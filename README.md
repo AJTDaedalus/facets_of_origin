@@ -43,7 +43,7 @@
 
 The goal of this project is to provide an open source TTRPG system with:
 1.  A flexible, simple ruleset that makes it easy to pick up and play with any level of experience.
-2.  A suite of software tools to help faccilitate online sessions, create characters and adventures, and expand the ruleset.
+2.  A suite of software tools to help facilitate online sessions, create characters and adventures, and expand the ruleset.
 3.  An open source license to encourage community participation and a variety of playstyles.
 
 
