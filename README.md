@@ -114,6 +114,7 @@ Project Link: [https://github.com/AJTDaedalus/facets_of_origin](https://github.c
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+<!--
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/AJTDaedalus/facets_of_origin.svg?style=for-the-badge
@@ -125,5 +126,6 @@ Project Link: [https://github.com/AJTDaedalus/facets_of_origin](https://github.c
 [issues-shield]: https://img.shields.io/github/issues/AJTDaedalus/facets_of_origin.svg?style=for-the-badge
 [issues-url]: https://github.com/AJTDaedalus/facets_of_origin/issues
 [license-shield]: https://img.shields.io/github/license/AJTDaedalus/facets_of_origin.svg?style=for-the-badge
-[license-url]: https://github.com/AJTDaedalus/facets_of_origin/master/LICENSE.txt
+[license-url]: https://github.com/AJTDaedalus/facets_of_origin/main/LICENSE.txt
 [product-screenshot]: images/screenshot.png
+-->
