@@ -1,17 +1,12 @@
-<div id="top"></div>
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Issues][issues-shield]][issues-url]
-[![GPLv3 License][license-shield]][license-url]
-
 
 <!-- PROJECT LOGO -->
 <br />
+<!--
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
-
+-->
   <h3 align="center">Facets of Origin</h3>
 
   <p align="center">
@@ -42,7 +37,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+<!--
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
+-->
 
 The goal of this project is to provide an open source TTRPG system with:
 	1.  A flexible, simple ruleset that makes it easy to pick up and play with any level of experience.
