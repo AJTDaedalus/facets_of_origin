@@ -184,14 +184,26 @@ The party has arrived in Thornwall to investigate a string of disappearances in 
 
 **MM:** "She is currently informing Mordai that she has personally filed complaints against three city watchmen and is not intimidated by whatever he thinks he is. She does not notice you. You have the key."
 
-*Zulnut tucks it away, produces a cigarette, and drifts toward the far stairwell.*
+*Zulnut pockets the key and drifts toward the door.*
 
-**Mordai:** "We are not—"
+**Mordai:** "We are not finished."
 
-**Zulnut:** "Lower archives. Let's go."
+**Zulnut:** "Yes we are. Come on."
 
-*Mordai looks at the archivist, still mid-sentence. Then back at Zulnut.*
+*Mordai glances at the archivist, still mid-sentence, and follows.*
 
-**Mordai:** "...Right."
+---
 
-(The MM is now frantically drawing a basement map.)
+*Outside.*
+
+**Zahna:** "I found records of three prior disappearances — same season, same region, all tied to an investigation that was closed without explanation fifteen years ago. It confirms something happened. It does not tell us what." *A pause.* "The lower archive records would."
+
+**Zulnut:** "Tonight." *He produces the brass key and regards it with mild interest.* "When the archive is closed."
+
+*Zahna looks at the key. Then at Zulnut. Then at the door behind them.*
+
+**Zahna:** "When did you—"
+
+**Zulnut:** "Mordai was very loud."
+
+(The MM is frantically drawing a basement map.)
