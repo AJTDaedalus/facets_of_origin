@@ -53,6 +53,9 @@ The four recurring characters are:
 
 **Zulnut** — Lazy. Profoundly, almost philosophically lazy. Exceptionally nimble and prefers to accomplish things with the minimum possible effort and maximum possible flair. Will complete a task with a dazzling acrobatic flourish, then immediately try to smoke a cigarette and leave. Has a preternatural talent for noticing the one thing in the room that matters, then doing something absurd with that information. Attributes: Dexterity 3, Luck 3, Constitution 1.
 
+### Ground Rules for Examples
+- Players can only act on details the MM has already described. If a player references an object or detail, it must have appeared in MM narration first — even if only briefly, even if only as scenery.
+
 ### Formatting Conventions for Examples
 - **`MM:`** — the Mirror Master speaking (describing the world, calling for rolls, narrating outcomes)
 - **`CharacterName:`** — a player declaring what their character attempts
