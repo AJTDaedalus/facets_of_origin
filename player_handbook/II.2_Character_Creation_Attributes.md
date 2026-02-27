@@ -170,23 +170,15 @@ The party has arrived in Thornwall to investigate a string of disappearances in 
 
 → Mordai rolls **2d6 + Charisma (2 → +0)** and gets an **8**. Partial success.
 
-**MM:** "She tells you there were rumors fifteen years ago — something about the old mill outside Millhaven. Then she stops. 'That investigation was handled by the Governor's office,' she says, and goes back to her desk. She looked afraid. Not cagey. There's a difference."
+**MM:** "She tells you there were rumors fifteen years ago — something about the old mill outside Millhaven. Then she stops. 'That investigation was handled by the Governor's office,' she says. She turns back to her desk and pulls a small leather journal from under her filing stack — not archive materials, something personal — and sets it in front of her like a ward against further questions. She looked afraid. Not cagey. There's a difference."
 
 *Mordai taps his temple. He does not own a scroll.*
 
 ---
 
-**Zulnut:** "When she turned back to her desk just now — what was she reaching for?"
+**Zulnut:** "The journal. I want it."
 
-**MM:** "...You were watching that?"
-
-**Zulnut:** "She didn't just go back to her filing. She went straight for something specific."
-
-(The MM pauses. This is correct. They had not planned for anyone to notice this.)
-
-**MM:** "A leather journal. Small. Personal. Definitely not part of the archive."
-
-**Zulnut:** "I want it."
+(The MM had assumed everyone would politely ignore the journal.)
 
 **MM:** "It's on her desk. She's sitting at her desk. Roll Dexterity."
 
