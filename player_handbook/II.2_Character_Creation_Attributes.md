@@ -142,7 +142,7 @@ The Mirror Master describes the world. Players declare what their characters att
 
 The party has arrived in Thornwall to investigate a string of disappearances in the nearby village of Millhaven — three days, seven people, no bodies. They've decided the municipal archive is the place to start.
 
-**MM:** "The archive is vast. Dusty. Floor-to-ceiling shelves, some with rolling ladders, some just daring you to climb them. Near the back, a box on the highest shelf has a broken latch — looks like it's been up there a while. The archivist looks like she has personally outlasted four city governors and will outlast four more. Thousands of records, centuries of history. Where do you start?"
+**MM:** "The archive is vast. Dusty. Floor-to-ceiling shelves on every wall, a front desk buried under forty years of accumulated paper, and an archivist who looks like she has personally outlasted four city governors and plans to outlast four more. Where do you start?"
 
 **Zahna:** "I cross-reference the census records from the last two decades with tax assessments near Millhaven, then check the incident logs for anything closed without resolution. Knowledge check?"
 
@@ -170,28 +170,34 @@ The party has arrived in Thornwall to investigate a string of disappearances in 
 
 → Mordai rolls **2d6 + Charisma (2 → +0)** and gets an **8**. Partial success.
 
-**MM:** "She tells you there were rumors fifteen years ago — something about the old mill outside Millhaven. Then she stops. 'That investigation was handled by the Governor's office,' she says, and goes back to her filing. She looked afraid. Not cagey. There's a difference."
+**MM:** "She tells you there were rumors fifteen years ago — something about the old mill outside Millhaven. Then she stops. 'That investigation was handled by the Governor's office,' she says, and goes back to her desk. She looked afraid. Not cagey. There's a difference."
 
 *Mordai taps his temple. He does not own a scroll.*
 
 ---
 
-**Zulnut:** "The box on the top shelf. The one with the broken latch you mentioned. What's in it?"
+**Zulnut:** "When she turned back to her desk just now — what was she reaching for?"
 
-(The MM had a whole thing planned for this discovery.)
+**MM:** "...You were watching that?"
 
-**MM:** "It's twelve feet up. Roll Dexterity."
+**Zulnut:** "She didn't just go back to her filing. She went straight for something specific."
 
-**Zulnut:** "Already moving."
+(The MM pauses. This is correct. They had not planned for anyone to notice this.)
+
+**MM:** "A leather journal. Small. Personal. Definitely not part of the archive."
+
+**Zulnut:** "I want it."
+
+**MM:** "It's on her desk. She's sitting at her desk. Roll Dexterity."
 
 → Zulnut rolls **2d6 + Dexterity (3 → +1)** and gets a **12**.
 
-**MM:** "You're up and back down before anyone processes that you moved. The box contains handwritten field notes from the original investigation — never formally filed. Someone put them up there and either forgot about them, or hoped everyone else would. The last entry is dated the day the investigation was closed. It just says: *do not go near the water at night.*"
+**MM:** "She's still rattled from the large man with the pointed questions. She doesn't notice you drift past. You have the journal."
 
-*Zulnut tucks the notes under his arm, produces a cigarette from somewhere, and heads for the door.*
+*Zulnut tucks it under his arm, produces a cigarette from somewhere, and moves toward the door.*
 
 **Mordai:** "We are not finished."
 
-**Zulnut:** "I am."
+**Zulnut:** "I finished faster."
 
-(The MM is already looking forward to whatever happens next.)
+(The MM is quietly making notes about what is going to be in that journal.)
