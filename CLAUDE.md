@@ -18,6 +18,14 @@ Three pillars:
 
 The project is in early development — the toolset, ruleset, and example adventure are all on the roadmap but not yet implemented.
 
+## Research Reference
+
+The `research/` directory contains foundational documents that should inform all design decisions. **Always consult relevant research files before proposing mechanics, systems, or content.**
+
+- `research/dice_system_analysis.md` — Synthesis of TTRPG market landscape and psychology of fun/dice/social bonding. Covers: why 2d6 three-tier outcomes are optimal, the Spark system recommendation, market gaps, what competing games do well and poorly, and five open design questions that need resolution before detailed system work begins.
+
+When proposing anything related to dice mechanics, resolution systems, player experience, onboarding, or digital design, check this file first — the recommendations are grounded in academic psychology research and market analysis and should not be overridden without documented reasoning.
+
 ## Copyright Policy
 
 **High priority:** All content created for this project must be either original or sourced from openly licensed material. Open source / open license content is explicitly welcome — for example, the D&D 5e Systems Reference Document (SRD) released under the Creative Commons Attribution 4.0 license is fair game, as are other systems published under OGL, CC, or similarly permissive licenses. When using such material, note the source and confirm the license terms apply.
