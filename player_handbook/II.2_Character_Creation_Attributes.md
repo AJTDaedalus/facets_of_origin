@@ -136,23 +136,23 @@ The full resolution rules are covered in Chapter III. This table is here so that
 
 ## In Play: The Vanishing of Millhaven
 
-*These examples show what play looks like at the table. The Mirror Master describes the world; players declare what their characters attempt; dice resolve the uncertain moments. MM speech is in quotes. Player declarations are marked with their character's name. What actually happens in the fiction appears in italics.*
+The Mirror Master describes the world. Players declare what their characters attempt. Dice resolve the uncertain moments. What actually happens in the fiction appears in *italics*.
 
 ---
 
 The party has arrived in Thornwall to investigate a string of disappearances in the nearby village of Millhaven — three days, seven people, no bodies. They've decided the municipal archive is the place to start.
 
-**MM:** "The archive is vast. Dusty. The archivist looks like she has personally outlasted four city governors and will outlast four more. Thousands of records, centuries of history. Where do you start?"
+**MM:** "The archive is vast. Dusty. Floor-to-ceiling shelves, some with rolling ladders, some just daring you to climb them. Near the back, a box on the highest shelf has a broken latch — looks like it's been up there a while. The archivist looks like she has personally outlasted four city governors and will outlast four more. Thousands of records, centuries of history. Where do you start?"
 
 **Zahna:** "I cross-reference the census records from the last two decades with tax assessments near Millhaven, then check the incident logs for anything closed without resolution. Knowledge check?"
 
-*The MM sighs — the sigh of someone who built a mystery and is watching it get disassembled like a math problem.*
+(The MM sighs — the sigh of someone who built a mystery and is watching it get disassembled like a math problem.)
 
 **MM:** "Roll it."
 
-→ Zahna rolls **2d6 + Knowledge (+1)** and gets a **10**. Full success.
+→ Zahna rolls **2d6 + Knowledge (3 → +1)** and gets a **10**. Full success.
 
-**MM:** "You find three prior disappearances from fifteen years ago. Same season, same area. The records reference an investigation." *A pause.* "Closed. Very quietly."
+**MM:** "You find three prior disappearances from fifteen years ago. Same season, same area. The records reference an investigation. Closed. Very quietly."
 
 *Zahna notes this on a scroll and keeps reading. He does not share this with anyone.*
 
@@ -160,39 +160,33 @@ The party has arrived in Thornwall to investigate a string of disappearances in 
 
 **Mordai:** "I walk up to the archivist and ask her directly — what happened in Millhaven?"
 
-**MM:** "The archivist is a small woman who has worked here for forty years and reorganized this archive three times. She is not impressed by your arms being crossed like that."
+**MM:** "The archivist has reorganized this archive three times. She is not moved by people walking up and demanding things."
 
 **Mordai:** "I'm very sincere about it."
 
-*The MM smiles despite themselves.*
+(The MM smiles despite themselves.)
 
-**MM:** "Roll Wisdom. She'll respect genuine concern. She does not respect whatever that stance is."
+**MM:** "That tracks, actually. You're not threatening her and you're not flattering her — you're just a large man asking a direct question and clearly meaning it. Roll Charisma."
 
-→ Mordai rolls **2d6 + Wisdom (+0)** and gets an **8**. Partial success.
+→ Mordai rolls **2d6 + Charisma (2 → +0)** and gets an **8**. Partial success.
 
-**MM:** "She tells you there were rumors fifteen years ago — something about the old mill outside Millhaven. Then she stops. 'That investigation was handled by the Governor's office,' she says, and goes back to her filing." *Beat.* "She looked afraid. Not cagey. There's a difference."
+**MM:** "She tells you there were rumors fifteen years ago — something about the old mill outside Millhaven. Then she stops. 'That investigation was handled by the Governor's office,' she says, and goes back to her filing. She looked afraid. Not cagey. There's a difference."
 
 *Mordai taps his temple. He does not own a scroll.*
 
 ---
 
-**Zulnut:** "The box on the top shelf. Far left. Broken latch. What's in it?"
+**Zulnut:** "The box on the top shelf. The one with the broken latch you mentioned. What's in it?"
 
-**MM:** "...How did you even notice that from the bench you've been asleep on?"
-
-**Zulnut:** "Is it relevant?"
-
-**MM:** "...Yes, actually."
-
-**Zulnut:** "Great. I grab it."
-
-*The MM had a whole thing planned for this.*
+(The MM had a whole thing planned for this discovery.)
 
 **MM:** "It's twelve feet up. Roll Dexterity."
 
-→ Zulnut rolls **2d6 + Dexterity (+1)** and gets a **12**.
+**Zulnut:** "Already moving."
 
-**MM:** "You're up and back down before anyone processes that you moved. The box contains handwritten field notes from the original investigation — never formally filed. Someone put them up there and either forgot about them, or hoped everyone else would." *The MM's voice drops a register.* "The last entry is dated the day the investigation was closed. It just says: *do not go near the water at night.*"
+→ Zulnut rolls **2d6 + Dexterity (3 → +1)** and gets a **12**.
+
+**MM:** "You're up and back down before anyone processes that you moved. The box contains handwritten field notes from the original investigation — never formally filed. Someone put them up there and either forgot about them, or hoped everyone else would. The last entry is dated the day the investigation was closed. It just says: *do not go near the water at night.*"
 
 *Zulnut tucks the notes under his arm, produces a cigarette from somewhere, and heads for the door.*
 
@@ -200,4 +194,4 @@ The party has arrived in Thornwall to investigate a string of disappearances in 
 
 **Zulnut:** "I am."
 
-*The MM is already looking forward to whatever happens next.*
+(The MM is already looking forward to whatever happens next.)
