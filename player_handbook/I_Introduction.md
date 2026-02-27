@@ -20,13 +20,13 @@ This is what that looks like in practice:
 
 The game is built around a modular core. The rules in this handbook cover the fundamentals — how to create a character, how to resolve what happens when things get uncertain, and how to build a world together. These fundamentals work for any genre and any tone.
 
-On top of that core, the community can build **Facets** — optional modules that adapt the game for specific styles of play. High fantasy, science fiction, horror, political intrigue: each becomes a Facet, a set of additions and adjustments that plug into the core without rewriting it. Your Game Master (GM) will tell you which Facets your campaign uses.
+On top of that core, the community can build **Facets** — optional modules that adapt the game for specific styles of play. High fantasy, science fiction, horror, political intrigue: each becomes a Facet, a set of additions and adjustments that plug into the core without rewriting it. Your Mirror Master (MM) will tell you which Facets your campaign uses.
 
 ## Shattered Origin
 
-This handbook includes the **Shattered Origin** setting — a primary world created as a home for the game's first adventures and campaigns. It exists to give new players and GMs a place to start: somewhere with history, factions, mysteries, and stories already in motion.
+This handbook includes the **Shattered Origin** setting — a primary world created as a home for the game's first adventures and campaigns. It exists to give new players and Mirror Masters a place to start: somewhere with history, factions, mysteries, and stories already in motion.
 
-You are not required to play in Shattered Origin. It is an invitation, not an obligation. GMs and players are equally welcome to build their own worlds, and everything you need to do that is in this book.
+You are not required to play in Shattered Origin. It is an invitation, not an obligation. Mirror Masters and players are equally welcome to build their own worlds, and everything you need to do that is in this book.
 
 ## How to Use This Handbook
 

@@ -24,7 +24,7 @@ important to think about your character's backstory before putting numbers on a 
 detailed you may want to be when defining it.  If you're only using this character for
 one night, it doesn't usually make sense to write pages of backstory.  A few short
 sentences may well suffice.  For a planned long campaign, you may want a more detailed
-backstory that you can share with your GM for them to include in the mythos of the world
+backstory that you can share with your Mirror Master for them to include in the mythos of the world
 they're creating.  
 
 Some example questions to ask about your character before continuing on:
