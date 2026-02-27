@@ -198,11 +198,15 @@ The party has arrived in Thornwall to investigate a string of disappearances in 
 
 **Zahna:** "I found records of three prior disappearances — same season, same region, all tied to an investigation that was closed without explanation fifteen years ago. It confirms something happened. It does not tell us what." *A pause.* "The lower archive records would."
 
-**Zulnut:** "Tonight." *He produces the brass key and regards it with mild interest.* "When the archive is closed."
+**Zulnut:** "Tonight." *He produces a keyring — several keys, none of them labeled — and regards it with mild interest.* "When the archive is closed."
 
-*Zahna looks at the key. Then at Zulnut. Then at the door behind them.*
+*Zahna looks at the keyring. Then at Zulnut. Then at the door behind them.*
 
-**Zahna:** "When did you—"
+**Zahna:** "Do you know which one—"
+
+**Zulnut:** "No."
+
+**Zahna:** "When did you even—"
 
 **Zulnut:** "Mordai was very loud."
 
