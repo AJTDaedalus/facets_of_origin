@@ -168,15 +168,15 @@ The party has arrived in Thornwall to investigate a string of disappearances in 
 
 → Mordai rolls **2d6 + Charisma (2 → +0)** and gets an **8**. Partial success.
 
-**MM:** "You get what you came for — and more than she intended to give. She is now telling you in a raised voice that those rumors about Millhaven were handled by the Governor's office, that it was resolved, that you have absolutely no business dredging it up, and that this archive closes in one hour. She is pointing at the door. The two clerks in the back have stopped pretending to work."
+**MM:** "You get what you came for — and more than she intended to give. She shoves back from her desk — keyring jangling on the edge as she stands — and is now telling you in a raised voice that those rumors about Millhaven were handled by the Governor's office, that it was resolved, that you have absolutely no business dredging it up, and that this archive closes in one hour. She is pointing at the door. The two clerks in the back have stopped pretending to work."
 
-*The archivist is no longer behind her desk.*
+*The archivist is no longer behind her desk. The keyring is.*
 
 ---
 
-**Zulnut:** "The key ring she left on her desk. Which one is the lower archives?"
+**Zulnut:** "The brass key. Lower archives."
 
-(The MM looks at the desk they described. There is, naturally, a key ring on it. She is the archivist.)
+(The MM had intended that keyring as scenery.)
 
 **MM:** "The brass one. Roll Dexterity."
 
