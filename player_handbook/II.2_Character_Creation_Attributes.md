@@ -130,7 +130,56 @@ When the outcome of an action is uncertain and the stakes matter, you roll **2d6
 | 7–9 | Success with a complication or cost |
 | 6 or less | Things go wrong — but the story always moves forward |
 
-The full resolution rules are covered in Chapter III. This table is here so that the meaning of your attribute choices is clear from the moment you make them.
+---
+
+### Difficulty
+
+Not every task is equally hard. Before calling for a roll, the MM declares a **difficulty** — a modifier that reflects the circumstances, opposition, or sheer improbability of what you're attempting.
+
+| Difficulty | Modifier | When |
+|---|---|---|
+| Easy | +1 | Clear advantage, weak or inattentive opposition, favorable conditions |
+| Standard | +0 | The default — uncertain outcome, no special advantage or impediment |
+| Hard | -1 | Skilled opposition, poor conditions, acting against the grain |
+| Very Hard | -2 | Extraordinary opposition, severe circumstances, nearly impossible odds |
+
+The MM declares difficulty **before** you roll. It is a statement about the world, not a judgment about your character.
+
+> **Why this matters for character creation:** A Strong attribute (+1) against a Hard task (-1) nets +0 — the same baseline odds as a character with no particular strength on a Standard task. A Weak attribute against a Very Hard task hits a net of -3, which borders on desperate. Your attribute choices carry meaning in context.
+
+---
+
+### Contested Rolls
+
+When you act against someone actively working against you, the opposition shapes the roll:
+
+**Against an NPC:** Only you roll. The NPC's relevant attribute informs the difficulty the MM selects — a perceptive guard makes your attempt Hard; an oblivious one makes it Easy. The MM decides; the fiction justifies it. NPCs do not roll dice.
+
+**Against another player character:** Both players roll their relevant attribute. The higher result wins the contest. On a tie, both achieve partial success — neither prevails cleanly, and the situation deepens. Both rolls are still interpreted against the outcome tiers: the winner's tier determines how well they achieve their goal; the loser's consequence is proportional to the winning margin.
+
+---
+
+### Sparks
+
+A **Spark** is a narrative resource you earn by doing something remarkable — and spend for an edge when the stakes are highest.
+
+**Spending a Spark:** Before you roll, you may spend one or more Sparks. Each Spark adds a d6 to your roll; you then drop an equal number of lowest dice. The core mechanic stays the same — 2d6 plus your modifier — but Sparks shift the odds by replacing your worst potential outcomes.
+
+> *Two Sparks spent: roll 4d6, drop the two lowest.*
+
+**Earning Sparks:** Sparks are awarded for moments that make the table sit up. There are three ways to earn one:
+
+- **MM award:** The MM gives a Spark for exceptional roleplay, creative problem-solving, or playing your character's established traits and weaknesses in a way that costs you something real in the fiction.
+
+- **"Spark?" — the peer call:** Any player at the table can call out `"Spark?"` for another player's moment — a line of dialogue that landed, a decision that surprised everyone, an in-character choice that felt completely true. The MM confirms it. The moment is recognized by the table collectively, not handed down from above.
+
+- **The Graceful Fail:** When your roll is a 6- and you lean into the consequence — or better, add something to the fiction that makes the failure richer — the MM may award a Spark. Going down swinging is worth something.
+
+**The economy:** Sparks are most useful when everything is on the line. A Spark spent on a trivial roll is a Spark not available at the moment that matters. That tension is the point.
+
+---
+
+The full resolution rules — move triggers, saving throws, advancement — are covered in Chapter III. This section exists so that your attribute choices mean something from the moment you make them.
 
 ---
 
@@ -148,9 +197,9 @@ The party has arrived in Thornwall to investigate a string of disappearances in 
 
 (The MM sighs — the sigh of someone who built a mystery and is watching it get disassembled like a math problem.)
 
-**MM:** "Roll it."
+**MM:** "Standard. Roll it."
 
-→ Zahna rolls **2d6 + Knowledge (3 → +1)** and gets a **10**. Full success.
+→ Zahna rolls **2d6 + Knowledge (3 → +1)** at Standard difficulty and gets a **10**. Full success.
 
 **MM:** "You find three prior disappearances from fifteen years ago. Same season, same area. The records reference an investigation. Closed. Very quietly."
 
@@ -164,9 +213,9 @@ The party has arrived in Thornwall to investigate a string of disappearances in 
 
 **Mordai:** "There isn't time for forms."
 
-**MM:** "She tells you there is always time for forms. Roll Charisma."
+**MM:** "She tells you there is always time for forms. Hard — she's been running this archive longer than you've been alive and has opinions about people who think urgency excuses paperwork. Roll Charisma."
 
-→ Mordai rolls **2d6 + Charisma (2 → +0)** and gets an **8**. Partial success.
+→ Mordai rolls **2d6 + Charisma (2 → +0)** against Hard difficulty (net −1) and gets an **8**. Partial success.
 
 **MM:** "You get what you came for — and more than she intended to give. She shoves back from her desk — keyring jangling on the edge as she stands — and is now telling you in a raised voice that those rumors about Millhaven were handled by the Governor's office, that it was resolved, that you have absolutely no business dredging it up, and that this archive closes in one hour. She is pointing at the door. The two clerks in the back have stopped pretending to work."
 
@@ -176,11 +225,15 @@ The party has arrived in Thornwall to investigate a string of disappearances in 
 
 **Zulnut:** "The brass key. Lower archives."
 
-(The MM had intended that keyring as scenery.)
+(The MM had intended that keyring as scenery. Zulnut's player just called their shot on a detail from the narration, mid-chaos, with perfect timing.)
 
-**MM:** "The brass one. Roll Dexterity."
+**Another player:** "Spark?"
 
-→ Zulnut rolls **2d6 + Dexterity (3 → +1)** and gets a **12**.
+**MM:** "Absolutely. Easy — Mordai has given you the perfect window. Roll Dexterity."
+
+*Zulnut spends the Spark before rolling.*
+
+→ Zulnut rolls **3d6 + Dexterity (3 → +1)**, drops the lowest die, at Easy difficulty (+1), and gets a **12**.
 
 **MM:** "She is currently informing Mordai that she has personally filed complaints against three city watchmen and is not intimidated by whatever he thinks he is. She does not notice you. You have the key."
 
