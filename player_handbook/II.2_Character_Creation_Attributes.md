@@ -136,72 +136,68 @@ The full resolution rules are covered in Chapter III. This table is here so that
 
 ## In Play: The Vanishing of Millhaven
 
-*The party has traveled to the Thornwall Municipal Archive to investigate a string of disappearances in the nearby village of Millhaven. Three days. Seven people. No bodies.*
-
-The Mirror Master spreads their hands over a table buried under a small mountain of ledgers. "The archive is vast. Dusty. The archivist looks like she has personally outlasted four city governors and will outlast four more. Thousands of records dating back four centuries. Where do you start?"
-
-**Zahna** doesn't look up. He is already reading. "I cross-reference the census records from the last two decades with the tax assessments for property disputes near Millhaven, then move to the municipal incident logs for anything closed without resolution."
-
-*A pause.*
-
-"...Knowledge check?" he adds, as an afterthought.
-
-*The MM sighs — the sigh of someone who built a mystery and is watching it get disassembled like a clock.* "Roll it."
-
-Zahna rolls **2d6 + Knowledge (+1)**. He gets a **10**. Full success.
-
-"You find three prior disappearances from fifteen years ago. Same season, same general area. The records reference an investigation. Closed. Quietly." The MM leans in slightly. "Someone closed it *very* quietly."
-
-Zahna makes a note on a small scroll and keeps reading. He does not share this with anyone.
+*These examples show what play looks like at the table. The Mirror Master describes the world; players declare what their characters attempt; dice resolve the uncertain moments. MM speech is in quotes. Player declarations are marked with their character's name. What actually happens in the fiction appears in italics.*
 
 ---
 
-**Mordai** has been standing in the center of the archive for four minutes with his arms crossed, staring at a portrait of a former mayor as if it owes him an explanation.
+The party has arrived in Thornwall to investigate a string of disappearances in the nearby village of Millhaven — three days, seven people, no bodies. They've decided the municipal archive is the place to start.
 
-"I'm asking the archivist directly. What happened in Millhaven?"
+**MM:** "The archive is vast. Dusty. The archivist looks like she has personally outlasted four city governors and will outlast four more. Thousands of records, centuries of history. Where do you start?"
 
-*The MM considers this.* "The archivist is a small woman who has worked here for forty years. She has reorganized this archive three times. She is not moved by crossed arms."
+**Zahna:** "I cross-reference the census records from the last two decades with tax assessments near Millhaven, then check the incident logs for anything closed without resolution. Knowledge check?"
 
-"I'm very sincere about it."
+*The MM sighs — the sigh of someone who built a mystery and is watching it get disassembled like a math problem.*
 
-*The MM smiles despite themselves.* "Roll Wisdom. She respects genuine concern. She does not respect whatever that stance is."
+**MM:** "Roll it."
 
-Mordai rolls **2d6 + Wisdom (+0)**. He gets an **8**. Partial success.
+→ Zahna rolls **2d6 + Knowledge (+1)** and gets a **10**. Full success.
 
-"She tells you there were rumors fifteen years ago — something about the old mill on the outskirts of Millhaven. Then she stops. 'That investigation was handled by the Governor's office,' she says, and goes back to her filing." The MM tilts their head. "She looked afraid, not cagey. There's a difference."
+**MM:** "You find three prior disappearances from fifteen years ago. Same season, same area. The records reference an investigation." *A pause.* "Closed. Very quietly."
 
-Mordai taps his temple to indicate he has filed this information. He does not own a scroll.
+*Zahna notes this on a scroll and keeps reading. He does not share this with anyone.*
 
 ---
 
-**Zulnut** has been asleep on a reading bench since approximately four minutes after arrival. He opens one eye.
+**Mordai:** "I walk up to the archivist and ask her directly — what happened in Millhaven?"
 
-"The box on the top shelf. Far left. Broken latch."
+**MM:** "The archivist is a small woman who has worked here for forty years and reorganized this archive three times. She is not impressed by your arms being crossed like that."
 
-*The MM stares at him.* "...How did you notice that from—"
+**Mordai:** "I'm very sincere about it."
 
-"Is it relevant?"
+*The MM smiles despite themselves.*
 
-*A longer pause.* "...Yes, actually."
+**MM:** "Roll Wisdom. She'll respect genuine concern. She does not respect whatever that stance is."
 
-"Great."
+→ Mordai rolls **2d6 + Wisdom (+0)** and gets an **8**. Partial success.
 
-Zulnut rolls off the bench, scales twelve feet of shelving in roughly three seconds using the bracket hardware as handholds, catches the box as the broken latch gives way, drops it to the floor, and lands beside it with his arms folded.
+**MM:** "She tells you there were rumors fifteen years ago — something about the old mill outside Millhaven. Then she stops. 'That investigation was handled by the Governor's office,' she says, and goes back to her filing." *Beat.* "She looked afraid. Not cagey. There's a difference."
 
-*The MM opens their mouth.*
+*Mordai taps his temple. He does not own a scroll.*
 
-"Dexterity?" says Zulnut.
+---
 
-"I was going to make that a whole thing," says the MM.
+**Zulnut:** "The box on the top shelf. Far left. Broken latch. What's in it?"
 
-Zulnut rolls **2d6 + Dexterity (+1)**. He gets a **12**.
+**MM:** "...How did you even notice that from the bench you've been asleep on?"
 
-"The box contains handwritten field notes from the original investigation. Never formally archived — someone put them up there and forgot about them. Or hoped everyone else would." The MM's voice drops a register. "The last entry is dated the day the investigation was closed. It just says: *do not go near the water at night.*"
+**Zulnut:** "Is it relevant?"
 
-Zulnut tucks the notes under his arm, produces a cigarette from somewhere, and moves toward the exit.
+**MM:** "...Yes, actually."
 
-"We are not finished," says Mordai.
+**Zulnut:** "Great. I grab it."
 
-"I am," says Zulnut.
+*The MM had a whole thing planned for this.*
+
+**MM:** "It's twelve feet up. Roll Dexterity."
+
+→ Zulnut rolls **2d6 + Dexterity (+1)** and gets a **12**.
+
+**MM:** "You're up and back down before anyone processes that you moved. The box contains handwritten field notes from the original investigation — never formally filed. Someone put them up there and either forgot about them, or hoped everyone else would." *The MM's voice drops a register.* "The last entry is dated the day the investigation was closed. It just says: *do not go near the water at night.*"
+
+*Zulnut tucks the notes under his arm, produces a cigarette from somewhere, and heads for the door.*
+
+**Mordai:** "We are not finished."
+
+**Zulnut:** "I am."
 
 *The MM is already looking forward to whatever happens next.*
