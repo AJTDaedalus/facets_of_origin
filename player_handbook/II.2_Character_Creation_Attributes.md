@@ -158,38 +158,40 @@ The party has arrived in Thornwall to investigate a string of disappearances in 
 
 ---
 
-**Mordai:** "I walk up to the archivist and ask her directly — what happened in Millhaven?"
+**Mordai:** "I walk up to the archivist and tell her people are missing in Millhaven and we need to know what happened there fifteen years ago."
 
-**MM:** "The archivist has reorganized this archive three times. She is not moved by people walking up and demanding things."
+**MM:** "She tells you the archive has a formal request process and points to a stack of forms."
 
-**Mordai:** "I'm very sincere about it."
+**Mordai:** "There isn't time for forms."
 
-(The MM smiles despite themselves.)
-
-**MM:** "That tracks, actually. You're not threatening her and you're not flattering her — you're just a large man asking a direct question and clearly meaning it. Roll Charisma."
+**MM:** "She tells you there is always time for forms. Roll Charisma."
 
 → Mordai rolls **2d6 + Charisma (2 → +0)** and gets an **8**. Partial success.
 
-**MM:** "She tells you there were rumors fifteen years ago — something about the old mill outside Millhaven. Then she stops. 'That investigation was handled by the Governor's office,' she says. She turns back to her desk and pulls a small leather journal from under her filing stack — not archive materials, something personal — and sets it in front of her like a ward against further questions. She looked afraid. Not cagey. There's a difference."
+**MM:** "You get what you came for — and more than she intended to give. She is now telling you in a raised voice that those rumors about Millhaven were handled by the Governor's office, that it was resolved, that you have absolutely no business dredging it up, and that this archive closes in one hour. She is pointing at the door. The two clerks in the back have stopped pretending to work."
 
-*Mordai taps his temple. He does not own a scroll.*
+*The archivist is no longer behind her desk.*
 
 ---
 
-**Zulnut:** "The journal. I want it."
+**Zulnut:** "The key ring she left on her desk. Which one is the lower archives?"
 
-(The MM had assumed everyone would politely ignore the journal.)
+(The MM looks at the desk they described. There is, naturally, a key ring on it. She is the archivist.)
 
-**MM:** "It's on her desk. She's sitting at her desk. Roll Dexterity."
+**MM:** "The brass one. Roll Dexterity."
 
 → Zulnut rolls **2d6 + Dexterity (3 → +1)** and gets a **12**.
 
-**MM:** "She's still rattled from the large man with the pointed questions. She doesn't notice you drift past. You have the journal."
+**MM:** "She is currently informing Mordai that she has personally filed complaints against three city watchmen and is not intimidated by whatever he thinks he is. She does not notice you. You have the key."
 
-*Zulnut tucks it under his arm, produces a cigarette from somewhere, and moves toward the door.*
+*Zulnut tucks it away, produces a cigarette, and drifts toward the far stairwell.*
 
-**Mordai:** "We are not finished."
+**Mordai:** "We are not—"
 
-**Zulnut:** "I finished faster."
+**Zulnut:** "Lower archives. Let's go."
 
-(The MM is quietly making notes about what is going to be in that journal.)
+*Mordai looks at the archivist, still mid-sentence. Then back at Zulnut.*
+
+**Mordai:** "...Right."
+
+(The MM is now frantically drawing a basement map.)

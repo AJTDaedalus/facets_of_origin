@@ -62,7 +62,7 @@ The four recurring characters are:
 
 ### Example Scenario Per Chapter
 Each chapter should have one brief vignette demonstrating the chapter's core mechanic or concept. Scenarios established so far:
-- **II.2 Attributes** — Investigating a series of mysterious disappearances in a village called Millhaven, sourced from records in a city archive (Thornwall Municipal Archive). Zahna researches records (Knowledge), Mordai questions the archivist directly (Charisma, partial success — she gets rattled and retreats to her desk), Zulnut observes that she reached for something specific and pickpockets her personal journal while she's still flustered (Dexterity). The MM's final aside is that they now have to figure out what's in that journal.
+- **II.2 Attributes** — Investigating a series of mysterious disappearances in a village called Millhaven, sourced from records in a city archive (Thornwall Municipal Archive). Zahna researches records (Knowledge, full success). Mordai gets into an argument with the archivist demanding answers (Charisma, partial success — he gets the information but she's furious and pointing at the door, leaving her desk unattended). Zulnut lifts the key to the lower archives from her desk while she's busy yelling at Mordai (Dexterity, full success). The MM's final aside: frantically drawing a basement map.
 
 ## Contributing Workflow
 
