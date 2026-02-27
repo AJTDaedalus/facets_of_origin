@@ -1,24 +1,32 @@
-# I_Introduction
+# Table of Contents
 
-# II_Character_Creation
-### II.1_Overview
-### II.2_Attributes
-### II.3_Races
-### II.4_Classes
-### II.5_Backgrounds
-### II.6_Skills
+## I — Introduction
 
-# III_Rules
-### III.1_Overview
-### III.2_Adventuring
-### III.3_Combat
-### III.4_Downtime
-### III.5_Crafting
-### III.6_Economy
+## II — Character Creation
+- II.1 Overview
+- II.2 Attributes
+- II.3 Lineage
+- II.4 Classes
+- II.5 Backgrounds
+- II.6 Skills
 
-# IV_Compendium
-### IV.1_Skills
-### IV.2_Feats
-### IV.3_Equipment
-### IV.4_Magical_Items
-### IV.5_Technology
+## III — Rules
+- III.1 Overview
+- III.2 Adventuring
+- III.3 Combat
+
+## IV — Compendium
+- IV.1 Skills
+- IV.2 Equipment
+- IV.3 Magical Items
+
+---
+
+## Facets (Optional Modules)
+The following content is not part of the core rules. Each is available as a standalone Facet module that Mirror Masters can add to any campaign.
+
+- **Downtime** — Extended activity between adventures: training, research, recovery, and personal projects
+- **Crafting** — Rules for creating equipment, potions, magical items, and other goods
+- **Economy** — Detailed trade, commerce, and resource management
+- **Feats** — Additional mechanical depth for character customization beyond core advancement
+- **Technology** — Rules for technological settings and equipment; required for science fiction or steampunk campaigns

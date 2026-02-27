@@ -32,6 +32,16 @@ When proposing anything related to dice mechanics, resolution systems, player ex
 
 Do not reproduce, closely paraphrase, or derive mechanics, text, lore, or art from proprietary copyrighted works. When researching closed systems for inspiration, extract only general concepts and design principles — never copy specific wording, stat blocks, spell lists, monster names, or proprietary mechanics verbatim.
 
+## PHB Scope Decisions
+
+**Core PHB (v1):** Introduction, Character Creation (Overview, Attributes, Lineage, Classes, Backgrounds, Skills), Rules (Overview, Adventuring, Combat), Compendium (Skills, Equipment, Magical Items).
+
+**Deferred to Facet modules:** Downtime, Crafting, Economy, Feats, Technology. These are listed in the ToC as optional modules but not written in the core PHB.
+
+**Lineage (formerly Races):** The character ancestry chapter is called Lineage. Shattered Origin defaults to human — the core PHB describes humans and provides MM guidance for creating custom lineages. Non-human lineages belong in setting Facets or homebrew. This keeps onboarding simple and puts creative world-building in the MM's hands.
+
+**Combat:** Has its own chapter (III.3) but uses the same 2d6 resolution system as everything else — no separate tactical subsystem.
+
 ## Terminology
 
 - The facilitating player role is called the **Mirror Master (MM)** — never "GM" or "DM". The name is thematic: the MM's role is to reflect the spotlight back onto the players and keep them the stars of their own story.
