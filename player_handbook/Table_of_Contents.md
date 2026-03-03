@@ -6,7 +6,7 @@
 - II.1 Overview
 - II.2 Attributes
 - II.3 Lineage
-- II.4 Classes
+- II.4 Facets & Advancement
 - II.5 Backgrounds
 - II.6 Skills
 

@@ -133,6 +133,42 @@ The companion app (core to the digital-first design) handles:
 
 ---
 
+## Resolved Design Decisions
+
+### Advancement System (resolved 2026-03-03)
+
+**Advancement model:** Three-track system inspired by Morrowind (skill use → Facet levels → Major Advancement).
+
+**Skills:** ~5 broad skills per Facet (15 total). All skills start at Novice. Three ranks: Novice (+0), Practiced (+1), Expert (+2). Skill modifier stacks with attribute modifier; maximum combined +3.
+
+**Session skill economy:** 4 skill points per session, spent on skills used that session only. Cost matrix:
+- Primary Facet + success: 1 point
+- Primary Facet + failure: 2 points
+- Outside Primary Facet + success: 2 points
+- Outside Primary Facet + failure: 4 points
+
+**Marks to advance a skill rank:** 3 marks per rank (Novice→Practiced, Practiced→Expert). Marks carry between sessions.
+
+**Facet levels:** Every 6 skill rank advances within a Facet = 1 Facet level. Each Facet level unlocks one Technique from the Facet's tree.
+
+**Technique trees:** Three branches per Facet (mirroring the three Minor Attributes). Three tiers; tier 2 requires one tier 1 in the same branch, tier 3 requires one tier 2. Body tree designed (Might/Grace/Iron branches). Mind and Soul trees pending.
+
+**Primary Facet:** Declared at character creation.
+
+**Major Advancement:** Every 4 Facet levels in Primary Facet. Choice of +1 Minor Attribute (max 3) or Pinnacle Technique. Requires significant reflection scene.
+
+**Reflection scenes:** Once per session. Advancement is potential until the reflection scene makes it real in the fiction. MM guide will cover running them. Major Advancements require a full scene; standard advancements are a brief witnessed moment.
+
+**Research alignment:** This system directly addresses the market gap identified in the research — "nobody has solved 30–50 session narrative-first arc design cleanly." The Morrowind-style model provides organic long-campaign growth without the PbtA flattening problem (stats max out) or FitD retirement problem (advancement = countdown). The fiction-first trigger (reflection scene) and use-based skill growth both reinforce the RP-rewards-mechanics design goal.
+
+**Open calibration questions (not yet playtested):**
+- Is 4 skill points per session the right economy? (Too few = players feel stuck; too many = advancement feels cheap)
+- Is 3 marks per rank right? (Affects how fast skills move)
+- Is 6 advances per Facet level right? (Affects how often Techniques unlock)
+- Is 4 Facet levels per Major Advancement right? (Affects how rare attribute increases feel)
+
+---
+
 ## Open Design Questions for Next Phase
 
 1. **Approach vs. Stat naming**: Should character traits be named as fictional roles ("Brave," "Clever," "Swift") or narrative approaches ("Forcefully," "Carefully," "Cleverly")? Approaches map better to fiction-first play; stats map better to D&D-adjacent player expectations.
@@ -144,6 +180,16 @@ The companion app (core to the digital-first design) handles:
 4. **GM role**: Full GM (reduced burden via tools), rotating GM, or GM-optional? The market gap is a game that genuinely eases the GM role. The digital assistant oracle is one lever; GMless design is another. These require different structural decisions early.
 
 5. **Session length target**: One-shot-friendly structure (For the Queen, Kids on Bikes) vs. campaign arc design (Blades, Ironsworn)? The market gap is long-campaign narrative design, but one-shot accessibility drives initial adoption. Both are achievable but require explicit arc-pacing design.
+
+6. **Advancement calibration (playtesting needed)**: The numbers in the advancement system (4 points/session, 3 marks/rank, 6 advances/Facet level, 4 Facet levels/Major Advancement) are design estimates. All four thresholds need playtesting to confirm they produce the right pacing feel.
+
+7. **Cross-Facet advancement ceiling**: Currently, cross-Facet skill development is possible but expensive and does not contribute to Primary Facet levels or Major Advancement thresholds. Should there be any cross-Facet Technique access at high investment, or is specialization the intended ceiling?
+
+8. **Backgrounds and starting skills**: Backgrounds (II.5, not yet written) can grant one skill at Practiced rank. The scope and list of Backgrounds needs design — this affects starting character differentiation and how "prior life" is mechanized.
+
+9. **Mind and Soul Facet trees**: Body is fully designed. Mind and Soul Facet trees (skill lists and Technique trees) need the same treatment.
+
+10. **Pinnacle Techniques**: The Major Advancement alternative to +1 attribute. These are deliberately left vague ("requires MM approval, should feel like culmination of a long arc") — but they need a design framework and examples before the system is complete.
 
 ---
 
