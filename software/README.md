@@ -28,7 +28,8 @@ pip install -r requirements.txt
 
 1. Start the server:
    ```bash
-   python run.py
+   cd facets_of_origin/software
+   python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
    ```
 
 2. Open your browser to `http://localhost:8000`.
@@ -83,29 +84,82 @@ Use the chat box in the right panel. Messages are visible to everyone in the ses
 
 ### Local LAN (simplest)
 
-Change the host in `.env`:
+Add to `.env`:
 ```
 HOST=0.0.0.0
 ```
-Then restart the server. Players on the same network can connect to `http://<your-ip>:8000`.
+Restart the server. Players on the same network connect to `http://<your-local-ip>:8000`.
+
+Find your local IP with `ip route get 1` (Linux/WSL) or `ipconfig` (Windows).
+
+---
 
 ### Cloudflare Tunnel (recommended for remote play)
 
-Cloudflare Tunnel gives players a public HTTPS URL without opening firewall ports or configuring a domain.
+Cloudflare Tunnel gives players a public HTTPS URL without opening firewall ports, changing router settings, or exposing your home IP. It's free and takes about two minutes to set up. The server speaks plain HTTP; Cloudflare handles encryption.
 
-1. Install [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/).
-2. Run: `cloudflared tunnel --url http://localhost:8000`
-3. Copy the `*.trycloudflare.com` URL into `.env`:
-   ```
-   EXTERNAL_URL=https://your-tunnel.trycloudflare.com
-   ```
-4. Restart the server.
+#### Install cloudflared
 
-Invite links will use the tunnel URL automatically.
+**Linux / WSL (Debian/Ubuntu):**
+```bash
+curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb \
+  -o cloudflared.deb
+sudo dpkg -i cloudflared.deb
+rm cloudflared.deb
+```
+
+**macOS (Homebrew):**
+```bash
+brew install cloudflared
+```
+
+**Windows:** Download the installer from the [cloudflared releases page](https://github.com/cloudflare/cloudflared/releases/latest) and run it.
+
+#### Run a session
+
+You need two terminals. Keep both open for the duration of the session.
+
+**Terminal 1 — start the game server:**
+```bash
+cd facets_of_origin/software
+python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
+```
+
+> The server must bind to `0.0.0.0` (not `127.0.0.1`) so cloudflared can reach it.
+> Set `HOST=0.0.0.0` in `.env` to make this permanent.
+
+**Terminal 2 — open the tunnel:**
+```bash
+cloudflared tunnel --url http://localhost:8000
+```
+
+Cloudflare prints a URL like:
+```
+https://random-words-here.trycloudflare.com
+```
+
+#### Configure the server to use the tunnel URL
+
+Copy that URL into your `.env` file so invite links point to the public address:
+```ini
+SECRET_KEY=your-secret-key-here
+HOST=0.0.0.0
+EXTERNAL_URL=https://random-words-here.trycloudflare.com
+```
+
+Restart Terminal 1 after editing `.env`. Invite links generated after restart will use the tunnel URL automatically.
+
+#### Notes
+
+- **The tunnel URL changes every time** you run `cloudflared tunnel --url ...` (no-account mode). Generate fresh invites at the start of each session. If you create a [free Cloudflare account](https://dash.cloudflare.com/sign-up) and register a named tunnel, you get a stable URL.
+- **WSL note:** if `localhost` doesn't work in the cloudflared command, use `127.0.0.1` explicitly: `cloudflared tunnel --url http://127.0.0.1:8000`.
+- The tunnel is tied to the cloudflared process. If Terminal 2 closes, players lose connection.
+
+---
 
 ### Caddy + Domain (permanent hosting)
 
-If you own a domain and want a permanent setup, use [Caddy](https://caddyserver.com/) as a reverse proxy:
+If you own a domain and want a permanent URL, use [Caddy](https://caddyserver.com/) as a reverse proxy. Caddy handles HTTPS certificates automatically.
 
 ```
 # Caddyfile
@@ -114,9 +168,11 @@ yourdomain.example.com {
 }
 ```
 
-Set `EXTERNAL_URL=https://yourdomain.example.com` in `.env`.
-
-See `research/self_hosting_best_practices.md` for full details on each deployment option.
+Set in `.env`:
+```ini
+HOST=0.0.0.0
+EXTERNAL_URL=https://yourdomain.example.com
+```
 
 ---
 
@@ -136,8 +192,8 @@ All configuration is via a `.env` file in the `software/` directory. Every varia
 | `INVITE_TOKEN_EXPIRE_HOURS` | `24` | How long a player invite link is valid (hours). |
 | `FACETS_DIR` | `facets/` | Directory where Facet module YAML files are loaded from. |
 | `DATA_DIR` | `data/` | Directory for persistent data files. |
-| `ROLL_RATE_LIMIT` | `10/minute` | Max rolls per minute per player (rate limiting coming in v0.2). |
-| `AUTH_RATE_LIMIT` | `5/minute` | Max auth attempts per minute (rate limiting coming in v0.2). |
+| `ROLL_RATE_LIMIT` | `10/minute` | Max roll requests per minute per client IP. |
+| `AUTH_RATE_LIMIT` | `5/minute` | Max auth attempts per minute per client IP. |
 
 ---
 
@@ -240,10 +296,10 @@ software/
 |---|---|
 | Backend | FastAPI + Uvicorn |
 | Real-time | WebSockets (FastAPI native) |
-| Auth | JWT (python-jose) + bcrypt (passlib) |
+| Auth | JWT (python-jose) + bcrypt |
 | Frontend | Vanilla JS — no build step required |
 | Ruleset | YAML files validated by Pydantic v2 |
-| State | In-memory (SQLite persistence planned) |
+| State | In-memory — JSON file persistence planned for v0.2 |
 
 ### Contributing
 
@@ -261,7 +317,7 @@ See the root `CLAUDE.md` for the branching workflow and copyright policy. In bri
 The server can't find `facets/base/facet.yaml`. Run from the `software/` directory, or set `FACETS_DIR` to the correct absolute path in `.env`.
 
 **"Session not found" on WebSocket connect**
-Session state is in-memory. If the server restarted, the session is gone — create a new one.
+All session and character data is held in memory. If the server restarted, the session is gone — create a new one and generate fresh invite links. (Persistent storage is on the roadmap for v0.2.)
 
 **Invite link says "already been used"**
 Each invite is single-use. Generate a new one from the MM dashboard.
