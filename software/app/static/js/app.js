@@ -690,13 +690,19 @@ function renderRollLog() {
   const container = document.getElementById('roll-log');
   if (!container) return;
   container.innerHTML = '';
+  const DESC_MAX = 40;
   state.rollLog.slice(0, 30).forEach(entry => {
     const div = document.createElement('div');
     div.className = 'roll-log-entry';
+    const desc = (entry.description || '').trim();
+    const descHtml = desc
+      ? `<div class="roll-log-desc" title="${desc.replace(/"/g, '&quot;')}">${desc.length > DESC_MAX ? desc.slice(0, DESC_MAX) + '…' : desc}</div>`
+      : '';
     div.innerHTML = `
       <span class="who">${entry.character_name || entry.player_name}</span>
       <span class="outcome-${entry.outcome}"> ${entry.total} — ${entry.outcome_label}</span>
       <span style="color:var(--text-dim);float:right">${entry.attribute_id}${entry.skill_id ? '+'+entry.skill_id : ''}</span>
+      ${descHtml}
     `;
     container.appendChild(div);
   });

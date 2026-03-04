@@ -443,6 +443,15 @@ label {
 .roll-log-entry .outcome-full_success    { color: var(--success); }
 .roll-log-entry .outcome-partial_success { color: var(--partial); }
 .roll-log-entry .outcome-failure         { color: var(--failure); }
+.roll-log-entry .roll-log-desc {
+  color: var(--text-dim);
+  font-style: italic;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+}
 
 /* =========================================================================
    CHAT
