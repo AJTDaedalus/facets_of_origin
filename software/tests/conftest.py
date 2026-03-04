@@ -44,6 +44,14 @@ def client():
 
 
 @pytest.fixture
+def reset_limiter():
+    """Reset the in-memory rate limiter storage before and after the test."""
+    app.state.limiter._storage.reset()
+    yield
+    app.state.limiter._storage.reset()
+
+
+@pytest.fixture
 def mm_token() -> str:
     return create_mm_token()
 

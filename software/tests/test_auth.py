@@ -184,3 +184,85 @@ class TestInvalidTokens:
         token = jwt.encode(payload, settings.secret_key, algorithm=settings.algorithm)
         with pytest.raises(JWTError, match="invalid role"):
             decode_token(token)
+
+
+# ---------------------------------------------------------------------------
+# Player name boundary — 32-char max
+# ---------------------------------------------------------------------------
+
+class TestPlayerNameBoundary:
+    def test_exactly_32_chars_accepted(self):
+        name = "A" * 32
+        token = create_invite_token(name, "sess-1")
+        data = decode_token(token)
+        assert data.player_name == name
+
+    def test_exactly_33_chars_rejected(self):
+        with pytest.raises(ValueError, match="Player name"):
+            create_invite_token("A" * 33, "sess-1")
+
+    def test_whitespace_only_name_rejected(self):
+        with pytest.raises(ValueError, match="Player name"):
+            create_invite_token("   ", "sess-1")
+
+    def test_name_with_numbers_accepted(self):
+        token = create_invite_token("Player123", "sess")
+        data = decode_token(token)
+        assert data.player_name == "Player123"
+
+    def test_name_with_underscore_accepted(self):
+        token = create_invite_token("The_Bard", "sess")
+        data = decode_token(token)
+        assert data.player_name == "The_Bard"
+
+
+# ---------------------------------------------------------------------------
+# Token payload structure
+# ---------------------------------------------------------------------------
+
+class TestTokenPayloadStructure:
+    def test_mm_token_has_iat_claim(self):
+        token = create_mm_token()
+        payload = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
+        assert "iat" in payload
+
+    def test_mm_token_has_exp_claim(self):
+        token = create_mm_token()
+        payload = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
+        assert "exp" in payload
+
+    def test_player_token_has_iat_claim(self):
+        token = create_session_token("Alice", "sess-1")
+        payload = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
+        assert "iat" in payload
+
+    def test_invite_token_has_type_claim(self):
+        token = create_invite_token("Bob", "sess-2")
+        payload = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
+        assert payload.get("type") == "invite"
+
+    def test_session_token_has_session_type(self):
+        token = create_session_token("Carol", "sess-3")
+        payload = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
+        assert payload.get("type") == "session"
+
+    def test_mm_token_does_not_have_player_name_in_payload(self):
+        token = create_mm_token()
+        payload = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
+        assert "player_name" not in payload
+
+
+# ---------------------------------------------------------------------------
+# Algorithm field
+# ---------------------------------------------------------------------------
+
+class TestAlgorithmField:
+    def test_settings_algorithm_is_hs256(self):
+        assert settings.algorithm == "HS256"
+
+    def test_token_uses_configured_algorithm(self):
+        token = create_mm_token()
+        # jwt.get_unverified_header extracts header without verifying sig
+        from jose import jwt as jose_jwt
+        header = jose_jwt.get_unverified_header(token)
+        assert header["alg"] == settings.algorithm

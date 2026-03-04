@@ -37,7 +37,6 @@ async def list_available_facets(request: Request):
                 "description": ff.description,
                 "authors": ff.authors,
                 "priority": ff.priority,
-                "path": str(path),
             })
         except FacetLoadError as e:
             result.append({"path": str(path), "error": str(e)})

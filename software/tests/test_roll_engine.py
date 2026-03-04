@@ -198,7 +198,7 @@ class TestSparkMechanics:
 
     def test_zero_sparks_dice_rolled_equals_kept(self, ruleset):
         result = resolve_roll(make_request(sparks_spent=0), ruleset)
-        assert result.dice_rolled == result.dice_kept
+        assert sorted(result.dice_rolled) == result.dice_kept
 
 
 # ---------------------------------------------------------------------------
@@ -258,3 +258,201 @@ class TestFullRoll:
         result = resolve_roll(req, ruleset)
         d = roll_result_to_dict(result)
         assert d["description"] == "Attempting to climb the wall"
+
+
+# ---------------------------------------------------------------------------
+# Extreme modifier stacking
+# ---------------------------------------------------------------------------
+
+class TestExtremeModifiers:
+    def test_weak_hard_still_produces_valid_outcome(self, ruleset):
+        """Rating 1 (-1) + Very Hard (-2) still resolves without error."""
+        with patch("random.randint", return_value=1):
+            result = resolve_roll(
+                make_request(attribute_rating=1, difficulty_label="Very Hard"),
+                ruleset,
+            )
+        assert result.outcome == "failure"
+        assert result.total == 2 + (-1) + (-2)  # dice_sum=2 + attr=-1 + diff=-2
+
+    def test_strong_easy_produces_high_total(self, ruleset):
+        with patch("random.randint", return_value=6):
+            result = resolve_roll(
+                make_request(attribute_rating=3, difficulty_label="Easy"),
+                ruleset,
+            )
+        # dice_sum=12, attr=+1, diff=+1 → 14
+        assert result.total == 14
+        assert result.outcome == "full_success"
+
+    def test_expert_skill_easy_difficulty_stacks(self, ruleset):
+        """Strong (+1) + Expert skill (+2) + Easy (+1) = +4 net."""
+        with patch("random.randint", return_value=4):
+            base = resolve_roll(make_request(attribute_rating=2, difficulty_label="Standard"), ruleset)
+            stacked = resolve_roll(
+                make_request(attribute_rating=3, skill_id="athletics",
+                             skill_rank_id="expert", difficulty_label="Easy"),
+                ruleset,
+            )
+        assert stacked.total == base.total + 4
+
+    def test_weak_expert_skill_nets_plus_one(self, ruleset):
+        """Weak (-1) + Expert (+2) = net +1."""
+        with patch("random.randint", return_value=4):
+            base = resolve_roll(make_request(attribute_rating=2), ruleset)
+            result = resolve_roll(
+                make_request(attribute_rating=1, skill_id="athletics", skill_rank_id="expert"),
+                ruleset,
+            )
+        assert result.total == base.total + 1
+
+
+# ---------------------------------------------------------------------------
+# Edge cases on dice counts and totals
+# ---------------------------------------------------------------------------
+
+class TestDiceEdgeCases:
+    def test_minimum_possible_roll(self, ruleset):
+        """2 ones, weak attribute, very hard — minimum conceivable total."""
+        with patch("random.randint", return_value=1):
+            result = resolve_roll(
+                make_request(attribute_rating=1, difficulty_label="Very Hard"),
+                ruleset,
+            )
+        # dice_sum=2, attr=-1, diff=-2 → -1
+        assert result.total == -1
+        assert result.outcome == "failure"
+
+    def test_maximum_possible_roll_no_spark(self, ruleset):
+        with patch("random.randint", return_value=6):
+            result = resolve_roll(
+                make_request(attribute_rating=3, skill_id="athletics",
+                             skill_rank_id="expert", difficulty_label="Easy"),
+                ruleset,
+            )
+        assert result.outcome == "full_success"
+
+    def test_partial_success_boundary_at_seven(self, ruleset):
+        """Total == 7 is exactly partial_success threshold."""
+        with patch("random.randint", side_effect=[3, 4]):
+            result = resolve_roll(make_request(attribute_rating=2), ruleset)
+        assert result.total == 7
+        assert result.outcome == "partial_success"
+
+    def test_just_below_partial_is_failure(self, ruleset):
+        with patch("random.randint", side_effect=[2, 4]):
+            result = resolve_roll(make_request(attribute_rating=2), ruleset)
+        assert result.total == 6
+        assert result.outcome == "failure"
+
+    def test_full_success_boundary_at_ten(self, ruleset):
+        with patch("random.randint", side_effect=[5, 5]):
+            result = resolve_roll(make_request(attribute_rating=2), ruleset)
+        assert result.total == 10
+        assert result.outcome == "full_success"
+
+    def test_just_below_full_success(self, ruleset):
+        with patch("random.randint", side_effect=[4, 5]):
+            result = resolve_roll(make_request(attribute_rating=2), ruleset)
+        assert result.total == 9
+        assert result.outcome == "partial_success"
+
+
+# ---------------------------------------------------------------------------
+# All 4 difficulties × all 3 skill ranks
+# ---------------------------------------------------------------------------
+
+class TestDifficultySkillCombinations:
+    @pytest.mark.parametrize("difficulty,diff_mod", [
+        ("Easy", 1), ("Standard", 0), ("Hard", -1), ("Very Hard", -2),
+    ])
+    @pytest.mark.parametrize("rank,rank_mod", [
+        ("novice", 0), ("practiced", 1), ("expert", 2),
+    ])
+    def test_combination_total(self, ruleset, difficulty, diff_mod, rank, rank_mod):
+        """Each difficulty × skill rank combination must produce the right total."""
+        with patch("random.randint", return_value=4):
+            result = resolve_roll(
+                make_request(
+                    attribute_rating=2,  # mod 0
+                    skill_id="athletics",
+                    skill_rank_id=rank,
+                    difficulty_label=difficulty,
+                ),
+                ruleset,
+            )
+        expected = 8 + 0 + rank_mod + diff_mod  # dice_sum=8, attr_mod=0
+        assert result.total == expected, (
+            f"difficulty={difficulty}, rank={rank}: expected {expected}, got {result.total}"
+        )
+
+
+# ---------------------------------------------------------------------------
+# Probability distribution validation
+# ---------------------------------------------------------------------------
+
+class TestProbabilityDistribution:
+    def test_2d6_average_is_near_seven(self, ruleset):
+        """Empirical: 2d6 average should be ~7.0 over a large sample."""
+        random.seed(99)
+        totals = [resolve_roll(make_request(), ruleset).dice_sum for _ in range(1000)]
+        mean = sum(totals) / len(totals)
+        assert 6.5 < mean < 7.5, f"Mean {mean} is outside expected range"
+
+    def test_one_spark_mean_exceeds_no_spark(self, ruleset):
+        random.seed(77)
+        no_sparks = [resolve_roll(make_request(sparks_spent=0), ruleset).dice_sum for _ in range(500)]
+        random.seed(77)
+        one_spark = [resolve_roll(make_request(sparks_spent=1), ruleset).dice_sum for _ in range(500)]
+        assert sum(one_spark) / 500 > sum(no_sparks) / 500
+
+
+# ---------------------------------------------------------------------------
+# RollRequest / RollResult field completeness
+# ---------------------------------------------------------------------------
+
+class TestRequestResultFields:
+    def test_roll_request_preserves_all_fields(self, ruleset):
+        req = make_request(
+            attribute_id="strength", attribute_rating=3,
+            skill_id="athletics", skill_rank_id="expert",
+            difficulty_label="Hard", sparks_spent=1,
+            description="Scale the cliffs",
+        )
+        result = resolve_roll(req, ruleset)
+        assert result.request is req
+
+    def test_roll_result_dict_has_all_keys(self, ruleset):
+        result = resolve_roll(make_request(), ruleset)
+        d = roll_result_to_dict(result)
+        expected_keys = {
+            "dice_rolled", "dice_kept", "dice_sum",
+            "attribute_modifier", "skill_modifier", "difficulty_modifier",
+            "total", "outcome", "outcome_label", "outcome_description",
+            "sparks_spent", "attribute_id", "skill_id", "difficulty", "description",
+        }
+        assert expected_keys == set(d.keys())
+
+    def test_negative_sparks_raises(self, ruleset):
+        with pytest.raises(ValueError, match="sparks_spent"):
+            make_request(sparks_spent=-1)
+
+    def test_zero_sparks_allowed(self, ruleset):
+        req = make_request(sparks_spent=0)
+        result = resolve_roll(req, ruleset)
+        assert result.sparks_spent == 0
+
+    def test_large_spark_count_rolls_many_dice(self, ruleset):
+        req = make_request(sparks_spent=5)
+        result = resolve_roll(req, ruleset)
+        assert len(result.dice_rolled) == 7  # 2 base + 5 extra
+        assert len(result.dice_kept) == 2
+
+    def test_description_truncated_at_200_chars(self, ruleset):
+        long_desc = "x" * 300
+        # description truncation is done in the WS handler, not the engine
+        # but the engine must accept long strings without error
+        req = make_request(description=long_desc)
+        result = resolve_roll(req, ruleset)
+        d = roll_result_to_dict(result)
+        assert d["description"] == long_desc

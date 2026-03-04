@@ -1,13 +1,13 @@
 """HTTP roll endpoint — alternative to WebSocket rolls for simple clients."""
-from __future__ import annotations
-
 from fastapi import APIRouter, HTTPException, Request, status
 from jose import JWTError
 from pydantic import BaseModel, Field
 
 from app.auth.tokens import decode_token
+from app.config import settings
 from app.game.engine import RollRequest, resolve_roll, roll_result_to_dict
 from app.game.session import session_store
+from app.limiter import limiter
 
 router = APIRouter(prefix="/api/rolls", tags=["rolls"])
 
@@ -22,6 +22,7 @@ class RollHTTPRequest(BaseModel):
 
 
 @router.post("/")
+@limiter.limit(settings.roll_rate_limit)
 async def http_roll(body: RollHTTPRequest, request: Request):
     """Resolve a roll via HTTP (useful for testing or non-WebSocket clients).
 

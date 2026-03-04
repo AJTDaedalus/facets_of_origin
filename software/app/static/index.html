@@ -116,6 +116,16 @@
       </div>
     </div>
 
+    <!-- Mobile tab bar — hidden on desktop via CSS -->
+    <nav class="mobile-tab-bar" aria-label="View tabs">
+      <button class="tab-btn active" data-tab="character" onclick="switchTab('character')">
+        <span class="tab-icon">🪞</span>Character
+      </button>
+      <button class="tab-btn" data-tab="table" onclick="switchTab('table')">
+        <span class="tab-icon">🎲</span>Table
+      </button>
+    </nav>
+
     <div class="main-area">
 
       <!-- ===== LEFT PANEL ===== -->
@@ -272,6 +282,22 @@
 
 <script src="/static/js/app.js"></script>
 <script>
+// -------------------------------------------------------------------------
+// Mobile tab navigation
+// -------------------------------------------------------------------------
+function switchTab(tab) {
+  const appEl = document.getElementById('app');
+  if (tab === 'table') {
+    appEl.classList.add('show-table');
+  } else {
+    appEl.classList.remove('show-table');
+  }
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.tab === tab);
+  });
+}
+
+// -------------------------------------------------------------------------
 // In-game invite generation for MM
 async function generateInviteInGame() {
   const playerName = document.getElementById('invite-player-name-ingame').value.trim();

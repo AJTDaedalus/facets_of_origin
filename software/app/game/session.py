@@ -1,4 +1,4 @@
-"""Game session management — in-memory with JSON persistence."""
+"""Game session management — in-memory with JSON persistence planned."""
 from __future__ import annotations
 
 import json
@@ -14,19 +14,34 @@ from app.facets.registry import MergedRuleset, build_ruleset
 
 @dataclass
 class GameSession:
+    """A single game session: one ruleset, one roll log, any number of characters.
+
+    Attributes:
+        id: UUID string — uniquely identifies the session.
+        name: Human-readable session or campaign name.
+        created_at: UTC timestamp of session creation.
+        active_facet_ids: List of optional Facet module IDs loaded for this session.
+        ruleset: The fully merged and validated ruleset for this session.
+        characters: Active player characters keyed by player_name.
+        used_invite_tokens: JWT strings that have already been redeemed (single-use enforcement).
+        roll_log: Chronological list of resolved rolls (unbounded; capped at 50 on read).
+    """
+
     id: str
     name: str
     created_at: datetime
     active_facet_ids: list[str]
     ruleset: MergedRuleset
-    characters: dict[str, Character] = field(default_factory=dict)  # keyed by player_name
+    characters: dict[str, Character] = field(default_factory=dict)
     used_invite_tokens: set[str] = field(default_factory=set)
     roll_log: list[dict] = field(default_factory=list)
 
     def add_character(self, character: Character) -> None:
+        """Add or replace a character in this session, keyed by player_name."""
         self.characters[character.player_name] = character
 
     def record_roll(self, player_name: str, roll_dict: dict) -> None:
+        """Append a resolved roll to the session roll log with timestamp and player."""
         self.roll_log.append({
             "player_name": player_name,
             "timestamp": datetime.now(tz=timezone.utc).isoformat(),
@@ -34,17 +49,24 @@ class GameSession:
         })
 
     def to_state_dict(self) -> dict:
-        """Full session state — sent to MM on join."""
+        """Full session state sent to the MM on WebSocket join.
+
+        Returns the most recent 50 rolls to keep the payload manageable.
+        """
         return {
             "session_id": self.id,
             "session_name": self.name,
             "characters": {pn: c.to_client_dict() for pn, c in self.characters.items()},
             "ruleset": self.ruleset.to_client_dict(),
-            "roll_log": self.roll_log[-50:],  # last 50 rolls only
+            "roll_log": self.roll_log[-50:],
         }
 
     def to_player_state_dict(self, player_name: str) -> dict:
-        """Session state sent to a specific player."""
+        """Session state sent to a specific player on WebSocket join.
+
+        Includes the player's own character separately as 'your_character' for
+        easy access, plus all characters for the player list panel.
+        """
         character = self.characters.get(player_name)
         return {
             "session_id": self.id,
@@ -57,7 +79,11 @@ class GameSession:
 
 
 class SessionStore:
-    """In-memory session store with JSON persistence."""
+    """In-memory session store. All state is lost on server restart.
+
+    Persistence (SQLite) is planned for v0.2. Until then, the MM should not
+    restart the server during an active session.
+    """
 
     def __init__(self) -> None:
         self._sessions: dict[str, GameSession] = {}
@@ -65,6 +91,18 @@ class SessionStore:
         self._persistence_dir.mkdir(parents=True, exist_ok=True)
 
     def create_session(self, name: str, active_facet_ids: list[str] | None = None) -> GameSession:
+        """Create a new session, load its ruleset, and register it.
+
+        Args:
+            name: Human-readable session name.
+            active_facet_ids: Optional list of additional Facet module IDs to load.
+
+        Returns:
+            The newly created GameSession.
+
+        Raises:
+            FacetLoadError: If the ruleset cannot be loaded (e.g., missing base facet).
+        """
         session_id = str(uuid.uuid4())
         ruleset = build_ruleset(active_facet_ids or [])
 
@@ -79,9 +117,11 @@ class SessionStore:
         return session
 
     def get(self, session_id: str) -> GameSession | None:
+        """Retrieve a session by ID, or None if not found."""
         return self._sessions.get(session_id)
 
     def list_sessions(self) -> list[dict]:
+        """Return a summary list of all sessions (id, name, created_at, player_count)."""
         return [
             {
                 "id": s.id,
@@ -93,14 +133,19 @@ class SessionStore:
         ]
 
     def mark_invite_used(self, session_id: str, token: str) -> None:
+        """Record that an invite token has been consumed.
+
+        No-op if the session does not exist.
+        """
         session = self._sessions.get(session_id)
         if session:
             session.used_invite_tokens.add(token)
 
     def is_invite_used(self, session_id: str, token: str) -> bool:
+        """Return True if the invite token has already been redeemed."""
         session = self._sessions.get(session_id)
         return session is not None and token in session.used_invite_tokens
 
 
-# Singleton store
+# Singleton store — shared across the entire application process.
 session_store = SessionStore()

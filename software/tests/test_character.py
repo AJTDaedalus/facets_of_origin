@@ -266,3 +266,182 @@ class TestCharacterSerialisation:
         d = body_character.to_client_dict()
         assert "skills" in d
         assert "athletics" in d["skills"]
+
+
+# ---------------------------------------------------------------------------
+# Character name boundary cases
+# ---------------------------------------------------------------------------
+
+class TestCharacterNameBoundaries:
+    def test_single_char_name_accepted(self, ruleset, valid_attributes):
+        char, errors = create_default_character(
+            name="X", player_name="P",
+            primary_facet="body", attributes=valid_attributes,
+            ruleset=ruleset,
+        )
+        assert errors == []
+        assert char.name == "X"
+
+    def test_64_char_name_accepted(self, ruleset, valid_attributes):
+        long_name = "A" * 64
+        char, errors = create_default_character(
+            name=long_name, player_name="P",
+            primary_facet="body", attributes=valid_attributes,
+            ruleset=ruleset,
+        )
+        assert errors == []
+
+    def test_empty_name_raises_validation_error(self, ruleset, valid_attributes):
+        from pydantic import ValidationError
+        with pytest.raises(ValidationError):
+            Character(
+                name="", player_name="P",
+                primary_facet="body", attributes=valid_attributes,
+            )
+
+    def test_65_char_name_raises_validation_error(self, ruleset, valid_attributes):
+        from pydantic import ValidationError
+        with pytest.raises(ValidationError):
+            Character(
+                name="A" * 65, player_name="P",
+                primary_facet="body", attributes=valid_attributes,
+            )
+
+
+# ---------------------------------------------------------------------------
+# player_name boundary
+# ---------------------------------------------------------------------------
+
+class TestPlayerNameBoundaries:
+    def test_single_char_player_name(self, ruleset, valid_attributes):
+        char, errors = create_default_character(
+            name="Mordai", player_name="P",
+            primary_facet="body", attributes=valid_attributes,
+            ruleset=ruleset,
+        )
+        assert errors == []
+        assert char.player_name == "P"
+
+    def test_32_char_player_name(self, ruleset, valid_attributes):
+        pname = "A" * 32
+        char, errors = create_default_character(
+            name="Mordai", player_name=pname,
+            primary_facet="body", attributes=valid_attributes,
+            ruleset=ruleset,
+        )
+        assert errors == []
+
+    def test_empty_player_name_raises(self, ruleset, valid_attributes):
+        from pydantic import ValidationError
+        with pytest.raises(ValidationError):
+            Character(
+                name="Mordai", player_name="",
+                primary_facet="body", attributes=valid_attributes,
+            )
+
+
+# ---------------------------------------------------------------------------
+# advance_skill edge cases
+# ---------------------------------------------------------------------------
+
+class TestAdvanceSkillEdgeCases:
+    def test_advance_zero_marks_is_noop(self, body_character, ruleset):
+        initial_rank = body_character.skills["athletics"].rank
+        initial_marks = body_character.skills["athletics"].marks
+        result = body_character.advance_skill("athletics", 0, ruleset)
+        assert result["rank_advances"] == 0
+        assert body_character.skills["athletics"].rank == initial_rank
+        assert body_character.skills["athletics"].marks == initial_marks
+
+    def test_advance_new_skill_creates_entry(self, body_character, ruleset):
+        assert "new_skill" not in body_character.skills
+        body_character.advance_skill("new_skill", 1, ruleset)
+        assert "new_skill" in body_character.skills
+        assert body_character.skills["new_skill"].marks == 1
+
+    def test_expert_is_capped_rank(self, body_character, ruleset):
+        body_character.advance_skill("athletics", 6, ruleset)  # novice → expert
+        result = body_character.advance_skill("athletics", 100, ruleset)
+        assert body_character.skills["athletics"].rank == "expert"
+        assert result["rank_advances"] == 0
+
+    def test_secondary_facet_advance_does_not_count_toward_level(self, body_character, ruleset):
+        """Skills outside primary facet don't advance facet level."""
+        # investigation is a mind skill; body_character's primary is body
+        initial_level = body_character.facet_level
+        # But investigation is stub, let's use a mind skill that might be available
+        # We use advance_skill with a fictitious skill that won't match primary facet
+        body_character.advance_skill("investigation", 3, ruleset)
+        # Facet level should NOT increase (investigation is mind, not body)
+        assert body_character.facet_level == initial_level
+
+
+# ---------------------------------------------------------------------------
+# validate_against_ruleset error paths
+# ---------------------------------------------------------------------------
+
+class TestValidateAgainstRulesetErrors:
+    def test_unknown_attribute_id_flagged(self, ruleset, valid_attributes):
+        attrs = dict(valid_attributes)
+        # Remove constitution and add a totally unknown attr
+        del attrs["constitution"]
+        attrs["nonexistent"] = 2
+        char, _ = create_default_character(
+            name="Test", player_name="P",
+            primary_facet="body", attributes=attrs,
+            ruleset=ruleset,
+        )
+        assert char is None  # validation fails
+
+    def test_unknown_skill_flagged(self, ruleset, valid_attributes):
+        char, errors = create_default_character(
+            name="Test", player_name="P",
+            primary_facet="body", attributes=valid_attributes,
+            ruleset=ruleset,
+        )
+        # Manually inject an unknown skill and re-validate
+        char.skills["unknownskill_xyz"] = SkillState(skill_id="unknownskill_xyz")
+        errors = char.validate_against_ruleset(ruleset)
+        assert any("unknownskill_xyz" in e for e in errors)
+
+    def test_empty_errors_means_valid(self, ruleset, valid_attributes):
+        char, errors = create_default_character(
+            name="Test", player_name="P",
+            primary_facet="body", attributes=valid_attributes,
+            ruleset=ruleset,
+        )
+        assert errors == []
+        errors2 = char.validate_against_ruleset(ruleset)
+        assert errors2 == []
+
+
+# ---------------------------------------------------------------------------
+# get_skill_modifier edge cases
+# ---------------------------------------------------------------------------
+
+class TestGetSkillModifier:
+    def test_missing_skill_returns_zero(self, body_character, ruleset):
+        mod = body_character.get_skill_modifier("nonexistent_skill", ruleset)
+        assert mod == 0
+
+    def test_novice_skill_returns_zero(self, body_character, ruleset):
+        mod = body_character.get_skill_modifier("athletics", ruleset)
+        assert mod == 0  # starts novice (modifier=0)
+
+
+# ---------------------------------------------------------------------------
+# Techniques list manipulation
+# ---------------------------------------------------------------------------
+
+class TestTechniquesList:
+    def test_techniques_starts_empty(self, body_character):
+        assert body_character.techniques == []
+
+    def test_can_append_technique(self, body_character):
+        body_character.techniques.append("forcing_hand")
+        assert "forcing_hand" in body_character.techniques
+
+    def test_techniques_included_in_client_dict(self, body_character):
+        body_character.techniques.append("weapon_mastery")
+        d = body_character.to_client_dict()
+        assert "weapon_mastery" in d["techniques"]

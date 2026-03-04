@@ -2,7 +2,7 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from app.auth.tokens import create_invite_token, create_session_token
+from app.auth.tokens import create_invite_token, create_mm_token, create_session_token
 
 
 # ---------------------------------------------------------------------------
@@ -309,3 +309,158 @@ class TestSecurityHeaders:
     def test_csp_header_present(self, client):
         resp = client.get("/api/health")
         assert "content-security-policy" in resp.headers
+
+
+# ---------------------------------------------------------------------------
+# Malformed JSON / missing fields (422 responses)
+# ---------------------------------------------------------------------------
+
+class TestMalformedRequests:
+    def test_setup_missing_password_returns_422(self, client):
+        resp = client.post("/api/sessions/auth/setup", json={})
+        assert resp.status_code == 422
+
+    def test_create_session_missing_name_returns_422(self, client, mm_headers):
+        resp = client.post("/api/sessions/", json={}, headers=mm_headers)
+        assert resp.status_code == 422
+
+    def test_create_character_missing_session_id_returns_422(self, client, mm_headers):
+        resp = client.post("/api/characters/", json={
+            "character_name": "Test",
+            "primary_facet": "body",
+            "attributes": {},
+        }, headers=mm_headers)
+        assert resp.status_code == 422
+
+    def test_roll_missing_session_id_returns_422(self, client, mm_headers):
+        resp = client.post("/api/rolls/", json={
+            "attribute_id": "strength",
+        }, headers=mm_headers)
+        assert resp.status_code == 422
+
+
+# ---------------------------------------------------------------------------
+# Password length edge cases
+# ---------------------------------------------------------------------------
+
+class TestPasswordLengthBoundary:
+    def _reset_password(self):
+        import app.api.routes.session as s
+        s._mm_password_hash = None
+
+    def test_7_char_password_rejected_by_setup(self, client):
+        self._reset_password()
+        resp = client.post("/api/sessions/auth/setup", json={"password": "seven77"})
+        assert resp.status_code == 422
+
+    def test_8_char_password_accepted_by_setup(self, client):
+        self._reset_password()
+        resp = client.post("/api/sessions/auth/setup", json={"password": "eight888"})
+        assert resp.status_code == 200
+
+
+# ---------------------------------------------------------------------------
+# Roll with all four difficulties via HTTP
+# ---------------------------------------------------------------------------
+
+class TestRollDifficulties:
+    @pytest.mark.parametrize("difficulty", ["Easy", "Standard", "Hard", "Very Hard"])
+    def test_roll_all_difficulties(self, client, session_with_character, difficulty):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        headers = {"Authorization": f"Bearer {player_token}"}
+        resp = client.post("/api/rolls/", json={
+            "session_id": session_id,
+            "attribute_id": "intelligence",
+            "difficulty": difficulty,
+        }, headers=headers)
+        assert resp.status_code == 200
+        assert resp.json()["roll"]["outcome"] in ("full_success", "partial_success", "failure")
+
+
+# ---------------------------------------------------------------------------
+# Facets API — extra coverage
+# ---------------------------------------------------------------------------
+
+class TestFacetsAPIExtra:
+    def test_facets_response_does_not_include_path(self, client, mm_headers):
+        """File paths must not be exposed to clients."""
+        resp = client.get("/api/facets/available", headers=mm_headers)
+        assert resp.status_code == 200
+        for facet in resp.json()["facets"]:
+            assert "path" not in facet
+
+    def test_facets_includes_version(self, client, mm_headers):
+        resp = client.get("/api/facets/available", headers=mm_headers)
+        base = next(f for f in resp.json()["facets"] if f.get("id") == "base")
+        assert "version" in base
+
+
+# ---------------------------------------------------------------------------
+# Player token session mismatch
+# ---------------------------------------------------------------------------
+
+class TestPlayerSessionMismatch:
+    def test_roll_with_mismatched_session_token_rejected(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        # Token for a DIFFERENT session
+        player_token = create_session_token("Zahna", "completely-different-session-id")
+        headers = {"Authorization": f"Bearer {player_token}"}
+        resp = client.post("/api/rolls/", json={
+            "session_id": session_id,
+            "attribute_id": "intelligence",
+        }, headers=headers)
+        assert resp.status_code == 403
+
+    def test_list_characters_with_player_token_allowed(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        headers = {"Authorization": f"Bearer {player_token}"}
+        resp = client.get(f"/api/characters/{session_id}", headers=headers)
+        assert resp.status_code == 200
+
+    def test_invite_for_session_not_found_returns_404(self, client, mm_headers):
+        resp = client.post("/api/sessions/invite", json={
+            "player_name": "Alice",
+            "session_id": "nonexistent-session",
+        }, headers=mm_headers)
+        assert resp.status_code == 404
+
+
+# ---------------------------------------------------------------------------
+# Rate limiting (H-01)
+# ---------------------------------------------------------------------------
+
+class TestRateLimiting:
+    """Verify that rate-limited endpoints return 429 after the limit is exhausted."""
+
+    @pytest.fixture(autouse=True)
+    def reset_limiter(self, reset_limiter):
+        """Use the shared reset_limiter fixture to clear state around every test."""
+
+    def test_setup_rate_limit(self, client):
+        """setup endpoint returns 429 after 5 requests from the same IP."""
+        # The first 5 requests succeed or fail normally (password may already be set)
+        for _ in range(5):
+            client.post("/api/sessions/auth/setup", json={"password": "testpassword"})
+        resp = client.post("/api/sessions/auth/setup", json={"password": "testpassword"})
+        assert resp.status_code == 429
+
+    def test_login_rate_limit(self, client, mm_password):
+        """mm-login endpoint returns 429 after 5 requests from the same IP."""
+        for _ in range(5):
+            client.post("/api/sessions/auth/mm-login", json={"password": "wrongpassword"})
+        resp = client.post("/api/sessions/auth/mm-login", json={"password": "wrongpassword"})
+        assert resp.status_code == 429
+
+    def test_rate_limit_response_is_json(self, client):
+        """429 response body is valid JSON."""
+        for _ in range(5):
+            client.post("/api/sessions/auth/setup", json={"password": "testpassword"})
+        resp = client.post("/api/sessions/auth/setup", json={"password": "testpassword"})
+        assert resp.status_code == 429
+        data = resp.json()
+        assert "error" in data

@@ -1,6 +1,7 @@
 """WebSocket connection manager and event dispatcher."""
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 from typing import Any
@@ -53,6 +54,11 @@ class ConnectionManager:
 
 manager = ConnectionManager()
 
+# Maximum allowed WebSocket message size in bytes (M-03).
+WS_MAX_MESSAGE_BYTES = 8_192
+# Seconds to wait for the auth message before closing unauthenticated connections (L-03).
+WS_AUTH_TIMEOUT_SECONDS = 30
+
 
 async def handle_websocket(websocket: WebSocket) -> None:
     """Main WebSocket handler — authentication then event loop."""
@@ -63,7 +69,29 @@ async def handle_websocket(websocket: WebSocket) -> None:
         # Step 1: Authenticate via token in the first message
         # (Not in the URL query string — avoids logging the token)
         await websocket.accept()
-        auth_msg = await websocket.receive_json()
+
+        # L-03: close unauthenticated connections that never send their auth message.
+        try:
+            auth_text = await asyncio.wait_for(
+                websocket.receive_text(), timeout=WS_AUTH_TIMEOUT_SECONDS
+            )
+        except asyncio.TimeoutError:
+            await websocket.send_json({"type": "error", "message": "Authentication timeout."})
+            await websocket.close(code=1008)
+            return
+
+        # M-03: enforce message size on the auth message too.
+        if len(auth_text) > WS_MAX_MESSAGE_BYTES:
+            await websocket.send_json({"type": "error", "message": "Message too large."})
+            await websocket.close(code=1009)
+            return
+
+        try:
+            auth_msg = json.loads(auth_text)
+        except (json.JSONDecodeError, ValueError):
+            await websocket.send_json({"type": "error", "message": "Invalid JSON."})
+            await websocket.close(code=1008)
+            return
 
         token = auth_msg.get("token", "")
         try:
@@ -101,8 +129,17 @@ async def handle_websocket(websocket: WebSocket) -> None:
         # Announce join to all
         await manager.broadcast(session_id, {"type": "player_joined", "player": identity})
 
-        # Step 2: Event loop
-        async for raw in websocket.iter_json():
+        # Step 2: Event loop — enforce message size on every incoming message (M-03).
+        while True:
+            text = await websocket.receive_text()
+            if len(text) > WS_MAX_MESSAGE_BYTES:
+                await manager.send_to(websocket, {"type": "error", "message": "Message too large."})
+                continue
+            try:
+                raw = json.loads(text)
+            except (json.JSONDecodeError, ValueError):
+                await manager.send_to(websocket, {"type": "error", "message": "Invalid JSON."})
+                continue
             await _dispatch(websocket, raw, session_id, identity, token_data.is_mm)
 
     except WebSocketDisconnect:

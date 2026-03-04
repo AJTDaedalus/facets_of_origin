@@ -303,3 +303,208 @@ class TestFacetComposition:
         skill = merged.get_skill("athletics")
         assert skill is not None
         assert skill.description == "Overridden description"
+
+
+# ---------------------------------------------------------------------------
+# discover_facet_files edge cases
+# ---------------------------------------------------------------------------
+
+class TestDiscoverFacetFiles:
+    def test_empty_directory_returns_empty_list(self, tmp_path):
+        from app.facets.loader import discover_facet_files
+        result = discover_facet_files(tmp_path)
+        assert result == []
+
+    def test_nonexistent_directory_returns_empty_list(self, tmp_path):
+        from app.facets.loader import discover_facet_files
+        result = discover_facet_files(tmp_path / "does_not_exist")
+        assert result == []
+
+    def test_directory_with_non_yaml_files_returns_empty(self, tmp_path):
+        from app.facets.loader import discover_facet_files
+        (tmp_path / "readme.txt").write_text("not a facet")
+        (tmp_path / "data.json").write_text("{}")
+        result = discover_facet_files(tmp_path)
+        assert result == []
+
+    def test_discovers_yaml_in_subdirectory(self, tmp_path):
+        from app.facets.loader import discover_facet_files
+        sub = tmp_path / "mymod"
+        sub.mkdir()
+        (sub / "facet.yaml").write_text("id: mymod\nname: My Mod\nversion: '1.0'\n")
+        result = discover_facet_files(tmp_path)
+        assert len(result) == 1
+
+    def test_discovers_multiple_facets(self, tmp_path):
+        from app.facets.loader import discover_facet_files
+        for name in ("mod_a", "mod_b", "mod_c"):
+            d = tmp_path / name
+            d.mkdir()
+            (d / "facet.yaml").write_text(f"id: '{name}'\nname: '{name}'\nversion: '1.0'\n")
+        result = discover_facet_files(tmp_path)
+        assert len(result) == 3
+
+    def test_returns_sorted_paths(self, tmp_path):
+        from app.facets.loader import discover_facet_files
+        for name in ("c_mod", "a_mod", "b_mod"):
+            d = tmp_path / name
+            d.mkdir()
+            (d / "facet.yaml").write_text(f"id: '{name}'\nname: '{name}'\nversion: '1.0'\n")
+        result = discover_facet_files(tmp_path)
+        names = [p.parent.name for p in result]
+        assert names == sorted(names)
+
+
+# ---------------------------------------------------------------------------
+# load_facet_file additional edge cases
+# ---------------------------------------------------------------------------
+
+class TestLoadFacetFileEdgeCases:
+    def test_facet_with_all_optional_sections_absent(self, tmp_path):
+        path = tmp_path / "facet.yaml"
+        path.write_text("id: bare\nname: Bare\nversion: '1.0'\n")
+        ff = load_facet_file(path)
+        assert ff.facets == []
+        assert ff.skills == []
+        assert ff.roll_resolution is None
+        assert ff.spark is None
+        assert ff.advancement is None
+
+    def test_facet_with_valid_technique_prerequisites(self, tmp_path):
+        path = tmp_path / "facet.yaml"
+        path.write_text(textwrap.dedent("""
+            id: "tech-test"
+            name: "Tech Test"
+            version: "1.0"
+            attributes:
+              minor:
+                - id: strength
+                  name: Strength
+                  description: test
+                  major: body
+              major:
+                - id: body
+                  name: Body
+                  description: test
+                  minor_attributes: [strength]
+            facets:
+              - id: body
+                name: Body
+                description: test
+                major_attribute: body
+            techniques:
+              body:
+                branches:
+                  - id: might
+                    name: Might
+                    attribute: strength
+                    tiers:
+                      - tier: 1
+                        techniques:
+                          - id: tier1
+                            name: Tier 1
+                            description: First tier.
+                            prerequisites: []
+                      - tier: 2
+                        techniques:
+                          - id: tier2
+                            name: Tier 2
+                            description: Requires tier1.
+                            prerequisites: [tier1]
+                      - tier: 3
+                        techniques:
+                          - id: tier3
+                            name: Tier 3
+                            description: Requires tier2.
+                            prerequisites: [tier2]
+        """))
+        ff = load_facet_file(path)
+        body_tree = ff.techniques.get("body")
+        assert body_tree is not None
+        tier2 = body_tree.branches[0].tiers[1].techniques[0]
+        assert "tier1" in tier2.prerequisites
+
+    def test_facet_priority_zero_accepted(self, tmp_path):
+        path = tmp_path / "facet.yaml"
+        path.write_text("id: base\nname: Base\nversion: '1.0'\npriority: 0\n")
+        ff = load_facet_file(path)
+        assert ff.priority == 0
+
+    def test_facet_with_authors_list(self, tmp_path):
+        path = tmp_path / "facet.yaml"
+        path.write_text(textwrap.dedent("""
+            id: "authored"
+            name: "Authored Facet"
+            version: "1.0"
+            authors:
+              - Alice
+              - Bob
+        """))
+        ff = load_facet_file(path)
+        assert len(ff.authors) == 2
+        assert "Alice" in ff.authors
+
+
+# ---------------------------------------------------------------------------
+# Override priority ordering
+# ---------------------------------------------------------------------------
+
+class TestFacetOverridePriority:
+    def _make_facet_yaml(self, tmp_path, id_, priority, skill_desc):
+        d = tmp_path / id_
+        d.mkdir()
+        (d / "facet.yaml").write_text(textwrap.dedent(f"""
+            id: "{id_}"
+            name: "{id_}"
+            version: "1.0"
+            priority: {priority}
+            attributes:
+              minor:
+                - id: strength
+                  name: Strength
+                  description: test
+                  major: body
+              major:
+                - id: body
+                  name: Body
+                  description: test
+                  minor_attributes: [strength]
+            facets:
+              - id: body
+                name: Body
+                description: test
+                major_attribute: body
+            skills:
+              - id: common_skill
+                name: Common
+                facet: body
+                attribute: strength
+                description: "{skill_desc}"
+        """))
+        return d / "facet.yaml"
+
+    def test_higher_priority_wins(self, tmp_path):
+        from app.facets.loader import load_facet_file as lff
+        path_low = self._make_facet_yaml(tmp_path, "low", 0, "Low priority description")
+        path_high = self._make_facet_yaml(tmp_path, "high", 20, "High priority description")
+        merged = MergedRuleset([lff(path_low), lff(path_high)])
+        skill = merged.get_skill("common_skill")
+        assert skill.description == "High priority description"
+
+    def test_equal_priority_last_in_list_wins(self, tmp_path):
+        from app.facets.loader import load_facet_file as lff
+        path_a = self._make_facet_yaml(tmp_path, "aaa", 10, "AAA description")
+        path_b = self._make_facet_yaml(tmp_path, "bbb", 10, "BBB description")
+        # bbb appears second in the list
+        merged = MergedRuleset([lff(path_a), lff(path_b)])
+        skill = merged.get_skill("common_skill")
+        assert skill.description == "BBB description"
+
+    def test_base_priority_zero_is_lowest(self, tmp_path):
+        """Priority 0 (base) must yield to any module with higher priority."""
+        from app.facets.loader import load_facet_file as lff
+        path_base = self._make_facet_yaml(tmp_path, "base_mod", 0, "Base description")
+        path_mod = self._make_facet_yaml(tmp_path, "expansion", 5, "Expansion description")
+        merged = MergedRuleset([lff(path_base), lff(path_mod)])
+        skill = merged.get_skill("common_skill")
+        assert skill.description == "Expansion description"

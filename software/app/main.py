@@ -8,6 +8,9 @@ from fastapi import FastAPI, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
 
 from app.api.routes.character import router as character_router
 from app.api.routes.facets_route import router as facets_router
@@ -15,6 +18,7 @@ from app.api.routes.rolls import router as rolls_router
 from app.api.routes.session import router as session_router
 from app.api.websocket import handle_websocket
 from app.config import settings
+from app.limiter import limiter
 
 logging.basicConfig(level=logging.DEBUG if settings.debug else logging.INFO)
 logger = logging.getLogger(__name__)
@@ -23,10 +27,17 @@ app = FastAPI(
     title="Facets of Origin",
     description="Self-hosted digital tabletop for the Facets of Origin TTRPG.",
     version="0.1.0",
-    # Disable docs in production if not debugging
     docs_url="/api/docs" if settings.debug else None,
     redoc_url=None,
 )
+
+# ---------------------------------------------------------------------------
+# Rate limiter — attach to app state so SlowAPIMiddleware can find it.
+# Routes opt in with @limiter.limit("N/interval").
+# ---------------------------------------------------------------------------
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+app.add_middleware(SlowAPIMiddleware)
 
 # ---------------------------------------------------------------------------
 # Security headers middleware

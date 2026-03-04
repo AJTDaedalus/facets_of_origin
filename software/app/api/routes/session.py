@@ -1,6 +1,4 @@
 """Session management API routes — MM only."""
-from __future__ import annotations
-
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from jose import JWTError
 from pydantic import BaseModel, Field
@@ -15,6 +13,7 @@ from app.auth.tokens import (
 )
 from app.config import settings
 from app.game.session import session_store
+from app.limiter import limiter
 
 router = APIRouter(prefix="/api/sessions", tags=["sessions"])
 
@@ -59,7 +58,8 @@ class MMLoginRequest(BaseModel):
 
 
 @router.post("/auth/mm-login")
-async def mm_login(body: MMLoginRequest):
+@limiter.limit(settings.auth_rate_limit)
+async def mm_login(request: Request, body: MMLoginRequest):
     """MM logs in with their password and receives a JWT."""
     pw_hash = _get_mm_hash()
     if pw_hash is None or not verify_password(body.password, pw_hash):
@@ -73,7 +73,8 @@ class SetupRequest(BaseModel):
 
 
 @router.post("/auth/setup")
-async def setup_mm_password(body: SetupRequest):
+@limiter.limit(settings.auth_rate_limit)
+async def setup_mm_password(request: Request, body: SetupRequest):
     """First-run endpoint: set the MM password. Can only be called once."""
     if _get_mm_hash() is not None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Password already set.")
