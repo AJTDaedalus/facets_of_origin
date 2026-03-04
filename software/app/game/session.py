@@ -1,11 +1,12 @@
 """Game session management — in-memory with JSON persistence planned."""
 from __future__ import annotations
 
-import json
 import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
+
+import yaml
 
 from app.config import settings
 from app.game.character import Character
@@ -25,6 +26,7 @@ class GameSession:
         characters: Active player characters keyed by player_name.
         used_invite_tokens: JWT strings that have already been redeemed (single-use enforcement).
         roll_log: Chronological list of resolved rolls (unbounded; capped at 50 on read).
+        _character_dir: Directory where per-character .fof files are written on save.
     """
 
     id: str
@@ -35,10 +37,25 @@ class GameSession:
     characters: dict[str, Character] = field(default_factory=dict)
     used_invite_tokens: set[str] = field(default_factory=set)
     roll_log: list[dict] = field(default_factory=list)
+    _character_dir: Path | None = field(default=None)
 
     def add_character(self, character: Character) -> None:
         """Add or replace a character in this session, keyed by player_name."""
         self.characters[character.player_name] = character
+        self.save_character_to_disk(character.player_name)
+
+    def save_character_to_disk(self, player_name: str) -> None:
+        """Write the current character state to data/sessions/{id}/characters/{player_name}.fof.
+
+        Silent no-op if player_name is not in the session or _character_dir is not set.
+        """
+        character = self.characters.get(player_name)
+        if not character or not self._character_dir:
+            return
+        module_refs = [{"id": f.id, "version": f.version} for f in self.ruleset._files]
+        fof_dict = character.to_fof(module_refs, self.id)
+        path = self._character_dir / f"{player_name}.fof"
+        path.write_text(yaml.dump(fof_dict, allow_unicode=True, sort_keys=False), encoding="utf-8")
 
     def record_roll(self, player_name: str, roll_dict: dict) -> None:
         """Append a resolved roll to the session roll log with timestamp and player."""
@@ -106,12 +123,16 @@ class SessionStore:
         session_id = str(uuid.uuid4())
         ruleset = build_ruleset(active_facet_ids or [])
 
+        char_dir = self._persistence_dir / session_id / "characters"
+        char_dir.mkdir(parents=True, exist_ok=True)
+
         session = GameSession(
             id=session_id,
             name=name,
             created_at=datetime.now(tz=timezone.utc),
             active_facet_ids=active_facet_ids or [],
             ruleset=ruleset,
+            _character_dir=char_dir,
         )
         self._sessions[session_id] = session
         return session

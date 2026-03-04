@@ -1,12 +1,13 @@
 """Character creation and management routes."""
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, HTTPException, Request, status
+import yaml
+from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from jose import JWTError
 from pydantic import BaseModel, Field
 
 from app.auth.tokens import decode_token
-from app.game.character import create_default_character
+from app.game.character import Character, create_default_character
 from app.game.session import session_store
 
 router = APIRouter(prefix="/api/characters", tags=["characters"])
@@ -28,6 +29,11 @@ class CreateCharacterRequest(BaseModel):
     character_name: str = Field(min_length=1, max_length=64)
     primary_facet: str
     attributes: dict[str, int] = Field(description="Minor attribute ID -> rating (1-3).")
+
+
+class UploadCharacterRequest(BaseModel):
+    session_id: str
+    fof_yaml: str = Field(description="Raw YAML content of a character .fof file.")
 
 
 @router.post("/")
@@ -61,6 +67,83 @@ async def create_character(body: CreateCharacterRequest, request: Request):
 
     session.add_character(character)
     return {"character": character.to_client_dict()}
+
+
+@router.post("/upload")
+async def upload_character(body: UploadCharacterRequest, request: Request):
+    """Upload a character .fof file to join or update a character in a session.
+
+    Players may only upload a character whose player_name matches their token.
+    MM may upload any character.
+    """
+    token_data = _require_player_or_mm(request)
+
+    session = session_store.get(body.session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found.")
+
+    try:
+        fof_dict = yaml.safe_load(body.fof_yaml)
+    except yaml.YAMLError as e:
+        raise HTTPException(status_code=400, detail=f"YAML parse error: {e}")
+
+    if not isinstance(fof_dict, dict) or fof_dict.get("type") != "character":
+        raise HTTPException(
+            status_code=400,
+            detail="File must be a character .fof (type: character).",
+        )
+
+    try:
+        character = Character.from_fof(fof_dict)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
+
+    # Players can only upload their own character
+    if not token_data.is_mm:
+        if token_data.session_id != body.session_id:
+            raise HTTPException(status_code=403, detail="Token is for a different session.")
+        if character.player_name != token_data.player_name:
+            raise HTTPException(
+                status_code=403,
+                detail="Character player_name does not match your token.",
+            )
+
+    errors = character.validate_against_ruleset(session.ruleset)
+    if errors:
+        raise HTTPException(status_code=422, detail={"errors": errors})
+
+    session.add_character(character)
+    return {"character": character.to_client_dict()}
+
+
+@router.get("/{session_id}/{player_name}/export")
+async def export_character(session_id: str, player_name: str, request: Request):
+    """Download the current character state as a .fof file.
+
+    Players may only export their own character. MM may export any.
+    """
+    token_data = _require_player_or_mm(request)
+
+    if not token_data.is_mm and token_data.player_name != player_name:
+        raise HTTPException(status_code=403, detail="You can only export your own character.")
+
+    session = session_store.get(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found.")
+
+    character = session.characters.get(player_name)
+    if not character:
+        raise HTTPException(status_code=404, detail="Character not found in session.")
+
+    module_refs = [{"id": f.id, "version": f.version} for f in session.ruleset._files]
+    fof_dict = character.to_fof(module_refs, session_id)
+    yaml_str = yaml.dump(fof_dict, allow_unicode=True, sort_keys=False)
+
+    return Response(
+        content=yaml_str,
+        media_type="application/yaml",
+        headers={"Content-Disposition": f'attachment; filename="{player_name}.fof"'},
+    )
 
 
 @router.get("/{session_id}")

@@ -57,6 +57,9 @@ async def http_roll(body: RollHTTPRequest, request: Request):
     for _ in range(sparks_to_spend):
         character.spend_spark()
 
+    if sparks_to_spend > 0 and player_name:
+        session.save_character_to_disk(player_name)
+
     roll_req = RollRequest(
         attribute_id=body.attribute_id,
         attribute_rating=character.attributes[body.attribute_id],

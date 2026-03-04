@@ -64,7 +64,7 @@ class SkillDef(BaseModel):
     facet: str                    # character facet ID
     attribute: str                # minor attribute ID
     description: str
-    status: Literal["active", "stub"] = "active"
+    status: Literal["active", "stub", "removed"] = "active"
 
 
 # ---------------------------------------------------------------------------

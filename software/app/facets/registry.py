@@ -159,7 +159,7 @@ def build_ruleset(active_facet_ids: list[str] | None = None) -> MergedRuleset:
     all_paths = discover_facet_files(facets_dir)
 
     if not all_paths:
-        raise FacetLoadError(f"No facet.yaml files found in {facets_dir.resolve()}.")
+        raise FacetLoadError(f"No ruleset files found in {facets_dir.resolve()}.")
 
     loaded: list[FacetFile] = []
     for path in all_paths:

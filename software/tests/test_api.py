@@ -1,8 +1,13 @@
 """Integration tests for the FastAPI HTTP endpoints."""
+from pathlib import Path
+
 import pytest
+import yaml
 from fastapi.testclient import TestClient
 
 from app.auth.tokens import create_invite_token, create_mm_token, create_session_token
+
+SPEC_EXAMPLES = Path(__file__).parent.parent.parent / "spec" / "examples"
 
 
 # ---------------------------------------------------------------------------
@@ -464,3 +469,257 @@ class TestRateLimiting:
         assert resp.status_code == 429
         data = resp.json()
         assert "error" in data
+
+
+# ---------------------------------------------------------------------------
+# Character upload endpoint
+# ---------------------------------------------------------------------------
+
+# Zahna's attributes from character-example.fof (sum = 18)
+_ZAHNA_ATTRIBUTES = {
+    "strength": 1, "dexterity": 2, "constitution": 2,
+    "intelligence": 3, "wisdom": 3, "knowledge": 2,
+    "spirit": 1, "luck": 2, "charisma": 2,
+}
+
+
+def _make_character_fof_yaml(player_name: str, session_id: str | None = None) -> str:
+    """Build a minimal valid character .fof YAML string."""
+    fof_dict = {
+        "fof_version": "0.1",
+        "type": "character",
+        "id": f"{player_name.lower()}-test",
+        "name": player_name,
+        "version": "1.0.0",
+        "authors": [player_name],
+        "ruleset": {"modules": [{"id": "base", "version": "0.1.0"}]},
+        "campaign_id": session_id or "test-session",
+        "character": {
+            "name": player_name,
+            "player_name": player_name,
+            "primary_facet": "mind",
+            "attributes": _ZAHNA_ATTRIBUTES,
+            "skills": {"investigation": {"rank": "practiced", "marks": 2}},
+            "sparks": 2,
+            "session_skill_points_remaining": 4,
+            "facet_level": 1,
+            "rank_advances_this_facet_level": 3,
+            "techniques": [],
+        },
+    }
+    return yaml.dump(fof_dict, allow_unicode=True, sort_keys=False)
+
+
+class TestCharacterUpload:
+    def test_upload_character_fof_with_mm_token(self, client, mm_headers, active_session):
+        session_id = active_session["session_id"]
+        fof_yaml = _make_character_fof_yaml("Zahna", session_id)
+        resp = client.post(
+            "/api/characters/upload",
+            json={"session_id": session_id, "fof_yaml": fof_yaml},
+            headers=mm_headers,
+        )
+        assert resp.status_code == 200
+        char = resp.json()["character"]
+        assert char["name"] == "Zahna"
+        assert char["primary_facet"] == "mind"
+
+    def test_upload_character_appears_in_session(self, client, mm_headers, active_session):
+        session_id = active_session["session_id"]
+        fof_yaml = _make_character_fof_yaml("Mordai", session_id)
+        client.post(
+            "/api/characters/upload",
+            json={"session_id": session_id, "fof_yaml": fof_yaml},
+            headers=mm_headers,
+        )
+        resp = client.get(f"/api/characters/{session_id}", headers=mm_headers)
+        assert "Mordai" in resp.json()["characters"]
+
+    def test_upload_writes_fof_file_to_disk(self, client, mm_headers, active_session, tmp_path):
+        """After upload, a .fof file should exist in the session's character dir."""
+        from app.game.session import session_store
+        session_id = active_session["session_id"]
+        fof_yaml = _make_character_fof_yaml("DiskTest", session_id)
+        resp = client.post(
+            "/api/characters/upload",
+            json={"session_id": session_id, "fof_yaml": fof_yaml},
+            headers=mm_headers,
+        )
+        assert resp.status_code == 200
+        session = session_store.get(session_id)
+        assert session is not None
+        assert session._character_dir is not None
+        fof_path = session._character_dir / "DiskTest.fof"
+        assert fof_path.exists(), f"Expected {fof_path} to exist after upload"
+
+    def test_upload_invalid_yaml_returns_400(self, client, mm_headers, active_session):
+        session_id = active_session["session_id"]
+        resp = client.post(
+            "/api/characters/upload",
+            json={"session_id": session_id, "fof_yaml": ":: invalid: yaml: ["},
+            headers=mm_headers,
+        )
+        assert resp.status_code == 400
+
+    def test_upload_wrong_type_returns_400(self, client, mm_headers, active_session):
+        session_id = active_session["session_id"]
+        ruleset_fof = (SPEC_EXAMPLES / "base-ruleset.fof").read_text(encoding="utf-8")
+        resp = client.post(
+            "/api/characters/upload",
+            json={"session_id": session_id, "fof_yaml": ruleset_fof},
+            headers=mm_headers,
+        )
+        assert resp.status_code == 400
+
+    def test_upload_with_player_token_own_character(self, client, active_session):
+        session_id = active_session["session_id"]
+        player_token = create_session_token("Alice", session_id)
+        headers = {"Authorization": f"Bearer {player_token}"}
+        fof_yaml = _make_character_fof_yaml("Alice", session_id)
+        resp = client.post(
+            "/api/characters/upload",
+            json={"session_id": session_id, "fof_yaml": fof_yaml},
+            headers=headers,
+        )
+        assert resp.status_code == 200
+
+    def test_upload_with_wrong_player_name_returns_403(self, client, active_session):
+        """Player uploading a character with a different player_name must be rejected."""
+        session_id = active_session["session_id"]
+        player_token = create_session_token("Alice", session_id)
+        headers = {"Authorization": f"Bearer {player_token}"}
+        # .fof says player_name is Bob, but token says Alice
+        fof_yaml = _make_character_fof_yaml("Bob", session_id)
+        resp = client.post(
+            "/api/characters/upload",
+            json={"session_id": session_id, "fof_yaml": fof_yaml},
+            headers=headers,
+        )
+        assert resp.status_code == 403
+
+    def test_upload_session_not_found_returns_404(self, client, mm_headers):
+        fof_yaml = _make_character_fof_yaml("Ghost")
+        resp = client.post(
+            "/api/characters/upload",
+            json={"session_id": "no-such-session", "fof_yaml": fof_yaml},
+            headers=mm_headers,
+        )
+        assert resp.status_code == 404
+
+    def test_upload_character_example_fof(self, client, mm_headers, active_session):
+        """The canonical character-example.fof from spec/ should upload successfully."""
+        session_id = active_session["session_id"]
+        fof_yaml = (SPEC_EXAMPLES / "character-example.fof").read_text(encoding="utf-8")
+        resp = client.post(
+            "/api/characters/upload",
+            json={"session_id": session_id, "fof_yaml": fof_yaml},
+            headers=mm_headers,
+        )
+        assert resp.status_code == 200
+        assert resp.json()["character"]["name"] == "Zahna"
+
+
+class TestCharacterExport:
+    def test_export_character_as_yaml(self, client, mm_headers, session_with_character):
+        session, char = session_with_character
+        session_id = session["session_id"]
+        player_name = char["player_name"]
+        resp = client.get(
+            f"/api/characters/{session_id}/{player_name}/export",
+            headers=mm_headers,
+        )
+        assert resp.status_code == 200
+        assert resp.headers["content-type"].startswith("application/yaml")
+
+    def test_export_content_disposition(self, client, mm_headers, session_with_character):
+        session, char = session_with_character
+        session_id = session["session_id"]
+        player_name = char["player_name"]
+        resp = client.get(
+            f"/api/characters/{session_id}/{player_name}/export",
+            headers=mm_headers,
+        )
+        assert f'filename="{player_name}.fof"' in resp.headers["content-disposition"]
+
+    def test_export_is_valid_yaml(self, client, mm_headers, session_with_character):
+        session, char = session_with_character
+        session_id = session["session_id"]
+        player_name = char["player_name"]
+        resp = client.get(
+            f"/api/characters/{session_id}/{player_name}/export",
+            headers=mm_headers,
+        )
+        parsed = yaml.safe_load(resp.text)
+        assert parsed["type"] == "character"
+        assert parsed["character"]["name"] == char["name"]
+
+    def test_export_reimport_roundtrip(self, client, mm_headers, active_session, valid_attributes):
+        """Export → re-upload should produce an identical character."""
+        session_id = active_session["session_id"]
+        # Create the character
+        client.post(
+            "/api/characters/",
+            json={
+                "session_id": session_id,
+                "character_name": "Roundtrip",
+                "primary_facet": "body",
+                "attributes": valid_attributes,
+            },
+            headers=mm_headers,
+        )
+        # Export
+        export_resp = client.get(
+            f"/api/characters/{session_id}/Roundtrip/export",
+            headers=mm_headers,
+        )
+        assert export_resp.status_code == 200
+
+        # Re-upload (overwrites same character)
+        upload_resp = client.post(
+            "/api/characters/upload",
+            json={"session_id": session_id, "fof_yaml": export_resp.text},
+            headers=mm_headers,
+        )
+        assert upload_resp.status_code == 200
+        reimported = upload_resp.json()["character"]
+        assert reimported["name"] == "Roundtrip"
+        assert reimported["primary_facet"] == "body"
+
+    def test_export_session_not_found_returns_404(self, client, mm_headers):
+        resp = client.get(
+            "/api/characters/no-such-session/SomePlayer/export",
+            headers=mm_headers,
+        )
+        assert resp.status_code == 404
+
+    def test_export_character_not_found_returns_404(self, client, mm_headers, active_session):
+        session_id = active_session["session_id"]
+        resp = client.get(
+            f"/api/characters/{session_id}/NoSuchPlayer/export",
+            headers=mm_headers,
+        )
+        assert resp.status_code == 404
+
+    def test_player_can_export_own_character(self, client, session_with_character):
+        session, char = session_with_character
+        session_id = session["session_id"]
+        player_name = char["player_name"]
+        player_token = create_session_token(player_name, session_id)
+        headers = {"Authorization": f"Bearer {player_token}"}
+        resp = client.get(
+            f"/api/characters/{session_id}/{player_name}/export",
+            headers=headers,
+        )
+        assert resp.status_code == 200
+
+    def test_player_cannot_export_other_character(self, client, session_with_character):
+        session, char = session_with_character
+        session_id = session["session_id"]
+        player_name = char["player_name"]
+        other_token = create_session_token("SomeOtherPlayer", session_id)
+        headers = {"Authorization": f"Bearer {other_token}"}
+        resp = client.get(
+            f"/api/characters/{session_id}/{player_name}/export",
+            headers=headers,
+        )
+        assert resp.status_code == 403

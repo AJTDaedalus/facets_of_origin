@@ -1,6 +1,8 @@
 """Character model — creation, validation, and skill advancement."""
 from __future__ import annotations
 
+import re
+from datetime import datetime, timezone
 from typing import Literal
 
 from pydantic import BaseModel, Field, model_validator
@@ -181,6 +183,106 @@ class Character(BaseModel):
     def to_client_dict(self) -> dict:
         """Serialize the character to a JSON-safe dict for sending to clients."""
         return self.model_dump()
+
+    def to_fof(
+        self,
+        module_refs: list[dict],
+        session_id: str,
+        created_at: str | None = None,
+    ) -> dict:
+        """Serialize this character to a FOF-format dict suitable for yaml.dump.
+
+        Only skills with non-default state (rank != novice OR marks != 0) are
+        included in the output. Absent skills are implicitly novice/0 on reload.
+
+        Args:
+            module_refs: List of {"id": ..., "version": ...} dicts for loaded modules.
+            session_id: Used as the campaign_id and to suffix the character's file id.
+            created_at: ISO timestamp string; defaults to now if not supplied.
+        """
+        now = datetime.now(tz=timezone.utc).isoformat()
+        slug = re.sub(r"[^a-z0-9]+", "-", self.player_name.lower()).strip("-")
+
+        non_default_skills = {
+            skill_id: {"rank": state.rank, "marks": state.marks}
+            for skill_id, state in self.skills.items()
+            if state.rank != "novice" or state.marks != 0
+        }
+
+        return {
+            "fof_version": "0.1",
+            "type": "character",
+            "id": f"{slug}-{session_id[:8]}",
+            "name": self.name,
+            "version": "1.0.0",
+            "authors": [self.player_name],
+            "ruleset": {"modules": module_refs},
+            "campaign_id": session_id,
+            "character": {
+                "name": self.name,
+                "player_name": self.player_name,
+                "primary_facet": self.primary_facet,
+                "attributes": dict(self.attributes),
+                "skills": non_default_skills,
+                "sparks": self.sparks,
+                "session_skill_points_remaining": self.session_skill_points_remaining,
+                "facet_level": self.facet_level,
+                "rank_advances_this_facet_level": self.rank_advances_this_facet_level,
+                "techniques": list(self.techniques),
+            },
+            "created_at": created_at or now,
+            "last_modified": now,
+        }
+
+    @classmethod
+    def from_fof(cls, fof_dict: dict) -> "Character":
+        """Deserialize a Character from a FOF-format dict.
+
+        Args:
+            fof_dict: A dict produced by yaml.safe_load on a character .fof file.
+
+        Returns:
+            A Character instance.
+
+        Raises:
+            ValueError: If the dict is not a character file or is missing required fields.
+        """
+        if fof_dict.get("type") != "character":
+            raise ValueError(
+                f"Expected type 'character', got {fof_dict.get('type')!r}. "
+                "Only character .fof files can be loaded here."
+            )
+
+        char_block = fof_dict.get("character")
+        if not isinstance(char_block, dict):
+            raise ValueError("Missing or invalid 'character' block in FOF file.")
+
+        for required_field in ("name", "player_name", "primary_facet", "attributes"):
+            if required_field not in char_block:
+                raise ValueError(f"Missing required field 'character.{required_field}'.")
+
+        raw_skills = char_block.get("skills") or {}
+        skills: dict[str, SkillState] = {}
+        for skill_id, state in raw_skills.items():
+            if isinstance(state, dict):
+                skills[skill_id] = SkillState(
+                    skill_id=skill_id,
+                    rank=state.get("rank", "novice"),
+                    marks=state.get("marks", 0),
+                )
+
+        return cls(
+            name=char_block["name"],
+            player_name=char_block["player_name"],
+            primary_facet=char_block["primary_facet"],
+            attributes=char_block["attributes"],
+            skills=skills,
+            sparks=char_block.get("sparks", 3),
+            session_skill_points_remaining=char_block.get("session_skill_points_remaining", 4),
+            facet_level=char_block.get("facet_level", 0),
+            rank_advances_this_facet_level=char_block.get("rank_advances_this_facet_level", 0),
+            techniques=char_block.get("techniques") or [],
+        )
 
 
 def create_default_character(
