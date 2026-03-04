@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facets of Origin</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<!-- =====================================================================
+     AUTH SCREEN (MM login)
+     ===================================================================== -->
+<div id="auth-screen">
+  <h2>Facets of Origin</h2>
+  <p class="tagline">Mirror Master Login</p>
+  <label for="mm-password">Password</label>
+  <input type="password" id="mm-password" placeholder="Enter MM password" autofocus>
+  <div class="btn-row">
+    <button class="btn btn-primary" onclick="mmLogin()">Log In</button>
+    <button class="btn btn-secondary" onclick="showSetupScreen()">First Run Setup</button>
+  </div>
+  <div id="auth-error" class="error-msg"></div>
+  <div id="setup-success" class="success-msg"></div>
+</div>
+
+<!-- =====================================================================
+     SETUP SCREEN (first run)
+     ===================================================================== -->
+<div id="setup-screen" class="hidden">
+  <h2>First Run Setup</h2>
+  <p class="tagline">Set a password for the Mirror Master account.</p>
+  <label for="setup-password">Password (min 8 characters)</label>
+  <input type="password" id="setup-password" placeholder="New password">
+  <label for="setup-confirm">Confirm Password</label>
+  <input type="password" id="setup-confirm" placeholder="Confirm password">
+  <button class="btn btn-primary" onclick="setupPassword()">Set Password</button>
+  <div id="setup-error" class="error-msg"></div>
+</div>
+
+<!-- =====================================================================
+     JOIN SCREEN (player invite)
+     ===================================================================== -->
+<div id="join-screen" class="hidden">
+  <h2>Join Session</h2>
+  <p class="tagline">You've been invited to a Facets of Origin session.</p>
+  <p style="color:var(--text-dim);font-size:0.9rem;margin-bottom:20px;">
+    Click below to join. Your invite link is single-use.
+  </p>
+  <button class="btn btn-primary" onclick="redeemInvite()">Join Session</button>
+  <div id="join-error" class="error-msg"></div>
+</div>
+
+<!-- =====================================================================
+     MM DASHBOARD (session management)
+     ===================================================================== -->
+<div id="mm-dashboard" class="hidden" style="max-width:700px;margin:40px auto;padding:24px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
+    <h2 style="color:var(--gold);">Mirror Master Dashboard</h2>
+    <button class="btn btn-secondary btn-sm" onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Create session -->
+  <div class="card">
+    <div class="card-title">New Session</div>
+    <label>Session / Campaign Name</label>
+    <input type="text" id="new-session-name" placeholder="e.g. The Shattered Crown">
+
+    <div style="margin-bottom:8px;">
+      <div class="card-title" style="margin-bottom:8px;">Active Facet Modules</div>
+      <div id="facet-list" style="font-size:13px;color:var(--text-dim);">Loading...</div>
+    </div>
+
+    <button class="btn btn-primary" onclick="createSession()">Create Session</button>
+    <div id="session-created-msg" class="success-msg"></div>
+  </div>
+
+  <!-- Session list -->
+  <div class="card">
+    <div class="card-title">Existing Sessions</div>
+    <ul id="session-list" class="player-list"></ul>
+  </div>
+
+  <!-- Invite generator -->
+  <div class="card">
+    <div class="card-title">Generate Player Invite</div>
+    <label>Session ID</label>
+    <input type="text" id="invite-session-id" placeholder="Paste session ID">
+    <label>Player Name</label>
+    <input type="text" id="invite-player-name" placeholder="e.g. Zahna">
+    <button class="btn btn-primary" onclick="generateInvite()">Generate Invite Link</button>
+    <div id="invite-result" style="display:none;margin-top:8px;padding:8px;background:var(--bg);border:1px solid var(--border);border-radius:4px;font-size:12px;word-break:break-all;font-family:var(--font-mono);"></div>
+  </div>
+</div>
+
+<!-- =====================================================================
+     MAIN GAME SCREEN
+     ===================================================================== -->
+<div id="game-screen" class="hidden">
+  <div id="app">
+
+    <!-- Header -->
+    <header>
+      <h1>Facets of Origin</h1>
+      <span class="session-badge" id="header-session-name">Session</span>
+      <span style="color:var(--text-dim);font-size:0.85rem;margin-left:auto;" id="header-identity"></span>
+      <button class="btn btn-secondary btn-sm" onclick="logout()">Leave</button>
+    </header>
+
+    <!-- Spark nomination banner (MM only) -->
+    <div id="spark-nomination-banner" class="spark-nomination hidden" style="margin:8px 24px;">
+      <span class="nomination-text"></span>
+      <div class="btn-row" style="margin:0">
+        <button class="btn btn-gold btn-sm" onclick="confirmSparkNomination()">✨ Confirm Spark</button>
+        <button class="btn btn-secondary btn-sm" onclick="document.getElementById('spark-nomination-banner').classList.add('hidden')">Dismiss</button>
+      </div>
+    </div>
+
+    <div class="main-area">
+
+      <!-- ===== LEFT PANEL ===== -->
+      <div class="left-panel">
+
+        <!-- CHARACTER CREATION (shown when player has no character) -->
+        <div id="char-create-panel" class="hidden">
+          <div class="card">
+            <div class="card-title">Create Your Character</div>
+            <label>Character Name</label>
+            <input type="text" id="cc-name" placeholder="What do they call you?">
+
+            <label>Primary Facet</label>
+            <select id="cc-facet"></select>
+
+            <div class="card-title" style="margin-top:12px;">Distribute Attributes</div>
+            <div id="cc-attributes"></div>
+            <div id="cc-points-remaining" style="font-size:0.85rem;color:var(--text-dim);margin-bottom:8px;"></div>
+
+            <button class="btn btn-primary" onclick="submitCharacterCreation()">Create Character</button>
+            <div id="cc-error" class="error-msg"></div>
+          </div>
+        </div>
+
+        <!-- CHARACTER SHEET -->
+        <div id="character-panel" class="hidden">
+          <div class="card">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+              <div>
+                <h2 id="char-name" style="font-size:1.2rem;"></h2>
+                <span id="char-facet" class="facet-badge"></span>
+                <span id="char-level" style="font-size:0.8rem;color:var(--text-dim);margin-left:8px;"></span>
+              </div>
+            </div>
+
+            <!-- Spark counter -->
+            <div class="spark-counter">
+              <span style="font-size:0.8rem;color:var(--text-dim);">SPARKS</span>
+              <div class="spark-pips" id="spark-pips"></div>
+              <span id="spark-count" style="font-size:0.85rem;color:var(--gold);"></span>
+              <span id="sparks-to-spend" style="font-size:0.75rem;color:var(--accent);"></span>
+            </div>
+
+            <!-- Attributes -->
+            <div class="card-title">Attributes</div>
+            <div id="attr-display"></div>
+
+            <!-- Roll controls -->
+            <div class="card" style="margin-top:12px;padding:12px;">
+              <div class="card-title">Roll Dice</div>
+              <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:8px;">
+                Selected: <strong id="roll-attr-display" style="color:var(--text);">— click an attribute above —</strong>
+              </div>
+              <label>Difficulty</label>
+              <select id="difficulty-select" class="difficulty-select">
+                <option value="Easy">Easy (+1)</option>
+                <option value="Standard" selected>Standard (±0)</option>
+                <option value="Hard">Hard (−1)</option>
+                <option value="Very Hard">Very Hard (−2)</option>
+              </select>
+              <label>Description (optional)</label>
+              <input type="text" id="roll-description" placeholder="What are you attempting?">
+              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:8px;">
+                Click spark pips above to spend Sparks before rolling.
+              </div>
+              <button class="btn btn-primary" id="roll-btn" onclick="performRoll()" disabled>Roll 2d6</button>
+            </div>
+
+            <!-- Roll result -->
+            <div id="roll-result-box" class="hidden"></div>
+          </div>
+
+          <!-- Skills -->
+          <div class="card">
+            <div class="card-title">Skills</div>
+            <table class="skills-table">
+              <thead>
+                <tr>
+                  <th>Skill</th>
+                  <th>Rank</th>
+                  <th>Progress</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="skills-tbody"></tbody>
+            </table>
+            <div style="font-size:0.7rem;color:var(--text-dim);margin-top:8px;">
+              ● = outside primary Facet. Click Roll to roll with skill bonus.
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- end left panel -->
+
+      <!-- ===== RIGHT PANEL ===== -->
+      <div class="right-panel">
+
+        <!-- Players -->
+        <div class="card">
+          <div class="card-title">Players</div>
+          <ul class="player-list" id="player-list"></ul>
+        </div>
+
+        <!-- Roll log -->
+        <div class="card">
+          <div class="card-title">Roll Log</div>
+          <div class="roll-log" id="roll-log"></div>
+        </div>
+
+        <!-- Chat -->
+        <div class="card" style="flex:1;">
+          <div class="card-title">Table Chat</div>
+          <div class="chat-log" id="chat-log"></div>
+          <div style="display:flex;gap:6px;margin-top:8px;">
+            <input type="text" id="chat-input" placeholder="Say something..." style="margin:0;flex:1;">
+            <button class="btn btn-secondary btn-sm" onclick="sendChat()">Send</button>
+          </div>
+        </div>
+
+        <!-- MM controls -->
+        <div id="mm-controls" class="card hidden">
+          <div class="card-title">Mirror Master Controls</div>
+          <div style="margin-bottom:12px;">
+            <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">AWARD SPARK</div>
+            <input type="text" id="mm-spark-player" placeholder="Player name">
+            <input type="text" id="mm-spark-reason" placeholder="Reason (optional)">
+            <button class="btn btn-gold btn-sm" onclick="mmAwardSpark()">✨ Award Spark</button>
+          </div>
+          <div>
+            <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">GENERATE INVITE</div>
+            <input type="text" id="invite-player-name-ingame" placeholder="Player name">
+            <button class="btn btn-secondary btn-sm" onclick="generateInviteInGame()">Get Invite Link</button>
+            <div id="ingame-invite-result" style="font-size:11px;word-break:break-all;color:var(--text-dim);margin-top:4px;"></div>
+          </div>
+        </div>
+
+        <!-- Player controls (Spark nomination) -->
+        <div id="player-controls" class="card hidden">
+          <div class="card-title">Nominate for Spark</div>
+          <input type="text" id="peer-spark-player" placeholder="Player name">
+          <button class="btn btn-gold btn-sm" onclick="nominateForSpark()">Spark?</button>
+          <div style="font-size:0.75rem;color:var(--text-dim);margin-top:6px;">
+            Nominate another player for a Spark. The MM confirms.
+          </div>
+        </div>
+
+      </div>
+      <!-- end right panel -->
+
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/app.js"></script>
+<script>
+// In-game invite generation for MM
+async function generateInviteInGame() {
+  const playerName = document.getElementById('invite-player-name-ingame').value.trim();
+  if (!playerName) { alert('Enter a player name.'); return; }
+  const resp = await apiFetch('/api/sessions/invite', 'POST', {
+    session_id: state.sessionId,
+    player_name: playerName,
+  });
+  if (resp.ok) {
+    const data = await resp.json();
+    document.getElementById('ingame-invite-result').textContent = data.invite_url;
+  } else {
+    const err = await resp.json();
+    alert(err.detail || 'Failed.');
+  }
+}
+</script>
+</body>
+</html>

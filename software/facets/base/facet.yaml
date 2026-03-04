@@ -1,0 +1,495 @@
+# Facets of Origin — Base Ruleset
+# Encodes the mechanics from the PHB first draft (feature/phb_first_draft branch).
+# This file is the single source of truth for all core game rules loaded by the engine.
+
+id: "base"
+name: "Facets of Origin — Core Ruleset"
+version: "0.1.0"
+authors: ["AJTDaedalus"]
+description: >
+  The complete base ruleset for Facets of Origin. Encodes attributes, character facets,
+  skills (Body complete; Mind and Soul stubbed pending PHB chapters II.5/II.6),
+  2d6 roll resolution, the Spark economy, and the Morrowind-style skill advancement system.
+priority: 0
+
+# ---------------------------------------------------------------------------
+# Attributes
+# ---------------------------------------------------------------------------
+attributes:
+  major:
+    - id: body
+      name: Body
+      description: >
+        Your physical presence in the world: your strength, your quickness,
+        your capacity to endure.
+      minor_attributes: [strength, dexterity, constitution]
+
+    - id: mind
+      name: Mind
+      description: >
+        Your cognitive and perceptual power: your reasoning, your instincts,
+        your accumulated knowledge.
+      minor_attributes: [intelligence, wisdom, knowledge]
+
+    - id: soul
+      name: Soul
+      description: >
+        The force of your inner self in relation to the world: your spiritual
+        connection, your presence, your capacity to bend fate.
+      minor_attributes: [spirit, luck, charisma]
+
+  minor:
+    # Body
+    - id: strength
+      name: Strength
+      description: "Applying raw physical force. Swinging a weapon, forcing a door, grappling, hauling something heavy."
+      major: body
+
+    - id: dexterity
+      name: Dexterity
+      description: "Acting with precision and speed. Firing a ranged weapon, moving without being heard, slipping free of a hold."
+      major: body
+
+    - id: constitution
+      name: Constitution
+      description: "Pushing through physical hardship. Enduring injury, resisting illness, holding your breath, functioning on no sleep."
+      major: body
+
+    # Mind
+    - id: intelligence
+      name: Intelligence
+      description: "Reasoning and analysis. Working out how something functions, understanding arcane principles, solving a puzzle."
+      major: mind
+
+    - id: wisdom
+      name: Wisdom
+      description: "Reading the world and trusting your instincts. Sensing something is wrong, understanding what someone actually wants."
+      major: mind
+
+    - id: knowledge
+      name: Knowledge
+      description: "The accumulated weight of what you have learned. History, lore, trade skills, languages, arcane theory."
+      major: mind
+
+    # Soul
+    - id: spirit
+      name: Spirit
+      description: "Your connection to forces beyond the material. Magical attunement, communion, the strength of conviction under duress."
+      major: soul
+
+    - id: luck
+      name: Luck
+      description: "The world's tendency to bend in your direction. Not wishful thinking — an actual, observable pattern."
+      major: soul
+
+    - id: charisma
+      name: Charisma
+      description: "The force of your presence on other people. Persuasion, intimidation, deception, inspiration."
+      major: soul
+
+  ratings:
+    - rating: 1
+      label: Weak
+      modifier: -1
+    - rating: 2
+      label: Average
+      modifier: 0
+    - rating: 3
+      label: Strong
+      modifier: 1
+
+  distribution:
+    total_points: 18
+    min_per_attribute: 1
+    max_per_attribute: 3
+
+# ---------------------------------------------------------------------------
+# Character Facets (archetypes)
+# ---------------------------------------------------------------------------
+facets:
+  - id: body
+    name: "Facet of the Body"
+    description: >
+      Warriors, scouts, athletes, brawlers, dancers. People who solve problems
+      with their physical presence in the world.
+    major_attribute: body
+
+  - id: mind
+    name: "Facet of the Mind"
+    description: >
+      Scholars, detectives, navigators, arcane theorists. People who solve
+      problems by understanding them.
+    major_attribute: mind
+
+  - id: soul
+    name: "Facet of the Soul"
+    description: >
+      Diplomats, spiritual practitioners, luck-touched wanderers. People who
+      solve problems by moving other people — or by bending the world toward them.
+    major_attribute: soul
+
+# ---------------------------------------------------------------------------
+# Skills
+# ---------------------------------------------------------------------------
+skills:
+  # Body skills — complete
+  - id: athletics
+    name: Athletics
+    facet: body
+    attribute: strength
+    description: "Lifting, climbing, swimming, jumping, forcing things."
+    status: active
+
+  - id: combat
+    name: Combat
+    facet: body
+    attribute: strength
+    description: "Attacking, weapon use, fighting technique."
+    status: active
+
+  - id: stealth
+    name: Stealth
+    facet: body
+    attribute: dexterity
+    description: "Moving unseen or unheard, hiding, shadowing someone."
+    status: active
+
+  - id: finesse
+    name: Finesse
+    facet: body
+    attribute: dexterity
+    description: "Sleight of hand, precision work, ranged weapons, acrobatics."
+    status: active
+
+  - id: endurance
+    name: Endurance
+    facet: body
+    attribute: constitution
+    description: "Resisting injury, pushing through hardship, surviving extremes."
+    status: active
+
+  # Mind skills — stubbed pending PHB chapter II.5
+  - id: investigation
+    name: Investigation
+    facet: mind
+    attribute: intelligence
+    description: "Searching for clues, examining evidence, logical deduction."
+    status: stub
+
+  - id: lore
+    name: Lore
+    facet: mind
+    attribute: knowledge
+    description: "Recall of history, arcane theory, cultures, trade knowledge."
+    status: stub
+
+  - id: perception
+    name: Perception
+    facet: mind
+    attribute: wisdom
+    description: "Noticing details, reading situations, sensing danger."
+    status: stub
+
+  - id: insight
+    name: Insight
+    facet: mind
+    attribute: wisdom
+    description: "Reading people, detecting deception, understanding motivation."
+    status: stub
+
+  - id: arcana
+    name: Arcana
+    facet: mind
+    attribute: intelligence
+    description: "Working with magical forces, theoretical and practical."
+    status: stub
+
+  # Soul skills — stubbed pending PHB chapter
+  - id: persuasion
+    name: Persuasion
+    facet: soul
+    attribute: charisma
+    description: "Convincing others through argument, charm, or appeal."
+    status: stub
+
+  - id: intimidation
+    name: Intimidation
+    facet: soul
+    attribute: charisma
+    description: "Compelling compliance through presence, threat, or fear."
+    status: stub
+
+  - id: deception
+    name: Deception
+    facet: soul
+    attribute: charisma
+    description: "Misleading, lying, maintaining a false identity."
+    status: stub
+
+  - id: attunement
+    name: Attunement
+    facet: soul
+    attribute: spirit
+    description: "Connecting with magical or spiritual forces, empathy with living things."
+    status: stub
+
+  - id: fortune
+    name: Fortune
+    facet: soul
+    attribute: luck
+    description: "Acting on hunches, pressing luck, recognising the thing that matters."
+    status: stub
+
+# ---------------------------------------------------------------------------
+# Techniques — Facet of the Body
+# (Mind and Soul trees are pending PHB chapters)
+# ---------------------------------------------------------------------------
+techniques:
+  body:
+    branches:
+      - id: might
+        name: Might
+        attribute: strength
+        tiers:
+          - tier: 1
+            techniques:
+              - id: forcing_hand
+                name: "Forcing Hand"
+                description: >
+                  When you succeed on an Athletics roll involving raw force, you may choose
+                  to leave a lasting mark on the environment — a door that cannot be resealed,
+                  a wall that bears your impact. The MM cannot undo this without explanation.
+                prerequisites: []
+
+              - id: weapon_mastery
+                name: "Weapon Mastery"
+                description: >
+                  Choose one weapon type (blades, blunt, polearms, unarmed). Rolls using
+                  that weapon type are treated as one difficulty step easier.
+                prerequisites: []
+                has_choice: true
+                choice_prompt: "Choose a weapon type: blades, blunt, polearms, or unarmed."
+
+          - tier: 2
+            techniques:
+              - id: overwhelming_force
+                name: "Overwhelming Force"
+                description: >
+                  When you achieve a full success on a Strength roll against a physical
+                  obstacle or opponent, you may impose a lasting physical condition on that
+                  obstacle or opponent (Staggered, Pinned, Broken). The MM determines the
+                  fictional expression; you determine the fact of it.
+                prerequisites: [forcing_hand]
+
+              - id: dual_mastery
+                name: "Dual Mastery"
+                description: >
+                  You may choose a second weapon type for Weapon Mastery. Your mastered
+                  weapon types stack — a character with both blades and unarmed mastery is
+                  genuinely dangerous with either.
+                prerequisites: [weapon_mastery]
+
+          - tier: 3
+            techniques:
+              - id: unstoppable
+                name: "Unstoppable"
+                description: >
+                  Once per session, when a roll result would mean you are knocked out,
+                  incapacitated, or otherwise removed from the scene, you may treat it as
+                  a partial success instead. You remain standing — barely. This does not
+                  prevent consequences, only removes you from the scene.
+                prerequisites: [overwhelming_force]
+
+      - id: grace
+        name: Grace
+        attribute: dexterity
+        tiers:
+          - tier: 1
+            techniques:
+              - id: swift_hands
+                name: "Swift Hands"
+                description: >
+                  When you succeed on a Finesse roll, you may simultaneously conceal or
+                  palm a small object as part of the same action — no additional roll required.
+                prerequisites: []
+
+              - id: shadow_step
+                name: "Shadow Step"
+                description: >
+                  When you move into concealment or shadows while already undetected, the
+                  difficulty of the Stealth roll is one step easier.
+                prerequisites: []
+
+          - tier: 2
+            techniques:
+              - id: evasion
+                name: "Evasion"
+                description: >
+                  When you would be hit by an attack or targeted by a physical effect, you
+                  may use a Dexterity saving throw instead of Constitution. On a full success,
+                  you avoid the effect entirely. On a partial success, you take a reduced consequence.
+                prerequisites: [swift_hands]
+
+              - id: ghost_step
+                name: "Ghost Step"
+                description: >
+                  You may make a Stealth roll to move through a moderately populated area
+                  (a market, a crowded hall) without detection. Previously this was impossible
+                  without a clear concealment path.
+                prerequisites: [shadow_step]
+
+          - tier: 3
+            techniques:
+              - id: untouchable
+                name: "Untouchable"
+                description: >
+                  Once per scene, when a physical attack would hit you, you may declare you
+                  are not where they think you are. The attack misses. No roll required. This
+                  uses your movement — the MM will describe where you end up.
+                prerequisites: [evasion, ghost_step]
+
+      - id: iron
+        name: Iron
+        attribute: constitution
+        tiers:
+          - tier: 1
+            techniques:
+              - id: iron_stomach
+                name: "Iron Stomach"
+                description: >
+                  Rolls to resist ingested poisons, disease, or toxins are treated as one
+                  difficulty step easier. You have eaten worse.
+                prerequisites: []
+
+              - id: second_wind
+                name: "Second Wind"
+                description: >
+                  Once per session, when you would be reduced to a critical injury threshold,
+                  you may make a Constitution roll (Standard). On a success, you push through
+                  and remain functional. On a failure, the injury stands but you act first
+                  before the consequence lands.
+                prerequisites: []
+
+          - tier: 2
+            techniques:
+              - id: relentless
+                name: "Relentless"
+                description: >
+                  You do not suffer the Hard difficulty penalty for acting while injured,
+                  poisoned, or exhausted — unless the MM rules the condition is severe enough
+                  to be incapacitating, not just painful.
+                prerequisites: [second_wind]
+
+              - id: fortified
+                name: "Fortified"
+                description: >
+                  When you take a physical condition (Poisoned, Bleeding, Exhausted), you
+                  may make an immediate Constitution roll (Standard). On a full success, the
+                  condition does not take hold. On a partial success, its severity is reduced.
+                prerequisites: [iron_stomach]
+
+          - tier: 3
+            techniques:
+              - id: immovable
+                name: "Immovable"
+                description: >
+                  You cannot be moved from a position you have chosen to hold by purely
+                  physical force — no roll needed against such attempts. Magical or
+                  environmental forces still require a saving throw, but the difficulty
+                  is always Standard regardless of the source's power.
+                prerequisites: [relentless, fortified]
+
+# ---------------------------------------------------------------------------
+# Roll Resolution
+# ---------------------------------------------------------------------------
+roll_resolution:
+  dice: "2d6"
+  modifier_source: minor_attribute
+  thresholds:
+    full_success: 10
+    partial_success: 7
+  outcomes:
+    full_success:
+      label: "Full Success"
+      description: "You achieve your goal cleanly."
+    partial_success:
+      label: "Success with Cost"
+      description: "You succeed, but with a complication or cost. The story moves forward at a price."
+    failure:
+      label: "Things Go Wrong"
+      description: "Things go wrong — but the story always moves forward."
+  difficulty_modifiers:
+    - label: Easy
+      modifier: 1
+      description: "Clear advantage, weak or inattentive opposition, favorable conditions."
+    - label: Standard
+      modifier: 0
+      description: "The default — uncertain outcome, no special advantage or impediment."
+    - label: Hard
+      modifier: -1
+      description: "Skilled opposition, poor conditions, acting against the grain."
+    - label: "Very Hard"
+      modifier: -2
+      description: "Extraordinary opposition, severe circumstances, nearly impossible odds."
+
+# ---------------------------------------------------------------------------
+# Spark Economy
+# ---------------------------------------------------------------------------
+spark:
+  base_sparks_per_session: 3
+  mechanic:
+    spend: per_spark_add_d6_drop_lowest
+    description: >
+      Each Spark adds a d6 to your roll; you then drop an equal number of lowest dice.
+      The core mechanic stays the same — 2d6 plus your modifier — but Sparks shift the
+      odds by replacing your worst potential outcomes.
+      Two Sparks spent: roll 4d6, drop the two lowest.
+  earn_methods:
+    - id: mm_award
+      label: "MM Award"
+      description: >
+        The MM gives a Spark for exceptional roleplay, creative problem-solving,
+        or playing your character's established traits and weaknesses in a way
+        that costs you something real in the fiction.
+    - id: peer_call
+      label: "Spark? — Peer Call"
+      description: >
+        Any player at the table can call out "Spark?" for another player's moment —
+        a line of dialogue that landed, a decision that surprised everyone,
+        an in-character choice that felt completely true. The MM confirms it.
+    - id: graceful_fail
+      label: "The Graceful Fail"
+      description: >
+        When your roll is a 6- and you lean into the consequence — or better,
+        add something to the fiction that makes the failure richer — the MM may
+        award a Spark.
+
+# ---------------------------------------------------------------------------
+# Advancement
+# ---------------------------------------------------------------------------
+advancement:
+  skill_ranks:
+    - id: novice
+      label: Novice
+      modifier: 0
+      default: true
+    - id: practiced
+      label: Practiced
+      modifier: 1
+    - id: expert
+      label: Expert
+      modifier: 2
+
+  skill_point_costs:
+    - context: primary_facet_success
+      cost: 1
+    - context: primary_facet_failure
+      cost: 2
+    - context: secondary_facet_success
+      cost: 2
+    - context: secondary_facet_failure
+      cost: 4
+
+  session_skill_points: 4
+  marks_per_rank: 3
+  facet_level_threshold: 6
