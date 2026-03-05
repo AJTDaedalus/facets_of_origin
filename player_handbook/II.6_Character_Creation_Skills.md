@@ -62,8 +62,9 @@ Pushing through physical hardship: staying functional through injury, resisting 
 | Novice | 0 (starting rank) | +0 |
 | Practiced | 3 marks | +1 |
 | Expert | 6 marks (3 more after Practiced) | +2 |
+| Master | 9 marks (3 more after Expert) | +3 |
 
-Skill modifiers stack with your Minor Attribute modifier. The maximum combined modifier from both is **+3** (Strong attribute + Expert skill rank).
+Skill modifiers stack with your Minor Attribute modifier. The maximum combined modifier from both is **+4** (Strong attribute + Master skill rank) — a level of capability that represents true legend in a field.
 
 ---
 

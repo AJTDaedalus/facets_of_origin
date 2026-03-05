@@ -75,20 +75,11 @@ These are numbers that will need adjustment after play, but we need working esti
 
 ### 5. Facet Level Threshold (6 advances per level)
 
-**The question:** At 6 skill rank advances per Facet level, how long does a Facet level take?
+**RESOLVED 2026-03-04.** Added Master rank (+3 modifier, 9 total marks).
 
-**Math:**
-- 5 skills × 2 advances each (Novice→Practiced→Expert) = 10 total advances per Facet
-- At 6 advances per level: Facet level 1 at advance 6, Facet level 2 at advance 12 (impossible — only 10 advances available)
-- **Problem:** With 5 skills and 2 ranks each, a fully-developed Body Facet only produces 10 advances — meaning a character can only ever reach Facet level 1 in a single Facet under the current math.
+**Solution:** Master rank (Novice → Practiced → Expert → Master, 3 marks each). 5 skills × 3 advances = 15 advances per Facet. Facet level 1 at advance 6, level 2 at advance 12. Level 3+ requires cross-training. Maximum combined modifier is now +4 (Strong attribute + Master skill).
 
-**This is a blocker.** Options:
-- Lower threshold (e.g., 4 advances per Facet level → levels 1 and 2 reachable, level 3 requires cross-training or a third rank tier)
-- Add a third skill rank (Master: +3, 9 marks total) so 5 skills × 3 advances = 15 total advances → Facet levels 1, 2 possible; level 3 requires nearly maxing the Facet
-- Add more skills per Facet (7–8 instead of 5)
-- Reframe: Facet levels count all marks, not just rank advances (more granular but harder to track)
-
-**Recommendation to discuss:** Add a Master rank (+3 modifier, 9 total marks) to create a genuine long-campaign ceiling. This gives 5 skills × 3 advances = 15 advances per Facet, supporting Facet levels 1, 2 (at 6 and 12 advances). Level 3 remains achievable only by cross-training or a dedicated campaign. Keeps the "rare and weighty" feel for major milestones.
+*Needs playtesting to confirm pacing feel — 15 advances at the session skill point economy may reach level 2 faster or slower than intended.*
 
 ---
 

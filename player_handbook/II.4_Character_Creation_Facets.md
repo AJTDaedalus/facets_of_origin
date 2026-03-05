@@ -28,15 +28,16 @@ Skills are specific areas of developed capability. Where your attributes represe
 
 Each skill is associated with one of the three Facets and one Minor Attribute that typically governs it. When you roll a skill, use the associated Minor Attribute modifier unless circumstances clearly call for something else.
 
-Skills have three ranks:
+Skills have four ranks:
 
 | Rank | Modifier |
 |---|---|
 | Novice | +0 (default — everyone starts here) |
 | Practiced | +1 |
 | Expert | +2 |
+| Master | +3 |
 
-Skill rank stacks with your attribute modifier. A character with Dexterity 3 (+1) and Expert rank in Stealth (+2) rolls at a net +3 — genuinely exceptional, and earned through play.
+Skill rank stacks with your attribute modifier. A character with Dexterity 3 (+1) and Expert rank in Stealth (+2) rolls at a net +3 — genuinely exceptional. A Master rank pushes that to +4 — a level of capability that defines a character's legend.
 
 ---
 
@@ -79,9 +80,11 @@ You may only advance skills you used this session. You may not save points betwe
 
 As you develop skills within a Facet, you grow as a practitioner of that Facet's approach to the world. Your **Facet level** in your Primary Facet advances every time you accumulate **6 skill rank advances** within it.
 
-A skill rank advance is any time a skill in that Facet moves from one rank to the next (Novice → Practiced, or Practiced → Expert).
+A skill rank advance is any time a skill in that Facet moves from one rank to the next (Novice → Practiced, Practiced → Expert, or Expert → Master).
 
-> **Example:** Zulnut advances Combat to Practiced (1 advance), Stealth to Practiced (2), Athletics to Practiced (3), Stealth to Expert (4), Finesse to Practiced (5), Combat to Expert (6). *Facet level 1.*
+With 5 skills and 3 possible advances each, a fully developed Facet produces 15 total advances — enough to reach Facet level 1 (at 6 advances) and Facet level 2 (at 12 advances). Facet level 3 and beyond require cross-training into other Facets or extraordinary dedication across a long campaign.
+
+> **Example:** Zulnut advances Combat to Practiced (1 advance), Stealth to Practiced (2), Athletics to Practiced (3), Stealth to Expert (4), Finesse to Practiced (5), Combat to Expert (6). *Facet level 1.* Several sessions later, Athletics to Expert (7), Endurance to Practiced (8), Finesse to Expert (9), Endurance to Expert (10), Stealth to Master (11), Combat to Master (12). *Facet level 2.*
 
 Facet level advances outside your Primary Facet follow the same counting, but those levels do not count toward your Major Advancement threshold (see below).
 
@@ -236,12 +239,14 @@ Session end:
   └─ One reflection scene — one advancement becomes real in fiction
 
 Every 3 marks in a skill:
-  └─ Skill rank advances (Novice → Practiced → Expert)
-  └─ Skill modifier increases (+1 at Practiced, +2 at Expert)
+  └─ Skill rank advances (Novice → Practiced → Expert → Master)
+  └─ Skill modifier increases (+1 / +2 / +3)
 
 Every 6 skill rank advances in Primary Facet:
   └─ Facet level increases
   └─ Unlock one Technique from Facet tree (chosen in reflection scene)
+  └─ 5 skills × 3 advances = 15 max advances per Facet
+  └─ Facet level 1 at advance 6, level 2 at advance 12; level 3+ requires cross-training
 
 Every 4 Facet levels in Primary Facet:
   └─ Major Advancement: +1 Minor Attribute OR Pinnacle Technique
