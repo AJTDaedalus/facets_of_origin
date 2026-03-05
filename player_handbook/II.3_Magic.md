@@ -88,7 +88,9 @@ Techniques within your Facet's tree can shift these difficulties further. A Tier
 
 When you invoke your domain, declare your intent and scope, then roll.
 
-The attribute you roll depends on your magical tradition. **Spirit** governs intuitive magic — magic that flows from connection, will, and felt presence. **Knowledge** governs scholarly magic — magic that is constructed, analyzed, and precisely understood. If your character bridges both, the MM will tell you which applies to a given effect, or you may roll whichever Minor Attribute is lower (some effects demand more head than heart, and vice versa).
+The attribute you roll depends on your magical tradition. **Spirit** governs intuitive magic — magic that flows from connection, will, and felt presence. **Knowledge** governs scholarly magic — magic that is constructed, analyzed, and precisely understood.
+
+Some characters develop both traditions — a scholar who has also cultivated spiritual practice, or a natural channeler who has supplemented intuition with formal study. When an effect genuinely draws on both, the MM will tell you which attribute applies. If either could honestly fit, roll both and take the lower result — the effect is demanding in both directions simultaneously. This is not a penalty for having breadth; it is an accurate reflection of what bridging two approaches costs in the moment. Characters who commit fully to one tradition never face this tradeoff.
 
 The MM sets the difficulty based on scope (the table above), then adjusts for any relevant Techniques or circumstances. The player rolls.
 
@@ -108,6 +110,24 @@ The same three outcome tiers from the core resolution system apply to every magi
 The complication is the MM's call, and it should move the story forward, not simply punish the player.
 
 **6− — Something goes wrong.** The magic misfires, is insufficient, or draws something unwanted. A 6− is not the end — it is a development. Maybe the fire turns inward. Maybe the shadow coalesces around the wrong thing. Maybe the magic works, but the price arrives before you expected it. The story always moves forward.
+
+> **Sidebar: When Magic Goes Wrong (6- Templates)**
+>
+> A magical 6- should always produce a development, not a dead end. The MM can reach for one of these patterns:
+>
+> *The effect manifests on the wrong target.* The intent was clear; the magic was not. A Presence working aimed at the hostile noble washes over the room. A Binding meant for the fleeing thief settles on the wrong person. Who was standing nearby becomes suddenly relevant.
+>
+> *The effect works — and keeps working.* A Verdance mage asks for vines to hold the door. The vines hold the door, and the wall around it, and are spreading. The mage can stop this, but it will take attention they may not have.
+>
+> *The working attracts attention.* The magic worked — but it was loud in ways only other magical practitioners can hear. Something that was not paying attention to this location now is.
+>
+> *The domain bleeds.* The effect lands in the right place but with the wrong character. The Shadow mage's darkness is also cold in a way that reads as malicious — the people sheltering in it are frightened, not simply hidden. The intent was protection; the fiction creates something more complicated.
+>
+> *The cost arrives early.* The magic succeeded — but the mage carries a consequence that should have been deferred: a migraine that makes their next roll Hard, a visible magical signature they cannot suppress, a drain on Endurance that signals physical cost.
+>
+> *Nothing happens.* The rarest and most useful failure. The domain reaches and finds nothing — the lock is not what Zahna thought it was, the creature is not susceptible in the way the theory suggested. The failure is informative. They now know something they didn't before.
+>
+> **For players:** a magical 6- is a Graceful Fail opportunity. Describe how your character responds to the misfire — what they do with the feedback the magic just gave them — and the MM may award a Spark for the commitment.
 
 ---
 
@@ -360,6 +380,15 @@ Does NOT cover: travel to the far past or future (days are the practical limit e
 ## Acquiring a Domain
 
 A domain is not granted by raw potential — it requires both narrative origin and developed practice. At character creation, your **Background** establishes the story of how your magic began: you were raised in a temple, apprenticed to a hedge mage, discovered your domain through a crisis you barely survived, or spent years studying at an institution that understood what you were. The Background provides the narrative legitimacy. The **Facet Technique** provides the mechanical activation.
+
+When you choose your domain, take a moment to answer these questions — even briefly, even just for yourself. They will make every magical roll feel like it belongs to your character rather than to a rule.
+
+- *Where were you when you first understood what you could do?*
+- *What does using your magic feel like from the inside — sensation, sound, temperature, effort?*
+- *What is one thing your domain cannot do that you wish it could?*
+- *Who else knows about your domain, and how do they feel about it?*
+
+These are not mechanics. They are the fiction your mechanics live in. The MM will use them. So will you.
 
 Soul Facet and Mind Facet Tier 1 Techniques each include domain selection as one available option, choosing from that Facet's domain list. Characters who do not take a magic-granting Technique at Tier 1 can return to it at later Tier 1 unlocks. Cross-Facet characters — a Body Facet character who wants magical capability, for instance — can access these Techniques but pay the standard cross-Facet advancement cost. Prismatic domains require a Tier 3 Technique in the appropriate Facet and are never available as a starting domain.
 

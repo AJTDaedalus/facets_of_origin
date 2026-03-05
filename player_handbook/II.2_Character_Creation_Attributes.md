@@ -179,6 +179,67 @@ A **Spark** is a narrative resource you earn by doing something remarkable — a
 
 ---
 
+> **Sidebar: "Spark?" — How the Peer Call Works**
+>
+> The peer call is the most important Spark mechanic at the table, and the easiest to forget in practice.
+>
+> Any player can say `"Spark?"` out loud — for *another* player's moment. Not your own. Someone did something that landed: a line of dialogue that felt true, an in-character choice that surprised everyone, a decision made at real cost. You say it. The MM confirms. The Spark is awarded.
+>
+> This is not a formal procedure. It is a reflex. It happens mid-scene, in the moment, while everyone is still feeling it. The longer you wait, the less it means.
+>
+> **What counts as Spark-worthy:**
+> - A character acting on their established traits when it costs them something real in the fiction
+> - A piece of dialogue that genuinely surprised the table
+> - An in-character decision that reframes how everyone understands that character
+> - A moment of roleplay that made the table go quiet — and then louder
+>
+> **What doesn't count:**
+> - Mechanically clever play (Sparks are for fiction, not optimization)
+> - Any moment you'd be calling for yourself
+> - A funny one-liner that didn't connect to who the character is
+>
+> When in doubt: if someone says `"Spark?"` and the table immediately knows why, it was a Spark.
+
+---
+
+> **Sidebar: When Things Go Wrong (6- Outcomes)**
+>
+> A 6- result does not mean the scene stops, the story pauses, or the character has failed permanently. It means something *develops* — usually in a direction nobody planned.
+>
+> The rule: *the story always moves forward.* The MM's job on a 6- is not to punish the player but to complicate the situation in a way that creates new stakes.
+>
+> **Some patterns the MM can reach for:**
+>
+> *You get what you wanted — but so does something else.* Mordai pries the vault open on a 6-; the vault is open, and the guard he didn't notice is now staring at him from the end of the corridor.
+>
+> *The attempt reveals something unexpected.* Zahna fails to identify the magical working on the lock; the working identifies *him* — something inside the room now knows someone tried.
+>
+> *The action works, partially, with a cost.* Zulnut makes it to the roof — but drops something in the courtyard below. The MM decides whether that something matters.
+>
+> *The moment is real but complicated.* A Persuade attempt on a 6- means the target was actually listening — and they are now skeptical in a specific, named way that the party can work with, if they're clever about it.
+>
+> **For players:** a 6- is the moment for the **Graceful Fail** — leaning into the consequence or adding something to the fiction that makes the failure richer. The MM may award a Spark for this. Going down swinging is worth something.
+
+---
+
+> **Sidebar: Partial Successes (7–9 Outcomes)**
+>
+> The 7–9 tier carries a lot of the game's weight. It is the most common interesting outcome — you achieved something, but not cleanly. The MM needs to say *what the cost is* before the player decides how to proceed.
+>
+> **Useful patterns for 7–9 across different situations:**
+>
+> *Social:* You get the information or the agreement — but the source knows you wanted it badly, and they will remember that.
+>
+> *Exploration:* You find the thing you were looking for — but something finds you in the process, or you've used up the only approach available.
+>
+> *Investigation:* You learn one true fact — but the conclusion you draw from it is yours to verify. It might be right. It might lead somewhere complicated.
+>
+> *Physical:* The task succeeds — but it cost something: time, equipment, noise, a resource spent, or a position compromised.
+>
+> The complication on a 7–9 should always move the story forward. "You succeed, but someone heard you" gives the party something to respond to. "You succeed, but now you're nervous" does not.
+
+---
+
 The full resolution rules — move triggers, saving throws, advancement — are covered in Chapter III. This section exists so that your attribute choices mean something from the moment you make them.
 
 ---

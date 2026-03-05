@@ -1,0 +1,956 @@
+# Facets of Origin — Base Ruleset v0.1.0
+# Updated to match PHB first draft (feature/phb_first_draft branch).
+# This file is the single source of truth for all core game rules loaded by the engine.
+#
+# Changes from previous version:
+#   - Added Master (rank 4, +3) to skill_ranks
+#   - Corrected Mind skills to match II.4b (Lore, Investigate, Craft, Insight, Survival)
+#   - Corrected Soul skills to match II.4c (Persuade, Deceive, Perform, Attune, Gamble)
+#   - Rewrote Body Technique tree to match II.4 exactly (Might/Grace/Iron branches)
+#   - Added full Mind Technique tree from II.4b (Clarity/Instinct/Archive branches)
+#   - Added full Soul Technique tree from II.4c (Presence/Fortune/Communion branches)
+#   - Added major_advancement_threshold (every 4 Facet levels)
+#   - Marked stub skills as active where PHB chapters define them
+
+id: "base"
+name: "Facets of Origin — Core Ruleset"
+version: "0.1.0"
+authors: ["AJTDaedalus"]
+description: >
+  The complete base ruleset for Facets of Origin. Encodes attributes, character Facets,
+  all skills (Body, Mind, Soul), the 2d6 roll resolution system, the Spark economy,
+  the Morrowind-style skill advancement system, and all three Facet Technique trees.
+priority: 0
+
+# ---------------------------------------------------------------------------
+# Attributes
+# ---------------------------------------------------------------------------
+attributes:
+  major:
+    - id: body
+      name: Body
+      description: >
+        Your physical presence in the world: your strength, your quickness,
+        your capacity to endure.
+      minor_attributes: [strength, dexterity, constitution]
+
+    - id: mind
+      name: Mind
+      description: >
+        Your cognitive and perceptual power: your reasoning, your instincts,
+        your accumulated knowledge.
+      minor_attributes: [intelligence, wisdom, knowledge]
+
+    - id: soul
+      name: Soul
+      description: >
+        The force of your inner self in relation to the world: your spiritual
+        connection, your presence, your capacity to bend fate.
+      minor_attributes: [spirit, luck, charisma]
+
+  minor:
+    # Body
+    - id: strength
+      name: Strength
+      description: "Applying raw physical force. Swinging a weapon, forcing a door, grappling, hauling something heavy."
+      major: body
+
+    - id: dexterity
+      name: Dexterity
+      description: "Acting with precision and speed. Firing a ranged weapon, moving without being heard, slipping free of a hold."
+      major: body
+
+    - id: constitution
+      name: Constitution
+      description: "Pushing through physical hardship. Enduring injury, resisting illness, holding your breath, functioning on no sleep."
+      major: body
+
+    # Mind
+    - id: intelligence
+      name: Intelligence
+      description: "Reasoning and analysis. Working out how something functions, understanding arcane principles, solving a puzzle."
+      major: mind
+
+    - id: wisdom
+      name: Wisdom
+      description: "Reading the world and trusting your instincts. Sensing something is wrong, understanding what someone actually wants."
+      major: mind
+
+    - id: knowledge
+      name: Knowledge
+      description: "The accumulated weight of what you have learned. History, lore, trade skills, languages, arcane theory."
+      major: mind
+
+    # Soul
+    - id: spirit
+      name: Spirit
+      description: "Your connection to forces beyond the material. Magical attunement, communion, the strength of conviction under duress."
+      major: soul
+
+    - id: luck
+      name: Luck
+      description: "The world's tendency to bend in your direction. Not wishful thinking — an actual, observable pattern."
+      major: soul
+
+    - id: charisma
+      name: Charisma
+      description: "The force of your presence on other people. Persuasion, intimidation, deception, inspiration."
+      major: soul
+
+  ratings:
+    - rating: 1
+      label: Weak
+      modifier: -1
+    - rating: 2
+      label: Average
+      modifier: 0
+    - rating: 3
+      label: Strong
+      modifier: 1
+
+  distribution:
+    total_points: 18
+    min_per_attribute: 1
+    max_per_attribute: 3
+
+# ---------------------------------------------------------------------------
+# Character Facets (archetypes)
+# ---------------------------------------------------------------------------
+facets:
+  - id: body
+    name: "Facet of the Body"
+    description: >
+      Warriors, scouts, athletes, brawlers, dancers. People who solve problems
+      with their physical presence in the world.
+    major_attribute: body
+
+  - id: mind
+    name: "Facet of the Mind"
+    description: >
+      Scholars, detectives, navigators, arcane theorists. People who solve
+      problems by understanding them.
+    major_attribute: mind
+
+  - id: soul
+    name: "Facet of the Soul"
+    description: >
+      Diplomats, spiritual practitioners, luck-touched wanderers. People who
+      solve problems by moving other people — or by bending the world toward them.
+    major_attribute: soul
+
+# ---------------------------------------------------------------------------
+# Skills
+# ---------------------------------------------------------------------------
+skills:
+  # --- Body skills ---
+  - id: athletics
+    name: Athletics
+    facet: body
+    attribute: strength
+    description: "Feats of raw physical capability: lifting, climbing, swimming, jumping, forcing something open, hauling weight."
+    status: active
+
+  - id: combat
+    name: Combat
+    facet: body
+    attribute: strength
+    description: "Fighting technique with any melee weapon or unarmed. Covers attacking, parrying, wrestling, and reading an opponent's physical intent."
+    status: active
+
+  - id: stealth
+    name: Stealth
+    facet: body
+    attribute: dexterity
+    description: "Moving without being detected: staying quiet, staying out of sight, tailing someone, hiding in available cover."
+    status: active
+
+  - id: finesse
+    name: Finesse
+    facet: body
+    attribute: dexterity
+    description: "Precision work under pressure: picking locks, sleight of hand, ranged weapons, acrobatics, disabling mechanisms."
+    status: active
+
+  - id: endurance
+    name: Endurance
+    facet: body
+    attribute: constitution
+    description: "Pushing through physical hardship: staying functional through injury, resisting illness or poison, surviving extremes."
+    status: active
+
+  # --- Mind skills (from II.4b) ---
+  - id: lore
+    name: Lore
+    facet: mind
+    attribute: knowledge
+    description: "Recalling and applying accumulated learning: history, cultures, languages, creature lore, arcane theory, religious traditions."
+    status: active
+
+  - id: investigate
+    name: Investigate
+    facet: mind
+    attribute: intelligence
+    description: "Active analysis: examining a scene, finding patterns, working out how something functions, deducing what happened."
+    status: active
+
+  - id: craft
+    name: Craft
+    facet: mind
+    attribute: intelligence
+    description: "Making, repairing, and modifying objects: tools, mechanisms, structures, alchemical preparations."
+    status: active
+
+  - id: insight
+    name: Insight
+    facet: mind
+    attribute: wisdom
+    description: "Reading people and situations: understanding what someone actually wants, sensing deception, noticing the wrong note in a conversation."
+    status: active
+
+  - id: survival
+    name: Survival
+    facet: mind
+    attribute: wisdom
+    description: "Navigating and enduring unfamiliar environments: tracking, finding food and shelter, reading weather and terrain, sensing danger in the wild."
+    status: active
+
+  # --- Soul skills (from II.4c) ---
+  - id: persuade
+    name: Persuade
+    facet: soul
+    attribute: charisma
+    description: "Moving people with words and presence: convincing, inspiring, negotiating, commanding, making yourself believed."
+    status: active
+
+  - id: deceive
+    name: Deceive
+    facet: soul
+    attribute: charisma
+    description: "Misleading people: lying convincingly, disguising intent, maintaining a false identity, misdirecting attention."
+    status: active
+
+  - id: perform
+    name: Perform
+    facet: soul
+    attribute: charisma
+    description: "Captivating an audience: music, storytelling, acting, oratory, any art used to move people rather than merely entertain."
+    status: active
+
+  - id: attune
+    name: Attune
+    facet: soul
+    attribute: spirit
+    description: "Connecting to forces beyond the physical: sensing the supernatural, channeling spiritual energy, communing with animals or spirits."
+    status: active
+
+  - id: gamble
+    name: Gamble
+    facet: soul
+    attribute: luck
+    description: "Pressing fortune: reading probability in the moment, knowing when to push and when to walk away, acting on intuition when the stakes are real."
+    status: active
+
+# ---------------------------------------------------------------------------
+# Techniques — all three Facets
+# ---------------------------------------------------------------------------
+techniques:
+
+  # =========================================================================
+  # Facet of the Body
+  # Branches: Might (Strength) / Grace (Dexterity) / Iron (Constitution)
+  # =========================================================================
+  body:
+    branches:
+      # ---- Might Branch ----
+      - id: might
+        name: Might
+        attribute: strength
+        tiers:
+          - tier: 1
+            techniques:
+              - id: forcing_hand
+                name: "Forcing Hand"
+                description: >
+                  When you succeed on an Athletics roll involving raw force, you may choose
+                  to leave a lasting mark on the environment — a door that cannot be resealed,
+                  a wall that bears your impact. The MM cannot undo this without explanation.
+                prerequisites: []
+
+              - id: weapon_mastery
+                name: "Weapon Mastery"
+                description: >
+                  Choose one weapon type (blades, blunt, polearms, unarmed). Rolls using
+                  that weapon type are treated as one difficulty step easier.
+                prerequisites: []
+                has_choice: true
+                choice_prompt: "Choose a weapon type: blades, blunt, polearms, or unarmed."
+
+          - tier: 2
+            techniques:
+              - id: overwhelming_force
+                name: "Overwhelming Force"
+                description: >
+                  When you succeed on a Combat roll against a single target by 3 or more
+                  above the threshold, the target is staggered — they act last in the next
+                  exchange and cannot take reactions until they do.
+                prerequisites: [forcing_hand]
+
+              - id: lift_the_world
+                name: "Lift the World"
+                description: >
+                  Once per scene, you may attempt a feat of Strength that would normally
+                  be impossible without tools or assistance — holding up a collapsing ceiling,
+                  halting a moving cart, forcing open a sealed vault. Roll Athletics at Hard
+                  difficulty. On a 10+, you succeed. On a 7–9, you succeed at a cost.
+                prerequisites: [weapon_mastery]
+
+          - tier: 3
+            techniques:
+              - id: unstoppable
+                name: "Unstoppable"
+                description: >
+                  When you move toward a goal in a straight line — physically, narratively —
+                  difficult terrain, minor obstacles, and crowds do not slow you. Only something
+                  that can genuinely stop you requires a roll. Everything else simply moves.
+                prerequisites: [overwhelming_force]
+
+              - id: the_final_blow
+                name: "The Final Blow"
+                description: >
+                  Once per session, when you spend a Spark on a Combat roll and succeed,
+                  the outcome is final. The target is removed from the conflict entirely —
+                  defeated, fled, or broken — regardless of any remaining resources or
+                  abilities they had.
+                prerequisites: [lift_the_world]
+
+      # ---- Grace Branch ----
+      - id: grace
+        name: Grace
+        attribute: dexterity
+        tiers:
+          - tier: 1
+            techniques:
+              - id: fleet_step
+                name: "Fleet Step"
+                description: >
+                  You can move through or past obstacles — crowds, furniture, narrow gaps,
+                  uneven terrain — without requiring a roll, as long as you are not in direct
+                  combat and the obstacle is not actively blocking you.
+                prerequisites: []
+
+              - id: steady_hand
+                name: "Steady Hand"
+                description: >
+                  Rolls for precision work under pressure (picking locks, threading a needle,
+                  disabling a mechanism mid-crisis) are treated as one difficulty step easier.
+                prerequisites: []
+
+          - tier: 2
+            techniques:
+              - id: shadow_walk
+                name: "Shadow Walk"
+                description: >
+                  When moving in darkness, dim light, or natural cover, you do not need to
+                  roll Stealth to remain undetected while moving. You only roll when performing
+                  an action that might draw attention.
+                prerequisites: [fleet_step]
+
+              - id: blur_of_motion
+                name: "Blur of Motion"
+                description: >
+                  Once per scene, when you would be targeted by an attack or sudden physical
+                  threat, you may spend a Spark to simply not be where they expected. You are
+                  not harmed, and the attacker must re-establish their approach.
+                prerequisites: [steady_hand]
+
+          - tier: 3
+            techniques:
+              - id: ghost_step
+                name: "Ghost Step"
+                description: >
+                  You never roll Stealth for movement alone. You only roll when you take an
+                  action — speaking, attacking, interacting with an object. Your passage leaves
+                  no trace the MM can use against you.
+                prerequisites: [shadow_walk]
+
+              - id: the_vanishing
+                name: "The Vanishing"
+                description: >
+                  Once per session, you may disappear from a scene entirely without explanation
+                  to anyone watching. You reappear at the start of the next scene in any position
+                  that is plausibly reachable. No roll required. The MM does not ask how.
+                prerequisites: [blur_of_motion]
+
+      # ---- Iron Branch ----
+      - id: iron
+        name: Iron
+        attribute: constitution
+        tiers:
+          - tier: 1
+            techniques:
+              - id: hard_to_kill
+                name: "Hard to Kill"
+                description: >
+                  When you fail an Endurance roll, you may choose to succeed at a cost instead —
+                  you push through, but mark one consequence the MM names immediately. You cannot
+                  use this ability again until the consequence is resolved or acknowledged in the fiction.
+                prerequisites: []
+
+              - id: acclimated
+                name: "Acclimated"
+                description: >
+                  Choose one type of environmental hardship: extreme cold, extreme heat, altitude,
+                  or deprivation (hunger/thirst/sleep). Endurance rolls against your chosen hardship
+                  are treated as one difficulty step easier.
+                prerequisites: []
+                has_choice: true
+                choice_prompt: "Choose one hardship type: extreme cold, extreme heat, altitude, or deprivation."
+
+          - tier: 2
+            techniques:
+              - id: shrug_it_off
+                name: "Shrug It Off"
+                description: >
+                  Once per scene, you may ignore a minor wound or physical consequence entirely.
+                  It happened — it simply does not slow you down this scene.
+                prerequisites: [hard_to_kill]
+
+              - id: grinding_advance
+                name: "Grinding Advance"
+                description: >
+                  When everyone else at the table has spent their resources or run out of options,
+                  you have not. Once per session, you may declare that you still have something left.
+                  Gain one Spark immediately.
+                prerequisites: [acclimated]
+
+          - tier: 3
+            techniques:
+              - id: unbreakable
+                name: "Unbreakable"
+                description: >
+                  Once per session, when something would remove you from the scene — defeat,
+                  collapse, capture, death — you may choose to remain. You are battered, spent,
+                  and at the edge. But you are still standing. The MM may not remove you from
+                  the scene against your will once per session.
+                prerequisites: [shrug_it_off]
+
+              - id: the_long_road
+                name: "The Long Road"
+                description: >
+                  At the end of any session in which your character endured significant hardship,
+                  you recover fully — wounds, consequences, and spent resources — without requiring
+                  downtime or rest. You are what hardship makes you.
+                prerequisites: [grinding_advance]
+
+  # =========================================================================
+  # Facet of the Mind
+  # Branches: Clarity (Intelligence) / Instinct (Wisdom) / Archive (Knowledge)
+  # =========================================================================
+  mind:
+    branches:
+      # ---- Clarity Branch ----
+      - id: clarity
+        name: Clarity
+        attribute: intelligence
+        tiers:
+          - tier: 1
+            techniques:
+              - id: sharp_analysis
+                name: "Sharp Analysis"
+                description: >
+                  When you spend time examining an object, mechanism, or scene — at least a few
+                  focused minutes — you may ask the MM one question about it that must be answered
+                  honestly. What holds this together? What is this for? What happened here? The MM
+                  cannot deflect with "you're not sure." You spent the time. You get an answer.
+                prerequisites: []
+
+              - id: dissecting_failure
+                name: "Dissecting Failure"
+                description: >
+                  When you fail an Investigate roll, you still learn one true fact about what you
+                  were examining. Your analysis fell short — but your mind does not come up entirely
+                  empty. The MM chooses what you learn; it is always real, and it always matters.
+                prerequisites: []
+
+          - tier: 2
+            techniques:
+              - id: structural_weakness
+                name: "Structural Weakness"
+                description: >
+                  Once per scene, when you have had the chance to observe a plan, structure,
+                  mechanism, or system in action, you may declare one specific flaw or vulnerability
+                  within it. The MM must confirm the flaw exists and describe what exploiting it
+                  would require. You cannot invent a weakness that isn't there — but if one is
+                  there, you will find it.
+                prerequisites: [sharp_analysis]
+
+              - id: working_theory
+                name: "Working Theory"
+                description: >
+                  Once per scene, after you have gathered at least one piece of evidence about a
+                  situation, you may state a conclusion about it as a theory. The MM tells you
+                  whether your theory is correct, partially correct, or wrong — and if wrong, gives
+                  you the one fact that most directly contradicts it. You do not need all the
+                  evidence yet. You just need enough to reason.
+                prerequisites: [dissecting_failure]
+
+          - tier: 3
+            techniques:
+              - id: the_deduction
+                name: "The Deduction"
+                description: >
+                  Once per session, you may make a reasoned deduction about a situation, location,
+                  or person you have not directly observed — working only from second-hand information,
+                  physical evidence, or inference. State your conclusion clearly. The MM tells you
+                  whether it is correct. If it is, everything that follows in the fiction treats
+                  your conclusion as established fact.
+                prerequisites: [structural_weakness]
+
+              - id: pressure_point
+                name: "Pressure Point"
+                description: >
+                  Once per session, when you have identified a specific weakness, flaw, or
+                  vulnerability in an obstacle (using Structural Weakness or by other means),
+                  you may describe exactly how to exploit it. The MM must treat this as the optimal
+                  approach — the difficulty of acting on your analysis is one step easier for any
+                  character who follows your instructions, for the rest of the scene.
+                prerequisites: [working_theory]
+
+      # ---- Instinct Branch ----
+      - id: instinct
+        name: Instinct
+        attribute: wisdom
+        tiers:
+          - tier: 1
+            techniques:
+              - id: never_surprised
+                name: "Never Surprised"
+                description: >
+                  You are not caught off guard. If the MM would call for a roll to notice an ambush,
+                  trap, or sudden threat before it lands, you automatically succeed. You may not
+                  always be able to prevent what's coming — but you always see it coming.
+                prerequisites: []
+
+              - id: the_wrong_note
+                name: "The Wrong Note"
+                description: >
+                  When something in your environment is deliberately concealed, falsified, or out
+                  of place, the MM will tell you that something feels off — even if they do not
+                  tell you what. This is not a roll. You simply notice the dissonance. What you
+                  do with that feeling is still yours to decide.
+                prerequisites: []
+
+          - tier: 2
+            techniques:
+              - id: immediate_threat
+                name: "Immediate Threat"
+                description: >
+                  Once per scene, you may ask the MM: "What is the most immediate danger here?"
+                  They must answer honestly and specifically — not "the room feels dangerous," but
+                  the actual threat, named. You can act on this information as if you had observed
+                  it directly.
+                prerequisites: [never_surprised]
+
+              - id: read_the_crowd
+                name: "Read the Crowd"
+                description: >
+                  Once per scene, when you enter a social situation — a negotiation, a gathering,
+                  a tense confrontation — you may ask the MM two questions about the emotional or
+                  political dynamics in the room. Both answers must be honest.
+                prerequisites: [the_wrong_note]
+
+          - tier: 3
+            techniques:
+              - id: first_move
+                name: "First Move"
+                description: >
+                  Once per session, your instincts extend to everyone around you. You may declare
+                  that the party acts on your read of the situation — before any opposition can
+                  react, before any ambush springs, before the moment tips. Everyone in the party
+                  acts first in the next exchange. No roll required.
+                prerequisites: [immediate_threat]
+
+              - id: pattern_recognition
+                name: "Pattern Recognition"
+                description: >
+                  Once per session, you may name a pattern you have observed across multiple scenes
+                  or sessions. The MM must confirm whether the pattern is real. If it is, you
+                  understand something about the situation, the antagonist, or the world that no
+                  amount of direct investigation could have uncovered. The MM tells you one true
+                  implication of that pattern the fiction has not yet revealed.
+                prerequisites: [read_the_crowd]
+
+      # ---- Archive Branch ----
+      - id: archive
+        name: Archive
+        attribute: knowledge
+        tiers:
+          - tier: 1
+            techniques:
+              - id: field_of_mastery
+                name: "Field of Mastery"
+                description: >
+                  Choose one field of knowledge: history, arcane theory, natural sciences,
+                  theology, law, languages, geography, or another domain with MM approval. Lore
+                  rolls that fall within your chosen field are treated as one difficulty step
+                  easier. You are not broadly competent here — you are genuinely expert, and the
+                  fiction should reflect it.
+                prerequisites: []
+                has_choice: true
+                choice_prompt: "Choose a field of knowledge (e.g. history, arcane theory, natural sciences, theology, law, languages, geography)."
+
+              - id: arcane_study
+                name: "Arcane Study"
+                description: >
+                  You have developed a formal magical domain through scholarly practice. Choose one
+                  domain from the Domains of the Mind list (Chapter II.3). You may use magic within
+                  that domain using the Domain + Intent + Scope framework. Roll Knowledge when doing so.
+                prerequisites: []
+                has_choice: true
+                choice_prompt: "Choose one domain from the Domains of the Mind list."
+
+          - tier: 2
+            techniques:
+              - id: first_encounter
+                name: "First Encounter"
+                description: >
+                  When you encounter something for the first time — a creature, a location, a
+                  historical figure, an artifact, a faction — you may ask the MM two questions
+                  about it that must be answered truthfully. The answers represent what a scholar
+                  of your depth would already know.
+                prerequisites: [field_of_mastery]
+
+              - id: cross_reference
+                name: "Cross-Reference"
+                description: >
+                  Once per scene, when you are presented with a new piece of information, you may
+                  immediately connect it to something you already know. Tell the MM what you think
+                  the connection is. They must tell you whether you are right — and if you are,
+                  describe one additional implication that the connection reveals.
+                prerequisites: [arcane_study]
+
+          - tier: 3
+            techniques:
+              - id: the_knowledge_that_saves
+                name: "The Knowledge That Saves"
+                description: >
+                  Once per session, your depth of knowledge prevents a consequence the party would
+                  otherwise face. Name what you know and the MM confirms whether it applies. If it
+                  applies, the consequence is negated. You do not roll. You simply know the thing
+                  that matters.
+                prerequisites: [first_encounter]
+
+              - id: deep_archive
+                name: "Deep Archive"
+                description: >
+                  Once per session, you may recall something you have no direct reason to know.
+                  Describe what you're reaching for. The MM tells you whether your character, given
+                  their depth of study, could plausibly have encountered this knowledge. If yes:
+                  you know it, and it is accurate.
+                prerequisites: [cross_reference]
+
+  # =========================================================================
+  # Facet of the Soul
+  # Branches: Presence (Charisma) / Fortune (Luck) / Communion (Spirit)
+  # =========================================================================
+  soul:
+    branches:
+      # ---- Presence Branch ----
+      - id: presence
+        name: Presence
+        attribute: charisma
+        tiers:
+          - tier: 1
+            techniques:
+              - id: read_the_room
+                name: "Read the Room"
+                description: >
+                  When you enter a social situation, you may ask the MM one question about anyone
+                  present: what do they want, what do they fear, or what would it take to change
+                  their mind? The MM must answer honestly. You may not use this ability if you are
+                  not paying attention to the people around you.
+                prerequisites: []
+
+              - id: lasting_impression
+                name: "Lasting Impression"
+                description: >
+                  When you succeed on a Persuade or Perform roll, the effect holds. The MM cannot
+                  have the target reverse course without a fictional reason — a change in
+                  circumstances, new information, or something that genuinely shifts their position.
+                  Being convinced and then unconvinced offscreen does not count.
+                prerequisites: []
+
+          - tier: 2
+            techniques:
+              - id: the_aimed_truth
+                name: "The Aimed Truth"
+                description: >
+                  Once per scene, you may say something so precisely targeted at what someone
+                  actually believes about themselves that they cannot ignore it. They must respond
+                  in kind: denial, anger, grief, or acknowledgment. They may not deflect, change
+                  the subject, or pretend they did not hear it.
+                prerequisites: [read_the_room]
+
+              - id: commanding_presence
+                name: "Commanding Presence"
+                description: >
+                  When you speak with clear authority in a tense situation — giving orders,
+                  stopping a confrontation, demanding attention — anyone who does not have a
+                  compelling reason to ignore you does not. You do not roll.
+                prerequisites: [lasting_impression]
+
+          - tier: 3
+            techniques:
+              - id: the_turning
+                name: "The Turning"
+                description: >
+                  Once per session, your words or presence shifts the direction of a scene in a
+                  way that cannot be ignored. An armed standoff ends. A hostile crowd turns
+                  uncertain. An official reconsidering their position decides. The MM cannot refuse
+                  the shift — they can only determine how it unfolds and what it costs the other
+                  side. You do not need to roll, but you must speak.
+                prerequisites: [the_aimed_truth]
+
+              - id: unforgettable
+                name: "Unforgettable"
+                description: >
+                  Anyone who has a meaningful interaction with you remembers you — specifically,
+                  favorably, and personally — unless they have a concrete reason not to. Old contacts
+                  become warm contacts. Strangers who met you once treat you like someone they have
+                  been looking for.
+                prerequisites: [commanding_presence]
+
+      # ---- Fortune Branch ----
+      - id: fortune
+        name: Fortune
+        attribute: luck
+        tiers:
+          - tier: 1
+            techniques:
+              - id: when_it_matters
+                name: "When It Matters"
+                description: >
+                  Once per scene, when a roll you make produces a 6- result, you may treat it as
+                  a 7–9 instead. Something still goes wrong — but not catastrophically. The
+                  complication the MM names must be real, but it must be survivable.
+                prerequisites: []
+
+              - id: the_uncanny_angle
+                name: "The Uncanny Angle"
+                description: >
+                  When you act on a hunch — doing something improbable because it simply feels
+                  right, with no rational justification — rolls for that action are treated as one
+                  difficulty step easier. You cannot plan this. It must be an impulse.
+                prerequisites: []
+
+          - tier: 2
+            techniques:
+              - id: convenient_coincidence
+                name: "Convenient Coincidence"
+                description: >
+                  Once per scene, you may declare that something small but useful is already true:
+                  a door was left unlocked, a guard stepped away a moment ago, the contact you
+                  needed happens to be in this tavern. The MM determines the exact form and any
+                  edges it carries — but they cannot refuse the coincidence entirely.
+                prerequisites: [when_it_matters]
+
+              - id: the_lucky_break
+                name: "The Lucky Break"
+                description: >
+                  When you would suffer a consequence — injury, capture, an irreversible loss —
+                  you may spend a Spark to declare that something intervenes. The consequence is
+                  delayed, deflected, or redirected to something recoverable. This does not stack:
+                  the same consequence cannot be deflected twice.
+                prerequisites: [the_uncanny_angle]
+
+          - tier: 3
+            techniques:
+              - id: fated
+                name: "Fated"
+                description: >
+                  Once per session, declare that something improbable happens in your favor. You
+                  do not specify what it is or how — only that it does. The MM must make it true
+                  and must make it significant. It happens, and it helps you, and neither you nor
+                  the MM gets to pretend afterward that it was ordinary.
+                prerequisites: [convenient_coincidence]
+
+              - id: the_odds_were_never_real
+                name: "The Odds Were Never Real"
+                description: >
+                  When you spend a Spark on a roll, add two dice instead of one and still drop the
+                  lowest. Your luck does not merely tip the scales — it removes them.
+                prerequisites: [the_lucky_break]
+
+      # ---- Communion Branch ----
+      - id: communion
+        name: Communion
+        attribute: spirit
+        tiers:
+          - tier: 1
+            techniques:
+              - id: sense_the_unseen
+                name: "Sense the Unseen"
+                description: >
+                  You always know when something supernatural is present in a scene — a spirit,
+                  an active ritual working, a place where the boundary between worlds has worn thin,
+                  a creature that is not what it appears. You cannot identify it without investigation,
+                  but you cannot be kept ignorant of its presence.
+                prerequisites: []
+
+              - id: spiritual_domain
+                name: "Spiritual Domain"
+                description: >
+                  You have developed an intuitive magical domain through spiritual practice, natural
+                  gift, or a bond you do not entirely understand. Choose one domain from the Domains
+                  of the Soul list (Chapter II.3). You may use magic within that domain using the
+                  Domain + Intent + Scope framework. Roll Spirit when doing so.
+                prerequisites: []
+                has_choice: true
+                choice_prompt: "Choose one domain from the Domains of the Soul list."
+
+          - tier: 2
+            techniques:
+              - id: formed_bond
+                name: "Formed Bond"
+                description: >
+                  Once per scene, you may form a temporary spiritual bond with a willing creature —
+                  an animal, a spirit, a person of significant spiritual presence, or a place that
+                  holds accumulated meaning. While bonded, you sense their emotional state and they
+                  sense yours. The bond lasts until the scene ends or you choose to release it.
+                  You may not maintain more than one bond at a time.
+                prerequisites: [sense_the_unseen]
+
+              - id: the_language_beneath_language
+                name: "The Language Beneath Language"
+                description: >
+                  When you attempt to communicate intent to a creature that cannot speak your
+                  language — an animal, a spirit, a being of alien origin — you do not need to roll
+                  for them to understand what you mean. They understand your intent. Whether they
+                  respond, cooperate, or care is a separate matter entirely.
+                prerequisites: [spiritual_domain]
+
+          - tier: 3
+            techniques:
+              - id: hold_the_line
+                name: "Hold the Line"
+                description: >
+                  Once per session, you may anchor something spiritual that is failing or breaking:
+                  a ritual unraveling, a protective ward dissolving, a spirit's grief turning to
+                  rage, a boundary giving way. Your presence is sufficient to hold it steady. No
+                  roll required. The MM determines what holding the line costs you in the fiction,
+                  but it holds.
+                prerequisites: [formed_bond]
+
+              - id: second_domain
+                name: "Second Domain"
+                description: >
+                  You have grown into a second intuitive magical domain. Choose a second domain
+                  from the Domains of the Soul list. You may use magic within that domain using the
+                  Domain + Intent + Scope framework, rolling Spirit as normal. Effects within your
+                  second domain are treated as one difficulty step harder than your primary domain.
+                prerequisites: [the_language_beneath_language]
+                has_choice: true
+                choice_prompt: "Choose a second domain from the Domains of the Soul list (must differ from your first)."
+
+# ---------------------------------------------------------------------------
+# Roll Resolution
+# ---------------------------------------------------------------------------
+roll_resolution:
+  dice: "2d6"
+  modifier_source: minor_attribute
+  thresholds:
+    full_success: 10
+    partial_success: 7
+  outcomes:
+    full_success:
+      label: "Full Success"
+      description: "You achieve your goal cleanly."
+    partial_success:
+      label: "Success with Cost"
+      description: "You succeed, but with a complication or cost. The story moves forward at a price."
+    failure:
+      label: "Things Go Wrong"
+      description: "Things go wrong — but the story always moves forward."
+  difficulty_modifiers:
+    - label: Easy
+      modifier: 1
+      description: "Clear advantage, weak or inattentive opposition, favorable conditions."
+    - label: Standard
+      modifier: 0
+      description: "The default — uncertain outcome, no special advantage or impediment."
+    - label: Hard
+      modifier: -1
+      description: "Skilled opposition, poor conditions, acting against the grain."
+    - label: "Very Hard"
+      modifier: -2
+      description: "Extraordinary opposition, severe circumstances, nearly impossible odds."
+
+# ---------------------------------------------------------------------------
+# Spark Economy
+# ---------------------------------------------------------------------------
+spark:
+  base_sparks_per_session: 3
+  mechanic:
+    spend: per_spark_add_d6_drop_lowest
+    description: >
+      Each Spark adds a d6 to your roll; you then drop an equal number of lowest dice.
+      The core mechanic stays the same — 2d6 plus your modifier — but Sparks shift the
+      odds by replacing your worst potential outcomes.
+      Two Sparks spent: roll 4d6, drop the two lowest.
+  earn_methods:
+    - id: mm_award
+      label: "MM Award"
+      description: >
+        The MM gives a Spark for exceptional roleplay, creative problem-solving,
+        or playing your character's established traits and weaknesses in a way
+        that costs you something real in the fiction.
+    - id: peer_call
+      label: "Spark? — Peer Call"
+      description: >
+        Any player at the table can call out "Spark?" for another player's moment —
+        a line of dialogue that landed, a decision that surprised everyone,
+        an in-character choice that felt completely true. The MM confirms it.
+    - id: graceful_fail
+      label: "The Graceful Fail"
+      description: >
+        When your roll is a 6- and you lean into the consequence — or better,
+        add something to the fiction that makes the failure richer — the MM may
+        award a Spark.
+
+# ---------------------------------------------------------------------------
+# Advancement
+# ---------------------------------------------------------------------------
+advancement:
+  skill_ranks:
+    - id: novice
+      label: Novice
+      modifier: 0
+      default: true
+    - id: practiced
+      label: Practiced
+      modifier: 1
+    - id: expert
+      label: Expert
+      modifier: 2
+    - id: master
+      label: Master
+      modifier: 3
+
+  skill_point_costs:
+    - context: primary_facet_success
+      cost: 1
+    - context: primary_facet_failure
+      cost: 2
+    - context: secondary_facet_success
+      cost: 2
+    - context: secondary_facet_failure
+      cost: 4
+
+  session_skill_points: 4
+  marks_per_rank: 3
+  facet_level_threshold: 6
+
+  # Every 4 Facet levels in a character's Primary Facet triggers a Major Advancement.
+  # At a Major Advancement, the player chooses: +1 to a Minor Attribute (max 3),
+  # or a Pinnacle Technique (MM approval required).
+  major_advancement_threshold: 4

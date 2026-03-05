@@ -14,7 +14,7 @@ There are three Facets, mirroring the three Major Attributes:
 
 **Facet of the Mind** — Characters of knowledge, perception, and reasoning. Scholars, detectives, navigators, arcane theorists. People who solve problems by understanding them.
 
-**Facet of the Soul** — Characters of will, presence, and connection. Diplomats, spiritual practitioners, luck-touched wanderers. People who solve problems by moving other people — or by bending the world toward them.
+**Facet of the Soul** — Characters of will, presence, and connection. Diplomats, spiritual practitioners, luck-touched wanderers. Where a Body character forces a door and a Mind character finds the hidden latch, a Soul character persuades someone to open it — or simply finds the door already unlocked, because it has always worked out that way.
 
 ---
 
@@ -69,6 +69,8 @@ The cost to spend a point on a skill depends on context:
 | Used the skill, outside your Primary Facet, failure | 4 points |
 
 You may only advance skills you used this session. You may not save points between sessions — unspent points are lost.
+
+> **Why failure costs more:** At first glance it seems backward — shouldn't failing teach you something faster? The cost reflects integration, not information. Failing a skill provides raw experience; converting that experience into reliable capability takes more deliberate effort than building on success. The fiction supports this: Mordai's failed Charisma attempt in the archive taught him something, but he'd need to work harder to turn that embarrassment into a repeatable technique than he would if the approach had worked.
 
 **Marks:** Each point spent toward a skill's next rank is called a mark. A skill advances when it accumulates **3 marks**. Marks carry over between sessions — you do not lose partial progress.
 
@@ -206,6 +208,8 @@ At the end of any session in which your character endured significant hardship, 
 
 Every **4 Facet levels** accumulated in your Primary Facet, you reach a **Major Advancement**.
 
+> **A note on the math:** A fully developed Primary Facet produces 15 total skill rank advances, which yields Facet level 2 (at advance 12). Reaching Facet level 4 — the first Major Advancement threshold — requires cross-training into other Facets. The Facet level counting for Major Advancement includes Facet levels earned in *any* Facet, not just your Primary. A character who has reached level 2 in their Primary Facet and level 2 in a secondary Facet has accumulated 4 Facet levels total and qualifies. Major Advancements are not gatekept — they require breadth, not perfection in one lane.
+
 At a Major Advancement, choose one:
 
 - **+1 to a Minor Attribute** — raise one Minor Attribute by one step (maximum 3). If this raises a Major Attribute's derived sum into the next bracket, the Major Attribute modifier increases as well.
@@ -227,7 +231,17 @@ This is the moment the advancement becomes real in the fiction. Before the refle
 
 > *Zahna spends a quiet moment after the Millhaven investigation re-reading his notes, marking the connections he didn't see until he had to look for them. His Knowledge rank ticks to Practiced. The table watches. Nobody comments. Mordai refills his drink.*
 
-The mirror Master guide covers running reflection scenes in detail: how long they should be, how to make them feel earned rather than procedural, and how to use them to develop the character relationships around the character who is growing.
+**Running reflection scenes (MM guidance):**
+
+Keep them brief — a paragraph of narration or a few lines of in-character exchange is enough. The scene should tie the advancement to something that actually happened this session. A Knowledge advancement is richer when it echoes Zahna's archive research. A Combat advancement feels earned after a fight where the character showed their improvement under pressure.
+
+One reflection scene per session means one character gets the spotlight. The MM should track whose turn it is informally — not rigidly rotating, but ensuring no character goes three or four sessions without one.
+
+When multiple characters qualify for advancement simultaneously, the MM picks the one whose fiction is most ready. "Your threshold is met — when the fiction gives us the right moment, we'll take it" is a valid response. The mechanical trigger and the fictional opportunity don't have to land at the same time; the mark carries.
+
+Technique unlocks during reflection scenes are worth a sentence of fiction: *what changed? What did this character realize, survive, or decide?* The player should name it. It doesn't have to be deep. It just has to be real.
+
+The Mirror Master's guide covers running reflection scenes in greater depth, including how to use them to develop the relationships around the character who is growing.
 
 ---
 
@@ -248,7 +262,8 @@ Every 6 skill rank advances in Primary Facet:
   └─ 5 skills × 3 advances = 15 max advances per Facet
   └─ Facet level 1 at advance 6, level 2 at advance 12; level 3+ requires cross-training
 
-Every 4 Facet levels in Primary Facet:
+Every 4 Facet levels total (Primary + any Facet):
   └─ Major Advancement: +1 Minor Attribute OR Pinnacle Technique
   └─ Significant reflection scene required
+  └─ Requires cross-training beyond Primary Facet to reach
 ```

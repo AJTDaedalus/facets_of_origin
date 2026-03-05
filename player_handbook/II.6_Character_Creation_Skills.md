@@ -45,13 +45,13 @@ Pushing through physical hardship: staying functional through injury, resisting 
 
 ### Skills of the Mind
 
-*(Defined in Chapter II.5 — Facet of the Mind)*
+*(Defined in Chapter II.4b — Facet of the Mind)*
 
 ---
 
 ### Skills of the Soul
 
-*(Defined in Chapter II.5 — Facet of the Soul)*
+*(Defined in Chapter II.4c — Facet of the Soul)*
 
 ---
 

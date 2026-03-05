@@ -1,0 +1,78 @@
+fof_version: '0.1'
+type: character
+id: zulnut
+name: Zulnut
+version: 1.0.0
+authors:
+- Zulnut
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+
+character:
+  name: Zulnut
+  player_name: Zulnut
+  primary_facet: body
+
+  attributes:
+    strength: 2
+    dexterity: 3
+    constitution: 1
+    intelligence: 2
+    wisdom: 2
+    knowledge: 2
+    spirit: 1
+    luck: 3
+    charisma: 2
+
+  # Major Attribute modifiers (derived — for reference):
+  #   Body (2+3+1=6): +0
+  #   Mind (2+2+2=6): +0
+  #   Soul (1+3+2=6): +0
+
+  skills:
+    finesse:
+      rank: practiced
+      marks: 0
+
+  magic: null
+
+  background:
+    name: Street Performer
+    type: pre-built
+    title: Performer
+    description: >
+      Grew up performing in Thornwall's market districts — acrobatics, sleight
+      of hand, close-up illusions using nothing but quick hands, and the fine
+      art of reading a crowd to know exactly when to make something disappear.
+      Audiences don't forgive sloppy technique, and neither does the city watch.
+    starting_skill_bonus:
+      skill: finesse
+      rank: practiced
+    specialty: >
+      Can assess a crowd's mood, attention, and the best angle of approach
+      within a few moments of observation — and knows when a specific person
+      in that crowd has just stopped paying attention to their belongings.
+
+  sparks: 3
+
+  facet_level: 0
+  rank_advances_this_facet_level: 0
+  techniques: []
+
+  notes: >
+    Dexterity 3 and Luck 3 are the defining axes. Constitution 1 gives an
+    Endurance pool of 3 (base 4 - 1) — Zulnut is extremely fragile in a
+    sustained fight, which is entirely intentional and on-brand.
+
+    Finesse roll: 2d6 + Dexterity (+1) + Finesse Practiced (+1) = 2d6+2.
+    Dodge roll: 2d6 + Dexterity (+1) = 2d6+1.
+    Endurance pool: 3.
+
+    All three major modifiers are +0 — genuinely average across the board
+    except where Dexterity and Luck push into specifics. This is the character:
+    exceptional in precise moments, unremarkable in broad ones.
+
+created_at: '2026-03-04T00:00:00+00:00'
+last_modified: '2026-03-04T00:00:00+00:00'

@@ -1,0 +1,34 @@
+fof_version: '0.1'
+type: character
+id: player1-af13153c
+name: Mordai
+version: 1.0.0
+authors:
+- Player1
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+campaign_id: af13153c-1db2-41a3-9265-fa8939985812
+character:
+  name: Mordai
+  player_name: Player1
+  primary_facet: body
+  attributes:
+    strength: 3
+    dexterity: 3
+    constitution: 2
+    intelligence: 2
+    wisdom: 2
+    knowledge: 2
+    spirit: 1
+    luck: 2
+    charisma: 1
+  skills: {}
+  sparks: 3
+  session_skill_points_remaining: 4
+  facet_level: 0
+  rank_advances_this_facet_level: 0
+  techniques: []
+created_at: '2026-03-04T02:53:23.547296+00:00'
+last_modified: '2026-03-04T02:53:23.547296+00:00'
