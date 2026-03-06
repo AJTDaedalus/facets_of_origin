@@ -1,0 +1,67 @@
+# Facets of Origin — Campaign Example
+# FOF Format v0.1
+#
+# An annotated campaign file for "The Shattered Crown" — a political intrigue campaign.
+# This file lives at the root of the campaign directory:
+#
+#   the-shattered-crown/
+#   ├── campaign.fof          ← this file
+#   ├── characters/
+#   │   └── zahna.fof         ← referenced below
+#   └── sessions/
+#       └── session-001.fof   ← referenced below
+
+# ── FOF Envelope ──────────────────────────────────────────────────────────────
+fof_version: "0.1"
+type: campaign
+id: "the-shattered-crown"
+name: "The Shattered Crown"
+version: "1.0.0"
+authors: ["AJTDaedalus"]
+description: "A political intrigue campaign set in the fractured city-states after the collapse of the old empire."
+
+# ── Active ruleset ────────────────────────────────────────────────────────────
+# Modules loaded for this campaign. The tool merges them in priority order.
+# Semver constraints: >=, =, or ~= (compatible release).
+modules:
+  - id: "base"
+    version: ">=0.1.0"
+
+# ── Campaign-level ruleset overrides (priority 100) ───────────────────────────
+# Only singleton fields may appear here. Campaign overrides always win.
+# The tool emits an info message for each field overridden.
+#
+# This campaign gives players one extra Spark per session (narrative-rich tone)
+# and one extra skill point to encourage faster character growth.
+overrides:
+  spark:
+    base_sparks_per_session: 4    # Base default: 3 → 4 for this campaign
+  advancement:
+    session_skill_points: 5       # Base default: 4 → 5 for this campaign
+
+# ── Enrolled characters ───────────────────────────────────────────────────────
+# The tool loads character files from paths relative to this campaign.fof.
+# joined_session: the session number when this character first appeared.
+# active: false = character retired, deceased, or otherwise out of play (file preserved).
+characters:
+  - id: "zahna-003"
+    player_name: "Zahna"
+    file: "characters/zahna.fof"
+    joined_session: 1
+    active: true
+
+# ── Session index ─────────────────────────────────────────────────────────────
+# The tool loads session files from paths relative to this campaign.fof.
+# summary: one-line entry for the session index display.
+sessions:
+  - id: "session-001"
+    session_number: 1
+    date: "2026-03-03"
+    file: "sessions/session-001.fof"
+    summary: "The party arrived at the market district and met the informant."
+
+# ── Campaign metadata ─────────────────────────────────────────────────────────
+started_at: "2026-03-03"
+session_count: 1
+status: active      # active | hiatus | complete | archived
+tags: [political, intrigue, city, empire]

@@ -1,0 +1,779 @@
+/* =========================================================================
+   Facets of Origin — Mirror Theme
+   Design language: deep charcoal, frosted glass panels, silver/gold accents.
+   Mobile-first breakpoint at 768px — tab-based layout on small screens.
+   ========================================================================= */
+
+/* ---- Variables ---------------------------------------------------------- */
+:root {
+  /* Backgrounds */
+  --bg:          #0d0d14;
+  --bg-panel:    #12121c;
+  --bg-card:     rgba(255,255,255,0.035);
+  --bg-input:    rgba(255,255,255,0.05);
+
+  /* Accent palette */
+  --silver:      #94a3b8;   /* primary accent, label text */
+  --gold:        #c9a84c;   /* highlights, spark pips, active state */
+  --gold-dim:    #8f712d;
+  --text:        #e8eaf0;   /* body text — soft silver-white, never pure white */
+  --text-dim:    #6b7892;   /* secondary text */
+
+  /* Outcome colours — mid-luminance, no neons */
+  --success:     #4d9e6a;
+  --partial:     #c9a84c;
+  --failure:     #9e4d4d;
+
+  /* Borders & glass */
+  --border:      rgba(148, 163, 184, 0.10);
+  --border-gold: rgba(201, 168, 76, 0.28);
+  --glass:       rgba(255,255,255,0.03);
+  --glass-hi:    rgba(255,255,255,0.07);  /* top-left highlight on cards */
+
+  /* Misc */
+  --shadow:      0 8px 32px rgba(0,0,0,0.55);
+  --shadow-sm:   0 2px 8px  rgba(0,0,0,0.4);
+  --radius:      10px;
+  --radius-sm:   6px;
+  --font:        system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:   'Consolas', 'Courier New', monospace;
+}
+
+/* ---- Reset --------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ---- Base ---------------------------------------------------------------- */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.55;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================================================
+   LAYOUT — Desktop (> 768 px)
+   ========================================================================= */
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---- Header -------------------------------------------------------------- */
+header {
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+header h1 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.session-badge {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  padding: 2px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+}
+
+/* ---- Two-column main area ------------------------------------------------ */
+.main-area {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.left-panel {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.right-panel {
+  background: var(--bg-panel);
+  border-left: 1px solid var(--border);
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Mobile tab bar hidden on desktop */
+.mobile-tab-bar { display: none; }
+
+/* =========================================================================
+   CARDS — frosted glass with diagonal highlight
+   ========================================================================= */
+
+.card {
+  background: var(--bg-card);
+  background-image: linear-gradient(
+    135deg,
+    var(--glass-hi) 0%,
+    transparent 50%
+  );
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 14px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.card-title {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--silver);
+  margin-bottom: 12px;
+}
+
+/* =========================================================================
+   FORMS
+   ========================================================================= */
+
+input, select, textarea {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  padding: 9px 12px;
+  font-size: 14px;
+  font-family: var(--font);
+  margin-bottom: 8px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--silver);
+  background: rgba(255,255,255,0.07);
+}
+
+select option { background: #1c1c2c; }
+
+label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  display: block;
+  margin-bottom: 4px;
+  letter-spacing: 0.04em;
+}
+
+/* =========================================================================
+   BUTTONS
+   ========================================================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: opacity 0.15s, transform 0.08s;
+  min-height: 40px; /* touch-friendly */
+}
+
+.btn:hover  { opacity: 0.88; }
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* Mirror silver primary */
+.btn-primary {
+  background: linear-gradient(135deg, #6b7ea8, #4a5878);
+  color: var(--text);
+  border: 1px solid rgba(148,163,184,0.25);
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #c9a84c, #8f712d);
+  color: #111;
+  font-weight: 700;
+}
+
+.btn-sm { padding: 5px 12px; font-size: 13px; min-height: 34px; }
+
+.btn-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* =========================================================================
+   ATTRIBUTES GRID
+   ========================================================================= */
+
+.attr-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.attr-block {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  position: relative;
+}
+
+.attr-block::before {
+  /* subtle top reflection */
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.attr-block:hover,
+.attr-block.selected {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.08);
+}
+
+.attr-block .attr-name     { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+.attr-block .attr-rating   { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.1; }
+.attr-block .attr-modifier { font-size: 0.75rem; color: var(--gold); }
+.attr-block .attr-label    { font-size: 0.62rem; color: var(--text-dim); }
+
+.major-group  { margin-bottom: 16px; }
+.major-label  {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  margin-bottom: 6px;
+  padding-left: 2px;
+}
+
+/* =========================================================================
+   SKILLS TABLE
+   ========================================================================= */
+
+.skills-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+.skills-table th {
+  text-align: left;
+  padding: 4px 8px;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+}
+
+.skills-table td {
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.skills-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* Rank badges */
+.rank-badge {
+  font-size: 0.62rem;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.rank-novice   { background: rgba(107,120,146,0.2); color: var(--text-dim); border: 1px solid rgba(107,120,146,0.2); }
+.rank-practiced{ background: rgba(77,158,106,0.15); color: #5fbb82;          border: 1px solid rgba(77,158,106,0.25); }
+.rank-expert   { background: rgba(201,168,76,0.15); color: var(--gold);      border: 1px solid var(--border-gold); }
+.rank-stub     { background: rgba(120,80,80,0.15);  color: #8a6060;          border: 1px solid rgba(120,80,80,0.2); font-style: italic; }
+
+.marks-dots { color: var(--silver); font-size: 0.8rem; }
+
+.btn-roll-skill {
+  font-size: 11px;
+  padding: 3px 9px;
+  background: rgba(148,163,184,0.12);
+  color: var(--silver);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.12s;
+  min-height: 28px;
+}
+.btn-roll-skill:hover { background: rgba(148,163,184,0.22); }
+
+/* =========================================================================
+   SPARK PIPS — silver ring / filled gold when active
+   ========================================================================= */
+
+.spark-counter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.spark-pips { display: flex; gap: 6px; }
+
+.spark-pip {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--silver);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, box-shadow 0.12s;
+}
+
+.spark-pip:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 6px rgba(201,168,76,0.4);
+}
+
+.spark-pip.filled {
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 8px rgba(201,168,76,0.45);
+}
+
+/* =========================================================================
+   DICE — round-cornered frames, silver border, inner glow
+   ========================================================================= */
+
+.dice-display { display: flex; gap: 7px; margin: 8px 0; flex-wrap: wrap; }
+
+.die {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  border: 2px solid;
+  transition: box-shadow 0.12s;
+}
+
+.die.kept {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.1);
+  color: var(--gold);
+  box-shadow: inset 0 0 8px rgba(201,168,76,0.15), 0 0 6px rgba(201,168,76,0.2);
+}
+
+.die.dropped {
+  border-color: var(--border);
+  background: rgba(255,255,255,0.02);
+  color: var(--text-dim);
+  opacity: 0.45;
+}
+
+/* =========================================================================
+   ROLL RESULT — frosted glass, colored border only (no harsh bg fills)
+   ========================================================================= */
+
+.roll-result-box {
+  padding: 14px;
+  border-radius: var(--radius);
+  border: 2px solid;
+  margin-bottom: 14px;
+  font-size: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background: var(--glass);
+}
+
+.roll-result-box.full_success    { border-color: var(--success); }
+.roll-result-box.partial_success { border-color: var(--partial); }
+.roll-result-box.failure         { border-color: var(--failure); }
+
+.roll-total { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.01em; }
+.roll-outcome-label { font-size: 1rem; font-weight: 600; margin-bottom: 4px; letter-spacing: 0.04em; }
+.roll-outcome-desc  { font-size: 0.85rem; color: var(--text-dim); }
+.roll-breakdown     { font-size: 0.78rem; color: var(--text-dim); margin-top: 8px; font-family: var(--font-mono); }
+
+/* =========================================================================
+   ROLL LOG
+   ========================================================================= */
+
+.roll-log { max-height: 300px; overflow-y: auto; }
+
+.roll-log-entry {
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 12px;
+}
+
+.roll-log-entry .who { font-weight: 600; color: var(--gold); }
+.roll-log-entry .outcome-full_success    { color: var(--success); }
+.roll-log-entry .outcome-partial_success { color: var(--partial); }
+.roll-log-entry .outcome-failure         { color: var(--failure); }
+.roll-log-entry .roll-log-desc {
+  color: var(--text-dim);
+  font-style: italic;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+}
+
+/* =========================================================================
+   CHAT
+   ========================================================================= */
+
+.chat-log {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 8px;
+}
+
+.chat-msg {
+  padding: 4px 8px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.chat-msg .from { font-weight: 600; color: var(--silver); }
+.chat-msg.system { color: var(--text-dim); font-style: italic; }
+
+/* =========================================================================
+   AUTH / SETUP / JOIN SCREENS
+   ========================================================================= */
+
+#auth-screen, #setup-screen, #join-screen {
+  max-width: 420px;
+  margin: 80px auto;
+  padding: 36px;
+  background: var(--bg-panel);
+  background-image: linear-gradient(135deg, var(--glass-hi) 0%, transparent 60%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+#auth-screen h2, #setup-screen h2, #join-screen h2 {
+  font-size: 1.5rem;
+  color: var(--gold);
+  margin-bottom: 6px;
+  letter-spacing: 0.06em;
+}
+
+.tagline { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 24px; }
+.error-msg   { color: var(--failure); font-size: 0.83rem; margin-top: 8px; }
+.success-msg { color: var(--success); font-size: 0.83rem; margin-top: 8px; }
+
+/* =========================================================================
+   PLAYER LIST
+   ========================================================================= */
+
+.player-list { list-style: none; }
+
+.player-list li {
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.player-online::before {
+  content: '●';
+  color: var(--success);
+  margin-right: 6px;
+  font-size: 8px;
+}
+
+/* =========================================================================
+   FACET BADGES
+   ========================================================================= */
+
+.facet-badge {
+  font-size: 0.65rem;
+  padding: 2px 9px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.facet-body { background: rgba(158,77,77,0.2);  color: #c47a7a; border: 1px solid rgba(158,77,77,0.3); }
+.facet-mind { background: rgba(77,118,158,0.2); color: #7aaac4; border: 1px solid rgba(77,118,158,0.3); }
+.facet-soul { background: rgba(118,77,158,0.2); color: #a87ac4; border: 1px solid rgba(118,77,158,0.3); }
+
+/* =========================================================================
+   SPARK NOMINATION BANNER
+   ========================================================================= */
+
+.spark-nomination {
+  background: rgba(201,168,76,0.08);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  backdrop-filter: blur(4px);
+}
+
+/* =========================================================================
+   MM DASHBOARD
+   ========================================================================= */
+
+#mm-dashboard {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 24px;
+}
+
+/* =========================================================================
+   SCROLLBARS — subtle silver
+   ========================================================================= */
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(148,163,184,0.35); }
+
+/* =========================================================================
+   UTILITY
+   ========================================================================= */
+
+.hidden { display: none !important; }
+
+/* =========================================================================
+   MOBILE LAYOUT  (≤ 768 px)
+   ========================================================================= */
+
+@media (max-width: 768px) {
+
+  /* ---- Auth screens ---- */
+  #auth-screen, #setup-screen, #join-screen {
+    margin: 32px auto;
+    padding: 24px 20px;
+    max-width: 100%;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  /* ---- MM Dashboard ---- */
+  #mm-dashboard {
+    margin: 0;
+    padding: 16px;
+  }
+
+  /* ---- Header ---- */
+  header {
+    padding: 10px 16px;
+    gap: 10px;
+  }
+
+  header h1 { font-size: 0.95rem; }
+
+  /* ---- Single-column game layout ---- */
+  .main-area {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    padding-bottom: 56px; /* room for tab bar */
+  }
+
+  /* Panels: each fills full width, scrollable independently */
+  .left-panel,
+  .right-panel {
+    width: 100%;
+    padding: 14px 14px;
+    overflow-y: visible;
+  }
+
+  .right-panel {
+    border-left: none;
+    border-top: 1px solid var(--border);
+    gap: 12px;
+  }
+
+  /* Default tab state: character panel visible, table panel hidden */
+  .left-panel  { display: block; }
+  .right-panel { display: none; }
+
+  /* When table tab is active (JS adds .show-table to #app) */
+  #app.show-table .left-panel  { display: none; }
+  #app.show-table .right-panel { display: block; }
+
+  /* ---- Mobile tab bar ---- */
+  .mobile-tab-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 52px;
+    background: var(--bg-panel);
+    border-top: 1px solid var(--border);
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 6px 0;
+  }
+
+  .tab-btn .tab-icon { font-size: 1.1rem; }
+
+  .tab-btn.active {
+    color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+
+  .tab-btn.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 0 0 2px 2px;
+  }
+
+  /* ---- Touch-friendly sizing ---- */
+  .btn {
+    min-height: 44px;
+    font-size: 15px;
+  }
+
+  .btn-sm {
+    min-height: 38px;
+    font-size: 14px;
+    padding: 6px 14px;
+  }
+
+  .spark-pip {
+    width: 22px;
+    height: 22px;
+  }
+
+  .die {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .btn-roll-skill {
+    min-height: 34px;
+    font-size: 13px;
+    padding: 5px 10px;
+  }
+
+  /* ---- Attribute grid: 3-column on phones ---- */
+  .attr-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .attr-block {
+    padding: 8px 4px;
+  }
+
+  .attr-block .attr-rating { font-size: 1.3rem; }
+
+  /* ---- Roll result: full-width ---- */
+  .roll-result-box {
+    margin-bottom: 10px;
+  }
+
+  .roll-total { font-size: 1.9rem; }
+
+  /* ---- Roll log & chat: no max-height on mobile (scrolls with page) ---- */
+  .roll-log  { max-height: none; }
+  .chat-log  { max-height: none; }
+
+  /* ---- Skills table: hide Progress column to save space ---- */
+  .skills-table th:nth-child(3),
+  .skills-table td:nth-child(3) {
+    display: none;
+  }
+
+  /* ---- Cards ---- */
+  .card {
+    border-radius: var(--radius-sm);
+    padding: 14px 12px;
+  }
+
+  /* ---- Spark nomination banner ---- */
+  .spark-nomination {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 14px 8px;
+  }
+}
+
+/* Very small screens (< 380px) — tighten further */
+@media (max-width: 380px) {
+  .attr-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+
+  .attr-block .attr-name   { font-size: 0.58rem; }
+  .attr-block .attr-rating { font-size: 1.15rem; }
+
+  header h1 { display: none; } /* save space; session badge is enough */
+}
