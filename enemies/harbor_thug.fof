@@ -1,0 +1,32 @@
+fof_version: '0.1'
+type: enemy
+id: harbor_thug
+name: Harbor Thug
+
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+
+enemy:
+  tier: mook
+  attack_modifier: 0    # Strength +0, Combat Novice +0
+  defense_modifier: 0
+  armor: none
+  techniques: []
+  special: null
+  tr: 1
+
+  description: >
+    Hired muscle. Doesn't want to die for this job. Will absolutely
+    run if the Named NPC they're working for goes down first. Fights
+    with clubs, boat hooks, or improvised cargo implements. Loud.
+    Not subtle.
+
+  notes: >
+    Mook — one Strike at any tier removes from fight.
+    Effective in groups of 4+; alone they are atmosphere, not threat.
+    TR 1 minimum by rule.
+
+created_at: '2026-03-05T00:00:00+00:00'
+last_modified: '2026-03-05T00:00:00+00:00'

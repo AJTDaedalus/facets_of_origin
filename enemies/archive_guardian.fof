@@ -1,0 +1,60 @@
+fof_version: '0.1'
+type: enemy
+id: archive_guardian
+name: Archive Guardian
+
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+
+enemy:
+  tier: boss
+  endurance: 10
+  attack_modifier: 3    # Strength +2, Combat Expert +2 — iron weight, not technique
+  defense_modifier: 1   # Dex −1, Combat Practiced +1 (partially damaged in story)
+  armor: heavy
+  techniques: []
+  special:
+    phase_change:
+      trigger: first_broken
+      name: Reduced Mode
+      description: >
+        When first Broken, the Guardian enters Reduced Mode. Its attack_modifier
+        drops to +1. However, it now ignores all Tier 1 Conditions entirely —
+        not through resilience, but because the sensory subsystem that registered
+        them has shut down. It is running on something else. What that is,
+        the party does not know. Its Endurance resets to 4 for the second phase.
+  tr: 16                # offense(+3→5) + durability(Endurance 10→5) + armor(heavy→2) + special(phase→2+immune Tier1→2) = 16
+
+  description: >
+    A Constructed guardian commissioned by the Thornwall city government
+    through the Artificers' Guild, designed to hold a fixed position and
+    prevent unauthorized access. Standing approximately seven feet tall,
+    iron-jointed, with eyes that produce rather than reflect light.
+    It has been in this room for fifteen years with no instructions
+    other than the original ones.
+
+    It is not malevolent. It is doing exactly what it was told.
+    That is, in certain lights, worse.
+
+  notes: >
+    TR breakdown: offense(+3 → value 5) + durability(Endurance 10 → value 5)
+    + armor(heavy → 2) + technique_bonus(phase change → 2, Tier 1 immunity → 2) = 16.
+
+    Against a Party Strength of 3, this is a Deadly encounter at face value
+    (budget 12, actual TR 16). Intended to be solved laterally — structural
+    weaknesses, Zahna's glyph, exploitation of its fixed patrol logic.
+    A straight fight is survivable but very expensive.
+
+    Joint weakness: its attack_modifier can be reduced by successful Maneuvers
+    targeting specific joints. Each successful joint Maneuver (10+) reduces
+    attack_modifier by 1, to a minimum of 0. This is not in the stat block
+    formally — it is a fictional fact the party can discover through play.
+
+    Posture: always Measured. It does not press. It does not go Aggressive.
+    It does not go Defensive. It approaches and acts with the patience of
+    something that has never needed to hurry.
+
+created_at: '2026-03-05T00:00:00+00:00'
+last_modified: '2026-03-05T00:00:00+00:00'

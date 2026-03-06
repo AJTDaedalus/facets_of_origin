@@ -1,0 +1,37 @@
+fof_version: '0.1'
+type: character
+id: disktest-105b0d75
+name: DiskTest
+version: 1.0.0
+authors:
+- DiskTest
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+campaign_id: 105b0d75-9524-41e0-9485-cc3d78edfe55
+character:
+  name: DiskTest
+  player_name: DiskTest
+  primary_facet: mind
+  attributes:
+    strength: 1
+    dexterity: 2
+    constitution: 2
+    intelligence: 3
+    wisdom: 3
+    knowledge: 2
+    spirit: 1
+    luck: 2
+    charisma: 2
+  skills:
+    investigation:
+      rank: practiced
+      marks: 2
+  sparks: 2
+  session_skill_points_remaining: 4
+  facet_level: 1
+  rank_advances_this_facet_level: 3
+  techniques: []
+created_at: '2026-03-04T02:53:19.977326+00:00'
+last_modified: '2026-03-04T02:53:19.977326+00:00'

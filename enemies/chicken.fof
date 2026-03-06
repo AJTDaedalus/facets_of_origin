@@ -1,0 +1,41 @@
+fof_version: '0.1'
+type: enemy
+id: chicken
+name: Chicken
+
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+
+enemy:
+  tier: mook
+  attack_modifier: -1   # Dexterity −1 (weak), no Combat skill to speak of
+  defense_modifier: -1  # Dodges erratically — hard to predict, not hard to hit
+  armor: none
+  techniques: []
+  special: null
+  tr: 1                 # Mook minimum. Offense(−1→value 1) + Durability(0) + Armor(0) = 1.
+
+  description: >
+    A chicken. Technically alive. Technically a threat, in the sense
+    that it occupies space and has opinions about personal boundaries.
+    Attacks by pecking at ankles or flapping directly into someone's
+    face at the worst possible moment. Not malevolent. Just a chicken.
+
+  notes: >
+    Mook — one Strike at any tier removes from fight.
+
+    The defense_modifier of −1 reflects erratic movement, not evasion.
+    A chicken does not dodge. It simply goes somewhere unpredictable.
+    This is functionally the same thing and somehow more annoying.
+
+    MMs are encouraged to have the chicken survive the encounter through
+    sheer irrelevance and wander off at the end. It was never really
+    part of this.
+
+    Do not give the chicken a name. If the party gives it a name, that
+    is entirely their fault and the MM should remember it forever.
+
+created_at: '2026-03-05T00:00:00+00:00'
+last_modified: '2026-03-05T00:00:00+00:00'

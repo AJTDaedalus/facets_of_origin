@@ -6,11 +6,13 @@
 # Python
 __pycache__/
 *.py[cod]
+*.pyo
 *.egg-info/
 dist/
 build/
 .venv/
 venv/
+env/
 
 # Test artifacts
 .pytest_cache/
@@ -25,3 +27,9 @@ software/data/
 # OS
 .DS_Store
 Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
