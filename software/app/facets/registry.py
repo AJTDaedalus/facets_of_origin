@@ -6,9 +6,12 @@ from pathlib import Path
 from app.facets.loader import FacetLoadError, discover_facet_files, load_facet_file
 from app.facets.schema import (
     AdvancementDef,
+    BackgroundDefinition,
     CharacterFacetDef,
+    CombatDef,
     FacetFile,
     FacetTreeDef,
+    MagicDef,
     RollResolutionDef,
     SkillDef,
     SparkDef,
@@ -34,10 +37,13 @@ class MergedRuleset:
         character_facets: dict[str, CharacterFacetDef] = {}
         skills: dict[str, SkillDef] = {}
         techniques: dict[str, FacetTreeDef] = {}
+        backgrounds: dict[str, BackgroundDefinition] = {}
         distribution = None
         roll_resolution: RollResolutionDef | None = None
         spark: SparkDef | None = None
         advancement: AdvancementDef | None = None
+        combat: CombatDef | None = None
+        magic: MagicDef | None = None
 
         for ff in self._files:
             for ma in ff.attributes.major:
@@ -58,12 +64,19 @@ class MergedRuleset:
             for facet_id, tree in ff.techniques.items():
                 techniques[facet_id] = tree
 
+            for bg in ff.backgrounds:
+                backgrounds[bg.id] = bg
+
             if ff.roll_resolution:
                 roll_resolution = ff.roll_resolution
             if ff.spark:
                 spark = ff.spark
             if ff.advancement:
                 advancement = ff.advancement
+            if ff.combat:
+                combat = ff.combat
+            if ff.magic:
+                magic = ff.magic
 
         self.major_attributes = list(major_attrs.values())
         self.minor_attributes = list(minor_attrs.values())
@@ -72,9 +85,12 @@ class MergedRuleset:
         self.character_facets = list(character_facets.values())
         self.skills = list(skills.values())
         self.techniques = techniques
+        self.backgrounds = list(backgrounds.values())
         self.roll_resolution = roll_resolution
         self.spark = spark
         self.advancement = advancement
+        self.combat = combat
+        self.magic = magic
 
         self._validate_cross_references()
 
@@ -121,9 +137,14 @@ class MergedRuleset:
                 return cost_def.cost
         return 1
 
+    def get_background(self, background_id: str) -> "BackgroundDefinition | None":
+        for bg in self.backgrounds:
+            if bg.id == background_id:
+                return bg
+        return None
+
     def to_client_dict(self) -> dict:
         """Serialise the ruleset to a JSON-safe dict for sending to clients."""
-        import json
         from pydantic import BaseModel
 
         def _serialize(obj):
@@ -143,9 +164,12 @@ class MergedRuleset:
             "character_facets": _serialize(self.character_facets),
             "skills": _serialize(self.skills),
             "techniques": _serialize(self.techniques),
+            "backgrounds": _serialize(self.backgrounds),
             "roll_resolution": _serialize(self.roll_resolution),
             "spark": _serialize(self.spark),
             "advancement": _serialize(self.advancement),
+            "combat": _serialize(self.combat),
+            "magic": _serialize(self.magic),
         }
 
 

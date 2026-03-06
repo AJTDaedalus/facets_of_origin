@@ -499,7 +499,7 @@ def _make_character_fof_yaml(player_name: str, session_id: str | None = None) ->
             "player_name": player_name,
             "primary_facet": "mind",
             "attributes": _ZAHNA_ATTRIBUTES,
-            "skills": {"investigation": {"rank": "practiced", "marks": 2}},
+            "skills": {"investigate": {"rank": "practiced", "marks": 2}},
             "sparks": 2,
             "session_skill_points_remaining": 4,
             "facet_level": 1,

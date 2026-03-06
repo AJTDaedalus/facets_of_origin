@@ -367,12 +367,10 @@ class TestAdvanceSkillEdgeCases:
 
     def test_secondary_facet_advance_does_not_count_toward_level(self, body_character, ruleset):
         """Skills outside primary facet don't advance facet level."""
-        # investigation is a mind skill; body_character's primary is body
+        # investigate is a mind skill; body_character's primary is body
         initial_level = body_character.facet_level
-        # But investigation is stub, let's use a mind skill that might be available
-        # We use advance_skill with a fictitious skill that won't match primary facet
-        body_character.advance_skill("investigation", 3, ruleset)
-        # Facet level should NOT increase (investigation is mind, not body)
+        body_character.advance_skill("investigate", 3, ruleset)
+        # Facet level should NOT increase (investigate is mind, not body)
         assert body_character.facet_level == initial_level
 
 

@@ -56,8 +56,8 @@ character:
   # Marks: progress toward next rank (0 to marks_per_rank−1 = 0..2)
   skills:
     athletics:      { rank: novice,    marks: 0 }   # Explicitly listed (non-default marks would require listing)
-    investigation:  { rank: practiced, marks: 2 }   # Two marks into Expert — almost there
-    perception:     { rank: novice,    marks: 1 }
+    investigate:    { rank: practiced, marks: 2 }   # Two marks into Expert — almost there
+    survival:       { rank: novice,    marks: 1 }
 
   # Sparks — current count. Starts at base_sparks_per_session (3) each session.
   sparks: 2

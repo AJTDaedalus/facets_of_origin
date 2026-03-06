@@ -16,8 +16,8 @@ version: "0.1.0"
 authors: ["AJTDaedalus"]
 description: >
   The complete base ruleset for Facets of Origin. Encodes attributes, character facets,
-  skills (Body complete; Mind and Soul stubbed pending PHB chapters II.5/II.6),
-  2d6 roll resolution, the Spark economy, and the Morrowind-style skill advancement system.
+  all 15 skills (Body, Mind, and Soul), 2d6 roll resolution, the Spark economy,
+  and the Morrowind-style skill advancement system.
 
 # ── Module metadata ───────────────────────────────────────────────────────────
 priority: 0                       # Base module always loads first
@@ -43,6 +43,12 @@ merge_hints:
   attribute_distribution: override
 
 changelog:
+  - version: "0.2.0"
+    date: "2026-03-06"
+    notes: >
+      Mind and Soul skills activated (PHB II.4b, II.4c). Old stub names replaced
+      with PHB-correct names. Mind: lore, investigate, craft, insight, survival.
+      Soul: persuade, deceive, perform, attune, gamble.
   - version: "0.1.0"
     date: "2026-03-03"
     notes: >
@@ -202,77 +208,77 @@ skills:
     description: "Resisting injury, pushing through hardship, surviving extremes."
     status: active
 
-  # Mind skills — stubbed pending PHB chapter II.5
-  - id: investigation
-    name: Investigation
-    facet: mind
-    attribute: intelligence
-    description: "Searching for clues, examining evidence, logical deduction."
-    status: stub
-
+  # Mind skills — PHB II.4b
   - id: lore
     name: Lore
     facet: mind
     attribute: knowledge
     description: "Recall of history, arcane theory, cultures, trade knowledge."
-    status: stub
+    status: active
 
-  - id: perception
-    name: Perception
+  - id: investigate
+    name: Investigate
     facet: mind
-    attribute: wisdom
-    description: "Noticing details, reading situations, sensing danger."
-    status: stub
+    attribute: intelligence
+    description: "Searching for clues, examining evidence, logical deduction."
+    status: active
+
+  - id: craft
+    name: Craft
+    facet: mind
+    attribute: intelligence
+    description: "Making, repairing, and modifying objects; understanding how things work."
+    status: active
 
   - id: insight
     name: Insight
     facet: mind
     attribute: wisdom
     description: "Reading people, detecting deception, understanding motivation."
-    status: stub
+    status: active
 
-  - id: arcana
-    name: Arcana
+  - id: survival
+    name: Survival
     facet: mind
-    attribute: intelligence
-    description: "Working with magical forces, theoretical and practical."
-    status: stub
+    attribute: wisdom
+    description: "Navigating wilderness, tracking, foraging, sensing danger."
+    status: active
 
-  # Soul skills — stubbed pending PHB chapter
-  - id: persuasion
-    name: Persuasion
+  # Soul skills — PHB II.4c
+  - id: persuade
+    name: Persuade
     facet: soul
     attribute: charisma
     description: "Convincing others through argument, charm, or appeal."
-    status: stub
+    status: active
 
-  - id: intimidation
-    name: Intimidation
-    facet: soul
-    attribute: charisma
-    description: "Compelling compliance through presence, threat, or fear."
-    status: stub
-
-  - id: deception
-    name: Deception
+  - id: deceive
+    name: Deceive
     facet: soul
     attribute: charisma
     description: "Misleading, lying, maintaining a false identity."
-    status: stub
+    status: active
 
-  - id: attunement
-    name: Attunement
+  - id: perform
+    name: Perform
+    facet: soul
+    attribute: charisma
+    description: "Entertaining, inspiring, or moving an audience through art or presence."
+    status: active
+
+  - id: attune
+    name: Attune
     facet: soul
     attribute: spirit
     description: "Connecting with magical or spiritual forces, empathy with living things."
-    status: stub
+    status: active
 
-  - id: fortune
-    name: Fortune
+  - id: gamble
+    name: Gamble
     facet: soul
     attribute: luck
     description: "Acting on hunches, pressing luck, recognising the thing that matters."
-    status: stub
+    status: active
 
 # ── Techniques — Facet of the Body ───────────────────────────────────────────
 # Mind and Soul trees are pending PHB chapters.

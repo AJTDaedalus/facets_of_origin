@@ -42,6 +42,30 @@ Do not reproduce, closely paraphrase, or derive mechanics, text, lore, or art fr
 
 **Combat:** Has its own chapter (III.3) but uses the same 2d6 resolution system as everything else — no separate tactical subsystem.
 
+## Software-PHB Synchronization
+
+The software layer (`software/`) is the mechanical implementation of the PHB.
+`software/facets/base/facet.yaml` is the machine-readable encoding of every
+mechanic the engine needs: attributes, skills, Techniques, advancement rules,
+combat parameters, and magic domains.
+
+**When to update the software:** Any time a PHB decision settles a mechanic
+(new system, changed rule, renamed concept), update the software in the same
+development cycle. Do not let the software lag the PHB by more than one branch.
+Purely narrative changes (vignettes, sidebars, tone) do not require software changes.
+
+**Sync workflow:**
+1. PHB change settled → update `facets/base/facet.yaml` first (single source of truth for rules)
+2. If the mechanic needs engine logic → update `software/app/game/engine.py` and/or
+   the character model (`software/app/game/character.py`)
+3. If players interact with the mechanic → add or update WebSocket events in
+   `software/app/api/websocket.py`
+4. Write or update tests before committing
+5. Commit message references the PHB section: e.g., `Implement PHB III.3: Combat exchanges`
+
+**Deferred modules** (Crafting, Economy, Feats, Technology): Do not implement
+until the corresponding PHB chapter is written.
+
 ## Terminology
 
 - The facilitating player role is called the **Mirror Master (MM)** — never "GM" or "DM". The name is thematic: the MM's role is to reflect the spotlight back onto the players and keep them the stars of their own story.

@@ -10,7 +10,7 @@ from fastapi import WebSocket, WebSocketDisconnect
 from jose import JWTError
 
 from app.auth.tokens import decode_token
-from app.game.engine import RollRequest, resolve_roll, roll_result_to_dict
+from app.game.engine import RollRequest, resolve_roll, resolve_magic_roll, roll_result_to_dict
 from app.game.session import session_store
 
 logger = logging.getLogger(__name__)
@@ -177,6 +177,33 @@ async def _dispatch(
         await _handle_skill_advance(msg, session, session_id)
     elif event_type == "ping":
         await manager.send_to(websocket, {"type": "pong"})
+    # --- Combat events ---
+    elif event_type == "combat_start" and is_mm:
+        await _handle_combat_start(msg, session, session_id)
+    elif event_type == "declare_posture":
+        await _handle_declare_posture(websocket, msg, session, session_id, identity)
+    elif event_type == "reveal_postures" and is_mm:
+        await _handle_reveal_postures(session, session_id)
+    elif event_type == "strike":
+        await _handle_strike(websocket, msg, session, session_id, identity)
+    elif event_type == "react":
+        await _handle_react(websocket, msg, session, session_id, identity)
+    elif event_type == "apply_condition" and is_mm:
+        await _handle_apply_condition(msg, session, session_id)
+    elif event_type == "clear_condition" and is_mm:
+        await _handle_clear_condition(msg, session, session_id)
+    elif event_type == "end_exchange" and is_mm:
+        await _handle_end_exchange(session, session_id)
+    elif event_type == "combat_end" and is_mm:
+        await _handle_combat_end(session, session_id)
+    # --- Magic events ---
+    elif event_type == "cast":
+        await _handle_cast(websocket, msg, session, session_id, identity)
+    # --- Technique events ---
+    elif event_type == "technique_select" and is_mm:
+        await _handle_technique_select(msg, session, session_id)
+    elif event_type == "session_reset" and is_mm:
+        await _handle_session_reset(session, session_id)
     else:
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown event type: {event_type}"})
 
@@ -284,6 +311,384 @@ async def _handle_skill_advance(msg: dict, session, session_id: str) -> None:
             "marks_added": marks,
             "rank_advances": result["rank_advances"],
             "facet_level_advances": result["facet_level_advances"],
+            "major_advancement": result.get("major_advancement", False),
             "new_rank": character.skills[skill_id].rank if skill_id in character.skills else "novice",
             "new_facet_level": character.facet_level,
+            "total_facet_levels": character.total_facet_levels,
+            "career_advances": character.career_advances,
         })
+
+
+# ---------------------------------------------------------------------------
+# Combat handlers
+# ---------------------------------------------------------------------------
+
+async def _handle_combat_start(msg: dict, session, session_id: str) -> None:
+    """MM initialises combat. Sets all characters' endurance_current = endurance_max."""
+    state: dict = {}
+    for player_name, character in session.characters.items():
+        character.endurance_current = character.endurance_max(session.ruleset)
+        character.conditions = []
+        character.posture = "measured"
+        state[player_name] = {
+            "endurance_current": character.endurance_current,
+            "endurance_max": character.endurance_current,
+            "conditions": [],
+            "posture": "measured",
+        }
+    await manager.broadcast(session_id, {"type": "combat_started", "characters": state})
+
+
+async def _handle_declare_posture(
+    websocket, msg: dict, session, session_id: str, identity: str,
+) -> None:
+    """Character declares their posture for this exchange. Stored but not broadcast."""
+    player_name = identity
+    character = session.characters.get(player_name)
+    posture = msg.get("posture", "measured")
+    valid_postures = {"aggressive", "measured", "defensive", "withdrawn"}
+    if character and posture in valid_postures:
+        character.posture = posture
+        await manager.send_to(websocket, {"type": "posture_declared", "posture": posture})
+    else:
+        await manager.send_to(websocket, {"type": "error", "message": f"Invalid posture '{posture}'."})
+
+
+async def _handle_reveal_postures(session, session_id: str) -> None:
+    """MM reveals all postures simultaneously."""
+    postures = {
+        player_name: (character.posture or "measured")
+        for player_name, character in session.characters.items()
+    }
+    await manager.broadcast(session_id, {"type": "postures_revealed", "postures": postures})
+
+
+async def _handle_strike(
+    websocket, msg: dict, session, session_id: str, identity: str,
+) -> None:
+    """Character attempts a Strike. Resolves roll and broadcasts result."""
+    player_name = identity
+    character = session.characters.get(player_name)
+    if not character:
+        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
+        return
+
+    if character.endurance_current is None:
+        await manager.send_to(websocket, {"type": "error", "message": "Not in combat."})
+        return
+
+    if character.posture == "withdrawn":
+        await manager.send_to(websocket, {"type": "error", "message": "Cannot Strike from Withdrawn posture."})
+        return
+
+    press = bool(msg.get("press", False))
+    sparks_requested = int(msg.get("sparks_spent", 0))
+    difficulty = str(msg.get("difficulty", "Standard"))
+    target_name = str(msg.get("target", ""))
+
+    # Press costs 1 Endurance
+    if press:
+        if character.endurance_current is not None and character.endurance_current > 0:
+            character.endurance_current -= 1
+        else:
+            await manager.send_to(websocket, {"type": "error", "message": "No Endurance to Press."})
+            return
+
+    sparks_to_spend = min(sparks_requested, character.sparks)
+    for _ in range(sparks_to_spend):
+        character.spend_spark()
+
+    request = RollRequest(
+        attribute_id="strength",
+        attribute_rating=character.attributes.get("strength", 2),
+        skill_id="combat",
+        skill_rank_id=character.skills["combat"].rank if "combat" in character.skills else None,
+        difficulty_label=difficulty,
+        sparks_spent=sparks_to_spend,
+        press=press,
+        description=str(msg.get("description", ""))[:200],
+    )
+    result = resolve_roll(request, session.ruleset)
+    result_dict = roll_result_to_dict(result)
+    session.record_roll(player_name, result_dict)
+
+    await manager.broadcast(session_id, {
+        "type": "strike_result",
+        "attacker": player_name,
+        "target": target_name,
+        "roll": result_dict,
+        "press_used": press,
+        "endurance_remaining": character.endurance_current,
+        "sparks_remaining": character.sparks,
+    })
+
+
+async def _handle_react(
+    websocket, msg: dict, session, session_id: str, identity: str,
+) -> None:
+    """Character declares a reaction (dodge/parry/absorb/intercept)."""
+    player_name = identity
+    character = session.characters.get(player_name)
+    if not character:
+        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
+        return
+
+    if character.endurance_current is None:
+        await manager.send_to(websocket, {"type": "error", "message": "Not in combat."})
+        return
+
+    reaction = str(msg.get("reaction", "absorb"))
+    valid_reactions = {"dodge", "parry", "absorb", "intercept"}
+    if reaction not in valid_reactions:
+        await manager.send_to(websocket, {"type": "error", "message": f"Unknown reaction '{reaction}'."})
+        return
+
+    # Compute Endurance cost (adjust for posture)
+    base_costs = {"dodge": 1, "parry": 1, "absorb": 0, "intercept": 2}
+    base_cost = base_costs[reaction]
+    posture_mod = 0
+    if character.posture == "aggressive":
+        posture_mod = 1
+    elif character.posture == "defensive" or character.posture == "withdrawn":
+        posture_mod = -1
+    cost = max(0, base_cost + posture_mod)
+    if character.posture == "withdrawn":
+        cost = 0  # withdrawn: free reactions
+
+    if character.endurance_current < cost:
+        # Cannot pay — forced to Absorb
+        reaction = "absorb"
+        cost = 0
+
+    character.endurance_current = max(0, character.endurance_current - cost)
+
+    # Active reactions (dodge/parry) require a roll
+    roll_result = None
+    if reaction in ("dodge", "parry"):
+        attr_id = "dexterity" if reaction == "dodge" else "strength"
+        skill_id = None if reaction == "dodge" else "combat"
+        request = RollRequest(
+            attribute_id=attr_id,
+            attribute_rating=character.attributes.get(attr_id, 2),
+            skill_id=skill_id,
+            skill_rank_id=character.skills[skill_id].rank if skill_id and skill_id in character.skills else None,
+            difficulty_label=str(msg.get("difficulty", "Standard")),
+            description=f"{reaction} reaction",
+        )
+        roll = resolve_roll(request, session.ruleset)
+        roll_result = roll_result_to_dict(roll)
+        session.record_roll(player_name, roll_result)
+
+    await manager.broadcast(session_id, {
+        "type": "react_result",
+        "player": player_name,
+        "reaction": reaction,
+        "endurance_cost": cost,
+        "endurance_remaining": character.endurance_current,
+        "roll": roll_result,
+    })
+
+
+async def _handle_apply_condition(msg: dict, session, session_id: str) -> None:
+    """MM applies a condition to a character."""
+    player_name = msg.get("player_name", "")
+    condition = str(msg.get("condition", ""))
+    character = session.characters.get(player_name)
+    if not character:
+        return
+
+    # Stacking: second Tier 2 condition → Broken
+    tier2_conditions = {"staggered", "cornered"}
+    tier2_on_char = [c for c in character.conditions if c in tier2_conditions]
+    if condition in tier2_conditions and len(tier2_on_char) >= 1:
+        condition = "broken"
+
+    if condition and condition not in character.conditions:
+        character.conditions.append(condition)
+
+    await manager.broadcast(session_id, {
+        "type": "condition_applied",
+        "player": player_name,
+        "condition": condition,
+        "all_conditions": list(character.conditions),
+    })
+
+
+async def _handle_clear_condition(msg: dict, session, session_id: str) -> None:
+    """MM clears a condition from a character."""
+    player_name = msg.get("player_name", "")
+    condition = str(msg.get("condition", ""))
+    character = session.characters.get(player_name)
+    if character and condition in character.conditions:
+        character.conditions.remove(condition)
+    await manager.broadcast(session_id, {
+        "type": "condition_cleared",
+        "player": player_name,
+        "condition": condition,
+        "all_conditions": list(character.conditions) if character else [],
+    })
+
+
+async def _handle_end_exchange(session, session_id: str) -> None:
+    """MM signals end of exchange: clear Tier 1 conditions, apply Withdrawn recovery."""
+    tier1_conditions = {"winded", "off_balance", "shaken"}
+    recovery_amount = 2  # from combat YAML: recovery_withdrawn: 2
+
+    updates: dict = {}
+    for player_name, character in session.characters.items():
+        if character.endurance_current is None:
+            continue
+
+        # Clear Tier 1 conditions
+        cleared = [c for c in character.conditions if c in tier1_conditions]
+        character.conditions = [c for c in character.conditions if c not in tier1_conditions]
+
+        # Withdrawn endurance recovery (only if not striking, enforced by declare_posture)
+        if character.posture == "withdrawn":
+            max_end = character.endurance_max(session.ruleset)
+            character.endurance_current = min(character.endurance_current + recovery_amount, max_end)
+
+        updates[player_name] = {
+            "conditions": list(character.conditions),
+            "cleared_conditions": cleared,
+            "endurance_current": character.endurance_current,
+        }
+
+    await manager.broadcast(session_id, {"type": "exchange_ended", "characters": updates})
+
+
+async def _handle_combat_end(session, session_id: str) -> None:
+    """MM ends combat: clear all ephemeral combat state."""
+    for character in session.characters.values():
+        character.endurance_current = None
+        character.conditions = []
+        character.posture = None
+    await manager.broadcast(session_id, {"type": "combat_ended"})
+
+
+# ---------------------------------------------------------------------------
+# Magic handler
+# ---------------------------------------------------------------------------
+
+async def _handle_cast(
+    websocket, msg: dict, session, session_id: str, identity: str,
+) -> None:
+    """Player declares a magical action. Server resolves difficulty and rolls."""
+    player_name = identity
+    character = session.characters.get(player_name)
+    if not character:
+        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
+        return
+
+    if not character.magic_domain:
+        await manager.send_to(websocket, {"type": "error", "message": "Character has no magic domain."})
+        return
+
+    domain_id = str(msg.get("domain_id", character.magic_domain))
+    scope = str(msg.get("scope", "minor"))
+    intent = str(msg.get("intent", ""))[:500]
+    spark_use = msg.get("spark_use")
+
+    if scope not in ("minor", "significant", "major"):
+        await manager.send_to(websocket, {"type": "error", "message": f"Invalid scope '{scope}'."})
+        return
+
+    # Spend Spark if needed
+    if spark_use in ("improve_roll", "ease_focused_major", "push_scope"):
+        if not character.spend_spark():
+            await manager.send_to(websocket, {"type": "error", "message": "No Sparks remaining."})
+            return
+
+    try:
+        result = resolve_magic_roll(
+            character=character,
+            domain_id=domain_id,
+            scope=scope,
+            intent=intent,
+            ruleset=session.ruleset,
+            spark_use=spark_use,
+        )
+    except ValueError as e:
+        await manager.send_to(websocket, {"type": "error", "message": str(e)})
+        return
+
+    result_dict = roll_result_to_dict(result)
+    session.record_roll(player_name, result_dict)
+
+    await manager.broadcast(session_id, {
+        "type": "cast_result",
+        "player": player_name,
+        "domain_id": domain_id,
+        "scope": scope,
+        "intent": intent,
+        "technique_active": character.magic_technique_active,
+        "roll": result_dict,
+        "sparks_remaining": character.sparks,
+    })
+
+
+# ---------------------------------------------------------------------------
+# Technique handler
+# ---------------------------------------------------------------------------
+
+async def _handle_technique_select(msg: dict, session, session_id: str) -> None:
+    """MM selects a Technique for a character at a Facet level advancement."""
+    player_name = msg.get("player_name", "")
+    technique_id = str(msg.get("technique_id", ""))
+    choice = msg.get("choice")  # optional, for Techniques with choices
+    character = session.characters.get(player_name)
+    if not character or not technique_id:
+        return
+
+    # Validate: technique must not already be selected
+    if technique_id in character.techniques:
+        await manager.broadcast(session_id, {
+            "type": "error",
+            "message": f"Technique '{technique_id}' already selected.",
+        })
+        return
+
+    # Validate prerequisites in the ruleset technique trees
+    prereq_errors: list[str] = []
+    for facet_id, tree in session.ruleset.techniques.items():
+        for branch in tree.branches:
+            for tier_def in branch.tiers:
+                for tech in tier_def.techniques:
+                    if tech.id == technique_id:
+                        for prereq in tech.prerequisites:
+                            if prereq not in character.techniques:
+                                prereq_errors.append(prereq)
+
+    if prereq_errors:
+        await manager.broadcast(session_id, {
+            "type": "error",
+            "message": f"Technique '{technique_id}' requires: {', '.join(prereq_errors)}.",
+        })
+        return
+
+    character.techniques.append(technique_id)
+    if choice:
+        character.technique_choices[technique_id] = str(choice)
+
+    # Special: magic-granting Techniques activate magic_technique_active
+    magic_granting = {"arcane_study", "spiritual_domain"}
+    if technique_id in magic_granting:
+        character.magic_technique_active = True
+        if choice:
+            character.magic_domain = choice
+
+    await manager.broadcast(session_id, {
+        "type": "technique_selected",
+        "player": player_name,
+        "technique_id": technique_id,
+        "choice": choice,
+        "all_techniques": list(character.techniques),
+    })
+
+
+async def _handle_session_reset(session, session_id: str) -> None:
+    """MM signals start of new session: reset once-per-session technique tracking."""
+    for character in session.characters.values():
+        character.techniques_used_this_session = []
+        character.sparks = session.ruleset.spark.base_sparks_per_session if session.ruleset.spark else 3
+    await manager.broadcast(session_id, {"type": "session_reset"})

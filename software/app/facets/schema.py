@@ -1,7 +1,7 @@
 """Pydantic schema for Facet YAML files — the ruleset data format."""
 from __future__ import annotations
 
-from typing import Any, Literal
+from typing import Any, Literal, Optional
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
@@ -168,6 +168,82 @@ class AdvancementDef(BaseModel):
     session_skill_points: int = 4
     marks_per_rank: int = 3
     facet_level_threshold: int = 6
+    major_advancement_threshold: int = 4   # total Facet levels before a Major Advancement
+
+
+# ---------------------------------------------------------------------------
+# Backgrounds (PHB II.5)
+# ---------------------------------------------------------------------------
+
+class BackgroundDefinition(BaseModel):
+    id: str
+    name: str
+    facet: str                          # primary facet this background belongs to
+    starting_skill: str                 # begins at Practiced
+    secondary_skill: Optional[str] = None  # begins at Novice with 1 mark; null for magic backgrounds
+    specialty: str
+    domain_origin: Optional[str] = None  # "mind" | "soul" | null
+
+
+# ---------------------------------------------------------------------------
+# Combat (PHB III.3)
+# ---------------------------------------------------------------------------
+
+class CombatConditionDef(BaseModel):
+    id: str
+    clears: str                     # "end_of_exchange" | "treated" | "end_of_scene"
+    description: str
+
+
+class CombatConditionsTierDef(BaseModel):
+    tier1: list[CombatConditionDef] = Field(default_factory=list)
+    tier2: list[CombatConditionDef] = Field(default_factory=list)
+    tier3: list[CombatConditionDef] = Field(default_factory=list)
+
+
+class CombatDef(BaseModel):
+    endurance: dict[str, Any] = Field(default_factory=dict)
+    postures: dict[str, Any] = Field(default_factory=dict)
+    reactions: dict[str, Any] = Field(default_factory=dict)
+    press: dict[str, Any] = Field(default_factory=dict)
+    conditions: CombatConditionsTierDef = Field(default_factory=CombatConditionsTierDef)
+    armor: dict[str, Any] = Field(default_factory=dict)
+    strike_outcomes: dict[str, Any] = Field(default_factory=dict)
+    endurance_floor_rule: str = ""
+    mook_rule: str = ""
+    named_npc_rule: str = ""
+    boss_rule: str = ""
+
+
+# ---------------------------------------------------------------------------
+# Magic (PHB II.3)
+# ---------------------------------------------------------------------------
+
+class MagicDomainDef(BaseModel):
+    id: str
+    name: str
+    type: Literal["focused", "standard", "broad"]
+    tradition: str                  # "intuitive" | "scholarly"
+    description: str
+    requires_tier3: bool = False    # Prismatic domains require Tier 3 Technique
+
+
+class MagicDef(BaseModel):
+    traditions: dict[str, Any] = Field(default_factory=dict)
+    domain_types: dict[str, Any] = Field(default_factory=dict)
+    pre_technique_penalty: str = "1_step_harder"
+    soul_domains: list[MagicDomainDef] = Field(default_factory=list)
+    mind_domains: list[MagicDomainDef] = Field(default_factory=list)
+
+    @property
+    def all_domains(self) -> list[MagicDomainDef]:
+        return self.soul_domains + self.mind_domains
+
+    def get_domain(self, domain_id: str) -> Optional[MagicDomainDef]:
+        for d in self.all_domains:
+            if d.id == domain_id:
+                return d
+        return None
 
 
 # ---------------------------------------------------------------------------
@@ -186,9 +262,12 @@ class FacetFile(BaseModel):
     facets: list[CharacterFacetDef] = Field(default_factory=list)
     skills: list[SkillDef] = Field(default_factory=list)
     techniques: dict[str, FacetTreeDef] = Field(default_factory=dict)  # keyed by character facet ID
+    backgrounds: list[BackgroundDefinition] = Field(default_factory=list)
     roll_resolution: RollResolutionDef | None = None
     spark: SparkDef | None = None
     advancement: AdvancementDef | None = None
+    combat: CombatDef | None = None
+    magic: MagicDef | None = None
 
     @field_validator("id")
     @classmethod

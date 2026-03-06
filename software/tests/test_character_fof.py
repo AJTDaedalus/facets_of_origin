@@ -48,8 +48,8 @@ def sample_character(ruleset, valid_attributes):
         ruleset=ruleset,
     )
     assert not errors
-    # Give Zahna some non-default skill state
-    char.advance_skill("investigation", 5, ruleset)  # practiced + 2 marks
+    # Give Zahna some non-default skill state (PHB skill names: investigate, not investigation)
+    char.advance_skill("investigate", 5, ruleset)  # practiced + 2 marks
     char.sparks = 2
     char.facet_level = 1
     char.rank_advances_this_facet_level = 3
@@ -91,14 +91,14 @@ class TestToFof:
         """Only non-default skills (rank != novice or marks != 0) appear in output."""
         result = sample_character.to_fof(MODULE_REFS, SESSION_ID)
         skills = result["character"]["skills"]
-        # investigation was advanced — must be present
-        assert "investigation" in skills
+        # investigate was advanced — must be present
+        assert "investigate" in skills
         # athletics was never touched — must not appear
         assert "athletics" not in skills
 
-    def test_to_fof_investigation_state(self, sample_character):
+    def test_to_fof_investigate_state(self, sample_character):
         result = sample_character.to_fof(MODULE_REFS, SESSION_ID)
-        inv = result["character"]["skills"]["investigation"]
+        inv = result["character"]["skills"]["investigate"]
         assert inv["rank"] == "practiced"
         assert inv["marks"] == 2
 
@@ -139,7 +139,7 @@ class TestFromFof:
                 "player_name": "Zahna",
                 "primary_facet": "mind",
                 "attributes": valid_attributes,
-                "skills": {"investigation": {"rank": "practiced", "marks": 2}},
+                "skills": {"investigate": {"rank": "practiced", "marks": 2}},
                 "sparks": 2,
                 "session_skill_points_remaining": 4,
                 "facet_level": 1,
@@ -153,9 +153,9 @@ class TestFromFof:
         assert char.primary_facet == "mind"
         assert char.sparks == 2
         assert char.facet_level == 1
-        assert "investigation" in char.skills
-        assert char.skills["investigation"].rank == "practiced"
-        assert char.skills["investigation"].marks == 2
+        assert "investigate" in char.skills
+        assert char.skills["investigate"].rank == "practiced"
+        assert char.skills["investigate"].marks == 2
         assert "forcing_hand" in char.techniques
 
     def test_from_fof_character_example_file(self, ruleset):
@@ -171,12 +171,12 @@ class TestFromFof:
     def test_from_fof_character_example_skills(self, ruleset):
         raw = yaml.safe_load(CHARACTER_FOF.read_text(encoding="utf-8"))
         char = Character.from_fof(raw)
-        # investigation: practiced, 2 marks
-        assert char.skills["investigation"].rank == "practiced"
-        assert char.skills["investigation"].marks == 2
-        # perception: novice, 1 mark
-        assert char.skills["perception"].rank == "novice"
-        assert char.skills["perception"].marks == 1
+        # investigate: practiced, 2 marks (PHB II.4b skill name)
+        assert char.skills["investigate"].rank == "practiced"
+        assert char.skills["investigate"].marks == 2
+        # survival: novice, 1 mark (PHB II.4b skill name)
+        assert char.skills["survival"].rank == "novice"
+        assert char.skills["survival"].marks == 1
 
 
 class TestRoundTrip:
@@ -196,9 +196,9 @@ class TestRoundTrip:
         fof_dict = sample_character.to_fof(MODULE_REFS, SESSION_ID)
         restored = Character.from_fof(fof_dict)
 
-        assert "investigation" in restored.skills
-        assert restored.skills["investigation"].rank == sample_character.skills["investigation"].rank
-        assert restored.skills["investigation"].marks == sample_character.skills["investigation"].marks
+        assert "investigate" in restored.skills
+        assert restored.skills["investigate"].rank == sample_character.skills["investigate"].rank
+        assert restored.skills["investigate"].marks == sample_character.skills["investigate"].marks
 
     def test_to_fof_from_fof_omits_default_skills(self, sample_character):
         """Skills at default state (novice/0) are not preserved — that is correct."""
