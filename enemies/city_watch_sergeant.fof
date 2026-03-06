@@ -1,0 +1,36 @@
+fof_version: '0.1'
+type: enemy
+id: city_watch_sergeant
+name: City Watch Sergeant
+
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+
+enemy:
+  tier: named
+  endurance: 6
+  attack_modifier: 2    # Strength +1, Combat Practiced +1
+  defense_modifier: 2   # Parry: same roll
+  armor: light
+  techniques: []
+  special: null
+  tr: 8                 # offense(+2→4) + durability(Endurance 6→3) + armor(light→1) + techniques(0) = 8
+
+  description: >
+    A mid-rank officer of the city watch. Experienced in crowd control,
+    street violence, and the particular skill of making someone feel
+    arrested before they've decided whether to resist. Fights
+    methodically — not inspired, but very hard to rattle. Will call
+    for backup if the fight runs more than two exchanges.
+
+  notes: >
+    TR breakdown: offense(+2 → value 4) + durability(Endurance 6 → value 3)
+    + armor(light → 1) + techniques(0) = 8. Meets Named NPC minimum of 8.
+
+    Posture tendency: Measured first exchange, Defensive if Staggered.
+    Will not go Aggressive unless the party is clearly losing.
+
+created_at: '2026-03-05T00:00:00+00:00'
+last_modified: '2026-03-05T00:00:00+00:00'

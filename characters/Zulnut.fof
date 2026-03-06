@@ -1,0 +1,95 @@
+fof_version: '0.1'
+type: character
+id: zulnut
+name: Zulnut
+version: 1.0.0
+authors:
+- Zulnut
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+
+character:
+  name: Zulnut
+  player_name: Zulnut
+  primary_facet: body
+
+  attributes:
+    strength: 2
+    dexterity: 3
+    constitution: 1
+    intelligence: 2
+    wisdom: 2
+    knowledge: 2
+    spirit: 1
+    luck: 3
+    charisma: 2
+
+  # Major Attribute modifiers (derived — for reference):
+  #   Body (2+3+1=6): +0
+  #   Mind (2+2+2=6): +0
+  #   Soul (1+3+2=6): +0
+  # Total points: 2+3+1+2+2+2+1+3+2 = 18 ✓
+
+  skills:
+    finesse:
+      rank: practiced
+      marks: 0
+    perform:
+      rank: novice
+      marks: 1  # Background Mark from Street Performer
+
+  magic: null
+
+  background:
+    name: Street Performer
+    type: custom  # custom variant: Finesse replaces Perform as starting skill
+    title: Street Performer
+    description: >
+      You worked crowds — acrobatics, sleight of hand, close-up illusions using
+      nothing but quick hands and timing, and the fine art of reading a crowd to
+      know exactly when to make something disappear. Audiences don't forgive sloppy
+      technique, and neither does the city watch.
+    starting_skill_bonus:
+      skill: finesse
+      rank: practiced
+    secondary_skill:
+      skill: perform
+      rank: novice
+      marks: 1
+    specialty: >
+      Can assess a crowd's mood, attention, and the best angle of approach within
+      a few moments of observation — and knows when a specific person in that crowd
+      has just stopped paying attention to their belongings.
+
+  sparks: 3
+
+  career_advances: 1  # progression metric — total skill rank advances taken (Novice→Practiced = 1, etc.)
+                      # Background starting skill (Finesse Practiced) = 1 advance
+                      # Background Mark on Perform does not count until rank advances
+
+  facet_level: 0
+  rank_advances_this_facet_level: 0
+  techniques: []
+
+  notes: >
+    Dexterity 3 (+1) and Luck 3 (+1) are the defining axes — precise and
+    fortunate, exceptional in exact moments, unremarkable everywhere else.
+    Constitution 1 gives Endurance pool of 3 (base 4 − 1). Zulnut is extremely
+    fragile in a sustained fight. This is intentional: the character's answer
+    to "what happens when you take a hit" is "don't."
+
+    Spirit 1 is the quietest weak attribute — not spiritually void, just
+    unconcerned with forces beyond the physical. The luck is not spiritual;
+    it is structural.
+
+    Finesse roll: 2d6 + Dexterity (+1) + Finesse Practiced (+1) = 2d6+2.
+    Dodge roll: 2d6 + Dexterity (+1) = 2d6+1.
+    Endurance pool: 3.
+
+    All three Major modifiers are +0 — genuinely average in the broad sense.
+    The character lives in the specifics.
+
+created_at: '2026-03-05T00:00:00+00:00'
+last_modified: '2026-03-05T00:00:00+00:00'

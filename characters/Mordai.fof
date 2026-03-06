@@ -1,0 +1,85 @@
+fof_version: '0.1'
+type: character
+id: mordai
+name: Mordai
+version: 1.0.0
+authors:
+- Mordai
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+
+character:
+  name: Mordai
+  player_name: Mordai
+  primary_facet: body
+
+  attributes:
+    strength: 3
+    dexterity: 2
+    constitution: 3
+    intelligence: 1
+    wisdom: 1
+    knowledge: 2
+    spirit: 2
+    luck: 2
+    charisma: 2
+
+  # Major Attribute modifiers (derived — for reference):
+  #   Body (3+2+3=8): +1
+  #   Mind (1+1+2=4): -1
+  #   Soul (2+2+2=6): +0
+
+  skills:
+    combat:
+      rank: practiced
+      marks: 0
+    endurance:
+      rank: novice
+      marks: 1  # Background Mark from City Watch Veteran
+
+  magic: null
+
+  background:
+    name: City Watch Veteran
+    type: pre-built
+    title: City Watch Veteran
+    description: >
+      Years of service in a city watch — street patrol, breaking up fights,
+      pursuing criminals through crowded markets, and learning that the direct
+      approach usually works and sometimes doesn't. Combat technique developed
+      from necessity rather than formal training.
+    starting_skill_bonus:
+      skill: combat
+      rank: practiced
+    secondary_skill:
+      skill: endurance
+      rank: novice
+      marks: 1
+    specialty: >
+      Knows the layout, regular occupants, and unofficial rules of Thornwall's
+      market district from years of patrol.
+
+  sparks: 3
+
+  career_advances: 1  # progression metric — total skill rank advances taken (Novice→Practiced = 1, etc.)
+                      # Background starting skill (Combat Practiced) = 1 advance
+                      # Background Mark on Endurance does not count until rank advances
+
+  facet_level: 0
+  rank_advances_this_facet_level: 0
+  techniques: []
+
+  notes: >
+    Strength 3 and Constitution 3 give Body +1 and an Endurance pool of 6
+    (base 4 + Constitution +1 + Combat Practiced... wait — Endurance pool uses
+    the Endurance *skill*, not Combat. Mordai has Endurance at Novice (+0), so
+    pool is 4 + 1 (Constitution Strong) + 0 = 5. Intelligence 1 and Wisdom 1
+    give Mind -1. Charisma 2 is average — present but not his strong suit.
+
+    Combat roll: 2d6 + Strength (+1) + Combat Practiced (+1) = 2d6+2.
+    Endurance pool: 5.
+
+created_at: '2026-03-04T00:00:00+00:00'
+last_modified: '2026-03-04T00:00:00+00:00'

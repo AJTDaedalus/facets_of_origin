@@ -1,0 +1,45 @@
+fof_version: '0.1'
+type: enemy
+id: veteran_soldier
+name: Veteran Soldier
+
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+
+enemy:
+  tier: named
+  endurance: 7
+  attack_modifier: 3    # Strength +2, Combat Expert +1
+  defense_modifier: 3   # Parry: same roll
+  armor: light
+  techniques: []
+  special: null
+  tr: 10                # offense(+3→5) + durability(Endurance 7→4) + armor(light→1) + techniques(0) = 10
+
+  description: >
+    A hardened fighter with years of real combat experience. Not a
+    tactician — a survivor. Knows how to absorb punishment, how to
+    read an opponent's weight shift, and exactly how long to wait
+    before committing. Fights economically: no wasted motion, no
+    bravado. Will push Aggressive only when the opponent is already
+    compromised. Difficult to rattle, difficult to put down.
+
+  tactics: >
+    Posture: Measured by default. Goes Aggressive if a party member
+    is Cornered or Staggered. Goes Defensive if Staggered themselves.
+    Reaction preference: Parry over Dodge (higher modifier). Will
+    Absorb Tier 1 attacks if Endurance is low and a Tier 2 threat
+    is incoming the same exchange. Targets the highest-Endurance
+    party member first to neutralize the biggest threat; shifts to
+    a Cornered/Staggered party member to press the advantage.
+
+  notes: >
+    TR breakdown: offense(+3 → value 5) + durability(Endurance 7 → value 4)
+    + armor(light → 1) + techniques(0) = 10.
+    Solo encounter vs PS 3 party: effective TR 10 × 0.75 = 7.5.
+    Expected difficulty: between Standard (~75% win) and Hard (~50% win).
+
+created_at: '2026-03-05T00:00:00+00:00'
+last_modified: '2026-03-05T00:00:00+00:00'
