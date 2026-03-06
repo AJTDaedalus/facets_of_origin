@@ -17,24 +17,31 @@ character:
 
   attributes:
     strength: 1
-    dexterity: 2
+    dexterity: 3
     constitution: 1
     intelligence: 3
     wisdom: 1
     knowledge: 3
     spirit: 2
-    luck: 2
+    luck: 3
     charisma: 1
 
   # Major Attribute modifiers (derived — for reference):
-  #   Body (1+2+1=4): -1
+  #   Body (1+3+1=5): +0
   #   Mind (3+1+3=7): +0
-  #   Soul (2+2+1=5): +0
+  #   Soul (2+3+1=6): +0
+  # Total points: 1+3+1+3+1+3+2+3+1 = 18 ✓
+  # Four Weak (1) attributes balanced by four Strong (3) attributes.
+  # Dexterity 3: inscription requires precise fine motor control.
+  # Luck 3: scholars who stumble through danger survive on cleverness and fortune.
 
   skills:
     lore:
       rank: practiced
       marks: 0
+    investigate:
+      rank: novice
+      marks: 1  # Background Mark from Guild Apprentice
 
   magic:
     domain: inscription
@@ -59,11 +66,19 @@ character:
     starting_skill_bonus:
       skill: lore
       rank: practiced
+    secondary_skill:
+      skill: investigate
+      rank: novice
+      marks: 1
     specialty: >
       Deep familiarity with the Artificers' Guild records, technical vocabulary,
       and personnel — and with the circumstances of the Guild's dissolution.
 
   sparks: 3
+
+  career_advances: 1  # progression metric — total skill rank advances taken (Novice→Practiced = 1, etc.)
+                      # Background starting skill (Lore Practiced) = 1 advance
+                      # Background Mark on Investigate does not count until rank advances
 
   facet_level: 0
   rank_advances_this_facet_level: 0

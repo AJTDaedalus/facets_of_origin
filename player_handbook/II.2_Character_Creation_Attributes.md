@@ -99,6 +99,8 @@ You have **18 points** to distribute across the nine Minor Attributes. Every Min
 
 The default is 2 in everything — competent across the board, exceptional at nothing. Most characters will push two or three Minor Attributes to 3 (Strong), accepting 1 (Weak) somewhere else to pay for it. Where you choose to be strong, and where you accept weakness, is one of the first things that makes your character yours.
 
+> **The arithmetic:** Every 3 you take costs one extra point; every 1 you take saves one point. These must balance. Two attributes at 3 and two attributes at 1 is net zero — still 18. Four attributes at 3 with two attributes at 1 and three at 2 is also net zero: four extra points spent, two saved, three at baseline. If your total doesn't reach 18, you have unspent points — put them somewhere. If it exceeds 18, something is at 3 that shouldn't be.
+
 ### Deriving Your Major Attribute Modifiers
 
 Once your Minor Attributes are set, add up the three Minor Attribute values under each Major. Consult the table below:

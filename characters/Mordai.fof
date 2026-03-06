@@ -35,6 +35,9 @@ character:
     combat:
       rank: practiced
       marks: 0
+    endurance:
+      rank: novice
+      marks: 1  # Background Mark from City Watch Veteran
 
   magic: null
 
@@ -50,11 +53,19 @@ character:
     starting_skill_bonus:
       skill: combat
       rank: practiced
+    secondary_skill:
+      skill: endurance
+      rank: novice
+      marks: 1
     specialty: >
       Knows the layout, regular occupants, and unofficial rules of Thornwall's
       market district from years of patrol.
 
   sparks: 3
+
+  career_advances: 1  # progression metric — total skill rank advances taken (Novice→Practiced = 1, etc.)
+                      # Background starting skill (Combat Practiced) = 1 advance
+                      # Background Mark on Endurance does not count until rank advances
 
   facet_level: 0
   rank_advances_this_facet_level: 0

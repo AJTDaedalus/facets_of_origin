@@ -42,6 +42,8 @@ A character with no particular investment in Constitution or the Endurance skill
 
 When your Endurance hits 0, you cannot spend it on reactions. You may still declare Postures and attempt to Dodge or Parry, but with nothing in the tank you cannot pay the cost — **Absorb** is your only reaction option. You remain in the fight until Conditions remove you.
 
+**At 0 Endurance, Absorbed conditions are persistent.** Any condition you Absorb at 0 Endurance is treated as Tier 2, regardless of its original tier — it does not clear at end of exchange. A second persistent Tier 2 condition escalates to Broken via the normal stacking rule. Running on empty is genuinely dangerous: armor and resilience get you far, but a character with nothing left in the tank can be broken by accumulation, even if no single hit could have done it alone.
+
 ### Recovering Endurance
 
 **Withdrawn posture** restores 2 Endurance at the end of the exchange. This requires giving up all offensive action for that beat — you are catching your breath, finding your footing, creating space between yourself and the pressure.
@@ -105,7 +107,7 @@ The foundational offensive action. You bring force to bear on a target — weapo
 
 **Roll:** `2d6 + Strength modifier + Combat skill rank modifier`
 
-**Difficulty** is Standard by default. The MM adjusts based on the situation: an opponent in Defensive Posture, or with strong Constitution, may push it to Hard. A Staggered, Cornered, or Spent opponent may make it Easy. When in doubt, Standard.
+**Difficulty** is Standard by default. The MM adjusts based on the situation: an opponent in Defensive Posture, or with strong Constitution, may push it to Hard. A Staggered or Cornered opponent may make it Easy. When in doubt, Standard.
 
 | Result | Outcome |
 |---|---|

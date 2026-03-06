@@ -220,6 +220,8 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 *Starting Skill:* Insight (Practiced)
 
+*Secondary Skill:* Lore (Novice, 1 mark) — working in formal and diplomatic settings requires knowing history, protocol, and the context that makes a phrase mean one thing in one culture and something quite different in another.
+
 *Specialty:* Fluent in two languages beyond your native tongue; can make oneself understood in a third through careful effort.
 
 ---
@@ -231,6 +233,8 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 *Description:* You spent years in an archive, a library, or a private collection — finding things, organizing things, and understanding how information gets buried and how it gets found again. You developed a researcher's instinct: the knowledge that the answer is probably in there somewhere, and the patience to find it.
 
 *Starting Skill:* Investigate (Practiced)
+
+*Secondary Skill:* Lore (Novice, 1 mark) — you cannot spend years surrounded by records without absorbing their contents as well as their organization.
 
 *Specialty:* Can navigate any organized record system — legal archives, guild registers, census records, church rolls — to find what is actually there, including things that have been quietly misfiled.
 
@@ -244,9 +248,11 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 *Starting Skill:* Lore (Practiced)
 
-*Specialty:* Has read widely enough to have encountered at least a surface familiarity with almost any scholarly topic — enough to know what questions to ask and where to look.
+*Secondary Skill (non-magical):* Investigate (Novice, 1 mark) — self-directed study is, at its core, research: following a thread until it either goes somewhere or runs out.
 
-*Domain origin (if magical):* Choose one domain from the Domains of the Mind list. Your domain developed through self-directed study: experimentation, recovered texts, and the occasional alarming accident. You understood it before you had language for what it was.
+*Domain origin (if magical, replaces secondary skill):* Choose one domain from the Domains of the Mind list. Your domain developed through self-directed study: experimentation, recovered texts, and the occasional alarming accident. You understood it before you had language for what it was.
+
+*Specialty:* Has read widely enough to have encountered at least a surface familiarity with almost any scholarly topic — enough to know what questions to ask and where to look.
 
 ---
 
@@ -261,6 +267,8 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 *Description:* You worked crowds — acrobatics, music, sleight of hand, storytelling, whatever the audience would pay for. You learned to read a crowd before they knew you were reading them, and you learned that the best performance is the one where nobody notices you working.
 
 *Starting Skill:* Perform (Practiced)
+
+*Secondary Skill:* Persuade (Novice, 1 mark) — getting strangers to stop, stay, and pay requires a working knowledge of what people want to hear.
 
 *Specialty:* Can assess a crowd's mood, attention, and the best angle of approach within a few moments of observation.
 
@@ -288,6 +296,8 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 *Starting Skill:* Persuade (Practiced)
 
+*Secondary Skill:* Attune (Novice, 1 mark) — years of reading strangers across a table develops an instinct for what people are actually after beneath what they're saying.
+
 *Specialty:* Can accurately assess the fair market value of common goods and identify when a price represents opportunity, desperation, or a trap.
 
 ---
@@ -300,6 +310,8 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 *Starting Skill:* Deceive (Practiced)
 
+*Secondary Skill:* Attune (Novice, 1 mark) — when getting caught means violence or imprisonment, you learn to read people's moods and intentions with some urgency.
+
 *Specialty:* Knows how a particular type of criminal operation works from the inside — smuggling, grifting, burglary, or another specific area. Can recognize one when they see it.
 
 ---
@@ -311,6 +323,8 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 *Description:* You've been places and done things, and the common thread is that you survived situations that statistically shouldn't have worked out. You don't entirely know why. You've stopped asking. You've learned to trust the feeling that says *go left*, *not this tavern*, *wait five more minutes* — and you've learned that the feeling is usually right.
 
 *Starting Skill:* Gamble (Practiced)
+
+*Secondary Skill:* Perform (Novice, 1 mark) — wanderers who want to eat pick up whatever earns a coin: a song, a trick, a story told well enough that the innkeeper feels charitable.
 
 *Specialty:* Has an uncanny sense for when a situation is about to turn — when the calm is the wrong kind of calm, when someone's goodwill has quietly become something else, when to be somewhere else before the thing that is about to happen, happens.
 

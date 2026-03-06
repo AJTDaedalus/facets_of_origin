@@ -72,7 +72,7 @@ Skill modifiers stack with your Minor Attribute modifier. The maximum combined m
 
 All characters begin with every skill at Novice. There are no starting skill bonuses from character creation — your skills emerge from play, not from a menu of choices.
 
-Some **Backgrounds** (Chapter II.5) grant a single skill at Practiced rank at character creation, reflecting prior training or life experience. This is the only exception.
+Some **Backgrounds** (Chapter II.5) grant a single skill at Practiced rank at character creation, reflecting prior training or life experience. Most Backgrounds also grant a **secondary skill** — a second skill from your Primary Facet starting at Novice with 1 mark already recorded (the Background Mark). These are the only exceptions to the "all skills start at Novice with no marks" rule.
 
 ---
 

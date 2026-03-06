@@ -255,6 +255,7 @@ Session end:
 Every 3 marks in a skill:
   └─ Skill rank advances (Novice → Practiced → Expert → Master)
   └─ Skill modifier increases (+1 / +2 / +3)
+  └─ career_advances increases by 1
 
 Every 6 skill rank advances in Primary Facet:
   └─ Facet level increases
@@ -267,3 +268,23 @@ Every 4 Facet levels total (Primary + any Facet):
   └─ Significant reflection scene required
   └─ Requires cross-training beyond Primary Facet to reach
 ```
+
+---
+
+## Career Advances
+
+**Career advances** is a single integer that counts every skill rank advance a character has ever taken — across all skills and all Facets — since character creation.
+
+It is the progression metric for Facets of Origin: a rough, honest gauge of how much a character has grown. Two characters with the same career advances are broadly comparable in power, regardless of where those advances landed.
+
+| Career Advances | Rough Equivalent |
+|---|---|
+| 0–2 | Freshly started — Background skills plus early play |
+| 3–6 | Developing — first Facet level within reach |
+| 7–12 | Capable — Facet level 1 achieved, first Technique unlocked |
+| 13–20 | Seasoned — Facet level 2, second Technique, cross-training possible |
+| 21+ | Veteran — deep specialization or broad cross-Facet development |
+
+Career advances are stored in the character file as `career_advances` and updated whenever a skill rank advances. The Background starting skill counts as 1 advance at character creation. Background Marks (the secondary skill's head start) do not count until the skill actually advances to Practiced.
+
+> *All three example characters — Zahna, Mordai, and Zulnut — begin at career_advances: 1. They are at the same tier and broadly comparable in capability, despite their very different shapes.*
