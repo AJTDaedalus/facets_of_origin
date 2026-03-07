@@ -1370,3 +1370,156 @@ class TestPersistenceAfterMutation:
         # endurance_current should be present (combat state was persisted)
         assert "endurance_current" in char_block
         assert isinstance(char_block["endurance_current"], int)
+
+
+# ---------------------------------------------------------------------------
+# Enemy tracker WebSocket events
+# ---------------------------------------------------------------------------
+
+class TestEnemyTrackerWS:
+    """Tests for spawn_enemy, enemy_update, and remove_enemy WebSocket events."""
+
+    def _create_session_with_enemy(self, client, mm_headers):
+        """Create a session and add an enemy to its library."""
+        resp = client.post("/api/sessions/", json={"name": "Enemy Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        client.post("/api/enemies/", json={
+            "session_id": session_id,
+            "id": "thug",
+            "name": "Harbor Thug",
+            "tier": "mook",
+            "attack_modifier": 0,
+        }, headers=mm_headers)
+        return session_id
+
+    def test_spawn_enemy_from_library(self, client, mm_headers, mm_token):
+        session_id = self._create_session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({
+                "type": "spawn_enemy",
+                "enemy_id": "thug",
+                "instance_name": "Thug 1",
+            })
+            msg = ws.receive_json()
+            assert msg["type"] == "enemy_spawned"
+            assert msg["tracker_key"] == "Thug 1"
+            assert msg["enemy"]["name"] == "Thug 1"
+            assert msg["tr"] >= 1
+
+    def test_spawn_enemy_inline(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Inline Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({
+                "type": "spawn_enemy",
+                "enemy_id": "bandit",
+                "enemy_data": {
+                    "name": "Bandit",
+                    "tier": "mook",
+                    "attack_modifier": 1,
+                },
+            })
+            msg = ws.receive_json()
+            assert msg["type"] == "enemy_spawned"
+            assert msg["enemy"]["name"] == "Bandit"
+
+    def test_spawn_enemy_not_found_no_data(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Error Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({
+                "type": "spawn_enemy",
+                "enemy_id": "ghost",
+            })
+            msg = ws.receive_json()
+            assert msg["type"] == "error"
+
+    def test_enemy_update_endurance(self, client, mm_headers, mm_token):
+        session_id = self._create_session_with_enemy(client, mm_headers)
+        # Also add a named enemy
+        client.post("/api/enemies/", json={
+            "session_id": session_id,
+            "id": "sergeant",
+            "name": "Sergeant",
+            "tier": "named",
+            "endurance": 6,
+            "attack_modifier": 2,
+            "armor": "light",
+        }, headers=mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            # Spawn
+            ws.send_json({
+                "type": "spawn_enemy",
+                "enemy_id": "sergeant",
+                "instance_name": "Sgt. Davies",
+            })
+            ws.receive_json()  # enemy_spawned
+            # Update endurance
+            ws.send_json({
+                "type": "enemy_update",
+                "tracker_key": "Sgt. Davies",
+                "endurance_current": 4,
+            })
+            msg = ws.receive_json()
+            assert msg["type"] == "enemy_updated"
+            assert msg["endurance_current"] == 4
+
+    def test_enemy_update_conditions(self, client, mm_headers, mm_token):
+        session_id = self._create_session_with_enemy(client, mm_headers)
+        client.post("/api/enemies/", json={
+            "session_id": session_id,
+            "id": "named1", "name": "Named", "tier": "named", "endurance": 5,
+        }, headers=mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "named1", "instance_name": "Named 1"})
+            ws.receive_json()  # spawned
+            # Add condition
+            ws.send_json({"type": "enemy_update", "tracker_key": "Named 1", "add_condition": "staggered"})
+            msg = ws.receive_json()
+            assert "staggered" in msg["conditions"]
+            # Remove condition
+            ws.send_json({"type": "enemy_update", "tracker_key": "Named 1", "remove_condition": "staggered"})
+            msg = ws.receive_json()
+            assert "staggered" not in msg["conditions"]
+
+    def test_enemy_update_not_found(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Update Error"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "enemy_update", "tracker_key": "nobody"})
+            msg = ws.receive_json()
+            assert msg["type"] == "error"
+
+    def test_remove_enemy(self, client, mm_headers, mm_token):
+        session_id = self._create_session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "thug", "instance_name": "Thug A"})
+            ws.receive_json()  # spawned
+            ws.send_json({"type": "remove_enemy", "tracker_key": "Thug A"})
+            msg = ws.receive_json()
+            assert msg["type"] == "enemy_removed"
+            assert msg["tracker_key"] == "Thug A"
+
+    def test_player_cannot_spawn_enemy(self, client, mm_headers, active_session, valid_attributes):
+        session_id = active_session["session_id"]
+        # Create a character for the player
+        client.post("/api/characters/", json={
+            "session_id": session_id,
+            "character_name": "Tester",
+            "primary_facet": "body",
+            "attributes": valid_attributes,
+        }, headers=mm_headers)
+        player_token = create_session_token("Tester", session_id)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "thug"})
+            msg = ws.receive_json()
+            assert msg["type"] == "error"
+            assert "Unknown event type" in msg["message"]

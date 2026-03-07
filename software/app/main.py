@@ -13,6 +13,8 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 
 from app.api.routes.character import router as character_router
+from app.api.routes.encounter import router as encounter_router
+from app.api.routes.enemy import router as enemy_router
 from app.api.routes.facets_route import router as facets_router
 from app.api.routes.rolls import router as rolls_router
 from app.api.routes.session import router as session_router
@@ -69,7 +71,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST"],
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["Authorization", "Content-Type"],
 )
 
@@ -80,6 +82,8 @@ app.include_router(session_router)
 app.include_router(character_router)
 app.include_router(rolls_router)
 app.include_router(facets_router)
+app.include_router(enemy_router)
+app.include_router(encounter_router)
 
 # ---------------------------------------------------------------------------
 # WebSocket endpoint

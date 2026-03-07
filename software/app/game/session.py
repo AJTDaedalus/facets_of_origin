@@ -10,6 +10,8 @@ import yaml
 
 from app.config import settings
 from app.game.character import Character
+from app.game.enemy import Enemy
+from app.game.encounter import Encounter
 from app.facets.registry import MergedRuleset, build_ruleset
 
 
@@ -37,6 +39,9 @@ class GameSession:
     characters: dict[str, Character] = field(default_factory=dict)
     used_invite_tokens: set[str] = field(default_factory=set)
     roll_log: list[dict] = field(default_factory=list)
+    enemy_library: dict[str, Enemy] = field(default_factory=dict)
+    encounter_library: dict[str, Encounter] = field(default_factory=dict)
+    active_enemies: dict[str, Enemy] = field(default_factory=dict)
     _character_dir: Path | None = field(default=None)
 
     def add_character(self, character: Character) -> None:

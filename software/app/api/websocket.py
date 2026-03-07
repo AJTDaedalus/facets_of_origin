@@ -217,6 +217,13 @@ async def _dispatch(
         await _handle_technique_select(msg, session, session_id)
     elif event_type == "session_reset" and is_mm:
         await _handle_session_reset(session, session_id)
+    # --- Enemy tracker events ---
+    elif event_type == "spawn_enemy" and is_mm:
+        await _handle_spawn_enemy(msg, session, session_id)
+    elif event_type == "enemy_update" and is_mm:
+        await _handle_enemy_update(msg, session, session_id)
+    elif event_type == "remove_enemy" and is_mm:
+        await _handle_remove_enemy(msg, session, session_id)
     else:
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown event type: {event_type}"})
 
@@ -1033,3 +1040,92 @@ async def _handle_session_reset(session, session_id: str) -> None:
         character.techniques_used_this_session = []
         character.sparks = session.ruleset.spark.base_sparks_per_session if session.ruleset.spark else 3
     await manager.broadcast(session_id, {"type": "session_reset"})
+
+
+# ---------------------------------------------------------------------------
+# Enemy tracker handlers
+# ---------------------------------------------------------------------------
+
+async def _handle_spawn_enemy(msg: dict, session, session_id: str) -> None:
+    """MM spawns an enemy into the active combat tracker."""
+    from app.game.enemy import Enemy
+
+    enemy_id = str(msg.get("enemy_id", ""))
+    instance_name = str(msg.get("instance_name", ""))
+
+    # Try loading from library first
+    library_enemy = session.enemy_library.get(enemy_id)
+    if library_enemy:
+        enemy = library_enemy.model_copy(deep=True)
+        if instance_name:
+            enemy.name = instance_name
+    else:
+        # Inline enemy data
+        enemy_data = msg.get("enemy_data")
+        if not enemy_data or not isinstance(enemy_data, dict):
+            await manager.broadcast(session_id, {
+                "type": "error",
+                "message": f"Enemy '{enemy_id}' not in library and no inline data provided.",
+            })
+            return
+        enemy = Enemy(
+            id=enemy_id,
+            name=enemy_data.get("name", enemy_id),
+            tier=enemy_data.get("tier", "mook"),
+            endurance=enemy_data.get("endurance", 0),
+            attack_modifier=enemy_data.get("attack_modifier", 0),
+            defense_modifier=enemy_data.get("defense_modifier", 0),
+            armor=enemy_data.get("armor", "none"),
+        )
+
+    enemy.init_combat()
+    tracker_key = instance_name or f"{enemy_id}_{len(session.active_enemies)}"
+    session.active_enemies[tracker_key] = enemy
+
+    await manager.broadcast(session_id, {
+        "type": "enemy_spawned",
+        "tracker_key": tracker_key,
+        "enemy": enemy.to_client_dict(),
+        "tr": enemy.calculate_tr(),
+    })
+
+
+async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
+    """MM updates an active enemy's endurance or conditions."""
+    tracker_key = str(msg.get("tracker_key", ""))
+    enemy = session.active_enemies.get(tracker_key)
+    if not enemy:
+        await manager.broadcast(session_id, {
+            "type": "error",
+            "message": f"No active enemy with key '{tracker_key}'.",
+        })
+        return
+
+    if "endurance_current" in msg:
+        enemy.endurance_current = max(0, int(msg["endurance_current"]))
+    if "add_condition" in msg:
+        cond = str(msg["add_condition"])
+        if cond and cond not in enemy.conditions:
+            enemy.conditions.append(cond)
+    if "remove_condition" in msg:
+        cond = str(msg["remove_condition"])
+        if cond in enemy.conditions:
+            enemy.conditions.remove(cond)
+
+    await manager.broadcast(session_id, {
+        "type": "enemy_updated",
+        "tracker_key": tracker_key,
+        "endurance_current": enemy.endurance_current,
+        "conditions": list(enemy.conditions),
+    })
+
+
+async def _handle_remove_enemy(msg: dict, session, session_id: str) -> None:
+    """MM removes an enemy from the active combat tracker."""
+    tracker_key = str(msg.get("tracker_key", ""))
+    if tracker_key in session.active_enemies:
+        del session.active_enemies[tracker_key]
+    await manager.broadcast(session_id, {
+        "type": "enemy_removed",
+        "tracker_key": tracker_key,
+    })

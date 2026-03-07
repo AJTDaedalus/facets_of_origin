@@ -84,6 +84,11 @@ class Character(BaseModel):
     magic_tradition: Optional[str] = None  # "intuitive" | "scholarly"
     magic_technique_active: bool = False
 
+    # Player-facing fields
+    inventory: list[str] = Field(default_factory=list)
+    notes_player: str = ""
+    notes_mm: str = ""
+
     # Combat state — ephemeral, not persisted to .fof between sessions
     endurance_current: Optional[int] = None
     conditions: list[str] = Field(default_factory=list)
@@ -326,6 +331,12 @@ class Character(BaseModel):
             char_block["posture"] = self.posture
         if self.armor is not None:
             char_block["armor"] = self.armor
+        if self.inventory:
+            char_block["inventory"] = list(self.inventory)
+        if self.notes_player:
+            char_block["notes_player"] = self.notes_player
+        if self.notes_mm:
+            char_block["notes_mm"] = self.notes_mm
 
         return {
             "fof_version": "0.1",
@@ -406,6 +417,9 @@ class Character(BaseModel):
             conditions=char_block.get("conditions") or [],
             posture=char_block.get("posture"),
             armor=char_block.get("armor"),
+            inventory=char_block.get("inventory") or [],
+            notes_player=char_block.get("notes_player") or "",
+            notes_mm=char_block.get("notes_mm") or "",
         )
         if ruleset is not None:
             errors = character.validate_against_ruleset(ruleset)

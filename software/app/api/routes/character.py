@@ -163,3 +163,70 @@ async def list_characters(session_id: str, request: Request):
     if not session:
         raise HTTPException(status_code=404, detail="Session not found.")
     return {"characters": {pn: c.to_client_dict() for pn, c in session.characters.items()}}
+
+
+class UpdateNotesRequest(BaseModel):
+    notes_player: str | None = None
+    notes_mm: str | None = None
+
+
+@router.put("/{session_id}/{player_name}/notes")
+async def update_notes(session_id: str, player_name: str, body: UpdateNotesRequest, request: Request):
+    """Update player and/or MM notes on a character.
+
+    Players can only update notes_player on their own character.
+    MM can update both notes_player and notes_mm on any character.
+    """
+    token_data = _require_player_or_mm(request)
+
+    session = session_store.get(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found.")
+
+    character = session.characters.get(player_name)
+    if not character:
+        raise HTTPException(status_code=404, detail="Character not found.")
+
+    if not token_data.is_mm:
+        if token_data.session_id != session_id:
+            raise HTTPException(status_code=403, detail="Token is for a different session.")
+        if token_data.player_name != player_name:
+            raise HTTPException(status_code=403, detail="You can only update your own notes.")
+        if body.notes_mm is not None:
+            raise HTTPException(status_code=403, detail="Only the MM can set MM notes.")
+
+    if body.notes_player is not None:
+        character.notes_player = body.notes_player[:2000]
+    if body.notes_mm is not None:
+        character.notes_mm = body.notes_mm[:2000]
+
+    session.save_character_to_disk(player_name)
+    return {"notes_player": character.notes_player, "notes_mm": character.notes_mm}
+
+
+class UpdateInventoryRequest(BaseModel):
+    inventory: list[str]
+
+
+@router.put("/{session_id}/{player_name}/inventory")
+async def update_inventory(session_id: str, player_name: str, body: UpdateInventoryRequest, request: Request):
+    """Update a character's inventory. Players update their own; MM can update any."""
+    token_data = _require_player_or_mm(request)
+
+    session = session_store.get(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found.")
+
+    character = session.characters.get(player_name)
+    if not character:
+        raise HTTPException(status_code=404, detail="Character not found.")
+
+    if not token_data.is_mm:
+        if token_data.session_id != session_id:
+            raise HTTPException(status_code=403, detail="Token is for a different session.")
+        if token_data.player_name != player_name:
+            raise HTTPException(status_code=403, detail="You can only update your own inventory.")
+
+    character.inventory = [item[:200] for item in body.inventory[:100]]
+    session.save_character_to_disk(player_name)
+    return {"inventory": character.inventory}
