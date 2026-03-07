@@ -48,6 +48,9 @@ class GameSession:
         """Write the current character state to data/sessions/{id}/characters/{player_name}.fof.
 
         Silent no-op if player_name is not in the session or _character_dir is not set.
+
+        Raises:
+            IOError: If the write fails (permissions, disk full, etc.).
         """
         character = self.characters.get(player_name)
         if not character or not self._character_dir:
@@ -55,7 +58,10 @@ class GameSession:
         module_refs = [{"id": f.id, "version": f.version} for f in self.ruleset._files]
         fof_dict = character.to_fof(module_refs, self.id)
         path = self._character_dir / f"{player_name}.fof"
-        path.write_text(yaml.dump(fof_dict, allow_unicode=True, sort_keys=False), encoding="utf-8")
+        try:
+            path.write_text(yaml.dump(fof_dict, allow_unicode=True, sort_keys=False), encoding="utf-8")
+        except Exception as e:
+            raise IOError(f"Failed to save character '{player_name}': {e}") from e
 
     def record_roll(self, player_name: str, roll_dict: dict) -> None:
         """Append a resolved roll to the session roll log with timestamp and player."""
@@ -64,6 +70,8 @@ class GameSession:
             "timestamp": datetime.now(tz=timezone.utc).isoformat(),
             **roll_dict,
         })
+        if len(self.roll_log) > 500:
+            self.roll_log = self.roll_log[-500:]
 
     def to_state_dict(self) -> dict:
         """Full session state sent to the MM on WebSocket join.

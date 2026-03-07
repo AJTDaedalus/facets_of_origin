@@ -1,0 +1,37 @@
+fof_version: '0.1'
+type: character
+id: aaron-44735140
+name: Zahna
+version: 1.0.0
+authors:
+- Aaron
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+campaign_id: 44735140-f8c6-4da7-9414-57246310a9c6
+character:
+  name: Zahna
+  player_name: Aaron
+  primary_facet: mind
+  attributes:
+    strength: 1
+    dexterity: 2
+    constitution: 1
+    intelligence: 3
+    wisdom: 3
+    knowledge: 3
+    spirit: 2
+    luck: 2
+    charisma: 1
+  skills: {}
+  sparks: 3
+  session_skill_points_remaining: 4
+  facet_level: 0
+  rank_advances_this_facet_level: 0
+  total_facet_levels: 0
+  career_advances: 0
+  techniques: []
+  technique_choices: {}
+created_at: '2026-03-07T14:55:34.767288+00:00'
+last_modified: '2026-03-07T14:55:34.767288+00:00'

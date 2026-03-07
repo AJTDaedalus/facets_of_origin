@@ -206,11 +206,17 @@ class TestSkillAdvancement:
         body_character.advance_skill("athletics", 6, ruleset)
         assert body_character.skills["athletics"].rank == "expert"
 
-    def test_expert_rank_does_not_advance_further(self, body_character, ruleset):
-        body_character.advance_skill("athletics", 6, ruleset)
+    def test_advance_past_expert_reaches_master(self, body_character, ruleset):
+        body_character.advance_skill("athletics", 6, ruleset)  # novice → expert
         assert body_character.skills["athletics"].rank == "expert"
+        body_character.advance_skill("athletics", 3, ruleset)  # expert → master
+        assert body_character.skills["athletics"].rank == "master"
+
+    def test_master_rank_does_not_advance_further(self, body_character, ruleset):
+        body_character.advance_skill("athletics", 9, ruleset)  # novice → master
+        assert body_character.skills["athletics"].rank == "master"
         body_character.advance_skill("athletics", 10, ruleset)
-        assert body_character.skills["athletics"].rank == "expert"  # still expert
+        assert body_character.skills["athletics"].rank == "master"  # still master
 
     def test_marks_carry_over_between_sessions(self, body_character, ruleset):
         body_character.advance_skill("athletics", 2, ruleset)
@@ -359,10 +365,11 @@ class TestAdvanceSkillEdgeCases:
         assert "new_skill" in body_character.skills
         assert body_character.skills["new_skill"].marks == 1
 
-    def test_expert_is_capped_rank(self, body_character, ruleset):
-        body_character.advance_skill("athletics", 6, ruleset)  # novice → expert
+    def test_master_is_capped_rank(self, body_character, ruleset):
+        body_character.advance_skill("athletics", 9, ruleset)  # novice → master (3+3+3 marks)
+        assert body_character.skills["athletics"].rank == "master"
         result = body_character.advance_skill("athletics", 100, ruleset)
-        assert body_character.skills["athletics"].rank == "expert"
+        assert body_character.skills["athletics"].rank == "master"
         assert result["rank_advances"] == 0
 
     def test_secondary_facet_advance_does_not_count_toward_level(self, body_character, ruleset):
@@ -425,6 +432,13 @@ class TestGetSkillModifier:
     def test_novice_skill_returns_zero(self, body_character, ruleset):
         mod = body_character.get_skill_modifier("athletics", ruleset)
         assert mod == 0  # starts novice (modifier=0)
+
+    def test_master_rank_modifier(self, body_character, ruleset):
+        """Master rank should give +3 modifier (from facet.yaml skill_ranks)."""
+        body_character.advance_skill("athletics", 9, ruleset)  # novice → master
+        assert body_character.skills["athletics"].rank == "master"
+        mod = body_character.get_skill_modifier("athletics", ruleset)
+        assert mod == 3
 
 
 # ---------------------------------------------------------------------------

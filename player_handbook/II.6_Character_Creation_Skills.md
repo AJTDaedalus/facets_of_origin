@@ -4,9 +4,31 @@
 
 Skills are specific areas of developed capability — what your character has learned to do through practice, training, or hard experience. Where attributes represent your fundamental nature, skills represent what you have made of yourself.
 
-Every character begins with all skills at **Novice** rank. Through play, skills you actually use advance toward **Practiced** and eventually **Expert**. You do not choose starting skills — you reveal them through action.
+Every character begins with all skills at **Novice** rank. Your Background determines your starting skills — you don't choose them separately (see Chapter II.5). Through play, skills you actually use advance toward **Practiced** and eventually **Expert**.
 
-Full rules for skill advancement, the session skill point economy, and reflection scenes are in **Chapter II.4 (Facets)**.
+Full rules for skill advancement, the session skill point economy, and reflection scenes are in **Chapter II.4 (Facets)**. Full descriptions and Technique trees are in the Facet chapters (II.4, II.4b, II.4c). This chapter provides the complete reference and explains how skill checks work.
+
+---
+
+## Complete Skill Reference
+
+| Skill | Facet | Attribute | Description |
+|---|---|---|---|
+| **Athletics** | Body | Strength | Feats of raw physical capability: lifting, climbing, swimming, jumping, forcing something open |
+| **Combat** | Body | Strength | Fighting technique with any melee weapon or unarmed; attacking, parrying, wrestling |
+| **Stealth** | Body | Dexterity | Moving without being detected: staying quiet, out of sight, tailing without being noticed |
+| **Finesse** | Body | Dexterity | Precision work: picking locks, sleight of hand, ranged weapons, acrobatics, disabling mechanisms |
+| **Endurance** | Body | Constitution | Pushing through physical hardship: injury, illness, extremes, sustained effort |
+| **Lore** | Mind | Knowledge | Recalling accumulated learning: history, cultures, languages, creature lore, arcane theory |
+| **Investigate** | Mind | Intelligence | Active analysis: examining scenes, finding patterns, deducing what happened |
+| **Craft** | Mind | Intelligence | Making and repairing objects: tools, mechanisms, alchemical preparations |
+| **Insight** | Mind | Wisdom | Reading people and situations: understanding intent, sensing deception, noticing dissonance |
+| **Survival** | Mind | Wisdom | Navigating unfamiliar environments: tracking, finding shelter, reading terrain and danger |
+| **Persuade** | Soul | Charisma | Moving people with words and presence: convincing, inspiring, negotiating, commanding |
+| **Deceive** | Soul | Charisma | Misleading people: lying convincingly, maintaining false identities, misdirecting attention |
+| **Perform** | Soul | Charisma | Captivating an audience: music, storytelling, acting, oratory |
+| **Attune** | Soul | Spirit | Connecting beyond the physical: sensing supernatural, channeling spiritual energy, rituals |
+| **Gamble** | Soul | Luck | Pressing fortune: reading probability, knowing when to push and when to walk away |
 
 ---
 
@@ -45,13 +67,33 @@ Pushing through physical hardship: staying functional through injury, resisting 
 
 ### Skills of the Mind
 
-*(Defined in Chapter II.4b — Facet of the Mind)*
+Full descriptions are in **Chapter II.4b — Facet of the Mind**.
+
+**Lore** *(Knowledge)* — Recalling and applying accumulated learning: history, cultures, languages, creature lore, arcane theory, religious traditions, and the significance of what you find.
+
+**Investigate** *(Intelligence)* — Active analysis: examining a scene, finding patterns, working out how something functions, deducing what happened, identifying the thing that doesn't fit.
+
+**Craft** *(Intelligence)* — Making, repairing, and modifying objects: tools, mechanisms, structures, alchemical preparations, and anything that requires precision of thought as much as precision of hand.
+
+**Insight** *(Wisdom)* — Reading people and situations: understanding what someone actually wants, sensing deception, noticing the wrong note in a conversation before you can name it.
+
+**Survival** *(Wisdom)* — Navigating and enduring unfamiliar environments: tracking, finding food and shelter, reading weather and terrain, sensing danger in the wild before it arrives.
 
 ---
 
 ### Skills of the Soul
 
-*(Defined in Chapter II.4c — Facet of the Soul)*
+Full descriptions are in **Chapter II.4c — Facet of the Soul**.
+
+**Persuade** *(Charisma)* — Moving people with words and presence: convincing, inspiring, negotiating, commanding, making yourself believed.
+
+**Deceive** *(Charisma)* — Misleading people: lying convincingly, disguising intent, maintaining a false identity, misdirecting attention at the critical moment.
+
+**Perform** *(Charisma)* — Captivating an audience: music, storytelling, acting, oratory, any art used to move people rather than merely entertain them.
+
+**Attune** *(Spirit)* — Connecting to forces beyond the physical: sensing the supernatural, channeling spiritual energy, communing with animals or spirits, holding rituals.
+
+**Gamble** *(Luck)* — Pressing fortune: reading probability in the moment, knowing when to push and when to walk away, acting on intuition when the stakes are real.
 
 ---
 

@@ -1,30 +1,43 @@
-"""Core roll resolution engine — 2d6 + modifier, Spark, 3-tier outcomes.
+"""Core roll resolution engine — data-driven dice, modifiers, and N-tier outcomes.
 
 The client submits a RollRequest describing what is being attempted. The server
 resolves everything: attribute modifier, skill modifier, difficulty modifier,
 Spark dice addition, and outcome tier. The client never provides modifiers.
+
+The dice formula and outcome tiers are read from the ruleset, allowing custom
+FoF modules to use different dice (1d20, 1d100, 3d8) and outcome structures.
 """
 from __future__ import annotations
 
 import random
 from dataclasses import dataclass, field
-from typing import Literal
 
 from app.facets.registry import MergedRuleset
+from app.facets.schema import OutcomeTierDef
+from app.game.dice import DiceSpec
 
 
-OutcomeTier = Literal["full_success", "partial_success", "failure"]
+_DEFAULT_OUTCOME_TIERS = [
+    OutcomeTierDef(id="full_success", threshold=10, label="Full Success",
+                   description="You achieve your goal cleanly."),
+    OutcomeTierDef(id="partial_success", threshold=7, label="Success with Cost",
+                   description="You succeed, but with a complication or cost."),
+    OutcomeTierDef(id="failure", threshold=None, label="Things Go Wrong",
+                   description="The story always moves forward, but not in your favor."),
+]
+
+_DEFAULT_DIFFICULTY_ORDER = ["Easy", "Standard", "Hard", "Very Hard"]
 
 
 @dataclass
 class RollRequest:
-    """All inputs required to resolve a 2d6 roll.
+    """All inputs required to resolve a roll.
 
     Attributes:
         attribute_id: ID of the minor attribute being tested (e.g. "strength").
         attribute_rating: Player's rating in that attribute (1, 2, or 3).
         skill_id: Optional skill ID contributing a bonus.
-        skill_rank_id: Skill rank if skill_id is set: "novice", "practiced", or "expert".
+        skill_rank_id: Skill rank if skill_id is set: "novice", "practiced", "expert", or "master".
         difficulty_label: One of "Easy", "Standard", "Hard", "Very Hard".
         sparks_spent: Number of Sparks to spend (adds dice and drops lowest).
         press: Whether the Press combat mechanic is active (costs 1 Endurance, adds 1 die).
@@ -50,14 +63,14 @@ class RollResult:
     """Complete result of a resolved roll.
 
     Attributes:
-        dice_rolled: All dice values before dropping (base 2 + sparks_spent extra).
-        dice_kept: The top 2 dice after dropping the lowest sparks_spent.
+        dice_rolled: All dice values before dropping (base dice + extra from sparks/press).
+        dice_kept: The top N dice after dropping extras (N = base dice count from formula).
         dice_sum: Sum of dice_kept.
         attribute_modifier: Modifier from the attribute rating.
         skill_modifier: Modifier from the skill rank (0 if no skill).
         difficulty_modifier: Modifier from the difficulty label.
         total: dice_sum + all modifiers — the value compared to thresholds.
-        outcome: Machine-readable outcome tier.
+        outcome: Machine-readable outcome tier ID.
         outcome_label: Human-readable label (e.g. "Full Success").
         outcome_description: Narrative prompt for the outcome.
         sparks_spent: How many Sparks were actually spent.
@@ -71,7 +84,7 @@ class RollResult:
     skill_modifier: int
     difficulty_modifier: int
     total: int
-    outcome: OutcomeTier
+    outcome: str
     outcome_label: str
     outcome_description: str
     sparks_spent: int
@@ -79,10 +92,10 @@ class RollResult:
 
 
 def resolve_roll(request: RollRequest, ruleset: MergedRuleset) -> RollResult:
-    """Resolve a 2d6 + modifier roll with optional Spark spending.
+    """Resolve a dice roll with optional Spark spending.
 
-    The client submits a roll request; the server resolves everything.
-    The client never provides modifiers — they're derived from ruleset data.
+    The dice formula is read from the ruleset (defaults to 2d6). Sparks and Press
+    add extra dice; the lowest extras are dropped to keep the base count.
 
     Args:
         request: Validated roll inputs.
@@ -102,17 +115,21 @@ def resolve_roll(request: RollRequest, ruleset: MergedRuleset) -> RollResult:
     # --- Difficulty modifier ---
     diff_modifier = _get_difficulty_modifier(request.difficulty_label, ruleset)
 
-    # --- Spark + Press mechanic: add d6s, drop lowest ---
-    # Press adds 1 extra die (costs 1 Endurance, handled by caller); stacks with Sparks.
-    base_dice = 2
+    # --- Dice from ruleset ---
+    dice_spec = DiceSpec.parse(
+        ruleset.roll_resolution.dice if ruleset.roll_resolution else "2d6"
+    )
+
+    # --- Spark + Press mechanic: add dice, drop lowest ---
+    base_dice = dice_spec.count
     extra_dice = max(0, request.sparks_spent) + (1 if request.press else 0)
     total_dice = base_dice + extra_dice
 
-    dice_rolled = [random.randint(1, 6) for _ in range(total_dice)]
+    dice_rolled = [random.randint(1, dice_spec.sides) for _ in range(total_dice)]
     dice_sorted = sorted(dice_rolled)
 
-    # Drop the lowest `extra_dice` dice to keep exactly 2
-    dice_kept = dice_sorted[extra_dice:]  # keep the top 2
+    # Drop the lowest `extra_dice` dice to keep exactly `base_dice`
+    dice_kept = dice_sorted[extra_dice:]
 
     dice_sum = sum(dice_kept)
     total = dice_sum + attr_modifier + skill_modifier + diff_modifier
@@ -187,16 +204,41 @@ def resolve_magic_roll(
     scope_to_key = {"minor": "minor", "significant": "significant", "major": "major"}
     difficulty_label: str = scope_difficulties.get(scope_to_key.get(scope, scope), "Standard")
 
-    # Pre-Technique penalty: one step harder for all scopes
+    # Pre-Technique restriction: scope ceiling and difficulty penalty
     if not character.magic_technique_active:
-        difficulty_label = _step_difficulty_harder(difficulty_label)
+        scope_limit = ruleset.magic.pre_technique_scope_limit if ruleset.magic else "minor"
+        penalty_steps = ruleset.magic.pre_technique_difficulty_penalty if ruleset.magic else 1
+        if scope_limit == "minor" and scope != "minor":
+            raise ValueError(
+                f"Before unlocking the Technique, magic is limited to {scope_limit} scope only. "
+                "Unlock the corresponding Facet Technique to access broader scopes."
+            )
+        for _ in range(penalty_steps):
+            difficulty_label = _step_difficulty_harder(difficulty_label, ruleset)
 
-    # Spark use: ease_focused_major (focused only)
+    # Spark use
     sparks_spent = 0
     if spark_use == "ease_focused_major" and domain_def.type == "focused" and scope == "major":
-        difficulty_label = _step_difficulty_easier(difficulty_label)
+        difficulty_label = _step_difficulty_easier(difficulty_label, ruleset)
+    elif spark_use == "push_scope":
+        if domain_def.type == "broad":
+            raise ValueError(
+                "Broad (Prismatic) domains cannot be pushed beyond their scope ceiling — "
+                "Very Hard is the maximum regardless of Sparks."
+            )
+        # Push scope one step higher: difficulty steps harder to reflect the ambition
+        difficulty_label = _step_difficulty_harder(difficulty_label, ruleset)
     elif spark_use == "improve_roll":
         sparks_spent = 1  # consumed by caller; here we model the dice bonus
+
+    # Secondary domain penalty: one difficulty step harder (Soul Communion T3 rule)
+    is_secondary = (
+        hasattr(character, "secondary_magic_domain")
+        and character.secondary_magic_domain
+        and domain_id == character.secondary_magic_domain
+    )
+    if is_secondary:
+        difficulty_label = _step_difficulty_harder(difficulty_label, ruleset)
 
     # Broad domain hard ceiling: Very Hard max, Sparks cannot push further
     if domain_def.type == "broad":
@@ -223,17 +265,31 @@ def resolve_magic_roll(
     return resolve_roll(request, ruleset)
 
 
-_DIFFICULTY_ORDER = ["Easy", "Standard", "Hard", "Very Hard"]
+# ---------------------------------------------------------------------------
+# Difficulty stepping (data-driven)
+# ---------------------------------------------------------------------------
+
+def _get_difficulty_order(ruleset) -> list[str]:
+    """Derive ordered difficulty labels from ruleset modifiers (easiest → hardest)."""
+    if (ruleset.roll_resolution
+            and ruleset.roll_resolution.difficulty_modifiers):
+        return [dm.label for dm in sorted(
+            ruleset.roll_resolution.difficulty_modifiers,
+            key=lambda dm: dm.modifier, reverse=True,
+        )]
+    return _DEFAULT_DIFFICULTY_ORDER
 
 
-def _step_difficulty_harder(label: str) -> str:
-    idx = _DIFFICULTY_ORDER.index(label) if label in _DIFFICULTY_ORDER else 1
-    return _DIFFICULTY_ORDER[min(idx + 1, len(_DIFFICULTY_ORDER) - 1)]
+def _step_difficulty_harder(label: str, ruleset=None) -> str:
+    order = _get_difficulty_order(ruleset) if ruleset else _DEFAULT_DIFFICULTY_ORDER
+    idx = order.index(label) if label in order else 1
+    return order[min(idx + 1, len(order) - 1)]
 
 
-def _step_difficulty_easier(label: str) -> str:
-    idx = _DIFFICULTY_ORDER.index(label) if label in _DIFFICULTY_ORDER else 1
-    return _DIFFICULTY_ORDER[max(idx - 1, 0)]
+def _step_difficulty_easier(label: str, ruleset=None) -> str:
+    order = _get_difficulty_order(ruleset) if ruleset else _DEFAULT_DIFFICULTY_ORDER
+    idx = order.index(label) if label in order else 1
+    return order[max(idx - 1, 0)]
 
 
 def _get_difficulty_modifier(label: str, ruleset: MergedRuleset) -> int:
@@ -251,37 +307,65 @@ def _get_difficulty_modifier(label: str, ruleset: MergedRuleset) -> int:
     return 0
 
 
-def _determine_outcome(total: int, ruleset: MergedRuleset) -> tuple[OutcomeTier, str, str]:
+# ---------------------------------------------------------------------------
+# Outcome resolution (data-driven N-tier)
+# ---------------------------------------------------------------------------
+
+def _get_outcome_tiers(ruleset) -> list[OutcomeTierDef]:
+    """Return outcome tiers sorted for evaluation: non-null thresholds descending, null last."""
+    # Prefer new outcome_tiers list
+    if (ruleset.roll_resolution
+            and ruleset.roll_resolution.outcome_tiers):
+        tiers = list(ruleset.roll_resolution.outcome_tiers)
+        return sorted(tiers, key=lambda t: (t.threshold is None, -(t.threshold or 0)))
+
+    # Backward compat: build from old thresholds/outcomes
+    if (ruleset.roll_resolution
+            and ruleset.roll_resolution.thresholds):
+        rr = ruleset.roll_resolution
+        thresholds = rr.thresholds
+        outcomes = rr.outcomes
+        built: list[OutcomeTierDef] = []
+        full_th = thresholds.get("full_success", 10)
+        partial_th = thresholds.get("partial_success", 7)
+        built.append(OutcomeTierDef(
+            id="full_success", threshold=full_th,
+            label=outcomes.full_success.label if outcomes else "Full Success",
+            description=outcomes.full_success.description if outcomes else "You achieve your goal cleanly.",
+        ))
+        built.append(OutcomeTierDef(
+            id="partial_success", threshold=partial_th,
+            label=outcomes.partial_success.label if outcomes else "Success with Cost",
+            description=outcomes.partial_success.description if outcomes else "You succeed, but with a complication or cost.",
+        ))
+        built.append(OutcomeTierDef(
+            id="failure", threshold=None,
+            label=outcomes.failure.label if outcomes else "Things Go Wrong",
+            description=outcomes.failure.description if outcomes else "The story always moves forward, but not in your favor.",
+        ))
+        return sorted(built, key=lambda t: (t.threshold is None, -(t.threshold or 0)))
+
+    # Hardcoded fallback
+    return sorted(_DEFAULT_OUTCOME_TIERS, key=lambda t: (t.threshold is None, -(t.threshold or 0)))
+
+
+def _determine_outcome(total: int, ruleset) -> tuple[str, str, str]:
     """Map a numeric total to an outcome tier, label, and description.
 
-    Uses ruleset thresholds if available; falls back to 10/7 defaults.
+    Supports any number of outcome tiers. Tiers are evaluated from highest
+    threshold to lowest; the first tier whose threshold is met (total >= threshold)
+    wins. A tier with threshold=None is the catch-all fallback.
 
     Returns:
-        A tuple of (tier, label, description).
+        A tuple of (tier_id, label, description).
     """
-    if ruleset.roll_resolution:
-        thresholds = ruleset.roll_resolution.thresholds
-        full = thresholds.get("full_success", 10)
-        partial = thresholds.get("partial_success", 7)
-        outcomes = ruleset.roll_resolution.outcomes
-    else:
-        full, partial = 10, 7
-        outcomes = None
-
-    if total >= full:
-        tier: OutcomeTier = "full_success"
-        label = outcomes.full_success.label if outcomes else "Full Success"
-        desc = outcomes.full_success.description if outcomes else "You achieve your goal cleanly."
-    elif total >= partial:
-        tier = "partial_success"
-        label = outcomes.partial_success.label if outcomes else "Success with Cost"
-        desc = outcomes.partial_success.description if outcomes else "You succeed, but with a complication or cost."
-    else:
-        tier = "failure"
-        label = outcomes.failure.label if outcomes else "Things Go Wrong"
-        desc = outcomes.failure.description if outcomes else "The story always moves forward, but not in your favor."
-
-    return tier, label, desc
+    tiers = _get_outcome_tiers(ruleset)
+    for tier in tiers:
+        if tier.threshold is not None and total >= tier.threshold:
+            return tier.id, tier.label, tier.description
+    # Catch-all: last tier (threshold=None)
+    fallback = tiers[-1]
+    return fallback.id, fallback.label, fallback.description
 
 
 def roll_result_to_dict(result: RollResult) -> dict:

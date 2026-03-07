@@ -124,7 +124,7 @@ Once your Minor Attributes are set, add up the three Minor Attribute values unde
 
 ## How Attributes Work in Play
 
-When the outcome of an action is uncertain and the stakes matter, you roll **2d6 + the relevant attribute modifier**. Minor Attributes are the default for most active rolls. Major Attributes are used for broad or undefined situations and for saving throws.
+When the outcome of an action is uncertain and the stakes matter, you roll **2d6 + the relevant attribute modifier**. Minor Attributes are the default for most active rolls. Major Attributes are used for broad or undefined situations and for saving throws (see Chapter III.1).
 
 | Roll Total | Outcome |
 |---|---|
@@ -132,117 +132,18 @@ When the outcome of an action is uncertain and the stakes matter, you roll **2d6
 | 7–9 | Success with a complication or cost |
 | 6 or less | Things go wrong — but the story always moves forward |
 
----
+The MM declares a **difficulty** before you roll:
 
-### Difficulty
+| Difficulty | Modifier |
+|---|---|
+| Easy | +1 |
+| Standard | +0 |
+| Hard | -1 |
+| Very Hard | -2 |
 
-Not every task is equally hard. Before calling for a roll, the MM declares a **difficulty** — a modifier that reflects the circumstances, opposition, or sheer improbability of what you're attempting.
+> **Why this matters for character creation:** A Strong attribute (+1) against a Hard task (-1) nets +0 — the same baseline as Average on Standard. A Weak attribute against a Very Hard task hits -3, which borders on desperate. Your attribute choices carry meaning in context.
 
-| Difficulty | Modifier | When |
-|---|---|---|
-| Easy | +1 | Clear advantage, weak or inattentive opposition, favorable conditions |
-| Standard | +0 | The default — uncertain outcome, no special advantage or impediment |
-| Hard | -1 | Skilled opposition, poor conditions, acting against the grain |
-| Very Hard | -2 | Extraordinary opposition, severe circumstances, nearly impossible odds |
-
-The MM declares difficulty **before** you roll. It is a statement about the world, not a judgment about your character.
-
-> **Why this matters for character creation:** A Strong attribute (+1) against a Hard task (-1) nets +0 — the same baseline odds as a character with no particular strength on a Standard task. A Weak attribute against a Very Hard task hits a net of -3, which borders on desperate. Your attribute choices carry meaning in context.
-
----
-
-### Contested Rolls
-
-When you act against someone actively working against you, the opposition shapes the roll:
-
-**Against an NPC:** Only you roll. The NPC's relevant attribute informs the difficulty the MM selects — a perceptive guard makes your attempt Hard; an oblivious one makes it Easy. The MM decides; the fiction justifies it. NPCs do not roll dice.
-
-**Against another player character:** Both players roll their relevant attribute. The higher result wins the contest. On a tie, both achieve partial success — neither prevails cleanly, and the situation deepens. Both rolls are still interpreted against the outcome tiers: the winner's tier determines how well they achieve their goal; the loser's consequence is proportional to the winning margin.
-
----
-
-### Sparks
-
-A **Spark** is a narrative resource you earn by doing something remarkable — and spend for an edge when the stakes are highest.
-
-**Spending a Spark:** Before you roll, you may spend one or more Sparks. Each Spark adds a d6 to your roll; you then drop an equal number of lowest dice. The core mechanic stays the same — 2d6 plus your modifier — but Sparks shift the odds by replacing your worst potential outcomes.
-
-> *Two Sparks spent: roll 4d6, drop the two lowest.*
-
-**Earning Sparks:** Sparks are awarded for moments that make the table sit up. There are three ways to earn one:
-
-- **MM award:** The MM gives a Spark for exceptional roleplay, creative problem-solving, or playing your character's established traits and weaknesses in a way that costs you something real in the fiction.
-
-- **"Spark?" — the peer call:** Any player at the table can call out `"Spark?"` for another player's moment — a line of dialogue that landed, a decision that surprised everyone, an in-character choice that felt completely true. The MM confirms it. The moment is recognized by the table collectively, not handed down from above.
-
-- **The Graceful Fail:** When your roll is a 6- and you lean into the consequence — or better, add something to the fiction that makes the failure richer — the MM may award a Spark. Going down swinging is worth something.
-
-**The economy:** Sparks are most useful when everything is on the line. A Spark spent on a trivial roll is a Spark not available at the moment that matters. That tension is the point.
-
----
-
-> **Sidebar: "Spark?" — How the Peer Call Works**
->
-> The peer call is the most important Spark mechanic at the table, and the easiest to forget in practice.
->
-> Any player can say `"Spark?"` out loud — for *another* player's moment. Not your own. Someone did something that landed: a line of dialogue that felt true, an in-character choice that surprised everyone, a decision made at real cost. You say it. The MM confirms. The Spark is awarded.
->
-> This is not a formal procedure. It is a reflex. It happens mid-scene, in the moment, while everyone is still feeling it. The longer you wait, the less it means.
->
-> **What counts as Spark-worthy:**
-> - A character acting on their established traits when it costs them something real in the fiction
-> - A piece of dialogue that genuinely surprised the table
-> - An in-character decision that reframes how everyone understands that character
-> - A moment of roleplay that made the table go quiet — and then louder
->
-> **What doesn't count:**
-> - Mechanically clever play (Sparks are for fiction, not optimization)
-> - Any moment you'd be calling for yourself
-> - A funny one-liner that didn't connect to who the character is
->
-> When in doubt: if someone says `"Spark?"` and the table immediately knows why, it was a Spark.
-
----
-
-> **Sidebar: When Things Go Wrong (6- Outcomes)**
->
-> A 6- result does not mean the scene stops, the story pauses, or the character has failed permanently. It means something *develops* — usually in a direction nobody planned.
->
-> The rule: *the story always moves forward.* The MM's job on a 6- is not to punish the player but to complicate the situation in a way that creates new stakes.
->
-> **Some patterns the MM can reach for:**
->
-> *You get what you wanted — but so does something else.* Mordai pries the vault open on a 6-; the vault is open, and the guard he didn't notice is now staring at him from the end of the corridor.
->
-> *The attempt reveals something unexpected.* Zahna fails to identify the magical working on the lock; the working identifies *him* — something inside the room now knows someone tried.
->
-> *The action works, partially, with a cost.* Zulnut makes it to the roof — but drops something in the courtyard below. The MM decides whether that something matters.
->
-> *The moment is real but complicated.* A Persuade attempt on a 6- means the target was actually listening — and they are now skeptical in a specific, named way that the party can work with, if they're clever about it.
->
-> **For players:** a 6- is the moment for the **Graceful Fail** — leaning into the consequence or adding something to the fiction that makes the failure richer. The MM may award a Spark for this. Going down swinging is worth something.
-
----
-
-> **Sidebar: Partial Successes (7–9 Outcomes)**
->
-> The 7–9 tier carries a lot of the game's weight. It is the most common interesting outcome — you achieved something, but not cleanly. The MM needs to say *what the cost is* before the player decides how to proceed.
->
-> **Useful patterns for 7–9 across different situations:**
->
-> *Social:* You get the information or the agreement — but the source knows you wanted it badly, and they will remember that.
->
-> *Exploration:* You find the thing you were looking for — but something finds you in the process, or you've used up the only approach available.
->
-> *Investigation:* You learn one true fact — but the conclusion you draw from it is yours to verify. It might be right. It might lead somewhere complicated.
->
-> *Physical:* The task succeeds — but it cost something: time, equipment, noise, a resource spent, or a position compromised.
->
-> The complication on a 7–9 should always move the story forward. "You succeed, but someone heard you" gives the party something to respond to. "You succeed, but now you're nervous" does not.
-
----
-
-The full resolution rules — move triggers, saving throws, advancement — are covered in Chapter III. This section exists so that your attribute choices mean something from the moment you make them.
+**Sparks** are narrative resources earned for remarkable moments and spent before a roll: each Spark adds a d6, then you drop the lowest. They shift the odds by replacing your worst potential outcomes. Full details on Sparks, difficulty, contested rolls, saving throws, and outcome guidance are in **Chapter III.1 (Core Resolution)**.
 
 ---
 

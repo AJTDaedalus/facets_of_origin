@@ -225,6 +225,21 @@ class TestCharacterAPI:
         )
         assert resp.status_code == 403
 
+    def test_invalid_background_id_returns_422(self, client, mm_headers, active_session, valid_attributes):
+        """B3.3: Creating a character with an unknown background_id must return 422."""
+        resp = client.post(
+            "/api/characters/",
+            json={
+                "session_id": active_session["session_id"],
+                "character_name": "Zahna",
+                "primary_facet": "mind",
+                "attributes": valid_attributes,
+                "background_id": "nonexistent_bg_xyz",
+            },
+            headers=mm_headers,
+        )
+        assert resp.status_code == 422
+
 
 # ---------------------------------------------------------------------------
 # Facets API

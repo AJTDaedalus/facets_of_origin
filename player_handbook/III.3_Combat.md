@@ -48,6 +48,8 @@ When your Endurance hits 0, you cannot spend it on reactions. You may still decl
 
 **Withdrawn posture** restores 2 Endurance at the end of the exchange. This requires giving up all offensive action for that beat — you are catching your breath, finding your footing, creating space between yourself and the pressure.
 
+> **MM Note — Withdrawn is a tempo move, not a permanent position.** Make it tactically costly: an aware opponent will advance, apply pressure elsewhere, or use the exchange to regroup their own forces. Withdrawn doesn't mean safe — the MM should make standing still feel like a choice, not a solution. A fighter who Withdraws three exchanges in a row is buying time, not winning the fight; make sure the fiction reflects that.
+
 ---
 
 ## The Exchange
@@ -107,7 +109,7 @@ The foundational offensive action. You bring force to bear on a target — weapo
 
 **Roll:** `2d6 + Strength modifier + Combat skill rank modifier`
 
-**Difficulty** is Standard by default. The MM adjusts based on the situation: an opponent in Defensive Posture, or with strong Constitution, may push it to Hard. A Staggered or Cornered opponent may make it Easy. When in doubt, Standard.
+**Difficulty** is Standard by default. The MM adjusts based on the situation: a Named NPC or Boss in Defensive Posture, or with strong Constitution, may push it to Hard. A Staggered or Cornered opponent may make it Easy. When in doubt, Standard. (Named NPCs and Bosses declare Postures as described in the Postures section. For Mooks, the MM sets difficulty by situation: Standard by default, Easy if distracted or exposed, Hard if armored and alert.)
 
 | Result | Outcome |
 |---|---|
@@ -135,7 +137,7 @@ You use your action to reshape the fight rather than deal damage directly. Force
 
 **Roll:** The relevant skill for the action — Athletics to bull rush someone into a bad position, Finesse to disarm, Stealth to vanish and reposition, an appropriate attribute for improvised environmental play.
 
-A successful Maneuver does not apply Conditions directly. Instead, it shifts difficulty: on a 10+, the target's next roll is Hard (or the party's next roll against them is Easy). On a 7–9, the repositioning works but at a cost — you may be exposed, or the effect is smaller. On a 6−, the attempt backfires.
+A successful Maneuver does not apply Conditions directly. Instead, it shifts difficulty: on a 10+, the target's next roll is Easy (or the party's next roll against them is Easy). On a 7–9, the Maneuver works, but the MM describes what it costs — a moment of exposure, a position ceded, an opening the opponent seizes; the target's next roll is Standard rather than Easy. On a 6−, the attempt backfires.
 
 Maneuvering well opens fights. It is the action for characters who think geometrically about combat, and for anyone helping a hard-hitting ally land the blow that matters.
 
@@ -143,7 +145,12 @@ Maneuvering well opens fights. It is the action for characters who think geometr
 
 ### Support
 
-You use your action to aid another participant rather than act directly. You grant an ally an extra die (they roll an extra d6 and drop the lowest on their next roll), or reduce the difficulty of their next roll by one step.
+You use your action to aid another participant rather than act directly. You grant an ally a bonus to their very next roll — **the supporting character chooses** which of the following to grant:
+
+- **+1d6 drop lowest** — add a d6 to the ally's next roll and drop the lowest die
+- **Difficulty one step easier** — the difficulty of the ally's next roll improves by one step
+
+The bonus applies to the ally's very next roll only, then expires. Bonuses from multiple Support actions do not stack; only the most recent one applies.
 
 **Roll:** The relevant skill for the manner of support — Insight to read the fight and pass critical information, Attune to channel force through an ally, Persuade to issue a command that breaks a target's concentration. Mind and Soul characters provide most of their combat value through Support and the creative application of their domains. This is not a lesser option. An ally with a boosted roll is more effective than two characters swinging blind.
 
@@ -183,6 +190,8 @@ You meet force with force — interposing weapon, shield, or forearm to deflect 
 
 Outcome tiers are the same as Dodge, flavored as deflection rather than avoidance.
 
+> **Dodge or Parry?** Choose the reaction that fits the fiction. Dodge requires space — the MM may rule it impossible if you are Cornered or in a tight passage. Parry requires something to meet force with — unarmed characters may find it implausible against some attacks. When in doubt, either is valid; the fiction justifies the choice, not an optimization calculation.
+
 ---
 
 ### Absorb
@@ -200,6 +209,8 @@ You do not react. You take the hit, accept the Condition, and remain composed. A
 You step in front of an attack targeting an ally. You take the incoming action instead of them, then roll Dodge or Parry as normal.
 
 Intercepting is how you protect someone who cannot protect themselves — a Spent ally, a mage mid-cast, someone whose low Endurance pool is about to become a serious problem.
+
+You may Intercept **one incoming action per exchange**. Only one character may Intercept a given action — if two try to Intercept the same attack, the protected ally decides who steps in. You must be aware of the incoming action and physically able to reach the ally before declaring.
 
 ---
 
@@ -305,7 +316,15 @@ Boss construction is covered in the Mirror Master's chapter. For now: a climacti
 
 ## Magic in Combat
 
-Magical effects in combat use the **Domain + Intent + Scope** framework from Chapter II.3. Roll Spirit (intuitive magic) or Knowledge (scholarly magic); the MM sets difficulty based on scope and the opposition. Magical Strikes apply Conditions using the same tier framework as physical Strikes. Full integration rules are in **Chapter II.3**.
+Magical effects in combat follow the same **Domain + Intent + Scope** framework as any other use of magic. The rules below govern how magic integrates with the exchange structure.
+
+**Casting time.** Magic is instant. Using your domain as an offensive action has the same action economy as a Strike — you do not need a setup exchange or additional preparation. The fiction determines what it looks like: a Scholar inscribing a glyph does it faster than it sounds; a Channeler reaching through their domain acts on instinct. Scope and intent are declared before the roll, as always.
+
+**Reactions against magical Strikes.** All three active reactions — Dodge, Parry, and Intercept — can apply against magical actions. Feasibility is the MM's call based on what is happening in the fiction: you cannot Parry a wave of force you never saw coming, but you can Parry a summoned blade meeting yours. Dodge remains valid against most magical effects that have a physical direction. When the nature of the magic makes a physical reaction implausible, Absorb is available as always.
+
+**Conditions from magical Strikes.** Magical Strikes apply Conditions on the same tier table as physical Strikes: a 10+ applies a Tier 2 Condition, a 7–9 applies a Tier 1 Condition, and a 6− produces a consequence for the caster. The attacker chooses which Condition to apply within the appropriate tier.
+
+**Scope in combat.** Active opposition counts as at least Standard difficulty for magical actions. Scope difficulty applies normally — a Focused domain character attempting a Major working mid-fight is rolling at Hard, same as always. The chaos of combat does not add difficulty on its own, but the MM may adjust for specific circumstances (distracted, wounded, constrained).
 
 ---
 
@@ -505,3 +524,68 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 ---
 
 *(The MM had planned for this fight to last three exchanges. It lasted two because Mordai hit the same joint twice and Zahna locked the room. The glyph on the floor will matter later. These things always do.)*
+
+---
+
+## Combat Quick Reference
+
+### Exchange Flow
+
+```
+1. Declare postures (simultaneously)
+2. Declare actions (Strike / Support / Maneuver / Magic / Withdraw)
+3. Resolve actions → roll 2d6 + attribute + skill + difficulty + posture modifier
+4. Declare reactions to incoming actions
+5. Apply conditions from resolved strikes
+6. End exchange: clear Tier 1 conditions, Withdrawn characters recover 2 Endurance
+```
+
+### Postures
+
+| Posture | Offense | Reaction Cost | Special |
+|---|---|---|---|
+| Aggressive | +1 | +1 | — |
+| Measured | +0 | +0 | Baseline |
+| Defensive | -1 | -1 | — |
+| Withdrawn | No offense | +0 | Free reactions, recover 2 Endurance at end of exchange |
+
+### Reactions (1 per incoming action)
+
+| Reaction | Cost | Roll | Effect |
+|---|---|---|---|
+| Dodge | 1 Endurance | Dexterity | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
+| Parry | 1 Endurance | Strength + Combat | 10+: deflect and counter (attacker takes T1). 7-9: reduce by one tier. 6-: full hit. |
+| Absorb | 0 Endurance | No roll | Take the hit at full tier. Always available. |
+| Intercept | 2 Endurance | — | Take a hit meant for an ally. |
+
+### Strike Outcomes
+
+| Roll | Result |
+|---|---|
+| 10+ | Tier 2 Condition (attacker chooses: Staggered or Cornered) |
+| 7-9 | Tier 1 Condition (attacker chooses: Winded, Off-Balance, or Shaken) |
+| 6- | Consequence for the attacker |
+
+### Condition Tiers
+
+| Tier | Conditions | Clears |
+|---|---|---|
+| **1** | Winded (-1 next roll), Off-Balance (+1 reaction cost), Shaken (MM directs next action) | End of exchange |
+| **2** | Staggered (-1 offense), Cornered (no Aggressive posture) | Treated |
+| **3** | Broken (out of the fight) | End of scene |
+
+Two Tier 2 conditions = Broken.
+
+### Armor
+
+| Armor | Effect |
+|---|---|
+| None | Conditions apply at full tier |
+| Light | Tier 2 becomes Tier 1 |
+| Heavy | Tier 3 becomes Tier 1 |
+
+### Endurance
+
+- Base: 4 + Constitution modifier + Endurance skill rank
+- 0 Endurance = Absorb only
+- Press: spend 1 Endurance before Strike to add a d6 and drop the lowest

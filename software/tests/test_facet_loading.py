@@ -97,10 +97,8 @@ class TestBaseRulesetLoading:
 
     def test_skill_point_costs_all_contexts(self, ruleset):
         costs = {c.context: c.cost for c in ruleset.advancement.skill_point_costs}
-        assert costs["primary_facet_success"] == 1
-        assert costs["primary_facet_failure"] == 2
-        assert costs["secondary_facet_success"] == 2
-        assert costs["secondary_facet_failure"] == 4
+        assert costs["primary_facet"] == 1
+        assert costs["cross_facet"] == 2
 
 
 # ---------------------------------------------------------------------------

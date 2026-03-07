@@ -219,3 +219,19 @@ class TestRoundTrip:
         fof_dict = char.to_fof(MODULE_REFS, SESSION_ID)
         restored = Character.from_fof(fof_dict)
         assert set(restored.techniques) == {"forcing_hand", "weapon_mastery"}
+
+    def test_master_rank_serializes_in_fof(self, ruleset, valid_attributes):
+        """Master rank skills survive to_fof / from_fof round-trip."""
+        char, _ = create_default_character(
+            name="Master",
+            player_name="Player3",
+            primary_facet="body",
+            attributes=valid_attributes,
+            ruleset=ruleset,
+        )
+        char.advance_skill("athletics", 9, ruleset)  # novice → master
+        assert char.skills["athletics"].rank == "master"
+        fof_dict = char.to_fof(MODULE_REFS, SESSION_ID)
+        assert fof_dict["character"]["skills"]["athletics"]["rank"] == "master"
+        restored = Character.from_fof(fof_dict)
+        assert restored.skills["athletics"].rank == "master"

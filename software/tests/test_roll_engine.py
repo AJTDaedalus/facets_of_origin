@@ -1,13 +1,16 @@
 """Tests for the 2d6 roll resolution engine — outcomes, modifiers, Spark mechanics."""
 import random
 from collections import Counter
-from unittest.mock import patch
+from types import SimpleNamespace
+from unittest.mock import MagicMock, patch
 
 import pytest
 
+from app.facets.schema import MagicDomainDef
 from app.game.engine import (
     RollRequest,
     RollResult,
+    resolve_magic_roll,
     resolve_roll,
     roll_result_to_dict,
     _determine_outcome,
@@ -456,3 +459,280 @@ class TestRequestResultFields:
         result = resolve_roll(req, ruleset)
         d = roll_result_to_dict(result)
         assert d["description"] == long_desc
+
+
+# ---------------------------------------------------------------------------
+# B3.5 — push_scope Spark use (implemented, not dead code)
+# ---------------------------------------------------------------------------
+
+def _make_magic_ruleset(domain_type: str, tradition: str = "intuitive") -> MagicMock:
+    """Build a minimal MergedRuleset mock that supports a single magic domain."""
+    domain = MagicDomainDef(
+        id="test_domain",
+        name="Test Domain",
+        type=domain_type,
+        tradition=tradition,
+        description="A test domain.",
+    )
+    magic_mock = MagicMock()
+    magic_mock.get_domain.return_value = domain
+    magic_mock.domain_types = {
+        "focused": {"scope_difficulties": {"minor": "Easy", "significant": "Standard", "major": "Hard"}},
+        "standard": {"scope_difficulties": {"minor": "Standard", "significant": "Hard", "major": "Very Hard"}},
+        "broad":    {"scope_difficulties": {"minor": "Hard", "significant": "Very Hard", "major": "Very Hard"}},
+    }
+    magic_mock.pre_technique_scope_limit = "minor"
+    magic_mock.pre_technique_difficulty_penalty = 1
+
+    ruleset_mock = MagicMock()
+    ruleset_mock.magic = magic_mock
+    ruleset_mock.roll_resolution = None  # falls back to hardcoded defaults
+    ruleset_mock.get_minor_attribute_modifier.return_value = 0
+    ruleset_mock.get_skill_rank_modifier.return_value = 0
+    return ruleset_mock
+
+
+def _make_caster(technique_active: bool = True) -> SimpleNamespace:
+    return SimpleNamespace(
+        magic_technique_active=technique_active,
+        magic_domain="test_domain",
+        attributes={"spirit": 2, "knowledge": 2},
+    )
+
+
+class TestPushScopeResolution:
+    def test_push_scope_raises_for_broad_domain(self):
+        """B3.5: push_scope on a Broad domain raises ValueError."""
+        ruleset = _make_magic_ruleset("broad")
+        character = _make_caster()
+        with pytest.raises(ValueError, match="Broad"):
+            resolve_magic_roll(
+                character=character,
+                domain_id="test_domain",
+                scope="minor",
+                intent="test",
+                ruleset=ruleset,
+                spark_use="push_scope",
+            )
+
+    def test_push_scope_steps_difficulty_harder_for_focused_domain(self):
+        """B3.5: push_scope on a non-broad domain steps difficulty one step harder."""
+        ruleset = _make_magic_ruleset("focused")
+        character = _make_caster()
+        # Focused minor is Easy (modifier +1). push_scope steps to Standard (modifier 0).
+        # With dice=5,5 (sum=10) and attr=0, difficulty=0: total=10 → full_success
+        # vs with Easy (+1): total=11
+        with patch("random.randint", return_value=5):
+            result_normal = resolve_magic_roll(
+                character=character,
+                domain_id="test_domain",
+                scope="minor",
+                intent="test",
+                ruleset=ruleset,
+                spark_use=None,
+            )
+            result_pushed = resolve_magic_roll(
+                character=character,
+                domain_id="test_domain",
+                scope="minor",
+                intent="test",
+                ruleset=ruleset,
+                spark_use="push_scope",
+            )
+        # push_scope steps Easy → Standard: difficulty_modifier goes from +1 to 0
+        assert result_pushed.difficulty_modifier == result_normal.difficulty_modifier - 1
+
+    def test_push_scope_steps_difficulty_harder_for_standard_domain(self):
+        """B3.5: push_scope on a Standard domain steps difficulty one level harder."""
+        ruleset = _make_magic_ruleset("standard")
+        character = _make_caster()
+        # Standard minor is Standard (modifier 0). push_scope steps to Hard (modifier -1).
+        with patch("random.randint", return_value=5):
+            result_normal = resolve_magic_roll(
+                character=character,
+                domain_id="test_domain",
+                scope="minor",
+                intent="test",
+                ruleset=ruleset,
+                spark_use=None,
+            )
+            result_pushed = resolve_magic_roll(
+                character=character,
+                domain_id="test_domain",
+                scope="minor",
+                intent="test",
+                ruleset=ruleset,
+                spark_use="push_scope",
+            )
+        assert result_pushed.difficulty_modifier == result_normal.difficulty_modifier - 1
+
+
+# ---------------------------------------------------------------------------
+# Data-driven outcome tiers
+# ---------------------------------------------------------------------------
+
+class TestDataDrivenOutcomeTiers:
+    """Tests for generalized N-tier outcome system."""
+
+    def _make_tier_ruleset(self, tiers):
+        """Build a MagicMock ruleset with custom outcome_tiers."""
+        from app.facets.schema import OutcomeTierDef
+        tier_defs = [OutcomeTierDef(**t) for t in tiers]
+        mock = MagicMock()
+        mock.roll_resolution = MagicMock()
+        mock.roll_resolution.outcome_tiers = tier_defs
+        mock.roll_resolution.thresholds = {}
+        mock.roll_resolution.outcomes = None
+        mock.roll_resolution.difficulty_modifiers = []
+        return mock
+
+    def test_outcome_from_4_tier_system(self):
+        """4-tier system: critical (20+), success (10+), fail (5+), fumble (catch-all)."""
+        ruleset = self._make_tier_ruleset([
+            {"id": "critical", "threshold": 20, "label": "Critical!", "description": "Crit"},
+            {"id": "success", "threshold": 10, "label": "Success", "description": "OK"},
+            {"id": "fail", "threshold": 5, "label": "Fail", "description": "Bad"},
+            {"id": "fumble", "threshold": None, "label": "Fumble", "description": "Oops"},
+        ])
+        tier, label, desc = _determine_outcome(25, ruleset)
+        assert tier == "critical"
+        tier, label, desc = _determine_outcome(20, ruleset)
+        assert tier == "critical"
+        tier, label, desc = _determine_outcome(15, ruleset)
+        assert tier == "success"
+        tier, label, desc = _determine_outcome(10, ruleset)
+        assert tier == "success"
+        tier, label, desc = _determine_outcome(7, ruleset)
+        assert tier == "fail"
+        tier, label, desc = _determine_outcome(5, ruleset)
+        assert tier == "fail"
+        tier, label, desc = _determine_outcome(4, ruleset)
+        assert tier == "fumble"
+        tier, label, desc = _determine_outcome(-1, ruleset)
+        assert tier == "fumble"
+
+    def test_outcome_from_2_tier_binary(self):
+        """Binary pass/fail — 2 tiers (success at 10, failure catch-all)."""
+        ruleset = self._make_tier_ruleset([
+            {"id": "success", "threshold": 10, "label": "Pass", "description": "You pass"},
+            {"id": "failure", "threshold": None, "label": "Fail", "description": "You fail"},
+        ])
+        tier, _, _ = _determine_outcome(10, ruleset)
+        assert tier == "success"
+        tier, _, _ = _determine_outcome(9, ruleset)
+        assert tier == "failure"
+
+    def test_outcome_tiers_backward_compat(self):
+        """Old thresholds+outcomes format works when outcome_tiers is empty."""
+        from app.facets.schema import OutcomeLabel, OutcomesDef
+        mock = MagicMock()
+        mock.roll_resolution = MagicMock()
+        mock.roll_resolution.outcome_tiers = []
+        mock.roll_resolution.thresholds = {"full_success": 10, "partial_success": 7}
+        mock.roll_resolution.outcomes = OutcomesDef(
+            full_success=OutcomeLabel(label="Full Success", description="Clean success"),
+            partial_success=OutcomeLabel(label="Partial", description="Cost"),
+            failure=OutcomeLabel(label="Failure", description="Bad"),
+        )
+        tier, label, _ = _determine_outcome(10, mock)
+        assert tier == "full_success"
+        assert label == "Full Success"
+        tier, _, _ = _determine_outcome(7, mock)
+        assert tier == "partial_success"
+        tier, _, _ = _determine_outcome(6, mock)
+        assert tier == "failure"
+
+
+# ---------------------------------------------------------------------------
+# Data-driven difficulty order
+# ---------------------------------------------------------------------------
+
+class TestDataDrivenDifficulty:
+    def test_difficulty_order_derived_from_modifiers(self):
+        """Custom difficulty names derive correct stepping order."""
+        from app.game.engine import _step_difficulty_harder, _step_difficulty_easier
+        mock = MagicMock()
+        mock.roll_resolution = MagicMock()
+        mock.roll_resolution.difficulty_modifiers = [
+            MagicMock(label="Trivial", modifier=2),
+            MagicMock(label="Normal", modifier=0),
+            MagicMock(label="Brutal", modifier=-3),
+        ]
+        # Trivial → Normal → Brutal (sorted by modifier descending)
+        result = _step_difficulty_harder("Trivial", mock)
+        assert result == "Normal"
+        result = _step_difficulty_harder("Normal", mock)
+        assert result == "Brutal"
+        result = _step_difficulty_harder("Brutal", mock)
+        assert result == "Brutal"  # already at hardest
+
+    def test_step_easier_uses_ruleset_order(self):
+        from app.game.engine import _step_difficulty_easier
+        mock = MagicMock()
+        mock.roll_resolution = MagicMock()
+        mock.roll_resolution.difficulty_modifiers = [
+            MagicMock(label="Trivial", modifier=2),
+            MagicMock(label="Normal", modifier=0),
+            MagicMock(label="Brutal", modifier=-3),
+        ]
+        result = _step_difficulty_easier("Brutal", mock)
+        assert result == "Normal"
+        result = _step_difficulty_easier("Trivial", mock)
+        assert result == "Trivial"  # already at easiest
+
+
+# ---------------------------------------------------------------------------
+# Data-driven dice (1d20, etc.)
+# ---------------------------------------------------------------------------
+
+class TestDataDrivenDice:
+    def test_dice_1d20_produces_correct_range(self):
+        """Roll with dice='1d20' uses d20, not d6."""
+        mock = MagicMock()
+        mock.roll_resolution = MagicMock()
+        mock.roll_resolution.dice = "1d20"
+        mock.roll_resolution.outcome_tiers = []
+        mock.roll_resolution.thresholds = {"full_success": 15, "partial_success": 10}
+        mock.roll_resolution.outcomes = MagicMock()
+        mock.roll_resolution.outcomes.full_success.label = "Hit"
+        mock.roll_resolution.outcomes.full_success.description = "Hit"
+        mock.roll_resolution.outcomes.partial_success.label = "Graze"
+        mock.roll_resolution.outcomes.partial_success.description = "Graze"
+        mock.roll_resolution.outcomes.failure.label = "Miss"
+        mock.roll_resolution.outcomes.failure.description = "Miss"
+        mock.roll_resolution.difficulty_modifiers = []
+        mock.get_minor_attribute_modifier.return_value = 0
+        mock.get_skill_rank_modifier.return_value = 0
+
+        # Mock random to return 17 (valid d20 value, > 6)
+        with patch("random.randint", return_value=17):
+            result = resolve_roll(make_request(), mock)
+        # With 1d20: only 1 die kept, sum = 17
+        assert len(result.dice_rolled) == 1
+        assert len(result.dice_kept) == 1
+        assert result.dice_sum == 17
+
+    def test_1d20_validation_integration(self):
+        """Build a minimal ruleset with 1d20 and 2 outcome tiers, full resolve."""
+        from app.facets.schema import OutcomeTierDef
+        mock = MagicMock()
+        mock.roll_resolution = MagicMock()
+        mock.roll_resolution.dice = "1d20"
+        mock.roll_resolution.outcome_tiers = [
+            OutcomeTierDef(id="pass", threshold=10, label="Pass", description="You pass"),
+            OutcomeTierDef(id="fail", threshold=None, label="Fail", description="You fail"),
+        ]
+        mock.roll_resolution.thresholds = {}
+        mock.roll_resolution.outcomes = None
+        mock.roll_resolution.difficulty_modifiers = []
+        mock.get_minor_attribute_modifier.return_value = 0
+        mock.get_skill_rank_modifier.return_value = 0
+
+        with patch("random.randint", return_value=15):
+            result = resolve_roll(make_request(), mock)
+        assert result.outcome == "pass"
+        assert result.dice_sum == 15
+
+        with patch("random.randint", return_value=5):
+            result = resolve_roll(make_request(), mock)
+        assert result.outcome == "fail"

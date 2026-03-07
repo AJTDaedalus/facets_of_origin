@@ -19,6 +19,10 @@ env/
 .DS_Store
 Thumbs.db
 
+# Test artifacts
+software/tests/_test_data/sessions/
+software/tests/_test_data/test.db
+
 # Editor
 .vscode/
 .idea/

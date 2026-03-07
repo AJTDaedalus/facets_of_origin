@@ -29,6 +29,8 @@ class CreateCharacterRequest(BaseModel):
     character_name: str = Field(min_length=1, max_length=64)
     primary_facet: str
     attributes: dict[str, int] = Field(description="Minor attribute ID -> rating (1-3).")
+    background_id: str | None = None
+    magic_domain: str | None = None
 
 
 class UploadCharacterRequest(BaseModel):
@@ -54,12 +56,20 @@ async def create_character(body: CreateCharacterRequest, request: Request):
         # MM can specify a player_name or it defaults to character name
         player_name = body.character_name
 
+    if body.background_id and not session.ruleset.get_background(body.background_id):
+        raise HTTPException(
+            status_code=422,
+            detail=f"Unknown background: {body.background_id}",
+        )
+
     character, errors = create_default_character(
         name=body.character_name,
         player_name=player_name or body.character_name,
         primary_facet=body.primary_facet,
         attributes=body.attributes,
         ruleset=session.ruleset,
+        background_id=body.background_id,
+        magic_domain=body.magic_domain,
     )
 
     if errors:

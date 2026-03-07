@@ -5,20 +5,27 @@
 ## II — Character Creation
 - II.1 Overview
 - II.2 Attributes
-- II.3 Lineage
-- II.4 Facets & Advancement
+- II.3 Magic
+- II.4 Facets & Advancement (Body)
+- II.4b Facets & Advancement (Mind)
+- II.4c Facets & Advancement (Soul)
 - II.5 Backgrounds
 - II.6 Skills
 
 ## III — Rules
-- III.1 Overview
-- III.2 Adventuring
+- III.1 Core Resolution *(dice mechanics, modifiers, difficulty, Sparks, contested rolls, saving throws)*
+- III.2 Adventuring *(Planned)*
 - III.3 Combat
 
 ## IV — Compendium
-- IV.1 Skills
-- IV.2 Equipment
-- IV.3 Magical Items
+- IV.1 Equipment
+- IV.2 Magical Items *(Planned)*
+
+## Quick Start
+- Pre-generated characters, core resolution summary, and an example scene to get playing in ten minutes.
+
+## Appendices
+- Appendix A: Magic Domain Catalog
 
 ---
 
