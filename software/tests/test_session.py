@@ -86,7 +86,7 @@ class TestStateDict:
     def test_to_state_dict_includes_characters(self, session, body_character):
         session.add_character(body_character)
         d = session.to_state_dict()
-        assert "Player1" in d["characters"]
+        assert "Player1" in d["all_characters"]
 
     def test_to_state_dict_roll_log_capped(self, session):
         for i in range(100):
@@ -186,13 +186,14 @@ class TestSessionNameEdgeCases:
 class TestStateDictCompleteness:
     def test_to_state_dict_has_all_keys(self, session):
         d = session.to_state_dict()
-        for key in ("session_id", "session_name", "characters", "ruleset", "roll_log"):
+        for key in ("session_id", "session_name", "all_characters", "ruleset", "roll_log",
+                    "enemy_library", "encounter_library", "active_enemies"):
             assert key in d, f"Missing key: {key}"
 
     def test_to_player_state_dict_has_all_keys(self, session):
         d = session.to_player_state_dict("nobody")
         for key in ("session_id", "session_name", "your_character", "all_characters",
-                    "ruleset", "roll_log"):
+                    "ruleset", "roll_log", "active_enemies"):
             assert key in d, f"Missing key: {key}"
 
     def test_ruleset_in_state_dict_is_dict(self, session):

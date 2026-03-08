@@ -82,20 +82,26 @@ class GameSession:
         """Full session state sent to the MM on WebSocket join.
 
         Returns the most recent 50 rolls to keep the payload manageable.
+        Includes enemy/encounter libraries and active enemies for the MM's
+        Builder and Play Field tabs.
         """
         return {
             "session_id": self.id,
             "session_name": self.name,
-            "characters": {pn: c.to_client_dict() for pn, c in self.characters.items()},
+            "all_characters": {pn: c.to_client_dict() for pn, c in self.characters.items()},
             "ruleset": self.ruleset.to_client_dict(),
             "roll_log": self.roll_log[-50:],
+            "enemy_library": {eid: e.to_client_dict() for eid, e in self.enemy_library.items()},
+            "encounter_library": {eid: e.to_client_dict() for eid, e in self.encounter_library.items()},
+            "active_enemies": {key: e.to_client_dict() for key, e in self.active_enemies.items()},
         }
 
     def to_player_state_dict(self, player_name: str) -> dict:
         """Session state sent to a specific player on WebSocket join.
 
         Includes the player's own character separately as 'your_character' for
-        easy access, plus all characters for the player list panel.
+        easy access, plus all characters for the player list panel and active
+        enemies for combat awareness.
         """
         character = self.characters.get(player_name)
         return {
@@ -105,6 +111,7 @@ class GameSession:
             "all_characters": {pn: c.to_client_dict() for pn, c in self.characters.items()},
             "ruleset": self.ruleset.to_client_dict(),
             "roll_log": self.roll_log[-50:],
+            "active_enemies": {key: e.to_client_dict() for key, e in self.active_enemies.items()},
         }
 
 

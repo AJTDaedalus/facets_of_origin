@@ -94,7 +94,7 @@
 </div>
 
 <!-- =====================================================================
-     MAIN GAME SCREEN
+     MAIN GAME SCREEN — Three-tab interface
      ===================================================================== -->
 <div id="game-screen" class="hidden">
   <div id="app">
@@ -107,213 +107,410 @@
       <button class="btn btn-secondary btn-sm" onclick="logout()">Leave</button>
     </header>
 
-    <!-- Spark nomination banner (MM only) -->
-    <div id="spark-nomination-banner" class="spark-nomination hidden" style="margin:8px 24px;">
+    <!-- Spark nomination banner (MM only, floats above tabs) -->
+    <div id="play-spark-nomination-banner" class="spark-nomination hidden" style="margin:8px 24px;">
       <span class="nomination-text"></span>
       <div class="btn-row" style="margin:0">
-        <button class="btn btn-gold btn-sm" onclick="confirmSparkNomination()">✨ Confirm Spark</button>
-        <button class="btn btn-secondary btn-sm" onclick="document.getElementById('spark-nomination-banner').classList.add('hidden')">Dismiss</button>
+        <button class="btn btn-gold btn-sm" onclick="confirmSparkNomination()">Confirm Spark</button>
+        <button class="btn btn-secondary btn-sm" onclick="document.getElementById('play-spark-nomination-banner').classList.add('hidden')">Dismiss</button>
       </div>
     </div>
 
-    <!-- Mobile tab bar — hidden on desktop via CSS -->
-    <nav class="mobile-tab-bar" aria-label="View tabs">
-      <button class="tab-btn active" data-tab="character" onclick="switchTab('character')">
-        <span class="tab-icon">🪞</span>Character
-      </button>
-      <button class="tab-btn" data-tab="table" onclick="switchTab('table')">
-        <span class="tab-icon">🎲</span>Table
-      </button>
+    <!-- Tab navigation -->
+    <nav class="tab-bar" id="main-tab-bar">
+      <button class="tab-btn active" data-tab="play" onclick="switchTab('play')">Play</button>
+      <button class="tab-btn" data-tab="tools" onclick="switchTab('tools')">Tools</button>
+      <button class="tab-btn" data-tab="builder" onclick="switchTab('builder')">Builder</button>
     </nav>
 
-    <div class="main-area">
+    <!-- =================================================================
+         PLAY TAB — rolling, combat, chat, sparks
+         ================================================================= -->
+    <div id="tab-play" class="tab-content">
+      <div class="main-area">
 
-      <!-- ===== LEFT PANEL ===== -->
-      <div class="left-panel">
+        <!-- ===== LEFT PANEL ===== -->
+        <div class="left-panel">
 
-        <!-- CHARACTER CREATION (shown when player has no character) -->
-        <div id="char-create-panel" class="hidden">
-          <div class="card">
-            <div class="card-title">Create Your Character</div>
-            <label>Character Name</label>
-            <input type="text" id="cc-name" placeholder="What do they call you?">
+          <!-- CHARACTER CREATION (shown when player has no character) -->
+          <div id="char-create-panel" class="hidden">
+            <div class="card">
+              <div class="card-title">Create Your Character</div>
+              <label>Character Name</label>
+              <input type="text" id="cc-name" placeholder="What do they call you?">
 
-            <label>Primary Facet</label>
-            <select id="cc-facet"></select>
+              <label>Primary Facet</label>
+              <select id="cc-facet"></select>
 
-            <div class="card-title" style="margin-top:12px;">Distribute Attributes</div>
-            <div id="cc-attributes"></div>
-            <div id="cc-points-remaining" style="font-size:0.85rem;color:var(--text-dim);margin-bottom:8px;"></div>
+              <div class="card-title" style="margin-top:12px;">Distribute Attributes</div>
+              <div id="cc-attributes"></div>
+              <div id="cc-points-remaining" style="font-size:0.85rem;color:var(--text-dim);margin-bottom:8px;"></div>
 
-            <button class="btn btn-primary" onclick="submitCharacterCreation()">Create Character</button>
-            <div id="cc-error" class="error-msg"></div>
+              <button class="btn btn-primary" onclick="submitCharacterCreation()">Create Character</button>
+              <div id="cc-error" class="error-msg"></div>
+            </div>
           </div>
+
+          <!-- CHARACTER SHEET (interactive — play tab) -->
+          <div id="character-panel" class="hidden">
+            <div class="card">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                <div>
+                  <h2 id="play-char-name" style="font-size:1.2rem;"></h2>
+                  <span id="play-char-facet" class="facet-badge"></span>
+                  <span id="play-char-level" style="font-size:0.8rem;color:var(--text-dim);margin-left:8px;"></span>
+                </div>
+              </div>
+
+              <!-- Spark counter -->
+              <div class="spark-counter">
+                <span style="font-size:0.8rem;color:var(--text-dim);">SPARKS</span>
+                <div class="spark-pips" id="play-spark-pips"></div>
+                <span id="play-spark-count" style="font-size:0.85rem;color:var(--gold);"></span>
+                <span id="play-sparks-to-spend" style="font-size:0.75rem;color:var(--accent);"></span>
+              </div>
+
+              <!-- Attributes -->
+              <div class="card-title">Attributes</div>
+              <div id="play-attr-display"></div>
+
+              <!-- Roll controls -->
+              <div class="card" style="margin-top:12px;padding:12px;">
+                <div class="card-title">Roll Dice</div>
+                <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:8px;">
+                  Selected: <strong id="play-roll-attr-display" style="color:var(--text);">-- click an attribute above --</strong>
+                </div>
+                <label>Difficulty</label>
+                <select id="play-difficulty-select" class="difficulty-select">
+                  <option value="Easy">Easy (+1)</option>
+                  <option value="Standard" selected>Standard (+/-0)</option>
+                  <option value="Hard">Hard (-1)</option>
+                  <option value="Very Hard">Very Hard (-2)</option>
+                </select>
+                <label>Description (optional)</label>
+                <input type="text" id="play-roll-description" placeholder="What are you attempting?">
+                <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:8px;">
+                  Click spark pips above to spend Sparks before rolling.
+                </div>
+                <button class="btn btn-primary" id="play-roll-btn" onclick="performRoll()" disabled>Roll 2d6</button>
+              </div>
+
+              <!-- Roll result -->
+              <div id="play-roll-result-box" class="hidden"></div>
+            </div>
+
+            <!-- Skills -->
+            <div class="card">
+              <div class="card-title">Skills</div>
+              <table class="skills-table">
+                <thead>
+                  <tr>
+                    <th>Skill</th>
+                    <th>Rank</th>
+                    <th>Progress</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="play-skills-tbody"></tbody>
+              </table>
+              <div style="font-size:0.7rem;color:var(--text-dim);margin-top:8px;">
+                outside primary Facet. Click Roll to roll with skill bonus.
+              </div>
+            </div>
+          </div>
+
         </div>
+        <!-- end left panel -->
 
-        <!-- CHARACTER SHEET -->
-        <div id="character-panel" class="hidden">
+        <!-- ===== RIGHT PANEL ===== -->
+        <div class="right-panel">
+
+          <!-- Players -->
           <div class="card">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-              <div>
-                <h2 id="char-name" style="font-size:1.2rem;"></h2>
-                <span id="char-facet" class="facet-badge"></span>
-                <span id="char-level" style="font-size:0.8rem;color:var(--text-dim);margin-left:8px;"></span>
-              </div>
-            </div>
-
-            <!-- Spark counter -->
-            <div class="spark-counter">
-              <span style="font-size:0.8rem;color:var(--text-dim);">SPARKS</span>
-              <div class="spark-pips" id="spark-pips"></div>
-              <span id="spark-count" style="font-size:0.85rem;color:var(--gold);"></span>
-              <span id="sparks-to-spend" style="font-size:0.75rem;color:var(--accent);"></span>
-            </div>
-
-            <!-- Attributes -->
-            <div class="card-title">Attributes</div>
-            <div id="attr-display"></div>
-
-            <!-- Roll controls -->
-            <div class="card" style="margin-top:12px;padding:12px;">
-              <div class="card-title">Roll Dice</div>
-              <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:8px;">
-                Selected: <strong id="roll-attr-display" style="color:var(--text);">— click an attribute above —</strong>
-              </div>
-              <label>Difficulty</label>
-              <select id="difficulty-select" class="difficulty-select">
-                <option value="Easy">Easy (+1)</option>
-                <option value="Standard" selected>Standard (±0)</option>
-                <option value="Hard">Hard (−1)</option>
-                <option value="Very Hard">Very Hard (−2)</option>
-              </select>
-              <label>Description (optional)</label>
-              <input type="text" id="roll-description" placeholder="What are you attempting?">
-              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:8px;">
-                Click spark pips above to spend Sparks before rolling.
-              </div>
-              <button class="btn btn-primary" id="roll-btn" onclick="performRoll()" disabled>Roll 2d6</button>
-            </div>
-
-            <!-- Roll result -->
-            <div id="roll-result-box" class="hidden"></div>
+            <div class="card-title">Players</div>
+            <ul class="player-list" id="play-player-list"></ul>
           </div>
 
-          <!-- Skills -->
+          <!-- Roll log -->
           <div class="card">
-            <div class="card-title">Skills</div>
-            <table class="skills-table">
-              <thead>
-                <tr>
-                  <th>Skill</th>
-                  <th>Rank</th>
-                  <th>Progress</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody id="skills-tbody"></tbody>
-            </table>
-            <div style="font-size:0.7rem;color:var(--text-dim);margin-top:8px;">
-              ● = outside primary Facet. Click Roll to roll with skill bonus.
+            <div class="card-title">Roll Log</div>
+            <div class="roll-log" id="play-roll-log"></div>
+          </div>
+
+          <!-- Chat -->
+          <div class="card" style="flex:1;">
+            <div class="card-title">Table Chat</div>
+            <div class="chat-log" id="play-chat-log"></div>
+            <div style="display:flex;gap:6px;margin-top:8px;">
+              <input type="text" id="play-chat-input" placeholder="Say something..." style="margin:0;flex:1;">
+              <button class="btn btn-secondary btn-sm" onclick="sendChat()">Send</button>
             </div>
           </div>
+
+          <!-- MM controls -->
+          <div id="play-mm-controls" class="card hidden">
+            <div class="card-title">Mirror Master Controls</div>
+            <div style="margin-bottom:12px;">
+              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">AWARD SPARK</div>
+              <input type="text" id="play-mm-spark-player" placeholder="Player name">
+              <input type="text" id="play-mm-spark-reason" placeholder="Reason (optional)">
+              <button class="btn btn-gold btn-sm" onclick="mmAwardSpark()">Award Spark</button>
+            </div>
+            <div style="margin-bottom:12px;">
+              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">GENERATE INVITE</div>
+              <input type="text" id="play-invite-player-name" placeholder="Player name">
+              <button class="btn btn-secondary btn-sm" onclick="generateInviteInGame()">Get Invite Link</button>
+              <div id="play-invite-result" style="font-size:11px;word-break:break-all;color:var(--text-dim);margin-top:4px;"></div>
+            </div>
+            <div style="margin-bottom:12px;">
+              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">COMBAT</div>
+              <div class="btn-row" style="margin:0;">
+                <button class="btn btn-primary btn-sm" onclick="startCombat()">Start Combat</button>
+                <button class="btn btn-secondary btn-sm" onclick="endExchange()">End Exchange</button>
+                <button class="btn btn-secondary btn-sm" onclick="endCombat()">End Combat</button>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">ENEMY TRACKER</div>
+              <div id="play-enemy-tracker"></div>
+              <div style="margin-top:8px;">
+                <select id="play-spawn-enemy-select" style="margin-bottom:4px;">
+                  <option value="">-- select enemy --</option>
+                </select>
+                <input type="text" id="play-spawn-instance-name" placeholder="Instance name (optional)">
+                <button class="btn btn-secondary btn-sm" onclick="spawnEnemyFromLibrary()">Spawn</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Player controls (Spark nomination) -->
+          <div id="play-player-controls" class="card hidden">
+            <div class="card-title">Nominate for Spark</div>
+            <input type="text" id="play-peer-spark-player" placeholder="Player name">
+            <button class="btn btn-gold btn-sm" onclick="nominateForSpark()">Spark?</button>
+            <div style="font-size:0.75rem;color:var(--text-dim);margin-top:6px;">
+              Nominate another player for a Spark. The MM confirms.
+            </div>
+          </div>
+
         </div>
+        <!-- end right panel -->
 
       </div>
-      <!-- end left panel -->
-
-      <!-- ===== RIGHT PANEL ===== -->
-      <div class="right-panel">
-
-        <!-- Players -->
-        <div class="card">
-          <div class="card-title">Players</div>
-          <ul class="player-list" id="player-list"></ul>
-        </div>
-
-        <!-- Roll log -->
-        <div class="card">
-          <div class="card-title">Roll Log</div>
-          <div class="roll-log" id="roll-log"></div>
-        </div>
-
-        <!-- Chat -->
-        <div class="card" style="flex:1;">
-          <div class="card-title">Table Chat</div>
-          <div class="chat-log" id="chat-log"></div>
-          <div style="display:flex;gap:6px;margin-top:8px;">
-            <input type="text" id="chat-input" placeholder="Say something..." style="margin:0;flex:1;">
-            <button class="btn btn-secondary btn-sm" onclick="sendChat()">Send</button>
-          </div>
-        </div>
-
-        <!-- MM controls -->
-        <div id="mm-controls" class="card hidden">
-          <div class="card-title">Mirror Master Controls</div>
-          <div style="margin-bottom:12px;">
-            <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">AWARD SPARK</div>
-            <input type="text" id="mm-spark-player" placeholder="Player name">
-            <input type="text" id="mm-spark-reason" placeholder="Reason (optional)">
-            <button class="btn btn-gold btn-sm" onclick="mmAwardSpark()">✨ Award Spark</button>
-          </div>
-          <div>
-            <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">GENERATE INVITE</div>
-            <input type="text" id="invite-player-name-ingame" placeholder="Player name">
-            <button class="btn btn-secondary btn-sm" onclick="generateInviteInGame()">Get Invite Link</button>
-            <div id="ingame-invite-result" style="font-size:11px;word-break:break-all;color:var(--text-dim);margin-top:4px;"></div>
-          </div>
-        </div>
-
-        <!-- Player controls (Spark nomination) -->
-        <div id="player-controls" class="card hidden">
-          <div class="card-title">Nominate for Spark</div>
-          <input type="text" id="peer-spark-player" placeholder="Player name">
-          <button class="btn btn-gold btn-sm" onclick="nominateForSpark()">Spark?</button>
-          <div style="font-size:0.75rem;color:var(--text-dim);margin-top:6px;">
-            Nominate another player for a Spark. The MM confirms.
-          </div>
-        </div>
-
-      </div>
-      <!-- end right panel -->
-
     </div>
+    <!-- end play tab -->
+
+    <!-- =================================================================
+         TOOLS TAB — sheets, inventory, rule summaries, export
+         ================================================================= -->
+    <div id="tab-tools" class="tab-content hidden">
+      <div class="tools-content">
+
+        <!-- Player: own character sheet -->
+        <div id="tools-own-sheet" class="card">
+          <div class="card-title">Character Sheet</div>
+          <div id="tools-sheet-content"></div>
+        </div>
+
+        <!-- MM: all character sheets -->
+        <div id="tools-all-sheets" class="card hidden">
+          <div class="card-title">All Characters</div>
+          <div id="tools-all-sheets-content"></div>
+        </div>
+
+        <!-- Inventory -->
+        <div class="card">
+          <div class="card-title">Inventory</div>
+          <div id="tools-inventory-list"></div>
+          <div style="display:flex;gap:6px;margin-top:8px;">
+            <input type="text" id="tools-inventory-input" placeholder="Add item..." style="margin:0;flex:1;">
+            <button class="btn btn-secondary btn-sm" onclick="addInventoryItem()">Add</button>
+          </div>
+        </div>
+
+        <!-- Rule summaries -->
+        <div id="tools-rule-summaries"></div>
+
+        <!-- Encounter budget calculator (MM only) -->
+        <div id="tools-budget-calculator" class="card hidden">
+          <div class="card-title">Encounter Budget Calculator</div>
+          <label>Party Career Advances (sum)</label>
+          <input type="number" id="tools-budget-advances" value="0" min="0" style="width:120px;">
+          <label>Difficulty</label>
+          <select id="tools-budget-difficulty" style="width:180px;">
+            <option value="skirmish">Skirmish (x1)</option>
+            <option value="standard" selected>Standard (x2)</option>
+            <option value="hard">Hard (x3)</option>
+            <option value="deadly">Deadly (x4)</option>
+          </select>
+          <button class="btn btn-secondary btn-sm" onclick="calculateBudget()">Calculate</button>
+          <div id="tools-budget-result" style="font-size:14px;font-weight:600;color:var(--gold);margin-top:8px;"></div>
+        </div>
+
+        <!-- Export -->
+        <div class="card">
+          <button class="btn btn-secondary" onclick="exportCharacter()">Export Character (.fof)</button>
+        </div>
+
+      </div>
+    </div>
+    <!-- end tools tab -->
+
+    <!-- =================================================================
+         BUILDER TAB — character advancement, enemy/encounter builder
+         ================================================================= -->
+    <div id="tab-builder" class="tab-content hidden">
+      <div class="builder-content">
+
+        <!-- ===== PLAYER SECTION ===== -->
+        <div id="builder-player-section">
+
+          <!-- Skill advancement -->
+          <div class="card">
+            <div class="card-title">Skill Advancement</div>
+            <div id="builder-sp-remaining" style="font-size:13px;color:var(--text-dim);margin-bottom:8px;"></div>
+            <div id="builder-skills-list"></div>
+          </div>
+
+          <!-- Technique selection -->
+          <div class="card">
+            <div class="card-title">Techniques</div>
+            <div id="builder-technique-list"></div>
+          </div>
+
+          <!-- Character notes -->
+          <div class="card">
+            <div class="card-title">Character Notes</div>
+            <textarea id="builder-player-notes" rows="6" placeholder="Your notes..." style="width:100%;"></textarea>
+            <button class="btn btn-secondary btn-sm" style="margin-top:8px;" onclick="savePlayerNotes()">Save Notes</button>
+          </div>
+
+        </div>
+
+        <!-- ===== MM SECTION ===== -->
+        <div id="builder-mm-section" class="hidden">
+
+          <!-- Enemy builder -->
+          <div class="card">
+            <div class="card-title">Enemy Builder</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <div>
+                <label>Name</label>
+                <input type="text" id="builder-enemy-name" placeholder="e.g. Harbor Thug">
+              </div>
+              <div>
+                <label>Tier</label>
+                <select id="builder-enemy-tier">
+                  <option value="mook">Mook</option>
+                  <option value="named" selected>Named</option>
+                  <option value="boss">Boss</option>
+                </select>
+              </div>
+              <div>
+                <label>Endurance</label>
+                <input type="number" id="builder-enemy-endurance" value="4" min="0">
+              </div>
+              <div>
+                <label>Armor</label>
+                <select id="builder-enemy-armor">
+                  <option value="none">None</option>
+                  <option value="light">Light</option>
+                  <option value="heavy">Heavy</option>
+                </select>
+              </div>
+              <div>
+                <label>Attack Mod</label>
+                <input type="number" id="builder-enemy-attack" value="0">
+              </div>
+              <div>
+                <label>Defense Mod</label>
+                <input type="number" id="builder-enemy-defense" value="0">
+              </div>
+            </div>
+            <label style="margin-top:8px;">Techniques (comma-separated)</label>
+            <input type="text" id="builder-enemy-techniques" placeholder="e.g. Riposte, Shield Wall">
+            <label>Special / Phase Changes</label>
+            <textarea id="builder-enemy-special" rows="2" placeholder="Phase change or special abilities..."></textarea>
+            <label>Description</label>
+            <input type="text" id="builder-enemy-description" placeholder="Brief description">
+            <label>Tactics</label>
+            <textarea id="builder-enemy-tactics" rows="2" placeholder="How does this enemy fight?"></textarea>
+            <div id="builder-enemy-tr" style="font-size:14px;font-weight:600;color:var(--gold);margin:8px 0;"></div>
+            <div class="btn-row">
+              <button class="btn btn-primary btn-sm" onclick="saveEnemy()">Save to Library</button>
+              <button class="btn btn-secondary btn-sm" onclick="previewEnemyTR()">Preview TR</button>
+            </div>
+            <div id="builder-enemy-status" class="success-msg"></div>
+          </div>
+
+          <!-- Enemy library -->
+          <div class="card">
+            <div class="card-title">Enemy Library</div>
+            <div id="builder-enemy-library-list" style="font-size:13px;color:var(--text-dim);">No enemies saved.</div>
+          </div>
+
+          <!-- Encounter builder -->
+          <div class="card">
+            <div class="card-title">Encounter Builder</div>
+            <label>Encounter Name</label>
+            <input type="text" id="builder-encounter-name" placeholder="e.g. Market Square Ambush">
+            <label>Difficulty</label>
+            <select id="builder-encounter-difficulty">
+              <option value="skirmish">Skirmish</option>
+              <option value="standard" selected>Standard</option>
+              <option value="hard">Hard</option>
+              <option value="deadly">Deadly</option>
+            </select>
+            <label>Environment</label>
+            <input type="text" id="builder-encounter-environment" placeholder="Where does this happen?">
+            <label>Description</label>
+            <textarea id="builder-encounter-description" rows="2" placeholder="What's happening?"></textarea>
+            <label>Enemies</label>
+            <div id="builder-encounter-enemies"></div>
+            <div class="btn-row" style="margin-bottom:8px;">
+              <select id="builder-encounter-add-enemy" style="flex:1;">
+                <option value="">-- add enemy --</option>
+              </select>
+              <button class="btn btn-secondary btn-sm" onclick="addEncounterEnemy()">Add</button>
+            </div>
+            <label>Lateral Solutions</label>
+            <textarea id="builder-encounter-laterals" rows="2" placeholder="Creative solutions players might find..."></textarea>
+            <div id="builder-encounter-budget" style="font-size:13px;color:var(--text-dim);margin:8px 0;"></div>
+            <button class="btn btn-primary btn-sm" onclick="saveEncounter()">Save Encounter</button>
+            <div id="builder-encounter-status" class="success-msg"></div>
+          </div>
+
+          <!-- Campaign notes -->
+          <div class="card">
+            <div class="card-title">Campaign Notes</div>
+            <textarea id="builder-campaign-notes" rows="8" placeholder="Session notes, NPC notes, plot threads..."></textarea>
+            <button class="btn btn-secondary btn-sm" style="margin-top:8px;" onclick="saveCampaignNotes()">Save Notes</button>
+          </div>
+
+          <!-- Skill advancement controls (MM awards marks) -->
+          <div class="card">
+            <div class="card-title">Award Skill Advancement</div>
+            <label>Player Name</label>
+            <input type="text" id="builder-advance-player" placeholder="Player name">
+            <label>Skill</label>
+            <select id="builder-advance-skill"></select>
+            <button class="btn btn-primary btn-sm" onclick="mmAdvanceSkill()">Award Mark</button>
+            <div id="builder-advance-status" class="success-msg"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <!-- end builder tab -->
+
   </div>
 </div>
 
 <script src="/static/js/app.js"></script>
-<script>
-// -------------------------------------------------------------------------
-// Mobile tab navigation
-// -------------------------------------------------------------------------
-function switchTab(tab) {
-  const appEl = document.getElementById('app');
-  if (tab === 'table') {
-    appEl.classList.add('show-table');
-  } else {
-    appEl.classList.remove('show-table');
-  }
-  document.querySelectorAll('.tab-btn').forEach(function(btn) {
-    btn.classList.toggle('active', btn.dataset.tab === tab);
-  });
-}
-
-// -------------------------------------------------------------------------
-// In-game invite generation for MM
-async function generateInviteInGame() {
-  const playerName = document.getElementById('invite-player-name-ingame').value.trim();
-  if (!playerName) { alert('Enter a player name.'); return; }
-  const resp = await apiFetch('/api/sessions/invite', 'POST', {
-    session_id: state.sessionId,
-    player_name: playerName,
-  });
-  if (resp.ok) {
-    const data = await resp.json();
-    document.getElementById('ingame-invite-result').textContent = data.invite_url;
-  } else {
-    const err = await resp.json();
-    alert(err.detail || 'Failed.');
-  }
-}
-</script>
+<script src="/static/js/components.js"></script>
+<script src="/static/js/play.js"></script>
+<script src="/static/js/tools.js"></script>
+<script src="/static/js/builder.js"></script>
 </body>
 </html>
