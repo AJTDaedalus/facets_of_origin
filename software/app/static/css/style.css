@@ -851,3 +851,159 @@ label {
 
   header h1 { display: none; } /* save space; session badge is enough */
 }
+
+/* =====================================================================
+   Combat Panel
+   ===================================================================== */
+.combat-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 12px;
+}
+.endurance-bar-wrap { flex: 1; }
+.endurance-bar {
+  height: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  overflow: hidden;
+  margin: 2px 0;
+}
+.endurance-fill {
+  height: 100%;
+  background: #4caf50;
+  border-radius: 7px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+.endurance-fill.low  { background: #ff9800; }
+.endurance-fill.critical { background: #f44336; }
+
+.posture-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: capitalize;
+}
+.posture-aggressive { background: rgba(244,67,54,0.2); color: #f44336; }
+.posture-measured   { background: rgba(158,158,158,0.2); color: var(--text-dim); }
+.posture-defensive  { background: rgba(33,150,243,0.2); color: #2196f3; }
+.posture-withdrawn  { background: rgba(158,158,158,0.15); color: var(--text-dim); font-style: italic; }
+
+.posture-selector {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+.posture-opt {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0;
+  transition: border-color 0.15s;
+}
+.posture-opt:hover { border-color: var(--accent); }
+.posture-opt input[type="radio"] { margin: 0; }
+
+.combat-action-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.combat-sub-form {
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+.condition-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 8px;
+  margin: 1px 2px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.condition-tier1 { background: rgba(255,193,7,0.2); color: #ffc107; }
+.condition-tier2 { background: rgba(255,152,0,0.2); color: #ff9800; }
+.condition-tier3 { background: rgba(244,67,54,0.25); color: #f44336; font-weight: 700; }
+
+/* =====================================================================
+   Magic Panel
+   ===================================================================== */
+.domain-type-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  border-radius: 8px;
+  text-transform: capitalize;
+  margin-left: 4px;
+}
+.domain-type-focused  { background: rgba(76,175,80,0.2); color: #4caf50; }
+.domain-type-standard { background: rgba(33,150,243,0.2); color: #2196f3; }
+.domain-type-broad    { background: rgba(156,39,176,0.2); color: #ab47bc; }
+
+.magic-scope-selector {
+  display: flex;
+  gap: 2px;
+}
+.scope-opt {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0;
+  transition: border-color 0.15s;
+}
+.scope-opt:hover { border-color: var(--accent); }
+.scope-opt input[type="radio"] { margin: 0; }
+
+.magic-difficulty-preview {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.spark-use-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.8rem;
+}
+.spark-use-selector label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  cursor: pointer;
+}
+.spark-use-selector input[type="radio"] { margin: 0; }
+
+/* Postures revealed list */
+#combat-postures-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.posture-reveal-entry {
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}

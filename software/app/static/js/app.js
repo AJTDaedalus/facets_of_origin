@@ -27,6 +27,8 @@ const state = {
   activeEnemies: {},       // tracker_key -> enemy
   enemyLibrary: {},        // enemy_id -> enemy
   encounterLibrary: {},    // encounter_id -> encounter
+  inCombat: false,
+  postures: {},            // player_name -> posture (after reveal)
 };
 
 // ---------------------------------------------------------------------------
@@ -348,6 +350,44 @@ function handleServerMessage(msg) {
     case 'enemy_removed':
       onEnemyRemoved(msg);
       addSystemChat(`Enemy removed: ${msg.tracker_key}`);
+      break;
+    // Combat broadcasts
+    case 'combat_started':
+      onCombatStarted(msg);
+      break;
+    case 'posture_declared':
+      onPostureDeclared(msg);
+      break;
+    case 'postures_revealed':
+      onPosturesRevealed(msg);
+      break;
+    case 'strike_result':
+      onStrikeResult(msg);
+      break;
+    case 'react_result':
+      onReactResult(msg);
+      break;
+    case 'support_result':
+      onSupportResult(msg);
+      break;
+    case 'maneuver_result':
+      onManeuverResult(msg);
+      break;
+    case 'condition_applied':
+      onConditionApplied(msg);
+      break;
+    case 'condition_cleared':
+      onConditionCleared(msg);
+      break;
+    case 'exchange_ended':
+      onExchangeEnded(msg);
+      break;
+    case 'combat_ended':
+      onCombatEnded(msg);
+      break;
+    // Magic broadcasts
+    case 'cast_result':
+      onCastResult(msg);
       break;
     case 'error':
       addSystemChat(`Error: ${msg.message}`);

@@ -195,7 +195,16 @@ def resolve_magic_roll(
 
     domain_def = ruleset.magic.get_domain(domain_id)
     if not domain_def:
-        raise ValueError(f"Unknown magic domain '{domain_id}'.")
+        # Domain not registered in the catalog — create a synthetic definition
+        # using "standard" type so the cast still resolves with sensible defaults.
+        from app.facets.schema import MagicDomainDef
+        domain_def = MagicDomainDef(
+            id=domain_id,
+            name=domain_id.replace("_", " ").title(),
+            type="standard",
+            tradition="scholarly",
+            description=f"Unregistered domain '{domain_id}'",
+        )
 
     domain_type_cfg = ruleset.magic.domain_types.get(domain_def.type, {})
     scope_difficulties: dict = domain_type_cfg.get("scope_difficulties", {})

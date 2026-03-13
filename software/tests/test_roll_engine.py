@@ -567,6 +567,52 @@ class TestPushScopeResolution:
         assert result_pushed.difficulty_modifier == result_normal.difficulty_modifier - 1
 
 
+class TestUnregisteredDomainFallback:
+    """When a character's domain isn't in the catalog, the engine should
+    fall back to 'standard' domain type rather than raising ValueError."""
+
+    def test_unregistered_domain_resolves_as_standard_type(self):
+        """Casting with an unregistered domain uses standard-type difficulties."""
+        # Build a ruleset whose get_domain returns None for the domain ID
+        ruleset = _make_magic_ruleset("standard")
+        ruleset.magic.get_domain.return_value = None  # simulate unregistered domain
+
+        character = _make_caster()
+        character.magic_domain = "inscription"
+
+        with patch("random.randint", return_value=5):
+            result = resolve_magic_roll(
+                character=character,
+                domain_id="inscription",
+                scope="minor",
+                intent="trace a glyph",
+                ruleset=ruleset,
+            )
+        # Standard-type minor scope → Standard difficulty (modifier 0)
+        assert result.difficulty_modifier == 0
+        assert "[magic:inscription:minor]" in result.request.description
+
+    def test_unregistered_domain_secondary_penalty_still_applies(self):
+        """Secondary domain penalty applies even for unregistered domains."""
+        ruleset = _make_magic_ruleset("standard")
+        ruleset.magic.get_domain.return_value = None
+
+        character = _make_caster()
+        character.magic_domain = "inscription"
+        character.secondary_magic_domain = "divination"
+
+        with patch("random.randint", return_value=5):
+            result = resolve_magic_roll(
+                character=character,
+                domain_id="divination",
+                scope="minor",
+                intent="read the threads",
+                ruleset=ruleset,
+            )
+        # Standard minor = Standard (0), +1 step harder for secondary = Hard (-1)
+        assert result.difficulty_modifier == -1
+
+
 # ---------------------------------------------------------------------------
 # Data-driven outcome tiers
 # ---------------------------------------------------------------------------

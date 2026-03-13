@@ -199,6 +199,195 @@
               <div id="play-roll-result-box" class="hidden"></div>
             </div>
 
+            <!-- COMBAT PANEL (shown during combat) -->
+            <div id="combat-panel" class="card hidden">
+              <div class="card-title">Combat</div>
+
+              <!-- Endurance bar -->
+              <div class="combat-status-bar">
+                <div class="endurance-bar-wrap">
+                  <label style="font-size:0.75rem;color:var(--text-dim);">Endurance</label>
+                  <div class="endurance-bar">
+                    <div class="endurance-fill" id="combat-endurance-fill"></div>
+                  </div>
+                  <span id="combat-endurance-text" style="font-size:0.85rem;">0/0</span>
+                </div>
+                <div>
+                  <span style="font-size:0.75rem;color:var(--text-dim);">Posture:</span>
+                  <span id="combat-posture-badge" class="posture-badge posture-measured">Measured</span>
+                </div>
+              </div>
+
+              <!-- Conditions -->
+              <div id="combat-conditions" style="margin-bottom:8px;"></div>
+
+              <!-- Posture selector -->
+              <div style="margin-bottom:10px;">
+                <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:4px;">DECLARE POSTURE</div>
+                <div class="posture-selector">
+                  <label class="posture-opt" title="Aggressive: +1 offense, +1 reaction cost">
+                    <input type="radio" name="combat-posture" value="aggressive"> Aggressive
+                  </label>
+                  <label class="posture-opt" title="Measured: baseline">
+                    <input type="radio" name="combat-posture" value="measured" checked> Measured
+                  </label>
+                  <label class="posture-opt" title="Defensive: -1 offense, -1 reaction cost">
+                    <input type="radio" name="combat-posture" value="defensive"> Defensive
+                  </label>
+                  <label class="posture-opt" title="Withdrawn: no offense, free reactions, recover 2 Endurance">
+                    <input type="radio" name="combat-posture" value="withdrawn"> Withdrawn
+                  </label>
+                </div>
+                <button class="btn btn-secondary btn-sm" onclick="declarePosture()" style="margin-top:4px;">Declare</button>
+              </div>
+
+              <!-- Action buttons -->
+              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:4px;">ACTIONS</div>
+              <div class="combat-action-row">
+                <button class="btn btn-primary btn-sm" onclick="showCombatAction('strike')">Strike</button>
+                <button class="btn btn-secondary btn-sm" onclick="showCombatAction('react')">React</button>
+                <button class="btn btn-secondary btn-sm" onclick="showCombatAction('support')">Support</button>
+                <button class="btn btn-secondary btn-sm" onclick="showCombatAction('maneuver')">Maneuver</button>
+              </div>
+
+              <!-- Strike sub-form -->
+              <div id="combat-form-strike" class="combat-sub-form hidden">
+                <div style="font-size:0.8rem;font-weight:600;margin-bottom:4px;">Strike</div>
+                <label>Target</label>
+                <input type="text" id="strike-target" placeholder="Enemy or character name">
+                <label>Attribute</label>
+                <select id="strike-attribute"></select>
+                <label>Skill (optional)</label>
+                <select id="strike-skill"><option value="">-- none --</option></select>
+                <label>Difficulty</label>
+                <select id="strike-difficulty" class="difficulty-select">
+                  <option value="Easy">Easy</option>
+                  <option value="Standard" selected>Standard</option>
+                  <option value="Hard">Hard</option>
+                  <option value="Very Hard">Very Hard</option>
+                </select>
+                <div style="display:flex;gap:12px;align-items:center;margin:6px 0;">
+                  <label style="margin:0;display:flex;align-items:center;gap:4px;">
+                    <input type="checkbox" id="strike-press"> Press (-1 End, +1d6 drop lowest)
+                  </label>
+                </div>
+                <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:4px;">
+                  Spark pips (Play tab top) apply here too.
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="performStrike()">Strike!</button>
+              </div>
+
+              <!-- React sub-form -->
+              <div id="combat-form-react" class="combat-sub-form hidden">
+                <div style="font-size:0.8rem;font-weight:600;margin-bottom:4px;">React</div>
+                <div class="combat-action-row" style="margin-bottom:6px;">
+                  <button class="btn btn-secondary btn-sm" onclick="performReact('dodge')" title="1 End, Dexterity roll">Dodge</button>
+                  <button class="btn btn-secondary btn-sm" onclick="performReact('parry')" title="1 End, Strength+Combat roll">Parry</button>
+                  <button class="btn btn-secondary btn-sm" onclick="performReact('absorb')" title="0 End, take the hit">Absorb</button>
+                  <button class="btn btn-secondary btn-sm" onclick="performReact('intercept')" title="2 End, protect an ally">Intercept</button>
+                </div>
+                <div id="react-cost-preview" style="font-size:0.75rem;color:var(--text-dim);"></div>
+              </div>
+
+              <!-- Support sub-form -->
+              <div id="combat-form-support" class="combat-sub-form hidden">
+                <div style="font-size:0.8rem;font-weight:600;margin-bottom:4px;">Support</div>
+                <label>Target Ally</label>
+                <select id="support-target"></select>
+                <label>Bonus Type</label>
+                <select id="support-bonus-type">
+                  <option value="add_die">Add Die (ally gets +1d6 drop lowest)</option>
+                  <option value="ease_difficulty">Ease Difficulty (ally's next roll one step easier)</option>
+                </select>
+                <label>Your Attribute</label>
+                <select id="support-attribute"></select>
+                <label>Your Skill (optional)</label>
+                <select id="support-skill"><option value="">-- none --</option></select>
+                <button class="btn btn-secondary btn-sm" onclick="performSupport()" style="margin-top:4px;">Support!</button>
+              </div>
+
+              <!-- Maneuver sub-form -->
+              <div id="combat-form-maneuver" class="combat-sub-form hidden">
+                <div style="font-size:0.8rem;font-weight:600;margin-bottom:4px;">Maneuver</div>
+                <label>Target</label>
+                <input type="text" id="maneuver-target" placeholder="Enemy or character name">
+                <label>Attribute</label>
+                <select id="maneuver-attribute"></select>
+                <label>Skill (optional)</label>
+                <select id="maneuver-skill"><option value="">-- none --</option></select>
+                <label>Description</label>
+                <input type="text" id="maneuver-description" placeholder="What are you trying to do?">
+                <button class="btn btn-secondary btn-sm" onclick="performManeuver()" style="margin-top:4px;">Maneuver!</button>
+              </div>
+
+              <!-- Revealed postures display -->
+              <div id="combat-postures-revealed" class="hidden" style="margin-top:8px;">
+                <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:4px;">POSTURES THIS EXCHANGE</div>
+                <div id="combat-postures-list"></div>
+              </div>
+            </div>
+
+            <!-- MAGIC PANEL (shown for magic users) -->
+            <div id="magic-panel" class="card hidden">
+              <div class="card-title">Magic</div>
+
+              <!-- Domain display -->
+              <div style="margin-bottom:8px;">
+                <span style="font-size:0.75rem;color:var(--text-dim);">Domain:</span>
+                <strong id="magic-domain-name"></strong>
+                <span id="magic-domain-type-badge" class="domain-type-badge"></span>
+              </div>
+
+              <!-- Secondary domain selector (hidden if no secondary) -->
+              <div id="magic-secondary-wrap" class="hidden" style="margin-bottom:8px;">
+                <label>Active Domain</label>
+                <select id="magic-domain-select">
+                  <option id="magic-domain-opt-primary" value=""></option>
+                  <option id="magic-domain-opt-secondary" value="">Secondary</option>
+                </select>
+                <div style="font-size:0.7rem;color:var(--text-dim);">Secondary domain: one difficulty step harder.</div>
+              </div>
+
+              <!-- Pre-technique warning -->
+              <div id="magic-pre-technique-warn" class="hidden" style="background:rgba(255,193,7,0.1);border:1px solid var(--gold);border-radius:6px;padding:8px;margin-bottom:8px;font-size:0.8rem;">
+                Technique not yet unlocked. Scope limited to <strong>Minor</strong>; difficulty one step harder.
+              </div>
+
+              <!-- Scope selector -->
+              <div style="margin-bottom:8px;">
+                <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:4px;">SCOPE</div>
+                <div class="magic-scope-selector">
+                  <label class="scope-opt">
+                    <input type="radio" name="magic-scope" value="minor" checked> Minor
+                  </label>
+                  <label class="scope-opt">
+                    <input type="radio" name="magic-scope" value="significant"> Significant
+                  </label>
+                  <label class="scope-opt">
+                    <input type="radio" name="magic-scope" value="major"> Major
+                  </label>
+                </div>
+                <div id="magic-difficulty-preview" class="magic-difficulty-preview"></div>
+              </div>
+
+              <!-- Intent -->
+              <label>Intent</label>
+              <input type="text" id="magic-intent" placeholder="What does the magic do?">
+
+              <!-- Spark use -->
+              <div style="margin-bottom:8px;">
+                <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:4px;">SPARK USE (optional, costs 1 Spark)</div>
+                <div class="spark-use-selector">
+                  <label><input type="radio" name="magic-spark-use" value="" checked> None</label>
+                  <label><input type="radio" name="magic-spark-use" value="improve_roll"> Improve Roll (+1d6 drop lowest)</label>
+                  <label><input type="radio" name="magic-spark-use" value="push_scope"> Push Scope (one step harder)</label>
+                  <label id="magic-spark-ease-label" class="hidden"><input type="radio" name="magic-spark-use" value="ease_focused_major"> Ease Major (focused only)</label>
+                </div>
+              </div>
+
+              <button class="btn btn-primary btn-sm" onclick="performCast()">Cast</button>
+            </div>
+
             <!-- Skills -->
             <div class="card">
               <div class="card-title">Skills</div>

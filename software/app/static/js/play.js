@@ -10,6 +10,8 @@ function initPlayTab() {
   renderPlayCharacterSheet();
   renderPlayRollLog();
   renderPlayPlayerList();
+  renderCombatPanel();
+  renderMagicPanel();
   if (state.role === 'mm') {
     document.getElementById('play-mm-controls').classList.remove('hidden');
     renderEnemyTracker();
@@ -457,4 +459,616 @@ function endCombat() {
 
 function endExchange() {
   sendWS({ type: 'end_exchange' });
+}
+
+// ---------------------------------------------------------------------------
+// Combat Panel — rendering and state
+// ---------------------------------------------------------------------------
+
+function renderCombatPanel() {
+  const panel = document.getElementById('combat-panel');
+  if (!panel || !state.character) return;
+
+  if (!state.inCombat) {
+    panel.classList.add('hidden');
+    return;
+  }
+
+  panel.classList.remove('hidden');
+  updateEnduranceBar();
+  updatePostureBadge(state.character.posture || 'measured');
+  updateConditionsDisplay();
+  populateCombatSelects();
+  updateReactCostPreview();
+}
+
+function updateEnduranceBar() {
+  const char = state.character;
+  if (!char) return;
+  const current = char.endurance_current != null ? char.endurance_current : 0;
+  const max = char.endurance_max || current || 1;
+  const pct = Math.round((current / max) * 100);
+
+  const fill = document.getElementById('combat-endurance-fill');
+  const text = document.getElementById('combat-endurance-text');
+  if (fill) {
+    fill.style.width = pct + '%';
+    fill.className = 'endurance-fill' + (pct <= 25 ? ' critical' : pct <= 50 ? ' low' : '');
+  }
+  if (text) text.textContent = current + '/' + max;
+}
+
+function updatePostureBadge(posture) {
+  const badge = document.getElementById('combat-posture-badge');
+  if (!badge) return;
+  badge.textContent = posture.charAt(0).toUpperCase() + posture.slice(1);
+  badge.className = 'posture-badge posture-' + posture;
+  // Sync radio
+  const radio = document.querySelector('input[name="combat-posture"][value="' + posture + '"]');
+  if (radio) radio.checked = true;
+}
+
+function updateConditionsDisplay() {
+  const container = document.getElementById('combat-conditions');
+  if (!container || !state.character) return;
+  const conditions = state.character.conditions || [];
+  if (conditions.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+  container.innerHTML = conditions.map(c => {
+    const tier = getConditionTier(c);
+    const desc = getConditionDescription(c);
+    return '<span class="condition-badge condition-tier' + tier + '" title="' + escapeHtml(desc) + '">' + escapeHtml(c.replace(/_/g, ' ')) + '</span>';
+  }).join(' ');
+}
+
+function getConditionTier(condId) {
+  if (!state.ruleset || !state.ruleset.combat || !state.ruleset.combat.conditions) return 1;
+  const conds = state.ruleset.combat.conditions;
+  if (conds.tier1 && conds.tier1.some(c => c.id === condId)) return 1;
+  if (conds.tier2 && conds.tier2.some(c => c.id === condId)) return 2;
+  if (conds.tier3 && conds.tier3.some(c => c.id === condId)) return 3;
+  return 1;
+}
+
+function getConditionDescription(condId) {
+  if (!state.ruleset || !state.ruleset.combat || !state.ruleset.combat.conditions) return '';
+  const conds = state.ruleset.combat.conditions;
+  const all = (conds.tier1 || []).concat(conds.tier2 || []).concat(conds.tier3 || []);
+  const match = all.find(c => c.id === condId);
+  return match ? match.description : '';
+}
+
+function populateCombatSelects() {
+  // Populate attribute selects for strike/support/maneuver
+  ['strike-attribute', 'support-attribute', 'maneuver-attribute'].forEach(selId => {
+    const sel = document.getElementById(selId);
+    if (!sel || sel.options.length > 1) return;
+    sel.innerHTML = '';
+    if (state.ruleset && state.ruleset.minor_attributes) {
+      state.ruleset.minor_attributes.forEach(attr => {
+        const opt = document.createElement('option');
+        opt.value = attr.id;
+        opt.textContent = attr.name;
+        sel.appendChild(opt);
+      });
+    }
+  });
+
+  // Populate skill selects
+  ['strike-skill', 'support-skill', 'maneuver-skill'].forEach(selId => {
+    const sel = document.getElementById(selId);
+    if (!sel || sel.options.length > 1) return;
+    sel.innerHTML = '<option value="">-- none --</option>';
+    if (state.ruleset && state.ruleset.skills) {
+      state.ruleset.skills.forEach(skill => {
+        if (skill.status === 'stub') return;
+        const opt = document.createElement('option');
+        opt.value = skill.id;
+        opt.textContent = skill.name;
+        sel.appendChild(opt);
+      });
+    }
+  });
+
+  // Populate support target (ally players)
+  const supportTarget = document.getElementById('support-target');
+  if (supportTarget && supportTarget.options.length <= 1) {
+    supportTarget.innerHTML = '<option value="">-- select ally --</option>';
+    Object.keys(state.allCharacters).forEach(pn => {
+      if (pn === state.playerName) return;
+      const opt = document.createElement('option');
+      opt.value = pn;
+      opt.textContent = state.allCharacters[pn].name || pn;
+      supportTarget.appendChild(opt);
+    });
+  }
+}
+
+function updateReactCostPreview() {
+  const preview = document.getElementById('react-cost-preview');
+  if (!preview || !state.character) return;
+  const posture = state.character.posture || 'measured';
+  const baseCosts = { dodge: 1, parry: 1, absorb: 0, intercept: 2 };
+  const postureMod = posture === 'aggressive' ? 1 : (posture === 'defensive' || posture === 'withdrawn') ? -1 : 0;
+  const lines = Object.entries(baseCosts).map(([r, base]) => {
+    const cost = posture === 'withdrawn' ? 0 : Math.max(0, base + postureMod);
+    return r.charAt(0).toUpperCase() + r.slice(1) + ': ' + cost + ' End';
+  });
+  preview.textContent = 'Costs (' + posture + '): ' + lines.join(' | ');
+}
+
+function showCombatAction(action) {
+  ['strike', 'react', 'support', 'maneuver'].forEach(a => {
+    const form = document.getElementById('combat-form-' + a);
+    if (form) form.classList.toggle('hidden', a !== action || !form.classList.contains('hidden'));
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Combat Panel — player actions
+// ---------------------------------------------------------------------------
+
+function declarePosture() {
+  const checked = document.querySelector('input[name="combat-posture"]:checked');
+  const posture = checked ? checked.value : 'measured';
+  sendWS({ type: 'declare_posture', posture });
+}
+
+function performStrike() {
+  const target = (document.getElementById('strike-target').value || '').trim();
+  const attrId = document.getElementById('strike-attribute').value;
+  const skillId = document.getElementById('strike-skill').value || null;
+  const difficulty = document.getElementById('strike-difficulty').value;
+  const press = document.getElementById('strike-press').checked;
+
+  sendWS({
+    type: 'strike',
+    target,
+    attribute_id: attrId,
+    skill_id: skillId,
+    difficulty,
+    press,
+    sparks_spent: state.sparksToSpend,
+  });
+  state.sparksToSpend = 0;
+  renderPlaySparkCounter();
+}
+
+function performReact(reaction) {
+  sendWS({
+    type: 'react',
+    reaction,
+    difficulty: 'Standard',
+  });
+}
+
+function performSupport() {
+  const target = document.getElementById('support-target').value;
+  const bonusType = document.getElementById('support-bonus-type').value;
+  const attrId = document.getElementById('support-attribute').value;
+  const skillId = document.getElementById('support-skill').value || null;
+
+  if (!target) { addSystemChat('Select a target ally.'); return; }
+  sendWS({
+    type: 'support',
+    target,
+    bonus_type: bonusType,
+    attribute_id: attrId,
+    skill_id: skillId,
+    difficulty: 'Standard',
+  });
+}
+
+function performManeuver() {
+  const target = (document.getElementById('maneuver-target').value || '').trim();
+  const attrId = document.getElementById('maneuver-attribute').value;
+  const skillId = document.getElementById('maneuver-skill').value || null;
+  const description = (document.getElementById('maneuver-description').value || '').trim();
+
+  sendWS({
+    type: 'maneuver',
+    target,
+    attribute_id: attrId,
+    skill_id: skillId,
+    difficulty: 'Standard',
+    description,
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Combat Panel — broadcast handlers
+// ---------------------------------------------------------------------------
+
+function onCombatStarted(msg) {
+  state.inCombat = true;
+  state.postures = {};
+  addSystemChat('Combat has begun!');
+
+  // Update character combat state from server
+  if (state.character && msg.characters) {
+    const myState = msg.characters[state.playerName];
+    if (myState) {
+      state.character.endurance_current = myState.endurance_current;
+      state.character.endurance_max = myState.endurance_max;
+      state.character.conditions = myState.conditions || [];
+      state.character.posture = myState.posture || 'measured';
+    }
+  }
+
+  // Store all characters' combat state
+  if (msg.characters) {
+    Object.entries(msg.characters).forEach(([pn, cs]) => {
+      if (state.allCharacters[pn]) {
+        state.allCharacters[pn].endurance_current = cs.endurance_current;
+        state.allCharacters[pn].endurance_max = cs.endurance_max;
+        state.allCharacters[pn].conditions = cs.conditions || [];
+        state.allCharacters[pn].posture = cs.posture || 'measured';
+      }
+    });
+  }
+
+  renderCombatPanel();
+  renderMagicPanel();
+}
+
+function onPostureDeclared(msg) {
+  if (state.character) {
+    state.character.posture = msg.posture;
+    updatePostureBadge(msg.posture);
+    updateReactCostPreview();
+  }
+  addSystemChat('Posture declared: ' + msg.posture);
+}
+
+function onPosturesRevealed(msg) {
+  state.postures = msg.postures || {};
+  const container = document.getElementById('combat-postures-revealed');
+  const list = document.getElementById('combat-postures-list');
+  if (container && list) {
+    container.classList.remove('hidden');
+    list.innerHTML = Object.entries(state.postures).map(([pn, p]) => {
+      const name = (state.allCharacters[pn] && state.allCharacters[pn].name) || pn;
+      return '<div class="posture-reveal-entry"><span class="posture-badge posture-' + p + '">' + p + '</span> ' + escapeHtml(name) + '</div>';
+    }).join('');
+  }
+
+  // Update all characters' postures
+  Object.entries(state.postures).forEach(([pn, p]) => {
+    if (state.allCharacters[pn]) state.allCharacters[pn].posture = p;
+    if (pn === state.playerName && state.character) {
+      state.character.posture = p;
+      updatePostureBadge(p);
+      updateReactCostPreview();
+    }
+  });
+
+  addSystemChat('Postures revealed: ' + Object.entries(state.postures).map(([pn, p]) => pn + '=' + p).join(', '));
+}
+
+function onStrikeResult(msg) {
+  const roll = msg.roll;
+  state.rollLog.unshift({ player_name: msg.attacker, character_name: (state.allCharacters[msg.attacker] || {}).name, ...roll });
+  renderPlayRollLog();
+
+  // Update attacker state
+  if (msg.attacker === state.playerName && state.character) {
+    state.character.endurance_current = msg.endurance_remaining;
+    state.character.sparks = msg.sparks_remaining;
+    updateEnduranceBar();
+    renderPlaySparkCounter();
+  }
+  if (state.allCharacters[msg.attacker]) {
+    state.allCharacters[msg.attacker].endurance_current = msg.endurance_remaining;
+  }
+
+  const attackerName = (state.allCharacters[msg.attacker] || {}).name || msg.attacker;
+  const targetStr = msg.target ? ' vs ' + msg.target : '';
+  addSystemChat(attackerName + ' strikes' + targetStr + ': ' + roll.outcome_label + ' (total ' + roll.total + ')' + (msg.press_used ? ' [Press]' : ''));
+
+  // Show result box for own strikes
+  if (msg.attacker === state.playerName) {
+    const resultBox = document.getElementById('play-roll-result-box');
+    if (resultBox) {
+      resultBox.className = 'roll-result-box ' + roll.outcome;
+      resultBox.classList.remove('hidden');
+      resultBox.innerHTML = buildRollResultHtml({ player: msg.attacker, character_name: attackerName }, roll);
+    }
+  }
+}
+
+function onReactResult(msg) {
+  const roll = msg.roll;
+  if (roll) {
+    state.rollLog.unshift({ player_name: msg.player, character_name: (state.allCharacters[msg.player] || {}).name, ...roll });
+    renderPlayRollLog();
+  }
+
+  // Update reactor state
+  if (msg.player === state.playerName && state.character) {
+    state.character.endurance_current = msg.endurance_remaining;
+    updateEnduranceBar();
+  }
+  if (state.allCharacters[msg.player]) {
+    state.allCharacters[msg.player].endurance_current = msg.endurance_remaining;
+  }
+
+  const reactorName = (state.allCharacters[msg.player] || {}).name || msg.player;
+  const rollStr = roll ? ' — ' + roll.outcome_label : '';
+  addSystemChat(reactorName + ' reacts: ' + msg.reaction + ' (cost ' + msg.endurance_cost + ' End)' + rollStr);
+}
+
+function onSupportResult(msg) {
+  const roll = msg.roll;
+  state.rollLog.unshift({ player_name: msg.player, character_name: (state.allCharacters[msg.player] || {}).name, ...roll });
+  renderPlayRollLog();
+
+  const supporterName = (state.allCharacters[msg.player] || {}).name || msg.player;
+  const targetName = msg.target || '?';
+  addSystemChat(supporterName + ' supports ' + targetName + ' (' + msg.bonus_type + '): ' + roll.outcome_label);
+}
+
+function onManeuverResult(msg) {
+  const roll = msg.roll;
+  state.rollLog.unshift({ player_name: msg.player, character_name: (state.allCharacters[msg.player] || {}).name, ...roll });
+  renderPlayRollLog();
+
+  const mName = (state.allCharacters[msg.player] || {}).name || msg.player;
+  const targetStr = msg.target ? ' on ' + msg.target : '';
+  addSystemChat(mName + ' maneuvers' + targetStr + ': ' + roll.outcome_label);
+}
+
+function onConditionApplied(msg) {
+  // Update character conditions
+  if (msg.player_name === state.playerName && state.character) {
+    state.character.conditions = msg.conditions || [];
+    updateConditionsDisplay();
+  }
+  if (state.allCharacters[msg.player_name]) {
+    state.allCharacters[msg.player_name].conditions = msg.conditions || [];
+  }
+
+  const name = (state.allCharacters[msg.player_name] || {}).name || msg.player_name;
+  addSystemChat(name + ': condition ' + (msg.applied_condition || msg.condition || '?').replace(/_/g, ' ') + (msg.downgraded ? ' (downgraded by armor)' : ''));
+}
+
+function onConditionCleared(msg) {
+  if (msg.player_name === state.playerName && state.character) {
+    state.character.conditions = msg.conditions || [];
+    updateConditionsDisplay();
+  }
+  if (state.allCharacters[msg.player_name]) {
+    state.allCharacters[msg.player_name].conditions = msg.conditions || [];
+  }
+  const name = (state.allCharacters[msg.player_name] || {}).name || msg.player_name;
+  addSystemChat(name + ': condition cleared — ' + (msg.condition || '?').replace(/_/g, ' '));
+}
+
+function onExchangeEnded(msg) {
+  addSystemChat('Exchange ended.');
+  state.postures = {};
+  const posturesPanel = document.getElementById('combat-postures-revealed');
+  if (posturesPanel) posturesPanel.classList.add('hidden');
+
+  if (msg.characters) {
+    Object.entries(msg.characters).forEach(([pn, upd]) => {
+      if (state.allCharacters[pn]) {
+        state.allCharacters[pn].conditions = upd.conditions || [];
+        state.allCharacters[pn].endurance_current = upd.endurance_current;
+      }
+      if (pn === state.playerName && state.character) {
+        state.character.conditions = upd.conditions || [];
+        state.character.endurance_current = upd.endurance_current;
+        updateEnduranceBar();
+        updateConditionsDisplay();
+      }
+      if (upd.cleared_conditions && upd.cleared_conditions.length > 0) {
+        addSystemChat(pn + ': cleared ' + upd.cleared_conditions.join(', ').replace(/_/g, ' '));
+      }
+    });
+  }
+}
+
+function onCombatEnded(msg) {
+  state.inCombat = false;
+  state.postures = {};
+  addSystemChat('Combat has ended.');
+
+  if (state.character) {
+    state.character.endurance_current = null;
+    state.character.conditions = [];
+    state.character.posture = null;
+  }
+  Object.values(state.allCharacters).forEach(c => {
+    c.endurance_current = null;
+    c.conditions = [];
+    c.posture = null;
+  });
+
+  const panel = document.getElementById('combat-panel');
+  if (panel) panel.classList.add('hidden');
+  const posturesPanel = document.getElementById('combat-postures-revealed');
+  if (posturesPanel) posturesPanel.classList.add('hidden');
+}
+
+// ---------------------------------------------------------------------------
+// Magic Panel — rendering and casting
+// ---------------------------------------------------------------------------
+
+function renderMagicPanel() {
+  const panel = document.getElementById('magic-panel');
+  if (!panel || !state.character) return;
+
+  if (!state.character.magic_domain) {
+    panel.classList.add('hidden');
+    return;
+  }
+
+  panel.classList.remove('hidden');
+
+  // Domain name and type
+  const domainName = state.character.magic_domain.replace(/_/g, ' ');
+  document.getElementById('magic-domain-name').textContent = domainName.charAt(0).toUpperCase() + domainName.slice(1);
+
+  // Domain type badge (try to determine from ruleset, default to "standard")
+  const domainType = getDomainType(state.character.magic_domain);
+  const typeBadge = document.getElementById('magic-domain-type-badge');
+  if (typeBadge) {
+    typeBadge.textContent = domainType;
+    typeBadge.className = 'domain-type-badge domain-type-' + domainType;
+  }
+
+  // Secondary domain
+  const secWrap = document.getElementById('magic-secondary-wrap');
+  if (state.character.secondary_magic_domain) {
+    secWrap.classList.remove('hidden');
+    const optPrimary = document.getElementById('magic-domain-opt-primary');
+    const optSecondary = document.getElementById('magic-domain-opt-secondary');
+    if (optPrimary) {
+      optPrimary.value = state.character.magic_domain;
+      optPrimary.textContent = domainName.charAt(0).toUpperCase() + domainName.slice(1) + ' (primary)';
+    }
+    if (optSecondary) {
+      const secName = state.character.secondary_magic_domain.replace(/_/g, ' ');
+      optSecondary.value = state.character.secondary_magic_domain;
+      optSecondary.textContent = secName.charAt(0).toUpperCase() + secName.slice(1) + ' (secondary)';
+    }
+  } else {
+    secWrap.classList.add('hidden');
+  }
+
+  // Pre-technique warning
+  const warn = document.getElementById('magic-pre-technique-warn');
+  if (warn) {
+    warn.classList.toggle('hidden', state.character.magic_technique_active !== false || !state.character.magic_domain);
+    // If technique is active, hide warning
+    if (state.character.magic_technique_active) warn.classList.add('hidden');
+  }
+
+  // Ease Major option: only for focused domains
+  const easeLabel = document.getElementById('magic-spark-ease-label');
+  if (easeLabel) {
+    easeLabel.classList.toggle('hidden', domainType !== 'focused');
+  }
+
+  // Disable significant/major if pre-technique
+  const scopeRadios = document.querySelectorAll('input[name="magic-scope"]');
+  scopeRadios.forEach(radio => {
+    if (radio.value !== 'minor') {
+      radio.disabled = !state.character.magic_technique_active;
+    }
+  });
+
+  updateMagicDifficultyPreview();
+
+  // Listen for scope changes to update preview
+  scopeRadios.forEach(radio => {
+    radio.onchange = updateMagicDifficultyPreview;
+  });
+  const domainSelect = document.getElementById('magic-domain-select');
+  if (domainSelect) domainSelect.onchange = updateMagicDifficultyPreview;
+}
+
+function getDomainType(domainId) {
+  // Try to find in ruleset's domain catalog; fall back to "standard"
+  if (state.ruleset && state.ruleset.magic && state.ruleset.magic.all_domains) {
+    const found = state.ruleset.magic.all_domains.find(d => d.id === domainId);
+    if (found) return found.type;
+  }
+  // Check soul_domains / mind_domains
+  if (state.ruleset && state.ruleset.magic) {
+    const allDomains = (state.ruleset.magic.soul_domains || []).concat(state.ruleset.magic.mind_domains || []);
+    const found = allDomains.find(d => d.id === domainId);
+    if (found) return found.type;
+  }
+  return 'standard';
+}
+
+function getScopeDifficulty(domainType, scope) {
+  if (!state.ruleset || !state.ruleset.magic || !state.ruleset.magic.domain_types) return 'Standard';
+  const typeCfg = state.ruleset.magic.domain_types[domainType];
+  if (!typeCfg || !typeCfg.scope_difficulties) return 'Standard';
+  return typeCfg.scope_difficulties[scope] || 'Standard';
+}
+
+function updateMagicDifficultyPreview() {
+  const preview = document.getElementById('magic-difficulty-preview');
+  if (!preview || !state.character) return;
+
+  const domainSelect = document.getElementById('magic-domain-select');
+  const domainId = (domainSelect && !domainSelect.closest('.hidden'))
+    ? domainSelect.value
+    : state.character.magic_domain;
+
+  const domainType = getDomainType(domainId);
+  const scope = (document.querySelector('input[name="magic-scope"]:checked') || {}).value || 'minor';
+  let difficulty = getScopeDifficulty(domainType, scope);
+
+  // Note pre-technique penalty
+  let notes = '';
+  if (!state.character.magic_technique_active) {
+    notes += ' (+1 step harder, pre-technique)';
+  }
+  if (domainId === state.character.secondary_magic_domain) {
+    notes += ' (+1 step harder, secondary domain)';
+  }
+
+  preview.textContent = 'Base difficulty: ' + difficulty + notes;
+}
+
+function performCast() {
+  if (!state.character || !state.character.magic_domain) return;
+
+  const domainSelect = document.getElementById('magic-domain-select');
+  const domainId = (domainSelect && !domainSelect.closest('.hidden'))
+    ? domainSelect.value
+    : state.character.magic_domain;
+
+  const scope = (document.querySelector('input[name="magic-scope"]:checked') || {}).value || 'minor';
+  const intent = (document.getElementById('magic-intent').value || '').trim();
+  const sparkUse = (document.querySelector('input[name="magic-spark-use"]:checked') || {}).value || null;
+
+  if (!intent) {
+    addSystemChat('Describe your intent before casting.');
+    return;
+  }
+
+  sendWS({
+    type: 'cast',
+    domain_id: domainId,
+    scope,
+    intent,
+    spark_use: sparkUse || undefined,
+  });
+}
+
+function onCastResult(msg) {
+  const roll = msg.roll;
+  state.rollLog.unshift({
+    player_name: msg.player,
+    character_name: (state.allCharacters[msg.player] || {}).name,
+    ...roll,
+  });
+  renderPlayRollLog();
+
+  // Update sparks
+  if (msg.player === state.playerName && state.character) {
+    state.character.sparks = msg.sparks_remaining;
+    renderPlaySparkCounter();
+  }
+
+  const casterName = (state.allCharacters[msg.player] || {}).name || msg.player;
+  const techStr = msg.technique_active ? '' : ' (pre-technique)';
+  addSystemChat(casterName + ' casts ' + msg.domain_id.replace(/_/g, ' ') + ' [' + msg.scope + ']: ' + roll.outcome_label + techStr);
+
+  // Show result box for own casts
+  if (msg.player === state.playerName) {
+    const resultBox = document.getElementById('play-roll-result-box');
+    if (resultBox) {
+      resultBox.className = 'roll-result-box ' + roll.outcome;
+      resultBox.classList.remove('hidden');
+      resultBox.innerHTML = buildRollResultHtml({ player: msg.player, character_name: casterName }, roll);
+    }
+  }
 }
