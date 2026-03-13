@@ -1,0 +1,82 @@
+# Facets of Origin — Encounter Example
+# FOF Format v0.1
+#
+# An annotated encounter file for "The Archive Guardian" — a designed-hard encounter
+# with built-in lateral solutions that reward creative play over brute force.
+#
+# Encounter files can live inside a campaign directory:
+#
+#   the-shattered-crown/
+#   ├── campaign.fof
+#   ├── encounters/
+#   │   └── archive-basement-guardian.fof   ← this file
+#   └── enemies/
+#       ├── archive_guardian.fof
+#       └── dust_construct.fof
+
+# ── FOF Envelope ──────────────────────────────────────────────────────────────
+fof_version: "0.1"
+type: encounter
+id: "archive-basement-guardian"
+name: "The Archive Guardian"
+
+# ── Encounter Definition ─────────────────────────────────────────────────────
+encounter:
+  # Difficulty: skirmish | standard | hard | deadly
+  # This drives the Encounter Budget formula:
+  #   Budget = sum(party career_advances) × difficulty_multiplier
+  #   Skirmish ×1, Standard ×2, Hard ×3, Deadly ×4
+  difficulty: hard
+
+  # Environment description — narrated to players when the encounter begins.
+  # Also informs what objects, terrain, and tactical options are available.
+  environment: >
+    Basement archive — cramped corridors between stone shelving units,
+    a single flickering ward-lantern overhead, stone pillars every ten paces.
+    The floor is covered in a fine layer of dust. Everything smells like old paper.
+
+  # MM-facing setup notes: what's happening and why.
+  description: >
+    The party descends into the restricted archive beneath the Thornwall
+    Municipal Archive. The Guardian is an ancient construct tasked with
+    protecting the lower stacks. It has been here for decades, alone,
+    doing exactly what it was told. Three smaller dust constructs patrol
+    the perimeter.
+
+  # Enemy roster — references enemy .fof files by ID or inline definition.
+  # count: how many of this enemy to deploy.
+  enemies:
+    - enemy_id: archive_guardian   # references enemies/archive_guardian.fof
+      count: 1
+    - enemy_id: dust_construct     # references enemies/dust_construct.fof
+      count: 3
+
+  # Lateral solutions — creative paths players might find.
+  # These are MM notes, not shared with players. A well-designed encounter
+  # always has at least one non-combat path or combat shortcut.
+  lateral_solutions:
+    - "Zahna's Inscription domain can disable the Guardian's sensory matrix (Hard Significant)"
+    - "Structural weakness in the Guardian's right shoulder joint — a successful Maneuver makes subsequent Strikes Easy"
+    - "The dust constructs collapse if the ward-lantern is extinguished (but then it's dark)"
+    - "The Guardian responds to the phrase 'Archivist's rest' — Lore Expert check to know this"
+
+  # Rewards for completing the encounter.
+  rewards:
+    sparks: 1                      # bonus Spark for each player
+    narrative: >
+      Access to the restricted archive and whatever is stored there.
+      The Guardian's core can be salvaged as a component for enchantment.
+
+  # Additional MM notes — pacing guidance, design intent, etc.
+  notes: >
+    This encounter is intentionally designed above the party's budget.
+    The straight fight is possible but expensive — two or three exchanges
+    minimum, and the Mook constructs will drain Endurance via action economy.
+
+    The lateral paths are the real design. Reward players who investigate
+    the environment before charging in. If someone asks about the lantern,
+    the shoulder joint, or tries to communicate with the Guardian, give them
+    a clear path forward.
+
+    If the party is struggling after two exchanges, have a dust construct
+    malfunction (narrate its glyph flickering out) to ease pressure.

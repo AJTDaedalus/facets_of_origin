@@ -1,0 +1,94 @@
+# Facets of Origin — Session Example
+# FOF Format v0.1
+#
+# An annotated session file for "Session 1: The Market District".
+# Session files live inside a campaign directory:
+#
+#   the-shattered-crown/
+#   ├── campaign.fof
+#   └── sessions/
+#       └── session-001.fof   ← this file
+#
+# The MM fills the "prep" section before play and the "log" section after.
+# The digital tool can auto-export the roll log if desired.
+
+# ── FOF Envelope ──────────────────────────────────────────────────────────────
+fof_version: "0.1"
+type: session
+id: "session-001"
+name: "Session 1: The Market District"
+
+# ── Session Metadata ──────────────────────────────────────────────────────────
+session:
+  session_number: 1
+  date: "2026-03-03"
+  campaign_id: "the-shattered-crown"
+
+  # ── Pre-Session Prep (MM fills before play) ─────────────────────────────
+  # Planned encounters by ID — these reference encounter .fof files.
+  # Not all planned encounters need to happen. Some are contingency.
+  planned_encounters:
+    - encounter_id: "market-pickpocket"
+    - encounter_id: "informant-meeting"
+
+  # Key NPCs the MM expects to appear this session.
+  # Quick reference so names and motivations are at hand.
+  planned_npcs:
+    - name: "Danya Voss"
+      role: "The informant — former clerk at the Crown Registry"
+      want: "Protection from the people she's about to betray"
+      secret: "She has a copy of the Crown deed, not just information about it"
+      connection: "Zahna's old classmate from the University"
+    - name: "Silt"
+      role: "Pickpocket who works the Brass Market"
+      want: "Enough coin to eat today"
+      secret: "Works for the Dock Rats gang"
+      connection: "None — but could become a recurring contact if the party handles it well"
+
+  # Scene sketches — loose structure, not a script.
+  scenes:
+    - "Opening: Party arrives at the Brass Market. Describe the crowd, smells, noise."
+    - "Inciting incident: Silt lifts Mordai's coin purse. Chase or confrontation."
+    - "Meeting: Danya approaches Zahna at the tea house. Information exchange."
+    - "Complication: Dock Rats show up looking for Silt. Combat or social resolution."
+    - "Cliffhanger: Danya reveals the deed exists. Session ends on the question: what now?"
+
+  # ── Post-Session Log (MM fills after play) ──────────────────────────────
+  # One-paragraph summary of what actually happened.
+  summary: >
+    The party arrived at the Brass Market. Mordai's coin purse was lifted
+    by a street kid named Silt. Rather than chasing, Zulnut simply appeared
+    behind Silt and offered to buy him lunch in exchange for the purse back.
+    Danya met Zahna at the tea house but was more nervous than expected —
+    she believes she's being followed. The Dock Rats never appeared because
+    the party left the market early. Session ended with Danya handing over
+    the Crown deed copy and asking the party to hide her.
+
+  # MM's private notes — what worked, what didn't, what to carry forward.
+  notes: >
+    Zulnut's player completely defused the pickpocket encounter with
+    roleplay. No dice rolled. It was magnificent. Give Zulnut a Spark
+    nomination next session for that moment.
+
+    The Dock Rats encounter didn't fire — save it for session 2. Have them
+    track the party to wherever Danya is hiding. Raises the stakes.
+
+    Mordai's player seemed disengaged during the tea house scene — need to
+    create more physical/direct moments for him next session. Maybe the
+    Dock Rats confrontation will help.
+
+  # ── Advancement Tracking ────────────────────────────────────────────────
+  # Was the session_skill_points budget awarded this session?
+  skill_points_awarded: true
+
+  # Spark awards — who earned Sparks and why.
+  sparks_awarded:
+    - player: "Zahna"
+      reason: "Clever use of Lore to identify Danya's nervousness as genuine"
+    - player: "Mordai"
+      reason: "Peer nomination from Zulnut (for not murdering the pickpocket)"
+
+  # ── Roll Log ────────────────────────────────────────────────────────────
+  # Optional: the digital tool can export the full roll log here.
+  # Set to true if the log has been exported, false if not.
+  roll_log_exported: false

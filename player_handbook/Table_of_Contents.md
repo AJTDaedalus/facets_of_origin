@@ -29,6 +29,18 @@
 
 ---
 
+## Mirror Master's Manual
+
+The companion guide for running Facets of Origin. Covers encounter design, session preparation, campaign planning, and the human side of being a Mirror Master.
+
+- MM1 — Encounters and Enemies *(enemy stat blocks, Threat Rating, encounter budget)*
+- MM2 — Session Design and Pacing *(session structure, improvisation, spotlight management)*
+- MM3 — Campaign Design *(campaign structures, NPC design, world-building, encounter sequencing)*
+- MM4 — Running the Table *(table culture, safety, difficult situations, growing as an MM)*
+- MM5 — Quick Reference *(mid-session cheat sheet)*
+
+---
+
 ## Facets (Optional Modules)
 The following content is not part of the core rules. Each is available as a standalone Facet module that Mirror Masters can add to any campaign.
 
