@@ -60,23 +60,58 @@ Each link is **single-use**. Once the player clicks it and joins, it can't be re
 
 ## Playing
 
-### Rolling Dice
-- Click an attribute in your character sheet to select it.
-- Optionally select a difficulty and fill in a description.
-- Click the spark pips to spend Sparks before rolling.
-- Click **Roll 2d6**.
-- The result is broadcast to everyone at the table.
+The app has three tabs: **Play Field**, **Tools**, and **Builder**. Both the MM and players see all three tabs, but the content differs by role.
 
-### Spending Sparks
-Each Spark you spend adds a d6 to your roll and drops the lowest — shifting the odds in your favour without changing the core 2d6 mechanic. Click the circular pip icons to add Sparks before rolling.
+### Play Field
 
-### Earning Sparks
-- The MM can award a Spark from the **Mirror Master Controls** panel.
-- Any player can nominate another using the **Nominate for Spark** panel — the MM confirms it.
-- Rolling a 6- and leaning into the consequence may earn a Spark at the MM's discretion.
+Where the action happens during a session.
 
-### Table Chat
-Use the chat box in the right panel. Messages are visible to everyone in the session.
+**Rolling dice:**
+- Select an attribute and optionally a skill from the dropdowns.
+- Choose a difficulty level (Easy / Standard / Hard / Very Hard).
+- Click the Spark pips to spend Sparks before rolling (each adds a d6, drop lowest).
+- Click **Roll 2d6**. The result is broadcast to the whole table.
+
+**Combat:**
+- The MM starts combat from the Play Field controls. All characters enter combat with full Endurance.
+- Players declare postures (Aggressive / Measured / Defensive / Withdrawn) each exchange.
+- Use the Strike, React, Support, and Maneuver buttons to take actions. The server resolves rolls and applies Endurance costs automatically.
+- The MM can spawn enemies from the library, track their Endurance and conditions, and end exchanges/combat.
+
+**Magic:**
+- Characters with a magic domain see the Magic panel. Select scope (Minor / Significant / Major), describe the intent, and cast.
+- The server determines difficulty from domain type and scope, then resolves the roll.
+
+**Sparks:**
+- The MM awards Sparks from the Play Field controls.
+- Players nominate each other for Sparks — the MM confirms.
+
+**Chat:** visible to everyone in the session.
+
+### Tools
+
+Reference and management during play.
+
+- **Character sheet** — full read-only view of attributes, skills, techniques, background, and specialty
+- **Inventory** — add/remove items (freeform list)
+- **Rule summaries** — collapsible cards for core resolution, combat, and magic quick reference
+- **Encounter budget calculator** (MM only) — input party strength and difficulty to get TR budget
+- **Export character** — download as a `.fof` file
+
+### Builder
+
+Between-session advancement and content creation.
+
+**Players:**
+- **Skill advancement** — spend session skill points on skills you used this session. Skills are auto-marked as used when you roll with them; the MM can also mark skills manually.
+- **Technique selection** — choose new techniques when your Facet level advances.
+- **Character notes** — personal notes that persist with your character.
+
+**Mirror Master:**
+- **Enemy builder** — create enemy stat blocks with auto-calculated Threat Rating. Saves to the session library.
+- **Encounter builder** — assemble enemies from the library, set difficulty, define lateral solutions.
+- **Skill advancement controls** — mark skills as used for players, award advancement marks directly.
+- **Campaign notes** — freeform session planning and NPC notes.
 
 ---
 
@@ -262,7 +297,9 @@ software/
 ├── app/
 │   ├── api/
 │   │   ├── routes/
-│   │   │   ├── character.py    # Character creation and listing
+│   │   │   ├── character.py    # Character creation, listing, notes, inventory
+│   │   │   ├── enemy.py        # Enemy CRUD endpoints
+│   │   │   ├── encounter.py    # Encounter CRUD endpoints
 │   │   │   ├── facets_route.py # Available Facet module listing
 │   │   │   ├── rolls.py        # HTTP roll endpoint
 │   │   │   └── session.py      # Session management and MM auth
@@ -275,16 +312,27 @@ software/
 │   │   └── schema.py           # Pydantic schema for facet.yaml files
 │   ├── game/
 │   │   ├── character.py        # Character model and advancement logic
+│   │   ├── encounter.py        # Encounter model and TR budget calculation
+│   │   ├── enemy.py            # Enemy model and Threat Rating calculation
 │   │   ├── engine.py           # 2d6 roll resolution and Spark mechanic
 │   │   └── session.py          # GameSession and SessionStore
-│   ├── static/                 # Frontend (HTML, CSS, JavaScript)
+│   ├── static/
+│   │   ├── index.html          # SPA shell: auth, tabs, character creation
+│   │   ├── css/style.css       # Styles (dark theme, responsive)
+│   │   └── js/
+│   │       ├── app.js          # Core: auth, WebSocket, state, routing
+│   │       ├── play.js         # Play Field tab: rolling, combat, magic, chat
+│   │       ├── tools.js        # Tools tab: sheets, inventory, rules, budget
+│   │       ├── builder.js      # Builder tab: advancement, enemy/encounter builder
+│   │       └── components.js   # Shared rendering functions
 │   ├── config.py               # Settings via pydantic-settings / .env
 │   └── main.py                 # FastAPI app: middleware, routers, static files
 ├── facets/
 │   └── base/
 │       └── facet.yaml          # Core ruleset (always loaded)
 ├── research/                   # Design documents and security audit
-├── tests/                      # Pytest test suite (300+ tests)
+├── tests/                      # Pytest test suite (613 tests)
+│   └── e2e/                    # End-to-end playtest simulations
 ├── requirements.txt            # Production dependencies
 ├── requirements-dev.txt        # + pytest, httpx
 └── run.py                      # Server entry point (uvicorn)
@@ -299,7 +347,7 @@ software/
 | Auth | JWT (python-jose) + bcrypt |
 | Frontend | Vanilla JS — no build step required |
 | Ruleset | YAML files validated by Pydantic v2 |
-| State | In-memory — JSON file persistence planned for v0.2 |
+| State | In-memory with JSON file persistence for characters |
 
 ### Contributing
 
