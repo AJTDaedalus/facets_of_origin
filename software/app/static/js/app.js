@@ -337,6 +337,26 @@ function handleServerMessage(msg) {
         }
       }
       break;
+    case 'skill_marked_used':
+      addSystemChat(`Skill '${msg.skill_id}' marked as used for ${msg.player}.`);
+      if (state.character && msg.player === state.playerName) {
+        state.character.skills_used_this_session = msg.skills_used || [];
+        if (typeof renderBuilderSkills === 'function') renderBuilderSkills();
+      }
+      break;
+    case 'skill_point_spent':
+      addSystemChat(`${msg.player} spent ${msg.sp_cost} SP on ${msg.skill_id}${msg.rank_advances > 0 ? ' -- rank up!' : ''}.`);
+      if (state.character && msg.player === state.playerName) {
+        state.character.session_skill_points_remaining = msg.session_skill_points_remaining;
+        if (state.character.skills[msg.skill_id]) {
+          state.character.skills[msg.skill_id].marks = msg.new_marks;
+          if (msg.rank_advances > 0) state.character.skills[msg.skill_id].rank = msg.new_rank;
+          if (msg.facet_level_advances > 0) state.character.facet_level = msg.new_facet_level;
+        }
+        renderPlayCharacterSheet();
+        if (typeof renderBuilderSkills === 'function') renderBuilderSkills();
+      }
+      break;
     case 'chat':
       addChatMessage(msg.from, msg.text);
       break;
@@ -466,6 +486,10 @@ function populateCharacterCreation() {
     facetSelect.appendChild(opt);
   });
 
+  // When facet changes, update background list
+  facetSelect.onchange = populateBackgroundSelect;
+  populateBackgroundSelect();
+
   const attrContainer = document.getElementById('cc-attributes');
   attrContainer.innerHTML = '';
 
@@ -501,6 +525,79 @@ function populateCharacterCreation() {
   updateAttrPointsDisplay();
 }
 
+function populateBackgroundSelect() {
+  const facetId = document.getElementById('cc-facet').value;
+  const bgSelect = document.getElementById('cc-background');
+  const infoEl = document.getElementById('cc-background-info');
+  bgSelect.innerHTML = '<option value="">-- none (custom) --</option>';
+
+  const backgrounds = (state.ruleset.backgrounds || []).filter(bg => bg.facet === facetId);
+  backgrounds.forEach(bg => {
+    const opt = document.createElement('option');
+    opt.value = bg.id;
+    opt.textContent = bg.name;
+    bgSelect.appendChild(opt);
+  });
+
+  bgSelect.onchange = onBackgroundChanged;
+  onBackgroundChanged();
+}
+
+function onBackgroundChanged() {
+  const bgId = document.getElementById('cc-background').value;
+  const infoEl = document.getElementById('cc-background-info');
+  const domainWrap = document.getElementById('cc-magic-domain-wrap');
+
+  if (!bgId) {
+    infoEl.textContent = '';
+    domainWrap.classList.add('hidden');
+    return;
+  }
+
+  const bg = (state.ruleset.backgrounds || []).find(b => b.id === bgId);
+  if (!bg) { infoEl.textContent = ''; domainWrap.classList.add('hidden'); return; }
+
+  // Show background info
+  const startSkill = (state.ruleset.skills || []).find(s => s.id === bg.starting_skill);
+  let info = 'Starting: ' + (startSkill ? startSkill.name : bg.starting_skill) + ' (Practiced)';
+  if (bg.secondary_skill) {
+    const secSkill = (state.ruleset.skills || []).find(s => s.id === bg.secondary_skill);
+    info += ' | Secondary: ' + (secSkill ? secSkill.name : bg.secondary_skill) + ' (Novice +1 mark)';
+  }
+  if (bg.specialty) info += '\nSpecialty: ' + bg.specialty;
+  infoEl.textContent = info;
+
+  // Show magic domain selector if background has domain_origin or is a Soul magic background
+  if (bg.domain_origin) {
+    domainWrap.classList.remove('hidden');
+    populateMagicDomainSelect(bg.domain_origin);
+  } else {
+    domainWrap.classList.add('hidden');
+    document.getElementById('cc-magic-domain').value = '';
+  }
+}
+
+function populateMagicDomainSelect(domainOrigin) {
+  const domainSelect = document.getElementById('cc-magic-domain');
+  domainSelect.innerHTML = '<option value="">-- no magic --</option>';
+
+  if (!state.ruleset.magic) return;
+
+  // Get domains for the origin facet (mind or soul)
+  const domainList = domainOrigin === 'mind'
+    ? (state.ruleset.magic.mind_domains || [])
+    : domainOrigin === 'soul'
+      ? (state.ruleset.magic.soul_domains || [])
+      : [];
+
+  domainList.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d.id;
+    opt.textContent = d.name + ' (' + d.type + ')';
+    domainSelect.appendChild(opt);
+  });
+}
+
 function updateAttrPointsDisplay() {
   const inputs = document.querySelectorAll('.attr-input');
   let total = 0;
@@ -526,11 +623,16 @@ async function submitCharacterCreation() {
     attributes[inp.dataset.attr] = parseInt(inp.value);
   });
 
+  const backgroundId = document.getElementById('cc-background').value || null;
+  const magicDomain = document.getElementById('cc-magic-domain').value || null;
+
   const resp = await apiFetch('/api/characters/', 'POST', {
     session_id: state.sessionId,
     character_name: name,
     primary_facet: primaryFacet,
     attributes,
+    background_id: backgroundId,
+    magic_domain: magicDomain,
   });
 
   if (resp.ok) {

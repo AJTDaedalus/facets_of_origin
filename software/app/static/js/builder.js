@@ -13,6 +13,7 @@ function initBuilderTab() {
     renderBuilderEnemyLibrary();
     renderBuilderEncounterEnemySelect();
     renderBuilderAdvanceSkillSelect();
+    renderBuilderMarkSkillSelect();
   } else {
     document.getElementById('builder-player-section').classList.remove('hidden');
     document.getElementById('builder-mm-section').classList.add('hidden');
@@ -39,6 +40,9 @@ function renderBuilderSkills() {
 
   spEl.textContent = 'Session Skill Points Remaining: ' + (char.session_skill_points_remaining || 0);
 
+  const usedSkills = char.skills_used_this_session || [];
+  const hasUsedSkills = usedSkills.length > 0;
+
   listEl.innerHTML = '';
   state.ruleset.skills.forEach(skill => {
     if (skill.status === 'stub') return;
@@ -46,8 +50,13 @@ function renderBuilderSkills() {
     const isPrimary = skill.facet === char.primary_facet;
     const cost = isPrimary ? 1 : 2;
     const canAfford = (char.session_skill_points_remaining || 0) >= cost;
+    const wasUsed = usedSkills.includes(skill.id);
+    const canSpend = canAfford && (!hasUsedSkills || wasUsed);
     const marksNeeded = state.ruleset.advancement ? state.ruleset.advancement.marks_per_rank : 3;
     const dots = '\u25CF'.repeat(ss.marks) + '\u25CB'.repeat(Math.max(0, marksNeeded - ss.marks));
+
+    const usedBadge = wasUsed ? '<span style="color:var(--success);font-size:10px;margin-left:4px;">USED</span>' : '';
+    const notUsedNote = hasUsedSkills && !wasUsed && canAfford ? '<span style="color:var(--text-dim);font-size:10px;margin-left:4px;">not used</span>' : '';
 
     const div = document.createElement('div');
     div.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;';
@@ -57,8 +66,9 @@ function renderBuilderSkills() {
         ${isPrimary ? '' : '<span style="color:var(--text-dim);font-size:10px;margin-left:4px;">(cross ' + cost + ' SP)</span>'}
         <span class="rank-badge rank-${ss.rank}" style="margin-left:6px;">${ss.rank}</span>
         <span class="marks-dots" style="margin-left:6px;">${dots}</span>
+        ${usedBadge}${notUsedNote}
       </div>
-      <button class="btn btn-secondary btn-sm" ${canAfford ? '' : 'disabled'} onclick="spendSkillPoint('${skill.id}')" style="padding:3px 10px;min-height:28px;font-size:11px;">Spend</button>
+      <button class="btn btn-secondary btn-sm" ${canSpend ? '' : 'disabled'} onclick="spendSkillPoint('${skill.id}')" style="padding:3px 10px;min-height:28px;font-size:11px;">Spend</button>
     `;
     listEl.appendChild(div);
   });
@@ -346,6 +356,31 @@ async function saveEncounter() {
 function saveCampaignNotes() {
   const notes = document.getElementById('builder-campaign-notes').value;
   sessionStorage.setItem('facets_campaign_notes_' + state.sessionId, notes);
+}
+
+// ---------------------------------------------------------------------------
+// MM: Mark skill as used (PHB II.4 enforcement)
+// ---------------------------------------------------------------------------
+function renderBuilderMarkSkillSelect() {
+  const select = document.getElementById('builder-mark-skill');
+  if (!select || !state.ruleset) return;
+  select.innerHTML = '';
+  state.ruleset.skills.forEach(skill => {
+    if (skill.status === 'stub') return;
+    const opt = document.createElement('option');
+    opt.value = skill.id;
+    opt.textContent = skill.name;
+    select.appendChild(opt);
+  });
+}
+
+function mmMarkSkillUsed() {
+  const playerName = document.getElementById('builder-mark-player').value.trim();
+  const skillId = document.getElementById('builder-mark-skill').value;
+  if (!playerName || !skillId) { alert('Player name and skill are required.'); return; }
+  sendWS({ type: 'mark_skill_used', player_name: playerName, skill_id: skillId });
+  document.getElementById('builder-mark-status').textContent = 'Marked ' + skillId + ' as used for ' + playerName;
+  setTimeout(() => { document.getElementById('builder-mark-status').textContent = ''; }, 3000);
 }
 
 // ---------------------------------------------------------------------------

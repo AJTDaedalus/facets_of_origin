@@ -314,6 +314,46 @@ Boss construction is covered in the Mirror Master's chapter. For now: a climacti
 
 ---
 
+## Enemy Attacks
+
+NPCs do not roll dice. When an enemy attacks a PC, the PC rolls a reaction. The rules below clarify how enemy type and posture interact with that reaction.
+
+### Incoming Condition Tier
+
+When a PC is hit by an enemy attack (Absorb, or a failed/partial reaction), the incoming Condition tier depends on the enemy's type:
+
+| Enemy Type | Incoming Tier | Rationale |
+|---|---|---|
+| **Mook** | Tier 1 | Mooks are individually weak — their threat is numbers, not force |
+| **Named NPC** | Tier 2 | A Named NPC's attack carries the weight of a full Strike success |
+| **Boss** | Tier 2 | Same as Named; Boss Techniques may escalate further |
+
+Armor applies normally: light armor downgrades the incoming tier by one (Tier 2 becomes Tier 1), heavy armor downgrades by two (Tier 3 becomes Tier 1).
+
+### Enemy Posture and Reaction Difficulty
+
+Named NPCs and Bosses declare Postures like PCs. Their posture's offense modifier adjusts the difficulty of reactions against their attacks:
+
+| Enemy Posture | Effect on PC Reactions |
+|---|---|
+| **Aggressive** | Reactions one step harder (e.g., Standard becomes Hard) |
+| **Measured** | No adjustment |
+| **Defensive** | Reactions one step easier (e.g., Standard becomes Easy) |
+
+Mooks do not declare Postures. The MM sets reaction difficulty by situation: Standard by default, Easy if the Mook is distracted or exposed, Hard if the Mook has positional advantage.
+
+### Armor and Reaction Downgrades
+
+Armor downgrades and successful reaction downgrades (Dodge 7-9, Parry 7-9) **do not stack**. Apply the greater reduction only.
+
+A character in light armor who rolls a partial Parry against a Named NPC's attack has two sources of reduction: armor (Tier 2 → Tier 1) and the partial reaction (downgrade one tier). Both reduce by one tier — they do not combine to eliminate the condition entirely. The result is **Tier 1**.
+
+> **Why they don't stack:** Armor represents physical protection; a partial reaction represents imperfect avoidance. If both reduced independently, light armor plus any partial reaction would negate all Named NPC attacks. That makes defense too cheap and removes the decision tension from reaction choices.
+
+> **When you avoid entirely:** A full reaction success (10+ on Dodge or Parry) avoids the attack completely — no condition is applied, and armor is irrelevant. Armor only matters when you are hit.
+
+---
+
 ## Magic in Combat
 
 Magical effects in combat follow the same **Domain + Intent + Scope** framework as any other use of magic. The rules below govern how magic integrates with the exchange structure.
@@ -575,6 +615,16 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 | **3** | Broken (out of the fight) | End of scene |
 
 Two Tier 2 conditions = Broken.
+
+### Enemy Attacks
+
+| Enemy Type | Incoming Tier | Posture affects reactions? |
+|---|---|---|
+| Mook | Tier 1 | No (MM sets difficulty by situation) |
+| Named NPC | Tier 2 | Yes (Aggressive = harder, Defensive = easier) |
+| Boss | Tier 2 | Yes (same as Named; Techniques may escalate) |
+
+Armor and partial reaction downgrades **do not stack** — apply the greater reduction.
 
 ### Armor
 

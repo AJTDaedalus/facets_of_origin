@@ -52,6 +52,16 @@
 - Start of session: 3 Sparks per character
 - **Graceful Fail:** MM may award a Spark when a player leans into a 6- consequence
 
+### Spark Flow (MM Guidance)
+
+The Spark economy works when Sparks flow — earned and spent regularly, not hoarded.
+
+- **Target:** Award at least **1-2 Sparks mid-session**, not just at session end.
+- **Graceful Fail is your best tool.** Every 6- is an opportunity. When a player leans into the consequence with commitment, award a Spark immediately. This creates a virtuous cycle: players spend Sparks because they expect to earn more.
+- **Midpoint diagnostic:** If no Spark has been earned by the session's midpoint, you are being too conservative. Look for the next moment of creative play, genuine character commitment, or a peer nomination, and award one.
+- **Peer nominations are contagious.** The first "Spark?" from a player opens the floodgate. If nobody is nominating, model it yourself by awarding one conspicuously. The table will follow.
+- **Hoarding is a signal.** If players consistently end sessions with unspent Sparks, they do not trust the supply. Award more visibly and more frequently until spending feels safe.
+
 ---
 
 ## Combat: Exchange Flow
@@ -116,6 +126,28 @@ At **0 Endurance**: Absorb only.
 
 ---
 
+## Enemy Attacks
+
+| Enemy Type | Incoming Tier | Posture? |
+|---|---|---|
+| Mook | Tier 1 | No (MM sets difficulty) |
+| Named NPC | Tier 2 | Yes |
+| Boss | Tier 2 | Yes (Techniques may escalate) |
+
+- **Aggressive enemy:** PC reactions one step **harder**
+- **Defensive enemy:** PC reactions one step **easier**
+- Armor and reaction downgrades **do not stack** -- apply the greater reduction
+
+---
+
+## Group Rolls
+
+- Each character rolls; **majority success** = group succeeds
+- Partial (7--9) counts as success for majority calculation
+- Or: designate a **lead roller**, others Support
+
+---
+
 ## Conditions
 
 | Tier | Conditions | Effect | Duration |
@@ -158,6 +190,7 @@ At **0 Endurance**: Absorb only.
 | Significant | Standard | Hard | Very Hard |
 | Major | Hard | Very Hard | Very Hard (ceiling) |
 
+- **Pre-technique:** Minor scope only (no difficulty penalty -- scope restriction alone is the limitation)
 - Prismatic ceiling is **unmovable** -- Sparks cannot ease Major scope for Broad domains
 - Focused domains **can** Spark to ease Major one step
 - Second domain (Soul Communion Tier 3): always one difficulty step harder

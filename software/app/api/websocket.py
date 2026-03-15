@@ -178,6 +178,8 @@ async def _dispatch(
         await _handle_chat(msg, session_id, identity)
     elif event_type == "skill_advance" and is_mm:
         await _handle_skill_advance(msg, session, session_id)
+    elif event_type == "mark_skill_used" and is_mm:
+        await _handle_mark_skill_used(msg, session, session_id)
     elif event_type == "ping":
         await manager.send_to(websocket, {"type": "pong"})
     # --- Combat events ---
@@ -289,6 +291,11 @@ async def _handle_roll(
     result_dict = roll_result_to_dict(result)
     session.record_roll(player_name, result_dict)
 
+    # Auto-mark skill as used this session (PHB II.4 advancement rule)
+    used_skill = msg.get("skill_id")
+    if used_skill and used_skill in character.skills:
+        character.skills_used_this_session.add(used_skill)
+
     # Broadcast the roll result to everyone in the session
     await manager.broadcast(session_id, {
         "type": "roll_result",
@@ -367,6 +374,21 @@ async def _handle_skill_advance(msg: dict, session, session_id: str) -> None:
             "new_facet_level": character.facet_level,
             "total_facet_levels": character.total_facet_levels,
             "career_advances": character.career_advances,
+        })
+
+
+async def _handle_mark_skill_used(msg: dict, session, session_id: str) -> None:
+    """MM marks a skill as used this session for a player, enabling advancement."""
+    player_name = msg.get("player_name", "")
+    skill_id = msg.get("skill_id", "")
+    character = session.characters.get(player_name)
+    if character and skill_id:
+        character.skills_used_this_session.add(skill_id)
+        await manager.broadcast(session_id, {
+            "type": "skill_marked_used",
+            "player": player_name,
+            "skill_id": skill_id,
+            "skills_used": sorted(character.skills_used_this_session),
         })
 
 
@@ -488,6 +510,10 @@ async def _handle_strike(
 
     session.record_roll(player_name, result_dict)
 
+    # Auto-mark skill as used this session
+    if skill_id and skill_id in character.skills:
+        character.skills_used_this_session.add(skill_id)
+
     session.save_character_to_disk(player_name)
     await manager.broadcast(session_id, {
         "type": "strike_result",
@@ -564,6 +590,10 @@ async def _handle_react(
         roll = resolve_roll(request, session.ruleset)
         roll_result = roll_result_to_dict(roll)
         session.record_roll(player_name, roll_result)
+
+    # Auto-mark skill as used this session (parry uses combat skill)
+    if reaction == "parry" and "combat" in character.skills:
+        character.skills_used_this_session.add("combat")
 
     session.save_character_to_disk(player_name)
     await manager.broadcast(session_id, {
@@ -819,6 +849,11 @@ async def _handle_support(
     result_dict = roll_result_to_dict(result)
     session.record_roll(player_name, result_dict)
 
+    # Auto-mark skill as used this session
+    used_skill = msg.get("skill_id")
+    if used_skill and used_skill in character.skills:
+        character.skills_used_this_session.add(used_skill)
+
     await manager.broadcast(session_id, {
         "type": "support_result",
         "player": player_name,
@@ -853,6 +888,11 @@ async def _handle_maneuver(
     result = resolve_roll(request, session.ruleset)
     result_dict = roll_result_to_dict(result)
     session.record_roll(player_name, result_dict)
+
+    # Auto-mark skill as used this session
+    used_skill = msg.get("skill_id")
+    if used_skill and used_skill in character.skills:
+        character.skills_used_this_session.add(used_skill)
 
     await manager.broadcast(session_id, {
         "type": "maneuver_result",
@@ -947,6 +987,14 @@ async def _handle_spend_skill_point(
         await manager.send_to(websocket, {"type": "error", "message": "Missing skill_id."})
         return
 
+    # Enforce "only skills used this session" rule (PHB II.4)
+    if character.skills_used_this_session and skill_id not in character.skills_used_this_session:
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": f"Skill '{skill_id}' was not used this session. Ask the MM to mark it as used.",
+        })
+        return
+
     # Determine cost
     sk_def = session.ruleset.get_skill(skill_id)
     is_primary = sk_def is not None and sk_def.facet == character.primary_facet
@@ -974,6 +1022,8 @@ async def _handle_spend_skill_point(
         "facet_level_advances": result["facet_level_advances"],
         "major_advancement": result.get("major_advancement", False),
         "new_rank": character.skills[skill_id].rank if skill_id in character.skills else "novice",
+        "new_marks": character.skills[skill_id].marks if skill_id in character.skills else 0,
+        "new_facet_level": character.facet_level,
         "session_skill_points_remaining": character.session_skill_points_remaining,
     })
 

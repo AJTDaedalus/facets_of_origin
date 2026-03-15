@@ -228,7 +228,7 @@ Full descriptions of all 18 domains — what each covers, example effects at eac
 
 ## Acquiring a Domain
 
-> **Before the Technique:** Your domain origin comes from your Background (Chapter II.5), not your Technique. Until you unlock the corresponding Facet Technique, magic is real but undisciplined: **Minor scope only**, and all difficulties one step harder than normal. The Technique is not when you gain magic — it is when your magic becomes what it is capable of being.
+> **Before the Technique:** Your domain origin comes from your Background (Chapter II.5), not your Technique. Until you unlock the corresponding Facet Technique, magic is real but limited: **Minor scope only**. You can light a candle, sense a vibration, or leave a small mark — but you cannot fill a room with fire or shatter a wall with sound. The Technique is not when you gain magic — it is when your magic becomes what it is capable of being. Minor scope uses the domain's normal difficulty table: Easy for Focused, Standard for Standard, Hard for Broad.
 
 A domain is not granted by raw potential — it requires both narrative origin and developed practice. At character creation, your **Background** establishes the story of how your magic began: you were raised in a temple, apprenticed to a hedge mage, discovered your domain through a crisis you barely survived, or spent years studying at an institution that understood what you were. The Background provides the narrative legitimacy. The **Facet Technique** provides the mechanical activation.
 

@@ -211,11 +211,13 @@ class BackgroundDefinition(BaseModel):
     Fields:
         facet: The primary Facet this background belongs to ("body" | "mind" | "soul").
         starting_skill: Skill ID that begins at Practiced rank.
-        secondary_skill: Skill ID that begins at Novice with 1 mark. Null for magic
-                         backgrounds (domain_origin replaces the secondary skill slot).
+        secondary_skill: Skill ID that begins at Novice with 1 mark.
         specialty: Narrow fictional expertise that eases directly applicable rolls.
         domain_origin: "mind" | "soul" | null. Set on magic-granting backgrounds to
                        indicate which domain list the player chooses from.
+        domain_replaces_secondary: If true, choosing a magic domain skips the
+                                   secondary skill (Guild Apprentice, Hedge Scholar).
+                                   If false, both are granted (Temple Acolyte).
     """
 
     id: str
@@ -225,6 +227,7 @@ class BackgroundDefinition(BaseModel):
     secondary_skill: Optional[str] = None
     specialty: str
     domain_origin: Optional[str] = None
+    domain_replaces_secondary: bool = False
 
 
 # ---------------------------------------------------------------------------
@@ -335,17 +338,17 @@ class MagicDef(BaseModel):
                       {"scope_difficulties": {"minor": "Easy", ...}}.
         pre_technique_scope_limit: Maximum scope before the Facet Technique is unlocked.
                                    Default "minor".
-        pre_technique_difficulty_penalty: Steps harder applied before Technique.
-                                          Default 1.
+        pre_technique_difficulty_penalty: No additional difficulty penalty pre-Technique.
+                                          Default 0 (scope restriction alone is the penalty).
         soul_domains: Domains available to Soul Facet characters.
         mind_domains: Domains available to Mind Facet characters.
     """
 
     traditions: dict[str, Any] = Field(default_factory=dict)
     domain_types: dict[str, Any] = Field(default_factory=dict)
-    pre_technique_penalty: str = "1_step_harder"
+    pre_technique_penalty: str = "scope_only"
     pre_technique_scope_limit: str = "minor"       # scope ceiling before Technique is unlocked
-    pre_technique_difficulty_penalty: int = 1       # number of difficulty steps harder pre-Technique
+    pre_technique_difficulty_penalty: int = 0       # no additional difficulty penalty pre-Technique
     soul_domains: list[MagicDomainDef] = Field(default_factory=list)
     mind_domains: list[MagicDomainDef] = Field(default_factory=list)
 

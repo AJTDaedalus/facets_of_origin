@@ -1005,10 +1005,10 @@ function updateMagicDifficultyPreview() {
   const scope = (document.querySelector('input[name="magic-scope"]:checked') || {}).value || 'minor';
   let difficulty = getScopeDifficulty(domainType, scope);
 
-  // Note pre-technique penalty
+  // Note pre-technique scope limit (no difficulty penalty)
   let notes = '';
   if (!state.character.magic_technique_active) {
-    notes += ' (+1 step harder, pre-technique)';
+    notes += ' (Minor scope only, pre-technique)';
   }
   if (domainId === state.character.secondary_magic_domain) {
     notes += ' (+1 step harder, secondary domain)';

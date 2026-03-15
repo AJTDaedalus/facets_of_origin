@@ -482,7 +482,7 @@ def _make_magic_ruleset(domain_type: str, tradition: str = "intuitive") -> Magic
         "broad":    {"scope_difficulties": {"minor": "Hard", "significant": "Very Hard", "major": "Very Hard"}},
     }
     magic_mock.pre_technique_scope_limit = "minor"
-    magic_mock.pre_technique_difficulty_penalty = 1
+    magic_mock.pre_technique_difficulty_penalty = 0
 
     ruleset_mock = MagicMock()
     ruleset_mock.magic = magic_mock
@@ -565,6 +565,48 @@ class TestPushScopeResolution:
                 spark_use="push_scope",
             )
         assert result_pushed.difficulty_modifier == result_normal.difficulty_modifier - 1
+
+
+class TestPreTechniqueMagic:
+    """Pre-technique magic: Minor scope only, no difficulty penalty."""
+
+    def test_pre_technique_no_difficulty_penalty(self):
+        """Pre-technique Focused Minor stays Easy (no penalty step)."""
+        ruleset = _make_magic_ruleset("focused")
+        caster_with = _make_caster(technique_active=True)
+        caster_without = _make_caster(technique_active=False)
+
+        with patch("random.randint", return_value=5):
+            result_with = resolve_magic_roll(
+                caster_with, "test_domain", "minor", "test", ruleset,
+            )
+            result_without = resolve_magic_roll(
+                caster_without, "test_domain", "minor", "test", ruleset,
+            )
+        # Both should have Easy (+1) difficulty — no penalty for pre-technique
+        assert result_with.difficulty_modifier == result_without.difficulty_modifier
+
+    def test_pre_technique_standard_domain_no_penalty(self):
+        """Pre-technique Standard Minor stays Standard (no penalty step)."""
+        ruleset = _make_magic_ruleset("standard")
+        caster = _make_caster(technique_active=False)
+
+        with patch("random.randint", return_value=5):
+            result = resolve_magic_roll(
+                caster, "test_domain", "minor", "test", ruleset,
+            )
+        # Standard Minor = Standard = modifier 0
+        assert result.difficulty_modifier == 0
+
+    def test_pre_technique_blocks_significant_scope(self):
+        """Pre-technique magic cannot exceed Minor scope."""
+        ruleset = _make_magic_ruleset("focused")
+        caster = _make_caster(technique_active=False)
+
+        with pytest.raises(ValueError, match="minor scope only"):
+            resolve_magic_roll(
+                caster, "test_domain", "significant", "test", ruleset,
+            )
 
 
 class TestUnregisteredDomainFallback:

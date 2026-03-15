@@ -142,6 +142,18 @@
               <label>Primary Facet</label>
               <select id="cc-facet"></select>
 
+              <label>Background</label>
+              <select id="cc-background"><option value="">-- none --</option></select>
+              <div id="cc-background-info" style="font-size:0.8rem;color:var(--text-dim);margin-bottom:8px;"></div>
+
+              <div id="cc-magic-domain-wrap" class="hidden">
+                <label>Magic Domain</label>
+                <select id="cc-magic-domain"><option value="">-- none --</option></select>
+                <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:8px;">
+                  This background grants a magic domain. Choose one, or leave blank for the non-magical variant.
+                </div>
+              </div>
+
               <div class="card-title" style="margin-top:12px;">Distribute Attributes</div>
               <div id="cc-attributes"></div>
               <div id="cc-points-remaining" style="font-size:0.85rem;color:var(--text-dim);margin-bottom:8px;"></div>
@@ -350,7 +362,7 @@
 
               <!-- Pre-technique warning -->
               <div id="magic-pre-technique-warn" class="hidden" style="background:rgba(255,193,7,0.1);border:1px solid var(--gold);border-radius:6px;padding:8px;margin-bottom:8px;font-size:0.8rem;">
-                Technique not yet unlocked. Scope limited to <strong>Minor</strong>; difficulty one step harder.
+                Technique not yet unlocked. Scope limited to <strong>Minor</strong> only.
               </div>
 
               <!-- Scope selector -->
@@ -674,6 +686,20 @@
             <div class="card-title">Campaign Notes</div>
             <textarea id="builder-campaign-notes" rows="8" placeholder="Session notes, NPC notes, plot threads..."></textarea>
             <button class="btn btn-secondary btn-sm" style="margin-top:8px;" onclick="saveCampaignNotes()">Save Notes</button>
+          </div>
+
+          <!-- Mark skills as used (enables player advancement) -->
+          <div class="card">
+            <div class="card-title">Mark Skills Used This Session</div>
+            <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:8px;">
+              Players can only spend skill points on skills the MM marks as used. Skills are also auto-marked when rolled.
+            </div>
+            <label>Player Name</label>
+            <input type="text" id="builder-mark-player" placeholder="Player name">
+            <label>Skill</label>
+            <select id="builder-mark-skill"></select>
+            <button class="btn btn-secondary btn-sm" onclick="mmMarkSkillUsed()">Mark as Used</button>
+            <div id="builder-mark-status" class="success-msg"></div>
           </div>
 
           <!-- Skill advancement controls (MM awards marks) -->

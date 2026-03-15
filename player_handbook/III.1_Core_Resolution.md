@@ -109,6 +109,20 @@ When you act against someone actively working against you:
 
 ---
 
+## Group Rolls
+
+When the whole party attempts the same task together — sneaking past a guard post, navigating a treacherous path, searching a room under time pressure — use a **group roll**.
+
+**How it works:** Each participating character rolls the relevant attribute and skill as normal. If **the majority succeed** (partial success or better counts as a success), the group succeeds. If the majority fail, the group fails — but the MM should note which characters succeeded individually, as their competence still matters in the fiction.
+
+A standout result within the group adds narrative color: the character who rolled 10+ on the group Stealth check was the one who noticed the loose floorboard and silently warned everyone. The character who rolled 6- on the same check stumbled — but the group's majority success means someone caught their arm in time.
+
+**The lead roller alternative:** For some tasks, the MM may designate one character as the lead — the most skilled navigator, the best lockpick, the strongest climber hauling others up. Other characters provide **Support** (see Combat, Chapter III.3) instead of rolling independently. This works best when one character is clearly more capable and the others are helping rather than performing the same task in parallel.
+
+> **When to use group rolls vs. individual rolls:** If every character's individual outcome matters to the story (each person searching a different room), roll individually. If the party succeeds or fails as a unit (sneaking past the same guards), use a group roll. When in doubt, group roll — it is faster and produces a cleaner narrative beat.
+
+---
+
 ## When Not to Roll
 
 The MM should only call for a roll when three conditions are met:

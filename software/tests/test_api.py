@@ -240,6 +240,100 @@ class TestCharacterAPI:
         )
         assert resp.status_code == 422
 
+    def test_background_guild_apprentice_replaces_secondary_with_domain(
+        self, client, mm_headers, active_session, valid_attributes
+    ):
+        """Guild Apprentice: choosing a magic domain skips secondary skill (investigate)."""
+        resp = client.post(
+            "/api/characters/",
+            json={
+                "session_id": active_session["session_id"],
+                "character_name": "Lyra",
+                "primary_facet": "mind",
+                "attributes": valid_attributes,
+                "background_id": "guild_apprentice",
+                "magic_domain": "warding",
+            },
+            headers=mm_headers,
+        )
+        assert resp.status_code == 200
+        char = resp.json()["character"]
+        # Starting skill: lore at practiced
+        assert char["skills"]["lore"]["rank"] == "practiced"
+        # Secondary skill (investigate) is SKIPPED because domain replaces it
+        assert char["skills"]["investigate"]["marks"] == 0
+        # Magic domain is set
+        assert char["magic_domain"] == "warding"
+        assert char["career_advances"] == 1
+
+    def test_background_guild_apprentice_no_domain_keeps_secondary(
+        self, client, mm_headers, active_session, valid_attributes
+    ):
+        """Guild Apprentice: without a magic domain, secondary skill (investigate) is granted."""
+        resp = client.post(
+            "/api/characters/",
+            json={
+                "session_id": active_session["session_id"],
+                "character_name": "Scholar",
+                "primary_facet": "mind",
+                "attributes": valid_attributes,
+                "background_id": "guild_apprentice",
+            },
+            headers=mm_headers,
+        )
+        assert resp.status_code == 200
+        char = resp.json()["character"]
+        assert char["skills"]["lore"]["rank"] == "practiced"
+        assert char["skills"]["investigate"]["marks"] == 1  # secondary granted
+        assert char["magic_domain"] is None
+
+    def test_background_temple_acolyte_keeps_secondary_with_domain(
+        self, client, mm_headers, active_session, valid_attributes
+    ):
+        """Temple Acolyte: choosing a magic domain does NOT skip secondary skill (perform)."""
+        resp = client.post(
+            "/api/characters/",
+            json={
+                "session_id": active_session["session_id"],
+                "character_name": "Sable",
+                "primary_facet": "soul",
+                "attributes": valid_attributes,
+                "background_id": "temple_acolyte",
+                "magic_domain": "resonance",
+            },
+            headers=mm_headers,
+        )
+        assert resp.status_code == 200
+        char = resp.json()["character"]
+        # Starting skill: attune at practiced
+        assert char["skills"]["attune"]["rank"] == "practiced"
+        # Secondary skill (perform) is KEPT even with magic domain
+        assert char["skills"]["perform"]["marks"] == 1
+        # Magic domain is set
+        assert char["magic_domain"] == "resonance"
+        assert char["career_advances"] == 1
+
+    def test_background_city_watch_veteran_no_domain(
+        self, client, mm_headers, active_session, valid_attributes
+    ):
+        """City Watch Veteran: non-magical background with secondary skill."""
+        resp = client.post(
+            "/api/characters/",
+            json={
+                "session_id": active_session["session_id"],
+                "character_name": "Rowan",
+                "primary_facet": "body",
+                "attributes": valid_attributes,
+                "background_id": "city_watch_veteran",
+            },
+            headers=mm_headers,
+        )
+        assert resp.status_code == 200
+        char = resp.json()["character"]
+        assert char["skills"]["combat"]["rank"] == "practiced"
+        assert char["skills"]["endurance"]["marks"] == 1
+        assert char["magic_domain"] is None
+
 
 # ---------------------------------------------------------------------------
 # Facets API

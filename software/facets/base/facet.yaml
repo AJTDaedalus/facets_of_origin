@@ -970,10 +970,10 @@ advancement:
 # Magic rules (PHB II.3)
 # ---------------------------------------------------------------------------
 magic:
-  # Before a Facet Technique is unlocked, magic is limited to minor scope only
-  # and all difficulty rolls are this many steps harder.
+  # Before a Facet Technique is unlocked, magic is limited to minor scope only.
+  # The scope restriction alone is the penalty — no additional difficulty step.
   pre_technique_scope_limit: minor
-  pre_technique_difficulty_penalty: 1
+  pre_technique_difficulty_penalty: 0
 
   domain_types:
     focused:
@@ -1051,3 +1051,120 @@ combat:
       downgrades: 1   # Tier 2 → Tier 1
     heavy:
       downgrades: 2   # Tier 3 → Tier 2
+
+# ---------------------------------------------------------------------------
+# Backgrounds (PHB II.5)
+# ---------------------------------------------------------------------------
+backgrounds:
+  # === Body Facet Backgrounds ===
+  - id: city_watch_veteran
+    name: "City Watch Veteran"
+    facet: body
+    starting_skill: combat
+    secondary_skill: endurance
+    specialty: "Knows the layout, regular occupants, and unofficial rules of one specific district or settlement from your service years."
+
+  - id: traveling_merchants_guard
+    name: "Traveling Merchant's Guard"
+    facet: body
+    starting_skill: athletics
+    secondary_skill: endurance
+    specialty: "Can read road conditions and assess the likelihood of ambush or delay based on terrain, weather, and recent traffic sign."
+
+  - id: arena_fighter
+    name: "Arena Fighter"
+    facet: body
+    starting_skill: combat
+    secondary_skill: finesse
+    specialty: "Reads an opponent's fighting style and general skill level within the first exchange of a fight, accurately enough to brief an ally."
+
+  - id: wilderness_scout
+    name: "Wilderness Scout"
+    facet: body
+    starting_skill: stealth
+    secondary_skill: athletics
+    specialty: "Can track a person or animal across terrain they've passed through within the last day, given minimal sign."
+
+  - id: dockworker
+    name: "Dockworker"
+    facet: body
+    starting_skill: athletics
+    secondary_skill: endurance
+    specialty: "Knows how cargo manifests work, how they get falsified, and what a legitimate versus suspicious shipment looks like on paper and on the dock."
+
+  # === Mind Facet Backgrounds ===
+  - id: guild_apprentice
+    name: "Guild Apprentice"
+    facet: mind
+    starting_skill: lore
+    secondary_skill: investigate
+    specialty: "Formal training in a structured discipline — can identify when methods, materials, or approaches follow an established tradition versus improvisation."
+    domain_origin: mind
+    domain_replaces_secondary: true
+
+  - id: physicians_assistant
+    name: "Physician's Assistant"
+    facet: mind
+    starting_skill: craft
+    secondary_skill: lore
+    specialty: "Recognizes symptoms of common diseases, poisons, and injuries accurately enough to name them and describe their progression."
+
+  - id: court_interpreter
+    name: "Court Interpreter"
+    facet: mind
+    starting_skill: insight
+    secondary_skill: lore
+    specialty: "Fluent in two languages beyond your native tongue; can make oneself understood in a third through careful effort."
+
+  - id: archive_researcher
+    name: "Archive Researcher"
+    facet: mind
+    starting_skill: investigate
+    secondary_skill: lore
+    specialty: "Can navigate any organized record system to find what is actually there, including things that have been quietly misfiled."
+
+  - id: hedge_scholar
+    name: "Hedge Scholar"
+    facet: mind
+    starting_skill: lore
+    secondary_skill: investigate
+    specialty: "Has read widely enough to have encountered at least a surface familiarity with almost any scholarly topic."
+    domain_origin: mind
+    domain_replaces_secondary: true
+
+  # === Soul Facet Backgrounds ===
+  - id: street_performer
+    name: "Street Performer"
+    facet: soul
+    starting_skill: perform
+    secondary_skill: persuade
+    specialty: "Can assess a crowd's mood, attention, and the best angle of approach within a few moments of observation."
+
+  - id: temple_acolyte
+    name: "Temple Acolyte"
+    facet: soul
+    starting_skill: attune
+    secondary_skill: perform
+    specialty: "Recognizes the rituals, symbols, and internal politics of one specific religious tradition in detail."
+    domain_origin: soul
+
+  - id: traveling_merchant
+    name: "Traveling Merchant"
+    facet: soul
+    starting_skill: persuade
+    secondary_skill: attune
+    specialty: "Can accurately assess the fair market value of common goods and identify when a price represents opportunity, desperation, or a trap."
+
+  - id: former_criminal
+    name: "Former Criminal"
+    facet: soul
+    starting_skill: deceive
+    secondary_skill: attune
+    specialty: "Knows how a particular type of criminal operation works from the inside and can recognize one when they see it."
+
+  - id: luck_touched_wanderer
+    name: "Luck-Touched Wanderer"
+    facet: soul
+    starting_skill: gamble
+    secondary_skill: perform
+    specialty: "Has an uncanny sense for when a situation is about to turn — when the calm is the wrong kind of calm."

@@ -65,6 +65,7 @@ class Character(BaseModel):
     sparks: int = Field(default=3, ge=0)
 
     session_skill_points_remaining: int = Field(default=4, ge=0)
+    skills_used_this_session: set[str] = Field(default_factory=set)
     facet_level: int = Field(default=0, ge=0)
     rank_advances_this_facet_level: int = Field(default=0, ge=0)
     total_facet_levels: int = Field(default=0, ge=0)
@@ -270,7 +271,10 @@ class Character(BaseModel):
 
     def to_client_dict(self) -> dict:
         """Serialize the character to a JSON-safe dict for sending to clients."""
-        return self.model_dump()
+        d = self.model_dump()
+        # Pydantic preserves set type; JSON requires list
+        d["skills_used_this_session"] = sorted(self.skills_used_this_session)
+        return d
 
     def to_fof(
         self,
@@ -481,16 +485,22 @@ def create_default_character(
             )
             career_advances += 1
 
-        # Secondary Skill → Novice with 1 mark (only if not a magic-granting background)
-        if bg.secondary_skill and not bg.domain_origin:
+        # Secondary Skill → Novice with 1 mark.
+        # Some backgrounds (Guild Apprentice, Hedge Scholar) replace the
+        # secondary skill with a magic domain when one is chosen.  Others
+        # (Temple Acolyte) grant both.  The flag domain_replaces_secondary
+        # controls which behaviour applies.
+        skip_secondary = bg.domain_replaces_secondary and magic_domain
+        if bg.secondary_skill and not skip_secondary:
             if bg.secondary_skill in skills:
                 skills[bg.secondary_skill].marks = 1
             else:
                 skills[bg.secondary_skill] = SkillState(
                     skill_id=bg.secondary_skill, rank="novice", marks=1
                 )
-        elif bg.domain_origin and magic_domain:
-            # Magic-granting background: record tradition from domain
+
+        # Resolve magic domain and tradition if magic_domain is provided
+        if magic_domain:
             resolved_magic_domain = magic_domain
             if ruleset.magic:
                 domain_def = ruleset.magic.get_domain(magic_domain)

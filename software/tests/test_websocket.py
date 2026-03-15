@@ -1271,6 +1271,137 @@ class TestSpendSkillPoint:
         assert remaining < 4
 
 
+class TestSkillUseEnforcement:
+    """PHB II.4: Only skills used this session can receive advancement points."""
+
+    def test_spend_rejected_when_skill_not_used(self, client, mm_token, session_with_character):
+        """Spending on a skill that wasn't used returns error when other skills were used."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        sess = session_store.get(session_id)
+        sess.characters["Zahna"].session_skill_points_remaining = 4
+        # Mark combat as used but NOT lore
+        sess.characters["Zahna"].skills_used_this_session = {"combat"}
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "spend_skill_point", "skill_id": "lore"})
+            msg = ws.receive_json()
+            assert msg["type"] == "error"
+            assert "not used this session" in msg["message"].lower()
+
+    def test_spend_allowed_when_skill_was_used(self, client, mm_token, session_with_character):
+        """Spending on a used skill succeeds."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        sess = session_store.get(session_id)
+        sess.characters["Zahna"].session_skill_points_remaining = 4
+        sess.characters["Zahna"].skills_used_this_session = {"lore"}
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "spend_skill_point", "skill_id": "lore"})
+            msg = ws.receive_json()
+            assert msg["type"] == "skill_point_spent"
+
+    def test_spend_allowed_when_no_skills_tracked(self, client, mm_token, session_with_character):
+        """When no skills have been used/marked, all skills are spendable (fresh session)."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        sess = session_store.get(session_id)
+        sess.characters["Zahna"].session_skill_points_remaining = 4
+        sess.characters["Zahna"].skills_used_this_session = set()
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "spend_skill_point", "skill_id": "lore"})
+            msg = ws.receive_json()
+            assert msg["type"] == "skill_point_spent"
+
+    def test_mm_mark_skill_used(self, client, mm_token, session_with_character):
+        """MM can mark a skill as used for a player."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({
+                "type": "mark_skill_used",
+                "player_name": "Zahna",
+                "skill_id": "lore",
+            })
+            msg = ws.receive_json()
+            assert msg["type"] == "skill_marked_used"
+            assert msg["player"] == "Zahna"
+            assert msg["skill_id"] == "lore"
+            assert "lore" in msg["skills_used"]
+
+        sess = session_store.get(session_id)
+        assert "lore" in sess.characters["Zahna"].skills_used_this_session
+
+    def test_auto_mark_on_roll(self, client, mm_token, session_with_character):
+        """Rolling with a skill auto-marks it as used."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({
+                "type": "roll",
+                "attribute_id": "knowledge",
+                "skill_id": "lore",
+                "difficulty": "Standard",
+            })
+            msg = ws.receive_json()
+            assert msg["type"] == "roll_result"
+
+        sess = session_store.get(session_id)
+        assert "lore" in sess.characters["Zahna"].skills_used_this_session
+
+    def test_auto_mark_on_strike(self, client, mm_token, session_with_character):
+        """Striking with a skill auto-marks it as used."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        char.endurance_current = 5
+        char.posture = "measured"
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({
+                "type": "strike",
+                "attribute_id": "strength",
+                "skill_id": "combat",
+                "difficulty": "Standard",
+            })
+            msg = ws.receive_json()
+            assert msg["type"] == "strike_result"
+
+        assert "combat" in sess.characters["Zahna"].skills_used_this_session
+
+    def test_skills_used_in_client_dict(self, client, mm_token, session_with_character):
+        """skills_used_this_session is included in character client dict."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        sess = session_store.get(session_id)
+        sess.characters["Zahna"].skills_used_this_session = {"lore", "combat"}
+
+        d = sess.characters["Zahna"].to_client_dict()
+        # Pydantic model_dump converts set to list
+        assert set(d["skills_used_this_session"]) == {"lore", "combat"}
+
+
 class TestSecondaryMagicDomain:
     """Phase 2.4: Secondary magic domain with difficulty penalty."""
 
@@ -1297,7 +1428,7 @@ class TestSecondaryMagicDomain:
             "focused": {"scope_difficulties": {"minor": "Easy", "significant": "Standard", "major": "Hard"}},
         }
         magic_mock.pre_technique_scope_limit = "minor"
-        magic_mock.pre_technique_difficulty_penalty = 1
+        magic_mock.pre_technique_difficulty_penalty = 0
 
         ruleset_mock = MagicMock()
         ruleset_mock.magic = magic_mock

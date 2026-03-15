@@ -162,6 +162,8 @@ Covered in detail in Chapter III.3 (Player's Handbook) and MM1 (this manual). Th
 
 A three-exchange fight should take 15-25 minutes at the table. If it is taking longer, something is wrong — either the fight has too many moving parts, or the players need help understanding their options, or the fight should have ended an exchange ago and you are prolonging it.
 
+> **Skirmish encounters are tutorial encounters.** A Skirmish-budget fight (Party Strength × 1) against Mooks will last 1-2 exchanges and produce minimal resource drain. That is by design — Skirmish encounters introduce combat mechanics without risking the party. Do not expect tactical depth from them. Use Skirmish encounters early in a session or campaign to teach the exchange structure, posture decisions, and reaction economy. Save Standard and Hard encounters for when the party understands the system and meaningful tactical pressure serves the story.
+
 End fights when they are won, not when the stat block is depleted. If the Named NPC is Staggered, out of Endurance, and the party has three characters with full pools, the fight is over — narrate the ending and move on. Do not make the players grind through the last two exchanges of a foregone conclusion.
 
 ### Downtime
