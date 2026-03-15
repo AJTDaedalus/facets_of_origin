@@ -473,6 +473,70 @@ The one exception: if a player is creating a character mid-campaign (a new playe
 
 ---
 
+## Spark Cadence
+
+### The Problem
+
+Playtests consistently showed Spark hoarding: players treated their 3 session Sparks as "too precious to spend," spending only 2 of 9 available per session. Combat simulations tell a different story — Sparks are spent heavily in Named and Boss fights (8+ of 9 available). The problem is not mechanical but behavioral: players don't earn enough Sparks during play to feel comfortable spending them.
+
+### The Solution: Structured Earning Moments
+
+**Session Sparks (3 per player):** Keep as-is. This is the baseline that ensures everyone has agency from the start.
+
+**Earning happens at predictable moments, not just MM fiat:**
+
+#### 1. Act Break Nomination (structured, predictable)
+
+After each major scene transition or act break, the MM calls for a "Spark moment":
+- Each player may nominate **one other player** for something they did that scene — a clever play, a funny moment, a choice that moved the story
+- The nominated player earns 1 Spark
+- The MM confirms or denies (should almost always confirm — this is social reinforcement, not gatekeeping)
+- **Target:** 2–3 nomination rounds per session = 2–3 Sparks earned per player
+
+> **Why nominations work:** Players award each other. This creates positive feedback loops — the table celebrates good play together, not through the MM's judgment alone. It also trains players to pay attention to each other's moments.
+
+#### 2. Graceful Failure (organic, MM-awarded)
+
+When a player rolls 6- and leans into the consequence — doesn't try to minimize it, plays it for story, makes the failure interesting — the MM may award a Spark.
+
+- **Target:** 1–2 per session across the whole table
+- The digital tool prompts after every 6- result: "Award Spark for graceful failure?"
+- Not every failure earns a Spark. It's specifically for failures the player makes entertaining or narratively rich.
+
+#### 3. Spark for Weakness (organic, MM-awarded)
+
+When a player deliberately plays into their character's weakness — low attribute, personality flaw, background limitation — at a cost to themselves, the MM may award a Spark.
+
+- **Target:** 0–1 per session
+- Mordai charging ahead despite Wisdom 1 when the situation clearly calls for caution
+- Zahna ignoring the social dynamics of a room because Charisma 1
+- This rewards characterization, not optimization
+
+### Target Economy
+
+Each player should end a session with **2–4 unspent Sparks**, having **spent 2–4 during the session**. The earning rate should roughly match the spending rate so Sparks feel like a renewable resource, not a finite one.
+
+| | Start | Earned | Spent | End |
+|---|---|---|---|---|
+| Low activity session | 3 | 1–2 | 1–2 | 2–3 |
+| Standard session | 3 | 2–3 | 3–4 | 2–3 |
+| High combat session | 3 | 3–4 | 4–6 | 1–3 |
+
+### MM Checklist
+
+Before each session, prepare:
+- [ ] 2–3 natural act break points where you'll call for nominations
+- [ ] At least 1 scene where a character's weakness could create interesting complications
+- [ ] Awareness of which players tend to hoard — give them opportunities that reward spending
+
+During play:
+- [ ] Call for Spark nominations at each act break
+- [ ] Watch for graceful failures (6- rolls played for story)
+- [ ] Award Sparks for deliberate weakness play
+- [ ] If a player hasn't spent a Spark by the session's midpoint, design a moment that rewards it
+
+---
+
 ## Quick Reference: Session Design
 
 ```

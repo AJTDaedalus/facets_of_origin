@@ -41,9 +41,31 @@ class Encounter(BaseModel):
             "deadly": 4.0,
         }.get(difficulty.lower(), 2.0)
 
+    # Enemy tier weights derived from combat simulation data (Series A-C).
+    # Mooks self-cancel as they die; Named maintain pressure; Bosses have
+    # phase changes and psychological impact.
+    TIER_WEIGHTS: dict[str, float] = {
+        "mook": 0.5,
+        "named": 1.0,
+        "boss": 1.25,
+    }
+
+    # Group-size modifier applied after tier weighting.
+    @staticmethod
+    def group_size_modifier(enemy_count: int) -> float:
+        """Modifier for total enemy count — captures action economy pressure."""
+        if enemy_count <= 3:
+            return 1.0
+        elif enemy_count <= 6:
+            return 1.1
+        else:
+            return 1.2
+
     @staticmethod
     def action_economy_multiplier(enemy_count: int, all_mooks: bool = False) -> float:
         """Return the action economy multiplier based on total enemy count.
+
+        Legacy interface kept for backward compatibility.
 
         MM1 rules:
         - Solo (1): x0.75
@@ -69,27 +91,47 @@ class Encounter(BaseModel):
         """Total number of individual enemies in this encounter."""
         return sum(entry.count for entry in self.enemies)
 
-    def calculate_effective_tr(self, enemy_trs: dict[str, int]) -> float:
-        """Calculate effective TR with action economy adjustment.
+    def calculate_effective_tr(
+        self,
+        enemy_trs: dict[str, int],
+        enemy_tiers: dict[str, str] | None = None,
+    ) -> float:
+        """Calculate effective TR using tier-weighted enemy contributions.
+
+        When *enemy_tiers* is provided the new simulation-calibrated formula
+        is used::
+
+            effective_tr = sum(TR_i × tier_weight_i × count_i) × group_modifier
+
+        Without tier info, falls back to the legacy action-economy multiplier.
 
         Args:
-            enemy_trs: Dict mapping enemy_id to their individual TR value.
-
-        Returns:
-            Adjusted TR accounting for action economy.
+            enemy_trs: Dict mapping enemy_id → individual TR.
+            enemy_tiers: Optional dict mapping enemy_id → tier string
+                         (``"mook"``, ``"named"``, ``"boss"``).
         """
+        if enemy_tiers is not None:
+            weighted_tr = sum(
+                enemy_trs.get(entry.enemy_id, 0)
+                * self.TIER_WEIGHTS.get(
+                    enemy_tiers.get(entry.enemy_id, "named"), 1.0
+                )
+                * entry.count
+                for entry in self.enemies
+            )
+            return weighted_tr * self.group_size_modifier(self.total_enemy_count())
+
+        # Legacy path (no tier info)
         raw_tr = sum(
             enemy_trs.get(entry.enemy_id, 0) * entry.count
             for entry in self.enemies
         )
         total_count = self.total_enemy_count()
-        # Determine if all enemies are mooks (simplified: check if all TRs <= 2)
         all_mooks = all(
             enemy_trs.get(entry.enemy_id, 0) <= 2
             for entry in self.enemies
         )
-        multiplier = self.action_economy_multiplier(total_count, all_mooks)
-        return raw_tr * multiplier
+        return raw_tr * self.action_economy_multiplier(total_count, all_mooks)
 
     def to_client_dict(self) -> dict:
         """Serialize for sending to clients."""

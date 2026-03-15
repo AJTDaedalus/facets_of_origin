@@ -55,7 +55,7 @@ class TestBaseRulesetLoading:
     def test_spark_loaded(self, ruleset):
         assert ruleset.spark is not None
         assert ruleset.spark.base_sparks_per_session == 3
-        assert len(ruleset.spark.earn_methods) == 3
+        assert len(ruleset.spark.earn_methods) == 4
 
     def test_advancement_loaded(self, ruleset):
         adv = ruleset.advancement

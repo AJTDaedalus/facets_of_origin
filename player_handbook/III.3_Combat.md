@@ -632,7 +632,7 @@ Armor and partial reaction downgrades **do not stack** — apply the greater red
 |---|---|
 | None | Conditions apply at full tier |
 | Light | Tier 2 becomes Tier 1 |
-| Heavy | Tier 3 becomes Tier 1 |
+| Heavy | Tier 3 (Broken) becomes Tier 2 |
 
 ### Endurance
 

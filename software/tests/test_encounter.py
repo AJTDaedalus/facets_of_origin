@@ -118,6 +118,91 @@ class TestEffectiveTR:
 
 
 # ---------------------------------------------------------------------------
+# Tier-weighted effective TR (new simulation-calibrated formula)
+# ---------------------------------------------------------------------------
+
+class TestTierWeightedTR:
+    def test_mook_weight_halves_tr(self):
+        e = Encounter(id="mooks", name="Mooks", enemies=[
+            EncounterEnemy(enemy_id="thug", count=3),
+        ])
+        trs = {"thug": 1}
+        tiers = {"thug": "mook"}
+        # 3 mooks × TR 1 × 0.5 weight × 1.0 group mod = 1.5
+        assert e.calculate_effective_tr(trs, tiers) == 1.5
+
+    def test_named_weight_is_one(self):
+        e = Encounter(id="duel", name="Duel", enemies=[
+            EncounterEnemy(enemy_id="sergeant", count=1),
+        ])
+        trs = {"sergeant": 8}
+        tiers = {"sergeant": "named"}
+        # 1 named × TR 8 × 1.0 weight × 1.0 group mod = 8.0
+        assert e.calculate_effective_tr(trs, tiers) == 8.0
+
+    def test_boss_weight_increases_tr(self):
+        e = Encounter(id="boss", name="Boss Fight", enemies=[
+            EncounterEnemy(enemy_id="guardian", count=1),
+        ])
+        trs = {"guardian": 16}
+        tiers = {"guardian": "boss"}
+        # 1 boss × TR 16 × 1.25 weight × 1.0 group mod = 20.0
+        assert e.calculate_effective_tr(trs, tiers) == 20.0
+
+    def test_mixed_group_with_tiers(self):
+        e = Encounter(id="mixed", name="Mixed", enemies=[
+            EncounterEnemy(enemy_id="thug", count=3),
+            EncounterEnemy(enemy_id="sergeant", count=1),
+        ])
+        trs = {"thug": 1, "sergeant": 8}
+        tiers = {"thug": "mook", "sergeant": "named"}
+        # (3×1×0.5 + 1×8×1.0) × 1.1 (4 enemies) = 9.5 × 1.1 = 10.45
+        assert e.calculate_effective_tr(trs, tiers) == pytest.approx(10.45)
+
+    def test_large_group_modifier(self):
+        e = Encounter(id="swarm", name="Swarm", enemies=[
+            EncounterEnemy(enemy_id="thug", count=10),
+        ])
+        trs = {"thug": 1}
+        tiers = {"thug": "mook"}
+        # 10 mooks × 1 × 0.5 × 1.2 (7+ enemies) = 6.0
+        assert e.calculate_effective_tr(trs, tiers) == 6.0
+
+    def test_boss_plus_mooks(self):
+        e = Encounter(id="boss-adds", name="Boss + Adds", enemies=[
+            EncounterEnemy(enemy_id="boss", count=1),
+            EncounterEnemy(enemy_id="minion", count=4),
+        ])
+        trs = {"boss": 12, "minion": 1}
+        tiers = {"boss": "boss", "minion": "mook"}
+        # (1×12×1.25 + 4×1×0.5) × 1.1 (5 enemies) = 17.0 × 1.1 = 18.7
+        assert e.calculate_effective_tr(trs, tiers) == pytest.approx(18.7)
+
+    def test_fallback_without_tiers_uses_legacy(self):
+        """Without tier info, falls back to the legacy action economy path."""
+        e = Encounter(id="legacy", name="Legacy", enemies=[
+            EncounterEnemy(enemy_id="thug", count=5),
+        ])
+        trs = {"thug": 1}
+        # Legacy: 5 × 1 × 1.1 (mook-only medium group) = 5.5
+        assert e.calculate_effective_tr(trs) == 5.5
+
+
+class TestGroupSizeModifier:
+    def test_small(self):
+        assert Encounter.group_size_modifier(1) == 1.0
+        assert Encounter.group_size_modifier(3) == 1.0
+
+    def test_medium(self):
+        assert Encounter.group_size_modifier(4) == 1.1
+        assert Encounter.group_size_modifier(6) == 1.1
+
+    def test_large(self):
+        assert Encounter.group_size_modifier(7) == 1.2
+        assert Encounter.group_size_modifier(15) == 1.2
+
+
+# ---------------------------------------------------------------------------
 # Serialization
 # ---------------------------------------------------------------------------
 

@@ -205,6 +205,8 @@ function onRollResult(msg) {
     state.character.sparks = msg.character_sparks_remaining;
     renderPlaySparkCounter();
   }
+
+  checkGracefulFailPrompt(msg);
 }
 
 function buildRollResultHtml(msg, roll) {
@@ -767,6 +769,8 @@ function onStrikeResult(msg) {
   const targetStr = msg.target ? ' vs ' + msg.target : '';
   addSystemChat(attackerName + ' strikes' + targetStr + ': ' + roll.outcome_label + ' (total ' + roll.total + ')' + (msg.press_used ? ' [Press]' : ''));
 
+  checkGracefulFailPrompt({ ...msg, player: msg.attacker, character_name: attackerName, roll });
+
   // Show result box for own strikes
   if (msg.attacker === state.playerName) {
     const resultBox = document.getElementById('play-roll-result-box');
@@ -1043,6 +1047,47 @@ function performCast() {
   });
 }
 
+// ---------------------------------------------------------------------------
+// Spark Cadence — Graceful Failure prompt and Nomination Round
+// ---------------------------------------------------------------------------
+
+/**
+ * Called after any roll result. If the MM sees a 6- (failure), show a
+ * prompt asking whether to award a Spark for graceful failure.
+ */
+function checkGracefulFailPrompt(msg) {
+  if (state.role !== 'mm') return;
+  const roll = msg.roll || msg;
+  if (roll.outcome !== 'failure') return;
+
+  const banner = document.getElementById('play-graceful-fail-banner');
+  if (!banner) return;
+
+  const playerName = msg.player || msg.attacker || msg.player_name || 'Unknown';
+  const charName = msg.character_name ||
+    (state.allCharacters[playerName] && state.allCharacters[playerName].name) ||
+    playerName;
+
+  banner.dataset.playerName = playerName;
+  banner.querySelector('.graceful-fail-text').textContent =
+    charName + ' rolled 6-. Award Spark for graceful failure?';
+  banner.classList.remove('hidden');
+}
+
+function awardGracefulFail() {
+  const banner = document.getElementById('play-graceful-fail-banner');
+  const playerName = banner.dataset.playerName;
+  if (playerName) {
+    sendWS({ type: 'spark_earn', player_name: playerName, reason: 'Graceful failure' });
+  }
+  banner.classList.add('hidden');
+}
+
+function startNominationRound() {
+  sendWS({ type: 'chat', text: '--- NOMINATION ROUND --- Each player: nominate one other player for a Spark.' });
+  addSystemChat('Nomination round started. Players can use the "Nominate for Spark" button.');
+}
+
 function onCastResult(msg) {
   const roll = msg.roll;
   state.rollLog.unshift({
@@ -1061,6 +1106,8 @@ function onCastResult(msg) {
   const casterName = (state.allCharacters[msg.player] || {}).name || msg.player;
   const techStr = msg.technique_active ? '' : ' (pre-technique)';
   addSystemChat(casterName + ' casts ' + msg.domain_id.replace(/_/g, ' ') + ' [' + msg.scope + ']: ' + roll.outcome_label + techStr);
+
+  checkGracefulFailPrompt({ ...msg, character_name: casterName, roll });
 
   // Show result box for own casts
   if (msg.player === state.playerName) {

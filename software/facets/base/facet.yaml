@@ -913,24 +913,47 @@ spark:
       odds by replacing your worst potential outcomes.
       Two Sparks spent: roll 4d6, drop the two lowest.
   earn_methods:
+    - id: act_break_nomination
+      label: "Act Break Nomination"
+      structured: true
+      target_per_session: 2-3
+      description: >
+        After each major scene transition or act break, the MM calls for nominations.
+        Each player may nominate one other player for something they did that scene.
+        The nominated player earns 1 Spark. The MM confirms (should almost always
+        confirm — this is social reinforcement, not gatekeeping).
+    - id: graceful_fail
+      label: "The Graceful Fail"
+      structured: false
+      target_per_session: 1-2
+      description: >
+        When a player rolls 6- and leans into the consequence — plays it for story,
+        makes the failure interesting — the MM may award a Spark. Not every failure
+        earns a Spark; specifically for failures the player makes entertaining
+        or narratively rich.
+    - id: spark_for_weakness
+      label: "Spark for Weakness"
+      structured: false
+      target_per_session: 0-1
+      description: >
+        When a player deliberately plays into their character's weakness — low
+        attribute, personality flaw, background limitation — at a cost to
+        themselves, the MM may award a Spark.
     - id: mm_award
       label: "MM Award"
+      structured: false
       description: >
         The MM gives a Spark for exceptional roleplay, creative problem-solving,
         or playing your character's established traits and weaknesses in a way
         that costs you something real in the fiction.
-    - id: peer_call
-      label: "Spark? — Peer Call"
-      description: >
-        Any player at the table can call out "Spark?" for another player's moment —
-        a line of dialogue that landed, a decision that surprised everyone,
-        an in-character choice that felt completely true. The MM confirms it.
-    - id: graceful_fail
-      label: "The Graceful Fail"
-      description: >
-        When your roll is a 6- and you lean into the consequence — or better,
-        add something to the fiction that makes the failure richer — the MM may
-        award a Spark.
+  target_economy:
+    description: >
+      Each player should end a session with 2-4 unspent Sparks, having spent
+      2-4 during the session. The earning rate should roughly match the spending
+      rate so Sparks feel like a renewable resource, not a finite one.
+    spend_target: 2-4
+    earn_target: 2-4
+    end_session_target: 2-4
 
 # ---------------------------------------------------------------------------
 # Advancement

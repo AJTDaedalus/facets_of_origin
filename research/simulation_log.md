@@ -229,3 +229,128 @@ With 13 total runs (Series 3 + 4 completed): **12 wins / 1 loss = ~92% win rate.
 ---
 
 *Simulation series ongoing. 10 seven-chicken runs and 14 Veteran Soldier runs remain. Results above are interim.*
+
+---
+
+## Series 6 — Automated Combat Simulator (2026-03-15)
+
+**Tool:** `software/tools/combat_sim.py` — automated combat simulator using the game engine's dice mechanics
+**Party (default):** Mordai (Body, Str+1, Combat+1, End 5), Zahna (Mind, Str-1, Dex+1, End 3), Zulnut (Body, Str+0, Dex+1, End 3). PS 3.
+**Iterations:** 200 per configuration, seed 42
+**Methodology:** Each exchange: all PCs declare posture (AI-driven: high End→Aggressive, mid→Measured, low→Defensive, 0 End→Withdrawn), PCs Strike enemies, enemies attack PCs (PC reacts). Named/Boss enemies Parry PC strikes spending Endurance. 0-Endurance Absorb = persistent Tier 2 (per PHB). Mooks: any successful strike removes. Named/Boss: same T2 condition twice → Broken. Boss phase change on first Broken.
+**AI notes:** PCs always Strike (non-combat PCs use raw Strength — underestimates Support/Maneuver contributions). Enemy posture: Measured (Defensive at 0 End). Target selection: PCs focus Mooks first then wounded Named; enemies target lowest-End PC.
+**Armor bug fixed:** Initial runs had heavy armor computed as T-2 (negating T2 entirely). Corrected to PHB rules: light T2→T1, heavy T3→T2 only. All results below use corrected armor.
+
+### Series A — Mook Scaling (PS 3, standard party)
+
+| Config | Enemies | Win Rate | 95% CI | Exch (mean) | Sparks | Broken |
+|--------|---------|----------|--------|-------------|--------|--------|
+| A1 | 3 Chickens (TR 3) | 100% | 98–100% | 1.6 | 0.2 | 0.00 |
+| A2 | 5 Chickens (TR 5) | 100% | 98–100% | 2.5 | 1.0 | 0.04 |
+| A3 | 7 Chickens (TR 7) | 100% | 98–100% | 3.9 | 1.4 | 0.57 |
+| A4 | 10 Chickens (TR 10) | 66% | 59–72% | 6.3 | 3.7 | 2.23 |
+| A5 | 15 Chickens (TR 15) | 98% | 95–99% | 14.5 | 5.0 | 2.00 |
+
+**Key findings:**
+- **A1–A3 (3–7 Mooks):** All 100% win rate. Mook swarms up to 7 are Skirmish difficulty at PS 3. Matches hand-simulated data direction but is more optimistic (hand sims showed ~92% at 7 — difference likely due to AI behavior and larger sample).
+- **A4 (10 Mooks):** 66% win rate — a genuine Hard encounter. Non-combat PCs (Zahna, Zulnut) break consistently due to weak Strike and low Endurance.
+- **A5 (15 Mooks) anomaly:** 98% win rate despite 15 enemies. Withdrawn posture cycling is the cause: PCs recover 2 End per exchange while dodging for free in Withdrawn. Mordai solos remaining Mooks over 14.5 exchanges. This reveals that Mook swarms have diminishing returns — the self-cancelling effect identified in Series 3 is real at scale.
+- **Non-combat PC limitation:** Zahna (Str -1, no Combat) and Zulnut (Str +0, no Combat) contribute weak Strikes. In actual play they'd use Support/Maneuver to boost Mordai — simulator underestimates their contribution. Results are a lower bound.
+
+### Series B — Named NPC Scaling (PS 3)
+
+| Config | Enemies | Win Rate | 95% CI | Exch (mean) | Sparks | Broken |
+|--------|---------|----------|--------|-------------|--------|--------|
+| B1 | 1 Named (TR 8) solo | 99% | 96–100% | 5.2 | 6.6 | 0.12 |
+| B2 | 1 Named (TR 10) solo | 95% | 91–97% | 7.6 | 8.2 | 0.35 |
+| B3 | 1 Named (TR 12) solo | 78% | 72–84% | 10.6 | 8.7 | 0.83 |
+| B4 | 1 Named TR 8 + 3 Mooks | 98% | 94–99% | 7.0 | 7.2 | 0.36 |
+| B5 | 2 Named (TR 8) each | 21% | 16–27% | 11.0 | 6.0 | 2.37 |
+
+**Key findings:**
+- **Solo Named NPCs scale linearly:** TR 8 → 99%, TR 10 → 95%, TR 12 → 78%. Each 2 TR roughly costs 10-15% win rate.
+- **Mixed encounters are slightly easier than their TR suggests:** B4 (Named + 3 Mooks, raw TR 11) has 98% win rate — the Mooks die quickly and the Named alone is manageable.
+- **B5 (2 Named) is devastating:** 21% win rate. Two Named NPCs with action economy × 2 and sustained pressure is Deadly. This is the strongest evidence that Named NPC count matters more than total TR for difficulty.
+- **Sparks heavily spent against Named:** 6.6–8.7 mean Sparks spent (out of 9 total). Named fights are resource-intensive.
+
+### Series C — Boss Encounters (PS 3)
+
+| Config | Enemies | Win Rate | 95% CI | Exch (mean) | Sparks | Broken |
+|--------|---------|----------|--------|-------------|--------|--------|
+| C1 | 1 Boss (TR 12) solo | 55% | 48–61% | 14.6 | 8.8 | 1.32 |
+| C2 | 1 Boss (TR 16) solo | 65% | 58–71% | 12.8 | 8.8 | 1.15 |
+| C3 | 1 Boss TR 12 + 2 Mooks | 46% | 39–52% | 15.8 | 8.6 | 1.48 |
+| C4 | 1 Boss TR 16 + 4 Mooks | 50% | 44–57% | 14.1 | 8.2 | 1.43 |
+
+**Key findings:**
+- **Boss fights are Hard (40–65% win rate):** All Boss configurations land in the Hard difficulty range.
+- **C2 (TR 16) higher win rate than C1 (TR 12) — counterintuitive:** The TR 16 Boss has heavy armor but higher attack modifier. With the corrected armor rules (heavy only blocks T3→T2), heavy armor does NOT prevent T2 conditions, so the Boss still accumulates Staggered/Cornered. The phase change with 4 Endurance is beatable. The higher attack modifier hurts PCs more but the phase 2 Boss is fragile.
+- **Adding Mooks to Boss fights barely changes difficulty:** C3 vs C1 (46% vs 55%), C4 vs C2 (50% vs 65%). Mooks die quickly; the Boss is the real fight.
+- **All Boss fights are resource-draining:** 8.2–8.8 Sparks spent (nearly all available), 1.1–1.5 PCs Broken.
+
+### Series D — Party Size Scaling (vs Named TR 8 + 5 Mooks)
+
+| Config | PCs | Win Rate | 95% CI | Exch (mean) | Sparks | Broken |
+|--------|-----|----------|--------|-------------|--------|--------|
+| D1 | 2 PCs | 12% | 9–18% | 12.0 | 3.8 | 1.74 |
+| D2 | 3 PCs | 86% | 81–90% | 9.2 | 6.9 | 0.98 |
+| D3 | 4 PCs | 100% | 98–100% | 5.2 | 5.0 | 0.29 |
+| D4 | 5 PCs | 100% | 98–100% | 3.9 | 3.5 | 0.21 |
+
+**Key findings:**
+- **Party size is the dominant factor:** Same encounter goes from 12% (2 PCs) to 100% (4+ PCs). Each additional PC dramatically reduces difficulty.
+- **3 PCs is the sweet spot for Standard difficulty** against this encounter (Named + 5 Mooks).
+- **2 PCs cannot handle action economy:** Too many incoming attacks per PC per exchange. Endurance drains immediately.
+
+### Series E — Advanced Party (PS 6, Techniques active)
+
+| Config | Enemies | Win Rate | 95% CI | Exch (mean) | Sparks | Broken |
+|--------|---------|----------|--------|-------------|--------|--------|
+| E1 | Named (TR 8) | 100% | 98–100% | 4.6 | 4.7 | 0.23 |
+| E2 | Boss (TR 12) | 88% | 82–91% | 12.6 | 8.7 | 0.58 |
+| E3 | Boss (TR 16) | 86% | 80–90% | 11.1 | 8.6 | 0.60 |
+
+**Key findings:**
+- **Advanced party trivializes Named NPCs:** E1 at 100% win rate, 4.6 exchanges (vs 5.2 for standard party). Mordai with Combat Expert (+2) is significantly more effective.
+- **Boss fights become Standard difficulty for advanced party:** 86–88% win rate. The encounter budget needs to scale up for higher PS.
+- **Advancement feels meaningful:** Standard party at 55% vs Boss TR 12 → Advanced party at 88%. Clear power progression.
+
+### Series F — Sequential Encounters (no full recovery)
+
+| Config | Sequence | Win Rate | 95% CI | Exch (mean) | Sparks | Broken |
+|--------|----------|----------|--------|-------------|--------|--------|
+| F1 | Skirmish → Standard | 98% | 95–99% | 2.2 | 6.7 | 0.18 |
+| F2 | Skirmish → Standard → Hard | 55% | 48–62% | 6.2 | 8.6 | 1.55 |
+| F3 | Standard → Hard | 64% | 57–70% | 5.1 | 8.6 | 1.35 |
+
+**Key findings:**
+- **Skirmish → Standard is safe:** 98% survival. The Skirmish barely taxes resources (2 End recovery between fights helps).
+- **Three-encounter sessions are genuine challenges:** F2 at 55% — adding a Hard fight after two earlier encounters creates meaningful tension. This is the "three encounter session" template working as designed.
+- **Resource carry-over matters:** F3 (Standard → Hard) at 64% shows that entering a Hard fight with depleted resources is dangerous.
+
+---
+
+### Master Calibration Table (2026-03-15, automated, N=200 each)
+
+| Difficulty | Target Win Rate | Encounter Compositions (PS 3) |
+|------------|----------------|-------------------------------|
+| **Skirmish** (90–100%) | Warm-up | 3–7 Mooks; 1 Named (TR 8) solo |
+| **Standard** (70–85%) | Real fight | 1 Named (TR 12) solo; 1 Named (TR 8) + 5 Mooks |
+| **Hard** (40–60%) | Coin flip | 1 Boss (TR 12–16); 10 Mooks; 2 Named (TR 8) is actually Deadly |
+| **Deadly** (15–30%) | Designed to lose | 2 Named (TR 8); encounters well above budget |
+
+### Key Design Conclusions
+
+1. **Named NPC count is more important than total TR.** Two Named NPCs (combined TR 16) is Deadly (21% win rate), while a single Boss at TR 16 is Hard (65%). Named NPCs maintain pressure; Mooks self-cancel.
+
+2. **Mook swarms have strongly diminishing returns.** 7 Mooks (100%) vs 10 Mooks (66%) vs 15 Mooks (98% via Withdrawn cycling). Mook difficulty peaks around 8–10 Mooks and then stabilizes or even decreases due to the self-cancelling effect.
+
+3. **Boss fights feel right at Hard difficulty.** Phase changes create interesting mid-fight pivots. Boss fights are long (12–16 exchanges) but not grindy — the condition spiral creates rising tension.
+
+4. **Party size is the strongest lever.** Each additional PC adds ~20-30% win rate. Encounter budgets must scale linearly with party size to maintain intended difficulty.
+
+5. **The Spark economy works under pressure.** Sparks are spent heavily against Named/Boss enemies (8+ of 9 per fight), confirming they are a genuine resource. Hoarding in playtests was a behavioral issue, not a mechanical one.
+
+6. **Sequential encounters create good tension arcs.** Skirmish → Standard is safe; Skirmish → Standard → Hard creates genuine late-session danger.
+
+7. **Non-combat PCs are underrepresented.** The simulator models everyone as Strikers. In play, Support/Maneuver PCs (Zahna, Zulnut) amplify combat PCs, likely increasing real win rates by 5-10%.

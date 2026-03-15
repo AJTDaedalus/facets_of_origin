@@ -116,6 +116,15 @@
       </div>
     </div>
 
+    <!-- Graceful Failure prompt (MM only, appears on 6- rolls) -->
+    <div id="play-graceful-fail-banner" class="spark-nomination hidden" style="margin:8px 24px;">
+      <span class="graceful-fail-text"></span>
+      <div class="btn-row" style="margin:0">
+        <button class="btn btn-gold btn-sm" onclick="awardGracefulFail()">Award Spark</button>
+        <button class="btn btn-secondary btn-sm" onclick="document.getElementById('play-graceful-fail-banner').classList.add('hidden')">Dismiss</button>
+      </div>
+    </div>
+
     <!-- Tab navigation -->
     <nav class="tab-bar" id="main-tab-bar">
       <button class="tab-btn active" data-tab="play" onclick="switchTab('play')">Play</button>
@@ -452,7 +461,11 @@
           <div id="play-mm-controls" class="card hidden">
             <div class="card-title">Mirror Master Controls</div>
             <div style="margin-bottom:12px;">
-              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">AWARD SPARK</div>
+              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">SPARK CADENCE</div>
+              <button class="btn btn-gold btn-sm" onclick="startNominationRound()" style="margin-bottom:8px;">Nomination Round</button>
+              <div style="font-size:0.7rem;color:var(--text-dim);margin-bottom:8px;">
+                Call for nominations at act breaks. Each player nominates one other player for a Spark.
+              </div>
               <input type="text" id="play-mm-spark-player" placeholder="Player name">
               <input type="text" id="play-mm-spark-reason" placeholder="Reason (optional)">
               <button class="btn btn-gold btn-sm" onclick="mmAwardSpark()">Award Spark</button>

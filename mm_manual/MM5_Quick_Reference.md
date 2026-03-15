@@ -62,6 +62,16 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 - **Peer nominations are contagious.** The first "Spark?" from a player opens the floodgate. If nobody is nominating, model it yourself by awarding one conspicuously. The table will follow.
 - **Hoarding is a signal.** If players consistently end sessions with unspent Sparks, they do not trust the supply. Award more visibly and more frequently until spending feels safe.
 
+### Spark Earning
+
+| Trigger | Who Awards | Target/Session |
+|---|---|---|
+| **Act Break Nomination** | Players nominate each other | 2–3 per player |
+| **Graceful Failure** (6- played for story) | MM | 1–2 across table |
+| **Spark for Weakness** (played into flaw) | MM | 0–1 across table |
+
+**Target economy:** Spend 2–4, earn 2–4, end session with 2–4 unspent.
+
 ---
 
 ## Combat: Exchange Flow
@@ -243,6 +253,18 @@ TR = offense_value + durability_value + armor_bonus + technique_bonus
 | 2--3 enemies | x1.0 |
 | 4--6 enemies | x1.25 (Mook-only: x1.1) |
 | 7+ enemies | x1.5 |
+
+### Encounter Recipe Table (PS 3)
+
+| Difficulty | Suggested Enemies |
+|---|---|
+| **Skirmish** (90%+ win) | 3–5 Mooks |
+| **Standard** (70–85% win) | 1 Named (TR 12), or 1 Named (TR 8) + 5 Mooks |
+| **Hard** (40–60% win) | 1 Boss (TR 12–16) |
+| **Deadly** (15–30% win) | 2 Named (TR 8), or 1 Boss + Named |
+
+**Scaling:** Each additional PC ≈ +25% win rate. Scale enemies up accordingly.
+**Warning:** Named NPC count matters more than total TR. Two Named = Deadly.
 
 ---
 
