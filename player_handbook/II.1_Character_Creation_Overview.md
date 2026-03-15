@@ -6,6 +6,19 @@ Your character is how you interact with the world and the people at the table. T
 
 Both aspects live together in the Facets Character Sheet, on paper or in the digital interface. This chapter walks you through creating your character and beginning their story.
 
+### What the Character Sheet Contains
+
+The sheet has six sections:
+
+| Section | What It Holds |
+|---|---|
+| **Attributes** | Your nine Minor Attributes (Strength, Dexterity, Constitution, Intelligence, Wisdom, Knowledge, Spirit, Luck, Charisma), each rated 1–3, grouped under the three Major Attributes (Body, Mind, Soul) |
+| **Facet** | Your chosen Primary Facet (Body, Mind, or Soul), your current Facet level, and your advancement track toward the next level |
+| **Background** | Your character's title and origin, your Starting Skill (Practiced), your Secondary Skill (Novice with 1 mark), and your Specialty |
+| **Skills** | All 15 skills across the three Facets — current rank (Novice/Practiced/Expert/Master) and marks toward the next rank |
+| **Techniques** | The specific abilities you have unlocked from your Facet's Technique tree, plus any choices made at unlock |
+| **Session Resources** | Your current Spark count and Session Skill Points remaining to spend at session end |
+
 ---
 
 ## Before the Numbers

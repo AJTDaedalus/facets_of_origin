@@ -567,6 +567,101 @@ label {
 }
 
 /* =========================================================================
+   TAB BAR — three-tab navigation below header
+   ========================================================================= */
+
+.tab-bar {
+  display: flex;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  flex-shrink: 0;
+}
+
+.tab-bar .tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 12px 20px;
+  position: relative;
+  transition: color 0.15s;
+}
+
+.tab-bar .tab-btn:hover {
+  color: var(--text);
+}
+
+.tab-bar .tab-btn.active {
+  color: var(--gold);
+}
+
+.tab-bar .tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gold);
+}
+
+/* Tab content panels */
+.tab-content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tools & Builder content: single-column scrollable */
+.tools-content,
+.builder-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+/* Enemy tracker entries */
+.enemy-tracker-entry {
+  padding: 8px;
+  margin-bottom: 6px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.enemy-tracker-entry .enemy-endurance {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* Rule summary cards — collapsible */
+.rule-summary-card .rule-summary-content {
+  display: none;
+  margin-top: 8px;
+}
+
+.rule-summary-card.expanded .rule-summary-content {
+  display: block;
+}
+
+.rule-summary-card .toggle-arrow {
+  float: right;
+  color: var(--text-dim);
+}
+
+.rule-summary-card.expanded .toggle-arrow::after {
+  content: '';
+}
+
+/* =========================================================================
    SCROLLBARS — subtle silver
    ========================================================================= */
 
@@ -611,6 +706,32 @@ label {
 
   header h1 { font-size: 0.95rem; }
 
+  /* ---- Tab bar becomes bottom bar on mobile ---- */
+  .tab-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 52px;
+    z-index: 100;
+    padding: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: none;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .tab-bar .tab-btn {
+    flex: 1;
+    padding: 8px 0;
+    font-size: 0.72rem;
+  }
+
+  .tab-bar .tab-btn.active::after {
+    top: 0;
+    bottom: auto;
+  }
+
   /* ---- Single-column game layout ---- */
   .main-area {
     display: flex;
@@ -619,7 +740,7 @@ label {
     padding-bottom: 56px; /* room for tab bar */
   }
 
-  /* Panels: each fills full width, scrollable independently */
+  /* Panels: each fills full width */
   .left-panel,
   .right-panel {
     width: 100%;
@@ -630,67 +751,20 @@ label {
   .right-panel {
     border-left: none;
     border-top: 1px solid var(--border);
+    display: flex;
     gap: 12px;
   }
 
-  /* Default tab state: character panel visible, table panel hidden */
-  .left-panel  { display: block; }
-  .right-panel { display: none; }
-
-  /* When table tab is active (JS adds .show-table to #app) */
-  #app.show-table .left-panel  { display: none; }
-  #app.show-table .right-panel { display: block; }
-
-  /* ---- Mobile tab bar ---- */
-  .mobile-tab-bar {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 52px;
-    background: var(--bg-panel);
-    border-top: 1px solid var(--border);
-    z-index: 100;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+  /* Tools & Builder: full width, padding adjusted */
+  .tools-content,
+  .builder-content {
+    padding: 14px;
+    overflow-y: visible;
   }
 
-  .tab-btn {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: var(--text-dim);
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: color 0.15s, background 0.15s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-    padding: 6px 0;
-  }
-
-  .tab-btn .tab-icon { font-size: 1.1rem; }
-
-  .tab-btn.active {
-    color: var(--gold);
-    background: rgba(201,168,76,0.08);
-  }
-
-  .tab-btn.active::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--gold);
-    border-radius: 0 0 2px 2px;
+  .tab-content {
+    overflow: visible;
+    padding-bottom: 56px;
   }
 
   /* ---- Touch-friendly sizing ---- */
@@ -776,4 +850,160 @@ label {
   .attr-block .attr-rating { font-size: 1.15rem; }
 
   header h1 { display: none; } /* save space; session badge is enough */
+}
+
+/* =====================================================================
+   Combat Panel
+   ===================================================================== */
+.combat-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 12px;
+}
+.endurance-bar-wrap { flex: 1; }
+.endurance-bar {
+  height: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  overflow: hidden;
+  margin: 2px 0;
+}
+.endurance-fill {
+  height: 100%;
+  background: #4caf50;
+  border-radius: 7px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+.endurance-fill.low  { background: #ff9800; }
+.endurance-fill.critical { background: #f44336; }
+
+.posture-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: capitalize;
+}
+.posture-aggressive { background: rgba(244,67,54,0.2); color: #f44336; }
+.posture-measured   { background: rgba(158,158,158,0.2); color: var(--text-dim); }
+.posture-defensive  { background: rgba(33,150,243,0.2); color: #2196f3; }
+.posture-withdrawn  { background: rgba(158,158,158,0.15); color: var(--text-dim); font-style: italic; }
+
+.posture-selector {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+.posture-opt {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0;
+  transition: border-color 0.15s;
+}
+.posture-opt:hover { border-color: var(--accent); }
+.posture-opt input[type="radio"] { margin: 0; }
+
+.combat-action-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.combat-sub-form {
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+.condition-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 8px;
+  margin: 1px 2px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.condition-tier1 { background: rgba(255,193,7,0.2); color: #ffc107; }
+.condition-tier2 { background: rgba(255,152,0,0.2); color: #ff9800; }
+.condition-tier3 { background: rgba(244,67,54,0.25); color: #f44336; font-weight: 700; }
+
+/* =====================================================================
+   Magic Panel
+   ===================================================================== */
+.domain-type-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  border-radius: 8px;
+  text-transform: capitalize;
+  margin-left: 4px;
+}
+.domain-type-focused  { background: rgba(76,175,80,0.2); color: #4caf50; }
+.domain-type-standard { background: rgba(33,150,243,0.2); color: #2196f3; }
+.domain-type-broad    { background: rgba(156,39,176,0.2); color: #ab47bc; }
+
+.magic-scope-selector {
+  display: flex;
+  gap: 2px;
+}
+.scope-opt {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0;
+  transition: border-color 0.15s;
+}
+.scope-opt:hover { border-color: var(--accent); }
+.scope-opt input[type="radio"] { margin: 0; }
+
+.magic-difficulty-preview {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.spark-use-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.8rem;
+}
+.spark-use-selector label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  cursor: pointer;
+}
+.spark-use-selector input[type="radio"] { margin: 0; }
+
+/* Postures revealed list */
+#combat-postures-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.posture-reveal-entry {
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
 }

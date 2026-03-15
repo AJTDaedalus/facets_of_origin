@@ -5,20 +5,39 @@
 ## II — Character Creation
 - II.1 Overview
 - II.2 Attributes
-- II.3 Lineage
-- II.4 Facets & Advancement
+- II.3 Magic
+- II.4 Facets & Advancement (Body)
+- II.4b Facets & Advancement (Mind)
+- II.4c Facets & Advancement (Soul)
 - II.5 Backgrounds
 - II.6 Skills
 
 ## III — Rules
-- III.1 Overview
-- III.2 Adventuring
+- III.1 Core Resolution *(dice mechanics, modifiers, difficulty, Sparks, contested rolls, saving throws)*
+- III.2 Adventuring *(Planned)*
 - III.3 Combat
 
 ## IV — Compendium
-- IV.1 Skills
-- IV.2 Equipment
-- IV.3 Magical Items
+- IV.1 Equipment
+- IV.2 Magical Items *(Planned)*
+
+## Quick Start
+- Pre-generated characters, core resolution summary, and an example scene to get playing in ten minutes.
+
+## Appendices
+- Appendix A: Magic Domain Catalog
+
+---
+
+## Mirror Master's Manual
+
+The companion guide for running Facets of Origin. Covers encounter design, session preparation, campaign planning, and the human side of being a Mirror Master.
+
+- MM1 — Encounters and Enemies *(enemy stat blocks, Threat Rating, encounter budget)*
+- MM2 — Session Design and Pacing *(session structure, improvisation, spotlight management)*
+- MM3 — Campaign Design *(campaign structures, NPC design, world-building, encounter sequencing)*
+- MM4 — Running the Table *(table culture, safety, difficult situations, growing as an MM)*
+- MM5 — Quick Reference *(mid-session cheat sheet)*
 
 ---
 

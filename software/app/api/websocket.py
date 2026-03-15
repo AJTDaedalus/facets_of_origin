@@ -45,11 +45,14 @@ class ConnectionManager:
         for ws in dead:
             self.disconnect(ws, session_id)
 
-    async def send_to(self, websocket: WebSocket, message: dict) -> None:
+    async def send_to(self, websocket: WebSocket, message: dict) -> bool:
+        """Send a message to a single WebSocket. Returns True on success, False on failure."""
         try:
             await websocket.send_json(message)
-        except Exception:
-            pass
+            return True
+        except Exception as e:
+            logger.warning("Failed to send to websocket: %s", e)
+            return False
 
 
 manager = ConnectionManager()
@@ -175,6 +178,8 @@ async def _dispatch(
         await _handle_chat(msg, session_id, identity)
     elif event_type == "skill_advance" and is_mm:
         await _handle_skill_advance(msg, session, session_id)
+    elif event_type == "mark_skill_used" and is_mm:
+        await _handle_mark_skill_used(msg, session, session_id)
     elif event_type == "ping":
         await manager.send_to(websocket, {"type": "pong"})
     # --- Combat events ---
@@ -196,16 +201,57 @@ async def _dispatch(
         await _handle_end_exchange(session, session_id)
     elif event_type == "combat_end" and is_mm:
         await _handle_combat_end(session, session_id)
+    elif event_type == "support":
+        await _handle_support(websocket, msg, session, session_id, identity)
+    elif event_type == "maneuver":
+        await _handle_maneuver(websocket, msg, session, session_id, identity)
     # --- Magic events ---
     elif event_type == "cast":
         await _handle_cast(websocket, msg, session, session_id, identity)
+    # --- Contested roll ---
+    elif event_type == "contested_roll" and is_mm:
+        await _handle_contested_roll(websocket, msg, session, session_id)
+    # --- Player skill spending ---
+    elif event_type == "spend_skill_point":
+        await _handle_spend_skill_point(websocket, msg, session, session_id, identity)
     # --- Technique events ---
     elif event_type == "technique_select" and is_mm:
         await _handle_technique_select(msg, session, session_id)
     elif event_type == "session_reset" and is_mm:
         await _handle_session_reset(session, session_id)
+    # --- Enemy tracker events ---
+    elif event_type == "spawn_enemy" and is_mm:
+        await _handle_spawn_enemy(msg, session, session_id)
+    elif event_type == "enemy_update" and is_mm:
+        await _handle_enemy_update(msg, session, session_id)
+    elif event_type == "remove_enemy" and is_mm:
+        await _handle_remove_enemy(msg, session, session_id)
     else:
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown event type: {event_type}"})
+
+
+def _spend_sparks(character, count: int) -> int:
+    """Spend up to `count` Sparks from character, returning the amount actually spent."""
+    actual = min(count, character.sparks)
+    for _ in range(actual):
+        character.spend_spark()
+    return actual
+
+
+def _build_roll_request(character, msg: dict, ruleset, *, press: bool = False) -> RollRequest:
+    """Build a RollRequest from a WebSocket message and character state."""
+    attribute_id = msg.get("attribute_id", "strength")
+    skill_id = msg.get("skill_id")
+    return RollRequest(
+        attribute_id=attribute_id,
+        attribute_rating=character.attributes.get(attribute_id, 2),
+        skill_id=skill_id,
+        skill_rank_id=character.skills[skill_id].rank if skill_id and skill_id in character.skills else None,
+        difficulty_label=str(msg.get("difficulty", "Standard")),
+        sparks_spent=0,  # sparks are tracked separately via _spend_sparks
+        press=press,
+        description=str(msg.get("description", ""))[:200],
+    )
 
 
 async def _handle_roll(
@@ -230,12 +276,7 @@ async def _handle_roll(
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown attribute '{attribute_id}'."})
         return
 
-    # Validate Spark spend — server authoritative
-    sparks_to_spend = min(sparks_requested, character.sparks)
-    if sparks_to_spend > 0:
-        for _ in range(sparks_to_spend):
-            character.spend_spark()
-
+    sparks_to_spend = _spend_sparks(character, sparks_requested)
     request = RollRequest(
         attribute_id=attribute_id,
         attribute_rating=character.attributes[attribute_id],
@@ -249,6 +290,11 @@ async def _handle_roll(
     result = resolve_roll(request, session.ruleset)
     result_dict = roll_result_to_dict(result)
     session.record_roll(player_name, result_dict)
+
+    # Auto-mark skill as used this session (PHB II.4 advancement rule)
+    used_skill = msg.get("skill_id")
+    if used_skill and used_skill in character.skills:
+        character.skills_used_this_session.add(used_skill)
 
     # Broadcast the roll result to everyone in the session
     await manager.broadcast(session_id, {
@@ -303,6 +349,18 @@ async def _handle_skill_advance(msg: dict, session, session_id: str) -> None:
     marks = int(msg.get("marks", 0))
     character = session.characters.get(player_name)
     if character and skill_id and marks > 0:
+        # Determine SP cost and check remaining budget
+        sk_def = session.ruleset.get_skill(skill_id)
+        is_primary = sk_def is not None and sk_def.facet == character.primary_facet
+        cost_context = "primary_facet" if is_primary else "cross_facet"
+        sp_cost = session.ruleset.get_skill_point_cost(cost_context)
+        if character.session_skill_points_remaining < sp_cost:
+            await manager.broadcast(session_id, {
+                "type": "error",
+                "message": f"Insufficient skill points: need {sp_cost}, have {character.session_skill_points_remaining}.",
+            })
+            return
+        character.session_skill_points_remaining -= sp_cost
         result = character.advance_skill(skill_id, marks, session.ruleset)
         await manager.broadcast(session_id, {
             "type": "skill_advanced",
@@ -316,6 +374,21 @@ async def _handle_skill_advance(msg: dict, session, session_id: str) -> None:
             "new_facet_level": character.facet_level,
             "total_facet_levels": character.total_facet_levels,
             "career_advances": character.career_advances,
+        })
+
+
+async def _handle_mark_skill_used(msg: dict, session, session_id: str) -> None:
+    """MM marks a skill as used this session for a player, enabling advancement."""
+    player_name = msg.get("player_name", "")
+    skill_id = msg.get("skill_id", "")
+    character = session.characters.get(player_name)
+    if character and skill_id:
+        character.skills_used_this_session.add(skill_id)
+        await manager.broadcast(session_id, {
+            "type": "skill_marked_used",
+            "player": player_name,
+            "skill_id": skill_id,
+            "skills_used": sorted(character.skills_used_this_session),
         })
 
 
@@ -394,15 +467,28 @@ async def _handle_strike(
             await manager.send_to(websocket, {"type": "error", "message": "No Endurance to Press."})
             return
 
-    sparks_to_spend = min(sparks_requested, character.sparks)
-    for _ in range(sparks_to_spend):
-        character.spend_spark()
+    sparks_to_spend = _spend_sparks(character, sparks_requested)
+
+    # Accept attribute/skill from client; default to strength/combat for backward compat
+    attribute_id = str(msg.get("attribute_id", "strength"))
+    skill_id = msg.get("skill_id", "combat")
+
+    # Validate attribute exists on character
+    if attribute_id not in character.attributes:
+        await manager.send_to(websocket, {"type": "error", "message": f"Unknown attribute '{attribute_id}'."})
+        return
+
+    # Apply posture offense modifier
+    offense_mod = 0
+    if session.ruleset.combat and session.ruleset.combat.postures:
+        posture_data = session.ruleset.combat.postures.get(character.posture or "measured", {})
+        offense_mod = posture_data.get("offense_modifier", 0) or 0
 
     request = RollRequest(
-        attribute_id="strength",
-        attribute_rating=character.attributes.get("strength", 2),
-        skill_id="combat",
-        skill_rank_id=character.skills["combat"].rank if "combat" in character.skills else None,
+        attribute_id=attribute_id,
+        attribute_rating=character.attributes.get(attribute_id, 2),
+        skill_id=skill_id,
+        skill_rank_id=character.skills[skill_id].rank if skill_id and skill_id in character.skills else None,
         difficulty_label=difficulty,
         sparks_spent=sparks_to_spend,
         press=press,
@@ -410,14 +496,32 @@ async def _handle_strike(
     )
     result = resolve_roll(request, session.ruleset)
     result_dict = roll_result_to_dict(result)
+
+    # Apply posture offense modifier to total
+    if offense_mod != 0:
+        result_dict["offense_modifier"] = offense_mod
+        result_dict["total"] += offense_mod
+        # Re-evaluate outcome with adjusted total
+        from app.game.engine import _determine_outcome
+        outcome, label, desc = _determine_outcome(result_dict["total"], session.ruleset)
+        result_dict["outcome"] = outcome
+        result_dict["outcome_label"] = label
+        result_dict["outcome_description"] = desc
+
     session.record_roll(player_name, result_dict)
 
+    # Auto-mark skill as used this session
+    if skill_id and skill_id in character.skills:
+        character.skills_used_this_session.add(skill_id)
+
+    session.save_character_to_disk(player_name)
     await manager.broadcast(session_id, {
         "type": "strike_result",
         "attacker": player_name,
         "target": target_name,
         "roll": result_dict,
         "press_used": press,
+        "posture": character.posture,
         "endurance_remaining": character.endurance_current,
         "sparks_remaining": character.sparks,
     })
@@ -438,6 +542,14 @@ async def _handle_react(
         return
 
     reaction = str(msg.get("reaction", "absorb"))
+
+    # PHB: 0 Endurance = Absorb only
+    if character.endurance_current <= 0 and reaction != "absorb":
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": "No Endurance remaining — only Absorb is available.",
+        })
+        return
     valid_reactions = {"dodge", "parry", "absorb", "intercept"}
     if reaction not in valid_reactions:
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown reaction '{reaction}'."})
@@ -479,6 +591,11 @@ async def _handle_react(
         roll_result = roll_result_to_dict(roll)
         session.record_roll(player_name, roll_result)
 
+    # Auto-mark skill as used this session (parry uses combat skill)
+    if reaction == "parry" and "combat" in character.skills:
+        character.skills_used_this_session.add("combat")
+
+    session.save_character_to_disk(player_name)
     await manager.broadcast(session_id, {
         "type": "react_result",
         "player": player_name,
@@ -489,12 +606,75 @@ async def _handle_react(
     })
 
 
+def _get_condition_tier(condition: str, ruleset) -> int:
+    """Return the tier (1, 2, or 3) a condition belongs to, or 0 if unknown."""
+    if not ruleset.combat:
+        return 0
+    conds = ruleset.combat.conditions
+    for c in conds.tier1:
+        if c.id == condition:
+            return 1
+    for c in conds.tier2:
+        if c.id == condition:
+            return 2
+    for c in conds.tier3:
+        if c.id == condition:
+            return 3
+    return 0
+
+
+def _downgrade_condition_for_armor(condition: str, character, ruleset) -> str:
+    """Apply armor downgrade rules: reduce condition tier based on armor type."""
+    if not character.armor or not ruleset.combat:
+        return condition
+
+    armor_def = ruleset.combat.armor
+    if character.armor == "light":
+        downgrades = armor_def.light.downgrades
+    elif character.armor == "heavy":
+        downgrades = armor_def.heavy.downgrades
+    else:
+        return condition
+
+    original_tier = _get_condition_tier(condition, ruleset)
+    if original_tier <= 0:
+        return condition
+
+    new_tier = max(0, original_tier - downgrades)
+    if new_tier == original_tier:
+        return condition
+
+    if new_tier == 0:
+        return ""  # fully absorbed by armor
+
+    # Map back to a condition of the lower tier (pick first available)
+    conds = ruleset.combat.conditions
+    tier_map = {1: conds.tier1, 2: conds.tier2, 3: conds.tier3}
+    lower_tier_conds = tier_map.get(new_tier, [])
+    if lower_tier_conds:
+        return lower_tier_conds[0].id
+    return condition
+
+
 async def _handle_apply_condition(msg: dict, session, session_id: str) -> None:
     """MM applies a condition to a character."""
     player_name = msg.get("player_name", "")
     condition = str(msg.get("condition", ""))
     character = session.characters.get(player_name)
     if not character:
+        return
+
+    # Apply armor downgrade
+    condition = _downgrade_condition_for_armor(condition, character, session.ruleset)
+    if not condition:
+        # Armor fully absorbed the hit
+        await manager.broadcast(session_id, {
+            "type": "condition_applied",
+            "player": player_name,
+            "condition": None,
+            "armor_absorbed": True,
+            "all_conditions": list(character.conditions),
+        })
         return
 
     # Stacking: second Tier 2 condition → Broken
@@ -506,6 +686,7 @@ async def _handle_apply_condition(msg: dict, session, session_id: str) -> None:
     if condition and condition not in character.conditions:
         character.conditions.append(condition)
 
+    session.save_character_to_disk(player_name)
     await manager.broadcast(session_id, {
         "type": "condition_applied",
         "player": player_name,
@@ -521,6 +702,7 @@ async def _handle_clear_condition(msg: dict, session, session_id: str) -> None:
     character = session.characters.get(player_name)
     if character and condition in character.conditions:
         character.conditions.remove(condition)
+    session.save_character_to_disk(player_name)
     await manager.broadcast(session_id, {
         "type": "condition_cleared",
         "player": player_name,
@@ -531,8 +713,16 @@ async def _handle_clear_condition(msg: dict, session, session_id: str) -> None:
 
 async def _handle_end_exchange(session, session_id: str) -> None:
     """MM signals end of exchange: clear Tier 1 conditions, apply Withdrawn recovery."""
-    tier1_conditions = {"winded", "off_balance", "shaken"}
-    recovery_amount = 2  # from combat YAML: recovery_withdrawn: 2
+    # Read Tier 1 condition IDs and recovery amount from ruleset (data-driven, C2)
+    if session.ruleset.combat and session.ruleset.combat.conditions.tier1:
+        tier1_conditions = {c.id for c in session.ruleset.combat.conditions.tier1}
+    else:
+        tier1_conditions = {"winded", "off_balance", "shaken"}  # fallback
+
+    if session.ruleset.combat:
+        recovery_amount = session.ruleset.combat.endurance.recovery_withdrawn
+    else:
+        recovery_amount = 2
 
     updates: dict = {}
     for player_name, character in session.characters.items():
@@ -554,6 +744,8 @@ async def _handle_end_exchange(session, session_id: str) -> None:
             "endurance_current": character.endurance_current,
         }
 
+    for pn in updates:
+        session.save_character_to_disk(pn)
     await manager.broadcast(session_id, {"type": "exchange_ended", "characters": updates})
 
 
@@ -628,6 +820,215 @@ async def _handle_cast(
 
 
 # ---------------------------------------------------------------------------
+# Support / Maneuver handlers (2.1)
+# ---------------------------------------------------------------------------
+
+async def _handle_support(
+    websocket, msg: dict, session, session_id: str, identity: str,
+) -> None:
+    """Character uses their action to support an ally."""
+    player_name = identity
+    character = session.characters.get(player_name)
+    if not character:
+        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
+        return
+
+    if character.endurance_current is None:
+        await manager.send_to(websocket, {"type": "error", "message": "Not in combat."})
+        return
+
+    target_player = str(msg.get("target", ""))
+    bonus_type = str(msg.get("bonus_type", "add_die"))  # "add_die" or "ease_difficulty"
+
+    if bonus_type not in ("add_die", "ease_difficulty"):
+        await manager.send_to(websocket, {"type": "error", "message": f"Invalid bonus_type '{bonus_type}'."})
+        return
+
+    request = _build_roll_request(character, msg, session.ruleset)
+    result = resolve_roll(request, session.ruleset)
+    result_dict = roll_result_to_dict(result)
+    session.record_roll(player_name, result_dict)
+
+    # Auto-mark skill as used this session
+    used_skill = msg.get("skill_id")
+    if used_skill and used_skill in character.skills:
+        character.skills_used_this_session.add(used_skill)
+
+    await manager.broadcast(session_id, {
+        "type": "support_result",
+        "player": player_name,
+        "target": target_player,
+        "bonus_type": bonus_type,
+        "roll": result_dict,
+        "outcome": result_dict["outcome"],
+    })
+
+
+async def _handle_maneuver(
+    websocket, msg: dict, session, session_id: str, identity: str,
+) -> None:
+    """Character uses their action to reposition, create advantage, or disarm."""
+    player_name = identity
+    character = session.characters.get(player_name)
+    if not character:
+        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
+        return
+
+    if character.endurance_current is None:
+        await manager.send_to(websocket, {"type": "error", "message": "Not in combat."})
+        return
+
+    if character.posture == "withdrawn":
+        await manager.send_to(websocket, {"type": "error", "message": "Cannot Maneuver from Withdrawn posture."})
+        return
+
+    target_name = str(msg.get("target", ""))
+
+    request = _build_roll_request(character, msg, session.ruleset)
+    result = resolve_roll(request, session.ruleset)
+    result_dict = roll_result_to_dict(result)
+    session.record_roll(player_name, result_dict)
+
+    # Auto-mark skill as used this session
+    used_skill = msg.get("skill_id")
+    if used_skill and used_skill in character.skills:
+        character.skills_used_this_session.add(used_skill)
+
+    await manager.broadcast(session_id, {
+        "type": "maneuver_result",
+        "player": player_name,
+        "target": target_name,
+        "roll": result_dict,
+        "outcome": result_dict["outcome"],
+    })
+
+
+# ---------------------------------------------------------------------------
+# Contested roll handler (2.2)
+# ---------------------------------------------------------------------------
+
+async def _handle_contested_roll(
+    websocket, msg: dict, session, session_id: str,
+) -> None:
+    """MM triggers a contested roll between two characters."""
+    player_a = str(msg.get("player_a", ""))
+    player_b = str(msg.get("player_b", ""))
+    char_a = session.characters.get(player_a)
+    char_b = session.characters.get(player_b)
+
+    if not char_a or not char_b:
+        await manager.send_to(websocket, {"type": "error", "message": "Both players must have characters."})
+        return
+
+    attr_a = str(msg.get("attribute_a", "strength"))
+    attr_b = str(msg.get("attribute_b", attr_a))
+    skill_a = msg.get("skill_a")
+    skill_b = msg.get("skill_b")
+    difficulty = str(msg.get("difficulty", "Standard"))
+
+    req_a = RollRequest(
+        attribute_id=attr_a,
+        attribute_rating=char_a.attributes.get(attr_a, 2),
+        skill_id=skill_a,
+        skill_rank_id=char_a.skills[skill_a].rank if skill_a and skill_a in char_a.skills else None,
+        difficulty_label=difficulty,
+        description=str(msg.get("description", ""))[:200],
+    )
+    req_b = RollRequest(
+        attribute_id=attr_b,
+        attribute_rating=char_b.attributes.get(attr_b, 2),
+        skill_id=skill_b,
+        skill_rank_id=char_b.skills[skill_b].rank if skill_b and skill_b in char_b.skills else None,
+        difficulty_label=difficulty,
+        description=str(msg.get("description", ""))[:200],
+    )
+
+    result_a = resolve_roll(req_a, session.ruleset)
+    result_b = resolve_roll(req_b, session.ruleset)
+    dict_a = roll_result_to_dict(result_a)
+    dict_b = roll_result_to_dict(result_b)
+
+    if result_a.total > result_b.total:
+        winner = player_a
+    elif result_b.total > result_a.total:
+        winner = player_b
+    else:
+        winner = "tie"
+
+    session.record_roll(player_a, dict_a)
+    session.record_roll(player_b, dict_b)
+
+    await manager.broadcast(session_id, {
+        "type": "contested_roll_result",
+        "player_a": player_a,
+        "player_b": player_b,
+        "roll_a": dict_a,
+        "roll_b": dict_b,
+        "winner": winner,
+    })
+
+
+# ---------------------------------------------------------------------------
+# Player skill point spending (2.3)
+# ---------------------------------------------------------------------------
+
+async def _handle_spend_skill_point(
+    websocket, msg: dict, session, session_id: str, identity: str,
+) -> None:
+    """Player spends a skill point to mark a skill for advancement."""
+    player_name = identity
+    character = session.characters.get(player_name)
+    if not character:
+        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
+        return
+
+    skill_id = str(msg.get("skill_id", ""))
+    if not skill_id:
+        await manager.send_to(websocket, {"type": "error", "message": "Missing skill_id."})
+        return
+
+    # Enforce "only skills used this session" rule (PHB II.4)
+    if character.skills_used_this_session and skill_id not in character.skills_used_this_session:
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": f"Skill '{skill_id}' was not used this session. Ask the MM to mark it as used.",
+        })
+        return
+
+    # Determine cost
+    sk_def = session.ruleset.get_skill(skill_id)
+    is_primary = sk_def is not None and sk_def.facet == character.primary_facet
+    cost_context = "primary_facet" if is_primary else "cross_facet"
+    sp_cost = session.ruleset.get_skill_point_cost(cost_context)
+
+    if character.session_skill_points_remaining < sp_cost:
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": f"Insufficient skill points: need {sp_cost}, have {character.session_skill_points_remaining}.",
+        })
+        return
+
+    character.session_skill_points_remaining -= sp_cost
+    result = character.advance_skill(skill_id, 1, session.ruleset)
+
+    session.save_character_to_disk(player_name)
+    await manager.broadcast(session_id, {
+        "type": "skill_point_spent",
+        "player": player_name,
+        "skill_id": skill_id,
+        "sp_cost": sp_cost,
+        "marks_added": 1,
+        "rank_advances": result["rank_advances"],
+        "facet_level_advances": result["facet_level_advances"],
+        "major_advancement": result.get("major_advancement", False),
+        "new_rank": character.skills[skill_id].rank if skill_id in character.skills else "novice",
+        "new_marks": character.skills[skill_id].marks if skill_id in character.skills else 0,
+        "new_facet_level": character.facet_level,
+        "session_skill_points_remaining": character.session_skill_points_remaining,
+    })
+
+
+# ---------------------------------------------------------------------------
 # Technique handler
 # ---------------------------------------------------------------------------
 
@@ -648,16 +1049,13 @@ async def _handle_technique_select(msg: dict, session, session_id: str) -> None:
         })
         return
 
-    # Validate prerequisites in the ruleset technique trees
+    # Validate prerequisites via fast lookup
     prereq_errors: list[str] = []
-    for facet_id, tree in session.ruleset.techniques.items():
-        for branch in tree.branches:
-            for tier_def in branch.tiers:
-                for tech in tier_def.techniques:
-                    if tech.id == technique_id:
-                        for prereq in tech.prerequisites:
-                            if prereq not in character.techniques:
-                                prereq_errors.append(prereq)
+    tech_def = session.ruleset.get_technique(technique_id)
+    if tech_def:
+        for prereq in tech_def.prerequisites:
+            if prereq not in character.techniques:
+                prereq_errors.append(prereq)
 
     if prereq_errors:
         await manager.broadcast(session_id, {
@@ -671,12 +1069,12 @@ async def _handle_technique_select(msg: dict, session, session_id: str) -> None:
         character.technique_choices[technique_id] = str(choice)
 
     # Special: magic-granting Techniques activate magic_technique_active
-    magic_granting = {"arcane_study", "spiritual_domain"}
-    if technique_id in magic_granting:
+    if tech_def and tech_def.magic_granting:
         character.magic_technique_active = True
         if choice:
             character.magic_domain = choice
 
+    session.save_character_to_disk(player_name)
     await manager.broadcast(session_id, {
         "type": "technique_selected",
         "player": player_name,
@@ -692,3 +1090,92 @@ async def _handle_session_reset(session, session_id: str) -> None:
         character.techniques_used_this_session = []
         character.sparks = session.ruleset.spark.base_sparks_per_session if session.ruleset.spark else 3
     await manager.broadcast(session_id, {"type": "session_reset"})
+
+
+# ---------------------------------------------------------------------------
+# Enemy tracker handlers
+# ---------------------------------------------------------------------------
+
+async def _handle_spawn_enemy(msg: dict, session, session_id: str) -> None:
+    """MM spawns an enemy into the active combat tracker."""
+    from app.game.enemy import Enemy
+
+    enemy_id = str(msg.get("enemy_id", ""))
+    instance_name = str(msg.get("instance_name", ""))
+
+    # Try loading from library first
+    library_enemy = session.enemy_library.get(enemy_id)
+    if library_enemy:
+        enemy = library_enemy.model_copy(deep=True)
+        if instance_name:
+            enemy.name = instance_name
+    else:
+        # Inline enemy data
+        enemy_data = msg.get("enemy_data")
+        if not enemy_data or not isinstance(enemy_data, dict):
+            await manager.broadcast(session_id, {
+                "type": "error",
+                "message": f"Enemy '{enemy_id}' not in library and no inline data provided.",
+            })
+            return
+        enemy = Enemy(
+            id=enemy_id,
+            name=enemy_data.get("name", enemy_id),
+            tier=enemy_data.get("tier", "mook"),
+            endurance=enemy_data.get("endurance", 0),
+            attack_modifier=enemy_data.get("attack_modifier", 0),
+            defense_modifier=enemy_data.get("defense_modifier", 0),
+            armor=enemy_data.get("armor", "none"),
+        )
+
+    enemy.init_combat()
+    tracker_key = instance_name or f"{enemy_id}_{len(session.active_enemies)}"
+    session.active_enemies[tracker_key] = enemy
+
+    await manager.broadcast(session_id, {
+        "type": "enemy_spawned",
+        "tracker_key": tracker_key,
+        "enemy": enemy.to_client_dict(),
+        "tr": enemy.calculate_tr(),
+    })
+
+
+async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
+    """MM updates an active enemy's endurance or conditions."""
+    tracker_key = str(msg.get("tracker_key", ""))
+    enemy = session.active_enemies.get(tracker_key)
+    if not enemy:
+        await manager.broadcast(session_id, {
+            "type": "error",
+            "message": f"No active enemy with key '{tracker_key}'.",
+        })
+        return
+
+    if "endurance_current" in msg:
+        enemy.endurance_current = max(0, int(msg["endurance_current"]))
+    if "add_condition" in msg:
+        cond = str(msg["add_condition"])
+        if cond and cond not in enemy.conditions:
+            enemy.conditions.append(cond)
+    if "remove_condition" in msg:
+        cond = str(msg["remove_condition"])
+        if cond in enemy.conditions:
+            enemy.conditions.remove(cond)
+
+    await manager.broadcast(session_id, {
+        "type": "enemy_updated",
+        "tracker_key": tracker_key,
+        "endurance_current": enemy.endurance_current,
+        "conditions": list(enemy.conditions),
+    })
+
+
+async def _handle_remove_enemy(msg: dict, session, session_id: str) -> None:
+    """MM removes an enemy from the active combat tracker."""
+    tracker_key = str(msg.get("tracker_key", ""))
+    if tracker_key in session.active_enemies:
+        del session.active_enemies[tracker_key]
+    await manager.broadcast(session_id, {
+        "type": "enemy_removed",
+        "tracker_key": tracker_key,
+    })

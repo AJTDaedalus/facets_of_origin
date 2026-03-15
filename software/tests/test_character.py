@@ -206,11 +206,17 @@ class TestSkillAdvancement:
         body_character.advance_skill("athletics", 6, ruleset)
         assert body_character.skills["athletics"].rank == "expert"
 
-    def test_expert_rank_does_not_advance_further(self, body_character, ruleset):
-        body_character.advance_skill("athletics", 6, ruleset)
+    def test_advance_past_expert_reaches_master(self, body_character, ruleset):
+        body_character.advance_skill("athletics", 6, ruleset)  # novice → expert
         assert body_character.skills["athletics"].rank == "expert"
+        body_character.advance_skill("athletics", 3, ruleset)  # expert → master
+        assert body_character.skills["athletics"].rank == "master"
+
+    def test_master_rank_does_not_advance_further(self, body_character, ruleset):
+        body_character.advance_skill("athletics", 9, ruleset)  # novice → master
+        assert body_character.skills["athletics"].rank == "master"
         body_character.advance_skill("athletics", 10, ruleset)
-        assert body_character.skills["athletics"].rank == "expert"  # still expert
+        assert body_character.skills["athletics"].rank == "master"  # still master
 
     def test_marks_carry_over_between_sessions(self, body_character, ruleset):
         body_character.advance_skill("athletics", 2, ruleset)
@@ -359,10 +365,11 @@ class TestAdvanceSkillEdgeCases:
         assert "new_skill" in body_character.skills
         assert body_character.skills["new_skill"].marks == 1
 
-    def test_expert_is_capped_rank(self, body_character, ruleset):
-        body_character.advance_skill("athletics", 6, ruleset)  # novice → expert
+    def test_master_is_capped_rank(self, body_character, ruleset):
+        body_character.advance_skill("athletics", 9, ruleset)  # novice → master (3+3+3 marks)
+        assert body_character.skills["athletics"].rank == "master"
         result = body_character.advance_skill("athletics", 100, ruleset)
-        assert body_character.skills["athletics"].rank == "expert"
+        assert body_character.skills["athletics"].rank == "master"
         assert result["rank_advances"] == 0
 
     def test_secondary_facet_advance_does_not_count_toward_level(self, body_character, ruleset):
@@ -426,6 +433,13 @@ class TestGetSkillModifier:
         mod = body_character.get_skill_modifier("athletics", ruleset)
         assert mod == 0  # starts novice (modifier=0)
 
+    def test_master_rank_modifier(self, body_character, ruleset):
+        """Master rank should give +3 modifier (from facet.yaml skill_ranks)."""
+        body_character.advance_skill("athletics", 9, ruleset)  # novice → master
+        assert body_character.skills["athletics"].rank == "master"
+        mod = body_character.get_skill_modifier("athletics", ruleset)
+        assert mod == 3
+
 
 # ---------------------------------------------------------------------------
 # Techniques list manipulation
@@ -443,3 +457,66 @@ class TestTechniquesList:
         body_character.techniques.append("weapon_mastery")
         d = body_character.to_client_dict()
         assert "weapon_mastery" in d["techniques"]
+
+
+# ---------------------------------------------------------------------------
+# Inventory, notes_player, notes_mm fields
+# ---------------------------------------------------------------------------
+
+class TestCharacterInventoryAndNotes:
+    def test_inventory_defaults_empty(self, body_character):
+        assert body_character.inventory == []
+
+    def test_notes_player_defaults_empty(self, body_character):
+        assert body_character.notes_player == ""
+
+    def test_notes_mm_defaults_empty(self, body_character):
+        assert body_character.notes_mm == ""
+
+    def test_inventory_in_client_dict(self, body_character):
+        body_character.inventory = ["Longsword", "Shield"]
+        d = body_character.to_client_dict()
+        assert d["inventory"] == ["Longsword", "Shield"]
+
+    def test_notes_in_client_dict(self, body_character):
+        body_character.notes_player = "Remember to buy rope"
+        body_character.notes_mm = "Secret backstory hook"
+        d = body_character.to_client_dict()
+        assert d["notes_player"] == "Remember to buy rope"
+        assert d["notes_mm"] == "Secret backstory hook"
+
+    def test_inventory_roundtrips_through_fof(self, body_character):
+        body_character.inventory = ["Rope", "Torch", "Rations"]
+        body_character.notes_player = "Player notes here"
+        body_character.notes_mm = "MM-only notes"
+        fof = body_character.to_fof([{"id": "base", "version": "0.1.0"}], "test-session")
+        loaded = Character.from_fof(fof)
+        assert loaded.inventory == ["Rope", "Torch", "Rations"]
+        assert loaded.notes_player == "Player notes here"
+        assert loaded.notes_mm == "MM-only notes"
+
+    def test_empty_inventory_not_in_fof(self, body_character):
+        """Empty inventory/notes should not clutter the .fof output."""
+        fof = body_character.to_fof([{"id": "base", "version": "0.1.0"}], "test-session")
+        assert "inventory" not in fof["character"]
+        assert "notes_player" not in fof["character"]
+        assert "notes_mm" not in fof["character"]
+
+    def test_from_fof_without_new_fields_uses_defaults(self):
+        """Old .fof files without inventory/notes should load without error."""
+        fof_dict = {
+            "type": "character",
+            "character": {
+                "name": "Old", "player_name": "P1",
+                "primary_facet": "body",
+                "attributes": {
+                    "strength": 2, "dexterity": 2, "constitution": 2,
+                    "intelligence": 2, "wisdom": 2, "knowledge": 2,
+                    "spirit": 2, "luck": 2, "charisma": 2,
+                },
+            },
+        }
+        char = Character.from_fof(fof_dict)
+        assert char.inventory == []
+        assert char.notes_player == ""
+        assert char.notes_mm == ""

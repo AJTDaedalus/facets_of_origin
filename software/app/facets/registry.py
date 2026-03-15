@@ -3,6 +3,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from pydantic import BaseModel
+
 from app.facets.loader import FacetLoadError, discover_facet_files, load_facet_file
 from app.facets.schema import (
     AdvancementDef,
@@ -15,6 +17,7 @@ from app.facets.schema import (
     RollResolutionDef,
     SkillDef,
     SparkDef,
+    TechniqueDef,
 )
 from app.config import settings
 
@@ -92,6 +95,17 @@ class MergedRuleset:
         self.combat = combat
         self.magic = magic
 
+        # Fast-lookup maps built once at merge time
+        self._skill_map: dict[str, SkillDef] = {sk.id: sk for sk in self.skills}
+        self._background_map: dict[str, BackgroundDefinition] = {bg.id: bg for bg in self.backgrounds}
+        self._rating_map: dict[int, object] = {r.rating: r for r in self.attribute_ratings}
+        self._technique_map: dict[str, TechniqueDef] = {}
+        for tree in self.techniques.values():
+            for branch in tree.branches:
+                for tier_def in branch.tiers:
+                    for tech in tier_def.techniques:
+                        self._technique_map[tech.id] = tech
+
         self._validate_cross_references()
 
     def _validate_cross_references(self) -> None:
@@ -110,16 +124,15 @@ class MergedRuleset:
             raise FacetLoadError("Cross-reference validation failed:\n" + "\n".join(f"  {e}" for e in errors))
 
     def get_minor_attribute_modifier(self, attribute_id: str, rating: int) -> int:
-        for r in self.attribute_ratings:
-            if r.rating == rating:
-                return r.modifier
-        return 0
+        r = self._rating_map.get(rating)
+        return r.modifier if r else 0
 
     def get_skill(self, skill_id: str) -> SkillDef | None:
-        for sk in self.skills:
-            if sk.id == skill_id:
-                return sk
-        return None
+        return self._skill_map.get(skill_id)
+
+    def get_technique(self, technique_id: str) -> TechniqueDef | None:
+        """Return the TechniqueDef for a given technique ID, or None if not found."""
+        return self._technique_map.get(technique_id)
 
     def get_skill_rank_modifier(self, rank_id: str) -> int:
         if not self.advancement:
@@ -138,15 +151,10 @@ class MergedRuleset:
         return 1
 
     def get_background(self, background_id: str) -> "BackgroundDefinition | None":
-        for bg in self.backgrounds:
-            if bg.id == background_id:
-                return bg
-        return None
+        return self._background_map.get(background_id)
 
     def to_client_dict(self) -> dict:
         """Serialise the ruleset to a JSON-safe dict for sending to clients."""
-        from pydantic import BaseModel
-
         def _serialize(obj):
             if isinstance(obj, BaseModel):
                 return obj.model_dump()

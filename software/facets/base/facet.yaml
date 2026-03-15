@@ -551,8 +551,8 @@ techniques:
                   it directly.
                 prerequisites: [never_surprised]
 
-              - id: read_the_crowd
-                name: "Read the Crowd"
+              - id: assess_the_situation
+                name: "Assess the Situation"
                 description: >
                   Once per scene, when you enter a social situation — a negotiation, a gathering,
                   a tense confrontation — you may ask the MM two questions about the emotional or
@@ -578,7 +578,7 @@ techniques:
                   understand something about the situation, the antagonist, or the world that no
                   amount of direct investigation could have uncovered. The MM tells you one true
                   implication of that pattern the fiction has not yet revealed.
-                prerequisites: [read_the_crowd]
+                prerequisites: [assess_the_situation]
 
       # ---- Archive Branch ----
       - id: archive
@@ -605,6 +605,7 @@ techniques:
                   You have developed a formal magical domain through scholarly practice. Choose one
                   domain from the Domains of the Mind list (Chapter II.3). You may use magic within
                   that domain using the Domain + Intent + Scope framework. Roll Knowledge when doing so.
+                magic_granting: true
                 prerequisites: []
                 has_choice: true
                 choice_prompt: "Choose one domain from the Domains of the Mind list."
@@ -694,7 +695,7 @@ techniques:
               - id: commanding_presence
                 name: "Commanding Presence"
                 description: >
-                  When you speak with clear authority in a tense situation — giving orders,
+                  Once per scene, when you speak with clear authority in a tense situation — giving orders,
                   stopping a confrontation, demanding attention — anyone who does not have a
                   compelling reason to ignore you does not. You do not roll.
                 prerequisites: [lasting_impression]
@@ -804,6 +805,7 @@ techniques:
                   gift, or a bond you do not entirely understand. Choose one domain from the Domains
                   of the Soul list (Chapter II.3). You may use magic within that domain using the
                   Domain + Intent + Scope framework. Roll Spirit when doing so.
+                magic_granting: true
                 prerequisites: []
                 has_choice: true
                 choice_prompt: "Choose one domain from the Domains of the Soul list."
@@ -884,6 +886,19 @@ roll_resolution:
     - label: "Very Hard"
       modifier: -2
       description: "Extraordinary opposition, severe circumstances, nearly impossible odds."
+  outcome_tiers:
+    - id: full_success
+      threshold: 10
+      label: "Full Success"
+      description: "You achieve your goal cleanly."
+    - id: partial_success
+      threshold: 7
+      label: "Success with Cost"
+      description: "You succeed, but with a complication or cost. The story moves forward at a price."
+    - id: failure
+      threshold: null
+      label: "Things Go Wrong"
+      description: "Things go wrong — but the story always moves forward."
 
 # ---------------------------------------------------------------------------
 # Spark Economy
@@ -898,24 +913,47 @@ spark:
       odds by replacing your worst potential outcomes.
       Two Sparks spent: roll 4d6, drop the two lowest.
   earn_methods:
+    - id: act_break_nomination
+      label: "Act Break Nomination"
+      structured: true
+      target_per_session: 2-3
+      description: >
+        After each major scene transition or act break, the MM calls for nominations.
+        Each player may nominate one other player for something they did that scene.
+        The nominated player earns 1 Spark. The MM confirms (should almost always
+        confirm — this is social reinforcement, not gatekeeping).
+    - id: graceful_fail
+      label: "The Graceful Fail"
+      structured: false
+      target_per_session: 1-2
+      description: >
+        When a player rolls 6- and leans into the consequence — plays it for story,
+        makes the failure interesting — the MM may award a Spark. Not every failure
+        earns a Spark; specifically for failures the player makes entertaining
+        or narratively rich.
+    - id: spark_for_weakness
+      label: "Spark for Weakness"
+      structured: false
+      target_per_session: 0-1
+      description: >
+        When a player deliberately plays into their character's weakness — low
+        attribute, personality flaw, background limitation — at a cost to
+        themselves, the MM may award a Spark.
     - id: mm_award
       label: "MM Award"
+      structured: false
       description: >
         The MM gives a Spark for exceptional roleplay, creative problem-solving,
         or playing your character's established traits and weaknesses in a way
         that costs you something real in the fiction.
-    - id: peer_call
-      label: "Spark? — Peer Call"
-      description: >
-        Any player at the table can call out "Spark?" for another player's moment —
-        a line of dialogue that landed, a decision that surprised everyone,
-        an in-character choice that felt completely true. The MM confirms it.
-    - id: graceful_fail
-      label: "The Graceful Fail"
-      description: >
-        When your roll is a 6- and you lean into the consequence — or better,
-        add something to the fiction that makes the failure richer — the MM may
-        award a Spark.
+  target_economy:
+    description: >
+      Each player should end a session with 2-4 unspent Sparks, having spent
+      2-4 during the session. The earning rate should roughly match the spending
+      rate so Sparks feel like a renewable resource, not a finite one.
+    spend_target: 2-4
+    earn_target: 2-4
+    end_session_target: 2-4
 
 # ---------------------------------------------------------------------------
 # Advancement
@@ -937,20 +975,219 @@ advancement:
       modifier: 3
 
   skill_point_costs:
-    - context: primary_facet_success
+    - context: primary_facet
       cost: 1
-    - context: primary_facet_failure
+    - context: cross_facet
       cost: 2
-    - context: secondary_facet_success
-      cost: 2
-    - context: secondary_facet_failure
-      cost: 4
 
   session_skill_points: 4
   marks_per_rank: 3
   facet_level_threshold: 6
 
-  # Every 4 Facet levels in a character's Primary Facet triggers a Major Advancement.
+  # Every 4 total Facet Levels triggers a Major Advancement.
   # At a Major Advancement, the player chooses: +1 to a Minor Attribute (max 3),
   # or a Pinnacle Technique (MM approval required).
   major_advancement_threshold: 4
+
+# ---------------------------------------------------------------------------
+# Magic rules (PHB II.3)
+# ---------------------------------------------------------------------------
+magic:
+  # Before a Facet Technique is unlocked, magic is limited to minor scope only.
+  # The scope restriction alone is the penalty — no additional difficulty step.
+  pre_technique_scope_limit: minor
+  pre_technique_difficulty_penalty: 0
+
+  domain_types:
+    focused:
+      scope_difficulties:
+        minor: Easy
+        significant: Standard
+        major: Hard
+    standard:
+      scope_difficulties:
+        minor: Standard
+        significant: Hard
+        major: "Very Hard"
+    broad:
+      scope_difficulties:
+        minor: Hard
+        significant: "Very Hard"
+        major: "Very Hard"
+
+# ---------------------------------------------------------------------------
+# Combat rules (PHB III.3)
+# ---------------------------------------------------------------------------
+combat:
+  endurance:
+    base: 4
+    recovery_withdrawn: 2
+
+  postures:
+    aggressive:
+      offense_modifier: 1
+      reaction_cost_modifier: 1
+    measured:
+      offense_modifier: 0
+      reaction_cost_modifier: 0
+    defensive:
+      offense_modifier: -1
+      reaction_cost_modifier: -1
+    withdrawn:
+      offense_modifier: null
+      reaction_cost_modifier: 0
+      recovery: 2
+
+  strike_outcomes:
+    full_success:
+      condition_tier: 2
+    partial_success:
+      condition_tier: 1
+    failure:
+      consequence: "attacker"
+
+  conditions:
+    tier1:
+      - id: winded
+        clears: end_of_exchange
+        description: "−1 to your next roll."
+      - id: off_balance
+        clears: end_of_exchange
+        description: "Your next reaction costs 1 additional Endurance."
+      - id: shaken
+        clears: end_of_exchange
+        description: "The MM may direct your next action."
+    tier2:
+      - id: staggered
+        clears: treated
+        description: "−1 to offensive rolls."
+      - id: cornered
+        clears: treated
+        description: "Cannot take Aggressive posture; MM has narrative authority over positioning."
+    tier3:
+      - id: broken
+        clears: end_of_scene
+        description: "Out of the fight."
+
+  armor:
+    light:
+      downgrades: 1   # Tier 2 → Tier 1
+    heavy:
+      downgrades: 2   # Tier 3 → Tier 2
+
+# ---------------------------------------------------------------------------
+# Backgrounds (PHB II.5)
+# ---------------------------------------------------------------------------
+backgrounds:
+  # === Body Facet Backgrounds ===
+  - id: city_watch_veteran
+    name: "City Watch Veteran"
+    facet: body
+    starting_skill: combat
+    secondary_skill: endurance
+    specialty: "Knows the layout, regular occupants, and unofficial rules of one specific district or settlement from your service years."
+
+  - id: traveling_merchants_guard
+    name: "Traveling Merchant's Guard"
+    facet: body
+    starting_skill: athletics
+    secondary_skill: endurance
+    specialty: "Can read road conditions and assess the likelihood of ambush or delay based on terrain, weather, and recent traffic sign."
+
+  - id: arena_fighter
+    name: "Arena Fighter"
+    facet: body
+    starting_skill: combat
+    secondary_skill: finesse
+    specialty: "Reads an opponent's fighting style and general skill level within the first exchange of a fight, accurately enough to brief an ally."
+
+  - id: wilderness_scout
+    name: "Wilderness Scout"
+    facet: body
+    starting_skill: stealth
+    secondary_skill: athletics
+    specialty: "Can track a person or animal across terrain they've passed through within the last day, given minimal sign."
+
+  - id: dockworker
+    name: "Dockworker"
+    facet: body
+    starting_skill: athletics
+    secondary_skill: endurance
+    specialty: "Knows how cargo manifests work, how they get falsified, and what a legitimate versus suspicious shipment looks like on paper and on the dock."
+
+  # === Mind Facet Backgrounds ===
+  - id: guild_apprentice
+    name: "Guild Apprentice"
+    facet: mind
+    starting_skill: lore
+    secondary_skill: investigate
+    specialty: "Formal training in a structured discipline — can identify when methods, materials, or approaches follow an established tradition versus improvisation."
+    domain_origin: mind
+    domain_replaces_secondary: true
+
+  - id: physicians_assistant
+    name: "Physician's Assistant"
+    facet: mind
+    starting_skill: craft
+    secondary_skill: lore
+    specialty: "Recognizes symptoms of common diseases, poisons, and injuries accurately enough to name them and describe their progression."
+
+  - id: court_interpreter
+    name: "Court Interpreter"
+    facet: mind
+    starting_skill: insight
+    secondary_skill: lore
+    specialty: "Fluent in two languages beyond your native tongue; can make oneself understood in a third through careful effort."
+
+  - id: archive_researcher
+    name: "Archive Researcher"
+    facet: mind
+    starting_skill: investigate
+    secondary_skill: lore
+    specialty: "Can navigate any organized record system to find what is actually there, including things that have been quietly misfiled."
+
+  - id: hedge_scholar
+    name: "Hedge Scholar"
+    facet: mind
+    starting_skill: lore
+    secondary_skill: investigate
+    specialty: "Has read widely enough to have encountered at least a surface familiarity with almost any scholarly topic."
+    domain_origin: mind
+    domain_replaces_secondary: true
+
+  # === Soul Facet Backgrounds ===
+  - id: street_performer
+    name: "Street Performer"
+    facet: soul
+    starting_skill: perform
+    secondary_skill: persuade
+    specialty: "Can assess a crowd's mood, attention, and the best angle of approach within a few moments of observation."
+
+  - id: temple_acolyte
+    name: "Temple Acolyte"
+    facet: soul
+    starting_skill: attune
+    secondary_skill: perform
+    specialty: "Recognizes the rituals, symbols, and internal politics of one specific religious tradition in detail."
+    domain_origin: soul
+
+  - id: traveling_merchant
+    name: "Traveling Merchant"
+    facet: soul
+    starting_skill: persuade
+    secondary_skill: attune
+    specialty: "Can accurately assess the fair market value of common goods and identify when a price represents opportunity, desperation, or a trap."
+
+  - id: former_criminal
+    name: "Former Criminal"
+    facet: soul
+    starting_skill: deceive
+    secondary_skill: attune
+    specialty: "Knows how a particular type of criminal operation works from the inside and can recognize one when they see it."
+
+  - id: luck_touched_wanderer
+    name: "Luck-Touched Wanderer"
+    facet: soul
+    starting_skill: gamble
+    secondary_skill: perform
+    specialty: "Has an uncanny sense for when a situation is about to turn — when the calm is the wrong kind of calm."

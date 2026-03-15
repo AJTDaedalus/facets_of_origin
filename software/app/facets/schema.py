@@ -72,12 +72,25 @@ class SkillDef(BaseModel):
 # ---------------------------------------------------------------------------
 
 class TechniqueDef(BaseModel):
+    """A single unlockable Technique in a Facet's Technique tree.
+
+    Fields:
+        id: Slug identifier (e.g. "sharp_analysis").
+        prerequisites: IDs of Techniques that must be unlocked before this one.
+        has_choice: True if the player picks from a list when selecting this Technique
+                    (e.g., choosing a magic domain).
+        choice_prompt: Human-readable prompt shown when has_choice is True.
+        magic_granting: True if selecting this Technique sets magic_technique_active = True
+                        on the character. Replaces hardcoded ID checks in the engine.
+    """
+
     id: str
     name: str
     description: str
-    prerequisites: list[str] = Field(default_factory=list)   # IDs of required techniques
+    prerequisites: list[str] = Field(default_factory=list)
     has_choice: bool = False
     choice_prompt: str = ""
+    magic_granting: bool = False
 
 
 class TierDef(BaseModel):
@@ -117,12 +130,29 @@ class DifficultyModifier(BaseModel):
     description: str
 
 
+class OutcomeTierDef(BaseModel):
+    """One outcome tier in the roll resolution system.
+
+    Fields:
+        id: Machine-readable identifier (e.g. "full_success", "critical", "fumble").
+        threshold: Minimum total to reach this tier. None = catch-all lowest tier.
+        label: Human-readable name shown to players.
+        description: Narrative prompt for the outcome.
+    """
+
+    id: str
+    threshold: int | None = None
+    label: str
+    description: str
+
+
 class RollResolutionDef(BaseModel):
     dice: str = "2d6"
     modifier_source: str = "minor_attribute"
     thresholds: dict[str, int]           # {"full_success": 10, "partial_success": 7}
     outcomes: OutcomesDef
     difficulty_modifiers: list[DifficultyModifier] = Field(default_factory=list)
+    outcome_tiers: list[OutcomeTierDef] = Field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------
@@ -176,13 +206,28 @@ class AdvancementDef(BaseModel):
 # ---------------------------------------------------------------------------
 
 class BackgroundDefinition(BaseModel):
+    """A pre-built character background (PHB II.5).
+
+    Fields:
+        facet: The primary Facet this background belongs to ("body" | "mind" | "soul").
+        starting_skill: Skill ID that begins at Practiced rank.
+        secondary_skill: Skill ID that begins at Novice with 1 mark.
+        specialty: Narrow fictional expertise that eases directly applicable rolls.
+        domain_origin: "mind" | "soul" | null. Set on magic-granting backgrounds to
+                       indicate which domain list the player chooses from.
+        domain_replaces_secondary: If true, choosing a magic domain skips the
+                                   secondary skill (Guild Apprentice, Hedge Scholar).
+                                   If false, both are granted (Temple Acolyte).
+    """
+
     id: str
     name: str
-    facet: str                          # primary facet this background belongs to
-    starting_skill: str                 # begins at Practiced
-    secondary_skill: Optional[str] = None  # begins at Novice with 1 mark; null for magic backgrounds
+    facet: str
+    starting_skill: str
+    secondary_skill: Optional[str] = None
     specialty: str
-    domain_origin: Optional[str] = None  # "mind" | "soul" | null
+    domain_origin: Optional[str] = None
+    domain_replaces_secondary: bool = False
 
 
 # ---------------------------------------------------------------------------
@@ -190,8 +235,17 @@ class BackgroundDefinition(BaseModel):
 # ---------------------------------------------------------------------------
 
 class CombatConditionDef(BaseModel):
+    """A single named combat condition.
+
+    Fields:
+        id: Slug identifier (e.g. "winded", "staggered", "broken").
+        clears: When this condition is removed:
+                "end_of_exchange" | "treated" | "end_of_scene".
+        description: Human-readable effect summary.
+    """
+
     id: str
-    clears: str                     # "end_of_exchange" | "treated" | "end_of_scene"
+    clears: str
     description: str
 
 
@@ -201,13 +255,50 @@ class CombatConditionsTierDef(BaseModel):
     tier3: list[CombatConditionDef] = Field(default_factory=list)
 
 
+class EnduranceDef(BaseModel):
+    """Endurance pool configuration.
+
+    Fields:
+        base: Starting Endurance before Constitution and skill modifiers.
+        recovery_withdrawn: Endurance restored per exchange when posture is Withdrawn.
+    """
+
+    base: int = 4
+    recovery_withdrawn: int = 2
+
+
+class ArmorEntryDef(BaseModel):
+    """One armor tier's downgrade rule.
+
+    Fields:
+        downgrades: Number of Condition tiers this armor downgrades (e.g. 1 = Tier 2→1).
+    """
+
+    downgrades: int = 1
+
+
+class ArmorDef(BaseModel):
+    """Armor downgrade rules keyed by armor type ("light", "heavy")."""
+
+    light: ArmorEntryDef = Field(default_factory=ArmorEntryDef)
+    heavy: ArmorEntryDef = Field(default_factory=lambda: ArmorEntryDef(downgrades=2))
+
+
 class CombatDef(BaseModel):
-    endurance: dict[str, Any] = Field(default_factory=dict)
+    """Full combat rule set loaded from facet.yaml (PHB III.3).
+
+    The structured sub-models (endurance, conditions, armor) are read by the
+    engine for data-driven behaviour. Remaining sections (postures, reactions,
+    press, strike_outcomes) are informational and stored as open dicts until
+    more structured models are needed.
+    """
+
+    endurance: EnduranceDef = Field(default_factory=EnduranceDef)
     postures: dict[str, Any] = Field(default_factory=dict)
     reactions: dict[str, Any] = Field(default_factory=dict)
     press: dict[str, Any] = Field(default_factory=dict)
     conditions: CombatConditionsTierDef = Field(default_factory=CombatConditionsTierDef)
-    armor: dict[str, Any] = Field(default_factory=dict)
+    armor: ArmorDef = Field(default_factory=ArmorDef)
     strike_outcomes: dict[str, Any] = Field(default_factory=dict)
     endurance_floor_rule: str = ""
     mook_rule: str = ""
@@ -220,18 +311,44 @@ class CombatDef(BaseModel):
 # ---------------------------------------------------------------------------
 
 class MagicDomainDef(BaseModel):
+    """A single magic domain (e.g. Fire, Inscription, Fate).
+
+    Fields:
+        type: Difficulty tier — "focused" (Easy/Standard/Hard),
+              "standard" (Standard/Hard/Very Hard),
+              "broad" (Hard/VH/VH, Sparks cannot push scope ceiling).
+        tradition: Which attribute governs rolls — "intuitive" (Spirit) or
+                   "scholarly" (Knowledge).
+        requires_tier3: True for Prismatic domains that need a Tier 3 Technique.
+    """
+
     id: str
     name: str
     type: Literal["focused", "standard", "broad"]
-    tradition: str                  # "intuitive" | "scholarly"
+    tradition: str
     description: str
-    requires_tier3: bool = False    # Prismatic domains require Tier 3 Technique
+    requires_tier3: bool = False
 
 
 class MagicDef(BaseModel):
+    """Full magic configuration for a Facet module (PHB II.3).
+
+    Fields:
+        domain_types: Maps type keys ("focused" | "standard" | "broad") to
+                      {"scope_difficulties": {"minor": "Easy", ...}}.
+        pre_technique_scope_limit: Maximum scope before the Facet Technique is unlocked.
+                                   Default "minor".
+        pre_technique_difficulty_penalty: No additional difficulty penalty pre-Technique.
+                                          Default 0 (scope restriction alone is the penalty).
+        soul_domains: Domains available to Soul Facet characters.
+        mind_domains: Domains available to Mind Facet characters.
+    """
+
     traditions: dict[str, Any] = Field(default_factory=dict)
     domain_types: dict[str, Any] = Field(default_factory=dict)
-    pre_technique_penalty: str = "1_step_harder"
+    pre_technique_penalty: str = "scope_only"
+    pre_technique_scope_limit: str = "minor"       # scope ceiling before Technique is unlocked
+    pre_technique_difficulty_penalty: int = 0       # no additional difficulty penalty pre-Technique
     soul_domains: list[MagicDomainDef] = Field(default_factory=list)
     mind_domains: list[MagicDomainDef] = Field(default_factory=list)
 

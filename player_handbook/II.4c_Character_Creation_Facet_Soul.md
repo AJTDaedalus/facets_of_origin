@@ -44,7 +44,7 @@ When you succeed on a Persuade or Perform roll, the effect holds. The MM cannot 
 Once per scene, you may say something so precisely targeted at what someone actually believes about themselves — their fear, their hope, their unspoken justification — that they cannot ignore it. They must respond in kind: denial, anger, grief, or acknowledgment. They may not deflect, change the subject, or pretend they did not hear it. The MM determines how they respond; you determine that they must.
 
 **Commanding Presence**
-When you speak with clear authority in a tense situation — giving orders, stopping a confrontation, demanding attention — anyone who does not have a compelling reason to ignore you does not. You do not roll. The MM may only override this with active, established fictional reasons why this particular person would resist you specifically.
+Once per scene, when you speak with clear authority in a tense situation — giving orders, stopping a confrontation, demanding attention — anyone who does not have a compelling reason to ignore you does not. You do not roll. The MM may only override this with active, established fictional reasons why this particular person would resist you specifically.
 
 ---
 
@@ -52,6 +52,8 @@ When you speak with clear authority in a tense situation — giving orders, stop
 
 **The Turning**
 Once per session, your words or presence shifts the direction of a scene in a way that cannot be ignored. An armed standoff ends. A hostile crowd turns uncertain. An official reconsidering their position decides. The MM cannot refuse the shift — they can only determine how it unfolds and what it costs the other side. You do not need to roll, but you must speak.
+
+> *Zulnut steps between Mordai and the six guards, hands open, and speaks. The Turning. The standoff doesn't explode — it deflates. The guard in front sheathes his blade. The door is still closed, but nothing is broken yet.*
 
 **Unforgettable**
 Anyone who has a meaningful interaction with you remembers you — specifically, favorably, and personally — unless they have a concrete reason not to. More than that: when you reappear in someone's life after an absence, they are glad to see you. Old contacts become warm contacts. Strangers who met you once treat you like someone they have been looking for. The MM cannot make people who had no reason to resent you cold or neutral on your return.

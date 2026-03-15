@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field, model_validator
 from app.facets.registry import MergedRuleset
 
 
-SkillRankId = Literal["novice", "practiced", "expert"]
+SkillRankId = Literal["novice", "practiced", "expert", "master"]
 
 
 class SkillState(BaseModel):
@@ -65,6 +65,7 @@ class Character(BaseModel):
     sparks: int = Field(default=3, ge=0)
 
     session_skill_points_remaining: int = Field(default=4, ge=0)
+    skills_used_this_session: set[str] = Field(default_factory=set)
     facet_level: int = Field(default=0, ge=0)
     rank_advances_this_facet_level: int = Field(default=0, ge=0)
     total_facet_levels: int = Field(default=0, ge=0)
@@ -80,13 +81,20 @@ class Character(BaseModel):
 
     # Magic (persisted)
     magic_domain: Optional[str] = None
+    secondary_magic_domain: Optional[str] = None  # Soul Communion T3 "Second Domain"
     magic_tradition: Optional[str] = None  # "intuitive" | "scholarly"
     magic_technique_active: bool = False
+
+    # Player-facing fields
+    inventory: list[str] = Field(default_factory=list)
+    notes_player: str = ""
+    notes_mm: str = ""
 
     # Combat state — ephemeral, not persisted to .fof between sessions
     endurance_current: Optional[int] = None
     conditions: list[str] = Field(default_factory=list)
     posture: Optional[str] = None  # "aggressive"|"measured"|"defensive"|"withdrawn"
+    armor: Optional[str] = None  # None | "light" | "heavy"
 
     def validate_against_ruleset(self, ruleset: MergedRuleset) -> list[str]:
         """Return a list of validation errors against the ruleset. Empty list = valid.
@@ -151,7 +159,7 @@ class Character(BaseModel):
         if not ruleset.combat:
             base = 4
         else:
-            base = ruleset.combat.endurance.get("base", 4)
+            base = ruleset.combat.endurance.base
         con_mod = self.get_attribute_modifier("constitution", ruleset)
         end_skill_mod = self.get_skill_modifier("endurance", ruleset)
         return base + con_mod + end_skill_mod
@@ -179,6 +187,47 @@ class Character(BaseModel):
         """Award one Spark to this character."""
         self.sparks += 1
 
+    def _try_advance_rank(self, state: "SkillState", marks_to_add: int, marks_per_rank: int) -> int:
+        """Add marks to a skill state, advancing rank as thresholds are crossed.
+
+        Mutates state in place. Returns the number of rank advances that occurred.
+        Stops at expert rank (the ceiling for advancement).
+        """
+        rank_order = ["novice", "practiced", "expert", "master"]
+        current_idx = rank_order.index(state.rank)
+        advances = 0
+        for _ in range(marks_to_add):
+            if state.rank == "master":
+                break
+            state.marks += 1
+            if state.marks >= marks_per_rank:
+                state.marks = 0
+                state.rank = rank_order[current_idx + 1]
+                current_idx += 1
+                advances += 1
+        return advances
+
+    def _check_facet_level_threshold(self, is_primary_facet_skill: bool, rank_advances: int, threshold: int) -> int:
+        """Update facet level tracking for rank advances in the primary facet.
+
+        Returns the number of new facet levels reached.
+        """
+        if not is_primary_facet_skill:
+            return 0
+        levels_gained = 0
+        for _ in range(rank_advances):
+            self.rank_advances_this_facet_level += 1
+            if self.rank_advances_this_facet_level >= threshold:
+                self.facet_level += 1
+                self.total_facet_levels += 1
+                self.rank_advances_this_facet_level = 0
+                levels_gained += 1
+        return levels_gained
+
+    def _check_major_advancement(self, major_threshold: int) -> bool:
+        """Return True if total_facet_levels just crossed a Major Advancement threshold."""
+        return self.total_facet_levels > 0 and self.total_facet_levels % major_threshold == 0
+
     def advance_skill(self, skill_id: str, marks_to_add: int, ruleset: MergedRuleset) -> dict:
         """Add marks to a skill, advancing rank if the threshold is met.
 
@@ -201,44 +250,31 @@ class Character(BaseModel):
         marks_per_rank = ruleset.advancement.marks_per_rank if ruleset.advancement else 3
         threshold = ruleset.advancement.facet_level_threshold if ruleset.advancement else 6
         major_threshold = ruleset.advancement.major_advancement_threshold if ruleset.advancement else 4
-        rank_order = ["novice", "practiced", "expert"]
-        current_idx = rank_order.index(state.rank)
 
-        result: dict = {
+        rank_advances = self._try_advance_rank(state, marks_to_add, marks_per_rank)
+        self.career_advances += rank_advances
+
+        sk_def = ruleset.get_skill(skill_id)
+        is_primary = sk_def is not None and sk_def.facet == self.primary_facet
+        facet_level_advances = self._check_facet_level_threshold(is_primary, rank_advances, threshold)
+
+        major = False
+        if facet_level_advances > 0:
+            major = self._check_major_advancement(major_threshold)
+
+        return {
             "skill_id": skill_id,
-            "rank_advances": 0,
-            "facet_level_advances": 0,
-            "major_advancement": False,
+            "rank_advances": rank_advances,
+            "facet_level_advances": facet_level_advances,
+            "major_advancement": major,
         }
-
-        for _ in range(marks_to_add):
-            if state.rank == "expert":
-                break
-
-            state.marks += 1
-            if state.marks >= marks_per_rank:
-                state.marks = 0
-                state.rank = rank_order[current_idx + 1]
-                current_idx += 1
-                result["rank_advances"] += 1
-                self.career_advances += 1
-
-                sk_def = ruleset.get_skill(skill_id)
-                if sk_def and sk_def.facet == self.primary_facet:
-                    self.rank_advances_this_facet_level += 1
-                    if self.rank_advances_this_facet_level >= threshold:
-                        self.facet_level += 1
-                        self.total_facet_levels += 1
-                        self.rank_advances_this_facet_level = 0
-                        result["facet_level_advances"] += 1
-                        if self.total_facet_levels > 0 and self.total_facet_levels % major_threshold == 0:
-                            result["major_advancement"] = True
-
-        return result
 
     def to_client_dict(self) -> dict:
         """Serialize the character to a JSON-safe dict for sending to clients."""
-        return self.model_dump()
+        d = self.model_dump()
+        # Pydantic preserves set type; JSON requires list
+        d["skills_used_this_session"] = sorted(self.skills_used_this_session)
+        return d
 
     def to_fof(
         self,
@@ -288,6 +324,23 @@ class Character(BaseModel):
             char_block["magic_domain"] = self.magic_domain
             char_block["magic_tradition"] = self.magic_tradition
             char_block["magic_technique_active"] = self.magic_technique_active
+        if self.secondary_magic_domain is not None:
+            char_block["secondary_magic_domain"] = self.secondary_magic_domain
+        # Persist combat state so server restarts mid-combat can resume
+        if self.endurance_current is not None:
+            char_block["endurance_current"] = self.endurance_current
+        if self.conditions:
+            char_block["conditions"] = list(self.conditions)
+        if self.posture is not None:
+            char_block["posture"] = self.posture
+        if self.armor is not None:
+            char_block["armor"] = self.armor
+        if self.inventory:
+            char_block["inventory"] = list(self.inventory)
+        if self.notes_player:
+            char_block["notes_player"] = self.notes_player
+        if self.notes_mm:
+            char_block["notes_mm"] = self.notes_mm
 
         return {
             "fof_version": "0.1",
@@ -304,17 +357,21 @@ class Character(BaseModel):
         }
 
     @classmethod
-    def from_fof(cls, fof_dict: dict) -> "Character":
+    def from_fof(cls, fof_dict: dict, ruleset=None) -> "Character":
         """Deserialize a Character from a FOF-format dict.
 
         Args:
             fof_dict: A dict produced by yaml.safe_load on a character .fof file.
+            ruleset: Optional MergedRuleset. When provided, validate_against_ruleset()
+                     is called and any validation errors are raised as ValueError.
+                     Without a ruleset, the caller must validate manually.
 
         Returns:
             A Character instance.
 
         Raises:
-            ValueError: If the dict is not a character file or is missing required fields.
+            ValueError: If the dict is not a character file, is missing required fields,
+                        or fails ruleset validation when a ruleset is provided.
         """
         if fof_dict.get("type") != "character":
             raise ValueError(
@@ -340,7 +397,7 @@ class Character(BaseModel):
                     marks=state.get("marks", 0),
                 )
 
-        return cls(
+        character = cls(
             name=char_block["name"],
             player_name=char_block["player_name"],
             primary_facet=char_block["primary_facet"],
@@ -357,9 +414,22 @@ class Character(BaseModel):
             background_id=char_block.get("background_id"),
             specialty=char_block.get("specialty"),
             magic_domain=char_block.get("magic_domain"),
+            secondary_magic_domain=char_block.get("secondary_magic_domain"),
             magic_tradition=char_block.get("magic_tradition"),
             magic_technique_active=char_block.get("magic_technique_active", False),
+            endurance_current=char_block.get("endurance_current"),
+            conditions=char_block.get("conditions") or [],
+            posture=char_block.get("posture"),
+            armor=char_block.get("armor"),
+            inventory=char_block.get("inventory") or [],
+            notes_player=char_block.get("notes_player") or "",
+            notes_mm=char_block.get("notes_mm") or "",
         )
+        if ruleset is not None:
+            errors = character.validate_against_ruleset(ruleset)
+            if errors:
+                raise ValueError(f"Character fails ruleset validation: {'; '.join(errors)}")
+        return character
 
 
 def create_default_character(
@@ -415,16 +485,22 @@ def create_default_character(
             )
             career_advances += 1
 
-        # Secondary Skill → Novice with 1 mark (only if not a magic-granting background)
-        if bg.secondary_skill and not bg.domain_origin:
+        # Secondary Skill → Novice with 1 mark.
+        # Some backgrounds (Guild Apprentice, Hedge Scholar) replace the
+        # secondary skill with a magic domain when one is chosen.  Others
+        # (Temple Acolyte) grant both.  The flag domain_replaces_secondary
+        # controls which behaviour applies.
+        skip_secondary = bg.domain_replaces_secondary and magic_domain
+        if bg.secondary_skill and not skip_secondary:
             if bg.secondary_skill in skills:
                 skills[bg.secondary_skill].marks = 1
             else:
                 skills[bg.secondary_skill] = SkillState(
                     skill_id=bg.secondary_skill, rank="novice", marks=1
                 )
-        elif bg.domain_origin and magic_domain:
-            # Magic-granting background: record tradition from domain
+
+        # Resolve magic domain and tradition if magic_domain is provided
+        if magic_domain:
             resolved_magic_domain = magic_domain
             if ruleset.magic:
                 domain_def = ruleset.magic.get_domain(magic_domain)

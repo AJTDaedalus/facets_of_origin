@@ -57,24 +57,20 @@ Skill rank stacks with your attribute modifier. A character with Dexterity 3 (+1
 
 ## Advancing Skills
 
-Skills improve through use. At the end of each session, you have **4 skill points** to distribute among skills you actually used during that session. Each point spent on a skill moves it one step toward its next rank.
+Skills improve through use. At the end of each session, you have **4 skill points** to distribute among skills you actually used during that session. Each point spent on a skill adds one mark toward its next rank.
 
-The cost to spend a point on a skill depends on context:
-
-| Situation | Cost |
+| Situation | Cost per Mark |
 |---|---|
-| Used the skill, in your Primary Facet, success | 1 point |
-| Used the skill, in your Primary Facet, failure | 2 points |
-| Used the skill, outside your Primary Facet, success | 2 points |
-| Used the skill, outside your Primary Facet, failure | 4 points |
+| Primary Facet skill | 1 point |
+| Cross-Facet skill | 2 points |
 
 You may only advance skills you used this session. You may not save points between sessions — unspent points are lost.
 
-> **Why failure costs more:** At first glance it seems backward — shouldn't failing teach you something faster? The cost reflects integration, not information. Failing a skill provides raw experience; converting that experience into reliable capability takes more deliberate effort than building on success. The fiction supports this: Mordai's failed Charisma attempt in the archive taught him something, but he'd need to work harder to turn that embarrassment into a repeatable technique than he would if the approach had worked.
+> **Example:** Mordai (Primary Facet: Body) uses Combat twice this session — 2 points for 2 marks. He also used Persuade (Soul Facet) once. That costs 2 points for 1 mark. All 4 points spent.
 
 **Marks:** Each point spent toward a skill's next rank is called a mark. A skill advances when it accumulates **3 marks**. Marks carry over between sessions — you do not lose partial progress.
 
-> **Example:** Zulnut (Primary Facet: Body) uses Stealth twice this session, succeeding both times. She spends 2 points (1 each) and marks Stealth twice. She also attempts Finesse once and fails. She could spend 2 points to mark it once — but she only has 2 points left after Stealth. She takes the mark. Next session, one more mark advances Finesse to Practiced.
+> **Example:** Zulnut (Primary Facet: Body) uses Stealth twice this session. She spends 2 points (1 each) and marks Stealth twice. She also used Finesse — 1 more point, 1 more mark. She has 1 point left. Next session, one more mark advances Finesse to Practiced.
 
 ---
 
@@ -85,6 +81,8 @@ As you develop skills within a Facet, you grow as a practitioner of that Facet's
 A skill rank advance is any time a skill in that Facet moves from one rank to the next (Novice → Practiced, Practiced → Expert, or Expert → Master).
 
 With 5 skills and 3 possible advances each, a fully developed Facet produces 15 total advances — enough to reach Facet level 1 (at 6 advances) and Facet level 2 (at 12 advances). Facet level 3 and beyond require cross-training into other Facets or extraordinary dedication across a long campaign.
+
+> This isn't a ceiling on specialization — it's a reflection of how mastery actually works. At the highest levels, experts grow by absorbing adjacent disciplines: the supreme warrior who studies philosophy, the master mage who learns a craftsperson's patience. The advancement system reflects this. Facet level 3 isn't earned by going deeper; it's earned by going wider.
 
 > **Example:** Zulnut advances Combat to Practiced (1 advance), Stealth to Practiced (2), Athletics to Practiced (3), Stealth to Expert (4), Finesse to Practiced (5), Combat to Expert (6). *Facet level 1.* Several sessions later, Athletics to Expert (7), Endurance to Practiced (8), Finesse to Expert (9), Endurance to Expert (10), Stealth to Master (11), Combat to Master (12). *Facet level 2.*
 
@@ -206,14 +204,16 @@ At the end of any session in which your character endured significant hardship, 
 
 ## Major Advancement
 
-Every **4 Facet levels** accumulated in your Primary Facet, you reach a **Major Advancement**.
+Every **4 Facet levels total** — accumulated across any Facet — you reach a **Major Advancement**.
 
-> **A note on the math:** A fully developed Primary Facet produces 15 total skill rank advances, which yields Facet level 2 (at advance 12). Reaching Facet level 4 — the first Major Advancement threshold — requires cross-training into other Facets. The Facet level counting for Major Advancement includes Facet levels earned in *any* Facet, not just your Primary. A character who has reached level 2 in their Primary Facet and level 2 in a secondary Facet has accumulated 4 Facet levels total and qualifies. Major Advancements are not gatekept — they require breadth, not perfection in one lane.
+> **A note on the math:** A fully developed Primary Facet produces 15 total skill rank advances, which yields Facet level 2 (at advance 12). Reaching Facet level 4 — the first Major Advancement threshold — requires cross-training into other Facets. A character who has reached level 2 in their Primary Facet and level 2 in a secondary Facet has accumulated 4 Facet levels total and qualifies. Major Advancements require breadth, not perfection in one lane.
 
 At a Major Advancement, choose one:
 
 - **+1 to a Minor Attribute** — raise one Minor Attribute by one step (maximum 3). If this raises a Major Attribute's derived sum into the next bracket, the Major Attribute modifier increases as well.
-- **Pinnacle Technique** — a powerful, character-defining ability that lives outside the normal Technique tree. These are rare and require MM approval — they should feel like the culmination of a long arc of play, not an item on a checklist.
+- **Pinnacle Technique** — a powerful, character-defining ability that lives outside the normal Technique tree. These require MM approval and should feel like the culmination of a long arc of play, not an item on a checklist. A Pinnacle Technique captures something the character has demonstrably *become* through play.
+
+  > *A duelist who has spent five sessions as the party's primary combatant might choose:* **Last Stand** — *Once per session, when you would be Broken, you may remain standing until the end of the exchange at 1 Endurance.* The MM ensures the Pinnacle feels earned by the character's demonstrated arc. A character who has never led a fight does not earn Last Stand — not because the rules forbid it, but because the fiction doesn't support it yet.
 
 Major Advancements require a **significant reflection scene** — more than the brief aside of a standard advancement. This should be a full scene at the table, tied to a meaningful story moment. The MM should look for the right moment in the fiction rather than forcing it at a mechanical threshold.
 
@@ -225,9 +225,9 @@ Major Advancements require a **significant reflection scene** — more than the 
 
 Advancement is not automatic. Numbers tell you when you *can* advance — the reflection scene is when you *do*.
 
-**Once per session**, at a natural pause or at session's end, one character has a **reflection scene**: a brief in-world moment where they acknowledge the growth that happened. It need not be long. It does not need to be dramatic. But it should be witnessed by the table.
+**Once per session**, at a natural pause or at session's end, one character may have a **reflection scene**: a brief in-world moment where they acknowledge the growth that happened. It need not be long. It does not need to be dramatic. But it should be witnessed by the table.
 
-This is the moment the advancement becomes real in the fiction. Before the reflection scene, a skill rank or Technique is potential — something your character is growing toward. After it, it is part of who they are.
+Reflection scenes are encouraged but not required. Advancement happens whether or not the scene takes place — the numbers move regardless. But a reflection scene makes the growth feel real in the fiction and gives the table a shared moment. When a player takes one, the MM may reward it with a bonus mark or a Spark. When the moment isn't right, skip it and move on.
 
 > *Zahna spends a quiet moment after the Millhaven investigation re-reading his notes, marking the connections he didn't see until he had to look for them. His Knowledge rank ticks to Practiced. The table watches. Nobody comments. Mordai refills his drink.*
 
@@ -245,28 +245,25 @@ The Mirror Master's guide covers running reflection scenes in greater depth, inc
 
 ---
 
-## Summary
+## Advancement at a Glance
 
 ```
 Session end:
-  └─ 4 skill points to spend (cost matrix applies)
-  └─ One reflection scene — one advancement becomes real in fiction
+  └─ 4 skill points to spend
+       Primary Facet: 1 point per mark  |  Cross-Facet: 2 points per mark
+  └─ Optional reflection scene — makes advancement feel real in the fiction
 
-Every 3 marks in a skill:
-  └─ Skill rank advances (Novice → Practiced → Expert → Master)
+Each point spent = 1 Mark on that skill
+3 Marks = Rank advance (Novice → Practiced → Expert → Master) = 1 Career Advance
   └─ Skill modifier increases (+1 / +2 / +3)
-  └─ career_advances increases by 1
 
-Every 6 skill rank advances in Primary Facet:
-  └─ Facet level increases
-  └─ Unlock one Technique from Facet tree (chosen in reflection scene)
-  └─ 5 skills × 3 advances = 15 max advances per Facet
-  └─ Facet level 1 at advance 6, level 2 at advance 12; level 3+ requires cross-training
+Every 6 rank advances in your Primary Facet:
+  └─ +1 Facet Level → unlock one Technique from Facet tree
+  └─ 5 skills × 3 advances = 15 max per Facet; level 3+ requires cross-training
 
-Every 4 Facet levels total (Primary + any Facet):
-  └─ Major Advancement: +1 Minor Attribute OR Pinnacle Technique
-  └─ Significant reflection scene required
-  └─ Requires cross-training beyond Primary Facet to reach
+Every 4 Facet Levels total (Primary + any Facet):
+  └─ Major Advancement: +1 Minor Attribute OR Pinnacle Technique (MM approval)
+  └─ Significant reflection scene recommended
 ```
 
 ---

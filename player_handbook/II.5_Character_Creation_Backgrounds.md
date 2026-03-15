@@ -282,6 +282,8 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 *Starting Skill:* Attune (Practiced)
 
+*Secondary Skill:* Perform (Novice, 1 mark) — acolytes lead ceremonies, chant liturgies, and guide communal ritual. The line between devotion and performance is thinner than most devout would admit.
+
 *Specialty:* Recognizes the rituals, symbols, and internal politics of one specific religious tradition in detail.
 
 *Domain origin (if magical):* Choose one domain from the Domains of the Soul list. Your domain developed through spiritual practice — prayer, ritual, communion with forces your tradition named and yours to describe.

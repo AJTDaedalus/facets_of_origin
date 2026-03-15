@@ -37,7 +37,7 @@ Clarity Techniques represent the trained precision of a disciplined mind — the
 #### Tier 1
 
 **Sharp Analysis** *(Intelligence)*
-When you spend time examining an object, mechanism, or scene — at least a few focused minutes — you may ask the MM one question about it that must be answered honestly. *What holds this together? What is this for? What happened here?* The MM cannot deflect with "you're not sure." You spent the time. You get an answer.
+When you spend time examining an object, mechanism, or scene — at least a few focused minutes — you may ask the MM one question about it that must be answered honestly. *What holds this together? What is this for? What happened here?* The MM cannot deflect with "you're not sure." You spent the time. You get an answer. *(The question must concern something your character can directly observe or has directly interacted with — not speculation about future events or the inner lives of people you haven't met.)*
 
 **Dissecting Failure** *(Intelligence)*
 When you fail an Investigate roll, you still learn one true fact about what you were examining. Your analysis fell short — but your mind does not come up entirely empty. The MM chooses what you learn; it is always real, and it always matters.
@@ -85,7 +85,7 @@ When something in your environment is deliberately concealed, falsified, or out 
 **Immediate Threat**
 Once per scene, you may ask the MM: *"What is the most immediate danger here?"* They must answer honestly and specifically. Not *"the room feels dangerous"* — the actual threat, named. You can act on this information as if you had observed it directly.
 
-**Read the Crowd**
+**Assess the Situation**
 Once per scene, when you enter a social situation — a negotiation, a gathering, a tense confrontation — you may ask the MM two questions about the emotional or political dynamics in the room. *Who holds the real power here? Who is afraid? What does this person actually want?* Both answers must be honest.
 
 ---

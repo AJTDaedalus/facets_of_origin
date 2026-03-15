@@ -323,3 +323,81 @@ Action Economy:
   4–6 enemies     × 1.25
   7+ enemies      × 1.5
 ```
+
+---
+
+## Encounter Recipe Table
+
+The table below maps party size and desired difficulty to concrete enemy compositions. These are validated by automated simulation (200 iterations each, seed 42).
+
+**How to use:** Find your party's column. Pick the difficulty row. Use the suggested enemy composition. Adjust flavor (Mooks become cultists, Named becomes a captain, Boss becomes a dragon) without changing the mechanical profile.
+
+### Party Strength 3 (3 fresh characters, 1 career advance each)
+
+| Difficulty | Win Rate Target | Suggested Composition | Sim Win Rate |
+|------------|----------------|-----------------------|-------------|
+| **Skirmish** | 90–100% | 3–5 Mooks | 100% |
+| **Standard** | 70–85% | 1 Named (TR 12) solo, or 1 Named (TR 8) + 5 Mooks | 78–86% |
+| **Hard** | 40–60% | 1 Boss (TR 12–16) solo | 55–65% |
+| **Deadly** | 15–30% | 2 Named (TR 8), or 1 Boss + many Mooks | 21% |
+
+### Party Strength 4 (4 PCs or 3 advanced PCs)
+
+| Difficulty | Win Rate Target | Suggested Composition |
+|------------|----------------|-----------------------|
+| **Skirmish** | 90–100% | 5–7 Mooks, or 1 Named (TR 8) solo |
+| **Standard** | 70–85% | 1 Named (TR 8) + 5 Mooks, or 1 Named (TR 12) |
+| **Hard** | 40–60% | 1 Boss (TR 12), or 2 Named (TR 8) |
+| **Deadly** | 15–30% | 1 Boss (TR 16) + Mooks, or 2 Named (TR 12) |
+
+### Scaling Notes
+
+- **Each additional PC** adds roughly 20–30% win rate to an encounter. Scale enemy count or Named NPC tier up accordingly.
+- **Named NPC count matters more than total TR.** Two Named NPCs (combined TR 16) is Deadly, while a single Boss at TR 16 is Hard. Named NPCs maintain sustained pressure; Mooks self-cancel as they die.
+- **Mook swarms have diminishing returns.** Difficulty peaks around 8–10 Mooks for a PS 3 party. Beyond that, the self-cancelling effect (dead Mooks reduce future pressure) stabilizes difficulty or even reduces it.
+- **Advanced parties** (PS 6+, Techniques active) trivialize encounters designed for PS 3. Scale encounter TR up 50–100% for advanced parties.
+
+---
+
+## The Five-Minute Encounter Design Method
+
+A quick framework for designing balanced encounters without a calculator.
+
+### Step 1: What's the story?
+
+Every encounter exists to serve the narrative. Ask: what does this fight (or potential fight) accomplish? If the answer is "I need a fight here," redesign the scene. Good fights create decisions. Great fights create stories.
+
+### Step 2: Pick a difficulty feel.
+
+- **Skirmish** — The party should win. This encounter taxes a few Endurance points and establishes the threat. Use when: introducing a new enemy type, pacing between major beats, rewarding players for good preparation.
+- **Standard** — A real fight. Someone will take conditions. Sparks will be spent. This is the default difficulty for most encounters. Use when: the stakes matter and the outcome is uncertain.
+- **Hard** — Someone might go down. Requires smart posture choices and possibly a lateral solution. Use when: the climax of an arc, protecting something important, facing a worthy adversary.
+- **Deadly** — The party should NOT fight this straight. This encounter exists to be solved, circumvented, or fled from. If they fight it and win, that's a story they'll tell forever. Use when: the Big Bad, a force of nature, a fight that should feel impossible.
+
+### Step 3: Build the enemy roster.
+
+Use the Encounter Recipe Table above. Find your party's column, pick the difficulty row, and use the suggested enemy composition. Adjust flavor without changing the mechanical profile.
+
+### Step 4: Add one lateral solution.
+
+For Standard and above, design at least one way the party can shortcut the encounter through clever play: an environmental hazard they can exploit, a weakness they can discover, a social angle that ends the fight. This isn't a consolation prize — it's the intended design. The lateral solution IS the encounter.
+
+### Step 5: Sanity check.
+
+Run through one exchange mentally. Does the first exchange feel dangerous but survivable? Can the party's tank absorb two hits? Can the fragile character contribute without dying immediately? If yes, you're good. If the math says "party wipe in exchange 1," dial it back. If the math says "party wins without spending Endurance," dial it up.
+
+> **The golden rule:** If you're unsure between two difficulties, pick the easier one. Players who feel competent take bigger risks. Players who feel punished play conservatively. The easier fight leads to more interesting decisions.
+
+### The "Three Encounter Session" Template
+
+Most sessions have 2–3 encounters. The ideal difficulty arc:
+
+1. **Opening:** Skirmish or light Standard — warm-up, establish the threat, let players feel competent
+2. **Rising action:** Standard or Hard — the real challenge, resource drain, stakes escalate
+3. **Climax:** Hard or Deadly — the payoff, lateral solutions welcome, maximum tension
+
+**Never:** Hard → Hard → Hard. This exhausts resources without narrative payoff. The second fight feels like grinding, and the third feels unfair.
+
+**Never:** Deadly as the opener. Players need to feel competent before you challenge them.
+
+Simulation data confirms this arc: Skirmish → Standard survives at 98%. Skirmish → Standard → Hard survives at 55% — genuine late-session tension where smart play and lateral solutions determine the outcome.

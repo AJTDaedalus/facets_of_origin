@@ -1,8 +1,9 @@
 /**
- * Facets of Origin — Digital Tabletop Client
+ * Facets of Origin — Core application shell.
  *
- * Single-file vanilla JS app. No build step required.
- * Manages auth, WebSocket, character sheet, dice rolling, and chat.
+ * Manages: auth, WebSocket, state, routing, tab switching, character creation.
+ * Tab-specific logic lives in play.js, tools.js, builder.js.
+ * Shared rendering components live in components.js.
  */
 
 // ---------------------------------------------------------------------------
@@ -23,6 +24,11 @@ const state = {
   selectedSkillId: null,
   sparksToSpend: 0,
   ws: null,
+  activeEnemies: {},       // tracker_key -> enemy
+  enemyLibrary: {},        // enemy_id -> enemy
+  encounterLibrary: {},    // encounter_id -> encounter
+  inCombat: false,
+  postures: {},            // player_name -> posture (after reveal)
 };
 
 // ---------------------------------------------------------------------------
@@ -54,8 +60,6 @@ window.addEventListener('DOMContentLoaded', () => {
 // Auth screens
 // ---------------------------------------------------------------------------
 async function checkSetupNeeded() {
-  // Try to log in with no password to check if setup is needed
-  // (the setup endpoint returns 400 if already configured)
   const el = document.getElementById('auth-screen');
   el.classList.remove('hidden');
   document.getElementById('game-screen').classList.add('hidden');
@@ -237,6 +241,23 @@ function enterSession(sessionId, sessionName) {
   connectWebSocket();
 }
 
+// In-game invite generation for MM
+async function generateInviteInGame() {
+  const playerName = document.getElementById('play-invite-player-name').value.trim();
+  if (!playerName) { alert('Enter a player name.'); return; }
+  const resp = await apiFetch('/api/sessions/invite', 'POST', {
+    session_id: state.sessionId,
+    player_name: playerName,
+  });
+  if (resp.ok) {
+    const data = await resp.json();
+    document.getElementById('play-invite-result').textContent = data.invite_url;
+  } else {
+    const err = await resp.json();
+    alert(err.detail || 'Failed.');
+  }
+}
+
 // ---------------------------------------------------------------------------
 // WebSocket
 // ---------------------------------------------------------------------------
@@ -247,7 +268,6 @@ function connectWebSocket() {
   state.ws = ws;
 
   ws.onopen = () => {
-    // Authenticate: send token as first message (NOT in URL to avoid logging)
     ws.send(JSON.stringify({
       token: state.token,
       session_id: state.sessionId,
@@ -289,35 +309,105 @@ function handleServerMessage(msg) {
     case 'player_joined':
       state.connectedPlayers.add(msg.player);
       addSystemChat(`${msg.player} joined the session.`);
-      renderPlayerList();
+      renderPlayPlayerList();
       break;
     case 'player_left':
       state.connectedPlayers.delete(msg.player);
       addSystemChat(`${msg.player} left the session.`);
-      renderPlayerList();
+      renderPlayPlayerList();
       break;
     case 'spark_earned':
-      addSystemChat(`✨ ${msg.player} earned a Spark! (${msg.reason}). Sparks now: ${msg.sparks_now}`);
-      if (msg.player === state.playerName) {
+      addSystemChat(`${msg.player} earned a Spark! (${msg.reason}). Sparks now: ${msg.sparks_now}`);
+      if (msg.player === state.playerName && state.character) {
         state.character.sparks = msg.sparks_now;
-        renderSparkCounter();
+        renderPlaySparkCounter();
       }
       break;
     case 'spark_nomination':
       onSparkNomination(msg);
       break;
     case 'skill_advanced':
-      addSystemChat(`📈 ${msg.player} advanced ${msg.skill_id} to ${msg.new_rank}${msg.facet_level_advances > 0 ? ' — FACET LEVEL UP!' : ''}!`);
+      addSystemChat(`${msg.player} advanced ${msg.skill_id} to ${msg.new_rank}${msg.facet_level_advances > 0 ? ' -- FACET LEVEL UP!' : ''}!`);
       if (state.character && msg.player === state.playerName) {
         if (state.character.skills[msg.skill_id]) {
           state.character.skills[msg.skill_id].rank = msg.new_rank;
           state.character.facet_level = msg.new_facet_level;
-          renderCharacterSheet();
+          renderPlayCharacterSheet();
+          if (typeof renderBuilderSkills === 'function') renderBuilderSkills();
         }
+      }
+      break;
+    case 'skill_marked_used':
+      addSystemChat(`Skill '${msg.skill_id}' marked as used for ${msg.player}.`);
+      if (state.character && msg.player === state.playerName) {
+        state.character.skills_used_this_session = msg.skills_used || [];
+        if (typeof renderBuilderSkills === 'function') renderBuilderSkills();
+      }
+      break;
+    case 'skill_point_spent':
+      addSystemChat(`${msg.player} spent ${msg.sp_cost} SP on ${msg.skill_id}${msg.rank_advances > 0 ? ' -- rank up!' : ''}.`);
+      if (state.character && msg.player === state.playerName) {
+        state.character.session_skill_points_remaining = msg.session_skill_points_remaining;
+        if (state.character.skills[msg.skill_id]) {
+          state.character.skills[msg.skill_id].marks = msg.new_marks;
+          if (msg.rank_advances > 0) state.character.skills[msg.skill_id].rank = msg.new_rank;
+          if (msg.facet_level_advances > 0) state.character.facet_level = msg.new_facet_level;
+        }
+        renderPlayCharacterSheet();
+        if (typeof renderBuilderSkills === 'function') renderBuilderSkills();
       }
       break;
     case 'chat':
       addChatMessage(msg.from, msg.text);
+      break;
+    case 'enemy_spawned':
+      onEnemySpawned(msg);
+      addSystemChat(`Enemy spawned: ${msg.enemy.name}`);
+      break;
+    case 'enemy_updated':
+      onEnemyUpdated(msg);
+      break;
+    case 'enemy_removed':
+      onEnemyRemoved(msg);
+      addSystemChat(`Enemy removed: ${msg.tracker_key}`);
+      break;
+    // Combat broadcasts
+    case 'combat_started':
+      onCombatStarted(msg);
+      break;
+    case 'posture_declared':
+      onPostureDeclared(msg);
+      break;
+    case 'postures_revealed':
+      onPosturesRevealed(msg);
+      break;
+    case 'strike_result':
+      onStrikeResult(msg);
+      break;
+    case 'react_result':
+      onReactResult(msg);
+      break;
+    case 'support_result':
+      onSupportResult(msg);
+      break;
+    case 'maneuver_result':
+      onManeuverResult(msg);
+      break;
+    case 'condition_applied':
+      onConditionApplied(msg);
+      break;
+    case 'condition_cleared':
+      onConditionCleared(msg);
+      break;
+    case 'exchange_ended':
+      onExchangeEnded(msg);
+      break;
+    case 'combat_ended':
+      onCombatEnded(msg);
+      break;
+    // Magic broadcasts
+    case 'cast_result':
+      onCastResult(msg);
       break;
     case 'error':
       addSystemChat(`Error: ${msg.message}`);
@@ -333,11 +423,15 @@ function onStateReceived(data) {
   state.ruleset = data.ruleset;
   state.rollLog = data.roll_log || [];
   state.allCharacters = data.all_characters || {};
+  state.activeEnemies = data.active_enemies || {};
+  state.enemyLibrary = data.enemy_library || {};
+  state.encounterLibrary = data.encounter_library || {};
 
   if (state.role === 'player' && data.your_character) {
     state.character = data.your_character;
   }
 
+  // Hide auth screens, show game screen
   document.getElementById('auth-screen').classList.add('hidden');
   document.getElementById('setup-screen').classList.add('hidden');
   document.getElementById('join-screen').classList.add('hidden');
@@ -345,15 +439,6 @@ function onStateReceived(data) {
   document.getElementById('game-screen').classList.remove('hidden');
 
   renderHeader();
-  renderCharacterSheet();
-  renderRollLog();
-  renderPlayerList();
-
-  if (state.role === 'mm') {
-    document.getElementById('mm-controls').classList.remove('hidden');
-  } else {
-    document.getElementById('player-controls').classList.remove('hidden');
-  }
 
   // Show character creation if player has no character yet
   if (state.role === 'player' && !state.character) {
@@ -364,6 +449,27 @@ function onStateReceived(data) {
     document.getElementById('char-create-panel').classList.add('hidden');
     document.getElementById('character-panel').classList.remove('hidden');
   }
+
+  // Initialize all tabs
+  initPlayTab();
+  initToolsTab();
+  if (typeof initBuilderTab === 'function') initBuilderTab();
+}
+
+// ---------------------------------------------------------------------------
+// Tab switching
+// ---------------------------------------------------------------------------
+function switchTab(tabName) {
+  ['play', 'tools', 'builder'].forEach(t => {
+    const content = document.getElementById('tab-' + t);
+    const btns = document.querySelectorAll('.tab-bar .tab-btn[data-tab="' + t + '"]');
+    if (content) content.classList.toggle('hidden', t !== tabName);
+    btns.forEach(btn => btn.classList.toggle('active', t === tabName));
+  });
+
+  // Refresh tab data when switching
+  if (tabName === 'tools') initToolsTab();
+  if (tabName === 'builder' && typeof initBuilderTab === 'function') initBuilderTab();
 }
 
 // ---------------------------------------------------------------------------
@@ -380,7 +486,10 @@ function populateCharacterCreation() {
     facetSelect.appendChild(opt);
   });
 
-  // Build attribute inputs
+  // When facet changes, update background list
+  facetSelect.onchange = populateBackgroundSelect;
+  populateBackgroundSelect();
+
   const attrContainer = document.getElementById('cc-attributes');
   attrContainer.innerHTML = '';
 
@@ -391,7 +500,7 @@ function populateCharacterCreation() {
   state.ruleset.major_attributes.forEach(major => {
     const groupDiv = document.createElement('div');
     groupDiv.className = 'major-group';
-    groupDiv.innerHTML = `<div class="major-label">${major.name}</div>`;
+    groupDiv.innerHTML = '<div class="major-label">' + major.name + '</div>';
 
     const gridDiv = document.createElement('div');
     gridDiv.className = 'attr-grid';
@@ -404,7 +513,7 @@ function populateCharacterCreation() {
       block.innerHTML = `
         <div class="attr-name">${minor.name}</div>
         <select class="attr-input" id="cc-attr-${minor.id}" data-attr="${minor.id}" onchange="updateAttrPointsDisplay()" style="width:60px;text-align:center;">
-          ${[1,2,3].filter(r => r <= maxRating).map(r => `<option value="${r}" ${r===2?'selected':''}>${r}</option>`).join('')}
+          ${[1,2,3].filter(r => r <= maxRating).map(r => '<option value="' + r + '"' + (r===2?' selected':'') + '>' + r + '</option>').join('')}
         </select>
       `;
       gridDiv.appendChild(block);
@@ -416,6 +525,79 @@ function populateCharacterCreation() {
   updateAttrPointsDisplay();
 }
 
+function populateBackgroundSelect() {
+  const facetId = document.getElementById('cc-facet').value;
+  const bgSelect = document.getElementById('cc-background');
+  const infoEl = document.getElementById('cc-background-info');
+  bgSelect.innerHTML = '<option value="">-- none (custom) --</option>';
+
+  const backgrounds = (state.ruleset.backgrounds || []).filter(bg => bg.facet === facetId);
+  backgrounds.forEach(bg => {
+    const opt = document.createElement('option');
+    opt.value = bg.id;
+    opt.textContent = bg.name;
+    bgSelect.appendChild(opt);
+  });
+
+  bgSelect.onchange = onBackgroundChanged;
+  onBackgroundChanged();
+}
+
+function onBackgroundChanged() {
+  const bgId = document.getElementById('cc-background').value;
+  const infoEl = document.getElementById('cc-background-info');
+  const domainWrap = document.getElementById('cc-magic-domain-wrap');
+
+  if (!bgId) {
+    infoEl.textContent = '';
+    domainWrap.classList.add('hidden');
+    return;
+  }
+
+  const bg = (state.ruleset.backgrounds || []).find(b => b.id === bgId);
+  if (!bg) { infoEl.textContent = ''; domainWrap.classList.add('hidden'); return; }
+
+  // Show background info
+  const startSkill = (state.ruleset.skills || []).find(s => s.id === bg.starting_skill);
+  let info = 'Starting: ' + (startSkill ? startSkill.name : bg.starting_skill) + ' (Practiced)';
+  if (bg.secondary_skill) {
+    const secSkill = (state.ruleset.skills || []).find(s => s.id === bg.secondary_skill);
+    info += ' | Secondary: ' + (secSkill ? secSkill.name : bg.secondary_skill) + ' (Novice +1 mark)';
+  }
+  if (bg.specialty) info += '\nSpecialty: ' + bg.specialty;
+  infoEl.textContent = info;
+
+  // Show magic domain selector if background has domain_origin or is a Soul magic background
+  if (bg.domain_origin) {
+    domainWrap.classList.remove('hidden');
+    populateMagicDomainSelect(bg.domain_origin);
+  } else {
+    domainWrap.classList.add('hidden');
+    document.getElementById('cc-magic-domain').value = '';
+  }
+}
+
+function populateMagicDomainSelect(domainOrigin) {
+  const domainSelect = document.getElementById('cc-magic-domain');
+  domainSelect.innerHTML = '<option value="">-- no magic --</option>';
+
+  if (!state.ruleset.magic) return;
+
+  // Get domains for the origin facet (mind or soul)
+  const domainList = domainOrigin === 'mind'
+    ? (state.ruleset.magic.mind_domains || [])
+    : domainOrigin === 'soul'
+      ? (state.ruleset.magic.soul_domains || [])
+      : [];
+
+  domainList.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d.id;
+    opt.textContent = d.name + ' (' + d.type + ')';
+    domainSelect.appendChild(opt);
+  });
+}
+
 function updateAttrPointsDisplay() {
   const inputs = document.querySelectorAll('.attr-input');
   let total = 0;
@@ -424,7 +606,7 @@ function updateAttrPointsDisplay() {
   const target = dist ? dist.total_points : 18;
   const el = document.getElementById('cc-points-remaining');
   const remaining = target - total;
-  el.textContent = `${remaining >= 0 ? remaining : 0} points remaining (${total}/${target})`;
+  el.textContent = (remaining >= 0 ? remaining : 0) + ' points remaining (' + total + '/' + target + ')';
   el.style.color = remaining === 0 ? 'var(--success)' : remaining < 0 ? 'var(--failure)' : 'var(--text-dim)';
 }
 
@@ -441,11 +623,16 @@ async function submitCharacterCreation() {
     attributes[inp.dataset.attr] = parseInt(inp.value);
   });
 
+  const backgroundId = document.getElementById('cc-background').value || null;
+  const magicDomain = document.getElementById('cc-magic-domain').value || null;
+
   const resp = await apiFetch('/api/characters/', 'POST', {
     session_id: state.sessionId,
     character_name: name,
     primary_facet: primaryFacet,
     attributes,
+    background_id: backgroundId,
+    magic_domain: magicDomain,
   });
 
   if (resp.ok) {
@@ -453,340 +640,13 @@ async function submitCharacterCreation() {
     state.character = data.character;
     document.getElementById('char-create-panel').classList.add('hidden');
     document.getElementById('character-panel').classList.remove('hidden');
-    renderCharacterSheet();
+    initPlayTab();
+    initToolsTab();
+    if (typeof initBuilderTab === 'function') initBuilderTab();
   } else {
     const err = await resp.json();
     errEl.textContent = JSON.stringify(err.detail || 'Character creation failed.');
   }
-}
-
-// ---------------------------------------------------------------------------
-// Character sheet rendering
-// ---------------------------------------------------------------------------
-function renderCharacterSheet() {
-  const char = state.character;
-  if (!char || !state.ruleset) return;
-
-  // Name and facet
-  const facetDef = state.ruleset.character_facets.find(cf => cf.id === char.primary_facet);
-  document.getElementById('char-name').textContent = char.name;
-  document.getElementById('char-facet').textContent = facetDef ? facetDef.name : char.primary_facet;
-  document.getElementById('char-facet').className = `facet-badge facet-${char.primary_facet}`;
-  document.getElementById('char-level').textContent = `Facet Level ${char.facet_level}`;
-
-  // Attributes
-  renderAttributeGrid(char);
-
-  // Skills
-  renderSkillsTable(char);
-
-  // Sparks
-  renderSparkCounter();
-}
-
-function renderAttributeGrid(char) {
-  const container = document.getElementById('attr-display');
-  if (!container || !state.ruleset) return;
-  container.innerHTML = '';
-
-  state.ruleset.major_attributes.forEach(major => {
-    const groupDiv = document.createElement('div');
-    groupDiv.className = 'major-group';
-    groupDiv.innerHTML = `<div class="major-label">${major.name}</div>`;
-
-    const gridDiv = document.createElement('div');
-    gridDiv.className = 'attr-grid';
-
-    major.minor_attributes.forEach(minorId => {
-      const minor = state.ruleset.minor_attributes.find(m => m.id === minorId);
-      if (!minor) return;
-      const rating = char.attributes[minorId] || 2;
-      const ratingDef = state.ruleset.attribute_ratings.find(r => r.rating === rating);
-      const mod = ratingDef ? ratingDef.modifier : 0;
-      const modStr = mod > 0 ? `+${mod}` : `${mod}`;
-
-      const block = document.createElement('div');
-      block.className = `attr-block${state.selectedAttributeId === minorId ? ' selected' : ''}`;
-      block.title = minor.description;
-      block.innerHTML = `
-        <div class="attr-name">${minor.name}</div>
-        <div class="attr-rating">${rating}</div>
-        <div class="attr-modifier">${modStr}</div>
-        <div class="attr-label">${ratingDef ? ratingDef.label : ''}</div>
-      `;
-      block.onclick = () => selectAttribute(minorId);
-      gridDiv.appendChild(block);
-    });
-    groupDiv.appendChild(gridDiv);
-    container.appendChild(groupDiv);
-  });
-}
-
-function renderSkillsTable(char) {
-  const tbody = document.getElementById('skills-tbody');
-  if (!tbody || !state.ruleset) return;
-  tbody.innerHTML = '';
-
-  state.ruleset.skills.forEach(skill => {
-    if (skill.status === 'stub') return; // hide stub skills for now
-    const skillState = char.skills[skill.id] || { rank: 'novice', marks: 0 };
-    const rankDef = state.ruleset.advancement ? state.ruleset.advancement.skill_ranks.find(r => r.id === skillState.rank) : null;
-    const marksNeeded = state.ruleset.advancement ? state.ruleset.advancement.marks_per_rank : 3;
-    const dots = '●'.repeat(skillState.marks) + '○'.repeat(Math.max(0, marksNeeded - skillState.marks));
-
-    const facetLabel = state.ruleset.character_facets.find(cf => cf.id === skill.facet);
-    const isPrimary = skill.facet === char.primary_facet;
-
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${skill.name}${isPrimary ? '' : ' <span style="color:var(--text-dim);font-size:10px">●</span>'}</td>
-      <td><span class="rank-badge rank-${skillState.rank}">${rankDef ? rankDef.label : skillState.rank}</span></td>
-      <td class="marks-dots" title="${skillState.marks}/${marksNeeded} marks">${dots}</td>
-      <td><button class="btn-roll-skill" onclick="rollSkill('${skill.id}')">Roll</button></td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-function renderSparkCounter() {
-  const char = state.character;
-  if (!char) return;
-  const container = document.getElementById('spark-pips');
-  if (!container) return;
-  container.innerHTML = '';
-
-  const maxSparks = Math.max(char.sparks, 6); // show at least 6 slots
-  for (let i = 0; i < maxSparks; i++) {
-    const pip = document.createElement('div');
-    pip.className = `spark-pip${i < char.sparks ? ' filled' : ''}`;
-    pip.title = i < char.sparks ? 'Spark available' : 'Empty';
-    pip.onclick = () => toggleSparkSpend(i);
-    container.appendChild(pip);
-  }
-
-  document.getElementById('spark-count').textContent = `${char.sparks} Spark${char.sparks !== 1 ? 's' : ''}`;
-  document.getElementById('sparks-to-spend').textContent = state.sparksToSpend > 0
-    ? `(spending ${state.sparksToSpend})`
-    : '';
-}
-
-function toggleSparkSpend(index) {
-  if (!state.character) return;
-  state.sparksToSpend = index + 1 <= state.character.sparks ? index + 1 : 0;
-  if (state.sparksToSpend === state.character.sparks + 1) state.sparksToSpend = 0;
-  renderSparkCounter();
-  // Update spend indicator
-  const pips = document.querySelectorAll('.spark-pip');
-  pips.forEach((pip, i) => {
-    pip.style.borderColor = i < state.sparksToSpend ? 'var(--accent)' : 'var(--gold)';
-  });
-}
-
-// ---------------------------------------------------------------------------
-// Rolling
-// ---------------------------------------------------------------------------
-function selectAttribute(attrId) {
-  state.selectedAttributeId = attrId;
-  state.selectedSkillId = null;
-  renderAttributeGrid(state.character);
-  document.getElementById('roll-btn').disabled = false;
-  document.getElementById('roll-attr-display').textContent =
-    state.ruleset.minor_attributes.find(m => m.id === attrId)?.name || attrId;
-}
-
-function rollSkill(skillId) {
-  if (!state.ruleset) return;
-  const skill = state.ruleset.skills.find(s => s.id === skillId);
-  if (!skill) return;
-  state.selectedSkillId = skillId;
-  state.selectedAttributeId = skill.attribute;
-  renderAttributeGrid(state.character);
-  document.getElementById('roll-btn').disabled = false;
-  document.getElementById('roll-attr-display').textContent =
-    `${state.ruleset.minor_attributes.find(m => m.id === skill.attribute)?.name} + ${skill.name}`;
-  performRoll();
-}
-
-function performRoll() {
-  if (!state.selectedAttributeId) {
-    addSystemChat('Select an attribute to roll.');
-    return;
-  }
-
-  const difficulty = document.getElementById('difficulty-select').value;
-  const description = document.getElementById('roll-description').value.slice(0, 200);
-
-  sendWS({
-    type: 'roll',
-    attribute_id: state.selectedAttributeId,
-    skill_id: state.selectedSkillId || null,
-    difficulty,
-    sparks_spent: state.sparksToSpend,
-    description,
-  });
-
-  // Reset spark spend
-  state.sparksToSpend = 0;
-}
-
-function onRollResult(msg) {
-  const roll = msg.roll;
-
-  // Add to log
-  state.rollLog.unshift({ player_name: msg.player, character_name: msg.character_name, ...roll });
-  renderRollLog();
-
-  // Show result in panel
-  const resultBox = document.getElementById('roll-result-box');
-  resultBox.className = `roll-result-box ${roll.outcome}`;
-  resultBox.classList.remove('hidden');
-
-  // Build dice display
-  const allDice = roll.dice_rolled;
-  const keptDice = roll.dice_kept;
-  const droppedIndices = [];
-  const remaining = [...allDice];
-  const keptCopy = [...keptDice];
-  remaining.forEach((d, i) => {
-    const ki = keptCopy.indexOf(d);
-    if (ki !== -1) keptCopy.splice(ki, 1);
-    else droppedIndices.push(i);
-  });
-
-  const diceHtml = allDice.map((d, i) => {
-    const isDropped = droppedIndices.includes(i);
-    return `<div class="die ${isDropped ? 'dropped' : 'kept'}" title="${isDropped ? 'dropped (Spark)' : 'kept'}">${d}</div>`;
-  }).join('');
-
-  const modParts = [];
-  if (roll.attribute_modifier !== 0) modParts.push(`Attr ${roll.attribute_modifier > 0 ? '+' : ''}${roll.attribute_modifier}`);
-  if (roll.skill_modifier !== 0) modParts.push(`Skill +${roll.skill_modifier}`);
-  if (roll.difficulty_modifier !== 0) modParts.push(`Diff ${roll.difficulty_modifier > 0 ? '+' : ''}${roll.difficulty_modifier}`);
-  const modStr = modParts.length ? ` (${modParts.join(', ')})` : '';
-
-  const whoStr = msg.player === state.playerName ? 'You' : `${msg.character_name || msg.player}`;
-
-  resultBox.innerHTML = `
-    <div style="font-size:0.8rem;color:var(--text-dim);margin-bottom:4px;">${whoStr} rolled ${roll.attribute_id}${roll.skill_id ? ' + ' + roll.skill_id : ''}${roll.difficulty !== 'Standard' ? ' [' + roll.difficulty + ']' : ''}${roll.sparks_spent > 0 ? ' ✨×' + roll.sparks_spent : ''}</div>
-    <div class="dice-display">${diceHtml}</div>
-    <div class="roll-total">${roll.total}</div>
-    <div class="roll-outcome-label">${roll.outcome_label}</div>
-    <div class="roll-outcome-desc">${roll.outcome_description}</div>
-    <div class="roll-breakdown">Dice sum: ${roll.dice_sum}${modStr} = ${roll.total}</div>
-    ${roll.description ? `<div style="font-size:0.8rem;color:var(--text-dim);margin-top:4px;font-style:italic;">"${roll.description}"</div>` : ''}
-  `;
-
-  // Update spark pips if it was our roll
-  if (msg.player === state.playerName && state.character) {
-    state.character.sparks = msg.character_sparks_remaining;
-    renderSparkCounter();
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Roll log
-// ---------------------------------------------------------------------------
-function renderRollLog() {
-  const container = document.getElementById('roll-log');
-  if (!container) return;
-  container.innerHTML = '';
-  const DESC_MAX = 40;
-  state.rollLog.slice(0, 30).forEach(entry => {
-    const div = document.createElement('div');
-    div.className = 'roll-log-entry';
-    const desc = (entry.description || '').trim();
-    const descHtml = desc
-      ? `<div class="roll-log-desc" title="${desc.replace(/"/g, '&quot;')}">${desc.length > DESC_MAX ? desc.slice(0, DESC_MAX) + '…' : desc}</div>`
-      : '';
-    div.innerHTML = `
-      <span class="who">${entry.character_name || entry.player_name}</span>
-      <span class="outcome-${entry.outcome}"> ${entry.total} — ${entry.outcome_label}</span>
-      <span style="color:var(--text-dim);float:right">${entry.attribute_id}${entry.skill_id ? '+'+entry.skill_id : ''}</span>
-      ${descHtml}
-    `;
-    container.appendChild(div);
-  });
-}
-
-// ---------------------------------------------------------------------------
-// Player list
-// ---------------------------------------------------------------------------
-function renderPlayerList() {
-  const ul = document.getElementById('player-list');
-  if (!ul) return;
-  ul.innerHTML = '';
-  Object.values(state.allCharacters).forEach(char => {
-    const li = document.createElement('li');
-    const isOnline = state.connectedPlayers.has(char.player_name);
-    li.innerHTML = `
-      <span class="${isOnline ? 'player-online' : ''}">${char.player_name}${char.name !== char.player_name ? ` (${char.name})` : ''}</span>
-      <span class="facet-badge facet-${char.primary_facet}">${char.primary_facet}</span>
-    `;
-    ul.appendChild(li);
-  });
-}
-
-// ---------------------------------------------------------------------------
-// Chat
-// ---------------------------------------------------------------------------
-function addChatMessage(from, text) {
-  const log = document.getElementById('chat-log');
-  if (!log) return;
-  const div = document.createElement('div');
-  div.className = 'chat-msg';
-  div.innerHTML = `<span class="from">${escapeHtml(from)}</span>: ${escapeHtml(text)}`;
-  log.appendChild(div);
-  log.scrollTop = log.scrollHeight;
-}
-
-function addSystemChat(text) {
-  const log = document.getElementById('chat-log');
-  if (!log) return;
-  const div = document.createElement('div');
-  div.className = 'chat-msg system';
-  div.textContent = text;
-  log.appendChild(div);
-  log.scrollTop = log.scrollHeight;
-}
-
-function sendChat() {
-  const input = document.getElementById('chat-input');
-  const text = input.value.trim();
-  if (!text) return;
-  sendWS({ type: 'chat', text });
-  input.value = '';
-}
-
-// MM: award Spark
-function mmAwardSpark() {
-  const playerName = document.getElementById('mm-spark-player').value.trim();
-  const reason = document.getElementById('mm-spark-reason').value.trim() || 'MM award';
-  if (!playerName) { alert('Enter a player name.'); return; }
-  sendWS({ type: 'spark_earn', player_name: playerName, reason });
-}
-
-// Player: nominate peer for Spark
-function nominateForSpark() {
-  const playerName = document.getElementById('peer-spark-player').value.trim();
-  if (!playerName) { alert('Enter a player name.'); return; }
-  sendWS({ type: 'spark_earn_peer', player_name: playerName });
-}
-
-function onSparkNomination(msg) {
-  const banner = document.getElementById('spark-nomination-banner');
-  if (!banner) return;
-  banner.classList.remove('hidden');
-  banner.querySelector('.nomination-text').textContent = msg.message;
-  banner.dataset.nominatedPlayer = msg.player;
-}
-
-function confirmSparkNomination() {
-  const banner = document.getElementById('spark-nomination-banner');
-  const playerName = banner.dataset.nominatedPlayer;
-  if (playerName) {
-    sendWS({ type: 'spark_earn', player_name: playerName, reason: 'Peer nomination' });
-  }
-  banner.classList.add('hidden');
 }
 
 // ---------------------------------------------------------------------------
@@ -805,7 +665,7 @@ async function apiFetch(url, method, body) {
     method,
     headers: { 'Content-Type': 'application/json' },
   };
-  if (state.token) opts.headers['Authorization'] = `Bearer ${state.token}`;
+  if (state.token) opts.headers['Authorization'] = 'Bearer ' + state.token;
   if (body) opts.body = JSON.stringify(body);
   return fetch(url, opts);
 }
@@ -820,7 +680,7 @@ function escapeHtml(str) {
 
 // Enter key to send chat
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && document.activeElement.id === 'chat-input') {
+  if (e.key === 'Enter' && document.activeElement && document.activeElement.id === 'play-chat-input') {
     sendChat();
   }
 });

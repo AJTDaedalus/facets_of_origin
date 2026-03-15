@@ -66,6 +66,17 @@ Purely narrative changes (vignettes, sidebars, tone) do not require software cha
 **Deferred modules** (Crafting, Economy, Feats, Technology): Do not implement
 until the corresponding PHB chapter is written.
 
+## Software Development Ethos
+
+This project uses **test-driven development (TDD)** as its core software practice:
+
+1. Write the test first — before implementing any new feature, handler, or mechanic.
+2. Run the test to confirm it fails (red).
+3. Implement the minimum code to make it pass (green).
+4. Refactor if needed, keeping all tests green.
+
+Every software change that adds or modifies behaviour must have a corresponding test. New WebSocket handlers, roll modifiers, character fields, and API endpoints all require tests before or alongside the implementation. PRs without tests for new behaviour will not be merged.
+
 
 ## Terminology
 
