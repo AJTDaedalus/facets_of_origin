@@ -145,21 +145,21 @@ The complication is the MM's call, and it should move the story forward, not sim
 
 ### Example: A Mage, a Beam, a Problem
 
-Mordai and Zahna are in a burning building. A massive wooden beam hangs half-collapsed above the exit, blocking their escape. Zahna, a Focused Fire mage, sees an opportunity.
+Mordai and Zahna are in a burning building. A massive wooden beam hangs half-collapsed above the exit, blocking their escape. Zahna, practicing the Focused Inscription domain, sees an opportunity.
 
-**Zahna:** "The beam is already burning. I want to accelerate the combustion in the supports — the two load-bearing joints on the left side — so they give way and the beam falls to the right, clear of the doorway."
+**Zahna:** "I want to inscribe a fracture-glyph on the two load-bearing joints — encode a stress point into the wood itself so they give way under the beam's own weight, and it falls to the right, clear of the doorway."
 
-**MM:** "That is Significant. You are controlling the direction of a structural collapse, not just adding flame. Standard difficulty. Roll Spirit."
+**MM:** "That is Significant. You are controlling the direction of a structural collapse, not just marking wood. Standard difficulty. Roll Knowledge."
 
-→ Zahna rolls **2d6 + Spirit (3 → +1)** at Standard difficulty and gets a **9**. Partial success.
+→ Zahna rolls **2d6 + Knowledge (3 → +1)** at Standard difficulty and gets a **9**. Partial success.
 
-**MM:** "The joints give way exactly as you intended. The beam comes down to the right, doorway clear. But the accelerated burn was louder than you expected — a crack like a cannon shot. Whatever is left alive on the floor above you now knows exactly where you are."
+**MM:** "The glyph bites and the joints give way exactly as you intended. The beam comes down to the right, doorway clear. But the working was louder than you expected — a crack like a cannon shot, and the glyph's light flared before it burned out. Whatever is left alive on the floor above you now knows exactly where you are."
 
 *The doorway opens. Something above them stirs.*
 
 ---
 
-Notably: Zahna could have attempted Major scope instead, requesting the entire floor above them collapse. That would have been Hard difficulty for a Focused domain. She chose Significant for Standard. That tradeoff — ambition against probability — is the heart of scope declaration.
+Notably: Zahna could have attempted Major scope instead, requesting the entire floor above them collapse. That would have been Hard difficulty for a Focused domain. He chose Significant for Standard. That tradeoff — ambition against probability — is the heart of scope declaration.
 
 ---
 

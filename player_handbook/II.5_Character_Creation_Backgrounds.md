@@ -68,7 +68,7 @@ If your character has a magical domain, the Background is where it begins.
 
 Magic requires two things: a narrative origin and a Facet Technique. The Background provides the first. The Technique — unlocked at Facet level 1 — provides the second.
 
-**Before the Technique is unlocked:** You can use your domain, but your practice is genuine without being disciplined. Effects are limited to Minor scope, and the difficulty is one step harder than normal. You are working from instinct and partial understanding.
+**Before the Technique is unlocked:** You can use your domain, but your practice is genuine without being disciplined. Effects are limited to Minor scope — the normal difficulty table applies. You are working from instinct and partial understanding.
 
 **After the Technique is unlocked:** Your domain operates at full capacity — all scopes available, normal difficulty table, any additional benefits the Technique provides. The Technique is not the moment you gain magic. It is the moment your magic becomes what it is capable of being.
 
@@ -352,6 +352,6 @@ Three different Backgrounds, three different shapes of competence at the table:
 
 *Mordai's City Watch Veteran Background explains why his instinct is to confront the archivist directly, and why his Specialty (knowing how city institutions work) doesn't help here — the archivist knows it too, and better. His Charisma roll is still Hard. The Background doesn't make him good at everything. It makes him specifically good at one thing.*
 
-*Zulnut's Street Performer Background explains why the MM calls the keyring lift Easy rather than Standard — reading a crowd, noticing the moment of distraction, acting in the window — that's exactly what a performer develops. The Background is what justified the difficulty call.*
+*Zulnut's Wandering Disciple Background explains why the MM calls the keyring lift Easy rather than Standard — noticing the exact moment attention shifts is exactly the discipline his training built. The Background is what justified the difficulty call.*
 
 The Background doesn't override the dice. It changes the context the dice live in.

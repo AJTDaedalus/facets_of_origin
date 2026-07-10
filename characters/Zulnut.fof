@@ -36,38 +36,40 @@ character:
     finesse:
       rank: practiced
       marks: 0
-    perform:
+    stealth:
       rank: novice
-      marks: 1  # Background Mark from Street Performer
+      marks: 1  # Background Mark from Wandering Disciple
 
   magic: null
 
   background:
-    name: Street Performer
-    type: custom  # custom variant: Finesse replaces Perform as starting skill
-    title: Street Performer
+    name: Wandering Disciple
+    type: custom
+    title: Wandering Disciple
     description: >
-      You worked crowds — acrobatics, sleight of hand, close-up illusions using
-      nothing but quick hands and timing, and the fine art of reading a crowd to
-      know exactly when to make something disappear. Audiences don't forgive sloppy
-      technique, and neither does the city watch.
+      You trained under a wandering ascetic tradition — no temple, no institution,
+      just a teacher who moved on and the habits that stayed: discipline built
+      through motion, stillness, and reading a room before it knows it is being
+      read. Sleight of hand and quiet feet came with the life, not the training —
+      a wanderer who wants to eat learns to move unnoticed when a situation calls
+      for it.
     starting_skill_bonus:
       skill: finesse
       rank: practiced
     secondary_skill:
-      skill: perform
+      skill: stealth
       rank: novice
       marks: 1
     specialty: >
-      Can assess a crowd's mood, attention, and the best angle of approach within
-      a few moments of observation — and knows when a specific person in that crowd
-      has just stopped paying attention to their belongings.
+      Trained to notice the exact moment a room's attention shifts — the half-second
+      window when a mark stops watching their own back. Knows how to be unremarkable
+      at precisely the moment it matters.
 
   sparks: 3
 
   career_advances: 1  # progression metric — total skill rank advances taken (Novice→Practiced = 1, etc.)
                       # Background starting skill (Finesse Practiced) = 1 advance
-                      # Background Mark on Perform does not count until rank advances
+                      # Background Mark on Stealth does not count until rank advances
 
   facet_level: 0
   rank_advances_this_facet_level: 0

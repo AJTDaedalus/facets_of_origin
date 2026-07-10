@@ -677,10 +677,12 @@ async def _handle_apply_condition(msg: dict, session, session_id: str) -> None:
         })
         return
 
-    # Stacking: second Tier 2 condition → Broken
-    tier2_conditions = {"staggered", "cornered"}
-    tier2_on_char = [c for c in character.conditions if c in tier2_conditions]
-    if condition in tier2_conditions and len(tier2_on_char) >= 1:
+    # Stacking: a second Tier 2 condition of the SAME type escalates to Broken (D5 ledger row 2)
+    if session.ruleset.combat and session.ruleset.combat.conditions.tier2:
+        tier2_ids = {c.id for c in session.ruleset.combat.conditions.tier2}
+    else:
+        tier2_ids = {"staggered", "cornered"}  # fallback
+    if condition in tier2_ids and condition in character.conditions:
         condition = "broken"
 
     if condition and condition not in character.conditions:

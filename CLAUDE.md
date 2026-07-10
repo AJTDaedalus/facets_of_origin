@@ -34,6 +34,7 @@ When adding new information: high-frequency or high-consequence content goes in 
 |---|---|---|
 | Writing PHB examples or vignettes | `references/phb-examples.md` | Character personalities, formatting conventions, ground rules, established scenarios |
 | Choosing a skill/tool for a task | `references/skills-reference.md` | Full skill tables by category with source and usage context |
+| Using World Anvil MCP or WA API | `references/worldanvil-mcp.md` | Working config, common pitfalls, verification steps |
 
 ---
 
@@ -44,6 +45,15 @@ The `research/` directory contains foundational documents that should inform all
 - `research/dice_system_analysis.md` — Synthesis of TTRPG market landscape and psychology of fun/dice/social bonding. Covers: why 2d6 three-tier outcomes are optimal, the Spark system recommendation, market gaps, what competing games do well and poorly, and five open design questions that need resolution before detailed system work begins.
 
 When proposing anything related to dice mechanics, resolution systems, player experience, onboarding, or digital design, check this file first — the recommendations are grounded in academic psychology research and market analysis and should not be overridden without documented reasoning.
+
+## Narrative & Lore Rules
+
+**Iron law:** NEVER invent fictional details — objects, events, characters, relationships, affiliations, backstory — that the user has not explicitly established. When unsure whether something is canon, **ask before introducing it**.
+
+- Treat all user-provided worldbuilding as **authoritative canon**. Do not assume character religions, affiliations, motivations, or backstory details.
+- When the user provides lore corrections, propagate changes to **ALL relevant local files** in the same pass. Do not fix one file and leave others inconsistent.
+- When writing narrative prose or vignettes, only reference objects, props, and setting details that have been **explicitly seeded** in the scene or source material. Do not add atmospheric details that introduce new canonical facts.
+- If a worldbuilding session is starting, **read existing canon files first** before generating any content. Summarize what's established and confirm with the user before making changes.
 
 ## Copyright Policy
 
@@ -85,6 +95,20 @@ Purely narrative changes (vignettes, sidebars, tone) do not require software cha
 **Deferred modules** (Crafting, Economy, Feats, Technology): Do not implement
 until the corresponding PHB chapter is written.
 
+**Quick references are compressions, not paraphrases.** A quick-reference card
+(`mm_manual/MM5_Quick_Reference.md`, `Quick_Start.md`, in-chapter quick-ref
+blocks) may only restate canonical body text in shorter form. It may never
+introduce a rule, exception, or wording the canonical section doesn't already
+state. Any rules change must update body text, every quick ref that touches
+it, `facet.yaml`, and the engine — all in the same commit.
+
+**The simulator may only drive `app/game/combat.py`. It must never
+re-implement a rule.** Combat resolution existed as two independent
+implementations (`websocket.py` and `tools/combat_sim.py`) that silently
+diverged, which invalidated a research corpus of recorded simulation numbers.
+Simulation tooling calls the shared rules module; it does not carry its own
+copy of rule logic.
+
 ## Software Development Ethos
 
 This project uses **test-driven development (TDD)** as its core software practice:
@@ -95,6 +119,11 @@ This project uses **test-driven development (TDD)** as its core software practic
 4. Refactor if needed, keeping all tests green.
 
 Every software change that adds or modifies behaviour must have a corresponding test. New WebSocket handlers, roll modifiers, character fields, and API endpoints all require tests before or alongside the implementation. PRs without tests for new behaviour will not be merged.
+
+**Coverage expectations:**
+- Minimum **3 tests per public function** (happy path, edge case, error handling).
+- When delivering a new module or major feature, test count should be proportional to code size — a 500-line module needs more than 5 tests.
+- After completing implementation, run the full test suite and report the pass/fail count. Do not consider a feature done until all tests pass.
 
 ## Terminology
 
@@ -128,12 +157,19 @@ Key skills for quick reference. **Full tables with all skills, sources, and deta
 | MM/adventure content | `/mimir-dm`, `/npc-generator`, `/panel-patterns` |
 | Consistency checking | `/continuity-check` |
 
+## Git & GitHub
+
+- Always use **`gh` CLI** for pushes and PRs — never raw HTTPS push.
+- Before committing, **review staged files** — never sweep in `.env`, credentials, or secret files. If unsure, show `git status` and the full diff for user approval before committing.
+- Confirm which GitHub account is authenticated (`gh auth status`) before attempting PR operations.
+- Prefer specific `git add <file>` over `git add -A` or `git add .`.
+
 ## Contributing Workflow
 
 ```bash
 git checkout -b feature/FeatureName   # create feature branch
 git commit -m 'Add some feature'       # commit changes
-git push origin feature/FeatureName   # push branch
+git push origin feature/FeatureName   # push branch (use gh CLI)
 # then open a Pull Request on GitHub
 ```
 
@@ -153,3 +189,4 @@ GPLv3 — see `LICENSE.txt`.
 | Choose a skill for a task | `references/skills-reference.md` — full tables by category |
 | Propose new mechanics | `research/dice_system_analysis.md` — 2d6 system rationale, open design questions |
 | Implement a settled mechanic | Software-PHB Sync workflow above + `facets/base/facet.yaml` |
+| Use World Anvil MCP or API | `references/worldanvil-mcp.md` — working config, pitfalls, verification |

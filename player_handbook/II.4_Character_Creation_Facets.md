@@ -70,7 +70,7 @@ You may only advance skills you used this session. You may not save points betwe
 
 **Marks:** Each point spent toward a skill's next rank is called a mark. A skill advances when it accumulates **3 marks**. Marks carry over between sessions — you do not lose partial progress.
 
-> **Example:** Zulnut (Primary Facet: Body) uses Stealth twice this session. She spends 2 points (1 each) and marks Stealth twice. She also used Finesse — 1 more point, 1 more mark. She has 1 point left. Next session, one more mark advances Finesse to Practiced.
+> **Example:** Zulnut (Primary Facet: Body) uses Stealth twice this session. He spends 2 points (1 each) and marks Stealth twice. He also used Finesse — 1 more point, 1 more mark. He has 1 point left. Next session, one more mark advances Finesse to Practiced.
 
 ---
 
@@ -86,7 +86,7 @@ With 5 skills and 3 possible advances each, a fully developed Facet produces 15 
 
 > **Example:** Zulnut advances Combat to Practiced (1 advance), Stealth to Practiced (2), Athletics to Practiced (3), Stealth to Expert (4), Finesse to Practiced (5), Combat to Expert (6). *Facet level 1.* Several sessions later, Athletics to Expert (7), Endurance to Practiced (8), Finesse to Expert (9), Endurance to Expert (10), Stealth to Master (11), Combat to Master (12). *Facet level 2.*
 
-Facet level advances outside your Primary Facet follow the same counting, but those levels do not count toward your Major Advancement threshold (see below).
+Facet level advances outside your Primary Facet follow the same counting, and those levels **do** count toward your Major Advancement threshold (see below) — Major Advancement is earned across every Facet you've invested in, not just your Primary one.
 
 ---
 

@@ -821,8 +821,8 @@ class TestCombatGameplayLoop:
             assert msg["type"] == "react_result"
             assert msg["reaction"] == "absorb"
 
-    def test_tier2_stacking_to_broken(self, client, mm_token, session_with_character):
-        """Two Tier 2 conditions stack to Broken."""
+    def test_tier2_same_type_stacking_to_broken(self, client, mm_token, session_with_character):
+        """D5 row 2: a second Tier 2 condition of the SAME type escalates to Broken."""
         session, _ = session_with_character
         session_id = session["session_id"]
 
@@ -833,10 +833,47 @@ class TestCombatGameplayLoop:
             ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
             msg1 = ws.receive_json()
             assert msg1["condition"] == "staggered"
-            # Apply second T2 → should become broken
-            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "cornered"})
+            # Apply staggered again → should become broken
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
             msg2 = ws.receive_json()
             assert msg2["condition"] == "broken"
+
+    def test_tier2_different_type_does_not_stack_to_broken(self, client, mm_token, session_with_character):
+        """D5 row 2: Staggered and Cornered coexist without escalating to Broken."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
+            msg1 = ws.receive_json()
+            assert msg1["condition"] == "staggered"
+            # Apply a different Tier 2 → both present, no escalation
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "cornered"})
+            msg2 = ws.receive_json()
+            assert msg2["condition"] == "cornered"
+            assert "staggered" in msg2["all_conditions"]
+            assert "cornered" in msg2["all_conditions"]
+            assert "broken" not in msg2["all_conditions"]
+
+    def test_tier2_third_application_of_present_type_is_broken(self, client, mm_token, session_with_character):
+        """D5 row 2: a third application of an already-present Tier 2 type stays Broken."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
+            ws.receive_json()
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
+            msg2 = ws.receive_json()
+            assert msg2["condition"] == "broken"
+            # Third application of the same type — still resolves to Broken
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
+            msg3 = ws.receive_json()
+            assert msg3["condition"] == "broken"
 
     def test_end_exchange_clears_tier1(self, client, mm_token, session_with_character):
         """End-of-exchange clears all Tier 1 conditions."""

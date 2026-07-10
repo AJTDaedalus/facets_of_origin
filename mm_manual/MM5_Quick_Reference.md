@@ -20,7 +20,7 @@
 
 | Rating | Label | Modifier |
 |---|---|---|
-| 1 | Poor | -1 |
+| 1 | Weak | -1 |
 | 2 | Average | +0 |
 | 3 | Strong | +1 |
 
@@ -102,7 +102,7 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 
 | Action | Roll | Effect |
 |---|---|---|
-| **Strike** | 2d6 + Strength + Combat | Apply Condition per outcome tier |
+| **Strike** | 2d6 + weapon attribute + Combat (melee/unarmed) or Finesse (ranged) | Apply Condition per outcome tier |
 | **Maneuver** | 2d6 + relevant skill | 10+: target's next roll Easy. 7--9: Standard. 6-: backfire |
 | **Support** | 2d6 + relevant skill | Grant ally +1d6 drop lowest OR difficulty one step easier on next roll |
 | **Magic** | 2d6 + attribute + skill | Domain + Intent + Scope; Conditions follow Strike table |
@@ -128,7 +128,7 @@ Default Strike difficulty: **Standard**. Adjust for posture, conditions, armor, 
 | Reaction | Cost | Roll | 10+ | 7--9 | 6- |
 |---|---|---|---|---|---|
 | **Dodge** | 1 End | Dexterity | Avoid entirely | Downgrade 1 tier | Full hit |
-| **Parry** | 1 End | Str + Combat | Deflect; attacker takes T1 | Downgrade 1 tier | Full hit |
+| **Parry** | 1 End | Weapon attribute + Combat | Avoid entirely | Downgrade 1 tier | Full hit |
 | **Absorb** | 0 End | No roll | -- | -- | Take hit at full tier |
 | **Intercept** | 2 End | -- | Protect ally, then Dodge/Parry | -- | -- |
 
@@ -169,7 +169,7 @@ At **0 Endurance**: Absorb only.
 | **2** | Cornered | Cannot take Aggressive posture | Persists until treated |
 | **3** | Broken | Out of the fight | End of scene |
 
-**Stacking:** 2nd Tier 2 Condition (same or different) = **Broken**.
+**Stacking:** 2nd Tier 2 Condition **of the same type** = **Broken**. (Staggered + Cornered coexist without escalating.)
 
 ---
 
@@ -283,7 +283,7 @@ TR = offense_value + durability_value + armor_bonus + technique_bonus
 ## Common Rulings
 
 - **Unnarrated details:** Players cannot act on details the MM has not described.
-- **Contested roll (PvP):** Both sides roll; higher total wins. Ties go to defender.
+- **Contested roll (PvP):** Both sides roll; higher total wins. On a tie, both achieve partial success.
 - **Contested roll (vs NPC):** Only the player rolls. NPC capability sets difficulty.
 - **"Can I try again?":** Only if the fiction changes -- new approach, new info, or time passes.
 - **When not to roll:** Only roll when outcome is uncertain, stakes matter, and both success and failure move the story.

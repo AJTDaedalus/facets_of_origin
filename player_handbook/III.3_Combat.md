@@ -34,8 +34,8 @@ The goal is a combat system where every participant is engaged every moment, whe
 A character with no particular investment in Constitution or the Endurance skill has a pool of 4. A heavily invested character tops out at 8. The range in practice is 3 (fragile but fast) to 8 (a deliberate, durable choice).
 
 > **Example pools:**
-> Mordai — Constitution 3 (+1), Endurance Practiced (+1): **6 Endurance**
-> Zahna — Constitution 2 (+0), Endurance Novice (+0): **4 Endurance**
+> Mordai — Constitution 3 (+1), Endurance Novice (+0): **5 Endurance**
+> Zahna — Constitution 1 (−1), Endurance Novice (+0): **3 Endurance**
 > Zulnut — Constitution 1 (−1), Endurance Novice (+0): **3 Endurance**
 
 ### Running Out of Endurance
@@ -107,7 +107,7 @@ On your action in an exchange, you may do one of the following. You may only tak
 
 The foundational offensive action. You bring force to bear on a target — weapon, fist, magic, momentum.
 
-**Roll:** `2d6 + Strength modifier + Combat skill rank modifier`
+**Roll:** `2d6 + weapon attribute + relevant skill rank modifier`. Your weapon's category sets the attribute (Chapter IV.1); the skill is **Combat** for melee and unarmed Strikes, **Finesse** for ranged ones.
 
 **Difficulty** is Standard by default. The MM adjusts based on the situation: a Named NPC or Boss in Defensive Posture, or with strong Constitution, may push it to Hard. A Staggered or Cornered opponent may make it Easy. When in doubt, Standard. (Named NPCs and Bosses declare Postures as described in the Postures section. For Mooks, the MM sets difficulty by situation: Standard by default, Easy if distracted or exposed, Hard if armored and alert.)
 
@@ -137,7 +137,7 @@ You use your action to reshape the fight rather than deal damage directly. Force
 
 **Roll:** The relevant skill for the action — Athletics to bull rush someone into a bad position, Finesse to disarm, Stealth to vanish and reposition, an appropriate attribute for improvised environmental play.
 
-A successful Maneuver does not apply Conditions directly. Instead, it shifts difficulty: on a 10+, the target's next roll is Easy (or the party's next roll against them is Easy). On a 7–9, the Maneuver works, but the MM describes what it costs — a moment of exposure, a position ceded, an opening the opponent seizes; the target's next roll is Standard rather than Easy. On a 6−, the attempt backfires.
+A successful Maneuver does not apply Conditions directly. Instead, it shifts difficulty: on a 10+, rolls **against** the target are Easy until the situation changes. On a 7–9, the Maneuver works, but the MM describes what it costs — a moment of exposure, a position ceded, an opening the opponent seizes; rolls against the target stay at Standard rather than dropping to Easy. On a 6−, the attempt backfires.
 
 Maneuvering well opens fights. It is the action for characters who think geometrically about combat, and for anyone helping a hard-hitting ally land the blow that matters.
 
@@ -186,7 +186,7 @@ You move — out, aside, low — using speed and awareness to take yourself out 
 
 You meet force with force — interposing weapon, shield, or forearm to deflect rather than avoid.
 
-**Roll:** `2d6 + Strength modifier + Combat skill rank modifier`
+**Roll:** `2d6 + weapon attribute + Combat skill rank modifier`. Parry is a melee reaction — your weapon's category sets the attribute, same as a Strike (Chapter IV.1).
 
 Outcome tiers are the same as Dodge, flavored as deflection rather than avoidance.
 
@@ -208,7 +208,7 @@ You do not react. You take the hit, accept the Condition, and remain composed. A
 
 You step in front of an attack targeting an ally. You take the incoming action instead of them, then roll Dodge or Parry as normal.
 
-Intercepting is how you protect someone who cannot protect themselves — a Spent ally, a mage mid-cast, someone whose low Endurance pool is about to become a serious problem.
+Intercepting is how you protect someone who cannot protect themselves — a mage mid-cast, someone whose low Endurance pool is about to become a serious problem.
 
 You may Intercept **one incoming action per exchange**. Only one character may Intercept a given action — if two try to Intercept the same attack, the protected ally decides who steps in. You must be aware of the incoming action and physically able to reach the ally before declaring.
 
@@ -453,7 +453,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Mordai:** "Parry."
 
-**MM:** "1 Endurance — you're at 5. Roll Combat."
+**MM:** "1 Endurance — you're at 4. Roll Combat."
 
 → Mordai rolls **2d6 + Strength (3 → +1) + Combat Practiced (+1)** and gets a **9**. Partial success.
 
@@ -519,7 +519,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **MM:** "The guardian is Measured. It is learning you. Mordai — left joint, Easy difficulty from Zulnut's read. Roll Combat."
 
-→ Mordai Presses: spends 1 Endurance (now at 4) and rolls **3d6 + Strength (3 → +1) + Combat Practiced (+1)** at Easy difficulty (+1), drops the lowest die, and gets a **13**. Full success.
+→ Mordai Presses: spends 1 Endurance (now at 3) and rolls **3d6 + Strength (3 → +1) + Combat Practiced (+1)** at Easy difficulty (+1), drops the lowest die, and gets a **13**. Full success.
 
 **MM:** "The left joint goes the way the right one went, but worse. There is a grinding sound that the room holds for a moment, and then the guardian's movement pattern simply — stops. Not falls. Stops. It is standing. It is looking at you. It is **Staggered** again — which means a second Staggered on top of an existing Staggered."
 
@@ -533,7 +533,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 ---
 
-**MM:** "The room is quiet. The guardian is kneeling. It is still watching the door — your door, the one you came in through. Mordai, you are at 4 Endurance. Zahna, the glyph is on the floor."
+**MM:** "The room is quiet. The guardian is kneeling. It is still watching the door — your door, the one you came in through. Mordai, you are at 3 Endurance. Zahna, the glyph is on the floor."
 
 **Zahna:** "I inspect the glyph. Can I refine the patrol boundary now that the fight is over?"
 
@@ -594,7 +594,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 | Reaction | Cost | Roll | Effect |
 |---|---|---|---|
 | Dodge | 1 Endurance | Dexterity | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
-| Parry | 1 Endurance | Strength + Combat | 10+: deflect and counter (attacker takes T1). 7-9: reduce by one tier. 6-: full hit. |
+| Parry | 1 Endurance | Weapon attribute + Combat | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
 | Absorb | 0 Endurance | No roll | Take the hit at full tier. Always available. |
 | Intercept | 2 Endurance | — | Take a hit meant for an ally. |
 
@@ -614,7 +614,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 | **2** | Staggered (-1 offense), Cornered (no Aggressive posture) | Treated |
 | **3** | Broken (out of the fight) | End of scene |
 
-Two Tier 2 conditions = Broken.
+A second Tier 2 condition of the same type = Broken. (Staggered + Cornered coexist.)
 
 ### Enemy Attacks
 
