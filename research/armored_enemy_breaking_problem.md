@@ -1,7 +1,38 @@
 # Design Issue: Armored Enemy Breaking Condition
 
 **Discovered:** 2026-03-05, during Veteran Soldier simulation design
-**Status:** Open — needs ruling before armored Named NPC sims are authoritative
+**Status:** **RESOLVED (2026-07-10, task A6)** — dissolved, not solved. See below.
+
+---
+
+## Resolution (v0.3 ruleset revision, DESIGN §4.1 / §4.3)
+
+The problem as posed — "armored enemies can never accumulate a Tier 2
+condition, so they can never Break" — no longer has a subject. Under D1
+(`DESIGN_v0.3_ruleset_revision.md` §4.1), enemies no longer have a
+Condition kill-track at all: durability is a Resolve pool, depleted
+directly by Strike outcome tier (2 / 1 / 0), and enemy Conditions are now
+narrative *riders* that never escalate to Broken. Enemy armor is a flat
+Resolve bonus (light +1, heavy +2), not a Condition downgrade. There is no
+loop to break out of.
+
+The 0-Endurance house rule below (Option A, `is_zero_end_absorb`) — the
+patch this doc originally recommended — is retired outright (§4.3), not
+carried into `combat.py`. It existed only in `tools/combat_sim.py` and was
+never adopted into `facet.yaml`, the engine, or the PHB. Under D1 it has
+no enemy-side purpose left to serve; under D2 (armored PCs are broken by
+a per-scene downgrade *budget*, not by an unlimited gate) the player-side
+motivation for the escalation is gone too.
+
+The player-side mirror of this bug — a light-armored PC could similarly
+never be Broken by a single boss's Tier 2 attacks — is fixed separately
+by task A5's per-scene `armor_downgrades_remaining` budget, not by
+anything in this document.
+
+**Everything below this line is historical record of the original
+analysis and is superseded.**
+
+---
 
 ---
 

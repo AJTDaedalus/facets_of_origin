@@ -8,7 +8,7 @@ The system has three layers:
 
 1. **Enemy stat blocks** — a minimal set of numbers sufficient to run any enemy in the full exchange structure
 2. **Threat Rating (TR)** — a single number summarizing how dangerous one enemy is
-3. **Encounter Budget** — a comparison of total enemy Threat against party strength, giving you a difficulty read before you run the scene
+3. **The Encounter Recipe Table** — simulation-validated rosters mapped to difficulty; this is the tool you actually build encounters from. (A rough TR budget is also provided, but it is a loose ordering check, not a difficulty predictor — see below.)
 
 ---
 
@@ -21,21 +21,22 @@ Enemy stat blocks are intentionally minimal. You do not need everything a player
 ```
 Name/Type
 Tier: Mook | Named | Boss
-Endurance: [number]
+Resolve: [number]  — the durability pool Strikes deplete; Named 3–4, Boss ~8; Mooks have none
 Attack: [roll modifier]  — e.g. +2 (Strength +1, Combat Practiced +1)
 Defense: [roll modifier] — same modifier used for Parry; Dodge uses Dex modifier if different
-Armor: None | Light | Heavy
-Conditions: [current condition track — blank at start]
+Armor: None | Light | Heavy  — adds a flat bonus to Resolve (light +1, heavy +2)
 Techniques: [list, if any]
 Special: [phase changes, triggers, or narrative rules — Boss only]
 TR: [Threat Rating — calculated below]
 ```
 
+An enemy has no Condition track of its own. A PC's Strike depletes Resolve — 2 on a full success (10+), 1 on a partial (7–9) — and the enemy is defeated when Resolve reaches 0. On a full success the attacker may *additionally* hang one rider Condition on the enemy; a Tier 2 rider (Staggered/Cornered) leaves it Easy to Strike until cleared, but riders never defeat an enemy on their own. A **Mook** has no Resolve at all: any success removes it (an armored Mook needs a full success).
+
 **Named NPC example** — City Watch Sergeant:
 ```
 City Watch Sergeant
 Tier: Named
-Endurance: 6
+Resolve: 3
 Attack: +2 (Strength +1, Combat Practiced +1)
 Defense: +2
 Armor: Light
@@ -47,7 +48,7 @@ TR: 8
 ```
 Harbor Thug
 Tier: Mook
-Endurance: — (Mooks have no pool; one Strike removes them)
+Resolve: — (Mooks have no pool; one Strike removes them)
 Attack: +0 (Strength +0, Combat Novice +0)
 Defense: +0
 Armor: None
@@ -58,14 +59,14 @@ TR: 1
 ```
 Archive Guardian
 Tier: Boss
-Endurance: 10
+Resolve: 8 (effective 10 with heavy armor)
 Attack: +3 (Strength +2, Combat Expert +2) — strikes with iron weight, not technique
 Defense: +1 (Dexterity −1, Combat Practiced +1... partially damaged)
 Armor: Heavy
-Techniques: —
-Special: Phase change — when first Broken, enters Reduced Mode (Attack drops to +1,
-         but ignores Tier 1 Conditions entirely — it does not feel them)
-TR: 16
+Techniques: phase_change, tier1_immunity
+Special: Phase change — when Resolve drops to 2 or below, enters Reduced Mode
+         (Attack drops to +1, but ignores Tier 1 Conditions entirely — it does not feel them)
+TR: 17
 ```
 
 ---
@@ -92,17 +93,15 @@ TR = offense + durability + armor_bonus + technique_bonus
 | +3 | 5 |
 | +4 | 6 |
 
-**Durability** — based on enemy tier and Endurance pool:
+**Durability** — an enemy's base Resolve (the armor bonus below is added separately):
 
 | Enemy Type | Durability Value |
 |---|---|
-| Mook (no Endurance, one Strike) | 0 |
-| Named NPC, Endurance 3–4 | 2 |
-| Named NPC, Endurance 5–6 | 3 |
-| Named NPC, Endurance 7–8 | 4 |
-| Boss, Endurance 9–10 | 5 |
-| Boss, Endurance 11–12 | 6 |
-| Boss, Endurance 13+ | 7 |
+| Mook (no Resolve, one Strike) | 0 |
+| Named NPC | its base Resolve (typically 3–4) |
+| Boss | its base Resolve (typically ~8) |
+
+Durability is simply the enemy's base Resolve — the pool a party's Strikes deplete. A Mook has none, so its durability is 0.
 
 **Armor bonus:**
 
@@ -112,14 +111,7 @@ TR = offense + durability + armor_bonus + technique_bonus
 | Light | 1 |
 | Heavy | 2 |
 
-**Technique bonus** — for each Technique or special ability the enemy has that materially affects the exchange structure:
-
-| Technique type | Bonus |
-|---|---|
-| One relevant Technique (e.g. Weapon Mastery) | 1 |
-| Two or more Techniques | 2 |
-| Boss phase change | 2 |
-| Exceptional special (area attacks, regeneration, immune to Tier 1) | 3 |
+**Technique bonus** — **+1 for each Technique or special ability** listed on the enemy (a phase change, a Weapon Mastery, an area attack, and the like each count as one). The bonus is simply the number of entries in the enemy's Techniques list, so an enemy with two Techniques adds +2. Keep the list to abilities that materially affect the exchange — don't pad it with flavor.
 
 ### TR Reference Examples
 
@@ -128,8 +120,8 @@ TR = offense + durability + armor_bonus + technique_bonus
 | Basic Mook (unskilled, no armor) | 1 | Offense 2, Durability 0 — minimum 1 |
 | Skilled Mook (Combat Practiced, light armor) | 4 | Offense 3, Durability 0, Armor 1 |
 | City Watch Sergeant | 8 | Offense 4, Durability 3, Armor 1 |
-| Veteran Soldier | 10 | Offense 5, Durability 3, Armor 2 |
-| The Archive Guardian | 16 | Offense 5, Durability 5, Armor 2, Special 4 |
+| Veteran Soldier | 10 | Offense 5, Durability 4 (Resolve 4), Armor 1 |
+| The Archive Guardian | 17 | Offense 5, Durability 8 (Resolve 8), Armor 2, Techniques 2 |
 
 > **TR minimums by tier:**
 > - Mook: TR 1 (even the most incompetent attacker occupies space and splits attention)
@@ -140,7 +132,9 @@ TR = offense + durability + armor_bonus + technique_bonus
 
 ## Encounter Budget
 
-The **Encounter Budget** is how you calibrate an encounter's difficulty before running it.
+**Actor count drives difficulty, not total TR.** This is the single most important thing to know about building encounters in this system, and it is the opposite of what a TR-summing budget would tell you. Simulation (`research/simulation_log.md` Series 9) is unambiguous: **the number of Named/Boss enemies acting at once** is the primary difficulty variable. One Named or one Boss is trivial for a fresh party no matter how high its TR — the party simply concentrates fire and removes it. Two of them are still nearly a walkover, and even three on their own is a near-clean win (~96%). **A real fight begins once three simultaneously-acting Named/Boss enemies are backed by a Mook or two** — four Named is a coin-flip (Hard), five is a near-certain loss. Mook swarms, meanwhile, never produce genuine danger at any size a table would field.
+
+Because of this, **the calibrated tool you should actually build from is the [Encounter Recipe Table](#encounter-recipe-table) below** — concrete, simulation-validated rosters mapped to difficulty. The TR budget that follows is kept only as a rough ordering sanity check for simple rosters. It is **explicitly non-predictive for encounters with 3+ Named/Boss enemies and for Mook swarms** — use the Recipe Table for those.
 
 ### Party Strength
 
@@ -148,41 +142,29 @@ Party Strength is the sum of all participating characters' `career_advances`.
 
 > *Zahna, Mordai, and Zulnut each have `career_advances: 1`. Party Strength = 3.*
 
-### Encounter Budget by Difficulty
+### The TR budget (a rough ordering check only)
 
-| Difficulty | Win Rate Target | Total Enemy TR | Description |
+| Difficulty | Intended feel | Total Enemy TR | Description |
 |---|---|---|---|
-| **Skirmish** | ~95% | Party Strength × 1 | Party should win cleanly; resources mostly intact |
-| **Standard** | ~75% | Party Strength × 2 | Genuine danger; someone likely takes a Tier 2 Condition |
-| **Hard** | ~50% | Party Strength × 3 | A coin flip; someone likely goes Broken; requires good decisions |
-| **Deadly** | ~25% | Party Strength × 4 | Party is expected to lose the straight fight; winning requires cleverness or exceptional luck |
+| **Skirmish** | Clean win | Party Strength × 1 | Party should win cleanly; resources mostly intact |
+| **Standard** | Genuine danger | Party Strength × 2 | A real fight; someone likely takes a Tier 2 Condition |
+| **Hard** | Coin flip | Party Strength × 3 | Someone likely goes Broken; requires good decisions |
+| **Deadly** | Expected loss | Party Strength × 4 | Party is expected to lose the straight fight; winning requires cleverness or exceptional luck |
 
-The win rate targets are the design intent. The multipliers (×1/×2/×3/×4) are a working estimate. See `research/simulation_log.md` for simulation results and calibration notes. If playtesting reveals the actual win rates are systematically off, adjust the multipliers accordingly and record what changed.
-
-> **Calibration note (2026-03-05, PS 3 party, Mook-only swarms):**
-> Simulation against pure Mook swarms suggests the ×1.25 action economy multiplier (4–6 enemies) may slightly overstate difficulty — five chickens produced 100% win rate despite sitting at the effective TR budget for Standard. The ×1.5 multiplier (7+ enemies) appears better-calibrated: seven chickens produced approximately 75% win rate, matching the Standard difficulty target. Provisional recommendation: for **Mook-only swarms** of 4–6, consider ×1.1 as a working estimate instead of ×1.25. Named NPC and mixed encounters are unaffected.
-
-> **Example — fresh party (Party Strength 3):**
->
-> - Skirmish (≤ TR 3): Two basic Mooks — party wins with Endurance to spare.
-> - Standard (≤ TR 6): Four Mooks, or one Named NPC — a real fight, outcome not guaranteed.
-> - Hard (≤ TR 9): One Named NPC with Mook support (e.g. Sergeant + two Harbor Thugs, TR 8+2=10, borderline) — expect someone Broken.
-> - Deadly (≤ TR 12): The Archive Guardian at TR 16 is above even the Deadly budget for this party — and that is intentional; see *Running Asymmetric Encounters* below.
+The "intended feel" column is the *design intent* for each difficulty. The multipliers (×1/×2/×3/×4) are **not** validated to produce those feels — they are a loose "bigger number is probably harder" ordering aid for simple/solo/Mook rosters. Any earlier presentation of these as validated "~95/75/50/25%" win rates was withdrawn: simulation showed no set of multipliers can reproduce the real (actor-count-gated) difficulty curve. **Do not derive a multi-Named/Boss encounter from this table — it will over-count badly (see the example below). Use the Recipe Table.**
 
 ### Action Economy Adjustment
 
-Raw TR comparison doesn't account for one important factor: **action economy**. More enemies mean more actions per exchange, which scales faster than raw TR suggests.
-
-Apply these modifiers to the enemy side's effective TR when assessing difficulty:
+Raw TR comparison doesn't account for **action economy** — more enemies mean more actions per exchange. The modifiers below are the same kind of rough ordering aid as the budget itself, and carry the same caveat: they capture the *direction* (more actors, more pressure) but not the sharp actor-count threshold the simulator measured.
 
 | Enemy Configuration | TR Multiplier | Notes |
 |---|---|---|
-| Single enemy | × 0.75 | Solo enemies underperform their TR — the party concentrates fire |
+| Single enemy | × 0.75 | Solo enemies badly underperform their TR — the party concentrates fire and removes them |
 | 2–3 enemies | × 1.0 | Baseline |
-| 4–6 enemies | × 1.25 | Action pressure compounds; some party members face forced Absorbs. For Mook-only swarms, provisional ×1.1 may be more accurate — see calibration note above |
-| 7+ enemies | × 1.5 | Swarming creates genuine tactical overload; validated at ~75% win rate for PS 3 party vs 7 Mooks |
+| 4–6 enemies | × 1.25 | Action pressure compounds (Mook-only swarms: ×1.1) |
+| 7+ enemies | × 1.5 | Swarming creates tactical overload |
 
-> **Example:** Three City Watch Sergeants (TR 8 each = 24 total), adjusted for 3 enemies: 24 × 1.0 = **24 effective TR**. Against a Party Strength of 3, that is eight times party strength — well above Deadly (budget 12). This party would need to be very creative, or very lucky, or both.
+> **Example — why the budget is only a rough check.** Three City Watch Sergeants (TR 8 each = 24 total, ×1.0 for three enemies = **24 effective TR**) sit at eight times a Party Strength of 3 — the raw budget screams "well above Deadly." Simulation says otherwise: three TR-8 Named enemies against a fresh PS-3 party is a near-clean win (~96% party win) — a Standard fight only *once you add a Mook*. The budget over-counted by more than a full difficulty band, because what it can't see is that three Named is barely the threshold at which difficulty becomes *tunable* at all — you climb from there by adding actors. This is exactly why the Recipe Table, not the budget, is the tool you build from.
 
 ---
 
@@ -190,7 +172,7 @@ Apply these modifiers to the enemy side's effective TR when assessing difficulty
 
 ### Mooks
 
-Mooks need only three things: an attack modifier, a fictional description, and a number. They do not have Endurance. They do not have individual Condition tracks. One Strike at any tier removes them.
+Mooks need only three things: an attack modifier, a fictional description, and a number. They do not have Resolve. They do not have individual Condition tracks. Any successful Strike (7+) removes one — an armored Mook takes a full success (10+).
 
 **What makes a Mook dangerous is volume.** Three Mooks attacking simultaneously each demand a reaction decision. A party with limited Endurance that chooses to Absorb all Mook attacks will arrive at the Named NPC already worn down.
 
@@ -209,37 +191,40 @@ You rarely need more than two or three Mook types per setting. Players will not 
 Named NPCs use the full exchange structure. Build them the same way you'd build a player character — Primary Facet, relevant attributes, a skill or two — but you only need the numbers you'll actually use at the table.
 
 **The short list you actually need:**
-- Endurance pool
+- Resolve (3–4 for a Named NPC; armor adds to it)
 - Attack modifier (best offensive roll modifier)
 - Defense modifier (what they use to Parry; or note if they Dodge instead)
 - Armor
 - One or two Techniques if they should feel distinct
 
-**Resist over-building.** A Named NPC who lasts two exchanges and dies memorably is better than one who lasts six exchanges and becomes a slog. Use Hard difficulty against them to make fights meaningful; don't pad their Endurance to make them last.
+**Resist over-building.** A Named NPC who lasts two exchanges and dies memorably is better than one who lasts six exchanges and becomes a slog. Use Hard difficulty against them to make fights meaningful; don't pad their Resolve to make them last.
 
 ---
 
 ### Bosses
 
-Bosses should be built to last *and* to change. A Boss that simply has more Endurance is a longer fight, not a better one. A Boss with a phase change is a fight with a second act.
+Bosses should be built to last *and* to change. A Boss that simply has more Resolve is a longer fight, not a better one. A Boss with a phase change is a fight with a second act.
 
-**Phase changes** are narrative triggers — usually when the Boss hits a specific Condition or has their Endurance reduced past a threshold — that shift something about how the fight works. Not necessarily harder; sometimes stranger.
+**Phase changes** are narrative triggers — keyed to a `resolve_threshold` on the Boss's stat block, crossed when a Strike depletes their Resolve past that point — that shift something about how the fight works. Not necessarily harder; sometimes stranger.
 
-> *The Archive Guardian's phase change: when first Broken, it enters Reduced Mode. Its attack drops. But it begins ignoring Tier 1 Conditions entirely — not because it's powerful, but because the thing that was interpreting sensory feedback has shut down. It's running on something else now. What that is, the party doesn't know.*
+> *The Archive Guardian's phase change: when its Resolve drops to 2 or below, it enters Reduced Mode. Its attack drops. But it begins ignoring Tier 1 Conditions entirely — not because it's powerful, but because the thing that was interpreting sensory feedback has shut down. It's running on something else now. What that is, the party doesn't know.*
 
-**Useful phase change patterns:**
-- **Reveal:** The Boss's true capability or nature becomes visible (a hidden second attack, a domain that was being held in reserve)
-- **Restriction:** The Boss loses an option that made them dangerous, but gains a different kind of pressure
-- **Environment shift:** The Boss does something to the space — floods the room, collapses the floor, draws Mooks in — that changes the tactical situation entirely
-- **Negotiation window:** The phase change is the Boss's breaking point; if the party reads this and acts, the fight can end without anyone going Broken
+**What a phase change may actually do.** A phase must change something that is live *right now*, in the exchange the party is fighting through — a piece of the enemy's runtime state, not a number that was already spent. Four levers do this, and they are the whole toolbox:
 
-Phase changes should feel like story beats, not just mechanical resets. The fiction should change, not just the stat block.
+- **Raise its danger.** The Boss's attack grows — a higher incoming Condition tier, or a more aggressive posture. It hits harder, or its Strikes are harder to react to. ("It stops holding back.")
+- **Grant or revoke a Special.** The Boss gains or loses a standing rule. The Archive Guardian's Reduced Mode is exactly this: it *starts ignoring Tier 1 Conditions.* A held-in-reserve domain that switches on, a vulnerability that opens, an immunity that drops — all the same lever.
+- **Second wind.** The Boss adds Resolve — a genuine durability spike the party can *see*, because it moves the same bar they've been grinding down. Use it sparingly; it is the honest version of "the fight isn't over."
+- **Change the space or the target.** The Boss floods the room, collapses the floor, pulls Mooks in, or fixes on a new PC. This is MM-narrated — the engine doesn't track it — but it changes the tactical picture as much as any stat.
+
+**What a phase change may *not* do: crack its own armor.** Do not write a phase as "its armor falls away" or "it trades defense for offense." Under our rules armor is a flat, one-time bonus baked into the Boss's starting Resolve pool the moment the fight begins (see *Armor*, above) — there is no armor value sitting on the stat block mid-fight for a phase to reduce. A "the plating cracks, now it's vulnerable" phase looks evocative and does *nothing*: the pool it would have drained was already spent into the starting number. If you want a Boss to get more fragile, that is not a phase — it is simply a lower Resolve. If you want a phase to raise the stakes, use one of the four levers above.
+
+Phase changes should feel like story beats, not just mechanical resets. The fiction should change *and* something the party can act on should change with it — never the fiction alone dressed over a stat that can't move.
 
 ---
 
 ## Running Asymmetric Encounters
 
-Sometimes an encounter is designed to be asymmetric — the party cannot win by hitting things until they stop moving. The Archive Guardian encounter from Chapter III.3 is an example: at TR 16 against a Party Strength of 3, it is a Deadly encounter on paper, but it was never intended as a straight fight. Zahna's glyph, Zulnut's structural read, and the specific weak joint Mordai exploited were all intended paths around the raw numbers.
+Sometimes an encounter is designed to be asymmetric — the party cannot win by hitting things until they stop moving. The Archive Guardian encounter from Chapter III.3 is an example: at TR 17 against a Party Strength of 3, it is a Deadly encounter on paper, but it was never intended as a straight fight. Zahna's glyph, Zulnut's structural read, and the specific weak joint Mordai exploited were all intended paths around the raw numbers.
 
 **Design asymmetric encounters deliberately:**
 - Give the party something to notice (an environmental element, a phase change trigger, a behavioral rule)
@@ -262,7 +247,7 @@ name: City Watch Sergeant
 
 enemy:
   tier: named
-  endurance: 6
+  resolve: 3              # base durability pool; armor adds to it in play
   attack_modifier: 2      # Strength +1, Combat Practiced +1
   defense_modifier: 2     # same roll for Parry
   armor: light
@@ -277,7 +262,22 @@ enemy:
     methodically — not inspired, but very hard to rattle.
 ```
 
-For Mooks, the format simplifies further:
+The durability field is `resolve`. (Older files that still use `endurance` load
+with a deprecation warning — they are mapped to a `resolve` value automatically
+— but write `resolve` in anything new.) A **Boss** adds a `phases` block: each
+phase has a `resolve_threshold` and a `description`, and crossing that threshold
+as Resolve is depleted triggers the phase in play. For example, the Archive
+Guardian's:
+
+```yaml
+  phases:
+    - resolve_threshold: 2
+      description: >
+        Reduced Mode. Its attack drops, but it stops registering Tier 1
+        Conditions entirely.
+```
+
+For Mooks, the format simplifies further — a Mook has no `resolve` field at all:
 
 ```yaml
 fof_version: '0.1'
@@ -303,59 +303,66 @@ enemy:
 ```
 1. Establish party career_advances total → Party Strength
 2. Choose difficulty: Skirmish / Standard / Hard / Deadly
-3. Calculate enemy TR budget: Party Strength × difficulty multiplier
-4. Build enemy roster: mix of Mooks, Named NPCs, and (rarely) a Boss
-5. Apply action economy multiplier if 4+ or 7+ enemies
-6. Adjust for asymmetric design if the encounter has a clever solution path
+3. Look up the roster in the Encounter Recipe Table (below) — this is the build step
+4. Reflavor the roster to fit the story (numbers stay, fiction changes)
+5. Add one lateral solution / asymmetric hook if the fight has a clever path
 
-TR Formula:
+Actor-count rule of thumb (PS 3 fresh party):
+  0–3 Named/Boss ........ clean win at any TR (3 Named ~96%)
+  3 Named + 1 Mook ...... Standard (first real fight)
+  +1 Mook each step ..... Standard → Hard → Deadly (1/2/3 Mooks)
+  4 Named + 1 Mook ...... also Deadly
+  Mook swarms alone ..... only ever a Skirmish
+
+TR Formula (for building one enemy):
   TR = offense_value + durability_value + armor_bonus + technique_bonus
 
-Encounter Budget:
-  Skirmish = Party Strength × 1
-  Standard = Party Strength × 2
-  Hard     = Party Strength × 3
-  Deadly   = Party Strength × 4
-
-Action Economy:
-  Solo enemy      × 0.75
-  2–3 enemies     × 1.0
-  4–6 enemies     × 1.25
-  7+ enemies      × 1.5
+Rough TR budget (ordering check only — NOT a difficulty predictor;
+use the Recipe Table, especially for 3+ Named/Boss or Mook swarms):
+  Skirmish = Party Strength × 1     Solo enemy   × 0.75
+  Standard = Party Strength × 2     2–3 enemies  × 1.0
+  Hard     = Party Strength × 3     4–6 enemies  × 1.25
+  Deadly   = Party Strength × 4     7+ enemies   × 1.5
 ```
 
 ---
 
 ## Encounter Recipe Table
 
-The table below maps party size and desired difficulty to concrete enemy compositions. These are validated by automated simulation (200 iterations each, seed 42).
+This is the tool you build encounters from. It maps difficulty to concrete enemy compositions that automated simulation has *measured* landing in the intended band — not derived from TR arithmetic, which (as shown above) mis-predicts multi-enemy fights.
 
 **How to use:** Find your party's column. Pick the difficulty row. Use the suggested enemy composition. Adjust flavor (Mooks become cultists, Named becomes a captain, Boss becomes a dragon) without changing the mechanical profile.
 
 ### Party Strength 3 (3 fresh characters, 1 career advance each)
 
-| Difficulty | Win Rate Target | Suggested Composition | Sim Win Rate |
+Validated in `research/simulation_log.md` Series 9 Part D (200 iterations per seed, seeds 1/2/3; the Sim Win Rate column lists all three seeds).
+
+| Difficulty | Win Rate Target | Suggested Composition | Sim Win Rate (seeds 1/2/3) |
 |------------|----------------|-----------------------|-------------|
-| **Skirmish** | 90–100% | 3–5 Mooks | 100% |
-| **Standard** | 70–85% | 1 Named (TR 12) solo, or 1 Named (TR 8) + 5 Mooks | 78–86% |
-| **Hard** | 40–60% | 1 Boss (TR 12–16) solo | 55–65% |
-| **Deadly** | 15–30% | 2 Named (TR 8), or 1 Boss + many Mooks | 21% |
+| **Skirmish** | 85–100% | 3–7 Mooks | 100% / 100% / 100% |
+| **Standard** | 65–85% | 3 Named (TR 8) + 1 Mook | 76% / 74.5% / 80% |
+| **Hard** | 40–60% | 3 Named (TR 8) + 2 Mooks | 47.5% / 48% / 47% |
+| **Deadly** | 15–35% | 3 Named (TR 8) + 3 Mooks, or 4 Named (TR 8) + 1 Mook | 20% / 20% / 22.5% · 20% / 16.5% / 21% |
+
+Note what these rosters have in common and what a TR budget would never tell you: **the Standard-through-Deadly ladder is built by adding actors, not by raising TR.** The core is three TR-8 Named in every band; you climb the ladder by adding a single throwaway Mook at a time — one Mook is Standard, two is Hard, three is Deadly. (Swapping that third Mook for a fourth Named, then trimming a Mook, lands the same Deadly window — the "upgrade a throwaway to a real threat" reading.) Per-enemy TR is a fine-tuning knob *after* you've set the actor count — 3× TR-10 Named is far harder than 3× TR-8 — but actor count is the dial you reach for first.
 
 ### Party Strength 4 (4 PCs or 3 advanced PCs)
 
-| Difficulty | Win Rate Target | Suggested Composition |
+> **Not yet simulation-validated.** Series 9 measured the PS-3 party only. The compositions below are *un-simulated extrapolations* from the PS-3 findings and the "each additional PC shifts the actor-count thresholds up by roughly one Named" rule of thumb — treat them as a starting guess to be confirmed at your table, not as validated recipes. Do not present them to players as calibrated.
+
+| Difficulty | Win Rate Target | Suggested Composition (extrapolated, unvalidated) |
 |------------|----------------|-----------------------|
-| **Skirmish** | 90–100% | 5–7 Mooks, or 1 Named (TR 8) solo |
-| **Standard** | 70–85% | 1 Named (TR 8) + 5 Mooks, or 1 Named (TR 12) |
-| **Hard** | 40–60% | 1 Boss (TR 12), or 2 Named (TR 8) |
-| **Deadly** | 15–30% | 1 Boss (TR 16) + Mooks, or 2 Named (TR 12) |
+| **Skirmish** | 85–100% | 4–8 Mooks |
+| **Standard** | 65–85% | 4 Named (TR 8) |
+| **Hard** | 40–60% | 4 Named (TR 8) + 1 Mook |
+| **Deadly** | 15–35% | 5 Named (TR 8) |
 
 ### Scaling Notes
 
-- **Each additional PC** adds roughly 20–30% win rate to an encounter. Scale enemy count or Named NPC tier up accordingly.
-- **Named NPC count matters more than total TR.** Two Named NPCs (combined TR 16) is Deadly, while a single Boss at TR 16 is Hard. Named NPCs maintain sustained pressure; Mooks self-cancel as they die.
-- **Mook swarms have diminishing returns.** Difficulty peaks around 8–10 Mooks for a PS 3 party. Beyond that, the self-cancelling effect (dead Mooks reduce future pressure) stabilizes difficulty or even reduces it.
-- **Advanced parties** (PS 6+, Techniques active) trivialize encounters designed for PS 3. Scale encounter TR up 50–100% for advanced parties.
+- **Actor count is the primary dial; per-enemy TR is secondary.** For a fresh PS-3 party, one or two Named/Boss enemies is trivial at *any* TR (a solo TR-17 Boss wins for the party as reliably as a solo TR-8 Named). Three simultaneously-acting Named/Boss enemies is the first genuine fight; four is Deadly; five is a near-certain party loss. Set the count first, then adjust per-enemy TR to fine-tune.
+- **Mook swarms only ever produce Skirmishes.** For a PS-3 party, mean PCs Broken stays at zero through 30 Mooks — the party is never in real danger, the fight just gets longer. (Win rate does eventually dip past ~40 Mooks, but that is the simulator's exchange cap timing out an unfinished-but-unlost fight, not a defeat.) Use Mooks for texture, action-economy pressure, and to nudge a Named fight up a band — not as a difficulty lever in their own right.
+- **Each additional PC** shifts the actor-count thresholds up by roughly one Named enemy (unvalidated beyond PS 3 — see the PS-4 caveat above).
+- **Advanced parties** (Techniques active) trivialize encounters designed for fresh PS-3 parties. Expect to add actors, not just TR — and re-check at the table, since the actor-count thresholds themselves move.
 
 ---
 

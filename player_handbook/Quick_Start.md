@@ -148,6 +148,6 @@ Zahna rolls 2d6+2 at Easy (+1), total modifier +3, and gets a **12**. Full succe
 
 **Skill Ranks:** Novice (+0), Practiced (+1), Expert (+2), Master (+3)
 
-**Combat Postures:** Aggressive (+1 offense, costly reactions) | Measured (baseline) | Defensive (-1 offense, cheap reactions) | Withdrawn (no offense, free reactions, recover 2 Endurance)
+**Combat Postures:** Aggressive (+1 offense, first reaction of the exchange costs extra) | Measured (baseline) | Defensive (-1 offense, cheap reactions) | Withdrawn (no offense, free reactions, recover 2 Endurance)
 
-**Conditions:** Tier 1 (Winded/Off-Balance/Shaken) clear end of exchange | Tier 2 (Staggered/Cornered) persist until treated | Two Tier 2 = Broken (out of fight)
+**Conditions:** Tier 1 (Winded/Off-Balance/Shaken) clear end of exchange | Tier 2 (Staggered/Cornered) persist until treated | Second Tier 2 of the same type = Broken (out of fight)

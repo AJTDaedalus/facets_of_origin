@@ -90,26 +90,26 @@ DESIGN §7. Do not touch armor text (WS-A owns it) or "Advancement at a Glance" 
 
 ## WS-A0 — Combat extraction (blocks WS-A) — DESIGN §2.1, §3
 
-- [ ] **A0.1 — Characterization tests for current combat semantics.** *(no behaviour change)*
+- [x] **A0.1 — Characterization tests for current combat semantics.** *(no behaviour change)*
   Files: `software/tests/test_combat_characterization.py` (new).
   Pin the **simulator's** semantics (`tools/combat_sim.py`), because `research/simulation_log.md` was measured under them: `armor_downgrade` (light affects Tier 2 only; heavy affects Tier 3 only), `apply_condition` stacking, `cleanup_end_of_exchange`, `is_zero_end_absorb` escalation, reaction Endurance costs with posture modifiers.
   Use 5 fixed seeds; assert exact end-state (conditions list, Endurance, out/alive), not aggregate win rates.
   Accept: ≥ 12 tests, all passing against unmodified code. This is the **G0 gate baseline**.
 
-- [ ] **A0.2 — Create `app/game/combat.py`.**
+- [x] **A0.2 — Create `app/game/combat.py`.**
   Files: `software/app/game/combat.py` (new), `software/tests/test_combat.py` (new).
   Move — do not rewrite — the rules functions into pure, synchronous form per DESIGN §2.1: `resolve_strike`, `resolve_reaction`, `apply_condition`, `armor_downgrade`, `end_exchange`. No async, no session objects, no I/O. Every constant read from `MergedRuleset` (reaction costs, Tier-1 ids, recovery amount) — delete the hardcoded fallbacks at `websocket.py:559` and `websocket.py:681,720,725`.
   Define a structural `Combatant` protocol satisfied by both `Character` and `Enemy`.
   Tests: ≥ 3 per public function (happy path, edge case, error).
   Accept: A0.1 characterization tests still pass, now importing from `combat.py`.
 
-- [ ] **A0.3 — Rewire both consumers; delete the duplicates.**
+- [x] **A0.3 — Rewire both consumers; delete the duplicates.**
   Files: `software/app/api/websocket.py`, `software/tools/combat_sim.py`, `software/tests/test_combat.py`.
   `websocket.py` handlers become thin: auth → validate → call `combat.py` → persist → broadcast. `combat_sim.py` keeps only policy (`choose_pc_posture`, `choose_pc_target`, `should_spend_spark`, `should_press`, `choose_pc_reaction`, `should_enemy_react`) and statistics. Delete `combat_sim.resolve_pc_strike`, `resolve_enemy_attack`, `armor_downgrade`, `apply_condition`, `_apply_broken`, `cleanup_end_of_exchange`.
   Add a **parity test class**: one seeded scenario driven through `combat.py` directly and through the WebSocket handler, asserting identical end-state. This is the permanent guard against F1.
   Accept: **G0** — on the 5 fixed seeds from A0.1, the post-refactor run reproduces the pre-refactor end-state **exactly** (conditions list, Endurance, out/alive). This is the criterion, not a win-rate band: at n=200 and p≈0.5, ±3pp is about one standard error, so it would pass real regressions and fail clean refactors by chance *(Brain, EF5)*. The ±3pp aggregate check against `research/sim_result_V6.md` applies **only** if the refactor legitimately changed RNG draw order — if you invoke it, document in `LOG` why draw order changed. Full suite green (~745 tests).
 
-- [ ] **A0.4 — Mark the superseded simulation corpus.** *(Brain ruling, Q3 — do not delete)*
+- [x] **A0.4 — Mark the superseded simulation corpus.** *(Brain ruling, Q3 — do not delete)*
   Files: `research/simulation_log.md`.
   Every PC-side win rate, Broken rate, and lethality figure was measured under simulator-only armor semantics plus the 0-Endurance house rule that A6 retires. The chicken baselines and the Encounter Budget difficulty multipliers fall with them.
   Mark each affected Series `**SUPERSEDED (v0.2 semantics)**` with a one-line reason and a pointer to DESIGN §4.3. **Do not delete them** — they are the record of how the error was found.
@@ -122,7 +122,7 @@ DESIGN §7. Do not touch armor text (WS-A owns it) or "Advancement at a Glance" 
 
 Requires WS-A0 complete. **No PHB prose until G1 and G2 pass.**
 
-- [ ] **A1 — Schema + `facet.yaml`: Resolve and armor.**
+- [x] **A1 — Schema + `facet.yaml`: Resolve and armor.**
   Files: `software/facets/base/facet.yaml`, `software/app/facets/schema.py`, `software/tests/test_facets_schema.py`, `software/tests/test_facet_loading.py`.
   Add under `combat:`
   ```yaml
@@ -139,7 +139,7 @@ Requires WS-A0 complete. **No PHB prose until G1 and G2 pass.**
   Replace the existing `armor.light.downgrades` / `armor.heavy.downgrades` keys. Add typed sub-models (`EnemyDurabilityDef`, rewrite `ArmorEntryDef`) with docstrings, matching the existing schema style.
   Accept: schema validates; ≥ 3 loading tests; full suite green.
 
-- [ ] **A2 — `Enemy` model: Resolve, TR re-key, back-compat.** *(TDD)*
+- [x] **A2 — `Enemy` model: Resolve, TR re-key, back-compat.** *(TDD)*
   Files: `software/app/game/enemy.py`, `software/tests/test_enemy.py`.
   - `endurance` → `resolve`; `endurance_current` → `resolve_current`; `init_combat` sets `resolve_current = resolve` for non-Mooks.
   - `calculate_tr()`: `durability_value = 0` for Mook, else `= resolve`. Delete the 7-branch Endurance ladder. Keep tier minimums (mook 1 / named 8 / boss 12).
@@ -148,12 +148,12 @@ Requires WS-A0 complete. **No PHB prose until G1 and G2 pass.**
   Tests (≥ 9): TR preserved for Sergeant (8) and Veteran Soldier (10); Guardian recomputes to **14** (was 16 — `special` was double-counted; see DESIGN §12 Q3); legacy `endurance` read emits the warning and maps correctly; `resolve` key round-trips; Mook durability is 0; tier minimums hold.
   Accept: all tests pass; full suite green.
 
-- [ ] **A3 — Migrate `enemies/*.fof`.**
+- [x] **A3 — Migrate `enemies/*.fof`.**
   Files: `enemies/chicken.fof`, `harbor_thug.fof`, `city_watch_sergeant.fof`, `veteran_soldier.fof`, `archive_guardian.fof`; `spec/examples/encounter-example.fof`.
   Replace `endurance:` with `resolve:` per the map. Sergeant 6→3, Veteran 7→4, Guardian 10→5. Mooks: remove the key. Update the inline `tr:` comments to the new arithmetic. Set Guardian `tr: 14` and add a `phases:` block with `resolve_threshold: 2`.
   Accept: every file loads through `Enemy.from_fof` without a `DeprecationWarning`; `calculate_tr()` matches the published `tr:` in each file.
 
-- [ ] **A4 — `combat.py`: Resolve depletion and rider Conditions.** *(TDD)*
+- [x] **A4 — `combat.py`: Resolve depletion and rider Conditions.** *(TDD)*
   Files: `software/app/game/combat.py`, `software/tests/test_combat.py`.
   - `apply_resolve_damage(enemy, outcome_tier, ruleset)` → depletes per `strike_depletion`; Resolve 0 = defeated; emits phase-change when a `resolve_threshold` is crossed.
   - `resolve_strike` against an enemy: full success may additionally impose one attacker-chosen Tier 1 or Tier 2 Condition as a **rider**. Riders never escalate to Broken. Delete enemy-side `_apply_broken` entirely.
@@ -163,7 +163,7 @@ Requires WS-A0 complete. **No PHB prose until G1 and G2 pass.**
   Tests (≥ 11): depletion 2/1/0 by tier; phase-change fires exactly once at threshold; rider condition applied on 10+ only; rider never produces Broken; **a Strike against an enemy holding a Tier 2 rider is resolved at Easy**; **a Tier 1 rider clears at `end_exchange` and its effect stops applying**; Mook removal on 7+; armored Mook survives a 7–9.
   Accept: full suite green. **A8's G1 run depends on rider→Easy existing here** — if it is stubbed out, G1 validates the wrong game.
 
-- [ ] **A5 — `combat.py`: PC armor per-scene downgrade budget.** *(TDD; **UNBLOCKED** — Brain approved, BRIEF §Q2)*
+- [x] **A5 — `combat.py`: PC armor per-scene downgrade budget.** *(TDD; **UNBLOCKED** — Brain approved, BRIEF §Q2)*
   Files: `software/app/game/combat.py`, `software/app/game/character.py`, `software/tests/test_combat.py`.
   Light armor downgrades the first **2** Conditions received per **scene** by one tier (T2→T1, T1→none). Heavy downgrades the first **4**. Track `armor_downgrades_remaining` on the combatant; initialise at `combat_start`, decrement on use, **do not reset in `end_exchange`**. Reset at end of scene. Two fights inside one scene share the budget.
   Values live in `facet.yaml` (`armor.light.downgrades_per_scene: 2`, `heavy: 4`) — G2 tuning knobs, not literals. Say **scene** in code, keys, and tests; never "fight."
@@ -173,40 +173,60 @@ Requires WS-A0 complete. **No PHB prose until G1 and G2 pass.**
   **The breakability assertion, fully specified** *(Brain, EF6 — "Broken within 6 exchanges" is only deterministic under a stated policy; otherwise you ship a flaky test or quietly weaken it)*: fix the policy to **PC Absorbs every incoming attack** (no Dodge, no Parry, no Intercept) and **the lone Named enemy lands a Tier 2 every exchange** (no reaction, no miss). Under that policy assert Broken by exchange 6 for light armor — and, since the policy is deterministic, assert the *exact* exchange for each of {none, light, heavy}. This is the bug from `research/armored_enemy_breaking_problem.md`; a probabilistic assertion cannot prove it is gone.
   Accept: full suite green.
 
-- [ ] **A6 — Retire the 0-Endurance rule.** *(DESIGN §4.3)*
+- [x] **A6 — Retire the 0-Endurance rule.** *(DESIGN §4.3)*
   Files: `software/app/game/combat.py`, `software/tests/test_combat_characterization.py`, `research/armored_enemy_breaking_problem.md`.
   Remove `is_zero_end_absorb` escalation. Update the characterization tests that pinned it (they were pinning a house rule, not a rule) — replace with tests asserting it is **gone**: an Absorb at 0 Endurance applies the incoming tier unmodified.
   Mark `research/armored_enemy_breaking_problem.md` **RESOLVED** with a pointer to DESIGN §4.1/§4.3 — the problem is dissolved, not solved: enemies no longer have a condition kill-track.
   Accept: no `is_zero_end_absorb` reference remains anywhere; full suite green.
 
-- [ ] **A7 — Phase changes end-to-end.** *(TDD)*
+- [x] **A7 — Phase changes end-to-end.** *(TDD)*
   Files: `software/app/api/websocket.py`, `software/tests/test_websocket.py`, `mm_manual/MM1_Encounters_and_Enemies.md`.
   New broadcast event `enemy_phase_change` carrying `enemy_id`, `phase_index`, `description`. Re-key MM1's phase-change prose to Resolve thresholds (completes ledger row 7, deferred from C8).
   Tests (3): event fires on threshold cross; fires once, not repeatedly; does not fire for enemies without `phases`.
   Accept: full suite green.
 
-- [ ] **A8 — Gate G0 re-verify, then run G1 and G2.** *(DESIGN §5)*
+- [x] **A8 — Gate G0 re-verify, then run G1 and G2.** *(DESIGN §5)* **CLOSED 2026-07-10 — G1 re-run under the revised pass condition (DESIGN §5-bis) passes; G2 already passed.**
   Files: `software/tools/combat_sim.py`, `research/simulation_log.md`.
+  - **G0 re-verify:** done. `combat_sim.py` migrated to D1's Resolve model (`apply_resolve_damage`, `mook_removed`, `target_strike_difficulty`, rider Conditions); the 5 fixed-seed characterization tests recomputed and passing; full suite green (847/848, 1 pre-existing unrelated failure).
   - **G1:** Archive Guardian (Resolve 5, heavy → effective 7) vs 3 starting PCs, n ≥ 200, seeded. **Riders must be modelled live** *(Brain, EF1)*: a Tier 2 rider makes subsequent Strikes against the Guardian Easy. A run that treats riders as inert validates a game nobody will play — the same class of error that voided the corpus in Q3. Pass: median ≥ 3 exchanges, PC win rate 45–55%, zero house rules. **Additionally measure the snowball:** does 2-Resolve depletion plus an Easy rider drive median exchanges below the 3-exchange floor? If so the lever is Boss Resolve, not the rider rule.
-  - **G2:** 1 PC × {none, light, heavy} vs Veteran Soldier. Vary the F6 fix (C4) and the F5 removal (A6) as **independent factors** — DESIGN §11 flags the combined over-correction risk. Pass: Broken reachable in all three armor states; `T_broken(heavy) > T_broken(light) > T_broken(none)`; `T_broken(light) ≤ 2 × T_broken(none)`.
-  Record both as new Series in `research/simulation_log.md` under its existing conventions.
-  **If G1 fails:** Boss Resolve is a `facet.yaml` scalar. Retune within 2–6 and re-run. Do not redesign. Escalate after 2 failed retunes.
-  Accept: both gates pass and are logged with seeds, n, and full parameters.
+    **First run FAILED as specified; escalated; Planner revised the gate (DESIGN §5-bis, DECISIONS P9).** The original run: riders confirmed live (verbose trace shows the exact Mordai→Zahna→Zulnut Easy-rider chain). Two in-band retunes (Resolve 5→6) left win rate pinned at 100%; a diagnostic sweep to Resolve 20 bottomed out at 95.5%. Root cause confirmed by Planner as an action-economy truth, not a tuning failure — and one that *matches existing canon* (`enemies/archive_guardian.fof:44-47`: a straight fight is "survivable but very expensive… solved laterally").
 
-- [ ] **A9 — Gate G3: Aggressive posture knob K1.** *(D8; independent — may run any time after A0.3)*
+    **→ RE-RUN G1 under the revised pass condition (Planner, DESIGN §5-bis):**
+    - **Drop the 45–55% win-rate criterion** — void-derived (traces to the Encounter Budget "Hard ≈ 50%" multiplier that Brain's Q3 voided).
+    - **Retune the Guardian's base Resolve** to the smallest value whose effective (heavy +2) pool yields **median ≥ 3 exchanges** under the worst-case rider policy — your diagnostic located this at Resolve ≈ 8; confirm by sim. Update `enemies/archive_guardian.fof` and the Boss Resolve band in `facet.yaml`, and widen the BRIEF's "working range 2–6" note to the confirmed ceiling.
+    - **New pass condition:** median ≥ 3 exchanges; every enemy defeatable; zero house rules; the rider→Easy snowball does not drive median below 3; **cost signal recorded** — mean Sparks spent, mean PC Endurance remaining at fight end, and PC-Broken incidence — as evidence the fight is *survivable but expensive*.
+    - This is a rules/data change (published Boss Resolve + facet.yaml band + BRIEF note), so it also touches the C1 "simulator may never reimplement a rule" constraint only insofar as the value lives in `facet.yaml`/`.fof`, not in `combat_sim.py`. Do **not** add a structural Boss second-action rule (Options 1/3 rejected — DESIGN §5-bis item 6).
+  - **G2:** 1 PC × {none, light, heavy} vs Veteran Soldier. Vary the F6 fix (C4) and the F5 removal (A6) as **independent factors** — DESIGN §11 flags the combined over-correction risk. Pass: Broken reachable in all three armor states; `T_broken(heavy) > T_broken(light) > T_broken(none)`; `T_broken(light) ≤ 2 × T_broken(none)`.
+    **PASSED.** Deterministic worst-case proof (A5, re-confirmed): T_broken = 2/4/6 for none/light/heavy, both pass conditions hold exactly. Realistic n=200 sim confirms Broken reachable in all three (heavy at n=2000). F6/F5 varied independently: F6 changes T_broken by at most 1 exchange (only when the attacker alternates Condition type; zero effect under the sanctioned same-type worst case); F5's retirement measured zero effect in this 1-PC-vs-1-Named matchup. No combined over-correction. See `research/simulation_log.md` Series 7.
+  Recorded as Series 7 in `research/simulation_log.md`.
+  **G1 escalation RESOLVED (Planner, DESIGN §5-bis):** the gate's pass condition was formally revised (win-rate dropped as void-derived; length-plus-cost gate substituted; Boss Resolve retuned via the pre-authorized scalar lever). One item — the ethos framing for MM1/III.3 — handed to Brain, non-blocking, deferred to A11 prose. Worker may now proceed to re-run G1.
+
+  **G1 RE-RUN — PASSED (2026-07-10).** Guardian base Resolve retuned 5 → 8 (effective 10 with heavy armor; TR 14 → 17) — the smallest value that robustly clears the median-3-exchange floor under the worst-case rider→Easy snowball (confirmed at n=200 across 7 seeds; median exactly 3.0 in every seed). Canonical run (n=200, seed=1): 100% win rate, median 3.0 exchanges, mean 2.8, mean Sparks spent 6.2/9, mean PC-Broken 0.03, Endurance remaining at fight end as low as 0 for Zahna — the cost signal evidencing "survivable but very expensive" per the Guardian's own `.fof` notes. Updated: `enemies/archive_guardian.fof`, `software/tools/combat_sim.py`'s `archive_guardian_def()`, `docs/BRIEF_v0.3_ruleset_revision.md` (D1 working range 2–6 → 2–8), `docs/DESIGN_v0.3_ruleset_revision.md` (§4.1 starting-value confirmation, §5-bis closing note), `software/facets/base/facet.yaml` (documented Named/Boss Resolve band under `enemy_durability`). Two pinned G0 characterization tests (`test_combat_characterization.py`'s seed-2 and seed-3 Guardian fixed-seed end-states) recomputed against the new Resolve value and re-pinned — this is a content retune, not an engine regression, so re-pinning is correct per that file's own docstring guidance on intentional rule/data changes. Full suite: 847 passed, 1 pre-existing unrelated failure (`test_config.py` port default).
+  Accept: G1 (revised) and G2 both pass and are logged with seeds, n, and full parameters. **A8 CLOSED.**
+
+- [x] **A9 — Gate G3: Aggressive posture knob K1.** *(D8; independent — may run any time after A0.3)* **CLOSED 2026-07-10 — ADOPTED.**
   Files: `software/tools/combat_sim.py`, `research/simulation_log.md`, `docs/DECISIONS.md`.
   Implement K1 behind a sim flag: the Aggressive posture's +1 reaction surcharge applies to the **first reaction per exchange only**. Compare against baseline: unarmored Endurance-3 PC, Aggressive vs Measured, n ≥ 200.
   Pass (both required): K1 cuts PC Broken rate by ≥ 15% relative, **and** Aggressive retains a net offense edge over Measured (win-rate delta preserved within ±5pp).
   **Adopt only if both hold.** If adopted: `facet.yaml` `postures.aggressive.reaction_cost_modifier_applies: first_reaction_only`, engine, III.3 text. If not: record the negative result in `DECISIONS.md` and leave Aggressive unchanged with a sidebar noting the tradeoff.
   Accept: result recorded either way. A negative result is a passing task.
 
-- [ ] **A10 — Gate G4: recalibrate the Encounter Budget.**
-  Files: `software/app/game/encounter.py`, `software/tests/test_encounter.py`, `mm_manual/MM1_Encounters_and_Enemies.md`, `research/simulation_log.md`.
-  Re-run the chicken baselines (3/5/7) plus Sergeant and Guardian at each difficulty. Target: Skirmish ~95%, Standard ~75%, Hard ~50%, Deadly ~25% (±10pp). Retune `difficulty_multiplier` and, if needed, `action_economy_multiplier`. Update the MM1 Encounter Recipe Table.
-  Accept: measured win rates inside the bands; multipliers no longer flagged "unvalidated" in MM1; ≥ 3 new tests on the changed multipliers.
+  **RESULT: ADOPTED.** Robust across 7 seeds (n=3000 each): Broken-rate cut 15.7%–18.7% (bar ≥15%), win-rate delta preserved within 0.1–0.6pp (bar ±5pp). Methodology required Worker judgment calls DESIGN didn't specify (enemy composition, a bounded 2-exchange window after a fight-to-conclusion design showed no signal, a "cleared both enemies" win proxy) — disclosed to the user before adopting; user confirmed. Shipped: `facet.yaml` (`postures.aggressive.reaction_cost_modifier_applies: first_reaction_only`), `app/game/combat.py` (`reaction_cost`/`resolve_reaction` gain `is_first_reaction`), `app/game/character.py` (`Character.reactions_this_exchange`), `app/api/websocket.py` (`_handle_react` computes/increments it, `_handle_end_exchange` resets it), `tools/combat_sim.py` (`PCState.reactions_this_exchange` wired into the shared `_enemy_attack` — K1 is now live for every Series, not just G3), `player_handbook/III.3_Combat.md` + `mm_manual/MM5_Quick_Reference.md` + `Quick_Start.md` text, 9 new tests (`test_combat.py` ×5, `test_websocket.py` ×3, plus the existing suite exercises the sim path). Full methodology and 7-seed table: `research/simulation_log.md` Series 8. Decision record: `docs/DECISIONS.md` W1. Full suite: 856 total, 855 passed, 1 pre-existing unrelated failure (`test_config.py` port default).
 
-- [ ] **A11 — PHB III.3 + MM1 prose.** *(only after G1, G2, G4 pass)*
-  Files: `player_handbook/III.3_Combat.md`, `mm_manual/MM1_Encounters_and_Enemies.md`, `mm_manual/MM5_Quick_Reference.md`.
+- [x] **A10 — Gate G4: recalibrate the Encounter Budget.** *(escalation RESOLVED by Planner 2026-07-10, DESIGN §5-ter — scope + Accept revised below; UNBLOCKED)* **CLOSED 2026-07-10 — see LOG "A10 … CLOSED". Recipe Table populated with Series 9 Part C rosters + seeds; MM1 budget/action-economy reframed (no false-precision language); `encounter.py` docstrings demoted to honest rough-heuristic (no constants retuned); 6 sim-level recipe characterization tests + 4 formula-level rough-ordering tests added. Full suite 865 passed, 1 pre-existing unrelated `test_config` failure.**
+  Files: `software/app/game/encounter.py`, `software/tests/test_encounter.py`, `software/tests/test_combat_sim.py` (recipe characterization), `mm_manual/MM1_Encounters_and_Enemies.md`, `research/simulation_log.md`.
+  **~~Original scope (superseded):~~** ~~Retune `difficulty_multiplier`/`action_economy_multiplier` so the five baselines hit Skirmish ~95% / Standard ~75% / Hard ~50% / Deadly ~25%.~~ Series 9 proved no scalar retune can do this — difficulty is an actor-count-gated threshold, not a smooth function of weighted-TR-sum, and the win-rate→multiplier mapping was already Brain-voided (Q3). See DESIGN §5-ter.
+  **Revised scope (DESIGN §5-ter):**
+  1. **MM1 Encounter Recipe Table** is the calibrated deliverable. Populate with A10's validated PS-3 rosters + measured win rates + seeds (Series 9 Part C): Skirmish = 3–7 Mooks; Standard = 3× Named(TR8); Hard = 3× Named(TR8) + 1 Mook; Deadly = 4× Named(TR8) *or* 3× Named(TR8) + 2 Mooks. Extend the PS-4 row where Series 9 covers it; flag gaps as un-simulated, don't guess.
+  2. **Reframe MM1's Encounter Budget + Action Economy sections** honestly: the `TR × multiplier` budget is a rough ordering sanity check, **explicitly non-predictive for 3+ Named/Boss rosters and for Mook swarms**, superseded by the Recipe Table. Remove the false-precision "~95/75/50/25%" validated-win-rate presentation (void-derived). Promote line-356's "Named NPC count matters more than total TR" to the section lead.
+  3. **`encounter.py`: make the formula honest, not precise.** Do **not** retune constants to hit only the four listed recipes (that reproduces the exact mis-prediction trap this task escalated). Update `calculate_effective_tr` / `calculate_budget` / `TIER_WEIGHTS` docstrings to state it's a rough heuristic, non-predictive for 3+ Named/Boss, pointing at the Recipe Table. Constants may stay as-is or be lightly adjusted only to improve *rough* ordering without implying precision.
+  Accept (revised): (a) MM1 Recipe Table populated with the validated rosters, their measured win rates, and seeds; (b) MM1 budget/action-economy prose reframed per §5-ter, no remaining "unvalidated"/false-precision language; (c) `encounter.py` docstrings honest per §5-ter; (d) tests — ≥ 3 sim-level characterization tests pinning that the four validated recipes reproduce their bands at the recorded seeds (in `test_combat_sim.py`'s calibration path), **plus** formula-level tests in `test_encounter.py` asserting the demoted formula's documented rough-ordering behavior (not "multipliers hit the bands"). The old "≥3 tests on the changed multipliers" criterion is superseded.
+  **Prose framing (item 2) rides on the §5-bis ethos note already handed to Brain — extended by §5-ter to Named/multi-enemy — and is blessed at A11 prose time; no Brain round-trip needed to proceed now.**
+
+  **Re-ran all 5 named baselines (research/simulation_log.md Series 9): all land at 100% win rate — none hits its target band.** A ~20-configuration follow-up sweep (enemy count × per-enemy TR, independent) shows this isn't a solo-enemy quirk: the true relationship is a steep, actor-count-gated threshold (1–2 Named/Boss enemies of *any* TR ≈ trivial; 3–5 is a cliff, TR a second-order modulator only past that gate; Mook count alone never produces real danger — mean PCs Broken stays 0.00 through 30 Mooks). This can't be reproduced by retuning `difficulty_multiplier`/`action_economy_multiplier`/`TIER_WEIGHTS` as scalar constants in the current linear/separable formula — see the full analysis in Series 9 and the `## ESCALATION` block in `docs/LOG_v0.3_ruleset_revision.md`. Found working recipes for all 4 bands (Skirmish = 3–7 Mooks; Standard = 3× Named TR8; Hard = 3× Named TR8 + 1 Mook; Deadly = 4× Named TR8, or 3× Named TR8 + 2 Mooks) but shipping only those as a patch to the two named constants would leave the budget formula silently wrong for every other composition. Escalated to Planner: does the raw TR-budget formula get demoted to a non-predictive sanity check for 3+ Named/Boss rosters (favoring the Recipe Table as the MM's real tool), rebuilt around actor-count as the primary term, or handled as an extension of the already-Planner/Brain-ruled G1 doctrine (§5-bis)? `encounter.py`/`test_encounter.py` untouched pending the ruling. **Recommend switching to Opus (Planner) to resolve before A10/A11 continue.**
+
+- [x] **A11 — PHB III.3 + MM1 prose.** *(only after G1, G2, G4 pass)* **CLOSED 2026-07-10 — see LOG "A11 … CLOSED". III.3 (body + Guardian vignette reworked to Resolve, 3 exchanges, phase at 2), MM1 (stat blocks + TR reconciled to engine, TR 16→17, .fof doc), MM5 (Strike/Armor/Endurance/TR + stale Encounter-Budget reconciled to A10), Quick_Start (D5 stacking). Armor presented as two tools, no cross-reference. Quick-ref "five numbers on screen" added. Cross-doc continuity clean; suite 865 pass / 1 pre-existing unrelated fail. Prose only — no code changed. Follow-up: tools.js:165 stale armor card → A12.**
+  Files: `player_handbook/III.3_Combat.md`, `mm_manual/MM1_Encounters_and_Enemies.md`, `mm_manual/MM5_Quick_Reference.md`, `player_handbook/Quick_Start.md`.
   Write: Resolve (enemy durability), Conditions-as-riders **and what a rider does** (Tier 2 rider → Strikes against that enemy are Easy), the amended "Conditions replace HP → **for player characters**" statement (BRIEF Open Question 1), the new armor rules for both sides, Mook removal, phase changes. Update the combat quick-reference card. Update MM1 stat blocks and the enemy `.fof` format documentation.
 
   **Presentation requirement — armor is two tools, never one rule with an exception** *(Brain, Q4)*. Asymmetry here is ethos-*consistent*, not tolerated: the game is already asymmetric at its root — PCs roll, enemies don't; PCs have stories, enemies have stat blocks. On a stat block, "armor" is a Resolve bonus. On a character sheet, it is a downgrade budget. **One sentence in each place. No cross-reference between them.** The app displays each automatically. Do not write "armor works differently for enemies."
@@ -216,32 +236,46 @@ Requires WS-A0 complete. **No PHB prose until G1 and G2 pass.**
   Per the new C1 repo rule: body text, all quick refs, `facet.yaml`, and engine in **one commit**.
   Accept: `/continuity-check` clean across III.3, MM1, MM5, Quick_Start; no quick ref paraphrases canonical text; the armor sections contain no cross-reference to each other; the quick-ref card locates all five PC numbers on screen.
 
-- [ ] **A12 — Web app: enemy tracker shows Resolve.**
-  Files: `software/app/static/js/play.js`, `builder.js`, `components.js`, `software/tests/test_api_enemy.py`.
+- [x] **A12 — Web app: enemy tracker shows Resolve.** **CLOSED 2026-07-11 — see LOG "A12 … CLOSED".** Shared `renderEnemyCard` in components.js (Resolve bar + phase markers, MM-only controls/phases); play.js tracker is role-aware (MM `#play-enemy-tracker` w/ phases + controls, player `#play-player-enemy-tracker` read-only Resolve); fixed `enemy_update` to send `resolve_current`, `onEnemyUpdated` to write it, added `onEnemyPhaseChange` + `enemy_phase_change` route in app.js; builder.js + index.html Endurance→Resolve (`#builder-enemy-resolve`, fixing a silent `resolve=0` POST bug); CSS `.resolve-bar/.resolve-fill/.resolve-phase-marker`; new `test_created_enemy_echoes_resolve`. Enemy CRUD 23 pass; full suite 866 pass / 1 pre-existing unrelated fail; zero enemy-facing `endurance` refs remain. **Carried forward:** `tools.js:165` stale armor rules card is a C1 quick-ref concern, deferred to a dedicated pass.
+  Files: `software/app/static/js/play.js`, `builder.js`, `components.js`, `app.js`, `software/app/static/index.html`, `software/app/static/css/style.css`, `software/tests/test_api_enemy.py`.
   Rename Endurance → Resolve in the enemy tracker and enemy builder. Render the Resolve bar and phase markers. Player view shows Resolve; MM view shows Resolve + phases.
   Accept: enemy CRUD tests pass with `resolve`; no `endurance` references remain in enemy-facing UI.
 
-- [ ] **A13 — PT03 boss stress test.** *(the human acceptance test for D1/D2)*
+- [x] **A13 — PT03 boss stress test.** *(the human acceptance test for D1/D2)* **CLOSED 2026-07-11 — re-run post-A14 against the revised §5-quater Accept PASSES on every count.** n=300 × 7 seeds: median **3** exchanges (min 3, was 1 pre-A14); phase fires **100%** (was ~0%); cost signal recorded — Sparks **6.6–6.7/9** (~2.2/player), PC Endurance remaining **~1.7**, PC-Broken **0.20–0.33/fight**; win rate 99.3–100% *reported, not gated*; **zero house rules**. Median ≥ 3 held with **no Boss Resolve retune** (the §5-bis scalar lever was not needed). Driver `run_pt03.py` gained phase-fire + Endurance-remaining aggregates; F0/F3/F4/F5/F8 confirmed resolved by A14; F6/F7 remain minor + out of scope (both make the cost a conservative floor). Prose only + driver metrics — no engine/test change. See `playtest/03_boss_stress_test/results.md` (re-run verdict) + LOG "A13 re-run".
   Files: `playtest/03_boss_stress_test/` (scenario exists).
   Run by the book. Real server rolls, per-player dice, modifier columns reconciled against sheets. Zero house rules permitted — if the table needs one, **that is a finding, not a fix**.
-  Accept: boss fight runs ≥ 3 exchanges, is won at approximately Hard rates, requires no house rules. Write `playtest/03_boss_stress_test/results.md`.
+  **Accept (REVISED per §5-quater item 1 — old "won at approximately Hard rates" DROPPED as void-derived, §5-bis):** (a) median ≥ 3 exchanges; (b) cost signal recorded — mean Sparks spent, mean PC Endurance remaining at fight end, PC-Broken incidence; (c) **the phase change fires in a meaningful fraction of by-the-book fights**. Win rate is *reported, not gated* (a lone Boss vs. a full party is not an even fight by doctrine). Stay a lone-boss run. Requires no house rules. Write/update `playtest/03_boss_stress_test/results.md`.
+  **First run (2026-07-11, pre-resolution):** `run_pt03.py`, all rolls via `app.game.combat`, sheet-reconciled. n=300: win 99.7%, mean 2.9 exch, phase fired in ~none of the fights. D1/D2 held up with zero house rules. Surfaced F0 (Accept) + F3–F5/F8 (phase subsystem) → escalated → resolved in §5-quater.
+  ~~**Blocked on A14**~~ **UNBLOCKED — A14 landed 2026-07-11.** The buggy parry/phase model is gone; re-run by the book against the revised Accept. Early signal from A14's G0 re-pin: the Guardian now crosses its phase on both fixed boss seeds (previously seed 2 did not), so Accept (c) looks reachable — but confirm at n≥300, don't infer from two seeds. If median still lands below 3, Boss Resolve is the sanctioned `facet.yaml` scalar (§5-bis / Risk table), not a redesign.
+
+- [x] **A14 — Boss phase-change subsystem: coherent D1 story.** *(Planner resolution of the A13 escalation — DESIGN §5-quater items 2–5)* **DONE 2026-07-11.** F5/F8: `should_enemy_react` + both enemy-Parry blocks + dead `_downgrade_outcome` removed; enemy-Parry unit tests deleted, `test_enemy_never_reacts_depletion_is_outcome_only` added. F4: invariant verified (all `resolve_current` writes route through `apply_resolve_damage`/`phase_crossed`; websocket MM-set path computes it explicitly); two exactly-on-threshold hardening tests added to `test_combat.py`. F3: MM1 §Bosses rewritten to the D1-native vocabulary (raise danger / grant-revoke Special / second wind / narrate space-target), armor-crack pattern explicitly forbidden, Guardian Reduced Mode kept as example; no schema field added, no rule changed (C1 clean). G0 characterization re-pinned (phase now fires on both boss seeds — evidence for A13 Accept c). Suite 861 pass / 4 xfail / 1 known-excluded (`test_config` port). **Surfaced a downstream escalation → new task A15 (see below); the 4 recipe-calibration tests are `xfail(strict)` pending it.** See LOG A14 entry.
+  Files: `software/tools/combat_sim.py`, `software/tests/test_combat_sim.py`, `software/app/game/combat.py` (invariant test), `mm_manual/MM1_Encounters_and_Enemies.md`; optional `software/app/facets/schema.py` + `facet.yaml` if a `phases[].effect` field is added.
+  1. **F5/F8 — enemies do not react.** Remove `should_enemy_react` and the enemy-Parry block (`combat_sim.py:478–494`). A Strike against a Named/Boss depletes Resolve by effective outcome only; no enemy reaction, no Resolve spent on defense. Update/remove the tests that asserted enemy Parry behaviour.
+  2. **F4 — phase-crossing invariant.** Ensure every `resolve_current` change routes through `phase_crossed`/`apply_resolve_damage` — no raw decrements. Add a test: a depletion that lands Resolve exactly *on* a threshold fires that phase exactly once.
+  3. **F3 — D1-native phase vocabulary in MM1.** Rewrite the Boss phase-design guidance and retire the "trade defense for offense / armor cracks" pattern. Supported effects: raise incoming-tier/offense; grant/revoke a Special (`special_ignores_tier1`-style); second wind (add Resolve); MM-narrated targeting/effect. Explicitly forbid "reduce own armor." Keep the Archive Guardian's Reduced Mode as the worked example. C1 applies: any rule change touches body text + quick refs + `facet.yaml`/engine in one commit.
+  Accept: enemy-Parry code + tests gone; phase-on-threshold-exactly test passes; MM1 phase guidance carries no armor-cracks pattern and no rule the engine doesn't honour; full suite green (minus the known unrelated `test_config` port failure). Then A13 re-runs.
+
+- [x] **A15 — Series-9 recipe recalibration.** *(follow-on surfaced by A14; Planner-tier — DESIGN §5-ter / G4 corpus)* **DONE 2026-07-11.** Re-ran the PS-3 ladder under the corrected (no-enemy-Parry) model; recalibrated to a fixed 3-Named core + one Mook per step: Standard `3 Named + 1 Mook` (76.0%), Hard `3 Named + 2 Mooks` (47.5%), Deadly `3 Named + 3 Mooks` (20.0%) / alt `4 Named + 1 Mook` (20.0%); Skirmish `3–7 Mooks` unchanged (model-agnostic). All four `xfail(strict)` markers removed, tests renamed + re-pinned, bands live. MM1 Recipe Table + surrounding actor-count prose, MM5 quick-ref card (C1), and `simulation_log.md` (Part C SUPERSEDED, Part D added) all updated and mutually consistent. Suite 865 pass / 1 known-excluded (`test_config` port). See LOG A15 entry + simulation_log Series 9 Part D.
+  Files: `mm_manual/MM1_Encounters_and_Enemies.md:329-344` (Encounter Recipe Table), `research/simulation_log.md` (Series 9), `software/tests/test_combat_sim.py` (`TestRecipeCalibration`).
+  Removing the enemy Parry (A14 F5) shifted every recipe ~one difficulty band easier (Standard 81→94.5%, Hard 48.5→76%, Deadly 19.5→58.5% / 19→47.5%). Re-run the actor-count ladder under the corrected model and re-derive the rosters and/or bands so Standard/Hard/Deadly land back in their intended windows; then update the MM1 Recipe Table, the Series-9 log, and the calibration tests. Honour the §5-ter ethos note (actor-count-gated difficulty; TR budget stays a rough check). Removing each `xfail(strict)` marker as its recipe is re-pinned is the acceptance signal (strict xfail XPASSes the instant a recipe re-enters band).
+  Accept: all four recipes in-band under the corrected model; `xfail` markers gone; MM1 table + simulation_log + tests consistent; `/continuity-check` clean.
 
 ---
 
 ## WS-B — Advancement math (D3) — DESIGN §6. Independent of WS-A.
 
-- [ ] **B1 — Pacing regression test.** *(TDD — write before B2/B3)*
+- [x] **B1 — Pacing regression test.** *(TDD — write before B2/B3)*
   Files: `software/tests/test_advancement_pacing.py` (new).
   Encode DESIGN §6.3: at `facet_level_threshold: 5`, Facet levels land at exactly 5, 10, and 15 rank advances; at `major_advancement_threshold: 3`, the first Major fires with Facet level 3. Assert the 100% / 80% / 60% session projections (s12 / s15 / s19) with an explicit SP-efficiency parameter.
   This test is the guard against a future content addition (e.g. a 6th skill) silently changing pacing.
   Accept: tests written and **failing** against current constants. That is the red step — report and stop.
 
-- [ ] **B2 — `facet.yaml` constants.** *(**UNBLOCKED** — Brain approved P5, BRIEF §Q1)*
+- [x] **B2 — `facet.yaml` constants.** *(**UNBLOCKED** — Brain approved P5, BRIEF §Q1)*
   Files: `software/facets/base/facet.yaml:985,990`.
   `facet_level_threshold: 6 → 5`. `major_advancement_threshold: 4 → 3`. Leave `session_skill_points: 4` and `skill_point_costs` (primary 1 / cross 2) untouched — DESIGN §6.2 explains why, and Brain ruled explicitly that rank inflation is a worse cost than a three-session slip on an illustrative number. **Do not raise `session_skill_points` to hit an earlier Major.**
   Accept: B1's threshold assertions pass; session-projection assertions still fail (they need B3).
 
-- [ ] **B3 — Per-Facet level tracking.** *(TDD; DESIGN §1 F3)*
+- [x] **B3 — Per-Facet level tracking.** *(TDD; DESIGN §1 F3)*
   Files: `software/app/game/character.py:210-269`, `software/tests/test_character.py`.
   - Add `facet_levels: dict[str, int]` and `rank_advances_by_facet: dict[str, int]`. `total_facet_levels` becomes the sum.
   - `_check_facet_level_threshold` currently returns `0` for any non-primary skill (`character.py:215-216`) — the reason Major Advancement has never fired for anyone. Rewrite it to credit the advance to the skill's own Facet.
@@ -249,21 +283,21 @@ Requires WS-A0 complete. **No PHB prose until G1 and G2 pass.**
   Tests (≥ 9): cross-Facet advance increments that Facet's level; `total_facet_levels` sums across Facets; Major fires at 3 total levels reached via 2 primary + 1 cross; boundary at exactly 5/10/15; existing `.fof` round-trip preserves `facet_level`.
   Accept: B1 fully green; full suite green.
 
-- [ ] **B4 — Technique pick budget.** *(TDD; DESIGN §1 F4, §6.4)*
+- [x] **B4 — Technique pick budget.** *(TDD; DESIGN §1 F4, §6.4)*
   Files: `software/app/game/character.py`, `software/app/api/websocket.py:1035`, `software/tests/test_character.py`, `software/tests/test_websocket.py`.
   Add `Character.technique_picks_available: int`, incremented on every Facet level in **any** Facet, decremented by `technique_select`. `_handle_technique_select` rejects when the budget is 0.
   Prerequisite validation is already correct and already tree-agnostic (`ruleset.get_technique()`) — **do not add a tree-ownership check.** D3 makes the code canonical and the PHB the thing that changes.
   Tests (≥ 6): pick granted per Facet level; `technique_select` with 0 picks is rejected with an error broadcast; a technique from a non-primary tree with prerequisites met is **accepted**; Tier 3 accepted when the same-branch Tier 2 is held; Tier 3 rejected without it.
   Accept: full suite green.
 
-- [ ] **B5 — II.4 advancement text.**
+- [x] **B5 — II.4 advancement text.**
   Files: `player_handbook/II.4_Character_Creation_Facets.md`.
   Update: the 6→5 threshold everywhere (including the Zulnut worked example at line 87, which counts to 6 and 12); *"At each Facet level you unlock one Technique from **any** tree whose prerequisites you meet"* (line 95, currently "your Facet's tree"); "Advancement at a Glance" (lines 248–266); the career-advance tier table (lines 280–282); Major Advancement at 3 levels (lines 205–220) including the worked example at line 209, which assumes 4.
   **The philosophy sidebar becomes false and must be rewritten** *(Brain, EF2)*. Around line 85 it reads *"Facet level 3 isn't earned by going deeper; it's earned by going wider."* True at threshold 6; **false at threshold 5**, where level 3 is reachable entirely in-Facet. Honest new framing: *level 3 = you have mastered all five skills of your Facet; level 4+ is where breadth begins.* Skipping this makes it ledger row 10 the day B2 lands.
   Line 89 was already fixed by **C10** — verify, do not re-edit.
   Accept: every number in II.4 matches `facet.yaml`; the sidebar no longer claims level 3 requires breadth; `/continuity-check` clean.
 
-- [ ] **B6 — PT05 technique showcase.**
+- [x] **B6 — PT05 technique showcase.**
   Files: `playtest/05_technique_showcase/`.
   Play a character to Facet level 3 using the new pacing. Confirm a Tier 3 Technique and a Prismatic domain are actually reachable, and that Second Domain (Soul Communion Tier 3) can be taken.
   Accept: `playtest/05_technique_showcase/results.md` records the session at which each unlock landed, measured against the DESIGN §6.3 projection.
@@ -274,7 +308,7 @@ Requires WS-A0 complete. **No PHB prose until G1 and G2 pass.**
 
 **Tasks in this workstream are numbered `WD*`, not `D*`** *(Brain, EF7)*. The BRIEF's decisions are D1–D8; a project that just built a contradiction ledger about ambiguous cross-references cannot have task D2 and decision D2 mean different things in the same commit message.
 
-- [ ] **WD1 — `facet.yaml`: Threat Clock, recovery, death.** *(TDD)*
+- [x] **WD1 — `facet.yaml`: Threat Clock, recovery, death.** *(TDD)*
   Files: `software/facets/base/facet.yaml`, `software/app/facets/schema.py`, `software/tests/test_facets_schema.py`.
   ```yaml
   hazards:
@@ -289,7 +323,7 @@ Requires WS-A0 complete. **No PHB prose until G1 and G2 pass.**
   ```
   Accept: schema validates with typed sub-models + docstrings; ≥ 3 tests.
 
-- [ ] **WD2 — Threat Clock engine + events.** *(TDD)*
+- [x] **WD2 — Threat Clock engine + events.** *(TDD)*
   Files: `software/app/game/session.py`, `software/app/api/websocket.py`, `software/tests/test_websocket.py`.
   Events: `clock_create` (MM), `clock_advance`, `clock_wind_back`, `clock_fill` (broadcast when full). Clocks live in session state.
   **Wind-back is automatic** *(Brain, EF4)*: spending the action winds the clock back one segment, **no roll**. If a roll were required, a 7–9 on the wind-back would advance the very clock being wound — a rules-lawyer loop, in a chapter written for novice MMs. `clock_wind_back` takes no roll result and never advances.
@@ -297,25 +331,25 @@ Requires WS-A0 complete. **No PHB prose until G1 and G2 pass.**
   Tests (≥ 7): advance on 7–9; advance on 6-; no advance on 10+; wind-back succeeds unconditionally and never advances; fill fires once at segment 4; clock survives a session round-trip.
   Accept: full suite green.
 
-- [ ] **WD3 — Threat Clock UI in the Play Field.** *(Brain, EF8 — the plan had engine events and no UI)*
+- [x] **WD3 — Threat Clock UI in the Play Field.** *(Brain, EF8 — the plan had engine events and no UI)*
   Files: `software/app/static/js/play.js`, `software/app/static/js/components.js`.
   Render every active clock in the Play Field for **all players** — segments filled/empty, name, and current state. MM view adds create / advance / wind-back controls.
   Rationale, not decoration: a clock that lives only in WebSocket frames is bookkeeping the digital layer **failed** to absorb — a direct ethos violation, in the one chapter whose purpose is stopping a novice MM from inventing subsystems. "Visible to the table" (DESIGN §8.1) is a UI requirement.
   Accept: a player-role client renders clocks and cannot mutate them; an MM-role client can create, advance, and wind back; `clock_fill` is visible to everyone.
 
-- [ ] **WD4 — Graceful Fail becomes player-initiated.** *(TDD; D6)*
+- [x] **WD4 — Graceful Fail becomes player-initiated.** *(TDD; D6)*
   Files: `software/facets/base/facet.yaml:920-930`, `software/app/api/websocket.py`, `software/tests/test_websocket.py`.
   `spark.earn_methods.graceful_fail.structured: false → true`; rewrite its description as player-initiated: on any 6-, the player may claim it by narrating how they make the failure worse or richer; the MM confirms.
   New event `claim_graceful_fail` — mirrors the existing `spark_earn_peer` nomination shape at `websocket.py:324` (broadcast claim → MM confirms → Spark). New event `act_break` (MM) opens a nomination window.
   Tests (≥ 6): claim rejected when the player's last roll was not a 6-; claim broadcasts for confirmation; MM confirmation awards exactly 1 Spark; double-claim on the same roll rejected; `act_break` broadcasts.
   Accept: full suite green.
 
-- [ ] **WD5 — III.1 Spark text.**
+- [x] **WD5 — III.1 Spark text.**
   Files: `player_handbook/III.1_Core_Resolution.md`.
   Codify **Act Break Nomination** and the player-initiated **Graceful Fail** in the player-facing chapter — the BRIEF is explicit that these do not live in MM5 alone. Keep: 3 Sparks/session, spend-before-roll, add-die-drop-lowest. State plainly that there is **no post-roll spending**.
   Accept: text matches `facet.yaml`; MM5's Spark section compresses it rather than restating it (C1 rule).
 
-- [ ] **WD6 — Write III.2 Adventuring.** *(strictly scoped — DESIGN §8.1)*
+- [x] **WD6 — Write III.2 Adventuring.** *(strictly scoped — DESIGN §8.1)*
   Files: `player_handbook/III.2_Adventuring.md` (new), `player_handbook/Table_of_Contents.md`.
   **Three sections only:** Hazards and Threat Clocks; Getting Hurt and Getting Better (recovery); When a Character Would Die.
   Death rule, one paragraph: *Broken never kills you. When a Broken result would end your character's life in the fiction, the choice is yours: take a permanent scar — a lasting cost you and the MM name together — and stay down alive; or choose a heroic death, and take one final action that automatically succeeds.*
@@ -326,37 +360,46 @@ Requires WS-A0 complete. **No PHB prose until G1 and G2 pass.**
   Depends on WS-A landing, since lethality determines what recovery must carry. Write the death rule and hazards first; write recovery after A8.
   Accept: chapter ≤ 3 sections; vignette voice per `references/phb-examples.md`; ToC updated; `/continuity-check` clean.
 
-- [ ] **WD7 — Spark refund variant flag.**
+- [x] **WD7 — Spark refund variant flag.**
   Files: `software/facets/base/facet.yaml`, `software/tools/combat_sim.py`.
   Add `spark.variants.refund_on_failed_pretechnique_cast: false`. **Test, do not adopt** (BRIEF D6).
   Accept: flag exists, defaults off, is readable by the sim and PT04 harness.
 
-- [ ] **WD8 — PT04 resource tax.** *(the acceptance test for D6)*
+- [x] **WD8 — PT04 resource tax.** *(the acceptance test for D6)* — **RUN, RESULT VOID — ESCALATED → RESOLVED (P12), REOPENED AS WD8-R**
   Files: `playtest/04_resource_tax/` (scenario exists).
-  Run with the new Spark cadence and the refund variant enabled for measurement.
-  Accept: **Sparks spent per player ≥ 2**. Below that, D6 is revisited — escalate to Planner. Record whether the refund variant changed spending. Write `playtest/04_resource_tax/results.md`.
+  **Result: mean 1.51 Sparks spent/player (n=1,400) — VOID AS EVIDENCE, not a failure of D6.** Planner ruling `docs/DECISIONS.md` **P12** / `DESIGN` **§8-bis**: the instrument is invalid on three independent counts — (1) the roster is pre-P10, built on the demoted budget formula, and by the calibrated Recipe Table its "Standard" is Mook-only and its "coin-flip Hard" climax is a 1-Named roster, both of which Series 9 measured as trivial (**the 100% win rate is what Series 9 predicts, not an anomaly**); (2) `should_spend_spark` is a hardcoded heuristic and cannot be evidence about *behavioural* spend; (3) `combat_sim` spends Sparks only on Strikes, but Sparks are spendable on any roll. **D6 is NOT revisited.** Run and driver are kept with a void banner (Series-9 precedent). Superseded by **WD9 → WD10 → WD8-R**.
+
+- [x] **WD9 — Recalibrate the PT04 rosters to the P10 Recipe Table.**
+  Files: `playtest/04_resource_tax/scenario.md`.
+  The scenario's three encounters are derived from inline `TR × multiplier` arithmetic that **P10 demoted as non-predictive**. Rebuild them from the **calibrated Recipe Table** (DESIGN §5-ter): Skirmish = 3–7 Mooks; Standard = 3× Named (TR 8); Hard = 3× Named (TR 8) + 1 Mook. Keep the Ashwood Trail's fiction (scouts → bridge ambush → the Captain) — re-stat the rosters underneath it, not the story. **Delete the inline budget arithmetic** from each encounter block and cite the Recipe Table instead; leaving it in is how the stale numbers propagated.
+  Accept: each of the three encounters maps to a named Recipe Table row; no `TR × multiplier` derivation remains in `scenario.md`; a smoke run of `run_pt04.py` shows the session is **no longer a 100% clean sweep** (the Hard climax must actually threaten — non-zero mean PCs Broken).
+
+- [x] **WD10 — Spark spend policy becomes selectable (default-preserving).**
+  Files: `software/tools/combat_sim.py`, `software/tests/test_combat_sim.py`.
+  `should_spend_spark` is shared code exercised by **every** Gate and Series, and every canonical PC starts `sparks=3` with spent Sparks adding dice to Strikes — so **editing it in place silently re-baselines every recorded G0–G4 / A-series / Series-9 number.** That is the exact failure A14 already recorded once (the F5 fix voiding the Series-9 corpus). **Do not edit it in place.** Instead: introduce a named, selectable spend policy (e.g. `spark_policy: "conservative" | "player_like"`), with **`conservative` = today's exact behaviour and the default**, and `player_like` modelling a less hoarding-prone spender (spend on a Named target in a climax, on a contested/high-stakes roll, when holding above a floor — the policy's rationale documented in the docstring).
+  **Iron requirement:** the existing recorded corpora must reproduce **bit-identical** under the default. That is the regression test, not a nicety.
+  Accept: ≥3 tests per public function; a characterization test pins that a known recorded run (seed + n from `research/simulation_log.md`) reproduces its recorded numbers exactly under `conservative`; `player_like` demonstrably spends more; **no recorded corpus number changes.**
+
+- [x] **WD8-R — PT04 re-run as the acceptance test for D6.** *(replaces WD8)*
+  Files: `playtest/04_resource_tax/`.
+  **Run PT04 as the playtest DESIGN §5 (line 206) always specified — not as a Monte Carlo.** Playtest data hygiene per BRIEF §Validation is binding: **real server rolls, per-player dice, modifier columns reconciled against the sheets**, invented mechanics flagged as drift and never silently adopted (as PT01/PT02 did). WD8's substitution of a 1,400-run `combat_sim` sweep for a played session is the defect P12 corrects; the Monte Carlo may run **alongside** as supporting evidence, reporting a **combat-only floor** explicitly labelled as such, and is **never the deciding number**.
+  Runs on the WD9 rosters, with the WD10 `player_like` policy where the sim is used. Record whether the refund variant (WD7) changed spending.
+  **Accept (amended per P12): Sparks spent per player ≥ 2, measured over the session across ALL rolls (not only Strikes), from the server roll log.** Below that — *with a valid instrument* — D6 is genuinely revisited; escalate to Planner. Rewrite `playtest/04_resource_tax/results.md`.
 
 ---
 
 ## WS-E — Content (D7) — DESIGN §9. Fully parallel. No engine impact.
 
-- [ ] **E1 — Domain example intents.** *(large — split per Facet, or per 6 domains, if a session runs long)*
-  Files: `player_handbook/Appendix_Magic_Domains.md`.
-  **Three example intents per scope × three scopes (Minor / Significant / Major) × 18 domains = 162 entries** *(arithmetic corrected per Brain, EF3 — DESIGN §9 and this task previously computed "= 54," dropping a factor of 3; 3-per-scope stands)*.
-  **Why three and not one:** variety within a scope is the anti-canonization mechanism. One example per scope becomes "the Minor Inscription spell" within two playtests, and the appendix turns into the spell list D7 exists to prevent.
-  Entries stay **one line each**. Frame explicitly as **design patterns, not a menu**. Pre-set "spell packages" are rejected.
-  **If the entries start reading like castable spells with fixed effects mid-writing, stop and escalate to Planner** — do not finish the appendix and hope the framing paragraph saves it.
-  Copyright policy applies: original content only.
-  Accept: 18 domains × 3 scopes × 3 examples = 162 entries; the framing paragraph is present and unambiguous; no entry reads as a castable spell with fixed effect.
+- [x] **E1 — Domain example intents.** **DONE 2026-07-11.** Escalated a spec bug before writing: BRIEF/DESIGN/TASKS all said "18 domains" but the canonical domain list (`II.3_Magic.md`, `Appendix_Magic_Domains.md`) has always had **21** (12 Soul: 9 standard + 3 prismatic; 9 Mind: 6 standard + 3 prismatic) — the PHB's own "18 domains" lines were stale, never updated when Soul's standard list grew past 6. User chose: write to the real 21, fix the stale PHB text too. Wrote 21 domains × 3 scopes × 3 examples = **189 entries** (verified by script: 21 domain headers, 63 scope-lines, 189 individual examples) into `player_handbook/Appendix_Magic_Domains.md`. Added an explicit "design patterns, not a menu" framing note. Fixed the two stale "18 domains" references in `II.3_Magic.md` (quick-reference intro + closing pointer) to 21. No entry reads as a castable spell with a fixed effect — all are verb-phrase intents, not named spells. Original content only.
+  Files: `player_handbook/Appendix_Magic_Domains.md`, `player_handbook/II.3_Magic.md`.
+  Accept: 21 domains × 3 scopes × 3 examples = 189 entries; the framing paragraph is present and unambiguous; no entry reads as a castable spell with fixed effect.
 
-- [ ] **E2 — MM Trouble Table.**
+- [x] **E2 — MM Trouble Table.** **DONE 2026-07-11.** Added a d6 table to `mm_manual/MM5_Quick_Reference.md` (new "MM Trouble Table" section, before "Common Rulings"): Cost / Position / Attention / Equipment / Condition / Revelation, one line each. The Condition row is explicit that it's narrated flavor, not a mechanical Condition outside combat — avoids inventing a rule the PHB doesn't state.
   Files: `mm_manual/MM5_Quick_Reference.md`.
-  A d6 table of generic 6- consequences: cost / position / attention / equipment / condition / revelation. Each entry one line, usable mid-session without a lookup.
   Accept: table is d6, scannable, and contains no rule the PHB does not already state.
 
-- [ ] **E3 — Magic 6- templates into MM5.**
+- [x] **E3 — Magic 6- templates into MM5.** **DONE 2026-07-11.** Added a "Magic 6- Templates" subsection under MM5's Magic section, citing II.3. Compressed each of the 6 named patterns (wrong target / keeps working / attracts attention / domain bleeds / cost arrives early / nothing happens) plus the player Graceful-Fail option to one line each, trimmed but not paraphrased — checked each line for verbatim agreement with II.3's wording (two lines tightened after a first pass drifted into paraphrase).
   Files: `mm_manual/MM5_Quick_Reference.md`, source: `player_handbook/II.3_Magic.md`.
-  Duplicate II.3's magic 6- consequence templates. Under the C1 rule this is **compression of canonical text**, which is permitted — a paraphrase is not. Copy the structure, cite II.3.
   Accept: MM5 and II.3 agree verbatim on every rule statement.
 
 ---
@@ -374,4 +417,6 @@ Requires WS-A0 complete. **No PHB prose until G1 and G2 pass.**
 
 **45 tasks** (was 43: +A0.4 supersede the sim corpus, +WD3 Threat Clock UI). Full suite must be green before any workstream is marked done.
 
-**Nothing is blocked.** Brain resolved Q1–Q4 on 2026-07-10 (`docs/BRIEF_v0.3_ruleset_revision.md` §BRIEF AMENDMENT): A5 and B2 are unblocked, WS-A0 is retroactively authorised, and the eight editorial findings EF1–EF8 are patched into this file and into DESIGN. **Start at WS-C, task C1.**
+**Nothing is blocked.** Brain resolved Q1–Q4 on 2026-07-10 (`docs/BRIEF_v0.3_ruleset_revision.md` §BRIEF AMENDMENT): A5 and B2 are unblocked, WS-A0 is retroactively authorised, and the eight editorial findings EF1–EF8 are patched into this file and into DESIGN. WS-C and WS-A0 are both complete (see `docs/LOG_v0.3_ruleset_revision.md`). **Start at WS-A, task A1.**
+
+**PT04 gate MET (2026-07-11, WD8-R):** ≥ 2 Sparks spent/player, measured live across 5 independent real-server sessions (aggregate mean 3.27, worst single session 3.00) — see `playtest/04_resource_tax/results.md`. D6 is confirmed, not revisited.

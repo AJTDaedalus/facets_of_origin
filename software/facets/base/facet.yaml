@@ -11,6 +11,10 @@
 #   - Added full Soul Technique tree from II.4c (Presence/Fortune/Communion branches)
 #   - Added major_advancement_threshold (every 4 Facet levels)
 #   - Marked stub skills as active where PHB chapters define them
+#
+# Changes in v0.3 (feature/data-driven-dice, WS-B):
+#   - facet_level_threshold 6 -> 5 (all 3 Facet levels now reachable in-Facet)
+#   - major_advancement_threshold 4 -> 3 (first Major lands with Facet level 3)
 
 id: "base"
 name: "Facets of Origin — Core Ruleset"
@@ -924,13 +928,13 @@ spark:
         confirm — this is social reinforcement, not gatekeeping).
     - id: graceful_fail
       label: "The Graceful Fail"
-      structured: false
+      structured: true
       target_per_session: 1-2
       description: >
-        When a player rolls 6- and leans into the consequence — plays it for story,
-        makes the failure interesting — the MM may award a Spark. Not every failure
-        earns a Spark; specifically for failures the player makes entertaining
-        or narratively rich.
+        Player-initiated: on any 6-, the player may claim a Graceful Fail by
+        narrating how they make the failure worse or richer for the story.
+        The MM confirms. Not every failure earns a Spark; specifically for
+        failures the player makes entertaining or narratively rich.
     - id: spark_for_weakness
       label: "Spark for Weakness"
       structured: false
@@ -954,6 +958,11 @@ spark:
     spend_target: 2-4
     earn_target: 2-4
     end_session_target: 2-4
+  variants:
+    # Untested/optional rule variants (D6). Default off — measured by PT04,
+    # not adopted. Do not flip this on for a live table without re-running
+    # the acceptance test.
+    refund_on_failed_pretechnique_cast: false
 
 # ---------------------------------------------------------------------------
 # Advancement
@@ -982,12 +991,17 @@ advancement:
 
   session_skill_points: 4
   marks_per_rank: 3
-  facet_level_threshold: 6
+  # Threshold 5 (not 6) puts all three Facet levels — and therefore Tier 3
+  # Techniques — inside the primary Facet's 15-advance ceiling (5 skills × 3
+  # rank advances). See DESIGN_v0.3 §6.2. session_skill_points stays 4: raising
+  # it to hit an earlier Major would inflate skill ranks as a side effect.
+  facet_level_threshold: 5
 
-  # Every 4 total Facet Levels triggers a Major Advancement.
+  # Every 3 total Facet Levels triggers a Major Advancement, so the first Major
+  # lands together with Facet level 3 (Tier 3 unlock) at roughly session 12–15.
   # At a Major Advancement, the player chooses: +1 to a Minor Attribute (max 3),
   # or a Pinnacle Technique (MM approval required).
-  major_advancement_threshold: 4
+  major_advancement_threshold: 3
 
 # ---------------------------------------------------------------------------
 # Magic rules (PHB II.3)
@@ -1027,6 +1041,14 @@ combat:
     aggressive:
       offense_modifier: 1
       reaction_cost_modifier: 1
+      # K1 (BRIEF D8, adopted after Gate G3 passed robustly across 7 seeds,
+      # 2026-07-10): the surcharge applies to a combatant's first reaction
+      # of the exchange only; every reaction after that pays the base cost.
+      # Softens the Aggressive "death spiral" (a low-Endurance PC facing
+      # several simultaneous attacks burns Endurance on the surcharge alone
+      # and has nothing left to react with) without changing the offense
+      # modifier above. See research/simulation_log.md Series 8.
+      reaction_cost_modifier_applies: first_reaction_only
     measured:
       offense_modifier: 0
       reaction_cost_modifier: 0
@@ -1037,6 +1059,13 @@ combat:
       offense_modifier: null
       reaction_cost_modifier: 0
       recovery: 2
+      free_reactions: true
+
+  reactions:
+    dodge: 1
+    parry: 1
+    absorb: 0
+    intercept: 2
 
   strike_outcomes:
     full_success:
@@ -1071,9 +1100,47 @@ combat:
 
   armor:
     light:
-      downgrades: 1   # Tier 2 → Tier 1
+      downgrades_per_scene: 2   # first 2 Conditions/scene: Tier 2 → Tier 1, Tier 1 → none
+      tiers_reduced: 1
     heavy:
-      downgrades: 2   # Tier 3 → Tier 2
+      downgrades_per_scene: 4   # first 4 Conditions/scene: Tier 2 → Tier 1, Tier 1 → none
+      tiers_reduced: 1
+
+  enemy_durability:
+    strike_depletion: {full_success: 2, partial_success: 1, failure: 0}
+    armor_resolve_bonus: {none: 0, light: 1, heavy: 2}
+    mook_removed_on: partial_success        # armored mook: full_success
+    armored_mook_removed_on: full_success
+    # Working Resolve band (base, before armor bonus), confirmed by Gate G1
+    # (task A8, 2026-07-10, DESIGN §5-bis; data in research/simulation_log.md
+    # Series 7): Named 3-4, Boss 8. Widened from the BRIEF's original 2-6
+    # working range after a solo by-the-book Boss at Resolve 5 collapsed to
+    # a median 2-exchange fight under the worst-case rider->Easy snowball;
+    # 8 is the smallest Boss value that robustly clears a median >= 3
+    # exchange floor. This is a per-enemy authoring guideline, not an
+    # enforced field — actual values live in each enemy's .fof.
+
+# ---------------------------------------------------------------------------
+# Hazards & Death (PHB III.2)
+# ---------------------------------------------------------------------------
+hazards:
+  threat_clock:
+    segments: 4
+    advances_on: [partial_success, failure]
+    wind_back_cost: 1_action
+    wind_back_requires_roll: false
+    # Roughly 72% of nearby rolls (7-9 + 6-) advance a segment, so a
+    # 4-segment clock strikes after about 3-4 party rolls near the hazard --
+    # the intended feel of "visible pressure" (DESIGN §8.1), stated on
+    # purpose rather than left as an accident of the tier probabilities.
+
+death:
+  broken_is_lethal: false
+  doom_gate: [permanent_scar, heroic_death]
+  # Broken never kills a character by itself. When a Broken result would end
+  # a character's life in the fiction, the player chooses: a permanent scar
+  # (a lasting cost named with the MM) and stay down alive, or a heroic
+  # death with one final action that automatically succeeds.
 
 # ---------------------------------------------------------------------------
 # Backgrounds (PHB II.5)

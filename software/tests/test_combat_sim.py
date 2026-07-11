@@ -7,19 +7,18 @@ from pathlib import Path
 # Ensure software/ is on path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+from app.game import combat as combat_module
+
 from tools.combat_sim import (
     PCState,
     EnemyState,
     SimResult,
     AggregateResult,
-    TIER1_CONDITIONS,
     TIER2_CONDITIONS,
     combat_roll,
-    apply_condition,
-    cleanup_end_of_exchange,
-    armor_downgrade,
-    resolve_pc_strike,
-    resolve_enemy_attack,
+    _pc_strike,
+    _enemy_attack,
+    _ruleset,
     run_combat,
     run_simulation,
     make_pc,
@@ -41,9 +40,9 @@ from tools.combat_sim import (
     should_spend_spark,
     should_press,
     choose_pc_reaction,
-    should_enemy_react,
     get_series,
     _wilson_ci,
+    spark_refund_variant_enabled,
 )
 
 
@@ -108,114 +107,10 @@ class TestCombatRoll:
         assert 2 <= sum(base_totals) / 1000 <= 12
 
 
-# ---------------------------------------------------------------------------
-# Condition management
-# ---------------------------------------------------------------------------
-
-class TestConditions:
-    def test_apply_t1_condition(self):
-        pc = make_pc(mordai_def())
-        apply_condition(pc, "winded", 1)
-        assert "winded" in pc.conditions
-        assert "winded" not in pc.persistent_conditions
-
-    def test_apply_t2_condition(self):
-        pc = make_pc(mordai_def())
-        apply_condition(pc, "staggered", 2)
-        assert "staggered" in pc.conditions
-
-    def test_same_t2_causes_broken(self):
-        pc = make_pc(mordai_def())
-        apply_condition(pc, "staggered", 2)
-        assert not pc.is_broken
-        apply_condition(pc, "staggered", 2)
-        assert pc.is_broken
-
-    def test_different_t2_does_not_break(self):
-        pc = make_pc(mordai_def())
-        apply_condition(pc, "staggered", 2)
-        apply_condition(pc, "cornered", 2)
-        assert not pc.is_broken
-        assert "staggered" in pc.conditions
-        assert "cornered" in pc.conditions
-
-    def test_zero_end_absorb_upgrades_t1_to_t2(self):
-        pc = make_pc(mordai_def())
-        pc.endurance_current = 0
-        apply_condition(pc, "winded", 1, is_zero_end_absorb=True)
-        assert "staggered" in pc.conditions  # Upgraded from T1 to T2
-        assert "staggered" in pc.persistent_conditions
-
-    def test_zero_end_absorb_t2_is_persistent(self):
-        pc = make_pc(mordai_def())
-        pc.endurance_current = 0
-        apply_condition(pc, "staggered", 2, is_zero_end_absorb=True)
-        assert "staggered" in pc.persistent_conditions
-
-    def test_zero_end_absorb_twice_causes_broken(self):
-        pc = make_pc(mordai_def())
-        pc.endurance_current = 0
-        apply_condition(pc, "winded", 1, is_zero_end_absorb=True)
-        # First absorb upgrades to staggered (persistent T2)
-        assert "staggered" in pc.conditions
-        apply_condition(pc, "winded", 1, is_zero_end_absorb=True)
-        # Second absorb tries to add staggered again → Broken
-        assert pc.is_broken
-
-    def test_cleanup_clears_t1(self):
-        pc = make_pc(mordai_def())
-        apply_condition(pc, "winded", 1)
-        apply_condition(pc, "off_balance", 1)
-        cleanup_end_of_exchange(pc)
-        assert "winded" not in pc.conditions
-        assert "off_balance" not in pc.conditions
-
-    def test_cleanup_keeps_t2(self):
-        pc = make_pc(mordai_def())
-        apply_condition(pc, "staggered", 2)
-        apply_condition(pc, "winded", 1)
-        cleanup_end_of_exchange(pc)
-        assert "staggered" in pc.conditions
-        assert "winded" not in pc.conditions
-
-    def test_cleanup_keeps_persistent(self):
-        pc = make_pc(mordai_def())
-        pc.endurance_current = 0
-        apply_condition(pc, "winded", 1, is_zero_end_absorb=True)
-        # winded upgraded to staggered (persistent)
-        cleanup_end_of_exchange(pc)
-        assert "staggered" in pc.conditions  # Persistent, should stay
-
-    def test_cleanup_withdrawn_recovery(self):
-        pc = make_pc(mordai_def())
-        pc.endurance_current = 1
-        pc.posture = "withdrawn"
-        cleanup_end_of_exchange(pc)
-        assert pc.endurance_current == 3  # 1 + 2
-
-    def test_cleanup_withdrawn_caps_at_max(self):
-        pc = make_pc(mordai_def())
-        pc.endurance_current = 4
-        pc.posture = "withdrawn"
-        cleanup_end_of_exchange(pc)
-        assert pc.endurance_current == 5  # Capped at endurance_max
-
-
-class TestArmorDowngrade:
-    def test_no_armor(self):
-        assert armor_downgrade(2, "none") == 2
-        assert armor_downgrade(1, "none") == 1
-
-    def test_light_armor_downgrades_t2_only(self):
-        assert armor_downgrade(2, "light") == 1  # T2 → T1
-        assert armor_downgrade(1, "light") == 1  # T1 unaffected
-        assert armor_downgrade(3, "light") == 3  # T3 unaffected
-
-    def test_heavy_armor_downgrades_t3_only(self):
-        assert armor_downgrade(3, "heavy") == 2  # T3 → T2
-        assert armor_downgrade(2, "heavy") == 2  # T2 unaffected
-        assert armor_downgrade(1, "heavy") == 1  # T1 unaffected
-
+# Condition management (apply_condition/cleanup_end_of_exchange/
+# armor_downgrade) and their unit tests moved to `app.game.combat` /
+# `tests/test_combat.py` per TASKS WS-A0 (A0.3) — combat_sim.py no longer
+# has its own copies.
 
 # ---------------------------------------------------------------------------
 # AI decisions
@@ -309,39 +204,18 @@ class TestAI:
         pc = make_pc(zahna_def())  # Dex+1 > Str-1+Combat 0 = -1
         assert choose_pc_reaction(pc, 2, "measured") == "dodge"
 
-    def test_enemy_react_to_t2(self):
-        enemy = make_enemy(generic_named_def(8))
-        assert should_enemy_react(enemy, 2) is True
-
-    def test_enemy_no_react_to_t1(self):
-        enemy = make_enemy(generic_named_def(8))
-        assert should_enemy_react(enemy, 1) is False
-
-    def test_enemy_no_react_at_zero_end(self):
-        enemy = make_enemy(generic_named_def(8))
-        enemy.endurance_current = 0
-        assert should_enemy_react(enemy, 2) is False
-
-    def test_mook_never_reacts(self):
-        mook = make_enemy(chicken_def())
-        assert should_enemy_react(mook, 2) is False
-
-
 # ---------------------------------------------------------------------------
 # Strike resolution
 # ---------------------------------------------------------------------------
 
 class TestPCStrike:
     def test_mook_removed_on_success(self):
-        random.seed(1)  # Seed that gives a success
-        pc = make_pc(mordai_def())
-        mook = make_enemy(chicken_def())
         # Keep trying seeds until we get a success
         for seed in range(100):
             random.seed(seed)
             pc_fresh = make_pc(mordai_def())
             mook_fresh = make_enemy(chicken_def())
-            resolve_pc_strike(pc_fresh, mook_fresh)
+            _pc_strike(pc_fresh, mook_fresh, _ruleset())
             if mook_fresh.is_removed:
                 break
         assert mook_fresh.is_removed
@@ -350,23 +224,112 @@ class TestPCStrike:
         pc = make_pc(mordai_def())
         pc.posture = "withdrawn"
         mook = make_enemy(chicken_def())
-        resolve_pc_strike(pc, mook)
+        _pc_strike(pc, mook, _ruleset())
         assert not mook.is_removed
 
-    def test_named_takes_condition_on_full_success(self):
-        """Named enemies should accumulate conditions from successful strikes."""
-        named = make_enemy(generic_named_def(8))
-        # Run many strikes until we get conditions applied
+    def test_named_takes_rider_condition_on_full_success(self):
+        """A full-success (10+) Strike may impose a rider Condition on a
+        Named enemy (D1) — riders, not accumulation toward Broken; Resolve
+        is what defeats an enemy now."""
         conditions_seen = False
         for seed in range(200):
             random.seed(seed)
             pc = make_pc(mordai_def())
             named_fresh = make_enemy(generic_named_def(8))
-            resolve_pc_strike(pc, named_fresh)
+            _pc_strike(pc, named_fresh, _ruleset())
             if named_fresh.conditions:
                 conditions_seen = True
                 break
-        assert conditions_seen, "Should see conditions on Named enemy after many strikes"
+        assert conditions_seen, "Should see a rider Condition on Named enemy after many strikes"
+
+    def test_named_resolve_depletes_on_success(self):
+        """A landed Strike depletes the target's Resolve pool (D1)
+        regardless of whether a rider was also applied."""
+        depletion_seen = False
+        for seed in range(200):
+            random.seed(seed)
+            pc = make_pc(mordai_def())
+            named_fresh = make_enemy(generic_named_def(8))
+            starting_resolve = named_fresh.resolve_current
+            _pc_strike(pc, named_fresh, _ruleset())
+            if named_fresh.resolve_current < starting_resolve:
+                depletion_seen = True
+                break
+        assert depletion_seen, "Should see Resolve depletion on Named enemy after many strikes"
+
+    def test_enemy_never_reacts_depletion_is_outcome_only(self):
+        """A14/F5: enemies have no reaction. A landed Strike depletes Resolve
+        by exactly the outcome's `strike_depletion` value — never more (a
+        parry cost) and never less (a full deflect), since no Resolve is ever
+        spent on defense. Across many seeds the observed depletion always
+        equals the canonical value for the outcome that actually rolled."""
+        ruleset = _ruleset()
+        expected = {
+            "full_success": ruleset.combat.enemy_durability.strike_depletion.full_success,
+            "partial_success": ruleset.combat.enemy_durability.strike_depletion.partial_success,
+            "failure": ruleset.combat.enemy_durability.strike_depletion.failure,
+        }
+        for seed in range(300):
+            random.seed(seed)
+            pc = make_pc(mordai_def())
+            named = make_enemy(generic_named_def(8))
+            starting = named.resolve_current
+            # Reproduce _pc_strike's exact dice: extra dice come from the same
+            # Spark/Press policy the function uses, and a fresh target has no
+            # conditions so difficulty is Standard.
+            extra_dice = should_spend_spark(pc, named) + (1 if should_press(pc, named) else 0)
+            random.seed(seed)
+            strike = combat_module.resolve_strike(
+                pc.strength_mod + pc.combat_mod, pc.posture, pc.conditions, ruleset,
+                combat_module.StrikeOptions(extra_dice=extra_dice),
+            )
+            random.seed(seed)
+            _pc_strike(pc, named, ruleset)
+            actual_depletion = starting - named.resolve_current
+            assert actual_depletion == expected[strike.outcome], (
+                f"seed {seed}: {strike.outcome} depleted {actual_depletion}, "
+                f"expected {expected[strike.outcome]} (no defense spend)"
+            )
+
+    def test_no_rider_on_partial_success(self):
+        """D1: only a full success may impose a rider — a partial success
+        (7-9) depletes 1 Resolve and nothing else."""
+        for seed in range(500):
+            random.seed(seed)
+            pc = make_pc(mordai_def())
+            named_fresh = make_enemy(generic_named_def(8))
+            strike = combat_module.resolve_strike(
+                pc.strength_mod + pc.combat_mod, pc.posture, pc.conditions, _ruleset(),
+            )
+            if strike.outcome != "partial_success":
+                continue
+            random.seed(seed)
+            _pc_strike(pc, named_fresh, _ruleset())
+            assert named_fresh.conditions == []
+            return
+        pytest.fail("No seed produced a partial-success Strike in 500 tries")
+
+    def test_armored_mook_needs_full_success(self):
+        """An armored Mook is only removed on a full success (10+); an
+        unarmored Mook is removed on any success (D1)."""
+        removed_on_partial = False
+        for seed in range(500):
+            random.seed(seed)
+            pc = make_pc(mordai_def())
+            strike = combat_module.resolve_strike(
+                pc.strength_mod + pc.combat_mod, pc.posture, pc.conditions, _ruleset(),
+            )
+            if strike.outcome != "partial_success":
+                continue
+            random.seed(seed)
+            pc2 = make_pc(mordai_def())
+            mook = make_enemy(chicken_def())
+            mook.armor = "light"
+            _pc_strike(pc2, mook, _ruleset())
+            if mook.is_removed:
+                removed_on_partial = True
+            break
+        assert not removed_on_partial, "Armored Mook should survive a partial success"
 
     def test_staggered_attacker_penalty(self):
         """Staggered PCs should have -1 to offense."""
@@ -392,16 +355,19 @@ class TestPCStrike:
 
 class TestEnemyAttack:
     def test_mook_attack_is_t1(self):
-        """Mook attacks produce T1 conditions (when PC fails reaction)."""
+        """Mook attacks produce T1 conditions (when PC fails reaction).
+
+        F5 retired (DESIGN §4.3): absorbing at 0 Endurance no longer
+        escalates the incoming tier, so a Mook's T1 attack lands as T1.
+        """
         mook = make_enemy(chicken_def())
         for seed in range(200):
             random.seed(seed)
             pc = make_pc(mordai_def())
             pc.endurance_current = 0  # Force Absorb
-            resolve_enemy_attack(mook, pc)
+            _enemy_attack(mook, pc, _ruleset())
             if pc.conditions:
-                # At 0 End, T1 is upgraded to T2 by the 0-End rule
-                assert any(c in ("staggered", "cornered") for c in pc.conditions)
+                assert all(c not in ("staggered", "cornered") for c in pc.conditions)
                 break
 
     def test_named_attack_is_t2(self):
@@ -409,7 +375,7 @@ class TestEnemyAttack:
         named = make_enemy(generic_named_def(8))
         pc = make_pc(mordai_def())
         pc.endurance_current = 0  # Force Absorb
-        resolve_enemy_attack(named, pc)
+        _enemy_attack(named, pc, _ruleset())
         # Should have a T2 condition (staggered or cornered)
         assert any(c in TIER2_CONDITIONS for c in pc.conditions)
 
@@ -419,30 +385,63 @@ class TestEnemyAttack:
 # ---------------------------------------------------------------------------
 
 class TestBossPhaseChange:
-    def test_phase_change_resets_boss(self):
-        boss = make_enemy(archive_guardian_def())
-        boss.endurance_current = 0
-        # Apply conditions to trigger Broken → phase change
-        apply_condition(boss, "staggered", 2, is_zero_end_absorb=True)
-        apply_condition(boss, "staggered", 2, is_zero_end_absorb=True)
-        # Phase change should have triggered instead of Broken
-        assert not boss.is_broken
-        assert boss.phase_changed
-        assert boss.endurance_current == 4  # Reset to phase 2 endurance
-        assert boss.attack_modifier == 1   # Reduced in phase 2
-        assert boss.conditions == []       # Cleared
+    """D1 (DESIGN §4.1): phase changes are Resolve-threshold crossings, not
+    Condition-stacking Broken escalations — enemies no longer have a
+    Condition-based Broken track at all. Archive Guardian's authored
+    Special (Reduced Mode: attack_modifier -> +1) is boss-specific flavor
+    modelled via `special_attack_mod`, applied by `_pc_strike` when
+    `apply_resolve_damage` reports a crossed `phase_index`.
+    """
 
-    def test_phase_change_only_once(self):
+    def test_phase_change_fires_when_resolve_crosses_threshold(self):
+        pc = make_pc(mordai_def())
+        for seed in range(300):
+            random.seed(seed)
+            boss = make_enemy(archive_guardian_def())
+            boss.resolve_current = 3  # one full-success Strike (-2) crosses threshold 2
+            _pc_strike(pc, boss, _ruleset())
+            if boss.phase_index is not None:
+                assert boss.phase_index == 0
+                assert boss.attack_modifier == 1  # Reduced Mode
+                return
+        pytest.fail("No seed produced a phase change in 300 tries")
+
+    def test_phase_change_does_not_refire(self):
+        """`apply_resolve_damage`/`phase_crossed` fire the crossing exactly
+        once by construction (A7) — Resolve only moves downward, so a
+        Strike landing after the threshold is already crossed reports no
+        new crossing."""
         boss = make_enemy(archive_guardian_def())
-        # First break → phase change
-        apply_condition(boss, "staggered", 2)
-        apply_condition(boss, "staggered", 2)
-        assert boss.phase_changed
-        assert not boss.is_broken
-        # Second break → actual Broken
-        apply_condition(boss, "staggered", 2)
-        apply_condition(boss, "staggered", 2)
-        assert boss.is_broken
+        boss.resolve_current = 2
+        boss.phase_index = 0
+        boss.attack_modifier = 1
+        pc = make_pc(mordai_def())
+        for seed in range(300):
+            random.seed(seed)
+            strike = combat_module.resolve_strike(
+                pc.strength_mod + pc.combat_mod, pc.posture, pc.conditions, _ruleset(),
+            )
+            if strike.outcome == "failure":
+                continue
+            random.seed(seed)
+            _pc_strike(pc, boss, _ruleset())
+            assert boss.phase_index == 0
+            assert boss.attack_modifier == 1
+            return
+        pytest.fail("No seed produced a landed Strike in 300 tries")
+
+    def test_defeat_is_removal_not_broken(self):
+        """An enemy defeated via Resolve reaching 0 is `is_removed`, not
+        `is_broken` — enemies have no Broken track under D1."""
+        pc = make_pc(mordai_def())
+        for seed in range(300):
+            random.seed(seed)
+            boss = make_enemy(archive_guardian_def())
+            boss.resolve_current = 2  # one full success finishes it
+            _pc_strike(pc, boss, _ruleset())
+            if boss.is_removed:
+                return
+        pytest.fail("No seed produced a defeat in 300 tries")
 
 
 # ---------------------------------------------------------------------------
@@ -610,18 +609,27 @@ class TestDefinitions:
     def test_chicken_is_mook(self):
         e = make_enemy(chicken_def())
         assert e.tier == "mook"
-        assert e.endurance_max == 0
+        assert e.resolve == 0
+        assert e.resolve_current == 0
 
     def test_sergeant_is_named(self):
+        """Matches `enemies/city_watch_sergeant.fof` (D1 migration): base
+        Resolve 3, +1 from light armor at combat start."""
         e = make_enemy(city_watch_sergeant_def())
         assert e.tier == "named"
-        assert e.endurance_max == 6
+        assert e.resolve == 3
+        assert e.resolve_current == 4
         assert e.armor == "light"
 
     def test_guardian_is_boss(self):
+        """Matches `enemies/archive_guardian.fof`: base Resolve 8 (A8/G1
+        retune, DESIGN §5-bis), +2 from heavy armor at combat start
+        (effective 10)."""
         e = make_enemy(archive_guardian_def())
         assert e.tier == "boss"
-        assert e.has_phase_change
+        assert e.resolve == 8
+        assert e.resolve_current == 10
+        assert e.phases == [{"resolve_threshold": 2, "description": "Reduced Mode"}]
         assert e.armor == "heavy"
 
     def test_series_definitions_valid(self):
@@ -658,7 +666,16 @@ class TestCalibration:
         assert result.mean_exchanges <= 5
 
     def test_seven_chickens_harder(self):
-        """7 Chickens should be significantly harder than 3."""
+        """7 Chickens should take significantly longer than 3.
+
+        Win rate is no longer a usable signal here after A6/F5: Mooks only
+        ever land Tier 1 hits, and with the 0-Endurance escalation retired
+        (DESIGN §4.3) a Mook swarm can no longer push a PC to a persistent
+        Tier 2, so both sizes sit at the 1.0 win-rate ceiling. `mean_exchanges`
+        still tracks difficulty — more Mooks take longer to grind through —
+        and is the assertion that survives. Chicken-baseline win rates are
+        superseded corpus per A0.4; full recalibration is A10's job.
+        """
         result_3 = run_simulation(
             standard_party(),
             [(chicken_def(), 3)],
@@ -673,29 +690,27 @@ class TestCalibration:
             label="7 Chickens",
             seed=1,
         )
-        assert result_7.win_rate < result_3.win_rate
         assert result_7.mean_exchanges > result_3.mean_exchanges
 
-    def test_named_npc_longer_than_mooks(self):
-        """Named NPC fights should last longer than Mook swarms."""
-        result_mooks = run_simulation(
-            standard_party(),
-            [(chicken_def(), 3)],
-            iterations=100,
-            label="3 Mooks",
-            seed=1,
-        )
-        result_named = run_simulation(
-            standard_party(),
-            [(generic_named_def(8), 1)],
-            iterations=100,
-            label="Named NPC",
-            seed=1,
-        )
-        assert result_named.mean_exchanges > result_mooks.mean_exchanges
-
     def test_boss_harder_than_named(self):
-        """Boss fights should have lower win rates than Named NPC fights."""
+        """Boss fights should take longer than Named NPC fights.
+
+        Win rate is no longer a usable signal here (same ceiling-effect as
+        `test_seven_chickens_harder` above): 3 PCs against either a single
+        Named or a single Boss at these post-D1 Resolve values both sit at
+        a 1.0 win-rate ceiling. `mean_exchanges` is the signal that
+        survives — a Boss's larger effective Resolve (7 + heavy armor 2 = 9
+        for a TR16 boss, vs a TR8 Named's 3 + light armor 1 = 4) reliably
+        takes more Strikes to grind through.
+
+        A single generic Named(TR8) is also no longer reliably slower than
+        a 3-Mook swarm post-D1 (its Resolve pool is small enough that 3 PCs
+        burn through it about as fast as removing 3 separate Mooks one
+        Strike each) — that comparison was dropped rather than loosened,
+        since "Named vs Mook-swarm" pacing is generic-def calibration, not
+        a D1 correctness question. Full recalibration against the new
+        Resolve numbers is Gate G4 (task A10).
+        """
         result_named = run_simulation(
             standard_party(),
             [(generic_named_def(8), 1)],
@@ -710,7 +725,264 @@ class TestCalibration:
             label="Boss",
             seed=1,
         )
-        assert result_boss.win_rate < result_named.win_rate
+        assert result_boss.mean_exchanges > result_named.mean_exchanges
+
+
+class TestRecipeCalibration:
+    """Pin the four MM1 Encounter Recipe Table rosters (task A10 / Gate G4).
+
+    These are the *calibrated deliverable* of A10: the recipes the MM builds
+    from, measured in the simulator rather than derived from the (demoted,
+    non-predictive) TR-budget formula. Each roster is the validated PS-3
+    composition from `research/simulation_log.md` Series 9 Part C. The win
+    rates are pinned to their recorded seed-1 values (n=200 is deterministic
+    at a fixed seed) *and* asserted to fall inside the difficulty band, so
+    that any future rules/engine change that shifts a recipe out of its band
+    trips a test instead of silently invalidating the MM1 table.
+
+    The difficulty ladder here is built by adding actors, not raising TR —
+    that is the whole point of the recalibration (DESIGN §5-ter).
+
+    A14 CASCADE, A15 RESOLUTION (2026-07-11): removing the enemy Parry
+    (§5-quater F5) moved every recipe ~one band easier, tripping the band
+    assertions by design (the guard working: a model correction must NOT
+    silently invalidate the MM1 Recipe Table). A15 re-ran the actor-count
+    ladder under the corrected model and re-pinned the rosters — see
+    `research/simulation_log.md` Series 9 Part D. The recalibrated ladder is
+    a fixed 3-Named core with one Mook added per difficulty step: Standard
+    3× Named + 1 Mook (76.0%), Hard 3× Named + 2 Mooks (47.5%), Deadly
+    3× Named + 3 Mooks (20.0%) with a 4× Named + 1 Mook alternative (20.0%).
+    The `xfail(strict)` markers were removed as each recipe re-entered band.
+    """
+
+    def test_skirmish_mook_swarm(self):
+        """Skirmish (85–100%): 3–7 Mooks. Recorded seed-1 win rate 100%."""
+        result = run_simulation(
+            standard_party(),
+            [(chicken_def(), 5)],
+            iterations=200,
+            label="Recipe: Skirmish (5 Mooks)",
+            seed=1,
+        )
+        assert result.win_rate == 1.0
+        assert 0.85 <= result.win_rate <= 1.00
+
+    def test_standard_three_named_plus_mook(self):
+        """Standard (65–85%): 3 Named (TR 8) + 1 Mook. A15-recalibrated seed-1
+        win 76.0% (Series 9 Part D)."""
+        result = run_simulation(
+            standard_party(),
+            [(generic_named_def(8), 3), (chicken_def(), 1)],
+            iterations=200,
+            label="Recipe: Standard (3x Named TR8 + 1 Mook)",
+            seed=1,
+        )
+        assert result.win_rate == pytest.approx(0.760)
+        assert 0.65 <= result.win_rate <= 0.85
+
+    def test_hard_three_named_plus_two_mooks(self):
+        """Hard (40–60%): 3 Named (TR 8) + 2 Mooks. A15-recalibrated seed-1
+        win 47.5% (Series 9 Part D)."""
+        result = run_simulation(
+            standard_party(),
+            [(generic_named_def(8), 3), (chicken_def(), 2)],
+            iterations=200,
+            label="Recipe: Hard (3x Named TR8 + 2 Mooks)",
+            seed=1,
+        )
+        assert result.win_rate == pytest.approx(0.475)
+        assert 0.40 <= result.win_rate <= 0.60
+
+    def test_deadly_three_named_plus_three_mooks(self):
+        """Deadly (15–35%): 3 Named (TR 8) + 3 Mooks. A15-recalibrated seed-1
+        win 20.0% (Series 9 Part D)."""
+        result = run_simulation(
+            standard_party(),
+            [(generic_named_def(8), 3), (chicken_def(), 3)],
+            iterations=200,
+            label="Recipe: Deadly (3x Named TR8 + 3 Mooks)",
+            seed=1,
+        )
+        assert result.win_rate == pytest.approx(0.200)
+        assert 0.15 <= result.win_rate <= 0.35
+
+    def test_deadly_four_named_plus_mook(self):
+        """Deadly (15–35%): 4 Named (TR 8) + 1 Mook — the "upgrade a throwaway
+        to a real threat" alternative. A15-recalibrated seed-1 win 20.0%
+        (Series 9 Part D)."""
+        result = run_simulation(
+            standard_party(),
+            [(generic_named_def(8), 4), (chicken_def(), 1)],
+            iterations=200,
+            label="Recipe: Deadly (4x Named TR8 + 1 Mook)",
+            seed=1,
+        )
+        assert result.win_rate == pytest.approx(0.200)
+        assert 0.15 <= result.win_rate <= 0.35
+
+    def test_ladder_is_built_by_adding_actors_not_tr(self):
+        """The Standard→Hard→Deadly ladder is an actor-count ladder.
+
+        Same TR-8 Named core; difficulty rises purely by adding actors. This
+        is the finding the TR budget cannot represent (Series 9), pinned here
+        so the recipes' monotonic ordering can't regress unnoticed.
+        """
+        std = run_simulation(
+            standard_party(), [(generic_named_def(8), 3), (chicken_def(), 1)],
+            iterations=200, label="ladder-std", seed=1,
+        )
+        hard = run_simulation(
+            standard_party(), [(generic_named_def(8), 3), (chicken_def(), 2)],
+            iterations=200, label="ladder-hard", seed=1,
+        )
+        deadly = run_simulation(
+            standard_party(), [(generic_named_def(8), 3), (chicken_def(), 3)],
+            iterations=200, label="ladder-deadly", seed=1,
+        )
+        assert std.win_rate > hard.win_rate > deadly.win_rate
+
+
+# ---------------------------------------------------------------------------
+# Spark refund variant flag (D6, WD7) -- "test, do not adopt"
+# ---------------------------------------------------------------------------
+
+class TestSparkRefundVariant:
+    def test_disabled_by_default(self):
+        assert spark_refund_variant_enabled() is False
+
+    def test_readable_from_a_custom_ruleset(self):
+        rs = _ruleset()
+        assert spark_refund_variant_enabled(rs) is False
+        assert rs.spark.variants.refund_on_failed_pretechnique_cast is False
+
+
+# ---------------------------------------------------------------------------
+# Spark spend policy (WD10) — selectable, default-preserving
+# ---------------------------------------------------------------------------
+
+class TestSparkSpendPolicy:
+    """WD10: `should_spend_spark` grows a selectable `policy` without
+    re-baselining any recorded corpus. `"conservative"` (default) must stay
+    bit-identical to the pre-WD10 function; `"player_like"` must spend more.
+    """
+
+    def test_default_policy_is_conservative(self):
+        """Omitting `policy` must match passing `"conservative"` explicitly,
+        across every branch of the old function (Boss / desperation /
+        finishing-blow / none of the above)."""
+        boss = make_enemy(generic_boss_def(12))
+        named = make_enemy(generic_named_def(8))
+        mook = make_enemy(chicken_def())
+
+        pc = make_pc(mordai_def())
+        assert should_spend_spark(pc, boss) == should_spend_spark(pc, boss, "conservative") == 1
+
+        pc = make_pc(mordai_def())
+        assert should_spend_spark(pc, mook) == should_spend_spark(pc, mook, "conservative") == 0
+
+        pc = make_pc(mordai_def())
+        pc.endurance_current = 1
+        assert should_spend_spark(pc, named) == should_spend_spark(pc, named, "conservative") == 1
+
+    def test_conservative_does_not_spend_on_named_at_full_endurance(self):
+        """Pins the exact pre-WD10 behaviour this policy must not disturb:
+        a Named target with no Tier 2 condition, at full Endurance, gets no
+        Spark under `"conservative"` — only `"player_like"` spends here."""
+        pc = make_pc(mordai_def())
+        named = make_enemy(generic_named_def(8))
+        assert should_spend_spark(pc, named, "conservative") == 0
+
+    def test_player_like_spends_on_named_not_just_boss(self):
+        pc = make_pc(mordai_def())
+        named = make_enemy(generic_named_def(8))
+        assert should_spend_spark(pc, named, "player_like") == 1
+
+    def test_player_like_spends_when_holding_above_a_floor(self):
+        """Holding 2+ Sparks spends even against a Mook at full Endurance —
+        the "less hoarding-prone" half of the policy `"conservative"` has no
+        equivalent for."""
+        pc = make_pc(mordai_def())
+        pc.sparks = 2
+        mook = make_enemy(chicken_def())
+        assert should_spend_spark(pc, mook, "player_like") == 1
+        assert should_spend_spark(pc, mook, "conservative") == 0
+
+    def test_player_like_never_spends_below_zero_sparks(self):
+        pc = make_pc(mordai_def())
+        pc.sparks = 0
+        boss = make_enemy(generic_boss_def(12))
+        assert should_spend_spark(pc, boss, "player_like") == 0
+
+    def test_player_like_is_a_superset_of_conservative(self):
+        """Every case where `"conservative"` spends, `"player_like"` also
+        spends — `"player_like"` never hoards more than the default."""
+        pc = make_pc(mordai_def())
+        for target in (
+            make_enemy(generic_boss_def(12)),
+            make_enemy(generic_named_def(8)),
+            make_enemy(chicken_def()),
+        ):
+            conservative = should_spend_spark(pc, target, "conservative")
+            player_like = should_spend_spark(pc, target, "player_like")
+            if conservative > 0:
+                assert player_like > 0
+
+    def test_run_combat_and_run_simulation_default_to_conservative(self):
+        """`spark_policy` threads through `_pc_strike` via `run_combat` and
+        `run_simulation` without changing the default call's behaviour."""
+        explicit = run_simulation(
+            standard_party(),
+            [(generic_named_def(8), 3), (chicken_def(), 1)],
+            iterations=50,
+            seed=1,
+            spark_policy="conservative",
+        )
+        default = run_simulation(
+            standard_party(),
+            [(generic_named_def(8), 3), (chicken_def(), 1)],
+            iterations=50,
+            seed=1,
+        )
+        assert explicit == default
+
+    def test_player_like_spends_more_sparks_in_aggregate(self):
+        """The Accept criterion's headline claim: `player_like` demonstrably
+        spends more than `conservative` over a real encounter, not just in
+        the unit-level branch tests above."""
+        conservative = run_simulation(
+            standard_party(),
+            [(generic_named_def(8), 3), (chicken_def(), 1)],
+            iterations=200,
+            seed=1,
+            spark_policy="conservative",
+        )
+        player_like = run_simulation(
+            standard_party(),
+            [(generic_named_def(8), 3), (chicken_def(), 1)],
+            iterations=200,
+            seed=1,
+            spark_policy="player_like",
+        )
+        assert player_like.mean_sparks_spent > conservative.mean_sparks_spent
+
+    def test_characterization_conservative_reproduces_recorded_corpus(self):
+        """Iron requirement (WD10 Accept): a known recorded run reproduces
+        its recorded numbers exactly under the default policy. This is the
+        Recipe Table's Standard roster (`research/simulation_log.md` Series
+        9 Part D / `TestRecipeCalibration.test_standard_three_named_plus_mook`),
+        seed=1, n=200 — its win rate (0.760) is the already-recorded corpus
+        number; `mean_sparks_spent` is pinned here as this task's own
+        regression anchor so a future edit to `should_spend_spark` cannot
+        silently re-baseline it."""
+        result = run_simulation(
+            standard_party(),
+            [(generic_named_def(8), 3), (chicken_def(), 1)],
+            iterations=200,
+            label="WD10 characterization: Recipe Standard",
+            seed=1,
+        )
+        assert result.win_rate == pytest.approx(0.760)
+        assert result.mean_sparks_spent == pytest.approx(4.1)
 
 
 # Expose MAX_EXCHANGES for use in test assertions

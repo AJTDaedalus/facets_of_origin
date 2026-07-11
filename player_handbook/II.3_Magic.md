@@ -139,7 +139,7 @@ The complication is the MM's call, and it should move the story forward, not sim
 >
 > *Nothing happens.* The rarest and most useful failure. The domain reaches and finds nothing — the lock is not what Zahna thought it was, the creature is not susceptible in the way the theory suggested. The failure is informative. They now know something they didn't before.
 >
-> **For players:** a magical 6- is a Graceful Fail opportunity. Describe how your character responds to the misfire — what they do with the feedback the magic just gave them — and the MM may award a Spark for the commitment.
+> **For players:** a magical 6- is a Graceful Fail opportunity. Describe how your character responds to the misfire — what they do with the feedback the magic just gave them — and claim the Spark yourself; the MM confirms.
 
 ---
 
@@ -187,7 +187,7 @@ Magic in combat — casting time, reactions against magical effects, Conditions 
 
 ## Domain Quick Reference
 
-All 18 domains at a glance. Full descriptions are in the **Appendix: Magic Domain Catalog**. Prismatic domains (marked †) require a Tier 3 Technique to access.
+All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domain Catalog**. Prismatic domains (marked †) require a Tier 3 Technique to access.
 
 ### Soul Domains
 
@@ -222,7 +222,7 @@ All 18 domains at a glance. Full descriptions are in the **Appendix: Magic Domai
 
 ---
 
-Full descriptions of all 18 domains — what each covers, example effects at each scope, and boundary guidance — are in the **Appendix: Magic Domain Catalog**.
+Full descriptions of all 21 domains — what each covers, example effects at each scope, and boundary guidance — are in the **Appendix: Magic Domain Catalog**.
 
 ---
 

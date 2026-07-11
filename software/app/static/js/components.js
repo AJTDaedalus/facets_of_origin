@@ -118,6 +118,109 @@ function renderCombatStateCompact(char) {
 }
 
 // ---------------------------------------------------------------------------
+// Enemy card rendering (shared between MM tracker and player view)
+// ---------------------------------------------------------------------------
+// Mooks have no Resolve pool — they fall to one Strike. Returns null for mooks,
+// otherwise {current, max} where current falls back to max before combat starts.
+function enemyResolveDisplay(enemy) {
+  if (enemy.tier === 'mook') return null;
+  const max = enemy.resolve || 0;
+  const current = (enemy.resolve_current !== null && enemy.resolve_current !== undefined)
+    ? enemy.resolve_current : max;
+  return { current: current, max: max };
+}
+
+function renderEnemyCard(key, enemy, opts) {
+  opts = opts || {};
+  const condStr = enemy.conditions && enemy.conditions.length > 0
+    ? enemy.conditions.join(', ') : 'none';
+  const res = enemyResolveDisplay(enemy);
+  const hasPhases = opts.showPhases && enemy.phases && enemy.phases.length > 0;
+
+  let resolveBlock;
+  if (res) {
+    const denom = res.max || res.current || 1;
+    const pct = Math.round((res.current / denom) * 100);
+    const fillClass = 'resolve-fill' + (pct <= 25 ? ' critical' : pct <= 50 ? ' low' : '');
+    let markers = '';
+    if (hasPhases) {
+      markers = enemy.phases.map(function (p) {
+        const left = Math.max(0, Math.min(100, Math.round((p.resolve_threshold / denom) * 100)));
+        return '<span class="resolve-phase-marker" style="left:' + left + '%;"'
+          + ' title="Phase at ' + p.resolve_threshold + ': ' + escapeHtml(p.description || '') + '"></span>';
+      }).join('');
+    }
+    resolveBlock =
+      '<div class="resolve-bar"><div class="' + fillClass + '" style="width:' + pct + '%;"></div>' + markers + '</div>'
+      + '<div style="font-size:11px;color:var(--text-dim);">Resolve <span class="enemy-resolve">'
+      + res.current + '</span>/' + res.max + '</div>';
+  } else {
+    resolveBlock = '<div style="font-size:12px;color:var(--text-dim);">Mook &mdash; falls to one Strike</div>';
+  }
+
+  let phaseNote = '';
+  if (hasPhases) {
+    phaseNote = '<div style="font-size:11px;color:var(--text-dim);margin-top:2px;">Phases at Resolve: '
+      + enemy.phases.map(function (p) { return escapeHtml(String(p.resolve_threshold)); }).join(', ')
+      + '</div>';
+  }
+
+  let controls = '';
+  if (opts.mmControls) {
+    controls =
+      '<div class="btn-row" style="margin-top:4px;">'
+      + (res ? '<button class="btn btn-secondary btn-sm" onclick="enemyTakeDamage(\'' + escapeHtml(key) + '\')">-1 Resolve</button>' : '')
+      + '<button class="btn btn-secondary btn-sm" onclick="enemyAddCondition(\'' + escapeHtml(key) + '\')">+Cond</button>'
+      + '<button class="btn btn-secondary btn-sm" onclick="removeEnemy(\'' + escapeHtml(key) + '\')">Remove</button>'
+      + '</div>';
+  }
+
+  return ''
+    + '<div class="enemy-tracker-entry">'
+    + '<div style="display:flex;justify-content:space-between;align-items:center;">'
+    + '<strong>' + escapeHtml(enemy.name) + '</strong>'
+    + '<span style="font-size:11px;color:var(--text-dim);">' + escapeHtml(enemy.tier) + ' | TR ' + (enemy.tr || '?') + '</span>'
+    + '</div>'
+    + '<div style="margin-top:4px;">' + resolveBlock + '</div>'
+    + '<div style="font-size:12px;margin-top:2px;">Cond: ' + escapeHtml(condStr) + '</div>'
+    + phaseNote
+    + controls
+    + '</div>';
+}
+
+// ---------------------------------------------------------------------------
+// Threat Clock card (PHB III.2, D4) — visible to the whole table
+// ---------------------------------------------------------------------------
+function renderThreatClockCard(clock, opts) {
+  opts = opts || {};
+  const segments = [];
+  for (let i = 0; i < clock.segments; i++) {
+    segments.push('<span class="clock-segment' + (i < clock.filled_segments ? ' filled' : '') + '"></span>');
+  }
+
+  let controls = '';
+  if (opts.mmControls) {
+    controls =
+      '<div class="btn-row" style="margin-top:4px;">'
+      + '<button class="btn btn-secondary btn-sm" onclick="clockAdvance(\'' + escapeHtml(clock.id) + '\', \'partial_success\')">Advance (7-9)</button>'
+      + '<button class="btn btn-secondary btn-sm" onclick="clockAdvance(\'' + escapeHtml(clock.id) + '\', \'failure\')">Advance (6-)</button>'
+      + '<button class="btn btn-secondary btn-sm" onclick="clockWindBack(\'' + escapeHtml(clock.id) + '\')">Wind Back</button>'
+      + '</div>';
+  }
+
+  return ''
+    + '<div class="threat-clock-entry' + (clock.is_full ? ' clock-full' : '') + '">'
+    + '<div style="display:flex;justify-content:space-between;align-items:center;">'
+    + '<strong>' + escapeHtml(clock.name) + '</strong>'
+    + '<span style="font-size:11px;color:var(--text-dim);">' + clock.filled_segments + '/' + clock.segments
+    + (clock.is_full ? ' — STRIKES' : '') + '</span>'
+    + '</div>'
+    + '<div class="clock-segments">' + segments.join('') + '</div>'
+    + controls
+    + '</div>';
+}
+
+// ---------------------------------------------------------------------------
 // Rule summary card (collapsible, used in Tools tab)
 // ---------------------------------------------------------------------------
 function renderRuleSummaryCard(title, content) {

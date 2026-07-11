@@ -10,22 +10,26 @@ ruleset:
 
 enemy:
   tier: boss
-  endurance: 10
+  resolve: 8            # A8/G1 retune (2026-07-10): 5 -> 8, DESIGN §5-bis. A
+                         # solo by-the-book Boss at Resolve 5 collapsed to a
+                         # median 2-exchange fight under the worst-case
+                         # rider->Easy snowball; 8 is the smallest value that
+                         # clears the median->=3 floor (confirmed by sim,
+                         # research/simulation_log.md Series 7).
   attack_modifier: 3    # Strength +2, Combat Expert +2 — iron weight, not technique
   defense_modifier: 1   # Dex −1, Combat Practiced +1 (partially damaged in story)
   armor: heavy
-  techniques: []
-  special:
-    phase_change:
-      trigger: first_broken
-      name: Reduced Mode
+  techniques: [phase_change, tier1_immunity]
+  special: null
+  tr: 17                 # offense(+3→5) + durability(Resolve 8) + armor(heavy→2) + techniques(2) = 17
+  phases:
+    - resolve_threshold: 2
       description: >
-        When first Broken, the Guardian enters Reduced Mode. Its attack_modifier
-        drops to +1. However, it now ignores all Tier 1 Conditions entirely —
-        not through resilience, but because the sensory subsystem that registered
-        them has shut down. It is running on something else. What that is,
-        the party does not know. Its Endurance resets to 4 for the second phase.
-  tr: 16                # offense(+3→5) + durability(Endurance 10→5) + armor(heavy→2) + special(phase→2+immune Tier1→2) = 16
+        Reduced Mode. When the Guardian's Resolve drops to 2 or below, its
+        attack_modifier drops to +1. However, it now ignores all Tier 1
+        Conditions entirely — not through resilience, but because the
+        sensory subsystem that registered them has shut down. It is running
+        on something else. What that is, the party does not know.
 
   description: >
     A Constructed guardian commissioned by the Thornwall city government
@@ -39,13 +43,24 @@ enemy:
     That is, in certain lights, worse.
 
   notes: >
-    TR breakdown: offense(+3 → value 5) + durability(Endurance 10 → value 5)
-    + armor(heavy → 2) + technique_bonus(phase change → 2, Tier 1 immunity → 2) = 16.
+    TR breakdown: offense(+3 → value 5) + durability(Resolve 8)
+    + armor(heavy → 2) + technique_bonus(phase_change → 1, tier1_immunity → 1) = 17.
 
-    Against a Party Strength of 3, this is a Deadly encounter at face value
-    (budget 12, actual TR 16). Intended to be solved laterally — structural
+    Resolve retuned 5 → 8 by task A8/Gate G1 (2026-07-10, DESIGN §5-bis):
+    a solo, single-target Boss cannot be tuned to a 45-55% party-loss rate
+    at any Resolve value (action economy, not a bug — three independently
+    acting PCs grind through any durability pool a lone attacker holds).
+    G1 was reframed as a length-plus-cost gate; Resolve 8 is the smallest
+    value whose effective (heavy +2) pool clears a median >= 3 exchanges
+    under the worst-case rider→Easy snowball. See research/simulation_log.md
+    Series 7.
+
+    Against a Party Strength of 3, this is a Hard-to-Deadly encounter at face value
+    (budget 12, actual TR 17). Intended to be solved laterally — structural
     weaknesses, Zahna's glyph, exploitation of its fixed patrol logic.
-    A straight fight is survivable but very expensive.
+    A straight fight is survivable but very expensive — G1 confirms this by
+    sim: the by-the-book party wins essentially every time, but only after
+    several exchanges and real Spark/Endurance expenditure.
 
     Joint weakness: its attack_modifier can be reduced by successful Maneuvers
     targeting specific joints. Each successful joint Maneuver (10+) reduces
@@ -57,4 +72,4 @@ enemy:
     something that has never needed to hurry.
 
 created_at: '2026-03-05T00:00:00+00:00'
-last_modified: '2026-03-05T00:00:00+00:00'
+last_modified: '2026-07-10T00:00:00+00:00'

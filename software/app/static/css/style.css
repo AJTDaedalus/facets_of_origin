@@ -637,9 +637,69 @@ label {
   border-radius: var(--radius-sm);
 }
 
-.enemy-tracker-entry .enemy-endurance {
+.enemy-tracker-entry .enemy-resolve {
   color: var(--gold);
   font-weight: 700;
+}
+
+/* Enemy Resolve bar (mirrors the character Endurance bar) */
+.resolve-bar {
+  position: relative;
+  height: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 2px 0;
+}
+.resolve-fill {
+  height: 100%;
+  background: #b3413a;
+  border-radius: 6px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+.resolve-fill.low  { background: #ff9800; }
+.resolve-fill.critical { background: #f44336; }
+.resolve-phase-marker {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--gold);
+  transform: translateX(-1px);
+}
+
+/* Threat Clock (PHB III.2, D4) — visible to the whole table */
+.threat-clock-entry {
+  padding: 8px;
+  margin-bottom: 6px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.clock-segments {
+  display: flex;
+  gap: 4px;
+  margin: 4px 0;
+}
+
+.clock-segment {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.clock-segment.filled {
+  background: #b3413a;
+  border-color: #b3413a;
+}
+
+.threat-clock-entry.clock-full .clock-segment.filled {
+  background: var(--gold);
+  border-color: var(--gold);
 }
 
 /* Rule summary cards — collapsible */

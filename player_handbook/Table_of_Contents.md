@@ -14,7 +14,7 @@
 
 ## III — Rules
 - III.1 Core Resolution *(dice mechanics, modifiers, difficulty, Sparks, contested rolls, saving throws)*
-- III.2 Adventuring *(Planned)*
+- III.2 Adventuring *(hazards & Threat Clocks, recovery, when a character would die)*
 - III.3 Combat
 
 ## IV — Compendium

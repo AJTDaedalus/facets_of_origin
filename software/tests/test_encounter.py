@@ -188,6 +188,74 @@ class TestTierWeightedTR:
         assert e.calculate_effective_tr(trs) == 5.5
 
 
+class TestFormulaIsRoughHeuristicNotPredictor:
+    """The TR-budget formula is a demoted rough ordering check (task A10 /
+    DESIGN §5-ter), not a difficulty predictor.
+
+    These tests assert the *documented* behavior of the demoted formula: it
+    preserves a few loose ordering intuitions (more of the same enemy is not
+    cheaper; a Boss outweighs a Named of equal TR; a solo enemy is discounted)
+    while being explicitly non-predictive for multi-Named/Boss rosters — a
+    property we pin with a known-mis-ranking test so nobody "fixes" the
+    constants into false precision. The calibrated difficulty numbers live in
+    the simulator (`test_combat_sim.py::TestRecipeCalibration`), not here.
+    """
+
+    def test_more_of_the_same_enemy_never_scores_lower(self):
+        """Rough monotonicity: adding identical enemies does not reduce TR."""
+        trs = {"named": 8}
+        tiers = {"named": "named"}
+        prev = -1.0
+        for count in range(1, 8):
+            e = Encounter(id="e", name="E", enemies=[
+                EncounterEnemy(enemy_id="named", count=count),
+            ])
+            eff = e.calculate_effective_tr(trs, tiers)
+            assert eff >= prev
+            prev = eff
+
+    def test_boss_outweighs_named_of_equal_tr(self):
+        """Tier ordering: boss weight > named weight > mook weight at equal TR."""
+        trs = {"x": 10}
+        base = Encounter(id="e", name="E", enemies=[EncounterEnemy(enemy_id="x", count=1)])
+        boss = base.calculate_effective_tr(trs, {"x": "boss"})
+        named = base.calculate_effective_tr(trs, {"x": "named"})
+        mook = base.calculate_effective_tr(trs, {"x": "mook"})
+        assert boss > named > mook
+
+    def test_solo_enemy_is_discounted_in_legacy_path(self):
+        """The legacy (no-tier) path discounts a solo enemy below its raw TR —
+        a rough nod to 'the party concentrates fire on one target'."""
+        e = Encounter(id="e", name="E", enemies=[EncounterEnemy(enemy_id="x", count=1)])
+        assert e.calculate_effective_tr({"x": 8}) < 8
+
+    def test_formula_mis_ranks_the_actor_count_cliff(self):
+        """DOCUMENTED LIMITATION — do not "fix" this.
+
+        Simulation (Series 9) measured 2 Bosses (TR 17) at ~83% party win
+        (nearly trivial) and 4 Named (TR 8) at ~20% (Deadly). The weighted-sum
+        formula ranks them the *opposite* way — it scores the two Bosses higher
+        (i.e. flags them as harder) than the four Named. This inversion is
+        inherent to any linear weighted-TR-sum and is exactly why the formula
+        is non-predictive for multi-Named/Boss rosters and why the Recipe Table
+        supersedes it. This test pins the inversion so that a future attempt to
+        retune the constants toward the four listed recipes — which would
+        reintroduce the false-precision trap A10 escalated — trips a test and a
+        reviewer instead of shipping silently.
+        """
+        two_bosses = Encounter(id="b", name="2 Boss", enemies=[
+            EncounterEnemy(enemy_id="boss", count=2),
+        ]).calculate_effective_tr({"boss": 17}, {"boss": "boss"})
+        four_named = Encounter(id="n", name="4 Named", enemies=[
+            EncounterEnemy(enemy_id="named", count=4),
+        ]).calculate_effective_tr({"named": 8}, {"named": "named"})
+
+        # Formula's ranking (backwards vs. the simulator's measured difficulty).
+        assert two_bosses == pytest.approx(42.5)
+        assert four_named == pytest.approx(35.2)
+        assert two_bosses > four_named  # the mis-ranking, pinned deliberately
+
+
 class TestGroupSizeModifier:
     def test_small(self):
         assert Encounter.group_size_modifier(1) == 1.0

@@ -27,6 +27,7 @@ const state = {
   activeEnemies: {},       // tracker_key -> enemy
   enemyLibrary: {},        // enemy_id -> enemy
   encounterLibrary: {},    // encounter_id -> encounter
+  threatClocks: {},        // clock_id -> clock (PHB III.2, D4)
   inCombat: false,
   postures: {},            // player_name -> posture (after reveal)
 };
@@ -371,6 +372,22 @@ function handleServerMessage(msg) {
       onEnemyRemoved(msg);
       addSystemChat(`Enemy removed: ${msg.tracker_key}`);
       break;
+    case 'enemy_phase_change':
+      onEnemyPhaseChange(msg);
+      break;
+    // Threat Clock broadcasts (PHB III.2, D4)
+    case 'clock_created':
+      onClockCreated(msg);
+      break;
+    case 'clock_advanced':
+      onClockAdvanced(msg);
+      break;
+    case 'clock_wound_back':
+      onClockWoundBack(msg);
+      break;
+    case 'clock_fill':
+      onClockFill(msg);
+      break;
     // Combat broadcasts
     case 'combat_started':
       onCombatStarted(msg);
@@ -426,6 +443,7 @@ function onStateReceived(data) {
   state.activeEnemies = data.active_enemies || {};
   state.enemyLibrary = data.enemy_library || {};
   state.encounterLibrary = data.encounter_library || {};
+  state.threatClocks = data.threat_clocks || {};
 
   if (state.role === 'player' && data.your_character) {
     state.character = data.your_character;

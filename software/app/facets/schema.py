@@ -168,12 +168,27 @@ class SparkEarnMethod(BaseModel):
     id: str
     label: str
     description: str
+    structured: bool = False
+    target_per_session: str = ""
+
+
+class SparkVariantsDef(BaseModel):
+    """Untested/optional rule variants, kept off by default (D6).
+
+    Fields:
+        refund_on_failed_pretechnique_cast: If true, a failed pre-Technique
+            magic cast refunds its Spark cost. Measured by PT04 (WD8) but
+            not adopted — the flag exists so the sim/harness can toggle it.
+    """
+
+    refund_on_failed_pretechnique_cast: bool = False
 
 
 class SparkDef(BaseModel):
     base_sparks_per_session: int = Field(ge=0)
     mechanic: SparkMechanicDef
     earn_methods: list[SparkEarnMethod] = Field(default_factory=list)
+    variants: SparkVariantsDef = Field(default_factory=SparkVariantsDef)
 
 
 # ---------------------------------------------------------------------------
@@ -268,29 +283,72 @@ class EnduranceDef(BaseModel):
 
 
 class ArmorEntryDef(BaseModel):
-    """One armor tier's downgrade rule.
+    """One armor tier's per-scene Condition-downgrade budget for player
+    characters (D2).
 
     Fields:
-        downgrades: Number of Condition tiers this armor downgrades (e.g. 1 = Tier 2→1).
+        downgrades_per_scene: Number of incoming Conditions this armor
+                              downgrades before the budget is spent. The
+                              budget resets at end of **scene**, never end
+                              of exchange or end of fight — two fights
+                              inside one scene share the budget.
+        tiers_reduced: Number of Condition tiers each downgrade removes
+                       (e.g. 1 = Tier 2 -> Tier 1; Tier 1 -> none).
     """
 
-    downgrades: int = 1
+    downgrades_per_scene: int = 2
+    tiers_reduced: int = 1
 
 
 class ArmorDef(BaseModel):
-    """Armor downgrade rules keyed by armor type ("light", "heavy")."""
+    """PC armor downgrade rules keyed by armor type ("light", "heavy")."""
 
     light: ArmorEntryDef = Field(default_factory=ArmorEntryDef)
-    heavy: ArmorEntryDef = Field(default_factory=lambda: ArmorEntryDef(downgrades=2))
+    heavy: ArmorEntryDef = Field(
+        default_factory=lambda: ArmorEntryDef(downgrades_per_scene=4)
+    )
+
+
+class StrikeDepletionDef(BaseModel):
+    """Resolve depletion an enemy takes from a PC Strike, keyed by outcome tier."""
+
+    full_success: int = 2
+    partial_success: int = 1
+    failure: int = 0
+
+
+class ArmorResolveBonusDef(BaseModel):
+    """Flat Resolve bonus an enemy's armor grants (D1). Numerically equal to
+    the Threat Rating formula's `armor_bonus` term — the TR identity."""
+
+    none: int = 0
+    light: int = 1
+    heavy: int = 2
+
+
+class EnemyDurabilityDef(BaseModel):
+    """Enemy Resolve pool rules (D1): depletion, armor bonus, and Mook removal.
+
+    Fields:
+        strike_depletion: Resolve lost per PC Strike outcome tier.
+        armor_resolve_bonus: Flat Resolve granted by enemy armor.
+        mook_removed_on: Outcome tier that removes an unarmored Mook.
+        armored_mook_removed_on: Outcome tier that removes an armored Mook.
+    """
+
+    strike_depletion: StrikeDepletionDef = Field(default_factory=StrikeDepletionDef)
+    armor_resolve_bonus: ArmorResolveBonusDef = Field(default_factory=ArmorResolveBonusDef)
+    mook_removed_on: str = "partial_success"
+    armored_mook_removed_on: str = "full_success"
 
 
 class CombatDef(BaseModel):
     """Full combat rule set loaded from facet.yaml (PHB III.3).
 
-    The structured sub-models (endurance, conditions, armor) are read by the
-    engine for data-driven behaviour. Remaining sections (postures, reactions,
-    press, strike_outcomes) are informational and stored as open dicts until
-    more structured models are needed.
+    The structured sub-models (endurance, conditions, armor, enemy_durability)
+    are read by the engine for data-driven behaviour. Remaining sections
+    (postures, reactions, press, strike_outcomes) are informational and
+    stored as open dicts until more structured models are needed.
     """
 
     endurance: EnduranceDef = Field(default_factory=EnduranceDef)
@@ -299,11 +357,58 @@ class CombatDef(BaseModel):
     press: dict[str, Any] = Field(default_factory=dict)
     conditions: CombatConditionsTierDef = Field(default_factory=CombatConditionsTierDef)
     armor: ArmorDef = Field(default_factory=ArmorDef)
+    enemy_durability: EnemyDurabilityDef = Field(default_factory=EnemyDurabilityDef)
     strike_outcomes: dict[str, Any] = Field(default_factory=dict)
     endurance_floor_rule: str = ""
     mook_rule: str = ""
     named_npc_rule: str = ""
     boss_rule: str = ""
+
+
+# ---------------------------------------------------------------------------
+# Hazards & Death (PHB III.2 — D4)
+# ---------------------------------------------------------------------------
+
+class ThreatClockDef(BaseModel):
+    """A visible-to-the-table pressure clock (PHB III.2).
+
+    Fields:
+        segments: Total segments before the clock fills and the hazard strikes.
+        advances_on: Outcome tiers (roll_resolution ids) that advance the clock
+                     by one segment when rolled near the hazard.
+        wind_back_cost: Narrative cost description for winding the clock back
+                        one segment (e.g. "1_action").
+        wind_back_requires_roll: Always False by design (Brain, BRIEF §EF4) — a
+                                  rolled wind-back would let a 7-9 advance the
+                                  very clock being wound.
+    """
+
+    segments: int = Field(default=4, ge=1)
+    advances_on: list[str] = Field(
+        default_factory=lambda: ["partial_success", "failure"]
+    )
+    wind_back_cost: str = "1_action"
+    wind_back_requires_roll: bool = False
+
+
+class HazardsDef(BaseModel):
+    threat_clock: ThreatClockDef = Field(default_factory=ThreatClockDef)
+
+
+class DeathDef(BaseModel):
+    """Death rule (PHB III.2): Broken is never lethal by itself.
+
+    Fields:
+        broken_is_lethal: Always False — a Broken Condition alone never ends
+                           a character's life.
+        doom_gate: The two player-chosen outcomes when a Broken result would
+                   end a character's life in the fiction.
+    """
+
+    broken_is_lethal: bool = False
+    doom_gate: list[str] = Field(
+        default_factory=lambda: ["permanent_scar", "heroic_death"]
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -385,6 +490,8 @@ class FacetFile(BaseModel):
     advancement: AdvancementDef | None = None
     combat: CombatDef | None = None
     magic: MagicDef | None = None
+    hazards: HazardsDef | None = None
+    death: DeathDef | None = None
 
     @field_validator("id")
     @classmethod

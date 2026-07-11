@@ -10,13 +10,13 @@ ruleset:
 
 enemy:
   tier: named
-  endurance: 6
+  resolve: 3
   attack_modifier: 2    # Strength +1, Combat Practiced +1
   defense_modifier: 2   # Parry: same roll
   armor: light
   techniques: []
   special: null
-  tr: 8                 # offense(+2→4) + durability(Endurance 6→3) + armor(light→1) + techniques(0) = 8
+  tr: 8                 # offense(+2→4) + durability(Resolve 3) + armor(light→1) + techniques(0) = 8
 
   description: >
     A mid-rank officer of the city watch. Experienced in crowd control,
@@ -26,7 +26,7 @@ enemy:
     for backup if the fight runs more than two exchanges.
 
   notes: >
-    TR breakdown: offense(+2 → value 4) + durability(Endurance 6 → value 3)
+    TR breakdown: offense(+2 → value 4) + durability(Resolve 3)
     + armor(light → 1) + techniques(0) = 8. Meets Named NPC minimum of 8.
 
     Posture tendency: Measured first exchange, Defensive if Staggered.

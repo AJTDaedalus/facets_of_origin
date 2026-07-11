@@ -6,14 +6,20 @@ from pydantic import ValidationError
 
 from app.facets.schema import (
     AdvancementDef,
+    ArmorDef,
+    ArmorEntryDef,
+    ArmorResolveBonusDef,
     AttributeDistribution,
     AttributeRating,
     AttributesDef,
     BranchDef,
     CharacterFacetDef,
+    DeathDef,
     DifficultyModifier,
+    EnemyDurabilityDef,
     FacetFile,
     FacetTreeDef,
+    HazardsDef,
     MajorAttributeDef,
     MinorAttributeDef,
     OutcomeLabel,
@@ -25,7 +31,10 @@ from app.facets.schema import (
     SparkDef,
     SparkEarnMethod,
     SparkMechanicDef,
+    SparkVariantsDef,
+    StrikeDepletionDef,
     TechniqueDef,
+    ThreatClockDef,
     TierDef,
 )
 
@@ -269,6 +278,87 @@ class TestSparkDef:
         )
         assert len(s.earn_methods) == 1
 
+    def test_variants_default_off(self):
+        s = SparkDef(
+            base_sparks_per_session=3,
+            mechanic=SparkMechanicDef(spend="per_spark", description="."),
+        )
+        assert s.variants.refund_on_failed_pretechnique_cast is False
+
+
+class TestSparkEarnMethod:
+    def test_structured_defaults_false(self):
+        m = SparkEarnMethod(id="graceful_fail", label="The Graceful Fail", description=".")
+        assert m.structured is False
+
+    def test_structured_can_be_true(self):
+        m = SparkEarnMethod(
+            id="graceful_fail", label="The Graceful Fail", description=".", structured=True
+        )
+        assert m.structured is True
+
+    def test_target_per_session_default_empty(self):
+        m = SparkEarnMethod(id="mm_award", label="MM Award", description=".")
+        assert m.target_per_session == ""
+
+
+class TestSparkVariantsDef:
+    def test_defaults_off(self):
+        v = SparkVariantsDef()
+        assert v.refund_on_failed_pretechnique_cast is False
+
+    def test_can_be_enabled(self):
+        v = SparkVariantsDef(refund_on_failed_pretechnique_cast=True)
+        assert v.refund_on_failed_pretechnique_cast is True
+
+
+# ---------------------------------------------------------------------------
+# ThreatClockDef / HazardsDef / DeathDef (D4 — PHB III.2)
+# ---------------------------------------------------------------------------
+
+class TestThreatClockDef:
+    def test_defaults(self):
+        c = ThreatClockDef()
+        assert c.segments == 4
+        assert c.advances_on == ["partial_success", "failure"]
+        assert c.wind_back_cost == "1_action"
+        assert c.wind_back_requires_roll is False
+
+    def test_segments_below_minimum_rejected(self):
+        with pytest.raises(ValidationError):
+            ThreatClockDef(segments=0)
+
+    def test_custom_segments(self):
+        c = ThreatClockDef(segments=6)
+        assert c.segments == 6
+
+    def test_wind_back_never_requires_roll_by_default(self):
+        # Brain ruling (BRIEF §EF4): a rolled wind-back would let a 7-9
+        # advance the very clock being wound.
+        c = ThreatClockDef()
+        assert c.wind_back_requires_roll is False
+
+
+class TestHazardsDef:
+    def test_default_threat_clock(self):
+        h = HazardsDef()
+        assert h.threat_clock.segments == 4
+
+    def test_custom_threat_clock(self):
+        h = HazardsDef(threat_clock=ThreatClockDef(segments=3))
+        assert h.threat_clock.segments == 3
+
+
+class TestDeathDef:
+    def test_defaults(self):
+        d = DeathDef()
+        assert d.broken_is_lethal is False
+        assert d.doom_gate == ["permanent_scar", "heroic_death"]
+
+    def test_broken_is_lethal_is_always_false_by_default(self):
+        d = DeathDef()
+        assert d.broken_is_lethal is False
+
 
 # ---------------------------------------------------------------------------
 # AdvancementDef
@@ -295,6 +385,71 @@ class TestAdvancementDef:
 
 
 # ---------------------------------------------------------------------------
+# ArmorEntryDef / ArmorDef (D2 — PC per-scene downgrade budget)
+# ---------------------------------------------------------------------------
+
+class TestArmorEntryDef:
+    def test_defaults(self):
+        a = ArmorEntryDef()
+        assert a.downgrades_per_scene == 2
+        assert a.tiers_reduced == 1
+
+    def test_custom_values(self):
+        a = ArmorEntryDef(downgrades_per_scene=4, tiers_reduced=1)
+        assert a.downgrades_per_scene == 4
+
+
+class TestArmorDef:
+    def test_defaults(self):
+        a = ArmorDef()
+        assert a.light.downgrades_per_scene == 2
+        assert a.heavy.downgrades_per_scene == 4
+
+    def test_heavy_outlasts_light(self):
+        a = ArmorDef()
+        assert a.heavy.downgrades_per_scene > a.light.downgrades_per_scene
+
+
+# ---------------------------------------------------------------------------
+# StrikeDepletionDef / ArmorResolveBonusDef / EnemyDurabilityDef (D1 — Resolve)
+# ---------------------------------------------------------------------------
+
+class TestStrikeDepletionDef:
+    def test_defaults(self):
+        d = StrikeDepletionDef()
+        assert d.full_success == 2
+        assert d.partial_success == 1
+        assert d.failure == 0
+
+
+class TestArmorResolveBonusDef:
+    def test_defaults(self):
+        b = ArmorResolveBonusDef()
+        assert b.none == 0
+        assert b.light == 1
+        assert b.heavy == 2
+
+
+class TestEnemyDurabilityDef:
+    def test_defaults(self):
+        e = EnemyDurabilityDef()
+        assert e.strike_depletion.full_success == 2
+        assert e.armor_resolve_bonus.heavy == 2
+        assert e.mook_removed_on == "partial_success"
+        assert e.armored_mook_removed_on == "full_success"
+
+    def test_custom_construction(self):
+        e = EnemyDurabilityDef(
+            strike_depletion=StrikeDepletionDef(full_success=3, partial_success=1, failure=0),
+            armor_resolve_bonus=ArmorResolveBonusDef(none=0, light=2, heavy=3),
+            mook_removed_on="full_success",
+            armored_mook_removed_on="full_success",
+        )
+        assert e.strike_depletion.full_success == 3
+        assert e.armor_resolve_bonus.light == 2
+
+
+# ---------------------------------------------------------------------------
 # FacetFile — root model
 # ---------------------------------------------------------------------------
 
@@ -313,6 +468,8 @@ class TestFacetFile:
         assert ff.roll_resolution is None
         assert ff.spark is None
         assert ff.advancement is None
+        assert ff.hazards is None
+        assert ff.death is None
 
     def test_authors_defaults_empty(self):
         ff = FacetFile(id="auth", name="Authors", version="1.0")

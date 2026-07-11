@@ -214,9 +214,9 @@ The Facets advancement system is not just a reward mechanism — it is a pacing 
 | Threshold | Approximate Timeline | Story Beat |
 |---|---|---|
 | First skill rank advance | Sessions 1–3 | The character finds their footing; early competence emerges |
-| Facet Level 1 (6 primary advances) | Sessions 8–15 | The character has a clear identity; first Technique defines their approach |
-| Facet Level 2 (12 primary advances) | Sessions 20–30 | The character is established; cross-training begins; breadth over depth |
-| Major Advancement (4 Facet levels total) | Sessions 35–50+ | The character has become someone — the +1 Attribute or Pinnacle Technique marks a transformation |
+| Facet Level 1 (5 primary advances) | Sessions 4–8 | The character has a clear identity; first Technique defines their approach |
+| Facet Level 2 (10 primary advances) | Sessions 8–15 | The character is established; a second and third Technique deepen their specialty |
+| Facet Level 3 + first Major Advancement (15 primary advances) | Sessions 12–20 | Primary Facet mastered — the Tier 3 Technique and the +1 Attribute or Pinnacle Technique land together, marking a transformation. Breadth (level 4+) begins here. |
 
 These timelines assume 4 skill points per session and primary Facet advancement. Actual pace depends on how the player distributes their points, whether they cross-train early, and how often they use the skills they want to advance.
 

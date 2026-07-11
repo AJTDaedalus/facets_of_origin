@@ -16,6 +16,46 @@ from app.facets.registry import MergedRuleset, build_ruleset
 
 
 @dataclass
+class ThreatClock:
+    """A visible-to-the-table pressure clock (PHB III.2, D4).
+
+    Advances on qualifying outcome tiers (default: partial_success, failure —
+    see `facet.yaml` `hazards.threat_clock.advances_on`). Winding back is
+    always unconditional and never itself advances the clock (Brain, BRIEF
+    §EF4) — there is no roll involved in `wind_back`.
+    """
+
+    id: str
+    name: str
+    segments: int
+    filled_segments: int = 0
+
+    @property
+    def is_full(self) -> bool:
+        return self.filled_segments >= self.segments
+
+    def advance(self) -> bool:
+        """Fill one segment. Returns True only on the advance that fills the clock."""
+        was_full = self.is_full
+        if not was_full:
+            self.filled_segments = min(self.segments, self.filled_segments + 1)
+        return self.is_full and not was_full
+
+    def wind_back(self) -> None:
+        """Empty one segment. Unconditional — no roll."""
+        self.filled_segments = max(0, self.filled_segments - 1)
+
+    def to_client_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "name": self.name,
+            "segments": self.segments,
+            "filled_segments": self.filled_segments,
+            "is_full": self.is_full,
+        }
+
+
+@dataclass
 class GameSession:
     """A single game session: one ruleset, one roll log, any number of characters.
 
@@ -42,6 +82,7 @@ class GameSession:
     enemy_library: dict[str, Enemy] = field(default_factory=dict)
     encounter_library: dict[str, Encounter] = field(default_factory=dict)
     active_enemies: dict[str, Enemy] = field(default_factory=dict)
+    threat_clocks: dict[str, ThreatClock] = field(default_factory=dict)
     _character_dir: Path | None = field(default=None)
 
     def add_character(self, character: Character) -> None:
@@ -94,6 +135,7 @@ class GameSession:
             "enemy_library": {eid: e.to_client_dict() for eid, e in self.enemy_library.items()},
             "encounter_library": {eid: e.to_client_dict() for eid, e in self.encounter_library.items()},
             "active_enemies": {key: e.to_client_dict() for key, e in self.active_enemies.items()},
+            "threat_clocks": {cid: c.to_client_dict() for cid, c in self.threat_clocks.items()},
         }
 
     def to_player_state_dict(self, player_name: str) -> dict:
@@ -112,6 +154,7 @@ class GameSession:
             "ruleset": self.ruleset.to_client_dict(),
             "roll_log": self.roll_log[-50:],
             "active_enemies": {key: e.to_client_dict() for key, e in self.active_enemies.items()},
+            "threat_clocks": {cid: c.to_client_dict() for cid, c in self.threat_clocks.items()},
         }
 
 

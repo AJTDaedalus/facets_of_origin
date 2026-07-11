@@ -495,9 +495,27 @@
                 <button class="btn btn-secondary btn-sm" onclick="spawnEnemyFromLibrary()">Spawn</button>
               </div>
             </div>
+            <div style="margin-top:12px;">
+              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">THREAT CLOCKS</div>
+              <div id="play-clock-tracker"></div>
+              <div style="margin-top:8px;">
+                <input type="text" id="play-clock-name" placeholder="Clock name (e.g. Rising Waters)">
+                <button class="btn btn-secondary btn-sm" onclick="createClock()">Create Clock</button>
+              </div>
+            </div>
           </div>
 
           <!-- Player controls (Spark nomination) -->
+          <div id="play-player-enemies" class="card hidden">
+            <div class="card-title">Enemies</div>
+            <div id="play-player-enemy-tracker"></div>
+          </div>
+
+          <div id="play-player-clocks" class="card hidden">
+            <div class="card-title">Threat Clocks</div>
+            <div id="play-player-clock-tracker"></div>
+          </div>
+
           <div id="play-player-controls" class="card hidden">
             <div class="card-title">Nominate for Spark</div>
             <input type="text" id="play-peer-spark-player" placeholder="Player name">
@@ -621,8 +639,8 @@
                 </select>
               </div>
               <div>
-                <label>Endurance</label>
-                <input type="number" id="builder-enemy-endurance" value="4" min="0">
+                <label>Resolve</label>
+                <input type="number" id="builder-enemy-resolve" value="4" min="0">
               </div>
               <div>
                 <label>Armor</label>
