@@ -190,7 +190,7 @@ The party is cornered in a narrow alley. Two Harbor Thugs are blocking the exit,
 
 **MM:** "Standard. Roll it."
 
-> Zahna rolls **2d6 + Intelligence (3 → +1)** and gets an **11**. Full success.
+→ Zahna rolls **2d6 + Intelligence (3 → +1)** and gets an **11**. Full success.
 
 **MM:** "The lock is old. The pin mechanism is a simple two-tumbler design — crude, but the corrosion has essentially welded it in place. Brute force would work. So would something thin and precise in the keyhole."
 
@@ -200,7 +200,7 @@ The party is cornered in a narrow alley. Two Harbor Thugs are blocking the exit,
 
 **MM:** "Standard. Though the Sergeant is getting closer — this is about speed as much as finesse."
 
-> Zulnut rolls **2d6 + Dexterity (3 → +1) + Finesse Practiced (+1)** and gets a **9**. Partial success.
+→ Zulnut rolls **2d6 + Dexterity (3 → +1) + Finesse Practiced (+1)** and gets a **9**. Partial success.
 
 **MM:** "The lock pops — but it takes a second longer than you wanted. The Sergeant has halved the distance and is calling for you to stop."
 

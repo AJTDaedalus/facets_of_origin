@@ -1,12 +1,16 @@
 # Table of Contents
 
+## Front Matter
+- How to read this book, license, credits and acknowledgments
+
 ## I — Introduction
 
 ## II — Character Creation
 - II.1 Overview
 - II.2 Attributes
 - II.3 Magic
-- II.4 Facets & Advancement (Body)
+- II.4 Facets & Advancement
+- II.4a Facets & Advancement (Body)
 - II.4b Facets & Advancement (Mind)
 - II.4c Facets & Advancement (Soul)
 - II.5 Backgrounds
@@ -26,6 +30,8 @@
 
 ## Appendices
 - Appendix A: Magic Domain Catalog
+- Appendix B: Character Sheet
+- Glossary
 
 ---
 

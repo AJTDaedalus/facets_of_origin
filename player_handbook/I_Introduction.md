@@ -6,6 +6,8 @@ Facets of Origin is a tabletop roleplaying game about people gathering together 
 
 The rules exist to serve that experience. They are intentionally lean. When you roll dice in Facets, it is because the outcome genuinely matters to the story and the tension is real. The rest of the time, you are just playing.
 
+If this is your first tabletop roleplaying game, here is the whole shape of it: one player — the Mirror Master — describes a world, everyone else plays a character living in it, and the dice decide what happens when the outcome is genuinely uncertain. That is the entire activity. Everything else in this book is refinement.
+
 ## The Philosophy
 
 Most TTRPGs were designed around a table — physical dice, paper character sheets, and everyone in the same room. Facets is built for how people actually play today: online sessions, mixed schedules, players spread across time zones. The digital tools handle bookkeeping, track your character, and keep the game moving so that you and your fellow players can focus on the only thing that actually matters: the story.
@@ -30,7 +32,9 @@ You are not required to play in Shattered Origin. It is an invitation, not an ob
 
 ## How to Use This Handbook
 
-Read the chapters in order when you are creating your first character — each section builds on the last. After that, use it as a reference. You should rarely need to look something up mid-session; if you do, the rules are designed to be found quickly.
+If you have never played a tabletop roleplaying game — or simply want to play *right now* — start with the **Quick Start** instead of this chapter's neighbors. It gives you a finished character, the one rule the game runs on, and an example scene, and has you playing in about ten minutes. Come back here when you want to build a character of your own.
+
+Otherwise: read the chapters in order when you are creating your first character — each section builds on the last. After that, use it as a reference. You should rarely need to look something up mid-session; if you do, the rules are designed to be found quickly.
 
 ## Playing Without Software
 

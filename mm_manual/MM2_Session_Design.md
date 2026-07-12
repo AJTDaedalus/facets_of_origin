@@ -401,7 +401,7 @@ The one exception: if a player is creating a character mid-campaign (a new playe
 
 **MM:** "Roll Wisdom. Standard."
 
-> Zulnut rolls **2d6 + Wisdom (2 → +0)** and gets a **9**. Partial success.
+→ Zulnut rolls **2d6 + Wisdom (2 → +0)** and gets a **9**. Partial success.
 
 **MM:** "At least three. But one of them is giving orders, and the other two are not arguing. That is either discipline or fear. You cannot tell which from out here."
 
@@ -421,7 +421,7 @@ The one exception: if a player is creating a character mid-campaign (a new playe
 
 **MM:** "Locked. A simple padlock — nothing fancy, but you are picking it in the dark, in an alley, while people move around on the other side. Standard difficulty. Roll Dexterity."
 
-> Zulnut rolls **2d6 + Dexterity (3 → +1) + Finesse Practiced (+1)** and gets a **7**. Partial success.
+→ Zulnut rolls **2d6 + Dexterity (3 → +1) + Finesse Practiced (+1)** and gets a **7**. Partial success.
 
 **MM:** "The lock opens. But the hasp squeaks — a short, sharp sound that carries exactly as far as you did not want it to. The movement inside stops."
 
@@ -455,7 +455,7 @@ The one exception: if a player is creating a character mid-campaign (a new playe
 
 **MM:** "He is waiting, Mordai. Charisma — you are trying to get him to tell you who he is working for. Hard. He is composed, this is his territory, and he has had thirty seconds to prepare for this conversation."
 
-> Mordai rolls **2d6 + Charisma (2 → +0)** against Hard difficulty (net -1) and gets an **8**. Partial success.
+→ Mordai rolls **2d6 + Charisma (2 → +0)** against Hard difficulty (net −1) and gets an **8**. Partial success.
 
 **MM:** "He tells you this is a private operation and the buyer is not someone whose name gets said in warehouses. He is being honest — you can feel it. But the partial success means the honesty goes both directions. He is now looking at Mordai with genuine concern. Not concern for himself. Concern for what happens if you pursue this."
 

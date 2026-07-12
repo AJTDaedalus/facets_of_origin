@@ -10,15 +10,15 @@ Their tools are attention, memory, and analysis. Their superpower is that they a
 
 ## Skills of the Mind
 
-| Skill | Attribute | Covers |
-|---|---|---|
-| **Lore** | Knowledge | Recalling and applying accumulated learning: history, cultures, languages, creature lore, arcane theory, religious traditions, and the significance of what you find |
-| **Investigate** | Intelligence | Active analysis: examining a scene, finding patterns, working out how something functions, deducing what happened, identifying the thing that doesn't fit |
-| **Craft** | Intelligence | Making, repairing, and modifying objects: tools, mechanisms, structures, alchemical preparations, and anything that requires precision of thought as much as precision of hand |
-| **Insight** | Wisdom | Reading people and situations: understanding what someone actually wants, sensing deception, noticing the wrong note in a conversation before you can name it |
-| **Survival** | Wisdom | Navigating and enduring unfamiliar environments: tracking, finding food and shelter, reading weather and terrain, sensing danger in the wild before it arrives |
+| Skill | Attribute |
+|---|---|
+| **Lore** | Knowledge |
+| **Investigate** | Intelligence |
+| **Craft** | Intelligence |
+| **Insight** | Wisdom |
+| **Survival** | Wisdom |
 
-*(Skills of the Body and Soul are defined in their respective Facet chapters.)*
+Full descriptions are in Chapter II.6 — Skills.
 
 ---
 

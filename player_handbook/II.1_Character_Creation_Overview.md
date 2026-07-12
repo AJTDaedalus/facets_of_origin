@@ -8,7 +8,7 @@ Both aspects live together in the Facets Character Sheet, on paper or in the dig
 
 ### What the Character Sheet Contains
 
-The sheet has six sections:
+At the top, before any of its sections, the sheet records two names: your character's and your own. Below that, it has six sections:
 
 | Section | What It Holds |
 |---|---|
@@ -57,7 +57,8 @@ The following sections walk you through creating your character's statistics:
 
 - **II.2 — Attributes:** Your character's fundamental nature, from broad physical capability to soul and presence
 - **II.3 — Magic:** How magic works in Facets of Origin, and how to establish your domain if your character uses it
-- **II.4 — Facets:** Your character's direction of growth, and the Technique trees available within it
+- **II.4 — Facets & Advancement:** Your character's direction of growth, and how skills, Facet levels, and Techniques advance
+- **II.4a — Facet of the Body:** Skills and Techniques for physical, forceful, and enduring characters
 - **II.4b — Facet of the Mind:** Skills and Techniques for scholarly, perceptive, and analytical characters
 - **II.4c — Facet of the Soul:** Skills and Techniques for diplomatic, spiritual, and luck-touched characters
 - **II.5 — Backgrounds:** Your character's history, relationships, and the narrative origin of any magical domains

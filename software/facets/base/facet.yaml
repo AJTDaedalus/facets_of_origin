@@ -6,7 +6,7 @@
 #   - Added Master (rank 4, +3) to skill_ranks
 #   - Corrected Mind skills to match II.4b (Lore, Investigate, Craft, Insight, Survival)
 #   - Corrected Soul skills to match II.4c (Persuade, Deceive, Perform, Attune, Gamble)
-#   - Rewrote Body Technique tree to match II.4 exactly (Might/Grace/Iron branches)
+#   - Rewrote Body Technique tree to match II.4a exactly (Might/Grace/Iron branches)
 #   - Added full Mind Technique tree from II.4b (Clarity/Instinct/Archive branches)
 #   - Added full Soul Technique tree from II.4c (Presence/Fortune/Communion branches)
 #   - Added major_advancement_threshold (every 4 Facet levels)

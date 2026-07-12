@@ -47,7 +47,7 @@
 
 ## Next Steps
 
-1. [x] **Commit.** Done: `249701f` on `fix/editorial-pass`. Still to do: push via `gh` CLI (check `gh auth status` first) and open a PR against `main` — **ask the user before pushing**. Note: `playtest/02_.../digital_tool_log.md` gets regenerated with fresh RNG whenever the e2e suite runs; revert it before any later commit.
+1. [x] **Commit + push + PR.** Done: commit `8b8dc58` on `fix/editorial-pass` (the earlier `249701f` was rewritten into this hash), pushed 2026-07-11, PR #7 open against `main` (https://github.com/AJTDaedalus/facets_of_origin/pull/7). Test suite re-verified before push: 965 passed, 1 pre-existing env failure (TODO T4). Playtest RNG-churn log reverted after the run.
 2. [ ] **Production apparatus** (section D of the review doc — the actual follow-up work, roughly in order):
    - Glossary of game terms (~30 terms: Spark, Exchange, Posture, Resolve, rider, Threat Clock, mark, career advance, Specialty, scope tiers…)
    - Index / bidirectional cross-reference layer
