@@ -396,6 +396,11 @@ class Character(BaseModel):
                 f"Second Domain requires a standard domain — prismatic territories "
                 f"like '{choice}' require Ascendant Domain."
             )
+        if tech_def.grants_secondary_domain and choice == self.magic_domain:
+            return False, (
+                f"Second Domain must differ from your first — you already practice "
+                f"'{choice}'."
+            )
         return True, "ok"
 
     def to_client_dict(self) -> dict:

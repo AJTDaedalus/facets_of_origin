@@ -245,6 +245,16 @@ def test_second_domain_rejects_prismatic_choice(ruleset):
     assert char.secondary_magic_domain is None
 
 
+def test_second_domain_must_differ_from_the_first(ruleset):
+    """"Must differ from your first" (II.4c choice prompt) — Fire + Fire is not a
+    second domain, it's a wasted Tier 3 Technique."""
+    char = _soul_mage(ruleset)  # primary domain: fire
+    ok, msg = char.select_technique("second_domain", ruleset=ruleset, choice="fire")
+    assert not ok
+    assert "differ" in msg.lower()
+    assert char.secondary_magic_domain is None
+
+
 def test_second_domain_is_one_step_harder(ruleset):
     """The penalty that distinguishes Second Domain from Ascendant Domain.
 
