@@ -7,59 +7,74 @@ from pathlib import Path
 import pytest
 
 
+@pytest.fixture
+def default_settings(monkeypatch):
+    """`Settings` as the *code* declares it — isolated from `.env` and the
+    process environment.
+
+    `Settings` resolves env vars first, `.env` second, and field defaults last.
+    So a test that asserts a documented default while letting those two layers
+    through isn't testing the default at all — it's testing whatever the machine
+    happens to be configured with. This repo's `.env` sets `PORT=8010` to dodge a
+    local port clash, and that alone made `test_default_port_is_8000` fail on
+    every checkout for reasons that had nothing to do with the code. `conftest`
+    exports `FACETS_DIR` and `DATA_DIR` for the same reason, which is why
+    `test_facets_dir_default` used to pass `facets_dir=` by hand — a workaround
+    for this exact leak, applied to one field instead of the cause.
+
+    Clearing every field's env var and disabling `.env` fixes it at the source,
+    for the whole class.
+    """
+    from app.config import Settings
+
+    for field in Settings.model_fields:
+        monkeypatch.delenv(field.upper(), raising=False)
+        monkeypatch.delenv(field, raising=False)
+
+    return Settings(_env_file=None, secret_key="test-key")
+
+
 class TestSettingsDefaults:
     """Verify every documented default value."""
 
-    def test_default_host_is_localhost(self):
-        from app.config import Settings
-        s = Settings(secret_key="test-key")
-        assert s.host == "127.0.0.1"
+    def test_default_host_is_localhost(self, default_settings):
+        assert default_settings.host == "127.0.0.1"
 
-    def test_default_port_is_8000(self):
-        from app.config import Settings
-        s = Settings(secret_key="test-key")
-        assert s.port == 8000
+    def test_default_port_is_8000(self, default_settings):
+        assert default_settings.port == 8000
 
-    def test_debug_is_false_by_default(self):
-        from app.config import Settings
-        s = Settings(secret_key="test-key")
-        assert s.debug is False
+    def test_debug_is_false_by_default(self, default_settings):
+        assert default_settings.debug is False
 
-    def test_external_url_is_empty_by_default(self):
-        from app.config import Settings
-        s = Settings(secret_key="test-key")
-        assert s.external_url == ""
+    def test_external_url_is_empty_by_default(self, default_settings):
+        assert default_settings.external_url == ""
 
-    def test_algorithm_is_hs256(self):
-        from app.config import Settings
-        s = Settings(secret_key="test-key")
-        assert s.algorithm == "HS256"
+    def test_algorithm_is_hs256(self, default_settings):
+        assert default_settings.algorithm == "HS256"
 
-    def test_mm_token_expire_hours_default(self):
-        from app.config import Settings
-        s = Settings(secret_key="test-key")
-        assert s.mm_token_expire_hours == 8
+    def test_mm_token_expire_hours_default(self, default_settings):
+        assert default_settings.mm_token_expire_hours == 8
 
-    def test_invite_token_expire_hours_default(self):
-        from app.config import Settings
-        s = Settings(secret_key="test-key")
-        assert s.invite_token_expire_hours == 24
+    def test_invite_token_expire_hours_default(self, default_settings):
+        assert default_settings.invite_token_expire_hours == 24
 
-    def test_facets_dir_default(self):
-        from app.config import Settings
-        # Pass facets_dir explicitly to avoid FACETS_DIR env var set by conftest
-        s = Settings(secret_key="test-key", facets_dir=Path("facets"))
-        assert s.facets_dir == Path("facets")
+    def test_facets_dir_default(self, default_settings):
+        assert default_settings.facets_dir == Path("facets")
 
-    def test_roll_rate_limit_default(self):
-        from app.config import Settings
-        s = Settings(secret_key="test-key")
-        assert s.roll_rate_limit == "10/minute"
+    def test_roll_rate_limit_default(self, default_settings):
+        assert default_settings.roll_rate_limit == "10/minute"
 
-    def test_auth_rate_limit_default(self):
+    def test_auth_rate_limit_default(self, default_settings):
+        assert default_settings.auth_rate_limit == "5/minute"
+
+    def test_env_var_overrides_the_default(self, monkeypatch):
+        """The isolation above must not hide a real regression: with the env var
+        present, it still wins over the default. This is what makes PORT=8010
+        work in the first place."""
         from app.config import Settings
-        s = Settings(secret_key="test-key")
-        assert s.auth_rate_limit == "5/minute"
+
+        monkeypatch.setenv("PORT", "8010")
+        assert Settings(_env_file=None, secret_key="test-key").port == 8010
 
 
 class TestSettingsEnvOverride:

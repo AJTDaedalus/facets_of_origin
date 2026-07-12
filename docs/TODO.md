@@ -94,7 +94,24 @@ one shape, not two. Pick deliberately; (b) is the smaller change.
 
 ---
 
-## T4 — `test_default_port_is_8000` reads the developer's real `.env`
+## ~~T4 — `test_default_port_is_8000` reads the developer's real `.env`~~
+
+**Closed 2026-07-12.** `TestSettingsDefaults` now takes a `default_settings` fixture that clears every
+`Settings` field's env var and passes `_env_file=None`, so the class asserts the code's declared
+defaults rather than the machine's configuration. `PORT=8010` in the local `.env` is intentional
+(it avoids a port clash) and is no longer the suite's problem.
+
+The leak was class-wide, not port-specific: `test_facets_dir_default` had already been patched by
+hand to pass `facets_dir=` because `conftest` exports `FACETS_DIR` — a workaround for this same
+cause, applied to one field. The fixture fixes it at the source. A companion test asserts the env
+var still *wins* when present, so the isolation can't hide a real regression.
+
+Full suite is green on a machine with a populated `.env`: **1026 passed, 0 failed.**
+
+---
+
+<details>
+<summary>Original report</summary>
 
 **Source:** PR #5 review (2026-07-11). **Pre-existing — predates the PR.**
 
@@ -112,3 +129,5 @@ developer-local state, which is exactly what a defaults test should not do.
 suppressed (e.g. `Settings(_env_file=None)`), so they assert real defaults rather
 than whatever the local `.env` happens to hold. Full suite should be green on a
 machine with a populated `.env`.
+
+</details>
