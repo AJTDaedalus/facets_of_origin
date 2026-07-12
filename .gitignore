@@ -41,3 +41,6 @@ software/data/sessions/
 /SOUL.md
 /TOOLS.md
 /USER.md
+
+# Test output artifacts (see tests/e2e/test_playtest_02.py)
+software/tests/_output/

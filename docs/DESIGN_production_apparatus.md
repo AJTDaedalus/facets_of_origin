@@ -254,9 +254,28 @@ and contains the term.
 meaningless; the right artifact is a term → section map with links, which is also
 exactly the "bidirectional cross-reference layer" the review asks for. The
 generator reads the glossary's term list, walks both books, and emits, per term,
-every chapter-and-heading where it appears.
+the chapters-and-headings that **define or rule on** it.
 
 The glossary is the generator's input, which is why it must land first.
+
+**Relevance ranking (revised post-merge, 2026-07-12).** The first cut indexed
+*every* occurrence of a term. That produced a concordance, not an index: "Tier"
+resolved to 72 sections and "Difficulty" to 70, and an entry that points to 72
+places points nowhere. Occurrences are now ranked, best-rank-wins-outright per
+file:
+
+1. the term is in the section's **heading** — the section is *about* it;
+2. failing that, the term appears in **bold** in the body — the books bold a term
+   where they state its rule.
+
+A bare prose mention earns no entry. Each term also gets a *Defined in* pointer to
+the chapter the Glossary cites, so terms that no heading ever names (Resolve,
+Mook, Rank) still have a canonical home rather than a scatter of rule statements.
+The Glossary, ToC, Front Matter, and `Index.md` itself are apparatus and are not
+indexed as content — the Glossary in particular bolds every term by construction,
+so indexing it gave all 54 terms an identical, useless self-reference.
+
+Net effect: 1184 entries → 496, no term orphaned.
 
 **INV-4 binds it:** `Index.md` is up to date — regenerating it produces no diff.
 Same pattern as a lockfile check. This is the invariant that makes an index
