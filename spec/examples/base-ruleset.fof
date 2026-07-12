@@ -527,4 +527,4 @@ advancement:
 
   session_skill_points: 4
   marks_per_rank: 3
-  facet_level_threshold: 6
+  facet_level_threshold: 5

@@ -22,8 +22,50 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
+from app.facets.registry import MergedRuleset, build_ruleset
+from app.game import combat as combat_module
+
+_RULESET_CACHE: Optional[MergedRuleset] = None
+
+
+def _ruleset() -> MergedRuleset:
+    """The merged base ruleset, built once and cached.
+
+    `run_combat` reads every combat constant (armor, condition tiers,
+    reaction costs, posture modifiers, Withdrawn recovery) through
+    `app.game.combat`, which requires a ruleset — this is the single load
+    point for the simulator. See DESIGN §2.1 / TASKS WS-A0.
+    """
+    global _RULESET_CACHE
+    if _RULESET_CACHE is None:
+        _RULESET_CACHE = build_ruleset([])
+    return _RULESET_CACHE
+
+
+def spark_refund_variant_enabled(ruleset: Optional[MergedRuleset] = None) -> bool:
+    """Read the D6 `refund_on_failed_pretechnique_cast` variant flag (WD7).
+
+    Test, do not adopt (BRIEF D6) — combat magic is not yet simulated
+    (see PT03/PT04 findings), so this flag has no observable effect on
+    `run_combat`. It exists so the sim and PT04 harness can read and
+    report the flag's state; toggling it is a no-op until magic casting
+    is modelled in the simulator.
+    """
+    rs = ruleset or _ruleset()
+    return bool(rs.spark and rs.spark.variants.refund_on_failed_pretechnique_cast)
+
+
 # ---------------------------------------------------------------------------
 # Constants
+#
+# TIER1_CONDITIONS/TIER2_CONDITIONS/POSTURE_OFFENSE/POSTURE_REACTION_COST/
+# DIFFICULTY_MOD/combat_roll below are no longer used by the resolution
+# functions (`_pc_strike`, `_enemy_attack` call `app.game.combat` instead,
+# which reads the equivalent values from `facet.yaml`). They are left in
+# place because deleting them was not in WS-A0's scope and existing tests
+# (`TestCombatRoll`, `test_staggered_attacker_penalty`) still exercise them
+# directly as a plain dice utility. Flagged here as a residual duplication
+# for a future pass, not silently carried forward.
 # ---------------------------------------------------------------------------
 
 TIER1_CONDITIONS = ("winded", "off_balance", "shaken")
@@ -91,6 +133,10 @@ class PCState:
     armor: str  # "none" | "light" | "heavy"
     sparks: int
     sparks_spent: int = 0
+    # D2 per-scene armor downgrade budget. Set fresh at the top of
+    # `run_combat` via `combat.armor_budget` — one `run_combat` call is one
+    # scene's worth of combat for the simulator's purposes.
+    armor_downgrades_remaining: int = 0
     # Offensive: Strike uses strength + combat
     strength_mod: int = 0
     combat_mod: int = 0
@@ -98,37 +144,52 @@ class PCState:
     dexterity_mod: int = 0
     # State
     conditions: list[str] = field(default_factory=list)
-    persistent_conditions: set[str] = field(default_factory=set)
     posture: str = "measured"
     is_broken: bool = False
+    # K1 (BRIEF D8): count of reactions taken so far this exchange, reset
+    # each exchange in `run_combat`. Feeds `combat.reaction_cost`'s
+    # `is_first_reaction` in `_enemy_attack`.
+    reactions_this_exchange: int = 0
 
 
 @dataclass
 class EnemyState:
-    """An enemy's combat state for one simulation run."""
+    """An enemy's combat state for one simulation run.
+
+    `resolve`/`resolve_current` (D1, DESIGN §4.1): a Mook has 0 and no
+    pool; a Named/Boss's `resolve` is its base pool, and `resolve_current`
+    starts at `resolve` plus its armor bonus (set by `make_enemy`, mirroring
+    `Enemy.init_combat`). There is no enemy-side Broken — Resolve reaching 0
+    is defeat, tracked via `is_removed` like a Mook.
+
+    `phases` holds this enemy's authored `resolve_threshold`/`description`
+    pairs straight from its `.fof` (purely narrative per the engine's
+    `PhaseDef`). `special_attack_mod`/`special_ignores_tier1` are NOT a
+    generic engine mechanic — they model an individual boss's authored
+    "Special" stat-block text (e.g. Archive Guardian's Reduced Mode) so the
+    simulator's numbers reflect that specific published enemy; a Named NPC
+    or a boss without such text leaves them at their defaults and phase
+    changes stay purely informational (`phase_index`).
+    """
     name: str
     instance_id: str
     tier: str  # "mook" | "named" | "boss"
-    endurance_max: int
-    endurance_current: int
+    resolve: int
+    resolve_current: int
     attack_modifier: int
     defense_modifier: int
     armor: str
     posture: str = "measured"
     conditions: list[str] = field(default_factory=list)
-    persistent_conditions: set[str] = field(default_factory=set)
-    is_broken: bool = False
     is_removed: bool = False
-    # Boss phase change
-    has_phase_change: bool = False
-    phase_changed: bool = False
-    phase2_attack_mod: int = 0
-    phase2_endurance: int = 4
-    phase2_ignores_t1: bool = False
+    phases: list[dict] = field(default_factory=list)
+    phase_index: Optional[int] = None
+    special_attack_mod: Optional[int] = None
+    special_ignores_tier1: bool = False
 
     @property
     def is_out(self) -> bool:
-        return self.is_broken or self.is_removed
+        return self.is_removed
 
 
 # ---------------------------------------------------------------------------
@@ -161,91 +222,27 @@ def combat_roll(
 
 # ---------------------------------------------------------------------------
 # Condition management
+#
+# apply_condition/_apply_broken/cleanup_end_of_exchange/armor_downgrade were
+# deleted here per TASKS WS-A0 (A0.3) — their rule logic now lives in
+# `app.game.combat` (`apply_condition`, `armor_downgrade`, `end_exchange`),
+# shared with `app/api/websocket.py`. `_mark_broken` below is NOT a moved
+# rule: it is simulator-only bookkeeping (PCState.is_broken/EnemyState.
+# is_removed plus the Boss phase-change reset) that reacts to the `broken`
+# flag `combat.apply_condition` returns. Character/Enemy don't have this
+# shape (Character represents Broken as a literal condition string), so it
+# stays here rather than in combat.py — see combat.py's `Combatant` docstring.
 # ---------------------------------------------------------------------------
 
-def apply_condition(target, condition: str, tier: int, is_zero_end_absorb: bool = False):
-    """Apply a condition to a combatant, handling escalation and persistence.
+def _mark_broken(target: PCState) -> None:
+    """Mark a PC Broken (Condition tier 3, D5 ledger row 2).
 
-    Args:
-        target: PCState or EnemyState
-        condition: condition ID (e.g. "staggered", "winded")
-        tier: 1 or 2
-        is_zero_end_absorb: True if this is an Absorb at 0 Endurance
+    PC-only since D1 (A4): enemies no longer have a Condition-based Broken
+    track — an enemy's defeat comes from Resolve reaching 0, handled
+    directly in `_pc_strike` via `combat_module.apply_resolve_damage`,
+    which sets `is_removed` the same way a Mook removal does.
     """
-    if target.is_broken or (hasattr(target, "is_removed") and target.is_removed):
-        return
-
-    # 0-Endurance Absorb: treat as T2 and persistent
-    if is_zero_end_absorb and tier < 2:
-        tier = 2
-        # Upgrade T1 condition to a T2 condition
-        condition = "staggered"  # Default T2 when upgrading from T1
-
-    # Check for Broken escalation: same T2 condition twice
-    if tier >= 2 and condition in target.conditions:
-        # Same T2 already present → Broken
-        _apply_broken(target)
-        return
-
-    target.conditions.append(condition)
-    if is_zero_end_absorb or tier >= 2:
-        target.persistent_conditions.add(condition)
-
-
-def _apply_broken(target):
-    """Mark a combatant as Broken. Handle Boss phase changes."""
-    if isinstance(target, EnemyState) and target.has_phase_change and not target.phase_changed:
-        # Boss phase change: reset instead of breaking
-        target.phase_changed = True
-        target.conditions.clear()
-        target.persistent_conditions.clear()
-        target.attack_modifier = target.phase2_attack_mod
-        target.endurance_current = target.phase2_endurance
-        target.endurance_max = target.phase2_endurance
-        return
-
     target.is_broken = True
-    if isinstance(target, EnemyState):
-        target.is_removed = True
-
-
-def cleanup_end_of_exchange(combatant):
-    """End-of-exchange cleanup: clear non-persistent T1 conditions."""
-    if combatant.is_broken:
-        return
-    if hasattr(combatant, "is_removed") and combatant.is_removed:
-        return
-
-    # Keep persistent conditions and T2 conditions
-    remaining = []
-    for c in combatant.conditions:
-        if c in combatant.persistent_conditions:
-            remaining.append(c)
-        elif c in TIER2_CONDITIONS:
-            remaining.append(c)
-        # T1 conditions not in persistent_conditions are cleared
-    combatant.conditions = remaining
-
-    # Withdrawn recovery
-    if combatant.posture == "withdrawn":
-        combatant.endurance_current = min(
-            combatant.endurance_max,
-            combatant.endurance_current + 2,
-        )
-
-
-def armor_downgrade(tier: int, armor: str) -> int:
-    """Downgrade condition tier by armor. Returns new tier (0 = negated).
-
-    Per PHB:
-    - Light armor: Tier 2 becomes Tier 1 (only affects T2)
-    - Heavy armor: Tier 3 (Broken) becomes Tier 2 (only affects T3)
-    """
-    if armor == "light" and tier == 2:
-        return 1
-    elif armor == "heavy" and tier == 3:
-        return 2
-    return tier
 
 
 # ---------------------------------------------------------------------------
@@ -275,8 +272,8 @@ def choose_enemy_posture(enemy: EnemyState) -> str:
     if enemy.tier == "mook":
         return "measured"
     # Named/Boss: Measured by default
-    # Defensive if has T2 conditions and low endurance
-    if enemy.endurance_current == 0 and enemy.tier != "mook":
+    # Defensive if has T2 conditions and low Resolve
+    if enemy.resolve_current == 0 and enemy.tier != "mook":
         return "defensive"
     return "measured"
 
@@ -319,10 +316,39 @@ def choose_enemy_target(enemy: EnemyState, pcs: list[PCState]) -> Optional[PCSta
 # AI: Reaction and resource decisions
 # ---------------------------------------------------------------------------
 
-def should_spend_spark(pc: PCState, target: EnemyState) -> int:
-    """Decide how many Sparks to spend on this Strike."""
+def should_spend_spark(pc: PCState, target: EnemyState, policy: str = "conservative") -> int:
+    """Decide how many Sparks to spend on this Strike.
+
+    `policy` (WD10, BRIEF D6): selectable, default-preserving. `should_spend_spark`
+    is exercised by every recorded Gate/Series corpus, so its old behaviour
+    cannot be edited in place without silently re-baselining every recorded
+    number (the exact failure A14 already recorded once) — see
+    `docs/TASKS_v0.3_ruleset_revision.md` WD10.
+
+    - `"conservative"` (default): today's exact behaviour, unchanged bit for
+      bit. Spend only against a Boss, in desperation (Endurance <= 2), or to
+      finish a Tier-2-conditioned target.
+    - `"player_like"`: a less hoarding-prone spender (BRIEF D6's premise).
+      Superset of `"conservative"` — spends on any Named-or-Boss target (a
+      "climax," not just a Boss), in the same desperation/finishing-blow
+      cases, and additionally when holding 2+ Sparks (a "floor" of 1 kept in
+      reserve rather than hoarding the whole allotment).
+    """
     if pc.sparks <= 0:
         return 0
+
+    if policy == "player_like":
+        if target.tier in ("named", "boss"):
+            return 1
+        if pc.endurance_current <= 2:
+            return 1
+        if any(c in TIER2_CONDITIONS for c in target.conditions):
+            return 1
+        if pc.sparks >= 2:
+            return 1
+        return 0
+
+    # "conservative" — today's exact behaviour, the default.
     # Spend against Bosses
     if target.tier == "boss":
         return 1
@@ -369,35 +395,77 @@ def choose_pc_reaction(pc: PCState, incoming_tier: int, enemy_posture: str) -> s
     return "dodge"
 
 
-def should_enemy_react(enemy: EnemyState, incoming_tier: int) -> bool:
-    """Decide if a Named/Boss enemy should spend Endurance to Parry."""
-    if enemy.tier == "mook":
-        return False
-    if enemy.endurance_current <= 0:
-        return False
-    # Don't bother reacting to T1 (clears at end of exchange)
-    if incoming_tier <= 1:
-        return False
-    # React to T2 conditions
-    return True
-
-
 # ---------------------------------------------------------------------------
 # Resolution: PC Strike against Enemy
 # ---------------------------------------------------------------------------
+#
+# Enemies do not react (A14/§5-quater F5/F8). Settled asymmetric-combat
+# doctrine ("NPCs don't roll; PCs react") plus Q4's "Resolve is durability,
+# not an action-economy pool": a Strike against a Named/Boss depletes Resolve
+# by its effective outcome, full stop. There is no enemy Parry, and no Resolve
+# is ever spent on defense. Enemy durability is Resolve + phases, never
+# out-defending the party.
 
-def resolve_pc_strike(pc: PCState, target: EnemyState, verbose: bool = False):
+def _choose_condition(target_conditions: list[str], ruleset) -> str:
+    """Which Condition to apply on a Tier 2 hit against a PC: prefer the
+    ruleset's first Tier 2 id if the target already has it (to trigger
+    Broken), else its second Tier 2 id if that's already present, else
+    default to the first. This is AI policy (the PHB leaves the choice to
+    the attacker), not a rule — it stays here, not in `app.game.combat`.
+    PC-only since D1 (A4) — see `_choose_rider` for the enemy-side
+    equivalent, which never escalates to Broken.
+    """
+    tier2_ids = [c.id for c in ruleset.combat.conditions.tier2]
+    for candidate in tier2_ids:
+        if candidate in target_conditions:
+            return candidate
+    return tier2_ids[0]
+
+
+def _choose_rider(target: EnemyState, ruleset) -> Optional[str]:
+    """AI policy for the Tier 1/2 Condition a full-success Strike may
+    impose on an enemy as a rider (D1, DESIGN §4.1). Always prefers a
+    Tier 2 id the target doesn't already carry — deliberately the most
+    aggressive policy available, so G1 (DESIGN §5) measures the worst-case
+    rider→Easy snowball rather than an averaged one. Falls back to a Tier 1
+    rider only once both Tier 2 ids are already present, at which point a
+    boss whose authored Special text grants Tier 1 immunity post-phase
+    (Archive Guardian's Reduced Mode) gets no rider at all — riders must
+    keep their normal table effect (Brain, EF1), and a Tier 1 rider with no
+    effect is not that.
+    """
+    tier2_ids = [c.id for c in ruleset.combat.conditions.tier2]
+    for candidate in tier2_ids:
+        if candidate not in target.conditions:
+            return candidate
+    if target.special_ignores_tier1 and target.phase_index is not None:
+        return None
+    return "winded"
+
+
+def _pc_strike(
+    pc: PCState,
+    target: EnemyState,
+    ruleset,
+    verbose: bool = False,
+    spark_policy: str = "conservative",
+) -> None:
     """Resolve a PC's Strike against an enemy target.
 
-    Handles: posture offense, difficulty from conditions, Sparks, Press,
-    enemy reaction (Parry for Named/Boss), armor, condition application,
-    Mook removal, and Boss phase changes.
+    Mook: any success removes it (an armored Mook needs a full success).
+    Named/Boss: enemies have no reaction (A14 F5) — Resolve depletes by the
+    Strike's outcome (D1) and a full success may additionally impose a
+    Tier 1/2 Condition as a rider. Riders never escalate to Broken, since
+    Resolve is what defeats an enemy now.
+
+    `spark_policy` (WD10) is forwarded to `should_spend_spark` unchanged;
+    default `"conservative"` reproduces every recorded corpus bit-identical.
     """
     if pc.posture == "withdrawn":
         return  # Cannot attack
 
     # Determine extra dice (Sparks + Press)
-    sparks = should_spend_spark(pc, target)
+    sparks = should_spend_spark(pc, target, spark_policy)
     press = should_press(pc, target)
 
     if sparks > 0 and pc.sparks >= sparks:
@@ -410,120 +478,94 @@ def resolve_pc_strike(pc: PCState, target: EnemyState, verbose: bool = False):
         pc.endurance_current -= 1
 
     extra_dice = sparks + (1 if press else 0)
+    modifier = pc.strength_mod + pc.combat_mod
 
-    # Calculate modifier: strength + combat + posture offense
-    total_mod = pc.strength_mod + pc.combat_mod
-    posture_off = POSTURE_OFFENSE.get(pc.posture, 0)
-    if posture_off is not None:
-        total_mod += posture_off
+    # A Tier 2 rider from a prior Strike makes this one Easy (D1).
+    difficulty = combat_module.target_strike_difficulty("Standard", target.conditions, ruleset)
 
-    # Staggered condition reduces offense by 1
-    if "staggered" in pc.conditions:
-        total_mod -= 1
-
-    # Difficulty: Standard, Easy if target has T2 conditions
-    difficulty = "Standard"
-    if any(c in TIER2_CONDITIONS for c in target.conditions):
-        difficulty = "Easy"
-
-    outcome, dice, total = combat_roll(total_mod, difficulty, extra_dice)
+    strike = combat_module.resolve_strike(
+        modifier, pc.posture, pc.conditions, ruleset,
+        combat_module.StrikeOptions(difficulty=difficulty, extra_dice=extra_dice),
+    )
 
     if verbose:
         print(f"  {pc.name} strikes {target.instance_id}: "
-              f"dice={dice} mod={total_mod} diff={difficulty} total={total} → {outcome}")
+              f"dice={strike.dice} mod={modifier} diff={difficulty} total={strike.total} → {strike.outcome}")
 
-    if outcome == "failure":
+    if strike.outcome == "failure":
         # 6-: consequence for attacker (T1 condition)
-        apply_condition(pc, "winded", 1)
+        combat_module.apply_condition(pc.conditions, "winded", 1, ruleset)
         return
 
-    # Determine base condition tier
-    if outcome == "full_success":
-        base_tier = 2
-    else:  # partial_success
-        base_tier = 1
-
-    # Mook: any success removes them
+    # Mook: any success removes them (armored Mook needs a full success)
     if target.tier == "mook":
-        target.is_removed = True
-        if verbose:
-            print(f"    → {target.instance_id} removed (Mook)")
-        return
-
-    # Named/Boss: enemy may react
-    final_tier = base_tier
-    reaction_downgraded = False
-
-    if should_enemy_react(target, base_tier):
-        # Enemy Parries: spend 1 Endurance
-        reaction_cost = max(0, 1 + POSTURE_REACTION_COST.get(target.posture, 0))
-        if target.endurance_current >= reaction_cost:
-            target.endurance_current -= reaction_cost
-            parry_outcome, _, _ = combat_roll(target.defense_modifier, "Standard")
+        armored = target.armor in ("light", "heavy")
+        if combat_module.mook_removed(strike.outcome, armored, ruleset):
+            target.is_removed = True
             if verbose:
-                print(f"    {target.instance_id} parries: → {parry_outcome}")
-            if parry_outcome == "full_success":
-                return  # Attack fully deflected
-            elif parry_outcome == "partial_success":
-                final_tier = max(0, base_tier - 1)
-                reaction_downgraded = True
-
-    # Apply armor (doesn't stack with reaction downgrade)
-    armor_tier = armor_downgrade(base_tier, target.armor)
-    if reaction_downgraded:
-        # Take the greater reduction (don't stack)
-        final_tier = min(final_tier, armor_tier)
-    else:
-        final_tier = armor_tier
-
-    # 0-Endurance Absorb override: conditions become T2 persistent
-    is_zero_end = (target.endurance_current <= 0 and target.tier != "mook")
-
-    if final_tier <= 0:
-        if verbose:
-            print(f"    → condition negated (armor/reaction)")
+                print(f"    → {target.instance_id} removed (Mook)")
         return
 
-    # Choose which condition to apply
-    if final_tier >= 2:
-        # Choose T2 that target already has (to trigger Broken), else staggered
-        if "staggered" in target.conditions:
-            condition = "staggered"
-        elif "cornered" in target.conditions:
-            condition = "cornered"
-        else:
-            condition = "staggered"
-    else:
-        condition = "winded"
-
-    apply_condition(target, condition, final_tier, is_zero_end_absorb=is_zero_end)
+    # Named/Boss: no enemy reaction (A14 F5). Resolve depletes by the
+    # Strike's own outcome.
+    effective_outcome = strike.outcome
+    phase_thresholds = [p["resolve_threshold"] for p in target.phases]
+    damage = combat_module.apply_resolve_damage(
+        target.resolve_current, effective_outcome, ruleset, phase_thresholds,
+    )
+    target.resolve_current = damage.resolve_current
 
     if verbose:
-        broken_str = " → BROKEN!" if target.is_broken else ""
-        print(f"    → {target.instance_id} takes {condition} (T{final_tier})"
-              f"{' [persistent]' if is_zero_end else ''}{broken_str}")
+        print(f"    → {target.instance_id} Resolve {damage.resolve_current} (-{damage.depletion})")
+
+    if damage.phase_index is not None:
+        target.phase_index = damage.phase_index
+        if target.special_attack_mod is not None:
+            target.attack_modifier = target.special_attack_mod
+        if verbose:
+            print(f"    → {target.instance_id} enters phase {damage.phase_index}")
+
+    if damage.defeated:
+        target.is_removed = True
+        if verbose:
+            print(f"    → {target.instance_id} defeated")
+        return
+
+    # A full success may additionally impose a rider Condition
+    # (D1: "on a full success only").
+    if effective_outcome == "full_success":
+        condition = _choose_rider(target, ruleset)
+        if condition is not None:
+            tier2_ids = {c.id for c in ruleset.combat.conditions.tier2}
+            tier = 2 if condition in tier2_ids else 1
+            combat_module.apply_condition(
+                target.conditions, condition, tier, ruleset, is_rider=True,
+            )
+            if verbose:
+                print(f"    → {target.instance_id} takes {condition} (rider, T{tier})")
 
 
 # ---------------------------------------------------------------------------
 # Resolution: Enemy Attack against PC
 # ---------------------------------------------------------------------------
 
-def resolve_enemy_attack(enemy: EnemyState, target: PCState, verbose: bool = False):
+def _enemy_attack(enemy: EnemyState, target: PCState, ruleset, verbose: bool = False) -> None:
     """Resolve an enemy's attack against a PC.
 
     NPCs don't roll. The incoming condition tier is determined by enemy type.
-    The PC reacts (Dodge, Parry, or Absorb).
+    The PC reacts (Dodge, Parry, or Absorb) via `app.game.combat`'s rules;
+    reaction choice is AI policy (`choose_pc_reaction`), made here.
     """
     if target.is_broken:
         return
 
-    # Incoming tier by enemy type
-    if enemy.tier == "mook":
-        incoming_tier = 1
-    else:
-        incoming_tier = 2
+    # K1 (BRIEF D8): this attack is the target's first reaction of the
+    # exchange only if none has landed yet this exchange.
+    is_first_reaction = target.reactions_this_exchange == 0
+    target.reactions_this_exchange += 1
 
-    # Boss phase 2 may ignore T1 conditions (irrelevant for attacks)
+    # Incoming tier by enemy type
+    incoming_tier = 1 if enemy.tier == "mook" else 2
 
     # Reaction difficulty adjusted by enemy posture
     difficulty = "Standard"
@@ -540,96 +582,69 @@ def resolve_enemy_attack(enemy: EnemyState, target: PCState, verbose: bool = Fal
               f"{target.name} {reaction}s")
 
     if reaction == "absorb":
-        # Take full hit
-        is_zero_end = target.endurance_current <= 0
-        final_tier = incoming_tier
-
-        # Armor downgrade
-        armor_tier = armor_downgrade(incoming_tier, target.armor)
-        final_tier = armor_tier
-
-        # 0-End override
-        if is_zero_end and final_tier > 0:
-            final_tier = max(final_tier, 2)
+        # Take full hit — Absorb never downgrades, so armor alone reduces here.
+        incoming = combat_module.resolve_incoming_condition(
+            incoming_tier, target.armor, target.armor_downgrades_remaining, ruleset,
+        )
+        target.armor_downgrades_remaining = incoming.downgrades_remaining
+        final_tier = incoming.tier
 
         if final_tier <= 0:
             if verbose:
                 print(f"    → negated by armor")
             return
 
-        # Choose condition
-        if final_tier >= 2:
-            if "staggered" in target.conditions:
-                condition = "staggered"
-            elif "cornered" in target.conditions:
-                condition = "cornered"
-            else:
-                condition = "staggered"
-        else:
-            condition = "winded"
+        condition = _choose_condition(target.conditions, ruleset) if final_tier >= 2 else "winded"
 
-        apply_condition(target, condition, final_tier, is_zero_end_absorb=is_zero_end)
+        result = combat_module.apply_condition(
+            target.conditions, condition, final_tier, ruleset,
+        )
+        if result.broken:
+            _mark_broken(target)
         if verbose:
             broken_str = " → BROKEN!" if target.is_broken else ""
-            print(f"    → {target.name} takes {condition} (T{final_tier})"
-                  f"{' [persistent]' if is_zero_end else ''}{broken_str}")
+            print(f"    → {target.name} takes {condition} (T{final_tier}){broken_str}")
         return
 
-    # Active reaction: Dodge or Parry
-    # Pay Endurance cost
-    base_cost = 1
-    posture_adj = POSTURE_REACTION_COST.get(target.posture, 0)
-    cost = max(0, base_cost + posture_adj)
+    # Active reaction: Dodge or Parry — pay Endurance cost, then roll
+    cost = combat_module.reaction_cost(reaction, target.posture, ruleset, is_first_reaction)
     target.endurance_current = max(0, target.endurance_current - cost)
 
-    # Roll reaction
-    if reaction == "dodge":
-        mod = target.dexterity_mod
-    else:  # parry
-        mod = target.strength_mod + target.combat_mod
-
-    outcome, dice, total = combat_roll(mod, difficulty)
+    mod = target.dexterity_mod if reaction == "dodge" else (target.strength_mod + target.combat_mod)
+    result = combat_module.roll(mod, difficulty, ruleset)
 
     if verbose:
-        print(f"    {target.name} rolls {reaction}: dice={dice} total={total} → {outcome}")
+        print(f"    {target.name} rolls {reaction}: dice={result.dice} total={result.total} → {result.outcome}")
 
-    if outcome == "full_success":
+    if result.outcome == "full_success":
         # Fully avoided
         if verbose:
             print(f"    → avoided entirely")
         return
 
-    # Determine final tier
-    reaction_downgraded = False
-    final_tier = incoming_tier
-    if outcome == "partial_success":
-        final_tier = max(0, incoming_tier - 1)
-        reaction_downgraded = True
-
-    # Armor downgrade (doesn't stack with reaction)
-    armor_tier = armor_downgrade(incoming_tier, target.armor)
-    if reaction_downgraded:
-        final_tier = min(final_tier, armor_tier)
-    else:
-        final_tier = armor_tier
+    # Armor and a partial reaction do not stack (PHB III.3) — the shared rule
+    # applies the single greater reduction, and does not spend an armor charge
+    # the reaction has already made redundant.
+    incoming = combat_module.resolve_incoming_condition(
+        incoming_tier,
+        target.armor,
+        target.armor_downgrades_remaining,
+        ruleset,
+        reaction_downgraded=(result.outcome == "partial_success"),
+    )
+    target.armor_downgrades_remaining = incoming.downgrades_remaining
+    final_tier = incoming.tier
 
     if final_tier <= 0:
         if verbose:
             print(f"    → condition negated")
         return
 
-    # Choose condition
-    if final_tier >= 2:
-        if "staggered" in target.conditions:
-            condition = "staggered"
-        elif "cornered" in target.conditions:
-            condition = "cornered"
-        else:
-            condition = "staggered"
-    else:
-        condition = "winded"
+    condition = _choose_condition(target.conditions, ruleset) if final_tier >= 2 else "winded"
 
-    apply_condition(target, condition, final_tier)
+    applied = combat_module.apply_condition(target.conditions, condition, final_tier, ruleset)
+    if applied.broken:
+        _mark_broken(target)
     if verbose:
         broken_str = " → BROKEN!" if target.is_broken else ""
         print(f"    → {target.name} takes {condition} (T{final_tier}){broken_str}")
@@ -643,11 +658,20 @@ def run_combat(
     pcs: list[PCState],
     enemies: list[EnemyState],
     verbose: bool = False,
+    spark_policy: str = "conservative",
 ) -> SimResult:
     """Run a single combat encounter to completion.
 
     Returns a SimResult with win/loss, exchanges, Sparks spent, etc.
+
+    `spark_policy` (WD10) is forwarded to every PC Strike's
+    `should_spend_spark` call; default `"conservative"` reproduces every
+    recorded corpus bit-identical.
     """
+    ruleset = _ruleset()
+    for pc in pcs:
+        pc.armor_downgrades_remaining = combat_module.armor_budget(pc.armor, ruleset)
+
     for exchange in range(1, MAX_EXCHANGES + 1):
         active_pcs = [p for p in pcs if not p.is_broken]
         active_enemies = [e for e in enemies if not e.is_out]
@@ -657,13 +681,17 @@ def run_combat(
         if not active_pcs:
             return _build_result(False, exchange - 1, pcs, enemies)
 
+        # K1 (BRIEF D8): reset the per-exchange reaction count.
+        for pc in active_pcs:
+            pc.reactions_this_exchange = 0
+
         if verbose:
             print(f"\n--- Exchange {exchange} ---")
             for p in active_pcs:
                 print(f"  {p.name}: End={p.endurance_current}/{p.endurance_max} "
                       f"Sparks={p.sparks} Cond={p.conditions}")
             for e in active_enemies:
-                end_str = f"End={e.endurance_current}/{e.endurance_max}" if e.tier != "mook" else "Mook"
+                end_str = f"Resolve={e.resolve_current}/{e.resolve}" if e.tier != "mook" else "Mook"
                 print(f"  {e.instance_id}: {end_str} Cond={e.conditions}")
 
         # 1. Declare postures
@@ -686,7 +714,7 @@ def run_combat(
             target = choose_pc_target(pc, enemies)
             if target is None:
                 continue
-            resolve_pc_strike(pc, target, verbose)
+            _pc_strike(pc, target, ruleset, verbose, spark_policy)
             # Refresh active enemies (a Mook may have been removed)
             active_enemies = [e for e in enemies if not e.is_out]
 
@@ -703,7 +731,7 @@ def run_combat(
             target = choose_enemy_target(enemy, active_pcs_now)
             if target is None:
                 continue
-            resolve_enemy_attack(enemy, target, verbose)
+            _enemy_attack(enemy, target, ruleset, verbose)
 
         # Check if all PCs broken after enemy actions
         active_pcs = [p for p in pcs if not p.is_broken]
@@ -712,16 +740,25 @@ def run_combat(
 
         # 4. End-of-exchange cleanup
         for pc in pcs:
-            cleanup_end_of_exchange(pc)
+            if pc.is_broken:
+                continue
+            combat_module.end_exchange(pc.conditions, ruleset)
+            if pc.posture == "withdrawn":
+                pc.endurance_current = min(
+                    pc.endurance_max,
+                    pc.endurance_current + combat_module.withdrawn_recovery_amount(ruleset),
+                )
         for enemy in enemies:
             if not enemy.is_out:
-                cleanup_end_of_exchange(enemy)
-                # Boss phase 2: ignore T1 conditions
-                if (isinstance(enemy, EnemyState) and enemy.phase_changed
-                        and enemy.phase2_ignores_t1):
-                    enemy.conditions = [
-                        c for c in enemy.conditions if c in TIER2_CONDITIONS
-                    ]
+                combat_module.end_exchange(enemy.conditions, ruleset)
+                if enemy.posture == "withdrawn":
+                    resolve_max = enemy.resolve + combat_module.enemy_armor_resolve_bonus(
+                        enemy.armor, ruleset,
+                    )
+                    enemy.resolve_current = min(
+                        resolve_max,
+                        enemy.resolve_current + combat_module.withdrawn_recovery_amount(ruleset),
+                    )
 
     # Timeout: draw (counted as loss)
     return _build_result(False, MAX_EXCHANGES, pcs, enemies)
@@ -754,6 +791,7 @@ def run_simulation(
     label: str = "",
     verbose: bool = False,
     seed: Optional[int] = None,
+    spark_policy: str = "conservative",
 ) -> AggregateResult:
     """Run N iterations of a combat encounter and aggregate results.
 
@@ -764,6 +802,8 @@ def run_simulation(
         label: Label for this simulation series.
         verbose: Print per-exchange details.
         seed: Random seed for reproducibility.
+        spark_policy: (WD10) `"conservative"` (default, today's exact
+            behaviour) or `"player_like"` — see `should_spend_spark`.
 
     Returns:
         AggregateResult with statistics.
@@ -782,7 +822,7 @@ def run_simulation(
                 e = make_enemy(edef, j + 1 if count > 1 else 0)
                 enemies.append(e)
 
-        result = run_combat(pcs, enemies, verbose=(verbose and i == 0))
+        result = run_combat(pcs, enemies, verbose=(verbose and i == 0), spark_policy=spark_policy)
         results.append(result)
 
     return _aggregate(results, label, iterations)
@@ -974,11 +1014,21 @@ def advanced_party() -> list[dict]:
 # ---------------------------------------------------------------------------
 
 def make_enemy(d: dict, instance_num: int = 0) -> EnemyState:
-    """Create an EnemyState from a definition dict."""
+    """Create an EnemyState from a definition dict.
+
+    Def dicts carry only base `resolve` (0 for Mook); `resolve_current`
+    starts at `resolve` plus the enemy's armor bonus (D1) — mirroring
+    `Enemy.init_combat`, applied here since this is the simulator's
+    equivalent one-time combat-start hook.
+    """
     d = dict(d)  # shallow copy
     if instance_num > 0:
         d["instance_id"] = f"{d.get('instance_id', d['name'])}_{instance_num}"
-    return EnemyState(**d)
+    base_resolve = d.pop("resolve", 0)
+    enemy = EnemyState(resolve=base_resolve, resolve_current=base_resolve, **d)
+    if enemy.tier != "mook":
+        enemy.resolve_current += combat_module.enemy_armor_resolve_bonus(enemy.armor, _ruleset())
+    return enemy
 
 
 def chicken_def() -> dict:
@@ -987,8 +1037,7 @@ def chicken_def() -> dict:
         name="Chicken",
         instance_id="chicken",
         tier="mook",
-        endurance_max=0,
-        endurance_current=0,
+        resolve=0,
         attack_modifier=-1,
         defense_modifier=-1,
         armor="none",
@@ -1001,8 +1050,7 @@ def harbor_thug_def() -> dict:
         name="Harbor Thug",
         instance_id="harbor_thug",
         tier="mook",
-        endurance_max=0,
-        endurance_current=0,
+        resolve=0,
         attack_modifier=0,
         defense_modifier=0,
         armor="none",
@@ -1010,13 +1058,13 @@ def harbor_thug_def() -> dict:
 
 
 def city_watch_sergeant_def() -> dict:
-    """City Watch Sergeant: Named, TR 8, light armor."""
+    """City Watch Sergeant: Named, TR 8, light armor. Matches
+    `enemies/city_watch_sergeant.fof` exactly (D1 migration)."""
     return dict(
         name="City Watch Sergeant",
         instance_id="sergeant",
         tier="named",
-        endurance_max=6,
-        endurance_current=6,
+        resolve=3,
         attack_modifier=2,
         defense_modifier=2,
         armor="light",
@@ -1024,34 +1072,32 @@ def city_watch_sergeant_def() -> dict:
 
 
 def veteran_soldier_def() -> dict:
-    """Veteran Soldier: Named, TR 10, light armor (from sim log)."""
+    """Veteran Soldier: Named, TR 10, light armor. Matches
+    `enemies/veteran_soldier.fof` exactly (D1 migration)."""
     return dict(
         name="Veteran Soldier",
         instance_id="veteran",
         tier="named",
-        endurance_max=6,
-        endurance_current=6,
-        attack_modifier=2,
-        defense_modifier=2,
+        resolve=4,
+        attack_modifier=3,
+        defense_modifier=3,
         armor="light",
     )
 
 
 def generic_named_def(tr: int = 8) -> dict:
-    """Generic Named NPC at a target TR. Minimal configuration."""
-    # TR = offense + durability + armor + techniques
-    # For simplicity: no armor, no techniques
-    # offense = attack_mod + 2, durability by endurance
-    # TR 8 = offense 4 (atk_mod +2) + durability 3 (end 6) + armor 1 (light)
-    # TR 10 = offense 4 (atk_mod +2) + durability 4 (end 8) + armor 1 + tech 1
-    # TR 12 = offense 5 (atk_mod +3) + durability 5 (end 10) + armor 2 (heavy)
+    """Generic Named NPC at a target TR. Minimal configuration (no
+    techniques). TR = offense_value + resolve + armor_bonus (D1, DESIGN
+    §4.1); durability is `resolve` directly, not derived from Endurance.
+    Approximate — full recalibration against these post-D1 numbers is
+    Gate G4 (task A10), not this function's job.
+    """
     if tr <= 8:
         return dict(
             name=f"Named NPC (TR {tr})",
             instance_id=f"named_tr{tr}",
             tier="named",
-            endurance_max=6,
-            endurance_current=6,
+            resolve=3,           # offense(+2→4) + resolve(3) + armor(light→1) = 8
             attack_modifier=2,
             defense_modifier=2,
             armor="light",
@@ -1061,10 +1107,9 @@ def generic_named_def(tr: int = 8) -> dict:
             name=f"Named NPC (TR {tr})",
             instance_id=f"named_tr{tr}",
             tier="named",
-            endurance_max=8,
-            endurance_current=8,
-            attack_modifier=2,
-            defense_modifier=2,
+            resolve=4,           # offense(+3→5) + resolve(4) + armor(light→1) = 10
+            attack_modifier=3,
+            defense_modifier=3,
             armor="light",
         )
     else:
@@ -1072,63 +1117,66 @@ def generic_named_def(tr: int = 8) -> dict:
             name=f"Named NPC (TR {tr})",
             instance_id=f"named_tr{tr}",
             tier="named",
-            endurance_max=10,
-            endurance_current=10,
+            resolve=5,           # offense(+3→5) + resolve(5) + armor(heavy→2) = 12
             attack_modifier=3,
             defense_modifier=2,
-            armor="light",
+            armor="heavy",
         )
 
 
 def generic_boss_def(tr: int = 12) -> dict:
-    """Generic Boss at a target TR."""
+    """Generic Boss at a target TR. No authored phase change — that is
+    per-enemy stat-block content (see `archive_guardian_def`), not a
+    generic engine mechanic. Approximate; see `generic_named_def`'s
+    docstring on recalibration scope.
+    """
     if tr <= 12:
         return dict(
             name=f"Boss (TR {tr})",
             instance_id=f"boss_tr{tr}",
             tier="boss",
-            endurance_max=8,
-            endurance_current=8,
-            attack_modifier=2,
+            resolve=5,            # offense(+3→5) + resolve(5) + armor(heavy→2) = 12
+            attack_modifier=3,
             defense_modifier=2,
-            armor="light",
-            has_phase_change=True,
-            phase2_attack_mod=1,
-            phase2_endurance=4,
-            phase2_ignores_t1=True,
+            armor="heavy",
         )
     else:
         return dict(
             name=f"Boss (TR {tr})",
             instance_id=f"boss_tr{tr}",
             tier="boss",
-            endurance_max=10,
-            endurance_current=10,
-            attack_modifier=3,
-            defense_modifier=2,
+            resolve=7,
+            attack_modifier=4,
+            defense_modifier=3,
             armor="heavy",
-            has_phase_change=True,
-            phase2_attack_mod=1,
-            phase2_endurance=4,
-            phase2_ignores_t1=True,
         )
 
 
 def archive_guardian_def() -> dict:
-    """Archive Guardian: Boss, TR 16, heavy armor, phase change."""
+    """Archive Guardian: Boss, TR 17, heavy armor. Matches
+    `enemies/archive_guardian.fof` exactly (D1 migration corrected the
+    published TR from 16 to 14 — the old `special` bonus was double-
+    counted at authoring time, DESIGN §4.1; A8/G1 retuned base Resolve
+    5 -> 8 to clear the median-3-exchange floor under the worst-case
+    rider->Easy snowball, per DESIGN §5-bis — TR 14 -> 17).
+
+    `phases` is the enemy's authored, purely-narrative `resolve_threshold`
+    trigger (matches the .fof's `phases:` block). `special_attack_mod`/
+    `special_ignores_tier1` model its authored "Special" text (Reduced
+    Mode: attack_modifier drops to +1, ignores Tier 1 Conditions entirely)
+    — boss-specific flavor, not a generic engine mechanic.
+    """
     return dict(
         name="Archive Guardian",
         instance_id="guardian",
         tier="boss",
-        endurance_max=10,
-        endurance_current=10,
+        resolve=8,
         attack_modifier=3,
         defense_modifier=1,
         armor="heavy",
-        has_phase_change=True,
-        phase2_attack_mod=1,
-        phase2_endurance=4,
-        phase2_ignores_t1=True,
+        phases=[{"resolve_threshold": 2, "description": "Reduced Mode"}],
+        special_attack_mod=1,
+        special_ignores_tier1=True,
     )
 
 
@@ -1257,6 +1305,333 @@ def run_sequential_series(iterations: int = 200, seed: Optional[int] = None) -> 
 
 
 # ---------------------------------------------------------------------------
+# Gate G3: Aggressive posture knob K1 (BRIEF D8, DESIGN §5)
+#
+# "Test, don't adopt blind" — K1 (the +1 Aggressive reaction surcharge
+# applies to the first reaction per exchange only) is a one-off
+# experimental knob, not a settled rule. It is deliberately implemented
+# as its own self-contained fight loop below rather than threaded through
+# `run_combat`/`_enemy_attack`/`choose_pc_reaction` — those are exercised
+# by every other Series and already under test; a knob that may be
+# rejected has no business touching shared, tested code paths. It still
+# routes every rule computation (cost table, dice, condition tiers)
+# through `app.game.combat` — only the *choice of which posture's cost to
+# look up* is new, per the C1 "simulator may never reimplement a rule"
+# boundary.
+# ---------------------------------------------------------------------------
+
+def _g3_pc_def() -> dict:
+    """G3's solo PC (BRIEF D8 / DESIGN §5 G3: "Unarmored Endurance-3
+    PC"). Reuses Zahna's canonical stat block exactly — she already is
+    Endurance 3 and unarmored — rather than inventing a new character for
+    a one-off experiment."""
+    return zahna_def()
+
+
+def _g3_named_def() -> dict:
+    """A deliberately weak, unarmored Named enemy for G3's isolated
+    experiment — attack_modifier 0, resolve 2. Not tied to any TR
+    formula (this experiment measures posture, not encounter balance);
+    weak enough that a solo Endurance-3 PC has a genuine chance, strong
+    enough (Tier 2 capable) that Broken is reachable at all.
+    """
+    return dict(
+        name="G3 Foe", instance_id="g3_foe", tier="named",
+        resolve=2, attack_modifier=0, defense_modifier=0, armor="none",
+    )
+
+
+def _g3_enemies() -> list[EnemyState]:
+    """G3's enemy composition: two identical weak Named enemies, no
+    Mooks.
+
+    Two are required, not one — with a single attacker there is only
+    ever one reaction per exchange, and "first reaction" is the *only*
+    reaction, making K1 indistinguishable from baseline by construction.
+    Both must be Tier 2 capable (Named, not Mook) for a Broken rate to be
+    measurable at all: `incoming_tier` is fixed at 1 for Mooks
+    (mirrored below from `_enemy_attack`), and Tier 1 alone never
+    escalates to Broken.
+    """
+    return [make_enemy(_g3_named_def(), i) for i in range(2)]
+
+
+def _g3_reaction_cost(
+    reaction: str, posture: str, is_first_reaction: bool, k1_enabled: bool, ruleset,
+) -> int:
+    """K1's cost lookup for the G3 gate's before/after comparison.
+
+    Historical note (2026-07-10): K1 was **adopted** as the canonical
+    rule after this gate passed robustly across 7 seeds (Series 8) —
+    `combat_module.reaction_cost` now applies the first-reaction-only
+    surcharge natively via its own `is_first_reaction` parameter and
+    `facet.yaml`'s `reaction_cost_modifier_applies`. This wrapper exists
+    only so `run_g3_gate` can still reproduce the **pre-adoption
+    baseline** (every reaction pays the full surcharge, `k1_enabled=
+    False`) for the historical before/after record — passing
+    `is_first_reaction=True` unconditionally reproduces that old
+    behaviour through the same, now-canonical function, rather than a
+    second copy of the rule.
+    """
+    return combat_module.reaction_cost(
+        reaction, posture, ruleset,
+        is_first_reaction=(True if not k1_enabled else is_first_reaction),
+    )
+
+
+def _g3_pc_reacts(
+    pc: PCState,
+    incoming_tier: int,
+    enemy_difficulty: str,
+    posture: str,
+    is_first_reaction: bool,
+    k1_enabled: bool,
+    ruleset,
+) -> None:
+    """Resolve one incoming attack against G3's solo PC.
+
+    Mirrors `_enemy_attack`'s reaction handling (same Dodge/Parry choice
+    heuristic, same `app.game.combat` calls for roll/condition) — the
+    sole divergence is the K1-adjusted cost lookup above.
+    """
+    parry_mod = pc.strength_mod + pc.combat_mod
+    dodge_mod = pc.dexterity_mod
+    reaction = "parry" if parry_mod >= dodge_mod else "dodge"
+
+    cost = _g3_reaction_cost(reaction, posture, is_first_reaction, k1_enabled, ruleset)
+    if pc.endurance_current < cost:
+        reaction = "absorb"
+
+    if reaction == "absorb":
+        if incoming_tier <= 0:
+            return
+        condition = _choose_condition(pc.conditions, ruleset) if incoming_tier >= 2 else "winded"
+        result = combat_module.apply_condition(pc.conditions, condition, incoming_tier, ruleset)
+        if result.broken:
+            _mark_broken(pc)
+        return
+
+    pc.endurance_current = max(0, pc.endurance_current - cost)
+    mod = dodge_mod if reaction == "dodge" else parry_mod
+    roll_result = combat_module.roll(mod, enemy_difficulty, ruleset)
+    if roll_result.outcome == "full_success":
+        return
+
+    # Same non-stacking rule as `_enemy_attack`. G3's PC is unarmored by
+    # construction, so armor never reduces here — routing through the shared
+    # rule keeps the reduction in one place without changing G3's numbers.
+    incoming = combat_module.resolve_incoming_condition(
+        incoming_tier,
+        pc.armor,
+        pc.armor_downgrades_remaining,
+        ruleset,
+        reaction_downgraded=(roll_result.outcome == "partial_success"),
+    )
+    pc.armor_downgrades_remaining = incoming.downgrades_remaining
+    final_tier = incoming.tier
+    if final_tier <= 0:
+        return
+
+    condition = _choose_condition(pc.conditions, ruleset) if final_tier >= 2 else "winded"
+    result = combat_module.apply_condition(pc.conditions, condition, final_tier, ruleset)
+    if result.broken:
+        _mark_broken(pc)
+
+
+def _g3_pc_strike(pc: PCState, target: EnemyState, ruleset) -> None:
+    """G3's PC Strike: no Press, no Sparks.
+
+    Deliberately simpler than the shared `_pc_strike` — `should_press`'s
+    policy spends 1 Endurance *before* reactions are even resolved for
+    this exchange, which confounds the posture experiment: Zahna's
+    Endurance-3 pool is exactly large enough that one pre-spent point
+    changes whether K1's discount ever crosses an affordability
+    threshold. G3 isolates the posture variable; Press/Spark spending is
+    a different, orthogonal resource decision the gate isn't testing.
+    Still routes the roll and Resolve depletion through `app.game.combat`
+    exactly like `_pc_strike` does.
+    """
+    if pc.posture == "withdrawn":
+        return
+
+    modifier = pc.strength_mod + pc.combat_mod
+    difficulty = combat_module.target_strike_difficulty("Standard", target.conditions, ruleset)
+    strike = combat_module.resolve_strike(
+        modifier, pc.posture, pc.conditions, ruleset,
+        combat_module.StrikeOptions(difficulty=difficulty),
+    )
+
+    if strike.outcome == "failure":
+        combat_module.apply_condition(pc.conditions, "winded", 1, ruleset)
+        return
+
+    # No enemy reaction (A14 F5): Resolve depletes by the Strike's outcome.
+    effective_outcome = strike.outcome
+    phase_thresholds = [p["resolve_threshold"] for p in target.phases]
+    damage = combat_module.apply_resolve_damage(
+        target.resolve_current, effective_outcome, ruleset, phase_thresholds,
+    )
+    target.resolve_current = damage.resolve_current
+    if damage.defeated:
+        target.is_removed = True
+        return
+
+    if effective_outcome == "full_success":
+        condition = _choose_rider(target, ruleset)
+        if condition is not None:
+            tier2_ids = {c.id for c in ruleset.combat.conditions.tier2}
+            tier = 2 if condition in tier2_ids else 1
+            combat_module.apply_condition(target.conditions, condition, tier, ruleset, is_rider=True)
+
+
+G3_EXCHANGES = 2  # BRIEF D8 / DESIGN §5 G3: bounded acute-burst window — see run_g3_fight's docstring
+
+
+def run_g3_fight(posture: str, k1_enabled: bool, verbose: bool = False) -> SimResult:
+    """One G3-gate combat: a solo Endurance-3 unarmored PC, posture fixed
+    for the whole fight (bypassing `choose_pc_posture`'s Endurance-ratio
+    logic entirely — G3 isolates the posture variable itself), against
+    `_g3_enemies()`, bounded to `G3_EXCHANGES` (2).
+
+    Bounded, not fight-to-conclusion — deliberately. A fight-to-conclusion
+    version of this same matchup was tried first and rejected: over a
+    multi-exchange war of attrition, cumulative Tier 2 exposure converges
+    every posture toward the same Broken ceiling (measured empirically:
+    baseline Aggressive and Measured both landed at ~84% Broken, no
+    daylight between them at all — the reaction-cost differential a
+    reaction ROLL's success chance never depends on posture, only the
+    Endurance to attempt one does). The "Aggressive death-spiral" PT01
+    and BRIEF D8 describe is specifically an *opening-exchange* alpha-
+    strike phenomenon: burn Endurance reacting to the first attack of a
+    multi-attacker exchange, then have nothing left for the second. That
+    signal is only visible in a short, bounded window, not a long-run
+    average. `party_wins` here means "cleared both enemies within the
+    window" (the offense-edge proxy for the gate's win-rate-delta check);
+    `pcs_broken`/`is_broken` is the safety signal K1 is meant to improve.
+    """
+    ruleset = _ruleset()
+    pc = make_pc(_g3_pc_def())
+    pc.posture = posture
+    enemies = _g3_enemies()
+
+    for _exchange in range(1, G3_EXCHANGES + 1):
+        active_enemies = [e for e in enemies if not e.is_out]
+        if not active_enemies or pc.is_broken:
+            break
+
+        # PC strikes (Press/Spark-free — see `_g3_pc_strike`'s docstring).
+        target = choose_pc_target(pc, enemies)
+        if target is not None:
+            _g3_pc_strike(pc, target, ruleset)
+        active_enemies = [e for e in enemies if not e.is_out]
+        if not active_enemies:
+            break
+
+        # Every active enemy attacks the solo PC this exchange — this
+        # simultaneity is what makes K1 measurable at all (BRIEF D8).
+        for i, enemy in enumerate(active_enemies):
+            if pc.is_broken:
+                break
+            incoming_tier = 1 if enemy.tier == "mook" else 2
+            difficulty = "Standard"
+            if enemy.posture == "aggressive":
+                difficulty = "Hard"
+            elif enemy.posture == "defensive":
+                difficulty = "Easy"
+            _g3_pc_reacts(
+                pc, incoming_tier, difficulty, posture,
+                is_first_reaction=(i == 0), k1_enabled=k1_enabled, ruleset=ruleset,
+            )
+
+        if pc.is_broken:
+            break
+
+        combat_module.end_exchange(pc.conditions, ruleset)
+        for enemy in enemies:
+            if not enemy.is_out:
+                combat_module.end_exchange(enemy.conditions, ruleset)
+
+    cleared = all(e.is_out for e in enemies)
+    return _build_result(cleared, G3_EXCHANGES, [pc], enemies)
+
+
+def run_g3_gate(iterations: int = 200, seed: Optional[int] = None) -> dict[str, AggregateResult]:
+    """Gate G3 (DESIGN §5, BRIEF D8): does K1 soften the Aggressive
+    death-spiral without erasing the tradeoff?
+
+    Runs all four configurations (Aggressive/Measured x baseline/K1),
+    each re-seeded identically so the four runs are directly comparable.
+    """
+    configs = [
+        ("baseline_aggressive", "aggressive", False),
+        ("baseline_measured", "measured", False),
+        ("k1_aggressive", "aggressive", True),
+        ("k1_measured", "measured", True),
+    ]
+    results = {}
+    for key, posture, k1_enabled in configs:
+        if seed is not None:
+            random.seed(seed)
+        runs = [run_g3_fight(posture, k1_enabled) for _ in range(iterations)]
+        label = f"G3: {posture} ({'K1' if k1_enabled else 'baseline'})"
+        results[key] = _aggregate(runs, label, iterations)
+    return results
+
+
+def g3_verdict(results: dict[str, AggregateResult]) -> dict:
+    """Compute the G3 pass/fail verdict per DESIGN §5's two-part
+    condition. Both parts must hold to adopt K1.
+    """
+    base_agg = results["baseline_aggressive"]
+    k1_agg = results["k1_aggressive"]
+    base_meas = results["baseline_measured"]
+    k1_meas = results["k1_measured"]
+
+    if base_agg.mean_pcs_broken > 0:
+        broken_cut = (base_agg.mean_pcs_broken - k1_agg.mean_pcs_broken) / base_agg.mean_pcs_broken
+        broken_cut_defined = True
+    else:
+        broken_cut = 0.0
+        broken_cut_defined = False
+
+    base_delta = base_agg.win_rate - base_meas.win_rate
+    k1_delta = k1_agg.win_rate - k1_meas.win_rate
+    delta_preserved = abs(k1_delta - base_delta) <= 0.05
+
+    broken_cut_passes = broken_cut_defined and broken_cut >= 0.15
+    adopt = broken_cut_passes and delta_preserved
+
+    return {
+        "broken_cut": broken_cut,
+        "broken_cut_defined": broken_cut_defined,
+        "broken_cut_passes": broken_cut_passes,
+        "base_delta": base_delta,
+        "k1_delta": k1_delta,
+        "delta_preserved": delta_preserved,
+        "adopt": adopt,
+    }
+
+
+def print_g3_result(results: dict[str, AggregateResult]) -> None:
+    """Print the G3 gate's four configurations and the pass/fail verdict."""
+    for r in results.values():
+        print_result(r)
+
+    v = g3_verdict(results)
+    print(f"\n{'=' * 60}")
+    print("  Gate G3 verdict — Aggressive posture knob K1")
+    print(f"{'=' * 60}")
+    if v["broken_cut_defined"]:
+        print(f"  Broken-rate cut (Aggressive, baseline->K1): {v['broken_cut']:.1%} (pass: >= 15%)")
+    else:
+        print("  Broken-rate cut: undefined (baseline Aggressive never Broken)")
+    print(f"  Win-rate delta, baseline (Agg - Measured): {v['base_delta']:+.1%}")
+    print(f"  Win-rate delta, K1 (Agg - Measured):       {v['k1_delta']:+.1%}")
+    print(f"  Delta preserved within +/-5pp: {v['delta_preserved']}")
+    print(f"  Verdict: {'ADOPT K1' if v['adopt'] else 'DO NOT ADOPT K1'}")
+
+
+# ---------------------------------------------------------------------------
 # Reporting
 # ---------------------------------------------------------------------------
 
@@ -1296,7 +1671,7 @@ def main():
         description="Combat simulator for Facets of Origin encounter balancing"
     )
     parser.add_argument("--series", type=str, default=None,
-                        help="Run a specific series (A, B, C, D, E, F, or 'all')")
+                        help="Run a specific series (A, B, C, D, E, F, G3, or 'all')")
     parser.add_argument("--iterations", "-n", type=int, default=200,
                         help="Iterations per configuration (default: 200)")
     parser.add_argument("--seed", type=int, default=None,
@@ -1328,6 +1703,10 @@ def main():
             all_results.extend(results)
             for r in results:
                 print_result(r)
+        elif series_id == "G3":
+            g3_results = run_g3_gate(args.iterations, args.seed)
+            print_g3_result(g3_results)
+            all_results.extend(g3_results.values())
         elif series_id in all_series:
             for label, pcs, enemies in all_series[series_id]:
                 result = run_simulation(

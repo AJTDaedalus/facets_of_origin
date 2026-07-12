@@ -62,7 +62,8 @@ class TestBaseRulesetLoading:
         assert adv is not None
         assert adv.session_skill_points == 4
         assert adv.marks_per_rank == 3
-        assert adv.facet_level_threshold == 6
+        assert adv.facet_level_threshold == 5
+        assert adv.major_advancement_threshold == 3
 
     def test_attribute_ratings_three_tiers(self, ruleset):
         assert len(ruleset.attribute_ratings) == 3
@@ -99,6 +100,42 @@ class TestBaseRulesetLoading:
         costs = {c.context: c.cost for c in ruleset.advancement.skill_point_costs}
         assert costs["primary_facet"] == 1
         assert costs["cross_facet"] == 2
+
+    def test_pc_armor_per_scene_budgets_loaded(self, ruleset):
+        armor = ruleset.combat.armor
+        assert armor.light.downgrades_per_scene == 2
+        assert armor.light.tiers_reduced == 1
+        assert armor.heavy.downgrades_per_scene == 4
+        assert armor.heavy.tiers_reduced == 1
+
+    def test_enemy_durability_loaded(self, ruleset):
+        durability = ruleset.combat.enemy_durability
+        assert durability.strike_depletion.full_success == 2
+        assert durability.strike_depletion.partial_success == 1
+        assert durability.strike_depletion.failure == 0
+        assert durability.armor_resolve_bonus.light == 1
+        assert durability.armor_resolve_bonus.heavy == 2
+        assert durability.mook_removed_on == "partial_success"
+        assert durability.armored_mook_removed_on == "full_success"
+
+    def test_hazards_threat_clock_loaded(self, ruleset):
+        clock = ruleset.hazards.threat_clock
+        assert clock.segments == 4
+        assert clock.advances_on == ["partial_success", "failure"]
+        assert clock.wind_back_cost == "1_action"
+        assert clock.wind_back_requires_roll is False
+
+    def test_death_rule_loaded(self, ruleset):
+        death = ruleset.death
+        assert death.broken_is_lethal is False
+        assert death.doom_gate == ["permanent_scar", "heroic_death"]
+
+    def test_spark_refund_variant_defaults_off(self, ruleset):
+        assert ruleset.spark.variants.refund_on_failed_pretechnique_cast is False
+
+    def test_graceful_fail_is_structured(self, ruleset):
+        methods = {m.id: m for m in ruleset.spark.earn_methods}
+        assert methods["graceful_fail"].structured is True
 
 
 # ---------------------------------------------------------------------------

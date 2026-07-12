@@ -5,7 +5,7 @@ import re
 from datetime import datetime, timezone
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, computed_field, model_validator
 
 from app.facets.registry import MergedRuleset
 
@@ -38,9 +38,12 @@ class Character(BaseModel):
         skills: SkillState instances keyed by skill ID.
         sparks: Current unspent Spark tokens. Starts at the ruleset's base_sparks_per_session.
         session_skill_points_remaining: Points left to spend on skill advancement this session.
-        facet_level: How many primary-Facet levels the character has earned.
-        rank_advances_this_facet_level: Rank advances toward the next primary Facet level.
-        total_facet_levels: Sum of Facet levels earned across ALL Facets (for Major Advancement).
+        facet_levels: Facet levels earned per Facet, keyed by Facet ID. Cross-Facet
+            levels are tracked separately so they can each count toward Major Advancement.
+        rank_advances_by_facet: Rank advances toward the next level, per Facet.
+        facet_level: (computed) primary-Facet levels earned; = facet_levels[primary_facet].
+        total_facet_levels: (computed) sum of levels across ALL Facets (for Major Advancement).
+        rank_advances_this_facet_level: (computed) advances toward the next primary-Facet level.
         career_advances: Total skill rank advances across all sessions (for encounter budget).
         techniques: List of unlocked technique IDs.
         techniques_used_this_session: Technique IDs marked used for "once per session" tracking.
@@ -53,6 +56,14 @@ class Character(BaseModel):
         endurance_current: Current Endurance in combat; None when not in combat.
         conditions: Active condition IDs in combat.
         posture: Current combat posture ("aggressive"|"measured"|"defensive"|"withdrawn").
+        armor_downgrades_remaining: PC armor's per-scene Condition-downgrade
+            budget (D2); None when unarmored or outside a scene. Persists
+            across `combat_start`/`combat_end` within the same scene — two
+            fights in one scene share the budget — and is only reinitialised
+            via `combat.armor_budget` at the start of a new scene.
+        reactions_this_exchange: Count of reactions taken so far this
+            exchange (K1, BRIEF D8) — feeds `combat.reaction_cost`'s
+            `is_first_reaction`. Reset to 0 by `_handle_end_exchange`.
     """
 
     name: str = Field(min_length=1, max_length=64)
@@ -66,10 +77,12 @@ class Character(BaseModel):
 
     session_skill_points_remaining: int = Field(default=4, ge=0)
     skills_used_this_session: set[str] = Field(default_factory=set)
-    facet_level: int = Field(default=0, ge=0)
-    rank_advances_this_facet_level: int = Field(default=0, ge=0)
-    total_facet_levels: int = Field(default=0, ge=0)
+    facet_levels: dict[str, int] = Field(default_factory=dict)
+    rank_advances_by_facet: dict[str, int] = Field(default_factory=dict)
     career_advances: int = Field(default=0, ge=0)
+    # One Technique pick is granted per Facet level earned in ANY Facet and
+    # spent by `technique_select` (D3, §6.4). Persisted across sessions.
+    technique_picks_available: int = Field(default=0, ge=0)
 
     techniques: list[str] = Field(default_factory=list)
     techniques_used_this_session: list[str] = Field(default_factory=list)
@@ -95,6 +108,28 @@ class Character(BaseModel):
     conditions: list[str] = Field(default_factory=list)
     posture: Optional[str] = None  # "aggressive"|"measured"|"defensive"|"withdrawn"
     armor: Optional[str] = None  # None | "light" | "heavy"
+    armor_downgrades_remaining: Optional[int] = None
+    reactions_this_exchange: int = 0
+
+    # --- Derived Facet-level views (read-only; kept for .fof and UI compat) ---
+
+    @computed_field
+    @property
+    def facet_level(self) -> int:
+        """Primary-Facet levels earned. Backward-compatible with .fof and UI."""
+        return self.facet_levels.get(self.primary_facet, 0)
+
+    @computed_field
+    @property
+    def total_facet_levels(self) -> int:
+        """Sum of Facet levels across all Facets — the Major Advancement counter."""
+        return sum(self.facet_levels.values())
+
+    @computed_field
+    @property
+    def rank_advances_this_facet_level(self) -> int:
+        """Rank advances banked toward the next primary-Facet level."""
+        return self.rank_advances_by_facet.get(self.primary_facet, 0)
 
     def validate_against_ruleset(self, ruleset: MergedRuleset) -> list[str]:
         """Return a list of validation errors against the ruleset. Empty list = valid.
@@ -207,20 +242,19 @@ class Character(BaseModel):
                 advances += 1
         return advances
 
-    def _check_facet_level_threshold(self, is_primary_facet_skill: bool, rank_advances: int, threshold: int) -> int:
-        """Update facet level tracking for rank advances in the primary facet.
+    def _check_facet_level_threshold(self, facet_id: str, rank_advances: int, threshold: int) -> int:
+        """Credit `rank_advances` in `facet_id` toward that Facet's level track.
 
-        Returns the number of new facet levels reached.
+        Every Facet — primary or cross — accrues its own levels, and each level
+        counts toward `total_facet_levels` (and therefore Major Advancement).
+        Returns the number of new Facet levels reached in this Facet.
         """
-        if not is_primary_facet_skill:
-            return 0
         levels_gained = 0
         for _ in range(rank_advances):
-            self.rank_advances_this_facet_level += 1
-            if self.rank_advances_this_facet_level >= threshold:
-                self.facet_level += 1
-                self.total_facet_levels += 1
-                self.rank_advances_this_facet_level = 0
+            self.rank_advances_by_facet[facet_id] = self.rank_advances_by_facet.get(facet_id, 0) + 1
+            if self.rank_advances_by_facet[facet_id] >= threshold:
+                self.facet_levels[facet_id] = self.facet_levels.get(facet_id, 0) + 1
+                self.rank_advances_by_facet[facet_id] = 0
                 levels_gained += 1
         return levels_gained
 
@@ -248,15 +282,19 @@ class Character(BaseModel):
 
         state = self.skills[skill_id]
         marks_per_rank = ruleset.advancement.marks_per_rank if ruleset.advancement else 3
-        threshold = ruleset.advancement.facet_level_threshold if ruleset.advancement else 6
-        major_threshold = ruleset.advancement.major_advancement_threshold if ruleset.advancement else 4
+        threshold = ruleset.advancement.facet_level_threshold if ruleset.advancement else 5
+        major_threshold = ruleset.advancement.major_advancement_threshold if ruleset.advancement else 3
 
         rank_advances = self._try_advance_rank(state, marks_to_add, marks_per_rank)
         self.career_advances += rank_advances
 
         sk_def = ruleset.get_skill(skill_id)
-        is_primary = sk_def is not None and sk_def.facet == self.primary_facet
-        facet_level_advances = self._check_facet_level_threshold(is_primary, rank_advances, threshold)
+        facet_level_advances = 0
+        if sk_def is not None and sk_def.facet:
+            facet_level_advances = self._check_facet_level_threshold(sk_def.facet, rank_advances, threshold)
+
+        # Each Facet level (any Facet) grants one Technique pick to spend later.
+        self.technique_picks_available += facet_level_advances
 
         major = False
         if facet_level_advances > 0:
@@ -268,6 +306,41 @@ class Character(BaseModel):
             "facet_level_advances": facet_level_advances,
             "major_advancement": major,
         }
+
+    def select_technique(
+        self, technique_id: str, ruleset: MergedRuleset, choice: Optional[str] = None
+    ) -> tuple[bool, str]:
+        """Spend one Technique pick on `technique_id` (§6.4). Single source of
+        truth for the rule; the WebSocket handler and playtest harness both call it.
+
+        Order of checks: not already held → prerequisites met (tree-agnostic) →
+        a pick is available. On success, appends the Technique, decrements the
+        pick budget, records any choice, and activates magic if the Technique is
+        magic-granting. On failure, mutates nothing.
+
+        Returns (ok, message); message is "ok" on success, else the reason.
+        """
+        if technique_id in self.techniques:
+            return False, f"Technique '{technique_id}' already selected."
+
+        tech_def = ruleset.get_technique(technique_id)
+        if tech_def:
+            missing = [p for p in tech_def.prerequisites if p not in self.techniques]
+            if missing:
+                return False, f"Technique '{technique_id}' requires: {', '.join(missing)}."
+
+        if self.technique_picks_available <= 0:
+            return False, "No Technique picks available — reach a Facet level to earn one."
+
+        self.technique_picks_available -= 1
+        self.techniques.append(technique_id)
+        if choice:
+            self.technique_choices[technique_id] = str(choice)
+        if tech_def and tech_def.magic_granting:
+            self.magic_technique_active = True
+            if choice:
+                self.magic_domain = choice
+        return True, "ok"
 
     def to_client_dict(self) -> dict:
         """Serialize the character to a JSON-safe dict for sending to clients."""
@@ -309,10 +382,13 @@ class Character(BaseModel):
             "skills": non_default_skills,
             "sparks": self.sparks,
             "session_skill_points_remaining": self.session_skill_points_remaining,
+            "facet_levels": dict(self.facet_levels),
+            "rank_advances_by_facet": dict(self.rank_advances_by_facet),
+            # Derived views, written for human readability and older readers.
             "facet_level": self.facet_level,
-            "rank_advances_this_facet_level": self.rank_advances_this_facet_level,
             "total_facet_levels": self.total_facet_levels,
             "career_advances": self.career_advances,
+            "technique_picks_available": self.technique_picks_available,
             "techniques": list(self.techniques),
             "technique_choices": dict(self.technique_choices),
         }
@@ -335,6 +411,8 @@ class Character(BaseModel):
             char_block["posture"] = self.posture
         if self.armor is not None:
             char_block["armor"] = self.armor
+        if self.armor_downgrades_remaining is not None:
+            char_block["armor_downgrades_remaining"] = self.armor_downgrades_remaining
         if self.inventory:
             char_block["inventory"] = list(self.inventory)
         if self.notes_player:
@@ -397,18 +475,35 @@ class Character(BaseModel):
                     marks=state.get("marks", 0),
                 )
 
+        # Per-Facet level tracking. Prefer the canonical dicts; fall back to the
+        # older flat fields (facet_level / rank_advances_this_facet_level) by
+        # crediting them to the primary Facet.
+        primary_facet = char_block["primary_facet"]
+        facet_levels = char_block.get("facet_levels")
+        rank_advances_by_facet = char_block.get("rank_advances_by_facet")
+        if facet_levels is None:
+            facet_levels = {}
+            legacy_level = char_block.get("facet_level", 0)
+            if legacy_level:
+                facet_levels[primary_facet] = legacy_level
+        if rank_advances_by_facet is None:
+            rank_advances_by_facet = {}
+            legacy_advances = char_block.get("rank_advances_this_facet_level", 0)
+            if legacy_advances:
+                rank_advances_by_facet[primary_facet] = legacy_advances
+
         character = cls(
             name=char_block["name"],
             player_name=char_block["player_name"],
-            primary_facet=char_block["primary_facet"],
+            primary_facet=primary_facet,
             attributes=char_block["attributes"],
             skills=skills,
             sparks=char_block.get("sparks", 3),
             session_skill_points_remaining=char_block.get("session_skill_points_remaining", 4),
-            facet_level=char_block.get("facet_level", 0),
-            rank_advances_this_facet_level=char_block.get("rank_advances_this_facet_level", 0),
-            total_facet_levels=char_block.get("total_facet_levels", 0),
+            facet_levels=facet_levels,
+            rank_advances_by_facet=rank_advances_by_facet,
             career_advances=char_block.get("career_advances", 0),
+            technique_picks_available=char_block.get("technique_picks_available", 0),
             techniques=char_block.get("techniques") or [],
             technique_choices=char_block.get("technique_choices") or {},
             background_id=char_block.get("background_id"),
@@ -421,6 +516,7 @@ class Character(BaseModel):
             conditions=char_block.get("conditions") or [],
             posture=char_block.get("posture"),
             armor=char_block.get("armor"),
+            armor_downgrades_remaining=char_block.get("armor_downgrades_remaining"),
             inventory=char_block.get("inventory") or [],
             notes_player=char_block.get("notes_player") or "",
             notes_mm=char_block.get("notes_mm") or "",

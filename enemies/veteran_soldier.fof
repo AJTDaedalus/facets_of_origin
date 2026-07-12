@@ -10,13 +10,13 @@ ruleset:
 
 enemy:
   tier: named
-  endurance: 7
+  resolve: 4
   attack_modifier: 3    # Strength +2, Combat Expert +1
   defense_modifier: 3   # Parry: same roll
   armor: light
   techniques: []
   special: null
-  tr: 10                # offense(+3→5) + durability(Endurance 7→4) + armor(light→1) + techniques(0) = 10
+  tr: 10                # offense(+3→5) + durability(Resolve 4) + armor(light→1) + techniques(0) = 10
 
   description: >
     A hardened fighter with years of real combat experience. Not a
@@ -36,7 +36,7 @@ enemy:
     a Cornered/Staggered party member to press the advantage.
 
   notes: >
-    TR breakdown: offense(+3 → value 5) + durability(Endurance 7 → value 4)
+    TR breakdown: offense(+3 → value 5) + durability(Resolve 4)
     + armor(light → 1) + techniques(0) = 10.
     Solo encounter vs PS 3 party: effective TR 10 × 0.75 = 7.5.
     Expected difficulty: between Standard (~75% win) and Hard (~50% win).

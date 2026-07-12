@@ -10,6 +10,7 @@ import yaml
 
 from app.api.websocket import ConnectionManager
 from app.auth.tokens import create_mm_token, create_session_token
+from app.game import combat as combat_module
 from app.game.session import session_store
 
 
@@ -427,6 +428,107 @@ class TestWebSocketSparkEarnPeer:
 
 
 # ---------------------------------------------------------------------------
+# Graceful Fail — player-initiated (D6, WD4)
+# ---------------------------------------------------------------------------
+
+class TestGracefulFailWS:
+    def _roll_until_outcome(self, ws, outcome_tier: str, max_tries: int = 100) -> None:
+        """Roll with attribute 0 modifier + Very Hard difficulty until a specific
+        outcome tier lands, consuming the roll_result message each time."""
+        for _ in range(max_tries):
+            ws.send_json({
+                "type": "roll",
+                "attribute_id": "spirit",
+                "difficulty": "Very Hard" if outcome_tier == "failure" else "Easy",
+            })
+            msg = ws.receive_json()
+            if msg["roll"]["outcome"] == outcome_tier:
+                return
+        raise AssertionError(f"Could not roll a '{outcome_tier}' outcome within {max_tries} tries.")
+
+    def test_act_break_broadcasts(self, client, mm_headers, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "act_break"})
+            msg = ws.receive_json()
+            assert msg["type"] == "act_break_opened"
+
+    def test_claim_rejected_when_no_roll_yet(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "claim_graceful_fail"})
+            msg = ws.receive_json()
+            assert msg["type"] == "error"
+
+    def test_claim_rejected_when_last_roll_not_failure(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            self._roll_until_outcome(ws, "full_success")
+            ws.send_json({"type": "claim_graceful_fail"})
+            msg = ws.receive_json()
+            assert msg["type"] == "error"
+
+    def test_claim_broadcasts_for_confirmation(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            self._roll_until_outcome(ws, "failure")
+            ws.send_json({"type": "claim_graceful_fail"})
+            msg = ws.receive_json()
+            assert msg["type"] == "graceful_fail_claimed"
+            assert msg["player"] == "Zahna"
+
+    def test_mm_confirmation_awards_exactly_one_spark(
+        self, client, mm_headers, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        with client.websocket_connect("/ws") as player_ws:
+            _auth_player(player_ws, player_token)
+            self._roll_until_outcome(player_ws, "failure")
+            player_ws.send_json({"type": "claim_graceful_fail"})
+            player_ws.receive_json()  # graceful_fail_claimed
+
+            char = session_store.get(session_id).characters["Zahna"]
+            sparks_before = char.sparks
+            with client.websocket_connect("/ws") as mm_ws:
+                _auth_mm(mm_ws, mm_token, session_id)
+                mm_ws.send_json({
+                    "type": "spark_earn",
+                    "player_name": "Zahna",
+                    "reason": "Graceful Fail",
+                })
+                msg = mm_ws.receive_json()
+                assert msg["type"] == "spark_earned"
+                assert msg["sparks_now"] == sparks_before + 1
+
+    def test_double_claim_same_roll_rejected(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            self._roll_until_outcome(ws, "failure")
+            ws.send_json({"type": "claim_graceful_fail"})
+            msg = ws.receive_json()
+            assert msg["type"] == "graceful_fail_claimed"
+            ws.send_json({"type": "claim_graceful_fail"})
+            msg = ws.receive_json()
+            assert msg["type"] == "error"
+
+
+# ---------------------------------------------------------------------------
 # Skill advance (MM-only)
 # ---------------------------------------------------------------------------
 
@@ -584,6 +686,7 @@ class TestMagicGrantingTechniqueFlag:
         """B3.2: Selecting arcane_study (magic_granting: true in YAML) activates magic."""
         session, _ = session_with_character
         session_id = session["session_id"]
+        session_store.get(session_id).characters["Zahna"].technique_picks_available = 1
         with client.websocket_connect("/ws") as ws:
             _auth_mm(ws, mm_token, session_id)
             ws.send_json({
@@ -601,6 +704,7 @@ class TestMagicGrantingTechniqueFlag:
         """B3.2: magic_domain is set from the choice field when magic_granting technique is selected."""
         session, _ = session_with_character
         session_id = session["session_id"]
+        session_store.get(session_id).characters["Zahna"].technique_picks_available = 1
         with client.websocket_connect("/ws") as ws:
             _auth_mm(ws, mm_token, session_id)
             ws.send_json({
@@ -612,6 +716,103 @@ class TestMagicGrantingTechniqueFlag:
             ws.receive_json()
         char = session_store.get(session_id).characters["Zahna"]
         assert char.magic_domain == "inscription"
+
+
+# ---------------------------------------------------------------------------
+# WS-B / B4 — Technique pick budget (§6.4)
+# ---------------------------------------------------------------------------
+
+class TestTechniquePickBudget:
+    def test_select_rejected_with_zero_picks(self, client, mm_token, session_with_character):
+        """A character with no earned Facet levels cannot pick a Technique."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = session_store.get(session_id).characters["Zahna"]
+        assert char.technique_picks_available == 0
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({
+                "type": "technique_select",
+                "player_name": "Zahna",
+                "technique_id": "read_the_room",
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert "pick" in msg["message"].lower()
+        assert "read_the_room" not in char.techniques
+
+    def test_pick_consumed_on_success(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = session_store.get(session_id).characters["Zahna"]
+        char.technique_picks_available = 2
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({
+                "type": "technique_select",
+                "player_name": "Zahna",
+                "technique_id": "read_the_room",
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "technique_selected"
+        assert msg["technique_picks_available"] == 1
+        assert char.technique_picks_available == 1
+
+    def test_non_primary_tree_technique_accepted(self, client, mm_token, session_with_character):
+        """Prerequisite checking is tree-agnostic: a mind-primary character may
+        pick a soul-tree Technique whose prerequisites are met (D3)."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = session_store.get(session_id).characters["Zahna"]  # primary = mind
+        char.techniques.append("read_the_room")  # soul-tree Tier 1 prerequisite
+        char.technique_picks_available = 1
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({
+                "type": "technique_select",
+                "player_name": "Zahna",
+                "technique_id": "the_aimed_truth",  # soul Tier 2
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "technique_selected"
+        assert "the_aimed_truth" in char.techniques
+
+    def test_tier_three_accepted_with_tier_two_held(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = session_store.get(session_id).characters["Zahna"]
+        char.techniques.extend(["read_the_room", "the_aimed_truth"])
+        char.technique_picks_available = 1
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({
+                "type": "technique_select",
+                "player_name": "Zahna",
+                "technique_id": "the_turning",  # soul Tier 3, prereq the_aimed_truth
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "technique_selected"
+        assert "the_turning" in char.techniques
+
+    def test_tier_three_rejected_without_tier_two(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = session_store.get(session_id).characters["Zahna"]
+        char.techniques.append("read_the_room")  # has Tier 1 but not Tier 2
+        char.technique_picks_available = 1
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({
+                "type": "technique_select",
+                "player_name": "Zahna",
+                "technique_id": "the_turning",
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert "the_aimed_truth" in msg["message"]
+        assert "the_turning" not in char.techniques
+        # A rejected pick must not be consumed.
+        assert char.technique_picks_available == 1
 
 
 # ---------------------------------------------------------------------------
@@ -742,8 +943,10 @@ class TestCombatGameplayLoop:
             # staggered (T2) should be downgraded to first T1 condition (winded)
             assert msg["condition"] == "winded"
 
-    def test_heavy_armor_downgrades_tier3_to_tier1(self, client, mm_token, session_with_character):
-        """0.3: Heavy armor (downgrades 2) reduces Tier 3 to Tier 1."""
+    def test_heavy_armor_downgrades_tier3_to_tier2(self, client, mm_token, session_with_character):
+        """A5/D2: Heavy armor downgrades any incoming tier by one step (its
+        per-scene budget spends here, first hit of the scene) — Tier 3
+        (Broken) to Tier 2, not a 2-tier subtraction."""
         session, _ = session_with_character
         session_id = session["session_id"]
 
@@ -761,8 +964,8 @@ class TestCombatGameplayLoop:
             })
             msg = ws.receive_json()
             assert msg["type"] == "condition_applied"
-            # broken (T3) downgraded by 2 tiers → T1 (winded)
-            assert msg["condition"] == "winded"
+            # broken (T3) downgraded one step → T2 (staggered)
+            assert msg["condition"] == "staggered"
 
     def test_no_armor_no_downgrade(self, client, mm_token, session_with_character):
         """0.3: Without armor, conditions are not downgraded."""
@@ -779,6 +982,52 @@ class TestCombatGameplayLoop:
             })
             msg = ws.receive_json()
             assert msg["condition"] == "staggered"
+
+    def test_light_armor_budget_exhausts_after_two_hits(self, client, mm_token, session_with_character):
+        """A5/D2: light armor's per-scene budget downgrades the first 2 hits
+        and passes the 3rd through unmodified."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        char.armor = "light"
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            for _ in range(2):
+                ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
+                msg = ws.receive_json()
+                assert msg["condition"] == "winded"
+                ws.send_json({"type": "clear_condition", "player_name": "Zahna", "condition": "winded"})
+                ws.receive_json()
+
+            assert char.armor_downgrades_remaining == 0
+
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
+            msg = ws.receive_json()
+            assert msg["condition"] == "staggered"
+
+    def test_armor_budget_persists_across_second_combat_start(self, client, mm_token, session_with_character):
+        """A5/D2: a second `combat_start` (a second fight in the same scene)
+        does not top the armor budget back up."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        char.armor = "light"
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
+            ws.receive_json()
+            assert char.armor_downgrades_remaining == 1
+
+            ws.send_json({"type": "combat_end"})
+            ws.receive_json()
+            self._start_combat(ws)
+            assert char.armor_downgrades_remaining == 1
 
     def test_zero_endurance_absorb_only(self, client, mm_token, session_with_character):
         """0.4: At 0 Endurance, only Absorb reaction is allowed."""
@@ -821,8 +1070,8 @@ class TestCombatGameplayLoop:
             assert msg["type"] == "react_result"
             assert msg["reaction"] == "absorb"
 
-    def test_tier2_stacking_to_broken(self, client, mm_token, session_with_character):
-        """Two Tier 2 conditions stack to Broken."""
+    def test_tier2_same_type_stacking_to_broken(self, client, mm_token, session_with_character):
+        """D5 row 2: a second Tier 2 condition of the SAME type escalates to Broken."""
         session, _ = session_with_character
         session_id = session["session_id"]
 
@@ -833,10 +1082,47 @@ class TestCombatGameplayLoop:
             ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
             msg1 = ws.receive_json()
             assert msg1["condition"] == "staggered"
-            # Apply second T2 → should become broken
-            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "cornered"})
+            # Apply staggered again → should become broken
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
             msg2 = ws.receive_json()
             assert msg2["condition"] == "broken"
+
+    def test_tier2_different_type_does_not_stack_to_broken(self, client, mm_token, session_with_character):
+        """D5 row 2: Staggered and Cornered coexist without escalating to Broken."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
+            msg1 = ws.receive_json()
+            assert msg1["condition"] == "staggered"
+            # Apply a different Tier 2 → both present, no escalation
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "cornered"})
+            msg2 = ws.receive_json()
+            assert msg2["condition"] == "cornered"
+            assert "staggered" in msg2["all_conditions"]
+            assert "cornered" in msg2["all_conditions"]
+            assert "broken" not in msg2["all_conditions"]
+
+    def test_tier2_third_application_of_present_type_is_broken(self, client, mm_token, session_with_character):
+        """D5 row 2: a third application of an already-present Tier 2 type stays Broken."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
+            ws.receive_json()
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
+            msg2 = ws.receive_json()
+            assert msg2["condition"] == "broken"
+            # Third application of the same type — still resolves to Broken
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
+            msg3 = ws.receive_json()
+            assert msg3["condition"] == "broken"
 
     def test_end_exchange_clears_tier1(self, client, mm_token, session_with_character):
         """End-of-exchange clears all Tier 1 conditions."""
@@ -955,6 +1241,93 @@ class TestCombatGameplayLoop:
             assert end_msg["type"] == "exchange_ended"
             # T1 condition should be cleared
             assert "winded" not in end_msg["characters"]["Zahna"]["conditions"]
+
+    def test_react_first_reaction_pays_aggressive_surcharge(
+        self, client, mm_token, session_with_character,
+    ):
+        """K1 (BRIEF D8): the first reaction of the exchange still pays
+        Aggressive's +1 surcharge (base 1 + 1 = 2)."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "declare_posture", "posture": "aggressive"})
+            ws.receive_json()
+            ws.send_json({"type": "react", "reaction": "dodge"})
+            msg = ws.receive_json()
+            assert msg["endurance_cost"] == 2
+
+    def test_react_second_reaction_same_exchange_no_surcharge(
+        self, client, mm_token, session_with_character,
+    ):
+        """K1 (BRIEF D8): a second reaction in the SAME exchange pays only
+        the base cost — the Aggressive surcharge applies to the first
+        reaction only."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "declare_posture", "posture": "aggressive"})
+            ws.receive_json()
+            ws.send_json({"type": "react", "reaction": "dodge"})
+            first = ws.receive_json()
+            assert first["endurance_cost"] == 2
+            ws.send_json({"type": "react", "reaction": "dodge"})
+            second = ws.receive_json()
+            assert second["endurance_cost"] == 1
+
+    def test_reactions_this_exchange_resets_on_end_exchange(
+        self, client, mm_token, session_with_character,
+    ):
+        """K1 (BRIEF D8): the per-exchange reaction count resets at end of
+        exchange, so the next exchange's first reaction again pays the
+        full Aggressive surcharge."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "declare_posture", "posture": "aggressive"})
+            ws.receive_json()
+            ws.send_json({"type": "react", "reaction": "dodge"})
+            first = ws.receive_json()
+            assert first["endurance_cost"] == 2
+            ws.send_json({"type": "react", "reaction": "dodge"})
+            second = ws.receive_json()
+            assert second["endurance_cost"] == 1
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "end_exchange"})
+            ws.receive_json()
+
+        # Restore Endurance so the assertion below isolates the reaction
+        # counter reset, not Endurance availability.
+        sess = session_store.get(session_id)
+        sess.characters["Zahna"].endurance_current = sess.characters["Zahna"].endurance_max(sess.ruleset)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "react", "reaction": "dodge"})
+            third = ws.receive_json()
+            assert third["endurance_cost"] == 2
 
     def test_skill_advance_checks_skill_points(self, client, mm_token, session_with_character):
         """0.7: Skill advance deducts session_skill_points_remaining."""
@@ -1568,7 +1941,7 @@ class TestEnemyTrackerWS:
             msg = ws.receive_json()
             assert msg["type"] == "error"
 
-    def test_enemy_update_endurance(self, client, mm_headers, mm_token):
+    def test_enemy_update_resolve(self, client, mm_headers, mm_token):
         session_id = self._create_session_with_enemy(client, mm_headers)
         # Also add a named enemy
         client.post("/api/enemies/", json={
@@ -1576,7 +1949,7 @@ class TestEnemyTrackerWS:
             "id": "sergeant",
             "name": "Sergeant",
             "tier": "named",
-            "endurance": 6,
+            "resolve": 3,
             "attack_modifier": 2,
             "armor": "light",
         }, headers=mm_headers)
@@ -1589,21 +1962,21 @@ class TestEnemyTrackerWS:
                 "instance_name": "Sgt. Davies",
             })
             ws.receive_json()  # enemy_spawned
-            # Update endurance
+            # Update resolve
             ws.send_json({
                 "type": "enemy_update",
                 "tracker_key": "Sgt. Davies",
-                "endurance_current": 4,
+                "resolve_current": 1,
             })
             msg = ws.receive_json()
             assert msg["type"] == "enemy_updated"
-            assert msg["endurance_current"] == 4
+            assert msg["resolve_current"] == 1
 
     def test_enemy_update_conditions(self, client, mm_headers, mm_token):
         session_id = self._create_session_with_enemy(client, mm_headers)
         client.post("/api/enemies/", json={
             "session_id": session_id,
-            "id": "named1", "name": "Named", "tier": "named", "endurance": 5,
+            "id": "named1", "name": "Named", "tier": "named", "resolve": 3,
         }, headers=mm_headers)
         with client.websocket_connect("/ws") as ws:
             _auth_mm(ws, mm_token, session_id)
@@ -1626,6 +1999,70 @@ class TestEnemyTrackerWS:
             ws.send_json({"type": "enemy_update", "tracker_key": "nobody"})
             msg = ws.receive_json()
             assert msg["type"] == "error"
+
+    def _spawn_boss_with_phase(self, client, mm_headers, mm_token, ws, session_id):
+        """Spawn a Named enemy, then attach a phase directly (no CRUD support
+        for `phases` yet — see A7 LOG scope note). Returns the tracker_key.
+        """
+        from app.game.enemy import PhaseDef
+
+        client.post("/api/enemies/", json={
+            "session_id": session_id,
+            "id": "boss1", "name": "Boss", "tier": "boss", "resolve": 5,
+        }, headers=mm_headers)
+        ws.send_json({"type": "spawn_enemy", "enemy_id": "boss1", "instance_name": "Boss 1"})
+        ws.receive_json()  # enemy_spawned
+        sess = session_store.get(session_id)
+        sess.active_enemies["Boss 1"].phases = [
+            PhaseDef(resolve_threshold=2, description="Reduced Mode."),
+        ]
+        return "Boss 1"
+
+    def test_enemy_phase_change_fires_on_threshold_cross(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Phase Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            tracker_key = self._spawn_boss_with_phase(client, mm_headers, mm_token, ws, session_id)
+            ws.send_json({"type": "enemy_update", "tracker_key": tracker_key, "resolve_current": 2})
+            updated = ws.receive_json()
+            assert updated["type"] == "enemy_updated"
+            phase_msg = ws.receive_json()
+            assert phase_msg["type"] == "enemy_phase_change"
+            assert phase_msg["enemy_id"] == tracker_key
+            assert phase_msg["phase_index"] == 0
+            assert phase_msg["description"] == "Reduced Mode."
+
+    def test_enemy_phase_change_fires_once_not_repeatedly(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Phase Test 2"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            tracker_key = self._spawn_boss_with_phase(client, mm_headers, mm_token, ws, session_id)
+            ws.send_json({"type": "enemy_update", "tracker_key": tracker_key, "resolve_current": 2})
+            ws.receive_json()  # enemy_updated
+            ws.receive_json()  # enemy_phase_change (first crossing)
+            ws.send_json({"type": "enemy_update", "tracker_key": tracker_key, "resolve_current": 1})
+            second_updated = ws.receive_json()
+            assert second_updated["type"] == "enemy_updated"
+            # Already past the threshold before this call — no second phase_change.
+            ws.send_json({"type": "enemy_update", "tracker_key": tracker_key, "resolve_current": 0})
+            third_updated = ws.receive_json()
+            assert third_updated["type"] == "enemy_updated"
+
+    def test_enemy_phase_change_does_not_fire_without_phases(self, client, mm_headers, mm_token):
+        session_id = self._create_session_with_enemy(client, mm_headers)
+        client.post("/api/enemies/", json={
+            "session_id": session_id,
+            "id": "named1", "name": "Named", "tier": "named", "resolve": 3,
+        }, headers=mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "named1", "instance_name": "Named 1"})
+            ws.receive_json()  # enemy_spawned
+            ws.send_json({"type": "enemy_update", "tracker_key": "Named 1", "resolve_current": 0})
+            msg = ws.receive_json()
+            assert msg["type"] == "enemy_updated"
 
     def test_remove_enemy(self, client, mm_headers, mm_token):
         session_id = self._create_session_with_enemy(client, mm_headers)
@@ -1654,3 +2091,408 @@ class TestEnemyTrackerWS:
             msg = ws.receive_json()
             assert msg["type"] == "error"
             assert "Unknown event type" in msg["message"]
+
+
+# ---------------------------------------------------------------------------
+# Threat Clock (D4, PHB III.2 — WD2)
+# ---------------------------------------------------------------------------
+
+class TestThreatClockWS:
+    """Tests for clock_create, clock_advance, clock_wind_back, clock_fill."""
+
+    def _create_clock(self, ws, name="Rising Tide", segments=4):
+        ws.send_json({"type": "clock_create", "name": name, "segments": segments})
+        msg = ws.receive_json()
+        assert msg["type"] == "clock_created"
+        return msg["clock"]["id"]
+
+    def test_clock_create_defaults_to_ruleset_segments(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Clock Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "clock_create", "name": "The Rising Waters"})
+            msg = ws.receive_json()
+            assert msg["type"] == "clock_created"
+            assert msg["clock"]["segments"] == 4
+            assert msg["clock"]["filled_segments"] == 0
+            assert msg["clock"]["is_full"] is False
+
+    def test_clock_advances_on_partial_success(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Clock Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            clock_id = self._create_clock(ws)
+            ws.send_json({"type": "clock_advance", "clock_id": clock_id, "outcome_tier": "partial_success"})
+            msg = ws.receive_json()
+            assert msg["type"] == "clock_advanced"
+            assert msg["clock"]["filled_segments"] == 1
+
+    def test_clock_advances_on_failure(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Clock Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            clock_id = self._create_clock(ws)
+            ws.send_json({"type": "clock_advance", "clock_id": clock_id, "outcome_tier": "failure"})
+            msg = ws.receive_json()
+            assert msg["type"] == "clock_advanced"
+            assert msg["clock"]["filled_segments"] == 1
+
+    def test_clock_does_not_advance_on_full_success(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Clock Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            clock_id = self._create_clock(ws)
+            ws.send_json({"type": "clock_advance", "clock_id": clock_id, "outcome_tier": "full_success"})
+            msg = ws.receive_json()
+            assert msg["type"] == "clock_advanced"
+            assert msg["clock"]["filled_segments"] == 0
+
+    def test_clock_wind_back_is_unconditional_and_never_advances(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Clock Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            clock_id = self._create_clock(ws)
+            ws.send_json({"type": "clock_advance", "clock_id": clock_id, "outcome_tier": "partial_success"})
+            ws.receive_json()  # clock_advanced (now at 1)
+            ws.send_json({"type": "clock_wind_back", "clock_id": clock_id})
+            msg = ws.receive_json()
+            assert msg["type"] == "clock_wound_back"
+            assert msg["clock"]["filled_segments"] == 0
+            # Winding back an already-empty clock never advances it, and never errors.
+            ws.send_json({"type": "clock_wind_back", "clock_id": clock_id})
+            msg = ws.receive_json()
+            assert msg["type"] == "clock_wound_back"
+            assert msg["clock"]["filled_segments"] == 0
+
+    def test_clock_fill_fires_once_at_segment_4(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Clock Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            clock_id = self._create_clock(ws, segments=4)
+            for _ in range(3):
+                ws.send_json({"type": "clock_advance", "clock_id": clock_id, "outcome_tier": "failure"})
+                msg = ws.receive_json()
+                assert msg["type"] == "clock_advanced"
+            # The 4th advance fills the clock and fires clock_fill.
+            ws.send_json({"type": "clock_advance", "clock_id": clock_id, "outcome_tier": "failure"})
+            advanced = ws.receive_json()
+            assert advanced["type"] == "clock_advanced"
+            assert advanced["clock"]["is_full"] is True
+            fill = ws.receive_json()
+            assert fill["type"] == "clock_fill"
+            # A further advance while already full does not re-fire clock_fill.
+            ws.send_json({"type": "clock_advance", "clock_id": clock_id, "outcome_tier": "failure"})
+            advanced_again = ws.receive_json()
+            assert advanced_again["type"] == "clock_advanced"
+            assert advanced_again["clock"]["filled_segments"] == 4
+
+    def test_clock_state_survives_session_round_trip(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Clock Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            clock_id = self._create_clock(ws, name="Collapsing Ceiling")
+            ws.send_json({"type": "clock_advance", "clock_id": clock_id, "outcome_tier": "partial_success"})
+            ws.receive_json()
+
+        sess = session_store.get(session_id)
+        assert clock_id in sess.threat_clocks
+        assert sess.threat_clocks[clock_id].name == "Collapsing Ceiling"
+        assert sess.threat_clocks[clock_id].filled_segments == 1
+
+    def test_clock_advance_unknown_id_errors(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Clock Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "clock_advance", "clock_id": "nonexistent", "outcome_tier": "failure"})
+            msg = ws.receive_json()
+            assert msg["type"] == "error"
+
+    def test_player_cannot_create_clock(self, client, mm_headers, active_session, valid_attributes):
+        session_id = active_session["session_id"]
+        client.post("/api/characters/", json={
+            "session_id": session_id,
+            "character_name": "Tester",
+            "primary_facet": "body",
+            "attributes": valid_attributes,
+        }, headers=mm_headers)
+        player_token = create_session_token("Tester", session_id)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "clock_create", "name": "Sneaky Clock"})
+            msg = ws.receive_json()
+            assert msg["type"] == "error"
+            assert "Unknown event type" in msg["message"]
+
+
+# ---------------------------------------------------------------------------
+# Parity: WebSocket handler vs. app.game.combat, direct
+#
+# TASKS WS-A0 (A0.3): permanent guard against F1 (DESIGN §1) recurring —
+# the engine and the simulator used to independently reimplement armor
+# downgrade and Broken escalation, and they diverged. Now both the
+# WebSocket handler and the simulator call the same `app.game.combat`
+# functions; these tests assert the handler's observable result for a
+# given input equals calling `combat.py` directly on the same input.
+# ---------------------------------------------------------------------------
+
+class TestCombatRulesParity:
+    def test_heavy_armor_downgrade_matches_combat_module(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        char.armor = "heavy"
+        ruleset = sess.ruleset
+
+        # Compute the expected result directly through combat.py.
+        original_tier = combat_module.condition_tier("broken", ruleset)
+        budget = combat_module.armor_budget(char.armor, ruleset)
+        expected = combat_module.armor_downgrade(original_tier, char.armor, budget, ruleset)
+        expected_condition = ruleset.combat.conditions.tier2[0].id
+        assert expected.tier == 2  # sanity: Tier 3 downgrades one step to Tier 2
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "combat_start"})
+            ws.receive_json()
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "broken"})
+            msg = ws.receive_json()
+
+        assert msg["condition"] == expected_condition
+        assert char.conditions == [expected_condition]
+
+    def test_same_tier2_twice_escalates_to_broken_matches_combat_module(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        ruleset = sess.ruleset
+
+        # Compute the expected end-state directly through combat.py, on an
+        # independent list mirroring the character's starting conditions.
+        expected_conditions: list[str] = []
+        tier = combat_module.condition_tier("staggered", ruleset)
+        combat_module.apply_condition(expected_conditions, "staggered", tier, ruleset)
+        second = combat_module.apply_condition(expected_conditions, "staggered", tier, ruleset)
+        assert second.broken is True
+        expected_conditions.append("broken")
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "combat_start"})
+            ws.receive_json()
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
+            ws.receive_json()
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
+            msg = ws.receive_json()
+
+        assert msg["condition"] == "broken"
+        assert char.conditions == expected_conditions
+
+    def test_end_exchange_clears_tier1_matches_combat_module(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        ruleset = sess.ruleset
+
+        expected_conditions = ["staggered", "winded"]
+        combat_module.end_exchange(expected_conditions, ruleset)  # mutates in place
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "combat_start"})
+            ws.receive_json()
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "staggered"})
+            ws.receive_json()
+            ws.send_json({"type": "apply_condition", "player_name": "Zahna", "condition": "winded"})
+            ws.receive_json()
+            ws.send_json({"type": "end_exchange"})
+            ws.receive_json()
+
+        assert char.conditions == expected_conditions == ["staggered"]
+
+
+class TestOffenseAndNonStackingInLivePlay:
+    """The two rules that were canon (and simulated) but never reached a real
+    table: the Staggered −1 offensive penalty, and armor/reaction non-stacking.
+
+    Both are PHB III.3. Before this, `_handle_strike` applied only the posture
+    modifier (the Staggered penalty lived in `combat.resolve_strike`, which no
+    production path calls), and `_handle_apply_condition` always spent an armor
+    charge because it had no way to know a reaction had already downgraded the
+    hit.
+    """
+
+    def _start_combat(self, ws):
+        ws.send_json({"type": "combat_start"})
+        ws.receive_json()  # combat_started
+
+    def _recv(self, ws, msg_type):
+        msg = ws.receive_json()
+        assert msg.get("type") == msg_type, f"expected {msg_type}, got {msg}"
+        return msg
+
+    def test_staggered_applies_minus_one_to_strike(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+
+        sess = session_store.get(session_id)
+        sess.characters["Zahna"].conditions = ["staggered"]
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "strike", "target": "goblin"})
+            msg = self._recv(ws, "strike_result")
+            assert msg["roll"]["offense_modifier"] == -1
+
+    def test_staggered_stacks_with_posture_modifier(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+
+        sess = session_store.get(session_id)
+        sess.characters["Zahna"].conditions = ["staggered"]
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "declare_posture", "posture": "aggressive"})
+            ws.receive_json()
+            ws.send_json({"type": "strike", "target": "goblin"})
+            msg = self._recv(ws, "strike_result")
+            # Aggressive +1 and Staggered −1 cancel out.
+            assert msg["roll"].get("offense_modifier", 0) == 0
+
+    def test_unstaggered_strike_is_unpenalised(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "strike", "target": "goblin"})
+            msg = self._recv(ws, "strike_result")
+            assert msg["roll"].get("offense_modifier", 0) == 0
+
+    def test_reaction_downgrade_does_not_stack_with_armor(
+        self, client, mm_token, session_with_character,
+    ):
+        """PHB III.3: light armor + partial Parry vs Tier 2 lands as Tier 1
+        (winded), not negated entirely."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        char.armor = "light"
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            ws.send_json({
+                "type": "apply_condition",
+                "player_name": "Zahna",
+                "condition": "staggered",
+                "reaction_downgraded": True,
+            })
+            msg = self._recv(ws, "condition_applied")
+            assert msg["condition"] == "winded"
+            assert "winded" in msg["all_conditions"]
+
+    def test_redundant_armor_charge_is_not_spent(
+        self, client, mm_token, session_with_character,
+    ):
+        """The reaction supplied the reduction, so the per-scene armor budget —
+        what keeps an armored PC breakable — is left intact."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        char.armor = "light"
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            before = sess.characters["Zahna"].armor_downgrades_remaining
+            ws.send_json({
+                "type": "apply_condition",
+                "player_name": "Zahna",
+                "condition": "staggered",
+                "reaction_downgraded": True,
+            })
+            self._recv(ws, "condition_applied")
+            assert sess.characters["Zahna"].armor_downgrades_remaining == before
+
+    def test_armor_alone_still_spends_a_charge(
+        self, client, mm_token, session_with_character,
+    ):
+        """No reaction: armor supplies the reduction and pays for it. Absent
+        the flag, behaviour is unchanged — the message is backward compatible."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        char.armor = "light"
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            before = sess.characters["Zahna"].armor_downgrades_remaining
+            ws.send_json({
+                "type": "apply_condition",
+                "player_name": "Zahna",
+                "condition": "staggered",
+            })
+            msg = self._recv(ws, "condition_applied")
+            assert msg["condition"] == "winded"
+            assert sess.characters["Zahna"].armor_downgrades_remaining == before - 1
+
+    def test_reaction_downgrade_negates_tier1_for_unarmored(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            ws.send_json({
+                "type": "apply_condition",
+                "player_name": "Zahna",
+                "condition": "winded",
+                "reaction_downgraded": True,
+            })
+            msg = self._recv(ws, "condition_applied")
+            assert msg["condition"] is None
+            assert msg.get("armor_absorbed") is False

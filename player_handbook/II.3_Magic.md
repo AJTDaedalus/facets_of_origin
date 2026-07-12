@@ -139,27 +139,27 @@ The complication is the MM's call, and it should move the story forward, not sim
 >
 > *Nothing happens.* The rarest and most useful failure. The domain reaches and finds nothing — the lock is not what Zahna thought it was, the creature is not susceptible in the way the theory suggested. The failure is informative. They now know something they didn't before.
 >
-> **For players:** a magical 6- is a Graceful Fail opportunity. Describe how your character responds to the misfire — what they do with the feedback the magic just gave them — and the MM may award a Spark for the commitment.
+> **For players:** a magical 6- is a Graceful Fail opportunity. Describe how your character responds to the misfire — what they do with the feedback the magic just gave them — and claim the Spark yourself; the MM confirms.
 
 ---
 
 ### Example: A Mage, a Beam, a Problem
 
-Mordai and Zahna are in a burning building. A massive wooden beam hangs half-collapsed above the exit, blocking their escape. Zahna, a Focused Fire mage, sees an opportunity.
+Mordai and Zahna are in a burning building. A massive wooden beam hangs half-collapsed above the exit, blocking their escape. Zahna, practicing the Focused Inscription domain, sees an opportunity.
 
-**Zahna:** "The beam is already burning. I want to accelerate the combustion in the supports — the two load-bearing joints on the left side — so they give way and the beam falls to the right, clear of the doorway."
+**Zahna:** "I want to inscribe a fracture-glyph on the two load-bearing joints — encode a stress point into the wood itself so they give way under the beam's own weight, and it falls to the right, clear of the doorway."
 
-**MM:** "That is Significant. You are controlling the direction of a structural collapse, not just adding flame. Standard difficulty. Roll Spirit."
+**MM:** "That is Significant. You are controlling the direction of a structural collapse, not just marking wood. Standard difficulty. Roll Knowledge."
 
-→ Zahna rolls **2d6 + Spirit (3 → +1)** at Standard difficulty and gets a **9**. Partial success.
+→ Zahna rolls **2d6 + Knowledge (3 → +1)** at Standard difficulty and gets a **9**. Partial success.
 
-**MM:** "The joints give way exactly as you intended. The beam comes down to the right, doorway clear. But the accelerated burn was louder than you expected — a crack like a cannon shot. Whatever is left alive on the floor above you now knows exactly where you are."
+**MM:** "The glyph bites and the joints give way exactly as you intended. The beam comes down to the right, doorway clear. But the working was louder than you expected — a crack like a cannon shot, and the glyph's light flared before it burned out. Whatever is left alive on the floor above you now knows exactly where you are."
 
 *The doorway opens. Something above them stirs.*
 
 ---
 
-Notably: Zahna could have attempted Major scope instead, requesting the entire floor above them collapse. That would have been Hard difficulty for a Focused domain. She chose Significant for Standard. That tradeoff — ambition against probability — is the heart of scope declaration.
+Notably: Zahna could have attempted Major scope instead, requesting the entire floor above them collapse. That would have been Hard difficulty for a Focused domain. He chose Significant for Standard. That tradeoff — ambition against probability — is the heart of scope declaration.
 
 ---
 
@@ -187,7 +187,7 @@ Magic in combat — casting time, reactions against magical effects, Conditions 
 
 ## Domain Quick Reference
 
-All 18 domains at a glance. Full descriptions are in the **Appendix: Magic Domain Catalog**. Prismatic domains (marked †) require a Tier 3 Technique to access.
+All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domain Catalog**. Prismatic domains (marked †) require a Tier 3 Technique to access.
 
 ### Soul Domains
 
@@ -222,7 +222,7 @@ All 18 domains at a glance. Full descriptions are in the **Appendix: Magic Domai
 
 ---
 
-Full descriptions of all 18 domains — what each covers, example effects at each scope, and boundary guidance — are in the **Appendix: Magic Domain Catalog**.
+Full descriptions of all 21 domains — what each covers, example effects at each scope, and boundary guidance — are in the **Appendix: Magic Domain Catalog**.
 
 ---
 

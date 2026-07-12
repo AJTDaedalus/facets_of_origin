@@ -18,7 +18,11 @@ function initPlayTab() {
     updateSpawnEnemySelect();
   } else {
     document.getElementById('play-player-controls').classList.remove('hidden');
+    document.getElementById('play-player-enemies').classList.remove('hidden');
+    document.getElementById('play-player-clocks').classList.remove('hidden');
+    renderEnemyTracker();
   }
+  renderThreatClocks();
 }
 
 // ---------------------------------------------------------------------------
@@ -356,36 +360,20 @@ function confirmSparkNomination() {
 // Enemy Tracker (MM only, in Play Field)
 // ---------------------------------------------------------------------------
 function renderEnemyTracker() {
-  const container = document.getElementById('play-enemy-tracker');
+  // MM gets full controls + phase markers; players get a read-only Resolve view.
+  const isMM = state.role === 'mm';
+  const container = document.getElementById(isMM ? 'play-enemy-tracker' : 'play-player-enemy-tracker');
   if (!container) return;
-  container.innerHTML = '';
 
-  if (Object.keys(state.activeEnemies).length === 0) {
+  const keys = Object.keys(state.activeEnemies);
+  if (keys.length === 0) {
     container.innerHTML = '<div style="font-size:12px;color:var(--text-dim);">No active enemies.</div>';
     return;
   }
 
-  Object.entries(state.activeEnemies).forEach(([key, enemy]) => {
-    const condStr = enemy.conditions && enemy.conditions.length > 0 ? enemy.conditions.join(', ') : 'none';
-    const div = document.createElement('div');
-    div.className = 'enemy-tracker-entry';
-    div.innerHTML = `
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <strong>${escapeHtml(enemy.name)}</strong>
-        <span style="font-size:11px;color:var(--text-dim);">${enemy.tier} | TR ${enemy.tr || '?'}</span>
-      </div>
-      <div style="font-size:12px;margin-top:4px;">
-        ${enemy.tier !== 'mook' ? 'End: <span class="enemy-endurance">' + (enemy.endurance_current !== null && enemy.endurance_current !== undefined ? enemy.endurance_current : enemy.endurance) + '</span>/' + enemy.endurance : 'Mook'}
-        | Cond: ${condStr}
-      </div>
-      <div class="btn-row" style="margin-top:4px;">
-        ${enemy.tier !== 'mook' ? '<button class="btn btn-secondary btn-sm" onclick="enemyTakeDamage(\'' + escapeHtml(key) + '\')">-1 End</button>' : ''}
-        <button class="btn btn-secondary btn-sm" onclick="enemyAddCondition('${escapeHtml(key)}')">+Cond</button>
-        <button class="btn btn-secondary btn-sm" onclick="removeEnemy('${escapeHtml(key)}')">Remove</button>
-      </div>
-    `;
-    container.appendChild(div);
-  });
+  container.innerHTML = Object.entries(state.activeEnemies).map(([key, enemy]) =>
+    renderEnemyCard(key, enemy, { mmControls: isMM, showPhases: isMM })
+  ).join('');
 }
 
 function spawnEnemyFromLibrary() {
@@ -400,8 +388,8 @@ function spawnEnemyFromLibrary() {
 function enemyTakeDamage(trackerKey) {
   const enemy = state.activeEnemies[trackerKey];
   if (!enemy) return;
-  const current = enemy.endurance_current !== null && enemy.endurance_current !== undefined ? enemy.endurance_current : enemy.endurance;
-  sendWS({ type: 'enemy_update', tracker_key: trackerKey, endurance_current: Math.max(0, current - 1) });
+  const current = enemy.resolve_current !== null && enemy.resolve_current !== undefined ? enemy.resolve_current : enemy.resolve;
+  sendWS({ type: 'enemy_update', tracker_key: trackerKey, resolve_current: Math.max(0, current - 1) });
 }
 
 function enemyAddCondition(trackerKey) {
@@ -423,7 +411,7 @@ function onEnemySpawned(msg) {
 function onEnemyUpdated(msg) {
   const enemy = state.activeEnemies[msg.tracker_key];
   if (enemy) {
-    enemy.endurance_current = msg.endurance_current;
+    enemy.resolve_current = msg.resolve_current;
     enemy.conditions = msg.conditions;
     renderEnemyTracker();
   }
@@ -431,6 +419,14 @@ function onEnemyUpdated(msg) {
 
 function onEnemyRemoved(msg) {
   delete state.activeEnemies[msg.tracker_key];
+  renderEnemyTracker();
+}
+
+function onEnemyPhaseChange(msg) {
+  const enemy = state.activeEnemies[msg.enemy_id];
+  const name = enemy ? enemy.name : msg.enemy_id;
+  addSystemChat('⚡ ' + name + ' — Phase ' + (msg.phase_index + 1)
+    + (msg.description ? ': ' + msg.description : ''));
   renderEnemyTracker();
 }
 
@@ -444,6 +440,60 @@ function updateSpawnEnemySelect() {
     opt.textContent = enemy.name + ' (TR ' + (enemy.tr || '?') + ')';
     select.appendChild(opt);
   });
+}
+
+// ---------------------------------------------------------------------------
+// Threat Clocks (PHB III.2, D4) — visible to every player; MM-only controls
+// ---------------------------------------------------------------------------
+function renderThreatClocks() {
+  const isMM = state.role === 'mm';
+  const container = document.getElementById(isMM ? 'play-clock-tracker' : 'play-player-clock-tracker');
+  if (!container) return;
+
+  const clocks = Object.values(state.threatClocks);
+  if (clocks.length === 0) {
+    container.innerHTML = '<div style="font-size:12px;color:var(--text-dim);">No active Threat Clocks.</div>';
+    return;
+  }
+
+  container.innerHTML = clocks.map((clock) => renderThreatClockCard(clock, { mmControls: isMM })).join('');
+}
+
+function createClock() {
+  const nameEl = document.getElementById('play-clock-name');
+  const name = nameEl ? nameEl.value.trim() : '';
+  if (!name) return;
+  sendWS({ type: 'clock_create', name });
+  if (nameEl) nameEl.value = '';
+}
+
+function clockAdvance(clockId, outcomeTier) {
+  sendWS({ type: 'clock_advance', clock_id: clockId, outcome_tier: outcomeTier });
+}
+
+function clockWindBack(clockId) {
+  sendWS({ type: 'clock_wind_back', clock_id: clockId });
+}
+
+function onClockCreated(msg) {
+  state.threatClocks[msg.clock.id] = msg.clock;
+  renderThreatClocks();
+}
+
+function onClockAdvanced(msg) {
+  state.threatClocks[msg.clock.id] = msg.clock;
+  renderThreatClocks();
+}
+
+function onClockWoundBack(msg) {
+  state.threatClocks[msg.clock.id] = msg.clock;
+  renderThreatClocks();
+}
+
+function onClockFill(msg) {
+  state.threatClocks[msg.clock.id] = msg.clock;
+  addSystemChat(`⏱ ${msg.clock.name} fills — the hazard strikes!`);
+  renderThreatClocks();
 }
 
 // ---------------------------------------------------------------------------

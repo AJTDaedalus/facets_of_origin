@@ -18,6 +18,26 @@ Three pillars:
 
 The project is in early development — the toolset, ruleset, and example adventure are all on the roadmap but not yet implemented.
 
+## Information Recording Principles
+
+This document uses **progressive disclosure** architecture to optimize LLM working efficiency.
+
+**Level 1 (this file)** contains: core rules, iron laws, key patterns, directory mapping, and trigger indexes to Level 2.
+
+**Level 2 (`references/`)** contains: detailed character descriptions, full skill tables, extended examples, and SOPs.
+
+When adding new information: high-frequency or high-consequence content goes in Level 1; detailed reference material goes in Level 2 with a trigger condition in Level 1 pointing to it.
+
+## Reference Index
+
+| Trigger | Reference File | Contents |
+|---|---|---|
+| Writing PHB examples or vignettes | `references/phb-examples.md` | Character personalities, formatting conventions, ground rules, established scenarios |
+| Choosing a skill/tool for a task | `references/skills-reference.md` | Full skill tables by category with source and usage context |
+| Using World Anvil MCP or WA API | `references/worldanvil-mcp.md` | Working config, common pitfalls, verification steps |
+
+---
+
 ## Research Reference
 
 The `research/` directory contains foundational documents that should inform all design decisions. **Always consult relevant research files before proposing mechanics, systems, or content.**
@@ -25,6 +45,15 @@ The `research/` directory contains foundational documents that should inform all
 - `research/dice_system_analysis.md` — Synthesis of TTRPG market landscape and psychology of fun/dice/social bonding. Covers: why 2d6 three-tier outcomes are optimal, the Spark system recommendation, market gaps, what competing games do well and poorly, and five open design questions that need resolution before detailed system work begins.
 
 When proposing anything related to dice mechanics, resolution systems, player experience, onboarding, or digital design, check this file first — the recommendations are grounded in academic psychology research and market analysis and should not be overridden without documented reasoning.
+
+## Narrative & Lore Rules
+
+**Iron law:** NEVER invent fictional details — objects, events, characters, relationships, affiliations, backstory — that the user has not explicitly established. When unsure whether something is canon, **ask before introducing it**.
+
+- Treat all user-provided worldbuilding as **authoritative canon**. Do not assume character religions, affiliations, motivations, or backstory details.
+- When the user provides lore corrections, propagate changes to **ALL relevant local files** in the same pass. Do not fix one file and leave others inconsistent.
+- When writing narrative prose or vignettes, only reference objects, props, and setting details that have been **explicitly seeded** in the scene or source material. Do not add atmospheric details that introduce new canonical facts.
+- If a worldbuilding session is starting, **read existing canon files first** before generating any content. Summarize what's established and confirm with the user before making changes.
 
 ## Copyright Policy
 
@@ -66,6 +95,20 @@ Purely narrative changes (vignettes, sidebars, tone) do not require software cha
 **Deferred modules** (Crafting, Economy, Feats, Technology): Do not implement
 until the corresponding PHB chapter is written.
 
+**Quick references are compressions, not paraphrases.** A quick-reference card
+(`mm_manual/MM5_Quick_Reference.md`, `Quick_Start.md`, in-chapter quick-ref
+blocks) may only restate canonical body text in shorter form. It may never
+introduce a rule, exception, or wording the canonical section doesn't already
+state. Any rules change must update body text, every quick ref that touches
+it, `facet.yaml`, and the engine — all in the same commit.
+
+**The simulator may only drive `app/game/combat.py`. It must never
+re-implement a rule.** Combat resolution existed as two independent
+implementations (`websocket.py` and `tools/combat_sim.py`) that silently
+diverged, which invalidated a research corpus of recorded simulation numbers.
+Simulation tooling calls the shared rules module; it does not carry its own
+copy of rule logic.
+
 ## Software Development Ethos
 
 This project uses **test-driven development (TDD)** as its core software practice:
@@ -77,6 +120,10 @@ This project uses **test-driven development (TDD)** as its core software practic
 
 Every software change that adds or modifies behaviour must have a corresponding test. New WebSocket handlers, roll modifiers, character fields, and API endpoints all require tests before or alongside the implementation. PRs without tests for new behaviour will not be merged.
 
+**Coverage expectations:**
+- Minimum **3 tests per public function** (happy path, edge case, error handling).
+- When delivering a new module or major feature, test count should be proportional to code size — a 500-line module needs more than 5 tests.
+- After completing implementation, run the full test suite and report the pass/fail count. Do not consider a feature done until all tests pass.
 
 ## Terminology
 
@@ -84,41 +131,45 @@ Every software change that adds or modifies behaviour must have a corresponding 
 
 ## Example Characters & Writing Style
 
-All PHB chapters include short, in-world example vignettes that demonstrate mechanics. These examples must be:
-- **Sarcastic and lighthearted** in tone — comical, not mean-spirited
-- Set in a **fantasy context** consistent with Shattered Origin
-- Brief — a sidebar, not a scene
+Four recurring characters (MM, Zahna, Mordai, Zulnut) appear in PHB example vignettes. Tone is sarcastic and lighthearted — comical, not mean-spirited — set in fantasy consistent with Shattered Origin.
 
-The four recurring characters are:
+**Read `references/phb-examples.md` when:**
+- Writing or editing a PHB chapter vignette
+- Creating a new example scenario
+- Checking formatting conventions for examples
 
-**The Mirror Master (MM)** — The narrator of all examples. Frequently exasperated by the party's approach to problems, but clearly relishing every moment. Reacts to chaos with the weary delight of someone who absolutely should have seen this coming.
+> Contains: full character personalities with attributes, formatting conventions (MM:/CharacterName:/italics/parentheses), ground rules, and established scenarios per chapter.
 
-**Zahna** — A studious young mage. Entirely absorbed in books, magical theory, and intellectual problems. Not rude, but thoroughly dismissive of anything he considers beneath analysis. Will solve the puzzle correctly while being completely oblivious to the social situation around him. Attributes: Knowledge 3, Intelligence 3, Wisdom 1 (very much does not read the room).
+## Available Skills
 
-**Mordai** — A strong warrior with a genuine heart. Considers himself a defender of the weak and takes that seriously. Not the brightest, but far from foolish — he simply prefers the direct solution to every problem, usually the most physical one available. Will ask the archivist for information the same way he'd ask a locked door. Poor at reading between the lines. Attributes: Strength 3, Constitution 3, Intelligence 1, Wisdom 1.
+Key skills for quick reference. **Full tables with all skills, sources, and detailed usage context are in `references/skills-reference.md`.**
 
-**Zulnut** — Lazy. Profoundly, almost philosophically lazy. Exceptionally nimble and prefers to accomplish things with the minimum possible effort and maximum possible flair. Will complete a task with a dazzling acrobatic flourish, then immediately try to smoke a cigarette and leave. Has a preternatural talent for noticing the one thing in the room that matters, then doing something absurd with that information. Attributes: Dexterity 3, Luck 3, Constitution 1.
+| Task | Key Skills |
+|---|---|
+| Game mechanics design | `/game-design`, `/systems-thinking-leverage`, `/constraint-based-creativity` |
+| Mechanic testing | `/prototyping-pretotyping`, `/evaluation-rubrics`, `/encounter-balance` |
+| PHB content organization | `/information-architecture`, `/cognitive-design`, `/writing-structure-planner` |
+| PHB prose editing | `/writing-revision`, `/writing-pre-publish-checklist` |
+| Software development | `/code-data-analysis-scaffolds`, `/adr-architecture`, `/rpg-api-development` |
+| UI/frontend | `/frontend-design:frontend-design`, `/cognitive-design` |
+| Prioritization | `/prioritization-effort-impact`, `/focus-timeboxing-8020`, `/roadmap-backcast` |
+| Creative blocks | `/brainstorm-diverge-converge`, `/constraint-based-creativity` |
+| MM/adventure content | `/mimir-dm`, `/npc-generator`, `/panel-patterns` |
+| Consistency checking | `/continuity-check` |
 
-### Ground Rules for Examples
-- Players can only act on details the MM has already described. If a player references an object or detail, it must have appeared in MM narration first — even if only briefly, even if only as scenery.
+## Git & GitHub
 
-### Formatting Conventions for Examples
-- **`MM:`** — the Mirror Master speaking (describing the world, calling for rolls, narrating outcomes)
-- **`CharacterName:`** — a player declaring what their character attempts
-- *Italics* — what actually happens in the fiction as a result of a roll or decision
-- (Parentheses) — the MM's aside reactions as a real person at the table; the exasperation, the delight. The MM is not a character in the fiction and never appears in italics.
-- Dice rolls shown as: `2d6 + AttributeName (value → modifier)` e.g. `2d6 + Knowledge (3 → +1)`
-
-### Example Scenario Per Chapter
-Each chapter should have one brief vignette demonstrating the chapter's core mechanic or concept. Scenarios established so far:
-- **II.2 Attributes** — Investigating a series of mysterious disappearances in a village called Millhaven, sourced from records in a city archive (Thornwall Municipal Archive). Zahna researches records (Knowledge, full success). Mordai gets into an argument with the archivist demanding answers (Charisma, partial success — he gets the information but she's furious and pointing at the door, leaving her desk unattended). Zulnut lifts the key to the lower archives from her desk while she's busy yelling at Mordai (Dexterity, full success). The MM's final aside: frantically drawing a basement map.
+- Always use **`gh` CLI** for pushes and PRs — never raw HTTPS push.
+- Before committing, **review staged files** — never sweep in `.env`, credentials, or secret files. If unsure, show `git status` and the full diff for user approval before committing.
+- Confirm which GitHub account is authenticated (`gh auth status`) before attempting PR operations.
+- Prefer specific `git add <file>` over `git add -A` or `git add .`.
 
 ## Contributing Workflow
 
 ```bash
 git checkout -b feature/FeatureName   # create feature branch
 git commit -m 'Add some feature'       # commit changes
-git push origin feature/FeatureName   # push branch
+git push origin feature/FeatureName   # push branch (use gh CLI)
 # then open a Pull Request on GitHub
 ```
 
@@ -127,3 +178,15 @@ GitHub: https://github.com/AJTDaedalus/facets_of_origin
 ## License
 
 GPLv3 — see `LICENSE.txt`.
+
+---
+
+## Reference Trigger Index
+
+| You're about to... | Read this first |
+|---|---|
+| Write a PHB example vignette | `references/phb-examples.md` — character voices, formatting, established scenarios |
+| Choose a skill for a task | `references/skills-reference.md` — full tables by category |
+| Propose new mechanics | `research/dice_system_analysis.md` — 2d6 system rationale, open design questions |
+| Implement a settled mechanic | Software-PHB Sync workflow above + `facets/base/facet.yaml` |
+| Use World Anvil MCP or API | `references/worldanvil-mcp.md` — working config, pitfalls, verification |

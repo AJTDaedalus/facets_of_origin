@@ -68,7 +68,8 @@ Sparks are awarded for moments that make the table sit up. They can be awarded a
 
 - **MM award:** Exceptional roleplay, creative problem-solving, or playing your character's established traits and weaknesses at real cost.
 - **"Spark?" — the peer call:** Any player can call out "Spark?" for *another* player's moment. The MM confirms. The moment is recognized by the table collectively.
-- **The Graceful Fail:** When your roll is a 6- and you lean into the consequence — making the failure richer — the MM may award a Spark.
+- **Act Break Nomination:** After a major scene transition or act break, the MM calls for nominations. Each player may nominate one other player for something they did that scene. The MM should almost always confirm — this is social reinforcement, not gatekeeping.
+- **The Graceful Fail:** This one is player-initiated. On any 6-, *you* may claim it — narrate how you make the failure worse or richer for the story. The MM confirms. Not every failure earns a Spark; it's for failures you make entertaining or narratively rich.
 
 ### Spending Sparks
 
@@ -76,7 +77,7 @@ Before you roll, you may spend one or more Sparks. Each Spark **adds a d6** to y
 
 > *One Spark: roll 3d6, drop the lowest. Two Sparks: roll 4d6, drop the two lowest.*
 
-Sparks are most useful when everything is on the line. A Spark spent on a trivial roll is a Spark not available at the moment that matters. That tension is the point.
+Sparks are always spent **before** you roll — there is no spending a Spark after you see the result. Sparks are most useful when everything is on the line. A Spark spent on a trivial roll is a Spark not available at the moment that matters. That tension is the point.
 
 ---
 
@@ -167,4 +168,4 @@ Something *develops* — usually in a direction nobody planned. The story always
 - *The action works partially, with a cost*
 - *The moment is real but complicated*
 
-A 6- is the moment for the **Graceful Fail** — leaning into the consequence or adding something to the fiction that makes the failure richer. The MM may award a Spark for this.
+A 6- is the moment for the **Graceful Fail** — leaning into the consequence or adding something to the fiction that makes the failure richer. Claim it yourself; the MM confirms.

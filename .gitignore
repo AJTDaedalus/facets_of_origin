@@ -23,8 +23,21 @@ Thumbs.db
 software/tests/_test_data/sessions/
 software/tests/_test_data/test.db
 
+# Runtime data (local dev server / playtest runs)
+software/data/sessions/
+
 # Editor
 .vscode/
 .idea/
 *.swp
 *.swo
+*.code-workspace
+
+# Local agent-assistant workspace (unrelated to this project)
+.openclaw/
+/AGENTS.md
+/HEARTBEAT.md
+/IDENTITY.md
+/SOUL.md
+/TOOLS.md
+/USER.md

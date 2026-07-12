@@ -43,7 +43,7 @@ The party is escorting a merchant caravan through the Ashwood — a dense forest
 After the skirmish, call for an Act Break Nomination. Each player nominates one other player for something cool they did in the fight or the approach to it.
 
 **Encounter 2 — Standard: The Bridge Ambush (30 min)**
-*Narrative:* Day two, midday. The trail crosses a narrow stone bridge over a gorge. Halfway across, bandits emerge from both sides — they've been waiting. The bridge limits movement (narrative constraint, no special mechanic).
+*Narrative:* Day two, midday. The trail crosses a narrow stone bridge over a gorge. Halfway across, three bandit lieutenants emerge from both sides — they've been waiting — backed by an archer covering the far end. The bridge limits movement (narrative constraint, no special mechanic).
 *Difficulty:* Standard — a real fight. Someone should take conditions.
 *Purpose:* The real test. Players should feel the Endurance they lost in encounter 1.
 
@@ -51,7 +51,7 @@ After the skirmish, call for an Act Break Nomination. Each player nominates one 
 After the ambush, call for nominations again. Also test: does the MM see a natural moment for a Graceful Failure Spark if anyone rolled 6-?
 
 **Encounter 3 — Hard: The Bandit Captain (45 min)**
-*Narrative:* Day three, evening. The bandit captain and her elite squad intercept the caravan at camp. She wants what's in the carts. She's willing to kill for it. The party is defending Tella and the caravan.
+*Narrative:* Day three, evening. The bandit captain, two of her lieutenants, and a pair of elite bandits intercept the caravan at camp. She wants what's in the carts. She's willing to kill for it. The party is defending Tella and the caravan.
 *Difficulty:* Hard — designed as a coin flip. Someone may get Broken.
 *Purpose:* The climax. Can the party win after two prior fights with depleted Endurance?
 
@@ -73,60 +73,64 @@ After the ambush, call for nominations again. Also test: does the MM see a natur
 
 ## Enemies
 
+Rosters below are built directly from the **MM1 Encounter Recipe Table**
+(`mm_manual/MM1_Encounters_and_Enemies.md`) — the calibrated,
+simulation-validated tool. No `TR × multiplier` budget arithmetic is derived
+here; that formula is demoted to a rough ordering check (DESIGN §5-ter) and is
+explicitly non-predictive for the 3+ Named rosters this scenario uses.
+
 ### Encounter 1: Bandit Scouts (Skirmish)
+
+**Recipe Table row:** Skirmish = 3–7 Mooks (85–100% win rate).
 
 **Bandit Scout (Mook)** — TR 1
 - Attack modifier: +0
 - No Endurance (Mook)
 - No armor
 - Tactics: Charge in, target whoever looks weakest
-- 3 scouts total (PS 3 party) or 4 scouts (PS 4 party)
+- 3 scouts total
 
-**Encounter Budget:** PS 3 × 1 (Skirmish) = 3. Raw TR 3 (3 Mooks × 1). Correct.
+### Encounter 2: The Bridge Ambush (Standard)
 
-### Encounter 2: Bridge Bandits (Standard)
+**Recipe Table row:** Standard = 3 Named (TR 8) + 1 Mook (65–85% win rate).
 
-**Bandit Warrior (Mook)** — TR 1
-- Attack modifier: +0
-- No Endurance (Mook)
-- No armor
-- 4 warriors total
+**Bandit Lieutenant (Named)** — TR 8
+- Endurance: 3
+- Attack modifier: +2
+- Defense modifier: +2
+- Armor: Light
+- TR breakdown: offense(+2 → 4) + durability(Resolve 3) + armor(light → 1) = 8
+- 3 lieutenants, positioned on both sides of the bridge
 
 **Bandit Archer (Mook)** — TR 1
 - Attack modifier: +0
 - No Endurance (Mook)
 - No armor
-- 2 archers (positioned at range — narrative flavor, same mechanics)
+- 1 archer, covering the far end (narrative flavor — ranged has no special mechanic)
 
-**Encounter Budget:** PS 3 × 2 (Standard) = 6. Raw TR 6 (6 Mooks × 1). With tier-weighted formula: 6 × 0.5 × 1.1 (6 enemies) = 3.3 effective TR. Skirmish-leaning by new math — may need adjustment. Consider replacing 2 Mooks with 1 Named if this plays too easy.
+### Encounter 3: The Bandit Captain (Hard)
 
-**Variant (if too easy):** Replace 4 Mook Warriors with 1 Named Bandit Lieutenant:
-- **Bandit Lieutenant (Named)** — TR 8
-  - Endurance: 4
-  - Attack modifier: +1
-  - Defense modifier: +0
-  - No armor
-  - Use with 2 Mook Archers. Budget check: (8 × 1.0 + 2 × 1 × 0.5) × 1.0 = 9.0 effective TR. Standard.
+**Recipe Table row:** Hard = 3 Named (TR 8) + 2 Mooks (40–60% win rate).
 
-### Encounter 3: Bandit Captain (Hard)
-
-**Bandit Captain (Named NPC)** — TR 9
-- Endurance: 5
-- Attack modifier: +1
-- Defense modifier: +1
+**Bandit Captain (Named)** — TR 8
+- Endurance: 3
+- Attack modifier: +2
+- Defense modifier: +2
 - Armor: Light
-- Technique: Rally — once per exchange, one Mook that was removed returns (represents reinforcements)
-- TR: Offense 3 + Durability 3 + Armor 1 + Technique 1 + minimum Named TR applied = **9**
+- TR breakdown: identical to Bandit Lieutenant, above — the Recipe Table's
+  3-Named-at-TR-8 core is not raised for the named boss; her distinction is
+  narrative (she commands, she offers terms), not a hidden TR bonus
 - Posture: Measured
 - Personality: Professional. Offers surrender first. "Hand over the cargo. Nobody has to die tonight."
+
+**Bandit Lieutenant (Named)** — TR 8, as Encounter 2
+- 2 lieutenants, flanking the Captain
 
 **Elite Bandit (Mook)** — TR 1
 - Attack modifier: +0
 - No Endurance (Mook)
 - No armor
-- 3 elite bandits with the Captain
-
-**Encounter Budget:** PS 3 × 3 (Hard) = 9. Tier-weighted: (9 × 1.0 + 3 × 1 × 0.5) × 1.1 = (9 + 1.5) × 1.1 = 11.55 effective TR. Above Hard budget — good, since the party should be depleted.
+- 2 elite bandits with the Captain
 
 **Lateral Solution (available but not highlighted):**
 - If a player asks about the cargo, Tella reveals it's a shipment of ward-stones — magical components. A PC with a magic domain could activate one as a defensive barrier (Knowledge or Spirit check, Standard), giving the party advantage for one exchange.

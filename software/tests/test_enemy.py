@@ -13,22 +13,23 @@ class TestEnemyDefaults:
     def test_mook_defaults(self):
         e = Enemy(id="thug", name="Harbor Thug")
         assert e.tier == "mook"
-        assert e.endurance == 0
+        assert e.resolve == 0
         assert e.attack_modifier == 0
         assert e.armor == "none"
         assert e.techniques == []
         assert e.loot == []
+        assert e.phases == []
 
     def test_named_npc(self):
-        e = Enemy(id="sergeant", name="Sergeant", tier="named", endurance=6,
+        e = Enemy(id="sergeant", name="Sergeant", tier="named", resolve=3,
                   attack_modifier=2, defense_modifier=2, armor="light")
         assert e.tier == "named"
-        assert e.endurance == 6
+        assert e.resolve == 3
 
     def test_boss_npc(self):
         e = Enemy(id="guardian", name="Archive Guardian", tier="boss",
-                  endurance=10, attack_modifier=3, special="Phase change at 50% Endurance")
-        assert e.special == "Phase change at 50% Endurance"
+                  resolve=5, attack_modifier=3, special="Phase change at 50% Resolve")
+        assert e.special == "Phase change at 50% Resolve"
 
 
 # ---------------------------------------------------------------------------
@@ -44,45 +45,69 @@ class TestTRCalculation:
 
     def test_mook_with_positive_attack(self):
         e = Enemy(id="thug", name="Thug", tier="mook", attack_modifier=0)
-        # offense=2, durability=0, armor=0, techniques=0 → raw=2, min=1
+        # offense=2, durability=0, armor=0, techniques=0 -> raw=2, min=1
         assert e.calculate_tr() == 2
 
-    def test_named_npc_tr(self):
-        """City Watch Sergeant: attack +2 → offense 4, endurance 6 → durability 3, light → 1 = 8."""
+    def test_mook_durability_is_zero_regardless_of_resolve(self):
+        """A Mook's durability_value is always 0, even if `resolve` is set."""
+        e = Enemy(id="chicken", name="Chicken", tier="mook",
+                  resolve=5, attack_modifier=0)
+        # offense=2, durability=0 (mook, resolve ignored), armor=0 -> raw=2
+        assert e.calculate_tr() == 2
+
+    def test_named_npc_tr_sergeant_preserved(self):
+        """City Watch Sergeant: attack +2 -> offense 4, resolve 3, light -> 1 = 8 (TR preserved from v0.2)."""
         e = Enemy(id="sergeant", name="Sergeant", tier="named",
-                  endurance=6, attack_modifier=2, armor="light")
+                  resolve=3, attack_modifier=2, armor="light")
         assert e.calculate_tr() == 8
+
+    def test_named_npc_tr_veteran_soldier_preserved(self):
+        """Veteran Soldier: attack +3 -> offense 5, resolve 4, light -> 1 = 10 (TR preserved from v0.2)."""
+        e = Enemy(id="veteran_soldier", name="Veteran Soldier", tier="named",
+                  resolve=4, attack_modifier=3, armor="light")
+        assert e.calculate_tr() == 10
+
+    def test_boss_archive_guardian_recomputes_to_14(self):
+        """Archive Guardian: offense(3->5) + resolve(5) + armor(heavy->2) + technique_bonus(2) = 14.
+
+        Was published as 16 under the old formula, which double-counted the
+        phase-change special as both a durability and a technique bonus.
+        """
+        e = Enemy(id="guardian", name="Archive Guardian", tier="boss",
+                  resolve=5, attack_modifier=3, armor="heavy",
+                  techniques=["phase_change", "tier1_immunity"])
+        assert e.calculate_tr() == 14
 
     def test_named_minimum_enforced(self):
         """Named NPC with low stats still gets TR >= 8."""
         e = Enemy(id="weak_named", name="Weak Named", tier="named",
-                  endurance=2, attack_modifier=-1, armor="none")
+                  resolve=1, attack_modifier=-1, armor="none")
         assert e.calculate_tr() >= 8
 
     def test_boss_minimum_enforced(self):
         """Boss always has TR >= 12."""
         e = Enemy(id="boss", name="Boss", tier="boss",
-                  endurance=4, attack_modifier=0)
+                  resolve=2, attack_modifier=0)
         assert e.calculate_tr() >= 12
 
     def test_boss_high_stats(self):
         e = Enemy(id="dragon", name="Dragon", tier="boss",
-                  endurance=14, attack_modifier=4, armor="heavy",
+                  resolve=7, attack_modifier=4, armor="heavy",
                   techniques=["fire_breath", "tail_sweep", "frightful_presence"])
         tr = e.calculate_tr()
-        # offense=6, durability=7, armor=2, techniques=3 → raw=18
+        # offense=6, durability=7, armor=2, techniques=3 -> raw=18
         assert tr == 18
 
     def test_techniques_add_to_tr(self):
         e = Enemy(id="elite", name="Elite", tier="named",
-                  endurance=6, attack_modifier=2, armor="light",
+                  resolve=3, attack_modifier=2, armor="light",
                   techniques=["shield_wall"])
         assert e.calculate_tr() == 9  # base 8 + 1 technique
 
     def test_heavy_armor_bonus(self):
         e = Enemy(id="knight", name="Knight", tier="named",
-                  endurance=8, attack_modifier=2, armor="heavy")
-        # offense=4, durability=4, armor=2, techniques=0 → raw=10
+                  resolve=4, attack_modifier=2, armor="heavy")
+        # offense=4, durability=4, armor=2, techniques=0 -> raw=10
         assert e.calculate_tr() == 10
 
 
@@ -92,20 +117,35 @@ class TestTRCalculation:
 
 class TestEnemyCombatTracker:
     def test_init_combat_named(self):
-        e = Enemy(id="sgt", name="Sgt", tier="named", endurance=6)
+        e = Enemy(id="sgt", name="Sgt", tier="named", resolve=3)
         e.init_combat()
-        assert e.endurance_current == 6
+        assert e.resolve_current == 3
         assert e.conditions == []
 
     def test_init_combat_mook(self):
         e = Enemy(id="thug", name="Thug", tier="mook")
         e.init_combat()
-        assert e.endurance_current == 0
+        assert e.resolve_current == 0
 
     def test_init_combat_boss(self):
-        e = Enemy(id="boss", name="Boss", tier="boss", endurance=10)
+        e = Enemy(id="boss", name="Boss", tier="boss", resolve=5)
         e.init_combat()
-        assert e.endurance_current == 10
+        assert e.resolve_current == 5
+
+    def test_init_combat_light_armor_adds_one_resolve(self):
+        e = Enemy(id="sgt", name="Sgt", tier="named", resolve=3, armor="light")
+        e.init_combat()
+        assert e.resolve_current == 4
+
+    def test_init_combat_heavy_armor_adds_two_resolve(self):
+        e = Enemy(id="boss", name="Boss", tier="boss", resolve=5, armor="heavy")
+        e.init_combat()
+        assert e.resolve_current == 7
+
+    def test_init_combat_mook_armor_grants_no_resolve(self):
+        e = Enemy(id="thug", name="Thug", tier="mook", armor="heavy")
+        e.init_combat()
+        assert e.resolve_current == 0
 
 
 # ---------------------------------------------------------------------------
@@ -125,21 +165,72 @@ class TestEnemySerialization:
         assert loaded.tactics == "Fights dirty."
         assert loaded.personality == "Cowardly."
 
-    def test_to_fof_named_includes_endurance(self):
-        e = Enemy(id="sgt", name="Sergeant", tier="named", endurance=6)
+    def test_to_fof_named_includes_resolve(self):
+        e = Enemy(id="sgt", name="Sergeant", tier="named", resolve=3)
         fof = e.to_fof()
-        assert fof["enemy"]["endurance"] == 6
+        assert fof["enemy"]["resolve"] == 3
 
-    def test_to_fof_mook_omits_endurance(self):
+    def test_to_fof_mook_omits_resolve(self):
         e = Enemy(id="thug", name="Thug", tier="mook")
         fof = e.to_fof()
-        assert "endurance" not in fof["enemy"]
+        assert "resolve" not in fof["enemy"]
 
     def test_to_fof_includes_tr(self):
         e = Enemy(id="sgt", name="Sergeant", tier="named",
-                  endurance=6, attack_modifier=2, armor="light")
+                  resolve=3, attack_modifier=2, armor="light")
         fof = e.to_fof()
         assert fof["enemy"]["tr"] == 8
+
+    def test_resolve_key_roundtrips_without_warning(self, recwarn):
+        e = Enemy(id="sgt", name="Sergeant", tier="named", resolve=4)
+        fof = e.to_fof()
+        loaded = Enemy.from_fof(fof)
+        assert loaded.resolve == 4
+        assert not any(issubclass(w.category, DeprecationWarning) for w in recwarn.list)
+
+    def test_from_fof_legacy_endurance_maps_and_warns(self):
+        """A legacy `endurance` key (no `resolve`) maps through the v0.1->v0.2 table and warns."""
+        fof = {
+            "type": "enemy",
+            "id": "sergeant",
+            "name": "Sergeant",
+            "enemy": {"tier": "named", "endurance": 6, "attack_modifier": 2, "armor": "light"},
+        }
+        with pytest.warns(DeprecationWarning):
+            loaded = Enemy.from_fof(fof)
+        assert loaded.resolve == 3
+        assert loaded.calculate_tr() == 8
+
+    @pytest.mark.parametrize("legacy_endurance,expected_resolve", [
+        (1, 1), (2, 1),
+        (3, 2), (4, 2),
+        (5, 3), (6, 3),
+        (7, 4), (8, 4),
+        (9, 5), (10, 5),
+        (11, 6), (12, 6),
+        (13, 7), (20, 7),
+    ])
+    def test_legacy_endurance_mapping_table(self, legacy_endurance, expected_resolve):
+        fof = {
+            "type": "enemy",
+            "id": "x",
+            "name": "X",
+            "enemy": {"tier": "named", "endurance": legacy_endurance},
+        }
+        with pytest.warns(DeprecationWarning):
+            loaded = Enemy.from_fof(fof)
+        assert loaded.resolve == expected_resolve
+
+    def test_from_fof_resolve_present_ignores_legacy_endurance(self):
+        """When both keys are present, `resolve` wins and no warning fires."""
+        fof = {
+            "type": "enemy",
+            "id": "x",
+            "name": "X",
+            "enemy": {"tier": "named", "resolve": 9, "endurance": 1},
+        }
+        loaded = Enemy.from_fof(fof)
+        assert loaded.resolve == 9
 
     def test_from_fof_wrong_type_raises(self):
         with pytest.raises(ValueError, match="Expected type 'enemy'"):
@@ -171,3 +262,28 @@ class TestEnemySerialization:
         fof = e.to_fof()
         loaded = Enemy.from_fof(fof)
         assert loaded.loot == ["Gold Coin", "Rusty Dagger"]
+
+
+# ---------------------------------------------------------------------------
+# Phase changes
+# ---------------------------------------------------------------------------
+
+class TestEnemyPhases:
+    def test_phases_default_empty(self):
+        e = Enemy(id="boss", name="Boss", tier="boss", resolve=5)
+        assert e.phases == []
+
+    def test_phases_accept_resolve_threshold_and_description(self):
+        e = Enemy(id="guardian", name="Archive Guardian", tier="boss", resolve=5,
+                  phases=[{"resolve_threshold": 2, "description": "Reduced Mode."}])
+        assert e.phases[0].resolve_threshold == 2
+        assert e.phases[0].description == "Reduced Mode."
+
+    def test_phases_roundtrip_through_fof(self):
+        e = Enemy(id="guardian", name="Archive Guardian", tier="boss", resolve=5,
+                  phases=[{"resolve_threshold": 2, "description": "Reduced Mode."}])
+        fof = e.to_fof()
+        loaded = Enemy.from_fof(fof)
+        assert len(loaded.phases) == 1
+        assert loaded.phases[0].resolve_threshold == 2
+        assert loaded.phases[0].description == "Reduced Mode."

@@ -15,7 +15,7 @@ enemy:
   armor: none
   techniques: []
   special: null
-  tr: 1
+  tr: 2                 # offense(0→2) + durability(Mook→0) + armor(0) + techniques(0) = 2
 
   description: >
     Hired muscle. Doesn't want to die for this job. Will absolutely

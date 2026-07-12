@@ -51,8 +51,8 @@ def sample_character(ruleset, valid_attributes):
     # Give Zahna some non-default skill state (PHB skill names: investigate, not investigation)
     char.advance_skill("investigate", 5, ruleset)  # practiced + 2 marks
     char.sparks = 2
-    char.facet_level = 1
-    char.rank_advances_this_facet_level = 3
+    char.facet_levels = {"mind": 1}
+    char.rank_advances_by_facet = {"mind": 3}
     return char
 
 

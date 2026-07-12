@@ -70,29 +70,29 @@ You may only advance skills you used this session. You may not save points betwe
 
 **Marks:** Each point spent toward a skill's next rank is called a mark. A skill advances when it accumulates **3 marks**. Marks carry over between sessions — you do not lose partial progress.
 
-> **Example:** Zulnut (Primary Facet: Body) uses Stealth twice this session. She spends 2 points (1 each) and marks Stealth twice. She also used Finesse — 1 more point, 1 more mark. She has 1 point left. Next session, one more mark advances Finesse to Practiced.
+> **Example:** Zulnut (Primary Facet: Body) uses Stealth twice this session. He spends 2 points (1 each) and marks Stealth twice. He also used Finesse — 1 more point, 1 more mark. He has 1 point left. Next session, one more mark advances Finesse to Practiced.
 
 ---
 
 ## Facet Levels
 
-As you develop skills within a Facet, you grow as a practitioner of that Facet's approach to the world. Your **Facet level** in your Primary Facet advances every time you accumulate **6 skill rank advances** within it.
+As you develop skills within a Facet, you grow as a practitioner of that Facet's approach to the world. Your **Facet level** in your Primary Facet advances every time you accumulate **5 skill rank advances** within it.
 
 A skill rank advance is any time a skill in that Facet moves from one rank to the next (Novice → Practiced, Practiced → Expert, or Expert → Master).
 
-With 5 skills and 3 possible advances each, a fully developed Facet produces 15 total advances — enough to reach Facet level 1 (at 6 advances) and Facet level 2 (at 12 advances). Facet level 3 and beyond require cross-training into other Facets or extraordinary dedication across a long campaign.
+With 5 skills and 3 possible advances each, a fully developed Facet produces 15 total advances — exactly enough to reach Facet level 1 (at 5 advances), Facet level 2 (at 10), and Facet level 3 (at 15). Reaching Facet level 3 means you have mastered every skill your Facet has to offer. Facet level 4 and beyond require cross-training into other Facets.
 
-> This isn't a ceiling on specialization — it's a reflection of how mastery actually works. At the highest levels, experts grow by absorbing adjacent disciplines: the supreme warrior who studies philosophy, the master mage who learns a craftsperson's patience. The advancement system reflects this. Facet level 3 isn't earned by going deeper; it's earned by going wider.
+> Facet level 3 is the top of a single Facet — you've taken it as far as it goes. Level 4 and beyond is where breadth begins. That isn't a ceiling on specialization; it's a reflection of how mastery actually works. At the highest levels, experts grow by absorbing adjacent disciplines: the supreme warrior who studies philosophy, the master mage who learns a craftsperson's patience.
 
-> **Example:** Zulnut advances Combat to Practiced (1 advance), Stealth to Practiced (2), Athletics to Practiced (3), Stealth to Expert (4), Finesse to Practiced (5), Combat to Expert (6). *Facet level 1.* Several sessions later, Athletics to Expert (7), Endurance to Practiced (8), Finesse to Expert (9), Endurance to Expert (10), Stealth to Master (11), Combat to Master (12). *Facet level 2.*
+> **Example:** Zulnut advances Combat to Practiced (1 advance), Stealth to Practiced (2), Athletics to Practiced (3), Stealth to Expert (4), Finesse to Practiced (5). *Facet level 1.* Several sessions later, Combat to Expert (6), Athletics to Expert (7), Endurance to Practiced (8), Finesse to Expert (9), Endurance to Expert (10). *Facet level 2.*
 
-Facet level advances outside your Primary Facet follow the same counting, but those levels do not count toward your Major Advancement threshold (see below).
+Facet level advances outside your Primary Facet follow the same counting, and those levels **do** count toward your Major Advancement threshold (see below) — Major Advancement is earned across every Facet you've invested in, not just your Primary one.
 
 ---
 
 ## Techniques
 
-At each **Facet level**, you unlock one **Technique** from your Facet's tree. Techniques are specific abilities — things your character can now do that others cannot, or ways they do ordinary things that are distinctly their own.
+At each **Facet level** — in any Facet — you unlock one **Technique** from any tree whose prerequisites you meet. Techniques are specific abilities — things your character can now do that others cannot, or ways they do ordinary things that are distinctly their own.
 
 The Technique tree has three tiers. Tier 1 is available at Facet level 1. Tier 2 requires at least one Tier 1 Technique in the same branch. Tier 3 requires at least one Tier 2 Technique in the same branch.
 
@@ -204,9 +204,9 @@ At the end of any session in which your character endured significant hardship, 
 
 ## Major Advancement
 
-Every **4 Facet levels total** — accumulated across any Facet — you reach a **Major Advancement**.
+Every **3 Facet levels total** — accumulated across any Facet — you reach a **Major Advancement**.
 
-> **A note on the math:** A fully developed Primary Facet produces 15 total skill rank advances, which yields Facet level 2 (at advance 12). Reaching Facet level 4 — the first Major Advancement threshold — requires cross-training into other Facets. A character who has reached level 2 in their Primary Facet and level 2 in a secondary Facet has accumulated 4 Facet levels total and qualifies. Major Advancements require breadth, not perfection in one lane.
+> **A note on the math:** A fully developed Primary Facet produces 15 total skill rank advances — exactly Facet level 3. Because a Major Advancement lands every 3 Facet levels, your **first** Major arrives together with Facet level 3: the moment you have mastered your Primary Facet. Later Major Advancements (at 6 levels, 9 levels, and so on) do require cross-training, since a single Facet caps at level 3.
 
 At a Major Advancement, choose one:
 
@@ -257,11 +257,11 @@ Each point spent = 1 Mark on that skill
 3 Marks = Rank advance (Novice → Practiced → Expert → Master) = 1 Career Advance
   └─ Skill modifier increases (+1 / +2 / +3)
 
-Every 6 rank advances in your Primary Facet:
-  └─ +1 Facet Level → unlock one Technique from Facet tree
-  └─ 5 skills × 3 advances = 15 max per Facet; level 3+ requires cross-training
+Every 5 rank advances in any Facet:
+  └─ +1 Facet Level → unlock one Technique from any tree whose prerequisites you meet
+  └─ 5 skills × 3 advances = 15 max per Facet = Facet level 3; level 4+ requires cross-training
 
-Every 4 Facet Levels total (Primary + any Facet):
+Every 3 Facet Levels total (Primary + any Facet):
   └─ Major Advancement: +1 Minor Attribute OR Pinnacle Technique (MM approval)
   └─ Significant reflection scene recommended
 ```
@@ -277,10 +277,10 @@ It is the progression metric for Facets of Origin: a rough, honest gauge of how 
 | Career Advances | Rough Equivalent |
 |---|---|
 | 0–2 | Freshly started — Background skills plus early play |
-| 3–6 | Developing — first Facet level within reach |
-| 7–12 | Capable — Facet level 1 achieved, first Technique unlocked |
-| 13–20 | Seasoned — Facet level 2, second Technique, cross-training possible |
-| 21+ | Veteran — deep specialization or broad cross-Facet development |
+| 3–5 | Developing — first Facet level (5 advances) within reach |
+| 6–10 | Capable — Facet level 1–2, first Techniques unlocked |
+| 11–15 | Seasoned — Facet level 3 and first Major Advancement within reach |
+| 16+ | Veteran — Primary Facet mastered; cross-Facet development begins |
 
 Career advances are stored in the character file as `career_advances` and updated whenever a skill rank advances. The Background starting skill counts as 1 advance at character creation. Background Marks (the secondary skill's head start) do not count until the skill actually advances to Practiced.
 

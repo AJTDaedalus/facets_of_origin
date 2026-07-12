@@ -38,13 +38,29 @@ class TestEnemyAPI:
             "id": "sergeant",
             "name": "City Watch Sergeant",
             "tier": "named",
-            "endurance": 6,
+            "resolve": 3,
             "attack_modifier": 2,
             "defense_modifier": 2,
             "armor": "light",
         }, headers=mm_headers)
         assert resp.status_code == 200
         assert resp.json()["tr"] == 8
+
+    def test_created_enemy_echoes_resolve(self, client, mm_headers, active_session):
+        # Guards the Endurance -> Resolve rename (A12): the API surface and the
+        # serialized enemy both speak `resolve`, and `endurance` is not an alias.
+        resp = client.post("/api/enemies/", json={
+            "session_id": active_session["session_id"],
+            "id": "sarge",
+            "name": "Sergeant",
+            "tier": "named",
+            "resolve": 6,
+            "attack_modifier": 1,
+        }, headers=mm_headers)
+        assert resp.status_code == 200
+        enemy = resp.json()["enemy"]
+        assert enemy["resolve"] == 6
+        assert "endurance" not in enemy
 
     def test_list_enemies(self, client, mm_headers, active_session):
         # Create two enemies
@@ -91,7 +107,7 @@ class TestEnemyAPI:
             "id": "boss",
             "name": "Archive Guardian",
             "tier": "boss",
-            "endurance": 10,
+            "resolve": 5,
             "attack_modifier": 3,
             "tactics": "Fights defensively at first.",
             "personality": "Not malevolent. Patient.",

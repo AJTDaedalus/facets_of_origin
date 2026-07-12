@@ -1,0 +1,362 @@
+[
+  {
+    "playtest_index": 2,
+    "adventure_name": "The Shattered Crypt",
+    "enemy_name": "Crypt Wight (TR 2)",
+    "successes": 0,
+    "partials": 2,
+    "failures": 3,
+    "rolls": [
+      {
+        "player": "Gideon",
+        "action": "strike",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Gideon",
+        "action": "react_dodge",
+        "total": 6,
+        "outcome": "failure"
+      },
+      {
+        "player": "Kaelen",
+        "action": "strike",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Kaelen",
+        "action": "react_dodge",
+        "total": 6,
+        "outcome": "failure"
+      },
+      {
+        "player": "Kaelen",
+        "action": "cast_resonance",
+        "total": 5,
+        "outcome": "failure"
+      }
+    ]
+  },
+  {
+    "playtest_index": 3,
+    "adventure_name": "The Whispering Caverns",
+    "enemy_name": "Sonic Bat (TR 1)",
+    "successes": 2,
+    "partials": 2,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Lyra",
+        "action": "strike",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Lyra",
+        "action": "react_dodge",
+        "total": 10,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Finn",
+        "action": "strike",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Finn",
+        "action": "react_dodge",
+        "total": 10,
+        "outcome": "full_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 4,
+    "adventure_name": "The Molten Abyss",
+    "enemy_name": "Magma Golem (TR 9)",
+    "successes": 0,
+    "partials": 0,
+    "failures": 5,
+    "rolls": [
+      {
+        "player": "Ignis",
+        "action": "strike",
+        "total": 6,
+        "outcome": "failure"
+      },
+      {
+        "player": "Ignis",
+        "action": "react_dodge",
+        "total": 4,
+        "outcome": "failure"
+      },
+      {
+        "player": "Brutus",
+        "action": "strike",
+        "total": 6,
+        "outcome": "failure"
+      },
+      {
+        "player": "Brutus",
+        "action": "react_dodge",
+        "total": 4,
+        "outcome": "failure"
+      },
+      {
+        "player": "Ignis",
+        "action": "cast_warding",
+        "total": 6,
+        "outcome": "failure"
+      }
+    ]
+  },
+  {
+    "playtest_index": 5,
+    "adventure_name": "The Glacial Spire",
+    "enemy_name": "Ice Spider (TR 3)",
+    "successes": 0,
+    "partials": 4,
+    "failures": 1,
+    "rolls": [
+      {
+        "player": "Eira",
+        "action": "strike",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Eira",
+        "action": "react_dodge",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Vane",
+        "action": "strike",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Vane",
+        "action": "react_dodge",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Eira",
+        "action": "cast_warding",
+        "total": 5,
+        "outcome": "failure"
+      }
+    ]
+  },
+  {
+    "playtest_index": 6,
+    "adventure_name": "The Overgrown Canopy",
+    "enemy_name": "Spore Stalker (TR 2)",
+    "successes": 0,
+    "partials": 5,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Flora",
+        "action": "strike",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Flora",
+        "action": "react_dodge",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Thorn",
+        "action": "strike",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Thorn",
+        "action": "react_dodge",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Flora",
+        "action": "cast_resonance",
+        "total": 8,
+        "outcome": "partial_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 7,
+    "adventure_name": "The Iron Citadel",
+    "enemy_name": "Steel Sentinel (TR 8)",
+    "successes": 1,
+    "partials": 4,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Ferrum",
+        "action": "strike",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Ferrum",
+        "action": "react_dodge",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Sophia",
+        "action": "strike",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Sophia",
+        "action": "react_dodge",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Sophia",
+        "action": "cast_warding",
+        "total": 10,
+        "outcome": "full_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 8,
+    "adventure_name": "The Abyssal Rift",
+    "enemy_name": "Void Shadow (TR 7)",
+    "successes": 2,
+    "partials": 2,
+    "failures": 2,
+    "rolls": [
+      {
+        "player": "Umbra",
+        "action": "strike",
+        "total": 13,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Umbra",
+        "action": "react_dodge",
+        "total": 5,
+        "outcome": "failure"
+      },
+      {
+        "player": "Lux",
+        "action": "strike",
+        "total": 13,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Lux",
+        "action": "react_dodge",
+        "total": 5,
+        "outcome": "failure"
+      },
+      {
+        "player": "Umbra",
+        "action": "cast_resonance",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Lux",
+        "action": "cast_warding",
+        "total": 8,
+        "outcome": "partial_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 9,
+    "adventure_name": "The Lightning Ridge",
+    "enemy_name": "Storm Griffin (TR 4)",
+    "successes": 2,
+    "partials": 2,
+    "failures": 1,
+    "rolls": [
+      {
+        "player": "Zephyr",
+        "action": "strike",
+        "total": 11,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Zephyr",
+        "action": "react_dodge",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Volt",
+        "action": "strike",
+        "total": 11,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Volt",
+        "action": "react_dodge",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Volt",
+        "action": "cast_resonance",
+        "total": 2,
+        "outcome": "failure"
+      }
+    ]
+  },
+  {
+    "playtest_index": 10,
+    "adventure_name": "The Clockwork Workshop",
+    "enemy_name": "Steam Titan (TR 9)",
+    "successes": 0,
+    "partials": 0,
+    "failures": 5,
+    "rolls": [
+      {
+        "player": "Gear",
+        "action": "strike",
+        "total": 5,
+        "outcome": "failure"
+      },
+      {
+        "player": "Gear",
+        "action": "react_dodge",
+        "total": 6,
+        "outcome": "failure"
+      },
+      {
+        "player": "Rust",
+        "action": "strike",
+        "total": 5,
+        "outcome": "failure"
+      },
+      {
+        "player": "Rust",
+        "action": "react_dodge",
+        "total": 6,
+        "outcome": "failure"
+      },
+      {
+        "player": "Gear",
+        "action": "cast_warding",
+        "total": 6,
+        "outcome": "failure"
+      }
+    ]
+  }
+]

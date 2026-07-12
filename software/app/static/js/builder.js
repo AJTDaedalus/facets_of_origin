@@ -161,7 +161,7 @@ async function savePlayerNotes() {
 // ---------------------------------------------------------------------------
 function previewEnemyTR() {
   const tier = document.getElementById('builder-enemy-tier').value;
-  const endurance = parseInt(document.getElementById('builder-enemy-endurance').value) || 0;
+  const resolve = parseInt(document.getElementById('builder-enemy-resolve').value) || 0;
   const attackMod = parseInt(document.getElementById('builder-enemy-attack').value) || 0;
   const armor = document.getElementById('builder-enemy-armor').value;
   const techniques = document.getElementById('builder-enemy-techniques').value.split(',').map(s => s.trim()).filter(Boolean);
@@ -175,15 +175,15 @@ function previewEnemyTR() {
   let durabilityValue = 0;
   if (tier === 'mook') {
     durabilityValue = 0;
-  } else if (endurance <= 4) {
+  } else if (resolve <= 4) {
     durabilityValue = 2;
-  } else if (endurance <= 6) {
+  } else if (resolve <= 6) {
     durabilityValue = 3;
-  } else if (endurance <= 8) {
+  } else if (resolve <= 8) {
     durabilityValue = 4;
-  } else if (endurance <= 10) {
+  } else if (resolve <= 10) {
     durabilityValue = 5;
-  } else if (endurance <= 12) {
+  } else if (resolve <= 12) {
     durabilityValue = 6;
   } else {
     durabilityValue = 7;
@@ -212,7 +212,7 @@ async function saveEnemy() {
     id: id,
     name: name,
     tier: document.getElementById('builder-enemy-tier').value,
-    endurance: parseInt(document.getElementById('builder-enemy-endurance').value) || 0,
+    resolve: parseInt(document.getElementById('builder-enemy-resolve').value) || 0,
     attack_modifier: parseInt(document.getElementById('builder-enemy-attack').value) || 0,
     defense_modifier: parseInt(document.getElementById('builder-enemy-defense').value) || 0,
     armor: document.getElementById('builder-enemy-armor').value,

@@ -4,14 +4,16 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import uuid
 from typing import Any
 
 from fastapi import WebSocket, WebSocketDisconnect
 from jose import JWTError
 
 from app.auth.tokens import decode_token
+from app.game import combat as combat_module
 from app.game.engine import RollRequest, resolve_roll, resolve_magic_roll, roll_result_to_dict
-from app.game.session import session_store
+from app.game.session import ThreatClock, session_store
 
 logger = logging.getLogger(__name__)
 
@@ -226,6 +228,18 @@ async def _dispatch(
         await _handle_enemy_update(msg, session, session_id)
     elif event_type == "remove_enemy" and is_mm:
         await _handle_remove_enemy(msg, session, session_id)
+    # --- Threat Clock events (D4, PHB III.2) ---
+    elif event_type == "clock_create" and is_mm:
+        await _handle_clock_create(msg, session, session_id)
+    elif event_type == "clock_advance" and is_mm:
+        await _handle_clock_advance(msg, session, session_id)
+    elif event_type == "clock_wind_back" and is_mm:
+        await _handle_clock_wind_back(msg, session, session_id)
+    # --- Spark: Act Break Nomination / Graceful Fail (D6) ---
+    elif event_type == "act_break" and is_mm:
+        await _handle_act_break(msg, session, session_id)
+    elif event_type == "claim_graceful_fail":
+        await _handle_claim_graceful_fail(msg, session, session_id, identity)
     else:
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown event type: {event_type}"})
 
@@ -332,6 +346,48 @@ async def _handle_spark_earn_peer(msg: dict, session, session_id: str, caller: s
     })
 
 
+async def _handle_act_break(msg: dict, session, session_id: str) -> None:
+    """MM opens an Act Break Nomination window after a major scene transition."""
+    await manager.broadcast(session_id, {
+        "type": "act_break_opened",
+        "message": "Act break — nominate a player for something they did this scene.",
+    })
+
+
+async def _handle_claim_graceful_fail(msg: dict, session, session_id: str, caller: str) -> None:
+    """Player-initiated Graceful Fail (D6): on any 6-, the player may claim it
+    by narrating how they make the failure worse or richer. Mirrors the
+    `spark_earn_peer` nomination shape — broadcasts a claim, MM confirms
+    separately with `spark_earn`.
+    """
+    last_roll = None
+    for entry in reversed(session.roll_log):
+        if entry.get("player_name") == caller:
+            last_roll = entry
+            break
+
+    if not last_roll or last_roll.get("outcome") != "failure":
+        await manager.broadcast(session_id, {
+            "type": "error",
+            "message": f"{caller} has no unclaimed 6- roll to claim a Graceful Fail on.",
+        })
+        return
+
+    if last_roll.get("graceful_fail_claimed"):
+        await manager.broadcast(session_id, {
+            "type": "error",
+            "message": f"{caller} already claimed a Graceful Fail on that roll.",
+        })
+        return
+
+    last_roll["graceful_fail_claimed"] = True
+    await manager.broadcast(session_id, {
+        "type": "graceful_fail_claimed",
+        "player": caller,
+        "message": f"{caller} claims a Graceful Fail — MM to confirm.",
+    })
+
+
 async def _handle_chat(msg: dict, session_id: str, identity: str) -> None:
     text = str(msg.get("text", ""))[:2000].strip()
     if text:
@@ -397,12 +453,22 @@ async def _handle_mark_skill_used(msg: dict, session, session_id: str) -> None:
 # ---------------------------------------------------------------------------
 
 async def _handle_combat_start(msg: dict, session, session_id: str) -> None:
-    """MM initialises combat. Sets all characters' endurance_current = endurance_max."""
+    """MM initialises combat. Sets all characters' endurance_current = endurance_max.
+
+    Armor's per-scene downgrade budget (D2) is initialised here only if it
+    isn't already set — a second `combat_start` within the same scene (a
+    second fight) must not top the budget back up; it resets only at end of
+    scene. See `combat.armor_budget`.
+    """
     state: dict = {}
     for player_name, character in session.characters.items():
         character.endurance_current = character.endurance_max(session.ruleset)
         character.conditions = []
         character.posture = "measured"
+        if character.armor and character.armor_downgrades_remaining is None:
+            character.armor_downgrades_remaining = combat_module.armor_budget(
+                character.armor, session.ruleset,
+            )
         state[player_name] = {
             "endurance_current": character.endurance_current,
             "endurance_max": character.endurance_current,
@@ -478,11 +544,12 @@ async def _handle_strike(
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown attribute '{attribute_id}'."})
         return
 
-    # Apply posture offense modifier
-    offense_mod = 0
-    if session.ruleset.combat and session.ruleset.combat.postures:
-        posture_data = session.ruleset.combat.postures.get(character.posture or "measured", {})
-        offense_mod = posture_data.get("offense_modifier", 0) or 0
+    # Posture offense modifier plus any Condition penalty (Staggered −1, PHB III.3).
+    # Both come from combat.offense_modifier so this path and the simulator's
+    # resolve_strike cannot drift apart again.
+    offense_mod = combat_module.offense_modifier(
+        character.posture or "measured", character.conditions, session.ruleset,
+    ) or 0
 
     request = RollRequest(
         attribute_id=attribute_id,
@@ -555,17 +622,14 @@ async def _handle_react(
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown reaction '{reaction}'."})
         return
 
-    # Compute Endurance cost (adjust for posture)
-    base_costs = {"dodge": 1, "parry": 1, "absorb": 0, "intercept": 2}
-    base_cost = base_costs[reaction]
-    posture_mod = 0
-    if character.posture == "aggressive":
-        posture_mod = 1
-    elif character.posture == "defensive" or character.posture == "withdrawn":
-        posture_mod = -1
-    cost = max(0, base_cost + posture_mod)
-    if character.posture == "withdrawn":
-        cost = 0  # withdrawn: free reactions
+    # Compute Endurance cost (adjust for posture). K1 (BRIEF D8): the
+    # Aggressive surcharge applies only to the first reaction of the
+    # exchange — see `reactions_this_exchange`'s docstring on Character.
+    is_first_reaction = character.reactions_this_exchange == 0
+    character.reactions_this_exchange += 1
+    cost = combat_module.reaction_cost(
+        reaction, character.posture or "measured", session.ruleset, is_first_reaction,
+    )
 
     if character.endurance_current < cost:
         # Cannot pay — forced to Absorb
@@ -606,54 +670,50 @@ async def _handle_react(
     })
 
 
-def _get_condition_tier(condition: str, ruleset) -> int:
-    """Return the tier (1, 2, or 3) a condition belongs to, or 0 if unknown."""
+def _reduce_incoming_condition(
+    condition: str, character, ruleset, reaction_downgraded: bool = False,
+) -> tuple[str, bool]:
+    """Reduce an incoming condition by armor and/or a partial reaction, under
+    PHB III.3's non-stacking rule (`combat.resolve_incoming_condition`).
+
+    Returns `(condition, armor_spent)` — the condition after the single greater
+    reduction, or `""` if it was reduced away entirely. `armor_spent` says
+    whether an armor charge actually paid for it, so the broadcast can tell a
+    player their armor absorbed the hit versus their Parry did.
+
+    Callers pass the **raw** incoming condition and set `reaction_downgraded`
+    when a Dodge/Parry already partially succeeded — they must not hand in a
+    pre-downgraded condition, or armor would reduce it a second time. Updates
+    `character.armor_downgrades_remaining` in place.
+    """
     if not ruleset.combat:
-        return 0
-    conds = ruleset.combat.conditions
-    for c in conds.tier1:
-        if c.id == condition:
-            return 1
-    for c in conds.tier2:
-        if c.id == condition:
-            return 2
-    for c in conds.tier3:
-        if c.id == condition:
-            return 3
-    return 0
+        return condition, False
 
-
-def _downgrade_condition_for_armor(condition: str, character, ruleset) -> str:
-    """Apply armor downgrade rules: reduce condition tier based on armor type."""
-    if not character.armor or not ruleset.combat:
-        return condition
-
-    armor_def = ruleset.combat.armor
-    if character.armor == "light":
-        downgrades = armor_def.light.downgrades
-    elif character.armor == "heavy":
-        downgrades = armor_def.heavy.downgrades
-    else:
-        return condition
-
-    original_tier = _get_condition_tier(condition, ruleset)
+    original_tier = combat_module.condition_tier(condition, ruleset)
     if original_tier <= 0:
-        return condition
+        return condition, False
 
-    new_tier = max(0, original_tier - downgrades)
-    if new_tier == original_tier:
-        return condition
+    result = combat_module.resolve_incoming_condition(
+        original_tier,
+        character.armor,
+        character.armor_downgrades_remaining or 0,
+        ruleset,
+        reaction_downgraded=reaction_downgraded,
+    )
+    character.armor_downgrades_remaining = result.downgrades_remaining
 
-    if new_tier == 0:
-        return ""  # fully absorbed by armor
+    if result.tier == original_tier:
+        return condition, False
+    if result.tier == 0:
+        return "", result.armor_spent
 
     # Map back to a condition of the lower tier (pick first available)
     conds = ruleset.combat.conditions
     tier_map = {1: conds.tier1, 2: conds.tier2, 3: conds.tier3}
-    lower_tier_conds = tier_map.get(new_tier, [])
+    lower_tier_conds = tier_map.get(result.tier, [])
     if lower_tier_conds:
-        return lower_tier_conds[0].id
-    return condition
+        return lower_tier_conds[0].id, result.armor_spent
+    return condition, result.armor_spent
 
 
 async def _handle_apply_condition(msg: dict, session, session_id: str) -> None:
@@ -664,27 +724,38 @@ async def _handle_apply_condition(msg: dict, session, session_id: str) -> None:
     if not character:
         return
 
-    # Apply armor downgrade
-    condition = _downgrade_condition_for_armor(condition, character, session.ruleset)
+    # `reaction_downgraded` is set when the target's Dodge/Parry partially
+    # succeeded. The MM sends the RAW incoming condition either way; armor and
+    # the reaction do not stack (PHB III.3), so the engine — not the MM —
+    # applies the single greater reduction. Absent the flag, behaviour is
+    # exactly as before: armor alone reduces, and pays a charge for it.
+    reaction_downgraded = bool(msg.get("reaction_downgraded", False))
+    condition, armor_spent = _reduce_incoming_condition(
+        condition, character, session.ruleset, reaction_downgraded,
+    )
     if not condition:
-        # Armor fully absorbed the hit
         await manager.broadcast(session_id, {
             "type": "condition_applied",
             "player": player_name,
             "condition": None,
-            "armor_absorbed": True,
+            "armor_absorbed": armor_spent,
+            "reaction_downgraded": reaction_downgraded,
             "all_conditions": list(character.conditions),
         })
         return
 
-    # Stacking: second Tier 2 condition → Broken
-    tier2_conditions = {"staggered", "cornered"}
-    tier2_on_char = [c for c in character.conditions if c in tier2_conditions]
-    if condition in tier2_conditions and len(tier2_on_char) >= 1:
-        condition = "broken"
-
-    if condition and condition not in character.conditions:
-        character.conditions.append(condition)
+    # Stacking: a second Tier 2 condition of the SAME type escalates to Broken (D5 ledger row 2).
+    # A duplicate of anything below Tier 2 is a silent no-op (pre-existing engine
+    # behaviour, orthogonal to the simulator's list-based semantics — see LOG WS-A0).
+    tier = combat_module.condition_tier(condition, session.ruleset)
+    if condition in character.conditions and tier < 2:
+        pass
+    else:
+        result = combat_module.apply_condition(character.conditions, condition, tier, session.ruleset)
+        if result.broken:
+            condition = "broken"
+            if condition not in character.conditions:
+                character.conditions.append(condition)
 
     session.save_character_to_disk(player_name)
     await manager.broadcast(session_id, {
@@ -713,29 +784,21 @@ async def _handle_clear_condition(msg: dict, session, session_id: str) -> None:
 
 async def _handle_end_exchange(session, session_id: str) -> None:
     """MM signals end of exchange: clear Tier 1 conditions, apply Withdrawn recovery."""
-    # Read Tier 1 condition IDs and recovery amount from ruleset (data-driven, C2)
-    if session.ruleset.combat and session.ruleset.combat.conditions.tier1:
-        tier1_conditions = {c.id for c in session.ruleset.combat.conditions.tier1}
-    else:
-        tier1_conditions = {"winded", "off_balance", "shaken"}  # fallback
-
-    if session.ruleset.combat:
-        recovery_amount = session.ruleset.combat.endurance.recovery_withdrawn
-    else:
-        recovery_amount = 2
-
     updates: dict = {}
     for player_name, character in session.characters.items():
         if character.endurance_current is None:
             continue
 
         # Clear Tier 1 conditions
-        cleared = [c for c in character.conditions if c in tier1_conditions]
-        character.conditions = [c for c in character.conditions if c not in tier1_conditions]
+        cleared = combat_module.end_exchange(character.conditions, session.ruleset)
+
+        # K1 (BRIEF D8): reset the per-exchange reaction count.
+        character.reactions_this_exchange = 0
 
         # Withdrawn endurance recovery (only if not striking, enforced by declare_posture)
         if character.posture == "withdrawn":
             max_end = character.endurance_max(session.ruleset)
+            recovery_amount = combat_module.withdrawn_recovery_amount(session.ruleset)
             character.endurance_current = min(character.endurance_current + recovery_amount, max_end)
 
         updates[player_name] = {
@@ -1041,38 +1104,12 @@ async def _handle_technique_select(msg: dict, session, session_id: str) -> None:
     if not character or not technique_id:
         return
 
-    # Validate: technique must not already be selected
-    if technique_id in character.techniques:
-        await manager.broadcast(session_id, {
-            "type": "error",
-            "message": f"Technique '{technique_id}' already selected.",
-        })
+    # All selection rules (already-held, prerequisites, pick budget, magic
+    # activation) live in Character.select_technique — the single source of truth.
+    ok, message = character.select_technique(technique_id, session.ruleset, choice)
+    if not ok:
+        await manager.broadcast(session_id, {"type": "error", "message": message})
         return
-
-    # Validate prerequisites via fast lookup
-    prereq_errors: list[str] = []
-    tech_def = session.ruleset.get_technique(technique_id)
-    if tech_def:
-        for prereq in tech_def.prerequisites:
-            if prereq not in character.techniques:
-                prereq_errors.append(prereq)
-
-    if prereq_errors:
-        await manager.broadcast(session_id, {
-            "type": "error",
-            "message": f"Technique '{technique_id}' requires: {', '.join(prereq_errors)}.",
-        })
-        return
-
-    character.techniques.append(technique_id)
-    if choice:
-        character.technique_choices[technique_id] = str(choice)
-
-    # Special: magic-granting Techniques activate magic_technique_active
-    if tech_def and tech_def.magic_granting:
-        character.magic_technique_active = True
-        if choice:
-            character.magic_domain = choice
 
     session.save_character_to_disk(player_name)
     await manager.broadcast(session_id, {
@@ -1081,6 +1118,7 @@ async def _handle_technique_select(msg: dict, session, session_id: str) -> None:
         "technique_id": technique_id,
         "choice": choice,
         "all_techniques": list(character.techniques),
+        "technique_picks_available": character.technique_picks_available,
     })
 
 
@@ -1122,7 +1160,7 @@ async def _handle_spawn_enemy(msg: dict, session, session_id: str) -> None:
             id=enemy_id,
             name=enemy_data.get("name", enemy_id),
             tier=enemy_data.get("tier", "mook"),
-            endurance=enemy_data.get("endurance", 0),
+            resolve=enemy_data.get("resolve", 0),
             attack_modifier=enemy_data.get("attack_modifier", 0),
             defense_modifier=enemy_data.get("defense_modifier", 0),
             armor=enemy_data.get("armor", "none"),
@@ -1141,7 +1179,7 @@ async def _handle_spawn_enemy(msg: dict, session, session_id: str) -> None:
 
 
 async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
-    """MM updates an active enemy's endurance or conditions."""
+    """MM updates an active enemy's resolve or conditions."""
     tracker_key = str(msg.get("tracker_key", ""))
     enemy = session.active_enemies.get(tracker_key)
     if not enemy:
@@ -1151,8 +1189,15 @@ async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
         })
         return
 
-    if "endurance_current" in msg:
-        enemy.endurance_current = max(0, int(msg["endurance_current"]))
+    phase_index = None
+    if "resolve_current" in msg:
+        resolve_before = enemy.resolve_current
+        enemy.resolve_current = max(0, int(msg["resolve_current"]))
+        if resolve_before is not None and enemy.phases:
+            phase_index = combat_module.phase_crossed(
+                resolve_before, enemy.resolve_current,
+                [p.resolve_threshold for p in enemy.phases],
+            )
     if "add_condition" in msg:
         cond = str(msg["add_condition"])
         if cond and cond not in enemy.conditions:
@@ -1165,9 +1210,17 @@ async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
     await manager.broadcast(session_id, {
         "type": "enemy_updated",
         "tracker_key": tracker_key,
-        "endurance_current": enemy.endurance_current,
+        "resolve_current": enemy.resolve_current,
         "conditions": list(enemy.conditions),
     })
+
+    if phase_index is not None:
+        await manager.broadcast(session_id, {
+            "type": "enemy_phase_change",
+            "enemy_id": tracker_key,
+            "phase_index": phase_index,
+            "description": enemy.phases[phase_index].description,
+        })
 
 
 async def _handle_remove_enemy(msg: dict, session, session_id: str) -> None:
@@ -1178,4 +1231,92 @@ async def _handle_remove_enemy(msg: dict, session, session_id: str) -> None:
     await manager.broadcast(session_id, {
         "type": "enemy_removed",
         "tracker_key": tracker_key,
+    })
+
+
+# ---------------------------------------------------------------------------
+# Threat Clock handlers (D4, PHB III.2)
+# ---------------------------------------------------------------------------
+
+async def _handle_clock_create(msg: dict, session, session_id: str) -> None:
+    """MM creates a new Threat Clock, visible to the whole table.
+
+    Segment count defaults to `hazards.threat_clock.segments` from the
+    ruleset (facet.yaml) unless the MM overrides it.
+    """
+    name = str(msg.get("name", "Threat"))[:128]
+    default_segments = 4
+    if session.ruleset.hazards:
+        default_segments = session.ruleset.hazards.threat_clock.segments
+    segments = int(msg.get("segments", default_segments))
+    clock_id = str(msg.get("clock_id") or uuid.uuid4())
+
+    clock = ThreatClock(id=clock_id, name=name, segments=segments)
+    session.threat_clocks[clock_id] = clock
+
+    await manager.broadcast(session_id, {
+        "type": "clock_created",
+        "clock": clock.to_client_dict(),
+    })
+
+
+async def _handle_clock_advance(msg: dict, session, session_id: str) -> None:
+    """MM advances a Threat Clock by one segment, if the outcome tier qualifies.
+
+    `outcome_tier` is checked against `hazards.threat_clock.advances_on`
+    (default: partial_success, failure) — a 10+ (full_success) never advances
+    the clock. No new resolution mechanic: this reuses the existing roll
+    outcome tiers (BRIEF non-goal).
+    """
+    clock_id = str(msg.get("clock_id", ""))
+    clock = session.threat_clocks.get(clock_id)
+    if not clock:
+        await manager.broadcast(session_id, {
+            "type": "error",
+            "message": f"No Threat Clock with id '{clock_id}'.",
+        })
+        return
+
+    outcome_tier = str(msg.get("outcome_tier", ""))
+    advances_on = (
+        session.ruleset.hazards.threat_clock.advances_on
+        if session.ruleset.hazards else ["partial_success", "failure"]
+    )
+
+    just_filled = False
+    if outcome_tier in advances_on:
+        just_filled = clock.advance()
+
+    await manager.broadcast(session_id, {
+        "type": "clock_advanced",
+        "clock": clock.to_client_dict(),
+    })
+
+    if just_filled:
+        await manager.broadcast(session_id, {
+            "type": "clock_fill",
+            "clock": clock.to_client_dict(),
+        })
+
+
+async def _handle_clock_wind_back(msg: dict, session, session_id: str) -> None:
+    """Spend an action to wind a Threat Clock back one segment.
+
+    Unconditional — no roll (Brain, BRIEF §EF4). A rolled wind-back would let
+    a 7-9 advance the very clock being wound.
+    """
+    clock_id = str(msg.get("clock_id", ""))
+    clock = session.threat_clocks.get(clock_id)
+    if not clock:
+        await manager.broadcast(session_id, {
+            "type": "error",
+            "message": f"No Threat Clock with id '{clock_id}'.",
+        })
+        return
+
+    clock.wind_back()
+
+    await manager.broadcast(session_id, {
+        "type": "clock_wound_back",
+        "clock": clock.to_client_dict(),
     })

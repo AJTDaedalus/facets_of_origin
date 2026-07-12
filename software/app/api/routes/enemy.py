@@ -16,7 +16,7 @@ class CreateEnemyRequest(BaseModel):
     id: str = Field(min_length=1)
     name: str = Field(min_length=1, max_length=128)
     tier: str = "mook"
-    endurance: int = Field(default=0, ge=0)
+    resolve: int = Field(default=0, ge=0)
     attack_modifier: int = 0
     defense_modifier: int = 0
     armor: str = "none"
@@ -40,7 +40,7 @@ async def create_enemy(body: CreateEnemyRequest):
         id=body.id,
         name=body.name,
         tier=body.tier,
-        endurance=body.endurance,
+        resolve=body.resolve,
         attack_modifier=body.attack_modifier,
         defense_modifier=body.defense_modifier,
         armor=body.armor,

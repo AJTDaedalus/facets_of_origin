@@ -8,7 +8,9 @@ Combat in Facets of Origin is structured around **exchanges** — dramatic beats
 
 The central resource in combat is **Endurance** — your physical stamina, the reserve of effort that lets you press hard or react quickly when it matters. Endurance is not hit points. It is not how much damage you can absorb. It is how much you have in the tank. A character with no Endurance left is not bleeding out — they are exhausted, overextended, outmaneuvered. They can still fight. They are simply fighting on grit alone.
 
-**Conditions** replace hit points as the measure of how a fight is going. They are named states with immediate mechanical and fictional weight: you are not "at 14 HP," you are Staggered — your offensive rolls suffer. Conditions are concrete, narratively rich, and temporary by design. They resolve when the fiction resolves them, not on a countdown.
+**Conditions** replace hit points for player characters as the measure of how a fight is going. They are named states with immediate mechanical and fictional weight: you are not "at 14 HP," you are Staggered — your offensive rolls suffer. Conditions are concrete, narratively rich, and temporary by design. They resolve when the fiction resolves them, not on a countdown.
+
+Enemies are measured differently. An antagonist's durability is a single pool called **Resolve**, and your Strikes deplete it directly — no condition track to manage, no hit points to whittle. This asymmetry is deliberate: player characters have stories, and Conditions are how a story-shaped hero takes damage; enemies have stat blocks, and Resolve is how a stat block runs down. Both models live in this chapter, each explained where it applies.
 
 The goal is a combat system where every participant is engaged every moment, where the choices feel real, where a mage and a warrior and a nimble rogue all have meaningful roles — and where the fiction of the fight is always more interesting than the arithmetic.
 
@@ -34,15 +36,15 @@ The goal is a combat system where every participant is engaged every moment, whe
 A character with no particular investment in Constitution or the Endurance skill has a pool of 4. A heavily invested character tops out at 8. The range in practice is 3 (fragile but fast) to 8 (a deliberate, durable choice).
 
 > **Example pools:**
-> Mordai — Constitution 3 (+1), Endurance Practiced (+1): **6 Endurance**
-> Zahna — Constitution 2 (+0), Endurance Novice (+0): **4 Endurance**
+> Mordai — Constitution 3 (+1), Endurance Novice (+0): **5 Endurance**
+> Zahna — Constitution 1 (−1), Endurance Novice (+0): **3 Endurance**
 > Zulnut — Constitution 1 (−1), Endurance Novice (+0): **3 Endurance**
 
 ### Running Out of Endurance
 
-When your Endurance hits 0, you cannot spend it on reactions. You may still declare Postures and attempt to Dodge or Parry, but with nothing in the tank you cannot pay the cost — **Absorb** is your only reaction option. You remain in the fight until Conditions remove you.
+When your Endurance hits 0, you cannot spend it on reactions. You may still declare Postures and attempt to Dodge or Parry, but with nothing in the tank you cannot pay the cost — **Absorb** is your only reaction option. Conditions you Absorb land at their normal tier; there is no extra penalty for taking them on an empty tank. You remain in the fight until Conditions remove you.
 
-**At 0 Endurance, Absorbed conditions are persistent.** Any condition you Absorb at 0 Endurance is treated as Tier 2, regardless of its original tier — it does not clear at end of exchange. A second persistent Tier 2 condition escalates to Broken via the normal stacking rule. Running on empty is genuinely dangerous: armor and resilience get you far, but a character with nothing left in the tank can be broken by accumulation, even if no single hit could have done it alone.
+Running on empty is still dangerous — every incoming Condition now lands in full, because you have no Endurance to buy a Dodge or a Parry that might have softened it. Your armor still helps (see Armor), but your reactive options are gone until you recover.
 
 ### Recovering Endurance
 
@@ -80,12 +82,12 @@ Posture is declared blind. You do not know what your opponent has declared until
 
 | Posture | Offense | Reactions | Other |
 |---|---|---|---|
-| **Aggressive** | +1 to offensive rolls | +1 Endurance cost per reaction | You are pressing hard — and exposed for it |
+| **Aggressive** | +1 to offensive rolls | +1 Endurance cost on your **first** reaction this exchange; every reaction after that costs the standard amount | You are pressing hard — and exposed for it, once, per exchange |
 | **Measured** | No modifier | Standard cost | The baseline — flexible and uncommitted |
 | **Defensive** | −1 to offensive rolls | −1 Endurance cost per reaction (min 0) | Trading offensive presence for resilience |
 | **Withdrawn** | Cannot make offensive actions | All reactions are free | Recover 2 Endurance at end of exchange |
 
-**Aggressive:** You are driving the action. Everything you do this exchange hits harder and faster. Everything done to you finds you slightly over-committed. Useful when you have momentum and Endurance to spend; dangerous when you don't.
+**Aggressive:** You are driving the action. Everything you do this exchange hits harder and faster. The first hit that comes back at you costs extra to answer — you were over-committed for that opening — but you are not paying the surcharge over and over: every reaction after your first this exchange costs the standard amount. Useful when you have momentum and Endurance to spend; still costs you something when a single exchange throws several attacks your way at once.
 
 **Measured:** The default. You have not handed your opponent an advantage. You have not bought yourself a discount, either. Measured posture is for when you want options.
 
@@ -107,17 +109,21 @@ On your action in an exchange, you may do one of the following. You may only tak
 
 The foundational offensive action. You bring force to bear on a target — weapon, fist, magic, momentum.
 
-**Roll:** `2d6 + Strength modifier + Combat skill rank modifier`
+**Roll:** `2d6 + weapon attribute + relevant skill rank modifier`. Your weapon's category sets the attribute (Chapter IV.1); the skill is **Combat** for melee and unarmed Strikes, **Finesse** for ranged ones.
 
 **Difficulty** is Standard by default. The MM adjusts based on the situation: a Named NPC or Boss in Defensive Posture, or with strong Constitution, may push it to Hard. A Staggered or Cornered opponent may make it Easy. When in doubt, Standard. (Named NPCs and Bosses declare Postures as described in the Postures section. For Mooks, the MM sets difficulty by situation: Standard by default, Easy if distracted or exposed, Hard if armored and alert.)
 
 | Result | Outcome |
 |---|---|
-| **10+** | Full success. Apply a **Tier 2 Condition** to the target. |
-| **7–9** | Partial success. Apply a **Tier 1 Condition** to the target. |
+| **10+** | Full success. |
+| **7–9** | Partial success. |
 | **6−** | Something goes wrong. The MM narrates a consequence for the attacker — a stumble, an opening left, a weapon out of position. |
 
-The attacker chooses which Condition to apply, within the appropriate tier. The choice should fit the fiction of the moment — a blade-fighter landing a precise blow might apply Staggered; one forcing an opponent into a corner might apply Cornered.
+What a success *does* depends on what you are Striking. Almost always, that is an enemy.
+
+**Against an enemy** — the usual case. Your success depletes the enemy's **Resolve** (see *Facing Mooks and Named Antagonists*): a full success (10+) depletes **2**, a partial (7–9) depletes **1**. When an enemy's Resolve reaches 0, it is defeated. On a **full success only**, you may *additionally* — on top of that 2 Resolve — hang one **rider Condition** on the enemy: a Tier 1 or Tier 2 Condition of your choice. A Tier 2 rider (Staggered or Cornered) leaves the enemy **Easy to Strike** until it is cleared, which is often worth more to the party than the raw depletion — a single 10+ can open an enemy up for everyone who Strikes after you. Riders never defeat an enemy on their own — **Resolve does that; a rider only shapes the blows that follow.**
+
+**Against another character** — a duel, a charmed ally, PvP. There is no Resolve pool; apply a Condition directly, exactly as an enemy's attack lands on a player character: a 10+ applies a **Tier 2 Condition**, a 7–9 applies a **Tier 1 Condition**. The attacker chooses which Condition, within the appropriate tier — a precise blow might apply Staggered; one forcing an opponent into a corner might apply Cornered.
 
 ---
 
@@ -137,7 +143,7 @@ You use your action to reshape the fight rather than deal damage directly. Force
 
 **Roll:** The relevant skill for the action — Athletics to bull rush someone into a bad position, Finesse to disarm, Stealth to vanish and reposition, an appropriate attribute for improvised environmental play.
 
-A successful Maneuver does not apply Conditions directly. Instead, it shifts difficulty: on a 10+, the target's next roll is Easy (or the party's next roll against them is Easy). On a 7–9, the Maneuver works, but the MM describes what it costs — a moment of exposure, a position ceded, an opening the opponent seizes; the target's next roll is Standard rather than Easy. On a 6−, the attempt backfires.
+A successful Maneuver does not apply Conditions directly. Instead, it shifts difficulty: on a 10+, rolls **against** the target are Easy until the situation changes. On a 7–9, the Maneuver works, but the MM describes what it costs — a moment of exposure, a position ceded, an opening the opponent seizes; rolls against the target stay at Standard rather than dropping to Easy. On a 6−, the attempt backfires.
 
 Maneuvering well opens fights. It is the action for characters who think geometrically about combat, and for anyone helping a hard-hitting ally land the blow that matters.
 
@@ -158,7 +164,7 @@ The bonus applies to the ally's very next roll only, then expires. Bonuses from 
 
 ## Reactions
 
-When an opponent takes action against you, you may **react**. You may declare a maximum of **one reaction per incoming action**. Each reaction costs Endurance unless your Posture reduces the cost. If your Endurance is at 0, only Absorb is available.
+When an opponent takes action against you, you may **react**. You may declare a maximum of **one reaction per incoming action**. Each reaction costs Endurance unless your Posture reduces the cost. If your Endurance is at 0, only Absorb is available. Aggressive posture's surcharge applies only to your first reaction of the exchange — see Postures, above.
 
 The choice to react, and which reaction to use, is made after the attacker rolls but before any Condition is formally applied.
 
@@ -186,7 +192,7 @@ You move — out, aside, low — using speed and awareness to take yourself out 
 
 You meet force with force — interposing weapon, shield, or forearm to deflect rather than avoid.
 
-**Roll:** `2d6 + Strength modifier + Combat skill rank modifier`
+**Roll:** `2d6 + weapon attribute + Combat skill rank modifier`. Parry is a melee reaction — your weapon's category sets the attribute, same as a Strike (Chapter IV.1).
 
 Outcome tiers are the same as Dodge, flavored as deflection rather than avoidance.
 
@@ -208,7 +214,7 @@ You do not react. You take the hit, accept the Condition, and remain composed. A
 
 You step in front of an attack targeting an ally. You take the incoming action instead of them, then roll Dodge or Parry as normal.
 
-Intercepting is how you protect someone who cannot protect themselves — a Spent ally, a mage mid-cast, someone whose low Endurance pool is about to become a serious problem.
+Intercepting is how you protect someone who cannot protect themselves — a mage mid-cast, someone whose low Endurance pool is about to become a serious problem.
 
 You may Intercept **one incoming action per exchange**. Only one character may Intercept a given action — if two try to Intercept the same attack, the protected ally decides who steps in. You must be aware of the incoming action and physically able to reach the ally before declaring.
 
@@ -216,7 +222,9 @@ You may Intercept **one incoming action per exchange**. Only one character may I
 
 ## Conditions
 
-Conditions replace hit points as the measure of how a fight is going. A character is not at "14 HP" — they are **Staggered**, and that means something concrete in both the mechanics and the fiction.
+Conditions replace hit points for player characters as the measure of how a fight is going. A character is not at "14 HP" — they are **Staggered**, and that means something concrete in both the mechanics and the fiction.
+
+The tiers below govern player characters in full. Enemies do not carry a Condition track of their own — they run on Resolve — but a Condition can be hung on an enemy as a **rider** by a full-success Strike, in which case it has exactly the effect described here until it clears. (A Tier 2 rider on an enemy also makes that enemy Easy to Strike; see *Strike*, above.)
 
 ### Tier 1 Conditions
 
@@ -267,12 +275,14 @@ Broken persists until the end of the scene. Full recovery requires meaningful do
 
 ## Armor
 
-**Armor** reduces the severity of incoming Conditions. It does not eliminate Conditions — it softens them.
+On your character sheet, armor is a **downgrade budget**: a finite number of incoming Conditions it can soften over the course of a scene, each by one tier.
 
-- **Light armor:** Incoming Tier 2 Conditions become Tier 1 Conditions. A Strike that would apply Staggered applies Winded instead.
-- **Heavy armor:** Incoming Tier 3 (Broken) becomes Tier 2 instead. A strike that would break an unarmored character leaves an armored one Staggered and Cornered — still badly hurt, but still in the fight.
+- **Light armor:** the first **2** Conditions you receive per scene are each downgraded one tier — Tier 2 becomes Tier 1, Tier 1 is negated entirely.
+- **Heavy armor:** the first **4**. Same one-tier softening, twice as often.
 
-Armor affects incoming severity, not the roll itself. An attacker still rolls Strike and interprets their result normally; the Condition they apply is simply reduced one tier before it lands.
+The budget does not refresh between exchanges — it is spent down across the whole scene and refills only when the scene ends. Two fights inside one scene draw on the same budget, so a character who took heavy fire in the first skirmish walks into the second with less armor left to spend. When the budget is gone, Conditions land at full tier. This is what keeps an armored character breakable: protection is real, but it is not infinite, and a long enough fight spends through it.
+
+Armor affects incoming severity, not the roll itself. An attacker still interprets their result normally; a Condition heading for you is simply reduced one tier before it lands, as long as budget remains.
 
 Armor has fictional weight beyond its mechanical effect. Heavy armor announces your presence, imposes noise and heat, and affects how you move through the world outside of combat. The Equipment chapter covers specific armor types, weights, and any relevant Technique interactions.
 
@@ -286,8 +296,8 @@ Not every fight deserves the same structure. The rules scale to the significance
 
 **Mooks** are minor antagonists: guards, hired muscle, ordinary soldiers, common bandits. They exist to create pressure and numbers, not to require sustained individual attention.
 
-- Mooks have no Endurance pool and no Condition track.
-- One successful Strike — at any tier — removes a Mook from the fight.
+- Mooks have no Resolve pool and no Condition track.
+- Any successful Strike — full or partial (7+) — removes a Mook from the fight. An **armored** Mook is tougher: it takes a full success (10+) to remove.
 - Mooks do not react. They apply pressure through volume and positioning, not through the full exchange structure.
 
 The MM narrates Mook combat efficiently. Mordai cutting through two guards on his way to the named antagonist across the room is not two separate Strike exchanges — it is one action, one roll, two Mooks handled. Save the full mechanical weight for fights that deserve it.
@@ -296,21 +306,23 @@ The MM narrates Mook combat efficiently. Mordai cutting through two guards on hi
 
 ### Named NPCs
 
-**Named NPCs and significant antagonists** use the full combat structure: Endurance pool, Posture, Condition track, the works. They are opponents whose defeat means something and whose capabilities should be genuinely felt.
+**Named NPCs and significant antagonists** use the full combat structure: Resolve, Posture, reactions, the works. They are opponents whose defeat means something and whose capabilities should be genuinely felt.
 
 A Named NPC is defined by:
-- **Endurance pool** — built the same way as a player character
+- **Resolve** — the durability pool your Strikes deplete. A Named NPC starts with a Resolve of 3 or 4. Each Strike depletes it (2 on a full success, 1 on a partial); at 0, the NPC is defeated. There is no Condition track to grind down — Resolve *is* the fight's clock.
 - **A primary attribute and skill** — the modifier they use for Strikes and Parries
-- **Armor**, if any
+- **Armor**, if any — armor raises Resolve by a flat amount (light +1, heavy +2), so an armored enemy simply takes longer to run down
 - **Techniques**, if the MM wants them to have specific capabilities
 
-Named NPCs do not need a full character sheet. A veteran soldier might be: Endurance 6, Strength +1, Combat Practiced (+1), Light armor. That is enough to run the full exchange structure against a party.
+A Named NPC can carry **rider Conditions** hung on it by a full-success Strike — Staggered or Cornered, with their usual effects (and a Tier 2 rider makes it Easy to Strike) — but riders never accumulate into Broken. An enemy leaves the fight when its Resolve is gone, not when its Conditions stack.
+
+Named NPCs do not need a full character sheet. A veteran soldier might be: Resolve 4, Strength +2, Combat Expert (+1), Light armor. That is enough to run the full exchange structure against a party.
 
 ### Bosses and Climactic Antagonists
 
-**Bosses** — the antagonists at the center of major conflicts — may have higher Endurance, multiple Condition tracks, or **phase changes**: narrative triggers when a specific Condition is applied that shift the nature of the fight. A creature that becomes more dangerous when Cornered, or that reveals a second form when first Broken, is following this structure.
+**Bosses** — the antagonists at the center of major conflicts — carry a much larger Resolve pool and often a **phase change**: a narrative trigger keyed to a Resolve threshold that shifts the nature of the fight when the pool is depleted past that point. A creature that changes when its Resolve drops to 2, revealing a second form or a new way of fighting, is following this structure. The threshold is part of the stat block, and crossing it is a story beat, not just a number ticking down.
 
-Boss construction is covered in the Mirror Master's chapter. For now: a climactic antagonist should not fall to the same two-exchange sequence that ends a Mook. Build them to last, and build the moment of their defeat to matter.
+Boss construction is covered in the Mirror Master's chapter. For now: a climactic antagonist should not fall to the same short sequence that ends a Mook. A lone Boss facing a full party is not meant to be an even fight on its own — a party concentrating its Strikes will grind through any Resolve pool eventually. A Boss earns its danger from the encounter around it (allies, Techniques, the terrain, a problem that cannot be solved by Striking) and from the *cost* of the fight, not from the raw size of its pool. Build them to last, build the encounter to bite, and build the moment of their defeat to matter.
 
 ---
 
@@ -328,7 +340,7 @@ When a PC is hit by an enemy attack (Absorb, or a failed/partial reaction), the 
 | **Named NPC** | Tier 2 | A Named NPC's attack carries the weight of a full Strike success |
 | **Boss** | Tier 2 | Same as Named; Boss Techniques may escalate further |
 
-Armor applies normally: light armor downgrades the incoming tier by one (Tier 2 becomes Tier 1), heavy armor downgrades by two (Tier 3 becomes Tier 1).
+Your armor applies normally: if you have downgrade budget left (see *Armor*), the incoming Condition is softened one tier before it lands — Tier 2 becomes Tier 1, Tier 1 is negated. Light and heavy soften by the same one tier; heavy simply has more downgrades to spend across the scene.
 
 ### Enemy Posture and Reaction Difficulty
 
@@ -346,7 +358,7 @@ Mooks do not declare Postures. The MM sets reaction difficulty by situation: Sta
 
 Armor downgrades and successful reaction downgrades (Dodge 7-9, Parry 7-9) **do not stack**. Apply the greater reduction only.
 
-A character in light armor who rolls a partial Parry against a Named NPC's attack has two sources of reduction: armor (Tier 2 → Tier 1) and the partial reaction (downgrade one tier). Both reduce by one tier — they do not combine to eliminate the condition entirely. The result is **Tier 1**.
+A character in light armor who rolls a partial Parry against a Named NPC's attack has two sources of reduction: their armor's downgrade budget (Tier 2 → Tier 1) and the partial reaction (downgrade one tier). Both reduce by one tier — they do not combine to eliminate the condition entirely. The result is **Tier 1**.
 
 > **Why they don't stack:** Armor represents physical protection; a partial reaction represents imperfect avoidance. If both reduced independently, light armor plus any partial reaction would negate all Named NPC attacks. That makes defense too cheap and removes the decision tension from reaction choices.
 
@@ -433,7 +445,9 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zahna:** "Measured. I'm looking for an opening — something I can use."
 
-*All three Postures revealed. The guardian's flat approach gives away nothing.*
+*All three Postures revealed. The guardian's flat approach gives away nothing. It is Measured — it always is.*
+
+*(Behind the screen, the MM is tracking one number for the guardian: **Resolve 10**. Base 8, plus 2 for its heavy plating. That is the whole fight's clock — no Condition track to grind, just a pool to run dry.)*
 
 ---
 
@@ -445,19 +459,23 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 → Mordai rolls **2d6 + Strength (3 → +1) + Combat Practiced (+1)** against Easy difficulty (+1) and gets a **12**. Full success.
 
-**MM:** "The blade finds the seam. Exactly the seam. There is a sound like a key turning in a lock that has not been oiled in fifteen years — grinding, then a kind of hollow click. The arm does not fall off. But it is not doing what it was doing before. The guardian is **Staggered**: its strikes take −1."
+**MM:** "Full success — that's 2 Resolve off. And because you rolled a 10 or better, you can hang a Condition on it as a rider, on top of the damage. Want one?"
+
+**Mordai:** "Staggered. I want the seam I just opened to stay open for everyone."
+
+**MM:** "The blade finds the seam. Exactly the seam. There is a sound like a key turning in a lock that has not been oiled in fifteen years — grinding, then a hollow click. The arm does not fall off, but it is not doing what it was doing before. The guardian is **Staggered** — and while that holds, it is **Easy to Strike** for the whole party. Guardian is at **Resolve 8**."
 
 *The guardian rotates toward Mordai with the patience of something that was not designed to feel surprise. It reaches for him anyway.*
 
-**MM:** "It's striking back, Mordai. Declare a reaction."
+**MM:** "It's striking back, Mordai. It's a Named threat — a Boss — so this comes in as a Tier 2 hit. Declare a reaction."
 
 **Mordai:** "Parry."
 
-**MM:** "1 Endurance — you're at 5. Roll Combat."
+**MM:** "First reaction of the exchange, and you're Aggressive, so that's 1 Endurance plus the 1-Endurance Aggressive surcharge — 2 total. You drop from 5 to 3. Roll Combat."
 
 → Mordai rolls **2d6 + Strength (3 → +1) + Combat Practiced (+1)** and gets a **9**. Partial success.
 
-**MM:** "You catch the blow — the blade turns it — but the force behind that arm is not organic. Your whole side rings. You take **Off-Balance**: your next reaction costs 1 additional Endurance."
+**MM:** "You catch the blow — the blade turns it — but the force behind that arm is not organic. A partial Parry knocks the incoming Tier 2 down one tier, so it lands as Tier 1: **Off-Balance**. Your next reaction costs 1 additional Endurance."
 
 *Mordai staggers half a step. His arm is still working. He is not sure for how long.*
 
@@ -467,15 +485,15 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zulnut:** "I'm watching. Waiting. Where is it weakest — the joints, the chest, something at the base?"
 
-**MM:** "You're supporting — Insight to read the fight?"
+**MM:** "Sounds like Support — you're setting Mordai up rather than swinging yourself. Finesse?"
 
-**Zulnut:** "Finesse, actually. I'm looking at how it moves. Where it's compensating."
+**Zulnut:** "Finesse. I'm looking at how it moves. Where it's compensating."
 
-**MM:** "I'll take that. Standard. Roll Dexterity plus Finesse."
+**MM:** "Standard. Roll Dexterity plus Finesse. It's already Easy to Strike from the Staggered rider, so pick the other Support benefit — a die, not a difficulty drop."
 
 → Zulnut rolls **2d6 + Dexterity (3 → +1) + Finesse Practiced (+1)** at Standard difficulty and gets an **11**. Full success.
 
-**MM:** "It's leading with the left. Right arm is structurally compromised — Mordai's hit moved something inside the joint — and the thing is routing its force through the left side to compensate. Whoever goes for the left joint next rolls at Easy."
+**MM:** "It's leading with the left. Right arm is structurally compromised — Mordai's hit moved something inside the joint — and the thing is routing its force through the left side to compensate. Mordai's next Strike gets **+1d6, drop the lowest**."
 
 **Zulnut:** "I tell Mordai. Very quietly, while it's not looking at me."
 
@@ -493,7 +511,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 (The MM stops. This is either extremely clever or the kind of thing that escalates a fight in an interesting direction. Probably both.)
 
-**MM:** "I love this. Hard — not because the magic is complicated, but because you're writing this during an active fight with thirty seconds of prep time. Roll Knowledge."
+**MM:** "I love this. Hard — not because the magic is complicated, but because you're writing this during an active fight with thirty seconds of prep time. This is control, not damage — it won't touch its Resolve, but if it lands it changes the shape of the room. Roll Knowledge."
 
 → Zahna rolls **2d6 + Knowledge (3 → +1)** against Hard difficulty (net +0) and gets an **8**. Partial success.
 
@@ -505,7 +523,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zahna:** "Measurably."
 
-*End-of-exchange cleanup: Off-Balance on Mordai clears. Mordai's Staggered on the guardian persists.*
+*End-of-exchange cleanup: Off-Balance on Mordai clears. The Staggered rider on the guardian persists — it stays Easy to Strike. Guardian: Resolve 8.*
 
 ---
 
@@ -513,19 +531,69 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Mordai:** "Aggressive. I have the left side open."
 
-**Zulnut:** "Still Defensive. Three Endurance."
+**Zulnut:** "Measured. I'm swinging this time."
+
+**Zahna:** "Measured. Holding the glyph steady."
+
+**MM:** "The guardian is Measured. It is learning you. Mordai — left joint. Easy from the Staggered rider, and you've got Zulnut's die. Roll Combat."
+
+→ Mordai spends Zulnut's Support: **3d6 + Strength (3 → +1) + Combat Practiced (+1)** at Easy difficulty (+1), drop the lowest, and gets a **13**. Full success.
+
+**MM:** "The left joint goes the way the right one went, but worse. That's another 2 Resolve — it's at **6**. Staggered's already on it, so no new rider needed; the seam just widens."
+
+*The guardian reaches for him again — slower now, but no less certain.*
+
+**MM:** "It's striking you again, Mordai. Tier 2. Reaction?"
+
+**Mordai:** "Parry. I know what this costs."
+
+**MM:** "First reaction, still Aggressive — 2 Endurance. You go from 3 to 1. Roll."
+
+→ Mordai rolls and gets a **7**. Partial success.
+
+**MM:** "Down a tier to Tier 1 — **Winded**, −1 on your next roll. You're breathing hard and you're nearly out of tank."
+
+**MM:** "Zulnut, you're up, and it's Easy for you too."
+
+**Zulnut:** "Same joint. I finish what Mordai started."
+
+→ Zulnut rolls **2d6 + Dexterity (3 → +1) + Finesse Practiced (+1)** at Easy difficulty (+1) and gets a **10**. Full success.
+
+**MM:** "Two more Resolve. The guardian is at **4**." *A pause.* "It is noticeably less fluid than it was two exchanges ago. Whatever you're doing, it's working."
+
+*End-of-exchange cleanup: Winded on Mordai clears. Staggered rider persists. Guardian: Resolve 4.*
+
+---
+
+**MM:** "Third exchange. Postures."
+
+**Mordai:** "Aggressive. One Endurance left, and I'm spending it."
+
+**Zulnut:** "Measured."
 
 **Zahna:** "Measured."
 
-**MM:** "The guardian is Measured. It is learning you. Mordai — left joint, Easy difficulty from Zulnut's read. Roll Combat."
+**MM:** "Mordai, left joint, Easy. What are you doing with that last point?"
 
-→ Mordai Presses: spends 1 Endurance (now at 4) and rolls **3d6 + Strength (3 → +1) + Combat Practiced (+1)** at Easy difficulty (+1), drops the lowest die, and gets a **13**. Full success.
+**Mordai:** "Press. I put everything into it."
 
-**MM:** "The left joint goes the way the right one went, but worse. There is a grinding sound that the room holds for a moment, and then the guardian's movement pattern simply — stops. Not falls. Stops. It is standing. It is looking at you. It is **Staggered** again — which means a second Staggered on top of an existing Staggered."
+→ Mordai spends his last Endurance to Press: **3d6 + Strength (3 → +1) + Combat Practiced (+1)** at Easy difficulty (+1), drop the lowest, and gets an **11**. Full success. Mordai is now at **0 Endurance**.
 
-*Second Tier 2 Condition of the same type.*
+**MM:** "Two more Resolve — that takes it to **2**. And 2 is a threshold." *The MM checks the stat block.* "The guardian changes. Its next blow won't have the weight the others did — but something else happens: it stops reacting to small hurts entirely. It's entered **Reduced Mode**. The subsystem that was registering minor damage has shut down. It is running on something else now, and none of you know what."
 
-**MM:** "That escalates. The guardian is **Broken**."
+*The light in its eyes flickers — not dimmer, exactly. Differently lit.*
+
+**MM:** "It reaches for you one more time, Mordai — weaker, but you're empty. No Endurance means Absorb is your only option."
+
+**Mordai:** "I take it. I don't have a choice."
+
+**MM:** "You take the hit. It lands, but there's almost nothing behind it — you stay standing. Zulnut, Zahna — it's down to 2 Resolve and it's still Easy to Strike. Finish it."
+
+**Zulnut:** "Left joint. One more time."
+
+→ Zulnut rolls **2d6 + Dexterity (3 → +1) + Finesse Practiced (+1)** at Easy difficulty (+1) and gets a **12**. Full success.
+
+**MM:** "Two Resolve. That's the pool. That's the fight."
 
 *The light in its eyes does not go out. It dims. The figure settles — not collapses, settles — to one knee, and then to both, with the deliberate patience of something that has decided to stop.*
 
@@ -533,7 +601,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 ---
 
-**MM:** "The room is quiet. The guardian is kneeling. It is still watching the door — your door, the one you came in through. Mordai, you are at 4 Endurance. Zahna, the glyph is on the floor."
+**MM:** "The room is quiet. The guardian is kneeling. It is still watching the door — your door, the one you came in through. Mordai, you are at 0 Endurance and you're going to feel this tomorrow. Zahna, the glyph is on the floor."
 
 **Zahna:** "I inspect the glyph. Can I refine the patrol boundary now that the fight is over?"
 
@@ -563,7 +631,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 ---
 
-*(The MM had planned for this fight to last three exchanges. It lasted two because Mordai hit the same joint twice and Zahna locked the room. The glyph on the floor will matter later. These things always do.)*
+*(The fight ran the three exchanges the MM planned for, and it cost the party for it: Mordai emptied his Endurance to the last point and Pressed the final blow on fumes, Zulnut carried the last two exchanges because Mordai had nothing left to spend, and the glyph rewrote the room in a way nobody has fully reckoned with yet. That is the shape of a by-the-book Boss fight — a full party will grind down any Resolve pool eventually, but "eventually" is measured in spent resources and complications, not in a clean two-hit finish. The Staggered rider is what made it this fast; without that Easy opening the guardian would have cost them another exchange and more Endurance than they had. The glyph on the floor will matter later. These things always do.)*
 
 ---
 
@@ -576,7 +644,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 2. Declare actions (Strike / Support / Maneuver / Magic / Withdraw)
 3. Resolve actions → roll 2d6 + attribute + skill + difficulty + posture modifier
 4. Declare reactions to incoming actions
-5. Apply conditions from resolved strikes
+5. Apply results — deplete enemy Resolve (2 / 1 / 0), apply any Conditions and riders
 6. End exchange: clear Tier 1 conditions, Withdrawn characters recover 2 Endurance
 ```
 
@@ -584,7 +652,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 | Posture | Offense | Reaction Cost | Special |
 |---|---|---|---|
-| Aggressive | +1 | +1 | — |
+| Aggressive | +1 | +1, first reaction of the exchange only | — |
 | Measured | +0 | +0 | Baseline |
 | Defensive | -1 | -1 | — |
 | Withdrawn | No offense | +0 | Free reactions, recover 2 Endurance at end of exchange |
@@ -594,17 +662,23 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 | Reaction | Cost | Roll | Effect |
 |---|---|---|---|
 | Dodge | 1 Endurance | Dexterity | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
-| Parry | 1 Endurance | Strength + Combat | 10+: deflect and counter (attacker takes T1). 7-9: reduce by one tier. 6-: full hit. |
+| Parry | 1 Endurance | Weapon attribute + Combat | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
 | Absorb | 0 Endurance | No roll | Take the hit at full tier. Always available. |
 | Intercept | 2 Endurance | — | Take a hit meant for an ally. |
 
 ### Strike Outcomes
 
-| Roll | Result |
-|---|---|
-| 10+ | Tier 2 Condition (attacker chooses: Staggered or Cornered) |
-| 7-9 | Tier 1 Condition (attacker chooses: Winded, Off-Balance, or Shaken) |
-| 6- | Consequence for the attacker |
+**Against an enemy (the usual case) — deplete Resolve:**
+
+| Roll | Resolve | Rider (10+ only) |
+|---|---|---|
+| 10+ | −2 | may add one Tier 1 or Tier 2 Condition; a Tier 2 rider makes the enemy **Easy to Strike** until cleared |
+| 7-9 | −1 | — |
+| 6- | 0 | consequence for the attacker |
+
+Enemy at **0 Resolve = defeated**. Mook: removed on any success (7+); armored Mook needs a 10+.
+
+**Against another character (duel / PvP) — apply a Condition:** 10+ = Tier 2 (Staggered or Cornered), 7-9 = Tier 1 (Winded/Off-Balance/Shaken), 6- = consequence for the attacker.
 
 ### Condition Tiers
 
@@ -614,7 +688,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 | **2** | Staggered (-1 offense), Cornered (no Aggressive posture) | Treated |
 | **3** | Broken (out of the fight) | End of scene |
 
-Two Tier 2 conditions = Broken.
+A second Tier 2 condition of the same type = Broken. (Staggered + Cornered coexist.)
 
 ### Enemy Attacks
 
@@ -626,16 +700,30 @@ Two Tier 2 conditions = Broken.
 
 Armor and partial reaction downgrades **do not stack** — apply the greater reduction.
 
-### Armor
+### Armor (your per-scene downgrade budget)
 
-| Armor | Effect |
+| Armor | Softens incoming Conditions |
 |---|---|
-| None | Conditions apply at full tier |
-| Light | Tier 2 becomes Tier 1 |
-| Heavy | Tier 3 (Broken) becomes Tier 2 |
+| None | — |
+| Light | first **2** per scene, one tier each (T2→T1, T1→none) |
+| Heavy | first **4** per scene, one tier each |
+
+Budget resets at **end of scene**, not exchange; two fights in one scene share it. When it's spent, Conditions land at full tier.
 
 ### Endurance
 
 - Base: 4 + Constitution modifier + Endurance skill rank
-- 0 Endurance = Absorb only
+- 0 Endurance = Absorb only (Conditions land at full tier — no extra penalty)
 - Press: spend 1 Endurance before Strike to add a d6 and drop the lowest
+
+### Your Five Numbers On Screen
+
+The app tracks every combat number for you. Where each one lives:
+
+| Number | On screen |
+|---|---|
+| **Endurance** | the Endurance bar in the Combat panel |
+| **Posture** | the Posture badge / "Declare Posture" selector |
+| **Conditions** | the Conditions row beneath your posture |
+| **Sparks** | the Spark pips at the top of the Play tab |
+| **Armor budget** | applied automatically — the action log shows "(downgraded by armor)" each time a point is spent |

@@ -495,13 +495,13 @@ After each major scene transition or act break, the MM calls for a "Spark moment
 
 > **Why nominations work:** Players award each other. This creates positive feedback loops — the table celebrates good play together, not through the MM's judgment alone. It also trains players to pay attention to each other's moments.
 
-#### 2. Graceful Failure (organic, MM-awarded)
+#### 2. Graceful Failure (structured, player-initiated)
 
-When a player rolls 6- and leans into the consequence — doesn't try to minimize it, plays it for story, makes the failure interesting — the MM may award a Spark.
+This one is player-initiated, not MM-awarded — the player, not the MM, decides when a failure is worth claiming. When a player rolls 6- and leans into the consequence — doesn't try to minimize it, plays it for story, makes the failure interesting — *they* may claim a Graceful Fail. The MM confirms.
 
 - **Target:** 1–2 per session across the whole table
-- The digital tool prompts after every 6- result: "Award Spark for graceful failure?"
-- Not every failure earns a Spark. It's specifically for failures the player makes entertaining or narratively rich.
+- The digital tool lets the player claim it directly off their 6- result; the claim broadcasts to the table and the MM confirms with a normal Spark award
+- Not every failure earns a Spark. It's specifically for failures the player makes entertaining or narratively rich — and the MM should almost always confirm, same as an Act Break Nomination.
 
 #### 3. Spark for Weakness (organic, MM-awarded)
 
@@ -531,7 +531,7 @@ Before each session, prepare:
 
 During play:
 - [ ] Call for Spark nominations at each act break
-- [ ] Watch for graceful failures (6- rolls played for story)
+- [ ] Confirm Graceful Fail claims promptly (players claim them off a 6-; you almost always confirm)
 - [ ] Award Sparks for deliberate weakness play
 - [ ] If a player hasn't spent a Spark by the session's midpoint, design a moment that rewards it
 

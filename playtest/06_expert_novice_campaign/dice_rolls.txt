@@ -1,0 +1,101 @@
+Chronological Dice Rolls — Playtest 06 (The Sunken Spire of Aethelgard)
+========================================================================
+
+[Act I: Infiltration]
+1. Sylvia - Lore check (Runes analysis, Standard)
+   - Roll: 2d6 (4, 3) + 2 (Knowledge + Lore Practiced) = 9
+   - Outcome: Partial Success (7-9)
+
+2. Pippa - Finesse check (Pick gate lock, Hard)
+   - Roll: 2d6 (5, 3) + 1 (Dexterity) - 1 (Hard) = 8
+   - Outcome: Partial Success (7-9)
+
+3. Thorne - Attune check (Spiritual eavesdropping, Standard)
+   - Roll: 2d6 (6, 4) + 2 (Spirit + Attune Practiced) = 12
+   - Outcome: Full Success (10+) -> Gain +1 Forward
+
+[Act II: Flooded Scriptorium Combat]
+Exchange 1:
+4. Pippa - Attack (Urchin sentinel, Aggressive)
+   - Roll: 2d6 (4, 4) + 1 (Dexterity) + 1 (Aggressive) = 10
+   - Outcome: Full Success (10+) -> Sentinel 1 destroyed
+
+5. Pippa - Dodge reaction (Sentinel lunging spear, Standard, Aggressive cost penalty)
+   - Roll: 2d6 (5, 3) + 1 (Dexterity) = 9
+   - Outcome: Partial Success (7-9) -> Dodged but fell in water; lost 2 Endurance
+
+6. Alaric - Attack (Sentinel 2, Defensive)
+   - Roll: 2d6 (6, 3) + 1 (Strength) + 1 (Combat Practiced) - 1 (Defensive) = 10
+   - Outcome: Full Success (10+) -> Sentinel 2 destroyed
+
+7. Alaric - Parry reaction (Sentinel 3 strike, Standard, Defensive cost discount)
+   - Roll: 2d6 (4, 5) + 1 (Strength) + 1 (Combat Practiced) = 11
+   - Outcome: Full Success (10+) -> Blocked completely; 0 Endurance cost
+
+8. Sylvia - Inscription spell (Freezing trap path, Standard, Spent 1 Spark)
+   - Roll: 3d6 (6, 5, 2 - keep 6, 5) + 2 (Knowledge + Lore Practiced) = 13
+   - Outcome: Full Success (10+) -> Sentinel 3 frozen & destroyed
+
+9. Thorne - Resonance spell (Shatter spear, Hard, Spent Forward +1)
+   - Roll: 2d6 (2, 3) + 1 (Spirit) + 1 (Attune Practiced) - 1 (Hard) + 1 (Forward) = 7
+   - Outcome: Partial Success (7-9) -> Sentinel off-balance; Thorne took 1 feedback damage
+
+Exchange 2:
+10. Pippa - Attack (Sentinel 4, Standard, Easy target bonus)
+    - Roll: 2d6 (5, 4) + 1 (Dexterity) + 1 (Easy target) = 11
+    - Outcome: Full Success (10+) -> Sentinel 4 destroyed (Combat over)
+
+11. Pippa - Athletics check (Climb path from cold water, Standard, Spent 1 Spark)
+    - Roll: 3d6 (5, 4, 1 - keep 5, 4) + 0 (Con + Athletics) = 9
+    - Outcome: Partial Success (7-9) -> Climbed out but dropped sword
+
+[Act III: Hearth-Core Vault Boss Fight]
+Exchange 1:
+12. Alaric - Avoid Steam Blast (Hard)
+    - Roll: 2d6 (6, 3) - 1 (Hard) = 8
+    - Outcome: Partial Success (7-9) -> Avoided blind, took 1 damage
+
+13. Sylvia - Avoid Steam Blast (Hard)
+    - Roll: 2d6 (5, 4) - 1 (Hard) = 8
+    - Outcome: Partial Success (7-9) -> Avoided blind, took 1 damage
+
+14. Thorne - Avoid Steam Blast (Hard)
+    - Roll: 2d6 (6, 5) - 1 (Hard) = 10
+    - Outcome: Full Success (10+) -> Unharmed
+
+15. Pippa - Avoid Steam Blast (Hard, Spent 1 Spark)
+    - Roll: 3d6 (6, 5, 2 - keep 6, 5) - 1 (Hard) = 10
+    - Outcome: Full Success (10+) -> Unharmed
+
+16. Alaric - Parry reaction (Golem swing, Standard, Defensive cost discount)
+    - Roll: 2d6 (4, 4) + 2 (Strength + Combat) = 10
+    - Outcome: Full Success (10+) -> Blocked completely
+
+17. Alaric - Attack (Defensive)
+    - Roll: 2d6 (5, 3) + 1 (Strength) + 1 (Combat) - 1 (Defensive) = 9
+    - Outcome: Partial Success (7-9) -> Blocked by Golem's Medium Armor (2)
+
+18. Pippa - Attack (Standard)
+    - Roll: 2d6 (6, 3) + 1 (Dexterity) = 10
+    - Outcome: Full Success (10+) -> Hit seam, bypassed 1 armor, dealt 1 damage
+
+19. Sylvia - Inscription spell (Binding glyph, Standard, Spent 1 Spark)
+    - Roll: 3d6 (5, 4, 3 - keep 5, 4) + 2 (Knowledge + Lore) = 11
+    - Outcome: Full Success (10+) -> Golem Staggered
+
+20. Thorne - Resonance spell (Valve jam, Hard, Spent 1 Spark)
+    - Roll: 3d6 (6, 5, 1 - keep 6, 5) + 2 (Spirit + Attune) - 1 (Hard) = 12
+    - Outcome: Full Success (10+) -> Steam Blast disabled
+
+Exchange 2:
+21. Alaric - Intercept reaction (Protect Pippa, Defensive cost discount)
+    - Roll: 2d6 (5, 4) + 2 (Strength + Combat) = 11
+    - Outcome: Full Success (10+) -> Intercepted swing; cost 1 Endurance
+
+22. Pippa - Attack (Precise strike, Standard, Spent 1 Spark)
+    - Roll: 3d6 (6, 6, 4 - keep 6, 6) + 1 (Dexterity) = 13
+    - Outcome: Full Success (10+) -> Critical hit, bypassed armor, dealt 3 damage
+
+23. Sylvia - Inscription spell (Collapse glyph, Standard)
+    - Roll: 2d6 (5, 5) + 2 (Knowledge + Lore) = 12
+    - Outcome: Full Success (10+) -> Golem destroyed

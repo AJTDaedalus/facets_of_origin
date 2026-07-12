@@ -231,27 +231,229 @@ class TestSkillAdvancement:
         body_character.advance_skill("athletics", 3, ruleset)  # novice → practiced
         assert body_character.rank_advances_this_facet_level == initial + 1
 
-    def test_six_advances_trigger_facet_level_up(self, ruleset, valid_attributes):
+    def test_five_advances_trigger_facet_level_up(self, ruleset, valid_attributes):
         char, _ = create_default_character(
             name="Level Test", player_name="P",
             primary_facet="body", attributes=valid_attributes,
             ruleset=ruleset,
         )
-        # Advance 5 different body skills by 3 marks each = 5 rank advances
+        # Advance 4 different body skills by 3 marks each = 4 rank advances
         body_active_skills = [s.id for s in ruleset.skills if s.facet == "body" and s.status == "active"]
-        for sid in body_active_skills[:5]:
+        for sid in body_active_skills[:4]:
             char.advance_skill(sid, 3, ruleset)
-        assert char.facet_level == 0  # not yet — need 6
-        assert char.rank_advances_this_facet_level == 5
+        assert char.facet_level == 0  # not yet — need 5
+        assert char.rank_advances_this_facet_level == 4
 
-        # One more → level 1
-        char.advance_skill(body_active_skills[0], 3, ruleset)  # practiced → expert on first skill
+        # Fifth advance → level 1 (threshold 5)
+        char.advance_skill(body_active_skills[4], 3, ruleset)
         assert char.facet_level == 1
         assert char.rank_advances_this_facet_level == 0
 
     def test_unknown_skill_is_created_on_advance(self, body_character, ruleset):
         body_character.advance_skill("nonexistent_skill", 1, ruleset)
         assert "nonexistent_skill" in body_character.skills
+
+
+# ---------------------------------------------------------------------------
+# Per-Facet level tracking (WS-B / B3 — cross-Facet levels count, D3)
+# ---------------------------------------------------------------------------
+
+def _facet_skills(ruleset, facet):
+    return [s.id for s in ruleset.skills if s.facet == facet and s.status == "active"]
+
+
+def _advance_facet(char, ruleset, facet, advances):
+    """Produce exactly `advances` rank advances in `facet`, one skill maxed at
+    a time (novice→practiced→expert→master = 3 advances per skill)."""
+    mpr = ruleset.advancement.marks_per_rank
+    done = 0
+    for sid in _facet_skills(ruleset, facet):
+        while done < advances and char.skills.get(sid, SkillState(skill_id=sid)).rank != "master":
+            result = char.advance_skill(sid, mpr, ruleset)
+            done += result["rank_advances"]
+            if result["rank_advances"] == 0:
+                break
+    return done
+
+
+class TestPerFacetLevelTracking:
+    def test_cross_facet_advance_increments_that_facets_level(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        _advance_facet(char, ruleset, "mind", 5)  # one mind level at threshold 5
+        assert char.facet_levels.get("mind") == 1
+        assert char.facet_levels.get("body", 0) == 0
+        assert char.facet_level == 0  # primary (body) unchanged
+
+    def test_total_facet_levels_sums_across_facets(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        _advance_facet(char, ruleset, "body", 10)  # 2 body levels
+        _advance_facet(char, ruleset, "mind", 5)   # 1 mind level
+        assert char.facet_level == 2               # primary only
+        assert char.total_facet_levels == 3        # sum across facets
+
+    def test_major_fires_at_three_levels_two_primary_one_cross(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        _advance_facet(char, ruleset, "body", 10)  # levels 1 and 2, no Major yet
+        assert char.total_facet_levels == 2
+        # The advance that lands the third (cross-Facet) level reports the Major.
+        mind = _facet_skills(ruleset, "mind")
+        mpr = ruleset.advancement.marks_per_rank
+        major_seen = False
+        advances = 0
+        for sid in mind:
+            while advances < 5:
+                result = char.advance_skill(sid, mpr, ruleset)
+                advances += result["rank_advances"]
+                major_seen = major_seen or result["major_advancement"]
+                if result["rank_advances"] == 0:
+                    break
+            if advances >= 5:
+                break
+        assert char.total_facet_levels == 3
+        assert major_seen
+
+    def test_boundary_level_one_at_five_advances(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        _advance_facet(char, ruleset, "body", 5)
+        assert char.facet_level == 1
+        assert char.rank_advances_this_facet_level == 0
+
+    def test_boundary_level_two_at_ten_advances(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        _advance_facet(char, ruleset, "body", 10)
+        assert char.facet_level == 2
+
+    def test_boundary_level_three_at_fifteen_advances(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        got = _advance_facet(char, ruleset, "body", 15)
+        assert got == 15  # the full in-Facet ceiling
+        assert char.facet_level == 3
+        assert char.rank_advances_this_facet_level == 0
+
+    def test_technique_pick_granted_per_facet_level(self, ruleset, valid_attributes):
+        """Each Facet level (any Facet) grants exactly one Technique pick (§6.4)."""
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        assert char.technique_picks_available == 0
+        _advance_facet(char, ruleset, "body", 5)   # 1 body level
+        assert char.technique_picks_available == 1
+        _advance_facet(char, ruleset, "body", 5)   # 2nd body level
+        assert char.technique_picks_available == 2
+        _advance_facet(char, ruleset, "mind", 5)   # 1 cross-Facet level also grants a pick
+        assert char.technique_picks_available == 3
+
+    def test_select_technique_spends_a_pick(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="soul",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.technique_picks_available = 1
+        ok, msg = char.select_technique("sense_the_unseen", ruleset)
+        assert ok and msg == "ok"
+        assert "sense_the_unseen" in char.techniques
+        assert char.technique_picks_available == 0
+
+    def test_select_technique_rejects_without_pick(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="soul",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        ok, msg = char.select_technique("sense_the_unseen", ruleset)
+        assert not ok
+        assert "pick" in msg.lower()
+        assert "sense_the_unseen" not in char.techniques
+
+    def test_select_technique_rejects_unmet_prerequisite(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="soul",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.technique_picks_available = 1
+        ok, msg = char.select_technique("second_domain", ruleset)  # needs a T1→T2 chain
+        assert not ok
+        assert "the_language_beneath_language" in msg
+        assert char.technique_picks_available == 1  # pick not consumed
+
+    def test_select_technique_magic_granting_activates_domain(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="soul",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.technique_picks_available = 1
+        ok, _ = char.select_technique("spiritual_domain", ruleset, choice="resonance")
+        assert ok
+        assert char.magic_technique_active is True
+        assert char.magic_domain == "resonance"
+
+    def test_technique_picks_survive_fof_roundtrip(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.technique_picks_available = 2
+        fof = char.to_fof([{"id": "base", "version": "0.1.0"}], "s" * 36)
+        restored = Character.from_fof(fof, ruleset)
+        assert restored.technique_picks_available == 2
+
+    def test_facet_level_property_tracks_primary(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="mind",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.facet_levels = {"mind": 2, "body": 1}
+        assert char.facet_level == 2          # primary is mind
+        assert char.total_facet_levels == 3
+
+    def test_legacy_flat_fof_roundtrip_preserves_facet_level(self, ruleset):
+        """An old .fof carrying flat facet_level survives a from_fof load."""
+        fof = {
+            "type": "character",
+            "character": {
+                "name": "Old", "player_name": "P", "primary_facet": "body",
+                "attributes": {"strength": 3, "dexterity": 3, "constitution": 2,
+                               "intelligence": 2, "wisdom": 2, "knowledge": 2,
+                               "spirit": 1, "luck": 2, "charisma": 1},
+                "skills": {}, "facet_level": 2, "rank_advances_this_facet_level": 3,
+            },
+        }
+        char = Character.from_fof(fof, ruleset)
+        assert char.facet_level == 2
+        assert char.facet_levels == {"body": 2}
+        assert char.rank_advances_this_facet_level == 3
+
+    def test_new_fof_roundtrip_preserves_cross_facet_levels(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="RT", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.facet_levels = {"body": 2, "mind": 1}
+        char.rank_advances_by_facet = {"body": 0, "mind": 2}
+        fof = char.to_fof([{"id": "base", "version": "0.1.0"}], "s" * 36)
+        restored = Character.from_fof(fof, ruleset)
+        assert restored.facet_levels == {"body": 2, "mind": 1}
+        assert restored.total_facet_levels == 3
+        assert restored.facet_level == 2
+        assert restored.rank_advances_by_facet.get("mind") == 2
 
 
 # ---------------------------------------------------------------------------
@@ -372,13 +574,16 @@ class TestAdvanceSkillEdgeCases:
         assert body_character.skills["athletics"].rank == "master"
         assert result["rank_advances"] == 0
 
-    def test_secondary_facet_advance_does_not_count_toward_level(self, body_character, ruleset):
-        """Skills outside primary facet don't advance facet level."""
+    def test_secondary_facet_advance_credits_its_own_facet(self, body_character, ruleset):
+        """A cross-Facet advance leaves the primary facet_level alone but banks
+        progress on the skill's own Facet (D3 — cross-Facet levels count)."""
         # investigate is a mind skill; body_character's primary is body
         initial_level = body_character.facet_level
         body_character.advance_skill("investigate", 3, ruleset)
-        # Facet level should NOT increase (investigate is mind, not body)
+        # Primary (body) facet level is unchanged...
         assert body_character.facet_level == initial_level
+        # ...but the advance is credited to the mind track, not discarded.
+        assert body_character.rank_advances_by_facet.get("mind") == 1
 
 
 # ---------------------------------------------------------------------------
