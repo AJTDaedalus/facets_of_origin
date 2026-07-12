@@ -582,10 +582,9 @@ def create_default_character(
             career_advances += 1
 
         # Secondary Skill → Novice with 1 mark.
-        # Some backgrounds (Guild Apprentice, Hedge Scholar) replace the
-        # secondary skill with a magic domain when one is chosen.  Others
-        # (Temple Acolyte) grant both.  The flag domain_replaces_secondary
-        # controls which behaviour applies.
+        # Magic-granting Backgrounds replace the secondary skill with the
+        # domain origin when a domain is actually chosen (PHB II.5); without
+        # a domain they grant the secondary skill like any other Background.
         skip_secondary = bg.domain_replaces_secondary and magic_domain
         if bg.secondary_skill and not skip_secondary:
             if bg.secondary_skill in skills:
