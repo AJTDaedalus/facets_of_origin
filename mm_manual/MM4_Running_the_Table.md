@@ -2,7 +2,7 @@
 
 ## The Mirror Master Philosophy
 
-You are not the author of the story. You are not the antagonist. You are not even the narrator, really — not in the way that word usually implies, with its suggestion of someone who already knows what happens next.
+You are not the author of the story, and you are not the antagonist. You are not even the narrator, really — not in the way that word usually implies, with its suggestion of someone who already knows what happens next.
 
 You are the world, responding to protagonists.
 
@@ -190,7 +190,7 @@ The party is cornered in a narrow alley. Two Harbor Thugs are blocking the exit,
 
 **MM:** "Standard. Roll it."
 
-> Zahna rolls **2d6 + Intelligence (3 -> +1)** and gets an **11**. Full success.
+> Zahna rolls **2d6 + Intelligence (3 → +1)** and gets an **11**. Full success.
 
 **MM:** "The lock is old. The pin mechanism is a simple two-tumbler design — crude, but the corrosion has essentially welded it in place. Brute force would work. So would something thin and precise in the keyhole."
 
@@ -200,7 +200,7 @@ The party is cornered in a narrow alley. Two Harbor Thugs are blocking the exit,
 
 **MM:** "Standard. Though the Sergeant is getting closer — this is about speed as much as finesse."
 
-> Zulnut rolls **2d6 + Dexterity (3 -> +1)** and gets a **9**. Partial success.
+> Zulnut rolls **2d6 + Dexterity (3 → +1) + Finesse Practiced (+1)** and gets a **9**. Partial success.
 
 **MM:** "The lock pops — but it takes a second longer than you wanted. The Sergeant has halved the distance and is calling for you to stop."
 
@@ -300,7 +300,7 @@ Everyone makes these. They are not failures — they are the learning curve.
 
 Every experienced MM has a collection of things they stole from other games, books, films, and conversations. This is not a character flaw. It is the job.
 
-Steal situations, not stories. You do not need the plot of a novel — you need the premise of its most interesting chapter. You do not need a film's three-act structure — you need the scene where the characters are trapped in a room with a problem they cannot punch their way out of.
+Steal situations, not stories. You do not need the plot of a novel or a film's three-act structure — you need the premise of its most interesting chapter, the scene where the characters are trapped in a room with a problem they cannot punch their way out of.
 
 Keep a note somewhere — a phone app, a scrap of paper, a text file — for moments that give you ideas. An interesting historical fact. A building you walked past. A line of dialogue from a show. A question someone asked you. Most of these will never become anything. A few will become the best sessions you ever run.
 
@@ -318,7 +318,7 @@ The MM who runs their tenth session is meaningfully better than the MM who ran t
 
 You develop these instincts the same way you develop any instinct — by paying attention. Every session is data. Every player reaction is feedback. Every moment that landed, and every moment that didn't, teaches you something about how stories work and how people engage with them.
 
-There is no destination. There is no point at which you have "figured it out." The MMs who have been doing this for decades will tell you the same thing: they are still learning. They are still surprised. They still have bad sessions.
+There is no point at which you have "figured it out." The MMs who have been doing this for decades will tell you the same thing: they are still learning, still surprised, and they still have bad sessions.
 
 That is the whole point. If you could master it completely, it would stop being interesting. The fact that every table is different, every group dynamic is new, every campaign is a fresh experiment — that is what makes this worth doing for years.
 

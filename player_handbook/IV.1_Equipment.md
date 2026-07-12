@@ -18,9 +18,9 @@ Weapons determine which attribute you use for a Strike. Choose the weapon that f
 | **Ranged** | Dexterity | Longbow, crossbow, sling, thrown weapons |
 | **Unarmed** | Strength or Dexterity (player's choice) | Fists, grappling, martial arts, headbutts |
 
-All weapons deal the same mechanical effect: a successful Strike applies a Condition of the appropriate tier. There are no damage dice, no weapon damage tables, no +1 swords in the base rules. The fiction determines what the hit looks like; the tier system determines the mechanical consequence.
+All weapons deal the same mechanical effect: a successful Strike depletes an enemy's Resolve — 2 on a full success, 1 on a partial — or, against another character, applies a Condition of the appropriate tier (Chapter III.3). There are no damage dice, no weapon damage tables, no +1 swords in the base rules. The fiction determines what the hit looks like; the outcome tiers determine the mechanical consequence.
 
-> **Why no damage numbers?** Because tracking variable damage per weapon creates complexity without meaningful choice in a Condition-based system. A dagger and a greatsword both apply Staggered on a 10+ — the fiction of *how* they do it is different, and that difference matters narratively, not arithmetically.
+> **Why no damage numbers?** Because tracking variable damage per weapon creates complexity without meaningful choice. A dagger and a greatsword take the same bite out of an enemy's Resolve on a 10+ — the fiction of *how* they do it is different, and that difference matters narratively, not arithmetically.
 
 ### Weapon Specialization
 
@@ -32,13 +32,15 @@ Characters with relevant Techniques (such as Weapon Mastery from the Body Facet 
 
 Armor reduces the severity of incoming Conditions. It does not add to your rolls or create a separate defense value.
 
+On your character sheet, armor is a **downgrade budget**: a finite number of incoming Conditions it can soften per scene, each by one tier. Full rules — including how the budget interacts with reactions — are in Chapter III.3.
+
 | Armor | Effect | Fictional Weight |
 |---|---|---|
 | **None** | Conditions apply at full tier | Unencumbered, silent, mobile |
-| **Light** | Tier 2 Conditions become Tier 1 | Leather, padded, chain shirt — some noise, some weight |
-| **Heavy** | Tier 3 (Broken) becomes Tier 2 | Plate, full chain, heavy brigandine — loud, hot, imposing |
+| **Light** | First **2** incoming Conditions per scene are downgraded one tier (Tier 2 becomes Tier 1; Tier 1 is negated) | Leather, padded, chain shirt — some noise, some weight |
+| **Heavy** | First **4** incoming Conditions per scene are downgraded one tier | Plate, full chain, heavy brigandine — loud, hot, imposing |
 
-Light armor softens serious blows into glancing ones. Heavy armor keeps you standing when an unarmored character would be Broken — but you are still Staggered and hurting.
+The budget is spent across the whole scene and refills when the scene ends — two fights in one scene draw on the same budget. When it runs out, Conditions land at full tier. Protection is real, but a long enough fight spends through it.
 
 ### Armor in the Fiction
 

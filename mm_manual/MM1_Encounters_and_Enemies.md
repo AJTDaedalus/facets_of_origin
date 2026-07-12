@@ -60,12 +60,13 @@ TR: 1
 Archive Guardian
 Tier: Boss
 Resolve: 8 (effective 10 with heavy armor)
-Attack: +3 (Strength +2, Combat Expert +2) — strikes with iron weight, not technique
-Defense: +1 (Dexterity −1, Combat Practiced +1... partially damaged)
+Attack: +3 (Strength +2, Combat Expert +2, −1 from fifteen years of wear) — iron weight, not technique
+Defense: +1 (Dexterity −1, Combat Expert +2)
 Armor: Heavy
 Techniques: phase_change, tier1_immunity
 Special: Phase change — when Resolve drops to 2 or below, enters Reduced Mode
-         (Attack drops to +1, but ignores Tier 1 Conditions entirely — it does not feel them)
+         (Attack drops to +1 and its blows land as Tier 1, but it ignores
+         Tier 1 Conditions entirely — it does not feel them)
 TR: 17
 ```
 
@@ -231,7 +232,7 @@ Sometimes an encounter is designed to be asymmetric — the party cannot win by 
 - Give the party something to exploit (a structural weakness, a limitation in the enemy's programming, a negotiation opening)
 - Make the straight fight winnable but costly — it should be a real option, just an expensive one
 
-> If a player finds a clever lateral solution that bypasses most of the TR, that is not them breaking the encounter. That is the encounter working correctly. The TR budget is a calibration tool, not a ceiling.
+> If a player finds a clever lateral solution that bypasses most of the TR, they have not broken the encounter — that is the encounter working correctly. The TR budget is a calibration tool, not a ceiling.
 
 ---
 
@@ -273,8 +274,8 @@ Guardian's:
   phases:
     - resolve_threshold: 2
       description: >
-        Reduced Mode. Its attack drops, but it stops registering Tier 1
-        Conditions entirely.
+        Reduced Mode. Its attack drops — blows land as Tier 1 — but it
+        stops registering Tier 1 Conditions entirely.
 ```
 
 For Mooks, the format simplifies further — a Mook has no `resolve` field at all:
@@ -372,7 +373,7 @@ A quick framework for designing balanced encounters without a calculator.
 
 ### Step 1: What's the story?
 
-Every encounter exists to serve the narrative. Ask: what does this fight (or potential fight) accomplish? If the answer is "I need a fight here," redesign the scene. Good fights create decisions. Great fights create stories.
+Every encounter exists to serve the narrative. Ask: what does this fight (or potential fight) accomplish? If the answer is "I need a fight here," redesign the scene. A good fight creates decisions — and the best ones send the table home with a story.
 
 ### Step 2: Pick a difficulty feel.
 

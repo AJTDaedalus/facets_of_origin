@@ -4,7 +4,7 @@
 
 A Facet is the broad shape of who your character is becoming through play.
 
-It is not a class you pick from a menu. It is not a role you are locked into. It is the direction your character naturally grows — the part of themselves they keep reaching for when things get hard. A Facet is declared at character creation, but it is confirmed by what you actually do over the course of a campaign.
+A Facet is not a class you pick from a menu, and it never locks you into a role. It is the direction your character naturally grows — the part of themselves they keep reaching for when things get hard. You declare a Facet at character creation, but what confirms it is what you actually do over the course of a campaign.
 
 There are three Facets, mirroring the three Major Attributes:
 
@@ -82,7 +82,7 @@ A skill rank advance is any time a skill in that Facet moves from one rank to th
 
 With 5 skills and 3 possible advances each, a fully developed Facet produces 15 total advances — exactly enough to reach Facet level 1 (at 5 advances), Facet level 2 (at 10), and Facet level 3 (at 15). Reaching Facet level 3 means you have mastered every skill your Facet has to offer. Facet level 4 and beyond require cross-training into other Facets.
 
-> Facet level 3 is the top of a single Facet — you've taken it as far as it goes. Level 4 and beyond is where breadth begins. That isn't a ceiling on specialization; it's a reflection of how mastery actually works. At the highest levels, experts grow by absorbing adjacent disciplines: the supreme warrior who studies philosophy, the master mage who learns a craftsperson's patience.
+> Facet level 3 is the top of a single Facet — you've taken it as far as it goes. Level 4 and beyond is where breadth begins, which is how mastery tends to work anyway: at the highest levels, experts grow by absorbing adjacent disciplines. The supreme warrior who studies philosophy. The master mage who learns a craftsperson's patience.
 
 > **Example:** Zulnut advances Combat to Practiced (1 advance), Stealth to Practiced (2), Athletics to Practiced (3), Stealth to Expert (4), Finesse to Practiced (5). *Facet level 1.* Several sessions later, Combat to Expert (6), Athletics to Expert (7), Endurance to Practiced (8), Finesse to Expert (9), Endurance to Expert (10). *Facet level 2.*
 
@@ -121,7 +121,7 @@ Choose one weapon type (blades, blunt, polearms, unarmed). Rolls using that weap
 **Tier 2** *(requires one Might Tier 1)*
 
 **Overwhelming Force**
-When you succeed on a Combat roll against a single target by 3 or more above the threshold, the target is staggered — they act last in the next exchange and cannot take reactions until they do.
+Once per scene, when your Strike scores a full success (10+) against a single target, you may drive the blow home: the target takes no offensive action in the next exchange. It is reeling, regrouping, or picking itself up off the ground while the fight moves on without it.
 
 **Lift the World**
 Once per scene, you may attempt a feat of Strength that would normally be impossible without tools or assistance — holding up a collapsing ceiling, halting a moving cart, forcing open a sealed vault. Roll Athletics at Hard difficulty. On a 10+, you succeed. On a 7–9, you succeed at a cost.

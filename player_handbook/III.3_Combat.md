@@ -6,11 +6,11 @@ Most TTRPG combat systems hand you a turn. You wait. You act. You wait again. Th
 
 Combat in Facets of Origin is structured around **exchanges** — dramatic beats where everyone acts and reacts simultaneously. There is no initiative order, no waiting for your moment while someone else's moment stretches on. Every participant in a fight is present every exchange: choosing a posture, taking action, responding to incoming threats. The whole thing resolves as a single beat of fiction, then the MM narrates what actually happened.
 
-The central resource in combat is **Endurance** — your physical stamina, the reserve of effort that lets you press hard or react quickly when it matters. Endurance is not hit points. It is not how much damage you can absorb. It is how much you have in the tank. A character with no Endurance left is not bleeding out — they are exhausted, overextended, outmaneuvered. They can still fight. They are simply fighting on grit alone.
+The central resource in combat is **Endurance** — your physical stamina, the reserve of effort that lets you press hard or react quickly when it matters. Endurance is not hit points; it is how much you have in the tank. A character with no Endurance left is not bleeding out — they are exhausted, overextended, outmaneuvered. They can still fight. They are just fighting on grit alone.
 
 **Conditions** replace hit points for player characters as the measure of how a fight is going. They are named states with immediate mechanical and fictional weight: you are not "at 14 HP," you are Staggered — your offensive rolls suffer. Conditions are concrete, narratively rich, and temporary by design. They resolve when the fiction resolves them, not on a countdown.
 
-Enemies are measured differently. An antagonist's durability is a single pool called **Resolve**, and your Strikes deplete it directly — no condition track to manage, no hit points to whittle. This asymmetry is deliberate: player characters have stories, and Conditions are how a story-shaped hero takes damage; enemies have stat blocks, and Resolve is how a stat block runs down. Both models live in this chapter, each explained where it applies.
+Enemies are measured differently. An antagonist's durability is a single pool called **Resolve**, and your Strikes deplete it directly — no condition track to manage, no hit points to whittle. The asymmetry is by design. Player characters have stories, so their damage is made of story: Conditions with names and weight. Enemies have stat blocks, so their damage is a number running down. Both models live in this chapter, each explained where it applies.
 
 The goal is a combat system where every participant is engaged every moment, where the choices feel real, where a mage and a warrior and a nimble rogue all have meaningful roles — and where the fiction of the fight is always more interesting than the arithmetic.
 
@@ -50,7 +50,7 @@ Running on empty is still dangerous — every incoming Condition now lands in fu
 
 **Withdrawn posture** restores 2 Endurance at the end of the exchange. This requires giving up all offensive action for that beat — you are catching your breath, finding your footing, creating space between yourself and the pressure.
 
-> **MM Note — Withdrawn is a tempo move, not a permanent position.** Make it tactically costly: an aware opponent will advance, apply pressure elsewhere, or use the exchange to regroup their own forces. Withdrawn doesn't mean safe — the MM should make standing still feel like a choice, not a solution. A fighter who Withdraws three exchanges in a row is buying time, not winning the fight; make sure the fiction reflects that.
+> **MM Note — Withdrawn is a tempo move, not a permanent position.** Make it tactically costly: an aware opponent will advance, apply pressure elsewhere, or use the exchange to regroup their own forces. A fighter who Withdraws three exchanges in a row is buying time, not winning the fight, and the fiction should say so.
 
 ---
 
@@ -204,7 +204,7 @@ Outcome tiers are the same as Dodge, flavored as deflection rather than avoidanc
 
 **Cost:** 0 Endurance
 
-You do not react. You take the hit, accept the Condition, and remain composed. Absorb is the reaction for when Endurance is gone or better spent elsewhere. It is not failure; it is calculation.
+You do not react. You take the hit, accept the Condition, and remain composed. Absorb is the reaction for when Endurance is gone or better spent elsewhere — a calculation, not a failure.
 
 ---
 
@@ -306,7 +306,7 @@ The MM narrates Mook combat efficiently. Mordai cutting through two guards on hi
 
 ### Named NPCs
 
-**Named NPCs and significant antagonists** use the full combat structure: Resolve, Posture, reactions, the works. They are opponents whose defeat means something and whose capabilities should be genuinely felt.
+**Named NPCs and significant antagonists** use the full combat structure: Resolve, Posture, reactions, the works. They are opponents whose defeat means something and whose capabilities should be felt.
 
 A Named NPC is defined by:
 - **Resolve** — the durability pool your Strikes deplete. A Named NPC starts with a Resolve of 3 or 4. Each Strike depletes it (2 on a full success, 1 on a partial); at 0, the NPC is defeated. There is no Condition track to grind down — Resolve *is* the fight's clock.
@@ -316,13 +316,13 @@ A Named NPC is defined by:
 
 A Named NPC can carry **rider Conditions** hung on it by a full-success Strike — Staggered or Cornered, with their usual effects (and a Tier 2 rider makes it Easy to Strike) — but riders never accumulate into Broken. An enemy leaves the fight when its Resolve is gone, not when its Conditions stack.
 
-Named NPCs do not need a full character sheet. A veteran soldier might be: Resolve 4, Strength +2, Combat Expert (+1), Light armor. That is enough to run the full exchange structure against a party.
+Named NPCs do not need a full character sheet. A veteran soldier might be: Resolve 4, Strength +2, Combat Practiced (+1), Light armor. That is enough to run the full exchange structure against a party.
 
 ### Bosses and Climactic Antagonists
 
 **Bosses** — the antagonists at the center of major conflicts — carry a much larger Resolve pool and often a **phase change**: a narrative trigger keyed to a Resolve threshold that shifts the nature of the fight when the pool is depleted past that point. A creature that changes when its Resolve drops to 2, revealing a second form or a new way of fighting, is following this structure. The threshold is part of the stat block, and crossing it is a story beat, not just a number ticking down.
 
-Boss construction is covered in the Mirror Master's chapter. For now: a climactic antagonist should not fall to the same short sequence that ends a Mook. A lone Boss facing a full party is not meant to be an even fight on its own — a party concentrating its Strikes will grind through any Resolve pool eventually. A Boss earns its danger from the encounter around it (allies, Techniques, the terrain, a problem that cannot be solved by Striking) and from the *cost* of the fight, not from the raw size of its pool. Build them to last, build the encounter to bite, and build the moment of their defeat to matter.
+Boss construction is covered in the Mirror Master's chapter. For now: a climactic antagonist should not fall to the same short sequence that ends a Mook. A lone Boss facing a full party is not meant to be an even fight on its own — a party concentrating its Strikes will grind through any Resolve pool eventually. A Boss earns its danger from the encounter around it (allies, Techniques, the terrain, a problem that cannot be solved by Striking) and from the *cost* of the fight, not from the raw size of its pool. Build the Boss to last, build the encounter to bite — and make sure the moment of its defeat is worth what the party paid for it.
 
 ---
 
@@ -360,6 +360,8 @@ Armor downgrades and successful reaction downgrades (Dodge 7-9, Parry 7-9) **do 
 
 A character in light armor who rolls a partial Parry against a Named NPC's attack has two sources of reduction: their armor's downgrade budget (Tier 2 → Tier 1) and the partial reaction (downgrade one tier). Both reduce by one tier — they do not combine to eliminate the condition entirely. The result is **Tier 1**.
 
+When the reaction already provides the reduction, the armor charge is **not spent**. A downgrade that softens nothing costs nothing from the budget — armor charges are consumed only when armor is the source of the reduction actually applied.
+
 > **Why they don't stack:** Armor represents physical protection; a partial reaction represents imperfect avoidance. If both reduced independently, light armor plus any partial reaction would negate all Named NPC attacks. That makes defense too cheap and removes the decision tension from reaction choices.
 
 > **When you avoid entirely:** A full reaction success (10+ on Dodge or Parry) avoids the attack completely — no condition is applied, and armor is irrelevant. Armor only matters when you are hit.
@@ -384,7 +386,7 @@ Magical effects in combat follow the same **Domain + Intent + Scope** framework 
 
 A character whose primary development is in Mind or Soul is not helpless in combat. They are playing a different game in the same space — one that is often more decisive than trading Strike for Strike.
 
-**Insight (Wisdom):** Read the opposition's likely Posture before it is revealed. A successful Insight roll at the start of an exchange gives you information — their body language, their positioning, the tension in their stance. That information is genuinely useful when Posture is declared blind.
+**Insight (Wisdom):** Read the opposition's likely Posture before it is revealed. A successful Insight roll at the start of an exchange gives you information — their body language, their positioning, the tension in their stance. That information matters when Posture is declared blind.
 
 **Attune (Spirit):** Channel your domain's force as a direct Strike. Spirit is the roll for intuitive magical attacks. Domain + Intent + Scope sets the difficulty; the Condition tier follows the Strike outcome table.
 
@@ -427,7 +429,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **MM:** "Hard — fifteen-year-old notes about a sealed room, not a standard catalog entry. Roll it."
 
-→ Zahna rolls **2d6 + Knowledge (3 → +1)** against Hard difficulty (net +0) and gets a **7**. Partial success.
+→ Zahna rolls **2d6 + Knowledge (3 → +1) + Lore Practiced (+1)** against Hard difficulty (net +1) and gets a **7**. Partial success.
 
 **MM:** "It's a Constructed guardian — you recognize the joint configuration from the Artificers' Guild technical records, the series that was commissioned by the city before the Guild dissolved. They were designed to hold a position. Not to pursue. But the one thing you couldn't get from those records is whether it can tell the difference between an authorized visitor and a not-authorized one."
 
@@ -457,7 +459,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **MM:** "Standard difficulty, but Weapon Mastery makes this one step easier, so Easy. Roll Combat."
 
-→ Mordai rolls **2d6 + Strength (3 → +1) + Combat Practiced (+1)** against Easy difficulty (+1) and gets a **12**. Full success.
+→ Mordai rolls **2d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** against Easy difficulty (+1) and gets a **12**. Full success.
 
 **MM:** "Full success — that's 2 Resolve off. And because you rolled a 10 or better, you can hang a Condition on it as a rider, on top of the damage. Want one?"
 
@@ -511,7 +513,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 (The MM stops. This is either extremely clever or the kind of thing that escalates a fight in an interesting direction. Probably both.)
 
-**MM:** "I love this. Hard — not because the magic is complicated, but because you're writing this during an active fight with thirty seconds of prep time. This is control, not damage — it won't touch its Resolve, but if it lands it changes the shape of the room. Roll Knowledge."
+**MM:** "I love this. Your domain says Easy — but Inscription is slow craft. The preparation is part of the working, and you're compressing an hour of careful encoding into thirty seconds. That specific pressure makes it Hard. This is control, not damage — it won't touch its Resolve, but if it lands it changes the shape of the room. Roll Knowledge."
 
 → Zahna rolls **2d6 + Knowledge (3 → +1)** against Hard difficulty (net +0) and gets an **8**. Partial success.
 
@@ -537,7 +539,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **MM:** "The guardian is Measured. It is learning you. Mordai — left joint. Easy from the Staggered rider, and you've got Zulnut's die. Roll Combat."
 
-→ Mordai spends Zulnut's Support: **3d6 + Strength (3 → +1) + Combat Practiced (+1)** at Easy difficulty (+1), drop the lowest, and gets a **13**. Full success.
+→ Mordai spends Zulnut's Support: **3d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** at Easy difficulty (+1), drop the lowest, and gets a **13**. Full success.
 
 **MM:** "The left joint goes the way the right one went, but worse. That's another 2 Resolve — it's at **6**. Staggered's already on it, so no new rider needed; the seam just widens."
 
@@ -577,7 +579,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Mordai:** "Press. I put everything into it."
 
-→ Mordai spends his last Endurance to Press: **3d6 + Strength (3 → +1) + Combat Practiced (+1)** at Easy difficulty (+1), drop the lowest, and gets an **11**. Full success. Mordai is now at **0 Endurance**.
+→ Mordai spends his last Endurance to Press: **3d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** at Easy difficulty (+1), drop the lowest, and gets an **11**. Full success. Mordai is now at **0 Endurance**.
 
 **MM:** "Two more Resolve — that takes it to **2**. And 2 is a threshold." *The MM checks the stat block.* "The guardian changes. Its next blow won't have the weight the others did — but something else happens: it stops reacting to small hurts entirely. It's entered **Reduced Mode**. The subsystem that was registering minor damage has shut down. It is running on something else now, and none of you know what."
 
@@ -587,7 +589,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Mordai:** "I take it. I don't have a choice."
 
-**MM:** "You take the hit. It lands, but there's almost nothing behind it — you stay standing. Zulnut, Zahna — it's down to 2 Resolve and it's still Easy to Strike. Finish it."
+**MM:** "You take the hit. In Reduced Mode its blows land at Tier 1 — you're **Winded**, −1 on your next roll, and the exchange is nearly over anyway. You stay standing. Zulnut, Zahna — it's down to 2 Resolve and it's still Easy to Strike. Finish it."
 
 **Zulnut:** "Left joint. One more time."
 
@@ -655,7 +657,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 | Aggressive | +1 | +1, first reaction of the exchange only | — |
 | Measured | +0 | +0 | Baseline |
 | Defensive | -1 | -1 | — |
-| Withdrawn | No offense | +0 | Free reactions, recover 2 Endurance at end of exchange |
+| Withdrawn | No offense | Free (0) | Recover 2 Endurance at end of exchange |
 
 ### Reactions (1 per incoming action)
 

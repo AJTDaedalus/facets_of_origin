@@ -4,11 +4,9 @@
 
 Magic is not a menu. There are no spells to choose from, no slots to manage, no list of prepared effects to consult at the table. When you use magic in Facets of Origin, you do three things: you name your territory, you describe what you want to happen, and you roll. The dice tell you how well it went. The story tells you what it looked like.
 
-This is deliberate. Magic should be the moment the table leans forward, not the moment someone reaches for a rulebook. A mage is defined by what their domain covers and how they use it creatively — not by which effects they've unlocked on a chart.
+Magic should be the moment the table leans forward, not the moment someone reaches for a rulebook. A mage is defined by what their domain covers and how they use it creatively, not by which effects they've unlocked on a chart.
 
-A player with the Fire domain can light a candle, cook food without a fire, drain the heat from a room until breath fogs and fingers stiffen, or hurl a collapsing tower of flame at a creature twice their size. All of that is fire. The question is not "do I have this spell?" The question is "what do I want my fire to do, and how ambitious am I feeling?"
-
-That question is yours to answer.
+A player with the Fire domain can light a candle, cook food without a fire, drain the heat from a room until breath fogs and fingers stiffen, or hurl a collapsing tower of flame at a creature twice their size. All of that is fire. The question is never "do I have this spell?" It is "what do I want my fire to do, and how ambitious am I feeling?"
 
 ---
 
@@ -36,7 +34,7 @@ Not "I cast a fire attack" — that is nothing. "I want to pull the heat out of 
 
 The player describes the intent. The dice determine how cleanly it resolves. If the roll is a 10+, the effect works as described. If it is a 7–9, something about the intent goes sideways — it works, but not entirely, and there is a cost. If it is a 6−, something goes wrong, and the story moves forward from there.
 
-The intent matters because it anchors the outcome to something real. A vague intent produces a vague result. A precise intent produces a precise result — or a precisely interesting failure.
+The intent matters because it anchors the outcome to something real. Vague intent gets you a vague result. Precise intent gets you a precise one — or at least a precisely interesting failure.
 
 ---
 
@@ -121,7 +119,7 @@ The same three outcome tiers from the core resolution system apply to every magi
 
 The complication is the MM's call, and it should move the story forward, not simply punish the player.
 
-**6− — Something goes wrong.** The magic misfires, is insufficient, or draws something unwanted. A 6− is not the end — it is a development. Maybe the fire turns inward. Maybe the shadow coalesces around the wrong thing. Maybe the magic works, but the price arrives before you expected it. The story always moves forward.
+**6− — Something goes wrong.** The magic misfires, is insufficient, or draws something unwanted. A 6− is a development, never a dead end. Maybe the fire turns inward. Maybe the shadow coalesces around the wrong thing. Maybe the magic works, but the price arrives before you expected it. The story always moves forward.
 
 > **Sidebar: When Magic Goes Wrong (6- Templates)**
 >
@@ -191,7 +189,7 @@ All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domai
 
 ### Soul Domains
 
-| Domain | Type | Key scope |
+| Domain | Type | Territory |
 |---|---|---|
 | Fire | Focused | Heat, flame, and light produced by fire |
 | Shadow | Focused | Darkness, absence of light, physical cold |
@@ -208,7 +206,7 @@ All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domai
 
 ### Mind Domains
 
-| Domain | Type | Key scope |
+| Domain | Type | Territory |
 |---|---|---|
 | Illusion | Standard | False sensory experience: images, sounds, smells |
 | Warding | Standard | Protective limits inscribed into space or objects |
@@ -239,9 +237,9 @@ When you choose your domain, take a moment to answer these questions — even br
 - *What is one thing your domain cannot do that you wish it could?*
 - *Who else knows about your domain, and how do they feel about it?*
 
-These are not mechanics. They are the fiction your mechanics live in. The MM will use them. So will you.
+None of this is mechanics. It is the fiction your mechanics live in, and both you and the MM will lean on it constantly.
 
-Soul Facet and Mind Facet Tier 1 Techniques each include domain selection as one available option, choosing from that Facet's domain list. Characters who do not take a magic-granting Technique at Tier 1 can return to it at later Tier 1 unlocks. Cross-Facet characters — a Body Facet character who wants magical capability, for instance — can access these Techniques but pay the standard cross-Facet advancement cost. Prismatic domains require a Tier 3 Technique in the appropriate Facet and are never available as a starting domain.
+Soul Facet and Mind Facet Tier 1 Techniques each include domain selection as one available option, choosing from that Facet's domain list. Characters who do not take a magic-granting Technique at Tier 1 can return to it at later Tier 1 unlocks. Cross-Facet characters — a Body Facet character who wants magical capability, for instance — can access these Techniques but pay the standard cross-Facet advancement cost. Prismatic domains require the **Ascendant Domain** Technique (Tier 3, in each Facet's tree) and are never available as a starting domain.
 
 ---
 
@@ -269,7 +267,7 @@ The party, having acquired a key that may or may not open the lower archives of 
 
 **MM:** "Standard."
 
-→ Zahna rolls **2d6 + Knowledge (3 → +1)** at Standard difficulty and gets a **10**. Full success.
+→ Zahna rolls **2d6 + Knowledge (3 → +1) + Lore Practiced (+1)** at Standard difficulty and gets a **10**. Full success.
 
 **MM:** "It is not a ward. It is Inscription — a glyph on the inner lock mechanism. Someone encoded a locking instruction into the lock itself. The trigger condition is... you cannot tell exactly, but the glyph is active, which means whatever was supposed to keep it locked is still happening."
 

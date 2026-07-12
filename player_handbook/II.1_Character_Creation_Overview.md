@@ -17,7 +17,7 @@ The sheet has six sections:
 | **Background** | Your character's title and origin, your Starting Skill (Practiced), your Secondary Skill (Novice with 1 mark), and your Specialty |
 | **Skills** | All 15 skills across the three Facets — current rank (Novice/Practiced/Expert/Master) and marks toward the next rank |
 | **Techniques** | The specific abilities you have unlocked from the Facet Technique trees (any tree whose prerequisites you meet), plus any choices made at unlock |
-| **Session Resources** | Your current Spark count and Session Skill Points remaining to spend at session end |
+| **Session Resources** | Your current Spark count and the skill points you receive to spend at each session's end |
 
 ---
 
@@ -47,7 +47,7 @@ Before the first session, it is worth the table asking a few shared questions:
 - Are there themes the table wants to explore, or themes to avoid?
 - How do these characters know each other, or how do they meet?
 
-These are not logistics. They are the beginning of the collaborative worldbuilding that makes Facets of Origin work. The rules exist to serve the story you build together. The story does not exist to exercise the rules.
+These are not logistics. They are the beginning of the collaborative worldbuilding that makes Facets of Origin work.
 
 ---
 

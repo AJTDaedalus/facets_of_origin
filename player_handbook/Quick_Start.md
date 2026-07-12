@@ -30,8 +30,8 @@ A studious young mage. Entirely absorbed in books, magical theory, and intellect
 | Luck | 3 | +1 |
 | Charisma | 1 | -1 |
 
-**Primary Facet:** Mind | **Background:** Guild Apprentice
-**Skills:** Lore (Practiced, +1), Investigate (Novice, 1 mark) | **Sparks:** 3
+**Primary Facet:** Mind | **Background:** Guild Apprentice (magical — the domain origin takes the place of a secondary skill)
+**Skills:** Lore (Practiced, +1) | **Sparks:** 3
 **Magic Domain:** Inscription (Focused, Minor scope only until Facet Technique unlocked)
 **Specialty:** Artificers' Guild technical records — Standard becomes Easy when directly applicable
 **Endurance:** 3 (base 4, Constitution -1)
@@ -81,7 +81,7 @@ Profoundly, almost philosophically lazy. Exceptionally nimble. Prefers to accomp
 | Luck | 3 | +1 |
 | Charisma | 2 | +0 |
 
-**Primary Facet:** Body | **Background:** Wandering Disciple
+**Primary Facet:** Body | **Background:** Wandering Disciple (custom — see Chapter II.5)
 **Skills:** Finesse (Practiced, +1), Stealth (Novice, 1 mark) | **Sparks:** 3
 **Specialty:** Monastery training and movement arts — Standard becomes Easy when directly applicable
 **Endurance:** 3 (base 4, Constitution -1)

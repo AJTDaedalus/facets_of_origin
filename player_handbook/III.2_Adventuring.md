@@ -26,7 +26,7 @@ No new resolution mechanic — the clock advances off the outcome tiers you alre
 
 Combat Conditions (Chapter III.3) work the same way outside a fight — a fall, a trap, a hazard filling its clock, a hostile crowd all apply Conditions exactly as a Strike would. Recovery works the same regardless of where the Condition came from:
 
-- **Tier 1** (Winded, Off-Balance, Shaken) clears automatically at the end of the scene it was applied in.
+- **Tier 1** (Winded, Off-Balance, Shaken) clears automatically at the end of the exchange in combat; outside combat, where no exchange structure exists, it clears at the end of the scene it was applied in.
 - **Tier 2** (Staggered, Cornered) persists until **treated**. Treated means one of three things: a scene passes in which the character has a genuine chance to recover (resting, regrouping, tending to the injury), a successful roll on a skill relevant to the harm (Endurance to push through it, a relevant Facet skill to address its cause), or downtime the MM rules is sufficient. The MM decides which applies based on the fiction — a Cornered character needs to actually get out of the corner; a Staggered one needs a moment to recover their footing.
 - **Tier 3 — Broken** — clears at the end of the scene. The character is out of that conflict, but not out of the story. Meaningful recovery from Broken — full physical or narrative recuperation — takes real downtime, not a single scene.
 

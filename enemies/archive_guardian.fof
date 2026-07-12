@@ -16,8 +16,8 @@ enemy:
                          # rider->Easy snowball; 8 is the smallest value that
                          # clears the median->=3 floor (confirmed by sim,
                          # research/simulation_log.md Series 7).
-  attack_modifier: 3    # Strength +2, Combat Expert +2 — iron weight, not technique
-  defense_modifier: 1   # Dex −1, Combat Practiced +1 (partially damaged in story)
+  attack_modifier: 3    # Strength +2, Combat Expert +2, −1 from fifteen years of wear — iron weight, not technique
+  defense_modifier: 1   # Dex −1, Combat Expert +2
   armor: heavy
   techniques: [phase_change, tier1_immunity]
   special: null
@@ -26,10 +26,11 @@ enemy:
     - resolve_threshold: 2
       description: >
         Reduced Mode. When the Guardian's Resolve drops to 2 or below, its
-        attack_modifier drops to +1. However, it now ignores all Tier 1
-        Conditions entirely — not through resilience, but because the
-        sensory subsystem that registered them has shut down. It is running
-        on something else. What that is, the party does not know.
+        attack_modifier drops to +1 and its blows land as Tier 1. However,
+        it now ignores all Tier 1 Conditions entirely — not through
+        resilience, but because the sensory subsystem that registered them
+        has shut down. It is running on something else. What that is, the
+        party does not know.
 
   description: >
     A Constructed guardian commissioned by the Thornwall city government

@@ -112,7 +112,7 @@ When you build a Named NPC who will appear in more than one session, give them t
 
 You will introduce dozens of NPCs across a campaign. Most of them do not need three-dimensional backstories. They need to be immediately distinct so the players can remember them.
 
-The trick is **one specific detail** — not a personality summary, but a concrete, sensory thing the players can latch onto.
+The trick is **one specific detail**: not a personality summary, but a concrete, sensory thing the players can latch onto.
 
 - "The guard has an accent you cannot place and keeps cracking her knuckles."
 - "He introduces himself while eating an apple and does not stop eating the apple for the entire conversation."
@@ -193,7 +193,7 @@ In a single session, the resource tax is straightforward: the party enters the c
 
 Across multiple sessions, the resource tax is more subtle. It is the NPC the party alienated in session two who will not help them in session four. It is the information they chose not to pursue that would have made the final encounter easier. It is the Spark they spent on a low-stakes moment that they will wish they had saved.
 
-Track what the party has spent — not in a ledger, but in your awareness of the fiction. When they arrive at the climax, the story should reflect what they invested to get there.
+Track what the party has spent, not in a ledger but in your awareness of the fiction. When they arrive at the climax, the story should reflect what they invested to get there.
 
 ### Not Every Session Needs a Fight
 
@@ -216,7 +216,7 @@ The Facets advancement system is not just a reward mechanism — it is a pacing 
 | First skill rank advance | Sessions 1–3 | The character finds their footing; early competence emerges |
 | Facet Level 1 (5 primary advances) | Sessions 4–8 | The character has a clear identity; first Technique defines their approach |
 | Facet Level 2 (10 primary advances) | Sessions 8–15 | The character is established; a second and third Technique deepen their specialty |
-| Facet Level 3 + first Major Advancement (15 primary advances) | Sessions 12–20 | Primary Facet mastered — the Tier 3 Technique and the +1 Attribute or Pinnacle Technique land together, marking a transformation. Breadth (level 4+) begins here. |
+| Facet Level 3 + first Major Advancement (15 primary advances) | Sessions 12–20 | Primary Facet mastered — a third Technique unlock and the Major Advancement (+1 Attribute or Pinnacle Technique) land together. Breadth (level 4+) begins here. |
 
 These timelines assume 4 skill points per session and primary Facet advancement. Actual pace depends on how the player distributes their points, whether they cross-train early, and how often they use the skills they want to advance.
 
@@ -228,11 +228,11 @@ When you are designing an arc, ask: *what career_advances range is this party in
 
 | career_advances | Party Capability | Encounter Design Notes |
 |---|---|---|
-| 0–2 | Fragile, narrow | Mooks are genuine threats in groups; one Named NPC is a boss fight |
-| 3–6 | Developing, gaining tools | Standard encounters feel fair; introduce Named NPC antagonists |
-| 7–12 | Capable, first Techniques | Hard encounters are survivable; Mook swarms are cleanup; Bosses are viable |
-| 13–20 | Seasoned, cross-trained | The party has answers to most problems; challenge them with situations, not raw difficulty |
-| 21+ | Veterans | Difficulty alone will not challenge them; the stakes must be narrative, not mechanical |
+| 0–2 | Freshly started | Build straight from the PS-3 Recipe Table (MM1); a lone Named NPC falls fast to focused fire — difficulty comes from actor count, not TR |
+| 3–5 | Developing, gaining tools | The Recipe Table still applies; nudge a fight up a band with one extra Mook |
+| 6–10 | Capable, first Techniques | Techniques shift the actor-count thresholds — expect to add actors and re-check at the table |
+| 11–15 | Seasoned | The party has answers to most problems; challenge them with situations, not raw difficulty |
+| 16+ | Veterans, cross-trained | Difficulty alone will not challenge them; the stakes must be narrative, not mechanical |
 
 ### Pacing Advancement Faster or Slower
 
@@ -252,11 +252,11 @@ The default is 4 skill points per session, with primary Facet skills costing 1 p
 
 ### Techniques as Narrative Milestones
 
-When a character reaches a new Facet level and unlocks a Technique, that is a story event — not just a mechanical upgrade. The reflection scene is your tool for making it feel real.
+When a character reaches a new Facet level and unlocks a Technique, that is a story event, not just a mechanical upgrade. The reflection scene is your tool for making it feel real.
 
-Plan for it. When you see a character approaching their next Facet level (check their marks — you can see it coming 2–3 sessions out), start thinking about what moment in the fiction could serve as the backdrop for their advancement. The warrior who unlocks Weapon Mastery after a fight where they finally understood how their sword works. The scholar who unlocks Analytical Eye after a session where every detail they noticed turned out to matter. The diplomat who unlocks Commanding Presence after the scene where they stood in front of a hostile crowd and did not flinch.
+Plan for it. When you see a character approaching their next Facet level (check their marks — you can see it coming 2–3 sessions out), start thinking about what moment in the fiction could serve as the backdrop for their advancement. The warrior who unlocks Weapon Mastery after a fight where they finally understood how their sword works. The scholar who unlocks Sharp Analysis after a session where every detail they noticed turned out to matter. The diplomat who unlocks Commanding Presence after the scene where they stood in front of a hostile crowd and did not flinch.
 
-The Technique is the mechanic. The reflection scene is the story. Together, they make the advancement feel like something that happened to a person, not a number that incremented.
+The Technique is the mechanic; the reflection scene is the story. Together they make advancement feel like something that happened to a person rather than a number that incremented.
 
 ---
 
@@ -358,7 +358,7 @@ A ten-session campaign that tells a complete, satisfying story is better than a 
 
 **Zulnut:** "I'm going to finish eating. Then I'm going to take a nap." *A beat.* "Then probably south. Mordai will need someone watching his back, and I have nothing better to do."
 
-(The MM smiles. The campaign is over. The story is not — it never is — but this part of it is complete. The characters are different than when they started. The world is different because they were in it. That is enough. That is always enough.)
+(The MM smiles. The campaign is over. The story is not — it never is — but this part of it is complete. The characters are different than when they started. The world is different because they were in it. That is enough.)
 
 ---
 

@@ -654,6 +654,19 @@ techniques:
                   you know it, and it is accurate.
                 prerequisites: [cross_reference]
 
+              - id: ascendant_domain_mind
+                name: "Ascendant Domain"
+                description: >
+                  Your practice has outgrown a single territory. Choose one prismatic domain from
+                  the Domains of the Mind list (Chapter II.3). You may work within it using the
+                  Domain + Intent + Scope framework, rolling Knowledge. The Broad difficulty table
+                  applies (Hard / Very Hard / Very Hard), and its Major-scope ceiling cannot be
+                  moved by Sparks. Your original domain is unchanged.
+                magic_granting: true
+                prerequisites: [cross_reference]
+                has_choice: true
+                choice_prompt: "Choose one prismatic domain from the Domains of the Mind list."
+
   # =========================================================================
   # Facet of the Soul
   # Branches: Presence (Charisma) / Fortune (Luck) / Communion (Spirit)
@@ -850,13 +863,27 @@ techniques:
               - id: second_domain
                 name: "Second Domain"
                 description: >
-                  You have grown into a second intuitive magical domain. Choose a second domain
-                  from the Domains of the Soul list. You may use magic within that domain using the
-                  Domain + Intent + Scope framework, rolling Spirit as normal. Effects within your
-                  second domain are treated as one difficulty step harder than your primary domain.
+                  You have grown into a second intuitive magical domain. Choose a second standard
+                  domain from the Domains of the Soul list (prismatic territories require Ascendant
+                  Domain). You may use magic within that domain using the Domain + Intent + Scope
+                  framework, rolling Spirit as normal. Effects within your second domain are
+                  treated as one difficulty step harder than your primary domain.
                 prerequisites: [the_language_beneath_language]
                 has_choice: true
-                choice_prompt: "Choose a second domain from the Domains of the Soul list (must differ from your first)."
+                choice_prompt: "Choose a second standard domain from the Domains of the Soul list (must differ from your first; prismatic domains excluded)."
+
+              - id: ascendant_domain_soul
+                name: "Ascendant Domain"
+                description: >
+                  Your practice has outgrown a single territory. Choose one prismatic domain from
+                  the Domains of the Soul list (Chapter II.3). You may work within it using the
+                  Domain + Intent + Scope framework, rolling Spirit. The Broad difficulty table
+                  applies (Hard / Very Hard / Very Hard), and its Major-scope ceiling cannot be
+                  moved by Sparks. Your original domain is unchanged.
+                magic_granting: true
+                prerequisites: [the_language_beneath_language]
+                has_choice: true
+                choice_prompt: "Choose one prismatic domain from the Domains of the Soul list."
 
 # ---------------------------------------------------------------------------
 # Roll Resolution
@@ -1243,6 +1270,7 @@ backgrounds:
     secondary_skill: perform
     specialty: "Recognizes the rituals, symbols, and internal politics of one specific religious tradition in detail."
     domain_origin: soul
+    domain_replaces_secondary: true
 
   - id: traveling_merchant
     name: "Traveling Merchant"

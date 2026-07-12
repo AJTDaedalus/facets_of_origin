@@ -4,7 +4,7 @@
 
 Skills are specific areas of developed capability — what your character has learned to do through practice, training, or hard experience. Where attributes represent your fundamental nature, skills represent what you have made of yourself.
 
-Every character begins with all skills at **Novice** rank. Your Background determines your starting skills — you don't choose them separately (see Chapter II.5). Through play, skills you actually use advance toward **Practiced** and eventually **Expert**.
+Every character begins with all skills at **Novice** rank. Your Background determines your starting skills — you don't choose them separately (see Chapter II.5). Through play, skills you actually use advance toward **Practiced**, **Expert**, and eventually **Master**.
 
 Full rules for skill advancement, the session skill point economy, and reflection scenes are in **Chapter II.4 (Facets)**. Full descriptions and Technique trees are in the Facet chapters (II.4, II.4b, II.4c). This chapter provides the complete reference and explains how skill checks work.
 
@@ -112,9 +112,9 @@ Skill modifiers stack with your Minor Attribute modifier. The maximum combined m
 
 ## Starting Skills
 
-All characters begin with every skill at Novice. There are no starting skill bonuses from character creation — your skills emerge from play, not from a menu of choices.
+All characters begin with every skill at Novice. Apart from what your Background grants, there are no starting skill choices — your skills emerge from play, not from a menu.
 
-Some **Backgrounds** (Chapter II.5) grant a single skill at Practiced rank at character creation, reflecting prior training or life experience. Most Backgrounds also grant a **secondary skill** — a second skill from your Primary Facet starting at Novice with 1 mark already recorded (the Background Mark). These are the only exceptions to the "all skills start at Novice with no marks" rule.
+Your **Background** (Chapter II.5) grants a single skill at Practiced rank at character creation, reflecting prior training or life experience. Most Backgrounds also grant a **secondary skill** — a second skill from your Primary Facet starting at Novice with 1 mark already recorded (the Background Mark); magic-granting Backgrounds provide a domain origin in its place. These are the only exceptions to the "all skills start at Novice with no marks" rule.
 
 ---
 

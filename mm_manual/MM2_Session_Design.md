@@ -164,7 +164,7 @@ A three-exchange fight should take 15-25 minutes at the table. If it is taking l
 
 > **Skirmish encounters are tutorial encounters.** A Skirmish-budget fight (Party Strength × 1) against Mooks will last 1-2 exchanges and produce minimal resource drain. That is by design — Skirmish encounters introduce combat mechanics without risking the party. Do not expect tactical depth from them. Use Skirmish encounters early in a session or campaign to teach the exchange structure, posture decisions, and reaction economy. Save Standard and Hard encounters for when the party understands the system and meaningful tactical pressure serves the story.
 
-End fights when they are won, not when the stat block is depleted. If the Named NPC is Staggered, out of Endurance, and the party has three characters with full pools, the fight is over — narrate the ending and move on. Do not make the players grind through the last two exchanges of a foregone conclusion.
+End fights when they are won, not when the stat block is depleted. If the Named NPC is down to its last point of Resolve, carrying a Staggered rider, and the party has three characters with full Endurance pools, the fight is over — narrate the ending and move on. Do not make the players grind through the last two exchanges of a foregone conclusion.
 
 ### Downtime
 
@@ -186,7 +186,7 @@ The smoothest transitions are the ones the players barely notice. A few patterns
 
 **When to cut a scene short:** When you realize the current scene is setup for the next one, and you are narrating the transition instead of the arrival. Skip the walk. Skip the travel. Skip the shopping unless the shopping is the scene. "You arrive at the tower. It is taller than the reports suggested."
 
-**When to let a scene breathe:** When the players are doing something you did not plan for and it is working. When the roleplay is richer than whatever you had next. When a player is having a character moment and the table is listening. These moments are why the game exists. Do not cut them for pacing. Pacing serves the story; the story does not serve the pace.
+**When to let a scene breathe:** When the players are doing something you did not plan for and it is working. When the roleplay is richer than whatever you had next. When a player is having a character moment and the table is listening. These moments are why the game exists — do not cut them for the sake of pacing.
 
 ---
 
@@ -251,7 +251,7 @@ Each clue is available through a different approach — social, investigative, p
 
 Before every session, write down ten names. Five masculine, five feminine, or whatever distribution fits your setting. Just names. No backstories, no stat blocks, no motivations.
 
-When the party talks to someone you did not plan for — the baker they decide to interrogate, the guard they befriend, the child who witnessed something — you pull a name from the list. A named NPC is instantly more real than "the baker." A named NPC is someone the players might remember. A named NPC is someone you can bring back.
+When the party talks to someone you did not plan for — the baker they decide to interrogate, the guard they befriend, the child who witnessed something — you pull a name from the list. A named NPC is instantly more real than "the baker": someone the players might remember, and someone you can bring back later.
 
 Keep the list visible. Cross off names as you use them. Replenish between sessions. This costs two minutes of prep and saves you from the specific panic of a player asking "what's her name?" while you stare at the ceiling.
 
@@ -296,7 +296,7 @@ If Spark nominations are clustering around one player, that is useful informatio
 
 ## Session Zero Checklist
 
-Session Zero is the session before the first session — the conversation where everyone agrees on what kind of game they are playing and how they want to play it. It is not optional. It is not a formality. It is the foundation that prevents most problems before they start.
+Session Zero is the session before the first session — the conversation where everyone agrees on what kind of game they are playing and how they want to play it. It is not optional, and it is not a formality: this conversation prevents most problems before they start.
 
 ### Safety and Boundaries
 
@@ -375,7 +375,7 @@ Use the Play Field whenever you are in a structured scene — combat, contested 
 The Tools tab is for between-the-action work:
 - **NPC lookup.** Pull up a stat block mid-session without flipping through notes.
 - **Encounter budgeting.** Check whether the fight you are about to run is calibrated for this party.
-- **Quick reference.** Rules lookups when memory fails. This is not a sign of weakness. It is the tool working as intended.
+- **Quick reference.** Rules lookups when memory fails — which is the tool working as intended, not a sign of weakness.
 
 Switch to Tools when you need information. Switch back to Play Field when you have it. The transition should take seconds, not minutes.
 
@@ -401,7 +401,7 @@ The one exception: if a player is creating a character mid-campaign (a new playe
 
 **MM:** "Roll Wisdom. Standard."
 
-> Zulnut rolls **2d6 + Wisdom (2 -> +0)** and gets a **9**. Partial success.
+> Zulnut rolls **2d6 + Wisdom (2 → +0)** and gets a **9**. Partial success.
 
 **MM:** "At least three. But one of them is giving orders, and the other two are not arguing. That is either discipline or fear. You cannot tell which from out here."
 
@@ -421,7 +421,7 @@ The one exception: if a player is creating a character mid-campaign (a new playe
 
 **MM:** "Locked. A simple padlock — nothing fancy, but you are picking it in the dark, in an alley, while people move around on the other side. Standard difficulty. Roll Dexterity."
 
-> Zulnut rolls **2d6 + Dexterity (3 -> +1) + Finesse Practiced (+1)** and gets a **7**. Partial success.
+> Zulnut rolls **2d6 + Dexterity (3 → +1) + Finesse Practiced (+1)** and gets a **7**. Partial success.
 
 **MM:** "The lock opens. But the hasp squeaks — a short, sharp sound that carries exactly as far as you did not want it to. The movement inside stops."
 
@@ -455,7 +455,7 @@ The one exception: if a player is creating a character mid-campaign (a new playe
 
 **MM:** "He is waiting, Mordai. Charisma — you are trying to get him to tell you who he is working for. Hard. He is composed, this is his territory, and he has had thirty seconds to prepare for this conversation."
 
-> Mordai rolls **2d6 + Charisma (2 -> +0)** against Hard difficulty (net -1) and gets an **8**. Partial success.
+> Mordai rolls **2d6 + Charisma (2 → +0)** against Hard difficulty (net -1) and gets an **8**. Partial success.
 
 **MM:** "He tells you this is a private operation and the buyer is not someone whose name gets said in warehouses. He is being honest — you can feel it. But the partial success means the honesty goes both directions. He is now looking at Mordai with genuine concern. Not concern for himself. Concern for what happens if you pursue this."
 
@@ -477,7 +477,7 @@ The one exception: if a player is creating a character mid-campaign (a new playe
 
 ### The Problem
 
-Playtests consistently showed Spark hoarding: players treated their 3 session Sparks as "too precious to spend," spending only 2 of 9 available per session. Combat simulations tell a different story — Sparks are spent heavily in Named and Boss fights (8+ of 9 available). The problem is not mechanical but behavioral: players don't earn enough Sparks during play to feel comfortable spending them.
+Playtests consistently showed Spark hoarding: players treated their 3 session Sparks as "too precious to spend." Across a three-player table, only 2 of the 9 Sparks in circulation were spent per session. Combat simulations tell a different story — Sparks are spent heavily in Named and Boss fights (8+ of 9 available). The problem is not mechanical but behavioral: players don't earn enough Sparks during play to feel comfortable spending them.
 
 ### The Solution: Structured Earning Moments
 

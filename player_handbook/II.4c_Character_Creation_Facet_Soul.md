@@ -124,6 +124,9 @@ When you attempt to communicate intent to a creature that cannot speak your lang
 Once per session, you may anchor something spiritual that is failing or breaking: a ritual unraveling, a protective ward dissolving, a spirit's grief turning to rage, a boundary giving way. Your presence is sufficient to hold it steady. No roll is required. You do not need to know what you are doing — you need only to stand in it and refuse to let go. The MM determines what holding the line costs you in the fiction, but it holds.
 
 **Second Domain**
-You have grown into a second intuitive magical domain — a complementary territory that your original practice has opened. Choose a second domain from the Domains of the Soul list. You may use magic within that domain using the Domain + Intent + Scope framework, rolling Spirit as normal. Effects within your second domain are treated as one difficulty step harder than your primary domain.
+You have grown into a second intuitive magical domain — a complementary territory that your original practice has opened. Choose a second standard domain from the Domains of the Soul list (prismatic territories require Ascendant Domain, below). You may use magic within that domain using the Domain + Intent + Scope framework, rolling Spirit as normal. Effects within your second domain are treated as one difficulty step harder than your primary domain.
+
+**Ascendant Domain**
+*Requires an existing Soul domain (Spiritual Domain).* Your practice has outgrown a single territory. Choose one prismatic domain from the Domains of the Soul list (Chapter II.3). You may work within it using the Domain + Intent + Scope framework, rolling Spirit. The Broad difficulty table applies — Hard at Minor scope, Very Hard at Significant and Major — and its Major-scope ceiling cannot be moved by Sparks. Your original domain is unchanged; the prismatic territory is a wider practice built on everything it taught you.
 
 ---
