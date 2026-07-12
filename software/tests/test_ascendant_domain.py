@@ -228,6 +228,71 @@ def test_ascendant_domain_takes_no_second_domain_penalty(ruleset):
 
 
 # ---------------------------------------------------------------------------
+# Cross-Facet second domain (owner ruling, D-A7) and the prismatic cap (D-A8)
+# ---------------------------------------------------------------------------
+
+def test_cross_facet_tier1_grants_a_second_domain(ruleset):
+    """Owner ruling (D-A7): a mage who cross-trains into the other Facet's Tier 1
+    holds that domain *alongside* their original, untaxed. Neither is destroyed.
+    """
+    char = _mind_mage(ruleset)  # Inscription, via Mind's Arcane Study
+    char.technique_picks_available += 1
+    ok, msg = char.select_technique("spiritual_domain", ruleset=ruleset, choice="fire")
+    assert ok, msg
+    assert char.magic_domain == "inscription"   # original survives
+    assert char.cross_facet_domain == "fire"
+
+
+def test_cross_facet_domain_is_untaxed(ruleset):
+    """D-A7: no difficulty step. Fire is Focused, so Minor scope is Easy — a leaked
+    Second Domain penalty would surface as Standard."""
+    char = _mind_mage(ruleset)
+    char.technique_picks_available += 1
+    assert char.select_technique("spiritual_domain", ruleset=ruleset, choice="fire")[0]
+
+    result = resolve_magic_roll(
+        character=char, domain_id="fire", scope="minor",
+        intent="light a candle", ruleset=ruleset,
+    )
+    assert result.request.difficulty_label == "Easy"
+
+
+def test_cross_facet_domain_survives_fof_round_trip(ruleset):
+    char = _mind_mage(ruleset)
+    char.technique_picks_available += 1
+    assert char.select_technique("spiritual_domain", ruleset=ruleset, choice="fire")[0]
+
+    from app.game.character import Character
+    restored = Character.from_fof(char.to_fof(module_refs=[], session_id="s1"))
+    assert restored.magic_domain == "inscription"
+    assert restored.cross_facet_domain == "fire"
+
+
+def test_only_one_prismatic_domain_per_character(ruleset):
+    """Owner ruling (D-A8): one prismatic territory per character. The second
+    Ascendant Domain is refused rather than silently overwriting the first.
+    """
+    char = _mind_mage(ruleset)
+    assert char.select_technique(
+        "ascendant_domain_mind", ruleset=ruleset, choice="chronomancy"
+    )[0]
+
+    # Walk the Soul Communion tree to its Tier 3 gate.
+    for tech, choice in [("spiritual_domain", "fire"),
+                         ("the_language_beneath_language", None)]:
+        char.technique_picks_available += 1
+        assert char.select_technique(tech, ruleset=ruleset, choice=choice)[0]
+
+    char.technique_picks_available += 1
+    ok, msg = char.select_technique(
+        "ascendant_domain_soul", ruleset=ruleset, choice="fate"
+    )
+    assert not ok
+    assert "prismatic" in msg.lower()
+    assert char.ascendant_domain == "chronomancy"  # the first one stands
+
+
+# ---------------------------------------------------------------------------
 # Second Domain — the other Tier 3 route (D-A5, D-A6)
 # ---------------------------------------------------------------------------
 
@@ -277,8 +342,24 @@ def test_second_domain_must_differ_from_the_first(ruleset):
     char = _soul_mage(ruleset)  # primary domain: fire
     ok, msg = char.select_technique("second_domain", ruleset=ruleset, choice="fire")
     assert not ok
-    assert "differ" in msg.lower()
+    assert "already practise" in msg.lower()
     assert char.secondary_magic_domain is None
+
+
+def test_second_domain_must_differ_from_a_cross_facet_domain_too(ruleset):
+    """"Differs from your first" means differs from *any* domain already held —
+    a cross-Facet domain (D-A7) counts."""
+    char = _soul_mage(ruleset)  # Soul mage, primary: fire
+    char.technique_picks_available += 1
+    assert char.select_technique(
+        "arcane_study", ruleset=ruleset, choice="illusion"
+    )[0]
+    assert char.cross_facet_domain == "illusion"
+
+    char.technique_picks_available += 1
+    ok, msg = char.select_technique("second_domain", ruleset=ruleset, choice="storm")
+    assert ok, msg  # a genuinely new Soul domain is still fine
+    assert char.secondary_magic_domain == "storm"
 
 
 def test_second_domain_is_one_step_harder(ruleset):

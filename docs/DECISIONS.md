@@ -383,3 +383,39 @@ resolved to `broad` — D-A1 would have made it live.
 Nothing outside `.fof` loading had ever written that field, so the penalty it gates could only
 fire for a hand-authored character. Same class of bug as the Ascendant overwrite, same code
 path, fixed alongside it — which is what makes the two Tier 3 routes symmetric.
+
+### D-A7 — Cross-Facet Tier 1 grants a second domain, untaxed *(owner ruling, 2026-07-12)*
+
+**Question:** a Mind/Soul mage who cross-trains into the *other* Facet's Tier 1 Technique gains a
+domain from that Facet's list. II.3 permits cross-Facet characters to take these Techniques, but
+its worked example is a *Body* character with no domain — it never says what happens when the
+taker already practises one. The engine silently overwrote the original.
+
+**Ruling:** they hold both, each at its own normal difficulty, neither taxed for the other. At most
+one domain per Facet by this route. Written into II.3.
+
+**Accepted consequence, recorded so nobody rediscovers it as a bug:** this makes **Second Domain**
+(Soul Communion Tier 3, permanently one difficulty step harder) strictly worse than a Tier 1
+cross-Facet pick for any character willing to pay the cross-Facet advancement rate. Second Domain's
+value needs a second look — tracked separately, not silently patched here.
+
+### D-A8 — One prismatic domain per character *(owner ruling, 2026-07-12)*
+
+A character who reaches Tier 3 in two Facet trees could take Ascendant Domain twice; the second
+prismatic silently overwrote the first. Ruled: the second is **refused**. A character masters one
+prismatic territory, however many trees they climb. `ascendant_domain` stays a single field.
+
+### Domain slots, after D-A7 and D-A8
+
+One field per acquisition route, because the route is what sets the price:
+
+| Field | Route | Cost |
+|---|---|---|
+| `magic_domain` | Background origin, formalized by that Facet's Tier 1 Technique | none |
+| `cross_facet_domain` | The *other* Facet's Tier 1 Technique | cross-Facet advancement rate |
+| `secondary_magic_domain` | Second Domain (Soul Communion, Tier 3) | one difficulty step, permanently |
+| `ascendant_domain` | Ascendant Domain (Tier 3) — prismatic, max one | the Broad table |
+
+Re-selecting the domain a Background already granted is *formalization*, not a duplicate — the
+Tier 1 Technique unlocks full scope on a domain the character already has (II.3/II.5). That case
+is exempt from the duplicate check; everything else is refused rather than overwritten.

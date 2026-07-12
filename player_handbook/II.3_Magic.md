@@ -239,7 +239,11 @@ When you choose your domain, take a moment to answer these questions — even br
 
 None of this is mechanics. It is the fiction your mechanics live in, and both you and the MM will lean on it constantly.
 
-Soul Facet and Mind Facet Tier 1 Techniques each include domain selection as one available option, choosing from that Facet's domain list. Characters who do not take a magic-granting Technique at Tier 1 can return to it at later Tier 1 unlocks. Cross-Facet characters — a Body Facet character who wants magical capability, for instance — can access these Techniques but pay the standard cross-Facet advancement cost. Prismatic domains require the **Ascendant Domain** Technique (Tier 3, in each Facet's tree) and are never available as a starting domain.
+Soul Facet and Mind Facet Tier 1 Techniques each include domain selection as one available option, choosing from that Facet's domain list. Characters who do not take a magic-granting Technique at Tier 1 can return to it at later Tier 1 unlocks. Cross-Facet characters — a Body Facet character who wants magical capability, for instance — can access these Techniques but pay the standard cross-Facet advancement cost.
+
+A mage who already practises one domain can cross-train into the other Facet's Tier 1 Technique and take a domain from *that* Facet's list, held alongside the first. Both are practised at their own normal difficulty — neither is taxed for the other's existence. This is the only way to hold a domain in each of two Facets, and it is not cheap: it costs the standard cross-Facet advancement rate for every step of the other tree. A character may hold at most one domain per Facet by this route.
+
+Prismatic domains require the **Ascendant Domain** Technique (Tier 3, in each Facet's tree) and are never available as a starting domain. A character masters **one** prismatic territory — Ascendant Domain is taken once, however many Facet trees they eventually climb.
 
 ---
 
