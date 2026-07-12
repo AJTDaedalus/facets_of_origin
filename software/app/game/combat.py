@@ -1,14 +1,33 @@
 """Pure, synchronous combat-resolution rules (PHB III.3).
 
-This is the only place combat rules live — `app/api/websocket.py` and
-`tools/combat_sim.py` both call into it; neither reimplements it. See
+Combat rules live here; `app/api/websocket.py` and `tools/combat_sim.py`
+call into it rather than carrying their own copies. See
 `docs/DESIGN_v0.3_ruleset_revision.md` §2.1 and TASKS `WS-A0`.
+
+The two callers do not consume the same surface, and the difference is
+load-bearing. The simulator drives the whole module, `resolve_strike` and
+`resolve_reaction` included. The live engine calls the *lookups and
+consequences* (`offense_modifier`, `reaction_cost`, `condition_tier`,
+`apply_condition`, `resolve_incoming_condition`, `armor_budget`,
+`end_exchange`, `phase_crossed`); its dice still go through
+`engine.resolve_roll`/`RollRequest`, because a Strike there is spread
+across two player/MM actions rather than one call (LOG WS-A0, judgment
+call #3). So `resolve_strike`/`resolve_reaction` have no production caller.
+
+**Put shared rules in the helpers, never inside `resolve_strike`.** That
+asymmetry is a standing divergence risk: a rule written into
+`resolve_strike` reaches the simulator and never a real table. It has
+already happened once — the Staggered −1 offensive penalty lived there as
+a literal, so a Staggered PC was penalised in every simulation and at no
+actual table (DECISIONS R1). It now lives in `offense_modifier`, which
+both callers use, and `resolve_strike` merely calls that.
 
 No I/O, no async, no session objects. Every function takes plain state
 (lists, ints, strings) plus a `MergedRuleset`, and returns a result
-dataclass. Constants — reaction costs, condition tier IDs, posture
-modifiers, Withdrawn recovery, strike-outcome tiers — are always read from
-the ruleset, never hardcoded.
+dataclass. Constants — reaction costs, condition tier IDs, posture and
+Condition modifiers, Withdrawn recovery, strike-outcome tiers — are read
+from the ruleset, not hardcoded. One literal remains: the `dodge`/`parry`
+"this reaction rolls" test in `resolve_reaction`.
 
 Scope note: `resolve_strike`/`resolve_reaction` resolve *rolls and their
 immediate rule consequences* (mook removal, Endurance cost). *Choosing*
@@ -108,6 +127,17 @@ class ArmorDowngradeResult:
     downgraded: bool  # True iff a downgrade was actually spent this call
 
 
+@dataclass
+class IncomingConditionResult:
+    """Result of `resolve_incoming_condition` — armor and reaction downgrades
+    combined under PHB III.3's non-stacking rule."""
+
+    tier: int  # final tier after the single greater reduction; 0 = negated
+    downgrades_remaining: int  # armor budget left after this call
+    armor_spent: bool  # True iff an armor charge was actually consumed
+    reaction_applied: bool  # True iff the reaction supplied the reduction
+
+
 # ---------------------------------------------------------------------------
 # Ruleset lookups — no literals; everything below reads facet.yaml
 # ---------------------------------------------------------------------------
@@ -141,6 +171,39 @@ def posture_offense_modifier(posture: str, ruleset) -> Optional[int]:
     """Offense modifier for a posture, or None if the posture cannot attack (Withdrawn)."""
     posture_def = ruleset.combat.postures.get(posture, {})
     return posture_def.get("offense_modifier", 0)
+
+
+def condition_offense_modifier(conditions: list[str], ruleset) -> int:
+    """Total offensive-roll modifier from the conditions a combatant holds.
+
+    Read from each condition's `offense_modifier` in `facet.yaml` (Staggered
+    is −1; everything else 0). Unknown condition IDs contribute nothing.
+    """
+    by_id = {
+        c.id: c
+        for tier in (
+            ruleset.combat.conditions.tier1,
+            ruleset.combat.conditions.tier2,
+            ruleset.combat.conditions.tier3,
+        )
+        for c in tier
+    }
+    return sum(by_id[c].offense_modifier for c in conditions if c in by_id)
+
+
+def offense_modifier(posture: str, conditions: list[str], ruleset) -> Optional[int]:
+    """Total modifier on an offensive roll: posture plus any Condition penalty.
+    `None` means the posture cannot attack at all (Withdrawn).
+
+    Both callers go through this. It exists because the posture modifier and
+    the Staggered penalty were applied in different places — the live engine
+    applied only the former, the simulator (via `resolve_strike`) applied
+    both — so a Staggered PC was penalised in simulation and not at the table.
+    """
+    posture_mod = posture_offense_modifier(posture, ruleset)
+    if posture_mod is None:
+        return None
+    return posture_mod + condition_offense_modifier(conditions, ruleset)
 
 
 def reaction_cost(
@@ -211,21 +274,21 @@ def resolve_strike(
     ruleset,
     opts: StrikeOptions = StrikeOptions(),
 ) -> StrikeRoll:
-    """Resolve a Strike's attack roll: posture offense modifier and the
-    Staggered penalty ("−1 to offensive rolls") applied to `modifier`, then
-    rolled.
+    """Resolve a Strike's attack roll: `offense_modifier` (posture plus any
+    Condition penalty, e.g. Staggered's −1) applied to `modifier`, then rolled.
+
+    Simulator-facing. The live engine composes the same roll from
+    `offense_modifier` + `engine.resolve_roll` — see the module docstring, and
+    keep any new offensive rule in `offense_modifier` so both paths get it.
 
     Does not apply a condition to the target or remove a Mook — see the
     module scope note. `mook_removed` tells the caller whether the target
     *would* be removed if it is a Mook; checking the target's tier is the
-    caller's job.
+    caller's job. Note it ignores armor: an armored Mook needs a full success,
+    so callers with a target in hand should use `mook_removed(...)` instead.
     """
-    offense_mod = posture_offense_modifier(posture, ruleset) or 0
-    total_mod = modifier + offense_mod
-    if "staggered" in conditions:
-        total_mod -= 1
-
-    result = roll(total_mod, opts.difficulty, ruleset, opts.extra_dice)
+    offense_mod = offense_modifier(posture, conditions, ruleset) or 0
+    result = roll(modifier + offense_mod, opts.difficulty, ruleset, opts.extra_dice)
 
     return StrikeRoll(
         outcome=result.outcome,
@@ -314,6 +377,53 @@ def armor_downgrade(
     new_tier = max(0, tier - tiers_reduced)
     return ArmorDowngradeResult(
         tier=new_tier, downgrades_remaining=downgrades_remaining - 1, downgraded=True,
+    )
+
+
+def resolve_incoming_condition(
+    tier: int,
+    armor: Optional[str],
+    downgrades_remaining: int,
+    ruleset,
+    *,
+    reaction_downgraded: bool = False,
+) -> IncomingConditionResult:
+    """Reduce an incoming Condition tier by armor and/or a partial reaction,
+    applying PHB III.3's non-stacking rule.
+
+    "Armor downgrades and successful reaction downgrades (Dodge 7-9, Parry
+    7-9) do not stack. Apply the greater reduction only." Both reduce by one
+    tier, so a partial Parry in light armor against a Tier 2 lands as **Tier
+    1** — not negated. Callers pass the *raw* incoming tier plus whether a
+    reaction already downgraded it; they must not pre-reduce the tier
+    themselves, or the two reductions silently compound.
+
+    When the reaction has already applied the greater (here, equal) reduction,
+    the armor charge is **not** spent: armor softened nothing the reaction had
+    not already softened, and the per-scene budget is what keeps an armored PC
+    breakable (D2, DESIGN §4.2). Spending a charge for no benefit would drain
+    that budget faster than the design intends. The PHB fixes the resulting
+    *tier* but is silent on whether the charge is consumed; this is the
+    reading consistent with armor being "a finite number of incoming
+    Conditions it can soften" (PHB III.3) — a charge that softens nothing is
+    not spent.
+
+    Pure: the budget counter stays with the caller, as in `armor_downgrade`.
+    """
+    if reaction_downgraded:
+        return IncomingConditionResult(
+            tier=max(0, tier - 1),
+            downgrades_remaining=downgrades_remaining,
+            armor_spent=False,
+            reaction_applied=True,
+        )
+
+    downgrade = armor_downgrade(tier, armor, downgrades_remaining, ruleset)
+    return IncomingConditionResult(
+        tier=downgrade.tier,
+        downgrades_remaining=downgrade.downgrades_remaining,
+        armor_spent=downgrade.downgraded,
+        reaction_applied=False,
     )
 
 

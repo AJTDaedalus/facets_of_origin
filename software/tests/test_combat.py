@@ -570,3 +570,113 @@ class TestTargetStrikeDifficulty:
             0, "measured", [], ruleset, combat.StrikeOptions(difficulty=difficulty)
         )
         assert eased.total == baseline.total + 1
+
+
+# ---------------------------------------------------------------------------
+# offense_modifier() — posture + Condition penalties, shared by both callers
+#
+# The Staggered −1 ("−1 to offensive rolls", PHB III.3) previously lived as a
+# literal inside resolve_strike, which no production code path calls — so it
+# was simulated but never applied at a real table. These pin it to the
+# ruleset and to the one helper both callers now use.
+# ---------------------------------------------------------------------------
+
+class TestOffenseModifier:
+    def test_measured_with_no_conditions_is_zero(self, ruleset):
+        assert combat.offense_modifier("measured", [], ruleset) == 0
+
+    def test_aggressive_posture_is_plus_one(self, ruleset):
+        assert combat.offense_modifier("aggressive", [], ruleset) == 1
+
+    def test_staggered_applies_minus_one(self, ruleset):
+        assert combat.offense_modifier("measured", ["staggered"], ruleset) == -1
+
+    def test_staggered_and_posture_combine(self, ruleset):
+        assert combat.offense_modifier("aggressive", ["staggered"], ruleset) == 0
+        assert combat.offense_modifier("defensive", ["staggered"], ruleset) == -2
+
+    def test_tier1_conditions_carry_no_offense_penalty(self, ruleset):
+        assert combat.offense_modifier("measured", ["winded"], ruleset) == 0
+
+    def test_withdrawn_cannot_attack(self, ruleset):
+        assert combat.offense_modifier("withdrawn", [], ruleset) is None
+
+    def test_penalty_is_read_from_the_ruleset_not_hardcoded(self, ruleset):
+        staggered = next(
+            c for c in ruleset.combat.conditions.tier2 if c.id == "staggered"
+        )
+        assert combat.offense_modifier("measured", ["staggered"], ruleset) == (
+            staggered.offense_modifier
+        )
+
+    def test_unknown_condition_is_ignored(self, ruleset):
+        assert combat.offense_modifier("measured", ["nonsense"], ruleset) == 0
+
+
+# ---------------------------------------------------------------------------
+# resolve_incoming_condition() — armor/reaction non-stacking (PHB III.3)
+#
+# "Armor downgrades and successful reaction downgrades do not stack. Apply the
+# greater reduction only." Both reduce by one tier, so a partial reaction and
+# armor together still land one tier down — and the armor charge is NOT spent,
+# because armor softened nothing that the reaction had not already softened.
+# ---------------------------------------------------------------------------
+
+class TestResolveIncomingCondition:
+    def test_unarmored_no_reaction_passes_tier_through(self, ruleset):
+        result = combat.resolve_incoming_condition(2, None, 0, ruleset)
+        assert result.tier == 2
+        assert result.downgrades_remaining == 0
+        assert result.armor_spent is False
+
+    def test_armor_alone_downgrades_and_spends_a_charge(self, ruleset):
+        result = combat.resolve_incoming_condition(2, "light", 2, ruleset)
+        assert result.tier == 1
+        assert result.downgrades_remaining == 1
+        assert result.armor_spent is True
+
+    def test_reaction_alone_downgrades_without_armor(self, ruleset):
+        result = combat.resolve_incoming_condition(
+            2, None, 0, ruleset, reaction_downgraded=True,
+        )
+        assert result.tier == 1
+        assert result.armor_spent is False
+
+    def test_armor_and_reaction_do_not_stack(self, ruleset):
+        """PHB III.3: light armor + partial Parry vs Tier 2 lands as Tier 1,
+        not negated entirely."""
+        result = combat.resolve_incoming_condition(
+            2, "light", 2, ruleset, reaction_downgraded=True,
+        )
+        assert result.tier == 1
+
+    def test_redundant_armor_charge_is_not_spent(self, ruleset):
+        """The reaction already applied the greater (equal) reduction, so the
+        per-scene budget that keeps armored PCs breakable is left intact."""
+        result = combat.resolve_incoming_condition(
+            2, "light", 2, ruleset, reaction_downgraded=True,
+        )
+        assert result.downgrades_remaining == 2
+        assert result.armor_spent is False
+
+    def test_reaction_negates_tier1_without_spending_armor(self, ruleset):
+        result = combat.resolve_incoming_condition(
+            1, "light", 2, ruleset, reaction_downgraded=True,
+        )
+        assert result.tier == 0
+        assert result.downgrades_remaining == 2
+
+    def test_exhausted_budget_lets_condition_through_at_full_tier(self, ruleset):
+        result = combat.resolve_incoming_condition(2, "light", 0, ruleset)
+        assert result.tier == 2
+        assert result.armor_spent is False
+
+    def test_heavy_armor_uses_its_own_budget(self, ruleset):
+        result = combat.resolve_incoming_condition(2, "heavy", 4, ruleset)
+        assert result.tier == 1
+        assert result.downgrades_remaining == 3
+
+    def test_armor_fully_absorbs_tier1(self, ruleset):
+        result = combat.resolve_incoming_condition(1, "light", 2, ruleset)
+        assert result.tier == 0
+        assert result.armor_spent is True

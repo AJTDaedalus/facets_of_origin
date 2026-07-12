@@ -1090,6 +1090,12 @@ combat:
       - id: staggered
         clears: treated
         description: "−1 to offensive rolls."
+        # The penalty above, made machine-readable. It previously lived only
+        # in this prose and as a literal in `combat.resolve_strike`, which the
+        # live engine never calls — so a Staggered PC was penalised in the
+        # simulator and nowhere else. `combat.offense_modifier` now reads this
+        # field, and both `_handle_strike` and the simulator go through it.
+        offense_modifier: -1
       - id: cornered
         clears: treated
         description: "Cannot take Aggressive posture; MM has narrative authority over positioning."

@@ -544,8 +544,12 @@ async def _handle_strike(
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown attribute '{attribute_id}'."})
         return
 
-    # Apply posture offense modifier
-    offense_mod = combat_module.posture_offense_modifier(character.posture or "measured", session.ruleset) or 0
+    # Posture offense modifier plus any Condition penalty (Staggered −1, PHB III.3).
+    # Both come from combat.offense_modifier so this path and the simulator's
+    # resolve_strike cannot drift apart again.
+    offense_mod = combat_module.offense_modifier(
+        character.posture or "measured", character.conditions, session.ruleset,
+    ) or 0
 
     request = RollRequest(
         attribute_id=attribute_id,
@@ -666,35 +670,50 @@ async def _handle_react(
     })
 
 
-def _apply_pc_armor_budget(condition: str, character, ruleset) -> str:
-    """Spend one unit of the PC's per-scene armor downgrade budget (D2), if
-    any is left, on an incoming condition. Returns the (possibly downgraded)
-    condition, or "" if it was fully absorbed (a Tier 1 hit downgraded to
-    none). Updates `character.armor_downgrades_remaining` in place.
+def _reduce_incoming_condition(
+    condition: str, character, ruleset, reaction_downgraded: bool = False,
+) -> tuple[str, bool]:
+    """Reduce an incoming condition by armor and/or a partial reaction, under
+    PHB III.3's non-stacking rule (`combat.resolve_incoming_condition`).
+
+    Returns `(condition, armor_spent)` — the condition after the single greater
+    reduction, or `""` if it was reduced away entirely. `armor_spent` says
+    whether an armor charge actually paid for it, so the broadcast can tell a
+    player their armor absorbed the hit versus their Parry did.
+
+    Callers pass the **raw** incoming condition and set `reaction_downgraded`
+    when a Dodge/Parry already partially succeeded — they must not hand in a
+    pre-downgraded condition, or armor would reduce it a second time. Updates
+    `character.armor_downgrades_remaining` in place.
     """
-    if not character.armor or character.armor not in ("light", "heavy") or not ruleset.combat:
-        return condition
+    if not ruleset.combat:
+        return condition, False
 
     original_tier = combat_module.condition_tier(condition, ruleset)
     if original_tier <= 0:
-        return condition
+        return condition, False
 
-    remaining = character.armor_downgrades_remaining or 0
-    result = combat_module.armor_downgrade(original_tier, character.armor, remaining, ruleset)
+    result = combat_module.resolve_incoming_condition(
+        original_tier,
+        character.armor,
+        character.armor_downgrades_remaining or 0,
+        ruleset,
+        reaction_downgraded=reaction_downgraded,
+    )
     character.armor_downgrades_remaining = result.downgrades_remaining
-    if not result.downgraded or result.tier == original_tier:
-        return condition
 
+    if result.tier == original_tier:
+        return condition, False
     if result.tier == 0:
-        return ""  # fully absorbed by armor
+        return "", result.armor_spent
 
     # Map back to a condition of the lower tier (pick first available)
     conds = ruleset.combat.conditions
     tier_map = {1: conds.tier1, 2: conds.tier2, 3: conds.tier3}
     lower_tier_conds = tier_map.get(result.tier, [])
     if lower_tier_conds:
-        return lower_tier_conds[0].id
-    return condition
+        return lower_tier_conds[0].id, result.armor_spent
+    return condition, result.armor_spent
 
 
 async def _handle_apply_condition(msg: dict, session, session_id: str) -> None:
@@ -705,15 +724,22 @@ async def _handle_apply_condition(msg: dict, session, session_id: str) -> None:
     if not character:
         return
 
-    # Apply armor downgrade
-    condition = _apply_pc_armor_budget(condition, character, session.ruleset)
+    # `reaction_downgraded` is set when the target's Dodge/Parry partially
+    # succeeded. The MM sends the RAW incoming condition either way; armor and
+    # the reaction do not stack (PHB III.3), so the engine — not the MM —
+    # applies the single greater reduction. Absent the flag, behaviour is
+    # exactly as before: armor alone reduces, and pays a charge for it.
+    reaction_downgraded = bool(msg.get("reaction_downgraded", False))
+    condition, armor_spent = _reduce_incoming_condition(
+        condition, character, session.ruleset, reaction_downgraded,
+    )
     if not condition:
-        # Armor fully absorbed the hit
         await manager.broadcast(session_id, {
             "type": "condition_applied",
             "player": player_name,
             "condition": None,
-            "armor_absorbed": True,
+            "armor_absorbed": armor_spent,
+            "reaction_downgraded": reaction_downgraded,
             "all_conditions": list(character.conditions),
         })
         return

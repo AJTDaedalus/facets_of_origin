@@ -257,11 +257,18 @@ class CombatConditionDef(BaseModel):
         clears: When this condition is removed:
                 "end_of_exchange" | "treated" | "end_of_scene".
         description: Human-readable effect summary.
+        offense_modifier: Modifier this condition applies to the holder's
+                offensive rolls. Staggered is −1 ("−1 to offensive rolls",
+                PHB III.3); every other condition is 0. Machine-readable so
+                `combat.offense_modifier` reads the penalty instead of
+                hardcoding it — the penalty used to exist only in the
+                `description` prose and a literal in `combat.py`.
     """
 
     id: str
     clears: str
     description: str
+    offense_modifier: int = 0
 
 
 class CombatConditionsTierDef(BaseModel):

@@ -582,12 +582,12 @@ def _enemy_attack(enemy: EnemyState, target: PCState, ruleset, verbose: bool = F
               f"{target.name} {reaction}s")
 
     if reaction == "absorb":
-        # Take full hit
-        downgrade = combat_module.armor_downgrade(
+        # Take full hit — Absorb never downgrades, so armor alone reduces here.
+        incoming = combat_module.resolve_incoming_condition(
             incoming_tier, target.armor, target.armor_downgrades_remaining, ruleset,
         )
-        target.armor_downgrades_remaining = downgrade.downgrades_remaining
-        final_tier = downgrade.tier
+        target.armor_downgrades_remaining = incoming.downgrades_remaining
+        final_tier = incoming.tier
 
         if final_tier <= 0:
             if verbose:
@@ -622,22 +622,18 @@ def _enemy_attack(enemy: EnemyState, target: PCState, ruleset, verbose: bool = F
             print(f"    → avoided entirely")
         return
 
-    # Determine final tier
-    reaction_downgraded = False
-    final_tier = incoming_tier
-    if result.outcome == "partial_success":
-        final_tier = max(0, incoming_tier - 1)
-        reaction_downgraded = True
-
-    # Armor downgrade (doesn't stack with reaction)
-    downgrade = combat_module.armor_downgrade(
-        incoming_tier, target.armor, target.armor_downgrades_remaining, ruleset,
+    # Armor and a partial reaction do not stack (PHB III.3) — the shared rule
+    # applies the single greater reduction, and does not spend an armor charge
+    # the reaction has already made redundant.
+    incoming = combat_module.resolve_incoming_condition(
+        incoming_tier,
+        target.armor,
+        target.armor_downgrades_remaining,
+        ruleset,
+        reaction_downgraded=(result.outcome == "partial_success"),
     )
-    target.armor_downgrades_remaining = downgrade.downgrades_remaining
-    if reaction_downgraded:
-        final_tier = min(final_tier, downgrade.tier)
-    else:
-        final_tier = downgrade.tier
+    target.armor_downgrades_remaining = incoming.downgrades_remaining
+    final_tier = incoming.tier
 
     if final_tier <= 0:
         if verbose:
@@ -1421,9 +1417,18 @@ def _g3_pc_reacts(
     if roll_result.outcome == "full_success":
         return
 
-    final_tier = incoming_tier
-    if roll_result.outcome == "partial_success":
-        final_tier = max(0, incoming_tier - 1)
+    # Same non-stacking rule as `_enemy_attack`. G3's PC is unarmored by
+    # construction, so armor never reduces here — routing through the shared
+    # rule keeps the reduction in one place without changing G3's numbers.
+    incoming = combat_module.resolve_incoming_condition(
+        incoming_tier,
+        pc.armor,
+        pc.armor_downgrades_remaining,
+        ruleset,
+        reaction_downgraded=(roll_result.outcome == "partial_success"),
+    )
+    pc.armor_downgrades_remaining = incoming.downgrades_remaining
+    final_tier = incoming.tier
     if final_tier <= 0:
         return
 

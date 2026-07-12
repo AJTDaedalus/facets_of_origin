@@ -2321,3 +2321,178 @@ class TestCombatRulesParity:
             ws.receive_json()
 
         assert char.conditions == expected_conditions == ["staggered"]
+
+
+class TestOffenseAndNonStackingInLivePlay:
+    """The two rules that were canon (and simulated) but never reached a real
+    table: the Staggered −1 offensive penalty, and armor/reaction non-stacking.
+
+    Both are PHB III.3. Before this, `_handle_strike` applied only the posture
+    modifier (the Staggered penalty lived in `combat.resolve_strike`, which no
+    production path calls), and `_handle_apply_condition` always spent an armor
+    charge because it had no way to know a reaction had already downgraded the
+    hit.
+    """
+
+    def _start_combat(self, ws):
+        ws.send_json({"type": "combat_start"})
+        ws.receive_json()  # combat_started
+
+    def _recv(self, ws, msg_type):
+        msg = ws.receive_json()
+        assert msg.get("type") == msg_type, f"expected {msg_type}, got {msg}"
+        return msg
+
+    def test_staggered_applies_minus_one_to_strike(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+
+        sess = session_store.get(session_id)
+        sess.characters["Zahna"].conditions = ["staggered"]
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "strike", "target": "goblin"})
+            msg = self._recv(ws, "strike_result")
+            assert msg["roll"]["offense_modifier"] == -1
+
+    def test_staggered_stacks_with_posture_modifier(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+
+        sess = session_store.get(session_id)
+        sess.characters["Zahna"].conditions = ["staggered"]
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "declare_posture", "posture": "aggressive"})
+            ws.receive_json()
+            ws.send_json({"type": "strike", "target": "goblin"})
+            msg = self._recv(ws, "strike_result")
+            # Aggressive +1 and Staggered −1 cancel out.
+            assert msg["roll"].get("offense_modifier", 0) == 0
+
+    def test_unstaggered_strike_is_unpenalised(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "strike", "target": "goblin"})
+            msg = self._recv(ws, "strike_result")
+            assert msg["roll"].get("offense_modifier", 0) == 0
+
+    def test_reaction_downgrade_does_not_stack_with_armor(
+        self, client, mm_token, session_with_character,
+    ):
+        """PHB III.3: light armor + partial Parry vs Tier 2 lands as Tier 1
+        (winded), not negated entirely."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        char.armor = "light"
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            ws.send_json({
+                "type": "apply_condition",
+                "player_name": "Zahna",
+                "condition": "staggered",
+                "reaction_downgraded": True,
+            })
+            msg = self._recv(ws, "condition_applied")
+            assert msg["condition"] == "winded"
+            assert "winded" in msg["all_conditions"]
+
+    def test_redundant_armor_charge_is_not_spent(
+        self, client, mm_token, session_with_character,
+    ):
+        """The reaction supplied the reduction, so the per-scene armor budget —
+        what keeps an armored PC breakable — is left intact."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        char.armor = "light"
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            before = sess.characters["Zahna"].armor_downgrades_remaining
+            ws.send_json({
+                "type": "apply_condition",
+                "player_name": "Zahna",
+                "condition": "staggered",
+                "reaction_downgraded": True,
+            })
+            self._recv(ws, "condition_applied")
+            assert sess.characters["Zahna"].armor_downgrades_remaining == before
+
+    def test_armor_alone_still_spends_a_charge(
+        self, client, mm_token, session_with_character,
+    ):
+        """No reaction: armor supplies the reduction and pays for it. Absent
+        the flag, behaviour is unchanged — the message is backward compatible."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        char.armor = "light"
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            before = sess.characters["Zahna"].armor_downgrades_remaining
+            ws.send_json({
+                "type": "apply_condition",
+                "player_name": "Zahna",
+                "condition": "staggered",
+            })
+            msg = self._recv(ws, "condition_applied")
+            assert msg["condition"] == "winded"
+            assert sess.characters["Zahna"].armor_downgrades_remaining == before - 1
+
+    def test_reaction_downgrade_negates_tier1_for_unarmored(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            ws.send_json({
+                "type": "apply_condition",
+                "player_name": "Zahna",
+                "condition": "winded",
+                "reaction_downgraded": True,
+            })
+            msg = self._recv(ws, "condition_applied")
+            assert msg["condition"] is None
+            assert msg.get("armor_absorbed") is False
