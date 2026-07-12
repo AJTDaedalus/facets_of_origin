@@ -10,6 +10,7 @@ Currently implemented:
   INV-1  every skill's facet.yaml description matches its II.6 prose entry
   INV-2  every Character Sheet field maps to a real Character model attribute
   INV-3  every Glossary entry's chapter pointer resolves and contains the term
+  INV-4  Index.md is byte-identical to a fresh regeneration
   INV-5  every `Chapter X.Y` reference in either book resolves to a file
   INV-6  MM5 uses typographic dashes, not ASCII `--` / `-->`
 """
@@ -22,6 +23,7 @@ import pytest
 import yaml
 
 from app.game.character import Character
+from tools.build_index import generate_index_text
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PLAYER_HANDBOOK = REPO_ROOT / "player_handbook"
@@ -30,6 +32,7 @@ FACET_YAML = REPO_ROOT / "software" / "facets" / "base" / "facet.yaml"
 SKILLS_CHAPTER = PLAYER_HANDBOOK / "II.6_Character_Creation_Skills.md"
 CHARACTER_SHEET = PLAYER_HANDBOOK / "Appendix_Character_Sheet.md"
 GLOSSARY = PLAYER_HANDBOOK / "Glossary.md"
+INDEX_FILE = PLAYER_HANDBOOK / "Index.md"
 
 # "Chapter II.4b", "Chapter III.3", "Chapter IV.1" — the number is the capture.
 CHAPTER_REFERENCE = re.compile(r"Chapter ([IVX]+\.\d+[a-c]?)")
@@ -255,3 +258,17 @@ def test_glossary_pointers_resolve() -> None:
             )
 
     assert not errors, "Glossary pointer mismatches:\n" + "\n".join(errors)
+
+
+def test_index_is_up_to_date() -> None:
+    """INV-4: Index.md is byte-identical to a fresh regeneration.
+
+    The lockfile pattern: `Index.md` is generated, not hand-maintained
+    (PA-10), so the only thing that keeps it honest in a ruleset that's
+    still moving is checking it was actually regenerated after the last
+    change to the Glossary or either book.
+    """
+    assert INDEX_FILE.read_text() == generate_index_text(), (
+        "Index.md is stale — regenerate with "
+        "`python -m tools.build_index` (from software/)."
+    )

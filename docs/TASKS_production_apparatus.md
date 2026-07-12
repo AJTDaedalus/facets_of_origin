@@ -205,7 +205,7 @@ resolves to an existing file, and that file contains the term.
 **Accept:** every system proper noun has an entry; INV-3 passes; any term with no
 canonical source is reported, not invented; ToC lists the glossary.
 
-### [ ] PA-10 — Index generator *(TDD; DESIGN §4.9; **blocked on Q2**)*
+### [x] PA-10 — Index generator *(TDD; DESIGN §4.9; **blocked on Q2**)*
 
 **Q2 resolved (Brain B2, 2026-07-12): digital-first confirmed, no print milestone exists.**
 This task is the right artifact as specified. If a print run is ever scheduled, the
@@ -230,7 +230,7 @@ happy path; a term appearing in zero sections; a term appearing in a heading vs.
 
 **Accept:** `Index.md` generated and committed; INV-4 passes; `build_index.py` has ≥3 tests.
 
-### [ ] PA-11 — ToC and final sweep
+### [x] PA-11 — ToC and final sweep
 
 **Files:** `player_handbook/Table_of_Contents.md`, plus anything the sweep finds.
 
@@ -255,5 +255,5 @@ the Character Sheet appendix. Run the whole suite. Confirm INV-1 through INV-6 g
 | PA-7 front matter | **Fable** | — | **done** |
 | PA-8 III.2 | **Brain → Fable** | Q1 ruled (B1) | **done** |
 | PA-9 glossary | Worker | all of Wave 2 | **done** |
-| PA-10 index | Worker | PA-9 (Q2 ruled, B2) | **ready** |
-| PA-11 ToC + sweep | Worker | PA-10 | — |
+| PA-10 index | Worker | PA-9 (Q2 ruled, B2) | **done** |
+| PA-11 ToC + sweep | Worker | PA-10 | **done** |

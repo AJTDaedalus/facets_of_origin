@@ -32,6 +32,7 @@
 - Appendix A: Magic Domain Catalog
 - Appendix B: Character Sheet
 - Glossary
+- Index
 
 ---
 
