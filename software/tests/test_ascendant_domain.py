@@ -327,6 +327,72 @@ def test_second_domain_populates_secondary_field(ruleset):
     assert char.ascendant_domain is None         # different route, different slot
 
 
+def test_mind_has_a_second_domain_too(ruleset):
+    """Mind's Archive branch mirrors Soul's Communion: a Second Domain at Tier 3.
+
+    Without it a Mind mage could not deepen within Mind at all — their only route
+    to a second domain was cross-training into Soul, rolling Spirit, their own
+    off-attribute. Soul had two routes; Mind had one, and it was the worse one.
+    """
+    char = _mind_mage(ruleset)  # Inscription, at the Archive Tier 3 gate
+    ok, msg = char.select_technique(
+        "second_domain_mind", ruleset=ruleset, choice="illusion"
+    )
+    assert ok, msg
+    assert char.magic_domain == "inscription"          # original survives
+    assert char.secondary_magic_domain == "illusion"
+
+
+def test_mind_second_domain_is_one_step_harder(ruleset):
+    """The same tax Soul pays. Illusion is Standard (Minor = Standard); as a
+    *second* domain it lands Hard."""
+    char = _mind_mage(ruleset)
+    assert char.select_technique(
+        "second_domain_mind", ruleset=ruleset, choice="illusion"
+    )[0]
+
+    result = resolve_magic_roll(
+        character=char, domain_id="illusion", scope="minor",
+        intent="veil a doorway", ruleset=ruleset,
+    )
+    assert result.request.difficulty_label == "Hard"
+
+
+def test_mind_second_domain_rejects_prismatic_choice(ruleset):
+    """Prismatic territories require Ascendant Domain — in Mind as in Soul."""
+    char = _mind_mage(ruleset)
+    ok, msg = char.select_technique(
+        "second_domain_mind", ruleset=ruleset, choice="chronomancy"
+    )
+    assert not ok
+    assert "ascendant" in msg.lower()
+    assert char.secondary_magic_domain is None
+
+
+def test_only_one_second_domain_per_character(ruleset):
+    """A character holds one Second Domain (II.4b/II.4c).
+
+    A cross-trained mage can reach Tier 3 in both trees. The second Second Domain
+    is refused rather than silently overwriting the first — the same
+    refuse-don't-overwrite rule as the prismatic cap.
+    """
+    char = _mind_mage(ruleset)
+    assert char.select_technique(
+        "second_domain_mind", ruleset=ruleset, choice="illusion"
+    )[0]
+
+    # Climb Soul's Communion branch to its Tier 3 gate.
+    for tech, choice in [("spiritual_domain", "fire"),
+                         ("the_language_beneath_language", None)]:
+        char.technique_picks_available += 1
+        assert char.select_technique(tech, ruleset=ruleset, choice=choice)[0]
+
+    char.technique_picks_available += 1
+    ok, msg = char.select_technique("second_domain", ruleset=ruleset, choice="storm")
+    assert not ok
+    assert char.secondary_magic_domain == "illusion"  # the first one stands
+
+
 def test_second_domain_rejects_prismatic_choice(ruleset):
     """"Prismatic territories require Ascendant Domain" (II.4c) — enforced (D-A5)."""
     char = _soul_mage(ruleset)

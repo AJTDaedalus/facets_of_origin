@@ -570,6 +570,7 @@
 
 *Defined in [II.4c](II.4c_Character_Creation_Facet_Soul.md).*
 
+- [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 
 ## Secondary Skill

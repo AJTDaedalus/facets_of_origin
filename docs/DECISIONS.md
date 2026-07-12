@@ -419,3 +419,39 @@ One field per acquisition route, because the route is what sets the price:
 Re-selecting the domain a Background already granted is *formalization*, not a duplicate — the
 Tier 1 Technique unlocks full scope on a domain the character already has (II.3/II.5). That case
 is exempt from the duplicate check; everything else is refused rather than overwritten.
+
+### D-A9 — Mind gets a Second Domain; the +1 step stays *(owner rulings, issue #9, 2026-07-12)*
+
+**Correction first.** Issue #9 was filed claiming Second Domain is *strictly dominated* by the
+untaxed cross-Facet route of D-A7. That was wrong, and the error was ignoring which attribute each
+route rolls. Soul domains are `intuitive` (roll **Spirit**); Mind domains are `scholarly` (roll
+**Knowledge**). A Soul mage cross-training into Mind rolls their off-attribute, and that penalty
+roughly cancels Second Domain's difficulty tax. For a typical Soul mage (Spirit 3 → +1,
+Knowledge 1 → −1), a Standard domain at Minor scope:
+
+| Route | Attribute | Difficulty | Net |
+|---|---|---|---|
+| Second Domain (same Facet, +1 step) | Spirit +1 | Hard (−1) | **0** |
+| Cross-Facet Tier 1 (other Facet, untaxed) | Knowledge −1 | Standard (0) | **−1** |
+
+Second Domain rolls one better and costs one more Technique pick. A real trade, not a dead option.
+It is dominated only for a mage who *invested in the off-Facet attribute* — which reads as a
+legitimate build payoff, not a flaw.
+
+**Ruling 1: the +1 difficulty step stays.** No rules change. The routes are near-balanced and the
+tax is doing real work.
+
+**Ruling 2: Mind gets a Second Domain.** The genuine defect the corrected math surfaced was an
+*asymmetry*, not an imbalance: Second Domain existed only in Soul's Communion branch. A Soul mage
+could deepen within Soul or branch into Mind; **a Mind mage could not deepen within Mind at all**,
+and their only second-domain route — cross-training into Soul — rolled Spirit, their own
+off-attribute. One Facet had two routes; the other had one, and it was the worse-rolling one.
+
+`second_domain_mind` now sits in Archive at Tier 3 (prerequisite `cross_reference`), mirroring
+Soul's Communion exactly: a second *standard* Mind domain, rolling Knowledge, one difficulty step
+harder.
+
+**One Second Domain per character.** Both trees now offer the Technique, so a cross-trained mage can
+reach two Tier 3 gates. The second is **refused**, not silently written over the first — the same
+refuse-don't-overwrite rule as the prismatic cap (D-A8), and `secondary_magic_domain` stays a single
+field. Stated in II.4b, II.4c, and the Glossary.

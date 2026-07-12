@@ -134,6 +134,9 @@ Once per session, your depth of knowledge prevents a consequence the party would
 **Deep Archive**
 Once per session, you may recall something you have no direct reason to know — a piece of esoteric knowledge from a tradition you weren't trained in, a fact from a period of history outside your specialty, a technical detail from a craft you've never practiced. Describe what you're reaching for. The MM tells you whether your character, given their depth of study and their habit of reading broadly and well, could plausibly have encountered this knowledge. If yes: you know it, and it is accurate.
 
+**Second Domain**
+*Requires an existing Mind domain (Arcane Study).* Your study has opened onto a second territory — an adjacent field whose principles your first domain taught you to read. Choose a second standard domain from the Domains of the Mind list (prismatic territories require Ascendant Domain, below). You may use magic within that domain using the Domain + Intent + Scope framework, rolling Knowledge as normal. Effects within your second domain are treated as one difficulty step harder than your primary domain. A character holds one Second Domain.
+
 **Ascendant Domain**
 *Requires an existing Mind domain (Arcane Study).* Your practice has outgrown a single territory. Choose one prismatic domain from the Domains of the Mind list (Chapter II.3). You may work within it using the Domain + Intent + Scope framework, rolling Knowledge. The Broad difficulty table applies — Hard at Minor scope, Very Hard at Significant and Major — and its Major-scope ceiling cannot be moved by Sparks. Your original domain is unchanged; the prismatic territory is a wider practice built on everything it taught you.
 
