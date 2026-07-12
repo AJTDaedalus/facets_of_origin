@@ -920,8 +920,21 @@ class TestPlaytest02DigitalTool:
     # -----------------------------------------------------------------------
 
     def test_99_write_log(self, server):
-        """Write the digital tool verification log to disk."""
-        log_path = Path(__file__).parents[3] / "playtest" / "02_silence_of_ashenmoor" / "digital_tool_log.md"
+        """Write the digital tool verification log.
+
+        The committed log under `playtest/` is a curated deliverable, not a test
+        artifact. Rewriting it on every run left the working tree dirty with RNG
+        churn — one `git add -A` away from committing noise nobody meant to. So
+        the default destination is a gitignored scratch dir; set
+        FOF_WRITE_PLAYTEST_LOG=1 to deliberately refresh the checked-in copy.
+        """
+        if os.environ.get("FOF_WRITE_PLAYTEST_LOG") == "1":
+            log_path = (
+                Path(__file__).parents[3]
+                / "playtest" / "02_silence_of_ashenmoor" / "digital_tool_log.md"
+            )
+        else:
+            log_path = Path(__file__).parents[1] / "_output" / "digital_tool_log.md"
         log_path.parent.mkdir(parents=True, exist_ok=True)
 
         lines = [

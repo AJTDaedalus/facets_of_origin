@@ -31,9 +31,19 @@ MM_MANUAL = REPO_ROOT / "mm_manual"
 GLOSSARY = PLAYER_HANDBOOK / "Glossary.md"
 INDEX_FILE = PLAYER_HANDBOOK / "Index.md"
 
-# The file this generator produces. Excluded from its own input so that
-# regenerating never feeds the previous run's output back into the next one.
-GENERATED_FILENAME = "Index.md"
+# Apparatus, not content — excluded from the indexed corpus.
+#
+# Index.md is this generator's own output; feeding it back in would let each run
+# index the last one. The Glossary bolds every term by definition, so indexing it
+# gives all 54 terms an identical, useless "Glossary — Glossary" self-reference —
+# and the *Defined in* pointer already sends the reader there. The ToC and Front
+# Matter are navigation furniture that mention terms without ever ruling on them.
+NOT_INDEXED = {
+    "Index.md",
+    "Glossary.md",
+    "Table_of_Contents.md",
+    "Front_Matter.md",
+}
 
 # "**Term** — definition..." at the start of a line. Only the bold term is
 # captured; the definition and chapter pointer aren't needed here.
@@ -60,6 +70,33 @@ def parse_glossary_terms(glossary_path: Path = GLOSSARY) -> list[str]:
     ]
 
 
+# The same entry shape as _GLOSSARY_TERM, but also capturing the trailing
+# chapter pointer: `**Resolve** — ... *(MM1)*`. The books write bare `MM1`, not
+# "Chapter MM1", so the "Chapter " prefix is optional.
+_GLOSSARY_POINTER = re.compile(
+    r"^\*\*(.+?)\*\* — .+? \*\((?:Chapter )?([A-Za-z0-9.]+)\)\*\s*$", re.M
+)
+
+
+def parse_glossary_pointers(glossary_path: Path = GLOSSARY) -> dict[str, str]:
+    """{base term: chapter token} — where the Glossary says each term is defined.
+
+    This is the anchor an index most owes its reader: the one place the term is
+    actually *defined*. Terms like "Resolve" are named in no heading anywhere,
+    so without this they would surface only as a scatter of bolded rule
+    statements with no canonical home.
+    """
+    return {
+        raw.split("(")[0].strip(): chapter
+        for raw, chapter in _GLOSSARY_POINTER.findall(glossary_path.read_text())
+    }
+
+
+def _chapter_files() -> dict[str, Path]:
+    """{chapter token: file}, keyed on the filename prefix ("II.4b", "MM1")."""
+    return {path.name.split("_", 1)[0]: path for path in _book_files()}
+
+
 def _chapter_label(path: Path) -> str:
     """A human-readable chapter label for a book file, from its filename."""
     token = path.stem.split("_", 1)[0]
@@ -77,38 +114,58 @@ def _slugify(heading: str) -> str:
 
 
 def find_term_sections(term: str, path: Path) -> list[tuple[str, str]]:
-    """[(heading text, anchor), ...] of every heading under which `term`
-    appears in `path`, in document order. A term counts as appearing under a
-    heading if it's in the heading itself or anywhere in the body text before
-    the next heading of any level. Returns [] if the term is absent or the
-    file has no headings at all.
+    """[(heading text, anchor), ...] of the sections in `path` that are *about*
+    `term` — not every section that happens to say the word.
+
+    Indexing every mention produces an index that points nowhere: under the
+    old any-mention rule "Tier" resolved to 72 sections and "Difficulty" to 70,
+    which is a concordance, not an index. Occurrences are ranked, and the best
+    rank present in a file wins outright:
+
+      1. the term is in the section's **heading** — the section is about it;
+      2. failing that, the term appears in **bold** in the body — the books bold
+         a term at the point where they state its rule.
+
+    A bare prose mention is not an index entry. Returns [] if the term appears
+    only in passing, or not at all.
     """
     text = path.read_text()
-    pattern = re.compile(rf"\b{re.escape(term)}\b", re.IGNORECASE)
+    word = re.compile(rf"\b{re.escape(term)}\b", re.IGNORECASE)
+    bold = re.compile(rf"\*\*[^*]*\b{re.escape(term)}\b[^*]*\*\*", re.IGNORECASE)
     headings = list(_HEADING.finditer(text))
 
-    sections: list[tuple[str, str]] = []
+    in_heading: list[tuple[str, str]] = []
+    in_bold: list[tuple[str, str]] = []
     for i, match in enumerate(headings):
         end = headings[i + 1].start() if i + 1 < len(headings) else len(text)
         section_text = text[match.start():end]
-        if pattern.search(section_text):
-            heading_text = match.group(2)
-            sections.append((heading_text, _slugify(heading_text)))
-    return sections
+        heading_text = match.group(2)
+        entry = (heading_text, _slugify(heading_text))
+        if word.search(heading_text):
+            in_heading.append(entry)
+        elif bold.search(section_text):
+            in_bold.append(entry)
+
+    return in_heading or in_bold
 
 
 def _book_files() -> list[Path]:
     """Every markdown file in both books except the generated index itself."""
     files = sorted(PLAYER_HANDBOOK.glob("*.md")) + sorted(MM_MANUAL.glob("*.md"))
-    return [f for f in files if f.name != GENERATED_FILENAME]
+    return [f for f in files if f.name not in NOT_INDEXED]
+
+
+def _file_link(path: Path) -> str:
+    """A markdown link to a book file, relative to player_handbook/ (where
+    Index.md lives)."""
+    if path.parent == MM_MANUAL:
+        return f"../mm_manual/{path.name}"
+    return path.name
 
 
 def _link(path: Path, anchor: str) -> str:
-    """A markdown link to a heading, relative to player_handbook/ (where
-    Index.md lives)."""
-    if path.parent == MM_MANUAL:
-        return f"../mm_manual/{path.name}#{anchor}"
-    return f"{path.name}#{anchor}"
+    """A markdown link to a heading within a book file."""
+    return f"{_file_link(path)}#{anchor}"
 
 
 def build_index(
@@ -128,7 +185,12 @@ def build_index(
     return index
 
 
-def render_index(index: dict[str, list[tuple[Path, str, str]]]) -> str:
+def render_index(
+    index: dict[str, list[tuple[Path, str, str]]],
+    pointers: dict[str, str] | None = None,
+) -> str:
+    pointers = pointers or {}
+    chapters = _chapter_files() if pointers else {}
     lines = [
         "# Index",
         "",
@@ -137,12 +199,23 @@ def render_index(index: dict[str, list[tuple[Path, str, str]]]) -> str:
         "Regenerating this file should produce no diff (INV-4); if it "
         "doesn't, the index was stale.*",
         "",
+        "*Each term lists the sections that **define or rule on** it — the "
+        "sections it is about — not every passing mention.*",
+        "",
         "---",
         "",
     ]
     for term in sorted(index, key=str.lower):
         lines.append(f"## {term}")
         lines.append("")
+
+        source = chapters.get(pointers.get(term, ""))
+        if source is not None:
+            lines.append(
+                f"*Defined in [{_chapter_label(source)}]({_file_link(source)}).*"
+            )
+            lines.append("")
+
         occurrences = index[term]
         if not occurrences:
             lines.append("_No sections found._")
@@ -155,7 +228,7 @@ def render_index(index: dict[str, list[tuple[Path, str, str]]]) -> str:
 
 
 def generate_index_text() -> str:
-    return render_index(build_index())
+    return render_index(build_index(), parse_glossary_pointers())
 
 
 def main() -> int:
