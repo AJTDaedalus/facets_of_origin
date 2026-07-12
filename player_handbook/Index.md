@@ -998,6 +998,7 @@
 ## Second Domain
 
 - [Glossary — Glossary](Glossary.md#glossary)
+- [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain-intent-scope)
 

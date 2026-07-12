@@ -459,6 +459,15 @@ class Character(BaseModel):
                 f"Domain Technique."
             )
 
+        # One Second Domain per character (II.4b/II.4c). Both trees offer the
+        # Technique, so a cross-trained mage can reach two Tier 3 gates — the
+        # second is refused, not silently written over the first.
+        if tech_def.grants_secondary_domain and self.secondary_magic_domain:
+            return False, (
+                f"You already hold the second domain "
+                f"'{self.secondary_magic_domain}' — a character holds one."
+            )
+
         if (
             tech_def.magic_granting
             and not formalizing

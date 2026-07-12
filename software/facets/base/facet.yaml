@@ -654,6 +654,21 @@ techniques:
                   you know it, and it is accurate.
                 prerequisites: [cross_reference]
 
+              - id: second_domain_mind
+                name: "Second Domain"
+                description: >
+                  Your study has opened onto a second territory — an adjacent field whose
+                  principles your first domain taught you to read. Choose a second standard
+                  domain from the Domains of the Mind list (prismatic territories require
+                  Ascendant Domain). You may use magic within that domain using the
+                  Domain + Intent + Scope framework, rolling Knowledge as normal. Effects
+                  within your second domain are treated as one difficulty step harder than
+                  your primary domain.
+                grants_secondary_domain: true
+                prerequisites: [cross_reference]
+                has_choice: true
+                choice_prompt: "Choose a second standard domain from the Domains of the Mind list (must differ from your first; prismatic domains excluded)."
+
               - id: ascendant_domain_mind
                 name: "Ascendant Domain"
                 description: >
