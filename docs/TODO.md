@@ -9,7 +9,12 @@ strike it here with a pointer.
 
 ---
 
-## T1 — PHB III.3 is silent on whether a redundant armor charge is spent
+## ~~T1 — PHB III.3 is silent on whether a redundant armor charge is spent~~
+
+**Closed 2026-07-11** (editorial-fixes pass): PHB III.3 *Armor and Reaction
+Downgrades* now states the charge-consumption rule ("a downgrade that softens
+nothing costs nothing from the budget"), and MM5's Armor quick-ref compresses
+it. `facet.yaml` and the engine already agreed — no code change was needed.
 
 **Source:** PR #5 review (DECISIONS R1, 2026-07-11).
 

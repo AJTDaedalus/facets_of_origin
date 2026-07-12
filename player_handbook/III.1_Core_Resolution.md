@@ -77,7 +77,7 @@ Before you roll, you may spend one or more Sparks. Each Spark **adds a d6** to y
 
 > *One Spark: roll 3d6, drop the lowest. Two Sparks: roll 4d6, drop the two lowest.*
 
-Sparks are always spent **before** you roll — there is no spending a Spark after you see the result. Sparks are most useful when everything is on the line. A Spark spent on a trivial roll is a Spark not available at the moment that matters. That tension is the point.
+Sparks are always spent **before** you roll — there is no spending a Spark after you see the result. Sparks are most useful when everything is on the line. A Spark spent on a trivial roll is a Spark you won't have at the moment that matters.
 
 ---
 
@@ -136,7 +136,7 @@ The MM should only call for a roll when three conditions are met:
 
 > **Sidebar: The "Don't Roll, Just Do It" Principle**
 >
-> Facets has fewer rolls per session than most TTRPGs. This is intentional. Every roll should feel like it matters — a moment of genuine tension where the table leans in. If you are rolling for routine actions, mundane conversations, or situations where the outcome is already determined by the fiction, the rolls are stealing weight from the moments that earn it.
+> Facets has fewer rolls per session than most TTRPGs, on purpose. Every roll should feel like it matters — a moment of genuine tension where the table leans in. If you are rolling for routine actions, mundane conversations, or situations where the outcome is already determined by the fiction, the rolls are stealing weight from the moments that earn it.
 >
 > The MM's default should lean toward *yes* — let the character succeed, let the story move, and save the dice for the moments that crackle.
 

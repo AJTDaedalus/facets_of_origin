@@ -10,15 +10,15 @@ Their tools are attention, memory, and analysis. Their superpower is that they a
 
 ## Skills of the Mind
 
-| Skill | Attribute | Covers |
-|---|---|---|
-| **Lore** | Knowledge | Recalling and applying accumulated learning: history, cultures, languages, creature lore, arcane theory, religious traditions, and the significance of what you find |
-| **Investigate** | Intelligence | Active analysis: examining a scene, finding patterns, working out how something functions, deducing what happened, identifying the thing that doesn't fit |
-| **Craft** | Intelligence | Making, repairing, and modifying objects: tools, mechanisms, structures, alchemical preparations, and anything that requires precision of thought as much as precision of hand |
-| **Insight** | Wisdom | Reading people and situations: understanding what someone actually wants, sensing deception, noticing the wrong note in a conversation before you can name it |
-| **Survival** | Wisdom | Navigating and enduring unfamiliar environments: tracking, finding food and shelter, reading weather and terrain, sensing danger in the wild before it arrives |
+| Skill | Attribute |
+|---|---|
+| **Lore** | Knowledge |
+| **Investigate** | Intelligence |
+| **Craft** | Intelligence |
+| **Insight** | Wisdom |
+| **Survival** | Wisdom |
 
-*(Skills of the Body and Soul are defined in their respective Facet chapters.)*
+Full descriptions are in Chapter II.6 — Skills.
 
 ---
 
@@ -93,7 +93,7 @@ Once per scene, when you enter a social situation — a negotiation, a gathering
 #### Tier 3 *(requires one Instinct Tier 2)*
 
 **First Move**
-Once per session, your instincts extend to everyone around you. You may declare that the party acts on your read of the situation — before any opposition can react, before any ambush springs, before the moment tips. Everyone in the party acts first in the next exchange. No roll required.
+Once per session, your instincts extend to everyone around you. You may declare that the party acts on your read of the situation. This exchange, the opposition does not act until every party member's action has resolved — no ambush springs, no prepared trap goes off, and an enemy defeated or disrupted before its moment never gets that moment at all. No roll required.
 
 **Pattern Recognition**
 Once per session, you may name a pattern you have observed across multiple scenes or sessions — a repeated behavior, a structural similarity, a tell that keeps appearing. The MM must confirm whether the pattern is real. If it is, you understand something about the situation, the antagonist, or the world that no amount of direct investigation could have uncovered. The MM tells you one true implication of that pattern that the fiction has not yet revealed.
@@ -133,5 +133,8 @@ Once per session, your depth of knowledge prevents a consequence the party would
 
 **Deep Archive**
 Once per session, you may recall something you have no direct reason to know — a piece of esoteric knowledge from a tradition you weren't trained in, a fact from a period of history outside your specialty, a technical detail from a craft you've never practiced. Describe what you're reaching for. The MM tells you whether your character, given their depth of study and their habit of reading broadly and well, could plausibly have encountered this knowledge. If yes: you know it, and it is accurate.
+
+**Ascendant Domain**
+*Requires an existing Mind domain (Arcane Study).* Your practice has outgrown a single territory. Choose one prismatic domain from the Domains of the Mind list (Chapter II.3). You may work within it using the Domain + Intent + Scope framework, rolling Knowledge. The Broad difficulty table applies — Hard at Minor scope, Very Hard at Significant and Major — and its Major-scope ceiling cannot be moved by Sparks. Your original domain is unchanged; the prismatic territory is a wider practice built on everything it taught you.
 
 ---

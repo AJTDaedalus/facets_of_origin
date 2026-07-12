@@ -39,9 +39,6 @@ character:
     lore:
       rank: practiced
       marks: 0
-    investigate:
-      rank: novice
-      marks: 1  # Background Mark from Guild Apprentice
 
   magic:
     domain: inscription
@@ -66,10 +63,8 @@ character:
     starting_skill_bonus:
       skill: lore
       rank: practiced
-    secondary_skill:
-      skill: investigate
-      rank: novice
-      marks: 1
+    # Magic-granting Background: the Inscription domain origin takes the
+    # place of a secondary skill (PHB II.5; facet.yaml domain_replaces_secondary).
     specialty: >
       Deep familiarity with the Artificers' Guild records, technical vocabulary,
       and personnel — and with the circumstances of the Guild's dissolution.
@@ -78,7 +73,6 @@ character:
 
   career_advances: 1  # progression metric — total skill rank advances taken (Novice→Practiced = 1, etc.)
                       # Background starting skill (Lore Practiced) = 1 advance
-                      # Background Mark on Investigate does not count until rank advances
 
   facet_level: 0
   rank_advances_this_facet_level: 0
@@ -91,10 +85,10 @@ character:
     social obliviousness, not rudeness.
 
     Domain note: Inscription is active from session one at Minor scope only,
-    one difficulty step harder than normal (per II.5 — Background grants
-    narrative origin, Technique formalizes full capacity). Arcane Study
-    (Archive Branch, Tier 1) at Facet level 1 unlocks full scope and normal
-    difficulty.
+    at the domain's normal difficulty — the scope restriction is the only
+    limitation (per II.5 — Background grants narrative origin, Technique
+    formalizes full capacity). Arcane Study (Archive Branch, Tier 1) at
+    Facet level 1 unlocks full scope.
 
 created_at: '2026-03-04T00:00:00+00:00'
 last_modified: '2026-03-04T00:00:00+00:00'

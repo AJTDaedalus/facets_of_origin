@@ -8,13 +8,15 @@ Soul Facet characters solve problems by moving people and bending the world towa
 
 ## Skills of the Soul
 
-| Skill | Attribute | Covers |
-|---|---|---|
-| **Persuade** | Charisma | Moving people with words and presence: convincing, inspiring, negotiating, commanding, making yourself believed |
-| **Deceive** | Charisma | Misleading people: lying convincingly, disguising intent, maintaining a false identity, misdirecting attention at the critical moment |
-| **Perform** | Charisma | Captivating an audience: music, storytelling, acting, oratory, any art used to move people rather than merely entertain them |
-| **Attune** | Spirit | Connecting to forces beyond the physical: sensing the supernatural, channeling spiritual energy, communing with animals or spirits, holding rituals |
-| **Gamble** | Luck | Pressing fortune: reading probability in the moment, knowing when to push and when to walk away, acting on intuition when the stakes are real |
+| Skill | Attribute |
+|---|---|
+| **Persuade** | Charisma |
+| **Deceive** | Charisma |
+| **Perform** | Charisma |
+| **Attune** | Spirit |
+| **Gamble** | Luck |
+
+Full descriptions are in Chapter II.6 — Skills.
 
 ---
 
@@ -25,6 +27,8 @@ The Soul tree has three branches: **Presence** (Charisma), **Fortune** (Luck), a
 ---
 
 ### Presence Branch
+
+Presence Techniques represent the weight a person carries into a room — the ability to read what people want, say the one thing they cannot wave away, and shift a scene by standing in the middle of it and speaking. A sword ends an argument; Presence ends the need for one.
 
 ---
 
@@ -62,6 +66,8 @@ Anyone who has a meaningful interaction with you remembers you — specifically,
 
 ### Fortune Branch
 
+Fortune Techniques represent a strange, standing arrangement with probability — the unlocked door, the guard called away a moment ago, the hunch that turns out to be load-bearing. Fortune cannot be planned, aimed, or explained, which has never once stopped it from working.
+
 ---
 
 #### Tier 1
@@ -96,6 +102,8 @@ When you spend a Spark on a roll, add two dice instead of one and still drop the
 
 ### Communion Branch
 
+Communion Techniques represent connection with what lives beneath the visible world — spirits, bonds, and the thin places most people walk past without a shiver. Communion does not command these forces; it stands in honest relation to them, which turns out to be the thing they answer.
+
 ---
 
 #### Tier 1
@@ -124,6 +132,9 @@ When you attempt to communicate intent to a creature that cannot speak your lang
 Once per session, you may anchor something spiritual that is failing or breaking: a ritual unraveling, a protective ward dissolving, a spirit's grief turning to rage, a boundary giving way. Your presence is sufficient to hold it steady. No roll is required. You do not need to know what you are doing — you need only to stand in it and refuse to let go. The MM determines what holding the line costs you in the fiction, but it holds.
 
 **Second Domain**
-You have grown into a second intuitive magical domain — a complementary territory that your original practice has opened. Choose a second domain from the Domains of the Soul list. You may use magic within that domain using the Domain + Intent + Scope framework, rolling Spirit as normal. Effects within your second domain are treated as one difficulty step harder than your primary domain.
+You have grown into a second intuitive magical domain — a complementary territory that your original practice has opened. Choose a second standard domain from the Domains of the Soul list (prismatic territories require Ascendant Domain, below). You may use magic within that domain using the Domain + Intent + Scope framework, rolling Spirit as normal. Effects within your second domain are treated as one difficulty step harder than your primary domain.
+
+**Ascendant Domain**
+*Requires an existing Soul domain (Spiritual Domain).* Your practice has outgrown a single territory. Choose one prismatic domain from the Domains of the Soul list (Chapter II.3). You may work within it using the Domain + Intent + Scope framework, rolling Spirit. The Broad difficulty table applies — Hard at Minor scope, Very Hard at Significant and Major — and its Major-scope ceiling cannot be moved by Sparks. Your original domain is unchanged; the prismatic territory is a wider practice built on everything it taught you.
 
 ---

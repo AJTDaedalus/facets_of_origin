@@ -1,10 +1,10 @@
-# Character Creation: Facets
+# Character Creation: Facets and Advancement
 
 ## What Is a Facet?
 
 A Facet is the broad shape of who your character is becoming through play.
 
-It is not a class you pick from a menu. It is not a role you are locked into. It is the direction your character naturally grows — the part of themselves they keep reaching for when things get hard. A Facet is declared at character creation, but it is confirmed by what you actually do over the course of a campaign.
+A Facet is not a class you pick from a menu, and it never locks you into a role. It is the direction your character naturally grows — the part of themselves they keep reaching for when things get hard. You declare a Facet at character creation, but what confirms it is what you actually do over the course of a campaign.
 
 There are three Facets, mirroring the three Major Attributes:
 
@@ -41,20 +41,6 @@ Skill rank stacks with your attribute modifier. A character with Dexterity 3 (+1
 
 ---
 
-### Skills of the Body
-
-| Skill | Attribute | Covers |
-|---|---|---|
-| **Athletics** | Strength | Lifting, climbing, swimming, jumping, forcing things |
-| **Combat** | Strength | Attacking, weapon use, fighting technique |
-| **Stealth** | Dexterity | Moving unseen or unheard, hiding, shadowing someone |
-| **Finesse** | Dexterity | Sleight of hand, precision work, ranged weapons, acrobatics |
-| **Endurance** | Constitution | Resisting injury, pushing through hardship, surviving extremes |
-
-*(Skills of the Mind and Soul are defined in their respective Facet chapters.)*
-
----
-
 ## Advancing Skills
 
 Skills improve through use. At the end of each session, you have **4 skill points** to distribute among skills you actually used during that session. Each point spent on a skill adds one mark toward its next rank.
@@ -82,7 +68,7 @@ A skill rank advance is any time a skill in that Facet moves from one rank to th
 
 With 5 skills and 3 possible advances each, a fully developed Facet produces 15 total advances — exactly enough to reach Facet level 1 (at 5 advances), Facet level 2 (at 10), and Facet level 3 (at 15). Reaching Facet level 3 means you have mastered every skill your Facet has to offer. Facet level 4 and beyond require cross-training into other Facets.
 
-> Facet level 3 is the top of a single Facet — you've taken it as far as it goes. Level 4 and beyond is where breadth begins. That isn't a ceiling on specialization; it's a reflection of how mastery actually works. At the highest levels, experts grow by absorbing adjacent disciplines: the supreme warrior who studies philosophy, the master mage who learns a craftsperson's patience.
+> Facet level 3 is the top of a single Facet — you've taken it as far as it goes. Level 4 and beyond is where breadth begins, which is how mastery tends to work anyway: at the highest levels, experts grow by absorbing adjacent disciplines. The supreme warrior who studies philosophy. The master mage who learns a craftsperson's patience.
 
 > **Example:** Zulnut advances Combat to Practiced (1 advance), Stealth to Practiced (2), Athletics to Practiced (3), Stealth to Expert (4), Finesse to Practiced (5). *Facet level 1.* Several sessions later, Combat to Expert (6), Athletics to Expert (7), Endurance to Practiced (8), Finesse to Expert (9), Endurance to Expert (10). *Facet level 2.*
 
@@ -97,108 +83,6 @@ At each **Facet level** — in any Facet — you unlock one **Technique** from a
 The Technique tree has three tiers. Tier 1 is available at Facet level 1. Tier 2 requires at least one Tier 1 Technique in the same branch. Tier 3 requires at least one Tier 2 Technique in the same branch.
 
 When you unlock a Technique, you choose it during your **reflection scene** — the moment where this growth becomes real in the fiction (see *Advancement and Reflection*, below).
-
----
-
-### Facet of the Body — Technique Tree
-
-The Body tree has three branches: **Might** (Strength), **Grace** (Dexterity), and **Iron** (Constitution).
-
----
-
-#### Might Branch
-
-**Tier 1**
-
-**Forcing Hand** *(Strength)*
-When you succeed on an Athletics roll involving raw force, you may choose to leave a lasting mark on the environment — a door that cannot be resealed, a wall that bears your impact. The MM cannot undo this without explanation.
-
-**Weapon Mastery** *(Strength)*
-Choose one weapon type (blades, blunt, polearms, unarmed). Rolls using that weapon type are treated as one difficulty step easier.
-
----
-
-**Tier 2** *(requires one Might Tier 1)*
-
-**Overwhelming Force**
-When you succeed on a Combat roll against a single target by 3 or more above the threshold, the target is staggered — they act last in the next exchange and cannot take reactions until they do.
-
-**Lift the World**
-Once per scene, you may attempt a feat of Strength that would normally be impossible without tools or assistance — holding up a collapsing ceiling, halting a moving cart, forcing open a sealed vault. Roll Athletics at Hard difficulty. On a 10+, you succeed. On a 7–9, you succeed at a cost.
-
----
-
-**Tier 3** *(requires one Might Tier 2)*
-
-**Unstoppable**
-When you move toward a goal in a straight line — physically, narratively — difficult terrain, minor obstacles, and crowds do not slow you. Only something that can genuinely stop you requires a roll. Everything else simply moves.
-
-**The Final Blow**
-Once per session, when you spend a Spark on a Combat roll and succeed, the outcome is final. The target is removed from the conflict entirely — defeated, fled, or broken — regardless of any remaining resources or abilities they had.
-
----
-
-#### Grace Branch
-
-**Tier 1**
-
-**Fleet Step** *(Dexterity)*
-You can move through or past obstacles — crowds, furniture, narrow gaps, uneven terrain — without requiring a roll, as long as you are not in direct combat and the obstacle is not actively blocking you.
-
-**Steady Hand** *(Dexterity)*
-Rolls for precision work under pressure (picking locks, threading a needle, disabling a mechanism mid-crisis) are treated as one difficulty step easier.
-
----
-
-**Tier 2** *(requires one Grace Tier 1)*
-
-**Shadow Walk**
-When moving in darkness, dim light, or natural cover, you do not need to roll Stealth to remain undetected while moving. You only roll when performing an action that might draw attention.
-
-**Blur of Motion**
-Once per scene, when you would be targeted by an attack or sudden physical threat, you may spend a Spark to simply not be where they expected. You are not harmed, and the attacker must re-establish their approach.
-
----
-
-**Tier 3** *(requires one Grace Tier 2)*
-
-**Ghost Step**
-You never roll Stealth for movement alone. You only roll when you take an action — speaking, attacking, interacting with an object. Your passage leaves no trace the MM can use against you.
-
-**The Vanishing**
-Once per session, you may disappear from a scene entirely without explanation to anyone watching. You reappear at the start of the next scene in any position that is plausibly reachable. No roll required. The MM does not ask how.
-
----
-
-#### Iron Branch
-
-**Tier 1**
-
-**Hard to Kill** *(Constitution)*
-When you fail an Endurance roll, you may choose to succeed at a cost instead — you push through, but mark one consequence the MM names immediately. You cannot use this ability again until the consequence is resolved or acknowledged in the fiction.
-
-**Acclimated** *(Constitution)*
-Choose one type of environmental hardship: extreme cold, extreme heat, altitude, or deprivation (hunger/thirst/sleep). Endurance rolls against your chosen hardship are treated as one difficulty step easier.
-
----
-
-**Tier 2** *(requires one Iron Tier 1)*
-
-**Shrug It Off**
-Once per scene, you may ignore a minor wound or physical consequence entirely. It happened — it simply does not slow you down this scene.
-
-**Grinding Advance**
-When everyone else at the table has spent their resources or run out of options, you have not. Once per session, you may declare that you still have something left — a Spark, a second wind, a reserve of will. Gain one Spark immediately.
-
----
-
-**Tier 3** *(requires one Iron Tier 2)*
-
-**Unbreakable**
-Once per session, when something would remove you from the scene — defeat, collapse, capture, death — you may choose to remain. You are battered, spent, and at the edge. But you are still standing. The MM may not remove you from the scene against your will once per session.
-
-**The Long Road**
-At the end of any session in which your character endured significant hardship, you recover fully — wounds, consequences, and spent resources — without requiring downtime or rest. You are what hardship makes you.
 
 ---
 

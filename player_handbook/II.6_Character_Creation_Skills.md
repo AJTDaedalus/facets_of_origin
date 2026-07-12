@@ -4,9 +4,9 @@
 
 Skills are specific areas of developed capability — what your character has learned to do through practice, training, or hard experience. Where attributes represent your fundamental nature, skills represent what you have made of yourself.
 
-Every character begins with all skills at **Novice** rank. Your Background determines your starting skills — you don't choose them separately (see Chapter II.5). Through play, skills you actually use advance toward **Practiced** and eventually **Expert**.
+Every character begins with all skills at **Novice** rank. Your Background determines your starting skills — you don't choose them separately (see Chapter II.5). Through play, skills you actually use advance toward **Practiced**, **Expert**, and eventually **Master**.
 
-Full rules for skill advancement, the session skill point economy, and reflection scenes are in **Chapter II.4 (Facets)**. Full descriptions and Technique trees are in the Facet chapters (II.4, II.4b, II.4c). This chapter provides the complete reference and explains how skill checks work.
+Full rules for skill advancement, the session skill point economy, and reflection scenes are in **Chapter II.4 (Facets)**. Technique trees are in the Facet chapters (II.4a, II.4b, II.4c). This chapter is the canonical source for skill descriptions and explains how skill checks work.
 
 ---
 
@@ -55,45 +55,51 @@ Feats of raw physical capability: lifting, climbing, swimming, jumping, forcing 
 Fighting technique with any melee weapon or unarmed. Covers attacking, parrying, wrestling, and reading an opponent's physical intent. Combat represents trained fighting skill — raw aggression is Strength alone.
 
 **Stealth** *(Dexterity)*
-Moving without being detected: staying quiet, staying out of sight, tailing someone without being noticed, hiding in available cover. Stealth is about your presence going unnoticed, not about concealment the environment provides on its own.
+Moving without being detected: staying quiet, staying out of sight, tailing someone, hiding in available cover. Stealth is about your presence going unnoticed, not about concealment the environment provides on its own.
 
 **Finesse** *(Dexterity)*
-Precision work under pressure: picking locks, sleight of hand, ranged weapons (bows, thrown weapons, crossbows), acrobatics, disabling mechanisms. Finesse is Dexterity applied with care and intention.
+Precision work under pressure: picking locks, sleight of hand, ranged weapons, acrobatics, disabling mechanisms. Finesse is Dexterity applied with care and intention.
 
 **Endurance** *(Constitution)*
-Pushing through physical hardship: staying functional through injury, resisting illness or poison, surviving exposure to extremes (cold, heat, deprivation), maintaining effort when others have stopped. Endurance is not about how tough you are — it is about how long you keep going.
+Pushing through physical hardship: staying functional through injury, resisting illness or poison, surviving extremes. Endurance covers exposure to cold, heat, and deprivation, and maintaining effort when others have stopped — it is not about how tough you are, but how long you keep going.
 
 ---
 
 ### Skills of the Mind
 
-Full descriptions are in **Chapter II.4b — Facet of the Mind**.
+**Lore** *(Knowledge)*
+Recalling and applying accumulated learning: history, cultures, languages, creature lore, arcane theory, religious traditions. Lore also covers the significance of what you find.
 
-**Lore** *(Knowledge)* — Recalling and applying accumulated learning: history, cultures, languages, creature lore, arcane theory, religious traditions, and the significance of what you find.
+**Investigate** *(Intelligence)*
+Active analysis: examining a scene, finding patterns, working out how something functions, deducing what happened. Investigate is identifying the thing that doesn't fit.
 
-**Investigate** *(Intelligence)* — Active analysis: examining a scene, finding patterns, working out how something functions, deducing what happened, identifying the thing that doesn't fit.
+**Craft** *(Intelligence)*
+Making, repairing, and modifying objects: tools, mechanisms, structures, alchemical preparations. Craft requires precision of thought as much as precision of hand.
 
-**Craft** *(Intelligence)* — Making, repairing, and modifying objects: tools, mechanisms, structures, alchemical preparations, and anything that requires precision of thought as much as precision of hand.
+**Insight** *(Wisdom)*
+Reading people and situations: understanding what someone actually wants, sensing deception, noticing the wrong note in a conversation. Often you notice the wrong note before you can name it.
 
-**Insight** *(Wisdom)* — Reading people and situations: understanding what someone actually wants, sensing deception, noticing the wrong note in a conversation before you can name it.
-
-**Survival** *(Wisdom)* — Navigating and enduring unfamiliar environments: tracking, finding food and shelter, reading weather and terrain, sensing danger in the wild before it arrives.
+**Survival** *(Wisdom)*
+Navigating and enduring unfamiliar environments: tracking, finding food and shelter, reading weather and terrain, sensing danger in the wild. Survival means sensing that danger before it arrives.
 
 ---
 
 ### Skills of the Soul
 
-Full descriptions are in **Chapter II.4c — Facet of the Soul**.
+**Persuade** *(Charisma)*
+Moving people with words and presence: convincing, inspiring, negotiating, commanding, making yourself believed.
 
-**Persuade** *(Charisma)* — Moving people with words and presence: convincing, inspiring, negotiating, commanding, making yourself believed.
+**Deceive** *(Charisma)*
+Misleading people: lying convincingly, disguising intent, maintaining a false identity, misdirecting attention. The best deception lands at exactly the critical moment.
 
-**Deceive** *(Charisma)* — Misleading people: lying convincingly, disguising intent, maintaining a false identity, misdirecting attention at the critical moment.
+**Perform** *(Charisma)*
+Captivating an audience: music, storytelling, acting, oratory, any art used to move people rather than merely entertain.
 
-**Perform** *(Charisma)* — Captivating an audience: music, storytelling, acting, oratory, any art used to move people rather than merely entertain them.
+**Attune** *(Spirit)*
+Connecting to forces beyond the physical: sensing the supernatural, channeling spiritual energy, communing with animals or spirits. Attune also covers holding rituals.
 
-**Attune** *(Spirit)* — Connecting to forces beyond the physical: sensing the supernatural, channeling spiritual energy, communing with animals or spirits, holding rituals.
-
-**Gamble** *(Luck)* — Pressing fortune: reading probability in the moment, knowing when to push and when to walk away, acting on intuition when the stakes are real.
+**Gamble** *(Luck)*
+Pressing fortune: reading probability in the moment, knowing when to push and when to walk away, acting on intuition when the stakes are real.
 
 ---
 
@@ -112,9 +118,9 @@ Skill modifiers stack with your Minor Attribute modifier. The maximum combined m
 
 ## Starting Skills
 
-All characters begin with every skill at Novice. There are no starting skill bonuses from character creation — your skills emerge from play, not from a menu of choices.
+All characters begin with every skill at Novice. Apart from what your Background grants, there are no starting skill choices — your skills emerge from play, not from a menu.
 
-Some **Backgrounds** (Chapter II.5) grant a single skill at Practiced rank at character creation, reflecting prior training or life experience. Most Backgrounds also grant a **secondary skill** — a second skill from your Primary Facet starting at Novice with 1 mark already recorded (the Background Mark). These are the only exceptions to the "all skills start at Novice with no marks" rule.
+Your **Background** (Chapter II.5) grants a single skill at Practiced rank at character creation, reflecting prior training or life experience. Most Backgrounds also grant a **secondary skill** — a second skill from your Primary Facet starting at Novice with 1 mark already recorded (the Background Mark); magic-granting Backgrounds provide a domain origin in its place. These are the only exceptions to the "all skills start at Novice with no marks" rule.
 
 ---
 

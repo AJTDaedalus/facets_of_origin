@@ -205,3 +205,217 @@ This is a ninth row on the D5 contradiction ledger, discovered during code surve
 **Still open:** `resolve_strike`/`resolve_reaction` remain without a production caller (the live strike is split across two player/MM actions; LOG WS-A0 judgment call #3). The offense modifier is now shared, so the divergence that mattered is closed, but the asymmetry itself is not — new rules placed inside `resolve_strike` will still reach the simulator and not the table. There is also **no MM UI for applying conditions to a PC**; `reaction_downgraded` is wired server-side and has no client control yet.
 
 **Status:** ✅ Fixed. 964 tests pass (+24). Sim corpus unchanged.
+
+---
+
+## Production Apparatus (2026-07-12)
+
+Planner-tier calls on `docs/DESIGN_production_apparatus.md` (editorial review §D).
+None is a rules change; all are structural. Owner sign-off pending.
+
+### P13 — The glossary and index are *derived* artifacts: generate the index, test both
+
+**Decision:** `Index.md` is emitted by `software/tools/build_index.py` and guarded by an
+up-to-date test (regeneration must produce no diff — the lockfile pattern). The glossary is
+hand-written but bound by a test that every entry's chapter pointer resolves and the target
+contains the term. Both ship with the machinery that keeps them true.
+
+**Why:** an index is a pure function of the finished text and a glossary is, by this project's
+own law, a quick reference — "a compression of canonical body text, never a new rule." Both go
+stale the moment a chapter moves, and a stale index is *worse than no index*: it misdirects
+with full confidence. This repo has already paid once for two copies of a rule drifting apart
+(the `combat.py` extraction, P1/C1). Hand-maintaining derived artifacts in a ruleset that is
+still moving is the same bet a second time.
+
+**Rejected:** *hand-written index* — cheaper today, rots by the next content branch, and nothing
+would catch it. *No index* — the review is right that the cross-references are one-directional;
+for a digital-first book the term→section map is the whole navigation layer.
+
+### P14 — Skill text has four copies, not three; the fix nominates two homes and binds them
+
+**Decision:** prose home = II.6's Skill List; data home = `facet.yaml`'s per-skill `description`.
+The three Facet chapters drop descriptions entirely and carry name + attribute + a pointer to
+II.6. A test asserts the two surviving copies agree.
+
+**Why:** the review's §D5 found three prose copies and prescribed "make II.6 canonical." It
+missed the fourth — `facet.yaml:150+` carries a `description` per skill, in the file `CLAUDE.md`
+names the single source of truth for mechanics. You cannot collapse to one home without either
+stripping data the engine may want or making a doc the authority over `facet.yaml`. So: two
+homes, one for prose and one for data, and a test in place of a promise. Four uncoupled copies
+become two coupled ones.
+
+**Also found:** II.6:69 and II.6:85 point at II.4b/II.4c for "full descriptions" that do not
+exist there — those chapters carry a *shorter* table whose text is byte-identical to II.6's own.
+The pointer sends a reader to a lesser copy of what they are already reading. PA-3 reverses it.
+
+### P15 — Write the cross-reference resolver *before* the renumber
+
+**Decision:** PA-1 (a test that every `Chapter X.Y` citation in both books resolves to a real
+file) lands before PA-2 (the II.4 → II.4 + II.4a split). It passes on today's text; it is what
+makes the renumber safe.
+
+**Why:** renumbering a book by hand and hoping you caught all 26 citations is how a book ships
+with dangling references. TDD applied to prose: the invariant exists before the change that
+could break it. This turns PA-2 from a careful error-prone task into a mechanical one.
+
+### P16 — Standardize roll markers on `→`, not `>`
+
+**Decision:** roll resolutions use `→` in both books. `>` is reserved for advice callouts.
+
+**Why:** the review framed this as an arbitrary consistency choice. It is not quite: the MM
+manual already uses `>` for callout boxes (MM2:42, :70, :165), so `>` there means *two* things
+and a reader cannot tell a roll from a sidebar by its marker. `→` is already the PHB's marker
+and is unambiguous. Standardizing the other way would deepen the collision.
+
+### P17 — Recommend growing III.2, not folding it *(escalated to Brain — Q1)*
+
+**Planner recommendation, not a ruling.** III.2 is 46 lines and will look vestigial in print,
+but both fold-targets are wrong. Threat Clocks exist *because* hazards are not combat — moving
+them into III.3 undoes the chapter's own argument. And the death rules ("Broken never kills
+you"; the player, never the MM, chooses the scar or the heroic death) are among the strongest
+design statements in the book; folding them into a combat chapter buries them and implies death
+is a combat outcome, which is precisely what they deny. Grow it with the two worked examples it
+lacks. That is a vignette in the recurring cast's voice — Brain/Fable's call and Fable's pen.
+
+### P18 — The index spec assumes digital-first *(escalated to Brain — Q2)*
+
+If a physical print run is actually planned, a page-number index cannot be generated from
+markdown and must come from the layout tool instead. PA-10 as specified would be the wrong
+artifact. Everything upstream of it is unaffected either way. **Confirm before PA-10 starts.**
+
+### B1 — III.2 grows; it does not fold *(Brain ruling on Q1, 2026-07-12 — resolves P17, unblocks PA-8)*
+
+**Ruling:** grow. The Planner's analysis is correct and is adopted as written: both fold-targets
+are self-defeating. Threat Clocks are the book's statement that hazards are not combat — filing
+them under Combat erases the statement. And the death rules are the strongest promise the book
+makes ("Broken never kills you"; the player, never the MM, chooses the ending). A promise about
+how death works does not belong inside the chapter about how fighting works; a reader skimming
+for "what happens when I die" must not have to wade through Strike outcomes to find it.
+
+One consideration the Planner did not raise, which settles it independently: III.2 is the only
+rules chapter a *novice MM* leans on harder than players do — clocks and recovery are MM-facing
+machinery. Folding it into III.3 makes the MM's simplest tool look like a combat subsystem, which
+is exactly the misreading MM1's hazard guidance exists to prevent. Short is not vestigial;
+III.1 is short too, and nobody proposes folding the resolution system.
+
+**Scope of the growth:** the two worked examples the chapter lacks (a Threat Clock filling; the
+scar-or-heroic-death choice), In Play vignettes in the recurring cast's voice. No rules text
+changes. Executed by Fable in the same pass as this ruling.
+
+### B2 — Digital-first is confirmed; PA-10's generated index is the right artifact *(Brain ruling on Q2, 2026-07-12 — resolves P18, unblocks PA-10)*
+
+**Ruling:** there is no print milestone. Digital-first is not an assumption this design made —
+it is the project's founding constraint (CLAUDE.md, pillar 2; the Introduction's own philosophy
+section), and no roadmap file, TODO, or handoff anywhere in the repo schedules a print run. The
+review's "print/PDF milestone" phrasing imported an assumption from traditional publishing; it
+has no referent here. PA-10 as specified (term → linked-section map, generated by
+`build_index.py`, guarded by INV-4) is the correct artifact and may proceed once PA-9 lands.
+
+**Reversal condition, recorded so nobody re-litigates this from scratch:** if the owner ever
+schedules a physical print run, that milestone creates a *new* task — a page-number index
+emitted by the layout tool — and does not modify PA-10. The linked term index remains the
+digital navigation layer regardless. Nothing upstream is affected either way.
+
+### B3 — The sheet gets a name line; II.1's canonical description grows one sentence *(Brain ruling on the PA-5 escalation, 2026-07-12)*
+
+**Question (Worker, PA-5 log):** II.1's six-section sheet description names no Character Name or
+Player Name field, and PA-5's rule was "no field II.1 does not name." The Worker correctly
+shipped a nameless sheet and flagged it rather than inventing a field.
+
+**Ruling:** add the name line — by amending the canonical text first, then the sheet, in that
+order. The engine's `Character` model *requires* both fields (`name` and `player_name` are
+non-optional, `character.py:69-70`); INV-2's own philosophy cuts both ways — a sheet that lets a
+player record what the engine cannot store lies about the game, and a sheet with no home for
+what the engine demands is equally a lie. The defect was never in the sheet; it was in II.1's
+description, which specified the six sections and forgot the header every one of those sections
+hangs off of.
+
+**Execution:** II.1 gains one sentence naming the sheet's header (character name + player name)
+above the six-section table — a header, not a seventh section, so PA-5's section count stands.
+The sheet gains the matching header block; INV-2's mapping gains `Character Name → name` and
+`Player Name → player_name`. Fable-executed with this ruling.
+
+---
+
+## Ascendant Domain — engine support (issue #8, PR #7 review, 2026-07-12)
+
+Full design: `docs/DESIGN_ascendant_domain.md`. PR #7 added the Ascendant Domain Tier 3
+Technique to the PHB, the Glossary, and `facet.yaml`, but the engine honored none of its
+three clauses. The prose was right; the software never caught up — the exact failure the
+Software-PHB Sync law in CLAUDE.md exists to prevent.
+
+### D-A1 — The domain catalog is data, transcribed from the appendix
+
+`facet.yaml`'s `magic:` section had **no domain catalog at all**, so `get_domain()` returned
+`None` for every domain and the engine silently substituted a synthetic `type: "standard"`.
+Every prismatic domain therefore rolled the Standard table. The 21 domains, their types, and
+their prismatic status are fully specified in `Appendix_Magic_Domains.md`, and `MagicDomainDef`
+was already purpose-built to hold them (`requires_tier3` is even documented for exactly this) —
+so populating `soul_domains` / `mind_domains` is **transcription of existing canon, not
+invention**, and needed no Brain ruling. Tradition follows from the Facet (Mind → `scholarly`,
+Soul → `intuitive`, per II.4b/II.4c).
+
+Guarded by **INV-7**: the appendix and `facet.yaml` must agree on the domain set and every
+domain's type. A domain whose type differs between them rolls one difficulty at the table and
+another in the engine.
+
+### D-A2 — `ascendant_domain` is its own field, not a reuse of `secondary_magic_domain`
+
+The one-step-harder penalty is a property of the *acquisition route*, not of the domain. Second
+Domain costs +1 difficulty step; Ascendant Domain pays with the Broad table instead and takes no
+step penalty. Reusing `secondary_magic_domain` would have leaked Second Domain's tax onto every
+Ascendant cast. A field per route is the honest model.
+
+**Rejected:** a general `domains: list[str]` refactor — it touches persistence, the API, the web
+app, and the `.fof` spec, for no gain this change can use. Reconsider if a third route appears.
+
+### D-A4 — The Broad "ceiling" was not a ceiling
+
+`engine.py` ended `resolve_magic_roll` with `if domain_def.type == "broad": difficulty_label =
+"Very Hard"`, labelled as ceiling enforcement. It enforced nothing: Very Hard is already the top
+of the ladder and `_step_difficulty_harder` saturates there, while `push_scope` is refused
+outright for Broad domains. What the line actually did was *raise* a Minor-scope Broad cast from
+its canonical Hard to Very Hard. Deleted. This was dormant only because no domain had ever
+resolved to `broad` — D-A1 would have made it live.
+
+### D-A6 — Second Domain's choice now reaches `secondary_magic_domain`
+
+Nothing outside `.fof` loading had ever written that field, so the penalty it gates could only
+fire for a hand-authored character. Same class of bug as the Ascendant overwrite, same code
+path, fixed alongside it — which is what makes the two Tier 3 routes symmetric.
+
+### D-A7 — Cross-Facet Tier 1 grants a second domain, untaxed *(owner ruling, 2026-07-12)*
+
+**Question:** a Mind/Soul mage who cross-trains into the *other* Facet's Tier 1 Technique gains a
+domain from that Facet's list. II.3 permits cross-Facet characters to take these Techniques, but
+its worked example is a *Body* character with no domain — it never says what happens when the
+taker already practises one. The engine silently overwrote the original.
+
+**Ruling:** they hold both, each at its own normal difficulty, neither taxed for the other. At most
+one domain per Facet by this route. Written into II.3.
+
+**Accepted consequence, recorded so nobody rediscovers it as a bug:** this makes **Second Domain**
+(Soul Communion Tier 3, permanently one difficulty step harder) strictly worse than a Tier 1
+cross-Facet pick for any character willing to pay the cross-Facet advancement rate. Second Domain's
+value needs a second look — tracked separately, not silently patched here.
+
+### D-A8 — One prismatic domain per character *(owner ruling, 2026-07-12)*
+
+A character who reaches Tier 3 in two Facet trees could take Ascendant Domain twice; the second
+prismatic silently overwrote the first. Ruled: the second is **refused**. A character masters one
+prismatic territory, however many trees they climb. `ascendant_domain` stays a single field.
+
+### Domain slots, after D-A7 and D-A8
+
+One field per acquisition route, because the route is what sets the price:
+
+| Field | Route | Cost |
+|---|---|---|
+| `magic_domain` | Background origin, formalized by that Facet's Tier 1 Technique | none |
+| `cross_facet_domain` | The *other* Facet's Tier 1 Technique | cross-Facet advancement rate |
+| `secondary_magic_domain` | Second Domain (Soul Communion, Tier 3) | one difficulty step, permanently |
+| `ascendant_domain` | Ascendant Domain (Tier 3) — prismatic, max one | the Broad table |
+
+Re-selecting the domain a Background already granted is *formalization*, not a duplicate — the
+Tier 1 Technique unlocks full scope on a domain the character already has (II.3/II.5). That case
+is exempt from the duplicate check; everything else is refused rather than overwritten.

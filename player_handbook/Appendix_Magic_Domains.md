@@ -12,11 +12,11 @@ This appendix contains the full descriptions of all 21 magic domains available i
 
 Soul magic flows from will, presence, and spiritual connection. It is felt before it is understood. Soul mages command domains rooted in the living world, the elements of presence and sensation, and the forces that move through creatures and the space between them.
 
-The soul domain list includes nine standard domains and three prismatic domains. Standard domains are available at Tier 1 of the Soul Facet Technique tree. Prismatic domains require a Tier 3 Technique — they represent mastery so complete that the domain's breadth has become a practitioner's natural territory rather than an overwhelming one.
+The soul domain list includes nine core domains and three prismatic domains. Core domains (each Focused or Standard in type) are available at Tier 1 of the Soul Facet Technique tree. Prismatic domains require the Ascendant Domain Technique (Tier 3) — they represent mastery so complete that the domain's breadth has become a practitioner's natural territory rather than an overwhelming one.
 
 ---
 
-### Standard Soul Domains
+### Core Soul Domains
 
 ---
 
@@ -139,7 +139,7 @@ The ebb and flow of natural energy between living things — vitality passing fr
 
 ### Prismatic Soul Domains
 
-Prismatic domains require a **Tier 3 Soul Technique** to access. They represent the broadest magical territories available — commanding them at all requires a practitioner whose understanding spans multiple thematic spaces rather than a single focused one. All Prismatic domains are Broad type: Hard at Minor scope, Very Hard at Significant, and Very Hard at Major with no exceptions and no ceiling movement through Sparks.
+Prismatic domains require the **Ascendant Domain** Technique (Tier 3, Communion branch) to access. They represent the broadest magical territories available — commanding them at all requires a practitioner whose understanding spans multiple thematic spaces rather than a single focused one. All Prismatic domains are Broad type: Hard at Minor scope, Very Hard at Significant, and Very Hard at Major with no exceptions and no ceiling movement through Sparks.
 
 ---
 
@@ -186,11 +186,11 @@ The animating current that runs through all living things simultaneously — not
 
 Mind magic is constructed rather than felt. Where Soul mages reach inward and outward simultaneously, Mind mages build: they study, analyze, and assemble effects from principles they understand. Mind magic tends toward precision, inscription, and the manipulation of information and perception. A Mind mage who does not understand what they are doing does not do it well — and a Mind mage who understands it completely is extraordinarily difficult to surprise.
 
-The mind domain list includes six standard domains and three prismatic domains, following the same structure as Soul. Standard domains are available at Tier 1 of the Mind Facet Technique tree. Prismatic domains require a Tier 3 Technique.
+The mind domain list includes six core domains and three prismatic domains, following the same structure as Soul. Core domains are available at Tier 1 of the Mind Facet Technique tree. Prismatic domains require the Ascendant Domain Technique (Tier 3).
 
 ---
 
-### Standard Mind Domains
+### Core Mind Domains
 
 ---
 
@@ -274,7 +274,7 @@ The generation and direction of invisible force — telekinesis, barriers, shape
 
 ### Prismatic Mind Domains
 
-Prismatic Mind domains require a **Tier 3 Mind Technique** to access. They are the widest, most powerful thematic territories available to Mind practitioners, requiring mastery across multiple disciplines before they can be wielded at all. All are Broad type.
+Prismatic Mind domains require the **Ascendant Domain** Technique (Tier 3, Archive branch) to access. They are the widest, most powerful thematic territories available to Mind practitioners, requiring mastery across multiple disciplines before they can be wielded at all. All are Broad type.
 
 ---
 

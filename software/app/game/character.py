@@ -95,6 +95,16 @@ class Character(BaseModel):
     # Magic (persisted)
     magic_domain: Optional[str] = None
     secondary_magic_domain: Optional[str] = None  # Soul Communion T3 "Second Domain"
+    # Tier 3 "Ascendant Domain" — a prismatic domain held *alongside* the
+    # original. Kept apart from secondary_magic_domain because the routes cost
+    # differently: Second Domain is one difficulty step harder, while Ascendant
+    # pays with the Broad table instead and takes no step penalty (II.4b/II.4c).
+    # One per character (II.3).
+    ascendant_domain: Optional[str] = None
+    # A domain taken from the *other* Facet's Tier 1, held alongside the first at
+    # no difficulty penalty (II.3). One field per acquisition route, because the
+    # route is what sets the price.
+    cross_facet_domain: Optional[str] = None
     magic_tradition: Optional[str] = None  # "intuitive" | "scholarly"
     magic_technique_active: bool = False
 
@@ -332,14 +342,133 @@ class Character(BaseModel):
         if self.technique_picks_available <= 0:
             return False, "No Technique picks available — reach a Facet level to earn one."
 
+        # Validated before anything is consumed: an illegal domain pick must not
+        # burn the Technique slot on its way out.
+        if tech_def and choice:
+            valid, reason = self._validate_domain_choice(
+                tech_def, str(choice), ruleset, technique_id
+            )
+            if not valid:
+                return False, reason
+
         self.technique_picks_available -= 1
         self.techniques.append(technique_id)
         if choice:
             self.technique_choices[technique_id] = str(choice)
         if tech_def and tech_def.magic_granting:
             self.magic_technique_active = True
-            if choice:
-                self.magic_domain = choice
+        if tech_def and choice:
+            # Which slot the choice lands in is the whole difference between the
+            # magic Techniques, and the slot is what sets the price:
+            #   ascendant_domain      — prismatic, Broad table, no step penalty
+            #   secondary_magic_domain — Second Domain, one step harder
+            #   cross_facet_domain    — the other Facet's Tier 1, untaxed
+            #   magic_domain          — the original
+            if tech_def.grants_prismatic_domain:
+                self.ascendant_domain = str(choice)
+            elif tech_def.grants_secondary_domain:
+                self.secondary_magic_domain = str(choice)
+            elif tech_def.magic_granting:
+                # Formalizing the Background's domain re-sets the same value;
+                # anything else is a genuine second domain from the other Facet.
+                if self.magic_domain in (None, str(choice)):
+                    self.magic_domain = str(choice)
+                else:
+                    self.cross_facet_domain = str(choice)
+        return True, "ok"
+
+    def held_domains(self) -> list[str]:
+        """Every domain the character currently practises, by any route."""
+        return [
+            d for d in (
+                self.magic_domain,
+                self.cross_facet_domain,
+                self.secondary_magic_domain,
+                self.ascendant_domain,
+            ) if d
+        ]
+
+    @staticmethod
+    def _facet_domains(facet_id: str | None, ruleset) -> list:
+        """The domain catalog for a Facet's tree. Body has no domains of its own.
+
+        Keyed on the *Technique's* Facet, not the character's primary one: a
+        cross-training character choosing from Soul's tree picks Soul domains
+        (PHB II.3 — "choosing from that Facet's domain list").
+        """
+        if not ruleset.magic or facet_id is None:
+            return []
+        pools = {
+            "soul": ruleset.magic.soul_domains,
+            "mind": ruleset.magic.mind_domains,
+        }
+        return pools.get(facet_id, [])
+
+    def _validate_domain_choice(
+        self, tech_def, choice: str, ruleset, technique_id: str
+    ) -> tuple[bool, str]:
+        """Ascendant Domain takes a prismatic domain; Second Domain takes a
+        non-prismatic one that differs from the first. Both draw from the domain
+        list of the Facet whose tree the Technique lives in. Techniques whose
+        choice isn't a domain at all pass straight through.
+        """
+        grants_domain = (
+            tech_def.grants_prismatic_domain
+            or tech_def.grants_secondary_domain
+            or tech_def.magic_granting
+        )
+        if not grants_domain:
+            return True, "ok"
+
+        facet_id = ruleset.get_technique_facet(technique_id)
+        pool = self._facet_domains(facet_id, ruleset)
+        domain = next((d for d in pool if d.id == choice), None)
+        if domain is None:
+            return False, (
+                f"'{choice}' is not a domain of the Facet of the "
+                f"{(facet_id or 'unknown').capitalize()}."
+            )
+
+        # Re-selecting the domain a Background already granted is not a duplicate:
+        # the Tier 1 Technique *formalizes* that domain and unlocks full scope
+        # (II.3, II.5). It adds nothing, so it is exempt from the checks below.
+        formalizing = tech_def.magic_granting and choice == self.magic_domain
+
+        # Otherwise no domain may be practised twice, by any route.
+        if choice in self.held_domains() and not formalizing:
+            return False, f"You already practise '{choice}'."
+
+        if tech_def.grants_prismatic_domain:
+            if domain.type != "broad":
+                return False, (
+                    f"Ascendant Domain requires a prismatic domain; "
+                    f"'{choice}' is not one."
+                )
+            # One prismatic territory per character (II.3).
+            if self.ascendant_domain:
+                return False, (
+                    f"You already hold the prismatic domain "
+                    f"'{self.ascendant_domain}' — a character masters only one."
+                )
+            return True, "ok"
+
+        # Every non-Ascendant route takes a non-prismatic domain.
+        if domain.type == "broad":
+            return False, (
+                f"Prismatic territories like '{choice}' require the Ascendant "
+                f"Domain Technique."
+            )
+
+        if (
+            tech_def.magic_granting
+            and not formalizing
+            and self.magic_domain
+            and self.cross_facet_domain
+        ):
+            return False, (
+                "You already practise a domain in each Facet — a further domain "
+                "requires the Second Domain Technique."
+            )
         return True, "ok"
 
     def to_client_dict(self) -> dict:
@@ -402,6 +531,10 @@ class Character(BaseModel):
             char_block["magic_technique_active"] = self.magic_technique_active
         if self.secondary_magic_domain is not None:
             char_block["secondary_magic_domain"] = self.secondary_magic_domain
+        if self.ascendant_domain is not None:
+            char_block["ascendant_domain"] = self.ascendant_domain
+        if self.cross_facet_domain is not None:
+            char_block["cross_facet_domain"] = self.cross_facet_domain
         # Persist combat state so server restarts mid-combat can resume
         if self.endurance_current is not None:
             char_block["endurance_current"] = self.endurance_current
@@ -510,6 +643,8 @@ class Character(BaseModel):
             specialty=char_block.get("specialty"),
             magic_domain=char_block.get("magic_domain"),
             secondary_magic_domain=char_block.get("secondary_magic_domain"),
+            ascendant_domain=char_block.get("ascendant_domain"),
+            cross_facet_domain=char_block.get("cross_facet_domain"),
             magic_tradition=char_block.get("magic_tradition"),
             magic_technique_active=char_block.get("magic_technique_active", False),
             endurance_current=char_block.get("endurance_current"),
@@ -582,10 +717,9 @@ def create_default_character(
             career_advances += 1
 
         # Secondary Skill → Novice with 1 mark.
-        # Some backgrounds (Guild Apprentice, Hedge Scholar) replace the
-        # secondary skill with a magic domain when one is chosen.  Others
-        # (Temple Acolyte) grant both.  The flag domain_replaces_secondary
-        # controls which behaviour applies.
+        # Magic-granting Backgrounds replace the secondary skill with the
+        # domain origin when a domain is actually chosen (PHB II.5); without
+        # a domain they grant the secondary skill like any other Background.
         skip_secondary = bg.domain_replaces_secondary and magic_domain
         if bg.secondary_skill and not skip_secondary:
             if bg.secondary_skill in skills:

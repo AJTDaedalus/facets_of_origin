@@ -6,7 +6,7 @@
 #   - Added Master (rank 4, +3) to skill_ranks
 #   - Corrected Mind skills to match II.4b (Lore, Investigate, Craft, Insight, Survival)
 #   - Corrected Soul skills to match II.4c (Persuade, Deceive, Perform, Attune, Gamble)
-#   - Rewrote Body Technique tree to match II.4 exactly (Might/Grace/Iron branches)
+#   - Rewrote Body Technique tree to match II.4a exactly (Might/Grace/Iron branches)
 #   - Added full Mind Technique tree from II.4b (Clarity/Instinct/Archive branches)
 #   - Added full Soul Technique tree from II.4c (Presence/Fortune/Communion branches)
 #   - Added major_advancement_threshold (every 4 Facet levels)
@@ -654,6 +654,20 @@ techniques:
                   you know it, and it is accurate.
                 prerequisites: [cross_reference]
 
+              - id: ascendant_domain_mind
+                name: "Ascendant Domain"
+                description: >
+                  Your practice has outgrown a single territory. Choose one prismatic domain from
+                  the Domains of the Mind list (Chapter II.3). You may work within it using the
+                  Domain + Intent + Scope framework, rolling Knowledge. The Broad difficulty table
+                  applies (Hard / Very Hard / Very Hard), and its Major-scope ceiling cannot be
+                  moved by Sparks. Your original domain is unchanged.
+                magic_granting: true
+                grants_prismatic_domain: true
+                prerequisites: [cross_reference]
+                has_choice: true
+                choice_prompt: "Choose one prismatic domain from the Domains of the Mind list."
+
   # =========================================================================
   # Facet of the Soul
   # Branches: Presence (Charisma) / Fortune (Luck) / Communion (Spirit)
@@ -850,13 +864,29 @@ techniques:
               - id: second_domain
                 name: "Second Domain"
                 description: >
-                  You have grown into a second intuitive magical domain. Choose a second domain
-                  from the Domains of the Soul list. You may use magic within that domain using the
-                  Domain + Intent + Scope framework, rolling Spirit as normal. Effects within your
-                  second domain are treated as one difficulty step harder than your primary domain.
+                  You have grown into a second intuitive magical domain. Choose a second standard
+                  domain from the Domains of the Soul list (prismatic territories require Ascendant
+                  Domain). You may use magic within that domain using the Domain + Intent + Scope
+                  framework, rolling Spirit as normal. Effects within your second domain are
+                  treated as one difficulty step harder than your primary domain.
+                grants_secondary_domain: true
                 prerequisites: [the_language_beneath_language]
                 has_choice: true
-                choice_prompt: "Choose a second domain from the Domains of the Soul list (must differ from your first)."
+                choice_prompt: "Choose a second standard domain from the Domains of the Soul list (must differ from your first; prismatic domains excluded)."
+
+              - id: ascendant_domain_soul
+                name: "Ascendant Domain"
+                description: >
+                  Your practice has outgrown a single territory. Choose one prismatic domain from
+                  the Domains of the Soul list (Chapter II.3). You may work within it using the
+                  Domain + Intent + Scope framework, rolling Spirit. The Broad difficulty table
+                  applies (Hard / Very Hard / Very Hard), and its Major-scope ceiling cannot be
+                  moved by Sparks. Your original domain is unchanged.
+                magic_granting: true
+                grants_prismatic_domain: true
+                prerequisites: [the_language_beneath_language]
+                has_choice: true
+                choice_prompt: "Choose one prismatic domain from the Domains of the Soul list."
 
 # ---------------------------------------------------------------------------
 # Roll Resolution
@@ -1028,6 +1058,188 @@ magic:
         minor: Hard
         significant: "Very Hard"
         major: "Very Hard"
+
+  # Domain catalog — transcribed from player_handbook/Appendix_Magic_Domains.md,
+  # which is canon. Types (focused/standard/broad) and prismatic status come from
+  # the appendix verbatim; tradition follows from the Facet (Mind rolls Knowledge,
+  # Soul rolls Spirit — II.4b/II.4c). Broad == Prismatic, reachable only via the
+  # Ascendant Domain Tier 3 Technique. INV-7 (test_docs_consistency.py) enforces
+  # that this list and the appendix never drift apart.
+  soul_domains:
+    - id: fire
+      name: "Fire"
+      type: focused
+      tradition: intuitive
+      requires_tier3: false
+      description: >-
+        Heat, flame, combustion, and the light produced by fire.
+    - id: shadow
+      name: "Shadow"
+      type: focused
+      tradition: intuitive
+      requires_tier3: false
+      description: >-
+        Darkness, the absence of light, and the physical sensation of cold
+        that accompanies true shadow.
+    - id: storm
+      name: "Storm"
+      type: standard
+      tradition: intuitive
+      requires_tier3: false
+      description: >-
+        Wind, rain, lightning, thunder, and the behavior of weather within a
+        scene.
+    - id: beasts
+      name: "Beasts"
+      type: standard
+      tradition: intuitive
+      requires_tier3: false
+      description: >-
+        Communication with, calming of, commanding of, and minor shaping of
+        animals and mundane creatures.
+    - id: resonance
+      name: "Resonance"
+      type: standard
+      tradition: intuitive
+      requires_tier3: false
+      description: >-
+        Sound, vibration, and harmonic force.
+    - id: verdance
+      name: "Verdance"
+      type: standard
+      tradition: intuitive
+      requires_tier3: false
+      description: >-
+        Living plants: growing, shaping, animating, and communicating with
+        plant life.
+    - id: binding
+      name: "Binding"
+      type: standard
+      tradition: intuitive
+      requires_tier3: false
+      description: >-
+        The creation and enforcement of oaths, pacts, and spiritual
+        constraints.
+    - id: presence
+      name: "Presence"
+      type: standard
+      tradition: intuitive
+      requires_tier3: false
+      description: >-
+        The force of a person's spiritual weight in a space — their warmth,
+        authority, terror, or calm, projected outward as a tangible thing.
+    - id: the_tide
+      name: "The Tide"
+      type: standard
+      tradition: intuitive
+      requires_tier3: false
+      description: >-
+        The ebb and flow of natural energy between living things — vitality
+        passing from one form to another.
+    - id: the_undying
+      name: "The Undying"
+      type: broad
+      tradition: intuitive
+      requires_tier3: true
+      description: >-
+        Death, the boundary between living and dead, spirits of the departed,
+        and the animating force that lingers after life ends.
+    - id: fate
+      name: "Fate"
+      type: broad
+      tradition: intuitive
+      requires_tier3: true
+      description: >-
+        Probability, luck, and the threads of what is likely to happen.
+    - id: the_living_world
+      name: "The Living World"
+      type: broad
+      tradition: intuitive
+      requires_tier3: true
+      description: >-
+        The animating current that runs through all living things
+        simultaneously — not specific to plants or beasts or people, but the
+        shared force of existing as a creature in the world.
+
+  mind_domains:
+    - id: illusion
+      name: "Illusion"
+      type: standard
+      tradition: scholarly
+      requires_tier3: false
+      description: >-
+        The construction of false sensory experience: images, sounds, smells,
+        textures, and temperatures that are not there.
+    - id: warding
+      name: "Warding"
+      type: standard
+      tradition: scholarly
+      requires_tier3: false
+      description: >-
+        The inscription of protective limits into physical space or objects.
+    - id: inscription
+      name: "Inscription"
+      type: focused
+      tradition: scholarly
+      requires_tier3: false
+      description: >-
+        The encoding of magical effects into physical surfaces: runes, marks,
+        glyphs, and patterns that hold an effect in suspended state until a
+        defined trigger releases it.
+    - id: transmutation
+      name: "Transmutation"
+      type: standard
+      tradition: scholarly
+      requires_tier3: false
+      description: >-
+        The structural alteration of non-living material: changing what
+        something is made of, reshaping its form, altering its properties.
+    - id: divination
+      name: "Divination"
+      type: standard
+      tradition: scholarly
+      requires_tier3: false
+      description: >-
+        The gathering of information through magical means: reading the
+        history of an object or place, perceiving events at a distance, asking
+        precise questions about the state of the world and receiving answers,
+        sensing lies and hidden truths, and at Major scope, perceiving the
+        broad shape of events across significant distances or time gaps
+        (recent past and near future only).
+    - id: constructed_force
+      name: "Constructed Force"
+      type: focused
+      tradition: scholarly
+      requires_tier3: false
+      description: >-
+        The generation and direction of invisible force — telekinesis,
+        barriers, shaped pressure, and impact without physical source.
+    - id: the_arcane
+      name: "The Arcane"
+      type: broad
+      tradition: scholarly
+      requires_tier3: true
+      description: >-
+        The fundamental substrate of magical practice itself — the ability to
+        perceive, manipulate, counter, and redirect magical workings
+        regardless of their source or domain.
+    - id: the_constructed_mind
+      name: "The Constructed Mind"
+      type: broad
+      tradition: scholarly
+      requires_tier3: true
+      description: >-
+        The creation and direction of artificial intelligence: magical
+        constructs with independent cognition, from simple automatons capable
+        of following complex instructions to genuine minds capable of
+        reasoning, learning, and independent action.
+    - id: chronomancy
+      name: "Chronomancy"
+      type: broad
+      tradition: scholarly
+      requires_tier3: true
+      description: >-
+        Time.
 
 # ---------------------------------------------------------------------------
 # Combat rules (PHB III.3)
@@ -1243,6 +1455,7 @@ backgrounds:
     secondary_skill: perform
     specialty: "Recognizes the rituals, symbols, and internal politics of one specific religious tradition in detail."
     domain_origin: soul
+    domain_replaces_secondary: true
 
   - id: traveling_merchant
     name: "Traveling Merchant"

@@ -141,7 +141,7 @@ The MM declares a **difficulty** before you roll:
 | Hard | -1 |
 | Very Hard | -2 |
 
-> **Why this matters for character creation:** A Strong attribute (+1) against a Hard task (-1) nets +0 — the same baseline as Average on Standard. A Weak attribute against a Very Hard task hits -3, which borders on desperate. Your attribute choices carry meaning in context.
+> **Why this matters for character creation:** A Strong attribute (+1) against a Hard task (-1) nets +0 — the same baseline as Average on Standard. A Weak attribute against a Very Hard task hits -3, which borders on desperate.
 
 **Sparks** are narrative resources earned for remarkable moments and spent before a roll: each Spark adds a d6, then you drop the lowest. They shift the odds by replacing your worst potential outcomes. Full details on Sparks, difficulty, contested rolls, saving throws, and outcome guidance are in **Chapter III.1 (Core Resolution)**.
 
@@ -163,7 +163,7 @@ The party has arrived in Thornwall to investigate a string of disappearances in 
 
 **MM:** "Standard. Roll it."
 
-→ Zahna rolls **2d6 + Knowledge (3 → +1)** at Standard difficulty and gets a **10**. Full success.
+→ Zahna rolls **2d6 + Knowledge (3 → +1) + Lore Practiced (+1)** at Standard difficulty and gets a **10**. Full success.
 
 **MM:** "You find three prior disappearances from fifteen years ago. Same season, same area. The records reference an investigation. Closed. Very quietly."
 
@@ -197,7 +197,7 @@ The party has arrived in Thornwall to investigate a string of disappearances in 
 
 *Zulnut spends the Spark before rolling.*
 
-→ Zulnut rolls **3d6 + Dexterity (3 → +1)**, drops the lowest die, at Easy difficulty (+1), and gets a **12**.
+→ Zulnut rolls **3d6 + Dexterity (3 → +1) + Finesse Practiced (+1)**, drops the lowest die, at Easy difficulty (+1), and gets a **12**.
 
 **MM:** "She is currently informing Mordai that she has personally filed complaints against three city watchmen and is not intimidated by whatever he thinks he is. She does not notice you. You have the key."
 

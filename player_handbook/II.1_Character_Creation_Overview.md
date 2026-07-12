@@ -8,7 +8,7 @@ Both aspects live together in the Facets Character Sheet, on paper or in the dig
 
 ### What the Character Sheet Contains
 
-The sheet has six sections:
+At the top, before any of its sections, the sheet records two names: your character's and your own. Below that, it has six sections:
 
 | Section | What It Holds |
 |---|---|
@@ -17,7 +17,7 @@ The sheet has six sections:
 | **Background** | Your character's title and origin, your Starting Skill (Practiced), your Secondary Skill (Novice with 1 mark), and your Specialty |
 | **Skills** | All 15 skills across the three Facets — current rank (Novice/Practiced/Expert/Master) and marks toward the next rank |
 | **Techniques** | The specific abilities you have unlocked from the Facet Technique trees (any tree whose prerequisites you meet), plus any choices made at unlock |
-| **Session Resources** | Your current Spark count and Session Skill Points remaining to spend at session end |
+| **Session Resources** | Your current Spark count and the skill points you receive to spend at each session's end |
 
 ---
 
@@ -47,7 +47,7 @@ Before the first session, it is worth the table asking a few shared questions:
 - Are there themes the table wants to explore, or themes to avoid?
 - How do these characters know each other, or how do they meet?
 
-These are not logistics. They are the beginning of the collaborative worldbuilding that makes Facets of Origin work. The rules exist to serve the story you build together. The story does not exist to exercise the rules.
+These are not logistics. They are the beginning of the collaborative worldbuilding that makes Facets of Origin work.
 
 ---
 
@@ -57,7 +57,8 @@ The following sections walk you through creating your character's statistics:
 
 - **II.2 — Attributes:** Your character's fundamental nature, from broad physical capability to soul and presence
 - **II.3 — Magic:** How magic works in Facets of Origin, and how to establish your domain if your character uses it
-- **II.4 — Facets:** Your character's direction of growth, and the Technique trees available within it
+- **II.4 — Facets & Advancement:** Your character's direction of growth, and how skills, Facet levels, and Techniques advance
+- **II.4a — Facet of the Body:** Skills and Techniques for physical, forceful, and enduring characters
 - **II.4b — Facet of the Mind:** Skills and Techniques for scholarly, perceptive, and analytical characters
 - **II.4c — Facet of the Soul:** Skills and Techniques for diplomatic, spiritual, and luck-touched characters
 - **II.5 — Backgrounds:** Your character's history, relationships, and the narrative origin of any magical domains

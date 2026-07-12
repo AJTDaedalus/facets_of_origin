@@ -4,7 +4,7 @@
 
 Your Background is who you were before the story started.
 
-It is not a class. It is not a role you are locked into. It is the life that shaped you — the work you did, the world you moved through, the people and institutions that left their mark on you before anyone at this table knew your name. A Background gives you a title, a history, and three things the fiction made true about you: a skill you genuinely developed, a second skill you've touched but not mastered, and a narrow area where your specific experience gives you an edge no generalist would have.
+It is not a character class, and it decides nothing about where you're headed. It is the life that shaped you — the work you did, the world you moved through, the people and institutions that left their mark on you before anyone at this table knew your name. A Background gives you a title, a history, and three things the fiction made true about you: a skill you genuinely developed, a second skill you've touched but not mastered, and a narrow area where your specific experience gives you an edge no generalist would have.
 
 For characters with magic, the Background is also the origin story. Not "I have the Fire domain" — but *where were you when you first understood what you could do?* The Background answers that question. The Facet Technique activates it.
 
@@ -12,7 +12,7 @@ For characters with magic, the Background is also the origin story. Not "I have 
 
 ## What a Background Contains
 
-Every Background — pre-built or custom — has four elements. Magic-granting Backgrounds replace the Secondary Skill with a domain origin (see *Magic and Backgrounds*).
+Every Background — pre-built or custom — has five elements. Magic-granting Backgrounds replace the Secondary Skill with a domain origin (see *Magic and Backgrounds*).
 
 ---
 
@@ -24,7 +24,7 @@ What you call yourself, or what others call you. Not a formal designation unless
 
 **Description**
 
-Two or three sentences of history. Where did you come from? What did you do? What did it cost or teach you? This is not a biography — it is the relevant context. The Mirror Master will read it. Write for them.
+Two or three sentences of history. Where did you come from? What did you do? What did it cost or teach you? Keep it to the relevant context rather than a biography. The Mirror Master will read it. Write for them.
 
 ---
 
@@ -282,11 +282,11 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 *Starting Skill:* Attune (Practiced)
 
-*Secondary Skill:* Perform (Novice, 1 mark) — acolytes lead ceremonies, chant liturgies, and guide communal ritual. The line between devotion and performance is thinner than most devout would admit.
+*Secondary Skill (non-magical):* Perform (Novice, 1 mark) — acolytes lead ceremonies, chant liturgies, and guide communal ritual. The line between devotion and performance is thinner than most devout would admit.
+
+*Domain origin (if magical, replaces secondary skill):* Choose one domain from the Domains of the Soul list. Your domain developed through spiritual practice — prayer, ritual, communion with forces your tradition named and yours to describe.
 
 *Specialty:* Recognizes the rituals, symbols, and internal politics of one specific religious tradition in detail.
-
-*Domain origin (if magical):* Choose one domain from the Domains of the Soul list. Your domain developed through spiritual practice — prayer, ritual, communion with forces your tradition named and yours to describe.
 
 ---
 
@@ -334,7 +334,7 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 ## A Note on Backgrounds and Identity
 
-The Background you choose is not a cage. It is a point of departure.
+The Background you choose is a point of departure, not a cage.
 
 Mordai might have the City Watch Veteran Background and spend the entire campaign moving away from what that trained him to be. Zahna's Guild Apprentice Background might define him for three sessions and become irrelevant background detail by session twenty. The Background gives the Mirror Master something to work with at the start. What your character becomes is up to the play that follows.
 
@@ -348,10 +348,10 @@ From the vignette in Chapter II.2 — Zahna at the archive, Mordai's argument wi
 
 Three different Backgrounds, three different shapes of competence at the table:
 
-*Zahna's Guild Apprentice Background explains why he goes directly to the cross-reference approach — and why his Lore at Practiced means the MM can call that Standard rather than Hard. He's not discovering how archives work. He's using a skill he already has.*
+*Zahna's Guild Apprentice Background explains why he goes directly to the cross-reference approach — and his Lore at Practiced adds +1 when he does. He's not discovering how archives work. He's using a skill he already has.*
 
 *Mordai's City Watch Veteran Background explains why his instinct is to confront the archivist directly, and why his Specialty (knowing how city institutions work) doesn't help here — the archivist knows it too, and better. His Charisma roll is still Hard. The Background doesn't make him good at everything. It makes him specifically good at one thing.*
 
-*Zulnut's Wandering Disciple Background explains why the MM calls the keyring lift Easy rather than Standard — noticing the exact moment attention shifts is exactly the discipline his training built. The Background is what justified the difficulty call.*
+*Zulnut's Wandering Disciple Background (a custom Background, built with the five-step path above) explains why the MM calls the keyring lift Easy rather than Standard — noticing the exact moment attention shifts is exactly the discipline his training built. The Background is what justified the difficulty call.*
 
 The Background doesn't override the dice. It changes the context the dice live in.

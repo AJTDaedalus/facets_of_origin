@@ -287,10 +287,10 @@ class TestCharacterAPI:
         assert char["skills"]["investigate"]["marks"] == 1  # secondary granted
         assert char["magic_domain"] is None
 
-    def test_background_temple_acolyte_keeps_secondary_with_domain(
+    def test_background_temple_acolyte_domain_replaces_secondary(
         self, client, mm_headers, active_session, valid_attributes
     ):
-        """Temple Acolyte: choosing a magic domain does NOT skip secondary skill (perform)."""
+        """Temple Acolyte: choosing a magic domain replaces the secondary skill (PHB II.5)."""
         resp = client.post(
             "/api/characters/",
             json={
@@ -307,11 +307,32 @@ class TestCharacterAPI:
         char = resp.json()["character"]
         # Starting skill: attune at practiced
         assert char["skills"]["attune"]["rank"] == "practiced"
-        # Secondary skill (perform) is KEPT even with magic domain
-        assert char["skills"]["perform"]["marks"] == 1
+        # Secondary skill (perform) is replaced by the domain origin
+        assert char["skills"].get("perform", {}).get("marks", 0) == 0
         # Magic domain is set
         assert char["magic_domain"] == "resonance"
         assert char["career_advances"] == 1
+
+    def test_background_temple_acolyte_keeps_secondary_without_domain(
+        self, client, mm_headers, active_session, valid_attributes
+    ):
+        """Temple Acolyte without a domain keeps the secondary skill (perform)."""
+        resp = client.post(
+            "/api/characters/",
+            json={
+                "session_id": active_session["session_id"],
+                "character_name": "Vesh",
+                "primary_facet": "soul",
+                "attributes": valid_attributes,
+                "background_id": "temple_acolyte",
+            },
+            headers=mm_headers,
+        )
+        assert resp.status_code == 200
+        char = resp.json()["character"]
+        assert char["skills"]["attune"]["rank"] == "practiced"
+        assert char["skills"]["perform"]["marks"] == 1
+        assert char["magic_domain"] is None
 
     def test_background_city_watch_veteran_no_domain(
         self, client, mm_headers, active_session, valid_attributes
