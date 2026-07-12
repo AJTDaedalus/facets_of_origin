@@ -249,9 +249,11 @@ def resolve_magic_roll(
     if is_secondary:
         difficulty_label = _step_difficulty_harder(difficulty_label, ruleset)
 
-    # Broad domain hard ceiling: Very Hard max, Sparks cannot push further
-    if domain_def.type == "broad":
-        difficulty_label = "Very Hard"  # enforce ceiling
+    # No Broad ceiling clamp is needed here: Very Hard is the top of the
+    # difficulty ladder and `_step_difficulty_harder` already saturates there,
+    # while `push_scope` is refused outright above. Assigning "Very Hard" would
+    # not enforce a ceiling — it would *raise* a Minor-scope Broad cast from its
+    # canonical Hard (II.4b/II.4c: "Hard at Minor scope").
 
     # Attribute for roll: tradition determines attribute
     tradition = domain_def.tradition

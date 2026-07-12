@@ -82,6 +82,15 @@ class TechniqueDef(BaseModel):
         choice_prompt: Human-readable prompt shown when has_choice is True.
         magic_granting: True if selecting this Technique sets magic_technique_active = True
                         on the character. Replaces hardcoded ID checks in the engine.
+        grants_prismatic_domain: True for Ascendant Domain (Tier 3). The choice is an
+                        *additional* prismatic domain — it lands in `ascendant_domain`
+                        and leaves the character's original `magic_domain` untouched
+                        (PHB II.4b/II.4c: "Your original domain is unchanged").
+                        Without this, `magic_granting` would overwrite the original.
+        grants_secondary_domain: True for Second Domain (Tier 3). The choice lands in
+                        `secondary_magic_domain`, which the engine taxes one difficulty
+                        step harder. Standard domains only — prismatic territories
+                        require Ascendant Domain instead (II.4c).
     """
 
     id: str
@@ -91,6 +100,8 @@ class TechniqueDef(BaseModel):
     has_choice: bool = False
     choice_prompt: str = ""
     magic_granting: bool = False
+    grants_prismatic_domain: bool = False
+    grants_secondary_domain: bool = False
 
 
 class TierDef(BaseModel):

@@ -95,6 +95,11 @@ class Character(BaseModel):
     # Magic (persisted)
     magic_domain: Optional[str] = None
     secondary_magic_domain: Optional[str] = None  # Soul Communion T3 "Second Domain"
+    # Tier 3 "Ascendant Domain" — a prismatic domain held *alongside* the
+    # original. Kept apart from secondary_magic_domain because the routes cost
+    # differently: Second Domain is one difficulty step harder, while Ascendant
+    # pays with the Broad table instead and takes no step penalty (II.4b/II.4c).
+    ascendant_domain: Optional[str] = None
     magic_tradition: Optional[str] = None  # "intuitive" | "scholarly"
     magic_technique_active: bool = False
 
@@ -332,14 +337,65 @@ class Character(BaseModel):
         if self.technique_picks_available <= 0:
             return False, "No Technique picks available — reach a Facet level to earn one."
 
+        # Validated before anything is consumed: an illegal domain pick must not
+        # burn the Technique slot on its way out.
+        if tech_def and choice:
+            valid, reason = self._validate_domain_choice(tech_def, str(choice), ruleset)
+            if not valid:
+                return False, reason
+
         self.technique_picks_available -= 1
         self.techniques.append(technique_id)
         if choice:
             self.technique_choices[technique_id] = str(choice)
         if tech_def and tech_def.magic_granting:
             self.magic_technique_active = True
-            if choice:
-                self.magic_domain = choice
+        if tech_def and choice:
+            # Which domain slot the choice lands in is the whole difference
+            # between the three magic Techniques. Ascendant Domain *adds* a
+            # prismatic domain; Second Domain *adds* a taxed standard one; a
+            # plain magic-granting Technique (Arcane Study) *sets* the original.
+            if tech_def.grants_prismatic_domain:
+                self.ascendant_domain = str(choice)
+            elif tech_def.grants_secondary_domain:
+                self.secondary_magic_domain = str(choice)
+            elif tech_def.magic_granting:
+                self.magic_domain = str(choice)
+        return True, "ok"
+
+    def _facet_domains(self, ruleset) -> list:
+        """The domain catalog for this character's Facet. Body has none."""
+        if not ruleset.magic:
+            return []
+        pools = {
+            "soul": ruleset.magic.soul_domains,
+            "mind": ruleset.magic.mind_domains,
+        }
+        return pools.get(self.primary_facet, [])
+
+    def _validate_domain_choice(self, tech_def, choice: str, ruleset) -> tuple[bool, str]:
+        """Ascendant Domain takes a prismatic domain; Second Domain takes a
+        non-prismatic one. Both must come from the character's own Facet list.
+        Techniques whose choice isn't a domain at all pass straight through.
+        """
+        if not (tech_def.grants_prismatic_domain or tech_def.grants_secondary_domain):
+            return True, "ok"
+
+        domain = next((d for d in self._facet_domains(ruleset) if d.id == choice), None)
+        if domain is None:
+            return False, (
+                f"'{choice}' is not a domain of the Facet of the "
+                f"{self.primary_facet.capitalize()}."
+            )
+        if tech_def.grants_prismatic_domain and domain.type != "broad":
+            return False, (
+                f"Ascendant Domain requires a prismatic domain; '{choice}' is not one."
+            )
+        if tech_def.grants_secondary_domain and domain.type == "broad":
+            return False, (
+                f"Second Domain requires a standard domain — prismatic territories "
+                f"like '{choice}' require Ascendant Domain."
+            )
         return True, "ok"
 
     def to_client_dict(self) -> dict:
@@ -402,6 +458,8 @@ class Character(BaseModel):
             char_block["magic_technique_active"] = self.magic_technique_active
         if self.secondary_magic_domain is not None:
             char_block["secondary_magic_domain"] = self.secondary_magic_domain
+        if self.ascendant_domain is not None:
+            char_block["ascendant_domain"] = self.ascendant_domain
         # Persist combat state so server restarts mid-combat can resume
         if self.endurance_current is not None:
             char_block["endurance_current"] = self.endurance_current
@@ -510,6 +568,7 @@ class Character(BaseModel):
             specialty=char_block.get("specialty"),
             magic_domain=char_block.get("magic_domain"),
             secondary_magic_domain=char_block.get("secondary_magic_domain"),
+            ascendant_domain=char_block.get("ascendant_domain"),
             magic_tradition=char_block.get("magic_tradition"),
             magic_technique_active=char_block.get("magic_technique_active", False),
             endurance_current=char_block.get("endurance_current"),

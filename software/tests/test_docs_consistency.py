@@ -13,6 +13,7 @@ Currently implemented:
   INV-4  Index.md is byte-identical to a fresh regeneration
   INV-5  every `Chapter X.Y` reference in either book resolves to a file
   INV-6  MM5 uses typographic dashes, not ASCII `--` / `-->`
+  INV-7  facet.yaml's domain catalog matches the Magic Domain appendix
 """
 from __future__ import annotations
 
@@ -258,6 +259,51 @@ def test_glossary_pointers_resolve() -> None:
             )
 
     assert not errors, "Glossary pointer mismatches:\n" + "\n".join(errors)
+
+
+# A domain heading in the appendix: `**Fire** *(Focused)*` on its own line. The
+# appendix is canon; facet.yaml is a transcription of it.
+_APPENDIX_DOMAIN = re.compile(r"^\*\*([A-Z][\w '&-]+?)\*\* \*\(([A-Za-z]+)\)\*\s*$", re.M)
+DOMAIN_APPENDIX = PLAYER_HANDBOOK / "Appendix_Magic_Domains.md"
+
+
+def _appendix_domains() -> dict[str, str]:
+    """{domain id: type} as the appendix declares them, across both Facets."""
+    domains: dict[str, str] = {}
+    for name, dtype in _APPENDIX_DOMAIN.findall(DOMAIN_APPENDIX.read_text()):
+        domain_id = re.sub(r"[^a-z0-9]+", "_", name.lower()).strip("_")
+        domains[domain_id] = dtype.lower()
+    return domains
+
+
+def test_domain_catalog_matches_appendix() -> None:
+    """INV-7: facet.yaml's domain catalog is the appendix, transcribed.
+
+    The catalog now lives in two coupled homes — canon prose (the appendix) and
+    data (facet.yaml) — and a domain whose *type* differs between them is a
+    domain that rolls one difficulty at the table and another in the engine.
+    That divergence is exactly what let prismatic domains be silently treated as
+    standard ones (issue #8).
+    """
+    data = yaml.safe_load(FACET_YAML.read_text())["magic"]
+    catalog = {
+        d["id"]: d["type"]
+        for d in data.get("soul_domains", []) + data.get("mind_domains", [])
+    }
+    appendix = _appendix_domains()
+
+    errors: list[str] = []
+    for domain_id, dtype in sorted(appendix.items()):
+        if domain_id not in catalog:
+            errors.append(f"{domain_id}: in the appendix, missing from facet.yaml")
+        elif catalog[domain_id] != dtype:
+            errors.append(
+                f"{domain_id}: appendix says {dtype!r}, facet.yaml says {catalog[domain_id]!r}"
+            )
+    for domain_id in sorted(set(catalog) - set(appendix)):
+        errors.append(f"{domain_id}: in facet.yaml, missing from the appendix")
+
+    assert not errors, "Domain catalog / appendix mismatches:\n" + "\n".join(errors)
 
 
 def test_index_is_up_to_date() -> None:

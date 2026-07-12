@@ -334,3 +334,52 @@ hangs off of.
 above the six-section table — a header, not a seventh section, so PA-5's section count stands.
 The sheet gains the matching header block; INV-2's mapping gains `Character Name → name` and
 `Player Name → player_name`. Fable-executed with this ruling.
+
+---
+
+## Ascendant Domain — engine support (issue #8, PR #7 review, 2026-07-12)
+
+Full design: `docs/DESIGN_ascendant_domain.md`. PR #7 added the Ascendant Domain Tier 3
+Technique to the PHB, the Glossary, and `facet.yaml`, but the engine honored none of its
+three clauses. The prose was right; the software never caught up — the exact failure the
+Software-PHB Sync law in CLAUDE.md exists to prevent.
+
+### D-A1 — The domain catalog is data, transcribed from the appendix
+
+`facet.yaml`'s `magic:` section had **no domain catalog at all**, so `get_domain()` returned
+`None` for every domain and the engine silently substituted a synthetic `type: "standard"`.
+Every prismatic domain therefore rolled the Standard table. The 21 domains, their types, and
+their prismatic status are fully specified in `Appendix_Magic_Domains.md`, and `MagicDomainDef`
+was already purpose-built to hold them (`requires_tier3` is even documented for exactly this) —
+so populating `soul_domains` / `mind_domains` is **transcription of existing canon, not
+invention**, and needed no Brain ruling. Tradition follows from the Facet (Mind → `scholarly`,
+Soul → `intuitive`, per II.4b/II.4c).
+
+Guarded by **INV-7**: the appendix and `facet.yaml` must agree on the domain set and every
+domain's type. A domain whose type differs between them rolls one difficulty at the table and
+another in the engine.
+
+### D-A2 — `ascendant_domain` is its own field, not a reuse of `secondary_magic_domain`
+
+The one-step-harder penalty is a property of the *acquisition route*, not of the domain. Second
+Domain costs +1 difficulty step; Ascendant Domain pays with the Broad table instead and takes no
+step penalty. Reusing `secondary_magic_domain` would have leaked Second Domain's tax onto every
+Ascendant cast. A field per route is the honest model.
+
+**Rejected:** a general `domains: list[str]` refactor — it touches persistence, the API, the web
+app, and the `.fof` spec, for no gain this change can use. Reconsider if a third route appears.
+
+### D-A4 — The Broad "ceiling" was not a ceiling
+
+`engine.py` ended `resolve_magic_roll` with `if domain_def.type == "broad": difficulty_label =
+"Very Hard"`, labelled as ceiling enforcement. It enforced nothing: Very Hard is already the top
+of the ladder and `_step_difficulty_harder` saturates there, while `push_scope` is refused
+outright for Broad domains. What the line actually did was *raise* a Minor-scope Broad cast from
+its canonical Hard to Very Hard. Deleted. This was dormant only because no domain had ever
+resolved to `broad` — D-A1 would have made it live.
+
+### D-A6 — Second Domain's choice now reaches `secondary_magic_domain`
+
+Nothing outside `.fof` loading had ever written that field, so the penalty it gates could only
+fire for a hand-authored character. Same class of bug as the Ascendant overwrite, same code
+path, fixed alongside it — which is what makes the two Tier 3 routes symmetric.
