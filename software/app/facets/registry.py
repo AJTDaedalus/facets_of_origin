@@ -110,11 +110,13 @@ class MergedRuleset:
         self._background_map: dict[str, BackgroundDefinition] = {bg.id: bg for bg in self.backgrounds}
         self._rating_map: dict[int, object] = {r.rating: r for r in self.attribute_ratings}
         self._technique_map: dict[str, TechniqueDef] = {}
-        for tree in self.techniques.values():
+        self._technique_facet_map: dict[str, str] = {}
+        for facet_id, tree in self.techniques.items():
             for branch in tree.branches:
                 for tier_def in branch.tiers:
                     for tech in tier_def.techniques:
                         self._technique_map[tech.id] = tech
+                        self._technique_facet_map[tech.id] = facet_id
 
         self._validate_cross_references()
 
@@ -143,6 +145,15 @@ class MergedRuleset:
     def get_technique(self, technique_id: str) -> TechniqueDef | None:
         """Return the TechniqueDef for a given technique ID, or None if not found."""
         return self._technique_map.get(technique_id)
+
+    def get_technique_facet(self, technique_id: str) -> str | None:
+        """Which Facet's tree a Technique lives in, or None if unknown.
+
+        A domain-granting Technique draws from *that Facet's* domain list, not
+        the character's primary Facet — a Body character who cross-trains into
+        Soul's tree still chooses from the Soul domains (PHB II.3).
+        """
+        return self._technique_facet_map.get(technique_id)
 
     def get_skill_rank_modifier(self, rank_id: str) -> int:
         if not self.advancement:

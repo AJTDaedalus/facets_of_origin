@@ -340,7 +340,9 @@ class Character(BaseModel):
         # Validated before anything is consumed: an illegal domain pick must not
         # burn the Technique slot on its way out.
         if tech_def and choice:
-            valid, reason = self._validate_domain_choice(tech_def, str(choice), ruleset)
+            valid, reason = self._validate_domain_choice(
+                tech_def, str(choice), ruleset, technique_id
+            )
             if not valid:
                 return False, reason
 
@@ -363,29 +365,40 @@ class Character(BaseModel):
                 self.magic_domain = str(choice)
         return True, "ok"
 
-    def _facet_domains(self, ruleset) -> list:
-        """The domain catalog for this character's Facet. Body has none."""
-        if not ruleset.magic:
+    @staticmethod
+    def _facet_domains(facet_id: str | None, ruleset) -> list:
+        """The domain catalog for a Facet's tree. Body has no domains of its own.
+
+        Keyed on the *Technique's* Facet, not the character's primary one: a
+        cross-training character choosing from Soul's tree picks Soul domains
+        (PHB II.3 — "choosing from that Facet's domain list").
+        """
+        if not ruleset.magic or facet_id is None:
             return []
         pools = {
             "soul": ruleset.magic.soul_domains,
             "mind": ruleset.magic.mind_domains,
         }
-        return pools.get(self.primary_facet, [])
+        return pools.get(facet_id, [])
 
-    def _validate_domain_choice(self, tech_def, choice: str, ruleset) -> tuple[bool, str]:
+    def _validate_domain_choice(
+        self, tech_def, choice: str, ruleset, technique_id: str
+    ) -> tuple[bool, str]:
         """Ascendant Domain takes a prismatic domain; Second Domain takes a
-        non-prismatic one. Both must come from the character's own Facet list.
-        Techniques whose choice isn't a domain at all pass straight through.
+        non-prismatic one that differs from the first. Both draw from the domain
+        list of the Facet whose tree the Technique lives in. Techniques whose
+        choice isn't a domain at all pass straight through.
         """
         if not (tech_def.grants_prismatic_domain or tech_def.grants_secondary_domain):
             return True, "ok"
 
-        domain = next((d for d in self._facet_domains(ruleset) if d.id == choice), None)
+        facet_id = ruleset.get_technique_facet(technique_id)
+        pool = self._facet_domains(facet_id, ruleset)
+        domain = next((d for d in pool if d.id == choice), None)
         if domain is None:
             return False, (
                 f"'{choice}' is not a domain of the Facet of the "
-                f"{self.primary_facet.capitalize()}."
+                f"{(facet_id or 'unknown').capitalize()}."
             )
         if tech_def.grants_prismatic_domain and domain.type != "broad":
             return False, (

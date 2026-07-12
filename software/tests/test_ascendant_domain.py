@@ -121,13 +121,39 @@ def test_ascendant_domain_rejects_non_prismatic_choice(ruleset):
 
 
 def test_ascendant_domain_rejects_other_facets_prismatic(ruleset):
-    """A Mind mage cannot ascend into a Soul prismatic domain (D-A5)."""
+    """Mind's Ascendant Domain draws from the Mind list — `fate` is a Soul domain.
+
+    The pool is keyed on the *Technique's* Facet, so taking Mind's Ascendant
+    Domain cannot reach into Soul's territory, whoever is taking it (D-A5).
+    """
     char = _mind_mage(ruleset)
     ok, msg = char.select_technique(
         "ascendant_domain_mind", ruleset=ruleset, choice="fate"
     )
     assert not ok
     assert char.ascendant_domain is None
+
+
+def test_cross_facet_character_draws_from_the_techniques_facet(ruleset):
+    """A Body character taking Soul's Tier 1 Technique picks from the Soul list.
+
+    PHB II.3: domain selection chooses "from that Facet's domain list", and
+    cross-Facet characters "can access these Techniques". Scoping the pool to
+    the character's *primary* Facet would lock every Body character out of
+    magic entirely.
+    """
+    char, errors = create_default_character(
+        name="Mordai", player_name="P", primary_facet="body",
+        attributes=dict(ZAHNA_ATTRS), ruleset=ruleset,
+        background_id="city_watch_veteran",
+    )
+    assert not errors, errors
+
+    char.technique_picks_available += 1
+    ok, msg = char.select_technique("spiritual_domain", ruleset=ruleset, choice="fire")
+    assert ok, msg
+    assert char.magic_domain == "fire"
+    assert char.magic_technique_active is True
 
 
 def test_ascendant_domain_survives_fof_round_trip(ruleset):
