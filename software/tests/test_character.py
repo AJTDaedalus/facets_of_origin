@@ -158,6 +158,33 @@ class TestAttributeModifiers:
 
 
 # ---------------------------------------------------------------------------
+# Major Attribute modifier derivation — sync-M-8 part 1: II.2, Deriving Your
+# Major Attribute Modifiers (sum of three Minors -> a modifier band).
+# ---------------------------------------------------------------------------
+
+class TestMajorAttributeModifierDerivation:
+    """`valid_attributes` (str3 dex3 con2, int2 wis2 kno2, spi1 luck2 cha1)
+    covers all three bands: Body sums to 8 (the 8-9 -> +1 band), Mind sums
+    to 6 (5-7 -> +0), Soul sums to 4 (3-4 -> -1)."""
+
+    def test_body_sum_eight_is_plus_one(self, body_character, ruleset):
+        assert body_character.get_major_attribute_modifier("body", ruleset) == 1
+
+    def test_mind_sum_six_is_plus_zero(self, body_character, ruleset):
+        assert body_character.get_major_attribute_modifier("mind", ruleset) == 0
+
+    def test_soul_sum_four_is_minus_one(self, body_character, ruleset):
+        assert body_character.get_major_attribute_modifier("soul", ruleset) == -1
+
+    def test_out_of_range_sum_defaults_to_zero(self, ruleset):
+        """Not reachable through the standard 1-3-per-Minor distribution
+        (sums always fall in 3-9), but a homebrew ruleset could shift the
+        bands — an unmatched sum must not raise, it defaults to +0."""
+        assert ruleset.get_major_attribute_modifier(0) == 0
+        assert ruleset.get_major_attribute_modifier(100) == 0
+
+
+# ---------------------------------------------------------------------------
 # Spark spending
 # ---------------------------------------------------------------------------
 

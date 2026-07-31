@@ -117,6 +117,13 @@ attributes:
     min_per_attribute: 1
     max_per_attribute: 3
 
+  # II.2, Deriving Your Major Attribute Modifiers — the sum of the three
+  # Minor Attributes under a Major maps to that Major's modifier.
+  major_derivation:
+    - {min_sum: 3, max_sum: 4, modifier: -1}
+    - {min_sum: 5, max_sum: 7, modifier: 0}
+    - {min_sum: 8, max_sum: 9, modifier: 1}
+
 # ---------------------------------------------------------------------------
 # Character Facets (archetypes)
 # ---------------------------------------------------------------------------

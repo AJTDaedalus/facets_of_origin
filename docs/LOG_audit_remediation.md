@@ -597,7 +597,7 @@ PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`
 - [x] W4-4 — Armor/reaction non-stacking into yaml. *(sync-M-5)* **TDD**
 - [x] W4-5 — Enemy attack rules into yaml. *(sync-M-6)* **TDD**
 - [x] W4-6 — Maneuver and Support into yaml. *(sync-M-7)* **TDD**
-- [ ] W4-7 — Major Attribute modifier derivation. *(sync-M-8, part 1)* **TDD**
+- [x] W4-7 — Major Attribute modifier derivation. *(sync-M-8, part 1)* **TDD**
 - [ ] W4-8 — Saving throws: engine + WebSocket. *(sync-M-8, part 2 — D11 full depth)* **TDD**
 - [ ] W4-9 — Spark scope fuel into yaml, including D8. *(sync-M-9)* **TDD**
 - [ ] W4-10 — Group rolls and contested rolls: encoding only. *(sync-M-10, M-11 — D11)* **TDD**
@@ -690,3 +690,16 @@ Result: **1062 passed** (1054 + 8 new).
 
 Command: `cd software && python -m pytest -q`
 Result: **1069 passed** (1062 + 7 new).
+
+### W4-7 *(sync-M-8, part 1)* — TDD
+
+- **Investigated first:** the Major Attribute modifier derivation (II.2: sum of the three Minors under a Major → modifier band) had **no implementation anywhere** — grepped `major_attribute_modifier`/"Sum of Three Minors" across `character.py`/`schema.py` with zero hits. This is what W4-8 (saving throws) needs as its modifier source, so it's split out as "part 1" per the task file.
+- `software/app/facets/schema.py` — new `MajorDerivationBandDef` (`min_sum`, `max_sum`, `modifier`); added `AttributesDef.major_derivation: list[MajorDerivationBandDef]`.
+- `software/facets/base/facet.yaml` (`attributes.major_derivation`) — the three bands from II.2 exactly: 3-4 → -1, 5-7 → +0, 8-9 → +1.
+- `software/app/facets/registry.py` (`MergedRuleset`) — tracks `major_derivation_bands` during `_merge()` (same pattern as `attribute_distribution`); new `get_major_attribute_modifier(minor_sum)` looks up the band, defaulting to +0 (not raising) for a sum outside every configured band — mirroring `get_minor_attribute_modifier`'s existing neutral-fallback convention for an unknown rating.
+- `software/app/game/character.py` — new `Character.get_major_attribute_modifier(major_id, ruleset)`: sums this character's three Minor ratings under the given Major (via `ruleset.major_attributes[...].minor_attributes`) and looks up the band.
+- Tests (4, written first) in `test_character.py`, new `TestMajorAttributeModifierDerivation` class — `valid_attributes` conveniently covers all three bands at once (Body sums to 8 → +1, Mind to 6 → +0, Soul to 4 → -1), plus a direct `ruleset.get_major_attribute_modifier()` out-of-range guard (0 and 100 both default to +0; not reachable through the standard 1-3-per-Minor distribution, but the guard exists for a homebrew ruleset that shifts the bands).
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1073 passed** (1069 + 4 new).

@@ -36,11 +36,23 @@ class AttributeDistribution(BaseModel):
     max_per_attribute: int
 
 
+class MajorDerivationBandDef(BaseModel):
+    """One band of the Major Attribute modifier table (II.2, Deriving Your
+    Major Attribute Modifiers): a sum of the three Minor Attributes under a
+    Major maps to a modifier.
+    """
+
+    min_sum: int
+    max_sum: int
+    modifier: int
+
+
 class AttributesDef(BaseModel):
     major: list[MajorAttributeDef] = Field(default_factory=list)
     minor: list[MinorAttributeDef] = Field(default_factory=list)
     ratings: list[AttributeRating] = Field(default_factory=list)
     distribution: AttributeDistribution | None = None
+    major_derivation: list[MajorDerivationBandDef] = Field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------

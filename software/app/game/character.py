@@ -214,6 +214,19 @@ class Character(BaseModel):
         rating = self.attributes.get(attribute_id, 2)
         return ruleset.get_minor_attribute_modifier(attribute_id, rating)
 
+    def get_major_attribute_modifier(self, major_id: str, ruleset: MergedRuleset) -> int:
+        """Return this character's modifier for a Major Attribute (Body,
+        Mind, or Soul) — II.2, Deriving Your Major Attribute Modifiers:
+        the sum of the three Minor Attributes under that Major maps to a
+        modifier via `ruleset.get_major_attribute_modifier`. Used for
+        saving throws (III.1).
+        """
+        major = next((m for m in ruleset.major_attributes if m.id == major_id), None)
+        if not major:
+            return 0
+        minor_sum = sum(self.attributes.get(minor_id, 2) for minor_id in major.minor_attributes)
+        return ruleset.get_major_attribute_modifier(minor_sum)
+
     def get_skill_modifier(self, skill_id: str, ruleset: MergedRuleset) -> int:
         """Return the numeric modifier for a skill. Returns 0 if skill is unknown."""
         state = self.skills.get(skill_id)
