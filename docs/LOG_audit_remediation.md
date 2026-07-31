@@ -34,7 +34,7 @@
 - [x] W1-9 — Index slugger: one hyphen per whitespace character. *(app-M6)* **TDD**
 - [x] W1-10 — Apparatus low-severity sweep. *(cre-L1, cre-L2, cre-L3, cre-L5, cre-L6, app-L6)*
 - [x] W1-11 — README: regenerate every factual claim from canon. *(README audit — D2 for the TR value)*
-- [ ] W1-12 — Wave 1 close-out.
+- [x] W1-12 — Wave 1 close-out.
 
 ### W1-1
 
@@ -162,3 +162,16 @@ Every number checked against the source file at edit time:
 
 Command: `cd software && python -m pytest -q`
 Result: **1029 passed**.
+
+### W1-12 — Wave 1 close-out
+
+All 12 W1 tasks done (W1-1 through W1-11 above, this entry for W1-12). Final suite run before opening the PR:
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed** (baseline was 1026; +3 from W1-9's slugger tests).
+
+Findings closed this wave: cre-H1, cre-H2, cre-H3, cre-M1, cre-M2, cre-M4, cre-M5, cre-L1, cre-L2, cre-L3, cre-L4, cre-L5, cre-L6, rul-M4, rul-M5, rul-L1, rul-L2, rul-L3, rul-L6, mm-M1, app-M5, app-M6, app-L1, app-L2, app-L3, app-L4, app-L6, README audit (D2's TR value stated; made fully true pending W2-4 in MM1).
+
+DESIGN §6 voice-review flags carried into the PR: W1-2 (Scholar's Luck replacement clause), W1-5 (the :73 Facet Levels example — departed from the task's literal "swap to Stealth" wording), W1-6 (the added fourth Threat Clock beat).
+
+PR: opened via `gh pr create` against `main`, branch `fix/audit-wave1-corrections`.
