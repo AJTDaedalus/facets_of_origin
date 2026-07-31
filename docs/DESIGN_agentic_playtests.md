@@ -305,13 +305,43 @@ something other than what we think.
 
 ### Decisions
 
-**D1 — Drive `app/game/*` directly, not the WebSocket API.** The v2 runner's 4×
-over-count was a WebSocket-broadcast aliasing bug. Calling the engine in-process
-removes that whole class of error, is far faster, and needs no running server. The
-engine is already the single source of truth (`CLAUDE.md`: *the simulator may only
-drive `app/game/combat.py`*). The web app has its own regression suite
-(`tests/e2e/test_ui_flows.py`) — the playtest harness does not need to double as
-an API test.
+**D1 (revised 2026-07-31) — agents play on the real tool, each with its own
+account.** An earlier draft called `app/game/*` in-process to sidestep the
+WebSocket-broadcast aliasing bug that caused batch 07's 4× over-count. That
+avoided the bug by avoiding the layer, which also avoided testing the thing that
+ships.
+
+Instead: each agent redeems a real single-use invite link, receives its own JWT,
+and connects to `/ws`. The server then enforces permissions for us — a player
+agent calling an MM verb is refused by the API, not by a Python wrapper we wrote
+and could get wrong. What a session exercises is what a table would use.
+
+The aliasing bug is handled structurally rather than avoided: **the event log is
+built from the MM's observer socket alone.** Every mechanical fact is broadcast
+session-wide, so one privileged connection sees each fact exactly once. Player
+sockets are used for sending and are drained, never recorded.
+`TestObserverDoesNotAlias` pins this — four players rolling must produce exactly
+four events with four distinct results, which is precisely what batch 07 got
+wrong.
+
+Two gaps surfaced when moving to the real API, both fixed:
+
+- **Enemy Resolve depletion had no server implementation.**
+  `combat.apply_resolve_damage` was called by `combat_sim.py` and by nothing in
+  `websocket.py`; the handler took `resolve_current` as a raw number. The D1 rule
+  therefore lived in the browser and the simulator but not the server — a second
+  copy of a rule, and one that would have forced agents to do rule arithmetic.
+  Added `enemy_strike`, which takes the *outcome*; the front end now sends that
+  too, and `strikeDepletionFor()` is deleted from `play.js`.
+- **`CreateEnemyRequest` silently dropped `phases`.** A phased Boss could be
+  POSTed and come back without its phase thresholds, so no phased Boss could be
+  created except by hand-writing a `.fof`. Bosses are central to the §5 question.
+
+**D1a — browser-level play is a separate, smaller check.** Driving the actual UI
+with Playwright tests *discoverability* — whether an MM can find how to land an
+enemy attack — which is a different question from whether the rules hold up, and
+is far slower. `tests/e2e/test_ui_flows.py` already covers that surface. Run one
+browser session per arm as a supplementary check, not the batch.
 
 **D2 — Tool use, not prose parsing.** Every agent action is a typed tool call with
 a JSON schema. An agent that wants to roll calls `roll_skill(skill_id=..., ...)`;

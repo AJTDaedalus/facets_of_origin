@@ -181,17 +181,19 @@ function renderEnemyCard(key, enemy, opts) {
 
   let controls = '';
   if (opts.mmControls) {
-    // A Strike that lands 10+ takes 2 Resolve, so -2 is a first-class button
-    // rather than two clicks of -1. +1 exists because misclicks happen.
-    const resolveButtons = res
-      ? '<button class="btn btn-secondary btn-sm" title="Strike 10+"'
-        + ' onclick="enemyAdjustResolve(\'' + escapeHtml(key) + '\', -2)">-2</button>'
-        + '<button class="btn btn-secondary btn-sm" title="Strike 7-9"'
-        + ' onclick="enemyAdjustResolve(\'' + escapeHtml(key) + '\', -1)">-1</button>'
-        + '<button class="btn btn-secondary btn-sm" title="Undo"'
-        + ' onclick="enemyAdjustResolve(\'' + escapeHtml(key) + '\', 1)">+1</button>'
-      : '<button class="btn btn-secondary btn-sm" title="Mooks fall to one Strike"'
-        + ' onclick="removeEnemy(\'' + escapeHtml(key) + '\')">Defeated</button>';
+    // Buttons send the Strike *outcome*; the engine decides what it costs.
+    // They used to send a pre-computed Resolve value, which put the depletion
+    // rule in the browser. +1 stays an arithmetic nudge because it is an undo,
+    // not a rule.
+    const resolveButtons =
+      '<button class="btn btn-secondary btn-sm" title="Strike landed 10+"'
+      + ' onclick="enemyStrikeOutcome(\'' + escapeHtml(key) + '\', \'full_success\')">Hit 10+</button>'
+      + '<button class="btn btn-secondary btn-sm" title="Strike landed 7-9"'
+      + ' onclick="enemyStrikeOutcome(\'' + escapeHtml(key) + '\', \'partial_success\')">Hit 7-9</button>'
+      + (res
+        ? '<button class="btn btn-secondary btn-sm" title="Undo one point"'
+          + ' onclick="enemyAdjustResolve(\'' + escapeHtml(key) + '\', 1)">+1</button>'
+        : '');
 
     controls =
       '<div class="btn-row" style="margin-top:6px;">'

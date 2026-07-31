@@ -1,0 +1,614 @@
+[
+  {
+    "playtest_index": 1,
+    "mm": "Arthur",
+    "successes": 0,
+    "partials": 4,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Serane",
+        "action": "gate_check",
+        "total": 7,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Pello",
+        "action": "gate_check",
+        "total": 7,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "gate_check",
+        "total": 7,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Ilesse",
+        "action": "gate_check",
+        "total": 7,
+        "outcome": "partial_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 2,
+    "mm": "Arthur",
+    "successes": 0,
+    "partials": 0,
+    "failures": 4,
+    "rolls": [
+      {
+        "player": "Serane",
+        "action": "social_check",
+        "total": 6,
+        "outcome": "failure"
+      },
+      {
+        "player": "Pello",
+        "action": "social_check",
+        "total": 6,
+        "outcome": "failure"
+      },
+      {
+        "player": "Dassa",
+        "action": "social_check",
+        "total": 6,
+        "outcome": "failure"
+      },
+      {
+        "player": "Ilesse",
+        "action": "social_check",
+        "total": 6,
+        "outcome": "failure"
+      }
+    ]
+  },
+  {
+    "playtest_index": 3,
+    "mm": "Arthur",
+    "successes": 0,
+    "partials": 4,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Serane",
+        "action": "summons_check",
+        "total": 7,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Pello",
+        "action": "summons_check",
+        "total": 7,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "summons_check",
+        "total": 7,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Ilesse",
+        "action": "summons_check",
+        "total": 7,
+        "outcome": "partial_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 4,
+    "mm": "Arthur",
+    "successes": 4,
+    "partials": 0,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Pello",
+        "action": "strike",
+        "total": 11,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "strike",
+        "total": 11,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Pello",
+        "action": "dodge_or_parry",
+        "total": 13,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "dodge_or_parry",
+        "total": 13,
+        "outcome": "full_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 5,
+    "mm": "Arthur",
+    "successes": 2,
+    "partials": 0,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Serane",
+        "action": "cast_warding",
+        "total": 11,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Ilesse",
+        "action": "cast_resonance",
+        "total": 11,
+        "outcome": "full_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 6,
+    "mm": "Cyrus",
+    "successes": 4,
+    "partials": 0,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Serane",
+        "action": "gate_check",
+        "total": 10,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Pello",
+        "action": "gate_check",
+        "total": 10,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "gate_check",
+        "total": 10,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Ilesse",
+        "action": "gate_check",
+        "total": 10,
+        "outcome": "full_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 7,
+    "mm": "Cyrus",
+    "successes": 0,
+    "partials": 4,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Serane",
+        "action": "social_check",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Pello",
+        "action": "social_check",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "social_check",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Ilesse",
+        "action": "social_check",
+        "total": 8,
+        "outcome": "partial_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 8,
+    "mm": "Cyrus",
+    "successes": 4,
+    "partials": 0,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Serane",
+        "action": "summons_check",
+        "total": 11,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Pello",
+        "action": "summons_check",
+        "total": 11,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "summons_check",
+        "total": 11,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Ilesse",
+        "action": "summons_check",
+        "total": 11,
+        "outcome": "full_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 9,
+    "mm": "Cyrus",
+    "successes": 0,
+    "partials": 2,
+    "failures": 2,
+    "rolls": [
+      {
+        "player": "Pello",
+        "action": "strike",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "strike",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Pello",
+        "action": "dodge_or_parry",
+        "total": 6,
+        "outcome": "failure"
+      },
+      {
+        "player": "Dassa",
+        "action": "dodge_or_parry",
+        "total": 6,
+        "outcome": "failure"
+      }
+    ]
+  },
+  {
+    "playtest_index": 10,
+    "mm": "Cyrus",
+    "successes": 2,
+    "partials": 0,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Serane",
+        "action": "cast_warding",
+        "total": 12,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Ilesse",
+        "action": "cast_resonance",
+        "total": 12,
+        "outcome": "full_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 11,
+    "mm": "Arthur",
+    "successes": 4,
+    "partials": 0,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Serane",
+        "action": "stealth_networking",
+        "total": 10,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Pello",
+        "action": "stealth_networking",
+        "total": 10,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "stealth_networking",
+        "total": 10,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Ilesse",
+        "action": "stealth_networking",
+        "total": 10,
+        "outcome": "full_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 12,
+    "mm": "Arthur",
+    "successes": 0,
+    "partials": 0,
+    "failures": 4,
+    "rolls": [
+      {
+        "player": "Serane",
+        "action": "scout_confrontation",
+        "total": 4,
+        "outcome": "failure"
+      },
+      {
+        "player": "Pello",
+        "action": "scout_confrontation",
+        "total": 4,
+        "outcome": "failure"
+      },
+      {
+        "player": "Dassa",
+        "action": "scout_confrontation",
+        "total": 4,
+        "outcome": "failure"
+      },
+      {
+        "player": "Ilesse",
+        "action": "scout_confrontation",
+        "total": 4,
+        "outcome": "failure"
+      }
+    ]
+  },
+  {
+    "playtest_index": 13,
+    "mm": "Arthur",
+    "successes": 0,
+    "partials": 0,
+    "failures": 4,
+    "rolls": [
+      {
+        "player": "Serane",
+        "action": "looter_detection",
+        "total": 4,
+        "outcome": "failure"
+      },
+      {
+        "player": "Pello",
+        "action": "looter_detection",
+        "total": 4,
+        "outcome": "failure"
+      },
+      {
+        "player": "Dassa",
+        "action": "looter_detection",
+        "total": 4,
+        "outcome": "failure"
+      },
+      {
+        "player": "Ilesse",
+        "action": "looter_detection",
+        "total": 4,
+        "outcome": "failure"
+      }
+    ]
+  },
+  {
+    "playtest_index": 14,
+    "mm": "Arthur",
+    "successes": 0,
+    "partials": 2,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Pello",
+        "action": "strike_mook",
+        "total": 7,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "strike_mook",
+        "total": 7,
+        "outcome": "partial_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 15,
+    "mm": "Arthur",
+    "successes": 0,
+    "partials": 2,
+    "failures": 2,
+    "rolls": [
+      {
+        "player": "Pello",
+        "action": "strike_tavva",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "strike_tavva",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Pello",
+        "action": "react_tavva",
+        "total": 6,
+        "outcome": "failure"
+      },
+      {
+        "player": "Dassa",
+        "action": "react_tavva",
+        "total": 6,
+        "outcome": "failure"
+      }
+    ]
+  },
+  {
+    "playtest_index": 16,
+    "mm": "Cyrus",
+    "successes": 0,
+    "partials": 4,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Serane",
+        "action": "stealth_networking",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Pello",
+        "action": "stealth_networking",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "stealth_networking",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Ilesse",
+        "action": "stealth_networking",
+        "total": 8,
+        "outcome": "partial_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 17,
+    "mm": "Cyrus",
+    "successes": 0,
+    "partials": 4,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Serane",
+        "action": "scout_confrontation",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Pello",
+        "action": "scout_confrontation",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "scout_confrontation",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Ilesse",
+        "action": "scout_confrontation",
+        "total": 9,
+        "outcome": "partial_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 18,
+    "mm": "Cyrus",
+    "successes": 0,
+    "partials": 4,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Serane",
+        "action": "looter_detection",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Pello",
+        "action": "looter_detection",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "looter_detection",
+        "total": 9,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Ilesse",
+        "action": "looter_detection",
+        "total": 9,
+        "outcome": "partial_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 19,
+    "mm": "Cyrus",
+    "successes": 0,
+    "partials": 2,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Pello",
+        "action": "strike_mook",
+        "total": 8,
+        "outcome": "partial_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "strike_mook",
+        "total": 8,
+        "outcome": "partial_success"
+      }
+    ]
+  },
+  {
+    "playtest_index": 20,
+    "mm": "Cyrus",
+    "successes": 4,
+    "partials": 0,
+    "failures": 0,
+    "rolls": [
+      {
+        "player": "Pello",
+        "action": "strike_tavva",
+        "total": 10,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "strike_tavva",
+        "total": 10,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Pello",
+        "action": "react_tavva",
+        "total": 12,
+        "outcome": "full_success"
+      },
+      {
+        "player": "Dassa",
+        "action": "react_tavva",
+        "total": 12,
+        "outcome": "full_success"
+      }
+    ]
+  }
+]

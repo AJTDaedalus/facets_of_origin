@@ -3001,3 +3001,151 @@ class TestTableRoll:
 
         assert msg["type"] == "error"
         assert "Unknown event type" in msg["message"]
+
+
+# ---------------------------------------------------------------------------
+# Enemy Resolve depletion must be resolved by the engine, not by the client
+# ---------------------------------------------------------------------------
+
+class TestEnemyStrikeDepletion:
+    """`enemy_update` takes `resolve_current` as a raw number the client
+    computes. That put the D1 depletion rule (10+ takes 2, 7-9 takes 1) in the
+    front end and the simulator but not the server — a second implementation of
+    a rule, which the Software-PHB sync policy forbids, and which would force an
+    agent playing over the API to do rule arithmetic itself.
+
+    `enemy_strike` sends the *outcome* and lets `combat.apply_resolve_damage`
+    decide. `enemy_update` stays for manual MM corrections.
+    """
+
+    def _session_with_enemy(self, client, mm_headers, tier="named", resolve=4, armor="none"):
+        session_id = client.post(
+            "/api/sessions/", json={"name": "Depletion"}, headers=mm_headers,
+        ).json()["session_id"]
+        client.post("/api/enemies/", json={
+            "session_id": session_id, "id": "guard", "name": "Guard",
+            "tier": tier, "resolve": resolve, "armor": armor,
+        }, headers=mm_headers)
+        return session_id
+
+    def _spawn(self, ws, enemy_id="guard"):
+        ws.send_json({"type": "spawn_enemy", "enemy_id": enemy_id})
+        msg = ws.receive_json()
+        assert msg["type"] == "enemy_spawned"
+        return msg["tracker_key"]
+
+    def test_full_success_depletes_two(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers, resolve=4)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "enemy_updated"
+        assert msg["depletion"] == 2
+        assert msg["resolve_current"] == 2
+
+    def test_partial_success_depletes_one(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers, resolve=4)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "partial_success"})
+            msg = ws.receive_json()
+
+        assert msg["depletion"] == 1
+        assert msg["resolve_current"] == 3
+
+    def test_failure_depletes_nothing(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers, resolve=4)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "failure"})
+            msg = ws.receive_json()
+
+        assert msg["depletion"] == 0
+        assert msg["resolve_current"] == 4
+
+    def test_reaching_zero_marks_defeated(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers, resolve=2)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            msg = ws.receive_json()
+
+        assert msg["resolve_current"] == 0
+        assert msg["defeated"] is True
+
+    def test_mook_falls_to_one_strike(self, client, mm_headers, mm_token):
+        """Mooks have no Resolve pool — `mook_removed` decides, not arithmetic."""
+        session_id = self._session_with_enemy(client, mm_headers, tier="mook", resolve=0)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "partial_success"})
+            msg = ws.receive_json()
+
+        assert msg["defeated"] is True
+        assert msg["mook_removed"] is True
+
+    def test_armored_mook_needs_a_full_success(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(
+            client, mm_headers, tier="mook", resolve=0, armor="light")
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "partial_success"})
+            msg = ws.receive_json()
+
+        assert msg["defeated"] is False
+
+    def test_phase_change_is_broadcast(self, client, mm_headers, mm_token):
+        session_id = client.post(
+            "/api/sessions/", json={"name": "Phases"}, headers=mm_headers,
+        ).json()["session_id"]
+        client.post("/api/enemies/", json={
+            "session_id": session_id, "id": "boss", "name": "Boss", "tier": "boss",
+            "resolve": 4, "phases": [{"resolve_threshold": 2, "description": "Enrages"}],
+        }, headers=mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws, "boss")
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            ws.receive_json()  # enemy_updated
+            msg = ws.receive_json()
+
+        assert msg["type"] == "enemy_phase_change"
+
+    def test_unknown_outcome_is_refused(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "banana"})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "error"
+
+    def test_players_cannot_deplete_resolve(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "enemy_strike", "tracker_key": "x",
+                          "outcome": "full_success"})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "error"
+        assert "Unknown event type" in msg["message"]

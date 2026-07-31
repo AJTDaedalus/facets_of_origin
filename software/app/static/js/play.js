@@ -489,6 +489,20 @@ function spawnEnemyFromLibrary() {
   if (countEl) countEl.value = '1';
 }
 
+/**
+ * Apply a Strike outcome to an enemy. The engine decides the cost.
+ *
+ * This used to compute the depletion here and send a raw `resolve_current`,
+ * which meant the D1 rule (10+ takes 2, 7-9 takes 1) lived in this file and in
+ * the simulator but nowhere on the server. `enemy_strike` sends the outcome and
+ * lets combat.apply_resolve_damage decide — one implementation, and it also
+ * handles the Mook case, where there is no Resolve pool to subtract from.
+ */
+function enemyStrikeOutcome(trackerKey, outcome) {
+  sendWS({ type: 'enemy_strike', tracker_key: trackerKey, outcome });
+}
+
+/** Manual correction — an undo, not a rule. Stays on `enemy_update`. */
 function enemyAdjustResolve(trackerKey, delta) {
   const enemy = state.activeEnemies[trackerKey];
   if (!enemy) return;
@@ -525,15 +539,25 @@ function onEnemySpawned(msg) {
 
 function onEnemyUpdated(msg) {
   const enemy = state.activeEnemies[msg.tracker_key];
-  if (enemy) {
-    enemy.resolve_current = msg.resolve_current;
-    enemy.conditions = msg.conditions;
-    renderEnemyTracker();
-    populateTargetSelects();
-    if (enemy.tier !== 'mook' && msg.resolve_current === 0) {
-      notify(`${enemy.name} is defeated — 0 Resolve.`, 'success');
-    }
+  if (!enemy) return;
+
+  const name = enemy.name || msg.tracker_key;
+  enemy.resolve_current = msg.resolve_current;
+  enemy.conditions = msg.conditions;
+
+  // `defeated` comes from the engine — for a Mook that means one Strike landed
+  // hard enough, for anyone else that Resolve reached 0. The client no longer
+  // infers either.
+  if (msg.defeated) {
+    delete state.activeEnemies[msg.tracker_key];
+    addSystemChat(`${name} is defeated.`);
+    notify(`${name} is defeated.`, 'success');
+  } else if (msg.depletion) {
+    addSystemChat(`${name}: −${msg.depletion} Resolve (now ${msg.resolve_current}).`);
   }
+
+  renderEnemyTracker();
+  populateTargetSelects();
 }
 
 function onEnemyRemoved(msg) {
@@ -1209,25 +1233,14 @@ function onStrikeResult(msg) {
     showRollResultBox({ player: msg.attacker, character_name: attackerName }, roll);
   }
 
-  // The engine does not deplete enemy Resolve — the MM does, from the tracker.
-  // Say how much this Strike is worth so the number does not have to be recalled.
-  if (state.role === 'mm' && msg.target) {
-    const depletion = strikeDepletionFor(roll.outcome);
-    if (depletion > 0) {
-      notify(`${attackerName} hits ${msg.target} — ${roll.outcome_label}. Deplete ${depletion} Resolve.`,
-        'info', { duration: 7000 });
-    }
+  // Prompt the MM to apply the outcome. How much it costs is the engine's
+  // business — the tracker's Hit buttons send the outcome, not a number.
+  if (state.role === 'mm' && msg.target && roll.outcome !== 'failure') {
+    notify(`${attackerName} hits ${msg.target} — ${roll.outcome_label}. `
+      + 'Apply it on the enemy tracker.', 'info', { duration: 7000 });
   }
 }
 
-/** Resolve depleted by a Strike outcome — `combat.enemy_durability.strike_depletion`. */
-function strikeDepletionFor(outcome) {
-  const cfg = state.ruleset && state.ruleset.combat
-    && state.ruleset.combat.enemy_durability
-    && state.ruleset.combat.enemy_durability.strike_depletion;
-  if (cfg && cfg[outcome] != null) return cfg[outcome];
-  return outcome === 'full_success' ? 2 : outcome === 'partial_success' ? 1 : 0;
-}
 
 function onReactResult(msg) {
   const roll = msg.roll;

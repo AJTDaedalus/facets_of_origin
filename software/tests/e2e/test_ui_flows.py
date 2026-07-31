@@ -425,6 +425,31 @@ class TestAdvancementAndSparks:
         _, player = table
         assert not player.is_visible("#table-roll-notation")
 
+    def test_enemy_strike_depletion_comes_from_the_engine(self, table):
+        """The tracker sends the Strike outcome; the server applies the D1 rule.
+        The buttons used to send a pre-computed Resolve value, which put the
+        depletion rule in the browser as well as the simulator."""
+        mm, _ = table
+        mm.click("button[data-tab='builder']")
+        mm.wait_for_timeout(300)
+        mm.fill("#builder-enemy-name", "Watch Sergeant")
+        mm.select_option("#builder-enemy-tier", "named")
+        mm.fill("#builder-enemy-resolve", "4")
+        mm.click("button:has-text('Save to Library')")
+        mm.wait_for_timeout(600)
+
+        mm.click("button[data-tab='play']")
+        mm.wait_for_timeout(300)
+        mm.select_option("#play-spawn-enemy-select", "watch_sergeant")
+        mm.click("button:has-text('Spawn')")
+        mm.wait_for_timeout(700)
+        assert "4/4" in mm.inner_text("#play-enemy-tracker")
+
+        mm.click("#play-enemy-tracker button:has-text('Hit 10+')")
+        mm.wait_for_timeout(700)
+        # 4 - 2 = 2, decided server-side by combat.apply_resolve_damage
+        assert "2/4" in mm.inner_text("#play-enemy-tracker")
+
     def test_technique_panel_renders_for_a_player(self, table):
         """technique_select was MM-gated while the only control that sent it was
         the player's Builder tab, so no character could ever gain a Technique."""

@@ -233,6 +233,8 @@ async def _dispatch(
         await _handle_spawn_enemy(msg, session, session_id)
     elif event_type == "enemy_update" and is_mm:
         await _handle_enemy_update(msg, session, session_id)
+    elif event_type == "enemy_strike" and is_mm:
+        await _handle_enemy_strike(websocket, msg, session, session_id)
     elif event_type == "remove_enemy" and is_mm:
         await _handle_remove_enemy(msg, session, session_id)
     # --- Threat Clock events (D4, PHB III.2) ---
@@ -1347,6 +1349,82 @@ async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
             "enemy_id": tracker_key,
             "phase_index": phase_index,
             "description": enemy.phases[phase_index].description,
+        })
+
+
+async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -> None:
+    """Apply a Strike outcome to an enemy and let the engine decide the cost.
+
+    `enemy_update` takes `resolve_current` as a raw number, which left the D1
+    depletion rule (10+ takes 2, 7-9 takes 1) implemented in the front end and
+    the simulator but nowhere on the server. That is a second copy of a rule —
+    the failure the Software-PHB sync policy exists to prevent — and it forces
+    any non-browser client to do rule arithmetic itself.
+
+    Here the caller sends the *outcome* and `combat.apply_resolve_damage` (or
+    `combat.mook_removed`, since Mooks have no Resolve pool) decides. Manual MM
+    corrections still go through `enemy_update`.
+    """
+    tracker_key = str(msg.get("tracker_key", ""))
+    outcome = str(msg.get("outcome", ""))
+
+    enemy = session.active_enemies.get(tracker_key)
+    if not enemy:
+        await manager.send_to(websocket, {
+            "type": "error", "message": f"No active enemy with key '{tracker_key}'.",
+        })
+        return
+
+    known_outcomes = {t.id for t in session.ruleset.roll_resolution.outcome_tiers}
+    if outcome not in known_outcomes:
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": f"Unknown outcome '{outcome}'. Expected one of: "
+                       f"{', '.join(sorted(known_outcomes))}.",
+        })
+        return
+
+    # Mooks have no Resolve pool — one Strike removes them (10+ if armoured).
+    if enemy.tier == "mook":
+        removed = combat_module.mook_removed(
+            outcome, enemy.armor != "none", session.ruleset,
+        )
+        if removed:
+            del session.active_enemies[tracker_key]
+        await manager.broadcast(session_id, {
+            "type": "enemy_updated",
+            "tracker_key": tracker_key,
+            "resolve_current": None,
+            "depletion": 0,
+            "defeated": removed,
+            "mook_removed": removed,
+            "conditions": list(enemy.conditions),
+        })
+        return
+
+    before = enemy.resolve_current if enemy.resolve_current is not None else enemy.resolve
+    result = combat_module.apply_resolve_damage(
+        before, outcome, session.ruleset,
+        phase_thresholds=[p.resolve_threshold for p in enemy.phases] or None,
+    )
+    enemy.resolve_current = result.resolve_current
+
+    await manager.broadcast(session_id, {
+        "type": "enemy_updated",
+        "tracker_key": tracker_key,
+        "resolve_current": result.resolve_current,
+        "depletion": result.depletion,
+        "defeated": result.defeated,
+        "mook_removed": False,
+        "conditions": list(enemy.conditions),
+    })
+
+    if result.phase_index is not None:
+        await manager.broadcast(session_id, {
+            "type": "enemy_phase_change",
+            "enemy_id": tracker_key,
+            "phase_index": result.phase_index,
+            "description": enemy.phases[result.phase_index].description,
         })
 
 

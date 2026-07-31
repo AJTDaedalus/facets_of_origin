@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, Field
 
 from app.api.routes.session import require_mm
-from app.game.enemy import Enemy
+from app.game.enemy import Enemy, PhaseDef
 from app.game.session import session_store
 
 router = APIRouter(prefix="/api/enemies", tags=["enemies"])
@@ -22,6 +22,10 @@ class CreateEnemyRequest(BaseModel):
     armor: str = "none"
     techniques: list[str] = Field(default_factory=list)
     special: str | None = None
+    #: Boss phase-change thresholds. Omitted from this model originally, so a
+    #: phased Boss could be POSTed and have its phases silently dropped —
+    #: `apply_resolve_damage` reports crossings, so the field is load-bearing.
+    phases: list[PhaseDef] = Field(default_factory=list)
     description: str = ""
     tactics: str = ""
     personality: str = ""
@@ -77,6 +81,7 @@ async def create_enemy(body: CreateEnemyRequest):
         armor=body.armor,
         techniques=body.techniques,
         special=body.special,
+        phases=body.phases,
         description=body.description,
         tactics=body.tactics,
         personality=body.personality,

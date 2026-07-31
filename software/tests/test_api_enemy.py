@@ -347,3 +347,44 @@ class TestThreatRatingReachesTheClient:
     def test_preview_tr_requires_mm(self, client):
         resp = client.post("/api/enemies/preview-tr", json={"tier": "mook"})
         assert resp.status_code in (401, 403)
+
+
+class TestEnemyPhasesRoundTrip:
+    """`Enemy` carries `phases` (the Boss phase-change thresholds that
+    `apply_resolve_damage` reports crossings for), but `CreateEnemyRequest`
+    omitted the field — so the API accepted a phased Boss and silently dropped
+    its phases. No phased enemy could be created except by writing a .fof.
+    """
+
+    def test_phases_survive_creation(self, client, mm_headers, active_session):
+        session_id = active_session["session_id"]
+        resp = client.post("/api/enemies/", json={
+            "session_id": session_id, "id": "guardian", "name": "Archive Guardian",
+            "tier": "boss", "resolve": 8,
+            "phases": [{"resolve_threshold": 2, "description": "Reduced Mode"}],
+        }, headers=mm_headers)
+
+        assert resp.status_code == 200
+        assert resp.json()["enemy"]["phases"] == [
+            {"resolve_threshold": 2, "description": "Reduced Mode"}
+        ]
+
+    def test_phases_survive_listing(self, client, mm_headers, active_session):
+        session_id = active_session["session_id"]
+        client.post("/api/enemies/", json={
+            "session_id": session_id, "id": "guardian", "name": "Archive Guardian",
+            "tier": "boss", "resolve": 8,
+            "phases": [{"resolve_threshold": 2, "description": "Reduced Mode"}],
+        }, headers=mm_headers)
+
+        listed = client.get(f"/api/enemies/{session_id}", headers=mm_headers).json()
+        assert listed["enemies"]["guardian"]["phases"][0]["resolve_threshold"] == 2
+
+    def test_omitting_phases_still_works(self, client, mm_headers, active_session):
+        session_id = active_session["session_id"]
+        resp = client.post("/api/enemies/", json={
+            "session_id": session_id, "id": "thug", "name": "Thug", "tier": "mook",
+        }, headers=mm_headers)
+
+        assert resp.status_code == 200
+        assert resp.json()["enemy"]["phases"] == []
