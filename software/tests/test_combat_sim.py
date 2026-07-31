@@ -151,7 +151,7 @@ class TestAI:
             make_enemy(generic_named_def(8)),
             make_enemy(chicken_def(), 1),
         ]
-        target = choose_pc_target(pc, enemies)
+        target = choose_pc_target(pc, enemies, _ruleset())
         assert target.tier == "mook"
 
     def test_target_selection_wounded_named(self):
@@ -160,8 +160,36 @@ class TestAI:
         named2 = make_enemy(generic_named_def(8))
         named2.instance_id = "named2"
         named2.conditions.append("staggered")
-        target = choose_pc_target(pc, [named1, named2])
+        target = choose_pc_target(pc, [named1, named2], _ruleset())
         assert target.instance_id == "named2"
+
+    def test_target_priority_reads_tier2_from_yaml_not_a_literal_set(self):
+        """sync-M-4: `choose_pc_target` and `should_spend_spark` used to check
+        membership in a hardcoded `TIER2_CONDITIONS = ("staggered", "cornered")`
+        tuple. A Condition id that is Tier 2 *only* by yaml configuration (not
+        in that old literal) must still be prioritized — proving the AI now
+        reads `combat.conditions.tier2`, not a fixed set."""
+        from app.facets.schema import CombatConditionDef
+
+        ruleset = _ruleset()
+        original_tier2 = ruleset.combat.conditions.tier2
+        try:
+            ruleset.combat.conditions.tier2 = original_tier2 + [
+                CombatConditionDef(id="marked", clears="treated", description="test-only")
+            ]
+            pc = make_pc(mordai_def())
+            named1 = make_enemy(generic_named_def(8))
+            named2 = make_enemy(generic_named_def(8))
+            named2.instance_id = "named2"
+            named2.conditions.append("marked")  # not in the old TIER2_CONDITIONS tuple
+
+            target = choose_pc_target(pc, [named1, named2], ruleset)
+            assert target.instance_id == "named2"
+
+            spark = should_spend_spark(pc, named2, ruleset, "conservative")
+            assert spark == 1  # finishing-blow branch fires for the yaml-only Tier 2 id
+        finally:
+            ruleset.combat.conditions.tier2 = original_tier2
 
     def test_enemy_targets_lowest_endurance(self):
         enemy = make_enemy(generic_named_def(8))
@@ -172,24 +200,24 @@ class TestAI:
     def test_spark_spend_against_boss(self):
         pc = make_pc(mordai_def())
         boss = make_enemy(generic_boss_def(12))
-        assert should_spend_spark(pc, boss) == 1
+        assert should_spend_spark(pc, boss, _ruleset()) == 1
 
     def test_no_spark_against_mook(self):
         pc = make_pc(mordai_def())
         mook = make_enemy(chicken_def())
-        assert should_spend_spark(pc, mook) == 0
+        assert should_spend_spark(pc, mook, _ruleset()) == 0
 
     def test_spark_at_low_endurance(self):
         pc = make_pc(mordai_def())
         pc.endurance_current = 1
         named = make_enemy(generic_named_def(8))
-        assert should_spend_spark(pc, named) == 1
+        assert should_spend_spark(pc, named, _ruleset()) == 1
 
     def test_no_spark_when_none_left(self):
         pc = make_pc(mordai_def())
         pc.sparks = 0
         boss = make_enemy(generic_boss_def(12))
-        assert should_spend_spark(pc, boss) == 0
+        assert should_spend_spark(pc, boss, _ruleset()) == 0
 
     def test_reaction_absorb_at_zero_end(self):
         pc = make_pc(mordai_def())
@@ -277,7 +305,7 @@ class TestPCStrike:
             # Reproduce _pc_strike's exact dice: extra dice come from the same
             # Spark/Press policy the function uses, and a fresh target has no
             # conditions so difficulty is Standard.
-            extra_dice = should_spend_spark(pc, named) + (1 if should_press(pc, named) else 0)
+            extra_dice = should_spend_spark(pc, named, _ruleset()) + (1 if should_press(pc, named) else 0)
             random.seed(seed)
             strike = combat_module.resolve_strike(
                 pc.strength_mod + pc.combat_mod, pc.posture, pc.conditions, ruleset,
@@ -875,14 +903,14 @@ class TestSparkSpendPolicy:
         mook = make_enemy(chicken_def())
 
         pc = make_pc(mordai_def())
-        assert should_spend_spark(pc, boss) == should_spend_spark(pc, boss, "conservative") == 1
+        assert should_spend_spark(pc, boss, _ruleset()) == should_spend_spark(pc, boss, _ruleset(), "conservative") == 1
 
         pc = make_pc(mordai_def())
-        assert should_spend_spark(pc, mook) == should_spend_spark(pc, mook, "conservative") == 0
+        assert should_spend_spark(pc, mook, _ruleset()) == should_spend_spark(pc, mook, _ruleset(), "conservative") == 0
 
         pc = make_pc(mordai_def())
         pc.endurance_current = 1
-        assert should_spend_spark(pc, named) == should_spend_spark(pc, named, "conservative") == 1
+        assert should_spend_spark(pc, named, _ruleset()) == should_spend_spark(pc, named, _ruleset(), "conservative") == 1
 
     def test_conservative_does_not_spend_on_named_at_full_endurance(self):
         """Pins the exact pre-WD10 behaviour this policy must not disturb:
@@ -890,12 +918,12 @@ class TestSparkSpendPolicy:
         Spark under `"conservative"` — only `"player_like"` spends here."""
         pc = make_pc(mordai_def())
         named = make_enemy(generic_named_def(8))
-        assert should_spend_spark(pc, named, "conservative") == 0
+        assert should_spend_spark(pc, named, _ruleset(), "conservative") == 0
 
     def test_player_like_spends_on_named_not_just_boss(self):
         pc = make_pc(mordai_def())
         named = make_enemy(generic_named_def(8))
-        assert should_spend_spark(pc, named, "player_like") == 1
+        assert should_spend_spark(pc, named, _ruleset(), "player_like") == 1
 
     def test_player_like_spends_when_holding_above_a_floor(self):
         """Holding 2+ Sparks spends even against a Mook at full Endurance —
@@ -904,14 +932,14 @@ class TestSparkSpendPolicy:
         pc = make_pc(mordai_def())
         pc.sparks = 2
         mook = make_enemy(chicken_def())
-        assert should_spend_spark(pc, mook, "player_like") == 1
-        assert should_spend_spark(pc, mook, "conservative") == 0
+        assert should_spend_spark(pc, mook, _ruleset(), "player_like") == 1
+        assert should_spend_spark(pc, mook, _ruleset(), "conservative") == 0
 
     def test_player_like_never_spends_below_zero_sparks(self):
         pc = make_pc(mordai_def())
         pc.sparks = 0
         boss = make_enemy(generic_boss_def(12))
-        assert should_spend_spark(pc, boss, "player_like") == 0
+        assert should_spend_spark(pc, boss, _ruleset(), "player_like") == 0
 
     def test_player_like_is_a_superset_of_conservative(self):
         """Every case where `"conservative"` spends, `"player_like"` also
@@ -922,8 +950,8 @@ class TestSparkSpendPolicy:
             make_enemy(generic_named_def(8)),
             make_enemy(chicken_def()),
         ):
-            conservative = should_spend_spark(pc, target, "conservative")
-            player_like = should_spend_spark(pc, target, "player_like")
+            conservative = should_spend_spark(pc, target, _ruleset(), "conservative")
+            player_like = should_spend_spark(pc, target, _ruleset(), "player_like")
             if conservative > 0:
                 assert player_like > 0
 

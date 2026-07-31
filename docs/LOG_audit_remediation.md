@@ -593,7 +593,7 @@ PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`
 
 - [x] W4-1 — Press cost into yaml. *(sync-M-2)* **TDD**
 - [x] W4-2 — Strike riders and Easy-to-Strike into yaml. *(sync-M-3)* **TDD**
-- [ ] W4-3 — Same-Tier-2 escalation into yaml. *(sync-M-4)* **TDD**
+- [x] W4-3 — Same-Tier-2 escalation into yaml. *(sync-M-4)* **TDD**
 - [ ] W4-4 — Armor/reaction non-stacking into yaml. *(sync-M-5)* **TDD**
 - [ ] W4-5 — Enemy attack rules into yaml. *(sync-M-6)* **TDD**
 - [ ] W4-6 — Maneuver and Support into yaml. *(sync-M-7)* **TDD**
@@ -634,3 +634,18 @@ Result: **1047 passed** (1044 + 3 new).
 
 Command: `cd software && python -m pytest -q`
 Result: **1052 passed** (1047 + 5 new).
+
+### W4-3 *(sync-M-4)* — TDD
+
+- **Investigated first, again:** the two files the task named (`combat.py:536,552-553`, `websocket.py:747`) were already fully yaml-driven — `apply_condition`'s same-type-escalates-to-Broken check and `condition_tier()` both read `combat.conditions.tier1/tier2/tier3` from the ruleset, no hardcoded id set. The real hardcoded literal was `tools/combat_sim.py:72`'s `TIER2_CONDITIONS = ("staggered", "cornered")` — a module comment even flagged it as "no longer used by the resolution functions... a residual duplication for a future pass," but it was still actively used by two AI decision functions (`choose_pc_target`'s target-priority check, `should_spend_spark`'s finishing-blow check), contradicting the comment.
+- `software/tools/combat_sim.py` — `choose_pc_target` and `should_spend_spark` now take `ruleset` as a parameter and check `combat_module.condition_tier(c, ruleset) == 2` instead of `c in TIER2_CONDITIONS`. Updated all 3 live call sites (`_pc_strike`, `run_combat`, the G3 exchange loop) to pass `ruleset` through.
+- Left `TIER2_CONDITIONS` (and its sibling `TIER1_CONDITIONS`) declared — still imported and used directly by one existing test (`test_combat_sim.py:380`, a "plain dice utility" test per the module's own comment) as a fixture value, not as rule-enforcement logic. Removing it would require touching that unrelated test, out of proportion for this task; the comment's original "future pass, not silently carried forward" framing still applies to that one remaining reference.
+- Updated 18 existing test call sites in `test_combat_sim.py` (`TestAI`, `TestPCStrike`, `TestSparkSpendPolicy`) to pass `_ruleset()` (the simulator's cached ruleset builder) through the new parameter — mechanical signature-following, not a behavior change.
+- Tests (1 new + 2 pre-existing already covering the other two required cases):
+  - `test_same_tier2_twice_escalates_to_broken` / `test_different_tier2_conditions_do_not_escalate` (pre-existing, `test_combat.py`) already cover "same-type → Broken" and "different-type → coexist."
+  - **New:** `test_target_priority_reads_tier2_from_yaml_not_a_literal_set` (`test_combat_sim.py`) — adds a Condition id to `ruleset.combat.conditions.tier2` that was never in the old `TIER2_CONDITIONS` tuple, and confirms both `choose_pc_target` and `should_spend_spark` treat it as Tier 2 — something the old hardcoded tuple could never have supported. Saves/restores the mutated tier2 list (`_ruleset()` returns a module-cached, shared instance — same leak risk as W4-2's session-scoped fixture).
+- Ran `test_combat_sim.py` and `test_combat_characterization.py` (89 tests) after the fix — all green, confirming no behavior change.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1053 passed** (1052 + 1 new).
