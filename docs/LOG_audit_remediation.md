@@ -31,7 +31,7 @@
 - [x] W1-6 — Threat Clock vignette and pacing math. *(rul-M4, rul-M5)*
 - [x] W1-7 — Four small text corrections across III.3, IV.1, Quick Start, MM5. *(rul-L1, rul-L2, rul-L3, rul-L6, mm-M1)*
 - [x] W1-8 — Glossary: add Saving Throw, fix citations, close the term gaps. *(app-M5, app-L1, app-L2/cre-L4, app-L3, app-L4)*
-- [ ] W1-9 — Index slugger: one hyphen per whitespace character. *(app-M6)* **TDD**
+- [x] W1-9 — Index slugger: one hyphen per whitespace character. *(app-M6)* **TDD**
 - [ ] W1-10 — Apparatus low-severity sweep. *(cre-L1, cre-L2, cre-L3, cre-L5, cre-L6, app-L6)*
 - [ ] W1-11 — README: regenerate every factual claim from canon. *(README audit — D2 for the TR value)*
 - [ ] W1-12 — Wave 1 close-out.
@@ -118,3 +118,19 @@ Result: **1026 passed**.
 
 Command: `cd software && python -m pytest -q`
 Result: **1026 passed**.
+
+### W1-9 *(app-M6)* — TDD
+
+- `software/tools/build_index.py:_slugify` used `re.sub(r"\s+", "-", slug)`, collapsing any run of whitespace into a single hyphen. GitHub's actual anchor algorithm emits one hyphen **per** whitespace character — an em-dash heading like `### Zahna — The Scholar` strips the em-dash as punctuation but leaves the space on each side, so the real GitHub anchor is `#zahna--the-scholar` (double hyphen), not the collapsed `#zahna-the-scholar` every link in the old Index pointed at. Fixed by dropping the `+` quantifier: `re.sub(r"\s", "-", slug)`.
+- Tests added to `software/tests/test_build_index.py` (3, using the exact real headings the bug affects, not synthetic ones):
+  - `test_slugify_em_dash_heading_anchors_with_double_hyphen` — `"Zahna — The Scholar"` (`Quick_Start.md:17`) → `"zahna--the-scholar"`.
+  - `test_slugify_plus_containing_heading` — `"Magic: Domain + Intent + Scope"` (`MM5_Quick_Reference.md:206`) → `"magic-domain--intent--scope"`.
+  - `test_slugify_plain_heading_unchanged` — `"Facet Levels"` → `"facet-levels"` (single spaces are unaffected by the per-character fix).
+- Regenerated `Index.md`: **33 lines changed** (matches the audit's "33 previously-broken anchors" exactly). Spot-checked 3 by hand against the actual source headings:
+  1. `Quick_Start.md#zahna--the-scholar` ← `### Zahna — The Scholar` (`Quick_Start.md:17`) ✓
+  2. `MM5_Quick_Reference.md#magic-domain--intent--scope` ← `## Magic: Domain + Intent + Scope` (`MM5_Quick_Reference.md:206`) ✓
+  3. `II.4c_Character_Creation_Facet_Soul.md#facet-of-the-soul--technique-tree` ← `## Facet of the Soul — Technique Tree` (`II.4c_Character_Creation_Facet_Soul.md:23`) ✓
+  All three now match GitHub's actual anchor generation; all three were broken (single-hyphen) before this fix.
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed** (1026 + 3 new).

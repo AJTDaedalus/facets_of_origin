@@ -9,6 +9,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from tools.build_index import (
+    _slugify,
     build_index,
     find_term_sections,
     parse_glossary_pointers,
@@ -21,6 +22,26 @@ def _write(tmp_path: Path, name: str, text: str) -> Path:
     path = tmp_path / name
     path.write_text(text)
     return path
+
+
+def test_slugify_em_dash_heading_anchors_with_double_hyphen() -> None:
+    """GitHub emits one hyphen per whitespace character. An em-dash is
+    stripped as punctuation but the space on either side of it survives,
+    so "Zahna — The Scholar" (Quick_Start.md:17) anchors to a double
+    hyphen, not a collapsed single one."""
+    assert _slugify("Zahna — The Scholar") == "zahna--the-scholar"
+
+
+def test_slugify_plus_containing_heading() -> None:
+    """"+" is stripped like any other punctuation, and each surviving
+    space becomes its own hyphen (MM5_Quick_Reference.md:206)."""
+    assert _slugify("Magic: Domain + Intent + Scope") == "magic-domain--intent--scope"
+
+
+def test_slugify_plain_heading_unchanged() -> None:
+    """A heading with single spaces and no punctuation is unaffected by the
+    per-character fix — one hyphen per space, same as before."""
+    assert _slugify("Facet Levels") == "facet-levels"
 
 
 def test_parse_glossary_terms_strips_parenthetical_variants(tmp_path: Path) -> None:
