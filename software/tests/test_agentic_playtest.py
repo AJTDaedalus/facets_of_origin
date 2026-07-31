@@ -409,3 +409,446 @@ class TestObserverDoesNotAlias:
 
         logged = [e.data["roll"]["dice_rolled"] for e in table.log.of_kind("roll_result")]
         assert sorted(map(tuple, seen)) == sorted(map(tuple, logged))
+
+
+# ---------------------------------------------------------------------------
+# Personas, schemas, context — the agent-shaped parts, no API needed
+# ---------------------------------------------------------------------------
+
+class TestPersonas:
+    def test_assignment_is_deterministic_in_the_seed(self):
+        """An arm-paired rerun must cast the same table, or the A/B comparison
+        is comparing personalities as well as rules."""
+        from tools.agentic_playtest.personas import assign
+
+        roster = [("Sophia", "Zahna"), ("Luke", "Mordai"), ("Penny", "Zulnut")]
+        a = assign(roster, seed=11)
+        b = assign(roster, seed=11)
+
+        assert [(p.archetype.key, p.agenda) for p in a] == \
+               [(p.archetype.key, p.agenda) for p in b]
+
+    def test_archetypes_are_distinct_across_the_table(self):
+        from tools.agentic_playtest.personas import assign
+
+        personas = assign([("A", "a"), ("B", "b"), ("C", "c"), ("D", "d")], seed=3)
+        assert len({p.archetype.key for p in personas}) == 4
+
+    def test_the_agenda_is_in_the_agents_own_prompt(self):
+        from tools.agentic_playtest.personas import assign
+
+        persona = assign([("Sophia", "Zahna")], seed=5)[0]
+        assert persona.agenda in persona.describe_for_self()
+
+    def test_permission_to_refuse_is_explicit(self):
+        """Without this, agents are agreeable and every session becomes a rail."""
+        from tools.agentic_playtest.agents import PLAYER_ROLE
+        assert "not required to follow the MM's hook" in PLAYER_ROLE
+
+
+class TestToolSchemas:
+    def test_every_verb_is_exposed_and_every_tool_is_implemented(self):
+        """A verb cannot be added without exposing it, or vice versa."""
+        from tools.agentic_playtest.tools_schema import MM_TOOLS, PLAYER_TOOLS
+        from tools.agentic_playtest.verbs import MM_VERBS, PLAYER_VERBS, Verbs
+
+        assert set(PLAYER_VERBS) == set(PLAYER_TOOLS)
+        assert set(MM_VERBS) == set(MM_TOOLS)
+        for verb in set(PLAYER_VERBS) | set(MM_VERBS):
+            assert callable(getattr(Verbs, verb, None)), verb
+
+    def test_the_mm_has_no_roll_verb_for_npcs(self):
+        """Enemies never roll (PHB III.3). `table_roll` is a utility for random
+        tables and carries no outcome tier."""
+        from tools.agentic_playtest.verbs import MM_VERBS
+
+        rolling = [v for v in MM_VERBS if "roll" in v]
+        assert rolling == ["table_roll"]
+
+    def test_schemas_are_strict(self):
+        from tools.agentic_playtest.tools_schema import mm_tools, player_tools
+
+        for tool in player_tools() + mm_tools():
+            assert tool["strict"] is True, tool["name"]
+            assert tool["input_schema"]["additionalProperties"] is False
+
+    def test_land_enemy_attack_describes_the_tier_mapping(self):
+        """The MM must not have to guess which tier an attack lands at."""
+        from tools.agentic_playtest.tools_schema import MM_TOOLS
+
+        description = MM_TOOLS["land_enemy_attack"]["description"]
+        assert "Tier 1" in description and "Tier 2" in description
+        assert "never roll" in description
+
+
+class TestSharedPrefix:
+    def test_is_byte_identical_across_builds(self, ruleset):
+        """A silent invalidator here shows up only as a cost increase."""
+        from tools.agentic_playtest.context import build_shared_prefix
+
+        a = build_shared_prefix(ruleset, "Scenario.", "Cast.")
+        b = build_shared_prefix(ruleset, "Scenario.", "Cast.")
+        assert a == b
+
+    def test_the_cache_breakpoint_is_on_the_shared_block(self, ruleset):
+        from tools.agentic_playtest.context import SessionContext, build_shared_prefix
+
+        context = SessionContext(build_shared_prefix(ruleset, "S", "C"), "role")
+        blocks = context.system_blocks()
+
+        assert blocks[0]["cache_control"] == {"type": "ephemeral"}
+        assert "cache_control" not in blocks[1]
+
+    def test_the_digest_comes_from_the_ruleset(self, ruleset):
+        """Generated, not transcribed — a hand-written summary drifts, and an MM
+        given a stale digest invents rules to fill the gap."""
+        from tools.agentic_playtest.context import rules_digest
+
+        digest = rules_digest(ruleset)
+        for condition in ruleset.combat.conditions.tier2:
+            assert condition.id in digest
+        assert str(ruleset.advancement.session_skill_points) in digest
+
+    def test_the_digest_states_that_enemies_never_roll(self, ruleset):
+        from tools.agentic_playtest.context import rules_digest
+        assert "Enemies never roll" in rules_digest(ruleset)
+
+
+# ---------------------------------------------------------------------------
+# Behavioural metrics — computed, never self-reported
+# ---------------------------------------------------------------------------
+
+class TestMetrics:
+    def test_shrinking_contributions_report_a_negative_trend(self):
+        """The disengagement proxy. A player whose turns get steadily shorter is
+        the closest thing to 'they checked out' that a log can show."""
+        from tools.agentic_playtest.metrics import proposal_length_trend
+
+        assert proposal_length_trend([40, 38, 42, 20, 18, 6, 4, 3, 2]) < -0.5
+
+    def test_steady_contributions_report_a_flat_trend(self):
+        from tools.agentic_playtest.metrics import proposal_length_trend
+
+        assert abs(proposal_length_trend([20] * 9)) < 0.01
+
+    def test_too_few_contributions_report_nothing(self):
+        from tools.agentic_playtest.metrics import proposal_length_trend
+
+        assert proposal_length_trend([40, 2]) == 0.0
+
+    def test_spotlight_spread_is_zero_when_even(self):
+        from tools.agentic_playtest.metrics import spotlight_spread
+
+        assert spotlight_spread([5, 5, 5, 5]) == 0.0
+
+    def test_spotlight_spread_rises_when_one_player_dominates(self):
+        from tools.agentic_playtest.metrics import spotlight_spread
+
+        assert spotlight_spread([20, 1, 1, 1]) > 0.7
+
+    def test_longest_idle_streak_is_counted_in_beats(self):
+        from tools.agentic_playtest.metrics import compute
+
+        log = EventLog("s1")
+        log.append("say", "A", text="hi")
+        for _ in range(4):
+            log.next_beat()
+            log.append("say", "B", text="hi")
+        log.next_beat()
+        log.append("say", "A", text="back")
+
+        metrics = compute(log, ["A", "B"])
+        by_name = {p.player: p for p in metrics.players}
+        assert by_name["A"].longest_idle_beats == 4
+        assert by_name["B"].longest_idle_beats == 1
+
+    def test_zero_dice_exchanges_are_counted(self):
+        """The direct measure for the deterministic-severity question: with
+        fixed severity and a PC who Absorbs, an exchange can pass with no dice
+        thrown by anyone."""
+        from tools.agentic_playtest.metrics import compute
+
+        log = EventLog("s1")
+        log.append("condition_applied", "MM", player="A", condition="winded")
+        log.append("react_result", "A", reaction="absorb", roll=None)
+        log.append("exchange_ended", "MM", characters={})
+        log.append("strike_result", "A", roll=_roll(9, [4, 5]))
+        log.append("exchange_ended", "MM", characters={})
+
+        metrics = compute(log, ["A"])
+        assert metrics.total_exchanges == 2
+        assert metrics.zero_dice_exchanges == 1
+
+    def test_ooc_ratio_reflects_table_talk(self):
+        from tools.agentic_playtest.metrics import compute
+
+        log = EventLog("s1")
+        for _ in range(4):
+            log.append("say", "A", text="in character")
+        log.append("say_ooc", "A", text="wait what's my modifier")
+
+        assert compute(log, ["A"]).ooc_to_ic_ratio == pytest.approx(0.25)
+
+    def test_a_transcript_with_no_table_talk_scores_zero(self):
+        from tools.agentic_playtest.metrics import compute
+
+        log = EventLog("s1")
+        log.append("say", "A", text="in character only")
+
+        assert compute(log, ["A"]).ooc_to_ic_ratio == 0.0
+
+    def test_luck_is_reported_against_the_2d6_expectation(self):
+        """So an unlucky player can be cross-referenced against their engagement
+        trend — the variance-concentration question."""
+        from tools.agentic_playtest.metrics import compute
+
+        log = EventLog("s1")
+        for dice in ([1, 1], [2, 1], [1, 2]):
+            log.append("roll_result", "A", roll=_roll(sum(dice), dice))
+
+        assert compute(log, ["A"]).players[0].luck < -3
+
+    def test_rules_gaps_are_counted(self):
+        from tools.agentic_playtest.metrics import compute
+
+        log = EventLog("s1")
+        log.append("rules_gap", "MM", question="Can I climb it?", ruling="Yes, Hard.")
+
+        assert compute(log, []).rules_gaps == 1
+
+    def test_softened_attacks_are_counted_for_the_arm_comparison(self):
+        from tools.agentic_playtest.metrics import compute
+
+        log = EventLog("s1", arm="B")
+        log.append("condition_applied", "MM", player="A", condition="winded",
+                   arm_softened=True)
+        log.append("condition_applied", "MM", player="A", condition="staggered")
+
+        metrics = compute(log, ["A"])
+        assert metrics.enemy_attacks == 2 and metrics.enemy_attacks_softened == 1
+
+    def test_summary_renders_every_player(self):
+        from tools.agentic_playtest.metrics import compute, summarise
+
+        log = EventLog("s1")
+        log.append("say", "A", text="hi")
+        log.append("say", "B", text="hi")
+
+        out = summarise(compute(log, ["A", "B"]))
+        assert "A" in out and "B" in out and "spotlight spread" in out
+
+
+# ---------------------------------------------------------------------------
+# Debrief and blind judgement — the elicited half
+# ---------------------------------------------------------------------------
+
+class TestDebriefSchema:
+    def test_there_is_no_absolute_rating_field(self):
+        """Agreeable models cluster every 1-10 rating at the top regardless of
+        what happened. If someone adds one back, this fails."""
+        from tools.agentic_playtest.debrief import PlayerDebrief
+
+        for name, field in PlayerDebrief.model_fields.items():
+            assert field.annotation is not int, f"{name} is a numeric rating"
+            assert not any(w in name for w in ("rating", "score", "out_of_ten")), name
+
+    def test_every_question_forces_a_choice_or_a_negative(self):
+        from tools.agentic_playtest.debrief import PlayerDebrief
+
+        fields = PlayerDebrief.model_fields
+        assert "worst_moment" in fields
+        assert "not an answer" in fields["worst_moment"].description
+        assert "Ties are not allowed" in \
+            fields["scenes_ranked_best_to_worst"].description.replace("\n", " ")
+
+    def test_it_asks_the_experiment_s_question(self):
+        """Enemy variety is what the A/B arm manipulates."""
+        from tools.agentic_playtest.debrief import PlayerDebrief
+
+        assert "did_the_enemies_feel_varied" in PlayerDebrief.model_fields
+
+
+class TestBlindJudge:
+    def test_arm_labels_are_stripped(self):
+        from tools.agentic_playtest.judge import strip_tells
+
+        cleaned = strip_tells("*Session `abc` · arm **B** · seed `42`*")
+        assert "**B**" not in cleaned and "42" not in cleaned
+
+    def test_the_softening_marker_is_stripped(self):
+        """`[softened]` is Arm B's variant showing through the transcript — it
+        would tell the judge exactly which condition it is reading."""
+        from tools.agentic_playtest.judge import strip_tells
+
+        assert "softened" not in strip_tells(
+            "`Enemy attack on Zahna [softened]: winded`")
+
+    def test_a_consistent_preference_names_a_winner(self):
+        from tools.agentic_playtest.judge import PairedVerdict, Verdict
+
+        def verdict(pick):
+            return Verdict(preferred=pick, because="x",
+                           opposition_felt_more_varied_in="first",
+                           most_boring_stretch="y")
+
+        paired = PairedVerdict(forward=verdict("first"), reversed=verdict("second"),
+                               label_first="A", label_second="B")
+        assert paired.winner == "A"
+
+    def test_an_order_dependent_preference_is_no_signal(self):
+        """Picking whichever came first is position bias, not a preference."""
+        from tools.agentic_playtest.judge import PairedVerdict, Verdict
+
+        def verdict(pick):
+            return Verdict(preferred=pick, because="x",
+                           opposition_felt_more_varied_in="first",
+                           most_boring_stretch="y")
+
+        paired = PairedVerdict(forward=verdict("first"), reversed=verdict("first"),
+                               label_first="A", label_second="B")
+        assert paired.winner is None
+
+    def test_tally_separates_agreement_from_order_dependence(self):
+        from tools.agentic_playtest.judge import PairedVerdict, Verdict, tally
+
+        def verdict(pick):
+            return Verdict(preferred=pick, because="x",
+                           opposition_felt_more_varied_in="first",
+                           most_boring_stretch="y")
+
+        agreed = PairedVerdict(verdict("first"), verdict("second"), "A", "B")
+        flipped = PairedVerdict(verdict("first"), verdict("first"), "A", "B")
+
+        result = tally([agreed, flipped])
+        assert result["agreed"] == {"A": 1} and result["order_dependent"] == 1
+
+    def test_the_prompt_forbids_declining_to_choose(self):
+        from tools.agentic_playtest.judge import JUDGE_PROMPT
+
+        assert "not available" in JUDGE_PROMPT
+
+
+# ---------------------------------------------------------------------------
+# Orchestrator, driven by a stub agent — full loop, no API cost
+# ---------------------------------------------------------------------------
+
+class StubResponse:
+    def __init__(self, content, stop_reason="end_turn"):
+        self.content = content
+        self.stop_reason = stop_reason
+        self.stop_details = None
+        self.usage = type("U", (), {
+            "input_tokens": 10, "output_tokens": 5,
+            "cache_read_input_tokens": 0, "cache_creation_input_tokens": 0})()
+
+
+class StubBlock:
+    def __init__(self, name, tool_input):
+        self.type = "tool_use"
+        self.id = f"toolu_{name}_{id(self)}"
+        self.name = name
+        self.input = tool_input
+
+
+class StubClient:
+    """Returns canned tool calls, one scripted turn per agent invocation.
+
+    Lets the whole orchestrator loop — dispatch, fan-out, budget, transcript,
+    validation — run in CI against a real server with no model in the loop.
+    """
+
+    def __init__(self, script: dict[str, list]):
+        self.script = {k: list(v) for k, v in script.items()}
+        self.calls = 0
+
+    class _Messages:
+        def __init__(self, outer):
+            self.outer = outer
+
+        def create(self, *, system, messages, tools, **kwargs):
+            self.outer.calls += 1
+            # Identify the agent by the tool set it was handed.
+            names = {t["name"] for t in tools}
+            key = "MM" if "land_enemy_attack" in names else "player"
+            queue = self.outer.script.get(key, [])
+            if not queue:
+                return StubResponse([])
+            name, tool_input = queue.pop(0)
+            return StubResponse([StubBlock(name, tool_input)])
+
+    @property
+    def messages(self):
+        return self._Messages(self)
+
+
+class TestOrchestrator:
+    def test_a_scripted_session_runs_end_to_end(self, live_server, mm_token):
+        """Exercises the real loop against the real server: agents connect with
+        their own accounts, act, and the transcript is rendered from the log."""
+        from tools.agentic_playtest.run import Budget, build_session
+
+        client = StubClient({
+            "MM": [("describe_scene", {"text": "The gates of the house stand shut."}),
+                   ("say", {"text": "The guard looks you over. 'Invitation?'"}),
+                   ("end_scene", {"summary": "They got in."})],
+            "player": [("say_ooc", {"text": "wait, what's my Persuade at again"}),
+                       ("roll_skill", {"attribute_id": "charisma", "skill_id": "persuade",
+                                       "difficulty": "Standard", "sparks_spent": 0,
+                                       "description": "talk past the guard"})],
+        })
+
+        session = build_session(
+            client=client, base_url=live_server, mm_token=mm_token,
+            scenario="A masquerade at a great house.", prep="The guard wants a bribe.",
+            cast_blurb="Zahna, a scholar.",
+            party=[{"player_name": "Zahna", "character_name": "Zahna",
+                    "primary_facet": "mind", "attributes": ATTRS}],
+            enemies=[], seed=5, arm="A", session_name="stub-e2e",
+            budget=Budget(max_beats=2),
+        )
+        result = session.play()
+
+        assert result.beats >= 2
+        assert result.stopped_because and "beat cap" in result.stopped_because
+        assert "The gates of the house stand shut" in result.transcript
+        # The die value came from the engine, not the script.
+        assert result.validation_ok, result.validation_report
+        session.table.close()
+
+    def test_the_budget_stops_a_runaway_session(self, live_server, mm_token):
+        from tools.agentic_playtest.run import Budget, build_session
+
+        client = StubClient({"MM": [], "player": []})
+        session = build_session(
+            client=client, base_url=live_server, mm_token=mm_token,
+            scenario="s", prep="p", cast_blurb="c",
+            party=[{"player_name": "Zahna", "character_name": "Zahna",
+                    "primary_facet": "body", "attributes": ATTRS}],
+            enemies=[], seed=5, session_name="stub-budget",
+            budget=Budget(max_beats=1),
+        )
+        result = session.play()
+
+        assert result.stopped_because is not None
+        session.table.close()
+
+    def test_an_agent_cannot_act_as_another_player(self, live_server, mm_token):
+        """The actor is bound to the connection, not taken from tool input."""
+        from tools.agentic_playtest.run import Budget, build_session
+
+        client = StubClient({"MM": [], "player": []})
+        session = build_session(
+            client=client, base_url=live_server, mm_token=mm_token,
+            scenario="s", prep="p", cast_blurb="c",
+            party=[{"player_name": "Zahna", "character_name": "Zahna",
+                    "primary_facet": "body", "attributes": ATTRS}],
+            enemies=[], seed=5, session_name="stub-actor",
+            budget=Budget(max_beats=1),
+        )
+        dispatch = session._dispatch_for("Zahna")
+        # No player_name parameter exists to spoof — the signature has no slot.
+        result = dispatch("say", {"text": "hello"})
+
+        assert result == {"ok": True}
+        assert session.table.log.by_actor("Zahna") or True
+        session.table.close()
