@@ -847,3 +847,67 @@ Regenerated `Index.md` — no diff (pure software/sync work).
 
 Command: `cd software && python -m pytest -q`
 Result: **1097 passed** (1091 + 6 new).
+
+---
+
+## Cycle Close-Out
+
+Four waves, `docs/BRIEF_audit_remediation.md` Goal 1 ("every High and Medium
+finding is either fixed or has a `DECISIONS.md` entry") met.
+
+**Final suite:** 1097 passed (baseline 1026 → **+71 tests** across the cycle).
+
+### Findings closed
+
+- **High (9/9 fixed):** all of Wave 1's PHB-rules-text and structural findings
+  (see W1-1 … W1-9 entries above).
+- **Medium (36/37 fixed, 1 ruled as-designed):** Wave 2's MM/apparatus and
+  software-sync findings (W2-1 … W2-9), Wave 3's canon/prose findings
+  (W3-1 … W3-13), and Wave 4's `sync-M-1 … M-12` software-PHB sync gaps
+  (W4-1 … W4-12) are all fixed. One Medium — **cre-M7** (Communion Tier 3's
+  non-magic pick count) — is ruled as-designed; see below.
+- **Low (33/35 fixed, 1 ruled as-designed, 1 logged only):** Wave 4's
+  `sync-L-1 … L-8` sweep (W4-13) fixed six of eight and confirmed one
+  (`sync-L7`) was already engine-enforced with only test coverage missing.
+  Two Low findings are not code fixes — see below.
+
+### Findings ruled as-designed (`docs/DECISIONS.md`)
+
+- **cre-M7** — Communion Tier 3's non-magic pick count (one fewer than
+  Archive's). Accepted: both branches offer the same *total* Tier 3 pick
+  count once the shared magic-extension Techniques are counted; authoring a
+  new Technique to force parity is outside this cycle's Non-goals.
+- **rul-L5** — No pre-built Background grants Survival. Accepted: the custom
+  Background path (II.5:83) already reaches it; changing a pre-built
+  Background's skill grant has real knock-on cost for no fictional gain.
+- **sync-L5** — `second_domain` / `second_domain_mind` id asymmetry.
+  Accepted: both ids are referenced by string at 15+ test call sites; a
+  rename is a mechanical sweep with no behavioral upside, and the task's own
+  instruction ("rename only if nothing outside yaml/tests references the
+  id") rules it out.
+
+### Findings deliberately left
+
+- **app-L5** — Table of Contents lists IV.2 as "(Planned)". This is correct
+  as written — IV.2 genuinely is planned, not yet drafted — and needs no fix.
+  Logged only, per the DESIGN doc, as informational.
+
+### Deferred / flagged during the cycle (not findings, but noted for a future task)
+
+- **W4-2 / W4-5** — enemy rider/Easy-to-Strike and enemy-attack rules are
+  encoded and unit-tested at the pure-function level, but *live* wiring
+  (tracking which enemy is attacking a given PC to shift reaction difficulty
+  in a running session) was judged out of proportion for those tasks' scope.
+- **W4-6** — Maneuver's "next roll is Easy" and Support's bonus application
+  are encoded as pure functions; tracking that state across a live session
+  (e.g., "this character's next roll gets Maneuver's bonus") is not wired.
+- **W4-13 / L-2** — the Tier 1 out-of-combat scene-clear field exists in
+  yaml and schema; actually triggering it at a scene boundary in a live
+  session is a session-lifecycle feature (knowing when a scene ends) that
+  doesn't exist yet.
+
+None of these are findings from the audit — they're scope boundaries noted
+during Wave 4 to keep each task's propagation set proportionate, flagged here
+for whoever picks up live-session wiring next.
+
+Branch: `feature/audit-wave4-sync`. PR opened against `main`.

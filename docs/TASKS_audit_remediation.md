@@ -366,7 +366,7 @@ Every task follows the sync workflow: yaml → schema model → engine → WebSo
   - L-7 domain acquisition limits (II.3:244-246: one domain per Facet via cross-training, Ascendant once ever, prismatics never a starting domain).
   Accept: each item either fixed or recorded as accepted with a reason; suite green.
 
-- [ ] **W4-14 — Cycle close-out.**
+- [x] **W4-14 — Cycle close-out.**
   Full suite; final count in the LOG. PR via `gh` listing finding IDs. Then append a cycle summary to `docs/LOG_audit_remediation.md`: findings closed, findings ruled as-designed, findings deliberately left (app-L5), and the final test count against the 1026 baseline.
   Accept: every High and Medium finding in the audit is either fixed or has a `DECISIONS.md` entry (BRIEF Goal 1); PR open.
 
