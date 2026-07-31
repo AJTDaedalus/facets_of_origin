@@ -534,6 +534,53 @@ class TestEnemyPostureReactionDifficulty:
 
 
 # ---------------------------------------------------------------------------
+# maneuver_target_difficulty() / support_bonus_modes() — sync-M-7: III.3
+# Maneuver (10+/7-9/6- effect on rolls against the target) and Support (the
+# two non-stacking next-roll-only bonus modes).
+# ---------------------------------------------------------------------------
+
+class TestManeuverTargetDifficulty:
+    def test_full_success_makes_target_easy(self, ruleset):
+        assert combat.maneuver_target_difficulty("full_success", "Standard", ruleset) == "Easy"
+
+    def test_partial_success_leaves_base_difficulty(self, ruleset):
+        assert combat.maneuver_target_difficulty("partial_success", "Standard", ruleset) == "Standard"
+
+    def test_failure_backfires_no_effect_on_target(self, ruleset):
+        assert combat.maneuver_target_difficulty("failure", "Standard", ruleset) == "Standard"
+
+    def test_modified_yaml_outcome_changes_the_effect(self, ruleset):
+        original = ruleset.combat.actions.maneuver.partial_success
+        try:
+            ruleset.combat.actions.maneuver.partial_success = "easy"
+            assert combat.maneuver_target_difficulty("partial_success", "Standard", ruleset) == "Easy"
+        finally:
+            ruleset.combat.actions.maneuver.partial_success = original
+
+
+class TestSupportBonusModes:
+    def test_support_has_exactly_two_modes_from_yaml(self, ruleset):
+        assert combat.support_bonus_modes(ruleset) == ["add_die", "ease_difficulty"]
+
+    def test_modified_yaml_modes_changes_accepted_set(self, ruleset):
+        original = ruleset.combat.actions.support.modes
+        try:
+            ruleset.combat.actions.support.modes = ["add_die"]
+            assert combat.support_bonus_modes(ruleset) == ["add_die"]
+        finally:
+            ruleset.combat.actions.support.modes = original
+
+    def test_support_is_next_roll_only_and_non_stacking_per_yaml(self, ruleset):
+        """The duration and non-stacking rule ('only the most recent
+        applies') are encoded as data. No live 'pending bonus' tracking
+        exists in the session yet to test the replacement behaviorally —
+        see the LOG for this task; that's a larger feature than moving a
+        literal into data."""
+        assert ruleset.combat.actions.support.duration == "next_roll_only"
+        assert ruleset.combat.actions.support.stacking == "most_recent_only"
+
+
+# ---------------------------------------------------------------------------
 # mook_removed() — D1 Mook removal thresholds (A4)
 # ---------------------------------------------------------------------------
 

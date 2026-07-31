@@ -907,9 +907,9 @@ async def _handle_support(
         return
 
     target_player = str(msg.get("target", ""))
-    bonus_type = str(msg.get("bonus_type", "add_die"))  # "add_die" or "ease_difficulty"
+    bonus_type = str(msg.get("bonus_type", "add_die"))  # PHB III.3: the supporting character's choice
 
-    if bonus_type not in ("add_die", "ease_difficulty"):
+    if bonus_type not in combat_module.support_bonus_modes(session.ruleset):
         await manager.send_to(websocket, {"type": "error", "message": f"Invalid bonus_type '{bonus_type}'."})
         return
 

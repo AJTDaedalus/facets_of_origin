@@ -395,6 +395,37 @@ class EnemyPostureReactionShiftDef(BaseModel):
     defensive: str = "easier"
 
 
+class ManeuverOutcomesDef(BaseModel):
+    """Maneuver's effect on rolls against the target, by outcome tier
+    (III.3): a 10+ makes rolls against the target Easy until the situation
+    changes; a 7-9 works but leaves the target at the base difficulty; a 6-
+    backfires (no effect on the target).
+    """
+
+    full_success: str = "easy"
+    partial_success: str = "standard"
+    failure: str = "backfire"
+
+
+class SupportDef(BaseModel):
+    """Support grants an ally a bonus to their very next roll only, the
+    supporting character's choice of mode; bonuses from multiple Support
+    actions do not stack — only the most recent applies (III.3).
+    """
+
+    modes: list[str] = Field(default_factory=lambda: ["add_die", "ease_difficulty"])
+    duration: str = "next_roll_only"
+    stacking: str = "most_recent_only"
+
+
+class CombatActionsDef(BaseModel):
+    """Maneuver and Support (III.3), the two non-Strike offensive/aid
+    actions."""
+
+    maneuver: ManeuverOutcomesDef = Field(default_factory=ManeuverOutcomesDef)
+    support: SupportDef = Field(default_factory=SupportDef)
+
+
 class EnemyAttacksDef(BaseModel):
     """Rules for how an enemy's type and Posture shape a PC's reaction
     against its attack (III.3, Enemy Attacks). NPCs never roll dice — the PC
@@ -456,6 +487,7 @@ class CombatDef(BaseModel):
     armor: ArmorDef = Field(default_factory=ArmorDef)
     enemy_durability: EnemyDurabilityDef = Field(default_factory=EnemyDurabilityDef)
     enemy_attacks: EnemyAttacksDef = Field(default_factory=EnemyAttacksDef)
+    actions: CombatActionsDef = Field(default_factory=CombatActionsDef)
     strike_outcomes: dict[str, Any] = Field(default_factory=dict)
     endurance_floor_rule: str = ""
     mook_rule: str = ""

@@ -596,7 +596,7 @@ PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`
 - [x] W4-3 — Same-Tier-2 escalation into yaml. *(sync-M-4)* **TDD**
 - [x] W4-4 — Armor/reaction non-stacking into yaml. *(sync-M-5)* **TDD**
 - [x] W4-5 — Enemy attack rules into yaml. *(sync-M-6)* **TDD**
-- [ ] W4-6 — Maneuver and Support into yaml. *(sync-M-7)* **TDD**
+- [x] W4-6 — Maneuver and Support into yaml. *(sync-M-7)* **TDD**
 - [ ] W4-7 — Major Attribute modifier derivation. *(sync-M-8, part 1)* **TDD**
 - [ ] W4-8 — Saving throws: engine + WebSocket. *(sync-M-8, part 2 — D11 full depth)* **TDD**
 - [ ] W4-9 — Spark scope fuel into yaml, including D8. *(sync-M-9)* **TDD**
@@ -675,3 +675,18 @@ Result: **1054 passed** (1053 + 1 new).
 
 Command: `cd software && python -m pytest -q`
 Result: **1062 passed** (1054 + 8 new).
+
+### W4-6 *(sync-M-7)* — TDD
+
+- **Investigated first:** Maneuver's outcome effect (10+ = Easy for rolls against the target, 7-9 = stays base, 6- = backfire) and Support's actual "next roll" bonus tracking were **entirely unimplemented** in the live handlers — `_handle_maneuver`/`_handle_support` roll and broadcast the result but never apply or track any mechanical effect. The one real hardcoded literal in the named file: `_handle_support`'s validation checked `bonus_type not in ("add_die", "ease_difficulty")` — a hardcoded tuple.
+- `software/app/facets/schema.py` — `ManeuverOutcomesDef` (full_success/partial_success/failure → easy/standard/backfire), `SupportDef` (modes, duration, stacking), `CombatActionsDef` bundling both. Added `CombatDef.actions`.
+- `software/facets/base/facet.yaml` (`combat.actions`) — set to match III.3 exactly.
+- `software/app/game/combat.py` — two new pure functions: `maneuver_target_difficulty(outcome, base_difficulty, ruleset)` and `support_bonus_modes(ruleset)`.
+- `software/app/api/websocket.py` (`_handle_support`) — the hardcoded `bonus_type` tuple now reads `combat_module.support_bonus_modes(session.ruleset)`.
+- **Scope note, same pattern as W4-5:** neither Maneuver's Easy-until-the-situation-changes effect nor Support's next-roll-only non-stacking bonus is tracked as live session state (no "pending bonus" field exists on `Character`) — encoding the rule as data and providing pure functions to query it is this task's proportionate scope; stateful wiring is a larger feature, flagged for a future task.
+- Tests (7: 3 required + regression coverage) in `test_combat.py`: Maneuver's three outcomes read from yaml (plus a modified-yaml check); Support's two modes read from yaml (plus a modified-yaml check); Support's `duration`/`stacking` fields confirmed present as data (the "non-stacking replacement" case, tested as a data-correctness check since no live mechanism exists yet to test behaviorally — noted honestly in the test's own docstring).
+- Confirmed the existing `test_support_invalid_bonus_type` websocket test still passes with the yaml-sourced validation.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1069 passed** (1062 + 7 new).

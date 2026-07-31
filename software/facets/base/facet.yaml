@@ -1385,6 +1385,17 @@ combat:
     posture_reaction_shift: {aggressive: harder, measured: none, defensive: easier}
     mook_declares_posture: false   # the MM sets Mook attack difficulty by situation instead
 
+  # III.3, Maneuver and Support — the two non-Strike actions.
+  actions:
+    maneuver:
+      full_success: easy       # rolls against the target are Easy until the situation changes
+      partial_success: standard
+      failure: backfire
+    support:
+      modes: [add_die, ease_difficulty]   # the supporting character's choice
+      duration: next_roll_only
+      stacking: most_recent_only          # bonuses from multiple Support actions do not stack
+
 # ---------------------------------------------------------------------------
 # Hazards & Death (PHB III.2)
 # ---------------------------------------------------------------------------
