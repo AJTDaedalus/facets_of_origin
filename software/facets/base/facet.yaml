@@ -1363,6 +1363,8 @@ combat:
     armor_resolve_bonus: {none: 0, light: 1, heavy: 2}
     mook_removed_on: partial_success        # armored mook: full_success
     armored_mook_removed_on: full_success
+    rider_on: full_success                  # a rider may only be hung on a 10+
+    rider_tiers: [1, 2]                     # attacker's choice; riders never defeat
     # Working Resolve band (base, before armor bonus), confirmed by Gate G1
     # (task A8, 2026-07-10, DESIGN §5-bis; data in research/simulation_log.md
     # Series 7): Named 3-4, Boss 8. Widened from the BRIEF's original 2-6

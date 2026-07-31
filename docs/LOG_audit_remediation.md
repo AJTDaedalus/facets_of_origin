@@ -592,7 +592,7 @@ PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`
 ### W4 task list (from `docs/TASKS_audit_remediation.md`)
 
 - [x] W4-1 — Press cost into yaml. *(sync-M-2)* **TDD**
-- [ ] W4-2 — Strike riders and Easy-to-Strike into yaml. *(sync-M-3)* **TDD**
+- [x] W4-2 — Strike riders and Easy-to-Strike into yaml. *(sync-M-3)* **TDD**
 - [ ] W4-3 — Same-Tier-2 escalation into yaml. *(sync-M-4)* **TDD**
 - [ ] W4-4 — Armor/reaction non-stacking into yaml. *(sync-M-5)* **TDD**
 - [ ] W4-5 — Enemy attack rules into yaml. *(sync-M-6)* **TDD**
@@ -619,3 +619,18 @@ PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`
 
 Command: `cd software && python -m pytest -q`
 Result: **1047 passed** (1044 + 3 new).
+
+### W4-2 *(sync-M-3)* — TDD
+
+- **Investigated first:** `target_strike_difficulty` (Tier 2 rider → Easy) and `apply_condition`'s `is_rider` handling (riders never escalate to Broken) were already correctly yaml-driven or structurally correct. The actual hardcoded literals were in `tools/combat_sim.py`: `_choose_rider`'s Tier 1 fallback returned the literal string `"winded"` instead of reading `combat.conditions.tier1[0]`, and **two** separate call sites gated the rider decision on `effective_outcome == "full_success"` — a hardcoded outcome comparison with no yaml backing.
+- `software/app/facets/schema.py` (`EnemyDurabilityDef`) — added `rider_on: str = "full_success"` and `rider_tiers: list[int] = [1, 2]`.
+- `software/facets/base/facet.yaml` (`combat.enemy_durability`) — set both fields, matching current behavior exactly.
+- `software/app/game/combat.py` — added two new shared helpers, `can_apply_rider(outcome, ruleset)` and `rider_tier_eligible(tier, ruleset)`, both reading the new yaml fields — a single source of truth any caller (simulator or, eventually, the live WS path) can use instead of re-deriving the comparison.
+- `software/tools/combat_sim.py` — fixed `_choose_rider`'s Tier 1 fallback to read `tier1_ids[0]` from yaml instead of the literal `"winded"`; both rider-gating call sites now call `combat_module.can_apply_rider(...)` instead of comparing against a hardcoded string — closing a second silent-divergence risk the same way W4-1 did for Press.
+- **Noted, not wired:** riders are not yet exposed through the live WebSocket Strike flow at all (`grep rider` in `websocket.py` returns nothing) — that's a real gap but a larger one than this task's scope (moving existing literals to data); flagging for a future task rather than expanding this one.
+- Tests (5 — 3 required + 2 restore-safety fixes) in `test_combat.py`, new `TestRiderEligibility` class: `can_apply_rider` reads the yaml outcome (and a modified yaml value flips eligibility — **careful:** the `ruleset` fixture is session-scoped and shared across the whole test run, so this test saves/restores the original value in a `try/finally` rather than mutating it permanently); `rider_tier_eligible` reads yaml tiers (same modify + restore pattern); a rider applied via `apply_condition` never touches a separately-tracked Resolve pool.
+- Ran `test_combat_sim.py` and `test_combat_characterization.py` (89 tests) specifically to confirm the simulator fixes didn't change any recorded behavior — all green.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1052 passed** (1047 + 5 new).

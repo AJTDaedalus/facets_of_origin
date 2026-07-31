@@ -373,12 +373,20 @@ class EnemyDurabilityDef(BaseModel):
         armor_resolve_bonus: Flat Resolve granted by enemy armor.
         mook_removed_on: Outcome tier that removes an unarmored Mook.
         armored_mook_removed_on: Outcome tier that removes an armored Mook.
+        rider_on: Outcome tier that may additionally hang a rider Condition
+                  on the enemy, on top of Resolve depletion (III.3 — "on a
+                  full success only").
+        rider_tiers: Condition tiers eligible as a rider (Tier 1 or Tier 2,
+                     attacker's choice). Riders never escalate to Broken —
+                     Resolve is what defeats an enemy, not Conditions.
     """
 
     strike_depletion: StrikeDepletionDef = Field(default_factory=StrikeDepletionDef)
     armor_resolve_bonus: ArmorResolveBonusDef = Field(default_factory=ArmorResolveBonusDef)
     mook_removed_on: str = "partial_success"
     armored_mook_removed_on: str = "full_success"
+    rider_on: str = "full_success"
+    rider_tiers: list[int] = Field(default_factory=lambda: [1, 2])
 
 
 class CombatDef(BaseModel):

@@ -508,6 +508,22 @@ def mook_removed(outcome: str, armored: bool, ruleset) -> bool:
         return False
 
 
+def can_apply_rider(outcome: str, ruleset) -> bool:
+    """Whether a Strike outcome is eligible to additionally hang a rider
+    Condition on an enemy, on top of Resolve depletion (III.3 — "on a full
+    success only"). Read from `combat.enemy_durability.rider_on`, not
+    hardcoded, so a homebrew ruleset could widen or narrow it.
+    """
+    return outcome == ruleset.combat.enemy_durability.rider_on
+
+
+def rider_tier_eligible(tier: int, ruleset) -> bool:
+    """Whether `tier` (1 or 2) is a legal rider tier — read from
+    `combat.enemy_durability.rider_tiers`, not hardcoded.
+    """
+    return tier in ruleset.combat.enemy_durability.rider_tiers
+
+
 def target_strike_difficulty(base_difficulty: str, target_conditions: list[str], ruleset) -> str:
     """A target holding a Tier 2 rider Condition (Staggered/Cornered) is
     Easy to Strike (D1) — this is what makes the attacker's 10+ choice on

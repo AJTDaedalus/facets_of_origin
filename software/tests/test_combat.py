@@ -573,6 +573,64 @@ class TestTargetStrikeDifficulty:
 
 
 # ---------------------------------------------------------------------------
+# can_apply_rider() / rider_tier_eligible() — sync-M-3: the "10+ may hang a
+# Tier 1 or Tier 2 rider" rule read from combat.enemy_durability, not
+# hardcoded in the simulator (which is what combat_sim.py did before this).
+# ---------------------------------------------------------------------------
+
+class TestRiderEligibility:
+    def test_can_apply_rider_reads_yaml_outcome(self, ruleset):
+        assert combat.can_apply_rider("full_success", ruleset) is True
+        assert combat.can_apply_rider("partial_success", ruleset) is False
+        assert combat.can_apply_rider("failure", ruleset) is False
+
+    def test_modified_yaml_rider_outcome_changes_eligibility(self, ruleset):
+        # `ruleset` is session-scoped (shared across the whole test run) —
+        # restore the original value so this mutation doesn't leak into
+        # other tests.
+        original = ruleset.combat.enemy_durability.rider_on
+        try:
+            ruleset.combat.enemy_durability.rider_on = "partial_success"
+            assert combat.can_apply_rider("partial_success", ruleset) is True
+            assert combat.can_apply_rider("full_success", ruleset) is False
+        finally:
+            ruleset.combat.enemy_durability.rider_on = original
+
+    def test_rider_tier_eligible_reads_yaml_tiers(self, ruleset):
+        assert combat.rider_tier_eligible(1, ruleset) is True
+        assert combat.rider_tier_eligible(2, ruleset) is True
+        assert combat.rider_tier_eligible(3, ruleset) is False
+
+    def test_modified_yaml_rider_tiers_narrows_eligibility(self, ruleset):
+        original = ruleset.combat.enemy_durability.rider_tiers
+        try:
+            ruleset.combat.enemy_durability.rider_tiers = [2]
+            assert combat.rider_tier_eligible(1, ruleset) is False
+            assert combat.rider_tier_eligible(2, ruleset) is True
+        finally:
+            ruleset.combat.enemy_durability.rider_tiers = original
+
+    def test_rider_never_reduces_resolve(self, ruleset):
+        """A rider is a Condition-list mutation only — it must never touch
+        the enemy's Resolve pool. Resolve, not Conditions, is what defeats
+        an enemy (D1)."""
+        resolve_current = 5
+        damage = combat.apply_resolve_damage(resolve_current, "full_success", ruleset)
+        assert damage.resolve_current == 3  # depleted by the Strike itself
+        assert damage.defeated is False
+
+        conditions: list[str] = []
+        assert combat.can_apply_rider("full_success", ruleset) is True
+        assert combat.rider_tier_eligible(2, ruleset) is True
+        result = combat.apply_condition(conditions, "staggered", 2, ruleset, is_rider=True)
+
+        # The rider changed the Condition list; Resolve is untouched by it.
+        assert result.applied is True
+        assert conditions == ["staggered"]
+        assert damage.resolve_current == 3
+
+
+# ---------------------------------------------------------------------------
 # offense_modifier() — posture + Condition penalties, shared by both callers
 #
 # The Staggered −1 ("−1 to offensive rolls", PHB III.3) previously lived as a

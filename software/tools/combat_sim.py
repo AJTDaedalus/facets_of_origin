@@ -440,7 +440,8 @@ def _choose_rider(target: EnemyState, ruleset) -> Optional[str]:
             return candidate
     if target.special_ignores_tier1 and target.phase_index is not None:
         return None
-    return "winded"
+    tier1_ids = [c.id for c in ruleset.combat.conditions.tier1]
+    return tier1_ids[0]
 
 
 def _pc_strike(
@@ -532,8 +533,9 @@ def _pc_strike(
         return
 
     # A full success may additionally impose a rider Condition
-    # (D1: "on a full success only").
-    if effective_outcome == "full_success":
+    # (D1: "on a full success only") — the eligible outcome is read from
+    # combat.enemy_durability.rider_on, not hardcoded.
+    if combat_module.can_apply_rider(effective_outcome, ruleset):
         condition = _choose_rider(target, ruleset)
         if condition is not None:
             tier2_ids = {c.id for c in ruleset.combat.conditions.tier2}
@@ -1476,7 +1478,7 @@ def _g3_pc_strike(pc: PCState, target: EnemyState, ruleset) -> None:
         target.is_removed = True
         return
 
-    if effective_outcome == "full_success":
+    if combat_module.can_apply_rider(effective_outcome, ruleset):
         condition = _choose_rider(target, ruleset)
         if condition is not None:
             tier2_ids = {c.id for c in ruleset.combat.conditions.tier2}
