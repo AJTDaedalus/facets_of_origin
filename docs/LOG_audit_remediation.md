@@ -366,7 +366,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migrat
 - [ ] W3-9 — Two Common Rulings into III.1. *(mm-M3, part 2 — D3)* — sign-off
 - [ ] W3-10 — MM2: "Adjudicating Magic". *(mm-M6 — D10, part 1)* — sign-off
 - [ ] W3-11 — MM coverage pointers + MM5 compression of the new section. *(mm-M6, mm-L9 — D10, part 2)* — sign-off
-- [ ] W3-12 — MM5 Spark-economy drift. *(mm-L2, mm-L3)*
+- [x] W3-12 — MM5 Spark-economy drift. *(mm-L2, mm-L3)*
 - [ ] W3-13 — II.4a gains its Facet introduction. *(cre-M6)* — sign-off
 - [ ] W3-14 — Rule two findings as-designed. *(cre-M7, rul-L5)* — sign-off
 - [ ] W3-15 — Wave 3 close-out.
@@ -449,6 +449,18 @@ Result: **1044 passed**.
 - `I_Introduction.md:27` — "This handbook includes the Shattered Origin setting" overclaimed completeness (II.3 already defers Body magic domains to a forthcoming "Shattered Origin setting Facet," so the full setting isn't actually included). Softened to "is set in Shattered Origin," and named the forthcoming setting Facet explicitly.
 - `Table_of_Contents.md` — added **"Shattered Origin (setting Facet)"** to the Facets (Optional Modules) planned list, giving II.3:252's Body-magic deferral an actual destination in the ToC, matching the other five planned-module entries' format.
 - Regenerated `Index.md` — no diff (`Table_of_Contents.md` is in `NOT_INDEXED`; `I_Introduction.md`'s change touched no heading).
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+### W3-12 *(mm-L2, mm-L3)*
+
+- `MM5:59` — "1-2 Graceful Fail claims mid-session, not just at session end" invented a timing emphasis MM2 doesn't state; MM2's actual target is "1-2 per session across the whole table" (`MM2:499`). Fixed to match.
+- `MM5:61` — the "midpoint diagnostic" was inverted: MM5 diagnosed on **earning** ("if no Spark has been earned by the midpoint"), but MM2's actual checklist item diagnoses on **spending** ("if a player hasn't spent a Spark by the session's midpoint, design a moment that rewards it," `MM2:536`). Fixed to match MM2 exactly — did not invent a new diagnostic.
+- `MM5:62-63` — "Peer nominations are contagious... model it yourself" had no MM2 source at all; cut rather than authoring new MM2 text to retroactively justify it (out of this task's scope — no sign-off flag on W3-12). "Hoarding is a signal" does trace to MM2 (`:480`'s hoarding-is-behavioral-not-mechanical framing) — kept, reworded to match that framing precisely instead of the invented "award more visibly" fix.
+- `MM5:74` — "Spend 2-4, earn 2-4, end with 2-4" flattened MM2's actual three-band Target Economy table (`MM2:519-524`: Low-activity 1-2/1-2/2-3, Standard 2-3/3-4/2-3, High-combat 3-4/4-6/1-3) into a single wrong number. Replaced with a compressed version of all three bands.
+- INV-6 (typographic dashes) verified green.
+- Regenerated `Index.md` — no diff.
 
 Command: `cd software && python -m pytest -q`
 Result: **1044 passed**.

@@ -56,11 +56,10 @@
 
 The Spark economy works when Sparks flow — earned and spent regularly, not hoarded.
 
-- **Target:** Confirm at least **1-2 Graceful Fail claims mid-session**, not just at session end.
+- **Target:** Confirm **1–2 Graceful Fail claims per session**, across the whole table.
 - **Graceful Fail is your best tool.** Every 6- is an opportunity for the player to claim it. When a player leans into the consequence with commitment, confirm the Spark immediately. This creates a virtuous cycle: players spend Sparks because they expect to earn more.
-- **Midpoint diagnostic:** If no Spark has been earned by the session's midpoint, you are being too conservative. Open an Act Break Nomination window, or watch for an unclaimed 6- and remind the table they can claim it.
-- **Peer nominations are contagious.** The first "Spark?" from a player opens the floodgate. If nobody is nominating, model it yourself by awarding one conspicuously. The table will follow.
-- **Hoarding is a signal.** If players consistently end sessions with unspent Sparks, they do not trust the supply. Award more visibly and more frequently until spending feels safe.
+- **Midpoint diagnostic:** If a player hasn't spent a Spark by the session's midpoint, design a moment that rewards it.
+- **Hoarding is a behavioral problem, not a mechanical one.** Players who don't earn enough Sparks during play won't feel comfortable spending them — structured earning moments (Act Break Nomination, Graceful Fail) are the fix.
 
 ### Spark Earning
 
@@ -71,7 +70,7 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 | **Graceful Failure** (6- played for story) | Player claims, MM confirms | 1–2 across table |
 | **Spark for Weakness** (played into flaw) | MM | 0–1 across table |
 
-**Target economy:** Spend 2–4, earn 2–4, end session with 2–4 unspent.
+**Target economy** (by session type): Low-activity — earn 1–2, spend 1–2, end with 2–3. Standard — earn 2–3, spend 3–4, end with 2–3. High-combat — earn 3–4, spend 4–6, end with 1–3.
 
 ---
 
