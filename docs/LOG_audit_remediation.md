@@ -598,7 +598,7 @@ PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`
 - [x] W4-5 — Enemy attack rules into yaml. *(sync-M-6)* **TDD**
 - [x] W4-6 — Maneuver and Support into yaml. *(sync-M-7)* **TDD**
 - [x] W4-7 — Major Attribute modifier derivation. *(sync-M-8, part 1)* **TDD**
-- [ ] W4-8 — Saving throws: engine + WebSocket. *(sync-M-8, part 2 — D11 full depth)* **TDD**
+- [x] W4-8 — Saving throws: engine + WebSocket. *(sync-M-8, part 2 — D11 full depth)* **TDD**
 - [ ] W4-9 — Spark scope fuel into yaml, including D8. *(sync-M-9)* **TDD**
 - [ ] W4-10 — Group rolls and contested rolls: encoding only. *(sync-M-10, M-11 — D11)* **TDD**
 - [ ] W4-11 — Weapon category → attribute table. *(sync-M-12)* **TDD**
@@ -703,3 +703,18 @@ Result: **1069 passed** (1062 + 7 new).
 
 Command: `cd software && python -m pytest -q`
 Result: **1073 passed** (1069 + 4 new).
+
+### W4-8 *(sync-M-8, part 2 — D11 full depth)* — TDD
+
+- **Investigated first:** saving throws (III.1:84-99: 2d6 + Major Attribute modifier, no skill) had zero presence in the engine or WebSocket layer — this is D11's "full depth" item (a core III.1 mechanic with zero prior software presence), unlike most of this wave's yaml-encoding tasks.
+- `software/app/game/engine.py` — extracted the dice-rolling/outcome core shared by `resolve_roll` into a new private helper, `_roll_and_resolve(attr_modifier, skill_modifier, difficulty_label, sparks_spent, press, ruleset)`, so both paths compute totals and outcomes identically; only the modifier source differs. Added `resolve_saving_throw(major_attribute_id, character, ruleset, difficulty_label="Standard", sparks_spent=0)`, which calls `character.get_major_attribute_modifier(...)` (W4-7's function) for the modifier — **not a second implementation** of the II.2 derivation, per the accept criteria.
+- `software/app/facets/schema.py` (`RollResolutionDef`) — added `SavingThrowDef` (`modifier_source`, `default_difficulty`) and `roll_resolution.saving_throw`.
+- `software/facets/base/facet.yaml` — set `roll_resolution.saving_throw: {modifier_source: major_attribute, default_difficulty: Standard}`.
+- `software/app/api/websocket.py` — new `saving_throw` event type, dispatched to a new `_handle_saving_throw` handler: validates the Major Attribute id against `session.ruleset.major_attributes` (not a hardcoded `{"body","mind","soul"}` set), spends any requested Sparks, calls `resolve_saving_throw`, and broadcasts a `saving_throw_result` event. Not combat-gated (saving throws aren't combat-only, unlike Strike/React).
+- Tests (5: 3 required + 2 regression), across two files:
+  - `test_roll_engine.py`, new `TestSavingThrow` class: the modifier comes from `Character.get_major_attribute_modifier` (cross-checked against calling it directly); outcome resolves on the standard three-tier table; JSON-safety of the result.
+  - `test_websocket.py`, new `TestSavingThrow` class: happy path (valid Major Attribute, correct `saving_throw_result` shape) and the unknown-Major-Attribute error path.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1078 passed** (1073 + 5 new).

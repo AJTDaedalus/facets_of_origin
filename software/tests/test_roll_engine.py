@@ -12,6 +12,7 @@ from app.game.engine import (
     RollResult,
     resolve_magic_roll,
     resolve_roll,
+    resolve_saving_throw,
     roll_result_to_dict,
     _determine_outcome,
     _get_difficulty_modifier,
@@ -261,6 +262,55 @@ class TestFullRoll:
         result = resolve_roll(req, ruleset)
         d = roll_result_to_dict(result)
         assert d["description"] == "Attempting to climb the wall"
+
+
+# ---------------------------------------------------------------------------
+# Saving throws — sync-M-8 part 2: III.1:84-99, 2d6 + the Major Attribute
+# modifier, no skill.
+# ---------------------------------------------------------------------------
+
+class TestSavingThrow:
+    def _character(self, ruleset):
+        from app.game.character import create_default_character
+        char, errors = create_default_character(
+            name="Mordai", player_name="P", primary_facet="body",
+            attributes={
+                "strength": 3, "dexterity": 3, "constitution": 2,
+                "intelligence": 2, "wisdom": 2, "knowledge": 2,
+                "spirit": 1, "luck": 2, "charisma": 1,
+            },
+            ruleset=ruleset,
+        )
+        assert not errors
+        return char
+
+    def test_saving_throw_uses_major_attribute_modifier(self, ruleset):
+        """Body sums to 8 (str3 dex3 con2) -> +1 per II.2's derivation
+        (W4-7) — resolve_saving_throw must use that, not a second
+        implementation of the band lookup."""
+        char = self._character(ruleset)
+        with patch("random.randint", return_value=4):
+            result = resolve_saving_throw("body", char, ruleset)
+        # dice_sum = 8, Body modifier = +1, Standard difficulty = +0
+        assert result.dice_sum == 8
+        assert result.attribute_modifier == 1
+        assert result.skill_modifier == 0
+        assert result.total == 9
+        assert char.get_major_attribute_modifier("body", ruleset) == result.attribute_modifier
+
+    def test_saving_throw_outcome_resolves_on_standard_table(self, ruleset):
+        char = self._character(ruleset)
+        with patch("random.randint", return_value=5):
+            result = resolve_saving_throw("soul", char, ruleset)  # Soul sums to 4 -> -1
+        # dice_sum = 10, Soul modifier = -1 -> total 9 -> partial_success
+        assert result.total == 9
+        assert result.outcome == "partial_success"
+
+    def test_saving_throw_result_is_json_safe(self, ruleset):
+        import json
+        char = self._character(ruleset)
+        result = resolve_saving_throw("mind", char, ruleset)
+        json.dumps(roll_result_to_dict(result))
 
 
 # ---------------------------------------------------------------------------

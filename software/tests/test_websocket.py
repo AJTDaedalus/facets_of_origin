@@ -2622,3 +2622,45 @@ class TestPressCostFromYaml:
         assert msg["type"] == "error"
         assert "Press" in msg["message"]
         assert sess.characters["Zahna"].endurance_current == 0
+
+
+class TestSavingThrow:
+    """sync-M-8 part 2: III.1:84-99 saving throws, rollable end-to-end
+    through the WebSocket layer."""
+
+    def test_saving_throw_happy_path(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({
+                "type": "saving_throw",
+                "major_attribute_id": "mind",
+                "difficulty": "Standard",
+            })
+            msg = ws.receive_json()
+
+        assert msg["type"] == "saving_throw_result"
+        assert msg["major_attribute_id"] == "mind"
+        assert msg["outcome"] in ("full_success", "partial_success", "failure")
+        assert "roll" in msg
+
+    def test_saving_throw_unknown_major_attribute_returns_error(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({
+                "type": "saving_throw",
+                "major_attribute_id": "flying",
+            })
+            msg = ws.receive_json()
+
+        assert msg["type"] == "error"
+        assert "flying" in msg["message"]

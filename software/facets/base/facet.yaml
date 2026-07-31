@@ -959,6 +959,11 @@ roll_resolution:
       threshold: null
       label: "Things Go Wrong"
       description: "Things go wrong — but the story always moves forward."
+  # III.1:84-99 — 2d6 + the Major Attribute modifier, no skill. Called for
+  # when something happens *to* the character, not something they chose.
+  saving_throw:
+    modifier_source: major_attribute
+    default_difficulty: Standard
 
 # ---------------------------------------------------------------------------
 # Spark Economy

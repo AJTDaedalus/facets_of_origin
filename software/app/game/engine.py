@@ -91,6 +91,48 @@ class RollResult:
     request: RollRequest
 
 
+def _roll_and_resolve(
+    attr_modifier: int,
+    skill_modifier: int,
+    difficulty_label: str,
+    sparks_spent: int,
+    press: bool,
+    ruleset: MergedRuleset,
+) -> tuple[list[int], list[int], int, int, int, str, str, str]:
+    """Shared dice-rolling and outcome core: roll the ruleset's dice formula
+    (Sparks/Press add dice, lowest extras dropped), sum against the given
+    modifiers, and determine the outcome tier. `resolve_roll` and
+    `resolve_saving_throw` both call this — only where the attribute
+    modifier comes from differs (Minor Attribute + skill vs. Major
+    Attribute alone).
+
+    Returns (dice_rolled, dice_kept, dice_sum, diff_modifier, total,
+    outcome, outcome_label, outcome_desc).
+    """
+    diff_modifier = _get_difficulty_modifier(difficulty_label, ruleset)
+
+    dice_spec = DiceSpec.parse(
+        ruleset.roll_resolution.dice if ruleset.roll_resolution else "2d6"
+    )
+
+    base_dice = dice_spec.count
+    press_dice = ruleset.combat.press.extra_dice if press else 0
+    extra_dice = max(0, sparks_spent) + press_dice
+    total_dice = base_dice + extra_dice
+
+    dice_rolled = [random.randint(1, dice_spec.sides) for _ in range(total_dice)]
+    dice_sorted = sorted(dice_rolled)
+
+    # Drop the lowest `extra_dice` dice to keep exactly `base_dice`
+    dice_kept = dice_sorted[extra_dice:]
+
+    dice_sum = sum(dice_kept)
+    total = dice_sum + attr_modifier + skill_modifier + diff_modifier
+
+    outcome, outcome_label, outcome_desc = _determine_outcome(total, ruleset)
+    return dice_rolled, dice_kept, dice_sum, diff_modifier, total, outcome, outcome_label, outcome_desc
+
+
 def resolve_roll(request: RollRequest, ruleset: MergedRuleset) -> RollResult:
     """Resolve a dice roll with optional Spark spending.
 
@@ -104,39 +146,18 @@ def resolve_roll(request: RollRequest, ruleset: MergedRuleset) -> RollResult:
     Returns:
         A fully resolved RollResult.
     """
-    # --- Attribute modifier ---
     attr_modifier = ruleset.get_minor_attribute_modifier(request.attribute_id, request.attribute_rating)
 
-    # --- Skill modifier ---
     skill_modifier = 0
     if request.skill_id and request.skill_rank_id:
         skill_modifier = ruleset.get_skill_rank_modifier(request.skill_rank_id)
 
-    # --- Difficulty modifier ---
-    diff_modifier = _get_difficulty_modifier(request.difficulty_label, ruleset)
-
-    # --- Dice from ruleset ---
-    dice_spec = DiceSpec.parse(
-        ruleset.roll_resolution.dice if ruleset.roll_resolution else "2d6"
+    dice_rolled, dice_kept, dice_sum, diff_modifier, total, outcome, outcome_label, outcome_desc = (
+        _roll_and_resolve(
+            attr_modifier, skill_modifier, request.difficulty_label,
+            request.sparks_spent, request.press, ruleset,
+        )
     )
-
-    # --- Spark + Press mechanic: add dice, drop lowest ---
-    base_dice = dice_spec.count
-    press_dice = ruleset.combat.press.extra_dice if request.press else 0
-    extra_dice = max(0, request.sparks_spent) + press_dice
-    total_dice = base_dice + extra_dice
-
-    dice_rolled = [random.randint(1, dice_spec.sides) for _ in range(total_dice)]
-    dice_sorted = sorted(dice_rolled)
-
-    # Drop the lowest `extra_dice` dice to keep exactly `base_dice`
-    dice_kept = dice_sorted[extra_dice:]
-
-    dice_sum = sum(dice_kept)
-    total = dice_sum + attr_modifier + skill_modifier + diff_modifier
-
-    # --- Outcome ---
-    outcome, outcome_label, outcome_desc = _determine_outcome(total, ruleset)
 
     return RollResult(
         dice_rolled=dice_rolled,
@@ -150,6 +171,52 @@ def resolve_roll(request: RollRequest, ruleset: MergedRuleset) -> RollResult:
         outcome_label=outcome_label,
         outcome_description=outcome_desc,
         sparks_spent=request.sparks_spent,
+        request=request,
+    )
+
+
+def resolve_saving_throw(
+    major_attribute_id: str,
+    character: "Character",  # type: ignore[name-defined]
+    ruleset: MergedRuleset,
+    difficulty_label: str = "Standard",
+    sparks_spent: int = 0,
+) -> RollResult:
+    """Resolve a saving throw (III.1:84-99): 2d6 + the Major Attribute
+    modifier, on the standard three-tier outcome table. No skill applies.
+
+    The modifier comes from `Character.get_major_attribute_modifier`
+    (sync-M-8 part 1) — not a second implementation of the II.2 derivation.
+    """
+    attr_modifier = character.get_major_attribute_modifier(major_attribute_id, ruleset)
+
+    dice_rolled, dice_kept, dice_sum, diff_modifier, total, outcome, outcome_label, outcome_desc = (
+        _roll_and_resolve(attr_modifier, 0, difficulty_label, sparks_spent, False, ruleset)
+    )
+
+    request = RollRequest(
+        attribute_id=major_attribute_id,
+        attribute_rating=0,
+        skill_id=None,
+        skill_rank_id=None,
+        difficulty_label=difficulty_label,
+        sparks_spent=sparks_spent,
+        press=False,
+        description="Saving throw",
+    )
+
+    return RollResult(
+        dice_rolled=dice_rolled,
+        dice_kept=dice_kept,
+        dice_sum=dice_sum,
+        attribute_modifier=attr_modifier,
+        skill_modifier=0,
+        difficulty_modifier=diff_modifier,
+        total=total,
+        outcome=outcome,
+        outcome_label=outcome_label,
+        outcome_description=outcome_desc,
+        sparks_spent=sparks_spent,
         request=request,
     )
 

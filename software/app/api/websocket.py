@@ -12,7 +12,9 @@ from jose import JWTError
 
 from app.auth.tokens import decode_token
 from app.game import combat as combat_module
-from app.game.engine import RollRequest, resolve_roll, resolve_magic_roll, roll_result_to_dict
+from app.game.engine import (
+    RollRequest, resolve_roll, resolve_magic_roll, resolve_saving_throw, roll_result_to_dict,
+)
 from app.game.session import ThreatClock, session_store
 
 logger = logging.getLogger(__name__)
@@ -210,6 +212,8 @@ async def _dispatch(
     # --- Magic events ---
     elif event_type == "cast":
         await _handle_cast(websocket, msg, session, session_id, identity)
+    elif event_type == "saving_throw":
+        await _handle_saving_throw(websocket, msg, session, session_id, identity)
     # --- Contested roll ---
     elif event_type == "contested_roll" and is_mm:
         await _handle_contested_roll(websocket, msg, session, session_id)
@@ -830,6 +834,48 @@ async def _handle_combat_end(session, session_id: str) -> None:
 # ---------------------------------------------------------------------------
 # Magic handler
 # ---------------------------------------------------------------------------
+
+async def _handle_saving_throw(
+    websocket, msg: dict, session, session_id: str, identity: str,
+) -> None:
+    """Character makes a saving throw (III.1:84-99): 2d6 + the Major
+    Attribute modifier. Something is happening *to* the character, not
+    something they chose to attempt."""
+    player_name = identity
+    character = session.characters.get(player_name)
+    if not character:
+        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
+        return
+
+    major_attribute_id = str(msg.get("major_attribute_id", ""))
+    known_majors = {ma.id for ma in session.ruleset.major_attributes}
+    if major_attribute_id not in known_majors:
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": f"Unknown Major Attribute '{major_attribute_id}'.",
+        })
+        return
+
+    difficulty = str(msg.get("difficulty", "Standard"))
+    sparks_requested = int(msg.get("sparks_spent", 0))
+    sparks_to_spend = _spend_sparks(character, sparks_requested)
+
+    result = resolve_saving_throw(
+        major_attribute_id, character, session.ruleset,
+        difficulty_label=difficulty, sparks_spent=sparks_to_spend,
+    )
+    result_dict = roll_result_to_dict(result)
+    session.record_roll(player_name, result_dict)
+
+    await manager.broadcast(session_id, {
+        "type": "saving_throw_result",
+        "player": player_name,
+        "major_attribute_id": major_attribute_id,
+        "roll": result_dict,
+        "outcome": result_dict["outcome"],
+        "sparks_remaining": character.sparks,
+    })
+
 
 async def _handle_cast(
     websocket, msg: dict, session, session_id: str, identity: str,

@@ -177,6 +177,17 @@ class OutcomeTierDef(BaseModel):
     description: str
 
 
+class SavingThrowDef(BaseModel):
+    """Saving throws (III.1:84-99): 2d6 + the Major Attribute modifier,
+    resolved on the same three-tier table as any other roll. No skill
+    applies — called for when something happens *to* the character, not
+    something they chose to attempt.
+    """
+
+    modifier_source: str = "major_attribute"
+    default_difficulty: str = "Standard"
+
+
 class RollResolutionDef(BaseModel):
     dice: str = "2d6"
     modifier_source: str = "minor_attribute"
@@ -184,6 +195,7 @@ class RollResolutionDef(BaseModel):
     outcomes: OutcomesDef
     difficulty_modifiers: list[DifficultyModifier] = Field(default_factory=list)
     outcome_tiers: list[OutcomeTierDef] = Field(default_factory=list)
+    saving_throw: SavingThrowDef = Field(default_factory=SavingThrowDef)
 
 
 # ---------------------------------------------------------------------------
