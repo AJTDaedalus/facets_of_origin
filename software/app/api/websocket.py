@@ -525,10 +525,11 @@ async def _handle_strike(
     difficulty = str(msg.get("difficulty", "Standard"))
     target_name = str(msg.get("target", ""))
 
-    # Press costs 1 Endurance
+    # PHB III.3: Press costs Endurance (facet.yaml combat.press.endurance_cost)
     if press:
-        if character.endurance_current is not None and character.endurance_current > 0:
-            character.endurance_current -= 1
+        press_cost = session.ruleset.combat.press.endurance_cost
+        if character.endurance_current is not None and character.endurance_current >= press_cost:
+            character.endurance_current -= press_cost
         else:
             await manager.send_to(websocket, {"type": "error", "message": "No Endurance to Press."})
             return

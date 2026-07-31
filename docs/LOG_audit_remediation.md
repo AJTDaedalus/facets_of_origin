@@ -580,3 +580,42 @@ Findings closed this wave: rul-H1, app-H1, app-H2, app-M1, app-M2, app-M3, app-M
 **Model routing note:** all six prose sign-off tasks (W3-6, W3-8, W3-9, W3-10, W3-11, W3-13) were drafted by Opus subagents briefed with exact source citations, then fact-checked, reviewed, and integrated by this Sonnet session before commit — per the user's explicit direction earlier in this conversation. Every subagent draft was checked against its cited PHB/MM sources before landing; one inaccuracy was found and fixed (W3-10, see above).
 
 PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`.
+
+---
+
+## W4 — Sync backlog
+
+- **Branch:** `feature/audit-wave4-sync`
+- **Date:** 2026-07-31
+- **Baseline:** `pytest --collect-only -q` → **1044 tests collected**, measured on this branch after merging W3 (PR #16).
+
+### W4 task list (from `docs/TASKS_audit_remediation.md`)
+
+- [x] W4-1 — Press cost into yaml. *(sync-M-2)* **TDD**
+- [ ] W4-2 — Strike riders and Easy-to-Strike into yaml. *(sync-M-3)* **TDD**
+- [ ] W4-3 — Same-Tier-2 escalation into yaml. *(sync-M-4)* **TDD**
+- [ ] W4-4 — Armor/reaction non-stacking into yaml. *(sync-M-5)* **TDD**
+- [ ] W4-5 — Enemy attack rules into yaml. *(sync-M-6)* **TDD**
+- [ ] W4-6 — Maneuver and Support into yaml. *(sync-M-7)* **TDD**
+- [ ] W4-7 — Major Attribute modifier derivation. *(sync-M-8, part 1)* **TDD**
+- [ ] W4-8 — Saving throws: engine + WebSocket. *(sync-M-8, part 2 — D11 full depth)* **TDD**
+- [ ] W4-9 — Spark scope fuel into yaml, including D8. *(sync-M-9)* **TDD**
+- [ ] W4-10 — Group rolls and contested rolls: encoding only. *(sync-M-10, M-11 — D11)* **TDD**
+- [ ] W4-11 — Weapon category → attribute table. *(sync-M-12)* **TDD**
+- [ ] W4-12 — First Move timing. *(sync-M-1)*
+- [ ] W4-13 — Sync low-severity sweep. *(sync-L-1 … L-8)*
+- [ ] W4-14 — Cycle close-out.
+
+### W4-1 *(sync-M-2)* — TDD
+
+- `software/app/facets/schema.py` — new `PressDef` (`endurance_cost: int = 1`, `extra_dice: int = 1`), typed model replacing `CombatDef.press`'s previous `dict[str, Any]`.
+- `software/facets/base/facet.yaml` — added `combat.press: {endurance_cost: 1, extra_dice: 1}` (didn't exist in yaml at all before this task — the schema field was declared but never populated).
+- `software/app/game/engine.py:125` — `extra_dice` for Press now reads `ruleset.combat.press.extra_dice` instead of a hardcoded `1`.
+- `software/app/api/websocket.py:528-535` — the Endurance deduction and the sufficiency check both now read `session.ruleset.combat.press.endurance_cost` instead of a hardcoded `1` / `> 0`.
+- `software/tools/combat_sim.py:476-479` — **found the same hardcoded literal in the simulator**, which CLAUDE.md explicitly forbids ("the simulator may only drive `app/game/combat.py`... it must never re-implement a rule"). Fixed both the Endurance deduction and the extra-dice computation to read the same `ruleset.combat.press` values, closing a second silent-divergence risk beyond what the task named.
+- Tests (3, written first) in `test_websocket.py`: cost read from yaml (default 1); a monkey-patched `ruleset.combat.press.endurance_cost = 2` changes the deduction to 2; Press refused with 0 Endurance, message names "Press," Endurance unchanged.
+- Grepped for remaining Press cost/extra-dice literals across `websocket.py`, `engine.py`, `combat_sim.py` — none left.
+- Regenerated `Index.md` — no diff (no PHB text touched).
+
+Command: `cd software && python -m pytest -q`
+Result: **1047 passed** (1044 + 3 new).

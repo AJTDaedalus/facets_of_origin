@@ -1306,6 +1306,13 @@ combat:
     absorb: 0
     intercept: 2
 
+  # Spend 1 Endurance before a Strike to add 1d6 and drop the lowest — the
+  # same mechanical effect as a Spark, drawn from a different resource, and
+  # stackable with one (III.3, Press).
+  press:
+    endurance_cost: 1
+    extra_dice: 1
+
   strike_outcomes:
     full_success:
       condition_tier: 2

@@ -308,6 +308,19 @@ class EnduranceDef(BaseModel):
     recovery_withdrawn: int = 2
 
 
+class PressDef(BaseModel):
+    """Press: spend Endurance before a Strike to add dice and drop the lowest (PHB III.3).
+
+    Fields:
+        endurance_cost: Endurance spent to Press.
+        extra_dice: Dice added to the roll (before dropping the lowest), same
+                    effect as a Spark, stacks with Sparks.
+    """
+
+    endurance_cost: int = 1
+    extra_dice: int = 1
+
+
 class ArmorEntryDef(BaseModel):
     """One armor tier's per-scene Condition-downgrade budget for player
     characters (D2).
@@ -380,7 +393,7 @@ class CombatDef(BaseModel):
     endurance: EnduranceDef = Field(default_factory=EnduranceDef)
     postures: dict[str, Any] = Field(default_factory=dict)
     reactions: dict[str, Any] = Field(default_factory=dict)
-    press: dict[str, Any] = Field(default_factory=dict)
+    press: PressDef = Field(default_factory=PressDef)
     conditions: CombatConditionsTierDef = Field(default_factory=CombatConditionsTierDef)
     armor: ArmorDef = Field(default_factory=ArmorDef)
     enemy_durability: EnemyDurabilityDef = Field(default_factory=EnemyDurabilityDef)

@@ -122,7 +122,8 @@ def resolve_roll(request: RollRequest, ruleset: MergedRuleset) -> RollResult:
 
     # --- Spark + Press mechanic: add dice, drop lowest ---
     base_dice = dice_spec.count
-    extra_dice = max(0, request.sparks_spent) + (1 if request.press else 0)
+    press_dice = ruleset.combat.press.extra_dice if request.press else 0
+    extra_dice = max(0, request.sparks_spent) + press_dice
     total_dice = base_dice + extra_dice
 
     dice_rolled = [random.randint(1, dice_spec.sides) for _ in range(total_dice)]

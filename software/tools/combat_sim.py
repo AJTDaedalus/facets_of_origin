@@ -475,9 +475,9 @@ def _pc_strike(
         sparks = 0
 
     if press:
-        pc.endurance_current -= 1
+        pc.endurance_current -= ruleset.combat.press.endurance_cost
 
-    extra_dice = sparks + (1 if press else 0)
+    extra_dice = sparks + (ruleset.combat.press.extra_dice if press else 0)
     modifier = pc.strength_mod + pc.combat_mod
 
     # A Tier 2 rider from a prior Strike makes this one Easy (D1).
