@@ -965,6 +965,21 @@ roll_resolution:
     modifier_source: major_attribute
     default_difficulty: Standard
 
+  # III.1:104-110 — vs an NPC only the PC rolls (the NPC's attribute informs
+  # difficulty); vs another PC both roll, higher wins, a tie gives both a
+  # partial success.
+  contested_roll:
+    vs_npc: {only_pc_rolls: true}
+    vs_pc: {both_roll: true, higher_wins: true, tie_result: both_partial_success}
+
+  # III.1:113-123 — the whole party attempts a task together; majority
+  # success (partial or better counts) succeeds the group. The lead roller +
+  # Support (III.3) is the stated alternative — encoding only, no engine
+  # work until a playtest demands it (D11).
+  group_roll:
+    majority_rule: partial_success_or_better_counts
+    lead_roller_alternative: true
+
 # ---------------------------------------------------------------------------
 # Spark Economy
 # ---------------------------------------------------------------------------

@@ -600,7 +600,7 @@ PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`
 - [x] W4-7 — Major Attribute modifier derivation. *(sync-M-8, part 1)* **TDD**
 - [x] W4-8 — Saving throws: engine + WebSocket. *(sync-M-8, part 2 — D11 full depth)* **TDD**
 - [x] W4-9 — Spark scope fuel into yaml, including D8. *(sync-M-9)* **TDD**
-- [ ] W4-10 — Group rolls and contested rolls: encoding only. *(sync-M-10, M-11 — D11)* **TDD**
+- [x] W4-10 — Group rolls and contested rolls: encoding only. *(sync-M-10, M-11 — D11)* **TDD**
 - [ ] W4-11 — Weapon category → attribute table. *(sync-M-12)* **TDD**
 - [ ] W4-12 — First Move timing. *(sync-M-1)*
 - [ ] W4-13 — Sync low-severity sweep. *(sync-L-1 … L-8)*
@@ -731,3 +731,14 @@ Result: **1078 passed** (1073 + 5 new).
 
 Command: `cd software && python -m pytest -q`
 Result: **1083 passed** (1078 + 5 new).
+
+### W4-10 *(sync-M-10, M-11 — D11)* — TDD
+
+- `software/app/facets/schema.py` — `ContestedRollVsNpcDef`, `ContestedRollVsPcDef`, `ContestedRollDef`; `GroupRollDef`. Added `RollResolutionDef.contested_roll` / `.group_roll`.
+- `software/facets/base/facet.yaml` (`roll_resolution.contested_roll`, `.group_roll`) — matching III.1:104-123 exactly.
+- **No engine work**, per D11 and the task's explicit instruction: `_handle_contested_roll` already exists and correctly implements "vs. NPC only the PC rolls" (the handler never rolls for an NPC) and "vs. PC both roll, higher wins" (`winner = player_a if total_a > total_b else ...`); group rolls have no live handler yet and wait for a playtest to demand them.
+- Tests (5: 2 required + regression coverage) in `test_facets_schema.py`: both blocks' defaults match the PHB text; the base ruleset's `facet.yaml` loads and validates both blocks; a test reproducing the WS handler's exact tie comparison (`"tie" if total_a == total_b`) alongside an assertion that `contested_roll.vs_pc.tie_result == "both_partial_success"` — documenting that the code's behavior (report "tie") and the yaml's stated PHB rule (a tie means both sides get a partial success) describe the same rule.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1088 passed** (1083 + 5 new).

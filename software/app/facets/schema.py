@@ -188,6 +188,39 @@ class SavingThrowDef(BaseModel):
     default_difficulty: str = "Standard"
 
 
+class ContestedRollVsNpcDef(BaseModel):
+    """Contested roll against an NPC (III.1): only the PC rolls; the NPC's
+    relevant attribute informs the difficulty the MM sets. NPCs never roll
+    dice."""
+
+    only_pc_rolls: bool = True
+
+
+class ContestedRollVsPcDef(BaseModel):
+    """Contested roll between two player characters (III.1): both roll, the
+    higher total wins; on a tie, both achieve partial success."""
+
+    both_roll: bool = True
+    higher_wins: bool = True
+    tie_result: str = "both_partial_success"
+
+
+class ContestedRollDef(BaseModel):
+    vs_npc: ContestedRollVsNpcDef = Field(default_factory=ContestedRollVsNpcDef)
+    vs_pc: ContestedRollVsPcDef = Field(default_factory=ContestedRollVsPcDef)
+
+
+class GroupRollDef(BaseModel):
+    """Group roll (III.1): the whole party attempts a task together. Majority
+    success (partial success or better counts) succeeds the group. The lead
+    roller + Support (III.3) is the stated alternative for tasks where one
+    character is clearly more capable.
+    """
+
+    majority_rule: str = "partial_success_or_better_counts"
+    lead_roller_alternative: bool = True
+
+
 class RollResolutionDef(BaseModel):
     dice: str = "2d6"
     modifier_source: str = "minor_attribute"
@@ -196,6 +229,8 @@ class RollResolutionDef(BaseModel):
     difficulty_modifiers: list[DifficultyModifier] = Field(default_factory=list)
     outcome_tiers: list[OutcomeTierDef] = Field(default_factory=list)
     saving_throw: SavingThrowDef = Field(default_factory=SavingThrowDef)
+    contested_roll: ContestedRollDef = Field(default_factory=ContestedRollDef)
+    group_roll: GroupRollDef = Field(default_factory=GroupRollDef)
 
 
 # ---------------------------------------------------------------------------
