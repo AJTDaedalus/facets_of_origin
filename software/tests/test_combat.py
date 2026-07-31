@@ -489,6 +489,51 @@ class TestEnemyArmorResolveBonus:
 
 
 # ---------------------------------------------------------------------------
+# enemy_incoming_condition_tier() / enemy_posture_reaction_difficulty() —
+# sync-M-6: III.3 Enemy Attacks (incoming tier by enemy type, Posture shifts
+# PC reaction difficulty, Mooks never declare Posture).
+# ---------------------------------------------------------------------------
+
+class TestEnemyIncomingConditionTier:
+    def test_mook_incoming_tier_from_yaml(self, ruleset):
+        assert combat.enemy_incoming_condition_tier("mook", ruleset) == 1
+
+    def test_named_incoming_tier_from_yaml(self, ruleset):
+        assert combat.enemy_incoming_condition_tier("named", ruleset) == 2
+
+    def test_boss_incoming_tier_from_yaml(self, ruleset):
+        assert combat.enemy_incoming_condition_tier("boss", ruleset) == 2
+
+    def test_modified_yaml_tier_changes_the_result(self, ruleset):
+        original = ruleset.combat.enemy_attacks.incoming_tier.named
+        try:
+            ruleset.combat.enemy_attacks.incoming_tier.named = 3
+            assert combat.enemy_incoming_condition_tier("named", ruleset) == 3
+        finally:
+            ruleset.combat.enemy_attacks.incoming_tier.named = original
+
+
+class TestEnemyPostureReactionDifficulty:
+    def test_aggressive_named_shifts_one_step_harder(self, ruleset):
+        result = combat.enemy_posture_reaction_difficulty("Standard", "named", "aggressive", ruleset)
+        assert result == "Hard"
+
+    def test_defensive_boss_shifts_one_step_easier(self, ruleset):
+        result = combat.enemy_posture_reaction_difficulty("Standard", "boss", "defensive", ruleset)
+        assert result == "Easy"
+
+    def test_measured_named_is_unchanged(self, ruleset):
+        result = combat.enemy_posture_reaction_difficulty("Standard", "named", "measured", ruleset)
+        assert result == "Standard"
+
+    def test_mook_posture_is_ignored_even_if_aggressive(self, ruleset):
+        """Mooks do not declare Postures (III.3) — passing one anyway must
+        not shift the difficulty; the MM sets Mook difficulty by situation."""
+        result = combat.enemy_posture_reaction_difficulty("Standard", "mook", "aggressive", ruleset)
+        assert result == "Standard"
+
+
+# ---------------------------------------------------------------------------
 # mook_removed() — D1 Mook removal thresholds (A4)
 # ---------------------------------------------------------------------------
 

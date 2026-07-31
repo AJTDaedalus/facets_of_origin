@@ -373,6 +373,48 @@ class ArmorResolveBonusDef(BaseModel):
     heavy: int = 2
 
 
+class EnemyIncomingTierDef(BaseModel):
+    """Condition tier a PC takes from an enemy attack, keyed by enemy type
+    (III.3, Incoming Condition Tier): Mooks are individually weak (Tier 1);
+    Named/Boss attacks carry a full Strike's weight (Tier 2).
+    """
+
+    mook: int = 1
+    named: int = 2
+    boss: int = 2
+
+
+class EnemyPostureReactionShiftDef(BaseModel):
+    """How an enemy's declared Posture shifts the difficulty of a PC's
+    reaction against its attack (III.3, Enemy Posture and Reaction
+    Difficulty). Values are "harder" | "easier" | "none".
+    """
+
+    aggressive: str = "harder"
+    measured: str = "none"
+    defensive: str = "easier"
+
+
+class EnemyAttacksDef(BaseModel):
+    """Rules for how an enemy's type and Posture shape a PC's reaction
+    against its attack (III.3, Enemy Attacks). NPCs never roll dice — the PC
+    rolls the reaction; these fields set what that reaction is up against.
+
+    Fields:
+        incoming_tier: Condition tier by enemy type.
+        posture_reaction_shift: Reaction-difficulty shift by enemy Posture.
+        mook_declares_posture: Mooks do not declare Postures (the MM sets
+                their attack difficulty by situation instead) — always False
+                for the base ruleset.
+    """
+
+    incoming_tier: EnemyIncomingTierDef = Field(default_factory=EnemyIncomingTierDef)
+    posture_reaction_shift: EnemyPostureReactionShiftDef = Field(
+        default_factory=EnemyPostureReactionShiftDef
+    )
+    mook_declares_posture: bool = False
+
+
 class EnemyDurabilityDef(BaseModel):
     """Enemy Resolve pool rules (D1): depletion, armor bonus, and Mook removal.
 
@@ -413,6 +455,7 @@ class CombatDef(BaseModel):
     conditions: CombatConditionsTierDef = Field(default_factory=CombatConditionsTierDef)
     armor: ArmorDef = Field(default_factory=ArmorDef)
     enemy_durability: EnemyDurabilityDef = Field(default_factory=EnemyDurabilityDef)
+    enemy_attacks: EnemyAttacksDef = Field(default_factory=EnemyAttacksDef)
     strike_outcomes: dict[str, Any] = Field(default_factory=dict)
     endurance_floor_rule: str = ""
     mook_rule: str = ""

@@ -1378,6 +1378,13 @@ combat:
     # exchange floor. This is a per-enemy authoring guideline, not an
     # enforced field — actual values live in each enemy's .fof.
 
+  # III.3, Enemy Attacks — NPCs never roll; a PC rolls the reaction. These
+  # fields set what that reaction is up against.
+  enemy_attacks:
+    incoming_tier: {mook: 1, named: 2, boss: 2}
+    posture_reaction_shift: {aggressive: harder, measured: none, defensive: easier}
+    mook_declares_posture: false   # the MM sets Mook attack difficulty by situation instead
+
 # ---------------------------------------------------------------------------
 # Hazards & Death (PHB III.2)
 # ---------------------------------------------------------------------------

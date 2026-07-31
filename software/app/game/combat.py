@@ -480,6 +480,35 @@ def apply_resolve_damage(
     )
 
 
+def enemy_incoming_condition_tier(enemy_type: str, ruleset) -> int:
+    """Condition tier a PC takes from an enemy attack, by enemy type (III.3,
+    Incoming Condition Tier). Read from `combat.enemy_attacks.incoming_tier`,
+    not hardcoded — Mook 1, Named/Boss 2 by default.
+    """
+    return getattr(ruleset.combat.enemy_attacks.incoming_tier, enemy_type, 1)
+
+
+def enemy_posture_reaction_difficulty(
+    base_difficulty: str, enemy_type: str, enemy_posture: Optional[str], ruleset,
+) -> str:
+    """Shift a PC's reaction difficulty by the attacking enemy's Posture
+    (III.3, Enemy Posture and Reaction Difficulty): Aggressive one step
+    harder, Defensive one step easier, Measured unchanged. Mooks never
+    declare Posture — no shift applies regardless of what is passed.
+    """
+    if enemy_type == "mook" and not ruleset.combat.enemy_attacks.mook_declares_posture:
+        return base_difficulty
+
+    shift = getattr(
+        ruleset.combat.enemy_attacks.posture_reaction_shift, enemy_posture or "measured", "none",
+    )
+    if shift == "harder":
+        return _engine._step_difficulty_harder(base_difficulty, ruleset)
+    if shift == "easier":
+        return _engine._step_difficulty_easier(base_difficulty, ruleset)
+    return base_difficulty
+
+
 def enemy_armor_resolve_bonus(armor: Optional[str], ruleset) -> int:
     """Flat Resolve bonus an enemy's armor grants at combat start (D1).
 

@@ -595,7 +595,7 @@ PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`
 - [x] W4-2 — Strike riders and Easy-to-Strike into yaml. *(sync-M-3)* **TDD**
 - [x] W4-3 — Same-Tier-2 escalation into yaml. *(sync-M-4)* **TDD**
 - [x] W4-4 — Armor/reaction non-stacking into yaml. *(sync-M-5)* **TDD**
-- [ ] W4-5 — Enemy attack rules into yaml. *(sync-M-6)* **TDD**
+- [x] W4-5 — Enemy attack rules into yaml. *(sync-M-6)* **TDD**
 - [ ] W4-6 — Maneuver and Support into yaml. *(sync-M-7)* **TDD**
 - [ ] W4-7 — Major Attribute modifier derivation. *(sync-M-8, part 1)* **TDD**
 - [ ] W4-8 — Saving throws: engine + WebSocket. *(sync-M-8, part 2 — D11 full depth)* **TDD**
@@ -662,3 +662,16 @@ Result: **1053 passed** (1052 + 1 new).
 
 Command: `cd software && python -m pytest -q`
 Result: **1054 passed** (1053 + 1 new).
+
+### W4-5 *(sync-M-6)* — TDD
+
+- **Investigated first:** unlike most Wave 4 tasks so far, this rule (III.3's Enemy Attacks: incoming Condition tier by enemy type, Posture-shifted PC reaction difficulty, Mooks never declaring Posture) had **no implementation anywhere** — not a hardcoded literal to fix, a genuine gap. Grepped `enemy_attack`, `incoming_tier`, "Aggressive.*harder" across `combat.py`, `websocket.py`, `combat_sim.py` — zero hits.
+- `software/app/facets/schema.py` — three new models: `EnemyIncomingTierDef` (mook/named/boss → tier), `EnemyPostureReactionShiftDef` (aggressive/measured/defensive → harder/none/easier), `EnemyAttacksDef` (bundles both plus `mook_declares_posture: bool = False`). Added `CombatDef.enemy_attacks`.
+- `software/facets/base/facet.yaml` (`combat.enemy_attacks`) — set to match III.3 exactly: Mook 1, Named/Boss 2; Aggressive harder, Defensive easier.
+- `software/app/game/combat.py` — two new pure functions: `enemy_incoming_condition_tier(enemy_type, ruleset)` and `enemy_posture_reaction_difficulty(base_difficulty, enemy_type, enemy_posture, ruleset)`. The latter reuses `engine._step_difficulty_harder`/`_step_difficulty_easier` (already-existing, ruleset-driven difficulty-stepping helpers) rather than reimplementing the Easy/Standard/Hard/Very Hard ladder — and short-circuits to the base difficulty for Mooks regardless of what posture is passed in, matching "the MM sets Mook difficulty by situation instead."
+- **Scope note, matching W4-2's precedent:** these functions are pure and tested, but **not wired into the live WebSocket flow** — the live session doesn't currently track which enemy is attacking or its Posture at the point a PC declares a reaction, so wiring this in would mean adding that tracking, a larger feature than "move a literal to data." Flagged for a future task rather than expanding this one's scope.
+- Tests (8: 3 required + regression coverage), two new classes in `test_combat.py`: `TestEnemyIncomingConditionTier` (tier by type from yaml, for all three enemy types, plus a modified-yaml-changes-the-result check) and `TestEnemyPostureReactionDifficulty` (Aggressive → Hard, Defensive → Easy, Measured unchanged, and Mook posture ignored even when passed "aggressive").
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1062 passed** (1054 + 8 new).
