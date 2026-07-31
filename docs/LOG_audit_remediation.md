@@ -28,7 +28,7 @@
 - [x] W1-3 — "Each Facet's tree" → "the Mind and Soul trees"; drop the phantom Techniques. *(cre-H2, cre-H3, cre-M4 — D1)*
 - [x] W1-4 — Soul Second Domain prerequisite line. *(cre-M2)*
 - [x] W1-5 — Zulnut's Finesse and the Knowledge/Lore slip. *(cre-M5)*
-- [ ] W1-6 — Threat Clock vignette and pacing math. *(rul-M4, rul-M5)*
+- [x] W1-6 — Threat Clock vignette and pacing math. *(rul-M4, rul-M5)*
 - [ ] W1-7 — Four small text corrections across III.3, IV.1, Quick Start, MM5. *(rul-L1, rul-L2, rul-L3, rul-L6, mm-M1)*
 - [ ] W1-8 — Glossary: add Saving Throw, fix citations, close the term gaps. *(app-M5, app-L1, app-L2/cre-L4, app-L3, app-L4)*
 - [ ] W1-9 — Index slugger: one hyphen per whitespace character. *(app-M6)* **TDD**
@@ -79,6 +79,15 @@ Result: **1026 passed**.
 - `II.4:120` — "A Knowledge advancement is richer..." → "A Lore advancement is richer..." (same fix, MM-guidance paragraph).
 - Regenerated `Index.md` — no diff.
 - **Flag for voice review (DESIGN §6):** the `:73` fix departs from the task's literal wording ("swap to Stealth") for the reasons above; worth a second look to confirm the Finesse-Expert-then-Master framing reads naturally.
+
+Command: `cd software && python -m pytest -q`
+Result: **1026 passed**.
+
+### W1-6 *(rul-M4, rul-M5)*
+
+- `III.2:96` (The Beam vignette) — the restarted 4-segment clock (reset to 0) was only narrating 3 advances before "fills." Added the missing fourth beat and explicit numbering matching the model vignette's style (`:43-57`, which numbers "the second segment fills," "a partial, three," "a partial, four"): Zahna's scramble (one), Zulnut's (two), a new beat — the stairs buckling underfoot (three) — then the beam settling deeper fills it (four). Did not touch the definition of "restarting" itself, per the task's explicit instruction.
+- `III.2:19` — at the stated 72% partial/failure rate, a 4-segment clock takes 4 ÷ 0.72 ≈ 5.6 rolls, not "roughly 3–4." Kept 72% (it's the derived, correct figure) and replaced the roll-count claim with "roughly five or six party rolls."
+- Regenerated `Index.md` — no diff (no heading touched).
 
 Command: `cd software && python -m pytest -q`
 Result: **1026 passed**.
