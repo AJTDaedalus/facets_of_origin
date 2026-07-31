@@ -550,6 +550,7 @@
 - [III.3 — Mooks](III.3_Combat.md#mooks)
 - [III.3 — Named NPCs](III.3_Combat.md#named-npcs)
 - [III.3 — Bosses and Climactic Antagonists](III.3_Combat.md#bosses-and-climactic-antagonists)
+- [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
 - [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
 - [IV.1 — Weapons](IV.1_Equipment.md#weapons)

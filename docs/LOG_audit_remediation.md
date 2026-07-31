@@ -175,3 +175,35 @@ Findings closed this wave: cre-H1, cre-H2, cre-H3, cre-M1, cre-M2, cre-M4, cre-M
 DESIGN §6 voice-review flags carried into the PR: W1-2 (Scholar's Luck replacement clause), W1-5 (the :73 Facet Levels example — departed from the task's literal "swap to Stealth" wording), W1-6 (the added fourth Threat Clock beat).
 
 PR: opened via `gh pr create` against `main`, branch `fix/audit-wave1-corrections`.
+
+---
+
+## W2 — v0.3 migration completion
+
+- **Branch:** `fix/audit-wave2-v03-migration`
+- **Date:** 2026-07-31
+- **Baseline:** `pytest --collect-only -q` → **1029 tests collected**, measured on this branch after merging W1 (PR #14).
+
+### W2 task list (from `docs/TASKS_audit_remediation.md`)
+
+- [x] W2-1 — Migrate Magic in Combat and Attune to the Resolve model. *(mm-M2)*
+- [ ] W2-2 — Combat quick reference: declarable actions. *(rul-M2)*
+- [ ] W2-3 — MM1 enemy Attack/Defense modifiers: what they mean at the table. *(mm-M4)*
+- [ ] W2-4 — Mook TR: the formula wins. *(mm-H1 — D2)*
+- [ ] W2-5 — Retire superseded simulation citations. *(mm-M5, mm-L4, mm-L5)*
+- [ ] W2-6 — MM low-severity sweep. *(mm-L1, mm-L6, mm-L7)*
+- [ ] W2-7 — facet.yaml: Overwhelming Force. *(sync-H-1)* **TDD**
+- [ ] W2-8 — Encode the magic-Technique domain prerequisite (the guard). *(sync-H-2, part 1)* **TDD**
+- [ ] W2-9 — Switch to the PHB's branch/tier prerequisite rule. *(sync-H-2, part 2)* **TDD**
+- [ ] W2-10 — Wave 2 close-out.
+
+### W2-1 *(mm-M2)*
+
+- `III.3:379` — "Conditions from magical Strikes" applied the PvP Condition-tier table unconditionally, even against enemies, which contradicts the Resolve model (III.3:124) that governs the "usual case." Rewrote as "Resolving magical Strikes": against an enemy, deplete Resolve on the same table as a physical Strike (10+ = -2 and may hang a rider, 7-9 = -1); against another character, apply a Condition directly on the PvP tier table. No magic-specific number invented — it's the existing Strike table, cited, not extended.
+- `III.3:391` (Attune) — "the Condition tier follows the Strike outcome table" was ambiguous/wrong for the enemy case (no Condition tier applies there, Resolve does). Reworded to state both branches explicitly.
+- **Verify-only, unchanged:** `MM5:109` ("vs enemy depletes Resolve like a Strike") was already a legal compression of the corrected body text — confirmed, not rewritten. `Quick_Start.md:143` ("Cast a spell | 2d6 + Spirit or Knowledge (by tradition)") states only the roll formula, never the old Condition-tier-only model — confirmed unchanged is correct.
+- Regenerated `Index.md` — 1 new line (`III.3 — Mind and Soul in a Fight` now indexes under Resolve, since Attune's paragraph now names Resolve explicitly).
+- Did not touch `III.3:395` (Gamble / "Reckless Press") — out of this task's scope; that's W3-5 (rul-M3, D6).
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed**.

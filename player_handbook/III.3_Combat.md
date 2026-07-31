@@ -376,7 +376,7 @@ Magical effects in combat follow the same **Domain + Intent + Scope** framework 
 
 **Reactions against magical Strikes.** All three active reactions — Dodge, Parry, and Intercept — can apply against magical actions. Feasibility is the MM's call based on what is happening in the fiction: you cannot Parry a wave of force you never saw coming, but you can Parry a summoned blade meeting yours. Dodge remains valid against most magical effects that have a physical direction. When the nature of the magic makes a physical reaction implausible, Absorb is available as always.
 
-**Conditions from magical Strikes.** Magical Strikes apply Conditions on the same tier table as physical Strikes: a 10+ applies a Tier 2 Condition, a 7–9 applies a Tier 1 Condition, and a 6− produces a consequence for the caster. The attacker chooses which Condition to apply within the appropriate tier.
+**Resolving magical Strikes.** A magical Strike resolves exactly like a physical one (see *Strike*, above): against an enemy, it depletes Resolve — a full success (10+) depletes 2 and may hang a rider Condition, a partial (7–9) depletes 1. Against another character, there is no Resolve pool; it applies a Condition directly on the PvP tier table — a 10+ applies a Tier 2 Condition, a 7–9 applies a Tier 1 Condition. A 6− produces a consequence for the caster either way. The attacker chooses which Condition to apply, within the appropriate tier, whenever one applies.
 
 **Scope in combat.** Active opposition counts as at least Standard difficulty for magical actions. Scope difficulty applies normally — a Focused domain character attempting a Major working mid-fight is rolling at Hard, same as always. The chaos of combat does not add difficulty on its own, but the MM may adjust for specific circumstances (distracted, wounded, constrained).
 
@@ -388,7 +388,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Insight (Wisdom):** Read the opposition's likely Posture before it is revealed. A successful Insight roll at the start of an exchange gives you information — their body language, their positioning, the tension in their stance. That information matters when Posture is declared blind.
 
-**Attune (Spirit):** Channel your domain's force as a direct Strike. Spirit is the roll for intuitive magical attacks. Domain + Intent + Scope sets the difficulty; the Condition tier follows the Strike outcome table.
+**Attune (Spirit):** Channel your domain's force as a direct Strike. Spirit is the roll for intuitive magical attacks. Domain + Intent + Scope sets the difficulty; the Strike outcome table applies exactly as it would for a physical Strike — Resolve against an enemy, a Condition against another character.
 
 **Investigate (Intelligence):** Find the structural weakness in the fight — a bad angle, a compromised footing, an environmental factor the enemy hasn't noticed. A successful Investigate roll translates directly into a difficulty modifier on the party's next actions against that target.
 
