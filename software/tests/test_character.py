@@ -384,14 +384,16 @@ class TestPerFacetLevelTracking:
         assert "sense_the_unseen" not in char.techniques
 
     def test_select_technique_rejects_unmet_prerequisite(self, ruleset, valid_attributes):
+        """PHB II.4:83: Tier 3 requires a Tier 2 in the same branch. A fresh
+        character (no Tier 2 Communion Technique) is refused Second Domain."""
         char, _ = create_default_character(
             name="X", player_name="P", primary_facet="soul",
             attributes=valid_attributes, ruleset=ruleset,
         )
         char.technique_picks_available = 1
-        ok, msg = char.select_technique("second_domain", ruleset)  # needs a T1→T2 chain
+        ok, msg = char.select_technique("second_domain", ruleset)
         assert not ok
-        assert "the_language_beneath_language" in msg
+        assert "Tier 2" in msg
         assert char.technique_picks_available == 1  # pick not consumed
 
     def test_select_technique_magic_granting_activates_domain(self, ruleset, valid_attributes):
@@ -452,6 +454,87 @@ class TestPerFacetLevelTracking:
         assert "domain" in msg.lower()
         assert "ascendant_domain_soul" not in char.techniques
         assert char.technique_picks_available == 1
+
+    def test_branch_tier_rule_weapon_mastery_unlocks_overwhelming_force(self, ruleset, valid_attributes):
+        """sync-H-2, part 2 (PHB II.4:83): Tier 2 requires *any* Tier 1 in the
+        same branch, not a specific one. weapon_mastery (Might T1) unlocking
+        overwhelming_force (Might T2, whose old chain-only prerequisite was
+        forcing_hand) is newly legal."""
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.technique_picks_available = 2
+        ok, _ = char.select_technique("weapon_mastery", ruleset, choice="blades")
+        assert ok
+        ok, msg = char.select_technique("overwhelming_force", ruleset)
+        assert ok, msg
+        assert "overwhelming_force" in char.techniques
+
+    def test_branch_tier_rule_mirrors_in_a_different_branch_and_tree(self, ruleset, valid_attributes):
+        """Same newly-legal shape, in a different branch (Instinct) and a
+        different Facet tree (Mind) than the Might example above.
+        immediate_threat's old chain-only prerequisite was never_surprised;
+        the_wrong_note (the *other* Instinct Tier 1) now satisfies it too."""
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="mind",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.technique_picks_available = 2
+        ok, _ = char.select_technique("the_wrong_note", ruleset)
+        assert ok
+        ok, msg = char.select_technique("immediate_threat", ruleset)
+        assert ok, msg
+        assert "immediate_threat" in char.techniques
+
+    def test_branch_tier_rule_rejects_tier_two_without_any_tier_one_in_branch(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.technique_picks_available = 1
+        ok, msg = char.select_technique("overwhelming_force", ruleset)
+        assert not ok
+        assert "Tier 1" in msg
+        assert "overwhelming_force" not in char.techniques
+        assert char.technique_picks_available == 1
+
+    def test_branch_tier_rule_rejects_cross_branch_tier_two(self, ruleset, valid_attributes):
+        """A Tier 1 in one branch (Might) does not satisfy Tier 2 in another
+        branch (Grace) — the rule is branch-scoped, not tree-wide."""
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.techniques.append("forcing_hand")  # Might Tier 1, not Grace
+        char.technique_picks_available = 1
+        ok, msg = char.select_technique("shadow_walk", ruleset)  # Grace Tier 2
+        assert not ok
+        assert "Tier 1" in msg
+        assert "shadow_walk" not in char.techniques
+        assert char.technique_picks_available == 1
+
+    def test_branch_tier_rule_second_domain_still_refused_without_domain_post_loosening(
+        self, ruleset, valid_attributes
+    ):
+        """The W2-8 domain guard must survive the chain loosening: this is now
+        a *genuinely reachable* play sequence (sense_the_unseen -> formed_bond
+        satisfies the Tier 2-in-branch rule on its own, with no domain ever
+        granted), not the direct-injection bypass W2-8's tests needed to use
+        while the old chain still blocked this path."""
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="soul",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.technique_picks_available = 3
+        ok, _ = char.select_technique("sense_the_unseen", ruleset)
+        assert ok
+        ok, _ = char.select_technique("formed_bond", ruleset)
+        assert ok
+        ok, msg = char.select_technique("second_domain", ruleset, choice="storm")
+        assert not ok
+        assert "domain" in msg.lower()
+        assert "second_domain" not in char.techniques
 
     def test_technique_picks_survive_fof_roundtrip(self, ruleset, valid_attributes):
         char, _ = create_default_character(

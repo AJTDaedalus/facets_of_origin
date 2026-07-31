@@ -194,7 +194,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave1-correction
 - [x] W2-6 — MM low-severity sweep. *(mm-L1, mm-L6, mm-L7)*
 - [x] W2-7 — facet.yaml: Overwhelming Force. *(sync-H-1)* **TDD**
 - [x] W2-8 — Encode the magic-Technique domain prerequisite (the guard). *(sync-H-2, part 1)* **TDD**
-- [ ] W2-9 — Switch to the PHB's branch/tier prerequisite rule. *(sync-H-2, part 2)* **TDD**
+- [x] W2-9 — Switch to the PHB's branch/tier prerequisite rule. *(sync-H-2, part 2)* **TDD**
 - [ ] W2-10 — Wave 2 close-out.
 
 ### W2-1 *(mm-M2)*
@@ -311,3 +311,22 @@ Result: **1031 passed** (1029 + 2 new).
 
 Command: `cd software && python -m pytest -q`
 Result: **1034 passed** (1031 + 3 new).
+
+### W2-9 *(sync-H-2, part 2)* — TDD
+
+- `software/app/facets/registry.py` (`MergedRuleset`) — added `_technique_branch_map` and `_technique_tier_map` (built once at merge time, alongside the existing `_technique_facet_map`) and their accessors `get_technique_branch()` / `get_technique_tier()`.
+- `software/app/game/character.py` (`select_technique`) — added the PHB II.4:83 branch/tier check right after the existing (now-mostly-empty) `prerequisites` list check: for any Technique at tier > 1, the character must hold at least one Technique at `tier - 1` in the *same branch*. The old `prerequisites` field/check stays in the schema and code path — it's just a no-op for the base ruleset now, and still available for homebrew Facets that want a specific chain.
+- `software/facets/base/facet.yaml` — emptied all 39 Tier 2/Tier 3 `prerequisites: [x]` lists to `[]` (script-verified: exactly the 39 chain-only entries, confirmed by diffing before/after — nothing else in the file touched). Did not touch `requires_domain` (W2-8) or any other field.
+- Tests (7 total, per DESIGN §4.2's exact list — 5 new + 2 pre-existing updated, all written/updated before running to confirm red→green):
+  1. **Newly legal** — `test_branch_tier_rule_weapon_mastery_unlocks_overwhelming_force`: Weapon Mastery (Might T1) → Overwhelming Force (Might T2), previously rejected (old chain-only prereq was `forcing_hand`), now legal.
+  2. **Mirror in a different branch and tree** — `test_branch_tier_rule_mirrors_in_a_different_branch_and_tree`: the_wrong_note (Mind/Instinct T1) → immediate_threat (Mind/Instinct T2, old chain-only prereq was `never_surprised`), now legal. One example satisfying both "different branch" and "different tree" from the Might case.
+  3. **No Tier 1 in branch** — `test_branch_tier_rule_rejects_tier_two_without_any_tier_one_in_branch`: fresh character, no Techniques, `overwhelming_force` refused.
+  4. **Cross-branch Tier 1 doesn't count** — `test_branch_tier_rule_rejects_cross_branch_tier_two`: holding `forcing_hand` (Might T1) does not satisfy `shadow_walk` (Grace T2) — the rule is branch-scoped, not tree-wide.
+  5. **Tier 3 with only Tier 1 in branch** — pre-existing `test_tier_three_rejected_without_tier_two` (`test_websocket.py`) updated: its exact-message assertion (`"the_aimed_truth" in msg`) no longer holds since the rejection reason is now generic ("Tier 2"), but the underlying behavior — still refused — is unchanged. Updated the assertion, not the test's intent.
+  6. **Second Domain, no domain, post-loosening** — `test_branch_tier_rule_second_domain_still_refused_without_domain_post_loosening`: proves the W2-8 guard survives the chain loosening using a *genuinely reachable* sequence (sense_the_unseen → formed_bond satisfies the branch/tier rule with no domain ever granted), not W2-8's direct-injection bypass (which was necessary only while the old chain still blocked this path in play).
+  7. **Second Domain, with domain, still legal** — pre-existing `test_select_technique_second_domain_permitted_with_domain` (W2-8) continues to pass unmodified; the full legitimate chain still works exactly as before.
+- Also updated `test_select_technique_rejects_unmet_prerequisite` (`test_character.py`) — same exact-message-vs-generic-message issue as item 5's websocket test, fixed the same way.
+- **Both message-assertion updates are within the advancement/technique test area** (the exact area this task changes) and both still assert the same underlying behavior (rejection) — not new failures outside scope requiring escalation. Confirmed no other file in the repo references specific chain-prerequisite ids in an assertion (grepped `software/tests/`, `software/app/`, `software/tools/`).
+
+Command: `cd software && python -m pytest -q`
+Result: **1039 passed** (1034 + 5 new).

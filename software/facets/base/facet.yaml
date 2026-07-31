@@ -297,7 +297,7 @@ techniques:
                   Once per scene, when your Strike scores a full success (10+) against a
                   single target, you may drive the blow home: the target takes no
                   offensive action in the next exchange.
-                prerequisites: [forcing_hand]
+                prerequisites: []
 
               - id: lift_the_world
                 name: "Lift the World"
@@ -306,7 +306,7 @@ techniques:
                   be impossible without tools or assistance — holding up a collapsing ceiling,
                   halting a moving cart, forcing open a sealed vault. Roll Athletics at Hard
                   difficulty. On a 10+, you succeed. On a 7–9, you succeed at a cost.
-                prerequisites: [weapon_mastery]
+                prerequisites: []
 
           - tier: 3
             techniques:
@@ -316,7 +316,7 @@ techniques:
                   When you move toward a goal in a straight line — physically, narratively —
                   difficult terrain, minor obstacles, and crowds do not slow you. Only something
                   that can genuinely stop you requires a roll. Everything else simply moves.
-                prerequisites: [overwhelming_force]
+                prerequisites: []
 
               - id: the_final_blow
                 name: "The Final Blow"
@@ -325,7 +325,7 @@ techniques:
                   the outcome is final. The target is removed from the conflict entirely —
                   defeated, fled, or broken — regardless of any remaining resources or
                   abilities they had.
-                prerequisites: [lift_the_world]
+                prerequisites: []
 
       # ---- Grace Branch ----
       - id: grace
@@ -357,7 +357,7 @@ techniques:
                   When moving in darkness, dim light, or natural cover, you do not need to
                   roll Stealth to remain undetected while moving. You only roll when performing
                   an action that might draw attention.
-                prerequisites: [fleet_step]
+                prerequisites: []
 
               - id: blur_of_motion
                 name: "Blur of Motion"
@@ -365,7 +365,7 @@ techniques:
                   Once per scene, when you would be targeted by an attack or sudden physical
                   threat, you may spend a Spark to simply not be where they expected. You are
                   not harmed, and the attacker must re-establish their approach.
-                prerequisites: [steady_hand]
+                prerequisites: []
 
           - tier: 3
             techniques:
@@ -375,7 +375,7 @@ techniques:
                   You never roll Stealth for movement alone. You only roll when you take an
                   action — speaking, attacking, interacting with an object. Your passage leaves
                   no trace the MM can use against you.
-                prerequisites: [shadow_walk]
+                prerequisites: []
 
               - id: the_vanishing
                 name: "The Vanishing"
@@ -383,7 +383,7 @@ techniques:
                   Once per session, you may disappear from a scene entirely without explanation
                   to anyone watching. You reappear at the start of the next scene in any position
                   that is plausibly reachable. No roll required. The MM does not ask how.
-                prerequisites: [blur_of_motion]
+                prerequisites: []
 
       # ---- Iron Branch ----
       - id: iron
@@ -417,7 +417,7 @@ techniques:
                 description: >
                   Once per scene, you may ignore a minor wound or physical consequence entirely.
                   It happened — it simply does not slow you down this scene.
-                prerequisites: [hard_to_kill]
+                prerequisites: []
 
               - id: grinding_advance
                 name: "Grinding Advance"
@@ -425,7 +425,7 @@ techniques:
                   When everyone else at the table has spent their resources or run out of options,
                   you have not. Once per session, you may declare that you still have something left.
                   Gain one Spark immediately.
-                prerequisites: [acclimated]
+                prerequisites: []
 
           - tier: 3
             techniques:
@@ -436,7 +436,7 @@ techniques:
                   collapse, capture, death — you may choose to remain. You are battered, spent,
                   and at the edge. But you are still standing. The MM may not remove you from
                   the scene against your will once per session.
-                prerequisites: [shrug_it_off]
+                prerequisites: []
 
               - id: the_long_road
                 name: "The Long Road"
@@ -444,7 +444,7 @@ techniques:
                   At the end of any session in which your character endured significant hardship,
                   you recover fully — wounds, consequences, and spent resources — without requiring
                   downtime or rest. You are what hardship makes you.
-                prerequisites: [grinding_advance]
+                prerequisites: []
 
   # =========================================================================
   # Facet of the Mind
@@ -486,7 +486,7 @@ techniques:
                   within it. The MM must confirm the flaw exists and describe what exploiting it
                   would require. You cannot invent a weakness that isn't there — but if one is
                   there, you will find it.
-                prerequisites: [sharp_analysis]
+                prerequisites: []
 
               - id: working_theory
                 name: "Working Theory"
@@ -496,7 +496,7 @@ techniques:
                   whether your theory is correct, partially correct, or wrong — and if wrong, gives
                   you the one fact that most directly contradicts it. You do not need all the
                   evidence yet. You just need enough to reason.
-                prerequisites: [dissecting_failure]
+                prerequisites: []
 
           - tier: 3
             techniques:
@@ -508,7 +508,7 @@ techniques:
                   physical evidence, or inference. State your conclusion clearly. The MM tells you
                   whether it is correct. If it is, everything that follows in the fiction treats
                   your conclusion as established fact.
-                prerequisites: [structural_weakness]
+                prerequisites: []
 
               - id: pressure_point
                 name: "Pressure Point"
@@ -518,7 +518,7 @@ techniques:
                   you may describe exactly how to exploit it. The MM must treat this as the optimal
                   approach — the difficulty of acting on your analysis is one step easier for any
                   character who follows your instructions, for the rest of the scene.
-                prerequisites: [working_theory]
+                prerequisites: []
 
       # ---- Instinct Branch ----
       - id: instinct
@@ -553,7 +553,7 @@ techniques:
                   They must answer honestly and specifically — not "the room feels dangerous," but
                   the actual threat, named. You can act on this information as if you had observed
                   it directly.
-                prerequisites: [never_surprised]
+                prerequisites: []
 
               - id: assess_the_situation
                 name: "Assess the Situation"
@@ -561,7 +561,7 @@ techniques:
                   Once per scene, when you enter a social situation — a negotiation, a gathering,
                   a tense confrontation — you may ask the MM two questions about the emotional or
                   political dynamics in the room. Both answers must be honest.
-                prerequisites: [the_wrong_note]
+                prerequisites: []
 
           - tier: 3
             techniques:
@@ -572,7 +572,7 @@ techniques:
                   that the party acts on your read of the situation — before any opposition can
                   react, before any ambush springs, before the moment tips. Everyone in the party
                   acts first in the next exchange. No roll required.
-                prerequisites: [immediate_threat]
+                prerequisites: []
 
               - id: pattern_recognition
                 name: "Pattern Recognition"
@@ -582,7 +582,7 @@ techniques:
                   understand something about the situation, the antagonist, or the world that no
                   amount of direct investigation could have uncovered. The MM tells you one true
                   implication of that pattern the fiction has not yet revealed.
-                prerequisites: [assess_the_situation]
+                prerequisites: []
 
       # ---- Archive Branch ----
       - id: archive
@@ -623,7 +623,7 @@ techniques:
                   historical figure, an artifact, a faction — you may ask the MM two questions
                   about it that must be answered truthfully. The answers represent what a scholar
                   of your depth would already know.
-                prerequisites: [field_of_mastery]
+                prerequisites: []
 
               - id: cross_reference
                 name: "Cross-Reference"
@@ -632,7 +632,7 @@ techniques:
                   immediately connect it to something you already know. Tell the MM what you think
                   the connection is. They must tell you whether you are right — and if you are,
                   describe one additional implication that the connection reveals.
-                prerequisites: [arcane_study]
+                prerequisites: []
 
           - tier: 3
             techniques:
@@ -643,7 +643,7 @@ techniques:
                   otherwise face. Name what you know and the MM confirms whether it applies. If it
                   applies, the consequence is negated. You do not roll. You simply know the thing
                   that matters.
-                prerequisites: [first_encounter]
+                prerequisites: []
 
               - id: deep_archive
                 name: "Deep Archive"
@@ -652,7 +652,7 @@ techniques:
                   Describe what you're reaching for. The MM tells you whether your character, given
                   their depth of study, could plausibly have encountered this knowledge. If yes:
                   you know it, and it is accurate.
-                prerequisites: [cross_reference]
+                prerequisites: []
 
               - id: second_domain_mind
                 name: "Second Domain"
@@ -666,7 +666,7 @@ techniques:
                   your primary domain.
                 grants_secondary_domain: true
                 requires_domain: mind
-                prerequisites: [cross_reference]
+                prerequisites: []
                 has_choice: true
                 choice_prompt: "Choose a second standard domain from the Domains of the Mind list (must differ from your first; prismatic domains excluded)."
 
@@ -681,7 +681,7 @@ techniques:
                 magic_granting: true
                 grants_prismatic_domain: true
                 requires_domain: mind
-                prerequisites: [cross_reference]
+                prerequisites: []
                 has_choice: true
                 choice_prompt: "Choose one prismatic domain from the Domains of the Mind list."
 
@@ -725,7 +725,7 @@ techniques:
                   actually believes about themselves that they cannot ignore it. They must respond
                   in kind: denial, anger, grief, or acknowledgment. They may not deflect, change
                   the subject, or pretend they did not hear it.
-                prerequisites: [read_the_room]
+                prerequisites: []
 
               - id: commanding_presence
                 name: "Commanding Presence"
@@ -733,7 +733,7 @@ techniques:
                   Once per scene, when you speak with clear authority in a tense situation — giving orders,
                   stopping a confrontation, demanding attention — anyone who does not have a
                   compelling reason to ignore you does not. You do not roll.
-                prerequisites: [lasting_impression]
+                prerequisites: []
 
           - tier: 3
             techniques:
@@ -745,7 +745,7 @@ techniques:
                   uncertain. An official reconsidering their position decides. The MM cannot refuse
                   the shift — they can only determine how it unfolds and what it costs the other
                   side. You do not need to roll, but you must speak.
-                prerequisites: [the_aimed_truth]
+                prerequisites: []
 
               - id: unforgettable
                 name: "Unforgettable"
@@ -754,7 +754,7 @@ techniques:
                   favorably, and personally — unless they have a concrete reason not to. Old contacts
                   become warm contacts. Strangers who met you once treat you like someone they have
                   been looking for.
-                prerequisites: [commanding_presence]
+                prerequisites: []
 
       # ---- Fortune Branch ----
       - id: fortune
@@ -788,7 +788,7 @@ techniques:
                   a door was left unlocked, a guard stepped away a moment ago, the contact you
                   needed happens to be in this tavern. The MM determines the exact form and any
                   edges it carries — but they cannot refuse the coincidence entirely.
-                prerequisites: [when_it_matters]
+                prerequisites: []
 
               - id: the_lucky_break
                 name: "The Lucky Break"
@@ -797,7 +797,7 @@ techniques:
                   you may spend a Spark to declare that something intervenes. The consequence is
                   delayed, deflected, or redirected to something recoverable. This does not stack:
                   the same consequence cannot be deflected twice.
-                prerequisites: [the_uncanny_angle]
+                prerequisites: []
 
           - tier: 3
             techniques:
@@ -808,14 +808,14 @@ techniques:
                   do not specify what it is or how — only that it does. The MM must make it true
                   and must make it significant. It happens, and it helps you, and neither you nor
                   the MM gets to pretend afterward that it was ordinary.
-                prerequisites: [convenient_coincidence]
+                prerequisites: []
 
               - id: the_odds_were_never_real
                 name: "The Odds Were Never Real"
                 description: >
                   When you spend a Spark on a roll, add two dice instead of one and still drop the
                   lowest. Your luck does not merely tip the scales — it removes them.
-                prerequisites: [the_lucky_break]
+                prerequisites: []
 
       # ---- Communion Branch ----
       - id: communion
@@ -855,7 +855,7 @@ techniques:
                   holds accumulated meaning. While bonded, you sense their emotional state and they
                   sense yours. The bond lasts until the scene ends or you choose to release it.
                   You may not maintain more than one bond at a time.
-                prerequisites: [sense_the_unseen]
+                prerequisites: []
 
               - id: the_language_beneath_language
                 name: "The Language Beneath Language"
@@ -864,7 +864,7 @@ techniques:
                   language — an animal, a spirit, a being of alien origin — you do not need to roll
                   for them to understand what you mean. They understand your intent. Whether they
                   respond, cooperate, or care is a separate matter entirely.
-                prerequisites: [spiritual_domain]
+                prerequisites: []
 
           - tier: 3
             techniques:
@@ -876,7 +876,7 @@ techniques:
                   rage, a boundary giving way. Your presence is sufficient to hold it steady. No
                   roll required. The MM determines what holding the line costs you in the fiction,
                   but it holds.
-                prerequisites: [formed_bond]
+                prerequisites: []
 
               - id: second_domain
                 name: "Second Domain"
@@ -888,7 +888,7 @@ techniques:
                   treated as one difficulty step harder than your primary domain.
                 grants_secondary_domain: true
                 requires_domain: soul
-                prerequisites: [the_language_beneath_language]
+                prerequisites: []
                 has_choice: true
                 choice_prompt: "Choose a second standard domain from the Domains of the Soul list (must differ from your first; prismatic domains excluded)."
 
@@ -903,7 +903,7 @@ techniques:
                 magic_granting: true
                 grants_prismatic_domain: true
                 requires_domain: soul
-                prerequisites: [the_language_beneath_language]
+                prerequisites: []
                 has_choice: true
                 choice_prompt: "Choose one prismatic domain from the Domains of the Soul list."
 
