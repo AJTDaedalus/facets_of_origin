@@ -22,8 +22,6 @@
 
 ## Ascendant Domain
 
-*Defined in [II.4b](II.4b_Character_Creation_Facet_Mind.md).*
-
 - [Appendix Magic Domains — Prismatic Soul Domains](Appendix_Magic_Domains.md#prismatic-soul-domains)
 - [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
@@ -423,6 +421,19 @@
 - [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
 - [MM1 — Named NPCs](../mm_manual/MM1_Encounters_and_Enemies.md#named-npcs)
 
+## Off-Balance
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
+- [III.3 — Tier 1 Conditions](III.3_Combat.md#tier-1-conditions)
+- [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
+- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
+- [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
+- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
+- [MM5 — MM Trouble Table](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table)
+
 ## Partial Success
 
 *Defined in [III.1](III.1_Core_Resolution.md).*
@@ -439,6 +450,20 @@
 - [MM2 — In Play: The Price of a Partial Success](../mm_manual/MM2_Session_Design.md#in-play-the-price-of-a-partial-success)
 - [MM4 — In Play: Sharing the Spotlight](../mm_manual/MM4_Running_the_Table.md#in-play-sharing-the-spotlight)
 - [MM5 — Common Rulings](../mm_manual/MM5_Quick_Reference.md#common-rulings)
+
+## Party Strength
+
+*Defined in [MM1](../mm_manual/MM1_Encounters_and_Enemies.md).*
+
+- [MM1 — Party Strength](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength)
+- [MM1 — Party Strength 3 (3 fresh characters, 1 career advance each)](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-3-3-fresh-characters-1-career-advance-each)
+- [MM1 — Party Strength 4 (4 PCs or 3 advanced PCs)](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-4-4-pcs-or-3-advanced-pcs)
+
+## Pinnacle Technique
+
+*Defined in [II.4](II.4_Character_Creation_Facets.md).*
+
+- [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
 
 ## Posture
 
@@ -548,6 +573,12 @@
 - [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 
+## Saving Throw
+
+*Defined in [III.1](III.1_Core_Resolution.md).*
+
+- [III.1 — Saving Throws](III.1_Core_Resolution.md#saving-throws)
+
 ## Scope
 
 *Defined in [II.3](II.3_Magic.md).*
@@ -566,8 +597,6 @@
 
 ## Second Domain
 
-*Defined in [II.4c](II.4c_Character_Creation_Facet_Soul.md).*
-
 - [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 
@@ -580,6 +609,17 @@
 - [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
 - [II.6 — Starting Skills](II.6_Character_Creation_Skills.md#starting-skills)
 - [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna-the-scholar)
+
+## Shaken
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
+- [III.3 — Tier 1 Conditions](III.3_Combat.md#tier-1-conditions)
+- [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
+- [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
+- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
+- [MM5 — MM Trouble Table](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table)
 
 ## Skill
 
@@ -770,3 +810,30 @@
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
 - [MM5 — Armor (PC downgrade budget)](../mm_manual/MM5_Quick_Reference.md#armor-pc-downgrade-budget)
 - [MM5 — Endurance](../mm_manual/MM5_Quick_Reference.md#endurance)
+
+## Weapon
+
+*Defined in [IV.1](IV.1_Equipment.md).*
+
+- [II.2 — Body](II.2_Character_Creation_Attributes.md#body)
+- [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
+- [II.6 — Complete Skill Reference](II.6_Character_Creation_Skills.md#complete-skill-reference)
+- [III.3 — Strike](III.3_Combat.md#strike)
+- [III.3 — Parry](III.3_Combat.md#parry)
+- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [IV.1 — Weapon Specialization](IV.1_Equipment.md#weapon-specialization)
+- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
+- [MM5 — Reactions (1 per incoming action)](../mm_manual/MM5_Quick_Reference.md#reactions-1-per-incoming-action)
+
+## Winded
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [III.2 — In Play: The Mill at Millhaven](III.2_Adventuring.md#in-play-the-mill-at-millhaven)
+- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
+- [III.3 — Tier 1 Conditions](III.3_Combat.md#tier-1-conditions)
+- [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
+- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
+- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
+- [MM5 — MM Trouble Table](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table)

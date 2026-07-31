@@ -30,7 +30,7 @@
 - [x] W1-5 — Zulnut's Finesse and the Knowledge/Lore slip. *(cre-M5)*
 - [x] W1-6 — Threat Clock vignette and pacing math. *(rul-M4, rul-M5)*
 - [x] W1-7 — Four small text corrections across III.3, IV.1, Quick Start, MM5. *(rul-L1, rul-L2, rul-L3, rul-L6, mm-M1)*
-- [ ] W1-8 — Glossary: add Saving Throw, fix citations, close the term gaps. *(app-M5, app-L1, app-L2/cre-L4, app-L3, app-L4)*
+- [x] W1-8 — Glossary: add Saving Throw, fix citations, close the term gaps. *(app-M5, app-L1, app-L2/cre-L4, app-L3, app-L4)*
 - [ ] W1-9 — Index slugger: one hyphen per whitespace character. *(app-M6)* **TDD**
 - [ ] W1-10 — Apparatus low-severity sweep. *(cre-L1, cre-L2, cre-L3, cre-L5, cre-L6, app-L6)*
 - [ ] W1-11 — README: regenerate every factual claim from canon. *(README audit — D2 for the TR value)*
@@ -100,6 +100,21 @@ Result: **1026 passed**.
 - `III.3:458` (The Archive's Guardian vignette) — Mordai uses Weapon Mastery, a Technique that requires Facet level 1+, which starting characters don't have. Added a grounding clause to the vignette's opening line: "Several sessions on from where this book's other vignettes leave off — long enough that Mordai has since taken Weapon Mastery," so readers don't infer starting characters have Techniques.
 - `MM5:107` — the Maneuver row had the direction and duration backwards: it said the *target's* next roll becomes Easy (one roll only). Canon (`III.3:146`) is that rolls made **against** the target are Easy, **until the situation changes** (not a single-roll effect). Rewrote the row as a compression of the canonical line, fixing both direction and duration; also compressed the 7–9 case ("rolls against the target stay Standard") to match.
 - Regenerated `Index.md` — no diff (no heading touched).
+
+Command: `cd software && python -m pytest -q`
+Result: **1026 passed**.
+
+### W1-8 *(app-M5, app-L1, app-L2/cre-L4, app-L3, app-L4)*
+
+- Added **Saving Throw** (compression of III.1:84-99: 2d6 + the relevant Major Attribute modifier, reactive vs. proactive framing), inserted alphabetically between Rider and Scope.
+- `:12` Ascendant Domain and `:90` Second Domain — added the missing "Chapter" prefix (matching the other 52 entries' format) and cited **both** homes: `*(Chapters II.4b, II.4c)*`. Note: `_GLOSSARY_ENTRY`'s regex (`software/tests/test_docs_consistency.py:227`) only captures a single trailing token (no comma/space), so a two-chapter citation isn't parsed by `test_glossary_pointers_resolve` — it's silently skipped rather than validated, same as the existing bare-MM-citation entries are skipped by the `Chapter X.Y`-only cross-reference check. Confirmed by hand that both II.4b and II.4c contain each term.
+- Added five standalone entries, each a compression of canonical text, alphabetically placed:
+  - **Off-Balance** and **Shaken** (Tier 1 Conditions, III.3:235-237) — Winded already existed; these two didn't.
+  - **Party Strength** (MM1:140-144) — bare `(MM1)` citation, matching the book's convention for MM-manual-only terms.
+  - **Pinnacle Technique** (II.4:98) — Major Advancement's non-Attribute option.
+  - **Weapon** (IV.1:13-19) — the category-to-attribute table, compressed; cited `(Chapter IV.1)`.
+  - **Winded** — added alongside Off-Balance/Shaken for a complete, consistent Tier 1 trio (Staggered/Cornered, Tier 2, already had entries).
+- Glossary term count: 61 (was 54; +7: Saving Throw, Off-Balance, Party Strength, Pinnacle Technique, Shaken, Weapon, Winded). Regenerated `Index.md` — 61 `## ` sections, matching the term count exactly.
 
 Command: `cd software && python -m pytest -q`
 Result: **1026 passed**.
