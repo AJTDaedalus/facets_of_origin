@@ -24,6 +24,14 @@
   --partial:     #c9a84c;
   --failure:     #9e4d4d;
 
+  /* Accent alias — the single "this is interactive / this is live" colour.
+     Referenced by posture and scope options, spend indicators, focus rings. */
+  --accent:      #c9a84c;
+
+  /* Recessed track behind any fill bar (Endurance, Resolve, clock segments).
+     Must be darker than --bg-card or the fill has nothing to read against. */
+  --surface:     rgba(0,0,0,0.35);
+
   /* Borders & glass */
   --border:      rgba(148, 163, 184, 0.10);
   --border-gold: rgba(201, 168, 76, 0.28);
@@ -161,6 +169,26 @@ input, select, textarea {
   font-family: var(--font);
   margin-bottom: 8px;
   transition: border-color 0.15s, background 0.15s;
+}
+
+/* Radios and checkboxes are not text fields. The blanket rule above stretched
+   every one of them to full width with 9px of padding, which scattered the
+   Posture, Scope, and Spark-use controls across their rows and left the label
+   text floating away from the control it belongs to. */
+input[type="radio"],
+input[type="checkbox"] {
+  width: auto;
+  min-width: 0;
+  flex: none;
+  padding: 0;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+input[type="file"] {
+  padding: 7px 10px;
+  font-size: 13px;
+  cursor: pointer;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -319,6 +347,8 @@ label {
 .rank-novice   { background: rgba(107,120,146,0.2); color: var(--text-dim); border: 1px solid rgba(107,120,146,0.2); }
 .rank-practiced{ background: rgba(77,158,106,0.15); color: #5fbb82;          border: 1px solid rgba(77,158,106,0.25); }
 .rank-expert   { background: rgba(201,168,76,0.15); color: var(--gold);      border: 1px solid var(--border-gold); }
+.rank-master   { background: linear-gradient(135deg, rgba(201,168,76,0.30), rgba(143,113,45,0.30));
+                 color: #e6c76a; border: 1px solid var(--gold); box-shadow: 0 0 6px rgba(201,168,76,0.25); }
 .rank-stub     { background: rgba(120,80,80,0.15);  color: #8a6060;          border: 1px solid rgba(120,80,80,0.2); font-style: italic; }
 
 .marks-dots { color: var(--silver); font-size: 0.8rem; }
@@ -758,13 +788,33 @@ label {
     padding: 16px;
   }
 
-  /* ---- Header ---- */
+  /* ---- Header ----
+     The wordmark, session badge, connection dot, identity, Help and Leave do
+     not fit across a phone. The wordmark is the one item carrying no state, so
+     it goes first; the identity truncates rather than pushing Leave off-screen. */
   header {
-    padding: 10px 16px;
-    gap: 10px;
+    padding: 10px 12px;
+    gap: 8px;
+    flex-wrap: nowrap;
   }
 
-  header h1 { font-size: 0.95rem; }
+  header h1 { display: none; }
+
+  #header-identity {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  .session-badge {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 40vw;
+  }
+
+  header .btn-sm { padding: 5px 10px; flex-shrink: 0; }
 
   /* ---- Tab bar becomes bottom bar on mobile ---- */
   .tab-bar {
@@ -909,7 +959,6 @@ label {
   .attr-block .attr-name   { font-size: 0.58rem; }
   .attr-block .attr-rating { font-size: 1.15rem; }
 
-  header h1 { display: none; } /* save space; session badge is enough */
 }
 
 /* =====================================================================
@@ -1066,4 +1115,550 @@ label {
   padding: 2px 8px;
   border: 1px solid var(--border);
   border-radius: 6px;
+}
+
+/* =========================================================================
+   TOASTS — anything the user must not miss
+   ========================================================================= */
+
+#toast-host {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: min(420px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  border-left-width: 3px;
+  background: #171722;
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  line-height: 1.4;
+  animation: toast-in 0.18s ease-out;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.toast-leaving { opacity: 0; transform: translateX(12px); transition: opacity 0.2s, transform 0.2s; }
+
+.toast-text { flex: 1; }
+
+.toast-info    { border-left-color: var(--silver); }
+.toast-success { border-left-color: var(--success); }
+.toast-warn    { border-left-color: var(--partial); }
+.toast-error   { border-left-color: var(--failure); }
+.toast-gold    { border-left-color: var(--gold); background: #1c1a14; }
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+.toast-close:hover { color: var(--text); }
+
+@media (prefers-reduced-motion: reduce) {
+  .toast { animation: none; }
+  .toast-leaving { transition: none; }
+}
+
+/* =========================================================================
+   MODALS — confirm / prompt / select
+   ========================================================================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(0,0,0,0.62);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal {
+  background: var(--bg-panel);
+  background-image: linear-gradient(135deg, var(--glass-hi) 0%, transparent 60%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.modal-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.modal-body { font-size: 13px; color: var(--text-dim); line-height: 1.5; margin-bottom: 12px; }
+.modal-input { margin-bottom: 12px; }
+
+/* =========================================================================
+   HELP DRAWER
+   ========================================================================= */
+
+.help-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 450;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.help-inner {
+  background: var(--bg-panel);
+  border-left: 1px solid var(--border);
+  width: min(520px, 100%);
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.help-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.help-head strong { color: var(--gold); letter-spacing: 0.06em; }
+
+.help-row { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.help-where { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 4px; }
+.help-what  { font-size: 13px; color: var(--text-dim); line-height: 1.55; }
+
+/* =========================================================================
+   CONNECTION STATUS
+   ========================================================================= */
+
+.conn-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.conn-online     { background: var(--success); box-shadow: 0 0 6px rgba(77,158,106,0.6); }
+.conn-connecting { background: var(--partial); animation: conn-pulse 1.2s ease-in-out infinite; }
+.conn-offline    { background: var(--failure); box-shadow: 0 0 6px rgba(158,77,77,0.6); }
+
+@keyframes conn-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+@media (prefers-reduced-motion: reduce) { .conn-connecting { animation: none; } }
+
+/* =========================================================================
+   SHARED TEXT PATTERNS
+   ========================================================================= */
+
+/* Explanatory copy under a card title. */
+.card-help {
+  font-size: 12.5px;
+  color: var(--text-dim);
+  line-height: 1.55;
+  margin-bottom: 10px;
+}
+
+/* A boxed aside inside a card — rules notes, why-is-this-disabled explanations. */
+.inline-note {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  background: rgba(255,255,255,0.025);
+  border-left: 2px solid var(--border);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 7px 10px;
+  margin: 8px 0;
+}
+
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  margin: 10px 0 5px;
+}
+
+.empty-state {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.55;
+  padding: 14px;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.save-stamp { font-size: 11px; color: var(--text-dim); align-self: center; }
+
+/* Destructive actions read differently from everything else on the page. */
+.card-danger { border-color: rgba(158,77,77,0.35); }
+.card-danger .card-title { color: #c47a7a; }
+.btn-danger {
+  border-color: rgba(158,77,77,0.45);
+  color: #c47a7a;
+}
+.btn-danger:hover { background: rgba(158,77,77,0.15); opacity: 1; }
+
+/* Character-creation choice detail (Facet blurb, Background breakdown). */
+.choice-info {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.choice-info:empty { margin: 0; }
+.choice-info > div { margin-bottom: 3px; }
+.bg-desc { color: var(--text-dim); font-style: italic; margin-bottom: 5px; }
+.bg-key {
+  display: inline-block;
+  min-width: 108px;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+}
+
+.points-counter { font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; }
+
+.checkbox-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text);
+  cursor: pointer;
+}
+.checkbox-inline input[type="checkbox"] { width: auto; margin: 0; }
+
+.sub-form-title { font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+
+.opt-hint { display: block; font-size: 0.66rem; color: var(--text-dim); letter-spacing: 0; }
+
+/* Posture options carry their trade-off inline now, so they need room to breathe. */
+.posture-selector { gap: 6px; }
+.posture-opt { flex-direction: column; align-items: flex-start; gap: 2px; min-width: 132px; }
+.posture-opt > input[type="radio"] { margin-right: 4px; }
+
+/* Roll selection readout */
+.roll-selection {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+.roll-selection-active { color: var(--text); border-color: var(--border-gold); background: rgba(201,168,76,0.06); }
+
+/* Focus target flash — used when a validation message points at a field. */
+.flash-target { animation: flash-ring 1.2s ease-out; }
+@keyframes flash-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(201,168,76,0.55); }
+  100% { box-shadow: 0 0 0 10px rgba(201,168,76,0); }
+}
+@media (prefers-reduced-motion: reduce) { .flash-target { animation: none; } }
+
+/* Keyboard focus must be visible everywhere, not just on inputs. */
+.btn:focus-visible,
+.tab-btn:focus-visible,
+.attr-block:focus-visible,
+.collapsible-toggle:focus-visible,
+.btn-roll-skill:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* =========================================================================
+   COLLAPSIBLE CARDS
+   ========================================================================= */
+
+.collapsible-toggle {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--silver);
+  padding: 0;
+  margin-bottom: 0;
+}
+.collapsible-toggle:hover { color: var(--text); }
+.collapsible-body { margin-top: 12px; }
+.toggle-arrow { float: right; color: var(--text-dim); font-weight: 400; }
+
+/* =========================================================================
+   MM COMBAT CONSOLE
+   ========================================================================= */
+
+.combat-status-banner {
+  margin: 8px 24px 0;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-gold);
+  background: rgba(201,168,76,0.07);
+  font-size: 12.5px;
+  color: var(--text);
+}
+
+.mm-combatant {
+  padding: 10px;
+  margin-bottom: 8px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.mm-combatant-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.mm-conditions { margin: 6px 0; min-height: 20px; }
+
+.mm-attack-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+  margin-top: 6px;
+  border-top: 1px solid var(--border);
+}
+.mm-attack-label {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin: 0;
+  width: 100%;
+}
+.mm-attack-tier { flex: 1; min-width: 150px; margin: 0; }
+.mm-attack-row .checkbox-inline { font-size: 0.72rem; color: var(--text-dim); }
+
+/* A Condition badge that can be lifted back off. */
+.condition-clearable {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.condition-clearable:hover { filter: brightness(1.35); }
+
+.spark-chip {
+  font-size: 0.7rem;
+  color: var(--gold);
+  background: rgba(201,168,76,0.12);
+  border: 1px solid var(--border-gold);
+  border-radius: 10px;
+  padding: 1px 7px;
+  white-space: nowrap;
+}
+
+.status-chip {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1px 7px;
+  white-space: nowrap;
+}
+.status-chip-warn { color: #ff9800; border-color: rgba(255,152,0,0.35); background: rgba(255,152,0,0.1); }
+
+.armor-chip {
+  font-size: 0.7rem;
+  color: var(--silver);
+  background: rgba(148,163,184,0.12);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1px 7px;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.player-chips { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+
+/* Out of combat the panel is a read-only readiness view. */
+.combat-idle { opacity: 0.92; }
+
+/* =========================================================================
+   CONTESTED ROLL
+   ========================================================================= */
+
+.contest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.contest-result {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--glass);
+}
+.contest-side { flex: 1; text-align: center; opacity: 0.65; }
+.contest-winner { opacity: 1; }
+.contest-winner .contest-total { color: var(--gold); }
+.contest-name { font-size: 0.8rem; color: var(--text-dim); }
+.contest-total { font-size: 1.8rem; font-weight: 700; line-height: 1.1; }
+.contest-outcome { font-size: 0.72rem; color: var(--text-dim); }
+.contest-vs { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* =========================================================================
+   LIBRARIES (enemies, encounters) & BUILDER ROWS
+   ========================================================================= */
+
+.library-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 13px;
+}
+.library-row:last-child { border-bottom: none; }
+.library-meta { color: var(--text-dim); font-size: 11px; margin-left: 6px; }
+.library-desc { color: var(--text-dim); font-size: 12px; margin-top: 2px; }
+
+.encounter-enemy-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.budget-readout {
+  font-size: 12.5px;
+  line-height: 1.55;
+  padding: 9px 11px;
+  margin: 10px 0;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--border);
+}
+
+.technique-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 13px;
+}
+.technique-held { color: var(--text); }
+.technique-held strong { color: var(--gold); }
+.technique-locked { opacity: 0.55; }
+.technique-blocked { font-size: 11px; color: var(--partial); margin-top: 3px; }
+
+.inventory-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 13px;
+}
+
+.spawn-row { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+.spawn-row select { margin: 0; }
+
+.enemy-tactics {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-top: 3px;
+  line-height: 1.45;
+}
+.enemy-defeated { opacity: 0.5; }
+.enemy-defeated strong { text-decoration: line-through; }
+
+/* =========================================================================
+   INVITE RESULT
+   ========================================================================= */
+
+.invite-result {
+  margin-top: 10px;
+  padding: 10px;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.invite-label { font-size: 11px; color: var(--text-dim); margin-bottom: 5px; }
+.invite-url {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  word-break: break-all;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* =========================================================================
+   MOBILE ADJUSTMENTS for the components above
+   ========================================================================= */
+
+@media (max-width: 768px) {
+  #toast-host { top: auto; bottom: 62px; left: 12px; right: 12px; max-width: none; }
+  .toast { font-size: 14px; }
+
+  .contest-grid { grid-template-columns: 1fr; }
+  .combat-status-banner { margin: 8px 14px 0; }
+  .help-inner { width: 100%; }
+
+  /* The Progress column is hidden on phones, so the marks move under the name
+     instead of vanishing outright. */
+  .skills-table td:first-child::after {
+    content: attr(data-marks);
+    display: block;
+    font-size: 11px;
+    color: var(--silver);
+    letter-spacing: 1px;
+  }
+
+  .mm-attack-tier { min-width: 0; flex: 1 1 100%; }
+  .posture-opt { min-width: 0; flex: 1 1 calc(50% - 6px); }
 }

@@ -216,6 +216,15 @@ class SessionStore:
             for s in self._sessions.values()
         ]
 
+    def delete_session(self, session_id: str) -> bool:
+        """Drop a session from the store. Returns False if it was not there.
+
+        Only the in-memory session goes; anything already written under
+        `data/` is left alone, so a deletion cannot destroy exported character
+        files the MM may still want.
+        """
+        return self._sessions.pop(session_id, None) is not None
+
     def mark_invite_used(self, session_id: str, token: str) -> None:
         """Record that an invite token has been consumed.
 

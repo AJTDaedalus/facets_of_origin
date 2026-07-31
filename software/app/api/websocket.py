@@ -221,8 +221,8 @@ async def _dispatch(
     elif event_type == "spend_skill_point":
         await _handle_spend_skill_point(websocket, msg, session, session_id, identity)
     # --- Technique events ---
-    elif event_type == "technique_select" and is_mm:
-        await _handle_technique_select(msg, session, session_id)
+    elif event_type == "technique_select":
+        await _handle_technique_select(msg, session, session_id, identity, is_mm)
     elif event_type == "session_reset" and is_mm:
         await _handle_session_reset(session, session_id)
     # --- Enemy tracker events ---
@@ -239,6 +239,8 @@ async def _dispatch(
         await _handle_clock_advance(msg, session, session_id)
     elif event_type == "clock_wind_back" and is_mm:
         await _handle_clock_wind_back(msg, session, session_id)
+    elif event_type == "clock_delete" and is_mm:
+        await _handle_clock_delete(msg, session, session_id)
     # --- Spark: Act Break Nomination / Graceful Fail (D6) ---
     elif event_type == "act_break" and is_mm:
         await _handle_act_break(msg, session, session_id)
@@ -1160,9 +1162,17 @@ async def _handle_spend_skill_point(
 # Technique handler
 # ---------------------------------------------------------------------------
 
-async def _handle_technique_select(msg: dict, session, session_id: str) -> None:
-    """MM selects a Technique for a character at a Facet level advancement."""
-    player_name = msg.get("player_name", "")
+async def _handle_technique_select(
+    msg: dict, session, session_id: str, identity: str, is_mm: bool,
+) -> None:
+    """Select a Technique at a Facet level advancement.
+
+    A player selects for themselves — `player_name` in the message is ignored
+    for non-MM callers, so nobody can spend another character's pick. The MM may
+    still select on any player's behalf (advancement is often walked through at
+    the table). Every selection rule stays in `Character.select_technique`.
+    """
+    player_name = str(msg.get("player_name", "")) if is_mm else identity
     technique_id = str(msg.get("technique_id", ""))
     choice = msg.get("choice")  # optional, for Techniques with choices
     character = session.characters.get(player_name)
@@ -1384,4 +1394,25 @@ async def _handle_clock_wind_back(msg: dict, session, session_id: str) -> None:
     await manager.broadcast(session_id, {
         "type": "clock_wound_back",
         "clock": clock.to_client_dict(),
+    })
+
+
+async def _handle_clock_delete(msg: dict, session, session_id: str) -> None:
+    """Remove a Threat Clock once the hazard it tracked is resolved.
+
+    Clocks are visible to the whole table, so a spent one lingers on every
+    player's screen until it is cleared.
+    """
+    clock_id = str(msg.get("clock_id", ""))
+    if clock_id not in session.threat_clocks:
+        await manager.broadcast(session_id, {
+            "type": "error",
+            "message": f"No Threat Clock with id '{clock_id}'.",
+        })
+        return
+
+    del session.threat_clocks[clock_id]
+    await manager.broadcast(session_id, {
+        "type": "clock_deleted",
+        "clock_id": clock_id,
     })

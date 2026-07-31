@@ -292,3 +292,58 @@ class TestCharacterInventoryAPI:
             headers=headers,
         )
         assert resp.status_code == 403
+
+
+# ---------------------------------------------------------------------------
+# Front-end audit — TR must reach the client from the server, never be
+# recomputed there
+# ---------------------------------------------------------------------------
+
+class TestThreatRatingReachesTheClient:
+    """`tr` is derived, not a stored field, so `model_dump()` dropped it and the
+    Builder's enemy library rendered "TR ?". The front end used to paper over
+    that with its own copy of the MM1 formula in JavaScript — a second
+    implementation of a rule, which is exactly what the Software-PHB sync rule
+    forbids. TR now ships with every enemy payload, and unsaved form values get
+    a preview endpoint instead of a client-side formula.
+    """
+
+    def test_to_client_dict_includes_tr(self):
+        from app.game.enemy import Enemy
+
+        enemy = Enemy(id="thug", name="Thug", tier="named", resolve=4, attack_modifier=1)
+        payload = enemy.to_client_dict()
+        assert payload["tr"] == enemy.calculate_tr()
+
+    def test_listed_enemies_carry_tr(self, client, mm_headers, active_session):
+        session_id = active_session["session_id"]
+        client.post("/api/enemies/", json={
+            "session_id": session_id, "id": "guardian", "name": "Guardian",
+            "tier": "boss", "resolve": 8, "attack_modifier": 2, "armor": "heavy",
+        }, headers=mm_headers)
+
+        listed = client.get(f"/api/enemies/{session_id}", headers=mm_headers).json()
+        # offense max(0, 2+2)=4 + resolve 8 + heavy armor 2 = 14, above the boss floor of 12
+        assert listed["enemies"]["guardian"]["tr"] == 14
+
+    def test_preview_tr_scores_unsaved_values(self, client, mm_headers):
+        """The Builder needs TR while the MM is still tuning numbers, before
+        anything is saved."""
+        resp = client.post("/api/enemies/preview-tr", json={
+            "tier": "boss", "resolve": 8, "attack_modifier": 2,
+            "armor": "heavy", "techniques": ["Riposte", "Shield Wall"],
+        }, headers=mm_headers)
+        assert resp.status_code == 200
+        # 4 offense + 8 resolve + 2 heavy armor + 2 techniques
+        assert resp.json()["tr"] == 16
+
+    def test_preview_tr_applies_the_tier_minimum(self, client, mm_headers):
+        """A Named NPC never scores below 8 however weak its stat line."""
+        resp = client.post("/api/enemies/preview-tr", json={
+            "tier": "named", "resolve": 0, "attack_modifier": -2, "armor": "none",
+        }, headers=mm_headers)
+        assert resp.json()["tr"] == 8
+
+    def test_preview_tr_requires_mm(self, client):
+        resp = client.post("/api/enemies/preview-tr", json={"tier": "mook"})
+        assert resp.status_code in (401, 403)

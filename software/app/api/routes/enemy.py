@@ -29,6 +29,37 @@ class CreateEnemyRequest(BaseModel):
     notes: str = ""
 
 
+class PreviewTRRequest(BaseModel):
+    """Unsaved enemy stats, for scoring a stat line the MM is still tuning."""
+
+    tier: str = "mook"
+    resolve: int = Field(default=0, ge=0)
+    attack_modifier: int = 0
+    armor: str = "none"
+    techniques: list[str] = Field(default_factory=list)
+
+
+@router.post("/preview-tr", dependencies=[Depends(require_mm)])
+async def preview_tr(body: PreviewTRRequest):
+    """Score an unsaved stat line.
+
+    The Builder needs a Threat Rating while the MM is still typing, and it used
+    to get one by re-implementing the MM1 formula in JavaScript. A second copy
+    of a rule is the failure mode the Software-PHB sync policy exists to
+    prevent, so the client asks the engine instead.
+    """
+    enemy = Enemy(
+        id="preview",
+        name="preview",
+        tier=body.tier,
+        resolve=body.resolve,
+        attack_modifier=body.attack_modifier,
+        armor=body.armor,
+        techniques=body.techniques,
+    )
+    return {"tr": enemy.calculate_tr()}
+
+
 @router.post("/", dependencies=[Depends(require_mm)])
 async def create_enemy(body: CreateEnemyRequest):
     """Save an enemy definition to a session's library."""

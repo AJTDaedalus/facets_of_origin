@@ -290,6 +290,23 @@ pytest -k "TestSparkMechanics"         # by class name
 pytest --tb=short                      # short tracebacks
 ```
 
+#### Front-end tests
+
+`tests/e2e/test_ui_flows.py` drives the web app in a real browser and asserts
+that an action a player or MM takes actually changes what they see. It covers
+the failure mode the rest of the suite cannot see — a control that exists, looks
+enabled, and is wired to nothing.
+
+It skips unless Playwright is installed:
+
+```bash
+pip install playwright && playwright install chromium
+pytest tests/e2e/test_ui_flows.py
+```
+
+Add a case here whenever you add a control to the UI. If a button has no
+front-end test, nothing in CI notices when its handler stops working.
+
 ### Project Structure
 
 ```

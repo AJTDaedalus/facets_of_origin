@@ -99,8 +99,14 @@ class Enemy(BaseModel):
         self.conditions = []
 
     def to_client_dict(self) -> dict:
-        """Serialize for sending to clients."""
-        return self.model_dump()
+        """Serialize for sending to clients.
+
+        `tr` is derived rather than stored, so `model_dump()` alone omits it and
+        every client that showed a Threat Rating had either to receive it as a
+        sibling field or recompute the MM1 formula itself. It ships with the
+        enemy instead: the formula stays in one place.
+        """
+        return {**self.model_dump(), "tr": self.calculate_tr()}
 
     def to_fof(self) -> dict:
         """Serialize to .fof format."""

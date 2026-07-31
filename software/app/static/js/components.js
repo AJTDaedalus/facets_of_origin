@@ -31,7 +31,7 @@ function renderCharacterSheetReadOnly(char, ruleset, containerId) {
       const rating = char.attributes[minorId] || 2;
       const ratingDef = ruleset.attribute_ratings.find(r => r.rating === rating);
       const mod = ratingDef ? ratingDef.modifier : 0;
-      const modStr = mod > 0 ? `+${mod}` : `${mod}`;
+      const modStr = mod >= 0 ? `+${mod}` : `${mod}`;
       html += `
         <div class="attr-block" style="cursor:default;">
           <div class="attr-name">${minor.name}</div>
@@ -52,10 +52,12 @@ function renderCharacterSheetReadOnly(char, ruleset, containerId) {
     const marksNeeded = ruleset.advancement ? ruleset.advancement.marks_per_rank : 3;
     const dots = String.fromCodePoint(0x25CF).repeat(ss.marks) + String.fromCodePoint(0x25CB).repeat(Math.max(0, marksNeeded - ss.marks));
     const isPrimary = skill.facet === char.primary_facet;
+    // data-marks re-surfaces the progress dots on mobile, where the Progress
+    // column is hidden for width.
     html += `<tr>
-      <td>${skill.name}${isPrimary ? '' : ' <span style="color:var(--text-dim);font-size:10px">' + String.fromCodePoint(0x25CF) + '</span>'}</td>
+      <td data-marks="${dots}">${skill.name}${isPrimary ? '' : ' <span style="color:var(--text-dim);font-size:10px" title="Outside the primary Facet">' + String.fromCodePoint(0x25CF) + '</span>'}</td>
       <td><span class="rank-badge rank-${ss.rank}">${ss.rank}</span></td>
-      <td class="marks-dots">${dots}</td>
+      <td class="marks-dots" title="${ss.marks}/${marksNeeded} marks toward the next rank">${dots}</td>
     </tr>`;
   });
   html += '</tbody></table>';
@@ -132,10 +134,22 @@ function enemyResolveDisplay(enemy) {
 
 function renderEnemyCard(key, enemy, opts) {
   opts = opts || {};
-  const condStr = enemy.conditions && enemy.conditions.length > 0
-    ? enemy.conditions.join(', ') : 'none';
+  const conditions = enemy.conditions || [];
   const res = enemyResolveDisplay(enemy);
   const hasPhases = opts.showPhases && enemy.phases && enemy.phases.length > 0;
+
+  // The MM can lift a Condition back off; players just read it. Previously a
+  // Condition added by mistake could never be removed from the tracker.
+  const condHtml = conditions.length
+    ? conditions.map(function (c) {
+        const label = escapeHtml(String(c).replace(/_/g, ' '));
+        return opts.mmControls
+          ? '<button class="condition-badge condition-tier1 condition-clearable" title="Remove"'
+            + ' onclick="enemyRemoveCondition(\'' + escapeHtml(key) + '\',\'' + escapeHtml(c) + '\')">'
+            + label + ' ×</button>'
+          : '<span class="condition-badge condition-tier1">' + label + '</span>';
+      }).join(' ')
+    : '<span style="color:var(--text-dim);font-size:11px;">none</span>';
 
   let resolveBlock;
   if (res) {
@@ -167,23 +181,44 @@ function renderEnemyCard(key, enemy, opts) {
 
   let controls = '';
   if (opts.mmControls) {
+    // A Strike that lands 10+ takes 2 Resolve, so -2 is a first-class button
+    // rather than two clicks of -1. +1 exists because misclicks happen.
+    const resolveButtons = res
+      ? '<button class="btn btn-secondary btn-sm" title="Strike 10+"'
+        + ' onclick="enemyAdjustResolve(\'' + escapeHtml(key) + '\', -2)">-2</button>'
+        + '<button class="btn btn-secondary btn-sm" title="Strike 7-9"'
+        + ' onclick="enemyAdjustResolve(\'' + escapeHtml(key) + '\', -1)">-1</button>'
+        + '<button class="btn btn-secondary btn-sm" title="Undo"'
+        + ' onclick="enemyAdjustResolve(\'' + escapeHtml(key) + '\', 1)">+1</button>'
+      : '<button class="btn btn-secondary btn-sm" title="Mooks fall to one Strike"'
+        + ' onclick="removeEnemy(\'' + escapeHtml(key) + '\')">Defeated</button>';
+
     controls =
-      '<div class="btn-row" style="margin-top:4px;">'
-      + (res ? '<button class="btn btn-secondary btn-sm" onclick="enemyTakeDamage(\'' + escapeHtml(key) + '\')">-1 Resolve</button>' : '')
-      + '<button class="btn btn-secondary btn-sm" onclick="enemyAddCondition(\'' + escapeHtml(key) + '\')">+Cond</button>'
+      '<div class="btn-row" style="margin-top:6px;">'
+      + resolveButtons
+      + '<button class="btn btn-secondary btn-sm" onclick="enemyAddCondition(\'' + escapeHtml(key) + '\')">+ Condition</button>'
       + '<button class="btn btn-secondary btn-sm" onclick="removeEnemy(\'' + escapeHtml(key) + '\')">Remove</button>'
       + '</div>';
   }
 
+  const tactics = opts.mmControls && enemy.tactics
+    ? '<div class="enemy-tactics" title="Tactics">' + escapeHtml(enemy.tactics) + '</div>' : '';
+  const special = opts.mmControls && enemy.special
+    ? '<div class="enemy-tactics"><strong>Special:</strong> ' + escapeHtml(enemy.special) + '</div>' : '';
+  const defeated = res && res.current <= 0 ? ' enemy-defeated' : '';
+
   return ''
-    + '<div class="enemy-tracker-entry">'
-    + '<div style="display:flex;justify-content:space-between;align-items:center;">'
+    + '<div class="enemy-tracker-entry' + defeated + '">'
+    + '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">'
     + '<strong>' + escapeHtml(enemy.name) + '</strong>'
-    + '<span style="font-size:11px;color:var(--text-dim);">' + escapeHtml(enemy.tier) + ' | TR ' + (enemy.tr || '?') + '</span>'
+    + '<span style="font-size:11px;color:var(--text-dim);white-space:nowrap;">'
+    + escapeHtml(enemy.tier) + ' | TR ' + (enemy.tr || '?') + '</span>'
     + '</div>'
     + '<div style="margin-top:4px;">' + resolveBlock + '</div>'
-    + '<div style="font-size:12px;margin-top:2px;">Cond: ' + escapeHtml(condStr) + '</div>'
+    + '<div style="font-size:12px;margin-top:4px;">' + condHtml + '</div>'
     + phaseNote
+    + tactics
+    + special
     + controls
     + '</div>';
 }
@@ -202,10 +237,17 @@ function renderThreatClockCard(clock, opts) {
   if (opts.mmControls) {
     controls =
       '<div class="btn-row" style="margin-top:4px;">'
-      + '<button class="btn btn-secondary btn-sm" onclick="clockAdvance(\'' + escapeHtml(clock.id) + '\', \'partial_success\')">Advance (7-9)</button>'
-      + '<button class="btn btn-secondary btn-sm" onclick="clockAdvance(\'' + escapeHtml(clock.id) + '\', \'failure\')">Advance (6-)</button>'
-      + '<button class="btn btn-secondary btn-sm" onclick="clockWindBack(\'' + escapeHtml(clock.id) + '\')">Wind Back</button>'
-      + '</div>';
+      + '<button class="btn btn-secondary btn-sm" title="A 7-9 advances the clock"'
+      + ' onclick="clockAdvance(\'' + escapeHtml(clock.id) + '\', \'partial_success\')">Advance (7-9)</button>'
+      + '<button class="btn btn-secondary btn-sm" title="A 6- advances the clock"'
+      + ' onclick="clockAdvance(\'' + escapeHtml(clock.id) + '\', \'failure\')">Advance (6-)</button>'
+      + '<button class="btn btn-secondary btn-sm" title="Spend an action to push the hazard back"'
+      + ' onclick="clockWindBack(\'' + escapeHtml(clock.id) + '\')">Wind Back</button>'
+      + '<button class="btn btn-secondary btn-sm" title="Remove this clock"'
+      + ' onclick="deleteClock(\'' + escapeHtml(clock.id) + '\')">Remove</button>'
+      + '</div>'
+      + '<div style="font-size:11px;color:var(--text-dim);margin-top:2px;">'
+      + 'A 10+ never advances a clock.</div>';
   }
 
   return ''

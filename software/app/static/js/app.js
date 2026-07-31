@@ -30,6 +30,9 @@ const state = {
   threatClocks: {},        // clock_id -> clock (PHB III.2, D4)
   inCombat: false,
   postures: {},            // player_name -> posture (after reveal)
+  connectionStatus: 'connecting',  // 'online' | 'connecting' | 'offline'
+  sessions: [],            // MM dashboard: sessions listed from the API
+  editingEnemyId: null,    // Builder: enemy currently loaded for edit, if any
 };
 
 // ---------------------------------------------------------------------------
@@ -166,21 +169,55 @@ async function loadSessionList() {
   const resp = await apiFetch('/api/sessions/', 'GET');
   if (!resp.ok) return;
   const data = await resp.json();
+  state.sessions = data.sessions || [];
+
   const list = document.getElementById('session-list');
   list.innerHTML = '';
-  if (data.sessions.length === 0) {
-    list.innerHTML = '<li style="color:var(--text-dim);font-size:13px;">No sessions yet.</li>';
-    return;
+  if (state.sessions.length === 0) {
+    list.innerHTML = `<li class="empty-state">No sessions yet. Create one above, then generate an
+      invite link for each player.</li>`;
+  } else {
+    state.sessions.forEach((s, i) => {
+      const li = document.createElement('li');
+      li.className = 'player-list-item';
+      li.innerHTML = `
+        <span><strong>${escapeHtml(s.name)}</strong>
+          <small style="color:var(--text-dim)">${s.player_count} player${s.player_count === 1 ? '' : 's'}</small></span>
+        <span class="btn-row" style="margin:0;"></span>`;
+      const actions = li.querySelector('.btn-row');
+
+      const open = document.createElement('button');
+      open.className = 'btn btn-sm btn-primary';
+      open.textContent = 'Open';
+      open.onclick = () => enterSession(s.id, s.name);
+      actions.appendChild(open);
+
+      const copyId = document.createElement('button');
+      copyId.className = 'btn btn-sm btn-secondary';
+      copyId.textContent = 'Copy ID';
+      copyId.onclick = () => copyToClipboard(s.id, 'Session ID copied.');
+      actions.appendChild(copyId);
+
+      const del = document.createElement('button');
+      del.className = 'btn btn-sm btn-secondary';
+      del.textContent = 'Delete';
+      del.onclick = () => deleteSession(s.id, s.name, s.player_count);
+      actions.appendChild(del);
+
+      list.appendChild(li);
+    });
   }
-  data.sessions.forEach(s => {
-    const li = document.createElement('li');
-    li.className = 'player-list-item';
-    li.innerHTML = `
-      <span>${s.name} <small style="color:var(--text-dim)">(${s.player_count} players)</small></span>
-      <button class="btn btn-sm btn-primary" onclick="enterSession('${s.id}', '${s.name}')">Open</button>
-    `;
-    list.appendChild(li);
-  });
+
+  // The invite form used to require pasting a session ID that was listed
+  // directly above it. It picks from the same list now.
+  const picker = document.getElementById('invite-session-id');
+  if (picker) {
+    const previous = picker.value;
+    picker.innerHTML = state.sessions.length
+      ? state.sessions.map(s => `<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)}</option>`).join('')
+      : '<option value="">-- create a session first --</option>';
+    if (state.sessions.some(s => s.id === previous)) picker.value = previous;
+  }
 }
 
 async function loadAvailableFacets() {
@@ -201,38 +238,85 @@ async function loadAvailableFacets() {
   });
 }
 
-async function createSession() {
+async function createSession(ev) {
   const name = document.getElementById('new-session-name').value.trim();
-  if (!name) { alert('Session name is required.'); return; }
+  if (!name) { notify('Give the session a name first.', 'warn'); focusElement('new-session-name'); return; }
 
   const checkboxes = document.querySelectorAll('[id^="facet-"]:checked');
   const activeFacetIds = Array.from(checkboxes).map(cb => cb.value);
 
-  const resp = await apiFetch('/api/sessions/', 'POST', { name, active_facet_ids: activeFacetIds });
-  if (resp.ok) {
-    const data = await resp.json();
-    document.getElementById('new-session-name').value = '';
-    loadSessionList();
-    document.getElementById('session-created-msg').textContent = `Session "${data.name}" created (ID: ${data.session_id})`;
-  } else {
-    const err = await resp.json();
-    alert(err.detail || 'Failed to create session.');
-  }
+  await withPending(ev && ev.target, 'Creating...', async () => {
+    const resp = await apiFetch('/api/sessions/', 'POST', { name, active_facet_ids: activeFacetIds });
+    if (resp.ok) {
+      const data = await resp.json();
+      document.getElementById('new-session-name').value = '';
+      await loadSessionList();
+      document.getElementById('session-created-msg').textContent =
+        `Session "${data.name}" created. Generate an invite link for each player below.`;
+      notify(`Session "${data.name}" created.`, 'success');
+    } else {
+      const err = await resp.json();
+      notify(err.detail || 'Failed to create session.', 'error');
+    }
+  });
 }
 
-async function generateInvite() {
-  const sessionId = state.sessionId || document.getElementById('invite-session-id').value.trim();
+async function generateInvite(ev) {
+  const picker = document.getElementById('invite-session-id');
+  const sessionId = picker ? picker.value : state.sessionId;
   const playerName = document.getElementById('invite-player-name').value.trim();
-  if (!sessionId || !playerName) { alert('Session ID and player name are required.'); return; }
+  if (!sessionId) { notify('Create a session first.', 'warn'); return; }
+  if (!playerName) { notify('Enter the player\'s name.', 'warn'); focusElement('invite-player-name'); return; }
 
-  const resp = await apiFetch('/api/sessions/invite', 'POST', { session_id: sessionId, player_name: playerName });
+  await withPending(ev && ev.target, 'Generating...', async () => {
+    const resp = await apiFetch('/api/sessions/invite', 'POST', { session_id: sessionId, player_name: playerName });
+    if (resp.ok) {
+      const data = await resp.json();
+      renderInviteResult('invite-result', data.invite_url, playerName);
+    } else {
+      const err = await resp.json();
+      notify(err.detail || 'Failed to generate invite.', 'error');
+    }
+  });
+}
+
+/**
+ * Invite links are single-use and get pasted into a chat app, so the copy button
+ * matters more than the link text. Rendered the same way in both places it appears.
+ */
+function renderInviteResult(containerId, url, playerName) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.style.display = 'block';
+  el.classList.remove('hidden');
+  el.innerHTML = `
+    <div class="invite-label">Single-use invite for <strong>${escapeHtml(playerName)}</strong></div>
+    <div class="invite-url"></div>
+    <div class="btn-row" style="margin-top:6px;"></div>`;
+  el.querySelector('.invite-url').textContent = url;
+  const copy = document.createElement('button');
+  copy.className = 'btn btn-primary btn-sm';
+  copy.textContent = 'Copy Link';
+  copy.onclick = () => copyToClipboard(url, `Invite for ${playerName} copied.`);
+  el.querySelector('.btn-row').appendChild(copy);
+}
+
+async function deleteSession(sessionId, sessionName, playerCount) {
+  const ok = await confirmDialog(
+    `Delete "${sessionName}"?`,
+    playerCount
+      ? `${playerCount} character${playerCount === 1 ? '' : 's'} in this session will be lost, and every `
+        + 'invite link for it stops working. Export any character you want to keep first.'
+      : 'Every invite link for this session stops working.',
+    'Delete Session');
+  if (!ok) return;
+
+  const resp = await apiFetch(`/api/sessions/${sessionId}`, 'DELETE');
   if (resp.ok) {
-    const data = await resp.json();
-    document.getElementById('invite-result').textContent = data.invite_url;
-    document.getElementById('invite-result').style.display = 'block';
+    await loadSessionList();
+    notify(`"${sessionName}" deleted.`, 'success');
   } else {
-    const err = await resp.json();
-    alert(err.detail || 'Failed to generate invite.');
+    notify('Failed to delete the session.', 'error');
   }
 }
 
@@ -243,20 +327,22 @@ function enterSession(sessionId, sessionName) {
 }
 
 // In-game invite generation for MM
-async function generateInviteInGame() {
+async function generateInviteInGame(ev) {
   const playerName = document.getElementById('play-invite-player-name').value.trim();
-  if (!playerName) { alert('Enter a player name.'); return; }
-  const resp = await apiFetch('/api/sessions/invite', 'POST', {
-    session_id: state.sessionId,
-    player_name: playerName,
+  if (!playerName) { notify('Enter a player name.', 'warn'); focusElement('play-invite-player-name'); return; }
+  await withPending(ev && ev.target, 'Generating...', async () => {
+    const resp = await apiFetch('/api/sessions/invite', 'POST', {
+      session_id: state.sessionId,
+      player_name: playerName,
+    });
+    if (resp.ok) {
+      const data = await resp.json();
+      renderInviteResult('play-invite-result', data.invite_url, playerName);
+    } else {
+      const err = await resp.json();
+      notify(err.detail || 'Failed to generate invite.', 'error');
+    }
   });
-  if (resp.ok) {
-    const data = await resp.json();
-    document.getElementById('play-invite-result').textContent = data.invite_url;
-  } else {
-    const err = await resp.json();
-    alert(err.detail || 'Failed.');
-  }
 }
 
 // ---------------------------------------------------------------------------
@@ -265,10 +351,12 @@ async function generateInviteInGame() {
 function connectWebSocket() {
   const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
   const wsUrl = `${protocol}//${location.host}/ws`;
+  setConnectionStatus('connecting');
   const ws = new WebSocket(wsUrl);
   state.ws = ws;
 
   ws.onopen = () => {
+    setConnectionStatus('online');
     ws.send(JSON.stringify({
       token: state.token,
       session_id: state.sessionId,
@@ -281,13 +369,29 @@ function connectWebSocket() {
   };
 
   ws.onclose = () => {
-    addSystemChat('Disconnected from server. Attempting to reconnect in 3s...');
+    setConnectionStatus('offline');
+    addSystemChat('Disconnected from server. Reconnecting in 3s...');
     setTimeout(connectWebSocket, 3000);
   };
 
   ws.onerror = () => {
-    addSystemChat('Connection error.');
+    setConnectionStatus('offline');
   };
+}
+
+/**
+ * Connection state is shown as a persistent dot in the header rather than a
+ * single line in a scrolling chat log — a dropped socket silently stops every
+ * action in the app, so it has to stay visible.
+ */
+function setConnectionStatus(status) {
+  state.connectionStatus = status;
+  const el = document.getElementById('header-connection');
+  if (!el) return;
+  const labels = { online: 'Connected', connecting: 'Connecting...', offline: 'Offline — reconnecting' };
+  el.className = 'conn-dot conn-' + status;
+  el.title = labels[status] || status;
+  el.setAttribute('aria-label', labels[status] || status);
 }
 
 function sendWS(msg) {
@@ -307,23 +411,36 @@ function handleServerMessage(msg) {
     case 'roll_result':
       onRollResult(msg);
       break;
+    case 'character_created':
+      onCharacterCreated(msg);
+      break;
+    case 'character_removed':
+      onCharacterRemoved(msg);
+      break;
     case 'player_joined':
       state.connectedPlayers.add(msg.player);
       addSystemChat(`${msg.player} joined the session.`);
       renderPlayPlayerList();
+      if (typeof renderPlayerPickers === 'function') renderPlayerPickers();
       break;
     case 'player_left':
       state.connectedPlayers.delete(msg.player);
       addSystemChat(`${msg.player} left the session.`);
       renderPlayPlayerList();
       break;
-    case 'spark_earned':
-      addSystemChat(`${msg.player} earned a Spark! (${msg.reason}). Sparks now: ${msg.sparks_now}`);
+    case 'spark_earned': {
+      const who = (state.allCharacters[msg.player] || {}).name || msg.player;
+      addSystemChat(`${who} earned a Spark — ${msg.reason}. Sparks now: ${msg.sparks_now}`);
+      notify(`${who} earned a Spark (${msg.reason}).`, 'gold');
+      if (state.allCharacters[msg.player]) state.allCharacters[msg.player].sparks = msg.sparks_now;
       if (msg.player === state.playerName && state.character) {
         state.character.sparks = msg.sparks_now;
         renderPlaySparkCounter();
       }
+      renderPlayPlayerList();
+      renderMMCombatConsole();
       break;
+    }
     case 'spark_nomination':
       onSparkNomination(msg);
       break;
@@ -388,6 +505,9 @@ function handleServerMessage(msg) {
     case 'clock_fill':
       onClockFill(msg);
       break;
+    case 'clock_deleted':
+      onClockDeleted(msg);
+      break;
     // Combat broadcasts
     case 'combat_started':
       onCombatStarted(msg);
@@ -426,11 +546,36 @@ function handleServerMessage(msg) {
     case 'cast_result':
       onCastResult(msg);
       break;
+    case 'saving_throw_result':
+      onSavingThrowResult(msg);
+      break;
+    case 'contested_roll_result':
+      onContestedRollResult(msg);
+      break;
+    // Advancement
+    case 'technique_selected':
+      onTechniqueSelected(msg);
+      break;
+    // Spark cadence
+    case 'act_break_opened':
+      onActBreakOpened(msg);
+      break;
+    case 'graceful_fail_claimed':
+      onGracefulFailClaimed(msg);
+      break;
+    case 'session_reset':
+      onSessionReset();
+      break;
     case 'error':
       addSystemChat(`Error: ${msg.message}`);
+      notify(msg.message, 'error');
       break;
     case 'pong':
       break;
+    default:
+      // Loud in development, harmless in play: an unhandled broadcast means the
+      // server grew a feature the UI has not caught up with.
+      console.warn('Unhandled server message type:', msg.type, msg);
   }
 }
 
@@ -449,6 +594,14 @@ function onStateReceived(data) {
     state.character = data.your_character;
   }
 
+  // Combat has no explicit flag in session state — a character in combat is one
+  // with a live Endurance pool, which is exactly the test the server itself uses
+  // ("Not in combat" == endurance_current is None). Deriving it here means a
+  // reconnect mid-fight restores the combat panel instead of hiding it until the
+  // next broadcast.
+  state.inCombat = Object.values(state.allCharacters)
+    .some(c => c.endurance_current !== null && c.endurance_current !== undefined);
+
   // Hide auth screens, show game screen
   document.getElementById('auth-screen').classList.add('hidden');
   document.getElementById('setup-screen').classList.add('hidden');
@@ -457,16 +610,15 @@ function onStateReceived(data) {
   document.getElementById('game-screen').classList.remove('hidden');
 
   renderHeader();
+  applyRoleVisibility();
 
-  // Show character creation if player has no character yet
-  if (state.role === 'player' && !state.character) {
-    document.getElementById('char-create-panel').classList.remove('hidden');
-    document.getElementById('character-panel').classList.add('hidden');
-    populateCharacterCreation();
-  } else {
-    document.getElementById('char-create-panel').classList.add('hidden');
-    document.getElementById('character-panel').classList.remove('hidden');
-  }
+  // The character panel is a player's sheet. The MM has no character, so
+  // showing it left them staring at an empty Attributes grid, a dead Roll Dice
+  // form, and an empty Skills table down the whole main column.
+  const needsCreation = state.role === 'player' && !state.character;
+  document.getElementById('char-create-panel').classList.toggle('hidden', !needsCreation);
+  document.getElementById('character-panel').classList.toggle('hidden', needsCreation || state.role === 'mm');
+  if (needsCreation) populateCharacterCreation();
 
   // Initialize all tabs
   initPlayTab();
@@ -504,9 +656,10 @@ function populateCharacterCreation() {
     facetSelect.appendChild(opt);
   });
 
-  // When facet changes, update background list
-  facetSelect.onchange = populateBackgroundSelect;
+  // When facet changes, update background list and the Facet blurb
+  facetSelect.onchange = () => { populateBackgroundSelect(); renderFacetDescription(); };
   populateBackgroundSelect();
+  renderFacetDescription();
 
   const attrContainer = document.getElementById('cc-attributes');
   attrContainer.innerHTML = '';
@@ -573,17 +726,35 @@ function onBackgroundChanged() {
   }
 
   const bg = (state.ruleset.backgrounds || []).find(b => b.id === bgId);
-  if (!bg) { infoEl.textContent = ''; domainWrap.classList.add('hidden'); return; }
+  if (!bg) { infoEl.innerHTML = ''; domainWrap.classList.add('hidden'); return; }
 
-  // Show background info
-  const startSkill = (state.ruleset.skills || []).find(s => s.id === bg.starting_skill);
-  let info = 'Starting: ' + (startSkill ? startSkill.name : bg.starting_skill) + ' (Practiced)';
-  if (bg.secondary_skill) {
-    const secSkill = (state.ruleset.skills || []).find(s => s.id === bg.secondary_skill);
-    info += ' | Secondary: ' + (secSkill ? secSkill.name : bg.secondary_skill) + ' (Novice +1 mark)';
+  const skillName = id => {
+    const s = (state.ruleset.skills || []).find(s => s.id === id);
+    return s ? s.name : id;
+  };
+
+  // A Background's five elements, laid out as rows rather than a run-on line
+  // with a literal newline in it (PHB II.5).
+  const rows = [];
+  if (bg.description) rows.push(`<div class="bg-desc">${escapeHtml(bg.description)}</div>`);
+  rows.push(`<div><span class="bg-key">Starting Skill</span> ${escapeHtml(skillName(bg.starting_skill))}
+             <span class="rank-badge rank-practiced">Practiced</span></div>`);
+
+  // Magic-granting Backgrounds replace the secondary skill with a domain origin.
+  if (bg.domain_origin) {
+    rows.push(`<div><span class="bg-key">Magic Origin</span> ${escapeHtml(bg.domain_origin)} domain
+               &mdash; replaces the secondary skill</div>`);
+  } else if (bg.secondary_skill) {
+    rows.push(`<div><span class="bg-key">Secondary Skill</span> ${escapeHtml(skillName(bg.secondary_skill))}
+               <span class="rank-badge rank-novice">Novice</span>
+               <span style="color:var(--text-dim);">+1 mark already recorded</span></div>`);
   }
-  if (bg.specialty) info += '\nSpecialty: ' + bg.specialty;
-  infoEl.textContent = info;
+  if (bg.specialty) {
+    rows.push(`<div><span class="bg-key">Specialty</span> ${escapeHtml(bg.specialty)}</div>
+               <div style="color:var(--text-dim);">A Standard roll becomes Easy when your Specialty applies
+               directly, and tangential knowledge needs no roll at all.</div>`);
+  }
+  infoEl.innerHTML = rows.join('');
 
   // Show magic domain selector if background has domain_origin or is a Soul magic background
   if (bg.domain_origin) {
@@ -593,6 +764,28 @@ function onBackgroundChanged() {
     domainWrap.classList.add('hidden');
     document.getElementById('cc-magic-domain').value = '';
   }
+}
+
+/**
+ * Facets are the first choice a new player makes and the one with the least
+ * context on screen, so the chosen Facet describes itself.
+ */
+function renderFacetDescription() {
+  const el = document.getElementById('cc-facet-info');
+  if (!el || !state.ruleset) return;
+  const facetId = document.getElementById('cc-facet').value;
+  const facet = (state.ruleset.character_facets || []).find(cf => cf.id === facetId);
+  if (!facet) { el.innerHTML = ''; return; }
+
+  const skills = (state.ruleset.skills || [])
+    .filter(s => s.facet === facetId && s.status !== 'stub')
+    .map(s => s.name);
+
+  el.innerHTML = `
+    ${facet.description ? `<div class="bg-desc">${escapeHtml(facet.description)}</div>` : ''}
+    ${skills.length ? `<div><span class="bg-key">Facet Skills</span> ${escapeHtml(skills.join(', '))}</div>` : ''}
+    <div style="color:var(--text-dim);">Skills in your primary Facet cost 1 Skill Point to advance;
+    everything else costs 2.</div>`;
 }
 
 function populateMagicDomainSelect(domainOrigin) {
@@ -616,6 +809,59 @@ function populateMagicDomainSelect(domainOrigin) {
   });
 }
 
+/**
+ * Import an existing .fof character instead of rebuilding it by hand.
+ *
+ * The server validates the file against the session's ruleset and rejects a
+ * player_name that doesn't match the caller's token, so the client only has to
+ * read the file and surface whatever comes back.
+ */
+async function importCharacterFile(input) {
+  const file = input && input.files && input.files[0];
+  if (!file) return;
+  const errEl = document.getElementById('cc-error');
+  if (errEl) errEl.textContent = '';
+
+  let text;
+  try {
+    text = await file.text();
+  } catch (e) {
+    notify('Could not read that file.', 'error');
+    return;
+  }
+
+  const resp = await apiFetch('/api/characters/upload', 'POST', {
+    session_id: state.sessionId,
+    fof_yaml: text,
+  });
+  input.value = '';  // allow re-selecting the same file after a fix
+
+  if (resp.ok) {
+    const data = await resp.json();
+    state.character = data.character;
+    state.allCharacters[data.character.player_name] = data.character;
+    notify(`${data.character.name} imported.`, 'success');
+    showCharacterPanels();
+  } else {
+    const err = await resp.json().catch(() => ({}));
+    const detail = err.detail;
+    const message = typeof detail === 'string'
+      ? detail
+      : (detail && detail.errors ? detail.errors.join('; ') : 'Import failed.');
+    if (errEl) errEl.textContent = message;
+    notify(message, 'error');
+  }
+}
+
+function showCharacterPanels() {
+  document.getElementById('char-create-panel').classList.add('hidden');
+  document.getElementById('character-panel').classList.remove('hidden');
+  applyRoleVisibility();
+  initPlayTab();
+  initToolsTab();
+  if (typeof initBuilderTab === 'function') initBuilderTab();
+}
+
 function updateAttrPointsDisplay() {
   const inputs = document.querySelectorAll('.attr-input');
   let total = 0;
@@ -628,43 +874,74 @@ function updateAttrPointsDisplay() {
   el.style.color = remaining === 0 ? 'var(--success)' : remaining < 0 ? 'var(--failure)' : 'var(--text-dim)';
 }
 
-async function submitCharacterCreation() {
+async function submitCharacterCreation(ev) {
   const name = document.getElementById('cc-name').value.trim();
   const primaryFacet = document.getElementById('cc-facet').value;
   const errEl = document.getElementById('cc-error');
   errEl.textContent = '';
 
-  if (!name) { errEl.textContent = 'Character name is required.'; return; }
+  if (!name) {
+    errEl.textContent = 'Give your character a name.';
+    focusElement('cc-name');
+    return;
+  }
 
   const attributes = {};
   document.querySelectorAll('.attr-input').forEach(inp => {
     attributes[inp.dataset.attr] = parseInt(inp.value);
   });
 
+  // Catch the point budget here rather than letting the server bounce it back
+  // as a validation blob — the user is looking straight at the counter.
+  const dist = state.ruleset && state.ruleset.attribute_distribution;
+  const target = dist ? dist.total_points : 18;
+  const spent = Object.values(attributes).reduce((a, b) => a + b, 0);
+  if (spent !== target) {
+    errEl.textContent = spent > target
+      ? `You have spent ${spent} of ${target} points — lower ${spent - target} rating${spent - target === 1 ? '' : 's'}.`
+      : `You have ${target - spent} point${target - spent === 1 ? '' : 's'} left to spend.`;
+    return;
+  }
+
   const backgroundId = document.getElementById('cc-background').value || null;
   const magicDomain = document.getElementById('cc-magic-domain').value || null;
 
-  const resp = await apiFetch('/api/characters/', 'POST', {
-    session_id: state.sessionId,
-    character_name: name,
-    primary_facet: primaryFacet,
-    attributes,
-    background_id: backgroundId,
-    magic_domain: magicDomain,
-  });
+  await withPending(ev && ev.target, 'Creating...', async () => {
+    const resp = await apiFetch('/api/characters/', 'POST', {
+      session_id: state.sessionId,
+      character_name: name,
+      primary_facet: primaryFacet,
+      attributes,
+      background_id: backgroundId,
+      magic_domain: magicDomain,
+    });
 
-  if (resp.ok) {
-    const data = await resp.json();
-    state.character = data.character;
-    document.getElementById('char-create-panel').classList.add('hidden');
-    document.getElementById('character-panel').classList.remove('hidden');
-    initPlayTab();
-    initToolsTab();
-    if (typeof initBuilderTab === 'function') initBuilderTab();
-  } else {
-    const err = await resp.json();
-    errEl.textContent = JSON.stringify(err.detail || 'Character creation failed.');
+    if (resp.ok) {
+      const data = await resp.json();
+      state.character = data.character;
+      state.allCharacters[data.character.player_name] = data.character;
+      notify(`${data.character.name} is ready to play.`, 'success');
+      showCharacterPanels();
+    } else {
+      const err = await resp.json().catch(() => ({}));
+      errEl.textContent = formatApiError(err.detail, 'Character creation failed.');
+    }
+  });
+}
+
+/**
+ * FastAPI validation details arrive as a string, a list of pydantic error
+ * objects, or a {errors: [...]} dict. They used to be JSON.stringify'd straight
+ * into the page.
+ */
+function formatApiError(detail, fallback) {
+  if (!detail) return fallback;
+  if (typeof detail === 'string') return detail;
+  if (Array.isArray(detail)) {
+    return detail.map(d => (typeof d === 'string' ? d : d.msg || JSON.stringify(d))).join('; ');
   }
+  if (detail.errors) return [].concat(detail.errors).join('; ');
+  return fallback;
 }
 
 // ---------------------------------------------------------------------------
@@ -673,6 +950,494 @@ async function submitCharacterCreation() {
 function renderHeader() {
   document.getElementById('header-session-name').textContent = state.sessionName || 'Session';
   document.getElementById('header-identity').textContent = state.role === 'mm' ? 'Mirror Master' : (state.playerName || 'Player');
+  setConnectionStatus(state.connectionStatus || 'online');
+}
+
+/**
+ * Show or hide every role-scoped block in one place.
+ *
+ * Role visibility used to be set piecemeal inside each tab's init, which meant a
+ * block hidden by one init could be re-shown by another (and MM-only controls
+ * leaked onto the player view after a reconnect). `data-role` on the element is
+ * now the single declaration.
+ */
+function applyRoleVisibility() {
+  const role = state.role;
+  document.querySelectorAll('[data-role]').forEach(el => {
+    el.classList.toggle('hidden', el.dataset.role !== role);
+  });
+  // Controls that need a character, which the MM never has.
+  const hasCharacter = !!state.character;
+  document.querySelectorAll('[data-requires-character]').forEach(el => {
+    el.classList.toggle('hidden', !hasCharacter);
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Broadcast handlers for advancement, saves, contests, and Spark cadence
+// ---------------------------------------------------------------------------
+/**
+ * A character now exists in the session.
+ *
+ * Everything that reads `allCharacters` has to refresh: the MM's combat roster,
+ * every player picker, the party list, and the party sheets. Without this the MM
+ * sat looking at an empty roster while players built characters in front of them.
+ */
+function onCharacterCreated(msg) {
+  const isNew = !state.allCharacters[msg.player];
+  state.allCharacters[msg.player] = msg.character;
+
+  if (msg.player === state.playerName) state.character = msg.character;
+
+  if (isNew) {
+    addSystemChat(`${msg.character.name} joins the party.`);
+    if (msg.player !== state.playerName) notify(`${msg.character.name} joins the party.`, 'success');
+  }
+
+  renderPlayPlayerList();
+  renderPlayerPickers();
+  renderMMCombatConsole();
+  if (typeof populateTargetSelects === 'function') populateTargetSelects();
+  if (typeof initToolsTab === 'function') initToolsTab();
+}
+
+function onCharacterRemoved(msg) {
+  delete state.allCharacters[msg.player];
+  addSystemChat(`${msg.player}'s character was removed.`);
+
+  if (msg.player === state.playerName) {
+    // Your own sheet is gone — drop straight back into creation rather than
+    // leaving a stale sheet on screen that no longer exists server-side.
+    state.character = null;
+    notify('Your character was removed. Build a new one.', 'warn');
+    document.getElementById('character-panel').classList.add('hidden');
+    document.getElementById('char-create-panel').classList.remove('hidden');
+    populateCharacterCreation();
+  } else {
+    notify(`${msg.player}'s character was removed.`, 'warn');
+  }
+
+  renderPlayPlayerList();
+  renderPlayerPickers();
+  renderMMCombatConsole();
+  if (typeof populateTargetSelects === 'function') populateTargetSelects();
+  if (typeof initToolsTab === 'function') initToolsTab();
+}
+
+/**
+ * Delete a character. Players rebuild their own; the MM may clear anyone's.
+ * Their single-use invite is already spent, so without this a misbuilt
+ * character was permanent.
+ */
+async function deleteCharacter(playerName) {
+  const who = playerName || state.playerName;
+  const char = state.allCharacters[who];
+  const ok = await confirmDialog(
+    `Delete ${char ? char.name : who}?`,
+    'Attributes, skills, Techniques, advancement, and inventory are all lost. '
+    + 'Export the character first if you want to keep any of it.',
+    'Delete Character');
+  if (!ok) return;
+
+  const resp = await apiFetch(`/api/characters/${state.sessionId}/${who}`, 'DELETE');
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({}));
+    notify(formatApiError(err.detail, 'Failed to delete the character.'), 'error');
+  }
+  // The success path is driven by the character_removed broadcast, so both the
+  // deleter and everyone else take exactly the same code path.
+}
+
+function onTechniqueSelected(msg) {
+  const name = (state.allCharacters[msg.player] || {}).name || msg.player;
+  const label = techniqueDisplayName(msg.technique_id) + (msg.choice ? ' (' + msg.choice + ')' : '');
+  addSystemChat(`${name} learned ${label}.`);
+  notify(`${name} learned ${label}.`, 'success');
+
+  if (state.allCharacters[msg.player]) {
+    state.allCharacters[msg.player].techniques = msg.all_techniques || [];
+    state.allCharacters[msg.player].technique_picks_available = msg.technique_picks_available;
+  }
+  if (msg.player === state.playerName && state.character) {
+    state.character.techniques = msg.all_techniques || [];
+    state.character.technique_picks_available = msg.technique_picks_available;
+    // A magic-granting Technique lifts the pre-Technique scope cap, so the
+    // Magic panel's scope radios have to be re-evaluated.
+    state.character.magic_technique_active = true;
+    if (typeof renderMagicPanel === 'function') renderMagicPanel();
+    if (typeof renderBuilderTechniques === 'function') renderBuilderTechniques();
+  }
+  if (typeof initToolsTab === 'function') initToolsTab();
+}
+
+function onSavingThrowResult(msg) {
+  const name = (state.allCharacters[msg.player] || {}).name || msg.player;
+  const major = majorAttributeName(msg.major_attribute_id);
+  state.rollLog.unshift({ player_name: msg.player, character_name: name, ...msg.roll });
+  renderPlayRollLog();
+
+  addSystemChat(`${name} makes a ${major} save: ${msg.roll.outcome_label} (${msg.roll.total}).`);
+
+  if (msg.player === state.playerName && state.character) {
+    state.character.sparks = msg.sparks_remaining;
+    renderPlaySparkCounter();
+    showRollResultBox({ player: msg.player, character_name: name }, msg.roll);
+  }
+  if (typeof checkGracefulFailPrompt === 'function') {
+    checkGracefulFailPrompt({ ...msg, character_name: name });
+  }
+}
+
+function onContestedRollResult(msg) {
+  const nameA = (state.allCharacters[msg.player_a] || {}).name || msg.player_a;
+  const nameB = (state.allCharacters[msg.player_b] || {}).name || msg.player_b;
+  state.rollLog.unshift({ player_name: msg.player_a, character_name: nameA, ...msg.roll_a });
+  state.rollLog.unshift({ player_name: msg.player_b, character_name: nameB, ...msg.roll_b });
+  renderPlayRollLog();
+
+  const winnerText = msg.winner === 'tie'
+    ? 'Tie — neither gains the upper hand.'
+    : ((state.allCharacters[msg.winner] || {}).name || msg.winner) + ' wins the contest.';
+  const summary = `Contest: ${nameA} ${msg.roll_a.total} vs ${nameB} ${msg.roll_b.total}. ${winnerText}`;
+  addSystemChat(summary);
+  notify(summary, 'info', { duration: 7000 });
+
+  const box = document.getElementById('play-contested-result');
+  if (box) {
+    box.classList.remove('hidden');
+    box.innerHTML = `
+      <div class="contest-side ${msg.winner === msg.player_a ? 'contest-winner' : ''}">
+        <div class="contest-name">${escapeHtml(nameA)}</div>
+        <div class="contest-total">${msg.roll_a.total}</div>
+        <div class="contest-outcome">${escapeHtml(msg.roll_a.outcome_label)}</div>
+      </div>
+      <div class="contest-vs">vs</div>
+      <div class="contest-side ${msg.winner === msg.player_b ? 'contest-winner' : ''}">
+        <div class="contest-name">${escapeHtml(nameB)}</div>
+        <div class="contest-total">${msg.roll_b.total}</div>
+        <div class="contest-outcome">${escapeHtml(msg.roll_b.outcome_label)}</div>
+      </div>`;
+  }
+}
+
+function onActBreakOpened(msg) {
+  addSystemChat(msg.message);
+  if (state.role === 'player') {
+    notify(msg.message, 'gold', {
+      sticky: true,
+      key: 'act-break',
+      action: 'Nominate',
+      onAction: () => { switchTab('play'); focusElement('play-peer-spark-player'); },
+    });
+  } else {
+    notify('Act break opened — players are nominating.', 'gold');
+  }
+}
+
+function onGracefulFailClaimed(msg) {
+  addSystemChat(msg.message);
+  if (state.role === 'mm') {
+    notify(msg.message, 'gold', {
+      sticky: true,
+      key: 'graceful-fail-claim',
+      action: 'Award Spark',
+      onAction: () => sendWS({ type: 'spark_earn', player_name: msg.player, reason: 'Graceful failure' }),
+    });
+  }
+}
+
+function onSessionReset() {
+  addSystemChat('New session started — Sparks refreshed and once-per-session Techniques reset.');
+  notify('New session started. Sparks refreshed.', 'success');
+  // Every character's Spark count and technique usage changed server-side; the
+  // cheapest correct refresh is to re-read state rather than mirror the rules here.
+  sendWS({ type: 'ping' });
+  location.reload();
+}
+
+// ---------------------------------------------------------------------------
+// Small shared lookups
+// ---------------------------------------------------------------------------
+function majorAttributeName(id) {
+  const found = state.ruleset && (state.ruleset.major_attributes || []).find(m => m.id === id);
+  return found ? found.name : id;
+}
+
+function techniqueDisplayName(id) {
+  if (state.ruleset) {
+    for (const cf of state.ruleset.character_facets || []) {
+      const t = (cf.techniques || []).find(t => t.id === id);
+      if (t && t.name) return t.name;
+    }
+  }
+  return String(id || '').replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function toggleCollapsible(toggle) {
+  const body = toggle.parentElement.querySelector('.collapsible-body');
+  if (!body) return;
+  const closed = body.classList.toggle('hidden');
+  toggle.setAttribute('aria-expanded', String(!closed));
+  const arrow = toggle.querySelector('.toggle-arrow');
+  if (arrow) arrow.textContent = closed ? '+' : '−';
+}
+
+// ---------------------------------------------------------------------------
+// Help drawer
+//
+// Nothing in the app told a first-time MM that enemy attacks are resolved by
+// landing a Condition, or where any given task lives. This is that map.
+// ---------------------------------------------------------------------------
+const HELP_MM = [
+  ['Play — Combat', 'Start Combat, Reveal Postures, End Exchange. Enemies never roll: when one attacks, pick the incoming Condition on the target and press Land Hit. Tick "reaction softened it" if their Dodge or Parry got a 7-9 — armour and reactions never stack, and the engine picks the greater reduction.'],
+  ['Play — Enemy Tracker', 'Spawn saved enemies, deplete Resolve as Strikes land (10+ takes 2, 7-9 takes 1), and hang Conditions. Mooks have no Resolve — one Strike removes them.'],
+  ['Play — Threat Clocks', 'A visible countdown on a hazard. A 7-9 or 6- near it advances a segment; a 10+ never does. Players can spend an action to wind one back.'],
+  ['Play — Sparks', 'Open Act Break prompts every player to nominate someone. You confirm each nomination and every Graceful Failure claim. Award directly any time.'],
+  ['Play — Contested Roll', 'Two characters pushing against each other. Highest total wins.'],
+  ['Play — Session', 'Invite links (one per player, single use) and Start New Session, which refreshes Sparks and re-arms once-per-session Techniques.'],
+  ['Builder — Enemies & Encounters', 'Build enemies, then group them into an Encounter. Run drops the whole encounter into the live tracker in one action.'],
+  ['Builder — Advancement', 'Mark skills used so players can spend Skill Points on them, and award marks directly.'],
+  ['Builder — Notes', 'Private notes per character, plus campaign notes stored in this browser.'],
+  ['Tools', 'Every character sheet, party inventory, rules quick references, and encounter difficulty guidance.'],
+];
+
+const HELP_PLAYER = [
+  ['Play — Rolling', 'Click an Attribute, or hit Roll on a skill to use both. Stage Sparks on the pips first — each adds a d6 and drops the lowest.'],
+  ['Play — Saving Throws', 'When something happens to you rather than something you attempt, roll a Major Attribute save.'],
+  ['Play — Combat', 'Declare a Posture each exchange, then Strike, React, Support, or Maneuver. Press spends 1 Endurance for an extra die. At 0 Endurance you can only Absorb.'],
+  ['Play — Magic', 'Domain plus Intent plus Scope. Describe what you want; the difficulty comes from your domain type and the scope you reach for.'],
+  ['Play — Sparks', 'Nominate another player any time; the MM confirms. On a 6-, narrate how it makes things worse and claim a Graceful Failure Spark.'],
+  ['Builder', 'Spend Skill Points on skills you actually used, pick Techniques as Facet levels open them, and keep your own notes.'],
+  ['Tools', 'Your sheet, the rest of the party, your inventory, and rules quick references.'],
+];
+
+function toggleHelp() {
+  const drawer = document.getElementById('help-drawer');
+  if (!drawer) return;
+  const opening = drawer.classList.contains('hidden');
+  if (opening) {
+    const rows = state.role === 'mm' ? HELP_MM : HELP_PLAYER;
+    document.getElementById('help-content').innerHTML = rows.map(([where, what]) =>
+      `<div class="help-row"><div class="help-where">${escapeHtml(where)}</div>
+       <div class="help-what">${escapeHtml(what)}</div></div>`).join('');
+  }
+  drawer.classList.toggle('hidden');
+}
+
+function focusElement(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  el.focus();
+  el.classList.add('flash-target');
+  setTimeout(() => el.classList.remove('flash-target'), 1200);
+}
+
+// ---------------------------------------------------------------------------
+// Notifications
+//
+// Everything used to land in the chat log with equal weight — a rules error and
+// an idle chat line looked identical. Toasts carry anything the user must not
+// miss; the chat log keeps the durable transcript.
+// ---------------------------------------------------------------------------
+function notify(message, kind, opts) {
+  opts = opts || {};
+  const host = document.getElementById('toast-host');
+  if (!host) return;
+
+  // A keyed toast replaces the previous one with the same key. Sticky prompts
+  // ("claim your Graceful Failure") otherwise pile up one per triggering roll
+  // and bury the panel behind them.
+  if (opts.key) {
+    host.querySelectorAll(`[data-toast-key="${CSS.escape(opts.key)}"]`).forEach(el => el.remove());
+  }
+
+  const toast = document.createElement('div');
+  toast.className = 'toast toast-' + (kind || 'info');
+  toast.setAttribute('role', kind === 'error' ? 'alert' : 'status');
+  if (opts.key) toast.dataset.toastKey = opts.key;
+
+  const text = document.createElement('span');
+  text.className = 'toast-text';
+  text.textContent = message;
+  toast.appendChild(text);
+
+  if (opts.action && opts.onAction) {
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-gold btn-sm';
+    btn.textContent = opts.action;
+    btn.onclick = () => { opts.onAction(); dismiss(); };
+    toast.appendChild(btn);
+  }
+
+  const close = document.createElement('button');
+  close.className = 'toast-close';
+  close.textContent = '×';
+  close.setAttribute('aria-label', 'Dismiss');
+  close.onclick = dismiss;
+  toast.appendChild(close);
+
+  host.appendChild(toast);
+
+  // Sticky toasts wait for a decision; the rest clear themselves.
+  let timer = null;
+  if (!opts.sticky) {
+    timer = setTimeout(dismiss, opts.duration || (kind === 'error' ? 8000 : 4500));
+  }
+
+  function dismiss() {
+    if (timer) clearTimeout(timer);
+    toast.classList.add('toast-leaving');
+    setTimeout(() => toast.remove(), 200);
+  }
+  return dismiss;
+}
+
+/**
+ * Promise-based confirm. Replaces window.confirm so destructive actions read
+ * in the app's own voice and can name what is about to be lost.
+ */
+function confirmDialog(title, body, confirmLabel) {
+  return new Promise(resolve => {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `
+      <div class="modal" role="dialog" aria-modal="true" aria-label="${escapeHtml(title)}">
+        <div class="modal-title">${escapeHtml(title)}</div>
+        <div class="modal-body">${escapeHtml(body)}</div>
+        <div class="btn-row" style="justify-content:flex-end;">
+          <button class="btn btn-secondary btn-sm" data-act="cancel">Cancel</button>
+          <button class="btn btn-primary btn-sm" data-act="ok">${escapeHtml(confirmLabel || 'Confirm')}</button>
+        </div>
+      </div>`;
+
+    function close(result) {
+      document.removeEventListener('keydown', onKey);
+      overlay.remove();
+      resolve(result);
+    }
+    function onKey(e) { if (e.key === 'Escape') close(false); }
+
+    overlay.onclick = (e) => {
+      if (e.target === overlay) return close(false);
+      const act = e.target.dataset && e.target.dataset.act;
+      if (act === 'ok') close(true);
+      if (act === 'cancel') close(false);
+    };
+    document.addEventListener('keydown', onKey);
+    document.body.appendChild(overlay);
+    const ok = overlay.querySelector('[data-act="ok"]');
+    if (ok) ok.focus();
+  });
+}
+
+/**
+ * Prompt for a single line of text. Same reason as confirmDialog — window.prompt
+ * is unstyled, blocks the whole page, and is suppressed in some embedded views.
+ */
+function promptDialog(title, placeholder, initial) {
+  return new Promise(resolve => {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `
+      <div class="modal" role="dialog" aria-modal="true" aria-label="${escapeHtml(title)}">
+        <div class="modal-title">${escapeHtml(title)}</div>
+        <input type="text" class="modal-input" placeholder="${escapeHtml(placeholder || '')}"
+               value="${escapeHtml(initial || '')}">
+        <div class="btn-row" style="justify-content:flex-end;">
+          <button class="btn btn-secondary btn-sm" data-act="cancel">Cancel</button>
+          <button class="btn btn-primary btn-sm" data-act="ok">OK</button>
+        </div>
+      </div>`;
+
+    const input = overlay.querySelector('.modal-input');
+    function close(result) {
+      document.removeEventListener('keydown', onKey);
+      overlay.remove();
+      resolve(result);
+    }
+    function onKey(e) {
+      if (e.key === 'Escape') close(null);
+      if (e.key === 'Enter' && document.activeElement === input) close(input.value.trim() || null);
+    }
+    overlay.onclick = (e) => {
+      if (e.target === overlay) return close(null);
+      const act = e.target.dataset && e.target.dataset.act;
+      if (act === 'ok') close(input.value.trim() || null);
+      if (act === 'cancel') close(null);
+    };
+    document.addEventListener('keydown', onKey);
+    document.body.appendChild(overlay);
+    input.focus();
+    input.select();
+  });
+}
+
+/**
+ * Choose one option from a list. Used where a decision has a fixed legal set —
+ * a Technique's domain choice, for instance — so the user picks rather than types.
+ * Resolves to the chosen value, or null if cancelled.
+ */
+function selectDialog(title, body, options) {
+  return new Promise(resolve => {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `
+      <div class="modal" role="dialog" aria-modal="true" aria-label="${escapeHtml(title)}">
+        <div class="modal-title">${escapeHtml(title)}</div>
+        <div class="modal-body">${escapeHtml(body)}</div>
+        <select class="modal-input">
+          ${options.map(o => `<option value="${escapeHtml(o.value)}">${escapeHtml(o.label)}</option>`).join('')}
+        </select>
+        <div class="btn-row" style="justify-content:flex-end;">
+          <button class="btn btn-secondary btn-sm" data-act="cancel">Cancel</button>
+          <button class="btn btn-primary btn-sm" data-act="ok">Confirm</button>
+        </div>
+      </div>`;
+
+    const select = overlay.querySelector('.modal-input');
+    function close(result) {
+      document.removeEventListener('keydown', onKey);
+      overlay.remove();
+      resolve(result);
+    }
+    function onKey(e) { if (e.key === 'Escape') close(null); }
+    overlay.onclick = (e) => {
+      if (e.target === overlay) return close(null);
+      const act = e.target.dataset && e.target.dataset.act;
+      if (act === 'ok') close(select.value);
+      if (act === 'cancel') close(null);
+    };
+    document.addEventListener('keydown', onKey);
+    document.body.appendChild(overlay);
+    select.focus();
+  });
+}
+
+/**
+ * Run an async action with the triggering button disabled, so a slow round-trip
+ * cannot be double-submitted.
+ */
+async function withPending(btn, label, fn) {
+  if (!btn) return fn();
+  const original = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = label || original;
+  try {
+    return await fn();
+  } finally {
+    btn.disabled = false;
+    btn.textContent = original;
+  }
+}
+
+async function copyToClipboard(text, successMessage) {
+  try {
+    await navigator.clipboard.writeText(text);
+    notify(successMessage || 'Copied to clipboard.', 'success');
+  } catch (e) {
+    notify('Could not copy automatically — select the text and copy it.', 'warn');
+  }
 }
 
 // ---------------------------------------------------------------------------

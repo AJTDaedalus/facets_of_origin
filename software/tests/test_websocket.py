@@ -2664,3 +2664,236 @@ class TestSavingThrow:
 
         assert msg["type"] == "error"
         assert "flying" in msg["message"]
+
+
+# ---------------------------------------------------------------------------
+# Front-end audit A3 — a player may select their OWN Technique
+# ---------------------------------------------------------------------------
+
+class TestPlayerTechniqueSelect:
+    """A3: `technique_select` was MM-gated while the only UI control that sent
+    it was the player-facing Builder tab, so no character could ever gain a
+    Technique. Players now select for themselves; the MM may still select on
+    any player's behalf. All selection rules stay in Character.select_technique.
+    """
+
+    def test_player_selects_own_technique(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        session_store.get(session_id).characters["Zahna"].technique_picks_available = 1
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({
+                "type": "technique_select",
+                "technique_id": "arcane_study",
+                "choice": "inscription",
+            })
+            msg = ws.receive_json()
+
+        assert msg["type"] == "technique_selected"
+        assert msg["player"] == "Zahna"
+        assert "arcane_study" in msg["all_techniques"]
+
+    def test_player_cannot_select_for_another_player(self, client, session_with_character):
+        """A player naming someone else is forced back onto their own sheet."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        stored = session_store.get(session_id)
+        stored.characters["Zahna"].technique_picks_available = 1
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({
+                "type": "technique_select",
+                "player_name": "SomeoneElse",
+                "technique_id": "arcane_study",
+                "choice": "inscription",
+            })
+            msg = ws.receive_json()
+
+        assert msg["type"] == "technique_selected"
+        assert msg["player"] == "Zahna"
+
+    def test_mm_may_still_select_on_behalf_of_a_player(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        session_store.get(session_id).characters["Zahna"].technique_picks_available = 1
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({
+                "type": "technique_select",
+                "player_name": "Zahna",
+                "technique_id": "arcane_study",
+                "choice": "inscription",
+            })
+            msg = ws.receive_json()
+
+        assert msg["type"] == "technique_selected"
+        assert msg["player"] == "Zahna"
+
+    def test_player_with_no_picks_left_gets_an_error(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        session_store.get(session_id).characters["Zahna"].technique_picks_available = 0
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({
+                "type": "technique_select",
+                "technique_id": "arcane_study",
+                "choice": "inscription",
+            })
+            msg = ws.receive_json()
+
+        assert msg["type"] == "error"
+
+
+# ---------------------------------------------------------------------------
+# Front-end audit B16 — a Threat Clock can be removed once it stops mattering
+# ---------------------------------------------------------------------------
+
+class TestThreatClockDelete:
+    """Clocks could be created, advanced, and wound back, but never removed —
+    a resolved hazard stayed on every player's screen for the rest of the
+    session. `clock_delete` is MM-only, like every other clock event.
+    """
+
+    def _create_clock(self, ws, name="Rising Tide"):
+        ws.send_json({"type": "clock_create", "name": name})
+        msg = ws.receive_json()
+        assert msg["type"] == "clock_created"
+        return msg["clock"]["id"]
+
+    def test_clock_delete_removes_it_from_session_state(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Clock Delete"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            clock_id = self._create_clock(ws)
+            ws.send_json({"type": "clock_delete", "clock_id": clock_id})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "clock_deleted"
+        assert msg["clock_id"] == clock_id
+        assert clock_id not in session_store.get(session_id).threat_clocks
+
+    def test_clock_delete_unknown_id_returns_error(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Clock Delete 2"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "clock_delete", "clock_id": "nope"})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "error"
+        assert "nope" in msg["message"]
+
+    def test_player_cannot_delete_a_clock(self, client, mm_headers, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        with client.websocket_connect("/ws") as mm_ws:
+            _auth_mm(mm_ws, mm_token, session_id)
+            clock_id = self._create_clock(mm_ws)
+
+        player_token = create_session_token("Zahna", session_id)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "clock_delete", "clock_id": clock_id})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "error"
+        assert clock_id in session_store.get(session_id).threat_clocks
+
+
+# ---------------------------------------------------------------------------
+# Front-end audit — a new character must reach everyone already connected
+# ---------------------------------------------------------------------------
+
+class TestCharacterCreatedBroadcast:
+    """Character creation is a REST call and broadcast nothing, so an MM sitting
+    in the session never learned a player had made a character: the combat
+    roster, every player picker, and the party list stayed empty until reload.
+    """
+
+    def test_character_creation_broadcasts_to_connected_clients(
+        self, client, mm_token, mm_headers, active_session, valid_attributes,
+    ):
+        session_id = active_session["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            client.post(
+                "/api/characters/",
+                json={
+                    "session_id": session_id,
+                    "character_name": "Zahna",
+                    "primary_facet": "mind",
+                    "attributes": valid_attributes,
+                },
+                headers=mm_headers,
+            )
+            msg = ws.receive_json()
+
+        assert msg["type"] == "character_created"
+        assert msg["player"] == "Zahna"
+        assert msg["character"]["name"] == "Zahna"
+
+    def test_broadcast_carries_the_full_character(
+        self, client, mm_token, mm_headers, active_session, valid_attributes,
+    ):
+        """Clients merge the payload straight into `allCharacters`, so it has to
+        be the same shape the state dict uses."""
+        session_id = active_session["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            resp = client.post(
+                "/api/characters/",
+                json={
+                    "session_id": session_id,
+                    "character_name": "Mordai",
+                    "primary_facet": "body",
+                    "attributes": valid_attributes,
+                },
+                headers=mm_headers,
+            )
+            msg = ws.receive_json()
+
+        assert msg["character"] == resp.json()["character"]
+
+    def test_upload_also_broadcasts(
+        self, client, mm_token, mm_headers, active_session, valid_attributes,
+    ):
+        """An imported .fof has to announce itself the same way a built one does."""
+        session_id = active_session["session_id"]
+        client.post(
+            "/api/characters/",
+            json={
+                "session_id": session_id,
+                "character_name": "Zulnut",
+                "primary_facet": "body",
+                "attributes": valid_attributes,
+            },
+            headers=mm_headers,
+        )
+        export = client.get(
+            f"/api/characters/{session_id}/Zulnut/export", headers=mm_headers,
+        )
+        assert export.status_code == 200
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            client.post(
+                "/api/characters/upload",
+                json={"session_id": session_id, "fof_yaml": export.text},
+                headers=mm_headers,
+            )
+            msg = ws.receive_json()
+
+        assert msg["type"] == "character_created"
+        assert msg["player"] == "Zulnut"

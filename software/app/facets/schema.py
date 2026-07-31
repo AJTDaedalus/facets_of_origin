@@ -290,8 +290,10 @@ class AdvancementDef(BaseModel):
     skill_point_costs: list[SkillPointCostDef] = Field(default_factory=list)
     session_skill_points: int = 4
     marks_per_rank: int = 3
-    facet_level_threshold: int = 6
-    major_advancement_threshold: int = 4   # total Facet levels before a Major Advancement
+    # Defaults mirror facets/base/facet.yaml. A Facet that omits these must land
+    # on canon, not on a stale earlier revision (v0.3 moved 6 -> 5 and 4 -> 3).
+    facet_level_threshold: int = 5
+    major_advancement_threshold: int = 3   # total Facet levels before a Major Advancement
 
 
 # ---------------------------------------------------------------------------
