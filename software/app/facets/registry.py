@@ -12,6 +12,7 @@ from app.facets.schema import (
     CharacterFacetDef,
     CombatDef,
     DeathDef,
+    EquipmentDef,
     FacetFile,
     FacetTreeDef,
     HazardsDef,
@@ -52,6 +53,7 @@ class MergedRuleset:
         magic: MagicDef | None = None
         hazards: HazardsDef | None = None
         death: DeathDef | None = None
+        equipment: EquipmentDef | None = None
 
         for ff in self._files:
             for ma in ff.attributes.major:
@@ -91,6 +93,8 @@ class MergedRuleset:
                 hazards = ff.hazards
             if ff.death:
                 death = ff.death
+            if ff.equipment:
+                equipment = ff.equipment
 
         self.major_attributes = list(major_attrs.values())
         self.minor_attributes = list(minor_attrs.values())
@@ -108,6 +112,7 @@ class MergedRuleset:
         self.magic = magic
         self.hazards = hazards
         self.death = death
+        self.equipment = equipment
 
         # Fast-lookup maps built once at merge time
         self._skill_map: dict[str, SkillDef] = {sk.id: sk for sk in self.skills}
@@ -236,6 +241,7 @@ class MergedRuleset:
             "magic": _serialize(self.magic),
             "hazards": _serialize(self.hazards),
             "death": _serialize(self.death),
+            "equipment": _serialize(self.equipment),
         }
 
 

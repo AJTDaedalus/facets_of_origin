@@ -20,6 +20,7 @@ from app.facets.schema import (
     DeathDef,
     DifficultyModifier,
     EnemyDurabilityDef,
+    EquipmentDef,
     FacetFile,
     FacetTreeDef,
     GroupRollDef,
@@ -561,3 +562,23 @@ class TestGroupRollDef:
         assert isinstance(block, GroupRollDef)
         assert block.majority_rule == "partial_success_or_better_counts"
         assert block.lead_roller_alternative is True
+
+
+# ---------------------------------------------------------------------------
+# EquipmentDef / weapon_categories — sync-M-12: IV.1:13-19 weapon category ->
+# attribute reference table. Reference data only — the engine stays
+# deliberately permissive on which attribute a Strike uses.
+# ---------------------------------------------------------------------------
+
+class TestWeaponCategories:
+    def test_base_ruleset_loads_equipment_block(self, ruleset):
+        assert isinstance(ruleset.equipment, EquipmentDef)
+
+    def test_all_five_categories_present_with_attributes(self, ruleset):
+        categories = ruleset.equipment.weapon_categories
+        assert set(categories) == {"heavy", "standard", "light", "ranged", "unarmed"}
+        assert categories["heavy"].attributes == ["strength"]
+        assert categories["standard"].attributes == ["strength", "dexterity"]
+        assert categories["light"].attributes == ["dexterity"]
+        assert categories["ranged"].attributes == ["dexterity"]
+        assert categories["unarmed"].attributes == ["strength", "dexterity"]

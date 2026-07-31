@@ -584,6 +584,26 @@ class HazardsDef(BaseModel):
     threat_clock: ThreatClockDef = Field(default_factory=ThreatClockDef)
 
 
+class WeaponCategoryDef(BaseModel):
+    """One weapon category's attribute options for a Strike (IV.1:13-19).
+
+    Fields:
+        attributes: One or two Minor Attribute IDs; two means the player's
+                    choice ("Standard or Dexterity"). Reference data only —
+                    the engine stays deliberately permissive on which
+                    attribute a Strike uses (IV.1: "The engine stays
+                    permissive on Strike attributes").
+    """
+
+    attributes: list[str]
+
+
+class EquipmentDef(BaseModel):
+    """Equipment reference data (PHB IV.1)."""
+
+    weapon_categories: dict[str, WeaponCategoryDef] = Field(default_factory=dict)
+
+
 class DeathDef(BaseModel):
     """Death rule (PHB III.2): Broken is never lethal by itself.
 
@@ -719,6 +739,7 @@ class FacetFile(BaseModel):
     magic: MagicDef | None = None
     hazards: HazardsDef | None = None
     death: DeathDef | None = None
+    equipment: EquipmentDef | None = None
 
     @field_validator("id")
     @classmethod

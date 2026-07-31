@@ -601,7 +601,7 @@ PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`
 - [x] W4-8 — Saving throws: engine + WebSocket. *(sync-M-8, part 2 — D11 full depth)* **TDD**
 - [x] W4-9 — Spark scope fuel into yaml, including D8. *(sync-M-9)* **TDD**
 - [x] W4-10 — Group rolls and contested rolls: encoding only. *(sync-M-10, M-11 — D11)* **TDD**
-- [ ] W4-11 — Weapon category → attribute table. *(sync-M-12)* **TDD**
+- [x] W4-11 — Weapon category → attribute table. *(sync-M-12)* **TDD**
 - [ ] W4-12 — First Move timing. *(sync-M-1)*
 - [ ] W4-13 — Sync low-severity sweep. *(sync-L-1 … L-8)*
 - [ ] W4-14 — Cycle close-out.
@@ -742,3 +742,14 @@ Result: **1083 passed** (1078 + 5 new).
 
 Command: `cd software && python -m pytest -q`
 Result: **1088 passed** (1083 + 5 new).
+
+### W4-11 *(sync-M-12)* — TDD
+
+- **New top-level yaml section:** no `equipment:` block or schema model existed at all. Added `WeaponCategoryDef` (`attributes: list[str]`) and `EquipmentDef` (`weapon_categories: dict[str, WeaponCategoryDef]`); added `FacetFile.equipment` (optional, matching the existing `combat`/`magic`/`hazards`/`death` pattern) and wired it through `MergedRuleset._merge()` plus `to_client_dict()`.
+- `software/facets/base/facet.yaml` (`equipment.weapon_categories`) — all five categories from IV.1:13-19: Heavy → Strength; Standard/Unarmed → Strength or Dexterity; Light/Ranged → Dexterity.
+- Reference data only, per the task's explicit note — the engine stays deliberately permissive on which attribute a Strike uses; nothing reads or enforces this block.
+- Tests (2, written first) in `test_facets_schema.py`, new `TestWeaponCategories` class: the base ruleset loads the `equipment` block as an `EquipmentDef`; all five categories are present with their exact attribute lists.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1090 passed** (1088 + 2 new).

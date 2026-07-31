@@ -1452,6 +1452,18 @@ death:
   # death with one final action that automatically succeeds.
 
 # ---------------------------------------------------------------------------
+# Equipment (PHB IV.1) — reference data only. The engine stays deliberately
+# permissive on which attribute a Strike uses; this is not enforced.
+# ---------------------------------------------------------------------------
+equipment:
+  weapon_categories:
+    heavy: {attributes: [strength]}
+    standard: {attributes: [strength, dexterity]}
+    light: {attributes: [dexterity]}
+    ranged: {attributes: [dexterity]}
+    unarmed: {attributes: [strength, dexterity]}
+
+# ---------------------------------------------------------------------------
 # Backgrounds (PHB II.5)
 # ---------------------------------------------------------------------------
 backgrounds:
