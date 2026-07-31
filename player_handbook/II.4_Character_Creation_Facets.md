@@ -56,7 +56,7 @@ You may only advance skills you used this session. You may not save points betwe
 
 **Marks:** Each point spent toward a skill's next rank is called a mark. A skill advances when it accumulates **3 marks**. Marks carry over between sessions — you do not lose partial progress.
 
-> **Example:** Zulnut (Primary Facet: Body) uses Stealth twice this session. He spends 2 points (1 each) and marks Stealth twice. He also used Finesse — 1 more point, 1 more mark. He has 1 point left. Next session, one more mark advances Finesse to Practiced.
+> **Example:** Zulnut (Primary Facet: Body) uses Stealth twice this session. He spends 2 points (1 each) and marks Stealth twice. Combined with the 1 mark he already carries from his Background, that's 3 marks — Stealth advances to Practiced. He has 2 points left; he didn't use another skill this session, so they go unspent, and unspent points are lost.
 
 ---
 
@@ -70,7 +70,7 @@ With 5 skills and 3 possible advances each, a fully developed Facet produces 15 
 
 > Facet level 3 is the top of a single Facet — you've taken it as far as it goes. Level 4 and beyond is where breadth begins, which is how mastery tends to work anyway: at the highest levels, experts grow by absorbing adjacent disciplines. The supreme warrior who studies philosophy. The master mage who learns a craftsperson's patience.
 
-> **Example:** Zulnut advances Combat to Practiced (1 advance), Stealth to Practiced (2), Athletics to Practiced (3), Stealth to Expert (4), Finesse to Practiced (5). *Facet level 1.* Several sessions later, Combat to Expert (6), Athletics to Expert (7), Endurance to Practiced (8), Finesse to Expert (9), Endurance to Expert (10). *Facet level 2.*
+> **Example:** Zulnut advances Combat to Practiced (1 advance), Stealth to Practiced (2), Athletics to Practiced (3), Stealth to Expert (4), Finesse to Expert (5) — Finesse started Practiced at creation, so this is its first advance. *Facet level 1.* Several sessions later, Combat to Expert (6), Athletics to Expert (7), Endurance to Practiced (8), Finesse to Master (9), Endurance to Expert (10). *Facet level 2.*
 
 Facet level advances outside your Primary Facet follow the same counting, and those levels **do** count toward your Major Advancement threshold (see below) — Major Advancement is earned across every Facet you've invested in, not just your Primary one.
 
@@ -113,11 +113,11 @@ Advancement is not automatic. Numbers tell you when you *can* advance — the re
 
 Reflection scenes are encouraged but not required. Advancement happens whether or not the scene takes place — the numbers move regardless. But a reflection scene makes the growth feel real in the fiction and gives the table a shared moment. When a player takes one, the MM may reward it with a bonus mark or a Spark. When the moment isn't right, skip it and move on.
 
-> *Zahna spends a quiet moment after the Millhaven investigation re-reading his notes, marking the connections he didn't see until he had to look for them. His Knowledge rank ticks to Practiced. The table watches. Nobody comments. Mordai refills his drink.*
+> *Zahna spends a quiet moment after the Millhaven investigation re-reading his notes, marking the connections he didn't see until he had to look for them. His Lore rank ticks to Practiced. The table watches. Nobody comments. Mordai refills his drink.*
 
 **Running reflection scenes (MM guidance):**
 
-Keep them brief — a paragraph of narration or a few lines of in-character exchange is enough. The scene should tie the advancement to something that actually happened this session. A Knowledge advancement is richer when it echoes Zahna's archive research. A Combat advancement feels earned after a fight where the character showed their improvement under pressure.
+Keep them brief — a paragraph of narration or a few lines of in-character exchange is enough. The scene should tie the advancement to something that actually happened this session. A Lore advancement is richer when it echoes Zahna's archive research. A Combat advancement feels earned after a fight where the character showed their improvement under pressure.
 
 One reflection scene per session means one character gets the spotlight. The MM should track whose turn it is informally — not rigidly rotating, but ensuring no character goes three or four sessions without one.
 
