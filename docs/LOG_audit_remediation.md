@@ -594,7 +594,7 @@ PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`
 - [x] W4-1 — Press cost into yaml. *(sync-M-2)* **TDD**
 - [x] W4-2 — Strike riders and Easy-to-Strike into yaml. *(sync-M-3)* **TDD**
 - [x] W4-3 — Same-Tier-2 escalation into yaml. *(sync-M-4)* **TDD**
-- [ ] W4-4 — Armor/reaction non-stacking into yaml. *(sync-M-5)* **TDD**
+- [x] W4-4 — Armor/reaction non-stacking into yaml. *(sync-M-5)* **TDD**
 - [ ] W4-5 — Enemy attack rules into yaml. *(sync-M-6)* **TDD**
 - [ ] W4-6 — Maneuver and Support into yaml. *(sync-M-7)* **TDD**
 - [ ] W4-7 — Major Attribute modifier derivation. *(sync-M-8, part 1)* **TDD**
@@ -649,3 +649,16 @@ Result: **1052 passed** (1047 + 5 new).
 
 Command: `cd software && python -m pytest -q`
 Result: **1053 passed** (1052 + 1 new).
+
+### W4-4 *(sync-M-5)* — TDD
+
+- **Investigated first:** `resolve_incoming_condition`'s non-stacking logic (apply the greater of armor/reaction, charge not spent when the reaction alone supplies the reduction) was already structurally correct — the WebSocket handler and simulator both delegate to it rather than duplicating the rule. The one hardcoded literal: the reaction branch computed `max(0, tier - 1)`, while the armor branch already read its reduction amount from yaml (`combat.armor.<type>.tiers_reduced`) — an asymmetry that happened to produce identical results only because every configured armor type's `tiers_reduced` is currently 1.
+- `software/app/facets/schema.py` (`ArmorDef`) — added `reaction_downgrade_tiers: int = 1`.
+- `software/facets/base/facet.yaml` (`combat.armor`) — set `reaction_downgrade_tiers: 1`, matching current behavior.
+- `software/app/game/combat.py` (`resolve_incoming_condition`) — reaction branch now reads `ruleset.combat.armor.reaction_downgrade_tiers` instead of the hardcoded `1`.
+- Confirmed `websocket.py` and `combat_sim.py` have no separate hardcoded copy of this literal — both already call `resolve_incoming_condition`/pass `reaction_downgraded` through to the shared function, so they inherit the fix automatically.
+- Tests: the three required cases (non-stacking, charge preserved when reaction supplies it, charge spent when armor alone supplies it) were **already covered** by pre-existing tests (`test_armor_and_reaction_do_not_stack`, `test_redundant_armor_charge_is_not_spent`, `test_armor_alone_downgrades_and_spends_a_charge`) — none of which would have caught the hardcoded-vs-yaml distinction, since they only assert the outcome, not the source. Added one new test, `test_reaction_downgrade_amount_reads_from_yaml`, that changes `reaction_downgrade_tiers` to 2 and confirms the reduction changes accordingly (save/restore around the session-scoped `ruleset` fixture).
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1054 passed** (1053 + 1 new).

@@ -411,8 +411,9 @@ def resolve_incoming_condition(
     Pure: the budget counter stays with the caller, as in `armor_downgrade`.
     """
     if reaction_downgraded:
+        reduction = ruleset.combat.armor.reaction_downgrade_tiers
         return IncomingConditionResult(
-            tier=max(0, tier - 1),
+            tier=max(0, tier - reduction),
             downgrades_remaining=downgrades_remaining,
             armor_spent=False,
             reaction_applied=True,

@@ -700,6 +700,21 @@ class TestResolveIncomingCondition:
         assert result.tier == 1
         assert result.armor_spent is False
 
+    def test_reaction_downgrade_amount_reads_from_yaml(self, ruleset):
+        """sync-M-5: the reaction's tier reduction was a hardcoded `tier - 1`
+        in resolve_incoming_condition; it now reads
+        combat.armor.reaction_downgrade_tiers. `ruleset` is session-scoped
+        (shared across the test run) — restore the original value."""
+        original = ruleset.combat.armor.reaction_downgrade_tiers
+        try:
+            ruleset.combat.armor.reaction_downgrade_tiers = 2
+            result = combat.resolve_incoming_condition(
+                2, None, 0, ruleset, reaction_downgraded=True,
+            )
+            assert result.tier == 0  # 2 - 2, not the old hardcoded 2 - 1
+        finally:
+            ruleset.combat.armor.reaction_downgrade_tiers = original
+
     def test_armor_and_reaction_do_not_stack(self, ruleset):
         """PHB III.3: light armor + partial Parry vs Tier 2 lands as Tier 1,
         not negated entirely."""

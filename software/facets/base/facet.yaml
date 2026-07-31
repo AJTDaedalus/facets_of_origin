@@ -1357,6 +1357,10 @@ combat:
     heavy:
       downgrades_per_scene: 4   # first 4 Conditions/scene: Tier 2 → Tier 1, Tier 1 → none
       tiers_reduced: 1
+    # A successful partial reaction (Dodge/Parry 7-9) downgrades by this many
+    # tiers. Armor and reaction downgrades do not stack — apply the greater
+    # reduction only (III.3, Armor and Reaction Downgrades).
+    reaction_downgrade_tiers: 1
 
   enemy_durability:
     strike_depletion: {full_success: 2, partial_success: 1, failure: 0}

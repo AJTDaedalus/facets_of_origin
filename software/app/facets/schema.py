@@ -340,12 +340,20 @@ class ArmorEntryDef(BaseModel):
 
 
 class ArmorDef(BaseModel):
-    """PC armor downgrade rules keyed by armor type ("light", "heavy")."""
+    """PC armor downgrade rules keyed by armor type ("light", "heavy").
+
+    Fields:
+        reaction_downgrade_tiers: Tiers a successful partial reaction
+                (Dodge/Parry 7-9) downgrades an incoming Condition by.
+                Armor and reaction downgrades do not stack — apply the
+                greater reduction only (III.3).
+    """
 
     light: ArmorEntryDef = Field(default_factory=ArmorEntryDef)
     heavy: ArmorEntryDef = Field(
         default_factory=lambda: ArmorEntryDef(downgrades_per_scene=4)
     )
+    reaction_downgrade_tiers: int = 1
 
 
 class StrikeDepletionDef(BaseModel):
