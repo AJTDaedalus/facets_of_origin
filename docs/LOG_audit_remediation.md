@@ -358,7 +358,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migrat
 - [x] W3-1 — Guild Apprentice gets its Specialty (three-way propagation). *(rul-H1 — D4)* **TDD**
 - [x] W3-2 — Amend II.1's character sheet specification. *(app-H1, H2, M1–M4 — D7, part 1)*
 - [x] W3-3 — Rebuild the character sheet appendix to the amended spec. *(D7, part 2)* **TDD**
-- [ ] W3-4 — 0 Endurance means Absorb only, absolutely. *(rul-M1, rul-L4 — D5)* **TDD**
+- [x] W3-4 — 0 Endurance means Absorb only, absolutely. *(rul-M1, rul-L4 — D5)* **TDD**
 - [ ] W3-5 — Cut Reckless Press. *(rul-M3 — D6)*
 - [ ] W3-6 — Redefine pushing scope against the pre-Technique cap. *(cre-M3, mm-L8 — D8)* — sign-off
 - [ ] W3-7 — The Shattered Origin promise, both fixes. *(app-M7 — D9)*
@@ -418,3 +418,19 @@ Result: **1041 passed**.
 
 Command: `cd software && python -m pytest -q`
 Result: **1042 passed** (1041 + 1 new).
+
+### W3-4 *(rul-M1, rul-L4 — D5)* — TDD
+
+- **Engine check first:** `_handle_react` (`websocket.py:614`) already gates on `character.endurance_current <= 0 and reaction != "absorb"` **before** computing any posture-based reaction cost — so Withdrawn's `free_reactions` and Defensive's reduced cost never get a chance to override the floor. The engine was already correct; per the task's own instruction ("if the engine already refuses, keep the tests as regressions"), this task became text + yaml + a regression-test job, not a behavior fix.
+- `III.3:167` (Reactions intro) — added the clarifying sentence: the 0-Endurance floor "is absolute, regardless of Posture: Withdrawn's free reactions and Defensive's reduced reaction cost only apply while you have at least 1 Endurance to spend."
+- `III.3:718` (quick ref) — "Conditions land at full tier — no extra penalty" was wrong for an armored character (`:47`: armor still helps downgrade Conditions even at 0 Endurance). Corrected to "land at their normal tier — your armor still helps," and added "regardless of Posture" for the same reason as the body-text fix.
+- `MM5:200` — already said "normal tier — no extra penalty" (not the "full tier" bug), so no correction needed there; added "regardless of Posture" anyway for consistency with the other two now-updated sites.
+- `facet.yaml` (`combat.endurance_floor_rule`) — set to a full statement of the rule (previously empty, the field existed but was unused, like its siblings `mook_rule`/`named_npc_rule`/`boss_rule`). `websocket.py`'s refusal message now reads this field (falling back to the old literal if empty) — the engine genuinely reads it now, not just declares it in the schema.
+- Tests (3 required; 2 new + 1 pre-existing satisfying the third), all in `test_websocket.py`:
+  - `test_zero_endurance_dodge_refused_while_withdrawn` *(new)* — Dodge refused at 0 Endurance while Withdrawn.
+  - `test_zero_endurance_dodge_refused_while_defensive` *(new)* — same, Defensive.
+  - `test_zero_endurance_absorb_allowed` *(pre-existing, already covers "Absorb permitted")* — left as-is; still passes, now also exercises the yaml-sourced message path.
+- Regenerated `Index.md` — 1 new line.
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed** (1042 + 2 new).

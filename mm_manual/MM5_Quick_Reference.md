@@ -198,7 +198,7 @@ A charge is consumed only when armor provides the reduction actually applied —
 
 - **Pool:** 4 + Constitution modifier + Endurance skill rank bonus
 - **Range:** 3 (Con 1, no skill) to 8 (Con 3, Master)
-- **0 Endurance:** Absorb only (Conditions land at their normal tier — no extra penalty)
+- **0 Endurance:** Absorb only, regardless of Posture (Conditions land at their normal tier — no extra penalty)
 - **Recovery:** Withdrawn posture restores 2 per exchange
 
 ---

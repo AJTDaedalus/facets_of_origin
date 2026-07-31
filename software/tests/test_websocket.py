@@ -1073,6 +1073,53 @@ class TestCombatGameplayLoop:
             assert msg["type"] == "react_result"
             assert msg["reaction"] == "absorb"
 
+    def test_zero_endurance_dodge_refused_while_withdrawn(self, client, mm_token, session_with_character):
+        """D5: the 0-Endurance floor is absolute — Withdrawn's free_reactions
+        (0 Endurance cost) does not exempt a character from it. Only Absorb
+        is available, regardless of Posture."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        char.endurance_current = 0
+        char.posture = "withdrawn"
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "react", "reaction": "dodge"})
+            msg = ws.receive_json()
+            assert msg["type"] == "error"
+            assert "Absorb" in msg["message"]
+
+    def test_zero_endurance_dodge_refused_while_defensive(self, client, mm_token, session_with_character):
+        """D5: same floor, Defensive posture — its reduced reaction cost
+        (min 0) does not exempt a character from the floor either."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        char.endurance_current = 0
+        char.posture = "defensive"
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "react", "reaction": "dodge"})
+            msg = ws.receive_json()
+            assert msg["type"] == "error"
+            assert "Absorb" in msg["message"]
+
     def test_tier2_same_type_stacking_to_broken(self, client, mm_token, session_with_character):
         """D5 row 2: a second Tier 2 condition of the SAME type escalates to Broken."""
         session, _ = session_with_character

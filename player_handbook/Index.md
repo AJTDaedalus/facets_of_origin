@@ -480,6 +480,7 @@
 - [MM4 — In Play: Sharing the Spotlight](../mm_manual/MM4_Running_the_Table.md#in-play-sharing-the-spotlight)
 - [MM4 — Practical Adjustments](../mm_manual/MM4_Running_the_Table.md#practical-adjustments)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
+- [MM5 — Endurance](../mm_manual/MM5_Quick_Reference.md#endurance)
 
 ## Press
 
