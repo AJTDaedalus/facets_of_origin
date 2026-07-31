@@ -10,6 +10,7 @@
 
 *Defined in [III.3](III.3_Combat.md).*
 
+- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [III.3 — Armor](III.3_Combat.md#armor)
 - [III.3 — Armor and Reaction Downgrades](III.3_Combat.md#armor-and-reaction-downgrades)
 - [III.3 — Armor (your per-scene downgrade budget)](III.3_Combat.md#armor-your-per-scene-downgrade-budget)
@@ -186,6 +187,7 @@
 *Defined in [II.3](II.3_Magic.md).*
 
 - [Appendix Magic Domains — Appendix: Magic Domain Catalog](Appendix_Magic_Domains.md#appendix-magic-domain-catalog)
+- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [II.1 — Where to Go From Here](II.1_Character_Creation_Overview.md#where-to-go-from-here)
 - [II.3 — Domain](II.3_Magic.md#domain)
 - [II.3 — Domain Types](II.3_Magic.md#domain-types)
@@ -220,6 +222,7 @@
 
 *Defined in [III.3](III.3_Combat.md).*
 
+- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [II.4 — What Is a Facet?](II.4_Character_Creation_Facets.md#what-is-a-facet)
 - [II.4a — Skills of the Body](II.4a_Character_Creation_Facet_Body.md#skills-of-the-body)
 - [II.6 — Complete Skill Reference](II.6_Character_Creation_Skills.md#complete-skill-reference)
@@ -586,6 +589,7 @@
 
 - [Appendix Magic Domains — Appendix: Magic Domain Catalog](Appendix_Magic_Domains.md#appendix-magic-domain-catalog)
 - [Appendix Magic Domains — Prismatic Soul Domains](Appendix_Magic_Domains.md#prismatic-soul-domains)
+- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [II.3 — Scope](II.3_Magic.md#scope)
 - [II.3 — Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope)
 - [II.5 — Magic and Backgrounds](II.5_Character_Creation_Backgrounds.md#magic-and-backgrounds)
@@ -659,6 +663,7 @@
 
 *Defined in [III.1](III.1_Core_Resolution.md).*
 
+- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [II.2 — How Attributes Work in Play](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play)
 - [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Attributes.md#in-play-the-vanishing-of-millhaven)
 - [II.3 — Sparks and Magic](II.3_Magic.md#sparks-and-magic)

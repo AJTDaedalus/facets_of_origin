@@ -356,7 +356,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migrat
 ### W3 task list (from `docs/TASKS_audit_remediation.md`)
 
 - [x] W3-1 — Guild Apprentice gets its Specialty (three-way propagation). *(rul-H1 — D4)* **TDD**
-- [ ] W3-2 — Amend II.1's character sheet specification. *(app-H1, H2, M1–M4 — D7, part 1)*
+- [x] W3-2 — Amend II.1's character sheet specification. *(app-H1, H2, M1–M4 — D7, part 1)*
 - [ ] W3-3 — Rebuild the character sheet appendix to the amended spec. *(D7, part 2)* **TDD**
 - [ ] W3-4 — 0 Endurance means Absorb only, absolutely. *(rul-M1, rul-L4 — D5)* **TDD**
 - [ ] W3-5 — Cut Reckless Press. *(rul-M3 — D6)*
@@ -382,3 +382,20 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migrat
 
 Command: `cd software && python -m pytest -q`
 Result: **1041 passed** (1039 + 2 new).
+
+### W3-2 *(app-H1, H2, M1–M4 — D7, part 1)*
+
+- `II.1:11` — "six sections" → "nine sections."
+- Amended the section table to the shape DESIGN §4.3 specifies:
+  - **Facet** — relabeled "advancement track" to "rank advances toward the next level" and added **Career Advances** (app-M2, app-M4).
+  - **Background** — Secondary Skill row now reads "Secondary Skill (Novice, 1 mark) or Domain Origin if your Background grants magic" (app-M1).
+  - **Magic** *(new)* — domain name, type, pre-Technique Minor-only flag (app-H2).
+  - **Combat** *(new)* — Endurance (with the printed formula), Armor type + downgrade budget, Conditions, and Sparks (moved here from Session Resources; app-H1).
+  - **Inventory** *(new)* — equipment, including the armor that drives the Combat section's budget (app-M3).
+  - **Session Resources** — now Skill Points only.
+- Nothing in the amended table states a rule the PHB doesn't already state elsewhere (Endurance formula from `Glossary.md:42`/III.3, Armor budget from III.3, domain scope-gating from II.3).
+- `Appendix_Character_Sheet.md:3` still says "six sections" — that's W3-3 (D7, part 2), not touched here.
+- Regenerated `Index.md` — 5 new lines (the new section's Armor/Magic/Combat/Spark mentions now index it, as expected).
+
+Command: `cd software && python -m pytest -q`
+Result: **1041 passed**.

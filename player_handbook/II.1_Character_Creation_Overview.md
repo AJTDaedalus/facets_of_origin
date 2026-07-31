@@ -8,16 +8,19 @@ Both aspects live together in the Facets Character Sheet, on paper or in the dig
 
 ### What the Character Sheet Contains
 
-At the top, before any of its sections, the sheet records two names: your character's and your own. Below that, it has six sections:
+At the top, before any of its sections, the sheet records two names: your character's and your own. Below that, it has nine sections:
 
 | Section | What It Holds |
 |---|---|
 | **Attributes** | Your nine Minor Attributes (Strength, Dexterity, Constitution, Intelligence, Wisdom, Knowledge, Spirit, Luck, Charisma), each rated 1–3, grouped under the three Major Attributes (Body, Mind, Soul) |
-| **Facet** | Your chosen Primary Facet (Body, Mind, or Soul), your current Facet level, and your advancement track toward the next level |
-| **Background** | Your character's title and origin, your Starting Skill (Practiced), your Secondary Skill (Novice with 1 mark), and your Specialty |
+| **Facet** | Your chosen Primary Facet (Body, Mind, or Soul), your current Facet level, your rank advances toward the next level, and your Career Advances — a running count of every skill rank advance you've ever taken, across every Facet |
+| **Background** | Your character's title and origin, your Starting Skill (Practiced), your Secondary Skill (Novice with 1 mark) or Domain Origin if your Background grants magic, and your Specialty |
 | **Skills** | All 15 skills across the three Facets — current rank (Novice/Practiced/Expert/Master) and marks toward the next rank |
 | **Techniques** | The specific abilities you have unlocked from the Facet Technique trees (any tree whose prerequisites you meet), plus any choices made at unlock |
-| **Session Resources** | Your current Spark count and the skill points you receive to spend at each session's end |
+| **Magic** | Your magic domain's name and type (Focused, Standard, or Broad), and whether you're still pre-Technique (Minor scope only) or have unlocked full scope |
+| **Combat** | Your Endurance (current / max — 4 plus your Constitution modifier plus Endurance skill rank), your Armor type and downgrade budget, your active Conditions, and your current Spark count |
+| **Inventory** | Your equipment, including the armor whose type sets your Combat section's downgrade budget |
+| **Session Resources** | The skill points you receive to spend at each session's end |
 
 ---
 
