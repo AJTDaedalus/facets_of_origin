@@ -33,7 +33,7 @@
 - [x] W1-8 — Glossary: add Saving Throw, fix citations, close the term gaps. *(app-M5, app-L1, app-L2/cre-L4, app-L3, app-L4)*
 - [x] W1-9 — Index slugger: one hyphen per whitespace character. *(app-M6)* **TDD**
 - [x] W1-10 — Apparatus low-severity sweep. *(cre-L1, cre-L2, cre-L3, cre-L5, cre-L6, app-L6)*
-- [ ] W1-11 — README: regenerate every factual claim from canon. *(README audit — D2 for the TR value)*
+- [x] W1-11 — README: regenerate every factual claim from canon. *(README audit — D2 for the TR value)*
 - [ ] W1-12 — Wave 1 close-out.
 
 ### W1-1
@@ -144,6 +144,21 @@ Result: **1029 passed** (1026 + 3 new).
 - `Table_of_Contents.md:13-16` — II.4/II.4a/b/c titles ("Facets & Advancement (Body)" etc.) didn't match the files' own titles ("Facet of the Body" etc.) at all. Brought the ToC in line with the actual file titles, following the same short-form convention every other II./III./IV. entry already uses.
 - `Table_of_Contents.md:32-33` — "Appendix A: Magic Domain Catalog" / "Appendix B: Character Sheet" — the letters exist nowhere in the appendix files themselves (`# Appendix: Magic Domain Catalog`, `# Appendix: Character Sheet`), and nothing else in the repo references "Appendix A/B" (grepped). Dropped the letters in the ToC rather than adding them to two more files, per the task's "pick one" instruction — lower blast radius.
 - Regenerated `Index.md` — no diff (no heading text changed by any of the above).
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed**.
+
+### W1-11 (README audit — D2 for the TR value)
+
+Every number checked against the source file at edit time:
+
+- "24 skills" → **15** — counted `player_handbook/II.6_Character_Creation_Skills.md`'s skill table (5 per Facet × 3 = 15).
+- "27 domains across three traditions (Resonance, Channeling, and one TBD)" → **21 domains across two traditions (Resonance/Mind, Channeling/Soul); Body magic deferred to the Shattered Origin setting Facet** — counted `II.3_Magic.md`'s Domain Quick Reference tables (12 Soul + 9 Mind = 21); there is no third tradition in canon, and Body magic isn't a tradition awaiting a name, it's explicitly deferred.
+- "613 tests" (both occurrences) → **1029** — `pytest --collect-only -q`, run in this commit (post-W1-9, which added 3 tests).
+- "Harbor Thug (Mook TR 1)" → **TR 2**. **Correction to the task's premise**: `enemies/harbor_thug.fof` already has `tr: 2` (with the arithmetic in a comment) — D2's value is *already true* in the .fof, just not yet in `mm_manual/MM1_Encounters_and_Enemies.md`'s stat-block example (`:47-56`) or its `.fof`-format example block (`:293`), which is what W2-4 (mm-H1) actually fixes. The README was simply stale against an already-correct source file.
+- "Archive Guardian (Boss TR 16)" → **TR 17** — `enemies/archive_guardian.fof:24` already states `tr: 17`.
+- "Two simulated playtests" (both occurrences: features list and roadmap checkbox) → **Six** — `git ls-tree -d --name-only HEAD playtest/` lists 6 committed directories (`01_thornwall_undercroft` through `06_expert_novice_campaign`); `playtest/07_oraga_night_playtests` is untracked and correctly excluded per the task instruction.
+- Added an HTML comment above the claims block (Character Creation bullet onward) naming each figure's source, so future edits know to re-verify rather than hand-edit a number.
 
 Command: `cd software && python -m pytest -q`
 Result: **1029 passed**.
