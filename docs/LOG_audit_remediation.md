@@ -195,7 +195,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave1-correction
 - [x] W2-7 — facet.yaml: Overwhelming Force. *(sync-H-1)* **TDD**
 - [x] W2-8 — Encode the magic-Technique domain prerequisite (the guard). *(sync-H-2, part 1)* **TDD**
 - [x] W2-9 — Switch to the PHB's branch/tier prerequisite rule. *(sync-H-2, part 2)* **TDD**
-- [ ] W2-10 — Wave 2 close-out.
+- [x] W2-10 — Wave 2 close-out.
 
 ### W2-1 *(mm-M2)*
 
@@ -330,3 +330,16 @@ Result: **1034 passed** (1031 + 3 new).
 
 Command: `cd software && python -m pytest -q`
 Result: **1039 passed** (1034 + 5 new).
+
+### W2-10 — Wave 2 close-out
+
+All 10 W2 tasks done. Final suite run before opening the PR:
+
+Command: `cd software && python -m pytest -q`
+Result: **1039 passed** (baseline was 1029; +10 across W2-7/8/9's TDD tasks).
+
+Findings closed this wave: mm-H1, mm-M2, mm-M4, mm-M5, mm-L1, mm-L4, mm-L5, mm-L6, mm-L7, rul-M2, sync-H-1, sync-H-2.
+
+DESIGN §6 flag carried into the PR: W2-3 (MM1 enemy Attack/Defense modifiers) — states only what III.3 already rules, but is the one Wave 2 line a reader could mistake for a new rule.
+
+PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migration`.
