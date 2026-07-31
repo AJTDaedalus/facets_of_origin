@@ -602,7 +602,7 @@ PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`
 - [x] W4-9 — Spark scope fuel into yaml, including D8. *(sync-M-9)* **TDD**
 - [x] W4-10 — Group rolls and contested rolls: encoding only. *(sync-M-10, M-11 — D11)* **TDD**
 - [x] W4-11 — Weapon category → attribute table. *(sync-M-12)* **TDD**
-- [ ] W4-12 — First Move timing. *(sync-M-1)*
+- [x] W4-12 — First Move timing. *(sync-M-1)*
 - [ ] W4-13 — Sync low-severity sweep. *(sync-L-1 … L-8)*
 - [ ] W4-14 — Cycle close-out.
 
@@ -753,3 +753,12 @@ Result: **1088 passed** (1083 + 5 new).
 
 Command: `cd software && python -m pytest -q`
 Result: **1090 passed** (1088 + 2 new).
+
+### W4-12 *(sync-M-1)*
+
+- `software/facets/base/facet.yaml` (`first_move`) — the description had drifted on two counts: timing (yaml said "acts first in the next exchange"; PHB II.4b:96 says "This exchange, the opposition does not act until every party member's action has resolved") and scope (yaml omitted the ambush/trap-negation clause entirely — "no ambush springs, no prepared trap goes off, and an enemy defeated or disrupted before its moment never gets that moment at all"). Restored both.
+- Added a cheap text assertion (per the task's suggestion) in `test_docs_consistency.py`: `test_first_move_matches_phb_ii4b_timing_and_scope` — confirms "this exchange" is present, "next exchange" is not, and both "ambush" and "trap" appear in the yaml description.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1091 passed** (1090 + 1 new).

@@ -576,9 +576,10 @@ techniques:
                 name: "First Move"
                 description: >
                   Once per session, your instincts extend to everyone around you. You may declare
-                  that the party acts on your read of the situation — before any opposition can
-                  react, before any ambush springs, before the moment tips. Everyone in the party
-                  acts first in the next exchange. No roll required.
+                  that the party acts on your read of the situation. This exchange, the opposition
+                  does not act until every party member's action has resolved — no ambush springs,
+                  no prepared trap goes off, and an enemy defeated or disrupted before its moment
+                  never gets that moment at all. No roll required.
                 prerequisites: []
 
               - id: pattern_recognition
