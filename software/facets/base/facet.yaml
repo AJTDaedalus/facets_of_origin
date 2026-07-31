@@ -1425,7 +1425,7 @@ backgrounds:
     facet: mind
     starting_skill: lore
     secondary_skill: investigate
-    specialty: "Formal training in a structured discipline — can identify when methods, materials, or approaches follow an established tradition versus improvisation."
+    specialty: "Artificers' Guild technical records — Standard becomes Easy when directly applicable."
     domain_origin: mind
     domain_replaces_secondary: true
 

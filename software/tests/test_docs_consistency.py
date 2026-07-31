@@ -348,3 +348,61 @@ def test_no_pre_v03_overwhelming_force_text_survives() -> None:
     """The old threshold-margin wording must not survive anywhere in facet.yaml,
     not just in the Overwhelming Force entry itself."""
     assert "3 or more above the threshold" not in FACET_YAML.read_text()
+
+
+# A pre-built Background entry in II.5: "**Name**\n\n*Title:* ...", up to the
+# next thematic break. Distinguishes the 15 real entries from the five bold
+# element-definition headers (**Title**, **Specialty**, etc.) earlier in the
+# chapter, which are never followed by a "*Title:*" line.
+_BACKGROUND_SECTION = re.compile(
+    r"^\*\*([A-Z][^\n*]+)\*\*\n\n\*Title:\*.*?(?=\n---\n|\Z)", re.M | re.S
+)
+_SPECIALTY_LINE = re.compile(r"^\*Specialty:\*\s*(.+?)\.?\s*$", re.M)
+BACKGROUNDS_CHAPTER = PLAYER_HANDBOOK / "II.5_Character_Creation_Backgrounds.md"
+
+
+def _phb_background_specialties() -> dict[str, str | None]:
+    """{Background name: Specialty text, or None if the entry has no Specialty line}."""
+    text = BACKGROUNDS_CHAPTER.read_text()
+    result: dict[str, str | None] = {}
+    for m in _BACKGROUND_SECTION.finditer(text):
+        name, block = m.group(1), m.group(0)
+        spec = _SPECIALTY_LINE.search(block)
+        result[name] = spec.group(1).strip() if spec else None
+    return result
+
+
+def _yaml_backgrounds() -> list[dict]:
+    return yaml.safe_load(FACET_YAML.read_text())["backgrounds"]
+
+
+def test_guild_apprentice_specialty_matches_quick_start() -> None:
+    """rul-H1 / D4: the Quick Start text is the source of truth. II.5 had no
+    Specialty at all for Guild Apprentice, and facet.yaml carried a third,
+    different string ("Formal training in a structured discipline...") —
+    both must now equal Quick Start's wording exactly, not merge with it.
+    """
+    quick_start_text = (
+        "Artificers' Guild technical records — Standard becomes Easy when directly applicable"
+    )
+    phb_specialty = _phb_background_specialties()["Guild Apprentice"]
+    assert phb_specialty == quick_start_text
+
+    yaml_specialty = next(
+        b["specialty"] for b in _yaml_backgrounds() if b["id"] == "guild_apprentice"
+    )
+    assert yaml_specialty.rstrip(".") == quick_start_text
+
+
+def test_all_fifteen_backgrounds_have_a_specialty_in_phb_and_yaml() -> None:
+    """II.5's five-elements claim (Title, Description, Starting Skill, Secondary
+    Skill/Domain Origin, Specialty) must hold for every pre-built Background."""
+    phb = _phb_background_specialties()
+    assert len(phb) == 15
+    missing_in_phb = [name for name, spec in phb.items() if not spec]
+    assert not missing_in_phb, f"No Specialty in II.5 for: {missing_in_phb}"
+
+    yaml_bgs = _yaml_backgrounds()
+    assert len(yaml_bgs) == 15
+    missing_in_yaml = [b["id"] for b in yaml_bgs if not b.get("specialty")]
+    assert not missing_in_yaml, f"No specialty in facet.yaml for: {missing_in_yaml}"

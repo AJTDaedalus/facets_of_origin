@@ -343,3 +343,42 @@ Findings closed this wave: mm-H1, mm-M2, mm-M4, mm-M5, mm-L1, mm-L4, mm-L5, mm-L
 DESIGN §6 flag carried into the PR: W2-3 (MM1 enemy Attack/Defense modifiers) — states only what III.3 already rules, but is the one Wave 2 line a reader could mistake for a new rule.
 
 PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migration`.
+
+---
+
+## W3 — Canon-decision items
+
+- **Branch:** `feature/audit-wave3-canon`
+- **Date:** 2026-07-31
+- **Baseline:** `pytest --collect-only -q` → **1039 tests collected**, measured on this branch after merging W2 (PR #15).
+- **Model routing this wave:** mechanical/TDD tasks execute directly on Sonnet (this session); new-canon-prose tasks (W3-6, W3-8, W3-9, W3-10, W3-11, W3-13 — all DESIGN §6 sign-off items) are drafted by an Opus subagent via the Agent tool's `model` override, briefed with the relevant DESIGN section, the PHB/MM text being extended, and `references/phb-examples.md`'s voice guide, then reviewed/integrated/tested/committed here. Every draft still goes to the user for D12 sign-off before merge, per the plan.
+
+### W3 task list (from `docs/TASKS_audit_remediation.md`)
+
+- [x] W3-1 — Guild Apprentice gets its Specialty (three-way propagation). *(rul-H1 — D4)* **TDD**
+- [ ] W3-2 — Amend II.1's character sheet specification. *(app-H1, H2, M1–M4 — D7, part 1)*
+- [ ] W3-3 — Rebuild the character sheet appendix to the amended spec. *(D7, part 2)* **TDD**
+- [ ] W3-4 — 0 Endurance means Absorb only, absolutely. *(rul-M1, rul-L4 — D5)* **TDD**
+- [ ] W3-5 — Cut Reckless Press. *(rul-M3 — D6)*
+- [ ] W3-6 — Redefine pushing scope against the pre-Technique cap. *(cre-M3, mm-L8 — D8)* — sign-off
+- [ ] W3-7 — The Shattered Origin promise, both fixes. *(app-M7 — D9)*
+- [ ] W3-8 — Give the Trouble Table a canonical home. *(mm-M3, part 1 — D3)* — sign-off
+- [ ] W3-9 — Two Common Rulings into III.1. *(mm-M3, part 2 — D3)* — sign-off
+- [ ] W3-10 — MM2: "Adjudicating Magic". *(mm-M6 — D10, part 1)* — sign-off
+- [ ] W3-11 — MM coverage pointers + MM5 compression of the new section. *(mm-M6, mm-L9 — D10, part 2)* — sign-off
+- [ ] W3-12 — MM5 Spark-economy drift. *(mm-L2, mm-L3)*
+- [ ] W3-13 — II.4a gains its Facet introduction. *(cre-M6)* — sign-off
+- [ ] W3-14 — Rule two findings as-designed. *(cre-M7, rul-L5)* — sign-off
+- [ ] W3-15 — Wave 3 close-out.
+
+### W3-1 *(rul-H1 — D4)* — TDD
+
+- `II.5:197` — Guild Apprentice had **no** Specialty line at all (every other Background does), breaking II.5's own "five elements" claim. Added the Quick Start text verbatim: *"Artificers' Guild technical records — Standard becomes Easy when directly applicable."*
+- `facet.yaml` (`guild_apprentice`) — replaced its third, different specialty string ("Formal training in a structured discipline...") with the same Quick Start text, per the task's explicit "replaced, not merged" instruction.
+- Tests added to `test_docs_consistency.py` (2, written first, confirmed red on the yaml side before the fix — the PHB side was already correct from the same edit):
+  - `test_guild_apprentice_specialty_matches_quick_start` — both II.5 and `facet.yaml` equal the Quick Start wording exactly.
+  - `test_all_fifteen_backgrounds_have_a_specialty_in_phb_and_yaml` — every one of the 15 pre-built Backgrounds has a non-empty Specialty in both II.5 and `facet.yaml` (regression guard against this ever recurring for another Background).
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1041 passed** (1039 + 2 new).
