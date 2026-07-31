@@ -26,7 +26,7 @@
 - [x] W1-1 — Create the LOG and record the baseline. *(this entry)*
 - [x] W1-2 — II.2 point-buy arithmetic and the Scholar's Luck. *(cre-H1, cre-M1)*
 - [x] W1-3 — "Each Facet's tree" → "the Mind and Soul trees"; drop the phantom Techniques. *(cre-H2, cre-H3, cre-M4 — D1)*
-- [ ] W1-4 — Soul Second Domain prerequisite line. *(cre-M2)*
+- [x] W1-4 — Soul Second Domain prerequisite line. *(cre-M2)*
 - [ ] W1-5 — Zulnut's Finesse and the Knowledge/Lore slip. *(cre-M5)*
 - [ ] W1-6 — Threat Clock vignette and pacing math. *(rul-M4, rul-M5)*
 - [ ] W1-7 — Four small text corrections across III.3, IV.1, Quick Start, MM5. *(rul-L1, rul-L2, rul-L3, rul-L6, mm-M1)*
@@ -59,6 +59,14 @@ Result: **1026 passed**.
 - `Glossary.md:90` — same "each Facet's tree" → "the Mind and Soul trees" fix. (Citation-format and dual-citation fix deferred to W1-8, out of this task's scope.)
 - Regenerated `Index.md` (`python -m tools.build_index`) since Glossary.md was touched (INV-4) — no diff, since no heading text changed.
 - Grepped `each Facet's tree` and "Body...Technique...magic" repo-wide: the one remaining hit (`II.3:242`, Body Facet characters cross-training into Mind/Soul magic Techniques) is a correct, unrelated statement — not a Body-tree magic Technique claim.
+
+Command: `cd software && python -m pytest -q`
+Result: **1026 passed**.
+
+### W1-4 *(cre-M2)*
+
+- `II.4c:134` — Soul's **Second Domain** was missing the prerequisite line its Mind twin carries (`II.4b:137`: *"Requires an existing Mind domain (Arcane Study)."*) and that Soul's own Ascendant Domain entry already carries (`II.4c:138`). Added the matching line: *"Requires an existing Soul domain (Spiritual Domain)."*, copying the sibling's exact wording pattern.
+- Regenerating `Index.md` was required even though this task touches neither a heading nor Glossary.md — `test_index_is_up_to_date` failed after the content edit alone (two `II.4c — Tier 1` search-index entries dropped from keyword-ranked sections once the surrounding text changed). Noting this for future tasks: **any body-text edit can stale the Index, not just heading/Glossary changes** — regenerate and check the test, don't rely on the wave-rule trigger list alone.
 
 Command: `cd software && python -m pytest -q`
 Result: **1026 passed**.
