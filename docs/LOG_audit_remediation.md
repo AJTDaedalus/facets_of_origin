@@ -599,7 +599,7 @@ PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`
 - [x] W4-6 — Maneuver and Support into yaml. *(sync-M-7)* **TDD**
 - [x] W4-7 — Major Attribute modifier derivation. *(sync-M-8, part 1)* **TDD**
 - [x] W4-8 — Saving throws: engine + WebSocket. *(sync-M-8, part 2 — D11 full depth)* **TDD**
-- [ ] W4-9 — Spark scope fuel into yaml, including D8. *(sync-M-9)* **TDD**
+- [x] W4-9 — Spark scope fuel into yaml, including D8. *(sync-M-9)* **TDD**
 - [ ] W4-10 — Group rolls and contested rolls: encoding only. *(sync-M-10, M-11 — D11)* **TDD**
 - [ ] W4-11 — Weapon category → attribute table. *(sync-M-12)* **TDD**
 - [ ] W4-12 — First Move timing. *(sync-M-1)*
@@ -718,3 +718,16 @@ Result: **1073 passed** (1069 + 4 new).
 
 Command: `cd software && python -m pytest -q`
 Result: **1078 passed** (1073 + 5 new).
+
+### W4-9 *(sync-M-9)* — TDD
+
+- `software/app/facets/schema.py` — three new models (`SparkEaseFocusedMajorDef`, `SparkPushScopeDef`, `SparkPreTechniquePushDef`) bundled in `MagicSparkRulesDef`; added `MagicDef.spark_rules`.
+- `software/facets/base/facet.yaml` (`magic.spark_rules`) — all three rules, including D8's `pre_technique_push: {permitted_scope: significant}` (the rule W3-6's body text established).
+- `software/app/game/engine.py` (`resolve_magic_roll`) — **rewritten, not extended in place**, per the accept criteria: the pre-Technique scope-ceiling check now short-circuits when `pre_technique_push` is true (spark_use is `"pre_technique_push"` AND scope matches `spark_rules.pre_technique_push.permitted_scope`) — this correctly refuses Major even with the Spark declared, since `"major" != "significant"`. The `ease_focused_major`/`push_scope` branches now compare against `ruleset.magic.spark_rules.*` fields instead of hardcoded `"focused"`/`"broad"`/`"major"` string literals. D8's push adds no dice and no difficulty shift — "the Spark buys the scope, not a discount on the roll."
+- `software/app/api/websocket.py` (`_handle_cast`) — added `"pre_technique_push"` to the Spark-spending check, so the feature actually consumes a Spark end-to-end.
+- **Found and fixed a test-infrastructure gap while adding coverage:** `test_roll_engine.py`'s `_make_magic_ruleset()` mock helper built a bare `MagicMock()` for `ruleset.magic` with no `spark_rules` configured — my rewrite's new attribute reads (`ruleset.magic.spark_rules.ease_focused_major.domain_type`, etc.) would have returned auto-generated `MagicMock` objects and silently broken every `==` comparison. Fixed the helper to set `spark_rules` via `SimpleNamespace`, matching the real schema shape; reran the 6 pre-existing `push_scope`/pre-Technique tests to confirm they still pass with the corrected mock.
+- Tests (5: 4 required + a Focused/Standard contrast check), new `TestSparkRulesFromYaml` class: Focused eases Major one step; a Standard domain gets no effect from the same `ease_focused_major` spark_use (proving the domain-type check is real, not always-true); Broad refuses `push_scope` (message still names "Broad," now sourced from yaml); D8 permits Significant pre-Technique at the domain's *normal* difficulty (cross-checked against a post-Technique roll at the same scope); D8 does not extend to Major, which stays refused.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1083 passed** (1078 + 5 new).

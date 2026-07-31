@@ -901,7 +901,7 @@ async def _handle_cast(
         return
 
     # Spend Spark if needed
-    if spark_use in ("improve_roll", "ease_focused_major", "push_scope"):
+    if spark_use in ("improve_roll", "ease_focused_major", "push_scope", "pre_technique_push"):
         if not character.spend_spark():
             await manager.send_to(websocket, {"type": "error", "message": "No Sparks remaining."})
             return

@@ -1073,6 +1073,12 @@ magic:
   pre_technique_scope_limit: minor
   pre_technique_difficulty_penalty: 0
 
+  # II.3, Sparks and Magic — the three Spark-magic rules.
+  spark_rules:
+    ease_focused_major: {domain_type: focused, scope: major}
+    push_scope: {refused_domain_type: broad}
+    pre_technique_push: {permitted_scope: significant}   # D8
+
   domain_types:
     focused:
       scope_difficulties:

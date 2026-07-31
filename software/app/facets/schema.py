@@ -589,6 +589,41 @@ class MagicDomainDef(BaseModel):
     requires_tier3: bool = False
 
 
+class SparkEaseFocusedMajorDef(BaseModel):
+    """Focused domains may spend a Spark to shift a Major effect one
+    difficulty step easier (II.3, Sparks and Magic)."""
+
+    domain_type: str = "focused"
+    scope: str = "major"
+
+
+class SparkPushScopeDef(BaseModel):
+    """Spend a Spark to attempt an effect one scope tier beyond the domain's
+    natural ceiling, at that higher difficulty. Broad (Prismatic) domains
+    cannot be pushed beyond their ceiling through Sparks or any other means
+    (II.3, Sparks and Magic)."""
+
+    refused_domain_type: str = "broad"
+
+
+class SparkPreTechniquePushDef(BaseModel):
+    """D8: a pre-Technique caster (capped at Minor scope) may spend a Spark
+    to attempt one effect at `permitted_scope`, at the domain's *normal*
+    difficulty for that scope — the Spark buys the scope, not a discount
+    on the roll. Each Spark buys one such effect; it is not a permanent
+    unlock (II.3, Reaching Significant Early)."""
+
+    permitted_scope: str = "significant"
+
+
+class MagicSparkRulesDef(BaseModel):
+    """The three Spark-magic rules (II.3, Sparks and Magic)."""
+
+    ease_focused_major: SparkEaseFocusedMajorDef = Field(default_factory=SparkEaseFocusedMajorDef)
+    push_scope: SparkPushScopeDef = Field(default_factory=SparkPushScopeDef)
+    pre_technique_push: SparkPreTechniquePushDef = Field(default_factory=SparkPreTechniquePushDef)
+
+
 class MagicDef(BaseModel):
     """Full magic configuration for a Facet module (PHB II.3).
 
@@ -601,6 +636,8 @@ class MagicDef(BaseModel):
                                           Default 0 (scope restriction alone is the penalty).
         soul_domains: Domains available to Soul Facet characters.
         mind_domains: Domains available to Mind Facet characters.
+        spark_rules: The three Spark-magic rules (ease Major, push scope,
+                     D8's pre-Technique push).
     """
 
     traditions: dict[str, Any] = Field(default_factory=dict)
@@ -610,6 +647,7 @@ class MagicDef(BaseModel):
     pre_technique_difficulty_penalty: int = 0       # no additional difficulty penalty pre-Technique
     soul_domains: list[MagicDomainDef] = Field(default_factory=list)
     mind_domains: list[MagicDomainDef] = Field(default_factory=list)
+    spark_rules: MagicSparkRulesDef = Field(default_factory=MagicSparkRulesDef)
 
     @property
     def all_domains(self) -> list[MagicDomainDef]:

@@ -533,6 +533,11 @@ def _make_magic_ruleset(domain_type: str, tradition: str = "intuitive") -> Magic
     }
     magic_mock.pre_technique_scope_limit = "minor"
     magic_mock.pre_technique_difficulty_penalty = 0
+    magic_mock.spark_rules = SimpleNamespace(
+        ease_focused_major=SimpleNamespace(domain_type="focused", scope="major"),
+        push_scope=SimpleNamespace(refused_domain_type="broad"),
+        pre_technique_push=SimpleNamespace(permitted_scope="significant"),
+    )
 
     ruleset_mock = MagicMock()
     ruleset_mock.magic = magic_mock
@@ -656,6 +661,88 @@ class TestPreTechniqueMagic:
         with pytest.raises(ValueError, match="minor scope only"):
             resolve_magic_roll(
                 caster, "test_domain", "significant", "test", ruleset,
+            )
+
+
+# ---------------------------------------------------------------------------
+# sync-M-9: Spark scope fuel rewritten against ruleset.magic.spark_rules,
+# including D8 (pre-Technique push to Significant at normal difficulty).
+# ---------------------------------------------------------------------------
+
+class TestSparkRulesFromYaml:
+    def test_focused_domain_can_ease_major_one_step(self):
+        """ease_focused_major: Focused Major (Hard) eases to Standard."""
+        ruleset = _make_magic_ruleset("focused")
+        character = _make_caster()
+        with patch("random.randint", return_value=5):
+            normal = resolve_magic_roll(
+                character, "test_domain", "major", "test", ruleset, spark_use=None,
+            )
+            eased = resolve_magic_roll(
+                character, "test_domain", "major", "test", ruleset,
+                spark_use="ease_focused_major",
+            )
+        # Hard (-1) eased one step to Standard (0)
+        assert eased.difficulty_modifier == normal.difficulty_modifier + 1
+
+    def test_standard_domain_cannot_ease_major(self):
+        """ease_focused_major only applies to Focused domains (read from
+        spark_rules.ease_focused_major.domain_type) — a Standard domain
+        gets no effect from the same spark_use."""
+        ruleset = _make_magic_ruleset("standard")
+        character = _make_caster()
+        with patch("random.randint", return_value=5):
+            normal = resolve_magic_roll(
+                character, "test_domain", "major", "test", ruleset, spark_use=None,
+            )
+            attempted = resolve_magic_roll(
+                character, "test_domain", "major", "test", ruleset,
+                spark_use="ease_focused_major",
+            )
+        assert attempted.difficulty_modifier == normal.difficulty_modifier
+
+    def test_broad_domain_push_scope_refused(self):
+        """push_scope's refusal reads spark_rules.push_scope.refused_domain_type,
+        not a hardcoded 'broad' string."""
+        ruleset = _make_magic_ruleset("broad")
+        character = _make_caster()
+        with pytest.raises(ValueError, match="Broad"):
+            resolve_magic_roll(
+                character, "test_domain", "minor", "test", ruleset,
+                spark_use="push_scope",
+            )
+
+    def test_d8_pre_technique_push_permitted_at_significant(self):
+        """D8: a pre-Technique caster may spend a Spark to attempt one
+        Significant-scope effect at the domain's normal Significant
+        difficulty — no ValueError, no extra difficulty penalty."""
+        ruleset = _make_magic_ruleset("focused")
+        caster = _make_caster(technique_active=False)
+
+        with patch("random.randint", return_value=5):
+            pushed = resolve_magic_roll(
+                caster, "test_domain", "significant", "test", ruleset,
+                spark_use="pre_technique_push",
+            )
+            post_technique = resolve_magic_roll(
+                _make_caster(technique_active=True),
+                "test_domain", "significant", "test", ruleset, spark_use=None,
+            )
+        # Focused Significant = Standard (modifier 0) either way — the push
+        # grants the normal difficulty, not an eased or penalized one.
+        assert pushed.difficulty_modifier == post_technique.difficulty_modifier
+
+    def test_d8_push_does_not_permit_major_scope(self):
+        """D8 only covers spark_rules.pre_technique_push.permitted_scope
+        (Significant) — Major stays refused pre-Technique even with the
+        Spark declared."""
+        ruleset = _make_magic_ruleset("focused")
+        caster = _make_caster(technique_active=False)
+
+        with pytest.raises(ValueError, match="minor scope only"):
+            resolve_magic_roll(
+                caster, "test_domain", "major", "test", ruleset,
+                spark_use="pre_technique_push",
             )
 
 

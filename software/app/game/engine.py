@@ -281,8 +281,18 @@ def resolve_magic_roll(
     scope_to_key = {"minor": "minor", "significant": "significant", "major": "major"}
     difficulty_label: str = scope_difficulties.get(scope_to_key.get(scope, scope), "Standard")
 
+    # D8 (II.3, Reaching Significant Early): a pre-Technique caster may spend
+    # a Spark to attempt one effect at spark_rules.pre_technique_push's
+    # permitted scope, at the domain's *normal* difficulty for that scope —
+    # the Spark buys the scope, not a discount on the roll (no difficulty
+    # penalty is applied below, and no extra dice are added).
+    pre_technique_push = (
+        spark_use == "pre_technique_push"
+        and scope == ruleset.magic.spark_rules.pre_technique_push.permitted_scope
+    )
+
     # Pre-Technique restriction: scope ceiling and difficulty penalty
-    if not character.magic_technique_active:
+    if not character.magic_technique_active and not pre_technique_push:
         scope_limit = ruleset.magic.pre_technique_scope_limit if ruleset.magic else "minor"
         penalty_steps = ruleset.magic.pre_technique_difficulty_penalty if ruleset.magic else 1
         if scope_limit == "minor" and scope != "minor":
@@ -293,12 +303,17 @@ def resolve_magic_roll(
         for _ in range(penalty_steps):
             difficulty_label = _step_difficulty_harder(difficulty_label, ruleset)
 
-    # Spark use
+    # Spark use — all three rules read from ruleset.magic.spark_rules, not
+    # hardcoded domain-type/scope literals.
     sparks_spent = 0
-    if spark_use == "ease_focused_major" and domain_def.type == "focused" and scope == "major":
+    ease_rule = ruleset.magic.spark_rules.ease_focused_major
+    push_rule = ruleset.magic.spark_rules.push_scope
+    if (spark_use == "ease_focused_major"
+            and domain_def.type == ease_rule.domain_type
+            and scope == ease_rule.scope):
         difficulty_label = _step_difficulty_easier(difficulty_label, ruleset)
     elif spark_use == "push_scope":
-        if domain_def.type == "broad":
+        if domain_def.type == push_rule.refused_domain_type:
             raise ValueError(
                 "Broad (Prismatic) domains cannot be pushed beyond their scope ceiling — "
                 "Very Hard is the maximum regardless of Sparks."
@@ -307,6 +322,9 @@ def resolve_magic_roll(
         difficulty_label = _step_difficulty_harder(difficulty_label, ruleset)
     elif spark_use == "improve_roll":
         sparks_spent = 1  # consumed by caller; here we model the dice bonus
+    # pre_technique_push needs no further action here: the scope ceiling was
+    # already bypassed above, and the difficulty stays at its normal value —
+    # no dice bonus, no difficulty shift.
 
     # Secondary domain penalty: one difficulty step harder (Soul Communion T3 rule)
     is_secondary = (
