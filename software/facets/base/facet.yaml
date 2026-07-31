@@ -665,6 +665,7 @@ techniques:
                   within your second domain are treated as one difficulty step harder than
                   your primary domain.
                 grants_secondary_domain: true
+                requires_domain: mind
                 prerequisites: [cross_reference]
                 has_choice: true
                 choice_prompt: "Choose a second standard domain from the Domains of the Mind list (must differ from your first; prismatic domains excluded)."
@@ -679,6 +680,7 @@ techniques:
                   moved by Sparks. Your original domain is unchanged.
                 magic_granting: true
                 grants_prismatic_domain: true
+                requires_domain: mind
                 prerequisites: [cross_reference]
                 has_choice: true
                 choice_prompt: "Choose one prismatic domain from the Domains of the Mind list."
@@ -885,6 +887,7 @@ techniques:
                   framework, rolling Spirit as normal. Effects within your second domain are
                   treated as one difficulty step harder than your primary domain.
                 grants_secondary_domain: true
+                requires_domain: soul
                 prerequisites: [the_language_beneath_language]
                 has_choice: true
                 choice_prompt: "Choose a second standard domain from the Domains of the Soul list (must differ from your first; prismatic domains excluded)."
@@ -899,6 +902,7 @@ techniques:
                   moved by Sparks. Your original domain is unchanged.
                 magic_granting: true
                 grants_prismatic_domain: true
+                requires_domain: soul
                 prerequisites: [the_language_beneath_language]
                 has_choice: true
                 choice_prompt: "Choose one prismatic domain from the Domains of the Soul list."

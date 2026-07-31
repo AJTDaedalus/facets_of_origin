@@ -405,6 +405,54 @@ class TestPerFacetLevelTracking:
         assert char.magic_technique_active is True
         assert char.magic_domain == "resonance"
 
+    def test_select_technique_second_domain_refused_without_domain(self, ruleset, valid_attributes):
+        """sync-H-2 guard: Second Domain requires an existing domain, encoded via
+        `requires_domain` on TechniqueDef — not left as a side effect of the
+        prerequisite chain (which W2-9 will loosen). `the_language_beneath_language`
+        is injected directly into `techniques` (bypassing select_technique) so the
+        prerequisite-chain check passes while `magic_domain` stays unset, proving
+        the domain guard is an independent check."""
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="soul",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.techniques.append("the_language_beneath_language")
+        char.technique_picks_available = 1
+        ok, msg = char.select_technique("second_domain", ruleset, choice="resonance")
+        assert not ok
+        assert "domain" in msg.lower()
+        assert "second_domain" not in char.techniques
+        assert char.technique_picks_available == 1  # pick not consumed
+
+    def test_select_technique_second_domain_permitted_with_domain(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="soul",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.technique_picks_available = 3
+        ok, _ = char.select_technique("spiritual_domain", ruleset, choice="resonance")
+        assert ok
+        ok, _ = char.select_technique("the_language_beneath_language", ruleset)
+        assert ok
+        ok, msg = char.select_technique("second_domain", ruleset, choice="storm")
+        assert ok, msg
+        assert "second_domain" in char.techniques
+        assert char.secondary_magic_domain == "storm"
+
+    def test_select_technique_ascendant_domain_refused_without_domain(self, ruleset, valid_attributes):
+        """Same guard, likewise for Ascendant Domain."""
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="soul",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.techniques.append("the_language_beneath_language")
+        char.technique_picks_available = 1
+        ok, msg = char.select_technique("ascendant_domain_soul", ruleset, choice="the_undying")
+        assert not ok
+        assert "domain" in msg.lower()
+        assert "ascendant_domain_soul" not in char.techniques
+        assert char.technique_picks_available == 1
+
     def test_technique_picks_survive_fof_roundtrip(self, ruleset, valid_attributes):
         char, _ = create_default_character(
             name="X", player_name="P", primary_facet="body",

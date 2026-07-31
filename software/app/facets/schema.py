@@ -91,6 +91,13 @@ class TechniqueDef(BaseModel):
                         `secondary_magic_domain`, which the engine taxes one difficulty
                         step harder. Standard domains only — prismatic territories
                         require Ascendant Domain instead (II.4c).
+        requires_domain: Facet id ("mind" or "soul") whose domain list the character
+                        must already hold a domain from — Second Domain and Ascendant
+                        Domain both require an existing domain in their own tree
+                        (PHB II.4b/II.4c). Encoded explicitly rather than left as a
+                        side effect of the prerequisite chain, since the chain is not
+                        guaranteed to route through the Facet's domain-granting
+                        Technique (sync report H-2).
     """
 
     id: str
@@ -102,6 +109,7 @@ class TechniqueDef(BaseModel):
     magic_granting: bool = False
     grants_prismatic_domain: bool = False
     grants_secondary_domain: bool = False
+    requires_domain: str | None = None
 
 
 class TierDef(BaseModel):

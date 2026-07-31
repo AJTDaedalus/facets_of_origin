@@ -339,6 +339,16 @@ class Character(BaseModel):
             if missing:
                 return False, f"Technique '{technique_id}' requires: {', '.join(missing)}."
 
+            if tech_def.requires_domain:
+                facet_domain_ids = {
+                    d.id for d in self._facet_domains(tech_def.requires_domain, ruleset)
+                }
+                if not any(d in facet_domain_ids for d in self.held_domains()):
+                    return False, (
+                        f"Technique '{technique_id}' requires an existing "
+                        f"{tech_def.requires_domain.capitalize()} domain."
+                    )
+
         if self.technique_picks_available <= 0:
             return False, "No Technique picks available — reach a Facet level to earn one."
 

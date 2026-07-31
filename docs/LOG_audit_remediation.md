@@ -193,7 +193,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave1-correction
 - [x] W2-5 — Retire superseded simulation citations. *(mm-M5, mm-L4, mm-L5)*
 - [x] W2-6 — MM low-severity sweep. *(mm-L1, mm-L6, mm-L7)*
 - [x] W2-7 — facet.yaml: Overwhelming Force. *(sync-H-1)* **TDD**
-- [ ] W2-8 — Encode the magic-Technique domain prerequisite (the guard). *(sync-H-2, part 1)* **TDD**
+- [x] W2-8 — Encode the magic-Technique domain prerequisite (the guard). *(sync-H-2, part 1)* **TDD**
 - [ ] W2-9 — Switch to the PHB's branch/tier prerequisite rule. *(sync-H-2, part 2)* **TDD**
 - [ ] W2-10 — Wave 2 close-out.
 
@@ -297,3 +297,17 @@ Result: **1029 passed**.
 
 Command: `cd software && python -m pytest -q`
 Result: **1031 passed** (1029 + 2 new).
+
+### W2-8 *(sync-H-2, part 1)* — TDD
+
+- `software/app/facets/schema.py` (`TechniqueDef`) — added `requires_domain: str | None = None`, a Facet id ("mind"/"soul") whose domain list the character must already hold a domain from. Documented why: the sync report's H-2 note is that this prerequisite is *currently* satisfied only as a side effect of the strict Tier1→Tier2→Tier3 chain, which W2-9 is about to loosen (branch/tier rule instead of the specific chain). Without an explicit guard, loosening the chain would let a character reach Second/Ascendant Domain via a non-domain-granting Tier 1/2 pick in the same branch.
+- `software/facets/base/facet.yaml` — set `requires_domain: mind` on `second_domain_mind` and `ascendant_domain_mind`; `requires_domain: soul` on `second_domain` and `ascendant_domain_soul`. Did not touch any `prerequisites` list, per the task's explicit instruction.
+- `software/app/game/character.py` (`select_technique`) — enforces the guard right after the existing prerequisite check: if `tech_def.requires_domain` is set, the character must hold a domain (via `held_domains()`) drawn from that Facet's domain catalog (`_facet_domains()`, both pre-existing helpers). Refusal message names the missing domain's Facet.
+- Tests added to `software/tests/test_character.py` (3, written first):
+  - `test_select_technique_second_domain_refused_without_domain` — `the_language_beneath_language` injected directly into `techniques` (bypassing `select_technique`) so the prerequisite-chain check passes while `magic_domain` stays unset; the domain guard refuses independently of the chain.
+  - `test_select_technique_second_domain_permitted_with_domain` — the full legitimate chain (`spiritual_domain` → `the_language_beneath_language` → `second_domain`) succeeds once a domain exists.
+  - `test_select_technique_ascendant_domain_refused_without_domain` — same bypass pattern, for Ascendant Domain.
+  - Note: under the *old* chain (still in place this task), the guard can't organically trigger in real play — the chain itself already forces a domain-granting Tier 1 pick first. The refusal tests use direct `techniques.append()` injection specifically to prove the guard's logic is independent of the chain, since that's exactly the property W2-9 will rely on.
+
+Command: `cd software && python -m pytest -q`
+Result: **1034 passed** (1031 + 3 new).
