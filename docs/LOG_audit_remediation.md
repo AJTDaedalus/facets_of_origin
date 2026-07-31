@@ -369,7 +369,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migrat
 - [x] W3-12 — MM5 Spark-economy drift. *(mm-L2, mm-L3)*
 - [x] W3-13 — II.4a gains its Facet introduction. *(cre-M6)* — sign-off
 - [x] W3-14 — Rule two findings as-designed. *(cre-M7, rul-L5)* — sign-off
-- [ ] W3-15 — Wave 3 close-out.
+- [x] W3-15 — Wave 3 close-out.
 
 ### W3-1 *(rul-H1 — D4)* — TDD
 
@@ -558,3 +558,25 @@ Command: `cd software && python -m pytest -q`
 Result: **1044 passed**.
 
 **Flagged for user sign-off (D12).**
+
+### W3-15 — Wave 3 close-out
+
+All 14 W3 tasks done. Final suite run before opening the PR:
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed** (baseline was 1039; +5 across W3-1's and W3-3's TDD tasks).
+
+Findings closed this wave: rul-H1, app-H1, app-H2, app-M1, app-M2, app-M3, app-M4, rul-M1, rul-L4, rul-M3, cre-M3, mm-L8, app-M7, mm-M3 (both parts), mm-M6 (both parts), mm-L9, mm-L2, mm-L3, cre-M6, cre-M7, rul-L5.
+
+**Every DESIGN §6 sign-off item in this wave — none merged without being flagged here for review:**
+- **W3-6** — new rule: pre-Technique casters can push to Significant scope with a Spark.
+- **W3-8** — new canonical body text: the Trouble Table's MM2 home.
+- **W3-9** — new canonical body text: "Unnarrated details" and "Can I try again?" in III.1.
+- **W3-10** — the largest new-prose task of the cycle: MM2's "Adjudicating Magic" section. One factual inaccuracy in the initial draft (a misquoted established vignette) was caught during integration and corrected before commit — noted in the PR for extra scrutiny.
+- **W3-11** — MM2/MM4 coverage pointers (hazards, death-as-consent) and MM5's Adjudicating Magic compression.
+- **W3-13** — new framing prose: II.4a's missing Facet introduction.
+- **W3-14** — two findings ruled as-designed in `DECISIONS.md` (cre-M7, rul-L5) — the user may veto either, which escalates to Brain.
+
+**Model routing note:** all six prose sign-off tasks (W3-6, W3-8, W3-9, W3-10, W3-11, W3-13) were drafted by Opus subagents briefed with exact source citations, then fact-checked, reviewed, and integrated by this Sonnet session before commit — per the user's explicit direction earlier in this conversation. Every subagent draft was checked against its cited PHB/MM sources before landing; one inaccuracy was found and fixed (W3-10, see above).
+
+PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`.
