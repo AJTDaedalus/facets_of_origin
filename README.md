@@ -9,12 +9,17 @@ A digital-first, open-source tabletop RPG designed so the rules never get in the
 
 ## What's In The Box
 
+<!-- Figures below are derived from canon, not hand-maintained — verify against
+     source before editing: skill/domain counts from player_handbook/II.6 and
+     II.3; test count from `pytest --collect-only -q` (software/); enemy TR
+     values from enemies/*.fof; playtest count from committed playtest/ dirs. -->
+
 ### Player's Handbook (`player_handbook/`)
 
 The complete rulebook for players:
 
-- **Character Creation** — Attributes (9 stats, 18-point buy), three Facets (Body, Mind, Soul), 15 Backgrounds with starting skills and specialties, 24 skills across three facets
-- **Magic** — Domain + Intent + Scope system with no spell lists. 27 domains across three traditions (Resonance, Channeling, and one TBD). Focused, Standard, Broad, and Prismatic domain types
+- **Character Creation** — Attributes (9 stats, 18-point buy), three Facets (Body, Mind, Soul), 15 Backgrounds with starting skills and specialties, 15 skills across three facets
+- **Magic** — Domain + Intent + Scope system with no spell lists. 21 domains across two traditions (Resonance/Mind, Channeling/Soul); Body magic deferred to the Shattered Origin setting Facet. Focused, Standard, Broad, and Prismatic domain types
 - **Core Resolution** — 2d6 + modifier with three-tier outcomes (10+ full success, 7-9 partial, 6- consequence). Sparks add dice and drop lowest for pre-roll agency
 - **Combat** — Exchange-based (simultaneous action, no turn order), posture system, Endurance pool, conditions instead of HP, armor as condition downgrade
 - **Equipment** — Weapons, armor, adventuring gear, and services
@@ -39,7 +44,7 @@ Features:
 - **Tools** — Read-only character sheets, inventory management, rule reference cards, encounter budget calculator
 - **Builder** — Skill advancement (with PHB II.4 usage enforcement), technique selection, enemy/encounter builder, campaign notes
 
-613 tests. TDD throughout.
+1029 tests. TDD throughout.
 
 ### .fof File Format (`spec/`)
 
@@ -48,8 +53,8 @@ A YAML-based format for portable game documents. Types: `ruleset`, `character`, 
 ### Example Content
 
 - **Characters** (`characters/`) — Zahna (Mind/Guild Apprentice), Mordai (Body/City Watch), Zulnut (Body/Wandering Disciple)
-- **Enemies** (`enemies/`) — Harbor Thug (Mook TR 1), City Watch Sergeant (Named TR 8), Archive Guardian (Boss TR 16), and others
-- **Playtests** (`playtest/`) — Two simulated playtests with full session logs, dice rolls, and reports
+- **Enemies** (`enemies/`) — Harbor Thug (Mook TR 2), City Watch Sergeant (Named TR 8), Archive Guardian (Boss TR 17), and others
+- **Playtests** (`playtest/`) — Six simulated playtests with full session logs, dice rolls, and reports
 
 ---
 
@@ -78,7 +83,7 @@ Start with `player_handbook/Quick_Start.md` for a ten-minute overview, or `playe
 facets_of_origin/
 ├── player_handbook/       # Complete PHB: creation, rules, combat, equipment
 ├── mm_manual/             # Mirror Master's Manual (5 chapters)
-├── software/              # Web app, game engine, tests (613)
+├── software/              # Web app, game engine, tests (1029)
 │   ├── app/               # FastAPI backend + vanilla JS frontend
 │   ├── facets/base/       # Core ruleset YAML
 │   └── tests/             # Unit, integration, and e2e tests
@@ -100,7 +105,7 @@ facets_of_origin/
 - [x] Digital toolset: three-tab web app with real-time WebSocket
 - [x] Enemy/encounter design system with Threat Rating
 - [x] Mirror Master's Manual (5 chapters)
-- [x] Two simulated playtests with issue tracking
+- [x] Six simulated playtests with issue tracking
 - [ ] Persistent storage (sessions survive server restart)
 - [ ] First real playtest with human players
 - [ ] Adventure module: *The Shattered Crown*

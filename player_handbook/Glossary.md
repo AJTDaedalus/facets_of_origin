@@ -9,7 +9,7 @@ the full rule, follow the pointer.
 
 **Armor** — A per-scene downgrade budget: light armor softens the first 2 incoming Conditions by one tier each, heavy armor the first 4. The budget resets only at the end of the scene. *(Chapter III.3)*
 
-**Ascendant Domain** — A Tier 3 Technique that grants a Broad (Prismatic) domain built on an existing Mind or Soul domain. It uses the Broad difficulty table, and its Major-scope ceiling cannot be moved by Sparks. *(II.4b)*
+**Ascendant Domain** — A Tier 3 Technique that grants a Broad (Prismatic) domain built on an existing Mind or Soul domain. It uses the Broad difficulty table, and its Major-scope ceiling cannot be moved by Sparks. *(Chapters II.4b, II.4c)*
 
 **Attribute (Major/Minor)** — A character's fundamental capabilities. Major Attributes (Body, Mind, Soul) ground saving throws and broad, undefined situations, and are derived from their three Minor Attributes; Minor Attributes are rated 1–3 and used for most active rolls. *(Chapter II.2)*
 
@@ -67,7 +67,13 @@ the full rule, follow the pointer.
 
 **Named NPC** — A significant antagonist that uses the full combat structure — Resolve, Posture, reactions — with a Resolve of 3 or 4 by default. *(Chapter III.3)*
 
+**Off-Balance** — A Tier 1 Condition: the character's next reaction costs 1 additional Endurance. *(Chapter III.3)*
+
 **Partial Success** — A roll total of 7–9: the character achieves something, but not cleanly — the MM must name the cost before the player decides how to proceed. *(Chapter III.1)*
+
+**Party Strength** — The sum of all participating characters' Career Advances, used to size an encounter's difficulty band (Skirmish/Standard/Hard/Deadly) via the Encounter Recipe Table. *(MM1)*
+
+**Pinnacle Technique** — A powerful, character-defining ability outside the normal Technique tree, chosen at Major Advancement with MM approval; it should feel like the culmination of a demonstrated arc of play, not an item on a checklist. *(Chapter II.4)*
 
 **Posture (Aggressive/Measured/Defensive/Withdrawn)** — The broad tactical stance every combat participant declares simultaneously each exchange, before actions are chosen. Aggressive trades a first-reaction Endurance surcharge for +1 offense, Measured is the baseline, Defensive trades offense for cheaper reactions, and Withdrawn forgoes offense to recover 2 Endurance. *(Chapter III.3)*
 
@@ -85,11 +91,15 @@ the full rule, follow the pointer.
 
 **Rider** — An additional Tier 1 or Tier 2 Condition a player may hang on an enemy after a full-success Strike, on top of the Resolve it depletes. A Tier 2 rider leaves the enemy Easy to Strike until cleared, but riders never defeat an enemy on their own. *(Chapter III.3)*
 
+**Saving Throw** — A reactive roll made when something happens *to* a character rather than something they choose to attempt: 2d6 + the relevant Major Attribute modifier, resolved on the standard three-tier table. *(Chapter III.1)*
+
 **Scope (Minor/Significant/Major)** — How ambitious a magical effect is, declared before the roll: Minor (small, local, brief), Significant (a meaningful area or persisting effect), or Major (scene-changing, large-scale, or lasting). Scope, not visual impressiveness, sets the base difficulty. *(Chapter II.3)*
 
-**Second Domain** — A Tier 3 Technique, in each Facet's tree, that grants a second standard magical domain complementary to a character's original practice; effects within it are one difficulty step harder than the primary domain. A character holds one. *(II.4c)*
+**Second Domain** — A Tier 3 Technique, in the Mind and Soul trees, that grants a second standard magical domain complementary to a character's original practice; effects within it are one difficulty step harder than the primary domain. A character holds one. *(Chapters II.4b, II.4c)*
 
 **Secondary Skill** — A second skill from a character's Primary Facet, granted by their Background, starting at Novice with 1 mark already recorded. Magic-granting Backgrounds replace it with a domain origin instead. *(Chapter II.5)*
+
+**Shaken** — A Tier 1 Condition: the MM may direct the character's next action — a flinch, a hesitation, a brief retreat. *(Chapter III.3)*
 
 **Skill** — A specific area of developed capability, associated with one Facet and one governing Minor Attribute, rated Novice through Master. *(Chapter II.6)*
 
@@ -114,3 +124,7 @@ the full rule, follow the pointer.
 **Threat Rating (TR)** — A single number summarizing how dangerous one enemy is in combat, calculated as offense + durability + armor bonus + technique bonus. A calibration tool, not a precise simulation. *(MM1)*
 
 **Tier** — A level within a Facet's Technique tree. Tier 1 Techniques are available at Facet level 1; Tier 2 requires a Tier 1 Technique in the same branch, and Tier 3 requires a Tier 2 Technique in the same branch. *(Chapter II.4)*
+
+**Weapon (Heavy/Standard/Light/Ranged/Unarmed)** — A weapon's category sets which attribute a Strike uses: Heavy is Strength; Standard and Unarmed allow either Strength or Dexterity; Light and Ranged use Dexterity. All weapons have the same mechanical effect on a Strike — there are no damage dice or per-weapon stat blocks. *(Chapter IV.1)*
+
+**Winded** — A Tier 1 Condition: −1 to the character's next roll. *(Chapter III.3)*

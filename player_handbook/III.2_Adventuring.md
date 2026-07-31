@@ -16,7 +16,7 @@ A **Threat Clock** is a four-segment tracker, visible to the whole table, that r
 
 **Why the wind-back never rolls.** If winding the clock back required a roll, a 7–9 on that very roll would advance the clock you are trying to wind back — a rules-lawyer loop, and an unkind trap for the table in the one chapter written to keep hazards simple for a novice MM to run. Spending the action is the cost. It always works.
 
-**The pacing is deliberate.** Roughly 72% of rolls made near a hazard land on partial success or failure — that is simply how often a roll clears 6 or misses 10 across the game's normal range of modifiers. A 4-segment clock, at that rate, fills in roughly 3–4 party rolls. That is the intended feel: hazards should close in fast enough to matter within a single scene, not linger as background noise. If a hazard is dragging on past that window, the MM should either resolve it narratively or let it fill.
+**The pacing is deliberate.** Roughly 72% of rolls made near a hazard land on partial success or failure — that is simply how often a roll clears 6 or misses 10 across the game's normal range of modifiers. A 4-segment clock, at that rate, fills in roughly five or six party rolls. That is the intended feel: hazards should close in fast enough to matter within a single scene, not linger as background noise. If a hazard is dragging on past that window, the MM should either resolve it narratively or let it fill.
 
 No new resolution mechanic — the clock advances off the outcome tiers you already know from Chapter III.1. Multiple hazards can run at once, each on its own clock.
 
@@ -93,7 +93,7 @@ Both options are the player's to choose, never the MM's to impose. This is what 
 
 ---
 
-**MM:** "You catch it. Both hands, full squat, the wet weight of a mill floor across your shoulders — and it buys Zahna and Zulnut the doorway. I'm restarting the water's clock, and you are still standing in the hazard. It advances on Zahna's scramble up the millrace — a partial. It advances on Zulnut's. It fills on the beam itself settling deeper. The hazard strikes the one person still in it, and given what you are holding and where you are holding it: Mordai, you're **Broken**."
+**MM:** "You catch it. Both hands, full squat, the wet weight of a mill floor across your shoulders — and it buys Zahna and Zulnut the doorway. I'm restarting the water's clock, and you are still standing in the hazard. It advances on Zahna's scramble up the millrace — a partial, one. It advances on Zulnut's — a partial, two. It advances again as the stairs buckle half a step beneath them — a failure, three. It fills on the beam itself settling deeper — four. The hazard strikes the one person still in it, and given what you are holding and where you are holding it: Mordai, you're **Broken**."
 
 **MM:** "And I want to be precise here, because this is the one moment in the game where precision matters most. Broken doesn't kill you — ever. But the fiction right now is a man alone under a failing beam with the water at his chest, and if it comes down with him under it, that is the end. So the rules stop being mine and become yours. Two options. You take a permanent scar — we name it together, and Mordai lives. Or you choose a heroic death: one final action, anything you can describe, and it succeeds automatically — no roll, no difficulty. And then Mordai's story ends."
 

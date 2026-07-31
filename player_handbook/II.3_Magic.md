@@ -90,7 +90,7 @@ There are three domain types:
 
 A Focused domain mage lighting a candle rolls at Easy difficulty. A Broad domain mage doing the same rolls at Hard. Power at scale requires either the right domain type or the right Techniques. Broad domains cannot be pushed beyond Very Hard under any circumstances, including Sparks.
 
-Techniques within your Facet's tree can shift these difficulties further. A Tier 1 Soul Technique might make Minor effects in your domain one step easier; a Tier 2 Technique might remove unintended collateral within your declared intent. The domain defines what is on the table; Techniques define how cleanly you can achieve it.
+Techniques within the Mind and Soul trees can extend what your domain can do — Second Domain (Tier 3) opens an adjacent territory, and Ascendant Domain (Tier 3) unlocks prismatic practice. The domain defines what is on the table; Techniques define how far you can reach beyond it.
 
 ---
 
@@ -185,7 +185,7 @@ Magic in combat — casting time, reactions against magical effects, Conditions 
 
 ## Domain Quick Reference
 
-All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domain Catalog**. Prismatic domains (marked †) require a Tier 3 Technique to access.
+All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domain Catalog**. Prismatic domains (marked †) require a Tier 3 Technique to access. (Body magic domains are deferred to the Shattered Origin setting Facet — see *A Brief Note on Body Magic*, below.)
 
 ### Soul Domains
 
@@ -220,10 +220,6 @@ All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domai
 
 ---
 
-Full descriptions of all 21 domains — what each covers, example effects at each scope, and boundary guidance — are in the **Appendix: Magic Domain Catalog**.
-
----
-
 ## Acquiring a Domain
 
 > **Before the Technique:** Your domain origin comes from your Background (Chapter II.5), not your Technique. Until you unlock the corresponding Facet Technique, magic is real but limited: **Minor scope only**. You can light a candle, sense a vibration, or leave a small mark — but you cannot fill a room with fire or shatter a wall with sound. The Technique is not when you gain magic — it is when your magic becomes what it is capable of being. Minor scope uses the domain's normal difficulty table: Easy for Focused, Standard for Standard, Hard for Broad.
@@ -243,7 +239,7 @@ Soul Facet and Mind Facet Tier 1 Techniques each include domain selection as one
 
 A mage who already practises one domain can cross-train into the other Facet's Tier 1 Technique and take a domain from *that* Facet's list, held alongside the first. Both are practised at their own normal difficulty — neither is taxed for the other's existence. This is the only way to hold a domain in each of two Facets, and it is not cheap: it costs the standard cross-Facet advancement rate for every step of the other tree. A character may hold at most one domain per Facet by this route.
 
-Prismatic domains require the **Ascendant Domain** Technique (Tier 3, in each Facet's tree) and are never available as a starting domain. A character masters **one** prismatic territory — Ascendant Domain is taken once, however many Facet trees they eventually climb.
+Prismatic domains require the **Ascendant Domain** Technique (Tier 3, in the Mind and Soul trees) and are never available as a starting domain. A character masters **one** prismatic territory — Ascendant Domain is taken once, however many Facet trees they eventually climb.
 
 ---
 

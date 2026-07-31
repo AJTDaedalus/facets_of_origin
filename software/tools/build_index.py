@@ -106,10 +106,16 @@ def _chapter_label(path: Path) -> str:
 
 
 def _slugify(heading: str) -> str:
-    """A GitHub-flavored-markdown-style anchor for a heading."""
+    """A GitHub-flavored-markdown-style anchor for a heading.
+
+    GitHub emits one hyphen per whitespace character, not one per run of
+    whitespace — "Zahna — The Scholar" (em-dash stripped, leaving two spaces)
+    anchors to "zahna--the-scholar", not "zahna-the-scholar". Collapsing the
+    run with `\\s+` produces an anchor GitHub never generates.
+    """
     slug = heading.strip().lower()
     slug = re.sub(r"[^\w\s-]", "", slug)
-    slug = re.sub(r"\s+", "-", slug)
+    slug = re.sub(r"\s", "-", slug)
     return slug
 
 

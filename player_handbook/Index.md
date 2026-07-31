@@ -22,8 +22,6 @@
 
 ## Ascendant Domain
 
-*Defined in [II.4b](II.4b_Character_Creation_Facet_Mind.md).*
-
 - [Appendix Magic Domains — Prismatic Soul Domains](Appendix_Magic_Domains.md#prismatic-soul-domains)
 - [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
@@ -58,9 +56,9 @@
 - [II.5 — In Play: What the Background Sounds Like](II.5_Character_Creation_Backgrounds.md#in-play-what-the-background-sounds-like)
 - [II.6 — Overview](II.6_Character_Creation_Skills.md#overview)
 - [II.6 — Starting Skills](II.6_Character_Creation_Skills.md#starting-skills)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna-the-scholar)
-- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai-the-warrior)
-- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut-the-rogue)
+- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
+- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
+- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
 - [MM4 — The Player Who Disengages](../mm_manual/MM4_Running_the_Table.md#the-player-who-disengages)
 
 ## Boss
@@ -170,7 +168,6 @@
 - [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Attributes.md#in-play-the-vanishing-of-millhaven)
 - [II.3 — Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope)
 - [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 - [II.5 — Magic and Backgrounds](II.5_Character_Creation_Backgrounds.md#magic-and-backgrounds)
 - [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
 - [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
@@ -202,9 +199,9 @@
 - [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
 - [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna-the-scholar)
+- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [Quick Start — Example Scene: The Sealed Door](Quick_Start.md#example-scene-the-sealed-door)
-- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain-intent-scope)
+- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
 ## Domain Type
 
@@ -233,9 +230,9 @@
 - [III.3 — Running Out of Endurance](III.3_Combat.md#running-out-of-endurance)
 - [III.3 — Recovering Endurance](III.3_Combat.md#recovering-endurance)
 - [III.3 — Endurance](III.3_Combat.md#endurance)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna-the-scholar)
-- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai-the-warrior)
-- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut-the-rogue)
+- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
+- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
+- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
 - [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
 - [MM1 — Step 2: Pick a difficulty feel.](../mm_manual/MM1_Encounters_and_Enemies.md#step-2-pick-a-difficulty-feel)
@@ -273,20 +270,20 @@
 - [II.4 — What Is a Facet?](II.4_Character_Creation_Facets.md#what-is-a-facet)
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.4a — Character Creation: Facet of the Body](II.4a_Character_Creation_Facet_Body.md#character-creation-facet-of-the-body)
-- [II.4a — Facet of the Body — Technique Tree](II.4a_Character_Creation_Facet_Body.md#facet-of-the-body-technique-tree)
+- [II.4a — Facet of the Body — Technique Tree](II.4a_Character_Creation_Facet_Body.md#facet-of-the-body--technique-tree)
 - [II.4b — Character Creation: Facet of the Mind](II.4b_Character_Creation_Facet_Mind.md#character-creation-facet-of-the-mind)
 - [II.4b — The Mind Facet](II.4b_Character_Creation_Facet_Mind.md#the-mind-facet)
-- [II.4b — Facet of the Mind — Technique Tree](II.4b_Character_Creation_Facet_Mind.md#facet-of-the-mind-technique-tree)
+- [II.4b — Facet of the Mind — Technique Tree](II.4b_Character_Creation_Facet_Mind.md#facet-of-the-mind--technique-tree)
 - [II.4c — Character Creation: Facet of the Soul](II.4c_Character_Creation_Facet_Soul.md#character-creation-facet-of-the-soul)
 - [II.4c — The Soul Facet](II.4c_Character_Creation_Facet_Soul.md#the-soul-facet)
-- [II.4c — Facet of the Soul — Technique Tree](II.4c_Character_Creation_Facet_Soul.md#facet-of-the-soul-technique-tree)
+- [II.4c — Facet of the Soul — Technique Tree](II.4c_Character_Creation_Facet_Soul.md#facet-of-the-soul--technique-tree)
 - [II.5 — Body Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#body-facet-backgrounds)
 - [II.5 — Mind Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
 - [II.5 — Soul Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
 - [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna-the-scholar)
-- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai-the-warrior)
-- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut-the-rogue)
+- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
+- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
+- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM3 — Recognizing When It Is Done](../mm_manual/MM3_Campaign_Design.md#recognizing-when-it-is-done)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
@@ -349,7 +346,7 @@
 - [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
 - [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain-intent-scope)
+- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
 ## Major Advancement
 
@@ -374,8 +371,8 @@
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai-the-warrior)
-- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut-the-rogue)
+- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
+- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
@@ -409,7 +406,7 @@
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Threat Rating (TR)](../mm_manual/MM5_Quick_Reference.md#threat-rating-tr)
 - [MM5 — Encounter Budget (rough ordering check only)](../mm_manual/MM5_Quick_Reference.md#encounter-budget-rough-ordering-check-only)
-- [MM5 — Encounter Recipe Table (PS 3 — simulation-validated)](../mm_manual/MM5_Quick_Reference.md#encounter-recipe-table-ps-3-simulation-validated)
+- [MM5 — Encounter Recipe Table (PS 3 — simulation-validated)](../mm_manual/MM5_Quick_Reference.md#encounter-recipe-table-ps-3--simulation-validated)
 
 ## Named NPC
 
@@ -423,6 +420,19 @@
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
 - [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
 - [MM1 — Named NPCs](../mm_manual/MM1_Encounters_and_Enemies.md#named-npcs)
+
+## Off-Balance
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
+- [III.3 — Tier 1 Conditions](III.3_Combat.md#tier-1-conditions)
+- [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
+- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
+- [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
+- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
+- [MM5 — MM Trouble Table](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table)
 
 ## Partial Success
 
@@ -440,6 +450,20 @@
 - [MM2 — In Play: The Price of a Partial Success](../mm_manual/MM2_Session_Design.md#in-play-the-price-of-a-partial-success)
 - [MM4 — In Play: Sharing the Spotlight](../mm_manual/MM4_Running_the_Table.md#in-play-sharing-the-spotlight)
 - [MM5 — Common Rulings](../mm_manual/MM5_Quick_Reference.md#common-rulings)
+
+## Party Strength
+
+*Defined in [MM1](../mm_manual/MM1_Encounters_and_Enemies.md).*
+
+- [MM1 — Party Strength](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength)
+- [MM1 — Party Strength 3 (3 fresh characters, 1 career advance each)](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-3-3-fresh-characters-1-career-advance-each)
+- [MM1 — Party Strength 4 (4 PCs or 3 advanced PCs)](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-4-4-pcs-or-3-advanced-pcs)
+
+## Pinnacle Technique
+
+*Defined in [II.4](II.4_Character_Creation_Facets.md).*
+
+- [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
 
 ## Posture
 
@@ -474,9 +498,9 @@
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna-the-scholar)
-- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai-the-warrior)
-- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut-the-rogue)
+- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
+- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
+- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
 ## Rank
@@ -549,6 +573,12 @@
 - [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 
+## Saving Throw
+
+*Defined in [III.1](III.1_Core_Resolution.md).*
+
+- [III.1 — Saving Throws](III.1_Core_Resolution.md#saving-throws)
+
 ## Scope
 
 *Defined in [II.3](II.3_Magic.md).*
@@ -557,18 +587,15 @@
 - [Appendix Magic Domains — Prismatic Soul Domains](Appendix_Magic_Domains.md#prismatic-soul-domains)
 - [II.3 — Scope](II.3_Magic.md#scope)
 - [II.3 — Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 - [II.5 — Magic and Backgrounds](II.5_Character_Creation_Backgrounds.md#magic-and-backgrounds)
 - [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
 - [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna-the-scholar)
+- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [Quick Start — Example Scene: The Sealed Door](Quick_Start.md#example-scene-the-sealed-door)
-- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain-intent-scope)
+- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
 ## Second Domain
-
-*Defined in [II.4c](II.4c_Character_Creation_Facet_Soul.md).*
 
 - [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
@@ -581,7 +608,18 @@
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
 - [II.6 — Starting Skills](II.6_Character_Creation_Skills.md#starting-skills)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna-the-scholar)
+- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
+
+## Shaken
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
+- [III.3 — Tier 1 Conditions](III.3_Combat.md#tier-1-conditions)
+- [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
+- [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
+- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
+- [MM5 — MM Trouble Table](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table)
 
 ## Skill
 
@@ -603,7 +641,7 @@
 - [III.3 — Parry](III.3_Combat.md#parry)
 - [III.3 — Named NPCs](III.3_Combat.md#named-npcs)
 - [IV.1 — Specialized Gear](IV.1_Equipment.md#specialized-gear)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna-the-scholar)
+- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
@@ -647,9 +685,9 @@
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
 - [IV.1 — Specialized Gear](IV.1_Equipment.md#specialized-gear)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna-the-scholar)
-- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai-the-warrior)
-- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut-the-rogue)
+- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
+- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
+- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
 
 ## Staggered
 
@@ -705,15 +743,15 @@
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
 - [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [II.4a — Facet of the Body — Technique Tree](II.4a_Character_Creation_Facet_Body.md#facet-of-the-body-technique-tree)
-- [II.4b — Facet of the Mind — Technique Tree](II.4b_Character_Creation_Facet_Mind.md#facet-of-the-mind-technique-tree)
-- [II.4c — Facet of the Soul — Technique Tree](II.4c_Character_Creation_Facet_Soul.md#facet-of-the-soul-technique-tree)
+- [II.4a — Facet of the Body — Technique Tree](II.4a_Character_Creation_Facet_Body.md#facet-of-the-body--technique-tree)
+- [II.4b — Facet of the Mind — Technique Tree](II.4b_Character_Creation_Facet_Mind.md#facet-of-the-mind--technique-tree)
+- [II.4c — Facet of the Soul — Technique Tree](II.4c_Character_Creation_Facet_Soul.md#facet-of-the-soul--technique-tree)
 - [II.5 — Magic and Backgrounds](II.5_Character_Creation_Backgrounds.md#magic-and-backgrounds)
 - [II.6 — Complete Skill Reference](II.6_Character_Creation_Skills.md#complete-skill-reference)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna-the-scholar)
+- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
-- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain-intent-scope)
+- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 - [MM5 — Threat Rating (TR)](../mm_manual/MM5_Quick_Reference.md#threat-rating-tr)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
@@ -772,3 +810,30 @@
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
 - [MM5 — Armor (PC downgrade budget)](../mm_manual/MM5_Quick_Reference.md#armor-pc-downgrade-budget)
 - [MM5 — Endurance](../mm_manual/MM5_Quick_Reference.md#endurance)
+
+## Weapon
+
+*Defined in [IV.1](IV.1_Equipment.md).*
+
+- [II.2 — Body](II.2_Character_Creation_Attributes.md#body)
+- [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
+- [II.6 — Complete Skill Reference](II.6_Character_Creation_Skills.md#complete-skill-reference)
+- [III.3 — Strike](III.3_Combat.md#strike)
+- [III.3 — Parry](III.3_Combat.md#parry)
+- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [IV.1 — Weapon Specialization](IV.1_Equipment.md#weapon-specialization)
+- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
+- [MM5 — Reactions (1 per incoming action)](../mm_manual/MM5_Quick_Reference.md#reactions-1-per-incoming-action)
+
+## Winded
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [III.2 — In Play: The Mill at Millhaven](III.2_Adventuring.md#in-play-the-mill-at-millhaven)
+- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
+- [III.3 — Tier 1 Conditions](III.3_Combat.md#tier-1-conditions)
+- [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
+- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
+- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
+- [MM5 — MM Trouble Table](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table)
