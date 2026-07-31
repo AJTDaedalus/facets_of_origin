@@ -191,7 +191,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave1-correction
 - [x] W2-3 — MM1 enemy Attack/Defense modifiers: what they mean at the table. *(mm-M4)*
 - [x] W2-4 — Mook TR: the formula wins. *(mm-H1 — D2)*
 - [x] W2-5 — Retire superseded simulation citations. *(mm-M5, mm-L4, mm-L5)*
-- [ ] W2-6 — MM low-severity sweep. *(mm-L1, mm-L6, mm-L7)*
+- [x] W2-6 — MM low-severity sweep. *(mm-L1, mm-L6, mm-L7)*
 - [ ] W2-7 — facet.yaml: Overwhelming Force. *(sync-H-1)* **TDD**
 - [ ] W2-8 — Encode the magic-Technique domain prerequisite (the guard). *(sync-H-2, part 1)* **TDD**
 - [ ] W2-9 — Switch to the PHB's branch/tier prerequisite rule. *(sync-H-2, part 2)* **TDD**
@@ -272,6 +272,17 @@ Result: **1029 passed**.
 - `enemies/veteran_soldier.fof:41-42` — the notes field computed "effective TR 10 × 0.75 = 7.5 ... between Standard and Hard" for a solo encounter, using the pre-Series-9 TR-budget-with-solo-multiplier model. This directly contradicts MM1's current actor-count doctrine (`:136`: "One Named or one Boss is trivial for a fresh party no matter how high its TR"). Replaced with a note stating the current doctrine and steering the MM toward a multi-actor roster instead.
 - **Adjacent issue found, left out of scope:** `veteran_soldier.fof:16` — `defense_modifier: 3 # Parry: same roll` has the same "NPCs don't roll" problem W2-3 fixed in MM1, but this file wasn't named in either task's file list. Not fixed here to avoid unauthorized scope expansion; worth a follow-up sweep.
 - Regenerated `Index.md` — no diff. `research/simulation_log.md`'s Series 6 section remains labeled SUPERSEDED and untouched, per the task's explicit instruction.
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed**.
+
+### W2-6 *(mm-L1, mm-L6, mm-L7)*
+
+- `MM3:218` — the Facet Level 2 row claimed "a second and third Technique deepen their specialty," but II.4 grants exactly one Technique per Facet level, and MM3's own Level 3 row already claims "a third Technique unlock." Fixed to "a second Technique."
+- `MM1:220` — "(see *Armor*, above)" pointed at a heading named "Armor" that doesn't exist anywhere in MM1. The real referent is the "**Armor bonus:**" subsection. Fixed the pointer text to match.
+- `MM1:176` — "Mooks need only three things: an attack modifier, a fictional description, and a number" undercounted against its own four-step "Building a Mook" list (attack modifier, description, armor decision, calculate TR) two lines below. Fixed to "four things," naming the armor decision explicitly.
+- No rules text changed — counts and pointers only, per the task's accept criteria.
+- Regenerated `Index.md` — no diff.
 
 Command: `cd software && python -m pytest -q`
 Result: **1029 passed**.
