@@ -365,7 +365,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migrat
 - [x] W3-8 — Give the Trouble Table a canonical home. *(mm-M3, part 1 — D3)* — sign-off
 - [x] W3-9 — Two Common Rulings into III.1. *(mm-M3, part 2 — D3)* — sign-off
 - [x] W3-10 — MM2: "Adjudicating Magic". *(mm-M6 — D10, part 1)* — sign-off
-- [ ] W3-11 — MM coverage pointers + MM5 compression of the new section. *(mm-M6, mm-L9 — D10, part 2)* — sign-off
+- [x] W3-11 — MM coverage pointers + MM5 compression of the new section. *(mm-M6, mm-L9 — D10, part 2)* — sign-off
 - [x] W3-12 — MM5 Spark-economy drift. *(mm-L2, mm-L3)*
 - [x] W3-13 — II.4a gains its Facet introduction. *(cre-M6)* — sign-off
 - [x] W3-14 — Rule two findings as-designed. *(cre-M7, rul-L5)* — sign-off
@@ -541,3 +541,20 @@ Command: `cd software && python -m pytest -q`
 Result: **1044 passed**.
 
 **Flagged for user sign-off (D12) — the largest new-prose task in the cycle. Please review closely**, especially the "substance vs. rhyme" domain-boundary framing and the active-opposition floor's derived claim.
+
+### W3-11 *(mm-M6, mm-L9 — D10, part 2)* — sign-off item, drafted via Opus subagent
+
+- **Drafted by an Opus subagent** (briefed with the just-landed W3-10 "Adjudicating Magic" section, MM2's Pacing Toolkit, III.2's Hazards/Threat Clock and death-choice rules, II.5's Specialty rule, and MM5's existing citation conventions), reviewed, fact-checked, and integrated by Sonnet. Four pieces:
+  - `MM2_Session_Design.md` — new "### Hazards as a Pacing Tool" subsection at the end of Pacing Toolkit, closing MM2's total absence of any hazard/Threat Clock mention. States the mechanic (4-segment clock, advances on partial/failure, wind-back costs an action with no roll) and the pacing shape (fills in roughly five or six party rolls — matching the exact figure W1-6 already corrected in III.2), then points at III.2 for the full rule.
+  - `MM4_Running_the_Table.md` — new "### Character Death Is the Player's Call" subsection closing out Safety and Consent, framing the game's death-choice rule (scar vs. heroic death, player's call, never the MM's) explicitly as a consent mechanic — a real gap, since the section previously said nothing about death at all despite it being the most safety-relevant rule in the book.
+  - `MM5_Quick_Reference.md` Common Rulings — one new bullet compressing II.5's Specialty rule (directly applicable → Standard becomes Easy; tangential → free information, no roll), inserted between "When not to roll" and "Saving throws."
+  - `MM5_Quick_Reference.md` Magic quick ref — a new "### Adjudicating Magic (compressed from MM2 — see MM2 for full text)" subsection, six bullets compressing all four W3-10 topics (rule-out-loud habit, scope = scale + duration, pre-Technique ceiling, domain boundary substance-vs-rhyme, 7-9 complication categories, active-opposition floor) at quick-ref density, inserted right after the Second Domain bullet and before the pre-existing Magic 6- Templates subsection.
+- **Fact-check pass:** verified the Threat Clock mechanic and "five or six party rolls" figure against III.2 (matches the figure I corrected myself in W1-6); verified the death-choice language against III.2's "When a Character Would Die" (scar named together by player and MM, heroic death's final action auto-succeeds, player's choice never the MM's); verified the Specialty bullet against II.5:51; verified the MM5 Adjudicating Magic compression against the actual W3-10 text now in the file (including the Easy-cell floor claim already fact-checked once in W3-10).
+- No new mechanics — every line is a pointer to or compression of already-existing PHB/MM body text.
+- INV-6 (typographic dashes) verified green.
+- Regenerated `Index.md` — 4 new lines.
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+**Flagged for user sign-off (D12).**

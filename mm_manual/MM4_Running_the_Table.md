@@ -92,6 +92,14 @@ Before a scene you suspect might be intense: "This next part might get heavy —
 
 Most discomfort never reaches the X-card. It sits quietly with a player who doesn't want to make a fuss. Your job is to notice before it becomes a problem.
 
+### Character Death Is the Player's Call
+
+The hardest content this game can produce is the death of a character, and the rules already treat that as a consent question rather than an outcome you deliver. **Broken never kills.** A character at Tier 3 is out of the conflict, not out of the story. Death enters the game in exactly one circumstance — when a Broken result would end that character's life in the fiction — and at that moment the choice belongs to the player: a permanent scar the two of you name together, or a heroic death whose final action succeeds automatically. Never the MM's to impose, in either direction.
+
+Which means you are never the one deciding whether a character dies, and you should not try to be. Your job at that moment is narrow: say both options plainly, out loud, and then stop talking. The silence that follows is not indecision — it is someone weighing the end of a person they have been for a year of Tuesdays. Give it as much room as it needs, and take whichever answer comes back without arguing for the more dramatic one.
+
+The full rule is in Chapter III.2, *When a Character Would Die*.
+
 ---
 
 ## Difficult Situations

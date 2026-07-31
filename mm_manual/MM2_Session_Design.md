@@ -122,6 +122,14 @@ When a scene is dragging: cut it. "The sun is setting by the time you leave the 
 
 When a scene is building tension: shut up. Let the players drive. Your job is to answer their questions and react to their choices, not to narrate them toward a conclusion.
 
+### Hazards as a Pacing Tool
+
+Not every source of pressure is a person who takes an action. Rising water, a spreading fire, a ritual counting down — Chapter III.2 handles these with a **Threat Clock**: a four-segment tracker, visible to the whole table, that advances one segment on every partial success or failure rolled near the hazard and strikes when it fills. A character can wind it back one segment by spending their action on it. There is no roll for the wind-back; it simply works.
+
+What matters for pacing is the shape. At the game's normal spread of results, a four-segment clock fills in roughly five or six party rolls — which is to say, one scene. That makes it the cleanest way to put a timer on a scene with no fight in it: the search that has to finish before the tide turns, the negotiation happening while the building burns. It also does the work of urgency without you narrating urgency, because the table can watch it tick. Put a clock down when a scene needs pressure and an enemy would be the wrong answer, and if one is still half-empty long after the scene should have ended, either resolve the hazard narratively or let it fill. A clock that lingers stops being pressure and becomes furniture.
+
+The full mechanic is in Chapter III.2, *Hazards and Threat Clocks*.
+
 ---
 
 ## Scene Types

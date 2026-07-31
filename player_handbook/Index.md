@@ -108,6 +108,7 @@
 - [MM1 — Scaling Notes](../mm_manual/MM1_Encounters_and_Enemies.md#scaling-notes)
 - [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM2 — Tone and Expectations](../mm_manual/MM2_Session_Design.md#tone-and-expectations)
+- [MM4 — Character Death Is the Player's Call](../mm_manual/MM4_Running_the_Table.md#character-death-is-the-players-call)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
 - [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
 
@@ -715,6 +716,7 @@
 - [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
 - [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
+- [MM5 — Common Rulings](../mm_manual/MM5_Quick_Reference.md#common-rulings)
 
 ## Staggered
 
@@ -782,6 +784,7 @@
 - [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
+- [MM5 — Adjudicating Magic (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#adjudicating-magic-compressed-from-mm2--see-mm2-for-full-text)
 - [MM5 — Threat Rating (TR)](../mm_manual/MM5_Quick_Reference.md#threat-rating-tr)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
@@ -791,6 +794,7 @@
 
 - [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
 - [III.2 — In Play: The Mill at Millhaven](III.2_Adventuring.md#in-play-the-mill-at-millhaven)
+- [MM2 — Hazards as a Pacing Tool](../mm_manual/MM2_Session_Design.md#hazards-as-a-pacing-tool)
 
 ## Threat Rating
 

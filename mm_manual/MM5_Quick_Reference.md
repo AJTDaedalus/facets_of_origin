@@ -217,6 +217,15 @@ A charge is consumed only when armor provides the reduction actually applied —
   - **Pre-technique push:** a pre-technique caster may spend a Spark to attempt **one** Significant-scope effect at the domain's normal Significant difficulty. One effect per Spark — not an unlock; Major stays closed until the Tier 1 Technique.
 - **Second domain** (Soul Communion Tier 3): a second **standard** domain only — prismatic territories require Ascendant Domain. Effects in the second domain are always one difficulty step harder than the primary.
 
+### Adjudicating Magic (compressed from MM2 — see MM2 for full text)
+
+- **Rule out loud, before the dice.** Say the scope, say the difficulty, then roll. A ruling delivered after the result sounds like an adjustment.
+- **Scope = scale of change + duration.** Nothing else. Not how impressive it looks, not how well it was described, not target count (a dozen torches lit at once is still Minor). "And it stays that way" moves the tier on duration alone — catch it before the roll. When you correct scope upward, name the new difficulty and *pause*; scaling the intent back down is the player's call.
+- **Check the ceiling before you price the roll.** A pre-technique caster is capped at **Minor, full stop** — that is an availability question, not a difficulty one. Tell them what their magic can do now and let them re-aim.
+- **Domain boundaries — lean toward yes.** The test is substance vs. rhyme: does it run through the domain's actual material, or only share its mood? Fire burning the breathable content out of the air = yes; fire commanding the weather = no. Shadow muffling sound = yes; shadow granting invisibility = no. Don't surcharge a creative stretch — if the reach is more ambitious, that shows up as scope. A "no" is a **"No, but..."**. A "yes" is precedent — you are setting it permanently.
+- **7–9: the magic worked.** Confirm the success in the fiction *first*; the complication is added to a success, never a discount on one. Then pick one: **affects more than intended** / **costs something unexpected** / **creates a consequence nobody planned**. Mine the player's stated intent for the specifics. Rotate categories — four costs in a row and 7–9 becomes a flat fee. Test: does the table now have something to *do*?
+- **Active opposition = Standard floor.** A floor, not a surcharge. It only ever moves the **Easy** cell (Focused domain, Minor scope); every other combination already meets it, so raising a Hard roll "because combat" applies it twice. Opposition = something with its own will resisting *this working, right now* — a sealed door is difficulty, the rival holding it shut is opposition. Specific circumstances (distracted, wounded, constrained) may still adjust; "it is a battle" is not a circumstance.
+
 ### Magic 6- Templates (compressed from II.3 — see II.3 for full text)
 
 - **Wrong target:** the effect manifests on the wrong target.
@@ -307,5 +316,6 @@ Roll or pick a d6 for a generic 6- consequence when nothing specific comes to mi
 - **Contested roll (vs NPC):** Only the player rolls. NPC capability sets difficulty.
 - **"Can I try again?":** Only if the fiction changed — new approach, new information, or time passing that cost something. Otherwise the first result stands. A new approach gets a freshly declared difficulty (III.1, *Trying Again*).
 - **When not to roll:** Only roll when outcome is uncertain, stakes matter, and both success and failure move the story.
+- **Specialty:** A Background Specialty that *directly* applies turns a Standard roll Easy. When it is only tangential, hand over the information free — no roll (II.5, *Specialty*).
 - **Saving throws:** 2d6 + Major Attribute modifier (Body / Mind / Soul). Same three-tier outcomes. Use when something happens *to* the character, not something they choose.
 - **Mooks:** No Resolve, no Condition track. Any successful Strike (7+) removes one; an armored Mook needs a full success (10+).
