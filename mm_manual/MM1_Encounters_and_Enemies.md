@@ -408,4 +408,4 @@ Most sessions have 2–3 encounters. The ideal difficulty arc:
 
 **Never:** Deadly as the opener. Players need to feel competent before you challenge them.
 
-Simulation data confirms this arc: Skirmish → Standard survives at 98%. Skirmish → Standard → Hard survives at 55% — genuine late-session tension where smart play and lateral solutions determine the outcome.
+The Encounter Recipe Table above confirms the shape of this arc at each individual band — Skirmish (100% win rate), Standard (~76–80%), Hard (~47–48%) — so a Skirmish → Standard → Hard session climbs through progressively tighter margins by design, ending in genuine late-session tension where smart play and lateral solutions determine the outcome.

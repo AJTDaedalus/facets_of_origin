@@ -190,7 +190,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave1-correction
 - [x] W2-2 — Combat quick reference: declarable actions. *(rul-M2)*
 - [x] W2-3 — MM1 enemy Attack/Defense modifiers: what they mean at the table. *(mm-M4)*
 - [x] W2-4 — Mook TR: the formula wins. *(mm-H1 — D2)*
-- [ ] W2-5 — Retire superseded simulation citations. *(mm-M5, mm-L4, mm-L5)*
+- [x] W2-5 — Retire superseded simulation citations. *(mm-M5, mm-L4, mm-L5)*
 - [ ] W2-6 — MM low-severity sweep. *(mm-L1, mm-L6, mm-L7)*
 - [ ] W2-7 — facet.yaml: Overwhelming Force. *(sync-H-1)* **TDD**
 - [ ] W2-8 — Encode the magic-Technique domain prerequisite (the guard). *(sync-H-2, part 1)* **TDD**
@@ -261,6 +261,17 @@ playtest/06_expert_novice_campaign/scenario.md:47,52,73, session_log.md:71,79, l
 - `enemies/chicken.fof:18` — `tr: 1` is **correct**: attack −1 → offense 1 (not 2), + durability 0 = 1. No floor clamping even applies; the arithmetic is simply 1. The chicken remains the TR-1 baseline, not renamed, per the task instruction.
 - `software/tests/test_encounter.py:131`, `test_enemy.py:244-250`, `test_api_enemy.py:24`, `test_combat_characterization.py:37,174` — none hardcode an exact TR of 1 for Harbor Thug; they use `>= 1` floor checks or a synthetic, unrelated `"thug": 1` fixture for testing the weighting formula in isolation. Confirmed the full suite (1029) still passes after the `.fof` and MM1 edits — nothing broke.
 - **All committed `playtest/` scenario and session-log hits** (01, 02, 04, 05, 06) — these are historical playtest records for *other* Mooks (Dust Construct, Husk, Bandit Scout/Archer, Elite Bandit, Sparring Partner, Arena Assistant, Water-Logged Sentinel, Sonic Bat), not Harbor Thug, and several show the *same* systemic pattern (offense 2, misapplied "minimum TR 1" floor). They are out of this task's explicit scope (the task names four fix sites: `MM1:55, :121, :293` and `harbor_thug.fof:29`) and are transcripts of what happened in a specific simulated session — rewriting their numbers after the fact would falsify the historical record, the same principle W2-5 applies to superseded simulation citations (don't re-run simulations, don't rewrite history). Left untouched.
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed**.
+
+### W2-5 *(mm-M5, mm-L4, mm-L5)*
+
+- `MM1:411` (last line) — "Simulation data confirms this arc: Skirmish → Standard survives at 98%. Skirmish → Standard → Hard survives at 55%…" was sourced from Series 6/F (`research/simulation_log.md:352-353`), a section explicitly marked **SUPERSEDED (v0.2 semantics)** (`:365`) — those runs used the deprecated TR-budget multiplier definitions of Skirmish/Standard/Hard, not the current Recipe-Table ones (under which Hard alone is ~47%). Did not re-run simulations (per the task instruction); re-sourced to the current, already-validated Recipe Table numbers instead of inventing a new cumulative statistic: "the Encounter Recipe Table above confirms the shape of this arc at each individual band — Skirmish (100%), Standard (~76-80%), Hard (~47-48%)."
+- `MM2:165` — "A Skirmish-budget fight (Party Strength × 1) against Mooks" defined Skirmish by the deprecated TR-budget formula. The current definition (MM1's Encounter Recipe Table, `:343`) is a Mook-only roster, not a TR multiplier. Reworded to "A Skirmish fight (a Mook-only roster, per the Encounter Recipe Table)."
+- `enemies/veteran_soldier.fof:41-42` — the notes field computed "effective TR 10 × 0.75 = 7.5 ... between Standard and Hard" for a solo encounter, using the pre-Series-9 TR-budget-with-solo-multiplier model. This directly contradicts MM1's current actor-count doctrine (`:136`: "One Named or one Boss is trivial for a fresh party no matter how high its TR"). Replaced with a note stating the current doctrine and steering the MM toward a multi-actor roster instead.
+- **Adjacent issue found, left out of scope:** `veteran_soldier.fof:16` — `defense_modifier: 3 # Parry: same roll` has the same "NPCs don't roll" problem W2-3 fixed in MM1, but this file wasn't named in either task's file list. Not fixed here to avoid unauthorized scope expansion; worth a follow-up sweep.
+- Regenerated `Index.md` — no diff. `research/simulation_log.md`'s Series 6 section remains labeled SUPERSEDED and untouched, per the task's explicit instruction.
 
 Command: `cd software && python -m pytest -q`
 Result: **1029 passed**.
