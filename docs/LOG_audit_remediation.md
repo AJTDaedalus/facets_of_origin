@@ -367,7 +367,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migrat
 - [ ] W3-10 — MM2: "Adjudicating Magic". *(mm-M6 — D10, part 1)* — sign-off
 - [ ] W3-11 — MM coverage pointers + MM5 compression of the new section. *(mm-M6, mm-L9 — D10, part 2)* — sign-off
 - [x] W3-12 — MM5 Spark-economy drift. *(mm-L2, mm-L3)*
-- [ ] W3-13 — II.4a gains its Facet introduction. *(cre-M6)* — sign-off
+- [x] W3-13 — II.4a gains its Facet introduction. *(cre-M6)* — sign-off
 - [x] W3-14 — Rule two findings as-designed. *(cre-M7, rul-L5)* — sign-off
 - [ ] W3-15 — Wave 3 close-out.
 
@@ -484,6 +484,18 @@ Result: **1044 passed** (unaffected — `DECISIONS.md` isn't part of the tested 
 - INV-6 (typographic dashes) verified green.
 - Regenerated `Index.md` — 3 new lines (new heading term indexed).
 - **Flagged for user sign-off (D12) — new canonical rule text.**
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+### W3-13 *(cre-M6)* — sign-off item, drafted via Opus subagent
+
+- **Drafted by an Opus subagent** (briefed with II.4b's and II.4c's opening templates and II.4:13's one-sentence Body summary), reviewed and integrated by Sonnet.
+- `II.4a_Character_Creation_Facet_Body.md` — added a `## The Body Facet` section between the chapter title and `### Skills of the Body`, matching II.4b/II.4c's template exactly: paragraph 1 (who they are, how they solve problems, a three-way comparative sentence) + paragraph 2 (their tools + capstone). Deliberately used a fresh "wall" image for the comparative sentence rather than reusing the door metaphor a third time (it already appears verbatim in both `II.4_Character_Creation_Facets.md` and `II.4c`) — a voice call, noted for review.
+- No new mechanics — pure framing prose parallel to its siblings.
+- **Adjacent issue found, left out of scope:** II.4a uses `### Skills of the Body` (h3) while II.4b/II.4c use `## Skills of the Mind`/`## Skills of the Soul` (h2), so the new `## The Body Facet` (h2) now nests the existing h3 beneath it — a pre-existing heading-level inconsistency between II.4a and its siblings, not introduced by this task. Worth a follow-up sweep; not fixed here.
+- Regenerated `Index.md` — 1 new line.
+- **Flagged for user sign-off (D12) — new framing prose.**
 
 Command: `cd software && python -m pytest -q`
 Result: **1044 passed**.

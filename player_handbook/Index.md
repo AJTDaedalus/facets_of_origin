@@ -273,6 +273,7 @@
 - [II.4 — What Is a Facet?](II.4_Character_Creation_Facets.md#what-is-a-facet)
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.4a — Character Creation: Facet of the Body](II.4a_Character_Creation_Facet_Body.md#character-creation-facet-of-the-body)
+- [II.4a — The Body Facet](II.4a_Character_Creation_Facet_Body.md#the-body-facet)
 - [II.4a — Facet of the Body — Technique Tree](II.4a_Character_Creation_Facet_Body.md#facet-of-the-body--technique-tree)
 - [II.4b — Character Creation: Facet of the Mind](II.4b_Character_Creation_Facet_Mind.md#character-creation-facet-of-the-mind)
 - [II.4b — The Mind Facet](II.4b_Character_Creation_Facet_Mind.md#the-mind-facet)
