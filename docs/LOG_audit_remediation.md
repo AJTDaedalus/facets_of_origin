@@ -363,7 +363,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migrat
 - [x] W3-6 — Redefine pushing scope against the pre-Technique cap. *(cre-M3, mm-L8 — D8)* — sign-off
 - [x] W3-7 — The Shattered Origin promise, both fixes. *(app-M7 — D9)*
 - [ ] W3-8 — Give the Trouble Table a canonical home. *(mm-M3, part 1 — D3)* — sign-off
-- [ ] W3-9 — Two Common Rulings into III.1. *(mm-M3, part 2 — D3)* — sign-off
+- [x] W3-9 — Two Common Rulings into III.1. *(mm-M3, part 2 — D3)* — sign-off
 - [ ] W3-10 — MM2: "Adjudicating Magic". *(mm-M6 — D10, part 1)* — sign-off
 - [ ] W3-11 — MM coverage pointers + MM5 compression of the new section. *(mm-M6, mm-L9 — D10, part 2)* — sign-off
 - [x] W3-12 — MM5 Spark-economy drift. *(mm-L2, mm-L3)*
@@ -496,6 +496,19 @@ Result: **1044 passed**.
 - **Adjacent issue found, left out of scope:** II.4a uses `### Skills of the Body` (h3) while II.4b/II.4c use `## Skills of the Mind`/`## Skills of the Soul` (h2), so the new `## The Body Facet` (h2) now nests the existing h3 beneath it — a pre-existing heading-level inconsistency between II.4a and its siblings, not introduced by this task. Worth a follow-up sweep; not fixed here.
 - Regenerated `Index.md` — 1 new line.
 - **Flagged for user sign-off (D12) — new framing prose.**
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+### W3-9 *(mm-M3, part 2 — D3)* — sign-off item, drafted via Opus subagent
+
+- **Drafted by an Opus subagent** (briefed with III.1's structure/voice and MM5's existing "Unnarrated details" / "Can I try again?" bullets, which had no canonical source at all before this task), reviewed and integrated by Sonnet.
+- `III.1_Core_Resolution.md` — added a new `## Standing Rulings` section at the end of the chapter (after "Failure (6-)"), with two subsections:
+  - **Acting on Unnarrated Details** — players can always *ask* about the scene; they cannot *declare* an action assuming an unstated fact. Ties to the existing "lean toward yes" default.
+  - **Trying Again** — a failed/partial roll may be retried only if the fiction has genuinely changed (new approach, new information, or time passing that cost something); otherwise the first result stands. Explicitly grounded in the already-canonical "a 6- is a development, never a dead end" principle.
+- `MM5_Quick_Reference.md` — both Common Rulings bullets now cite their III.1 source (matching the file's existing trailing-parenthetical convention, e.g. `III.3:192`'s `(III.3, *Armor and Reaction Downgrades*)`), and compress the new body text rather than standing as unsourced assertions.
+- Regenerated `Index.md` — no diff (neither new heading names a Glossary term).
+- **Flagged for user sign-off (D12) — new canonical rule text.** Per the task's stated exception: if either ruling is rejected as non-canon, delete it from MM5 rather than keep an orphaned quick-ref line.
 
 Command: `cd software && python -m pytest -q`
 Result: **1044 passed**.

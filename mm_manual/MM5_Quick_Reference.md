@@ -297,10 +297,10 @@ Roll (or pick) a d6 for a generic 6- consequence when nothing specific comes to 
 
 ## Common Rulings
 
-- **Unnarrated details:** Players cannot act on details the MM has not described.
+- **Unnarrated details:** Players cannot act on details the MM has not described. A player may always ask — and the default answer leans yes — but cannot declare an action that assumes the answer (III.1, *Acting on Unnarrated Details*).
 - **Contested roll (PvP):** Both sides roll; higher total wins. On a tie, both achieve partial success.
 - **Contested roll (vs NPC):** Only the player rolls. NPC capability sets difficulty.
-- **"Can I try again?":** Only if the fiction changes — new approach, new info, or time passes.
+- **"Can I try again?":** Only if the fiction changed — new approach, new information, or time passing that cost something. Otherwise the first result stands. A new approach gets a freshly declared difficulty (III.1, *Trying Again*).
 - **When not to roll:** Only roll when outcome is uncertain, stakes matter, and both success and failure move the story.
 - **Saving throws:** 2d6 + Major Attribute modifier (Body / Mind / Soul). Same three-tier outcomes. Use when something happens *to* the character, not something they choose.
 - **Mooks:** No Resolve, no Condition track. Any successful Strike (7+) removes one; an armored Mook needs a full success (10+).
