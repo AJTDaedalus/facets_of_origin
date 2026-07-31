@@ -360,7 +360,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migrat
 - [x] W3-3 — Rebuild the character sheet appendix to the amended spec. *(D7, part 2)* **TDD**
 - [x] W3-4 — 0 Endurance means Absorb only, absolutely. *(rul-M1, rul-L4 — D5)* **TDD**
 - [x] W3-5 — Cut Reckless Press. *(rul-M3 — D6)*
-- [ ] W3-6 — Redefine pushing scope against the pre-Technique cap. *(cre-M3, mm-L8 — D8)* — sign-off
+- [x] W3-6 — Redefine pushing scope against the pre-Technique cap. *(cre-M3, mm-L8 — D8)* — sign-off
 - [x] W3-7 — The Shattered Origin promise, both fixes. *(app-M7 — D9)*
 - [ ] W3-8 — Give the Trouble Table a canonical home. *(mm-M3, part 1 — D3)* — sign-off
 - [ ] W3-9 — Two Common Rulings into III.1. *(mm-M3, part 2 — D3)* — sign-off
@@ -475,3 +475,15 @@ Added a new "Completeness Audit Remediation — Wave 3" section to `docs/DECISIO
 
 Command: `cd software && python -m pytest -q`
 Result: **1044 passed** (unaffected — `DECISIONS.md` isn't part of the tested corpus).
+
+### W3-6 *(cre-M3, mm-L8 — D8)* — sign-off item, drafted via Opus subagent
+
+- **Drafted by an Opus subagent** (briefed with II.3's "Sparks and Magic" section, the "Before the Technique" blockquote, MM5's magic quick ref, and II.4c:135), reviewed and integrated by Sonnet.
+- `II.3_Magic.md` — added a new bullet, **"Reaching Significant early (before the Technique)"**, between the existing "Pushing scope" and "Easing Major effects" bullets: a pre-Technique caster may spend a Spark to attempt one Significant-scope effect at the domain's normal Significant difficulty (the Spark buys scope, not a discount) — one effect per Spark, not a permanent unlock; Major stays closed until the Tier 1 Technique. Has a real referent back to the Minor-scope cap (points at *Before the Technique*, below it in the same chapter).
+- `MM5_Quick_Reference.md` — rewrote the four post-difficulty-table bullets to group **all three** Spark-magic rules together (Focused eases Major / Broad ceiling immovable / the new pre-Technique push) and added the "standard domains only" qualifier to the Second Domain bullet (from II.4c:135), which the old MM5 line lacked.
+- INV-6 (typographic dashes) verified green.
+- Regenerated `Index.md` — 3 new lines (new heading term indexed).
+- **Flagged for user sign-off (D12) — new canonical rule text.**
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.

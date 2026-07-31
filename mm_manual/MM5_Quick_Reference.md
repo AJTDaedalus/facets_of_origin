@@ -210,10 +210,12 @@ A charge is consumed only when armor provides the reduction actually applied —
 | Significant | Standard | Hard | Very Hard |
 | Major | Hard | Very Hard | Very Hard (ceiling) |
 
-- **Pre-technique:** Minor scope only (no difficulty penalty — scope restriction alone is the limitation)
-- Prismatic ceiling is **unmovable** — Sparks cannot ease Major scope for Broad domains
-- Focused domains **can** Spark to ease Major one step
-- Second domain (Soul Communion Tier 3): always one difficulty step harder
+- **Pre-technique:** Minor scope only, at the domain's normal difficulty (no extra penalty — the scope restriction *is* the limitation)
+- **Sparks and scope** — three rules, all optional, all player-declared before the roll:
+  - **Focused eases Major:** a Focused domain may spend a Spark to shift a Major effect one step easier (Hard → Standard). Focused only.
+  - **Prismatic ceiling is unmovable:** no Spark eases Major for a Broad domain. Very Hard is Very Hard.
+  - **Pre-technique push:** a pre-technique caster may spend a Spark to attempt **one** Significant-scope effect at the domain's normal Significant difficulty. One effect per Spark — not an unlock; Major stays closed until the Tier 1 Technique.
+- **Second domain** (Soul Communion Tier 3): a second **standard** domain only — prismatic territories require Ascendant Domain. Effects in the second domain are always one difficulty step harder than the primary.
 
 ### Magic 6- Templates (compressed from II.3 — see II.3 for full text)
 

@@ -605,6 +605,7 @@
 
 - [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
+- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
 ## Secondary Skill
 
@@ -747,6 +748,7 @@
 - [Appendix Magic Domains — Prismatic Soul Domains](Appendix_Magic_Domains.md#prismatic-soul-domains)
 - [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
+- [II.3 — Sparks and Magic](II.3_Magic.md#sparks-and-magic)
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
 - [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
@@ -817,6 +819,7 @@
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
 - [MM5 — Armor (PC downgrade budget)](../mm_manual/MM5_Quick_Reference.md#armor-pc-downgrade-budget)
 - [MM5 — Endurance](../mm_manual/MM5_Quick_Reference.md#endurance)
+- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
 ## Weapon
 
