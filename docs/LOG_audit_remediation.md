@@ -361,7 +361,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migrat
 - [x] W3-4 — 0 Endurance means Absorb only, absolutely. *(rul-M1, rul-L4 — D5)* **TDD**
 - [x] W3-5 — Cut Reckless Press. *(rul-M3 — D6)*
 - [ ] W3-6 — Redefine pushing scope against the pre-Technique cap. *(cre-M3, mm-L8 — D8)* — sign-off
-- [ ] W3-7 — The Shattered Origin promise, both fixes. *(app-M7 — D9)*
+- [x] W3-7 — The Shattered Origin promise, both fixes. *(app-M7 — D9)*
 - [ ] W3-8 — Give the Trouble Table a canonical home. *(mm-M3, part 1 — D3)* — sign-off
 - [ ] W3-9 — Two Common Rulings into III.1. *(mm-M3, part 2 — D3)* — sign-off
 - [ ] W3-10 — MM2: "Adjudicating Magic". *(mm-M6 — D10, part 1)* — sign-off
@@ -440,6 +440,15 @@ Result: **1044 passed** (1042 + 2 new).
 - `III.3:395` (Gamble) — "Reckless Press" named a mechanic that was just the plain Spark rule (III.1:73-76: spend a Spark, add a d6, drop the lowest) under a different name, with no distinct effect of its own. A named mechanic must earn its name. Rewrote to point at the actual Spark rule directly.
 - Grepped `Reckless` repo-wide: zero hits in `player_handbook/`, `mm_manual/`, `software/`, `characters/`, `enemies/`, `spec/`. The only remaining hits are in `docs/` — the audit corpus and this plan itself, which legitimately discuss the finding being fixed, not shipped content.
 - Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+### W3-7 *(app-M7 — D9)*
+
+- `I_Introduction.md:27` — "This handbook includes the Shattered Origin setting" overclaimed completeness (II.3 already defers Body magic domains to a forthcoming "Shattered Origin setting Facet," so the full setting isn't actually included). Softened to "is set in Shattered Origin," and named the forthcoming setting Facet explicitly.
+- `Table_of_Contents.md` — added **"Shattered Origin (setting Facet)"** to the Facets (Optional Modules) planned list, giving II.3:252's Body-magic deferral an actual destination in the ToC, matching the other five planned-module entries' format.
+- Regenerated `Index.md` — no diff (`Table_of_Contents.md` is in `NOT_INDEXED`; `I_Introduction.md`'s change touched no heading).
 
 Command: `cd software && python -m pytest -q`
 Result: **1044 passed**.

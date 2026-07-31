@@ -56,3 +56,4 @@ The following content is not part of the core rules. Each is available as a stan
 - **Economy** — Detailed trade, commerce, and resource management
 - **Feats** — Additional mechanical depth for character customization beyond core advancement
 - **Technology** — Rules for technological settings and equipment; required for science fiction or steampunk campaigns
+- **Shattered Origin (setting Facet)** — The full Shattered Origin setting: expanded lore, additional lineages, and setting-specific content including Body magic domains
