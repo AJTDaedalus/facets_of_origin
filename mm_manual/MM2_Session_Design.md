@@ -298,6 +298,119 @@ None of this is a subsystem. The table exists to get you from a silent pause to 
 
 ---
 
+## Adjudicating Magic
+
+Magic in Facets of Origin has no spell list, which means it has no lookup table to hide behind. When a player says "I want to pull the heat out of the air in front of the door," the rules do not answer them — you do. Three times per working, in fact: is this inside their domain, how ambitious is it, and what does a partial success cost them.
+
+This is less frightening than it sounds. The player is doing most of the work. They name the domain, they describe the intent, they declare the scope. Your job is to confirm the classification, set the difficulty, and — when the dice land in the middle — invent the thing that goes sideways. Everything below is about doing that quickly enough that the table does not lose momentum.
+
+The one habit worth building above all others: **rule out loud, before the dice.** Say the scope, say the difficulty, then roll. A ruling delivered after the result always sounds like an adjustment, even when it is not.
+
+### Judging Scope
+
+The player declares scope. You ratify it — or you correct it, and then you let them respond.
+
+Scope is set by two things and only two things: **scale of change and duration**. How much of the world is different afterward, and for how long. That is the entire test.
+
+It is emphatically *not* set by how impressive the effect looks, how many words the player used to describe it, or how clever the idea was. A Verdance mage coaxing one dead vine to bloom is Minor even when it is the most beautiful thing that happens all session. Nor is it set by target count: a Fire mage lighting a dozen torches at once is still Minor, because each individual change is trivially small.
+
+Run the request against the table's own markers:
+
+- **Minor** — a single object or creature, immediate area, short duration.
+- **Significant** — several creatures, a room, an effect that persists.
+- **Major** — a building, a crowd, a creature unmade, an effect that endures.
+
+Two judgment calls, worked:
+
+> *Zahna: "I inscribe a hold-glyph across the door seam so it will not open while we get clear."*
+>
+> *MM: "That is a door fused shut for the length of the scene — Significant. Focused domain, so Standard difficulty. Roll Knowledge."*
+
+Same intent, one variable changed:
+
+> *Zahna: "I want it to hold after we are gone. Days, if it can."*
+>
+> *MM: "Then it is a ward, and it endures. Major, which is Hard for you. Same glyph, same door — you are just asking it to outlive you."*
+
+Nothing about the mark changed. Nothing about the door changed. Duration alone moved it two rows down the table, and that is correct: duration is one of the two axes, so it can carry a working across a tier on its own.
+
+The second call is the more common one at real tables, because players routinely tack "and it stays that way" onto the end of an intent without hearing themselves do it. Catch it before the roll, not after.
+
+**When you correct a scope upward, say the new difficulty and pause.** The player may want to scale the intent back down — a narrower area, a shorter duration, one target instead of the room. That trade of ambition against probability is the heart of scope declaration, and it belongs to the player. Announcing "that is Major, which is Hard for you" and then rolling immediately takes the decision away from them. Announce it, then wait two seconds. They will tell you which they want.
+
+> **Check the ceiling before you price the roll.** A character whose Background granted a domain but who has not yet unlocked the corresponding Facet Technique is limited to **Minor scope, full stop** (see II.3, *Acquiring a Domain*). This is not a difficulty question — a Significant working is not hard for them, it is unavailable. If a new player declares something Significant, the correct response is to tell them what their magic can do right now and let them re-aim, not to set a punishing number.
+
+### Domain Boundary Calls
+
+A domain is licensed territory, agreed at character creation and used consistently from there. The catalog entry — or the player's own agreed description of a custom domain — is the artifact you consult. It is short on purpose.
+
+When a request is genuinely borderline, **the default is yes.** Not "yes if they argue well." Yes. Magic in this game exists to make the table lean forward, and the edge cases are where the best stories happen. If you find yourself building a case for no, notice that you are building it.
+
+What separates a borderline yes from an actual no is not how far the request reaches — it is *what it reaches through*. Ask: does this run through the substance of the domain, or does it merely rhyme with the domain's mood?
+
+- Fire used to burn the breathable content out of the air is **substance**. Air and fire are in an actual physical relationship, and the mage is operating on it. Yes.
+- Fire used to command the weather is **rhyme**. Fire is hot and storms are loud, and that is the entire connection. No.
+- Shadow used to muffle sound is **substance** — near enough to the domain's stated territory that the reach is short. Yes.
+- Shadow used to turn the mage invisible is **rhyme**. Darkness is inconvenient to see through; that does not make it a different kind of light. No.
+
+Three practical notes.
+
+**Do not surcharge the stretch.** There is no column in the difficulty table for "was this creative." A borderline yes is priced exactly like any other working: domain type against scope. If the reach makes the effect more ambitious, that shows up as scope and it shows up honestly. Adding a step because the idea was clever teaches players not to be.
+
+**A yes is precedent.** Domains are used *consistently* through play, which means the boundary you drew tonight is the boundary next month. This is a reason to be generous, not cautious — the player who learns their Shadow can touch sound will build three sessions of ideas on it, and that is the system working. But say yes knowing you are saying it permanently.
+
+**A no is a "No, but..."** — the same tool from the Improvisation section, applied to magic. Say it clearly, say why, and point at what *is* available. "Your fire does not reach the storm. But there is a great deal of dry timber between you and that gate, and wind is already doing half your work."
+
+If you notice the same boundary being renegotiated every session, that is not a ruling problem. Domain breadth is a one-time conversation at character creation, not a recurring negotiation mid-session — so have the conversation again, once, between sessions, and write down what you land on.
+
+### Designing the 7-9 Complication
+
+The complication is your call. It is also the single most improvisationally demanding thing magic asks of you, because it arrives without warning and the table is looking at you.
+
+Start from the fixed point: **on a 7-9 the magic worked.** Confirm that first, in the fiction, before anything else. The complication is something added to a success, never a discount applied to one. A player who hears their partial success narrated as a near-miss has been told the wrong thing.
+
+Then reach for one of three categories:
+
+1. **It affects more than intended.** The fire spreads farther. The sound dampens the wrong area. The working overshoots its boundary.
+2. **It costs something unexpected.** A brief drain, a destroyed component, a visible trace the magic should not have left.
+3. **It creates a consequence nobody planned for.** The creature is bound — and it is now watching you.
+
+The fastest way to use these is to stop searching your imagination and start searching **the player's intent**. A precise intent contains its own complication, because in naming exactly what they wanted, the player has named a boundary that can be exceeded, a resource that can be spent, and an audience that can notice. Take Zahna's freeze-the-lock working and run all three:
+
+- *Affects more:* the cold does not stop at the lock. The hinges contract too, and now the door is stuck shut — which is not what anyone wanted, since they were trying to open it.
+- *Costs something:* the heat had to go somewhere. It went into Zahna, and he is sweating in a way that will be extremely difficult to explain to the person on the other side of that door.
+- *Creates a consequence:* metal contracting under sudden cold makes a sound. A sharp one. Something upstairs heard it.
+
+Three complications, one intent, about eight seconds of thought. This is why the PHB pushes players toward specific intent: vague intent gets a vague result, and it also leaves you with nothing to work from.
+
+Two disciplines worth keeping:
+
+**Rotate the categories.** Not a rule — a habit. If your last four complications were all costs, the table has quietly learned that 7-9 means "pay a fee," and the tier stops being interesting. Category 2 is the one that decays fastest, because a cost with nothing attached to it is just subtraction. If you reach for a cost, hang something on it: the destroyed component is a scene next week, the visible trace is a person who sees it.
+
+**Apply the test.** A complication should move the story forward, not simply punish the player. The check is whether the table now has something to *do* — a new problem, a new person, a new piece of information, a decision that was not on the table a moment ago. If the answer is "they are slightly worse off and nothing else changed," discard it and pick a different category.
+
+And say it in the fiction, not in the mechanics. Not "you take a complication, the noise attracts attention." *"The glyph bit exactly where you wanted it. It also made a crack like a cannon shot, and whatever is alive on the floor above you now knows precisely where you are."*
+
+(For the other end of the range, the 6- templates in II.3 are a separate toolkit and a genuinely good one. Different problem, different sidebar.)
+
+### Magic Against Active Opposition
+
+**Active opposition counts as at least Standard difficulty for magical actions.** That is the whole rule, and it is worth understanding precisely, because it is narrower than it first appears.
+
+It is a **floor, not a surcharge.** Scope difficulty still applies normally on top of the domain type table — a Focused mage attempting a Major working mid-fight is rolling at Hard, exactly as they would in an empty room. Nothing is added. The floor simply says that nothing goes *below* Standard while something is actively working against you.
+
+Which means it bites in exactly one place: **the Easy cell.** A Focused domain at Minor scope is the only combination the table prices below Standard, so it is the only combination the floor ever moves. Everything else — any Standard domain, any Broad domain, any scope above Minor — already meets or exceeds the floor and is entirely unaffected. If you catch yourself raising a difficulty because of the floor and the roll was not going to be Easy, you have applied it twice.
+
+The practical consequence is that the floor mostly lands on newer casters and on small workings: the Focused mage who lights a candle at Easy all session finds that lighting the enemy's cloak while the enemy objects is Standard. That is the intended lesson, and it is a cheap one to teach.
+
+> **It is not a combat tax.** The chaos of combat does not add difficulty on its own. Magic is instant and carries the same action economy as a Strike, so a working in an exchange is not paying for the exchange — it is paying for scope, exactly like everything else.
+
+**When does opposition count as active?** In a fight, essentially always — that is what a fight is. Outside one, the test is whether something with its own will is resisting *this working, right now*. A sealed door is not opposition; it is a difficulty. The rival practitioner holding that door shut while you try to open it is opposition. The distinction is resistance, not initiative order.
+
+Beyond the floor, you may still adjust for **specific circumstances** — distracted, wounded, constrained are the ones the rules name. Note what those have in common: each describes something concrete about the caster's situation, not about the scene's general mood. Before you adjust, make yourself name the interference in one clause. "He is holding up a collapsing beam with both hands so the others can get through" is a circumstance. "It is a battle" is not — that is already priced in, and charging for it again turns every magical character into a liability in exactly the scenes they should be shaping.
+
+---
+
 ## Managing Player Spotlight
 
 Every player at your table deserves moments where the game is about their character. Not adjacent to their character. About them. The Mirror Master's title is not decorative — you are reflecting the story back onto the players, and your job is to make sure every player sees themselves in it.

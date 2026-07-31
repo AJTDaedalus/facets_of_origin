@@ -60,6 +60,7 @@
 - [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
 - [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
+- [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
 - [MM4 — The Player Who Disengages](../mm_manual/MM4_Running_the_Table.md#the-player-who-disengages)
 
 ## Boss
@@ -181,6 +182,9 @@
 - [IV.1 — Specialized Gear](IV.1_Equipment.md#specialized-gear)
 - [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM1 — Step 2: Pick a difficulty feel.](../mm_manual/MM1_Encounters_and_Enemies.md#step-2-pick-a-difficulty-feel)
+- [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
+- [MM2 — Domain Boundary Calls](../mm_manual/MM2_Session_Design.md#domain-boundary-calls)
+- [MM2 — Magic Against Active Opposition](../mm_manual/MM2_Session_Design.md#magic-against-active-opposition)
 - [MM2 — In Play: The Price of a Partial Success](../mm_manual/MM2_Session_Design.md#in-play-the-price-of-a-partial-success)
 - [MM3 — Difficulty Should Breathe](../mm_manual/MM3_Campaign_Design.md#difficulty-should-breathe)
 - [MM5 — Difficulty](../mm_manual/MM5_Quick_Reference.md#difficulty)
@@ -206,6 +210,7 @@
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
 - [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [Quick Start — Example Scene: The Sealed Door](Quick_Start.md#example-scene-the-sealed-door)
+- [MM2 — Domain Boundary Calls](../mm_manual/MM2_Session_Design.md#domain-boundary-calls)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
 ## Domain Type
@@ -213,6 +218,7 @@
 *Defined in [II.3](II.3_Magic.md).*
 
 - [II.3 — Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope)
+- [MM2 — Domain Boundary Calls](../mm_manual/MM2_Session_Design.md#domain-boundary-calls)
 
 ## Encounter Budget
 
@@ -260,6 +266,7 @@
 - [MM1 — Overview](../mm_manual/MM1_Encounters_and_Enemies.md#overview)
 - [MM1 — Scaling Notes](../mm_manual/MM1_Encounters_and_Enemies.md#scaling-notes)
 - [MM2 — Combat](../mm_manual/MM2_Session_Design.md#combat)
+- [MM2 — Magic Against Active Opposition](../mm_manual/MM2_Session_Design.md#magic-against-active-opposition)
 - [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
 - [MM4 — Player Types and Motivations](../mm_manual/MM4_Running_the_Table.md#player-types-and-motivations)
 - [MM4 — Common Early Mistakes](../mm_manual/MM4_Running_the_Table.md#common-early-mistakes)
@@ -291,6 +298,7 @@
 - [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
 - [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
+- [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM3 — Recognizing When It Is Done](../mm_manual/MM3_Campaign_Design.md#recognizing-when-it-is-done)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
@@ -355,6 +363,8 @@
 - [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
 - [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
+- [MM2 — Designing the 7-9 Complication](../mm_manual/MM2_Session_Design.md#designing-the-7-9-complication)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
 ## Major Advancement
@@ -606,6 +616,7 @@
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
 - [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [Quick Start — Example Scene: The Sealed Door](Quick_Start.md#example-scene-the-sealed-door)
+- [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
 ## Second Domain
@@ -738,6 +749,7 @@
 - [IV.1 — Weapons](IV.1_Equipment.md#weapons)
 - [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
+- [MM2 — Magic Against Active Opposition](../mm_manual/MM2_Session_Design.md#magic-against-active-opposition)
 - [MM2 — Quiet Players vs. Dominant Players](../mm_manual/MM2_Session_Design.md#quiet-players-vs-dominant-players)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 
@@ -767,6 +779,7 @@
 - [II.6 — Complete Skill Reference](II.6_Character_Creation_Skills.md#complete-skill-reference)
 - [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
+- [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 - [MM5 — Threat Rating (TR)](../mm_manual/MM5_Quick_Reference.md#threat-rating-tr)
@@ -823,6 +836,7 @@
 - [MM1 — The TR budget (a rough ordering check only)](../mm_manual/MM1_Encounters_and_Enemies.md#the-tr-budget-a-rough-ordering-check-only)
 - [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
 - [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
+- [MM2 — Designing the 7-9 Complication](../mm_manual/MM2_Session_Design.md#designing-the-7-9-complication)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Reactions (1 per incoming action)](../mm_manual/MM5_Quick_Reference.md#reactions-1-per-incoming-action)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)

@@ -364,7 +364,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migrat
 - [x] W3-7 — The Shattered Origin promise, both fixes. *(app-M7 — D9)*
 - [x] W3-8 — Give the Trouble Table a canonical home. *(mm-M3, part 1 — D3)* — sign-off
 - [x] W3-9 — Two Common Rulings into III.1. *(mm-M3, part 2 — D3)* — sign-off
-- [ ] W3-10 — MM2: "Adjudicating Magic". *(mm-M6 — D10, part 1)* — sign-off
+- [x] W3-10 — MM2: "Adjudicating Magic". *(mm-M6 — D10, part 1)* — sign-off
 - [ ] W3-11 — MM coverage pointers + MM5 compression of the new section. *(mm-M6, mm-L9 — D10, part 2)* — sign-off
 - [x] W3-12 — MM5 Spark-economy drift. *(mm-L2, mm-L3)*
 - [x] W3-13 — II.4a gains its Facet introduction. *(cre-M6)* — sign-off
@@ -524,3 +524,20 @@ Result: **1044 passed**.
 
 Command: `cd software && python -m pytest -q`
 Result: **1044 passed**.
+
+### W3-10 *(mm-M6 — D10, part 1)* — sign-off item, drafted via Opus subagent, largest new-prose task of the cycle
+
+- **Drafted by an Opus subagent** (briefed with II.3's Scope table, the domain-boundary "lean toward yes" paragraph, the Outcome Tiers for Magic 7-9 guidance, and III.3's "Scope in combat" paragraph — the four PHB sources this section compresses), reviewed, fact-checked, and integrated by Sonnet.
+- `MM2_Session_Design.md` — added `## Adjudicating Magic` as a new top-level section (after the newly-added Trouble Table, before "Managing Player Spotlight"), covering exactly four topics, each traced to a real PHB source:
+  - **Judging Scope** — the scale-and-duration test, worked through two paired examples (a hold-glyph door: Significant vs. the same glyph asked to endure: Major) that isolate duration as an independent axis; the pre-Technique Minor-scope ceiling as a hard availability limit, not a difficulty question.
+  - **Domain Boundary Calls** — the "lean toward yes" default, plus a "substance vs. rhyme" discriminator built directly from II.3's own two rejected examples (fire/weather, shadow/invisibility) contrasted with its own accepted ones (fire/air, shadow/sound).
+  - **Designing the 7-9 Complication** — the three complication categories from II.3, with a technique for deriving a complication from the player's own stated intent (worked three ways against the canonical "freeze-the-lock" intent from II.3:33).
+  - **Magic Against Active Opposition** — the Standard-difficulty floor, with the derived observation that it only ever moves the Focused/Minor cell (arithmetic on the existing difficulty table, not a new rule) — flagged as the section's strongest single line and worth extra scrutiny at sign-off.
+- **Fact-check pass (before integrating):** verified every concrete claim against its cited source — the difficulty-table arithmetic, the "lean toward yes" quote, the three complication categories, the Standard-floor combat rule, and the "same action economy as a Strike" line all check out verbatim or near-verbatim against II.3/III.3. **Caught and corrected one inaccuracy:** the agent's active-opposition example paraphrased the established "In Play: The Beam" vignette (III.2) as *"He is holding a beam off Zulnut with one arm"* — the actual scene has Mordai holding the beam with **both hands**, buying the doorway for **both** Zahna and Zulnut, not one arm for one character. Corrected to *"He is holding up a collapsing beam with both hands so the others can get through,"* accurate to the source without over-specifying.
+- No new mechanics anywhere in the section — every paragraph is a compression or application of already-existing PHB rules, per the task's hard constraint.
+- Regenerated `Index.md` — 14 new lines.
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+**Flagged for user sign-off (D12) — the largest new-prose task in the cycle. Please review closely**, especially the "substance vs. rhyme" domain-boundary framing and the active-opposition floor's derived claim.
