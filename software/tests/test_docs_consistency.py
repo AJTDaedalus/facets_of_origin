@@ -318,3 +318,33 @@ def test_index_is_up_to_date() -> None:
         "Index.md is stale — regenerate with "
         "`python -m tools.build_index` (from software/)."
     )
+
+
+def _find_technique(technique_id: str) -> dict:
+    """Find a Technique's yaml block anywhere in facet.yaml's `techniques` tree."""
+    data = yaml.safe_load(FACET_YAML.read_text())["techniques"]
+    for tree in data.values():
+        for branch in tree.get("branches", []):
+            for tier in branch.get("tiers", []):
+                for technique in tier.get("techniques", []):
+                    if technique["id"] == technique_id:
+                        return technique
+    raise AssertionError(f"No technique {technique_id!r} found in facet.yaml")
+
+
+def test_overwhelming_force_matches_phb_ii4a() -> None:
+    """sync-H-1: Overwhelming Force is the current (once/scene, 10+) rule.
+
+    facet.yaml still carried the pre-v0.3 "succeed by 3 or more above the
+    threshold... staggered... act last... no reactions" version, which no
+    longer matches PHB II.4a:39-40's rule at all.
+    """
+    description = _find_technique("overwhelming_force")["description"].lower()
+    assert "once per scene" in description
+    assert "10+" in description or "full success" in description
+
+
+def test_no_pre_v03_overwhelming_force_text_survives() -> None:
+    """The old threshold-margin wording must not survive anywhere in facet.yaml,
+    not just in the Overwhelming Force entry itself."""
+    assert "3 or more above the threshold" not in FACET_YAML.read_text()

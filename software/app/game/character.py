@@ -323,9 +323,12 @@ class Character(BaseModel):
         """Spend one Technique pick on `technique_id` (§6.4). Single source of
         truth for the rule; the WebSocket handler and playtest harness both call it.
 
-        Order of checks: not already held → prerequisites met (tree-agnostic) →
-        a pick is available. On success, appends the Technique, decrements the
-        pick budget, records any choice, and activates magic if the Technique is
+        Order of checks: not already held → explicit prerequisites met (for
+        homebrew Facets that set them) → branch/tier rule met (PHB II.4:83:
+        Tier 2 requires any Tier 1 in the same branch, Tier 3 requires any
+        Tier 2 in the same branch) → domain guard (sync-H-2) → a pick is
+        available. On success, appends the Technique, decrements the pick
+        budget, records any choice, and activates magic if the Technique is
         magic-granting. On failure, mutates nothing.
 
         Returns (ok, message); message is "ok" on success, else the reason.
@@ -338,6 +341,31 @@ class Character(BaseModel):
             missing = [p for p in tech_def.prerequisites if p not in self.techniques]
             if missing:
                 return False, f"Technique '{technique_id}' requires: {', '.join(missing)}."
+
+            tier = ruleset.get_technique_tier(technique_id)
+            branch = ruleset.get_technique_branch(technique_id)
+            if tier and tier > 1 and branch is not None:
+                needed_tier = tier - 1
+                has_lower_tier_in_branch = any(
+                    ruleset.get_technique_branch(t) == branch
+                    and ruleset.get_technique_tier(t) == needed_tier
+                    for t in self.techniques
+                )
+                if not has_lower_tier_in_branch:
+                    return False, (
+                        f"Technique '{technique_id}' requires a Tier {needed_tier} "
+                        f"Technique in the same branch."
+                    )
+
+            if tech_def.requires_domain:
+                facet_domain_ids = {
+                    d.id for d in self._facet_domains(tech_def.requires_domain, ruleset)
+                }
+                if not any(d in facet_domain_ids for d in self.held_domains()):
+                    return False, (
+                        f"Technique '{technique_id}' requires an existing "
+                        f"{tech_def.requires_domain.capitalize()} domain."
+                    )
 
         if self.technique_picks_available <= 0:
             return False, "No Technique picks available — reach a Facet level to earn one."

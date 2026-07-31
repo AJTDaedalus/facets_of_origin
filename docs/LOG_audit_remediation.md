@@ -175,3 +175,171 @@ Findings closed this wave: cre-H1, cre-H2, cre-H3, cre-M1, cre-M2, cre-M4, cre-M
 DESIGN §6 voice-review flags carried into the PR: W1-2 (Scholar's Luck replacement clause), W1-5 (the :73 Facet Levels example — departed from the task's literal "swap to Stealth" wording), W1-6 (the added fourth Threat Clock beat).
 
 PR: opened via `gh pr create` against `main`, branch `fix/audit-wave1-corrections`.
+
+---
+
+## W2 — v0.3 migration completion
+
+- **Branch:** `fix/audit-wave2-v03-migration`
+- **Date:** 2026-07-31
+- **Baseline:** `pytest --collect-only -q` → **1029 tests collected**, measured on this branch after merging W1 (PR #14).
+
+### W2 task list (from `docs/TASKS_audit_remediation.md`)
+
+- [x] W2-1 — Migrate Magic in Combat and Attune to the Resolve model. *(mm-M2)*
+- [x] W2-2 — Combat quick reference: declarable actions. *(rul-M2)*
+- [x] W2-3 — MM1 enemy Attack/Defense modifiers: what they mean at the table. *(mm-M4)*
+- [x] W2-4 — Mook TR: the formula wins. *(mm-H1 — D2)*
+- [x] W2-5 — Retire superseded simulation citations. *(mm-M5, mm-L4, mm-L5)*
+- [x] W2-6 — MM low-severity sweep. *(mm-L1, mm-L6, mm-L7)*
+- [x] W2-7 — facet.yaml: Overwhelming Force. *(sync-H-1)* **TDD**
+- [x] W2-8 — Encode the magic-Technique domain prerequisite (the guard). *(sync-H-2, part 1)* **TDD**
+- [x] W2-9 — Switch to the PHB's branch/tier prerequisite rule. *(sync-H-2, part 2)* **TDD**
+- [x] W2-10 — Wave 2 close-out.
+
+### W2-1 *(mm-M2)*
+
+- `III.3:379` — "Conditions from magical Strikes" applied the PvP Condition-tier table unconditionally, even against enemies, which contradicts the Resolve model (III.3:124) that governs the "usual case." Rewrote as "Resolving magical Strikes": against an enemy, deplete Resolve on the same table as a physical Strike (10+ = -2 and may hang a rider, 7-9 = -1); against another character, apply a Condition directly on the PvP tier table. No magic-specific number invented — it's the existing Strike table, cited, not extended.
+- `III.3:391` (Attune) — "the Condition tier follows the Strike outcome table" was ambiguous/wrong for the enemy case (no Condition tier applies there, Resolve does). Reworded to state both branches explicitly.
+- **Verify-only, unchanged:** `MM5:109` ("vs enemy depletes Resolve like a Strike") was already a legal compression of the corrected body text — confirmed, not rewritten. `Quick_Start.md:143` ("Cast a spell | 2d6 + Spirit or Knowledge (by tradition)") states only the roll formula, never the old Condition-tier-only model — confirmed unchanged is correct.
+- Regenerated `Index.md` — 1 new line (`III.3 — Mind and Soul in a Fight` now indexes under Resolve, since Attune's paragraph now names Resolve explicitly).
+- Did not touch `III.3:395` (Gamble / "Reckless Press") — out of this task's scope; that's W3-5 (rul-M3, D6).
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed**.
+
+### W2-2 *(rul-M2)*
+
+- `III.3:646` — the Exchange Flow quick ref listed "Withdraw" as a step-2 action alongside Strike/Support/Maneuver/Magic. Withdraw is a Posture, declared in step 1, not an action — body text defines exactly three actions (`:104-161`) plus Magic (which uses the Strike action economy, `:375`). Removed "Withdraw" from the step-2 list.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed**.
+
+### W2-3 *(mm-M4)* — flagged for PR review per DESIGN §6
+
+- `MM1:26` (stat-block field) — "same modifier used for Parry; Dodge uses Dex modifier if different" implies the enemy rolls, which contradicts `III.3:331` ("NPCs do not roll dice"). Reworded: an authoring input, not a rolled modifier — feeds the TR formula and informs the difficulty the MM sets for PC Strikes and PC reactions against this enemy's attacks (both Chapter III.3, no new rule asserted).
+- `MM1:197` (Named NPC "short list") — "what they use to Parry" had the same problem. Same fix applied.
+- Grepped `used for Parry|use to Parry|Dodge uses Dex` repo-wide — no other instances.
+- Did not touch the `Attack:` field (`MM1:25`) — it doesn't make an explicit rolled-modifier claim and wasn't named in the task.
+- Regenerated `Index.md` — no diff.
+- **Flag for review:** this is the one Wave 2 line a reader could mistake for a new rule, per DESIGN §4.2 — it states only what III.3 already rules, but worth a second look.
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed**.
+
+### W2-4 *(mm-H1 — D2)*
+
+**Grep hit list** (`TR 1|tr: 1|harbor_thug` across `mm_manual/`, `enemies/`, `spec/`, committed `playtest/` dirs, `software/tests/`), before editing:
+
+```
+mm_manual/MM1_Encounters_and_Enemies.md:52  (stat-block example: Attack +0, TR: 1)
+mm_manual/MM1_Encounters_and_Enemies.md:121 (TR Reference Examples: "Basic Mook ... | 1 | Offense 2, Durability 0 — minimum 1")
+mm_manual/MM1_Encounters_and_Enemies.md:128 (TR minimums note: "Mook: TR 1 (even the most incompetent...)")
+mm_manual/MM1_Encounters_and_Enemies.md:286-293 (.fof teaching example block: id harbor_thug, attack_modifier 0, tr: 1)
+enemies/harbor_thug.fof:18 (tr: 2, already correct) and :29 ("TR 1 minimum by rule." — self-contradicting note)
+enemies/chicken.fof:18 (tr: 1, attack_modifier -1)
+software/tests/test_encounter.py:131 (synthetic trs = {"thug": 1} in a weighting-formula unit test)
+software/tests/test_enemy.py:244-250 (loads harbor_thug.fof, asserts calculate_tr() >= 1)
+software/tests/test_api_enemy.py:24 (creates an enemy id "harbor_thug", asserts tr >= 1)
+software/tests/test_combat_characterization.py:37,174 (uses harbor_thug_def fixture, no TR assertion)
+playtest/01_thornwall_undercroft/scenario.md:39,44,67 (Dust Construct, "minimum TR 1", offense 2 computed)
+playtest/02_silence_of_ashenmoor/scenario.md:43,49,92,100 and session_log.md:419 (Husk, same pattern)
+playtest/04_resource_tax/scenario.md:86,105,129 and run_pt04.py:59,72,78 (Bandit Scout/Archer, Elite Bandit)
+playtest/05_technique_showcase/scenario.md:105,107,129 (Sparring Partner, Arena Assistant)
+playtest/06_expert_novice_campaign/scenario.md:47,52,73, session_log.md:71,79, live_unscripted_playtest_log.md:45,66, agent_playtest_log.md:51, agentic_playtest_compendium.md:35, batch_results.json:45 (Water-Logged Sentinel, Sonic Bat)
+```
+
+**Fixed** (the four sites the task names):
+- `MM1:52` — Harbor Thug stat-block example: `TR: 1` → `TR: 2` (Attack +0 → Offense 2 per the table at `:87-92`; Durability 0; sum 2).
+- `MM1:121` — TR Reference Examples table: "Basic Mook (unskilled, no armor) | 1 | Offense 2, Durability 0 — minimum 1" was self-contradicting — its own stated inputs sum to 2, so the "minimum 1" floor never actually applied here. Fixed to `| 2 | Offense 2, Durability 0 |`.
+- `MM1:293` — the `.fof`-format teaching example (`id: harbor_thug, attack_modifier: 0, tr: 1`) → `tr: 2`, matching the real file.
+- `enemies/harbor_thug.fof:29` — removed the self-contradicting "TR 1 minimum by rule." note (the file's own `tr: 2` doesn't need or match the floor).
+
+**Left unchanged, with reason:**
+- `MM1:128` ("Mook: TR 1 ... even the most incompetent attacker") — this is the TR-minimum-by-rule text itself, explicitly told to stay (task instruction: "MM1:127's minimum-1 floor text stays — it is still correct for attack −2"). It describes the genuine floor case (attack −2 → offense 0, which needs clamping to 1), not Harbor Thug's case.
+- `enemies/chicken.fof:18` — `tr: 1` is **correct**: attack −1 → offense 1 (not 2), + durability 0 = 1. No floor clamping even applies; the arithmetic is simply 1. The chicken remains the TR-1 baseline, not renamed, per the task instruction.
+- `software/tests/test_encounter.py:131`, `test_enemy.py:244-250`, `test_api_enemy.py:24`, `test_combat_characterization.py:37,174` — none hardcode an exact TR of 1 for Harbor Thug; they use `>= 1` floor checks or a synthetic, unrelated `"thug": 1` fixture for testing the weighting formula in isolation. Confirmed the full suite (1029) still passes after the `.fof` and MM1 edits — nothing broke.
+- **All committed `playtest/` scenario and session-log hits** (01, 02, 04, 05, 06) — these are historical playtest records for *other* Mooks (Dust Construct, Husk, Bandit Scout/Archer, Elite Bandit, Sparring Partner, Arena Assistant, Water-Logged Sentinel, Sonic Bat), not Harbor Thug, and several show the *same* systemic pattern (offense 2, misapplied "minimum TR 1" floor). They are out of this task's explicit scope (the task names four fix sites: `MM1:55, :121, :293` and `harbor_thug.fof:29`) and are transcripts of what happened in a specific simulated session — rewriting their numbers after the fact would falsify the historical record, the same principle W2-5 applies to superseded simulation citations (don't re-run simulations, don't rewrite history). Left untouched.
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed**.
+
+### W2-5 *(mm-M5, mm-L4, mm-L5)*
+
+- `MM1:411` (last line) — "Simulation data confirms this arc: Skirmish → Standard survives at 98%. Skirmish → Standard → Hard survives at 55%…" was sourced from Series 6/F (`research/simulation_log.md:352-353`), a section explicitly marked **SUPERSEDED (v0.2 semantics)** (`:365`) — those runs used the deprecated TR-budget multiplier definitions of Skirmish/Standard/Hard, not the current Recipe-Table ones (under which Hard alone is ~47%). Did not re-run simulations (per the task instruction); re-sourced to the current, already-validated Recipe Table numbers instead of inventing a new cumulative statistic: "the Encounter Recipe Table above confirms the shape of this arc at each individual band — Skirmish (100%), Standard (~76-80%), Hard (~47-48%)."
+- `MM2:165` — "A Skirmish-budget fight (Party Strength × 1) against Mooks" defined Skirmish by the deprecated TR-budget formula. The current definition (MM1's Encounter Recipe Table, `:343`) is a Mook-only roster, not a TR multiplier. Reworded to "A Skirmish fight (a Mook-only roster, per the Encounter Recipe Table)."
+- `enemies/veteran_soldier.fof:41-42` — the notes field computed "effective TR 10 × 0.75 = 7.5 ... between Standard and Hard" for a solo encounter, using the pre-Series-9 TR-budget-with-solo-multiplier model. This directly contradicts MM1's current actor-count doctrine (`:136`: "One Named or one Boss is trivial for a fresh party no matter how high its TR"). Replaced with a note stating the current doctrine and steering the MM toward a multi-actor roster instead.
+- **Adjacent issue found, left out of scope:** `veteran_soldier.fof:16` — `defense_modifier: 3 # Parry: same roll` has the same "NPCs don't roll" problem W2-3 fixed in MM1, but this file wasn't named in either task's file list. Not fixed here to avoid unauthorized scope expansion; worth a follow-up sweep.
+- Regenerated `Index.md` — no diff. `research/simulation_log.md`'s Series 6 section remains labeled SUPERSEDED and untouched, per the task's explicit instruction.
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed**.
+
+### W2-6 *(mm-L1, mm-L6, mm-L7)*
+
+- `MM3:218` — the Facet Level 2 row claimed "a second and third Technique deepen their specialty," but II.4 grants exactly one Technique per Facet level, and MM3's own Level 3 row already claims "a third Technique unlock." Fixed to "a second Technique."
+- `MM1:220` — "(see *Armor*, above)" pointed at a heading named "Armor" that doesn't exist anywhere in MM1. The real referent is the "**Armor bonus:**" subsection. Fixed the pointer text to match.
+- `MM1:176` — "Mooks need only three things: an attack modifier, a fictional description, and a number" undercounted against its own four-step "Building a Mook" list (attack modifier, description, armor decision, calculate TR) two lines below. Fixed to "four things," naming the armor decision explicitly.
+- No rules text changed — counts and pointers only, per the task's accept criteria.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed**.
+
+### W2-7 *(sync-H-1)* — TDD
+
+- `software/facets/base/facet.yaml:294-299` — Overwhelming Force still carried the pre-v0.3 rule ("succeed by 3 or more above the threshold... staggered... act last... cannot take reactions"), which has no relationship to the current Condition/Resolve model. Replaced with PHB II.4a:39-40's actual rule: once per scene, on a full success (10+) Strike against a single target, the target takes no offensive action in the next exchange.
+- Tests added to `software/tests/test_docs_consistency.py` (2, written first — confirmed red before the fix):
+  - `test_overwhelming_force_matches_phb_ii4a` — the yaml description carries "once per scene" and the 10+/full-success trigger.
+  - `test_no_pre_v03_overwhelming_force_text_survives` — `"3 or more above the threshold"` doesn't appear anywhere in `facet.yaml`.
+  - Added a `_find_technique` helper that walks the full `techniques` tree (`facets.yaml`'s `techniques: {body/mind/soul: {branches: [...]}}` structure) by id, for reuse in later Wave 2/4 technique tests.
+
+Command: `cd software && python -m pytest -q`
+Result: **1031 passed** (1029 + 2 new).
+
+### W2-8 *(sync-H-2, part 1)* — TDD
+
+- `software/app/facets/schema.py` (`TechniqueDef`) — added `requires_domain: str | None = None`, a Facet id ("mind"/"soul") whose domain list the character must already hold a domain from. Documented why: the sync report's H-2 note is that this prerequisite is *currently* satisfied only as a side effect of the strict Tier1→Tier2→Tier3 chain, which W2-9 is about to loosen (branch/tier rule instead of the specific chain). Without an explicit guard, loosening the chain would let a character reach Second/Ascendant Domain via a non-domain-granting Tier 1/2 pick in the same branch.
+- `software/facets/base/facet.yaml` — set `requires_domain: mind` on `second_domain_mind` and `ascendant_domain_mind`; `requires_domain: soul` on `second_domain` and `ascendant_domain_soul`. Did not touch any `prerequisites` list, per the task's explicit instruction.
+- `software/app/game/character.py` (`select_technique`) — enforces the guard right after the existing prerequisite check: if `tech_def.requires_domain` is set, the character must hold a domain (via `held_domains()`) drawn from that Facet's domain catalog (`_facet_domains()`, both pre-existing helpers). Refusal message names the missing domain's Facet.
+- Tests added to `software/tests/test_character.py` (3, written first):
+  - `test_select_technique_second_domain_refused_without_domain` — `the_language_beneath_language` injected directly into `techniques` (bypassing `select_technique`) so the prerequisite-chain check passes while `magic_domain` stays unset; the domain guard refuses independently of the chain.
+  - `test_select_technique_second_domain_permitted_with_domain` — the full legitimate chain (`spiritual_domain` → `the_language_beneath_language` → `second_domain`) succeeds once a domain exists.
+  - `test_select_technique_ascendant_domain_refused_without_domain` — same bypass pattern, for Ascendant Domain.
+  - Note: under the *old* chain (still in place this task), the guard can't organically trigger in real play — the chain itself already forces a domain-granting Tier 1 pick first. The refusal tests use direct `techniques.append()` injection specifically to prove the guard's logic is independent of the chain, since that's exactly the property W2-9 will rely on.
+
+Command: `cd software && python -m pytest -q`
+Result: **1034 passed** (1031 + 3 new).
+
+### W2-9 *(sync-H-2, part 2)* — TDD
+
+- `software/app/facets/registry.py` (`MergedRuleset`) — added `_technique_branch_map` and `_technique_tier_map` (built once at merge time, alongside the existing `_technique_facet_map`) and their accessors `get_technique_branch()` / `get_technique_tier()`.
+- `software/app/game/character.py` (`select_technique`) — added the PHB II.4:83 branch/tier check right after the existing (now-mostly-empty) `prerequisites` list check: for any Technique at tier > 1, the character must hold at least one Technique at `tier - 1` in the *same branch*. The old `prerequisites` field/check stays in the schema and code path — it's just a no-op for the base ruleset now, and still available for homebrew Facets that want a specific chain.
+- `software/facets/base/facet.yaml` — emptied all 39 Tier 2/Tier 3 `prerequisites: [x]` lists to `[]` (script-verified: exactly the 39 chain-only entries, confirmed by diffing before/after — nothing else in the file touched). Did not touch `requires_domain` (W2-8) or any other field.
+- Tests (7 total, per DESIGN §4.2's exact list — 5 new + 2 pre-existing updated, all written/updated before running to confirm red→green):
+  1. **Newly legal** — `test_branch_tier_rule_weapon_mastery_unlocks_overwhelming_force`: Weapon Mastery (Might T1) → Overwhelming Force (Might T2), previously rejected (old chain-only prereq was `forcing_hand`), now legal.
+  2. **Mirror in a different branch and tree** — `test_branch_tier_rule_mirrors_in_a_different_branch_and_tree`: the_wrong_note (Mind/Instinct T1) → immediate_threat (Mind/Instinct T2, old chain-only prereq was `never_surprised`), now legal. One example satisfying both "different branch" and "different tree" from the Might case.
+  3. **No Tier 1 in branch** — `test_branch_tier_rule_rejects_tier_two_without_any_tier_one_in_branch`: fresh character, no Techniques, `overwhelming_force` refused.
+  4. **Cross-branch Tier 1 doesn't count** — `test_branch_tier_rule_rejects_cross_branch_tier_two`: holding `forcing_hand` (Might T1) does not satisfy `shadow_walk` (Grace T2) — the rule is branch-scoped, not tree-wide.
+  5. **Tier 3 with only Tier 1 in branch** — pre-existing `test_tier_three_rejected_without_tier_two` (`test_websocket.py`) updated: its exact-message assertion (`"the_aimed_truth" in msg`) no longer holds since the rejection reason is now generic ("Tier 2"), but the underlying behavior — still refused — is unchanged. Updated the assertion, not the test's intent.
+  6. **Second Domain, no domain, post-loosening** — `test_branch_tier_rule_second_domain_still_refused_without_domain_post_loosening`: proves the W2-8 guard survives the chain loosening using a *genuinely reachable* sequence (sense_the_unseen → formed_bond satisfies the branch/tier rule with no domain ever granted), not W2-8's direct-injection bypass (which was necessary only while the old chain still blocked this path in play).
+  7. **Second Domain, with domain, still legal** — pre-existing `test_select_technique_second_domain_permitted_with_domain` (W2-8) continues to pass unmodified; the full legitimate chain still works exactly as before.
+- Also updated `test_select_technique_rejects_unmet_prerequisite` (`test_character.py`) — same exact-message-vs-generic-message issue as item 5's websocket test, fixed the same way.
+- **Both message-assertion updates are within the advancement/technique test area** (the exact area this task changes) and both still assert the same underlying behavior (rejection) — not new failures outside scope requiring escalation. Confirmed no other file in the repo references specific chain-prerequisite ids in an assertion (grepped `software/tests/`, `software/app/`, `software/tools/`).
+
+Command: `cd software && python -m pytest -q`
+Result: **1039 passed** (1034 + 5 new).
+
+### W2-10 — Wave 2 close-out
+
+All 10 W2 tasks done. Final suite run before opening the PR:
+
+Command: `cd software && python -m pytest -q`
+Result: **1039 passed** (baseline was 1029; +10 across W2-7/8/9's TDD tasks).
+
+Findings closed this wave: mm-H1, mm-M2, mm-M4, mm-M5, mm-L1, mm-L4, mm-L5, mm-L6, mm-L7, rul-M2, sync-H-1, sync-H-2.
+
+DESIGN §6 flag carried into the PR: W2-3 (MM1 enemy Attack/Defense modifiers) — states only what III.3 already rules, but is the one Wave 2 line a reader could mistake for a new rule.
+
+PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migration`.

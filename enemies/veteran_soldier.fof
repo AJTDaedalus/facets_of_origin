@@ -38,8 +38,10 @@ enemy:
   notes: >
     TR breakdown: offense(+3 → value 5) + durability(Resolve 4)
     + armor(light → 1) + techniques(0) = 10.
-    Solo encounter vs PS 3 party: effective TR 10 × 0.75 = 7.5.
-    Expected difficulty: between Standard (~75% win) and Hard (~50% win).
+    Actor count drives difficulty, not total TR (MM1, Encounter Recipe
+    Table): a single Named enemy, however high its TR, is trivial for
+    a fresh party. Use Veteran Soldier as part of a multi-actor roster
+    to reach Standard or Hard difficulty, not alone.
 
 created_at: '2026-03-05T00:00:00+00:00'
 last_modified: '2026-03-05T00:00:00+00:00'

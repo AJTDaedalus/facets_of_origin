@@ -111,12 +111,16 @@ class MergedRuleset:
         self._rating_map: dict[int, object] = {r.rating: r for r in self.attribute_ratings}
         self._technique_map: dict[str, TechniqueDef] = {}
         self._technique_facet_map: dict[str, str] = {}
+        self._technique_branch_map: dict[str, str] = {}
+        self._technique_tier_map: dict[str, int] = {}
         for facet_id, tree in self.techniques.items():
             for branch in tree.branches:
                 for tier_def in branch.tiers:
                     for tech in tier_def.techniques:
                         self._technique_map[tech.id] = tech
                         self._technique_facet_map[tech.id] = facet_id
+                        self._technique_branch_map[tech.id] = branch.id
+                        self._technique_tier_map[tech.id] = tier_def.tier
 
         self._validate_cross_references()
 
@@ -154,6 +158,19 @@ class MergedRuleset:
         Soul's tree still chooses from the Soul domains (PHB II.3).
         """
         return self._technique_facet_map.get(technique_id)
+
+    def get_technique_branch(self, technique_id: str) -> str | None:
+        """Which branch (within its Facet's tree) a Technique lives in, or None.
+
+        PHB II.4:83 — Tier 2 requires any Tier 1 Technique in the same branch;
+        Tier 3 requires any Tier 2 in the same branch. Branch membership, not a
+        specific Technique id, is what the rule keys on.
+        """
+        return self._technique_branch_map.get(technique_id)
+
+    def get_technique_tier(self, technique_id: str) -> int | None:
+        """Which tier (1-3) a Technique sits at, or None if unknown."""
+        return self._technique_tier_map.get(technique_id)
 
     def get_skill_rank_modifier(self, rank_id: str) -> int:
         if not self.advancement:

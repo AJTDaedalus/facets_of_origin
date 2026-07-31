@@ -795,6 +795,9 @@ class TestTechniquePickBudget:
         assert "the_turning" in char.techniques
 
     def test_tier_three_rejected_without_tier_two(self, client, mm_token, session_with_character):
+        """PHB II.4:83: Tier 3 requires a Tier 2 in the same branch. Holding only
+        a Tier 1 Presence Technique (read_the_room) is not enough for the_turning
+        (Presence Tier 3), regardless of which specific Tier 2 pick is missing."""
         session, _ = session_with_character
         session_id = session["session_id"]
         char = session_store.get(session_id).characters["Zahna"]
@@ -809,7 +812,7 @@ class TestTechniquePickBudget:
             })
             msg = ws.receive_json()
         assert msg["type"] == "error"
-        assert "the_aimed_truth" in msg["message"]
+        assert "Tier 2" in msg["message"]
         assert "the_turning" not in char.techniques
         # A rejected pick must not be consumed.
         assert char.technique_picks_available == 1

@@ -23,7 +23,7 @@ Name/Type
 Tier: Mook | Named | Boss
 Resolve: [number]  — the durability pool Strikes deplete; Named 3–4, Boss ~8; Mooks have none
 Attack: [roll modifier]  — e.g. +2 (Strength +1, Combat Practiced +1)
-Defense: [roll modifier] — same modifier used for Parry; Dodge uses Dex modifier if different
+Defense: [roll modifier] — an authoring input, not a rolled modifier (NPCs don't roll, Chapter III.3): feeds the TR formula and informs the difficulty you set for PC Strikes and for PC reactions against this enemy's attacks (both Chapter III.3)
 Armor: None | Light | Heavy  — adds a flat bonus to Resolve (light +1, heavy +2)
 Techniques: [list, if any]
 Special: [phase changes, triggers, or narrative rules — Boss only]
@@ -52,7 +52,7 @@ Resolve: — (Mooks have no pool; one Strike removes them)
 Attack: +0 (Strength +0, Combat Novice +0)
 Defense: +0
 Armor: None
-TR: 1
+TR: 2
 ```
 
 **Boss example** — The Archive Guardian (from Chapter III.3):
@@ -118,7 +118,7 @@ Durability is simply the enemy's base Resolve — the pool a party's Strikes dep
 
 | Enemy | TR | Notes |
 |---|---|---|
-| Basic Mook (unskilled, no armor) | 1 | Offense 2, Durability 0 — minimum 1 |
+| Basic Mook (unskilled, no armor) | 2 | Offense 2, Durability 0 |
 | Skilled Mook (Combat Practiced, light armor) | 4 | Offense 3, Durability 0, Armor 1 |
 | City Watch Sergeant | 8 | Offense 4, Durability 3, Armor 1 |
 | Veteran Soldier | 10 | Offense 5, Durability 4 (Resolve 4), Armor 1 |
@@ -173,7 +173,7 @@ Raw TR comparison doesn't account for **action economy** — more enemies mean m
 
 ### Mooks
 
-Mooks need only three things: an attack modifier, a fictional description, and a number. They do not have Resolve. They do not have individual Condition tracks. Any successful Strike (7+) removes one — an armored Mook takes a full success (10+).
+Mooks need only four things: an attack modifier, a fictional description, an armor decision, and a TR number. They do not have Resolve. They do not have individual Condition tracks. Any successful Strike (7+) removes one — an armored Mook takes a full success (10+).
 
 **What makes a Mook dangerous is volume.** Three Mooks attacking simultaneously each demand a reaction decision. A party with limited Endurance that chooses to Absorb all Mook attacks will arrive at the Named NPC already worn down.
 
@@ -194,7 +194,7 @@ Named NPCs use the full exchange structure. Build them the same way you'd build 
 **The short list you actually need:**
 - Resolve (3–4 for a Named NPC; armor adds to it)
 - Attack modifier (best offensive roll modifier)
-- Defense modifier (what they use to Parry; or note if they Dodge instead)
+- Defense modifier (an authoring input — NPCs don't roll; it informs the difficulty of PC Strikes and PC reactions against this enemy, Chapter III.3)
 - Armor
 - One or two Techniques if they should feel distinct
 
@@ -217,7 +217,7 @@ Bosses should be built to last *and* to change. A Boss that simply has more Reso
 - **Second wind.** The Boss adds Resolve — a genuine durability spike the party can *see*, because it moves the same bar they've been grinding down. Use it sparingly; it is the honest version of "the fight isn't over."
 - **Change the space or the target.** The Boss floods the room, collapses the floor, pulls Mooks in, or fixes on a new PC. This is MM-narrated — the engine doesn't track it — but it changes the tactical picture as much as any stat.
 
-**What a phase change may *not* do: crack its own armor.** Do not write a phase as "its armor falls away" or "it trades defense for offense." Under our rules armor is a flat, one-time bonus baked into the Boss's starting Resolve pool the moment the fight begins (see *Armor*, above) — there is no armor value sitting on the stat block mid-fight for a phase to reduce. A "the plating cracks, now it's vulnerable" phase looks evocative and does *nothing*: the pool it would have drained was already spent into the starting number. If you want a Boss to get more fragile, that is not a phase — it is simply a lower Resolve. If you want a phase to raise the stakes, use one of the four levers above.
+**What a phase change may *not* do: crack its own armor.** Do not write a phase as "its armor falls away" or "it trades defense for offense." Under our rules armor is a flat, one-time bonus baked into the Boss's starting Resolve pool the moment the fight begins (see *Armor bonus*, above) — there is no armor value sitting on the stat block mid-fight for a phase to reduce. A "the plating cracks, now it's vulnerable" phase looks evocative and does *nothing*: the pool it would have drained was already spent into the starting number. If you want a Boss to get more fragile, that is not a phase — it is simply a lower Resolve. If you want a phase to raise the stakes, use one of the four levers above.
 
 Phase changes should feel like story beats, not just mechanical resets. The fiction should change *and* something the party can act on should change with it — never the fiction alone dressed over a stat that can't move.
 
@@ -290,7 +290,7 @@ enemy:
   tier: mook
   attack_modifier: 0
   armor: none
-  tr: 1
+  tr: 2
 
   description: >
     Hired muscle. Doesn't want to die for this job.
@@ -408,4 +408,4 @@ Most sessions have 2–3 encounters. The ideal difficulty arc:
 
 **Never:** Deadly as the opener. Players need to feel competent before you challenge them.
 
-Simulation data confirms this arc: Skirmish → Standard survives at 98%. Skirmish → Standard → Hard survives at 55% — genuine late-session tension where smart play and lateral solutions determine the outcome.
+The Encounter Recipe Table above confirms the shape of this arc at each individual band — Skirmish (100% win rate), Standard (~76–80%), Hard (~47–48%) — so a Skirmish → Standard → Hard session climbs through progressively tighter margins by design, ending in genuine late-session tension where smart play and lateral solutions determine the outcome.
