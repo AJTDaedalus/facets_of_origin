@@ -392,7 +392,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Investigate (Intelligence):** Find the structural weakness in the fight — a bad angle, a compromised footing, an environmental factor the enemy hasn't noticed. A successful Investigate roll translates directly into a difficulty modifier on the party's next actions against that target.
 
-**Gamble (Luck):** Spend a Spark and take a Reckless Press — add a die to a risky action the way Press adds a die through Endurance. Luck-touched characters bend probability; they should lean into that in combat as much as anywhere.
+**Gamble (Luck):** Spend a Spark on a risky action the same way you would on any roll (Chapter III.1) — add a d6 and drop the lowest. Luck-touched characters bend probability; they should lean into that in combat as much as anywhere.
 
 **Persuade (Charisma):** End the fight before it ends you. A successful Persuade during a combat exchange can demoralize, redirect, or straight-out stop an opponent who has a reason to stop. This requires a genuine in-fiction basis — an enemy who has no reason to listen will not listen — but talking your way out of a fight is a full, valid, mechanically supported option.
 
