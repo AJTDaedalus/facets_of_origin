@@ -1,5 +1,13 @@
 # Character Creation: Facet of the Body
 
+## The Body Facet
+
+Body Facet characters solve problems with their physical presence in the world. They are warriors and scouts, athletes, brawlers, and dancers — the ones who arrive first, who put themselves between the danger and everyone else, and who are still standing when the clever plan has come apart. Where a Mind character finds the flaw in the wall and a Soul character talks the guard into looking the other way, a Body character goes over the wall, on the theory that the wall was never really the problem and standing around debating it was.
+
+Their tools are strength, speed, and endurance. Their superpower is that the distance between deciding and doing is shorter for them than for anyone else at the table.
+
+---
+
 ### Skills of the Body
 
 | Skill | Attribute |

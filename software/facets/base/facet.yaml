@@ -1268,6 +1268,14 @@ combat:
     base: 4
     recovery_withdrawn: 2
 
+  # D5: the floor is absolute — it overrides Posture, not just the reaction's
+  # base cost. Withdrawn's free_reactions and Defensive's reaction_cost_modifier
+  # (above) only matter once there is at least 1 Endurance to spend.
+  endurance_floor_rule: >-
+    At 0 Endurance, only Absorb is available as a reaction, regardless of
+    Posture. Withdrawn's free reactions and Defensive's reduced reaction
+    cost apply only while Endurance is 1 or higher.
+
   postures:
     aggressive:
       offense_modifier: 1
@@ -1425,7 +1433,7 @@ backgrounds:
     facet: mind
     starting_skill: lore
     secondary_skill: investigate
-    specialty: "Formal training in a structured discipline — can identify when methods, materials, or approaches follow an established tradition versus improvisation."
+    specialty: "Artificers' Guild technical records — Standard becomes Easy when directly applicable."
     domain_origin: mind
     domain_replaces_secondary: true
 

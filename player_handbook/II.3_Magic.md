@@ -169,6 +169,8 @@ Magic also gives Sparks a second use: as scope fuel.
 
 **Pushing scope:** By spending a Spark, a character may attempt an effect one scope tier beyond their domain's natural ceiling. A Standard domain character whose Major effects are normally Very Hard may spend a Spark to push to a scope that would otherwise be unavailable — attempting something that transcends what the domain should be able to manage at all, at Very Hard difficulty.
 
+**Reaching Significant early (before the Technique):** A character who has not yet unlocked their Facet's magic-granting Technique works at Minor scope only (see *Before the Technique*, under **Acquiring a Domain** below). By spending a Spark, that character may attempt one Significant-scope effect at their domain's normal Significant difficulty — the Spark buys the scope, not a discount on the roll. Each Spark buys one such effect; it is not a permanent unlock. The Tier 1 Technique remains the only route to routine full scope, and Major scope stays closed until you have it.
+
 **Easing Major effects (Focused domains only):** A Focused domain character may spend a Spark to shift a Major effect one difficulty step easier: Hard becomes Standard. This does not apply to Standard or Broad domains.
 
 **The hard limit:** Broad (Prismatic) domains cannot be pushed beyond Very Hard through Sparks or any other means. Their ceiling is their ceiling. If you want the widest possible magical territory, you accept that the grandest effects will always be desperate rolls.

@@ -176,15 +176,23 @@ CHARACTER_SHEET_FIELDS = {
     "Attributes": "attributes",
     "Primary Facet": "primary_facet",
     "Facet Level": "facet_level",
-    "Advancement Track (marks toward next level)": "rank_advances_this_facet_level",
+    "Rank Advances Toward Next Level": "rank_advances_this_facet_level",
+    "Career Advances": "career_advances",
     "Title & Origin": "background_id",
     "Starting Skill (Practiced)": "skills",
-    "Secondary Skill (Novice, 1 mark)": "skills",
+    "Secondary Skill (Novice, 1 mark) or Domain Origin": "skills",
     "Specialty": "specialty",
     "Skills": "skills",
     "Technique": "techniques",
     "Choice (if any)": "technique_choices",
+    "Magic Domain": "magic_domain",
+    "Endurance (current / max) — max is 4 + Constitution modifier + Endurance skill rank": "endurance_current",
+    "Armor Type": "armor",
+    "Armor Downgrade Budget Remaining This Scene": "armor_downgrades_remaining",
+    "Active Conditions": "conditions",
     "Sparks": "sparks",
+    "Inventory": "inventory",
+    "Item": "inventory",
     "Skill Points Remaining This Session": "session_skill_points_remaining",
 }
 
@@ -215,6 +223,33 @@ def test_character_sheet_fields_map_to_model() -> None:
 
     errors = bad_attrs + missing_labels
     assert not errors, "Character Sheet / model mismatches:\n" + "\n".join(errors)
+
+
+# The Magic, Combat, and Inventory sections (new in this task), plus the
+# Facet section's new Career Advances row.
+NEW_CHARACTER_SHEET_SECTION_LABELS = [
+    "Career Advances",
+    "Magic Domain",
+    "Endurance (current / max) — max is 4 + Constitution modifier + Endurance skill rank",
+    "Armor Type",
+    "Armor Downgrade Budget Remaining This Scene",
+    "Active Conditions",
+    "Inventory",
+]
+
+
+def test_new_character_sheet_sections_need_no_new_model_field() -> None:
+    """D7 (W3-2/W3-3): the Magic, Combat, and Inventory sections are new
+    *sheet* content, but every field they add was already tracked on
+    `Character` before this task (DESIGN Section 1 S3) — no new Character
+    field was added to support them.
+    """
+    known_attrs = set(Character.model_fields) | set(Character.model_computed_fields)
+    for label in NEW_CHARACTER_SHEET_SECTION_LABELS:
+        assert label in CHARACTER_SHEET_FIELDS, f"{label!r} not registered in CHARACTER_SHEET_FIELDS"
+        assert CHARACTER_SHEET_FIELDS[label] in known_attrs, (
+            f"{label!r} maps to {CHARACTER_SHEET_FIELDS[label]!r}, not a real Character attribute"
+        )
 
 
 # A Glossary entry: `**Term** — definition text. *(pointer)*`. The pointer is
@@ -348,3 +383,61 @@ def test_no_pre_v03_overwhelming_force_text_survives() -> None:
     """The old threshold-margin wording must not survive anywhere in facet.yaml,
     not just in the Overwhelming Force entry itself."""
     assert "3 or more above the threshold" not in FACET_YAML.read_text()
+
+
+# A pre-built Background entry in II.5: "**Name**\n\n*Title:* ...", up to the
+# next thematic break. Distinguishes the 15 real entries from the five bold
+# element-definition headers (**Title**, **Specialty**, etc.) earlier in the
+# chapter, which are never followed by a "*Title:*" line.
+_BACKGROUND_SECTION = re.compile(
+    r"^\*\*([A-Z][^\n*]+)\*\*\n\n\*Title:\*.*?(?=\n---\n|\Z)", re.M | re.S
+)
+_SPECIALTY_LINE = re.compile(r"^\*Specialty:\*\s*(.+?)\.?\s*$", re.M)
+BACKGROUNDS_CHAPTER = PLAYER_HANDBOOK / "II.5_Character_Creation_Backgrounds.md"
+
+
+def _phb_background_specialties() -> dict[str, str | None]:
+    """{Background name: Specialty text, or None if the entry has no Specialty line}."""
+    text = BACKGROUNDS_CHAPTER.read_text()
+    result: dict[str, str | None] = {}
+    for m in _BACKGROUND_SECTION.finditer(text):
+        name, block = m.group(1), m.group(0)
+        spec = _SPECIALTY_LINE.search(block)
+        result[name] = spec.group(1).strip() if spec else None
+    return result
+
+
+def _yaml_backgrounds() -> list[dict]:
+    return yaml.safe_load(FACET_YAML.read_text())["backgrounds"]
+
+
+def test_guild_apprentice_specialty_matches_quick_start() -> None:
+    """rul-H1 / D4: the Quick Start text is the source of truth. II.5 had no
+    Specialty at all for Guild Apprentice, and facet.yaml carried a third,
+    different string ("Formal training in a structured discipline...") —
+    both must now equal Quick Start's wording exactly, not merge with it.
+    """
+    quick_start_text = (
+        "Artificers' Guild technical records — Standard becomes Easy when directly applicable"
+    )
+    phb_specialty = _phb_background_specialties()["Guild Apprentice"]
+    assert phb_specialty == quick_start_text
+
+    yaml_specialty = next(
+        b["specialty"] for b in _yaml_backgrounds() if b["id"] == "guild_apprentice"
+    )
+    assert yaml_specialty.rstrip(".") == quick_start_text
+
+
+def test_all_fifteen_backgrounds_have_a_specialty_in_phb_and_yaml() -> None:
+    """II.5's five-elements claim (Title, Description, Starting Skill, Secondary
+    Skill/Domain Origin, Specialty) must hold for every pre-built Background."""
+    phb = _phb_background_specialties()
+    assert len(phb) == 15
+    missing_in_phb = [name for name, spec in phb.items() if not spec]
+    assert not missing_in_phb, f"No Specialty in II.5 for: {missing_in_phb}"
+
+    yaml_bgs = _yaml_backgrounds()
+    assert len(yaml_bgs) == 15
+    missing_in_yaml = [b["id"] for b in yaml_bgs if not b.get("specialty")]
+    assert not missing_in_yaml, f"No specialty in facet.yaml for: {missing_in_yaml}"

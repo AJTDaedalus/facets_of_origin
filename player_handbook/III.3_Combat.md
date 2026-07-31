@@ -164,7 +164,7 @@ The bonus applies to the ally's very next roll only, then expires. Bonuses from 
 
 ## Reactions
 
-When an opponent takes action against you, you may **react**. You may declare a maximum of **one reaction per incoming action**. Each reaction costs Endurance unless your Posture reduces the cost. If your Endurance is at 0, only Absorb is available. Aggressive posture's surcharge applies only to your first reaction of the exchange — see Postures, above.
+When an opponent takes action against you, you may **react**. You may declare a maximum of **one reaction per incoming action**. Each reaction costs Endurance unless your Posture reduces the cost. If your Endurance is at 0, only Absorb is available — this is absolute, regardless of Posture: Withdrawn's free reactions and Defensive's reduced reaction cost only apply while you have at least 1 Endurance to spend. Aggressive posture's surcharge applies only to your first reaction of the exchange — see Postures, above.
 
 The choice to react, and which reaction to use, is made after the attacker rolls but before any Condition is formally applied.
 
@@ -392,7 +392,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Investigate (Intelligence):** Find the structural weakness in the fight — a bad angle, a compromised footing, an environmental factor the enemy hasn't noticed. A successful Investigate roll translates directly into a difficulty modifier on the party's next actions against that target.
 
-**Gamble (Luck):** Spend a Spark and take a Reckless Press — add a die to a risky action the way Press adds a die through Endurance. Luck-touched characters bend probability; they should lean into that in combat as much as anywhere.
+**Gamble (Luck):** Spend a Spark on a risky action the same way you would on any roll (Chapter III.1) — add a d6 and drop the lowest. Luck-touched characters bend probability; they should lean into that in combat as much as anywhere.
 
 **Persuade (Charisma):** End the fight before it ends you. A successful Persuade during a combat exchange can demoralize, redirect, or straight-out stop an opponent who has a reason to stop. This requires a genuine in-fiction basis — an enemy who has no reason to listen will not listen — but talking your way out of a fight is a full, valid, mechanically supported option.
 
@@ -715,7 +715,7 @@ Budget resets at **end of scene**, not exchange; two fights in one scene share i
 ### Endurance
 
 - Base: 4 + Constitution modifier + Endurance skill rank
-- 0 Endurance = Absorb only (Conditions land at full tier — no extra penalty)
+- 0 Endurance = Absorb only, regardless of Posture (Conditions land at their normal tier — your armor still helps; there's no extra penalty for an empty tank)
 - Press: spend 1 Endurance before Strike to add a d6 and drop the lowest
 
 ### Your Five Numbers On Screen

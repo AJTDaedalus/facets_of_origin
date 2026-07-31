@@ -610,11 +610,16 @@ async def _handle_react(
 
     reaction = str(msg.get("reaction", "absorb"))
 
-    # PHB: 0 Endurance = Absorb only
+    # PHB III.3: 0 Endurance = Absorb only, regardless of Posture. The floor
+    # applies unconditionally — Withdrawn's free reactions and Defensive's
+    # reduced cost only matter once there is at least 1 Endurance to spend.
     if character.endurance_current <= 0 and reaction != "absorb":
         await manager.send_to(websocket, {
             "type": "error",
-            "message": "No Endurance remaining — only Absorb is available.",
+            "message": (
+                session.ruleset.combat.endurance_floor_rule
+                or "No Endurance remaining — only Absorb is available."
+            ),
         })
         return
     valid_reactions = {"dodge", "parry", "absorb", "intercept"}

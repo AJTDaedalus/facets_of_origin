@@ -169,3 +169,42 @@ Something *develops* — usually in a direction nobody planned. The story always
 - *The moment is real but complicated*
 
 A 6- is the moment for the **Graceful Fail** — leaning into the consequence or adding something to the fiction that makes the failure richer. Claim it yourself; the MM confirms.
+
+---
+
+## Standing Rulings
+
+Two questions come up at nearly every table. Both are answered here so the MM does not have to invent a ruling mid-scene.
+
+### Acting on Unnarrated Details
+
+A player may only act on details the MM has described. If the MM has not put a thing in the scene, a character cannot use it.
+
+A player may always **ask**. "Is there a window?" "Is anything in here burning?" "How high is the ceiling?" Asking costs nothing, takes no action, and is encouraged — it is how a scene gets sharper. What a player may not do is declare an action that assumes the answer.
+
+- *Legal:* "Is there anything on the desk I could throw?" — the MM answers, and the player acts on the answer.
+- *Not legal:* "I grab the letter opener off the desk and throw it" — when nothing on the desk has been described.
+
+The MM's default answer to these questions should lean toward *yes*, exactly as it does for rolls. Most of the time the right response is "sure, there's a window" — and now there is one, for everyone, permanently. The rule is not there to deny the player the window. It is there to make sure the scene the MM is describing and the scene the players are picturing stay the same scene, and to keep new facts entering the world through the MM rather than through a declaration.
+
+Once a detail has been narrated — by the MM, or in answer to a question — it is part of the scene and any character may act on it.
+
+### Trying Again
+
+A failed or partial roll may be attempted again **only if the fiction has changed since the first attempt**. Rolling the same action against an unchanged situation is not allowed; the result of the first roll stands.
+
+The fiction has changed when at least one of the following is true:
+
+1. **A new approach.** The character goes at the task a different way — a different attribute, a different skill, a different tool, a different angle.
+2. **New information.** The character has learned something they did not know on the first attempt, and it bears on the task.
+3. **Time has passed** — and the passage itself cost something or moved the situation. The patrol rotated, the storm broke, the pursuers closed the distance.
+
+If none of those is true, the answer is no. A new approach usually changes the circumstances as well, so the MM declares difficulty again before the new roll — it will often not be the difficulty of the first attempt.
+
+> **"What's different this time?"**
+>
+> That question is the whole ruling. Ask it back to the player. If they have an answer, they have a roll. If they do not, the first result is still standing and the scene needs to move on from it.
+
+This exists to keep failure meaningful. A 6- is a development, never a dead end (see *Failure (6-)*, above) — the story has already moved, and the situation the character now faces is not the situation they rolled against. Allowing the same action to be re-rolled until it lands would erase that development and turn every roll into a delay rather than a turn in the story.
+
+- *The lock did not open on a 6-. The same picks against the same lock: no. Forcing the door with a pry bar, or going back for the key you now know exists, or waiting out the shift change so you can work unhurried — each of those is a new roll, at a difficulty the MM sets fresh.*

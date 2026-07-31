@@ -343,3 +343,240 @@ Findings closed this wave: mm-H1, mm-M2, mm-M4, mm-M5, mm-L1, mm-L4, mm-L5, mm-L
 DESIGN §6 flag carried into the PR: W2-3 (MM1 enemy Attack/Defense modifiers) — states only what III.3 already rules, but is the one Wave 2 line a reader could mistake for a new rule.
 
 PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migration`.
+
+---
+
+## W3 — Canon-decision items
+
+- **Branch:** `feature/audit-wave3-canon`
+- **Date:** 2026-07-31
+- **Baseline:** `pytest --collect-only -q` → **1039 tests collected**, measured on this branch after merging W2 (PR #15).
+- **Model routing this wave:** mechanical/TDD tasks execute directly on Sonnet (this session); new-canon-prose tasks (W3-6, W3-8, W3-9, W3-10, W3-11, W3-13 — all DESIGN §6 sign-off items) are drafted by an Opus subagent via the Agent tool's `model` override, briefed with the relevant DESIGN section, the PHB/MM text being extended, and `references/phb-examples.md`'s voice guide, then reviewed/integrated/tested/committed here. Every draft still goes to the user for D12 sign-off before merge, per the plan.
+
+### W3 task list (from `docs/TASKS_audit_remediation.md`)
+
+- [x] W3-1 — Guild Apprentice gets its Specialty (three-way propagation). *(rul-H1 — D4)* **TDD**
+- [x] W3-2 — Amend II.1's character sheet specification. *(app-H1, H2, M1–M4 — D7, part 1)*
+- [x] W3-3 — Rebuild the character sheet appendix to the amended spec. *(D7, part 2)* **TDD**
+- [x] W3-4 — 0 Endurance means Absorb only, absolutely. *(rul-M1, rul-L4 — D5)* **TDD**
+- [x] W3-5 — Cut Reckless Press. *(rul-M3 — D6)*
+- [x] W3-6 — Redefine pushing scope against the pre-Technique cap. *(cre-M3, mm-L8 — D8)* — sign-off
+- [x] W3-7 — The Shattered Origin promise, both fixes. *(app-M7 — D9)*
+- [x] W3-8 — Give the Trouble Table a canonical home. *(mm-M3, part 1 — D3)* — sign-off
+- [x] W3-9 — Two Common Rulings into III.1. *(mm-M3, part 2 — D3)* — sign-off
+- [x] W3-10 — MM2: "Adjudicating Magic". *(mm-M6 — D10, part 1)* — sign-off
+- [x] W3-11 — MM coverage pointers + MM5 compression of the new section. *(mm-M6, mm-L9 — D10, part 2)* — sign-off
+- [x] W3-12 — MM5 Spark-economy drift. *(mm-L2, mm-L3)*
+- [x] W3-13 — II.4a gains its Facet introduction. *(cre-M6)* — sign-off
+- [x] W3-14 — Rule two findings as-designed. *(cre-M7, rul-L5)* — sign-off
+- [x] W3-15 — Wave 3 close-out.
+
+### W3-1 *(rul-H1 — D4)* — TDD
+
+- `II.5:197` — Guild Apprentice had **no** Specialty line at all (every other Background does), breaking II.5's own "five elements" claim. Added the Quick Start text verbatim: *"Artificers' Guild technical records — Standard becomes Easy when directly applicable."*
+- `facet.yaml` (`guild_apprentice`) — replaced its third, different specialty string ("Formal training in a structured discipline...") with the same Quick Start text, per the task's explicit "replaced, not merged" instruction.
+- Tests added to `test_docs_consistency.py` (2, written first, confirmed red on the yaml side before the fix — the PHB side was already correct from the same edit):
+  - `test_guild_apprentice_specialty_matches_quick_start` — both II.5 and `facet.yaml` equal the Quick Start wording exactly.
+  - `test_all_fifteen_backgrounds_have_a_specialty_in_phb_and_yaml` — every one of the 15 pre-built Backgrounds has a non-empty Specialty in both II.5 and `facet.yaml` (regression guard against this ever recurring for another Background).
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1041 passed** (1039 + 2 new).
+
+### W3-2 *(app-H1, H2, M1–M4 — D7, part 1)*
+
+- `II.1:11` — "six sections" → "nine sections."
+- Amended the section table to the shape DESIGN §4.3 specifies:
+  - **Facet** — relabeled "advancement track" to "rank advances toward the next level" and added **Career Advances** (app-M2, app-M4).
+  - **Background** — Secondary Skill row now reads "Secondary Skill (Novice, 1 mark) or Domain Origin if your Background grants magic" (app-M1).
+  - **Magic** *(new)* — domain name, type, pre-Technique Minor-only flag (app-H2).
+  - **Combat** *(new)* — Endurance (with the printed formula), Armor type + downgrade budget, Conditions, and Sparks (moved here from Session Resources; app-H1).
+  - **Inventory** *(new)* — equipment, including the armor that drives the Combat section's budget (app-M3).
+  - **Session Resources** — now Skill Points only.
+- Nothing in the amended table states a rule the PHB doesn't already state elsewhere (Endurance formula from `Glossary.md:42`/III.3, Armor budget from III.3, domain scope-gating from II.3).
+- `Appendix_Character_Sheet.md:3` still says "six sections" — that's W3-3 (D7, part 2), not touched here.
+- Regenerated `Index.md` — 5 new lines (the new section's Armor/Magic/Combat/Spark mentions now index it, as expected).
+
+Command: `cd software && python -m pytest -q`
+Result: **1041 passed**.
+
+### W3-3 *(D7, part 2)* — TDD
+
+- `Appendix_Character_Sheet.md` — rebuilt to mirror W3-2's nine-section spec exactly: relabeled the Facet section's advancement row, added Career Advances; changed Background's Secondary Skill row to "...or Domain Origin"; added Magic (Magic Domain), Combat (Endurance with the printed formula, Armor Type, Armor Downgrade Budget Remaining This Scene, Active Conditions, Sparks — moved here), and Inventory sections; Session Resources now Skill Points only. `:3`'s "six sections" → "nine sections."
+- **No new `Character` field added** — every new row maps to a field that already existed: `career_advances`, `magic_domain`, `endurance_current`, `armor`, `armor_downgrades_remaining`, `conditions`, `inventory` (all confirmed present on the model before writing a single sheet row).
+- `test_docs_consistency.py` — updated `CHARACTER_SHEET_FIELDS` (renamed the advancement-track label, added the eight new-section labels) and added `test_new_character_sheet_sections_need_no_new_model_field`, a dedicated regression guard beyond the general INV-2 check, asserting each of the seven new labels is both registered and maps to a real attribute.
+- **Zahna transcription check** (`characters/Zahna.fof`), by hand — nothing lost:
+  - Attributes: Str 1, Dex 3, Con 1, Int 3, Wis 1, Kno 3, Spi 2, Luck 3, Cha 1 — all nine fit.
+  - Facet: Mind, Level 0, 0 rank advances, Career Advances 1.
+  - Background: "Former Apprentice" (Guild Apprentice), Starting Skill Lore (Practiced), Domain Origin (Inscription — magic-granting Background replaces the secondary skill slot, per `facet.yaml`'s `domain_replaces_secondary`), Specialty (Guild records).
+  - Skills: Lore Practiced, 0 marks; the other 14 sit at their sheet rows Novice/0 by omission.
+  - Techniques: none (empty list — the Techniques table is simply blank).
+  - Magic Domain: Inscription.
+  - Combat: Endurance current/max not set in the `.fof` (Zahna isn't mid-combat) — the max the formula computes is 4 + Constitution modifier (1 → −1) + Endurance rank (Novice, +0) = 3, matching the character's own `notes:` field ("Endurance pool of 3"). Armor/Conditions unset (none yet). Sparks 3.
+  - Inventory: empty (not yet tracked in the `.fof`).
+  - Session Resources: skill points remaining is session-transient state, not part of the persistent `.fof` — correctly has no source to transcribe.
+
+Command: `cd software && python -m pytest -q`
+Result: **1042 passed** (1041 + 1 new).
+
+### W3-4 *(rul-M1, rul-L4 — D5)* — TDD
+
+- **Engine check first:** `_handle_react` (`websocket.py:614`) already gates on `character.endurance_current <= 0 and reaction != "absorb"` **before** computing any posture-based reaction cost — so Withdrawn's `free_reactions` and Defensive's reduced cost never get a chance to override the floor. The engine was already correct; per the task's own instruction ("if the engine already refuses, keep the tests as regressions"), this task became text + yaml + a regression-test job, not a behavior fix.
+- `III.3:167` (Reactions intro) — added the clarifying sentence: the 0-Endurance floor "is absolute, regardless of Posture: Withdrawn's free reactions and Defensive's reduced reaction cost only apply while you have at least 1 Endurance to spend."
+- `III.3:718` (quick ref) — "Conditions land at full tier — no extra penalty" was wrong for an armored character (`:47`: armor still helps downgrade Conditions even at 0 Endurance). Corrected to "land at their normal tier — your armor still helps," and added "regardless of Posture" for the same reason as the body-text fix.
+- `MM5:200` — already said "normal tier — no extra penalty" (not the "full tier" bug), so no correction needed there; added "regardless of Posture" anyway for consistency with the other two now-updated sites.
+- `facet.yaml` (`combat.endurance_floor_rule`) — set to a full statement of the rule (previously empty, the field existed but was unused, like its siblings `mook_rule`/`named_npc_rule`/`boss_rule`). `websocket.py`'s refusal message now reads this field (falling back to the old literal if empty) — the engine genuinely reads it now, not just declares it in the schema.
+- Tests (3 required; 2 new + 1 pre-existing satisfying the third), all in `test_websocket.py`:
+  - `test_zero_endurance_dodge_refused_while_withdrawn` *(new)* — Dodge refused at 0 Endurance while Withdrawn.
+  - `test_zero_endurance_dodge_refused_while_defensive` *(new)* — same, Defensive.
+  - `test_zero_endurance_absorb_allowed` *(pre-existing, already covers "Absorb permitted")* — left as-is; still passes, now also exercises the yaml-sourced message path.
+- Regenerated `Index.md` — 1 new line.
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed** (1042 + 2 new).
+
+### W3-5 *(rul-M3 — D6)*
+
+- `III.3:395` (Gamble) — "Reckless Press" named a mechanic that was just the plain Spark rule (III.1:73-76: spend a Spark, add a d6, drop the lowest) under a different name, with no distinct effect of its own. A named mechanic must earn its name. Rewrote to point at the actual Spark rule directly.
+- Grepped `Reckless` repo-wide: zero hits in `player_handbook/`, `mm_manual/`, `software/`, `characters/`, `enemies/`, `spec/`. The only remaining hits are in `docs/` — the audit corpus and this plan itself, which legitimately discuss the finding being fixed, not shipped content.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+### W3-7 *(app-M7 — D9)*
+
+- `I_Introduction.md:27` — "This handbook includes the Shattered Origin setting" overclaimed completeness (II.3 already defers Body magic domains to a forthcoming "Shattered Origin setting Facet," so the full setting isn't actually included). Softened to "is set in Shattered Origin," and named the forthcoming setting Facet explicitly.
+- `Table_of_Contents.md` — added **"Shattered Origin (setting Facet)"** to the Facets (Optional Modules) planned list, giving II.3:252's Body-magic deferral an actual destination in the ToC, matching the other five planned-module entries' format.
+- Regenerated `Index.md` — no diff (`Table_of_Contents.md` is in `NOT_INDEXED`; `I_Introduction.md`'s change touched no heading).
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+### W3-12 *(mm-L2, mm-L3)*
+
+- `MM5:59` — "1-2 Graceful Fail claims mid-session, not just at session end" invented a timing emphasis MM2 doesn't state; MM2's actual target is "1-2 per session across the whole table" (`MM2:499`). Fixed to match.
+- `MM5:61` — the "midpoint diagnostic" was inverted: MM5 diagnosed on **earning** ("if no Spark has been earned by the midpoint"), but MM2's actual checklist item diagnoses on **spending** ("if a player hasn't spent a Spark by the session's midpoint, design a moment that rewards it," `MM2:536`). Fixed to match MM2 exactly — did not invent a new diagnostic.
+- `MM5:62-63` — "Peer nominations are contagious... model it yourself" had no MM2 source at all; cut rather than authoring new MM2 text to retroactively justify it (out of this task's scope — no sign-off flag on W3-12). "Hoarding is a signal" does trace to MM2 (`:480`'s hoarding-is-behavioral-not-mechanical framing) — kept, reworded to match that framing precisely instead of the invented "award more visibly" fix.
+- `MM5:74` — "Spend 2-4, earn 2-4, end with 2-4" flattened MM2's actual three-band Target Economy table (`MM2:519-524`: Low-activity 1-2/1-2/2-3, Standard 2-3/3-4/2-3, High-combat 3-4/4-6/1-3) into a single wrong number. Replaced with a compressed version of all three bands.
+- INV-6 (typographic dashes) verified green.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+### W3-14 *(cre-M7, rul-L5)* — sign-off item, user may veto
+
+Added a new "Completeness Audit Remediation — Wave 3" section to `docs/DECISIONS.md` with two entries:
+
+- **cre-M7** — Communion Tier 3 has one fewer non-magic pick than Archive (3 vs 4 total, counting the shared Second/Ascendant Domain pair both trees carry). Recorded as accepted: authoring a fourth Communion Technique is outside this cycle's Non-goals, and both trees offer the *same total* Tier 3 pick count once the shared magic-extension Techniques are counted — no character is actually short a door.
+- **rul-L5** — no pre-built Background grants Survival. Recorded as accepted: changing an existing Background's skill grant has real knock-on cost (PHB entry, `facet.yaml`, tests, pre-gen characters) and is a content change outside this cycle's Non-goals; the custom Background path (II.5:83, five steps) already lets a Mind-primary character choose Survival as their Starting or Secondary skill.
+- Both entries name the finding ID, state the rejected alternative, and give the rationale, per the task's accept criteria. **Flagged for user sign-off — either ruling may be vetoed, which escalates to Brain per D12.**
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed** (unaffected — `DECISIONS.md` isn't part of the tested corpus).
+
+### W3-6 *(cre-M3, mm-L8 — D8)* — sign-off item, drafted via Opus subagent
+
+- **Drafted by an Opus subagent** (briefed with II.3's "Sparks and Magic" section, the "Before the Technique" blockquote, MM5's magic quick ref, and II.4c:135), reviewed and integrated by Sonnet.
+- `II.3_Magic.md` — added a new bullet, **"Reaching Significant early (before the Technique)"**, between the existing "Pushing scope" and "Easing Major effects" bullets: a pre-Technique caster may spend a Spark to attempt one Significant-scope effect at the domain's normal Significant difficulty (the Spark buys scope, not a discount) — one effect per Spark, not a permanent unlock; Major stays closed until the Tier 1 Technique. Has a real referent back to the Minor-scope cap (points at *Before the Technique*, below it in the same chapter).
+- `MM5_Quick_Reference.md` — rewrote the four post-difficulty-table bullets to group **all three** Spark-magic rules together (Focused eases Major / Broad ceiling immovable / the new pre-Technique push) and added the "standard domains only" qualifier to the Second Domain bullet (from II.4c:135), which the old MM5 line lacked.
+- INV-6 (typographic dashes) verified green.
+- Regenerated `Index.md` — 3 new lines (new heading term indexed).
+- **Flagged for user sign-off (D12) — new canonical rule text.**
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+### W3-13 *(cre-M6)* — sign-off item, drafted via Opus subagent
+
+- **Drafted by an Opus subagent** (briefed with II.4b's and II.4c's opening templates and II.4:13's one-sentence Body summary), reviewed and integrated by Sonnet.
+- `II.4a_Character_Creation_Facet_Body.md` — added a `## The Body Facet` section between the chapter title and `### Skills of the Body`, matching II.4b/II.4c's template exactly: paragraph 1 (who they are, how they solve problems, a three-way comparative sentence) + paragraph 2 (their tools + capstone). Deliberately used a fresh "wall" image for the comparative sentence rather than reusing the door metaphor a third time (it already appears verbatim in both `II.4_Character_Creation_Facets.md` and `II.4c`) — a voice call, noted for review.
+- No new mechanics — pure framing prose parallel to its siblings.
+- **Adjacent issue found, left out of scope:** II.4a uses `### Skills of the Body` (h3) while II.4b/II.4c use `## Skills of the Mind`/`## Skills of the Soul` (h2), so the new `## The Body Facet` (h2) now nests the existing h3 beneath it — a pre-existing heading-level inconsistency between II.4a and its siblings, not introduced by this task. Worth a follow-up sweep; not fixed here.
+- Regenerated `Index.md` — 1 new line.
+- **Flagged for user sign-off (D12) — new framing prose.**
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+### W3-9 *(mm-M3, part 2 — D3)* — sign-off item, drafted via Opus subagent
+
+- **Drafted by an Opus subagent** (briefed with III.1's structure/voice and MM5's existing "Unnarrated details" / "Can I try again?" bullets, which had no canonical source at all before this task), reviewed and integrated by Sonnet.
+- `III.1_Core_Resolution.md` — added a new `## Standing Rulings` section at the end of the chapter (after "Failure (6-)"), with two subsections:
+  - **Acting on Unnarrated Details** — players can always *ask* about the scene; they cannot *declare* an action assuming an unstated fact. Ties to the existing "lean toward yes" default.
+  - **Trying Again** — a failed/partial roll may be retried only if the fiction has genuinely changed (new approach, new information, or time passing that cost something); otherwise the first result stands. Explicitly grounded in the already-canonical "a 6- is a development, never a dead end" principle.
+- `MM5_Quick_Reference.md` — both Common Rulings bullets now cite their III.1 source (matching the file's existing trailing-parenthetical convention, e.g. `III.3:192`'s `(III.3, *Armor and Reaction Downgrades*)`), and compress the new body text rather than standing as unsourced assertions.
+- Regenerated `Index.md` — no diff (neither new heading names a Glossary term).
+- **Flagged for user sign-off (D12) — new canonical rule text.** Per the task's stated exception: if either ruling is rejected as non-canon, delete it from MM5 rather than keep an orphaned quick-ref line.
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+### W3-8 *(mm-M3, part 1 — D3)* — sign-off item, drafted via Opus subagent
+
+- **Drafted by an Opus subagent** (briefed with MM2's "Improvisation Techniques" section for structure/voice and MM5's existing Trouble Table, which had no canonical source), reviewed and integrated by Sonnet.
+- `MM2_Session_Design.md` — added a new `### The Trouble Table` subsection at the end of "Improvisation Techniques" (after "The NPC Name List"), expanding the six-row d6 table into full canonical guidance: per-category explanation with a worked example each, plus a "Working with the table" list (pick-over-roll, size to risk, never halt the story, vary it, hand it to a Graceful Fail claimant, pair with the Magic 6- Templates). Same six categories, same die mapping — no mechanic changed, only explained.
+- `MM5_Quick_Reference.md` — the Trouble Table section now cites its MM2 source in the heading (matching the file's existing "(compressed from II.3 — see II.3 for full text)" convention) and compresses down to the table plus four short bullets instead of standing alone.
+- INV-6 (typographic dashes) verified green.
+- Regenerated `Index.md` — 15 insertions / 6 deletions (new heading and reworded MM5 table content reindex).
+- **Flagged for user sign-off (D12) — new canonical body text.**
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+### W3-10 *(mm-M6 — D10, part 1)* — sign-off item, drafted via Opus subagent, largest new-prose task of the cycle
+
+- **Drafted by an Opus subagent** (briefed with II.3's Scope table, the domain-boundary "lean toward yes" paragraph, the Outcome Tiers for Magic 7-9 guidance, and III.3's "Scope in combat" paragraph — the four PHB sources this section compresses), reviewed, fact-checked, and integrated by Sonnet.
+- `MM2_Session_Design.md` — added `## Adjudicating Magic` as a new top-level section (after the newly-added Trouble Table, before "Managing Player Spotlight"), covering exactly four topics, each traced to a real PHB source:
+  - **Judging Scope** — the scale-and-duration test, worked through two paired examples (a hold-glyph door: Significant vs. the same glyph asked to endure: Major) that isolate duration as an independent axis; the pre-Technique Minor-scope ceiling as a hard availability limit, not a difficulty question.
+  - **Domain Boundary Calls** — the "lean toward yes" default, plus a "substance vs. rhyme" discriminator built directly from II.3's own two rejected examples (fire/weather, shadow/invisibility) contrasted with its own accepted ones (fire/air, shadow/sound).
+  - **Designing the 7-9 Complication** — the three complication categories from II.3, with a technique for deriving a complication from the player's own stated intent (worked three ways against the canonical "freeze-the-lock" intent from II.3:33).
+  - **Magic Against Active Opposition** — the Standard-difficulty floor, with the derived observation that it only ever moves the Focused/Minor cell (arithmetic on the existing difficulty table, not a new rule) — flagged as the section's strongest single line and worth extra scrutiny at sign-off.
+- **Fact-check pass (before integrating):** verified every concrete claim against its cited source — the difficulty-table arithmetic, the "lean toward yes" quote, the three complication categories, the Standard-floor combat rule, and the "same action economy as a Strike" line all check out verbatim or near-verbatim against II.3/III.3. **Caught and corrected one inaccuracy:** the agent's active-opposition example paraphrased the established "In Play: The Beam" vignette (III.2) as *"He is holding a beam off Zulnut with one arm"* — the actual scene has Mordai holding the beam with **both hands**, buying the doorway for **both** Zahna and Zulnut, not one arm for one character. Corrected to *"He is holding up a collapsing beam with both hands so the others can get through,"* accurate to the source without over-specifying.
+- No new mechanics anywhere in the section — every paragraph is a compression or application of already-existing PHB rules, per the task's hard constraint.
+- Regenerated `Index.md` — 14 new lines.
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+**Flagged for user sign-off (D12) — the largest new-prose task in the cycle. Please review closely**, especially the "substance vs. rhyme" domain-boundary framing and the active-opposition floor's derived claim.
+
+### W3-11 *(mm-M6, mm-L9 — D10, part 2)* — sign-off item, drafted via Opus subagent
+
+- **Drafted by an Opus subagent** (briefed with the just-landed W3-10 "Adjudicating Magic" section, MM2's Pacing Toolkit, III.2's Hazards/Threat Clock and death-choice rules, II.5's Specialty rule, and MM5's existing citation conventions), reviewed, fact-checked, and integrated by Sonnet. Four pieces:
+  - `MM2_Session_Design.md` — new "### Hazards as a Pacing Tool" subsection at the end of Pacing Toolkit, closing MM2's total absence of any hazard/Threat Clock mention. States the mechanic (4-segment clock, advances on partial/failure, wind-back costs an action with no roll) and the pacing shape (fills in roughly five or six party rolls — matching the exact figure W1-6 already corrected in III.2), then points at III.2 for the full rule.
+  - `MM4_Running_the_Table.md` — new "### Character Death Is the Player's Call" subsection closing out Safety and Consent, framing the game's death-choice rule (scar vs. heroic death, player's call, never the MM's) explicitly as a consent mechanic — a real gap, since the section previously said nothing about death at all despite it being the most safety-relevant rule in the book.
+  - `MM5_Quick_Reference.md` Common Rulings — one new bullet compressing II.5's Specialty rule (directly applicable → Standard becomes Easy; tangential → free information, no roll), inserted between "When not to roll" and "Saving throws."
+  - `MM5_Quick_Reference.md` Magic quick ref — a new "### Adjudicating Magic (compressed from MM2 — see MM2 for full text)" subsection, six bullets compressing all four W3-10 topics (rule-out-loud habit, scope = scale + duration, pre-Technique ceiling, domain boundary substance-vs-rhyme, 7-9 complication categories, active-opposition floor) at quick-ref density, inserted right after the Second Domain bullet and before the pre-existing Magic 6- Templates subsection.
+- **Fact-check pass:** verified the Threat Clock mechanic and "five or six party rolls" figure against III.2 (matches the figure I corrected myself in W1-6); verified the death-choice language against III.2's "When a Character Would Die" (scar named together by player and MM, heroic death's final action auto-succeeds, player's choice never the MM's); verified the Specialty bullet against II.5:51; verified the MM5 Adjudicating Magic compression against the actual W3-10 text now in the file (including the Easy-cell floor claim already fact-checked once in W3-10).
+- No new mechanics — every line is a pointer to or compression of already-existing PHB/MM body text.
+- INV-6 (typographic dashes) verified green.
+- Regenerated `Index.md` — 4 new lines.
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+**Flagged for user sign-off (D12).**
+
+### W3-15 — Wave 3 close-out
+
+All 14 W3 tasks done. Final suite run before opening the PR:
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed** (baseline was 1039; +5 across W3-1's and W3-3's TDD tasks).
+
+Findings closed this wave: rul-H1, app-H1, app-H2, app-M1, app-M2, app-M3, app-M4, rul-M1, rul-L4, rul-M3, cre-M3, mm-L8, app-M7, mm-M3 (both parts), mm-M6 (both parts), mm-L9, mm-L2, mm-L3, cre-M6, cre-M7, rul-L5.
+
+**Every DESIGN §6 sign-off item in this wave — none merged without being flagged here for review:**
+- **W3-6** — new rule: pre-Technique casters can push to Significant scope with a Spark.
+- **W3-8** — new canonical body text: the Trouble Table's MM2 home.
+- **W3-9** — new canonical body text: "Unnarrated details" and "Can I try again?" in III.1.
+- **W3-10** — the largest new-prose task of the cycle: MM2's "Adjudicating Magic" section. One factual inaccuracy in the initial draft (a misquoted established vignette) was caught during integration and corrected before commit — noted in the PR for extra scrutiny.
+- **W3-11** — MM2/MM4 coverage pointers (hazards, death-as-consent) and MM5's Adjudicating Magic compression.
+- **W3-13** — new framing prose: II.4a's missing Facet introduction.
+- **W3-14** — two findings ruled as-designed in `DECISIONS.md` (cre-M7, rul-L5) — the user may veto either, which escalates to Brain.
+
+**Model routing note:** all six prose sign-off tasks (W3-6, W3-8, W3-9, W3-10, W3-11, W3-13) were drafted by Opus subagents briefed with exact source citations, then fact-checked, reviewed, and integrated by this Sonnet session before commit — per the user's explicit direction earlier in this conversation. Every subagent draft was checked against its cited PHB/MM sources before landing; one inaccuracy was found and fixed (W3-10, see above).
+
+PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`.

@@ -26,7 +26,7 @@ On top of that core, the community can build **Facets** — optional modules tha
 
 ## Shattered Origin
 
-This handbook includes the **Shattered Origin** setting — a primary world created as a home for the game's first adventures and campaigns. It exists to give new players and Mirror Masters a place to start: somewhere with history, factions, mysteries, and stories already in motion.
+This handbook is **set in Shattered Origin** — a primary world created as a home for the game's first adventures and campaigns. It exists to give new players and Mirror Masters a place to start: somewhere with history, factions, mysteries, and stories already in motion. The full Shattered Origin setting Facet — expanded lore and setting-specific content like Body magic domains — is forthcoming; this handbook gives you enough of the world to start playing today.
 
 You are not required to play in Shattered Origin. It is an invitation, not an obligation. Mirror Masters and players are equally welcome to build their own worlds, and everything you need to do that is in this book.
 

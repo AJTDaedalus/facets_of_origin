@@ -56,11 +56,10 @@
 
 The Spark economy works when Sparks flow — earned and spent regularly, not hoarded.
 
-- **Target:** Confirm at least **1-2 Graceful Fail claims mid-session**, not just at session end.
+- **Target:** Confirm **1–2 Graceful Fail claims per session**, across the whole table.
 - **Graceful Fail is your best tool.** Every 6- is an opportunity for the player to claim it. When a player leans into the consequence with commitment, confirm the Spark immediately. This creates a virtuous cycle: players spend Sparks because they expect to earn more.
-- **Midpoint diagnostic:** If no Spark has been earned by the session's midpoint, you are being too conservative. Open an Act Break Nomination window, or watch for an unclaimed 6- and remind the table they can claim it.
-- **Peer nominations are contagious.** The first "Spark?" from a player opens the floodgate. If nobody is nominating, model it yourself by awarding one conspicuously. The table will follow.
-- **Hoarding is a signal.** If players consistently end sessions with unspent Sparks, they do not trust the supply. Award more visibly and more frequently until spending feels safe.
+- **Midpoint diagnostic:** If a player hasn't spent a Spark by the session's midpoint, design a moment that rewards it.
+- **Hoarding is a behavioral problem, not a mechanical one.** Players who don't earn enough Sparks during play won't feel comfortable spending them — structured earning moments (Act Break Nomination, Graceful Fail) are the fix.
 
 ### Spark Earning
 
@@ -71,7 +70,7 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 | **Graceful Failure** (6- played for story) | Player claims, MM confirms | 1–2 across table |
 | **Spark for Weakness** (played into flaw) | MM | 0–1 across table |
 
-**Target economy:** Spend 2–4, earn 2–4, end session with 2–4 unspent.
+**Target economy** (by session type): Low-activity — earn 1–2, spend 1–2, end with 2–3. Standard — earn 2–3, spend 3–4, end with 2–3. High-combat — earn 3–4, spend 4–6, end with 1–3.
 
 ---
 
@@ -198,7 +197,7 @@ A charge is consumed only when armor provides the reduction actually applied —
 
 - **Pool:** 4 + Constitution modifier + Endurance skill rank bonus
 - **Range:** 3 (Con 1, no skill) to 8 (Con 3, Master)
-- **0 Endurance:** Absorb only (Conditions land at their normal tier — no extra penalty)
+- **0 Endurance:** Absorb only, regardless of Posture (Conditions land at their normal tier — no extra penalty)
 - **Recovery:** Withdrawn posture restores 2 per exchange
 
 ---
@@ -211,10 +210,21 @@ A charge is consumed only when armor provides the reduction actually applied —
 | Significant | Standard | Hard | Very Hard |
 | Major | Hard | Very Hard | Very Hard (ceiling) |
 
-- **Pre-technique:** Minor scope only (no difficulty penalty — scope restriction alone is the limitation)
-- Prismatic ceiling is **unmovable** — Sparks cannot ease Major scope for Broad domains
-- Focused domains **can** Spark to ease Major one step
-- Second domain (Soul Communion Tier 3): always one difficulty step harder
+- **Pre-technique:** Minor scope only, at the domain's normal difficulty (no extra penalty — the scope restriction *is* the limitation)
+- **Sparks and scope** — three rules, all optional, all player-declared before the roll:
+  - **Focused eases Major:** a Focused domain may spend a Spark to shift a Major effect one step easier (Hard → Standard). Focused only.
+  - **Prismatic ceiling is unmovable:** no Spark eases Major for a Broad domain. Very Hard is Very Hard.
+  - **Pre-technique push:** a pre-technique caster may spend a Spark to attempt **one** Significant-scope effect at the domain's normal Significant difficulty. One effect per Spark — not an unlock; Major stays closed until the Tier 1 Technique.
+- **Second domain** (Soul Communion Tier 3): a second **standard** domain only — prismatic territories require Ascendant Domain. Effects in the second domain are always one difficulty step harder than the primary.
+
+### Adjudicating Magic (compressed from MM2 — see MM2 for full text)
+
+- **Rule out loud, before the dice.** Say the scope, say the difficulty, then roll. A ruling delivered after the result sounds like an adjustment.
+- **Scope = scale of change + duration.** Nothing else. Not how impressive it looks, not how well it was described, not target count (a dozen torches lit at once is still Minor). "And it stays that way" moves the tier on duration alone — catch it before the roll. When you correct scope upward, name the new difficulty and *pause*; scaling the intent back down is the player's call.
+- **Check the ceiling before you price the roll.** A pre-technique caster is capped at **Minor, full stop** — that is an availability question, not a difficulty one. Tell them what their magic can do now and let them re-aim.
+- **Domain boundaries — lean toward yes.** The test is substance vs. rhyme: does it run through the domain's actual material, or only share its mood? Fire burning the breathable content out of the air = yes; fire commanding the weather = no. Shadow muffling sound = yes; shadow granting invisibility = no. Don't surcharge a creative stretch — if the reach is more ambitious, that shows up as scope. A "no" is a **"No, but..."**. A "yes" is precedent — you are setting it permanently.
+- **7–9: the magic worked.** Confirm the success in the fiction *first*; the complication is added to a success, never a discount on one. Then pick one: **affects more than intended** / **costs something unexpected** / **creates a consequence nobody planned**. Mine the player's stated intent for the specifics. Rotate categories — four costs in a row and 7–9 becomes a flat fee. Test: does the table now have something to *do*?
+- **Active opposition = Standard floor.** A floor, not a surcharge. It only ever moves the **Easy** cell (Focused domain, Minor scope); every other combination already meets it, so raising a Hard roll "because combat" applies it twice. Opposition = something with its own will resisting *this working, right now* — a sealed door is difficulty, the rival holding it shut is opposition. Specific circumstances (distracted, wounded, constrained) may still adjust; "it is a battle" is not a circumstance.
 
 ### Magic 6- Templates (compressed from II.3 — see II.3 for full text)
 
@@ -279,27 +289,33 @@ Budget = Party Strength (sum of `career_advances`) x multiplier: Skirmish x1 / S
 
 ---
 
-## MM Trouble Table
+## MM Trouble Table (compressed from MM2 — see MM2 for full text)
 
-Roll (or pick) a d6 for a generic 6- consequence when nothing specific comes to mind. Usable for any roll, magical or not — pair with the domain-specific templates above for magic.
+Roll or pick a d6 for a generic 6- consequence when nothing specific comes to mind. Any roll, magical or not.
 
 | d6 | Category | The 6- consequence |
 |---|---|---|
-| 1 | **Cost** | Something is spent, broken, or used up that can't be easily replaced — a resource, a favor, an opportunity. |
-| 2 | **Position** | The character ends up somewhere worse — cornered, separated from the group, or committed to a course they can't easily undo. |
-| 3 | **Attention** | Someone or something notices that wasn't paying attention before — a guard, a rival, a threat nearby. |
-| 4 | **Equipment** | Gear fails, jams, or is lost at the worst moment — not gone forever, just unavailable right now. |
-| 5 | **Condition** | The character is left worse for wear in the fiction — winded, shaken, off-balance — narrated flavor, not a mechanical Condition unless already in combat (III.3). |
-| 6 | **Revelation** | New information comes to light — and it complicates things. Decide whether it helps or hurts first. |
+| 1 | **Cost** | Something spent, broken, or used up that can't be easily replaced — a resource, a favor, an opportunity. |
+| 2 | **Position** | Somewhere worse — cornered, separated from the group, or committed to a course they can't undo. |
+| 3 | **Attention** | Something notices that wasn't paying attention before — guard, rival, nearby threat. Better if it only starts looking. |
+| 4 | **Equipment** | Gear fails, jams, or is lost — not gone forever, just unavailable right now. Keep it recoverable. |
+| 5 | **Condition** | Worse for wear — winded, shaken, off-balance. Narrated flavor, **not** a mechanical Condition unless already in combat (III.3). |
+| 6 | **Revelation** | New information that complicates things. Decide whether it helps or hurts first; make it cost something. |
+
+- **Pick over roll** unless you want to be surprised too. The category is a prompt, not the line you say out loud.
+- **Size the trouble to the risk**; never pick the row that halts the story.
+- **Magic:** pair a category with the Magic 6- Templates above — template = how the domain misbehaved, category = what it cost.
+- **Graceful Fail:** hand the player the category, let them narrate the specifics, confirm the Spark.
 
 ---
 
 ## Common Rulings
 
-- **Unnarrated details:** Players cannot act on details the MM has not described.
+- **Unnarrated details:** Players cannot act on details the MM has not described. A player may always ask — and the default answer leans yes — but cannot declare an action that assumes the answer (III.1, *Acting on Unnarrated Details*).
 - **Contested roll (PvP):** Both sides roll; higher total wins. On a tie, both achieve partial success.
 - **Contested roll (vs NPC):** Only the player rolls. NPC capability sets difficulty.
-- **"Can I try again?":** Only if the fiction changes — new approach, new info, or time passes.
+- **"Can I try again?":** Only if the fiction changed — new approach, new information, or time passing that cost something. Otherwise the first result stands. A new approach gets a freshly declared difficulty (III.1, *Trying Again*).
 - **When not to roll:** Only roll when outcome is uncertain, stakes matter, and both success and failure move the story.
+- **Specialty:** A Background Specialty that *directly* applies turns a Standard roll Easy. When it is only tangential, hand over the information free — no roll (II.5, *Specialty*).
 - **Saving throws:** 2d6 + Major Attribute modifier (Body / Mind / Soul). Same three-tier outcomes. Use when something happens *to* the character, not something they choose.
 - **Mooks:** No Resolve, no Condition track. Any successful Strike (7+) removes one; an armored Mook needs a full success (10+).

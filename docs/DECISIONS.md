@@ -455,3 +455,44 @@ harder.
 reach two Tier 3 gates. The second is **refused**, not silently written over the first — the same
 refuse-don't-overwrite rule as the prismatic cap (D-A8), and `secondary_magic_domain` stays a single
 field. Stated in II.4b, II.4c, and the Glossary.
+
+## Completeness Audit Remediation — Wave 3 (2026-07-31)
+
+Two findings ruled as-designed rather than fixed, per `docs/BRIEF_audit_remediation.md`'s
+Non-goal boundary (no new Technique content, no Background skill-grant changes) and the task's
+explicit instruction to record rather than patch. Both are sign-off items — the user may veto
+either, which escalates to Brain per the standing D12 veto.
+
+### cre-M7 — Communion Tier 3's non-magic pick count, accepted as-is
+
+**Finding:** Soul's Communion branch offers one fewer non-magic Tier 3 pick than Mind's Archive
+branch. Archive Tier 3 has two non-magic Techniques (The Knowledge That Saves, Deep Archive)
+*plus* the two magic-extension Techniques (Second Domain, Ascendant Domain) — four total. Communion
+Tier 3 has one non-magic Technique (Hold the Line) plus the same two magic-extension Techniques
+(Second Domain, Ascendant Domain) — three total.
+
+**Alternative rejected:** Author a fourth Communion Tier 3 Technique to match Archive's non-magic
+count. Rejected — authoring new Technique content is outside this cycle's Non-goals (mechanical
+correctness and canon-consistency fixes, not new content).
+
+**Ruling: accepted as-is.** The asymmetry is real at the *non-magic* pick count, but both trees
+offer the same Tier 3 pick count *overall* once the shared magic-extension Techniques are counted
+— a character in either branch who wants a third Technique has exactly as many Tier 3 doors open.
+No fix needed to reach parity; the trees were never meant to mirror each other pick-for-pick
+outside that shared pair.
+
+### rul-L5 — No pre-built Background grants Survival, accepted as-is
+
+**Finding:** Survival (Mind) is one of the 15 skills but no pre-built Background (II.5) grants it
+as a Starting or Secondary Skill.
+
+**Alternative rejected:** Change an existing pre-built Background's skill grant to Survival.
+Rejected — this is a content change with real knock-on cost: it would touch the Background's PHB
+entry, `facet.yaml`, any test asserting that Background's current grant, and the pre-generated
+Quick Start characters that reference it. A one-line "fix" is not actually one line once every
+consumer is accounted for, and the Non-goal boundary (no content changes this cycle) applies here
+too.
+
+**Ruling: accepted as-is.** The custom Background path (II.5:83 — five steps, choose any skill
+from your Primary Facet) already covers a character who wants Survival from the start. No pre-built
+Background is required to reach it.
