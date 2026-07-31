@@ -402,6 +402,29 @@ class TestAdvancementAndSparks:
         mm.wait_for_timeout(700)
         assert player.is_visible(".toast-gold")
 
+    def test_mm_table_roller_shows_dice_and_a_total_only(self, table):
+        """A utility for random tables and oracles. It must stay visibly apart
+        from the resolution system — no outcome tier, and nothing that reads as
+        an NPC rolling."""
+        mm, player = table
+        mm.click(".collapsible-toggle:has-text('Table Roller')")
+        mm.wait_for_timeout(300)
+        mm.fill("#table-roll-label", "Wandering encounter")
+        mm.click(".dice-quick-row button:has-text('d20')")
+        mm.wait_for_timeout(700)
+
+        result = mm.inner_text("#table-roll-result")
+        assert "Wandering encounter" in result
+        for tier in ("Full Success", "Success with Cost", "Things Go Wrong"):
+            assert tier not in result, "table roll must not carry a resolution outcome"
+
+        # The table sees the result, so a roll behind the screen stays a choice.
+        assert "Table roll" in player.inner_text("#play-chat-log")
+
+    def test_players_have_no_table_roller(self, table):
+        _, player = table
+        assert not player.is_visible("#table-roll-notation")
+
     def test_technique_panel_renders_for_a_player(self, table):
         """technique_select was MM-gated while the only control that sent it was
         the player's Builder tab, so no character could ever gain a Technique."""

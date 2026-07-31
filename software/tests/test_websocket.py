@@ -2897,3 +2897,107 @@ class TestCharacterCreatedBroadcast:
 
         assert msg["type"] == "character_created"
         assert msg["player"] == "Zulnut"
+
+
+# ---------------------------------------------------------------------------
+# MM table roller — a utility, deliberately not a resolution mechanic
+# ---------------------------------------------------------------------------
+
+class TestTableRoll:
+    """Raw dice for the things around the game that are not the game: random
+    tables, oracles, "which of you does it notice first".
+
+    It returns dice and a total and nothing else. There is deliberately no
+    outcome tier, no attribute, and no skill — a 2d6 with a success band would
+    be a second implementation of the core resolution system, and would let an
+    MM roll for an NPC, which PHB III.3 says never happens.
+    """
+
+    def test_mm_can_roll_arbitrary_dice(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Table"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "table_roll", "notation": "3d6", "label": "Loot value"})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "table_roll_result"
+        assert msg["notation"] == "3d6"
+        assert msg["label"] == "Loot value"
+        assert len(msg["dice"]) == 3
+        assert all(1 <= d <= 6 for d in msg["dice"])
+        assert msg["total"] == sum(msg["dice"])
+
+    def test_modifier_is_applied_to_the_total(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Table Mod"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "table_roll", "notation": "2d6+4"})
+            msg = ws.receive_json()
+
+        assert msg["modifier"] == 4
+        assert msg["total"] == sum(msg["dice"]) + 4
+
+    def test_result_carries_no_outcome_tier(self, client, mm_headers, mm_token):
+        """Guards the boundary: this must never grow into a second copy of the
+        2d6 resolution system."""
+        resp = client.post("/api/sessions/", json={"name": "No Tier"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "table_roll", "notation": "2d6"})
+            msg = ws.receive_json()
+
+        assert "outcome" not in msg
+        assert "outcome_label" not in msg
+
+    def test_table_rolls_stay_out_of_the_character_roll_log(
+        self, client, mm_headers, mm_token,
+    ):
+        """The roll log is a record of character actions. A d100 for a weather
+        table is not one, and would render as a malformed entry."""
+        resp = client.post("/api/sessions/", json={"name": "Log Clean"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "table_roll", "notation": "1d100"})
+            ws.receive_json()
+
+        assert session_store.get(session_id).roll_log == []
+
+    def test_invalid_notation_returns_an_error(self, client, mm_headers, mm_token):
+        resp = client.post("/api/sessions/", json={"name": "Bad Dice"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "table_roll", "notation": "banana"})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "error"
+        assert "banana" in msg["message"]
+
+    def test_absurd_dice_counts_are_refused(self, client, mm_headers, mm_token):
+        """A bounded roller cannot be used to flood every connected client."""
+        resp = client.post("/api/sessions/", json={"name": "Too Many"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "table_roll", "notation": "9999d6"})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "error"
+
+    def test_players_cannot_table_roll(self, client, mm_token, session_with_character):
+        """Players roll through the resolution system. A second, tier-less
+        roller on their sheet would only muddy which one is the real mechanic."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "table_roll", "notation": "1d20"})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "error"
+        assert "Unknown event type" in msg["message"]

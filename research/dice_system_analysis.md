@@ -193,10 +193,106 @@ The companion app (core to the digital-first design) handles:
 
 ---
 
+## Player-Facing Rolls: "NPCs Never Roll"
+
+Added 2026-07-31. The rule was adopted after the 2026-03-13 playtest without a
+documented basis; this section supplies one. Question raised: is it good design,
+and is there precedent?
+
+### Precedent
+
+It is a well-established design, not a novelty, and it appears in two distinct
+lineages:
+
+| Game | Lineage | Form |
+|---|---|---|
+| Apocalypse World (Baker, 2010) | PbtA | "The MC never rolls dice." Foundational — the whole family inherits it |
+| Dungeon World (Adams & LaTorra, 2012) | PbtA | "The GM never rolls dice"; monster attacks arrive as GM moves |
+| Masks, Monsterhearts, Avatar Legends | PbtA | Same rule, unchanged |
+| Blades in the Dark (Harper, 2015) | FitD | GM never rolls; action, resistance, and fortune rolls are all player-side |
+| Ironsworn / Starforged (Tomkin, 2019) | FitD-adjacent | Player-facing by necessity — it supports solo and co-op play |
+| **Numenera / Cypher System (Cook, 2013)** | **Traditional / crunchy** | **Player-facing rolls throughout, including defence** |
+
+The Cypher entry is the important one. Every other game on that list is
+narrative-first, which makes it easy to assume player-facing rolls are a
+*narrative* technique. Cypher is a comparatively crunchy, tactical, level-and-
+damage system that uses them anyway. The mechanic is not tied to a register.
+
+Counterexamples exist and are respectable: Fate rolls for active opposition,
+Mouse Guard and Torchbearer use opposed rolls, and D&D 5e has the GM roll
+attacks (its player-facing variant is a house rule, not RAW). Nobody considers
+either choice wrong.
+
+### Why it fits this project specifically
+
+Both stated pillars point the same way:
+
+1. **"Minimize rules complexity and gameplay friction."** It removes roughly half
+   the dice handling in a fight. In a four-character combat, an exchange goes
+   from eight rolls to four.
+2. **"The MM's role is to reflect the spotlight back onto the players."** The MM
+   is never heads-down resolving their own dice while the table waits.
+
+It also closes a weakness this document already identified. The systems
+comparison table lists **"GM burnout in long play"** as PbtA's cost, and Open
+Question 4 names *"a game that genuinely eases the GM role"* as the market gap.
+Player-facing rolls are one of the strongest available levers on both.
+
+And it is why the digital layer works as well as it does: the MM Combat Console
+resolves an enemy attack by picking the incoming Condition, not by rolling and
+then reconciling a number against a target. There is nothing to reconcile.
+
+### The honest costs
+
+1. **Variance concentrates on one person.** A player rolls both to act and to
+   avoid being hurt, so a bad dice night hits them from both directions with no
+   relief. This is the most-cited real criticism of Cypher, and it compounds
+   here because Endurance is a spending economy: bad reaction rolls drain the
+   pool that pays for reactions.
+2. **The shared spectator moment is gone.** A GM rolling a crit in the open is
+   genuine table drama, and player-facing rolls trade it away.
+3. **NPCs can read as inert** unless the MM narrates hard, because they never
+   visibly try and fail — they only ever succeed at whatever the MM declares.
+
+### The open question this surfaces
+
+In Apocalypse World the MC's hard move lands without a roll, but the **player's
+own 6-** is what invited it. The dice still gate the consequence; the MC is just
+not the one holding them.
+
+Facets of Origin currently works differently. An enemy attack is declared by the
+MM and its severity is fixed by tier — Mook = Tier 1, Named/Boss = Tier 2 — with
+no roll gating whether it arrives. The PC's reaction is the only variance, and a
+PC who Absorbs does not roll at all, so an exchange can resolve with **zero dice
+thrown by anyone**.
+
+That is closer to Cypher's defence roll than to Apocalypse World's move economy,
+and it is internally coherent: Absorb is a deliberate choice to eat the hit, and
+the reaction is the "does it land?" step. But it has a consequence worth
+measuring: **a Boss lands Tier 2 every single time it acts.** An enemy's
+competence never varies, only the PC's response to it.
+
+**Recommendation: keep the rule.** It has strong precedent in and out of PbtA,
+it serves both design pillars directly, and it is load-bearing for the MM
+experience the project is trying to build.
+
+**Flag for playtest**, not redesign: whether fully deterministic enemy severity
+makes Named and Boss enemies feel same-y across a long fight, and whether
+variance concentration produces a "nothing I did mattered" run for one player.
+Both are measurable in the existing simulation harness. If either bites, the
+smallest available fix is a variable incoming tier (some enemy actions arrive as
+Tier 1 rather than Tier 2) — which preserves "NPCs never roll" while restoring
+variety, since the MM is already choosing the Condition from a list.
+
+---
+
 ## Sources
 
 **Psychology:**
 Ryan & Deci (2000), Self-Determination Theory; Lazzaro (2004), 4 Keys to Fun (GDC); Csikszentmihalyi (1990), Flow; Griffiths (1991), near-miss effect; Schultz (1997), dopamine and prediction; Green & Brock (2000), narrative transportation; Sweller (1988), cognitive load theory; Seligman & Maier (1967), learned helplessness; Edmondson (1999), psychological safety; Rotter (1966), locus of control; Baker (2010), Apocalypse World design notes; Harper (2017), Blades in the Dark; Laws (2002), Robin's Laws; Koster (2005), A Theory of Fun.
+
+**Player-facing rolls ("the GM never rolls"):**
+Baker (2010), *Apocalypse World* — "the MC never rolls dice"; Adams & LaTorra (2012), *Dungeon World*; Harper (2015), *Blades in the Dark*; Cook (2013), *Numenera* / Cypher System — the non-narrative-first case; Tomkin (2019), *Ironsworn*. Counterexamples retaining GM rolls: *Fate Core* (active opposition), *Mouse Guard* / *Torchbearer* (opposed rolls), *D&D 5e* (GM attack rolls; player-facing is a house rule, not RAW).
 
 **Market:**
 Training knowledge synthesis through August 2025 covering: r/rpg, r/PBtA, r/bladesinthedark, r/Ironsworn, r/narrativegames, r/FATErpg community patterns; ICv2 industry reporting; EN World; Dicebreaker; The Gauntlet Gaming Community; Deeper in the Game (Chris Chinn); Gnome Stew; published game texts for Apocalypse World, Dungeon World, Blades in the Dark, Ironsworn, Starforged, Masks, Monsterhearts, Kids on Bikes, Fate Core, Fate Accelerated, Wanderhome, For the Queen, Microscope, Trophy Dark/Gold, Avatar Legends.

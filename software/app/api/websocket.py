@@ -12,6 +12,7 @@ from jose import JWTError
 
 from app.auth.tokens import decode_token
 from app.game import combat as combat_module
+from app.game.dice import DiceSpec
 from app.game.engine import (
     RollRequest, resolve_roll, resolve_magic_roll, resolve_saving_throw, roll_result_to_dict,
 )
@@ -184,6 +185,8 @@ async def _dispatch(
         await _handle_skill_advance(msg, session, session_id)
     elif event_type == "mark_skill_used" and is_mm:
         await _handle_mark_skill_used(msg, session, session_id)
+    elif event_type == "table_roll" and is_mm:
+        await _handle_table_roll(websocket, msg, session_id, identity)
     elif event_type == "ping":
         await manager.send_to(websocket, {"type": "pong"})
     # --- Combat events ---
@@ -391,6 +394,55 @@ async def _handle_claim_graceful_fail(msg: dict, session, session_id: str, calle
         "type": "graceful_fail_claimed",
         "player": caller,
         "message": f"{caller} claims a Graceful Fail — MM to confirm.",
+    })
+
+
+#: Bounds for the MM's table roller. Wide enough for any random table an MM
+#: would reach for, narrow enough that the roller cannot be used to flood every
+#: connected client with a single message.
+_TABLE_ROLL_MAX_DICE = 100
+_TABLE_ROLL_MAX_SIDES = 1000
+
+
+async def _handle_table_roll(websocket, msg: dict, session_id: str, identity: str) -> None:
+    """Roll raw dice for the things around the game that are not the game —
+    random tables, oracles, "which of you does it notice first".
+
+    Deliberately NOT a resolution mechanic. It returns dice and a total and
+    nothing else: no outcome tier, no attribute, no skill. A 2d6 here with a
+    success band would be a second implementation of the core resolution system
+    (III.1), and would hand the MM a way to roll for an NPC — which PHB III.3
+    says never happens. It also stays out of the character roll log, which is a
+    record of what characters did.
+    """
+    notation = str(msg.get("notation", "")).strip()
+    label = str(msg.get("label", ""))[:120].strip()
+
+    try:
+        spec = DiceSpec.parse(notation)
+    except ValueError as e:
+        await manager.send_to(websocket, {"type": "error", "message": str(e)})
+        return
+
+    if spec.count > _TABLE_ROLL_MAX_DICE or spec.sides > _TABLE_ROLL_MAX_SIDES:
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": (
+                f"Table roll is capped at {_TABLE_ROLL_MAX_DICE} dice "
+                f"of up to d{_TABLE_ROLL_MAX_SIDES}."
+            ),
+        })
+        return
+
+    dice = spec.roll()
+    await manager.broadcast(session_id, {
+        "type": "table_roll_result",
+        "rolled_by": identity,
+        "notation": notation,
+        "label": label,
+        "dice": dice,
+        "modifier": spec.modifier,
+        "total": spec.total(dice),
     })
 
 

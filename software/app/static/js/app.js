@@ -552,6 +552,9 @@ function handleServerMessage(msg) {
     case 'contested_roll_result':
       onContestedRollResult(msg);
       break;
+    case 'table_roll_result':
+      onTableRollResult(msg);
+      break;
     // Advancement
     case 'technique_selected':
       onTechniqueSelected(msg);
@@ -1194,6 +1197,7 @@ const HELP_MM = [
   ['Play — Threat Clocks', 'A visible countdown on a hazard. A 7-9 or 6- near it advances a segment; a 10+ never does. Players can spend an action to wind one back.'],
   ['Play — Sparks', 'Open Act Break prompts every player to nominate someone. You confirm each nomination and every Graceful Failure claim. Award directly any time.'],
   ['Play — Contested Roll', 'Two characters pushing against each other. Highest total wins.'],
+  ['Play — Table Roller', 'Raw dice for random tables, oracles, and coin flips. It has no outcome tier because it is not a resolution roll — enemies still never roll, and an enemy attack is landed as a Condition in the combat console.'],
   ['Play — Session', 'Invite links (one per player, single use) and Start New Session, which refreshes Sparks and re-arms once-per-session Techniques.'],
   ['Builder — Enemies & Encounters', 'Build enemies, then group them into an Encounter. Run drops the whole encounter into the live tracker in one action.'],
   ['Builder — Advancement', 'Mark skills used so players can spend Skill Points on them, and award marks directly.'],

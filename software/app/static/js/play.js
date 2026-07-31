@@ -1656,6 +1656,55 @@ function performContestedRoll() {
 }
 
 // ---------------------------------------------------------------------------
+// Table roller (MM) — a utility, not a mechanic
+//
+// Raw dice for everything around the game that is not the game: random tables,
+// oracles, coin flips. It shows dice and a total and nothing else. Giving it an
+// outcome tier would make it a second copy of the core resolution system and
+// hand the MM a way to roll for an NPC, which PHB III.3 says never happens.
+// ---------------------------------------------------------------------------
+
+function quickTableRoll(notation) {
+  const labelEl = document.getElementById('table-roll-label');
+  sendWS({
+    type: 'table_roll',
+    notation,
+    label: labelEl ? labelEl.value.trim() : '',
+  });
+}
+
+function performTableRoll() {
+  const input = document.getElementById('table-roll-notation');
+  const notation = input ? input.value.trim() : '';
+  if (!notation) {
+    notify('Type dice notation, or use a quick button.', 'warn');
+    focusElement('table-roll-notation');
+    return;
+  }
+  quickTableRoll(notation);
+}
+
+function onTableRollResult(msg) {
+  const parts = msg.label ? `${msg.label} — ${msg.notation}` : msg.notation;
+  addSystemChat(`Table roll ${parts}: [${msg.dice.join(', ')}] = ${msg.total}`);
+
+  // Everyone sees the result in chat; the MM also gets the readout in the panel.
+  const box = document.getElementById('table-roll-result');
+  if (!box || state.role !== 'mm') return;
+
+  box.classList.remove('hidden');
+  const modStr = msg.modifier ? ` ${msg.modifier > 0 ? '+' : '−'} ${Math.abs(msg.modifier)}` : '';
+  box.innerHTML = `
+    ${msg.label ? `<div class="table-roll-label">${escapeHtml(msg.label)}</div>` : ''}
+    <div class="dice-display">${msg.dice.map(d => `<div class="die kept">${d}</div>`).join('')}</div>
+    <div class="table-roll-total">${msg.total}</div>
+    <div class="roll-breakdown">${escapeHtml(msg.notation)}: ${msg.dice.join(' + ')}${modStr} = ${msg.total}</div>`;
+
+  const labelEl = document.getElementById('table-roll-label');
+  if (labelEl) labelEl.value = '';
+}
+
+// ---------------------------------------------------------------------------
 // Session lifecycle (MM)
 // ---------------------------------------------------------------------------
 async function resetSession() {

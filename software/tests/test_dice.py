@@ -47,3 +47,44 @@ class TestDiceSpecRoll:
         for _ in range(100):
             for val in spec.roll():
                 assert 1 <= val <= 20
+
+
+# ---------------------------------------------------------------------------
+# Modifier notation — for the MM's table roller
+# ---------------------------------------------------------------------------
+
+class TestModifierNotation:
+    """The MM's table roller lets an MM type what a random table asks for
+    ("1d20+3"), so the parser accepts a trailing modifier. Plain 'NdS' is
+    unchanged and still parses to a modifier of 0 — the resolution engine and
+    combat module both go through this parser.
+    """
+
+    def test_plain_notation_has_no_modifier(self):
+        assert DiceSpec.parse("2d6").modifier == 0
+
+    def test_positive_modifier(self):
+        spec = DiceSpec.parse("1d20+3")
+        assert (spec.count, spec.sides, spec.modifier) == (1, 20, 3)
+
+    def test_negative_modifier(self):
+        spec = DiceSpec.parse("2d6-1")
+        assert (spec.count, spec.sides, spec.modifier) == (2, 6, -1)
+
+    def test_whitespace_around_the_modifier_is_tolerated(self):
+        assert DiceSpec.parse(" 3d8 + 2 ").modifier == 2
+
+    def test_total_applies_the_modifier(self):
+        spec = DiceSpec.parse("1d1+5")   # 1d1 always rolls 1
+        assert spec.total([1]) == 6
+
+    def test_total_of_a_plain_spec_is_the_dice_sum(self):
+        assert DiceSpec.parse("3d6").total([2, 3, 4]) == 9
+
+    def test_a_bare_modifier_is_still_invalid(self):
+        with pytest.raises(ValueError):
+            DiceSpec.parse("+3")
+
+    def test_a_trailing_operator_is_invalid(self):
+        with pytest.raises(ValueError):
+            DiceSpec.parse("1d20+")

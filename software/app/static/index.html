@@ -673,6 +673,39 @@
             </div>
           </div>
 
+          <!-- =============== MM: TABLE ROLLER =============== -->
+          <div class="card collapsible" data-role="mm">
+            <button class="card-title collapsible-toggle" aria-expanded="false"
+                    onclick="toggleCollapsible(this)">
+              Table Roller <span class="toggle-arrow">+</span>
+            </button>
+            <div class="collapsible-body hidden">
+              <p class="card-help">
+                Raw dice for the things around the game &mdash; random tables, oracles, which of
+                two doors the noise came from. Not a resolution roll: no outcome tier, no
+                Attribute. Enemies still never roll; when one attacks, land the Condition above.
+              </p>
+              <div class="dice-quick-row">
+                <button class="btn btn-secondary btn-sm" onclick="quickTableRoll('1d4')">d4</button>
+                <button class="btn btn-secondary btn-sm" onclick="quickTableRoll('1d6')">d6</button>
+                <button class="btn btn-secondary btn-sm" onclick="quickTableRoll('1d8')">d8</button>
+                <button class="btn btn-secondary btn-sm" onclick="quickTableRoll('1d10')">d10</button>
+                <button class="btn btn-secondary btn-sm" onclick="quickTableRoll('1d12')">d12</button>
+                <button class="btn btn-secondary btn-sm" onclick="quickTableRoll('1d20')">d20</button>
+                <button class="btn btn-secondary btn-sm" onclick="quickTableRoll('1d100')">d100</button>
+              </div>
+              <label for="table-roll-notation">Or type it</label>
+              <div style="display:flex;gap:6px;">
+                <input type="text" id="table-roll-notation" placeholder="e.g. 3d6+2"
+                       style="flex:1;margin:0;" onkeydown="if(event.key==='Enter')performTableRoll()">
+                <button class="btn btn-primary btn-sm" onclick="performTableRoll()">Roll</button>
+              </div>
+              <label for="table-roll-label" style="margin-top:8px;">What for? (optional)</label>
+              <input type="text" id="table-roll-label" placeholder="e.g. Wandering encounter">
+              <div id="table-roll-result" class="table-roll-result hidden"></div>
+            </div>
+          </div>
+
           <!-- =============== MM: SESSION =============== -->
           <div class="card collapsible" data-role="mm">
             <button class="card-title collapsible-toggle" aria-expanded="false"

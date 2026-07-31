@@ -1544,6 +1544,28 @@ label {
 .contest-vs { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; }
 
 /* =========================================================================
+   TABLE ROLLER
+   ========================================================================= */
+
+.dice-quick-row {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.dice-quick-row .btn { flex: 1 0 auto; min-width: 46px; padding: 5px 8px; }
+
+.table-roll-result {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--glass);
+}
+.table-roll-label { font-size: 11px; color: var(--text-dim); margin-bottom: 4px; }
+.table-roll-total { font-size: 1.8rem; font-weight: 700; line-height: 1.1; color: var(--gold); }
+
+/* =========================================================================
    LIBRARIES (enemies, encounters) & BUILDER ROWS
    ========================================================================= */
 
