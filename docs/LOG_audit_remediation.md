@@ -23,8 +23,8 @@
 
 ### W1 task list (from `docs/TASKS_audit_remediation.md`)
 
-- [ ] W1-1 — Create the LOG and record the baseline. *(this entry)*
-- [ ] W1-2 — II.2 point-buy arithmetic and the Scholar's Luck. *(cre-H1, cre-M1)*
+- [x] W1-1 — Create the LOG and record the baseline. *(this entry)*
+- [x] W1-2 — II.2 point-buy arithmetic and the Scholar's Luck. *(cre-H1, cre-M1)*
 - [ ] W1-3 — "Each Facet's tree" → "the Mind and Soul trees"; drop the phantom Techniques. *(cre-H2, cre-H3, cre-M4 — D1)*
 - [ ] W1-4 — Soul Second Domain prerequisite line. *(cre-M2)*
 - [ ] W1-5 — Zulnut's Finesse and the Knowledge/Lore slip. *(cre-M5)*
@@ -41,3 +41,13 @@
 Command: `cd software && python -m pytest --collect-only -q`
 Result: **1026 tests collected**, 0 errors.
 Accept criteria met: file exists with the baseline count measured (not copied from W0).
+
+### W1-2 *(cre-H1, cre-M1)*
+
+- `II.2:102` — replaced the illegal "four at 3, two at 1, three at 2" example (nets to 20, not 18) with the legal **four at 3, four at 1, one at 2** (4 spent, 4 saved, 1 at baseline = 18). Recomputed the whole sentence, not just the numbers.
+- `II.2:121` — the Scholar's stat line was already correct (Luck 2, total 18 ✓); the prose falsely claimed "Strong in Luck" (Strong = 3, Luck is baseline 2). Replaced with "Nothing lucky about them, either — cleverness is the only edge they've got," preserving the sentence's voice without the false claim.
+- No other prose in the section touched.
+- **Flag for voice review (DESIGN §6):** the `:121` replacement clause is a new sentence, not a pure arithmetic fix — worth a second look for tone.
+
+Command: `cd software && python -m pytest -q`
+Result: **1026 passed**.
