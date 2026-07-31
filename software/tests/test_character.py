@@ -468,6 +468,39 @@ class TestPerFacetLevelTracking:
         assert "second_domain" in char.techniques
         assert char.secondary_magic_domain == "storm"
 
+    # L-7 (docs/RESEARCH_completeness_audit.md, II.3:244-246): prismatic
+    # domains are never available as a starting domain — only via Ascendant
+    # Domain (Tier 3).
+    def test_starting_domain_technique_rejects_prismatic_choice(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="soul",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.technique_picks_available = 1
+        ok, msg = char.select_technique("spiritual_domain", ruleset, choice="fate")
+        assert not ok
+        assert "prismatic" in msg.lower() or "Ascendant" in msg
+        assert char.magic_domain is None
+        assert "spiritual_domain" not in char.techniques
+
+    # L-7 (II.3:244-246): "A character may hold at most one domain per Facet"
+    # via the cross-training route. Only one magic-granting Tier 1 Technique
+    # exists per Facet, so this is structurally unreachable through the
+    # public API today — exercised directly on the guard instead.
+    def test_domain_guard_refuses_a_third_facet_domain(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="soul",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.magic_domain = "resonance"
+        char.cross_facet_domain = "inscription"
+        tech_def = ruleset.get_technique("spiritual_domain")
+        ok, msg = char._validate_domain_choice(
+            tech_def, "storm", ruleset, "spiritual_domain"
+        )
+        assert not ok
+        assert "each Facet" in msg
+
     def test_select_technique_ascendant_domain_refused_without_domain(self, ruleset, valid_attributes):
         """Same guard, likewise for Ascendant Domain."""
         char, _ = create_default_character(

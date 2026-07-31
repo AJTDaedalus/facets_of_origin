@@ -762,3 +762,88 @@ Result: **1090 passed** (1088 + 2 new).
 
 Command: `cd software && python -m pytest -q`
 Result: **1091 passed** (1090 + 1 new).
+
+### W4-13 *(sync-L-1 … L-8)* — TDD
+
+Eight low-severity findings; each investigated on its own merits rather than
+batch-applied — three were already-correct or already-enforced and just needed
+verification/recording rather than a code change.
+
+- **L-1** — `software/facets/base/facet.yaml` (`spark.earn_methods`): replaced
+  `spark_for_weakness` with `peer_call` (III.1:70's "Spark?" — any player can
+  call it for another player's moment; the MM confirms). `spark_for_weakness`'s
+  content already duplicated `mm_award`'s "playing your character's established
+  traits and weaknesses in a way that costs you something real" clause — III.1
+  folds weakness-play into the MM award rather than treating it as a separate
+  earn method. No references to the old id existed outside yaml/research docs.
+- **L-2** — `software/app/facets/schema.py` (`CombatConditionDef`): added
+  `out_of_combat_clears: str | None`. `facet.yaml`'s three Tier 1 conditions
+  (winded, off_balance, shaken) now carry `out_of_combat_clears: end_of_scene`
+  (III.2:69 — Tier 1 clears end of exchange in combat; outside combat, where
+  there's no exchange structure, end of scene instead). Data only: the actual
+  scene-boundary trigger to *invoke* this clearing is a session-lifecycle
+  feature (knowing when a scene ends) that doesn't exist yet — flagged as a
+  gap, consistent with this wave's scope discipline on tasks with no live
+  wiring target.
+- **L-3** — `software/app/game/character.py`: added
+  `intercepts_this_exchange: int = 0`. `software/app/api/websocket.py`
+  (`_handle_react`): refuses a second Intercept in the same exchange
+  (III.3:219 — Intercept is capped at one per exchange, unlike other reaction
+  types); increments on a successful Intercept; `_handle_end_exchange` resets
+  it to 0 alongside `reactions_this_exchange`.
+- **L-4** — `software/facets/base/facet.yaml` (`combat.postures.defensive`):
+  added `min_reaction_cost: 0` as an explicit field (III.3 posture table:
+  "-1 Endurance cost per reaction (min 0)"). `software/app/game/combat.py`
+  (`reaction_cost`): the floor now reads `posture_def.get("min_reaction_cost",
+  0)` instead of a hardcoded `max(0, ...)`. No behavioral change at the
+  default value; the floor is now overridable per-posture from yaml.
+- **L-5** — **Accepted as-is**, recorded in `docs/DECISIONS.md`
+  (`sync-L5`). `second_domain` (Soul) vs. `second_domain_mind` (Mind) is a
+  real naming asymmetry, but both ids are referenced by string at 15+ call
+  sites across `test_ascendant_domain.py` and `test_character.py` — a rename
+  is a mechanical test-file sweep with no behavioral upside, since Technique
+  ids are looked up per-branch and never collide. Per the task's own
+  instruction ("rename only if nothing outside yaml/tests references the
+  id"), this fails that test.
+- **L-6** — `software/facets/base/facet.yaml` (`minor_attributes`): restored
+  the PHB II.2 clauses the descriptions had trimmed — Dexterity ("keeping
+  your footing on treacherous ground"), Constitution ("to keep moving" /
+  "or food"), Intelligence ("under pressure" / "finding the flaw in a
+  plan"), Wisdom ("before you can name why" / "finding your way through
+  unfamiliar territory"), Knowledge (rewritten to match II.2's actual
+  examples — the yaml version had drifted to unrelated phrasing), Spirit
+  (rewritten to match II.2 — "holding the line of a ritual" etc.), Luck
+  (rewritten to II.2's actual text — the yaml version had replaced the PHB's
+  concrete examples with abstract flavor text), Charisma (restored
+  "negotiating" and the "feel true" clause; dropped "intimidation," which
+  is not a II.2 example and was an unattributed addition — Iron Law: no
+  invented canon).
+- **L-8** — `software/facets/base/facet.yaml`: restored trimmed Technique
+  clauses — Grinding Advance ("a Spark, a second wind, a reserve of will"),
+  Sharp Analysis (the observability-restriction parenthetical), Commanding
+  Presence (the MM-override clause), Unforgettable (the "glad to see you"
+  clause).
+- **L-7** — **Investigated, found already engine-enforced.**
+  `character.py`'s `_validate_domain_choice` (pre-existing, from earlier
+  Ascendant Domain work) already implements all three II.3:244-246 rules:
+  Ascendant taken once ever (`self.ascendant_domain` guard), prismatics never
+  a starting domain (non-Ascendant routes reject `domain.type == "broad"`),
+  and at most one domain per Facet via cross-training (only one magic-granting
+  Tier 1 Technique exists per Facet — `arcane_study` for Mind,
+  `spiritual_domain` for Soul — so this is structurally guaranteed by content
+  as well as guarded in code). The gap was test coverage, not engine logic:
+  added `test_starting_domain_technique_rejects_prismatic_choice` (exercises
+  the public API — `spiritual_domain` refuses a prismatic choice) and
+  `test_domain_guard_refuses_a_third_facet_domain` (exercises the guard
+  branch directly, since it's unreachable through the public API with today's
+  content — there is no third Facet with domains to cross-train into).
+
+Tests (6, all written first): `TestReactionCost.test_defensive_floor_reads_from_yaml_not_a_literal`,
+`test_peer_call_earn_method_present`, `test_minor_attribute_descriptions_match_phb_clauses`,
+`test_technique_descriptions_match_phb_clauses` (all in `test_facet_loading.py`/`test_combat.py`),
+and the two L-7 tests in `test_character.py`.
+
+Regenerated `Index.md` — no diff (pure software/sync work).
+
+Command: `cd software && python -m pytest -q`
+Result: **1097 passed** (1091 + 6 new).

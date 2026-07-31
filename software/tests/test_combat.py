@@ -378,6 +378,17 @@ class TestReactionCost:
     def test_defensive_unaffected_by_is_first_reaction(self, ruleset):
         assert combat.reaction_cost("dodge", "defensive", ruleset, is_first_reaction=False) == 0
 
+    # L-4 (docs/RESEARCH_completeness_audit.md): Defensive's "-1 Endurance
+    # cost per reaction (min 0)" floor is an explicit yaml field
+    # (postures.defensive.min_reaction_cost), not a hardcoded literal.
+    def test_defensive_floor_reads_from_yaml_not_a_literal(self, ruleset):
+        original = ruleset.combat.postures["defensive"].get("min_reaction_cost", 0)
+        try:
+            ruleset.combat.postures["defensive"]["min_reaction_cost"] = 3
+            assert combat.reaction_cost("dodge", "defensive", ruleset) == 3
+        finally:
+            ruleset.combat.postures["defensive"]["min_reaction_cost"] = original
+
 
 class TestWithdrawnRecoveryAmount:
     def test_matches_ruleset_value(self, ruleset):

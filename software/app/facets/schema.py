@@ -332,8 +332,14 @@ class CombatConditionDef(BaseModel):
 
     Fields:
         id: Slug identifier (e.g. "winded", "staggered", "broken").
-        clears: When this condition is removed:
+        clears: When this condition is removed *in combat*:
                 "end_of_exchange" | "treated" | "end_of_scene".
+        out_of_combat_clears: When this condition is removed *outside*
+                combat, where no exchange structure exists (III.2:69) —
+                Tier 1 Conditions clear at end of scene rather than end of
+                exchange. `None` for conditions whose `clears` value is
+                already scene/treated-based and doesn't change outside
+                combat.
         description: Human-readable effect summary.
         offense_modifier: Modifier this condition applies to the holder's
                 offensive rolls. Staggered is −1 ("−1 to offensive rolls",
@@ -345,6 +351,7 @@ class CombatConditionDef(BaseModel):
 
     id: str
     clears: str
+    out_of_combat_clears: str | None = None
     description: str
     offense_modifier: int = 0
 

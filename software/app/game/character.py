@@ -64,6 +64,9 @@ class Character(BaseModel):
         reactions_this_exchange: Count of reactions taken so far this
             exchange (K1, BRIEF D8) — feeds `combat.reaction_cost`'s
             `is_first_reaction`. Reset to 0 by `_handle_end_exchange`.
+        intercepts_this_exchange: Count of Intercept reactions taken so far
+            this exchange. Intercept is capped at one per exchange (III.3:219),
+            unlike other reaction types. Reset to 0 by `_handle_end_exchange`.
     """
 
     name: str = Field(min_length=1, max_length=64)
@@ -120,6 +123,7 @@ class Character(BaseModel):
     armor: Optional[str] = None  # None | "light" | "heavy"
     armor_downgrades_remaining: Optional[int] = None
     reactions_this_exchange: int = 0
+    intercepts_this_exchange: int = 0
 
     # --- Derived Facet-level views (read-only; kept for .fof and UI compat) ---
 

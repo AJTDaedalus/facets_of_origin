@@ -234,7 +234,8 @@ def reaction_cost(
     applies = posture_def.get("reaction_cost_modifier_applies", "always")
     if applies == "first_reaction_only" and not is_first_reaction:
         modifier = 0
-    return max(0, base + modifier)
+    min_cost = posture_def.get("min_reaction_cost", 0)
+    return max(min_cost, base + modifier)
 
 
 def withdrawn_recovery_amount(ruleset) -> int:

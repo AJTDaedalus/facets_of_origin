@@ -632,11 +632,22 @@ async def _handle_react(
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown reaction '{reaction}'."})
         return
 
+    # PHB III.3:219 — Intercept is capped at one per exchange, unlike other
+    # reaction types.
+    if reaction == "intercept" and character.intercepts_this_exchange >= 1:
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": "Already Intercepted an action this exchange.",
+        })
+        return
+
     # Compute Endurance cost (adjust for posture). K1 (BRIEF D8): the
     # Aggressive surcharge applies only to the first reaction of the
     # exchange — see `reactions_this_exchange`'s docstring on Character.
     is_first_reaction = character.reactions_this_exchange == 0
     character.reactions_this_exchange += 1
+    if reaction == "intercept":
+        character.intercepts_this_exchange += 1
     cost = combat_module.reaction_cost(
         reaction, character.posture or "measured", session.ruleset, is_first_reaction,
     )
@@ -804,6 +815,8 @@ async def _handle_end_exchange(session, session_id: str) -> None:
 
         # K1 (BRIEF D8): reset the per-exchange reaction count.
         character.reactions_this_exchange = 0
+        # III.3:219 — Intercept's once-per-exchange cap resets too.
+        character.intercepts_this_exchange = 0
 
         # Withdrawn endurance recovery (only if not striking, enforced by declare_posture)
         if character.posture == "withdrawn":

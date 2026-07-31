@@ -355,7 +355,7 @@ Every task follows the sync workflow: yaml → schema model → engine → WebSo
   PHB II.4b:96 — the effect governs **this** exchange, not the next, and includes the ambush/trap-negation clause. Restore both.
   Accept: the yaml description matches the PHB sentence in timing and scope; add a text assertion if one is cheap.
 
-- [ ] **W4-13 — Sync low-severity sweep.** *(sync-L-1 … L-8)*
+- [x] **W4-13 — Sync low-severity sweep.** *(sync-L-1 … L-8)*
   Files: `software/facets/base/facet.yaml`, `software/app/facets/schema.py`.
   - L-1 Spark earn methods: add the "Spark?" peer call (III.1:70); reconcile `spark_for_weakness` with III.1's folding of weakness-play into the MM award.
   - L-2 Tier 1 Conditions clear at end of scene **out of combat** (III.2:69).
