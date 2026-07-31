@@ -357,7 +357,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migrat
 
 - [x] W3-1 — Guild Apprentice gets its Specialty (three-way propagation). *(rul-H1 — D4)* **TDD**
 - [x] W3-2 — Amend II.1's character sheet specification. *(app-H1, H2, M1–M4 — D7, part 1)*
-- [ ] W3-3 — Rebuild the character sheet appendix to the amended spec. *(D7, part 2)* **TDD**
+- [x] W3-3 — Rebuild the character sheet appendix to the amended spec. *(D7, part 2)* **TDD**
 - [ ] W3-4 — 0 Endurance means Absorb only, absolutely. *(rul-M1, rul-L4 — D5)* **TDD**
 - [ ] W3-5 — Cut Reckless Press. *(rul-M3 — D6)*
 - [ ] W3-6 — Redefine pushing scope against the pre-Technique cap. *(cre-M3, mm-L8 — D8)* — sign-off
@@ -399,3 +399,22 @@ Result: **1041 passed** (1039 + 2 new).
 
 Command: `cd software && python -m pytest -q`
 Result: **1041 passed**.
+
+### W3-3 *(D7, part 2)* — TDD
+
+- `Appendix_Character_Sheet.md` — rebuilt to mirror W3-2's nine-section spec exactly: relabeled the Facet section's advancement row, added Career Advances; changed Background's Secondary Skill row to "...or Domain Origin"; added Magic (Magic Domain), Combat (Endurance with the printed formula, Armor Type, Armor Downgrade Budget Remaining This Scene, Active Conditions, Sparks — moved here), and Inventory sections; Session Resources now Skill Points only. `:3`'s "six sections" → "nine sections."
+- **No new `Character` field added** — every new row maps to a field that already existed: `career_advances`, `magic_domain`, `endurance_current`, `armor`, `armor_downgrades_remaining`, `conditions`, `inventory` (all confirmed present on the model before writing a single sheet row).
+- `test_docs_consistency.py` — updated `CHARACTER_SHEET_FIELDS` (renamed the advancement-track label, added the eight new-section labels) and added `test_new_character_sheet_sections_need_no_new_model_field`, a dedicated regression guard beyond the general INV-2 check, asserting each of the seven new labels is both registered and maps to a real attribute.
+- **Zahna transcription check** (`characters/Zahna.fof`), by hand — nothing lost:
+  - Attributes: Str 1, Dex 3, Con 1, Int 3, Wis 1, Kno 3, Spi 2, Luck 3, Cha 1 — all nine fit.
+  - Facet: Mind, Level 0, 0 rank advances, Career Advances 1.
+  - Background: "Former Apprentice" (Guild Apprentice), Starting Skill Lore (Practiced), Domain Origin (Inscription — magic-granting Background replaces the secondary skill slot, per `facet.yaml`'s `domain_replaces_secondary`), Specialty (Guild records).
+  - Skills: Lore Practiced, 0 marks; the other 14 sit at their sheet rows Novice/0 by omission.
+  - Techniques: none (empty list — the Techniques table is simply blank).
+  - Magic Domain: Inscription.
+  - Combat: Endurance current/max not set in the `.fof` (Zahna isn't mid-combat) — the max the formula computes is 4 + Constitution modifier (1 → −1) + Endurance rank (Novice, +0) = 3, matching the character's own `notes:` field ("Endurance pool of 3"). Armor/Conditions unset (none yet). Sparks 3.
+  - Inventory: empty (not yet tracked in the `.fof`).
+  - Session Resources: skill points remaining is session-transient state, not part of the persistent `.fof` — correctly has no source to transcribe.
+
+Command: `cd software && python -m pytest -q`
+Result: **1042 passed** (1041 + 1 new).

@@ -1,6 +1,6 @@
 # Appendix: Character Sheet
 
-**Chapter II.1** has described this sheet since the book began: two names at the top, then six sections, holding both the fiction of your character and the statistics that let them act in it. This appendix is that sheet — print it, copy it into a notebook, or use it as a checklist while filling in the digital tool. Every field below is one II.1 already named; nothing here is new.
+**Chapter II.1** has described this sheet since the book began: two names at the top, then nine sections, holding both the fiction of your character and the statistics that let them act in it. This appendix is that sheet — print it, copy it into a notebook, or use it as a checklist while filling in the digital tool. Every field below is one II.1 already named; nothing here is new.
 
 ---
 
@@ -32,7 +32,8 @@
 |---|---|
 | Primary Facet | |
 | Facet Level | |
-| Advancement Track (marks toward next level) | |
+| Rank Advances Toward Next Level | |
+| Career Advances | |
 
 ---
 
@@ -42,7 +43,7 @@
 |---|---|
 | Title & Origin | |
 | Starting Skill (Practiced) | |
-| Secondary Skill (Novice, 1 mark) | |
+| Secondary Skill (Novice, 1 mark) or Domain Origin | |
 | Specialty | |
 
 ---
@@ -86,9 +87,43 @@ List each unlocked Technique and any choice made at unlock (weapon type, hardshi
 
 ---
 
+### Magic
+
+Leave blank if your character has no magic. Consult the Appendix: Magic Domain Catalog for your domain's type and territory.
+
+| Field | Value |
+|---|---|
+| Magic Domain | |
+
+---
+
+### Combat
+
+| Field | Value |
+|---|---|
+| Endurance (current / max) — max is 4 + Constitution modifier + Endurance skill rank | |
+| Armor Type | |
+| Armor Downgrade Budget Remaining This Scene | |
+| Active Conditions | |
+| Sparks | |
+
+---
+
+### Inventory
+
+| Item |
+|---|
+| |
+| |
+| |
+| |
+| |
+| |
+
+---
+
 ### Session Resources
 
 | Field | Value |
 |---|---|
-| Sparks | |
 | Skill Points Remaining This Session | |

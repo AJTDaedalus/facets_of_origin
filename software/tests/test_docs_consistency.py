@@ -176,15 +176,23 @@ CHARACTER_SHEET_FIELDS = {
     "Attributes": "attributes",
     "Primary Facet": "primary_facet",
     "Facet Level": "facet_level",
-    "Advancement Track (marks toward next level)": "rank_advances_this_facet_level",
+    "Rank Advances Toward Next Level": "rank_advances_this_facet_level",
+    "Career Advances": "career_advances",
     "Title & Origin": "background_id",
     "Starting Skill (Practiced)": "skills",
-    "Secondary Skill (Novice, 1 mark)": "skills",
+    "Secondary Skill (Novice, 1 mark) or Domain Origin": "skills",
     "Specialty": "specialty",
     "Skills": "skills",
     "Technique": "techniques",
     "Choice (if any)": "technique_choices",
+    "Magic Domain": "magic_domain",
+    "Endurance (current / max) — max is 4 + Constitution modifier + Endurance skill rank": "endurance_current",
+    "Armor Type": "armor",
+    "Armor Downgrade Budget Remaining This Scene": "armor_downgrades_remaining",
+    "Active Conditions": "conditions",
     "Sparks": "sparks",
+    "Inventory": "inventory",
+    "Item": "inventory",
     "Skill Points Remaining This Session": "session_skill_points_remaining",
 }
 
@@ -215,6 +223,33 @@ def test_character_sheet_fields_map_to_model() -> None:
 
     errors = bad_attrs + missing_labels
     assert not errors, "Character Sheet / model mismatches:\n" + "\n".join(errors)
+
+
+# The Magic, Combat, and Inventory sections (new in this task), plus the
+# Facet section's new Career Advances row.
+NEW_CHARACTER_SHEET_SECTION_LABELS = [
+    "Career Advances",
+    "Magic Domain",
+    "Endurance (current / max) — max is 4 + Constitution modifier + Endurance skill rank",
+    "Armor Type",
+    "Armor Downgrade Budget Remaining This Scene",
+    "Active Conditions",
+    "Inventory",
+]
+
+
+def test_new_character_sheet_sections_need_no_new_model_field() -> None:
+    """D7 (W3-2/W3-3): the Magic, Combat, and Inventory sections are new
+    *sheet* content, but every field they add was already tracked on
+    `Character` before this task (DESIGN Section 1 S3) — no new Character
+    field was added to support them.
+    """
+    known_attrs = set(Character.model_fields) | set(Character.model_computed_fields)
+    for label in NEW_CHARACTER_SHEET_SECTION_LABELS:
+        assert label in CHARACTER_SHEET_FIELDS, f"{label!r} not registered in CHARACTER_SHEET_FIELDS"
+        assert CHARACTER_SHEET_FIELDS[label] in known_attrs, (
+            f"{label!r} maps to {CHARACTER_SHEET_FIELDS[label]!r}, not a real Character attribute"
+        )
 
 
 # A Glossary entry: `**Term** — definition text. *(pointer)*`. The pointer is
