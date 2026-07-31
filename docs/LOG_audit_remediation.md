@@ -188,7 +188,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave1-correction
 
 - [x] W2-1 — Migrate Magic in Combat and Attune to the Resolve model. *(mm-M2)*
 - [x] W2-2 — Combat quick reference: declarable actions. *(rul-M2)*
-- [ ] W2-3 — MM1 enemy Attack/Defense modifiers: what they mean at the table. *(mm-M4)*
+- [x] W2-3 — MM1 enemy Attack/Defense modifiers: what they mean at the table. *(mm-M4)*
 - [ ] W2-4 — Mook TR: the formula wins. *(mm-H1 — D2)*
 - [ ] W2-5 — Retire superseded simulation citations. *(mm-M5, mm-L4, mm-L5)*
 - [ ] W2-6 — MM low-severity sweep. *(mm-L1, mm-L6, mm-L7)*
@@ -212,6 +212,18 @@ Result: **1029 passed**.
 
 - `III.3:646` — the Exchange Flow quick ref listed "Withdraw" as a step-2 action alongside Strike/Support/Maneuver/Magic. Withdraw is a Posture, declared in step 1, not an action — body text defines exactly three actions (`:104-161`) plus Magic (which uses the Strike action economy, `:375`). Removed "Withdraw" from the step-2 list.
 - Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed**.
+
+### W2-3 *(mm-M4)* — flagged for PR review per DESIGN §6
+
+- `MM1:26` (stat-block field) — "same modifier used for Parry; Dodge uses Dex modifier if different" implies the enemy rolls, which contradicts `III.3:331` ("NPCs do not roll dice"). Reworded: an authoring input, not a rolled modifier — feeds the TR formula and informs the difficulty the MM sets for PC Strikes and PC reactions against this enemy's attacks (both Chapter III.3, no new rule asserted).
+- `MM1:197` (Named NPC "short list") — "what they use to Parry" had the same problem. Same fix applied.
+- Grepped `used for Parry|use to Parry|Dodge uses Dex` repo-wide — no other instances.
+- Did not touch the `Attack:` field (`MM1:25`) — it doesn't make an explicit rolled-modifier claim and wasn't named in the task.
+- Regenerated `Index.md` — no diff.
+- **Flag for review:** this is the one Wave 2 line a reader could mistake for a new rule, per DESIGN §4.2 — it states only what III.3 already rules, but worth a second look.
 
 Command: `cd software && python -m pytest -q`
 Result: **1029 passed**.

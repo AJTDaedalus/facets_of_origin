@@ -23,7 +23,7 @@ Name/Type
 Tier: Mook | Named | Boss
 Resolve: [number]  — the durability pool Strikes deplete; Named 3–4, Boss ~8; Mooks have none
 Attack: [roll modifier]  — e.g. +2 (Strength +1, Combat Practiced +1)
-Defense: [roll modifier] — same modifier used for Parry; Dodge uses Dex modifier if different
+Defense: [roll modifier] — an authoring input, not a rolled modifier (NPCs don't roll, Chapter III.3): feeds the TR formula and informs the difficulty you set for PC Strikes and for PC reactions against this enemy's attacks (both Chapter III.3)
 Armor: None | Light | Heavy  — adds a flat bonus to Resolve (light +1, heavy +2)
 Techniques: [list, if any]
 Special: [phase changes, triggers, or narrative rules — Boss only]
@@ -194,7 +194,7 @@ Named NPCs use the full exchange structure. Build them the same way you'd build 
 **The short list you actually need:**
 - Resolve (3–4 for a Named NPC; armor adds to it)
 - Attack modifier (best offensive roll modifier)
-- Defense modifier (what they use to Parry; or note if they Dodge instead)
+- Defense modifier (an authoring input — NPCs don't roll; it informs the difficulty of PC Strikes and PC reactions against this enemy, Chapter III.3)
 - Armor
 - One or two Techniques if they should feel distinct
 
