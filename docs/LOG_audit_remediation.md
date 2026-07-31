@@ -187,7 +187,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave1-correction
 ### W2 task list (from `docs/TASKS_audit_remediation.md`)
 
 - [x] W2-1 — Migrate Magic in Combat and Attune to the Resolve model. *(mm-M2)*
-- [ ] W2-2 — Combat quick reference: declarable actions. *(rul-M2)*
+- [x] W2-2 — Combat quick reference: declarable actions. *(rul-M2)*
 - [ ] W2-3 — MM1 enemy Attack/Defense modifiers: what they mean at the table. *(mm-M4)*
 - [ ] W2-4 — Mook TR: the formula wins. *(mm-H1 — D2)*
 - [ ] W2-5 — Retire superseded simulation citations. *(mm-M5, mm-L4, mm-L5)*
@@ -204,6 +204,14 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave1-correction
 - **Verify-only, unchanged:** `MM5:109` ("vs enemy depletes Resolve like a Strike") was already a legal compression of the corrected body text — confirmed, not rewritten. `Quick_Start.md:143` ("Cast a spell | 2d6 + Spirit or Knowledge (by tradition)") states only the roll formula, never the old Condition-tier-only model — confirmed unchanged is correct.
 - Regenerated `Index.md` — 1 new line (`III.3 — Mind and Soul in a Fight` now indexes under Resolve, since Attune's paragraph now names Resolve explicitly).
 - Did not touch `III.3:395` (Gamble / "Reckless Press") — out of this task's scope; that's W3-5 (rul-M3, D6).
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed**.
+
+### W2-2 *(rul-M2)*
+
+- `III.3:646` — the Exchange Flow quick ref listed "Withdraw" as a step-2 action alongside Strike/Support/Maneuver/Magic. Withdraw is a Posture, declared in step 1, not an action — body text defines exactly three actions (`:104-161`) plus Magic (which uses the Strike action economy, `:375`). Removed "Withdraw" from the step-2 list.
+- Regenerated `Index.md` — no diff.
 
 Command: `cd software && python -m pytest -q`
 Result: **1029 passed**.

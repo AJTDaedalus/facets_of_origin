@@ -643,7 +643,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 ```
 1. Declare postures (simultaneously)
-2. Declare actions (Strike / Support / Maneuver / Magic / Withdraw)
+2. Declare actions (Strike / Support / Maneuver / Magic)
 3. Resolve actions → roll 2d6 + attribute + skill + difficulty + posture modifier
 4. Declare reactions to incoming actions
 5. Apply results — deplete enemy Resolve (2 / 1 / 0), apply any Conditions and riders
