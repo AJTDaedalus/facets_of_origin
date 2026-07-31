@@ -29,7 +29,7 @@
 - [x] W1-4 — Soul Second Domain prerequisite line. *(cre-M2)*
 - [x] W1-5 — Zulnut's Finesse and the Knowledge/Lore slip. *(cre-M5)*
 - [x] W1-6 — Threat Clock vignette and pacing math. *(rul-M4, rul-M5)*
-- [ ] W1-7 — Four small text corrections across III.3, IV.1, Quick Start, MM5. *(rul-L1, rul-L2, rul-L3, rul-L6, mm-M1)*
+- [x] W1-7 — Four small text corrections across III.3, IV.1, Quick Start, MM5. *(rul-L1, rul-L2, rul-L3, rul-L6, mm-M1)*
 - [ ] W1-8 — Glossary: add Saving Throw, fix citations, close the term gaps. *(app-M5, app-L1, app-L2/cre-L4, app-L3, app-L4)*
 - [ ] W1-9 — Index slugger: one hyphen per whitespace character. *(app-M6)* **TDD**
 - [ ] W1-10 — Apparatus low-severity sweep. *(cre-L1, cre-L2, cre-L3, cre-L5, cre-L6, app-L6)*
@@ -87,6 +87,18 @@ Result: **1026 passed**.
 
 - `III.2:96` (The Beam vignette) — the restarted 4-segment clock (reset to 0) was only narrating 3 advances before "fills." Added the missing fourth beat and explicit numbering matching the model vignette's style (`:43-57`, which numbers "the second segment fills," "a partial, three," "a partial, four"): Zahna's scramble (one), Zulnut's (two), a new beat — the stairs buckling underfoot (three) — then the beam settling deeper fills it (four). Did not touch the definition of "restarting" itself, per the task's explicit instruction.
 - `III.2:19` — at the stated 72% partial/failure rate, a 4-segment clock takes 4 ÷ 0.72 ≈ 5.6 rolls, not "roughly 3–4." Kept 72% (it's the derived, correct figure) and replaced the roll-count claim with "roughly five or six party rolls."
+- Regenerated `Index.md` — no diff (no heading touched).
+
+Command: `cd software && python -m pytest -q`
+Result: **1026 passed**.
+
+### W1-7 *(rul-L1, rul-L2, rul-L3, rul-L6, mm-M1)*
+
+- `III.3:317` — the Named NPC section only mentioned Staggered/Cornered (Tier 2) riders, but the Strike rules (`III.3:124`) and quick ref (`:677`) both allow a Tier 1 **or** Tier 2 rider. Reworded to name both tiers.
+- `III.3:287` — trimmed the promise that the Equipment chapter covers armor "Technique interactions"; `IV.1_Equipment.md` has no such section (it covers weapon Techniques at `:27`, not armor ones). Did not author the missing content (Non-goal) — just removed the false promise.
+- `Quick_Start.md:123` — the MM's line called another player's "Spark?" peer call (III.1:70) a "graceful failure." Graceful Fail is player-claimed by the roller on their own 6- (III.1:72) — this was a different player recognizing Zulnut's moment, i.e., the peer call, not a Graceful Fail. Reworded to drop the misapplied term.
+- `III.3:458` (The Archive's Guardian vignette) — Mordai uses Weapon Mastery, a Technique that requires Facet level 1+, which starting characters don't have. Added a grounding clause to the vignette's opening line: "Several sessions on from where this book's other vignettes leave off — long enough that Mordai has since taken Weapon Mastery," so readers don't infer starting characters have Techniques.
+- `MM5:107` — the Maneuver row had the direction and duration backwards: it said the *target's* next roll becomes Easy (one roll only). Canon (`III.3:146`) is that rolls made **against** the target are Easy, **until the situation changes** (not a single-roll effect). Rewrote the row as a compression of the canonical line, fixing both direction and duration; also compressed the 7–9 case ("rolls against the target stay Standard") to match.
 - Regenerated `Index.md` — no diff (no heading touched).
 
 Command: `cd software && python -m pytest -q`

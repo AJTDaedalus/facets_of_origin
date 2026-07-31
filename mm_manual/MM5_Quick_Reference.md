@@ -104,7 +104,7 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 | Action | Roll | Effect |
 |---|---|---|
 | **Strike** | 2d6 + weapon attribute + Combat (melee/unarmed) or Finesse (ranged) | Deplete enemy Resolve (10+: −2, 7–9: −1); 10+ may add a rider Condition |
-| **Maneuver** | 2d6 + relevant skill | 10+: target's next roll Easy. 7–9: Standard. 6-: backfire |
+| **Maneuver** | 2d6 + relevant skill | 10+: rolls against the target are Easy until the situation changes. 7–9: rolls against the target stay Standard. 6-: backfire |
 | **Support** | 2d6 + relevant skill | Grant ally +1d6 drop lowest OR difficulty one step easier on next roll |
 | **Magic** | 2d6 + Knowledge or Spirit (by tradition) | Domain + Intent + Scope; vs enemy depletes Resolve like a Strike |
 

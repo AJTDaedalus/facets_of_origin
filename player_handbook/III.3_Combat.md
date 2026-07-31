@@ -284,7 +284,7 @@ The budget does not refresh between exchanges — it is spent down across the wh
 
 Armor affects incoming severity, not the roll itself. An attacker still interprets their result normally; a Condition heading for you is simply reduced one tier before it lands, as long as budget remains.
 
-Armor has fictional weight beyond its mechanical effect. Heavy armor announces your presence, imposes noise and heat, and affects how you move through the world outside of combat. The Equipment chapter covers specific armor types, weights, and any relevant Technique interactions.
+Armor has fictional weight beyond its mechanical effect. Heavy armor announces your presence, imposes noise and heat, and affects how you move through the world outside of combat. The Equipment chapter covers specific armor types and weights.
 
 ---
 
@@ -314,7 +314,7 @@ A Named NPC is defined by:
 - **Armor**, if any — armor raises Resolve by a flat amount (light +1, heavy +2), so an armored enemy simply takes longer to run down
 - **Techniques**, if the MM wants them to have specific capabilities
 
-A Named NPC can carry **rider Conditions** hung on it by a full-success Strike — Staggered or Cornered, with their usual effects (and a Tier 2 rider makes it Easy to Strike) — but riders never accumulate into Broken. An enemy leaves the fight when its Resolve is gone, not when its Conditions stack.
+A Named NPC can carry **rider Conditions** hung on it by a full-success Strike — a Tier 1 (Winded, Off-Balance, Shaken) or Tier 2 (Staggered, Cornered) Condition of the attacker's choice, with their usual effects (and a Tier 2 rider makes it Easy to Strike) — but riders never accumulate into Broken. An enemy leaves the fight when its Resolve is gone, not when its Conditions stack.
 
 Named NPCs do not need a full character sheet. A veteran soldier might be: Resolve 4, Strength +2, Combat Practiced (+1), Light armor. That is enough to run the full exchange structure against a party.
 
@@ -411,7 +411,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 ## In Play: The Archive's Guardian
 
-*The party has entered the lower archives of the Thornwall Municipal Archive. The door is open behind them. The light inside has been waiting.*
+*Several sessions on from where this book's other vignettes leave off — long enough that Mordai has since taken Weapon Mastery. The party has entered the lower archives of the Thornwall Municipal Archive. The door is open behind them. The light inside has been waiting.*
 
 ---
 

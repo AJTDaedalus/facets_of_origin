@@ -120,7 +120,7 @@ Zulnut rolls 2d6+0 (Wisdom +0) and gets a **6**. Failure.
 
 **Another player:** "Spark?"
 
-**MM:** "For Zulnut's player? Absolutely — 'you cannot tell which' is exactly the graceful failure. Spark awarded."
+**MM:** "For Zulnut's player? Absolutely — 'you cannot tell which' is exactly the kind of moment worth recognizing. Spark awarded."
 
 **Zahna:** "I write the counter-sign. Inscription domain, minor scope."
 
