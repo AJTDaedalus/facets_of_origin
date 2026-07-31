@@ -185,7 +185,7 @@ Magic in combat — casting time, reactions against magical effects, Conditions 
 
 ## Domain Quick Reference
 
-All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domain Catalog**. Prismatic domains (marked †) require a Tier 3 Technique to access.
+All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domain Catalog**. Prismatic domains (marked †) require a Tier 3 Technique to access. (Body magic domains are deferred to the Shattered Origin setting Facet — see *A Brief Note on Body Magic*, below.)
 
 ### Soul Domains
 
@@ -217,10 +217,6 @@ All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domai
 | The Arcane † | Broad | Perceiving and manipulating magic itself |
 | The Constructed Mind † | Broad | Artificial intelligence and construct cognition |
 | Chronomancy † | Broad | Time: acceleration, perception, brief stepping |
-
----
-
-Full descriptions of all 21 domains — what each covers, example effects at each scope, and boundary guidance — are in the **Appendix: Magic Domain Catalog**.
 
 ---
 

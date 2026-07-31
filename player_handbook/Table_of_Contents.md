@@ -9,10 +9,10 @@
 - II.1 Overview
 - II.2 Attributes
 - II.3 Magic
-- II.4 Facets & Advancement
-- II.4a Facets & Advancement (Body)
-- II.4b Facets & Advancement (Mind)
-- II.4c Facets & Advancement (Soul)
+- II.4 Facets and Advancement
+- II.4a Facet of the Body
+- II.4b Facet of the Mind
+- II.4c Facet of the Soul
 - II.5 Backgrounds
 - II.6 Skills
 
@@ -29,8 +29,8 @@
 - Pre-generated characters, core resolution summary, and an example scene to get playing in ten minutes.
 
 ## Appendices
-- Appendix A: Magic Domain Catalog
-- Appendix B: Character Sheet
+- Appendix: Magic Domain Catalog
+- Appendix: Character Sheet
 - Glossary
 - Index
 

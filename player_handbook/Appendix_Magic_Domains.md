@@ -186,7 +186,7 @@ The animating current that runs through all living things simultaneously — not
 
 Mind magic is constructed rather than felt. Where Soul mages reach inward and outward simultaneously, Mind mages build: they study, analyze, and assemble effects from principles they understand. Mind magic tends toward precision, inscription, and the manipulation of information and perception. A Mind mage who does not understand what they are doing does not do it well — and a Mind mage who understands it completely is extraordinarily difficult to surprise.
 
-The mind domain list includes six core domains and three prismatic domains, following the same structure as Soul. Core domains are available at Tier 1 of the Mind Facet Technique tree. Prismatic domains require the Ascendant Domain Technique (Tier 3).
+The mind domain list includes six core domains and three prismatic domains — the same core/prismatic split as Soul, though Mind's core list is shorter. Core domains are available at Tier 1 of the Mind Facet Technique tree. Prismatic domains require the Ascendant Domain Technique (Tier 3).
 
 ---
 

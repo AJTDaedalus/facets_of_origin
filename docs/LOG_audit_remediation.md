@@ -32,7 +32,7 @@
 - [x] W1-7 — Four small text corrections across III.3, IV.1, Quick Start, MM5. *(rul-L1, rul-L2, rul-L3, rul-L6, mm-M1)*
 - [x] W1-8 — Glossary: add Saving Throw, fix citations, close the term gaps. *(app-M5, app-L1, app-L2/cre-L4, app-L3, app-L4)*
 - [x] W1-9 — Index slugger: one hyphen per whitespace character. *(app-M6)* **TDD**
-- [ ] W1-10 — Apparatus low-severity sweep. *(cre-L1, cre-L2, cre-L3, cre-L5, cre-L6, app-L6)*
+- [x] W1-10 — Apparatus low-severity sweep. *(cre-L1, cre-L2, cre-L3, cre-L5, cre-L6, app-L6)*
 - [ ] W1-11 — README: regenerate every factual claim from canon. *(README audit — D2 for the TR value)*
 - [ ] W1-12 — Wave 1 close-out.
 
@@ -134,3 +134,16 @@ Result: **1026 passed**.
 
 Command: `cd software && python -m pytest -q`
 Result: **1029 passed** (1026 + 3 new).
+
+### W1-10 *(cre-L1, cre-L2, cre-L3, cre-L5, cre-L6, app-L6)*
+
+- `Appendix_Magic_Domains.md:189` — "following the same structure as Soul" implied matching counts; Soul is 9 core + 3 prismatic, Mind is 6 core + 3 prismatic. Reworded to claim only the structural pattern (core/prismatic split, same Tier gating), not the counts.
+- `II.3:188` — added a one-line forward pointer in the Domain Quick Reference intro noting Body domains are deferred, pointing at *A Brief Note on Body Magic* below (which keeps the actual explanation, unmoved).
+- `II.3:223` — removed the duplicate "Full descriptions ... Appendix: Magic Domain Catalog" sentence; the near-identical sentence at `:188` (which also carries the † prismatic-marker note) stays as the one pointer.
+- `II.4b:139` / `II.4c:136` — Ascendant Domain's "taken once, however many Facet trees" rule lived only at `II.3:246`. Added the same sentence, cited back to Chapter II.3, at the end of each tree's own Ascendant Domain entry.
+- `Table_of_Contents.md:13-16` — II.4/II.4a/b/c titles ("Facets & Advancement (Body)" etc.) didn't match the files' own titles ("Facet of the Body" etc.) at all. Brought the ToC in line with the actual file titles, following the same short-form convention every other II./III./IV. entry already uses.
+- `Table_of_Contents.md:32-33` — "Appendix A: Magic Domain Catalog" / "Appendix B: Character Sheet" — the letters exist nowhere in the appendix files themselves (`# Appendix: Magic Domain Catalog`, `# Appendix: Character Sheet`), and nothing else in the repo references "Appendix A/B" (grepped). Dropped the letters in the ToC rather than adding them to two more files, per the task's "pick one" instruction — lower blast radius.
+- Regenerated `Index.md` — no diff (no heading text changed by any of the above).
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed**.
