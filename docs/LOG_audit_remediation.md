@@ -189,7 +189,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave1-correction
 - [x] W2-1 — Migrate Magic in Combat and Attune to the Resolve model. *(mm-M2)*
 - [x] W2-2 — Combat quick reference: declarable actions. *(rul-M2)*
 - [x] W2-3 — MM1 enemy Attack/Defense modifiers: what they mean at the table. *(mm-M4)*
-- [ ] W2-4 — Mook TR: the formula wins. *(mm-H1 — D2)*
+- [x] W2-4 — Mook TR: the formula wins. *(mm-H1 — D2)*
 - [ ] W2-5 — Retire superseded simulation citations. *(mm-M5, mm-L4, mm-L5)*
 - [ ] W2-6 — MM low-severity sweep. *(mm-L1, mm-L6, mm-L7)*
 - [ ] W2-7 — facet.yaml: Overwhelming Force. *(sync-H-1)* **TDD**
@@ -224,6 +224,43 @@ Result: **1029 passed**.
 - Did not touch the `Attack:` field (`MM1:25`) — it doesn't make an explicit rolled-modifier claim and wasn't named in the task.
 - Regenerated `Index.md` — no diff.
 - **Flag for review:** this is the one Wave 2 line a reader could mistake for a new rule, per DESIGN §4.2 — it states only what III.3 already rules, but worth a second look.
+
+Command: `cd software && python -m pytest -q`
+Result: **1029 passed**.
+
+### W2-4 *(mm-H1 — D2)*
+
+**Grep hit list** (`TR 1|tr: 1|harbor_thug` across `mm_manual/`, `enemies/`, `spec/`, committed `playtest/` dirs, `software/tests/`), before editing:
+
+```
+mm_manual/MM1_Encounters_and_Enemies.md:52  (stat-block example: Attack +0, TR: 1)
+mm_manual/MM1_Encounters_and_Enemies.md:121 (TR Reference Examples: "Basic Mook ... | 1 | Offense 2, Durability 0 — minimum 1")
+mm_manual/MM1_Encounters_and_Enemies.md:128 (TR minimums note: "Mook: TR 1 (even the most incompetent...)")
+mm_manual/MM1_Encounters_and_Enemies.md:286-293 (.fof teaching example block: id harbor_thug, attack_modifier 0, tr: 1)
+enemies/harbor_thug.fof:18 (tr: 2, already correct) and :29 ("TR 1 minimum by rule." — self-contradicting note)
+enemies/chicken.fof:18 (tr: 1, attack_modifier -1)
+software/tests/test_encounter.py:131 (synthetic trs = {"thug": 1} in a weighting-formula unit test)
+software/tests/test_enemy.py:244-250 (loads harbor_thug.fof, asserts calculate_tr() >= 1)
+software/tests/test_api_enemy.py:24 (creates an enemy id "harbor_thug", asserts tr >= 1)
+software/tests/test_combat_characterization.py:37,174 (uses harbor_thug_def fixture, no TR assertion)
+playtest/01_thornwall_undercroft/scenario.md:39,44,67 (Dust Construct, "minimum TR 1", offense 2 computed)
+playtest/02_silence_of_ashenmoor/scenario.md:43,49,92,100 and session_log.md:419 (Husk, same pattern)
+playtest/04_resource_tax/scenario.md:86,105,129 and run_pt04.py:59,72,78 (Bandit Scout/Archer, Elite Bandit)
+playtest/05_technique_showcase/scenario.md:105,107,129 (Sparring Partner, Arena Assistant)
+playtest/06_expert_novice_campaign/scenario.md:47,52,73, session_log.md:71,79, live_unscripted_playtest_log.md:45,66, agent_playtest_log.md:51, agentic_playtest_compendium.md:35, batch_results.json:45 (Water-Logged Sentinel, Sonic Bat)
+```
+
+**Fixed** (the four sites the task names):
+- `MM1:52` — Harbor Thug stat-block example: `TR: 1` → `TR: 2` (Attack +0 → Offense 2 per the table at `:87-92`; Durability 0; sum 2).
+- `MM1:121` — TR Reference Examples table: "Basic Mook (unskilled, no armor) | 1 | Offense 2, Durability 0 — minimum 1" was self-contradicting — its own stated inputs sum to 2, so the "minimum 1" floor never actually applied here. Fixed to `| 2 | Offense 2, Durability 0 |`.
+- `MM1:293` — the `.fof`-format teaching example (`id: harbor_thug, attack_modifier: 0, tr: 1`) → `tr: 2`, matching the real file.
+- `enemies/harbor_thug.fof:29` — removed the self-contradicting "TR 1 minimum by rule." note (the file's own `tr: 2` doesn't need or match the floor).
+
+**Left unchanged, with reason:**
+- `MM1:128` ("Mook: TR 1 ... even the most incompetent attacker") — this is the TR-minimum-by-rule text itself, explicitly told to stay (task instruction: "MM1:127's minimum-1 floor text stays — it is still correct for attack −2"). It describes the genuine floor case (attack −2 → offense 0, which needs clamping to 1), not Harbor Thug's case.
+- `enemies/chicken.fof:18` — `tr: 1` is **correct**: attack −1 → offense 1 (not 2), + durability 0 = 1. No floor clamping even applies; the arithmetic is simply 1. The chicken remains the TR-1 baseline, not renamed, per the task instruction.
+- `software/tests/test_encounter.py:131`, `test_enemy.py:244-250`, `test_api_enemy.py:24`, `test_combat_characterization.py:37,174` — none hardcode an exact TR of 1 for Harbor Thug; they use `>= 1` floor checks or a synthetic, unrelated `"thug": 1` fixture for testing the weighting formula in isolation. Confirmed the full suite (1029) still passes after the `.fof` and MM1 edits — nothing broke.
+- **All committed `playtest/` scenario and session-log hits** (01, 02, 04, 05, 06) — these are historical playtest records for *other* Mooks (Dust Construct, Husk, Bandit Scout/Archer, Elite Bandit, Sparring Partner, Arena Assistant, Water-Logged Sentinel, Sonic Bat), not Harbor Thug, and several show the *same* systemic pattern (offense 2, misapplied "minimum TR 1" floor). They are out of this task's explicit scope (the task names four fix sites: `MM1:55, :121, :293` and `harbor_thug.fof:29`) and are transcripts of what happened in a specific simulated session — rewriting their numbers after the fact would falsify the historical record, the same principle W2-5 applies to superseded simulation citations (don't re-run simulations, don't rewrite history). Left untouched.
 
 Command: `cd software && python -m pytest -q`
 Result: **1029 passed**.

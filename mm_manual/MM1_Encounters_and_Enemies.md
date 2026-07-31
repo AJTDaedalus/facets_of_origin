@@ -52,7 +52,7 @@ Resolve: — (Mooks have no pool; one Strike removes them)
 Attack: +0 (Strength +0, Combat Novice +0)
 Defense: +0
 Armor: None
-TR: 1
+TR: 2
 ```
 
 **Boss example** — The Archive Guardian (from Chapter III.3):
@@ -118,7 +118,7 @@ Durability is simply the enemy's base Resolve — the pool a party's Strikes dep
 
 | Enemy | TR | Notes |
 |---|---|---|
-| Basic Mook (unskilled, no armor) | 1 | Offense 2, Durability 0 — minimum 1 |
+| Basic Mook (unskilled, no armor) | 2 | Offense 2, Durability 0 |
 | Skilled Mook (Combat Practiced, light armor) | 4 | Offense 3, Durability 0, Armor 1 |
 | City Watch Sergeant | 8 | Offense 4, Durability 3, Armor 1 |
 | Veteran Soldier | 10 | Offense 5, Durability 4 (Resolve 4), Armor 1 |
@@ -290,7 +290,7 @@ enemy:
   tier: mook
   attack_modifier: 0
   armor: none
-  tr: 1
+  tr: 2
 
   description: >
     Hired muscle. Doesn't want to die for this job.
