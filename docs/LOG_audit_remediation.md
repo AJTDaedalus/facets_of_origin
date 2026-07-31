@@ -192,7 +192,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave1-correction
 - [x] W2-4 — Mook TR: the formula wins. *(mm-H1 — D2)*
 - [x] W2-5 — Retire superseded simulation citations. *(mm-M5, mm-L4, mm-L5)*
 - [x] W2-6 — MM low-severity sweep. *(mm-L1, mm-L6, mm-L7)*
-- [ ] W2-7 — facet.yaml: Overwhelming Force. *(sync-H-1)* **TDD**
+- [x] W2-7 — facet.yaml: Overwhelming Force. *(sync-H-1)* **TDD**
 - [ ] W2-8 — Encode the magic-Technique domain prerequisite (the guard). *(sync-H-2, part 1)* **TDD**
 - [ ] W2-9 — Switch to the PHB's branch/tier prerequisite rule. *(sync-H-2, part 2)* **TDD**
 - [ ] W2-10 — Wave 2 close-out.
@@ -286,3 +286,14 @@ Result: **1029 passed**.
 
 Command: `cd software && python -m pytest -q`
 Result: **1029 passed**.
+
+### W2-7 *(sync-H-1)* — TDD
+
+- `software/facets/base/facet.yaml:294-299` — Overwhelming Force still carried the pre-v0.3 rule ("succeed by 3 or more above the threshold... staggered... act last... cannot take reactions"), which has no relationship to the current Condition/Resolve model. Replaced with PHB II.4a:39-40's actual rule: once per scene, on a full success (10+) Strike against a single target, the target takes no offensive action in the next exchange.
+- Tests added to `software/tests/test_docs_consistency.py` (2, written first — confirmed red before the fix):
+  - `test_overwhelming_force_matches_phb_ii4a` — the yaml description carries "once per scene" and the 10+/full-success trigger.
+  - `test_no_pre_v03_overwhelming_force_text_survives` — `"3 or more above the threshold"` doesn't appear anywhere in `facet.yaml`.
+  - Added a `_find_technique` helper that walks the full `techniques` tree (`facets.yaml`'s `techniques: {body/mind/soul: {branches: [...]}}` structure) by id, for reuse in later Wave 2/4 technique tests.
+
+Command: `cd software && python -m pytest -q`
+Result: **1031 passed** (1029 + 2 new).

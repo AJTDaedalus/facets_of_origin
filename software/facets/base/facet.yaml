@@ -294,9 +294,9 @@ techniques:
               - id: overwhelming_force
                 name: "Overwhelming Force"
                 description: >
-                  When you succeed on a Combat roll against a single target by 3 or more
-                  above the threshold, the target is staggered — they act last in the next
-                  exchange and cannot take reactions until they do.
+                  Once per scene, when your Strike scores a full success (10+) against a
+                  single target, you may drive the blow home: the target takes no
+                  offensive action in the next exchange.
                 prerequisites: [forcing_hand]
 
               - id: lift_the_world
