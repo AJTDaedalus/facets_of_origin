@@ -368,7 +368,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migrat
 - [ ] W3-11 — MM coverage pointers + MM5 compression of the new section. *(mm-M6, mm-L9 — D10, part 2)* — sign-off
 - [x] W3-12 — MM5 Spark-economy drift. *(mm-L2, mm-L3)*
 - [ ] W3-13 — II.4a gains its Facet introduction. *(cre-M6)* — sign-off
-- [ ] W3-14 — Rule two findings as-designed. *(cre-M7, rul-L5)* — sign-off
+- [x] W3-14 — Rule two findings as-designed. *(cre-M7, rul-L5)* — sign-off
 - [ ] W3-15 — Wave 3 close-out.
 
 ### W3-1 *(rul-H1 — D4)* — TDD
@@ -464,3 +464,14 @@ Result: **1044 passed**.
 
 Command: `cd software && python -m pytest -q`
 Result: **1044 passed**.
+
+### W3-14 *(cre-M7, rul-L5)* — sign-off item, user may veto
+
+Added a new "Completeness Audit Remediation — Wave 3" section to `docs/DECISIONS.md` with two entries:
+
+- **cre-M7** — Communion Tier 3 has one fewer non-magic pick than Archive (3 vs 4 total, counting the shared Second/Ascendant Domain pair both trees carry). Recorded as accepted: authoring a fourth Communion Technique is outside this cycle's Non-goals, and both trees offer the *same total* Tier 3 pick count once the shared magic-extension Techniques are counted — no character is actually short a door.
+- **rul-L5** — no pre-built Background grants Survival. Recorded as accepted: changing an existing Background's skill grant has real knock-on cost (PHB entry, `facet.yaml`, tests, pre-gen characters) and is a content change outside this cycle's Non-goals; the custom Background path (II.5:83, five steps) already lets a Mind-primary character choose Survival as their Starting or Secondary skill.
+- Both entries name the finding ID, state the rejected alternative, and give the rationale, per the task's accept criteria. **Flagged for user sign-off — either ruling may be vetoed, which escalates to Brain per D12.**
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed** (unaffected — `DECISIONS.md` isn't part of the tested corpus).
