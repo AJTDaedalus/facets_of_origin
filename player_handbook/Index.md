@@ -105,9 +105,10 @@
 - [III.3 — Tier 3: Broken](III.3_Combat.md#tier-3-broken)
 - [MM1 — The TR budget (a rough ordering check only)](../mm_manual/MM1_Encounters_and_Enemies.md#the-tr-budget-a-rough-ordering-check-only)
 - [MM1 — Scaling Notes](../mm_manual/MM1_Encounters_and_Enemies.md#scaling-notes)
+- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM2 — Tone and Expectations](../mm_manual/MM2_Session_Design.md#tone-and-expectations)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — MM Trouble Table](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table)
+- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
 
 ## Career Advance
 
@@ -126,12 +127,13 @@
 - [IV.1 — Weapons](IV.1_Equipment.md#weapons)
 - [MM1 — The TR budget (a rough ordering check only)](../mm_manual/MM1_Encounters_and_Enemies.md#the-tr-budget-a-rough-ordering-check-only)
 - [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
+- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM2 — Tone and Expectations](../mm_manual/MM2_Session_Design.md#tone-and-expectations)
 - [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
 - [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — MM Trouble Table](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table)
+- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
 
 ## Contested Roll
 
@@ -148,9 +150,10 @@
 - [III.3 — Tier 2 Conditions](III.3_Combat.md#tier-2-conditions)
 - [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
 - [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
+- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — MM Trouble Table](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table)
+- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
 
 ## Cross-Facet
 
@@ -331,8 +334,10 @@
 
 - [III.1 — Earning Sparks](III.1_Core_Resolution.md#earning-sparks)
 - [III.1 — Failure (6-)](III.1_Core_Resolution.md#failure-6-)
+- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM5 — Sparks](../mm_manual/MM5_Quick_Reference.md#sparks)
 - [MM5 — Spark Flow (MM Guidance)](../mm_manual/MM5_Quick_Reference.md#spark-flow-mm-guidance)
+- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
 
 ## Group Roll
 
@@ -434,9 +439,10 @@
 - [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
 - [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
+- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — MM Trouble Table](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table)
+- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
 
 ## Partial Success
 
@@ -626,8 +632,9 @@
 - [III.3 — Tier 1 Conditions](III.3_Combat.md#tier-1-conditions)
 - [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
 - [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
+- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — MM Trouble Table](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table)
+- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
 
 ## Skill
 
@@ -815,6 +822,7 @@
 - [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
 - [MM1 — The TR budget (a rough ordering check only)](../mm_manual/MM1_Encounters_and_Enemies.md#the-tr-budget-a-rough-ordering-check-only)
 - [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
+- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Reactions (1 per incoming action)](../mm_manual/MM5_Quick_Reference.md#reactions-1-per-incoming-action)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
@@ -846,5 +854,6 @@
 - [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
 - [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
+- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — MM Trouble Table](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table)
+- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)

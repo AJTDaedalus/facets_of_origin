@@ -362,7 +362,7 @@ PR: opened via `gh pr create` against `main`, branch `fix/audit-wave2-v03-migrat
 - [x] W3-5 — Cut Reckless Press. *(rul-M3 — D6)*
 - [x] W3-6 — Redefine pushing scope against the pre-Technique cap. *(cre-M3, mm-L8 — D8)* — sign-off
 - [x] W3-7 — The Shattered Origin promise, both fixes. *(app-M7 — D9)*
-- [ ] W3-8 — Give the Trouble Table a canonical home. *(mm-M3, part 1 — D3)* — sign-off
+- [x] W3-8 — Give the Trouble Table a canonical home. *(mm-M3, part 1 — D3)* — sign-off
 - [x] W3-9 — Two Common Rulings into III.1. *(mm-M3, part 2 — D3)* — sign-off
 - [ ] W3-10 — MM2: "Adjudicating Magic". *(mm-M6 — D10, part 1)* — sign-off
 - [ ] W3-11 — MM coverage pointers + MM5 compression of the new section. *(mm-M6, mm-L9 — D10, part 2)* — sign-off
@@ -509,6 +509,18 @@ Result: **1044 passed**.
 - `MM5_Quick_Reference.md` — both Common Rulings bullets now cite their III.1 source (matching the file's existing trailing-parenthetical convention, e.g. `III.3:192`'s `(III.3, *Armor and Reaction Downgrades*)`), and compress the new body text rather than standing as unsourced assertions.
 - Regenerated `Index.md` — no diff (neither new heading names a Glossary term).
 - **Flagged for user sign-off (D12) — new canonical rule text.** Per the task's stated exception: if either ruling is rejected as non-canon, delete it from MM5 rather than keep an orphaned quick-ref line.
+
+Command: `cd software && python -m pytest -q`
+Result: **1044 passed**.
+
+### W3-8 *(mm-M3, part 1 — D3)* — sign-off item, drafted via Opus subagent
+
+- **Drafted by an Opus subagent** (briefed with MM2's "Improvisation Techniques" section for structure/voice and MM5's existing Trouble Table, which had no canonical source), reviewed and integrated by Sonnet.
+- `MM2_Session_Design.md` — added a new `### The Trouble Table` subsection at the end of "Improvisation Techniques" (after "The NPC Name List"), expanding the six-row d6 table into full canonical guidance: per-category explanation with a worked example each, plus a "Working with the table" list (pick-over-roll, size to risk, never halt the story, vary it, hand it to a Graceful Fail claimant, pair with the Magic 6- Templates). Same six categories, same die mapping — no mechanic changed, only explained.
+- `MM5_Quick_Reference.md` — the Trouble Table section now cites its MM2 source in the heading (matching the file's existing "(compressed from II.3 — see II.3 for full text)" convention) and compresses down to the table plus four short bullets instead of standing alone.
+- INV-6 (typographic dashes) verified green.
+- Regenerated `Index.md` — 15 insertions / 6 deletions (new heading and reworded MM5 table content reindex).
+- **Flagged for user sign-off (D12) — new canonical body text.**
 
 Command: `cd software && python -m pytest -q`
 Result: **1044 passed**.

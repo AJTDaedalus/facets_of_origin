@@ -257,6 +257,47 @@ Keep the list visible. Cross off names as you use them. Replenish between sessio
 
 ---
 
+### The Trouble Table
+
+Earlier in this chapter you were told that something always happens on a 6-. That is the easiest principle in the book to agree with and the hardest one to honor at speed, because the dice do not wait for you to be clever. A player rolls a 5, the whole table turns to look at you, and your mind produces a clean, echoing silence.
+
+This table is for that moment. Six categories of trouble, one of which fits nearly any situation the game can produce. **Roll a d6 or simply pick the row you like** — both are legitimate — and use the result as a prompt for the consequence you narrate. It works for any roll, magical or not.
+
+| d6 | Category | The 6- consequence |
+|---|---|---|
+| 1 | **Cost** | Something is spent, broken, or used up that can't be easily replaced — a resource, a favor, an opportunity. |
+| 2 | **Position** | The character ends up somewhere worse — cornered, separated from the group, or committed to a course they can't easily undo. |
+| 3 | **Attention** | Someone or something notices that wasn't paying attention before — a guard, a rival, a threat nearby. |
+| 4 | **Equipment** | Gear fails, jams, or is lost at the worst moment — not gone forever, just unavailable right now. |
+| 5 | **Condition** | The character is left worse for wear in the fiction — winded, shaken, off-balance. |
+| 6 | **Revelation** | New information comes to light — and it complicates things. |
+
+**1 — Cost.** Something is spent, broken, or used up, and getting it back is not a matter of shopping. The rope holds; the rope is also now two-thirds of a rope. Favors and opportunities count as resources here, and they are usually the better choice — the watch sergeant who owed Mordai a favor does not owe him one anymore, and that will matter three sessions from now in a way a lost coin purse never will.
+
+**2 — Position.** The trouble changes the map rather than the character sheet. The character is cornered, cut off from the others, on the wrong side of a door that just shut, or committed to a course they cannot back out of gracefully. Position is the right pick when the party has been coasting on safety in numbers: separate one player from the other two and the next three minutes of play get very attentive.
+
+**3 — Attention.** Someone notices. A patrol changes its route, a rival recognizes a face, something in the dark stops making the noise it was making. The noticing party does not have to arrive — it is usually better if they only start looking. Attention is trouble that has not landed yet, which means the players get to decide how bad it becomes, and that decision is more interesting than anything you would have narrated.
+
+**4 — Equipment.** Gear fails at the worst possible moment. Not destroyed, not gone forever: unavailable right now. The lantern gutters out, the blade sticks in the scabbard, the pack goes over the railing into the water below and can be fished out later by whoever is willing to swim. Keep it recoverable. Permanently destroy enough equipment and your players will stop bringing anything they care about, which is the opposite of the behavior you want.
+
+**5 — Condition.** The character comes out of it worse for wear — winded, shaken, off-balance, favoring a wrist. Outside combat this is **narrated flavor, not a mechanical Condition**; do not hand out a Tier 1 Condition in the middle of a conversation scene because a die showed a 5. Inside combat, use the Condition rules in Chapter III.3 and let the tier follow the fiction rather than the table.
+
+**6 — Revelation.** The party learns something, and it makes their life harder. Decide whether the information helps or hurts *before* you open your mouth, then narrate it so that it does both. A 6- Revelation is not a free clue delivered in an ominous voice — it has to cost something. The information arrives too late to act on, or it arrives with an implication nobody wanted, or it answers the question the party asked and raises the one they had been carefully not asking.
+
+**Working with the table:**
+
+- **Picking beats rolling most of the time.** You know what is at stake in this scene; the die does not. Roll when you genuinely want to be surprised alongside the players, or when you notice you have reached for the same kind of trouble four times running.
+- **The category is a prompt, not the consequence.** "Attention" is not a thing you say out loud. "The sergeant on the catwalk stops walking" is.
+- **Size the trouble to the risk.** Picking a lock in an empty corridor and picking the same lock with three smugglers on the other side are the same roll and very different 6- outcomes.
+- **Never pick the row that halts the story.** If the only Cost you can imagine is the one that ends the session, take a different row. A 6- complicates; it does not close the door.
+- **Vary it.** Three Equipment results in a row and the party concludes their gear is cursed rather than that the world is dangerous.
+- **Hand it to the player when they want it.** A player claiming a Graceful Fail can be given the category and left to invent the specifics: "This one is Attention — tell me who noticed." Then confirm the Spark.
+- **For magic, layer it.** Pair a category here with the domain 6- templates in Chapter II.3. The template says how the domain misbehaved; the category says what it cost.
+
+None of this is a subsystem. The table exists to get you from a silent pause to a spoken sentence. Once the trouble is narrated, the table has done its entire job and the fiction takes it from there.
+
+---
+
 ## Managing Player Spotlight
 
 Every player at your table deserves moments where the game is about their character. Not adjacent to their character. About them. The Mirror Master's title is not decorative — you are reflecting the story back onto the players, and your job is to make sure every player sees themselves in it.

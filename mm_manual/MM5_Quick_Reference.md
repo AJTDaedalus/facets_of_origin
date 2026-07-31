@@ -280,18 +280,23 @@ Budget = Party Strength (sum of `career_advances`) x multiplier: Skirmish x1 / S
 
 ---
 
-## MM Trouble Table
+## MM Trouble Table (compressed from MM2 — see MM2 for full text)
 
-Roll (or pick) a d6 for a generic 6- consequence when nothing specific comes to mind. Usable for any roll, magical or not — pair with the domain-specific templates above for magic.
+Roll or pick a d6 for a generic 6- consequence when nothing specific comes to mind. Any roll, magical or not.
 
 | d6 | Category | The 6- consequence |
 |---|---|---|
-| 1 | **Cost** | Something is spent, broken, or used up that can't be easily replaced — a resource, a favor, an opportunity. |
-| 2 | **Position** | The character ends up somewhere worse — cornered, separated from the group, or committed to a course they can't easily undo. |
-| 3 | **Attention** | Someone or something notices that wasn't paying attention before — a guard, a rival, a threat nearby. |
-| 4 | **Equipment** | Gear fails, jams, or is lost at the worst moment — not gone forever, just unavailable right now. |
-| 5 | **Condition** | The character is left worse for wear in the fiction — winded, shaken, off-balance — narrated flavor, not a mechanical Condition unless already in combat (III.3). |
-| 6 | **Revelation** | New information comes to light — and it complicates things. Decide whether it helps or hurts first. |
+| 1 | **Cost** | Something spent, broken, or used up that can't be easily replaced — a resource, a favor, an opportunity. |
+| 2 | **Position** | Somewhere worse — cornered, separated from the group, or committed to a course they can't undo. |
+| 3 | **Attention** | Something notices that wasn't paying attention before — guard, rival, nearby threat. Better if it only starts looking. |
+| 4 | **Equipment** | Gear fails, jams, or is lost — not gone forever, just unavailable right now. Keep it recoverable. |
+| 5 | **Condition** | Worse for wear — winded, shaken, off-balance. Narrated flavor, **not** a mechanical Condition unless already in combat (III.3). |
+| 6 | **Revelation** | New information that complicates things. Decide whether it helps or hurts first; make it cost something. |
+
+- **Pick over roll** unless you want to be surprised too. The category is a prompt, not the line you say out loud.
+- **Size the trouble to the risk**; never pick the row that halts the story.
+- **Magic:** pair a category with the Magic 6- Templates above — template = how the domain misbehaved, category = what it cost.
+- **Graceful Fail:** hand the player the category, let them narrate the specifics, confirm the Spark.
 
 ---
 
