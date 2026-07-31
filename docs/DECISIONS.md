@@ -496,3 +496,22 @@ too.
 **Ruling: accepted as-is.** The custom Background path (II.5:83 — five steps, choose any skill
 from your Primary Facet) already covers a character who wants Survival from the start. No pre-built
 Background is required to reach it.
+
+## Completeness Audit Remediation — Wave 4 (2026-07-31)
+
+### sync-L5 — `second_domain` / `second_domain_mind` id asymmetry, accepted as-is
+
+**Finding:** The Soul Communion Tier 3 "Second Domain" Technique uses id `second_domain`, while
+the Mind Archive Tier 3 equivalent uses id `second_domain_mind` — an inconsistent naming scheme
+(one is bare, the other is facet-suffixed) for what is otherwise the same Technique concept.
+
+**Alternative rejected:** Rename `second_domain` → `second_domain_soul` (or `second_domain_mind`
+→ `second_domain`) for symmetry. Rejected per the task's own instruction: both ids are directly
+referenced by id string in `tests/test_ascendant_domain.py` and `tests/test_character.py` — over
+15 call sites between them (`select_technique("second_domain", ...)`,
+`select_technique("second_domain_mind", ...)`, plus assertions on `char.techniques`). A rename
+is not a one-line id swap; it is a mechanical find-and-replace across two test files with no
+behavioral upside, since Technique ids are looked up per-branch and never collide today.
+
+**Ruling: accepted as-is.** The asymmetric naming is cosmetic, not functional — both Techniques
+resolve correctly within their own Facet tree. No fix needed this cycle.

@@ -137,6 +137,53 @@ class TestBaseRulesetLoading:
         methods = {m.id: m for m in ruleset.spark.earn_methods}
         assert methods["graceful_fail"].structured is True
 
+    # L-1 (docs/RESEARCH_completeness_audit.md): the "Spark?" peer call
+    # (III.1:70) is an explicit earn method; spark_for_weakness was folded
+    # into mm_award per III.1's text, not kept as a separate method.
+    def test_peer_call_earn_method_present(self, ruleset):
+        methods = {m.id: m for m in ruleset.spark.earn_methods}
+        assert "peer_call" in methods
+        assert "spark_for_weakness" not in methods
+
+    # L-6 (docs/RESEARCH_completeness_audit.md): minor-attribute descriptions
+    # restore the PHB clauses the yaml had trimmed (II.2).
+    def test_minor_attribute_descriptions_match_phb_clauses(self, ruleset):
+        attrs = {a.id: a.description for a in ruleset.minor_attributes}
+        assert "keeping your footing on treacherous ground" in attrs["dexterity"]
+        assert "functioning on no sleep or food" in attrs["constitution"]
+        assert "finding the flaw in a plan" in attrs["intelligence"]
+        assert "finding your way through unfamiliar territory" in attrs["wisdom"]
+        assert "Identifying a historical figure or artifact" in attrs["knowledge"]
+        assert "holding the line of a ritual" in attrs["spirit"]
+        assert "Bending fate in your favor" in attrs["luck"]
+        assert "making something you said feel true even when it isn't" in attrs["charisma"]
+
+    # L-8 (docs/RESEARCH_completeness_audit.md): Technique descriptions
+    # restore the PHB parentheticals/clauses the yaml had trimmed.
+    def test_technique_descriptions_match_phb_clauses(self, ruleset):
+        body_iron = next(b for b in ruleset.techniques["body"].branches if b.id == "iron")
+        grinding_advance = next(
+            t for tier in body_iron.tiers for t in tier.techniques if t.id == "grinding_advance"
+        )
+        assert "a Spark, a second wind, a reserve of will" in grinding_advance.description
+
+        mind_clarity = next(b for b in ruleset.techniques["mind"].branches if b.id == "clarity")
+        sharp_analysis = next(
+            t for tier in mind_clarity.tiers for t in tier.techniques if t.id == "sharp_analysis"
+        )
+        assert "not speculation about future events" in sharp_analysis.description
+
+        soul_presence = next(b for b in ruleset.techniques["soul"].branches if b.id == "presence")
+        commanding_presence = next(
+            t for tier in soul_presence.tiers for t in tier.techniques
+            if t.id == "commanding_presence"
+        )
+        assert "active, established fictional reasons" in commanding_presence.description
+        unforgettable = next(
+            t for tier in soul_presence.tiers for t in tier.techniques if t.id == "unforgettable"
+        )
+        assert "glad to see you" in unforgettable.description
+
 
 # ---------------------------------------------------------------------------
 # Schema validation — malformed Facet files

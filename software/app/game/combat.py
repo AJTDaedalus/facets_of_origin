@@ -234,7 +234,8 @@ def reaction_cost(
     applies = posture_def.get("reaction_cost_modifier_applies", "always")
     if applies == "first_reaction_only" and not is_first_reaction:
         modifier = 0
-    return max(0, base + modifier)
+    min_cost = posture_def.get("min_reaction_cost", 0)
+    return max(min_cost, base + modifier)
 
 
 def withdrawn_recovery_amount(ruleset) -> int:
@@ -411,8 +412,9 @@ def resolve_incoming_condition(
     Pure: the budget counter stays with the caller, as in `armor_downgrade`.
     """
     if reaction_downgraded:
+        reduction = ruleset.combat.armor.reaction_downgrade_tiers
         return IncomingConditionResult(
-            tier=max(0, tier - 1),
+            tier=max(0, tier - reduction),
             downgrades_remaining=downgrades_remaining,
             armor_spent=False,
             reaction_applied=True,
@@ -479,6 +481,56 @@ def apply_resolve_damage(
     )
 
 
+def maneuver_target_difficulty(outcome: str, base_difficulty: str, ruleset) -> str:
+    """Effect of a Maneuver's outcome on rolls against the target (III.3):
+    a 10+ makes rolls against the target Easy (until the situation
+    changes — tracked by the caller, not here); a 7-9 leaves the target at
+    the base difficulty; a 6- backfires and has no effect on the target.
+    Read from `combat.actions.maneuver`, not hardcoded.
+    """
+    effect = getattr(ruleset.combat.actions.maneuver, outcome, "standard")
+    if effect == "easy":
+        return "Easy"
+    return base_difficulty
+
+
+def support_bonus_modes(ruleset) -> list[str]:
+    """The non-stacking bonus types a Support action may grant an ally's
+    very next roll (III.3) — the supporting character's choice. Read from
+    `combat.actions.support.modes`, not a hardcoded tuple.
+    """
+    return list(ruleset.combat.actions.support.modes)
+
+
+def enemy_incoming_condition_tier(enemy_type: str, ruleset) -> int:
+    """Condition tier a PC takes from an enemy attack, by enemy type (III.3,
+    Incoming Condition Tier). Read from `combat.enemy_attacks.incoming_tier`,
+    not hardcoded — Mook 1, Named/Boss 2 by default.
+    """
+    return getattr(ruleset.combat.enemy_attacks.incoming_tier, enemy_type, 1)
+
+
+def enemy_posture_reaction_difficulty(
+    base_difficulty: str, enemy_type: str, enemy_posture: Optional[str], ruleset,
+) -> str:
+    """Shift a PC's reaction difficulty by the attacking enemy's Posture
+    (III.3, Enemy Posture and Reaction Difficulty): Aggressive one step
+    harder, Defensive one step easier, Measured unchanged. Mooks never
+    declare Posture — no shift applies regardless of what is passed.
+    """
+    if enemy_type == "mook" and not ruleset.combat.enemy_attacks.mook_declares_posture:
+        return base_difficulty
+
+    shift = getattr(
+        ruleset.combat.enemy_attacks.posture_reaction_shift, enemy_posture or "measured", "none",
+    )
+    if shift == "harder":
+        return _engine._step_difficulty_harder(base_difficulty, ruleset)
+    if shift == "easier":
+        return _engine._step_difficulty_easier(base_difficulty, ruleset)
+    return base_difficulty
+
+
 def enemy_armor_resolve_bonus(armor: Optional[str], ruleset) -> int:
     """Flat Resolve bonus an enemy's armor grants at combat start (D1).
 
@@ -506,6 +558,22 @@ def mook_removed(outcome: str, armored: bool, ruleset) -> bool:
         return _OUTCOME_ORDER.index(outcome) >= _OUTCOME_ORDER.index(threshold)
     except ValueError:
         return False
+
+
+def can_apply_rider(outcome: str, ruleset) -> bool:
+    """Whether a Strike outcome is eligible to additionally hang a rider
+    Condition on an enemy, on top of Resolve depletion (III.3 — "on a full
+    success only"). Read from `combat.enemy_durability.rider_on`, not
+    hardcoded, so a homebrew ruleset could widen or narrow it.
+    """
+    return outcome == ruleset.combat.enemy_durability.rider_on
+
+
+def rider_tier_eligible(tier: int, ruleset) -> bool:
+    """Whether `tier` (1 or 2) is a legal rider tier — read from
+    `combat.enemy_durability.rider_tiers`, not hardcoded.
+    """
+    return tier in ruleset.combat.enemy_durability.rider_tiers
 
 
 def target_strike_difficulty(base_difficulty: str, target_conditions: list[str], ruleset) -> str:

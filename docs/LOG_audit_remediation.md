@@ -580,3 +580,334 @@ Findings closed this wave: rul-H1, app-H1, app-H2, app-M1, app-M2, app-M3, app-M
 **Model routing note:** all six prose sign-off tasks (W3-6, W3-8, W3-9, W3-10, W3-11, W3-13) were drafted by Opus subagents briefed with exact source citations, then fact-checked, reviewed, and integrated by this Sonnet session before commit — per the user's explicit direction earlier in this conversation. Every subagent draft was checked against its cited PHB/MM sources before landing; one inaccuracy was found and fixed (W3-10, see above).
 
 PR: opened via `gh pr create` against `main`, branch `feature/audit-wave3-canon`.
+
+---
+
+## W4 — Sync backlog
+
+- **Branch:** `feature/audit-wave4-sync`
+- **Date:** 2026-07-31
+- **Baseline:** `pytest --collect-only -q` → **1044 tests collected**, measured on this branch after merging W3 (PR #16).
+
+### W4 task list (from `docs/TASKS_audit_remediation.md`)
+
+- [x] W4-1 — Press cost into yaml. *(sync-M-2)* **TDD**
+- [x] W4-2 — Strike riders and Easy-to-Strike into yaml. *(sync-M-3)* **TDD**
+- [x] W4-3 — Same-Tier-2 escalation into yaml. *(sync-M-4)* **TDD**
+- [x] W4-4 — Armor/reaction non-stacking into yaml. *(sync-M-5)* **TDD**
+- [x] W4-5 — Enemy attack rules into yaml. *(sync-M-6)* **TDD**
+- [x] W4-6 — Maneuver and Support into yaml. *(sync-M-7)* **TDD**
+- [x] W4-7 — Major Attribute modifier derivation. *(sync-M-8, part 1)* **TDD**
+- [x] W4-8 — Saving throws: engine + WebSocket. *(sync-M-8, part 2 — D11 full depth)* **TDD**
+- [x] W4-9 — Spark scope fuel into yaml, including D8. *(sync-M-9)* **TDD**
+- [x] W4-10 — Group rolls and contested rolls: encoding only. *(sync-M-10, M-11 — D11)* **TDD**
+- [x] W4-11 — Weapon category → attribute table. *(sync-M-12)* **TDD**
+- [x] W4-12 — First Move timing. *(sync-M-1)*
+- [ ] W4-13 — Sync low-severity sweep. *(sync-L-1 … L-8)*
+- [ ] W4-14 — Cycle close-out.
+
+### W4-1 *(sync-M-2)* — TDD
+
+- `software/app/facets/schema.py` — new `PressDef` (`endurance_cost: int = 1`, `extra_dice: int = 1`), typed model replacing `CombatDef.press`'s previous `dict[str, Any]`.
+- `software/facets/base/facet.yaml` — added `combat.press: {endurance_cost: 1, extra_dice: 1}` (didn't exist in yaml at all before this task — the schema field was declared but never populated).
+- `software/app/game/engine.py:125` — `extra_dice` for Press now reads `ruleset.combat.press.extra_dice` instead of a hardcoded `1`.
+- `software/app/api/websocket.py:528-535` — the Endurance deduction and the sufficiency check both now read `session.ruleset.combat.press.endurance_cost` instead of a hardcoded `1` / `> 0`.
+- `software/tools/combat_sim.py:476-479` — **found the same hardcoded literal in the simulator**, which CLAUDE.md explicitly forbids ("the simulator may only drive `app/game/combat.py`... it must never re-implement a rule"). Fixed both the Endurance deduction and the extra-dice computation to read the same `ruleset.combat.press` values, closing a second silent-divergence risk beyond what the task named.
+- Tests (3, written first) in `test_websocket.py`: cost read from yaml (default 1); a monkey-patched `ruleset.combat.press.endurance_cost = 2` changes the deduction to 2; Press refused with 0 Endurance, message names "Press," Endurance unchanged.
+- Grepped for remaining Press cost/extra-dice literals across `websocket.py`, `engine.py`, `combat_sim.py` — none left.
+- Regenerated `Index.md` — no diff (no PHB text touched).
+
+Command: `cd software && python -m pytest -q`
+Result: **1047 passed** (1044 + 3 new).
+
+### W4-2 *(sync-M-3)* — TDD
+
+- **Investigated first:** `target_strike_difficulty` (Tier 2 rider → Easy) and `apply_condition`'s `is_rider` handling (riders never escalate to Broken) were already correctly yaml-driven or structurally correct. The actual hardcoded literals were in `tools/combat_sim.py`: `_choose_rider`'s Tier 1 fallback returned the literal string `"winded"` instead of reading `combat.conditions.tier1[0]`, and **two** separate call sites gated the rider decision on `effective_outcome == "full_success"` — a hardcoded outcome comparison with no yaml backing.
+- `software/app/facets/schema.py` (`EnemyDurabilityDef`) — added `rider_on: str = "full_success"` and `rider_tiers: list[int] = [1, 2]`.
+- `software/facets/base/facet.yaml` (`combat.enemy_durability`) — set both fields, matching current behavior exactly.
+- `software/app/game/combat.py` — added two new shared helpers, `can_apply_rider(outcome, ruleset)` and `rider_tier_eligible(tier, ruleset)`, both reading the new yaml fields — a single source of truth any caller (simulator or, eventually, the live WS path) can use instead of re-deriving the comparison.
+- `software/tools/combat_sim.py` — fixed `_choose_rider`'s Tier 1 fallback to read `tier1_ids[0]` from yaml instead of the literal `"winded"`; both rider-gating call sites now call `combat_module.can_apply_rider(...)` instead of comparing against a hardcoded string — closing a second silent-divergence risk the same way W4-1 did for Press.
+- **Noted, not wired:** riders are not yet exposed through the live WebSocket Strike flow at all (`grep rider` in `websocket.py` returns nothing) — that's a real gap but a larger one than this task's scope (moving existing literals to data); flagging for a future task rather than expanding this one.
+- Tests (5 — 3 required + 2 restore-safety fixes) in `test_combat.py`, new `TestRiderEligibility` class: `can_apply_rider` reads the yaml outcome (and a modified yaml value flips eligibility — **careful:** the `ruleset` fixture is session-scoped and shared across the whole test run, so this test saves/restores the original value in a `try/finally` rather than mutating it permanently); `rider_tier_eligible` reads yaml tiers (same modify + restore pattern); a rider applied via `apply_condition` never touches a separately-tracked Resolve pool.
+- Ran `test_combat_sim.py` and `test_combat_characterization.py` (89 tests) specifically to confirm the simulator fixes didn't change any recorded behavior — all green.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1052 passed** (1047 + 5 new).
+
+### W4-3 *(sync-M-4)* — TDD
+
+- **Investigated first, again:** the two files the task named (`combat.py:536,552-553`, `websocket.py:747`) were already fully yaml-driven — `apply_condition`'s same-type-escalates-to-Broken check and `condition_tier()` both read `combat.conditions.tier1/tier2/tier3` from the ruleset, no hardcoded id set. The real hardcoded literal was `tools/combat_sim.py:72`'s `TIER2_CONDITIONS = ("staggered", "cornered")` — a module comment even flagged it as "no longer used by the resolution functions... a residual duplication for a future pass," but it was still actively used by two AI decision functions (`choose_pc_target`'s target-priority check, `should_spend_spark`'s finishing-blow check), contradicting the comment.
+- `software/tools/combat_sim.py` — `choose_pc_target` and `should_spend_spark` now take `ruleset` as a parameter and check `combat_module.condition_tier(c, ruleset) == 2` instead of `c in TIER2_CONDITIONS`. Updated all 3 live call sites (`_pc_strike`, `run_combat`, the G3 exchange loop) to pass `ruleset` through.
+- Left `TIER2_CONDITIONS` (and its sibling `TIER1_CONDITIONS`) declared — still imported and used directly by one existing test (`test_combat_sim.py:380`, a "plain dice utility" test per the module's own comment) as a fixture value, not as rule-enforcement logic. Removing it would require touching that unrelated test, out of proportion for this task; the comment's original "future pass, not silently carried forward" framing still applies to that one remaining reference.
+- Updated 18 existing test call sites in `test_combat_sim.py` (`TestAI`, `TestPCStrike`, `TestSparkSpendPolicy`) to pass `_ruleset()` (the simulator's cached ruleset builder) through the new parameter — mechanical signature-following, not a behavior change.
+- Tests (1 new + 2 pre-existing already covering the other two required cases):
+  - `test_same_tier2_twice_escalates_to_broken` / `test_different_tier2_conditions_do_not_escalate` (pre-existing, `test_combat.py`) already cover "same-type → Broken" and "different-type → coexist."
+  - **New:** `test_target_priority_reads_tier2_from_yaml_not_a_literal_set` (`test_combat_sim.py`) — adds a Condition id to `ruleset.combat.conditions.tier2` that was never in the old `TIER2_CONDITIONS` tuple, and confirms both `choose_pc_target` and `should_spend_spark` treat it as Tier 2 — something the old hardcoded tuple could never have supported. Saves/restores the mutated tier2 list (`_ruleset()` returns a module-cached, shared instance — same leak risk as W4-2's session-scoped fixture).
+- Ran `test_combat_sim.py` and `test_combat_characterization.py` (89 tests) after the fix — all green, confirming no behavior change.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1053 passed** (1052 + 1 new).
+
+### W4-4 *(sync-M-5)* — TDD
+
+- **Investigated first:** `resolve_incoming_condition`'s non-stacking logic (apply the greater of armor/reaction, charge not spent when the reaction alone supplies the reduction) was already structurally correct — the WebSocket handler and simulator both delegate to it rather than duplicating the rule. The one hardcoded literal: the reaction branch computed `max(0, tier - 1)`, while the armor branch already read its reduction amount from yaml (`combat.armor.<type>.tiers_reduced`) — an asymmetry that happened to produce identical results only because every configured armor type's `tiers_reduced` is currently 1.
+- `software/app/facets/schema.py` (`ArmorDef`) — added `reaction_downgrade_tiers: int = 1`.
+- `software/facets/base/facet.yaml` (`combat.armor`) — set `reaction_downgrade_tiers: 1`, matching current behavior.
+- `software/app/game/combat.py` (`resolve_incoming_condition`) — reaction branch now reads `ruleset.combat.armor.reaction_downgrade_tiers` instead of the hardcoded `1`.
+- Confirmed `websocket.py` and `combat_sim.py` have no separate hardcoded copy of this literal — both already call `resolve_incoming_condition`/pass `reaction_downgraded` through to the shared function, so they inherit the fix automatically.
+- Tests: the three required cases (non-stacking, charge preserved when reaction supplies it, charge spent when armor alone supplies it) were **already covered** by pre-existing tests (`test_armor_and_reaction_do_not_stack`, `test_redundant_armor_charge_is_not_spent`, `test_armor_alone_downgrades_and_spends_a_charge`) — none of which would have caught the hardcoded-vs-yaml distinction, since they only assert the outcome, not the source. Added one new test, `test_reaction_downgrade_amount_reads_from_yaml`, that changes `reaction_downgrade_tiers` to 2 and confirms the reduction changes accordingly (save/restore around the session-scoped `ruleset` fixture).
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1054 passed** (1053 + 1 new).
+
+### W4-5 *(sync-M-6)* — TDD
+
+- **Investigated first:** unlike most Wave 4 tasks so far, this rule (III.3's Enemy Attacks: incoming Condition tier by enemy type, Posture-shifted PC reaction difficulty, Mooks never declaring Posture) had **no implementation anywhere** — not a hardcoded literal to fix, a genuine gap. Grepped `enemy_attack`, `incoming_tier`, "Aggressive.*harder" across `combat.py`, `websocket.py`, `combat_sim.py` — zero hits.
+- `software/app/facets/schema.py` — three new models: `EnemyIncomingTierDef` (mook/named/boss → tier), `EnemyPostureReactionShiftDef` (aggressive/measured/defensive → harder/none/easier), `EnemyAttacksDef` (bundles both plus `mook_declares_posture: bool = False`). Added `CombatDef.enemy_attacks`.
+- `software/facets/base/facet.yaml` (`combat.enemy_attacks`) — set to match III.3 exactly: Mook 1, Named/Boss 2; Aggressive harder, Defensive easier.
+- `software/app/game/combat.py` — two new pure functions: `enemy_incoming_condition_tier(enemy_type, ruleset)` and `enemy_posture_reaction_difficulty(base_difficulty, enemy_type, enemy_posture, ruleset)`. The latter reuses `engine._step_difficulty_harder`/`_step_difficulty_easier` (already-existing, ruleset-driven difficulty-stepping helpers) rather than reimplementing the Easy/Standard/Hard/Very Hard ladder — and short-circuits to the base difficulty for Mooks regardless of what posture is passed in, matching "the MM sets Mook difficulty by situation instead."
+- **Scope note, matching W4-2's precedent:** these functions are pure and tested, but **not wired into the live WebSocket flow** — the live session doesn't currently track which enemy is attacking or its Posture at the point a PC declares a reaction, so wiring this in would mean adding that tracking, a larger feature than "move a literal to data." Flagged for a future task rather than expanding this one's scope.
+- Tests (8: 3 required + regression coverage), two new classes in `test_combat.py`: `TestEnemyIncomingConditionTier` (tier by type from yaml, for all three enemy types, plus a modified-yaml-changes-the-result check) and `TestEnemyPostureReactionDifficulty` (Aggressive → Hard, Defensive → Easy, Measured unchanged, and Mook posture ignored even when passed "aggressive").
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1062 passed** (1054 + 8 new).
+
+### W4-6 *(sync-M-7)* — TDD
+
+- **Investigated first:** Maneuver's outcome effect (10+ = Easy for rolls against the target, 7-9 = stays base, 6- = backfire) and Support's actual "next roll" bonus tracking were **entirely unimplemented** in the live handlers — `_handle_maneuver`/`_handle_support` roll and broadcast the result but never apply or track any mechanical effect. The one real hardcoded literal in the named file: `_handle_support`'s validation checked `bonus_type not in ("add_die", "ease_difficulty")` — a hardcoded tuple.
+- `software/app/facets/schema.py` — `ManeuverOutcomesDef` (full_success/partial_success/failure → easy/standard/backfire), `SupportDef` (modes, duration, stacking), `CombatActionsDef` bundling both. Added `CombatDef.actions`.
+- `software/facets/base/facet.yaml` (`combat.actions`) — set to match III.3 exactly.
+- `software/app/game/combat.py` — two new pure functions: `maneuver_target_difficulty(outcome, base_difficulty, ruleset)` and `support_bonus_modes(ruleset)`.
+- `software/app/api/websocket.py` (`_handle_support`) — the hardcoded `bonus_type` tuple now reads `combat_module.support_bonus_modes(session.ruleset)`.
+- **Scope note, same pattern as W4-5:** neither Maneuver's Easy-until-the-situation-changes effect nor Support's next-roll-only non-stacking bonus is tracked as live session state (no "pending bonus" field exists on `Character`) — encoding the rule as data and providing pure functions to query it is this task's proportionate scope; stateful wiring is a larger feature, flagged for a future task.
+- Tests (7: 3 required + regression coverage) in `test_combat.py`: Maneuver's three outcomes read from yaml (plus a modified-yaml check); Support's two modes read from yaml (plus a modified-yaml check); Support's `duration`/`stacking` fields confirmed present as data (the "non-stacking replacement" case, tested as a data-correctness check since no live mechanism exists yet to test behaviorally — noted honestly in the test's own docstring).
+- Confirmed the existing `test_support_invalid_bonus_type` websocket test still passes with the yaml-sourced validation.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1069 passed** (1062 + 7 new).
+
+### W4-7 *(sync-M-8, part 1)* — TDD
+
+- **Investigated first:** the Major Attribute modifier derivation (II.2: sum of the three Minors under a Major → modifier band) had **no implementation anywhere** — grepped `major_attribute_modifier`/"Sum of Three Minors" across `character.py`/`schema.py` with zero hits. This is what W4-8 (saving throws) needs as its modifier source, so it's split out as "part 1" per the task file.
+- `software/app/facets/schema.py` — new `MajorDerivationBandDef` (`min_sum`, `max_sum`, `modifier`); added `AttributesDef.major_derivation: list[MajorDerivationBandDef]`.
+- `software/facets/base/facet.yaml` (`attributes.major_derivation`) — the three bands from II.2 exactly: 3-4 → -1, 5-7 → +0, 8-9 → +1.
+- `software/app/facets/registry.py` (`MergedRuleset`) — tracks `major_derivation_bands` during `_merge()` (same pattern as `attribute_distribution`); new `get_major_attribute_modifier(minor_sum)` looks up the band, defaulting to +0 (not raising) for a sum outside every configured band — mirroring `get_minor_attribute_modifier`'s existing neutral-fallback convention for an unknown rating.
+- `software/app/game/character.py` — new `Character.get_major_attribute_modifier(major_id, ruleset)`: sums this character's three Minor ratings under the given Major (via `ruleset.major_attributes[...].minor_attributes`) and looks up the band.
+- Tests (4, written first) in `test_character.py`, new `TestMajorAttributeModifierDerivation` class — `valid_attributes` conveniently covers all three bands at once (Body sums to 8 → +1, Mind to 6 → +0, Soul to 4 → -1), plus a direct `ruleset.get_major_attribute_modifier()` out-of-range guard (0 and 100 both default to +0; not reachable through the standard 1-3-per-Minor distribution, but the guard exists for a homebrew ruleset that shifts the bands).
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1073 passed** (1069 + 4 new).
+
+### W4-8 *(sync-M-8, part 2 — D11 full depth)* — TDD
+
+- **Investigated first:** saving throws (III.1:84-99: 2d6 + Major Attribute modifier, no skill) had zero presence in the engine or WebSocket layer — this is D11's "full depth" item (a core III.1 mechanic with zero prior software presence), unlike most of this wave's yaml-encoding tasks.
+- `software/app/game/engine.py` — extracted the dice-rolling/outcome core shared by `resolve_roll` into a new private helper, `_roll_and_resolve(attr_modifier, skill_modifier, difficulty_label, sparks_spent, press, ruleset)`, so both paths compute totals and outcomes identically; only the modifier source differs. Added `resolve_saving_throw(major_attribute_id, character, ruleset, difficulty_label="Standard", sparks_spent=0)`, which calls `character.get_major_attribute_modifier(...)` (W4-7's function) for the modifier — **not a second implementation** of the II.2 derivation, per the accept criteria.
+- `software/app/facets/schema.py` (`RollResolutionDef`) — added `SavingThrowDef` (`modifier_source`, `default_difficulty`) and `roll_resolution.saving_throw`.
+- `software/facets/base/facet.yaml` — set `roll_resolution.saving_throw: {modifier_source: major_attribute, default_difficulty: Standard}`.
+- `software/app/api/websocket.py` — new `saving_throw` event type, dispatched to a new `_handle_saving_throw` handler: validates the Major Attribute id against `session.ruleset.major_attributes` (not a hardcoded `{"body","mind","soul"}` set), spends any requested Sparks, calls `resolve_saving_throw`, and broadcasts a `saving_throw_result` event. Not combat-gated (saving throws aren't combat-only, unlike Strike/React).
+- Tests (5: 3 required + 2 regression), across two files:
+  - `test_roll_engine.py`, new `TestSavingThrow` class: the modifier comes from `Character.get_major_attribute_modifier` (cross-checked against calling it directly); outcome resolves on the standard three-tier table; JSON-safety of the result.
+  - `test_websocket.py`, new `TestSavingThrow` class: happy path (valid Major Attribute, correct `saving_throw_result` shape) and the unknown-Major-Attribute error path.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1078 passed** (1073 + 5 new).
+
+### W4-9 *(sync-M-9)* — TDD
+
+- `software/app/facets/schema.py` — three new models (`SparkEaseFocusedMajorDef`, `SparkPushScopeDef`, `SparkPreTechniquePushDef`) bundled in `MagicSparkRulesDef`; added `MagicDef.spark_rules`.
+- `software/facets/base/facet.yaml` (`magic.spark_rules`) — all three rules, including D8's `pre_technique_push: {permitted_scope: significant}` (the rule W3-6's body text established).
+- `software/app/game/engine.py` (`resolve_magic_roll`) — **rewritten, not extended in place**, per the accept criteria: the pre-Technique scope-ceiling check now short-circuits when `pre_technique_push` is true (spark_use is `"pre_technique_push"` AND scope matches `spark_rules.pre_technique_push.permitted_scope`) — this correctly refuses Major even with the Spark declared, since `"major" != "significant"`. The `ease_focused_major`/`push_scope` branches now compare against `ruleset.magic.spark_rules.*` fields instead of hardcoded `"focused"`/`"broad"`/`"major"` string literals. D8's push adds no dice and no difficulty shift — "the Spark buys the scope, not a discount on the roll."
+- `software/app/api/websocket.py` (`_handle_cast`) — added `"pre_technique_push"` to the Spark-spending check, so the feature actually consumes a Spark end-to-end.
+- **Found and fixed a test-infrastructure gap while adding coverage:** `test_roll_engine.py`'s `_make_magic_ruleset()` mock helper built a bare `MagicMock()` for `ruleset.magic` with no `spark_rules` configured — my rewrite's new attribute reads (`ruleset.magic.spark_rules.ease_focused_major.domain_type`, etc.) would have returned auto-generated `MagicMock` objects and silently broken every `==` comparison. Fixed the helper to set `spark_rules` via `SimpleNamespace`, matching the real schema shape; reran the 6 pre-existing `push_scope`/pre-Technique tests to confirm they still pass with the corrected mock.
+- Tests (5: 4 required + a Focused/Standard contrast check), new `TestSparkRulesFromYaml` class: Focused eases Major one step; a Standard domain gets no effect from the same `ease_focused_major` spark_use (proving the domain-type check is real, not always-true); Broad refuses `push_scope` (message still names "Broad," now sourced from yaml); D8 permits Significant pre-Technique at the domain's *normal* difficulty (cross-checked against a post-Technique roll at the same scope); D8 does not extend to Major, which stays refused.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1083 passed** (1078 + 5 new).
+
+### W4-10 *(sync-M-10, M-11 — D11)* — TDD
+
+- `software/app/facets/schema.py` — `ContestedRollVsNpcDef`, `ContestedRollVsPcDef`, `ContestedRollDef`; `GroupRollDef`. Added `RollResolutionDef.contested_roll` / `.group_roll`.
+- `software/facets/base/facet.yaml` (`roll_resolution.contested_roll`, `.group_roll`) — matching III.1:104-123 exactly.
+- **No engine work**, per D11 and the task's explicit instruction: `_handle_contested_roll` already exists and correctly implements "vs. NPC only the PC rolls" (the handler never rolls for an NPC) and "vs. PC both roll, higher wins" (`winner = player_a if total_a > total_b else ...`); group rolls have no live handler yet and wait for a playtest to demand them.
+- Tests (5: 2 required + regression coverage) in `test_facets_schema.py`: both blocks' defaults match the PHB text; the base ruleset's `facet.yaml` loads and validates both blocks; a test reproducing the WS handler's exact tie comparison (`"tie" if total_a == total_b`) alongside an assertion that `contested_roll.vs_pc.tie_result == "both_partial_success"` — documenting that the code's behavior (report "tie") and the yaml's stated PHB rule (a tie means both sides get a partial success) describe the same rule.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1088 passed** (1083 + 5 new).
+
+### W4-11 *(sync-M-12)* — TDD
+
+- **New top-level yaml section:** no `equipment:` block or schema model existed at all. Added `WeaponCategoryDef` (`attributes: list[str]`) and `EquipmentDef` (`weapon_categories: dict[str, WeaponCategoryDef]`); added `FacetFile.equipment` (optional, matching the existing `combat`/`magic`/`hazards`/`death` pattern) and wired it through `MergedRuleset._merge()` plus `to_client_dict()`.
+- `software/facets/base/facet.yaml` (`equipment.weapon_categories`) — all five categories from IV.1:13-19: Heavy → Strength; Standard/Unarmed → Strength or Dexterity; Light/Ranged → Dexterity.
+- Reference data only, per the task's explicit note — the engine stays deliberately permissive on which attribute a Strike uses; nothing reads or enforces this block.
+- Tests (2, written first) in `test_facets_schema.py`, new `TestWeaponCategories` class: the base ruleset loads the `equipment` block as an `EquipmentDef`; all five categories are present with their exact attribute lists.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1090 passed** (1088 + 2 new).
+
+### W4-12 *(sync-M-1)*
+
+- `software/facets/base/facet.yaml` (`first_move`) — the description had drifted on two counts: timing (yaml said "acts first in the next exchange"; PHB II.4b:96 says "This exchange, the opposition does not act until every party member's action has resolved") and scope (yaml omitted the ambush/trap-negation clause entirely — "no ambush springs, no prepared trap goes off, and an enemy defeated or disrupted before its moment never gets that moment at all"). Restored both.
+- Added a cheap text assertion (per the task's suggestion) in `test_docs_consistency.py`: `test_first_move_matches_phb_ii4b_timing_and_scope` — confirms "this exchange" is present, "next exchange" is not, and both "ambush" and "trap" appear in the yaml description.
+- Regenerated `Index.md` — no diff.
+
+Command: `cd software && python -m pytest -q`
+Result: **1091 passed** (1090 + 1 new).
+
+### W4-13 *(sync-L-1 … L-8)* — TDD
+
+Eight low-severity findings; each investigated on its own merits rather than
+batch-applied — three were already-correct or already-enforced and just needed
+verification/recording rather than a code change.
+
+- **L-1** — `software/facets/base/facet.yaml` (`spark.earn_methods`): replaced
+  `spark_for_weakness` with `peer_call` (III.1:70's "Spark?" — any player can
+  call it for another player's moment; the MM confirms). `spark_for_weakness`'s
+  content already duplicated `mm_award`'s "playing your character's established
+  traits and weaknesses in a way that costs you something real" clause — III.1
+  folds weakness-play into the MM award rather than treating it as a separate
+  earn method. No references to the old id existed outside yaml/research docs.
+- **L-2** — `software/app/facets/schema.py` (`CombatConditionDef`): added
+  `out_of_combat_clears: str | None`. `facet.yaml`'s three Tier 1 conditions
+  (winded, off_balance, shaken) now carry `out_of_combat_clears: end_of_scene`
+  (III.2:69 — Tier 1 clears end of exchange in combat; outside combat, where
+  there's no exchange structure, end of scene instead). Data only: the actual
+  scene-boundary trigger to *invoke* this clearing is a session-lifecycle
+  feature (knowing when a scene ends) that doesn't exist yet — flagged as a
+  gap, consistent with this wave's scope discipline on tasks with no live
+  wiring target.
+- **L-3** — `software/app/game/character.py`: added
+  `intercepts_this_exchange: int = 0`. `software/app/api/websocket.py`
+  (`_handle_react`): refuses a second Intercept in the same exchange
+  (III.3:219 — Intercept is capped at one per exchange, unlike other reaction
+  types); increments on a successful Intercept; `_handle_end_exchange` resets
+  it to 0 alongside `reactions_this_exchange`.
+- **L-4** — `software/facets/base/facet.yaml` (`combat.postures.defensive`):
+  added `min_reaction_cost: 0` as an explicit field (III.3 posture table:
+  "-1 Endurance cost per reaction (min 0)"). `software/app/game/combat.py`
+  (`reaction_cost`): the floor now reads `posture_def.get("min_reaction_cost",
+  0)` instead of a hardcoded `max(0, ...)`. No behavioral change at the
+  default value; the floor is now overridable per-posture from yaml.
+- **L-5** — **Accepted as-is**, recorded in `docs/DECISIONS.md`
+  (`sync-L5`). `second_domain` (Soul) vs. `second_domain_mind` (Mind) is a
+  real naming asymmetry, but both ids are referenced by string at 15+ call
+  sites across `test_ascendant_domain.py` and `test_character.py` — a rename
+  is a mechanical test-file sweep with no behavioral upside, since Technique
+  ids are looked up per-branch and never collide. Per the task's own
+  instruction ("rename only if nothing outside yaml/tests references the
+  id"), this fails that test.
+- **L-6** — `software/facets/base/facet.yaml` (`minor_attributes`): restored
+  the PHB II.2 clauses the descriptions had trimmed — Dexterity ("keeping
+  your footing on treacherous ground"), Constitution ("to keep moving" /
+  "or food"), Intelligence ("under pressure" / "finding the flaw in a
+  plan"), Wisdom ("before you can name why" / "finding your way through
+  unfamiliar territory"), Knowledge (rewritten to match II.2's actual
+  examples — the yaml version had drifted to unrelated phrasing), Spirit
+  (rewritten to match II.2 — "holding the line of a ritual" etc.), Luck
+  (rewritten to II.2's actual text — the yaml version had replaced the PHB's
+  concrete examples with abstract flavor text), Charisma (restored
+  "negotiating" and the "feel true" clause; dropped "intimidation," which
+  is not a II.2 example and was an unattributed addition — Iron Law: no
+  invented canon).
+- **L-8** — `software/facets/base/facet.yaml`: restored trimmed Technique
+  clauses — Grinding Advance ("a Spark, a second wind, a reserve of will"),
+  Sharp Analysis (the observability-restriction parenthetical), Commanding
+  Presence (the MM-override clause), Unforgettable (the "glad to see you"
+  clause).
+- **L-7** — **Investigated, found already engine-enforced.**
+  `character.py`'s `_validate_domain_choice` (pre-existing, from earlier
+  Ascendant Domain work) already implements all three II.3:244-246 rules:
+  Ascendant taken once ever (`self.ascendant_domain` guard), prismatics never
+  a starting domain (non-Ascendant routes reject `domain.type == "broad"`),
+  and at most one domain per Facet via cross-training (only one magic-granting
+  Tier 1 Technique exists per Facet — `arcane_study` for Mind,
+  `spiritual_domain` for Soul — so this is structurally guaranteed by content
+  as well as guarded in code). The gap was test coverage, not engine logic:
+  added `test_starting_domain_technique_rejects_prismatic_choice` (exercises
+  the public API — `spiritual_domain` refuses a prismatic choice) and
+  `test_domain_guard_refuses_a_third_facet_domain` (exercises the guard
+  branch directly, since it's unreachable through the public API with today's
+  content — there is no third Facet with domains to cross-train into).
+
+Tests (6, all written first): `TestReactionCost.test_defensive_floor_reads_from_yaml_not_a_literal`,
+`test_peer_call_earn_method_present`, `test_minor_attribute_descriptions_match_phb_clauses`,
+`test_technique_descriptions_match_phb_clauses` (all in `test_facet_loading.py`/`test_combat.py`),
+and the two L-7 tests in `test_character.py`.
+
+Regenerated `Index.md` — no diff (pure software/sync work).
+
+Command: `cd software && python -m pytest -q`
+Result: **1097 passed** (1091 + 6 new).
+
+---
+
+## Cycle Close-Out
+
+Four waves, `docs/BRIEF_audit_remediation.md` Goal 1 ("every High and Medium
+finding is either fixed or has a `DECISIONS.md` entry") met.
+
+**Final suite:** 1097 passed (baseline 1026 → **+71 tests** across the cycle).
+
+### Findings closed
+
+- **High (9/9 fixed):** all of Wave 1's PHB-rules-text and structural findings
+  (see W1-1 … W1-9 entries above).
+- **Medium (36/37 fixed, 1 ruled as-designed):** Wave 2's MM/apparatus and
+  software-sync findings (W2-1 … W2-9), Wave 3's canon/prose findings
+  (W3-1 … W3-13), and Wave 4's `sync-M-1 … M-12` software-PHB sync gaps
+  (W4-1 … W4-12) are all fixed. One Medium — **cre-M7** (Communion Tier 3's
+  non-magic pick count) — is ruled as-designed; see below.
+- **Low (33/35 fixed, 1 ruled as-designed, 1 logged only):** Wave 4's
+  `sync-L-1 … L-8` sweep (W4-13) fixed six of eight and confirmed one
+  (`sync-L7`) was already engine-enforced with only test coverage missing.
+  Two Low findings are not code fixes — see below.
+
+### Findings ruled as-designed (`docs/DECISIONS.md`)
+
+- **cre-M7** — Communion Tier 3's non-magic pick count (one fewer than
+  Archive's). Accepted: both branches offer the same *total* Tier 3 pick
+  count once the shared magic-extension Techniques are counted; authoring a
+  new Technique to force parity is outside this cycle's Non-goals.
+- **rul-L5** — No pre-built Background grants Survival. Accepted: the custom
+  Background path (II.5:83) already reaches it; changing a pre-built
+  Background's skill grant has real knock-on cost for no fictional gain.
+- **sync-L5** — `second_domain` / `second_domain_mind` id asymmetry.
+  Accepted: both ids are referenced by string at 15+ test call sites; a
+  rename is a mechanical sweep with no behavioral upside, and the task's own
+  instruction ("rename only if nothing outside yaml/tests references the
+  id") rules it out.
+
+### Findings deliberately left
+
+- **app-L5** — Table of Contents lists IV.2 as "(Planned)". This is correct
+  as written — IV.2 genuinely is planned, not yet drafted — and needs no fix.
+  Logged only, per the DESIGN doc, as informational.
+
+### Deferred / flagged during the cycle (not findings, but noted for a future task)
+
+- **W4-2 / W4-5** — enemy rider/Easy-to-Strike and enemy-attack rules are
+  encoded and unit-tested at the pure-function level, but *live* wiring
+  (tracking which enemy is attacking a given PC to shift reaction difficulty
+  in a running session) was judged out of proportion for those tasks' scope.
+- **W4-6** — Maneuver's "next roll is Easy" and Support's bonus application
+  are encoded as pure functions; tracking that state across a live session
+  (e.g., "this character's next roll gets Maneuver's bonus") is not wired.
+- **W4-13 / L-2** — the Tier 1 out-of-combat scene-clear field exists in
+  yaml and schema; actually triggering it at a scene boundary in a live
+  session is a session-lifecycle feature (knowing when a scene ends) that
+  doesn't exist yet.
+
+None of these are findings from the audit — they're scope boundaries noted
+during Wave 4 to keep each task's propagation set proportionate, flagged here
+for whoever picks up live-session wiring next.
+
+Branch: `feature/audit-wave4-sync`. PR opened against `main`.

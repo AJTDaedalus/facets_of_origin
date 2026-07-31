@@ -385,6 +385,19 @@ def test_no_pre_v03_overwhelming_force_text_survives() -> None:
     assert "3 or more above the threshold" not in FACET_YAML.read_text()
 
 
+def test_first_move_matches_phb_ii4b_timing_and_scope() -> None:
+    """sync-M-1: First Move governs *this* exchange, not the next, and
+    includes the ambush/trap-negation clause (PHB II.4b:96). facet.yaml had
+    drifted to "acts first in the next exchange" with no mention of
+    ambushes or traps.
+    """
+    description = _find_technique("first_move")["description"].lower()
+    assert "this exchange" in description
+    assert "next exchange" not in description
+    assert "ambush" in description
+    assert "trap" in description
+
+
 # A pre-built Background entry in II.5: "**Name**\n\n*Title:* ...", up to the
 # next thematic break. Distinguishes the 15 real entries from the five bold
 # element-definition headers (**Title**, **Specialty**, etc.) earlier in the

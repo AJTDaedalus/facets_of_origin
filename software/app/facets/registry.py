@@ -12,6 +12,7 @@ from app.facets.schema import (
     CharacterFacetDef,
     CombatDef,
     DeathDef,
+    EquipmentDef,
     FacetFile,
     FacetTreeDef,
     HazardsDef,
@@ -44,6 +45,7 @@ class MergedRuleset:
         techniques: dict[str, FacetTreeDef] = {}
         backgrounds: dict[str, BackgroundDefinition] = {}
         distribution = None
+        major_derivation: list = []
         roll_resolution: RollResolutionDef | None = None
         spark: SparkDef | None = None
         advancement: AdvancementDef | None = None
@@ -51,6 +53,7 @@ class MergedRuleset:
         magic: MagicDef | None = None
         hazards: HazardsDef | None = None
         death: DeathDef | None = None
+        equipment: EquipmentDef | None = None
 
         for ff in self._files:
             for ma in ff.attributes.major:
@@ -61,6 +64,8 @@ class MergedRuleset:
                 ratings[r.rating] = r
             if ff.attributes.distribution:
                 distribution = ff.attributes.distribution
+            if ff.attributes.major_derivation:
+                major_derivation = ff.attributes.major_derivation
 
             for cf in ff.facets:
                 character_facets[cf.id] = cf
@@ -88,11 +93,14 @@ class MergedRuleset:
                 hazards = ff.hazards
             if ff.death:
                 death = ff.death
+            if ff.equipment:
+                equipment = ff.equipment
 
         self.major_attributes = list(major_attrs.values())
         self.minor_attributes = list(minor_attrs.values())
         self.attribute_ratings = sorted(ratings.values(), key=lambda r: r.rating)
         self.attribute_distribution = distribution
+        self.major_derivation_bands = major_derivation
         self.character_facets = list(character_facets.values())
         self.skills = list(skills.values())
         self.techniques = techniques
@@ -104,6 +112,7 @@ class MergedRuleset:
         self.magic = magic
         self.hazards = hazards
         self.death = death
+        self.equipment = equipment
 
         # Fast-lookup maps built once at merge time
         self._skill_map: dict[str, SkillDef] = {sk.id: sk for sk in self.skills}
@@ -142,6 +151,20 @@ class MergedRuleset:
     def get_minor_attribute_modifier(self, attribute_id: str, rating: int) -> int:
         r = self._rating_map.get(rating)
         return r.modifier if r else 0
+
+    def get_major_attribute_modifier(self, minor_sum: int) -> int:
+        """Modifier for a Major Attribute given the sum of its three Minor
+        Attributes (II.2, Deriving Your Major Attribute Modifiers). Read
+        from `attributes.major_derivation`, not hardcoded. Out-of-range
+        sums (outside every configured band — not reachable under the
+        standard 18-point distribution, but a homebrew ruleset could shift
+        the bands) default to +0, the same neutral fallback
+        `get_minor_attribute_modifier` uses for an unknown rating.
+        """
+        for band in self.major_derivation_bands:
+            if band.min_sum <= minor_sum <= band.max_sum:
+                return band.modifier
+        return 0
 
     def get_skill(self, skill_id: str) -> SkillDef | None:
         return self._skill_map.get(skill_id)
@@ -218,6 +241,7 @@ class MergedRuleset:
             "magic": _serialize(self.magic),
             "hazards": _serialize(self.hazards),
             "death": _serialize(self.death),
+            "equipment": _serialize(self.equipment),
         }
 
 

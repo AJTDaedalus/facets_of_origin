@@ -282,7 +282,7 @@ def choose_enemy_posture(enemy: EnemyState) -> str:
 # AI: Target selection
 # ---------------------------------------------------------------------------
 
-def choose_pc_target(pc: PCState, enemies: list[EnemyState]) -> Optional[EnemyState]:
+def choose_pc_target(pc: PCState, enemies: list[EnemyState], ruleset) -> Optional[EnemyState]:
     """PC target selection: focus fire on weakest enemy."""
     active = [e for e in enemies if not e.is_out]
     if not active:
@@ -293,8 +293,12 @@ def choose_pc_target(pc: PCState, enemies: list[EnemyState]) -> Optional[EnemySt
     if mooks:
         return mooks[0]
 
-    # Named/Boss: prioritize those with T2 conditions (close to Broken)
-    with_t2 = [e for e in active if any(c in TIER2_CONDITIONS for c in e.conditions)]
+    # Named/Boss: prioritize those with T2 conditions (close to Broken).
+    # Tier read from combat.conditions (yaml), not a hardcoded id set.
+    with_t2 = [
+        e for e in active
+        if any(combat_module.condition_tier(c, ruleset) == 2 for c in e.conditions)
+    ]
     if with_t2:
         return with_t2[0]
 
@@ -316,7 +320,7 @@ def choose_enemy_target(enemy: EnemyState, pcs: list[PCState]) -> Optional[PCSta
 # AI: Reaction and resource decisions
 # ---------------------------------------------------------------------------
 
-def should_spend_spark(pc: PCState, target: EnemyState, policy: str = "conservative") -> int:
+def should_spend_spark(pc: PCState, target: EnemyState, ruleset, policy: str = "conservative") -> int:
     """Decide how many Sparks to spend on this Strike.
 
     `policy` (WD10, BRIEF D6): selectable, default-preserving. `should_spend_spark`
@@ -342,7 +346,7 @@ def should_spend_spark(pc: PCState, target: EnemyState, policy: str = "conservat
             return 1
         if pc.endurance_current <= 2:
             return 1
-        if any(c in TIER2_CONDITIONS for c in target.conditions):
+        if any(combat_module.condition_tier(c, ruleset) == 2 for c in target.conditions):
             return 1
         if pc.sparks >= 2:
             return 1
@@ -355,8 +359,9 @@ def should_spend_spark(pc: PCState, target: EnemyState, policy: str = "conservat
     # Desperation: low Endurance
     if pc.endurance_current <= 2:
         return 1
-    # Finishing blow: target has T2 condition (close to Broken)
-    if any(c in TIER2_CONDITIONS for c in target.conditions):
+    # Finishing blow: target has T2 condition (close to Broken). Tier read
+    # from combat.conditions (yaml), not a hardcoded id set.
+    if any(combat_module.condition_tier(c, ruleset) == 2 for c in target.conditions):
         return 1
     return 0
 
@@ -440,7 +445,8 @@ def _choose_rider(target: EnemyState, ruleset) -> Optional[str]:
             return candidate
     if target.special_ignores_tier1 and target.phase_index is not None:
         return None
-    return "winded"
+    tier1_ids = [c.id for c in ruleset.combat.conditions.tier1]
+    return tier1_ids[0]
 
 
 def _pc_strike(
@@ -465,7 +471,7 @@ def _pc_strike(
         return  # Cannot attack
 
     # Determine extra dice (Sparks + Press)
-    sparks = should_spend_spark(pc, target, spark_policy)
+    sparks = should_spend_spark(pc, target, ruleset, spark_policy)
     press = should_press(pc, target)
 
     if sparks > 0 and pc.sparks >= sparks:
@@ -475,9 +481,9 @@ def _pc_strike(
         sparks = 0
 
     if press:
-        pc.endurance_current -= 1
+        pc.endurance_current -= ruleset.combat.press.endurance_cost
 
-    extra_dice = sparks + (1 if press else 0)
+    extra_dice = sparks + (ruleset.combat.press.extra_dice if press else 0)
     modifier = pc.strength_mod + pc.combat_mod
 
     # A Tier 2 rider from a prior Strike makes this one Easy (D1).
@@ -532,8 +538,9 @@ def _pc_strike(
         return
 
     # A full success may additionally impose a rider Condition
-    # (D1: "on a full success only").
-    if effective_outcome == "full_success":
+    # (D1: "on a full success only") — the eligible outcome is read from
+    # combat.enemy_durability.rider_on, not hardcoded.
+    if combat_module.can_apply_rider(effective_outcome, ruleset):
         condition = _choose_rider(target, ruleset)
         if condition is not None:
             tier2_ids = {c.id for c in ruleset.combat.conditions.tier2}
@@ -711,7 +718,7 @@ def run_combat(
                 if verbose:
                     print(f"  {pc.name} withdraws (recovering)")
                 continue
-            target = choose_pc_target(pc, enemies)
+            target = choose_pc_target(pc, enemies, ruleset)
             if target is None:
                 continue
             _pc_strike(pc, target, ruleset, verbose, spark_policy)
@@ -1476,7 +1483,7 @@ def _g3_pc_strike(pc: PCState, target: EnemyState, ruleset) -> None:
         target.is_removed = True
         return
 
-    if effective_outcome == "full_success":
+    if combat_module.can_apply_rider(effective_outcome, ruleset):
         condition = _choose_rider(target, ruleset)
         if condition is not None:
             tier2_ids = {c.id for c in ruleset.combat.conditions.tier2}
@@ -1520,7 +1527,7 @@ def run_g3_fight(posture: str, k1_enabled: bool, verbose: bool = False) -> SimRe
             break
 
         # PC strikes (Press/Spark-free — see `_g3_pc_strike`'s docstring).
-        target = choose_pc_target(pc, enemies)
+        target = choose_pc_target(pc, enemies, ruleset)
         if target is not None:
             _g3_pc_strike(pc, target, ruleset)
         active_enemies = [e for e in enemies if not e.is_out]

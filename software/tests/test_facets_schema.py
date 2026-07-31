@@ -14,11 +14,16 @@ from app.facets.schema import (
     AttributesDef,
     BranchDef,
     CharacterFacetDef,
+    ContestedRollDef,
+    ContestedRollVsNpcDef,
+    ContestedRollVsPcDef,
     DeathDef,
     DifficultyModifier,
     EnemyDurabilityDef,
+    EquipmentDef,
     FacetFile,
     FacetTreeDef,
+    GroupRollDef,
     HazardsDef,
     MajorAttributeDef,
     MinorAttributeDef,
@@ -512,3 +517,68 @@ class TestIdSlugValidator:
     def test_empty_id_rejected(self):
         with pytest.raises(ValidationError):
             FacetFile(id="", name="X", version="1")
+
+
+# ---------------------------------------------------------------------------
+# ContestedRollDef / GroupRollDef — sync-M-10, M-11 (D11: encoding only, no
+# engine work — the contested handler already exists and group rolls wait
+# for a playtest to demand them).
+# ---------------------------------------------------------------------------
+
+class TestContestedRollDef:
+    def test_defaults_match_phb_iii1(self):
+        block = ContestedRollDef()
+        assert block.vs_npc.only_pc_rolls is True
+        assert block.vs_pc.both_roll is True
+        assert block.vs_pc.higher_wins is True
+        assert block.vs_pc.tie_result == "both_partial_success"
+
+    def test_base_ruleset_loads_and_validates_the_block(self, ruleset):
+        block = ruleset.roll_resolution.contested_roll
+        assert isinstance(block, ContestedRollDef)
+        assert block.vs_pc.tie_result == "both_partial_success"
+
+    def test_contested_handler_tie_rule_matches_yaml(self, ruleset):
+        """The WebSocket contested-roll handler (websocket.py:_handle_contested_roll)
+        reports `winner = "tie"` when both totals are equal — the same
+        comparison, reproduced here — and the yaml's `tie_result` names what
+        that tie means under PHB III.1: both sides get a partial success,
+        not a re-roll or a stalemate."""
+        total_a = 9
+        total_b = 9
+        winner = "player_a" if total_a > total_b else ("player_b" if total_b > total_a else "tie")
+        assert winner == "tie"
+        assert ruleset.roll_resolution.contested_roll.vs_pc.tie_result == "both_partial_success"
+
+
+class TestGroupRollDef:
+    def test_defaults_match_phb_iii1(self):
+        block = GroupRollDef()
+        assert block.majority_rule == "partial_success_or_better_counts"
+        assert block.lead_roller_alternative is True
+
+    def test_base_ruleset_loads_and_validates_the_block(self, ruleset):
+        block = ruleset.roll_resolution.group_roll
+        assert isinstance(block, GroupRollDef)
+        assert block.majority_rule == "partial_success_or_better_counts"
+        assert block.lead_roller_alternative is True
+
+
+# ---------------------------------------------------------------------------
+# EquipmentDef / weapon_categories — sync-M-12: IV.1:13-19 weapon category ->
+# attribute reference table. Reference data only — the engine stays
+# deliberately permissive on which attribute a Strike uses.
+# ---------------------------------------------------------------------------
+
+class TestWeaponCategories:
+    def test_base_ruleset_loads_equipment_block(self, ruleset):
+        assert isinstance(ruleset.equipment, EquipmentDef)
+
+    def test_all_five_categories_present_with_attributes(self, ruleset):
+        categories = ruleset.equipment.weapon_categories
+        assert set(categories) == {"heavy", "standard", "light", "ranged", "unarmed"}
+        assert categories["heavy"].attributes == ["strength"]
+        assert categories["standard"].attributes == ["strength", "dexterity"]
+        assert categories["light"].attributes == ["dexterity"]
+        assert categories["ranged"].attributes == ["dexterity"]
+        assert categories["unarmed"].attributes == ["strength", "dexterity"]

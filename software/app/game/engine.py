@@ -91,6 +91,48 @@ class RollResult:
     request: RollRequest
 
 
+def _roll_and_resolve(
+    attr_modifier: int,
+    skill_modifier: int,
+    difficulty_label: str,
+    sparks_spent: int,
+    press: bool,
+    ruleset: MergedRuleset,
+) -> tuple[list[int], list[int], int, int, int, str, str, str]:
+    """Shared dice-rolling and outcome core: roll the ruleset's dice formula
+    (Sparks/Press add dice, lowest extras dropped), sum against the given
+    modifiers, and determine the outcome tier. `resolve_roll` and
+    `resolve_saving_throw` both call this — only where the attribute
+    modifier comes from differs (Minor Attribute + skill vs. Major
+    Attribute alone).
+
+    Returns (dice_rolled, dice_kept, dice_sum, diff_modifier, total,
+    outcome, outcome_label, outcome_desc).
+    """
+    diff_modifier = _get_difficulty_modifier(difficulty_label, ruleset)
+
+    dice_spec = DiceSpec.parse(
+        ruleset.roll_resolution.dice if ruleset.roll_resolution else "2d6"
+    )
+
+    base_dice = dice_spec.count
+    press_dice = ruleset.combat.press.extra_dice if press else 0
+    extra_dice = max(0, sparks_spent) + press_dice
+    total_dice = base_dice + extra_dice
+
+    dice_rolled = [random.randint(1, dice_spec.sides) for _ in range(total_dice)]
+    dice_sorted = sorted(dice_rolled)
+
+    # Drop the lowest `extra_dice` dice to keep exactly `base_dice`
+    dice_kept = dice_sorted[extra_dice:]
+
+    dice_sum = sum(dice_kept)
+    total = dice_sum + attr_modifier + skill_modifier + diff_modifier
+
+    outcome, outcome_label, outcome_desc = _determine_outcome(total, ruleset)
+    return dice_rolled, dice_kept, dice_sum, diff_modifier, total, outcome, outcome_label, outcome_desc
+
+
 def resolve_roll(request: RollRequest, ruleset: MergedRuleset) -> RollResult:
     """Resolve a dice roll with optional Spark spending.
 
@@ -104,38 +146,18 @@ def resolve_roll(request: RollRequest, ruleset: MergedRuleset) -> RollResult:
     Returns:
         A fully resolved RollResult.
     """
-    # --- Attribute modifier ---
     attr_modifier = ruleset.get_minor_attribute_modifier(request.attribute_id, request.attribute_rating)
 
-    # --- Skill modifier ---
     skill_modifier = 0
     if request.skill_id and request.skill_rank_id:
         skill_modifier = ruleset.get_skill_rank_modifier(request.skill_rank_id)
 
-    # --- Difficulty modifier ---
-    diff_modifier = _get_difficulty_modifier(request.difficulty_label, ruleset)
-
-    # --- Dice from ruleset ---
-    dice_spec = DiceSpec.parse(
-        ruleset.roll_resolution.dice if ruleset.roll_resolution else "2d6"
+    dice_rolled, dice_kept, dice_sum, diff_modifier, total, outcome, outcome_label, outcome_desc = (
+        _roll_and_resolve(
+            attr_modifier, skill_modifier, request.difficulty_label,
+            request.sparks_spent, request.press, ruleset,
+        )
     )
-
-    # --- Spark + Press mechanic: add dice, drop lowest ---
-    base_dice = dice_spec.count
-    extra_dice = max(0, request.sparks_spent) + (1 if request.press else 0)
-    total_dice = base_dice + extra_dice
-
-    dice_rolled = [random.randint(1, dice_spec.sides) for _ in range(total_dice)]
-    dice_sorted = sorted(dice_rolled)
-
-    # Drop the lowest `extra_dice` dice to keep exactly `base_dice`
-    dice_kept = dice_sorted[extra_dice:]
-
-    dice_sum = sum(dice_kept)
-    total = dice_sum + attr_modifier + skill_modifier + diff_modifier
-
-    # --- Outcome ---
-    outcome, outcome_label, outcome_desc = _determine_outcome(total, ruleset)
 
     return RollResult(
         dice_rolled=dice_rolled,
@@ -149,6 +171,52 @@ def resolve_roll(request: RollRequest, ruleset: MergedRuleset) -> RollResult:
         outcome_label=outcome_label,
         outcome_description=outcome_desc,
         sparks_spent=request.sparks_spent,
+        request=request,
+    )
+
+
+def resolve_saving_throw(
+    major_attribute_id: str,
+    character: "Character",  # type: ignore[name-defined]
+    ruleset: MergedRuleset,
+    difficulty_label: str = "Standard",
+    sparks_spent: int = 0,
+) -> RollResult:
+    """Resolve a saving throw (III.1:84-99): 2d6 + the Major Attribute
+    modifier, on the standard three-tier outcome table. No skill applies.
+
+    The modifier comes from `Character.get_major_attribute_modifier`
+    (sync-M-8 part 1) — not a second implementation of the II.2 derivation.
+    """
+    attr_modifier = character.get_major_attribute_modifier(major_attribute_id, ruleset)
+
+    dice_rolled, dice_kept, dice_sum, diff_modifier, total, outcome, outcome_label, outcome_desc = (
+        _roll_and_resolve(attr_modifier, 0, difficulty_label, sparks_spent, False, ruleset)
+    )
+
+    request = RollRequest(
+        attribute_id=major_attribute_id,
+        attribute_rating=0,
+        skill_id=None,
+        skill_rank_id=None,
+        difficulty_label=difficulty_label,
+        sparks_spent=sparks_spent,
+        press=False,
+        description="Saving throw",
+    )
+
+    return RollResult(
+        dice_rolled=dice_rolled,
+        dice_kept=dice_kept,
+        dice_sum=dice_sum,
+        attribute_modifier=attr_modifier,
+        skill_modifier=0,
+        difficulty_modifier=diff_modifier,
+        total=total,
+        outcome=outcome,
+        outcome_label=outcome_label,
+        outcome_description=outcome_desc,
+        sparks_spent=sparks_spent,
         request=request,
     )
 
@@ -213,8 +281,18 @@ def resolve_magic_roll(
     scope_to_key = {"minor": "minor", "significant": "significant", "major": "major"}
     difficulty_label: str = scope_difficulties.get(scope_to_key.get(scope, scope), "Standard")
 
+    # D8 (II.3, Reaching Significant Early): a pre-Technique caster may spend
+    # a Spark to attempt one effect at spark_rules.pre_technique_push's
+    # permitted scope, at the domain's *normal* difficulty for that scope —
+    # the Spark buys the scope, not a discount on the roll (no difficulty
+    # penalty is applied below, and no extra dice are added).
+    pre_technique_push = (
+        spark_use == "pre_technique_push"
+        and scope == ruleset.magic.spark_rules.pre_technique_push.permitted_scope
+    )
+
     # Pre-Technique restriction: scope ceiling and difficulty penalty
-    if not character.magic_technique_active:
+    if not character.magic_technique_active and not pre_technique_push:
         scope_limit = ruleset.magic.pre_technique_scope_limit if ruleset.magic else "minor"
         penalty_steps = ruleset.magic.pre_technique_difficulty_penalty if ruleset.magic else 1
         if scope_limit == "minor" and scope != "minor":
@@ -225,12 +303,17 @@ def resolve_magic_roll(
         for _ in range(penalty_steps):
             difficulty_label = _step_difficulty_harder(difficulty_label, ruleset)
 
-    # Spark use
+    # Spark use — all three rules read from ruleset.magic.spark_rules, not
+    # hardcoded domain-type/scope literals.
     sparks_spent = 0
-    if spark_use == "ease_focused_major" and domain_def.type == "focused" and scope == "major":
+    ease_rule = ruleset.magic.spark_rules.ease_focused_major
+    push_rule = ruleset.magic.spark_rules.push_scope
+    if (spark_use == "ease_focused_major"
+            and domain_def.type == ease_rule.domain_type
+            and scope == ease_rule.scope):
         difficulty_label = _step_difficulty_easier(difficulty_label, ruleset)
     elif spark_use == "push_scope":
-        if domain_def.type == "broad":
+        if domain_def.type == push_rule.refused_domain_type:
             raise ValueError(
                 "Broad (Prismatic) domains cannot be pushed beyond their scope ceiling — "
                 "Very Hard is the maximum regardless of Sparks."
@@ -239,6 +322,9 @@ def resolve_magic_roll(
         difficulty_label = _step_difficulty_harder(difficulty_label, ruleset)
     elif spark_use == "improve_roll":
         sparks_spent = 1  # consumed by caller; here we model the dice bonus
+    # pre_technique_push needs no further action here: the scope ceiling was
+    # already bypassed above, and the difficulty stays at its normal value —
+    # no dice bonus, no difficulty shift.
 
     # Secondary domain penalty: one difficulty step harder (Soul Communion T3 rule)
     is_secondary = (

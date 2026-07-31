@@ -36,11 +36,23 @@ class AttributeDistribution(BaseModel):
     max_per_attribute: int
 
 
+class MajorDerivationBandDef(BaseModel):
+    """One band of the Major Attribute modifier table (II.2, Deriving Your
+    Major Attribute Modifiers): a sum of the three Minor Attributes under a
+    Major maps to a modifier.
+    """
+
+    min_sum: int
+    max_sum: int
+    modifier: int
+
+
 class AttributesDef(BaseModel):
     major: list[MajorAttributeDef] = Field(default_factory=list)
     minor: list[MinorAttributeDef] = Field(default_factory=list)
     ratings: list[AttributeRating] = Field(default_factory=list)
     distribution: AttributeDistribution | None = None
+    major_derivation: list[MajorDerivationBandDef] = Field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------
@@ -165,6 +177,50 @@ class OutcomeTierDef(BaseModel):
     description: str
 
 
+class SavingThrowDef(BaseModel):
+    """Saving throws (III.1:84-99): 2d6 + the Major Attribute modifier,
+    resolved on the same three-tier table as any other roll. No skill
+    applies — called for when something happens *to* the character, not
+    something they chose to attempt.
+    """
+
+    modifier_source: str = "major_attribute"
+    default_difficulty: str = "Standard"
+
+
+class ContestedRollVsNpcDef(BaseModel):
+    """Contested roll against an NPC (III.1): only the PC rolls; the NPC's
+    relevant attribute informs the difficulty the MM sets. NPCs never roll
+    dice."""
+
+    only_pc_rolls: bool = True
+
+
+class ContestedRollVsPcDef(BaseModel):
+    """Contested roll between two player characters (III.1): both roll, the
+    higher total wins; on a tie, both achieve partial success."""
+
+    both_roll: bool = True
+    higher_wins: bool = True
+    tie_result: str = "both_partial_success"
+
+
+class ContestedRollDef(BaseModel):
+    vs_npc: ContestedRollVsNpcDef = Field(default_factory=ContestedRollVsNpcDef)
+    vs_pc: ContestedRollVsPcDef = Field(default_factory=ContestedRollVsPcDef)
+
+
+class GroupRollDef(BaseModel):
+    """Group roll (III.1): the whole party attempts a task together. Majority
+    success (partial success or better counts) succeeds the group. The lead
+    roller + Support (III.3) is the stated alternative for tasks where one
+    character is clearly more capable.
+    """
+
+    majority_rule: str = "partial_success_or_better_counts"
+    lead_roller_alternative: bool = True
+
+
 class RollResolutionDef(BaseModel):
     dice: str = "2d6"
     modifier_source: str = "minor_attribute"
@@ -172,6 +228,9 @@ class RollResolutionDef(BaseModel):
     outcomes: OutcomesDef
     difficulty_modifiers: list[DifficultyModifier] = Field(default_factory=list)
     outcome_tiers: list[OutcomeTierDef] = Field(default_factory=list)
+    saving_throw: SavingThrowDef = Field(default_factory=SavingThrowDef)
+    contested_roll: ContestedRollDef = Field(default_factory=ContestedRollDef)
+    group_roll: GroupRollDef = Field(default_factory=GroupRollDef)
 
 
 # ---------------------------------------------------------------------------
@@ -273,8 +332,14 @@ class CombatConditionDef(BaseModel):
 
     Fields:
         id: Slug identifier (e.g. "winded", "staggered", "broken").
-        clears: When this condition is removed:
+        clears: When this condition is removed *in combat*:
                 "end_of_exchange" | "treated" | "end_of_scene".
+        out_of_combat_clears: When this condition is removed *outside*
+                combat, where no exchange structure exists (III.2:69) —
+                Tier 1 Conditions clear at end of scene rather than end of
+                exchange. `None` for conditions whose `clears` value is
+                already scene/treated-based and doesn't change outside
+                combat.
         description: Human-readable effect summary.
         offense_modifier: Modifier this condition applies to the holder's
                 offensive rolls. Staggered is −1 ("−1 to offensive rolls",
@@ -286,6 +351,7 @@ class CombatConditionDef(BaseModel):
 
     id: str
     clears: str
+    out_of_combat_clears: str | None = None
     description: str
     offense_modifier: int = 0
 
@@ -308,6 +374,19 @@ class EnduranceDef(BaseModel):
     recovery_withdrawn: int = 2
 
 
+class PressDef(BaseModel):
+    """Press: spend Endurance before a Strike to add dice and drop the lowest (PHB III.3).
+
+    Fields:
+        endurance_cost: Endurance spent to Press.
+        extra_dice: Dice added to the roll (before dropping the lowest), same
+                    effect as a Spark, stacks with Sparks.
+    """
+
+    endurance_cost: int = 1
+    extra_dice: int = 1
+
+
 class ArmorEntryDef(BaseModel):
     """One armor tier's per-scene Condition-downgrade budget for player
     characters (D2).
@@ -327,12 +406,20 @@ class ArmorEntryDef(BaseModel):
 
 
 class ArmorDef(BaseModel):
-    """PC armor downgrade rules keyed by armor type ("light", "heavy")."""
+    """PC armor downgrade rules keyed by armor type ("light", "heavy").
+
+    Fields:
+        reaction_downgrade_tiers: Tiers a successful partial reaction
+                (Dodge/Parry 7-9) downgrades an incoming Condition by.
+                Armor and reaction downgrades do not stack — apply the
+                greater reduction only (III.3).
+    """
 
     light: ArmorEntryDef = Field(default_factory=ArmorEntryDef)
     heavy: ArmorEntryDef = Field(
         default_factory=lambda: ArmorEntryDef(downgrades_per_scene=4)
     )
+    reaction_downgrade_tiers: int = 1
 
 
 class StrikeDepletionDef(BaseModel):
@@ -352,6 +439,79 @@ class ArmorResolveBonusDef(BaseModel):
     heavy: int = 2
 
 
+class EnemyIncomingTierDef(BaseModel):
+    """Condition tier a PC takes from an enemy attack, keyed by enemy type
+    (III.3, Incoming Condition Tier): Mooks are individually weak (Tier 1);
+    Named/Boss attacks carry a full Strike's weight (Tier 2).
+    """
+
+    mook: int = 1
+    named: int = 2
+    boss: int = 2
+
+
+class EnemyPostureReactionShiftDef(BaseModel):
+    """How an enemy's declared Posture shifts the difficulty of a PC's
+    reaction against its attack (III.3, Enemy Posture and Reaction
+    Difficulty). Values are "harder" | "easier" | "none".
+    """
+
+    aggressive: str = "harder"
+    measured: str = "none"
+    defensive: str = "easier"
+
+
+class ManeuverOutcomesDef(BaseModel):
+    """Maneuver's effect on rolls against the target, by outcome tier
+    (III.3): a 10+ makes rolls against the target Easy until the situation
+    changes; a 7-9 works but leaves the target at the base difficulty; a 6-
+    backfires (no effect on the target).
+    """
+
+    full_success: str = "easy"
+    partial_success: str = "standard"
+    failure: str = "backfire"
+
+
+class SupportDef(BaseModel):
+    """Support grants an ally a bonus to their very next roll only, the
+    supporting character's choice of mode; bonuses from multiple Support
+    actions do not stack — only the most recent applies (III.3).
+    """
+
+    modes: list[str] = Field(default_factory=lambda: ["add_die", "ease_difficulty"])
+    duration: str = "next_roll_only"
+    stacking: str = "most_recent_only"
+
+
+class CombatActionsDef(BaseModel):
+    """Maneuver and Support (III.3), the two non-Strike offensive/aid
+    actions."""
+
+    maneuver: ManeuverOutcomesDef = Field(default_factory=ManeuverOutcomesDef)
+    support: SupportDef = Field(default_factory=SupportDef)
+
+
+class EnemyAttacksDef(BaseModel):
+    """Rules for how an enemy's type and Posture shape a PC's reaction
+    against its attack (III.3, Enemy Attacks). NPCs never roll dice — the PC
+    rolls the reaction; these fields set what that reaction is up against.
+
+    Fields:
+        incoming_tier: Condition tier by enemy type.
+        posture_reaction_shift: Reaction-difficulty shift by enemy Posture.
+        mook_declares_posture: Mooks do not declare Postures (the MM sets
+                their attack difficulty by situation instead) — always False
+                for the base ruleset.
+    """
+
+    incoming_tier: EnemyIncomingTierDef = Field(default_factory=EnemyIncomingTierDef)
+    posture_reaction_shift: EnemyPostureReactionShiftDef = Field(
+        default_factory=EnemyPostureReactionShiftDef
+    )
+    mook_declares_posture: bool = False
+
+
 class EnemyDurabilityDef(BaseModel):
     """Enemy Resolve pool rules (D1): depletion, armor bonus, and Mook removal.
 
@@ -360,12 +520,20 @@ class EnemyDurabilityDef(BaseModel):
         armor_resolve_bonus: Flat Resolve granted by enemy armor.
         mook_removed_on: Outcome tier that removes an unarmored Mook.
         armored_mook_removed_on: Outcome tier that removes an armored Mook.
+        rider_on: Outcome tier that may additionally hang a rider Condition
+                  on the enemy, on top of Resolve depletion (III.3 — "on a
+                  full success only").
+        rider_tiers: Condition tiers eligible as a rider (Tier 1 or Tier 2,
+                     attacker's choice). Riders never escalate to Broken —
+                     Resolve is what defeats an enemy, not Conditions.
     """
 
     strike_depletion: StrikeDepletionDef = Field(default_factory=StrikeDepletionDef)
     armor_resolve_bonus: ArmorResolveBonusDef = Field(default_factory=ArmorResolveBonusDef)
     mook_removed_on: str = "partial_success"
     armored_mook_removed_on: str = "full_success"
+    rider_on: str = "full_success"
+    rider_tiers: list[int] = Field(default_factory=lambda: [1, 2])
 
 
 class CombatDef(BaseModel):
@@ -380,10 +548,12 @@ class CombatDef(BaseModel):
     endurance: EnduranceDef = Field(default_factory=EnduranceDef)
     postures: dict[str, Any] = Field(default_factory=dict)
     reactions: dict[str, Any] = Field(default_factory=dict)
-    press: dict[str, Any] = Field(default_factory=dict)
+    press: PressDef = Field(default_factory=PressDef)
     conditions: CombatConditionsTierDef = Field(default_factory=CombatConditionsTierDef)
     armor: ArmorDef = Field(default_factory=ArmorDef)
     enemy_durability: EnemyDurabilityDef = Field(default_factory=EnemyDurabilityDef)
+    enemy_attacks: EnemyAttacksDef = Field(default_factory=EnemyAttacksDef)
+    actions: CombatActionsDef = Field(default_factory=CombatActionsDef)
     strike_outcomes: dict[str, Any] = Field(default_factory=dict)
     endurance_floor_rule: str = ""
     mook_rule: str = ""
@@ -419,6 +589,26 @@ class ThreatClockDef(BaseModel):
 
 class HazardsDef(BaseModel):
     threat_clock: ThreatClockDef = Field(default_factory=ThreatClockDef)
+
+
+class WeaponCategoryDef(BaseModel):
+    """One weapon category's attribute options for a Strike (IV.1:13-19).
+
+    Fields:
+        attributes: One or two Minor Attribute IDs; two means the player's
+                    choice ("Standard or Dexterity"). Reference data only —
+                    the engine stays deliberately permissive on which
+                    attribute a Strike uses (IV.1: "The engine stays
+                    permissive on Strike attributes").
+    """
+
+    attributes: list[str]
+
+
+class EquipmentDef(BaseModel):
+    """Equipment reference data (PHB IV.1)."""
+
+    weapon_categories: dict[str, WeaponCategoryDef] = Field(default_factory=dict)
 
 
 class DeathDef(BaseModel):
@@ -461,6 +651,41 @@ class MagicDomainDef(BaseModel):
     requires_tier3: bool = False
 
 
+class SparkEaseFocusedMajorDef(BaseModel):
+    """Focused domains may spend a Spark to shift a Major effect one
+    difficulty step easier (II.3, Sparks and Magic)."""
+
+    domain_type: str = "focused"
+    scope: str = "major"
+
+
+class SparkPushScopeDef(BaseModel):
+    """Spend a Spark to attempt an effect one scope tier beyond the domain's
+    natural ceiling, at that higher difficulty. Broad (Prismatic) domains
+    cannot be pushed beyond their ceiling through Sparks or any other means
+    (II.3, Sparks and Magic)."""
+
+    refused_domain_type: str = "broad"
+
+
+class SparkPreTechniquePushDef(BaseModel):
+    """D8: a pre-Technique caster (capped at Minor scope) may spend a Spark
+    to attempt one effect at `permitted_scope`, at the domain's *normal*
+    difficulty for that scope — the Spark buys the scope, not a discount
+    on the roll. Each Spark buys one such effect; it is not a permanent
+    unlock (II.3, Reaching Significant Early)."""
+
+    permitted_scope: str = "significant"
+
+
+class MagicSparkRulesDef(BaseModel):
+    """The three Spark-magic rules (II.3, Sparks and Magic)."""
+
+    ease_focused_major: SparkEaseFocusedMajorDef = Field(default_factory=SparkEaseFocusedMajorDef)
+    push_scope: SparkPushScopeDef = Field(default_factory=SparkPushScopeDef)
+    pre_technique_push: SparkPreTechniquePushDef = Field(default_factory=SparkPreTechniquePushDef)
+
+
 class MagicDef(BaseModel):
     """Full magic configuration for a Facet module (PHB II.3).
 
@@ -473,6 +698,8 @@ class MagicDef(BaseModel):
                                           Default 0 (scope restriction alone is the penalty).
         soul_domains: Domains available to Soul Facet characters.
         mind_domains: Domains available to Mind Facet characters.
+        spark_rules: The three Spark-magic rules (ease Major, push scope,
+                     D8's pre-Technique push).
     """
 
     traditions: dict[str, Any] = Field(default_factory=dict)
@@ -482,6 +709,7 @@ class MagicDef(BaseModel):
     pre_technique_difficulty_penalty: int = 0       # no additional difficulty penalty pre-Technique
     soul_domains: list[MagicDomainDef] = Field(default_factory=list)
     mind_domains: list[MagicDomainDef] = Field(default_factory=list)
+    spark_rules: MagicSparkRulesDef = Field(default_factory=MagicSparkRulesDef)
 
     @property
     def all_domains(self) -> list[MagicDomainDef]:
@@ -518,6 +746,7 @@ class FacetFile(BaseModel):
     magic: MagicDef | None = None
     hazards: HazardsDef | None = None
     death: DeathDef | None = None
+    equipment: EquipmentDef | None = None
 
     @field_validator("id")
     @classmethod

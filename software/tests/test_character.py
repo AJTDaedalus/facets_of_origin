@@ -158,6 +158,33 @@ class TestAttributeModifiers:
 
 
 # ---------------------------------------------------------------------------
+# Major Attribute modifier derivation — sync-M-8 part 1: II.2, Deriving Your
+# Major Attribute Modifiers (sum of three Minors -> a modifier band).
+# ---------------------------------------------------------------------------
+
+class TestMajorAttributeModifierDerivation:
+    """`valid_attributes` (str3 dex3 con2, int2 wis2 kno2, spi1 luck2 cha1)
+    covers all three bands: Body sums to 8 (the 8-9 -> +1 band), Mind sums
+    to 6 (5-7 -> +0), Soul sums to 4 (3-4 -> -1)."""
+
+    def test_body_sum_eight_is_plus_one(self, body_character, ruleset):
+        assert body_character.get_major_attribute_modifier("body", ruleset) == 1
+
+    def test_mind_sum_six_is_plus_zero(self, body_character, ruleset):
+        assert body_character.get_major_attribute_modifier("mind", ruleset) == 0
+
+    def test_soul_sum_four_is_minus_one(self, body_character, ruleset):
+        assert body_character.get_major_attribute_modifier("soul", ruleset) == -1
+
+    def test_out_of_range_sum_defaults_to_zero(self, ruleset):
+        """Not reachable through the standard 1-3-per-Minor distribution
+        (sums always fall in 3-9), but a homebrew ruleset could shift the
+        bands — an unmatched sum must not raise, it defaults to +0."""
+        assert ruleset.get_major_attribute_modifier(0) == 0
+        assert ruleset.get_major_attribute_modifier(100) == 0
+
+
+# ---------------------------------------------------------------------------
 # Spark spending
 # ---------------------------------------------------------------------------
 
@@ -440,6 +467,39 @@ class TestPerFacetLevelTracking:
         assert ok, msg
         assert "second_domain" in char.techniques
         assert char.secondary_magic_domain == "storm"
+
+    # L-7 (docs/RESEARCH_completeness_audit.md, II.3:244-246): prismatic
+    # domains are never available as a starting domain — only via Ascendant
+    # Domain (Tier 3).
+    def test_starting_domain_technique_rejects_prismatic_choice(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="soul",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.technique_picks_available = 1
+        ok, msg = char.select_technique("spiritual_domain", ruleset, choice="fate")
+        assert not ok
+        assert "prismatic" in msg.lower() or "Ascendant" in msg
+        assert char.magic_domain is None
+        assert "spiritual_domain" not in char.techniques
+
+    # L-7 (II.3:244-246): "A character may hold at most one domain per Facet"
+    # via the cross-training route. Only one magic-granting Tier 1 Technique
+    # exists per Facet, so this is structurally unreachable through the
+    # public API today — exercised directly on the guard instead.
+    def test_domain_guard_refuses_a_third_facet_domain(self, ruleset, valid_attributes):
+        char, _ = create_default_character(
+            name="X", player_name="P", primary_facet="soul",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        char.magic_domain = "resonance"
+        char.cross_facet_domain = "inscription"
+        tech_def = ruleset.get_technique("spiritual_domain")
+        ok, msg = char._validate_domain_choice(
+            tech_def, "storm", ruleset, "spiritual_domain"
+        )
+        assert not ok
+        assert "each Facet" in msg
 
     def test_select_technique_ascendant_domain_refused_without_domain(self, ruleset, valid_attributes):
         """Same guard, likewise for Ascendant Domain."""

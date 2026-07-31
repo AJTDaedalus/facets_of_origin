@@ -12,7 +12,9 @@ from jose import JWTError
 
 from app.auth.tokens import decode_token
 from app.game import combat as combat_module
-from app.game.engine import RollRequest, resolve_roll, resolve_magic_roll, roll_result_to_dict
+from app.game.engine import (
+    RollRequest, resolve_roll, resolve_magic_roll, resolve_saving_throw, roll_result_to_dict,
+)
 from app.game.session import ThreatClock, session_store
 
 logger = logging.getLogger(__name__)
@@ -210,6 +212,8 @@ async def _dispatch(
     # --- Magic events ---
     elif event_type == "cast":
         await _handle_cast(websocket, msg, session, session_id, identity)
+    elif event_type == "saving_throw":
+        await _handle_saving_throw(websocket, msg, session, session_id, identity)
     # --- Contested roll ---
     elif event_type == "contested_roll" and is_mm:
         await _handle_contested_roll(websocket, msg, session, session_id)
@@ -525,10 +529,11 @@ async def _handle_strike(
     difficulty = str(msg.get("difficulty", "Standard"))
     target_name = str(msg.get("target", ""))
 
-    # Press costs 1 Endurance
+    # PHB III.3: Press costs Endurance (facet.yaml combat.press.endurance_cost)
     if press:
-        if character.endurance_current is not None and character.endurance_current > 0:
-            character.endurance_current -= 1
+        press_cost = session.ruleset.combat.press.endurance_cost
+        if character.endurance_current is not None and character.endurance_current >= press_cost:
+            character.endurance_current -= press_cost
         else:
             await manager.send_to(websocket, {"type": "error", "message": "No Endurance to Press."})
             return
@@ -627,11 +632,22 @@ async def _handle_react(
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown reaction '{reaction}'."})
         return
 
+    # PHB III.3:219 — Intercept is capped at one per exchange, unlike other
+    # reaction types.
+    if reaction == "intercept" and character.intercepts_this_exchange >= 1:
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": "Already Intercepted an action this exchange.",
+        })
+        return
+
     # Compute Endurance cost (adjust for posture). K1 (BRIEF D8): the
     # Aggressive surcharge applies only to the first reaction of the
     # exchange — see `reactions_this_exchange`'s docstring on Character.
     is_first_reaction = character.reactions_this_exchange == 0
     character.reactions_this_exchange += 1
+    if reaction == "intercept":
+        character.intercepts_this_exchange += 1
     cost = combat_module.reaction_cost(
         reaction, character.posture or "measured", session.ruleset, is_first_reaction,
     )
@@ -799,6 +815,8 @@ async def _handle_end_exchange(session, session_id: str) -> None:
 
         # K1 (BRIEF D8): reset the per-exchange reaction count.
         character.reactions_this_exchange = 0
+        # III.3:219 — Intercept's once-per-exchange cap resets too.
+        character.intercepts_this_exchange = 0
 
         # Withdrawn endurance recovery (only if not striking, enforced by declare_posture)
         if character.posture == "withdrawn":
@@ -830,6 +848,48 @@ async def _handle_combat_end(session, session_id: str) -> None:
 # Magic handler
 # ---------------------------------------------------------------------------
 
+async def _handle_saving_throw(
+    websocket, msg: dict, session, session_id: str, identity: str,
+) -> None:
+    """Character makes a saving throw (III.1:84-99): 2d6 + the Major
+    Attribute modifier. Something is happening *to* the character, not
+    something they chose to attempt."""
+    player_name = identity
+    character = session.characters.get(player_name)
+    if not character:
+        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
+        return
+
+    major_attribute_id = str(msg.get("major_attribute_id", ""))
+    known_majors = {ma.id for ma in session.ruleset.major_attributes}
+    if major_attribute_id not in known_majors:
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": f"Unknown Major Attribute '{major_attribute_id}'.",
+        })
+        return
+
+    difficulty = str(msg.get("difficulty", "Standard"))
+    sparks_requested = int(msg.get("sparks_spent", 0))
+    sparks_to_spend = _spend_sparks(character, sparks_requested)
+
+    result = resolve_saving_throw(
+        major_attribute_id, character, session.ruleset,
+        difficulty_label=difficulty, sparks_spent=sparks_to_spend,
+    )
+    result_dict = roll_result_to_dict(result)
+    session.record_roll(player_name, result_dict)
+
+    await manager.broadcast(session_id, {
+        "type": "saving_throw_result",
+        "player": player_name,
+        "major_attribute_id": major_attribute_id,
+        "roll": result_dict,
+        "outcome": result_dict["outcome"],
+        "sparks_remaining": character.sparks,
+    })
+
+
 async def _handle_cast(
     websocket, msg: dict, session, session_id: str, identity: str,
 ) -> None:
@@ -854,7 +914,7 @@ async def _handle_cast(
         return
 
     # Spend Spark if needed
-    if spark_use in ("improve_roll", "ease_focused_major", "push_scope"):
+    if spark_use in ("improve_roll", "ease_focused_major", "push_scope", "pre_technique_push"):
         if not character.spend_spark():
             await manager.send_to(websocket, {"type": "error", "message": "No Sparks remaining."})
             return
@@ -906,9 +966,9 @@ async def _handle_support(
         return
 
     target_player = str(msg.get("target", ""))
-    bonus_type = str(msg.get("bonus_type", "add_die"))  # "add_die" or "ease_difficulty"
+    bonus_type = str(msg.get("bonus_type", "add_die"))  # PHB III.3: the supporting character's choice
 
-    if bonus_type not in ("add_die", "ease_difficulty"):
+    if bonus_type not in combat_module.support_bonus_modes(session.ruleset):
         await manager.send_to(websocket, {"type": "error", "message": f"Invalid bonus_type '{bonus_type}'."})
         return
 

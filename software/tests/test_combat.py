@@ -378,6 +378,17 @@ class TestReactionCost:
     def test_defensive_unaffected_by_is_first_reaction(self, ruleset):
         assert combat.reaction_cost("dodge", "defensive", ruleset, is_first_reaction=False) == 0
 
+    # L-4 (docs/RESEARCH_completeness_audit.md): Defensive's "-1 Endurance
+    # cost per reaction (min 0)" floor is an explicit yaml field
+    # (postures.defensive.min_reaction_cost), not a hardcoded literal.
+    def test_defensive_floor_reads_from_yaml_not_a_literal(self, ruleset):
+        original = ruleset.combat.postures["defensive"].get("min_reaction_cost", 0)
+        try:
+            ruleset.combat.postures["defensive"]["min_reaction_cost"] = 3
+            assert combat.reaction_cost("dodge", "defensive", ruleset) == 3
+        finally:
+            ruleset.combat.postures["defensive"]["min_reaction_cost"] = original
+
 
 class TestWithdrawnRecoveryAmount:
     def test_matches_ruleset_value(self, ruleset):
@@ -489,6 +500,98 @@ class TestEnemyArmorResolveBonus:
 
 
 # ---------------------------------------------------------------------------
+# enemy_incoming_condition_tier() / enemy_posture_reaction_difficulty() —
+# sync-M-6: III.3 Enemy Attacks (incoming tier by enemy type, Posture shifts
+# PC reaction difficulty, Mooks never declare Posture).
+# ---------------------------------------------------------------------------
+
+class TestEnemyIncomingConditionTier:
+    def test_mook_incoming_tier_from_yaml(self, ruleset):
+        assert combat.enemy_incoming_condition_tier("mook", ruleset) == 1
+
+    def test_named_incoming_tier_from_yaml(self, ruleset):
+        assert combat.enemy_incoming_condition_tier("named", ruleset) == 2
+
+    def test_boss_incoming_tier_from_yaml(self, ruleset):
+        assert combat.enemy_incoming_condition_tier("boss", ruleset) == 2
+
+    def test_modified_yaml_tier_changes_the_result(self, ruleset):
+        original = ruleset.combat.enemy_attacks.incoming_tier.named
+        try:
+            ruleset.combat.enemy_attacks.incoming_tier.named = 3
+            assert combat.enemy_incoming_condition_tier("named", ruleset) == 3
+        finally:
+            ruleset.combat.enemy_attacks.incoming_tier.named = original
+
+
+class TestEnemyPostureReactionDifficulty:
+    def test_aggressive_named_shifts_one_step_harder(self, ruleset):
+        result = combat.enemy_posture_reaction_difficulty("Standard", "named", "aggressive", ruleset)
+        assert result == "Hard"
+
+    def test_defensive_boss_shifts_one_step_easier(self, ruleset):
+        result = combat.enemy_posture_reaction_difficulty("Standard", "boss", "defensive", ruleset)
+        assert result == "Easy"
+
+    def test_measured_named_is_unchanged(self, ruleset):
+        result = combat.enemy_posture_reaction_difficulty("Standard", "named", "measured", ruleset)
+        assert result == "Standard"
+
+    def test_mook_posture_is_ignored_even_if_aggressive(self, ruleset):
+        """Mooks do not declare Postures (III.3) — passing one anyway must
+        not shift the difficulty; the MM sets Mook difficulty by situation."""
+        result = combat.enemy_posture_reaction_difficulty("Standard", "mook", "aggressive", ruleset)
+        assert result == "Standard"
+
+
+# ---------------------------------------------------------------------------
+# maneuver_target_difficulty() / support_bonus_modes() — sync-M-7: III.3
+# Maneuver (10+/7-9/6- effect on rolls against the target) and Support (the
+# two non-stacking next-roll-only bonus modes).
+# ---------------------------------------------------------------------------
+
+class TestManeuverTargetDifficulty:
+    def test_full_success_makes_target_easy(self, ruleset):
+        assert combat.maneuver_target_difficulty("full_success", "Standard", ruleset) == "Easy"
+
+    def test_partial_success_leaves_base_difficulty(self, ruleset):
+        assert combat.maneuver_target_difficulty("partial_success", "Standard", ruleset) == "Standard"
+
+    def test_failure_backfires_no_effect_on_target(self, ruleset):
+        assert combat.maneuver_target_difficulty("failure", "Standard", ruleset) == "Standard"
+
+    def test_modified_yaml_outcome_changes_the_effect(self, ruleset):
+        original = ruleset.combat.actions.maneuver.partial_success
+        try:
+            ruleset.combat.actions.maneuver.partial_success = "easy"
+            assert combat.maneuver_target_difficulty("partial_success", "Standard", ruleset) == "Easy"
+        finally:
+            ruleset.combat.actions.maneuver.partial_success = original
+
+
+class TestSupportBonusModes:
+    def test_support_has_exactly_two_modes_from_yaml(self, ruleset):
+        assert combat.support_bonus_modes(ruleset) == ["add_die", "ease_difficulty"]
+
+    def test_modified_yaml_modes_changes_accepted_set(self, ruleset):
+        original = ruleset.combat.actions.support.modes
+        try:
+            ruleset.combat.actions.support.modes = ["add_die"]
+            assert combat.support_bonus_modes(ruleset) == ["add_die"]
+        finally:
+            ruleset.combat.actions.support.modes = original
+
+    def test_support_is_next_roll_only_and_non_stacking_per_yaml(self, ruleset):
+        """The duration and non-stacking rule ('only the most recent
+        applies') are encoded as data. No live 'pending bonus' tracking
+        exists in the session yet to test the replacement behaviorally —
+        see the LOG for this task; that's a larger feature than moving a
+        literal into data."""
+        assert ruleset.combat.actions.support.duration == "next_roll_only"
+        assert ruleset.combat.actions.support.stacking == "most_recent_only"
+
+
+# ---------------------------------------------------------------------------
 # mook_removed() — D1 Mook removal thresholds (A4)
 # ---------------------------------------------------------------------------
 
@@ -573,6 +676,64 @@ class TestTargetStrikeDifficulty:
 
 
 # ---------------------------------------------------------------------------
+# can_apply_rider() / rider_tier_eligible() — sync-M-3: the "10+ may hang a
+# Tier 1 or Tier 2 rider" rule read from combat.enemy_durability, not
+# hardcoded in the simulator (which is what combat_sim.py did before this).
+# ---------------------------------------------------------------------------
+
+class TestRiderEligibility:
+    def test_can_apply_rider_reads_yaml_outcome(self, ruleset):
+        assert combat.can_apply_rider("full_success", ruleset) is True
+        assert combat.can_apply_rider("partial_success", ruleset) is False
+        assert combat.can_apply_rider("failure", ruleset) is False
+
+    def test_modified_yaml_rider_outcome_changes_eligibility(self, ruleset):
+        # `ruleset` is session-scoped (shared across the whole test run) —
+        # restore the original value so this mutation doesn't leak into
+        # other tests.
+        original = ruleset.combat.enemy_durability.rider_on
+        try:
+            ruleset.combat.enemy_durability.rider_on = "partial_success"
+            assert combat.can_apply_rider("partial_success", ruleset) is True
+            assert combat.can_apply_rider("full_success", ruleset) is False
+        finally:
+            ruleset.combat.enemy_durability.rider_on = original
+
+    def test_rider_tier_eligible_reads_yaml_tiers(self, ruleset):
+        assert combat.rider_tier_eligible(1, ruleset) is True
+        assert combat.rider_tier_eligible(2, ruleset) is True
+        assert combat.rider_tier_eligible(3, ruleset) is False
+
+    def test_modified_yaml_rider_tiers_narrows_eligibility(self, ruleset):
+        original = ruleset.combat.enemy_durability.rider_tiers
+        try:
+            ruleset.combat.enemy_durability.rider_tiers = [2]
+            assert combat.rider_tier_eligible(1, ruleset) is False
+            assert combat.rider_tier_eligible(2, ruleset) is True
+        finally:
+            ruleset.combat.enemy_durability.rider_tiers = original
+
+    def test_rider_never_reduces_resolve(self, ruleset):
+        """A rider is a Condition-list mutation only — it must never touch
+        the enemy's Resolve pool. Resolve, not Conditions, is what defeats
+        an enemy (D1)."""
+        resolve_current = 5
+        damage = combat.apply_resolve_damage(resolve_current, "full_success", ruleset)
+        assert damage.resolve_current == 3  # depleted by the Strike itself
+        assert damage.defeated is False
+
+        conditions: list[str] = []
+        assert combat.can_apply_rider("full_success", ruleset) is True
+        assert combat.rider_tier_eligible(2, ruleset) is True
+        result = combat.apply_condition(conditions, "staggered", 2, ruleset, is_rider=True)
+
+        # The rider changed the Condition list; Resolve is untouched by it.
+        assert result.applied is True
+        assert conditions == ["staggered"]
+        assert damage.resolve_current == 3
+
+
+# ---------------------------------------------------------------------------
 # offense_modifier() — posture + Condition penalties, shared by both callers
 #
 # The Staggered −1 ("−1 to offensive rolls", PHB III.3) previously lived as a
@@ -641,6 +802,21 @@ class TestResolveIncomingCondition:
         )
         assert result.tier == 1
         assert result.armor_spent is False
+
+    def test_reaction_downgrade_amount_reads_from_yaml(self, ruleset):
+        """sync-M-5: the reaction's tier reduction was a hardcoded `tier - 1`
+        in resolve_incoming_condition; it now reads
+        combat.armor.reaction_downgrade_tiers. `ruleset` is session-scoped
+        (shared across the test run) — restore the original value."""
+        original = ruleset.combat.armor.reaction_downgrade_tiers
+        try:
+            ruleset.combat.armor.reaction_downgrade_tiers = 2
+            result = combat.resolve_incoming_condition(
+                2, None, 0, ruleset, reaction_downgraded=True,
+            )
+            assert result.tier == 0  # 2 - 2, not the old hardcoded 2 - 1
+        finally:
+            ruleset.combat.armor.reaction_downgrade_tiers = original
 
     def test_armor_and_reaction_do_not_stack(self, ruleset):
         """PHB III.3: light armor + partial Parry vs Tier 2 lands as Tier 1,

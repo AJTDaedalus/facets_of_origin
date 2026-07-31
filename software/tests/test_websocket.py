@@ -2546,3 +2546,121 @@ class TestOffenseAndNonStackingInLivePlay:
             msg = self._recv(ws, "condition_applied")
             assert msg["condition"] is None
             assert msg.get("armor_absorbed") is False
+
+
+class TestPressCostFromYaml:
+    """sync-M-2: Press's Endurance cost and extra-die effect are read from
+    facet.yaml (combat.press), not a hardcoded literal in the handler."""
+
+    def _start_combat(self, ws):
+        ws.send_json({"type": "combat_start"})
+        return ws.receive_json()
+
+    def test_press_cost_read_from_yaml(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        sess = session_store.get(session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+
+        before = sess.characters["Zahna"].endurance_current
+        expected_cost = sess.ruleset.combat.press.endurance_cost
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "strike", "target": "goblin", "press": True})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "strike_result"
+        assert msg["press_used"] is True
+        assert msg["endurance_remaining"] == before - expected_cost
+
+    def test_modified_yaml_press_cost_changes_the_deduction(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        sess = session_store.get(session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+
+        sess.ruleset.combat.press.endurance_cost = 2
+        before = sess.characters["Zahna"].endurance_current
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "strike", "target": "goblin", "press": True})
+            msg = ws.receive_json()
+
+        assert msg["endurance_remaining"] == before - 2
+
+    def test_press_refused_with_insufficient_endurance(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        sess = session_store.get(session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+
+        sess.characters["Zahna"].endurance_current = 0
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "strike", "target": "goblin", "press": True})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "error"
+        assert "Press" in msg["message"]
+        assert sess.characters["Zahna"].endurance_current == 0
+
+
+class TestSavingThrow:
+    """sync-M-8 part 2: III.1:84-99 saving throws, rollable end-to-end
+    through the WebSocket layer."""
+
+    def test_saving_throw_happy_path(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({
+                "type": "saving_throw",
+                "major_attribute_id": "mind",
+                "difficulty": "Standard",
+            })
+            msg = ws.receive_json()
+
+        assert msg["type"] == "saving_throw_result"
+        assert msg["major_attribute_id"] == "mind"
+        assert msg["outcome"] in ("full_success", "partial_success", "failure")
+        assert "roll" in msg
+
+    def test_saving_throw_unknown_major_attribute_returns_error(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({
+                "type": "saving_throw",
+                "major_attribute_id": "flying",
+            })
+            msg = ws.receive_json()
+
+        assert msg["type"] == "error"
+        assert "flying" in msg["message"]

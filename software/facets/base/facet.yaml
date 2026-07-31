@@ -61,44 +61,44 @@ attributes:
 
     - id: dexterity
       name: Dexterity
-      description: "Acting with precision and speed. Firing a ranged weapon, moving without being heard, slipping free of a hold."
+      description: "Acting with precision and speed. Firing a ranged weapon, moving without being heard, slipping free of a hold, keeping your footing on treacherous ground."
       major: body
 
     - id: constitution
       name: Constitution
-      description: "Pushing through physical hardship. Enduring injury, resisting illness, holding your breath, functioning on no sleep."
+      description: "Pushing through physical hardship. Enduring injury to keep moving, resisting illness, holding your breath, functioning on no sleep or food."
       major: body
 
     # Mind
     - id: intelligence
       name: Intelligence
-      description: "Reasoning and analysis. Working out how something functions, understanding arcane principles, solving a puzzle."
+      description: "Reasoning and analysis. Working out how something functions, understanding arcane principles, solving a puzzle under pressure, finding the flaw in a plan."
       major: mind
 
     - id: wisdom
       name: Wisdom
-      description: "Reading the world and trusting your instincts. Sensing something is wrong, understanding what someone actually wants."
+      description: "Reading the world and trusting your instincts. Sensing something is wrong before you can name why, understanding what someone actually wants, finding your way through unfamiliar territory."
       major: mind
 
     - id: knowledge
       name: Knowledge
-      description: "The accumulated weight of what you have learned. History, lore, trade skills, languages, arcane theory."
+      description: "Recalling what you have learned. Identifying a historical figure or artifact, knowing the customs of a distant culture, remembering the weakness of a creature you've encountered before, navigating a library or archive."
       major: mind
 
     # Soul
     - id: spirit
       name: Spirit
-      description: "Your connection to forces beyond the material. Magical attunement, communion, the strength of conviction under duress."
+      description: "Connecting to forces beyond the physical. Channeling divine or natural power, forming a bond with an animal, sensing the presence of something supernatural, holding the line of a ritual."
       major: soul
 
     - id: luck
       name: Luck
-      description: "The world's tendency to bend in your direction. Not wishful thinking — an actual, observable pattern."
+      description: "Bending fate in your favor. Drawing on innate or wild magic, surviving against the odds, feeling when to press your advantage and when to walk away."
       major: soul
 
     - id: charisma
       name: Charisma
-      description: "The force of your presence on other people. Persuasion, intimidation, deception, inspiration."
+      description: "Moving people with your presence and words. Persuading, inspiring, deceiving, negotiating, or making something you said feel true even when it isn't."
       major: soul
 
   ratings:
@@ -116,6 +116,13 @@ attributes:
     total_points: 18
     min_per_attribute: 1
     max_per_attribute: 3
+
+  # II.2, Deriving Your Major Attribute Modifiers — the sum of the three
+  # Minor Attributes under a Major maps to that Major's modifier.
+  major_derivation:
+    - {min_sum: 3, max_sum: 4, modifier: -1}
+    - {min_sum: 5, max_sum: 7, modifier: 0}
+    - {min_sum: 8, max_sum: 9, modifier: 1}
 
 # ---------------------------------------------------------------------------
 # Character Facets (archetypes)
@@ -423,8 +430,8 @@ techniques:
                 name: "Grinding Advance"
                 description: >
                   When everyone else at the table has spent their resources or run out of options,
-                  you have not. Once per session, you may declare that you still have something left.
-                  Gain one Spark immediately.
+                  you have not. Once per session, you may declare that you still have something
+                  left — a Spark, a second wind, a reserve of will. Gain one Spark immediately.
                 prerequisites: []
 
           - tier: 3
@@ -466,6 +473,9 @@ techniques:
                   focused minutes — you may ask the MM one question about it that must be answered
                   honestly. What holds this together? What is this for? What happened here? The MM
                   cannot deflect with "you're not sure." You spent the time. You get an answer.
+                  (The question must concern something your character can directly observe or has
+                  directly interacted with — not speculation about future events or the inner
+                  lives of people you haven't met.)
                 prerequisites: []
 
               - id: dissecting_failure
@@ -569,9 +579,10 @@ techniques:
                 name: "First Move"
                 description: >
                   Once per session, your instincts extend to everyone around you. You may declare
-                  that the party acts on your read of the situation — before any opposition can
-                  react, before any ambush springs, before the moment tips. Everyone in the party
-                  acts first in the next exchange. No roll required.
+                  that the party acts on your read of the situation. This exchange, the opposition
+                  does not act until every party member's action has resolved — no ambush springs,
+                  no prepared trap goes off, and an enemy defeated or disrupted before its moment
+                  never gets that moment at all. No roll required.
                 prerequisites: []
 
               - id: pattern_recognition
@@ -732,7 +743,9 @@ techniques:
                 description: >
                   Once per scene, when you speak with clear authority in a tense situation — giving orders,
                   stopping a confrontation, demanding attention — anyone who does not have a
-                  compelling reason to ignore you does not. You do not roll.
+                  compelling reason to ignore you does not. You do not roll. The MM may only
+                  override this with active, established fictional reasons why this particular
+                  person would resist you specifically.
                 prerequisites: []
 
           - tier: 3
@@ -751,9 +764,11 @@ techniques:
                 name: "Unforgettable"
                 description: >
                   Anyone who has a meaningful interaction with you remembers you — specifically,
-                  favorably, and personally — unless they have a concrete reason not to. Old contacts
-                  become warm contacts. Strangers who met you once treat you like someone they have
-                  been looking for.
+                  favorably, and personally — unless they have a concrete reason not to. More than
+                  that: when you reappear in someone's life after an absence, they are glad to see
+                  you. Old contacts become warm contacts. Strangers who met you once treat you like
+                  someone they have been looking for. The MM cannot make people who had no reason
+                  to resent you cold or neutral on your return.
                 prerequisites: []
 
       # ---- Fortune Branch ----
@@ -952,6 +967,26 @@ roll_resolution:
       threshold: null
       label: "Things Go Wrong"
       description: "Things go wrong — but the story always moves forward."
+  # III.1:84-99 — 2d6 + the Major Attribute modifier, no skill. Called for
+  # when something happens *to* the character, not something they chose.
+  saving_throw:
+    modifier_source: major_attribute
+    default_difficulty: Standard
+
+  # III.1:104-110 — vs an NPC only the PC rolls (the NPC's attribute informs
+  # difficulty); vs another PC both roll, higher wins, a tie gives both a
+  # partial success.
+  contested_roll:
+    vs_npc: {only_pc_rolls: true}
+    vs_pc: {both_roll: true, higher_wins: true, tie_result: both_partial_success}
+
+  # III.1:113-123 — the whole party attempts a task together; majority
+  # success (partial or better counts) succeeds the group. The lead roller +
+  # Support (III.3) is the stated alternative — encoding only, no engine
+  # work until a playtest demands it (D11).
+  group_roll:
+    majority_rule: partial_success_or_better_counts
+    lead_roller_alternative: true
 
 # ---------------------------------------------------------------------------
 # Spark Economy
@@ -984,14 +1019,13 @@ spark:
         narrating how they make the failure worse or richer for the story.
         The MM confirms. Not every failure earns a Spark; specifically for
         failures the player makes entertaining or narratively rich.
-    - id: spark_for_weakness
-      label: "Spark for Weakness"
+    - id: peer_call
+      label: "\"Spark?\" — the Peer Call"
       structured: false
-      target_per_session: 0-1
+      target_per_session: 0-2
       description: >
-        When a player deliberately plays into their character's weakness — low
-        attribute, personality flaw, background limitation — at a cost to
-        themselves, the MM may award a Spark.
+        Any player can call out "Spark?" for another player's moment. The MM
+        confirms. The moment is recognized by the table collectively.
     - id: mm_award
       label: "MM Award"
       structured: false
@@ -1060,6 +1094,12 @@ magic:
   # The scope restriction alone is the penalty — no additional difficulty step.
   pre_technique_scope_limit: minor
   pre_technique_difficulty_penalty: 0
+
+  # II.3, Sparks and Magic — the three Spark-magic rules.
+  spark_rules:
+    ease_focused_major: {domain_type: focused, scope: major}
+    push_scope: {refused_domain_type: broad}
+    pre_technique_push: {permitted_scope: significant}   # D8
 
   domain_types:
     focused:
@@ -1294,6 +1334,7 @@ combat:
     defensive:
       offense_modifier: -1
       reaction_cost_modifier: -1
+      min_reaction_cost: 0   # III.3 posture table: "-1 Endurance cost per reaction (min 0)"
     withdrawn:
       offense_modifier: null
       reaction_cost_modifier: 0
@@ -1306,6 +1347,13 @@ combat:
     absorb: 0
     intercept: 2
 
+  # Spend 1 Endurance before a Strike to add 1d6 and drop the lowest — the
+  # same mechanical effect as a Spark, drawn from a different resource, and
+  # stackable with one (III.3, Press).
+  press:
+    endurance_cost: 1
+    extra_dice: 1
+
   strike_outcomes:
     full_success:
       condition_tier: 2
@@ -1315,15 +1363,20 @@ combat:
       consequence: "attacker"
 
   conditions:
+    # Tier 1 clears at end of exchange in combat; outside combat, where no
+    # exchange structure exists, it clears at end of scene instead (III.2:69).
     tier1:
       - id: winded
         clears: end_of_exchange
+        out_of_combat_clears: end_of_scene
         description: "−1 to your next roll."
       - id: off_balance
         clears: end_of_exchange
+        out_of_combat_clears: end_of_scene
         description: "Your next reaction costs 1 additional Endurance."
       - id: shaken
         clears: end_of_exchange
+        out_of_combat_clears: end_of_scene
         description: "The MM may direct your next action."
     tier2:
       - id: staggered
@@ -1350,12 +1403,18 @@ combat:
     heavy:
       downgrades_per_scene: 4   # first 4 Conditions/scene: Tier 2 → Tier 1, Tier 1 → none
       tiers_reduced: 1
+    # A successful partial reaction (Dodge/Parry 7-9) downgrades by this many
+    # tiers. Armor and reaction downgrades do not stack — apply the greater
+    # reduction only (III.3, Armor and Reaction Downgrades).
+    reaction_downgrade_tiers: 1
 
   enemy_durability:
     strike_depletion: {full_success: 2, partial_success: 1, failure: 0}
     armor_resolve_bonus: {none: 0, light: 1, heavy: 2}
     mook_removed_on: partial_success        # armored mook: full_success
     armored_mook_removed_on: full_success
+    rider_on: full_success                  # a rider may only be hung on a 10+
+    rider_tiers: [1, 2]                     # attacker's choice; riders never defeat
     # Working Resolve band (base, before armor bonus), confirmed by Gate G1
     # (task A8, 2026-07-10, DESIGN §5-bis; data in research/simulation_log.md
     # Series 7): Named 3-4, Boss 8. Widened from the BRIEF's original 2-6
@@ -1364,6 +1423,24 @@ combat:
     # 8 is the smallest Boss value that robustly clears a median >= 3
     # exchange floor. This is a per-enemy authoring guideline, not an
     # enforced field — actual values live in each enemy's .fof.
+
+  # III.3, Enemy Attacks — NPCs never roll; a PC rolls the reaction. These
+  # fields set what that reaction is up against.
+  enemy_attacks:
+    incoming_tier: {mook: 1, named: 2, boss: 2}
+    posture_reaction_shift: {aggressive: harder, measured: none, defensive: easier}
+    mook_declares_posture: false   # the MM sets Mook attack difficulty by situation instead
+
+  # III.3, Maneuver and Support — the two non-Strike actions.
+  actions:
+    maneuver:
+      full_success: easy       # rolls against the target are Easy until the situation changes
+      partial_success: standard
+      failure: backfire
+    support:
+      modes: [add_die, ease_difficulty]   # the supporting character's choice
+      duration: next_roll_only
+      stacking: most_recent_only          # bonuses from multiple Support actions do not stack
 
 # ---------------------------------------------------------------------------
 # Hazards & Death (PHB III.2)
@@ -1386,6 +1463,18 @@ death:
   # a character's life in the fiction, the player chooses: a permanent scar
   # (a lasting cost named with the MM) and stay down alive, or a heroic
   # death with one final action that automatically succeeds.
+
+# ---------------------------------------------------------------------------
+# Equipment (PHB IV.1) — reference data only. The engine stays deliberately
+# permissive on which attribute a Strike uses; this is not enforced.
+# ---------------------------------------------------------------------------
+equipment:
+  weapon_categories:
+    heavy: {attributes: [strength]}
+    standard: {attributes: [strength, dexterity]}
+    light: {attributes: [dexterity]}
+    ranged: {attributes: [dexterity]}
+    unarmed: {attributes: [strength, dexterity]}
 
 # ---------------------------------------------------------------------------
 # Backgrounds (PHB II.5)
