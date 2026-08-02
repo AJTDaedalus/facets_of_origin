@@ -15,7 +15,13 @@ from __future__ import annotations
 
 from typing import Any
 
-from tools.agentic_playtest.client import LiveTable, TableRuling
+from tools.agentic_playtest.client import (
+    OOC_TAG,
+    RULING_TAG,
+    SCENE_TAG,
+    LiveTable,
+    TableRuling,
+)
 
 #: Sentinel for `_act(match_actor=...)`. `None` means "any actor"; omitting the
 #: argument means "match the caller". They are different, and conflating them
@@ -55,28 +61,46 @@ class Verbs:
     # Talking (no mechanics)
     # ------------------------------------------------------------------
 
-    def say(self, actor: str, text: str) -> dict:
-        self._send(actor, {"type": "chat", "text": text})
+    def _speak(self, actor: str, text: str) -> dict:
+        """Send a chat line and wait for the server to echo it back.
+
+        Speech must wait like every other verb. `pump()` only drains what has
+        already arrived, so a fire-and-forget send raced the echo and dropped
+        lines from the transcript — silently, and more often the later in a turn
+        they were sent.
+        """
+        self._act(actor, {"type": "chat", "text": text}, "chat")
         return {"ok": True}
+
+    def say(self, actor: str, text: str) -> dict:
+        return self._speak(actor, text)
 
     def say_ooc(self, actor: str, text: str) -> dict:
         """Table talk. Logged separately so the OOC:IC ratio is measurable —
-        a transcript with no out-of-character content is not a table."""
-        self._send(actor, {"type": "chat", "text": f"(ooc) {text}"})
-        self.table.log.append("say_ooc", actor, text=text)
-        return {"ok": True}
+        a transcript with no out-of-character content is not a table.
+
+        Sent tagged and *not* appended locally: the server echoes every chat
+        message back to the observer socket, so appending here too would log one
+        utterance twice — once as OOC and once as in-character speech, which is
+        precisely the ratio this verb exists to measure. `LiveTable._record`
+        reads the tag.
+        """
+        return self._speak(actor, f"{OOC_TAG}{text}")
 
     def describe_scene(self, actor: str, text: str) -> dict:
-        self._send(actor, {"type": "chat", "text": text})
-        self.table.log.append("scene", actor, text=text)
-        return {"ok": True}
+        """MM narration. Tagged for the same reason as `say_ooc`."""
+        return self._speak(actor, f"{SCENE_TAG}{text}")
 
     def rule_it(self, actor: str, question: str, ruling: str) -> dict:
         """The MM had to invent a rule. One of the most valuable outputs of a
-        run: it marks exactly where the PHB is silent or unclear."""
+        run: it marks exactly where the PHB is silent or unclear.
+
+        The structured event is appended here because the server has no concept
+        of a rules gap; the echoed chat is tagged so `_record` drops it rather
+        than logging the same ruling a second time as speech.
+        """
         self.table.log.append("rules_gap", actor, question=question, ruling=ruling)
-        self._send(actor, {"type": "chat", "text": f"[MM ruling] {question} — {ruling}"})
-        return {"ok": True}
+        return self._speak(actor, f"{RULING_TAG}{question} — {ruling}")
 
     def end_scene(self, actor: str, summary: str) -> dict:
         self.table.log.append("scene_ended", actor, summary=summary)
@@ -231,9 +255,10 @@ class Verbs:
 
     def spawn_enemy(self, actor: str, enemy_id: str,
                     instance_name: str | None = None) -> dict:
-        message = self._act(actor, {"type": "spawn_enemy", "enemy_id": enemy_id,
-                                    "instance_name": instance_name},
-                            "enemy_spawned", match_actor=None)
+        payload = {"type": "spawn_enemy", "enemy_id": enemy_id}
+        if instance_name:
+            payload["instance_name"] = instance_name
+        message = self._act(actor, payload, "enemy_spawned", match_actor=None)
         return {"tracker_key": message["tracker_key"], "tr": message.get("tr"),
                 "enemy": message.get("enemy", {})}
 

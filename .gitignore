@@ -25,6 +25,7 @@ software/tests/_test_data/test.db
 
 # Runtime data (local dev server / playtest runs)
 software/data/sessions/
+software/data/agentic_playtest/
 
 # Editor
 .vscode/

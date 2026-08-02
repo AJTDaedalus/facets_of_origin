@@ -28,6 +28,14 @@ from websockets.sync.client import connect as ws_connect
 
 from tools.agentic_playtest.events import EventLog
 
+#: The server has one chat channel and no concept of narration, table talk, or a
+#: rules gap. These tags carry that distinction over it, so the observer socket
+#: stays the single writer of the speech log — a verb that also appended locally
+#: would log one utterance twice, which is the batch-07 over-count in miniature.
+OOC_TAG = "(ooc) "
+SCENE_TAG = "[scene] "
+RULING_TAG = "[MM ruling] "
+
 
 class ServerError(RuntimeError):
     """The API refused a request."""
@@ -233,7 +241,7 @@ class LiveTable:
         kind = message.get("type")
         if kind in ("state", "pong", "player_joined", "player_left", "chat"):
             if kind == "chat":
-                self.log.append("say", message.get("from", "?"), text=message.get("text", ""))
+                self._record_chat(message)
             return
         if kind == "error":
             self._rulings.append(message.get("message", ""))
@@ -243,6 +251,23 @@ class LiveTable:
                      or message.get("player_a") or message.get("rolled_by") or "MM")
             data = {k: v for k, v in message.items() if k != "type"}
             self.log.append(kind, actor, **data)
+
+    def _record_chat(self, message: dict) -> None:
+        """One chat message becomes exactly one speech event, of one kind."""
+        # The server identifies the MM socket as "mm"; the rest of the harness
+        # calls it "MM". Normalise here so metrics keyed on actor don't split
+        # the MM's speech from the MM's mechanical events.
+        speaker = message.get("from", "?")
+        speaker = "MM" if speaker == "mm" else speaker
+        text = str(message.get("text", ""))
+        if text.startswith(RULING_TAG):
+            return  # already logged as a structured `rules_gap`
+        if text.startswith(OOC_TAG):
+            self.log.append("say_ooc", speaker, text=text[len(OOC_TAG):])
+        elif text.startswith(SCENE_TAG):
+            self.log.append("scene", speaker, text=text[len(SCENE_TAG):])
+        else:
+            self.log.append("say", speaker, text=text)
 
     def pump(self) -> list[dict]:
         """Record everything the MM socket has seen since the last pump."""
@@ -288,7 +313,10 @@ class LiveTable:
                 if actor is None:
                     return message
                 who = (message.get("player") or message.get("attacker")
-                       or message.get("target") or message.get("rolled_by"))
+                       or message.get("target") or message.get("rolled_by")
+                       or message.get("from"))
+                if who == "mm":
+                    who = "MM"
                 if who == actor:
                     return message
         raise TimeoutError(f"No {kinds} broadcast within {timeout}s")

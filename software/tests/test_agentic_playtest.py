@@ -12,10 +12,6 @@ throwaway data directory, the same pattern as tests/e2e/test_ui_flows.py.
 """
 from __future__ import annotations
 
-import socket
-import subprocess
-import sys
-import time
 from pathlib import Path
 
 import pytest
@@ -190,8 +186,12 @@ class TestDiceDistribution:
 
 class TestTranscript:
     def test_dice_are_rendered_from_the_event(self):
+        """`roll_result` is the server's own broadcast type. It was `roll` here,
+        a name nothing emits, so no roll ever rendered — see
+        `TestTranscriptRendersWhatTheServerSends`."""
         log = EventLog("s1")
-        log.append("roll", "Zahna", roll=_roll(4, [1, 3]), description="pick the lock")
+        log.append("roll_result", "Zahna", roll=_roll(4, [1, 3]),
+                   description="pick the lock")
 
         line = render_event(list(log)[0])
         assert "1, 3" in line and "**4**" in line
@@ -251,40 +251,14 @@ class TestEventLog:
 # Live server — agents play on the real tool, each with its own account
 # ---------------------------------------------------------------------------
 
-def _free_port() -> int:
-    with socket.socket() as s:
-        s.bind(("127.0.0.1", 0))
-        return s.getsockname()[1]
-
-
 @pytest.fixture(scope="module")
 def live_server(tmp_path_factory):
-    port = _free_port()
-    data_dir = tmp_path_factory.mktemp("agentic-data")
-    env = {
-        **dict(__import__("os").environ),
-        "DATA_DIR": str(data_dir), "PORT": str(port), "HOST": "127.0.0.1",
-    }
-    proc = subprocess.Popen([sys.executable, "run.py"], cwd=SOFTWARE_DIR, env=env,
-                            stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    for _ in range(100):
-        if proc.poll() is not None:
-            pytest.fail(proc.stdout.read().decode(errors="replace"))
-        try:
-            with socket.create_connection(("127.0.0.1", port), timeout=0.2):
-                break
-        except OSError:
-            time.sleep(0.1)
-    else:
-        proc.kill()
-        pytest.fail("server did not start")
+    """The same `AppServer` the CLI uses, so the tests exercise the real
+    spin-up path rather than a second copy of it."""
+    from tools.agentic_playtest.cli import AppServer
 
-    yield f"http://127.0.0.1:{port}"
-    proc.terminate()
-    try:
-        proc.wait(timeout=5)
-    except subprocess.TimeoutExpired:
-        proc.kill()
+    with AppServer(data_dir=tmp_path_factory.mktemp("agentic-data")) as server:
+        yield server.base_url
 
 
 ATTRS = {"strength": 3, "dexterity": 2, "constitution": 3, "intelligence": 1,
@@ -852,3 +826,361 @@ class TestOrchestrator:
         assert result == {"ok": True}
         assert session.table.log.by_actor("Zahna") or True
         session.table.close()
+
+
+# ---------------------------------------------------------------------------
+# Scenarios — the pack must transcribe canon, not invent it
+# ---------------------------------------------------------------------------
+
+import yaml  # noqa: E402
+
+
+def _canon_enemy(enemy_id: str) -> dict:
+    """The enemy block from enemies/<id>.fof — the single source of truth."""
+    text = (REPO_ROOT / "enemies" / f"{enemy_id}.fof").read_text(encoding="utf-8")
+    return yaml.safe_load(text)["enemy"]
+
+
+class TestScenarioCanon:
+    """CLAUDE.md's iron law: nothing invented. A playtest that contaminates the
+    canon it is testing is worse than no playtest, and a stat line that drifts
+    from its `.fof` silently retunes the experiment."""
+
+    @pytest.mark.parametrize("key", ["archive_guardian", "city_watch_sergeant",
+                                     "harbor_thug"])
+    def test_stat_lines_match_the_canonical_fof(self, key):
+        from tools.agentic_playtest import scenarios
+
+        blocks = {e["id"]: e for s in scenarios.SCENARIOS.values() for e in s.enemies}
+        canon = _canon_enemy(key)
+        block = blocks[key]
+
+        for field in ("tier", "attack_modifier", "defense_modifier", "armor"):
+            assert block[field] == canon[field], f"{key}.{field} drifted from canon"
+        if "resolve" in canon:
+            assert block["resolve"] == canon["resolve"]
+
+    def test_the_guardian_phase_threshold_matches_canon(self):
+        from tools.agentic_playtest import scenarios
+
+        canon = _canon_enemy("archive_guardian")
+        assert (scenarios.ARCHIVE_GUARDIAN["phases"][0]["resolve_threshold"]
+                == canon["phases"][0]["resolve_threshold"])
+
+    def test_the_party_matches_the_canonical_character_files(self):
+        from tools.agentic_playtest.scenarios import PARTY
+
+        by_character = {p["character_name"]: p for p in PARTY}
+        for name in ("Zahna", "Mordai", "Zulnut"):
+            canon = yaml.safe_load(
+                (REPO_ROOT / "characters" / f"{name}.fof").read_text(encoding="utf-8"))
+            character = canon.get("character", canon)
+            assert by_character[name]["attributes"] == character["attributes"], name
+            assert by_character[name]["primary_facet"] == character["primary_facet"]
+
+    def test_every_attribute_spread_spends_the_same_budget(self):
+        """The fourth seat is built to the same standard as the canon three."""
+        from tools.agentic_playtest.scenarios import PARTY
+
+        totals = {p["character_name"]: sum(p["attributes"].values()) for p in PARTY}
+        assert set(totals.values()) == {18}, totals
+
+    def test_both_scenarios_give_the_mm_permission_not_to_force_the_fight(self):
+        """The experiment measures enemy variance; an MM that railroads every
+        table into combat measures the railroad instead."""
+        from tools.agentic_playtest.scenarios import SCENARIOS
+
+        for scenario in SCENARIOS.values():
+            prep = scenario.prep.lower()
+            assert "do not" in prep, f"{scenario.key} prep has no restraint clause"
+
+
+# ---------------------------------------------------------------------------
+# CLI wiring
+# ---------------------------------------------------------------------------
+
+class TestCli:
+    def test_pilot_defaults_to_a_short_capped_run(self):
+        """The gate is only a gate if it is cheap. A pilot that inherits the
+        batch's beat cap costs as much as a real session."""
+        from tools.agentic_playtest import cli
+
+        args = _parse(cli, ["pilot"])
+        assert args.max_beats < 25
+        assert args.arm == "A"
+
+    def test_batch_pairs_every_seed_across_both_arms(self):
+        from tools.agentic_playtest import cli
+
+        args = _parse(cli, ["batch", "--sessions-per-arm", "4"])
+        scenarios = [("guardian_chamber", "aldermans_office")[i % 2]
+                     for i in range(args.sessions_per_arm)]
+        pairs = [(s, args.seed_base + i, arm)
+                 for i, s in enumerate(scenarios) for arm in ("A", "B")]
+
+        assert len(pairs) == 8
+        # Every (scenario, seed) appears in both arms — that is what "paired" means.
+        for scenario, seed, _ in pairs:
+            arms = {a for s, sd, a in pairs if (s, sd) == (scenario, seed)}
+            assert arms == {"A", "B"}
+
+    def test_an_unknown_subcommand_is_rejected(self):
+        from tools.agentic_playtest import cli
+
+        with pytest.raises(SystemExit):
+            cli.main(["conjure"])
+
+    def test_analyse_refuses_an_empty_directory(self, tmp_path):
+        """Better to stop than to report a judgement over nothing."""
+        from tools.agentic_playtest import cli
+
+        with pytest.raises(SystemExit):
+            cli.main(["analyse", str(tmp_path)])
+
+    def test_the_server_gets_its_own_port_and_data_directory(self, tmp_path):
+        from tools.agentic_playtest.cli import AppServer
+
+        one = AppServer(data_dir=tmp_path / "a")
+        two = AppServer(data_dir=tmp_path / "b")
+
+        assert one.port != two.port
+        assert one.base_url.startswith("http://127.0.0.1:")
+
+
+def _parse(cli_module, argv: list[str]):
+    """The parsed namespace, without running the command."""
+    return cli_module.build_parser().parse_args(argv)
+
+
+# ---------------------------------------------------------------------------
+# Transcript fidelity — the defects the rehearsal found
+# ---------------------------------------------------------------------------
+
+class TestTranscriptRendersWhatTheServerSends:
+    """Two defects, both silent, both fatal to the experiment's only artifact.
+
+    The renderer matched event kinds (`roll`, `strike`, `enemy_attack`) that the
+    observer socket never emits, so every die roll was invisible in the rendered
+    transcript. Separately, `say_ooc` and `describe_scene` appended locally *and*
+    were echoed by the server, logging one utterance twice — the batch-07
+    over-count in a new place, and directly on the OOC:IC metric.
+    """
+
+    #: Kinds the harness writes itself; the server has no concept of them.
+    HARNESS_LOCAL = {"say", "say_ooc", "scene", "scene_ended", "rules_gap",
+                     "refused", "character_joined", "roll"}
+
+    def test_every_rendered_kind_is_a_type_the_server_broadcasts(self):
+        """The structural fix. A renderer branch for a kind nothing emits is
+        dead code that looks like coverage."""
+        import re
+
+        source = (SOFTWARE_DIR / "app" / "api" / "websocket.py").read_text(encoding="utf-8")
+        broadcast = set(re.findall(r'"type":\s*"(\w+)"', source))
+
+        renderer = (SOFTWARE_DIR / "tools" / "agentic_playtest" /
+                    "transcript.py").read_text(encoding="utf-8")
+        rendered = set(re.findall(r'event\.kind == "(\w+)"', renderer))
+        rendered |= set(re.findall(r'event\.kind in \("(\w+)", "(\w+)"\)', renderer)
+                        and [k for pair in
+                             re.findall(r'event\.kind in \("(\w+)", "(\w+)"\)', renderer)
+                             for k in pair])
+
+        unknown = rendered - broadcast - self.HARNESS_LOCAL
+        assert not unknown, (
+            f"transcript.py renders kinds the server never broadcasts: "
+            f"{sorted(unknown)}")
+
+    def test_a_roll_reaches_the_rendered_transcript(self, table):
+        """The end-to-end version: a real roll must show its real dice."""
+        from tools.agentic_playtest.verbs import Verbs
+
+        table.join_as_player("Zahna")
+        table.create_character("Zahna", "Zahna", "body", ATTRS)
+        roll = Verbs(table).roll_skill("Zahna", "strength", "athletics")
+
+        text = render(table.log)
+        assert str(roll["total"]) in text
+        assert "Zahna rolls" in text
+
+    def test_speech_is_logged_exactly_once(self, table):
+        from tools.agentic_playtest.verbs import Verbs
+
+        table.join_as_player("Zahna")
+        verbs = Verbs(table)
+        verbs.say("Zahna", "One line, one event.")
+
+        assert len(table.log.of_kind("say")) == 1
+
+    def test_ooc_is_not_also_logged_as_in_character_speech(self, table):
+        """The OOC:IC ratio is a headline metric; double-logging corrupts both
+        sides of it at once."""
+        from tools.agentic_playtest.verbs import Verbs
+
+        table.join_as_player("Zahna")
+        Verbs(table).say_ooc("Zahna", "Do I add my skill here?")
+
+        assert len(table.log.of_kind("say_ooc")) == 1
+        assert len(table.log.of_kind("say")) == 0
+        assert table.log.of_kind("say_ooc")[0].data["text"] == "Do I add my skill here?"
+
+    def test_mm_narration_is_one_scene_event_not_a_scene_and_a_say(self, table):
+        from tools.agentic_playtest.verbs import Verbs
+
+        Verbs(table).describe_scene("MM", "Ward-lanterns flicker.")
+
+        assert len(table.log.of_kind("scene")) == 1
+        assert len(table.log.of_kind("say")) == 0
+
+    def test_a_ruling_is_logged_as_a_gap_not_as_speech(self, table):
+        from tools.agentic_playtest.verbs import Verbs
+
+        Verbs(table).rule_it("MM", "Can you Press from Withdrawn?", "No.")
+
+        assert len(table.log.of_kind("rules_gap")) == 1
+        assert len(table.log.of_kind("say")) == 0
+
+
+class TestRehearsal:
+    """The free gate. It exists because every defect above was found by running
+    the real thing with a scripted stand-in for the model, at zero cost."""
+
+    def test_the_script_only_names_real_verbs(self):
+        from tools.agentic_playtest.rehearsal import rehearsal_script
+        from tools.agentic_playtest.verbs import Verbs
+
+        script = rehearsal_script("archive_guardian", "Sophia")
+        for turns in script.values():
+            for name, _ in turns:
+                assert hasattr(Verbs, name), f"no such verb: {name}"
+
+    def test_the_script_arguments_match_the_verb_signatures(self):
+        """A wrong keyword here is a pilot that dies mid-session, after paying."""
+        import inspect
+
+        from tools.agentic_playtest.rehearsal import rehearsal_script
+        from tools.agentic_playtest.verbs import Verbs
+
+        script = rehearsal_script("archive_guardian", "Sophia")
+        for turns in script.values():
+            for name, kwargs in turns:
+                params = set(inspect.signature(getattr(Verbs, name)).parameters)
+                unknown = set(kwargs) - params
+                assert not unknown, f"{name} has no parameter(s) {sorted(unknown)}"
+
+    def test_a_rehearsal_runs_end_to_end_and_validates(self, live_server, mm_token):
+        from tools.agentic_playtest.rehearsal import ScriptedClient, rehearsal_script
+        from tools.agentic_playtest.run import Budget, build_session
+        from tools.agentic_playtest.scenarios import CAST_BLURB, PARTY, SCENARIOS
+
+        scenario = SCENARIOS["guardian_chamber"]
+        session = build_session(
+            client=ScriptedClient(rehearsal_script(scenario.enemies[0]["id"],
+                                                   PARTY[0]["player_name"])),
+            base_url=live_server, mm_token=mm_token, scenario=scenario.briefing,
+            prep=scenario.prep, cast_blurb=CAST_BLURB, party=PARTY,
+            enemies=scenario.enemies, seed=1, arm="A",
+            session_name="rehearsal-test", budget=Budget(max_beats=2),
+        )
+        result = session.play()
+        session.table.close()
+
+        assert result.validation_ok, result.validation_report
+        # The whole point: dice, and an enemy, actually appear.
+        assert "Archive Guardian" in result.transcript
+        assert "rolls" in result.transcript
+
+
+# ---------------------------------------------------------------------------
+# The subagent path — a table that short-lived processes can act on
+# ---------------------------------------------------------------------------
+
+class TestBroker:
+    """The broker fronts the table for `play_as`. It must not become a second
+    place where rules live, and it must not let an actor act as someone else."""
+
+    @pytest.fixture
+    def broker(self, table, tmp_path):
+        from tools.agentic_playtest.broker import Broker
+        from tools.agentic_playtest.scenarios import HARBOR_THUG
+
+        table.add_enemy(HARBOR_THUG)  # spawn_enemy reads the session's library
+        table.join_as_player("Zahna")
+        table.create_character("Zahna", "Zahna", "body", ATTRS)
+        return Broker(table, tmp_path / "out",
+                      [{"player_name": "Zahna", "character_name": "Zahna"}])
+
+    def test_a_player_may_not_call_an_mm_verb(self, broker):
+        result = broker.take_turn("Zahna", "land_enemy_attack",
+                                  {"target_player": "Zahna", "condition": "broken"})
+        assert "refused" in result
+        assert "land_enemy_attack" in result["refused"]
+
+    def test_an_unknown_verb_is_refused_not_raised(self, broker):
+        assert "refused" in broker.take_turn("Zahna", "teleport", {})
+
+    def test_wrong_arguments_are_refused_with_the_reason(self, broker):
+        result = broker.take_turn("Zahna", "say", {"words": "hello"})
+        assert "refused" in result and "say" in result["refused"]
+
+    def test_a_real_verb_returns_the_engine_s_answer(self, broker):
+        result = broker.take_turn("Zahna", "roll_skill",
+                                  {"attribute_id": "strength", "skill_id": "athletics"})
+        assert result["ok"]
+        # The engine's dice, not ours.
+        assert len(result["result"]["dice_rolled"]) == 2
+        assert result["result"]["total"] == (
+            result["result"]["dice_sum"]
+            + result["result"]["attribute_modifier"]
+            + result["result"]["skill_modifier"]
+            + result["result"]["difficulty_modifier"])
+
+    def test_the_enemy_roster_is_replayed_from_the_log(self, broker):
+        """Not kept as a second copy — a copy can disagree with the engine."""
+        broker.take_turn("MM", "spawn_enemy", {"enemy_id": "harbor_thug"})
+        roster = broker.state_for("MM")["active_enemies"]
+        assert roster and all(e["name"] for e in roster.values())
+
+    def test_a_defeated_mook_leaves_the_roster(self, broker):
+        spawn = broker.take_turn("MM", "spawn_enemy", {"enemy_id": "harbor_thug"})
+        key = spawn["result"]["tracker_key"]
+        broker.take_turn("MM", "apply_strike_to_enemy",
+                         {"tracker_key": key, "outcome": "full_success"})
+        assert key not in broker.state_for("MM")["active_enemies"]
+
+    def test_finish_writes_every_artifact(self, broker, tmp_path):
+        broker.take_turn("Zahna", "say", {"text": "one line"})
+        summary = broker.finish()
+        out = tmp_path / "out"
+        for name in ("transcript.md", "events.jsonl", "metrics.json",
+                     "validation.txt"):
+            assert (out / name).exists(), name
+        assert summary["validation_ok"]
+
+
+class TestSubagentBriefings:
+    """What a subagent is told is the only thing standing between it and the
+    batch-07 failure mode, so the wording is load-bearing."""
+
+    def test_the_brief_forbids_asserting_an_outcome(self):
+        from tools.agentic_playtest.host import HOW_TO_ACT
+
+        text = HOW_TO_ACT.lower()
+        assert "you never decide an outcome" in text
+        assert "flagged as a defect" in text
+
+    def test_the_brief_tells_them_refusal_is_allowed(self):
+        from tools.agentic_playtest.host import PLAYER_BRIEF
+
+        assert "refuse a hook" in PLAYER_BRIEF
+
+    def test_the_mm_brief_states_that_enemies_never_roll(self):
+        from tools.agentic_playtest.host import MM_BRIEF
+
+        assert "Enemies never roll" in MM_BRIEF
+        assert "rule_it" in MM_BRIEF
+
+    def test_the_mm_brief_says_prep_is_disposable(self):
+        from tools.agentic_playtest.host import MM_BRIEF
+
+        assert "Prep is disposable" in MM_BRIEF

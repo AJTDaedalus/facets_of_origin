@@ -10,6 +10,62 @@ Dependency: `anthropic` (add to `requirements-dev.txt` as an optional extra — 
 main suite must still run without it, same pattern as `playwright` in
 `tests/e2e/test_ui_flows.py`).
 
+## Status — 2026-07-31
+
+| Wave | State |
+|---|---|
+| 0 | Done. Batch-07 report carries its caveat banner; the two broken runners are archived under `playtest/07_oraga_night_playtests/runner_archive/` with deprecation headers. |
+| 1 | Done, **re-scoped**: `table.py` was deleted. Agents play on a live server over real WebSockets, so the verbs are messages on each agent's own socket rather than calls into an in-process `GameSession`. T1.1's "no rule logic in this module" acceptance is satisfied more strongly — the module cannot contain rule logic, because the server resolves everything. |
+| 2 | Done. |
+| 3 | Done. |
+| 4 | **T4.1 done** — scenario pack built and the fourth seat (Ilesse) approved 2026-07-31 as a *playtest fixture only*, deliberately not given a `characters/*.fof`. T4.2–T4.5 need API credits: the key authenticates, the account balance is zero, and a Max plan does not include API usage. Everything up to the API boundary is written and tested. |
+
+84 harness tests pass without an API key.
+
+### A gate before the gate — `rehearse`
+
+T4.2 costs money, so `cli.py rehearse` runs the real scenario, party, and server
+with a scripted stand-in for the model. It found five defects the pilot would
+otherwise have hit *after* paying:
+
+1. `transcript.py` matched event kinds (`roll`, `strike`, `enemy_attack`) the
+   server never broadcasts — **no die roll would have appeared in any
+   transcript**, the one artifact the whole experiment produces.
+2. `say_ooc` and `describe_scene` appended locally *and* were echoed by the
+   server: one utterance, two events. The batch-07 over-count in a new place,
+   landing directly on the OOC:IC metric.
+3. Speech was fire-and-forget and raced its own echo, so lines vanished from the
+   log — more often the later in a turn they were sent.
+4. `spawn_enemy` sent `instance_name: null`, which the server stringified to
+   `"None"` and used to rename the enemy. Fixed on both sides.
+5. `city_watch_sergeant`'s stat line in `scenarios.py` had drifted from its
+   `.fof`. `TestScenarioCanon` now pins every stat line and every PC.
+
+**Run order:**
+
+```bash
+cd software
+python -m tools.agentic_playtest.cli rehearse                     # free
+python -m tools.agentic_playtest.host --scenario guardian_chamber  # subagent path
+python -m tools.agentic_playtest.cli pilot --arm A --seed 1        # T4.2 GATE
+```
+
+### The subagent path — half of T4.2, without the API
+
+`host.py` + `broker.py` + `play_as.py` let Claude Code subagents play at a real
+table through the shell. Same server, same verbs, same observer socket, same
+validator — only the model layer changes. It **cannot** measure cost (subagents
+report no token usage), so it answers the qualitative half of the gate and leaves
+the budgeting half open.
+
+Run 2026-07-31: `playtest/08_npc_variance/subagent_session/report.md`.
+**Validator found zero confabulated mechanics**, and the transcript reads like a
+table — players refused hooks, refused each other, and raised two design
+complaints unprompted. Four findings, of which F1 is the important one: PHB
+III.3:112 restricts Strike to Combat/Finesse by range while the engine accepts any
+pairing, which misbuilds a monk-adjacent character. That is a live Software-PHB
+desync and is worth fixing independently of Wave 4.
+
 ---
 
 ## Wave 0 — Contain the damage from the old corpus
