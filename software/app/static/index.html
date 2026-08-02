@@ -253,6 +253,10 @@
                 </select>
                 <label for="play-roll-description">Description (optional)</label>
                 <input type="text" id="play-roll-description" placeholder="What are you attempting?">
+                <label for="play-roll-hazard-type">Hazard type (optional — Acclimated)</label>
+                <input type="text" id="play-roll-hazard-type" placeholder="e.g. extreme cold">
+                <label for="play-roll-knowledge-field">Knowledge field (optional — Field of Mastery)</label>
+                <input type="text" id="play-roll-knowledge-field" placeholder="e.g. arcane theory">
                 <div class="inline-note">
                   10+ full success · 7-9 success with a cost · 6- things go wrong, but the story moves.
                   Stage Sparks on the pips above to add dice before you roll.
@@ -363,6 +367,23 @@
                   </p>
                   <label for="strike-target">Target</label>
                   <select id="strike-target"></select>
+                  <label for="strike-weapon-category">Weapon Category (optional)</label>
+                  <select id="strike-weapon-category" onchange="onStrikeWeaponCategoryChange()">
+                    <option value="">-- none --</option>
+                    <option value="heavy">Heavy (Strength)</option>
+                    <option value="standard">Standard (Strength or Dexterity)</option>
+                    <option value="light">Light (Dexterity)</option>
+                    <option value="ranged">Ranged (Dexterity)</option>
+                    <option value="unarmed">Unarmed (Strength or Dexterity)</option>
+                  </select>
+                  <label for="strike-weapon-type">Weapon Type (optional, for Weapon Mastery)</label>
+                  <select id="strike-weapon-type">
+                    <option value="">-- none --</option>
+                    <option value="blades">Blades</option>
+                    <option value="blunt">Blunt</option>
+                    <option value="polearms">Polearms</option>
+                    <option value="unarmed">Unarmed</option>
+                  </select>
                   <label for="strike-attribute">Attribute</label>
                   <select id="strike-attribute"></select>
                   <label for="strike-skill">Skill (optional)</label>
@@ -376,6 +397,10 @@
                   </select>
                   <label class="checkbox-inline" style="margin:6px 0;">
                     <input type="checkbox" id="strike-press"> Press — spend 1 Endurance for +1d6, drop lowest
+                  </label>
+                  <label class="checkbox-inline" style="margin:6px 0;">
+                    <input type="checkbox" id="strike-final-blow">
+                    The Final Blow — once per session, spend a Spark; on 7+ the target is removed (MM confirms)
                   </label>
                   <div class="inline-note">
                     Sparks staged on your sheet above apply to this Strike too.

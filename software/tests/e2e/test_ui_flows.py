@@ -59,16 +59,29 @@ def live_server(tmp_path_factory):
         "PORT": str(port),
         "HOST": "127.0.0.1",
     }
+    # Log to a file, never to an undrained pipe. uvicorn logs every request at
+    # info level; with `stdout=PIPE` and nobody reading it, the 64KB OS pipe
+    # buffer filled about fifty tests in and the server BLOCKED ON WRITE —
+    # wedged, accepting no HTTP at all. It looked like flakiness in whichever
+    # test happened to be running at the time.
+    log_path = data_dir / "server.log"
+    log_file = log_path.open("wb")
     proc = subprocess.Popen(
         [sys.executable, "run.py"],
         cwd=SOFTWARE_DIR, env=env,
-        stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+        stdout=log_file, stderr=subprocess.STDOUT,
     )
+
+    def _server_log() -> str:
+        try:
+            return log_path.read_text(errors="replace")
+        except OSError:
+            return "(no server log)"
 
     base = f"http://127.0.0.1:{port}"
     for _ in range(100):
         if proc.poll() is not None:
-            pytest.fail(f"server exited early:\n{proc.stdout.read().decode(errors='replace')}")
+            pytest.fail(f"server exited early:\n{_server_log()}")
         try:
             with socket.create_connection(("127.0.0.1", port), timeout=0.2):
                 break
@@ -84,6 +97,7 @@ def live_server(tmp_path_factory):
         proc.wait(timeout=5)
     except subprocess.TimeoutExpired:
         proc.kill()
+    log_file.close()
 
 
 @pytest.fixture(scope="module")
@@ -156,10 +170,31 @@ def _login_mm(page, base, token):
     page.wait_for_timeout(300)
 
 
+def _delete_session(base: str, token: str, session_id: str) -> None:
+    """Best-effort teardown — a failure here must not mask a test result."""
+    import urllib.error
+    import urllib.request
+
+    request = urllib.request.Request(
+        f"{base.rstrip('/')}/api/sessions/{session_id}", method="DELETE",
+        headers={"Authorization": f"Bearer {token}"})
+    try:
+        urllib.request.urlopen(request, timeout=10).close()
+    except (urllib.error.URLError, OSError):
+        pass
+
+
 def _make_session_and_invite(page, name, player):
     page.fill("#new-session-name", name)
     page.click("button:has-text('Create Session')")
-    page.wait_for_timeout(600)
+    # Wait for the option, not for a fixed 600ms. The list re-render is async and
+    # the session list grows all run, so a sleep is a race by construction.
+    page.wait_for_function(
+        """expected => {
+            const select = document.getElementById('invite-session-id');
+            return !!select && [...select.options].some(o => o.textContent === expected);
+        }""",
+        arg=name, timeout=15000)
     page.select_option("#invite-session-id", label=name)
     page.fill("#invite-player-name", player)
     page.click("button:has-text('Generate Invite Link')")
@@ -194,6 +229,7 @@ def table(live_server, browser, errors, request, mm_token):
     _login_mm(mm, live_server, mm_token)
     session_name = f"E2E {request.node.name}"[:60]
     invite = _make_session_and_invite(mm, session_name, "Zahna")
+    session_id = mm.evaluate("() => state.sessionId")
 
     player = errors.attach(browser.new_page(viewport={"width": 1400, "height": 950}), "PLAYER")
     _join_and_build(player, invite, "Zahna")
@@ -202,6 +238,13 @@ def table(live_server, browser, errors, request, mm_token):
     yield mm, player
     mm.close()
     player.close()
+    # Delete the session. Every test in this module makes one against a shared
+    # server and nothing used to clean them up, so the dashboard's session list
+    # grew all run; past ~50 the MM's own list stopped rendering and later
+    # fixtures found an empty session picker. Bounding the accumulation is the
+    # actual fix — waiting longer for the list only moved the threshold.
+    if session_id:
+        _delete_session(live_server, mm_token, session_id)
 
 
 # ---------------------------------------------------------------------------
@@ -314,6 +357,131 @@ class TestCombatLoop:
             "#strike-target option", "els => els.map(e => e.textContent)")
         assert any("Harbor Thug" in t for t in targets)
 
+
+
+    def test_a_strike_on_a_tracked_enemy_can_be_applied_from_the_prompt(self, table):
+        """A Strike roll does not itself remove the enemy — the MM must apply
+        the outcome. The prompt used to say "apply it on the enemy tracker" and
+        leave them to find the row, so between the roll and the click the table
+        and the engine disagreed about whether the enemy was still standing.
+
+        Found by the subagent playtest, 2026-07-31 (F4): a player rolled a full
+        success on a Mook, said "that one should be gone", and it was not.
+        """
+        mm, player = table
+        mm.click("button[data-tab='builder']")
+        mm.wait_for_timeout(300)
+        mm.fill("#builder-enemy-name", "Harbor Thug")
+        mm.select_option("#builder-enemy-tier", "mook")
+        mm.click("button:has-text('Save to Library')")
+        mm.wait_for_timeout(600)
+        mm.click("button[data-tab='play']")
+        mm.wait_for_timeout(300)
+        mm.select_option("#play-spawn-enemy-select", "harbor_thug")
+        mm.click("button:has-text('Spawn')")
+        mm.wait_for_timeout(700)
+
+        mm.click("button:has-text('Start Combat')")
+        mm.wait_for_timeout(600)
+        player.wait_for_timeout(500)
+
+        # Drive the Strike through the socket so the test does not depend on
+        # the dice: any non-failure outcome must offer the MM an Apply.
+        tracker_key = mm.evaluate("() => Object.keys(state.activeEnemies)[0]")
+        assert tracker_key, "nothing in the enemy tracker to strike"
+        mm.evaluate(
+            """key => onStrikeResult({
+                attacker: 'Zahna', target: key,
+                roll: {dice_rolled: [6, 5], dice_kept: [6, 5], dice_sum: 11,
+                       attribute_modifier: 0, skill_modifier: 0,
+                       difficulty_modifier: 0, total: 11, outcome: 'full_success',
+                       outcome_label: 'Full Success', outcome_description: '',
+                       sparks_spent: 0},
+                endurance_remaining: 5, sparks_remaining: 3, press_used: false,
+            })""",
+            tracker_key)
+        mm.wait_for_timeout(400)
+
+        apply_button = mm.locator("#toast-host button:has-text('Apply')")
+        assert apply_button.count() == 1, "no one-click Apply on the Strike prompt"
+
+        apply_button.click()
+        mm.wait_for_timeout(800)
+
+        # A Mook taking a full success is removed outright — the engine's call.
+        remaining = mm.evaluate("() => Object.keys(state.activeEnemies)")
+        assert tracker_key not in remaining, "Apply did not reach the engine"
+
+    def test_a_strike_on_an_untracked_target_offers_no_apply(self, table):
+        """PvP and untracked targets have nothing to apply the outcome to, so
+        the prompt must stay advisory rather than offering a dead button."""
+        mm, player = table
+        mm.click("button:has-text('Start Combat')")
+        mm.wait_for_timeout(600)
+
+        mm.evaluate(
+            """() => onStrikeResult({
+                attacker: 'Zahna', target: 'Some Bystander',
+                roll: {dice_rolled: [6, 5], dice_kept: [6, 5], dice_sum: 11,
+                       attribute_modifier: 0, skill_modifier: 0,
+                       difficulty_modifier: 0, total: 11, outcome: 'full_success',
+                       outcome_label: 'Full Success', outcome_description: '',
+                       sparks_spent: 0},
+                endurance_remaining: 5, sparks_remaining: 3, press_used: false,
+            })""")
+        mm.wait_for_timeout(400)
+
+        assert mm.locator("#toast-host button:has-text('Apply')").count() == 0
+        assert "Some Bystander" in mm.inner_text("#toast-host")
+
+    def test_technique_step_banner_shows_both_moves(self, table):
+        """B4 Q1 UX (DESIGN_technique_difficulty.md §2.7, TD-10): auto-apply is
+        only legible at the table because the roll banner shows both moves —
+        the MM's declared label and the Technique that stepped it."""
+        mm, player = table
+        mm.click("button:has-text('Start Combat')")
+        mm.wait_for_timeout(600)
+        player.wait_for_timeout(400)
+
+        player.evaluate(
+            """() => onStrikeResult({
+                attacker: 'Zahna', target: 'goblin',
+                roll: {dice_rolled: [6, 5], dice_kept: [6, 5], dice_sum: 11,
+                       attribute_modifier: 0, skill_modifier: 0,
+                       difficulty_modifier: 0, total: 11, outcome: 'full_success',
+                       outcome_label: 'Full Success', outcome_description: '',
+                       sparks_spent: 0, difficulty: 'Standard'},
+                endurance_remaining: 5, sparks_remaining: 3, press_used: false,
+                technique_step: {technique_id: 'weapon_mastery', technique_name: 'Weapon Mastery',
+                                  from: 'Hard', to: 'Standard'},
+            })""")
+        player.wait_for_timeout(400)
+
+        banner = player.inner_text("#play-roll-result-box")
+        assert "Hard" in banner and "Standard" in banner and "Weapon Mastery" in banner
+        assert player.locator("#play-roll-result-box .technique-step-banner").count() == 1
+
+    def test_ordinary_strike_banner_has_no_technique_step(self, table):
+        """Same box, no Technique fired — TD-10 must not change the banner
+        when `technique_step` is absent."""
+        mm, player = table
+        mm.click("button:has-text('Start Combat')")
+        mm.wait_for_timeout(600)
+        player.wait_for_timeout(400)
+
+        player.evaluate(
+            """() => onStrikeResult({
+                attacker: 'Zahna', target: 'goblin',
+                roll: {dice_rolled: [6, 5], dice_kept: [6, 5], dice_sum: 11,
+                       attribute_modifier: 0, skill_modifier: 0,
+                       difficulty_modifier: 0, total: 11, outcome: 'full_success',
+                       outcome_label: 'Full Success', outcome_description: '',
+                       sparks_spent: 0, difficulty: 'Standard'},
+                endurance_remaining: 5, sparks_remaining: 3, press_used: false,
+            })""")
+        player.wait_for_timeout(400)
+
+        assert player.locator("#play-roll-result-box .technique-step-banner").count() == 0
 
 # ---------------------------------------------------------------------------
 # Builder — saved content has to be reachable again
@@ -457,6 +625,155 @@ class TestAdvancementAndSparks:
         player.click("button[data-tab='builder']")
         player.wait_for_timeout(500)
         assert "Technique pick" in player.inner_text("#builder-technique-list")
+
+
+# ---------------------------------------------------------------------------
+# TD-20 (DESIGN §8): pickTechniqueChoice's non-domain choices fallback
+# ---------------------------------------------------------------------------
+
+class TestTechniqueChoicePicker:
+    """`pickTechniqueChoice` used to build only domain-name option lists, so
+    Weapon Mastery/Acclimated/Field of Mastery — none of which are domain-
+    granting — offered whatever domain list the character's primary Facet
+    happened to map to as candidate "weapon types". TD-19 gave the three a
+    `choices` list of their own in facet.yaml; TD-20 makes the picker use it.
+
+    `selectTechnique`'s own `def` lookup has an unrelated, pre-existing bug
+    (docs/TODO.md T9: it reads `character_facets[].techniques`, a field that
+    does not exist on the wire) that leaves the Builder tab's "Available"
+    Technique list always empty, so a real click-through was not reachable.
+    These tests call `pickTechniqueChoice` directly with a Technique
+    definition read from the real, correctly-shaped
+    `ruleset.techniques[facet].branches[].tiers[].techniques[]` structure —
+    the same direct-injection approach TD-10's Strike-banner tests already
+    use in this file when the natural trigger path is separately broken or
+    impractical to stage.
+    """
+
+    def _find_technique(self, page, tech_id):
+        return page.evaluate(
+            """id => {
+                for (const facetId in state.ruleset.techniques) {
+                    for (const branch of state.ruleset.techniques[facetId].branches) {
+                        for (const tier of branch.tiers) {
+                            const found = tier.techniques.find(t => t.id === id);
+                            if (found) return found;
+                        }
+                    }
+                }
+                return null;
+            }""",
+            tech_id)
+
+    def test_weapon_mastery_choice_reaches_technique_choices_on_the_character(self, table, live_server):
+        mm, player = table
+
+        # Grant a Technique pick the only way currently reachable: two Body
+        # skill advances cross the 5-rank-advance Facet-level threshold
+        # (facet.yaml advancement.facet_level_threshold). Zahna is created
+        # with no Background (custom/none is the create-character default in
+        # `table`), so both skills start clean at Novice/0 marks — each maxes
+        # to Master (3 rank advances) well within the 100 marks sent, and two
+        # skills' worth (6 advances) crosses the threshold of 5 for 1 SP each,
+        # inside the 4-SP session budget.
+        for skill_id in ("athletics", "stealth"):
+            mm.evaluate(
+                "args => sendWS({type: 'skill_advance', player_name: args.p, "
+                "skill_id: args.s, marks: 100})",
+                {"p": "Zahna", "s": skill_id})
+            mm.wait_for_timeout(400)
+
+        # `technique_picks_available` really is incremented server-side at
+        # this point — `character.advance_skill` computed it correctly — but
+        # the `skill_advanced` broadcast never carries the field and
+        # `app.js`'s handler never applies it to `state.character` (a third,
+        # separate pre-existing wiring gap; see docs/TODO.md T10). A reload
+        # re-authenticates from the stored token and re-fetches full session
+        # state, which — unlike the incremental broadcast — does carry the
+        # true value, so this routes around the gap rather than depending on
+        # a fix that is out of TD-20's scope. A plain reload would re-run the
+        # invite-join flow instead, since the page URL still carries the
+        # invite token query param that takes precedence over sessionStorage
+        # (app.js's DOMContentLoaded routing) — going to the bare origin
+        # avoids that and falls into the stored-token branch.
+        player.goto(live_server)
+        player.wait_for_selector("#game-screen:not(.hidden)", timeout=10000)
+        player.wait_for_timeout(500)
+
+        picks = player.evaluate("() => state.character.technique_picks_available")
+        assert picks >= 1, "skill advance did not grant a Technique pick"
+
+        weapon_mastery = self._find_technique(player, "weapon_mastery")
+        assert weapon_mastery is not None
+        assert weapon_mastery["choices"] == ["blades", "blunt", "polearms", "unarmed"]
+
+        # Kick off the real picker without awaiting it in-page — the Promise
+        # only resolves once the dialog's Confirm button is clicked, below.
+        player.evaluate(
+            "def => { window.__pickResult = undefined; "
+            "pickTechniqueChoice(def).then(r => { window.__pickResult = r; }); }",
+            weapon_mastery)
+        player.wait_for_selector(".modal-input", timeout=5000)
+
+        option_values = player.eval_on_selector_all(".modal-input option", "els => els.map(e => e.value)")
+        assert option_values == ["blades", "blunt", "polearms", "unarmed"], (
+            "picker did not offer Weapon Mastery's own choices — "
+            f"got {option_values}")
+
+        player.select_option(".modal-input", "blades")
+        player.click("button[data-act='ok']")
+        player.wait_for_function("() => window.__pickResult !== undefined", timeout=5000)
+        resolved = player.evaluate("() => window.__pickResult")
+        assert resolved == "blades"
+
+        # `selectTechnique` would send exactly this once its own `def` lookup
+        # (docs/TODO.md T9) is fixed; sending it here proves the resolved
+        # choice — not just the dialog's local state — is what reaches the
+        # character over the real `technique_select` WS handler.
+        player.evaluate(
+            "choice => sendWS({type: 'technique_select', technique_id: 'weapon_mastery', choice})",
+            resolved)
+        player.wait_for_timeout(500)
+
+        # `onTechniqueSelected` (app.js) never applies `msg.choice` to
+        # `state.character.technique_choices` — a fourth pre-existing wiring
+        # gap alongside T9/T10 (docs/TODO.md T11). The character's stored
+        # `technique_choices` is correct server-side regardless (`Character
+        # .select_technique`, `character.py:402`); fetch it the same way as
+        # the picks-available check above rather than trust the incremental
+        # broadcast handler this test is not about.
+        player.goto(live_server)
+        player.wait_for_selector("#game-screen:not(.hidden)", timeout=10000)
+        player.wait_for_timeout(500)
+
+        techniques = player.evaluate("() => state.character.techniques")
+        choices = player.evaluate("() => state.character.technique_choices")
+        assert "weapon_mastery" in techniques
+        assert choices["weapon_mastery"] == "blades"
+
+    def test_domain_granting_technique_keeps_the_domain_list_behaviour(self, table):
+        """A Technique with no `choices` — every domain-granting one; TD-19
+        gave `choices` to exactly the three non-domain Techniques — must
+        still get the pre-existing domain-list picker, not an empty result."""
+        _, player = table
+        arcane_study = self._find_technique(player, "arcane_study")
+        assert arcane_study is not None
+        assert arcane_study.get("choices") is None
+
+        player.evaluate(
+            "def => { window.__pickResult2 = undefined; "
+            "pickTechniqueChoice(def).then(r => { window.__pickResult2 = r; }); }",
+            arcane_study)
+        player.wait_for_selector(".modal-input", timeout=5000)
+
+        option_labels = player.eval_on_selector_all(".modal-input option", "els => els.map(e => e.textContent)")
+        # Domain options render as "Name (type)" (the pre-existing branch) —
+        # never a bare weapon/hardship/field string, which is what a wrongly
+        # taken `choices` fallback would produce instead.
+        assert option_labels, "domain picker offered no options"
+        assert all("(" in label and ")" in label for label in option_labels)
+
+        player.click("button[data-act='cancel']")
 
 
 # ---------------------------------------------------------------------------

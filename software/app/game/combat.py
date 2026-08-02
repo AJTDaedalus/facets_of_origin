@@ -119,6 +119,26 @@ class ResolveDamageResult:
 
 
 @dataclass
+class FinalBlowResult:
+    """Result of `apply_final_blow_removal` (B4 Q3 — *The Final Blow*).
+
+    Deliberately its own type, not a reuse of `ResolveDamageResult`: the two
+    must be distinguishable at the type level, not just by field values, so
+    a transcript or a future sim series can tell a licensed-override removal
+    apart from an ordinary Strike defeating an enemy at 0 Resolve on sight —
+    without relying on a caller remembering to check a `cause` string.
+    `cause` is carried anyway, for callers (the WS broadcast, the transcript
+    log) that want a machine-readable label rather than a type check.
+    """
+
+    resolve_current: int  # always 0 — the target is removed
+    depletion: int  # however much Resolve this removal actually took off, for the transcript
+    defeated: bool  # always True
+    phase_index: Optional[int]  # index into the caller's `phase_thresholds`, or None
+    cause: str = "final_blow"  # distinguishes this event from an ordinary Resolve-0 defeat
+
+
+@dataclass
 class ArmorDowngradeResult:
     """Result of `armor_downgrade` (D2 — PC per-scene downgrade budget)."""
 
@@ -481,6 +501,54 @@ def apply_resolve_damage(
     )
 
 
+def apply_final_blow_removal(
+    resolve_current: int,
+    phase_thresholds: Optional[list[int]] = None,
+) -> FinalBlowResult:
+    """Resolve *The Final Blow*'s target removal (B4 Q3) as a defeat event
+    through the canonical defeat path — never a raw `resolve_current = 0`
+    write.
+
+    P11 invariant: every `resolve_current` mutation routes through
+    `phase_crossed`, the same primitive `apply_resolve_damage` uses to
+    detect a Boss phase crossing from an ordinary Strike. A raw write would
+    skip that call and could silently miss a phase change the removal
+    triggers in passing (e.g. a Boss whose Reduced Mode threshold sits above
+    0) — bypassing phase logic and corrupting anything reading the
+    transcript afterward. This function is *not* `apply_resolve_damage`
+    with a bigger number: it works on any target regardless of remaining
+    Resolve (Bosses included, per B4/the BRIEF's Q3 ruling — the removal is
+    a licensed override, not depletion), and it returns the distinct
+    `FinalBlowResult` type so a capstone removal can never be mistaken for,
+    or silently merged with, an ordinary Resolve-0 defeat.
+
+    The once-per-session gate, the Spark spend, and the "succeed" (7+)
+    requirement are the caller's job (`websocket._handle_*`) — this
+    function only resolves the mechanical consequence once a caller has
+    already established the Technique fires. It also does not decide
+    whether the removal *commits*: MM confirmation gates that at the
+    caller, because auto-apply (B4's UX ruling) governs difficulty steps,
+    not actor removal.
+
+    Args:
+        resolve_current: The target's Resolve immediately before removal.
+        phase_thresholds: The target's `PhaseDef.resolve_threshold` values,
+            in definition order, or `None`/empty for a target with no
+            phases (Mooks, Named NPCs, most Bosses outside a phase block).
+
+    Returns:
+        A `FinalBlowResult` with `resolve_current=0`, `defeated=True`, and
+        `phase_index` set if the drop to 0 crosses a phase boundary.
+    """
+    new_resolve = 0
+    return FinalBlowResult(
+        resolve_current=new_resolve,
+        depletion=max(0, resolve_current),
+        defeated=True,
+        phase_index=phase_crossed(resolve_current, new_resolve, phase_thresholds),
+    )
+
+
 def maneuver_target_difficulty(outcome: str, base_difficulty: str, ruleset) -> str:
     """Effect of a Maneuver's outcome on rolls against the target (III.3):
     a 10+ makes rolls against the target Easy (until the situation
@@ -622,6 +690,124 @@ def apply_condition(
 
     conditions.append(condition)
     return ConditionResult(applied=True, condition=condition, tier=tier, broken=False)
+
+
+# ---------------------------------------------------------------------------
+# Difficulty composition — B4 Q1 (DESIGN_technique_difficulty.md §2.2)
+# ---------------------------------------------------------------------------
+
+def apply_character_difficulty_step(
+    declared_label: str,
+    character,
+    context: dict,
+    ruleset,
+) -> tuple[str, Optional[str]]:
+    """Compose the MM's declared difficulty label with at most one
+    character-side Technique step (DECISIONS.md B4, Q1).
+
+    This lives here, not in `websocket.py` or `tools/combat_sim.py`, because
+    it is a rule: `CLAUDE.md`'s iron law is that the simulator may only
+    *drive* `combat.py`, never carry its own copy of a rule, and this project
+    has already been burned once by exactly that divergence (DECISIONS R1).
+    Every caller — the three WS handlers this cycle wires (strike, generic
+    roll, reaction) and any future sim series — must call this function
+    rather than re-deriving a step inline.
+
+    **Order** (non-negotiable, B4): `declared_label` is the MM's situational
+    call, already resolved, and is never second-guessed here. A character-side
+    step applies to it second. The ladder then clamps via
+    `engine._step_difficulty_easier`/`_harder`, which already saturate at
+    the four-rung ladder's ends (Easy stays Easy; Very Hard stays Very Hard)
+    — those are ladder primitives; this function only composes them.
+
+    **Guardrail**: character-side steps never stack, whatever their source —
+    at most one per roll. `context` may make several unlocked Techniques
+    qualify at once; only one step is ever applied. Precedence is
+    deterministic so the roll banner names a stable Technique: a
+    player-declared Technique beats an auto one, then lowest Technique id.
+
+    Only Techniques in `character.techniques` (i.e. actually unlocked) are
+    eligible — an un-unlocked Technique's `difficulty_step` never fires,
+    even if its trigger would otherwise match.
+
+    Args:
+        declared_label: The MM's already-resolved situational difficulty.
+        character: Anything exposing `.techniques` (list[str], unlocked
+            Technique ids) and `.technique_choices` (dict[str, str]).
+        context: Roll facts the trigger evaluates against — `skill_id`,
+            `weapon_category`, `weapon_type`, `hazard_type`,
+            `knowledge_field`, and `declared_technique_ids` (the player's
+            toggles for declared-kind Techniques). A field this dict omits
+            simply means no auto trigger keyed on it can fire — it is not
+            an error. `weapon_category` and `weapon_type` are orthogonal
+            (DESIGN §8): the former is the mechanical IV.1 taxonomy that
+            sets a Strike's attribute, the latter the fictional taxonomy
+            *Weapon Mastery* masters (blades/blunt/polearms/unarmed) — this
+            function does not know or care which trigger reads which key,
+            it only compares `context[trigger.match]`.
+        ruleset: A `MergedRuleset` (or anything exposing `get_technique()`
+            and the attributes `_step_difficulty_easier`/`_harder` read).
+
+    Returns:
+        `(final_label, applied_technique_id)` — `applied_technique_id` is
+        `None` when no Technique fired, so the roll banner and transcript
+        can distinguish an unmodified roll from a stepped one (DESIGN §2.7).
+    """
+    # Client-supplied; a non-iterable here used to raise straight through the
+    # dispatch loop and disconnect the sender.
+    raw_declared = context.get("declared_technique_ids") or []
+    if isinstance(raw_declared, (str, bytes)) or not isinstance(raw_declared, (list, tuple, set)):
+        raw_declared = []
+    declared_ids = {str(x) for x in raw_declared}
+    # (precedence_rank, technique_id): rank 0 = player-declared, rank 1 = auto.
+    # Sorting by this tuple gives "declared beats auto, then lowest id" in one step.
+    candidates: list[tuple[int, str]] = []
+
+    for tech_id in character.techniques:
+        tech_def = ruleset.get_technique(tech_id)
+        if tech_def is None or tech_def.difficulty_step is None or tech_def.step_trigger is None:
+            continue
+
+        trigger = tech_def.step_trigger
+        if trigger.kind == "declared":
+            if tech_id not in declared_ids:
+                continue
+            candidates.append((0, tech_id))
+        elif trigger.kind == "auto":
+            # A Technique the book scopes to one skill only fires on that skill.
+            # Without this, Acclimated ("Endurance rolls against your chosen
+            # hardship") and Field of Mastery ("Lore rolls within your chosen
+            # field") stepped any roll that carried the matching context string —
+            # the engine implementing a wider rule than the printed one.
+            if trigger.requires_skill and context.get("skill_id") != trigger.requires_skill:
+                continue
+            match_field = trigger.match
+            if not match_field or match_field not in context:
+                continue
+            context_value = context[match_field]
+            if context_value is None:
+                continue
+            if trigger.against == "choice":
+                expected = character.technique_choices.get(tech_id)
+            else:
+                expected = trigger.against
+            if expected is None or context_value != expected:
+                continue
+            candidates.append((1, tech_id))
+
+    if not candidates:
+        return declared_label, None
+
+    candidates.sort()
+    _, applied_id = candidates[0]
+    applied_def = ruleset.get_technique(applied_id)
+
+    if applied_def.difficulty_step == "easier":
+        final_label = _engine._step_difficulty_easier(declared_label, ruleset)
+    else:
+        final_label = _engine._step_difficulty_harder(declared_label, ruleset)
+
+    return final_label, applied_id
 
 
 def end_exchange(conditions: list[str], ruleset) -> list[str]:

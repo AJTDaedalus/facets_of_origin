@@ -515,3 +515,115 @@ behavioral upside, since Technique ids are looked up per-branch and never collid
 
 **Ruling: accepted as-is.** The asymmetric naming is cosmetic, not functional — both Techniques
 resolve correctly within their own Facet tree. No fix needed this cycle.
+
+---
+
+### B4 — Technique difficulty composes; the app applies mechanically-scoped steps automatically *(Brain ruling on the style-audit escalation, 2026-08-02; user ruling on the UX question, same day)*
+
+**Source:** `docs/BRIEF_technique_difficulty.md`, escalated from `docs/LOG_style_audit.md`
+after the `Normal:` pass found three baselines that did not exist.
+
+**Decision — three rulings and one UX call:**
+
+1. **Q1. Technique difficulty steps compose with the MM's situational call**, in a
+   fixed order: the MM declares the situational label per III.1, then any
+   character-side "one step easier" effect applies to that label, then the
+   four-rung ladder clamps. **Guardrail:** character-side steps never stack with
+   each other — at most one per roll, whatever its source.
+2. **Q2. The Second Domain penalty rides the grant route, not the domain count.**
+   Ascendant Domain's prismatic territory prices off the Broad table alone. The
+   Second Domain penalty is one step harder *than normal for that domain*, not
+   than the primary domain.
+3. **Q3. *The Final Blow* is a licensed override, not a rider.** III.3's "riders
+   never defeat" governs rider Conditions and stays verbatim. The removal works on
+   any target including Bosses, and is implemented as a **defeat event** through
+   the canonical path — never a raw `resolve_current` write (P11 invariant).
+4. **UX. Mechanically-scoped Technique steps auto-apply.** Where the trigger is
+   data the app already holds — *Weapon Mastery*'s weapon type, *Acclimated*'s
+   hardship type, *Field of Mastery*'s field, *Steady Hand*'s Finesse rolls — the
+   server applies the step without asking, and the roll banner shows both moves
+   ("Hard (MM) → Standard (Weapon Mastery)"). Fiction-scoped Techniques remain a
+   player toggle, because their trigger is a judgement call and no data the app
+   holds can settle it. **Only *The Uncanny Angle* ships as a toggle.**
+   *Pressure Point* was deferred entirely — it is party-wide scene state, not
+   roll-time metadata, and needs a store the app does not have (DESIGN §2.5,
+   `docs/TODO.md` T7). Five Techniques carry a step, not six.
+
+   Two Techniques the book scopes to one skill — *Acclimated* ("Endurance rolls
+   against your chosen hardship") and *Field of Mastery* ("Lore rolls that fall
+   within your chosen field") — carry a `requires_skill` conjunct. Without it the
+   engine implemented a wider rule than the printed one; caught in review, fixed
+   before merge.
+
+**Why:** the full argument is in the BRIEF. The load-bearing points:
+
+- Q1 was **already ruled in print** and never stated as a rule: III.3:513's play
+  example reads "Standard difficulty, but Weapon Mastery makes this one step
+  easier, so Easy" — the Technique applied *after* the base was set. The ruling
+  ratifies existing text rather than choosing against it. The non-stacking
+  guardrail is the exact shape of two guardrails already in canon (III.3:175,
+  III.3:410), so it costs no new concept.
+- Q2 ratifies working, tested code (`character.py:406–410`, `engine.py:330–338`),
+  which keeps the two grant routes apart *because the routes cost differently*.
+  The alternative prices a prismatic cantrip like the hardest acts in the game.
+- Q3's alternative makes a once-per-session Tier 3 capstone do nothing a
+  successful Strike does not already do.
+- Auto-apply is the bookkeeping-absorption pillar doing its job. A step the app
+  can derive from `technique_choices` is a step no human should be asked to
+  remember mid-exchange, and the banner keeps it visible rather than silent.
+
+**Rejected:**
+
+- *Q1, inside the budget* — makes Tier 1 signatures evaporate whenever the MM
+  applies any hardship, so a Technique's value would depend on the difficulty call.
+- *Q1, free composition* — arithmetic at the table, and it compounds with every
+  Facet shipped. The guardrail caps total drift at one rung forever.
+- *Q3, Boss carve-out* — requires the MM to consult a hidden number and announce a
+  diminished result at the most cinematic beat in the game.
+- *One-tap confirm for every step* — rejected by the user in favour of auto-apply.
+  The confirm survives only where the trigger is genuinely fictional.
+
+**Latent defect fixed in the same ruling:** *Second Domain* reads "one difficulty
+step harder **than your primary domain**." Read literally, a Focused-primary
+caster's second standard domain prices at Focused-plus-one — which *is* the
+standard table, silently deleting the penalty. Five surfaces re-anchor to "harder
+than normal for that domain": II.4b, II.4c, `facet.yaml` ×2 roll-texts, MM5.
+
+**Corpus:** intact for all three. `standard_party()` carries no Techniques
+(`combat_sim.py:973–981`), so Series 7 and 9 stand as published. MM1 gains one
+advisory sentence; no re-run gated.
+
+**Status:** ✅ Resolved by Brain, UX resolved by the user. Planner has produced
+`docs/DESIGN_technique_difficulty.md` and `docs/TASKS_technique_difficulty.md`.
+Return to Worker at TD-1.
+
+---
+
+### B5 — The Strike's skill is a default, not a restriction *(ratified 2026-08-03, backfilled)*
+
+**Decision:** III.3 names **Combat** for melee and unarmed Strikes and **Finesse**
+for ranged ones as *defaults*, not restrictions. Where the fiction supports it, a
+player may Strike with the skill that describes what they are doing, and where two
+pairings both fit, the player chooses. The MM may name a different attribute where
+the fiction clearly supports one.
+
+**Why:** the engine has always accepted any attribute/skill pairing the client
+sends (`_handle_strike`). The book said the skill *is* Combat or Finesse, which
+read as a restriction the engine does not enforce — and which made a
+Finesse-based unarmed character, exactly the monk-adjacent build Zulnut is,
+unbuildable by the book while being buildable in the app.
+
+Found by an agentic playtest on 2026-07-31
+(`playtest/08_npc_variance/subagent_session/report.md`, finding F1) when a
+monk-adjacent PC struck with Dexterity + Finesse, the engine allowed it, and the
+book forbade it.
+
+**Status:** ✅ Landed with the style-audit commit and pinned by **INV-8**
+(`test_books_do_not_restrict_the_strike_pairing`), which fails if any book line
+states the pairing without hedging.
+
+**Backfilled.** This entry is written after the fact. The ruling was recorded in
+the INV-8 test docstring and the playtest report but never in `DECISIONS.md`,
+which is where a rules change belongs — a reviewer reading only the decision log
+would have found a rules change with no ruling behind it. Recording the gap
+rather than quietly closing it.

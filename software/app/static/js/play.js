@@ -231,8 +231,14 @@ function performRoll() {
 
   const diffEl = document.getElementById('play-difficulty-select');
   const descEl = document.getElementById('play-roll-description');
+  const hazardEl = document.getElementById('play-roll-hazard-type');
+  const fieldEl = document.getElementById('play-roll-knowledge-field');
   const difficulty = diffEl ? diffEl.value : 'Standard';
   const description = descEl ? descEl.value.slice(0, 200) : '';
+  // Optional (B4 Q1, TD-8): absent unless the player names a hardship/field,
+  // in which case Acclimated/Field of Mastery may auto-apply a step.
+  const hazardType = hazardEl && hazardEl.value.trim() ? hazardEl.value.trim() : null;
+  const knowledgeField = fieldEl && fieldEl.value.trim() ? fieldEl.value.trim() : null;
 
   sendWS({
     type: 'roll',
@@ -241,6 +247,8 @@ function performRoll() {
     difficulty,
     sparks_spent: state.sparksToSpend,
     description,
+    hazard_type: hazardType,
+    knowledge_field: knowledgeField,
   });
 
   state.sparksToSpend = 0;
@@ -297,8 +305,17 @@ function buildRollResultHtml(msg, roll) {
 
   const whoStr = msg.player === state.playerName ? 'You' : (msg.character_name || msg.player);
 
+  // B4 Q1 (TD-10, DESIGN §2.7): auto-apply is only legible because the
+  // banner shows both moves — the MM's declared label AND the Technique
+  // that stepped it. When no Technique fired, msg.technique_step is absent
+  // (or null) and this renders nothing, leaving the banner unchanged.
+  const stepHtml = msg.technique_step
+    ? `<div class="technique-step-banner" style="font-size:0.8rem;color:var(--gold);margin-bottom:4px;">${escapeHtml(String(msg.technique_step.from))} (MM) → ${escapeHtml(String(msg.technique_step.to))} (${escapeHtml(String(msg.technique_step.technique_name))})</div>`
+    : '';
+
   return `
     <div style="font-size:0.8rem;color:var(--text-dim);margin-bottom:4px;">${whoStr} rolled ${roll.attribute_id}${roll.skill_id ? ' + ' + roll.skill_id : ''}${roll.difficulty !== 'Standard' ? ' [' + roll.difficulty + ']' : ''}${roll.sparks_spent > 0 ? ' x' + roll.sparks_spent : ''}</div>
+    ${stepHtml}
     <div class="dice-display">${diceHtml}</div>
     <div class="roll-total">${roll.total}</div>
     <div class="roll-outcome-label">${roll.outcome_label}</div>
@@ -502,6 +519,15 @@ function enemyStrikeOutcome(trackerKey, outcome) {
   sendWS({ type: 'enemy_strike', tracker_key: trackerKey, outcome });
 }
 
+/**
+ * TD-14 (B4 Q3): commits a Final Blow removal offered by a Strike. This is
+ * the MM confirmation DESIGN §4 requires before an actor is deleted from
+ * the encounter — auto-apply covers difficulty steps only, never this.
+ */
+function confirmFinalBlow(playerName, trackerKey) {
+  sendWS({ type: 'final_blow_confirm', player: playerName, tracker_key: trackerKey });
+}
+
 /** Manual correction — an undo, not a rule. Stays on `enemy_update`. */
 function enemyAdjustResolve(trackerKey, delta) {
   const enemy = state.activeEnemies[trackerKey];
@@ -550,8 +576,16 @@ function onEnemyUpdated(msg) {
   // infers either.
   if (msg.defeated) {
     delete state.activeEnemies[msg.tracker_key];
-    addSystemChat(`${name} is defeated.`);
-    notify(`${name} is defeated.`, 'success');
+    // TD-14/TD-13 (B4 Q3): a Final Blow removal is a licensed override, not
+    // Resolve depletion — `cause` distinguishes it in the log from an
+    // ordinary Resolve-0 defeat, same as it does in the transcript.
+    if (msg.cause === 'final_blow') {
+      addSystemChat(`${name} is removed from the conflict — The Final Blow.`);
+      notify(`${name} is removed from the conflict — The Final Blow.`, 'success');
+    } else {
+      addSystemChat(`${name} is defeated.`);
+      notify(`${name} is defeated.`, 'success');
+    }
   } else if (msg.depletion) {
     addSystemChat(`${name}: −${msg.depletion} Resolve (now ${msg.resolve_current}).`);
   }
@@ -1055,16 +1089,52 @@ function declarePosture() {
   sendWS({ type: 'declare_posture', posture });
 }
 
+/**
+ * TD-7 (B4 Q1 side benefit, IV.1:13-19): the weapon category picker sets the
+ * Strike attribute *as a default only* — the player can still override it,
+ * because the engine stays permissive on which attribute/skill a Strike uses
+ * (INV-8) and the picker must never become a gate on that.
+ */
+function onStrikeWeaponCategoryChange() {
+  const catEl = document.getElementById('strike-weapon-category');
+  const attrEl = document.getElementById('strike-attribute');
+  if (!catEl || !attrEl) return;
+  const category = catEl.value;
+  const categories = (state.ruleset && state.ruleset.equipment && state.ruleset.equipment.weapon_categories) || {};
+  const def = categories[category];
+  if (def && def.attributes && def.attributes.length) {
+    attrEl.value = def.attributes[0];
+  }
+}
+
 function performStrike() {
   const target = (document.getElementById('strike-target').value || '').trim();
   const attrId = document.getElementById('strike-attribute').value;
   const skillId = document.getElementById('strike-skill').value || null;
   const difficulty = document.getElementById('strike-difficulty').value;
   const press = document.getElementById('strike-press').checked;
+  const weaponCategoryEl = document.getElementById('strike-weapon-category');
+  const weaponCategory = weaponCategoryEl && weaponCategoryEl.value ? weaponCategoryEl.value : null;
+  // TD-18 (DESIGN §8): weapon_type is the orthogonal, fictional vocabulary
+  // (blades/blunt/polearms/unarmed) Weapon Mastery masters — separate from
+  // weapon_category above, which only defaults the attribute picker.
+  const weaponTypeEl = document.getElementById('strike-weapon-type');
+  const weaponType = weaponTypeEl && weaponTypeEl.value ? weaponTypeEl.value : null;
+  // TD-14 (B4 Q3): a player toggle, not an auto-apply — Final Blow deletes
+  // an actor from the encounter, so unlike a difficulty step it always
+  // needs the player's explicit ask and the MM's explicit confirmation
+  // (DESIGN §4). The server enforces once-per-session, Combat-roll, and
+  // Spark-spent; this checkbox only carries the player's declaration.
+  const finalBlowEl = document.getElementById('strike-final-blow');
+  const finalBlow = !!(finalBlowEl && finalBlowEl.checked);
 
   if (!target) { notify('Choose a target.', 'warn'); focusElement('strike-target'); return; }
   if (press && (state.character.endurance_current || 0) < 1) {
     notify('No Endurance left to Press.', 'warn');
+    return;
+  }
+  if (finalBlow && state.sparksToSpend < 1) {
+    notify('The Final Blow requires spending a Spark on this roll.', 'warn');
     return;
   }
 
@@ -1076,7 +1146,11 @@ function performStrike() {
     difficulty,
     press,
     sparks_spent: state.sparksToSpend,
+    weapon_category: weaponCategory,
+    weapon_type: weaponType,
+    final_blow: finalBlow,
   });
+  if (finalBlowEl) finalBlowEl.checked = false;
   state.sparksToSpend = 0;
   renderPlaySparkCounter();
 }
@@ -1230,14 +1304,48 @@ function onStrikeResult(msg) {
 
   // Show result box for own strikes
   if (msg.attacker === state.playerName) {
-    showRollResultBox({ player: msg.attacker, character_name: attackerName }, roll);
+    showRollResultBox({ player: msg.attacker, character_name: attackerName, technique_step: msg.technique_step }, roll);
   }
 
   // Prompt the MM to apply the outcome. How much it costs is the engine's
-  // business — the tracker's Hit buttons send the outcome, not a number.
+  // business — this sends the outcome, not a number.
+  //
+  // The prompt used to say "apply it on the enemy tracker" and leave the MM to
+  // find the row. A subagent playtest (playtest/08_npc_variance, F4) showed the
+  // real cost of that gap: a player rolled a full success on a Mook, said "that
+  // one should be gone", and it was still standing in the engine. Between the
+  // roll and the MM's click, the table's model of the fight and the engine's
+  // state disagree. When the target is a tracked enemy, apply it from here.
   if (state.role === 'mm' && msg.target && roll.outcome !== 'failure') {
-    notify(`${attackerName} hits ${msg.target} — ${roll.outcome_label}. `
-      + 'Apply it on the enemy tracker.', 'info', { duration: 7000 });
+    const tracked = state.activeEnemies && state.activeEnemies[msg.target];
+    const headline = `${attackerName} hits ${msg.target} — ${roll.outcome_label}.`;
+    if (tracked) {
+      notify(headline, 'info', {
+        duration: 12000,
+        key: 'apply-strike',
+        action: 'Apply',
+        onAction: () => enemyStrikeOutcome(msg.target, roll.outcome),
+      });
+    } else {
+      // Not in the tracker — a PvP Strike or an untracked target. Nothing to apply.
+      notify(`${headline} Apply it on the enemy tracker.`, 'info', { duration: 7000 });
+    }
+  }
+
+  // TD-14 (B4 Q3): the server only *offers* Final Blow on the roll — the
+  // removal never touches an enemy until the MM explicitly confirms it.
+  if (state.role === 'mm' && msg.final_blow_available && msg.target) {
+    const tracked = state.activeEnemies && state.activeEnemies[msg.target];
+    if (tracked) {
+      notify(`${attackerName} lands The Final Blow on ${msg.target} — confirm the removal?`, 'info', {
+        duration: 20000,
+        key: 'confirm-final-blow',
+        action: 'Confirm Final Blow',
+        onAction: () => confirmFinalBlow(msg.attacker, msg.target),
+      });
+    } else {
+      notify(`${attackerName} lands The Final Blow, but ${msg.target} is not in the enemy tracker.`, 'info', { duration: 7000 });
+    }
   }
 }
 
@@ -1260,7 +1368,12 @@ function onReactResult(msg) {
 
   const reactorName = (state.allCharacters[msg.player] || {}).name || msg.player;
   const rollStr = roll ? ' — ' + roll.outcome_label : '';
-  addSystemChat(reactorName + ' reacts: ' + msg.reaction + ' (cost ' + msg.endurance_cost + ' End)' + rollStr);
+  // B4 Q1 (TD-10): reactions have no roll-result box, so the banner text
+  // goes in the chat line instead — same two moves, same visibility.
+  const stepStr = msg.technique_step
+    ? ' [' + msg.technique_step.from + ' (MM) → ' + msg.technique_step.to + ' (' + msg.technique_step.technique_name + ')]'
+    : '';
+  addSystemChat(reactorName + ' reacts: ' + msg.reaction + ' (cost ' + msg.endurance_cost + ' End)' + rollStr + stepStr);
 }
 
 function onSupportResult(msg) {

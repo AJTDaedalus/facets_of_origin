@@ -5,7 +5,7 @@ import asyncio
 import json
 import logging
 import uuid
-from typing import Any
+from typing import Any, Optional
 
 from fastapi import WebSocket, WebSocketDisconnect
 from jose import JWTError
@@ -235,6 +235,8 @@ async def _dispatch(
         await _handle_enemy_update(msg, session, session_id)
     elif event_type == "enemy_strike" and is_mm:
         await _handle_enemy_strike(websocket, msg, session, session_id)
+    elif event_type == "final_blow_confirm" and is_mm:
+        await _handle_final_blow_confirm(msg, session, session_id)
     elif event_type == "remove_enemy" and is_mm:
         await _handle_remove_enemy(msg, session, session_id)
     # --- Threat Clock events (D4, PHB III.2) ---
@@ -261,6 +263,40 @@ def _spend_sparks(character, count: int) -> int:
     for _ in range(actual):
         character.spend_spark()
     return actual
+
+
+def _apply_difficulty_step(
+    character, declared_difficulty: str, context: dict, ruleset,
+) -> tuple[str, Optional[dict]]:
+    """Compose the MM's declared difficulty with any qualifying character-side
+    Technique step (B4 Q1). All the *rule* lives in
+    `combat.apply_character_difficulty_step` — this wrapper only looks up the
+    applied Technique's display name so the caller can put both moves on the
+    broadcast payload for the roll banner (DESIGN_technique_difficulty.md §2.7:
+    "Hard (MM) -> Standard (Weapon Mastery)").
+
+    Every WS handler that resolves a difficulty label (strike, generic roll,
+    reaction) calls this — never `combat_module.apply_character_difficulty_step`
+    directly and never a re-derived step — per TD-9.
+
+    Returns `(final_label, step_info)`. `step_info` is `None` when no
+    Technique fired, which is exactly the "unaffected" case the backward
+    compatibility requirement (TD-7/8/9) hinges on: a caller that ignores a
+    `None` gets today's behaviour byte-for-byte.
+    """
+    final_label, applied_id = combat_module.apply_character_difficulty_step(
+        declared_difficulty, character, context, ruleset,
+    )
+    if applied_id is None:
+        return final_label, None
+    tech_def = ruleset.get_technique(applied_id)
+    step_info = {
+        "technique_id": applied_id,
+        "technique_name": tech_def.name if tech_def else applied_id,
+        "from": declared_difficulty,
+        "to": final_label,
+    }
+    return final_label, step_info
 
 
 def _build_roll_request(character, msg: dict, ruleset, *, press: bool = False) -> RollRequest:
@@ -302,12 +338,32 @@ async def _handle_roll(
         return
 
     sparks_to_spend = _spend_sparks(character, sparks_requested)
+    skill_id = msg.get("skill_id")
+
+    # B4 Q1 (TD-8/TD-9): hazard_type and knowledge_field are optional strings
+    # a generic roll may carry so Acclimated/Field of Mastery can auto-fire.
+    # Absent (None) means the corresponding auto trigger simply does not fire
+    # — existing roll messages that never sent these fields are unaffected.
+    hazard_type = msg.get("hazard_type")
+    knowledge_field = msg.get("knowledge_field")
+    difficulty_declared = str(msg.get("difficulty", "Standard"))
+    difficulty, technique_step = _apply_difficulty_step(
+        character, difficulty_declared,
+        {
+            "skill_id": skill_id,
+            "hazard_type": str(hazard_type) if hazard_type is not None else None,
+            "knowledge_field": str(knowledge_field) if knowledge_field is not None else None,
+            "declared_technique_ids": msg.get("declared_technique_ids"),
+        },
+        session.ruleset,
+    )
+
     request = RollRequest(
         attribute_id=attribute_id,
         attribute_rating=character.attributes[attribute_id],
-        skill_id=msg.get("skill_id"),
-        skill_rank_id=character.skills[msg["skill_id"]].rank if msg.get("skill_id") and msg["skill_id"] in character.skills else None,
-        difficulty_label=msg.get("difficulty", "Standard"),
+        skill_id=skill_id,
+        skill_rank_id=character.skills[skill_id].rank if skill_id and skill_id in character.skills else None,
+        difficulty_label=difficulty,
         sparks_spent=sparks_to_spend,
         description=str(msg.get("description", ""))[:200],
     )
@@ -328,6 +384,7 @@ async def _handle_roll(
         "character_name": character.name,
         "roll": result_dict,
         "character_sparks_remaining": character.sparks,
+        "technique_step": technique_step,
     })
 
 
@@ -582,8 +639,78 @@ async def _handle_strike(
 
     press = bool(msg.get("press", False))
     sparks_requested = int(msg.get("sparks_spent", 0))
-    difficulty = str(msg.get("difficulty", "Standard"))
+    difficulty_declared = str(msg.get("difficulty", "Standard"))
     target_name = str(msg.get("target", ""))
+
+    # TD-7 (B4 Q1 side benefit, IV.1:13-19): an optional weapon category on
+    # the Strike. Reference data only — like `ruleset.equipment.weapon_categories`
+    # itself, this never gates which attribute/skill pairing the client sends
+    # (INV-8: the books may not restrict a Strike pairing the engine permits).
+    # It only (a) feeds Weapon Mastery's auto-trigger and (b) lets the client
+    # default the attribute picker, which is a client-side UX choice, not
+    # something this handler enforces.
+    weapon_category = msg.get("weapon_category")
+    if weapon_category is not None:
+        weapon_category = str(weapon_category)
+        valid_categories = set(session.ruleset.equipment.weapon_categories)
+        if weapon_category not in valid_categories:
+            await manager.send_to(websocket, {
+                "type": "error",
+                "message": f"Unknown weapon category '{weapon_category}'.",
+            })
+            return
+
+    # TD-18 (DESIGN §8): a second, orthogonal, optional field — `weapon_type`
+    # (blades/blunt/polearms/unarmed) is the *fictional* vocabulary Weapon
+    # Mastery masters, not the mechanical one `weapon_category` carries.
+    # Reference data only, same INV-8 reasoning as above; it feeds only
+    # Weapon Mastery's auto-trigger and sets no attribute default.
+    weapon_type = msg.get("weapon_type")
+    if weapon_type is not None:
+        weapon_type = str(weapon_type)
+        valid_types = set(session.ruleset.equipment.weapon_types)
+        if weapon_type not in valid_types:
+            await manager.send_to(websocket, {
+                "type": "error",
+                "message": f"Unknown weapon type '{weapon_type}'.",
+            })
+            return
+
+    # TD-14 (B4 Q3): *The Final Blow* is a licensed override, declared with
+    # the Strike. Preconditions are checked here, before the roll resolves
+    # and before any Spark is actually spent (`_spend_sparks` below), so a
+    # rejected declaration costs the player nothing: not unlocked, already
+    # used this session, not a Combat roll, or no Spark requested on this
+    # roll all refuse outright. Whether it *fires* is decided after the
+    # roll, from the outcome (7+ per the BRIEF). Whether it *commits* is a
+    # separate, later step — MM confirmation via `final_blow_confirm` — per
+    # DESIGN §4: auto-apply governs difficulty steps, not actor removal.
+    final_blow_requested = bool(msg.get("final_blow", False))
+    if final_blow_requested:
+        if "the_final_blow" not in character.techniques:
+            await manager.send_to(websocket, {
+                "type": "error", "message": "The Final Blow is not unlocked.",
+            })
+            return
+        if "the_final_blow" in character.techniques_used_this_session:
+            await manager.send_to(websocket, {
+                "type": "error", "message": "The Final Blow has already been used this session.",
+            })
+            return
+        if str(msg.get("skill_id", "combat")) != "combat":
+            await manager.send_to(websocket, {
+                "type": "error", "message": "The Final Blow requires a Combat roll.",
+            })
+            return
+        # Check the Spark the character *has*, not the one the client asked to
+        # spend: `_spend_sparks` clamps to `character.sparks` and silently
+        # spends 0, so testing the request alone hands the capstone out free to
+        # anyone at 0 Sparks.
+        if sparks_requested < 1 or character.sparks < 1:
+            await manager.send_to(websocket, {
+                "type": "error", "message": "The Final Blow requires spending a Spark on this roll.",
+            })
+            return
 
     # PHB III.3: Press costs Endurance (facet.yaml combat.press.endurance_cost)
     if press:
@@ -611,6 +738,20 @@ async def _handle_strike(
     offense_mod = combat_module.offense_modifier(
         character.posture or "measured", character.conditions, session.ruleset,
     ) or 0
+
+    # B4 Q1 (TD-9): the MM's declared label composes with at most one
+    # character-side Technique step — declared label first, step second
+    # (combat.apply_character_difficulty_step is the rule's only home).
+    difficulty, technique_step = _apply_difficulty_step(
+        character, difficulty_declared,
+        {
+            "skill_id": skill_id,
+            "weapon_category": weapon_category,
+            "weapon_type": weapon_type,
+            "declared_technique_ids": msg.get("declared_technique_ids"),
+        },
+        session.ruleset,
+    )
 
     request = RollRequest(
         attribute_id=attribute_id,
@@ -642,6 +783,16 @@ async def _handle_strike(
     if skill_id and skill_id in character.skills:
         character.skills_used_this_session.add(skill_id)
 
+    # TD-14: Final Blow fires on 7+ (both success tiers, per the BRIEF) —
+    # never on a 6- failure. Firing only *offers* the removal; it does not
+    # touch any enemy and does not mark the Technique used. That happens
+    # only in `_handle_final_blow_confirm`, gated to the MM.
+    final_blow_available = bool(
+        final_blow_requested
+        and sparks_to_spend >= 1          # the Spark was actually paid, not just requested
+        and result_dict["outcome"] in ("full_success", "partial_success")
+    )
+
     session.save_character_to_disk(player_name)
     await manager.broadcast(session_id, {
         "type": "strike_result",
@@ -652,6 +803,10 @@ async def _handle_strike(
         "posture": character.posture,
         "endurance_remaining": character.endurance_current,
         "sparks_remaining": character.sparks,
+        "weapon_category": weapon_category,
+        "weapon_type": weapon_type,
+        "technique_step": technique_step,
+        "final_blow_available": final_blow_available,
     })
 
 
@@ -717,15 +872,27 @@ async def _handle_react(
 
     # Active reactions (dodge/parry) require a roll
     roll_result = None
+    technique_step = None
     if reaction in ("dodge", "parry"):
         attr_id = "dexterity" if reaction == "dodge" else "strength"
         skill_id = None if reaction == "dodge" else "combat"
+        difficulty_declared = str(msg.get("difficulty", "Standard"))
+        # B4 Q1 (TD-9): same composition as Strike/roll — declared label
+        # first, at most one character-side Technique step second.
+        difficulty, technique_step = _apply_difficulty_step(
+            character, difficulty_declared,
+            {
+                "skill_id": skill_id,
+                "declared_technique_ids": msg.get("declared_technique_ids"),
+            },
+            session.ruleset,
+        )
         request = RollRequest(
             attribute_id=attr_id,
             attribute_rating=character.attributes.get(attr_id, 2),
             skill_id=skill_id,
             skill_rank_id=character.skills[skill_id].rank if skill_id and skill_id in character.skills else None,
-            difficulty_label=str(msg.get("difficulty", "Standard")),
+            difficulty_label=difficulty,
             description=f"{reaction} reaction",
         )
         roll = resolve_roll(request, session.ruleset)
@@ -744,6 +911,7 @@ async def _handle_react(
         "endurance_cost": cost,
         "endurance_remaining": character.endurance_current,
         "roll": roll_result,
+        "technique_step": technique_step,
     })
 
 
@@ -1268,7 +1436,9 @@ async def _handle_spawn_enemy(msg: dict, session, session_id: str) -> None:
     from app.game.enemy import Enemy
 
     enemy_id = str(msg.get("enemy_id", ""))
-    instance_name = str(msg.get("instance_name", ""))
+    # An explicit JSON null must not become the string "None" and rename the
+    # enemy — any client that sends the key unset would lose the stat block's name.
+    instance_name = str(msg.get("instance_name") or "")
 
     # Try loading from library first
     library_enemy = session.enemy_library.get(enemy_id)
@@ -1417,6 +1587,79 @@ async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -
         "defeated": result.defeated,
         "mook_removed": False,
         "conditions": list(enemy.conditions),
+    })
+
+    if result.phase_index is not None:
+        await manager.broadcast(session_id, {
+            "type": "enemy_phase_change",
+            "enemy_id": tracker_key,
+            "phase_index": result.phase_index,
+            "description": enemy.phases[result.phase_index].description,
+        })
+
+
+async def _handle_final_blow_confirm(msg: dict, session, session_id: str) -> None:
+    """MM confirms a Final Blow removal offered by a Strike (B4 Q3, TD-14).
+
+    The Strike handler (`_handle_strike`) only *offers* the removal via
+    `final_blow_available` on the roll — it never touches an enemy and
+    never marks the Technique used. This handler is the commit: MM-gated
+    at dispatch, per DESIGN §4 ("auto-apply governs difficulty steps, not
+    actor removal — these are different questions"). It resolves the
+    removal through `combat.apply_final_blow_removal`, the canonical
+    defeat path (P11 invariant, TD-13), and only *here* does the once-
+    per-session use actually get recorded — a Strike that offered Final
+    Blow but was never confirmed leaves the Technique available.
+    """
+    player_name = str(msg.get("player", ""))
+    tracker_key = str(msg.get("tracker_key", ""))
+
+    character = session.characters.get(player_name)
+    if not character:
+        await manager.broadcast(session_id, {
+            "type": "error", "message": f"No character '{player_name}'.",
+        })
+        return
+
+    enemy = session.active_enemies.get(tracker_key)
+    if not enemy:
+        await manager.broadcast(session_id, {
+            "type": "error", "message": f"No active enemy with key '{tracker_key}'.",
+        })
+        return
+
+    if "the_final_blow" not in character.techniques:
+        await manager.broadcast(session_id, {
+            "type": "error", "message": "The Final Blow is not unlocked.",
+        })
+        return
+    if "the_final_blow" in character.techniques_used_this_session:
+        await manager.broadcast(session_id, {
+            "type": "error", "message": "The Final Blow has already been used this session.",
+        })
+        return
+
+    before = enemy.resolve_current if enemy.resolve_current is not None else enemy.resolve
+    result = combat_module.apply_final_blow_removal(
+        before, phase_thresholds=[p.resolve_threshold for p in enemy.phases] or None,
+    )
+    enemy.resolve_current = result.resolve_current
+    character.techniques_used_this_session.append("the_final_blow")
+    session.save_character_to_disk(player_name)
+
+    await manager.broadcast(session_id, {
+        "type": "enemy_updated",
+        "tracker_key": tracker_key,
+        "resolve_current": result.resolve_current,
+        "depletion": result.depletion,
+        "defeated": result.defeated,
+        "mook_removed": False,
+        "conditions": list(enemy.conditions),
+        # Distinguishes this event from an ordinary enemy_strike defeat
+        # (DESIGN §4 / TD-13's "distinguishable in the transcript").
+        "cause": result.cause,
+        "player": player_name,
+        "technique_id": "the_final_blow",
     })
 
     if result.phase_index is not None:

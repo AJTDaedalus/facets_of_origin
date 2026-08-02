@@ -83,6 +83,42 @@ class SkillDef(BaseModel):
 # Techniques
 # ---------------------------------------------------------------------------
 
+class StepTriggerDef(BaseModel):
+    """The condition under which a Technique's `difficulty_step` fires (B4 Q1,
+    DESIGN_technique_difficulty.md §2.3).
+
+    Two kinds:
+        "auto": the app evaluates the trigger itself from roll context data it
+                already holds (e.g. `weapon_category`), and the step applies
+                without asking the player — the roll banner shows it happened.
+        "declared": the trigger is a fictional judgement call no data can
+                settle (e.g. "an unexpected angle of attack"), so the player
+                toggles it on the roll.
+
+    Fields:
+        kind: "auto" | "declared".
+        match: For "auto" only — the roll-context field name to check
+               (e.g. "weapon_category", "hazard_type", "knowledge_field",
+               "skill_id"). Unused (None) for "declared".
+        against: For "auto" only — what `match`'s context value must equal
+                 to fire. Either the literal string "choice" (compare
+                 against the character's `technique_choices[technique_id]`)
+                 or a literal value to compare against directly (e.g.
+                 Steady Hand's `skill_id == "finesse"`). Unused (None) for
+                 "declared".
+    """
+
+    kind: Literal["auto", "declared"]
+    match: str | None = None
+    against: str | None = None
+    #: When set, the trigger only fires on a roll using this skill. The
+    #: book scopes some Techniques to one skill — Acclimated is "Endurance
+    #: rolls against your chosen hardship", Field of Mastery is "Lore rolls
+    #: that fall within your chosen field". Without this conjunct the engine
+    #: implements a broader rule than the printed one.
+    requires_skill: str | None = None
+
+
 class TechniqueDef(BaseModel):
     """A single unlockable Technique in a Facet's Technique tree.
 
@@ -110,6 +146,47 @@ class TechniqueDef(BaseModel):
                         side effect of the prerequisite chain, since the chain is not
                         guaranteed to route through the Facet's domain-granting
                         Technique (sync report H-2).
+        difficulty_step: "easier" | "harder" | None (B4 Q1). If set, this
+                        Technique — once unlocked and its `step_trigger`
+                        satisfied — shifts a roll's declared difficulty one
+                        rung. Composed by `app.game.combat
+                        .apply_character_difficulty_step`, never applied
+                        inline by a caller. Optional and defaults to None so
+                        every Technique that predates B4 Q1 parses unchanged.
+        step_trigger: The `StepTriggerDef` gating `difficulty_step`. Required
+                        in practice whenever `difficulty_step` is set, but not
+                        enforced by the schema — a Technique with a step and
+                        no trigger simply never fires (see combat.py).
+        choices: The machine-readable option list for a `has_choice` Technique
+                        that is not domain-granting (DESIGN §8 / TD-19)  —
+                        e.g. Weapon Mastery's `blades`/`blunt`/`polearms`/
+                        `unarmed`. `choice_prompt` stays the human-readable
+                        label printed in the book; `choices` is what the
+                        client renders a picker from and what
+                        `technique_choices[tech_id]` is expected to hold.
+                        Optional and defaults to `None` so every Technique
+                        that predates TD-19 (including domain-granting ones,
+                        which build their option list from the domain
+                        catalog instead) parses unchanged. For Techniques
+                        whose fiction is deliberately open-ended (Field of
+                        Mastery), the list is suggestions, not a closed set —
+                        nothing in the schema or the engine enforces
+                        membership (INV-8).
+        removes_target_from_conflict: True only for *The Final Blow* (B4 Q3
+                        / TD-12). Marks a Technique as a **licensed
+                        override**, not a rider — III.3's "riders never
+                        defeat an enemy on their own" governs rider
+                        Conditions and does not apply to a Technique
+                        carrying this flag. The engine resolves its use as
+                        a defeat event through the canonical defeat path
+                        (`combat.apply_final_blow_removal`), never a raw
+                        `resolve_current` write (P11 invariant). A flag,
+                        not a mechanism — kept explicit and greppable so
+                        overrides stay countable (exactly one Technique
+                        this cycle; see
+                        `test_facets_schema.py::TestFinalBlowOverrideFlag`).
+                        Optional and defaults to `False` so every other
+                        Technique parses unchanged.
     """
 
     id: str
@@ -122,6 +199,10 @@ class TechniqueDef(BaseModel):
     grants_prismatic_domain: bool = False
     grants_secondary_domain: bool = False
     requires_domain: str | None = None
+    difficulty_step: Literal["easier", "harder"] | None = None
+    step_trigger: StepTriggerDef | None = None
+    choices: list[str] | None = None
+    removes_target_from_conflict: bool = False
 
 
 class TierDef(BaseModel):
@@ -611,6 +692,14 @@ class EquipmentDef(BaseModel):
     """Equipment reference data (PHB IV.1)."""
 
     weapon_categories: dict[str, WeaponCategoryDef] = Field(default_factory=dict)
+    # DESIGN §8 (TD-18): the *fictional* weapon vocabulary — blades/blunt/
+    # polearms/unarmed — that Weapon Mastery (II.4a) masters. Orthogonal to
+    # `weapon_categories` above, which is the *mechanical* vocabulary that
+    # sets a Strike's attribute. A longsword is `standard` category and
+    # `blades` type at once; the two lists are not meant to line up. No
+    # ranged entry exists here because Weapon Mastery has no option covering
+    # ranged weapons (content gap, docs/TODO.md T8 — not fixed in code).
+    weapon_types: list[str] = Field(default_factory=list)
 
 
 class DeathDef(BaseModel):

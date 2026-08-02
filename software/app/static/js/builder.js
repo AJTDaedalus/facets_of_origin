@@ -179,8 +179,21 @@ async function selectTechnique(techId) {
  * Offer the legal choices for a Technique. For the domain-granting Techniques
  * that means the right domain list: Ascendant Domain takes prismatic territories,
  * Second Domain takes standard ones only (PHB II.4b/II.4c).
+ *
+ * TD-20 (DESIGN §8): non-domain `has_choice` Techniques — Weapon Mastery,
+ * Acclimated, Field of Mastery — used to fall through to the domain logic
+ * below and get offered the character's primary Facet's *domain* names as
+ * candidate weapon types, hardships, or fields of knowledge, which is not
+ * merely wrong but doesn't even overlap the Technique's real vocabulary.
+ * TD-19 gave these three Techniques a `choices` list of their own in
+ * facet.yaml; when a Technique carries one, it is authoritative and the
+ * domain-list branch never runs for it.
  */
 function pickTechniqueChoice(def) {
+  if (def.choices && def.choices.length) {
+    return pickFromChoicesList(def);
+  }
+
   const magic = (state.ruleset && state.ruleset.magic) || {};
   const facetForDomains = def.requires_domain || state.character.primary_facet;
   const list = (facetForDomains === 'mind' ? magic.mind_domains : magic.soul_domains) || [];
@@ -206,6 +219,31 @@ function pickTechniqueChoice(def) {
     def.name || def.id,
     def.choice_prompt || 'Choose a domain.',
     options.map(d => ({ value: d.id, label: `${d.name} (${d.type})` })));
+}
+
+/**
+ * Picker for a non-domain Technique's `choices` list (TD-19/TD-20).
+ *
+ * Field of Mastery is deliberately open-ended in the fiction (II.4a: "or
+ * another domain with MM approval") — nothing gates membership (INV-8) —
+ * so it alone gets an "Other..." entry that drops into free text via
+ * `promptDialog`. Weapon Mastery and Acclimated are closed sets (the book
+ * lists exactly four/four options each) and offer only what `choices` says.
+ */
+async function pickFromChoicesList(def) {
+  const OTHER = '__other__';
+  const options = def.choices.map(c => ({ value: c, label: c }));
+  if (def.id === 'field_of_mastery') {
+    options.push({ value: OTHER, label: 'Other (type your own)...' });
+  }
+  const picked = await selectDialog(
+    def.name || def.id,
+    def.choice_prompt || 'Choose an option.',
+    options);
+  if (picked === OTHER) {
+    return promptDialog('Field of Mastery', 'e.g. cartography, herbalism...', '');
+  }
+  return picked;
 }
 
 // ---------------------------------------------------------------------------
