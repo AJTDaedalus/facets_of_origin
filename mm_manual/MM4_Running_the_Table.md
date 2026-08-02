@@ -114,9 +114,11 @@ Every one of these is a communication problem, not a behavior problem. People ar
 
 **What to do:**
 
-- **At the table:** Direct questions to quiet players by name. "Mordai, what are you doing while Zahna is reading the records?" This is not a correction — it is a redirect. The dominant player usually doesn't even notice.
-- **Structured moments:** In tense scenes, go around the table. "Each of you — what is your character doing right now?" This gives everyone a guaranteed moment without singling anyone out.
-- **Privately, if it persists:** "You're clearly into this, and I love that. I want to make sure everyone else gets that same energy. Can you help me by holding back a beat sometimes and letting the others jump in first?" Frame it as a request for help, not a complaint.
+**At the table:** Direct questions to quiet players by name. "Mordai, what are you doing while Zahna is reading the records?" This is not a correction — it is a redirect. The dominant player usually doesn't even notice.
+
+**Structured moments:** In tense scenes, go around the table. "Each of you — what is your character doing right now?" This gives everyone a guaranteed moment without singling anyone out.
+
+**Privately, if it persists:** "You're clearly into this, and I love that. I want to make sure everyone else gets that same energy. Can you help me by holding back a beat sometimes and letting the others jump in first?" Frame it as a request for help, not a complaint.
 
 ### The Player Who Disengages
 
@@ -126,7 +128,8 @@ Every one of these is a communication problem, not a behavior problem. People ar
 
 **What to do:**
 
-- **At the table:** Create a moment specifically for them. Use their character's background, their skills, their stated interests. "The symbol on the wall — Zulnut, you've seen this before. Where?" Give them something only their character can contribute.
+**At the table:** Create a moment specifically for them. Use their character's background, their skills, their stated interests. "The symbol on the wall — Zulnut, you've seen this before. Where?" Give them something only their character can contribute.
+
 - **Between sessions:** Ask, without pressure. "Are you having fun? Is there something you'd like more of?" Sometimes the answer is "I'm just tired" and that is fine. Sometimes the answer reveals a mismatch you can fix.
 - **Accept the range.** Not every player engages the same way. Some people are happy being along for the ride, contributing when the moment calls for it and otherwise enjoying the story. If they are having fun, that is enough.
 
@@ -150,9 +153,11 @@ Every one of these is a communication problem, not a behavior problem. People ar
 
 **What to do:**
 
-- **In the moment:** Let consequences happen in the fiction. The town guard responds. The NPC is offended. The party's reputation suffers. Do not escalate punitively — just let the world react honestly.
-- **At the table, if it continues:** "This is a cooperative game. Your character needs a reason to work with the party. If we can't find one, we should talk about making a character who has one."
-- **Privately, always:** "I've noticed a pattern. Is something going on? Are you not into the game we're playing?" Sometimes the answer is yes, and the kindest thing is to help them bow out gracefully.
+**In the moment:** Let consequences happen in the fiction. The town guard responds. The NPC is offended. The party's reputation suffers. Do not escalate punitively — just let the world react honestly.
+
+**At the table, if it continues:** "This is a cooperative game. Your character needs a reason to work with the party. If we can't find one, we should talk about making a character who has one."
+
+**Privately, always:** "I've noticed a pattern. Is something going on? Are you not into the game we're playing?" Sometimes the answer is yes, and the kindest thing is to help them bow out gracefully.
 
 The nuclear option — asking a player to leave the table — exists, and sometimes it is the right call. But it is always the last resort, and it is always done privately, with respect, after other approaches have been exhausted. You are not firing an employee. You are ending a social arrangement that is no longer working for everyone involved.
 
@@ -165,13 +170,9 @@ People come to the table wanting different things. None of these wants are wrong
 This is not a rigid taxonomy. Most players want several of these things in different proportions, and those proportions shift from session to session. But it helps to have a loose vocabulary for what your players are looking for.
 
 - **The Tactician** wants meaningful choices with real consequences. They engage most when the situation is a puzzle with multiple viable approaches. Give them encounters where positioning, resource management, and clever use of abilities matters. The exchange structure and posture system are built for this player.
-
 - **The Actor** wants to inhabit their character. They engage most during dialogue, personal moments, and scenes where their character's personality and history are relevant. Give them NPCs who react to them as people, not quest-dispensers. Ask them what their character is feeling.
-
 - **The Socializer** is here for the people at the table as much as the game. They engage most when the table is laughing, arguing in-character, or building on each other's ideas. Give them scenes that require collaboration. Create opportunities for characters to bounce off each other.
-
 - **The Explorer** wants to discover the world. They engage most when there are mysteries to unravel, lore to uncover, places to see. Give them details that reward curiosity. Leave things unexplained. Let them find the answers themselves.
-
 - **The Storyteller** wants a satisfying narrative arc. They engage most when events connect, when themes recur, when their character's choices have lasting consequences. Give them callbacks to earlier sessions. Let the story remember what they did.
 
 A good session has at least one moment for each type of player at the table. You do not need to do this mechanically or consciously every time — but if you finish a session and one player never had a moment that was *for them*, notice that, and adjust next time.

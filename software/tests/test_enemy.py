@@ -1,8 +1,12 @@
 """Tests for the Enemy model — TR calculation, serialization, combat tracker."""
+from pathlib import Path
+
 import pytest
 import yaml
 
 from app.game.enemy import Enemy
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
 # ---------------------------------------------------------------------------
@@ -287,3 +291,108 @@ class TestEnemyPhases:
         assert len(loaded.phases) == 1
         assert loaded.phases[0].resolve_threshold == 2
         assert loaded.phases[0].description == "Reduced Mode."
+
+
+class TestConduct:
+    """A stat block without behaviour is a spreadsheet, not an enemy.
+
+    `monster_books.md` §8.7 makes a Tactics section mandatory: disposition,
+    first-target logic, if-then triggers, and a morale line. Before this, that
+    material lived in the freeform `notes` blob under ad-hoc ALLCAPS labels that
+    differed per file — `Posture tendency:` in one, `CONDUCT:` in another — so
+    nothing could find it, render it, or check that it existed.
+    Audit finding E2.
+    """
+
+    def test_conduct_fields_default_to_empty(self):
+        enemy = Enemy(id="blank", name="Blank")
+        assert enemy.disposition == ""
+        assert enemy.first_target == ""
+        assert enemy.triggers == []
+        assert enemy.morale == ""
+        assert enemy.organization == ""
+        assert enemy.negotiation == ""
+
+    def test_conduct_round_trips_through_fof(self):
+        enemy = Enemy(
+            id="tollkeeper", name="Tollkeeper", tier="named", resolve=3,
+            disposition="Calculating; treats the fight as a transaction.",
+            first_target="The best-armoured character, trusting her coat.",
+            triggers=["At half Resolve she goes Aggressive and stops offering the toll.",
+                      "If a valuable is dropped, she takes it instead of pursuing."],
+            morale="Will not pursue anyone who drops a valuable and runs.",
+            organization="Works one stretch of road alone; never in numbers.",
+        )
+        restored = Enemy.from_fof(enemy.to_fof())
+        assert restored.disposition == enemy.disposition
+        assert restored.first_target == enemy.first_target
+        assert restored.triggers == enemy.triggers
+        assert restored.morale == enemy.morale
+        assert restored.organization == enemy.organization
+
+    def test_conduct_is_omitted_from_fof_when_empty(self):
+        """Absent fields are omitted, not written as empty strings — the
+        legend states what absence means (style guide Law 1)."""
+        block = Enemy(id="blank", name="Blank").to_fof()["enemy"]
+        for field in ("disposition", "first_target", "triggers", "morale",
+                      "organization", "negotiation"):
+            assert field not in block
+
+    def test_negotiation_survives_the_round_trip(self):
+        boss = Enemy(id="guardian", name="Guardian", tier="boss", resolve=8,
+                     negotiation="Wants the archive intact. Shifts if shown a "
+                                 "writ. Honours any deal that ends with the "
+                                 "doors sealed behind it.")
+        assert Enemy.from_fof(boss.to_fof()).negotiation == boss.negotiation
+
+    def test_legacy_files_without_conduct_still_load(self):
+        legacy = {
+            "type": "enemy", "id": "old", "name": "Old",
+            "enemy": {"tier": "mook", "attack_modifier": 0},
+        }
+        enemy = Enemy.from_fof(legacy)
+        assert enemy.morale == ""
+        assert enemy.triggers == []
+
+
+class TestShippedEnemyFiles:
+    """Every enemy the project ships states how it fights and when it stops.
+
+    `monster_books.md` §9: "stat blocks without behaviour" is the anti-pattern,
+    and `adventures.md` §9.7 requires a morale line on every Tactics entry —
+    no fight-to-the-death defaults. This is the check that the shipped corpus
+    obeys the rule, not just the model.
+    """
+
+    ENEMY_DIRS = [
+        REPO_ROOT / "enemies",
+        REPO_ROOT / "adventures" / "oraga_night" / "enemies",
+    ]
+
+    def _shipped(self):
+        import yaml
+        for directory in self.ENEMY_DIRS:
+            for path in sorted(directory.glob("*.fof")):
+                yield path, Enemy.from_fof(yaml.safe_load(path.read_text()))
+
+    def test_every_shipped_enemy_states_a_disposition(self):
+        missing = [p.name for p, e in self._shipped() if not e.disposition]
+        assert not missing, f"No disposition: {missing}"
+
+    def test_every_shipped_enemy_states_a_morale_line(self):
+        missing = [p.name for p, e in self._shipped() if not e.morale]
+        assert not missing, (
+            f"No morale line — these default to fighting to the death: {missing}")
+
+    def test_every_boss_states_a_negotiation_surface(self):
+        """`adventures.md` §7: a Boss without a stated negotiation surface can
+        only be solved by killing it."""
+        missing = [p.name for p, e in self._shipped()
+                   if e.tier == "boss" and not e.negotiation]
+        assert not missing, f"Boss with no negotiation surface: {missing}"
+
+    def test_shipped_enemies_round_trip(self):
+        for path, enemy in self._shipped():
+            restored = Enemy.from_fof(enemy.to_fof())
+            assert restored.morale == enemy.morale, path.name
+            assert restored.triggers == enemy.triggers, path.name

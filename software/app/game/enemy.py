@@ -46,6 +46,19 @@ class Enemy(BaseModel):
     techniques: list[str] = Field(default_factory=list)
     special: Optional[str] = None
     description: str = ""
+
+    # Conduct — grouped by the moment the MM needs it, which is the ordering
+    # principle a 2007-era stat block is built on (monster_books.md §3): what
+    # the enemy is like, who it goes for, what changes mid-fight, and when it
+    # stops fighting. `tactics` predates these and stays as free prose; the
+    # fields below are what MM1 and the enemy chapter actually render.
+    disposition: str = ""
+    first_target: str = ""
+    triggers: list[str] = Field(default_factory=list)
+    morale: str = ""
+    organization: str = ""
+    negotiation: str = ""
+
     tactics: str = ""
     personality: str = ""
     loot: list[str] = Field(default_factory=list)
@@ -124,6 +137,13 @@ class Enemy(BaseModel):
         }
         if self.tier != "mook":
             enemy_block["resolve"] = self.resolve
+        for field in ("disposition", "first_target", "morale",
+                      "organization", "negotiation"):
+            value = getattr(self, field)
+            if value:
+                enemy_block[field] = value
+        if self.triggers:
+            enemy_block["triggers"] = list(self.triggers)
         if self.tactics:
             enemy_block["tactics"] = self.tactics
         if self.personality:
@@ -180,6 +200,12 @@ class Enemy(BaseModel):
             techniques=enemy_block.get("techniques") or [],
             special=enemy_block.get("special"),
             description=enemy_block.get("description", ""),
+            disposition=enemy_block.get("disposition", ""),
+            first_target=enemy_block.get("first_target", ""),
+            triggers=enemy_block.get("triggers") or [],
+            morale=enemy_block.get("morale", ""),
+            organization=enemy_block.get("organization", ""),
+            negotiation=enemy_block.get("negotiation", ""),
             tactics=enemy_block.get("tactics", ""),
             personality=enemy_block.get("personality", ""),
             loot=enemy_block.get("loot") or [],

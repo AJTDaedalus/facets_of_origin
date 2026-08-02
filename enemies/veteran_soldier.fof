@@ -18,6 +18,13 @@ enemy:
   special: null
   tr: 10                # offense(+3→5) + durability(Resolve 4) + armor(light→1) + techniques(0) = 10
 
+  disposition: >
+    Trained, unhurried, and entirely without anything to prove.
+
+  morale: >
+    Withdraws in good order when a fight stops being worth the wound.
+    Does not rout.
+
   description: >
     A hardened fighter with years of real combat experience. Not a
     tactician — a survivor. Knows how to absorb punishment, how to

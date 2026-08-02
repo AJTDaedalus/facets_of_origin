@@ -1,0 +1,39 @@
+fof_version: '0.1'
+type: enemy
+id: waiting_one
+name: A Waiting One
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+enemy:
+  tier: named
+  attack_modifier: 2
+  defense_modifier: 1
+  armor: none
+  techniques:
+  - the_task
+  special: THE TASK — a Waiting One is doing something, and the MM knows what. Any
+    character who takes an action that genuinely advances that task is not a target
+    this exchange, and the Waiting One will work around them.
+  description: Someone at work. The hands move, the tools are real, and the job
+    is being done properly. It is only when you have watched for a while that you
+    notice the job was finished a long time ago, and is being done again.
+  disposition: Occupied. Violence is an interruption, and it is treated as one.
+  first_target: Whoever is between it and the work.
+  triggers:
+  - Never strikes first, and never strikes anyone who is helping.
+  - Becomes immediately and comprehensively dangerous to anyone who damages the
+    work.
+  morale: Stops when the task is finished, and only then. Nothing else stops it;
+    at Resolve 0 it simply cannot continue, which is not the same thing and the
+    fiction should say so.
+  organization: 'Where people died mid-task: one to four, each on its own job.'
+  notes: 'TR breakdown: offense(+2 → 4) + durability(Resolve 4) + armor(none → 0)
+    + techniques(1) = 9.'
+  negotiation: Wants the work done. Shifts for help. Honours nothing, because it
+    is not making agreements — but a party that finishes the job is not opposed
+    again.
+  resolve: 4
+created_at: '2026-08-02T00:00:00+00:00'
+last_modified: '2026-08-02T00:00:00+00:00'

@@ -17,6 +17,16 @@ enemy:
   special: null
   tr: 1                 # Mook minimum. Offense(−1→value 1) + Durability(0) + Armor(0) = 1.
 
+  disposition: >
+    A chicken. It is not fighting; it is having a bad time in the same
+    room as a fight.
+
+  morale: >
+    Wanders off the moment nothing is chasing it.
+
+  organization: >
+    Alone, in pairs, or in a genuinely alarming quantity.
+
   description: >
     A chicken. Technically alive. Technically a threat, in the sense
     that it occupies space and has opinions about personal boundaries.

@@ -1,6 +1,12 @@
 # Mirror Master's Manual: Encounters and Enemies
 
-## Overview
+Building a fight is three jobs, and only one of them is arithmetic.
+
+The first is **stating an enemy** — the smallest set of numbers that lets you run something in a full exchange without writing it a character sheet. The second is **rating it**, so you can compare a harbour tough to an archive guardian without playing both fights first. The third is **choosing how many**, which is the one that actually decides whether your table has a good evening, and the one where the obvious tool is the wrong tool.
+
+This chapter does them in that order, and it is honest about which of its numbers are simulation-validated and which are educated guesses.
+
+And when you would rather not build anything: the **Bestiary** is eighteen creatures that arrive finished, sorted by Threat Rating, every one of them already carrying the conduct this chapter would otherwise have you invent.
 
 This chapter gives you the tools to build enemies, assign them a Threat Rating, and calibrate how hard an encounter will feel for a given party — without requiring a full character sheet for every bandit in the room.
 
@@ -8,7 +14,7 @@ The system has three layers:
 
 1. **Enemy stat blocks** — a minimal set of numbers sufficient to run any enemy in the full exchange structure
 2. **Threat Rating (TR)** — a single number summarizing how dangerous one enemy is
-3. **The Encounter Recipe Table** — simulation-validated rosters mapped to difficulty; this is the tool you actually build encounters from. (A rough TR budget is also provided, but it is a loose ordering check, not a difficulty predictor — see below.)
+3. **The Encounter Recipe Table** — simulation-validated rosters mapped to difficulty; this is the tool you actually build encounters from. (A rough TR budget is also provided, but it is a loose ordering check, not a difficulty predictor — see *The TR budget*, MM1.)
 
 ---
 
@@ -84,6 +90,8 @@ TR = offense + durability + armor_bonus + technique_bonus
 
 **Offense** — the enemy's attack roll modifier (attribute + skill):
 
+**Table MM1–1: Offense Value by Attack Modifier**
+
 | Attack Modifier | Offense Value |
 |---|---|
 | −2 or lower | 0 |
@@ -96,6 +104,8 @@ TR = offense + durability + armor_bonus + technique_bonus
 
 **Durability** — an enemy's base Resolve (the armor bonus below is added separately):
 
+**Table MM1–2: Durability Value by Enemy Type**
+
 | Enemy Type | Durability Value |
 |---|---|
 | Mook (no Resolve, one Strike) | 0 |
@@ -105,6 +115,8 @@ TR = offense + durability + armor_bonus + technique_bonus
 Durability is simply the enemy's base Resolve — the pool a party's Strikes deplete. A Mook has none, so its durability is 0.
 
 **Armor bonus:**
+
+**Table MM1–3: Armor Bonus**
 
 | Armor | Bonus |
 |---|---|
@@ -116,6 +128,8 @@ Durability is simply the enemy's base Resolve — the pool a party's Strikes dep
 
 ### TR Reference Examples
 
+**Table MM1–4: TR Reference Examples**
+
 | Enemy | TR | Notes |
 |---|---|---|
 | Basic Mook (unskilled, no armor) | 2 | Offense 2, Durability 0 |
@@ -124,10 +138,20 @@ Durability is simply the enemy's base Resolve — the pool a party's Strikes dep
 | Veteran Soldier | 10 | Offense 5, Durability 4 (Resolve 4), Armor 1 |
 | The Archive Guardian | 17 | Offense 5, Durability 8 (Resolve 8), Armor 2, Techniques 2 |
 
-> **TR minimums by tier:**
-> - Mook: TR 1 (even the most incompetent attacker occupies space and splits attention)
-> - Named NPC: TR 8 (a Named NPC that poses no real threat isn't named — they're a Mook with a name)
-> - Boss: TR 12 (a Boss that doesn't require sustained effort isn't a Boss — it's a Named NPC with a phase)
+> **Example — rating an enemy from scratch**
+>
+> The MM needs a harbour tough for a scene at the Thornwall docks. Not a name, not a threat — a body in a doorway.
+>
+> **Offense.** Strength 2, no Combat rank: attack modifier +0, which is offense value **2**.
+> **Durability.** A Mook, so base Resolve 0 — durability value **0**.
+> **Armor.** A leather jerkin, which is light: **+1**.
+> **Techniques.** None: **+0**.
+>
+> `TR = 2 + 0 + 1 + 0 = 3`. Above the Mook minimum of 1, well under the Named minimum of 8, which is the arithmetic agreeing with the fiction: this is somebody's muscle, not somebody.
+>
+> Now the same body promoted. Give him Combat at Practiced (attack +1 → offense 3), a name, and Resolve 3, and TR goes to 7 — *below* the Named minimum. That is the formula telling the MM something true: a Named NPC at Resolve 3 with one skill rank is not yet worth the party's attention. Either give him a Technique, better armor, or leave him a Mook.
+
+**TR minimums by tier.** A **Mook** is TR 1 at minimum — even the most incompetent attacker occupies space and splits attention. A **Named NPC** is TR 8: one that poses no real threat is not named, it is a Mook with a name. A **Boss** is TR 12: one that does not require sustained effort is not a Boss, it is a Named NPC with a phase.
 
 ---
 
@@ -141,9 +165,13 @@ Because of this, **the calibrated tool you should actually build from is the [En
 
 Party Strength is the sum of all participating characters' `career_advances`.
 
+> **Example — Party Strength**
+>
 > *Zahna, Mordai, and Zulnut each have `career_advances: 1`. Party Strength = 3.*
 
 ### The TR budget (a rough ordering check only)
+
+**Table MM1–5: The TR Budget**
 
 | Difficulty | Intended feel | Total Enemy TR | Description |
 |---|---|---|---|
@@ -152,11 +180,13 @@ Party Strength is the sum of all participating characters' `career_advances`.
 | **Hard** | Coin flip | Party Strength × 3 | Someone likely goes Broken; requires good decisions |
 | **Deadly** | Expected loss | Party Strength × 4 | Party is expected to lose the straight fight; winning requires cleverness or exceptional luck |
 
-The "intended feel" column is the *design intent* for each difficulty. The multipliers (×1/×2/×3/×4) are **not** validated to produce those feels — they are a loose "bigger number is probably harder" ordering aid for simple/solo/Mook rosters. Any earlier presentation of these as validated "~95/75/50/25%" win rates was withdrawn: simulation showed no set of multipliers can reproduce the real (actor-count-gated) difficulty curve. **Do not derive a multi-Named/Boss encounter from this table — it will over-count badly (see the example below). Use the Recipe Table.**
+The "intended feel" column is the *design intent* for each difficulty. The multipliers (×1/×2/×3/×4) are **not** validated to produce those feels — they are a loose "bigger number is probably harder" ordering aid for simple/solo/Mook rosters. Any earlier presentation of these as validated "~95/75/50/25%" win rates was withdrawn: simulation showed no set of multipliers can reproduce the real (actor-count-gated) difficulty curve. **Do not derive a multi-Named/Boss encounter from this table — it will over-count badly (see *Action Economy Adjustment*, MM1). Use the Recipe Table.**
 
 ### Action Economy Adjustment
 
 Raw TR comparison doesn't account for **action economy** — more enemies mean more actions per exchange. The modifiers below are the same kind of rough ordering aid as the budget itself, and carry the same caveat: they capture the *direction* (more actors, more pressure) but not the sharp actor-count threshold the simulator measured.
+
+**Table MM1–6: Action Economy Multipliers**
 
 | Enemy Configuration | TR Multiplier | Notes |
 |---|---|---|
@@ -165,7 +195,9 @@ Raw TR comparison doesn't account for **action economy** — more enemies mean m
 | 4–6 enemies | × 1.25 | Action pressure compounds (Mook-only swarms: ×1.1) |
 | 7+ enemies | × 1.5 | Swarming creates tactical overload |
 
-> **Example — why the budget is only a rough check.** Three City Watch Sergeants (TR 8 each = 24 total, ×1.0 for three enemies = **24 effective TR**) sit at eight times a Party Strength of 3 — the raw budget screams "well above Deadly." Simulation says otherwise: three TR-8 Named enemies against a fresh PS-3 party is a near-clean win (~96% party win) — a Standard fight only *once you add a Mook*. The budget over-counted by more than a full difficulty band, because what it can't see is that three Named is barely the threshold at which difficulty becomes *tunable* at all — you climb from there by adding actors. This is exactly why the Recipe Table, not the budget, is the tool you build from.
+> **Example — why the budget is only a rough check**
+>
+> Three City Watch Sergeants (TR 8 each = 24 total, ×1.0 for three enemies = **24 effective TR**) sit at eight times a Party Strength of 3 — the raw budget screams "well above Deadly." Simulation says otherwise: three TR-8 Named enemies against a fresh PS-3 party is a near-clean win (~96% party win) — a Standard fight only *once you add a Mook*. The budget over-counted by more than a full difficulty band, because what it can't see is that three Named is barely the threshold at which difficulty becomes *tunable* at all — you climb from there by adding actors. This is exactly why the Recipe Table, not the budget, is the tool you build from.
 
 ---
 
@@ -208,6 +240,8 @@ Bosses should be built to last *and* to change. A Boss that simply has more Reso
 
 **Phase changes** are narrative triggers — keyed to a `resolve_threshold` on the Boss's stat block, crossed when a Strike depletes their Resolve past that point — that shift something about how the fight works. Not necessarily harder; sometimes stranger.
 
+> **Example — the Archive Guardian changes phase**
+>
 > *The Archive Guardian's phase change: when its Resolve drops to 2 or below, it enters Reduced Mode. Its attack drops. But it begins ignoring Tier 1 Conditions entirely — not because it's powerful, but because the thing that was interpreting sensory feedback has shut down. It's running on something else now. What that is, the party doesn't know.*
 
 **What a phase change may actually do.** A phase must change something that is live *right now*, in the exchange the party is fighting through — a piece of the enemy's runtime state, not a number that was already spent. Four levers do this, and they are the whole toolbox:
@@ -221,6 +255,10 @@ Bosses should be built to last *and* to change. A Boss that simply has more Reso
 
 Phase changes should feel like story beats, not just mechanical resets. The fiction should change *and* something the party can act on should change with it — never the fiction alone dressed over a stat that can't move.
 
+> **MM Note — build for the early exit, not against it**
+>
+> A Tier 3 capstone like *The Final Blow* (Body/Might, II.4a) can end a Boss outright, on any target, once per session — that is what the Technique is for, and it is not subject to the rider limit (see *Strike*, III.3). If a Boss's second act only exists in your notes and never in the fiction the party can act on, a capstone landing early does not just skip a phase — it skips the *encounter*. Build Bosses so the party deleting them is a win, not a broken script: front-load anything the phase change was protecting (a hostage taken, information dropped mid-fight, an environmental threat the Boss was suppressing) so it is already live by the time a capstone could land, rather than something the party only sees by grinding Resolve down in order.
+
 ---
 
 ## Running Asymmetric Encounters
@@ -232,7 +270,31 @@ Sometimes an encounter is designed to be asymmetric — the party cannot win by 
 - Give the party something to exploit (a structural weakness, a limitation in the enemy's programming, a negotiation opening)
 - Make the straight fight winnable but costly — it should be a real option, just an expensive one
 
+> **MM Note — a lateral solution is the encounter working**
+>
 > If a player finds a clever lateral solution that bypasses most of the TR, they have not broken the encounter — that is the encounter working correctly. The TR budget is a calibration tool, not a ceiling.
+
+---
+
+## Enemy Conduct Fields
+
+A stat block says how hard something is. These say how it behaves, and the Bestiary
+renders them straight out of the file — an enemy written without them is a
+spreadsheet row.
+
+**`disposition:`** its whole combat philosophy in one sentence.
+**`first_target:`** who it goes for, and why.
+**`triggers:`** a list of if-then rules — not a round-by-round script.
+**`morale:`** when it stops. Every enemy needs one; nothing fights to the death by
+default.
+**`organization:`** how many turn up together.
+**`negotiation:`** for Named and Bosses that can be dealt with — what it wants,
+what shifts it, what deal it honours. Leave it out when there is no deal to be had,
+and the absence means exactly that.
+
+The older free-text `tactics:` field still loads and is still read, but new enemies
+should use the fields above: they are what the Bestiary and the app can actually
+find.
 
 ---
 
@@ -338,6 +400,8 @@ This is the tool you build encounters from. It maps difficulty to concrete enemy
 
 Validated in `research/simulation_log.md` Series 9 Part D (200 iterations per seed, seeds 1/2/3; the Sim Win Rate column lists all three seeds).
 
+**Table MM1–7: Encounter Recipes at Party Strength 3**
+
 | Difficulty | Win Rate Target | Suggested Composition | Sim Win Rate (seeds 1/2/3) |
 |------------|----------------|-----------------------|-------------|
 | **Skirmish** | 85–100% | 3–7 Mooks | 100% / 100% / 100% |
@@ -349,7 +413,11 @@ Note what these rosters have in common and what a TR budget would never tell you
 
 ### Party Strength 4 (4 PCs or 3 advanced PCs)
 
-> **Not yet simulation-validated.** Series 9 measured the PS-3 party only. The compositions below are *un-simulated extrapolations* from the PS-3 findings and the "each additional PC shifts the actor-count thresholds up by roughly one Named" rule of thumb — treat them as a starting guess to be confirmed at your table, not as validated recipes. Do not present them to players as calibrated.
+> **Through the Mirror — these numbers are not yet simulated**
+>
+> Series 9 measured the PS-3 party only. The compositions below are *un-simulated extrapolations* from the PS-3 findings and the "each additional PC shifts the actor-count thresholds up by roughly one Named" rule of thumb — treat them as a starting guess to be confirmed at your table, not as validated recipes. Do not present them to players as calibrated.
+
+**Table MM1–8: Encounter Recipes at Other Party Strengths**
 
 | Difficulty | Win Rate Target | Suggested Composition (extrapolated, unvalidated) |
 |------------|----------------|-----------------------|
@@ -364,6 +432,7 @@ Note what these rosters have in common and what a TR budget would never tell you
 - **Mook swarms only ever produce Skirmishes.** For a PS-3 party, mean PCs Broken stays at zero through 30 Mooks — the party is never in real danger, the fight just gets longer. (Win rate does eventually dip past ~40 Mooks, but that is the simulator's exchange cap timing out an unfinished-but-unlost fight, not a defeat.) Use Mooks for texture, action-economy pressure, and to nudge a Named fight up a band — not as a difficulty lever in their own right.
 - **Each additional PC** shifts the actor-count thresholds up by roughly one Named enemy (unvalidated beyond PS 3 — see the PS-4 caveat above).
 - **Advanced parties** (Techniques active) trivialize encounters designed for fresh PS-3 parties. Expect to add actors, not just TR — and re-check at the table, since the actor-count thresholds themselves move.
+- **The recipes above are calibrated for a baseline party** — `standard_party()` in the simulation corpus carries no Techniques. A party fielding *Weapon Mastery* — the one step-easier Technique that eases a Strike — or a Tier 3 capstone like *The Final Blow* runs a Recipe Table encounter about a band hot. The other step-easier Techniques ease rolls a fight rarely calls for — hardship, scholarship, precision work, and acting on a hunch — so they do not shift a combat recipe at all — treat the difficulty row you picked as one notch easier than printed.
 
 ---
 
@@ -394,7 +463,9 @@ For Standard and above, design at least one way the party can shortcut the encou
 
 Run through one exchange mentally. Does the first exchange feel dangerous but survivable? Can the party's tank absorb two hits? Can the fragile character contribute without dying immediately? If yes, you're good. If the math says "party wipe in exchange 1," dial it back. If the math says "party wins without spending Endurance," dial it up.
 
-> **The golden rule:** If you're unsure between two difficulties, pick the easier one. Players who feel competent take bigger risks. Players who feel punished play conservatively. The easier fight leads to more interesting decisions.
+> **MM Note — The golden rule**
+>
+> If you're unsure between two difficulties, pick the easier one. Players who feel competent take bigger risks. Players who feel punished play conservatively. The easier fight leads to more interesting decisions.
 
 ### The "Three Encounter Session" Template
 

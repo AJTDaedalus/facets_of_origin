@@ -1,6 +1,12 @@
 # Mirror Master's Manual: Campaign Design
 
-## Overview
+A session is a story. A campaign is what happens when a story starts remembering itself — when the guard you bribed in the first week turns up in the eleventh with a promotion and a grudge.
+
+Four things make that happen on purpose rather than by luck: a **frame** the players can pitch themselves into, **antagonists** who want something specific, a **world that answers back** to what the party did last time, and an **advancement arc** that lands the characters' growth on the moments where it matters. And an **ending** — the fifth thing, the one most campaigns never get, and the one worth designing for from the first session.
+
+> **MM Note — where to see this chapter working**
+>
+> **Oraga Night** (`adventures/oraga_night/`) is a one-session module built as a campaign opening, and it is the worked artifact for most of this chapter. Its Overture states the frame, its cast chapter gives every antagonist a specific want, and its ⟨If History Breaks⟩ sidebars are what "the world answers back" looks like when it is written down rather than improvised. If you are starting a campaign and want to see the shape before you build your own, run that.
 
 A single session of Facets of Origin is a story. A campaign is a story made of stories — sessions that accumulate into something larger than any one of them could have been alone. The characters grow. The world responds. The things that happened three sessions ago turn out to matter in ways nobody planned.
 
@@ -78,18 +84,26 @@ The campaign pitch is a contract. It tells the players what to expect so they ca
 
 **Episodic — "The Thornwall Watch"**
 
+> **Example — campaign pitch: Episodic — "The Thornwall Watch"**
+>
 > You are members of the Thornwall City Watch — not the elite investigators, not the governor's guard, but the district officers who handle the things nobody else wants to deal with. Every session is a new case: a missing merchant, a haunted tenement, a dockside brawl that turns out to be something worse. The tone is equal parts police procedural and fantasy comedy. Build characters who have a reason to show up for work every day, even when the work is terrible.
 
 **Arc-Based — "The Shattered Road"**
 
+> **Example — campaign pitch: Arc-Based — "The Shattered Road"**
+>
 > A trade route between two cities has collapsed — not physically, but socially. Caravans are turning back. Travelers are vanishing. The settlements along the road have gone quiet. You have been hired to find out why, reopen the route, and deal with whatever is responsible. The campaign will run in arcs: each settlement along the road is its own story, and the cause behind the collapse will become clear as you travel deeper. Build characters who have a reason to be on the road and a reason to care about the people along it.
 
 **Sandbox — "The Free Marches"**
 
+> **Example — campaign pitch: Sandbox — "The Free Marches"**
+>
 > The southern frontier is ungoverned. The old empire withdrew thirty years ago and left behind ruins, feuding towns, and a lot of unanswered questions about what was happening out here before they pulled out. You are here — for your own reasons — and what you do with this place is up to you. There are factions, opportunities, and threats. None of them are waiting for you. Build characters who want something they can only find out here.
 
 **Mystery-Box — "The Silence"**
 
+> **Example — campaign pitch: Mystery-Box — "The Silence"**
+>
 > Six months ago, the Oracle of Greymount stopped speaking. She had spoken continuously for three hundred years — prophecy, warning, guidance — and then, mid-sentence, she stopped. She is alive. Her eyes are open. She does not respond. You have been sent to find out what happened. The answer will take you further than you expect. Build characters who are drawn to questions they cannot leave unanswered.
 
 ---
@@ -176,6 +190,8 @@ A campaign where every encounter is Hard is exhausting. A campaign where every e
 
 A useful default for a 4-session arc:
 
+**Table MM3–1: Encounter Difficulty Across a Four-Session Arc**
+
 | Session | Encounter Difficulty | Purpose |
 |---|---|---|
 | 1 | Skirmish or none | Establish the situation; let players investigate and plan |
@@ -211,6 +227,8 @@ A rough guideline: in a 4-session arc, 2–3 sessions should involve combat. At 
 
 The Facets advancement system is not just a reward mechanism — it is a pacing tool. Each mechanical threshold corresponds to a natural story beat, and you can use those thresholds to structure your campaign.
 
+**Table MM3–2: Advancement Thresholds and Story Beats**
+
 | Threshold | Approximate Timeline | Story Beat |
 |---|---|---|
 | First skill rank advance | Sessions 1–3 | The character finds their footing; early competence emerges |
@@ -225,6 +243,8 @@ These timelines assume 4 skill points per session and primary Facet advancement.
 Every character's `career_advances` is a single number that tells you how far they have come. It is also a useful planning tool.
 
 When you are designing an arc, ask: *what career_advances range is this party in?* The answer tells you what kind of challenges are appropriate, what kinds of enemies will feel threatening, and how much the party can handle in a single session.
+
+**Table MM3–3: Party Capability by Career Advances**
 
 | career_advances | Party Capability | Encounter Design Notes |
 |---|---|---|

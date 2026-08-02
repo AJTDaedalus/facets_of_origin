@@ -285,6 +285,11 @@ techniques:
                   When you succeed on an Athletics roll involving raw force, you may choose
                   to leave a lasting mark on the environment — a door that cannot be resealed,
                   a wall that bears your impact. The MM cannot undo this without explanation.
+                use: "At will"
+                normal: >
+                  A full success achieves what you set out to do; how much
+                  of the world it permanently changes is the MM's to
+                  narrate.
                 prerequisites: []
 
               - id: weapon_mastery
@@ -292,9 +297,19 @@ techniques:
                 description: >
                   Choose one weapon type (blades, blunt, polearms, unarmed). Rolls using
                   that weapon type are treated as one difficulty step easier.
+                use: "Passive"
+                normal: >
+                  Difficulty is Standard by default, and the MM adjusts it
+                  one step from the situation (see *Difficulty*, III.1).
                 prerequisites: []
                 has_choice: true
                 choice_prompt: "Choose a weapon type: blades, blunt, polearms, or unarmed."
+                choices: [blades, blunt, polearms, unarmed]
+                difficulty_step: easier
+                step_trigger:
+                  kind: auto
+                  match: weapon_type
+                  against: choice
 
           - tier: 2
             techniques:
@@ -304,6 +319,11 @@ techniques:
                   Once per scene, when your Strike scores a full success (10+) against a
                   single target, you may drive the blow home: the target takes no
                   offensive action in the next exchange.
+                use: "Once per scene"
+                normal: >
+                  A full-success Strike depletes 2 Resolve and may hang a
+                  rider Condition. It does not stop the target acting (see
+                  *Strike*, III.3).
                 prerequisites: []
 
               - id: lift_the_world
@@ -313,6 +333,11 @@ techniques:
                   be impossible without tools or assistance — holding up a collapsing ceiling,
                   halting a moving cart, forcing open a sealed vault. Roll Athletics at Hard
                   difficulty. On a 10+, you succeed. On a 7–9, you succeed at a cost.
+                use: "Once per scene"
+                roll: "Athletics, Hard"
+                normal: >
+                  A feat that is impossible without tools or help is not a
+                  roll — the MM says it cannot be done.
                 prerequisites: []
 
           - tier: 3
@@ -323,6 +348,10 @@ techniques:
                   When you move toward a goal in a straight line — physically, narratively —
                   difficult terrain, minor obstacles, and crowds do not slow you. Only something
                   that can genuinely stop you requires a roll. Everything else simply moves.
+                use: "Passive"
+                normal: >
+                  Difficult terrain, crowds, and minor obstacles are the
+                  MM's to price, as a roll or as a cost in the fiction.
                 prerequisites: []
 
               - id: the_final_blow
@@ -332,7 +361,13 @@ techniques:
                   the outcome is final. The target is removed from the conflict entirely —
                   defeated, fled, or broken — regardless of any remaining resources or
                   abilities they had.
+                use: "Once per session"
+                normal: >
+                  A Spark adds a d6 and drops the lowest. A Strike
+                  depletes Resolve, and riders never defeat an enemy on
+                  their own (see *Strike*, III.3).
                 prerequisites: []
+                removes_target_from_conflict: true
 
       # ---- Grace Branch ----
       - id: grace
@@ -347,6 +382,10 @@ techniques:
                   You can move through or past obstacles — crowds, furniture, narrow gaps,
                   uneven terrain — without requiring a roll, as long as you are not in direct
                   combat and the obstacle is not actively blocking you.
+                use: "Passive"
+                normal: >
+                  Moving through obstacles under pressure is a roll the MM
+                  prices from the situation.
                 prerequisites: []
 
               - id: steady_hand
@@ -354,7 +393,16 @@ techniques:
                 description: >
                   Rolls for precision work under pressure (picking locks, threading a needle,
                   disabling a mechanism mid-crisis) are treated as one difficulty step easier.
+                use: "Passive"
+                normal: >
+                  Difficulty is Standard by default, and the MM adjusts it
+                  one step from the situation (see *Difficulty*, III.1).
                 prerequisites: []
+                difficulty_step: easier
+                step_trigger:
+                  kind: auto
+                  match: skill_id
+                  against: finesse
 
           - tier: 2
             techniques:
@@ -364,6 +412,9 @@ techniques:
                   When moving in darkness, dim light, or natural cover, you do not need to
                   roll Stealth to remain undetected while moving. You only roll when performing
                   an action that might draw attention.
+                use: "Passive"
+                normal: >
+                  Staying unseen while you move is a Stealth roll.
                 prerequisites: []
 
               - id: blur_of_motion
@@ -372,6 +423,11 @@ techniques:
                   Once per scene, when you would be targeted by an attack or sudden physical
                   threat, you may spend a Spark to simply not be where they expected. You are
                   not harmed, and the attacker must re-establish their approach.
+                use: "Once per scene"
+                normal: >
+                  An incoming attack is answered with a reaction, which
+                  costs Endurance and may still land a Condition (see
+                  *Reactions*, III.3).
                 prerequisites: []
 
           - tier: 3
@@ -382,6 +438,9 @@ techniques:
                   You never roll Stealth for movement alone. You only roll when you take an
                   action — speaking, attacking, interacting with an object. Your passage leaves
                   no trace the MM can use against you.
+                use: "Passive"
+                normal: >
+                  Staying unseen while you move is a Stealth roll.
                 prerequisites: []
 
               - id: the_vanishing
@@ -390,6 +449,10 @@ techniques:
                   Once per session, you may disappear from a scene entirely without explanation
                   to anyone watching. You reappear at the start of the next scene in any position
                   that is plausibly reachable. No roll required. The MM does not ask how.
+                use: "Once per session"
+                normal: >
+                  Leaving a scene unseen is a Stealth roll, and where you
+                  come out is the MM's to decide.
                 prerequisites: []
 
       # ---- Iron Branch ----
@@ -405,6 +468,12 @@ techniques:
                   When you fail an Endurance roll, you may choose to succeed at a cost instead —
                   you push through, but mark one consequence the MM names immediately. You cannot
                   use this ability again until the consequence is resolved or acknowledged in the fiction.
+                use: "At will, then locked until the consequence is resolved"
+                normal: >
+                  A 6− means things go wrong. Turning a failure into a
+                  costed success is the Graceful Fail — player-narrated,
+                  once claimed, and it earns a Spark (see *Sparks*,
+                  III.1).
                 prerequisites: []
 
               - id: acclimated
@@ -413,9 +482,20 @@ techniques:
                   Choose one type of environmental hardship: extreme cold, extreme heat, altitude,
                   or deprivation (hunger/thirst/sleep). Endurance rolls against your chosen hardship
                   are treated as one difficulty step easier.
+                use: "Passive"
+                normal: >
+                  Difficulty is Standard by default, and the MM adjusts it
+                  one step from the situation (see *Difficulty*, III.1).
                 prerequisites: []
                 has_choice: true
                 choice_prompt: "Choose one hardship type: extreme cold, extreme heat, altitude, or deprivation."
+                choices: [extreme cold, extreme heat, altitude, deprivation]
+                difficulty_step: easier
+                step_trigger:
+                  kind: auto
+                  match: hazard_type
+                  against: choice
+                  requires_skill: endurance
 
           - tier: 2
             techniques:
@@ -424,6 +504,10 @@ techniques:
                 description: >
                   Once per scene, you may ignore a minor wound or physical consequence entirely.
                   It happened — it simply does not slow you down this scene.
+                use: "Once per scene"
+                normal: >
+                  Tier 1 Conditions clear at the end of the exchange; Tier
+                  2 persist until treated (see *Conditions*, III.3).
                 prerequisites: []
 
               - id: grinding_advance
@@ -432,6 +516,11 @@ techniques:
                   When everyone else at the table has spent their resources or run out of options,
                   you have not. Once per session, you may declare that you still have something
                   left — a Spark, a second wind, a reserve of will. Gain one Spark immediately.
+                use: "Once per session"
+                normal: >
+                  Sparks are earned from play — an MM award, a peer call,
+                  an act-break nomination, or a Graceful Fail (see
+                  *Earning Sparks*, III.1).
                 prerequisites: []
 
           - tier: 3
@@ -443,6 +532,10 @@ techniques:
                   collapse, capture, death — you may choose to remain. You are battered, spent,
                   and at the edge. But you are still standing. The MM may not remove you from
                   the scene against your will once per session.
+                use: "Once per session"
+                normal: >
+                  A Tier 3 Condition takes a character out of the fight
+                  (see *Conditions*, III.3).
                 prerequisites: []
 
               - id: the_long_road
@@ -451,6 +544,10 @@ techniques:
                   At the end of any session in which your character endured significant hardship,
                   you recover fully — wounds, consequences, and spent resources — without requiring
                   downtime or rest. You are what hardship makes you.
+                use: "Once per session, at the end of the session"
+                normal: >
+                  Tier 2 Conditions persist until treated, and recovery
+                  follows the rules in III.2.
                 prerequisites: []
 
   # =========================================================================
@@ -476,6 +573,10 @@ techniques:
                   (The question must concern something your character can directly observe or has
                   directly interacted with — not speculation about future events or the inner
                   lives of people you haven't met.)
+                use: "At will"
+                normal: >
+                  What examination turns up is an Investigate roll, and
+                  "you are not sure" is an answer the MM may give.
                 prerequisites: []
 
               - id: dissecting_failure
@@ -484,6 +585,10 @@ techniques:
                   When you fail an Investigate roll, you still learn one true fact about what you
                   were examining. Your analysis fell short — but your mind does not come up entirely
                   empty. The MM chooses what you learn; it is always real, and it always matters.
+                use: "Passive"
+                normal: >
+                  A 6− means things go wrong — the story moves forward,
+                  but not in your favor (see *Failure (6−)*, III.1).
                 prerequisites: []
 
           - tier: 2
@@ -496,6 +601,10 @@ techniques:
                   within it. The MM must confirm the flaw exists and describe what exploiting it
                   would require. You cannot invent a weakness that isn't there — but if one is
                   there, you will find it.
+                use: "Once per scene"
+                normal: >
+                  Whether a plan or a structure has an exploitable flaw is
+                  the MM's to decide and yours to find through play.
                 prerequisites: []
 
               - id: working_theory
@@ -506,6 +615,11 @@ techniques:
                   whether your theory is correct, partially correct, or wrong — and if wrong, gives
                   you the one fact that most directly contradicts it. You do not need all the
                   evidence yet. You just need enough to reason.
+                use: "Once per scene"
+                normal: >
+                  The MM narrates what your character observes; drawing
+                  the right conclusion from it is yours to do,
+                  unconfirmed.
                 prerequisites: []
 
           - tier: 3
@@ -518,6 +632,10 @@ techniques:
                   physical evidence, or inference. State your conclusion clearly. The MM tells you
                   whether it is correct. If it is, everything that follows in the fiction treats
                   your conclusion as established fact.
+                use: "Once per session"
+                normal: >
+                  You reason from what your character has observed (see
+                  *Acting on Unnarrated Details*, III.1).
                 prerequisites: []
 
               - id: pressure_point
@@ -528,6 +646,10 @@ techniques:
                   you may describe exactly how to exploit it. The MM must treat this as the optimal
                   approach — the difficulty of acting on your analysis is one step easier for any
                   character who follows your instructions, for the rest of the scene.
+                use: "Once per session"
+                normal: >
+                  Difficulty is Standard by default, and the MM adjusts it
+                  one step from the situation (see *Difficulty*, III.1).
                 prerequisites: []
 
       # ---- Instinct Branch ----
@@ -543,6 +665,10 @@ techniques:
                   You are not caught off guard. If the MM would call for a roll to notice an ambush,
                   trap, or sudden threat before it lands, you automatically succeed. You may not
                   always be able to prevent what's coming — but you always see it coming.
+                use: "Passive"
+                normal: >
+                  Noticing an ambush or a trap before it lands is a roll
+                  the MM calls for.
                 prerequisites: []
 
               - id: the_wrong_note
@@ -552,6 +678,10 @@ techniques:
                   of place, the MM will tell you that something feels off — even if they do not
                   tell you what. This is not a roll. You simply notice the dissonance. What you
                   do with that feeling is still yours to decide.
+                use: "Passive"
+                normal: >
+                  Noticing that something has been concealed or falsified
+                  is an Investigate or Insight roll.
                 prerequisites: []
 
           - tier: 2
@@ -563,6 +693,10 @@ techniques:
                   They must answer honestly and specifically — not "the room feels dangerous," but
                   the actual threat, named. You can act on this information as if you had observed
                   it directly.
+                use: "Once per scene"
+                normal: >
+                  What a character notices about a room is an Investigate
+                  or Insight roll.
                 prerequisites: []
 
               - id: assess_the_situation
@@ -571,6 +705,9 @@ techniques:
                   Once per scene, when you enter a social situation — a negotiation, a gathering,
                   a tense confrontation — you may ask the MM two questions about the emotional or
                   political dynamics in the room. Both answers must be honest.
+                use: "Once per scene"
+                normal: >
+                  Reading the dynamics of a gathering is an Insight roll.
                 prerequisites: []
 
           - tier: 3
@@ -583,6 +720,11 @@ techniques:
                   does not act until every party member's action has resolved — no ambush springs,
                   no prepared trap goes off, and an enemy defeated or disrupted before its moment
                   never gets that moment at all. No roll required.
+                use: "Once per session"
+                normal: >
+                  In an exchange everyone acts and reacts at once. There
+                  is no initiative, and nobody acts first (see
+                  *Exchanges*, III.3).
                 prerequisites: []
 
               - id: pattern_recognition
@@ -593,6 +735,11 @@ techniques:
                   understand something about the situation, the antagonist, or the world that no
                   amount of direct investigation could have uncovered. The MM tells you one true
                   implication of that pattern the fiction has not yet revealed.
+                use: "Once per session"
+                normal: >
+                  Connections across scenes are the players' to make and
+                  the fiction's to confirm, not the MM's to certify on
+                  request.
                 prerequisites: []
 
       # ---- Archive Branch ----
@@ -610,9 +757,23 @@ techniques:
                   rolls that fall within your chosen field are treated as one difficulty step
                   easier. You are not broadly competent here — you are genuinely expert, and the
                   fiction should reflect it.
+                use: "Passive"
+                normal: >
+                  Difficulty is Standard by default, and the MM adjusts it
+                  one step from the situation (see *Difficulty*, III.1).
                 prerequisites: []
                 has_choice: true
                 choice_prompt: "Choose a field of knowledge (e.g. history, arcane theory, natural sciences, theology, law, languages, geography)."
+                # Suggestions, not a closed set (DESIGN §8 / TD-19) — "another
+                # domain with MM approval" per the description above means
+                # nothing here or in the engine enforces membership (INV-8).
+                choices: [history, arcane theory, natural sciences, theology, law, languages, geography]
+                difficulty_step: easier
+                step_trigger:
+                  kind: auto
+                  match: knowledge_field
+                  against: choice
+                  requires_skill: lore
 
               - id: arcane_study
                 name: "Arcane Study"
@@ -620,6 +781,12 @@ techniques:
                   You have developed a formal magical domain through scholarly practice. Choose one
                   domain from the Domains of the Mind list (Chapter II.3). You may use magic within
                   that domain using the Domain + Intent + Scope framework. Roll Knowledge when doing so.
+                use: "Passive"
+                roll: "Knowledge"
+                normal: >
+                  A domain's origin is a Background, and it is limited to
+                  Minor scope until a Facet Technique unlocks it (see
+                  *Acquiring a Domain*, II.3).
                 magic_granting: true
                 prerequisites: []
                 has_choice: true
@@ -634,6 +801,10 @@ techniques:
                   historical figure, an artifact, a faction — you may ask the MM two questions
                   about it that must be answered truthfully. The answers represent what a scholar
                   of your depth would already know.
+                use: "At will, once per subject"
+                normal: >
+                  What your character already knows about something new is
+                  a Lore roll.
                 prerequisites: []
 
               - id: cross_reference
@@ -643,6 +814,10 @@ techniques:
                   immediately connect it to something you already know. Tell the MM what you think
                   the connection is. They must tell you whether you are right — and if you are,
                   describe one additional implication that the connection reveals.
+                use: "Once per scene"
+                normal: >
+                  Connecting new information to old is a Lore or
+                  Investigate roll.
                 prerequisites: []
 
           - tier: 3
@@ -654,6 +829,10 @@ techniques:
                   otherwise face. Name what you know and the MM confirms whether it applies. If it
                   applies, the consequence is negated. You do not roll. You simply know the thing
                   that matters.
+                use: "Once per session"
+                normal: >
+                  A consequence the fiction has established lands. Knowing
+                  about it is a Lore roll, not a cancellation.
                 prerequisites: []
 
               - id: deep_archive
@@ -663,6 +842,10 @@ techniques:
                   Describe what you're reaching for. The MM tells you whether your character, given
                   their depth of study, could plausibly have encountered this knowledge. If yes:
                   you know it, and it is accurate.
+                use: "Once per session"
+                normal: >
+                  You know what your character has plausibly learned, and
+                  a Lore roll settles the uncertain cases.
                 prerequisites: []
 
               - id: second_domain_mind
@@ -674,7 +857,12 @@ techniques:
                   Ascendant Domain). You may use magic within that domain using the
                   Domain + Intent + Scope framework, rolling Knowledge as normal. Effects
                   within your second domain are treated as one difficulty step harder than
-                  your primary domain.
+                  normal for that domain.
+                use: "Passive"
+                roll: "Knowledge, one difficulty step harder than normal for that domain"
+                normal: >
+                  A character has one magical domain, and its origin is a
+                  Background (see *Acquiring a Domain*, II.3).
                 grants_secondary_domain: true
                 requires_domain: mind
                 prerequisites: []
@@ -689,6 +877,11 @@ techniques:
                   Domain + Intent + Scope framework, rolling Knowledge. The Broad difficulty table
                   applies (Hard / Very Hard / Very Hard), and its Major-scope ceiling cannot be
                   moved by Sparks. Your original domain is unchanged.
+                use: "Passive"
+                roll: "Knowledge, on the Broad difficulty table"
+                normal: >
+                  Domains are Focused or Standard; prismatic territories
+                  are not otherwise available (see Table II.3–2).
                 magic_granting: true
                 grants_prismatic_domain: true
                 requires_domain: mind
@@ -716,6 +909,9 @@ techniques:
                   present: what do they want, what do they fear, or what would it take to change
                   their mind? The MM must answer honestly. You may not use this ability if you are
                   not paying attention to the people around you.
+                use: "At will"
+                normal: >
+                  Reading what someone wants or fears is an Insight roll.
                 prerequisites: []
 
               - id: lasting_impression
@@ -725,6 +921,10 @@ techniques:
                   have the target reverse course without a fictional reason — a change in
                   circumstances, new information, or something that genuinely shifts their position.
                   Being convinced and then unconvinced offscreen does not count.
+                use: "Passive"
+                normal: >
+                  A successful Persuade or Perform moves someone now;
+                  whether it holds is the MM's to narrate.
                 prerequisites: []
 
           - tier: 2
@@ -736,6 +936,9 @@ techniques:
                   actually believes about themselves that they cannot ignore it. They must respond
                   in kind: denial, anger, grief, or acknowledgment. They may not deflect, change
                   the subject, or pretend they did not hear it.
+                use: "Once per scene"
+                normal: >
+                  How an NPC answers anything you say is the MM's call.
                 prerequisites: []
 
               - id: commanding_presence
@@ -746,6 +949,9 @@ techniques:
                   compelling reason to ignore you does not. You do not roll. The MM may only
                   override this with active, established fictional reasons why this particular
                   person would resist you specifically.
+                use: "Once per scene"
+                normal: >
+                  Getting a room to listen to you is a Persuade roll.
                 prerequisites: []
 
           - tier: 3
@@ -758,6 +964,10 @@ techniques:
                   uncertain. An official reconsidering their position decides. The MM cannot refuse
                   the shift — they can only determine how it unfolds and what it costs the other
                   side. You do not need to roll, but you must speak.
+                use: "Once per session"
+                normal: >
+                  A scene turns when the fiction turns it. A roll wins a
+                  moment, not a scene.
                 prerequisites: []
 
               - id: unforgettable
@@ -769,6 +979,10 @@ techniques:
                   you. Old contacts become warm contacts. Strangers who met you once treat you like
                   someone they have been looking for. The MM cannot make people who had no reason
                   to resent you cold or neutral on your return.
+                use: "Passive"
+                normal: >
+                  Whether an NPC remembers you, and how warmly, is the
+                  MM's to decide.
                 prerequisites: []
 
       # ---- Fortune Branch ----
@@ -784,6 +998,9 @@ techniques:
                   Once per scene, when a roll you make produces a 6- result, you may treat it as
                   a 7–9 instead. Something still goes wrong — but not catastrophically. The
                   complication the MM names must be real, but it must be survivable.
+                use: "Once per scene"
+                normal: >
+                  A 6− means things go wrong (see *Failure (6−)*, III.1).
                 prerequisites: []
 
               - id: the_uncanny_angle
@@ -792,7 +1009,14 @@ techniques:
                   When you act on a hunch — doing something improbable because it simply feels
                   right, with no rational justification — rolls for that action are treated as one
                   difficulty step easier. You cannot plan this. It must be an impulse.
+                use: "Passive"
+                normal: >
+                  Difficulty is Standard by default, and the MM adjusts it
+                  one step from the situation (see *Difficulty*, III.1).
                 prerequisites: []
+                difficulty_step: easier
+                step_trigger:
+                  kind: declared
 
           - tier: 2
             techniques:
@@ -803,6 +1027,11 @@ techniques:
                   a door was left unlocked, a guard stepped away a moment ago, the contact you
                   needed happens to be in this tavern. The MM determines the exact form and any
                   edges it carries — but they cannot refuse the coincidence entirely.
+                use: "Once per scene"
+                normal: >
+                  You act on details the fiction has established; you do
+                  not add them (see *Acting on Unnarrated Details*,
+                  III.1).
                 prerequisites: []
 
               - id: the_lucky_break
@@ -812,6 +1041,11 @@ techniques:
                   you may spend a Spark to declare that something intervenes. The consequence is
                   delayed, deflected, or redirected to something recoverable. This does not stack:
                   the same consequence cannot be deflected twice.
+                use: "At will, costs 1 Spark"
+                normal: >
+                  A Spark is spent before a roll to add a d6 and drop the
+                  lowest. It does not undo a consequence after the fact
+                  (see *Spending Sparks*, III.1).
                 prerequisites: []
 
           - tier: 3
@@ -823,6 +1057,10 @@ techniques:
                   do not specify what it is or how — only that it does. The MM must make it true
                   and must make it significant. It happens, and it helps you, and neither you nor
                   the MM gets to pretend afterward that it was ordinary.
+                use: "Once per session"
+                normal: >
+                  The MM decides what the world does; players declare what
+                  their characters do.
                 prerequisites: []
 
               - id: the_odds_were_never_real
@@ -830,6 +1068,10 @@ techniques:
                 description: >
                   When you spend a Spark on a roll, add two dice instead of one and still drop the
                   lowest. Your luck does not merely tip the scales — it removes them.
+                use: "Passive"
+                normal: >
+                  A Spark adds one d6 and drops the lowest (see *Spending
+                  Sparks*, III.1).
                 prerequisites: []
 
       # ---- Communion Branch ----
@@ -846,6 +1088,10 @@ techniques:
                   an active ritual working, a place where the boundary between worlds has worn thin,
                   a creature that is not what it appears. You cannot identify it without investigation,
                   but you cannot be kept ignorant of its presence.
+                use: "Passive"
+                normal: >
+                  Noticing that something supernatural is present is an
+                  Attune roll.
                 prerequisites: []
 
               - id: spiritual_domain
@@ -855,6 +1101,12 @@ techniques:
                   gift, or a bond you do not entirely understand. Choose one domain from the Domains
                   of the Soul list (Chapter II.3). You may use magic within that domain using the
                   Domain + Intent + Scope framework. Roll Spirit when doing so.
+                use: "Passive"
+                roll: "Spirit"
+                normal: >
+                  A domain's origin is a Background, and it is limited to
+                  Minor scope until a Facet Technique unlocks it (see
+                  *Acquiring a Domain*, II.3).
                 magic_granting: true
                 prerequisites: []
                 has_choice: true
@@ -870,6 +1122,10 @@ techniques:
                   holds accumulated meaning. While bonded, you sense their emotional state and they
                   sense yours. The bond lasts until the scene ends or you choose to release it.
                   You may not maintain more than one bond at a time.
+                use: "Once per scene, one bond at a time"
+                normal: >
+                  Sensing another creature's emotional state is an Insight
+                  or Attune roll.
                 prerequisites: []
 
               - id: the_language_beneath_language
@@ -879,6 +1135,10 @@ techniques:
                   language — an animal, a spirit, a being of alien origin — you do not need to roll
                   for them to understand what you mean. They understand your intent. Whether they
                   respond, cooperate, or care is a separate matter entirely.
+                use: "Passive"
+                normal: >
+                  Making yourself understood across a language barrier is
+                  a roll the MM prices from the situation.
                 prerequisites: []
 
           - tier: 3
@@ -891,6 +1151,11 @@ techniques:
                   rage, a boundary giving way. Your presence is sufficient to hold it steady. No
                   roll required. The MM determines what holding the line costs you in the fiction,
                   but it holds.
+                use: "Once per session"
+                normal: >
+                  Whether a failing ritual, ward, or boundary holds is
+                  settled by the fiction, and by a roll where it is
+                  uncertain.
                 prerequisites: []
 
               - id: second_domain
@@ -900,7 +1165,12 @@ techniques:
                   domain from the Domains of the Soul list (prismatic territories require Ascendant
                   Domain). You may use magic within that domain using the Domain + Intent + Scope
                   framework, rolling Spirit as normal. Effects within your second domain are
-                  treated as one difficulty step harder than your primary domain.
+                  treated as one difficulty step harder than normal for that domain.
+                use: "Passive"
+                roll: "Spirit, one difficulty step harder than normal for that domain"
+                normal: >
+                  A character has one magical domain, and its origin is a
+                  Background (see *Acquiring a Domain*, II.3).
                 grants_secondary_domain: true
                 requires_domain: soul
                 prerequisites: []
@@ -915,6 +1185,11 @@ techniques:
                   Domain + Intent + Scope framework, rolling Spirit. The Broad difficulty table
                   applies (Hard / Very Hard / Very Hard), and its Major-scope ceiling cannot be
                   moved by Sparks. Your original domain is unchanged.
+                use: "Passive"
+                roll: "Spirit, on the Broad difficulty table"
+                normal: >
+                  Domains are Focused or Standard; prismatic territories
+                  are not otherwise available (see Table II.3–2).
                 magic_granting: true
                 grants_prismatic_domain: true
                 requires_domain: soul
@@ -1475,6 +1750,11 @@ equipment:
     light: {attributes: [dexterity]}
     ranged: {attributes: [dexterity]}
     unarmed: {attributes: [strength, dexterity]}
+  # DESIGN §8 (TD-18): the orthogonal, fictional weapon vocabulary that
+  # Weapon Mastery (II.4a) masters. Not a substitute for weapon_categories
+  # above — see that field's comment. No ranged entry (content gap,
+  # docs/TODO.md T8).
+  weapon_types: [blades, blunt, polearms, unarmed]
 
 # ---------------------------------------------------------------------------
 # Backgrounds (PHB II.5)

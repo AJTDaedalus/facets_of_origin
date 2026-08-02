@@ -95,7 +95,7 @@ the full rule, follow the pointer.
 
 **Scope (Minor/Significant/Major)** — How ambitious a magical effect is, declared before the roll: Minor (small, local, brief), Significant (a meaningful area or persisting effect), or Major (scene-changing, large-scale, or lasting). Scope, not visual impressiveness, sets the base difficulty. *(Chapter II.3)*
 
-**Second Domain** — A Tier 3 Technique, in the Mind and Soul trees, that grants a second standard magical domain complementary to a character's original practice; effects within it are one difficulty step harder than the primary domain. A character holds one. *(Chapters II.4b, II.4c)*
+**Second Domain** — A Tier 3 Technique, in the Mind and Soul trees, that grants a second standard magical domain complementary to a character's original practice; effects within it are one difficulty step harder than normal for that domain. A character holds one. *(Chapters II.4b, II.4c)*
 
 **Secondary Skill** — A second skill from a character's Primary Facet, granted by their Background, starting at Novice with 1 mark already recorded. Magic-granting Backgrounds replace it with a domain origin instead. *(Chapter II.5)*
 
