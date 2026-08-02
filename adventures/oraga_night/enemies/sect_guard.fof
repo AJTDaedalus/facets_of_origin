@@ -1,0 +1,60 @@
+fof_version: '0.1'
+type: enemy
+id: sect_guard
+name: Sect Guard
+
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+
+enemy:
+  tier: mook
+  resolve: 0
+  attack_modifier: 1
+  defense_modifier: 1
+  armor: light
+  techniques: []
+  special: null
+  tr: 4                 # offense(+1→3) + durability(0) + armor(light→1) = 4
+  phases: []
+
+  disposition: >
+    Festival watchmen. Their first instinct is volume and numbers, not
+    blades.
+
+  first_target: >
+    Whoever drew steel, and only them.
+
+  morale: >
+    Never fights past compliance. A dropped weapon ends it on the spot.
+
+  organization: >
+    Patrols in fours; a disturbance draws every four within earshot.
+
+  triggers:
+    - >
+      Answers brandished steel with four more guards inside two
+      exchanges.
+    - >
+      Subdues and ejects; does not kill guests unless guests are
+      killing.
+
+  description: >
+    A house guard of Rekuzan's sect palaces — trained, sober on duty, and far
+    more interested in ending trouble than in winning fights. Sect guards work
+    in pairs at minimum and shout for more before they draw.
+
+  notes: >
+    CONDUCT: guards subdue and eject; they do not kill guests unless guests
+    are killing. Their first response to brandished steel is numbers and loud
+    voices, not blades. A player character who fights one guard fights four
+    within two exchanges, and wakes up in the gatehouse cell having lost their
+    mask, their invitation, and their evening — which, depending on the hour,
+    may be the worst thing that has ever happened to anyone.
+
+    Use this block for festival watchmen and street patrols in the prelude and
+    aftermath wings as well.
+
+created_at: '2026-07-12T00:00:00+00:00'
+last_modified: '2026-07-12T00:00:00+00:00'

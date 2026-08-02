@@ -1,0 +1,102 @@
+fof_version: '0.1'
+type: enemy
+id: the_radiant
+name: The Radiant
+
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+
+enemy:
+  tier: named
+  resolve: 4
+  attack_modifier: 2
+  defense_modifier: 3   # fast — appallingly, beautifully fast
+  armor: light
+  techniques: [fracture_devotion, unraveling_presence, shadow_step]
+  special: >
+    THE LEASH — as the_wept.fof. THE HUNT — the Radiant's assignment is Veier;
+    it is faster than locked doors but not faster than witnesses.
+  tr: 12                # offense(+2→4) + durability(Resolve 4) + armor(light→1) + techniques(3) = 12
+  phases: []
+
+  disposition: >
+    Believes its service is worship, and worship must be witnessed to
+    count.
+
+  first_target: >
+    Whatever its errand names, and it re-stages the kill if nobody saw.
+
+  morale: >
+    It cannot be turned. Not by darkness, not by doubt, not by damage —
+    nothing short of the leash ends its errand. It can only be made to
+    feel, and guilt is slow, and slow is hallways.
+
+  organization: >
+    One of three. Takes the Dance while the others take the doors and
+    the dais.
+
+  negotiation: >
+    None. There is no deal here; that is the point of it.
+
+  triggers:
+    - >
+      Fracture — Deny the Congregation, at Hard: douse the lights,
+      empty the room, turn every back, or make someone else the better
+      spectacle. Unwitnessed, it hurries, stops savouring, and does
+      the work badly.
+    - >
+      Fracture — Plant the Doubt, at Hard: anyone armed with what they
+      have seen of its rites, declaring to its face that no god worth
+      the name asks for a stolen child. On a hit, guilt gets into the
+      errand — it falters at thresholds, looks back, re-stages kills.
+
+  description: >
+    A mirror-bright spirit-mask that catches every lamp in the hall. He is a
+    person — warm, courtly, genuinely delightful on the subject of duty — who
+    blessed his food in a form no priest has used in living memory and joined
+    the Dead Dance because he could not help himself. Of the three, he is the
+    one who moves like joy — and his kills, when they come, are staged, angled
+    toward the room, offered upward. Not showmanship. Liturgy. He believes
+    this errand is holy.
+
+    He hunts Veier Nolonaire through corridors that seal themselves behind
+    her, and he is losing time he does not have every moment somebody
+    WATCHES him.
+
+  notes: >
+    FRACTURE — DEVOTION (once): it believes revelations were spoken to it and
+    that its service is worship — which must be witnessed to count. THE
+    RADIANT CANNOT BE TURNED — not from the hunt, not by darkness or doubt;
+    nothing short of the leash ends its errand. It can only be made to FEEL.
+    Two roads in, either at Hard: DENY THE CONGREGATION (douse the lights,
+    empty the room, turn every back, or a Perform action that makes someone
+    else the better spectacle — unwitnessed, its service stops counting as
+    worship, and it hurries, stops savoring, does the work badly), or PLANT
+    THE DOUBT (a priest, a believer, or anyone armed with what they have seen
+    of its rites, declaring to its face that no god worth the name asks for a
+    stolen child). On a hit the words lodge: it does not stop or turn, but
+    guilt gets into the errand — it falters at thresholds, looks back,
+    re-stages kills. Guilt is slow, and slow is hallways; the margin at the
+    river gate is made of exactly this.
+
+    SHADOW-STEP: as the_wept.fof.
+
+    Conversely, witnesses SLOW it: every scene in which player characters
+    chase, harry, or simply see it buys Veier another hallway. Reward pursuit
+    with progress even when rolls fail — failure costs the pursuer, not the
+    escape.
+
+    UNRAVELING PRESENCE: as the_wept.fof.
+
+    UNDEFEATABLE: as the_wept.fof — Resolve 0 is never a kill; it removes the
+    obstacle and resumes the hunt. Force buys Veier hallways, nothing more.
+
+    THE CROSSING: at the climax the Radiant is intercepted in the gardens by
+    Master Vell — the one being at the ball it is wary of. It breaks past him
+    exactly once — unless guilt is already dragging at it, which is what its
+    Fracture is for. See module Chapter V.
+
+created_at: '2026-07-12T00:00:00+00:00'
+last_modified: '2026-07-13T00:00:00+00:00'

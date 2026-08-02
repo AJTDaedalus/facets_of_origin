@@ -1,0 +1,94 @@
+fof_version: '0.1'
+type: enemy
+id: the_hollow
+name: The Hollow
+
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+
+enemy:
+  tier: named
+  resolve: 4
+  attack_modifier: 1
+  defense_modifier: 2
+  armor: light
+  techniques: [fracture_despair, unraveling_presence, shadow_step]
+  special: >
+    THE LEASH — as the_wept.fof. THE POST — the Hollow holds the main doors and
+    herds the crowd; it never advances if holding will do.
+  tr: 11                # offense(+1→3) + durability(Resolve 4) + armor(light→1) + techniques(3) = 11
+  phases: []
+
+  disposition: >
+    Holds, never pushes. You cannot frighten something that would not
+    much mind ending.
+
+  first_target: >
+    The doors. It is not here to hurt anyone; it is here so nobody
+    leaves.
+
+  morale: >
+    Resolve 0 is never a kill. The only way to be rid of it early is its
+    Fracture — alone of the three, it can be driven off, because it
+    wants to go.
+
+  organization: >
+    One of three. Never acts without the other two on the field.
+
+  negotiation: >
+    Wants to stop. Shifts for sincerity and nothing else — ferocity is
+    useless. Honours its own departure: once turned, it goes home and
+    does not come back tonight.
+
+  triggers:
+    - >
+      Stands always nearest its own exit.
+    - >
+      Flinches from the palace's ward-fire the way a tired man
+      flinches from being asked to try.
+    - >
+      Fracture — Despair, once, at Hard: name the emptiness truly,
+      offer one honest moment of the belonging it was promised, or
+      simply tell it that it can stop. On a hit it opens its hands and
+      quits the field early. On 7–9 it lashes out once, hard, on its
+      way through the wall.
+
+  description: >
+    A blank gray spirit-mask — no features at all, which among two hundred
+    carved faces is the loudest mask in the room. He is a person: polite,
+    exhausted somewhere deeper than sleep reaches, answering small talk with
+    a flatness that ends conversations. All night he stood beside a different
+    exit, like a man permanently halfway to leaving. When midnight comes he
+    holds the great doors, and the crowd breaks around him like water.
+
+    He does not want to be here. He has not wanted anything, for a very long
+    time — which is precisely why he was chosen. He holds the doors because
+    holding is easier than wanting.
+
+  notes: >
+    FRACTURE — DESPAIR (once): ferocity is useless — you cannot frighten
+    something that would not much mind ending. SINCERITY works, at Hard: see
+    it; name the emptiness truly; offer one honest moment of the belonging it
+    was promised long ago and never given; or simply tell it, one person to
+    another, that it can stop. On a hit it stops — opens its hands, quits the
+    field early, the doors open, two hundred hostages stop being hostages. It
+    is the only one of the three that goes home before it is called. On 7–9
+    it lashes out once, hard, on its way through the wall.
+
+    TELLS: it flinches from the palace's ward-fire the way a tired man
+    flinches from being asked to try; it stands always nearest its own exit;
+    it holds but never pushes. Players who read crowds or guards (or a
+    bodyguard's Specialty) can be handed these free.
+
+    SHADOW-STEP: as the_wept.fof.
+
+    UNRAVELING PRESENCE: as the_wept.fof.
+
+    UNDEFEATABLE: as the_wept.fof — Resolve 0 is never a kill. The one true
+    way to be rid of the Hollow early is its Fracture: unlike its siblings,
+    it can be driven off the field by mortal ferocity, because it wants to go.
+
+created_at: '2026-07-12T00:00:00+00:00'
+last_modified: '2026-07-12T00:00:00+00:00'

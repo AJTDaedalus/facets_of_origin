@@ -1,0 +1,77 @@
+fof_version: '0.1'
+type: enemy
+id: tavva
+name: Tavva
+
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+
+enemy:
+  tier: named
+  resolve: 3
+  attack_modifier: 2
+  defense_modifier: 2
+  armor: light
+  techniques: [vanisher]
+  special: >
+    VANISHER — Tavva carries two bought crystal charges (a dark-burst and a
+    door-seal) and spends them only to break contact. When either fires, she
+    and anyone of her crew in reach are simply elsewhere by the next exchange
+    unless a player character spends their action staying on her.
+  tr: 9                 # offense(+2→4) + durability(Resolve 3) + armor(light→1) + techniques(1) = 9
+  phases: []
+
+  disposition: >
+    The finest working thief in Rekuzan tonight, mid-job when the world
+    fell in, professional enough to treat that as an opportunity.
+
+  first_target: >
+    Nobody. She fights to leave, and opens with feints and furniture.
+
+  morale: >
+    Cornered with no way out, she bargains fast and honestly: names, the
+    crew's routes, what she saw in the dark. All of it is true.
+
+  organization: >
+    Herself plus two to four gallery knives, never in the same room as
+    each other by choice.
+
+  negotiation: >
+    Wants out with something. Shifts for a clear exit or a better payer.
+    Honours any deal that ends with her walking and somebody else
+    holding the bag.
+
+  triggers:
+    - >
+      Spends a crystal charge only to break contact.
+    - >
+      Abandons any prize — including crew — that starts costing blood.
+
+  description: >
+    Steward's livery, coastal manners, a different name on every festival
+    hiring list. The finest working thief in Rekuzan tonight, mid-job when the
+    world falls in, professional enough to treat that as an opportunity. Full
+    entry in module Chapter VII; her crew's three sightings are Chapter IV;
+    the midnight raid is Chapter V.
+
+  notes: >
+    CONDUCT: Tavva fights to leave, never to kill. She opens with feints and
+    furniture, spends her charges to break contact, and abandons any prize —
+    including crew — that starts costing blood. Cornered with no way out, she
+    bargains, fast and honestly: names (not her buyers'; she does not know
+    them), the crew's routes, what she saw in the dark. All of it is true.
+
+    ENTIRELY WINNABLE: unlike nearly everything else abroad at midnight, Tavva
+    and her crew are a fight a starting party can flatly win. Resolve 0 means
+    exactly what the core rules say it means. Give the table this one clean
+    victory with both hands.
+
+    CAUGHT AND HELD: a captured Tavva is worth more than the goods — the
+    inquest's favorite scapegoat, the players' proof of what they saw, and a
+    season of professional observations about the palace that nobody else
+    thought to make.
+
+created_at: '2026-07-13T00:00:00+00:00'
+last_modified: '2026-07-13T00:00:00+00:00'
