@@ -25,9 +25,20 @@ _TOTAL = re.compile(r"(?:=\s*|\btotal(?:s|ed)?\s*(?:of\s*)?|\brolled\s+(?:an?\s+
 _OUTCOME_LABELS = ("full success", "success with cost", "things go wrong",
                    "partial success")
 
-#: Verbs whose result the agent may legitimately narrate in the same beat.
-_MECHANICAL_KINDS = ("roll", "saving_throw", "cast", "strike", "react",
-                     "enemy_attack", "enemy_resolve")
+#: Event kinds carrying an engine-produced mechanical fact an agent may
+#: legitimately narrate in the same beat.
+#:
+#: These MUST be the kinds the client actually logs (`client.Table.MECHANICAL`),
+#: not the verb names a caller invokes. They drifted apart once: this tuple held
+#: the verb names ("roll", "strike", ...) while the log carried the server's
+#: result kinds ("roll_result", "strike_result", ...). The sets were disjoint, so
+#: `_beat_facts` matched nothing, every beat's known-facts were empty, and the
+#: confabulation check silently verified nothing — while still being able to flag
+#: *accurate* narration as invented. Keep this in step with the client.
+_MECHANICAL_KINDS = ("roll_result", "saving_throw_result", "cast_result",
+                     "strike_result", "react_result", "support_result",
+                     "maneuver_result", "contested_roll_result",
+                     "condition_applied", "enemy_updated", "enemy_phase_change")
 
 
 @dataclass
@@ -84,12 +95,12 @@ def _beat_facts(log: EventLog, beat: int) -> tuple[set[tuple[int, ...]], set[int
             totals.add(roll["total"])
             totals.add(roll["dice_sum"])
             labels.add(roll["outcome_label"].lower())
-        if event.kind == "enemy_attack":
-            for key in ("condition_applied", "condition_declared"):
+        if event.kind == "condition_applied":
+            for key in ("condition", "condition_applied", "condition_declared"):
                 if event.data.get(key):
                     conditions.add(event.data[key])
-        if event.kind == "enemy_resolve":
-            for key in ("resolve", "resolve_before", "depletion"):
+        if event.kind in ("enemy_updated", "enemy_phase_change"):
+            for key in ("resolve", "resolve_current", "resolve_before", "depletion"):
                 if event.data.get(key) is not None:
                     totals.add(event.data[key])
     return dice, totals, labels, conditions

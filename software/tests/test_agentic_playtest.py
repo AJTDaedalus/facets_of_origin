@@ -71,14 +71,14 @@ class TestConfabulationValidator:
 
     def test_accepts_narration_that_matches_the_log(self, ruleset):
         log = EventLog("s1")
-        log.append("roll", "Zahna", roll=_roll(8, [3, 5]))
+        log.append("roll_result", "Zahna", roll=_roll(8, [3, 5]))
         log.append("say", "Zahna", text="An 8 — enough to get through the gate.")
 
         assert find_confabulations(log, ruleset).ok
 
     def test_rejects_a_total_the_engine_never_produced(self, ruleset):
         log = EventLog("s1")
-        log.append("roll", "Zahna", roll=_roll(8, [3, 5]))
+        log.append("roll_result", "Zahna", roll=_roll(8, [3, 5]))
         log.append("say", "Zahna", text="I rolled a 12, so the door swings wide.")
 
         report = find_confabulations(log, ruleset)
@@ -86,7 +86,7 @@ class TestConfabulationValidator:
 
     def test_rejects_an_outcome_label_the_engine_never_gave(self, ruleset):
         log = EventLog("s1")
-        log.append("roll", "Zahna", roll=_roll(8, [3, 5], label="Success with Cost"))
+        log.append("roll_result", "Zahna", roll=_roll(8, [3, 5], label="Success with Cost"))
         log.append("say", "MM", text="That's a Full Success — clean and clear.")
 
         report = find_confabulations(log, ruleset)
@@ -106,8 +106,8 @@ class TestConfabulationValidator:
 
     def test_accepts_a_condition_the_engine_applied(self, ruleset):
         log = EventLog("s1")
-        log.append("enemy_attack", "MM", target="Zahna", condition_applied="winded",
-                   condition_declared="winded", all_conditions=["winded"])
+        log.append("condition_applied", "MM", target="Zahna", condition="winded",
+                   condition_applied="winded", all_conditions=["winded"])
         log.append("say", "MM", text="The blow lands — you have the winded condition.")
 
         assert find_confabulations(log, ruleset).ok
@@ -115,7 +115,7 @@ class TestConfabulationValidator:
     def test_claims_are_scoped_to_their_own_beat(self, ruleset):
         """A roll in beat 1 does not license a claim about it in beat 2."""
         log = EventLog("s1")
-        log.append("roll", "Zahna", roll=_roll(8, [3, 5]))
+        log.append("roll_result", "Zahna", roll=_roll(8, [3, 5]))
         log.next_beat()
         log.append("say", "Zahna", text="2d6 (3, 5) again, same as before.")
 
@@ -152,7 +152,7 @@ class TestDiceDistribution:
         ]
         log = EventLog("legacy")
         for a, b in pairs:
-            log.append("roll", "P", roll=_roll(a + b, [a, b]))
+            log.append("roll_result", "P", roll=_roll(a + b, [a, b]))
 
         report = dice_distribution([log])
 
@@ -165,13 +165,13 @@ class TestDiceDistribution:
         log = EventLog("real")
         for _ in range(200):
             dice = [rng.randint(1, 6), rng.randint(1, 6)]
-            log.append("roll", "P", roll=_roll(sum(dice), dice))
+            log.append("roll_result", "P", roll=_roll(sum(dice), dice))
 
         assert dice_distribution([log]).passed
 
     def test_small_samples_are_not_evaluated(self):
         log = EventLog("tiny")
-        log.append("roll", "P", roll=_roll(7, [3, 4]))
+        log.append("roll_result", "P", roll=_roll(7, [3, 4]))
 
         report = dice_distribution([log])
         assert report.passed and "minimum" in report.note
@@ -222,7 +222,7 @@ class TestTranscript:
 class TestEventLog:
     def test_round_trips_through_disk(self, tmp_path):
         log = EventLog("s1", arm="B", seed=7)
-        log.append("roll", "Zahna", roll=_roll(9, [4, 5]))
+        log.append("roll_result", "Zahna", roll=_roll(9, [4, 5]))
         log.next_beat()
         log.append("say", "Zahna", text="Clean.")
         path = tmp_path / "events.jsonl"
@@ -1184,3 +1184,45 @@ class TestSubagentBriefings:
         from tools.agentic_playtest.host import MM_BRIEF
 
         assert "Prep is disposable" in MM_BRIEF
+
+
+class TestValidatorKindsStayInStep:
+    """The confabulation check compares narration against what the engine
+    actually logged. It can only do that if it looks for the kinds the client
+    actually writes.
+
+    These drifted once: `_MECHANICAL_KINDS` held verb names ("roll", "strike")
+    while the log carried result kinds ("roll_result", "strike_result"). The two
+    sets were disjoint, so `_beat_facts` matched nothing, every beat's known
+    facts were empty, and the check silently verified nothing — while still
+    being able to flag *accurate* narration as invented. The existing unit tests
+    hid it by hand-building events with the legacy names.
+    """
+
+    def test_every_validator_kind_is_a_kind_the_client_logs(self):
+        from tools.agentic_playtest.validate import _MECHANICAL_KINDS
+        from tools.agentic_playtest import client as client_module
+
+        table = next(v for v in vars(client_module).values()
+                     if isinstance(v, type) and hasattr(v, "MECHANICAL"))
+        unknown = [k for k in _MECHANICAL_KINDS if k not in table.MECHANICAL]
+        assert not unknown, (
+            f"validate._MECHANICAL_KINDS names kinds the client never logs: "
+            f"{unknown}. The confabulation check silently verifies nothing when "
+            f"these drift apart.")
+
+    def test_the_recorded_run_uses_kinds_the_validator_recognises(self):
+        """The shipped playtest artifact must be checkable by the checker whose
+        output it cites as evidence."""
+        import json
+        from pathlib import Path
+        from tools.agentic_playtest.validate import _MECHANICAL_KINDS
+
+        events = Path(__file__).resolve().parents[2] / (
+            "playtest/08_npc_variance/subagent_session/events.jsonl")
+        if not events.exists():
+            pytest.skip("recorded run not present")
+        kinds = {json.loads(line).get("kind") for line in events.read_text().splitlines() if line.strip()}
+        assert kinds & set(_MECHANICAL_KINDS), (
+            f"No event in the recorded run matches any kind the validator looks "
+            f"for. Logged kinds: {sorted(k for k in kinds if k)}")
