@@ -123,8 +123,11 @@ function renderBuilderTechniques() {
     });
   }
 
-  const facetDef = state.ruleset.character_facets.find(cf => cf.id === char.primary_facet);
-  const techniques = (facetDef && facetDef.techniques) || [];
+  // The tree lives at ruleset.techniques[facetId], nested branch → tier →
+  // technique. `character_facets[]` has never carried a `techniques` field, so
+  // reaching for it silently produced an empty list and this panel always said
+  // "Every Technique in this Facet is learned" (TODO T9).
+  const techniques = techniquesForFacet(char.primary_facet);
   const available = techniques.filter(t => !held.includes(t.id));
 
   if (available.length > 0) {
@@ -164,8 +167,8 @@ function renderBuilderTechniques() {
  * event was MM-gated besides, so it always came back as an error.
  */
 async function selectTechnique(techId) {
-  const facetDef = state.ruleset.character_facets.find(cf => cf.id === state.character.primary_facet);
-  const def = ((facetDef && facetDef.techniques) || []).find(t => t.id === techId);
+  const def = techniquesForFacet(state.character.primary_facet)
+    .find(t => t.id === techId);
 
   let choice;
   if (def && def.has_choice) {

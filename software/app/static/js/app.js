@@ -450,8 +450,14 @@ function handleServerMessage(msg) {
         if (state.character.skills[msg.skill_id]) {
           state.character.skills[msg.skill_id].rank = msg.new_rank;
           state.character.facet_level = msg.new_facet_level;
+          // A Facet level earns a Technique pick; without applying it here the
+          // advancement panel keeps showing the old count until a reload.
+          if (msg.technique_picks_available !== undefined) {
+            state.character.technique_picks_available = msg.technique_picks_available;
+          }
           renderPlayCharacterSheet();
           if (typeof renderBuilderSkills === 'function') renderBuilderSkills();
+          if (typeof renderBuilderTechniques === 'function') renderBuilderTechniques();
         }
       }
       break;
@@ -1064,10 +1070,26 @@ function onTechniqueSelected(msg) {
   if (msg.player === state.playerName && state.character) {
     state.character.techniques = msg.all_techniques || [];
     state.character.technique_picks_available = msg.technique_picks_available;
-    // A magic-granting Technique lifts the pre-Technique scope cap, so the
-    // Magic panel's scope radios have to be re-evaluated.
-    state.character.magic_technique_active = true;
-    if (typeof renderMagicPanel === 'function') renderMagicPanel();
+
+    // The choice is what makes a choice-bearing Technique work at all: Weapon
+    // Mastery's step is matched against technique_choices[id], so leaving this
+    // unset client-side meant the Technique looked learned and behaved inert
+    // until the next reload.
+    if (msg.choice !== undefined && msg.choice !== null) {
+      state.character.technique_choices = state.character.technique_choices || {};
+      state.character.technique_choices[msg.technique_id] = msg.choice;
+    }
+
+    // Only a magic-granting Technique lifts the pre-Technique scope cap. This
+    // used to fire for every Technique, so learning Weapon Mastery told the
+    // Magic panel the character had unlocked full-scope magic.
+    const def = allTechniques().find(t => t.id === msg.technique_id);
+    const grantsMagic = !!(def && (def.magic_granting
+      || def.grants_secondary_domain || def.grants_prismatic_domain));
+    if (grantsMagic) {
+      state.character.magic_technique_active = true;
+      if (typeof renderMagicPanel === 'function') renderMagicPanel();
+    }
     if (typeof renderBuilderTechniques === 'function') renderBuilderTechniques();
   }
   if (typeof initToolsTab === 'function') initToolsTab();
@@ -1166,13 +1188,47 @@ function majorAttributeName(id) {
   return found ? found.name : id;
 }
 
+/**
+ * Every Technique in one Facet's tree, flattened.
+ *
+ * The tree the server sends is `ruleset.techniques[facetId].branches[].tiers[]
+ * .techniques[]` — three levels of nesting. `ruleset.character_facets[]` carries
+ * id/name/description/major_attribute and has never had a `techniques` field, so
+ * code that reached for `character_facets[].techniques` always got `undefined`
+ * and silently behaved as though the Facet had no Techniques at all.
+ *
+ * Each entry keeps its branch and tier, because "Requires a Tier 1 in the same
+ * branch" is a rule the advancement screen has to be able to show.
+ */
+function techniquesForFacet(facetId) {
+  const tree = state.ruleset && state.ruleset.techniques
+    && state.ruleset.techniques[facetId];
+  if (!tree) return [];
+  const out = [];
+  (tree.branches || []).forEach(branch => {
+    (branch.tiers || []).forEach(tier => {
+      (tier.techniques || []).forEach(technique => {
+        out.push(Object.assign({}, technique, {
+          branch_id: branch.id,
+          branch_name: branch.name,
+          tier: tier.tier,
+        }));
+      });
+    });
+  });
+  return out;
+}
+
+/** Every Technique in every Facet's tree, flattened. */
+function allTechniques() {
+  const trees = (state.ruleset && state.ruleset.techniques) || {};
+  return Object.keys(trees).reduce(
+    (acc, facetId) => acc.concat(techniquesForFacet(facetId)), []);
+}
+
 function techniqueDisplayName(id) {
-  if (state.ruleset) {
-    for (const cf of state.ruleset.character_facets || []) {
-      const t = (cf.techniques || []).find(t => t.id === id);
-      if (t && t.name) return t.name;
-    }
-  }
+  const found = allTechniques().find(t => t.id === id);
+  if (found && found.name) return found.name;
   return String(id || '').replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 }
 

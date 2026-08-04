@@ -667,6 +667,31 @@ class TestWebSocketSkillAdvance:
             msg = ws.receive_json()
             assert msg["type"] in ("error", "pong")
 
+    def test_skill_advanced_broadcast_carries_the_technique_pick(
+        self, client, mm_token, session_with_character,
+    ):
+        """TODO T10: a Facet level grants a Technique pick, and the client has to
+        be told, or the advancement panel keeps showing the old count until a
+        reload. The broadcast reported the new rank and Facet level but not this.
+        """
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        character = session_store.get(session_id).characters["Zahna"]
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            # Enough marks to cross a Facet level threshold and earn a pick.
+            ws.send_json({
+                "type": "skill_advance", "player_name": "Zahna",
+                "skill_id": "lore", "marks": 60,
+            })
+            msg = ws.receive_json()
+
+        assert msg["type"] == "skill_advanced"
+        assert "technique_picks_available" in msg, (
+            "the client cannot show a pick it is never told about")
+        assert msg["technique_picks_available"] == character.technique_picks_available
+
     def test_skill_advance_zero_marks_ignored(self, client, mm_token, session_with_character):
         """marks=0 should be silently ignored (not advance anything)."""
         session, _ = session_with_character
@@ -3742,12 +3767,29 @@ class TestFinalBlowLicensedOverride:
             "tier": "boss", "resolve": 8,
         }, headers=mm_headers)
 
+        player_token = create_session_token("Zahna", session_id)
         with client.websocket_connect("/ws") as ws:
             _auth_mm(ws, mm_token, session_id)
             key = self._spawn(ws)
             self._start_combat(ws)
+
+        # A confirm only commits an offer a Strike actually made (TODO T12), so
+        # the Strike has to happen first and has to name the tracker key.
+        with client.websocket_connect("/ws") as pws:
+            _auth_player(pws, player_token)
+            with patch("random.randint", return_value=6):
+                pws.send_json({
+                    "type": "strike", "target": key,
+                    "final_blow": True, "sparks_spent": 1,
+                })
+                offer = pws.receive_json()
+        assert offer["final_blow_available"] is True
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
             ws.send_json({
                 "type": "final_blow_confirm", "player": "Zahna", "tracker_key": key,
+                "offer_id": offer["final_blow_offer_id"],
             })
             msg = ws.receive_json()
 
@@ -3813,6 +3855,80 @@ class TestFinalBlowLicensedOverride:
         assert msg["type"] == "error"
         assert "Spark" in msg["message"]
         assert "the_final_blow" not in char.techniques_used_this_session
+
+    def test_confirm_without_an_offer_is_refused(
+        self, client, mm_headers, mm_token, session_with_character,
+    ):
+        """TODO T12: the 7+ outcome and the Spark cost are enforced by the Strike
+        that makes the offer, not by the confirm. So a confirm arriving with no
+        live offer — a stale toast, a replay, a hand-made message — used to
+        remove an enemy off the back of a Strike that never succeeded."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = session_store.get(session_id).characters["Zahna"]
+        char.techniques.append("the_final_blow")
+        client.post("/api/enemies/", json={
+            "session_id": session_id, "id": "boss", "name": "Boss",
+            "tier": "boss", "resolve": 8,
+        }, headers=mm_headers)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            self._start_combat(ws)
+            ws.send_json({
+                "type": "final_blow_confirm", "player": "Zahna", "tracker_key": key,
+            })
+            msg = ws.receive_json()
+
+        assert msg["type"] == "error"
+        assert "on offer" in msg["message"]
+        assert "the_final_blow" not in char.techniques_used_this_session
+        assert session_store.get(session_id).active_enemies[key].resolve_current != 0
+
+    def test_a_failed_strike_clears_any_standing_offer(
+        self, client, mm_headers, mm_token, session_with_character,
+    ):
+        """A 6- Strike must not leave an earlier offer standing — otherwise the
+        MM's stale toast still commits."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        char = session_store.get(session_id).characters["Zahna"]
+        char.techniques.append("the_final_blow")
+        char.sparks = 3
+        client.post("/api/enemies/", json={
+            "session_id": session_id, "id": "boss", "name": "Boss",
+            "tier": "boss", "resolve": 8,
+        }, headers=mm_headers)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            self._start_combat(ws)
+
+        with client.websocket_connect("/ws") as pws:
+            _auth_player(pws, player_token)
+            with patch("random.randint", return_value=6):      # offer opens
+                pws.send_json({"type": "strike", "target": key,
+                               "final_blow": True, "sparks_spent": 1})
+                first = pws.receive_json()
+            assert first["final_blow_available"] is True
+            with patch("random.randint", return_value=1):      # then a 6- Strike
+                pws.send_json({"type": "strike", "target": key,
+                               "final_blow": True, "sparks_spent": 1})
+                pws.receive_json()
+
+        assert session_store.get(session_id).pending_final_blow is None
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({
+                "type": "final_blow_confirm", "player": "Zahna", "tracker_key": key,
+                "offer_id": first["final_blow_offer_id"],
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
 
     def test_non_mm_cannot_confirm_final_blow(self, client, mm_token, session_with_character):
         session, _ = session_with_character

@@ -626,6 +626,39 @@ class TestAdvancementAndSparks:
         player.wait_for_timeout(500)
         assert "Technique pick" in player.inner_text("#builder-technique-list")
 
+    def test_available_technique_list_is_populated(self, table):
+        """TODO T9: `renderBuilderTechniques` read `character_facets[].techniques`,
+        a field the wire format has never carried, so the "Available" list was
+        always empty and the panel always claimed every Technique was learned —
+        whatever the truth. The tree actually lives at
+        `ruleset.techniques[facet].branches[].tiers[].techniques[]`.
+        """
+        _, player = table
+        player.click("button[data-tab='builder']")
+        player.wait_for_timeout(500)
+        panel = player.inner_text("#builder-technique-list")
+        # The section label is uppercased by CSS, so compare case-insensitively.
+        assert "available" in panel.lower(), (
+            f"no Available section rendered — the tree lookup came back empty. "
+            f"panel={panel[:200]!r}")
+        # A real Tier 1 Technique from the pregen's own Facet.
+        facet = player.evaluate("state.character.primary_facet")
+        expected = {"body": "Forcing Hand", "mind": "Sharp Analysis",
+                    "soul": "Read the Room"}[facet]
+        assert expected in panel, f"expected {expected!r} for facet {facet!r}"
+
+    def test_technique_display_name_resolves_from_the_real_tree(self, table):
+        """Same root cause as T9, in `app.js::techniqueDisplayName`: it searched
+        `character_facets[].techniques` and so always fell through to its
+        id-prettifying default. "sharp_analysis" must resolve to the printed
+        name, not to "Sharp Analysis" by accident of formatting — so this checks
+        an id whose real name differs from its prettified id."""
+        _, player = table
+        name = player.evaluate("techniqueDisplayName('the_wrong_note')")
+        assert name == "The Wrong Note"
+        # And an unknown id still degrades to the prettified fallback.
+        assert player.evaluate("techniqueDisplayName('no_such_technique')") == "No Such Technique"
+
 
 # ---------------------------------------------------------------------------
 # TD-20 (DESIGN §8): pickTechniqueChoice's non-domain choices fallback
@@ -638,16 +671,13 @@ class TestTechniqueChoicePicker:
     happened to map to as candidate "weapon types". TD-19 gave the three a
     `choices` list of their own in facet.yaml; TD-20 makes the picker use it.
 
-    `selectTechnique`'s own `def` lookup has an unrelated, pre-existing bug
-    (docs/TODO.md T9: it reads `character_facets[].techniques`, a field that
-    does not exist on the wire) that leaves the Builder tab's "Available"
-    Technique list always empty, so a real click-through was not reachable.
-    These tests call `pickTechniqueChoice` directly with a Technique
-    definition read from the real, correctly-shaped
-    `ruleset.techniques[facet].branches[].tiers[].techniques[]` structure —
-    the same direct-injection approach TD-10's Strike-banner tests already
-    use in this file when the natural trigger path is separately broken or
-    impractical to stage.
+    These tests call `pickTechniqueChoice` directly, which isolates the picker
+    from the surrounding advancement flow — the same direct-injection approach
+    TD-10's Strike-banner tests use in this file. When they were written that was
+    also a necessity: T9 left the Builder's "Available" list empty, so no real
+    click-through existed. T9 is fixed (see
+    `TestAdvancementAndSparks::test_available_technique_list_is_populated`), so
+    this is now an isolation choice rather than a workaround.
     """
 
     def _find_technique(self, page, tech_id):

@@ -547,6 +547,10 @@ async def _handle_skill_advance(msg: dict, session, session_id: str) -> None:
             "new_facet_level": character.facet_level,
             "total_facet_levels": character.total_facet_levels,
             "career_advances": character.career_advances,
+            # A Facet level grants a Technique pick (character.advance_skill).
+            # Without this the client's counter stays stale until a reload, so a
+            # player who just levelled cannot see the pick they earned.
+            "technique_picks_available": character.technique_picks_available,
         })
 
 
@@ -793,6 +797,20 @@ async def _handle_strike(
         and result_dict["outcome"] in ("full_success", "partial_success")
     )
 
+    # Record the offer so the MM's confirm can be checked against it. Without a
+    # live offer to match, `final_blow_available: false` is only a client hint,
+    # and a stale or replayed confirm could remove an enemy after a failed
+    # Strike (TODO T12). A new Strike always replaces any older offer, so at most
+    # one is ever open.
+    if final_blow_available:
+        session.pending_final_blow = {
+            "player": player_name,
+            "tracker_key": target_name,
+            "offer_id": uuid.uuid4().hex,
+        }
+    elif final_blow_requested:
+        session.pending_final_blow = None
+
     session.save_character_to_disk(player_name)
     await manager.broadcast(session_id, {
         "type": "strike_result",
@@ -807,6 +825,9 @@ async def _handle_strike(
         "weapon_type": weapon_type,
         "technique_step": technique_step,
         "final_blow_available": final_blow_available,
+        # Names the specific offer, so the MM's confirm commits this Strike's
+        # offer and not a stale one still on screen (TODO T12).
+        "final_blow_offer_id": (session.pending_final_blow or {}).get("offer_id"),
     })
 
 
@@ -1639,12 +1660,36 @@ async def _handle_final_blow_confirm(msg: dict, session, session_id: str) -> Non
         })
         return
 
+    # The 7+ outcome and the Spark cost are checked by the Strike that made the
+    # offer, not here — so this handler has to verify an offer was actually made,
+    # and that it was for this attacker and this target. Otherwise a stale toast,
+    # a replay, or a hand-made message removes an enemy off the back of a Strike
+    # that failed (TODO T12).
+    offer = session.pending_final_blow
+    offer_id = str(msg.get("offer_id", "")) or None
+    matches = bool(
+        offer
+        and offer["player"] == player_name
+        and offer["tracker_key"] == tracker_key
+        # An offer id is optional for backward compatibility, but when one is
+        # sent it must name *this* offer — that is what makes a replayed or
+        # stale confirm fail rather than commit against a newer Strike.
+        and (offer_id is None or offer_id == offer["offer_id"])
+    )
+    if not matches:
+        await manager.broadcast(session_id, {
+            "type": "error",
+            "message": "No Final Blow is on offer for that attacker and target.",
+        })
+        return
+
     before = enemy.resolve_current if enemy.resolve_current is not None else enemy.resolve
     result = combat_module.apply_final_blow_removal(
         before, phase_thresholds=[p.resolve_threshold for p in enemy.phases] or None,
     )
     enemy.resolve_current = result.resolve_current
     character.techniques_used_this_session.append("the_final_blow")
+    session.pending_final_blow = None   # consumed; a replay finds nothing on offer
     session.save_character_to_disk(player_name)
 
     await manager.broadcast(session_id, {

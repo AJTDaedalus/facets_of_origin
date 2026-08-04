@@ -83,6 +83,13 @@ class GameSession:
     encounter_library: dict[str, Encounter] = field(default_factory=dict)
     active_enemies: dict[str, Enemy] = field(default_factory=dict)
     threat_clocks: dict[str, ThreatClock] = field(default_factory=dict)
+    #: The Final Blow offer a Strike is currently holding open, if any:
+    #: {"player", "tracker_key", "offer_id"}. A confirm that does not match a
+    #: live offer is refused. Without this the confirm handler re-checked only
+    #: "unlocked" and "not used this session" — the 7+ requirement and the Spark
+    #: cost lived in an advisory flag on the roll, so a stale or replayed confirm
+    #: could remove an enemy after a failed Strike (TODO T12).
+    pending_final_blow: dict | None = field(default=None)
     _character_dir: Path | None = field(default=None)
 
     def add_character(self, character: Character) -> None:
