@@ -449,3 +449,31 @@ Domain-Type × Scope table, not from a label the MM declares, so there is no cal
 for a character-side step to compose *with*. Narrowing the book to "Strikes" was
 rejected as a rules change made to accommodate an implementation gap. Full
 reasoning in `docs/DECISIONS.md` **B7**.
+
+---
+
+## T14 — The simulator resets armor per fight; the app resets it per scene
+
+**Source:** review of PR #25, 2026-08-04.
+
+**What's wrong.** `tools/combat_sim.py:680` refreshes every PC's armor downgrade
+budget at the start of each simulated fight. The app refreshes it at `scene_end`
+(B6), and a scene may hold two fights that share one budget. The two
+implementations therefore model armor differently.
+
+**Why it does not matter yet, and why that is fragile.** Every PC definition in
+the simulator is `armor="none"`, so `armor_budget()` returns 0 and the reset
+assigns 0 to a field already 0 — a no-op in every run recorded to date. Nothing in
+`research/simulation_log.md` is implicated. `combat_sim.py:136-138` declares the
+one-encounter-is-one-scene simplification in source, so this is a documented
+modelling choice rather than a silent second copy of a rule.
+
+It stops being harmless the moment anyone gives a simulated PC `armor="light"`.
+At that point the simulator would hand a two-fight scene two full budgets while
+the app shares one, and any series measuring armored survivability would be
+measuring something the app does not do.
+
+**Done when:** either the simulator models a scene explicitly (budgets reset
+between scenes, not fights) before any armored PC is simulated, or the PC defs
+carry a comment at the `armor` field saying an armored def requires that change
+first. Whichever lands, `combat_sim.py:136-138`'s note should name the constraint.

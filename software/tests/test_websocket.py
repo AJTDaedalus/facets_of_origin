@@ -4078,7 +4078,7 @@ class TestStepAppliesOnEveryPricedRoll:
 
     @pytest.mark.parametrize("action,extra", [
         ("maneuver", {"target": "boss"}),
-        ("support", {"target_player": "Zahna", "bonus_type": "add_die"}),
+        ("support", {"target": "Zahna", "bonus_type": "add_die"}),
     ])
     def test_step_applies_to_maneuver_and_support(
         self, client, mm_token, session_with_character, action, extra,
@@ -4230,3 +4230,24 @@ class TestSceneBoundary:
             msg = ws.receive_json()
 
         assert msg["type"] == "error"
+
+
+class TestSceneEndVisibility:
+    """Review finding: the MM presses `End Scene` and usually holds no character
+    of their own, so the broadcast has to name who was refreshed or the effect is
+    invisible on the screen of the person who triggered it."""
+
+    def test_scene_ended_names_the_refreshed_characters(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        session_store.get(session_id).characters["Zahna"].armor = "light"
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "scene_end"})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "scene_ended"
+        assert "Zahna" in msg["characters"]

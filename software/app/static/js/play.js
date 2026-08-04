@@ -712,6 +712,26 @@ function startCombat() {
   sendWS({ type: 'combat_start' });
 }
 
+/**
+ * The weapon the character has declared for this exchange, as the fields the
+ * server's Technique-step matcher reads.
+ *
+ * B7: a Technique's step applies on every roll the MM prices, so Maneuver and
+ * Support have to carry the same weapon the Strike form declared — otherwise
+ * Mordai Strikes with his sword and gets Easy, Maneuvers with the same sword and
+ * stays Standard, which is the inconsistency B7 exists to remove. The weapon in
+ * your hand does not change between two actions in one exchange, so this reads
+ * one control rather than duplicating a picker onto every form.
+ */
+function declaredWeaponFields() {
+  const categoryEl = document.getElementById('strike-weapon-category');
+  const typeEl = document.getElementById('strike-weapon-type');
+  return {
+    weapon_category: categoryEl && categoryEl.value ? categoryEl.value : null,
+    weapon_type: typeEl && typeEl.value ? typeEl.value : null,
+  };
+}
+
 async function endCombat() {
   const ok = await confirmDialog(
     'End combat?',
@@ -719,12 +739,18 @@ async function endCombat() {
     'End Combat');
   if (!ok) return;
   sendWS({ type: 'combat_end' });
+  // The server does not touch active_enemies on combat_end, so this client-side
+  // clear is the only thing that empties the tracker the dialog just promised
+  // to empty. Do not move it.
+  state.activeEnemies = {};
+  renderEnemyTracker();
 }
 
 /**
  * B6: the scene is a published boundary — armor's downgrade budget refreshes at
  * it, and it is deliberately *not* the same event as End Combat, because a scene
- * can hold two fights or none.
+ * can hold two fights or none. It does not clear the enemy tracker; ending a
+ * scene is not ending a fight.
  */
 async function endScene() {
   const ok = await confirmDialog(
@@ -733,8 +759,6 @@ async function endScene() {
     'End Scene');
   if (!ok) return;
   sendWS({ type: 'scene_end' });
-  state.activeEnemies = {};
-  renderEnemyTracker();
 }
 
 function endExchange() {
@@ -1197,6 +1221,7 @@ function performSupport() {
     attribute_id: attrId,
     skill_id: skillId,
     difficulty: 'Standard',
+    ...declaredWeaponFields(),
   });
 }
 
@@ -1219,6 +1244,7 @@ function performManeuver() {
     attribute_id: attrId,
     skill_id: skillId,
     difficulty: 'Standard',
+    ...declaredWeaponFields(),
     description,
   });
 }

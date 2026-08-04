@@ -56,7 +56,7 @@ Rolls using your chosen weapon type are treated as one difficulty step easier.
 
 **Normal:** Difficulty is Standard by default, and the MM adjusts it one step from the situation (see *Difficulty*, III.1).
 
-*Might is the Strength branch, and the four weapon types it names are the shapes you swing. A ranged build is served by Grace instead: ranged Strikes default to Finesse, and Grace's* **Steady Hand** *eases exactly those rolls.*
+*Might is the Strength branch, and the four weapon types it names are the shapes you swing. A ranged build is served by Grace instead: ranged Strikes default to Finesse, and Grace's* **Steady Hand** *eases every Finesse roll — including that one.*
 
 ---
 
@@ -136,7 +136,7 @@ You can move through or past obstacles — crowds, furniture, narrow gaps, uneve
 
 **Use:** Passive.
 
-Rolls for precision work under pressure (picking locks, threading a needle, disabling a mechanism mid-crisis) are treated as one difficulty step easier.
+**Finesse** rolls are treated as one difficulty step easier — precision work under pressure, whether that is picking a lock, threading a needle, disabling a mechanism mid-crisis, or putting an arrow where you meant it to go.
 
 **Normal:** Difficulty is Standard by default, and the MM adjusts it one step from the situation (see *Difficulty*, III.1).
 

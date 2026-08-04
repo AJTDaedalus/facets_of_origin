@@ -633,8 +633,12 @@ rather than quietly closing it.
 ### B6 — The scene is a real boundary, and the engine gets one *(2026-08-04)*
 
 **Decision:** add an MM-gated `scene_end` event. On it the engine resets every
-character's armor downgrade budget, clears any scene-scoped Technique effect, and
-drops standing Final Blow offers.
+character's armor downgrade budget and drops standing Final Blow offers.
+
+*Scene-scoped Technique effects are named in the "Scope held deliberately narrow"
+paragraph below and are **not** part of this decision — an earlier draft of this
+sentence said they were, which contradicted the same entry three paragraphs
+later. There is no scene-effect store yet; `docs/TODO.md` T7 still owns it.*
 
 **Why — this started as T7 and turned up a live rules bug.** Three published rules
 are scoped "per scene": armor's downgrade budget (III.3, IV.1), the *Once per
@@ -649,12 +653,35 @@ the PHB prints as refreshing every scene **never refreshes**. A character who
 spends light armor's two charges in the first fight of a session plays the rest
 of it in effectively no armor.
 
-Worse, `tools/combat_sim.py:680` resets the budget at the start of every simulated
-fight. So the simulator and the app disagreed about a defensive resource — the
-exact divergence class that invalidated a research corpus once already, and which
-the "the simulator may only drive `combat.py`" iron law exists to prevent. The
-recipes in MM1 were calibrated against a party whose armor refreshed; the app gave
-players one that never did.
+`tools/combat_sim.py:680` does reset the budget at the start of every simulated
+fight, so the two implementations disagree in source.
+
+**Corrected after review — the consequence claimed here was false.** An earlier
+version of this entry said "the recipes in MM1 were calibrated against a party
+whose armor refreshed; the app gave players one that never did", and escalated the
+disagreement to "the exact divergence class that invalidated a research corpus".
+Neither holds. **Every PC definition in `combat_sim.py` is `armor="none"`** —
+`mordai_def`, `zahna_def`, `zulnut_def`, `drew_def`, all three `advanced_*` defs,
+and `_g3_pc_def` — and `armor_budget()` returns 0 for anything that is not light
+or heavy. Line 680 assigns 0 to a field already 0. **It has been a no-op in every
+simulation ever run**, so no recorded number in `research/simulation_log.md` moves
+in either direction.
+
+The honest statement is close to the reverse: MM1's recipes have **no armored-PC
+data behind them at all**, because the instrument that produced them has never
+modelled an armored PC. The Recipe Table's repeated "fresh party" hedge is doing
+more work than it looks like.
+
+The residual divergence is real but declared: the app now resets per *scene*, the
+simulator per *fight*, and `combat_sim.py:136-138` documents the
+one-encounter-is-one-scene simplification in source. It becomes a live problem the
+first time a simulated PC wears armor — recorded in `docs/TODO.md`.
+
+**Bounding the bug's reach, also from review:** `Character.armor` is written in
+exactly one place (`from_fof`) and set by no REST route, no WebSocket event, and
+no UI control. A character created through the app has `armor = None` forever, so
+only an uploaded `.fof` can produce an armored PC today. The bug is real and the
+fix is right; the population currently able to hit it is small.
 
 **Rejected:** resetting armor at `combat_start`. That is what the code used to do
 and the `is None` guard was added on purpose — two fights in one scene must not
@@ -731,8 +758,19 @@ list is not a design goal; the branch structure is. The plumbing added in the B4
 cycle will carry a fifth `weapon_type` the day the setting's author wants one, so
 this stays a one-line change if the reading above is ever overruled.
 
-**Consequence:** II.4a gains one sentence pointing a ranged build at *Steady Hand*,
-so the reasoning is on the page rather than in this file.
+**Consequence, enlarged after review.** The first attempt added only a pointer
+sentence to II.4a — and review showed the premise did not hold *in the book*.
+*Steady Hand*'s trigger is `skill_id == finesse`, so in the engine it does ease a
+ranged Strike; but its printed text read "precision work under pressure (picking
+locks, threading a needle, disabling a mechanism mid-crisis)", which covers no
+such thing. A player reading the entry got "no" while the engine said "yes", and
+the pointer sentence asserted the engine's answer without changing the entry.
+
+So the entry was widened to say what it does — **Finesse rolls** are eased, with
+the old examples kept as illustration — in II.4a and `facet.yaml` in the same
+commit. That is a rules change, small and in the direction the engine already
+went, and B8 depends on it: without it, T8 would have been closed on a premise
+true only in code.
 
 **Status:** ✅ Decided. Closes `docs/TODO.md` T8.
 

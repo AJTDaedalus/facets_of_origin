@@ -1513,7 +1513,12 @@ async def _handle_scene_end(session, session_id: str) -> None:
         character.armor_downgrades_remaining = None
     # A Final Blow offer cannot outlive the scene that produced it.
     session.pending_final_blows.clear()
-    await manager.broadcast(session_id, {"type": "scene_ended"})
+    # The MM presses this button and usually holds no character of their own, so
+    # naming who was refreshed is what makes the effect visible on their screen.
+    await manager.broadcast(session_id, {
+        "type": "scene_ended",
+        "characters": sorted(session.characters),
+    })
 
 
 async def _handle_session_reset(session, session_id: str) -> None:
