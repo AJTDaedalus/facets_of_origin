@@ -1,0 +1,47 @@
+fof_version: '0.1'
+type: enemy
+id: glassback_bull
+name: Glassback Bull
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+enemy:
+  tier: boss
+  attack_modifier: 3
+  defense_modifier: 1
+  armor: light
+  techniques:
+  - ringing_charge
+  special: RINGING CHARGE — when the bull closes from a distance, its antlers ring
+    on impact and the note carries. Every glassback within a mile knows where the
+    fight is, and the MM may bring one Glassback Cow to the edge of the scene at
+    the end of the next exchange.
+  description: Nine feet at the shoulder in season, and the rack is wider than a
+    cart. The mineral has gone milky with age at the base and stayed clear at the
+    tips, so that a bull in low sun looks like it is carrying a small sunrise on
+    its head. It is not aggressive for eleven months of the year.
+  disposition: In season, and therefore not reasonable. Out of season it is the
+    single most avoidable danger in this book.
+  first_target: The largest thing in the clearing. Armour makes you a candidate;
+    standing still does not save you.
+  triggers:
+  - Charges in a straight line and cannot turn inside the charge — a character who
+    commits to moving aside rather than meeting it is not in the path.
+  - Rings the charge every time it closes from distance.
+  morale: Breaks off at Resolve 2 and walks — not runs — back to the herd. Nothing
+    in this book is less interested in finishing a fight.
+  organization: One bull per herd, and only dangerous in the eight weeks of season.
+  notes: 'TR breakdown: offense(+3 → 5) + durability(Resolve 6) + armor(light →
+    1) + techniques(1) = 13. An entry-tier Boss, and one the party can decline.'
+  negotiation: It wants distance and the herd behind it. Every step backwards buys
+    real ground, and a party that gives it the clearing gets to keep everything
+    else, including any antler already shed.
+  resolve: 6
+  phases:
+  - resolve_threshold: 2
+    description: The season goes out of it. The bull stops charging, turns broadside,
+      and begins backing toward the herd. It will still answer anyone who closes,
+      but it has stopped starting anything.
+created_at: '2026-08-02T00:00:00+00:00'
+last_modified: '2026-08-02T00:00:00+00:00'

@@ -1,0 +1,52 @@
+fof_version: '0.1'
+type: enemy
+id: the_unfinished
+name: The Unfinished
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+enemy:
+  tier: boss
+  attack_modifier: 2
+  defense_modifier: 2
+  armor: none
+  techniques:
+  - the_great_work
+  - conscription
+  special: 'THE GREAT WORK — the Unfinished is not doing a task. It is running one,
+    and it has been recruiting.
+
+    CONSCRIPTION — once per scene, the Unfinished sets a task for a character. That
+    character may spend their action doing it, or refuse; refusing is free, but
+    every Waiting One in the scene now considers them an obstruction.'
+  description: A foreman, or a prior, or a harbourmaster — whatever the place needed
+    most. It is at the centre of the work, and the work has grown. Around it the
+    others labour at jobs that were never theirs, on a project none of them began,
+    and it is going to be finished.
+  disposition: Administrative. It does not fight so much as assign.
+  first_target: Whoever is disrupting the most labour.
+  triggers:
+  - Spends its first exchange assessing, and its second conscripting.
+  - Never leaves the work. It has never once left the work.
+  - Treats a character who completes an assigned task as staff, which is both an
+    enormous tactical advantage and a genuinely unsettling place to be.
+  morale: None. The work is not finishable — that is the tragedy of the entry —
+    and it will not stop for anything short of the party making it finishable.
+  organization: One, with four to twelve Waiting Ones, at a site where something
+    large was left half-done.
+  notes: 'TR breakdown: offense(+2 → 4) + durability(Resolve 8) + armor(none → 0)
+    + techniques(2) = 14. Rated as a Boss; intended to be finished rather than beaten.'
+  negotiation: 'Wants the great work completed. Shifts for a credible plan to finish
+    it, and it will listen to one at length, mid-fight. Honours a completed plan
+    absolutely: it lays down the tools, and so does everyone else, and that is the
+    intended ending of this entry.'
+  resolve: 8
+  phases:
+  - resolve_threshold: 3
+    description: It stops assigning and starts doing the work itself, at speed,
+      with its own hands. Its attack no longer targets anyone — it targets the site.
+      Every exchange from here, the work advances visibly, and the party has to
+      decide whether that is a problem.
+created_at: '2026-08-02T00:00:00+00:00'
+last_modified: '2026-08-02T00:00:00+00:00'

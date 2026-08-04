@@ -18,6 +18,24 @@ enemy:
   special: null
   tr: 8                 # offense(+2→4) + durability(Resolve 3) + armor(light→1) + techniques(0) = 8
 
+  disposition: >
+    Methodical, uninspired, and very hard to rattle.
+
+  morale: >
+    Fights to arrest, not to kill. Surrender ends the fight immediately
+    and starts the paperwork.
+
+  organization: >
+    One sergeant per four to six watch on a shift.
+
+  triggers:
+    - >
+      Opens Measured; shifts to Defensive if Staggered.
+    - >
+      Goes Aggressive only if the party is clearly losing.
+    - >
+      Calls for backup if the fight runs more than two exchanges.
+
   description: >
     A mid-rank officer of the city watch. Experienced in crowd control,
     street violence, and the particular skill of making someone feel

@@ -18,6 +18,8 @@ Pick one. You are ready to play.
 
 A studious young mage. Entirely absorbed in books, magical theory, and intellectual problems. Will solve the puzzle correctly while being completely oblivious to the social situation around him.
 
+**Table QS–1: Zahna — Attributes**
+
 | Attribute | Rating | Modifier |
 |---|---|---|
 | Strength | 1 | -1 |
@@ -44,6 +46,8 @@ A studious young mage. Entirely absorbed in books, magical theory, and intellect
 
 A strong warrior with a genuine heart. Considers himself a defender of the weak. Prefers the direct solution to every problem, usually the most physical one available.
 
+**Table QS–2: Mordai — Attributes**
+
 | Attribute | Rating | Modifier |
 |---|---|---|
 | Strength | 3 | +1 |
@@ -68,6 +72,8 @@ A strong warrior with a genuine heart. Considers himself a defender of the weak.
 ### Zulnut — The Rogue
 
 Profoundly, almost philosophically lazy. Exceptionally nimble. Prefers to accomplish things with the minimum possible effort and maximum possible flair.
+
+**Table QS–3: Zulnut — Attributes**
 
 | Attribute | Rating | Modifier |
 |---|---|---|
@@ -134,9 +140,11 @@ Zahna rolls 2d6+2 at Easy (+1), total modifier +3, and gets a **12**. Full succe
 
 ## Quick Reference
 
+**Table QS–4: Quick Reference**
+
 | To Do This | Roll |
 |---|---|
-| Hit something | 2d6 + weapon attribute + Combat (melee/unarmed) or Finesse (ranged) |
+| Hit something | 2d6 + weapon attribute + Combat or Finesse — whichever fits how you're striking |
 | Sneak past someone | 2d6 + Dexterity + Stealth skill |
 | Know something | 2d6 + Knowledge + Lore skill |
 | Persuade someone | 2d6 + Charisma + Persuade skill |

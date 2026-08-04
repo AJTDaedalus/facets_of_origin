@@ -1,0 +1,40 @@
+fof_version: '0.1'
+type: enemy
+id: bought_sergeant
+name: Sergeant-at-Arms
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+enemy:
+  tier: named
+  attack_modifier: 2
+  defense_modifier: 2
+  armor: light
+  techniques:
+  - hold_the_terms
+  special: HOLD THE TERMS — once per scene, the sergeant states the contract's boundary
+    aloud. Every Blade in earshot immediately behaves as though the boundary is
+    where the sergeant just said it is, whatever they believed a moment ago.
+  description: The one reading the room instead of the target. Sergeants of the
+    Bought carry the contract itself in a case at the hip, and produce it more readily
+    than steel, because in their experience it settles more.
+  disposition: Reads first, fights second, and would genuinely rather not.
+  first_target: Whoever is closest to breaking the contract's boundary.
+  triggers:
+  - Opens by naming the contract's terms aloud. This is not a bluff; it is how the
+    company works.
+  - Spends Hold the Terms when the party splits, to keep the Blades from following
+    anyone past the line.
+  morale: Surrenders the field the moment the contract is void — payment withdrawn,
+    terms broken by the employer, or the named target gone. Will say so out loud
+    and expect to be believed.
+  organization: One per four Blades.
+  notes: 'TR breakdown: offense(+2 → 4) + durability(Resolve 3) + armor(light →
+    1) + techniques(1) = 9.'
+  negotiation: Wants the contract satisfied or voided; either ends the fight. Shifts
+    for proof the employer has broken terms. Honours any deal that lets the company
+    withdraw with its fee and its reputation.
+  resolve: 3
+created_at: '2026-08-02T00:00:00+00:00'
+last_modified: '2026-08-02T00:00:00+00:00'

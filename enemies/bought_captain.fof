@@ -1,0 +1,53 @@
+fof_version: '0.1'
+type: enemy
+id: bought_captain
+name: Captain-under-Contract
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+enemy:
+  tier: boss
+  attack_modifier: 3
+  defense_modifier: 2
+  armor: heavy
+  techniques:
+  - the_second_clause
+  - reform_the_line
+  special: 'THE SECOND CLAUSE — every contract the Bought sign has one, and only
+    the captain has read it. Once per fight the captain invokes it and the company''s
+    objective changes mid-scene, in a direction the party did not plan for.
+
+    REFORM THE LINE — once per scene, every Blade that disengaged this scene returns
+    to the field in good order.'
+  description: A captain of the Bought is a businessperson who has been shot at,
+    and it shows in both directions. The coat is very good. The scar is older than
+    the coat. The contract case is chained to the belt, and the chain has been replaced
+    more recently than the case.
+  disposition: 'Runs the fight the way a foreman runs a site: no heroics, no waste,
+    and a very clear idea of when to stop.'
+  first_target: Nobody, at first. The captain spends the opening exchange placing
+    Blades and watching who the party protects.
+  triggers:
+  - Invokes the Second Clause the exchange after the party looks like winning.
+  - Reforms the line once, and only once, and only if the company still has somewhere
+    to withdraw to.
+  - Never goes Aggressive. Ever. It is not that kind of company.
+  morale: Calls the withdrawal at Resolve 2 and means it. A captain who has called
+    a withdrawal will not resume the fight tonight for any inducement, including
+    a better offer.
+  organization: One per company of sixteen Blades and four sergeants.
+  notes: 'TR breakdown: offense(+3 → 5) + durability(Resolve 6) + armor(heavy →
+    2) + techniques(2) = 15.'
+  negotiation: Wants the fee, the company intact, and the reputation that gets the
+    next contract. Shifts for a better-paying, better-terms offer made in front
+    of the sergeants. Honours a bought-out contract absolutely — it is the only
+    asset the Bought actually sell.
+  resolve: 6
+  phases:
+  - resolve_threshold: 3
+    description: The captain stops fighting and starts negotiating, out loud, mid-exchange.
+      Attacks continue; so does the offer. Any party member who answers is talking
+      to someone who is genuinely listening.
+created_at: '2026-08-02T00:00:00+00:00'
+last_modified: '2026-08-02T00:00:00+00:00'

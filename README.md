@@ -35,6 +35,24 @@ The companion guide for running the game:
 - **MM4** — Running the Table: MM philosophy, table culture, safety and consent, difficult situations
 - **MM5** — Quick Reference: mid-session cheat sheet for all core mechanics
 
+### Bestiary (`bestiary/`)
+
+The third core book: eighteen creatures across four chapters, every one of them
+original to this project and every one of them shipping a resolution that is not
+a fight.
+
+- **B1** — Beasts and Vermin: chalk hounds, glassbacks, ledgerlice, the chicken
+- **B2** — Folk: the ordinary dangerous, the Bought, the Kindly
+- **B3** — The Made: latchlings, latchmen, and the Archive Guardian
+- **B4** — What Remains: the Waiting, the Unfinished, hushfall
+- **Finding Aids** — every creature by Threat Rating and by tier *(generated)*
+
+Entries carry a read-aloud opener, lore, a stat block generated from the
+creature's `.fof` file, a tiered "What Characters Can Know" box keyed to the
+2d6 outcome tiers, labelled sample encounters, ecology, and an Adaptation note
+for porting the creature into a setting. Nothing in the book is Shattered Origin
+canon.
+
 ### Digital Toolset (`software/`)
 
 A self-hosted web app for running sessions online. The Mirror Master starts the server; players join via single-use invite links. See the [software README](software/README.md) for setup and usage.
@@ -53,7 +71,7 @@ A YAML-based format for portable game documents. Types: `ruleset`, `character`, 
 ### Example Content
 
 - **Characters** (`characters/`) — Zahna (Mind/Guild Apprentice), Mordai (Body/City Watch), Zulnut (Body/Wandering Disciple)
-- **Enemies** (`enemies/`) — Harbor Thug (Mook TR 2), City Watch Sergeant (Named TR 8), Archive Guardian (Boss TR 17), and others
+- **Enemies** (`enemies/`) — 18 stat files, TR 1 through 17, rendered into the Bestiary
 - **Playtests** (`playtest/`) — Six simulated playtests with full session logs, dice rolls, and reports
 
 ---
@@ -83,6 +101,7 @@ Start with `player_handbook/Quick_Start.md` for a ten-minute overview, or `playe
 facets_of_origin/
 ├── player_handbook/       # Complete PHB: creation, rules, combat, equipment
 ├── mm_manual/             # Mirror Master's Manual (5 chapters)
+├── bestiary/              # Bestiary: 18 original creatures (4 chapters)
 ├── software/              # Web app, game engine, tests (1029)
 │   ├── app/               # FastAPI backend + vanilla JS frontend
 │   ├── facets/base/       # Core ruleset YAML

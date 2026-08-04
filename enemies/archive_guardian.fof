@@ -32,6 +32,31 @@ enemy:
         has shut down. It is running on something else. What that is, the
         party does not know.
 
+  disposition: >
+    Patient beyond anything alive. It has never needed to hurry and does
+    not start now.
+
+  morale: >
+    None. It was not built with any. It stops when its Resolve is gone
+    or when the thing it guards is no longer in the room.
+
+  negotiation: >
+    It wants the archive undisturbed and nothing else. It cannot be
+    bargained with in words, but it will disengage from anyone leaving
+    empty-handed by the door they came in through.
+
+  triggers:
+    - >
+      Always Measured. It does not Press, does not go Aggressive, does
+      not go Defensive.
+    - >
+      At Resolve 2 or below it enters Reduced Mode: its attack drops,
+      its blows land at Tier 1, and it ignores Tier 1 Conditions.
+    - >
+      Each joint Maneuver that lands (10+) reduces its attack modifier
+      by 1, to a minimum of 0 — a fictional weakness the party
+      discovers, not a printed stat.
+
   description: >
     A Constructed guardian commissioned by the Thornwall city government
     through the Artificers' Guild, designed to hold a fixed position and

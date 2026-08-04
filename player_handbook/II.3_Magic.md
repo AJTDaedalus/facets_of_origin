@@ -1,5 +1,9 @@
 # Character Creation: Magic
 
+Zahna has never once looked up a spell. He has a territory — the marks people make and the meanings they carry — and inside that territory he can attempt anything he can describe, at whatever ambition he is willing to risk.
+
+That is the whole of magic here. A domain says where you can reach. An intent says what you are reaching for. A scope says how far. Then you roll the same two dice as everyone else.
+
 ## What Is Magic?
 
 Magic is not a menu. There are no spells to choose from, no slots to manage, no list of prepared effects to consult at the table. When you use magic in Facets of Origin, you do three things: you name your territory, you describe what you want to happen, and you roll. The dice tell you how well it went. The story tells you what it looked like.
@@ -42,6 +46,8 @@ The intent matters because it anchors the outcome to something real. Vague inten
 
 **Scope** is how ambitious the effect is. Declare it before you roll. It determines the base difficulty.
 
+**Table II.3–1: Scope**
+
 | Scope | Description | Examples |
 |---|---|---|
 | **Minor** | Small, local, brief. A single object or creature, immediate area, short duration. | A candle lit from across the room. A lock made too hot to touch. A sound masked for a moment. |
@@ -50,7 +56,7 @@ The intent matters because it anchors the outcome to something real. Vague inten
 
 Scope is not a ceiling on creativity. A fire mage lighting a dozen torches simultaneously is a Minor effect — there are many targets but each is trivially small. A fire mage collapsing a burning building to trap an army beneath it is Major. The fiction determines scope; the difficulty follows.
 
-> **Sidebar: The Same Intent at Three Scopes**
+> **Example — the same intent at three scopes**
 >
 > The same magical intent reads very differently depending on scope. Using the Verdance domain as an example:
 >
@@ -81,6 +87,8 @@ There are three domain types:
 ---
 
 ### Base Difficulty by Domain Type and Scope
+
+**Table II.3–2: Base Difficulty by Domain Type and Scope**
 
 | Domain Type | Minor | Significant | Major |
 |---|---|---|---|
@@ -121,7 +129,7 @@ The complication is the MM's call, and it should move the story forward, not sim
 
 **6− — Something goes wrong.** The magic misfires, is insufficient, or draws something unwanted. A 6− is a development, never a dead end. Maybe the fire turns inward. Maybe the shadow coalesces around the wrong thing. Maybe the magic works, but the price arrives before you expected it. The story always moves forward.
 
-> **Sidebar: When Magic Goes Wrong (6- Templates)**
+> **MM Note — When magic goes wrong (6− templates)**
 >
 > A magical 6- should always produce a development, not a dead end. The MM can reach for one of these patterns:
 >
@@ -137,7 +145,7 @@ The complication is the MM's call, and it should move the story forward, not sim
 >
 > *Nothing happens.* The rarest and most useful failure. The domain reaches and finds nothing — the lock is not what Zahna thought it was, the creature is not susceptible in the way the theory suggested. The failure is informative. They now know something they didn't before.
 >
-> **For players:** a magical 6- is a Graceful Fail opportunity. Describe how your character responds to the misfire — what they do with the feedback the magic just gave them — and claim the Spark yourself; the MM confirms.
+**A magical 6− is a Graceful Fail opportunity.** Describe how your character responds to the misfire — what they do with the feedback the magic just gave them — and claim the Spark yourself; the MM confirms.
 
 ---
 
@@ -191,6 +199,8 @@ All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domai
 
 ### Soul Domains
 
+**Table II.3–3: Soul Domains**
+
 | Domain | Type | Territory |
 |---|---|---|
 | Fire | Focused | Heat, flame, and light produced by fire |
@@ -208,6 +218,8 @@ All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domai
 
 ### Mind Domains
 
+**Table II.3–4: Mind Domains**
+
 | Domain | Type | Territory |
 |---|---|---|
 | Illusion | Standard | False sensory experience: images, sounds, smells |
@@ -224,7 +236,13 @@ All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domai
 
 ## Acquiring a Domain
 
-> **Before the Technique:** Your domain origin comes from your Background (Chapter II.5), not your Technique. Until you unlock the corresponding Facet Technique, magic is real but limited: **Minor scope only**. You can light a candle, sense a vibration, or leave a small mark — but you cannot fill a room with fire or shatter a wall with sound. The Technique is not when you gain magic — it is when your magic becomes what it is capable of being. Minor scope uses the domain's normal difficulty table: Easy for Focused, Standard for Standard, Hard for Broad.
+> **Through the Mirror — why early magic is capped by scope, not by difficulty**
+>
+> The first draft made pre-Technique magic *harder* instead of smaller: full scope, worse odds. A playtest killed it in one session. Punishing the roll meant new casters failed publicly and often, which taught them that their character's defining trait was a liability — and the honest response to that lesson is to stop trying.
+>
+> Capping scope does the same work from the other end. A starting caster succeeds at their magic, reliably, at their normal difficulty, and simply cannot yet do the big thing. The limit is legible in the fiction instead of hidden in the dice, and the Technique becomes a door that opens rather than a penalty that lifts.
+
+**Before the Technique.** Your domain origin comes from your Background (Chapter II.5), not your Technique. Until you unlock the corresponding Facet Technique, magic is real but limited: **Minor scope only**. You can light a candle, sense a vibration, or leave a small mark — but you cannot fill a room with fire or shatter a wall with sound. The Technique is not when you gain magic — it is when your magic becomes what it is capable of being. Minor scope uses the domain's normal difficulty table: Easy for Focused, Standard for Standard, Hard for Broad.
 
 A domain is not granted by raw potential — it requires both narrative origin and developed practice. At character creation, your **Background** establishes the story of how your magic began: you were raised in a temple, apprenticed to a hedge mage, discovered your domain through a crisis you barely survived, or spent years studying at an institution that understood what you were. The Background provides the narrative legitimacy. The **Facet Technique** provides the mechanical activation.
 

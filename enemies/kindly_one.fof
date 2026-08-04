@@ -1,0 +1,47 @@
+fof_version: '0.1'
+type: enemy
+id: kindly_one
+name: A Kindly One
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+enemy:
+  tier: named
+  attack_modifier: 0
+  defense_modifier: 3
+  armor: none
+  techniques:
+  - fair_offer
+  - the_unforgiven_slight
+  special: 'FAIR OFFER — a Kindly One cannot decline a genuinely fair trade, and
+    knows fair from unfair without being told. No roll. The MM does not get to refuse
+    on its behalf.
+
+    THE UNFORGIVEN SLIGHT — a Kindly One cheated once never trades with that person
+    again, nor does any other. There is no roll for this either, and no apology
+    that works.'
+  description: Waist-high, dressed in whatever it has most recently been given,
+    and holding something out. The Kindly are always holding something out. They
+    speak politely, in whatever language you used first, and they will wait a very
+    long time for an answer.
+  disposition: Does not fight. Has never fought. Will absolutely stand there while
+    you decide whether you are going to.
+  first_target: None. If struck, a Kindly One defends itself by being extremely
+    difficult to hit and by leaving.
+  triggers:
+  - Opens every encounter with an offer, and the offer is always real.
+  - Never lies, never haggles twice, and never mentions the slight again — to you.
+  morale: Leaves at the first Condition, and does not come back. Neither does any
+    other Kindly One, anywhere, for the rest of the campaign.
+  organization: Alone, at a crossing, a threshold, or a place where something was
+    lost.
+  notes: 'TR breakdown: offense(+0 → 2) + durability(Resolve 4) + armor(none → 0)
+    + techniques(2) = 8. The number exists so a table that starts a fight has one
+    to finish. It is not an invitation.'
+  negotiation: Wants a fair trade, and defines fair generously. Shifts for anything
+    genuinely valued by its owner rather than anything expensive. Honours every
+    bargain to the letter, including the ones you would rather it read loosely.
+  resolve: 4
+created_at: '2026-08-02T00:00:00+00:00'
+last_modified: '2026-08-02T00:00:00+00:00'

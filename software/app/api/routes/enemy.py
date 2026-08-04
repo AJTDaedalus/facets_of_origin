@@ -27,6 +27,12 @@ class CreateEnemyRequest(BaseModel):
     #: `apply_resolve_damage` reports crossings, so the field is load-bearing.
     phases: list[PhaseDef] = Field(default_factory=list)
     description: str = ""
+    disposition: str = ""
+    first_target: str = ""
+    triggers: list[str] = []
+    morale: str = ""
+    organization: str = ""
+    negotiation: str = ""
     tactics: str = ""
     personality: str = ""
     loot: list[str] = Field(default_factory=list)
@@ -83,6 +89,12 @@ async def create_enemy(body: CreateEnemyRequest):
         special=body.special,
         phases=body.phases,
         description=body.description,
+        disposition=body.disposition,
+        first_target=body.first_target,
+        triggers=list(body.triggers),
+        morale=body.morale,
+        organization=body.organization,
+        negotiation=body.negotiation,
         tactics=body.tactics,
         personality=body.personality,
         loot=body.loot,

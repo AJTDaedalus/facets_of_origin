@@ -31,8 +31,10 @@
 ## Appendices
 - Appendix: Magic Domain Catalog
 - Appendix: Character Sheet
-- Glossary
-- Index
+- Glossary *(definitions — the first-stop lookup)*
+- Index *(where each term is defined or ruled on)*
+- List of Tables *(every numbered table in both books, in reading order)*
+- List of Boxes *(every designer note, MM note, example, and variant)*
 
 ---
 
@@ -45,6 +47,19 @@ The companion guide for running Facets of Origin. Covers encounter design, sessi
 - MM3 — Campaign Design *(campaign structures, NPC design, world-building, encounter sequencing)*
 - MM4 — Running the Table *(table culture, safety, difficult situations, growing as an MM)*
 - MM5 — Quick Reference *(mid-session cheat sheet)*
+
+---
+
+## Bestiary
+
+The third core book: eighteen creatures, every one of them original to this project, every one of them with a way out that is not a fight.
+
+- Front Matter — what this book is, how to read an entry, and the setting question
+- B1 — Beasts and Vermin *(chalk hounds, glassbacks, ledgerlice, the chicken)*
+- B2 — Folk *(the ordinary dangerous, the Bought, the Kindly)*
+- B3 — The Made *(latchlings, latchmen, and the Archive Guardian)*
+- B4 — What Remains *(the Waiting, the Unfinished, hushfall)*
+- Finding Aids — every creature by Threat Rating and by tier
 
 ---
 

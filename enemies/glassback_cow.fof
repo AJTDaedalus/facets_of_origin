@@ -1,0 +1,36 @@
+fof_version: '0.1'
+type: enemy
+id: glassback_cow
+name: Glassback Cow
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+enemy:
+  tier: named
+  attack_modifier: 2
+  defense_modifier: 1
+  armor: light
+  techniques: []
+  special: null
+  description: An elk the colour of wet slate, seven feet at the shoulder, with
+    antlers that are not bone. They are a clear mineral that rings when struck and
+    carries light a surprising distance down its length. In herd country you hear
+    a glassback before you see one, and what you hear is chiming.
+  disposition: Wants you to leave. Every single thing it does is an escalating request
+    that you leave.
+  first_target: Whoever is nearest a calf, regardless of what that person is doing.
+  triggers:
+  - Opens with display — a stamp, a bellow, a lowered rack — never a blow. The first
+    exchange of any glassback encounter is a warning the MM should narrate as unmistakable.
+  - Strikes only if the party closes after the display, or if a calf is between
+    the party and the herd.
+  morale: Stops the instant the distance opens. It does not pursue, it does not
+    finish anyone down, and it will stand over a fallen character without touching
+    them until the rest of the party backs away.
+  organization: Herds of eight to twenty, one calf in three.
+  notes: 'TR breakdown: offense(+2 → 4) + durability(Resolve 4) + armor(light →
+    1) + techniques(0) = 9. Rated for a fight the party should not be having.'
+  resolve: 4
+created_at: '2026-08-02T00:00:00+00:00'
+last_modified: '2026-08-02T00:00:00+00:00'

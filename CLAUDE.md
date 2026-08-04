@@ -71,6 +71,35 @@ Do not reproduce, closely paraphrase, or derive mechanics, text, lore, or art fr
 
 **Combat:** Has its own chapter (III.3) but uses the same 2d6 resolution system as everything else — no separate tactical subsystem.
 
+## The Three Books
+
+The line is `player_handbook/` (the PHB), `mm_manual/` (the MM Manual), and
+`bestiary/` (the Bestiary). Each has a different job and a different reader:
+
+- **PHB** — ordered by the character lifecycle: create, then play, then look up.
+  Addresses the player as their character.
+- **MM Manual** — ordered outward from the table: session, adventure, campaign,
+  reference. Addresses the Mirror Master as the game's author-arbiter, and never
+  re-teaches a PHB rule; it adds the tuning layer and points.
+- **Bestiary** — a catalog. Setting-agnostic by design, so nothing in it is
+  Shattered Origin canon without an explicit ruling (see `docs/TODO.md` T6). Its
+  prose is hand-written; its stat blocks are **generated** from `enemies/*.fof`
+  by `software/tools/build_bestiary.py` into `<!-- statblock: id -->` markers, so
+  the book and the data cannot disagree. Never hand-edit a stat block or
+  `bestiary/Finding_Aids.md`.
+
+**Generated files — never edit by hand.** `player_handbook/Index.md`,
+`player_handbook/List_of_Tables.md`, `player_handbook/List_of_Boxes.md`,
+`bestiary/Finding_Aids.md`, and every stat block inside a `bestiary/B*.md`
+marker. Each has a no-diff invariant in `software/tests/test_docs_consistency.py`.
+
+**Style guide.** `style/STYLE_GUIDE.md` (untracked, local) is the house style for
+all three books. `docs/RESEARCH_style_audit.md` is the audit against it and
+`docs/LOG_style_audit.md` the remediation record. The mechanical rules — numbered
+tables, declared box species, resolvable cross-references, invariant entry
+formats — are enforced as invariants INV-9 through INV-15, so a style regression
+fails the suite rather than surviving review.
+
 ## Software-PHB Synchronization
 
 The software layer (`software/`) is the mechanical implementation of the PHB.

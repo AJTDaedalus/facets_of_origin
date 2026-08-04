@@ -1,6 +1,8 @@
 # Character Creation: Attributes
 
-## Introduction
+Nine numbers, none higher than three, and between them they say more about a person than any paragraph of backstory will. Not what your character has learned — what they *are*, before training, before choices, before the story started.
+
+You get eighteen points and a rule that every strength is bought with a weakness. That constraint is the point of this chapter. A character good at everything is a character with no shape, and the table will find out within one session.
 
 Attributes describe who your character is at a fundamental level — not just what they can do, but what comes naturally to them, what they struggle with, and how they move through the world.
 
@@ -27,7 +29,7 @@ A Major Attribute's modifier is **derived from its three Minor Attributes** — 
 
 **Body** — Your physical presence in the world: your strength, your quickness, your capacity to endure.
 
-> *Covers: feats of raw physicality, physical saving throws (withstanding a collapse, resisting a toxin, surviving extreme cold)*
+*Covers: feats of raw physicality, physical saving throws (withstanding a collapse, resisting a toxin, surviving extreme cold)*
 
 *Minor Attributes: Strength, Dexterity, Constitution*
 
@@ -35,7 +37,7 @@ A Major Attribute's modifier is **derived from its three Minor Attributes** — 
 
 **Mind** — Your cognitive and perceptual power: your reasoning, your instincts, your accumulated knowledge.
 
-> *Covers: broad intellectual challenges, mental saving throws (resisting illusions, holding your concentration under pressure, recognizing magical compulsion)*
+*Covers: broad intellectual challenges, mental saving throws (resisting illusions, holding your concentration under pressure, recognizing magical compulsion)*
 
 *Minor Attributes: Intelligence, Wisdom, Knowledge*
 
@@ -43,7 +45,7 @@ A Major Attribute's modifier is **derived from its three Minor Attributes** — 
 
 **Soul** — The force of your inner self in relation to the world: your spiritual connection, your presence, your capacity to bend fate.
 
-> *Covers: acts of will and spirit, soul saving throws (resisting domination, holding your identity against corruption, enduring grief or terror)*
+*Covers: acts of will and spirit, soul saving throws (resisting domination, holding your identity against corruption, enduring grief or terror)*
 
 *Minor Attributes: Spirit, Luck, Charisma*
 
@@ -54,6 +56,8 @@ A Major Attribute's modifier is **derived from its three Minor Attributes** — 
 Minor Attributes represent specific areas of capability. When you attempt something active and the outcome is uncertain, use the Minor Attribute that best fits what you are doing.
 
 Minor Attributes are rated on a three-point scale:
+
+**Table II.2–1: Minor Attribute Ratings**
 
 | Rating | Label | Roll Modifier |
 |---|---|---|
@@ -99,11 +103,15 @@ You have **18 points** to distribute across the nine Minor Attributes. Every Min
 
 The default is 2 in everything — competent across the board, exceptional at nothing. Most characters will push two or three Minor Attributes to 3 (Strong), accepting 1 (Weak) somewhere else to pay for it. Where you choose to be strong, and where you accept weakness, is one of the first things that makes your character yours.
 
-> **The arithmetic:** Every 3 you take costs one extra point; every 1 you take saves one point. These must balance. Two attributes at 3 and two attributes at 1 is net zero — still 18. Four attributes at 3, four attributes at 1, and one attribute at 2 is also net zero: four extra points spent, four saved, one at baseline. If your total doesn't reach 18, you have unspent points — put them somewhere. If it exceeds 18, something is at 3 that shouldn't be.
+> **Example — the arithmetic**
+>
+> Every 3 you take costs one extra point; every 1 you take saves one point. These must balance. Two attributes at 3 and two attributes at 1 is net zero — still 18. Four attributes at 3, four attributes at 1, and one attribute at 2 is also net zero: four extra points spent, four saved, one at baseline. If your total doesn't reach 18, you have unspent points — put them somewhere. If it exceeds 18, something is at 3 that shouldn't be.
 
 ### Deriving Your Major Attribute Modifiers
 
 Once your Minor Attributes are set, add up the three Minor Attribute values under each Major. Consult the table below:
+
+**Table II.2–2: Major Attribute Modifiers**
 
 | Sum of Three Minors | Major Modifier |
 |---|---|
@@ -126,6 +134,8 @@ Once your Minor Attributes are set, add up the three Minor Attribute values unde
 
 When the outcome of an action is uncertain and the stakes matter, you roll **2d6 + the relevant attribute modifier**. Minor Attributes are the default for most active rolls. Major Attributes are used for broad or undefined situations and for saving throws (see Chapter III.1).
 
+**Table II.2–3: Outcome Tiers**
+
 | Roll Total | Outcome |
 |---|---|
 | 10+ | Full success |
@@ -134,6 +144,8 @@ When the outcome of an action is uncertain and the stakes matter, you roll **2d6
 
 The MM declares a **difficulty** before you roll:
 
+**Table II.2–4: Difficulty Modifiers**
+
 | Difficulty | Modifier |
 |---|---|
 | Easy | +1 |
@@ -141,7 +153,9 @@ The MM declares a **difficulty** before you roll:
 | Hard | -1 |
 | Very Hard | -2 |
 
-> **Why this matters for character creation:** A Strong attribute (+1) against a Hard task (-1) nets +0 — the same baseline as Average on Standard. A Weak attribute against a Very Hard task hits -3, which borders on desperate.
+> **Through the Mirror — why the spread matters**
+>
+> A Strong attribute (+1) against a Hard task (-1) nets +0 — the same baseline as Average on Standard. A Weak attribute against a Very Hard task hits -3, which borders on desperate.
 
 **Sparks** are narrative resources earned for remarkable moments and spent before a roll: each Spark adds a d6, then you drop the lowest. They shift the odds by replacing your worst potential outcomes. Full details on Sparks, difficulty, contested rolls, saving throws, and outcome guidance are in **Chapter III.1 (Core Resolution)**.
 

@@ -1,6 +1,14 @@
 # Mirror Master's Manual: Session Design
 
-## Overview
+Nobody remembers a well-structured session. They remember the bit where Mordai punched the archivist, and they remember it partly because you knew when to stop describing the archive.
+
+Running a session is four skills wearing one job title: **shaping** it (giving three hours a beginning, a middle, and a reason to come back), **pacing** it (knowing when a scene is finished before the players do), **improvising** when the plan meets contact, and **spreading the light** so everyone at the table gets a turn at being the reason things worked.
+
+They are separable, and they are learnable, and this chapter takes them one at a time.
+
+> **MM Note — where to see this chapter working**
+>
+> Every technique here is easier to read in a finished artifact than in the abstract. **Oraga Night** (`adventures/oraga_night/`) is this project's one complete worked session: a seven-Movement clock, scheduled events the party cannot stop, open time they can spend however they like, and one omen per Movement that rewards attention. Read its Overture beside this chapter's *Session Structure* and *Pacing Toolkit* sections; the mapping is almost line for line, and it will tell you more about act breaks than another two pages here would.
 
 This chapter is about the craft of running a session — the practical, unglamorous work of knowing when to describe a room, when to call for a roll, when to shut up and let the players argue, and when to drop a cliffhanger that ensures they show up next week.
 
@@ -23,15 +31,18 @@ Open with something that demands a response. Not a briefing. Not a recap. A situ
 The hook establishes two things: what is happening right now, and why the players cannot ignore it. If your opening lets the party shrug and go shopping, it is not a hook — it is scenery.
 
 Practical patterns for hooks:
-- **In medias res:** Start mid-action. The party is already being chased, already in the room, already talking to the person. Skip the walk to the interesting part.
-- **Consequence of last session:** Something the party did — or chose not to do — has developed. The world moved while they were away.
-- **A question that demands investigation:** Something is wrong. Something is missing. Something is different. The players' natural curiosity does the rest.
+
+**In medias res:** Start mid-action. The party is already being chased, already in the room, already talking to the person. Skip the walk to the interesting part.
+
+**Consequence of last session:** Something the party did — or chose not to do — has developed. The world moved while they were away.
+
+**A question that demands investigation:** Something is wrong. Something is missing. Something is different. The players' natural curiosity does the rest.
 
 **Act II — Rising Action (the bulk of the session)**
 
 This is where the party explores, investigates, fights, negotiates, argues, makes plans, abandons plans, and generally does the thing they came to do. Act II is not one long scene — it is a sequence of scenes that build on each other, each raising the stakes or revealing new information.
 
-The MM's job during Act II is pacing (see the next section) and scene transitions. When a scene has given everything it has, move to the next one. When the players are deep in something rich, let it breathe. The rhythm is yours to manage.
+The MM's job during Act II is pacing (see *Pacing Toolkit*, MM2) and scene transitions. When a scene has given everything it has, move to the next one. When the players are deep in something rich, let it breathe. The rhythm is yours to manage.
 
 **Act III — Climax or Cliffhanger (15-30 minutes)**
 
@@ -39,7 +50,9 @@ End with something that matters. A climactic fight. A revelation. A decision wit
 
 The best session endings are not resolved — they are poised. The party has just learned something, or just committed to something, or just survived something, and the implications have not finished landing. That tension carries them to next session.
 
-> **The cliffhanger is not mandatory.** Some sessions end with resolution — the quest is complete, the villain is defeated, the party is safe. That is fine. But even a resolved session benefits from a final beat that points forward: a letter arrives, a favor is called in, a detail from earlier turns out to mean something new.
+> **MM Note — The cliffhanger is not mandatory**
+>
+> Some sessions end with resolution — the quest is complete, the villain is defeated, the party is safe. That is fine. But even a resolved session benefits from a final beat that points forward: a letter arrives, a favor is called in, a detail from earlier turns out to mean something new.
 
 ### When to Deviate
 
@@ -67,7 +80,17 @@ If you are calling for a roll because a player attempted something and you are n
 
 The corollary: **do not roll for things that should just happen.** A character with Knowledge 3 and Lore Practiced does not need to roll to identify a common herb. A character with Dexterity 3 does not need to roll to climb a ladder. Save the rolls for the moments where the table holds its breath.
 
-> **Practical test:** Before calling for a roll, ask yourself what happens on a 6-. If you cannot think of something interesting, do not roll. If the answer is "nothing happens," definitely do not roll.
+> **MM Note — Practical test**
+>
+> Before calling for a roll, ask yourself what happens on a 6-. If you cannot think of something interesting, do not roll. If the answer is "nothing happens," definitely do not roll.
+
+### Difficulty and Technique Steps
+
+Declare difficulty the same way every time: name the situation, say the label, then let the mechanics take their step. A qualifying Technique moves that declared label one rung further — automatically, when its trigger is something the roll already carries, or when the player tells you they are invoking it. Either way, at most one character-side step ever lands on a single roll (see *Difficulty*, III.1).
+
+> **MM Note — Pressure Point does not stack with an auto-applied step**
+>
+> *Pressure Point* eases a difficulty by hand, for the rest of the scene, for whoever follows through on it — it is scene state, not roll-time data, so nothing applies it for you. If you have already lowered a roll's difficulty for Pressure Point, do not also let a Technique step it again: that is two character-side steps on one roll, and the ruleset caps it at one. Know which one is already priced in before you set the number.
 
 ### The "Nothing Happens on a 6-" Fallacy
 
@@ -170,7 +193,9 @@ Covered in detail in Chapter III.3 (Player's Handbook) and MM1 (this manual). Th
 
 A three-exchange fight should take 15-25 minutes at the table. If it is taking longer, something is wrong — either the fight has too many moving parts, or the players need help understanding their options, or the fight should have ended an exchange ago and you are prolonging it.
 
-> **Skirmish encounters are tutorial encounters.** A Skirmish fight (a Mook-only roster, per the Encounter Recipe Table) will last 1-2 exchanges and produce minimal resource drain. That is by design — Skirmish encounters introduce combat mechanics without risking the party. Do not expect tactical depth from them. Use Skirmish encounters early in a session or campaign to teach the exchange structure, posture decisions, and reaction economy. Save Standard and Hard encounters for when the party understands the system and meaningful tactical pressure serves the story.
+> **MM Note — Skirmish encounters are tutorial encounters**
+>
+> A Skirmish fight (a Mook-only roster, per the Encounter Recipe Table) will last 1-2 exchanges and produce minimal resource drain. That is by design — Skirmish encounters introduce combat mechanics without risking the party. Do not expect tactical depth from them. Use Skirmish encounters early in a session or campaign to teach the exchange structure, posture decisions, and reaction economy. Save Standard and Hard encounters for when the party understands the system and meaningful tactical pressure serves the story.
 
 End fights when they are won, not when the stat block is depleted. If the Named NPC is down to its last point of Resolve, carrying a Staggered rider, and the party has three characters with full Endurance pools, the fight is over — narrate the ending and move on. Do not make the players grind through the last two exchanges of a foregone conclusion.
 
@@ -186,11 +211,15 @@ The party is resting, recovering, pursuing personal goals, or simply existing in
 
 The smoothest transitions are the ones the players barely notice. A few patterns:
 
-- **Exploration to social:** The party finds someone. Describe the person before they speak.
-- **Social to combat:** The conversation breaks down. Postures — now.
-- **Combat to investigation:** The fight ends. What is left in the room?
-- **Investigation to social:** The clue points to a person. Where are they?
-- **Any scene to downtime:** "Night falls." Two words. Let the players fill the silence.
+**Exploration to social:** The party finds someone. Describe the person before they speak.
+
+**Social to combat:** The conversation breaks down. Postures — now.
+
+**Combat to investigation:** The fight ends. What is left in the room?
+
+**Investigation to social:** The clue points to a person. Where are they?
+
+**Any scene to downtime:** "Night falls." Two words. Let the players fill the silence.
 
 **When to cut a scene short:** When you realize the current scene is setup for the next one, and you are narrating the transition instead of the arrival. Skip the walk. Skip the travel. Skip the shopping unless the shopping is the scene. "You arrive at the tower. It is taller than the reports suggested."
 
@@ -208,16 +237,22 @@ These three responses are the foundation of improvisational play. Between them, 
 
 **"Yes, and..."** — The player's idea works, and it creates something new. Use this when the idea is good and you want to reward it by making the situation richer.
 
+> **Example — saying yes to an unnarrated detail**
+>
 > *Player: "Is there a chandelier in this room?"*
 > *MM: "Yes, and it is hanging by a single chain that looks about fifteen years past its last maintenance."*
 
 **"Yes, but..."** — The player's idea works, but there is a cost or complication. This is the 7-9 of conversation — success with texture.
 
+> **Example — saying yes, and charging for it**
+>
 > *Player: "Can I bribe the guard?"*
 > *MM: "Yes, but he takes the money and tells you he is going to need twice that to forget your face, too."*
 
 **"No, but..."** — The player's idea does not work as stated, but something else is available. This keeps the story moving when a direct "no" would stop it.
 
+> **Example — saying no to the plan, yes to the intent**
+>
 > *Player: "I kick the door down."*
 > *MM: "The door is reinforced iron — it is not going anywhere. But the wall next to it is crumbling plaster, and you can hear voices on the other side."*
 
@@ -235,6 +270,26 @@ When you prep a situation, you need:
 - **Who wants what?** The smugglers want to complete their delivery. The informant wants protection. The watch captain wants the problem to go away quietly.
 - **What happens if the party does nothing?** The delivery completes. The informant disappears. The dangerous cargo reaches its buyer. This is your clock — it gives the situation urgency without requiring a specific sequence.
 - **What are the pressure points?** Where can the party intervene to change the outcome? There should be several, and you should not have a preferred one.
+
+### Prep by the Clock
+
+You do not have four hours. Almost nobody does, and the guidance that assumes you do is the reason MMs cancel sessions they could have run.
+
+So here is prep by what you actually have. Each tier is cumulative — the hour includes the twenty minutes.
+
+**Twenty minutes.** Write ten names (see *The NPC Name List*, below). Decide the one thing that has changed since last session, and who it changed for. Pick the scene you will open on. That is enough to run three hours; the rest of what you would have prepared, you would have improvised anyway.
+
+**One hour.** All of the above, plus: the situation on one page — who wants what, what happens if the party does nothing, and three pressure points they could push. Then one encounter statted from the Recipe Table (MM1), chosen for the pressure point they are most likely to push, because that is the prep most expensive to do live.
+
+**Two hours.** All of the above, plus: three clues pointing at whatever you want them to work out (see *The 3-Clue Rule*, below). One set piece with its terrain written as rules rather than scenery. A second encounter for a pressure point you consider unlikely — you will be wrong about which one is unlikely roughly half the time, and being wrong twice is cheaper than being wrong once with nothing in reserve.
+
+**Four hours or more.** Everything above, and then stop. Past this point, additional prep starts producing material you are attached to, and material you are attached to is material you will steer the party toward. The failure mode of a well-prepped session is not that you run out of content — it is that you have too much and start defending it.
+
+**Under twenty minutes.** Run the names and the opening scene. Ask the table what their characters have been thinking about since last time and build the first hour out of their answers. This is a real technique, not an emergency measure, and some of the best sessions anyone runs come out of it.
+
+**And when there is no time at all,** cancel. A session you resent prepping is a session the table can feel, and one cancelled evening costs less than one bad one.
+
+---
 
 ### The 3-Clue Rule
 
@@ -255,6 +310,36 @@ If you place only one clue and the party misses it, the mystery stalls. If you p
 
 Each clue is available through a different approach — social, investigative, physical. The party will find at least one. Probably two. When they kick down the mill door, they earned it.
 
+### The Complication Table
+
+Every entry below is an active want or an unfolding situation, not a noun. Weighted on the 2d6 curve, so the common results sit at 7 and the table's teeth are on the ends. Roll it when a scene needs a reason to start, or when the party has solved the thing you prepared and it is only nine o'clock.
+
+**Table MM2–1: What Walks In**
+
+| 2d6 | What is happening |
+|---|---|
+| 2 | Someone the party wronged and forgot about has found them, and has spent the intervening time getting competent¹ |
+| 3 | A person in genuine danger asks for help in a way that makes helping expensive |
+| 4 | An official wants to see paperwork nobody has |
+| 5 | A rival is already here and already halfway through the party's plan² |
+| 6 | Somebody wants to sell the party something that is not theirs to sell |
+| 7 | A Named NPC the party knows wants something small, urgent, and inconvenient³ |
+| 8 | Two people the party needs are in the middle of an argument with each other |
+| 9 | Someone recognizes a party member and is wrong about who they are |
+| 10 | A crowd forms around something the party would rather nobody looked at |
+| 11 | The thing the party is carrying starts to matter to somebody else |
+| 12 | An opportunity arrives that is genuinely too good, and is genuinely real⁴ |
+
+¹ The point is the competence, not the grudge. Give them one advantage they did not have before — a title, a friend in the watch, a Technique — and let the party recognize the face before they recognize the problem. A fight here is a failure of the scene; what this wants is a negotiation the party enters from behind.
+
+² Run this as an opposed clock, not a race the party loses. The rival should be two steps ahead and one mistake deep, so that catching up requires noticing the mistake rather than moving faster.
+
+³ The commonest result is the smallest one on purpose. A Named NPC asking for ten minutes of help is how a world stays populated. Pay this the way you would pay a fight: if the party helps at real cost to their own schedule, that is a Spark.
+
+⁴ The table will assume it is a trap and spend twenty minutes proving it. Let them prove it, and let it be real anyway — a setting where good things are always bait teaches players to refuse every hook you write.
+
+---
+
 ### The NPC Name List
 
 Before every session, write down ten names. Five masculine, five feminine, or whatever distribution fits your setting. Just names. No backstories, no stat blocks, no motivations.
@@ -270,6 +355,8 @@ Keep the list visible. Cross off names as you use them. Replenish between sessio
 Earlier in this chapter you were told that something always happens on a 6-. That is the easiest principle in the book to agree with and the hardest one to honor at speed, because the dice do not wait for you to be clever. A player rolls a 5, the whole table turns to look at you, and your mind produces a clean, echoing silence.
 
 This table is for that moment. Six categories of trouble, one of which fits nearly any situation the game can produce. **Roll a d6 or simply pick the row you like** — both are legitimate — and use the result as a prompt for the consequence you narrate. It works for any roll, magical or not.
+
+**Table MM2–2: Generic 6− Consequences**
 
 | d6 | Category | The 6- consequence |
 |---|---|---|
@@ -330,12 +417,16 @@ Run the request against the table's own markers:
 
 Two judgment calls, worked:
 
+> **Example — pricing a Significant working**
+>
 > *Zahna: "I inscribe a hold-glyph across the door seam so it will not open while we get clear."*
 >
 > *MM: "That is a door fused shut for the length of the scene — Significant. Focused domain, so Standard difficulty. Roll Knowledge."*
 
 Same intent, one variable changed:
 
+> **Example — the same glyph at Major scope**
+>
 > *Zahna: "I want it to hold after we are gone. Days, if it can."*
 >
 > *MM: "Then it is a ward, and it endures. Major, which is Hard for you. Same glyph, same door — you are just asking it to outlive you."*
@@ -346,7 +437,9 @@ The second call is the more common one at real tables, because players routinely
 
 **When you correct a scope upward, say the new difficulty and pause.** The player may want to scale the intent back down — a narrower area, a shorter duration, one target instead of the room. That trade of ambition against probability is the heart of scope declaration, and it belongs to the player. Announcing "that is Major, which is Hard for you" and then rolling immediately takes the decision away from them. Announce it, then wait two seconds. They will tell you which they want.
 
-> **Check the ceiling before you price the roll.** A character whose Background granted a domain but who has not yet unlocked the corresponding Facet Technique is limited to **Minor scope, full stop** (see II.3, *Acquiring a Domain*). This is not a difficulty question — a Significant working is not hard for them, it is unavailable. If a new player declares something Significant, the correct response is to tell them what their magic can do right now and let them re-aim, not to set a punishing number.
+> **MM Note — Check the ceiling before you price the roll**
+>
+> A character whose Background granted a domain but who has not yet unlocked the corresponding Facet Technique is limited to **Minor scope, full stop** (see II.3, *Acquiring a Domain*). This is not a difficulty question — a Significant working is not hard for them, it is unavailable. If a new player declares something Significant, the correct response is to tell them what their magic can do right now and let them re-aim, not to set a punishing number.
 
 ### Domain Boundary Calls
 
@@ -411,7 +504,9 @@ Which means it bites in exactly one place: **the Easy cell.** A Focused domain a
 
 The practical consequence is that the floor mostly lands on newer casters and on small workings: the Focused mage who lights a candle at Easy all session finds that lighting the enemy's cloak while the enemy objects is Standard. That is the intended lesson, and it is a cheap one to teach.
 
-> **It is not a combat tax.** The chaos of combat does not add difficulty on its own. Magic is instant and carries the same action economy as a Strike, so a working in an exchange is not paying for the exchange — it is paying for scope, exactly like everything else.
+> **Through the Mirror — magic in an exchange is not taxed**
+>
+> The chaos of combat does not add difficulty on its own. Magic is instant and carries the same action economy as a Strike, so a working in an exchange is not paying for the exchange — it is paying for scope, exactly like everything else.
 
 **When does opposition count as active?** In a fight, essentially always — that is what a fight is. Outside one, the test is whether something with its own will is resisting *this working, right now*. A sealed door is not opposition; it is a difficulty. The rival practitioner holding that door shut while you try to open it is opposition. The distinction is resistance, not initiative order.
 
@@ -464,7 +559,8 @@ Session Zero is the session before the first session — the conversation where 
 
 Every table needs a way to say "this is not fun for me" without derailing the game or requiring justification. Establish this in Session Zero.
 
-- **Lines:** Hard limits. Topics, themes, or content that will not appear in the game, period. No justification needed. No discussion. If a player draws a line, the line exists.
+**Lines:** Hard limits. Topics, themes, or content that will not appear in the game, period. No justification needed. No discussion. If a player draws a line, the line exists.
+
 - **Veils:** Soft limits. Topics that can exist in the fiction but will not be described in detail. "It happened, but we cut to the next scene."
 - **The pause.** Any player can pause the game at any time to address something that is making them uncomfortable. The table respects the pause, addresses it, and continues. This is not a disruption — it is the system working.
 
@@ -655,7 +751,9 @@ After each major scene transition or act break, the MM calls for a "Spark moment
 - The MM confirms or denies (should almost always confirm — this is social reinforcement, not gatekeeping)
 - **Target:** 2–3 nomination rounds per session = 2–3 Sparks earned per player
 
-> **Why nominations work:** Players award each other. This creates positive feedback loops — the table celebrates good play together, not through the MM's judgment alone. It also trains players to pay attention to each other's moments.
+> **Through the Mirror — why nominations work**
+>
+> Players award each other. This creates positive feedback loops — the table celebrates good play together, not through the MM's judgment alone. It also trains players to pay attention to each other's moments.
 
 #### 2. Graceful Failure (structured, player-initiated)
 
@@ -677,6 +775,8 @@ When a player deliberately plays into their character's weakness — low attribu
 ### Target Economy
 
 Each player should end a session with **2–4 unspent Sparks**, having **spent 2–4 during the session**. The earning rate should roughly match the spending rate so Sparks feel like a renewable resource, not a finite one.
+
+**Table MM2–3: Spark Target Economy**
 
 | | Start | Earned | Spent | End |
 |---|---|---|---|---|

@@ -1,8 +1,12 @@
 # Rules: Combat
 
+Six guards come through the door at once. Mordai is already moving, Zahna is already talking, and Zulnut has already decided he is going out the window — and none of them is waiting for permission, because a fight is not a queue.
+
+Everything in this chapter follows from that. Everyone declares at once. Everyone acts at once. What you spend is Endurance, what you take is Conditions, and what you wear down in the thing across the room is its Resolve. The dice are the same two dice as every other chapter.
+
 ## The Shape of a Fight
 
-Most TTRPG combat systems hand you a turn. You wait. You act. You wait again. The monster acts. You wait some more. This is not how fights feel, and it is not how this system works.
+A fight here is a conversation conducted at speed, and everybody speaks at the same time.
 
 Combat in Facets of Origin is structured around **exchanges** — dramatic beats where everyone acts and reacts simultaneously. There is no initiative order, no waiting for your moment while someone else's moment stretches on. Every participant in a fight is present every exchange: choosing a posture, taking action, responding to incoming threats. The whole thing resolves as a single beat of fiction, then the MM narrates what actually happened.
 
@@ -22,6 +26,8 @@ The goal is a combat system where every participant is engaged every moment, whe
 
 ### Calculating Your Endurance Pool
 
+**Table III.3–1: Endurance Pool**
+
 | Component | Value |
 |---|---|
 | Base | 4 |
@@ -35,7 +41,9 @@ The goal is a combat system where every participant is engaged every moment, whe
 
 A character with no particular investment in Constitution or the Endurance skill has a pool of 4. A heavily invested character tops out at 8. The range in practice is 3 (fragile but fast) to 8 (a deliberate, durable choice).
 
-> **Example pools:**
+> **Example — Endurance pools**
+>
+>
 > Mordai — Constitution 3 (+1), Endurance Novice (+0): **5 Endurance**
 > Zahna — Constitution 1 (−1), Endurance Novice (+0): **3 Endurance**
 > Zulnut — Constitution 1 (−1), Endurance Novice (+0): **3 Endurance**
@@ -50,7 +58,9 @@ Running on empty is still dangerous — every incoming Condition now lands in fu
 
 **Withdrawn posture** restores 2 Endurance at the end of the exchange. This requires giving up all offensive action for that beat — you are catching your breath, finding your footing, creating space between yourself and the pressure.
 
-> **MM Note — Withdrawn is a tempo move, not a permanent position.** Make it tactically costly: an aware opponent will advance, apply pressure elsewhere, or use the exchange to regroup their own forces. A fighter who Withdraws three exchanges in a row is buying time, not winning the fight, and the fiction should say so.
+> **MM Note — Withdrawn is a tempo move, not a permanent position**
+>
+> Make it tactically costly: an aware opponent will advance, apply pressure elsewhere, or use the exchange to regroup their own forces. A fighter who Withdraws three exchanges in a row is buying time, not winning the fight, and the fiction should say so.
 
 ---
 
@@ -80,6 +90,8 @@ Before actions are declared each exchange, every participant (player characters 
 
 Posture is declared blind. You do not know what your opponent has declared until everyone reveals at once. Reading the situation, anticipating the opposition, and matching your posture to the moment is half the tactical game.
 
+**Table III.3–2: Postures**
+
 | Posture | Offense | Reactions | Other |
 |---|---|---|---|
 | **Aggressive** | +1 to offensive rolls | +1 Endurance cost on your **first** reaction this exchange; every reaction after that costs the standard amount | You are pressing hard — and exposed for it, once, per exchange |
@@ -95,7 +107,9 @@ Posture is declared blind. You do not know what your opponent has declared until
 
 **Withdrawn:** You are out of the press entirely — creating space, catching breath, declining to engage. You can still react to incoming attacks, and those reactions are free. But you are going nowhere. The fight is happening without you for this beat.
 
-> **Reading the opponent:** Posture is declared blind, but it is not declared blind of all information. A character with high Wisdom or the Insight skill can read body language, stance, and the micro-signals an opponent broadcasts before they commit. Before declaration, a player can ask the MM: *"Does anything about how they're carrying themselves suggest what posture they're about to declare?"* The MM is not obligated to answer precisely — but they should give an honest read of what an attentive character would notice. A skilled fighter telegraphs less. A wounded one telegraphs more. A creature built for ambush telegraphs nothing at all, and that too is information.
+> **MM Note — Reading the opponent**
+>
+> Posture is declared blind, but it is not declared blind of all information. A character with high Wisdom or the Insight skill can read body language, stance, and the micro-signals an opponent broadcasts before they commit. Before declaration, a player can ask the MM: *"Does anything about how they're carrying themselves suggest what posture they're about to declare?"* The MM is not obligated to answer precisely — but they should give an honest read of what an attentive character would notice. A skilled fighter telegraphs less. A wounded one telegraphs more. A creature built for ambush telegraphs nothing at all, and that too is information.
 
 ---
 
@@ -109,9 +123,11 @@ On your action in an exchange, you may do one of the following. You may only tak
 
 The foundational offensive action. You bring force to bear on a target — weapon, fist, magic, momentum.
 
-**Roll:** `2d6 + weapon attribute + relevant skill rank modifier`. Your weapon's category sets the attribute (Chapter IV.1); the skill is **Combat** for melee and unarmed Strikes, **Finesse** for ranged ones.
+**Roll:** `2d6 + weapon attribute + relevant skill rank modifier`. Your weapon's category sets the attribute (Chapter IV.1). For the skill, the defaults are **Combat** for melee and unarmed Strikes and **Finesse** for ranged ones — but these are defaults, not restrictions. Describe how you are striking and use the skill that describes it. A soldier who overpowers her opponent rolls Combat; a disciple who strikes with trained precision rather than mass rolls Finesse; both are correct, and both are Strikes. Where the fiction clearly supports a different attribute, the MM may name one. When two pairings both fit, the player chooses.
 
-**Difficulty** is Standard by default. The MM adjusts based on the situation: a Named NPC or Boss in Defensive Posture, or with strong Constitution, may push it to Hard. A Staggered or Cornered opponent may make it Easy. When in doubt, Standard. (Named NPCs and Bosses declare Postures as described in the Postures section. For Mooks, the MM sets difficulty by situation: Standard by default, Easy if distracted or exposed, Hard if armored and alert.)
+**Difficulty** is Standard by default. The MM adjusts based on the situation: a Named NPC or Boss in Defensive Posture, or with strong Constitution, may push it to Hard. A Staggered or Cornered opponent may make it Easy. When in doubt, Standard. (Named NPCs and Bosses declare Postures as described in the Postures section. For Mooks, the MM sets difficulty by situation: Standard by default, Easy if distracted or exposed, Hard if armored and alert.) A Technique may then move the MM's call one step further, exactly as any roll's difficulty can (see *Difficulty*, III.1).
+
+**Table III.3–3: Strike Outcomes**
 
 | Result | Outcome |
 |---|---|
@@ -178,6 +194,8 @@ You move — out, aside, low — using speed and awareness to take yourself out 
 
 **Roll:** `2d6 + Dexterity modifier`
 
+**Table III.3–4: Dodge Outcomes**
+
 | Result | Outcome |
 |---|---|
 | **10+** | The attack misses entirely. No Condition applied. |
@@ -196,7 +214,9 @@ You meet force with force — interposing weapon, shield, or forearm to deflect 
 
 Outcome tiers are the same as Dodge, flavored as deflection rather than avoidance.
 
-> **Dodge or Parry?** Choose the reaction that fits the fiction. Dodge requires space — the MM may rule it impossible if you are Cornered or in a tight passage. Parry requires something to meet force with — unarmed characters may find it implausible against some attacks. When in doubt, either is valid; the fiction justifies the choice, not an optimization calculation.
+> **MM Note — Dodge or Parry?**
+>
+> Choose the reaction that fits the fiction. Dodge requires space — the MM may rule it impossible if you are Cornered or in a tight passage. Parry requires something to meet force with — unarmed characters may find it implausible against some attacks. When in doubt, either is valid; the fiction justifies the choice, not an optimization calculation.
 
 ---
 
@@ -224,11 +244,25 @@ You may Intercept **one incoming action per exchange**. Only one character may I
 
 Conditions replace hit points for player characters as the measure of how a fight is going. A character is not at "14 HP" — they are **Staggered**, and that means something concrete in both the mechanics and the fiction.
 
+> **Through the Mirror — why enemies lose Resolve and characters take Conditions**
+>
+> These are two tools, and the asymmetry is deliberate. A Condition is interesting because it changes how *you* play the next exchange — Off-Balance is a decision, not a number — and that only pays off for a character somebody is steering. An enemy the MM runs for three exchanges does not need an inner life. It needs to visibly wear down, on one number the MM can track for six enemies at once without a spreadsheet.
+>
+> So Resolve is durability and nothing else: not an action-economy pool, never spent to defend, and riders never take an enemy out on their own. Give enemies a Condition track and you have doubled the MM's bookkeeping to buy tactical texture the players mostly cannot see.
+
 The tiers below govern player characters in full. Enemies do not carry a Condition track of their own — they run on Resolve — but a Condition can be hung on an enemy as a **rider** by a full-success Strike, in which case it has exactly the effect described here until it clears. (A Tier 2 rider on an enemy also makes that enemy Easy to Strike; see *Strike*, above.)
 
 ### Tier 1 Conditions
 
 Applied by partial Strike successes (7–9). **Tier 1 Conditions clear automatically at the end of the exchange.**
+
+> **Through the Mirror — why Tier 1 Conditions clear so fast**
+>
+> An earlier draft had Weary, Spent, Bleeding, and Exposed sitting on characters for whole scenes. It worked, arithmetically. It was also miserable: by the fourth exchange every player was tracking four modifiers, and the fight had stopped being about what anyone was doing and become about what everyone was carrying.
+>
+> A Tier 1 Condition is a bad moment, not an injury. It should change the exchange you are in and then get out of the way. Persistence is what Tier 2 is for, and Tier 2 is deliberately harder to inflict. Make Tier 1 persist and you have not made combat grittier — you have made it slower, and the third exchange is where tables stop paying attention.
+
+**Table III.3–5: Tier 1 Conditions**
 
 | Condition | Effect |
 |---|---|
@@ -243,6 +277,8 @@ Tier 1 Conditions are the texture of a fight — they shift the next beat withou
 ### Tier 2 Conditions
 
 Applied by full Strike successes (10+). **Tier 2 Conditions persist until a narrative action addresses them** — binding a wound, catching full breath during a Withdrawn exchange, receiving aid from an ally, or any fictional activity that genuinely resolves the condition's cause.
+
+**Table III.3–6: Tier 2 Conditions**
 
 | Condition | Effect |
 |---|---|
@@ -265,6 +301,8 @@ Broken persists until the end of the scene. Full recovery requires meaningful do
 
 ### Condition Summary
 
+**Table III.3–7: Condition Summary**
+
 | Tier | Conditions | Duration | Applied By |
 |---|---|---|---|
 | **Tier 1** | Winded, Off-Balance, Shaken | Clears end of exchange | Partial Strike (7–9) |
@@ -277,8 +315,9 @@ Broken persists until the end of the scene. Full recovery requires meaningful do
 
 On your character sheet, armor is a **downgrade budget**: a finite number of incoming Conditions it can soften over the course of a scene, each by one tier.
 
-- **Light armor:** the first **2** Conditions you receive per scene are each downgraded one tier — Tier 2 becomes Tier 1, Tier 1 is negated entirely.
-- **Heavy armor:** the first **4**. Same one-tier softening, twice as often.
+**Light armor:** the first **2** Conditions you receive per scene are each downgraded one tier — Tier 2 becomes Tier 1, Tier 1 is negated entirely.
+
+**Heavy armor:** the first **4**. Same one-tier softening, twice as often.
 
 The budget does not refresh between exchanges — it is spent down across the whole scene and refills only when the scene ends. Two fights inside one scene draw on the same budget, so a character who took heavy fire in the first skirmish walks into the second with less armor left to spend. When the budget is gone, Conditions land at full tier. This is what keeps an armored character breakable: protection is real, but it is not infinite, and a long enough fight spends through it.
 
@@ -302,7 +341,9 @@ Not every fight deserves the same structure. The rules scale to the significance
 
 The MM narrates Mook combat efficiently. Mordai cutting through two guards on his way to the named antagonist across the room is not two separate Strike exchanges — it is one action, one roll, two Mooks handled. Save the full mechanical weight for fights that deserve it.
 
-> **Mooks as roleplay opportunities:** Mooks fall fast, but they can still talk. A guard who drops their weapon and holds up their hands is a Mook who has just become a source of information, a witness, a potential ally, or a moral complication. The party's decision about what to do with a surrendering Mook is often more interesting than the Strike that got them there. Give the table a beat to make that choice.
+> **MM Note — Mooks as roleplay opportunities**
+>
+> Mooks fall fast, but they can still talk. A guard who drops their weapon and holds up their hands is a Mook who has just become a source of information, a witness, a potential ally, or a moral complication. The party's decision about what to do with a surrendering Mook is often more interesting than the Strike that got them there. Give the table a beat to make that choice.
 
 ### Named NPCs
 
@@ -328,11 +369,19 @@ Boss construction is covered in the Mirror Master's chapter. For now: a climacti
 
 ## Enemy Attacks
 
-NPCs do not roll dice. When an enemy attacks a PC, the PC rolls a reaction. The rules below clarify how enemy type and posture interact with that reaction.
+NPCs do not roll dice. When an enemy attacks a PC, the PC rolls a reaction. The rules below say how enemy type and posture interact with that reaction.
+
+> **Through the Mirror — why NPCs never roll**
+>
+> Every die at this table belongs to a player. We could have had the MM roll to attack, and the arithmetic would have worked; what it would have cost is the thing the whole system exists to protect. A roll is a moment of attention, and attention spent on the MM's dice is attention taken off the people whose story this is. So enemy pressure arrives as a stated tier and the players answer it — the tension is identical, the spotlight never moves, and the MM is free to watch faces instead of adding numbers.
+>
+> House-rule enemy rolls back in and you are buying tactile MM play with player agency and table time. Enemy Resolve is priced against a no-roll model, so expect fights to run longer than the Encounter Recipe Table predicts.
 
 ### Incoming Condition Tier
 
 When a PC is hit by an enemy attack (Absorb, or a failed/partial reaction), the incoming Condition tier depends on the enemy's type:
+
+**Table III.3–8: Incoming Attack Tier by Enemy Type**
 
 | Enemy Type | Incoming Tier | Rationale |
 |---|---|---|
@@ -345,6 +394,8 @@ Your armor applies normally: if you have downgrade budget left (see *Armor*), th
 ### Enemy Posture and Reaction Difficulty
 
 Named NPCs and Bosses declare Postures like PCs. Their posture's offense modifier adjusts the difficulty of reactions against their attacks:
+
+**Table III.3–9: Enemy Posture and PC Reactions**
 
 | Enemy Posture | Effect on PC Reactions |
 |---|---|
@@ -362,9 +413,11 @@ A character in light armor who rolls a partial Parry against a Named NPC's attac
 
 When the reaction already provides the reduction, the armor charge is **not spent**. A downgrade that softens nothing costs nothing from the budget — armor charges are consumed only when armor is the source of the reduction actually applied.
 
-> **Why they don't stack:** Armor represents physical protection; a partial reaction represents imperfect avoidance. If both reduced independently, light armor plus any partial reaction would negate all Named NPC attacks. That makes defense too cheap and removes the decision tension from reaction choices.
+> **Through the Mirror — why armor and partial reactions do not stack**
+>
+> Armor represents physical protection; a partial reaction represents imperfect avoidance. If both reduced independently, light armor plus any partial reaction would negate all Named NPC attacks. That makes defense too cheap and removes the decision tension from reaction choices.
 
-> **When you avoid entirely:** A full reaction success (10+ on Dodge or Parry) avoids the attack completely — no condition is applied, and armor is irrelevant. Armor only matters when you are hit.
+**When you avoid entirely.** A full reaction success (10+ on Dodge or Parry) avoids the attack completely — no Condition is applied, and armor is irrelevant. Armor only matters when you are hit.
 
 ---
 
@@ -396,7 +449,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Persuade (Charisma):** End the fight before it ends you. A successful Persuade during a combat exchange can demoralize, redirect, or straight-out stop an opponent who has a reason to stop. This requires a genuine in-fiction basis — an enemy who has no reason to listen will not listen — but talking your way out of a fight is a full, valid, mechanically supported option.
 
-> **MM guidance: rewarding creative lateral play**
+> **MM Note — Rewarding creative lateral play**
 >
 > When a player does something genuinely unexpected with the environment, their domain, or the fictional situation — rather than the optimal tactical move — the MM has a responsibility to make it work *better* than the obvious choice, not just equally well.
 >
@@ -652,6 +705,8 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 ### Postures
 
+**Table III.3–10: Postures (quick reference)**
+
 | Posture | Offense | Reaction Cost | Special |
 |---|---|---|---|
 | Aggressive | +1 | +1, first reaction of the exchange only | — |
@@ -660,6 +715,8 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 | Withdrawn | No offense | Free (0) | Recover 2 Endurance at end of exchange |
 
 ### Reactions (1 per incoming action)
+
+**Table III.3–11: Reactions (quick reference)**
 
 | Reaction | Cost | Roll | Effect |
 |---|---|---|---|
@@ -671,6 +728,8 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 ### Strike Outcomes
 
 **Against an enemy (the usual case) — deplete Resolve:**
+
+**Table III.3–12: Strike Outcomes (quick reference)**
 
 | Roll | Resolve | Rider (10+ only) |
 |---|---|---|
@@ -684,6 +743,8 @@ Enemy at **0 Resolve = defeated**. Mook: removed on any success (7+); armored Mo
 
 ### Condition Tiers
 
+**Table III.3–13: Condition Tiers (quick reference)**
+
 | Tier | Conditions | Clears |
 |---|---|---|
 | **1** | Winded (-1 next roll), Off-Balance (+1 reaction cost), Shaken (MM directs next action) | End of exchange |
@@ -694,6 +755,8 @@ A second Tier 2 condition of the same type = Broken. (Staggered + Cornered coexi
 
 ### Enemy Attacks
 
+**Table III.3–14: Enemy Attacks (quick reference)**
+
 | Enemy Type | Incoming Tier | Posture affects reactions? |
 |---|---|---|
 | Mook | Tier 1 | No (MM sets difficulty by situation) |
@@ -703,6 +766,8 @@ A second Tier 2 condition of the same type = Broken. (Staggered + Cornered coexi
 Armor and partial reaction downgrades **do not stack** — apply the greater reduction.
 
 ### Armor (your per-scene downgrade budget)
+
+**Table III.3–15: Armor (quick reference)**
 
 | Armor | Softens incoming Conditions |
 |---|---|
@@ -721,6 +786,8 @@ Budget resets at **end of scene**, not exchange; two fights in one scene share i
 ### Your Five Numbers On Screen
 
 The app tracks every combat number for you. Where each one lives:
+
+**Table III.3–16: Where Each Combat Number Appears in the App**
 
 | Number | On screen |
 |---|---|

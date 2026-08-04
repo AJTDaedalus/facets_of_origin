@@ -1,5 +1,9 @@
 # Character Creation: Facets and Advancement
 
+Nobody in this game levels up. What happens instead is that a character does something enough times, in enough trouble, that the table stops being surprised when it works.
+
+This chapter is the bookkeeping under that sentence: how the skills you actually use turn into ranks, how ranks turn into Facet levels, how Facet levels turn into Techniques, and where the whole thing eventually asks you to stop being only one kind of person.
+
 ## What Is a Facet?
 
 A Facet is the broad shape of who your character is becoming through play.
@@ -30,6 +34,8 @@ Each skill is associated with one of the three Facets and one Minor Attribute th
 
 Skills have four ranks:
 
+**Table II.4–1: Skill Ranks**
+
 | Rank | Modifier |
 |---|---|
 | Novice | +0 (default — everyone starts here) |
@@ -45,6 +51,8 @@ Skill rank stacks with your attribute modifier. A character with Dexterity 3 (+1
 
 Skills improve through use. At the end of each session, you have **4 skill points** to distribute among skills you actually used during that session. Each point spent on a skill adds one mark toward its next rank.
 
+**Table II.4–2: Skill Point Cost per Mark**
+
 | Situation | Cost per Mark |
 |---|---|
 | Primary Facet skill | 1 point |
@@ -52,11 +60,15 @@ Skills improve through use. At the end of each session, you have **4 skill point
 
 You may only advance skills you used this session. You may not save points between sessions — unspent points are lost.
 
-> **Example:** Mordai (Primary Facet: Body) uses Combat twice this session — 2 points for 2 marks. He also used Persuade (Soul Facet) once. That costs 2 points for 1 mark. All 4 points spent.
+> **Example — spending skill points across Facets**
+>
+> Mordai (Primary Facet: Body) uses Combat twice this session — 2 points for 2 marks. He also used Persuade (Soul Facet) once. That costs 2 points for 1 mark. All 4 points spent.
 
 **Marks:** Each point spent toward a skill's next rank is called a mark. A skill advances when it accumulates **3 marks**. Marks carry over between sessions — you do not lose partial progress.
 
-> **Example:** Zulnut (Primary Facet: Body) uses Stealth twice this session. He spends 2 points (1 each) and marks Stealth twice. Combined with the 1 mark he already carries from his Background, that's 3 marks — Stealth advances to Practiced. He has 2 points left; he didn't use another skill this session, so they go unspent, and unspent points are lost.
+> **Example — a Background mark completing a rank**
+>
+> Zulnut (Primary Facet: Body) uses Stealth twice this session. He spends 2 points (1 each) and marks Stealth twice. Combined with the 1 mark he already carries from his Background, that's 3 marks — Stealth advances to Practiced. He has 2 points left; he didn't use another skill this session, so they go unspent, and unspent points are lost.
 
 ---
 
@@ -68,11 +80,15 @@ A skill rank advance is any time a skill in that Facet moves from one rank to th
 
 With 5 skills and 3 possible advances each, a fully developed Facet produces 15 total advances — exactly enough to reach Facet level 1 (at 5 advances), Facet level 2 (at 10), and Facet level 3 (at 15). Reaching Facet level 3 means you have mastered every skill your Facet has to offer. Facet level 4 and beyond require cross-training into other Facets.
 
+> **Through the Mirror — a single Facet stops at level 3**
+>
 > Facet level 3 is the top of a single Facet — you've taken it as far as it goes. Level 4 and beyond is where breadth begins, which is how mastery tends to work anyway: at the highest levels, experts grow by absorbing adjacent disciplines. The supreme warrior who studies philosophy. The master mage who learns a craftsperson's patience.
 
-> **Example:** Zulnut advances Combat to Practiced (1 advance), Stealth to Practiced (2), Athletics to Practiced (3), Stealth to Expert (4), Finesse to Expert (5) — Finesse started Practiced at creation, so this is its first advance. *Facet level 1.* Several sessions later, Combat to Expert (6), Athletics to Expert (7), Endurance to Practiced (8), Finesse to Master (9), Endurance to Expert (10). *Facet level 2.*
+> **Example — counting Facet levels**
+>
+> Zulnut advances Combat to Practiced (1 advance), Stealth to Practiced (2), Athletics to Practiced (3), Stealth to Expert (4), Finesse to Expert (5) — Finesse started Practiced at creation, so this is its first advance. *Facet level 1.* Several sessions later, Combat to Expert (6), Athletics to Expert (7), Endurance to Practiced (8), Finesse to Master (9), Endurance to Expert (10). *Facet level 2.*
 
-Facet level advances outside your Primary Facet follow the same counting, and those levels **do** count toward your Major Advancement threshold (see below) — Major Advancement is earned across every Facet you've invested in, not just your Primary one.
+Facet level advances outside your Primary Facet follow the same counting, and those levels **do** count toward your Major Advancement threshold (see *Major Advancement*, II.4) — Major Advancement is earned across every Facet you've invested in, not just your Primary one.
 
 ---
 
@@ -82,7 +98,23 @@ At each **Facet level** — in any Facet — you unlock one **Technique** from a
 
 The Technique tree has three tiers. Tier 1 is available at Facet level 1. Tier 2 requires at least one Tier 1 Technique in the same branch. Tier 3 requires at least one Tier 2 Technique in the same branch.
 
-When you unlock a Technique, you choose it during your **reflection scene** — the moment where this growth becomes real in the fiction (see *Advancement and Reflection*, below).
+When you unlock a Technique, you choose it during your **reflection scene** — the moment where this growth becomes real in the fiction (see *Advancement and Reflection*, II.4).
+
+The three trees are in Chapters II.4a (Body), II.4b (Mind), and II.4c (Soul). Every Technique in all three is written the same way.
+
+> **Reading the Entries — Techniques**
+>
+> **Name** *(Branch, Tier — governing Attribute)*. The attribute named here is the one the branch is built on; a Technique may still be used with whatever roll its text describes.
+>
+> **Use:** how often it is available — *Passive* (always on, never declared), *At will* (you invoke it, no limit), *Once per scene*, or *Once per session*. A Spark or Endurance cost, where one exists, is stated here too.
+>
+> **Choose:** the decision you make once, at the moment you unlock it. It does not change afterward.
+>
+> **Roll:** the roll the Technique itself calls for. Techniques that add no roll of their own omit this field.
+>
+> Then the Technique's rule, in prose.
+>
+> **Normal:** the baseline rule this Technique departs from, restated so the size of the departure is unambiguous. Every Technique has one; if the Normal line surprises you, read it before you read the Technique again.
 
 ---
 
@@ -90,7 +122,9 @@ When you unlock a Technique, you choose it during your **reflection scene** — 
 
 Every **3 Facet levels total** — accumulated across any Facet — you reach a **Major Advancement**.
 
-> **A note on the math:** A fully developed Primary Facet produces 15 total skill rank advances — exactly Facet level 3. Because a Major Advancement lands every 3 Facet levels, your **first** Major arrives together with Facet level 3: the moment you have mastered your Primary Facet. Later Major Advancements (at 6 levels, 9 levels, and so on) do require cross-training, since a single Facet caps at level 3.
+> **Through the Mirror — the advancement math**
+>
+> A fully developed Primary Facet produces 15 total skill rank advances — exactly Facet level 3. Because a Major Advancement lands every 3 Facet levels, your **first** Major arrives together with Facet level 3: the moment you have mastered your Primary Facet. Later Major Advancements (at 6 levels, 9 levels, and so on) do require cross-training, since a single Facet caps at level 3.
 
 At a Major Advancement, choose one:
 
@@ -101,6 +135,8 @@ At a Major Advancement, choose one:
 
 Major Advancements require a **significant reflection scene** — more than the brief aside of a standard advancement. This should be a full scene at the table, tied to a meaningful story moment. The MM should look for the right moment in the fiction rather than forcing it at a mechanical threshold.
 
+> **Example — a reflection scene after a Major Advancement**
+>
 > *A character who reaches their first Major Advancement after a campaign of hard physical growth might have their scene in the aftermath of a battle they barely survived — a quiet moment where they understand something about themselves they didn't before.*
 
 ---
@@ -113,6 +149,8 @@ Advancement is not automatic. Numbers tell you when you *can* advance — the re
 
 Reflection scenes are encouraged but not required. Advancement happens whether or not the scene takes place — the numbers move regardless. But a reflection scene makes the growth feel real in the fiction and gives the table a shared moment. When a player takes one, the MM may reward it with a bonus mark or a Spark. When the moment isn't right, skip it and move on.
 
+> **Example — a quiet reflection scene**
+>
 > *Zahna spends a quiet moment after the Millhaven investigation re-reading his notes, marking the connections he didn't see until he had to look for them. His Lore rank ticks to Practiced. The table watches. Nobody comments. Mordai refills his drink.*
 
 **Running reflection scenes (MM guidance):**
@@ -158,6 +196,8 @@ Every 3 Facet Levels total (Primary + any Facet):
 
 It is the progression metric for Facets of Origin: a rough, honest gauge of how much a character has grown. Two characters with the same career advances are broadly comparable in power, regardless of where those advances landed.
 
+**Table II.4–3: Career Advance Benchmarks**
+
 | Career Advances | Rough Equivalent |
 |---|---|
 | 0–2 | Freshly started — Background skills plus early play |
@@ -168,4 +208,6 @@ It is the progression metric for Facets of Origin: a rough, honest gauge of how 
 
 Career advances are stored in the character file as `career_advances` and updated whenever a skill rank advances. The Background starting skill counts as 1 advance at character creation. Background Marks (the secondary skill's head start) do not count until the skill actually advances to Practiced.
 
+> **Example — the cast at one career advance**
+>
 > *All three example characters — Zahna, Mordai, and Zulnut — begin at career_advances: 1. They are at the same tier and broadly comparable in capability, despite their very different shapes.*

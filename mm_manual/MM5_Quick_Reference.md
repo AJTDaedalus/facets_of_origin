@@ -1,10 +1,22 @@
 # Mirror Master's Quick Reference
 
+This chapter is for the middle of a session, not the week before one. Everything here is a compression of a rule that lives somewhere else — the section named beside each heading owns it. Nothing on these pages is new, and if a line here ever disagrees with the chapter it compresses, the chapter is right.
+
+Keep it open. Look things up. Do not read it.
+
+> **Through the Mirror — why a quick reference may never introduce a rule**
+>
+> We have already been bitten by this once. Two implementations of combat resolution drifted apart because both were treated as authoritative, and a corpus of recorded simulation numbers turned out to be measuring a rule set nobody had written down. A quick reference is the same hazard in prose: the moment a card states something its parent chapter does not, the game has two rules and the table is playing whichever one it read most recently.
+>
+> So this chapter compresses and never paraphrases, and a change to any rule updates the body text, every quick reference that touches it, `facet.yaml`, and the engine in the same commit. If you write your own reference card, inherit the discipline — a card that is allowed to say something new is a house rule with no author.
+
 ---
 
 ## Core Resolution
 
 **Roll: 2d6 + Attribute Modifier + Skill Modifier + Difficulty Modifier**
+
+**Table MM5–1: Outcome Tiers**
 
 | Roll Total | Outcome |
 |---|---|
@@ -18,6 +30,8 @@
 
 ### Attribute Ratings
 
+**Table MM5–2: Attribute Ratings**
+
 | Rating | Label | Modifier |
 |---|---|---|
 | 1 | Weak | -1 |
@@ -26,6 +40,8 @@
 
 ### Difficulty
 
+**Table MM5–3: Difficulty**
+
 | Difficulty | Modifier | When |
 |---|---|---|
 | Easy | +1 | Clear advantage, weak opposition |
@@ -33,7 +49,11 @@
 | Hard | -1 | Skilled opposition, poor conditions |
 | Very Hard | -2 | Extraordinary opposition, nearly impossible |
 
+A Technique may then move your call one step further — at most one per roll, auto-applied when its trigger is data the app already holds, player-declared otherwise (see *Difficulty*, III.1).
+
 ### Skill Ranks
+
+**Table MM5–4: Skill Ranks**
 
 | Rank | Modifier |
 |---|---|
@@ -63,6 +83,8 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 
 ### Spark Earning
 
+**Table MM5–5: Spark Earning**
+
 | Trigger | Who Awards | Target/Session |
 |---|---|---|
 | **MM award / peer "Spark?"** (remarkable moments) | MM, or any player calls it and MM confirms | As they happen |
@@ -89,6 +111,8 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 
 ## Postures
 
+**Table MM5–6: Postures**
+
 | Posture | Offense | Reaction Cost | Special |
 |---|---|---|---|
 | **Aggressive** | +1 | +1 Endurance, first reaction of the exchange only | — |
@@ -100,9 +124,11 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 
 ## Offensive Actions
 
+**Table MM5–7: Offensive Actions**
+
 | Action | Roll | Effect |
 |---|---|---|
-| **Strike** | 2d6 + weapon attribute + Combat (melee/unarmed) or Finesse (ranged) | Deplete enemy Resolve (10+: −2, 7–9: −1); 10+ may add a rider Condition |
+| **Strike** | 2d6 + weapon attribute + Combat or Finesse (default melee/ranged; the fiction may say otherwise) | Deplete enemy Resolve (10+: −2, 7–9: −1); 10+ may add a rider Condition |
 | **Maneuver** | 2d6 + relevant skill | 10+: rolls against the target are Easy until the situation changes. 7–9: rolls against the target stay Standard. 6-: backfire |
 | **Support** | 2d6 + relevant skill | Grant ally +1d6 drop lowest OR difficulty one step easier on next roll |
 | **Magic** | 2d6 + Knowledge or Spirit (by tradition) | Domain + Intent + Scope; vs enemy depletes Resolve like a Strike |
@@ -114,6 +140,8 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 ## Strike Outcomes
 
 **Against an enemy (usual case) — deplete Resolve:**
+
+**Table MM5–8: Strike Outcomes**
 
 | Roll | Resolve | Rider (10+ only) |
 |---|---|---|
@@ -131,6 +159,8 @@ Default Strike difficulty: **Standard**. Adjust for posture, rider Conditions, s
 
 ## Reactions (1 per incoming action)
 
+**Table MM5–9: Reactions**
+
 | Reaction | Cost | Roll | 10+ | 7–9 | 6- |
 |---|---|---|---|---|---|
 | **Dodge** | 1 End | Dexterity | Avoid entirely | Downgrade 1 tier | Full hit |
@@ -144,13 +174,16 @@ At **0 Endurance**: Absorb only.
 
 ## Enemy Attacks
 
+**Table MM5–10: Enemy Attacks**
+
 | Enemy Type | Incoming Tier | Posture? |
 |---|---|---|
 | Mook | Tier 1 | No (MM sets difficulty) |
 | Named NPC | Tier 2 | Yes |
 | Boss | Tier 2 | Yes (Techniques may escalate) |
 
-- **Aggressive enemy:** PC reactions one step **harder**
+**Aggressive enemy:** PC reactions one step **harder**
+
 - **Defensive enemy:** PC reactions one step **easier**
 - Armor and reaction downgrades **do not stack** — apply the greater reduction
 
@@ -165,6 +198,8 @@ At **0 Endurance**: Absorb only.
 ---
 
 ## Conditions
+
+**Table MM5–11: Conditions**
 
 | Tier | Conditions | Effect | Duration |
 |---|---|---|---|
@@ -181,6 +216,8 @@ At **0 Endurance**: Absorb only.
 
 ## Armor (PC downgrade budget)
 
+**Table MM5–12: Armor**
+
 | Type | Softens incoming Conditions |
 |---|---|
 | None | — |
@@ -195,14 +232,19 @@ A charge is consumed only when armor provides the reduction actually applied —
 
 ## Endurance
 
-- **Pool:** 4 + Constitution modifier + Endurance skill rank bonus
-- **Range:** 3 (Con 1, no skill) to 8 (Con 3, Master)
-- **0 Endurance:** Absorb only, regardless of Posture (Conditions land at their normal tier — no extra penalty)
-- **Recovery:** Withdrawn posture restores 2 per exchange
+**Pool:** 4 + Constitution modifier + Endurance skill rank bonus
+
+**Range:** 3 (Con 1, no skill) to 8 (Con 3, Master)
+
+**0 Endurance:** Absorb only, regardless of Posture (Conditions land at their normal tier — no extra penalty)
+
+**Recovery:** Withdrawn posture restores 2 per exchange
 
 ---
 
 ## Magic: Domain + Intent + Scope
+
+**Table MM5–13: Magic Difficulty by Scope**
 
 | Scope | Focused | Standard | Broad (Prismatic) |
 |---|---|---|---|
@@ -215,7 +257,7 @@ A charge is consumed only when armor provides the reduction actually applied —
   - **Focused eases Major:** a Focused domain may spend a Spark to shift a Major effect one step easier (Hard → Standard). Focused only.
   - **Prismatic ceiling is unmovable:** no Spark eases Major for a Broad domain. Very Hard is Very Hard.
   - **Pre-technique push:** a pre-technique caster may spend a Spark to attempt **one** Significant-scope effect at the domain's normal Significant difficulty. One effect per Spark — not an unlock; Major stays closed until the Tier 1 Technique.
-- **Second domain** (Soul Communion Tier 3): a second **standard** domain only — prismatic territories require Ascendant Domain. Effects in the second domain are always one difficulty step harder than the primary.
+- **Second domain** (Soul Communion Tier 3): a second **standard** domain only — prismatic territories require Ascendant Domain. Effects in the second domain are always one difficulty step harder than normal for that domain.
 
 ### Adjudicating Magic (compressed from MM2 — see MM2 for full text)
 
@@ -228,13 +270,19 @@ A charge is consumed only when armor provides the reduction actually applied —
 
 ### Magic 6- Templates (compressed from II.3 — see II.3 for full text)
 
-- **Wrong target:** the effect manifests on the wrong target.
-- **Keeps working:** the effect works — and keeps working.
-- **Attracts attention:** the working attracts attention.
-- **Domain bleeds:** the effect lands in the right place but with the wrong character.
-- **Cost arrives early:** the magic succeeded — but the mage carries a consequence that should have been deferred.
-- **Nothing happens:** the domain reaches and finds nothing — the rarest and most useful failure.
-- **Player option:** a magical 6- is a Graceful Fail opportunity — the player describes the response and claims the Spark; the MM confirms.
+**Wrong target:** the effect manifests on the wrong target.
+
+**Keeps working:** the effect works — and keeps working.
+
+**Attracts attention:** the working attracts attention.
+
+**Domain bleeds:** the effect lands in the right place but with the wrong character.
+
+**Cost arrives early:** the magic succeeded — but the mage carries a consequence that should have been deferred.
+
+**Nothing happens:** the domain reaches and finds nothing — the rarest and most useful failure.
+
+**Player option:** a magical 6- is a Graceful Fail opportunity — the player describes the response and claims the Spark; the MM confirms.
 
 ---
 
@@ -245,6 +293,8 @@ A charge is consumed only when armor provides the reduction actually applied —
 ```
 TR = offense_value + durability_value + armor_bonus + technique_bonus
 ```
+
+**Table MM5–14: Threat Rating Components**
 
 | Attack Mod | Offense | | Component | Value |
 |---|---|---|---|---|
@@ -265,6 +315,8 @@ TR = offense_value + durability_value + armor_bonus + technique_bonus
 Budget = Party Strength (sum of `career_advances`) x multiplier: Skirmish x1 / Standard x2 / Hard x3 / Deadly x4 (directional only — not validated win rates). Action economy (same rough aid): solo x0.75 / 2–3 x1.0 / 4–6 x1.25 (Mook-only x1.1) / 7+ x1.5.
 
 ### Encounter Recipe Table (PS 3 — simulation-validated)
+
+**Table MM5–15: Encounter Recipes (Party Strength 3)**
 
 | Difficulty | Suggested Enemies | Sim Win Rate |
 |---|---|---|
@@ -293,6 +345,8 @@ Budget = Party Strength (sum of `career_advances`) x multiplier: Skirmish x1 / S
 
 Roll or pick a d6 for a generic 6- consequence when nothing specific comes to mind. Any roll, magical or not.
 
+**Table MM5–16: Generic 6− Consequences**
+
 | d6 | Category | The 6- consequence |
 |---|---|---|
 | 1 | **Cost** | Something spent, broken, or used up that can't be easily replaced — a resource, a favor, an opportunity. |
@@ -305,17 +359,26 @@ Roll or pick a d6 for a generic 6- consequence when nothing specific comes to mi
 - **Pick over roll** unless you want to be surprised too. The category is a prompt, not the line you say out loud.
 - **Size the trouble to the risk**; never pick the row that halts the story.
 - **Magic:** pair a category with the Magic 6- Templates above — template = how the domain misbehaved, category = what it cost.
-- **Graceful Fail:** hand the player the category, let them narrate the specifics, confirm the Spark.
+
+**Graceful Fail:** hand the player the category, let them narrate the specifics, confirm the Spark.
 
 ---
 
 ## Common Rulings
 
-- **Unnarrated details:** Players cannot act on details the MM has not described. A player may always ask — and the default answer leans yes — but cannot declare an action that assumes the answer (III.1, *Acting on Unnarrated Details*).
-- **Contested roll (PvP):** Both sides roll; higher total wins. On a tie, both achieve partial success.
-- **Contested roll (vs NPC):** Only the player rolls. NPC capability sets difficulty.
-- **"Can I try again?":** Only if the fiction changed — new approach, new information, or time passing that cost something. Otherwise the first result stands. A new approach gets a freshly declared difficulty (III.1, *Trying Again*).
-- **When not to roll:** Only roll when outcome is uncertain, stakes matter, and both success and failure move the story.
-- **Specialty:** A Background Specialty that *directly* applies turns a Standard roll Easy. When it is only tangential, hand over the information free — no roll (II.5, *Specialty*).
-- **Saving throws:** 2d6 + Major Attribute modifier (Body / Mind / Soul). Same three-tier outcomes. Use when something happens *to* the character, not something they choose.
-- **Mooks:** No Resolve, no Condition track. Any successful Strike (7+) removes one; an armored Mook needs a full success (10+).
+**Unnarrated details:** Players cannot act on details the MM has not described. A player may always ask — and the default answer leans yes — but cannot declare an action that assumes the answer (III.1, *Acting on Unnarrated Details*).
+
+**Contested roll (PvP):** Both sides roll; higher total wins. On a tie, both achieve partial success.
+
+**Contested roll (vs NPC):** Only the player rolls. NPC capability sets difficulty.
+
+**"Can I try again?":** Only if the fiction changed — new approach, new information, or time passing that cost something. Otherwise the first result stands. A new approach gets a freshly declared difficulty (III.1, *Trying Again*).
+
+**When not to roll:** Only roll when outcome is uncertain, stakes matter, and both success and failure move the story.
+
+**Specialty:** A Background Specialty that *directly* applies turns a Standard roll Easy. When it is only tangential, hand over the information free — no roll (II.5, *Specialty*).
+
+**Saving throws:** 2d6 + Major Attribute modifier (Body / Mind / Soul). Same three-tier outcomes. Use when something happens *to* the character, not something they choose.
+
+**Mooks:** No Resolve, no Condition track. Any successful Strike (7+) removes one; an armored Mook needs a full success (10+).
+
