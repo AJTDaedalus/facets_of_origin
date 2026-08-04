@@ -1,0 +1,68 @@
+fof_version: '0.1'
+type: enemy
+id: boranis_honor_guard
+name: Boranis Honor Guard
+
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+
+enemy:
+  tier: named
+  resolve: 3
+  attack_modifier: 2
+  defense_modifier: 2
+  armor: light
+  techniques: [warder]
+  special: >
+    WARDER — each honor guard carries two charged house crystals (a seal and a
+    flare) and knows the palace's ward-points by heart. In a crisis they fight
+    to positions, not to kills.
+  tr: 9                 # offense(+2→4) + durability(Resolve 3) + armor(light→1) + techniques(1) = 9
+  phases: []
+
+  disposition: >
+    Household soldiers, good at their work, entirely certain they are in
+    the right.
+
+  first_target: >
+    Whoever is between them and the room being crossed.
+
+  morale: >
+    Surrender ends it. It costs the evening — mask, invitation, and the
+    rest of the night in the gatehouse cell — and not the character.
+
+  organization: >
+    Nine on the night of the ball, placed inward, facing the palace
+    doors.
+
+  triggers:
+    - >
+      Fights to detain and expel, never to kill.
+    - >
+      At midnight the nine die or fall protecting their chief, around
+      the edges of the frame — scripted regardless of these numbers
+      (Chapter V).
+
+  description: >
+    One of the nine. The Boranis honor guard should number forty at an event
+    like this; the nine on duty tonight are the ones Raunu judged he could not
+    make leave, and they stand facing the palace doors, not the gates. Veterans
+    to the last, courteous to guests, and entirely without illusions about
+    what they signed up for — though even they do not know what is actually
+    coming.
+
+  notes: >
+    Use this block if players cross the house itself: forcing the east wing,
+    robbing the trophy gallery loudly, or refusing the gatehouse cell. Honor
+    guards fight to detain and expel, and they are good enough that a starting
+    party should feel it.
+
+    AT MIDNIGHT they die or fall protecting their chief — quickly, around the
+    edges of the frame (module Chapter V). That outcome is scripted regardless
+    of these numbers; the stat block exists for the hours before the bells,
+    or for tables whose plans put them beside the nine when the lights die.
+
+created_at: '2026-07-12T00:00:00+00:00'
+last_modified: '2026-07-12T00:00:00+00:00'

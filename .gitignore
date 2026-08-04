@@ -34,6 +34,11 @@ software/data/agentic_playtest/
 *.swo
 *.code-workspace
 
+# Author's private worldbuilding source material — kept locally, never distributed.
+# This repository is public; source notes compiled from the private setting corpus
+# are working scaffolding, not reader-facing content.
+references/oraga_night/
+
 # Local agent-assistant workspace (unrelated to this project)
 .openclaw/
 /AGENTS.md

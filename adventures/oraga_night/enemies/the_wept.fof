@@ -1,0 +1,99 @@
+fof_version: '0.1'
+type: enemy
+id: the_wept
+name: The Wept
+
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+
+enemy:
+  tier: boss
+  resolve: 8
+  attack_modifier: 3    # it does not fight; it arrives — strength like a fact
+  defense_modifier: 2
+  armor: heavy          # not armor: wrongness. Blades land and matter less than they should
+  techniques: [fracture_sorrow, unraveling_presence, shadow_step]
+  special: >
+    THE LEASH — the Wept has roughly half an hour of story-time from the first
+    scream; when the last bell of Oraga rings, it leaves, finished or not.
+    Late in the attack it grows faster, sloppier, and more human.
+  tr: 18                # offense(+3→5) + durability(Resolve 8) + armor(heavy→2) + techniques(3) = 18
+  phases:
+    - resolve_threshold: 2
+      description: >
+        The Sorrow Slips. At Resolve 2 or below, the mask's carved tears begin to
+        run — actually run. Its blows land one tier softer, it starts to hum the
+        cradle-song mid-strike without knowing, and invoking its Fracture drops
+        from Hard to Standard. It is losing the argument with what it used to be.
+
+  disposition: >
+    Grief with a task. It does the work and takes no pleasure in any of
+    it.
+
+  first_target: >
+    Raunu Boranis, on the dais, and nothing else until that is done.
+
+  morale: >
+    Resolve 0 is never a kill. It leaves when its errand is finished or
+    when the leash calls it home.
+
+  organization: >
+    One of three. The others hold the doors and the Dance while it works
+    the dais.
+
+  negotiation: >
+    Wants the errand over. Shifts for nothing a mortal can offer
+    tonight.
+
+  description: >
+    The tallest of the three gray masks: a spirit-mask carved with falling
+    tears, warm sure hands, and the manners of a court two centuries gone. She
+    is a person — that is the thing to hold onto — a woman, gracious and
+    quietly sad, who praised the wine and danced beautifully. She leads. She
+    goes for Raunu Boranis and she does not hurry, because nothing at this
+    ball can stop her, and she knows exactly what that feels like from the
+    other side.
+
+    She watched the young pages at the feast a beat too long. She left a
+    mourner's offering in Elanna's niche, in a rite centuries out of date. She
+    lingered at the nursery doors humming a cradle-song no one living knows,
+    and told a dance partner, kindly, "You dance like my daughter would have."
+    Under the carved tears, the mask is a woman's face.
+
+  notes: >
+    FRACTURE — SORROW (once): a Soul-facet action at Hard (Standard in its final
+    phase), requiring ammunition gathered in play (the nursery, the cradle-song,
+    the question in the dance, the woman's face under the mask). The truth: she
+    was a mother; disease took her family while she stood helpless; tonight she
+    has been sent to inflict on a family what the world inflicted on hers. On a
+    hit, the Wept stops — mid-motion, mid-kill — and for one full beat it is a
+    person standing in a burning ballroom. On 7–9 it answers with one terrible
+    parting blow or word before it stops.
+
+    SHADOW-STEP: it slips through the world's shadow — short relocations that
+    read as arriving rather than running. Ordinary doors, walls, and barricades
+    do not reliably hold it; deep Boranis ward-crystal does.
+
+    UNRAVELING PRESENCE: within a stone's throw, triggered Orthaen crystal
+    charges work only on a Luck roll (Standard); on a 6− the charge dies dark.
+    The palace's great wards hold longer but gutter at close range.
+
+    CONDUCT: it has a task, not a body count. It steps around bystanders. It
+    kills whoever stands between it and its target — but a player character
+    about to die shielding Raunu is taken out of the fight (Tier 2 Condition,
+    a broken wall) rather than out of the world. It has no orders about them,
+    and no appetite.
+
+    UNDEFEATABLE: the Wept cannot be killed or beaten by force tonight — not
+    by the party, not by fifty guards, not by the palace. Resolve 0 is not a
+    kill: it stops indulging the interference, puts its attacker through a
+    wall (Tier 2 Condition, out of the scene), and resumes its task with
+    Resolve reset. Fighting it buys time with bodies — and time is real
+    currency (every exchange is a hallway Veier gains). Only ward-fire, the
+    leash-clock, and its Fracture change outcomes. See module Chapter V,
+    "You Cannot Beat Them."
+
+created_at: '2026-07-12T00:00:00+00:00'
+last_modified: '2026-07-12T00:00:00+00:00'
