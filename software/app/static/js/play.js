@@ -524,8 +524,14 @@ function enemyStrikeOutcome(trackerKey, outcome) {
  * the MM confirmation DESIGN §4 requires before an actor is deleted from
  * the encounter — auto-apply covers difficulty steps only, never this.
  */
-function confirmFinalBlow(playerName, trackerKey) {
-  sendWS({ type: 'final_blow_confirm', player: playerName, tracker_key: trackerKey });
+function confirmFinalBlow(playerName, trackerKey, offerId) {
+  // The offer id names exactly which Strike's offer this commits, so a stale
+  // toast left on screen by an earlier exchange cannot remove an enemy off the
+  // back of a later, failed Strike (TODO T12).
+  sendWS({
+    type: 'final_blow_confirm', player: playerName,
+    tracker_key: trackerKey, offer_id: offerId,
+  });
 }
 
 /** Manual correction — an undo, not a rule. Stays on `enemy_update`. */
@@ -1341,7 +1347,7 @@ function onStrikeResult(msg) {
         duration: 20000,
         key: 'confirm-final-blow',
         action: 'Confirm Final Blow',
-        onAction: () => confirmFinalBlow(msg.attacker, msg.target),
+        onAction: () => confirmFinalBlow(msg.attacker, msg.target, msg.final_blow_offer_id),
       });
     } else {
       notify(`${attackerName} lands The Final Blow, but ${msg.target} is not in the enemy tracker.`, 'info', { duration: 7000 });

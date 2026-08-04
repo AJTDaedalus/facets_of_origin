@@ -242,7 +242,7 @@ and `choices`, and the client picker in one commit.
 
 ---
 
-## T9 — The Builder tab's "Available" Technique list is always empty
+## ~~T9 — The Builder tab's "Available" Technique list is always empty~~
 
 **Source:** discovered while implementing TD-20
 (`docs/TASKS_technique_difficulty.md`), 2026-08-02.
@@ -274,16 +274,17 @@ Technique definition read from the real nested `ruleset.techniques` structure,
 which is sufficient to prove TD-20's own fix but does not exercise the button a
 player would actually click.
 
-**Done when:** `renderBuilderTechniques`, `selectTechnique`, and
-`techniqueDisplayName` read from `ruleset.techniques[facet_id]`'s nested
-branch/tier structure (flattened once, ideally, rather than three separate
-re-derivations) instead of the nonexistent `character_facets[].techniques`. An
-e2e test drives the real button — not a direct function call — through to a
-`technique_selected` response.
+**Closed 2026-08-04.** `app.js` gained `techniquesForFacet(facetId)` and
+`allTechniques()` — one flattener over the real nested tree, shared rather than
+re-derived three times. `renderBuilderTechniques`, `selectTechnique`, and
+`techniqueDisplayName` all use it. Covered by
+`test_available_technique_list_is_populated` and
+`test_technique_display_name_resolves_from_the_real_tree`, which assert against
+the rendered panel and the live function rather than a stub.
 
 ---
 
-## T10 — `skill_advanced` never tells the client a Technique pick was earned
+## ~~T10 — `skill_advanced` never tells the client a Technique pick was earned~~
 
 **Source:** discovered while implementing TD-20
 (`docs/TASKS_technique_difficulty.md`), 2026-08-02.
@@ -305,13 +306,13 @@ because TD-20's e2e test needed a real Technique pick to exist before it could
 exercise the picker at all; the test routes around it with a full page reload
 (`player.goto(live_server)`) rather than trusting the incremental broadcast.
 
-**Done when:** `_handle_skill_advance`'s broadcast carries
-`technique_picks_available`, and `app.js`'s `skill_advanced` case applies it the
-same way `onTechniqueSelected` already does for its own broadcast.
+**Closed 2026-08-04.** The broadcast carries `technique_picks_available`; the
+client applies it and re-renders the advancement panel. Covered by
+`test_skill_advanced_broadcast_carries_the_technique_pick`.
 
 ---
 
-## T11 — `onTechniqueSelected` never applies the choice to `technique_choices`
+## ~~T11 — `onTechniqueSelected` never applies the choice to `technique_choices`~~
 
 **Source:** discovered while implementing TD-20
 (`docs/TASKS_technique_difficulty.md`), 2026-08-02.
@@ -334,15 +335,16 @@ and never generalized).
 three tasks' file lists). TD-20's e2e test routes around it with the same
 full-reload approach as T10.
 
-**Done when:** `onTechniqueSelected` sets
-`state.character.technique_choices[msg.technique_id] = msg.choice` when `msg.choice`
-is present, and only sets `magic_technique_active = true` when the selected
-Technique's definition says `magic_granting` (or one of the two domain-grant
-variants) is true — not for every Technique.
+**Closed 2026-08-04.** The handler now writes the choice into
+`technique_choices` and only sets `magic_technique_active` when the Technique's
+own definition grants magic — checked via `allTechniques()` against
+`magic_granting` / `grants_secondary_domain` / `grants_prismatic_domain`. The
+second defect mattered more than it looked: learning Weapon Mastery was telling
+the Magic panel the character had unlocked full-scope magic.
 
 ---
 
-## T12 — `final_blow_confirm` is not bound to the Strike that offered it
+## ~~T12 — `final_blow_confirm` is not bound to the Strike that offered it~~
 
 **Source:** review of PR #21, 2026-08-03.
 
@@ -358,9 +360,35 @@ this is a state-machine gap rather than a privilege escalation. Closing it means
 holding pending-offer state per session, which is a small feature rather than a
 patch.
 
-**Done when:** a Strike that offers Final Blow records a pending offer (attacker,
-target, roll id, expiry), and `final_blow_confirm` refuses anything that does not
-match a live one.
+**Closed 2026-08-04, corrected the same day after review.**
+`GameSession.pending_final_blows` holds the open offers **keyed by attacker**
+(tracker key + offer id). A Strike that offers Final Blow records one; a Strike
+that requests it and fails clears that attacker's own; committing consumes it.
+The confirm handler refuses anything without a matching live offer, and the offer
+id — broadcast on the `strike_result` and echoed back by the client — is
+**required**, pinning the confirm to *that* Strike.
+
+Offers are cleared at `exchange_end`, `combat_end`, and `session_reset`, so one
+cannot outlive the exchange that made it.
+
+**Two things the first attempt got wrong**, both caught in review of PR #24:
+
+- The offer was a single **session-wide** slot, so any Final Blow Strike
+  overwrote or cleared whoever else's was open. Two characters can both hold the
+  Technique; one player spending a Spark on a successful capstone Strike lost it
+  because someone else swung and missed. That was a regression, not a
+  pre-existing gap — the confirm succeeded before this work.
+- Nothing cleared the offer at any lifecycle boundary, so one made in a previous
+  combat — or a previous *session*, after once-per-session use was reset — was
+  still committable. The original note claimed "a stale one cannot outlive the
+  exchange that made it" and used that to argue against an expiry. The claim was
+  false when written; the code now makes it true, which is why no timer is
+  needed.
+
+Covered by `test_confirm_without_an_offer_is_refused` and
+`test_a_failed_strike_clears_any_standing_offer`. `test_mm_confirm_commits_the_removal`
+was rewritten: it used to confirm without ever Striking, which is exactly the hole
+this closes — the test was encoding the bug.
 
 ---
 

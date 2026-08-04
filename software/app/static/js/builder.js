@@ -123,8 +123,11 @@ function renderBuilderTechniques() {
     });
   }
 
-  const facetDef = state.ruleset.character_facets.find(cf => cf.id === char.primary_facet);
-  const techniques = (facetDef && facetDef.techniques) || [];
+  // The tree lives at ruleset.techniques[facetId], nested branch → tier →
+  // technique. `character_facets[]` has never carried a `techniques` field, so
+  // reaching for it silently produced an empty list and this panel always said
+  // "Every Technique in this Facet is learned" (TODO T9).
+  const techniques = techniquesForFacet(char.primary_facet);
   const available = techniques.filter(t => !held.includes(t.id));
 
   if (available.length > 0) {
@@ -133,9 +136,27 @@ function renderBuilderTechniques() {
       // Show WHY a Technique is locked rather than hiding it. Seeing the shape of
       // the tree ahead is most of the point of an advancement screen.
       const missing = (t.prerequisites || []).filter(p => !held.includes(p));
-      const blocked = missing.length > 0 || picks <= 0;
+
+      // The tier ladder is the real gate and no Technique in the ruleset states
+      // it as a `prerequisites` entry: Tier 2 needs any Tier 1 in the same
+      // branch, Tier 3 any Tier 2. `select_technique` enforces it server-side
+      // and broadcasts its refusal to the whole table, so an enabled button here
+      // means a player publicly fails at something the panel invited them to do.
+      const heldInBranch = techniques.filter(
+        o => held.includes(o.id) && o.branch_id === t.branch_id);
+      const tierMissing = (t.tier || 1) > 1
+        && !heldInBranch.some(o => o.tier === (t.tier || 1) - 1);
+
+      // Second Domain and Ascendant Domain need a domain in their own tree first.
+      const domainMissing = !!t.requires_domain && !state.character.magic_domain;
+
+      const blocked = missing.length > 0 || tierMissing || domainMissing || picks <= 0;
       const reasons = [];
       if (missing.length) reasons.push('Requires ' + missing.map(techniqueDisplayName).join(', '));
+      if (tierMissing) {
+        reasons.push(`Requires a Tier ${(t.tier || 1) - 1} Technique in ${t.branch_name || 'the same branch'}`);
+      }
+      if (domainMissing) reasons.push('Requires an existing domain');
       if (picks <= 0) reasons.push('No pick available');
 
       html += `<div class="technique-row${blocked ? ' technique-locked' : ''}">
@@ -164,8 +185,8 @@ function renderBuilderTechniques() {
  * event was MM-gated besides, so it always came back as an error.
  */
 async function selectTechnique(techId) {
-  const facetDef = state.ruleset.character_facets.find(cf => cf.id === state.character.primary_facet);
-  const def = ((facetDef && facetDef.techniques) || []).find(t => t.id === techId);
+  const def = techniquesForFacet(state.character.primary_facet)
+    .find(t => t.id === techId);
 
   let choice;
   if (def && def.has_choice) {

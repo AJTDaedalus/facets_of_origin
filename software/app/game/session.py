@@ -83,6 +83,17 @@ class GameSession:
     encounter_library: dict[str, Encounter] = field(default_factory=dict)
     active_enemies: dict[str, Enemy] = field(default_factory=dict)
     threat_clocks: dict[str, ThreatClock] = field(default_factory=dict)
+    #: Open Final Blow offers, keyed by attacker: {player: {"tracker_key",
+    #: "offer_id"}}. A confirm that does not match a live offer is refused.
+    #: Without this the confirm handler re-checked only "unlocked" and "not used
+    #: this session" — the 7+ requirement and the Spark cost live in an advisory
+    #: flag on the roll, so a stale or replayed confirm could remove an enemy
+    #: after a failed Strike (TODO T12).
+    #:
+    #: Keyed per attacker, not per session: two characters can each hold The
+    #: Final Blow, and a single shared slot meant one player's Strike silently
+    #: destroyed the other's earned offer.
+    pending_final_blows: dict[str, dict] = field(default_factory=dict)
     _character_dir: Path | None = field(default=None)
 
     def add_character(self, character: Character) -> None:
