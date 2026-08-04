@@ -8,6 +8,10 @@
 </head>
 <body>
 
+<!-- Toast host — anything the user must not miss surfaces here rather than
+     scrolling past in the chat log. -->
+<div id="toast-host" aria-live="polite" aria-atomic="false"></div>
+
 <!-- =====================================================================
      AUTH SCREEN (MM login)
      ===================================================================== -->
@@ -84,12 +88,13 @@
   <!-- Invite generator -->
   <div class="card">
     <div class="card-title">Generate Player Invite</div>
-    <label>Session ID</label>
-    <input type="text" id="invite-session-id" placeholder="Paste session ID">
-    <label>Player Name</label>
+    <p class="card-help">Each link is single-use and carries the player's name. Send one per player.</p>
+    <label for="invite-session-id">Session</label>
+    <select id="invite-session-id"></select>
+    <label for="invite-player-name">Player Name</label>
     <input type="text" id="invite-player-name" placeholder="e.g. Zahna">
-    <button class="btn btn-primary" onclick="generateInvite()">Generate Invite Link</button>
-    <div id="invite-result" style="display:none;margin-top:8px;padding:8px;background:var(--bg);border:1px solid var(--border);border-radius:4px;font-size:12px;word-break:break-all;font-family:var(--font-mono);"></div>
+    <button class="btn btn-primary" onclick="generateInvite(event)">Generate Invite Link</button>
+    <div id="invite-result" class="invite-result" style="display:none;"></div>
   </div>
 </div>
 
@@ -103,9 +108,22 @@
     <header>
       <h1>Facets of Origin</h1>
       <span class="session-badge" id="header-session-name">Session</span>
+      <span class="conn-dot conn-connecting" id="header-connection" role="status" aria-label="Connecting"></span>
       <span style="color:var(--text-dim);font-size:0.85rem;margin-left:auto;" id="header-identity"></span>
+      <button class="btn btn-secondary btn-sm" onclick="toggleHelp()" title="What can I do here?">Help</button>
       <button class="btn btn-secondary btn-sm" onclick="logout()">Leave</button>
     </header>
+
+    <!-- Help drawer — answers "where do I do X?" without leaving the table -->
+    <div id="help-drawer" class="help-drawer hidden">
+      <div class="help-inner">
+        <div class="help-head">
+          <strong>Where things live</strong>
+          <button class="btn btn-secondary btn-sm" onclick="toggleHelp()">Close</button>
+        </div>
+        <div id="help-content"></div>
+      </div>
+    </div>
 
     <!-- Spark nomination banner (MM only, floats above tabs) -->
     <div id="play-spark-nomination-banner" class="spark-nomination hidden" style="margin:8px 24px;">
@@ -124,6 +142,9 @@
         <button class="btn btn-secondary btn-sm" onclick="document.getElementById('play-graceful-fail-banner').classList.add('hidden')">Dismiss</button>
       </div>
     </div>
+
+    <!-- Where the exchange is right now — nothing used to say this -->
+    <div id="combat-status-banner" class="combat-status-banner hidden" role="status"></div>
 
     <!-- Tab navigation -->
     <nav class="tab-bar" id="main-tab-bar">
@@ -145,30 +166,52 @@
           <div id="char-create-panel" class="hidden">
             <div class="card">
               <div class="card-title">Create Your Character</div>
-              <label>Character Name</label>
+              <p class="card-help">
+                Four choices and you're playing: a name, a Facet, a Background, and how your nine
+                Attributes are rated. Nothing here is permanent — advancement changes all of it.
+              </p>
+
+              <label for="cc-name">Character Name</label>
               <input type="text" id="cc-name" placeholder="What do they call you?">
 
-              <label>Primary Facet</label>
+              <label for="cc-facet">Primary Facet</label>
               <select id="cc-facet"></select>
+              <div id="cc-facet-info" class="choice-info"></div>
 
-              <label>Background</label>
-              <select id="cc-background"><option value="">-- none --</option></select>
-              <div id="cc-background-info" style="font-size:0.8rem;color:var(--text-dim);margin-bottom:8px;"></div>
+              <label for="cc-background">Background</label>
+              <select id="cc-background"><option value="">-- none (custom) --</option></select>
+              <div id="cc-background-info" class="choice-info"></div>
 
               <div id="cc-magic-domain-wrap" class="hidden">
-                <label>Magic Domain</label>
+                <label for="cc-magic-domain">Magic Domain</label>
                 <select id="cc-magic-domain"><option value="">-- none --</option></select>
-                <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:8px;">
-                  This background grants a magic domain. Choose one, or leave blank for the non-magical variant.
+                <div class="inline-note">
+                  This Background grants a magic domain — choose one, or leave it blank for the
+                  non-magical variant. Until you unlock a Technique your magic works at
+                  <strong>Minor</strong> scope only; there is no extra difficulty on top of that.
                 </div>
               </div>
 
-              <div class="card-title" style="margin-top:12px;">Distribute Attributes</div>
+              <div class="card-title" style="margin-top:16px;">Distribute Attributes</div>
+              <p class="card-help">
+                Rate each Attribute 1 to 3. Spend every point — 2 is competent, 3 is exceptional,
+                1 is a genuine weakness worth playing.
+              </p>
               <div id="cc-attributes"></div>
-              <div id="cc-points-remaining" style="font-size:0.85rem;color:var(--text-dim);margin-bottom:8px;"></div>
+              <div id="cc-points-remaining" class="points-counter"></div>
 
-              <button class="btn btn-primary" onclick="submitCharacterCreation()">Create Character</button>
+              <button class="btn btn-primary" onclick="submitCharacterCreation(event)">Create Character</button>
               <div id="cc-error" class="error-msg"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Already Have a Character?</div>
+              <p class="card-help">
+                Import a <code>.fof</code> file exported from another session. It has to be your own
+                character — the player name in the file must match your invite.
+              </p>
+              <input type="file" id="cc-import-file" accept=".fof,.yaml,.yml"
+                     onchange="importCharacterFile(this)">
             </div>
           </div>
 
@@ -198,31 +241,62 @@
               <!-- Roll controls -->
               <div class="card" style="margin-top:12px;padding:12px;">
                 <div class="card-title">Roll Dice</div>
-                <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:8px;">
-                  Selected: <strong id="play-roll-attr-display" style="color:var(--text);">-- click an attribute above --</strong>
+                <div class="roll-selection" id="play-roll-selection">
+                  Pick an Attribute above, or hit Roll on any skill.
                 </div>
-                <label>Difficulty</label>
+                <label for="play-difficulty-select">Difficulty</label>
                 <select id="play-difficulty-select" class="difficulty-select">
                   <option value="Easy">Easy (+1)</option>
-                  <option value="Standard" selected>Standard (+/-0)</option>
-                  <option value="Hard">Hard (-1)</option>
-                  <option value="Very Hard">Very Hard (-2)</option>
+                  <option value="Standard" selected>Standard (±0)</option>
+                  <option value="Hard">Hard (−1)</option>
+                  <option value="Very Hard">Very Hard (−2)</option>
                 </select>
-                <label>Description (optional)</label>
+                <label for="play-roll-description">Description (optional)</label>
                 <input type="text" id="play-roll-description" placeholder="What are you attempting?">
-                <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:8px;">
-                  Click spark pips above to spend Sparks before rolling.
+                <div class="inline-note">
+                  10+ full success · 7-9 success with a cost · 6- things go wrong, but the story moves.
+                  Stage Sparks on the pips above to add dice before you roll.
                 </div>
                 <button class="btn btn-primary" id="play-roll-btn" onclick="performRoll()" disabled>Roll 2d6</button>
+              </div>
+
+              <!-- Saving throws: something happening TO you, not something you attempt -->
+              <div class="card" style="margin-top:12px;padding:12px;">
+                <div class="card-title">Saving Throw</div>
+                <p class="card-help">
+                  When something happens <em>to</em> you — a trap springs, a spell lands, the floor gives way —
+                  roll 2d6 plus a Major Attribute rather than a skill.
+                </p>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;">
+                  <div style="flex:1;min-width:120px;">
+                    <label for="play-save-attribute">Major Attribute</label>
+                    <select id="play-save-attribute"></select>
+                  </div>
+                  <div style="flex:1;min-width:120px;">
+                    <label for="play-save-difficulty">Difficulty</label>
+                    <select id="play-save-difficulty" class="difficulty-select">
+                      <option value="Easy">Easy (+1)</option>
+                      <option value="Standard" selected>Standard (±0)</option>
+                      <option value="Hard">Hard (−1)</option>
+                      <option value="Very Hard">Very Hard (−2)</option>
+                    </select>
+                  </div>
+                  <button class="btn btn-secondary" onclick="performSavingThrow()">Save</button>
+                </div>
               </div>
 
               <!-- Roll result -->
               <div id="play-roll-result-box" class="hidden"></div>
             </div>
 
-            <!-- COMBAT PANEL (shown during combat) -->
+            <!-- COMBAT PANEL — read-only readiness view out of combat, live in it -->
             <div id="combat-panel" class="card hidden">
               <div class="card-title">Combat</div>
+
+              <div id="combat-idle-note" class="inline-note hidden">
+                Not in combat. This is your readiness: the Endurance pool you'll start a fight with,
+                your armour budget, and what each reaction will cost. The MM starts combat when it begins.
+              </div>
 
               <!-- Endurance bar -->
               <div class="combat-status-bar">
@@ -239,112 +313,135 @@
                 </div>
               </div>
 
+              <!-- Armor budget: per-scene downgrade charges, not a flat reduction -->
+              <div id="combat-armor-display" style="font-size:0.8rem;margin-bottom:8px;"></div>
+
               <!-- Conditions -->
               <div id="combat-conditions" style="margin-bottom:8px;"></div>
 
               <!-- Posture selector -->
               <div style="margin-bottom:10px;">
-                <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:4px;">DECLARE POSTURE</div>
+                <div class="section-label">Declare Posture</div>
                 <div class="posture-selector">
-                  <label class="posture-opt" title="Aggressive: +1 offense, +1 reaction cost">
+                  <label class="posture-opt">
                     <input type="radio" name="combat-posture" value="aggressive"> Aggressive
+                    <span class="opt-hint">+1 offense · reactions cost 1 more</span>
                   </label>
-                  <label class="posture-opt" title="Measured: baseline">
+                  <label class="posture-opt">
                     <input type="radio" name="combat-posture" value="measured" checked> Measured
+                    <span class="opt-hint">baseline</span>
                   </label>
-                  <label class="posture-opt" title="Defensive: -1 offense, -1 reaction cost">
+                  <label class="posture-opt">
                     <input type="radio" name="combat-posture" value="defensive"> Defensive
+                    <span class="opt-hint">−1 offense · reactions cost 1 less</span>
                   </label>
-                  <label class="posture-opt" title="Withdrawn: no offense, free reactions, recover 2 Endurance">
+                  <label class="posture-opt">
                     <input type="radio" name="combat-posture" value="withdrawn"> Withdrawn
+                    <span class="opt-hint">no offense · free reactions · recover 2 Endurance</span>
                   </label>
                 </div>
-                <button class="btn btn-secondary btn-sm" onclick="declarePosture()" style="margin-top:4px;">Declare</button>
+                <button class="btn btn-secondary btn-sm combat-live-only" onclick="declarePosture()"
+                        style="margin-top:4px;">Declare Posture</button>
               </div>
 
               <!-- Action buttons -->
-              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:4px;">ACTIONS</div>
-              <div class="combat-action-row">
-                <button class="btn btn-primary btn-sm" onclick="showCombatAction('strike')">Strike</button>
-                <button class="btn btn-secondary btn-sm" onclick="showCombatAction('react')">React</button>
-                <button class="btn btn-secondary btn-sm" onclick="showCombatAction('support')">Support</button>
-                <button class="btn btn-secondary btn-sm" onclick="showCombatAction('maneuver')">Maneuver</button>
-              </div>
+              <div class="combat-live-only">
+                <div class="section-label">Actions</div>
+                <div class="combat-action-row">
+                  <button class="btn btn-primary btn-sm" onclick="showCombatAction('strike')">Strike</button>
+                  <button class="btn btn-secondary btn-sm" onclick="showCombatAction('react')">React</button>
+                  <button class="btn btn-secondary btn-sm" onclick="showCombatAction('support')">Support</button>
+                  <button class="btn btn-secondary btn-sm" onclick="showCombatAction('maneuver')">Maneuver</button>
+                </div>
 
-              <!-- Strike sub-form -->
-              <div id="combat-form-strike" class="combat-sub-form hidden">
-                <div style="font-size:0.8rem;font-weight:600;margin-bottom:4px;">Strike</div>
-                <label>Target</label>
-                <input type="text" id="strike-target" placeholder="Enemy or character name">
-                <label>Attribute</label>
-                <select id="strike-attribute"></select>
-                <label>Skill (optional)</label>
-                <select id="strike-skill"><option value="">-- none --</option></select>
-                <label>Difficulty</label>
-                <select id="strike-difficulty" class="difficulty-select">
-                  <option value="Easy">Easy</option>
-                  <option value="Standard" selected>Standard</option>
-                  <option value="Hard">Hard</option>
-                  <option value="Very Hard">Very Hard</option>
-                </select>
-                <div style="display:flex;gap:12px;align-items:center;margin:6px 0;">
-                  <label style="margin:0;display:flex;align-items:center;gap:4px;">
-                    <input type="checkbox" id="strike-press"> Press (-1 End, +1d6 drop lowest)
+                <!-- Strike sub-form -->
+                <div id="combat-form-strike" class="combat-sub-form hidden">
+                  <div class="sub-form-title">Strike</div>
+                  <p class="card-help">
+                    Against an enemy a 10+ depletes 2 Resolve and may hang a Condition; a 7-9 depletes 1.
+                    Against another character a 10+ is a Tier 2 Condition and a 7-9 is Tier 1.
+                  </p>
+                  <label for="strike-target">Target</label>
+                  <select id="strike-target"></select>
+                  <label for="strike-attribute">Attribute</label>
+                  <select id="strike-attribute"></select>
+                  <label for="strike-skill">Skill (optional)</label>
+                  <select id="strike-skill"><option value="">-- none --</option></select>
+                  <label for="strike-difficulty">Difficulty</label>
+                  <select id="strike-difficulty" class="difficulty-select">
+                    <option value="Easy">Easy (+1)</option>
+                    <option value="Standard" selected>Standard (±0)</option>
+                    <option value="Hard">Hard (−1)</option>
+                    <option value="Very Hard">Very Hard (−2)</option>
+                  </select>
+                  <label class="checkbox-inline" style="margin:6px 0;">
+                    <input type="checkbox" id="strike-press"> Press — spend 1 Endurance for +1d6, drop lowest
                   </label>
+                  <div class="inline-note">
+                    Sparks staged on your sheet above apply to this Strike too.
+                  </div>
+                  <button class="btn btn-primary btn-sm" onclick="performStrike()">Strike</button>
                 </div>
-                <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:4px;">
-                  Spark pips (Play tab top) apply here too.
+
+                <!-- React sub-form -->
+                <div id="combat-form-react" class="combat-sub-form hidden">
+                  <div class="sub-form-title">React</div>
+                  <p class="card-help">
+                    One reaction per incoming action. At 0 Endurance only Absorb is available.
+                  </p>
+                  <div class="combat-action-row" style="margin-bottom:6px;">
+                    <button class="btn btn-secondary btn-sm" onclick="performReact('dodge')"
+                            title="Dexterity roll">Dodge</button>
+                    <button class="btn btn-secondary btn-sm" onclick="performReact('parry')"
+                            title="Strength + Combat roll">Parry</button>
+                    <button class="btn btn-secondary btn-sm" onclick="performReact('absorb')"
+                            title="Take the hit — always free">Absorb</button>
+                    <button class="btn btn-secondary btn-sm" onclick="performReact('intercept')"
+                            title="Take a hit meant for an ally — once per exchange">Intercept</button>
+                  </div>
+                  <div id="react-cost-preview" style="font-size:0.75rem;color:var(--text-dim);"></div>
                 </div>
-                <button class="btn btn-primary btn-sm" onclick="performStrike()">Strike!</button>
-              </div>
 
-              <!-- React sub-form -->
-              <div id="combat-form-react" class="combat-sub-form hidden">
-                <div style="font-size:0.8rem;font-weight:600;margin-bottom:4px;">React</div>
-                <div class="combat-action-row" style="margin-bottom:6px;">
-                  <button class="btn btn-secondary btn-sm" onclick="performReact('dodge')" title="1 End, Dexterity roll">Dodge</button>
-                  <button class="btn btn-secondary btn-sm" onclick="performReact('parry')" title="1 End, Strength+Combat roll">Parry</button>
-                  <button class="btn btn-secondary btn-sm" onclick="performReact('absorb')" title="0 End, take the hit">Absorb</button>
-                  <button class="btn btn-secondary btn-sm" onclick="performReact('intercept')" title="2 End, protect an ally">Intercept</button>
+                <!-- Support sub-form -->
+                <div id="combat-form-support" class="combat-sub-form hidden">
+                  <div class="sub-form-title">Support</div>
+                  <label for="support-target">Target Ally</label>
+                  <select id="support-target"></select>
+                  <label for="support-bonus-type">Bonus Type</label>
+                  <select id="support-bonus-type">
+                    <option value="add_die">Add Die — ally rolls +1d6 and drops the lowest</option>
+                    <option value="ease_difficulty">Ease Difficulty — ally's next roll is one step easier</option>
+                  </select>
+                  <label for="support-attribute">Your Attribute</label>
+                  <select id="support-attribute"></select>
+                  <label for="support-skill">Your Skill (optional)</label>
+                  <select id="support-skill"><option value="">-- none --</option></select>
+                  <button class="btn btn-secondary btn-sm" onclick="performSupport()" style="margin-top:4px;">Support</button>
                 </div>
-                <div id="react-cost-preview" style="font-size:0.75rem;color:var(--text-dim);"></div>
-              </div>
 
-              <!-- Support sub-form -->
-              <div id="combat-form-support" class="combat-sub-form hidden">
-                <div style="font-size:0.8rem;font-weight:600;margin-bottom:4px;">Support</div>
-                <label>Target Ally</label>
-                <select id="support-target"></select>
-                <label>Bonus Type</label>
-                <select id="support-bonus-type">
-                  <option value="add_die">Add Die (ally gets +1d6 drop lowest)</option>
-                  <option value="ease_difficulty">Ease Difficulty (ally's next roll one step easier)</option>
-                </select>
-                <label>Your Attribute</label>
-                <select id="support-attribute"></select>
-                <label>Your Skill (optional)</label>
-                <select id="support-skill"><option value="">-- none --</option></select>
-                <button class="btn btn-secondary btn-sm" onclick="performSupport()" style="margin-top:4px;">Support!</button>
-              </div>
+                <!-- Maneuver sub-form -->
+                <div id="combat-form-maneuver" class="combat-sub-form hidden">
+                  <div class="sub-form-title">Maneuver</div>
+                  <p class="card-help">
+                    Change the situation instead of dealing damage — disarm, shove, blind, cut the rope.
+                    A Maneuver is defined by what you describe.
+                  </p>
+                  <label for="maneuver-target">Target</label>
+                  <select id="maneuver-target"></select>
+                  <label for="maneuver-attribute">Attribute</label>
+                  <select id="maneuver-attribute"></select>
+                  <label for="maneuver-skill">Skill (optional)</label>
+                  <select id="maneuver-skill"><option value="">-- none --</option></select>
+                  <label for="maneuver-description">What are you trying to do?</label>
+                  <input type="text" id="maneuver-description" placeholder="e.g. kick the brazier into his path">
+                  <button class="btn btn-secondary btn-sm" onclick="performManeuver()" style="margin-top:4px;">Maneuver</button>
+                </div>
 
-              <!-- Maneuver sub-form -->
-              <div id="combat-form-maneuver" class="combat-sub-form hidden">
-                <div style="font-size:0.8rem;font-weight:600;margin-bottom:4px;">Maneuver</div>
-                <label>Target</label>
-                <input type="text" id="maneuver-target" placeholder="Enemy or character name">
-                <label>Attribute</label>
-                <select id="maneuver-attribute"></select>
-                <label>Skill (optional)</label>
-                <select id="maneuver-skill"><option value="">-- none --</option></select>
-                <label>Description</label>
-                <input type="text" id="maneuver-description" placeholder="What are you trying to do?">
-                <button class="btn btn-secondary btn-sm" onclick="performManeuver()" style="margin-top:4px;">Maneuver!</button>
-              </div>
-
-              <!-- Revealed postures display -->
-              <div id="combat-postures-revealed" class="hidden" style="margin-top:8px;">
-                <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:4px;">POSTURES THIS EXCHANGE</div>
-                <div id="combat-postures-list"></div>
+                <!-- Revealed postures display -->
+                <div id="combat-postures-revealed" class="hidden" style="margin-top:8px;">
+                  <div class="section-label">Postures This Exchange</div>
+                  <div id="combat-postures-list"></div>
+                </div>
               </div>
             </div>
 
@@ -423,10 +520,57 @@
                 </thead>
                 <tbody id="play-skills-tbody"></tbody>
               </table>
-              <div style="font-size:0.7rem;color:var(--text-dim);margin-top:8px;">
-                outside primary Facet. Click Roll to roll with skill bonus.
+              <div class="inline-note">
+                <span style="color:var(--text-dim);">●</span> marks a skill outside your primary Facet —
+                those cost 2 Skill Points to advance instead of 1. Roll sets the Attribute for you and
+                adds the skill bonus.
               </div>
             </div>
+          </div>
+
+          <!-- ===== MM WORK SURFACE =====
+               The MM has no character sheet, so the main column is theirs. The
+               combat console and enemy tracker are what an MM touches most, and
+               they do not fit usably in the 340px rail. ===== -->
+          <div id="mm-left-panel" data-role="mm">
+          <!-- =============== MM: COMBAT =============== -->
+          <div class="card" data-role="mm">
+            <div class="card-title">Combat</div>
+            <div class="btn-row" style="margin:0 0 8px;">
+              <button class="btn btn-primary btn-sm" onclick="startCombat()">Start Combat</button>
+              <button class="btn btn-gold btn-sm" onclick="revealPostures()"
+                      title="Everyone declared in secret — flip them face up">Reveal Postures</button>
+              <button class="btn btn-secondary btn-sm" onclick="endExchange()"
+                      title="Clear Tier 1 Conditions, apply Withdrawn recovery, reset reactions">End Exchange</button>
+              <button class="btn btn-secondary btn-sm" onclick="endCombat()">End Combat</button>
+            </div>
+            <p class="card-help">
+              Enemies never roll. When one attacks, land the incoming Condition on the target below —
+              the engine applies armour and any partial reaction for you.
+            </p>
+            <div id="mm-combat-roster"></div>
+          </div>
+
+          <!-- =============== MM: ENEMY TRACKER =============== -->
+          <div class="card" data-role="mm">
+            <div class="card-title">Enemy Tracker</div>
+            <div id="play-enemy-tracker"></div>
+            <div class="spawn-row">
+              <select id="play-spawn-enemy-select">
+                <option value="">-- select enemy --</option>
+              </select>
+              <div style="display:flex;gap:6px;">
+                <input type="text" id="play-spawn-instance-name" placeholder="Name (optional)" style="flex:1;margin:0;">
+                <input type="number" id="play-spawn-count" value="1" min="1" max="20" title="How many"
+                       style="width:64px;margin:0;">
+                <button class="btn btn-secondary btn-sm" onclick="spawnEnemyFromLibrary()">Spawn</button>
+              </div>
+              <div class="inline-note" style="margin:0;">
+                Build and save enemies on the Builder tab, or Run a whole saved Encounter from there.
+              </div>
+            </div>
+          </div>
+
           </div>
 
         </div>
@@ -457,72 +601,152 @@
             </div>
           </div>
 
-          <!-- MM controls -->
-          <div id="play-mm-controls" class="card hidden">
-            <div class="card-title">Mirror Master Controls</div>
-            <div style="margin-bottom:12px;">
-              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">SPARK CADENCE</div>
-              <button class="btn btn-gold btn-sm" onclick="startNominationRound()" style="margin-bottom:8px;">Nomination Round</button>
-              <div style="font-size:0.7rem;color:var(--text-dim);margin-bottom:8px;">
-                Call for nominations at act breaks. Each player nominates one other player for a Spark.
-              </div>
-              <input type="text" id="play-mm-spark-player" placeholder="Player name">
-              <input type="text" id="play-mm-spark-reason" placeholder="Reason (optional)">
-              <button class="btn btn-gold btn-sm" onclick="mmAwardSpark()">Award Spark</button>
-            </div>
-            <div style="margin-bottom:12px;">
-              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">GENERATE INVITE</div>
-              <input type="text" id="play-invite-player-name" placeholder="Player name">
-              <button class="btn btn-secondary btn-sm" onclick="generateInviteInGame()">Get Invite Link</button>
-              <div id="play-invite-result" style="font-size:11px;word-break:break-all;color:var(--text-dim);margin-top:4px;"></div>
-            </div>
-            <div style="margin-bottom:12px;">
-              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">COMBAT</div>
-              <div class="btn-row" style="margin:0;">
-                <button class="btn btn-primary btn-sm" onclick="startCombat()">Start Combat</button>
-                <button class="btn btn-secondary btn-sm" onclick="endExchange()">End Exchange</button>
-                <button class="btn btn-secondary btn-sm" onclick="endCombat()">End Combat</button>
-              </div>
-            </div>
-            <div>
-              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">ENEMY TRACKER</div>
-              <div id="play-enemy-tracker"></div>
-              <div style="margin-top:8px;">
-                <select id="play-spawn-enemy-select" style="margin-bottom:4px;">
-                  <option value="">-- select enemy --</option>
-                </select>
-                <input type="text" id="play-spawn-instance-name" placeholder="Instance name (optional)">
-                <button class="btn btn-secondary btn-sm" onclick="spawnEnemyFromLibrary()">Spawn</button>
-              </div>
-            </div>
-            <div style="margin-top:12px;">
-              <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;">THREAT CLOCKS</div>
-              <div id="play-clock-tracker"></div>
-              <div style="margin-top:8px;">
-                <input type="text" id="play-clock-name" placeholder="Clock name (e.g. Rising Waters)">
-                <button class="btn btn-secondary btn-sm" onclick="createClock()">Create Clock</button>
-              </div>
+          <!-- =============== MM: THREAT CLOCKS =============== -->
+          <div class="card" data-role="mm">
+            <div class="card-title">Threat Clocks</div>
+            <p class="card-help">
+              A visible countdown on a looming hazard. A 7-9 or a 6- near it advances the clock;
+              a 10+ never does.
+            </p>
+            <div id="play-clock-tracker"></div>
+            <div style="display:flex;gap:6px;margin-top:8px;">
+              <input type="text" id="play-clock-name" placeholder="e.g. Rising Waters" style="flex:1;margin:0;">
+              <input type="number" id="play-clock-segments" min="2" max="12" placeholder="4"
+                     title="Segments (default from ruleset)" style="width:64px;margin:0;">
+              <button class="btn btn-secondary btn-sm" onclick="createClock()">Create</button>
             </div>
           </div>
 
-          <!-- Player controls (Spark nomination) -->
-          <div id="play-player-enemies" class="card hidden">
+          <!-- =============== MM: SPARK CADENCE =============== -->
+          <div class="card" data-role="mm">
+            <div class="card-title">Sparks</div>
+            <button class="btn btn-gold btn-sm" onclick="startNominationRound()">Open Act Break</button>
+            <p class="card-help">
+              Prompts every player to nominate someone for a Spark. Use it at scene and act breaks.
+            </p>
+            <label for="play-mm-spark-player">Award directly</label>
+            <select id="play-mm-spark-player" data-player-picker="optional"></select>
+            <input type="text" id="play-mm-spark-reason" placeholder="Reason (optional)">
+            <button class="btn btn-gold btn-sm" onclick="mmAwardSpark()">Award Spark</button>
+          </div>
+
+          <!-- =============== MM: CONTESTED ROLL =============== -->
+          <div class="card collapsible" data-role="mm">
+            <button class="card-title collapsible-toggle" aria-expanded="false"
+                    onclick="toggleCollapsible(this)">
+              Contested Roll <span class="toggle-arrow">+</span>
+            </button>
+            <div class="collapsible-body hidden">
+              <p class="card-help">
+                Two characters pushing directly against each other — a grapple, a staredown, a race
+                for the same ledge. Highest total wins.
+              </p>
+              <div class="contest-grid">
+                <div>
+                  <label for="contest-player-a">Character A</label>
+                  <select id="contest-player-a" data-player-picker="required"></select>
+                  <label for="contest-attr-a">Attribute</label>
+                  <select id="contest-attr-a"></select>
+                  <label for="contest-skill-a">Skill</label>
+                  <select id="contest-skill-a"></select>
+                </div>
+                <div>
+                  <label for="contest-player-b">Character B</label>
+                  <select id="contest-player-b" data-player-picker="required"></select>
+                  <label for="contest-attr-b">Attribute</label>
+                  <select id="contest-attr-b"></select>
+                  <label for="contest-skill-b">Skill</label>
+                  <select id="contest-skill-b"></select>
+                </div>
+              </div>
+              <label for="contest-difficulty">Difficulty</label>
+              <select id="contest-difficulty" class="difficulty-select">
+                <option value="Easy">Easy (+1)</option>
+                <option value="Standard" selected>Standard (±0)</option>
+                <option value="Hard">Hard (−1)</option>
+                <option value="Very Hard">Very Hard (−2)</option>
+              </select>
+              <label for="contest-description">What are they contesting?</label>
+              <input type="text" id="contest-description" placeholder="e.g. control of the lever">
+              <button class="btn btn-primary btn-sm" onclick="performContestedRoll()">Roll Contest</button>
+              <div id="play-contested-result" class="contest-result hidden"></div>
+            </div>
+          </div>
+
+          <!-- =============== MM: TABLE ROLLER =============== -->
+          <div class="card collapsible" data-role="mm">
+            <button class="card-title collapsible-toggle" aria-expanded="false"
+                    onclick="toggleCollapsible(this)">
+              Table Roller <span class="toggle-arrow">+</span>
+            </button>
+            <div class="collapsible-body hidden">
+              <p class="card-help">
+                Raw dice for the things around the game &mdash; random tables, oracles, which of
+                two doors the noise came from. Not a resolution roll: no outcome tier, no
+                Attribute. Enemies still never roll; when one attacks, land the Condition above.
+              </p>
+              <div class="dice-quick-row">
+                <button class="btn btn-secondary btn-sm" onclick="quickTableRoll('1d4')">d4</button>
+                <button class="btn btn-secondary btn-sm" onclick="quickTableRoll('1d6')">d6</button>
+                <button class="btn btn-secondary btn-sm" onclick="quickTableRoll('1d8')">d8</button>
+                <button class="btn btn-secondary btn-sm" onclick="quickTableRoll('1d10')">d10</button>
+                <button class="btn btn-secondary btn-sm" onclick="quickTableRoll('1d12')">d12</button>
+                <button class="btn btn-secondary btn-sm" onclick="quickTableRoll('1d20')">d20</button>
+                <button class="btn btn-secondary btn-sm" onclick="quickTableRoll('1d100')">d100</button>
+              </div>
+              <label for="table-roll-notation">Or type it</label>
+              <div style="display:flex;gap:6px;">
+                <input type="text" id="table-roll-notation" placeholder="e.g. 3d6+2"
+                       style="flex:1;margin:0;" onkeydown="if(event.key==='Enter')performTableRoll()">
+                <button class="btn btn-primary btn-sm" onclick="performTableRoll()">Roll</button>
+              </div>
+              <label for="table-roll-label" style="margin-top:8px;">What for? (optional)</label>
+              <input type="text" id="table-roll-label" placeholder="e.g. Wandering encounter">
+              <div id="table-roll-result" class="table-roll-result hidden"></div>
+            </div>
+          </div>
+
+          <!-- =============== MM: SESSION =============== -->
+          <div class="card collapsible" data-role="mm">
+            <button class="card-title collapsible-toggle" aria-expanded="false"
+                    onclick="toggleCollapsible(this)">
+              Session <span class="toggle-arrow">+</span>
+            </button>
+            <div class="collapsible-body hidden">
+              <label for="play-invite-player-name">Invite a player</label>
+              <div style="display:flex;gap:6px;">
+                <input type="text" id="play-invite-player-name" placeholder="Player name" style="flex:1;margin:0;">
+                <button class="btn btn-secondary btn-sm" onclick="generateInviteInGame(event)">Get Link</button>
+              </div>
+              <div id="play-invite-result" class="invite-result" style="display:none;"></div>
+
+              <div class="section-label" style="margin-top:14px;">New Session</div>
+              <p class="card-help">
+                Refreshes everyone's Sparks to the per-session baseline and re-arms once-per-session
+                Techniques. Run this when you sit down to play, not mid-scene.
+              </p>
+              <button class="btn btn-secondary btn-sm" onclick="resetSession()">Start New Session</button>
+            </div>
+          </div>
+
+          <!-- =============== PLAYER: ENEMIES, CLOCKS, SPARKS =============== -->
+          <div class="card" data-role="player">
             <div class="card-title">Enemies</div>
             <div id="play-player-enemy-tracker"></div>
           </div>
 
-          <div id="play-player-clocks" class="card hidden">
+          <div class="card" data-role="player">
             <div class="card-title">Threat Clocks</div>
             <div id="play-player-clock-tracker"></div>
           </div>
 
-          <div id="play-player-controls" class="card hidden">
-            <div class="card-title">Nominate for Spark</div>
-            <input type="text" id="play-peer-spark-player" placeholder="Player name">
-            <button class="btn btn-gold btn-sm" onclick="nominateForSpark()">Spark?</button>
-            <div style="font-size:0.75rem;color:var(--text-dim);margin-top:6px;">
-              Nominate another player for a Spark. The MM confirms.
-            </div>
+          <div class="card" data-role="player">
+            <div class="card-title">Nominate for a Spark</div>
+            <select id="play-peer-spark-player" data-player-picker="optional"></select>
+            <button class="btn btn-gold btn-sm" onclick="nominateForSpark()">Nominate</button>
+            <p class="card-help">
+              Saw someone do something great? Nominate them — the MM confirms the Spark.
+            </p>
           </div>
 
         </div>
@@ -544,9 +768,9 @@
           <div id="tools-sheet-content"></div>
         </div>
 
-        <!-- MM: all character sheets -->
-        <div id="tools-all-sheets" class="card hidden">
-          <div class="card-title">All Characters</div>
+        <!-- Party / all character sheets -->
+        <div id="tools-all-sheets" class="card">
+          <div class="card-title" id="tools-all-sheets-title">The Party</div>
           <div id="tools-all-sheets-content"></div>
         </div>
 
@@ -554,8 +778,8 @@
         <div class="card">
           <div class="card-title">Inventory</div>
           <div id="tools-inventory-list"></div>
-          <div style="display:flex;gap:6px;margin-top:8px;">
-            <input type="text" id="tools-inventory-input" placeholder="Add item..." style="margin:0;flex:1;">
+          <div id="tools-inventory-add" style="display:flex;gap:6px;margin-top:8px;">
+            <input type="text" id="tools-inventory-input" placeholder="Add an item..." style="margin:0;flex:1;">
             <button class="btn btn-secondary btn-sm" onclick="addInventoryItem()">Add</button>
           </div>
         </div>
@@ -563,25 +787,51 @@
         <!-- Rule summaries -->
         <div id="tools-rule-summaries"></div>
 
-        <!-- Encounter budget calculator (MM only) -->
+        <!-- Encounter difficulty (MM only) -->
         <div id="tools-budget-calculator" class="card hidden">
-          <div class="card-title">Encounter Budget Calculator</div>
-          <label>Party Career Advances (sum)</label>
-          <input type="number" id="tools-budget-advances" value="0" min="0" style="width:120px;">
-          <label>Difficulty</label>
-          <select id="tools-budget-difficulty" style="width:180px;">
-            <option value="skirmish">Skirmish (x1)</option>
-            <option value="standard" selected>Standard (x2)</option>
-            <option value="hard">Hard (x3)</option>
-            <option value="deadly">Deadly (x4)</option>
-          </select>
-          <button class="btn btn-secondary btn-sm" onclick="calculateBudget()">Calculate</button>
-          <div id="tools-budget-result" style="font-size:14px;font-weight:600;color:var(--gold);margin-top:8px;"></div>
+          <div class="card-title">Encounter Difficulty</div>
+          <p class="card-help">
+            Difficulty is set by how many Named and Boss enemies the party faces at once. The TR
+            budget below is a rough ordering check, not a target to hit.
+          </p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;">
+            <div>
+              <label for="tools-budget-party-size">Party size</label>
+              <input type="number" id="tools-budget-party-size" value="3" min="1" max="8"
+                     style="width:90px;" oninput="this.dataset.touched=1;calculateBudget()">
+            </div>
+            <div>
+              <label for="tools-budget-advances">Party career advances</label>
+              <input type="number" id="tools-budget-advances" value="0" min="0"
+                     style="width:120px;" oninput="this.dataset.touched=1;calculateBudget()">
+            </div>
+            <div>
+              <label for="tools-budget-difficulty">Target difficulty</label>
+              <select id="tools-budget-difficulty" style="width:180px;" onchange="calculateBudget()">
+                <option value="skirmish">Skirmish</option>
+                <option value="standard" selected>Standard</option>
+                <option value="hard">Hard</option>
+                <option value="deadly">Deadly</option>
+              </select>
+            </div>
+          </div>
+          <div id="tools-budget-result" style="font-weight:600;color:var(--gold);margin-top:10px;"></div>
         </div>
 
         <!-- Export -->
         <div class="card">
-          <button class="btn btn-secondary" onclick="exportCharacter()">Export Character (.fof)</button>
+          <div class="card-title">Export</div>
+          <div id="tools-export-content"></div>
+        </div>
+
+        <!-- Destructive actions, kept apart from everything else -->
+        <div class="card card-danger hidden" id="tools-danger">
+          <div class="card-title">Start Over</div>
+          <p class="card-help">
+            Deleting a character discards its Attributes, skills, Techniques, advancement, and
+            inventory. Export it first if there is anything you want to keep.
+          </p>
+          <div id="tools-danger-content"></div>
         </div>
 
       </div>
@@ -595,12 +845,12 @@
       <div class="builder-content">
 
         <!-- ===== PLAYER SECTION ===== -->
-        <div id="builder-player-section">
+        <div id="builder-player-section" data-role="player">
 
           <!-- Skill advancement -->
           <div class="card">
             <div class="card-title">Skill Advancement</div>
-            <div id="builder-sp-remaining" style="font-size:13px;color:var(--text-dim);margin-bottom:8px;"></div>
+            <div id="builder-sp-remaining" class="card-help"></div>
             <div id="builder-skills-list"></div>
           </div>
 
@@ -613,18 +863,31 @@
           <!-- Character notes -->
           <div class="card">
             <div class="card-title">Character Notes</div>
-            <textarea id="builder-player-notes" rows="6" placeholder="Your notes..." style="width:100%;"></textarea>
-            <button class="btn btn-secondary btn-sm" style="margin-top:8px;" onclick="savePlayerNotes()">Save Notes</button>
+            <p class="card-help">Your own notes on this character. Saved to the server with your sheet.</p>
+            <textarea id="builder-player-notes" rows="6" placeholder="Goals, questions, things you noticed..."
+                      style="width:100%;"></textarea>
+            <button class="btn btn-secondary btn-sm" style="margin-top:8px;"
+                    onclick="savePlayerNotes(event)">Save Notes</button>
           </div>
 
         </div>
 
         <!-- ===== MM SECTION ===== -->
-        <div id="builder-mm-section" class="hidden">
+        <div id="builder-mm-section" data-role="mm">
+
+          <!-- Enemy library -->
+          <div class="card">
+            <div class="card-title">Enemy Library</div>
+            <div id="builder-enemy-library-list"></div>
+          </div>
 
           <!-- Enemy builder -->
           <div class="card">
-            <div class="card-title">Enemy Builder</div>
+            <div class="card-title" id="builder-enemy-form-title">Enemy Builder</div>
+            <p class="card-help">
+              Threat Rating is derived from these numbers — Mooks are at least 1, Named at least 8,
+              Bosses at least 12. Mooks have no Resolve pool and fall to a single Strike.
+            </p>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
               <div>
                 <label>Name</label>
@@ -632,7 +895,7 @@
               </div>
               <div>
                 <label>Tier</label>
-                <select id="builder-enemy-tier">
+                <select id="builder-enemy-tier" oninput="previewEnemyTR()" onchange="previewEnemyTR()">
                   <option value="mook">Mook</option>
                   <option value="named" selected>Named</option>
                   <option value="boss">Boss</option>
@@ -640,11 +903,11 @@
               </div>
               <div>
                 <label>Resolve</label>
-                <input type="number" id="builder-enemy-resolve" value="4" min="0">
+                <input type="number" id="builder-enemy-resolve" oninput="previewEnemyTR()" onchange="previewEnemyTR()" value="4" min="0">
               </div>
               <div>
                 <label>Armor</label>
-                <select id="builder-enemy-armor">
+                <select id="builder-enemy-armor" oninput="previewEnemyTR()" onchange="previewEnemyTR()">
                   <option value="none">None</option>
                   <option value="light">Light</option>
                   <option value="heavy">Heavy</option>
@@ -652,50 +915,51 @@
               </div>
               <div>
                 <label>Attack Mod</label>
-                <input type="number" id="builder-enemy-attack" value="0">
+                <input type="number" id="builder-enemy-attack" oninput="previewEnemyTR()" onchange="previewEnemyTR()" value="0">
               </div>
               <div>
                 <label>Defense Mod</label>
                 <input type="number" id="builder-enemy-defense" value="0">
               </div>
             </div>
-            <label style="margin-top:8px;">Techniques (comma-separated)</label>
-            <input type="text" id="builder-enemy-techniques" placeholder="e.g. Riposte, Shield Wall">
-            <label>Special / Phase Changes</label>
+            <label style="margin-top:8px;" for="builder-enemy-techniques">Techniques (comma-separated)</label>
+            <input type="text" id="builder-enemy-techniques" oninput="previewEnemyTR()" onchange="previewEnemyTR()" placeholder="e.g. Riposte, Shield Wall">
+            <label for="builder-enemy-special">Special / Phase Changes</label>
             <textarea id="builder-enemy-special" rows="2" placeholder="Phase change or special abilities..."></textarea>
-            <label>Description</label>
+            <label for="builder-enemy-description">Description</label>
             <input type="text" id="builder-enemy-description" placeholder="Brief description">
-            <label>Tactics</label>
+            <label for="builder-enemy-tactics">Tactics</label>
             <textarea id="builder-enemy-tactics" rows="2" placeholder="How does this enemy fight?"></textarea>
             <div id="builder-enemy-tr" style="font-size:14px;font-weight:600;color:var(--gold);margin:8px 0;"></div>
             <div class="btn-row">
-              <button class="btn btn-primary btn-sm" onclick="saveEnemy()">Save to Library</button>
-              <button class="btn btn-secondary btn-sm" onclick="previewEnemyTR()">Preview TR</button>
+              <button class="btn btn-primary btn-sm" onclick="saveEnemy(event)">Save to Library</button>
+              <button class="btn btn-secondary btn-sm" onclick="previewEnemyTR()">Recalculate TR</button>
+              <button class="btn btn-secondary btn-sm hidden" id="builder-enemy-cancel-edit"
+                      onclick="clearEnemyForm()">Cancel Edit</button>
             </div>
-            <div id="builder-enemy-status" class="success-msg"></div>
           </div>
 
-          <!-- Enemy library -->
+          <!-- Encounter library -->
           <div class="card">
-            <div class="card-title">Enemy Library</div>
-            <div id="builder-enemy-library-list" style="font-size:13px;color:var(--text-dim);">No enemies saved.</div>
+            <div class="card-title">Encounter Library</div>
+            <div id="builder-encounter-library-list"></div>
           </div>
 
           <!-- Encounter builder -->
           <div class="card">
-            <div class="card-title">Encounter Builder</div>
-            <label>Encounter Name</label>
+            <div class="card-title" id="builder-encounter-form-title">Encounter Builder</div>
+            <label for="builder-encounter-name">Encounter Name</label>
             <input type="text" id="builder-encounter-name" placeholder="e.g. Market Square Ambush">
-            <label>Difficulty</label>
+            <label for="builder-encounter-difficulty">Intended Difficulty</label>
             <select id="builder-encounter-difficulty">
               <option value="skirmish">Skirmish</option>
               <option value="standard" selected>Standard</option>
               <option value="hard">Hard</option>
               <option value="deadly">Deadly</option>
             </select>
-            <label>Environment</label>
+            <label for="builder-encounter-environment">Environment</label>
             <input type="text" id="builder-encounter-environment" placeholder="Where does this happen?">
-            <label>Description</label>
+            <label for="builder-encounter-description">Description</label>
             <textarea id="builder-encounter-description" rows="2" placeholder="What's happening?"></textarea>
             <label>Enemies</label>
             <div id="builder-encounter-enemies"></div>
@@ -705,43 +969,69 @@
               </select>
               <button class="btn btn-secondary btn-sm" onclick="addEncounterEnemy()">Add</button>
             </div>
-            <label>Lateral Solutions</label>
-            <textarea id="builder-encounter-laterals" rows="2" placeholder="Creative solutions players might find..."></textarea>
-            <div id="builder-encounter-budget" style="font-size:13px;color:var(--text-dim);margin:8px 0;"></div>
-            <button class="btn btn-primary btn-sm" onclick="saveEncounter()">Save Encounter</button>
-            <div id="builder-encounter-status" class="success-msg"></div>
+            <label for="builder-encounter-laterals">Lateral Solutions (one per line)</label>
+            <textarea id="builder-encounter-laterals" rows="3"
+                      placeholder="Ways out that aren't a fight — talk, sneak, bargain, collapse the scaffold..."></textarea>
+            <div id="builder-encounter-budget" class="budget-readout"></div>
+            <div class="btn-row">
+              <button class="btn btn-primary btn-sm" onclick="saveEncounter(event)">Save Encounter</button>
+              <button class="btn btn-secondary btn-sm hidden" id="builder-encounter-cancel-edit"
+                      onclick="clearEncounterForm()">Cancel Edit</button>
+            </div>
+          </div>
+
+          <!-- Advancement controls -->
+          <div class="card">
+            <div class="card-title">Advancement</div>
+            <p class="card-help">
+              Players may only spend a Skill Point on a skill marked as used this session. Rolling a
+              skill marks it automatically — mark one here when it was used without a roll.
+            </p>
+            <div class="contest-grid">
+              <div>
+                <div class="section-label">Mark a Skill Used</div>
+                <label for="builder-mark-player">Player</label>
+                <select id="builder-mark-player" data-player-picker="required"></select>
+                <label for="builder-mark-skill">Skill</label>
+                <select id="builder-mark-skill"></select>
+                <button class="btn btn-secondary btn-sm" onclick="mmMarkSkillUsed()">Mark as Used</button>
+              </div>
+              <div>
+                <div class="section-label">Award a Mark</div>
+                <label for="builder-advance-player">Player</label>
+                <select id="builder-advance-player" data-player-picker="required"></select>
+                <label for="builder-advance-skill">Skill</label>
+                <select id="builder-advance-skill"></select>
+                <button class="btn btn-primary btn-sm" onclick="mmAdvanceSkill()">Award Mark</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- MM private notes on a character -->
+          <div class="card">
+            <div class="card-title">Notes on a Character</div>
+            <p class="card-help">Private to you. Players never see these.</p>
+            <label for="builder-mm-notes-player">Character</label>
+            <select id="builder-mm-notes-player" data-player-picker="optional"
+                    onchange="renderBuilderMMNotes()"></select>
+            <textarea id="builder-mm-notes" rows="5"
+                      placeholder="Secrets, hooks, what they don't know yet..."></textarea>
+            <button class="btn btn-secondary btn-sm" onclick="saveMMNotes(event)">Save Notes</button>
           </div>
 
           <!-- Campaign notes -->
           <div class="card">
             <div class="card-title">Campaign Notes</div>
-            <textarea id="builder-campaign-notes" rows="8" placeholder="Session notes, NPC notes, plot threads..."></textarea>
-            <button class="btn btn-secondary btn-sm" style="margin-top:8px;" onclick="saveCampaignNotes()">Save Notes</button>
-          </div>
-
-          <!-- Mark skills as used (enables player advancement) -->
-          <div class="card">
-            <div class="card-title">Mark Skills Used This Session</div>
-            <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:8px;">
-              Players can only spend skill points on skills the MM marks as used. Skills are also auto-marked when rolled.
+            <p class="card-help">
+              Session notes, NPCs, plot threads. Autosaved to this browser — not to the server, and
+              not shared between devices.
+            </p>
+            <textarea id="builder-campaign-notes" rows="8"
+                      placeholder="Session notes, NPC notes, plot threads..."></textarea>
+            <div class="btn-row">
+              <button class="btn btn-secondary btn-sm" onclick="saveCampaignNotes()">Save Notes</button>
+              <span id="builder-campaign-notes-status" class="save-stamp"></span>
             </div>
-            <label>Player Name</label>
-            <input type="text" id="builder-mark-player" placeholder="Player name">
-            <label>Skill</label>
-            <select id="builder-mark-skill"></select>
-            <button class="btn btn-secondary btn-sm" onclick="mmMarkSkillUsed()">Mark as Used</button>
-            <div id="builder-mark-status" class="success-msg"></div>
-          </div>
-
-          <!-- Skill advancement controls (MM awards marks) -->
-          <div class="card">
-            <div class="card-title">Award Skill Advancement</div>
-            <label>Player Name</label>
-            <input type="text" id="builder-advance-player" placeholder="Player name">
-            <label>Skill</label>
-            <select id="builder-advance-skill"></select>
-            <button class="btn btn-primary btn-sm" onclick="mmAdvanceSkill()">Award Mark</button>
-            <div id="builder-advance-status" class="success-msg"></div>
           </div>
 
         </div>

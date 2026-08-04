@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, Field
 
 from app.api.routes.session import require_mm
-from app.game.enemy import Enemy
+from app.game.enemy import Enemy, PhaseDef
 from app.game.session import session_store
 
 router = APIRouter(prefix="/api/enemies", tags=["enemies"])
@@ -22,11 +22,46 @@ class CreateEnemyRequest(BaseModel):
     armor: str = "none"
     techniques: list[str] = Field(default_factory=list)
     special: str | None = None
+    #: Boss phase-change thresholds. Omitted from this model originally, so a
+    #: phased Boss could be POSTed and have its phases silently dropped —
+    #: `apply_resolve_damage` reports crossings, so the field is load-bearing.
+    phases: list[PhaseDef] = Field(default_factory=list)
     description: str = ""
     tactics: str = ""
     personality: str = ""
     loot: list[str] = Field(default_factory=list)
     notes: str = ""
+
+
+class PreviewTRRequest(BaseModel):
+    """Unsaved enemy stats, for scoring a stat line the MM is still tuning."""
+
+    tier: str = "mook"
+    resolve: int = Field(default=0, ge=0)
+    attack_modifier: int = 0
+    armor: str = "none"
+    techniques: list[str] = Field(default_factory=list)
+
+
+@router.post("/preview-tr", dependencies=[Depends(require_mm)])
+async def preview_tr(body: PreviewTRRequest):
+    """Score an unsaved stat line.
+
+    The Builder needs a Threat Rating while the MM is still typing, and it used
+    to get one by re-implementing the MM1 formula in JavaScript. A second copy
+    of a rule is the failure mode the Software-PHB sync policy exists to
+    prevent, so the client asks the engine instead.
+    """
+    enemy = Enemy(
+        id="preview",
+        name="preview",
+        tier=body.tier,
+        resolve=body.resolve,
+        attack_modifier=body.attack_modifier,
+        armor=body.armor,
+        techniques=body.techniques,
+    )
+    return {"tr": enemy.calculate_tr()}
 
 
 @router.post("/", dependencies=[Depends(require_mm)])
@@ -46,6 +81,7 @@ async def create_enemy(body: CreateEnemyRequest):
         armor=body.armor,
         techniques=body.techniques,
         special=body.special,
+        phases=body.phases,
         description=body.description,
         tactics=body.tactics,
         personality=body.personality,

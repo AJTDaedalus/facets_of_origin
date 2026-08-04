@@ -1,0 +1,66 @@
+{
+  "session_id": "2a2e959f-32dd-4e38-89cb-3cef735615db",
+  "arm": "A",
+  "beats": 2,
+  "players": [
+    {
+      "player": "Sophia",
+      "actions": 1,
+      "lines": 3,
+      "words": 194,
+      "rolls": 1,
+      "sparks_earned": 0,
+      "sparks_spent": 0,
+      "longest_idle_beats": 2,
+      "proposal_length_trend": 0.0,
+      "luck": 0.0
+    },
+    {
+      "player": "Luke",
+      "actions": 0,
+      "lines": 4,
+      "words": 519,
+      "rolls": 0,
+      "sparks_earned": 0,
+      "sparks_spent": 0,
+      "longest_idle_beats": 1,
+      "proposal_length_trend": 0.0,
+      "luck": 0.0
+    },
+    {
+      "player": "Penny",
+      "actions": 3,
+      "lines": 5,
+      "words": 925,
+      "rolls": 2,
+      "sparks_earned": 1,
+      "sparks_spent": 1,
+      "longest_idle_beats": 0,
+      "proposal_length_trend": 0.0,
+      "luck": 0.5
+    },
+    {
+      "player": "Toby",
+      "actions": 1,
+      "lines": 3,
+      "words": 609,
+      "rolls": 1,
+      "sparks_earned": 1,
+      "sparks_spent": 0,
+      "longest_idle_beats": 1,
+      "proposal_length_trend": 0.0,
+      "luck": 3.0
+    }
+  ],
+  "spotlight_spread": 0.6,
+  "decision_to_roll_ratio": 1.25,
+  "ooc_to_ic_ratio": 0.7647058823529411,
+  "lateral_solutions": 0,
+  "callbacks": 81,
+  "zero_dice_exchanges": 0,
+  "total_exchanges": 1,
+  "rules_gaps": 4,
+  "refusals": 0,
+  "enemy_attacks": 1,
+  "enemy_attacks_softened": 0
+}

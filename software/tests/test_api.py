@@ -853,3 +853,105 @@ class TestCharacterExport:
             headers=headers,
         )
         assert resp.status_code == 403
+
+
+# ---------------------------------------------------------------------------
+# Front-end audit B19/B21 — sessions and characters can be removed
+# ---------------------------------------------------------------------------
+
+class TestSessionDeletion:
+    """An MM could create sessions but never remove one, so the dashboard grew
+    a permanent list of dead campaigns and test runs."""
+
+    def test_mm_can_delete_a_session(self, client, mm_headers):
+        session_id = client.post(
+            "/api/sessions/", json={"name": "Scratch"}, headers=mm_headers,
+        ).json()["session_id"]
+
+        resp = client.delete(f"/api/sessions/{session_id}", headers=mm_headers)
+        assert resp.status_code == 200
+
+        listed = client.get("/api/sessions/", headers=mm_headers).json()["sessions"]
+        assert all(s["id"] != session_id for s in listed)
+
+    def test_deleting_an_unknown_session_is_404(self, client, mm_headers):
+        resp = client.delete("/api/sessions/not-a-session", headers=mm_headers)
+        assert resp.status_code == 404
+
+    def test_players_cannot_delete_a_session(self, client, mm_headers):
+        from app.auth.tokens import create_session_token
+
+        session_id = client.post(
+            "/api/sessions/", json={"name": "Protected"}, headers=mm_headers,
+        ).json()["session_id"]
+        player_headers = {"Authorization": f"Bearer {create_session_token('Zahna', session_id)}"}
+
+        resp = client.delete(f"/api/sessions/{session_id}", headers=player_headers)
+        assert resp.status_code in (401, 403)
+        assert client.get("/api/sessions/", headers=mm_headers).status_code == 200
+
+
+class TestCharacterDeletion:
+    """A misbuilt character was permanent — nothing could remove one, and the
+    player's invite is single-use, so they could not start over either."""
+
+    def test_mm_can_delete_a_character(
+        self, client, mm_headers, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        resp = client.delete(f"/api/characters/{session_id}/Zahna", headers=mm_headers)
+        assert resp.status_code == 200
+
+        listed = client.get(f"/api/characters/{session_id}", headers=mm_headers).json()
+        assert "Zahna" not in listed["characters"]
+
+    def test_player_can_delete_their_own_character(
+        self, client, mm_headers, session_with_character,
+    ):
+        """Rebuilding your own character must not need the MM — the invite that
+        let you in was single-use."""
+        from app.auth.tokens import create_session_token
+
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        headers = {"Authorization": f"Bearer {create_session_token('Zahna', session_id)}"}
+
+        resp = client.delete(f"/api/characters/{session_id}/Zahna", headers=headers)
+        assert resp.status_code == 200
+
+    def test_player_cannot_delete_someone_elses_character(
+        self, client, mm_headers, session_with_character,
+    ):
+        from app.auth.tokens import create_session_token
+
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        headers = {"Authorization": f"Bearer {create_session_token('Mordai', session_id)}"}
+
+        resp = client.delete(f"/api/characters/{session_id}/Zahna", headers=headers)
+        assert resp.status_code == 403
+
+    def test_deleting_an_unknown_character_is_404(
+        self, client, mm_headers, active_session,
+    ):
+        session_id = active_session["session_id"]
+        resp = client.delete(f"/api/characters/{session_id}/Nobody", headers=mm_headers)
+        assert resp.status_code == 404
+
+    def test_deletion_is_broadcast(self, client, mm_headers, mm_token, session_with_character):
+        """Everyone's roster has to drop the character too."""
+        from app.api.websocket import manager  # noqa: F401  (import parity with the route)
+
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            ws.send_json({"token": mm_token, "session_id": session_id})
+            ws.receive_json()  # state
+            ws.receive_json()  # player_joined
+            client.delete(f"/api/characters/{session_id}/Zahna", headers=mm_headers)
+            msg = ws.receive_json()
+
+        assert msg["type"] == "character_removed"
+        assert msg["player"] == "Zahna"

@@ -12,6 +12,7 @@ from jose import JWTError
 
 from app.auth.tokens import decode_token
 from app.game import combat as combat_module
+from app.game.dice import DiceSpec
 from app.game.engine import (
     RollRequest, resolve_roll, resolve_magic_roll, resolve_saving_throw, roll_result_to_dict,
 )
@@ -184,6 +185,8 @@ async def _dispatch(
         await _handle_skill_advance(msg, session, session_id)
     elif event_type == "mark_skill_used" and is_mm:
         await _handle_mark_skill_used(msg, session, session_id)
+    elif event_type == "table_roll" and is_mm:
+        await _handle_table_roll(websocket, msg, session_id, identity)
     elif event_type == "ping":
         await manager.send_to(websocket, {"type": "pong"})
     # --- Combat events ---
@@ -221,8 +224,8 @@ async def _dispatch(
     elif event_type == "spend_skill_point":
         await _handle_spend_skill_point(websocket, msg, session, session_id, identity)
     # --- Technique events ---
-    elif event_type == "technique_select" and is_mm:
-        await _handle_technique_select(msg, session, session_id)
+    elif event_type == "technique_select":
+        await _handle_technique_select(msg, session, session_id, identity, is_mm)
     elif event_type == "session_reset" and is_mm:
         await _handle_session_reset(session, session_id)
     # --- Enemy tracker events ---
@@ -230,6 +233,8 @@ async def _dispatch(
         await _handle_spawn_enemy(msg, session, session_id)
     elif event_type == "enemy_update" and is_mm:
         await _handle_enemy_update(msg, session, session_id)
+    elif event_type == "enemy_strike" and is_mm:
+        await _handle_enemy_strike(websocket, msg, session, session_id)
     elif event_type == "remove_enemy" and is_mm:
         await _handle_remove_enemy(msg, session, session_id)
     # --- Threat Clock events (D4, PHB III.2) ---
@@ -239,6 +244,8 @@ async def _dispatch(
         await _handle_clock_advance(msg, session, session_id)
     elif event_type == "clock_wind_back" and is_mm:
         await _handle_clock_wind_back(msg, session, session_id)
+    elif event_type == "clock_delete" and is_mm:
+        await _handle_clock_delete(msg, session, session_id)
     # --- Spark: Act Break Nomination / Graceful Fail (D6) ---
     elif event_type == "act_break" and is_mm:
         await _handle_act_break(msg, session, session_id)
@@ -389,6 +396,55 @@ async def _handle_claim_graceful_fail(msg: dict, session, session_id: str, calle
         "type": "graceful_fail_claimed",
         "player": caller,
         "message": f"{caller} claims a Graceful Fail — MM to confirm.",
+    })
+
+
+#: Bounds for the MM's table roller. Wide enough for any random table an MM
+#: would reach for, narrow enough that the roller cannot be used to flood every
+#: connected client with a single message.
+_TABLE_ROLL_MAX_DICE = 100
+_TABLE_ROLL_MAX_SIDES = 1000
+
+
+async def _handle_table_roll(websocket, msg: dict, session_id: str, identity: str) -> None:
+    """Roll raw dice for the things around the game that are not the game —
+    random tables, oracles, "which of you does it notice first".
+
+    Deliberately NOT a resolution mechanic. It returns dice and a total and
+    nothing else: no outcome tier, no attribute, no skill. A 2d6 here with a
+    success band would be a second implementation of the core resolution system
+    (III.1), and would hand the MM a way to roll for an NPC — which PHB III.3
+    says never happens. It also stays out of the character roll log, which is a
+    record of what characters did.
+    """
+    notation = str(msg.get("notation", "")).strip()
+    label = str(msg.get("label", ""))[:120].strip()
+
+    try:
+        spec = DiceSpec.parse(notation)
+    except ValueError as e:
+        await manager.send_to(websocket, {"type": "error", "message": str(e)})
+        return
+
+    if spec.count > _TABLE_ROLL_MAX_DICE or spec.sides > _TABLE_ROLL_MAX_SIDES:
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": (
+                f"Table roll is capped at {_TABLE_ROLL_MAX_DICE} dice "
+                f"of up to d{_TABLE_ROLL_MAX_SIDES}."
+            ),
+        })
+        return
+
+    dice = spec.roll()
+    await manager.broadcast(session_id, {
+        "type": "table_roll_result",
+        "rolled_by": identity,
+        "notation": notation,
+        "label": label,
+        "dice": dice,
+        "modifier": spec.modifier,
+        "total": spec.total(dice),
     })
 
 
@@ -1160,9 +1216,17 @@ async def _handle_spend_skill_point(
 # Technique handler
 # ---------------------------------------------------------------------------
 
-async def _handle_technique_select(msg: dict, session, session_id: str) -> None:
-    """MM selects a Technique for a character at a Facet level advancement."""
-    player_name = msg.get("player_name", "")
+async def _handle_technique_select(
+    msg: dict, session, session_id: str, identity: str, is_mm: bool,
+) -> None:
+    """Select a Technique at a Facet level advancement.
+
+    A player selects for themselves — `player_name` in the message is ignored
+    for non-MM callers, so nobody can spend another character's pick. The MM may
+    still select on any player's behalf (advancement is often walked through at
+    the table). Every selection rule stays in `Character.select_technique`.
+    """
+    player_name = str(msg.get("player_name", "")) if is_mm else identity
     technique_id = str(msg.get("technique_id", ""))
     choice = msg.get("choice")  # optional, for Techniques with choices
     character = session.characters.get(player_name)
@@ -1288,6 +1352,82 @@ async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
         })
 
 
+async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -> None:
+    """Apply a Strike outcome to an enemy and let the engine decide the cost.
+
+    `enemy_update` takes `resolve_current` as a raw number, which left the D1
+    depletion rule (10+ takes 2, 7-9 takes 1) implemented in the front end and
+    the simulator but nowhere on the server. That is a second copy of a rule —
+    the failure the Software-PHB sync policy exists to prevent — and it forces
+    any non-browser client to do rule arithmetic itself.
+
+    Here the caller sends the *outcome* and `combat.apply_resolve_damage` (or
+    `combat.mook_removed`, since Mooks have no Resolve pool) decides. Manual MM
+    corrections still go through `enemy_update`.
+    """
+    tracker_key = str(msg.get("tracker_key", ""))
+    outcome = str(msg.get("outcome", ""))
+
+    enemy = session.active_enemies.get(tracker_key)
+    if not enemy:
+        await manager.send_to(websocket, {
+            "type": "error", "message": f"No active enemy with key '{tracker_key}'.",
+        })
+        return
+
+    known_outcomes = {t.id for t in session.ruleset.roll_resolution.outcome_tiers}
+    if outcome not in known_outcomes:
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": f"Unknown outcome '{outcome}'. Expected one of: "
+                       f"{', '.join(sorted(known_outcomes))}.",
+        })
+        return
+
+    # Mooks have no Resolve pool — one Strike removes them (10+ if armoured).
+    if enemy.tier == "mook":
+        removed = combat_module.mook_removed(
+            outcome, enemy.armor != "none", session.ruleset,
+        )
+        if removed:
+            del session.active_enemies[tracker_key]
+        await manager.broadcast(session_id, {
+            "type": "enemy_updated",
+            "tracker_key": tracker_key,
+            "resolve_current": None,
+            "depletion": 0,
+            "defeated": removed,
+            "mook_removed": removed,
+            "conditions": list(enemy.conditions),
+        })
+        return
+
+    before = enemy.resolve_current if enemy.resolve_current is not None else enemy.resolve
+    result = combat_module.apply_resolve_damage(
+        before, outcome, session.ruleset,
+        phase_thresholds=[p.resolve_threshold for p in enemy.phases] or None,
+    )
+    enemy.resolve_current = result.resolve_current
+
+    await manager.broadcast(session_id, {
+        "type": "enemy_updated",
+        "tracker_key": tracker_key,
+        "resolve_current": result.resolve_current,
+        "depletion": result.depletion,
+        "defeated": result.defeated,
+        "mook_removed": False,
+        "conditions": list(enemy.conditions),
+    })
+
+    if result.phase_index is not None:
+        await manager.broadcast(session_id, {
+            "type": "enemy_phase_change",
+            "enemy_id": tracker_key,
+            "phase_index": result.phase_index,
+            "description": enemy.phases[result.phase_index].description,
+        })
+
+
 async def _handle_remove_enemy(msg: dict, session, session_id: str) -> None:
     """MM removes an enemy from the active combat tracker."""
     tracker_key = str(msg.get("tracker_key", ""))
@@ -1384,4 +1524,25 @@ async def _handle_clock_wind_back(msg: dict, session, session_id: str) -> None:
     await manager.broadcast(session_id, {
         "type": "clock_wound_back",
         "clock": clock.to_client_dict(),
+    })
+
+
+async def _handle_clock_delete(msg: dict, session, session_id: str) -> None:
+    """Remove a Threat Clock once the hazard it tracked is resolved.
+
+    Clocks are visible to the whole table, so a spent one lingers on every
+    player's screen until it is cleared.
+    """
+    clock_id = str(msg.get("clock_id", ""))
+    if clock_id not in session.threat_clocks:
+        await manager.broadcast(session_id, {
+            "type": "error",
+            "message": f"No Threat Clock with id '{clock_id}'.",
+        })
+        return
+
+    del session.threat_clocks[clock_id]
+    await manager.broadcast(session_id, {
+        "type": "clock_deleted",
+        "clock_id": clock_id,
     })

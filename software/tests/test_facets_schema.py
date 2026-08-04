@@ -370,11 +370,36 @@ class TestDeathDef:
 # ---------------------------------------------------------------------------
 
 class TestAdvancementDef:
-    def test_defaults(self):
+    def test_defaults_match_canon(self):
+        """Schema defaults must equal facets/base/facet.yaml, not an earlier
+        revision. v0.3 moved facet_level_threshold 6 -> 5 and
+        major_advancement_threshold 4 -> 3; the defaults lagged behind, so any
+        Facet omitting them would silently load pre-v0.3 advancement pacing.
+        """
         adv = AdvancementDef()
         assert adv.session_skill_points == 4
         assert adv.marks_per_rank == 3
-        assert adv.facet_level_threshold == 6
+        assert adv.facet_level_threshold == 5
+        assert adv.major_advancement_threshold == 3
+
+    @pytest.mark.parametrize("field", [
+        "session_skill_points",
+        "marks_per_rank",
+        "facet_level_threshold",
+        "major_advancement_threshold",
+    ])
+    def test_defaults_do_not_drift_from_base_facet(self, field):
+        """Pin the defaults to the base Facet so a future ruleset change to
+        facet.yaml cannot leave the schema behind again."""
+        import yaml
+        from app.config import settings
+
+        with open(settings.facets_dir / "base" / "facet.yaml", encoding="utf-8") as fh:
+            advancement = yaml.safe_load(fh)["advancement"]
+
+        assert getattr(AdvancementDef(), field) == advancement[field], (
+            f"AdvancementDef.{field} default disagrees with facets/base/facet.yaml"
+        )
 
     def test_skill_ranks_default_empty(self):
         adv = AdvancementDef()

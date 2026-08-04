@@ -102,6 +102,18 @@ async def list_sessions():
     return {"sessions": session_store.list_sessions()}
 
 
+@router.delete("/{session_id}", dependencies=[Depends(require_mm)])
+async def delete_session(session_id: str):
+    """Remove a session.
+
+    Sessions could only ever be created, so the dashboard accumulated finished
+    campaigns and throwaway test runs with no way to clear them.
+    """
+    if not session_store.delete_session(session_id):
+        raise HTTPException(status_code=404, detail="Session not found.")
+    return {"deleted": session_id}
+
+
 class InviteRequest(BaseModel):
     player_name: str = Field(min_length=1, max_length=32)
     session_id: str

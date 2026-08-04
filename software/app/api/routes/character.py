@@ -13,6 +13,24 @@ from app.game.session import session_store
 router = APIRouter(prefix="/api/characters", tags=["characters"])
 
 
+async def _announce_character(session_id: str, character: Character) -> None:
+    """Tell everyone already connected that a character now exists.
+
+    Character creation is a REST call, so it used to change session state
+    silently: an MM sitting in the session saw an empty combat roster, empty
+    player pickers, and an empty party list until they reloaded the page.
+    Imported here rather than at module scope to avoid a circular import
+    (websocket.py -> session -> routes).
+    """
+    from app.api.websocket import manager
+
+    await manager.broadcast(session_id, {
+        "type": "character_created",
+        "player": character.player_name,
+        "character": character.to_client_dict(),
+    })
+
+
 def _require_player_or_mm(request: Request):
     auth = request.headers.get("Authorization", "")
     if not auth.startswith("Bearer "):
@@ -76,6 +94,7 @@ async def create_character(body: CreateCharacterRequest, request: Request):
         raise HTTPException(status_code=422, detail={"errors": errors})
 
     session.add_character(character)
+    await _announce_character(body.session_id, character)
     return {"character": character.to_client_dict()}
 
 
@@ -123,6 +142,7 @@ async def upload_character(body: UploadCharacterRequest, request: Request):
         raise HTTPException(status_code=422, detail={"errors": errors})
 
     session.add_character(character)
+    await _announce_character(body.session_id, character)
     return {"character": character.to_client_dict()}
 
 
@@ -154,6 +174,38 @@ async def export_character(session_id: str, player_name: str, request: Request):
         media_type="application/yaml",
         headers={"Content-Disposition": f'attachment; filename="{player_name}.fof"'},
     )
+
+
+@router.delete("/{session_id}/{player_name}")
+async def delete_character(session_id: str, player_name: str, request: Request):
+    """Remove a character so it can be rebuilt.
+
+    A misbuilt character used to be permanent: nothing could delete one, and a
+    player's invite is single-use, so they could not rejoin to start over
+    either. Players may delete their own; the MM may delete any.
+    """
+    token_data = _require_player_or_mm(request)
+
+    if not token_data.is_mm:
+        if token_data.session_id != session_id:
+            raise HTTPException(status_code=403, detail="Token is for a different session.")
+        if token_data.player_name != player_name:
+            raise HTTPException(status_code=403, detail="You can only delete your own character.")
+
+    session = session_store.get(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found.")
+    if player_name not in session.characters:
+        raise HTTPException(status_code=404, detail="Character not found in session.")
+
+    del session.characters[player_name]
+
+    from app.api.websocket import manager
+    await manager.broadcast(session_id, {
+        "type": "character_removed",
+        "player": player_name,
+    })
+    return {"deleted": player_name}
 
 
 @router.get("/{session_id}")
