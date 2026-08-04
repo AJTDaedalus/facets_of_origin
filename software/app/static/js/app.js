@@ -552,6 +552,13 @@ function handleServerMessage(msg) {
     case 'combat_ended':
       onCombatEnded(msg);
       break;
+    case 'scene_ended':
+      // B6: armor budgets refreshed server-side; the sheet shows the budget, so
+      // it has to re-render or it keeps displaying the spent one.
+      if (state.character) state.character.armor_downgrades_remaining = null;
+      addSystemChat('Scene ended — armor downgrade budgets refresh.');
+      renderPlayCharacterSheet();
+      break;
     // Magic broadcasts
     case 'cast_result':
       onCastResult(msg);

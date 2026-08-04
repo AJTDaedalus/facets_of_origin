@@ -628,6 +628,22 @@ The Play Field is your primary session interface. It handles:
 
 Use the Play Field whenever you are in a structured scene — combat, contested rolls, any moment where the mechanical state matters. It keeps the table honest and the MM's hands free for narration.
 
+> **MM Note — two buttons, two jobs**
+>
+> The app gives you `End Combat` and `End Scene`, and the difference between them
+> is a rule rather than a preference. `End Combat` clears Endurance, Conditions,
+> and Postures — the fight is over. `End Scene` refreshes every character's armor
+> downgrade budget, because that budget is scoped to the scene and not to the
+> fight (see *Armor*, III.3).
+>
+> A scene can hold two fights, and when it does they share one budget. That
+> sharing is what makes armor a decision rather than a number, so do not press
+> `End Scene` between them. A scene can also hold no fight at all, which is the
+> other reason these are not the same button.
+>
+> The habit worth building: `End Combat` when the swords go down, `End Scene`
+> when you cut away.
+
 ### The Tools Tab
 
 The Tools tab is for between-the-action work:

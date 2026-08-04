@@ -173,7 +173,7 @@ and the module opens on a one-page italic prologue.
 
 ---
 
-## T6 — Bestiary entries need their Adaptation notes reviewed against Shattered Origin
+## ~~T6 — Bestiary entries need their Adaptation notes reviewed against Shattered Origin~~
 
 **Source:** Bestiary drafting, 2026-08-02.
 
@@ -184,13 +184,21 @@ until the setting's author decides where (or whether) they belong. The one excep
 the Latchmen family, whose Boss expression is the Archive Guardian, which was already
 canon.
 
-**Done when:** the setting's author has ruled, per family, whether it exists in
-Shattered Origin, and the Shattered Origin setting Facet carries whatever placement,
-renaming, or exclusion that ruling implies.
+**Closed 2026-08-04 by decision B4/B9.** Ruled the other way: the Bestiary is a
+*core* module and stays **permanently setting-agnostic**. No creature is placed in
+Shattered Origin, now or later, and the per-entry **Adaptation** line is the
+mechanism for seating one in any setting — including this project's own.
+
+Placing them would convert a core book into setting canon and oblige every future
+entry to justify itself against a history the author has not finished writing. An
+MM who wants chalk hounds on the roads of Svara can put them there in a sentence.
+If the author later wants one seated formally, that belongs in the Shattered Origin
+setting Facet, which can name and adapt anything here without the Bestiary
+changing. Full reasoning in `docs/DECISIONS.md` **B9**.
 
 ---
 
-## T7 — *Pressure Point* is not covered by the Technique step machinery
+## T7 — *Pressure Point* is not covered by the Technique step machinery *(unblocked)*
 
 **Source:** Planner design for B4 Q1, 2026-08-02
 (`docs/DESIGN_technique_difficulty.md` §2.5). Tracked as **TD-17**.
@@ -212,14 +220,24 @@ counting — an MM applying Pressure Point by hand while a Technique also
 auto-steps the same roll would move it two rungs, which B4's guardrail forbids.
 TD-11 puts that warning in MM2 where the MM will meet it.
 
-**Done when:** a scene-effect store exists; *Pressure Point* writes into it on use;
-`apply_character_difficulty_step` reads it and counts it as **the** one permitted
-character-side step for any qualifying roll; and the double-counting warning in MM2
-is removed because it can no longer happen.
+**Unblocked 2026-08-04 by decision B6**, which added the scene boundary this was
+waiting on — and found a live bug while doing it. `_handle_combat_start`
+initialised armor's per-scene downgrade budget only when it was `None`, and
+nothing ever set it back, so a rule the PHB prints as refreshing every scene
+**never refreshed**. The simulator reset it per fight, so app and sim disagreed
+about a defensive resource. Both fixed by the new `scene_end` event.
+
+*Pressure Point* itself remains MM-applied and this item stays open, but the hard
+part is done: there is now a boundary to hang a scene-effect store on.
+
+**Done when:** a scene-effect store exists, cleared at `scene_end`;
+*Pressure Point* writes into it; `apply_character_difficulty_step` reads it and
+counts it as **the** one permitted character-side step; and MM2's
+double-counting warning is removed because it can no longer happen.
 
 ---
 
-## T8 — *Weapon Mastery* has no option for ranged weapons
+## ~~T8 — *Weapon Mastery* has no option for ranged weapons~~
 
 **Source:** Worker escalation during TD-7, resolved by Planner in
 `docs/DESIGN_technique_difficulty.md` §8, 2026-08-02.
@@ -236,9 +254,17 @@ offers, which is a content decision for the setting's author, not a Worker or
 Planner call. The mechanical plumbing added this cycle (`weapon_type` on the Strike
 message) will carry a fifth value the day one is chosen — no code change needed.
 
-**Done when:** the author has ruled whether *Weapon Mastery* gains a ranged option
-(and what it is called), and if so it lands in II.4a, `facet.yaml`'s `choice_prompt`
-and `choices`, and the client picker in one commit.
+**Closed 2026-08-04 by decision B8 — no change needed.** The gap dissolves on
+inspection: *Weapon Mastery* is a **Might** Technique, Might is the Strength
+branch, and ranged weapons are Dexterity. Ranged Strikes default to **Finesse**,
+which is the **Grace** branch — and Grace prints its own step-easier Tier 1
+Technique, *Steady Hand*, triggering on exactly that skill.
+
+So an archer is not short a Technique; they take the Dexterity branch's step for
+their Dexterity weapon. Adding "bows" to a Strength Technique would let a ranged
+build draw its step from a branch it does not use, and make Might the only branch
+easing every weapon in the game. II.4a now says so on the page. Full reasoning in
+`docs/DECISIONS.md` **B8**.
 
 ---
 
@@ -392,7 +418,7 @@ this closes — the test was encoding the bug.
 
 ---
 
-## T13 — The Technique step composes on three of six roll paths
+## ~~T13 — The Technique step composes on three of six roll paths~~
 
 **Source:** review of PR #21, 2026-08-03.
 
@@ -412,6 +438,14 @@ so a generic roll with a blade can never fire *Weapon Mastery* at all.
 deliberately named three call sites, and widening it touches three more handlers
 plus the client fields that feed them.
 
-**Done when:** either every roll path that can carry a Technique's trigger calls
-the shared function, or the printed Technique text is narrowed to match the paths
-that do — decided deliberately, not by default.
+**Closed 2026-08-04 by decision B7 — widened, not narrowed.** The printed text
+says *rolls*, so the code was wrong, not the book. `_build_roll_request` (Support
+and Maneuver) and the contested-roll handler now compose the step; contested rolls
+price each side independently, since one MM label produces two rolls and a
+Technique one participant holds must not ease the other's.
+
+Magic stays excluded and that is deliberate: a working's difficulty comes from the
+Domain-Type × Scope table, not from a label the MM declares, so there is no call
+for a character-side step to compose *with*. Narrowing the book to "Strikes" was
+rejected as a rules change made to accommodate an implementation gap. Full
+reasoning in `docs/DECISIONS.md` **B7**.

@@ -56,6 +56,8 @@ Rolls using your chosen weapon type are treated as one difficulty step easier.
 
 **Normal:** Difficulty is Standard by default, and the MM adjusts it one step from the situation (see *Difficulty*, III.1).
 
+*Might is the Strength branch, and the four weapon types it names are the shapes you swing. A ranged build is served by Grace instead: ranged Strikes default to Finesse, and Grace's* **Steady Hand** *eases exactly those rolls.*
+
 ---
 
 **Tier 2** *(requires one Might Tier 1)*

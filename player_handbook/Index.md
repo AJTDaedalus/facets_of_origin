@@ -997,6 +997,7 @@
 - [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
 - [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM2 — Designing the 7-9 Complication](../mm_manual/MM2_Session_Design.md#designing-the-7-9-complication)
+- [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Reactions (1 per incoming action)](../mm_manual/MM5_Quick_Reference.md#reactions-1-per-incoming-action)
 - [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)

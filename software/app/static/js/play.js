@@ -719,6 +719,20 @@ async function endCombat() {
     'End Combat');
   if (!ok) return;
   sendWS({ type: 'combat_end' });
+}
+
+/**
+ * B6: the scene is a published boundary — armor's downgrade budget refreshes at
+ * it, and it is deliberately *not* the same event as End Combat, because a scene
+ * can hold two fights or none.
+ */
+async function endScene() {
+  const ok = await confirmDialog(
+    'End the scene?',
+    "Armor downgrade budgets refresh for every character. Use this between scenes, not between fights in the same scene — two fights in one scene share one budget.",
+    'End Scene');
+  if (!ok) return;
+  sendWS({ type: 'scene_end' });
   state.activeEnemies = {};
   renderEnemyTracker();
 }
