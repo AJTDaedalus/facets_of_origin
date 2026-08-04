@@ -37,6 +37,7 @@ from app.facets.schema import (
     SparkEarnMethod,
     SparkMechanicDef,
     SparkVariantsDef,
+    StepTriggerDef,
     StrikeDepletionDef,
     TechniqueDef,
     ThreatClockDef,
@@ -184,6 +185,61 @@ class TestTechniqueDef:
         t = TechniqueDef(id="tier2", name="Tier 2", description=".",
                          prerequisites=["tier1a", "tier1b"])
         assert len(t.prerequisites) == 2
+
+    # -- TD-4: difficulty_step / step_trigger (B4 Q1) --------------------
+
+    def test_no_step_parses_unchanged(self):
+        """Every pre-existing Technique omits these fields and must parse
+        exactly as before — both optional fields default to None."""
+        t = TechniqueDef(id="forcing_hand", name="Forcing Hand", description="...")
+        assert t.difficulty_step is None
+        assert t.step_trigger is None
+
+    def test_auto_trigger_technique_parses(self):
+        t = TechniqueDef(
+            id="weapon_mastery", name="Weapon Mastery", description=".",
+            difficulty_step="easier",
+            step_trigger=StepTriggerDef(kind="auto", match="weapon_type", against="choice"),
+        )
+        assert t.difficulty_step == "easier"
+        assert t.step_trigger.kind == "auto"
+        assert t.step_trigger.match == "weapon_type"
+        assert t.step_trigger.against == "choice"
+
+    def test_declared_trigger_technique_parses(self):
+        t = TechniqueDef(
+            id="the_uncanny_angle", name="The Uncanny Angle", description=".",
+            difficulty_step="easier",
+            step_trigger=StepTriggerDef(kind="declared"),
+        )
+        assert t.step_trigger.kind == "declared"
+        assert t.step_trigger.match is None
+        assert t.step_trigger.against is None
+
+    def test_invalid_step_trigger_kind_raises(self):
+        with pytest.raises(ValidationError):
+            StepTriggerDef(kind="bogus")
+
+    def test_invalid_difficulty_step_raises(self):
+        with pytest.raises(ValidationError):
+            TechniqueDef(id="x", name="X", description=".", difficulty_step="sideways")
+
+    # -- TD-19: choices (DESIGN §8) ----------------------------------------
+
+    def test_no_choices_parses_unchanged(self):
+        """Every Technique that predates TD-19 — including domain-granting
+        ones, which build their picker from the domain catalog instead —
+        omits `choices` and must parse exactly as before."""
+        t = TechniqueDef(id="forcing_hand", name="Forcing Hand", description="...")
+        assert t.choices is None
+
+    def test_technique_with_choices_parses(self):
+        t = TechniqueDef(
+            id="weapon_mastery", name="Weapon Mastery", description=".",
+            has_choice=True, choice_prompt="Choose a weapon type.",
+            choices=["blades", "blunt", "polearms", "unarmed"],
+        )
+        assert t.choices == ["blades", "blunt", "polearms", "unarmed"]
 
 
 # ---------------------------------------------------------------------------
@@ -595,6 +651,98 @@ class TestGroupRollDef:
 # deliberately permissive on which attribute a Strike uses.
 # ---------------------------------------------------------------------------
 
+class TestDifficultyStepMetadataInBaseFacet:
+    """TD-6 (B4 Q1): exactly five Techniques in facet.yaml carry
+    `difficulty_step` metadata. Pinned by name so a sixth cannot be added
+    without a deliberate change to this test — `pressure_point` is
+    deliberately deferred (DESIGN §2.5, docs/TODO.md T7) and must stay out."""
+
+    EXPECTED = {
+        "weapon_mastery": ("easier", "auto"),
+        "acclimated": ("easier", "auto"),
+        "field_of_mastery": ("easier", "auto"),
+        "steady_hand": ("easier", "auto"),
+        "the_uncanny_angle": ("easier", "declared"),
+    }
+
+    def _techniques_with_step(self, ruleset):
+        found = {}
+        for facet_id, tree in ruleset.techniques.items():
+            for branch in tree.branches:
+                for tier_def in branch.tiers:
+                    for tech in tier_def.techniques:
+                        if tech.difficulty_step is not None:
+                            found[tech.id] = tech
+        return found
+
+    def test_exactly_five_techniques_carry_the_step(self, ruleset):
+        found = self._techniques_with_step(ruleset)
+        assert set(found) == set(self.EXPECTED), (
+            f"expected exactly {sorted(self.EXPECTED)}, found {sorted(found)}"
+        )
+
+    def test_each_technique_matches_its_expected_step_and_trigger_kind(self, ruleset):
+        found = self._techniques_with_step(ruleset)
+        for tech_id, (expected_step, expected_kind) in self.EXPECTED.items():
+            tech = found[tech_id]
+            assert tech.difficulty_step == expected_step, tech_id
+            assert tech.step_trigger is not None, tech_id
+            assert tech.step_trigger.kind == expected_kind, tech_id
+
+    def test_pressure_point_deliberately_carries_no_step(self, ruleset):
+        pressure_point = ruleset.get_technique("pressure_point")
+        assert pressure_point is not None
+        assert pressure_point.difficulty_step is None
+        assert pressure_point.step_trigger is None
+
+    def test_auto_triggers_match_declared_fields(self, ruleset):
+        found = self._techniques_with_step(ruleset)
+        assert found["weapon_mastery"].step_trigger.match == "weapon_type"
+        assert found["weapon_mastery"].step_trigger.against == "choice"
+        assert found["acclimated"].step_trigger.match == "hazard_type"
+        assert found["acclimated"].step_trigger.against == "choice"
+        assert found["field_of_mastery"].step_trigger.match == "knowledge_field"
+        assert found["field_of_mastery"].step_trigger.against == "choice"
+        assert found["steady_hand"].step_trigger.match == "skill_id"
+        assert found["steady_hand"].step_trigger.against == "finesse"
+
+
+class TestFinalBlowOverrideFlag:
+    """TD-12 (B4 Q3): exactly one Technique in facet.yaml carries
+    `removes_target_from_conflict`, and it is *The Final Blow*. Pinned by
+    name, same pattern as `TestDifficultyStepMetadataInBaseFacet`, so a
+    second override can't creep in without a deliberate test change —
+    overrides must stay greppable and countable."""
+
+    def _techniques_with_override_flag(self, ruleset):
+        found = {}
+        for facet_id, tree in ruleset.techniques.items():
+            for branch in tree.branches:
+                for tier_def in branch.tiers:
+                    for tech in tier_def.techniques:
+                        if tech.removes_target_from_conflict:
+                            found[tech.id] = tech
+        return found
+
+    def test_exactly_one_technique_carries_the_flag(self, ruleset):
+        found = self._techniques_with_override_flag(ruleset)
+        assert set(found) == {"the_final_blow"}, (
+            f"expected only 'the_final_blow', found {sorted(found)}"
+        )
+
+    def test_the_final_blow_carries_the_flag(self, ruleset):
+        tech = ruleset.get_technique("the_final_blow")
+        assert tech is not None
+        assert tech.removes_target_from_conflict is True
+
+    def test_an_ordinary_technique_does_not_carry_the_flag(self, ruleset):
+        """Backward compatibility: a Technique that predates TD-12 parses
+        with the flag defaulting to False."""
+        unstoppable = ruleset.get_technique("unstoppable")
+        assert unstoppable is not None
+        assert unstoppable.removes_target_from_conflict is False
+
+
 class TestWeaponCategories:
     def test_base_ruleset_loads_equipment_block(self, ruleset):
         assert isinstance(ruleset.equipment, EquipmentDef)
@@ -607,3 +755,66 @@ class TestWeaponCategories:
         assert categories["light"].attributes == ["dexterity"]
         assert categories["ranged"].attributes == ["dexterity"]
         assert categories["unarmed"].attributes == ["strength", "dexterity"]
+
+    def test_weapon_types_present_and_orthogonal_to_categories(self, ruleset):
+        """TD-18 (DESIGN §8): `weapon_types` is the separate, fictional
+        vocabulary Weapon Mastery masters — it is not a subset or a rename
+        of `weapon_categories` above. Only `unarmed` legitimately overlaps
+        both lists; the rest are disjoint by design."""
+        types = set(ruleset.equipment.weapon_types)
+        assert types == {"blades", "blunt", "polearms", "unarmed"}
+        categories = set(ruleset.equipment.weapon_categories)
+        assert types - categories == {"blades", "blunt", "polearms"}
+
+
+class TestNonDomainTechniqueChoices:
+    """TD-19 (DESIGN §8): the three non-domain `has_choice` Techniques
+    (Weapon Mastery, Acclimated, Field of Mastery) enumerate their options
+    as data. `choice_prompt` stays the printed prose; `choices` is what the
+    picker renders from — and the two must never drift apart, since the
+    book and the data would then be silently telling players different
+    things a Technique can be taken in."""
+
+    NON_DOMAIN_CHOICE_TECHNIQUES = ("weapon_mastery", "acclimated", "field_of_mastery")
+
+    def test_all_three_carry_choices(self, ruleset):
+        for tech_id in self.NON_DOMAIN_CHOICE_TECHNIQUES:
+            tech = ruleset.get_technique(tech_id)
+            assert tech is not None, tech_id
+            assert tech.choices, f"{tech_id} has no choices"
+
+    def test_a_technique_without_choices_still_parses(self, ruleset):
+        """Backward compatibility: an ordinary Technique with no `choices`
+        (most of the tree) is unaffected."""
+        forcing_hand = ruleset.get_technique("forcing_hand")
+        assert forcing_hand is not None
+        assert forcing_hand.choices is None
+
+    def test_choices_match_the_printed_choice_prompt_text(self, ruleset):
+        """The acceptance test that matters: every value in `choices` must
+        appear (case-insensitively) in `choice_prompt`, so the machine-
+        readable list and the book's human-readable prompt cannot drift."""
+        mismatches = []
+        for tech_id in self.NON_DOMAIN_CHOICE_TECHNIQUES:
+            tech = ruleset.get_technique(tech_id)
+            prompt = tech.choice_prompt.lower()
+            for choice in tech.choices:
+                if choice.lower() not in prompt:
+                    mismatches.append(f"{tech_id}: '{choice}' not found in "
+                                      f"choice_prompt {tech.choice_prompt!r}")
+        assert not mismatches, "\n".join(mismatches)
+
+    def test_weapon_mastery_choices_are_the_fictional_weapon_type_vocabulary(self, ruleset):
+        tech = ruleset.get_technique("weapon_mastery")
+        assert tech.choices == ["blades", "blunt", "polearms", "unarmed"]
+
+    def test_acclimated_choices(self, ruleset):
+        tech = ruleset.get_technique("acclimated")
+        assert tech.choices == ["extreme cold", "extreme heat", "altitude", "deprivation"]
+
+    def test_field_of_mastery_choices_are_suggestions_not_a_closed_set(self, ruleset):
+        """PHB II.4a: 'or another domain with MM approval' — nothing in the
+        schema or the engine enforces membership in this list (INV-8)."""
+        tech = ruleset.get_technique("field_of_mastery")
+        assert "history" in tech.choices
+        assert "arcane theory" in tech.choices

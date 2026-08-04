@@ -480,3 +480,82 @@ def test_primary_domain_unaffected_by_ascension(ruleset):
         intent="copy a page", ruleset=ruleset,
     )
     assert result.request.difficulty_label == "Easy"  # focused/minor
+
+
+# ---------------------------------------------------------------------------
+# B4 Q2 pin (docs/DECISIONS.md) — the two domain grant routes price off their
+# own table, not off the primary domain's table. TD-1 (docs/TASKS_technique_
+# difficulty.md): these three tests must pass against the *current* engine
+# with no engine changes — character.py:406-410 and engine.py:330-338 already
+# implement the ruling. If any of these three fail, the engine does not
+# implement B4 Q2; that is an escalation, not a license to patch the engine.
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize(
+    "scope,expected",
+    [("minor", "Hard"), ("significant", "Very Hard"), ("major", "Very Hard")],
+)
+def test_b4q2_ascendant_domain_prices_off_broad_table_no_step(ruleset, scope, expected):
+    """B4 Q2, clause 1: "Ascendant Domain's prismatic territory prices off the
+    Broad table alone" — at all three scopes, with no additional character-side
+    step layered on top. Chronomancy is Broad; the Broad table alone gives
+    Hard/Very Hard/Very Hard for minor/significant/major. A leaked extra step
+    would only be visible at minor, where Broad still has room to climb.
+    """
+    char = _mind_mage(ruleset)
+    assert char.select_technique(
+        "ascendant_domain_mind", ruleset=ruleset, choice="chronomancy"
+    )[0]
+
+    result = resolve_magic_roll(
+        character=char, domain_id="chronomancy", scope=scope,
+        intent="bend a moment", ruleset=ruleset,
+    )
+    assert result.request.difficulty_label == expected
+
+
+def test_b4q2_second_domain_prices_off_own_table_one_step_harder(ruleset):
+    """B4 Q2, clause 2: "A Second Domain grant resolves on its own domain type's
+    table, one step harder." Storm is Standard; Standard/minor is normally
+    "Standard". As a Second Domain it must land one step harder than *that* —
+    "Hard" — not one step harder than the primary domain's own table.
+    """
+    char = _soul_mage(ruleset)  # primary domain: fire (Focused)
+    assert char.select_technique("second_domain", ruleset=ruleset, choice="storm")[0]
+
+    result = resolve_magic_roll(
+        character=char, domain_id="storm", scope="minor",
+        intent="still the wind", ruleset=ruleset,
+    )
+    assert result.request.difficulty_label == "Hard"
+
+
+def test_b4q2_second_domain_focused_primary_does_not_leak_into_pricing(ruleset):
+    """B4 Q2, clause 3 — the case the old wording broke.
+
+    The retired wording read "one difficulty step harder than your primary
+    domain." Inscription (this character's primary) is Focused, whose table is
+    Easy/Standard/Hard for minor/significant/major. Read literally, the old
+    wording would step *that* table: Focused-minor (Easy) + one step =
+    Standard. Illusion — the Second Domain grant — is Standard, whose own
+    table already reads minor=Standard; stepped harder that is Hard.
+
+    So the old wording and the correct ruling disagree on this exact case:
+    old wording -> Standard, B4 Q2 -> Hard. This is why the defect was
+    invisible for a Standard-or-Broad-primary caster (their table and the
+    grant's table often coincide) and only bites a Focused-primary caster.
+    """
+    char = _mind_mage(ruleset)  # primary domain: inscription (Focused)
+    assert char.select_technique(
+        "second_domain_mind", ruleset=ruleset, choice="illusion"
+    )[0]
+
+    result = resolve_magic_roll(
+        character=char, domain_id="illusion", scope="minor",
+        intent="veil a doorway", ruleset=ruleset,
+    )
+    assert result.request.difficulty_label == "Hard"
+    assert result.request.difficulty_label != "Standard", (
+        "this is the exact value the retired 'harder than your primary "
+        "domain' wording would have produced for a Focused-primary caster"
+    )

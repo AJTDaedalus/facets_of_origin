@@ -339,3 +339,51 @@ full-reload approach as T10.
 is present, and only sets `magic_technique_active = true` when the selected
 Technique's definition says `magic_granting` (or one of the two domain-grant
 variants) is true — not for every Technique.
+
+---
+
+## T12 — `final_blow_confirm` is not bound to the Strike that offered it
+
+**Source:** review of PR #21, 2026-08-03.
+
+**What's wrong.** The commit handler re-checks only *unlocked* and *not used this
+session*. The 7+ requirement and the Spark cost live in `_handle_strike`'s
+advisory `final_blow_available` flag; the confirm handler holds no reference to a
+roll, an outcome, or a pending offer. `final_blow_available: false` is a client
+hint, not a server gate — so a stale toast, a replayed message, or a hand-crafted
+one could commit a removal after a 6−.
+
+**Why deferred.** The handler is MM-gated and the MM is the game's authority, so
+this is a state-machine gap rather than a privilege escalation. Closing it means
+holding pending-offer state per session, which is a small feature rather than a
+patch.
+
+**Done when:** a Strike that offers Final Blow records a pending offer (attacker,
+target, roll id, expiry), and `final_blow_confirm` refuses anything that does not
+match a live one.
+
+---
+
+## T13 — The Technique step composes on three of six roll paths
+
+**Source:** review of PR #21, 2026-08-03.
+
+**What's wrong.** `apply_character_difficulty_step` is called from the strike,
+generic-roll, and reaction handlers (DESIGN §2.6 named exactly those three).
+Support, Maneuver, and contested rolls never call it. But the book prints
+*Weapon Mastery* as "**Rolls** using your chosen weapon type", not "Strikes".
+
+So Mordai Strikes with his sword at Standard and gets Easy; he Maneuvers with the
+same sword in the same exchange and stays Standard. Same Technique, same weapon,
+two labels, and nothing on screen explains the difference. *Steady Hand* has the
+same shape: a Finesse lockpick sent as a `roll` steps, the same attempt sent as a
+`contested_roll` does not. `weapon_type` is also only read by the strike handler,
+so a generic roll with a blade can never fire *Weapon Mastery* at all.
+
+**Why deferred.** It is a scope question, not a bug in what shipped: the design
+deliberately named three call sites, and widening it touches three more handlers
+plus the client fields that feed them.
+
+**Done when:** either every roll path that can carry a Technique's trigger calls
+the shared function, or the printed Technique text is narrowed to match the paths
+that do — decided deliberately, not by default.

@@ -2,12 +2,14 @@
 import random
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from app.facets.registry import build_ruleset
+from app.facets.schema import StepTriggerDef, TechniqueDef
 from app.game import combat
 
 
@@ -482,6 +484,72 @@ class TestApplyResolveDamage:
 
 
 # ---------------------------------------------------------------------------
+# apply_final_blow_removal() — B4 Q3, TD-13: *The Final Blow* is a licensed
+# override, resolved as a defeat event through the canonical defeat path,
+# never a raw `resolve_current = 0` write.
+# ---------------------------------------------------------------------------
+
+class TestApplyFinalBlowRemoval:
+    def test_removal_produces_a_defeat_event(self, ruleset):
+        """Works on any target, Bosses included — the removal does not care
+        how much Resolve remained."""
+        result = combat.apply_final_blow_removal(8)
+        assert result.resolve_current == 0
+        assert result.defeated is True
+        assert result.depletion == 8
+
+    def test_removal_routes_through_phase_crossed(self, ruleset):
+        """The drop to 0 must be detected by the same `phase_crossed`
+        primitive `apply_resolve_damage` uses — a Boss phase sitting between
+        the target's current Resolve and 0 must still fire, exactly as it
+        would from an ordinary Strike that happened to zero the pool."""
+        result = combat.apply_final_blow_removal(8, phase_thresholds=[2])
+        assert result.phase_index == 0
+
+        # Already at/under every threshold: no re-fire, same "fires exactly
+        # once" invariant apply_resolve_damage's phase tests pin.
+        already_low = combat.apply_final_blow_removal(1, phase_thresholds=[2])
+        assert already_low.phase_index is None
+
+    def test_transcript_entry_is_distinguishable_from_a_resolve_zero_defeat(self, ruleset):
+        """A Final Blow removal must be tellable apart from an ordinary
+        Strike that happened to deplete Resolve to exactly 0 — both by
+        result *type* (a future sim series can `isinstance`-branch) and by
+        the `cause` field a transcript/broadcast can log directly."""
+        ordinary_defeat = combat.apply_resolve_damage(2, "full_success", ruleset)
+        final_blow = combat.apply_final_blow_removal(2)
+
+        assert ordinary_defeat.resolve_current == 0
+        assert ordinary_defeat.defeated is True
+        assert final_blow.resolve_current == 0
+        assert final_blow.defeated is True
+
+        # Same surface-level outcome; different type and a distinguishing cause.
+        assert not isinstance(ordinary_defeat, combat.FinalBlowResult)
+        assert isinstance(final_blow, combat.FinalBlowResult)
+        assert not hasattr(ordinary_defeat, "cause")
+        assert final_blow.cause == "final_blow"
+
+    def test_no_raw_resolve_current_zero_write_in_source(self):
+        """Guards the P11 invariant at the source level: nowhere in
+        `apply_final_blow_removal` may `resolve_current` be assigned `0`
+        directly outside of building the `FinalBlowResult` via
+        `phase_crossed` — the function must route the crossing check
+        through `phase_crossed`, matching `apply_resolve_damage`'s shape,
+        rather than a bare `resolve_current = 0` that would skip it."""
+        import inspect
+
+        source = inspect.getsource(combat.apply_final_blow_removal)
+        assert "phase_crossed(" in source, (
+            "apply_final_blow_removal must route through phase_crossed"
+        )
+        assert "resolve_current = 0" not in source.replace(" ", ""), (
+            "found a raw `resolve_current = 0` write — must route through "
+            "phase_crossed like apply_resolve_damage does"
+        )
+
+
+# ---------------------------------------------------------------------------
 # enemy_armor_resolve_bonus() — D1 flat Resolve from armor (A8)
 # ---------------------------------------------------------------------------
 
@@ -856,3 +924,257 @@ class TestResolveIncomingCondition:
         result = combat.resolve_incoming_condition(1, "light", 2, ruleset)
         assert result.tier == 0
         assert result.armor_spent is True
+
+
+# ---------------------------------------------------------------------------
+# apply_character_difficulty_step() — TD-5, B4 Q1's composition mechanism
+# (DESIGN_technique_difficulty.md §2.2, §5)
+#
+# Tests inject synthetic TechniqueDef instances via a thin ruleset wrapper so
+# this rule is pinned independently of TD-6's real facet.yaml metadata —
+# TD-5 is sequenced before TD-6 precisely so the mechanism is proven first.
+# ---------------------------------------------------------------------------
+
+class _FakeRulesetWithTechniques:
+    """Wraps a real `MergedRuleset` but overrides `get_technique()` with a
+    caller-supplied map, so composition tests do not depend on which real
+    Techniques (if any) carry `difficulty_step` metadata."""
+
+    def __init__(self, base_ruleset, techniques: dict):
+        self._base = base_ruleset
+        self._techniques = techniques
+
+    def __getattr__(self, name):
+        return getattr(self._base, name)
+
+    def get_technique(self, technique_id):
+        return self._techniques.get(technique_id)
+
+
+def _character(techniques=None, technique_choices=None):
+    return SimpleNamespace(
+        techniques=techniques or [], technique_choices=technique_choices or {},
+    )
+
+
+def _auto_step_technique(tech_id, *, match, against, step="easier"):
+    return TechniqueDef(
+        id=tech_id, name=tech_id, description=".",
+        difficulty_step=step,
+        step_trigger=StepTriggerDef(kind="auto", match=match, against=against),
+    )
+
+
+def _declared_step_technique(tech_id, *, step="easier"):
+    return TechniqueDef(
+        id=tech_id, name=tech_id, description=".",
+        difficulty_step=step,
+        step_trigger=StepTriggerDef(kind="declared"),
+    )
+
+
+class TestApplyCharacterDifficultyStep:
+    def test_clamping_from_easy_stays_easy(self, ruleset):
+        tech = _auto_step_technique("weapon_mastery", match="weapon_category", against="blades")
+        fake = _FakeRulesetWithTechniques(ruleset, {"weapon_mastery": tech})
+        character = _character(techniques=["weapon_mastery"])
+        context = {"weapon_category": "blades"}
+
+        label, applied = combat.apply_character_difficulty_step(
+            "Easy", character, context, fake,
+        )
+        assert label == "Easy"
+        assert applied == "weapon_mastery"
+
+    def test_hard_plus_step_yields_standard_not_easy(self, ruleset):
+        """Proves the step composes with the MM's call rather than
+        replacing it — DESIGN §5.4."""
+        tech = _auto_step_technique("weapon_mastery", match="weapon_category", against="blades")
+        fake = _FakeRulesetWithTechniques(ruleset, {"weapon_mastery": tech})
+        character = _character(techniques=["weapon_mastery"])
+        context = {"weapon_category": "blades"}
+
+        label, applied = combat.apply_character_difficulty_step(
+            "Hard", character, context, fake,
+        )
+        assert label == "Standard"
+        assert applied == "weapon_mastery"
+
+    def test_two_qualifying_techniques_yield_one_step_deterministic_id(self, ruleset):
+        """The guardrail: at most one character-side step per roll. Two
+        auto Techniques both qualify; only one step is applied, and the
+        reported id is the lower of the two regardless of unlock order."""
+        tech_a = _auto_step_technique("acclimated", match="hazard_type", against="cold")
+        tech_b = _auto_step_technique("weapon_mastery", match="weapon_category", against="blades")
+        fake = _FakeRulesetWithTechniques(ruleset, {"acclimated": tech_a, "weapon_mastery": tech_b})
+        character = _character(techniques=["weapon_mastery", "acclimated"])
+        context = {"hazard_type": "cold", "weapon_category": "blades"}
+
+        label, applied = combat.apply_character_difficulty_step(
+            "Hard", character, context, fake,
+        )
+        assert label == "Standard"  # only one step, not two
+        assert applied == "acclimated"  # lowest technique id wins between two autos
+
+    def test_unlocked_only_technique_not_in_characters_list_does_not_fire(self, ruleset):
+        tech = _auto_step_technique("weapon_mastery", match="weapon_category", against="blades")
+        fake = _FakeRulesetWithTechniques(ruleset, {"weapon_mastery": tech})
+        character = _character(techniques=[])  # not unlocked
+        context = {"weapon_category": "blades"}
+
+        label, applied = combat.apply_character_difficulty_step(
+            "Hard", character, context, fake,
+        )
+        assert label == "Hard"
+        assert applied is None
+
+    def test_absent_context_field_does_not_fire(self, ruleset):
+        tech = _auto_step_technique("weapon_mastery", match="weapon_category", against="blades")
+        fake = _FakeRulesetWithTechniques(ruleset, {"weapon_mastery": tech})
+        character = _character(techniques=["weapon_mastery"])
+        context = {}  # weapon_category absent entirely
+
+        label, applied = combat.apply_character_difficulty_step(
+            "Standard", character, context, fake,
+        )
+        assert label == "Standard"
+        assert applied is None
+
+    def test_mismatched_choice_does_not_fire(self, ruleset):
+        """`against == "choice"` compares the roll context against the
+        character's recorded `technique_choices` for that Technique —
+        Weapon Mastery (blades) does not fire on an unarmed Strike."""
+        tech = _auto_step_technique("weapon_mastery", match="weapon_category", against="choice")
+        fake = _FakeRulesetWithTechniques(ruleset, {"weapon_mastery": tech})
+        character = _character(
+            techniques=["weapon_mastery"],
+            technique_choices={"weapon_mastery": "blades"},
+        )
+        context = {"weapon_category": "unarmed"}
+
+        label, applied = combat.apply_character_difficulty_step(
+            "Standard", character, context, fake,
+        )
+        assert label == "Standard"
+        assert applied is None
+
+    def test_matched_choice_fires(self, ruleset):
+        tech = _auto_step_technique("weapon_mastery", match="weapon_category", against="choice")
+        fake = _FakeRulesetWithTechniques(ruleset, {"weapon_mastery": tech})
+        character = _character(
+            techniques=["weapon_mastery"],
+            technique_choices={"weapon_mastery": "blades"},
+        )
+        context = {"weapon_category": "blades"}
+
+        label, applied = combat.apply_character_difficulty_step(
+            "Standard", character, context, fake,
+        )
+        assert label == "Easy"
+        assert applied == "weapon_mastery"
+
+    def test_declared_beats_auto(self, ruleset):
+        """A player-declared toggle wins precedence over a qualifying auto
+        Technique, even when the auto Technique's id sorts lower."""
+        declared = _declared_step_technique("zzz_the_uncanny_angle")
+        auto = _auto_step_technique("aaa_weapon_mastery", match="weapon_category", against="blades")
+        fake = _FakeRulesetWithTechniques(
+            ruleset, {"zzz_the_uncanny_angle": declared, "aaa_weapon_mastery": auto},
+        )
+        character = _character(techniques=["aaa_weapon_mastery", "zzz_the_uncanny_angle"])
+        context = {
+            "weapon_category": "blades",
+            "declared_technique_ids": ["zzz_the_uncanny_angle"],
+        }
+
+        label, applied = combat.apply_character_difficulty_step(
+            "Hard", character, context, fake,
+        )
+        assert label == "Standard"
+        assert applied == "zzz_the_uncanny_angle"
+
+    def test_declared_technique_not_toggled_does_not_fire(self, ruleset):
+        tech = _declared_step_technique("the_uncanny_angle")
+        fake = _FakeRulesetWithTechniques(ruleset, {"the_uncanny_angle": tech})
+        character = _character(techniques=["the_uncanny_angle"])
+        context = {}  # not declared this roll
+
+        label, applied = combat.apply_character_difficulty_step(
+            "Standard", character, context, fake,
+        )
+        assert label == "Standard"
+        assert applied is None
+
+    def test_no_qualifying_technique_leaves_label_unchanged(self, ruleset):
+        character = _character(techniques=[])
+        label, applied = combat.apply_character_difficulty_step(
+            "Standard", character, {}, ruleset,
+        )
+        assert label == "Standard"
+        assert applied is None
+
+    def test_technique_without_step_metadata_never_fires(self, ruleset):
+        """A Technique the character has unlocked but which carries no
+        `difficulty_step`/`step_trigger` (the overwhelming majority) is
+        silently skipped rather than raising."""
+        plain = TechniqueDef(id="forcing_hand", name="Forcing Hand", description=".")
+        fake = _FakeRulesetWithTechniques(ruleset, {"forcing_hand": plain})
+        character = _character(techniques=["forcing_hand"])
+
+        label, applied = combat.apply_character_difficulty_step(
+            "Standard", character, {"weapon_category": "blades"}, fake,
+        )
+        assert label == "Standard"
+        assert applied is None
+
+
+class TestReviewFindingsB4:
+    """Regressions for two rule bypasses found in review of the B4 cycle.
+
+    Both slipped past the original suite because no test exercised a character
+    with zero Sparks, and none asserted that a skill-scoped Technique *fails* to
+    fire on the wrong skill.
+    """
+
+    def test_skill_scoped_technique_does_not_fire_on_another_skill(self, ruleset):
+        """Acclimated is "Endurance rolls against your chosen hardship" (II.4a).
+
+        Before the fix the trigger matched on `hazard_type` alone, so a character
+        with Acclimated (extreme cold) rolling Combat in a warm tavern — while
+        sending `hazard_type: "extreme cold"` — got the step. The engine was
+        implementing a wider rule than the book prints.
+        """
+        character = SimpleNamespace(
+            techniques=["acclimated"],
+            technique_choices={"acclimated": "extreme cold"},
+        )
+        wrong_skill = {"skill_id": "combat", "hazard_type": "extreme cold"}
+        label, applied = combat.apply_character_difficulty_step(
+            "Hard", character, wrong_skill, ruleset)
+        assert (label, applied) == ("Hard", None)
+
+        right_skill = {"skill_id": "endurance", "hazard_type": "extreme cold"}
+        label, applied = combat.apply_character_difficulty_step(
+            "Hard", character, right_skill, ruleset)
+        assert (label, applied) == ("Standard", "acclimated")
+
+    def test_field_of_mastery_is_scoped_to_lore(self, ruleset):
+        character = SimpleNamespace(
+            techniques=["field_of_mastery"],
+            technique_choices={"field_of_mastery": "history"},
+        )
+        assert combat.apply_character_difficulty_step(
+            "Hard", character, {"skill_id": "persuade", "knowledge_field": "history"},
+            ruleset) == ("Hard", None)
+        assert combat.apply_character_difficulty_step(
+            "Hard", character, {"skill_id": "lore", "knowledge_field": "history"},
+            ruleset) == ("Standard", "field_of_mastery")
+
+    def test_non_iterable_declared_ids_does_not_raise(self, ruleset):
+        """A client sending a scalar used to raise straight through the dispatch
+        loop and disconnect the sender."""
+        character = SimpleNamespace(techniques=["the_uncanny_angle"], technique_choices={})
+        for junk in (5, None, {"a": 1}, "the_uncanny_angle"):
+            label, applied = combat.apply_character_difficulty_step(
+                "Hard", character, {"declared_technique_ids": junk}, ruleset)
+            assert label == "Hard" and applied is None
