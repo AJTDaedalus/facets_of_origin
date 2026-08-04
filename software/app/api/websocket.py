@@ -800,16 +800,17 @@ async def _handle_strike(
     # Record the offer so the MM's confirm can be checked against it. Without a
     # live offer to match, `final_blow_available: false` is only a client hint,
     # and a stale or replayed confirm could remove an enemy after a failed
-    # Strike (TODO T12). A new Strike always replaces any older offer, so at most
-    # one is ever open.
+    # Strike (TODO T12). One offer per attacker: a Final Blow Strike replaces or
+    # clears only its own, and an ordinary Strike touches none.
     if final_blow_available:
-        session.pending_final_blow = {
-            "player": player_name,
+        session.pending_final_blows[player_name] = {
             "tracker_key": target_name,
             "offer_id": uuid.uuid4().hex,
         }
     elif final_blow_requested:
-        session.pending_final_blow = None
+        # This attacker's own failed attempt closes their offer. Another
+        # character's offer is none of this Strike's business.
+        session.pending_final_blows.pop(player_name, None)
 
     session.save_character_to_disk(player_name)
     await manager.broadcast(session_id, {
@@ -827,7 +828,7 @@ async def _handle_strike(
         "final_blow_available": final_blow_available,
         # Names the specific offer, so the MM's confirm commits this Strike's
         # offer and not a stale one still on screen (TODO T12).
-        "final_blow_offer_id": (session.pending_final_blow or {}).get("offer_id"),
+        "final_blow_offer_id": session.pending_final_blows.get(player_name, {}).get("offer_id"),
     })
 
 
@@ -1077,6 +1078,9 @@ async def _handle_end_exchange(session, session_id: str) -> None:
 
     for pn in updates:
         session.save_character_to_disk(pn)
+    # A Final Blow offer belongs to the exchange that produced it. Left standing,
+    # a stale toast could commit against a later, different Strike (TODO T12).
+    session.pending_final_blows.clear()
     await manager.broadcast(session_id, {"type": "exchange_ended", "characters": updates})
 
 
@@ -1086,6 +1090,7 @@ async def _handle_combat_end(session, session_id: str) -> None:
         character.endurance_current = None
         character.conditions = []
         character.posture = None
+    session.pending_final_blows.clear()
     await manager.broadcast(session_id, {"type": "combat_ended"})
 
 
@@ -1397,6 +1402,9 @@ async def _handle_spend_skill_point(
         "new_rank": character.skills[skill_id].rank if skill_id in character.skills else "novice",
         "new_marks": character.skills[skill_id].marks if skill_id in character.skills else 0,
         "new_facet_level": character.facet_level,
+        # Same reason as skill_advanced: crossing a Facet level grants a
+        # Technique pick, and this is the path the *player* drives (TODO T10).
+        "technique_picks_available": character.technique_picks_available,
         "session_skill_points_remaining": character.session_skill_points_remaining,
     })
 
@@ -1445,6 +1453,9 @@ async def _handle_session_reset(session, session_id: str) -> None:
     for character in session.characters.values():
         character.techniques_used_this_session = []
         character.sparks = session.ruleset.spark.base_sparks_per_session if session.ruleset.spark else 3
+    # Once-per-session use is being reset, so any offer from the old session must
+    # go with it — otherwise a stale confirm burns the fresh session's use.
+    session.pending_final_blows.clear()
     await manager.broadcast(session_id, {"type": "session_reset"})
 
 
@@ -1665,16 +1676,16 @@ async def _handle_final_blow_confirm(msg: dict, session, session_id: str) -> Non
     # and that it was for this attacker and this target. Otherwise a stale toast,
     # a replay, or a hand-made message removes an enemy off the back of a Strike
     # that failed (TODO T12).
-    offer = session.pending_final_blow
+    offer = session.pending_final_blows.get(player_name)
     offer_id = str(msg.get("offer_id", "")) or None
+    # The id is required, not optional: without it the check degrades to
+    # attacker+target, which is not "*that* Strike" and lets a stale toast
+    # commit against a newer offer. Every in-tree client sends it.
     matches = bool(
         offer
-        and offer["player"] == player_name
         and offer["tracker_key"] == tracker_key
-        # An offer id is optional for backward compatibility, but when one is
-        # sent it must name *this* offer — that is what makes a replayed or
-        # stale confirm fail rather than commit against a newer Strike.
-        and (offer_id is None or offer_id == offer["offer_id"])
+        and offer_id is not None
+        and offer_id == offer["offer_id"]
     )
     if not matches:
         await manager.broadcast(session_id, {
@@ -1689,7 +1700,7 @@ async def _handle_final_blow_confirm(msg: dict, session, session_id: str) -> Non
     )
     enemy.resolve_current = result.resolve_current
     character.techniques_used_this_session.append("the_final_blow")
-    session.pending_final_blow = None   # consumed; a replay finds nothing on offer
+    session.pending_final_blows.pop(player_name, None)   # consumed; a replay finds nothing
     session.save_character_to_disk(player_name)
 
     await manager.broadcast(session_id, {

@@ -360,16 +360,30 @@ this is a state-machine gap rather than a privilege escalation. Closing it means
 holding pending-offer state per session, which is a small feature rather than a
 patch.
 
-**Closed 2026-08-04.** `GameSession.pending_final_blow` holds the open offer
-(attacker, tracker key, offer id). A Strike that offers Final Blow records one; a
-Strike that requests it and fails clears any standing offer; committing consumes
-it. The confirm handler refuses anything without a matching live offer, and the
-offer id — broadcast on the `strike_result` and echoed back by the client — pins
-the confirm to *that* Strike rather than to any offer that happens to be open.
+**Closed 2026-08-04, corrected the same day after review.**
+`GameSession.pending_final_blows` holds the open offers **keyed by attacker**
+(tracker key + offer id). A Strike that offers Final Blow records one; a Strike
+that requests it and fails clears that attacker's own; committing consumes it.
+The confirm handler refuses anything without a matching live offer, and the offer
+id — broadcast on the `strike_result` and echoed back by the client — is
+**required**, pinning the confirm to *that* Strike.
 
-No expiry was added. The offer is single-slot and cleared by the next Strike, a
-commit, or a failure, so a stale one cannot outlive the exchange that made it —
-a timer would add a clock to reason about for no extra safety.
+Offers are cleared at `exchange_end`, `combat_end`, and `session_reset`, so one
+cannot outlive the exchange that made it.
+
+**Two things the first attempt got wrong**, both caught in review of PR #24:
+
+- The offer was a single **session-wide** slot, so any Final Blow Strike
+  overwrote or cleared whoever else's was open. Two characters can both hold the
+  Technique; one player spending a Spark on a successful capstone Strike lost it
+  because someone else swung and missed. That was a regression, not a
+  pre-existing gap — the confirm succeeded before this work.
+- Nothing cleared the offer at any lifecycle boundary, so one made in a previous
+  combat — or a previous *session*, after once-per-session use was reset — was
+  still committable. The original note claimed "a stale one cannot outlive the
+  exchange that made it" and used that to argue against an expiry. The claim was
+  false when written; the code now makes it true, which is why no timer is
+  needed.
 
 Covered by `test_confirm_without_an_offer_is_refused` and
 `test_a_failed_strike_clears_any_standing_offer`. `test_mm_confirm_commits_the_removal`

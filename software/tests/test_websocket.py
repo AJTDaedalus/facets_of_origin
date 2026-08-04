@@ -3812,17 +3812,31 @@ class TestFinalBlowLicensedOverride:
             "tier": "boss", "resolve": 8,
         }, headers=mm_headers)
 
+        player_token = create_session_token("Zahna", session_id)
         with client.websocket_connect("/ws") as ws:
             _auth_mm(ws, mm_token, session_id)
             key = self._spawn(ws)
             self._start_combat(ws)
-            ws.send_json({
-                "type": "final_blow_confirm", "player": "Zahna", "tracker_key": key,
-            })
-            ws.receive_json()  # enemy_updated
-            ws.send_json({
-                "type": "final_blow_confirm", "player": "Zahna", "tracker_key": key,
-            })
+
+        # A real offer, or the first confirm errors too and this test passes for
+        # the wrong reason — which is exactly what it used to do.
+        with client.websocket_connect("/ws") as pws:
+            _auth_player(pws, player_token)
+            with patch("random.randint", return_value=6):
+                pws.send_json({"type": "strike", "target": key,
+                               "final_blow": True, "sparks_spent": 1})
+                offer = pws.receive_json()
+        assert offer["final_blow_available"] is True
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            confirm = {"type": "final_blow_confirm", "player": "Zahna",
+                       "tracker_key": key, "offer_id": offer["final_blow_offer_id"]}
+            ws.send_json(confirm)
+            first = ws.receive_json()
+            assert first["type"] == "enemy_updated", (
+                f"first confirm must commit, got {first}")
+            ws.send_json(dict(confirm))          # replay the identical message
             msg = ws.receive_json()
 
         assert msg["type"] == "error"
@@ -3919,7 +3933,7 @@ class TestFinalBlowLicensedOverride:
                                "final_blow": True, "sparks_spent": 1})
                 pws.receive_json()
 
-        assert session_store.get(session_id).pending_final_blow is None
+        assert "Zahna" not in session_store.get(session_id).pending_final_blows
 
         with client.websocket_connect("/ws") as ws:
             _auth_mm(ws, mm_token, session_id)
@@ -3929,6 +3943,107 @@ class TestFinalBlowLicensedOverride:
             })
             msg = ws.receive_json()
         assert msg["type"] == "error"
+
+    def test_one_players_strike_does_not_destroy_anothers_offer(
+        self, client, mm_headers, mm_token, session_with_character,
+    ):
+        """Review finding: the offer was a single session-wide slot, so any Final
+        Blow Strike overwrote or cleared whoever else's offer was open. A player
+        who spent a Spark on a successful capstone Strike lost it because someone
+        else swung and missed."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        store = session_store.get(session_id)
+        # A second attacker, created the same way the fixture makes the first.
+        client.post("/api/characters/", json={
+            "session_id": session_id, "character_name": "Mordai",
+            "primary_facet": "body",
+            "attributes": {"strength": 3, "dexterity": 2, "constitution": 3,
+                           "intelligence": 1, "wisdom": 1, "knowledge": 2,
+                           "spirit": 2, "luck": 2, "charisma": 2},
+        }, headers=mm_headers)
+        for name in ("Zahna", "Mordai"):
+            char = store.characters[name]
+            char.techniques.append("the_final_blow")
+            char.sparks = 3
+        client.post("/api/enemies/", json={
+            "session_id": session_id, "id": "boss", "name": "Boss",
+            "tier": "boss", "resolve": 8,
+        }, headers=mm_headers)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            self._start_combat(ws)
+
+        with client.websocket_connect("/ws") as a:
+            _auth_player(a, create_session_token("Zahna", session_id))
+            with patch("random.randint", return_value=6):
+                a.send_json({"type": "strike", "target": key,
+                             "final_blow": True, "sparks_spent": 1})
+                offer_a = a.receive_json()
+        assert offer_a["final_blow_available"] is True
+
+        with client.websocket_connect("/ws") as b:
+            _auth_player(b, create_session_token("Mordai", session_id))
+            with patch("random.randint", return_value=1):        # B misses
+                b.send_json({"type": "strike", "target": key,
+                             "final_blow": True, "sparks_spent": 1})
+                b.receive_json()
+
+        # A's offer must survive B's failure.
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "final_blow_confirm", "player": "Zahna",
+                          "tracker_key": key,
+                          "offer_id": offer_a["final_blow_offer_id"]})
+            msg = ws.receive_json()
+        assert msg["type"] == "enemy_updated", (
+            f"A's earned offer was destroyed by B's Strike: {msg}")
+
+    def test_offers_do_not_survive_combat_or_session_boundaries(
+        self, client, mm_headers, mm_token, session_with_character,
+    ):
+        """Review finding: nothing cleared the offer, so one made in a previous
+        combat — or a previous session, after once-per-session use was reset —
+        could still be committed."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = session_store.get(session_id).characters["Zahna"]
+        char.techniques.append("the_final_blow")
+        char.sparks = 3
+        client.post("/api/enemies/", json={
+            "session_id": session_id, "id": "boss", "name": "Boss",
+            "tier": "boss", "resolve": 8,
+        }, headers=mm_headers)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            self._start_combat(ws)
+
+        with client.websocket_connect("/ws") as pws:
+            _auth_player(pws, create_session_token("Zahna", session_id))
+            with patch("random.randint", return_value=6):
+                pws.send_json({"type": "strike", "target": key,
+                               "final_blow": True, "sparks_spent": 1})
+                offer = pws.receive_json()
+        assert offer["final_blow_available"] is True
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "combat_end"})
+            ws.receive_json()
+            ws.send_json({"type": "session_reset"})
+            ws.receive_json()
+            ws.send_json({"type": "final_blow_confirm", "player": "Zahna",
+                          "tracker_key": key,
+                          "offer_id": offer["final_blow_offer_id"]})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "error", (
+            f"an offer from a previous session was still committable: {msg}")
+        assert "the_final_blow" not in char.techniques_used_this_session
 
     def test_non_mm_cannot_confirm_final_blow(self, client, mm_token, session_with_character):
         session, _ = session_with_character

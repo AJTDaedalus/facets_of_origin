@@ -477,8 +477,12 @@ function handleServerMessage(msg) {
           if (msg.rank_advances > 0) state.character.skills[msg.skill_id].rank = msg.new_rank;
           if (msg.facet_level_advances > 0) state.character.facet_level = msg.new_facet_level;
         }
+        if (msg.technique_picks_available !== undefined) {
+          state.character.technique_picks_available = msg.technique_picks_available;
+        }
         renderPlayCharacterSheet();
         if (typeof renderBuilderSkills === 'function') renderBuilderSkills();
+        if (typeof renderBuilderTechniques === 'function') renderBuilderTechniques();
       }
       break;
     case 'chat':
@@ -1083,9 +1087,16 @@ function onTechniqueSelected(msg) {
     // Only a magic-granting Technique lifts the pre-Technique scope cap. This
     // used to fire for every Technique, so learning Weapon Mastery told the
     // Magic panel the character had unlocked full-scope magic.
+    //
+    // The test is `magic_granting` alone, mirroring `Character.select_technique`
+    // exactly. Second Domain and Ascendant Domain carry only
+    // `grants_secondary_domain` / `grants_prismatic_domain` and do NOT set the
+    // flag server-side; including them here made the client enable Significant
+    // and Major scope on a character the server still capped at Minor, and the
+    // resulting cast spent a Spark before failing. Which Technique lifts the cap
+    // is a rule — the client mirrors it, never re-derives it.
     const def = allTechniques().find(t => t.id === msg.technique_id);
-    const grantsMagic = !!(def && (def.magic_granting
-      || def.grants_secondary_domain || def.grants_prismatic_domain));
+    const grantsMagic = !!(def && def.magic_granting);
     if (grantsMagic) {
       state.character.magic_technique_active = true;
       if (typeof renderMagicPanel === 'function') renderMagicPanel();

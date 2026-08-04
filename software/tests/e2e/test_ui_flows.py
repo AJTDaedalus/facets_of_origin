@@ -650,13 +650,18 @@ class TestAdvancementAndSparks:
     def test_technique_display_name_resolves_from_the_real_tree(self, table):
         """Same root cause as T9, in `app.js::techniqueDisplayName`: it searched
         `character_facets[].techniques` and so always fell through to its
-        id-prettifying default. "sharp_analysis" must resolve to the printed
-        name, not to "Sharp Analysis" by accident of formatting — so this checks
-        an id whose real name differs from its prettified id."""
+        id-prettifying default.
+
+        The ids here are chosen so the prettifier gives the *wrong* answer —
+        "Read The Room" vs the printed "Read the Room", "Cross Reference" vs
+        "Cross-Reference". An earlier version of this test used `the_wrong_note`,
+        whose printed name is exactly what the prettifier produces, so it passed
+        against the broken code and proved nothing.
+        """
         _, player = table
-        name = player.evaluate("techniqueDisplayName('the_wrong_note')")
-        assert name == "The Wrong Note"
-        # And an unknown id still degrades to the prettified fallback.
+        assert player.evaluate("techniqueDisplayName('read_the_room')") == "Read the Room"
+        assert player.evaluate("techniqueDisplayName('cross_reference')") == "Cross-Reference"
+        # An unknown id still degrades to the prettified fallback.
         assert player.evaluate("techniqueDisplayName('no_such_technique')") == "No Such Technique"
 
 
