@@ -552,6 +552,18 @@ function handleServerMessage(msg) {
     case 'combat_ended':
       onCombatEnded(msg);
       break;
+    case 'scene_ended':
+      // B6: armor budgets refreshed server-side; both the player's own sheet and
+      // the MM's roster show the budget, so both have to be told or they keep
+      // displaying the spent one.
+      if (state.character) state.character.armor_downgrades_remaining = null;
+      (msg.characters || []).forEach(pn => {
+        if (state.allCharacters[pn]) state.allCharacters[pn].armor_downgrades_remaining = null;
+      });
+      addSystemChat('Scene ended — armor downgrade budgets refresh.');
+      renderPlayCharacterSheet();
+      if (typeof renderMMCombatConsole === 'function') renderMMCombatConsole();
+      break;
     // Magic broadcasts
     case 'cast_result':
       onCastResult(msg);

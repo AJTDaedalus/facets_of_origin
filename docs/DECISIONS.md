@@ -627,3 +627,177 @@ the INV-8 test docstring and the playtest report but never in `DECISIONS.md`,
 which is where a rules change belongs — a reviewer reading only the decision log
 would have found a rules change with no ruling behind it. Recording the gap
 rather than quietly closing it.
+
+---
+
+### B6 — The scene is a real boundary, and the engine gets one *(2026-08-04)*
+
+**Decision:** add an MM-gated `scene_end` event. On it the engine resets every
+character's armor downgrade budget and drops standing Final Blow offers.
+
+*Scene-scoped Technique effects are named in the "Scope held deliberately narrow"
+paragraph below and are **not** part of this decision — an earlier draft of this
+sentence said they were, which contradicted the same entry three paragraphs
+later. There is no scene-effect store yet; `docs/TODO.md` T7 still owns it.*
+
+**Why — this started as T7 and turned up a live rules bug.** Three published rules
+are scoped "per scene": armor's downgrade budget (III.3, IV.1), the *Once per
+scene* frequency on fourteen Techniques, and *Pressure Point*'s party-wide step.
+The engine had no scene boundary at all.
+
+The consequence was not theoretical. `_handle_combat_start` initialises
+`armor_downgrades_remaining` **only if it is `None`** — deliberately, so a second
+fight inside one scene cannot top the budget back up. Nothing anywhere sets it
+back to `None`. So the budget is initialised once per character, ever, and a rule
+the PHB prints as refreshing every scene **never refreshes**. A character who
+spends light armor's two charges in the first fight of a session plays the rest
+of it in effectively no armor.
+
+`tools/combat_sim.py:680` does reset the budget at the start of every simulated
+fight, so the two implementations disagree in source.
+
+**Corrected after review — the consequence claimed here was false.** An earlier
+version of this entry said "the recipes in MM1 were calibrated against a party
+whose armor refreshed; the app gave players one that never did", and escalated the
+disagreement to "the exact divergence class that invalidated a research corpus".
+Neither holds. **Every PC definition in `combat_sim.py` is `armor="none"`** —
+`mordai_def`, `zahna_def`, `zulnut_def`, `drew_def`, all three `advanced_*` defs,
+and `_g3_pc_def` — and `armor_budget()` returns 0 for anything that is not light
+or heavy. Line 680 assigns 0 to a field already 0. **It has been a no-op in every
+simulation ever run**, so no recorded number in `research/simulation_log.md` moves
+in either direction.
+
+The honest statement is close to the reverse: MM1's recipes have **no armored-PC
+data behind them at all**, because the instrument that produced them has never
+modelled an armored PC. The Recipe Table's repeated "fresh party" hedge is doing
+more work than it looks like.
+
+The residual divergence is real but declared: the app now resets per *scene*, the
+simulator per *fight*, and `combat_sim.py:136-138` documents the
+one-encounter-is-one-scene simplification in source. It becomes a live problem the
+first time a simulated PC wears armor — recorded in `docs/TODO.md`.
+
+**Bounding the bug's reach, also from review:** `Character.armor` is written in
+exactly one place (`from_fof`) and set by no REST route, no WebSocket event, and
+no UI control. A character created through the app has `armor = None` forever, so
+only an uploaded `.fof` can produce an armored PC today. The bug is real and the
+fix is right; the population currently able to hit it is small.
+
+**Rejected:** resetting armor at `combat_start`. That is what the code used to do
+and the `is None` guard was added on purpose — two fights in one scene must not
+each hand out a fresh budget, because the budget is what makes armor a decision
+rather than a number. The bug was never that the guard existed; it was that
+nothing ever cleared the flag the guard reads.
+
+**Rejected:** inferring scene end from `combat_end`. A scene is not a fight —
+III.3's own armor text says a second fight can happen inside one scene, and plenty
+of scenes contain no combat at all. Tying the two would re-introduce the bug the
+`is None` guard prevents.
+
+**Scope held deliberately narrow.** *Once per scene* Technique frequency stays
+MM-tracked. Most such Techniques have no engine invocation path — they are
+narrated, not clicked — so enforcing a counter would police the few that happen to
+be wired and ignore the rest. The boundary now exists for whenever that changes.
+
+**Status:** ✅ Decided and implemented. Closes the armor bug; unblocks
+`docs/TODO.md` T7.
+
+---
+
+### B7 — A Technique's difficulty step applies on every roll the MM prices *(2026-08-04, resolves T13)*
+
+**Decision:** `apply_character_difficulty_step` is called from every handler that
+resolves a roll against an MM-declared difficulty label — Strike, generic roll,
+reaction, **Support, Maneuver, and contested rolls**. Magic stays excluded.
+
+**Why:** the printed text says *rolls*. *Weapon Mastery* eases "Rolls using your
+chosen weapon type", not Strikes. Under the old three-call-site implementation
+Mordai Struck with his sword at Standard and got Easy, then Maneuvered with the
+same sword in the same exchange and stayed Standard — same Technique, same weapon,
+two labels, and nothing on screen explaining the difference.
+
+**Rejected: narrowing the printed text to "Strikes".** That is a rules change made
+to accommodate an implementation gap, and it would quietly weaken a Tier 1
+Technique that four other Techniques' scoping already depends on being read
+plainly. Fixing the code is cheaper than editing the book, `facet.yaml`, and two
+quick references to describe something smaller than what was designed.
+
+**Magic remains excluded**, and this is not an oversight: a magical working's
+difficulty comes from the Domain-Type × Scope table (II.3), not from a label the
+MM declares. There is no MM call for a character-side step to compose *with*. If a
+Technique is ever printed that eases magic, it needs its own rule, not this one.
+
+**The guardrail is unchanged and is what makes widening safe:** at most one
+character-side step per roll, whatever the source. Widening the call sites cannot
+compound, because the cap is enforced inside the shared function rather than at
+each call site.
+
+**Status:** ✅ Decided and implemented. Closes `docs/TODO.md` T13.
+
+---
+
+### B8 — *Weapon Mastery* stays melee-shaped; ranged specialists are served by *Steady Hand* *(2026-08-04, resolves T8)*
+
+**Decision:** no fifth option is added to *Weapon Mastery*. Its four choices
+(blades, blunt, polearms, unarmed) stand.
+
+**Why:** the apparent gap dissolves on inspection. *Weapon Mastery* is a **Might**
+Technique, and Might is the Strength branch. Ranged weapons are Dexterity (IV.1),
+ranged Strikes default to **Finesse** (III.3), and Finesse is the **Grace** branch
+— which prints its own step-easier Tier 1 Technique, *Steady Hand*, triggering on
+exactly that skill.
+
+So an archer is not short a Technique. They take the Dexterity branch's step, in
+the Dexterity branch, for the Dexterity weapon. Adding "bows" to a Strength
+Technique would let a ranged specialist take their step from the branch their
+build does not use, and would make Might the only branch easing every weapon in
+the game.
+
+**Rejected:** adding the option anyway "for completeness". Completeness across a
+list is not a design goal; the branch structure is. The plumbing added in the B4
+cycle will carry a fifth `weapon_type` the day the setting's author wants one, so
+this stays a one-line change if the reading above is ever overruled.
+
+**Consequence, enlarged after review.** The first attempt added only a pointer
+sentence to II.4a — and review showed the premise did not hold *in the book*.
+*Steady Hand*'s trigger is `skill_id == finesse`, so in the engine it does ease a
+ranged Strike; but its printed text read "precision work under pressure (picking
+locks, threading a needle, disabling a mechanism mid-crisis)", which covers no
+such thing. A player reading the entry got "no" while the engine said "yes", and
+the pointer sentence asserted the engine's answer without changing the entry.
+
+So the entry was widened to say what it does — **Finesse rolls** are eased, with
+the old examples kept as illustration — in II.4a and `facet.yaml` in the same
+commit. That is a rules change, small and in the direction the engine already
+went, and B8 depends on it: without it, T8 would have been closed on a premise
+true only in code.
+
+**Status:** ✅ Decided. Closes `docs/TODO.md` T8.
+
+---
+
+### B9 — The Bestiary is permanently setting-agnostic *(2026-08-04, resolves T6)*
+
+**Decision:** no creature in the Bestiary is placed in Shattered Origin, now or
+later. The book stays portable by design, and the **Adaptation** line on each
+family entry is the mechanism by which an MM seats one in any setting — including
+this project's own.
+
+**Why:** the Bestiary is a *core* module, shipped alongside the PHB and MM Manual,
+not a setting Facet. Its value is that any table can use it. Placing the creatures
+would convert a core book into setting canon, oblige every future entry to
+justify itself against Shattered Origin's history, and hand the project a
+compatibility burden for no play benefit — an MM who wants chalk hounds on the
+roads of Svara can put them there in one sentence today.
+
+It also keeps the copyright and canon postures clean: every creature is original
+to the project *and* owned by no setting, so nothing in the book can contradict
+canon the author has not written yet.
+
+**The one exception stands and is not a precedent:** the Archive Guardian was
+already canon before the Bestiary existed, and appears as the Latchmen's Boss
+expression because that is what it is.
+
+**Status:** ✅ Decided. Closes `docs/TODO.md` T6. If the author later wants a
+creature seated in Shattered Origin, that belongs in the Shattered Origin setting
+Facet, which can name and adapt anything here without the Bestiary changing.

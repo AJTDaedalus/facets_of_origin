@@ -966,7 +966,7 @@ class TestTranscriptRendersWhatTheServerSends:
     over-count in a new place, and directly on the OOC:IC metric.
     """
 
-    #: Kinds the harness writes itself; the server has no concept of them.
+    #: Kinds the harness writes itself. Most have no server counterpart; `scene_ended` now does (B6), so it must stay out of `LiveTable.MECHANICAL` or the same beat would be logged twice — once locally and once from the broadcast.
     HARNESS_LOCAL = {"say", "say_ooc", "scene", "scene_ended", "rules_gap",
                      "refused", "character_joined", "roll"}
 

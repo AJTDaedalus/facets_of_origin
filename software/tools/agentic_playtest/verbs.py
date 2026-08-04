@@ -103,7 +103,17 @@ class Verbs:
         return self._speak(actor, f"{RULING_TAG}{question} — {ruling}")
 
     def end_scene(self, actor: str, summary: str) -> dict:
+        """Close the scene, locally and on the server.
+
+        `scene_end` is a real server event (B6): it refreshes every character's
+        armor downgrade budget. A harness that only wrote a transcript line would
+        leave the server's per-scene state standing, so a recorded run would stop
+        being evidence about the game the moment a PC wore armor.
+        """
         self.table.log.append("scene_ended", actor, summary=summary)
+        # `scene_end` is MM-gated server-side; a player agent calling this still
+        # gets its transcript line, and the server refuses on their socket.
+        self._send(actor, {"type": "scene_end"})
         return {"ok": True}
 
     # ------------------------------------------------------------------

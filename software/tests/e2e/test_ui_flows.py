@@ -903,3 +903,30 @@ class TestPresentation:
         mm.wait_for_timeout(300)
         assert "Land Hit" in mm.inner_text("#help-content")
         mm.click("#help-drawer button:has-text('Close')")
+
+
+class TestSceneAndCombatControls:
+    """Review finding: `endScene()` was inserted inside `endCombat()`'s body and
+    took two statements with it, so End Combat silently stopped clearing the
+    enemy tracker — while its own confirm dialog still promised to. The server
+    never touches `active_enemies` on `combat_end`, so the client-side clear was
+    the only thing emptying that panel."""
+
+    def test_end_combat_clears_the_enemy_tracker(self, table):
+        mm, _ = table
+        mm.evaluate("state.activeEnemies = {'boss_0': {name: 'Boss', tier: 'boss'}}")
+        # Drive the real function, auto-accepting its confirm.
+        mm.evaluate("window.confirmDialog = async () => true")
+        mm.evaluate("endCombat()")
+        mm.wait_for_timeout(400)
+        assert mm.evaluate("Object.keys(state.activeEnemies).length") == 0
+
+    def test_end_scene_leaves_the_enemy_tracker_alone(self, table):
+        """Ending a scene is not ending a fight — B6 keeps them separate on
+        purpose, so End Scene must not quietly do End Combat's job."""
+        mm, _ = table
+        mm.evaluate("state.activeEnemies = {'boss_0': {name: 'Boss', tier: 'boss'}}")
+        mm.evaluate("window.confirmDialog = async () => true")
+        mm.evaluate("endScene()")
+        mm.wait_for_timeout(400)
+        assert mm.evaluate("Object.keys(state.activeEnemies).length") == 1

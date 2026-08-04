@@ -78,6 +78,7 @@
 | **Example** | [the same glyph at Major scope](../mm_manual/MM2_Session_Design.md#judging-scope) | MM2_Session_Design.md |
 | **MM Note** | [Check the ceiling before you price the roll](../mm_manual/MM2_Session_Design.md#judging-scope) | MM2_Session_Design.md |
 | **Through the Mirror** | [magic in an exchange is not taxed](../mm_manual/MM2_Session_Design.md#magic-against-active-opposition) | MM2_Session_Design.md |
+| **MM Note** | [two buttons, two jobs](../mm_manual/MM2_Session_Design.md#the-play-field) | MM2_Session_Design.md |
 | **Through the Mirror** | [why nominations work](../mm_manual/MM2_Session_Design.md#1-act-break-nomination-structured-predictable) | MM2_Session_Design.md |
 | **MM Note** | [where to see this chapter working](../mm_manual/MM3_Campaign_Design.md#mirror-masters-manual-campaign-design) | MM3_Campaign_Design.md |
 | **Example** | [campaign pitch: Episodic — "The Thornwall Watch"](../mm_manual/MM3_Campaign_Design.md#example-pitches) | MM3_Campaign_Design.md |

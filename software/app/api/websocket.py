@@ -235,6 +235,8 @@ async def _dispatch(
         await _handle_enemy_update(msg, session, session_id)
     elif event_type == "enemy_strike" and is_mm:
         await _handle_enemy_strike(websocket, msg, session, session_id)
+    elif event_type == "scene_end" and is_mm:
+        await _handle_scene_end(session, session_id)
     elif event_type == "final_blow_confirm" and is_mm:
         await _handle_final_blow_confirm(msg, session, session_id)
     elif event_type == "remove_enemy" and is_mm:
@@ -299,20 +301,44 @@ def _apply_difficulty_step(
     return final_label, step_info
 
 
-def _build_roll_request(character, msg: dict, ruleset, *, press: bool = False) -> RollRequest:
-    """Build a RollRequest from a WebSocket message and character state."""
+def _build_roll_request(
+    character, msg: dict, ruleset, *, press: bool = False,
+) -> tuple[RollRequest, Optional[dict]]:
+    """Build a RollRequest from a WebSocket message and character state.
+
+    Returns the request and the Technique step that moved its difficulty, if any.
+
+    B7: a Technique's step applies on every roll the MM prices, not only on the
+    three handlers the first implementation happened to wire. Weapon Mastery eases
+    "Rolls using your chosen weapon type" — so Striking with a sword and
+    Maneuvering with the same sword in the same exchange must not land on
+    different labels.
+    """
     attribute_id = msg.get("attribute_id", "strength")
     skill_id = msg.get("skill_id")
+    difficulty, technique_step = _apply_difficulty_step(
+        character,
+        str(msg.get("difficulty", "Standard")),
+        {
+            "skill_id": skill_id,
+            "weapon_category": msg.get("weapon_category"),
+            "weapon_type": msg.get("weapon_type"),
+            "hazard_type": msg.get("hazard_type"),
+            "knowledge_field": msg.get("knowledge_field"),
+            "declared_technique_ids": msg.get("declared_technique_ids"),
+        },
+        ruleset,
+    )
     return RollRequest(
         attribute_id=attribute_id,
         attribute_rating=character.attributes.get(attribute_id, 2),
         skill_id=skill_id,
         skill_rank_id=character.skills[skill_id].rank if skill_id and skill_id in character.skills else None,
-        difficulty_label=str(msg.get("difficulty", "Standard")),
+        difficulty_label=difficulty,
         sparks_spent=0,  # sparks are tracked separately via _spend_sparks
         press=press,
         description=str(msg.get("description", ""))[:200],
-    )
+    ), technique_step
 
 
 async def _handle_roll(
@@ -1222,7 +1248,7 @@ async def _handle_support(
         await manager.send_to(websocket, {"type": "error", "message": f"Invalid bonus_type '{bonus_type}'."})
         return
 
-    request = _build_roll_request(character, msg, session.ruleset)
+    request, technique_step = _build_roll_request(character, msg, session.ruleset)
     result = resolve_roll(request, session.ruleset)
     result_dict = roll_result_to_dict(result)
     session.record_roll(player_name, result_dict)
@@ -1236,6 +1262,7 @@ async def _handle_support(
         "type": "support_result",
         "player": player_name,
         "target": target_player,
+        "technique_step": technique_step,
         "bonus_type": bonus_type,
         "roll": result_dict,
         "outcome": result_dict["outcome"],
@@ -1262,7 +1289,7 @@ async def _handle_maneuver(
 
     target_name = str(msg.get("target", ""))
 
-    request = _build_roll_request(character, msg, session.ruleset)
+    request, technique_step = _build_roll_request(character, msg, session.ruleset)
     result = resolve_roll(request, session.ruleset)
     result_dict = roll_result_to_dict(result)
     session.record_roll(player_name, result_dict)
@@ -1276,6 +1303,7 @@ async def _handle_maneuver(
         "type": "maneuver_result",
         "player": player_name,
         "target": target_name,
+        "technique_step": technique_step,
         "roll": result_dict,
         "outcome": result_dict["outcome"],
     })
@@ -1304,22 +1332,34 @@ async def _handle_contested_roll(
     skill_b = msg.get("skill_b")
     difficulty = str(msg.get("difficulty", "Standard"))
 
-    req_a = RollRequest(
-        attribute_id=attr_a,
-        attribute_rating=char_a.attributes.get(attr_a, 2),
-        skill_id=skill_a,
-        skill_rank_id=char_a.skills[skill_a].rank if skill_a and skill_a in char_a.skills else None,
-        difficulty_label=difficulty,
-        description=str(msg.get("description", ""))[:200],
-    )
-    req_b = RollRequest(
-        attribute_id=attr_b,
-        attribute_rating=char_b.attributes.get(attr_b, 2),
-        skill_id=skill_b,
-        skill_rank_id=char_b.skills[skill_b].rank if skill_b and skill_b in char_b.skills else None,
-        difficulty_label=difficulty,
-        description=str(msg.get("description", ""))[:200],
-    )
+    # B7: each side is priced against the MM's one declared label, so each side's
+    # own Techniques compose with it independently. A contested roll is two rolls,
+    # not one, and a Technique one participant holds must not ease the other's.
+    def _side(character, attribute_id, skill_id, suffix):
+        label, step = _apply_difficulty_step(
+            character, difficulty,
+            {
+                "skill_id": skill_id,
+                "weapon_category": msg.get("weapon_category_" + suffix),
+                "weapon_type": msg.get("weapon_type_" + suffix),
+                "hazard_type": msg.get("hazard_type_" + suffix),
+                "knowledge_field": msg.get("knowledge_field_" + suffix),
+                "declared_technique_ids": msg.get("declared_technique_ids_" + suffix),
+            },
+            session.ruleset,
+        )
+        return RollRequest(
+            attribute_id=attribute_id,
+            attribute_rating=character.attributes.get(attribute_id, 2),
+            skill_id=skill_id,
+            skill_rank_id=(character.skills[skill_id].rank
+                           if skill_id and skill_id in character.skills else None),
+            difficulty_label=label,
+            description=str(msg.get("description", ""))[:200],
+        ), step
+
+    req_a, step_a = _side(char_a, attr_a, skill_a, "a")
+    req_b, step_b = _side(char_b, attr_b, skill_b, "b")
 
     result_a = resolve_roll(req_a, session.ruleset)
     result_b = resolve_roll(req_b, session.ruleset)
@@ -1342,6 +1382,8 @@ async def _handle_contested_roll(
         "player_b": player_b,
         "roll_a": dict_a,
         "roll_b": dict_b,
+        "technique_step_a": step_a,
+        "technique_step_b": step_b,
         "winner": winner,
     })
 
@@ -1445,6 +1487,37 @@ async def _handle_technique_select(
         "choice": choice,
         "all_techniques": list(character.techniques),
         "technique_picks_available": character.technique_picks_available,
+    })
+
+
+async def _handle_scene_end(session, session_id: str) -> None:
+    """MM ends a scene: reset everything the rules scope to one (B6).
+
+    The scene is a published boundary — armor's downgrade budget refreshes at it
+    (III.3, IV.1), *Once per scene* Techniques recharge at it — and the engine had
+    no event for it. `_handle_combat_start` initialises the armor budget only when
+    it is `None`, deliberately, so a second fight inside one scene cannot top it
+    back up; nothing ever set it back, so a budget the book says refreshes every
+    scene refreshed exactly never. Meanwhile `tools/combat_sim.py` reset it per
+    fight, so the simulator and the app disagreed about a defensive resource.
+
+    Clearing the budget to `None` here — rather than re-initialising it — is what
+    keeps the `is None` guard meaningful: the next `combat_start` hands out a fresh
+    budget, and a second fight in the *same* scene still does not.
+
+    A scene is not a fight. Plenty of scenes contain no combat, and III.3's own
+    armor text assumes a scene can contain two fights, so this is deliberately a
+    separate event from `combat_end`.
+    """
+    for character in session.characters.values():
+        character.armor_downgrades_remaining = None
+    # A Final Blow offer cannot outlive the scene that produced it.
+    session.pending_final_blows.clear()
+    # The MM presses this button and usually holds no character of their own, so
+    # naming who was refreshed is what makes the effect visible on their screen.
+    await manager.broadcast(session_id, {
+        "type": "scene_ended",
+        "characters": sorted(session.characters),
     })
 
 

@@ -588,6 +588,9 @@ VAGUE_POINTERS = re.compile(
 # these positions (rulebooks.md §2), so they are exempt from the Law 5 check.
 _TITLE_CASE_LABEL = re.compile(r"^>?\s*\*\*[^*]+\*\*:?\s*$")
 
+#: An inline code span. Its contents are a literal name, not prose.
+_INLINE_CODE = re.compile(r"`[^`]*`")
+
 CAPITALIZABLE_CANDIDATES = [
     "Skill", "Skills", "Scene", "Scenes", "Roll", "Rolls", "Action", "Actions",
     "Check", "Checks", "Turn", "Turns",
@@ -745,7 +748,12 @@ def test_capitalized_terms_are_glossary_defined() -> None:
                 continue
             if _TITLE_CASE_LABEL.match(line.strip()):
                 continue
-            for match in pattern.finditer(line):
+            # An inline code span is a literal — a filename, a field, a UI
+            # control like `End Scene`. Capitalisation inside one is the thing's
+            # actual name, not a claim that it is a defined game term, so it is
+            # blanked before the scan rather than exempted case by case.
+            scanned = _INLINE_CODE.sub(lambda m: " " * len(m.group(0)), line)
+            for match in pattern.finditer(scanned):
                 offenders.append(
                     f"{path.relative_to(REPO_ROOT)}:{number}: '{match.group(1)}' "
                     f"in: {line.strip()[:80]}")

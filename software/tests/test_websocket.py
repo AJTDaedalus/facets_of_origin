@@ -4059,3 +4059,195 @@ class TestFinalBlowLicensedOverride:
 
         assert msg["type"] == "error"
         assert "Unknown event type" in msg["message"]
+
+
+class TestStepAppliesOnEveryPricedRoll:
+    """B7 (TODO T13): a Technique's step applies on every roll the MM prices.
+
+    The first implementation wired three handlers, so Mordai Struck with his
+    sword at Standard and got Easy, then Maneuvered with the same sword in the
+    same exchange and stayed Standard — same Technique, same weapon, two labels.
+    Weapon Mastery eases "Rolls using your chosen weapon type", not Strikes.
+    """
+
+    def _mastered(self, session_id):
+        character = session_store.get(session_id).characters["Zahna"]
+        character.techniques.append("weapon_mastery")
+        character.technique_choices["weapon_mastery"] = "blades"
+        return character
+
+    @pytest.mark.parametrize("action,extra", [
+        ("maneuver", {"target": "boss"}),
+        ("support", {"target": "Zahna", "bonus_type": "add_die"}),
+    ])
+    def test_step_applies_to_maneuver_and_support(
+        self, client, mm_token, session_with_character, action, extra,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        self._mastered(session_id)
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "combat_start"})
+            ws.receive_json()
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({
+                "type": action, "skill_id": "combat", "difficulty": "Hard",
+                "weapon_type": "blades", **extra,
+            })
+            msg = ws.receive_json()
+
+        assert msg["technique_step"] is not None, (
+            f"{action} did not compose the Technique step")
+        assert msg["technique_step"]["technique_id"] == "weapon_mastery"
+        assert msg["technique_step"]["to"] == "Standard"   # Hard, eased one step
+
+    def test_contested_roll_steps_each_side_independently(
+        self, client, mm_headers, mm_token, session_with_character,
+    ):
+        """One MM label, two rolls. A Technique one participant holds must not
+        ease the other's side."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        self._mastered(session_id)
+        client.post("/api/characters/", json={
+            "session_id": session_id, "character_name": "Mordai",
+            "primary_facet": "body",
+            "attributes": {"strength": 3, "dexterity": 2, "constitution": 3,
+                           "intelligence": 1, "wisdom": 1, "knowledge": 2,
+                           "spirit": 2, "luck": 2, "charisma": 2},
+        }, headers=mm_headers)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({
+                "type": "contested_roll",
+                "player_a": "Zahna", "player_b": "Mordai",
+                "attribute_a": "strength", "attribute_b": "strength",
+                "skill_a": "combat", "skill_b": "combat",
+                "difficulty": "Hard",
+                "weapon_type_a": "blades", "weapon_type_b": "blades",
+            })
+            msg = ws.receive_json()
+
+        assert msg["technique_step_a"] is not None
+        assert msg["technique_step_a"]["technique_id"] == "weapon_mastery"
+        # Mordai holds no Technique, so his side keeps the MM's label.
+        assert msg["technique_step_b"] is None
+
+
+class TestSceneBoundary:
+    """B6: the engine had no scene boundary, so armor's per-scene downgrade
+    budget was initialised once and never reset.
+
+    `_handle_combat_start` only initialises the budget when it is `None` — on
+    purpose, so a second fight inside one scene cannot top it back up — and
+    nothing ever set it back. A rule the PHB prints as refreshing every scene
+    never refreshed, and `tools/combat_sim.py` reset it per fight, so the
+    simulator and the app disagreed about a defensive resource.
+    """
+
+    def _armed_session(self, client, mm_headers, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        character = session_store.get(session_id).characters["Zahna"]
+        character.armor = "light"
+        return session_id, character
+
+    def test_scene_end_resets_the_armor_budget(
+        self, client, mm_headers, mm_token, session_with_character,
+    ):
+        session_id, character = self._armed_session(
+            client, mm_headers, mm_token, session_with_character)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "combat_start"})
+            ws.receive_json()
+            budget = character.armor_downgrades_remaining
+            assert budget and budget > 0
+
+            character.armor_downgrades_remaining = 0      # spent in the fight
+            ws.send_json({"type": "scene_end"})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "scene_ended"
+        # Cleared, so the next combat_start hands out a fresh budget.
+        assert character.armor_downgrades_remaining is None
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "combat_start"})
+            ws.receive_json()
+        assert character.armor_downgrades_remaining == budget
+
+    def test_a_second_fight_in_one_scene_does_not_refresh_armor(
+        self, client, mm_headers, mm_token, session_with_character,
+    ):
+        """The `is None` guard is deliberate and must survive this fix: two
+        fights inside one scene share one budget, which is what makes armor a
+        decision rather than a number."""
+        session_id, character = self._armed_session(
+            client, mm_headers, mm_token, session_with_character)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "combat_start"})
+            ws.receive_json()
+            character.armor_downgrades_remaining = 1     # partly spent
+            ws.send_json({"type": "combat_start"})       # second fight, same scene
+            ws.receive_json()
+
+        assert character.armor_downgrades_remaining == 1
+
+    def test_scene_end_drops_standing_final_blow_offers(
+        self, client, mm_headers, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        store = session_store.get(session_id)
+        store.pending_final_blows["Zahna"] = {"tracker_key": "boss_0", "offer_id": "x"}
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "scene_end"})
+            ws.receive_json()
+
+        assert store.pending_final_blows == {}
+
+    def test_scene_end_is_mm_only(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({"type": "scene_end"})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "error"
+
+
+class TestSceneEndVisibility:
+    """Review finding: the MM presses `End Scene` and usually holds no character
+    of their own, so the broadcast has to name who was refreshed or the effect is
+    invisible on the screen of the person who triggered it."""
+
+    def test_scene_ended_names_the_refreshed_characters(
+        self, client, mm_token, session_with_character,
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        session_store.get(session_id).characters["Zahna"].armor = "light"
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "scene_end"})
+            msg = ws.receive_json()
+
+        assert msg["type"] == "scene_ended"
+        assert "Zahna" in msg["characters"]
