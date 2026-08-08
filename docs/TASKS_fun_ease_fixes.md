@@ -204,7 +204,7 @@ listed greps return the expected result; LOG updated.
   Register: `a Tier 1 or Tier 2 Condition of your choice` (confirm exact wording in
   situ first).
 
-- [ ] **T3.3 — Open tag transport.**
+- [x] **T3.3 — Open tag transport.**
   Files: `software/app/api/websocket.py` (enemy tracker events carry Open state),
   static js that renders enemy conditions (`play.js`, `components.js`), tests
   (≥3: set, clear, broadcast).

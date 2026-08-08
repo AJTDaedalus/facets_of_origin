@@ -2591,6 +2591,67 @@ class TestEnemyTrackerWS:
             msg = ws.receive_json()
             assert msg["type"] == "error"
 
+    # -- The Open tag over the wire (K-6/D4, T3.3) --------------------------
+
+    def _spawn_named(self, client, mm_headers, mm_token, ws, session_id, name="Named 1"):
+        client.post("/api/enemies/", json={
+            "session_id": session_id,
+            "id": "named_open", "name": "Named", "tier": "named", "resolve": 3,
+        }, headers=mm_headers)
+        ws.send_json({"type": "spawn_enemy", "enemy_id": "named_open", "instance_name": name})
+        return ws.receive_json()  # enemy_spawned
+
+    def test_enemy_spawned_carries_open_state(self, client, mm_headers, mm_token):
+        session_id = self._create_session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            spawned = self._spawn_named(client, mm_headers, mm_token, ws, session_id)
+            assert spawned["type"] == "enemy_spawned"
+            assert spawned["enemy"]["open"] is False
+
+    def test_enemy_update_sets_open(self, client, mm_headers, mm_token):
+        session_id = self._create_session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._spawn_named(client, mm_headers, mm_token, ws, session_id)
+            ws.send_json({"type": "enemy_update", "tracker_key": "Named 1", "open": True})
+            msg = ws.receive_json()
+            assert msg["type"] == "enemy_updated"
+            assert msg["open"] is True
+            sess = session_store.get(session_id)
+            assert sess.active_enemies["Named 1"].open is True
+
+    def test_enemy_update_clears_open(self, client, mm_headers, mm_token):
+        """The enemy visibly spends its action — the MM clears the tag."""
+        session_id = self._create_session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._spawn_named(client, mm_headers, mm_token, ws, session_id)
+            ws.send_json({"type": "enemy_update", "tracker_key": "Named 1", "open": True})
+            ws.receive_json()
+            ws.send_json({"type": "enemy_update", "tracker_key": "Named 1", "open": False})
+            msg = ws.receive_json()
+            assert msg["open"] is False
+            sess = session_store.get(session_id)
+            assert sess.active_enemies["Named 1"].open is False
+
+    def test_enemy_strike_broadcast_preserves_open(self, client, mm_headers, mm_token):
+        """A Strike outcome does not clear Open — only the enemy's own
+        visible action does. The depletion broadcast carries the tag so
+        every client keeps rendering it."""
+        session_id = self._create_session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._spawn_named(client, mm_headers, mm_token, ws, session_id)
+            ws.send_json({"type": "enemy_update", "tracker_key": "Named 1", "open": True})
+            ws.receive_json()
+            ws.send_json({"type": "enemy_strike", "tracker_key": "Named 1",
+                          "outcome": "partial_success"})
+            msg = ws.receive_json()
+            assert msg["type"] == "enemy_updated"
+            assert msg["resolve_current"] == 2
+            assert msg["open"] is True
+
     def _spawn_boss_with_phase(self, client, mm_headers, mm_token, ws, session_id):
         """Spawn a Named enemy, then attach a phase directly (no CRUD support
         for `phases` yet — see A7 LOG scope note). Returns the tracker_key.

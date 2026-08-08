@@ -138,8 +138,14 @@ function renderEnemyCard(key, enemy, opts) {
   const res = enemyResolveDisplay(enemy);
   const hasPhases = opts.showPhases && enemy.phases && enemy.phases.length > 0;
 
-  // The MM can lift a Condition back off; players just read it. Previously a
-  // Condition added by mistake could never be removed from the tracker.
+  // K-6/D4: the one mark a Strike can put on an enemy is the Open tag —
+  // Easy to Strike for everyone until the enemy visibly spends its action.
+  const openBadge = enemy.open
+    ? '<span class="condition-badge condition-tier2" title="Easy to Strike for everyone until it spends its action recovering">OPEN — Easy to Strike</span>'
+    : '';
+
+  // Legacy Condition badges: enemies no longer take Strike Conditions, but
+  // the MM can still lift a stale badge off a pre-Open tracker entry.
   const condHtml = conditions.length
     ? conditions.map(function (c) {
         const label = escapeHtml(String(c).replace(/_/g, ' '));
@@ -149,7 +155,7 @@ function renderEnemyCard(key, enemy, opts) {
             + label + ' ×</button>'
           : '<span class="condition-badge condition-tier1">' + label + '</span>';
       }).join(' ')
-    : '<span style="color:var(--text-dim);font-size:11px;">none</span>';
+    : '';
 
   let resolveBlock;
   if (res) {
@@ -195,10 +201,19 @@ function renderEnemyCard(key, enemy, opts) {
           + ' onclick="enemyAdjustResolve(\'' + escapeHtml(key) + '\', 1)">+1</button>'
         : '');
 
+    // Open toggle (K-6/D4) replaces the retired "+ Condition" prompt: on a
+    // 10+ the attacker may leave the enemy Open; the enemy clears it only
+    // by visibly spending its action.
+    const openButton = enemy.open
+      ? '<button class="btn btn-secondary btn-sm" title="The enemy visibly spends its action recovering"'
+        + ' onclick="enemyToggleOpen(\'' + escapeHtml(key) + '\')">Clears Open (action)</button>'
+      : '<button class="btn btn-secondary btn-sm" title="Attacker’s option on a 10+ — Easy to Strike for everyone"'
+        + ' onclick="enemyToggleOpen(\'' + escapeHtml(key) + '\')">Leave Open</button>';
+
     controls =
       '<div class="btn-row" style="margin-top:6px;">'
       + resolveButtons
-      + '<button class="btn btn-secondary btn-sm" onclick="enemyAddCondition(\'' + escapeHtml(key) + '\')">+ Condition</button>'
+      + openButton
       + '<button class="btn btn-secondary btn-sm" onclick="removeEnemy(\'' + escapeHtml(key) + '\')">Remove</button>'
       + '</div>';
   }
@@ -217,7 +232,11 @@ function renderEnemyCard(key, enemy, opts) {
     + escapeHtml(enemy.tier) + ' | TR ' + (enemy.tr || '?') + '</span>'
     + '</div>'
     + '<div style="margin-top:4px;">' + resolveBlock + '</div>'
-    + '<div style="font-size:12px;margin-top:4px;">' + condHtml + '</div>'
+    + '<div style="font-size:12px;margin-top:4px;">'
+    + (openBadge || condHtml
+        ? [openBadge, condHtml].filter(Boolean).join(' ')
+        : '<span style="color:var(--text-dim);font-size:11px;">no marks</span>')
+    + '</div>'
     + phaseNote
     + tactics
     + special

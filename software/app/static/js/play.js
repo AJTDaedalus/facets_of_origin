@@ -544,14 +544,20 @@ function enemyAdjustResolve(trackerKey, delta) {
   sendWS({ type: 'enemy_update', tracker_key: trackerKey, resolve_current: next });
 }
 
-async function enemyAddCondition(trackerKey) {
-  const cond = await promptDialog('Add a Condition', 'e.g. off balance');
-  if (!cond) return;
-  sendWS({ type: 'enemy_update', tracker_key: trackerKey, add_condition: cond });
-}
-
 function enemyRemoveCondition(trackerKey, condition) {
   sendWS({ type: 'enemy_update', tracker_key: trackerKey, remove_condition: condition });
+}
+
+/**
+ * Toggle the Open tag (K-6/D4). Setting it records the attacker's 10+
+ * option; clearing it records the enemy visibly spending its action to
+ * recover. Enemies carry no Conditions of their own — Open is the one
+ * mark a Strike can put on them, so the old "+ Condition" prompt is gone.
+ */
+function enemyToggleOpen(trackerKey) {
+  const enemy = state.activeEnemies[trackerKey];
+  if (!enemy) return;
+  sendWS({ type: 'enemy_update', tracker_key: trackerKey, open: !enemy.open });
 }
 
 async function removeEnemy(trackerKey) {
@@ -576,6 +582,16 @@ function onEnemyUpdated(msg) {
   const name = enemy.name || msg.tracker_key;
   enemy.resolve_current = msg.resolve_current;
   enemy.conditions = msg.conditions;
+  if ('open' in msg) {
+    // K-6/D4: announce the tag's edges — leaving an enemy Open and the
+    // enemy visibly spending its action to clear it are both table beats.
+    if (msg.open && !enemy.open) {
+      addSystemChat(`${name} is left Open — Easy to Strike for everyone.`);
+    } else if (!msg.open && enemy.open) {
+      addSystemChat(`${name} spends its action recovering — no longer Open.`);
+    }
+    enemy.open = msg.open;
+  }
 
   // `defeated` comes from the engine — for a Mook that means one Strike landed
   // hard enough, for anyone else that Resolve reached 0. The client no longer

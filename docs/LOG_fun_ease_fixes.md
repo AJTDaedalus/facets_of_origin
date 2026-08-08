@@ -453,6 +453,36 @@ anything unexpected.
 - **Commands:** `python -m tools.build_index`; docs suite → **32 passed**;
   rider-phrase grep over both books → empty.
 
+### T3.3 — Open tag transport (2026-08-08)
+
+- **Files:** `software/app/api/websocket.py`, `software/app/static/js/play.js`,
+  `software/app/static/js/components.js`, `software/app/static/js/tools.js`
+  (unlisted: its in-app rules card restated the rider rule),
+  `software/tests/test_websocket.py`.
+- **Red first:** 3 failed of 4 new (`enemy_spawned` already carried `open`
+  via T3.1's `to_client_dict`).
+- **Did (server):** `enemy_update` accepts an `open` boolean (set = the
+  attacker's 10+ option; clear = the enemy visibly spending its action —
+  a choice the MM relays, so it lives on the manual-update handler, not
+  `enemy_strike`, which resolves outcomes). All four `enemy_updated`
+  broadcast sites (update, mook strike, named strike, final blow) carry
+  `open`. A Strike broadcast preserves the tag — only the enemy's action
+  clears it (tested).
+- **Did (client):** `onEnemyUpdated` applies `open` and announces both
+  edges in chat ("left Open — Easy to Strike for everyone" / "spends its
+  action recovering"); enemy card renders an OPEN badge (players and MM);
+  MM controls swap the retired "+ Condition" prompt for a Leave Open /
+  Clears Open (action) toggle (`enemyToggleOpen`). `enemyAddCondition`
+  deleted (enemies take no Strike Conditions); legacy condition badges
+  still render and remain MM-removable so a stale tracker entry can be
+  cleaned. tools.js rules card updated rider→Open.
+- **Server keeps `add_condition`/`remove_condition`** on `enemy_update`
+  as a manual-correction path (remove is still wired in the UI); only the
+  UI affordance for adding died with the rule.
+- **Commands:** red 3 → `test_websocket.py` **222 passed**;
+  `test_api_enemy + test_agentic_playtest` 128 passed; `node --check` on
+  all three JS files OK.
+
 ---
 
 ## Escalations

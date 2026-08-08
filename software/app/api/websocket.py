@@ -1598,7 +1598,15 @@ async def _handle_spawn_enemy(msg: dict, session, session_id: str) -> None:
 
 
 async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
-    """MM updates an active enemy's resolve or conditions."""
+    """MM updates an active enemy's resolve, conditions, or Open state.
+
+    `open` (K-6/D4): setting it records the attacker's 10+ option; clearing
+    it records the enemy visibly spending its action to recover
+    (`combat.open_clear_mode`) — both are table events the MM relays, so
+    both go through this manual-update handler rather than `enemy_strike`
+    (which resolves depletion only; the Open option is a choice, not an
+    outcome).
+    """
     tracker_key = str(msg.get("tracker_key", ""))
     enemy = session.active_enemies.get(tracker_key)
     if not enemy:
@@ -1625,12 +1633,15 @@ async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
         cond = str(msg["remove_condition"])
         if cond in enemy.conditions:
             enemy.conditions.remove(cond)
+    if "open" in msg:
+        enemy.open = bool(msg["open"])
 
     await manager.broadcast(session_id, {
         "type": "enemy_updated",
         "tracker_key": tracker_key,
         "resolve_current": enemy.resolve_current,
         "conditions": list(enemy.conditions),
+        "open": enemy.open,
     })
 
     if phase_index is not None:
@@ -1689,6 +1700,7 @@ async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -
             "defeated": removed,
             "mook_removed": removed,
             "conditions": list(enemy.conditions),
+            "open": enemy.open,
         })
         return
 
@@ -1707,6 +1719,7 @@ async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -
         "defeated": result.defeated,
         "mook_removed": False,
         "conditions": list(enemy.conditions),
+        "open": enemy.open,
     })
 
     if result.phase_index is not None:
@@ -1799,6 +1812,7 @@ async def _handle_final_blow_confirm(msg: dict, session, session_id: str) -> Non
         "defeated": result.defeated,
         "mook_removed": False,
         "conditions": list(enemy.conditions),
+        "open": enemy.open,
         # Distinguishes this event from an ordinary enemy_strike defeat
         # (DESIGN §4 / TD-13's "distinguishable in the transcript").
         "cause": result.cause,

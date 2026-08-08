@@ -224,8 +224,9 @@ function renderToolsRuleSummaries() {
       <p style="margin-top:6px;"><strong>Reactions:</strong> Dodge (1 End, Dexterity), Parry (1 End, Strength+Combat),
          Absorb (0 End), Intercept (2 End, once per exchange)</p>
       <p><strong>0 Endurance:</strong> Absorb only.</p>
-      <p style="margin-top:6px;"><strong>Strike vs an enemy:</strong> 10+ depletes 2 Resolve and may hang a rider
-         Condition; 7-9 depletes 1. At 0 Resolve the enemy is defeated. Mooks have no Resolve &mdash; they fall to
+      <p style="margin-top:6px;"><strong>Strike vs an enemy:</strong> 10+ depletes 2 Resolve and may leave the enemy
+         <strong>Open</strong> &mdash; Easy to Strike for everyone until it visibly spends its action to recover;
+         7-9 depletes 1. At 0 Resolve the enemy is defeated. Mooks have no Resolve &mdash; they fall to
          one Strike (10+ if armoured).</p>
       <p><strong>Strike vs another character:</strong> 10+ = Tier 2 Condition, 7-9 = Tier 1.</p>
       <p style="margin-top:6px;"><strong>Enemy attacks:</strong> NPCs never roll. The MM applies the incoming
