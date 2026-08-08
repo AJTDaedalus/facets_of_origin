@@ -1375,8 +1375,9 @@ magic:
 
   # II.3, Sparks and Magic — the three Spark-magic rules.
   spark_rules:
+    # A Spark buys reach in exactly two cases (II.3, T2.2/D8). Reach-Sparks
+    # cannot move a Broad working's difficulty; dice-Sparks work normally.
     ease_focused_major: {domain_type: focused, scope: major}
-    push_scope: {refused_domain_type: broad}
     pre_technique_push: {permitted_scope: significant}   # D8
 
   domain_types:

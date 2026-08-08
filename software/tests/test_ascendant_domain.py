@@ -195,18 +195,31 @@ def test_broad_domain_uses_broad_difficulty_table(ruleset, scope, expected):
     assert result.request.difficulty_label == expected
 
 
-def test_sparks_cannot_push_scope_on_a_prismatic_domain(ruleset):
-    """Clause 3: the ceiling cannot be moved by Sparks."""
+def test_reach_sparks_cannot_move_a_prismatic_working(ruleset):
+    """Clause 3 (T2.2 rewrite): reach-Sparks cannot move a Broad working's
+    difficulty — both the retired push_scope use and an ease attempt are
+    refused; dice-Sparks work normally."""
     char = _mind_mage(ruleset)
     assert char.select_technique(
         "ascendant_domain_mind", ruleset=ruleset, choice="chronomancy"
     )[0]
 
-    with pytest.raises(ValueError, match="cannot be pushed"):
+    with pytest.raises(ValueError, match="[Ss]park"):
         resolve_magic_roll(
             character=char, domain_id="chronomancy", scope="major",
             intent="unmake an hour", ruleset=ruleset, spark_use="push_scope",
         )
+    with pytest.raises(ValueError, match="[Ss]park"):
+        resolve_magic_roll(
+            character=char, domain_id="chronomancy", scope="major",
+            intent="unmake an hour", ruleset=ruleset, spark_use="ease_focused_major",
+        )
+    result = resolve_magic_roll(
+        character=char, domain_id="chronomancy", scope="major",
+        intent="unmake an hour", ruleset=ruleset, spark_use="improve_roll",
+    )
+    assert result.request.difficulty_label == "Very Hard"
+    assert result.sparks_spent == 1
 
 
 def test_ascendant_domain_takes_no_second_domain_penalty(ruleset):

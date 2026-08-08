@@ -246,7 +246,7 @@ You may anchor something spiritual that is failing or breaking: a ritual unravel
 
 **Roll:** Spirit, on the Broad difficulty table.
 
-*Requires an existing Soul domain (Spiritual Domain).* Your practice has outgrown a single territory. Choose one prismatic domain from the Domains of the Soul list (Chapter II.3). You may work within it using the Domain + Intent + Scope framework, rolling Spirit. The Broad difficulty table applies — Hard at Minor scope, Very Hard at Significant and Major — and its Major-scope ceiling cannot be moved by Sparks. Your original domain is unchanged; the prismatic territory is a wider practice built on everything it taught you. A character masters one prismatic territory — Ascendant Domain is taken once, however many Facet trees they eventually climb (Chapter II.3).
+*Requires an existing Soul domain (Spiritual Domain).* Your practice has outgrown a single territory. Choose one prismatic domain from the Domains of the Soul list (Chapter II.3). You may work within it using the Domain + Intent + Scope framework, rolling Spirit. The Broad difficulty table applies — Hard at Minor scope, Very Hard at Significant and Major — and reach-Sparks cannot move a Broad working's difficulty, though dice-Sparks work normally (Chapter II.3, *Sparks and Magic*). Your original domain is unchanged; the prismatic territory is a wider practice built on everything it taught you. A character masters one prismatic territory — Ascendant Domain is taken once, however many Facet trees they eventually climb (Chapter II.3).
 
 **Normal:** Domains are Focused or Standard; prismatic territories are not otherwise available (see Table II.3–2).
 

@@ -448,6 +448,64 @@ class TestCastHandlerUnaffectedByDifficultyStep:
             assert "technique_step" not in msg
 
 
+class TestCastSparkNotBurnedOnRefusedUse:
+    """T2.2 (D8): a Spark buys reach in exactly two cases. A refused reach
+    attempt must not consume the Spark — the handler previously spent it
+    before the engine could reject the use."""
+
+    def _mage(self, session_id, domain="inscription", technique_active=True):
+        char = session_store.get(session_id).characters["Zahna"]
+        char.magic_domain = domain
+        char.magic_technique_active = technique_active
+        char.sparks = 3
+        return char
+
+    def test_refused_reach_spark_is_not_spent(self, client, session_with_character):
+        """Storm is a Standard domain — ease_focused_major is ineligible;
+        the cast errors and the Spark stays."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = self._mage(session_id, domain="storm")
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            ws.send_json({
+                "type": "cast", "domain_id": "storm", "scope": "major",
+                "intent": "test", "spark_use": "ease_focused_major",
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert char.sparks == 3
+
+    def test_retired_push_scope_is_refused_and_not_spent(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = self._mage(session_id)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            ws.send_json({
+                "type": "cast", "domain_id": "inscription", "scope": "minor",
+                "intent": "test", "spark_use": "push_scope",
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert char.sparks == 3
+
+    def test_dice_spark_still_spent_on_successful_cast(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = self._mage(session_id)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            ws.send_json({
+                "type": "cast", "domain_id": "inscription", "scope": "minor",
+                "intent": "test", "spark_use": "improve_roll",
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "cast_result"
+        assert char.sparks == 2
+        assert msg["sparks_remaining"] == 2
+
+
 # ---------------------------------------------------------------------------
 # Spark earn (MM-only)
 # ---------------------------------------------------------------------------

@@ -750,15 +750,6 @@ class SparkEaseFocusedMajorDef(BaseModel):
     scope: str = "major"
 
 
-class SparkPushScopeDef(BaseModel):
-    """Spend a Spark to attempt an effect one scope tier beyond the domain's
-    natural ceiling, at that higher difficulty. Broad (Prismatic) domains
-    cannot be pushed beyond their ceiling through Sparks or any other means
-    (II.3, Sparks and Magic)."""
-
-    refused_domain_type: str = "broad"
-
-
 class SparkPreTechniquePushDef(BaseModel):
     """D8: a pre-Technique caster (capped at Minor scope) may spend a Spark
     to attempt one effect at `permitted_scope`, at the domain's *normal*
@@ -770,10 +761,15 @@ class SparkPreTechniquePushDef(BaseModel):
 
 
 class MagicSparkRulesDef(BaseModel):
-    """The three Spark-magic rules (II.3, Sparks and Magic)."""
+    """The two Spark-reach rules (II.3, Sparks and Magic; T2.2/D8). A Spark
+    buys reach in exactly two cases — pre-Technique, one Significant-scope
+    attempt; Focused domains, one difficulty step off a Major working.
+    Reach-Sparks cannot move a Broad working's difficulty; dice-Sparks work
+    normally (that is the engine's improve_roll path, not a rule here).
+    The retired push_scope rule (P-1) referenced a scope tier beyond Major
+    that does not exist."""
 
     ease_focused_major: SparkEaseFocusedMajorDef = Field(default_factory=SparkEaseFocusedMajorDef)
-    push_scope: SparkPushScopeDef = Field(default_factory=SparkPushScopeDef)
     pre_technique_push: SparkPreTechniquePushDef = Field(default_factory=SparkPreTechniquePushDef)
 
 
@@ -789,7 +785,7 @@ class MagicDef(BaseModel):
                                           Default 0 (scope restriction alone is the penalty).
         soul_domains: Domains available to Soul Facet characters.
         mind_domains: Domains available to Mind Facet characters.
-        spark_rules: The three Spark-magic rules (ease Major, push scope,
+        spark_rules: The two Spark-reach rules (Focused Major ease,
                      D8's pre-Technique push).
     """
 

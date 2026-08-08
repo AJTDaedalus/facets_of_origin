@@ -179,6 +179,53 @@ anything unexpected.
   software/facets` → 2 hits, both reset-consistent. Docs suite 32 passed;
   `TestSparkSessionReset` 3 passed. `python -m tools.build_index` → no diff.
 
+### T2.2 — Magic-Spark fold + ceiling rewrite (P-1, P-9, P-3, D8) (2026-08-08)
+
+- **Files:** `player_handbook/II.3_Magic.md`, `player_handbook/III.1_Core_Resolution.md`
+  (unlisted but DESIGN-mandated: §3.1 makes III.1 the canonical home; II.3 restates),
+  `player_handbook/Glossary.md` (Spark, Domain Type, Ascendant Domain),
+  `player_handbook/II.4b`/`II.4c` (Ascendant Domain entries — "ceiling cannot be
+  moved by Sparks"), `player_handbook/Appendix_Magic_Domains.md` (§Prismatic
+  preamble), `mm_manual/MM5_Quick_Reference.md` (magic card recompressed),
+  `mm_manual/MM2_Session_Design.md` ("Check the ceiling" MM Note — said
+  Significant is flatly unavailable pre-Technique, omitting the D8 Spark
+  purchase), `software/app/game/engine.py`, `software/app/facets/schema.py`,
+  `software/facets/base/facet.yaml`, `software/app/api/websocket.py`,
+  `software/app/static/index.html`, tests, `player_handbook/Index.md` (regen).
+- **Did (text):** II.3 §Sparks and Magic folded to the two rules of DESIGN §3.1
+  (dice + reach); the un-executable "Pushing scope" paragraph deleted; ceiling
+  sentences at II.3:99/:184 and the §Broad blurb rewritten to "Reach-Sparks
+  cannot move a Broad working's difficulty; dice-Sparks work normally." III.1
+  §Spending Sparks gains the canonical "works on any roll, including every
+  magic roll" + two-case reach pointer.
+- **Did (engine, TDD):** engine DOES model Spark-reach — `resolve_magic_roll`
+  had `push_scope`/`ease_focused_major`/`pre_technique_push`. Red first (10
+  failed): push_scope now rejected for every domain type; unknown spark_use
+  rejected; ineligible ease (Standard/Broad) raises instead of silently
+  no-opping; new eligibility functions `can_spark_ease_major` +
+  `can_spark_pre_technique_reach` exported for app-side enforcement.
+  `SparkPushScopeDef` removed from schema + yaml. Websocket `cast` reordered:
+  Spark availability checked pre-resolve, SPENT only post-accept (old order
+  burned a Spark on a refused reach). index.html loses the Push Scope radio.
+- **Tests updated with reasons:** `test_standard_domain_cannot_ease_major`
+  (no-op → raises: silent no-op still cost the Spark at the handler);
+  `test_d8_push_does_not_permit_major_scope` (new refusal message);
+  `test_sparks_cannot_push_scope_on_a_prismatic_domain` → renamed
+  `test_reach_sparks_cannot_move_a_prismatic_working` (covers retired push,
+  refused ease, legal dice-Spark). `TestPushScopeResolution` (3 tests of the
+  dead rule) replaced by `TestPushScopeRetired` (4). New:
+  `TestSparkReachEligibility` (4), `TestCastSparkNotBurnedOnRefusedUse` (3).
+- **Unexpected:** first websocket test draft assumed Zahna's Inscription was
+  Standard-type; it is Focused (facet.yaml) — test switched to Storm.
+- **Register:** `Pushing scope`; `natural ceiling`; `pushed beyond Very Hard
+  under any circumstances`; `Their ceiling is their ceiling` (all verified
+  present pre-edit, absent post-edit).
+- **Commands:** red run → 10 failed as intended; post-implementation
+  `test_roll_engine + test_ascendant_domain + test_websocket + test_character`
+  → 449 passed. Docs suite 32 passed after `python -m tools.build_index`
+  (III.1/II.3 wording feeds index terms). FULL suite → **1405 passed** (308s;
+  baseline 1395: +13 new, −3 dead-rule tests).
+
 ---
 
 ## Escalations

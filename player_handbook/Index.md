@@ -105,7 +105,6 @@
 
 *Defined in [II.4](II.4_Character_Creation_Facets.md).*
 
-- [Appendix Magic Domains — Prismatic Soul Domains](Appendix_Magic_Domains.md#prismatic-soul-domains)
 - [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
 - [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
 - [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
@@ -717,7 +716,6 @@
 *Defined in [II.3](II.3_Magic.md).*
 
 - [Appendix Magic Domains — Appendix: Magic Domain Catalog](Appendix_Magic_Domains.md#appendix-magic-domain-catalog)
-- [Appendix Magic Domains — Prismatic Soul Domains](Appendix_Magic_Domains.md#prismatic-soul-domains)
 - [Appendix Magic Domains — Core Mind Domains](Appendix_Magic_Domains.md#core-mind-domains)
 - [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
@@ -819,8 +817,6 @@
 
 ## Spark
 
-*Defined in [III.1](III.1_Core_Resolution.md).*
-
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [II.2 — How Attributes Work in Play](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play)
 - [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Attributes.md#in-play-the-vanishing-of-millhaven)
@@ -831,6 +827,7 @@
 - [II.4a — Iron Branch](II.4a_Character_Creation_Facet_Body.md#iron-branch)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 - [III.1 — Sparks](III.1_Core_Resolution.md#sparks)
+- [III.1 — Spending Sparks](III.1_Core_Resolution.md#spending-sparks)
 - [III.3 — Press](III.3_Combat.md#press)
 - [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
 - [III.3 — Your Five Numbers On Screen](III.3_Combat.md#your-five-numbers-on-screen)
@@ -917,7 +914,6 @@
 
 *Defined in [II.4](II.4_Character_Creation_Facets.md).*
 
-- [Appendix Magic Domains — Prismatic Soul Domains](Appendix_Magic_Domains.md#prismatic-soul-domains)
 - [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [II.3 — Sparks and Magic](II.3_Magic.md#sparks-and-magic)
@@ -962,7 +958,6 @@
 
 *Defined in [II.4](II.4_Character_Creation_Facets.md).*
 
-- [Appendix Magic Domains — Prismatic Soul Domains](Appendix_Magic_Domains.md#prismatic-soul-domains)
 - [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
 - [II.3 — Sparks and Magic](II.3_Magic.md#sparks-and-magic)
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)

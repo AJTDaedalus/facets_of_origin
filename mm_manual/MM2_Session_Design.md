@@ -439,7 +439,7 @@ The second call is the more common one at real tables, because players routinely
 
 > **MM Note — Check the ceiling before you price the roll**
 >
-> A character whose Background granted a domain but who has not yet unlocked the corresponding Facet Technique is limited to **Minor scope, full stop** (see II.3, *Acquiring a Domain*). This is not a difficulty question — a Significant working is not hard for them, it is unavailable. If a new player declares something Significant, the correct response is to tell them what their magic can do right now and let them re-aim, not to set a punishing number.
+> A character whose Background granted a domain but who has not yet unlocked the corresponding Facet Technique is limited to **Minor scope** — with one exception: a Spark buys one Significant-scope attempt at the domain's normal difficulty (see II.3, *Sparks and Magic*). Beyond that, this is not a difficulty question — a Significant working is not hard for them, it is unavailable. If a new player declares something Significant without the Spark, the correct response is to tell them what their magic can do right now and let them re-aim, not to set a punishing number.
 
 ### Domain Boundary Calls
 

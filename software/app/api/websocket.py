@@ -1189,11 +1189,13 @@ async def _handle_cast(
         await manager.send_to(websocket, {"type": "error", "message": f"Invalid scope '{scope}'."})
         return
 
-    # Spend Spark if needed
-    if spark_use in ("improve_roll", "ease_focused_major", "push_scope", "pre_technique_push"):
-        if not character.spend_spark():
-            await manager.send_to(websocket, {"type": "error", "message": "No Sparks remaining."})
-            return
+    # A declared Spark use needs a Spark available — but the Spark is only
+    # spent AFTER the engine accepts the use (T2.2/D8: a refused reach attempt
+    # must not consume the Spark; the old order burned it before rejection).
+    spark_declared = spark_use in ("improve_roll", "ease_focused_major", "pre_technique_push")
+    if spark_declared and character.sparks <= 0:
+        await manager.send_to(websocket, {"type": "error", "message": "No Sparks remaining."})
+        return
 
     try:
         result = resolve_magic_roll(
@@ -1207,6 +1209,9 @@ async def _handle_cast(
     except ValueError as e:
         await manager.send_to(websocket, {"type": "error", "message": str(e)})
         return
+
+    if spark_declared:
+        character.spend_spark()
 
     result_dict = roll_result_to_dict(result)
     session.record_roll(player_name, result_dict)

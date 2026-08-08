@@ -225,6 +225,38 @@ def resolve_saving_throw(
 # Magic roll resolution
 # ---------------------------------------------------------------------------
 
+# The only Spark uses a magic roll recognises (II.3, Sparks and Magic; T2.2/D8):
+# the dice rule, plus the exactly-two reach cases. "push_scope" was retired with
+# the un-executable "one scope tier beyond Major" rule (P-1).
+_VALID_SPARK_USES = frozenset({"improve_roll", "ease_focused_major", "pre_technique_push"})
+
+
+def can_spark_ease_major(domain_type: str, scope: str, ruleset: MergedRuleset) -> bool:
+    """Reach case 2 (II.3): a Focused domain may spend a Spark to shift a Major
+    working one difficulty step easier. Reach-Sparks cannot move any other
+    working — Broad (Prismatic) included; dice-Sparks work normally there."""
+    if not ruleset.magic:
+        return False
+    rule = ruleset.magic.spark_rules.ease_focused_major
+    return domain_type == rule.domain_type and scope == rule.scope
+
+
+def can_spark_pre_technique_reach(
+    character: "Character",  # type: ignore[name-defined]
+    scope: str,
+    ruleset: MergedRuleset,
+) -> bool:
+    """Reach case 1 (II.3, D8): a pre-Technique caster may spend a Spark to
+    attempt ONE Significant-scope effect at the domain's normal difficulty —
+    the Spark buys the scope, not a discount on the roll."""
+    if not ruleset.magic:
+        return False
+    return (
+        not character.magic_technique_active
+        and scope == ruleset.magic.spark_rules.pre_technique_push.permitted_scope
+    )
+
+
 def resolve_magic_roll(
     character: "Character",  # type: ignore[name-defined]
     domain_id: str,
@@ -241,12 +273,28 @@ def resolve_magic_roll(
         scope: "minor" | "significant" | "major".
         intent: Free-text description of what the magic does (logged only).
         ruleset: The session's merged ruleset.
-        spark_use: Optional Spark use: "improve_roll" | "push_scope" |
-                   "ease_focused_major" (focused domains only).
+        spark_use: Optional Spark use: "improve_roll" (the dice rule) |
+                   "ease_focused_major" (reach: Focused Major only) |
+                   "pre_technique_push" (reach: pre-Technique Significant only).
+                   Any other value — including the retired "push_scope" —
+                   raises ValueError so the handler never wastes a Spark on it.
 
     Returns:
         A RollResult with difficulty and modifiers resolved from domain + scope.
+
+    Raises:
+        ValueError: On an unknown spark_use, an ineligible reach attempt
+            (reach-Sparks cannot move a Broad working's difficulty), or a
+            pre-Technique cast beyond the permitted scope.
     """
+    if spark_use is not None and spark_use not in _VALID_SPARK_USES:
+        raise ValueError(
+            f"Unknown Spark use '{spark_use}'. A Spark improves the dice on any "
+            "roll, or buys reach in exactly two cases: a pre-Technique "
+            "Significant-scope attempt, or easing a Focused domain's Major "
+            "working one step (II.3, Sparks and Magic)."
+        )
+
     if not ruleset.magic:
         # No magic rules loaded — fall back to Standard difficulty
         return resolve_roll(
@@ -288,8 +336,13 @@ def resolve_magic_roll(
     # penalty is applied below, and no extra dice are added).
     pre_technique_push = (
         spark_use == "pre_technique_push"
-        and scope == ruleset.magic.spark_rules.pre_technique_push.permitted_scope
+        and can_spark_pre_technique_reach(character, scope, ruleset)
     )
+    if spark_use == "pre_technique_push" and not pre_technique_push:
+        raise ValueError(
+            "A reach-Spark cannot buy that: pre-Technique, a Spark buys one "
+            "Significant-scope attempt only (II.3, Reaching Significant Early)."
+        )
 
     # Pre-Technique restriction: scope ceiling and difficulty penalty
     if not character.magic_technique_active and not pre_technique_push:
@@ -303,23 +356,17 @@ def resolve_magic_roll(
         for _ in range(penalty_steps):
             difficulty_label = _step_difficulty_harder(difficulty_label, ruleset)
 
-    # Spark use — all three rules read from ruleset.magic.spark_rules, not
-    # hardcoded domain-type/scope literals.
+    # Spark use — the dice rule plus reach case 2, both read from
+    # ruleset.magic.spark_rules, not hardcoded domain-type/scope literals.
     sparks_spent = 0
-    ease_rule = ruleset.magic.spark_rules.ease_focused_major
-    push_rule = ruleset.magic.spark_rules.push_scope
-    if (spark_use == "ease_focused_major"
-            and domain_def.type == ease_rule.domain_type
-            and scope == ease_rule.scope):
-        difficulty_label = _step_difficulty_easier(difficulty_label, ruleset)
-    elif spark_use == "push_scope":
-        if domain_def.type == push_rule.refused_domain_type:
+    if spark_use == "ease_focused_major":
+        if not can_spark_ease_major(domain_def.type, scope, ruleset):
             raise ValueError(
-                "Broad (Prismatic) domains cannot be pushed beyond their scope ceiling — "
-                "Very Hard is the maximum regardless of Sparks."
+                "A reach-Spark cannot move this working's difficulty: only a "
+                "Focused domain's Major working can be eased one step (II.3). "
+                "Dice-Sparks work normally on any roll."
             )
-        # Push scope one step higher: difficulty steps harder to reflect the ambition
-        difficulty_label = _step_difficulty_harder(difficulty_label, ruleset)
+        difficulty_label = _step_difficulty_easier(difficulty_label, ruleset)
     elif spark_use == "improve_roll":
         sparks_spent = 1  # consumed by caller; here we model the dice bonus
     # pre_technique_push needs no further action here: the scope ceiling was
@@ -337,9 +384,10 @@ def resolve_magic_roll(
 
     # No Broad ceiling clamp is needed here: Very Hard is the top of the
     # difficulty ladder and `_step_difficulty_harder` already saturates there,
-    # while `push_scope` is refused outright above. Assigning "Very Hard" would
-    # not enforce a ceiling — it would *raise* a Minor-scope Broad cast from its
-    # canonical Hard (II.4b/II.4c: "Hard at Minor scope").
+    # while every reach-Spark on a Broad working is refused outright above.
+    # Assigning "Very Hard" would not enforce a ceiling — it would *raise* a
+    # Minor-scope Broad cast from its canonical Hard (II.4b/II.4c: "Hard at
+    # Minor scope").
 
     # Attribute for roll: tradition determines attribute
     tradition = domain_def.tradition

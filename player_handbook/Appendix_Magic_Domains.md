@@ -143,7 +143,7 @@ The ebb and flow of natural energy between living things — vitality passing fr
 
 ### Prismatic Soul Domains
 
-Prismatic domains require the **Ascendant Domain** Technique (Tier 3, Communion branch) to access. They represent the broadest magical territories available — commanding them at all requires a practitioner whose understanding spans multiple thematic spaces rather than a single focused one. All Prismatic domains are Broad type: Hard at Minor scope, Very Hard at Significant, and Very Hard at Major with no exceptions and no ceiling movement through Sparks.
+Prismatic domains require the **Ascendant Domain** Technique (Tier 3, Communion branch) to access. They represent the broadest magical territories available — commanding them at all requires a practitioner whose understanding spans multiple thematic spaces rather than a single focused one. All Prismatic domains are Broad type: Hard at Minor scope, Very Hard at Significant, and Very Hard at Major — reach-Sparks cannot move a Broad working's difficulty, though dice-Sparks work normally (Chapter II.3, *Sparks and Magic*).
 
 ---
 

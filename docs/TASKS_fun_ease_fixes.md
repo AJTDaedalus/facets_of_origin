@@ -122,7 +122,7 @@ listed greps return the expected result; LOG updated.
   Accept: `grep -rn "unspent Spark" player_handbook mm_manual software/facets`
   returns only reset-consistent text; lifecycle test green.
 
-- [ ] **T2.2 — Magic-Spark fold + ceiling rewrite (P-1, P-9, P-3, D8).**
+- [x] **T2.2 — Magic-Spark fold + ceiling rewrite (P-1, P-9, P-3, D8).**
   Files: `player_handbook/II.3_Magic.md` (delete "Pushing scope" ~line 178; rewrite
   §Sparks and Magic to the two rules of DESIGN §3.1; rewrite the ceiling sentences
   at ~99 and ~184 to "Reach-Sparks cannot move a Broad working's difficulty;

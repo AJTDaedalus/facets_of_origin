@@ -105,7 +105,9 @@ Sparks are awarded for moments that make the table sit up. They can be awarded a
 
 ### Spending Sparks
 
-Before you roll, you may spend one or more Sparks. Each Spark **adds a d6** to your roll; you then **drop an equal number of lowest dice**. The base remains 2d6 — Sparks shift the odds by replacing your worst potential outcomes.
+Before you roll, you may spend one or more Sparks. Each Spark **adds a d6** to your roll; you then **drop an equal number of lowest dice**. The base remains 2d6 — Sparks shift the odds by replacing your worst potential outcomes. This works on any roll, including every magic roll.
+
+In magic only, a Spark can also buy **reach**, in exactly two cases: before your Technique, one Significant-scope attempt; with a Focused domain, one difficulty step off a Major working. Chapter II.3 (*Sparks and Magic*) has both.
 
 > **Example — spending Sparks**
 >

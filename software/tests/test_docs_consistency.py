@@ -1061,6 +1061,10 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("end a session with 2-4 unspent Sparks", "C-2/D1: Sparks reset to 3 each session; the target is spend-what-you-earn (hyphen variant, facet.yaml)"),
     ("end a session with **2–4 unspent Sparks**", "C-2/D1: Sparks reset to 3 each session; the target is spend-what-you-earn (en-dash+bold variant, MM2)"),
     ("end a session with 2–4 unspent Sparks", "C-2/D1: Sparks reset to 3 each session; the target is spend-what-you-earn (en-dash variant)"),
+    ("Pushing scope", "P-1: un-executable rule deleted — no scope tier exists beyond Major"),
+    ("natural ceiling", "P-1: the 'one tier beyond the natural ceiling' framing died with Pushing scope"),
+    ("pushed beyond Very Hard under any circumstances", "P-3/D8: rewritten as 'Reach-Sparks cannot move a Broad working's difficulty; dice-Sparks work normally'"),
+    ("Their ceiling is their ceiling", "P-3/D8: the misreadable 'Sparks don't work here' framing died; dice-Sparks are legal on Broad rolls"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment

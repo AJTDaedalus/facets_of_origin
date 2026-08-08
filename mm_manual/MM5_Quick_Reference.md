@@ -253,17 +253,17 @@ A charge is consumed only when armor provides the reduction actually applied —
 | Major | Hard | Very Hard | Very Hard (ceiling) |
 
 - **Pre-technique:** Minor scope only, at the domain's normal difficulty (no extra penalty — the scope restriction *is* the limitation)
-- **Sparks and scope** — three rules, all optional, all player-declared before the roll:
+- **Sparks and magic** — dice-Sparks work on any roll, including every magic roll. A Spark buys **reach** in exactly two cases, player-declared before the roll:
+  - **Pre-Technique Significant:** a pre-Technique caster may spend a Spark to attempt **one** Significant-scope effect at the domain's normal Significant difficulty. One effect per Spark — not an unlock; Major stays closed until the Tier 1 Technique.
   - **Focused eases Major:** a Focused domain may spend a Spark to shift a Major effect one step easier (Hard → Standard). Focused only.
-  - **Prismatic ceiling is unmovable:** no Spark eases Major for a Broad domain. Very Hard is Very Hard.
-  - **Pre-technique push:** a pre-technique caster may spend a Spark to attempt **one** Significant-scope effect at the domain's normal Significant difficulty. One effect per Spark — not an unlock; Major stays closed until the Tier 1 Technique.
+  - **Prismatic:** reach-Sparks cannot move a Broad working's difficulty; dice-Sparks work normally.
 - **Second domain** (Soul Communion Tier 3): a second **standard** domain only — prismatic territories require Ascendant Domain. Effects in the second domain are always one difficulty step harder than normal for that domain.
 
 ### Adjudicating Magic (compressed from MM2 — see MM2 for full text)
 
 - **Rule out loud, before the dice.** Say the scope, say the difficulty, then roll. A ruling delivered after the result sounds like an adjustment.
 - **Scope = scale of change + duration.** Nothing else. Not how impressive it looks, not how well it was described, not target count (a dozen torches lit at once is still Minor). "And it stays that way" moves the tier on duration alone — catch it before the roll. When you correct scope upward, name the new difficulty and *pause*; scaling the intent back down is the player's call.
-- **Check the ceiling before you price the roll.** A pre-technique caster is capped at **Minor, full stop** — that is an availability question, not a difficulty one. Tell them what their magic can do now and let them re-aim.
+- **Check the ceiling before you price the roll.** A pre-technique caster is capped at **Minor** — except that a Spark buys one Significant-scope attempt at normal difficulty. Beyond that it is an availability question, not a difficulty one. Tell them what their magic can do now and let them re-aim.
 - **Domain boundaries — lean toward yes.** The test is substance vs. rhyme: does it run through the domain's actual material, or only share its mood? Fire burning the breathable content out of the air = yes; fire commanding the weather = no. Shadow muffling sound = yes; shadow granting invisibility = no. Don't surcharge a creative stretch — if the reach is more ambitious, that shows up as scope. A "no" is a **"No, but..."**. A "yes" is precedent — you are setting it permanently.
 - **7–9: the magic worked.** Confirm the success in the fiction *first*; the complication is added to a success, never a discount on one. Then pick one: **affects more than intended** / **costs something unexpected** / **creates a consequence nobody planned**. Mine the player's stated intent for the specifics. Rotate categories — four costs in a row and 7–9 becomes a flat fee. Test: does the table now have something to *do*?
 - **Active opposition = Standard floor.** A floor, not a surcharge. It only ever moves the **Easy** cell (Focused domain, Minor scope); every other combination already meets it, so raising a Hard roll "because combat" applies it twice. Opposition = something with its own will resisting *this working, right now* — a sealed door is difficulty, the rival holding it shut is opposition. Specific circumstances (distracted, wounded, constrained) may still adjust; "it is a battle" is not a circumstance.

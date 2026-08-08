@@ -9,7 +9,7 @@ the full rule, follow the pointer.
 
 **Armor** — A per-scene downgrade budget: light armor softens the first 2 incoming Conditions by one tier each, heavy armor the first 4. The budget resets only at the end of the scene. *(Chapter III.3)*
 
-**Ascendant Domain** — A Tier 3 Technique that grants a Broad (Prismatic) domain built on an existing Mind or Soul domain. It uses the Broad difficulty table, and its Major-scope ceiling cannot be moved by Sparks. *(Chapters II.4b, II.4c)*
+**Ascendant Domain** — A Tier 3 Technique that grants a Broad (Prismatic) domain built on an existing Mind or Soul domain. It uses the Broad difficulty table; reach-Sparks cannot move its workings' difficulty, though dice-Sparks work normally. *(Chapters II.4b, II.4c)*
 
 **Attribute (Major/Minor)** — A character's fundamental capabilities. Major Attributes (Body, Mind, Soul) ground saving throws and broad, undefined situations, and are derived from their three Minor Attributes; Minor Attributes are rated 1–3 and used for most active rolls. *(Chapter II.2)*
 
@@ -35,7 +35,7 @@ the full rule, follow the pointer.
 
 **Domain** — A character's licensed magical territory — the thematic and physical scope their magic covers, agreed at character creation and defined by what it includes and what it does not. *(Chapter II.3)*
 
-**Domain Type (Focused/Standard/Broad-Prismatic)** — How wide a domain's territory is. Focused domains cover one narrow element with the highest reliability; Standard domains cover a coherent thematic territory; Broad (Prismatic) domains span multiple territories but can never exceed Very Hard difficulty, even with Sparks. *(Chapter II.3)*
+**Domain Type (Focused/Standard/Broad-Prismatic)** — How wide a domain's territory is. Focused domains cover one narrow element with the highest reliability; Standard domains cover a coherent thematic territory; Broad (Prismatic) domains span multiple territories at the steepest difficulties — reach-Sparks cannot move a Broad working's difficulty, though dice-Sparks work normally. *(Chapter II.3)*
 
 **Encounter Budget** — The TR-based framework for gauging encounter difficulty by Party Strength. Simulation shows actor count — the number of Named/Boss enemies acting at once, not total TR — is what actually drives difficulty, so the Encounter Recipe Table, not the TR budget, is the tool to build from. *(MM1)*
 
@@ -105,7 +105,7 @@ the full rule, follow the pointer.
 
 **Skill Point** — One of 4 points a character has to distribute among skills they actually used during a session; each point spent adds one mark toward the skill's next rank, and unspent points do not carry over. *(Chapter II.4)*
 
-**Spark** — A narrative resource earned for remarkable moments and spent before a roll to add a d6, dropping the lowest die. Sparks do not carry over; every character starts every session with 3. *(Chapter III.1)*
+**Spark** — A narrative resource earned for remarkable moments and spent before a roll to add a d6, dropping the lowest die — any roll, including every magic roll. In magic only, a Spark can instead buy reach in exactly two cases: a pre-Technique Significant-scope attempt, or easing a Focused domain's Major working one step. Sparks do not carry over; every character starts every session with 3. *(Chapters III.1, II.3)*
 
 **Specialty** — A narrow, specific area of fictional expertise granted by a Background — not a second skill, but a fact about a character's history that turns a Standard roll Easy when it directly applies. *(Chapter II.5)*
 
