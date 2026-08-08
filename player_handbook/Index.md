@@ -59,6 +59,7 @@
 - [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
 - [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
+- [MM1 — Named NPCs](../mm_manual/MM1_Encounters_and_Enemies.md#named-npcs)
 - [MM5 — Attribute Ratings](../mm_manual/MM5_Quick_Reference.md#attribute-ratings)
 
 ## Background
@@ -800,6 +801,7 @@
 - [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
+- [MM1 — Named NPCs](../mm_manual/MM1_Encounters_and_Enemies.md#named-npcs)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM5 — Skill Ranks](../mm_manual/MM5_Quick_Reference.md#skill-ranks)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)

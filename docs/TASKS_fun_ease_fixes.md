@@ -68,7 +68,7 @@ listed greps return the expected result; LOG updated.
   Accept: `grep -n "Parr" player_handbook/III.3_Combat.md` shows only PC-side
   reaction text (Dodge/Parry as PC actions, vignette lines, reaction tables).
 
-- [ ] **T1.2 — MM1 stale Parry + Defense-line claim (K-1, K-11 prep).**
+- [x] **T1.2 — MM1 stale Parry + Defense-line claim (K-1, K-11 prep).**
   Files: `mm_manual/MM1_Encounters_and_Enemies.md` (line ~315 `.fof` example; the
   minimal stat block's Defense line).
   Do: delete `# same roll for Parry`; rewrite the Defense line to stop claiming it

@@ -76,6 +76,26 @@ anything unexpected.
   Full suite → 1394 passed.
 - **Unexpected:** none.
 
+### T1.2 — MM1 stale Parry + Defense-line claim (K-1, K-11 prep) (2026-08-08)
+
+- **Files:** `mm_manual/MM1_Encounters_and_Enemies.md`, `player_handbook/Index.md`
+  (regenerated), `software/tests/test_docs_consistency.py` (register).
+- **Did:** `.fof` example — `# same roll for Parry` → `# authoring input — NPCs
+  don't roll (Chapter III.3)`. Minimal stat block Defense line — dropped the
+  false "feeds the TR formula and" claim (field removal itself is T3.7).
+  Sweep hits fixed in the same pass: `Attack: [roll modifier]` and
+  `Defense: [roll modifier]` → `[modifier]` (template); "the enemy's attack
+  roll modifier" (§Calculating TR) and "best offensive roll modifier" (§Named
+  NPCs build list) rewritten as authoring-input phrasing. Line 229's Defense
+  bullet already reads no-roll and keeps its (true) difficulty claim until
+  T3.7. Register: `same roll for Parry`; `feeds the TR formula`.
+- **Commands:** `grep -rn "same roll for Parry|feeds the TR formula|roll
+  modifier" mm_manual/` → empty. `python -m tools.build_index` (index terms
+  shifted with the reworded lines). `pytest tests/test_docs_consistency.py -q`
+  → 32 passed. Full suite → 1395 passed.
+- **Unexpected:** Index regeneration needed for an MM1-only wording change —
+  the index harvests both books, worth remembering for later WS-1 tasks.
+
 ---
 
 ## Escalations

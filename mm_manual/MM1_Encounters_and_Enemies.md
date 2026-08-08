@@ -28,8 +28,8 @@ Enemy stat blocks are intentionally minimal. You do not need everything a player
 Name/Type
 Tier: Mook | Named | Boss
 Resolve: [number]  — the durability pool Strikes deplete; Named 3–4, Boss ~8; Mooks have none
-Attack: [roll modifier]  — e.g. +2 (Strength +1, Combat Practiced +1)
-Defense: [roll modifier] — an authoring input, not a rolled modifier (NPCs don't roll, Chapter III.3): feeds the TR formula and informs the difficulty you set for PC Strikes and for PC reactions against this enemy's attacks (both Chapter III.3)
+Attack: [modifier]  — e.g. +2 (Strength +1, Combat Practiced +1)
+Defense: [modifier] — an authoring input, not a rolled modifier (NPCs don't roll, Chapter III.3): informs the difficulty you set for PC Strikes and for PC reactions against this enemy's attacks (both Chapter III.3)
 Armor: None | Light | Heavy  — adds a flat bonus to Resolve (light +1, heavy +2)
 Techniques: [list, if any]
 Special: [phase changes, triggers, or narrative rules — Boss only]
@@ -88,7 +88,7 @@ TR: 17
 TR = offense + durability + armor_bonus + technique_bonus
 ```
 
-**Offense** — the enemy's attack roll modifier (attribute + skill):
+**Offense** — the enemy's attack modifier (attribute + skill, an authoring input — NPCs don't roll):
 
 **Table MM1–1: Offense Value by Attack Modifier**
 
@@ -225,7 +225,7 @@ Named NPCs use the full exchange structure. Build them the same way you'd build 
 
 **The short list you actually need:**
 - Resolve (3–4 for a Named NPC; armor adds to it)
-- Attack modifier (best offensive roll modifier)
+- Attack modifier (the best offensive attribute-plus-skill pairing, as an authoring input)
 - Defense modifier (an authoring input — NPCs don't roll; it informs the difficulty of PC Strikes and PC reactions against this enemy, Chapter III.3)
 - Armor
 - One or two Techniques if they should feel distinct
@@ -312,7 +312,7 @@ enemy:
   tier: named
   resolve: 3              # base durability pool; armor adds to it in play
   attack_modifier: 2      # Strength +1, Combat Practiced +1
-  defense_modifier: 2     # same roll for Parry
+  defense_modifier: 2     # authoring input — NPCs don't roll (Chapter III.3)
   armor: light
   techniques: []
   special: null

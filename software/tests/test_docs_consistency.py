@@ -1052,6 +1052,8 @@ def test_second_domain_wording_does_not_anchor_on_primary_domain() -> None:
 RETIRED_PHRASES: list[tuple[str, str]] = [
     ("reactions, the works", "K-1: Named NPCs do not roll reactions"),
     ("they use for Strikes and Parries", "K-1: enemy attack modifier is an authoring input, not a rolled modifier"),
+    ("same roll for Parry", "K-1: enemies never roll Parry"),
+    ("feeds the TR formula", "K-11 prep: defense_modifier does not feed the TR formula"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment
