@@ -1066,6 +1066,7 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("pushed beyond Very Hard under any circumstances", "P-3/D8: rewritten as 'Reach-Sparks cannot move a Broad working's difficulty; dice-Sparks work normally'"),
     ("Their ceiling is their ceiling", "P-3/D8: the misreadable 'Sparks don't work here' framing died; dice-Sparks are legal on Broad rolls"),
     ("something the roll already carries", "C-3/D2: III.1's Technique trigger taxonomy moved to II.4 Reading the Entries; III.1 keeps the precedence paragraph + one-sentence pointer"),
+    ("before the player decides how to proceed", "C-7/D3: 7-9 is narration sequencing, not a decline-offer — the MM names the cost before narrating the success"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment

@@ -185,7 +185,7 @@ You get what you wanted, cleanly. The MM should not add hidden costs, surprise c
 
 ### Partial Success (7–9)
 
-You achieved something, but not cleanly. The MM must name the cost *before* the player decides how to proceed. Useful patterns:
+You achieved something, but not cleanly. The MM names the cost *before* narrating the success — the cost is part of the outcome, not an offer to weigh. Useful patterns:
 
 - *Social:* You get the agreement, but the source knows you wanted it badly
 - *Exploration:* You find what you sought, but something finds you in the process

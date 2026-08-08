@@ -468,7 +468,7 @@ If you notice the same boundary being renegotiated every session, that is not a 
 
 The complication is your call. It is also the single most improvisationally demanding thing magic asks of you, because it arrives without warning and the table is looking at you.
 
-Start from the fixed point: **on a 7-9 the magic worked.** Confirm that first, in the fiction, before anything else. The complication is something added to a success, never a discount applied to one. A player who hears their partial success narrated as a near-miss has been told the wrong thing.
+Start from the fixed point: **on a 7-9 the magic worked.** Name the cost as part of narrating that success (III.1: the cost comes before the success narration, as one package). The complication is something added to a success, never a discount applied to one. A player who hears their partial success narrated as a near-miss has been told the wrong thing.
 
 Then reach for one of three categories:
 

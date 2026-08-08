@@ -165,7 +165,7 @@ listed greps return the expected result; LOG updated.
   Do: "A group roll advances a Threat Clock at most once, keyed to the group's
   overall result."
 
-- [ ] **T2.6 — 7–9 narration sequencing (C-7, D3).**
+- [x] **T2.6 — 7–9 narration sequencing (C-7, D3).**
   Files: `player_handbook/III.1_Core_Resolution.md` (§Partial Success),
   `player_handbook/II.2_Character_Creation_Attributes.md` (duplicated outcome table
   / any restatement), `mm_manual/MM5_Quick_Reference.md`.

@@ -69,7 +69,7 @@ the full rule, follow the pointer.
 
 **Off-Balance** — A Tier 1 Condition: the character's next reaction costs 1 additional Endurance. *(Chapter III.3)*
 
-**Partial Success** — A roll total of 7–9: the character achieves something, but not cleanly — the MM must name the cost before the player decides how to proceed. *(Chapter III.1)*
+**Partial Success** — A roll total of 7–9: the character achieves something, but not cleanly — the MM names the cost before narrating the success; the cost is part of the outcome, not an offer to weigh. *(Chapter III.1)*
 
 **Party Strength** — The sum of all participating characters' Career Advances, used to size an encounter's difficulty band (Skirmish/Standard/Hard/Deadly) via the Encounter Recipe Table. *(MM1)*
 

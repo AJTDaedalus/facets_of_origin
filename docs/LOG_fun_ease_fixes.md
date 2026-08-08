@@ -307,6 +307,27 @@ anything unexpected.
   ("Rolls" capitalized mid-sentence) — reworded to "(Chapter III.1)".
 - **Commands:** `python -m tools.build_index`; docs suite → 32 passed.
 
+### T2.6 — 7–9 narration sequencing (C-7, D3) (2026-08-08)
+
+- **Files:** `player_handbook/III.1_Core_Resolution.md` (§Partial Success),
+  `player_handbook/Glossary.md` (Partial Success — carried the retired phrase
+  verbatim), `mm_manual/MM2_Session_Design.md` (magic 7–9 guidance),
+  `mm_manual/MM5_Quick_Reference.md` (magic 7–9 card),
+  `software/tests/test_docs_consistency.py`.
+- **Did:** III.1: "The MM must name the cost *before* the player decides how
+  to proceed" → "The MM names the cost *before* narrating the success — the
+  cost is part of the outcome, not an offer to weigh." Glossary mirrors it.
+  II.2's outcome table (II.2–3) restates only tier labels, no sequencing —
+  no change needed there.
+- **Unexpected touchpoints:** MM2:471 and MM5:268 (magic 7–9) instructed the
+  OPPOSITE order — "confirm the success in the fiction first, before anything
+  else." Their real point (a partial is a success, never a near-miss) is kept;
+  the ordering clause now matches III.1 (cost named as part of/before the
+  success narration).
+- **Register:** `before the player decides how to proceed`.
+- **Commands:** `grep -rn "decides how to proceed" player_handbook mm_manual`
+  → empty. `python -m tools.build_index` (no diff). Docs suite → 32 passed.
+
 ---
 
 ## Escalations
