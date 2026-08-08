@@ -328,6 +328,21 @@ anything unexpected.
 - **Commands:** `grep -rn "decides how to proceed" player_handbook mm_manual`
   → empty. `python -m tools.build_index` (no diff). Docs suite → 32 passed.
 
+### T2.7 — Fixed-pairs principle (C-9) (2026-08-08)
+
+- **Files:** `player_handbook/II.6_Character_Creation_Skills.md` (§Using
+  Skills).
+- **Did:** one sentence appended to the §Using Skills roll paragraph:
+  "Skill–attribute pairs are fixed except where a rule explicitly says
+  otherwise; the Strike (Chapter III.3) is the named exception."
+- **Verified agreement:** III.3 §Strike already frames its pairings as
+  "defaults, not restrictions" with the MM naming a different attribute where
+  the fiction supports it — exactly the licensed exception. QS Mordai's Strike
+  line (2d6 + Strength + Combat) is a plain valid pairing; no QS-4 wording
+  conflicts.
+- **Commands:** `python -m tools.build_index` (no diff); docs suite →
+  32 passed.
+
 ---
 
 ## Escalations

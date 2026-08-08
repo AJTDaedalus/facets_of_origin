@@ -173,7 +173,7 @@ listed greps return the expected result; LOG updated.
   decide-how-to-proceed implication everywhere it is mirrored.
   Register: `before the player decides how to proceed`.
 
-- [ ] **T2.7 — Fixed-pairs principle (C-9).**
+- [x] **T2.7 — Fixed-pairs principle (C-9).**
   Files: `player_handbook/II.6_Character_Creation_Skills.md` (§Using Skills).
   Do: one sentence; Strike named as the explicit exception; verify QS-4's Strike
   line and III.3 §Strike agree with the phrasing.
