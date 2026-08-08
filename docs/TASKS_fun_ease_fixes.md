@@ -57,7 +57,7 @@ listed greps return the expected result; LOG updated.
 
 ## WS-1 — Text integrity (branch `fix/text-integrity`)
 
-- [ ] **T1.1 — III.3 Named-NPC bullet (K-1).**
+- [x] **T1.1 — III.3 Named-NPC bullet (K-1).**
   Files: `player_handbook/III.3_Combat.md` (lines ~348–356).
   Do: "use the full combat structure: Resolve, Posture, reactions, the works" →
   "Resolve, Posture, Techniques"; "A primary attribute and skill — the modifier they

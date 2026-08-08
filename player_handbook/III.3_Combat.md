@@ -347,17 +347,17 @@ The MM narrates Mook combat efficiently. Mordai cutting through two guards on hi
 
 ### Named NPCs
 
-**Named NPCs and significant antagonists** use the full combat structure: Resolve, Posture, reactions, the works. They are opponents whose defeat means something and whose capabilities should be felt.
+**Named NPCs and significant antagonists** use the full combat structure: Resolve, Posture, Techniques. They are opponents whose defeat means something and whose capabilities should be felt.
 
 A Named NPC is defined by:
 - **Resolve** — the durability pool your Strikes deplete. A Named NPC starts with a Resolve of 3 or 4. Each Strike depletes it (2 on a full success, 1 on a partial); at 0, the NPC is defeated. There is no Condition track to grind down — Resolve *is* the fight's clock.
-- **A primary attribute and skill** — the modifier they use for Strikes and Parries
+- **An attack modifier** — an authoring input, usually built from a primary attribute and skill. The NPC never rolls it: when it attacks, the PCs roll reactions (see *Enemy Attacks*)
 - **Armor**, if any — armor raises Resolve by a flat amount (light +1, heavy +2), so an armored enemy simply takes longer to run down
 - **Techniques**, if the MM wants them to have specific capabilities
 
 A Named NPC can carry **rider Conditions** hung on it by a full-success Strike — a Tier 1 (Winded, Off-Balance, Shaken) or Tier 2 (Staggered, Cornered) Condition of the attacker's choice, with their usual effects (and a Tier 2 rider makes it Easy to Strike) — but riders never accumulate into Broken. An enemy leaves the fight when its Resolve is gone, not when its Conditions stack.
 
-Named NPCs do not need a full character sheet. A veteran soldier might be: Resolve 4, Strength +2, Combat Practiced (+1), Light armor. That is enough to run the full exchange structure against a party.
+Named NPCs do not need a full character sheet. A veteran soldier might be: Resolve 4, Attack +3 (Strength +2, Combat Practiced +1), Light armor. That is enough to run the full exchange structure against a party.
 
 ### Bosses and Climactic Antagonists
 

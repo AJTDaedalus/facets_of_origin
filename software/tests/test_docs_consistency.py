@@ -1049,7 +1049,10 @@ def test_second_domain_wording_does_not_anchor_on_primary_domain() -> None:
 # Historical archives (playtest/, docs/, research/simulation_log.md,
 # research/advancement_priority_questions.md) are excluded by construction:
 # they are simply not in the scanned paths below.
-RETIRED_PHRASES: list[tuple[str, str]] = []
+RETIRED_PHRASES: list[tuple[str, str]] = [
+    ("reactions, the works", "K-1: Named NPCs do not roll reactions"),
+    ("they use for Strikes and Parries", "K-1: enemy attack modifier is an authoring input, not a rolled modifier"),
+]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment
 # protocol's: books, data, and specs — not archives.

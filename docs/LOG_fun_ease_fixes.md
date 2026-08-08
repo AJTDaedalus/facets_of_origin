@@ -55,6 +55,27 @@ anything unexpected.
 - **Did:** WS/branch table from DESIGN §1, branch-consolidation deviation note,
   baseline record (1394 passed), empty escalation section.
 
+### T1.1 — III.3 Named-NPC bullet (K-1) (2026-08-08)
+
+- **Files:** `player_handbook/III.3_Combat.md`, `player_handbook/Index.md`
+  (regenerated), `software/tests/test_docs_consistency.py` (register).
+- **Did:** §Named NPCs — "Resolve, Posture, reactions, the works" → "Resolve,
+  Posture, Techniques"; the "primary attribute and skill … Strikes and Parries"
+  bullet rewritten as "**An attack modifier** — an authoring input … The NPC
+  never rolls it: when it attacks, the PCs roll reactions (see *Enemy
+  Attacks*)"; the veteran-soldier example line restated as "Attack +3
+  (Strength +2, Combat Practiced +1)" instead of a rollable attribute+skill
+  pair. Read the whole §Facing Mooks and Named Antagonists section — no other
+  enemy-rolls implication found (§Enemy Attacks already states NPCs never
+  roll). Register: `reactions, the works`; `they use for Strikes and Parries`.
+- **Commands:** `grep -n "Parr" player_handbook/III.3_Combat.md` → all
+  remaining hits are PC-side reaction rules, MM notes, vignette lines, and the
+  reaction table. `python -m tools.build_index` (Index lost the Named-NPCs
+  anchor under two index terms whose wording the bullet no longer carries —
+  legitimate regen). `pytest tests/test_docs_consistency.py -q` → 32 passed.
+  Full suite → 1394 passed.
+- **Unexpected:** none.
+
 ---
 
 ## Escalations
