@@ -343,6 +343,26 @@ anything unexpected.
 - **Commands:** `python -m tools.build_index` (no diff); docs suite →
   32 passed.
 
+### T2.8 — WS-2 sweep (2026-08-08)
+
+- **Register grep:** all 6 WS-2 phrases (+ the 3 T2.1 variants) absent from
+  every live surface; invariant test green. One grep hit — "unspent points do
+  not carry over" (Glossary, Skill Point) — is WS-4 T4.3's registered target
+  and still-live canon until banking lands; correctly untouched by WS-2.
+- **Glossary diff review (each entry reread against its body source):**
+  Spark ↔ III.1 §Sparks/§Spending Sparks + II.3 (dice + two reach cases +
+  reset) ✓; Domain Type ↔ II.3 §Broad + :99 ✓; Ascendant Domain ↔ II.4b/c
+  entries ✓; Specialty ↔ II.5 §Specialty (shared allowance) ✓; Technique ↔
+  II.4 box + III.1 precedence ✓; Partial Success ↔ III.1 §Partial Success
+  (narration sequencing) ✓.
+- **Regeneration:** `python -m tools.build_index` idempotent (no diff);
+  `python -m tools.build_bestiary --check` → "Bestiary is up to date."
+- **Straggler fix:** test_roll_engine.py section header still claimed
+  push_scope was "implemented, not dead code" — reworded to the T2.2 truth.
+- **Full suite:** **1417 passed** (311s). WS-2 complete: baseline 1395 →
+  1417 (+22 net: 3 Spark-reset, +11/−3 magic-Spark, +10 precedence, +2
+  live-play Specialty, −1 replaced ascendant test folded into a wider one).
+
 ---
 
 ## Escalations

@@ -178,7 +178,7 @@ listed greps return the expected result; LOG updated.
   Do: one sentence; Strike named as the explicit exception; verify QS-4's Strike
   line and III.3 §Strike agree with the phrasing.
 
-- [ ] **T2.8 — WS-2 sweep.** Register grep; Glossary diff review (every entry
+- [x] **T2.8 — WS-2 sweep.** Register grep; Glossary diff review (every entry
   touched this WS reread against its body-text source); regenerate; full suite.
 
 ## WS-3 — Combat mechanics (branch `feat/combat-open-and-tempo`)

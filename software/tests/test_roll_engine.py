@@ -512,7 +512,8 @@ class TestRequestResultFields:
 
 
 # ---------------------------------------------------------------------------
-# B3.5 — push_scope Spark use (implemented, not dead code)
+# Spark use on magic rolls (T2.2/D8: the dice rule + exactly two reach cases;
+# the retired push_scope use is rejected, never resolved)
 # ---------------------------------------------------------------------------
 
 def _make_magic_ruleset(domain_type: str, tradition: str = "intuitive") -> MagicMock:
