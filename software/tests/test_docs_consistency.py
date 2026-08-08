@@ -1037,3 +1037,64 @@ def test_second_domain_wording_does_not_anchor_on_primary_domain() -> None:
     assert not offenders, (
         f"stale 'harder than your primary domain' wording in: {offenders}"
     )
+
+
+# ---------------------------------------------------------------------------
+# Retired-phrase register (fun/ease pipeline — docs/TASKS_fun_ease_fixes.md T0.1)
+# ---------------------------------------------------------------------------
+
+# Every entry is (phrase, reason/finding-id). When a task in the fun/ease
+# pipeline removes or rewrites rule wording, the dead phrase is appended here
+# so the suite fails forever if it reappears anywhere in live rules surfaces.
+# Historical archives (playtest/, docs/, research/simulation_log.md,
+# research/advancement_priority_questions.md) are excluded by construction:
+# they are simply not in the scanned paths below.
+RETIRED_PHRASES: list[tuple[str, str]] = []
+
+# Live rules surfaces, relative to the repo root. Scope is the anti-fragment
+# protocol's: books, data, and specs — not archives.
+_RETIRED_SCAN_DIRS = [
+    "player_handbook",
+    "mm_manual",
+    "bestiary",
+    "facets",
+    "software/facets",
+    "enemies",
+    "characters",
+    "spec",
+]
+
+
+def _retired_scan_files() -> list[Path]:
+    """Every readable text file under the live rules surfaces."""
+    files: list[Path] = []
+    for rel in _RETIRED_SCAN_DIRS:
+        root = REPO_ROOT / rel
+        if not root.exists():
+            continue
+        files.extend(sorted(p for p in root.rglob("*") if p.is_file()))
+    return files
+
+
+def test_retired_phrases_do_not_reappear() -> None:
+    """No retired rule wording survives (or returns) on a live rules surface.
+
+    The drift the fun/ease review found came from a rewrite landing in one
+    file and missing siblings. This register makes each removal permanent:
+    the exact dead string, greppable, with the finding that killed it.
+    """
+    offenders: list[str] = []
+    for path in _retired_scan_files():
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue  # binary or unreadable — not a rules surface
+        for lineno, line in enumerate(text.splitlines(), start=1):
+            for phrase, reason in RETIRED_PHRASES:
+                if phrase in line:
+                    rel = path.relative_to(REPO_ROOT)
+                    offenders.append(f"{rel}:{lineno} — {phrase!r} ({reason})")
+    assert not offenders, (
+        "Retired phrases reappeared on live rules surfaces:\n"
+        + "\n".join(offenders)
+    )
