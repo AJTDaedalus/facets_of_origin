@@ -11,7 +11,7 @@ ruleset:
 enemy:
   tier: mook
   attack_modifier: -1   # Dexterity −1 (weak), no Combat skill to speak of
-  defense_modifier: -1  # Dodges erratically — hard to predict, not hard to hit
+  defense_modifier: -1  # Erratic movement — hard to predict, not hard to hit
   armor: none
   techniques: []
   special: null

@@ -1054,6 +1054,9 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("they use for Strikes and Parries", "K-1: enemy attack modifier is an authoring input, not a rolled modifier"),
     ("same roll for Parry", "K-1: enemies never roll Parry"),
     ("feeds the TR formula", "K-11 prep: defense_modifier does not feed the TR formula"),
+    ("Parry: same roll", "K-1: enemies never roll Parry"),
+    ("Reaction preference: Parry over Dodge", "K-1: enemies do not choose or roll reactions"),
+    ("Dodges erratically", "K-1: enemies do not Dodge; defense text is authoring guidance"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment

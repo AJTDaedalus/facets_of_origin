@@ -76,7 +76,7 @@ listed greps return the expected result; LOG updated.
   dies). Sweep MM1 for any other enemy-reaction phrasing.
   Register: `same roll for Parry`; `feeds the TR formula`.
 
-- [ ] **T1.3 — Enemy `.fof` conduct text contradicting no-roll (K-1 sweep).**
+- [x] **T1.3 — Enemy `.fof` conduct text contradicting no-roll (K-1 sweep).**
   Files: `enemies/veteran_soldier.fof` ("Reaction preference: Parry over Dodge
   (higher modifier)…") and any other hit from
   `grep -ln "Parry\|Dodge\|reaction" enemies/*.fof`.

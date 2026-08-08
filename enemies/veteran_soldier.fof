@@ -11,8 +11,8 @@ ruleset:
 enemy:
   tier: named
   resolve: 4
-  attack_modifier: 3    # Strength +2, Combat Expert +1
-  defense_modifier: 3   # Parry: same roll
+  attack_modifier: 3    # Strength +2, Combat Practiced +1
+  defense_modifier: 3   # authoring input — NPCs don't roll (Chapter III.3)
   armor: light
   techniques: []
   special: null
@@ -36,9 +36,9 @@ enemy:
   tactics: >
     Posture: Measured by default. Goes Aggressive if a party member
     is Cornered or Staggered. Goes Defensive if Staggered themselves.
-    Reaction preference: Parry over Dodge (higher modifier). Will
-    Absorb Tier 1 attacks if Endurance is low and a Tier 2 threat
-    is incoming the same exchange. Targets the highest-Endurance
+    Defends by meeting force with the blade, not by giving ground —
+    while set (Measured or Defensive), lean toward Hard difficulty
+    for Strikes against them (Chapter III.3). Targets the highest-Endurance
     party member first to neutralize the biggest threat; shifts to
     a Cornered/Staggered party member to press the advantage.
 

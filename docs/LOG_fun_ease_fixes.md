@@ -96,6 +96,30 @@ anything unexpected.
 - **Unexpected:** Index regeneration needed for an MM1-only wording change —
   the index harvests both books, worth remembering for later WS-1 tasks.
 
+### T1.3 — Enemy `.fof` conduct text contradicting no-roll (K-1 sweep) (2026-08-08)
+
+- **Files:** `enemies/veteran_soldier.fof`, `enemies/city_watch_sergeant.fof`,
+  `enemies/chicken.fof`, `software/tests/test_docs_consistency.py` (register).
+- **Did:** veteran_soldier `tactics:` — "Reaction preference: Parry over Dodge
+  (higher modifier). Will Absorb Tier 1 attacks if Endurance is low…" (both
+  mechanically null: enemies have no reactions, Endurance, or Absorb) →
+  no-roll authoring guidance keeping the meets-force-with-the-blade flavor:
+  "Defends by meeting force with the blade, not by giving ground — while set
+  (Measured or Defensive), lean toward Hard difficulty for Strikes against
+  them (Chapter III.3)." `# Parry: same roll` comments (veteran_soldier,
+  city_watch_sergeant) → `# authoring input — NPCs don't roll (Chapter
+  III.3)`. chicken `# Dodges erratically` comment → `# Erratic movement` (its
+  notes already deny dodging and stay). Register: `Parry: same roll`;
+  `Reaction preference: Parry over Dodge`; `Dodges erratically`.
+- **Commands:** `grep -ln "Parry\|Dodge\|reaction" enemies/*.fof` → no files.
+  `python -m tools.build_bestiary --check` → up to date (tactics/comments are
+  not rendered into stat blocks, so no regen diff). Docs suite → 32 passed.
+  Full suite → 1395 passed.
+- **Unexpected:** veteran_soldier's attack comment said "Combat Expert +1" —
+  a mislabel (Expert is +2; the +3 total is Strength +2 + Practiced +1, which
+  is what PHB III.3's example states). Corrected to "Combat Practiced +1" in
+  the same pass; `attack_modifier: 3` and TR unchanged.
+
 ---
 
 ## Escalations
