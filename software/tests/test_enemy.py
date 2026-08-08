@@ -153,6 +153,81 @@ class TestEnemyCombatTracker:
 
 
 # ---------------------------------------------------------------------------
+# The Open tag — K-6/D4 tracker state
+# ---------------------------------------------------------------------------
+
+class TestEnemyOpenState:
+    def test_open_defaults_false(self):
+        e = Enemy(id="sgt", name="Sgt", tier="named", resolve=3)
+        assert e.open is False
+
+    def test_init_combat_resets_open(self):
+        e = Enemy(id="sgt", name="Sgt", tier="named", resolve=3)
+        e.open = True
+        e.init_combat()
+        assert e.open is False
+
+    def test_to_client_dict_carries_open(self):
+        e = Enemy(id="sgt", name="Sgt", tier="named", resolve=3)
+        e.open = True
+        assert e.to_client_dict()["open"] is True
+
+    def test_open_is_ephemeral_not_saved_to_fof(self):
+        e = Enemy(id="sgt", name="Sgt", tier="named", resolve=3)
+        e.open = True
+        assert "open" not in e.to_fof()["enemy"]
+
+
+# ---------------------------------------------------------------------------
+# tier1_immunity retirement — K-6/D4 (it was immunity to nothing once the
+# rider menu died); loads with a deprecation warning, same pattern as the
+# legacy `endurance` key.
+# ---------------------------------------------------------------------------
+
+class TestTier1ImmunityDeprecation:
+    def _fof(self, techniques):
+        return {
+            "type": "enemy",
+            "id": "relic",
+            "name": "Relic",
+            "enemy": {
+                "tier": "boss",
+                "resolve": 8,
+                "armor": "heavy",
+                "techniques": techniques,
+            },
+        }
+
+    def test_tier1_immunity_load_warns(self):
+        """Same pattern as the legacy `endurance` key: the file still
+        loads (the entry is kept so a published TR doesn't silently move
+        on load), but the author is told to remove it."""
+        with pytest.warns(DeprecationWarning, match="tier1_immunity"):
+            e = Enemy.from_fof(self._fof(["phase_change", "tier1_immunity"]))
+        assert "phase_change" in e.techniques
+
+    def test_tier1_immunity_absent_loads_without_warning(self, recwarn):
+        e = Enemy.from_fof(self._fof(["phase_change"]))
+        assert e.techniques == ["phase_change"]
+        assert not any(
+            issubclass(w.category, DeprecationWarning) for w in recwarn.list
+        )
+
+    def test_no_shipped_enemy_lists_tier1_immunity_after_t3_4(self):
+        """Guard for T3.4's cleanup: once the Archive Guardian is
+        re-expressed without `tier1_immunity`, no shipped `.fof` may carry
+        it again. (xfail until T3.4 lands in this same workstream.)"""
+        shipped = sorted((REPO_ROOT / "enemies").glob("*.fof"))
+        offenders = [
+            p.name for p in shipped
+            if "tier1_immunity" in p.read_text()
+        ]
+        if offenders == ["archive_guardian.fof"]:
+            pytest.xfail("archive_guardian.fof re-expression is T3.4")
+        assert offenders == []
+
+
+# ---------------------------------------------------------------------------
 # Serialization: to_fof / from_fof
 # ---------------------------------------------------------------------------
 

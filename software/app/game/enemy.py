@@ -65,9 +65,13 @@ class Enemy(BaseModel):
     notes: str = ""
     phases: list[PhaseDef] = Field(default_factory=list)
 
-    # Combat tracker state (ephemeral, not saved to .fof)
+    # Combat tracker state (ephemeral, not saved to .fof). `open` is the
+    # K-6/D4 Open tag: set at the attacker's option on a full-success
+    # Strike, Easy to Strike for everyone while it holds, and cleared only
+    # by the enemy visibly spending its action (`combat.open_clear_mode`).
     resolve_current: Optional[int] = None
     conditions: list[str] = Field(default_factory=list)
+    open: bool = False
 
     def calculate_tr(self) -> int:
         """Calculate Threat Rating using the MM1 formula.
@@ -110,6 +114,7 @@ class Enemy(BaseModel):
             armor_bonus = {"none": 0, "light": 1, "heavy": 2}.get(self.armor, 0)
             self.resolve_current = self.resolve + armor_bonus
         self.conditions = []
+        self.open = False
 
     def to_client_dict(self) -> dict:
         """Serialize for sending to clients.
@@ -175,6 +180,18 @@ class Enemy(BaseModel):
         if not isinstance(enemy_block, dict):
             raise ValueError("Missing or invalid 'enemy' block in FOF file.")
 
+        techniques = list(enemy_block.get("techniques") or [])
+        if "tier1_immunity" in techniques:
+            warnings.warn(
+                "Enemy .fof lists the retired 'tier1_immunity' technique; "
+                "enemies no longer take Strike Conditions (the Open tag "
+                "replaced the rider menu, K-6/D4), so it is immunity to "
+                "nothing. Remove the entry (and recompute TR); support "
+                "will be removed in v0.4.",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+
         if "resolve" in enemy_block:
             resolve = enemy_block["resolve"]
         elif "endurance" in enemy_block:
@@ -197,7 +214,7 @@ class Enemy(BaseModel):
             attack_modifier=enemy_block.get("attack_modifier", 0),
             defense_modifier=enemy_block.get("defense_modifier", 0),
             armor=enemy_block.get("armor", "none"),
-            techniques=enemy_block.get("techniques") or [],
+            techniques=techniques,
             special=enemy_block.get("special"),
             description=enemy_block.get("description", ""),
             disposition=enemy_block.get("disposition", ""),

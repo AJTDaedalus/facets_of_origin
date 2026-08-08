@@ -154,42 +154,26 @@ class TestAI:
         target = choose_pc_target(pc, enemies, _ruleset())
         assert target.tier == "mook"
 
-    def test_target_selection_wounded_named(self):
+    def test_target_selection_prefers_open_named(self):
+        """K-6/D4: an Open enemy is Easy to Strike for everyone — the AI
+        presses the advantage before the enemy spends its action clearing.
+        (Replaces the retired Tier-2-rider priority.)"""
         pc = make_pc(mordai_def())
         named1 = make_enemy(generic_named_def(8))
         named2 = make_enemy(generic_named_def(8))
         named2.instance_id = "named2"
-        named2.conditions.append("staggered")
+        named2.open = True
         target = choose_pc_target(pc, [named1, named2], _ruleset())
         assert target.instance_id == "named2"
 
-    def test_target_priority_reads_tier2_from_yaml_not_a_literal_set(self):
-        """sync-M-4: `choose_pc_target` and `should_spend_spark` used to check
-        membership in a hardcoded `TIER2_CONDITIONS = ("staggered", "cornered")`
-        tuple. A Condition id that is Tier 2 *only* by yaml configuration (not
-        in that old literal) must still be prioritized — proving the AI now
-        reads `combat.conditions.tier2`, not a fixed set."""
-        from app.facets.schema import CombatConditionDef
-
-        ruleset = _ruleset()
-        original_tier2 = ruleset.combat.conditions.tier2
-        try:
-            ruleset.combat.conditions.tier2 = original_tier2 + [
-                CombatConditionDef(id="marked", clears="treated", description="test-only")
-            ]
-            pc = make_pc(mordai_def())
-            named1 = make_enemy(generic_named_def(8))
-            named2 = make_enemy(generic_named_def(8))
-            named2.instance_id = "named2"
-            named2.conditions.append("marked")  # not in the old TIER2_CONDITIONS tuple
-
-            target = choose_pc_target(pc, [named1, named2], ruleset)
-            assert target.instance_id == "named2"
-
-            spark = should_spend_spark(pc, named2, ruleset, "conservative")
-            assert spark == 1  # finishing-blow branch fires for the yaml-only Tier 2 id
-        finally:
-            ruleset.combat.conditions.tier2 = original_tier2
+    def test_spark_finishing_blow_fires_on_open_target(self):
+        """The conservative policy's finishing-blow branch keys on the Open
+        tag (the K-6/D4 'target is exposed' signal, replacing the retired
+        Tier-2-rider check)."""
+        pc = make_pc(mordai_def())
+        named = make_enemy(generic_named_def(8))
+        named.open = True
+        assert should_spend_spark(pc, named, _ruleset(), "conservative") == 1
 
     def test_enemy_targets_lowest_endurance(self):
         enemy = make_enemy(generic_named_def(8))
@@ -255,20 +239,21 @@ class TestPCStrike:
         _pc_strike(pc, mook, _ruleset())
         assert not mook.is_removed
 
-    def test_named_takes_rider_condition_on_full_success(self):
-        """A full-success (10+) Strike may impose a rider Condition on a
-        Named enemy (D1) — riders, not accumulation toward Broken; Resolve
-        is what defeats an enemy now."""
-        conditions_seen = False
+    def test_named_left_open_on_full_success(self):
+        """A full-success (10+) Strike may leave a Named enemy Open
+        (K-6/D4, attacker's option) — a tag, not a Condition; Resolve is
+        what defeats an enemy. The enemy takes no Strike Conditions."""
+        open_seen = False
         for seed in range(200):
             random.seed(seed)
             pc = make_pc(mordai_def())
             named_fresh = make_enemy(generic_named_def(8))
             _pc_strike(pc, named_fresh, _ruleset())
-            if named_fresh.conditions:
-                conditions_seen = True
+            assert named_fresh.conditions == []
+            if named_fresh.open:
+                open_seen = True
                 break
-        assert conditions_seen, "Should see a rider Condition on Named enemy after many strikes"
+        assert open_seen, "Should see a Named enemy left Open after many strikes"
 
     def test_named_resolve_depletes_on_success(self):
         """A landed Strike depletes the target's Resolve pool (D1)
@@ -319,9 +304,9 @@ class TestPCStrike:
                 f"expected {expected[strike.outcome]} (no defense spend)"
             )
 
-    def test_no_rider_on_partial_success(self):
-        """D1: only a full success may impose a rider — a partial success
-        (7-9) depletes 1 Resolve and nothing else."""
+    def test_no_open_on_partial_success(self):
+        """K-6/D4: only a full success may leave the target Open — a
+        partial success (7-9) depletes 1 Resolve and nothing else."""
         for seed in range(500):
             random.seed(seed)
             pc = make_pc(mordai_def())
@@ -333,6 +318,7 @@ class TestPCStrike:
                 continue
             random.seed(seed)
             _pc_strike(pc, named_fresh, _ruleset())
+            assert named_fresh.open is False
             assert named_fresh.conditions == []
             return
         pytest.fail("No seed produced a partial-success Strike in 500 tries")

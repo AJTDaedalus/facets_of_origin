@@ -183,7 +183,7 @@ listed greps return the expected result; LOG updated.
 
 ## WS-3 — Combat mechanics (branch `feat/combat-open-and-tempo`)
 
-- [ ] **T3.1 — Open tag engine (K-6, D4; TDD).**
+- [x] **T3.1 — Open tag engine (K-6, D4; TDD).**
   Files: `software/app/game/combat.py` (`can_apply_rider`, `rider_tier_eligible`,
   `apply_condition`, `target_strike_difficulty`), `software/app/facets/schema.py`
   (enemy state; `tier1_immunity` → deprecation warning, pattern of `endurance`),

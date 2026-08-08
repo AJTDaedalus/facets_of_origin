@@ -684,121 +684,94 @@ class TestMookRemoved:
 
 
 # ---------------------------------------------------------------------------
-# apply_condition(is_rider=True) — D1 enemy Conditions as riders (A4)
+# The Open tag — K-6/D4: on a 10+ vs an enemy, the attacker may leave it
+# Open (Easy to Strike for everyone) instead of the retired five-option
+# rider-Condition menu. PvP Strike outcomes are unchanged.
 # ---------------------------------------------------------------------------
 
-class TestApplyConditionRider:
-    def test_rider_applies_like_a_normal_condition(self, ruleset):
-        conditions: list[str] = []
-        result = combat.apply_condition(conditions, "staggered", 2, ruleset, is_rider=True)
-        assert result.applied is True
-        assert conditions == ["staggered"]
+class TestOpenTag:
+    def test_open_on_full_success_only(self, ruleset):
+        assert combat.can_apply_open("full_success", ruleset) is True
+        assert combat.can_apply_open("partial_success", ruleset) is False
+        assert combat.can_apply_open("failure", ruleset) is False
 
-    def test_rider_never_escalates_to_broken(self, ruleset):
-        conditions: list[str] = ["staggered"]
-        result = combat.apply_condition(conditions, "staggered", 2, ruleset, is_rider=True)
-        assert result.broken is False
-        assert result.applied is True
+    def test_modified_yaml_open_outcome_changes_eligibility(self, ruleset):
+        # `ruleset` is session-scoped (shared across the whole test run) —
+        # restore the original value so this mutation doesn't leak into
+        # other tests.
+        original = ruleset.combat.enemy_durability.open_on
+        try:
+            ruleset.combat.enemy_durability.open_on = "partial_success"
+            assert combat.can_apply_open("partial_success", ruleset) is True
+            assert combat.can_apply_open("full_success", ruleset) is False
+        finally:
+            ruleset.combat.enemy_durability.open_on = original
 
-    def test_tier1_rider_clears_at_end_exchange(self, ruleset):
-        conditions: list[str] = []
-        combat.apply_condition(conditions, "winded", 1, ruleset, is_rider=True)
-        assert combat.target_strike_difficulty("Standard", conditions, ruleset) == "Standard"
-        cleared = combat.end_exchange(conditions, ruleset)
-        assert cleared == ["winded"]
-        assert conditions == []
+    def test_open_target_is_easy_for_everyone(self, ruleset):
+        """Easy to Strike for everyone — not just the attacker who opened it."""
+        assert combat.target_strike_difficulty("Standard", True, ruleset) == "Easy"
+        assert combat.target_strike_difficulty("Hard", True, ruleset) == "Easy"
+        assert combat.target_strike_difficulty("Very Hard", True, ruleset) == "Easy"
 
-    def test_tier2_rider_persists_past_end_exchange(self, ruleset):
-        conditions: list[str] = ["cornered"]
-        cleared = combat.end_exchange(conditions, ruleset)
-        assert cleared == []
-        assert conditions == ["cornered"]
+    def test_not_open_keeps_base_difficulty(self, ruleset):
+        assert combat.target_strike_difficulty("Standard", False, ruleset) == "Standard"
+        assert combat.target_strike_difficulty("Hard", False, ruleset) == "Hard"
 
+    def test_open_composes_through_the_difficulty_pipeline(self, ruleset):
+        """Open is an Easy-tag source in compose_difficulty's precedence
+        (III.1 step 2) — target_strike_difficulty must agree with the
+        pipeline, not carry its own copy of the override."""
+        expected, _ = combat.compose_difficulty("Hard", ruleset=ruleset, easy_tag=True)
+        assert combat.target_strike_difficulty("Hard", True, ruleset) == expected
 
-# ---------------------------------------------------------------------------
-# target_strike_difficulty() — D1 Tier 2 rider -> Easy (A4)
-# ---------------------------------------------------------------------------
+    def test_open_clears_only_by_enemy_action(self, ruleset):
+        assert combat.open_clear_mode(ruleset) == "enemy_action"
 
-class TestTargetStrikeDifficulty:
-    def test_no_conditions_keeps_base_difficulty(self, ruleset):
-        assert combat.target_strike_difficulty("Standard", [], ruleset) == "Standard"
+    def test_open_never_reduces_resolve(self, ruleset):
+        """Open is a tag, not damage — the 10+'s Resolve depletion comes
+        from the Strike itself; leaving the enemy Open adds none."""
+        damage = combat.apply_resolve_damage(5, "full_success", ruleset)
+        assert damage.resolve_current == 3
+        assert combat.can_apply_open("full_success", ruleset) is True
+        # Applying Open is a state flag on the enemy; nothing here touches Resolve.
+        assert damage.resolve_current == 3
 
-    def test_tier1_condition_keeps_base_difficulty(self, ruleset):
-        assert combat.target_strike_difficulty("Standard", ["winded"], ruleset) == "Standard"
-
-    def test_tier2_rider_forces_easy(self, ruleset):
-        assert combat.target_strike_difficulty("Standard", ["staggered"], ruleset) == "Easy"
-
-    def test_tier2_rider_overrides_hard_base(self, ruleset):
-        assert combat.target_strike_difficulty("Hard", ["cornered"], ruleset) == "Easy"
+    def test_rider_menu_is_retired(self):
+        assert not hasattr(combat, "can_apply_rider")
+        assert not hasattr(combat, "rider_tier_eligible")
 
     def test_easy_flows_through_resolve_strike_as_a_bonus(self, ruleset):
         random.seed(1)
         baseline = combat.resolve_strike(0, "measured", [], ruleset)
         random.seed(1)
-        difficulty = combat.target_strike_difficulty("Standard", ["staggered"], ruleset)
+        difficulty = combat.target_strike_difficulty("Standard", True, ruleset)
         eased = combat.resolve_strike(
             0, "measured", [], ruleset, combat.StrikeOptions(difficulty=difficulty)
         )
         assert eased.total == baseline.total + 1
 
 
-# ---------------------------------------------------------------------------
-# can_apply_rider() / rider_tier_eligible() — sync-M-3: the "10+ may hang a
-# Tier 1 or Tier 2 rider" rule read from combat.enemy_durability, not
-# hardcoded in the simulator (which is what combat_sim.py did before this).
-# ---------------------------------------------------------------------------
+class TestPvPOutcomesUnchanged:
+    """K-6 scope guard: the Open merge touches only the enemy-target path.
+    PC-vs-PC Strikes keep the tier outcomes (10+ = Tier 2, 7-9 = Tier 1)
+    and the same-type-Tier-2 escalation to Broken."""
 
-class TestRiderEligibility:
-    def test_can_apply_rider_reads_yaml_outcome(self, ruleset):
-        assert combat.can_apply_rider("full_success", ruleset) is True
-        assert combat.can_apply_rider("partial_success", ruleset) is False
-        assert combat.can_apply_rider("failure", ruleset) is False
+    def test_pvp_strike_outcome_tiers_unchanged(self, ruleset):
+        assert combat._strike_outcome_tier("full_success", ruleset) == 2
+        assert combat._strike_outcome_tier("partial_success", ruleset) == 1
+        assert combat._strike_outcome_tier("failure", ruleset) == 0
 
-    def test_modified_yaml_rider_outcome_changes_eligibility(self, ruleset):
-        # `ruleset` is session-scoped (shared across the whole test run) —
-        # restore the original value so this mutation doesn't leak into
-        # other tests.
-        original = ruleset.combat.enemy_durability.rider_on
-        try:
-            ruleset.combat.enemy_durability.rider_on = "partial_success"
-            assert combat.can_apply_rider("partial_success", ruleset) is True
-            assert combat.can_apply_rider("full_success", ruleset) is False
-        finally:
-            ruleset.combat.enemy_durability.rider_on = original
+    def test_pvp_second_tier2_same_type_still_escalates_to_broken(self, ruleset):
+        conditions = ["staggered"]
+        result = combat.apply_condition(conditions, "staggered", 2, ruleset)
+        assert result.broken is True
+        assert result.applied is False
 
-    def test_rider_tier_eligible_reads_yaml_tiers(self, ruleset):
-        assert combat.rider_tier_eligible(1, ruleset) is True
-        assert combat.rider_tier_eligible(2, ruleset) is True
-        assert combat.rider_tier_eligible(3, ruleset) is False
-
-    def test_modified_yaml_rider_tiers_narrows_eligibility(self, ruleset):
-        original = ruleset.combat.enemy_durability.rider_tiers
-        try:
-            ruleset.combat.enemy_durability.rider_tiers = [2]
-            assert combat.rider_tier_eligible(1, ruleset) is False
-            assert combat.rider_tier_eligible(2, ruleset) is True
-        finally:
-            ruleset.combat.enemy_durability.rider_tiers = original
-
-    def test_rider_never_reduces_resolve(self, ruleset):
-        """A rider is a Condition-list mutation only — it must never touch
-        the enemy's Resolve pool. Resolve, not Conditions, is what defeats
-        an enemy (D1)."""
-        resolve_current = 5
-        damage = combat.apply_resolve_damage(resolve_current, "full_success", ruleset)
-        assert damage.resolve_current == 3  # depleted by the Strike itself
-        assert damage.defeated is False
-
-        conditions: list[str] = []
-        assert combat.can_apply_rider("full_success", ruleset) is True
-        assert combat.rider_tier_eligible(2, ruleset) is True
-        result = combat.apply_condition(conditions, "staggered", 2, ruleset, is_rider=True)
-
-        # The rider changed the Condition list; Resolve is untouched by it.
-        assert result.applied is True
-        assert conditions == ["staggered"]
-        assert damage.resolve_current == 3
+    def test_apply_condition_has_no_rider_flag(self, ruleset):
+        """`is_rider` retired with the menu — enemies no longer take Strike
+        Conditions, so the flag has nothing left to mark."""
+        with pytest.raises(TypeError):
+            combat.apply_condition([], "staggered", 2, ruleset, is_rider=True)
 
 
 # ---------------------------------------------------------------------------

@@ -174,9 +174,9 @@ class TechniqueDef(BaseModel):
                         membership (INV-8).
         removes_target_from_conflict: True only for *The Final Blow* (B4 Q3
                         / TD-12). Marks a Technique as a **licensed
-                        override**, not a rider — III.3's "riders never
-                        defeat an enemy on their own" governs rider
-                        Conditions and does not apply to a Technique
+                        override** — III.3's rule that the Open tag never
+                        defeats an enemy on its own (Resolve does) does
+                        not apply to a Technique
                         carrying this flag. The engine resolves its use as
                         a defeat event through the canonical defeat path
                         (`combat.apply_final_blow_removal`), never a raw
@@ -603,20 +603,23 @@ class EnemyDurabilityDef(BaseModel):
         armor_resolve_bonus: Flat Resolve granted by enemy armor.
         mook_removed_on: Outcome tier that removes an unarmored Mook.
         armored_mook_removed_on: Outcome tier that removes an armored Mook.
-        rider_on: Outcome tier that may additionally hang a rider Condition
-                  on the enemy, on top of Resolve depletion (III.3 — "on a
-                  full success only").
-        rider_tiers: Condition tiers eligible as a rider (Tier 1 or Tier 2,
-                     attacker's choice). Riders never escalate to Broken —
-                     Resolve is what defeats an enemy, not Conditions.
+        open_on: Outcome tier that may additionally leave the enemy Open
+                 (K-6/D4 — attacker's option, III.3 "on a full success
+                 only"), on top of Resolve depletion. An Open enemy is
+                 Easy to Strike for everyone; the player narrates what
+                 Open looks like. Open never defeats an enemy — Resolve
+                 does.
+        open_clears: How Open clears. "enemy_action": only by the enemy
+                     visibly spending its action — never at end of
+                     exchange.
     """
 
     strike_depletion: StrikeDepletionDef = Field(default_factory=StrikeDepletionDef)
     armor_resolve_bonus: ArmorResolveBonusDef = Field(default_factory=ArmorResolveBonusDef)
     mook_removed_on: str = "partial_success"
     armored_mook_removed_on: str = "full_success"
-    rider_on: str = "full_success"
-    rider_tiers: list[int] = Field(default_factory=lambda: [1, 2])
+    open_on: str = "full_success"
+    open_clears: str = "enemy_action"
 
 
 class CombatDef(BaseModel):

@@ -363,6 +363,60 @@ anything unexpected.
   1417 (+22 net: 3 Spark-reset, +11/−3 magic-Spark, +10 precedence, +2
   live-play Specialty, −1 replaced ascendant test folded into a wider one).
 
+### T3.1 — Open tag engine (K-6, D4; TDD) (2026-08-08)
+
+- **Files:** `software/app/game/combat.py`, `software/app/game/enemy.py`
+  (unlisted but canonical: enemy state + the `endurance` deprecation pattern
+  live HERE, not in `schema.py` — the task's schema.py pointer covered the
+  `EnemyDurabilityDef` rider fields), `software/app/facets/schema.py`,
+  `software/facets/base/facet.yaml`, `software/tools/combat_sim.py`
+  (unlisted but load-bearing: it drives the changed combat.py API),
+  `software/tests/test_combat.py`, `test_enemy.py`, `test_combat_sim.py`,
+  `test_combat_characterization.py`.
+- **Red first:** 16 failed of 19 new tests (`TestOpenTag`,
+  `TestPvPOutcomesUnchanged`, `TestEnemyOpenState`,
+  `TestTier1ImmunityDeprecation`).
+- **Did (engine):** `can_apply_rider`/`rider_tier_eligible` retired →
+  `can_apply_open` (reads new `enemy_durability.open_on`) + `open_clear_mode`
+  (reads `open_clears: enemy_action` — cleared ONLY by the enemy visibly
+  spending its action; never at end of exchange). `target_strike_difficulty`
+  now takes `target_open: bool` and routes through `compose_difficulty` as an
+  Easy-tag source (WS-2's pipeline, per the operational lesson — no bypass).
+  `apply_condition` loses `is_rider` (character-target only now; PvP
+  escalation unchanged). `Enemy` model gains ephemeral `open` tracker state
+  (reset by `init_combat`, sent in `to_client_dict`, never saved to .fof).
+  yaml `strike_outcomes` gains a PvP-scope comment; `rider_on`/`rider_tiers`
+  → `open_on`/`open_clears`; `EnemyDurabilityDef` mirrors it.
+- **tier1_immunity:** loader warns (DeprecationWarning, endurance pattern)
+  but KEEPS the entry — first draft dropped it on load, which churned the
+  generated Guardian stat block (TR 17→16) ahead of T3.4's proper .fof
+  re-expression; warn-and-keep matches the endurance pattern (file still
+  loads as published) and leaves exactly one cleanup site for T3.4. An
+  xfail guard (`test_no_shipped_enemy_lists_tier1_immunity_after_t3_4`)
+  flips to enforcement when T3.4 lands.
+- **Sim (drives combat.py, no forked rules):** `EnemyState.open`;
+  `_choose_rider` → `_should_leave_open` (attacker always takes the option —
+  worst-case pressure, mirroring the old worst-case rider policy);
+  `_should_clear_open` MM-side policy: **Boss clears (visible action spend),
+  Named fights on** — rationale in the docstring (a 3–4-Resolve Named's value
+  is its attacks; the tempo trade favors the pool that can afford it). With
+  the all-enemies-always-clear policy the four Recipe rows moved +13..+22pp
+  (0.76→0.895, 0.475→0.695, 0.20→0.36/0.325); under Boss-only clear the
+  recorded seed-1 Recipe values reproduce EXACTLY (Open-not-cleared is
+  behaviourally identical to the old permanent staggered rider at fixed
+  seeds). T3.11 re-measures with 3 seeds × 200 regardless.
+  `special_ignores_tier1` removed from `EnemyState` (dead with riders gone;
+  scenarios.py reference is T3.4). Target/Spark AI keys on `open` instead of
+  enemy Tier 2 Conditions.
+- **Re-pins (documented in each docstring):** 4 G0 fixed-seed end states —
+  sergeant seeds 1/5 identical dice, Condition tuple → Open tag; guardian
+  seed 2 shortens 3→2 exchanges (Boss trades attacks for clears under Easy
+  pressure); seed 3 same result shape. 3 sim tests rewritten rider→Open.
+- **Commands:** red 16 failed → post-implementation targeted suites 586
+  passed + 1 xfail. FULL suite → **1421 passed** + 1 xfail (317s; +5 net
+  over 1417: +19 new, −9 rider tests, −5 folded/rewritten). Bestiary
+  `--check` up to date (no stat-block churn).
+
 ---
 
 ## Escalations

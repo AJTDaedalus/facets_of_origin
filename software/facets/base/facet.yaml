@@ -1633,6 +1633,9 @@ combat:
     endurance_cost: 1
     extra_dice: 1
 
+  # Strike outcomes vs another CHARACTER (PvP): 10+ = Tier 2 Condition,
+  # 7-9 = Tier 1. Vs an ENEMY, a Strike depletes Resolve instead and a 10+
+  # may leave it Open — see enemy_durability (K-6/D4).
   strike_outcomes:
     full_success:
       condition_tier: 2
@@ -1692,8 +1695,8 @@ combat:
     armor_resolve_bonus: {none: 0, light: 1, heavy: 2}
     mook_removed_on: partial_success        # armored mook: full_success
     armored_mook_removed_on: full_success
-    rider_on: full_success                  # a rider may only be hung on a 10+
-    rider_tiers: [1, 2]                     # attacker's choice; riders never defeat
+    open_on: full_success                   # a 10+ may leave the enemy Open (attacker's option, K-6/D4)
+    open_clears: enemy_action               # cleared ONLY by the enemy visibly spending its action
     # Working Resolve band (base, before armor bonus), confirmed by Gate G1
     # (task A8, 2026-07-10, DESIGN §5-bis; data in research/simulation_log.md
     # Series 7): Named 3-4, Boss 8. Widened from the BRIEF's original 2-6
