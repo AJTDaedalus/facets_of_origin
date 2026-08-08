@@ -43,7 +43,7 @@ listed greps return the expected result; LOG updated.
 
 ## WS-0 — Scaffolding
 
-- [ ] **T0.1 — Retired-phrase invariant scaffold.**
+- [x] **T0.1 — Retired-phrase invariant scaffold.**
   Files: `software/tests/test_docs_consistency.py`.
   Do: add `RETIRED_PHRASES: list[tuple[str, str]]` (phrase, reason/finding-id) and a
   test that greps `player_handbook/ mm_manual/ bestiary/ facets/ software/facets/
@@ -52,7 +52,7 @@ listed greps return the expected result; LOG updated.
   Accept: suite green; adding a dummy phrase that exists makes it red (verify, then
   remove the dummy).
 
-- [ ] **T0.2 — Create `docs/LOG_fun_ease_fixes.md`** with the WS/branch table from
+- [x] **T0.2 — Create `docs/LOG_fun_ease_fixes.md`** with the WS/branch table from
   DESIGN §1 and an empty escalation section.
 
 ## WS-1 — Text integrity (branch `fix/text-integrity`)
