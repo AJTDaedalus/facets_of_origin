@@ -412,6 +412,7 @@
 *Defined in [III.1](III.1_Core_Resolution.md).*
 
 - [III.1 — Group Rolls](III.1_Core_Resolution.md#group-rolls)
+- [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 
 ## Intent

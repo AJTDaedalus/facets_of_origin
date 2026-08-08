@@ -10,7 +10,7 @@ Not every danger is an enemy who takes a turn. Rising water, a collapsing ceilin
 
 A **Threat Clock** is a four-segment tracker, visible to the whole table, that represents a hazard closing in.
 
-- **It advances** one segment whenever a character rolls a **partial success (7–9) or a failure (6-)** on a roll made near the hazard. A full success (10+) never advances it — the character handled the situation cleanly enough that the hazard gained no ground.
+- **It advances** one segment whenever a character rolls a **partial success (7–9) or a failure (6-)** on a roll made near the hazard. A full success (10+) never advances it — the character handled the situation cleanly enough that the hazard gained no ground. A group roll (Chapter III.1) advances a Threat Clock at most once, keyed to the group's overall result.
 - **When it fills**, the hazard strikes: the MM applies a Condition to those caught in it, or calls for a forced roll against a difficulty the MM states before the roll.
 - **Winding it back** costs a character an action, nothing more. There is no roll. A player who spends their action shoring up the failing wall, or working the valve that vents the pressure, winds the clock back one segment automatically.
 

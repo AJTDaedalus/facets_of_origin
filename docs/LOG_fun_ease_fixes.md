@@ -294,6 +294,19 @@ anything unexpected.
   updating — the Technique-only behavior is byte-identical when no Specialty
   is declared.
 
+### T2.5 — Group rolls vs Threat Clocks (C-5) (2026-08-08)
+
+- **Files:** `player_handbook/III.2_Adventuring.md`, `player_handbook/Index.md`
+  (regen).
+- **Did:** the clock-advance bullet in §Hazards and Threat Clocks gains "A
+  group roll (Chapter III.1) advances a Threat Clock at most once, keyed to
+  the group's overall result." MM5's Group Rolls card does not mention
+  hazards, so per the task's own condition it takes no change.
+- **Unexpected:** the first phrasing cross-referenced the *Group Rolls*
+  heading verbatim and tripped INV `test_capitalized_terms_are_glossary_defined`
+  ("Rolls" capitalized mid-sentence) — reworded to "(Chapter III.1)".
+- **Commands:** `python -m tools.build_index`; docs suite → 32 passed.
+
 ---
 
 ## Escalations

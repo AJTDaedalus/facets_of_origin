@@ -159,7 +159,7 @@ listed greps return the expected result; LOG updated.
   Accept: new tests green; existing combat/magic tests green or updated with
   reasons in LOG.
 
-- [ ] **T2.5 — Group rolls vs Threat Clocks (C-5).**
+- [x] **T2.5 — Group rolls vs Threat Clocks (C-5).**
   Files: `player_handbook/III.2_Adventuring.md` (§Hazards), MM5 group-roll card if
   it mentions hazards.
   Do: "A group roll advances a Threat Clock at most once, keyed to the group's
