@@ -721,10 +721,16 @@ def apply_character_difficulty_step(
     — those are ladder primitives; this function only composes them.
 
     **Guardrail**: character-side steps never stack, whatever their source —
-    at most one per roll. `context` may make several unlocked Techniques
-    qualify at once; only one step is ever applied. Precedence is
-    deterministic so the roll banner names a stable Technique: a
-    player-declared Technique beats an auto one, then lowest Technique id.
+    at most one per roll. Specialty and Technique share this one pool
+    (III.1 §Difficulty, T2.4/D2): a declared Specialty
+    (`context["specialty_declared"]` truthy, on a character whose
+    `.specialty` is set) is a candidate exactly like a Technique, and a
+    Hard roll reaches Standard via either source, never Easy via both.
+    `context` may make several sources qualify at once; only one step is
+    ever applied. Precedence is deterministic so the roll banner names a
+    stable source: a player-declared Technique beats a declared Specialty,
+    which beats an auto Technique, then lowest Technique id. The applied id
+    for a Specialty step is the literal string `"specialty"`.
 
     Only Techniques in `character.techniques` (i.e. actually unlocked) are
     eligible — an un-unlocked Technique's `difficulty_step` never fires,
@@ -759,9 +765,17 @@ def apply_character_difficulty_step(
     if isinstance(raw_declared, (str, bytes)) or not isinstance(raw_declared, (list, tuple, set)):
         raw_declared = []
     declared_ids = {str(x) for x in raw_declared}
-    # (precedence_rank, technique_id): rank 0 = player-declared, rank 1 = auto.
-    # Sorting by this tuple gives "declared beats auto, then lowest id" in one step.
+    # (precedence_rank, source_id): rank 0 = player-declared Technique,
+    # rank 1 = declared Specialty, rank 2 = auto Technique. Sorting by this
+    # tuple gives "declared beats Specialty beats auto, then lowest id".
     candidates: list[tuple[int, str]] = []
+
+    # Specialty shares the one character-side step pool (T2.4/D2). It is
+    # always player-declared — the MM confirms it applies in the fiction —
+    # and always eases (II.5: a directly applicable Specialty turns a
+    # Standard roll Easy; composed here as one step easier).
+    if context.get("specialty_declared") and getattr(character, "specialty", None):
+        candidates.append((1, "specialty"))
 
     for tech_id in character.techniques:
         tech_def = ruleset.get_technique(tech_id)
@@ -793,21 +807,76 @@ def apply_character_difficulty_step(
                 expected = trigger.against
             if expected is None or context_value != expected:
                 continue
-            candidates.append((1, tech_id))
+            candidates.append((2, tech_id))
 
     if not candidates:
         return declared_label, None
 
     candidates.sort()
     _, applied_id = candidates[0]
-    applied_def = ruleset.get_technique(applied_id)
 
-    if applied_def.difficulty_step == "easier":
+    if applied_id == "specialty":
+        step = "easier"
+    else:
+        step = ruleset.get_technique(applied_id).difficulty_step
+
+    if step == "easier":
         final_label = _engine._step_difficulty_easier(declared_label, ruleset)
     else:
         final_label = _engine._step_difficulty_harder(declared_label, ruleset)
 
     return final_label, applied_id
+
+
+def compose_difficulty(
+    base_label: str,
+    character=None,
+    context: Optional[dict] = None,
+    ruleset=None,
+    *,
+    easy_tag: bool = False,
+    support_ease: bool = False,
+) -> tuple[str, Optional[str]]:
+    """The full printed precedence for a roll's difficulty (III.1
+    §Difficulty; T2.4/D2), composed in its fixed order:
+
+    1. **Base** from the situation — `base_label`, the MM's call.
+    2. **Easy-tag override** — a rider Condition or a Maneuver
+       (`easy_tag=True`) overrides the base downward to Easy. Tags are
+       absolute, so they cannot stack with themselves: two tags are still
+       one Easy.
+    3. **One character-side step** — at most one, from all character
+       abilities combined (Technique, Specialty, anything future), via
+       `apply_character_difficulty_step`'s shared pool.
+    4. **Support's step** — `support_ease=True` when the ally's pending
+       Support bonus is the ease-difficulty mode (party-side, so it lands
+       on top of the single character step).
+    5. **Clamp** — Easy is the floor, Very Hard the ceiling; the ladder
+       primitives (`engine._step_difficulty_easier`/`_harder`) saturate
+       at both ends.
+
+    This is the rule's only home — WS handlers and the simulator compose
+    through here (or through `apply_character_difficulty_step` when no tag
+    or Support is in play), never inline.
+
+    Returns `(final_label, applied_source_id)` — the source id is a
+    Technique id, the literal `"specialty"`, or None (see
+    `apply_character_difficulty_step`).
+    """
+    label = base_label
+    if easy_tag:
+        label = "Easy"
+
+    applied_id: Optional[str] = None
+    if character is not None:
+        label, applied_id = apply_character_difficulty_step(
+            label, character, context or {}, ruleset,
+        )
+
+    if support_ease:
+        label = _engine._step_difficulty_easier(label, ruleset)
+
+    return label, applied_id
 
 
 def end_exchange(conditions: list[str], ruleset) -> list[str]:

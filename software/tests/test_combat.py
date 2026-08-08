@@ -1128,6 +1128,120 @@ class TestApplyCharacterDifficultyStep:
         assert applied is None
 
 
+class TestDifficultyPrecedence:
+    """T2.4 (C-3/C-4/K-8, D2): III.1's printed precedence, in one place —
+    base from the situation → Easy-tag override (downward, non-stacking) →
+    at most ONE character-side step (Technique OR Specialty, one pool) →
+    Support's step → ladder clamps at both ends."""
+
+    def _char(self, techniques=None, technique_choices=None, specialty=None):
+        return SimpleNamespace(
+            techniques=techniques or [],
+            technique_choices=technique_choices or {},
+            specialty=specialty,
+        )
+
+    def test_easy_tag_overrides_base_downward(self, ruleset):
+        label, _ = combat.compose_difficulty(
+            "Very Hard", ruleset=ruleset, easy_tag=True,
+        )
+        assert label == "Easy"
+
+    def test_easy_tag_does_not_stack_below_the_floor(self, ruleset):
+        """A rider Condition and a Maneuver both tagging the target Easy is
+        still just Easy — and a character step on top of the tag is absorbed
+        by the ladder floor, not banked."""
+        tech = _auto_step_technique("weapon_mastery", match="weapon_category", against="blades")
+        fake = _FakeRulesetWithTechniques(ruleset, {"weapon_mastery": tech})
+        character = self._char(techniques=["weapon_mastery"])
+        label, _ = combat.compose_difficulty(
+            "Hard", character, {"weapon_category": "blades"}, fake, easy_tag=True,
+        )
+        assert label == "Easy"
+
+    def test_specialty_alone_is_a_character_side_step(self, ruleset):
+        character = self._char(specialty="Knows how cargo manifests get falsified")
+        label, applied = combat.apply_character_difficulty_step(
+            "Hard", character, {"specialty_declared": True}, ruleset,
+        )
+        assert label == "Standard"
+        assert applied == "specialty"
+
+    def test_specialty_without_declaration_does_not_fire(self, ruleset):
+        character = self._char(specialty="Knows how cargo manifests get falsified")
+        label, applied = combat.apply_character_difficulty_step(
+            "Hard", character, {}, ruleset,
+        )
+        assert label == "Hard"
+        assert applied is None
+
+    def test_declared_specialty_on_specialtyless_character_does_not_fire(self, ruleset):
+        character = self._char(specialty=None)
+        label, applied = combat.apply_character_difficulty_step(
+            "Hard", character, {"specialty_declared": True}, ruleset,
+        )
+        assert label == "Hard"
+        assert applied is None
+
+    def test_technique_and_specialty_share_one_step(self, ruleset):
+        """C-4: two character-side sources → one step. A Hard roll reaches
+        Standard via either source, never Easy via both."""
+        tech = _auto_step_technique("weapon_mastery", match="weapon_category", against="blades")
+        fake = _FakeRulesetWithTechniques(ruleset, {"weapon_mastery": tech})
+        character = self._char(
+            techniques=["weapon_mastery"],
+            specialty="Reads an opponent's style in the first exchange",
+        )
+        label, applied = combat.apply_character_difficulty_step(
+            "Hard", character,
+            {"weapon_category": "blades", "specialty_declared": True},
+            fake,
+        )
+        assert label == "Standard"  # one step, not two
+        assert applied == "specialty"  # the player's pick beats the auto step
+
+    def test_support_step_applies_after_the_character_step(self, ruleset):
+        """Support is party-side, not character-side — its step lands on top
+        of the single character step: Hard → Standard (Technique) → Easy."""
+        tech = _auto_step_technique("weapon_mastery", match="weapon_category", against="blades")
+        fake = _FakeRulesetWithTechniques(ruleset, {"weapon_mastery": tech})
+        character = self._char(techniques=["weapon_mastery"])
+        label, applied = combat.compose_difficulty(
+            "Hard", character, {"weapon_category": "blades"}, fake,
+            support_ease=True,
+        )
+        assert label == "Easy"
+        assert applied == "weapon_mastery"
+
+    def test_ladder_clamps_at_easy(self, ruleset):
+        character = self._char(specialty="anything")
+        label, _ = combat.compose_difficulty(
+            "Easy", character, {"specialty_declared": True}, ruleset,
+            support_ease=True,
+        )
+        assert label == "Easy"
+
+    def test_ladder_clamps_at_very_hard(self, ruleset):
+        harder = _declared_step_technique("grim_burden", step="harder")
+        fake = _FakeRulesetWithTechniques(ruleset, {"grim_burden": harder})
+        character = self._char(techniques=["grim_burden"])
+        label, _ = combat.compose_difficulty(
+            "Very Hard", character,
+            {"declared_technique_ids": ["grim_burden"]}, fake,
+        )
+        assert label == "Very Hard"
+
+    def test_full_order_base_tag_step_support(self, ruleset):
+        """The whole chain at once: Very Hard base, Easy tag overrides,
+        character step and Support then saturate at the floor."""
+        character = self._char(specialty="anything")
+        label, _ = combat.compose_difficulty(
+            "Very Hard", character, {"specialty_declared": True}, ruleset,
+            easy_tag=True, support_ease=True,
+        )
+        assert label == "Easy"
+
+
 class TestReviewFindingsB4:
     """Regressions for two rule bypasses found in review of the B4 cycle.
 

@@ -148,7 +148,7 @@ listed greps return the expected result; LOG updated.
   Register: the III.1 taxonomy paragraph's distinctive clause (pick after reading,
   e.g. `something the roll already carries`).
 
-- [ ] **T2.4 — Engine precedence order (TDD).**
+- [x] **T2.4 — Engine precedence order (TDD).**
   Files: `software/app/game/engine.py` (`_step_difficulty_*`, resolve paths),
   `software/app/game/combat.py` (`target_strike_difficulty`,
   `maneuver_target_difficulty`, Support handling), tests.

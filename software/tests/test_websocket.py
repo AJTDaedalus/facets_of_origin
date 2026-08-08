@@ -4240,6 +4240,45 @@ class TestStepAppliesOnEveryPricedRoll:
         assert msg["technique_step_b"] is None
 
 
+class TestSpecialtyStepInLivePlay:
+    """T2.4 (D2): a declared Specialty steps a roll through the same
+    character-side pool as Techniques, and the banner names it."""
+
+    def test_declared_specialty_steps_a_roll(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = session_store.get(session_id).characters["Zahna"]
+        char.specialty = "Artificers' Guild technical records"
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            ws.send_json({
+                "type": "roll", "attribute_id": "knowledge", "skill_id": "lore",
+                "difficulty": "Standard", "specialty_declared": True,
+            })
+            msg = ws.receive_json()
+        step = msg["roll"].get("technique_step") or msg.get("technique_step")
+        assert step is not None
+        assert step["technique_id"] == "specialty"
+        assert step["technique_name"] == "Specialty"
+        assert step["from"] == "Standard"
+        assert step["to"] == "Easy"
+
+    def test_undeclared_specialty_does_not_step(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = session_store.get(session_id).characters["Zahna"]
+        char.specialty = "Artificers' Guild technical records"
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            ws.send_json({
+                "type": "roll", "attribute_id": "knowledge", "skill_id": "lore",
+                "difficulty": "Standard",
+            })
+            msg = ws.receive_json()
+        step = msg["roll"].get("technique_step") or msg.get("technique_step")
+        assert step is None
+
+
 class TestSceneBoundary:
     """B6: the engine had no scene boundary, so armor's per-scene downgrade
     budget was initialised once and never reset.

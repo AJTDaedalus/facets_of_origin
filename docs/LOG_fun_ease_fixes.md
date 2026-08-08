@@ -258,6 +258,42 @@ anything unexpected.
 - **Commands:** `python -m tools.build_index`; docs suite → 32 passed (register
   caught the MM2 hit on first run — fixed, re-ran green).
 
+### T2.4 — Engine precedence order (TDD) (2026-08-08)
+
+- **Files:** `software/app/game/combat.py`, `software/app/api/websocket.py`,
+  `software/tests/test_combat.py`, `software/tests/test_websocket.py`.
+- **Discovery (how the engine modeled Specialty):** it didn't — `specialty`
+  was a display-only text field on `Character` (character.py:98); no roll path
+  read it. Easy tags existed as absolute assignments (`target_strike_difficulty`
+  → "Easy" on a Tier 2 rider; `maneuver_target_difficulty` → "Easy" on 10+),
+  correct override semantics individually but never composed with the character
+  step in one place. Support's ease-difficulty mode was broadcast
+  (`support_result`) but never mechanically applied to the ally's next roll.
+  The one-step cap lived in `apply_character_difficulty_step` for Techniques
+  only.
+- **Did (red first — 8 failed of 10 new):** new `TestDifficultyPrecedence`
+  (10 tests): tag overrides Very Hard → Easy; tag + character step clamps at
+  the floor (non-stacking); Specialty alone steps (Hard → Standard, id
+  `"specialty"`); undeclared / specialty-less negatives; Technique+Specialty
+  → ONE step (player's pick beats auto); Support step lands after the
+  character step (Hard → Standard → Easy); clamps at both ladder ends; full
+  chain. Then implemented: `apply_character_difficulty_step` gains the
+  Specialty candidate in the SAME pool (ranks: declared Technique 0 <
+  Specialty 1 < auto Technique 2, then lowest id); new `compose_difficulty()`
+  = base → Easy-tag override → single character step → Support step → clamp
+  (ladder primitives already saturate — engine.py needed no change).
+- **App wiring (unlisted but needed for enforcement):** the four WS contexts
+  (`_build_roll_request`, roll, strike, reaction) pass
+  `specialty_declared`; `_apply_difficulty_step` banners a Specialty step as
+  "Specialty". 2 live-play WS tests (declared steps + names the source;
+  undeclared doesn't). First WS run failed because the generic `roll` handler
+  builds its own context — a fifth context site the grep list missed.
+- **Commands:** red run 8/10 failed → post-implementation
+  `test_combat.py` 153 passed, WS class 2 passed. FULL suite →
+  **1417 passed** (319s; +12 over T2.2's 1405). No existing test needed
+  updating — the Technique-only behavior is byte-identical when no Specialty
+  is declared.
+
 ---
 
 ## Escalations

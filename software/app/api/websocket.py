@@ -291,10 +291,16 @@ def _apply_difficulty_step(
     )
     if applied_id is None:
         return final_label, None
-    tech_def = ruleset.get_technique(applied_id)
+    if applied_id == "specialty":
+        # T2.4/D2: a Specialty step shares the Technique pool; the banner
+        # names it so the table sees which single source moved the label.
+        display_name = "Specialty"
+    else:
+        tech_def = ruleset.get_technique(applied_id)
+        display_name = tech_def.name if tech_def else applied_id
     step_info = {
         "technique_id": applied_id,
-        "technique_name": tech_def.name if tech_def else applied_id,
+        "technique_name": display_name,
         "from": declared_difficulty,
         "to": final_label,
     }
@@ -326,6 +332,7 @@ def _build_roll_request(
             "hazard_type": msg.get("hazard_type"),
             "knowledge_field": msg.get("knowledge_field"),
             "declared_technique_ids": msg.get("declared_technique_ids"),
+            "specialty_declared": bool(msg.get("specialty_declared")),
         },
         ruleset,
     )
@@ -380,6 +387,7 @@ async def _handle_roll(
             "hazard_type": str(hazard_type) if hazard_type is not None else None,
             "knowledge_field": str(knowledge_field) if knowledge_field is not None else None,
             "declared_technique_ids": msg.get("declared_technique_ids"),
+            "specialty_declared": bool(msg.get("specialty_declared")),
         },
         session.ruleset,
     )
@@ -779,6 +787,7 @@ async def _handle_strike(
             "weapon_category": weapon_category,
             "weapon_type": weapon_type,
             "declared_technique_ids": msg.get("declared_technique_ids"),
+            "specialty_declared": bool(msg.get("specialty_declared")),
         },
         session.ruleset,
     )
@@ -932,6 +941,7 @@ async def _handle_react(
             {
                 "skill_id": skill_id,
                 "declared_technique_ids": msg.get("declared_technique_ids"),
+                "specialty_declared": bool(msg.get("specialty_declared")),
             },
             session.ruleset,
         )
