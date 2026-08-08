@@ -88,6 +88,7 @@
 
 *Defined in [III.3](III.3_Combat.md).*
 
+- [III.3 — Strike](III.3_Combat.md#strike)
 - [III.3 — Incoming Condition Tier](III.3_Combat.md#incoming-condition-tier)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
 - [III.3 — Enemy Attacks](III.3_Combat.md#enemy-attacks)
@@ -148,7 +149,6 @@
 
 *Defined in [III.3](III.3_Combat.md).*
 
-- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
 - [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
 - [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
 - [III.3 — Incoming Condition Tier](III.3_Combat.md#incoming-condition-tier)
@@ -162,8 +162,6 @@
 - [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM2 — Tone and Expectations](../mm_manual/MM2_Session_Design.md#tone-and-expectations)
 - [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
-- [MM5 — Difficulty](../mm_manual/MM5_Quick_Reference.md#difficulty)
-- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
 - [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
@@ -184,7 +182,6 @@
 - [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
 - [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
 - [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
-- [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
 - [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
 
@@ -517,6 +514,7 @@
 
 *Defined in [III.3](III.3_Combat.md).*
 
+- [III.3 — Strike](III.3_Combat.md#strike)
 - [III.3 — Named NPCs](III.3_Combat.md#named-npcs)
 - [III.3 — Incoming Condition Tier](III.3_Combat.md#incoming-condition-tier)
 - [III.3 — Armor and Reaction Downgrades](III.3_Combat.md#armor-and-reaction-downgrades)
@@ -543,6 +541,29 @@
 - [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
 - [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
+
+## Open
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [II.4 — What Is a Facet?](II.4_Character_Creation_Facets.md#what-is-a-facet)
+- [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
+- [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
+- [II.6 — Skills of the Body](II.6_Character_Creation_Skills.md#skills-of-the-body)
+- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
+- [III.1 — When Not to Roll](III.1_Core_Resolution.md#when-not-to-roll)
+- [III.3 — Strike](III.3_Combat.md#strike)
+- [III.3 — Conditions](III.3_Combat.md#conditions)
+- [III.3 — Named NPCs](III.3_Combat.md#named-npcs)
+- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
+- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
+- [MM2 — The Three-Act Framework](../mm_manual/MM2_Session_Design.md#the-three-act-framework)
+- [MM2 — In Play: The Price of a Partial Success](../mm_manual/MM2_Session_Design.md#in-play-the-price-of-a-partial-success)
+- [MM3 — In Play: The End of the Road](../mm_manual/MM3_Campaign_Design.md#in-play-the-end-of-the-road)
+- [MM5 — Difficulty](../mm_manual/MM5_Quick_Reference.md#difficulty)
+- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
+- [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 
 ## Partial Success
 
@@ -696,20 +717,6 @@
 - [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Threat Rating (TR)](../mm_manual/MM5_Quick_Reference.md#threat-rating-tr)
-
-## Rider
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — Conditions](III.3_Combat.md#conditions)
-- [III.3 — Named NPCs](III.3_Combat.md#named-npcs)
-- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
-- [MM5 — Difficulty](../mm_manual/MM5_Quick_Reference.md#difficulty)
-- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
-- [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 
 ## Saving Throw
 
@@ -872,10 +879,8 @@
 - [III.3 — Conditions](III.3_Combat.md#conditions)
 - [III.3 — Tier 2 Conditions](III.3_Combat.md#tier-2-conditions)
 - [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
-- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
 - [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
 - [IV.1 — Armor in Play](IV.1_Equipment.md#armor-in-play)
-- [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
 
 ## Starting Skill

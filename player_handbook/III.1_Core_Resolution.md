@@ -70,7 +70,7 @@ Before calling for a roll, the MM declares a **difficulty** — a statement abou
 
 The MM declares difficulty **before** you roll.
 
-From there, adjustments apply in a fixed order. Set the base difficulty from the situation. An **Easy tag** (a rider Condition, a Maneuver) overrides the base downward — it does not stack with itself. Then **at most one step** from all character abilities combined — Technique, Specialty, anything future — may shift the result, whichever single source the player picks. Support's step applies after that. Easy is the floor; Very Hard is the ceiling. Whether a Technique's step applies on its own or on your declaration depends on its trigger — Chapter II.4 (*Reading the Entries — Techniques*) explains both kinds.
+From there, adjustments apply in a fixed order. Set the base difficulty from the situation. An **Easy tag** (an Open enemy, a Maneuver) overrides the base downward — it does not stack with itself. Then **at most one step** from all character abilities combined — Technique, Specialty, anything future — may shift the result, whichever single source the player picks. Support's step applies after that. Easy is the floor; Very Hard is the ceiling. Whether a Technique's step applies on its own or on your declaration depends on its trigger — Chapter II.4 (*Reading the Entries — Techniques*) explains both kinds.
 
 Those descriptions are the rule. The table below is the calibration — the same four tiers against tasks you can picture, and against the rank that clears them most of the time. Use it when a difficulty call is taking longer than the roll would.
 

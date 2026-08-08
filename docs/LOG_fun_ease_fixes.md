@@ -417,6 +417,42 @@ anything unexpected.
   over 1417: +19 new, −9 rider tests, −5 folded/rewritten). Bestiary
   `--check` up to date (no stat-block churn).
 
+### T3.2 — Open tag body text (K-6, K-12) (2026-08-08)
+
+- **Files:** `player_handbook/III.3_Combat.md`, `player_handbook/Glossary.md`,
+  `mm_manual/MM5_Quick_Reference.md`, plus unlisted carriers found by the
+  rider sweep: `player_handbook/III.1_Core_Resolution.md` (:73 precedence
+  paragraph's "(a rider Condition, a Maneuver)" tag example),
+  `player_handbook/II.4a_Character_Creation_Facet_Body.md` (Overwhelming
+  Force + The Final Blow "Normal:" lines), `mm_manual/MM1` (:39 rider
+  paragraph → Open + the K-12 anti-snowball sentence; :260 "rider limit"),
+  `mm_manual/MM2` (:89 tag example; :200 "carrying a Staggered rider"),
+  `software/facets/base/facet.yaml` (both Technique `normal:` mirrors +
+  the :1704 calibration comment), `player_handbook/Index.md` (regen),
+  `software/tests/test_docs_consistency.py` (register).
+- **Did:** III.3 §Strike vs-enemy paragraph rewritten to the single Open
+  tag (attacker's option on 10+; Easy to Strike for everyone; player
+  narrates; cleared ONLY by the enemy visibly spending its action);
+  §Conditions intro — enemies now carry no Conditions at all; §Named NPCs
+  rider paragraph → Open + visible-recovery cost; magical Strikes line;
+  the Boss vignette re-voiced (Mordai now narrates what Open looks like,
+  the MM notes the guardian *choosing* not to spend its action closing
+  up — the fiction's grinding-seam line survives untouched); both
+  quick-ref tables (III.3–12 + exchange-flow step 5). PvP paragraph and
+  PvP tier text untouched everywhere. Glossary: Rider entry replaced by
+  an Open entry (alphabetical slot after Off-Balance); Condition entry
+  scoped to characters; Named NPC entry's stale "Resolve, Posture,
+  reactions" (a K-1 survivor) fixed to "Techniques" + never-rolls.
+- **Register:** `a Tier 1 or Tier 2 Condition of your choice` (verified in
+  situ pre-edit) + `rider Condition` (broad drift guard). Remaining
+  "rider" hits in scope: `enemies/archive_guardian.fof` historical
+  calibration comments only — T3.4 touches that file and rewords them.
+- **INV catch:** first draft's "(see below)" pointer at III.3:128 tripped
+  `test_no_vague_cross_references` — pointer dropped (the rule follows in
+  the same section).
+- **Commands:** `python -m tools.build_index`; docs suite → **32 passed**;
+  rider-phrase grep over both books → empty.
+
 ---
 
 ## Escalations

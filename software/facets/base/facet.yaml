@@ -321,8 +321,8 @@ techniques:
                   offensive action in the next exchange.
                 use: "Once per scene"
                 normal: >
-                  A full-success Strike depletes 2 Resolve and may hang a
-                  rider Condition. It does not stop the target acting (see
+                  A full-success Strike depletes 2 Resolve and may leave
+                  the target Open. It does not stop the target acting (see
                   *Strike*, III.3).
                 prerequisites: []
 
@@ -364,8 +364,8 @@ techniques:
                 use: "Once per session"
                 normal: >
                   A Spark adds a d6 and drops the lowest. A Strike
-                  depletes Resolve, and riders never defeat an enemy on
-                  their own (see *Strike*, III.3).
+                  depletes Resolve, and leaving an enemy Open never
+                  defeats it on its own (see *Strike*, III.3).
                 prerequisites: []
                 removes_target_from_conflict: true
 
@@ -1701,7 +1701,8 @@ combat:
     # (task A8, 2026-07-10, DESIGN §5-bis; data in research/simulation_log.md
     # Series 7): Named 3-4, Boss 8. Widened from the BRIEF's original 2-6
     # working range after a solo by-the-book Boss at Resolve 5 collapsed to
-    # a median 2-exchange fight under the worst-case rider->Easy snowball;
+    # a median 2-exchange fight under the worst-case Easy-to-Strike snowball
+    # (then a Tier-2 rider, now the Open tag);
     # 8 is the smallest Boss value that robustly clears a median >= 3
     # exchange floor. This is a per-enemy authoring guideline, not an
     # enforced field — actual values live in each enemy's .fof.

@@ -125,7 +125,7 @@ The foundational offensive action. You bring force to bear on a target — weapo
 
 **Roll:** `2d6 + weapon attribute + relevant skill rank modifier`. Your weapon's category sets the attribute (Chapter IV.1). For the skill, the defaults are **Combat** for melee and unarmed Strikes and **Finesse** for ranged ones — but these are defaults, not restrictions. Describe how you are striking and use the skill that describes it. A soldier who overpowers her opponent rolls Combat; a disciple who strikes with trained precision rather than mass rolls Finesse; both are correct, and both are Strikes. Where the fiction clearly supports a different attribute, the MM may name one. When two pairings both fit, the player chooses.
 
-**Difficulty** is Standard by default. The MM adjusts based on the situation: a Named NPC or Boss in Defensive Posture, or with strong Constitution, may push it to Hard. A Staggered or Cornered opponent may make it Easy. When in doubt, Standard. (Named NPCs and Bosses declare Postures as described in the Postures section. For Mooks, the MM sets difficulty by situation: Standard by default, Easy if distracted or exposed, Hard if armored and alert.) A Technique may then move the MM's call one step further, exactly as any roll's difficulty can (see *Difficulty*, III.1).
+**Difficulty** is Standard by default. The MM adjusts based on the situation: a Named NPC or Boss in Defensive Posture, or with strong Constitution, may push it to Hard. An **Open** enemy is Easy to Strike — for everyone, no judgment call required. When in doubt, Standard. (Named NPCs and Bosses declare Postures as described in the Postures section. For Mooks, the MM sets difficulty by situation: Standard by default, Easy if distracted or exposed, Hard if armored and alert.) A Technique may then move the MM's call one step further, exactly as any roll's difficulty can (see *Difficulty*, III.1).
 
 **Table III.3–3: Strike Outcomes**
 
@@ -137,7 +137,7 @@ The foundational offensive action. You bring force to bear on a target — weapo
 
 What a success *does* depends on what you are Striking. Almost always, that is an enemy.
 
-**Against an enemy** — the usual case. Your success depletes the enemy's **Resolve** (see *Facing Mooks and Named Antagonists*): a full success (10+) depletes **2**, a partial (7–9) depletes **1**. When an enemy's Resolve reaches 0, it is defeated. On a **full success only**, you may *additionally* — on top of that 2 Resolve — hang one **rider Condition** on the enemy: a Tier 1 or Tier 2 Condition of your choice. A Tier 2 rider (Staggered or Cornered) leaves the enemy **Easy to Strike** until it is cleared, which is often worth more to the party than the raw depletion — a single 10+ can open an enemy up for everyone who Strikes after you. Riders never defeat an enemy on their own — **Resolve does that; a rider only shapes the blows that follow.**
+**Against an enemy** — the usual case. Your success depletes the enemy's **Resolve** (see *Facing Mooks and Named Antagonists*): a full success (10+) depletes **2**, a partial (7–9) depletes **1**. When an enemy's Resolve reaches 0, it is defeated. On a **full success only**, you may *additionally* — on top of that 2 Resolve — leave the enemy **Open**: it is **Easy to Strike for everyone** until it recovers. You narrate what Open looks like — staggered, cornered, blinded, disarmed, its guard beaten aside. The fiction supplies the variety; the mechanics carry one tag. An enemy clears Open only one way: by **visibly spending its action** to recover — and an action spent recovering is an action not spent on the party. Open never defeats an enemy on its own — **Resolve does that; Open only shapes the blows that follow.**
 
 **Against another character** — a duel, a charmed ally, PvP. There is no Resolve pool; apply a Condition directly, exactly as an enemy's attack lands on a player character: a 10+ applies a **Tier 2 Condition**, a 7–9 applies a **Tier 1 Condition**. The attacker chooses which Condition, within the appropriate tier — a precise blow might apply Staggered; one forcing an opponent into a corner might apply Cornered.
 
@@ -248,9 +248,9 @@ Conditions replace hit points for player characters as the measure of how a figh
 >
 > These are two tools, and the asymmetry is deliberate. A Condition is interesting because it changes how *you* play the next exchange — Off-Balance is a decision, not a number — and that only pays off for a character somebody is steering. An enemy the MM runs for three exchanges does not need an inner life. It needs to visibly wear down, on one number the MM can track for six enemies at once without a spreadsheet.
 >
-> So Resolve is durability and nothing else: not an action-economy pool, never spent to defend, and riders never take an enemy out on their own. Give enemies a Condition track and you have doubled the MM's bookkeeping to buy tactical texture the players mostly cannot see.
+> So Resolve is durability and nothing else: not an action-economy pool, never spent to defend, and the Open tag never takes an enemy out on its own. Give enemies a Condition track and you have doubled the MM's bookkeeping to buy tactical texture the players mostly cannot see.
 
-The tiers below govern player characters in full. Enemies do not carry a Condition track of their own — they run on Resolve — but a Condition can be hung on an enemy as a **rider** by a full-success Strike, in which case it has exactly the effect described here until it clears. (A Tier 2 rider on an enemy also makes that enemy Easy to Strike; see *Strike*, above.)
+The tiers below govern player characters in full. Enemies do not carry Conditions at all — they run on Resolve, and the one mark a Strike can put on them is the **Open** tag (see *Strike*, above).
 
 ### Tier 1 Conditions
 
@@ -355,7 +355,7 @@ A Named NPC is defined by:
 - **Armor**, if any — armor raises Resolve by a flat amount (light +1, heavy +2), so an armored enemy simply takes longer to run down
 - **Techniques**, if the MM wants them to have specific capabilities
 
-A Named NPC can carry **rider Conditions** hung on it by a full-success Strike — a Tier 1 (Winded, Off-Balance, Shaken) or Tier 2 (Staggered, Cornered) Condition of the attacker's choice, with their usual effects (and a Tier 2 rider makes it Easy to Strike) — but riders never accumulate into Broken. An enemy leaves the fight when its Resolve is gone, not when its Conditions stack.
+A Named NPC can be left **Open** by a full-success Strike — Easy to Strike for everyone until it recovers, and it recovers only by visibly spending its action to do so. The party sees the recovery happen and can answer it; the NPC buys its guard back at the price of a lost action. Open never accumulates into anything worse. An enemy leaves the fight when its Resolve is gone, and no other way.
 
 Named NPCs do not need a full character sheet. A veteran soldier might be: Resolve 4, Attack +3 (Strength +2, Combat Practiced +1), Light armor. That is enough to run the full exchange structure against a party.
 
@@ -429,7 +429,7 @@ Magical effects in combat follow the same **Domain + Intent + Scope** framework 
 
 **Reactions against magical Strikes.** All three active reactions — Dodge, Parry, and Intercept — can apply against magical actions. Feasibility is the MM's call based on what is happening in the fiction: you cannot Parry a wave of force you never saw coming, but you can Parry a summoned blade meeting yours. Dodge remains valid against most magical effects that have a physical direction. When the nature of the magic makes a physical reaction implausible, Absorb is available as always.
 
-**Resolving magical Strikes.** A magical Strike resolves exactly like a physical one (see *Strike*, above): against an enemy, it depletes Resolve — a full success (10+) depletes 2 and may hang a rider Condition, a partial (7–9) depletes 1. Against another character, there is no Resolve pool; it applies a Condition directly on the PvP tier table — a 10+ applies a Tier 2 Condition, a 7–9 applies a Tier 1 Condition. A 6− produces a consequence for the caster either way. The attacker chooses which Condition to apply, within the appropriate tier, whenever one applies.
+**Resolving magical Strikes.** A magical Strike resolves exactly like a physical one (see *Strike*, above): against an enemy, it depletes Resolve — a full success (10+) depletes 2 and may leave the target Open, a partial (7–9) depletes 1. Against another character, there is no Resolve pool; it applies a Condition directly on the PvP tier table — a 10+ applies a Tier 2 Condition, a 7–9 applies a Tier 1 Condition. A 6− produces a consequence for the caster either way. Against a character the attacker chooses which Condition to apply, within the appropriate tier; against an enemy the caster narrates what Open looks like — a binding of frost, a blinding flare, whatever the working's fiction supports.
 
 **Scope in combat.** Active opposition counts as at least Standard difficulty for magical actions. Scope difficulty applies normally — a Focused domain character attempting a Major working mid-fight is rolling at Hard, same as always. The chaos of combat does not add difficulty on its own, but the MM may adjust for specific circumstances (distracted, wounded, constrained).
 
@@ -514,11 +514,11 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 → Mordai rolls **2d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** against Easy difficulty (+1) and gets a **12**. Full success.
 
-**MM:** "Full success — that's 2 Resolve off. And because you rolled a 10 or better, you can hang a Condition on it as a rider, on top of the damage. Want one?"
+**MM:** "Full success — that's 2 Resolve off. And because you rolled a 10 or better, you can leave it Open, on top of the damage. Your call. If you do, tell us what that looks like."
 
-**Mordai:** "Staggered. I want the seam I just opened to stay open for everyone."
+**Mordai:** "I do. The seam I just opened — I want it to stay open. The joint's grinding, the arm can't cover its right side."
 
-**MM:** "The blade finds the seam. Exactly the seam. There is a sound like a key turning in a lock that has not been oiled in fifteen years — grinding, then a hollow click. The arm does not fall off, but it is not doing what it was doing before. The guardian is **Staggered** — and while that holds, it is **Easy to Strike** for the whole party. Guardian is at **Resolve 8**."
+**MM:** "The blade finds the seam. Exactly the seam. There is a sound like a key turning in a lock that has not been oiled in fifteen years — grinding, then a hollow click. The arm does not fall off, but it is not doing what it was doing before. The guardian is **Open** — and until it stops to reset that joint, it is **Easy to Strike** for the whole party. Guardian is at **Resolve 8**."
 
 *The guardian rotates toward Mordai with the patience of something that was not designed to feel surprise. It reaches for him anyway.*
 
@@ -544,7 +544,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zulnut:** "Finesse. I'm looking at how it moves. Where it's compensating."
 
-**MM:** "Standard. Roll Dexterity plus Finesse. It's already Easy to Strike from the Staggered rider, so pick the other Support benefit — a die, not a difficulty drop."
+**MM:** "Standard. Roll Dexterity plus Finesse. It's already Easy to Strike while it's Open, so pick the other Support benefit — a die, not a difficulty drop."
 
 → Zulnut rolls **2d6 + Dexterity (3 → +1) + Finesse Practiced (+1)** at Standard difficulty and gets an **11**. Full success.
 
@@ -578,7 +578,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zahna:** "Measurably."
 
-*End-of-exchange cleanup: Off-Balance on Mordai clears. The Staggered rider on the guardian persists — it stays Easy to Strike. Guardian: Resolve 8.*
+*End-of-exchange cleanup: Off-Balance on Mordai clears. The guardian is still Open — it spent its action reaching for Mordai, not resetting the joint, so it stays Easy to Strike. Guardian: Resolve 8.*
 
 ---
 
@@ -590,11 +590,11 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zahna:** "Measured. Holding the glyph steady."
 
-**MM:** "The guardian is Measured. It is learning you. Mordai — left joint. Easy from the Staggered rider, and you've got Zulnut's die. Roll Combat."
+**MM:** "The guardian is Measured. It could spend this exchange resetting that joint and close itself back up — it doesn't. It was built to hold the room, not to protect itself. It is learning you instead. Mordai — left joint. Easy while it's Open, and you've got Zulnut's die. Roll Combat."
 
 → Mordai spends Zulnut's Support: **3d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** at Easy difficulty (+1), drop the lowest, and gets a **13**. Full success.
 
-**MM:** "The left joint goes the way the right one went, but worse. That's another 2 Resolve — it's at **6**. Staggered's already on it, so no new rider needed; the seam just widens."
+**MM:** "The left joint goes the way the right one went, but worse. That's another 2 Resolve — it's at **6**. It's already Open; the seam just widens."
 
 *The guardian reaches for him again — slower now, but no less certain.*
 
@@ -616,7 +616,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **MM:** "Two more Resolve. The guardian is at **4**." *A pause.* "It is noticeably less fluid than it was two exchanges ago. Whatever you're doing, it's working."
 
-*End-of-exchange cleanup: Winded on Mordai clears. Staggered rider persists. Guardian: Resolve 4.*
+*End-of-exchange cleanup: Winded on Mordai clears. The guardian stays Open — it pressed the attack again. Guardian: Resolve 4.*
 
 ---
 
@@ -642,7 +642,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Mordai:** "I take it. I don't have a choice."
 
-**MM:** "You take the hit. In Reduced Mode its blows land at Tier 1 — you're **Winded**, −1 on your next roll, and the exchange is nearly over anyway. You stay standing. Zulnut, Zahna — it's down to 2 Resolve and it's still Easy to Strike. Finish it."
+**MM:** "You take the hit. In Reduced Mode its blows land at Tier 1 — you're **Winded**, −1 on your next roll, and the exchange is nearly over anyway. You stay standing. Zulnut, Zahna — it's down to 2 Resolve and it's still Open. Finish it."
 
 **Zulnut:** "Left joint. One more time."
 
@@ -686,7 +686,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 ---
 
-*(The fight ran the three exchanges the MM planned for, and it cost the party for it: Mordai emptied his Endurance to the last point and Pressed the final blow on fumes, Zulnut carried the last two exchanges because Mordai had nothing left to spend, and the glyph rewrote the room in a way nobody has fully reckoned with yet. That is the shape of a by-the-book Boss fight — a full party will grind down any Resolve pool eventually, but "eventually" is measured in spent resources and complications, not in a clean two-hit finish. The Staggered rider is what made it this fast; without that Easy opening the guardian would have cost them another exchange and more Endurance than they had. The glyph on the floor will matter later. These things always do.)*
+*(The fight ran the three exchanges the MM planned for, and it cost the party for it: Mordai emptied his Endurance to the last point and Pressed the final blow on fumes, Zulnut carried the last two exchanges because Mordai had nothing left to spend, and the glyph rewrote the room in a way nobody has fully reckoned with yet. That is the shape of a by-the-book Boss fight — a full party will grind down any Resolve pool eventually, but "eventually" is measured in spent resources and complications, not in a clean two-hit finish. Leaving it Open is what made it this fast; without that Easy opening — and with a guardian willing to spend an action closing it — the fight would have cost them another exchange and more Endurance than they had. The glyph on the floor will matter later. These things always do.)*
 
 ---
 
@@ -699,7 +699,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 2. Declare actions (Strike / Support / Maneuver / Magic)
 3. Resolve actions → roll 2d6 + attribute + skill + difficulty + posture modifier
 4. Declare reactions to incoming actions
-5. Apply results — deplete enemy Resolve (2 / 1 / 0), apply any Conditions and riders
+5. Apply results — deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, note an enemy left Open
 6. End exchange: clear Tier 1 conditions, Withdrawn characters recover 2 Endurance
 ```
 
@@ -731,13 +731,13 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Table III.3–12: Strike Outcomes (quick reference)**
 
-| Roll | Resolve | Rider (10+ only) |
+| Roll | Resolve | Open (10+ only) |
 |---|---|---|
-| 10+ | −2 | may add one Tier 1 or Tier 2 Condition; a Tier 2 rider makes the enemy **Easy to Strike** until cleared |
+| 10+ | −2 | may leave the enemy **Open** — **Easy to Strike** for everyone; you narrate what it looks like |
 | 7-9 | −1 | — |
 | 6- | 0 | consequence for the attacker |
 
-Enemy at **0 Resolve = defeated**. Mook: removed on any success (7+); armored Mook needs a 10+.
+Enemy at **0 Resolve = defeated**. An enemy clears Open only by visibly spending its action. Mook: removed on any success (7+); armored Mook needs a 10+.
 
 **Against another character (duel / PvP) — apply a Condition:** 10+ = Tier 2 (Staggered or Cornered), 7-9 = Tier 1 (Winded/Off-Balance/Shaken), 6- = consequence for the attacker.
 

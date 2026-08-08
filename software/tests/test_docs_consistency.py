@@ -1067,6 +1067,8 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("Their ceiling is their ceiling", "P-3/D8: the misreadable 'Sparks don't work here' framing died; dice-Sparks are legal on Broad rolls"),
     ("something the roll already carries", "C-3/D2: III.1's Technique trigger taxonomy moved to II.4 Reading the Entries; III.1 keeps the precedence paragraph + one-sentence pointer"),
     ("before the player decides how to proceed", "C-7/D3: 7-9 is narration sequencing, not a decline-offer — the MM names the cost before narrating the success"),
+    ("a Tier 1 or Tier 2 Condition of your choice", "K-6/D4: the five-option Condition menu vs enemies became the single Open tag"),
+    ("rider Condition", "K-6/D4: riders retired — a 10+ vs an enemy may leave it Open instead; PvP tier outcomes unchanged"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment

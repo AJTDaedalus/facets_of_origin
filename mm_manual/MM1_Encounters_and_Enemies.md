@@ -36,7 +36,7 @@ Special: [phase changes, triggers, or narrative rules — Boss only]
 TR: [Threat Rating — calculated below]
 ```
 
-An enemy has no Condition track of its own. A PC's Strike depletes Resolve — 2 on a full success (10+), 1 on a partial (7–9) — and the enemy is defeated when Resolve reaches 0. On a full success the attacker may *additionally* hang one rider Condition on the enemy; a Tier 2 rider (Staggered/Cornered) leaves it Easy to Strike until cleared, but riders never defeat an enemy on their own. A **Mook** has no Resolve at all: any success removes it (an armored Mook needs a full success).
+An enemy has no Condition track of its own. A PC's Strike depletes Resolve — 2 on a full success (10+), 1 on a partial (7–9) — and the enemy is defeated when Resolve reaches 0. On a full success the attacker may *additionally* leave the enemy **Open**: Easy to Strike for everyone, with the player narrating what it looks like, until the enemy visibly spends its action to recover. Spending that action is your legitimate anti-snowball move — the party sees it and can answer it. Open never defeats an enemy on its own. A **Mook** has no Resolve at all: any success removes it (an armored Mook needs a full success).
 
 **Named NPC example** — City Watch Sergeant:
 ```
@@ -257,7 +257,7 @@ Phase changes should feel like story beats, not just mechanical resets. The fict
 
 > **MM Note — build for the early exit, not against it**
 >
-> A Tier 3 capstone like *The Final Blow* (Body/Might, II.4a) can end a Boss outright, on any target, once per session — that is what the Technique is for, and it is not subject to the rider limit (see *Strike*, III.3). If a Boss's second act only exists in your notes and never in the fiction the party can act on, a capstone landing early does not just skip a phase — it skips the *encounter*. Build Bosses so the party deleting them is a win, not a broken script: front-load anything the phase change was protecting (a hostage taken, information dropped mid-fight, an environmental threat the Boss was suppressing) so it is already live by the time a capstone could land, rather than something the party only sees by grinding Resolve down in order.
+> A Tier 3 capstone like *The Final Blow* (Body/Might, II.4a) can end a Boss outright, on any target, once per session — that is what the Technique is for, and it is not subject to Open's never-defeats limit (see *Strike*, III.3). If a Boss's second act only exists in your notes and never in the fiction the party can act on, a capstone landing early does not just skip a phase — it skips the *encounter*. Build Bosses so the party deleting them is a win, not a broken script: front-load anything the phase change was protecting (a hostage taken, information dropped mid-fight, an environmental threat the Boss was suppressing) so it is already live by the time a capstone could land, rather than something the party only sees by grinding Resolve down in order.
 
 ---
 

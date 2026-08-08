@@ -23,7 +23,7 @@ the full rule, follow the pointer.
 
 **Career Advance** — A single integer counting every skill rank advance a character has ever taken, across all skills and Facets, since character creation — the game's rough overall progression gauge. *(Chapter II.4)*
 
-**Condition (Tier 1/2/3)** — The measure of how a fight is going for a player character, in place of hit points. Tier 1 (Winded, Off-Balance, Shaken) clears at the end of the exchange; Tier 2 (Staggered, Cornered) persists until treated; Tier 3 is Broken. *(Chapter III.3)*
+**Condition (Tier 1/2/3)** — The measure of how a fight is going for a player character, in place of hit points. Tier 1 (Winded, Off-Balance, Shaken) clears at the end of the exchange; Tier 2 (Staggered, Cornered) persists until treated; Tier 3 is Broken. Conditions belong to characters only — enemies run on Resolve, and the one mark a Strike can put on them is the Open tag. *(Chapter III.3)*
 
 **Contested Roll** — A roll made against active opposition. Against an NPC, only the player rolls, and the NPC's attribute informs the difficulty; against another player character, both roll and the higher total wins, with a tie granting both a partial success. *(Chapter III.1)*
 
@@ -65,9 +65,11 @@ the full rule, follow the pointer.
 
 **Mook** — A minor antagonist with no Resolve pool and no Condition track. Any successful Strike (7+) removes a Mook from the fight; an armored Mook needs a full success (10+). *(Chapter III.3)*
 
-**Named NPC** — A significant antagonist that uses the full combat structure — Resolve, Posture, reactions — with a Resolve of 3 or 4 by default. *(Chapter III.3)*
+**Named NPC** — A significant antagonist that uses the full combat structure — Resolve, Posture, Techniques — with a Resolve of 3 or 4 by default. It never rolls: when it attacks, the PCs roll reactions. *(Chapter III.3)*
 
 **Off-Balance** — A Tier 1 Condition: the character's next reaction costs 1 additional Endurance. *(Chapter III.3)*
+
+**Open** — The one mark a Strike can put on an enemy: on a full success (10+), the attacker may leave the enemy Open — Easy to Strike for everyone — narrating what that looks like. The enemy clears Open only by visibly spending its action to recover; Open never defeats an enemy on its own. *(Chapter III.3)*
 
 **Partial Success** — A roll total of 7–9: the character achieves something, but not cleanly — the MM names the cost before narrating the success; the cost is part of the outcome, not an offer to weigh. *(Chapter III.1)*
 
@@ -88,8 +90,6 @@ the full rule, follow the pointer.
 **Reflection Scene** — A brief in-world moment, once per session, where a character acknowledges growth that happened in play; encouraged but not required, since advancement itself happens whether or not the scene takes place. *(Chapter II.4)*
 
 **Resolve** — An enemy's durability pool, depleted directly by Strikes — 2 on a full success, 1 on a partial — with no Condition track to manage. At 0 Resolve, the enemy is defeated. *(Chapter III.3)*
-
-**Rider** — An additional Tier 1 or Tier 2 Condition a player may hang on an enemy after a full-success Strike, on top of the Resolve it depletes. A Tier 2 rider leaves the enemy Easy to Strike until cleared, but riders never defeat an enemy on their own. *(Chapter III.3)*
 
 **Saving Throw** — A reactive roll made when something happens *to* a character rather than something they choose to attempt: 2d6 + the relevant Major Attribute modifier, resolved on the standard three-tier table. *(Chapter III.1)*
 

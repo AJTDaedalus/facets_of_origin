@@ -193,7 +193,7 @@ listed greps return the expected result; LOG updated.
   for everyone, cleared only by enemy spending its action, PvP tier outcomes
   unchanged, `tier1_immunity` load warns. Then implement.
 
-- [ ] **T3.2 — Open tag body text (K-6, K-12).**
+- [x] **T3.2 — Open tag body text (K-6, K-12).**
   Files: `player_handbook/III.3_Combat.md` (§Strike outcomes vs enemies, §Named
   NPCs, any conditions-on-enemies passage — read the whole chapter for "Condition"
   applied to an enemy), `mm_manual/MM5_Quick_Reference.md` (strike card),

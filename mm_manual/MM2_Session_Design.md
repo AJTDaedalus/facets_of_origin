@@ -86,7 +86,7 @@ The corollary: **do not roll for things that should just happen.** A character w
 
 ### Difficulty and Technique Steps
 
-Declare difficulty the same way every time: name the situation, say the label, then let the adjustments take their fixed order — an Easy tag (rider Condition, Maneuver) overrides downward without stacking, then at most one character-side step (Technique or Specialty, whichever the player picks), then Support's step, clamped between Easy and Very Hard. A carried trigger (a weapon type, a hazard, a field of study) applies its step automatically; a judgment-call trigger is the player's to declare (see *Difficulty*, III.1; *Reading the Entries*, II.4).
+Declare difficulty the same way every time: name the situation, say the label, then let the adjustments take their fixed order — an Easy tag (an Open enemy, a Maneuver) overrides downward without stacking, then at most one character-side step (Technique or Specialty, whichever the player picks), then Support's step, clamped between Easy and Very Hard. A carried trigger (a weapon type, a hazard, a field of study) applies its step automatically; a judgment-call trigger is the player's to declare (see *Difficulty*, III.1; *Reading the Entries*, II.4).
 
 > **MM Note — Pressure Point does not stack with an auto-applied step**
 >
@@ -197,7 +197,7 @@ A three-exchange fight should take 15-25 minutes at the table. If it is taking l
 >
 > A Skirmish fight (a Mook-only roster, per the Encounter Recipe Table) will last 1-2 exchanges and produce minimal resource drain. That is by design — Skirmish encounters introduce combat mechanics without risking the party. Do not expect tactical depth from them. Use Skirmish encounters early in a session or campaign to teach the exchange structure, posture decisions, and reaction economy. Save Standard and Hard encounters for when the party understands the system and meaningful tactical pressure serves the story.
 
-End fights when they are won, not when the stat block is depleted. If the Named NPC is down to its last point of Resolve, carrying a Staggered rider, and the party has three characters with full Endurance pools, the fight is over — narrate the ending and move on. Do not make the players grind through the last two exchanges of a foregone conclusion.
+End fights when they are won, not when the stat block is depleted. If the Named NPC is down to its last point of Resolve, left Open, and the party has three characters with full Endurance pools, the fight is over — narrate the ending and move on. Do not make the players grind through the last two exchanges of a foregone conclusion.
 
 ### Downtime
 

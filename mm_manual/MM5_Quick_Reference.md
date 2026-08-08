@@ -49,7 +49,7 @@ Keep it open. Look things up. Do not read it.
 | Hard | -1 | Skilled opposition, poor conditions |
 | Very Hard | -2 | Extraordinary opposition, nearly impossible |
 
-Adjustments apply in a fixed order: base from the situation → an Easy tag (rider Condition, Maneuver) overrides downward, never stacking with itself → at most **one** character-side step (Technique OR Specialty, whichever the player picks) → Support's step → Easy is the floor, Very Hard the ceiling. Carried triggers auto-apply; judgment-call triggers are player-declared (III.1 *Difficulty*; II.4 *Reading the Entries*).
+Adjustments apply in a fixed order: base from the situation → an Easy tag (an Open enemy, a Maneuver) overrides downward, never stacking with itself → at most **one** character-side step (Technique OR Specialty, whichever the player picks) → Support's step → Easy is the floor, Very Hard the ceiling. Carried triggers auto-apply; judgment-call triggers are player-declared (III.1 *Difficulty*; II.4 *Reading the Entries*).
 
 ### Skill Ranks
 
@@ -103,7 +103,7 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 2. All participants declare Postures (simultaneously, blind)
 3. Declare and resolve Actions (Strike / Maneuver / Support / Magic)
 4. Targets declare and resolve Reactions
-5. Apply results: deplete enemy Resolve (2 / 1 / 0), apply any Conditions and riders
+5. Apply results: deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, note an enemy left Open
 6. End of exchange: Tier 1 Conditions clear, Withdrawn recover 2 Endurance
 ```
 
@@ -128,7 +128,7 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 
 | Action | Roll | Effect |
 |---|---|---|
-| **Strike** | 2d6 + weapon attribute + Combat or Finesse (default melee/ranged; the fiction may say otherwise) | Deplete enemy Resolve (10+: −2, 7–9: −1); 10+ may add a rider Condition |
+| **Strike** | 2d6 + weapon attribute + Combat or Finesse (default melee/ranged; the fiction may say otherwise) | Deplete enemy Resolve (10+: −2, 7–9: −1); 10+ may leave the enemy Open |
 | **Maneuver** | 2d6 + relevant skill | 10+: rolls against the target are Easy until the situation changes. 7–9: rolls against the target stay Standard. 6-: backfire |
 | **Support** | 2d6 + relevant skill | Grant ally +1d6 drop lowest OR difficulty one step easier on next roll |
 | **Magic** | 2d6 + Knowledge or Spirit (by tradition) | Domain + Intent + Scope; vs enemy depletes Resolve like a Strike |
@@ -143,17 +143,17 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 
 **Table MM5–8: Strike Outcomes**
 
-| Roll | Resolve | Rider (10+ only) |
+| Roll | Resolve | Open (10+ only) |
 |---|---|---|
-| **10+** | **−2** | may add one Tier 1/Tier 2 Condition; a Tier 2 rider (Staggered/Cornered) makes the enemy **Easy to Strike** until cleared |
+| **10+** | **−2** | may leave the enemy **Open** — **Easy to Strike** for everyone; the player narrates what it looks like |
 | **7–9** | **−1** | — |
 | **6-** | 0 | consequence for the **attacker** |
 
-Enemy at **0 Resolve = defeated**. Riders never defeat — Resolve does. Mook: removed on any success (7+); armored Mook needs 10+.
+Enemy at **0 Resolve = defeated**. Open never defeats — Resolve does; the enemy clears Open only by visibly spending its action. Mook: removed on any success (7+); armored Mook needs 10+.
 
 **Against another character (duel/PvP):** 10+ = Tier 2 Condition, 7–9 = Tier 1 Condition, 6- = consequence for attacker.
 
-Default Strike difficulty: **Standard**. Adjust for posture, rider Conditions, situation.
+Default Strike difficulty: **Standard**. Adjust for posture and situation; an Open enemy is Easy for everyone.
 
 ---
 
