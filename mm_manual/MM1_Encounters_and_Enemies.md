@@ -207,7 +207,7 @@ Raw TR comparison doesn't account for **action economy** — more enemies mean m
 
 Mooks need only four things: an attack modifier, a fictional description, an armor decision, and a TR number. They do not have Resolve. They do not have individual Condition tracks. Any successful Strike (7+) removes one — an armored Mook takes a full success (10+).
 
-**What makes a Mook dangerous is volume.** Three Mooks attacking simultaneously each demand a reaction decision. A party with limited Endurance that chooses to Absorb all Mook attacks will arrive at the Named NPC already worn down.
+**What makes a Mook dangerous is volume.** Three Mooks attacking simultaneously each demand a reaction decision. Absorbing a Mook attack costs no Endurance — but it lands a Tier 1 Condition, and Winded (−1 to your next roll) or Off-Balance (your next reaction costs 1 additional Endurance) is exactly the handicap a character cannot afford in the same exchange a Named NPC's Tier 2 attack comes in. Mook chip damage defeats no one; it degrades the reactions that matter.
 
 **Building a Mook:**
 1. Assign an attack modifier (usually −1 to +1 for cannon fodder; up to +2 for elite troops)

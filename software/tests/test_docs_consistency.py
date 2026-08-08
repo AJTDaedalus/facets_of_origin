@@ -1057,6 +1057,7 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("Parry: same roll", "K-1: enemies never roll Parry"),
     ("Reaction preference: Parry over Dodge", "K-1: enemies do not choose or roll reactions"),
     ("Dodges erratically", "K-1: enemies do not Dodge; defense text is authoring guidance"),
+    ("arrive at the Named NPC already worn down", "K §4.3: Absorb costs nothing; Mook pressure is Tier 1 chip, not Endurance attrition"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment
