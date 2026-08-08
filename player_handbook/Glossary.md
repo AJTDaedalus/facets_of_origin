@@ -107,7 +107,7 @@ the full rule, follow the pointer.
 
 **Spark** — A narrative resource earned for remarkable moments and spent before a roll to add a d6, dropping the lowest die — any roll, including every magic roll. In magic only, a Spark can instead buy reach in exactly two cases: a pre-Technique Significant-scope attempt, or easing a Focused domain's Major working one step. Sparks do not carry over; every character starts every session with 3. *(Chapters III.1, II.3)*
 
-**Specialty** — A narrow, specific area of fictional expertise granted by a Background — not a second skill, but a fact about a character's history that turns a Standard roll Easy when it directly applies. *(Chapter II.5)*
+**Specialty** — A narrow, specific area of fictional expertise granted by a Background — not a second skill, but a fact about a character's history that turns a Standard roll Easy when it directly applies. Its step draws from the same allowance as a Technique's — at most one character-side step moves any single roll. *(Chapters II.5, III.1)*
 
 **Staggered** — A Tier 2 Condition: −1 to offensive rolls, persisting until treated. *(Chapter III.3)*
 
@@ -117,7 +117,7 @@ the full rule, follow the pointer.
 
 **Support** — An action that aids another combat participant instead of acting directly: the supporting character grants an ally either +1d6 drop-lowest or one difficulty step easier on the ally's very next roll. *(Chapter III.3)*
 
-**Technique** — A specific ability a character unlocks at each Facet level, chosen from any tree whose prerequisites are met — something the character can now do that others cannot, or a distinctly their-own way of doing something ordinary. *(Chapter II.4)*
+**Technique** — A specific ability a character unlocks at each Facet level, chosen from any tree whose prerequisites are met — something the character can now do that others cannot, or a distinctly their-own way of doing something ordinary. When a Technique eases a roll's difficulty, its step draws from the same allowance as a Specialty's — at most one character-side step moves any single roll. *(Chapters II.4, III.1)*
 
 **Threat Clock** — A four-segment tracker representing a hazard closing in. It advances one segment on a partial success or failure near the hazard, strikes when it fills, and can be wound back one segment by a character spending an action — no roll required. *(Chapter III.2)*
 

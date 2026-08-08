@@ -86,7 +86,7 @@ The corollary: **do not roll for things that should just happen.** A character w
 
 ### Difficulty and Technique Steps
 
-Declare difficulty the same way every time: name the situation, say the label, then let the mechanics take their step. A qualifying Technique moves that declared label one rung further — automatically, when its trigger is something the roll already carries, or when the player tells you they are invoking it. Either way, at most one character-side step ever lands on a single roll (see *Difficulty*, III.1).
+Declare difficulty the same way every time: name the situation, say the label, then let the adjustments take their fixed order — an Easy tag (rider Condition, Maneuver) overrides downward without stacking, then at most one character-side step (Technique or Specialty, whichever the player picks), then Support's step, clamped between Easy and Very Hard. A carried trigger (a weapon type, a hazard, a field of study) applies its step automatically; a judgment-call trigger is the player's to declare (see *Difficulty*, III.1; *Reading the Entries*, II.4).
 
 > **MM Note — Pressure Point does not stack with an auto-applied step**
 >

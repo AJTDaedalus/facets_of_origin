@@ -68,7 +68,7 @@ A Background Mark is worth exactly one mark toward the Practiced rank. It has no
 
 **Specialty**
 
-One narrow, specific area of fictional expertise — something too precise to be a skill, but real enough to matter. The MM treats this as a detail that changes difficulty: when the specialty directly applies, a Standard roll becomes Easy. When it is tangential, it gives the MM permission to offer information without a roll.
+One narrow, specific area of fictional expertise — something too precise to be a skill, but real enough to matter. The MM treats this as a detail that changes difficulty: when the specialty directly applies, a Standard roll becomes Easy. When it is tangential, it gives the MM permission to offer information without a roll. A Specialty's step and a Technique's step draw from the same allowance — at most one character-side step moves any single roll, whichever source you pick (see *Difficulty*, III.1).
 
 A Specialty is not a second skill. It is a *fact about your history* that occasionally bends the fiction in your favor.
 

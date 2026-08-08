@@ -135,7 +135,7 @@ listed greps return the expected result; LOG updated.
   Register: `Pushing scope`; `natural ceiling`; `pushed beyond Very Hard under any
   circumstances`; `Their ceiling is their ceiling`.
 
-- [ ] **T2.3 — Difficulty precedence text + taxonomy relocation (C-3, C-4, K-8, D2).**
+- [x] **T2.3 — Difficulty precedence text + taxonomy relocation (C-3, C-4, K-8, D2).**
   Files: `player_handbook/III.1_Core_Resolution.md` (§Difficulty — new precedence
   paragraph per DESIGN §3.2; Technique trigger taxonomy reduced to one sentence),
   `player_handbook/II.4_Character_Creation_Facets.md` (§Reading the Entries receives

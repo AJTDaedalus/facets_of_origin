@@ -226,6 +226,38 @@ anything unexpected.
   (III.1/II.3 wording feeds index terms). FULL suite → **1405 passed** (308s;
   baseline 1395: +13 new, −3 dead-rule tests).
 
+### T2.3 — Difficulty precedence text + taxonomy relocation (C-3, C-4, K-8, D2) (2026-08-08)
+
+- **Files:** `player_handbook/III.1_Core_Resolution.md`,
+  `player_handbook/II.4_Character_Creation_Facets.md`,
+  `player_handbook/II.5_Character_Creation_Backgrounds.md`,
+  `player_handbook/Glossary.md` (Technique, Specialty),
+  `mm_manual/MM5_Quick_Reference.md` (difficulty card + Specialty quick line),
+  `mm_manual/MM2_Session_Design.md` (unlisted touchpoint),
+  `player_handbook/Index.md` (regen), `software/tests/test_docs_consistency.py`.
+- **Did:** III.1 §Difficulty's Technique paragraph replaced by the DESIGN §3.2
+  precedence paragraph (base → Easy-tag override, non-stacking → at most ONE
+  character-side step from Technique/Specialty/anything future → Support step →
+  Easy floor / Very Hard ceiling) + a one-sentence pointer to II.4 for trigger
+  kinds. The trigger taxonomy MOVED (not duplicated) into II.4 §Reading the
+  Entries as a new "Triggers and the difficulty step" paragraph, reworded
+  ("a fact the roll brings with it") so the old III.1 clause dies cleanly.
+  II.5 §Specialty + both Glossary entries gain the shared-allowance sentence.
+  MM5 difficulty-card line and Specialty line recompressed from the new canon.
+- **Unexpected touchpoint:** MM2 §Difficulty and Technique Steps (line 89)
+  restated the old taxonomy verbatim enough to trip the register — recompressed
+  against the new precedence paragraph. (Its neighboring Pressure Point MM Note
+  already teaches the one-character-side-step cap and stands unchanged.)
+  Also fixed pre-T2.3: MM5:266 "capped at Minor, full stop" contradicted D8's
+  Spark purchase — corrected and amended into the T2.2 commit (a379517).
+- **Double-relabel check:** II.2 vignette has no Specialty demonstration; QS
+  pregen Specialty lines state only "Standard becomes Easy when directly
+  applicable"; no MM5 card shows Technique step + Specialty on one roll.
+- **Register:** `something the roll already carries` (verified: present at
+  III.1:73 and MM2:89 pre-edit, absent everywhere post-edit).
+- **Commands:** `python -m tools.build_index`; docs suite → 32 passed (register
+  caught the MM2 hit on first run — fixed, re-ran green).
+
 ---
 
 ## Escalations

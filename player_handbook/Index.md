@@ -148,6 +148,7 @@
 
 *Defined in [III.3](III.3_Combat.md).*
 
+- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
 - [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
 - [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
 - [III.3 — Incoming Condition Tier](III.3_Combat.md#incoming-condition-tier)
@@ -161,6 +162,7 @@
 - [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM2 — Tone and Expectations](../mm_manual/MM2_Session_Design.md#tone-and-expectations)
 - [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
+- [MM5 — Difficulty](../mm_manual/MM5_Quick_Reference.md#difficulty)
 - [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
@@ -203,6 +205,7 @@
 - [II.2 — How Attributes Work in Play](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play)
 - [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Attributes.md#in-play-the-vanishing-of-millhaven)
 - [II.3 — Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope)
+- [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
 - [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
 - [II.4a — Grace Branch](II.4a_Character_Creation_Facet_Body.md#grace-branch)
 - [II.4a — Iron Branch](II.4a_Character_Creation_Facet_Body.md#iron-branch)
@@ -443,7 +446,9 @@
 
 *Defined in [III.3](III.3_Combat.md).*
 
+- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
 - [III.3 — Maneuver](III.3_Combat.md#maneuver)
+- [MM5 — Difficulty](../mm_manual/MM5_Quick_Reference.md#difficulty)
 - [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
 
 ## Mark
@@ -633,7 +638,6 @@
 - [II.6 — Skill Ranks at a Glance](II.6_Character_Creation_Skills.md#skill-ranks-at-a-glance)
 - [II.6 — Starting Skills](II.6_Character_Creation_Skills.md#starting-skills)
 - [III.1 — Skill Modifier](III.1_Core_Resolution.md#skill-modifier)
-- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
 - [III.3 — Strike](III.3_Combat.md#strike)
 - [III.3 — Parry](III.3_Combat.md#parry)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
@@ -696,11 +700,13 @@
 
 *Defined in [III.3](III.3_Combat.md).*
 
+- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
 - [III.3 — Strike](III.3_Combat.md#strike)
 - [III.3 — Conditions](III.3_Combat.md#conditions)
 - [III.3 — Named NPCs](III.3_Combat.md#named-npcs)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
 - [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
+- [MM5 — Difficulty](../mm_manual/MM5_Quick_Reference.md#difficulty)
 - [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 
@@ -842,8 +848,6 @@
 
 ## Specialty
 
-*Defined in [II.5](II.5_Character_Creation_Backgrounds.md).*
-
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
@@ -912,8 +916,6 @@
 
 ## Technique
 
-*Defined in [II.4](II.4_Character_Creation_Facets.md).*
-
 - [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [II.3 — Sparks and Magic](II.3_Magic.md#sparks-and-magic)
@@ -925,7 +927,6 @@
 - [II.4c — Facet of the Soul — Technique Tree](II.4c_Character_Creation_Facet_Soul.md#facet-of-the-soul--technique-tree)
 - [II.5 — Magic and Backgrounds](II.5_Character_Creation_Backgrounds.md#magic-and-backgrounds)
 - [II.6 — Skills of the Body](II.6_Character_Creation_Skills.md#skills-of-the-body)
-- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
 - [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
@@ -1012,7 +1013,6 @@
 - [II.2 — Body](II.2_Character_Creation_Attributes.md#body)
 - [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
 - [II.6 — Skills of the Body](II.6_Character_Creation_Skills.md#skills-of-the-body)
-- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
 - [III.3 — Strike](III.3_Combat.md#strike)
 - [III.3 — Parry](III.3_Combat.md#parry)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)

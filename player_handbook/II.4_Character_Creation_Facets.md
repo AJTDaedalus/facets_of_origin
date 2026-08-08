@@ -115,6 +115,8 @@ The three trees are in Chapters II.4a (Body), II.4b (Mind), and II.4c (Soul). Ev
 > Then the Technique's rule, in prose.
 >
 > **Normal:** the baseline rule this Technique departs from, restated so the size of the departure is unambiguous. Every Technique has one; if the Normal line surprises you, read it before you read the Technique again.
+>
+> **Triggers and the difficulty step.** A Technique that eases a roll moves the MM's declared difficulty one step in your favor — it never replaces the call, only shifts the label already given. How the step arrives depends on the trigger. If the trigger is a fact the roll brings with it — a weapon type, a hazard, a field of study — the step applies on its own and the roll result names it; the digital roller applies these automatically. If the trigger is a judgment call — a hunch, a genuine coincidence — you declare it yourself when you roll. However many Techniques you hold, at most one character-side step moves any single roll, and a Specialty draws from the same allowance (see *Difficulty*, III.1).
 
 ---
 

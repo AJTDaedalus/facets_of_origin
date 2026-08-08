@@ -49,7 +49,7 @@ Keep it open. Look things up. Do not read it.
 | Hard | -1 | Skilled opposition, poor conditions |
 | Very Hard | -2 | Extraordinary opposition, nearly impossible |
 
-A Technique may then move your call one step further — at most one per roll, auto-applied when its trigger is data the app already holds, player-declared otherwise (see *Difficulty*, III.1).
+Adjustments apply in a fixed order: base from the situation → an Easy tag (rider Condition, Maneuver) overrides downward, never stacking with itself → at most **one** character-side step (Technique OR Specialty, whichever the player picks) → Support's step → Easy is the floor, Very Hard the ceiling. Carried triggers auto-apply; judgment-call triggers are player-declared (III.1 *Difficulty*; II.4 *Reading the Entries*).
 
 ### Skill Ranks
 
@@ -376,7 +376,7 @@ Roll or pick a d6 for a generic 6- consequence when nothing specific comes to mi
 
 **When not to roll:** Only roll when outcome is uncertain, stakes matter, and both success and failure move the story.
 
-**Specialty:** A Background Specialty that *directly* applies turns a Standard roll Easy. When it is only tangential, hand over the information free — no roll (II.5, *Specialty*).
+**Specialty:** A Background Specialty that *directly* applies turns a Standard roll Easy — its step shares the single character-side step with Techniques (III.1, *Difficulty*). When it is only tangential, hand over the information free — no roll (II.5, *Specialty*).
 
 **Saving throws:** 2d6 + Major Attribute modifier (Body / Mind / Soul). Same three-tier outcomes. Use when something happens *to* the character, not something they choose.
 
