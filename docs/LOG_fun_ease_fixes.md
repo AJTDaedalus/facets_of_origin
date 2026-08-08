@@ -483,6 +483,42 @@ anything unexpected.
   `test_api_enemy + test_agentic_playtest` 128 passed; `node --check` on
   all three JS files OK.
 
+### T3.4 — Archive Guardian + agentic scenarios + bestiary regen (2026-08-08)
+
+- **Files:** `enemies/archive_guardian.fof`,
+  `software/tools/agentic_playtest/scenarios.py`,
+  `mm_manual/MM1_Encounters_and_Enemies.md` (stat-block example, Table
+  MM1-4 row, phase-change example + Special lever, asymmetric-encounter
+  TR, `.fof` format yaml example), `bestiary/B3_The_Made.md` (hand prose
+  "TR of 17" → 16; stat block regenerated), `bestiary/Finding_Aids.md`
+  (regen), `software/tools/combat_sim.py` (unlisted:
+  `archive_guardian_def` mirrors the .fof), `software/tests/test_enemy.py`
+  (TR test re-derived).
+- **Re-expression (character kept, mechanism changed):** Reduced Mode
+  keeps "attack drops to +1, blows land as Tier 1" verbatim. The
+  "ignores Tier 1 Conditions — sensory subsystem shut down" clause (now
+  vacuous: enemies take no Strike Conditions) becomes "it stops
+  registering harm — left Open, it will not spend an action recovering,
+  because the sensory subsystem that would notice has shut down." Same
+  fiction, live mechanic. `techniques: [phase_change]`; **TR 17 → 16**
+  (the retired technique's +1 came off; breakdown updated in .fof notes,
+  MM1 example, MM1-4 table, MM1 asymmetric section, B3 hand prose).
+- **Sim modeling:** `special_no_clear_open` added to `EnemyState`
+  (mirrors the modeling depth `special_ignores_tier1` had) — after the
+  Guardian's phase fires it never spends the action to clear Open; set
+  in `archive_guardian_def`. Characterization pins unchanged (both
+  guardian seeds defeat it while Open pre-clear).
+- **Gotcha:** the .fof historical note first said "tier1_immunity"
+  verbatim, tripping both the acceptance grep and the shipped-file
+  guard — reworded to describe the retirement without the token. The
+  T3.1 xfail guard (`test_no_shipped_enemy_lists_tier1_immunity_after_t3_4`)
+  now passes as a real pass.
+- **Commands:** `python -m tools.build_bestiary` (2 files), `--check` up
+  to date; `grep -rn "tier1_immunity" enemies/ mm_manual/ bestiary/
+  spec/ software/facets/` → **empty** (only the loader deprecation path
+  in `app/game/enemy.py` remains); enemy/docs/sim/characterization/
+  agentic suites → 97 + 90 + 128 passed.
+
 ---
 
 ## Escalations

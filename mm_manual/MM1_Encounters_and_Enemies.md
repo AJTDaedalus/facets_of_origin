@@ -69,11 +69,11 @@ Resolve: 8 (effective 10 with heavy armor)
 Attack: +3 (Strength +2, Combat Expert +2, −1 from fifteen years of wear) — iron weight, not technique
 Defense: +1 (Dexterity −1, Combat Expert +2)
 Armor: Heavy
-Techniques: phase_change, tier1_immunity
+Techniques: phase_change
 Special: Phase change — when Resolve drops to 2 or below, enters Reduced Mode
-         (Attack drops to +1 and its blows land as Tier 1, but it ignores
-         Tier 1 Conditions entirely — it does not feel them)
-TR: 17
+         (Attack drops to +1 and its blows land as Tier 1, but it stops
+         registering harm — left Open, it never spends an action recovering)
+TR: 16
 ```
 
 ---
@@ -136,7 +136,7 @@ Durability is simply the enemy's base Resolve — the pool a party's Strikes dep
 | Skilled Mook (Combat Practiced, light armor) | 4 | Offense 3, Durability 0, Armor 1 |
 | City Watch Sergeant | 8 | Offense 4, Durability 3, Armor 1 |
 | Veteran Soldier | 10 | Offense 5, Durability 4 (Resolve 4), Armor 1 |
-| The Archive Guardian | 17 | Offense 5, Durability 8 (Resolve 8), Armor 2, Techniques 2 |
+| The Archive Guardian | 16 | Offense 5, Durability 8 (Resolve 8), Armor 2, Techniques 1 |
 
 > **Example — rating an enemy from scratch**
 >
@@ -242,12 +242,12 @@ Bosses should be built to last *and* to change. A Boss that simply has more Reso
 
 > **Example — the Archive Guardian changes phase**
 >
-> *The Archive Guardian's phase change: when its Resolve drops to 2 or below, it enters Reduced Mode. Its attack drops. But it begins ignoring Tier 1 Conditions entirely — not because it's powerful, but because the thing that was interpreting sensory feedback has shut down. It's running on something else now. What that is, the party doesn't know.*
+> *The Archive Guardian's phase change: when its Resolve drops to 2 or below, it enters Reduced Mode. Its attack drops. But it stops registering harm — left Open, it will never spend an action recovering, because the thing that was interpreting sensory feedback has shut down. It's running on something else now. What that is, the party doesn't know.*
 
 **What a phase change may actually do.** A phase must change something that is live *right now*, in the exchange the party is fighting through — a piece of the enemy's runtime state, not a number that was already spent. Four levers do this, and they are the whole toolbox:
 
 - **Raise its danger.** The Boss's attack grows — a higher incoming Condition tier, or a more aggressive posture. It hits harder, or its Strikes are harder to react to. ("It stops holding back.")
-- **Grant or revoke a Special.** The Boss gains or loses a standing rule. The Archive Guardian's Reduced Mode is exactly this: it *starts ignoring Tier 1 Conditions.* A held-in-reserve domain that switches on, a vulnerability that opens, an immunity that drops — all the same lever.
+- **Grant or revoke a Special.** The Boss gains or loses a standing rule. The Archive Guardian's Reduced Mode is exactly this: it *stops spending actions to recover — once Open, it stays Open.* A held-in-reserve domain that switches on, a vulnerability that opens, an immunity that drops — all the same lever.
 - **Second wind.** The Boss adds Resolve — a genuine durability spike the party can *see*, because it moves the same bar they've been grinding down. Use it sparingly; it is the honest version of "the fight isn't over."
 - **Change the space or the target.** The Boss floods the room, collapses the floor, pulls Mooks in, or fixes on a new PC. This is MM-narrated — the engine doesn't track it — but it changes the tactical picture as much as any stat.
 
@@ -263,7 +263,7 @@ Phase changes should feel like story beats, not just mechanical resets. The fict
 
 ## Running Asymmetric Encounters
 
-Sometimes an encounter is designed to be asymmetric — the party cannot win by hitting things until they stop moving. The Archive Guardian encounter from Chapter III.3 is an example: at TR 17 against a Party Strength of 3, it is a Deadly encounter on paper, but it was never intended as a straight fight. Zahna's glyph, Zulnut's structural read, and the specific weak joint Mordai exploited were all intended paths around the raw numbers.
+Sometimes an encounter is designed to be asymmetric — the party cannot win by hitting things until they stop moving. The Archive Guardian encounter from Chapter III.3 is an example: at TR 16 against a Party Strength of 3, it is a Deadly encounter on paper, but it was never intended as a straight fight. Zahna's glyph, Zulnut's structural read, and the specific weak joint Mordai exploited were all intended paths around the raw numbers.
 
 **Design asymmetric encounters deliberately:**
 - Give the party something to notice (an environmental element, a phase change trigger, a behavioral rule)
@@ -337,7 +337,7 @@ Guardian's:
     - resolve_threshold: 2
       description: >
         Reduced Mode. Its attack drops — blows land as Tier 1 — but it
-        stops registering Tier 1 Conditions entirely.
+        stops registering harm: once Open, it stays Open.
 ```
 
 For Mooks, the format simplifies further — a Mook has no `resolve` field at all:

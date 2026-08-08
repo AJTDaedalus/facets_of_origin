@@ -71,16 +71,18 @@ class TestTRCalculation:
                   resolve=4, attack_modifier=3, armor="light")
         assert e.calculate_tr() == 10
 
-    def test_boss_archive_guardian_recomputes_to_14(self):
-        """Archive Guardian: offense(3->5) + resolve(5) + armor(heavy->2) + technique_bonus(2) = 14.
+    def test_boss_archive_guardian_tr_16(self):
+        """Archive Guardian: offense(3->5) + resolve(8) + armor(heavy->2) + technique_bonus(1) = 16.
 
-        Was published as 16 under the old formula, which double-counted the
-        phase-change special as both a durability and a technique bonus.
+        History: published 16 under the old formula (which double-counted
+        the phase-change special), recomputed to 14 by D1, retuned to 17
+        by A8/G1 (Resolve 5->8), and back to 16 by T3.4 — the retired
+        tier1_immunity technique came off the list (K-6/D4).
         """
         e = Enemy(id="guardian", name="Archive Guardian", tier="boss",
-                  resolve=5, attack_modifier=3, armor="heavy",
-                  techniques=["phase_change", "tier1_immunity"])
-        assert e.calculate_tr() == 14
+                  resolve=8, attack_modifier=3, armor="heavy",
+                  techniques=["phase_change"])
+        assert e.calculate_tr() == 16
 
     def test_named_minimum_enforced(self):
         """Named NPC with low stats still gets TR >= 8."""

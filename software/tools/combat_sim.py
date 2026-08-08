@@ -169,12 +169,13 @@ class EnemyState:
 
     `phases` holds this enemy's authored `resolve_threshold`/`description`
     pairs straight from its `.fof` (purely narrative per the engine's
-    `PhaseDef`). `special_attack_mod` is NOT a generic engine mechanic —
-    it models an individual boss's authored "Special" stat-block text
-    (e.g. Archive Guardian's Reduced Mode attack drop) so the simulator's
-    numbers reflect that specific published enemy; a Named NPC or a boss
-    without such text leaves it at its default and phase changes stay
-    purely informational (`phase_index`).
+    `PhaseDef`). `special_attack_mod`/`special_no_clear_open` are NOT a
+    generic engine mechanic — they model an individual boss's authored
+    "Special" stat-block text (e.g. Archive Guardian's Reduced Mode:
+    attack drop, and it stops spending actions to clear Open) so the
+    simulator's numbers reflect that specific published enemy; a Named
+    NPC or a boss without such text leaves them at their defaults and
+    phase changes stay purely informational (`phase_index`).
     """
     name: str
     instance_id: str
@@ -191,6 +192,7 @@ class EnemyState:
     phases: list[dict] = field(default_factory=list)
     phase_index: Optional[int] = None
     special_attack_mod: Optional[int] = None
+    special_no_clear_open: bool = False
 
     @property
     def is_out(self) -> bool:
@@ -441,7 +443,13 @@ def _should_clear_open(enemy: EnemyState) -> bool:
     one for certain to shave one incoming Easy tag is a losing trade.
     Policy, not a rule: the *only* legal clear mechanism is
     `combat.open_clear_mode`'s enemy-action spend, checked by the caller.
+
+    `special_no_clear_open` models an authored Special (Archive Guardian's
+    Reduced Mode: it stops registering harm) — after its phase fires, the
+    boss never spends the action, whatever the general policy says.
     """
+    if enemy.special_no_clear_open and enemy.phase_index is not None:
+        return False
     return enemy.tier == "boss"
 
 
@@ -1174,18 +1182,20 @@ def generic_boss_def(tr: int = 12) -> dict:
 
 
 def archive_guardian_def() -> dict:
-    """Archive Guardian: Boss, TR 17, heavy armor. Matches
+    """Archive Guardian: Boss, TR 16, heavy armor. Matches
     `enemies/archive_guardian.fof` exactly (D1 migration corrected the
     published TR from 16 to 14 — the old `special` bonus was double-
     counted at authoring time, DESIGN §4.1; A8/G1 retuned base Resolve
     5 -> 8 to clear the median-3-exchange floor under the worst-case
-    rider->Easy snowball (pre-Open), per DESIGN §5-bis — TR 14 -> 17).
+    Easy-to-Strike snowball, per DESIGN §5-bis — TR 14 -> 17; T3.4
+    retired the tier1_immunity technique with the Open merge — TR 16).
 
     `phases` is the enemy's authored, purely-narrative `resolve_threshold`
-    trigger (matches the .fof's `phases:` block). `special_attack_mod`
-    models its authored "Special" text (Reduced Mode: attack_modifier
-    drops to +1 and its blows land as Tier 1) — boss-specific flavor, not
-    a generic engine mechanic.
+    trigger (matches the .fof's `phases:` block). `special_attack_mod`/
+    `special_no_clear_open` model its authored "Special" text (Reduced
+    Mode: attack_modifier drops to +1, its blows land as Tier 1, and it
+    stops spending actions to clear Open) — boss-specific flavor, not a
+    generic engine mechanic.
     """
     return dict(
         name="Archive Guardian",
@@ -1197,6 +1207,7 @@ def archive_guardian_def() -> dict:
         armor="heavy",
         phases=[{"resolve_threshold": 2, "description": "Reduced Mode"}],
         special_attack_mod=1,
+        special_no_clear_open=True,
     )
 
 

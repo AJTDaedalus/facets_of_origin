@@ -209,7 +209,7 @@ listed greps return the expected result; LOG updated.
   static js that renders enemy conditions (`play.js`, `components.js`), tests
   (≥3: set, clear, broadcast).
 
-- [ ] **T3.4 — Archive Guardian + agentic scenarios + bestiary regen.**
+- [x] **T3.4 — Archive Guardian + agentic scenarios + bestiary regen.**
   Files: `enemies/archive_guardian.fof` (remove `tier1_immunity`; re-express
   Reduced Mode per DESIGN §4.1 without it),
   `software/tools/agentic_playtest/scenarios.py` (references it),

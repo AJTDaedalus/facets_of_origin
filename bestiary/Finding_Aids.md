@@ -31,7 +31,7 @@ Party Strength 3 bands, from Table MM1–7: **3–7 Mooks** is a Skirmish; **3 N
 | **13** | [Glassback Bull](B1_Beasts_and_Vermin.md) | Boss | B1_Beasts_and_Vermin.md |
 | **14** | [The Unfinished](B4_What_Remains.md) | Boss | B4_What_Remains.md |
 | **15** | [Captain-under-Contract](B2_Folk.md) | Boss | B2_Folk.md |
-| **17** | [Archive Guardian](B3_The_Made.md) | Boss | B3_The_Made.md |
+| **16** | [Archive Guardian](B3_The_Made.md) | Boss | B3_The_Made.md |
 
 ---
 
@@ -58,7 +58,7 @@ Party Strength 3 bands, from Table MM1–7: **3–7 Mooks** is a Skirmish; **3 N
 | Boss | [Glassback Bull](B1_Beasts_and_Vermin.md) | 13 | B1_Beasts_and_Vermin.md |
 | Boss | [The Unfinished](B4_What_Remains.md) | 14 | B4_What_Remains.md |
 | Boss | [Captain-under-Contract](B2_Folk.md) | 15 | B2_Folk.md |
-| Boss | [Archive Guardian](B3_The_Made.md) | 17 | B3_The_Made.md |
+| Boss | [Archive Guardian](B3_The_Made.md) | 16 | B3_The_Made.md |
 
 ---
 
@@ -77,4 +77,4 @@ Every creature below states a negotiation surface — what it wants, what shifts
 | [Glassback Bull](B1_Beasts_and_Vermin.md) | 13 | It wants distance and the herd behind it. |
 | [The Unfinished](B4_What_Remains.md) | 14 | Wants the great work completed. |
 | [Captain-under-Contract](B2_Folk.md) | 15 | Wants the fee, the company intact, and the reputation that gets the next contract. |
-| [Archive Guardian](B3_The_Made.md) | 17 | It wants the archive undisturbed and nothing else. |
+| [Archive Guardian](B3_The_Made.md) | 16 | It wants the archive undisturbed and nothing else. |

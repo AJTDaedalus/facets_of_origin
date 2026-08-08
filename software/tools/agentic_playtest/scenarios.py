@@ -28,11 +28,12 @@ class Scenario:
 ARCHIVE_GUARDIAN = {
     "id": "archive_guardian", "name": "Archive Guardian", "tier": "boss",
     "resolve": 8, "attack_modifier": 3, "defense_modifier": 1, "armor": "heavy",
-    "techniques": ["phase_change", "tier1_immunity"],
+    "techniques": ["phase_change"],
     "phases": [{"resolve_threshold": 2,
                 "description": "Reduced Mode — its attacks weaken and land as "
-                               "Tier 1, but it now ignores Tier 1 Conditions "
-                               "entirely. It is running on something else."}],
+                               "Tier 1, but it stops registering harm: left "
+                               "Open, it will not spend an action recovering. "
+                               "It is running on something else."}],
     "description": "An ancient construct protecting the sealed vault.",
     "tactics": "Holds the vault door. Does not pursue. Strikes whoever is nearest.",
 }
