@@ -120,6 +120,34 @@ anything unexpected.
   is what PHB III.3's example states). Corrected to "Combat Practiced +1" in
   the same pass; `attack_modifier: 3` and TR unchanged.
 
+### T1.4 — MM1 §Mooks "worn down" mechanism (K §4.3) (2026-08-08)
+
+- **Files:** `mm_manual/MM1_Encounters_and_Enemies.md`, `player_handbook/Index.md`
+  (regenerated), `software/tests/test_docs_consistency.py` (register).
+- **Did:** replaced the false Endurance-attrition claim with the true mechanism:
+  Absorb costs nothing; Mook Tier 1 chip (Winded −1 next roll, Off-Balance +1
+  next reaction cost) degrades reactions against simultaneous Named Tier 2s.
+  Register: `arrive at the Named NPC already worn down`. (Edit begun by the WS-1
+  agent before its session ended; completed and verified by the orchestrator.)
+- **Commands:** `grep -rn "worn down" mm_manual/ player_handbook/` → empty.
+  Full suite → **1395 passed** (336s).
+
+### T1.5 — Supersession header (P-15) (2026-08-08)
+
+- **Files:** `research/advancement_priority_questions.md`.
+- **Did:** top-of-file SUPERSEDED FIGURES note: item #5's 6/12 thresholds and
+  4-point cross-Facet economy superseded by shipped II.4 (5/10/15, flat 2 points);
+  pointer to II.4 and this pipeline.
+
+### T1.6 — WS-1 sweep (2026-08-08)
+
+- **Commands:** register invariant test → 1 passed. `grep -rn "Parr" mm_manual/
+  enemies/ software/facets/` → 4 hits, all legitimate PC-side reaction text
+  (MM5 reaction cards, armor-downgrade note, facet.yaml comment).
+  `python -m tools.build_index` and `python -m tools.build_bestiary --check` →
+  both idempotent ("Bestiary is up to date", no Index diff). Tree clean.
+- **Result:** WS-1 complete. 8/8 WS-0+WS-1 tasks done, suite green at 1395.
+
 ---
 
 ## Escalations

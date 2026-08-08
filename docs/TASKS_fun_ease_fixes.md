@@ -86,19 +86,19 @@ listed greps return the expected result; LOG updated.
   Accept: the grep returns no roll-implying lines; bestiary regenerated if any
   listed enemy feeds a stat block.
 
-- [ ] **T1.4 — MM1 §Mooks "worn down" mechanism (K §4.3).**
+- [x] **T1.4 — MM1 §Mooks "worn down" mechanism (K §4.3).**
   Files: `mm_manual/MM1_Encounters_and_Enemies.md`.
   Do: replace the Endurance-attrition claim with the true mechanism: Absorb costs
   nothing; Mook Tier 1 chip degrades reactions against simultaneous Named Tier 2s
   (Winded −1 next roll, Off-Balance +1 next reaction cost).
   Register: the exact "worn down" clause after reading it in situ.
 
-- [ ] **T1.5 — Supersession header (P-15).**
+- [x] **T1.5 — Supersession header (P-15).**
   Files: `research/advancement_priority_questions.md`.
   Do: top-of-file note: item #5 figures superseded by shipped II.4 (5/10/15
   thresholds, flat 2-point cross-Facet cost); pointer to II.4 and this pipeline.
 
-- [ ] **T1.6 — WS-1 sweep.**
+- [x] **T1.6 — WS-1 sweep.**
   Do: run the full register grep; rebuild generated files; full suite;
   `grep -rn "Parr" mm_manual/ enemies/ facets/` — verify every remaining hit is
   legitimate PC-side text. LOG the sweep output.
