@@ -69,7 +69,7 @@ A Technique may then move your call one step further — at most one per roll, a
 - Earned via MM award, Act Break Nomination, peer nomination ("Spark?"), or a player-claimed Graceful Fail
 - Spend **before** rolling: each Spark adds 1d6, drop lowest; no post-roll spending
 - 1 Spark = 3d6 drop lowest; 2 Sparks = 4d6 drop two lowest
-- Start of session: 3 Sparks per character
+- Start of session: 3 Sparks per character — Sparks do not carry over
 - **Graceful Fail:** player-initiated — on any 6-, the player may claim it by narrating how they make the failure worse or richer; MM confirms
 
 ### Spark Flow (MM Guidance)

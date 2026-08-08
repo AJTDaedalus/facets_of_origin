@@ -1058,6 +1058,9 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("Reaction preference: Parry over Dodge", "K-1: enemies do not choose or roll reactions"),
     ("Dodges erratically", "K-1: enemies do not Dodge; defense text is authoring guidance"),
     ("arrive at the Named NPC already worn down", "K §4.3: Absorb costs nothing; Mook pressure is Tier 1 chip, not Endurance attrition"),
+    ("end a session with 2-4 unspent Sparks", "C-2/D1: Sparks reset to 3 each session; the target is spend-what-you-earn (hyphen variant, facet.yaml)"),
+    ("end a session with **2–4 unspent Sparks**", "C-2/D1: Sparks reset to 3 each session; the target is spend-what-you-earn (en-dash+bold variant, MM2)"),
+    ("end a session with 2–4 unspent Sparks", "C-2/D1: Sparks reset to 3 each session; the target is spend-what-you-earn (en-dash variant)"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment

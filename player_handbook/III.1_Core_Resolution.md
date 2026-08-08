@@ -89,7 +89,7 @@ A benchmark is not a ceiling. If the fiction says a task is harder than the tabl
 
 ## Sparks
 
-A **Spark** is a narrative resource you earn by doing something remarkable — and spend for an edge when the stakes are highest. Each character begins each session with **3 Sparks**.
+A **Spark** is a narrative resource you earn by doing something remarkable — and spend for an edge when the stakes are highest. Sparks do not carry over. You start every session with **3**.
 
 ### Earning Sparks
 

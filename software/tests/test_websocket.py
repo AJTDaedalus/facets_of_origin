@@ -498,6 +498,48 @@ class TestWebSocketSparkEarn:
 
 
 # ---------------------------------------------------------------------------
+# Spark session lifecycle (T2.1, D1): Sparks do not carry over —
+# session_reset returns every character to base_sparks_per_session.
+# ---------------------------------------------------------------------------
+
+class TestSparkSessionReset:
+    def _reset(self, client, mm_token, session_id):
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "session_reset"})
+            msg = ws.receive_json()
+        assert msg["type"] == "session_reset"
+
+    def test_depleted_sparks_reset_to_base(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = session_store.get(session_id).characters["Zahna"]
+        char.sparks = 0
+        self._reset(client, mm_token, session_id)
+        assert char.sparks == 3
+
+    def test_hoarded_sparks_do_not_carry_over(self, client, mm_token, session_with_character):
+        """D1: unspent Sparks are wasted Sparks — a hoard of 5 becomes 3."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = session_store.get(session_id).characters["Zahna"]
+        char.sparks = 5
+        self._reset(client, mm_token, session_id)
+        assert char.sparks == 3
+
+    def test_reset_uses_ruleset_base_sparks(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        store_session = session_store.get(session_id)
+        char = store_session.characters["Zahna"]
+        char.sparks = 0
+        assert store_session.ruleset.spark is not None
+        base = store_session.ruleset.spark.base_sparks_per_session
+        self._reset(client, mm_token, session_id)
+        assert char.sparks == base
+
+
+# ---------------------------------------------------------------------------
 # Spark earn peer (any player)
 # ---------------------------------------------------------------------------
 

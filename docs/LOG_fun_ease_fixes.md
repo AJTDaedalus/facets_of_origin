@@ -148,6 +148,37 @@ anything unexpected.
   both idempotent ("Bestiary is up to date", no Index diff). Tree clean.
 - **Result:** WS-1 complete. 8/8 WS-0+WS-1 tasks done, suite green at 1395.
 
+### T2.1 — Spark reset + economy home (C-2, D1) (2026-08-08)
+
+- **Files:** `player_handbook/III.1_Core_Resolution.md`, `player_handbook/Glossary.md`,
+  `mm_manual/MM5_Quick_Reference.md`, `mm_manual/MM2_Session_Design.md`,
+  `mm_manual/MM3_Campaign_Design.md` (unlisted touchpoint),
+  `software/facets/base/facet.yaml`, `software/app/game/character.py`,
+  `software/tests/test_websocket.py`, `software/tests/test_docs_consistency.py`.
+- **Did:** III.1 §Sparks gains the canonical sentence "Sparks do not carry over.
+  You start every session with **3**." (replacing "begins each session with 3
+  Sparks"); Glossary Spark entry and MM5 session-start line mirror it. MM2
+  §Target Economy rewritten to spend-what-you-earn (spend 2–4, earn 2–4 back);
+  Table MM2–3 drops its "End" column (a carry-over concept) — Start/Earned/Spent
+  numbers unchanged. facet.yaml `target_economy` description rewritten;
+  `end_session_target: 2-4` removed (no code consumer — `SparkDef` never modeled
+  `target_economy`). character.py `sparks` docstring now states the reset.
+- **Lifecycle:** new-session reset ALREADY implemented at
+  `software/app/api/websocket.py:1528` (`_handle_session_reset` sets sparks to
+  `base_sparks_per_session`) but had no test — added
+  `TestSparkSessionReset` (3 tests: depleted→3, hoard of 5→3, ruleset-base).
+  Red not achievable (behavior pre-exists); tests are the missing verification.
+- **Unexpected touchpoint:** MM3_Campaign_Design.md:210 ("the Spark they spent…
+  wish they had saved") listed Sparks as a *cross-session* resource tax —
+  contradicts reset-to-3; sentence removed (single-session Spark tax at line
+  208 is untouched and remains correct).
+- **Register:** `end a session with 2-4 unspent Sparks` (hyphen, facet.yaml
+  form) + `end a session with **2–4 unspent Sparks**` (en-dash+bold, MM2 form)
+  + plain en-dash variant.
+- **Commands:** `grep -rn "unspent Spark" player_handbook mm_manual
+  software/facets` → 2 hits, both reset-consistent. Docs suite 32 passed;
+  `TestSparkSessionReset` 3 passed. `python -m tools.build_index` → no diff.
+
 ---
 
 ## Escalations

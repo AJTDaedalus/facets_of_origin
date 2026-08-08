@@ -790,15 +790,15 @@ When a player deliberately plays into their character's weakness — low attribu
 
 ### Target Economy
 
-Each player should end a session with **2–4 unspent Sparks**, having **spent 2–4 during the session**. The earning rate should roughly match the spending rate so Sparks feel like a renewable resource, not a finite one.
+Sparks do not carry over — every character starts every session with 3, so an unspent Spark at the end of the night is simply gone. The target is spend-what-you-earn: each player should **spend 2–4 Sparks during the session** and **earn 2–4 back**, so Sparks feel like a renewable resource, not a finite one.
 
 **Table MM2–3: Spark Target Economy**
 
-| | Start | Earned | Spent | End |
-|---|---|---|---|---|
-| Low activity session | 3 | 1–2 | 1–2 | 2–3 |
-| Standard session | 3 | 2–3 | 3–4 | 2–3 |
-| High combat session | 3 | 3–4 | 4–6 | 1–3 |
+| | Start | Earned | Spent |
+|---|---|---|---|
+| Low activity session | 3 | 1–2 | 1–2 |
+| Standard session | 3 | 2–3 | 3–4 |
+| High combat session | 3 | 3–4 | 4–6 |
 
 ### MM Checklist
 

@@ -105,7 +105,7 @@ the full rule, follow the pointer.
 
 **Skill Point** — One of 4 points a character has to distribute among skills they actually used during a session; each point spent adds one mark toward the skill's next rank, and unspent points do not carry over. *(Chapter II.4)*
 
-**Spark** — A narrative resource earned for remarkable moments and spent before a roll to add a d6, dropping the lowest die. Each character begins each session with 3. *(Chapter III.1)*
+**Spark** — A narrative resource earned for remarkable moments and spent before a roll to add a d6, dropping the lowest die. Sparks do not carry over; every character starts every session with 3. *(Chapter III.1)*
 
 **Specialty** — A narrow, specific area of fictional expertise granted by a Background — not a second skill, but a fact about a character's history that turns a Standard roll Easy when it directly applies. *(Chapter II.5)*
 

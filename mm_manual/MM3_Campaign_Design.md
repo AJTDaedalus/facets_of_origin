@@ -207,7 +207,7 @@ Every encounter — combat or otherwise — costs the party something. Endurance
 
 In a single session, the resource tax is straightforward: the party enters the climactic encounter with whatever Endurance and Sparks they have left after the earlier encounters. This is why a Skirmish before a Hard encounter is useful — it is not about the Skirmish itself, it is about the 2–3 Endurance points the party spent getting through it.
 
-Across multiple sessions, the resource tax is more subtle. It is the NPC the party alienated in session two who will not help them in session four. It is the information they chose not to pursue that would have made the final encounter easier. It is the Spark they spent on a low-stakes moment that they will wish they had saved.
+Across multiple sessions, the resource tax is more subtle. It is the NPC the party alienated in session two who will not help them in session four. It is the information they chose not to pursue that would have made the final encounter easier.
 
 Track what the party has spent, not in a ledger but in your awareness of the fiction. When they arrive at the climax, the story should reflect what they invested to get there.
 

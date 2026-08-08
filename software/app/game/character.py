@@ -36,7 +36,9 @@ class Character(BaseModel):
         primary_facet: The character's chosen Facet ID (e.g. "body", "mind", "soul").
         attributes: Minor attribute ratings keyed by attribute ID. Values are 1, 2, or 3.
         skills: SkillState instances keyed by skill ID.
-        sparks: Current unspent Spark tokens. Starts at the ruleset's base_sparks_per_session.
+        sparks: Current Spark tokens. Sparks do not carry over between sessions:
+            the value starts at the ruleset's base_sparks_per_session and is reset
+            to it on every `session_reset` event.
         session_skill_points_remaining: Points left to spend on skill advancement this session.
         facet_levels: Facet levels earned per Facet, keyed by Facet ID. Cross-Facet
             levels are tracked separately so they can each count toward Major Advancement.

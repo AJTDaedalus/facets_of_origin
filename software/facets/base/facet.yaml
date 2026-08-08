@@ -1312,12 +1312,13 @@ spark:
         that costs you something real in the fiction.
   target_economy:
     description: >
-      Each player should end a session with 2-4 unspent Sparks, having spent
-      2-4 during the session. The earning rate should roughly match the spending
-      rate so Sparks feel like a renewable resource, not a finite one.
+      Sparks do not carry over — every character starts every session with 3
+      (base_sparks_per_session), so an unspent Spark at session's end is simply
+      gone. Target is spend-what-you-earn: each player spends 2-4 Sparks during
+      the session and earns 2-4 back, so Sparks feel like a renewable resource,
+      not a finite one.
     spend_target: 2-4
     earn_target: 2-4
-    end_session_target: 2-4
   variants:
     # Untested/optional rule variants (D6). Default off — measured by PT04,
     # not adopted. Do not flip this on for a live table without re-running

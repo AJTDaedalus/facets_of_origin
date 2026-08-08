@@ -105,7 +105,7 @@ listed greps return the expected result; LOG updated.
 
 ## WS-2 — Rules unification (branch `feat/rules-unification`)
 
-- [ ] **T2.1 — Spark reset + economy home (C-2, D1).**
+- [x] **T2.1 — Spark reset + economy home (C-2, D1).**
   Files: `player_handbook/III.1_Core_Resolution.md` (~line 92),
   `player_handbook/Glossary.md` (Spark entry, line ~108),
   `mm_manual/MM5_Quick_Reference.md` (~line 72),
