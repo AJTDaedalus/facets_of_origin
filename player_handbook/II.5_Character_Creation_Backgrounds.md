@@ -98,7 +98,7 @@ Magic requires two things: a narrative origin and a Facet Technique. The Backgro
 
 **After the Technique is unlocked:** Your domain operates at full capacity — all scopes available, normal difficulty table, any additional benefits the Technique provides. The Technique is not the moment you gain magic. It is the moment your magic becomes what it is capable of being.
 
-This means starting characters with magical Backgrounds have a real but limited version of their domain from session one. The first Facet level — and the Technique that comes with it — is a meaningful mechanical milestone: the moment of formalization, of understanding, of arriving somewhere you have been walking toward.
+This means starting characters with magical Backgrounds have a real but limited version of their domain from session one. The first Facet level — and the Technique that comes with it — is a meaningful mechanical milestone: the moment of formalization, of understanding, of arriving somewhere you have been walking toward. Own that when you choose a magical Background: your first Technique is your formalization, and your first *free* Technique choice comes at Facet level 2.
 
 > **Example — a domain origin**
 >

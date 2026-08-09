@@ -101,7 +101,7 @@ Sparks are awarded for moments that make the table sit up. They can be awarded a
 
 **Act break nomination.** After a major scene transition, the MM calls for nominations, and each player may nominate one other player for something they did in the scene just past. The MM should almost always confirm — this is social reinforcement, not gatekeeping.
 
-**The Graceful Fail.** This one is yours to claim. On any 6−, narrate how you make the failure worse or richer for the story, and the MM confirms. Not every failure earns a Spark; this is for the failures you make worth having.
+**The Graceful Fail.** This one is yours to claim. On any 6−, narrate how you make the failure worse or richer for the story, and the MM confirms. Not every failure earns a Spark; this is for the failures you make worth having. The bar for the confirm is the same one every award clears: the narration must *add* something — a complication, a truth about the character, a detail the table can use — the way the award in Chapter II.2's vignette goes to a player who turns a scenery detail into the scene's next move. A narration that only restates the failure is a failure, not a Graceful one.
 
 ### Spending Sparks
 

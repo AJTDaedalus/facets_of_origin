@@ -947,6 +947,30 @@ anything unexpected.
   (D8 as designed); DESIGN §5.6's Master-at-VH ≈ Practiced-at-Standard
   acceptance is met exactly (both are 2d6+2 vs 7 = 83.3%).
 
+### T4.7 — Four prose notes (P-4, C-10, C-12, C-8) (2026-08-09)
+
+- **P-4 (mage formalization):** II.4 §Techniques — after the
+  reflection-scene paragraph: the magic-granting pick is your
+  **formalization**, first free choice at Facet level 2, "the shape of the
+  arc, not a tax," cross-ref to II.5. II.5 §Magic and Backgrounds — the
+  formalization paragraph gains the own-it sentence.
+- **C-10 (Graceful Fail calibration):** III.1's Graceful Fail paragraph
+  gains the confirm bar — the narration must *add* something, referenced to
+  the II.2 vignette's award (the keyring peer-call: a scenery detail turned
+  into the scene's next move); "a narration that only restates the failure
+  is a failure, not a Graceful one."
+- **C-12 (clock janitor):** III.2 gains "MM Note — nobody plays the
+  janitor" after the wind-back paragraph: rotate the winder, narrate the
+  wind-back as vividly as any roll. New box → List_of_Boxes regenerated
+  (72 boxes).
+- **C-8 (Luck/Spirit):** MM4 §Common Early Mistakes gains the "Never
+  calling for Luck or Spirit" bullet — those attributes earn their points
+  through MM-invoked rolls (matching the section's fix-formatted voice; the
+  watch-for-monocultures caveat is designer guidance and stays in DESIGN,
+  not the MM book).
+- **Commands:** `build_index` + `build_table_register`; docs suite →
+  32 passed. One commit, per the task.
+
 ---
 
 ## Escalations

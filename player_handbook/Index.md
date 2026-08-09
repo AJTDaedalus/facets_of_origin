@@ -368,7 +368,6 @@
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [II.5 — Magic and Backgrounds](II.5_Character_Creation_Backgrounds.md#magic-and-backgrounds)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM3 — Recognizing When It Is Done](../mm_manual/MM3_Campaign_Design.md#recognizing-when-it-is-done)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)

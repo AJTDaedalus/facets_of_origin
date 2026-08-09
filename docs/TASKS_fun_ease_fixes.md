@@ -342,7 +342,7 @@ listed greps return the expected result; LOG updated.
   Accept: pre-Technique Minor success unchanged-or-better; curves recorded for
   Focused + Broad at ranks 0/2/4.
 
-- [ ] **T4.7 — Four prose notes (P-4, C-10, C-12, C-8).**
+- [x] **T4.7 — Four prose notes (P-4, C-10, C-12, C-8).**
   Files: `player_handbook/II.4` + `II.5` (mage's first Technique owned as
   formalization; first free choice at level 2), `player_handbook/III.1` (Graceful
   Fail confirm calibration, cross-ref the II.2 award vignette),

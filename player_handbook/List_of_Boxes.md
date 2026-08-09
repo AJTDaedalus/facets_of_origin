@@ -37,6 +37,7 @@
 | **MM Note** | [The "Don't Roll, Just Do It" principle](III.1_Core_Resolution.md#when-not-to-roll) | III.1_Core_Resolution.md |
 | **Example** | [one roll, three tiers, and a ruling said out loud](III.1_Core_Resolution.md#in-play-the-front-desk) | III.1_Core_Resolution.md |
 | **MM Note** | ["What's different this time?"](III.1_Core_Resolution.md#trying-again) | III.1_Core_Resolution.md |
+| **MM Note** | [nobody plays the janitor](III.2_Adventuring.md#hazards-and-threat-clocks) | III.2_Adventuring.md |
 | **Example** | [Endurance pools](III.3_Combat.md#calculating-your-endurance-pool) | III.3_Combat.md |
 | **MM Note** | [Withdrawn is a tempo move, not a permanent position](III.3_Combat.md#recovering-endurance) | III.3_Combat.md |
 | **MM Note** | [Reading past the stated stance](III.3_Combat.md#postures) | III.3_Combat.md |

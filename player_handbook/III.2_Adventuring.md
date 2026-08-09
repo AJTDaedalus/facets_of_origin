@@ -16,6 +16,10 @@ A **Threat Clock** is a four-segment tracker, visible to the whole table, that r
 
 **Why the wind-back never rolls.** If winding the clock back required a roll, a 7–9 on that very roll would advance the clock you are trying to wind back — a rules-lawyer loop, and an unkind trap for the table in the one chapter written to keep hazards simple for a novice MM to run. Spending the action is the cost. It always works.
 
+> **MM Note — nobody plays the janitor**
+>
+> Because the wind-back always works, it can quietly become a job — the same character spending every action on the valve while everyone else has the adventure. Rotate the winder: let the fiction ask a different character to be the one shoring, venting, bailing this time. And narrate the wind-back as vividly as any roll — the character who buys the party one more segment deserves the same spotlight as the one who rolled a 12.
+
 **The pacing is deliberate.** Roughly 72% of rolls made near a hazard land on partial success or failure — that is simply how often a roll clears 6 or misses 10 across the game's normal range of modifiers. A 4-segment clock, at that rate, fills in roughly five or six party rolls. That is the intended feel: hazards should close in fast enough to matter within a single scene, not linger as background noise. If a hazard is dragging on past that window, the MM should either resolve it narratively or let it fill.
 
 No new resolution mechanic — the clock advances off the outcome tiers you already know from Chapter III.1. Multiple hazards can run at once, each on its own clock.
