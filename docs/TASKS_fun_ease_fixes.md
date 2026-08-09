@@ -267,7 +267,7 @@ listed greps return the expected result; LOG updated.
   Constraint: templates are setting-agnostic mechanics — no new lore, no names
   implying Shattered Origin canon.
 
-- [ ] **T3.10 — Paper fallback + Intercept card (K-13, K-12).**
+- [x] **T3.10 — Paper fallback + Intercept card (K-13, K-12).**
   Files: `player_handbook/III.3_Combat.md` (sidebar: armor = N per-scene
   checkboxes; first-reaction = flip a token, clear at exchange end),
   `mm_manual/MM5_Quick_Reference.md` (Intercept row gains once-per-exchange and

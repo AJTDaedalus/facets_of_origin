@@ -43,6 +43,7 @@
 | **MM Note** | [Dodge or Parry?](III.3_Combat.md#parry) | III.3_Combat.md |
 | **Through the Mirror** | [why enemies lose Resolve and characters take Conditions](III.3_Combat.md#conditions) | III.3_Combat.md |
 | **Through the Mirror** | [why Tier 1 Conditions clear so fast](III.3_Combat.md#tier-1-conditions) | III.3_Combat.md |
+| **Variant** | [running it on paper](III.3_Combat.md#armor) | III.3_Combat.md |
 | **MM Note** | [Mooks as roleplay opportunities](III.3_Combat.md#mooks) | III.3_Combat.md |
 | **Through the Mirror** | [why NPCs never roll](III.3_Combat.md#enemy-attacks) | III.3_Combat.md |
 | **Through the Mirror** | [why armor and partial reactions do not stack](III.3_Combat.md#armor-and-reaction-downgrades) | III.3_Combat.md |

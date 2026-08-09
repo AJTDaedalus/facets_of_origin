@@ -329,6 +329,10 @@ Armor affects incoming severity, not the roll itself. An attacker still interpre
 
 Armor has fictional weight beyond its mechanical effect. Heavy armor announces your presence, imposes noise and heat, and affects how you move through the world outside of combat. The Equipment chapter covers specific armor types and weights.
 
+> **Variant — running it on paper**
+>
+> Without the app, both per-exchange trackers fit on a scrap of paper. Armor: draw one checkbox per downgrade (2 for light, 4 for heavy) and tick one each time it softens a Condition — a fresh row of boxes when the scene ends. Aggressive's first-reaction surcharge: put a token by your sheet when the exchange starts and flip it when you pay your first reaction — flipped means every later reaction this exchange costs the standard amount. Clear it at exchange end.
+
 ---
 
 ## Facing Mooks and Named Antagonists
@@ -731,7 +735,7 @@ An exchange in which no PC took an offensive action is **uncontested** — the s
 | Dodge | 1 Endurance | Dexterity | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
 | Parry | 1 Endurance | Weapon attribute + Combat | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
 | Absorb | 0 Endurance | No roll | Take the hit at full tier. Always available. |
-| Intercept | 2 Endurance | — | Take a hit meant for an ally. |
+| Intercept | 2 Endurance | — | Take a hit meant for an ally — once per exchange; the protected ally decides who steps in. |
 
 ### Strike Outcomes
 

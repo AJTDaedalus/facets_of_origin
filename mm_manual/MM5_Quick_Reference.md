@@ -170,7 +170,7 @@ Default Strike difficulty: **Standard**. Adjust for posture and situation; an Op
 | **Dodge** | 1 End | Dexterity | Avoid entirely | Downgrade 1 tier | Full hit |
 | **Parry** | 1 End | Weapon attribute + Combat | Avoid entirely | Downgrade 1 tier | Full hit |
 | **Absorb** | 0 End | No roll | — | — | Take hit at full tier |
-| **Intercept** | 2 End | — | Protect ally, then Dodge/Parry | — | — |
+| **Intercept** | 2 End | — | Protect ally, then Dodge/Parry — once per exchange; if two would step in, the protected ally decides who | — | — |
 
 At **0 Endurance**: Absorb only.
 

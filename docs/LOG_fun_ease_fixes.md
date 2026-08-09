@@ -697,6 +697,19 @@ anything unexpected.
 - **Commands:** `build_bestiary` (2 files: B2 block + Finding_Aids TR
   re-sort) + `--check` clean; enemy/docs/sim suites → 179 passed.
 
+### T3.10 — Paper fallback + Intercept card (K-13, K-12) (2026-08-08)
+
+- **Files:** `player_handbook/III.3_Combat.md` ("Variant — running it on
+  paper" box after §Armor: armor = one checkbox per downgrade, ticked as
+  spent, fresh row at scene end; Aggressive first-reaction surcharge =
+  flip a token on first paid reaction, clear at exchange end; plus the
+  in-chapter quick-ref Intercept row), `mm_manual/MM5_Quick_Reference.md`
+  (Intercept row gains once-per-exchange + "the protected ally decides
+  who steps in" — both clauses already canonical in III.3 §Intercept
+  body text, so the compression stays a compression), Index +
+  List_of_Boxes regenerated (new Variant box).
+- **Commands:** docs suite → 32 passed.
+
 ---
 
 ## Escalations
