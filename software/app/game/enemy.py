@@ -68,9 +68,13 @@ class Enemy(BaseModel):
     # K-6/D4 Open tag: set at the attacker's option on a full-success
     # Strike, Easy to Strike for everyone while it holds, and cleared only
     # by the enemy visibly spending its action (`combat.open_clear_mode`).
+    # `posture` (T6.4, K-10/D12) is the stance the MM states openly for a
+    # Named/Boss (III.3 §Postures) — it shifts PC reaction difficulty per
+    # Table III.3-9. Mooks never declare Postures, so theirs stays None.
     resolve_current: Optional[int] = None
     conditions: list[str] = Field(default_factory=list)
     open: bool = False
+    posture: Optional[str] = None
 
     def calculate_tr(self) -> int:
         """Calculate Threat Rating using the MM1 formula.
@@ -114,6 +118,8 @@ class Enemy(BaseModel):
             self.resolve_current = self.resolve + armor_bonus
         self.conditions = []
         self.open = False
+        # T6.4: Named/Boss enter at the baseline stance; Mooks never hold one.
+        self.posture = None if self.tier == "mook" else "measured"
 
     def to_client_dict(self) -> dict:
         """Serialize for sending to clients.

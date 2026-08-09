@@ -132,6 +132,69 @@ function enemyResolveDisplay(enemy) {
   return { current: current, max: max };
 }
 
+/**
+ * T6.4 (K-10/D12): Table III.3-9 shift for an enemy stance, read from the
+ * ruleset (`combat.enemy_attacks.posture_reaction_shift`) — display never
+ * carries its own copy of the table.
+ */
+function enemyPostureShift(posture) {
+  const ea = state.ruleset && state.ruleset.combat && state.ruleset.combat.enemy_attacks;
+  const shifts = (ea && ea.posture_reaction_shift) || {};
+  return shifts[posture] || 'none';
+}
+
+function enemyPostureOptions() {
+  const ea = state.ruleset && state.ruleset.combat && state.ruleset.combat.enemy_attacks;
+  return Object.keys((ea && ea.posture_reaction_shift) || {});
+}
+
+/**
+ * Posture panel for a Named/Boss tracker entry (T6.4, K-10). The MM states
+ * the stance openly (III.3 §Postures, T3.8/D12), so the stance and the
+ * reaction-difficulty label it implies are visible to everyone; the stance
+ * select and the conduct triggers are MM-side.
+ */
+function renderEnemyPosturePanel(key, enemy, mmControls) {
+  if (enemy.tier === 'mook') return '';
+  const posture = enemy.posture || 'measured';
+  const shift = enemyPostureShift(posture);
+  // Table III.3-9: Aggressive - reactions one step harder; Measured - no
+  // adjustment; Defensive - reactions one step easier.
+  const reactLabel = shift === 'harder' ? 'reactions vs its attacks one step harder'
+    : shift === 'easier' ? 'reactions vs its attacks one step easier'
+    : 'reactions vs its attacks unadjusted';
+  // Strike difficulty hint (III.3 §Strike): Standard by default; Open is
+  // Easy for everyone; a Defensive stance may push the MM's call to Hard.
+  const strikeHint = enemy.open
+    ? 'Easy to Strike (Open)'
+    : posture === 'defensive'
+      ? 'Strike: Standard, consider Hard (Defensive)'
+      : 'Strike: Standard by default';
+
+  const stanceControl = mmControls
+    ? '<select class="enemy-posture-select" title="The MM states this stance openly (III.3)"'
+      + ' onchange="enemySetPosture(\'' + escapeHtml(key) + '\', this.value)">'
+      + enemyPostureOptions().map(function (p) {
+          return '<option value="' + escapeHtml(p) + '"' + (p === posture ? ' selected' : '') + '>'
+            + escapeHtml(p) + '</option>';
+        }).join('')
+      + '</select>'
+    : '<span class="posture-badge posture-' + escapeHtml(posture) + '">' + escapeHtml(posture) + '</span>';
+
+  // Conduct triggers (T3.8): rule-driven stance changes the MM authored on
+  // the stat block — shown beside the stance so the MM plays them.
+  const triggers = mmControls && enemy.triggers && enemy.triggers.length
+    ? '<div class="enemy-tactics"><strong>Triggers:</strong> '
+      + enemy.triggers.map(function (t) { return escapeHtml(t); }).join(' · ') + '</div>'
+    : '';
+
+  return '<div class="enemy-posture-panel" style="margin-top:4px;font-size:11px;">'
+    + '<span style="color:var(--text-dim);">Stance:</span> ' + stanceControl
+    + ' <span style="color:var(--text-dim);">— ' + reactLabel + ' · ' + strikeHint + '</span>'
+    + '</div>'
+    + triggers;
+}
+
 function renderEnemyCard(key, enemy, opts) {
   opts = opts || {};
   const conditions = enemy.conditions || [];
@@ -232,6 +295,7 @@ function renderEnemyCard(key, enemy, opts) {
     + escapeHtml(enemy.tier) + ' | TR ' + (enemy.tr || '?') + '</span>'
     + '</div>'
     + '<div style="margin-top:4px;">' + resolveBlock + '</div>'
+    + renderEnemyPosturePanel(key, enemy, opts.mmControls)
     + '<div style="font-size:12px;margin-top:4px;">'
     + (openBadge || condHtml
         ? [openBadge, condHtml].filter(Boolean).join(' ')

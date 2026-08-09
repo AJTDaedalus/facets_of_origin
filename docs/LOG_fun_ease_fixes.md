@@ -1443,6 +1443,36 @@ anything unexpected.
   tests/test_api.py tests/test_agentic_playtest.py` → **454 passed**;
   `node --check` on app.js/play.js.
 
+### T6.4 — Enemy posture panel (K-10) (2026-08-09)
+
+- **TDD:** 4 tests red first (`TestEnemyPostureWS`): stance set broadcasts
+  and persists (Named spawns at "measured"); invalid stance rejected (enemy
+  stances are the Table III.3–9 three, not the PC posture list); Mooks
+  cannot declare (error names the III.3 rule); stance survives unrelated
+  `enemy_update`s (Open toggle).
+- **Model:** `Enemy.posture` joins the ephemeral tracker-state block
+  (pattern of `open`); `init_combat()` sets "measured" for Named/Boss, None
+  for Mooks.
+- **WS:** `_handle_enemy_update` accepts `posture`, validated against the
+  ruleset's `combat.enemy_attacks.posture_reaction_shift` keys (never
+  hardcoded); the manual-update broadcast now carries `posture`.
+- **Client:** `renderEnemyPosturePanel()` in `components.js` on every
+  Named/Boss tracker card — stance select (MM) / stance badge (players,
+  since T3.8 canon is that the MM states stances openly), auto-labels
+  derived from the ruleset's Table III.3–9 data (`enemyPostureShift()`) for
+  the reaction difficulty players face, a Strike-difficulty hint per III.3
+  §Strike (Standard default / "consider Hard (Defensive)" / "Easy to Strike
+  (Open)"), and the conduct `triggers:` text displayed beside it (MM side).
+  `play.js`: `enemySetPosture()` sender + stance-change system-chat
+  announcement with the reaction effect. Compact `.enemy-posture-select`
+  CSS.
+- **Scope note:** the PC react flow keeps MM-declared difficulty — the
+  panel is the display aid the task asked for; the rule itself already
+  lives in `combat.enemy_posture_reaction_difficulty` for the simulator.
+- **Commands:** `pytest tests/test_websocket.py tests/test_enemy.py
+  tests/test_api_enemy.py tests/test_agentic_playtest.py
+  tests/test_combat_sim.py` → **525 passed**; `node --check` both JS files.
+
 ---
 
 ## Escalations

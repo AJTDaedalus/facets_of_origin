@@ -442,7 +442,7 @@ listed greps return the expected result; LOG updated.
   Files: session state (per-player last-earn/last-spend), websocket MM-only prompt
   event, `play.js` MM display, tests (≥3).
 
-- [ ] **T6.4 — Enemy posture panel (K-10).**
+- [x] **T6.4 — Enemy posture panel (K-10).**
   Files: enemy tracker (posture field), auto-labels: reaction difficulty players
   face (Table III.3-9) + Strike difficulty hint, conduct-trigger text display;
   websocket + `play.js`/`builder.js`; tests (≥3).

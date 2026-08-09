@@ -4740,3 +4740,71 @@ class TestSparkFlowNudge:
             assert ws.receive_json()["type"] == "roll_result"
         flow = session_store.get(session_id).spark_flow["Zahna"]
         assert time.monotonic() - flow["last_flow"] < SPARK_FLOW_NUDGE_SECONDS
+
+# ---------------------------------------------------------------------------
+# Enemy posture panel (T6.4, K-10)
+# ---------------------------------------------------------------------------
+
+class TestEnemyPostureWS:
+    """T3.8/D12: the MM states Named/Boss stances openly; the tracker carries
+    the stance so the table sees the reaction difficulty it implies
+    (Table III.3-9). Mooks never declare Postures."""
+
+    def _session_with(self, client, mm_headers, tier="named"):
+        resp = client.post("/api/sessions/", json={"name": "Posture Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        body = {"session_id": session_id, "id": "subject", "name": "Subject", "tier": tier}
+        if tier != "mook":
+            body["resolve"] = 3
+        client.post("/api/enemies/", json=body, headers=mm_headers)
+        return session_id
+
+    def test_set_posture_broadcasts(self, client, mm_headers, mm_token):
+        session_id = self._session_with(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "subject", "instance_name": "S1"})
+            spawned = ws.receive_json()
+            # A Named enemy enters the fight at the baseline stance.
+            assert spawned["enemy"]["posture"] == "measured"
+            ws.send_json({"type": "enemy_update", "tracker_key": "S1", "posture": "aggressive"})
+            msg = ws.receive_json()
+            assert msg["type"] == "enemy_updated"
+            assert msg["posture"] == "aggressive"
+            assert session_store.get(session_id).active_enemies["S1"].posture == "aggressive"
+
+    def test_invalid_posture_rejected(self, client, mm_headers, mm_token):
+        session_id = self._session_with(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "subject", "instance_name": "S1"})
+            ws.receive_json()
+            ws.send_json({"type": "enemy_update", "tracker_key": "S1", "posture": "withdrawn"})
+            msg = ws.receive_json()
+            assert msg["type"] == "error"
+            # Enemy stances are the Table III.3-9 three, not the PC posture list.
+            assert session_store.get(session_id).active_enemies["S1"].posture == "measured"
+
+    def test_mook_cannot_declare_posture(self, client, mm_headers, mm_token):
+        session_id = self._session_with(client, mm_headers, tier="mook")
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "subject", "instance_name": "M1"})
+            spawned = ws.receive_json()
+            assert spawned["enemy"]["posture"] is None
+            ws.send_json({"type": "enemy_update", "tracker_key": "M1", "posture": "aggressive"})
+            msg = ws.receive_json()
+            assert msg["type"] == "error"
+            assert "Mook" in msg["message"]
+
+    def test_posture_survives_other_updates(self, client, mm_headers, mm_token):
+        session_id = self._session_with(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "subject", "instance_name": "S1"})
+            ws.receive_json()
+            ws.send_json({"type": "enemy_update", "tracker_key": "S1", "posture": "defensive"})
+            ws.receive_json()
+            ws.send_json({"type": "enemy_update", "tracker_key": "S1", "open": True})
+            msg = ws.receive_json()
+            assert msg["posture"] == "defensive"

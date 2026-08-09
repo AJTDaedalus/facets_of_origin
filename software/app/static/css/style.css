@@ -999,6 +999,16 @@ label {
   text-transform: capitalize;
 }
 .posture-aggressive { background: rgba(244,67,54,0.2); color: #f44336; }
+
+/* Enemy stance select on the tracker (T6.4) — compact, inline with its labels. */
+.enemy-posture-select {
+  width: auto;
+  display: inline-block;
+  padding: 1px 4px;
+  margin: 0;
+  font-size: 11px;
+  text-transform: capitalize;
+}
 .posture-measured   { background: rgba(158,158,158,0.2); color: var(--text-dim); }
 .posture-defensive  { background: rgba(33,150,243,0.2); color: #2196f3; }
 .posture-withdrawn  { background: rgba(158,158,158,0.15); color: var(--text-dim); font-style: italic; }

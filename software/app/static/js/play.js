@@ -574,6 +574,14 @@ function enemyToggleOpen(trackerKey) {
   sendWS({ type: 'enemy_update', tracker_key: trackerKey, open: !enemy.open });
 }
 
+/**
+ * T6.4 (K-10/D12): the MM states a Named/Boss stance openly. The server
+ * validates the stance against Table III.3-9's set and broadcasts it.
+ */
+function enemySetPosture(trackerKey, posture) {
+  sendWS({ type: 'enemy_update', tracker_key: trackerKey, posture: posture });
+}
+
 async function removeEnemy(trackerKey) {
   const enemy = state.activeEnemies[trackerKey];
   const label = enemy ? (enemy.name || trackerKey) : trackerKey;
@@ -635,6 +643,18 @@ function onEnemyUpdated(msg) {
       addSystemChat(`${name} spends its action recovering — no longer Open.`);
     }
     enemy.open = msg.open;
+  }
+  if ('posture' in msg) {
+    // T6.4: a stated stance is a table beat (III.3 — the MM states enemy
+    // stances openly), and it tells players what their reactions face.
+    if (msg.posture && msg.posture !== enemy.posture) {
+      const shift = enemyPostureShift(msg.posture);
+      const effect = shift === 'harder' ? 'reactions against its attacks are one step harder'
+        : shift === 'easier' ? 'reactions against its attacks are one step easier'
+        : 'reactions against its attacks are unadjusted';
+      addSystemChat(`${name} holds a ${msg.posture} stance — ${effect}.`);
+    }
+    enemy.posture = msg.posture;
   }
 
   // `defeated` comes from the engine — for a Mook that means one Strike landed

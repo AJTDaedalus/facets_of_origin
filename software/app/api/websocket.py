@@ -1730,6 +1730,29 @@ async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
             enemy.conditions.remove(cond)
     if "open" in msg:
         enemy.open = bool(msg["open"])
+    if "posture" in msg:
+        # T6.4 (K-10/D12): the MM states Named/Boss stances openly. Valid
+        # enemy stances are the Table III.3-9 set, read from the ruleset
+        # (`combat.enemy_attacks.posture_reaction_shift`), never hardcoded.
+        if enemy.tier == "mook":
+            await manager.broadcast(session_id, {
+                "type": "error",
+                "message": "Mooks do not declare Postures — the MM sets "
+                           "reaction difficulty by situation (III.3).",
+            })
+            return
+        posture = str(msg["posture"])
+        valid_postures = set(
+            session.ruleset.combat.enemy_attacks.posture_reaction_shift.model_dump()
+        )
+        if posture not in valid_postures:
+            await manager.broadcast(session_id, {
+                "type": "error",
+                "message": f"Unknown enemy Posture '{posture}'. Expected one "
+                           f"of: {', '.join(sorted(valid_postures))}.",
+            })
+            return
+        enemy.posture = posture
 
     await manager.broadcast(session_id, {
         "type": "enemy_updated",
@@ -1737,6 +1760,7 @@ async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
         "resolve_current": enemy.resolve_current,
         "conditions": list(enemy.conditions),
         "open": enemy.open,
+        "posture": enemy.posture,
     })
 
     if phase_index is not None:
