@@ -252,10 +252,11 @@ function renderToolsRuleSummaries() {
         <li>Prismatic: Hard/VH/VH (reach-Sparks cannot move the difficulty; dice-Sparks work normally)</li>
       </ul>
       <p style="margin-top:6px;"><strong>Spark Uses:</strong> Improve Roll (add die, drop lowest),
-         Push Scope (one step harder), Ease Focused Major</p>
+         Ease Focused Major</p>
       <p><strong>Pre-Technique:</strong> Minor scope only. The scope restriction is the whole limitation
          &mdash; there is no extra difficulty step.</p>
-      <p><strong>Secondary domain:</strong> always one difficulty step harder than the primary.</p>
+      <p><strong>Second domain:</strong> one difficulty step harder than normal for that domain
+         until the character earns their next Facet level; then the penalty lifts.</p>
     </div>
   `);
 

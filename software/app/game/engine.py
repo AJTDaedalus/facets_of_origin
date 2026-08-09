@@ -228,7 +228,7 @@ def resolve_saving_throw(
 # The only Spark uses a magic roll recognises (II.3, Sparks and Magic; T2.2/D8):
 # the dice rule, plus the exactly-two reach cases. "push_scope" was retired with
 # the un-executable "one scope tier beyond Major" rule (P-1).
-_VALID_SPARK_USES = frozenset({"improve_roll", "ease_focused_major", "pre_technique_push"})
+VALID_SPARK_USES = frozenset({"improve_roll", "ease_focused_major", "pre_technique_push"})
 
 
 def can_spark_ease_major(domain_type: str, scope: str, ruleset: MergedRuleset) -> bool:
@@ -287,7 +287,7 @@ def resolve_magic_roll(
             (reach-Sparks cannot move a Broad working's difficulty), or a
             pre-Technique cast beyond the permitted scope.
     """
-    if spark_use is not None and spark_use not in _VALID_SPARK_USES:
+    if spark_use is not None and spark_use not in VALID_SPARK_USES:
         raise ValueError(
             f"Unknown Spark use '{spark_use}'. A Spark improves the dice on any "
             "roll, or buys reach in exactly two cases: a pre-Technique "
@@ -403,13 +403,20 @@ def resolve_magic_roll(
         "intuitive": ("spirit", "attune"),
         "scholarly": ("knowledge", "lore"),
     }
-    attr_id, skill_id = _tradition_defaults.get(tradition, ("knowledge", "lore"))
-    traditions_cfg = getattr(ruleset.magic, "traditions", None)
-    if isinstance(traditions_cfg, dict):
-        trad_cfg = traditions_cfg.get(tradition)
-        if isinstance(trad_cfg, dict):
-            attr_id = trad_cfg.get("attribute", attr_id)
-            skill_id = trad_cfg.get("skill", skill_id)
+    traditions_cfg = getattr(ruleset.magic, "traditions", None) or {}
+    trad_cfg = traditions_cfg.get(tradition)
+    if trad_cfg is not None:
+        attr_id, skill_id = trad_cfg.attribute, trad_cfg.skill
+    elif tradition in _tradition_defaults:
+        attr_id, skill_id = _tradition_defaults[tradition]
+    else:
+        # A domain declaring a tradition no Facet defines is a data error, and
+        # guessing produces a wrong roll nobody can see. Name it instead.
+        raise ValueError(
+            f"Domain '{domain_id}' declares tradition '{tradition}', which no "
+            f"loaded Facet defines under magic.traditions "
+            f"(known: {', '.join(sorted(traditions_cfg)) or 'none'})."
+        )
 
     attr_rating = character.attributes.get(attr_id, 2)
 

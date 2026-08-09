@@ -648,10 +648,7 @@ function onEnemyUpdated(msg) {
     // T6.4: a stated stance is a table beat (III.3 — the MM states enemy
     // stances openly), and it tells players what their reactions face.
     if (msg.posture && msg.posture !== enemy.posture) {
-      const shift = enemyPostureShift(msg.posture);
-      const effect = shift === 'harder' ? 'reactions against its attacks are one step harder'
-        : shift === 'easier' ? 'reactions against its attacks are one step easier'
-        : 'reactions against its attacks are unadjusted';
+      const effect = enemyPostureShiftLabel(enemyPostureShift(msg.posture));
       addSystemChat(`${name} holds a ${msg.posture} stance — ${effect}.`);
     }
     enemy.posture = msg.posture;

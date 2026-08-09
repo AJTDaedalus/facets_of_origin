@@ -1548,3 +1548,101 @@ anything unexpected.
 ## Escalations
 
 (none)
+
+---
+
+## PR #26 review pass (2026-08-09)
+
+Eight-angle code review of the branch, plus the owner's tradition-naming
+ruling. Seven findings fixed, each red-first; two candidates judged and left
+alone.
+
+### D15 — tradition names settled (owner ruling)
+
+- **Invocation** = the intuitive tradition (Spirit, casting adds Attune,
+  Soul-aligned); **Thaumaturgy** = the scholarly tradition (Knowledge, casting
+  adds Lore, Mind-aligned). These fill the slot the displaced working names
+  left: "Resonance" became a Soul *domain* in II.3 and could not be reused.
+- **Scope:** D7 stands — the core PHB stays attribute-keyed and prints no
+  tradition proper nouns; the names live at the setting layer. The Body
+  tradition's name is still open.
+- **Surfaces:** `docs/DECISIONS.md` (D15), `research/magic_system_analysis.md`
+  §6 naming note, `README.md` (which still advertised Resonance/Channeling).
+
+### Fixes — server
+
+- **Cast never marked the skill it rolled.** T4.1/D7 put Attune/Lore on every
+  casting roll, but `_handle_cast` was the one rolling handler that did not add
+  it to `skills_used_this_session`. A caster who also made any other roll then
+  read as never having used their casting skill, so advancement refused the
+  skill their roll banner showed all session — cross-Facet outright, otherwise
+  via the single training mark. Now marked from `result.request.skill_id`.
+- **Cast Spark spends were invisible to the flow tracker.** `_handle_cast`
+  called `character.spend_spark()` directly, bypassing `_spend_sparks(...,
+  session)` and so `record_spark_flow`. A caster spending Sparks steadily still
+  tripped T6.3's "hasn't earned or spent a Spark in a while" nudge, telling the
+  MM a busy player had gone quiet. Now routed through `_spend_sparks`.
+- **Two copies of the valid Spark-use list.** The handler's pre-check
+  re-listed engine's set inline; this PR had already hand-edited both to retire
+  `push_scope`. `_VALID_SPARK_USES` is now public `VALID_SPARK_USES` and the
+  handler imports it — one list, and a test asserts they are the same object.
+- **`enemy_update` applied fields before it validated posture.** A message
+  carrying both a Resolve change and a bad posture (typo, or any posture on a
+  Mook) applied the Resolve, then errored and returned *before* the
+  `enemy_updated` broadcast — server state moved, no client heard, and the next
+  Resolve adjustment computed from the stale number every client still showed.
+  Posture is now validated before any mutation.
+
+### Fixes — client
+
+- **In-app quick reference had two dead rules.** `tools.js` still listed
+  "Push Scope" (the engine rejects it) and "always one difficulty step harder"
+  for the second domain (a phrase this PR itself registered as retired). Both
+  corrected to canon. The reason the register missed them: `_RETIRED_SCAN_DIRS`
+  omitted `software/app/static`, so the in-app rule summaries were the one
+  quick reference the guard did not cover. **Added** — the guard failed on the
+  second phrase the moment it was, which is how it was found to be real.
+- **Advancement caps hardcoded in JS.** `builder.js` mirrored D10's two
+  numbers as literals (`< 1` training cap, "Up to 2 unspent points bank")
+  though the PR added `advancement.training_marks_per_session` and `bank_cap`
+  to the ruleset the server enforces from, and that same function already reads
+  `marks_per_rank`. Now read from the ruleset.
+- **`training_marks_this_session` broadcast but never ingested.** `app.js`
+  ignored the field on `skill_point_spent`, so the builder's training
+  affordance stayed enabled after the mark was spent and the second click hit a
+  server refusal instead of a greyed-out button. Now ingested.
+- **Posture wording drift.** The tracker panel and the system-chat beat
+  described the same Table III.3-9 effect in two phrasings; extracted
+  `enemyPostureShiftLabel(shift)` in `components.js` and used it in both.
+
+### Hardening — the tradition block is typed
+
+`magic.traditions` was the one rules block still `dict[str, Any]` while every
+sibling (EnduranceDef, MagicSparkRulesDef, …) is a typed sub-model, and the
+engine layered a silent `.get(tradition, ("knowledge", "lore"))` over it. A
+misspelled key (`atribute:`) validated cleanly and cast with the *other*
+tradition's attribute and skill — a wrong roll at the table with nothing on
+screen to explain it. Now `TraditionDef` (both fields required,
+`extra="forbid"`), and a domain naming a tradition no Facet defines raises
+instead of guessing.
+
+### Judged and left alone
+
+- **`compose_difficulty`'s unused generality.** Its `character`/`context`/
+  `support_ease` parameters have no production caller — `target_strike_difficulty`
+  passes `easy_tag` alone. Kept: it is the printed precedence's only home and
+  the tests exercise the full ladder. Its docstring's claim that "WS handlers
+  and the simulator compose through here" was false, though, so that is
+  corrected to name the real paths.
+- **Two low-severity perf notes** (the Spark-flow check runs per message; the
+  band is computed twice per tracker mutation) — microseconds at tabletop
+  scale, named honestly as cleanliness rather than cost. Not changed.
+
+### Validation
+
+- **Red first on every fix:** 7 failing before, 17 passing after
+  (`TestCastMarksTheTraditionSkill`, `TestCastSparkSpendRecordsFlow`,
+  `TestCastSparkUsesFollowTheEngine`, `TestEnemyUpdateIsAllOrNothing`,
+  `TestTraditionDef`, plus two client-sync invariants in
+  `test_docs_consistency.py`).
+- **Full suite: 1536 passed**, 0 failures (1519 at pipeline close, +17).

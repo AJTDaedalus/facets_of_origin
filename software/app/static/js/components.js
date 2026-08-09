@@ -143,6 +143,17 @@ function enemyPostureShift(posture) {
   return shifts[posture] || 'none';
 }
 
+/**
+ * How a stance's reaction shift reads at the table (Table III.3-9). One
+ * wording, used by both surfaces that describe it — the tracker panel and the
+ * system-chat beat drifted to two phrasings of the same effect.
+ */
+function enemyPostureShiftLabel(shift) {
+  if (shift === 'harder') return 'reactions vs its attacks one step harder';
+  if (shift === 'easier') return 'reactions vs its attacks one step easier';
+  return 'reactions vs its attacks unadjusted';
+}
+
 function enemyPostureOptions() {
   const ea = state.ruleset && state.ruleset.combat && state.ruleset.combat.enemy_attacks;
   return Object.keys((ea && ea.posture_reaction_shift) || {});
@@ -160,9 +171,7 @@ function renderEnemyPosturePanel(key, enemy, mmControls) {
   const shift = enemyPostureShift(posture);
   // Table III.3-9: Aggressive - reactions one step harder; Measured - no
   // adjustment; Defensive - reactions one step easier.
-  const reactLabel = shift === 'harder' ? 'reactions vs its attacks one step harder'
-    : shift === 'easier' ? 'reactions vs its attacks one step easier'
-    : 'reactions vs its attacks unadjusted';
+  const reactLabel = enemyPostureShiftLabel(shift);
   // Strike difficulty hint (III.3 §Strike): Standard by default; Open is
   // Easy for everyone; a Defensive stance may push the MM's call to Hard.
   const strikeHint = enemy.open

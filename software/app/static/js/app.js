@@ -473,6 +473,12 @@ function handleServerMessage(msg) {
       addSystemChat(`${msg.player} spent ${msg.sp_cost} SP on ${msg.skill_id}${msg.rank_advances > 0 ? ' -- rank up!' : ''}.`);
       if (state.character && msg.player === state.playerName) {
         state.character.session_skill_points_remaining = msg.session_skill_points_remaining;
+        // The training mark gates the builder's "train" affordance (T4.3/D10);
+        // without it the gate stayed open and the second click hit a server
+        // refusal instead of a greyed-out button.
+        if (msg.training_marks_this_session !== undefined) {
+          state.character.training_marks_this_session = msg.training_marks_this_session;
+        }
         if (state.character.skills[msg.skill_id]) {
           state.character.skills[msg.skill_id].marks = msg.new_marks;
           if (msg.rank_advances > 0) state.character.skills[msg.skill_id].rank = msg.new_rank;

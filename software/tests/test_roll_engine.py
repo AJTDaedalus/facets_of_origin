@@ -1031,7 +1031,7 @@ class TestCastingSkill:
     def test_yaml_traditions_drive_the_mapping(self, ruleset):
         """facet.yaml's magic.traditions block is the source of the mapping."""
         traditions = ruleset.magic.traditions
-        assert traditions["scholarly"]["attribute"] == "knowledge"
-        assert traditions["scholarly"]["skill"] == "lore"
-        assert traditions["intuitive"]["attribute"] == "spirit"
-        assert traditions["intuitive"]["skill"] == "attune"
+        assert traditions["scholarly"].attribute == "knowledge"
+        assert traditions["scholarly"].skill == "lore"
+        assert traditions["intuitive"].attribute == "spirit"
+        assert traditions["intuitive"].skill == "attune"

@@ -890,9 +890,10 @@ def compose_difficulty(
        primitives (`engine._step_difficulty_easier`/`_harder`) saturate
        at both ends.
 
-    This is the rule's only home — WS handlers and the simulator compose
-    through here (or through `apply_character_difficulty_step` when no tag
-    or Support is in play), never inline.
+    This is the rule's only home. `target_strike_difficulty` composes through
+    here for the Easy tag; the WS handlers and the simulator reach the same
+    ladder through `apply_character_difficulty_step`, which step 3 calls.
+    Nobody steps a difficulty inline.
 
     Returns `(final_label, applied_source_id)` — the source id is a
     Technique id, the literal `"specialty"`, or None (see

@@ -39,15 +39,24 @@ function renderBuilderSkills() {
     return;
   }
 
+  // T4.3/D10's two numbers are ruleset data the server enforces
+  // (Character.spend_skill_point / start_new_session), so read them rather
+  // than mirroring them here — a Facet that retunes either would otherwise
+  // leave the UI offering what the server refuses.
+  const adv = state.ruleset.advancement || {};
+  const bankCap = adv.bank_cap !== undefined ? adv.bank_cap : 2;
+  const trainingCap = adv.training_marks_per_session !== undefined
+    ? adv.training_marks_per_session : 1;
+
   const sp = char.session_skill_points_remaining || 0;
   spEl.innerHTML = `<strong style="color:var(--gold);">${sp}</strong> Skill Point${sp === 1 ? '' : 's'}
     left this session. Primary-Facet skills cost 1, everything else costs 2.
-    Up to 2 unspent points bank into the next session.`;
+    Up to ${bankCap} unspent point${bankCap === 1 ? '' : 's'} bank into the next session.`;
 
   const usedSkills = char.skills_used_this_session || [];
   const hasUsedSkills = usedSkills.length > 0;
-  // T4.3/D10: 1 point per session may train an UNUSED Primary-Facet skill.
-  const trainingAvailable = (char.training_marks_this_session || 0) < 1;
+  // T4.3/D10: a point per session may train an UNUSED Primary-Facet skill.
+  const trainingAvailable = (char.training_marks_this_session || 0) < trainingCap;
 
   listEl.innerHTML = '';
   if (!hasUsedSkills) {
@@ -75,7 +84,7 @@ function renderBuilderSkills() {
     const usedBadge = wasUsed ? '<span style="color:var(--success);font-size:10px;margin-left:4px;">USED</span>' : '';
     const notUsedNote = hasUsedSkills && !wasUsed && canAfford
       ? (canTrain
-        ? '<span style="color:var(--gold);font-size:10px;margin-left:4px;">train (1/session)</span>'
+        ? `<span style="color:var(--gold);font-size:10px;margin-left:4px;">train (${trainingCap}/session)</span>`
         : '<span style="color:var(--text-dim);font-size:10px;margin-left:4px;">not used</span>')
       : '';
 

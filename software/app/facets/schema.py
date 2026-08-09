@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Any, Literal, Optional
 
-from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 
 # ---------------------------------------------------------------------------
@@ -781,6 +781,23 @@ class SparkPreTechniquePushDef(BaseModel):
     permitted_scope: str = "significant"
 
 
+class TraditionDef(BaseModel):
+    """Which attribute and skill a tradition's casting roll uses (II.3,
+    Rolling Magic; T4.1/D7): casting with Spirit adds the Attune rank,
+    casting with Knowledge adds the Lore rank.
+
+    Both fields are required. Typed rather than a bare dict because a
+    misspelled key here does not fail — it silently casts with the other
+    tradition's attribute and skill, which is a wrong roll at the table with
+    nothing on screen to explain it.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    attribute: str
+    skill: str
+
+
 class MagicSparkRulesDef(BaseModel):
     """The two Spark-reach rules (II.3, Sparks and Magic; T2.2/D8). A Spark
     buys reach in exactly two cases — pre-Technique, one Significant-scope
@@ -815,7 +832,7 @@ class MagicDef(BaseModel):
                      D8's pre-Technique push).
     """
 
-    traditions: dict[str, Any] = Field(default_factory=dict)
+    traditions: dict[str, TraditionDef] = Field(default_factory=dict)
     domain_types: dict[str, Any] = Field(default_factory=dict)
     pre_technique_penalty: str = "scope_only"
     pre_technique_scope_limit: str = "minor"       # scope ceiling before Technique is unlocked

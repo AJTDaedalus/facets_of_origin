@@ -15,6 +15,7 @@ from app.auth.tokens import decode_token
 from app.game import combat as combat_module
 from app.game.dice import DiceSpec
 from app.game.engine import (
+    VALID_SPARK_USES,
     RollRequest, resolve_roll, resolve_magic_roll, resolve_saving_throw, roll_result_to_dict,
 )
 from app.game.session import ThreatClock, session_store
@@ -1286,7 +1287,7 @@ async def _handle_cast(
     # A declared Spark use needs a Spark available — but the Spark is only
     # spent AFTER the engine accepts the use (T2.2/D8: a refused reach attempt
     # must not consume the Spark; the old order burned it before rejection).
-    spark_declared = spark_use in ("improve_roll", "ease_focused_major", "pre_technique_push")
+    spark_declared = spark_use in VALID_SPARK_USES
     if spark_declared and character.sparks <= 0:
         await manager.send_to(websocket, {"type": "error", "message": "No Sparks remaining."})
         return
@@ -1305,7 +1306,13 @@ async def _handle_cast(
         return
 
     if spark_declared:
-        character.spend_spark()
+        _spend_sparks(character, 1, session)
+
+    # T4.1/D7: the cast rolled the tradition's skill, so the caster used it —
+    # the same mark every other rolling handler records, and what advancement
+    # reads to decide whether a skill may take a point.
+    if result.request.skill_id:
+        character.skills_used_this_session.add(result.request.skill_id)
 
     result_dict = roll_result_to_dict(result)
     session.record_roll(player_name, result_dict)
@@ -1711,6 +1718,35 @@ async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
         })
         return
 
+    # T6.4 (K-10/D12): the MM states Named/Boss stances openly. Valid enemy
+    # stances are the Table III.3-9 set, read from the ruleset
+    # (`combat.enemy_attacks.posture_reaction_shift`), never hardcoded.
+    #
+    # Validated BEFORE anything is applied: a rejection returns without the
+    # `enemy_updated` broadcast, so any field applied first would live on the
+    # server and nowhere else — and the next Resolve adjustment is computed
+    # from the stale value the clients still show.
+    posture = None
+    if "posture" in msg:
+        if enemy.tier == "mook":
+            await manager.broadcast(session_id, {
+                "type": "error",
+                "message": "Mooks do not declare Postures — the MM sets "
+                           "reaction difficulty by situation (III.3).",
+            })
+            return
+        posture = str(msg["posture"])
+        valid_postures = set(
+            session.ruleset.combat.enemy_attacks.posture_reaction_shift.model_dump()
+        )
+        if posture not in valid_postures:
+            await manager.broadcast(session_id, {
+                "type": "error",
+                "message": f"Unknown enemy Posture '{posture}'. Expected one "
+                           f"of: {', '.join(sorted(valid_postures))}.",
+            })
+            return
+
     phase_index = None
     if "resolve_current" in msg:
         resolve_before = enemy.resolve_current
@@ -1730,28 +1766,7 @@ async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
             enemy.conditions.remove(cond)
     if "open" in msg:
         enemy.open = bool(msg["open"])
-    if "posture" in msg:
-        # T6.4 (K-10/D12): the MM states Named/Boss stances openly. Valid
-        # enemy stances are the Table III.3-9 set, read from the ruleset
-        # (`combat.enemy_attacks.posture_reaction_shift`), never hardcoded.
-        if enemy.tier == "mook":
-            await manager.broadcast(session_id, {
-                "type": "error",
-                "message": "Mooks do not declare Postures — the MM sets "
-                           "reaction difficulty by situation (III.3).",
-            })
-            return
-        posture = str(msg["posture"])
-        valid_postures = set(
-            session.ruleset.combat.enemy_attacks.posture_reaction_shift.model_dump()
-        )
-        if posture not in valid_postures:
-            await manager.broadcast(session_id, {
-                "type": "error",
-                "message": f"Unknown enemy Posture '{posture}'. Expected one "
-                           f"of: {', '.join(sorted(valid_postures))}.",
-            })
-            return
+    if posture is not None:
         enemy.posture = posture
 
     await manager.broadcast(session_id, {

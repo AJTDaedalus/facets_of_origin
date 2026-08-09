@@ -1107,6 +1107,10 @@ _RETIRED_SCAN_DIRS = [
     "enemies",
     "characters",
     "spec",
+    # The in-app rule summaries are a quick reference a player reads at the
+    # table, so they are a live rules surface under the same rule as MM5 and
+    # Quick Start — and they drifted exactly once before this was guarded.
+    "software/app/static",
 ]
 
 
@@ -1143,3 +1147,28 @@ def test_retired_phrases_do_not_reappear() -> None:
         "Retired phrases reappeared on live rules surfaces:\n"
         + "\n".join(offenders)
     )
+
+
+def test_client_reads_advancement_caps_from_the_ruleset() -> None:
+    """The two D10 advancement numbers live in `advancement:`, and the server
+    enforces them from there (`Character.spend_skill_point`,
+    `start_new_session`). The builder mirrored both as JS literals, so a Facet
+    that retuned either would have the UI offering what the server refuses.
+    """
+    builder = (REPO_ROOT / "software/app/static/js/builder.js").read_text(encoding="utf-8")
+    for key in ("bank_cap", "training_marks_per_session"):
+        assert key in builder, (
+            f"builder.js no longer reads advancement.{key} from the ruleset — "
+            "the cap is hardcoded again."
+        )
+
+
+def test_skill_point_broadcast_fields_are_ingested_by_the_client() -> None:
+    """A field the server broadcasts and the client ignores is a UI that goes
+    stale mid-session. `training_marks_this_session` gates the builder's
+    training affordance, and it was broadcast but never read.
+    """
+    websocket_py = (REPO_ROOT / "software/app/api/websocket.py").read_text(encoding="utf-8")
+    app_js = (REPO_ROOT / "software/app/static/js/app.js").read_text(encoding="utf-8")
+    assert '"training_marks_this_session": character.training_marks_this_session' in websocket_py
+    assert "msg.training_marks_this_session" in app_js

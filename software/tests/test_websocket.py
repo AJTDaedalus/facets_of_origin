@@ -506,6 +506,137 @@ class TestCastSparkNotBurnedOnRefusedUse:
         assert msg["sparks_remaining"] == 2
 
 
+class TestCastMarksTheTraditionSkill:
+    """T4.1/D7 put the tradition's skill on every cast roll, so casting is
+    what "used" that skill means for advancement. Every other rolling handler
+    marks its skill; cast was the one that did not, which left a caster unable
+    to spend points on the exact skill their roll banner showed all session."""
+
+    def _mage(self, session_id):
+        char = session_store.get(session_id).characters["Zahna"]
+        char.magic_domain = "inscription"
+        char.magic_technique_active = True
+        char.sparks = 3
+        return char
+
+    def test_cast_marks_the_rolled_skill_used(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = self._mage(session_id)
+        char.skills_used_this_session.clear()
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            ws.send_json({
+                "type": "cast", "domain_id": "inscription",
+                "scope": "minor", "intent": "test",
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "cast_result"
+        # Zahna is a scholarly caster: Knowledge + Lore (II.3, Rolling Magic).
+        assert msg["roll"]["skill_id"] == "lore"
+        assert "lore" in char.skills_used_this_session
+
+    def test_marked_skill_is_the_one_the_roll_used(self, client, session_with_character):
+        """An intuitive caster marks Attune, not Lore — the mark follows the
+        tradition the engine actually rolled."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = self._mage(session_id)
+        char.magic_domain = "spirit_sight"
+        char.skills_used_this_session.clear()
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            ws.send_json({
+                "type": "cast", "domain_id": "spirit_sight",
+                "scope": "minor", "intent": "test",
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "cast_result"
+        assert char.skills_used_this_session == {msg["roll"]["skill_id"]}
+
+    def test_refused_cast_marks_nothing(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = self._mage(session_id)
+        char.skills_used_this_session.clear()
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            ws.send_json({
+                "type": "cast", "domain_id": "inscription",
+                "scope": "nonsense", "intent": "test",
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert char.skills_used_this_session == set()
+
+
+class TestCastSparkSpendRecordsFlow:
+    """T6.3's nudge asks whether a player's Sparks are flowing. A caster who
+    spends only through magic is flowing; the tracker has to see it, or the MM
+    gets told a busy player has gone quiet."""
+
+    def test_cast_spend_resets_the_flow_clock(self, client, session_with_character):
+        import time as _time
+        from app.api.websocket import SPARK_FLOW_NUDGE_SECONDS
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        char.magic_domain = "inscription"
+        char.magic_technique_active = True
+        char.sparks = 3
+        sess.spark_flow["Zahna"] = {
+            "last_flow": _time.monotonic() - (SPARK_FLOW_NUDGE_SECONDS + 1),
+            "last_nudge": None,
+        }
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            ws.send_json({
+                "type": "cast", "domain_id": "inscription", "scope": "minor",
+                "intent": "test", "spark_use": "improve_roll",
+            })
+            assert ws.receive_json()["type"] == "cast_result"
+        stale_by = _time.monotonic() - sess.spark_flow["Zahna"]["last_flow"]
+        assert stale_by < SPARK_FLOW_NUDGE_SECONDS
+
+    def test_refused_cast_does_not_reset_the_clock(self, client, session_with_character):
+        """No Spark left the pool, so nothing flowed."""
+        import time as _time
+        from app.api.websocket import SPARK_FLOW_NUDGE_SECONDS
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        sess = session_store.get(session_id)
+        char = sess.characters["Zahna"]
+        char.magic_domain = "storm"
+        char.magic_technique_active = True
+        char.sparks = 3
+        stale = _time.monotonic() - (SPARK_FLOW_NUDGE_SECONDS + 1)
+        sess.spark_flow["Zahna"] = {"last_flow": stale, "last_nudge": None}
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            ws.send_json({
+                "type": "cast", "domain_id": "storm", "scope": "major",
+                "intent": "test", "spark_use": "ease_focused_major",
+            })
+            assert ws.receive_json()["type"] == "error"
+        assert sess.spark_flow["Zahna"]["last_flow"] == stale
+        assert char.sparks == 3
+
+
+class TestCastSparkUsesFollowTheEngine:
+    """The handler's pre-check and the engine's accepted-use set are one list.
+    Two hand-synced copies is how a retired use survives on one side."""
+
+    def test_handler_reads_the_engine_set(self):
+        from app.api import websocket as ws_module
+        from app.game.engine import VALID_SPARK_USES
+        assert ws_module.VALID_SPARK_USES is VALID_SPARK_USES
+
+    def test_retired_push_scope_is_absent_from_the_shared_set(self):
+        from app.game.engine import VALID_SPARK_USES
+        assert "push_scope" not in VALID_SPARK_USES
+
+
 # ---------------------------------------------------------------------------
 # Spark earn (MM-only)
 # ---------------------------------------------------------------------------
@@ -4808,3 +4939,63 @@ class TestEnemyPostureWS:
             ws.send_json({"type": "enemy_update", "tracker_key": "S1", "open": True})
             msg = ws.receive_json()
             assert msg["posture"] == "defensive"
+
+
+class TestEnemyUpdateIsAllOrNothing:
+    """A rejected field must not leave the other fields of the same message
+    applied server-side. The rejection path returns before the broadcast, so
+    a half-applied update is one every client would never hear about — and the
+    next Resolve adjustment is computed from the stale number they still show."""
+
+    def _session_with(self, client, mm_headers, tier="named"):
+        resp = client.post("/api/sessions/", json={"name": "Atomic Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        body = {"session_id": session_id, "id": "subject", "name": "Subject", "tier": tier}
+        if tier != "mook":
+            body["resolve"] = 3
+        client.post("/api/enemies/", json=body, headers=mm_headers)
+        return session_id
+
+    def test_bad_posture_rolls_back_nothing_else(self, client, mm_headers, mm_token):
+        session_id = self._session_with(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "subject", "instance_name": "S1"})
+            ws.receive_json()
+            ws.send_json({
+                "type": "enemy_update", "tracker_key": "S1",
+                "resolve_current": 1, "open": True, "posture": "agressive",  # typo
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        enemy = session_store.get(session_id).active_enemies["S1"]
+        assert enemy.resolve_current == 3
+        assert enemy.open is False
+
+    def test_mook_posture_rejection_rolls_back_nothing_else(self, client, mm_headers, mm_token):
+        session_id = self._session_with(client, mm_headers, tier="mook")
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "subject", "instance_name": "M1"})
+            ws.receive_json()
+            ws.send_json({
+                "type": "enemy_update", "tracker_key": "M1",
+                "add_condition": "winded", "posture": "aggressive",
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert session_store.get(session_id).active_enemies["M1"].conditions == []
+
+    def test_valid_multi_field_update_still_applies(self, client, mm_headers, mm_token):
+        session_id = self._session_with(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "subject", "instance_name": "S1"})
+            ws.receive_json()
+            ws.send_json({
+                "type": "enemy_update", "tracker_key": "S1",
+                "resolve_current": 1, "open": True, "posture": "aggressive",
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "enemy_updated"
+        assert (msg["resolve_current"], msg["open"], msg["posture"]) == (1, True, "aggressive")
