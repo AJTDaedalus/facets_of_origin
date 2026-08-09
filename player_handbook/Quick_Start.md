@@ -164,6 +164,10 @@ Zahna rolls 2d6+2 (Knowledge +1, Lore +1) at Easy (+1), total modifier +3, and g
 
 **Skill Ranks:** Novice (+0), Practiced (+1), Expert (+2), Master (+3)
 
-**Combat Postures:** Aggressive (+1 offense, first reaction of the exchange costs extra) | Measured (baseline) | Defensive (-1 offense, cheap reactions) | Withdrawn (no offense, free reactions, recover 2 Endurance up to your pool)
+**Combat in five lines:**
 
-**Conditions:** Tier 1 (Winded/Off-Balance/Shaken) clear end of exchange | Tier 2 (Staggered/Cornered) persist until treated | Second Tier 2 of the same type = Broken (out of fight)
+1. Combat runs in **exchanges** — everyone picks their move at once and the whole beat resolves together. No turn order, no waiting.
+2. Each exchange you declare a **Posture** — the stance you are taking for that beat (Aggressive, Measured, Defensive, or Withdrawn).
+3. Attacking is a **Strike** — the same 2d6 roll (see "Hit something," above).
+4. When something attacks you, you may **react** — one reaction per incoming attack, paid for from your Endurance. At 0 Endurance you can only take the hit.
+5. Everything else: Chapter III.3 — the same 2d6 roll.

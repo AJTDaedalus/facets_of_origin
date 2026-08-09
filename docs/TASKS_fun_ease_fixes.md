@@ -363,7 +363,7 @@ listed greps return the expected result; LOG updated.
   Accept: every number on a pregen sheet is derivable from chapters II.2–II.6; a
   reader needs no term the document doesn't define.
 
-- [ ] **T5.2 — QS-4 combat primer (C-1b).**
+- [x] **T5.2 — QS-4 combat primer (C-1b).**
   Files: `player_handbook/Quick_Start.md`.
   Do: replace Postures/Conditions rows with the five-line primer (exchange,
   reaction, posture — one clause each) + "everything else: Chapter III.3 — the

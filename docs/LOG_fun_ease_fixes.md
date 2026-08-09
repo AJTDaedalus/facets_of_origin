@@ -1035,6 +1035,29 @@ anything unexpected.
 - **Commands:** `python -m tools.build_index` (QS wording feeds index
   terms); docs suite → 32 passed.
 
+### T5.2 — QS-4 combat primer (C-1b) (2026-08-09)
+
+- **Files:** `player_handbook/Quick_Start.md`, `player_handbook/Index.md`
+  (regen).
+- **Did:** QS–4's Combat Postures and Conditions rows replaced by the
+  five-line primer: (1) exchange — everyone picks at once, the beat resolves
+  together, no turn order; (2) Posture — the stance you take for the beat,
+  four names listed; (3) Strike — the same 2d6 roll, pointered to the "Hit
+  something" row; (4) reaction — one per incoming attack, paid from
+  Endurance, 0 Endurance = take the hit; (5) "Everything else: Chapter III.3
+  — the same 2d6 roll." Line 4 also grounds the Endurance number every
+  pregen sheet carries (QS previously never said what Endurance does).
+- **Term audit:** every remaining QS-4 term is defined in-document
+  (exchange, Posture, react/Endurance — primer; Skill Ranks/Difficulty —
+  their own lines; Major Attribute — pregen lines + II.2 derivation) or
+  pointered (Strike detail, posture detail → Chapter III.3). The removed
+  Condition vocabulary (Winded/Staggered/Broken…) appears nowhere else in
+  the document.
+- **Compression check:** each primer clause restates III.3 body text (§The
+  Exchange, §Postures, §Reactions "If your Endurance is at 0, only Absorb is
+  available") in shorter form; no new rule wording introduced.
+- **Commands:** `python -m tools.build_index`; docs suite → 32 passed.
+
 ---
 
 ## Escalations
