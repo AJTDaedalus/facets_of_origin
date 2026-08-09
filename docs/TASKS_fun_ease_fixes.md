@@ -273,7 +273,7 @@ listed greps return the expected result; LOG updated.
   `mm_manual/MM5_Quick_Reference.md` (Intercept row gains once-per-exchange and
   "the protected ally decides who steps in").
 
-- [ ] **T3.11 — Sim campaign (DESIGN §4.7).**
+- [x] **T3.11 — Sim campaign (DESIGN §4.7).**
   Files: `software/tools/combat_sim.py` (drives `combat.py` ONLY — the iron law),
   `research/simulation_log.md` (append), `mm_manual/MM1` + `MM5` Recipe Tables
   (same commit, only if a row moves a band).

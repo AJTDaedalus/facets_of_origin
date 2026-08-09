@@ -97,13 +97,22 @@ DIFFICULTY_MOD = {"Easy": 1, "Standard": 0, "Hard": -1, "Very Hard": -2}
 
 @dataclass
 class SimResult:
-    """Result of a single combat simulation run."""
+    """Result of a single combat simulation run.
+
+    `uncontested_exchanges` counts exchanges in which no PC took an
+    offensive action (K-2/D5, read from `combat.exchange_uncontested` —
+    never re-derived here). `objective_lost` is True when an optional
+    objective clock (see `run_combat`) filled on uncontested exchanges
+    and ended the encounter against the party.
+    """
     party_wins: bool
     exchanges: int
     sparks_spent: int
     pcs_broken: list[str]
     endurance_remaining: dict[str, int]
     enemies_remaining: int
+    uncontested_exchanges: int = 0
+    objective_lost: bool = False
 
 
 @dataclass
@@ -674,6 +683,7 @@ def run_combat(
     enemies: list[EnemyState],
     verbose: bool = False,
     spark_policy: str = "conservative",
+    objective_clock: Optional[int] = None,
 ) -> SimResult:
     """Run a single combat encounter to completion.
 
@@ -682,19 +692,34 @@ def run_combat(
     `spark_policy` (WD10) is forwarded to every PC Strike's
     `should_spend_spark` call; default `"conservative"` reproduces every
     recorded corpus bit-identical.
+
+    `objective_clock` (K-2/D5 hook, T3.11): the number of segments on the
+    encounter's stake — the clock MM1 says every Mook-only encounter must
+    carry. Each **uncontested exchange** (no PC offensive action — the
+    rule is read from `combat.exchange_uncontested`, never re-derived
+    here) advances it by one segment, modeling the MM's free advance;
+    when it fills, the situation resolves against the party
+    (`objective_lost`, counted as a loss). `None` (the default) runs the
+    encounter without a stake, reproducing every recorded corpus
+    bit-identical.
     """
     ruleset = _ruleset()
     for pc in pcs:
         pc.armor_downgrades_remaining = combat_module.armor_budget(pc.armor, ruleset)
+
+    uncontested_count = 0
+    clock_progress = 0
 
     for exchange in range(1, MAX_EXCHANGES + 1):
         active_pcs = [p for p in pcs if not p.is_broken]
         active_enemies = [e for e in enemies if not e.is_out]
 
         if not active_enemies:
-            return _build_result(True, exchange - 1, pcs, enemies)
+            return _build_result(True, exchange - 1, pcs, enemies,
+                                 uncontested=uncontested_count)
         if not active_pcs:
-            return _build_result(False, exchange - 1, pcs, enemies)
+            return _build_result(False, exchange - 1, pcs, enemies,
+                                 uncontested=uncontested_count)
 
         # K1 (BRIEF D8): reset the per-exchange reaction count.
         for pc in active_pcs:
@@ -721,6 +746,7 @@ def run_combat(
             print(f"  Postures — PCs: {postures}, Enemies: {e_postures}")
 
         # 2. PC actions
+        offensive_actions: list[bool] = []
         for pc in active_pcs:
             if pc.posture == "withdrawn":
                 if verbose:
@@ -730,13 +756,15 @@ def run_combat(
             if target is None:
                 continue
             _pc_strike(pc, target, ruleset, verbose, spark_policy)
+            offensive_actions.append(True)
             # Refresh active enemies (a Mook may have been removed)
             active_enemies = [e for e in enemies if not e.is_out]
 
         # Check if all enemies defeated after PC actions
         active_enemies = [e for e in enemies if not e.is_out]
         if not active_enemies:
-            return _build_result(True, exchange, pcs, enemies)
+            return _build_result(True, exchange, pcs, enemies,
+                                 uncontested=uncontested_count)
 
         # 3. Enemy actions
         for enemy in active_enemies:
@@ -764,7 +792,23 @@ def run_combat(
         # Check if all PCs broken after enemy actions
         active_pcs = [p for p in pcs if not p.is_broken]
         if not active_pcs:
-            return _build_result(False, exchange, pcs, enemies)
+            return _build_result(False, exchange, pcs, enemies,
+                                 uncontested=uncontested_count)
+
+        # K-2/D5: an exchange no PC contested lets the situation advance
+        # for free — the rule itself lives in combat.exchange_uncontested.
+        if combat_module.exchange_uncontested(offensive_actions):
+            uncontested_count += 1
+            if objective_clock is not None:
+                clock_progress += 1
+                if verbose:
+                    print(f"  Uncontested exchange — the situation advances "
+                          f"({clock_progress}/{objective_clock})")
+                if clock_progress >= objective_clock:
+                    return _build_result(
+                        False, exchange, pcs, enemies,
+                        uncontested=uncontested_count, objective_lost=True,
+                    )
 
         # 4. End-of-exchange cleanup
         for pc in pcs:
@@ -788,7 +832,8 @@ def run_combat(
                     )
 
     # Timeout: draw (counted as loss)
-    return _build_result(False, MAX_EXCHANGES, pcs, enemies)
+    return _build_result(False, MAX_EXCHANGES, pcs, enemies,
+                         uncontested=uncontested_count)
 
 
 def _build_result(
@@ -796,6 +841,8 @@ def _build_result(
     exchanges: int,
     pcs: list[PCState],
     enemies: list[EnemyState],
+    uncontested: int = 0,
+    objective_lost: bool = False,
 ) -> SimResult:
     return SimResult(
         party_wins=party_wins,
@@ -804,6 +851,8 @@ def _build_result(
         pcs_broken=[p.name for p in pcs if p.is_broken],
         endurance_remaining={p.name: p.endurance_current for p in pcs},
         enemies_remaining=sum(1 for e in enemies if not e.is_out),
+        uncontested_exchanges=uncontested,
+        objective_lost=objective_lost,
     )
 
 
@@ -819,6 +868,7 @@ def run_simulation(
     verbose: bool = False,
     seed: Optional[int] = None,
     spark_policy: str = "conservative",
+    objective_clock: Optional[int] = None,
 ) -> AggregateResult:
     """Run N iterations of a combat encounter and aggregate results.
 
@@ -831,6 +881,8 @@ def run_simulation(
         seed: Random seed for reproducibility.
         spark_policy: (WD10) `"conservative"` (default, today's exact
             behaviour) or `"player_like"` — see `should_spend_spark`.
+        objective_clock: (K-2/D5, T3.11) segments on the encounter's
+            stake — see `run_combat`. `None` reproduces recorded corpora.
 
     Returns:
         AggregateResult with statistics.
@@ -849,7 +901,9 @@ def run_simulation(
                 e = make_enemy(edef, j + 1 if count > 1 else 0)
                 enemies.append(e)
 
-        result = run_combat(pcs, enemies, verbose=(verbose and i == 0), spark_policy=spark_policy)
+        result = run_combat(pcs, enemies, verbose=(verbose and i == 0),
+                            spark_policy=spark_policy,
+                            objective_clock=objective_clock)
         results.append(result)
 
     return _aggregate(results, label, iterations)

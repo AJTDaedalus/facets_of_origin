@@ -742,6 +742,49 @@ class TestCalibration:
         assert result_boss.mean_exchanges > result_named.mean_exchanges
 
 
+class TestObjectiveClockHook:
+    """T3.11: the sim's K-2/D5 hook. The rule (an exchange with no PC
+    offensive action is uncontested) is READ from
+    `combat.exchange_uncontested`; the tool only supplies the stake —
+    an objective clock that fills on uncontested exchanges."""
+
+    def test_clock_fills_on_uncontested_exchanges_and_loses(self, monkeypatch):
+        """A party that only cycles Withdrawn hands the MM the scene: the
+        clock fills, the objective is taken, the encounter is lost."""
+        import tools.combat_sim as sim
+        monkeypatch.setattr(sim, "choose_pc_posture", lambda pc, allies: "withdrawn")
+        random.seed(1)
+        pcs = [make_pc(d) for d in standard_party()]
+        # An enemy whose Tier 1 chip cannot break anyone: a single chicken.
+        enemies = [make_enemy(chicken_def())]
+        result = run_combat(pcs, enemies, objective_clock=4)
+        assert result.objective_lost is True
+        assert result.party_wins is False
+        assert result.uncontested_exchanges == 4
+        assert result.exchanges == 4
+
+    def test_no_clock_reproduces_recorded_behaviour(self):
+        """objective_clock=None: the counter observes, nothing else
+        changes — the recorded-corpus contract (WD10 shape)."""
+        random.seed(1)
+        pcs = [make_pc(d) for d in standard_party()]
+        enemies = [make_enemy(city_watch_sergeant_def())]
+        result = run_combat(pcs, enemies)
+        assert result.objective_lost is False
+        assert (result.party_wins, result.exchanges) == (True, 1)
+
+    def test_contested_fight_never_advances_the_clock(self):
+        """A normal fight — PCs striking every exchange — has zero
+        uncontested exchanges, so even a 1-segment clock never fills."""
+        random.seed(1)
+        pcs = [make_pc(d) for d in standard_party()]
+        enemies = [make_enemy(city_watch_sergeant_def())]
+        result = run_combat(pcs, enemies, objective_clock=1)
+        assert result.objective_lost is False
+        assert result.uncontested_exchanges == 0
+        assert result.party_wins is True
+
+
 class TestRecipeCalibration:
     """Pin the four MM1 Encounter Recipe Table rosters (task A10 / Gate G4).
 

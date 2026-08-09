@@ -396,7 +396,6 @@ function clearEnemyForm() {
   document.getElementById('builder-enemy-tier').value = 'named';
   document.getElementById('builder-enemy-resolve').value = 4;
   document.getElementById('builder-enemy-attack').value = 0;
-  document.getElementById('builder-enemy-defense').value = 0;
   document.getElementById('builder-enemy-armor').value = 'none';
   updateEnemyFormMode();
   previewEnemyTR();

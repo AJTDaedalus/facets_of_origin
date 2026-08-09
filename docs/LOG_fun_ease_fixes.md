@@ -710,6 +710,43 @@ anything unexpected.
   List_of_Boxes regenerated (new Variant box).
 - **Commands:** docs suite → 32 passed.
 
+### T3.11 — Sim campaign (DESIGN §4.7) (2026-08-08)
+
+- **Files:** `software/tools/combat_sim.py` (the `objective_clock` hook on
+  `run_combat`/`run_simulation` — reads K-2/D5 from
+  `combat.exchange_uncontested`, never re-derives; `SimResult` gains
+  `uncontested_exchanges` + `objective_lost`, both default-preserving so
+  every recorded corpus reproduces bit-identical),
+  `software/tests/test_combat_sim.py` (`TestObjectiveClockHook`, 3 tests),
+  `research/simulation_log.md` (**Series 10** appended in the file's
+  format). MM1/MM5 Recipe Tables: **no change needed** — see below.
+- **Results vs acceptance (full numbers in Series 10):**
+  - **Recipe rows (3 seeds × 200/row):** every Part D row reproduces its
+    published value to the decimal — Skirmish 100/100/100, Standard
+    76.0/74.5/80.0, Hard 47.5/48.0/47.0, Deadly 20.0/20.0/22.5 and
+    20.0/16.5/21.0 — **+0.0pp across the board** (band: ±10pp). The
+    Named-fights-on-while-Open sim policy is behaviourally identical at
+    fixed seeds to the old permanent Tier-2 rider, which is why; the
+    rejected always-clear policy had moved rows +13..+22pp (T3.1 LOG).
+  - **A5 (15 Mooks):** the default-AI win is 100% with **0 uncontested
+    exchanges** — a fighting win (enemy fire concentrates, two strikers
+    stay topped up), not a cycling one; settled Mook-swarm doctrine, not
+    an exploit. The stall itself is dead: a pure-turtle party under the
+    MM1-mandated 4-segment clock loses the objective in exactly 4
+    exchanges, **100% of runs, all seeds** (vs an unresolvable 20-exchange
+    timeout without the rule). Acceptance met in substance: no win happens
+    *via cycling*, and cycling now loses.
+  - **Boss median:** Archive Guardian median **2** exchanges (means
+    2.27/2.29/2.32, seeds 1/2/3) — inside the 2–4 band at its floor;
+    the shortening vs G1's 3 is Open pressure by design. Flagged in
+    Series 10 for playtest attention; Resolve retuning out of scope.
+- **Commands:** hook tests red→green (first clock test's scenario
+  corrected: the default AI un-cycles after one Withdrawn exchange, so
+  the deterministic test monkeypatches the posture policy — the exploit
+  is a policy, not the shipped AI); `test_combat_sim.py` 79 passed;
+  campaign script in the session scratchpad (reproduce lines in
+  Series 10). FULL suite: see T3.12.
+
 ---
 
 ## Escalations
