@@ -198,7 +198,8 @@ CHARACTER_SHEET_FIELDS = {
     "Primary Facet": "primary_facet",
     "Facet Level": "facet_level",
     "Rank Advances Toward Next Level": "rank_advances_this_facet_level",
-    "Career Advances": "career_advances",
+    # "Career Advances" left the paper sheet in T5.5 (P-13) — the app and
+    # `.fof` keep the field; it is an app/MM concept, not sheet bookkeeping.
     "Title & Origin": "background_id",
     "Starting Skill (Practiced)": "skills",
     "Secondary Skill (Novice, 1 mark) or Domain Origin": "skills",
@@ -246,10 +247,9 @@ def test_character_sheet_fields_map_to_model() -> None:
     assert not errors, "Character Sheet / model mismatches:\n" + "\n".join(errors)
 
 
-# The Magic, Combat, and Inventory sections (new in this task), plus the
-# Facet section's new Career Advances row.
+# The Magic, Combat, and Inventory sections (new in this task). The Facet
+# section's Career Advances row left the sheet in T5.5 (P-13).
 NEW_CHARACTER_SHEET_SECTION_LABELS = [
-    "Career Advances",
     "Magic Domain",
     "Endurance Pool (current / max) — max is 4 + Constitution modifier + Endurance skill rank",
     "Armor Type",

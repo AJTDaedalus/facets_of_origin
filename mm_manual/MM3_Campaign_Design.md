@@ -244,7 +244,17 @@ Every character's `career_advances` is a single number that tells you how far th
 
 When you are designing an arc, ask: *what career_advances range is this party in?* The answer tells you what kind of challenges are appropriate, what kinds of enemies will feel threatening, and how much the party can handle in a single session.
 
-**Table MM3–3: Party Capability by Career Advances**
+**Table MM3–3: Career Advance Benchmarks**
+
+| Career Advances | Rough Equivalent |
+|---|---|
+| 0–2 | Freshly started — Background skills plus early play |
+| 3–5 | Developing — first Facet level (5 advances) within reach |
+| 6–10 | Capable — Facet level 1–2, first Techniques unlocked |
+| 11–15 | Seasoned — Facet level 3 and first Major Advancement within reach |
+| 16+ | Veteran — Primary Facet mastered; cross-Facet development begins |
+
+**Table MM3–4: Party Capability by Career Advances**
 
 | career_advances | Party Capability | Encounter Design Notes |
 |---|---|---|

@@ -33,7 +33,6 @@
 | Primary Facet | |
 | Facet Level | |
 | Rank Advances Toward Next Level | |
-| Career Advances | |
 
 ---
 

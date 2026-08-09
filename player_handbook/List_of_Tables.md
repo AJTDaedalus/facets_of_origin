@@ -21,7 +21,6 @@
 | **II.3–4** | [Mind Domains](II.3_Magic.md#mind-domains) | II.3_Magic.md |
 | **II.4–1** | [Skill Ranks](II.4_Character_Creation_Facets.md#skills) | II.4_Character_Creation_Facets.md |
 | **II.4–2** | [Skill Point Cost per Mark](II.4_Character_Creation_Facets.md#advancing-skills) | II.4_Character_Creation_Facets.md |
-| **II.4–3** | [Career Advance Benchmarks](II.4_Character_Creation_Facets.md#career-advances) | II.4_Character_Creation_Facets.md |
 | **II.4a–1** | [Skills of the Body](II.4a_Character_Creation_Facet_Body.md#skills-of-the-body) | II.4a_Character_Creation_Facet_Body.md |
 | **II.4b–1** | [Skills of the Mind](II.4b_Character_Creation_Facet_Mind.md#skills-of-the-mind) | II.4b_Character_Creation_Facet_Mind.md |
 | **II.4c–1** | [Skills of the Soul](II.4c_Character_Creation_Facet_Soul.md#skills-of-the-soul) | II.4c_Character_Creation_Facet_Soul.md |
@@ -72,7 +71,8 @@
 | **MM2–3** | [Spark Target Economy](../mm_manual/MM2_Session_Design.md#target-economy) | MM2_Session_Design.md |
 | **MM3–1** | [Encounter Difficulty Across a Four-Session Arc](../mm_manual/MM3_Campaign_Design.md#difficulty-should-breathe) | MM3_Campaign_Design.md |
 | **MM3–2** | [Advancement Thresholds and Story Beats](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure) | MM3_Campaign_Design.md |
-| **MM3–3** | [Party Capability by Career Advances](../mm_manual/MM3_Campaign_Design.md#using-career-advances-as-a-campaign-clock) | MM3_Campaign_Design.md |
+| **MM3–3** | [Career Advance Benchmarks](../mm_manual/MM3_Campaign_Design.md#using-career-advances-as-a-campaign-clock) | MM3_Campaign_Design.md |
+| **MM3–4** | [Party Capability by Career Advances](../mm_manual/MM3_Campaign_Design.md#using-career-advances-as-a-campaign-clock) | MM3_Campaign_Design.md |
 | **MM5–1** | [Outcome Tiers](../mm_manual/MM5_Quick_Reference.md#core-resolution) | MM5_Quick_Reference.md |
 | **MM5–2** | [Attribute Ratings](../mm_manual/MM5_Quick_Reference.md#attribute-ratings) | MM5_Quick_Reference.md |
 | **MM5–3** | [Difficulty](../mm_manual/MM5_Quick_Reference.md#difficulty) | MM5_Quick_Reference.md |

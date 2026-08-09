@@ -1136,6 +1136,32 @@ anything unexpected.
   32 passed. **FULL suite → 1471 passed** (318s; no count change — text
   task).
 
+### T5.5 — Career Advances off the paper sheet (P-13) (2026-08-09)
+
+- **Files:** `player_handbook/Appendix_Character_Sheet.md` (Facet-section
+  row removed), `player_handbook/II.1_Character_Creation_Overview.md`
+  (Table II.1–1 Facet row loses the Career Advances clause),
+  `player_handbook/II.4_Character_Creation_Facets.md` (Table II.4–3 cut;
+  §Career Advances keeps the definition + gains the MM3 pointer; "stored in
+  the character file" prose now says "tracked by the app"),
+  `mm_manual/MM3_Campaign_Design.md` (benchmarks table lands verbatim as
+  **Table MM3–3: Career Advance Benchmarks** inside §Using career_advances
+  as a Campaign Clock; Party Capability renumbers MM3–3 → MM3–4),
+  `software/tests/test_docs_consistency.py` (CHARACTER_SHEET_FIELDS +
+  NEW_CHARACTER_SHEET_SECTION_LABELS drop the label, with a T5.5 comment),
+  Index + List_of_Tables regenerated.
+- **Kept, verified:** Glossary Career Advance + Party Strength entries
+  (live app/MM concepts); MM1 Party Strength wording unchanged (still sums
+  `career_advances`, :162/:166/:382); app keeps the field
+  (`components.js` header line, `tools.js` PS sum, `.fof` storage).
+- **Unexpected touchpoint (T5.3 leftover):** II.1's Combat row said "Your
+  Endurance (current / max…)" — the grep filter had excluded the line (it
+  contains "skill"); qualified to "Endurance Pool" here.
+- **Numbering:** II.4 tables now 1..2, MM3 tables 1..4 — INV-9 contiguity
+  green; no other file references the moved captions.
+- **Commands:** `build_index` + `build_table_register` (76/72; index
+  needed a second regen after the Lists rebuild); docs suite → 32 passed.
+
 ---
 
 ## Escalations

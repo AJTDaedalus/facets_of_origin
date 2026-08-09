@@ -201,19 +201,9 @@ Every 3 Facet Levels total (Primary + any Facet):
 
 **Career advances** is a single integer that counts every skill rank advance a character has ever taken — across all skills and all Facets — since character creation.
 
-It is the progression metric for Facets of Origin: a rough, honest gauge of how much a character has grown. Two characters with the same career advances are broadly comparable in power, regardless of where those advances landed.
+It is the progression metric for Facets of Origin: a rough, honest gauge of how much a character has grown. Two characters with the same career advances are broadly comparable in power, regardless of where those advances landed. Benchmark ranges for what a given total looks like in play are the MM's pacing tool and live in the MM Manual (MM3, *Using career_advances as a Campaign Clock*).
 
-**Table II.4–3: Career Advance Benchmarks**
-
-| Career Advances | Rough Equivalent |
-|---|---|
-| 0–2 | Freshly started — Background skills plus early play |
-| 3–5 | Developing — first Facet level (5 advances) within reach |
-| 6–10 | Capable — Facet level 1–2, first Techniques unlocked |
-| 11–15 | Seasoned — Facet level 3 and first Major Advancement within reach |
-| 16+ | Veteran — Primary Facet mastered; cross-Facet development begins |
-
-Career advances are stored in the character file as `career_advances` and updated whenever a skill rank advances. The Background starting skill counts as 1 advance at character creation — toward this total only, not toward Facet levels (see *Facet Levels*, above). Background Marks (the secondary skill's head start) do not count until the skill actually advances to Practiced.
+Career advances are tracked by the app and stored in the character file as `career_advances`, updated whenever a skill rank advances. The Background starting skill counts as 1 advance at character creation — toward this total only, not toward Facet levels (see *Facet Levels*, above). Background Marks (the secondary skill's head start) do not count until the skill actually advances to Practiced.
 
 > **Example — the cast at one career advance**
 >

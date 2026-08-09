@@ -388,7 +388,7 @@ listed greps return the expected result; LOG updated.
   sentence in II.3. Table headers II.3-2/3 updated; regen Lists/Index.
   Register: `Broad (Prismatic)`.
 
-- [ ] **T5.5 — Career Advances off the paper sheet (P-13).**
+- [x] **T5.5 — Career Advances off the paper sheet (P-13).**
   Files: `player_handbook/Appendix_Character_Sheet.md`, `II.1` (sheet table),
   `II.4` (Table II.4-3 moves to `mm_manual/MM3_Campaign_Design.md`), `Glossary.md`
   (entry stays — it's still a live app/MM concept), MM1 (Party Strength still sums

@@ -83,6 +83,7 @@
 - [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
 - [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
 - [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
+- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM4 — The Player Who Disengages](../mm_manual/MM4_Running_the_Table.md#the-player-who-disengages)
 
 ## Boss
@@ -143,8 +144,9 @@
 
 - [II.4 — Career Advances](II.4_Character_Creation_Facets.md#career-advances)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
+- [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
 - [MM1 — Party Strength 3 (3 fresh characters, 1 career advance each)](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-3-3-fresh-characters-1-career-advance-each)
+- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 
 ## Condition
 
@@ -192,6 +194,7 @@
 
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
+- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
@@ -278,6 +281,7 @@
 
 *Defined in [III.3](III.3_Combat.md).*
 
+- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [III.3 — Endurance Pool](III.3_Combat.md#endurance-pool)
 - [III.3 — Calculating Your Endurance Pool](III.3_Combat.md#calculating-your-endurance-pool)
 - [III.3 — An Empty Endurance Pool](III.3_Combat.md#an-empty-endurance-pool)
@@ -347,6 +351,7 @@
 - [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
 - [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
 - [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
+- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM3 — Recognizing When It Is Done](../mm_manual/MM3_Campaign_Design.md#recognizing-when-it-is-done)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
@@ -359,6 +364,7 @@
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
+- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM3 — Recognizing When It Is Done](../mm_manual/MM3_Campaign_Design.md#recognizing-when-it-is-done)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
@@ -430,6 +436,7 @@
 
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
+- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM3 — Recognizing When It Is Done](../mm_manual/MM3_Campaign_Design.md#recognizing-when-it-is-done)
 
 ## Maneuver
@@ -631,6 +638,7 @@
 - [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
 - [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
+- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
 ## Rank
@@ -642,7 +650,6 @@
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [II.4 — Career Advances](II.4_Character_Creation_Facets.md#career-advances)
 - [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
@@ -783,7 +790,6 @@
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [II.4 — Career Advances](II.4_Character_Creation_Facets.md#career-advances)
 - [II.4a — Skills of the Body](II.4a_Character_Creation_Facet_Body.md#skills-of-the-body)
 - [II.4b — Skills of the Mind](II.4b_Character_Creation_Facet_Mind.md#skills-of-the-mind)
 - [II.4c — Skills of the Soul](II.4c_Character_Creation_Facet_Soul.md#skills-of-the-soul)
