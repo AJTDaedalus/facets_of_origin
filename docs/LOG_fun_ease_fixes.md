@@ -1343,6 +1343,17 @@ anything unexpected.
   Domain expiry, actor-count doctrine numbers (76→47→20).
 - **Commands:** `build_index`; docs suite → 32 passed.
 
+### T5.11 — WS-5 sweep (2026-08-09)
+
+- **Commands (orchestrator-run after the agent's session ended mid-close):**
+  full suite → **1471 passed** (377s). Bestiary `--check` → up to date;
+  `build_index` → idempotent. Terminology sweeps: "Broad" survives in exactly
+  one definitional II.3 sentence (data-field type key noted there, identifier
+  unchanged); Quick Start prints "Endurance Pool" for the pool, skill stays
+  bare; pregen mark annotations gone.
+- **Result:** WS-5 complete. 11/11 tasks, suite steady at 1471, no
+  escalations. T5.8 swaps remain flagged FOR USER REVIEW in that entry.
+
 ---
 
 ## Escalations

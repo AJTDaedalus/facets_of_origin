@@ -423,7 +423,7 @@ listed greps return the expected result; LOG updated.
   duplicated tables match III.1 verbatim (default: keep them — DESIGN §9.3).
   LOG a table: quick-ref line → canonical source section.
 
-- [ ] **T5.11 — WS-5 sweep.** Full register grep; regenerate everything; full
+- [x] **T5.11 — WS-5 sweep.** Full register grep; regenerate everything; full
   suite; INV-9..15 green.
 
 ## WS-6 — App features (branch `feat/app-fun-ease`)
