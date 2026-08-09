@@ -874,8 +874,18 @@ reused as a tradition name.
 **Scope:** D7 stands — the core PHB keeps its attribute-keyed wording and
 introduces no tradition proper nouns. Invocation and Thaumaturgy live in the
 setting layer (the Shattered Origin setting Facet, when written) and in
-project-level descriptions. The Body tradition's name remains the one open
-naming question.
+project-level descriptions.
+
+**There is no third tradition** *(correction, 2026-08-09)*. This entry
+originally closed by calling the Body tradition's name "the one open naming
+question." That was wrong, and it inherited the error from a stale
+open-questions list carrying a shortlist (Wildcraft / The Root / Bloodcraft /
+The Waking) for a tradition the ruleset does not have. Verified: the Facet of
+the Body has no domains, no domain-granting Technique, and no magic-granting
+Background, and `magic.traditions` holds exactly the two entries above. A Body
+character who wants magic cross-trains into the Mind or Soul Tier 1 Technique
+at the standard cross-Facet cost (II.3, *Acquiring a Domain*). The question is
+void, not open.
 
 **Status:** ✅ Decided. Recorded in `research/magic_system_analysis.md` §6
 naming note; README project description updated.

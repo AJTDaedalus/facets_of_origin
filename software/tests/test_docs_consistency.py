@@ -1094,6 +1094,11 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("Broad (Prismatic)", "P-11/D14 (T5.4): Prismatic is the player-facing word; Broad survives only in II.3's one definitional sentence (and as the untouched `broad` type key)"),
     ("Broad-Prismatic", "P-11/D14 (T5.4): Glossary headword variant of the dead double name"),
     ("Broad difficulty table", "P-11/D14 (T5.4): the table is printed 'the Prismatic difficulty table'"),
+    ("Body magic domains are deferred", "The Facet of the Body has no domains — nothing is deferred to a setting module; a Body character cross-trains into Mind or Soul (II.3, A Brief Note on Body Magic)"),
+    ("Body magic domains are covered", "Same: there are no Body domains to cover, in this book or a later one"),
+    ("Body magic practitioners", "There is no Body tradition; a Body character who casts is cross-trained into Mind or Soul"),
+    ("including Body magic domains", "The setting Facet's contents list promised Body domains that do not exist"),
+    ("like Body magic domains", "I_Introduction's example of forthcoming setting content promised Body domains that do not exist"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment
