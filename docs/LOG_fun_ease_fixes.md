@@ -906,6 +906,28 @@ anything unexpected.
 - **Commands:** 3 new tests green; docs + character suites 132 passed;
   `python -m tools.build_index` (no diff).
 
+### T4.5 — Never Surprised → warning beat (P-8, D11) (2026-08-09)
+
+- **Files:** `player_handbook/II.4b_Character_Creation_Facet_Mind.md` (entry
+  rewritten to warning-beat strength: "You always get a warning beat before
+  an ambush, trap, or sudden threat lands … What you do with it is yours.
+  The beat is warning, not prevention"; the Normal: line now names what a
+  failed notice roll means), `software/facets/base/facet.yaml`
+  (`never_surprised` mirrored), `software/tests/test_character.py` (+2:
+  entry grants a warning beat; entry carries no auto-success),
+  `software/tests/test_docs_consistency.py` (register).
+- **Tests asserting the old behavior:** grep found NONE — the only
+  `never_surprised` reference in tests is a prerequisite-chain comment
+  (test_character.py:537), untouched. The auto-success was book/yaml prose
+  with no mechanical hook, so the two new tests pin the wording contract.
+- **Glossary:** carries no Never Surprised entry (Techniques are not
+  glossary terms) — nothing to update, verified by the entry list.
+- **Register:** `before it lands, you automatically succeed` (a single-line
+  substring present in BOTH carriers pre-edit — the full sentence spans a
+  yaml line break, which the line-scanner cannot match).
+- **Commands:** 2 new tests green; docs suite 32 passed;
+  `python -m tools.build_index` (no diff).
+
 ---
 
 ## Escalations

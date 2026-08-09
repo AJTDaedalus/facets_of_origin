@@ -1081,6 +1081,7 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("unspent points are lost", "P-5/D10 (T4.3): the forfeit is dead — up to 2 unspent points bank across sessions"),
     ("unspent points do not carry over", "P-5/D10 (T4.3): the forfeit is dead — up to 2 unspent points bank across sessions"),
     ("use-it-or-lose-it", "P-5/D10 (T4.3): MM5's compression of the dead forfeit rule"),
+    ("before it lands, you automatically succeed", "P-8/D11 (T4.5): Never Surprised is a warning beat, not an auto-success — the absolute is gone"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment

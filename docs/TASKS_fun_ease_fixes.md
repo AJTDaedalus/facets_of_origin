@@ -329,7 +329,7 @@ listed greps return the expected result; LOG updated.
   `software/facets/base/facet.yaml` + engine counters (verify existing behavior
   matches; add the missing test either way).
 
-- [ ] **T4.5 — Never Surprised → warning beat (P-8, D11).**
+- [x] **T4.5 — Never Surprised → warning beat (P-8, D11).**
   Files: `player_handbook/II.4b_Character_Creation_Facet_Mind.md`,
   `software/facets/base/facet.yaml` (`never_surprised` ~664),
   `player_handbook/Glossary.md`, tests referencing it (grep

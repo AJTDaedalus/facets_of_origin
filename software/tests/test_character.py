@@ -1045,3 +1045,28 @@ class TestCreationRanksAndFacetLevels:
         assert char.skills["combat"].rank == "expert"
         assert char.career_advances == 2
         assert char.rank_advances_by_facet.get("body") == 1
+
+
+# ---------------------------------------------------------------------------
+# T4.5 (P-8, D11): Never Surprised is a warning beat, not an auto-success.
+# ---------------------------------------------------------------------------
+
+class TestNeverSurprisedWarningBeat:
+    def _entry(self, ruleset):
+        for tree in ruleset.techniques.values():
+            for branch in tree.branches:
+                for tier in branch.tiers:
+                    for tech in tier.techniques:
+                        if tech.id == "never_surprised":
+                            return tech
+        raise AssertionError("never_surprised not found in the ruleset")
+
+    def test_entry_grants_a_warning_beat(self, ruleset):
+        tech = self._entry(ruleset)
+        assert "warning beat" in tech.description
+
+    def test_entry_carries_no_auto_success(self, ruleset):
+        """D11: the absolute is gone — the entry may not promise automatic
+        success on the notice roll."""
+        tech = self._entry(ruleset)
+        assert "automatically succeed" not in tech.description

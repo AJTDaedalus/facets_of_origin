@@ -124,9 +124,9 @@ Instinct Techniques represent a mind so attuned to pattern and environment that 
 
 **Use:** Passive.
 
-You are not caught off guard. If the MM would call for a roll to notice an ambush, trap, or sudden threat before it lands, you automatically succeed. You may not always be able to prevent what's coming — but you always see it coming.
+You are not caught flat. You always get a warning beat before an ambush, trap, or sudden threat lands — a heartbeat of wrongness, enough to turn, shout, or set your feet. What you do with it is yours. The beat is warning, not prevention: whatever is coming still comes, and any roll to meet it is still a roll.
 
-**Normal:** Noticing an ambush or a trap before it lands is a roll the MM calls for.
+**Normal:** Noticing an ambush or a trap before it lands is a roll the MM calls for, and a failed roll means it arrives unannounced.
 
 **The Wrong Note** *(Instinct, Tier 1 — Wisdom)*
 
