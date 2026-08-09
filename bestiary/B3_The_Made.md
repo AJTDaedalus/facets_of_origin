@@ -26,7 +26,7 @@ They are not stupid. This is the point most people miss and it gets them hurt. A
 
 **Latchling** · *Mook* · **TR 5**
 
-**When they act on it:** Resolve — · armor heavy (+2 Resolve) · defense +1
+**When they act on it:** Resolve — · armor heavy (+2 Resolve)
 
 **When it acts:** attack +1 · incoming Tier 1
 
@@ -51,7 +51,7 @@ They are not stupid. This is the point most people miss and it gets them hurt. A
 
 **Latchman** · *Named* · **TR 11**
 
-**When they act on it:** Resolve 4 · armor heavy (+2 Resolve) · defense +2
+**When they act on it:** Resolve 4 · armor heavy (+2 Resolve)
 
 **When it acts:** attack +2 · incoming Tier 2
 
@@ -101,7 +101,7 @@ The Latchmen's Boss expression is not a bigger latchman. It is what the same com
 
 **Archive Guardian** · *Boss* · **TR 16**
 
-**When they act on it:** Resolve 8 · armor heavy (+2 Resolve) · defense +1
+**When they act on it:** Resolve 8 · armor heavy (+2 Resolve)
 
 **When it acts:** attack +3 · incoming Tier 2
 

@@ -183,7 +183,6 @@ class EnemyState:
     resolve: int
     resolve_current: int
     attack_modifier: int
-    defense_modifier: int
     armor: str
     posture: str = "measured"
     conditions: list[str] = field(default_factory=list)
@@ -1067,7 +1066,6 @@ def chicken_def() -> dict:
         tier="mook",
         resolve=0,
         attack_modifier=-1,
-        defense_modifier=-1,
         armor="none",
     )
 
@@ -1080,7 +1078,6 @@ def harbor_thug_def() -> dict:
         tier="mook",
         resolve=0,
         attack_modifier=0,
-        defense_modifier=0,
         armor="none",
     )
 
@@ -1094,7 +1091,6 @@ def city_watch_sergeant_def() -> dict:
         tier="named",
         resolve=3,
         attack_modifier=2,
-        defense_modifier=2,
         armor="light",
     )
 
@@ -1108,7 +1104,6 @@ def veteran_soldier_def() -> dict:
         tier="named",
         resolve=4,
         attack_modifier=3,
-        defense_modifier=3,
         armor="light",
     )
 
@@ -1127,7 +1122,6 @@ def generic_named_def(tr: int = 8) -> dict:
             tier="named",
             resolve=3,           # offense(+2→4) + resolve(3) + armor(light→1) = 8
             attack_modifier=2,
-            defense_modifier=2,
             armor="light",
         )
     elif tr <= 10:
@@ -1137,7 +1131,6 @@ def generic_named_def(tr: int = 8) -> dict:
             tier="named",
             resolve=4,           # offense(+3→5) + resolve(4) + armor(light→1) = 10
             attack_modifier=3,
-            defense_modifier=3,
             armor="light",
         )
     else:
@@ -1147,7 +1140,6 @@ def generic_named_def(tr: int = 8) -> dict:
             tier="named",
             resolve=5,           # offense(+3→5) + resolve(5) + armor(heavy→2) = 12
             attack_modifier=3,
-            defense_modifier=2,
             armor="heavy",
         )
 
@@ -1165,7 +1157,6 @@ def generic_boss_def(tr: int = 12) -> dict:
             tier="boss",
             resolve=5,            # offense(+3→5) + resolve(5) + armor(heavy→2) = 12
             attack_modifier=3,
-            defense_modifier=2,
             armor="heavy",
         )
     else:
@@ -1175,7 +1166,6 @@ def generic_boss_def(tr: int = 12) -> dict:
             tier="boss",
             resolve=7,
             attack_modifier=4,
-            defense_modifier=3,
             armor="heavy",
         )
 
@@ -1202,7 +1192,6 @@ def archive_guardian_def() -> dict:
         tier="boss",
         resolve=8,
         attack_modifier=3,
-        defense_modifier=1,
         armor="heavy",
         phases=[{"resolve_threshold": 2, "description": "Reduced Mode"}],
         special_attack_mod=1,
@@ -1367,7 +1356,7 @@ def _g3_named_def() -> dict:
     """
     return dict(
         name="G3 Foe", instance_id="g3_foe", tier="named",
-        resolve=2, attack_modifier=0, defense_modifier=0, armor="none",
+        resolve=2, attack_modifier=0, armor="none",
     )
 
 

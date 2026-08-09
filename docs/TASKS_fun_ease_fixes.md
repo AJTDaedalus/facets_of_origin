@@ -240,7 +240,7 @@ listed greps return the expected result; LOG updated.
   `test_docs_consistency.py` table invariants.
   Register: `x multiplier` in the budget formula wording (confirm exact string).
 
-- [ ] **T3.7 — `defense_modifier` retirement (K-11).**
+- [x] **T3.7 — `defense_modifier` retirement (K-11).**
   Files: `software/app/facets/schema.py` (deprecation warning on load),
   all shipped `enemies/*.fof` (remove the field — ~16 files; TR values unchanged),
   `mm_manual/MM1_Encounters_and_Enemies.md` (drop from minimal block and `.fof`

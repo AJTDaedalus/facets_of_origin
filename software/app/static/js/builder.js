@@ -338,7 +338,6 @@ async function saveEnemy(ev) {
     tier: document.getElementById('builder-enemy-tier').value,
     resolve: parseInt(document.getElementById('builder-enemy-resolve').value) || 0,
     attack_modifier: parseInt(document.getElementById('builder-enemy-attack').value) || 0,
-    defense_modifier: parseInt(document.getElementById('builder-enemy-defense').value) || 0,
     armor: document.getElementById('builder-enemy-armor').value,
     techniques: techniques,
     special: document.getElementById('builder-enemy-special').value.trim() || null,
@@ -376,7 +375,6 @@ function editEnemy(enemyId) {
   document.getElementById('builder-enemy-tier').value = enemy.tier || 'named';
   document.getElementById('builder-enemy-resolve').value = enemy.resolve != null ? enemy.resolve : 0;
   document.getElementById('builder-enemy-attack').value = enemy.attack_modifier || 0;
-  document.getElementById('builder-enemy-defense').value = enemy.defense_modifier || 0;
   document.getElementById('builder-enemy-armor').value = enemy.armor || 'none';
   document.getElementById('builder-enemy-techniques').value = (enemy.techniques || []).join(', ');
   document.getElementById('builder-enemy-special').value = enemy.special || '';

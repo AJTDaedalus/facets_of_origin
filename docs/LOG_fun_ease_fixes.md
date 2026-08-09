@@ -604,6 +604,39 @@ anything unexpected.
   clean (no `x multiplier`, no MM1-5/6 budget captions; the only MM1-5/6
   hits are the renumbered Recipe tables).
 
+### T3.7 — `defense_modifier` retirement (K-11) (2026-08-08)
+
+- **Files:** `software/app/game/enemy.py` (field removed; `from_fof` warns
+  on the legacy key and ignores it — endurance pattern),
+  `software/app/api/routes/enemy.py` (CreateEnemyRequest),
+  `software/app/api/websocket.py` (inline spawn),
+  `software/app/static/js/builder.js` + `index.html` (Defense Mod input
+  removed), `software/tools/build_bestiary.py` (stat-block template's
+  "· defense +N" segment removed), `software/tools/combat_sim.py`
+  (EnemyState field + every def), `software/tools/agentic_playtest/
+  scenarios.py`, 16× `enemies/*.fof`, **9× `adventures/oraga_night/
+  enemies/*.fof`** (unlisted but shipped — anti-fragment rule 1; the
+  spec/examples files carried no defense fields), `enemies/chicken.fof`
+  notes (prose referenced the field by name — reworded, joke intact),
+  `mm_manual/MM1` (minimal stat block Defense line, all three example
+  blocks, the Named build list bullet, the `.fof` format doc line),
+  regenerated bestiary (all 4 B-files' stat blocks lose the defense
+  segment) + `Finding_Aids.md`; tests: `test_enemy.py` (6 new),
+  `test_api_enemy.py`, `test_agentic_playtest.py` (canon-drift field
+  list). `playtest/**` untouched.
+- **Red first:** 4 failed of 6 new (`TestDefenseModifierDeprecation`).
+- **TR values unchanged** — the field was never a TR term
+  (`test_tr_unchanged_by_retirement` pins the Sergeant at 8); a
+  shipped-files guard (`test_no_shipped_enemy_lists_defense_modifier`)
+  covers enemies/ AND adventures/.
+- **Register:** `defense_modifier` (scanned scope now clean; the loader
+  warning text lives in `app/`, outside scope by design).
+- **Commands:** red 4 → 539 passed across
+  enemy/api/api_enemy/websocket/agentic/docs suites; `python -m
+  tools.build_bestiary` (4 files) then `--check` clean; `node --check
+  builder.js` OK; acceptance grep over enemies/ mm_manual/ spec/
+  software/facets/ bestiary/ characters/ adventures/ → **empty**.
+
 ---
 
 ## Escalations

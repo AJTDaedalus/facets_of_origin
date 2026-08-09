@@ -26,7 +26,7 @@ class TestEnemyDefaults:
 
     def test_named_npc(self):
         e = Enemy(id="sergeant", name="Sergeant", tier="named", resolve=3,
-                  attack_modifier=2, defense_modifier=2, armor="light")
+                  attack_modifier=2, armor="light")
         assert e.tier == "named"
         assert e.resolve == 3
 
@@ -185,6 +185,49 @@ class TestEnemyOpenState:
 # rider menu died); loads with a deprecation warning, same pattern as the
 # legacy `endurance` key.
 # ---------------------------------------------------------------------------
+
+class TestDefenseModifierDeprecation:
+    """K-11: `defense_modifier` retired — it was never in the TR formula and
+    NPCs never roll it. Loads with a deprecation warning (endurance pattern);
+    the model no longer carries the field."""
+
+    def _fof(self, enemy_block):
+        return {"type": "enemy", "id": "x", "name": "X", "enemy": enemy_block}
+
+    def test_defense_modifier_load_warns(self):
+        with pytest.warns(DeprecationWarning, match="defense_modifier"):
+            e = Enemy.from_fof(self._fof(
+                {"tier": "named", "resolve": 3, "defense_modifier": 2}
+            ))
+        assert e.resolve == 3
+
+    def test_load_without_defense_modifier_is_clean(self, recwarn):
+        Enemy.from_fof(self._fof({"tier": "named", "resolve": 3}))
+        assert not any(
+            issubclass(w.category, DeprecationWarning) for w in recwarn.list
+        )
+
+    def test_model_has_no_defense_modifier_field(self):
+        assert "defense_modifier" not in Enemy.model_fields
+
+    def test_to_fof_omits_defense_modifier(self):
+        e = Enemy(id="sgt", name="Sgt", tier="named", resolve=3)
+        assert "defense_modifier" not in e.to_fof()["enemy"]
+
+    def test_tr_unchanged_by_retirement(self):
+        """defense_modifier was never a TR term — the Sergeant's published
+        TR 8 survives the field's removal untouched."""
+        e = Enemy(id="sergeant", name="Sergeant", tier="named", resolve=3,
+                  attack_modifier=2, armor="light")
+        assert e.calculate_tr() == 8
+
+    def test_no_shipped_enemy_lists_defense_modifier(self):
+        shipped = sorted((REPO_ROOT / "enemies").glob("*.fof")) + sorted(
+            (REPO_ROOT / "adventures").glob("**/enemies/*.fof")
+        )
+        offenders = [p.name for p in shipped if "defense_modifier" in p.read_text()]
+        assert offenders == []
+
 
 class TestTier1ImmunityDeprecation:
     def _fof(self, techniques):

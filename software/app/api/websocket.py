@@ -1608,7 +1608,6 @@ async def _handle_spawn_enemy(msg: dict, session, session_id: str) -> None:
             tier=enemy_data.get("tier", "mook"),
             resolve=enemy_data.get("resolve", 0),
             attack_modifier=enemy_data.get("attack_modifier", 0),
-            defense_modifier=enemy_data.get("defense_modifier", 0),
             armor=enemy_data.get("armor", "none"),
         )
 

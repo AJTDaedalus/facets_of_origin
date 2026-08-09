@@ -9,7 +9,6 @@ ruleset:
 enemy:
   tier: boss
   attack_modifier: 3
-  defense_modifier: 1
   armor: light
   techniques:
   - ringing_charge

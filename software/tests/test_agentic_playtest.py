@@ -855,7 +855,7 @@ class TestScenarioCanon:
         canon = _canon_enemy(key)
         block = blocks[key]
 
-        for field in ("tier", "attack_modifier", "defense_modifier", "armor"):
+        for field in ("tier", "attack_modifier", "armor"):
             assert block[field] == canon[field], f"{key}.{field} drifted from canon"
         if "resolve" in canon:
             assert block["resolve"] == canon["resolve"]

@@ -12,7 +12,6 @@ enemy:
   tier: named
   resolve: 4
   attack_modifier: 1
-  defense_modifier: 2
   armor: light
   techniques: [fracture_despair, unraveling_presence, shadow_step]
   special: >

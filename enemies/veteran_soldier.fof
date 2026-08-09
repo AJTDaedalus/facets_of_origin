@@ -12,7 +12,6 @@ enemy:
   tier: named
   resolve: 4
   attack_modifier: 3    # Strength +2, Combat Practiced +1
-  defense_modifier: 3   # authoring input — NPCs don't roll (Chapter III.3)
   armor: light
   techniques: []
   special: null

@@ -41,7 +41,6 @@ class Enemy(BaseModel):
     tier: EnemyTier = "mook"
     resolve: int = Field(default=0, ge=0)
     attack_modifier: int = 0
-    defense_modifier: int = 0
     armor: str = "none"  # "none" | "light" | "heavy"
     techniques: list[str] = Field(default_factory=list)
     special: Optional[str] = None
@@ -132,7 +131,6 @@ class Enemy(BaseModel):
         enemy_block: dict = {
             "tier": self.tier,
             "attack_modifier": self.attack_modifier,
-            "defense_modifier": self.defense_modifier,
             "armor": self.armor,
             "techniques": list(self.techniques),
             "special": self.special,
@@ -180,6 +178,17 @@ class Enemy(BaseModel):
         if not isinstance(enemy_block, dict):
             raise ValueError("Missing or invalid 'enemy' block in FOF file.")
 
+        if "defense_modifier" in enemy_block:
+            warnings.warn(
+                "Enemy .fof carries the retired 'defense_modifier' field; it "
+                "was never part of the TR formula and NPCs never roll it "
+                "(K-11) — difficulty against an enemy is the MM's situational "
+                "call plus posture (Chapter III.3). The field is ignored on "
+                "load and support will be removed in v0.4.",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+
         techniques = list(enemy_block.get("techniques") or [])
         if "tier1_immunity" in techniques:
             warnings.warn(
@@ -212,7 +221,6 @@ class Enemy(BaseModel):
             tier=enemy_block.get("tier", "mook"),
             resolve=resolve,
             attack_modifier=enemy_block.get("attack_modifier", 0),
-            defense_modifier=enemy_block.get("defense_modifier", 0),
             armor=enemy_block.get("armor", "none"),
             techniques=techniques,
             special=enemy_block.get("special"),

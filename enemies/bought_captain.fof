@@ -9,7 +9,6 @@ ruleset:
 enemy:
   tier: boss
   attack_modifier: 3
-  defense_modifier: 2
   armor: heavy
   techniques:
   - the_second_clause

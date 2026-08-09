@@ -1071,6 +1071,7 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("rider Condition", "K-6/D4: riders retired — a 10+ vs an enemy may leave it Open instead; PvP tier outcomes unchanged"),
     ("x multiplier", "K-5/D6: the TR budget and its multipliers are cut — actor count drives difficulty; historical record in docs/DECISIONS.md"),
     ("Action Economy Multipliers", "K-5/D6: Table MM1-6 cut with the budget — the multipliers never predicted the actor-count threshold"),
+    ("defense_modifier", "K-11: retired — never in the TR formula, and NPCs never roll; loader warns on legacy files"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment

@@ -40,7 +40,6 @@ class TestEnemyAPI:
             "tier": "named",
             "resolve": 3,
             "attack_modifier": 2,
-            "defense_modifier": 2,
             "armor": "light",
         }, headers=mm_headers)
         assert resp.status_code == 200

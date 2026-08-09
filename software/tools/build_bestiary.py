@@ -85,8 +85,7 @@ def render_block(enemy: Enemy) -> str:
     incoming = "Tier 1" if enemy.tier == "mook" else "Tier 2"
     lines += [
         f"**When they act on it:** Resolve {resolve} · armor "
-        f"{ARMOR_LABEL.get(enemy.armor, enemy.armor)} · defense "
-        f"{_signed(enemy.defense_modifier)}",
+        f"{ARMOR_LABEL.get(enemy.armor, enemy.armor)}",
         "",
         f"**When it acts:** attack {_signed(enemy.attack_modifier)} · incoming {incoming}",
         "",

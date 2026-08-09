@@ -9,7 +9,6 @@ ruleset:
 enemy:
   tier: mook
   attack_modifier: 0
-  defense_modifier: 2
   armor: none
   techniques:
   - swarm

@@ -29,7 +29,6 @@ Name/Type
 Tier: Mook | Named | Boss
 Resolve: [number]  — the durability pool Strikes deplete; Named 3–4, Boss ~8; Mooks have none
 Attack: [modifier]  — e.g. +2 (Strength +1, Combat Practiced +1)
-Defense: [modifier] — an authoring input, not a rolled modifier (NPCs don't roll, Chapter III.3): informs the difficulty you set for PC Strikes and for PC reactions against this enemy's attacks (both Chapter III.3)
 Armor: None | Light | Heavy  — adds a flat bonus to Resolve (light +1, heavy +2)
 Techniques: [list, if any]
 Special: [phase changes, triggers, or narrative rules — Boss only]
@@ -44,7 +43,6 @@ City Watch Sergeant
 Tier: Named
 Resolve: 3
 Attack: +2 (Strength +1, Combat Practiced +1)
-Defense: +2
 Armor: Light
 Techniques: —
 TR: 8
@@ -56,7 +54,6 @@ Harbor Thug
 Tier: Mook
 Resolve: — (Mooks have no pool; one Strike removes them)
 Attack: +0 (Strength +0, Combat Novice +0)
-Defense: +0
 Armor: None
 TR: 2
 ```
@@ -67,7 +64,6 @@ Archive Guardian
 Tier: Boss
 Resolve: 8 (effective 10 with heavy armor)
 Attack: +3 (Strength +2, Combat Expert +2, −1 from fifteen years of wear) — iron weight, not technique
-Defense: +1 (Dexterity −1, Combat Expert +2)
 Armor: Heavy
 Techniques: phase_change
 Special: Phase change — when Resolve drops to 2 or below, enters Reduced Mode
@@ -202,7 +198,6 @@ Named NPCs use the full exchange structure. Build them the same way you'd build 
 **The short list you actually need:**
 - Resolve (3–4 for a Named NPC; armor adds to it)
 - Attack modifier (the best offensive attribute-plus-skill pairing, as an authoring input)
-- Defense modifier (an authoring input — NPCs don't roll; it informs the difficulty of PC Strikes and PC reactions against this enemy, Chapter III.3)
 - Armor
 - One or two Techniques if they should feel distinct
 
@@ -288,7 +283,6 @@ enemy:
   tier: named
   resolve: 3              # base durability pool; armor adds to it in play
   attack_modifier: 2      # Strength +1, Combat Practiced +1
-  defense_modifier: 2     # authoring input — NPCs don't roll (Chapter III.3)
   armor: light
   techniques: []
   special: null

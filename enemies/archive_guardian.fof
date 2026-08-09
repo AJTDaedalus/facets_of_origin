@@ -18,7 +18,6 @@ enemy:
                          # clears the median->=3 floor (confirmed by sim,
                          # research/simulation_log.md Series 7).
   attack_modifier: 3    # Strength +2, Combat Expert +2, −1 from fifteen years of wear — iron weight, not technique
-  defense_modifier: 1   # Dex −1, Combat Expert +2
   armor: heavy
   techniques: [phase_change]
   special: null

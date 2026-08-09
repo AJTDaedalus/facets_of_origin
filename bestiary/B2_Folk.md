@@ -20,7 +20,7 @@ These are the people who fight for a living without being soldiers about it: doc
 
 **Harbor Thug** · *Mook* · **TR 2**
 
-**When they act on it:** Resolve — · armor none · defense +0
+**When they act on it:** Resolve — · armor none
 
 **When it acts:** attack +0 · incoming Tier 1
 
@@ -38,7 +38,7 @@ These are the people who fight for a living without being soldiers about it: doc
 
 **City Watch Sergeant** · *Named* · **TR 8**
 
-**When they act on it:** Resolve 3 · armor light (+1 Resolve) · defense +2
+**When they act on it:** Resolve 3 · armor light (+1 Resolve)
 
 **When it acts:** attack +2 · incoming Tier 2
 
@@ -62,7 +62,7 @@ These are the people who fight for a living without being soldiers about it: doc
 
 **Veteran Soldier** · *Named* · **TR 10**
 
-**When they act on it:** Resolve 4 · armor light (+1 Resolve) · defense +3
+**When they act on it:** Resolve 4 · armor light (+1 Resolve)
 
 **When it acts:** attack +3 · incoming Tier 2
 
@@ -109,7 +109,7 @@ They have existed in some form in every settled region for as long as anyone has
 
 **Blade of the Bought** · *Mook* · **TR 4**
 
-**When they act on it:** Resolve — · armor light (+1 Resolve) · defense +1
+**When they act on it:** Resolve — · armor light (+1 Resolve)
 
 **When it acts:** attack +1 · incoming Tier 1
 
@@ -134,7 +134,7 @@ They have existed in some form in every settled region for as long as anyone has
 
 **Sergeant-at-Arms** · *Named* · **TR 9**
 
-**When they act on it:** Resolve 3 · armor light (+1 Resolve) · defense +2
+**When they act on it:** Resolve 3 · armor light (+1 Resolve)
 
 **When it acts:** attack +2 · incoming Tier 2
 
@@ -163,7 +163,7 @@ They have existed in some form in every settled region for as long as anyone has
 
 **Captain-under-Contract** · *Boss* · **TR 15**
 
-**When they act on it:** Resolve 6 · armor heavy (+2 Resolve) · defense +2
+**When they act on it:** Resolve 6 · armor heavy (+2 Resolve)
 
 **When it acts:** attack +3 · incoming Tier 2
 
@@ -230,7 +230,7 @@ Nobody knows what they do with what they are given. The Kindly do not say, and t
 
 **A Kindly One** · *Named* · **TR 8**
 
-**When they act on it:** Resolve 4 · armor none · defense +3
+**When they act on it:** Resolve 4 · armor none
 
 **When it acts:** attack +0 · incoming Tier 2
 
