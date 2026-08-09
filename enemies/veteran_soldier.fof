@@ -11,12 +11,15 @@ ruleset:
 enemy:
   tier: named
   resolve: 4
-  attack_modifier: 3    # Strength +2, Combat Expert +1
-  defense_modifier: 3   # Parry: same roll
+  attack_modifier: 3    # Strength +2, Combat Practiced +1
   armor: light
-  techniques: []
+  techniques: [telegraphed_finisher]
+  # Telegraphed Finisher (MM1, Three Worked Enemy Techniques): once per
+  # scene, against a character already carrying a Tier 2 Condition, its
+  # attack repeats that Condition's type — a landed repeat is Broken.
+  # Named one full exchange before it can land. Always.
   special: null
-  tr: 10                # offense(+3→5) + durability(Resolve 4) + armor(light→1) + techniques(0) = 10
+  tr: 11                # offense(+3→5) + durability(Resolve 4) + armor(light→1) + techniques(1) = 11
 
   disposition: >
     Trained, unhurried, and entirely without anything to prove.
@@ -35,20 +38,24 @@ enemy:
 
   tactics: >
     Posture: Measured by default. Goes Aggressive if a party member
-    is Cornered or Staggered. Goes Defensive if Staggered themselves.
-    Reaction preference: Parry over Dodge (higher modifier). Will
-    Absorb Tier 1 attacks if Endurance is low and a Tier 2 threat
-    is incoming the same exchange. Targets the highest-Endurance
+    is Cornered or Staggered. Goes Defensive once left Open.
+    Defends by meeting force with the blade, not by giving ground —
+    while set (Measured or Defensive), lean toward Hard difficulty
+    for Strikes against them (Chapter III.3). Targets the fullest-Endurance-Pool
     party member first to neutralize the biggest threat; shifts to
-    a Cornered/Staggered party member to press the advantage.
+    a Cornered/Staggered party member to press the advantage — and
+    that is when the Telegraphed Finisher comes out: the measured
+    step, the blade drawn back, the whole table given one exchange
+    to answer it.
 
   notes: >
     TR breakdown: offense(+3 → value 5) + durability(Resolve 4)
-    + armor(light → 1) + techniques(0) = 10.
+    + armor(light → 1) + techniques(1) = 11. (Was 10; gained the
+    Telegraphed Finisher when MM1's worked enemy Techniques landed.)
     Actor count drives difficulty, not total TR (MM1, Encounter Recipe
     Table): a single Named enemy, however high its TR, is trivial for
     a fresh party. Use Veteran Soldier as part of a multi-actor roster
     to reach Standard or Hard difficulty, not alone.
 
 created_at: '2026-03-05T00:00:00+00:00'
-last_modified: '2026-03-05T00:00:00+00:00'
+last_modified: '2026-08-08T00:00:00+00:00'

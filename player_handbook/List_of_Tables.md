@@ -17,11 +17,8 @@
 | **II.2–4** | [Difficulty Modifiers](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play) | II.2_Character_Creation_Attributes.md |
 | **II.3–1** | [Scope](II.3_Magic.md#scope) | II.3_Magic.md |
 | **II.3–2** | [Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope) | II.3_Magic.md |
-| **II.3–3** | [Soul Domains](II.3_Magic.md#soul-domains) | II.3_Magic.md |
-| **II.3–4** | [Mind Domains](II.3_Magic.md#mind-domains) | II.3_Magic.md |
 | **II.4–1** | [Skill Ranks](II.4_Character_Creation_Facets.md#skills) | II.4_Character_Creation_Facets.md |
 | **II.4–2** | [Skill Point Cost per Mark](II.4_Character_Creation_Facets.md#advancing-skills) | II.4_Character_Creation_Facets.md |
-| **II.4–3** | [Career Advance Benchmarks](II.4_Character_Creation_Facets.md#career-advances) | II.4_Character_Creation_Facets.md |
 | **II.4a–1** | [Skills of the Body](II.4a_Character_Creation_Facet_Body.md#skills-of-the-body) | II.4a_Character_Creation_Facet_Body.md |
 | **II.4b–1** | [Skills of the Mind](II.4b_Character_Creation_Facet_Mind.md#skills-of-the-mind) | II.4b_Character_Creation_Facet_Mind.md |
 | **II.4c–1** | [Skills of the Soul](II.4c_Character_Creation_Facet_Soul.md#skills-of-the-soul) | II.4c_Character_Creation_Facet_Soul.md |
@@ -54,6 +51,8 @@
 | **QS–2** | [Mordai — Attributes](Quick_Start.md#mordai-the-warrior) | Quick_Start.md |
 | **QS–3** | [Zulnut — Attributes](Quick_Start.md#zulnut-the-rogue) | Quick_Start.md |
 | **QS–4** | [Quick Reference](Quick_Start.md#quick-reference) | Quick_Start.md |
+| **A–1** | [Soul Domains at a Glance](Appendix_Magic_Domains.md#domains-of-the-soul) | Appendix_Magic_Domains.md |
+| **A–2** | [Mind Domains at a Glance](Appendix_Magic_Domains.md#domains-of-the-mind) | Appendix_Magic_Domains.md |
 
 ---
 
@@ -65,16 +64,15 @@
 | **MM1–2** | [Durability Value by Enemy Type](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr) | MM1_Encounters_and_Enemies.md |
 | **MM1–3** | [Armor Bonus](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr) | MM1_Encounters_and_Enemies.md |
 | **MM1–4** | [TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples) | MM1_Encounters_and_Enemies.md |
-| **MM1–5** | [The TR Budget](../mm_manual/MM1_Encounters_and_Enemies.md#the-tr-budget-a-rough-ordering-check-only) | MM1_Encounters_and_Enemies.md |
-| **MM1–6** | [Action Economy Multipliers](../mm_manual/MM1_Encounters_and_Enemies.md#action-economy-adjustment) | MM1_Encounters_and_Enemies.md |
-| **MM1–7** | [Encounter Recipes at Party Strength 3](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-3-3-fresh-characters-1-career-advance-each) | MM1_Encounters_and_Enemies.md |
-| **MM1–8** | [Encounter Recipes at Other Party Strengths](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-4-4-pcs-or-3-advanced-pcs) | MM1_Encounters_and_Enemies.md |
+| **MM1–5** | [Encounter Recipes at Party Strength 3](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-3-3-fresh-characters-1-career-advance-each) | MM1_Encounters_and_Enemies.md |
+| **MM1–6** | [Encounter Recipes at Other Party Strengths](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-4-4-pcs-or-3-advanced-pcs) | MM1_Encounters_and_Enemies.md |
 | **MM2–1** | [What Walks In](../mm_manual/MM2_Session_Design.md#the-complication-table) | MM2_Session_Design.md |
 | **MM2–2** | [Generic 6− Consequences](../mm_manual/MM2_Session_Design.md#the-trouble-table) | MM2_Session_Design.md |
 | **MM2–3** | [Spark Target Economy](../mm_manual/MM2_Session_Design.md#target-economy) | MM2_Session_Design.md |
 | **MM3–1** | [Encounter Difficulty Across a Four-Session Arc](../mm_manual/MM3_Campaign_Design.md#difficulty-should-breathe) | MM3_Campaign_Design.md |
 | **MM3–2** | [Advancement Thresholds and Story Beats](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure) | MM3_Campaign_Design.md |
-| **MM3–3** | [Party Capability by Career Advances](../mm_manual/MM3_Campaign_Design.md#using-career-advances-as-a-campaign-clock) | MM3_Campaign_Design.md |
+| **MM3–3** | [Career Advance Benchmarks](../mm_manual/MM3_Campaign_Design.md#using-career-advances-as-a-campaign-clock) | MM3_Campaign_Design.md |
+| **MM3–4** | [Party Capability by Career Advances](../mm_manual/MM3_Campaign_Design.md#using-career-advances-as-a-campaign-clock) | MM3_Campaign_Design.md |
 | **MM5–1** | [Outcome Tiers](../mm_manual/MM5_Quick_Reference.md#core-resolution) | MM5_Quick_Reference.md |
 | **MM5–2** | [Attribute Ratings](../mm_manual/MM5_Quick_Reference.md#attribute-ratings) | MM5_Quick_Reference.md |
 | **MM5–3** | [Difficulty](../mm_manual/MM5_Quick_Reference.md#difficulty) | MM5_Quick_Reference.md |

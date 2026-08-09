@@ -40,7 +40,7 @@ Every skill, its Facet, and the Minor Attribute that governs it. What each skill
 
 ## Using Skills
 
-When the MM calls for a roll, they will name the relevant skill (or describe the situation clearly enough that the right skill is obvious). Roll **2d6 + your Minor Attribute modifier + your Skill rank modifier**.
+When the MM calls for a roll, they will name the relevant skill (or describe the situation clearly enough that the right skill is obvious). Roll **2d6 + your Minor Attribute modifier + your Skill rank modifier**. Skill–attribute pairs are fixed except where a rule explicitly says otherwise; the Strike (Chapter III.3) is the named exception.
 
 If no single skill clearly fits, roll the relevant Minor Attribute alone with no skill modifier — you are relying on raw capability rather than developed technique.
 

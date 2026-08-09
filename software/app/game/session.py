@@ -1,6 +1,7 @@
 """Game session management — in-memory with JSON persistence planned."""
 from __future__ import annotations
 
+import time
 import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -11,7 +12,7 @@ import yaml
 from app.config import settings
 from app.game.character import Character
 from app.game.enemy import Enemy
-from app.game.encounter import Encounter
+from app.game.encounter import Encounter, compute_band
 from app.facets.registry import MergedRuleset, build_ruleset
 
 
@@ -94,12 +95,37 @@ class GameSession:
     #: Final Blow, and a single shared slot meant one player's Strike silently
     #: destroyed the other's earned offer.
     pending_final_blows: dict[str, dict] = field(default_factory=dict)
+    #: Player names who took an offensive action (Strike, Maneuver, or an
+    #: MM-recorded enemy_strike) this exchange. Read by the end-exchange
+    #: handler through `combat.exchange_uncontested` (K-2/D5): an exchange
+    #: nobody contested lets the situation advance for free, and the MM
+    #: gets prompted to say so. Cleared at combat start and every
+    #: end-exchange.
+    offensive_actions_this_exchange: set[str] = field(default_factory=set)
+    #: Per-player Spark-flow tracker (T6.3, C-2 app-side): player_name →
+    #: {"last_flow": monotonic ts of the last earn OR spend, "last_nudge":
+    #: monotonic ts of the last MM prompt about it, or None}. Feeds the quiet
+    #: MM-only `spark_flow_nudge` prompt in the WS layer — a tool prompt,
+    #: not a rule (see `SPARK_FLOW_NUDGE_SECONDS` in `app/api/websocket.py`).
+    spark_flow: dict[str, dict] = field(default_factory=dict)
     _character_dir: Path | None = field(default=None)
 
     def add_character(self, character: Character) -> None:
         """Add or replace a character in this session, keyed by player_name."""
         self.characters[character.player_name] = character
+        # Joining opens a fresh Spark-flow stretch — the nudge clock starts now.
+        self.record_spark_flow(character.player_name)
         self.save_character_to_disk(character.player_name)
+
+    def record_spark_flow(self, player_name: str) -> None:
+        """Record a Spark earn or spend (or other stretch reset) for the
+        Spark-flow nudge tracker (T6.3). Also clears any pending nudge
+        cooldown — a fresh flow starts a fresh stretch.
+        """
+        self.spark_flow[player_name] = {
+            "last_flow": time.monotonic(),
+            "last_nudge": None,
+        }
 
     def save_character_to_disk(self, player_name: str) -> None:
         """Write the current character state to data/sessions/{id}/characters/{player_name}.fof.
@@ -130,6 +156,30 @@ class GameSession:
         if len(self.roll_log) > 500:
             self.roll_log = self.roll_log[-500:]
 
+    def party_strength(self) -> int:
+        """Party Strength: the sum of participating characters' career
+        advances (MM1 §Party Strength). Falls back to 3 — the simulation-
+        calibrated baseline — when no characters have joined yet (or the sum
+        is degenerate), rather than raising or claiming a PS of zero.
+        """
+        total = sum(c.career_advances for c in self.characters.values())
+        return total if total >= 1 else 3
+
+    def active_encounter_band(self) -> dict:
+        """Difficulty band of the live tracker roster (T6.2, K-3).
+
+        Defers to `encounter.compute_band` — the Recipe-Table logic's only
+        home. Defeated Named/Boss enemies (Resolve 0, not yet removed) no
+        longer act, so they leave the count.
+        """
+        tiers = [
+            e.tier for e in self.active_enemies.values()
+            if e.tier == "mook"
+            or e.resolve_current is None
+            or e.resolve_current > 0
+        ]
+        return compute_band(tiers, self.party_strength())
+
     def to_state_dict(self) -> dict:
         """Full session state sent to the MM on WebSocket join.
 
@@ -147,6 +197,8 @@ class GameSession:
             "encounter_library": {eid: e.to_client_dict() for eid, e in self.encounter_library.items()},
             "active_enemies": {key: e.to_client_dict() for key, e in self.active_enemies.items()},
             "threat_clocks": {cid: c.to_client_dict() for cid, c in self.threat_clocks.items()},
+            # MM dial only (K-3): deliberately absent from the player state.
+            "encounter_band": self.active_encounter_band(),
         }
 
     def to_player_state_dict(self, player_name: str) -> dict:

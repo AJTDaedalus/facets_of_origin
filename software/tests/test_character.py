@@ -916,3 +916,157 @@ class TestCharacterInventoryAndNotes:
         assert char.inventory == []
         assert char.notes_player == ""
         assert char.notes_mm == ""
+
+
+# ---------------------------------------------------------------------------
+# T4.3 (P-5, D10): the forfeit dies — unspent points bank (cap 2) and 1 of the
+# 4 session points may train an unused Primary-Facet skill.
+# ---------------------------------------------------------------------------
+
+class TestSkillPointBankingAndTraining:
+    def test_unspent_points_bank_up_to_cap(self, body_character, ruleset):
+        """3 points left at session end → 2 bank (cap) → 6 next session."""
+        body_character.session_skill_points_remaining = 3
+        body_character.start_new_session(ruleset)
+        assert body_character.session_skill_points_remaining == 6
+
+    def test_full_spend_banks_nothing(self, body_character, ruleset):
+        body_character.session_skill_points_remaining = 0
+        body_character.start_new_session(ruleset)
+        assert body_character.session_skill_points_remaining == 4
+
+    def test_one_point_banks_one(self, body_character, ruleset):
+        body_character.session_skill_points_remaining = 1
+        body_character.start_new_session(ruleset)
+        assert body_character.session_skill_points_remaining == 5
+
+    def test_new_session_resets_used_skills_and_training(self, body_character, ruleset):
+        body_character.skills_used_this_session = {"combat"}
+        body_character.training_marks_this_session = 1
+        body_character.start_new_session(ruleset)
+        assert body_character.skills_used_this_session == set()
+        assert body_character.training_marks_this_session == 0
+
+    def test_training_mark_on_unused_primary_skill(self, body_character, ruleset):
+        """With a used-skills list active, 1 point may still go to an unused
+        Primary-Facet skill — training between sessions."""
+        body_character.session_skill_points_remaining = 4
+        body_character.skills_used_this_session = {"combat"}
+        result = body_character.spend_skill_point("athletics", ruleset)
+        assert result["training_mark"] is True
+        assert body_character.training_marks_this_session == 1
+        assert body_character.skills["athletics"].marks == 1
+        assert body_character.session_skill_points_remaining == 3
+
+    def test_second_training_mark_refused(self, body_character, ruleset):
+        body_character.session_skill_points_remaining = 4
+        body_character.skills_used_this_session = {"combat"}
+        body_character.spend_skill_point("athletics", ruleset)
+        with pytest.raises(ValueError, match="[Tt]raining"):
+            body_character.spend_skill_point("finesse", ruleset)
+
+    def test_training_mark_cannot_go_cross_facet(self, body_character, ruleset):
+        """The training point is Primary-Facet only — an unused cross-Facet
+        skill is still off the table."""
+        body_character.session_skill_points_remaining = 4
+        body_character.skills_used_this_session = {"combat"}
+        with pytest.raises(ValueError, match="not used this session"):
+            body_character.spend_skill_point("lore", ruleset)
+
+    def test_used_skill_spend_is_not_a_training_mark(self, body_character, ruleset):
+        body_character.session_skill_points_remaining = 4
+        body_character.skills_used_this_session = {"combat"}
+        result = body_character.spend_skill_point("combat", ruleset)
+        assert result["training_mark"] is False
+        assert body_character.training_marks_this_session == 0
+
+    def test_insufficient_points_raises(self, body_character, ruleset):
+        body_character.session_skill_points_remaining = 0
+        body_character.skills_used_this_session = {"combat"}
+        with pytest.raises(ValueError, match="[Ii]nsufficient"):
+            body_character.spend_skill_point("combat", ruleset)
+
+    def test_yaml_carries_banking_and_training_config(self, ruleset):
+        assert ruleset.advancement.bank_cap == 2
+        assert ruleset.advancement.training_marks_per_session == 1
+
+
+# ---------------------------------------------------------------------------
+# T4.4 (P-6): ranks granted at character creation count toward career
+# advances but NOT toward Facet levels. The behavior pre-existed (creation
+# never routes through advance_skill); these are the missing verification.
+# ---------------------------------------------------------------------------
+
+class TestCreationRanksAndFacetLevels:
+    def test_background_starting_skill_counts_toward_career_only(self, ruleset, valid_attributes):
+        """A Background's Practiced starting skill is 1 career advance and
+        0 Facet-level progress."""
+        char, errors = create_default_character(
+            name="Mordai", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+            background_id="city_watch_veteran",
+        )
+        assert not errors, errors
+        assert char.career_advances == 1
+        assert char.facet_level == 0
+        assert char.rank_advances_by_facet == {}
+
+    def test_facet_level_needs_five_played_advances_regardless_of_creation_rank(
+        self, ruleset, valid_attributes
+    ):
+        """The 5-advance threshold counts advances earned in play only: four
+        played advances leave the character at level 0 even with a creation
+        rank on the sheet; the fifth played advance lands level 1."""
+        char, errors = create_default_character(
+            name="Mordai", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+            background_id="city_watch_veteran",  # Combat Practiced at creation
+        )
+        assert not errors, errors
+        # Four played rank advances (9 marks = 3 advances, 3 marks = 1)
+        char.advance_skill("athletics", 9, ruleset)
+        char.advance_skill("finesse", 3, ruleset)
+        assert char.career_advances == 5  # 1 creation + 4 played
+        assert char.facet_level == 0      # creation advance does not count
+        # The fifth played advance in the Facet crosses the threshold
+        char.advance_skill("stealth", 3, ruleset)
+        assert char.facet_level == 1
+
+    def test_played_advance_on_the_creation_skill_counts_normally(self, ruleset, valid_attributes):
+        """Advancing the creation-granted skill in play (Practiced → Expert)
+        is a normal played advance for both counters."""
+        char, errors = create_default_character(
+            name="Mordai", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+            background_id="city_watch_veteran",
+        )
+        assert not errors, errors
+        char.advance_skill("combat", 3, ruleset)  # Practiced -> Expert
+        assert char.skills["combat"].rank == "expert"
+        assert char.career_advances == 2
+        assert char.rank_advances_by_facet.get("body") == 1
+
+
+# ---------------------------------------------------------------------------
+# T4.5 (P-8, D11): Never Surprised is a warning beat, not an auto-success.
+# ---------------------------------------------------------------------------
+
+class TestNeverSurprisedWarningBeat:
+    def _entry(self, ruleset):
+        for tree in ruleset.techniques.values():
+            for branch in tree.branches:
+                for tier in branch.tiers:
+                    for tech in tier.techniques:
+                        if tech.id == "never_surprised":
+                            return tech
+        raise AssertionError("never_surprised not found in the ruleset")
+
+    def test_entry_grants_a_warning_beat(self, ruleset):
+        tech = self._entry(ruleset)
+        assert "warning beat" in tech.description
+
+    def test_entry_carries_no_auto_success(self, ruleset):
+        """D11: the absolute is gone — the entry may not promise automatic
+        success on the notice roll."""
+        tech = self._entry(ruleset)
+        assert "automatically succeed" not in tech.description

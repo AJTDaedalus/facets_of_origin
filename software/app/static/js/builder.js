@@ -39,12 +39,24 @@ function renderBuilderSkills() {
     return;
   }
 
+  // T4.3/D10's two numbers are ruleset data the server enforces
+  // (Character.spend_skill_point / start_new_session), so read them rather
+  // than mirroring them here — a Facet that retunes either would otherwise
+  // leave the UI offering what the server refuses.
+  const adv = state.ruleset.advancement || {};
+  const bankCap = adv.bank_cap !== undefined ? adv.bank_cap : 2;
+  const trainingCap = adv.training_marks_per_session !== undefined
+    ? adv.training_marks_per_session : 1;
+
   const sp = char.session_skill_points_remaining || 0;
   spEl.innerHTML = `<strong style="color:var(--gold);">${sp}</strong> Skill Point${sp === 1 ? '' : 's'}
-    left this session. Primary-Facet skills cost 1, everything else costs 2.`;
+    left this session. Primary-Facet skills cost 1, everything else costs 2.
+    Up to ${bankCap} unspent point${bankCap === 1 ? '' : 's'} bank into the next session.`;
 
   const usedSkills = char.skills_used_this_session || [];
   const hasUsedSkills = usedSkills.length > 0;
+  // T4.3/D10: a point per session may train an UNUSED Primary-Facet skill.
+  const trainingAvailable = (char.training_marks_this_session || 0) < trainingCap;
 
   listEl.innerHTML = '';
   if (!hasUsedSkills) {
@@ -53,7 +65,7 @@ function renderBuilderSkills() {
     const note = document.createElement('div');
     note.className = 'inline-note';
     note.textContent = 'Nothing is marked as used yet. Roll a skill in play, or ask the MM to mark one — '
-      + 'you may only advance skills you actually used this session.';
+      + 'points go to skills you used this session, plus 1 training point for an unused Primary-Facet skill.';
     listEl.appendChild(note);
   }
 
@@ -64,12 +76,17 @@ function renderBuilderSkills() {
     const cost = isPrimary ? 1 : 2;
     const canAfford = (char.session_skill_points_remaining || 0) >= cost;
     const wasUsed = usedSkills.includes(skill.id);
-    const canSpend = canAfford && (!hasUsedSkills || wasUsed);
+    const canTrain = isPrimary && trainingAvailable;
+    const canSpend = canAfford && (!hasUsedSkills || wasUsed || canTrain);
     const marksNeeded = state.ruleset.advancement ? state.ruleset.advancement.marks_per_rank : 3;
     const dots = '\u25CF'.repeat(ss.marks) + '\u25CB'.repeat(Math.max(0, marksNeeded - ss.marks));
 
     const usedBadge = wasUsed ? '<span style="color:var(--success);font-size:10px;margin-left:4px;">USED</span>' : '';
-    const notUsedNote = hasUsedSkills && !wasUsed && canAfford ? '<span style="color:var(--text-dim);font-size:10px;margin-left:4px;">not used</span>' : '';
+    const notUsedNote = hasUsedSkills && !wasUsed && canAfford
+      ? (canTrain
+        ? `<span style="color:var(--gold);font-size:10px;margin-left:4px;">train (${trainingCap}/session)</span>`
+        : '<span style="color:var(--text-dim);font-size:10px;margin-left:4px;">not used</span>')
+      : '';
 
     const div = document.createElement('div');
     div.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;';
@@ -338,7 +355,6 @@ async function saveEnemy(ev) {
     tier: document.getElementById('builder-enemy-tier').value,
     resolve: parseInt(document.getElementById('builder-enemy-resolve').value) || 0,
     attack_modifier: parseInt(document.getElementById('builder-enemy-attack').value) || 0,
-    defense_modifier: parseInt(document.getElementById('builder-enemy-defense').value) || 0,
     armor: document.getElementById('builder-enemy-armor').value,
     techniques: techniques,
     special: document.getElementById('builder-enemy-special').value.trim() || null,
@@ -376,7 +392,6 @@ function editEnemy(enemyId) {
   document.getElementById('builder-enemy-tier').value = enemy.tier || 'named';
   document.getElementById('builder-enemy-resolve').value = enemy.resolve != null ? enemy.resolve : 0;
   document.getElementById('builder-enemy-attack').value = enemy.attack_modifier || 0;
-  document.getElementById('builder-enemy-defense').value = enemy.defense_modifier || 0;
   document.getElementById('builder-enemy-armor').value = enemy.armor || 'none';
   document.getElementById('builder-enemy-techniques').value = (enemy.techniques || []).join(', ');
   document.getElementById('builder-enemy-special').value = enemy.special || '';
@@ -398,7 +413,6 @@ function clearEnemyForm() {
   document.getElementById('builder-enemy-tier').value = 'named';
   document.getElementById('builder-enemy-resolve').value = 4;
   document.getElementById('builder-enemy-attack').value = 0;
-  document.getElementById('builder-enemy-defense').value = 0;
   document.getElementById('builder-enemy-armor').value = 'none';
   updateEnemyFormMode();
   previewEnemyTR();
@@ -558,10 +572,40 @@ function updateEncounterBudget() {
 
   el.innerHTML = `
     <div><strong style="color:var(--gold);">${actors}</strong> Named/Boss actor${actors === 1 ? '' : 's'}
-      · <strong>${mooks}</strong> Mook${mooks === 1 ? '' : 's'} · total TR ${totalTR}</div>
+      · <strong>${mooks}</strong> Mook${mooks === 1 ? '' : 's'} · total TR ${totalTR}
+      <span id="builder-encounter-band" style="margin-left:8px;"></span></div>
     <div style="color:var(--text-dim);margin-top:2px;">Difficulty tracks the number of Named/Boss actors, not
       total TR. A Mook swarm on its own is never dangerous. For a 3-character party: 3 Named + 1 Mook is
       Standard; add 2 Mooks for Hard; add 3, or use 4 Named + 1 Mook, for Deadly.</div>`;
+
+  // T6.2 (K-3): the live band comes from the server (compute_band via
+  // /api/encounters/preview_band) — this file never carries its own copy of
+  // the Recipe-Table logic. Debounced: count inputs fire per keystroke.
+  clearTimeout(updateEncounterBudget._bandTimer);
+  updateEncounterBudget._bandTimer = setTimeout(fetchEncounterBandPreview, 250);
+}
+
+async function fetchEncounterBandPreview() {
+  const el = document.getElementById('builder-encounter-band');
+  if (!el) return;
+  const enemies = [];
+  document.querySelectorAll('.encounter-enemy-row').forEach(row => {
+    enemies.push({
+      enemy_id: row.dataset.enemyId,
+      count: parseInt(row.querySelector('.encounter-enemy-count').value) || 1,
+    });
+  });
+  if (enemies.length === 0) { el.innerHTML = ''; return; }
+  try {
+    const resp = await apiFetch('/api/encounters/preview_band', 'POST', {
+      session_id: state.sessionId, enemies: enemies,
+    });
+    if (!resp.ok) { el.innerHTML = ''; return; }
+    const data = await resp.json();
+    el.innerHTML = renderBandChip(data.band);
+  } catch (e) {
+    el.innerHTML = '';
+  }
 }
 
 async function saveEncounter(ev) {

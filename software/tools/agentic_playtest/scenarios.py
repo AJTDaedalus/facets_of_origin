@@ -27,19 +27,20 @@ class Scenario:
 #: Canon stat lines, transcribed from enemies/*.fof.
 ARCHIVE_GUARDIAN = {
     "id": "archive_guardian", "name": "Archive Guardian", "tier": "boss",
-    "resolve": 8, "attack_modifier": 3, "defense_modifier": 1, "armor": "heavy",
-    "techniques": ["phase_change", "tier1_immunity"],
+    "resolve": 8, "attack_modifier": 3, "armor": "heavy",
+    "techniques": ["phase_change"],
     "phases": [{"resolve_threshold": 2,
                 "description": "Reduced Mode — its attacks weaken and land as "
-                               "Tier 1, but it now ignores Tier 1 Conditions "
-                               "entirely. It is running on something else."}],
+                               "Tier 1, but it stops registering harm: left "
+                               "Open, it will not spend an action recovering. "
+                               "It is running on something else."}],
     "description": "An ancient construct protecting the sealed vault.",
     "tactics": "Holds the vault door. Does not pursue. Strikes whoever is nearest.",
 }
 
 DUST_CONSTRUCT = {
     "id": "dust_construct", "name": "Dust Construct", "tier": "mook",
-    "attack_modifier": 0, "defense_modifier": 0, "armor": "none",
+    "attack_modifier": 0, "armor": "none",
     "description": "Humanoid shapes of compressed dust and old paper, animated "
                    "by residual ward magic.",
     "tactics": "Move silently. Strike with hardened limbs.",
@@ -47,13 +48,13 @@ DUST_CONSTRUCT = {
 
 HARBOR_THUG = {
     "id": "harbor_thug", "name": "Harbor Thug", "tier": "mook",
-    "attack_modifier": 0, "defense_modifier": 0, "armor": "none",
+    "attack_modifier": 0, "armor": "none",
     "description": "Hired muscle from the harbour district.",
 }
 
 WATCH_SERGEANT = {
     "id": "city_watch_sergeant", "name": "City Watch Sergeant", "tier": "named",
-    "resolve": 3, "attack_modifier": 2, "defense_modifier": 2, "armor": "light",
+    "resolve": 3, "attack_modifier": 2, "armor": "light",
     "description": "A mid-rank officer of the city watch. Fights methodically — "
                    "not inspired, but very hard to rattle. Will call for backup "
                    "if the fight runs more than two exchanges.",

@@ -68,7 +68,7 @@ A Background Mark is worth exactly one mark toward the Practiced rank. It has no
 
 **Specialty**
 
-One narrow, specific area of fictional expertise — something too precise to be a skill, but real enough to matter. The MM treats this as a detail that changes difficulty: when the specialty directly applies, a Standard roll becomes Easy. When it is tangential, it gives the MM permission to offer information without a roll.
+One narrow, specific area of fictional expertise — something too precise to be a skill, but real enough to matter. The MM treats this as a detail that changes difficulty: when the specialty directly applies, a Standard roll becomes Easy. When it is tangential, it gives the MM permission to offer information without a roll. A Specialty's step and a Technique's step draw from the same allowance — at most one character-side step moves any single roll, whichever source you pick (see *Difficulty*, III.1).
 
 A Specialty is not a second skill. It is a *fact about your history* that occasionally bends the fiction in your favor.
 
@@ -98,7 +98,7 @@ Magic requires two things: a narrative origin and a Facet Technique. The Backgro
 
 **After the Technique is unlocked:** Your domain operates at full capacity — all scopes available, normal difficulty table, any additional benefits the Technique provides. The Technique is not the moment you gain magic. It is the moment your magic becomes what it is capable of being.
 
-This means starting characters with magical Backgrounds have a real but limited version of their domain from session one. The first Facet level — and the Technique that comes with it — is a meaningful mechanical milestone: the moment of formalization, of understanding, of arriving somewhere you have been walking toward.
+This means starting characters with magical Backgrounds have a real but limited version of their domain from session one. The first Facet level — and the Technique that comes with it — is a meaningful mechanical milestone: the moment of formalization, of understanding, of arriving somewhere you have been walking toward. Own that when you choose a magical Background: your first Technique is your formalization, and your first *free* Technique choice comes at Facet level 2.
 
 > **Example — a domain origin**
 >
@@ -160,7 +160,7 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Starting Skill:** Athletics (Practiced)
 
-**Secondary Skill:** Endurance (Novice, 1 mark) — weeks between cities with no days off.
+**Secondary Skill:** Combat (Novice, 1 mark) — the job is standing between the cargo and the bandits who want it.
 
 **Specialty:** Can read road conditions and assess the likelihood of ambush or delay based on terrain, weather, and recent traffic sign.
 
@@ -220,7 +220,7 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Starting Skill:** Lore (Practiced)
 
-**Secondary Skill (non-magical):** Investigate (Novice, 1 mark) — formal training involves a lot of finding things, cross-referencing things, and noticing when something doesn't fit.
+**Secondary Skill (non-magical):** Craft (Novice, 1 mark) — a structured education builds the foundations of a discipline by practicing it, not just reading about it.
 
 **Domain origin (if magical, replaces secondary skill):** Choose one domain from the Domains of the Mind list. Your apprenticeship was the beginning of formal magical education. Specify the institution and what domain it taught.
 

@@ -26,7 +26,7 @@ They are not stupid. This is the point most people miss and it gets them hurt. A
 
 **Latchling** · *Mook* · **TR 5**
 
-**When they act on it:** Resolve — · armor heavy (+2 Resolve) · defense +1
+**When they act on it:** Resolve — · armor heavy (+2 Resolve)
 
 **When it acts:** attack +1 · incoming Tier 1
 
@@ -51,7 +51,7 @@ They are not stupid. This is the point most people miss and it gets them hurt. A
 
 **Latchman** · *Named* · **TR 11**
 
-**When they act on it:** Resolve 4 · armor heavy (+2 Resolve) · defense +2
+**When they act on it:** Resolve 4 · armor heavy (+2 Resolve)
 
 **When it acts:** attack +2 · incoming Tier 2
 
@@ -99,20 +99,20 @@ The Latchmen's Boss expression is not a bigger latchman. It is what the same com
 
 <!-- statblock: archive_guardian -->
 
-**Archive Guardian** · *Boss* · **TR 17**
+**Archive Guardian** · *Boss* · **TR 16**
 
-**When they act on it:** Resolve 8 · armor heavy (+2 Resolve) · defense +1
+**When they act on it:** Resolve 8 · armor heavy (+2 Resolve)
 
 **When it acts:** attack +3 · incoming Tier 2
 
-**At Resolve 2:** Reduced Mode. When the Guardian's Resolve drops to 2 or below, its attack_modifier drops to +1 and its blows land as Tier 1. However, it now ignores all Tier 1 Conditions entirely — not through resilience, but because the sensory subsystem that registered them has shut down. It is running on something else. What that is, the party does not know.
+**At Resolve 2:** Reduced Mode. When the Guardian's Resolve drops to 2 or below, its attack_modifier drops to +1 and its blows land as Tier 1. However, it stops registering harm entirely — left Open, it will not spend an action recovering, because the sensory subsystem that would notice has shut down. It is running on something else. What that is, the party does not know.
 
 **Disposition:** Patient beyond anything alive. It has never needed to hurry and does not start now.
 
 **In play:**
 
 - Always Measured. It does not Press, does not go Aggressive, does not go Defensive.
-- At Resolve 2 or below it enters Reduced Mode: its attack drops, its blows land at Tier 1, and it ignores Tier 1 Conditions.
+- At Resolve 2 or below it enters Reduced Mode: its attack drops, its blows land at Tier 1, and it no longer spends actions recovering — once Open, it stays Open.
 - Each joint Maneuver that lands (10+) reduces its attack modifier by 1, to a minimum of 0 — a fictional weakness the party discovers, not a printed stat.
 
 **Morale:** None. It was not built with any. It stops when its Resolve is gone or when the thing it guards is no longer in the room.
@@ -129,7 +129,7 @@ That is, in certain lights, worse.
 
 **What makes it a Boss and not a large latchman** is that its instruction has no seam in it. Latchmen keep doors, and a door has a hundred edges to argue about. The Guardian was told to prevent unauthorized access to the contents of a room, and there is no clever reading of that sentence, no borrowed coat, and no successor office — the guild that could have countermanded it dissolved along with every record of who held authority over it.
 
-So this one is a fight, or it is a problem solved sideways: structural weaknesses, the fixed patrol logic, a sealed door, the joints. A straight fight is survivable and very expensive, which the simulation data supports — a by-the-book party wins essentially every time, several exchanges in, having spent real Sparks and real Endurance to do it.
+So this one is a fight, or it is a problem solved sideways: structural weaknesses, the fixed patrol logic, a sealed door, the joints. A straight fight is survivable and very expensive, which the simulation data supports — a by-the-book party wins essentially every time, several exchanges in, having spent real Sparks and real Endurance Pool points to do it.
 
 > **What Characters Can Know — the Archive Guardian**
 >
@@ -139,7 +139,7 @@ So this one is a fight, or it is a problem solved sideways: structural weaknesse
 >
 > **10+** — *"There's no argument to be had with this one; the office that could have called it off doesn't exist. But it was built by people, which means it has joints, and a maneuver that lands on one takes something off its attack — permanently, for the fight. And when it's nearly done it changes: it hits softer and stops noticing the small hurts entirely, because whatever registers those has shut down and it is running on something else."*
 
-**Encounter.** *(1 Boss alone — expensive, not deadly, and intended to be solved laterally.)* Its TR of 17 puts it well above the budget for a party of three, and the budget is the wrong instrument: a lone Boss is trivial for a fresh party whatever its TR, because difficulty is gated by actor count. A by-the-book party wins essentially every time — after several exchanges and real Spark and Endurance expenditure. It is not meant to be met head-on. Everything the party needs — the patrol logic, the joints, the room itself — is available before the first exchange to anyone who looks.
+**Encounter.** *(1 Boss alone — expensive, not deadly, and intended to be solved laterally.)* Its TR of 16 puts it well above the budget for a party of three, and the budget is the wrong instrument: a lone Boss is trivial for a fresh party whatever its TR, because difficulty is gated by actor count. A by-the-book party wins essentially every time — after several exchanges and real Spark and Endurance Pool expenditure. It is not meant to be met head-on. Everything the party needs — the patrol logic, the joints, the room itself — is available before the first exchange to anyone who looks.
 
 ---
 

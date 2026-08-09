@@ -198,7 +198,8 @@ CHARACTER_SHEET_FIELDS = {
     "Primary Facet": "primary_facet",
     "Facet Level": "facet_level",
     "Rank Advances Toward Next Level": "rank_advances_this_facet_level",
-    "Career Advances": "career_advances",
+    # "Career Advances" left the paper sheet in T5.5 (P-13) — the app and
+    # `.fof` keep the field; it is an app/MM concept, not sheet bookkeeping.
     "Title & Origin": "background_id",
     "Starting Skill (Practiced)": "skills",
     "Secondary Skill (Novice, 1 mark) or Domain Origin": "skills",
@@ -207,9 +208,12 @@ CHARACTER_SHEET_FIELDS = {
     "Technique": "techniques",
     "Choice (if any)": "technique_choices",
     "Magic Domain": "magic_domain",
-    "Endurance (current / max) — max is 4 + Constitution modifier + Endurance skill rank": "endurance_current",
+    "Endurance Pool (current / max) — max is 4 + Constitution modifier + Endurance skill rank": "endurance_current",
     "Armor Type": "armor",
-    "Armor Downgrade Budget Remaining This Scene": "armor_downgrades_remaining",
+    # T6.5: the printed sheet carries the III.3 paper-variant checkboxes
+    # (one per downgrade, ticked as armor softens a Condition) — the model
+    # still stores the same state as a remaining count.
+    "Armor Downgrades This Scene — tick a box each time armor softens a Condition (light armor: the first 2 boxes; heavy: all 4); boxes refresh when the scene ends": "armor_downgrades_remaining",
     "Active Conditions": "conditions",
     "Sparks": "sparks",
     "Inventory": "inventory",
@@ -246,14 +250,14 @@ def test_character_sheet_fields_map_to_model() -> None:
     assert not errors, "Character Sheet / model mismatches:\n" + "\n".join(errors)
 
 
-# The Magic, Combat, and Inventory sections (new in this task), plus the
-# Facet section's new Career Advances row.
+# The Magic, Combat, and Inventory sections (new in this task). The Facet
+# section's Career Advances row left the sheet in T5.5 (P-13); the armor row
+# became the III.3 paper-variant checkboxes in T6.5.
 NEW_CHARACTER_SHEET_SECTION_LABELS = [
-    "Career Advances",
     "Magic Domain",
-    "Endurance (current / max) — max is 4 + Constitution modifier + Endurance skill rank",
+    "Endurance Pool (current / max) — max is 4 + Constitution modifier + Endurance skill rank",
     "Armor Type",
-    "Armor Downgrade Budget Remaining This Scene",
+    "Armor Downgrades This Scene — tick a box each time armor softens a Condition (light armor: the first 2 boxes; heavy: all 4); boxes refresh when the scene ends",
     "Active Conditions",
     "Inventory",
 ]
@@ -324,11 +328,16 @@ DOMAIN_APPENDIX = PLAYER_HANDBOOK / "Appendix_Magic_Domains.md"
 
 
 def _appendix_domains() -> dict[str, str]:
-    """{domain id: type} as the appendix declares them, across both Facets."""
+    """{domain id: type} as the appendix declares them, across both Facets.
+
+    D14 (T5.4): "Prismatic" is the player-facing print name of the `broad`
+    type key — the appendix prints Prismatic, facet.yaml keeps the key.
+    """
     domains: dict[str, str] = {}
     for name, dtype in _APPENDIX_DOMAIN.findall(DOMAIN_APPENDIX.read_text()):
         domain_id = re.sub(r"[^a-z0-9]+", "_", name.lower()).strip("_")
-        domains[domain_id] = dtype.lower()
+        dtype = dtype.lower()
+        domains[domain_id] = "broad" if dtype == "prismatic" else dtype
     return domains
 
 
@@ -1037,3 +1046,129 @@ def test_second_domain_wording_does_not_anchor_on_primary_domain() -> None:
     assert not offenders, (
         f"stale 'harder than your primary domain' wording in: {offenders}"
     )
+
+
+# ---------------------------------------------------------------------------
+# Retired-phrase register (fun/ease pipeline — docs/TASKS_fun_ease_fixes.md T0.1)
+# ---------------------------------------------------------------------------
+
+# Every entry is (phrase, reason/finding-id). When a task in the fun/ease
+# pipeline removes or rewrites rule wording, the dead phrase is appended here
+# so the suite fails forever if it reappears anywhere in live rules surfaces.
+# Historical archives (playtest/, docs/, research/simulation_log.md,
+# research/advancement_priority_questions.md) are excluded by construction:
+# they are simply not in the scanned paths below.
+RETIRED_PHRASES: list[tuple[str, str]] = [
+    ("reactions, the works", "K-1: Named NPCs do not roll reactions"),
+    ("they use for Strikes and Parries", "K-1: enemy attack modifier is an authoring input, not a rolled modifier"),
+    ("same roll for Parry", "K-1: enemies never roll Parry"),
+    ("feeds the TR formula", "K-11 prep: defense_modifier does not feed the TR formula"),
+    ("Parry: same roll", "K-1: enemies never roll Parry"),
+    ("Reaction preference: Parry over Dodge", "K-1: enemies do not choose or roll reactions"),
+    ("Dodges erratically", "K-1: enemies do not Dodge; defense text is authoring guidance"),
+    ("arrive at the Named NPC already worn down", "K §4.3: Absorb costs nothing; Mook pressure is Tier 1 chip, not Endurance attrition"),
+    ("end a session with 2-4 unspent Sparks", "C-2/D1: Sparks reset to 3 each session; the target is spend-what-you-earn (hyphen variant, facet.yaml)"),
+    ("end a session with **2–4 unspent Sparks**", "C-2/D1: Sparks reset to 3 each session; the target is spend-what-you-earn (en-dash+bold variant, MM2)"),
+    ("end a session with 2–4 unspent Sparks", "C-2/D1: Sparks reset to 3 each session; the target is spend-what-you-earn (en-dash variant)"),
+    ("Pushing scope", "P-1: un-executable rule deleted — no scope tier exists beyond Major"),
+    ("natural ceiling", "P-1: the 'one tier beyond the natural ceiling' framing died with Pushing scope"),
+    ("pushed beyond Very Hard under any circumstances", "P-3/D8: rewritten as 'Reach-Sparks cannot move a Broad working's difficulty; dice-Sparks work normally'"),
+    ("Their ceiling is their ceiling", "P-3/D8: the misreadable 'Sparks don't work here' framing died; dice-Sparks are legal on Broad rolls"),
+    ("something the roll already carries", "C-3/D2: III.1's Technique trigger taxonomy moved to II.4 Reading the Entries; III.1 keeps the precedence paragraph + one-sentence pointer"),
+    ("before the player decides how to proceed", "C-7/D3: 7-9 is narration sequencing, not a decline-offer — the MM names the cost before narrating the success"),
+    ("a Tier 1 or Tier 2 Condition of your choice", "K-6/D4: the five-option Condition menu vs enemies became the single Open tag"),
+    ("rider Condition", "K-6/D4: riders retired — a 10+ vs an enemy may leave it Open instead; PvP tier outcomes unchanged"),
+    ("x multiplier", "K-5/D6: the TR budget and its multipliers are cut — actor count drives difficulty; historical record in docs/DECISIONS.md"),
+    ("Action Economy Multipliers", "K-5/D6: Table MM1-6 cut with the budget — the multipliers never predicted the actor-count threshold"),
+    ("defense_modifier", "K-11: retired — never in the TR formula, and NPCs never roll; loader warns on legacy files"),
+    ("player characters and significant antagonists alike", "K-4/K-10/D12: the enemy blind-posture-reveal ceremony is dropped — the MM states enemy stances openly, driven by conduct triggers; PC-side blind declaration stays"),
+    ("Roll Knowledge when doing so", "P-2/D7 (T4.1): casting adds the tradition's skill — casting with Knowledge adds the Lore rank"),
+    ("Roll Spirit when doing so", "P-2/D7 (T4.1): casting adds the tradition's skill — casting with Spirit adds the Attune rank"),
+    ("Knowledge or Spirit (by tradition)", "P-2/D7 (T4.1): the attribute-only casting formula is dead — the roll is Spirit + Attune or Knowledge + Lore"),
+    ("Spirit or Knowledge (by tradition)", "P-2/D7 (T4.1): the attribute-only casting formula is dead — the roll is Spirit + Attune or Knowledge + Lore"),
+    ("always one difficulty step harder", "P-7/D9 (T4.2): the Second Domain penalty is an arc, not a permanent tax — it lifts at the character's next Facet level after acquisition"),
+    ("unspent points are lost", "P-5/D10 (T4.3): the forfeit is dead — up to 2 unspent points bank across sessions"),
+    ("unspent points do not carry over", "P-5/D10 (T4.3): the forfeit is dead — up to 2 unspent points bank across sessions"),
+    ("use-it-or-lose-it", "P-5/D10 (T4.3): MM5's compression of the dead forfeit rule"),
+    ("before it lands, you automatically succeed", "P-8/D11 (T4.5): Never Surprised is a warning beat, not an auto-success — the absolute is gone"),
+    ("Broad (Prismatic)", "P-11/D14 (T5.4): Prismatic is the player-facing word; Broad survives only in II.3's one definitional sentence (and as the untouched `broad` type key)"),
+    ("Broad-Prismatic", "P-11/D14 (T5.4): Glossary headword variant of the dead double name"),
+    ("Broad difficulty table", "P-11/D14 (T5.4): the table is printed 'the Prismatic difficulty table'"),
+]
+
+# Live rules surfaces, relative to the repo root. Scope is the anti-fragment
+# protocol's: books, data, and specs — not archives.
+_RETIRED_SCAN_DIRS = [
+    "player_handbook",
+    "mm_manual",
+    "bestiary",
+    "facets",
+    "software/facets",
+    "enemies",
+    "characters",
+    "spec",
+    # The in-app rule summaries are a quick reference a player reads at the
+    # table, so they are a live rules surface under the same rule as MM5 and
+    # Quick Start — and they drifted exactly once before this was guarded.
+    "software/app/static",
+]
+
+
+def _retired_scan_files() -> list[Path]:
+    """Every readable text file under the live rules surfaces."""
+    files: list[Path] = []
+    for rel in _RETIRED_SCAN_DIRS:
+        root = REPO_ROOT / rel
+        if not root.exists():
+            continue
+        files.extend(sorted(p for p in root.rglob("*") if p.is_file()))
+    return files
+
+
+def test_retired_phrases_do_not_reappear() -> None:
+    """No retired rule wording survives (or returns) on a live rules surface.
+
+    The drift the fun/ease review found came from a rewrite landing in one
+    file and missing siblings. This register makes each removal permanent:
+    the exact dead string, greppable, with the finding that killed it.
+    """
+    offenders: list[str] = []
+    for path in _retired_scan_files():
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue  # binary or unreadable — not a rules surface
+        for lineno, line in enumerate(text.splitlines(), start=1):
+            for phrase, reason in RETIRED_PHRASES:
+                if phrase in line:
+                    rel = path.relative_to(REPO_ROOT)
+                    offenders.append(f"{rel}:{lineno} — {phrase!r} ({reason})")
+    assert not offenders, (
+        "Retired phrases reappeared on live rules surfaces:\n"
+        + "\n".join(offenders)
+    )
+
+
+def test_client_reads_advancement_caps_from_the_ruleset() -> None:
+    """The two D10 advancement numbers live in `advancement:`, and the server
+    enforces them from there (`Character.spend_skill_point`,
+    `start_new_session`). The builder mirrored both as JS literals, so a Facet
+    that retuned either would have the UI offering what the server refuses.
+    """
+    builder = (REPO_ROOT / "software/app/static/js/builder.js").read_text(encoding="utf-8")
+    for key in ("bank_cap", "training_marks_per_session"):
+        assert key in builder, (
+            f"builder.js no longer reads advancement.{key} from the ruleset — "
+            "the cap is hardcoded again."
+        )
+
+
+def test_skill_point_broadcast_fields_are_ingested_by_the_client() -> None:
+    """A field the server broadcasts and the client ignores is a UI that goes
+    stale mid-session. `training_marks_this_session` gates the builder's
+    training affordance, and it was broadcast but never read.
+    """
+    websocket_py = (REPO_ROOT / "software/app/api/websocket.py").read_text(encoding="utf-8")
+    app_js = (REPO_ROOT / "software/app/static/js/app.js").read_text(encoding="utf-8")
+    assert '"training_marks_this_session": character.training_marks_this_session' in websocket_py
+    assert "msg.training_marks_this_session" in app_js

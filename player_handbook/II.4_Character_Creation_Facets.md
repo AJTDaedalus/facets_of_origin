@@ -58,7 +58,10 @@ Skills improve through use. At the end of each session, you have **4 skill point
 | Primary Facet skill | 1 point |
 | Cross-Facet skill | 2 points |
 
-You may only advance skills you used this session. You may not save points between sessions — unspent points are lost.
+Points go to skills you used this session, with two allowances:
+
+- **Banking.** Unspent points are not lost — you may carry up to **2** of them into the next session, on top of that session's 4.
+- **Training between sessions.** **1** of your 4 points each session may go to a Primary-Facet skill you did *not* use — the practice your character puts in on the road, between adventures. Cross-Facet skills still require use at the table.
 
 > **Example — spending skill points across Facets**
 >
@@ -68,7 +71,7 @@ You may only advance skills you used this session. You may not save points betwe
 
 > **Example — a Background mark completing a rank**
 >
-> Zulnut (Primary Facet: Body) uses Stealth twice this session. He spends 2 points (1 each) and marks Stealth twice. Combined with the 1 mark he already carries from his Background, that's 3 marks — Stealth advances to Practiced. He has 2 points left; he didn't use another skill this session, so they go unspent, and unspent points are lost.
+> Zulnut (Primary Facet: Body) uses Stealth twice this session. He spends 2 points (1 each) and marks Stealth twice. Combined with the 1 mark he already carries from his Background, that's 3 marks — Stealth advances to Practiced. He has 2 points left and didn't use another skill this session, so he banks them: next session he'll have 6 to spend. (He could instead put 1 of them into an unused Body skill as his training point — Zulnut, characteristically, chooses the option that requires nothing of him now.)
 
 ---
 
@@ -76,7 +79,7 @@ You may only advance skills you used this session. You may not save points betwe
 
 As you develop skills within a Facet, you grow as a practitioner of that Facet's approach to the world. Your **Facet level** in your Primary Facet advances every time you accumulate **5 skill rank advances** within it.
 
-A skill rank advance is any time a skill in that Facet moves from one rank to the next (Novice → Practiced, Practiced → Expert, or Expert → Master).
+A skill rank advance is any time a skill in that Facet moves from one rank to the next (Novice → Practiced, Practiced → Expert, or Expert → Master). Ranks granted at character creation — your Background's starting skill — count toward career advances but not toward Facet levels: a Facet level is earned by growth in play.
 
 With 5 skills and 3 possible advances each, a fully developed Facet produces 15 total advances — exactly enough to reach Facet level 1 (at 5 advances), Facet level 2 (at 10), and Facet level 3 (at 15). Reaching Facet level 3 means you have mastered every skill your Facet has to offer. Facet level 4 and beyond require cross-training into other Facets.
 
@@ -100,13 +103,15 @@ The Technique tree has three tiers. Tier 1 is available at Facet level 1. Tier 2
 
 When you unlock a Technique, you choose it during your **reflection scene** — the moment where this growth becomes real in the fiction (see *Advancement and Reflection*, II.4).
 
+If your Background grants a magical domain, your Facet level 1 pick is spoken for: the magic-granting Technique is your **formalization**, and your first free choice comes at Facet level 2. That is the shape of the arc, not a tax — the formalization is the milestone your Background has been walking toward since session one (see *Magic and Backgrounds*, II.5).
+
 The three trees are in Chapters II.4a (Body), II.4b (Mind), and II.4c (Soul). Every Technique in all three is written the same way.
 
 > **Reading the Entries — Techniques**
 >
 > **Name** *(Branch, Tier — governing Attribute)*. The attribute named here is the one the branch is built on; a Technique may still be used with whatever roll its text describes.
 >
-> **Use:** how often it is available — *Passive* (always on, never declared), *At will* (you invoke it, no limit), *Once per scene*, or *Once per session*. A Spark or Endurance cost, where one exists, is stated here too.
+> **Use:** how often it is available — *Passive* (always on, never declared), *At will* (you invoke it, no limit), *Once per scene*, or *Once per session*. A Spark or Endurance Pool cost, where one exists, is stated here too.
 >
 > **Choose:** the decision you make once, at the moment you unlock it. It does not change afterward.
 >
@@ -115,6 +120,8 @@ The three trees are in Chapters II.4a (Body), II.4b (Mind), and II.4c (Soul). Ev
 > Then the Technique's rule, in prose.
 >
 > **Normal:** the baseline rule this Technique departs from, restated so the size of the departure is unambiguous. Every Technique has one; if the Normal line surprises you, read it before you read the Technique again.
+>
+> **Triggers and the difficulty step.** A Technique that eases a roll moves the MM's declared difficulty one step in your favor — it never replaces the call, only shifts the label already given. How the step arrives depends on the trigger. If the trigger is a fact the roll brings with it — a weapon type, a hazard, a field of study — the step applies on its own and the roll result names it; the digital roller applies these automatically. If the trigger is a judgment call — a hunch, a genuine coincidence — you declare it yourself when you roll. However many Techniques you hold, at most one character-side step moves any single roll, and a Specialty draws from the same allowance (see *Difficulty*, III.1).
 
 ---
 
@@ -131,7 +138,7 @@ At a Major Advancement, choose one:
 - **+1 to a Minor Attribute** — raise one Minor Attribute by one step (maximum 3). If this raises a Major Attribute's derived sum into the next bracket, the Major Attribute modifier increases as well.
 - **Pinnacle Technique** — a powerful, character-defining ability that lives outside the normal Technique tree. These require MM approval and should feel like the culmination of a long arc of play, not an item on a checklist. A Pinnacle Technique captures something the character has demonstrably *become* through play.
 
-  > *A duelist who has spent five sessions as the party's primary combatant might choose:* **Last Stand** — *Once per session, when you would be Broken, you may remain standing until the end of the exchange at 1 Endurance.* The MM ensures the Pinnacle feels earned by the character's demonstrated arc. A character who has never led a fight does not earn Last Stand — not because the rules forbid it, but because the fiction doesn't support it yet.
+  > *A duelist who has spent five sessions as the party's primary combatant might choose:* **Last Stand** — *Once per session, when you would be Broken, you may remain standing until the end of the exchange at 1 Endurance Pool point.* The MM ensures the Pinnacle feels earned by the character's demonstrated arc. A character who has never led a fight does not earn Last Stand — not because the rules forbid it, but because the fiction doesn't support it yet.
 
 Major Advancements require a **significant reflection scene** — more than the brief aside of a standard advancement. This should be a full scene at the table, tied to a meaningful story moment. The MM should look for the right moment in the fiction rather than forcing it at a mechanical threshold.
 
@@ -194,19 +201,9 @@ Every 3 Facet Levels total (Primary + any Facet):
 
 **Career advances** is a single integer that counts every skill rank advance a character has ever taken — across all skills and all Facets — since character creation.
 
-It is the progression metric for Facets of Origin: a rough, honest gauge of how much a character has grown. Two characters with the same career advances are broadly comparable in power, regardless of where those advances landed.
+It is the progression metric for Facets of Origin: a rough, honest gauge of how much a character has grown. Two characters with the same career advances are broadly comparable in power, regardless of where those advances landed. Benchmark ranges for what a given total looks like in play are the MM's pacing tool and live in the MM Manual (MM3, *Using career_advances as a Campaign Clock*).
 
-**Table II.4–3: Career Advance Benchmarks**
-
-| Career Advances | Rough Equivalent |
-|---|---|
-| 0–2 | Freshly started — Background skills plus early play |
-| 3–5 | Developing — first Facet level (5 advances) within reach |
-| 6–10 | Capable — Facet level 1–2, first Techniques unlocked |
-| 11–15 | Seasoned — Facet level 3 and first Major Advancement within reach |
-| 16+ | Veteran — Primary Facet mastered; cross-Facet development begins |
-
-Career advances are stored in the character file as `career_advances` and updated whenever a skill rank advances. The Background starting skill counts as 1 advance at character creation. Background Marks (the secondary skill's head start) do not count until the skill actually advances to Practiced.
+Career advances are tracked by the app and stored in the character file as `career_advances`, updated whenever a skill rank advances. The Background starting skill counts as 1 advance at character creation — toward this total only, not toward Facet levels (see *Facet Levels*, above). Background Marks (the secondary skill's head start) do not count until the skill actually advances to Practiced.
 
 > **Example — the cast at one career advance**
 >

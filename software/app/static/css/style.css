@@ -298,8 +298,9 @@ label {
 }
 
 .attr-block .attr-name     { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
-.attr-block .attr-rating   { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.1; }
-.attr-block .attr-modifier { font-size: 0.75rem; color: var(--gold); }
+/* C-11 (T5.9): modifier-first — the roll number leads, the rating is demoted. */
+.attr-block .attr-modifier { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.1; }
+.attr-block .attr-rating   { font-size: 0.68rem; color: var(--gold); }
 .attr-block .attr-label    { font-size: 0.62rem; color: var(--text-dim); }
 
 .major-group  { margin-bottom: 16px; }
@@ -916,7 +917,7 @@ label {
     padding: 8px 4px;
   }
 
-  .attr-block .attr-rating { font-size: 1.3rem; }
+  .attr-block .attr-modifier { font-size: 1.3rem; }
 
   /* ---- Roll result: full-width ---- */
   .roll-result-box {
@@ -957,7 +958,7 @@ label {
   }
 
   .attr-block .attr-name   { font-size: 0.58rem; }
-  .attr-block .attr-rating { font-size: 1.15rem; }
+  .attr-block .attr-modifier { font-size: 1.15rem; }
 
 }
 
@@ -998,6 +999,16 @@ label {
   text-transform: capitalize;
 }
 .posture-aggressive { background: rgba(244,67,54,0.2); color: #f44336; }
+
+/* Enemy stance select on the tracker (T6.4) — compact, inline with its labels. */
+.enemy-posture-select {
+  width: auto;
+  display: inline-block;
+  padding: 1px 4px;
+  margin: 0;
+  font-size: 11px;
+  text-transform: capitalize;
+}
 .posture-measured   { background: rgba(158,158,158,0.2); color: var(--text-dim); }
 .posture-defensive  { background: rgba(33,150,243,0.2); color: #2196f3; }
 .posture-withdrawn  { background: rgba(158,158,158,0.15); color: var(--text-dim); font-style: italic; }
@@ -1047,6 +1058,21 @@ label {
 .condition-tier1 { background: rgba(255,193,7,0.2); color: #ffc107; }
 .condition-tier2 { background: rgba(255,152,0,0.2); color: #ff9800; }
 .condition-tier3 { background: rgba(244,67,54,0.25); color: #f44336; font-weight: 700; }
+
+/* Difficulty band chip (T6.2, K-3) — MM-only surfaces. Colours climb the
+   ladder: cool for a Skirmish, the failure red for Deadly. */
+.band-chip {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.band-skirmish { background: rgba(148,163,184,0.18); color: var(--silver); }
+.band-standard { background: rgba(77,158,106,0.2);   color: var(--success); }
+.band-hard     { background: rgba(201,168,76,0.2);   color: var(--gold); }
+.band-deadly   { background: rgba(158,77,77,0.25);   color: #d96b6b; font-weight: 700; }
 
 /* =====================================================================
    Magic Panel

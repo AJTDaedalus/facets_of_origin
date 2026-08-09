@@ -68,7 +68,7 @@ Rolls using your chosen weapon type are treated as one difficulty step easier.
 
 When your Strike scores a full success (10+) against a single target, you may drive the blow home: the target takes no offensive action in the next exchange. It is reeling, regrouping, or picking itself up off the ground while the fight moves on without it.
 
-**Normal:** A full-success Strike depletes 2 Resolve and may hang a rider Condition. It does not stop the target acting (see *Strike*, III.3).
+**Normal:** A full-success Strike depletes 2 Resolve and may leave the target Open. It does not stop the target acting (see *Strike*, III.3).
 
 **Lift the World** *(Might, Tier 2 — Strength)*
 
@@ -100,7 +100,7 @@ When you spend a Spark on a Combat roll and succeed, the outcome is final. The t
 
 "Succeed" means a **10+ or a 7–9** — both success tiers count. On a 7–9, the partial's usual cost still applies and shapes how the removal happens in the fiction, but never whether it happens: the target is gone either way.
 
-**Normal:** A Spark adds a d6 and drops the lowest. A Strike depletes Resolve, and riders never defeat an enemy on their own (see *Strike*, III.3).
+**Normal:** A Spark adds a d6 and drops the lowest. A Strike depletes Resolve, and leaving an enemy Open never defeats it on its own (see *Strike*, III.3).
 
 ---
 
@@ -158,7 +158,7 @@ When moving in darkness, dim light, or natural cover, you do not need to roll St
 
 When you would be targeted by an attack or sudden physical threat, you may spend a Spark to simply not be where they expected. You are not harmed, and the attacker must re-establish their approach.
 
-**Normal:** An incoming attack is answered with a reaction, which costs Endurance and may still land a Condition (see *Reactions*, III.3).
+**Normal:** An incoming attack is answered with a reaction, which costs Endurance Pool points and may still land a Condition (see *Reactions*, III.3).
 
 ---
 

@@ -219,13 +219,14 @@ function renderToolsRuleSummaries() {
         <li>Aggressive: +1 offense, +1 reaction cost</li>
         <li>Measured: baseline</li>
         <li>Defensive: -1 offense, -1 reaction cost</li>
-        <li>Withdrawn: no offense, free reactions, recover 2 End</li>
+        <li>Withdrawn: no offense, free reactions, recover 2 End (up to your pool)</li>
       </ul>
       <p style="margin-top:6px;"><strong>Reactions:</strong> Dodge (1 End, Dexterity), Parry (1 End, Strength+Combat),
          Absorb (0 End), Intercept (2 End, once per exchange)</p>
-      <p><strong>0 Endurance:</strong> Absorb only.</p>
-      <p style="margin-top:6px;"><strong>Strike vs an enemy:</strong> 10+ depletes 2 Resolve and may hang a rider
-         Condition; 7-9 depletes 1. At 0 Resolve the enemy is defeated. Mooks have no Resolve &mdash; they fall to
+      <p><strong>0 Endurance Pool:</strong> Absorb only.</p>
+      <p style="margin-top:6px;"><strong>Strike vs an enemy:</strong> 10+ depletes 2 Resolve and may leave the enemy
+         <strong>Open</strong> &mdash; Easy to Strike for everyone until it visibly spends its action to recover;
+         7-9 depletes 1. At 0 Resolve the enemy is defeated. Mooks have no Resolve &mdash; they fall to
          one Strike (10+ if armoured).</p>
       <p><strong>Strike vs another character:</strong> 10+ = Tier 2 Condition, 7-9 = Tier 1.</p>
       <p style="margin-top:6px;"><strong>Enemy attacks:</strong> NPCs never roll. The MM applies the incoming
@@ -248,13 +249,14 @@ function renderToolsRuleSummaries() {
       <ul style="list-style:disc;padding-left:20px;">
         <li>Focused: Easy/Standard/Hard</li>
         <li>Standard: Standard/Hard/Very Hard</li>
-        <li>Broad (Prismatic): Hard/VH/VH (ceiling unmovable by Sparks)</li>
+        <li>Prismatic: Hard/VH/VH (reach-Sparks cannot move the difficulty; dice-Sparks work normally)</li>
       </ul>
       <p style="margin-top:6px;"><strong>Spark Uses:</strong> Improve Roll (add die, drop lowest),
-         Push Scope (one step harder), Ease Focused Major</p>
+         Ease Focused Major</p>
       <p><strong>Pre-Technique:</strong> Minor scope only. The scope restriction is the whole limitation
          &mdash; there is no extra difficulty step.</p>
-      <p><strong>Secondary domain:</strong> always one difficulty step harder than the primary.</p>
+      <p><strong>Second domain:</strong> one difficulty step harder than normal for that domain
+         until the character earns their next Facet level; then the penalty lifts.</p>
     </div>
   `);
 

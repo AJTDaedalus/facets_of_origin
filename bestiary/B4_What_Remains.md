@@ -24,7 +24,7 @@ Damage the work and it becomes something else entirely.
 
 **A Waiting One** · *Named* · **TR 9**
 
-**When they act on it:** Resolve 4 · armor none · defense +1
+**When they act on it:** Resolve 4 · armor none
 
 **When it acts:** attack +2 · incoming Tier 2
 
@@ -89,7 +89,7 @@ Which means the only real ending is to make it finishable.
 
 **The Unfinished** · *Boss* · **TR 14**
 
-**When they act on it:** Resolve 8 · armor none · defense +2
+**When they act on it:** Resolve 8 · armor none
 
 **When it acts:** attack +2 · incoming Tier 2
 

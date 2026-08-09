@@ -12,7 +12,6 @@ enemy:
   tier: named
   resolve: 3
   attack_modifier: 2    # Strength +1, Combat Practiced +1
-  defense_modifier: 2   # Parry: same roll
   armor: light
   techniques: []
   special: null
@@ -30,7 +29,8 @@ enemy:
 
   triggers:
     - >
-      Opens Measured; shifts to Defensive if Staggered.
+      Opens Measured; shifts to Defensive once left Open — guard low,
+      looking for the moment to spend an action recovering.
     - >
       Goes Aggressive only if the party is clearly losing.
     - >
@@ -47,8 +47,9 @@ enemy:
     TR breakdown: offense(+2 → value 4) + durability(Resolve 3)
     + armor(light → 1) + techniques(0) = 8. Meets Named NPC minimum of 8.
 
-    Posture tendency: Measured first exchange, Defensive if Staggered.
-    Will not go Aggressive unless the party is clearly losing.
+    Posture tendency: Measured first exchange, Defensive once Open.
+    Will not go Aggressive unless the party is clearly losing. Stances
+    are stated openly, driven by the triggers above (III.3, Postures).
 
 created_at: '2026-03-05T00:00:00+00:00'
-last_modified: '2026-03-05T00:00:00+00:00'
+last_modified: '2026-08-08T00:00:00+00:00'

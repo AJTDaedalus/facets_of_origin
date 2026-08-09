@@ -203,11 +203,11 @@ This is a guideline, not a formula. Some arcs work better with the hardest fight
 
 ### The Resource Tax
 
-Every encounter — combat or otherwise — costs the party something. Endurance, Sparks, information leverage, NPC goodwill, time. The resource tax is the cumulative cost of everything the party has spent getting to this point.
+Every encounter — combat or otherwise — costs the party something. Endurance Pool points, Sparks, information leverage, NPC goodwill, time. The resource tax is the cumulative cost of everything the party has spent getting to this point.
 
-In a single session, the resource tax is straightforward: the party enters the climactic encounter with whatever Endurance and Sparks they have left after the earlier encounters. This is why a Skirmish before a Hard encounter is useful — it is not about the Skirmish itself, it is about the 2–3 Endurance points the party spent getting through it.
+In a single session, the resource tax is straightforward: the party enters the climactic encounter with whatever Endurance Pool and Sparks they have left after the earlier encounters. This is why a Skirmish before a Hard encounter is useful — it is not about the Skirmish itself, it is about the 2–3 Endurance Pool points the party spent getting through it.
 
-Across multiple sessions, the resource tax is more subtle. It is the NPC the party alienated in session two who will not help them in session four. It is the information they chose not to pursue that would have made the final encounter easier. It is the Spark they spent on a low-stakes moment that they will wish they had saved.
+Across multiple sessions, the resource tax is more subtle. It is the NPC the party alienated in session two who will not help them in session four. It is the information they chose not to pursue that would have made the final encounter easier.
 
 Track what the party has spent, not in a ledger but in your awareness of the fiction. When they arrive at the climax, the story should reflect what they invested to get there.
 
@@ -244,7 +244,17 @@ Every character's `career_advances` is a single number that tells you how far th
 
 When you are designing an arc, ask: *what career_advances range is this party in?* The answer tells you what kind of challenges are appropriate, what kinds of enemies will feel threatening, and how much the party can handle in a single session.
 
-**Table MM3–3: Party Capability by Career Advances**
+**Table MM3–3: Career Advance Benchmarks**
+
+| Career Advances | Rough Equivalent |
+|---|---|
+| 0–2 | Freshly started — Background skills plus early play |
+| 3–5 | Developing — first Facet level (5 advances) within reach |
+| 6–10 | Capable — Facet level 1–2, first Techniques unlocked |
+| 11–15 | Seasoned — Facet level 3 and first Major Advancement within reach |
+| 16+ | Veteran — Primary Facet mastered; cross-Facet development begins |
+
+**Table MM3–4: Party Capability by Career Advances**
 
 | career_advances | Party Capability | Encounter Design Notes |
 |---|---|---|

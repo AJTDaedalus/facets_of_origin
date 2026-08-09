@@ -18,6 +18,23 @@ Soul magic flows from will, presence, and spiritual connection. It is felt befor
 
 The soul domain list includes nine core domains and three prismatic domains. Core domains (each Focused or Standard in type) are available at Tier 1 of the Soul Facet Technique tree. Prismatic domains require the Ascendant Domain Technique (Tier 3) — they represent mastery so complete that the domain's breadth has become a practitioner's natural territory rather than an overwhelming one.
 
+**Table A–1: Soul Domains at a Glance**
+
+| Domain | Type | Territory |
+|---|---|---|
+| Fire | Focused | Heat, flame, and light produced by fire |
+| Shadow | Focused | Darkness, absence of light, physical cold |
+| Storm | Standard | Wind, rain, lightning, concussive thunder |
+| Beasts | Standard | Communication and command of natural animals |
+| Resonance | Standard | Sound, vibration, harmonic force |
+| Verdance | Standard | Living plants: growing, shaping, animating |
+| Binding | Standard | Oaths, pacts, and spiritual constraints |
+| Presence | Standard | Projecting spiritual weight, emotional aura |
+| The Tide | Standard | Vitality flowing between living things |
+| The Undying | Prismatic | Death, spirits of the departed, undead |
+| Fate | Prismatic | Probability, luck, threads of possibility |
+| The Living World | Prismatic | Animating current through all living things |
+
 ---
 
 ### Core Soul Domains
@@ -143,11 +160,11 @@ The ebb and flow of natural energy between living things — vitality passing fr
 
 ### Prismatic Soul Domains
 
-Prismatic domains require the **Ascendant Domain** Technique (Tier 3, Communion branch) to access. They represent the broadest magical territories available — commanding them at all requires a practitioner whose understanding spans multiple thematic spaces rather than a single focused one. All Prismatic domains are Broad type: Hard at Minor scope, Very Hard at Significant, and Very Hard at Major with no exceptions and no ceiling movement through Sparks.
+Prismatic domains require the **Ascendant Domain** Technique (Tier 3, Communion branch) to access. They represent the broadest magical territories available — commanding them at all requires a practitioner whose understanding spans multiple thematic spaces rather than a single focused one. All Prismatic domains share one difficulty table: Hard at Minor scope, Very Hard at Significant, and Very Hard at Major — reach-Sparks cannot move a Prismatic working's difficulty, though dice-Sparks work normally (Chapter II.3, *Sparks and Magic*).
 
 ---
 
-**The Undying** *(Broad)*
+**The Undying** *(Prismatic)*
 
 Death, the boundary between living and dead, spirits of the departed, and the animating force that lingers after life ends. A practitioner of The Undying can communicate with the spirits of the recently deceased, sense death that has occurred in a space, perceive the boundary between living and dead things, exert force through necrotic energy, command or bind undead to simple purpose, and at Major scope, raise the dead to purposeful unlife or drag a spirit back from across the boundary to answer questions it would prefer not to. The Undying is among the most potent magical territories in Shattered Origin, and among the most scrutinized.
 
@@ -160,7 +177,7 @@ Death, the boundary between living and dead, spirits of the departed, and the an
 
 ---
 
-**Fate** *(Broad)*
+**Fate** *(Prismatic)*
 
 Probability, luck, and the threads of what is likely to happen. A Fate mage sees the shape of events before they unfold — not certainty, but the strong and weak currents of possibility. They can nudge outcomes: the die that almost landed poorly tips the other way; the arrow that nearly missed shifts on the wind; the guard who was about to turn around stops to scratch his neck instead. At Significant scope, Fate can read the likely shape of an encounter before it begins — who holds the advantage, where the turning point will probably be. At Major scope, a Fate mage can bend probability in ways that border on the miraculous, collapsing long odds into something almost certain or near-certainties into chaos.
 
@@ -173,7 +190,7 @@ Probability, luck, and the threads of what is likely to happen. A Fate mage sees
 
 ---
 
-**The Living World** *(Broad)*
+**The Living World** *(Prismatic)*
 
 The animating current that runs through all living things simultaneously — not specific to plants or beasts or people, but the shared force of existing as a creature in the world. A practitioner of The Living World can sense all life within a significant area (its density, health, emotional state in broad strokes), speak to living things as a class rather than as individuals, sustain life in conditions that should extinguish it, and at Major scope, command the living world of a region — calming a riot, turning prey animals into a coordinated force, or saturating an area with vital energy that slows the progression of wounds and poisons across every creature present. It is the most encompassing of all Soul domains, and the hardest to wield with precision at any scope.
 
@@ -191,6 +208,20 @@ The animating current that runs through all living things simultaneously — not
 Mind magic is constructed rather than felt. Where Soul mages reach inward and outward simultaneously, Mind mages build: they study, analyze, and assemble effects from principles they understand. Mind magic tends toward precision, inscription, and the manipulation of information and perception. A Mind mage who does not understand what they are doing does not do it well — and a Mind mage who understands it completely is extraordinarily difficult to surprise.
 
 The mind domain list includes six core domains and three prismatic domains — the same core/prismatic split as Soul, though Mind's core list is shorter. Core domains are available at Tier 1 of the Mind Facet Technique tree. Prismatic domains require the Ascendant Domain Technique (Tier 3).
+
+**Table A–2: Mind Domains at a Glance**
+
+| Domain | Type | Territory |
+|---|---|---|
+| Illusion | Standard | False sensory experience: images, sounds, smells |
+| Warding | Standard | Protective limits inscribed into space or objects |
+| Inscription | Focused | Magical effects encoded into physical marks |
+| Transmutation | Standard | Structural alteration of non-living material |
+| Divination | Standard | Gathering information through magical means |
+| Constructed Force | Focused | Invisible force, telekinesis, barriers |
+| The Arcane | Prismatic | Perceiving and manipulating magic itself |
+| The Constructed Mind | Prismatic | Artificial intelligence and construct cognition |
+| Chronomancy | Prismatic | Time: acceleration, perception, brief stepping |
 
 ---
 
@@ -278,11 +309,11 @@ The generation and direction of invisible force — telekinesis, barriers, shape
 
 ### Prismatic Mind Domains
 
-Prismatic Mind domains require the **Ascendant Domain** Technique (Tier 3, Archive branch) to access. They are the widest, most powerful thematic territories available to Mind practitioners, requiring mastery across multiple disciplines before they can be wielded at all. All are Broad type.
+Prismatic Mind domains require the **Ascendant Domain** Technique (Tier 3, Archive branch) to access. They are the widest, most powerful thematic territories available to Mind practitioners, requiring mastery across multiple disciplines before they can be wielded at all. All use the Prismatic difficulty table (Chapter II.3).
 
 ---
 
-**The Arcane** *(Broad)*
+**The Arcane** *(Prismatic)*
 
 The fundamental substrate of magical practice itself — the ability to perceive, manipulate, counter, and redirect magical workings regardless of their source or domain. A practitioner of The Arcane can read the structure of any magical effect they can perceive, disrupt active workings, redirect magical energy between sources and targets, create effects that span multiple domains by constructing them from first principles, and at Major scope, unmake magical constructs entirely or stabilize wild magical phenomena. The Arcane is the master discipline of Mind magic — those who wield it have moved beyond any single domain into an understanding of what magic is, not merely what it does.
 
@@ -295,7 +326,7 @@ The fundamental substrate of magical practice itself — the ability to perceive
 
 ---
 
-**The Constructed Mind** *(Broad)*
+**The Constructed Mind** *(Prismatic)*
 
 The creation and direction of artificial intelligence: magical constructs with independent cognition, from simple automatons capable of following complex instructions to genuine minds capable of reasoning, learning, and independent action. A Constructed Mind practitioner can animate constructs with purpose-built cognition, communicate with and direct artificial minds, perceive the world through a construct's senses, repair damaged cognition in a construct, and at Major scope, build a mind capable of genuine independent thought and self-modification. The Constructed Mind is among the most demanding domains in the game — the constructs are persistent, require maintenance, and their independence means they do not always do exactly what was intended.
 
@@ -308,7 +339,7 @@ The creation and direction of artificial intelligence: magical constructs with i
 
 ---
 
-**Chronomancy** *(Broad)*
+**Chronomancy** *(Prismatic)*
 
 Time. Not fate, not prophecy — time itself. A Chronomancer can accelerate or slow the passage of time in a defined area, perceive a brief window of the recent past as though directly present in it (up to an hour, at Significant scope), move a small effect forward or backward a few moments in its occurrence, and at Major scope, step briefly outside the normal flow of time — acting in a frozen instant, or skipping past a brief interval entirely. Chronomancy is the most carefully governed domain in Shattered Origin, because its effects compound: a Chronomancer who operates carelessly leaves traces that other Chronomancers can read, and the discipline has enough history to have opinions about that.
 

@@ -620,3 +620,160 @@ The `4× Named + 1 Mook` Deadly alternative is the "upgrade a Mook to a Named" r
 These recipes are pinned in `software/tests/test_combat_sim.py::TestRecipeCalibration` at their seed-1 values and asserted to fall inside their bands; the pre-A14 `xfail(strict)` markers were removed as each recipe re-entered band. The MM1 Recipe Table (`mm_manual/MM1_Encounters_and_Enemies.md`) is built from this Part D.
 
 **Reproduce:** same helpers as Part C; `run_simulation(standard_party(), [(generic_named_def(8), 3), (chicken_def(), k)], iterations=200, seed=s)` for `k` in 1/2/3 and `s` in 1/2/3.
+
+---
+
+## Series 10 — WS-3 re-validation: Open tag, uncontested exchanges, posture triggers (T3.11) (2026-08-08)
+
+WS-3 (`docs/DESIGN_fun_ease_fixes.md` §4) changed three measured mechanics:
+the rider-Condition menu vs enemies became the single **Open** tag (K-6/D4;
+Easy to Strike for everyone, cleared only by the enemy visibly spending its
+action), the **uncontested-exchange** rule lets the situation advance for
+free when no PC takes an offensive action (K-2/D5), and enemy postures moved
+to stated conduct **triggers** (D12; sim policy: Named fight on while Open,
+Bosses spend the action to clear — Archive Guardian's Reduced Mode never
+does, per its authored Special). This series re-runs the published corpus
+under the new model. Acceptance bands per DESIGN §4.7.
+
+All runs: `tools/combat_sim.py` driving `app/game/combat.py` (the iron
+law — the uncontested rule is read from `combat.exchange_uncontested`
+via the new `objective_clock` hook on `run_combat`, never re-derived).
+`standard_party()` PS-3, n=200 per seed, seeds 1/2/3.
+
+### Part A — Series 9 Part D recipe rows
+
+| Roster | Win rate (seeds 1/2/3) | Published (Part D) | Delta | Band |
+|---|---|---|---|---|
+| Skirmish: 5 Mooks | 100.0 / 100.0 / 100.0% | 100 / 100 / 100% | +0.0pp | 85–100 ✓ |
+| Standard: 3× Named(8) + 1 Mook | 76.0 / 74.5 / 80.0% | 76.0 / 74.5 / 80.0% | +0.0pp | 65–85 ✓ |
+| Hard: 3× Named(8) + 2 Mooks | 47.5 / 48.0 / 47.0% | 47.5 / 48.0 / 47.0% | +0.0pp | 40–60 ✓ |
+| Deadly: 3× Named(8) + 3 Mooks | 20.0 / 20.0 / 22.5% | 20.0 / 20.0 / 22.5% | +0.0pp | 15–35 ✓ |
+| Deadly alt: 4× Named(8) + 1 Mook | 20.0 / 16.5 / 21.0% | 20.0 / 16.5 / 21.0% | +0.0pp | 15–35 ✓ |
+
+**Every row reproduces its published value exactly — the Recipe Table
+stands unchanged.** This is not luck: with the Named-fights-on-while-Open
+policy, the Open tag is behaviourally identical at fixed seeds to the old
+permanent Tier-2 rider (one Easy tag from the first 10+ onward), and the
+same AI decision branches fire on the same rolls. The worst-case policy was
+chosen for exactly this comparability (see T3.1's LOG entry); the
+alternative all-enemies-always-clear policy moved every row +13..+22pp and
+was rejected as an unrealistic MM model for 3–4-Resolve Named enemies.
+
+### Part B — A5 (15 Mooks) and the Withdrawn stall (K-2/D5)
+
+The Series 6 A5 anomaly (98% win over 14.5 exchanges via Withdrawn
+cycling) predates the armor budget, K1, and the no-enemy-Parry model.
+Under the current model the picture is sharper:
+
+| A5 variant | Win | Objective lost | Mean uncontested exch | Mean exch |
+|---|---|---|---|---|
+| Default AI, no clock (seeds 1/2/3) | 100 / 100 / 100% | — | 0.00 | 7.5 / 7.7 / 7.6 |
+| Default AI, 4-segment clock | 100 / 100 / 100% | 0% | 0.00 | 7.5 / 7.7 / 7.6 |
+| Pure turtle (all Withdrawn), no clock | 0% (all seeds) | — | 20.0 (cap) | 20.0 (timeout stall) |
+| Pure turtle, 4-segment clock | 0% (all seeds) | **100%** | 4.0 | **4.0** |
+
+Two findings. First, **the 100% Mook-swarm win is not a cycling win**: the
+default party contests every exchange (0 uncontested — enemy fire
+concentrates on the lowest-Endurance PC, so two strikers always stay
+topped up), which is the settled "Mook swarms alone are never dangerous"
+doctrine, not an exploit. Second, **the stall itself is dead**: a party
+that turtles now hands the MM the scene in exactly `clock` exchanges
+(objective lost, 100% of runs) instead of producing the unresolvable
+20-exchange timeout the old model allowed. With MM1 now requiring every
+Mook-only encounter to carry a clock or objective, A5-shaped encounters
+are fights about time, not survival — and time can be lost.
+
+### Part C — Boss median (Archive Guardian, solo, by-the-book)
+
+| Seed | Win | Median exchanges | Mean |
+|---|---|---|---|
+| 1 | 100% | 2 | 2.27 |
+| 2 | 100% | 2 | 2.29 |
+| 3 | 100% | 2 | 2.32 |
+
+Median **2 exchanges** — inside the 2–4 acceptance band, at its floor. The
+shortening vs the A8/G1 3-exchange median is the Open pressure working as
+designed (the Guardian's Reduced Mode never clears the tag, and pre-phase
+it trades attacks for clears); the G1 length-plus-cost reading still holds
+— the by-the-book win continues to price in real Spark and Endurance spend
+(see the re-pinned `test_combat_characterization.py` end states). Flagged
+for WS-5/playtest attention rather than retuned here: a solo Boss is
+explicitly not an encounter (MM1), and Resolve retuning is out of T3.11's
+scope.
+
+**Acceptance (DESIGN §4.7): recipe bands ±10pp — met at +0.0pp, table
+unchanged. A5 no-98%-by-cycling — met (0 uncontested exchanges in the
+win; the cycling strategy itself now loses 100% of runs under the
+mandated clock). Boss median 2–4 — met (2).**
+
+**Reproduce:** Part A as Series 9 Part D. Part B/C:
+`run_combat(pcs, enemies, objective_clock=4)` with
+`[(chicken_def(), 15)]` / `[archive_guardian_def()]`; turtle variant
+monkeypatches `choose_pc_posture` to constant `"withdrawn"` (the exploit
+policy, not shipped AI). Hook tests:
+`test_combat_sim.py::TestObjectiveClockHook`.
+
+---
+
+## Series 11 — WS-4 casting curves under skills-apply (T4.6, DESIGN §5.6) (2026-08-09)
+
+T4.1 (P-2/D7) made every casting roll add the tradition's skill — casting
+with Spirit adds the Attune rank, casting with Knowledge adds the Lore rank
+— giving casters the same +0 → +4 modifier arc as every other practitioner.
+This series spot-checks the resulting success curves for a Focused and a
+Broad domain at the three arc points, and verifies the guarded number:
+**pre-Technique Minor-scope success must be unchanged-or-better vs
+pre-T4.1.**
+
+All runs drive `app.game.engine.resolve_magic_roll` against the real base
+ruleset (the shared rules module — no re-implemented rules, per the iron
+law). n=20,000 casts per cell, seed 1. Arc points: **+0** = attribute 2
+(+0) + Novice (+0); **+2** = attribute 3 (+1) + Practiced (+1) — Zahna's
+exact numbers; **+4** = attribute 3 (+1) + Master (+3).
+
+### Focused — Inscription (scholarly: Knowledge + Lore)
+
+| Arc | Minor (Easy) P7+/P10+ | Significant (Std) | Major (Hard) |
+|---|---|---|---|
+| +0 | 72.2 / 27.7% | 58.1 / 16.5% | 41.5 / 8.2% |
+| +2 | 91.8 / 58.1% | 83.3 / 41.5% | 72.2 / 27.7% |
+| +4 | 100.0 / 83.3% | 97.2 / 72.2% | 91.8 / 58.1% |
+
+### Broad — Fate (intuitive: Spirit + Attune)
+
+| Arc | Minor (Hard) P7+/P10+ | Significant (VH) | Major (VH) |
+|---|---|---|---|
+| +0 | 41.5 / 8.2% | 27.7 / 2.5% | 27.7 / 2.5% |
+| +2 | 72.2 / 27.7% | 58.1 / 16.5% | 58.1 / 16.5% |
+| +4 | 91.8 / 58.1% | 83.3 / 41.5% | 83.3 / 41.5% |
+
+### The guarded number — pre-Technique Minor scope
+
+The +0 row **is** the pre-T4.1 baseline: a Novice skill adds +0, which is
+arithmetically identical to the old attribute-only roll, and the measured
+pre-Technique Minor rates confirm it (Focused 72.2%, Broad 41.5% at +0 —
+the same cells as above; pre-Technique Minor uses the domain's normal
+difficulty, unchanged). Every trained row is strictly better, and no cell
+anywhere in the grid got worse. **Unchanged-or-better: HOLDS.**
+
+### Readings
+
+- **The Broad ladder is rehabilitated without moving a number (P-3/D8):**
+  at +0 a Broad Major working is a desperate 27.7% — the identity holds —
+  but the arc now exists: 58.1% at mid-career, 83.3% at Master. Growth
+  comes from advancement, not from softening the table.
+- **DESIGN §5.6's second acceptance:** "Very Hard at Master rank lands near
+  the Practiced-at-Standard feel" — exactly met: VH at +4 is 2d6+2 ≥ 7 =
+  83.3%, the same distribution as Practiced-at-Standard (+2 vs +0).
+- **Session-one magic stays real:** a starting Focused caster (Zahna, +2)
+  succeeds at Minor workings 91.8% of the time pre-Technique.
+
+**Acceptance (DESIGN §5.6): guarded number holds (+0 row identical,
+trained rows strictly better); curves recorded for Focused + Broad at all
+three arc points.**
+
+**Reproduce:** `resolve_magic_roll(caster, domain, scope, "sim", ruleset)`
+for `inscription`/`fate` × `minor`/`significant`/`major` × the three arc
+casters (skills as SkillState rank strings), n=20,000, `random.seed(1)`;
+pre-Technique rows with `magic_technique_active=False`. Script:
+`casting_curves.py` (session scratchpad).

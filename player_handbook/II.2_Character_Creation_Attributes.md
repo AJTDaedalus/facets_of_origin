@@ -138,9 +138,9 @@ When the outcome of an action is uncertain and the stakes matter, you roll **2d6
 
 | Roll Total | Outcome |
 |---|---|
-| 10+ | Full success |
-| 7–9 | Success with a complication or cost |
-| 6 or less | Things go wrong — but the story always moves forward |
+| 10+ | Full success — you achieve your goal cleanly |
+| 7–9 | Success with a cost — you succeed, but with a complication or consequence |
+| 6 or less | Things go wrong — the story always moves forward, but not in your favor |
 
 The MM declares a **difficulty** before you roll:
 

@@ -86,7 +86,7 @@ The corollary: **do not roll for things that should just happen.** A character w
 
 ### Difficulty and Technique Steps
 
-Declare difficulty the same way every time: name the situation, say the label, then let the mechanics take their step. A qualifying Technique moves that declared label one rung further — automatically, when its trigger is something the roll already carries, or when the player tells you they are invoking it. Either way, at most one character-side step ever lands on a single roll (see *Difficulty*, III.1).
+Declare difficulty the same way every time: name the situation, say the label, then let the adjustments take their fixed order — an Easy tag (an Open enemy, a Maneuver) overrides downward without stacking, then at most one character-side step (Technique or Specialty, whichever the player picks), then Support's step, clamped between Easy and Very Hard. A carried trigger (a weapon type, a hazard, a field of study) applies its step automatically; a judgment-call trigger is the player's to declare (see *Difficulty*, III.1; *Reading the Entries*, II.4).
 
 > **MM Note — Pressure Point does not stack with an auto-applied step**
 >
@@ -197,7 +197,7 @@ A three-exchange fight should take 15-25 minutes at the table. If it is taking l
 >
 > A Skirmish fight (a Mook-only roster, per the Encounter Recipe Table) will last 1-2 exchanges and produce minimal resource drain. That is by design — Skirmish encounters introduce combat mechanics without risking the party. Do not expect tactical depth from them. Use Skirmish encounters early in a session or campaign to teach the exchange structure, posture decisions, and reaction economy. Save Standard and Hard encounters for when the party understands the system and meaningful tactical pressure serves the story.
 
-End fights when they are won, not when the stat block is depleted. If the Named NPC is down to its last point of Resolve, carrying a Staggered rider, and the party has three characters with full Endurance pools, the fight is over — narrate the ending and move on. Do not make the players grind through the last two exchanges of a foregone conclusion.
+End fights when they are won, not when the stat block is depleted. If the Named NPC is down to its last point of Resolve, left Open, and the party has three characters with full Endurance Pools, the fight is over — narrate the ending and move on. Do not make the players grind through the last two exchanges of a foregone conclusion.
 
 ### Downtime
 
@@ -421,7 +421,7 @@ Two judgment calls, worked:
 >
 > *Zahna: "I inscribe a hold-glyph across the door seam so it will not open while we get clear."*
 >
-> *MM: "That is a door fused shut for the length of the scene — Significant. Focused domain, so Standard difficulty. Roll Knowledge."*
+> *MM: "That is a door fused shut for the length of the scene — Significant. Focused domain, so Standard difficulty. Roll Knowledge and Lore."*
 
 Same intent, one variable changed:
 
@@ -439,7 +439,7 @@ The second call is the more common one at real tables, because players routinely
 
 > **MM Note — Check the ceiling before you price the roll**
 >
-> A character whose Background granted a domain but who has not yet unlocked the corresponding Facet Technique is limited to **Minor scope, full stop** (see II.3, *Acquiring a Domain*). This is not a difficulty question — a Significant working is not hard for them, it is unavailable. If a new player declares something Significant, the correct response is to tell them what their magic can do right now and let them re-aim, not to set a punishing number.
+> A character whose Background granted a domain but who has not yet unlocked the corresponding Facet Technique is limited to **Minor scope** — with one exception: a Spark buys one Significant-scope attempt at the domain's normal difficulty (see II.3, *Sparks and Magic*). Beyond that, this is not a difficulty question — a Significant working is not hard for them, it is unavailable. If a new player declares something Significant without the Spark, the correct response is to tell them what their magic can do right now and let them re-aim, not to set a punishing number.
 
 ### Domain Boundary Calls
 
@@ -468,7 +468,7 @@ If you notice the same boundary being renegotiated every session, that is not a 
 
 The complication is your call. It is also the single most improvisationally demanding thing magic asks of you, because it arrives without warning and the table is looking at you.
 
-Start from the fixed point: **on a 7-9 the magic worked.** Confirm that first, in the fiction, before anything else. The complication is something added to a success, never a discount applied to one. A player who hears their partial success narrated as a near-miss has been told the wrong thing.
+Start from the fixed point: **on a 7-9 the magic worked.** Name the cost as part of narrating that success (III.1: the cost comes before the success narration, as one package). The complication is something added to a success, never a discount applied to one. A player who hears their partial success narrated as a near-miss has been told the wrong thing.
 
 Then reach for one of three categories:
 
@@ -500,7 +500,7 @@ And say it in the fiction, not in the mechanics. Not "you take a complication, t
 
 It is a **floor, not a surcharge.** Scope difficulty still applies normally on top of the domain type table — a Focused mage attempting a Major working mid-fight is rolling at Hard, exactly as they would in an empty room. Nothing is added. The floor simply says that nothing goes *below* Standard while something is actively working against you.
 
-Which means it bites in exactly one place: **the Easy cell.** A Focused domain at Minor scope is the only combination the table prices below Standard, so it is the only combination the floor ever moves. Everything else — any Standard domain, any Broad domain, any scope above Minor — already meets or exceeds the floor and is entirely unaffected. If you catch yourself raising a difficulty because of the floor and the roll was not going to be Easy, you have applied it twice.
+Which means it bites in exactly one place: **the Easy cell.** A Focused domain at Minor scope is the only combination the table prices below Standard, so it is the only combination the floor ever moves. Everything else — any Standard domain, any Prismatic domain, any scope above Minor — already meets or exceeds the floor and is entirely unaffected. If you catch yourself raising a difficulty because of the floor and the roll was not going to be Easy, you have applied it twice.
 
 The practical consequence is that the floor mostly lands on newer casters and on small workings: the Focused mage who lights a candle at Easy all session finds that lighting the enemy's cloak while the enemy objects is Standard. That is the intended lesson, and it is a cheap one to teach.
 
@@ -622,7 +622,7 @@ Facets of Origin is designed for digital play, and the software toolset is there
 
 The Play Field is your primary session interface. It handles:
 - **Posture declaration and blind reveal.** All players submit simultaneously; the app reveals together. This is faster and cleaner than paper slips and eliminates the "I changed mine" problem.
-- **Endurance tracking.** Automatic deduction on reactions and Press. The players see their own pool; you see everyone's.
+- **Endurance Pool tracking.** Automatic deduction on reactions and Press. The players see their own pool; you see everyone's.
 - **Condition tracking.** Applied and cleared by the system at appropriate times. No one forgets that Off-Balance clears at end of exchange.
 - **Roll resolution.** The dice are visible to everyone. Modifiers are calculated. The result tier is shown. No mental arithmetic.
 
@@ -631,7 +631,7 @@ Use the Play Field whenever you are in a structured scene — combat, contested 
 > **MM Note — two buttons, two jobs**
 >
 > The app gives you `End Combat` and `End Scene`, and the difference between them
-> is a rule rather than a preference. `End Combat` clears Endurance, Conditions,
+> is a rule rather than a preference. `End Combat` clears Endurance Pools, Conditions,
 > and Postures — the fight is over. `End Scene` refreshes every character's armor
 > downgrade budget, because that budget is scoped to the scene and not to the
 > fight (see *Armor*, III.3).
@@ -648,7 +648,7 @@ Use the Play Field whenever you are in a structured scene — combat, contested 
 
 The Tools tab is for between-the-action work:
 - **NPC lookup.** Pull up a stat block mid-session without flipping through notes.
-- **Encounter budgeting.** Check whether the fight you are about to run is calibrated for this party.
+- **Encounter sizing.** Check the fight you are about to run against the Encounter Recipe Table for this party.
 - **Quick reference.** Rules lookups when memory fails — which is the tool working as intended, not a sign of weakness.
 
 Switch to Tools when you need information. Switch back to Play Field when you have it. The transition should take seconds, not minutes.
@@ -790,15 +790,15 @@ When a player deliberately plays into their character's weakness — low attribu
 
 ### Target Economy
 
-Each player should end a session with **2–4 unspent Sparks**, having **spent 2–4 during the session**. The earning rate should roughly match the spending rate so Sparks feel like a renewable resource, not a finite one.
+Sparks do not carry over — every character starts every session with 3, so an unspent Spark at the end of the night is simply gone. The target is spend-what-you-earn: each player should **spend 2–4 Sparks during the session** and **earn 2–4 back**, so Sparks feel like a renewable resource, not a finite one.
 
 **Table MM2–3: Spark Target Economy**
 
-| | Start | Earned | Spent | End |
-|---|---|---|---|---|
-| Low activity session | 3 | 1–2 | 1–2 | 2–3 |
-| Standard session | 3 | 2–3 | 3–4 | 2–3 |
-| High combat session | 3 | 3–4 | 4–6 | 1–3 |
+| | Start | Earned | Spent |
+|---|---|---|---|
+| Low activity session | 3 | 1–2 | 1–2 |
+| Standard session | 3 | 2–3 | 3–4 |
+| High combat session | 3 | 3–4 | 4–6 |
 
 ### MM Checklist
 
@@ -822,7 +822,7 @@ BEFORE THE SESSION
 - Review last session's notes (what happened, what was promised, what was left open)
 - Prep 1-2 situations, not a plot
 - Write 10 NPC names
-- Check encounter budget if combat is likely
+- Check the Encounter Recipe Table if combat is likely
 - Review player hooks — is anyone due for a spotlight moment?
 
 DURING THE SESSION

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Any, Literal, Optional
 
-from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 
 # ---------------------------------------------------------------------------
@@ -139,6 +139,13 @@ class TechniqueDef(BaseModel):
                         `secondary_magic_domain`, which the engine taxes one difficulty
                         step harder. Standard domains only — prismatic territories
                         require Ascendant Domain instead (II.4c).
+        penalty_expires: "next_facet_level" | None (T4.2/D9). On a
+                        `grants_secondary_domain` Technique, declares that the
+                        one-step penalty lifts at the character's next Facet
+                        level after acquisition — `select_technique` records
+                        the acquisition level so the engine can honor the
+                        expiry. None (the default) leaves any penalty
+                        permanent, the pre-D9 behavior.
         requires_domain: Facet id ("mind" or "soul") whose domain list the character
                         must already hold a domain from — Second Domain and Ascendant
                         Domain both require an existing domain in their own tree
@@ -174,9 +181,9 @@ class TechniqueDef(BaseModel):
                         membership (INV-8).
         removes_target_from_conflict: True only for *The Final Blow* (B4 Q3
                         / TD-12). Marks a Technique as a **licensed
-                        override**, not a rider — III.3's "riders never
-                        defeat an enemy on their own" governs rider
-                        Conditions and does not apply to a Technique
+                        override** — III.3's rule that the Open tag never
+                        defeats an enemy on its own (Resolve does) does
+                        not apply to a Technique
                         carrying this flag. The engine resolves its use as
                         a defeat event through the canonical defeat path
                         (`combat.apply_final_blow_removal`), never a raw
@@ -198,6 +205,7 @@ class TechniqueDef(BaseModel):
     magic_granting: bool = False
     grants_prismatic_domain: bool = False
     grants_secondary_domain: bool = False
+    penalty_expires: str | None = None
     requires_domain: str | None = None
     difficulty_step: Literal["easier", "harder"] | None = None
     step_trigger: StepTriggerDef | None = None
@@ -371,6 +379,13 @@ class AdvancementDef(BaseModel):
     skill_point_costs: list[SkillPointCostDef] = Field(default_factory=list)
     session_skill_points: int = 4
     marks_per_rank: int = 3
+    # T4.3/D10: the forfeit is dead. Up to `bank_cap` unspent points carry
+    # into the next session, and `training_marks_per_session` of the session
+    # points may go to an UNUSED Primary-Facet skill ("training between
+    # sessions"). Both enforced by Character.spend_skill_point /
+    # Character.start_new_session.
+    bank_cap: int = 2
+    training_marks_per_session: int = 1
     # Defaults mirror facets/base/facet.yaml. A Facet that omits these must land
     # on canon, not on a stale earlier revision (v0.3 moved 6 -> 5 and 4 -> 3).
     facet_level_threshold: int = 5
@@ -450,7 +465,9 @@ class EnduranceDef(BaseModel):
 
     Fields:
         base: Starting Endurance before Constitution and skill modifiers.
-        recovery_withdrawn: Endurance restored per exchange when posture is Withdrawn.
+        recovery_withdrawn: Endurance restored per exchange when posture is
+                            Withdrawn — up to the pool maximum (D5); the
+                            clamp lives in `combat.apply_withdrawn_recovery`.
     """
 
     base: int = 4
@@ -603,20 +620,23 @@ class EnemyDurabilityDef(BaseModel):
         armor_resolve_bonus: Flat Resolve granted by enemy armor.
         mook_removed_on: Outcome tier that removes an unarmored Mook.
         armored_mook_removed_on: Outcome tier that removes an armored Mook.
-        rider_on: Outcome tier that may additionally hang a rider Condition
-                  on the enemy, on top of Resolve depletion (III.3 — "on a
-                  full success only").
-        rider_tiers: Condition tiers eligible as a rider (Tier 1 or Tier 2,
-                     attacker's choice). Riders never escalate to Broken —
-                     Resolve is what defeats an enemy, not Conditions.
+        open_on: Outcome tier that may additionally leave the enemy Open
+                 (K-6/D4 — attacker's option, III.3 "on a full success
+                 only"), on top of Resolve depletion. An Open enemy is
+                 Easy to Strike for everyone; the player narrates what
+                 Open looks like. Open never defeats an enemy — Resolve
+                 does.
+        open_clears: How Open clears. "enemy_action": only by the enemy
+                     visibly spending its action — never at end of
+                     exchange.
     """
 
     strike_depletion: StrikeDepletionDef = Field(default_factory=StrikeDepletionDef)
     armor_resolve_bonus: ArmorResolveBonusDef = Field(default_factory=ArmorResolveBonusDef)
     mook_removed_on: str = "partial_success"
     armored_mook_removed_on: str = "full_success"
-    rider_on: str = "full_success"
-    rider_tiers: list[int] = Field(default_factory=lambda: [1, 2])
+    open_on: str = "full_success"
+    open_clears: str = "enemy_action"
 
 
 class CombatDef(BaseModel):
@@ -729,8 +749,9 @@ class MagicDomainDef(BaseModel):
         type: Difficulty tier — "focused" (Easy/Standard/Hard),
               "standard" (Standard/Hard/Very Hard),
               "broad" (Hard/VH/VH, Sparks cannot push scope ceiling).
-        tradition: Which attribute governs rolls — "intuitive" (Spirit) or
-                   "scholarly" (Knowledge).
+        tradition: Which attribute and skill govern casting rolls —
+                   "intuitive" (Spirit + Attune) or "scholarly"
+                   (Knowledge + Lore); see MagicDef.traditions.
         requires_tier3: True for Prismatic domains that need a Tier 3 Technique.
     """
 
@@ -750,15 +771,6 @@ class SparkEaseFocusedMajorDef(BaseModel):
     scope: str = "major"
 
 
-class SparkPushScopeDef(BaseModel):
-    """Spend a Spark to attempt an effect one scope tier beyond the domain's
-    natural ceiling, at that higher difficulty. Broad (Prismatic) domains
-    cannot be pushed beyond their ceiling through Sparks or any other means
-    (II.3, Sparks and Magic)."""
-
-    refused_domain_type: str = "broad"
-
-
 class SparkPreTechniquePushDef(BaseModel):
     """D8: a pre-Technique caster (capped at Minor scope) may spend a Spark
     to attempt one effect at `permitted_scope`, at the domain's *normal*
@@ -769,11 +781,33 @@ class SparkPreTechniquePushDef(BaseModel):
     permitted_scope: str = "significant"
 
 
+class TraditionDef(BaseModel):
+    """Which attribute and skill a tradition's casting roll uses (II.3,
+    Rolling Magic; T4.1/D7): casting with Spirit adds the Attune rank,
+    casting with Knowledge adds the Lore rank.
+
+    Both fields are required. Typed rather than a bare dict because a
+    misspelled key here does not fail — it silently casts with the other
+    tradition's attribute and skill, which is a wrong roll at the table with
+    nothing on screen to explain it.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    attribute: str
+    skill: str
+
+
 class MagicSparkRulesDef(BaseModel):
-    """The three Spark-magic rules (II.3, Sparks and Magic)."""
+    """The two Spark-reach rules (II.3, Sparks and Magic; T2.2/D8). A Spark
+    buys reach in exactly two cases — pre-Technique, one Significant-scope
+    attempt; Focused domains, one difficulty step off a Major working.
+    Reach-Sparks cannot move a Broad working's difficulty; dice-Sparks work
+    normally (that is the engine's improve_roll path, not a rule here).
+    The retired push_scope rule (P-1) referenced a scope tier beyond Major
+    that does not exist."""
 
     ease_focused_major: SparkEaseFocusedMajorDef = Field(default_factory=SparkEaseFocusedMajorDef)
-    push_scope: SparkPushScopeDef = Field(default_factory=SparkPushScopeDef)
     pre_technique_push: SparkPreTechniquePushDef = Field(default_factory=SparkPreTechniquePushDef)
 
 
@@ -781,6 +815,11 @@ class MagicDef(BaseModel):
     """Full magic configuration for a Facet module (PHB II.3).
 
     Fields:
+        traditions: Maps tradition keys ("intuitive" | "scholarly") to
+                    {"attribute": ..., "skill": ...} — a casting roll adds
+                    the skill the tradition trains (II.3, Rolling Magic):
+                    casting with Spirit adds the Attune rank; casting with
+                    Knowledge adds the Lore rank.
         domain_types: Maps type keys ("focused" | "standard" | "broad") to
                       {"scope_difficulties": {"minor": "Easy", ...}}.
         pre_technique_scope_limit: Maximum scope before the Facet Technique is unlocked.
@@ -789,11 +828,11 @@ class MagicDef(BaseModel):
                                           Default 0 (scope restriction alone is the penalty).
         soul_domains: Domains available to Soul Facet characters.
         mind_domains: Domains available to Mind Facet characters.
-        spark_rules: The three Spark-magic rules (ease Major, push scope,
+        spark_rules: The two Spark-reach rules (Focused Major ease,
                      D8's pre-Technique push).
     """
 
-    traditions: dict[str, Any] = Field(default_factory=dict)
+    traditions: dict[str, TraditionDef] = Field(default_factory=dict)
     domain_types: dict[str, Any] = Field(default_factory=dict)
     pre_technique_penalty: str = "scope_only"
     pre_technique_scope_limit: str = "minor"       # scope ceiling before Technique is unlocked

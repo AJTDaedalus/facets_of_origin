@@ -321,8 +321,8 @@ techniques:
                   offensive action in the next exchange.
                 use: "Once per scene"
                 normal: >
-                  A full-success Strike depletes 2 Resolve and may hang a
-                  rider Condition. It does not stop the target acting (see
+                  A full-success Strike depletes 2 Resolve and may leave
+                  the target Open. It does not stop the target acting (see
                   *Strike*, III.3).
                 prerequisites: []
 
@@ -364,8 +364,8 @@ techniques:
                 use: "Once per session"
                 normal: >
                   A Spark adds a d6 and drops the lowest. A Strike
-                  depletes Resolve, and riders never defeat an enemy on
-                  their own (see *Strike*, III.3).
+                  depletes Resolve, and leaving an enemy Open never
+                  defeats it on its own (see *Strike*, III.3).
                 prerequisites: []
                 removes_target_from_conflict: true
 
@@ -428,7 +428,7 @@ techniques:
                 use: "Once per scene"
                 normal: >
                   An incoming attack is answered with a reaction, which
-                  costs Endurance and may still land a Condition (see
+                  costs Endurance Pool points and may still land a Condition (see
                   *Reactions*, III.3).
                 prerequisites: []
 
@@ -664,13 +664,16 @@ techniques:
               - id: never_surprised
                 name: "Never Surprised"
                 description: >
-                  You are not caught off guard. If the MM would call for a roll to notice an ambush,
-                  trap, or sudden threat before it lands, you automatically succeed. You may not
-                  always be able to prevent what's coming — but you always see it coming.
+                  You are not caught flat. You always get a warning beat before an ambush, trap,
+                  or sudden threat lands — a heartbeat of wrongness, enough to turn, shout, or
+                  set your feet. What you do with it is yours. The beat is warning, not
+                  prevention: whatever is coming still comes, and any roll to meet it is still
+                  a roll.
                 use: "Passive"
                 normal: >
                   Noticing an ambush or a trap before it lands is a roll
-                  the MM calls for.
+                  the MM calls for, and a failed roll means it arrives
+                  unannounced.
                 prerequisites: []
 
               - id: the_wrong_note
@@ -782,9 +785,10 @@ techniques:
                 description: >
                   You have developed a formal magical domain through scholarly practice. Choose one
                   domain from the Domains of the Mind list (Chapter II.3). You may use magic within
-                  that domain using the Domain + Intent + Scope framework. Roll Knowledge when doing so.
+                  that domain using the Domain + Intent + Scope framework. Roll Knowledge, adding
+                  your Lore rank, when doing so.
                 use: "Passive"
-                roll: "Knowledge"
+                roll: "Knowledge + Lore"
                 normal: >
                   A domain's origin is a Background, and it is limited to
                   Minor scope until a Facet Technique unlocks it (see
@@ -859,28 +863,30 @@ techniques:
                   Ascendant Domain). You may use magic within that domain using the
                   Domain + Intent + Scope framework, rolling Knowledge as normal. Effects
                   within your second domain are treated as one difficulty step harder than
-                  normal for that domain.
+                  normal for that domain until you earn your next Facet level — the cost
+                  of a practice still settling, not a permanent tax.
                 use: "Passive"
-                roll: "Knowledge, one difficulty step harder than normal for that domain"
+                roll: "Knowledge + Lore, one difficulty step harder than normal for that domain until your next Facet level"
                 normal: >
                   A character has one magical domain, and its origin is a
                   Background (see *Acquiring a Domain*, II.3).
                 grants_secondary_domain: true
+                penalty_expires: next_facet_level
                 requires_domain: mind
                 prerequisites: []
                 has_choice: true
-                choice_prompt: "Choose a second standard domain from the Domains of the Mind list (must differ from your first; prismatic domains excluded)."
+                choice_prompt: "Choose a second standard domain from the Domains of the Mind list (must differ from your first; prismatic domains excluded). A Focused pick suffers the settling-in penalty least while it lasts."
 
               - id: ascendant_domain_mind
                 name: "Ascendant Domain"
                 description: >
                   Your practice has outgrown a single territory. Choose one prismatic domain from
                   the Domains of the Mind list (Chapter II.3). You may work within it using the
-                  Domain + Intent + Scope framework, rolling Knowledge. The Broad difficulty table
-                  applies (Hard / Very Hard / Very Hard), and its Major-scope ceiling cannot be
-                  moved by Sparks. Your original domain is unchanged.
+                  Domain + Intent + Scope framework, rolling Knowledge. The Prismatic difficulty
+                  table applies (Hard / Very Hard / Very Hard); reach-Sparks cannot move its
+                  workings' difficulty, dice-Sparks work normally. Your original domain is unchanged.
                 use: "Passive"
-                roll: "Knowledge, on the Broad difficulty table"
+                roll: "Knowledge + Lore, on the Prismatic difficulty table"
                 normal: >
                   Domains are Focused or Standard; prismatic territories
                   are not otherwise available (see Table II.3–2).
@@ -1102,9 +1108,10 @@ techniques:
                   You have developed an intuitive magical domain through spiritual practice, natural
                   gift, or a bond you do not entirely understand. Choose one domain from the Domains
                   of the Soul list (Chapter II.3). You may use magic within that domain using the
-                  Domain + Intent + Scope framework. Roll Spirit when doing so.
+                  Domain + Intent + Scope framework. Roll Spirit, adding your Attune rank,
+                  when doing so.
                 use: "Passive"
-                roll: "Spirit"
+                roll: "Spirit + Attune"
                 normal: >
                   A domain's origin is a Background, and it is limited to
                   Minor scope until a Facet Technique unlocks it (see
@@ -1167,28 +1174,31 @@ techniques:
                   domain from the Domains of the Soul list (prismatic territories require Ascendant
                   Domain). You may use magic within that domain using the Domain + Intent + Scope
                   framework, rolling Spirit as normal. Effects within your second domain are
-                  treated as one difficulty step harder than normal for that domain.
+                  treated as one difficulty step harder than normal for that domain until
+                  you earn your next Facet level — the cost of a practice still settling,
+                  not a permanent tax.
                 use: "Passive"
-                roll: "Spirit, one difficulty step harder than normal for that domain"
+                roll: "Spirit + Attune, one difficulty step harder than normal for that domain until your next Facet level"
                 normal: >
                   A character has one magical domain, and its origin is a
                   Background (see *Acquiring a Domain*, II.3).
                 grants_secondary_domain: true
+                penalty_expires: next_facet_level
                 requires_domain: soul
                 prerequisites: []
                 has_choice: true
-                choice_prompt: "Choose a second standard domain from the Domains of the Soul list (must differ from your first; prismatic domains excluded)."
+                choice_prompt: "Choose a second standard domain from the Domains of the Soul list (must differ from your first; prismatic domains excluded). A Focused pick suffers the settling-in penalty least while it lasts."
 
               - id: ascendant_domain_soul
                 name: "Ascendant Domain"
                 description: >
                   Your practice has outgrown a single territory. Choose one prismatic domain from
                   the Domains of the Soul list (Chapter II.3). You may work within it using the
-                  Domain + Intent + Scope framework, rolling Spirit. The Broad difficulty table
-                  applies (Hard / Very Hard / Very Hard), and its Major-scope ceiling cannot be
-                  moved by Sparks. Your original domain is unchanged.
+                  Domain + Intent + Scope framework, rolling Spirit. The Prismatic difficulty
+                  table applies (Hard / Very Hard / Very Hard); reach-Sparks cannot move its
+                  workings' difficulty, dice-Sparks work normally. Your original domain is unchanged.
                 use: "Passive"
-                roll: "Spirit, on the Broad difficulty table"
+                roll: "Spirit + Attune, on the Prismatic difficulty table"
                 normal: >
                   Domains are Focused or Standard; prismatic territories
                   are not otherwise available (see Table II.3–2).
@@ -1312,12 +1322,13 @@ spark:
         that costs you something real in the fiction.
   target_economy:
     description: >
-      Each player should end a session with 2-4 unspent Sparks, having spent
-      2-4 during the session. The earning rate should roughly match the spending
-      rate so Sparks feel like a renewable resource, not a finite one.
+      Sparks do not carry over — every character starts every session with 3
+      (base_sparks_per_session), so an unspent Spark at session's end is simply
+      gone. Target is spend-what-you-earn: each player spends 2-4 Sparks during
+      the session and earns 2-4 back, so Sparks feel like a renewable resource,
+      not a finite one.
     spend_target: 2-4
     earn_target: 2-4
-    end_session_target: 2-4
   variants:
     # Untested/optional rule variants (D6). Default off — measured by PT04,
     # not adopted. Do not flip this on for a live table without re-running
@@ -1351,10 +1362,19 @@ advancement:
 
   session_skill_points: 4
   marks_per_rank: 3
+  # T4.3/D10 (II.4, Advancing Skills): unspent points are not forfeited — up
+  # to bank_cap carry into the next session, and training_marks_per_session
+  # of the 4 session points may go to an unused Primary-Facet skill
+  # ("training between sessions").
+  bank_cap: 2
+  training_marks_per_session: 1
   # Threshold 5 (not 6) puts all three Facet levels — and therefore Tier 3
   # Techniques — inside the primary Facet's 15-advance ceiling (5 skills × 3
   # rank advances). See DESIGN_v0.3 §6.2. session_skill_points stays 4: raising
   # it to hit an earlier Major would inflate skill ranks as a side effect.
+  # P-6 (II.4, Facet Levels): ranks granted at character creation count toward
+  # career_advances but NOT toward Facet levels — only advance_skill writes
+  # rank_advances_by_facet, and creation never routes through it.
   facet_level_threshold: 5
 
   # Every 3 total Facet Levels triggers a Major Advancement, so the first Major
@@ -1372,10 +1392,22 @@ magic:
   pre_technique_scope_limit: minor
   pre_technique_difficulty_penalty: 0
 
+  # II.3, Rolling Magic (T4.1/D7): a casting roll adds the skill the tradition
+  # trains — casting with Spirit adds the Attune rank; casting with Knowledge
+  # adds the Lore rank. A caster without the skill casts at Novice (+0).
+  traditions:
+    intuitive:
+      attribute: spirit
+      skill: attune
+    scholarly:
+      attribute: knowledge
+      skill: lore
+
   # II.3, Sparks and Magic — the three Spark-magic rules.
   spark_rules:
+    # A Spark buys reach in exactly two cases (II.3, T2.2/D8). Reach-Sparks
+    # cannot move a Prismatic working's difficulty; dice-Sparks work normally.
     ease_focused_major: {domain_type: focused, scope: major}
-    push_scope: {refused_domain_type: broad}
     pre_technique_push: {permitted_scope: significant}   # D8
 
   domain_types:
@@ -1398,7 +1430,8 @@ magic:
   # Domain catalog — transcribed from player_handbook/Appendix_Magic_Domains.md,
   # which is canon. Types (focused/standard/broad) and prismatic status come from
   # the appendix verbatim; tradition follows from the Facet (Mind rolls Knowledge,
-  # Soul rolls Spirit — II.4b/II.4c). Broad == Prismatic, reachable only via the
+  # Soul rolls Spirit — II.4b/II.4c). The `broad` type key prints as Prismatic
+  # (D14) and is reachable only via the
   # Ascendant Domain Tier 3 Technique. INV-7 (test_docs_consistency.py) enforces
   # that this list and the appendix never drift apart.
   soul_domains:
@@ -1583,15 +1616,16 @@ magic:
 combat:
   endurance:
     base: 4
-    recovery_withdrawn: 2
+    recovery_withdrawn: 2   # recovered at end of exchange when Withdrawn,
+                            # up to your pool — never overfills (D5)
 
   # D5: the floor is absolute — it overrides Posture, not just the reaction's
   # base cost. Withdrawn's free_reactions and Defensive's reaction_cost_modifier
-  # (above) only matter once there is at least 1 Endurance to spend.
+  # (above) only matter once there is at least 1 Endurance Pool point to spend.
   endurance_floor_rule: >-
-    At 0 Endurance, only Absorb is available as a reaction, regardless of
-    Posture. Withdrawn's free reactions and Defensive's reduced reaction
-    cost apply only while Endurance is 1 or higher.
+    At 0 Endurance Pool, only Absorb is available as a reaction, regardless
+    of Posture. Withdrawn's free reactions and Defensive's reduced reaction
+    cost apply only while the Endurance Pool is 1 or higher.
 
   postures:
     aggressive:
@@ -1600,8 +1634,8 @@ combat:
       # K1 (BRIEF D8, adopted after Gate G3 passed robustly across 7 seeds,
       # 2026-07-10): the surcharge applies to a combatant's first reaction
       # of the exchange only; every reaction after that pays the base cost.
-      # Softens the Aggressive "death spiral" (a low-Endurance PC facing
-      # several simultaneous attacks burns Endurance on the surcharge alone
+      # Softens the Aggressive "death spiral" (a low-Endurance-Pool PC facing
+      # several simultaneous attacks burns pool points on the surcharge alone
       # and has nothing left to react with) without changing the offense
       # modifier above. See research/simulation_log.md Series 8.
       reaction_cost_modifier_applies: first_reaction_only
@@ -1611,7 +1645,7 @@ combat:
     defensive:
       offense_modifier: -1
       reaction_cost_modifier: -1
-      min_reaction_cost: 0   # III.3 posture table: "-1 Endurance cost per reaction (min 0)"
+      min_reaction_cost: 0   # III.3 posture table: "-1 Endurance Pool cost per reaction (min 0)"
     withdrawn:
       offense_modifier: null
       reaction_cost_modifier: 0
@@ -1624,13 +1658,16 @@ combat:
     absorb: 0
     intercept: 2
 
-  # Spend 1 Endurance before a Strike to add 1d6 and drop the lowest — the
+  # Spend 1 Endurance Pool point before a Strike to add 1d6 and drop the lowest — the
   # same mechanical effect as a Spark, drawn from a different resource, and
   # stackable with one (III.3, Press).
   press:
     endurance_cost: 1
     extra_dice: 1
 
+  # Strike outcomes vs another CHARACTER (PvP): 10+ = Tier 2 Condition,
+  # 7-9 = Tier 1. Vs an ENEMY, a Strike depletes Resolve instead and a 10+
+  # may leave it Open — see enemy_durability (K-6/D4).
   strike_outcomes:
     full_success:
       condition_tier: 2
@@ -1650,7 +1687,7 @@ combat:
       - id: off_balance
         clears: end_of_exchange
         out_of_combat_clears: end_of_scene
-        description: "Your next reaction costs 1 additional Endurance."
+        description: "Your next reaction costs 1 additional Endurance Pool point."
       - id: shaken
         clears: end_of_exchange
         out_of_combat_clears: end_of_scene
@@ -1690,13 +1727,14 @@ combat:
     armor_resolve_bonus: {none: 0, light: 1, heavy: 2}
     mook_removed_on: partial_success        # armored mook: full_success
     armored_mook_removed_on: full_success
-    rider_on: full_success                  # a rider may only be hung on a 10+
-    rider_tiers: [1, 2]                     # attacker's choice; riders never defeat
+    open_on: full_success                   # a 10+ may leave the enemy Open (attacker's option, K-6/D4)
+    open_clears: enemy_action               # cleared ONLY by the enemy visibly spending its action
     # Working Resolve band (base, before armor bonus), confirmed by Gate G1
     # (task A8, 2026-07-10, DESIGN §5-bis; data in research/simulation_log.md
     # Series 7): Named 3-4, Boss 8. Widened from the BRIEF's original 2-6
     # working range after a solo by-the-book Boss at Resolve 5 collapsed to
-    # a median 2-exchange fight under the worst-case rider->Easy snowball;
+    # a median 2-exchange fight under the worst-case Easy-to-Strike snowball
+    # (then a Tier-2 rider, now the Open tag);
     # 8 is the smallest Boss value that robustly clears a median >= 3
     # exchange floor. This is a per-enemy authoring guideline, not an
     # enforced field — actual values live in each enemy's .fof.
@@ -1774,7 +1812,7 @@ backgrounds:
     name: "Traveling Merchant's Guard"
     facet: body
     starting_skill: athletics
-    secondary_skill: endurance
+    secondary_skill: combat
     specialty: "Can read road conditions and assess the likelihood of ambush or delay based on terrain, weather, and recent traffic sign."
 
   - id: arena_fighter
@@ -1803,7 +1841,7 @@ backgrounds:
     name: "Guild Apprentice"
     facet: mind
     starting_skill: lore
-    secondary_skill: investigate
+    secondary_skill: craft
     specialty: "Artificers' Guild technical records — Standard becomes Easy when directly applicable."
     domain_origin: mind
     domain_replaces_secondary: true

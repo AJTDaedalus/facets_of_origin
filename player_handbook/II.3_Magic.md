@@ -4,6 +4,8 @@ Zahna has never once looked up a spell. He has a territory — the marks people 
 
 That is the whole of magic here. A domain says where you can reach. An intent says what you are reaching for. A scope says how far. Then you roll the same two dice as everyone else.
 
+**If your concept isn't magical, skip this chapter.** Nothing else in character creation depends on it. Magic enters a character through a Background with a domain origin (Chapter II.5) and grows through the Facet Techniques (Chapter II.4); a character with neither loses nothing by never reading a word of this. Come back if a domain ever finds you.
+
 ## What Is Magic?
 
 Magic is not a menu. There are no spells to choose from, no slots to manage, no list of prepared effects to consult at the table. When you use magic in Facets of Origin, you do three things: you name your territory, you describe what you want to happen, and you roll. The dice tell you how well it went. The story tells you what it looked like.
@@ -82,7 +84,7 @@ There are three domain types:
 
 **Standard** domains cover a coherent thematic territory — broader than a single element but bounded by a clear conceptual edge. A storm mage commands weather; they do not command fire or ice simply because both can be cold or destructive. Versatility costs reliability.
 
-**Broad (Prismatic)** domains span multiple thematic territories. They are the widest possible license — and the hardest to use at scale. A Broad domain can do many things; it does none of them easily at Major scope, and that ceiling does not move. You trade reliability for range.
+**Prismatic** domains — *Broad*, in the ruleset data's type field — span multiple thematic territories. They are the widest possible license — and the hardest to use at scale. A Prismatic domain can do many things; it does none of them easily at Major scope. You trade reliability for range.
 
 ---
 
@@ -94,9 +96,9 @@ There are three domain types:
 |---|---|---|---|
 | **Focused** | Easy | Standard | Hard |
 | **Standard** | Standard | Hard | Very Hard |
-| **Broad (Prismatic)** | Hard | Very Hard | Very Hard |
+| **Prismatic** | Hard | Very Hard | Very Hard |
 
-A Focused domain mage lighting a candle rolls at Easy difficulty. A Broad domain mage doing the same rolls at Hard. Power at scale requires either the right domain type or the right Techniques. Broad domains cannot be pushed beyond Very Hard under any circumstances, including Sparks.
+A Focused domain mage lighting a candle rolls at Easy difficulty. A Prismatic domain mage doing the same rolls at Hard. Power at scale requires either the right domain type or the right Techniques. Reach-Sparks cannot move a Prismatic working's difficulty; dice-Sparks work normally (see *Sparks and Magic* below).
 
 Techniques within the Mind and Soul trees can extend what your domain can do — Second Domain (Tier 3) opens an adjacent territory, and Ascendant Domain (Tier 3) unlocks prismatic practice. The domain defines what is on the table; Techniques define how far you can reach beyond it.
 
@@ -107,6 +109,8 @@ Techniques within the Mind and Soul trees can extend what your domain can do —
 When you invoke your domain, declare your intent and scope, then roll.
 
 The attribute you roll depends on your magical tradition. **Spirit** governs intuitive magic — magic that flows from connection, will, and felt presence. **Knowledge** governs scholarly magic — magic that is constructed, analyzed, and precisely understood.
+
+The skill follows the attribute. Casting with **Spirit** adds your **Attune** rank; casting with **Knowledge** adds your **Lore** rank. A casting roll is 2d6 + attribute + skill, the same shape as every other roll in the game — a caster's reliability grows through practice exactly the way a duelist's or a burglar's does. If you have not yet developed the skill, you cast at Novice (+0), like anyone attempting anything untrained.
 
 Some characters develop both traditions — a scholar who has also cultivated spiritual practice, or a natural channeler who has supplemented intuition with formal study. When an effect genuinely draws on both, the player chooses which attribute to use for the roll. The MM may suggest one tradition fits a particular working more naturally, but the choice is always the player's.
 
@@ -141,7 +145,7 @@ The complication is the MM's call, and it should move the story forward, not sim
 >
 > *The domain bleeds.* The effect lands in the right place but with the wrong character. The Shadow mage's darkness is also cold in a way that reads as malicious — the people sheltering in it are frightened, not simply hidden. The intent was protection; the fiction creates something more complicated.
 >
-> *The cost arrives early.* The magic succeeded — but the mage carries a consequence that should have been deferred: a migraine that makes their next roll Hard, a visible magical signature they cannot suppress, a drain on Endurance that signals physical cost.
+> *The cost arrives early.* The magic succeeded — but the mage carries a consequence that should have been deferred: a migraine that makes their next roll Hard, a visible magical signature they cannot suppress, a drain on the Endurance Pool that signals physical cost.
 >
 > *Nothing happens.* The rarest and most useful failure. The domain reaches and finds nothing — the lock is not what Zahna thought it was, the creature is not susceptible in the way the theory suggested. The failure is informative. They now know something they didn't before.
 >
@@ -155,9 +159,9 @@ Mordai and Zahna are in a burning building. A massive wooden beam hangs half-col
 
 **Zahna:** "I want to inscribe a fracture-glyph on the two load-bearing joints — encode a stress point into the wood itself so they give way under the beam's own weight, and it falls to the right, clear of the doorway."
 
-**MM:** "That is Significant. You are controlling the direction of a structural collapse, not just marking wood. Standard difficulty. Roll Knowledge."
+**MM:** "That is Significant. You are controlling the direction of a structural collapse, not just marking wood. Standard difficulty. Roll Knowledge and Lore."
 
-→ Zahna rolls **2d6 + Knowledge (3 → +1)** at Standard difficulty and gets a **9**. Partial success.
+→ Zahna rolls **2d6 + Knowledge (3 → +1) + Lore (Practiced, +1)** at Standard difficulty and gets a **9**. Partial success.
 
 **MM:** "The glyph bites and the joints give way exactly as you intended. The beam comes down to the right, doorway clear. But the working was louder than you expected — a crack like a cannon shot, and the glyph's light flared before it burned out. Whatever is left alive on the floor above you now knows exactly where you are."
 
@@ -171,17 +175,17 @@ Notably: Zahna could have attempted Major scope instead, requesting the entire f
 
 ## Sparks and Magic
 
-**Sparks** can be spent on magical rolls just as they can on any other roll — add a d6 and drop the lowest, improving your odds before the dice land.
+Two rules cover everything a Spark does for a caster.
 
-Magic also gives Sparks a second use: as scope fuel.
+**The dice.** A Spark improves the dice: +1d6, drop the lowest. This works on any roll, including every magic roll — a Prismatic working included.
 
-**Pushing scope:** By spending a Spark, a character may attempt an effect one scope tier beyond their domain's natural ceiling. A Standard domain character whose Major effects are normally Very Hard may spend a Spark to push to a scope that would otherwise be unavailable — attempting something that transcends what the domain should be able to manage at all, at Very Hard difficulty.
+**The reach.** A Spark buys reach in exactly two cases:
 
 **Reaching Significant early (before the Technique):** A character who has not yet unlocked their Facet's magic-granting Technique works at Minor scope only (see *Before the Technique*, under **Acquiring a Domain** below). By spending a Spark, that character may attempt one Significant-scope effect at their domain's normal Significant difficulty — the Spark buys the scope, not a discount on the roll. Each Spark buys one such effect; it is not a permanent unlock. The Tier 1 Technique remains the only route to routine full scope, and Major scope stays closed until you have it.
 
-**Easing Major effects (Focused domains only):** A Focused domain character may spend a Spark to shift a Major effect one difficulty step easier: Hard becomes Standard. This does not apply to Standard or Broad domains.
+**Easing Major effects (Focused domains only):** A Focused domain character may spend a Spark to shift a Major effect one difficulty step easier: Hard becomes Standard. This does not apply to Standard or Prismatic domains.
 
-**The hard limit:** Broad (Prismatic) domains cannot be pushed beyond Very Hard through Sparks or any other means. Their ceiling is their ceiling. If you want the widest possible magical territory, you accept that the grandest effects will always be desperate rolls.
+Reach-Sparks cannot move a Prismatic working's difficulty; dice-Sparks work normally. If you want the widest possible magical territory, you accept that the grandest effects will always be desperate rolls.
 
 When to spend a Spark on magic is the same question as always: is this the moment that matters? A Spark spent to light a candle slightly more reliably is a Spark not available when the building is coming down.
 
@@ -193,44 +197,9 @@ Magic in combat — casting time, reactions against magical effects, Conditions 
 
 ---
 
-## Domain Quick Reference
+## The Domain Catalog
 
-All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domain Catalog**. Prismatic domains (marked †) require a Tier 3 Technique to access. (Body magic domains are deferred to the Shattered Origin setting Facet — see *A Brief Note on Body Magic*, below.)
-
-### Soul Domains
-
-**Table II.3–3: Soul Domains**
-
-| Domain | Type | Territory |
-|---|---|---|
-| Fire | Focused | Heat, flame, and light produced by fire |
-| Shadow | Focused | Darkness, absence of light, physical cold |
-| Storm | Standard | Wind, rain, lightning, concussive thunder |
-| Beasts | Standard | Communication and command of natural animals |
-| Resonance | Standard | Sound, vibration, harmonic force |
-| Verdance | Standard | Living plants: growing, shaping, animating |
-| Binding | Standard | Oaths, pacts, and spiritual constraints |
-| Presence | Standard | Projecting spiritual weight, emotional aura |
-| The Tide | Standard | Vitality flowing between living things |
-| The Undying † | Broad | Death, spirits of the departed, undead |
-| Fate † | Broad | Probability, luck, threads of possibility |
-| The Living World † | Broad | Animating current through all living things |
-
-### Mind Domains
-
-**Table II.3–4: Mind Domains**
-
-| Domain | Type | Territory |
-|---|---|---|
-| Illusion | Standard | False sensory experience: images, sounds, smells |
-| Warding | Standard | Protective limits inscribed into space or objects |
-| Inscription | Focused | Magical effects encoded into physical marks |
-| Transmutation | Standard | Structural alteration of non-living material |
-| Divination | Standard | Gathering information through magical means |
-| Constructed Force | Focused | Invisible force, telekinesis, barriers |
-| The Arcane † | Broad | Perceiving and manipulating magic itself |
-| The Constructed Mind † | Broad | Artificial intelligence and construct cognition |
-| Chronomancy † | Broad | Time: acceleration, perception, brief stepping |
+There are 21 domains: nine core and three Prismatic for each of Soul and Mind. All of them — an at-a-glance table per Facet and a full entry for every domain, with type, territory, and example intents at each scope — live in the **Appendix: Magic Domain Catalog**. Prismatic domains require a Tier 3 Technique to access (see *Acquiring a Domain*, below). Body magic domains are deferred to the Shattered Origin setting Facet — see *A Brief Note on Body Magic*, below.
 
 ---
 
@@ -242,7 +211,7 @@ All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domai
 >
 > Capping scope does the same work from the other end. A starting caster succeeds at their magic, reliably, at their normal difficulty, and simply cannot yet do the big thing. The limit is legible in the fiction instead of hidden in the dice, and the Technique becomes a door that opens rather than a penalty that lifts.
 
-**Before the Technique.** Your domain origin comes from your Background (Chapter II.5), not your Technique. Until you unlock the corresponding Facet Technique, magic is real but limited: **Minor scope only**. You can light a candle, sense a vibration, or leave a small mark — but you cannot fill a room with fire or shatter a wall with sound. The Technique is not when you gain magic — it is when your magic becomes what it is capable of being. Minor scope uses the domain's normal difficulty table: Easy for Focused, Standard for Standard, Hard for Broad.
+**Before the Technique.** Your domain origin comes from your Background (Chapter II.5), not your Technique. Until you unlock the corresponding Facet Technique, magic is real but limited: **Minor scope only**. You can light a candle, sense a vibration, or leave a small mark — but you cannot fill a room with fire or shatter a wall with sound. The Technique is not when you gain magic — it is when your magic becomes what it is capable of being. Minor scope uses the domain's normal difficulty table: Easy for Focused, Standard for Standard, Hard for Prismatic.
 
 A domain is not granted by raw potential — it requires both narrative origin and developed practice. At character creation, your **Background** establishes the story of how your magic began: you were raised in a temple, apprenticed to a hedge mage, discovered your domain through a crisis you barely survived, or spent years studying at an institution that understood what you were. The Background provides the narrative legitimacy. The **Facet Technique** provides the mechanical activation.
 

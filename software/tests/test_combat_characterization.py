@@ -197,6 +197,11 @@ class TestG0FixedSeedEndStates:
         Resolve to Parry, so the fight resolves purely on the PCs' Strike
         outcomes — Zulnut now Presses (End 3→2, +1 Spark) and total Sparks
         spent moves 1 → 2.
+
+        Re-pinned by WS-3 T3.1 (K-6/D4): the rider menu died — the 10+
+        that used to hang 'staggered' now leaves the Sergeant Open
+        instead. Same dice, same one-exchange defeat; the end state swaps
+        the Condition tuple for the Open tag.
         """
         random.seed(1)
         pcs = [make_pc(d) for d in standard_party()]
@@ -211,8 +216,9 @@ class TestG0FixedSeedEndStates:
             ("Zulnut", 2, 3, (), 1, False),
         ]
         assert _enemy_state(enemies[0]) == (
-            "sergeant", 0, 3, ("staggered",), True, None,
+            "sergeant", 0, 3, (), True, None,
         )
+        assert enemies[0].open is True
 
     def test_seed_2_boss_defeated_with_phase_change(self):
         """Pinned value updated by A8/G1 (DESIGN §5-bis): the Archive
@@ -229,9 +235,16 @@ class TestG0FixedSeedEndStates:
         Parry raises the fraction of by-the-book fights in which the second
         act actually triggers.
 
+        Re-pinned by WS-3 T3.1 (K-6/D4): riders died; a 10+ leaves the
+        Guardian Open, every follow-up Strike is Easy until it clears, and
+        the Boss AI spends actions visibly recovering (`_should_clear_open`)
+        — the fight shortens 3 -> 2 exchanges under Easy-to-Strike pressure
+        and the Guardian trades attacks away to clear the tag.
+
         Formerly (pre-D1) (True, 20, 9, 0), Mordai Broken; (D1, Resolve 5)
         (True, 2, 5, 0) no phase; (A8/G1, Resolve 8) (True, 4, 8, 0) no
-        phase; now (A14, no enemy Parry) (True, 3, 6, 0) with phase.
+        phase; (A14, no enemy Parry) (True, 3, 6, 0) with phase; now
+        (T3.1, Open) (True, 2, 6, 0) with phase.
         """
         random.seed(2)
         pcs = [make_pc(d) for d in standard_party()]
@@ -239,16 +252,17 @@ class TestG0FixedSeedEndStates:
         result = run_combat(pcs, enemies)
 
         assert (result.party_wins, result.exchanges, result.sparks_spent,
-                result.enemies_remaining) == (True, 3, 6, 0)
+                result.enemies_remaining) == (True, 2, 6, 0)
         assert result.pcs_broken == []
         assert [_pc_state(p) for p in pcs] == [
-            ("Mordai", 2, 5, (), 3, False),
-            ("Zahna", 2, 3, (), 1, False),
+            ("Mordai", 3, 5, (), 2, False),
+            ("Zahna", 2, 3, (), 2, False),
             ("Zulnut", 2, 3, (), 2, False),
         ]
         assert _enemy_state(enemies[0]) == (
-            "guardian", 0, 8, ("staggered", "cornered"), True, 0,
+            "guardian", 0, 8, (), True, 0,
         )
+        assert enemies[0].open is True
 
     def test_seed_3_boss_defeated_after_phase_change(self):
         """Pinned value updated by A8/G1 — same Resolve 5 -> 8 retune as
@@ -260,8 +274,14 @@ class TestG0FixedSeedEndStates:
         fight shortens 3 -> 2 exchanges and the rider snowball lands both
         Tier 2 Conditions ('staggered', 'cornered') before defeat.
 
+        Re-pinned by WS-3 T3.1 (K-6/D4): riders died; the snowball is now
+        the Open tag (Easy to Strike for everyone) and the Boss AI answers
+        it by visibly spending an action to clear — same 2-exchange
+        defeat, Sparks 5 -> 5, end state swaps Conditions for Open.
+
         Formerly (D1, Resolve 5) (True, 2, 4) no phase; (A8/G1, Resolve 8)
-        (True, 3, 6) with phase; now (A14, no enemy Parry) (True, 2, 5).
+        (True, 3, 6) with phase; (A14, no enemy Parry) (True, 2, 5); now
+        (T3.1, Open) (True, 2, 5).
         """
         random.seed(3)
         pcs = [make_pc(d) for d in standard_party()]
@@ -273,12 +293,13 @@ class TestG0FixedSeedEndStates:
         )
         assert [_pc_state(p) for p in pcs] == [
             ("Mordai", 3, 5, (), 2, False),
-            ("Zahna", 0, 3, (), 1, False),
-            ("Zulnut", 2, 3, (), 2, False),
+            ("Zahna", 2, 3, (), 2, False),
+            ("Zulnut", 2, 3, (), 1, False),
         ]
         assert _enemy_state(enemies[0]) == (
-            "guardian", 0, 8, ("staggered", "cornered"), True, 0,
+            "guardian", 0, 8, (), True, 0,
         )
+        assert enemies[0].open is True
 
     def test_seed_5_named_mordai_double_condition(self):
         """Pinned value updated by A8/D1 — same migration as test_seed_1's
@@ -291,6 +312,10 @@ class TestG0FixedSeedEndStates:
         Sergeant can no longer deflect a Strike, so the killing exchange now
         lands a 'staggered' rider (Zahna Presses, +1 Spark) instead of a
         clean no-condition drop.
+
+        Re-pinned by WS-3 T3.1 (K-6/D4): the 10+ that hung 'staggered' now
+        leaves the Sergeant Open. Same dice, same one-exchange defeat; the
+        end state swaps the Condition tuple for the Open tag.
         """
         random.seed(5)
         pcs = [make_pc(d) for d in standard_party()]
@@ -306,5 +331,6 @@ class TestG0FixedSeedEndStates:
             ("Zulnut", 3, 3, (), 0, False),
         ]
         assert _enemy_state(enemies[0]) == (
-            "sergeant", 0, 3, ("staggered",), True, None,
+            "sergeant", 0, 3, (), True, None,
         )
+        assert enemies[0].open is True

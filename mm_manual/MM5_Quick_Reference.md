@@ -49,7 +49,7 @@ Keep it open. Look things up. Do not read it.
 | Hard | -1 | Skilled opposition, poor conditions |
 | Very Hard | -2 | Extraordinary opposition, nearly impossible |
 
-A Technique may then move your call one step further — at most one per roll, auto-applied when its trigger is data the app already holds, player-declared otherwise (see *Difficulty*, III.1).
+Adjustments apply in a fixed order: base from the situation → an Easy tag (an Open enemy, a Maneuver) overrides downward, never stacking with itself → at most **one** character-side step (Technique OR Specialty, whichever the player picks) → Support's step → Easy is the floor, Very Hard the ceiling. Carried triggers auto-apply; judgment-call triggers are player-declared (III.1 *Difficulty*; II.4 *Reading the Entries*).
 
 ### Skill Ranks
 
@@ -69,7 +69,7 @@ A Technique may then move your call one step further — at most one per roll, a
 - Earned via MM award, Act Break Nomination, peer nomination ("Spark?"), or a player-claimed Graceful Fail
 - Spend **before** rolling: each Spark adds 1d6, drop lowest; no post-roll spending
 - 1 Spark = 3d6 drop lowest; 2 Sparks = 4d6 drop two lowest
-- Start of session: 3 Sparks per character
+- Start of session: 3 Sparks per character — Sparks do not carry over
 - **Graceful Fail:** player-initiated — on any 6-, the player may claim it by narrating how they make the failure worse or richer; MM confirms
 
 ### Spark Flow (MM Guidance)
@@ -92,7 +92,7 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 | **Graceful Failure** (6- played for story) | Player claims, MM confirms | 1–2 across table |
 | **Spark for Weakness** (played into flaw) | MM | 0–1 across table |
 
-**Target economy** (by session type): Low-activity — earn 1–2, spend 1–2, end with 2–3. Standard — earn 2–3, spend 3–4, end with 2–3. High-combat — earn 3–4, spend 4–6, end with 1–3.
+**Target economy** (by session type, everyone starting at 3): Low-activity — earn 1–2, spend 1–2. Standard — earn 2–3, spend 3–4. High-combat — earn 3–4, spend 4–6. Spend-what-you-earn: an unspent Spark at session end is simply gone (MM2, *Target Economy*).
 
 ---
 
@@ -100,11 +100,13 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 
 ```
 1. MM describes the situation
-2. All participants declare Postures (simultaneously, blind)
+2. State enemy stances openly (from their `triggers:`); PCs declare Postures simultaneously, blind
 3. Declare and resolve Actions (Strike / Maneuver / Support / Magic)
 4. Targets declare and resolve Reactions
-5. Apply results: deplete enemy Resolve (2 / 1 / 0), apply any Conditions and riders
-6. End of exchange: Tier 1 Conditions clear, Withdrawn recover 2 Endurance
+5. Apply results: deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, note an enemy left Open
+6. End of exchange: Tier 1 Conditions clear, Withdrawn recover 2 Endurance Pool points (up to the maximum)
+
+An exchange with **no PC offensive action** is uncontested — the situation advances for free: reposition, reinforce, progress a clock, or take the objective. No roll.
 ```
 
 ---
@@ -115,10 +117,12 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 
 | Posture | Offense | Reaction Cost | Special |
 |---|---|---|---|
-| **Aggressive** | +1 | +1 Endurance, first reaction of the exchange only | — |
+| **Aggressive** | +1 | +1 Endurance Pool cost, first reaction of the exchange only | — |
 | **Measured** | +0 | +0 | Baseline |
-| **Defensive** | -1 | -1 Endurance (min 0) | — |
-| **Withdrawn** | No offense | Free (0) | Recover 2 Endurance end of exchange |
+| **Defensive** | -1 | -1 Endurance Pool cost (min 0) | — |
+| **Withdrawn** | No offense | Free (0) | Recover 2 Endurance Pool points end of exchange, up to the maximum |
+
+PC Posture is declared blind. Enemy stances are **stated, not concealed** — announce them as the exchange opens, driven by the stat block's `triggers:`. Insight reads past a stated stance (a feint, a shift about to happen).
 
 ---
 
@@ -128,12 +132,12 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 
 | Action | Roll | Effect |
 |---|---|---|
-| **Strike** | 2d6 + weapon attribute + Combat or Finesse (default melee/ranged; the fiction may say otherwise) | Deplete enemy Resolve (10+: −2, 7–9: −1); 10+ may add a rider Condition |
+| **Strike** | 2d6 + weapon attribute + Combat or Finesse (default melee/ranged; the fiction may say otherwise) | Deplete enemy Resolve (10+: −2, 7–9: −1); 10+ may leave the enemy Open |
 | **Maneuver** | 2d6 + relevant skill | 10+: rolls against the target are Easy until the situation changes. 7–9: rolls against the target stay Standard. 6-: backfire |
 | **Support** | 2d6 + relevant skill | Grant ally +1d6 drop lowest OR difficulty one step easier on next roll |
-| **Magic** | 2d6 + Knowledge or Spirit (by tradition) | Domain + Intent + Scope; vs enemy depletes Resolve like a Strike |
+| **Magic** | 2d6 + Spirit + Attune, or Knowledge + Lore (by tradition) | Domain + Intent + Scope; vs enemy depletes Resolve like a Strike |
 
-**Press:** Spend 1 Endurance before a Strike to add 1d6 drop lowest (stacks with Sparks).
+**Press:** Spend 1 Endurance Pool point before a Strike to add 1d6 drop lowest (stacks with Sparks).
 
 ---
 
@@ -143,17 +147,17 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 
 **Table MM5–8: Strike Outcomes**
 
-| Roll | Resolve | Rider (10+ only) |
+| Roll | Resolve | Open (10+ only) |
 |---|---|---|
-| **10+** | **−2** | may add one Tier 1/Tier 2 Condition; a Tier 2 rider (Staggered/Cornered) makes the enemy **Easy to Strike** until cleared |
+| **10+** | **−2** | may leave the enemy **Open** — **Easy to Strike** for everyone; the player narrates what it looks like |
 | **7–9** | **−1** | — |
 | **6-** | 0 | consequence for the **attacker** |
 
-Enemy at **0 Resolve = defeated**. Riders never defeat — Resolve does. Mook: removed on any success (7+); armored Mook needs 10+.
+Enemy at **0 Resolve = defeated**. Open never defeats — Resolve does; the enemy clears Open only by visibly spending its action. Mook: removed on any success (7+); armored Mook needs 10+.
 
 **Against another character (duel/PvP):** 10+ = Tier 2 Condition, 7–9 = Tier 1 Condition, 6- = consequence for attacker.
 
-Default Strike difficulty: **Standard**. Adjust for posture, rider Conditions, situation.
+Default Strike difficulty: **Standard**. Adjust for posture and situation; an Open enemy is Easy for everyone.
 
 ---
 
@@ -161,14 +165,14 @@ Default Strike difficulty: **Standard**. Adjust for posture, rider Conditions, s
 
 **Table MM5–9: Reactions**
 
-| Reaction | Cost | Roll | 10+ | 7–9 | 6- |
+| Reaction | Cost (Endurance Pool points) | Roll | 10+ | 7–9 | 6- |
 |---|---|---|---|---|---|
-| **Dodge** | 1 End | Dexterity | Avoid entirely | Downgrade 1 tier | Full hit |
-| **Parry** | 1 End | Weapon attribute + Combat | Avoid entirely | Downgrade 1 tier | Full hit |
-| **Absorb** | 0 End | No roll | — | — | Take hit at full tier |
-| **Intercept** | 2 End | — | Protect ally, then Dodge/Parry | — | — |
+| **Dodge** | 1 | Dexterity | Avoid entirely | Downgrade 1 tier | Full hit |
+| **Parry** | 1 | Weapon attribute + Combat | Avoid entirely | Downgrade 1 tier | Full hit |
+| **Absorb** | 0 | No roll | — | — | Take hit at full tier |
+| **Intercept** | 2 | — | Protect ally, then Dodge/Parry — once per exchange; if two would step in, the protected ally decides who | — | — |
 
-At **0 Endurance**: Absorb only.
+At **0 Endurance Pool**: Absorb only.
 
 ---
 
@@ -186,6 +190,7 @@ At **0 Endurance**: Absorb only.
 
 - **Defensive enemy:** PC reactions one step **easier**
 - Armor and reaction downgrades **do not stack** — apply the greater reduction
+- The MM chooses the incoming Condition; repeating a carried type is the telegraphed finisher (a landed repeat of a Tier 2 = Broken — telegraph it an exchange ahead)
 
 ---
 
@@ -204,7 +209,7 @@ At **0 Endurance**: Absorb only.
 | Tier | Conditions | Effect | Duration |
 |---|---|---|---|
 | **1** | Winded | -1 to next roll | Clears end of exchange |
-| **1** | Off-Balance | +1 Endurance cost on next reaction | Clears end of exchange |
+| **1** | Off-Balance | +1 Endurance Pool cost on next reaction | Clears end of exchange |
 | **1** | Shaken | MM directs next action | Clears end of exchange |
 | **2** | Staggered | -1 to offensive rolls | Persists until treated |
 | **2** | Cornered | Cannot take Aggressive posture | Persists until treated |
@@ -230,15 +235,15 @@ A charge is consumed only when armor provides the reduction actually applied —
 
 ---
 
-## Endurance
+## Endurance Pool
 
 **Pool:** 4 + Constitution modifier + Endurance skill rank bonus
 
 **Range:** 3 (Con 1, no skill) to 8 (Con 3, Master)
 
-**0 Endurance:** Absorb only, regardless of Posture (Conditions land at their normal tier — no extra penalty)
+**0 Endurance Pool:** Absorb only, regardless of Posture (Conditions land at their normal tier — no extra penalty)
 
-**Recovery:** Withdrawn posture restores 2 per exchange
+**Recovery:** Withdrawn posture restores 2 per exchange, up to the maximum
 
 ---
 
@@ -246,26 +251,27 @@ A charge is consumed only when armor provides the reduction actually applied —
 
 **Table MM5–13: Magic Difficulty by Scope**
 
-| Scope | Focused | Standard | Broad (Prismatic) |
+| Scope | Focused | Standard | Prismatic |
 |---|---|---|---|
 | Minor | Easy | Standard | Hard |
 | Significant | Standard | Hard | Very Hard |
 | Major | Hard | Very Hard | Very Hard (ceiling) |
 
+- **The roll:** casting with Spirit adds the Attune rank; casting with Knowledge adds the Lore rank (Novice +0 if untrained)
 - **Pre-technique:** Minor scope only, at the domain's normal difficulty (no extra penalty — the scope restriction *is* the limitation)
-- **Sparks and scope** — three rules, all optional, all player-declared before the roll:
+- **Sparks and magic** — dice-Sparks work on any roll, including every magic roll. A Spark buys **reach** in exactly two cases, player-declared before the roll:
+  - **Pre-Technique Significant:** a pre-Technique caster may spend a Spark to attempt **one** Significant-scope effect at the domain's normal Significant difficulty. One effect per Spark — not an unlock; Major stays closed until the Tier 1 Technique.
   - **Focused eases Major:** a Focused domain may spend a Spark to shift a Major effect one step easier (Hard → Standard). Focused only.
-  - **Prismatic ceiling is unmovable:** no Spark eases Major for a Broad domain. Very Hard is Very Hard.
-  - **Pre-technique push:** a pre-technique caster may spend a Spark to attempt **one** Significant-scope effect at the domain's normal Significant difficulty. One effect per Spark — not an unlock; Major stays closed until the Tier 1 Technique.
-- **Second domain** (Soul Communion Tier 3): a second **standard** domain only — prismatic territories require Ascendant Domain. Effects in the second domain are always one difficulty step harder than normal for that domain.
+  - **Prismatic:** reach-Sparks cannot move a Prismatic working's difficulty; dice-Sparks work normally.
+- **Second domain** (Tier 3, Mind and Soul trees): a second **standard** domain only — prismatic territories require Ascendant Domain. Effects in the second domain are one difficulty step harder than normal for that domain until the character earns their next Facet level; then the penalty lifts.
 
 ### Adjudicating Magic (compressed from MM2 — see MM2 for full text)
 
 - **Rule out loud, before the dice.** Say the scope, say the difficulty, then roll. A ruling delivered after the result sounds like an adjustment.
 - **Scope = scale of change + duration.** Nothing else. Not how impressive it looks, not how well it was described, not target count (a dozen torches lit at once is still Minor). "And it stays that way" moves the tier on duration alone — catch it before the roll. When you correct scope upward, name the new difficulty and *pause*; scaling the intent back down is the player's call.
-- **Check the ceiling before you price the roll.** A pre-technique caster is capped at **Minor, full stop** — that is an availability question, not a difficulty one. Tell them what their magic can do now and let them re-aim.
+- **Check the ceiling before you price the roll.** A pre-technique caster is capped at **Minor** — except that a Spark buys one Significant-scope attempt at normal difficulty. Beyond that it is an availability question, not a difficulty one. Tell them what their magic can do now and let them re-aim.
 - **Domain boundaries — lean toward yes.** The test is substance vs. rhyme: does it run through the domain's actual material, or only share its mood? Fire burning the breathable content out of the air = yes; fire commanding the weather = no. Shadow muffling sound = yes; shadow granting invisibility = no. Don't surcharge a creative stretch — if the reach is more ambitious, that shows up as scope. A "no" is a **"No, but..."**. A "yes" is precedent — you are setting it permanently.
-- **7–9: the magic worked.** Confirm the success in the fiction *first*; the complication is added to a success, never a discount on one. Then pick one: **affects more than intended** / **costs something unexpected** / **creates a consequence nobody planned**. Mine the player's stated intent for the specifics. Rotate categories — four costs in a row and 7–9 becomes a flat fee. Test: does the table now have something to *do*?
+- **7–9: the magic worked.** Pick the cost first — **affects more than intended** / **costs something unexpected** / **creates a consequence nobody planned** — then name it while narrating the success it rides on; the complication is added to a success, never a discount on one. Mine the player's stated intent for the specifics. Rotate categories — four costs in a row and 7–9 becomes a flat fee. Test: does the table now have something to *do*?
 - **Active opposition = Standard floor.** A floor, not a surcharge. It only ever moves the **Easy** cell (Focused domain, Minor scope); every other combination already meets it, so raising a Hard roll "because combat" applies it twice. Opposition = something with its own will resisting *this working, right now* — a sealed door is difficulty, the rival holding it shut is opposition. Specific circumstances (distracted, wounded, constrained) may still adjust; "it is a battle" is not a circumstance.
 
 ### Magic 6- Templates (compressed from II.3 — see II.3 for full text)
@@ -308,13 +314,9 @@ TR = offense_value + durability_value + armor_bonus + technique_bonus
 
 **TR Minimums:** Mook >= 1, Named >= 8, Boss >= 12
 
-### Encounter Budget (rough ordering check only)
-
-**Actor count drives difficulty, not total TR.** The number of Named/Boss enemies acting at once is the real dial. The TR budget below is a loose "bigger is probably harder" check — it is **non-predictive for 3+ Named/Boss rosters and for Mook swarms.** Build from the Recipe Table.
-
-Budget = Party Strength (sum of `career_advances`) x multiplier: Skirmish x1 / Standard x2 / Hard x3 / Deadly x4 (directional only — not validated win rates). Action economy (same rough aid): solo x0.75 / 2–3 x1.0 / 4–6 x1.25 (Mook-only x1.1) / 7+ x1.5.
-
 ### Encounter Recipe Table (PS 3 — simulation-validated)
+
+**Actor count drives difficulty, not total TR.** The number of Named/Boss enemies acting at once is the real dial — there is no TR budget (MM1, *Sizing an Encounter*). Party Strength = sum of `career_advances`. Adding enemies mid-fight is the sharpest dial you own: one Mook is one difficulty band (76% → 47% → 20%).
 
 **Table MM5–15: Encounter Recipes (Party Strength 3)**
 
@@ -331,7 +333,7 @@ Budget = Party Strength (sum of `career_advances`) x multiplier: Skirmish x1 / S
 
 ## Skill Advancement
 
-- **4 skill points** per session (use-it-or-lose-it)
+- **4 skill points** per session — up to 2 unspent bank into the next session; 1 per session may train an unused Primary-Facet skill
 - **3 marks** to advance one rank (Novice → Practiced → Expert → Master)
 - Primary Facet skills: **1 SP per mark**
 - Cross-Facet skills: **2 SP per mark**
@@ -376,7 +378,7 @@ Roll or pick a d6 for a generic 6- consequence when nothing specific comes to mi
 
 **When not to roll:** Only roll when outcome is uncertain, stakes matter, and both success and failure move the story.
 
-**Specialty:** A Background Specialty that *directly* applies turns a Standard roll Easy. When it is only tangential, hand over the information free — no roll (II.5, *Specialty*).
+**Specialty:** A Background Specialty that *directly* applies turns a Standard roll Easy — its step shares the single character-side step with Techniques (III.1, *Difficulty*). When it is only tangential, hand over the information free — no roll (II.5, *Specialty*).
 
 **Saving throws:** 2d6 + Major Attribute modifier (Body / Mind / Soul). Same three-tier outcomes. Use when something happens *to* the character, not something they choose.
 

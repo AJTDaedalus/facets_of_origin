@@ -26,7 +26,7 @@ class TestEnemyDefaults:
 
     def test_named_npc(self):
         e = Enemy(id="sergeant", name="Sergeant", tier="named", resolve=3,
-                  attack_modifier=2, defense_modifier=2, armor="light")
+                  attack_modifier=2, armor="light")
         assert e.tier == "named"
         assert e.resolve == 3
 
@@ -71,16 +71,18 @@ class TestTRCalculation:
                   resolve=4, attack_modifier=3, armor="light")
         assert e.calculate_tr() == 10
 
-    def test_boss_archive_guardian_recomputes_to_14(self):
-        """Archive Guardian: offense(3->5) + resolve(5) + armor(heavy->2) + technique_bonus(2) = 14.
+    def test_boss_archive_guardian_tr_16(self):
+        """Archive Guardian: offense(3->5) + resolve(8) + armor(heavy->2) + technique_bonus(1) = 16.
 
-        Was published as 16 under the old formula, which double-counted the
-        phase-change special as both a durability and a technique bonus.
+        History: published 16 under the old formula (which double-counted
+        the phase-change special), recomputed to 14 by D1, retuned to 17
+        by A8/G1 (Resolve 5->8), and back to 16 by T3.4 — the retired
+        tier1_immunity technique came off the list (K-6/D4).
         """
         e = Enemy(id="guardian", name="Archive Guardian", tier="boss",
-                  resolve=5, attack_modifier=3, armor="heavy",
-                  techniques=["phase_change", "tier1_immunity"])
-        assert e.calculate_tr() == 14
+                  resolve=8, attack_modifier=3, armor="heavy",
+                  techniques=["phase_change"])
+        assert e.calculate_tr() == 16
 
     def test_named_minimum_enforced(self):
         """Named NPC with low stats still gets TR >= 8."""
@@ -150,6 +152,124 @@ class TestEnemyCombatTracker:
         e = Enemy(id="thug", name="Thug", tier="mook", armor="heavy")
         e.init_combat()
         assert e.resolve_current == 0
+
+
+# ---------------------------------------------------------------------------
+# The Open tag — K-6/D4 tracker state
+# ---------------------------------------------------------------------------
+
+class TestEnemyOpenState:
+    def test_open_defaults_false(self):
+        e = Enemy(id="sgt", name="Sgt", tier="named", resolve=3)
+        assert e.open is False
+
+    def test_init_combat_resets_open(self):
+        e = Enemy(id="sgt", name="Sgt", tier="named", resolve=3)
+        e.open = True
+        e.init_combat()
+        assert e.open is False
+
+    def test_to_client_dict_carries_open(self):
+        e = Enemy(id="sgt", name="Sgt", tier="named", resolve=3)
+        e.open = True
+        assert e.to_client_dict()["open"] is True
+
+    def test_open_is_ephemeral_not_saved_to_fof(self):
+        e = Enemy(id="sgt", name="Sgt", tier="named", resolve=3)
+        e.open = True
+        assert "open" not in e.to_fof()["enemy"]
+
+
+# ---------------------------------------------------------------------------
+# tier1_immunity retirement — K-6/D4 (it was immunity to nothing once the
+# rider menu died); loads with a deprecation warning, same pattern as the
+# legacy `endurance` key.
+# ---------------------------------------------------------------------------
+
+class TestDefenseModifierDeprecation:
+    """K-11: `defense_modifier` retired — it was never in the TR formula and
+    NPCs never roll it. Loads with a deprecation warning (endurance pattern);
+    the model no longer carries the field."""
+
+    def _fof(self, enemy_block):
+        return {"type": "enemy", "id": "x", "name": "X", "enemy": enemy_block}
+
+    def test_defense_modifier_load_warns(self):
+        with pytest.warns(DeprecationWarning, match="defense_modifier"):
+            e = Enemy.from_fof(self._fof(
+                {"tier": "named", "resolve": 3, "defense_modifier": 2}
+            ))
+        assert e.resolve == 3
+
+    def test_load_without_defense_modifier_is_clean(self, recwarn):
+        Enemy.from_fof(self._fof({"tier": "named", "resolve": 3}))
+        assert not any(
+            issubclass(w.category, DeprecationWarning) for w in recwarn.list
+        )
+
+    def test_model_has_no_defense_modifier_field(self):
+        assert "defense_modifier" not in Enemy.model_fields
+
+    def test_to_fof_omits_defense_modifier(self):
+        e = Enemy(id="sgt", name="Sgt", tier="named", resolve=3)
+        assert "defense_modifier" not in e.to_fof()["enemy"]
+
+    def test_tr_unchanged_by_retirement(self):
+        """defense_modifier was never a TR term — the Sergeant's published
+        TR 8 survives the field's removal untouched."""
+        e = Enemy(id="sergeant", name="Sergeant", tier="named", resolve=3,
+                  attack_modifier=2, armor="light")
+        assert e.calculate_tr() == 8
+
+    def test_no_shipped_enemy_lists_defense_modifier(self):
+        shipped = sorted((REPO_ROOT / "enemies").glob("*.fof")) + sorted(
+            (REPO_ROOT / "adventures").glob("**/enemies/*.fof")
+        )
+        offenders = [p.name for p in shipped if "defense_modifier" in p.read_text()]
+        assert offenders == []
+
+
+class TestTier1ImmunityDeprecation:
+    def _fof(self, techniques):
+        return {
+            "type": "enemy",
+            "id": "relic",
+            "name": "Relic",
+            "enemy": {
+                "tier": "boss",
+                "resolve": 8,
+                "armor": "heavy",
+                "techniques": techniques,
+            },
+        }
+
+    def test_tier1_immunity_load_warns(self):
+        """Same pattern as the legacy `endurance` key: the file still
+        loads (the entry is kept so a published TR doesn't silently move
+        on load), but the author is told to remove it."""
+        with pytest.warns(DeprecationWarning, match="tier1_immunity"):
+            e = Enemy.from_fof(self._fof(["phase_change", "tier1_immunity"]))
+        assert "phase_change" in e.techniques
+
+    def test_tier1_immunity_absent_loads_without_warning(self, recwarn):
+        e = Enemy.from_fof(self._fof(["phase_change"]))
+        assert e.techniques == ["phase_change"]
+        assert not any(
+            issubclass(w.category, DeprecationWarning) for w in recwarn.list
+        )
+
+    def test_no_shipped_enemy_lists_tier1_immunity_after_t3_4(self):
+        """Guard for T3.4's cleanup: once the Archive Guardian is
+        re-expressed without `tier1_immunity`, no shipped `.fof` may carry
+        it again. (xfail until T3.4 lands in this same workstream.)"""
+        shipped = sorted((REPO_ROOT / "enemies").glob("*.fof"))
+        offenders = [
+            p.name for p in shipped
+            if "tier1_immunity" in p.read_text()
+        ]
+        if offenders == ["archive_guardian.fof"]:
+            pytest.xfail("archive_guardian.fof re-expression is T3.4")
+        assert offenders == []
 
 
 # ---------------------------------------------------------------------------

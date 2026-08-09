@@ -298,14 +298,14 @@
               <div class="card-title">Combat</div>
 
               <div id="combat-idle-note" class="inline-note hidden">
-                Not in combat. This is your readiness: the Endurance pool you'll start a fight with,
+                Not in combat. This is your readiness: the Endurance Pool you'll start a fight with,
                 your armour budget, and what each reaction will cost. The MM starts combat when it begins.
               </div>
 
               <!-- Endurance bar -->
               <div class="combat-status-bar">
                 <div class="endurance-bar-wrap">
-                  <label style="font-size:0.75rem;color:var(--text-dim);">Endurance</label>
+                  <label style="font-size:0.75rem;color:var(--text-dim);">Endurance Pool</label>
                   <div class="endurance-bar">
                     <div class="endurance-fill" id="combat-endurance-fill"></div>
                   </div>
@@ -341,7 +341,7 @@
                   </label>
                   <label class="posture-opt">
                     <input type="radio" name="combat-posture" value="withdrawn"> Withdrawn
-                    <span class="opt-hint">no offense · free reactions · recover 2 Endurance</span>
+                    <span class="opt-hint">no offense · free reactions · recover 2 Endurance Pool points (up to your maximum)</span>
                   </label>
                 </div>
                 <button class="btn btn-secondary btn-sm combat-live-only" onclick="declarePosture()"
@@ -396,7 +396,7 @@
                     <option value="Very Hard">Very Hard (−2)</option>
                   </select>
                   <label class="checkbox-inline" style="margin:6px 0;">
-                    <input type="checkbox" id="strike-press"> Press — spend 1 Endurance for +1d6, drop lowest
+                    <input type="checkbox" id="strike-press"> Press — spend 1 Endurance Pool point for +1d6, drop lowest
                   </label>
                   <label class="checkbox-inline" style="margin:6px 0;">
                     <input type="checkbox" id="strike-final-blow">
@@ -412,7 +412,7 @@
                 <div id="combat-form-react" class="combat-sub-form hidden">
                   <div class="sub-form-title">React</div>
                   <p class="card-help">
-                    One reaction per incoming action. At 0 Endurance only Absorb is available.
+                    One reaction per incoming action. At 0 Endurance Pool only Absorb is available.
                   </p>
                   <div class="combat-action-row" style="margin-bottom:6px;">
                     <button class="btn btn-secondary btn-sm" onclick="performReact('dodge')"
@@ -523,7 +523,6 @@
                 <div class="spark-use-selector">
                   <label><input type="radio" name="magic-spark-use" value="" checked> None</label>
                   <label><input type="radio" name="magic-spark-use" value="improve_roll"> Improve Roll (+1d6 drop lowest)</label>
-                  <label><input type="radio" name="magic-spark-use" value="push_scope"> Push Scope (one step harder)</label>
                   <label id="magic-spark-ease-label" class="hidden"><input type="radio" name="magic-spark-use" value="ease_focused_major"> Ease Major (focused only)</label>
                 </div>
               </div>
@@ -580,6 +579,8 @@
           <!-- =============== MM: ENEMY TRACKER =============== -->
           <div class="card" data-role="mm">
             <div class="card-title">Enemy Tracker</div>
+            <!-- T6.2 (K-3): live difficulty band — MM-only surface -->
+            <div id="play-encounter-band" style="margin-bottom:6px;"></div>
             <div id="play-enemy-tracker"></div>
             <div class="spawn-row">
               <select id="play-spawn-enemy-select">
@@ -942,10 +943,6 @@
               <div>
                 <label>Attack Mod</label>
                 <input type="number" id="builder-enemy-attack" oninput="previewEnemyTR()" onchange="previewEnemyTR()" value="0">
-              </div>
-              <div>
-                <label>Defense Mod</label>
-                <input type="number" id="builder-enemy-defense" value="0">
               </div>
             </div>
             <label style="margin-top:8px;" for="builder-enemy-techniques">Techniques (comma-separated)</label>

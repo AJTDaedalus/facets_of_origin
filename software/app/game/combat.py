@@ -31,11 +31,12 @@ from the ruleset, not hardcoded. One literal remains: the `dodge`/`parry`
 
 Scope note: `resolve_strike`/`resolve_reaction` resolve *rolls and their
 immediate rule consequences* (mook removal, Endurance cost). *Choosing*
-which Tier 1/2 Condition to apply is left to the caller — in the live
-engine that choice belongs to the attacking player or the MM (PHB III.3:
-"10+ = Tier 2 Condition, attacker chooses which"); in the simulator it is
-AI policy (`tools.combat_sim.choose_pc_reaction` and friends). combat.py
-never makes that choice itself.
+what to do with an outcome is left to the caller — against a character,
+which Tier 1/2 Condition to apply (PHB III.3: "10+ = Tier 2 Condition,
+attacker chooses which"); against an enemy, whether a full success leaves
+it Open (K-6/D4, attacker's option). In the simulator both are AI policy
+(`tools.combat_sim.choose_pc_reaction` and friends). combat.py never
+makes those choices itself.
 """
 from __future__ import annotations
 
@@ -260,6 +261,30 @@ def reaction_cost(
 
 def withdrawn_recovery_amount(ruleset) -> int:
     return ruleset.combat.endurance.recovery_withdrawn
+
+
+def apply_withdrawn_recovery(current: int, pool_max: int, ruleset) -> int:
+    """Withdrawn's end-of-exchange recovery, **up to your pool** (III.3,
+    D5): returns the new Endurance value, clamped at `pool_max`. The clamp
+    is a rule — callers (the WS end-exchange handler, the simulator loop)
+    apply this function to their own Endurance field instead of re-deriving
+    `min(max, current + amount)` inline.
+    """
+    return min(pool_max, current + withdrawn_recovery_amount(ruleset))
+
+
+def exchange_uncontested(offensive_actions) -> bool:
+    """The uncontested exchange (III.3, K-2/D5): an exchange in which no
+    player character took an offensive action lets the situation advance
+    for free — the MM may reposition, reinforce, progress a clock, or take
+    the objective, no roll.
+
+    `offensive_actions` is one truthy/falsy entry per offensive action
+    considered (or per PC: "did they act offensively?"). This is the
+    rule's only home — the WS end-exchange handler and any sim series read
+    it from here, never re-derive it.
+    """
+    return not any(offensive_actions)
 
 
 # ---------------------------------------------------------------------------
@@ -628,31 +653,44 @@ def mook_removed(outcome: str, armored: bool, ruleset) -> bool:
         return False
 
 
-def can_apply_rider(outcome: str, ruleset) -> bool:
-    """Whether a Strike outcome is eligible to additionally hang a rider
-    Condition on an enemy, on top of Resolve depletion (III.3 — "on a full
-    success only"). Read from `combat.enemy_durability.rider_on`, not
-    hardcoded, so a homebrew ruleset could widen or narrow it.
+def can_apply_open(outcome: str, ruleset) -> bool:
+    """Whether a Strike outcome is eligible to additionally leave the enemy
+    Open, on top of Resolve depletion (III.3 / K-6/D4 — attacker's option,
+    "on a full success only"). Read from `combat.enemy_durability.open_on`,
+    not hardcoded, so a homebrew ruleset could widen or narrow it.
+
+    Whether the attacker *takes* the option is the caller's choice (player
+    at a table, AI policy in the simulator) — this function only rules on
+    eligibility. The player narrates what Open looks like (staggered,
+    cornered, blinded, disarmed); the mechanics carry one tag.
     """
-    return outcome == ruleset.combat.enemy_durability.rider_on
+    return outcome == ruleset.combat.enemy_durability.open_on
 
 
-def rider_tier_eligible(tier: int, ruleset) -> bool:
-    """Whether `tier` (1 or 2) is a legal rider tier — read from
-    `combat.enemy_durability.rider_tiers`, not hardcoded.
+def open_clear_mode(ruleset) -> str:
+    """How the Open tag clears — read from
+    `combat.enemy_durability.open_clears`. The base ruleset's
+    `"enemy_action"` means: ONLY by the enemy visibly spending its action.
+    Open never clears at end of exchange (`end_exchange` touches
+    Conditions, and Open is not a Condition), and nothing the PCs do
+    removes it. Callers (WS handler, simulator enemy AI) gate their
+    clearing paths on this value rather than hardcoding the lifecycle.
     """
-    return tier in ruleset.combat.enemy_durability.rider_tiers
+    return ruleset.combat.enemy_durability.open_clears
 
 
-def target_strike_difficulty(base_difficulty: str, target_conditions: list[str], ruleset) -> str:
-    """A target holding a Tier 2 rider Condition (Staggered/Cornered) is
-    Easy to Strike (D1) — this is what makes the attacker's 10+ choice on
-    the *previous* Strike real: deplete Resolve now, or set up an Easy
-    follow-up for the rest of the party.
+def target_strike_difficulty(base_difficulty: str, target_open: bool, ruleset) -> str:
+    """An Open enemy is Easy to Strike for everyone (K-6/D4) — this is what
+    makes the attacker's 10+ option on the *previous* Strike real: leave
+    the enemy Open now and every ally's follow-up is Easy, until the enemy
+    visibly spends its action recovering.
+
+    Composed through `compose_difficulty` as an Easy-tag source (III.1
+    precedence step 2) — the override is absolute and does not stack with
+    itself, and this function must never carry its own copy of that rule.
     """
-    if any(c in _tier2_ids(ruleset) for c in target_conditions):
-        return "Easy"
-    return base_difficulty
+    label, _ = compose_difficulty(base_difficulty, ruleset=ruleset, easy_tag=target_open)
+    return label
 
 
 # ---------------------------------------------------------------------------
@@ -664,10 +702,8 @@ def apply_condition(
     condition: str,
     tier: int,
     ruleset,
-    *,
-    is_rider: bool = False,
 ) -> ConditionResult:
-    """Apply a condition to a combatant's `conditions` list in place.
+    """Apply a condition to a character's `conditions` list in place.
 
     A second Tier 2+ condition of the *same* type escalates to Broken
     instead of being added again (D5 ledger row 2: same type, not "any
@@ -676,16 +712,15 @@ def apply_condition(
     retired, DESIGN §4.3): under D1 enemies have no Condition kill-track,
     and under D2 armored PCs are already breakable without it.
 
-    `is_rider` marks an enemy Condition applied as a Strike rider (D1):
-    riders never escalate to Broken, since Resolve — not Conditions — is
-    what defeats an enemy. Enemy armor does not downgrade rider Conditions
-    (`armor_downgrade` is PC-only, D2); this flag is the only special
-    handling riders get.
+    Character-target only since K-6/D4: a Strike against an enemy never
+    hangs a Condition — a full success may leave it Open instead
+    (`can_apply_open`), and Resolve is what defeats it. The retired
+    `is_rider` flag marked the enemy-rider path and died with the menu.
 
     The caller is responsible for not calling this on an already-Broken or
     already-removed target.
     """
-    if not is_rider and tier >= 2 and condition in conditions:
+    if tier >= 2 and condition in conditions:
         return ConditionResult(applied=False, condition=condition, tier=tier, broken=True)
 
     conditions.append(condition)
@@ -721,10 +756,16 @@ def apply_character_difficulty_step(
     — those are ladder primitives; this function only composes them.
 
     **Guardrail**: character-side steps never stack, whatever their source —
-    at most one per roll. `context` may make several unlocked Techniques
-    qualify at once; only one step is ever applied. Precedence is
-    deterministic so the roll banner names a stable Technique: a
-    player-declared Technique beats an auto one, then lowest Technique id.
+    at most one per roll. Specialty and Technique share this one pool
+    (III.1 §Difficulty, T2.4/D2): a declared Specialty
+    (`context["specialty_declared"]` truthy, on a character whose
+    `.specialty` is set) is a candidate exactly like a Technique, and a
+    Hard roll reaches Standard via either source, never Easy via both.
+    `context` may make several sources qualify at once; only one step is
+    ever applied. Precedence is deterministic so the roll banner names a
+    stable source: a player-declared Technique beats a declared Specialty,
+    which beats an auto Technique, then lowest Technique id. The applied id
+    for a Specialty step is the literal string `"specialty"`.
 
     Only Techniques in `character.techniques` (i.e. actually unlocked) are
     eligible — an un-unlocked Technique's `difficulty_step` never fires,
@@ -759,9 +800,17 @@ def apply_character_difficulty_step(
     if isinstance(raw_declared, (str, bytes)) or not isinstance(raw_declared, (list, tuple, set)):
         raw_declared = []
     declared_ids = {str(x) for x in raw_declared}
-    # (precedence_rank, technique_id): rank 0 = player-declared, rank 1 = auto.
-    # Sorting by this tuple gives "declared beats auto, then lowest id" in one step.
+    # (precedence_rank, source_id): rank 0 = player-declared Technique,
+    # rank 1 = declared Specialty, rank 2 = auto Technique. Sorting by this
+    # tuple gives "declared beats Specialty beats auto, then lowest id".
     candidates: list[tuple[int, str]] = []
+
+    # Specialty shares the one character-side step pool (T2.4/D2). It is
+    # always player-declared — the MM confirms it applies in the fiction —
+    # and always eases (II.5: a directly applicable Specialty turns a
+    # Standard roll Easy; composed here as one step easier).
+    if context.get("specialty_declared") and getattr(character, "specialty", None):
+        candidates.append((1, "specialty"))
 
     for tech_id in character.techniques:
         tech_def = ruleset.get_technique(tech_id)
@@ -793,21 +842,77 @@ def apply_character_difficulty_step(
                 expected = trigger.against
             if expected is None or context_value != expected:
                 continue
-            candidates.append((1, tech_id))
+            candidates.append((2, tech_id))
 
     if not candidates:
         return declared_label, None
 
     candidates.sort()
     _, applied_id = candidates[0]
-    applied_def = ruleset.get_technique(applied_id)
 
-    if applied_def.difficulty_step == "easier":
+    if applied_id == "specialty":
+        step = "easier"
+    else:
+        step = ruleset.get_technique(applied_id).difficulty_step
+
+    if step == "easier":
         final_label = _engine._step_difficulty_easier(declared_label, ruleset)
     else:
         final_label = _engine._step_difficulty_harder(declared_label, ruleset)
 
     return final_label, applied_id
+
+
+def compose_difficulty(
+    base_label: str,
+    character=None,
+    context: Optional[dict] = None,
+    ruleset=None,
+    *,
+    easy_tag: bool = False,
+    support_ease: bool = False,
+) -> tuple[str, Optional[str]]:
+    """The full printed precedence for a roll's difficulty (III.1
+    §Difficulty; T2.4/D2), composed in its fixed order:
+
+    1. **Base** from the situation — `base_label`, the MM's call.
+    2. **Easy-tag override** — an Open enemy (K-6/D4) or a Maneuver
+       (`easy_tag=True`) overrides the base downward to Easy. Tags are
+       absolute, so they cannot stack with themselves: two tags are still
+       one Easy.
+    3. **One character-side step** — at most one, from all character
+       abilities combined (Technique, Specialty, anything future), via
+       `apply_character_difficulty_step`'s shared pool.
+    4. **Support's step** — `support_ease=True` when the ally's pending
+       Support bonus is the ease-difficulty mode (party-side, so it lands
+       on top of the single character step).
+    5. **Clamp** — Easy is the floor, Very Hard the ceiling; the ladder
+       primitives (`engine._step_difficulty_easier`/`_harder`) saturate
+       at both ends.
+
+    This is the rule's only home. `target_strike_difficulty` composes through
+    here for the Easy tag; the WS handlers and the simulator reach the same
+    ladder through `apply_character_difficulty_step`, which step 3 calls.
+    Nobody steps a difficulty inline.
+
+    Returns `(final_label, applied_source_id)` — the source id is a
+    Technique id, the literal `"specialty"`, or None (see
+    `apply_character_difficulty_step`).
+    """
+    label = base_label
+    if easy_tag:
+        label = "Easy"
+
+    applied_id: Optional[str] = None
+    if character is not None:
+        label, applied_id = apply_character_difficulty_step(
+            label, character, context or {}, ruleset,
+        )
+
+    if support_ease:
+        label = _engine._step_difficulty_easier(label, ruleset)
+
+    return label, applied_id
 
 
 def end_exchange(conditions: list[str], ruleset) -> list[str]:

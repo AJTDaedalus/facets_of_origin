@@ -12,17 +12,19 @@
 
 ### Attributes
 
-| Major Attribute | Minor Attribute | Rating (1–3) |
-|---|---|---|
-| Body | Strength | |
-| Body | Dexterity | |
-| Body | Constitution | |
-| Mind | Intelligence | |
-| Mind | Wisdom | |
-| Mind | Knowledge | |
-| Soul | Spirit | |
-| Soul | Luck | |
-| Soul | Charisma | |
+| Major Attribute | Minor Attribute | Modifier | Rating (1–3) |
+|---|---|---|---|
+| Body | Strength | | |
+| Body | Dexterity | | |
+| Body | Constitution | | |
+| Mind | Intelligence | | |
+| Mind | Wisdom | | |
+| Mind | Knowledge | | |
+| Soul | Spirit | | |
+| Soul | Luck | | |
+| Soul | Charisma | | |
+
+The modifier is the number you roll with — write it large. The rating is character-creation bookkeeping (see Table II.2–1 for the mapping).
 
 ---
 
@@ -33,7 +35,6 @@
 | Primary Facet | |
 | Facet Level | |
 | Rank Advances Toward Next Level | |
-| Career Advances | |
 
 ---
 
@@ -101,9 +102,9 @@ Leave blank if your character has no magic. Consult the Appendix: Magic Domain C
 
 | Field | Value |
 |---|---|
-| Endurance (current / max) — max is 4 + Constitution modifier + Endurance skill rank | |
+| Endurance Pool (current / max) — max is 4 + Constitution modifier + Endurance skill rank | |
 | Armor Type | |
-| Armor Downgrade Budget Remaining This Scene | |
+| Armor Downgrades This Scene — tick a box each time armor softens a Condition (light armor: the first 2 boxes; heavy: all 4); boxes refresh when the scene ends | ☐ ☐ ☐ ☐ |
 | Active Conditions | |
 | Sparks | |
 

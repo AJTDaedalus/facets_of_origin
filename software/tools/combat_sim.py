@@ -97,13 +97,22 @@ DIFFICULTY_MOD = {"Easy": 1, "Standard": 0, "Hard": -1, "Very Hard": -2}
 
 @dataclass
 class SimResult:
-    """Result of a single combat simulation run."""
+    """Result of a single combat simulation run.
+
+    `uncontested_exchanges` counts exchanges in which no PC took an
+    offensive action (K-2/D5, read from `combat.exchange_uncontested` —
+    never re-derived here). `objective_lost` is True when an optional
+    objective clock (see `run_combat`) filled on uncontested exchanges
+    and ended the encounter against the party.
+    """
     party_wins: bool
     exchanges: int
     sparks_spent: int
     pcs_broken: list[str]
     endurance_remaining: dict[str, int]
     enemies_remaining: int
+    uncontested_exchanges: int = 0
+    objective_lost: bool = False
 
 
 @dataclass
@@ -162,14 +171,20 @@ class EnemyState:
     `Enemy.init_combat`). There is no enemy-side Broken — Resolve reaching 0
     is defeat, tracked via `is_removed` like a Mook.
 
+    `open` is the K-6/D4 Open tag: set at the attacker's option on a
+    full-success Strike (`combat.can_apply_open`), Easy to Strike for
+    everyone while it holds, cleared only by this enemy visibly spending
+    its action (`combat.open_clear_mode`).
+
     `phases` holds this enemy's authored `resolve_threshold`/`description`
     pairs straight from its `.fof` (purely narrative per the engine's
-    `PhaseDef`). `special_attack_mod`/`special_ignores_tier1` are NOT a
+    `PhaseDef`). `special_attack_mod`/`special_no_clear_open` are NOT a
     generic engine mechanic — they model an individual boss's authored
-    "Special" stat-block text (e.g. Archive Guardian's Reduced Mode) so the
-    simulator's numbers reflect that specific published enemy; a Named NPC
-    or a boss without such text leaves them at their defaults and phase
-    changes stay purely informational (`phase_index`).
+    "Special" stat-block text (e.g. Archive Guardian's Reduced Mode:
+    attack drop, and it stops spending actions to clear Open) so the
+    simulator's numbers reflect that specific published enemy; a Named
+    NPC or a boss without such text leaves them at their defaults and
+    phase changes stay purely informational (`phase_index`).
     """
     name: str
     instance_id: str
@@ -177,15 +192,15 @@ class EnemyState:
     resolve: int
     resolve_current: int
     attack_modifier: int
-    defense_modifier: int
     armor: str
     posture: str = "measured"
     conditions: list[str] = field(default_factory=list)
     is_removed: bool = False
+    open: bool = False
     phases: list[dict] = field(default_factory=list)
     phase_index: Optional[int] = None
     special_attack_mod: Optional[int] = None
-    special_ignores_tier1: bool = False
+    special_no_clear_open: bool = False
 
     @property
     def is_out(self) -> bool:
@@ -293,14 +308,12 @@ def choose_pc_target(pc: PCState, enemies: list[EnemyState], ruleset) -> Optiona
     if mooks:
         return mooks[0]
 
-    # Named/Boss: prioritize those with T2 conditions (close to Broken).
-    # Tier read from combat.conditions (yaml), not a hardcoded id set.
-    with_t2 = [
-        e for e in active
-        if any(combat_module.condition_tier(c, ruleset) == 2 for c in e.conditions)
-    ]
-    if with_t2:
-        return with_t2[0]
+    # Named/Boss: prioritize an Open target (Easy to Strike for everyone,
+    # K-6/D4) — press the advantage before the enemy spends its action
+    # recovering.
+    open_targets = [e for e in active if e.open]
+    if open_targets:
+        return open_targets[0]
 
     # Default: first active enemy
     return active[0]
@@ -346,7 +359,7 @@ def should_spend_spark(pc: PCState, target: EnemyState, ruleset, policy: str = "
             return 1
         if pc.endurance_current <= 2:
             return 1
-        if any(combat_module.condition_tier(c, ruleset) == 2 for c in target.conditions):
+        if target.open:
             return 1
         if pc.sparks >= 2:
             return 1
@@ -359,9 +372,10 @@ def should_spend_spark(pc: PCState, target: EnemyState, ruleset, policy: str = "
     # Desperation: low Endurance
     if pc.endurance_current <= 2:
         return 1
-    # Finishing blow: target has T2 condition (close to Broken). Tier read
-    # from combat.conditions (yaml), not a hardcoded id set.
-    if any(combat_module.condition_tier(c, ruleset) == 2 for c in target.conditions):
+    # Finishing blow: target is Open (Easy to Strike — press it home).
+    # Pre-Open this branch keyed on a Tier 2 rider Condition; Open is the
+    # same "target is exposed" signal under K-6/D4.
+    if target.open:
         return 1
     return 0
 
@@ -417,8 +431,8 @@ def _choose_condition(target_conditions: list[str], ruleset) -> str:
     Broken), else its second Tier 2 id if that's already present, else
     default to the first. This is AI policy (the PHB leaves the choice to
     the attacker), not a rule — it stays here, not in `app.game.combat`.
-    PC-only since D1 (A4) — see `_choose_rider` for the enemy-side
-    equivalent, which never escalates to Broken.
+    PC-only since D1 (A4); since K-6/D4 enemies take no Strike Conditions
+    at all — a full success may leave them Open instead.
     """
     tier2_ids = [c.id for c in ruleset.combat.conditions.tier2]
     for candidate in tier2_ids:
@@ -427,26 +441,35 @@ def _choose_condition(target_conditions: list[str], ruleset) -> str:
     return tier2_ids[0]
 
 
-def _choose_rider(target: EnemyState, ruleset) -> Optional[str]:
-    """AI policy for the Tier 1/2 Condition a full-success Strike may
-    impose on an enemy as a rider (D1, DESIGN §4.1). Always prefers a
-    Tier 2 id the target doesn't already carry — deliberately the most
-    aggressive policy available, so G1 (DESIGN §5) measures the worst-case
-    rider→Easy snowball rather than an averaged one. Falls back to a Tier 1
-    rider only once both Tier 2 ids are already present, at which point a
-    boss whose authored Special text grants Tier 1 immunity post-phase
-    (Archive Guardian's Reduced Mode) gets no rider at all — riders must
-    keep their normal table effect (Brain, EF1), and a Tier 1 rider with no
-    effect is not that.
+def _should_clear_open(enemy: EnemyState) -> bool:
+    """AI policy for the MM's side of K-6/D4: does an Open enemy spend its
+    action (visibly) to clear the tag? A **Boss** does — it has the Resolve
+    pool to make the tempo trade worthwhile, and the recover-its-guard beat
+    is exactly the anti-snowball move D4 hands the MM. A **Named** enemy
+    fights on: with a 3-4 Resolve pool it is one or two Strikes from
+    defeat either way, and its remaining value is its attacks — forfeiting
+    one for certain to shave one incoming Easy tag is a losing trade.
+    Policy, not a rule: the *only* legal clear mechanism is
+    `combat.open_clear_mode`'s enemy-action spend, checked by the caller.
+
+    `special_no_clear_open` models an authored Special (Archive Guardian's
+    Reduced Mode: it stops registering harm) — after its phase fires, the
+    boss never spends the action, whatever the general policy says.
     """
-    tier2_ids = [c.id for c in ruleset.combat.conditions.tier2]
-    for candidate in tier2_ids:
-        if candidate not in target.conditions:
-            return candidate
-    if target.special_ignores_tier1 and target.phase_index is not None:
-        return None
-    tier1_ids = [c.id for c in ruleset.combat.conditions.tier1]
-    return tier1_ids[0]
+    if enemy.special_no_clear_open and enemy.phase_index is not None:
+        return False
+    return enemy.tier == "boss"
+
+
+def _should_leave_open(target: EnemyState) -> bool:
+    """AI policy for the attacker's K-6/D4 option: a full-success Strike
+    may leave the enemy Open. The simulator always takes it when the tag
+    isn't already up — deliberately the most aggressive policy available
+    (mirroring the retired rider policy's worst-case stance), so the sim
+    measures the strongest Open→Easy pressure the rule permits. Mooks are
+    never Open in practice: the 10+ that would open one removes it.
+    """
+    return not target.open
 
 
 def _pc_strike(
@@ -460,9 +483,9 @@ def _pc_strike(
 
     Mook: any success removes it (an armored Mook needs a full success).
     Named/Boss: enemies have no reaction (A14 F5) — Resolve depletes by the
-    Strike's outcome (D1) and a full success may additionally impose a
-    Tier 1/2 Condition as a rider. Riders never escalate to Broken, since
-    Resolve is what defeats an enemy now.
+    Strike's outcome (D1) and a full success may additionally leave the
+    target Open (K-6/D4, attacker's option). Open never defeats an enemy —
+    Resolve is what defeats it.
 
     `spark_policy` (WD10) is forwarded to `should_spend_spark` unchanged;
     default `"conservative"` reproduces every recorded corpus bit-identical.
@@ -486,8 +509,8 @@ def _pc_strike(
     extra_dice = sparks + (ruleset.combat.press.extra_dice if press else 0)
     modifier = pc.strength_mod + pc.combat_mod
 
-    # A Tier 2 rider from a prior Strike makes this one Easy (D1).
-    difficulty = combat_module.target_strike_difficulty("Standard", target.conditions, ruleset)
+    # An Open target (a prior 10+'s option) makes this Strike Easy (K-6/D4).
+    difficulty = combat_module.target_strike_difficulty("Standard", target.open, ruleset)
 
     strike = combat_module.resolve_strike(
         modifier, pc.posture, pc.conditions, ruleset,
@@ -537,19 +560,13 @@ def _pc_strike(
             print(f"    → {target.instance_id} defeated")
         return
 
-    # A full success may additionally impose a rider Condition
-    # (D1: "on a full success only") — the eligible outcome is read from
-    # combat.enemy_durability.rider_on, not hardcoded.
-    if combat_module.can_apply_rider(effective_outcome, ruleset):
-        condition = _choose_rider(target, ruleset)
-        if condition is not None:
-            tier2_ids = {c.id for c in ruleset.combat.conditions.tier2}
-            tier = 2 if condition in tier2_ids else 1
-            combat_module.apply_condition(
-                target.conditions, condition, tier, ruleset, is_rider=True,
-            )
-            if verbose:
-                print(f"    → {target.instance_id} takes {condition} (rider, T{tier})")
+    # A full success may additionally leave the target Open (K-6/D4:
+    # attacker's option, "on a full success only") — the eligible outcome
+    # is read from combat.enemy_durability.open_on, not hardcoded.
+    if combat_module.can_apply_open(effective_outcome, ruleset) and _should_leave_open(target):
+        target.open = True
+        if verbose:
+            print(f"    → {target.instance_id} is left Open (Easy to Strike)")
 
 
 # ---------------------------------------------------------------------------
@@ -666,6 +683,7 @@ def run_combat(
     enemies: list[EnemyState],
     verbose: bool = False,
     spark_policy: str = "conservative",
+    objective_clock: Optional[int] = None,
 ) -> SimResult:
     """Run a single combat encounter to completion.
 
@@ -674,19 +692,34 @@ def run_combat(
     `spark_policy` (WD10) is forwarded to every PC Strike's
     `should_spend_spark` call; default `"conservative"` reproduces every
     recorded corpus bit-identical.
+
+    `objective_clock` (K-2/D5 hook, T3.11): the number of segments on the
+    encounter's stake — the clock MM1 says every Mook-only encounter must
+    carry. Each **uncontested exchange** (no PC offensive action — the
+    rule is read from `combat.exchange_uncontested`, never re-derived
+    here) advances it by one segment, modeling the MM's free advance;
+    when it fills, the situation resolves against the party
+    (`objective_lost`, counted as a loss). `None` (the default) runs the
+    encounter without a stake, reproducing every recorded corpus
+    bit-identical.
     """
     ruleset = _ruleset()
     for pc in pcs:
         pc.armor_downgrades_remaining = combat_module.armor_budget(pc.armor, ruleset)
+
+    uncontested_count = 0
+    clock_progress = 0
 
     for exchange in range(1, MAX_EXCHANGES + 1):
         active_pcs = [p for p in pcs if not p.is_broken]
         active_enemies = [e for e in enemies if not e.is_out]
 
         if not active_enemies:
-            return _build_result(True, exchange - 1, pcs, enemies)
+            return _build_result(True, exchange - 1, pcs, enemies,
+                                 uncontested=uncontested_count)
         if not active_pcs:
-            return _build_result(False, exchange - 1, pcs, enemies)
+            return _build_result(False, exchange - 1, pcs, enemies,
+                                 uncontested=uncontested_count)
 
         # K1 (BRIEF D8): reset the per-exchange reaction count.
         for pc in active_pcs:
@@ -713,6 +746,7 @@ def run_combat(
             print(f"  Postures — PCs: {postures}, Enemies: {e_postures}")
 
         # 2. PC actions
+        offensive_actions: list[bool] = []
         for pc in active_pcs:
             if pc.posture == "withdrawn":
                 if verbose:
@@ -722,19 +756,34 @@ def run_combat(
             if target is None:
                 continue
             _pc_strike(pc, target, ruleset, verbose, spark_policy)
+            offensive_actions.append(True)
             # Refresh active enemies (a Mook may have been removed)
             active_enemies = [e for e in enemies if not e.is_out]
 
         # Check if all enemies defeated after PC actions
         active_enemies = [e for e in enemies if not e.is_out]
         if not active_enemies:
-            return _build_result(True, exchange, pcs, enemies)
+            return _build_result(True, exchange, pcs, enemies,
+                                 uncontested=uncontested_count)
 
         # 3. Enemy actions
         for enemy in active_enemies:
             active_pcs_now = [p for p in pcs if not p.is_broken]
             if not active_pcs_now:
                 break
+            # K-6/D4: an Open enemy clears the tag ONLY by visibly spending
+            # its action (combat.open_clear_mode) — the MM's anti-snowball
+            # move. AI policy here (see _should_clear_open): a Boss spends
+            # the action to recover; a Named fights on while Open.
+            if (
+                enemy.open
+                and combat_module.open_clear_mode(ruleset) == "enemy_action"
+                and _should_clear_open(enemy)
+            ):
+                enemy.open = False
+                if verbose:
+                    print(f"  {enemy.instance_id} spends its action recovering — no longer Open")
+                continue
             target = choose_enemy_target(enemy, active_pcs_now)
             if target is None:
                 continue
@@ -743,7 +792,23 @@ def run_combat(
         # Check if all PCs broken after enemy actions
         active_pcs = [p for p in pcs if not p.is_broken]
         if not active_pcs:
-            return _build_result(False, exchange, pcs, enemies)
+            return _build_result(False, exchange, pcs, enemies,
+                                 uncontested=uncontested_count)
+
+        # K-2/D5: an exchange no PC contested lets the situation advance
+        # for free — the rule itself lives in combat.exchange_uncontested.
+        if combat_module.exchange_uncontested(offensive_actions):
+            uncontested_count += 1
+            if objective_clock is not None:
+                clock_progress += 1
+                if verbose:
+                    print(f"  Uncontested exchange — the situation advances "
+                          f"({clock_progress}/{objective_clock})")
+                if clock_progress >= objective_clock:
+                    return _build_result(
+                        False, exchange, pcs, enemies,
+                        uncontested=uncontested_count, objective_lost=True,
+                    )
 
         # 4. End-of-exchange cleanup
         for pc in pcs:
@@ -751,9 +816,9 @@ def run_combat(
                 continue
             combat_module.end_exchange(pc.conditions, ruleset)
             if pc.posture == "withdrawn":
-                pc.endurance_current = min(
-                    pc.endurance_max,
-                    pc.endurance_current + combat_module.withdrawn_recovery_amount(ruleset),
+                # Up to the pool (D5) — the clamp is combat.py's rule.
+                pc.endurance_current = combat_module.apply_withdrawn_recovery(
+                    pc.endurance_current, pc.endurance_max, ruleset,
                 )
         for enemy in enemies:
             if not enemy.is_out:
@@ -762,13 +827,13 @@ def run_combat(
                     resolve_max = enemy.resolve + combat_module.enemy_armor_resolve_bonus(
                         enemy.armor, ruleset,
                     )
-                    enemy.resolve_current = min(
-                        resolve_max,
-                        enemy.resolve_current + combat_module.withdrawn_recovery_amount(ruleset),
+                    enemy.resolve_current = combat_module.apply_withdrawn_recovery(
+                        enemy.resolve_current, resolve_max, ruleset,
                     )
 
     # Timeout: draw (counted as loss)
-    return _build_result(False, MAX_EXCHANGES, pcs, enemies)
+    return _build_result(False, MAX_EXCHANGES, pcs, enemies,
+                         uncontested=uncontested_count)
 
 
 def _build_result(
@@ -776,6 +841,8 @@ def _build_result(
     exchanges: int,
     pcs: list[PCState],
     enemies: list[EnemyState],
+    uncontested: int = 0,
+    objective_lost: bool = False,
 ) -> SimResult:
     return SimResult(
         party_wins=party_wins,
@@ -784,6 +851,8 @@ def _build_result(
         pcs_broken=[p.name for p in pcs if p.is_broken],
         endurance_remaining={p.name: p.endurance_current for p in pcs},
         enemies_remaining=sum(1 for e in enemies if not e.is_out),
+        uncontested_exchanges=uncontested,
+        objective_lost=objective_lost,
     )
 
 
@@ -799,6 +868,7 @@ def run_simulation(
     verbose: bool = False,
     seed: Optional[int] = None,
     spark_policy: str = "conservative",
+    objective_clock: Optional[int] = None,
 ) -> AggregateResult:
     """Run N iterations of a combat encounter and aggregate results.
 
@@ -811,6 +881,8 @@ def run_simulation(
         seed: Random seed for reproducibility.
         spark_policy: (WD10) `"conservative"` (default, today's exact
             behaviour) or `"player_like"` — see `should_spend_spark`.
+        objective_clock: (K-2/D5, T3.11) segments on the encounter's
+            stake — see `run_combat`. `None` reproduces recorded corpora.
 
     Returns:
         AggregateResult with statistics.
@@ -829,7 +901,9 @@ def run_simulation(
                 e = make_enemy(edef, j + 1 if count > 1 else 0)
                 enemies.append(e)
 
-        result = run_combat(pcs, enemies, verbose=(verbose and i == 0), spark_policy=spark_policy)
+        result = run_combat(pcs, enemies, verbose=(verbose and i == 0),
+                            spark_policy=spark_policy,
+                            objective_clock=objective_clock)
         results.append(result)
 
     return _aggregate(results, label, iterations)
@@ -1046,7 +1120,6 @@ def chicken_def() -> dict:
         tier="mook",
         resolve=0,
         attack_modifier=-1,
-        defense_modifier=-1,
         armor="none",
     )
 
@@ -1059,7 +1132,6 @@ def harbor_thug_def() -> dict:
         tier="mook",
         resolve=0,
         attack_modifier=0,
-        defense_modifier=0,
         armor="none",
     )
 
@@ -1073,13 +1145,12 @@ def city_watch_sergeant_def() -> dict:
         tier="named",
         resolve=3,
         attack_modifier=2,
-        defense_modifier=2,
         armor="light",
     )
 
 
 def veteran_soldier_def() -> dict:
-    """Veteran Soldier: Named, TR 10, light armor. Matches
+    """Veteran Soldier: Named, TR 11 (Telegraphed Finisher), light armor. Matches
     `enemies/veteran_soldier.fof` exactly (D1 migration)."""
     return dict(
         name="Veteran Soldier",
@@ -1087,7 +1158,6 @@ def veteran_soldier_def() -> dict:
         tier="named",
         resolve=4,
         attack_modifier=3,
-        defense_modifier=3,
         armor="light",
     )
 
@@ -1106,7 +1176,6 @@ def generic_named_def(tr: int = 8) -> dict:
             tier="named",
             resolve=3,           # offense(+2→4) + resolve(3) + armor(light→1) = 8
             attack_modifier=2,
-            defense_modifier=2,
             armor="light",
         )
     elif tr <= 10:
@@ -1116,7 +1185,6 @@ def generic_named_def(tr: int = 8) -> dict:
             tier="named",
             resolve=4,           # offense(+3→5) + resolve(4) + armor(light→1) = 10
             attack_modifier=3,
-            defense_modifier=3,
             armor="light",
         )
     else:
@@ -1126,7 +1194,6 @@ def generic_named_def(tr: int = 8) -> dict:
             tier="named",
             resolve=5,           # offense(+3→5) + resolve(5) + armor(heavy→2) = 12
             attack_modifier=3,
-            defense_modifier=2,
             armor="heavy",
         )
 
@@ -1144,7 +1211,6 @@ def generic_boss_def(tr: int = 12) -> dict:
             tier="boss",
             resolve=5,            # offense(+3→5) + resolve(5) + armor(heavy→2) = 12
             attack_modifier=3,
-            defense_modifier=2,
             armor="heavy",
         )
     else:
@@ -1154,24 +1220,25 @@ def generic_boss_def(tr: int = 12) -> dict:
             tier="boss",
             resolve=7,
             attack_modifier=4,
-            defense_modifier=3,
             armor="heavy",
         )
 
 
 def archive_guardian_def() -> dict:
-    """Archive Guardian: Boss, TR 17, heavy armor. Matches
+    """Archive Guardian: Boss, TR 16, heavy armor. Matches
     `enemies/archive_guardian.fof` exactly (D1 migration corrected the
     published TR from 16 to 14 — the old `special` bonus was double-
     counted at authoring time, DESIGN §4.1; A8/G1 retuned base Resolve
     5 -> 8 to clear the median-3-exchange floor under the worst-case
-    rider->Easy snowball, per DESIGN §5-bis — TR 14 -> 17).
+    Easy-to-Strike snowball, per DESIGN §5-bis — TR 14 -> 17; T3.4
+    retired the tier1_immunity technique with the Open merge — TR 16).
 
     `phases` is the enemy's authored, purely-narrative `resolve_threshold`
     trigger (matches the .fof's `phases:` block). `special_attack_mod`/
-    `special_ignores_tier1` model its authored "Special" text (Reduced
-    Mode: attack_modifier drops to +1, ignores Tier 1 Conditions entirely)
-    — boss-specific flavor, not a generic engine mechanic.
+    `special_no_clear_open` model its authored "Special" text (Reduced
+    Mode: attack_modifier drops to +1, its blows land as Tier 1, and it
+    stops spending actions to clear Open) — boss-specific flavor, not a
+    generic engine mechanic.
     """
     return dict(
         name="Archive Guardian",
@@ -1179,11 +1246,10 @@ def archive_guardian_def() -> dict:
         tier="boss",
         resolve=8,
         attack_modifier=3,
-        defense_modifier=1,
         armor="heavy",
         phases=[{"resolve_threshold": 2, "description": "Reduced Mode"}],
         special_attack_mod=1,
-        special_ignores_tier1=True,
+        special_no_clear_open=True,
     )
 
 
@@ -1344,7 +1410,7 @@ def _g3_named_def() -> dict:
     """
     return dict(
         name="G3 Foe", instance_id="g3_foe", tier="named",
-        resolve=2, attack_modifier=0, defense_modifier=0, armor="none",
+        resolve=2, attack_modifier=0, armor="none",
     )
 
 
@@ -1462,7 +1528,7 @@ def _g3_pc_strike(pc: PCState, target: EnemyState, ruleset) -> None:
         return
 
     modifier = pc.strength_mod + pc.combat_mod
-    difficulty = combat_module.target_strike_difficulty("Standard", target.conditions, ruleset)
+    difficulty = combat_module.target_strike_difficulty("Standard", target.open, ruleset)
     strike = combat_module.resolve_strike(
         modifier, pc.posture, pc.conditions, ruleset,
         combat_module.StrikeOptions(difficulty=difficulty),
@@ -1483,12 +1549,8 @@ def _g3_pc_strike(pc: PCState, target: EnemyState, ruleset) -> None:
         target.is_removed = True
         return
 
-    if combat_module.can_apply_rider(effective_outcome, ruleset):
-        condition = _choose_rider(target, ruleset)
-        if condition is not None:
-            tier2_ids = {c.id for c in ruleset.combat.conditions.tier2}
-            tier = 2 if condition in tier2_ids else 1
-            combat_module.apply_condition(target.conditions, condition, tier, ruleset, is_rider=True)
+    if combat_module.can_apply_open(effective_outcome, ruleset) and _should_leave_open(target):
+        target.open = True
 
 
 G3_EXCHANGES = 2  # BRIEF D8 / DESIGN §5 G3: bounded acute-burst window — see run_g3_fight's docstring

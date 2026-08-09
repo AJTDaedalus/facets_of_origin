@@ -12,7 +12,6 @@ enemy:
   tier: mook
   resolve: 0
   attack_modifier: 1
-  defense_modifier: 1
   armor: light
   techniques: []
   special: null

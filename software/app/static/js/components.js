@@ -35,8 +35,8 @@ function renderCharacterSheetReadOnly(char, ruleset, containerId) {
       html += `
         <div class="attr-block" style="cursor:default;">
           <div class="attr-name">${minor.name}</div>
-          <div class="attr-rating">${rating}</div>
           <div class="attr-modifier">${modStr}</div>
+          <div class="attr-rating">rating ${rating}</div>
           <div class="attr-label">${ratingDef ? ratingDef.label : ''}</div>
         </div>`;
     });
@@ -132,14 +132,92 @@ function enemyResolveDisplay(enemy) {
   return { current: current, max: max };
 }
 
+/**
+ * T6.4 (K-10/D12): Table III.3-9 shift for an enemy stance, read from the
+ * ruleset (`combat.enemy_attacks.posture_reaction_shift`) — display never
+ * carries its own copy of the table.
+ */
+function enemyPostureShift(posture) {
+  const ea = state.ruleset && state.ruleset.combat && state.ruleset.combat.enemy_attacks;
+  const shifts = (ea && ea.posture_reaction_shift) || {};
+  return shifts[posture] || 'none';
+}
+
+/**
+ * How a stance's reaction shift reads at the table (Table III.3-9). One
+ * wording, used by both surfaces that describe it — the tracker panel and the
+ * system-chat beat drifted to two phrasings of the same effect.
+ */
+function enemyPostureShiftLabel(shift) {
+  if (shift === 'harder') return 'reactions vs its attacks one step harder';
+  if (shift === 'easier') return 'reactions vs its attacks one step easier';
+  return 'reactions vs its attacks unadjusted';
+}
+
+function enemyPostureOptions() {
+  const ea = state.ruleset && state.ruleset.combat && state.ruleset.combat.enemy_attacks;
+  return Object.keys((ea && ea.posture_reaction_shift) || {});
+}
+
+/**
+ * Posture panel for a Named/Boss tracker entry (T6.4, K-10). The MM states
+ * the stance openly (III.3 §Postures, T3.8/D12), so the stance and the
+ * reaction-difficulty label it implies are visible to everyone; the stance
+ * select and the conduct triggers are MM-side.
+ */
+function renderEnemyPosturePanel(key, enemy, mmControls) {
+  if (enemy.tier === 'mook') return '';
+  const posture = enemy.posture || 'measured';
+  const shift = enemyPostureShift(posture);
+  // Table III.3-9: Aggressive - reactions one step harder; Measured - no
+  // adjustment; Defensive - reactions one step easier.
+  const reactLabel = enemyPostureShiftLabel(shift);
+  // Strike difficulty hint (III.3 §Strike): Standard by default; Open is
+  // Easy for everyone; a Defensive stance may push the MM's call to Hard.
+  const strikeHint = enemy.open
+    ? 'Easy to Strike (Open)'
+    : posture === 'defensive'
+      ? 'Strike: Standard, consider Hard (Defensive)'
+      : 'Strike: Standard by default';
+
+  const stanceControl = mmControls
+    ? '<select class="enemy-posture-select" title="The MM states this stance openly (III.3)"'
+      + ' onchange="enemySetPosture(\'' + escapeHtml(key) + '\', this.value)">'
+      + enemyPostureOptions().map(function (p) {
+          return '<option value="' + escapeHtml(p) + '"' + (p === posture ? ' selected' : '') + '>'
+            + escapeHtml(p) + '</option>';
+        }).join('')
+      + '</select>'
+    : '<span class="posture-badge posture-' + escapeHtml(posture) + '">' + escapeHtml(posture) + '</span>';
+
+  // Conduct triggers (T3.8): rule-driven stance changes the MM authored on
+  // the stat block — shown beside the stance so the MM plays them.
+  const triggers = mmControls && enemy.triggers && enemy.triggers.length
+    ? '<div class="enemy-tactics"><strong>Triggers:</strong> '
+      + enemy.triggers.map(function (t) { return escapeHtml(t); }).join(' · ') + '</div>'
+    : '';
+
+  return '<div class="enemy-posture-panel" style="margin-top:4px;font-size:11px;">'
+    + '<span style="color:var(--text-dim);">Stance:</span> ' + stanceControl
+    + ' <span style="color:var(--text-dim);">— ' + reactLabel + ' · ' + strikeHint + '</span>'
+    + '</div>'
+    + triggers;
+}
+
 function renderEnemyCard(key, enemy, opts) {
   opts = opts || {};
   const conditions = enemy.conditions || [];
   const res = enemyResolveDisplay(enemy);
   const hasPhases = opts.showPhases && enemy.phases && enemy.phases.length > 0;
 
-  // The MM can lift a Condition back off; players just read it. Previously a
-  // Condition added by mistake could never be removed from the tracker.
+  // K-6/D4: the one mark a Strike can put on an enemy is the Open tag —
+  // Easy to Strike for everyone until the enemy visibly spends its action.
+  const openBadge = enemy.open
+    ? '<span class="condition-badge condition-tier2" title="Easy to Strike for everyone until it spends its action recovering">OPEN — Easy to Strike</span>'
+    : '';
+
+  // Legacy Condition badges: enemies no longer take Strike Conditions, but
+  // the MM can still lift a stale badge off a pre-Open tracker entry.
   const condHtml = conditions.length
     ? conditions.map(function (c) {
         const label = escapeHtml(String(c).replace(/_/g, ' '));
@@ -149,7 +227,7 @@ function renderEnemyCard(key, enemy, opts) {
             + label + ' ×</button>'
           : '<span class="condition-badge condition-tier1">' + label + '</span>';
       }).join(' ')
-    : '<span style="color:var(--text-dim);font-size:11px;">none</span>';
+    : '';
 
   let resolveBlock;
   if (res) {
@@ -195,10 +273,19 @@ function renderEnemyCard(key, enemy, opts) {
           + ' onclick="enemyAdjustResolve(\'' + escapeHtml(key) + '\', 1)">+1</button>'
         : '');
 
+    // Open toggle (K-6/D4) replaces the retired "+ Condition" prompt: on a
+    // 10+ the attacker may leave the enemy Open; the enemy clears it only
+    // by visibly spending its action.
+    const openButton = enemy.open
+      ? '<button class="btn btn-secondary btn-sm" title="The enemy visibly spends its action recovering"'
+        + ' onclick="enemyToggleOpen(\'' + escapeHtml(key) + '\')">Clears Open (action)</button>'
+      : '<button class="btn btn-secondary btn-sm" title="Attacker’s option on a 10+ — Easy to Strike for everyone"'
+        + ' onclick="enemyToggleOpen(\'' + escapeHtml(key) + '\')">Leave Open</button>';
+
     controls =
       '<div class="btn-row" style="margin-top:6px;">'
       + resolveButtons
-      + '<button class="btn btn-secondary btn-sm" onclick="enemyAddCondition(\'' + escapeHtml(key) + '\')">+ Condition</button>'
+      + openButton
       + '<button class="btn btn-secondary btn-sm" onclick="removeEnemy(\'' + escapeHtml(key) + '\')">Remove</button>'
       + '</div>';
   }
@@ -217,12 +304,37 @@ function renderEnemyCard(key, enemy, opts) {
     + escapeHtml(enemy.tier) + ' | TR ' + (enemy.tr || '?') + '</span>'
     + '</div>'
     + '<div style="margin-top:4px;">' + resolveBlock + '</div>'
-    + '<div style="font-size:12px;margin-top:4px;">' + condHtml + '</div>'
+    + renderEnemyPosturePanel(key, enemy, opts.mmControls)
+    + '<div style="font-size:12px;margin-top:4px;">'
+    + (openBadge || condHtml
+        ? [openBadge, condHtml].filter(Boolean).join(' ')
+        : '<span style="color:var(--text-dim);font-size:11px;">no marks</span>')
+    + '</div>'
     + phaseNote
     + tactics
     + special
     + controls
     + '</div>';
+}
+
+// ---------------------------------------------------------------------------
+// Difficulty band chip (T6.2, K-3) — MM-only surfaces (encounter builder,
+// enemy tracker). The band itself is computed server-side (compute_band);
+// this only renders what the server said.
+// ---------------------------------------------------------------------------
+function renderBandChip(band) {
+  if (!band || !band.band) return '';
+  const label = band.band.charAt(0).toUpperCase() + band.band.slice(1);
+  const caveat = band.calibrated
+    ? ''
+    : ' <span style="color:var(--text-dim);font-size:10px;" title="'
+      + escapeHtml(band.note || '') + '">un-simulated (PS ' + band.party_strength + ')</span>';
+  const note = band.calibrated && band.note
+    ? ' <span style="color:var(--text-dim);font-size:10px;">' + escapeHtml(band.note) + '</span>'
+    : '';
+  return '<span class="band-chip band-' + escapeHtml(band.band) + '" title="'
+    + escapeHtml(band.note || 'Recipe Table (MM1): actor count of Named/Boss enemies drives difficulty.')
+    + '">' + label + '</span>' + caveat + note;
 }
 
 // ---------------------------------------------------------------------------

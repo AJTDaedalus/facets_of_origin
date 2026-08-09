@@ -6,6 +6,128 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
+#: The published difficulty ladder, in order (MM1 Encounter Recipe Table).
+DIFFICULTY_BANDS = ["skirmish", "standard", "hard", "deadly"]
+
+_VALID_TIERS = {"mook", "named", "boss"}
+
+
+def compute_band(enemy_tiers: list[str], party_strength: int = 3) -> dict:
+    """Compute a roster's difficulty band from the MM1 Encounter Recipe Table.
+
+    Actor count of Named/Boss enemies is the dial, plus one band per Mook once
+    the Named core is in place — the actor-count doctrine simulation validated
+    in ``research/simulation_log.md`` Series 9 (T6.1, K-3). Every branch below
+    is keyed to a published row or its accompanying prose:
+
+    Party Strength 3 (Table MM1–5, measured — seeds 1/2/3 win rates):
+      * Mook-only, any size: **Skirmish** (100%; Mook swarms never dangerous)
+      * 1–2 Named/Boss (any Mooks): **Skirmish** ("trivial at any TR")
+      * 3 Named alone: **Skirmish** (~96% — inside the 85–100% target)
+      * 3 Named + 1/2/3+ Mooks: **Standard / Hard / Deadly** (76% / 47% / 20%)
+      * 4 Named alone: **Hard** ("a coin-flip"); + any Mook: **Deadly**
+      * 5+ Named/Boss: **Deadly**, flagged "near-certain party loss" —
+        below the published Deadly target (15–35%), so the note says so.
+
+    Party Strength ≠ 3 (Table MM1–6 and the "+1 Named per additional PC"
+    rule of thumb): the same ladder shifted by ``party_strength − 3`` actors,
+    with the MM1–6 shape (threshold Named alone = Standard). **The book
+    itself flags these rows as un-simulated extrapolation** ("Do not present
+    them to players as calibrated"), so the result carries
+    ``calibrated: False`` — honesty over silent extrapolation.
+
+    Args:
+        enemy_tiers: One tier string per individual actor
+            (``"mook"``/``"named"``/``"boss"``, case-insensitive).
+        party_strength: Sum of participating characters' career advances
+            (MM1 §Party Strength). Only PS 3 is simulation-calibrated.
+
+    Returns:
+        Dict with ``band`` (str or None for an empty roster), ``band_index``
+        (position in :data:`DIFFICULTY_BANDS`, or None), ``calibrated``
+        (bool — True only at PS 3), ``named_boss_count``, ``mook_count``,
+        ``party_strength``, and ``note`` (honest caveat text, may be empty).
+
+    Raises:
+        ValueError: On an unknown tier string or non-positive party strength.
+    """
+    if party_strength < 1:
+        raise ValueError(f"party_strength must be >= 1, got {party_strength}.")
+
+    tiers = [str(t).lower() for t in enemy_tiers]
+    unknown = sorted(set(tiers) - _VALID_TIERS)
+    if unknown:
+        raise ValueError(
+            f"Unknown enemy tier(s): {', '.join(unknown)}. "
+            f"Valid tiers: mook, named, boss."
+        )
+
+    named_boss = sum(1 for t in tiers if t in ("named", "boss"))
+    mooks = len(tiers) - named_boss
+    calibrated = party_strength == 3
+
+    band: str | None
+    note = ""
+
+    if not tiers:
+        band = None
+        note = "No enemies in the roster yet."
+    elif calibrated:
+        # Table MM1-5 + MM1 "Sizing an Encounter" prose (measured, Series 9).
+        if named_boss == 0:
+            band = "skirmish"
+            note = (
+                "Mook-only — Mook swarms never produce genuine danger "
+                "at any size a table would field (MM1 Scaling Notes)."
+            )
+        elif named_boss <= 2:
+            band = "skirmish"
+            note = (
+                "1-2 Named/Boss actors are trivial for a fresh party "
+                "at any TR (MM1 Scaling Notes)."
+            )
+        elif named_boss == 3:
+            band = DIFFICULTY_BANDS[min(mooks, 3)]
+            if mooks == 0:
+                note = (
+                    "Three Named alone is a near-clean win (~96%) — "
+                    "add a Mook for a Standard fight (MM1)."
+                )
+        elif named_boss == 4:
+            band = "hard" if mooks == 0 else "deadly"
+        else:
+            band = "deadly"
+            note = (
+                "Beyond the published Deadly window: five or more "
+                "Named/Boss actors is a near-certain party loss "
+                "(MM1 Scaling Notes)."
+            )
+    else:
+        # Table MM1-6 shape, shifted by the "+1 Named per additional PC" rule
+        # of thumb. Un-simulated — MM1's own caveat is the precedent.
+        threshold = max(1, 3 + (party_strength - 3))
+        if named_boss < threshold:
+            band = "skirmish"
+        elif named_boss == threshold:
+            band = DIFFICULTY_BANDS[min(1 + mooks, 3)]
+        else:
+            band = "deadly"
+        note = (
+            f"Party Strength {party_strength} is un-simulated — extrapolated "
+            "from the PS-3 findings (MM1, Table MM1-6 caveat). Treat as a "
+            "starting guess, not a validated recipe."
+        )
+
+    return {
+        "band": band,
+        "band_index": DIFFICULTY_BANDS.index(band) if band else None,
+        "calibrated": calibrated if band else False,
+        "named_boss_count": named_boss,
+        "mook_count": mooks,
+        "party_strength": party_strength,
+        "note": note,
+    }
+
 
 class EncounterEnemy(BaseModel):
     """An enemy entry in an encounter definition."""
@@ -174,6 +296,26 @@ class Encounter(BaseModel):
             for entry in self.enemies
         )
         return raw_tr * self.action_economy_multiplier(total_count, all_mooks)
+
+    def band(self, enemy_tiers: dict[str, str], party_strength: int) -> dict:
+        """Difficulty band for this encounter's roster (T6.2, K-3).
+
+        Expands each entry by its count and defers to :func:`compute_band`.
+        Entries whose enemy_id is not in *enemy_tiers* (a deleted library
+        enemy — "will no longer resolve") are skipped: the band describes the
+        actors that will actually hit the table.
+
+        Args:
+            enemy_tiers: Dict mapping enemy_id → tier string.
+            party_strength: Sum of participating characters' career advances.
+        """
+        tiers: list[str] = []
+        for entry in self.enemies:
+            tier = enemy_tiers.get(entry.enemy_id)
+            if tier is None:
+                continue
+            tiers.extend([tier] * entry.count)
+        return compute_band(tiers, party_strength)
 
     def to_client_dict(self) -> dict:
         """Serialize for sending to clients."""

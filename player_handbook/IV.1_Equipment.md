@@ -14,13 +14,15 @@ Weapons determine which attribute you use for a Strike. Choose the weapon that f
 
 **Table IV.1–1: Weapon Categories**
 
-| Category | Attribute | Examples |
-|---|---|---|
-| **Heavy** | Strength | Greatsword, warhammer, greataxe, maul |
-| **Standard** | Strength or Dexterity (player's choice) | Longsword, mace, spear, staff, hand axe |
-| **Light** | Dexterity | Dagger, short sword, rapier, hand crossbow |
-| **Ranged** | Dexterity | Longbow, crossbow, sling, thrown weapons |
-| **Unarmed** | Strength or Dexterity (player's choice) | Fists, grappling, martial arts, headbutts |
+| Category | Attribute | Examples | Weapon Type (Chapter II.4a) |
+|---|---|---|---|
+| **Heavy** | Strength | Greatsword, warhammer, greataxe, maul | Blades (greatsword, greataxe); blunt (warhammer, maul) |
+| **Standard** | Strength or Dexterity (player's choice) | Longsword, mace, spear, staff, hand axe | Blades (longsword, hand axe); blunt (mace, staff); polearms (spear) |
+| **Light** | Dexterity | Dagger, short sword, rapier, hand crossbow | Blades (dagger, short sword, rapier); hand crossbow: see Ranged |
+| **Ranged** | Dexterity | Longbow, crossbow, sling, thrown weapons | — (no weapon type; Steady Hand eases ranged Strikes — Chapter II.4a) |
+| **Unarmed** | Strength or Dexterity (player's choice) | Fists, grappling, martial arts, headbutts | Unarmed |
+
+The two vocabularies join in the type column: a longsword is a **Standard**-category weapon of the **blades** type. The category names the attribute your Strike uses; the type is what Techniques such as Weapon Mastery key to (Chapter II.4a).
 
 All weapons deal the same mechanical effect: a successful Strike depletes an enemy's Resolve — 2 on a full success, 1 on a partial — or, against another character, applies a Condition of the appropriate tier (Chapter III.3). There are no damage dice, no weapon damage tables, no +1 swords in the base rules. The fiction determines what the hit looks like; the outcome tiers determine the mechanical consequence.
 

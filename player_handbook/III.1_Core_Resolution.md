@@ -70,7 +70,7 @@ Before calling for a roll, the MM declares a **difficulty** — a statement abou
 
 The MM declares difficulty **before** you roll.
 
-A Technique can then move that declared difficulty one step further in your favor — it never replaces the MM's call, only shifts the label the MM already gave you. At most one such step ever applies to a single roll, no matter how many Techniques you hold: a step whose trigger is something the roll already carries (a weapon type, a hazard, a field of study) applies on its own and the roll result names it; a step whose trigger is a judgment call — a hunch, a genuine coincidence — you declare yourself when you roll. Either way the order is fixed: the MM's label first, the one Technique step second, then the four-rung ladder holds the result (Easy cannot go easier; Very Hard cannot go harder).
+From there, adjustments apply in a fixed order. Set the base difficulty from the situation. An **Easy tag** (an Open enemy, a Maneuver) overrides the base downward — it does not stack with itself. Then **at most one step** from all character abilities combined — Technique, Specialty, anything future — may shift the result, whichever single source the player picks. Support's step applies after that. Easy is the floor; Very Hard is the ceiling. Whether a Technique's step applies on its own or on your declaration depends on its trigger — Chapter II.4 (*Reading the Entries — Techniques*) explains both kinds.
 
 Those descriptions are the rule. The table below is the calibration — the same four tiers against tasks you can picture, and against the rank that clears them most of the time. Use it when a difficulty call is taking longer than the roll would.
 
@@ -89,7 +89,7 @@ A benchmark is not a ceiling. If the fiction says a task is harder than the tabl
 
 ## Sparks
 
-A **Spark** is a narrative resource you earn by doing something remarkable — and spend for an edge when the stakes are highest. Each character begins each session with **3 Sparks**.
+A **Spark** is a narrative resource you earn by doing something remarkable — and spend for an edge when the stakes are highest. Sparks do not carry over. You start every session with **3**.
 
 ### Earning Sparks
 
@@ -101,11 +101,13 @@ Sparks are awarded for moments that make the table sit up. They can be awarded a
 
 **Act break nomination.** After a major scene transition, the MM calls for nominations, and each player may nominate one other player for something they did in the scene just past. The MM should almost always confirm — this is social reinforcement, not gatekeeping.
 
-**The Graceful Fail.** This one is yours to claim. On any 6−, narrate how you make the failure worse or richer for the story, and the MM confirms. Not every failure earns a Spark; this is for the failures you make worth having.
+**The Graceful Fail.** This one is yours to claim. On any 6−, narrate how you make the failure worse or richer for the story, and the MM confirms. Not every failure earns a Spark; this is for the failures you make worth having. The bar for the confirm is the same one every award clears: the narration must *add* something — a complication, a truth about the character, a detail the table can use — the way the award in Chapter II.2's vignette goes to a player who turns a scenery detail into the scene's next move. A narration that only restates the failure is a failure, not a Graceful one.
 
 ### Spending Sparks
 
-Before you roll, you may spend one or more Sparks. Each Spark **adds a d6** to your roll; you then **drop an equal number of lowest dice**. The base remains 2d6 — Sparks shift the odds by replacing your worst potential outcomes.
+Before you roll, you may spend one or more Sparks. Each Spark **adds a d6** to your roll; you then **drop an equal number of lowest dice**. The base remains 2d6 — Sparks shift the odds by replacing your worst potential outcomes. This works on any roll, including every magic roll.
+
+In magic only, a Spark can also buy **reach**, in exactly two cases: before your Technique, one Significant-scope attempt; with a Focused domain, one difficulty step off a Major working. Chapter II.3 (*Sparks and Magic*) has both.
 
 > **Example — spending Sparks**
 >
@@ -183,7 +185,7 @@ You get what you wanted, cleanly. The MM should not add hidden costs, surprise c
 
 ### Partial Success (7–9)
 
-You achieved something, but not cleanly. The MM must name the cost *before* the player decides how to proceed. Useful patterns:
+You achieved something, but not cleanly. The MM names the cost *before* narrating the success — the cost is part of the outcome, not an offer to weigh. Useful patterns:
 
 - *Social:* You get the agreement, but the source knows you wanted it badly
 - *Exploration:* You find what you sought, but something finds you in the process

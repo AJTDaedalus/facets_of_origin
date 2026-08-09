@@ -9,7 +9,6 @@ ruleset:
 enemy:
   tier: mook
   attack_modifier: 1
-  defense_modifier: 1
   armor: none
   techniques: []
   special: null

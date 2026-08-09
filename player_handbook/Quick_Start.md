@@ -32,13 +32,17 @@ A studious young mage. Entirely absorbed in books, magical theory, and intellect
 | Luck | 3 | +1 |
 | Charisma | 1 | -1 |
 
-**Primary Facet:** Mind | **Background:** Guild Apprentice (magical — the domain origin takes the place of a secondary skill)
+**Major Attributes:** Body +0 | Mind +0 | Soul +0
+
+**Primary Facet:** Mind | **Background:** Guild Apprentice
 **Skills:** Lore (Practiced, +1) | **Sparks:** 3
-**Magic Domain:** Inscription (Focused, Minor scope only until Facet Technique unlocked)
+**Magic Domain:** Inscription
 **Specialty:** Artificers' Guild technical records — Standard becomes Easy when directly applicable
-**Endurance:** 3 (base 4, Constitution -1)
+**Endurance Pool:** 3 (base 4, Constitution -1)
 
 *When Zahna rolls Knowledge for a lore question: 2d6 +1 (Knowledge) +1 (Lore skill) = 2d6+2*
+
+*When Zahna casts with Inscription: 2d6 +1 (Knowledge) +1 (Lore skill) = 2d6+2*
 
 ---
 
@@ -60,10 +64,12 @@ A strong warrior with a genuine heart. Considers himself a defender of the weak.
 | Luck | 2 | +0 |
 | Charisma | 2 | +0 |
 
+**Major Attributes:** Body +1 | Mind -1 | Soul +0
+
 **Primary Facet:** Body | **Background:** City Watch Veteran
-**Skills:** Combat (Practiced, +1), Endurance (Novice, 1 mark) | **Sparks:** 3
+**Skills:** Combat (Practiced, +1), Endurance (Novice, +0) | **Sparks:** 3
 **Specialty:** City Watch protocols and criminal behavior — Standard becomes Easy when directly applicable
-**Endurance:** 5 (base 4, Constitution +1)
+**Endurance Pool:** 5 (base 4, Constitution +1)
 
 *When Mordai rolls a Strike: 2d6 +1 (Strength) +1 (Combat skill) = 2d6+2*
 
@@ -87,10 +93,12 @@ Profoundly, almost philosophically lazy. Exceptionally nimble. Prefers to accomp
 | Luck | 3 | +1 |
 | Charisma | 2 | +0 |
 
-**Primary Facet:** Body | **Background:** Wandering Disciple (custom — see Chapter II.5)
-**Skills:** Finesse (Practiced, +1), Stealth (Novice, 1 mark) | **Sparks:** 3
+**Major Attributes:** Body +0 | Mind +0 | Soul +0
+
+**Primary Facet:** Body | **Background:** Wandering Disciple
+**Skills:** Finesse (Practiced, +1), Stealth (Novice, +0) | **Sparks:** 3
 **Specialty:** Monastery training and movement arts — Standard becomes Easy when directly applicable
-**Endurance:** 3 (base 4, Constitution -1)
+**Endurance Pool:** 3 (base 4, Constitution -1)
 
 *When Zulnut picks a lock: 2d6 +1 (Dexterity) +1 (Finesse skill) = 2d6+2*
 
@@ -128,11 +136,11 @@ Zulnut rolls 2d6+0 (Wisdom +0) and gets a **6**. Failure.
 
 **MM:** "For Zulnut's player? Absolutely — 'you cannot tell which' is exactly the kind of moment worth recognizing. Spark awarded."
 
-**Zahna:** "I write the counter-sign. Inscription domain, minor scope."
+**Zahna:** "I write the counter-sign. Inscription domain."
 
-**MM:** "Easy — it is your domain and you just identified the notation. Roll Knowledge."
+**MM:** "Easy — it is your domain and you just identified the notation. Roll Knowledge and Lore."
 
-Zahna rolls 2d6+2 at Easy (+1), total modifier +3, and gets a **12**. Full success.
+Zahna rolls 2d6+2 (Knowledge +1, Lore +1) at Easy (+1), total modifier +3, and gets a **12**. Full success.
 
 *The glyph dims. The door swings open.*
 
@@ -148,7 +156,7 @@ Zahna rolls 2d6+2 at Easy (+1), total modifier +3, and gets a **12**. Full succe
 | Sneak past someone | 2d6 + Dexterity + Stealth skill |
 | Know something | 2d6 + Knowledge + Lore skill |
 | Persuade someone | 2d6 + Charisma + Persuade skill |
-| Cast a spell | 2d6 + Spirit or Knowledge (by tradition) |
+| Cast a spell | 2d6 + Spirit + Attune skill, or Knowledge + Lore skill (by tradition) |
 | Resist an effect | 2d6 + Major Attribute (Body/Mind/Soul) |
 | Use a Spark | Add 1d6, drop lowest die |
 
@@ -156,6 +164,10 @@ Zahna rolls 2d6+2 at Easy (+1), total modifier +3, and gets a **12**. Full succe
 
 **Skill Ranks:** Novice (+0), Practiced (+1), Expert (+2), Master (+3)
 
-**Combat Postures:** Aggressive (+1 offense, first reaction of the exchange costs extra) | Measured (baseline) | Defensive (-1 offense, cheap reactions) | Withdrawn (no offense, free reactions, recover 2 Endurance)
+**Combat in five lines:**
 
-**Conditions:** Tier 1 (Winded/Off-Balance/Shaken) clear end of exchange | Tier 2 (Staggered/Cornered) persist until treated | Second Tier 2 of the same type = Broken (out of fight)
+1. Combat runs in **exchanges** — everyone picks their move at once and the whole beat resolves together. No turn order, no waiting.
+2. Each exchange you declare a **Posture** — the stance you are taking for that beat (Aggressive, Measured, Defensive, or Withdrawn).
+3. Attacking is a **Strike** — the same 2d6 roll (see "Hit something," above).
+4. When something attacks you, you may **react** — one reaction per incoming attack, paid for from your Endurance Pool. At 0 you can only take the hit.
+5. Everything else: Chapter III.3 — the same 2d6 roll.

@@ -818,3 +818,38 @@ class TestNonDomainTechniqueChoices:
         tech = ruleset.get_technique("field_of_mastery")
         assert "history" in tech.choices
         assert "arcane theory" in tech.choices
+
+
+class TestTraditionDef:
+    """The tradition block decides which attribute and skill every casting
+    roll uses (II.3, Rolling Magic; T4.1/D7). It was the one rules block still
+    typed `dict[str, Any]`, so a misspelled key validated cleanly and silently
+    rolled the other tradition's attribute and skill at the table.
+    """
+
+    def test_valid_tradition_parses(self):
+        from app.facets.schema import TraditionDef
+        trad = TraditionDef(attribute="spirit", skill="attune")
+        assert (trad.attribute, trad.skill) == ("spirit", "attune")
+
+    def test_misspelled_attribute_key_is_rejected(self):
+        from app.facets.schema import TraditionDef
+        with pytest.raises(ValidationError):
+            TraditionDef(atribute="knowledge", skill="lore")
+
+    def test_missing_skill_is_rejected(self):
+        """The skill is the whole point of D7 — a tradition without one is
+        an attribute-only casting rule, which is the thing D7 retired."""
+        from app.facets.schema import TraditionDef
+        with pytest.raises(ValidationError):
+            TraditionDef(attribute="knowledge")
+
+    def test_magic_def_traditions_are_typed(self):
+        from app.facets.schema import MagicDef, TraditionDef
+        magic = MagicDef(traditions={"scholarly": {"attribute": "knowledge", "skill": "lore"}})
+        assert isinstance(magic.traditions["scholarly"], TraditionDef)
+
+    def test_base_facet_traditions_load_typed(self, ruleset):
+        from app.facets.schema import TraditionDef
+        for key in ("intuitive", "scholarly"):
+            assert isinstance(ruleset.magic.traditions[key], TraditionDef)

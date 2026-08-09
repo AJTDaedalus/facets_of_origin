@@ -43,7 +43,7 @@ character:
   magic:
     domain: inscription
     domain_type: focused
-    tradition: scholarly  # rolls Knowledge
+    tradition: scholarly  # rolls Knowledge; casting adds the Lore rank (II.3)
     background_origin: >
       Trained as an apprentice at the Thornwall Artificers' Guild before the
       Guild dissolved. Developed the Inscription domain through formal guild

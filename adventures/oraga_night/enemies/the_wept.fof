@@ -12,7 +12,6 @@ enemy:
   tier: boss
   resolve: 8
   attack_modifier: 3    # it does not fight; it arrives — strength like a fact
-  defense_modifier: 2
   armor: heavy          # not armor: wrongness. Blades land and matter less than they should
   techniques: [fracture_sorrow, unraveling_presence, shadow_step]
   special: >

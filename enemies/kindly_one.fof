@@ -9,7 +9,6 @@ ruleset:
 enemy:
   tier: named
   attack_modifier: 0
-  defense_modifier: 3
   armor: none
   techniques:
   - fair_offer

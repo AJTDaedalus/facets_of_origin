@@ -36,7 +36,9 @@ class Character(BaseModel):
         primary_facet: The character's chosen Facet ID (e.g. "body", "mind", "soul").
         attributes: Minor attribute ratings keyed by attribute ID. Values are 1, 2, or 3.
         skills: SkillState instances keyed by skill ID.
-        sparks: Current unspent Spark tokens. Starts at the ruleset's base_sparks_per_session.
+        sparks: Current Spark tokens. Sparks do not carry over between sessions:
+            the value starts at the ruleset's base_sparks_per_session and is reset
+            to it on every `session_reset` event.
         session_skill_points_remaining: Points left to spend on skill advancement this session.
         facet_levels: Facet levels earned per Facet, keyed by Facet ID. Cross-Facet
             levels are tracked separately so they can each count toward Major Advancement.
@@ -80,6 +82,10 @@ class Character(BaseModel):
 
     session_skill_points_remaining: int = Field(default=4, ge=0)
     skills_used_this_session: set[str] = Field(default_factory=set)
+    # T4.3/D10: how many of this session's points went to an UNUSED
+    # Primary-Facet skill ("training between sessions"). Capped by
+    # advancement.training_marks_per_session; reset by start_new_session.
+    training_marks_this_session: int = Field(default=0, ge=0)
     facet_levels: dict[str, int] = Field(default_factory=dict)
     rank_advances_by_facet: dict[str, int] = Field(default_factory=dict)
     career_advances: int = Field(default=0, ge=0)
@@ -98,6 +104,10 @@ class Character(BaseModel):
     # Magic (persisted)
     magic_domain: Optional[str] = None
     secondary_magic_domain: Optional[str] = None  # Soul Communion T3 "Second Domain"
+    # T4.2/D9: total_facet_levels at the moment Second Domain was taken. The
+    # one-step penalty lifts at the next Facet level after acquisition; None
+    # (a hand-authored or legacy secondary domain) keeps the penalty standing.
+    second_domain_acquired_at_total_facet_levels: Optional[int] = None
     # Tier 3 "Ascendant Domain" — a prismatic domain held *alongside* the
     # original. Kept apart from secondary_magic_domain because the routes cost
     # differently: Second Domain is one difficulty step harder, while Ascendant
@@ -144,6 +154,17 @@ class Character(BaseModel):
     def rank_advances_this_facet_level(self) -> int:
         """Rank advances banked toward the next primary-Facet level."""
         return self.rank_advances_by_facet.get(self.primary_facet, 0)
+
+    @property
+    def second_domain_penalty_expired(self) -> bool:
+        """T4.2/D9: True once the character has earned a Facet level after
+        acquiring Second Domain — the one-step penalty is an arc, not a
+        permanent tax. Without an acquisition record (legacy/hand-authored
+        characters), the penalty stands."""
+        acquired = self.second_domain_acquired_at_total_facet_levels
+        if acquired is None:
+            return False
+        return self.total_facet_levels > acquired
 
     def validate_against_ruleset(self, ruleset: MergedRuleset) -> list[str]:
         """Return a list of validation errors against the ruleset. Empty list = valid.
@@ -334,6 +355,80 @@ class Character(BaseModel):
             "major_advancement": major,
         }
 
+    def spend_skill_point(self, skill_id: str, ruleset: MergedRuleset) -> dict:
+        """Spend one session skill point on `skill_id` (II.4, Advancing Skills;
+        T4.3/D10). Single source of truth for the spend rules — the WebSocket
+        handler delegates here.
+
+        Rules enforced:
+        - Points go to skills used this session. Exception ("training between
+          sessions"): up to `advancement.training_marks_per_session` of the
+          session's points may go to an UNUSED Primary-Facet skill.
+        - When no used-skills list exists yet (fresh/offline session), every
+          skill is spendable without touching the training allowance.
+        - Primary-Facet marks cost 1 point, cross-Facet marks cost 2.
+
+        Returns:
+            advance_skill's result dict, plus "sp_cost" and "training_mark".
+
+        Raises:
+            ValueError: On an unused cross-Facet skill, an exhausted training
+                allowance, or insufficient points.
+        """
+        sk_def = ruleset.get_skill(skill_id)
+        is_primary = sk_def is not None and sk_def.facet == self.primary_facet
+
+        training_mark = False
+        if self.skills_used_this_session and skill_id not in self.skills_used_this_session:
+            training_cap = (
+                ruleset.advancement.training_marks_per_session
+                if ruleset.advancement else 1
+            )
+            if not is_primary:
+                raise ValueError(
+                    f"Skill '{skill_id}' was not used this session, and the "
+                    "training point covers Primary-Facet skills only. Ask the "
+                    "MM to mark it as used."
+                )
+            if self.training_marks_this_session >= training_cap:
+                raise ValueError(
+                    "Skill was not used this session, and this session's "
+                    "training point is already spent — 1 point per session "
+                    "may train an unused Primary-Facet skill (II.4)."
+                )
+            training_mark = True
+
+        cost_context = "primary_facet" if is_primary else "cross_facet"
+        sp_cost = ruleset.get_skill_point_cost(cost_context)
+        if self.session_skill_points_remaining < sp_cost:
+            raise ValueError(
+                f"Insufficient skill points: need {sp_cost}, "
+                f"have {self.session_skill_points_remaining}."
+            )
+
+        self.session_skill_points_remaining -= sp_cost
+        if training_mark:
+            self.training_marks_this_session += 1
+
+        result = self.advance_skill(skill_id, 1, ruleset)
+        result["sp_cost"] = sp_cost
+        result["training_mark"] = training_mark
+        return result
+
+    def start_new_session(self, ruleset: MergedRuleset) -> None:
+        """Roll the per-session advancement state over (T4.3/D10): up to
+        `advancement.bank_cap` unspent points carry into the new session's
+        allowance — unspent points are banked, never lost — and the
+        used-skills list and training allowance reset."""
+        session_points = (
+            ruleset.advancement.session_skill_points if ruleset.advancement else 4
+        )
+        bank_cap = ruleset.advancement.bank_cap if ruleset.advancement else 2
+        banked = min(max(self.session_skill_points_remaining, 0), bank_cap)
+        self.session_skill_points_remaining = session_points + banked
+        self.skills_used_this_session = set()
+        self.training_marks_this_session = 0
+
     def select_technique(
         self, technique_id: str, ruleset: MergedRuleset, choice: Optional[str] = None
     ) -> tuple[bool, str]:
@@ -413,6 +508,13 @@ class Character(BaseModel):
                 self.ascendant_domain = str(choice)
             elif tech_def.grants_secondary_domain:
                 self.secondary_magic_domain = str(choice)
+                # T4.2/D9: record the acquisition level so the one-step
+                # penalty can lift at the next Facet level — driven by the
+                # Technique's own penalty_expires field, not hardcoded.
+                if getattr(tech_def, "penalty_expires", None) == "next_facet_level":
+                    self.second_domain_acquired_at_total_facet_levels = (
+                        self.total_facet_levels
+                    )
             elif tech_def.magic_granting:
                 # Formalizing the Background's domain re-sets the same value;
                 # anything else is a genuine second domain from the other Facet.
@@ -565,6 +667,7 @@ class Character(BaseModel):
             "skills": non_default_skills,
             "sparks": self.sparks,
             "session_skill_points_remaining": self.session_skill_points_remaining,
+            "training_marks_this_session": self.training_marks_this_session,
             "facet_levels": dict(self.facet_levels),
             "rank_advances_by_facet": dict(self.rank_advances_by_facet),
             # Derived views, written for human readability and older readers.
@@ -585,6 +688,10 @@ class Character(BaseModel):
             char_block["magic_technique_active"] = self.magic_technique_active
         if self.secondary_magic_domain is not None:
             char_block["secondary_magic_domain"] = self.secondary_magic_domain
+            if self.second_domain_acquired_at_total_facet_levels is not None:
+                char_block["second_domain_acquired_at_total_facet_levels"] = (
+                    self.second_domain_acquired_at_total_facet_levels
+                )
         if self.ascendant_domain is not None:
             char_block["ascendant_domain"] = self.ascendant_domain
         if self.cross_facet_domain is not None:
@@ -687,6 +794,7 @@ class Character(BaseModel):
             skills=skills,
             sparks=char_block.get("sparks", 3),
             session_skill_points_remaining=char_block.get("session_skill_points_remaining", 4),
+            training_marks_this_session=char_block.get("training_marks_this_session", 0),
             facet_levels=facet_levels,
             rank_advances_by_facet=rank_advances_by_facet,
             career_advances=char_block.get("career_advances", 0),
@@ -697,6 +805,9 @@ class Character(BaseModel):
             specialty=char_block.get("specialty"),
             magic_domain=char_block.get("magic_domain"),
             secondary_magic_domain=char_block.get("secondary_magic_domain"),
+            second_domain_acquired_at_total_facet_levels=char_block.get(
+                "second_domain_acquired_at_total_facet_levels"
+            ),
             ascendant_domain=char_block.get("ascendant_domain"),
             cross_facet_domain=char_block.get("cross_facet_domain"),
             magic_tradition=char_block.get("magic_tradition"),

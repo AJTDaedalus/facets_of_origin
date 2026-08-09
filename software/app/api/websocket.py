@@ -4,6 +4,7 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import time
 import uuid
 from typing import Any, Optional
 
@@ -14,6 +15,7 @@ from app.auth.tokens import decode_token
 from app.game import combat as combat_module
 from app.game.dice import DiceSpec
 from app.game.engine import (
+    VALID_SPARK_USES,
     RollRequest, resolve_roll, resolve_magic_roll, resolve_saving_throw, roll_result_to_dict,
 )
 from app.game.session import ThreatClock, session_store
@@ -58,6 +60,13 @@ class ConnectionManager:
         except Exception as e:
             logger.warning("Failed to send to websocket: %s", e)
             return False
+
+    async def send_to_identity(self, session_id: str, identity: str, message: dict) -> None:
+        """Send to every connection in *session_id* held by *identity*
+        (e.g. ``"mm"``) — for prompts that are not table broadcasts."""
+        for ws, ident in list(self._connections.get(session_id, [])):
+            if ident == identity:
+                await self.send_to(ws, message)
 
 
 manager = ConnectionManager()
@@ -205,7 +214,7 @@ async def _dispatch(
     elif event_type == "clear_condition" and is_mm:
         await _handle_clear_condition(msg, session, session_id)
     elif event_type == "end_exchange" and is_mm:
-        await _handle_end_exchange(session, session_id)
+        await _handle_end_exchange(websocket, session, session_id)
     elif event_type == "combat_end" and is_mm:
         await _handle_combat_end(session, session_id)
     elif event_type == "support":
@@ -257,13 +266,64 @@ async def _dispatch(
         await _handle_claim_graceful_fail(msg, session, session_id, identity)
     else:
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown event type: {event_type}"})
+        return
+
+    # T6.3 (C-2 app-side): any handled table activity is the heartbeat for
+    # the quiet Spark-flow check — no timers, no background tasks.
+    await _maybe_nudge_spark_flow(session, session_id)
 
 
-def _spend_sparks(character, count: int) -> int:
-    """Spend up to `count` Sparks from character, returning the amount actually spent."""
+# T6.3 (C-2 app-side): how long a player can go without earning OR spending a
+# Spark before the MM gets a quiet prompt. This is a TOOL prompt, not a rule —
+# the books state no timer. The guidance it surfaces is MM5 §Spark Flow ("the
+# Spark economy works when Sparks flow"; "midpoint diagnostic: if a player
+# hasn't spent a Spark by the session's midpoint, design a moment that rewards
+# it") and MM2 §Target Economy. The threshold approximates "an act" of quiet
+# (DESIGN §7) and is free to tune.
+SPARK_FLOW_NUDGE_SECONDS = 25 * 60
+
+
+async def _maybe_nudge_spark_flow(session, session_id: str) -> None:
+    """Prompt the MM — quietly, MM-only — about any player whose Spark flow
+    has stalled for a full stretch (T6.3). One prompt per stretch: the
+    cooldown suppresses repeats until the player's flow resets it.
+    """
+    now = time.monotonic()
+    for player_name in session.characters:
+        flow = session.spark_flow.setdefault(
+            player_name, {"last_flow": now, "last_nudge": None},
+        )
+        if now - flow["last_flow"] < SPARK_FLOW_NUDGE_SECONDS:
+            continue
+        if (
+            flow["last_nudge"] is not None
+            and now - flow["last_nudge"] < SPARK_FLOW_NUDGE_SECONDS
+        ):
+            continue
+        flow["last_nudge"] = now
+        await manager.send_to_identity(session_id, "mm", {
+            "type": "spark_flow_nudge",
+            "player": player_name,
+            "minutes_quiet": int((now - flow["last_flow"]) // 60),
+            "message": (
+                f"{player_name} hasn't earned or spent a Spark in a while. "
+                "MM5, Spark Flow: every 6- is a Graceful Fail opportunity, "
+                "and an unspent Spark at session end is simply gone."
+            ),
+        })
+
+
+def _spend_sparks(character, count: int, session=None) -> int:
+    """Spend up to `count` Sparks from character, returning the amount actually spent.
+
+    Passing *session* records the spend in the Spark-flow tracker (T6.3) —
+    every real spend site does; only rule-level tests omit it.
+    """
     actual = min(count, character.sparks)
     for _ in range(actual):
         character.spend_spark()
+    if actual > 0 and session is not None:
+        session.record_spark_flow(character.player_name)
     return actual
 
 
@@ -291,10 +351,16 @@ def _apply_difficulty_step(
     )
     if applied_id is None:
         return final_label, None
-    tech_def = ruleset.get_technique(applied_id)
+    if applied_id == "specialty":
+        # T2.4/D2: a Specialty step shares the Technique pool; the banner
+        # names it so the table sees which single source moved the label.
+        display_name = "Specialty"
+    else:
+        tech_def = ruleset.get_technique(applied_id)
+        display_name = tech_def.name if tech_def else applied_id
     step_info = {
         "technique_id": applied_id,
-        "technique_name": tech_def.name if tech_def else applied_id,
+        "technique_name": display_name,
         "from": declared_difficulty,
         "to": final_label,
     }
@@ -326,6 +392,7 @@ def _build_roll_request(
             "hazard_type": msg.get("hazard_type"),
             "knowledge_field": msg.get("knowledge_field"),
             "declared_technique_ids": msg.get("declared_technique_ids"),
+            "specialty_declared": bool(msg.get("specialty_declared")),
         },
         ruleset,
     )
@@ -363,7 +430,7 @@ async def _handle_roll(
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown attribute '{attribute_id}'."})
         return
 
-    sparks_to_spend = _spend_sparks(character, sparks_requested)
+    sparks_to_spend = _spend_sparks(character, sparks_requested, session)
     skill_id = msg.get("skill_id")
 
     # B4 Q1 (TD-8/TD-9): hazard_type and knowledge_field are optional strings
@@ -380,6 +447,7 @@ async def _handle_roll(
             "hazard_type": str(hazard_type) if hazard_type is not None else None,
             "knowledge_field": str(knowledge_field) if knowledge_field is not None else None,
             "declared_technique_ids": msg.get("declared_technique_ids"),
+            "specialty_declared": bool(msg.get("specialty_declared")),
         },
         session.ruleset,
     )
@@ -421,6 +489,7 @@ async def _handle_spark_earn(msg: dict, session, session_id: str) -> None:
     character = session.characters.get(player_name)
     if character:
         character.earn_spark()
+        session.record_spark_flow(player_name)  # T6.3: an earn resets the stretch
         await manager.broadcast(session_id, {
             "type": "spark_earned",
             "player": player_name,
@@ -608,6 +677,7 @@ async def _handle_combat_start(msg: dict, session, session_id: str) -> None:
     scene. See `combat.armor_budget`.
     """
     state: dict = {}
+    session.offensive_actions_this_exchange.clear()
     for player_name, character in session.characters.items():
         character.endurance_current = character.endurance_max(session.ruleset)
         character.conditions = []
@@ -748,10 +818,13 @@ async def _handle_strike(
         if character.endurance_current is not None and character.endurance_current >= press_cost:
             character.endurance_current -= press_cost
         else:
-            await manager.send_to(websocket, {"type": "error", "message": "No Endurance to Press."})
+            await manager.send_to(websocket, {"type": "error", "message": "No Endurance Pool points to Press."})
             return
 
-    sparks_to_spend = _spend_sparks(character, sparks_requested)
+    sparks_to_spend = _spend_sparks(character, sparks_requested, session)
+
+    # K-2/D5: a Strike — landed or not — contests the exchange.
+    session.offensive_actions_this_exchange.add(player_name)
 
     # Accept attribute/skill from client; default to strength/combat for backward compat
     attribute_id = str(msg.get("attribute_id", "strength"))
@@ -779,6 +852,7 @@ async def _handle_strike(
             "weapon_category": weapon_category,
             "weapon_type": weapon_type,
             "declared_technique_ids": msg.get("declared_technique_ids"),
+            "specialty_declared": bool(msg.get("specialty_declared")),
         },
         session.ruleset,
     )
@@ -932,6 +1006,7 @@ async def _handle_react(
             {
                 "skill_id": skill_id,
                 "declared_technique_ids": msg.get("declared_technique_ids"),
+                "specialty_declared": bool(msg.get("specialty_declared")),
             },
             session.ruleset,
         )
@@ -1075,8 +1150,11 @@ async def _handle_clear_condition(msg: dict, session, session_id: str) -> None:
     })
 
 
-async def _handle_end_exchange(session, session_id: str) -> None:
-    """MM signals end of exchange: clear Tier 1 conditions, apply Withdrawn recovery."""
+async def _handle_end_exchange(websocket, session, session_id: str) -> None:
+    """MM signals end of exchange: clear Tier 1 conditions, apply Withdrawn
+    recovery (up to the pool, D5), and prompt the MM when the exchange was
+    uncontested (K-2/D5). `websocket` is the MM's own socket — the
+    uncontested prompt goes only there, not to the table."""
     updates: dict = {}
     for player_name, character in session.characters.items():
         if character.endurance_current is None:
@@ -1090,11 +1168,14 @@ async def _handle_end_exchange(session, session_id: str) -> None:
         # III.3:219 — Intercept's once-per-exchange cap resets too.
         character.intercepts_this_exchange = 0
 
-        # Withdrawn endurance recovery (only if not striking, enforced by declare_posture)
+        # Withdrawn endurance recovery, up to the pool — the clamp is a rule
+        # (III.3/D5) and lives in combat.apply_withdrawn_recovery.
         if character.posture == "withdrawn":
-            max_end = character.endurance_max(session.ruleset)
-            recovery_amount = combat_module.withdrawn_recovery_amount(session.ruleset)
-            character.endurance_current = min(character.endurance_current + recovery_amount, max_end)
+            character.endurance_current = combat_module.apply_withdrawn_recovery(
+                character.endurance_current,
+                character.endurance_max(session.ruleset),
+                session.ruleset,
+            )
 
         updates[player_name] = {
             "conditions": list(character.conditions),
@@ -1108,6 +1189,20 @@ async def _handle_end_exchange(session, session_id: str) -> None:
     # a stale toast could commit against a later, different Strike (TODO T12).
     session.pending_final_blows.clear()
     await manager.broadcast(session_id, {"type": "exchange_ended", "characters": updates})
+
+    # K-2/D5: an exchange no PC contested lets the situation advance for
+    # free. The rule reads from combat.exchange_uncontested (its only home);
+    # this handler only relays the prompt to the MM who ended the exchange.
+    if combat_module.exchange_uncontested(session.offensive_actions_this_exchange):
+        await manager.send_to(websocket, {
+            "type": "uncontested_exchange",
+            "message": (
+                "No one took an offensive action this exchange — the situation "
+                "advances for free. Reposition, reinforce, progress a clock, "
+                "or take the objective. No roll."
+            ),
+        })
+    session.offensive_actions_this_exchange.clear()
 
 
 async def _handle_combat_end(session, session_id: str) -> None:
@@ -1147,7 +1242,7 @@ async def _handle_saving_throw(
 
     difficulty = str(msg.get("difficulty", "Standard"))
     sparks_requested = int(msg.get("sparks_spent", 0))
-    sparks_to_spend = _spend_sparks(character, sparks_requested)
+    sparks_to_spend = _spend_sparks(character, sparks_requested, session)
 
     result = resolve_saving_throw(
         major_attribute_id, character, session.ruleset,
@@ -1189,11 +1284,13 @@ async def _handle_cast(
         await manager.send_to(websocket, {"type": "error", "message": f"Invalid scope '{scope}'."})
         return
 
-    # Spend Spark if needed
-    if spark_use in ("improve_roll", "ease_focused_major", "push_scope", "pre_technique_push"):
-        if not character.spend_spark():
-            await manager.send_to(websocket, {"type": "error", "message": "No Sparks remaining."})
-            return
+    # A declared Spark use needs a Spark available — but the Spark is only
+    # spent AFTER the engine accepts the use (T2.2/D8: a refused reach attempt
+    # must not consume the Spark; the old order burned it before rejection).
+    spark_declared = spark_use in VALID_SPARK_USES
+    if spark_declared and character.sparks <= 0:
+        await manager.send_to(websocket, {"type": "error", "message": "No Sparks remaining."})
+        return
 
     try:
         result = resolve_magic_roll(
@@ -1207,6 +1304,15 @@ async def _handle_cast(
     except ValueError as e:
         await manager.send_to(websocket, {"type": "error", "message": str(e)})
         return
+
+    if spark_declared:
+        _spend_sparks(character, 1, session)
+
+    # T4.1/D7: the cast rolled the tradition's skill, so the caster used it —
+    # the same mark every other rolling handler records, and what advancement
+    # reads to decide whether a skill may take a point.
+    if result.request.skill_id:
+        character.skills_used_this_session.add(result.request.skill_id)
 
     result_dict = roll_result_to_dict(result)
     session.record_roll(player_name, result_dict)
@@ -1288,6 +1394,9 @@ async def _handle_maneuver(
         return
 
     target_name = str(msg.get("target", ""))
+
+    # K-2/D5: a Maneuver is an offensive action — it contests the exchange.
+    session.offensive_actions_this_exchange.add(player_name)
 
     request, technique_step = _build_roll_request(character, msg, session.ruleset)
     result = resolve_roll(request, session.ruleset)
@@ -1407,36 +1516,22 @@ async def _handle_spend_skill_point(
         await manager.send_to(websocket, {"type": "error", "message": "Missing skill_id."})
         return
 
-    # Enforce "only skills used this session" rule (PHB II.4)
-    if character.skills_used_this_session and skill_id not in character.skills_used_this_session:
-        await manager.send_to(websocket, {
-            "type": "error",
-            "message": f"Skill '{skill_id}' was not used this session. Ask the MM to mark it as used.",
-        })
+    # All spend rules — used-skills enforcement, the T4.3/D10 training-mark
+    # exception, cost, and budget — live in Character.spend_skill_point.
+    try:
+        result = character.spend_skill_point(skill_id, session.ruleset)
+    except ValueError as e:
+        await manager.send_to(websocket, {"type": "error", "message": str(e)})
         return
-
-    # Determine cost
-    sk_def = session.ruleset.get_skill(skill_id)
-    is_primary = sk_def is not None and sk_def.facet == character.primary_facet
-    cost_context = "primary_facet" if is_primary else "cross_facet"
-    sp_cost = session.ruleset.get_skill_point_cost(cost_context)
-
-    if character.session_skill_points_remaining < sp_cost:
-        await manager.send_to(websocket, {
-            "type": "error",
-            "message": f"Insufficient skill points: need {sp_cost}, have {character.session_skill_points_remaining}.",
-        })
-        return
-
-    character.session_skill_points_remaining -= sp_cost
-    result = character.advance_skill(skill_id, 1, session.ruleset)
 
     session.save_character_to_disk(player_name)
     await manager.broadcast(session_id, {
         "type": "skill_point_spent",
         "player": player_name,
         "skill_id": skill_id,
-        "sp_cost": sp_cost,
+        "sp_cost": result["sp_cost"],
+        "training_mark": result["training_mark"],
+        "training_marks_this_session": character.training_marks_this_session,
         "marks_added": 1,
         "rank_advances": result["rank_advances"],
         "facet_level_advances": result["facet_level_advances"],
@@ -1526,15 +1621,36 @@ async def _handle_session_reset(session, session_id: str) -> None:
     for character in session.characters.values():
         character.techniques_used_this_session = []
         character.sparks = session.ruleset.spark.base_sparks_per_session if session.ruleset.spark else 3
+        # T4.3/D10: unspent skill points bank (cap 2) into the new session's
+        # allowance; used-skills list and training allowance reset.
+        character.start_new_session(session.ruleset)
     # Once-per-session use is being reset, so any offer from the old session must
     # go with it — otherwise a stale confirm burns the fresh session's use.
     session.pending_final_blows.clear()
+    # T6.3: a new session opens a fresh Spark-flow stretch for everyone —
+    # Sparks just reset to 3, so nobody is "quiet" yet.
+    for player_name in session.characters:
+        session.record_spark_flow(player_name)
     await manager.broadcast(session_id, {"type": "session_reset"})
 
 
 # ---------------------------------------------------------------------------
 # Enemy tracker handlers
 # ---------------------------------------------------------------------------
+
+def _band_fields(session, band_before: dict) -> dict:
+    """Difficulty-band payload for tracker broadcasts (T6.2, K-3).
+
+    `band` is the roster's band after the change; `band_crossed` flags a
+    change of band ("one Mook is one difficulty band" — MM1). The data rides
+    the existing broadcasts; clients display it to the MM only.
+    """
+    band = session.active_encounter_band()
+    return {
+        "band": band,
+        "band_crossed": band["band_index"] != band_before["band_index"],
+    }
+
 
 async def _handle_spawn_enemy(msg: dict, session, session_id: str) -> None:
     """MM spawns an enemy into the active combat tracker."""
@@ -1566,11 +1682,11 @@ async def _handle_spawn_enemy(msg: dict, session, session_id: str) -> None:
             tier=enemy_data.get("tier", "mook"),
             resolve=enemy_data.get("resolve", 0),
             attack_modifier=enemy_data.get("attack_modifier", 0),
-            defense_modifier=enemy_data.get("defense_modifier", 0),
             armor=enemy_data.get("armor", "none"),
         )
 
     enemy.init_combat()
+    band_before = session.active_encounter_band()
     tracker_key = instance_name or f"{enemy_id}_{len(session.active_enemies)}"
     session.active_enemies[tracker_key] = enemy
 
@@ -1579,11 +1695,20 @@ async def _handle_spawn_enemy(msg: dict, session, session_id: str) -> None:
         "tracker_key": tracker_key,
         "enemy": enemy.to_client_dict(),
         "tr": enemy.calculate_tr(),
+        **_band_fields(session, band_before),
     })
 
 
 async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
-    """MM updates an active enemy's resolve or conditions."""
+    """MM updates an active enemy's resolve, conditions, or Open state.
+
+    `open` (K-6/D4): setting it records the attacker's 10+ option; clearing
+    it records the enemy visibly spending its action to recover
+    (`combat.open_clear_mode`) — both are table events the MM relays, so
+    both go through this manual-update handler rather than `enemy_strike`
+    (which resolves depletion only; the Open option is a choice, not an
+    outcome).
+    """
     tracker_key = str(msg.get("tracker_key", ""))
     enemy = session.active_enemies.get(tracker_key)
     if not enemy:
@@ -1592,6 +1717,35 @@ async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
             "message": f"No active enemy with key '{tracker_key}'.",
         })
         return
+
+    # T6.4 (K-10/D12): the MM states Named/Boss stances openly. Valid enemy
+    # stances are the Table III.3-9 set, read from the ruleset
+    # (`combat.enemy_attacks.posture_reaction_shift`), never hardcoded.
+    #
+    # Validated BEFORE anything is applied: a rejection returns without the
+    # `enemy_updated` broadcast, so any field applied first would live on the
+    # server and nowhere else — and the next Resolve adjustment is computed
+    # from the stale value the clients still show.
+    posture = None
+    if "posture" in msg:
+        if enemy.tier == "mook":
+            await manager.broadcast(session_id, {
+                "type": "error",
+                "message": "Mooks do not declare Postures — the MM sets "
+                           "reaction difficulty by situation (III.3).",
+            })
+            return
+        posture = str(msg["posture"])
+        valid_postures = set(
+            session.ruleset.combat.enemy_attacks.posture_reaction_shift.model_dump()
+        )
+        if posture not in valid_postures:
+            await manager.broadcast(session_id, {
+                "type": "error",
+                "message": f"Unknown enemy Posture '{posture}'. Expected one "
+                           f"of: {', '.join(sorted(valid_postures))}.",
+            })
+            return
 
     phase_index = None
     if "resolve_current" in msg:
@@ -1610,12 +1764,18 @@ async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
         cond = str(msg["remove_condition"])
         if cond in enemy.conditions:
             enemy.conditions.remove(cond)
+    if "open" in msg:
+        enemy.open = bool(msg["open"])
+    if posture is not None:
+        enemy.posture = posture
 
     await manager.broadcast(session_id, {
         "type": "enemy_updated",
         "tracker_key": tracker_key,
         "resolve_current": enemy.resolve_current,
         "conditions": list(enemy.conditions),
+        "open": enemy.open,
+        "posture": enemy.posture,
     })
 
     if phase_index is not None:
@@ -1659,6 +1819,13 @@ async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -
         })
         return
 
+    # K-2/D5: an MM-recorded Strike outcome is a PC offensive action — it
+    # contests the exchange even when the roll happened off-app.
+    session.offensive_actions_this_exchange.add(f"enemy_strike:{tracker_key}")
+
+    # A defeat changes the roster, so the band payload rides along (T6.2).
+    band_before = session.active_encounter_band()
+
     # Mooks have no Resolve pool — one Strike removes them (10+ if armoured).
     if enemy.tier == "mook":
         removed = combat_module.mook_removed(
@@ -1674,6 +1841,8 @@ async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -
             "defeated": removed,
             "mook_removed": removed,
             "conditions": list(enemy.conditions),
+            "open": enemy.open,
+            **_band_fields(session, band_before),
         })
         return
 
@@ -1692,6 +1861,8 @@ async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -
         "defeated": result.defeated,
         "mook_removed": False,
         "conditions": list(enemy.conditions),
+        "open": enemy.open,
+        **_band_fields(session, band_before),
     })
 
     if result.phase_index is not None:
@@ -1767,6 +1938,7 @@ async def _handle_final_blow_confirm(msg: dict, session, session_id: str) -> Non
         })
         return
 
+    band_before = session.active_encounter_band()
     before = enemy.resolve_current if enemy.resolve_current is not None else enemy.resolve
     result = combat_module.apply_final_blow_removal(
         before, phase_thresholds=[p.resolve_threshold for p in enemy.phases] or None,
@@ -1784,11 +1956,13 @@ async def _handle_final_blow_confirm(msg: dict, session, session_id: str) -> Non
         "defeated": result.defeated,
         "mook_removed": False,
         "conditions": list(enemy.conditions),
+        "open": enemy.open,
         # Distinguishes this event from an ordinary enemy_strike defeat
         # (DESIGN §4 / TD-13's "distinguishable in the transcript").
         "cause": result.cause,
         "player": player_name,
         "technique_id": "the_final_blow",
+        **_band_fields(session, band_before),
     })
 
     if result.phase_index is not None:
@@ -1803,11 +1977,13 @@ async def _handle_final_blow_confirm(msg: dict, session, session_id: str) -> Non
 async def _handle_remove_enemy(msg: dict, session, session_id: str) -> None:
     """MM removes an enemy from the active combat tracker."""
     tracker_key = str(msg.get("tracker_key", ""))
+    band_before = session.active_encounter_band()
     if tracker_key in session.active_enemies:
         del session.active_enemies[tracker_key]
     await manager.broadcast(session_id, {
         "type": "enemy_removed",
         "tracker_key": tracker_key,
+        **_band_fields(session, band_before),
     })
 
 

@@ -33,6 +33,7 @@ const state = {
   connectionStatus: 'connecting',  // 'online' | 'connecting' | 'offline'
   sessions: [],            // MM dashboard: sessions listed from the API
   editingEnemyId: null,    // Builder: enemy currently loaded for edit, if any
+  encounterBand: null,     // T6.2 (K-3): live tracker difficulty band — MM display only
 };
 
 // ---------------------------------------------------------------------------
@@ -472,6 +473,12 @@ function handleServerMessage(msg) {
       addSystemChat(`${msg.player} spent ${msg.sp_cost} SP on ${msg.skill_id}${msg.rank_advances > 0 ? ' -- rank up!' : ''}.`);
       if (state.character && msg.player === state.playerName) {
         state.character.session_skill_points_remaining = msg.session_skill_points_remaining;
+        // The training mark gates the builder's "train" affordance (T4.3/D10);
+        // without it the gate stayed open and the second click hit a server
+        // refusal instead of a greyed-out button.
+        if (msg.training_marks_this_session !== undefined) {
+          state.character.training_marks_this_session = msg.training_marks_this_session;
+        }
         if (state.character.skills[msg.skill_id]) {
           state.character.skills[msg.skill_id].marks = msg.new_marks;
           if (msg.rank_advances > 0) state.character.skills[msg.skill_id].rank = msg.new_rank;
@@ -591,6 +598,10 @@ function handleServerMessage(msg) {
     case 'session_reset':
       onSessionReset();
       break;
+    case 'spark_flow_nudge':
+      // T6.3: server sends this to MM connections only; display is quiet.
+      onSparkFlowNudge(msg);
+      break;
     case 'error':
       addSystemChat(`Error: ${msg.message}`);
       notify(msg.message, 'error');
@@ -614,6 +625,8 @@ function onStateReceived(data) {
   state.enemyLibrary = data.enemy_library || {};
   state.encounterLibrary = data.encounter_library || {};
   state.threatClocks = data.threat_clocks || {};
+  // MM state only — the server omits it from player state (K-3, MM dial).
+  state.encounterBand = data.encounter_band || null;
 
   if (state.role === 'player' && data.your_character) {
     state.character = data.your_character;
@@ -1287,10 +1300,10 @@ const HELP_MM = [
 const HELP_PLAYER = [
   ['Play — Rolling', 'Click an Attribute, or hit Roll on a skill to use both. Stage Sparks on the pips first — each adds a d6 and drops the lowest.'],
   ['Play — Saving Throws', 'When something happens to you rather than something you attempt, roll a Major Attribute save.'],
-  ['Play — Combat', 'Declare a Posture each exchange, then Strike, React, Support, or Maneuver. Press spends 1 Endurance for an extra die. At 0 Endurance you can only Absorb.'],
+  ['Play — Combat', 'Declare a Posture each exchange, then Strike, React, Support, or Maneuver. Press spends 1 Endurance Pool point for an extra die. At 0 you can only Absorb.'],
   ['Play — Magic', 'Domain plus Intent plus Scope. Describe what you want; the difficulty comes from your domain type and the scope you reach for.'],
   ['Play — Sparks', 'Nominate another player any time; the MM confirms. On a 6-, narrate how it makes things worse and claim a Graceful Failure Spark.'],
-  ['Builder', 'Spend Skill Points on skills you actually used, pick Techniques as Facet levels open them, and keep your own notes.'],
+  ['Builder', 'Spend Skill Points on skills you used (plus one training point for an unused Primary-Facet skill), pick Techniques as Facet levels open them, and keep your own notes.'],
   ['Tools', 'Your sheet, the rest of the party, your inventory, and rules quick references.'],
 ];
 

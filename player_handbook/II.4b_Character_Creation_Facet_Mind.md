@@ -124,9 +124,9 @@ Instinct Techniques represent a mind so attuned to pattern and environment that 
 
 **Use:** Passive.
 
-You are not caught off guard. If the MM would call for a roll to notice an ambush, trap, or sudden threat before it lands, you automatically succeed. You may not always be able to prevent what's coming — but you always see it coming.
+You are not caught flat. You always get a warning beat before an ambush, trap, or sudden threat lands — a heartbeat of wrongness, enough to turn, shout, or set your feet. What you do with it is yours. The beat is warning, not prevention: whatever is coming still comes, and any roll to meet it is still a roll.
 
-**Normal:** Noticing an ambush or a trap before it lands is a roll the MM calls for.
+**Normal:** Noticing an ambush or a trap before it lands is a roll the MM calls for, and a failed roll means it arrives unannounced.
 
 **The Wrong Note** *(Instinct, Tier 1 — Wisdom)*
 
@@ -202,9 +202,9 @@ Choose one field of knowledge: history, arcane theory, natural sciences, theolog
 
 **Choose:** One domain from the Domains of the Mind list.
 
-**Roll:** Knowledge.
+**Roll:** Knowledge + Lore.
 
-You have developed a formal magical domain through scholarly practice. Choose one domain from the Domains of the Mind list (Chapter II.3). You may use magic within that domain using the Domain + Intent + Scope framework. Roll Knowledge when doing so.
+You have developed a formal magical domain through scholarly practice. Choose one domain from the Domains of the Mind list (Chapter II.3). You may use magic within that domain using the Domain + Intent + Scope framework. Roll Knowledge, adding your Lore rank, when doing so.
 
 **Normal:** A domain's origin is a Background, and it is limited to Minor scope until a Facet Technique unlocks it (see *Acquiring a Domain*, II.3).
 
@@ -252,11 +252,11 @@ You may recall something you have no direct reason to know — a piece of esoter
 
 **Use:** Passive.
 
-**Choose:** A second standard domain from the Domains of the Mind list — it must differ from your first, and prismatic domains are excluded.
+**Choose:** A second standard domain from the Domains of the Mind list — it must differ from your first, and prismatic domains are excluded. A Focused pick suffers the settling-in penalty least while it lasts.
 
-**Roll:** Knowledge, one difficulty step harder than normal for that domain.
+**Roll:** Knowledge + Lore, one difficulty step harder than normal for that domain until your next Facet level.
 
-*Requires an existing Mind domain (Arcane Study).* Your study has opened onto a second territory — an adjacent field whose principles your first domain taught you to read. Choose a second standard domain from the Domains of the Mind list (prismatic territories require Ascendant Domain, below). You may use magic within that domain using the Domain + Intent + Scope framework, rolling Knowledge as normal. Effects within your second domain are treated as one difficulty step harder than normal for that domain. A character holds one Second Domain.
+*Requires an existing Mind domain (Arcane Study).* Your study has opened onto a second territory — an adjacent field whose principles your first domain taught you to read. Choose a second standard domain from the Domains of the Mind list (prismatic territories require Ascendant Domain, below). You may use magic within that domain using the Domain + Intent + Scope framework, rolling Knowledge as normal. Effects within your second domain are treated as one difficulty step harder than normal for that domain until you earn your next Facet level — the cost of a practice still settling, not a permanent tax. A character holds one Second Domain.
 
 **Normal:** A character has one magical domain, and its origin is a Background (see *Acquiring a Domain*, II.3).
 
@@ -266,9 +266,9 @@ You may recall something you have no direct reason to know — a piece of esoter
 
 **Choose:** One prismatic domain from the Domains of the Mind list.
 
-**Roll:** Knowledge, on the Broad difficulty table.
+**Roll:** Knowledge + Lore, on the Prismatic difficulty table.
 
-*Requires an existing Mind domain (Arcane Study).* Your practice has outgrown a single territory. Choose one prismatic domain from the Domains of the Mind list (Chapter II.3). You may work within it using the Domain + Intent + Scope framework, rolling Knowledge. The Broad difficulty table applies — Hard at Minor scope, Very Hard at Significant and Major — and its Major-scope ceiling cannot be moved by Sparks. Your original domain is unchanged; the prismatic territory is a wider practice built on everything it taught you. A character masters one prismatic territory — Ascendant Domain is taken once, however many Facet trees they eventually climb (Chapter II.3).
+*Requires an existing Mind domain (Arcane Study).* Your practice has outgrown a single territory. Choose one prismatic domain from the Domains of the Mind list (Chapter II.3). You may work within it using the Domain + Intent + Scope framework, rolling Knowledge. The Prismatic difficulty table applies — Hard at Minor scope, Very Hard at Significant and Major — and reach-Sparks cannot move a Prismatic working's difficulty, though dice-Sparks work normally (Chapter II.3, *Sparks and Magic*). Your original domain is unchanged; the prismatic territory is a wider practice built on everything it taught you. A character masters one prismatic territory — Ascendant Domain is taken once, however many Facet trees they eventually climb (Chapter II.3).
 
 **Normal:** Domains are Focused or Standard; prismatic territories are not otherwise available (see Table II.3–2).
 

@@ -85,16 +85,18 @@ function renderPlayAttributeGrid(char) {
       const rating = char.attributes[minorId] || 2;
       const ratingDef = state.ruleset.attribute_ratings.find(r => r.rating === rating);
       const mod = ratingDef ? ratingDef.modifier : 0;
-      // Always signed: a bare "0" sitting under the rating reads as a second value.
+      // Always signed: a bare "0" reads as a second rating value.
       const modStr = mod >= 0 ? '+' + mod : '' + mod;
 
       const block = document.createElement('div');
       block.className = 'attr-block' + (state.selectedAttributeId === minorId ? ' selected' : '');
       block.title = minor.description;
+      // C-11 (T5.9): the modifier is the number you roll with — it leads.
+      // The rating is chargen bookkeeping, demoted to the secondary line.
       block.innerHTML = `
         <div class="attr-name">${minor.name}</div>
-        <div class="attr-rating">${rating}</div>
         <div class="attr-modifier">${modStr}</div>
+        <div class="attr-rating">rating ${rating}</div>
         <div class="attr-label">${ratingDef ? ratingDef.label : ''}</div>
       `;
       block.onclick = () => selectAttribute(minorId);
@@ -375,7 +377,7 @@ function renderPlayPlayerList() {
     // Spark economy without being able to see anyone's balance.
     const sparkChip = `<span class="spark-chip" title="Sparks">✦ ${char.sparks != null ? char.sparks : 0}</span>`;
     const combatChip = inCombat
-      ? `<span class="status-chip" title="Endurance">${char.endurance_current}/${char.endurance_max || '?'}</span>`
+      ? `<span class="status-chip" title="Endurance Pool">${char.endurance_current}/${char.endurance_max || '?'}</span>`
       : '';
     const condChip = (char.conditions || []).length
       ? `<span class="status-chip status-chip-warn" title="${escapeHtml((char.conditions || []).map(prettyCondition).join(', '))}">${char.conditions.length} cond</span>`
@@ -442,6 +444,17 @@ function nominateForSpark() {
   sendWS({ type: 'spark_earn_peer', player_name: playerName });
 }
 
+/**
+ * T6.3 (C-2 app-side): quiet MM-only Spark-flow prompt. The server already
+ * routes it to MM connections only; a dim system-chat line (local to this
+ * client) keeps it a nudge, not an alarm — MM5 §Spark Flow is guidance,
+ * not a rule.
+ */
+function onSparkFlowNudge(msg) {
+  if (state.role !== 'mm') return;
+  addSystemChat(`(MM) ${msg.message}`);
+}
+
 function onSparkNomination(msg) {
   const banner = document.getElementById('play-spark-nomination-banner');
   if (!banner) return;
@@ -466,6 +479,7 @@ function renderEnemyTracker() {
   // MM gets full controls + phase markers; players get a read-only Resolve view.
   const isMM = state.role === 'mm';
   const container = document.getElementById(isMM ? 'play-enemy-tracker' : 'play-player-enemy-tracker');
+  renderEncounterBand();
   if (!container) return;
 
   const keys = Object.keys(state.activeEnemies);
@@ -544,14 +558,28 @@ function enemyAdjustResolve(trackerKey, delta) {
   sendWS({ type: 'enemy_update', tracker_key: trackerKey, resolve_current: next });
 }
 
-async function enemyAddCondition(trackerKey) {
-  const cond = await promptDialog('Add a Condition', 'e.g. off balance');
-  if (!cond) return;
-  sendWS({ type: 'enemy_update', tracker_key: trackerKey, add_condition: cond });
-}
-
 function enemyRemoveCondition(trackerKey, condition) {
   sendWS({ type: 'enemy_update', tracker_key: trackerKey, remove_condition: condition });
+}
+
+/**
+ * Toggle the Open tag (K-6/D4). Setting it records the attacker's 10+
+ * option; clearing it records the enemy visibly spending its action to
+ * recover. Enemies carry no Conditions of their own — Open is the one
+ * mark a Strike can put on them, so the old "+ Condition" prompt is gone.
+ */
+function enemyToggleOpen(trackerKey) {
+  const enemy = state.activeEnemies[trackerKey];
+  if (!enemy) return;
+  sendWS({ type: 'enemy_update', tracker_key: trackerKey, open: !enemy.open });
+}
+
+/**
+ * T6.4 (K-10/D12): the MM states a Named/Boss stance openly. The server
+ * validates the stance against Table III.3-9's set and broadcasts it.
+ */
+function enemySetPosture(trackerKey, posture) {
+  sendWS({ type: 'enemy_update', tracker_key: trackerKey, posture: posture });
 }
 
 async function removeEnemy(trackerKey) {
@@ -562,8 +590,38 @@ async function removeEnemy(trackerKey) {
   sendWS({ type: 'remove_enemy', tracker_key: trackerKey });
 }
 
+/**
+ * T6.2 (K-3): live difficulty band over the tracker. The band rides the
+ * tracker broadcasts (computed server-side by compute_band); display is
+ * MM-only. `warnIfCrossed` fires the badge only for spawns — MM1's
+ * "adding enemies mid-fight is the sharpest dial you own".
+ */
+function noteBandChange(msg, warnIfCrossed) {
+  if (!msg.band) return;
+  const prev = state.encounterBand;
+  state.encounterBand = msg.band;
+  if (state.role === 'mm' && warnIfCrossed && msg.band_crossed && msg.band.band) {
+    const from = prev && prev.band ? prev.band : 'none';
+    notify('Spawn crossed a difficulty band: ' + from + ' → ' + msg.band.band
+      + ' — one Mook is one band (MM1).', 'warn', { duration: 8000 });
+  }
+}
+
+function renderEncounterBand() {
+  // MM-only surface — the element exists only in the MM tracker card.
+  const el = document.getElementById('play-encounter-band');
+  if (!el) return;
+  if (state.role !== 'mm' || !state.encounterBand || !state.encounterBand.band) {
+    el.innerHTML = '';
+    return;
+  }
+  el.innerHTML = '<span style="font-size:11px;color:var(--text-dim);">Difficulty band: </span>'
+    + renderBandChip(state.encounterBand);
+}
+
 function onEnemySpawned(msg) {
   state.activeEnemies[msg.tracker_key] = { ...msg.enemy, tr: msg.tr };
+  noteBandChange(msg, true);
   renderEnemyTracker();
   updateSpawnEnemySelect();
   populateTargetSelects();  // a new enemy is immediately Strikeable
@@ -576,6 +634,25 @@ function onEnemyUpdated(msg) {
   const name = enemy.name || msg.tracker_key;
   enemy.resolve_current = msg.resolve_current;
   enemy.conditions = msg.conditions;
+  if ('open' in msg) {
+    // K-6/D4: announce the tag's edges — leaving an enemy Open and the
+    // enemy visibly spending its action to clear it are both table beats.
+    if (msg.open && !enemy.open) {
+      addSystemChat(`${name} is left Open — Easy to Strike for everyone.`);
+    } else if (!msg.open && enemy.open) {
+      addSystemChat(`${name} spends its action recovering — no longer Open.`);
+    }
+    enemy.open = msg.open;
+  }
+  if ('posture' in msg) {
+    // T6.4: a stated stance is a table beat (III.3 — the MM states enemy
+    // stances openly), and it tells players what their reactions face.
+    if (msg.posture && msg.posture !== enemy.posture) {
+      const effect = enemyPostureShiftLabel(enemyPostureShift(msg.posture));
+      addSystemChat(`${name} holds a ${msg.posture} stance — ${effect}.`);
+    }
+    enemy.posture = msg.posture;
+  }
 
   // `defeated` comes from the engine — for a Mook that means one Strike landed
   // hard enough, for anyone else that Resolve reached 0. The client no longer
@@ -596,12 +673,14 @@ function onEnemyUpdated(msg) {
     addSystemChat(`${name}: −${msg.depletion} Resolve (now ${msg.resolve_current}).`);
   }
 
+  noteBandChange(msg, false);  // a defeat can drop the band — update quietly
   renderEnemyTracker();
   populateTargetSelects();
 }
 
 function onEnemyRemoved(msg) {
   delete state.activeEnemies[msg.tracker_key];
+  noteBandChange(msg, false);
   renderEnemyTracker();
   populateTargetSelects();
 }
@@ -735,7 +814,7 @@ function declaredWeaponFields() {
 async function endCombat() {
   const ok = await confirmDialog(
     'End combat?',
-    'Endurance, Conditions, and Postures are cleared for every character, and the enemy tracker is emptied.',
+    'Endurance Pools, Conditions, and Postures are cleared for every character, and the enemy tracker is emptied.',
     'End Combat');
   if (!ok) return;
   sendWS({ type: 'combat_end' });
@@ -825,7 +904,7 @@ function renderMMCombatantRow(playerName, char) {
       </div>
       ${inCombat ? `
         <div class="endurance-bar"><div class="${fillClass}" style="width:${pct}%;"></div></div>
-        <div style="font-size:11px;color:var(--text-dim);">Endurance ${current}/${max}</div>` : ''}
+        <div style="font-size:11px;color:var(--text-dim);">Endurance Pool ${current}/${max}</div>` : ''}
       <div class="mm-conditions">${condHtml}</div>
       <div class="mm-attack-row">
         <label class="mm-attack-label">Enemy attack lands as</label>
@@ -1174,7 +1253,7 @@ function performStrike() {
 
   if (!target) { notify('Choose a target.', 'warn'); focusElement('strike-target'); return; }
   if (press && (state.character.endurance_current || 0) < 1) {
-    notify('No Endurance left to Press.', 'warn');
+    notify('No Endurance Pool points left to Press.', 'warn');
     return;
   }
   if (finalBlow && state.sparksToSpend < 1) {

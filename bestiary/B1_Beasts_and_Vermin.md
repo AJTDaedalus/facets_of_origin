@@ -20,7 +20,7 @@ They cannot leave their road. Not will not — cannot. A pack's territory is mea
 
 **Chalk Hound** · *Mook* · **TR 3**
 
-**When they act on it:** Resolve — · armor none · defense +1
+**When they act on it:** Resolve — · armor none
 
 **When it acts:** attack +1 · incoming Tier 1
 
@@ -45,7 +45,7 @@ They cannot leave their road. Not will not — cannot. A pack's territory is mea
 
 **The Lead** · *Named* · **TR 8**
 
-**When they act on it:** Resolve 3 · armor none · defense +1
+**When they act on it:** Resolve 3 · armor none
 
 **When it acts:** attack +2 · incoming Tier 2
 
@@ -102,7 +102,7 @@ Glassbacks are not dangerous. Glassbacks defending a calf are extremely dangerou
 
 **Glassback Cow** · *Named* · **TR 9**
 
-**When they act on it:** Resolve 4 · armor light (+1 Resolve) · defense +1
+**When they act on it:** Resolve 4 · armor light (+1 Resolve)
 
 **When it acts:** attack +2 · incoming Tier 2
 
@@ -127,7 +127,7 @@ Glassbacks are not dangerous. Glassbacks defending a calf are extremely dangerou
 
 **Glassback Bull** · *Boss* · **TR 13**
 
-**When they act on it:** Resolve 6 · armor light (+1 Resolve) · defense +1
+**When they act on it:** Resolve 6 · armor light (+1 Resolve)
 
 **When it acts:** attack +3 · incoming Tier 2
 
@@ -186,7 +186,7 @@ A ledgerlouse is grey, flat, thumbnail-sized, and built around a jaw that does o
 
 **Ledgerlice** · *Mook* · **TR 3**
 
-**When they act on it:** Resolve — · armor none · defense +2
+**When they act on it:** Resolve — · armor none
 
 **When it acts:** attack +0 · incoming Tier 1
 
@@ -237,7 +237,7 @@ A ledgerlouse is grey, flat, thumbnail-sized, and built around a jaw that does o
 
 **Chicken** · *Mook* · **TR 1**
 
-**When they act on it:** Resolve — · armor none · defense −1
+**When they act on it:** Resolve — · armor none
 
 **When it acts:** attack −1 · incoming Tier 1
 

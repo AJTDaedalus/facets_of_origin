@@ -18,7 +18,6 @@ class CreateEnemyRequest(BaseModel):
     tier: str = "mook"
     resolve: int = Field(default=0, ge=0)
     attack_modifier: int = 0
-    defense_modifier: int = 0
     armor: str = "none"
     techniques: list[str] = Field(default_factory=list)
     special: str | None = None
@@ -83,7 +82,6 @@ async def create_enemy(body: CreateEnemyRequest):
         tier=body.tier,
         resolve=body.resolve,
         attack_modifier=body.attack_modifier,
-        defense_modifier=body.defense_modifier,
         armor=body.armor,
         techniques=body.techniques,
         special=body.special,

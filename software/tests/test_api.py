@@ -243,7 +243,7 @@ class TestCharacterAPI:
     def test_background_guild_apprentice_replaces_secondary_with_domain(
         self, client, mm_headers, active_session, valid_attributes
     ):
-        """Guild Apprentice: choosing a magic domain skips secondary skill (investigate)."""
+        """Guild Apprentice: choosing a magic domain skips secondary skill (craft, per T5.8)."""
         resp = client.post(
             "/api/characters/",
             json={
@@ -260,8 +260,8 @@ class TestCharacterAPI:
         char = resp.json()["character"]
         # Starting skill: lore at practiced
         assert char["skills"]["lore"]["rank"] == "practiced"
-        # Secondary skill (investigate) is SKIPPED because domain replaces it
-        assert char["skills"]["investigate"]["marks"] == 0
+        # Secondary skill (craft) is SKIPPED because domain replaces it
+        assert char["skills"]["craft"]["marks"] == 0
         # Magic domain is set
         assert char["magic_domain"] == "warding"
         assert char["career_advances"] == 1
@@ -269,7 +269,7 @@ class TestCharacterAPI:
     def test_background_guild_apprentice_no_domain_keeps_secondary(
         self, client, mm_headers, active_session, valid_attributes
     ):
-        """Guild Apprentice: without a magic domain, secondary skill (investigate) is granted."""
+        """Guild Apprentice: without a magic domain, secondary skill (craft, per T5.8) is granted."""
         resp = client.post(
             "/api/characters/",
             json={
@@ -284,7 +284,7 @@ class TestCharacterAPI:
         assert resp.status_code == 200
         char = resp.json()["character"]
         assert char["skills"]["lore"]["rank"] == "practiced"
-        assert char["skills"]["investigate"]["marks"] == 1  # secondary granted
+        assert char["skills"]["craft"]["marks"] == 1  # secondary granted
         assert char["magic_domain"] is None
 
     def test_background_temple_acolyte_domain_replaces_secondary(

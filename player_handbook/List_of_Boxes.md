@@ -37,12 +37,14 @@
 | **MM Note** | [The "Don't Roll, Just Do It" principle](III.1_Core_Resolution.md#when-not-to-roll) | III.1_Core_Resolution.md |
 | **Example** | [one roll, three tiers, and a ruling said out loud](III.1_Core_Resolution.md#in-play-the-front-desk) | III.1_Core_Resolution.md |
 | **MM Note** | ["What's different this time?"](III.1_Core_Resolution.md#trying-again) | III.1_Core_Resolution.md |
-| **Example** | [Endurance pools](III.3_Combat.md#calculating-your-endurance-pool) | III.3_Combat.md |
-| **MM Note** | [Withdrawn is a tempo move, not a permanent position](III.3_Combat.md#recovering-endurance) | III.3_Combat.md |
-| **MM Note** | [Reading the opponent](III.3_Combat.md#postures) | III.3_Combat.md |
+| **MM Note** | [nobody plays the janitor](III.2_Adventuring.md#hazards-and-threat-clocks) | III.2_Adventuring.md |
+| **Example** | [Endurance Pools](III.3_Combat.md#calculating-your-endurance-pool) | III.3_Combat.md |
+| **MM Note** | [Withdrawn is a tempo move, not a permanent position](III.3_Combat.md#recovering-your-endurance-pool) | III.3_Combat.md |
+| **MM Note** | [Reading past the stated stance](III.3_Combat.md#postures) | III.3_Combat.md |
 | **MM Note** | [Dodge or Parry?](III.3_Combat.md#parry) | III.3_Combat.md |
 | **Through the Mirror** | [why enemies lose Resolve and characters take Conditions](III.3_Combat.md#conditions) | III.3_Combat.md |
 | **Through the Mirror** | [why Tier 1 Conditions clear so fast](III.3_Combat.md#tier-1-conditions) | III.3_Combat.md |
+| **Variant** | [running it on paper](III.3_Combat.md#armor) | III.3_Combat.md |
 | **MM Note** | [Mooks as roleplay opportunities](III.3_Combat.md#mooks) | III.3_Combat.md |
 | **Through the Mirror** | [why NPCs never roll](III.3_Combat.md#enemy-attacks) | III.3_Combat.md |
 | **Through the Mirror** | [why armor and partial reactions do not stack](III.3_Combat.md#armor-and-reaction-downgrades) | III.3_Combat.md |
@@ -51,6 +53,8 @@
 | **Through the Mirror** | [why armor is a budget and not a subtraction](IV.1_Equipment.md#armor) | IV.1_Equipment.md |
 | **Example** | [spending a downgrade budget](IV.1_Equipment.md#armor-in-play) | IV.1_Equipment.md |
 | **MM Note** | [Money and wealth](IV.1_Equipment.md#currency-and-trade) | IV.1_Equipment.md |
+| **Reading the Entries** | [the domain descriptions](Appendix_Magic_Domains.md#appendix-magic-domain-catalog) | Appendix_Magic_Domains.md |
+| **Reading the Entries** | [the example intents](Appendix_Magic_Domains.md#appendix-magic-domain-catalog) | Appendix_Magic_Domains.md |
 
 ---
 
@@ -60,7 +64,7 @@
 |---|---|---|
 | **Example** | [rating an enemy from scratch](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples) | MM1_Encounters_and_Enemies.md |
 | **Example** | [Party Strength](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength) | MM1_Encounters_and_Enemies.md |
-| **Example** | [why the budget is only a rough check](../mm_manual/MM1_Encounters_and_Enemies.md#action-economy-adjustment) | MM1_Encounters_and_Enemies.md |
+| **Example** | [why summed TR cannot size a fight](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength) | MM1_Encounters_and_Enemies.md |
 | **Example** | [the Archive Guardian changes phase](../mm_manual/MM1_Encounters_and_Enemies.md#bosses) | MM1_Encounters_and_Enemies.md |
 | **MM Note** | [build for the early exit, not against it](../mm_manual/MM1_Encounters_and_Enemies.md#bosses) | MM1_Encounters_and_Enemies.md |
 | **MM Note** | [a lateral solution is the encounter working](../mm_manual/MM1_Encounters_and_Enemies.md#running-asymmetric-encounters) | MM1_Encounters_and_Enemies.md |

@@ -2,7 +2,7 @@
 import json
 import pytest
 
-from app.game.encounter import Encounter, EncounterEnemy
+from app.game.encounter import Encounter, EncounterEnemy, compute_band
 
 
 # ---------------------------------------------------------------------------
@@ -315,3 +315,182 @@ class TestEncounterSerialization:
     def test_fof_includes_type(self):
         e = Encounter(id="test", name="Test")
         assert e.to_fof()["type"] == "encounter"
+
+
+# ---------------------------------------------------------------------------
+# compute_band (T6.1, K-3) — Recipe-Table difficulty band from actor counts
+# ---------------------------------------------------------------------------
+
+class TestComputeBandPS3CalibratedRows:
+    """Every expectation here is keyed to a published simulation row:
+    MM1 Table MM1-5 (Series 9 Part D, seeds 1/2/3) or the MM1 'Sizing an
+    Encounter' prose it summarizes. No invented numbers."""
+
+    def test_mook_only_is_skirmish(self):
+        # MM1-5 Skirmish row: 3-7 Mooks, sim 100%/100%/100%.
+        result = compute_band(["mook"] * 5, party_strength=3)
+        assert result["band"] == "skirmish"
+        assert result["calibrated"] is True
+
+    def test_three_named_one_mook_is_standard(self):
+        # MM1-5 Standard row: 3 Named + 1 Mook, sim 76%/74.5%/80%.
+        result = compute_band(["named"] * 3 + ["mook"], party_strength=3)
+        assert result["band"] == "standard"
+        assert result["calibrated"] is True
+
+    def test_three_named_two_mooks_is_hard(self):
+        # MM1-5 Hard row: 3 Named + 2 Mooks, sim 47.5%/48%/47%.
+        result = compute_band(["named"] * 3 + ["mook"] * 2, party_strength=3)
+        assert result["band"] == "hard"
+        assert result["calibrated"] is True
+
+    def test_three_named_three_mooks_is_deadly(self):
+        # MM1-5 Deadly row (first composition): 3 Named + 3 Mooks, sim 20%/20%/22.5%.
+        result = compute_band(["named"] * 3 + ["mook"] * 3, party_strength=3)
+        assert result["band"] == "deadly"
+        assert result["calibrated"] is True
+
+    def test_four_named_one_mook_is_deadly(self):
+        # MM1-5 Deadly row (second composition): 4 Named + 1 Mook, sim 20%/16.5%/21%.
+        result = compute_band(["named"] * 4 + ["mook"], party_strength=3)
+        assert result["band"] == "deadly"
+        assert result["calibrated"] is True
+
+    def test_one_mook_is_one_band(self):
+        # MM1 Five-Minute Method: "one Mook is one difficulty band (76% -> 47% -> 20%)."
+        core = ["named"] * 3
+        bands = [
+            compute_band(core + ["mook"] * m, party_strength=3)["band_index"]
+            for m in (1, 2, 3)
+        ]
+        assert bands == [1, 2, 3]  # standard -> hard -> deadly, one step per Mook
+
+
+class TestComputeBandPS3Edges:
+    def test_three_named_alone_is_skirmish(self):
+        # MM1 Sizing an Encounter: three Named on their own is a near-clean
+        # win (~96%) - inside the Skirmish target band (85-100%).
+        result = compute_band(["named"] * 3, party_strength=3)
+        assert result["band"] == "skirmish"
+
+    def test_four_named_alone_is_hard(self):
+        # MM1 Sizing an Encounter: "four Named is a coin-flip (Hard)".
+        result = compute_band(["named"] * 4, party_strength=3)
+        assert result["band"] == "hard"
+
+    def test_five_named_is_deadly_with_loss_warning(self):
+        # MM1 Scaling Notes: "five is a near-certain party loss" - beyond the
+        # published Deadly target (15-35%); the band clamps and the note says so.
+        result = compute_band(["named"] * 5, party_strength=3)
+        assert result["band"] == "deadly"
+        assert "near-certain" in result["note"]
+
+    def test_two_named_with_mooks_is_skirmish(self):
+        # MM1 Scaling Notes: "one or two Named/Boss enemies is trivial at any
+        # TR"; Mooks alone never make it dangerous.
+        result = compute_band(["named"] * 2 + ["mook"] * 10, party_strength=3)
+        assert result["band"] == "skirmish"
+
+    def test_boss_counts_as_a_named_boss_actor(self):
+        # The dial is "the number of Named/Boss enemies acting at once" -
+        # a Boss is one actor in that count, same as a Named.
+        result = compute_band(["named"] * 2 + ["boss"] + ["mook"], party_strength=3)
+        assert result["band"] == "standard"
+
+    def test_thirty_mooks_still_skirmish(self):
+        # MM1 Scaling Notes: mean PCs Broken stays at zero through 30 Mooks.
+        result = compute_band(["mook"] * 30, party_strength=3)
+        assert result["band"] == "skirmish"
+
+    def test_empty_roster_has_no_band(self):
+        result = compute_band([], party_strength=3)
+        assert result["band"] is None
+        assert result["band_index"] is None
+
+
+class TestComputeBandOutsidePS3:
+    """PS-4 rows come from MM1 Table MM1-6, which the book itself flags as
+    un-simulated extrapolation ("Do not present them to players as
+    calibrated") - the function must carry the same honesty flag."""
+
+    def test_ps4_four_named_is_standard_uncalibrated(self):
+        # MM1-6 Standard row: 4 Named.
+        result = compute_band(["named"] * 4, party_strength=4)
+        assert result["band"] == "standard"
+        assert result["calibrated"] is False
+
+    def test_ps4_four_named_one_mook_is_hard_uncalibrated(self):
+        # MM1-6 Hard row: 4 Named + 1 Mook.
+        result = compute_band(["named"] * 4 + ["mook"], party_strength=4)
+        assert result["band"] == "hard"
+        assert result["calibrated"] is False
+
+    def test_ps4_five_named_is_deadly_uncalibrated(self):
+        # MM1-6 Deadly row: 5 Named.
+        result = compute_band(["named"] * 5, party_strength=4)
+        assert result["band"] == "deadly"
+        assert result["calibrated"] is False
+
+    def test_ps4_mook_only_is_skirmish_uncalibrated(self):
+        # MM1-6 Skirmish row: 4-8 Mooks.
+        result = compute_band(["mook"] * 6, party_strength=4)
+        assert result["band"] == "skirmish"
+        assert result["calibrated"] is False
+
+    def test_ps5_extrapolates_and_says_so(self):
+        # "Each additional PC shifts the actor-count thresholds up by roughly
+        # one Named" (unvalidated beyond PS 3) - the note must admit it.
+        result = compute_band(["named"] * 5, party_strength=5)
+        assert result["band"] == "standard"
+        assert result["calibrated"] is False
+        assert "un-simulated" in result["note"]
+
+
+class TestComputeBandErrors:
+    def test_unknown_tier_raises(self):
+        with pytest.raises(ValueError, match="tier"):
+            compute_band(["named", "dragon"], party_strength=3)
+
+    def test_nonpositive_party_strength_raises(self):
+        with pytest.raises(ValueError, match="party_strength"):
+            compute_band(["mook"], party_strength=0)
+
+    def test_tier_is_case_insensitive(self):
+        result = compute_band(["Named"] * 3 + ["Mook"], party_strength=3)
+        assert result["band"] == "standard"
+
+
+class TestEncounterBandAdapter:
+    """Encounter.band expands the roster into tiers and defers to compute_band."""
+
+    def _library_tiers(self):
+        return {"thug": "mook", "sergeant": "named", "guardian": "boss"}
+
+    def test_band_expands_counts(self):
+        e = Encounter(id="e", name="E", enemies=[
+            EncounterEnemy(enemy_id="sergeant", count=3),
+            EncounterEnemy(enemy_id="thug", count=1),
+        ])
+        result = e.band(self._library_tiers(), party_strength=3)
+        assert result["band"] == "standard"  # MM1-5: 3 Named + 1 Mook
+        assert result["named_boss_count"] == 3
+        assert result["mook_count"] == 1
+
+    def test_band_skips_unknown_enemy_ids(self):
+        # An encounter can reference a deleted library enemy ("will no longer
+        # resolve") - the band is computed from the enemies that still do.
+        e = Encounter(id="e", name="E", enemies=[
+            EncounterEnemy(enemy_id="sergeant", count=3),
+            EncounterEnemy(enemy_id="ghost_of_deleted", count=5),
+        ])
+        result = e.band(self._library_tiers(), party_strength=3)
+        assert result["named_boss_count"] == 3
+        assert result["band"] == "skirmish"
+
+    def test_band_passes_party_strength_through(self):
+        e = Encounter(id="e", name="E", enemies=[
+            EncounterEnemy(enemy_id="sergeant", count=4),
+        ])
+        result = e.band(self._library_tiers(), party_strength=4)
+        assert result["band"] == "standard"  # MM1-6 Standard row
+        assert result["calibrated"] is False

@@ -2,7 +2,7 @@
 
 Six guards come through the door at once. Mordai is already moving, Zahna is already talking, and Zulnut has already decided he is going out the window — and none of them is waiting for permission, because a fight is not a queue.
 
-Everything in this chapter follows from that. Everyone declares at once. Everyone acts at once. What you spend is Endurance, what you take is Conditions, and what you wear down in the thing across the room is its Resolve. The dice are the same two dice as every other chapter.
+Everything in this chapter follows from that. Everyone declares at once. Everyone acts at once. What you spend is your Endurance Pool, what you take is Conditions, and what you wear down in the thing across the room is its Resolve. The dice are the same two dice as every other chapter.
 
 ## The Shape of a Fight
 
@@ -10,7 +10,7 @@ A fight here is a conversation conducted at speed, and everybody speaks at the s
 
 Combat in Facets of Origin is structured around **exchanges** — dramatic beats where everyone acts and reacts simultaneously. There is no initiative order, no waiting for your moment while someone else's moment stretches on. Every participant in a fight is present every exchange: choosing a posture, taking action, responding to incoming threats. The whole thing resolves as a single beat of fiction, then the MM narrates what actually happened.
 
-The central resource in combat is **Endurance** — your physical stamina, the reserve of effort that lets you press hard or react quickly when it matters. Endurance is not hit points; it is how much you have in the tank. A character with no Endurance left is not bleeding out — they are exhausted, overextended, outmaneuvered. They can still fight. They are just fighting on grit alone.
+The central resource in combat is your **Endurance Pool** — your physical stamina, the reserve of effort that lets you press hard or react quickly when it matters. The Endurance Pool is not hit points; it is how much you have in the tank. A character with an empty pool is not bleeding out — they are exhausted, overextended, outmaneuvered. They can still fight. They are just fighting on grit alone.
 
 **Conditions** replace hit points for player characters as the measure of how a fight is going. They are named states with immediate mechanical and fictional weight: you are not "at 14 HP," you are Staggered — your offensive rolls suffer. Conditions are concrete, narratively rich, and temporary by design. They resolve when the fiction resolves them, not on a countdown.
 
@@ -20,9 +20,9 @@ The goal is a combat system where every participant is engaged every moment, whe
 
 ---
 
-## Endurance
+## Endurance Pool
 
-**Endurance** is your combat stamina. You spend it to react to incoming attacks and to press hard on offense. When you run out, your options narrow sharply.
+Your **Endurance Pool** is your combat stamina. You spend it to react to incoming attacks and to press hard on offense. When you run out, your options narrow sharply.
 
 ### Calculating Your Endurance Pool
 
@@ -39,28 +39,30 @@ The goal is a combat system where every participant is engaged every moment, whe
 | Endurance skill: Expert | +2 |
 | Endurance skill: Master | +3 |
 
-A character with no particular investment in Constitution or the Endurance skill has a pool of 4. A heavily invested character tops out at 8. The range in practice is 3 (fragile but fast) to 8 (a deliberate, durable choice).
+A character with no particular investment in Constitution or the Endurance skill has an Endurance Pool of 4. A heavily invested character tops out at 8. The range in practice is 3 (fragile but fast) to 8 (a deliberate, durable choice).
 
-> **Example — Endurance pools**
+> **Example — Endurance Pools**
 >
 >
-> Mordai — Constitution 3 (+1), Endurance Novice (+0): **5 Endurance**
-> Zahna — Constitution 1 (−1), Endurance Novice (+0): **3 Endurance**
-> Zulnut — Constitution 1 (−1), Endurance Novice (+0): **3 Endurance**
+> Mordai — Constitution 3 (+1), Endurance Novice (+0): **Endurance Pool 5**
+> Zahna — Constitution 1 (−1), Endurance Novice (+0): **Endurance Pool 3**
+> Zulnut — Constitution 1 (−1), Endurance Novice (+0): **Endurance Pool 3**
 
-### Running Out of Endurance
+### An Empty Endurance Pool
 
-When your Endurance hits 0, you cannot spend it on reactions. You may still declare Postures and attempt to Dodge or Parry, but with nothing in the tank you cannot pay the cost — **Absorb** is your only reaction option. Conditions you Absorb land at their normal tier; there is no extra penalty for taking them on an empty tank. You remain in the fight until Conditions remove you.
+When your Endurance Pool hits 0, you cannot spend it on reactions. You may still declare Postures and attempt to Dodge or Parry, but with nothing in the tank you cannot pay the cost — **Absorb** is your only reaction option. Conditions you Absorb land at their normal tier; there is no extra penalty for taking them on an empty tank. You remain in the fight until Conditions remove you.
 
-Running on empty is still dangerous — every incoming Condition now lands in full, because you have no Endurance to buy a Dodge or a Parry that might have softened it. Your armor still helps (see Armor), but your reactive options are gone until you recover.
+Running on empty is still dangerous — every incoming Condition now lands in full, because you have nothing left in the pool to buy a Dodge or a Parry that might have softened it. Your armor still helps (see Armor), but your reactive options are gone until you recover.
 
-### Recovering Endurance
+### Recovering Your Endurance Pool
 
-**Withdrawn posture** restores 2 Endurance at the end of the exchange. This requires giving up all offensive action for that beat — you are catching your breath, finding your footing, creating space between yourself and the pressure.
+**Withdrawn posture** restores 2 Endurance Pool points at the end of the exchange, **up to your maximum** — recovery never carries you past it. This requires giving up all offensive action for that beat — you are catching your breath, finding your footing, creating space between yourself and the pressure.
+
+**The uncontested exchange.** An exchange in which no player character takes an offensive action is **uncontested**: the situation advances for free. The MM may reposition the opposition, bring in reinforcements, progress a Threat Clock, or simply take the objective — no roll. Recovering is a real choice with a real price: while everyone catches their breath, the fight moves without them.
 
 > **MM Note — Withdrawn is a tempo move, not a permanent position**
 >
-> Make it tactically costly: an aware opponent will advance, apply pressure elsewhere, or use the exchange to regroup their own forces. A fighter who Withdraws three exchanges in a row is buying time, not winning the fight, and the fiction should say so.
+> The uncontested-exchange rule is what makes that true at the table: a party that cycles Withdrawn to refill Endurance Pools hands you the scene, one free advance at a time. You do not need to punish the players — just spend the exchange they gave you, visibly, and let them decide whether the trade is still worth it.
 
 ---
 
@@ -72,11 +74,11 @@ A combat **exchange** is one dramatic beat — a moment of the fight where every
 
 1. **The MM describes the situation.** Where is everyone? What has just happened? What does the opposition look like right now?
 
-2. **All participants simultaneously declare Posture.** In a live session, the digital app handles blind reveal — everyone declares at the same time, then the table sees all Postures together. At a physical table, players can write postures on slips of paper and reveal them at once.
+2. **The MM states enemy stances; player characters simultaneously declare Posture.** Enemy stances are announced openly, driven by their written conduct. Player declaration is blind: in a live session, the digital app handles the blind reveal — everyone declares at the same time, then the table sees all Postures together. At a physical table, players can write postures on slips of paper and reveal them at once.
 
 3. **Actions and reactions are declared and resolved.** Each participant takes an offensive action, a support action, or passes. Targets of those actions may declare reactions. Rolls happen.
 
-4. **End-of-exchange cleanup.** Tier 1 Conditions clear. Withdrawn characters recover 2 Endurance.
+4. **End-of-exchange cleanup.** Tier 1 Conditions clear. Withdrawn characters recover 2 Endurance Pool points, up to their maximum.
 
 5. **The MM narrates the exchange as a single dramatic beat.** The dice have told you what happened mechanically; the MM tells you what it looked like.
 
@@ -86,20 +88,22 @@ Exchanges are fast in the fiction. A full exchange — everyone acting, everyone
 
 ## Postures
 
-Before actions are declared each exchange, every participant (player characters and significant antagonists alike) simultaneously declares a **Posture**: the broad tactical stance they are taking for this beat of the fight.
+Before actions are declared each exchange, every player character simultaneously declares a **Posture**: the broad tactical stance they are taking for this beat of the fight.
 
-Posture is declared blind. You do not know what your opponent has declared until everyone reveals at once. Reading the situation, anticipating the opposition, and matching your posture to the moment is half the tactical game.
+Player Posture is declared blind. You do not know what your allies have committed to until everyone reveals at once. Reading the situation and matching your posture to the moment is half the tactical game.
+
+**Enemy stances are stated, not concealed.** As the exchange opens, the MM announces each Named NPC's and Boss's Posture out loud — most enemies follow the written conduct on their stat block (`triggers:` — "Aggressive while its allies stand; Defensive once Open"), so their stance is part of the situation you read and play against, not a secret to guess. Your declaration stays blind; theirs is the terrain.
 
 **Table III.3–2: Postures**
 
 | Posture | Offense | Reactions | Other |
 |---|---|---|---|
-| **Aggressive** | +1 to offensive rolls | +1 Endurance cost on your **first** reaction this exchange; every reaction after that costs the standard amount | You are pressing hard — and exposed for it, once, per exchange |
+| **Aggressive** | +1 to offensive rolls | +1 Endurance Pool cost on your **first** reaction this exchange; every reaction after that costs the standard amount | You are pressing hard — and exposed for it, once, per exchange |
 | **Measured** | No modifier | Standard cost | The baseline — flexible and uncommitted |
-| **Defensive** | −1 to offensive rolls | −1 Endurance cost per reaction (min 0) | Trading offensive presence for resilience |
-| **Withdrawn** | Cannot make offensive actions | All reactions are free | Recover 2 Endurance at end of exchange |
+| **Defensive** | −1 to offensive rolls | −1 Endurance Pool cost per reaction (min 0) | Trading offensive presence for resilience |
+| **Withdrawn** | Cannot make offensive actions | All reactions are free | Recover 2 Endurance Pool points at end of exchange, up to your maximum |
 
-**Aggressive:** You are driving the action. Everything you do this exchange hits harder and faster. The first hit that comes back at you costs extra to answer — you were over-committed for that opening — but you are not paying the surcharge over and over: every reaction after your first this exchange costs the standard amount. Useful when you have momentum and Endurance to spend; still costs you something when a single exchange throws several attacks your way at once.
+**Aggressive:** You are driving the action. Everything you do this exchange hits harder and faster. The first hit that comes back at you costs extra to answer — you were over-committed for that opening — but you are not paying the surcharge over and over: every reaction after your first this exchange costs the standard amount. Useful when you have momentum and Endurance Pool points to spend; still costs you something when a single exchange throws several attacks your way at once.
 
 **Measured:** The default. You have not handed your opponent an advantage. You have not bought yourself a discount, either. Measured posture is for when you want options.
 
@@ -107,9 +111,9 @@ Posture is declared blind. You do not know what your opponent has declared until
 
 **Withdrawn:** You are out of the press entirely — creating space, catching breath, declining to engage. You can still react to incoming attacks, and those reactions are free. But you are going nowhere. The fight is happening without you for this beat.
 
-> **MM Note — Reading the opponent**
+> **MM Note — Reading past the stated stance**
 >
-> Posture is declared blind, but it is not declared blind of all information. A character with high Wisdom or the Insight skill can read body language, stance, and the micro-signals an opponent broadcasts before they commit. Before declaration, a player can ask the MM: *"Does anything about how they're carrying themselves suggest what posture they're about to declare?"* The MM is not obligated to answer precisely — but they should give an honest read of what an attentive character would notice. A skilled fighter telegraphs less. A wounded one telegraphs more. A creature built for ambush telegraphs nothing at all, and that too is information.
+> A stated stance is not the whole story, and Insight is the counter-tool for the rest. An enemy about to *change* stance, a feint, an ambusher whose conduct the party has not yet seen — before declaring, a player can ask: *"Does anything about how they're carrying themselves suggest what they're about to do?"* Give an honest read of what an attentive character would notice. A skilled fighter telegraphs less. A wounded one telegraphs more. A creature built for ambush telegraphs nothing at all, and that too is information.
 
 ---
 
@@ -125,7 +129,7 @@ The foundational offensive action. You bring force to bear on a target — weapo
 
 **Roll:** `2d6 + weapon attribute + relevant skill rank modifier`. Your weapon's category sets the attribute (Chapter IV.1). For the skill, the defaults are **Combat** for melee and unarmed Strikes and **Finesse** for ranged ones — but these are defaults, not restrictions. Describe how you are striking and use the skill that describes it. A soldier who overpowers her opponent rolls Combat; a disciple who strikes with trained precision rather than mass rolls Finesse; both are correct, and both are Strikes. Where the fiction clearly supports a different attribute, the MM may name one. When two pairings both fit, the player chooses.
 
-**Difficulty** is Standard by default. The MM adjusts based on the situation: a Named NPC or Boss in Defensive Posture, or with strong Constitution, may push it to Hard. A Staggered or Cornered opponent may make it Easy. When in doubt, Standard. (Named NPCs and Bosses declare Postures as described in the Postures section. For Mooks, the MM sets difficulty by situation: Standard by default, Easy if distracted or exposed, Hard if armored and alert.) A Technique may then move the MM's call one step further, exactly as any roll's difficulty can (see *Difficulty*, III.1).
+**Difficulty** is Standard by default. The MM adjusts based on the situation: a Named NPC or Boss in Defensive Posture, or with strong Constitution, may push it to Hard. An **Open** enemy is Easy to Strike — for everyone, no judgment call required. When in doubt, Standard. (The MM states Named NPC and Boss stances openly — see the Postures section. For Mooks, the MM sets difficulty by situation: Standard by default, Easy if distracted or exposed, Hard if armored and alert.) A Technique may then move the MM's call one step further, exactly as any roll's difficulty can (see *Difficulty*, III.1).
 
 **Table III.3–3: Strike Outcomes**
 
@@ -137,7 +141,7 @@ The foundational offensive action. You bring force to bear on a target — weapo
 
 What a success *does* depends on what you are Striking. Almost always, that is an enemy.
 
-**Against an enemy** — the usual case. Your success depletes the enemy's **Resolve** (see *Facing Mooks and Named Antagonists*): a full success (10+) depletes **2**, a partial (7–9) depletes **1**. When an enemy's Resolve reaches 0, it is defeated. On a **full success only**, you may *additionally* — on top of that 2 Resolve — hang one **rider Condition** on the enemy: a Tier 1 or Tier 2 Condition of your choice. A Tier 2 rider (Staggered or Cornered) leaves the enemy **Easy to Strike** until it is cleared, which is often worth more to the party than the raw depletion — a single 10+ can open an enemy up for everyone who Strikes after you. Riders never defeat an enemy on their own — **Resolve does that; a rider only shapes the blows that follow.**
+**Against an enemy** — the usual case. Your success depletes the enemy's **Resolve** (see *Facing Mooks and Named Antagonists*): a full success (10+) depletes **2**, a partial (7–9) depletes **1**. When an enemy's Resolve reaches 0, it is defeated. On a **full success only**, you may *additionally* — on top of that 2 Resolve — leave the enemy **Open**: it is **Easy to Strike for everyone** until it recovers. You narrate what Open looks like — staggered, cornered, blinded, disarmed, its guard beaten aside. The fiction supplies the variety; the mechanics carry one tag. An enemy clears Open only one way: by **visibly spending its action** to recover — and an action spent recovering is an action not spent on the party. Open never defeats an enemy on its own — **Resolve does that; Open only shapes the blows that follow.**
 
 **Against another character** — a duel, a charmed ally, PvP. There is no Resolve pool; apply a Condition directly, exactly as an enemy's attack lands on a player character: a 10+ applies a **Tier 2 Condition**, a 7–9 applies a **Tier 1 Condition**. The attacker chooses which Condition, within the appropriate tier — a precise blow might apply Staggered; one forcing an opponent into a corner might apply Cornered.
 
@@ -145,11 +149,11 @@ What a success *does* depends on what you are Striking. Almost always, that is a
 
 ### Press
 
-Before rolling a Strike, you may spend **1 Endurance** to add 1d6 to the roll and drop the lowest die. This is the same mechanical effect as spending a Spark, drawing from a completely different resource — going in hard costs stamina.
+Before rolling a Strike, you may spend **1 Endurance Pool point** to add 1d6 to the roll and drop the lowest die. This is the same mechanical effect as spending a Spark, drawing from a completely different resource — going in hard costs stamina.
 
-**Press and Sparks stack.** You may spend 1 Endurance for Press and also spend a Spark on the same roll. A character who Presses and Sparks rolls 4d6 and drops the two lowest.
+**Press and Sparks stack.** You may spend 1 Endurance Pool point for Press and also spend a Spark on the same roll. A character who Presses and Sparks rolls 4d6 and drops the two lowest.
 
-Pressing when your Endurance is already low is a calculation. The dice improvement is real. So is the cost.
+Pressing when your Endurance Pool is already low is a calculation. The dice improvement is real. So is the cost.
 
 ---
 
@@ -180,7 +184,7 @@ The bonus applies to the ally's very next roll only, then expires. Bonuses from 
 
 ## Reactions
 
-When an opponent takes action against you, you may **react**. You may declare a maximum of **one reaction per incoming action**. Each reaction costs Endurance unless your Posture reduces the cost. If your Endurance is at 0, only Absorb is available — this is absolute, regardless of Posture: Withdrawn's free reactions and Defensive's reduced reaction cost only apply while you have at least 1 Endurance to spend. Aggressive posture's surcharge applies only to your first reaction of the exchange — see Postures, above.
+When an opponent takes action against you, you may **react**. You may declare a maximum of **one reaction per incoming action**. Each reaction costs Endurance Pool points unless your Posture reduces the cost. If your Endurance Pool is at 0, only Absorb is available — this is absolute, regardless of Posture: Withdrawn's free reactions and Defensive's reduced reaction cost only apply while you have at least 1 point to spend. Aggressive posture's surcharge applies only to your first reaction of the exchange — see Postures, above.
 
 The choice to react, and which reaction to use, is made after the attacker rolls but before any Condition is formally applied.
 
@@ -188,7 +192,7 @@ The choice to react, and which reaction to use, is made after the attacker rolls
 
 ### Dodge
 
-**Cost:** 1 Endurance
+**Cost:** 1 Endurance Pool point
 
 You move — out, aside, low — using speed and awareness to take yourself out of the path of what's coming.
 
@@ -206,7 +210,7 @@ You move — out, aside, low — using speed and awareness to take yourself out 
 
 ### Parry
 
-**Cost:** 1 Endurance
+**Cost:** 1 Endurance Pool point
 
 You meet force with force — interposing weapon, shield, or forearm to deflect rather than avoid.
 
@@ -222,19 +226,19 @@ Outcome tiers are the same as Dodge, flavored as deflection rather than avoidanc
 
 ### Absorb
 
-**Cost:** 0 Endurance
+**Cost:** 0 Endurance Pool points
 
-You do not react. You take the hit, accept the Condition, and remain composed. Absorb is the reaction for when Endurance is gone or better spent elsewhere — a calculation, not a failure.
+You do not react. You take the hit, accept the Condition, and remain composed. Absorb is the reaction for when the Endurance Pool is empty or better spent elsewhere — a calculation, not a failure.
 
 ---
 
 ### Intercept
 
-**Cost:** 2 Endurance
+**Cost:** 2 Endurance Pool points
 
 You step in front of an attack targeting an ally. You take the incoming action instead of them, then roll Dodge or Parry as normal.
 
-Intercepting is how you protect someone who cannot protect themselves — a mage mid-cast, someone whose low Endurance pool is about to become a serious problem.
+Intercepting is how you protect someone who cannot protect themselves — a mage mid-cast, someone whose low Endurance Pool is about to become a serious problem.
 
 You may Intercept **one incoming action per exchange**. Only one character may Intercept a given action — if two try to Intercept the same attack, the protected ally decides who steps in. You must be aware of the incoming action and physically able to reach the ally before declaring.
 
@@ -248,9 +252,9 @@ Conditions replace hit points for player characters as the measure of how a figh
 >
 > These are two tools, and the asymmetry is deliberate. A Condition is interesting because it changes how *you* play the next exchange — Off-Balance is a decision, not a number — and that only pays off for a character somebody is steering. An enemy the MM runs for three exchanges does not need an inner life. It needs to visibly wear down, on one number the MM can track for six enemies at once without a spreadsheet.
 >
-> So Resolve is durability and nothing else: not an action-economy pool, never spent to defend, and riders never take an enemy out on their own. Give enemies a Condition track and you have doubled the MM's bookkeeping to buy tactical texture the players mostly cannot see.
+> So Resolve is durability and nothing else: not an action-economy pool, never spent to defend, and the Open tag never takes an enemy out on its own. Give enemies a Condition track and you have doubled the MM's bookkeeping to buy tactical texture the players mostly cannot see.
 
-The tiers below govern player characters in full. Enemies do not carry a Condition track of their own — they run on Resolve — but a Condition can be hung on an enemy as a **rider** by a full-success Strike, in which case it has exactly the effect described here until it clears. (A Tier 2 rider on an enemy also makes that enemy Easy to Strike; see *Strike*, above.)
+The tiers below govern player characters in full. Enemies do not carry Conditions at all — they run on Resolve, and the one mark a Strike can put on them is the **Open** tag (see *Strike*, above).
 
 ### Tier 1 Conditions
 
@@ -267,7 +271,7 @@ Applied by partial Strike successes (7–9). **Tier 1 Conditions clear automatic
 | Condition | Effect |
 |---|---|
 | **Winded** | −1 to your next roll |
-| **Off-Balance** | Your next reaction costs 1 additional Endurance |
+| **Off-Balance** | Your next reaction costs 1 additional Endurance Pool point |
 | **Shaken** | The MM may direct your next action — you flinch, hesitate, or briefly retreat |
 
 Tier 1 Conditions are the texture of a fight — they shift the next beat without defining the outcome.
@@ -325,6 +329,10 @@ Armor affects incoming severity, not the roll itself. An attacker still interpre
 
 Armor has fictional weight beyond its mechanical effect. Heavy armor announces your presence, imposes noise and heat, and affects how you move through the world outside of combat. The Equipment chapter covers specific armor types and weights.
 
+> **Variant — running it on paper**
+>
+> Without the app, both per-exchange trackers fit on a scrap of paper. Armor: draw one checkbox per downgrade (2 for light, 4 for heavy) and tick one each time it softens a Condition — a fresh row of boxes when the scene ends. Aggressive's first-reaction surcharge: put a token by your sheet when the exchange starts and flip it when you pay your first reaction — flipped means every later reaction this exchange costs the standard amount. Clear it at exchange end.
+
 ---
 
 ## Facing Mooks and Named Antagonists
@@ -347,17 +355,17 @@ The MM narrates Mook combat efficiently. Mordai cutting through two guards on hi
 
 ### Named NPCs
 
-**Named NPCs and significant antagonists** use the full combat structure: Resolve, Posture, reactions, the works. They are opponents whose defeat means something and whose capabilities should be felt.
+**Named NPCs and significant antagonists** use the full combat structure: Resolve, Posture, Techniques. They are opponents whose defeat means something and whose capabilities should be felt.
 
 A Named NPC is defined by:
 - **Resolve** — the durability pool your Strikes deplete. A Named NPC starts with a Resolve of 3 or 4. Each Strike depletes it (2 on a full success, 1 on a partial); at 0, the NPC is defeated. There is no Condition track to grind down — Resolve *is* the fight's clock.
-- **A primary attribute and skill** — the modifier they use for Strikes and Parries
+- **An attack modifier** — an authoring input, usually built from a primary attribute and skill. The NPC never rolls it: when it attacks, the PCs roll reactions (see *Enemy Attacks*)
 - **Armor**, if any — armor raises Resolve by a flat amount (light +1, heavy +2), so an armored enemy simply takes longer to run down
 - **Techniques**, if the MM wants them to have specific capabilities
 
-A Named NPC can carry **rider Conditions** hung on it by a full-success Strike — a Tier 1 (Winded, Off-Balance, Shaken) or Tier 2 (Staggered, Cornered) Condition of the attacker's choice, with their usual effects (and a Tier 2 rider makes it Easy to Strike) — but riders never accumulate into Broken. An enemy leaves the fight when its Resolve is gone, not when its Conditions stack.
+A Named NPC can be left **Open** by a full-success Strike — Easy to Strike for everyone until it recovers, and it recovers only by visibly spending its action to do so. The party sees the recovery happen and can answer it; the NPC buys its guard back at the price of a lost action. Open never accumulates into anything worse. An enemy leaves the fight when its Resolve is gone, and no other way.
 
-Named NPCs do not need a full character sheet. A veteran soldier might be: Resolve 4, Strength +2, Combat Practiced (+1), Light armor. That is enough to run the full exchange structure against a party.
+Named NPCs do not need a full character sheet. A veteran soldier might be: Resolve 4, Attack +3 (Strength +2, Combat Practiced +1), Light armor. That is enough to run the full exchange structure against a party.
 
 ### Bosses and Climactic Antagonists
 
@@ -389,11 +397,13 @@ When a PC is hit by an enemy attack (Absorb, or a failed/partial reaction), the 
 | **Named NPC** | Tier 2 | A Named NPC's attack carries the weight of a full Strike success |
 | **Boss** | Tier 2 | Same as Named; Boss Techniques may escalate further |
 
+The MM chooses which Condition the tier delivers. Repeating a type the character already carries is how an enemy deliberately finishes someone — a second Tier 2 of the same type is Broken — so it is telegraphed, never sprung: the table should see the finishing blow coming an exchange away.
+
 Your armor applies normally: if you have downgrade budget left (see *Armor*), the incoming Condition is softened one tier before it lands — Tier 2 becomes Tier 1, Tier 1 is negated. Light and heavy soften by the same one tier; heavy simply has more downgrades to spend across the scene.
 
 ### Enemy Posture and Reaction Difficulty
 
-Named NPCs and Bosses declare Postures like PCs. Their posture's offense modifier adjusts the difficulty of reactions against their attacks:
+Named NPCs and Bosses hold stances the MM states openly (see *Postures*). The stance adjusts the difficulty of reactions against their attacks:
 
 **Table III.3–9: Enemy Posture and PC Reactions**
 
@@ -429,7 +439,7 @@ Magical effects in combat follow the same **Domain + Intent + Scope** framework 
 
 **Reactions against magical Strikes.** All three active reactions — Dodge, Parry, and Intercept — can apply against magical actions. Feasibility is the MM's call based on what is happening in the fiction: you cannot Parry a wave of force you never saw coming, but you can Parry a summoned blade meeting yours. Dodge remains valid against most magical effects that have a physical direction. When the nature of the magic makes a physical reaction implausible, Absorb is available as always.
 
-**Resolving magical Strikes.** A magical Strike resolves exactly like a physical one (see *Strike*, above): against an enemy, it depletes Resolve — a full success (10+) depletes 2 and may hang a rider Condition, a partial (7–9) depletes 1. Against another character, there is no Resolve pool; it applies a Condition directly on the PvP tier table — a 10+ applies a Tier 2 Condition, a 7–9 applies a Tier 1 Condition. A 6− produces a consequence for the caster either way. The attacker chooses which Condition to apply, within the appropriate tier, whenever one applies.
+**Resolving magical Strikes.** A magical Strike resolves exactly like a physical one (see *Strike*, above): against an enemy, it depletes Resolve — a full success (10+) depletes 2 and may leave the target Open, a partial (7–9) depletes 1. Against another character, there is no Resolve pool; it applies a Condition directly on the PvP tier table — a 10+ applies a Tier 2 Condition, a 7–9 applies a Tier 1 Condition. A 6− produces a consequence for the caster either way. Against a character the attacker chooses which Condition to apply, within the appropriate tier; against an enemy the caster narrates what Open looks like — a binding of frost, a blinding flare, whatever the working's fiction supports.
 
 **Scope in combat.** Active opposition counts as at least Standard difficulty for magical actions. Scope difficulty applies normally — a Focused domain character attempting a Major working mid-fight is rolling at Hard, same as always. The chaos of combat does not add difficulty on its own, but the MM may adjust for specific circumstances (distracted, wounded, constrained).
 
@@ -439,9 +449,9 @@ Magical effects in combat follow the same **Domain + Intent + Scope** framework 
 
 A character whose primary development is in Mind or Soul is not helpless in combat. They are playing a different game in the same space — one that is often more decisive than trading Strike for Strike.
 
-**Insight (Wisdom):** Read the opposition's likely Posture before it is revealed. A successful Insight roll at the start of an exchange gives you information — their body language, their positioning, the tension in their stance. That information matters when Posture is declared blind.
+**Insight (Wisdom):** Read what the stated stance does not say. Enemy stances are announced openly, but a successful Insight roll at the start of an exchange reads past them — a feint, a stance about to change, an ambusher whose conduct you have not seen yet. That information matters most in the beat before you commit your own blind declaration.
 
-**Attune (Spirit):** Channel your domain's force as a direct Strike. Spirit is the roll for intuitive magical attacks. Domain + Intent + Scope sets the difficulty; the Strike outcome table applies exactly as it would for a physical Strike — Resolve against an enemy, a Condition against another character.
+**Attune (Spirit):** Channel your domain's force as a direct Strike. Spirit + Attune is the roll for intuitive magical attacks; scholarly casters Strike with Knowledge + Lore. Domain + Intent + Scope sets the difficulty; the Strike outcome table applies exactly as it would for a physical Strike — Resolve against an enemy, a Condition against another character.
 
 **Investigate (Intelligence):** Find the structural weakness in the fight — a bad angle, a compromised footing, an environmental factor the enemy hasn't noticed. A successful Investigate roll translates directly into a difficulty modifier on the party's next actions against that target.
 
@@ -488,7 +498,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zahna:** "Is that the encouraging or discouraging reading of this situation?"
 
-**MM:** "Yes. It takes another step. Combat this exchange. Declare Postures."
+**MM:** "Yes. It takes another step. Combat this exchange. The guardian is Measured — flat, patient, giving nothing away. It always is. Declare Postures."
 
 ---
 
@@ -496,11 +506,11 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Mordai:** "Aggressive."
 
-**Zulnut:** "Defensive." *(Quietly, to nobody in particular:)* "I have three Endurance."
+**Zulnut:** "Defensive." *(Quietly, to nobody in particular:)* "I have three points in the pool."
 
 **Zahna:** "Measured. I'm looking for an opening — something I can use."
 
-*All three Postures revealed. The guardian's flat approach gives away nothing. It is Measured — it always is.*
+*All three Postures revealed, against the stance the MM already named. The guardian gives away nothing else.*
 
 *(Behind the screen, the MM is tracking one number for the guardian: **Resolve 10**. Base 8, plus 2 for its heavy plating. That is the whole fight's clock — no Condition track to grind, just a pool to run dry.)*
 
@@ -514,11 +524,11 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 → Mordai rolls **2d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** against Easy difficulty (+1) and gets a **12**. Full success.
 
-**MM:** "Full success — that's 2 Resolve off. And because you rolled a 10 or better, you can hang a Condition on it as a rider, on top of the damage. Want one?"
+**MM:** "Full success — that's 2 Resolve off. And because you rolled a 10 or better, you can leave it Open, on top of the damage. Your call. If you do, tell us what that looks like."
 
-**Mordai:** "Staggered. I want the seam I just opened to stay open for everyone."
+**Mordai:** "I do. The seam I just opened — I want it to stay open. The joint's grinding, the arm can't cover its right side."
 
-**MM:** "The blade finds the seam. Exactly the seam. There is a sound like a key turning in a lock that has not been oiled in fifteen years — grinding, then a hollow click. The arm does not fall off, but it is not doing what it was doing before. The guardian is **Staggered** — and while that holds, it is **Easy to Strike** for the whole party. Guardian is at **Resolve 8**."
+**MM:** "The blade finds the seam. Exactly the seam. There is a sound like a key turning in a lock that has not been oiled in fifteen years — grinding, then a hollow click. The arm does not fall off, but it is not doing what it was doing before. The guardian is **Open** — and until it stops to reset that joint, it is **Easy to Strike** for the whole party. Guardian is at **Resolve 8**."
 
 *The guardian rotates toward Mordai with the patience of something that was not designed to feel surprise. It reaches for him anyway.*
 
@@ -526,11 +536,11 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Mordai:** "Parry."
 
-**MM:** "First reaction of the exchange, and you're Aggressive, so that's 1 Endurance plus the 1-Endurance Aggressive surcharge — 2 total. You drop from 5 to 3. Roll Combat."
+**MM:** "First reaction of the exchange, and you're Aggressive, so that's 1 from your Endurance Pool plus the 1-point Aggressive surcharge — 2 total. You drop from 5 to 3. Roll Combat."
 
 → Mordai rolls **2d6 + Strength (3 → +1) + Combat Practiced (+1)** and gets a **9**. Partial success.
 
-**MM:** "You catch the blow — the blade turns it — but the force behind that arm is not organic. A partial Parry knocks the incoming Tier 2 down one tier, so it lands as Tier 1: **Off-Balance**. Your next reaction costs 1 additional Endurance."
+**MM:** "You catch the blow — the blade turns it — but the force behind that arm is not organic. A partial Parry knocks the incoming Tier 2 down one tier, so it lands as Tier 1: **Off-Balance**. Your next reaction costs 1 additional Endurance Pool point."
 
 *Mordai staggers half a step. His arm is still working. He is not sure for how long.*
 
@@ -544,7 +554,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zulnut:** "Finesse. I'm looking at how it moves. Where it's compensating."
 
-**MM:** "Standard. Roll Dexterity plus Finesse. It's already Easy to Strike from the Staggered rider, so pick the other Support benefit — a die, not a difficulty drop."
+**MM:** "Standard. Roll Dexterity plus Finesse. It's already Easy to Strike while it's Open, so pick the other Support benefit — a die, not a difficulty drop."
 
 → Zulnut rolls **2d6 + Dexterity (3 → +1) + Finesse Practiced (+1)** at Standard difficulty and gets an **11**. Full success.
 
@@ -566,9 +576,9 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 (The MM stops. This is either extremely clever or the kind of thing that escalates a fight in an interesting direction. Probably both.)
 
-**MM:** "I love this. Your domain says Easy — but Inscription is slow craft. The preparation is part of the working, and you're compressing an hour of careful encoding into thirty seconds. That specific pressure makes it Hard. This is control, not damage — it won't touch its Resolve, but if it lands it changes the shape of the room. Roll Knowledge."
+**MM:** "I love this. Your domain says Easy — but Inscription is slow craft. The preparation is part of the working, and you're compressing an hour of careful encoding into thirty seconds. That specific pressure makes it Hard. This is control, not damage — it won't touch its Resolve, but if it lands it changes the shape of the room. Roll Knowledge and Lore."
 
-→ Zahna rolls **2d6 + Knowledge (3 → +1)** against Hard difficulty (net +0) and gets an **8**. Partial success.
+→ Zahna rolls **2d6 + Knowledge (3 → +1) + Lore (Practiced, +1)** against Hard difficulty (net +1) and gets an **8**. Partial success.
 
 **MM:** "The glyph takes. But you had to compromise — the instruction is less specific than you wanted. It will stop the guardian from leaving, but it reads 'unauthorized departure from position' broadly. Right now, that includes the guardian and also anyone standing in the rough area of the room it considers its patrol zone." *A beat.* "Which is the room you are all currently in."
 
@@ -578,7 +588,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zahna:** "Measurably."
 
-*End-of-exchange cleanup: Off-Balance on Mordai clears. The Staggered rider on the guardian persists — it stays Easy to Strike. Guardian: Resolve 8.*
+*End-of-exchange cleanup: Off-Balance on Mordai clears. The guardian is still Open — it spent its action reaching for Mordai, not resetting the joint, so it stays Easy to Strike. Guardian: Resolve 8.*
 
 ---
 
@@ -590,11 +600,11 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zahna:** "Measured. Holding the glyph steady."
 
-**MM:** "The guardian is Measured. It is learning you. Mordai — left joint. Easy from the Staggered rider, and you've got Zulnut's die. Roll Combat."
+**MM:** "The guardian is Measured. It could spend this exchange resetting that joint and close itself back up — it doesn't. It was built to hold the room, not to protect itself. It is learning you instead. Mordai — left joint. Easy while it's Open, and you've got Zulnut's die. Roll Combat."
 
 → Mordai spends Zulnut's Support: **3d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** at Easy difficulty (+1), drop the lowest, and gets a **13**. Full success.
 
-**MM:** "The left joint goes the way the right one went, but worse. That's another 2 Resolve — it's at **6**. Staggered's already on it, so no new rider needed; the seam just widens."
+**MM:** "The left joint goes the way the right one went, but worse. That's another 2 Resolve — it's at **6**. It's already Open; the seam just widens."
 
 *The guardian reaches for him again — slower now, but no less certain.*
 
@@ -602,7 +612,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Mordai:** "Parry. I know what this costs."
 
-**MM:** "First reaction, still Aggressive — 2 Endurance. You go from 3 to 1. Roll."
+**MM:** "First reaction, still Aggressive — 2 from the pool. You go from 3 to 1. Roll."
 
 → Mordai rolls and gets a **7**. Partial success.
 
@@ -616,13 +626,13 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **MM:** "Two more Resolve. The guardian is at **4**." *A pause.* "It is noticeably less fluid than it was two exchanges ago. Whatever you're doing, it's working."
 
-*End-of-exchange cleanup: Winded on Mordai clears. Staggered rider persists. Guardian: Resolve 4.*
+*End-of-exchange cleanup: Winded on Mordai clears. The guardian stays Open — it pressed the attack again. Guardian: Resolve 4.*
 
 ---
 
 **MM:** "Third exchange. Postures."
 
-**Mordai:** "Aggressive. One Endurance left, and I'm spending it."
+**Mordai:** "Aggressive. One point left, and I'm spending it."
 
 **Zulnut:** "Measured."
 
@@ -632,17 +642,17 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Mordai:** "Press. I put everything into it."
 
-→ Mordai spends his last Endurance to Press: **3d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** at Easy difficulty (+1), drop the lowest, and gets an **11**. Full success. Mordai is now at **0 Endurance**.
+→ Mordai spends his last Endurance Pool point to Press: **3d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** at Easy difficulty (+1), drop the lowest, and gets an **11**. Full success. Mordai's Endurance Pool is now **empty**.
 
-**MM:** "Two more Resolve — that takes it to **2**. And 2 is a threshold." *The MM checks the stat block.* "The guardian changes. Its next blow won't have the weight the others did — but something else happens: it stops reacting to small hurts entirely. It's entered **Reduced Mode**. The subsystem that was registering minor damage has shut down. It is running on something else now, and none of you know what."
+**MM:** "Two more Resolve — that takes it to **2**. And 2 is a threshold." *The MM checks the stat block.* "The guardian changes. Its next blow won't have the weight the others did — but something else happens: it stops registering harm entirely. It's entered **Reduced Mode**. The subsystem that would notice the seam you've opened — notice it is Open at all — has shut down. It will never stop to close it now. It is running on something else, and none of you know what."
 
 *The light in its eyes flickers — not dimmer, exactly. Differently lit.*
 
-**MM:** "It reaches for you one more time, Mordai — weaker, but you're empty. No Endurance means Absorb is your only option."
+**MM:** "It reaches for you one more time, Mordai — weaker, but you're empty. An empty Endurance Pool means Absorb is your only option."
 
 **Mordai:** "I take it. I don't have a choice."
 
-**MM:** "You take the hit. In Reduced Mode its blows land at Tier 1 — you're **Winded**, −1 on your next roll, and the exchange is nearly over anyway. You stay standing. Zulnut, Zahna — it's down to 2 Resolve and it's still Easy to Strike. Finish it."
+**MM:** "You take the hit. In Reduced Mode its blows land at Tier 1 — you're **Winded**, −1 on your next roll, and the exchange is nearly over anyway. You stay standing. Zulnut, Zahna — it's down to 2 Resolve and it's still Open. Finish it."
 
 **Zulnut:** "Left joint. One more time."
 
@@ -656,7 +666,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 ---
 
-**MM:** "The room is quiet. The guardian is kneeling. It is still watching the door — your door, the one you came in through. Mordai, you are at 0 Endurance and you're going to feel this tomorrow. Zahna, the glyph is on the floor."
+**MM:** "The room is quiet. The guardian is kneeling. It is still watching the door — your door, the one you came in through. Mordai, your Endurance Pool is empty and you're going to feel this tomorrow. Zahna, the glyph is on the floor."
 
 **Zahna:** "I inspect the glyph. Can I refine the patrol boundary now that the fight is over?"
 
@@ -686,7 +696,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 ---
 
-*(The fight ran the three exchanges the MM planned for, and it cost the party for it: Mordai emptied his Endurance to the last point and Pressed the final blow on fumes, Zulnut carried the last two exchanges because Mordai had nothing left to spend, and the glyph rewrote the room in a way nobody has fully reckoned with yet. That is the shape of a by-the-book Boss fight — a full party will grind down any Resolve pool eventually, but "eventually" is measured in spent resources and complications, not in a clean two-hit finish. The Staggered rider is what made it this fast; without that Easy opening the guardian would have cost them another exchange and more Endurance than they had. The glyph on the floor will matter later. These things always do.)*
+*(The fight ran the three exchanges the MM planned for, and it cost the party for it: Mordai emptied his Endurance Pool to the last point and Pressed the final blow on fumes, Zulnut carried the last two exchanges because Mordai had nothing left to spend, and the glyph rewrote the room in a way nobody has fully reckoned with yet. That is the shape of a by-the-book Boss fight — a full party will grind down any Resolve pool eventually, but "eventually" is measured in spent resources and complications, not in a clean two-hit finish. Leaving it Open is what made it this fast; without that Easy opening — and with a guardian willing to spend an action closing it — the fight would have cost them another exchange and more Endurance Pool points than they had. The glyph on the floor will matter later. These things always do.)*
 
 ---
 
@@ -695,13 +705,15 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 ### Exchange Flow
 
 ```
-1. Declare postures (simultaneously)
+1. MM states enemy stances openly; PCs declare Postures (simultaneously, blind)
 2. Declare actions (Strike / Support / Maneuver / Magic)
 3. Resolve actions → roll 2d6 + attribute + skill + difficulty + posture modifier
 4. Declare reactions to incoming actions
-5. Apply results — deplete enemy Resolve (2 / 1 / 0), apply any Conditions and riders
-6. End exchange: clear Tier 1 conditions, Withdrawn characters recover 2 Endurance
+5. Apply results — deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, note an enemy left Open
+6. End exchange: clear Tier 1 conditions, Withdrawn characters recover 2 Endurance Pool points (up to the maximum)
 ```
+
+An exchange in which no PC took an offensive action is **uncontested** — the situation advances for free: the MM may reposition, reinforce, progress a clock, or take the objective, no roll.
 
 ### Postures
 
@@ -711,8 +723,8 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 |---|---|---|---|
 | Aggressive | +1 | +1, first reaction of the exchange only | — |
 | Measured | +0 | +0 | Baseline |
-| Defensive | -1 | -1 | — |
-| Withdrawn | No offense | Free (0) | Recover 2 Endurance at end of exchange |
+| Defensive | -1 | -1 (min 0) | — |
+| Withdrawn | No offense | Free (0) | Recover 2 Endurance Pool points at end of exchange, up to your maximum |
 
 ### Reactions (1 per incoming action)
 
@@ -720,10 +732,10 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 | Reaction | Cost | Roll | Effect |
 |---|---|---|---|
-| Dodge | 1 Endurance | Dexterity | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
-| Parry | 1 Endurance | Weapon attribute + Combat | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
-| Absorb | 0 Endurance | No roll | Take the hit at full tier. Always available. |
-| Intercept | 2 Endurance | — | Take a hit meant for an ally. |
+| Dodge | 1 Endurance Pool point | Dexterity | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
+| Parry | 1 Endurance Pool point | Weapon attribute + Combat | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
+| Absorb | 0 Endurance Pool points | No roll | Take the hit at full tier. Always available. |
+| Intercept | 2 Endurance Pool points | — | Take a hit meant for an ally — once per exchange; the protected ally decides who steps in. |
 
 ### Strike Outcomes
 
@@ -731,13 +743,13 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Table III.3–12: Strike Outcomes (quick reference)**
 
-| Roll | Resolve | Rider (10+ only) |
+| Roll | Resolve | Open (10+ only) |
 |---|---|---|
-| 10+ | −2 | may add one Tier 1 or Tier 2 Condition; a Tier 2 rider makes the enemy **Easy to Strike** until cleared |
+| 10+ | −2 | may leave the enemy **Open** — **Easy to Strike** for everyone; you narrate what it looks like |
 | 7-9 | −1 | — |
 | 6- | 0 | consequence for the attacker |
 
-Enemy at **0 Resolve = defeated**. Mook: removed on any success (7+); armored Mook needs a 10+.
+Enemy at **0 Resolve = defeated**. An enemy clears Open only by visibly spending its action. Mook: removed on any success (7+); armored Mook needs a 10+.
 
 **Against another character (duel / PvP) — apply a Condition:** 10+ = Tier 2 (Staggered or Cornered), 7-9 = Tier 1 (Winded/Off-Balance/Shaken), 6- = consequence for the attacker.
 
@@ -777,11 +789,11 @@ Armor and partial reaction downgrades **do not stack** — apply the greater red
 
 Budget resets at **end of scene**, not exchange; two fights in one scene share it. When it's spent, Conditions land at full tier.
 
-### Endurance
+### Endurance Pool
 
 - Base: 4 + Constitution modifier + Endurance skill rank
-- 0 Endurance = Absorb only, regardless of Posture (Conditions land at their normal tier — your armor still helps; there's no extra penalty for an empty tank)
-- Press: spend 1 Endurance before Strike to add a d6 and drop the lowest
+- Endurance Pool at 0 = Absorb only, regardless of Posture (Conditions land at their normal tier — your armor still helps; there's no extra penalty for an empty tank)
+- Press: spend 1 Endurance Pool point before Strike to add a d6 and drop the lowest
 
 ### Your Five Numbers On Screen
 
@@ -791,7 +803,7 @@ The app tracks every combat number for you. Where each one lives:
 
 | Number | On screen |
 |---|---|
-| **Endurance** | the Endurance bar in the Combat panel |
+| **Endurance Pool** | the Endurance Pool bar in the Combat panel |
 | **Posture** | the Posture badge / "Declare Posture" selector |
 | **Conditions** | the Conditions row beneath your posture |
 | **Sparks** | the Spark pips at the top of the Play tab |

@@ -30,6 +30,17 @@ class CreateEncounterRequest(BaseModel):
     notes: str = ""
 
 
+class PreviewBandRequest(BaseModel):
+    """Roster for a live difficulty-band preview (T6.2, K-3)."""
+
+    session_id: str
+    enemies: list[EncounterEnemyRequest] = Field(default_factory=list)
+
+
+def _library_tiers(session) -> dict[str, str]:
+    return {eid: e.tier for eid, e in session.enemy_library.items()}
+
+
 @router.post("/", dependencies=[Depends(require_mm)])
 async def create_encounter(body: CreateEncounterRequest):
     """Save an encounter definition to a session."""
@@ -64,7 +75,37 @@ async def create_encounter(body: CreateEncounterRequest):
     return {
         "encounter": encounter.to_client_dict(),
         "effective_tr": effective_tr,
+        # Recipe-Table difficulty band (T6.2, K-3) — the calibrated readout;
+        # effective_tr above is only the legacy rough-ordering number.
+        "band": encounter.band(_library_tiers(session), session.party_strength()),
     }
+
+
+@router.post("/preview_band", dependencies=[Depends(require_mm)])
+async def preview_band(body: PreviewBandRequest):
+    """Live difficulty band for an unsaved roster (T6.2, K-3).
+
+    The encounter builder calls this as enemies are added, so the band logic
+    stays server-side in `encounter.compute_band` — the front end never
+    carries its own copy of the Recipe-Table doctrine.
+    """
+    session = session_store.get(body.session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found.")
+
+    tiers = _library_tiers(session)
+    unknown = sorted({e.enemy_id for e in body.enemies} - set(tiers))
+    if unknown:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Enemy id(s) not in the session library: {', '.join(unknown)}.",
+        )
+
+    encounter = Encounter(
+        id="_preview", name="_preview",
+        enemies=[EncounterEnemy(enemy_id=e.enemy_id, count=e.count) for e in body.enemies],
+    )
+    return {"band": encounter.band(tiers, session.party_strength())}
 
 
 @router.get("/{session_id}", dependencies=[Depends(require_mm)])
@@ -78,12 +119,15 @@ async def list_encounters(session_id: str):
         eid: e.calculate_tr()
         for eid, e in session.enemy_library.items()
     }
+    tiers = _library_tiers(session)
+    party_strength = session.party_strength()
 
     return {
         "encounters": {
             eid: {
                 **enc.to_client_dict(),
                 "effective_tr": enc.calculate_effective_tr(enemy_trs),
+                "band": enc.band(tiers, party_strength),
             }
             for eid, enc in session.encounter_library.items()
         }

@@ -2,6 +2,14 @@
 
 *Created 2026-03-03 after initial advancement system design session.*
 
+> **SUPERSEDED FIGURES — read II.4 for current rules.** This is a historical design
+> record. In particular, item #5's resolution ("Facet level 1 at advance 6, level 2
+> at advance 12"; "4 points per out-of-Facet failure") was superseded by the shipped
+> rules in `player_handbook/II.4_Character_Creation_Facets.md`: Facet levels at
+> **5/10/15** rank advances and a flat **2-point** cross-Facet mark cost. Do not
+> derive rules from this file. (Flagged by the 2026-08-08 fun/ease review, finding
+> P-15; pipeline: `docs/TASKS_fun_ease_fixes.md`.)
+
 This document tracks open questions and topics to address in future design sessions, in priority order. Grouped by urgency (must resolve before writing depends on it) and type.
 
 ---
