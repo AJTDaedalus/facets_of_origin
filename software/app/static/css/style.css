@@ -298,8 +298,9 @@ label {
 }
 
 .attr-block .attr-name     { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
-.attr-block .attr-rating   { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.1; }
-.attr-block .attr-modifier { font-size: 0.75rem; color: var(--gold); }
+/* C-11 (T5.9): modifier-first — the roll number leads, the rating is demoted. */
+.attr-block .attr-modifier { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.1; }
+.attr-block .attr-rating   { font-size: 0.68rem; color: var(--gold); }
 .attr-block .attr-label    { font-size: 0.62rem; color: var(--text-dim); }
 
 .major-group  { margin-bottom: 16px; }
@@ -916,7 +917,7 @@ label {
     padding: 8px 4px;
   }
 
-  .attr-block .attr-rating { font-size: 1.3rem; }
+  .attr-block .attr-modifier { font-size: 1.3rem; }
 
   /* ---- Roll result: full-width ---- */
   .roll-result-box {
@@ -957,7 +958,7 @@ label {
   }
 
   .attr-block .attr-name   { font-size: 0.58rem; }
-  .attr-block .attr-rating { font-size: 1.15rem; }
+  .attr-block .attr-modifier { font-size: 1.15rem; }
 
 }
 

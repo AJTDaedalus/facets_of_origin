@@ -12,17 +12,19 @@
 
 ### Attributes
 
-| Major Attribute | Minor Attribute | Rating (1–3) |
-|---|---|---|
-| Body | Strength | |
-| Body | Dexterity | |
-| Body | Constitution | |
-| Mind | Intelligence | |
-| Mind | Wisdom | |
-| Mind | Knowledge | |
-| Soul | Spirit | |
-| Soul | Luck | |
-| Soul | Charisma | |
+| Major Attribute | Minor Attribute | Modifier | Rating (1–3) |
+|---|---|---|---|
+| Body | Strength | | |
+| Body | Dexterity | | |
+| Body | Constitution | | |
+| Mind | Intelligence | | |
+| Mind | Wisdom | | |
+| Mind | Knowledge | | |
+| Soul | Spirit | | |
+| Soul | Luck | | |
+| Soul | Charisma | | |
+
+The modifier is the number you roll with — write it large. The rating is character-creation bookkeeping (see Table II.2–1 for the mapping).
 
 ---
 

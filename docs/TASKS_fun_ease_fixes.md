@@ -411,7 +411,7 @@ listed greps return the expected result; LOG updated.
   slots only, no new fiction. On approval: `II.5`, `software/facets/base/facet.yaml`
   (backgrounds block ~1771+), background-validation tests, any affected pregen.
 
-- [ ] **T5.9 — Modifier-first rendering (C-11).**
+- [x] **T5.9 — Modifier-first rendering (C-11).**
   Files: `player_handbook/Appendix_Character_Sheet.md`,
   `software/app/static/js/components.js` (sheet rendering leads with the modifier;
   rating shown as secondary), tests if rendering is tested.

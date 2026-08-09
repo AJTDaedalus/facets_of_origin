@@ -85,16 +85,18 @@ function renderPlayAttributeGrid(char) {
       const rating = char.attributes[minorId] || 2;
       const ratingDef = state.ruleset.attribute_ratings.find(r => r.rating === rating);
       const mod = ratingDef ? ratingDef.modifier : 0;
-      // Always signed: a bare "0" sitting under the rating reads as a second value.
+      // Always signed: a bare "0" reads as a second rating value.
       const modStr = mod >= 0 ? '+' + mod : '' + mod;
 
       const block = document.createElement('div');
       block.className = 'attr-block' + (state.selectedAttributeId === minorId ? ' selected' : '');
       block.title = minor.description;
+      // C-11 (T5.9): the modifier is the number you roll with — it leads.
+      // The rating is chargen bookkeeping, demoted to the secondary line.
       block.innerHTML = `
         <div class="attr-name">${minor.name}</div>
-        <div class="attr-rating">${rating}</div>
         <div class="attr-modifier">${modStr}</div>
+        <div class="attr-rating">rating ${rating}</div>
         <div class="attr-label">${ratingDef ? ratingDef.label : ''}</div>
       `;
       block.onclick = () => selectAttribute(minorId);

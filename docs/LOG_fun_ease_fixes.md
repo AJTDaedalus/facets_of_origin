@@ -1263,6 +1263,25 @@ anything unexpected.
 - **Commands:** api + docs suites → 115 passed; `build_index` (no diff).
   **FULL suite → 1471 passed** (334s).
 
+### T5.9 — Modifier-first rendering (C-11) (2026-08-09)
+
+- **Files:** `player_handbook/Appendix_Character_Sheet.md` (Attributes grid
+  gains a **Modifier** column ahead of Rating + the one-line "write it
+  large / rating is character-creation bookkeeping" note pointing at Table
+  II.2–1), `software/app/static/js/components.js` +
+  `software/app/static/js/play.js` (attr-block markup reordered: modifier
+  leads; rating demoted to a "rating N" secondary line — both render sites
+  carry a C-11 comment), `software/app/static/css/style.css` (size/weight
+  roles swapped: `.attr-modifier` takes the 1.5rem lead style, both mobile
+  breakpoint overrides retargeted).
+- **Deliberately rating-first:** the character-creation flow in
+  `builder.js` — point allocation is done in ratings, which is exactly the
+  "chargen bookkeeping" role C-11 assigns them; unchanged by design.
+- **Tests:** rendering has no JS test harness; `node --check` on both
+  files. No pytest surface renders attributes.
+- **Commands:** docs suite → 32 passed; `build_index` (no diff beyond
+  regen).
+
 ---
 
 ## Escalations

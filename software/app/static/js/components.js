@@ -35,8 +35,8 @@ function renderCharacterSheetReadOnly(char, ruleset, containerId) {
       html += `
         <div class="attr-block" style="cursor:default;">
           <div class="attr-name">${minor.name}</div>
-          <div class="attr-rating">${rating}</div>
           <div class="attr-modifier">${modStr}</div>
+          <div class="attr-rating">rating ${rating}</div>
           <div class="attr-label">${ratingDef ? ratingDef.label : ''}</div>
         </div>`;
     });
