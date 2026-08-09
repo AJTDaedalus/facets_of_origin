@@ -190,6 +190,7 @@ At **0 Endurance**: Absorb only.
 
 - **Defensive enemy:** PC reactions one step **easier**
 - Armor and reaction downgrades **do not stack** — apply the greater reduction
+- The MM chooses the incoming Condition; repeating a carried type is the telegraphed finisher (a landed repeat of a Tier 2 = Broken — telegraph it an exchange ahead)
 
 ---
 

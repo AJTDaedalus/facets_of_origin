@@ -131,7 +131,7 @@ Durability is simply the enemy's base Resolve — the pool a party's Strikes dep
 | Basic Mook (unskilled, no armor) | 2 | Offense 2, Durability 0 |
 | Skilled Mook (Combat Practiced, light armor) | 4 | Offense 3, Durability 0, Armor 1 |
 | City Watch Sergeant | 8 | Offense 4, Durability 3, Armor 1 |
-| Veteran Soldier | 10 | Offense 5, Durability 4 (Resolve 4), Armor 1 |
+| Veteran Soldier | 11 | Offense 5, Durability 4 (Resolve 4), Armor 1, Techniques 1 (Telegraphed Finisher) |
 | The Archive Guardian | 16 | Offense 5, Durability 8 (Resolve 8), Armor 2, Techniques 1 |
 
 > **Example — rating an enemy from scratch**
@@ -202,6 +202,45 @@ Named NPCs use the full exchange structure. Build them the same way you'd build 
 - One or two Techniques if they should feel distinct
 
 **Resist over-building.** A Named NPC who lasts two exchanges and dies memorably is better than one who lasts six exchanges and becomes a slog. Use Hard difficulty against them to make fights meaningful; don't pad their Resolve to make them last.
+
+### Three Worked Enemy Techniques
+
+Enemy Techniques are the "feel distinct" line above made concrete. These three are mechanical templates — setting-agnostic shapes you reskin to fit the enemy in front of you. Each adds +1 TR, and each is a stat-block-ready `techniques:` entry.
+
+**Flurry** — pressure everyone at once.
+
+```yaml
+  techniques: [flurry]
+  # Flurry: once per scene, its attack targets every PC engaged with it
+  # in one action. Each incoming hit lands at Tier 1 (whatever the
+  # enemy's usual tier); each target reacts separately.
+```
+
+A reaction-economy attack: it trades one heavy blow for a demand on everybody's Endurance in the same exchange. Strongest alongside a second enemy whose Tier 2 is arriving simultaneously — the chip degrades the reactions that matter. Reskin freely: a sweeping tail, a volley, a shove through the whole line.
+
+**Telegraphed Finisher** — the visible killing blow.
+
+```yaml
+  techniques: [telegraphed_finisher]
+  # Telegraphed Finisher: once per scene, against a character already
+  # carrying a Tier 2 Condition, its attack repeats that Condition's
+  # type — a landed repeat is Broken (III.3). The MM names the move
+  # one full exchange before it can land. Always.
+```
+
+This is the incoming-Condition selection rule (III.3) sharpened into a signature move. The telegraph is not a courtesy, it is the mechanic: the whole table gets one exchange to answer — Intercept, Withdraw, treat the Condition, end the fight first. Reskin: the raised axe, the drawn-back sting, the word of unbinding half-spoken.
+
+**Sapping Strike** — exhaust instead of injure.
+
+```yaml
+  techniques: [sapping_strike]
+  # Sapping Strike: its attacks drain the tank instead of landing a
+  # Condition — a hit that lands (Absorb, or a failed reaction) costs
+  # the target 2 Endurance instead of the Condition tier. A partial
+  # reaction halves it to 1.
+```
+
+A tempo weapon: it never moves anyone toward Broken, but it empties the pool that pays for Dodges and Parries — the enemy that follows it hits a party that can no longer afford to react. Reskin: draining cold, a wrestler's clinch, anything that wins by exhaustion.
 
 ---
 

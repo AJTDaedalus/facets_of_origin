@@ -667,6 +667,36 @@ anything unexpected.
   `build_index`; `build_table_register` (box title change); docs suite →
   **32 passed**.
 
+### T3.9 — Enemy Techniques + incoming-Condition selection (K-9, K-7) (2026-08-08)
+
+- **Files:** `mm_manual/MM1_Encounters_and_Enemies.md` (new §Three Worked
+  Enemy Techniques under Named NPCs), `player_handbook/III.3_Combat.md`
+  (§Incoming Condition Tier gains the K-7 sentence),
+  `mm_manual/MM5_Quick_Reference.md` (enemy-attack card line),
+  `enemies/veteran_soldier.fof` (canonical instance: gains
+  `telegraphed_finisher`; TR 10 → 11, breakdown + tactics synced),
+  MM1 Table MM1-4 row, `software/tools/combat_sim.py` (docstring TR),
+  bestiary + Index regenerated.
+- **Templates (DESIGN §4.4 a/b/c, setting-agnostic, no proper nouns):**
+  Flurry (once/scene, hits every engaged PC at Tier 1 — reaction-economy
+  pressure), Telegraphed Finisher (once/scene, repeats a carried Tier 2
+  type — landed repeat is Broken; named one full exchange before it can
+  land, always), Sapping Strike (drains 2 Endurance instead of a
+  Condition; partial reaction halves to 1). Each is a stat-block-ready
+  `techniques:` yaml snippet + one usage paragraph, each +1 TR.
+- **K-7 canon:** "The MM chooses which Condition the tier delivers.
+  Repeating a type the character already carries is how an enemy
+  deliberately finishes someone — telegraphed, never sprung." The
+  veteran's fiction already pressed Cornered/Staggered targets; the
+  Finisher formalizes it as the worked instance.
+- **Sim note:** the simulator's `_choose_condition` policy has ALWAYS
+  preferred repeating a carried Tier 2 (worst-case finisher-every-time
+  MM). Left unchanged deliberately — changing selection policy would
+  silently re-baseline Series 9 ahead of T3.11's measured rerun; the
+  policy now reads as the harshest legal use of the K-7 rule.
+- **Commands:** `build_bestiary` (2 files: B2 block + Finding_Aids TR
+  re-sort) + `--check` clean; enemy/docs/sim suites → 179 passed.
+
 ---
 
 ## Escalations

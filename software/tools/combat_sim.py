@@ -1096,7 +1096,7 @@ def city_watch_sergeant_def() -> dict:
 
 
 def veteran_soldier_def() -> dict:
-    """Veteran Soldier: Named, TR 10, light armor. Matches
+    """Veteran Soldier: Named, TR 11 (Telegraphed Finisher), light armor. Matches
     `enemies/veteran_soldier.fof` exactly (D1 migration)."""
     return dict(
         name="Veteran Soldier",

@@ -60,7 +60,7 @@ These are the people who fight for a living without being soldiers about it: doc
 
 <!-- statblock: veteran_soldier -->
 
-**Veteran Soldier** · *Named* · **TR 10**
+**Veteran Soldier** · *Named* · **TR 11**
 
 **When they act on it:** Resolve 4 · armor light (+1 Resolve)
 

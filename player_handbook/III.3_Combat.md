@@ -393,6 +393,8 @@ When a PC is hit by an enemy attack (Absorb, or a failed/partial reaction), the 
 | **Named NPC** | Tier 2 | A Named NPC's attack carries the weight of a full Strike success |
 | **Boss** | Tier 2 | Same as Named; Boss Techniques may escalate further |
 
+The MM chooses which Condition the tier delivers. Repeating a type the character already carries is how an enemy deliberately finishes someone — a second Tier 2 of the same type is Broken — so it is telegraphed, never sprung: the table should see the finishing blow coming an exchange away.
+
 Your armor applies normally: if you have downgrade budget left (see *Armor*), the incoming Condition is softened one tier before it lands — Tier 2 becomes Tier 1, Tier 1 is negated. Light and heavy soften by the same one tier; heavy simply has more downgrades to spend across the scene.
 
 ### Enemy Posture and Reaction Difficulty

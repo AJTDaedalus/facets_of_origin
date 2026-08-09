@@ -259,7 +259,7 @@ listed greps return the expected result; LOG updated.
   Register: the enemy-reveal ceremony's distinctive clause (read III.3 first;
   likely `player characters and significant antagonists alike`).
 
-- [ ] **T3.9 — Enemy Techniques + incoming-Condition selection (K-9, K-7).**
+- [x] **T3.9 — Enemy Techniques + incoming-Condition selection (K-9, K-7).**
   Files: `mm_manual/MM1_Encounters_and_Enemies.md` (three mechanical templates per
   DESIGN §4.4 with stat-block-ready `techniques:` entries),
   `player_handbook/III.3_Combat.md` + MM5 (one sentence each: MM chooses the
