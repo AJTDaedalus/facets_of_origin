@@ -9,7 +9,7 @@ the full rule, follow the pointer.
 
 **Armor** — A per-scene downgrade budget: light armor softens the first 2 incoming Conditions by one tier each, heavy armor the first 4. The budget resets only at the end of the scene. *(Chapter III.3)*
 
-**Ascendant Domain** — A Tier 3 Technique that grants a Broad (Prismatic) domain built on an existing Mind or Soul domain. It uses the Broad difficulty table; reach-Sparks cannot move its workings' difficulty, though dice-Sparks work normally. *(Chapters II.4b, II.4c)*
+**Ascendant Domain** — A Tier 3 Technique that grants a Prismatic domain built on an existing Mind or Soul domain. It uses the Prismatic difficulty table; reach-Sparks cannot move its workings' difficulty, though dice-Sparks work normally. *(Chapters II.4b, II.4c)*
 
 **Attribute (Major/Minor)** — A character's fundamental capabilities. Major Attributes (Body, Mind, Soul) ground saving throws and broad, undefined situations, and are derived from their three Minor Attributes; Minor Attributes are rated 1–3 and used for most active rolls. *(Chapter II.2)*
 
@@ -35,7 +35,7 @@ the full rule, follow the pointer.
 
 **Domain** — A character's licensed magical territory — the thematic and physical scope their magic covers, agreed at character creation and defined by what it includes and what it does not. Casting rolls within a domain add the skill the tradition trains: casting with Spirit adds the Attune rank; casting with Knowledge adds the Lore rank. *(Chapter II.3)*
 
-**Domain Type (Focused/Standard/Broad-Prismatic)** — How wide a domain's territory is. Focused domains cover one narrow element with the highest reliability; Standard domains cover a coherent thematic territory; Broad (Prismatic) domains span multiple territories at the steepest difficulties — reach-Sparks cannot move a Broad working's difficulty, though dice-Sparks work normally. *(Chapter II.3)*
+**Domain Type (Focused/Standard/Prismatic)** — How wide a domain's territory is. Focused domains cover one narrow element with the highest reliability; Standard domains cover a coherent thematic territory; Prismatic domains span multiple territories at the steepest difficulties — reach-Sparks cannot move a Prismatic working's difficulty, though dice-Sparks work normally. *(Chapter II.3)*
 
 **Encounter Recipe Table** — The simulation-validated table of enemy rosters mapped to difficulty bands (Skirmish/Standard/Hard/Deadly), keyed to Party Strength. Actor count — the number of Named/Boss enemies acting at once, not total TR — is what drives difficulty; the retired TR budget is preserved only as a historical record in `docs/DECISIONS.md`. *(MM1)*
 

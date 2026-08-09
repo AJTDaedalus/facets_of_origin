@@ -882,11 +882,11 @@ techniques:
                 description: >
                   Your practice has outgrown a single territory. Choose one prismatic domain from
                   the Domains of the Mind list (Chapter II.3). You may work within it using the
-                  Domain + Intent + Scope framework, rolling Knowledge. The Broad difficulty table
-                  applies (Hard / Very Hard / Very Hard), and its Major-scope ceiling cannot be
-                  moved by Sparks. Your original domain is unchanged.
+                  Domain + Intent + Scope framework, rolling Knowledge. The Prismatic difficulty
+                  table applies (Hard / Very Hard / Very Hard); reach-Sparks cannot move its
+                  workings' difficulty, dice-Sparks work normally. Your original domain is unchanged.
                 use: "Passive"
-                roll: "Knowledge + Lore, on the Broad difficulty table"
+                roll: "Knowledge + Lore, on the Prismatic difficulty table"
                 normal: >
                   Domains are Focused or Standard; prismatic territories
                   are not otherwise available (see Table II.3–2).
@@ -1194,11 +1194,11 @@ techniques:
                 description: >
                   Your practice has outgrown a single territory. Choose one prismatic domain from
                   the Domains of the Soul list (Chapter II.3). You may work within it using the
-                  Domain + Intent + Scope framework, rolling Spirit. The Broad difficulty table
-                  applies (Hard / Very Hard / Very Hard), and its Major-scope ceiling cannot be
-                  moved by Sparks. Your original domain is unchanged.
+                  Domain + Intent + Scope framework, rolling Spirit. The Prismatic difficulty
+                  table applies (Hard / Very Hard / Very Hard); reach-Sparks cannot move its
+                  workings' difficulty, dice-Sparks work normally. Your original domain is unchanged.
                 use: "Passive"
-                roll: "Spirit + Attune, on the Broad difficulty table"
+                roll: "Spirit + Attune, on the Prismatic difficulty table"
                 normal: >
                   Domains are Focused or Standard; prismatic territories
                   are not otherwise available (see Table II.3–2).
@@ -1406,7 +1406,7 @@ magic:
   # II.3, Sparks and Magic — the three Spark-magic rules.
   spark_rules:
     # A Spark buys reach in exactly two cases (II.3, T2.2/D8). Reach-Sparks
-    # cannot move a Broad working's difficulty; dice-Sparks work normally.
+    # cannot move a Prismatic working's difficulty; dice-Sparks work normally.
     ease_focused_major: {domain_type: focused, scope: major}
     pre_technique_push: {permitted_scope: significant}   # D8
 
@@ -1430,7 +1430,8 @@ magic:
   # Domain catalog — transcribed from player_handbook/Appendix_Magic_Domains.md,
   # which is canon. Types (focused/standard/broad) and prismatic status come from
   # the appendix verbatim; tradition follows from the Facet (Mind rolls Knowledge,
-  # Soul rolls Spirit — II.4b/II.4c). Broad == Prismatic, reachable only via the
+  # Soul rolls Spirit — II.4b/II.4c). The `broad` type key prints as Prismatic
+  # (D14) and is reachable only via the
   # Ascendant Domain Tier 3 Technique. INV-7 (test_docs_consistency.py) enforces
   # that this list and the appendix never drift apart.
   soul_domains:

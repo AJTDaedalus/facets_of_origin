@@ -251,7 +251,7 @@ A charge is consumed only when armor provides the reduction actually applied —
 
 **Table MM5–13: Magic Difficulty by Scope**
 
-| Scope | Focused | Standard | Broad (Prismatic) |
+| Scope | Focused | Standard | Prismatic |
 |---|---|---|---|
 | Minor | Easy | Standard | Hard |
 | Significant | Standard | Hard | Very Hard |
@@ -262,7 +262,7 @@ A charge is consumed only when armor provides the reduction actually applied —
 - **Sparks and magic** — dice-Sparks work on any roll, including every magic roll. A Spark buys **reach** in exactly two cases, player-declared before the roll:
   - **Pre-Technique Significant:** a pre-Technique caster may spend a Spark to attempt **one** Significant-scope effect at the domain's normal Significant difficulty. One effect per Spark — not an unlock; Major stays closed until the Tier 1 Technique.
   - **Focused eases Major:** a Focused domain may spend a Spark to shift a Major effect one step easier (Hard → Standard). Focused only.
-  - **Prismatic:** reach-Sparks cannot move a Broad working's difficulty; dice-Sparks work normally.
+  - **Prismatic:** reach-Sparks cannot move a Prismatic working's difficulty; dice-Sparks work normally.
 - **Second domain** (Tier 3, Mind and Soul trees): a second **standard** domain only — prismatic territories require Ascendant Domain. Effects in the second domain are one difficulty step harder than normal for that domain until the character earns their next Facet level; then the penalty lifts.
 
 ### Adjudicating Magic (compressed from MM2 — see MM2 for full text)

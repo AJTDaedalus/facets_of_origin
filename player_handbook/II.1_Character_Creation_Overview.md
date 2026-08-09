@@ -21,7 +21,7 @@ At the top, before any of its sections, the sheet records two names: your charac
 | **Background** | Your character's title and origin, your Starting Skill (Practiced), your Secondary Skill (Novice with 1 mark) or Domain Origin if your Background grants magic, and your Specialty |
 | **Skills** | All 15 skills across the three Facets — current rank (Novice/Practiced/Expert/Master) and marks toward the next rank |
 | **Techniques** | The specific abilities you have unlocked from the Facet Technique trees (any tree whose prerequisites you meet), plus any choices made at unlock |
-| **Magic** | Your magic domain's name and type (Focused, Standard, or Broad), and whether you're still pre-Technique (Minor scope only) or have unlocked full scope |
+| **Magic** | Your magic domain's name and type (Focused, Standard, or Prismatic), and whether you're still pre-Technique (Minor scope only) or have unlocked full scope |
 | **Combat** | Your Endurance (current / max — 4 plus your Constitution modifier plus Endurance skill rank), your Armor type and downgrade budget, your active Conditions, and your current Spark count |
 | **Inventory** | Your equipment, including the armor whose type sets your Combat section's downgrade budget |
 | **Session Resources** | The skill points you receive to spend at each session's end |

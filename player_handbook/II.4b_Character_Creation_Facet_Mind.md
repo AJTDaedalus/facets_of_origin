@@ -266,9 +266,9 @@ You may recall something you have no direct reason to know — a piece of esoter
 
 **Choose:** One prismatic domain from the Domains of the Mind list.
 
-**Roll:** Knowledge + Lore, on the Broad difficulty table.
+**Roll:** Knowledge + Lore, on the Prismatic difficulty table.
 
-*Requires an existing Mind domain (Arcane Study).* Your practice has outgrown a single territory. Choose one prismatic domain from the Domains of the Mind list (Chapter II.3). You may work within it using the Domain + Intent + Scope framework, rolling Knowledge. The Broad difficulty table applies — Hard at Minor scope, Very Hard at Significant and Major — and reach-Sparks cannot move a Broad working's difficulty, though dice-Sparks work normally (Chapter II.3, *Sparks and Magic*). Your original domain is unchanged; the prismatic territory is a wider practice built on everything it taught you. A character masters one prismatic territory — Ascendant Domain is taken once, however many Facet trees they eventually climb (Chapter II.3).
+*Requires an existing Mind domain (Arcane Study).* Your practice has outgrown a single territory. Choose one prismatic domain from the Domains of the Mind list (Chapter II.3). You may work within it using the Domain + Intent + Scope framework, rolling Knowledge. The Prismatic difficulty table applies — Hard at Minor scope, Very Hard at Significant and Major — and reach-Sparks cannot move a Prismatic working's difficulty, though dice-Sparks work normally (Chapter II.3, *Sparks and Magic*). Your original domain is unchanged; the prismatic territory is a wider practice built on everything it taught you. A character masters one prismatic territory — Ascendant Domain is taken once, however many Facet trees they eventually climb (Chapter II.3).
 
 **Normal:** Domains are Focused or Standard; prismatic territories are not otherwise available (see Table II.3–2).
 

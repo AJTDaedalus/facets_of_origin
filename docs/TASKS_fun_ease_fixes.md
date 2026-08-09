@@ -380,7 +380,7 @@ listed greps return the expected result; LOG updated.
   grep -v "skill\|rank"` and disposition every hit (pool → "Endurance Pool";
   skill stays bare). Record the disposition list in the LOG.
 
-- [ ] **T5.4 — One word: Prismatic (P-11, D14).**
+- [x] **T5.4 — One word: Prismatic (P-11, D14).**
   Files: `player_handbook/II.3_Magic.md` (12 hits), `Appendix_Magic_Domains.md`
   (8), `II.4b`/`II.4c` (2+2), `II.1` (1), `Glossary.md` (2),
   `software/facets/base/facet.yaml` (5), MM5 if present, static js (grep `Broad`).

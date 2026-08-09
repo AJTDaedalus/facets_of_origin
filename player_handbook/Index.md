@@ -199,6 +199,7 @@
 
 *Defined in [III.1](III.1_Core_Resolution.md).*
 
+- [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
 - [II.2 — How Attributes Work in Play](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play)
 - [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Attributes.md#in-play-the-vanishing-of-millhaven)
 - [II.3 — Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope)

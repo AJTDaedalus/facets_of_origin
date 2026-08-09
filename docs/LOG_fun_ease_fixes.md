@@ -1101,6 +1101,41 @@ anything unexpected.
   (76/72 — box title "Endurance Pools" re-registered); `node --check` ×3 OK;
   docs suite → 32 passed; websocket/character/combat suites → 487 passed.
 
+### T5.4 — One word: Prismatic (P-11, D14) (2026-08-09)
+
+- **Files:** `player_handbook/II.3_Magic.md` (9 edit groups incl. 6 catalog
+  rows), `Appendix_Magic_Domains.md` (8: preamble, 6 type labels, Mind
+  preamble), `II.4b`/`II.4c` (Roll: field + body, both Ascendant entries),
+  `II.1` (sheet-table type list), `Glossary.md` (Ascendant Domain + Domain
+  Type headword "Broad-Prismatic" → "Prismatic"),
+  `mm_manual/MM5_Quick_Reference.md` (Table MM5–11 header + Prismatic
+  bullet), `mm_manual/MM2_Session_Design.md` (Easy-cell floor note),
+  `software/facets/base/facet.yaml` (both Ascendant descriptions + roll
+  fields, 2 comments — **type key `broad` and `domain_types.broad` block
+  untouched per the identifier rule**), `software/app/static/js/tools.js`
+  (in-app rules card), `software/tests/test_docs_consistency.py` (INV-7
+  parser + register), Index + List regen.
+- **The one definitional sentence (II.3 §Domain Types):** "**Prismatic**
+  domains — *Broad*, in the ruleset data's type field — span multiple
+  thematic territories." Post-edit audit: this is the ONLY "Broad" left in
+  either book (plain-English "broad/broadly/broadside" excluded).
+- **INV-7:** the appendix parser now maps the printed "Prismatic" label to
+  the `broad` type key (D14 print-name mapping documented in the docstring)
+  — appendix stays canon, yaml keeps its identifier.
+- **Unexpected touchpoints:** (a) facet.yaml's two Ascendant `description:`
+  strings still carried the pre-T2.2 ceiling wording ("its Major-scope
+  ceiling cannot be moved by Sparks") — rewritten to the reach/dice-Spark
+  rule while in hand; (b) `tools.js`'s domain-type list likewise said
+  "(ceiling unmovable by Sparks)" — recompressed to the T2.2 rule.
+- **Register:** `Broad (Prismatic)`; `Broad-Prismatic`; `Broad difficulty
+  table` (all verified present pre-edit, absent post-edit; engine/test
+  docstrings are outside the register's scan scope and keep their
+  mechanical references to the `broad` type).
+- **Commands:** script → OK 30 groups/10 files; `build_index`;
+  `build_table_register` (76/72); `node --check tools.js` OK; docs suite →
+  32 passed. **FULL suite → 1471 passed** (318s; no count change — text
+  task).
+
 ---
 
 ## Escalations

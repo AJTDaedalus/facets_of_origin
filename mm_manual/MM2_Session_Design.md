@@ -500,7 +500,7 @@ And say it in the fiction, not in the mechanics. Not "you take a complication, t
 
 It is a **floor, not a surcharge.** Scope difficulty still applies normally on top of the domain type table — a Focused mage attempting a Major working mid-fight is rolling at Hard, exactly as they would in an empty room. Nothing is added. The floor simply says that nothing goes *below* Standard while something is actively working against you.
 
-Which means it bites in exactly one place: **the Easy cell.** A Focused domain at Minor scope is the only combination the table prices below Standard, so it is the only combination the floor ever moves. Everything else — any Standard domain, any Broad domain, any scope above Minor — already meets or exceeds the floor and is entirely unaffected. If you catch yourself raising a difficulty because of the floor and the roll was not going to be Easy, you have applied it twice.
+Which means it bites in exactly one place: **the Easy cell.** A Focused domain at Minor scope is the only combination the table prices below Standard, so it is the only combination the floor ever moves. Everything else — any Standard domain, any Prismatic domain, any scope above Minor — already meets or exceeds the floor and is entirely unaffected. If you catch yourself raising a difficulty because of the floor and the roll was not going to be Easy, you have applied it twice.
 
 The practical consequence is that the floor mostly lands on newer casters and on small workings: the Focused mage who lights a candle at Easy all session finds that lighting the enemy's cloak while the enemy objects is Standard. That is the intended lesson, and it is a cheap one to teach.
 

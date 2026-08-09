@@ -249,7 +249,7 @@ function renderToolsRuleSummaries() {
       <ul style="list-style:disc;padding-left:20px;">
         <li>Focused: Easy/Standard/Hard</li>
         <li>Standard: Standard/Hard/Very Hard</li>
-        <li>Broad (Prismatic): Hard/VH/VH (ceiling unmovable by Sparks)</li>
+        <li>Prismatic: Hard/VH/VH (reach-Sparks cannot move the difficulty; dice-Sparks work normally)</li>
       </ul>
       <p style="margin-top:6px;"><strong>Spark Uses:</strong> Improve Roll (add die, drop lowest),
          Push Scope (one step harder), Ease Focused Major</p>

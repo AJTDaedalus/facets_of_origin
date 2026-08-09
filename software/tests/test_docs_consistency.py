@@ -324,11 +324,16 @@ DOMAIN_APPENDIX = PLAYER_HANDBOOK / "Appendix_Magic_Domains.md"
 
 
 def _appendix_domains() -> dict[str, str]:
-    """{domain id: type} as the appendix declares them, across both Facets."""
+    """{domain id: type} as the appendix declares them, across both Facets.
+
+    D14 (T5.4): "Prismatic" is the player-facing print name of the `broad`
+    type key — the appendix prints Prismatic, facet.yaml keeps the key.
+    """
     domains: dict[str, str] = {}
     for name, dtype in _APPENDIX_DOMAIN.findall(DOMAIN_APPENDIX.read_text()):
         domain_id = re.sub(r"[^a-z0-9]+", "_", name.lower()).strip("_")
-        domains[domain_id] = dtype.lower()
+        dtype = dtype.lower()
+        domains[domain_id] = "broad" if dtype == "prismatic" else dtype
     return domains
 
 
@@ -1082,6 +1087,9 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("unspent points do not carry over", "P-5/D10 (T4.3): the forfeit is dead — up to 2 unspent points bank across sessions"),
     ("use-it-or-lose-it", "P-5/D10 (T4.3): MM5's compression of the dead forfeit rule"),
     ("before it lands, you automatically succeed", "P-8/D11 (T4.5): Never Surprised is a warning beat, not an auto-success — the absolute is gone"),
+    ("Broad (Prismatic)", "P-11/D14 (T5.4): Prismatic is the player-facing word; Broad survives only in II.3's one definitional sentence (and as the untouched `broad` type key)"),
+    ("Broad-Prismatic", "P-11/D14 (T5.4): Glossary headword variant of the dead double name"),
+    ("Broad difficulty table", "P-11/D14 (T5.4): the table is printed 'the Prismatic difficulty table'"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment
