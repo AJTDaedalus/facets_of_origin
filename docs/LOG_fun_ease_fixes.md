@@ -637,6 +637,36 @@ anything unexpected.
   builder.js` OK; acceptance grep over enemies/ mm_manual/ spec/
   software/facets/ bestiary/ characters/ adventures/ → **empty**.
 
+### T3.8 — Enemy posture: triggers instead of ceremony (K-4, K-10, D12) (2026-08-08)
+
+- **Files:** `player_handbook/III.3_Combat.md` (§Postures rewritten — PC
+  blind declaration explicitly KEPT, enemy stances stated openly from
+  conduct `triggers:`; exchange step 2; Strike-difficulty parenthetical;
+  §Enemy Posture and Reaction Difficulty lead; Insight combat-skill entry
+  and the "Reading the opponent" MM Note recast as the counter-tool for
+  what a stated stance does not say; vignette posture beats re-voiced —
+  the MM names the guardian's stance before declarations),
+  `mm_manual/MM1` (§Enemy Conduct Fields: `triggers:` now documents
+  posture explicitly — "write the stance as a rule the table can learn"),
+  `enemies/city_watch_sergeant.fof` (worked trigger: "Defensive once left
+  Open" — its old trigger read "Defensive if Staggered", a Condition an
+  enemy can no longer take; notes synced), `enemies/veteran_soldier.fof`
+  (unlisted: same stale "Defensive if Staggered themselves" in tactics —
+  PC-side Cornered/Staggered references kept, they are still real),
+  `mm_manual/MM5_Quick_Reference.md` (exchange-flow line 2 + posture-card
+  note), `player_handbook/Glossary.md` (Posture entry), bestiary
+  regenerated (sergeant's block renders the new trigger), Index +
+  List_of_Boxes regenerated (the MM Note title changed).
+- **Also fixed (T3.4 leftover found by the sweep):** the vignette's
+  Reduced-Mode narration still described the dead ignores-small-hurts
+  mechanic — now "the subsystem that would notice it is Open has shut
+  down; it will never stop to close it."
+- **Register:** `player characters and significant antagonists alike`
+  (the ceremony's distinctive clause, verified in situ pre-edit).
+- **Commands:** `build_bestiary` (1 file) + `--check` clean;
+  `build_index`; `build_table_register` (box title change); docs suite →
+  **32 passed**.
+
 ---
 
 ## Escalations

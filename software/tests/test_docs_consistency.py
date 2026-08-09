@@ -1072,6 +1072,7 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("x multiplier", "K-5/D6: the TR budget and its multipliers are cut — actor count drives difficulty; historical record in docs/DECISIONS.md"),
     ("Action Economy Multipliers", "K-5/D6: Table MM1-6 cut with the budget — the multipliers never predicted the actor-count threshold"),
     ("defense_modifier", "K-11: retired — never in the TR formula, and NPCs never roll; loader warns on legacy files"),
+    ("player characters and significant antagonists alike", "K-4/K-10/D12: the enemy blind-posture-reveal ceremony is dropped — the MM states enemy stances openly, driven by conduct triggers; PC-side blind declaration stays"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment

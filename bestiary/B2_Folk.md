@@ -46,7 +46,7 @@ These are the people who fight for a living without being soldiers about it: doc
 
 **In play:**
 
-- Opens Measured; shifts to Defensive if Staggered.
+- Opens Measured; shifts to Defensive once left Open — guard low, looking for the moment to spend an action recovering.
 - Goes Aggressive only if the party is clearly losing.
 - Calls for backup if the fight runs more than two exchanges.
 

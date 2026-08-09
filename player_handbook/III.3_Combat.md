@@ -74,7 +74,7 @@ A combat **exchange** is one dramatic beat — a moment of the fight where every
 
 1. **The MM describes the situation.** Where is everyone? What has just happened? What does the opposition look like right now?
 
-2. **All participants simultaneously declare Posture.** In a live session, the digital app handles blind reveal — everyone declares at the same time, then the table sees all Postures together. At a physical table, players can write postures on slips of paper and reveal them at once.
+2. **The MM states enemy stances; player characters simultaneously declare Posture.** Enemy stances are announced openly, driven by their written conduct. Player declaration is blind: in a live session, the digital app handles the blind reveal — everyone declares at the same time, then the table sees all Postures together. At a physical table, players can write postures on slips of paper and reveal them at once.
 
 3. **Actions and reactions are declared and resolved.** Each participant takes an offensive action, a support action, or passes. Targets of those actions may declare reactions. Rolls happen.
 
@@ -88,9 +88,11 @@ Exchanges are fast in the fiction. A full exchange — everyone acting, everyone
 
 ## Postures
 
-Before actions are declared each exchange, every participant (player characters and significant antagonists alike) simultaneously declares a **Posture**: the broad tactical stance they are taking for this beat of the fight.
+Before actions are declared each exchange, every player character simultaneously declares a **Posture**: the broad tactical stance they are taking for this beat of the fight.
 
-Posture is declared blind. You do not know what your opponent has declared until everyone reveals at once. Reading the situation, anticipating the opposition, and matching your posture to the moment is half the tactical game.
+Player Posture is declared blind. You do not know what your allies have committed to until everyone reveals at once. Reading the situation and matching your posture to the moment is half the tactical game.
+
+**Enemy stances are stated, not concealed.** As the exchange opens, the MM announces each Named NPC's and Boss's Posture out loud — most enemies follow the written conduct on their stat block (`triggers:` — "Aggressive while its allies stand; Defensive once Open"), so their stance is part of the situation you read and play against, not a secret to guess. Your declaration stays blind; theirs is the terrain.
 
 **Table III.3–2: Postures**
 
@@ -109,9 +111,9 @@ Posture is declared blind. You do not know what your opponent has declared until
 
 **Withdrawn:** You are out of the press entirely — creating space, catching breath, declining to engage. You can still react to incoming attacks, and those reactions are free. But you are going nowhere. The fight is happening without you for this beat.
 
-> **MM Note — Reading the opponent**
+> **MM Note — Reading past the stated stance**
 >
-> Posture is declared blind, but it is not declared blind of all information. A character with high Wisdom or the Insight skill can read body language, stance, and the micro-signals an opponent broadcasts before they commit. Before declaration, a player can ask the MM: *"Does anything about how they're carrying themselves suggest what posture they're about to declare?"* The MM is not obligated to answer precisely — but they should give an honest read of what an attentive character would notice. A skilled fighter telegraphs less. A wounded one telegraphs more. A creature built for ambush telegraphs nothing at all, and that too is information.
+> A stated stance is not the whole story, and Insight is the counter-tool for the rest. An enemy about to *change* stance, a feint, an ambusher whose conduct the party has not yet seen — before declaring, a player can ask: *"Does anything about how they're carrying themselves suggest what they're about to do?"* Give an honest read of what an attentive character would notice. A skilled fighter telegraphs less. A wounded one telegraphs more. A creature built for ambush telegraphs nothing at all, and that too is information.
 
 ---
 
@@ -127,7 +129,7 @@ The foundational offensive action. You bring force to bear on a target — weapo
 
 **Roll:** `2d6 + weapon attribute + relevant skill rank modifier`. Your weapon's category sets the attribute (Chapter IV.1). For the skill, the defaults are **Combat** for melee and unarmed Strikes and **Finesse** for ranged ones — but these are defaults, not restrictions. Describe how you are striking and use the skill that describes it. A soldier who overpowers her opponent rolls Combat; a disciple who strikes with trained precision rather than mass rolls Finesse; both are correct, and both are Strikes. Where the fiction clearly supports a different attribute, the MM may name one. When two pairings both fit, the player chooses.
 
-**Difficulty** is Standard by default. The MM adjusts based on the situation: a Named NPC or Boss in Defensive Posture, or with strong Constitution, may push it to Hard. An **Open** enemy is Easy to Strike — for everyone, no judgment call required. When in doubt, Standard. (Named NPCs and Bosses declare Postures as described in the Postures section. For Mooks, the MM sets difficulty by situation: Standard by default, Easy if distracted or exposed, Hard if armored and alert.) A Technique may then move the MM's call one step further, exactly as any roll's difficulty can (see *Difficulty*, III.1).
+**Difficulty** is Standard by default. The MM adjusts based on the situation: a Named NPC or Boss in Defensive Posture, or with strong Constitution, may push it to Hard. An **Open** enemy is Easy to Strike — for everyone, no judgment call required. When in doubt, Standard. (The MM states Named NPC and Boss stances openly — see the Postures section. For Mooks, the MM sets difficulty by situation: Standard by default, Easy if distracted or exposed, Hard if armored and alert.) A Technique may then move the MM's call one step further, exactly as any roll's difficulty can (see *Difficulty*, III.1).
 
 **Table III.3–3: Strike Outcomes**
 
@@ -395,7 +397,7 @@ Your armor applies normally: if you have downgrade budget left (see *Armor*), th
 
 ### Enemy Posture and Reaction Difficulty
 
-Named NPCs and Bosses declare Postures like PCs. Their posture's offense modifier adjusts the difficulty of reactions against their attacks:
+Named NPCs and Bosses hold stances the MM states openly (see *Postures*). The stance adjusts the difficulty of reactions against their attacks:
 
 **Table III.3–9: Enemy Posture and PC Reactions**
 
@@ -441,7 +443,7 @@ Magical effects in combat follow the same **Domain + Intent + Scope** framework 
 
 A character whose primary development is in Mind or Soul is not helpless in combat. They are playing a different game in the same space — one that is often more decisive than trading Strike for Strike.
 
-**Insight (Wisdom):** Read the opposition's likely Posture before it is revealed. A successful Insight roll at the start of an exchange gives you information — their body language, their positioning, the tension in their stance. That information matters when Posture is declared blind.
+**Insight (Wisdom):** Read what the stated stance does not say. Enemy stances are announced openly, but a successful Insight roll at the start of an exchange reads past them — a feint, a stance about to change, an ambusher whose conduct you have not seen yet. That information matters most in the beat before you commit your own blind declaration.
 
 **Attune (Spirit):** Channel your domain's force as a direct Strike. Spirit is the roll for intuitive magical attacks. Domain + Intent + Scope sets the difficulty; the Strike outcome table applies exactly as it would for a physical Strike — Resolve against an enemy, a Condition against another character.
 
@@ -490,7 +492,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zahna:** "Is that the encouraging or discouraging reading of this situation?"
 
-**MM:** "Yes. It takes another step. Combat this exchange. Declare Postures."
+**MM:** "Yes. It takes another step. Combat this exchange. The guardian is Measured — flat, patient, giving nothing away. It always is. Declare Postures."
 
 ---
 
@@ -502,7 +504,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zahna:** "Measured. I'm looking for an opening — something I can use."
 
-*All three Postures revealed. The guardian's flat approach gives away nothing. It is Measured — it always is.*
+*All three Postures revealed, against the stance the MM already named. The guardian gives away nothing else.*
 
 *(Behind the screen, the MM is tracking one number for the guardian: **Resolve 10**. Base 8, plus 2 for its heavy plating. That is the whole fight's clock — no Condition track to grind, just a pool to run dry.)*
 
@@ -636,7 +638,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 → Mordai spends his last Endurance to Press: **3d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** at Easy difficulty (+1), drop the lowest, and gets an **11**. Full success. Mordai is now at **0 Endurance**.
 
-**MM:** "Two more Resolve — that takes it to **2**. And 2 is a threshold." *The MM checks the stat block.* "The guardian changes. Its next blow won't have the weight the others did — but something else happens: it stops reacting to small hurts entirely. It's entered **Reduced Mode**. The subsystem that was registering minor damage has shut down. It is running on something else now, and none of you know what."
+**MM:** "Two more Resolve — that takes it to **2**. And 2 is a threshold." *The MM checks the stat block.* "The guardian changes. Its next blow won't have the weight the others did — but something else happens: it stops registering harm entirely. It's entered **Reduced Mode**. The subsystem that would notice the seam you've opened — notice it is Open at all — has shut down. It will never stop to close it now. It is running on something else, and none of you know what."
 
 *The light in its eyes flickers — not dimmer, exactly. Differently lit.*
 

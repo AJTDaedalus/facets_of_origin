@@ -100,7 +100,7 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 
 ```
 1. MM describes the situation
-2. All participants declare Postures (simultaneously, blind)
+2. State enemy stances openly (from their `triggers:`); PCs declare Postures simultaneously, blind
 3. Declare and resolve Actions (Strike / Maneuver / Support / Magic)
 4. Targets declare and resolve Reactions
 5. Apply results: deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, note an enemy left Open
@@ -121,6 +121,8 @@ An exchange with **no PC offensive action** is uncontested — the situation adv
 | **Measured** | +0 | +0 | Baseline |
 | **Defensive** | -1 | -1 Endurance (min 0) | — |
 | **Withdrawn** | No offense | Free (0) | Recover 2 Endurance end of exchange, up to the pool |
+
+PC Posture is declared blind. Enemy stances are **stated, not concealed** — announce them as the exchange opens, driven by the stat block's `triggers:`. Insight reads past a stated stance (a feint, a shift about to happen).
 
 ---
 

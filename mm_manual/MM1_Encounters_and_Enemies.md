@@ -255,7 +255,13 @@ spreadsheet row.
 
 **`disposition:`** its whole combat philosophy in one sentence.
 **`first_target:`** who it goes for, and why.
-**`triggers:`** a list of if-then rules — not a round-by-round script.
+**`triggers:`** a list of if-then rules — not a round-by-round script. **Posture
+lives here.** Enemy stances are not declared blind — you state them openly as
+each exchange opens (see *Postures*, Chapter III.3) — so write the stance as a
+rule the table can learn: "Aggressive while its allies stand; Defensive once
+Open; Withdrawn when its morale line is crossed." A stated stance driven by a
+visible trigger is threat texture the party can read and play against; a
+stance you invent fresh each exchange is noise.
 **`morale:`** when it stops. Every enemy needs one; nothing fights to the death by
 default.
 **`organization:`** how many turn up together.

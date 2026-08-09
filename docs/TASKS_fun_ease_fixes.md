@@ -249,7 +249,7 @@ listed greps return the expected result; LOG updated.
   Accept: `grep -rln "defense_modifier" enemies/ mm_manual/ spec/ facets/` → empty;
   loader-warning test green; bestiary regenerated.
 
-- [ ] **T3.8 — Enemy posture: triggers instead of ceremony (K-4, K-10, D12).**
+- [x] **T3.8 — Enemy posture: triggers instead of ceremony (K-4, K-10, D12).**
   Files: `player_handbook/III.3_Combat.md` (§Postures: enemy blind-reveal dropped —
   the MM states enemy stance; PC-side blind declaration explicitly kept; Insight
   pre-read named as the counter-tool), `mm_manual/MM1_Encounters_and_Enemies.md`

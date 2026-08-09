@@ -39,7 +39,7 @@
 | **MM Note** | ["What's different this time?"](III.1_Core_Resolution.md#trying-again) | III.1_Core_Resolution.md |
 | **Example** | [Endurance pools](III.3_Combat.md#calculating-your-endurance-pool) | III.3_Combat.md |
 | **MM Note** | [Withdrawn is a tempo move, not a permanent position](III.3_Combat.md#recovering-endurance) | III.3_Combat.md |
-| **MM Note** | [Reading the opponent](III.3_Combat.md#postures) | III.3_Combat.md |
+| **MM Note** | [Reading past the stated stance](III.3_Combat.md#postures) | III.3_Combat.md |
 | **MM Note** | [Dodge or Parry?](III.3_Combat.md#parry) | III.3_Combat.md |
 | **Through the Mirror** | [why enemies lose Resolve and characters take Conditions](III.3_Combat.md#conditions) | III.3_Combat.md |
 | **Through the Mirror** | [why Tier 1 Conditions clear so fast](III.3_Combat.md#tier-1-conditions) | III.3_Combat.md |
