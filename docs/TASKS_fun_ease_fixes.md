@@ -349,7 +349,7 @@ listed greps return the expected result; LOG updated.
   `player_handbook/III.2` (clock-janitor MM sidebar),
   `mm_manual/MM4_Running_the_Table.md` (Luck/Spirit MM-invoked-roll note).
 
-- [ ] **T4.8 — WS-4 sweep.** Register grep; Glossary reread; regenerate; full
+- [x] **T4.8 — WS-4 sweep.** Register grep; Glossary reread; regenerate; full
   suite; verify II.3 examples, QS pregens, Zahna.fof, and facet.yaml all state the
   same casting math (the classic four-way drift point).
 

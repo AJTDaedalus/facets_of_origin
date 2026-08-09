@@ -971,6 +971,37 @@ anything unexpected.
 - **Commands:** `build_index` + `build_table_register`; docs suite →
   32 passed. One commit, per the task.
 
+### T4.8 — WS-4 sweep (2026-08-09)
+
+- **Register grep:** all 9 WS-4 phrases (4× T4.1 casting-formula, T4.2's
+  "always one difficulty step harder", 3× T4.3 forfeit variants, T4.5's
+  auto-success clause) absent from every live surface; invariant test green.
+- **Glossary reread (each touched entry against its body source):**
+  Domain ↔ II.3 §Rolling Magic (Spirit+Attune / Knowledge+Lore) ✓;
+  Second Domain ↔ II.4b/II.4c entries (expiry at next Facet level) ✓;
+  Skill Point ↔ II.4 §Advancing Skills (bank ≤2, 1 training point) ✓;
+  Spark/Rank/Posture spot-checked, untouched by WS-4 and still consistent ✓.
+- **Four-way casting math (the classic drift point):** II.3's two examples
+  (2d6 + Knowledge +1 + Lore +1), QS's pregen line + both vignette casts
+  (2d6+2 with the breakdown), `characters/Zahna.fof` (knowledge 3, lore
+  practiced, scholarly comment), `software/facets/base/facet.yaml`
+  `magic.traditions`, and `test_scholarly_casting_adds_lore_rank` (+2
+  asserted) all state the same total for the same character.
+- **Regeneration:** `build_index` idempotent; `build_table_register`
+  idempotent (76 tables / 72 boxes); `build_bestiary --check` → "Bestiary
+  is up to date."
+- **Sub-item (user conversation):** `research/magic_system_analysis.md`
+  §6 gains a dated **Naming note** at its traditions recommendation:
+  "Resonance" is now a Soul domain and must not be reused as a tradition
+  name; the core PHB keys traditions to attributes (Spirit=intuitive,
+  Knowledge=scholarly, each with its skill per T4.1/D7); setting-layer
+  tradition naming stays open alongside the Body tradition name. No new
+  tradition names introduced.
+- **Full suite:** **1471 passed** (331s). WS-4 complete: 1445 → 1471
+  (+26: 4 casting-skill, 5 second-domain expiry, 10 banking/training, +2 net
+  websocket, 3 facet-level counting, 2 never-surprised wording).
+- **Result:** 8/8 WS-4 tasks done, 8 commits, no escalations.
+
 ---
 
 ## Escalations

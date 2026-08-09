@@ -387,6 +387,8 @@ Shattered Origin presumably has some internal logic for why magic exists and wha
 
 **Recommendation:** Define 2–3 broad magical traditions in Shattered Origin at the setting level (e.g., Resonance — the study of fundamental harmonic forces in the world; Channeling — drawing on spiritual entities or divine power; Wild — magic that flows from living things and the natural world). Each tradition suggests domains and offers a narrative hook, but does not restrict which domains a character can access — that's determined by character history and the domain system. Traditions are flavor, not ceilings.
 
+> **Naming note (2026-08-09):** the name "Resonance" proposed above has since been used for a Soul *domain* (sound, vibration, harmonic force — PHB II.3) and must not be reused as a tradition name. The core PHB deliberately names no traditions: it keys them to attributes instead — Spirit governs intuitive magic, Knowledge governs scholarly magic (II.3, *Rolling Magic*), and as of T4.1/D7 each keys a skill as well (Spirit adds Attune, Knowledge adds Lore). Setting-layer tradition *naming* remains an open question, alongside the Body tradition name (see the open design questions list).
+
 ---
 
 ## Summary and Next Steps
