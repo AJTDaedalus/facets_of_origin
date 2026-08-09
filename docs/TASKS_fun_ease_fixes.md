@@ -282,7 +282,7 @@ listed greps return the expected result; LOG updated.
   Accept: bands within ±10pp or tables updated; A5 no longer 98%-by-cycling; boss
   median 2–4 exchanges. Escalate to Planner if any acceptance fails twice.
 
-- [ ] **T3.12 — WS-3 sweep.** Register grep; regenerate bestiary + PHB lists; full
+- [x] **T3.12 — WS-3 sweep.** Register grep; regenerate bestiary + PHB lists; full
   suite; reread MM5 combat cards against final III.3 (rule 5).
 
 ## WS-4 — Magic & advancement (branch `feat/magic-advancement-arcs`)

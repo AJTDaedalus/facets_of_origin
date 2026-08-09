@@ -747,6 +747,18 @@ anything unexpected.
   campaign script in the session scratchpad (reproduce lines in
   Series 10). FULL suite: see T3.12.
 
+### T3.12 — WS-3 sweep (2026-08-09)
+
+- **Commands (orchestrator-run after the agent's second session ended):**
+  register invariant + full suite → **1445 passed** (337s). Bestiary
+  `--check` → up to date. `build_index` → idempotent, no diff. Sweep greps:
+  budget/multiplier remnants in both books → empty; `tier1_immunity` outside
+  the schema deprecation path → empty; Open present in MM5 cards (7 refs).
+- **Note:** T3.11's builder.js straggler (form reset touching the removed
+  defense field — would have thrown a TypeError on clearEnemyForm) was folded
+  into the T3.11 commit with a note.
+- **Result:** WS-3 complete. 12/12 tasks, suite 1417 → 1445, no escalations.
+
 ---
 
 ## Escalations
