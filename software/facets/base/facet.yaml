@@ -860,17 +860,19 @@ techniques:
                   Ascendant Domain). You may use magic within that domain using the
                   Domain + Intent + Scope framework, rolling Knowledge as normal. Effects
                   within your second domain are treated as one difficulty step harder than
-                  normal for that domain.
+                  normal for that domain until you earn your next Facet level — the cost
+                  of a practice still settling, not a permanent tax.
                 use: "Passive"
-                roll: "Knowledge + Lore, one difficulty step harder than normal for that domain"
+                roll: "Knowledge + Lore, one difficulty step harder than normal for that domain until your next Facet level"
                 normal: >
                   A character has one magical domain, and its origin is a
                   Background (see *Acquiring a Domain*, II.3).
                 grants_secondary_domain: true
+                penalty_expires: next_facet_level
                 requires_domain: mind
                 prerequisites: []
                 has_choice: true
-                choice_prompt: "Choose a second standard domain from the Domains of the Mind list (must differ from your first; prismatic domains excluded)."
+                choice_prompt: "Choose a second standard domain from the Domains of the Mind list (must differ from your first; prismatic domains excluded). A Focused pick suffers the settling-in penalty least while it lasts."
 
               - id: ascendant_domain_mind
                 name: "Ascendant Domain"
@@ -1169,17 +1171,20 @@ techniques:
                   domain from the Domains of the Soul list (prismatic territories require Ascendant
                   Domain). You may use magic within that domain using the Domain + Intent + Scope
                   framework, rolling Spirit as normal. Effects within your second domain are
-                  treated as one difficulty step harder than normal for that domain.
+                  treated as one difficulty step harder than normal for that domain until
+                  you earn your next Facet level — the cost of a practice still settling,
+                  not a permanent tax.
                 use: "Passive"
-                roll: "Spirit + Attune, one difficulty step harder than normal for that domain"
+                roll: "Spirit + Attune, one difficulty step harder than normal for that domain until your next Facet level"
                 normal: >
                   A character has one magical domain, and its origin is a
                   Background (see *Acquiring a Domain*, II.3).
                 grants_secondary_domain: true
+                penalty_expires: next_facet_level
                 requires_domain: soul
                 prerequisites: []
                 has_choice: true
-                choice_prompt: "Choose a second standard domain from the Domains of the Soul list (must differ from your first; prismatic domains excluded)."
+                choice_prompt: "Choose a second standard domain from the Domains of the Soul list (must differ from your first; prismatic domains excluded). A Focused pick suffers the settling-in penalty least while it lasts."
 
               - id: ascendant_domain_soul
                 name: "Ascendant Domain"

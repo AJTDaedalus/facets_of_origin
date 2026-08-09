@@ -139,6 +139,13 @@ class TechniqueDef(BaseModel):
                         `secondary_magic_domain`, which the engine taxes one difficulty
                         step harder. Standard domains only — prismatic territories
                         require Ascendant Domain instead (II.4c).
+        penalty_expires: "next_facet_level" | None (T4.2/D9). On a
+                        `grants_secondary_domain` Technique, declares that the
+                        one-step penalty lifts at the character's next Facet
+                        level after acquisition — `select_technique` records
+                        the acquisition level so the engine can honor the
+                        expiry. None (the default) leaves any penalty
+                        permanent, the pre-D9 behavior.
         requires_domain: Facet id ("mind" or "soul") whose domain list the character
                         must already hold a domain from — Second Domain and Ascendant
                         Domain both require an existing domain in their own tree
@@ -198,6 +205,7 @@ class TechniqueDef(BaseModel):
     magic_granting: bool = False
     grants_prismatic_domain: bool = False
     grants_secondary_domain: bool = False
+    penalty_expires: str | None = None
     requires_domain: str | None = None
     difficulty_step: Literal["easier", "harder"] | None = None
     step_trigger: StepTriggerDef | None = None

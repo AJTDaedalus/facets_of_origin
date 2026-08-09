@@ -100,6 +100,10 @@ class Character(BaseModel):
     # Magic (persisted)
     magic_domain: Optional[str] = None
     secondary_magic_domain: Optional[str] = None  # Soul Communion T3 "Second Domain"
+    # T4.2/D9: total_facet_levels at the moment Second Domain was taken. The
+    # one-step penalty lifts at the next Facet level after acquisition; None
+    # (a hand-authored or legacy secondary domain) keeps the penalty standing.
+    second_domain_acquired_at_total_facet_levels: Optional[int] = None
     # Tier 3 "Ascendant Domain" — a prismatic domain held *alongside* the
     # original. Kept apart from secondary_magic_domain because the routes cost
     # differently: Second Domain is one difficulty step harder, while Ascendant
@@ -146,6 +150,17 @@ class Character(BaseModel):
     def rank_advances_this_facet_level(self) -> int:
         """Rank advances banked toward the next primary-Facet level."""
         return self.rank_advances_by_facet.get(self.primary_facet, 0)
+
+    @property
+    def second_domain_penalty_expired(self) -> bool:
+        """T4.2/D9: True once the character has earned a Facet level after
+        acquiring Second Domain — the one-step penalty is an arc, not a
+        permanent tax. Without an acquisition record (legacy/hand-authored
+        characters), the penalty stands."""
+        acquired = self.second_domain_acquired_at_total_facet_levels
+        if acquired is None:
+            return False
+        return self.total_facet_levels > acquired
 
     def validate_against_ruleset(self, ruleset: MergedRuleset) -> list[str]:
         """Return a list of validation errors against the ruleset. Empty list = valid.
@@ -415,6 +430,13 @@ class Character(BaseModel):
                 self.ascendant_domain = str(choice)
             elif tech_def.grants_secondary_domain:
                 self.secondary_magic_domain = str(choice)
+                # T4.2/D9: record the acquisition level so the one-step
+                # penalty can lift at the next Facet level — driven by the
+                # Technique's own penalty_expires field, not hardcoded.
+                if getattr(tech_def, "penalty_expires", None) == "next_facet_level":
+                    self.second_domain_acquired_at_total_facet_levels = (
+                        self.total_facet_levels
+                    )
             elif tech_def.magic_granting:
                 # Formalizing the Background's domain re-sets the same value;
                 # anything else is a genuine second domain from the other Facet.
@@ -587,6 +609,10 @@ class Character(BaseModel):
             char_block["magic_technique_active"] = self.magic_technique_active
         if self.secondary_magic_domain is not None:
             char_block["secondary_magic_domain"] = self.secondary_magic_domain
+            if self.second_domain_acquired_at_total_facet_levels is not None:
+                char_block["second_domain_acquired_at_total_facet_levels"] = (
+                    self.second_domain_acquired_at_total_facet_levels
+                )
         if self.ascendant_domain is not None:
             char_block["ascendant_domain"] = self.ascendant_domain
         if self.cross_facet_domain is not None:
@@ -699,6 +725,9 @@ class Character(BaseModel):
             specialty=char_block.get("specialty"),
             magic_domain=char_block.get("magic_domain"),
             secondary_magic_domain=char_block.get("secondary_magic_domain"),
+            second_domain_acquired_at_total_facet_levels=char_block.get(
+                "second_domain_acquired_at_total_facet_levels"
+            ),
             ascendant_domain=char_block.get("ascendant_domain"),
             cross_facet_domain=char_block.get("cross_facet_domain"),
             magic_tradition=char_block.get("magic_tradition"),

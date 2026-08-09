@@ -1077,6 +1077,7 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("Roll Spirit when doing so", "P-2/D7 (T4.1): casting adds the tradition's skill — casting with Spirit adds the Attune rank"),
     ("Knowledge or Spirit (by tradition)", "P-2/D7 (T4.1): the attribute-only casting formula is dead — the roll is Spirit + Attune or Knowledge + Lore"),
     ("Spirit or Knowledge (by tradition)", "P-2/D7 (T4.1): the attribute-only casting formula is dead — the roll is Spirit + Attune or Knowledge + Lore"),
+    ("always one difficulty step harder", "P-7/D9 (T4.2): the Second Domain penalty is an arc, not a permanent tax — it lifts at the character's next Facet level after acquisition"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment

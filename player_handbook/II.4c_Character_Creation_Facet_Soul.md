@@ -230,11 +230,11 @@ You may anchor something spiritual that is failing or breaking: a ritual unravel
 
 **Use:** Passive.
 
-**Choose:** A second standard domain from the Domains of the Soul list (must differ from your first; prismatic domains excluded).
+**Choose:** A second standard domain from the Domains of the Soul list (must differ from your first; prismatic domains excluded). A Focused pick suffers the settling-in penalty least while it lasts.
 
-**Roll:** Spirit + Attune, one difficulty step harder than normal for that domain.
+**Roll:** Spirit + Attune, one difficulty step harder than normal for that domain until your next Facet level.
 
-*Requires an existing Soul domain (Spiritual Domain).* You have grown into a second intuitive magical domain — a complementary territory that your original practice has opened. Choose a second standard domain from the Domains of the Soul list (prismatic territories require Ascendant Domain, below). You may use magic within that domain using the Domain + Intent + Scope framework, rolling Spirit as normal. Effects within your second domain are treated as one difficulty step harder than normal for that domain. A character holds one Second Domain.
+*Requires an existing Soul domain (Spiritual Domain).* You have grown into a second intuitive magical domain — a complementary territory that your original practice has opened. Choose a second standard domain from the Domains of the Soul list (prismatic territories require Ascendant Domain, below). You may use magic within that domain using the Domain + Intent + Scope framework, rolling Spirit as normal. Effects within your second domain are treated as one difficulty step harder than normal for that domain until you earn your next Facet level — the cost of a practice still settling, not a permanent tax. A character holds one Second Domain.
 
 **Normal:** A character has one magical domain, and its origin is a Background (see *Acquiring a Domain*, II.3).
 

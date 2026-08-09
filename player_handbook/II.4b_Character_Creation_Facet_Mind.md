@@ -252,11 +252,11 @@ You may recall something you have no direct reason to know — a piece of esoter
 
 **Use:** Passive.
 
-**Choose:** A second standard domain from the Domains of the Mind list — it must differ from your first, and prismatic domains are excluded.
+**Choose:** A second standard domain from the Domains of the Mind list — it must differ from your first, and prismatic domains are excluded. A Focused pick suffers the settling-in penalty least while it lasts.
 
-**Roll:** Knowledge + Lore, one difficulty step harder than normal for that domain.
+**Roll:** Knowledge + Lore, one difficulty step harder than normal for that domain until your next Facet level.
 
-*Requires an existing Mind domain (Arcane Study).* Your study has opened onto a second territory — an adjacent field whose principles your first domain taught you to read. Choose a second standard domain from the Domains of the Mind list (prismatic territories require Ascendant Domain, below). You may use magic within that domain using the Domain + Intent + Scope framework, rolling Knowledge as normal. Effects within your second domain are treated as one difficulty step harder than normal for that domain. A character holds one Second Domain.
+*Requires an existing Mind domain (Arcane Study).* Your study has opened onto a second territory — an adjacent field whose principles your first domain taught you to read. Choose a second standard domain from the Domains of the Mind list (prismatic territories require Ascendant Domain, below). You may use magic within that domain using the Domain + Intent + Scope framework, rolling Knowledge as normal. Effects within your second domain are treated as one difficulty step harder than normal for that domain until you earn your next Facet level — the cost of a practice still settling, not a permanent tax. A character holds one Second Domain.
 
 **Normal:** A character has one magical domain, and its origin is a Background (see *Acquiring a Domain*, II.3).
 

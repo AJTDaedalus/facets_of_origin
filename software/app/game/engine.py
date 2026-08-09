@@ -373,13 +373,17 @@ def resolve_magic_roll(
     # already bypassed above, and the difficulty stays at its normal value —
     # no dice bonus, no difficulty shift.
 
-    # Secondary domain penalty: one difficulty step harder (Soul Communion T3 rule)
+    # Secondary domain penalty: one difficulty step harder (Second Domain,
+    # Tier 3). T4.2/D9: the penalty is an arc, not a permanent tax — it lifts
+    # at the character's next Facet level after acquiring the Technique
+    # (Character.second_domain_penalty_expired; legacy characters without an
+    # acquisition record keep the penalty).
     is_secondary = (
         hasattr(character, "secondary_magic_domain")
         and character.secondary_magic_domain
         and domain_id == character.secondary_magic_domain
     )
-    if is_secondary:
+    if is_secondary and not getattr(character, "second_domain_penalty_expired", False):
         difficulty_label = _step_difficulty_harder(difficulty_label, ruleset)
 
     # No Broad ceiling clamp is needed here: Very Hard is the top of the

@@ -572,3 +572,74 @@ def test_b4q2_second_domain_focused_primary_does_not_leak_into_pricing(ruleset):
         "this is the exact value the retired 'harder than your primary "
         "domain' wording would have produced for a Focused-primary caster"
     )
+
+
+# ---------------------------------------------------------------------------
+# T4.2 (P-7, D9): the Second Domain penalty is an arc, not a permanent tax —
+# it lifts at the character's next Facet level after acquiring the Technique.
+# ---------------------------------------------------------------------------
+
+class TestSecondDomainPenaltyExpiry:
+    def test_penalty_applies_while_the_practice_settles(self, ruleset):
+        """Right after acquisition the tax stands: Storm Minor (Standard)
+        lands Hard as a second domain."""
+        char = _soul_mage(ruleset)
+        assert char.select_technique("second_domain", ruleset=ruleset, choice="storm")[0]
+        result = resolve_magic_roll(
+            character=char, domain_id="storm", scope="minor",
+            intent="a gust", ruleset=ruleset,
+        )
+        assert result.difficulty_modifier == -1  # Standard stepped to Hard
+
+    def test_penalty_lifts_at_next_facet_level(self, ruleset):
+        """Earning the next Facet level after taking the Technique lifts the
+        penalty: Storm Minor returns to its normal Standard difficulty."""
+        char = _soul_mage(ruleset)
+        assert char.select_technique("second_domain", ruleset=ruleset, choice="storm")[0]
+        levels_before = char.total_facet_levels
+        # Advance skills until a new Facet level lands (threshold: 5 rank
+        # advances in the Facet; 9 marks = 3 rank advances per skill).
+        char.advance_skill("persuade", 9, ruleset)
+        char.advance_skill("deceive", 9, ruleset)
+        assert char.total_facet_levels > levels_before
+        result = resolve_magic_roll(
+            character=char, domain_id="storm", scope="minor",
+            intent="a gust", ruleset=ruleset,
+        )
+        assert result.difficulty_modifier == 0  # Standard, no step
+
+    def test_hand_authored_secondary_without_record_keeps_penalty(self, ruleset):
+        """A legacy character whose secondary domain was set by hand (no
+        acquisition record) keeps the conservative permanent penalty."""
+        char = _soul_mage(ruleset)
+        char.secondary_magic_domain = "storm"
+        char.facet_levels["soul"] = char.facet_levels.get("soul", 0) + 3
+        result = resolve_magic_roll(
+            character=char, domain_id="storm", scope="minor",
+            intent="a gust", ruleset=ruleset,
+        )
+        assert result.difficulty_modifier == -1
+
+    def test_acquisition_level_survives_fof_round_trip(self, ruleset):
+        """The recorded acquisition level persists through to_fof/from_fof."""
+        from app.game.character import Character
+        char = _soul_mage(ruleset)
+        assert char.select_technique("second_domain", ruleset=ruleset, choice="storm")[0]
+        recorded = char.second_domain_acquired_at_total_facet_levels
+        assert recorded is not None
+        reloaded = Character.from_fof(
+            char.to_fof([{"id": "base", "version": "0.1.0"}], "t" * 36)
+        )
+        assert reloaded.second_domain_acquired_at_total_facet_levels == recorded
+
+    def test_yaml_entries_carry_the_expiry_field(self, ruleset):
+        """Both Second Domain entries declare penalty_expires: next_facet_level."""
+        found = 0
+        for tree in ruleset.techniques.values():
+            for branch in tree.branches:
+                for tier in branch.tiers:
+                    for tech in tier.techniques:
+                        if tech.grants_secondary_domain:
+                            assert tech.penalty_expires == "next_facet_level", tech.id
+                            found += 1
+        assert found == 2

@@ -302,7 +302,7 @@ listed greps return the expected result; LOG updated.
   Accept: an example roll in II.3, the QS pregen line, and an engine test all show
   the same total for the same character.
 
-- [ ] **T4.2 — Second Domain expiry (P-7, D9).**
+- [x] **T4.2 — Second Domain expiry (P-7, D9).**
   Files: `player_handbook/II.4b` + `II.4c` (both Technique entries; Choose-field
   note that Focused suffers the penalty least while it lasts),
   `software/facets/base/facet.yaml` (`second_domain_mind` ~853, `second_domain`

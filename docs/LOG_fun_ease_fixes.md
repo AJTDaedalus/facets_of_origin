@@ -806,6 +806,41 @@ anything unexpected.
   passed; `python -m tools.build_index`; docs suite 32 passed. FULL suite →
   **1449 passed** (322s; 1445 + 4 new).
 
+### T4.2 — Second Domain expiry (P-7, D9) (2026-08-09)
+
+- **Files:** `player_handbook/II.4b` + `II.4c` (both entries: Roll line,
+  body text "until you earn your next Facet level — the cost of a practice
+  still settling, not a permanent tax", Choose-field "A Focused pick suffers
+  the settling-in penalty least while it lasts"),
+  `software/facets/base/facet.yaml` (both entries gain
+  `penalty_expires: next_facet_level` + mirrored description/roll/choice
+  text), `software/app/facets/schema.py` (`TechniqueDef.penalty_expires`),
+  `software/app/game/character.py` (new persisted field
+  `second_domain_acquired_at_total_facet_levels`, recorded by
+  `select_technique` only when the Technique declares the expiry —
+  data-driven, not hardcoded; property `second_domain_penalty_expired`;
+  to_fof/from_fof round trip), `software/app/game/engine.py` (penalty step
+  skipped once expired), `player_handbook/Glossary.md` (Second Domain
+  entry), `mm_manual/MM5_Quick_Reference.md` ("always one difficulty step
+  harder" corrected + "Soul Communion Tier 3" widened to both trees — Mind's
+  Archive branch has had Second Domain since the editorial pass),
+  `software/tests/test_ascendant_domain.py` (+5),
+  `software/tests/test_docs_consistency.py` (register),
+  `player_handbook/Index.md` (regen).
+- **TDD:** `TestSecondDomainPenaltyExpiry` red first (3 failed of 5: no
+  field, no expiry, no yaml flag) → green. Tests: penalty stands right after
+  acquisition; lifts after a REAL level gain (advance_skill ×18 marks →
+  6 rank advances → Facet level); hand-authored/legacy secondary without an
+  acquisition record keeps the conservative permanent penalty; the record
+  survives the .fof round trip; both yaml entries carry the expiry field.
+- **JS check (per task):** `grep "Second Domain"` in builder.js/app.js —
+  only routing comments, no displayed penalty text; no change needed.
+- **Register:** `always one difficulty step harder` (MM5's clause; the book
+  entries' base clause survives with the new "until" continuation, so only
+  the absolutizing variant is registered).
+- **Commands:** red 3 → ascendant/character/websocket/docs suites
+  **394 passed**; `python -m tools.build_index`.
+
 ---
 
 ## Escalations
