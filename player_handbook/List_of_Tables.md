@@ -65,10 +65,8 @@
 | **MM1–2** | [Durability Value by Enemy Type](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr) | MM1_Encounters_and_Enemies.md |
 | **MM1–3** | [Armor Bonus](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr) | MM1_Encounters_and_Enemies.md |
 | **MM1–4** | [TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples) | MM1_Encounters_and_Enemies.md |
-| **MM1–5** | [The TR Budget](../mm_manual/MM1_Encounters_and_Enemies.md#the-tr-budget-a-rough-ordering-check-only) | MM1_Encounters_and_Enemies.md |
-| **MM1–6** | [Action Economy Multipliers](../mm_manual/MM1_Encounters_and_Enemies.md#action-economy-adjustment) | MM1_Encounters_and_Enemies.md |
-| **MM1–7** | [Encounter Recipes at Party Strength 3](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-3-3-fresh-characters-1-career-advance-each) | MM1_Encounters_and_Enemies.md |
-| **MM1–8** | [Encounter Recipes at Other Party Strengths](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-4-4-pcs-or-3-advanced-pcs) | MM1_Encounters_and_Enemies.md |
+| **MM1–5** | [Encounter Recipes at Party Strength 3](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-3-3-fresh-characters-1-career-advance-each) | MM1_Encounters_and_Enemies.md |
+| **MM1–6** | [Encounter Recipes at Other Party Strengths](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-4-4-pcs-or-3-advanced-pcs) | MM1_Encounters_and_Enemies.md |
 | **MM2–1** | [What Walks In](../mm_manual/MM2_Session_Design.md#the-complication-table) | MM2_Session_Design.md |
 | **MM2–2** | [Generic 6− Consequences](../mm_manual/MM2_Session_Design.md#the-trouble-table) | MM2_Session_Design.md |
 | **MM2–3** | [Spark Target Economy](../mm_manual/MM2_Session_Design.md#target-economy) | MM2_Session_Design.md |

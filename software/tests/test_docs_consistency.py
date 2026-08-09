@@ -1069,6 +1069,8 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("before the player decides how to proceed", "C-7/D3: 7-9 is narration sequencing, not a decline-offer — the MM names the cost before narrating the success"),
     ("a Tier 1 or Tier 2 Condition of your choice", "K-6/D4: the five-option Condition menu vs enemies became the single Open tag"),
     ("rider Condition", "K-6/D4: riders retired — a 10+ vs an enemy may leave it Open instead; PvP tier outcomes unchanged"),
+    ("x multiplier", "K-5/D6: the TR budget and its multipliers are cut — actor count drives difficulty; historical record in docs/DECISIONS.md"),
+    ("Action Economy Multipliers", "K-5/D6: Table MM1-6 cut with the budget — the multipliers never predicted the actor-count threshold"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment

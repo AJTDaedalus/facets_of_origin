@@ -95,12 +95,11 @@
 - [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
 - [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
-- [MM1 — Encounter Budget](../mm_manual/MM1_Encounters_and_Enemies.md#encounter-budget)
+- [MM1 — Sizing an Encounter](../mm_manual/MM1_Encounters_and_Enemies.md#sizing-an-encounter)
 - [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
 - [MM1 — Enemy TR in `.fof` Files](../mm_manual/MM1_Encounters_and_Enemies.md#enemy-tr-in-fof-files)
 - [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)
 - [MM5 — Threat Rating (TR)](../mm_manual/MM5_Quick_Reference.md#threat-rating-tr)
-- [MM5 — Encounter Budget (rough ordering check only)](../mm_manual/MM5_Quick_Reference.md#encounter-budget-rough-ordering-check-only)
 
 ## Branch
 
@@ -128,7 +127,6 @@
 - [III.2 — When a Character Would Die](III.2_Adventuring.md#when-a-character-would-die)
 - [III.2 — In Play: The Beam](III.2_Adventuring.md#in-play-the-beam)
 - [III.3 — Tier 3: Broken](III.3_Combat.md#tier-3-broken)
-- [MM1 — The TR budget (a rough ordering check only)](../mm_manual/MM1_Encounters_and_Enemies.md#the-tr-budget-a-rough-ordering-check-only)
 - [MM1 — Scaling Notes](../mm_manual/MM1_Encounters_and_Enemies.md#scaling-notes)
 - [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM2 — Tone and Expectations](../mm_manual/MM2_Session_Design.md#tone-and-expectations)
@@ -156,7 +154,6 @@
 - [IV.1 — Weapons](IV.1_Equipment.md#weapons)
 - [IV.1 — Armor in Play](IV.1_Equipment.md#armor-in-play)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [MM1 — The TR budget (a rough ordering check only)](../mm_manual/MM1_Encounters_and_Enemies.md#the-tr-budget-a-rough-ordering-check-only)
 - [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
 - [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
 - [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
@@ -265,12 +262,13 @@
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [MM2 — Domain Boundary Calls](../mm_manual/MM2_Session_Design.md#domain-boundary-calls)
 
-## Encounter Budget
+## Encounter Recipe Table
 
 *Defined in [MM1](../mm_manual/MM1_Encounters_and_Enemies.md).*
 
-- [MM1 — Encounter Budget](../mm_manual/MM1_Encounters_and_Enemies.md#encounter-budget)
-- [MM5 — Encounter Budget (rough ordering check only)](../mm_manual/MM5_Quick_Reference.md#encounter-budget-rough-ordering-check-only)
+- [MM1 — Encounter Recipe Table](../mm_manual/MM1_Encounters_and_Enemies.md#encounter-recipe-table)
+- [MM2 — The Tools Tab](../mm_manual/MM2_Session_Design.md#the-tools-tab)
+- [MM5 — Encounter Recipe Table (PS 3 — simulation-validated)](../mm_manual/MM5_Quick_Reference.md#encounter-recipe-table-ps-3--simulation-validated)
 
 ## Endurance
 
@@ -497,17 +495,15 @@
 - [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
 - [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
-- [MM1 — Encounter Budget](../mm_manual/MM1_Encounters_and_Enemies.md#encounter-budget)
-- [MM1 — The TR budget (a rough ordering check only)](../mm_manual/MM1_Encounters_and_Enemies.md#the-tr-budget-a-rough-ordering-check-only)
-- [MM1 — Action Economy Adjustment](../mm_manual/MM1_Encounters_and_Enemies.md#action-economy-adjustment)
+- [MM1 — Sizing an Encounter](../mm_manual/MM1_Encounters_and_Enemies.md#sizing-an-encounter)
 - [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
 - [MM1 — Party Strength 3 (3 fresh characters, 1 career advance each)](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-3-3-fresh-characters-1-career-advance-each)
 - [MM1 — Party Strength 4 (4 PCs or 3 advanced PCs)](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-4-4-pcs-or-3-advanced-pcs)
 - [MM1 — Scaling Notes](../mm_manual/MM1_Encounters_and_Enemies.md#scaling-notes)
+- [MM1 — Step 3: Build the enemy roster.](../mm_manual/MM1_Encounters_and_Enemies.md#step-3-build-the-enemy-roster)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)
 - [MM5 — Threat Rating (TR)](../mm_manual/MM5_Quick_Reference.md#threat-rating-tr)
-- [MM5 — Encounter Budget (rough ordering check only)](../mm_manual/MM5_Quick_Reference.md#encounter-budget-rough-ordering-check-only)
 - [MM5 — Encounter Recipe Table (PS 3 — simulation-validated)](../mm_manual/MM5_Quick_Reference.md#encounter-recipe-table-ps-3--simulation-validated)
 
 ## Named NPC
@@ -999,7 +995,6 @@
 - [List of Tables — Bestiary](List_of_Tables.md#bestiary)
 - [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
 - [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
-- [MM1 — The TR budget (a rough ordering check only)](../mm_manual/MM1_Encounters_and_Enemies.md#the-tr-budget-a-rough-ordering-check-only)
 - [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
 - [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
 - [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)

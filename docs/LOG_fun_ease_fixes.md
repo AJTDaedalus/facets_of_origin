@@ -564,6 +564,46 @@ anything unexpected.
   reverse-staged out (stash + inverse edits) so this commit stays
   single-task; they are replayed in T3.6's own commit.
 
+### T3.6 — Cut budget & multiplier tables (K-5, D6) (2026-08-08)
+
+- **Files:** `mm_manual/MM1_Encounters_and_Enemies.md`,
+  `mm_manual/MM5_Quick_Reference.md`, `docs/DECISIONS.md`, plus carriers
+  found by the `[Bb]udget` grep: `player_handbook/Glossary.md` (Encounter
+  Budget entry), `player_handbook/Table_of_Contents.md` (MM1 blurb),
+  `mm_manual/MM2_Session_Design.md` (prep checklists ×2), MM1's intro
+  tour and lateral-solution MM Note; regenerated `Index.md`,
+  `List_of_Tables.md`, `List_of_Boxes.md`;
+  `software/tests/test_docs_consistency.py` (register).
+- **Cut:** Table MM1-5 (TR budget ×1–4), Table MM1-6 (action-economy
+  multipliers), their caveat prose, the cheat-block budget lines, and
+  MM5's whole budget compression. §Encounter Budget renamed **§Sizing an
+  Encounter** (actor-count rule + Party Strength + a rewritten
+  summed-TR-cannot-size example box that keeps the 3-Sergeants teaching
+  case without referencing a budget that no longer exists).
+- **Kept (per task):** TR itself, TR minimums, the Recipe Table, the
+  actor-count rule, Party Strength (the Recipe Table's key).
+- **Added:** the K-3 sentence in §Five-Minute Method Step 3 and MM5's
+  Recipe intro: "adding enemies mid-fight is the sharpest dial you own —
+  one Mook is one difficulty band (76% → 47% → 20%)."
+- **DECISIONS.md:** D6 record with the full retired numbers (budget rows
+  + multipliers) and the Series 9 citation (Parts C/D, seed-1 n=200 row
+  values), so nothing is lost.
+- **Glossary:** Encounter Budget entry replaced by an Encounter Recipe
+  Table entry (same alphabetical slot; INV-3 pointer resolves).
+- **Renumber:** MM1-7/MM1-8 → MM1-5/MM1-6; `python -m
+  tools.build_table_register` regenerated both Lists (76 tables /
+  70 boxes — the "why the budget is only a rough check" box died, the
+  new example box registered).
+- **Register:** `x multiplier` (exact MM5 string, verified pre-edit) +
+  `Action Economy Multipliers`.
+- **Commit hygiene:** these edits were begun while T3.5's full suite ran,
+  then reverse-staged out of the T3.5 commit and replayed here — see the
+  T3.5 session note.
+- **Commands:** docs + build_index suites → **47 passed** (INV-9/INV-10
+  table invariants green on the renumbered captions); acceptance greps
+  clean (no `x multiplier`, no MM1-5/6 budget captions; the only MM1-5/6
+  hits are the renumbered Recipe tables).
+
 ---
 
 ## Escalations

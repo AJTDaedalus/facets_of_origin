@@ -60,7 +60,7 @@
 |---|---|---|
 | **Example** | [rating an enemy from scratch](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples) | MM1_Encounters_and_Enemies.md |
 | **Example** | [Party Strength](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength) | MM1_Encounters_and_Enemies.md |
-| **Example** | [why the budget is only a rough check](../mm_manual/MM1_Encounters_and_Enemies.md#action-economy-adjustment) | MM1_Encounters_and_Enemies.md |
+| **Example** | [why summed TR cannot size a fight](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength) | MM1_Encounters_and_Enemies.md |
 | **Example** | [the Archive Guardian changes phase](../mm_manual/MM1_Encounters_and_Enemies.md#bosses) | MM1_Encounters_and_Enemies.md |
 | **MM Note** | [build for the early exit, not against it](../mm_manual/MM1_Encounters_and_Enemies.md#bosses) | MM1_Encounters_and_Enemies.md |
 | **MM Note** | [a lateral solution is the encounter working](../mm_manual/MM1_Encounters_and_Enemies.md#running-asymmetric-encounters) | MM1_Encounters_and_Enemies.md |

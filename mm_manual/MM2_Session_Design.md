@@ -648,7 +648,7 @@ Use the Play Field whenever you are in a structured scene — combat, contested 
 
 The Tools tab is for between-the-action work:
 - **NPC lookup.** Pull up a stat block mid-session without flipping through notes.
-- **Encounter budgeting.** Check whether the fight you are about to run is calibrated for this party.
+- **Encounter sizing.** Check the fight you are about to run against the Encounter Recipe Table for this party.
 - **Quick reference.** Rules lookups when memory fails — which is the tool working as intended, not a sign of weakness.
 
 Switch to Tools when you need information. Switch back to Play Field when you have it. The transition should take seconds, not minutes.
@@ -822,7 +822,7 @@ BEFORE THE SESSION
 - Review last session's notes (what happened, what was promised, what was left open)
 - Prep 1-2 situations, not a plot
 - Write 10 NPC names
-- Check encounter budget if combat is likely
+- Check the Encounter Recipe Table if combat is likely
 - Review player hooks — is anyone due for a spotlight moment?
 
 DURING THE SESSION

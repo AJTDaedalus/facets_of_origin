@@ -801,3 +801,41 @@ expression because that is what it is.
 **Status:** ✅ Decided. Closes `docs/TODO.md` T6. If the author later wants a
 creature seated in Shattered Origin, that belongs in the Shattered Origin setting
 Facet, which can name and adapt anything here without the Bestiary changing.
+
+---
+
+## Fun & Ease-of-Play Fixes — WS-3 (2026-08-08)
+
+### D6 — The TR budget and action-economy multiplier tables are cut (K-5)
+
+**Decision:** MM1's Encounter Budget section — Table MM1-5 (TR budget, Party
+Strength × 1/2/3/4) and Table MM1-6 (action-economy multipliers ×0.75/×1.0/
+×1.25/×1.5) — and MM5's compression of both are removed from the books. TR
+itself, the TR minimums, the Recipe Table, and the actor-count rule stay.
+
+**Why:** the budget was proven structurally non-predictive by simulation
+(`research/simulation_log.md` Series 9): difficulty is gated by the **actor
+count of Named/Boss enemies**, not by summed TR. Three TR-8 Named enemies
+(24 total TR, "well above Deadly" by budget) are a ~96% party win; the same
+roster becomes Standard only once a Mook is added. No set of multipliers can
+reproduce the actor-count-gated curve — the earlier "~95/75/50/25%" win-rate
+presentation was already withdrawn once, and the tables survived only behind
+40 lines of caveats telling the reader not to use them. Tables outlive prose:
+a table on the page gets used, whatever the paragraph above it says. The
+Recipe Table already does the budget's job with measured numbers.
+
+**Historical record (so the numbers are not lost):**
+
+The cut budget: Skirmish = PS × 1, Standard = PS × 2, Hard = PS × 3,
+Deadly = PS × 4, where Party Strength = sum of participating characters'
+`career_advances`. The cut action-economy adjustment: single enemy × 0.75,
+2–3 enemies × 1.0, 4–6 enemies × 1.25 (Mook-only swarms × 1.1),
+7+ enemies × 1.5. Both were rough ordering aids for simple/solo rosters and
+explicitly non-predictive for 3+ Named/Boss rosters and Mook swarms.
+
+**Citation:** Series 9 (`research/simulation_log.md`) — Part C measured the
+actor-count ladder; Part D re-pinned the recipe rosters after the A14 enemy-
+Parry correction (Standard 3×Named+1 Mook 76.0%, Hard +2 Mooks 47.5%, Deadly
++3 Mooks 20.0% / 4×Named+1 Mook 20.0%, seed 1, n=200).
+
+**Status:** ✅ Decided (DESIGN_fun_ease_fixes.md D6). Implemented by T3.6.

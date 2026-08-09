@@ -37,7 +37,7 @@ the full rule, follow the pointer.
 
 **Domain Type (Focused/Standard/Broad-Prismatic)** — How wide a domain's territory is. Focused domains cover one narrow element with the highest reliability; Standard domains cover a coherent thematic territory; Broad (Prismatic) domains span multiple territories at the steepest difficulties — reach-Sparks cannot move a Broad working's difficulty, though dice-Sparks work normally. *(Chapter II.3)*
 
-**Encounter Budget** — The TR-based framework for gauging encounter difficulty by Party Strength. Simulation shows actor count — the number of Named/Boss enemies acting at once, not total TR — is what actually drives difficulty, so the Encounter Recipe Table, not the TR budget, is the tool to build from. *(MM1)*
+**Encounter Recipe Table** — The simulation-validated table of enemy rosters mapped to difficulty bands (Skirmish/Standard/Hard/Deadly), keyed to Party Strength. Actor count — the number of Named/Boss enemies acting at once, not total TR — is what drives difficulty; the retired TR budget is preserved only as a historical record in `docs/DECISIONS.md`. *(MM1)*
 
 **Endurance** — A character's combat stamina, spent to react to incoming attacks and to Press on offense. The pool equals 4 plus the Constitution modifier plus Endurance skill rank; at 0 Endurance, Absorb is the only available reaction. *(Chapter III.3)*
 

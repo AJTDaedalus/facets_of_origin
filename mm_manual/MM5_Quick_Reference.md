@@ -310,13 +310,9 @@ TR = offense_value + durability_value + armor_bonus + technique_bonus
 
 **TR Minimums:** Mook >= 1, Named >= 8, Boss >= 12
 
-### Encounter Budget (rough ordering check only)
-
-**Actor count drives difficulty, not total TR.** The number of Named/Boss enemies acting at once is the real dial. The TR budget below is a loose "bigger is probably harder" check — it is **non-predictive for 3+ Named/Boss rosters and for Mook swarms.** Build from the Recipe Table.
-
-Budget = Party Strength (sum of `career_advances`) x multiplier: Skirmish x1 / Standard x2 / Hard x3 / Deadly x4 (directional only — not validated win rates). Action economy (same rough aid): solo x0.75 / 2–3 x1.0 / 4–6 x1.25 (Mook-only x1.1) / 7+ x1.5.
-
 ### Encounter Recipe Table (PS 3 — simulation-validated)
+
+**Actor count drives difficulty, not total TR.** The number of Named/Boss enemies acting at once is the real dial — there is no TR budget (MM1, *Sizing an Encounter*). Party Strength = sum of `career_advances`. Adding enemies mid-fight is the sharpest dial you own: one Mook is one difficulty band (76% → 47% → 20%).
 
 **Table MM5–15: Encounter Recipes (Party Strength 3)**
 

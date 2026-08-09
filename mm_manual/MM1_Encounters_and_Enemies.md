@@ -14,7 +14,7 @@ The system has three layers:
 
 1. **Enemy stat blocks** — a minimal set of numbers sufficient to run any enemy in the full exchange structure
 2. **Threat Rating (TR)** — a single number summarizing how dangerous one enemy is
-3. **The Encounter Recipe Table** — simulation-validated rosters mapped to difficulty; this is the tool you actually build encounters from. (A rough TR budget is also provided, but it is a loose ordering check, not a difficulty predictor — see *The TR budget*, MM1.)
+3. **The Encounter Recipe Table** — simulation-validated rosters mapped to difficulty; this is the tool you actually build encounters from. Actor count, not summed TR, is what drives difficulty (see *Sizing an Encounter*, MM1).
 
 ---
 
@@ -155,49 +155,23 @@ Durability is simply the enemy's base Resolve — the pool a party's Strikes dep
 
 ---
 
-## Encounter Budget
+## Sizing an Encounter
 
-**Actor count drives difficulty, not total TR.** This is the single most important thing to know about building encounters in this system, and it is the opposite of what a TR-summing budget would tell you. Simulation (`research/simulation_log.md` Series 9) is unambiguous: **the number of Named/Boss enemies acting at once** is the primary difficulty variable. One Named or one Boss is trivial for a fresh party no matter how high its TR — the party simply concentrates fire and removes it. Two of them are still nearly a walkover, and even three on their own is a near-clean win (~96%). **A real fight begins once three simultaneously-acting Named/Boss enemies are backed by a Mook or two** — four Named is a coin-flip (Hard), five is a near-certain loss. Mook swarms, meanwhile, never produce genuine danger at any size a table would field.
+**Actor count drives difficulty, not total TR.** This is the single most important thing to know about building encounters in this system. Simulation (`research/simulation_log.md` Series 9) is unambiguous: **the number of Named/Boss enemies acting at once** is the primary difficulty variable. One Named or one Boss is trivial for a fresh party no matter how high its TR — the party simply concentrates fire and removes it. Two of them are still nearly a walkover, and even three on their own is a near-clean win (~96%). **A real fight begins once three simultaneously-acting Named/Boss enemies are backed by a Mook or two** — four Named is a coin-flip (Hard), five is a near-certain loss. Mook swarms, meanwhile, never produce genuine danger at any size a table would field.
 
-Because of this, **the calibrated tool you should actually build from is the [Encounter Recipe Table](#encounter-recipe-table) below** — concrete, simulation-validated rosters mapped to difficulty. The TR budget that follows is kept only as a rough ordering sanity check for simple rosters. It is **explicitly non-predictive for encounters with 3+ Named/Boss enemies and for Mook swarms** — use the Recipe Table for those.
+Because of this, **the calibrated tool you build from is the [Encounter Recipe Table](#encounter-recipe-table) below** — concrete, simulation-validated rosters mapped to difficulty. There is deliberately no TR-summing budget in this book: earlier editions carried one, and simulation proved it structurally non-predictive — summed TR cannot see the actor-count threshold that actually gates difficulty. (The retired budget and its multipliers are preserved for the record in `docs/DECISIONS.md`.) TR remains what it always was: a per-enemy build and ordering number, not an encounter-sizing one.
 
 ### Party Strength
 
-Party Strength is the sum of all participating characters' `career_advances`.
+Party Strength is the sum of all participating characters' `career_advances`. The Recipe Table is keyed to it.
 
 > **Example — Party Strength**
 >
 > *Zahna, Mordai, and Zulnut each have `career_advances: 1`. Party Strength = 3.*
 
-### The TR budget (a rough ordering check only)
-
-**Table MM1–5: The TR Budget**
-
-| Difficulty | Intended feel | Total Enemy TR | Description |
-|---|---|---|---|
-| **Skirmish** | Clean win | Party Strength × 1 | Party should win cleanly; resources mostly intact |
-| **Standard** | Genuine danger | Party Strength × 2 | A real fight; someone likely takes a Tier 2 Condition |
-| **Hard** | Coin flip | Party Strength × 3 | Someone likely goes Broken; requires good decisions |
-| **Deadly** | Expected loss | Party Strength × 4 | Party is expected to lose the straight fight; winning requires cleverness or exceptional luck |
-
-The "intended feel" column is the *design intent* for each difficulty. The multipliers (×1/×2/×3/×4) are **not** validated to produce those feels — they are a loose "bigger number is probably harder" ordering aid for simple/solo/Mook rosters. Any earlier presentation of these as validated "~95/75/50/25%" win rates was withdrawn: simulation showed no set of multipliers can reproduce the real (actor-count-gated) difficulty curve. **Do not derive a multi-Named/Boss encounter from this table — it will over-count badly (see *Action Economy Adjustment*, MM1). Use the Recipe Table.**
-
-### Action Economy Adjustment
-
-Raw TR comparison doesn't account for **action economy** — more enemies mean more actions per exchange. The modifiers below are the same kind of rough ordering aid as the budget itself, and carry the same caveat: they capture the *direction* (more actors, more pressure) but not the sharp actor-count threshold the simulator measured.
-
-**Table MM1–6: Action Economy Multipliers**
-
-| Enemy Configuration | TR Multiplier | Notes |
-|---|---|---|
-| Single enemy | × 0.75 | Solo enemies badly underperform their TR — the party concentrates fire and removes them |
-| 2–3 enemies | × 1.0 | Baseline |
-| 4–6 enemies | × 1.25 | Action pressure compounds (Mook-only swarms: ×1.1) |
-| 7+ enemies | × 1.5 | Swarming creates tactical overload |
-
-> **Example — why the budget is only a rough check**
+> **Example — why summed TR cannot size a fight**
 >
-> Three City Watch Sergeants (TR 8 each = 24 total, ×1.0 for three enemies = **24 effective TR**) sit at eight times a Party Strength of 3 — the raw budget screams "well above Deadly." Simulation says otherwise: three TR-8 Named enemies against a fresh PS-3 party is a near-clean win (~96% party win) — a Standard fight only *once you add a Mook*. The budget over-counted by more than a full difficulty band, because what it can't see is that three Named is barely the threshold at which difficulty becomes *tunable* at all — you climb from there by adding actors. This is exactly why the Recipe Table, not the budget, is the tool you build from.
+> Three City Watch Sergeants total 24 TR — eight times a Party Strength of 3, a number that looks catastrophic. Simulation says otherwise: three TR-8 Named enemies against a fresh PS-3 party is a near-clean win (~96% party win) — a Standard fight only *once you add a Mook*. What the sum cannot see is that three Named is barely the threshold at which difficulty becomes *tunable* at all — you climb from there by adding actors, one at a time.
 
 ---
 
@@ -274,7 +248,7 @@ Sometimes an encounter is designed to be asymmetric — the party cannot win by 
 
 > **MM Note — a lateral solution is the encounter working**
 >
-> If a player finds a clever lateral solution that bypasses most of the TR, they have not broken the encounter — that is the encounter working correctly. The TR budget is a calibration tool, not a ceiling.
+> If a player finds a clever lateral solution that bypasses most of the TR, they have not broken the encounter — that is the encounter working correctly. TR is a calibration tool, not a ceiling.
 
 ---
 
@@ -381,13 +355,6 @@ Actor-count rule of thumb (PS 3 fresh party):
 
 TR Formula (for building one enemy):
   TR = offense_value + durability_value + armor_bonus + technique_bonus
-
-Rough TR budget (ordering check only — NOT a difficulty predictor;
-use the Recipe Table, especially for 3+ Named/Boss or Mook swarms):
-  Skirmish = Party Strength × 1     Solo enemy   × 0.75
-  Standard = Party Strength × 2     2–3 enemies  × 1.0
-  Hard     = Party Strength × 3     4–6 enemies  × 1.25
-  Deadly   = Party Strength × 4     7+ enemies   × 1.5
 ```
 
 ---
@@ -402,7 +369,7 @@ This is the tool you build encounters from. It maps difficulty to concrete enemy
 
 Validated in `research/simulation_log.md` Series 9 Part D (200 iterations per seed, seeds 1/2/3; the Sim Win Rate column lists all three seeds).
 
-**Table MM1–7: Encounter Recipes at Party Strength 3**
+**Table MM1–5: Encounter Recipes at Party Strength 3**
 
 | Difficulty | Win Rate Target | Suggested Composition | Sim Win Rate (seeds 1/2/3) |
 |------------|----------------|-----------------------|-------------|
@@ -419,7 +386,7 @@ Note what these rosters have in common and what a TR budget would never tell you
 >
 > Series 9 measured the PS-3 party only. The compositions below are *un-simulated extrapolations* from the PS-3 findings and the "each additional PC shifts the actor-count thresholds up by roughly one Named" rule of thumb — treat them as a starting guess to be confirmed at your table, not as validated recipes. Do not present them to players as calibrated.
 
-**Table MM1–8: Encounter Recipes at Other Party Strengths**
+**Table MM1–6: Encounter Recipes at Other Party Strengths**
 
 | Difficulty | Win Rate Target | Suggested Composition (extrapolated, unvalidated) |
 |------------|----------------|-----------------------|
@@ -455,7 +422,7 @@ Every encounter exists to serve the narrative. Ask: what does this fight (or pot
 
 ### Step 3: Build the enemy roster.
 
-Use the Encounter Recipe Table above. Find your party's column, pick the difficulty row, and use the suggested enemy composition. Adjust flavor without changing the mechanical profile.
+Use the Encounter Recipe Table above. Find your party's column, pick the difficulty row, and use the suggested enemy composition. Adjust flavor without changing the mechanical profile. And remember while the fight runs: **adding enemies mid-fight is the sharpest dial you own — one Mook is one difficulty band (76% → 47% → 20%).**
 
 ### Step 4: Add one lateral solution.
 

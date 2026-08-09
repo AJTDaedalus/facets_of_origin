@@ -228,7 +228,7 @@ listed greps return the expected result; LOG updated.
   `software/app/api/websocket.py` (MM prompt event on uncontested exchange), tests
   (≥3 clamp/helper/event).
 
-- [ ] **T3.6 — Cut budget & multiplier tables (K-5, D6).**
+- [x] **T3.6 — Cut budget & multiplier tables (K-5, D6).**
   Files: `mm_manual/MM1_Encounters_and_Enemies.md` (§Encounter Budget, lines
   ~158–183, tables MM1-5/MM1-6 + caveat prose), `mm_manual/MM5_Quick_Reference.md`
   (~lines 311–315), `docs/DECISIONS.md` (historical record + Series 9 citation),
