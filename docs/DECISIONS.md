@@ -861,3 +861,21 @@ tier; findings and evidence in `docs/RESEARCH_fun_ease_review.md`).
 | D12 | Enemy blind posture reveal dropped; conduct triggers instead | keep ceremony | A ritual that never surprises is pure overhead; rule-driven stances are cheaper and more readable |
 | D13 | "Endurance Pool" print qualifier, no identifier rename | full rename | A full rename churns code/data/YAML for the same table clarity; revisit on playtest evidence |
 | D14 | Prismatic is the player-facing term | Broad | The evocative word wins the player-facing slot; Broad survives in one definitional II.3 sentence naming the data type key |
+
+### D15 — The traditions get their setting names: Invocation and Thaumaturgy *(owner ruling, 2026-08-09)*
+
+**Decision:** The two magical traditions of Shattered Origin are named at the
+setting layer: **Invocation** is the intuitive tradition (Spirit, Soul-aligned,
+casting adds Attune) and **Thaumaturgy** is the scholarly tradition (Knowledge,
+Mind-aligned, casting adds Lore). These replace the displaced working names
+Channeling and Resonance — "Resonance" is now a Soul *domain* and cannot be
+reused as a tradition name.
+
+**Scope:** D7 stands — the core PHB keeps its attribute-keyed wording and
+introduces no tradition proper nouns. Invocation and Thaumaturgy live in the
+setting layer (the Shattered Origin setting Facet, when written) and in
+project-level descriptions. The Body tradition's name remains the one open
+naming question.
+
+**Status:** ✅ Decided. Recorded in `research/magic_system_analysis.md` §6
+naming note; README project description updated.
