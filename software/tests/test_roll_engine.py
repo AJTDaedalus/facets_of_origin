@@ -968,3 +968,70 @@ class TestDataDrivenDice:
         with patch("random.randint", return_value=5):
             result = resolve_roll(make_request(), mock)
         assert result.outcome == "fail"
+
+
+# ---------------------------------------------------------------------------
+# T4.1 (P-2, D7): a casting roll adds the skill the tradition trains —
+# casting with Spirit adds the Attune rank; casting with Knowledge adds Lore.
+# ---------------------------------------------------------------------------
+
+def _make_skilled_caster(skills: dict, attributes: dict | None = None,
+                         technique_active: bool = False) -> SimpleNamespace:
+    """A caster carrying real skill states (rank strings, per Character.skills)."""
+    return SimpleNamespace(
+        magic_technique_active=technique_active,
+        magic_domain="inscription",
+        attributes=attributes or {"spirit": 2, "knowledge": 3},
+        skills={k: SimpleNamespace(skill_id=k, rank=v) for k, v in skills.items()},
+    )
+
+
+class TestCastingSkill:
+    """II.3, Rolling Magic: casting with Spirit adds your Attune rank;
+    casting with Knowledge adds your Lore rank (T4.1/D7)."""
+
+    def test_scholarly_casting_adds_lore_rank(self, ruleset):
+        """Zahna's numbers (II.3 example, QS pregen line): Knowledge 3 (+1)
+        + Lore Practiced (+1) = 2d6+2 on a scholarly cast."""
+        caster = _make_skilled_caster({"lore": "practiced"})
+        with patch("random.randint", return_value=4):
+            result = resolve_magic_roll(
+                caster, "inscription", "minor", "test", ruleset,
+            )
+        assert result.request.skill_id == "lore"
+        assert result.skill_modifier == 1
+        assert result.attribute_modifier == 1
+        assert result.attribute_modifier + result.skill_modifier == 2
+
+    def test_intuitive_casting_adds_attune_rank(self, ruleset):
+        """An intuitive (Spirit) cast adds the Attune rank."""
+        caster = _make_skilled_caster(
+            {"attune": "expert"}, attributes={"spirit": 3, "knowledge": 2},
+        )
+        caster.magic_domain = "fire"
+        with patch("random.randint", return_value=4):
+            result = resolve_magic_roll(
+                caster, "fire", "minor", "test", ruleset,
+            )
+        assert result.request.skill_id == "attune"
+        assert result.skill_modifier == 2
+        assert result.request.attribute_id == "spirit"
+
+    def test_unskilled_caster_casts_at_novice(self, ruleset):
+        """A caster without the tradition's skill casts at Novice (+0) —
+        every skill starts at Novice, so the skill still shows on the roll."""
+        caster = _make_skilled_caster({})
+        with patch("random.randint", return_value=4):
+            result = resolve_magic_roll(
+                caster, "inscription", "minor", "test", ruleset,
+            )
+        assert result.request.skill_id == "lore"
+        assert result.skill_modifier == 0
+
+    def test_yaml_traditions_drive_the_mapping(self, ruleset):
+        """facet.yaml's magic.traditions block is the source of the mapping."""
+        traditions = ruleset.magic.traditions
+        assert traditions["scholarly"]["attribute"] == "knowledge"
+        assert traditions["scholarly"]["skill"] == "lore"
+        assert traditions["intuitive"]["attribute"] == "spirit"
+        assert traditions["intuitive"]["skill"] == "attune"

@@ -202,9 +202,9 @@ Choose one field of knowledge: history, arcane theory, natural sciences, theolog
 
 **Choose:** One domain from the Domains of the Mind list.
 
-**Roll:** Knowledge.
+**Roll:** Knowledge + Lore.
 
-You have developed a formal magical domain through scholarly practice. Choose one domain from the Domains of the Mind list (Chapter II.3). You may use magic within that domain using the Domain + Intent + Scope framework. Roll Knowledge when doing so.
+You have developed a formal magical domain through scholarly practice. Choose one domain from the Domains of the Mind list (Chapter II.3). You may use magic within that domain using the Domain + Intent + Scope framework. Roll Knowledge, adding your Lore rank, when doing so.
 
 **Normal:** A domain's origin is a Background, and it is limited to Minor scope until a Facet Technique unlocks it (see *Acquiring a Domain*, II.3).
 
@@ -254,7 +254,7 @@ You may recall something you have no direct reason to know — a piece of esoter
 
 **Choose:** A second standard domain from the Domains of the Mind list — it must differ from your first, and prismatic domains are excluded.
 
-**Roll:** Knowledge, one difficulty step harder than normal for that domain.
+**Roll:** Knowledge + Lore, one difficulty step harder than normal for that domain.
 
 *Requires an existing Mind domain (Arcane Study).* Your study has opened onto a second territory — an adjacent field whose principles your first domain taught you to read. Choose a second standard domain from the Domains of the Mind list (prismatic territories require Ascendant Domain, below). You may use magic within that domain using the Domain + Intent + Scope framework, rolling Knowledge as normal. Effects within your second domain are treated as one difficulty step harder than normal for that domain. A character holds one Second Domain.
 
@@ -266,7 +266,7 @@ You may recall something you have no direct reason to know — a piece of esoter
 
 **Choose:** One prismatic domain from the Domains of the Mind list.
 
-**Roll:** Knowledge, on the Broad difficulty table.
+**Roll:** Knowledge + Lore, on the Broad difficulty table.
 
 *Requires an existing Mind domain (Arcane Study).* Your practice has outgrown a single territory. Choose one prismatic domain from the Domains of the Mind list (Chapter II.3). You may work within it using the Domain + Intent + Scope framework, rolling Knowledge. The Broad difficulty table applies — Hard at Minor scope, Very Hard at Significant and Major — and reach-Sparks cannot move a Broad working's difficulty, though dice-Sparks work normally (Chapter II.3, *Sparks and Magic*). Your original domain is unchanged; the prismatic territory is a wider practice built on everything it taught you. A character masters one prismatic territory — Ascendant Domain is taken once, however many Facet trees they eventually climb (Chapter II.3).
 

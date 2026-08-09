@@ -389,20 +389,36 @@ def resolve_magic_roll(
     # Minor-scope Broad cast from its canonical Hard (II.4b/II.4c: "Hard at
     # Minor scope").
 
-    # Attribute for roll: tradition determines attribute
+    # Attribute and skill for the roll (II.3, Rolling Magic; T4.1/D7):
+    # the tradition determines both — casting with Spirit adds the Attune
+    # rank; casting with Knowledge adds the Lore rank. The mapping is read
+    # from ruleset.magic.traditions (facet.yaml), with the II.3 defaults as
+    # fallback.
     tradition = domain_def.tradition
-    if tradition == "intuitive":
-        attr_id = "spirit"
-    else:
-        attr_id = "knowledge"
+    _tradition_defaults = {
+        "intuitive": ("spirit", "attune"),
+        "scholarly": ("knowledge", "lore"),
+    }
+    attr_id, skill_id = _tradition_defaults.get(tradition, ("knowledge", "lore"))
+    traditions_cfg = getattr(ruleset.magic, "traditions", None)
+    if isinstance(traditions_cfg, dict):
+        trad_cfg = traditions_cfg.get(tradition)
+        if isinstance(trad_cfg, dict):
+            attr_id = trad_cfg.get("attribute", attr_id)
+            skill_id = trad_cfg.get("skill", skill_id)
 
     attr_rating = character.attributes.get(attr_id, 2)
+
+    # A caster without the tradition's skill casts at Novice (+0) — every
+    # skill starts at Novice, so the skill still shows on the roll.
+    skill_state = getattr(character, "skills", {}).get(skill_id)
+    skill_rank_id = getattr(skill_state, "rank", None) or "novice"
 
     request = RollRequest(
         attribute_id=attr_id,
         attribute_rating=attr_rating,
-        skill_id=None,
-        skill_rank_id=None,
+        skill_id=skill_id,
+        skill_rank_id=skill_rank_id,
         difficulty_label=difficulty_label,
         sparks_spent=sparks_spent,
         description=f"[magic:{domain_id}:{scope}] {intent}",

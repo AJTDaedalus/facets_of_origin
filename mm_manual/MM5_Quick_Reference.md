@@ -135,7 +135,7 @@ PC Posture is declared blind. Enemy stances are **stated, not concealed** — an
 | **Strike** | 2d6 + weapon attribute + Combat or Finesse (default melee/ranged; the fiction may say otherwise) | Deplete enemy Resolve (10+: −2, 7–9: −1); 10+ may leave the enemy Open |
 | **Maneuver** | 2d6 + relevant skill | 10+: rolls against the target are Easy until the situation changes. 7–9: rolls against the target stay Standard. 6-: backfire |
 | **Support** | 2d6 + relevant skill | Grant ally +1d6 drop lowest OR difficulty one step easier on next roll |
-| **Magic** | 2d6 + Knowledge or Spirit (by tradition) | Domain + Intent + Scope; vs enemy depletes Resolve like a Strike |
+| **Magic** | 2d6 + Spirit + Attune, or Knowledge + Lore (by tradition) | Domain + Intent + Scope; vs enemy depletes Resolve like a Strike |
 
 **Press:** Spend 1 Endurance before a Strike to add 1d6 drop lowest (stacks with Sparks).
 
@@ -257,6 +257,7 @@ A charge is consumed only when armor provides the reduction actually applied —
 | Significant | Standard | Hard | Very Hard |
 | Major | Hard | Very Hard | Very Hard (ceiling) |
 
+- **The roll:** casting with Spirit adds the Attune rank; casting with Knowledge adds the Lore rank (Novice +0 if untrained)
 - **Pre-technique:** Minor scope only, at the domain's normal difficulty (no extra penalty — the scope restriction *is* the limitation)
 - **Sparks and magic** — dice-Sparks work on any roll, including every magic roll. A Spark buys **reach** in exactly two cases, player-declared before the roll:
   - **Pre-Technique Significant:** a pre-Technique caster may spend a Spark to attempt **one** Significant-scope effect at the domain's normal Significant difficulty. One effect per Spark — not an unlock; Major stays closed until the Tier 1 Technique.

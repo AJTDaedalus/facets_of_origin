@@ -421,7 +421,7 @@ Two judgment calls, worked:
 >
 > *Zahna: "I inscribe a hold-glyph across the door seam so it will not open while we get clear."*
 >
-> *MM: "That is a door fused shut for the length of the scene — Significant. Focused domain, so Standard difficulty. Roll Knowledge."*
+> *MM: "That is a door fused shut for the length of the scene — Significant. Focused domain, so Standard difficulty. Roll Knowledge and Lore."*
 
 Same intent, one variable changed:
 

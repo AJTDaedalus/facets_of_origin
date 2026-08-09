@@ -33,7 +33,7 @@ the full rule, follow the pointer.
 
 **Difficulty (Easy/Standard/Hard/Very Hard)** — The modifier the MM declares before a roll, based on circumstances rather than a judgment of the character: Easy (+1), Standard (+0), Hard (−1), or Very Hard (−2). *(Chapter III.1)*
 
-**Domain** — A character's licensed magical territory — the thematic and physical scope their magic covers, agreed at character creation and defined by what it includes and what it does not. *(Chapter II.3)*
+**Domain** — A character's licensed magical territory — the thematic and physical scope their magic covers, agreed at character creation and defined by what it includes and what it does not. Casting rolls within a domain add the skill the tradition trains: casting with Spirit adds the Attune rank; casting with Knowledge adds the Lore rank. *(Chapter II.3)*
 
 **Domain Type (Focused/Standard/Broad-Prismatic)** — How wide a domain's territory is. Focused domains cover one narrow element with the highest reliability; Standard domains cover a coherent thematic territory; Broad (Prismatic) domains span multiple territories at the steepest difficulties — reach-Sparks cannot move a Broad working's difficulty, though dice-Sparks work normally. *(Chapter II.3)*
 

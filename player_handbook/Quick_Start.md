@@ -130,9 +130,9 @@ Zulnut rolls 2d6+0 (Wisdom +0) and gets a **6**. Failure.
 
 **Zahna:** "I write the counter-sign. Inscription domain, minor scope."
 
-**MM:** "Easy — it is your domain and you just identified the notation. Roll Knowledge."
+**MM:** "Easy — it is your domain and you just identified the notation. Roll Knowledge and Lore."
 
-Zahna rolls 2d6+2 at Easy (+1), total modifier +3, and gets a **12**. Full success.
+Zahna rolls 2d6+2 (Knowledge +1, Lore +1) at Easy (+1), total modifier +3, and gets a **12**. Full success.
 
 *The glyph dims. The door swings open.*
 
@@ -148,7 +148,7 @@ Zahna rolls 2d6+2 at Easy (+1), total modifier +3, and gets a **12**. Full succe
 | Sneak past someone | 2d6 + Dexterity + Stealth skill |
 | Know something | 2d6 + Knowledge + Lore skill |
 | Persuade someone | 2d6 + Charisma + Persuade skill |
-| Cast a spell | 2d6 + Spirit or Knowledge (by tradition) |
+| Cast a spell | 2d6 + Spirit + Attune skill, or Knowledge + Lore skill (by tradition) |
 | Resist an effect | 2d6 + Major Attribute (Body/Mind/Soul) |
 | Use a Spark | Add 1d6, drop lowest die |
 

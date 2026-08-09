@@ -734,8 +734,9 @@ class MagicDomainDef(BaseModel):
         type: Difficulty tier — "focused" (Easy/Standard/Hard),
               "standard" (Standard/Hard/Very Hard),
               "broad" (Hard/VH/VH, Sparks cannot push scope ceiling).
-        tradition: Which attribute governs rolls — "intuitive" (Spirit) or
-                   "scholarly" (Knowledge).
+        tradition: Which attribute and skill govern casting rolls —
+                   "intuitive" (Spirit + Attune) or "scholarly"
+                   (Knowledge + Lore); see MagicDef.traditions.
         requires_tier3: True for Prismatic domains that need a Tier 3 Technique.
     """
 
@@ -782,6 +783,11 @@ class MagicDef(BaseModel):
     """Full magic configuration for a Facet module (PHB II.3).
 
     Fields:
+        traditions: Maps tradition keys ("intuitive" | "scholarly") to
+                    {"attribute": ..., "skill": ...} — a casting roll adds
+                    the skill the tradition trains (II.3, Rolling Magic):
+                    casting with Spirit adds the Attune rank; casting with
+                    Knowledge adds the Lore rank.
         domain_types: Maps type keys ("focused" | "standard" | "broad") to
                       {"scope_difficulties": {"minor": "Easy", ...}}.
         pre_technique_scope_limit: Maximum scope before the Facet Technique is unlocked.

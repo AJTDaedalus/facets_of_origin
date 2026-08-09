@@ -108,6 +108,8 @@ When you invoke your domain, declare your intent and scope, then roll.
 
 The attribute you roll depends on your magical tradition. **Spirit** governs intuitive magic — magic that flows from connection, will, and felt presence. **Knowledge** governs scholarly magic — magic that is constructed, analyzed, and precisely understood.
 
+The skill follows the attribute. Casting with **Spirit** adds your **Attune** rank; casting with **Knowledge** adds your **Lore** rank. A casting roll is 2d6 + attribute + skill, the same shape as every other roll in the game — a caster's reliability grows through practice exactly the way a duelist's or a burglar's does. If you have not yet developed the skill, you cast at Novice (+0), like anyone attempting anything untrained.
+
 Some characters develop both traditions — a scholar who has also cultivated spiritual practice, or a natural channeler who has supplemented intuition with formal study. When an effect genuinely draws on both, the player chooses which attribute to use for the roll. The MM may suggest one tradition fits a particular working more naturally, but the choice is always the player's.
 
 The MM sets the difficulty based on scope (the table above), then adjusts for any relevant Techniques or circumstances. The player rolls.
@@ -155,9 +157,9 @@ Mordai and Zahna are in a burning building. A massive wooden beam hangs half-col
 
 **Zahna:** "I want to inscribe a fracture-glyph on the two load-bearing joints — encode a stress point into the wood itself so they give way under the beam's own weight, and it falls to the right, clear of the doorway."
 
-**MM:** "That is Significant. You are controlling the direction of a structural collapse, not just marking wood. Standard difficulty. Roll Knowledge."
+**MM:** "That is Significant. You are controlling the direction of a structural collapse, not just marking wood. Standard difficulty. Roll Knowledge and Lore."
 
-→ Zahna rolls **2d6 + Knowledge (3 → +1)** at Standard difficulty and gets a **9**. Partial success.
+→ Zahna rolls **2d6 + Knowledge (3 → +1) + Lore (Practiced, +1)** at Standard difficulty and gets a **9**. Partial success.
 
 **MM:** "The glyph bites and the joints give way exactly as you intended. The beam comes down to the right, doorway clear. But the working was louder than you expected — a crack like a cannon shot, and the glyph's light flared before it burned out. Whatever is left alive on the floor above you now knows exactly where you are."
 

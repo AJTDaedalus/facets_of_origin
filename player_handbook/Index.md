@@ -39,6 +39,7 @@
 *Defined in [II.2](II.2_Character_Creation_Attributes.md).*
 
 - [II.2 — Deriving Your Major Attribute Modifiers](II.2_Character_Creation_Attributes.md#deriving-your-major-attribute-modifiers)
+- [II.3 — Rolling Magic](II.3_Magic.md#rolling-magic)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
 - [II.4a — Skills of the Body](II.4a_Character_Creation_Facet_Body.md#skills-of-the-body)
 - [II.4b — Skills of the Mind](II.4b_Character_Creation_Facet_Mind.md#skills-of-the-mind)
@@ -651,10 +652,13 @@
 *Defined in [II.6](II.6_Character_Creation_Skills.md).*
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
+- [II.3 — Rolling Magic](II.3_Magic.md#rolling-magic)
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
 - [II.4 — Career Advances](II.4_Character_Creation_Facets.md#career-advances)
+- [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
+- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.6 — Character Creation: Skills](II.6_Character_Creation_Skills.md#character-creation-skills)
 - [II.6 — Using Skills](II.6_Character_Creation_Skills.md#using-skills)
@@ -670,6 +674,7 @@
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
 - [MM5 — Endurance](../mm_manual/MM5_Quick_Reference.md#endurance)
+- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
 ## Reaction
@@ -792,6 +797,7 @@
 *Defined in [II.6](II.6_Character_Creation_Skills.md).*
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
+- [II.3 — Rolling Magic](II.3_Magic.md#rolling-magic)
 - [II.4 — Skills](II.4_Character_Creation_Facets.md#skills)
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)

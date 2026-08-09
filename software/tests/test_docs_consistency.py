@@ -1073,6 +1073,10 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("Action Economy Multipliers", "K-5/D6: Table MM1-6 cut with the budget — the multipliers never predicted the actor-count threshold"),
     ("defense_modifier", "K-11: retired — never in the TR formula, and NPCs never roll; loader warns on legacy files"),
     ("player characters and significant antagonists alike", "K-4/K-10/D12: the enemy blind-posture-reveal ceremony is dropped — the MM states enemy stances openly, driven by conduct triggers; PC-side blind declaration stays"),
+    ("Roll Knowledge when doing so", "P-2/D7 (T4.1): casting adds the tradition's skill — casting with Knowledge adds the Lore rank"),
+    ("Roll Spirit when doing so", "P-2/D7 (T4.1): casting adds the tradition's skill — casting with Spirit adds the Attune rank"),
+    ("Knowledge or Spirit (by tradition)", "P-2/D7 (T4.1): the attribute-only casting formula is dead — the roll is Spirit + Attune or Knowledge + Lore"),
+    ("Spirit or Knowledge (by tradition)", "P-2/D7 (T4.1): the attribute-only casting formula is dead — the roll is Spirit + Attune or Knowledge + Lore"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment

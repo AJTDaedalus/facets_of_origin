@@ -287,8 +287,9 @@ listed greps return the expected result; LOG updated.
 
 ## WS-4 — Magic & advancement (branch `feat/magic-advancement-arcs`)
 
-- [ ] **T4.1 — Casting adds tradition skill (P-2, D7). ⛔ BLOCKED on DESIGN §9.1**
-  (Channeling → Attune, Resonance → Lore — user must confirm the mapping).
+- [x] **T4.1 — Casting adds tradition skill (P-2, D7).** *(Unblocked 2026-08-09:
+  user confirmed Spirit→Attune, Knowledge→Lore; rule written attribute-keyed —
+  no tradition proper nouns.)*
   Files: `player_handbook/II.3_Magic.md` (§Rolling Magic + BOTH worked examples
   re-rolled showing the skill), `player_handbook/Glossary.md`,
   `mm_manual/MM5_Quick_Reference.md` (magic card),

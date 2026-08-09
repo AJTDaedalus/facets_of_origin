@@ -451,7 +451,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Insight (Wisdom):** Read what the stated stance does not say. Enemy stances are announced openly, but a successful Insight roll at the start of an exchange reads past them — a feint, a stance about to change, an ambusher whose conduct you have not seen yet. That information matters most in the beat before you commit your own blind declaration.
 
-**Attune (Spirit):** Channel your domain's force as a direct Strike. Spirit is the roll for intuitive magical attacks. Domain + Intent + Scope sets the difficulty; the Strike outcome table applies exactly as it would for a physical Strike — Resolve against an enemy, a Condition against another character.
+**Attune (Spirit):** Channel your domain's force as a direct Strike. Spirit + Attune is the roll for intuitive magical attacks; scholarly casters Strike with Knowledge + Lore. Domain + Intent + Scope sets the difficulty; the Strike outcome table applies exactly as it would for a physical Strike — Resolve against an enemy, a Condition against another character.
 
 **Investigate (Intelligence):** Find the structural weakness in the fight — a bad angle, a compromised footing, an environmental factor the enemy hasn't noticed. A successful Investigate roll translates directly into a difficulty modifier on the party's next actions against that target.
 
@@ -576,9 +576,9 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 (The MM stops. This is either extremely clever or the kind of thing that escalates a fight in an interesting direction. Probably both.)
 
-**MM:** "I love this. Your domain says Easy — but Inscription is slow craft. The preparation is part of the working, and you're compressing an hour of careful encoding into thirty seconds. That specific pressure makes it Hard. This is control, not damage — it won't touch its Resolve, but if it lands it changes the shape of the room. Roll Knowledge."
+**MM:** "I love this. Your domain says Easy — but Inscription is slow craft. The preparation is part of the working, and you're compressing an hour of careful encoding into thirty seconds. That specific pressure makes it Hard. This is control, not damage — it won't touch its Resolve, but if it lands it changes the shape of the room. Roll Knowledge and Lore."
 
-→ Zahna rolls **2d6 + Knowledge (3 → +1)** against Hard difficulty (net +0) and gets an **8**. Partial success.
+→ Zahna rolls **2d6 + Knowledge (3 → +1) + Lore (Practiced, +1)** against Hard difficulty (net +1) and gets an **8**. Partial success.
 
 **MM:** "The glyph takes. But you had to compromise — the instruction is less specific than you wanted. It will stop the guardian from leaving, but it reads 'unauthorized departure from position' broadly. Right now, that includes the guardian and also anyone standing in the rough area of the room it considers its patrol zone." *A beat.* "Which is the room you are all currently in."
 

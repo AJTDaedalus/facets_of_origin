@@ -759,6 +759,53 @@ anything unexpected.
   into the T3.11 commit with a note.
 - **Result:** WS-3 complete. 12/12 tasks, suite 1417 → 1445, no escalations.
 
+### T4.1 — Casting adds tradition skill (P-2, D7) (2026-08-09)
+
+- **Unblocked by user ruling:** casting with **Spirit adds the Attune rank**;
+  casting with **Knowledge adds the Lore rank**. Canon constraint honored: the
+  rule is attribute-keyed everywhere — no tradition proper nouns introduced
+  ("intuitive"/"scholarly" descriptors already in II.3 are kept as-is).
+- **Files:** `player_handbook/II.3_Magic.md` (§Rolling Magic rule + beam
+  example re-rolled), `player_handbook/Glossary.md` (Domain entry),
+  `mm_manual/MM5_Quick_Reference.md` (roll table row + magic card "The roll"
+  line), `player_handbook/Quick_Start.md` (QS-4 Cast-a-spell row + the sealed-
+  door cast shown as Knowledge +1, Lore +1 — minimal per protocol; full pregen
+  overhaul stays T5.1), `software/facets/base/facet.yaml` (new
+  `magic.traditions` block + 6 technique roll fields/descriptions),
+  `software/app/game/engine.py` (`resolve_magic_roll` adds the skill),
+  `software/app/facets/schema.py` (docstrings), `characters/Zahna.fof`
+  (tradition comment), `software/tests/test_roll_engine.py` (+4),
+  `software/tests/test_docs_consistency.py` (register), plus unlisted carriers
+  found by sweep: `player_handbook/III.3_Combat.md` (vignette cast at :581 —
+  now Knowledge + Lore, net +1, total 8 unchanged, narrative intact; §Mind and
+  Soul in a Fight "Attune (Spirit)" line gains the scholarly analog),
+  `player_handbook/II.4b`/`II.4c` (Arcane Study/Spiritual Domain + Second
+  Domain + Ascendant Domain Roll: fields → "Knowledge + Lore" / "Spirit +
+  Attune"), `mm_manual/MM2_Session_Design.md` (:424 pricing example),
+  `player_handbook/Index.md` (regen).
+- **TDD:** `TestCastingSkill` red first (4 failed: KeyError — yaml had no
+  traditions block) → green. Tests: scholarly adds Lore (Zahna's +2),
+  intuitive adds Attune (Expert +2), unskilled casts at Novice +0 (skill still
+  shown on the roll), yaml traditions block drives the mapping. Engine reads
+  `ruleset.magic.traditions` with II.3 defaults as fallback (robust to the
+  mock rulesets in older tests); `MagicDef.traditions` field already existed,
+  previously unpopulated.
+- **Zahna verified:** Knowledge 3 → +1, Lore Practiced → +1 ⇒ **2d6+2** —
+  the II.3 beam example, the II.3 Thornwall vignette (already showed
+  Knowledge + Lore, needed no numeric change), the QS sealed-door cast, and
+  `test_scholarly_casting_adds_lore_rank` all state the same total. QS's cast
+  line had read "2d6+2" (attribute-only would be +1) — it is now *correct*
+  under the new rule and shows its breakdown.
+- **Websocket:** no handler change needed — `roll_result_to_dict` already
+  carries `skill_id`/`skill_modifier`, so `cast_result` broadcasts the skill
+  automatically; no static-JS text hardcoded the old formula.
+- **Register:** `Roll Knowledge when doing so`; `Roll Spirit when doing so`;
+  `Knowledge or Spirit (by tradition)`; `Spirit or Knowledge (by tradition)`
+  (all verified present pre-edit, absent post-edit).
+- **Commands:** red 4 → engine+ascendant+websocket+character suites 462
+  passed; `python -m tools.build_index`; docs suite 32 passed. FULL suite →
+  **1449 passed** (322s; 1445 + 4 new).
+
 ---
 
 ## Escalations
