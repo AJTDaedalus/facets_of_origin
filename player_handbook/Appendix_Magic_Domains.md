@@ -18,6 +18,23 @@ Soul magic flows from will, presence, and spiritual connection. It is felt befor
 
 The soul domain list includes nine core domains and three prismatic domains. Core domains (each Focused or Standard in type) are available at Tier 1 of the Soul Facet Technique tree. Prismatic domains require the Ascendant Domain Technique (Tier 3) — they represent mastery so complete that the domain's breadth has become a practitioner's natural territory rather than an overwhelming one.
 
+**Table A–1: Soul Domains at a Glance**
+
+| Domain | Type | Territory |
+|---|---|---|
+| Fire | Focused | Heat, flame, and light produced by fire |
+| Shadow | Focused | Darkness, absence of light, physical cold |
+| Storm | Standard | Wind, rain, lightning, concussive thunder |
+| Beasts | Standard | Communication and command of natural animals |
+| Resonance | Standard | Sound, vibration, harmonic force |
+| Verdance | Standard | Living plants: growing, shaping, animating |
+| Binding | Standard | Oaths, pacts, and spiritual constraints |
+| Presence | Standard | Projecting spiritual weight, emotional aura |
+| The Tide | Standard | Vitality flowing between living things |
+| The Undying | Prismatic | Death, spirits of the departed, undead |
+| Fate | Prismatic | Probability, luck, threads of possibility |
+| The Living World | Prismatic | Animating current through all living things |
+
 ---
 
 ### Core Soul Domains
@@ -191,6 +208,20 @@ The animating current that runs through all living things simultaneously — not
 Mind magic is constructed rather than felt. Where Soul mages reach inward and outward simultaneously, Mind mages build: they study, analyze, and assemble effects from principles they understand. Mind magic tends toward precision, inscription, and the manipulation of information and perception. A Mind mage who does not understand what they are doing does not do it well — and a Mind mage who understands it completely is extraordinarily difficult to surprise.
 
 The mind domain list includes six core domains and three prismatic domains — the same core/prismatic split as Soul, though Mind's core list is shorter. Core domains are available at Tier 1 of the Mind Facet Technique tree. Prismatic domains require the Ascendant Domain Technique (Tier 3).
+
+**Table A–2: Mind Domains at a Glance**
+
+| Domain | Type | Territory |
+|---|---|---|
+| Illusion | Standard | False sensory experience: images, sounds, smells |
+| Warding | Standard | Protective limits inscribed into space or objects |
+| Inscription | Focused | Magical effects encoded into physical marks |
+| Transmutation | Standard | Structural alteration of non-living material |
+| Divination | Standard | Gathering information through magical means |
+| Constructed Force | Focused | Invisible force, telekinesis, barriers |
+| The Arcane | Prismatic | Perceiving and manipulating magic itself |
+| The Constructed Mind | Prismatic | Artificial intelligence and construct cognition |
+| Chronomancy | Prismatic | Time: acceleration, perception, brief stepping |
 
 ---
 

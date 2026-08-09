@@ -53,6 +53,8 @@
 | **Through the Mirror** | [why armor is a budget and not a subtraction](IV.1_Equipment.md#armor) | IV.1_Equipment.md |
 | **Example** | [spending a downgrade budget](IV.1_Equipment.md#armor-in-play) | IV.1_Equipment.md |
 | **MM Note** | [Money and wealth](IV.1_Equipment.md#currency-and-trade) | IV.1_Equipment.md |
+| **Reading the Entries** | [the domain descriptions](Appendix_Magic_Domains.md#appendix-magic-domain-catalog) | Appendix_Magic_Domains.md |
+| **Reading the Entries** | [the example intents](Appendix_Magic_Domains.md#appendix-magic-domain-catalog) | Appendix_Magic_Domains.md |
 
 ---
 

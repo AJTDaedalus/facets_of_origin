@@ -399,7 +399,7 @@ listed greps return the expected result; LOG updated.
   Files: `player_handbook/IV.1_Equipment.md` (Table IV.1-1 gains a type column
   with examples: longsword = standard / blades), `II.4a` cross-ref check.
 
-- [ ] **T5.7 — II.3 signpost + domain table consolidation (P-12).**
+- [x] **T5.7 — II.3 signpost + domain table consolidation (P-12).**
   Files: `player_handbook/II.3_Magic.md` (top-of-chapter "skip ahead unless your
   concept is magical" note), `Appendix_Magic_Domains.md` (quick-ref tables
   consolidated here; II.3 keeps prose + pointer), regen Lists/Index.

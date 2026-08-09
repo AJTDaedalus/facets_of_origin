@@ -17,8 +17,6 @@
 | **II.2–4** | [Difficulty Modifiers](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play) | II.2_Character_Creation_Attributes.md |
 | **II.3–1** | [Scope](II.3_Magic.md#scope) | II.3_Magic.md |
 | **II.3–2** | [Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope) | II.3_Magic.md |
-| **II.3–3** | [Soul Domains](II.3_Magic.md#soul-domains) | II.3_Magic.md |
-| **II.3–4** | [Mind Domains](II.3_Magic.md#mind-domains) | II.3_Magic.md |
 | **II.4–1** | [Skill Ranks](II.4_Character_Creation_Facets.md#skills) | II.4_Character_Creation_Facets.md |
 | **II.4–2** | [Skill Point Cost per Mark](II.4_Character_Creation_Facets.md#advancing-skills) | II.4_Character_Creation_Facets.md |
 | **II.4a–1** | [Skills of the Body](II.4a_Character_Creation_Facet_Body.md#skills-of-the-body) | II.4a_Character_Creation_Facet_Body.md |
@@ -53,6 +51,8 @@
 | **QS–2** | [Mordai — Attributes](Quick_Start.md#mordai-the-warrior) | Quick_Start.md |
 | **QS–3** | [Zulnut — Attributes](Quick_Start.md#zulnut-the-rogue) | Quick_Start.md |
 | **QS–4** | [Quick Reference](Quick_Start.md#quick-reference) | Quick_Start.md |
+| **A–1** | [Soul Domains at a Glance](Appendix_Magic_Domains.md#domains-of-the-soul) | Appendix_Magic_Domains.md |
+| **A–2** | [Mind Domains at a Glance](Appendix_Magic_Domains.md#domains-of-the-mind) | Appendix_Magic_Domains.md |
 
 ---
 

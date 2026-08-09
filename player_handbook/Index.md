@@ -240,7 +240,7 @@
 - [II.3 — Domain](II.3_Magic.md#domain)
 - [II.3 — Domain Types](II.3_Magic.md#domain-types)
 - [II.3 — Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope)
-- [II.3 — Domain Quick Reference](II.3_Magic.md#domain-quick-reference)
+- [II.3 — The Domain Catalog](II.3_Magic.md#the-domain-catalog)
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
 - [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
 - [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)

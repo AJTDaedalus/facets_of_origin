@@ -66,6 +66,9 @@ BOOK_ORDER = [
         "III.3_Combat.md",
         "IV.1_Equipment.md",
         "Quick_Start.md",
+        # T5.7 (P-12): the domain at-a-glance tables consolidated into the
+        # appendix, which therefore joined the register's scan order.
+        "Appendix_Magic_Domains.md",
     ]),
     ("Mirror Master's Manual", MM_MANUAL, [
         "MM1_Encounters_and_Enemies.md",

@@ -4,6 +4,8 @@ Zahna has never once looked up a spell. He has a territory — the marks people 
 
 That is the whole of magic here. A domain says where you can reach. An intent says what you are reaching for. A scope says how far. Then you roll the same two dice as everyone else.
 
+**If your concept isn't magical, skip this chapter.** Nothing else in character creation depends on it. Magic enters a character through a Background with a domain origin (Chapter II.5) and grows through the Facet Techniques (Chapter II.4); a character with neither loses nothing by never reading a word of this. Come back if a domain ever finds you.
+
 ## What Is Magic?
 
 Magic is not a menu. There are no spells to choose from, no slots to manage, no list of prepared effects to consult at the table. When you use magic in Facets of Origin, you do three things: you name your territory, you describe what you want to happen, and you roll. The dice tell you how well it went. The story tells you what it looked like.
@@ -195,44 +197,9 @@ Magic in combat — casting time, reactions against magical effects, Conditions 
 
 ---
 
-## Domain Quick Reference
+## The Domain Catalog
 
-All 21 domains at a glance. Full descriptions are in the **Appendix: Magic Domain Catalog**. Prismatic domains (marked †) require a Tier 3 Technique to access. (Body magic domains are deferred to the Shattered Origin setting Facet — see *A Brief Note on Body Magic*, below.)
-
-### Soul Domains
-
-**Table II.3–3: Soul Domains**
-
-| Domain | Type | Territory |
-|---|---|---|
-| Fire | Focused | Heat, flame, and light produced by fire |
-| Shadow | Focused | Darkness, absence of light, physical cold |
-| Storm | Standard | Wind, rain, lightning, concussive thunder |
-| Beasts | Standard | Communication and command of natural animals |
-| Resonance | Standard | Sound, vibration, harmonic force |
-| Verdance | Standard | Living plants: growing, shaping, animating |
-| Binding | Standard | Oaths, pacts, and spiritual constraints |
-| Presence | Standard | Projecting spiritual weight, emotional aura |
-| The Tide | Standard | Vitality flowing between living things |
-| The Undying † | Prismatic | Death, spirits of the departed, undead |
-| Fate † | Prismatic | Probability, luck, threads of possibility |
-| The Living World † | Prismatic | Animating current through all living things |
-
-### Mind Domains
-
-**Table II.3–4: Mind Domains**
-
-| Domain | Type | Territory |
-|---|---|---|
-| Illusion | Standard | False sensory experience: images, sounds, smells |
-| Warding | Standard | Protective limits inscribed into space or objects |
-| Inscription | Focused | Magical effects encoded into physical marks |
-| Transmutation | Standard | Structural alteration of non-living material |
-| Divination | Standard | Gathering information through magical means |
-| Constructed Force | Focused | Invisible force, telekinesis, barriers |
-| The Arcane † | Prismatic | Perceiving and manipulating magic itself |
-| The Constructed Mind † | Prismatic | Artificial intelligence and construct cognition |
-| Chronomancy † | Prismatic | Time: acceleration, perception, brief stepping |
+There are 21 domains: nine core and three Prismatic for each of Soul and Mind. All of them — an at-a-glance table per Facet and a full entry for every domain, with type, territory, and example intents at each scope — live in the **Appendix: Magic Domain Catalog**. Prismatic domains require a Tier 3 Technique to access (see *Acquiring a Domain*, below). Body magic domains are deferred to the Shattered Origin setting Facet — see *A Brief Note on Body Magic*, below.
 
 ---
 

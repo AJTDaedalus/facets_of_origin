@@ -1180,6 +1180,33 @@ anything unexpected.
 - **Commands:** `build_index` ×2 around `build_table_register`; docs suite
   → 32 passed.
 
+### T5.7 — II.3 signpost + domain table consolidation (P-12) (2026-08-09)
+
+- **Files:** `player_handbook/II.3_Magic.md` (top-of-chapter skip note; the
+  §Domain Quick Reference section — Tables II.3–3/II.3–4 — replaced by
+  "## The Domain Catalog", prose + pointer only),
+  `player_handbook/Appendix_Magic_Domains.md` (gains **Table A–1: Soul
+  Domains at a Glance** and **Table A–2: Mind Domains at a Glance** at the
+  top of their sections, verbatim rows; the † markers dropped — the Type
+  column now says Prismatic outright and the II.3 footnote they pointed at
+  did not move), `software/tools/build_table_register.py` (the appendix
+  joined the register's scan order — it had never held a numbered table
+  before), Index + both Lists regenerated.
+- **Signpost:** "**If your concept isn't magical, skip this chapter.**
+  Nothing else in character creation depends on it…" — placed above §What
+  Is Magic?, grounded entirely in existing rules (domain origin via II.5,
+  growth via II.4).
+- **Acceptance verified:** II.3 carries no domain rows at all now — the
+  only domain data homes are the appendix (tables + entries side by side)
+  and facet.yaml's catalog, which INV-7 pins to the appendix. II.3 tables
+  renumber cleanly to 1..2 (INV-9 green); no file referenced the old
+  II.3–3/II.3–4 designations.
+- **Register side effect:** the appendix's two Reading the Entries boxes
+  now register too — List_of_Boxes 72 → 74; List_of_Tables back to 76
+  (−2 II.3, +2 appendix).
+- **Commands:** `build_table_register` + `build_index`; docs suite →
+  32 passed.
+
 ---
 
 ## Escalations
