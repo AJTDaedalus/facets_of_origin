@@ -1473,6 +1473,34 @@ anything unexpected.
   tests/test_api_enemy.py tests/test_agentic_playtest.py
   tests/test_combat_sim.py` → **525 passed**; `node --check` both JS files.
 
+### T6.5 — Printable sheet artifacts (2026-08-09)
+
+- **Scope check first:** the printable/paper sheet is
+  `player_handbook/Appendix_Character_Sheet.md` ("print it, copy it into a
+  notebook"); no other sheet template exists in the repo. Of the three
+  required artifacts, two already landed there in WS-5 — "Endurance Pool
+  (current / max)" label (T5.3) and the modifier-first Attributes grid with
+  the "write it large" note (T5.9) — verified present, not re-touched. The
+  interactive app views were not touched at all, per the task constraint.
+- **The missing artifact:** the Combat section's "Armor Downgrade Budget
+  Remaining This Scene" write-in row became the III.3 §Armor paper-variant
+  checkboxes (T3.10's canon: one checkbox per downgrade, 2 for light / 4
+  for heavy, tick when armor softens a Condition, fresh row at scene end):
+  "Armor Downgrades This Scene — tick a box each time armor softens a
+  Condition (light armor: the first 2 boxes; heavy: all 4); boxes refresh
+  when the scene ends | ☐ ☐ ☐ ☐". Wording is a compression of the III.3
+  sidebar — no new rule.
+- **Invariant sync:** `CHARACTER_SHEET_FIELDS` and
+  `NEW_CHARACTER_SHEET_SECTION_LABELS` in `test_docs_consistency.py`
+  updated to the new label (still mapped to
+  `Character.armor_downgrades_remaining` — same state, count vs boxes).
+  II.1's sheet-section table ("Armor type and downgrade budget") still
+  describes the row correctly; no other reference to the old label exists
+  outside historical docs.
+- **Commands:** `pytest tests/test_docs_consistency.py
+  tests/test_build_index.py` → **47 passed**; `build_index` idempotent (no
+  diff).
+
 ---
 
 ## Escalations

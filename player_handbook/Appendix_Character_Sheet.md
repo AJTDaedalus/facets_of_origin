@@ -104,7 +104,7 @@ Leave blank if your character has no magic. Consult the Appendix: Magic Domain C
 |---|---|
 | Endurance Pool (current / max) — max is 4 + Constitution modifier + Endurance skill rank | |
 | Armor Type | |
-| Armor Downgrade Budget Remaining This Scene | |
+| Armor Downgrades This Scene — tick a box each time armor softens a Condition (light armor: the first 2 boxes; heavy: all 4); boxes refresh when the scene ends | ☐ ☐ ☐ ☐ |
 | Active Conditions | |
 | Sparks | |
 

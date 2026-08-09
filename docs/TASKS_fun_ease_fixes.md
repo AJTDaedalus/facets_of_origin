@@ -447,7 +447,7 @@ listed greps return the expected result; LOG updated.
   face (Table III.3-9) + Strike difficulty hint, conduct-trigger text display;
   websocket + `play.js`/`builder.js`; tests (≥3).
 
-- [ ] **T6.5 — Printable sheet artifacts.**
+- [x] **T6.5 — Printable sheet artifacts.**
   Files: printable sheet template(s): armor checkboxes per scene, "Endurance
   Pool" label, modifier-first — consistent with T5.3/T5.9.
 

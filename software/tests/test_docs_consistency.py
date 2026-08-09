@@ -210,7 +210,10 @@ CHARACTER_SHEET_FIELDS = {
     "Magic Domain": "magic_domain",
     "Endurance Pool (current / max) — max is 4 + Constitution modifier + Endurance skill rank": "endurance_current",
     "Armor Type": "armor",
-    "Armor Downgrade Budget Remaining This Scene": "armor_downgrades_remaining",
+    # T6.5: the printed sheet carries the III.3 paper-variant checkboxes
+    # (one per downgrade, ticked as armor softens a Condition) — the model
+    # still stores the same state as a remaining count.
+    "Armor Downgrades This Scene — tick a box each time armor softens a Condition (light armor: the first 2 boxes; heavy: all 4); boxes refresh when the scene ends": "armor_downgrades_remaining",
     "Active Conditions": "conditions",
     "Sparks": "sparks",
     "Inventory": "inventory",
@@ -248,12 +251,13 @@ def test_character_sheet_fields_map_to_model() -> None:
 
 
 # The Magic, Combat, and Inventory sections (new in this task). The Facet
-# section's Career Advances row left the sheet in T5.5 (P-13).
+# section's Career Advances row left the sheet in T5.5 (P-13); the armor row
+# became the III.3 paper-variant checkboxes in T6.5.
 NEW_CHARACTER_SHEET_SECTION_LABELS = [
     "Magic Domain",
     "Endurance Pool (current / max) — max is 4 + Constitution modifier + Endurance skill rank",
     "Armor Type",
-    "Armor Downgrade Budget Remaining This Scene",
+    "Armor Downgrades This Scene — tick a box each time armor softens a Condition (light armor: the first 2 boxes; heavy: all 4); boxes refresh when the scene ends",
     "Active Conditions",
     "Inventory",
 ]
