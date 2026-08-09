@@ -1515,6 +1515,34 @@ anything unexpected.
   Table III.3–9 labels and conduct triggers, and the paper sheet's armor
   checkboxes.
 
+### T7.1 — Global contradiction audit (2026-08-09)
+
+- **(a) Register:** full `RETIRED_PHRASES` run green inside the final suite —
+  ~30 phrases locked out of every live rules surface.
+- **(b) Keyword sweeps, all dispositioned clean:** Sparks (4 surfaces, all
+  reset-consistent; MM2 flow target now spend-what-you-earn); casting skill
+  (8 consistent mentions, zero "Spirit or Knowledge" forks); rider menu
+  ("Condition of your choice" extinct); Second Domain (expiry phrased
+  identically in II.4b/II.4c); Withdrawn cap (MM5 consistent, 3 sites);
+  Prismatic (one definitional "Broad" in II.3, naming the data type key);
+  Endurance Pool (QS/sheets/MM5 all qualified; skill bare). The one
+  "unspent points" hit outside the new rule is II.2's chargen point-buy —
+  a different concept, legitimately worded.
+- **(c) Glossary end-to-end read:** all 47 entries consistent with the
+  changed rules (incl. Partial Success "not an offer to weigh", shared
+  one-step allowance cited from both Specialty and Technique, Open,
+  conduct-trigger stances, banked points, Recipe-Table doctrine). No fixes
+  needed — the WS agents kept the mirror current, which is the protocol
+  working.
+- **(d)** D1–D14 recorded in `docs/DECISIONS.md`.
+- **(e)** Bestiary `--check` up to date; `build_index` idempotent.
+- **(f) Final full suite: 1519 passed** (326s). Baseline was 1394: +125
+  tests net across the pipeline.
+- **Result:** pipeline complete — 46/46 tasks, 7 workstreams, zero
+  escalations. Flagged for the PR reviewer: T5.8 Background swaps (FOR USER
+  REVIEW, see that entry) and the boss-median-2 playtest watch item
+  (Series 10).
+
 ---
 
 ## Escalations

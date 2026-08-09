@@ -455,7 +455,7 @@ listed greps return the expected result; LOG updated.
 
 ## WS-7 — Global close-out
 
-- [ ] **T7.1 — Global contradiction audit.**
+- [x] **T7.1 — Global contradiction audit.**
   Do: (a) full `RETIRED_PHRASES` run — must be empty outside excluded archives;
   (b) cross-book keyword sweep for every changed rule (Sparks, Open, Withdrawn,
   precedence, banking, Prismatic, Endurance Pool, casting skill) — each hit

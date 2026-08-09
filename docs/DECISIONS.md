@@ -839,3 +839,25 @@ Parry correction (Standard 3×Named+1 Mook 76.0%, Hard +2 Mooks 47.5%, Deadly
 +3 Mooks 20.0% / 4×Named+1 Mook 20.0%, seed 1, n=200).
 
 **Status:** ✅ Decided (DESIGN_fun_ease_fixes.md D6). Implemented by T3.6.
+
+## Fun & Ease-of-Play Fixes — design decisions D1–D14 (2026-08-09)
+
+Recorded from `docs/DESIGN_fun_ease_fixes.md` §8 on pipeline completion (Brain
+tier; findings and evidence in `docs/RESEARCH_fun_ease_review.md`).
+
+| # | Decision | Chosen over | Rationale |
+|---|---|---|---|
+| D1 | Sparks reset to 3 each session | carry-over / floor | Anti-hoarding lever; playtest-confirmed hoarding; unspent = wasted drives engagement |
+| D2 | One-step cap unified across Techniques + Specialties + future sources | separate caps | Future-proofs the ladder; kills the read-carefully advantage |
+| D3 | 7–9 = narration sequencing, no decline-offer | PbtA-style offer | 7–9 fires on ~46% of rolls; a decision point on the most common outcome taxes pace; "never a dead end" already guarantees motion. Revisit on playtest evidence |
+| D4 | Rider menu vs enemies → single "Open" tag | keep menu + honesty note | 4 of 5 options mechanically null vs non-rolling enemies; fiction keeps variety at zero rules cost |
+| D5 | Withdrawn fixed via uncontested-exchange escalation | recovery nerf / pressure conditionals | Scene rule, applied once by the MM, no per-character bookkeeping; converts the loop into a tempo trade |
+| D6 | TR budget + multiplier tables cut to DECISIONS.md | keep with caveats | Proven structurally non-predictive; tables outlive prose; the Recipe Table already does the job |
+| D7 | Casting adds the tradition's skill (Spirit→Attune, Knowledge→Lore) | attribute-only | Gives mages the fighter's +0→+4 arc; research names attribute-only's failure explicitly; rehabilitates the Prismatic ladder and Second Domain without touching tables. Wording stays attribute-keyed — no tradition proper nouns in the core PHB |
+| D8 | Prismatic ladder numbers unchanged; ceiling sentence rewritten as reach-only | soften to Hard/Hard/VH | Skills-apply restores growth; identity kept; the "Sparks don't work here" misread killed |
+| D9 | Second Domain penalty expires at next Facet level | permanent + label | Arc beats tax; permanent difficulty taxes on defining traits are the documented feel-bad shape |
+| D10 | Bank ≤2 points + 1 training mark to an unused Primary-Facet skill | forfeit as-is | The banked-pool abuse cannot occur at 4/session; the forfeit's only output was its own example's feel-bad |
+| D11 | Never Surprised → warning beat | absolute at a higher tier | Preserves the fantasy at full strength; returns a scene genre to the MM |
+| D12 | Enemy blind posture reveal dropped; conduct triggers instead | keep ceremony | A ritual that never surprises is pure overhead; rule-driven stances are cheaper and more readable |
+| D13 | "Endurance Pool" print qualifier, no identifier rename | full rename | A full rename churns code/data/YAML for the same table clarity; revisit on playtest evidence |
+| D14 | Prismatic is the player-facing term | Broad | The evocative word wins the player-facing slot; Broad survives in one definitional II.3 sentence naming the data type key |
