@@ -712,3 +712,68 @@ mandated clock). Boss median 2–4 — met (2).**
 monkeypatches `choose_pc_posture` to constant `"withdrawn"` (the exploit
 policy, not shipped AI). Hook tests:
 `test_combat_sim.py::TestObjectiveClockHook`.
+
+---
+
+## Series 11 — WS-4 casting curves under skills-apply (T4.6, DESIGN §5.6) (2026-08-09)
+
+T4.1 (P-2/D7) made every casting roll add the tradition's skill — casting
+with Spirit adds the Attune rank, casting with Knowledge adds the Lore rank
+— giving casters the same +0 → +4 modifier arc as every other practitioner.
+This series spot-checks the resulting success curves for a Focused and a
+Broad domain at the three arc points, and verifies the guarded number:
+**pre-Technique Minor-scope success must be unchanged-or-better vs
+pre-T4.1.**
+
+All runs drive `app.game.engine.resolve_magic_roll` against the real base
+ruleset (the shared rules module — no re-implemented rules, per the iron
+law). n=20,000 casts per cell, seed 1. Arc points: **+0** = attribute 2
+(+0) + Novice (+0); **+2** = attribute 3 (+1) + Practiced (+1) — Zahna's
+exact numbers; **+4** = attribute 3 (+1) + Master (+3).
+
+### Focused — Inscription (scholarly: Knowledge + Lore)
+
+| Arc | Minor (Easy) P7+/P10+ | Significant (Std) | Major (Hard) |
+|---|---|---|---|
+| +0 | 72.2 / 27.7% | 58.1 / 16.5% | 41.5 / 8.2% |
+| +2 | 91.8 / 58.1% | 83.3 / 41.5% | 72.2 / 27.7% |
+| +4 | 100.0 / 83.3% | 97.2 / 72.2% | 91.8 / 58.1% |
+
+### Broad — Fate (intuitive: Spirit + Attune)
+
+| Arc | Minor (Hard) P7+/P10+ | Significant (VH) | Major (VH) |
+|---|---|---|---|
+| +0 | 41.5 / 8.2% | 27.7 / 2.5% | 27.7 / 2.5% |
+| +2 | 72.2 / 27.7% | 58.1 / 16.5% | 58.1 / 16.5% |
+| +4 | 91.8 / 58.1% | 83.3 / 41.5% | 83.3 / 41.5% |
+
+### The guarded number — pre-Technique Minor scope
+
+The +0 row **is** the pre-T4.1 baseline: a Novice skill adds +0, which is
+arithmetically identical to the old attribute-only roll, and the measured
+pre-Technique Minor rates confirm it (Focused 72.2%, Broad 41.5% at +0 —
+the same cells as above; pre-Technique Minor uses the domain's normal
+difficulty, unchanged). Every trained row is strictly better, and no cell
+anywhere in the grid got worse. **Unchanged-or-better: HOLDS.**
+
+### Readings
+
+- **The Broad ladder is rehabilitated without moving a number (P-3/D8):**
+  at +0 a Broad Major working is a desperate 27.7% — the identity holds —
+  but the arc now exists: 58.1% at mid-career, 83.3% at Master. Growth
+  comes from advancement, not from softening the table.
+- **DESIGN §5.6's second acceptance:** "Very Hard at Master rank lands near
+  the Practiced-at-Standard feel" — exactly met: VH at +4 is 2d6+2 ≥ 7 =
+  83.3%, the same distribution as Practiced-at-Standard (+2 vs +0).
+- **Session-one magic stays real:** a starting Focused caster (Zahna, +2)
+  succeeds at Minor workings 91.8% of the time pre-Technique.
+
+**Acceptance (DESIGN §5.6): guarded number holds (+0 row identical,
+trained rows strictly better); curves recorded for Focused + Broad at all
+three arc points.**
+
+**Reproduce:** `resolve_magic_roll(caster, domain, scope, "sim", ruleset)`
+for `inscription`/`fate` × `minor`/`significant`/`major` × the three arc
+casters (skills as SkillState rank strings), n=20,000, `random.seed(1)`;
+pre-Technique rows with `magic_technique_active=False`. Script:
+`casting_curves.py` (session scratchpad).

@@ -928,6 +928,25 @@ anything unexpected.
 - **Commands:** 2 new tests green; docs suite 32 passed;
   `python -m tools.build_index` (no diff).
 
+### T4.6 — Casting-curve spot-checks (DESIGN §5.6) (2026-08-09)
+
+- **Files:** `research/simulation_log.md` (**Series 11** appended in the
+  file's format). Script in the session scratchpad (`casting_curves.py`);
+  drives `engine.resolve_magic_roll` against the real base ruleset only —
+  no re-implemented rules.
+- **Method:** n=20,000 casts per cell, seed 1. Focused = Inscription
+  (Knowledge + Lore), Broad = Fate (Spirit + Attune). Arc points +0
+  (attr 2 + Novice), +2 (attr 3 + Practiced — Zahna), +4 (attr 3 + Master),
+  across Minor/Significant/Major.
+- **Guarded number: HOLDS.** The +0 row is arithmetically identical to the
+  pre-T4.1 attribute-only model (Novice adds +0): pre-Technique Minor
+  success is unchanged at rank 0 (Focused 72.2%, Broad 41.5%) and strictly
+  better at every trained rank. No cell in the grid got worse.
+- **Headlines:** Broad Major goes 27.7% → 58.1% → 83.3% across the arc —
+  the ladder is rehabilitated by advancement with zero table changes
+  (D8 as designed); DESIGN §5.6's Master-at-VH ≈ Practiced-at-Standard
+  acceptance is met exactly (both are 2d6+2 vs 7 = 83.3%).
+
 ---
 
 ## Escalations

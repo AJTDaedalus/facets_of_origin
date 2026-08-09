@@ -337,7 +337,7 @@ listed greps return the expected result; LOG updated.
   Register: the entry's absolute clause (`you automatically succeed` scoped — use
   a longer unique substring from the entry).
 
-- [ ] **T4.6 — Casting-curve spot-checks (DESIGN §5.6; after T4.1).**
+- [x] **T4.6 — Casting-curve spot-checks (DESIGN §5.6; after T4.1).**
   Files: sim tooling (shared rules module only), `research/simulation_log.md`.
   Accept: pre-Technique Minor success unchanged-or-better; curves recorded for
   Focused + Broad at ranks 0/2/4.
