@@ -19,7 +19,7 @@ A digital-first, open-source tabletop RPG designed so the rules never get in the
 The complete rulebook for players:
 
 - **Character Creation** — Attributes (9 stats, 18-point buy), three Facets (Body, Mind, Soul), 15 Backgrounds with starting skills and specialties, 15 skills across three facets
-- **Magic** — Domain + Intent + Scope system with no spell lists. 21 domains across two traditions (Thaumaturgy/Mind, Invocation/Soul); Body magic deferred to the Shattered Origin setting Facet. Focused, Standard, Broad, and Prismatic domain types
+- **Magic** — Domain + Intent + Scope system with no spell lists. 21 domains across the two traditions (Thaumaturgy/Mind, Invocation/Soul); the Facet of the Body has no domains of its own, and Body characters reach magic by cross-training. Focused, Standard, Broad, and Prismatic domain types
 - **Core Resolution** — 2d6 + modifier with three-tier outcomes (10+ full success, 7-9 partial, 6- consequence). Sparks add dice and drop lowest for pre-roll agency
 - **Combat** — Exchange-based (simultaneous action, no turn order), posture system, Endurance pool, conditions instead of HP, armor as condition downgrade
 - **Equipment** — Weapons, armor, adventuring gear, and services

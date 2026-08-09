@@ -199,7 +199,7 @@ Magic in combat — casting time, reactions against magical effects, Conditions 
 
 ## The Domain Catalog
 
-There are 21 domains: nine core and three Prismatic for each of Soul and Mind. All of them — an at-a-glance table per Facet and a full entry for every domain, with type, territory, and example intents at each scope — live in the **Appendix: Magic Domain Catalog**. Prismatic domains require a Tier 3 Technique to access (see *Acquiring a Domain*, below). Body magic domains are deferred to the Shattered Origin setting Facet — see *A Brief Note on Body Magic*, below.
+There are 21 domains: twelve for the Soul (nine core and three Prismatic) and nine for the Mind (six core and three Prismatic). All of them — an at-a-glance table per Facet and a full entry for every domain, with type, territory, and example intents at each scope — live in the **Appendix: Magic Domain Catalog**. Prismatic domains require a Tier 3 Technique to access (see *Acquiring a Domain*, below). The Facet of the Body has no domains of its own — see *A Brief Note on Body Magic*, below.
 
 ---
 
@@ -234,7 +234,9 @@ Prismatic domains require the **Ascendant Domain** Technique (Tier 3, in the Min
 
 ## A Brief Note on Body Magic
 
-Characters whose primary growth is in the Facet of the Body are not excluded from magical practice — they simply arrive at it differently. In Shattered Origin, Body magic tends toward earth, endurance, and the transformation of physical limits: the fighter who becomes immovable, the warrior whose wounds close on command, the guardian whose body is a ward in itself. These domains are real and viable. They are also less common in the core setting and more closely tied to specific cultures, traditions, and setting content. Rather than confine them to an incomplete entry in the core PHB, Body magic domains are covered in the Shattered Origin setting Facet, where the narrative context that makes them meaningful is already present. A Mirror Master whose campaign includes Body magic practitioners should consult that module.
+The Facet of the Body has no domains of its own. The 21 domains in this chapter belong to the Soul and the Mind, and that is the complete list — nothing is being held back for a later module.
+
+This does not shut a Body character out of magic. It means they arrive at it the way anyone reaches past their own Facet: by cross-training. A Body character who wants a domain takes the Mind or Soul Tier 1 Technique and pays the standard cross-Facet advancement cost for it, exactly as described in *Acquiring a Domain*, above. What the Body trains is formidable, and it is not magic — but a character who wants both can have both, at a price the advancement rules already name.
 
 ---
 
