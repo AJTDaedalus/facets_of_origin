@@ -1282,6 +1282,67 @@ anything unexpected.
 - **Commands:** docs suite → 32 passed; `build_index` (no diff beyond
   regen).
 
+### T5.10 — Quick-ref recompression audit (protocol rule 5, verification) (2026-08-09)
+
+- **Method:** every MM5 card, QS-4 line, and III.3 in-chapter quick-ref
+  block read line-by-line against its canonical section as it stands after
+  WS-2/3/4 + T5.1–T5.9.
+- **Divergences found and fixed (4):**
+  1. **MM5 §Sparks target-economy line** still said "end with 2–3 / end
+     with 1–3" — carry-over targets T2.1 removed from MM2 (different
+     wording than the registered phrase, so the register never saw it).
+     Recompressed to spend-what-you-earn + "an unspent Spark at session
+     end is simply gone (MM2, *Target Economy*)."
+  2. **MM5 Table MM5–9 (Reactions)** cost cells said "1 End / 0 End /
+     2 End" — a bare-Endurance abbreviation the C-6 qualifier had made
+     stale. Header now reads "Cost (Endurance Pool points)", cells are
+     plain numbers, matching III.3's Table III.3–11 units.
+  3. **III.3 quick-ref Exchange Flow step 1** omitted the T3.8 canon that
+     the MM states enemy stances openly (MM5's card had it; the chapter's
+     own compression didn't) — now "MM states enemy stances openly; PCs
+     declare Postures (simultaneously, blind)."
+  4. **III.3 quick-ref Postures table** dropped Defensive's "(min 0)"
+     floor that the body table carries — restored.
+- **II.2 duplicated tables (DESIGN §9.3 — default keep, verified):**
+  Table II.2–4 (Difficulty Modifiers) matches Table III.1–4's modifiers
+  exactly (When-column omitted = compression). Table II.2–3's outcome
+  descriptions had drifted shorter than Table III.1–1 — notably the 6-
+  row lost "but not in your favor" — **synced to III.1's full wording**;
+  tables kept in place per the default.
+- **Mapping table (quick-ref → canonical source):**
+  | Quick-ref card | Canonical source |
+  |---|---|
+  | MM5–1 Outcome Tiers / roll formula | III.1 §The Roll, Table III.1–1 |
+  | MM5–2 Attribute Ratings | II.2 Table II.2–1 / III.1 Table III.1–2 |
+  | MM5–3 Difficulty + precedence paragraph | III.1 §Difficulty (Table III.1–4, precedence ¶) + II.4 §Reading the Entries |
+  | MM5–4 Skill Ranks | III.1 Table III.1–3 / II.6 |
+  | MM5 §Sparks (earn/spend/reset/Graceful Fail) | III.1 §Sparks; MM2 §The Spark Economy (flow guidance, Table MM2–3) |
+  | MM5 §Exchange Flow + uncontested rule | III.3 §How an Exchange Runs + §Recovering (T3.5 rule) |
+  | MM5–6 Postures | III.3 Table III.3–2 + §Postures (stated enemy stances) |
+  | MM5–7 Offensive Actions + Press | III.3 §Strike/§Maneuver/§Support/§Press; II.3 §Rolling Magic |
+  | MM5–8 Strike Outcomes + Open | III.3 §Strike outcomes (vs enemies / PvP) |
+  | MM5–9 Reactions | III.3 §Reactions + Table III.3–11 |
+  | MM5–10 Enemy Attacks + finisher line | III.3 §Enemy Attacks, §Incoming Condition Tier; MM1 finisher template |
+  | MM5 §Group Rolls | III.1 §Group Rolls |
+  | MM5–11 Conditions | III.3 §Conditions + Table III.3–13 |
+  | MM5–12 Armor | III.3 §Armor + §Armor and Reaction Downgrades |
+  | MM5 §Endurance Pool | III.3 §Endurance Pool (pool, floor, recovery) |
+  | MM5–13 Magic + Spark-reach bullets + Second Domain | II.3 Table II.3–2, §Sparks and Magic; II.4b/II.4c Second Domain |
+  | MM5 §Adjudicating Magic | MM2 §Adjudicating Magic (6 rules) |
+  | MM5 §Magic 6- Templates | II.3 §When Magic Fails (6 templates) |
+  | MM5–14/15 TR + Recipes + actor-count | MM1 §Calculating TR, §Sizing an Encounter, Recipe Table |
+  | MM5 §Skill Advancement | II.4 §Advancing Skills (banking, T4.3) + §Facet Levels |
+  | MM5–16 Trouble Table | MM2 §The Trouble Table |
+  | MM5 §Common Rulings | III.1 (unnarrated details, contested, trying again, when to roll, saving throws); II.5 §Specialty; III.3 §Mooks |
+  | QS-4 rows + five-line primer | III.1 (roll/difficulty/ranks/Sparks), III.3 (Strike/exchange/reaction/posture), II.3 (casting) — verified at T5.2, re-checked |
+  | III.3 §Combat Quick Reference (Tables III.3–10..16) | III.3's own body sections (same chapter) |
+  | II.2 Tables II.2–3/II.2–4 | III.1 Tables III.1–1/III.1–4 (kept, now verbatim-synced) |
+- **Traces verified with no change needed:** Spark pre-roll timing, tie
+  rule, saving throws, Mook rules, magic 7–9 categories and all six 6-
+  template names, trouble-table rows, banking/training line, Second
+  Domain expiry, actor-count doctrine numbers (76→47→20).
+- **Commands:** `build_index`; docs suite → 32 passed.
+
 ---
 
 ## Escalations

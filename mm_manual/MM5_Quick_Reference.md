@@ -92,7 +92,7 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 | **Graceful Failure** (6- played for story) | Player claims, MM confirms | 1–2 across table |
 | **Spark for Weakness** (played into flaw) | MM | 0–1 across table |
 
-**Target economy** (by session type): Low-activity — earn 1–2, spend 1–2, end with 2–3. Standard — earn 2–3, spend 3–4, end with 2–3. High-combat — earn 3–4, spend 4–6, end with 1–3.
+**Target economy** (by session type, everyone starting at 3): Low-activity — earn 1–2, spend 1–2. Standard — earn 2–3, spend 3–4. High-combat — earn 3–4, spend 4–6. Spend-what-you-earn: an unspent Spark at session end is simply gone (MM2, *Target Economy*).
 
 ---
 
@@ -165,12 +165,12 @@ Default Strike difficulty: **Standard**. Adjust for posture and situation; an Op
 
 **Table MM5–9: Reactions**
 
-| Reaction | Cost | Roll | 10+ | 7–9 | 6- |
+| Reaction | Cost (Endurance Pool points) | Roll | 10+ | 7–9 | 6- |
 |---|---|---|---|---|---|
-| **Dodge** | 1 End | Dexterity | Avoid entirely | Downgrade 1 tier | Full hit |
-| **Parry** | 1 End | Weapon attribute + Combat | Avoid entirely | Downgrade 1 tier | Full hit |
-| **Absorb** | 0 End | No roll | — | — | Take hit at full tier |
-| **Intercept** | 2 End | — | Protect ally, then Dodge/Parry — once per exchange; if two would step in, the protected ally decides who | — | — |
+| **Dodge** | 1 | Dexterity | Avoid entirely | Downgrade 1 tier | Full hit |
+| **Parry** | 1 | Weapon attribute + Combat | Avoid entirely | Downgrade 1 tier | Full hit |
+| **Absorb** | 0 | No roll | — | — | Take hit at full tier |
+| **Intercept** | 2 | — | Protect ally, then Dodge/Parry — once per exchange; if two would step in, the protected ally decides who | — | — |
 
 At **0 Endurance Pool**: Absorb only.
 

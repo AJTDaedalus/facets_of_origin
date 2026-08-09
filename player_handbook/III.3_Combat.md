@@ -705,7 +705,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 ### Exchange Flow
 
 ```
-1. Declare postures (simultaneously)
+1. MM states enemy stances openly; PCs declare Postures (simultaneously, blind)
 2. Declare actions (Strike / Support / Maneuver / Magic)
 3. Resolve actions → roll 2d6 + attribute + skill + difficulty + posture modifier
 4. Declare reactions to incoming actions
@@ -723,7 +723,7 @@ An exchange in which no PC took an offensive action is **uncontested** — the s
 |---|---|---|---|
 | Aggressive | +1 | +1, first reaction of the exchange only | — |
 | Measured | +0 | +0 | Baseline |
-| Defensive | -1 | -1 | — |
+| Defensive | -1 | -1 (min 0) | — |
 | Withdrawn | No offense | Free (0) | Recover 2 Endurance Pool points at end of exchange, up to your maximum |
 
 ### Reactions (1 per incoming action)

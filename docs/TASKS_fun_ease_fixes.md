@@ -416,7 +416,7 @@ listed greps return the expected result; LOG updated.
   `software/app/static/js/components.js` (sheet rendering leads with the modifier;
   rating shown as secondary), tests if rendering is tested.
 
-- [ ] **T5.10 — Quick-ref recompression audit (protocol rule 5, verification).**
+- [x] **T5.10 — Quick-ref recompression audit (protocol rule 5, verification).**
   Files: `mm_manual/MM5_Quick_Reference.md`, `Quick_Start.md` QS-4, in-chapter
   quick-ref boxes.
   Do: line-by-line against final body text; fix divergences; confirm II.2's
