@@ -444,6 +444,17 @@ function nominateForSpark() {
   sendWS({ type: 'spark_earn_peer', player_name: playerName });
 }
 
+/**
+ * T6.3 (C-2 app-side): quiet MM-only Spark-flow prompt. The server already
+ * routes it to MM connections only; a dim system-chat line (local to this
+ * client) keeps it a nudge, not an alarm — MM5 §Spark Flow is guidance,
+ * not a rule.
+ */
+function onSparkFlowNudge(msg) {
+  if (state.role !== 'mm') return;
+  addSystemChat(`(MM) ${msg.message}`);
+}
+
 function onSparkNomination(msg) {
   const banner = document.getElementById('play-spark-nomination-banner');
   if (!banner) return;

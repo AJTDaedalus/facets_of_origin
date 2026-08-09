@@ -1,6 +1,7 @@
 """Game session management — in-memory with JSON persistence planned."""
 from __future__ import annotations
 
+import time
 import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -101,12 +102,30 @@ class GameSession:
     #: gets prompted to say so. Cleared at combat start and every
     #: end-exchange.
     offensive_actions_this_exchange: set[str] = field(default_factory=set)
+    #: Per-player Spark-flow tracker (T6.3, C-2 app-side): player_name →
+    #: {"last_flow": monotonic ts of the last earn OR spend, "last_nudge":
+    #: monotonic ts of the last MM prompt about it, or None}. Feeds the quiet
+    #: MM-only `spark_flow_nudge` prompt in the WS layer — a tool prompt,
+    #: not a rule (see `SPARK_FLOW_NUDGE_SECONDS` in `app/api/websocket.py`).
+    spark_flow: dict[str, dict] = field(default_factory=dict)
     _character_dir: Path | None = field(default=None)
 
     def add_character(self, character: Character) -> None:
         """Add or replace a character in this session, keyed by player_name."""
         self.characters[character.player_name] = character
+        # Joining opens a fresh Spark-flow stretch — the nudge clock starts now.
+        self.record_spark_flow(character.player_name)
         self.save_character_to_disk(character.player_name)
+
+    def record_spark_flow(self, player_name: str) -> None:
+        """Record a Spark earn or spend (or other stretch reset) for the
+        Spark-flow nudge tracker (T6.3). Also clears any pending nudge
+        cooldown — a fresh flow starts a fresh stretch.
+        """
+        self.spark_flow[player_name] = {
+            "last_flow": time.monotonic(),
+            "last_nudge": None,
+        }
 
     def save_character_to_disk(self, player_name: str) -> None:
         """Write the current character state to data/sessions/{id}/characters/{player_name}.fof.

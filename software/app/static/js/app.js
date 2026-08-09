@@ -592,6 +592,10 @@ function handleServerMessage(msg) {
     case 'session_reset':
       onSessionReset();
       break;
+    case 'spark_flow_nudge':
+      // T6.3: server sends this to MM connections only; display is quiet.
+      onSparkFlowNudge(msg);
+      break;
     case 'error':
       addSystemChat(`Error: ${msg.message}`);
       notify(msg.message, 'error');

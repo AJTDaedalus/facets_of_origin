@@ -4,6 +4,7 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import time
 import uuid
 from typing import Any, Optional
 
@@ -58,6 +59,13 @@ class ConnectionManager:
         except Exception as e:
             logger.warning("Failed to send to websocket: %s", e)
             return False
+
+    async def send_to_identity(self, session_id: str, identity: str, message: dict) -> None:
+        """Send to every connection in *session_id* held by *identity*
+        (e.g. ``"mm"``) — for prompts that are not table broadcasts."""
+        for ws, ident in list(self._connections.get(session_id, [])):
+            if ident == identity:
+                await self.send_to(ws, message)
 
 
 manager = ConnectionManager()
@@ -257,13 +265,64 @@ async def _dispatch(
         await _handle_claim_graceful_fail(msg, session, session_id, identity)
     else:
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown event type: {event_type}"})
+        return
+
+    # T6.3 (C-2 app-side): any handled table activity is the heartbeat for
+    # the quiet Spark-flow check — no timers, no background tasks.
+    await _maybe_nudge_spark_flow(session, session_id)
 
 
-def _spend_sparks(character, count: int) -> int:
-    """Spend up to `count` Sparks from character, returning the amount actually spent."""
+# T6.3 (C-2 app-side): how long a player can go without earning OR spending a
+# Spark before the MM gets a quiet prompt. This is a TOOL prompt, not a rule —
+# the books state no timer. The guidance it surfaces is MM5 §Spark Flow ("the
+# Spark economy works when Sparks flow"; "midpoint diagnostic: if a player
+# hasn't spent a Spark by the session's midpoint, design a moment that rewards
+# it") and MM2 §Target Economy. The threshold approximates "an act" of quiet
+# (DESIGN §7) and is free to tune.
+SPARK_FLOW_NUDGE_SECONDS = 25 * 60
+
+
+async def _maybe_nudge_spark_flow(session, session_id: str) -> None:
+    """Prompt the MM — quietly, MM-only — about any player whose Spark flow
+    has stalled for a full stretch (T6.3). One prompt per stretch: the
+    cooldown suppresses repeats until the player's flow resets it.
+    """
+    now = time.monotonic()
+    for player_name in session.characters:
+        flow = session.spark_flow.setdefault(
+            player_name, {"last_flow": now, "last_nudge": None},
+        )
+        if now - flow["last_flow"] < SPARK_FLOW_NUDGE_SECONDS:
+            continue
+        if (
+            flow["last_nudge"] is not None
+            and now - flow["last_nudge"] < SPARK_FLOW_NUDGE_SECONDS
+        ):
+            continue
+        flow["last_nudge"] = now
+        await manager.send_to_identity(session_id, "mm", {
+            "type": "spark_flow_nudge",
+            "player": player_name,
+            "minutes_quiet": int((now - flow["last_flow"]) // 60),
+            "message": (
+                f"{player_name} hasn't earned or spent a Spark in a while. "
+                "MM5, Spark Flow: every 6- is a Graceful Fail opportunity, "
+                "and an unspent Spark at session end is simply gone."
+            ),
+        })
+
+
+def _spend_sparks(character, count: int, session=None) -> int:
+    """Spend up to `count` Sparks from character, returning the amount actually spent.
+
+    Passing *session* records the spend in the Spark-flow tracker (T6.3) —
+    every real spend site does; only rule-level tests omit it.
+    """
     actual = min(count, character.sparks)
     for _ in range(actual):
         character.spend_spark()
+    if actual > 0 and session is not None:
+        session.record_spark_flow(character.player_name)
     return actual
 
 
@@ -370,7 +429,7 @@ async def _handle_roll(
         await manager.send_to(websocket, {"type": "error", "message": f"Unknown attribute '{attribute_id}'."})
         return
 
-    sparks_to_spend = _spend_sparks(character, sparks_requested)
+    sparks_to_spend = _spend_sparks(character, sparks_requested, session)
     skill_id = msg.get("skill_id")
 
     # B4 Q1 (TD-8/TD-9): hazard_type and knowledge_field are optional strings
@@ -429,6 +488,7 @@ async def _handle_spark_earn(msg: dict, session, session_id: str) -> None:
     character = session.characters.get(player_name)
     if character:
         character.earn_spark()
+        session.record_spark_flow(player_name)  # T6.3: an earn resets the stretch
         await manager.broadcast(session_id, {
             "type": "spark_earned",
             "player": player_name,
@@ -760,7 +820,7 @@ async def _handle_strike(
             await manager.send_to(websocket, {"type": "error", "message": "No Endurance Pool points to Press."})
             return
 
-    sparks_to_spend = _spend_sparks(character, sparks_requested)
+    sparks_to_spend = _spend_sparks(character, sparks_requested, session)
 
     # K-2/D5: a Strike — landed or not — contests the exchange.
     session.offensive_actions_this_exchange.add(player_name)
@@ -1181,7 +1241,7 @@ async def _handle_saving_throw(
 
     difficulty = str(msg.get("difficulty", "Standard"))
     sparks_requested = int(msg.get("sparks_spent", 0))
-    sparks_to_spend = _spend_sparks(character, sparks_requested)
+    sparks_to_spend = _spend_sparks(character, sparks_requested, session)
 
     result = resolve_saving_throw(
         major_attribute_id, character, session.ruleset,
@@ -1560,6 +1620,10 @@ async def _handle_session_reset(session, session_id: str) -> None:
     # Once-per-session use is being reset, so any offer from the old session must
     # go with it — otherwise a stale confirm burns the fresh session's use.
     session.pending_final_blows.clear()
+    # T6.3: a new session opens a fresh Spark-flow stretch for everyone —
+    # Sparks just reset to 3, so nobody is "quiet" yet.
+    for player_name in session.characters:
+        session.record_spark_flow(player_name)
     await manager.broadcast(session_id, {"type": "session_reset"})
 
 

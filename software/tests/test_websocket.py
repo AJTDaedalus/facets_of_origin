@@ -4635,3 +4635,108 @@ class TestEncounterBandWS:
             state = ws.receive_json()
             assert state["type"] == "state"
             assert "encounter_band" not in state["data"]
+
+# ---------------------------------------------------------------------------
+# Spark-flow nudge (T6.3, C-2 app-side)
+# ---------------------------------------------------------------------------
+
+class TestSparkFlowNudge:
+    """A quiet MM-only prompt when a player has neither earned nor spent a
+    Spark for a long stretch. Tool prompt, not a rule — see the constant's
+    comment (MM5 §Spark Flow)."""
+
+    def _make_stale(self, session_id: str, player: str) -> None:
+        import time
+        from app.api.websocket import SPARK_FLOW_NUDGE_SECONDS
+        sess = session_store.get(session_id)
+        sess.spark_flow[player] = {
+            "last_flow": time.monotonic() - (SPARK_FLOW_NUDGE_SECONDS + 1),
+            "last_nudge": None,
+        }
+
+    def test_stale_player_prompts_mm_quietly(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._make_stale(session_id, "Zahna")
+            ws.send_json({"type": "ping"})
+            assert ws.receive_json()["type"] == "pong"
+            nudge = ws.receive_json()
+            assert nudge["type"] == "spark_flow_nudge"
+            assert nudge["player"] == "Zahna"
+            assert "Spark" in nudge["message"]
+
+    def test_nudge_not_sent_to_players(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        with client.websocket_connect("/ws") as player_ws:
+            _auth_player(player_ws, player_token)
+            with client.websocket_connect("/ws") as mm_ws:
+                _auth_mm(mm_ws, mm_token, session_id)
+                player_ws.receive_json()  # mm's player_joined broadcast
+                self._make_stale(session_id, "Zahna")
+                mm_ws.send_json({"type": "ping"})
+                assert mm_ws.receive_json()["type"] == "pong"
+                assert mm_ws.receive_json()["type"] == "spark_flow_nudge"
+                # The player's socket saw none of that: the next thing it
+                # receives is its own pong, not a nudge.
+                player_ws.send_json({"type": "ping"})
+                assert player_ws.receive_json()["type"] == "pong"
+
+    def test_recent_flow_no_nudge(self, client, mm_token, session_with_character):
+        """A player whose Spark flow is fresh (character creation records it)
+        produces no prompt — consecutive pings see only pongs."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "ping"})
+            assert ws.receive_json()["type"] == "pong"
+            ws.send_json({"type": "ping"})
+            assert ws.receive_json()["type"] == "pong"
+
+    def test_nudge_cooldown_no_repeat(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._make_stale(session_id, "Zahna")
+            ws.send_json({"type": "ping"})
+            assert ws.receive_json()["type"] == "pong"
+            assert ws.receive_json()["type"] == "spark_flow_nudge"
+            # Same stretch, next activity: still quiet - no nagging.
+            ws.send_json({"type": "ping"})
+            assert ws.receive_json()["type"] == "pong"
+            ws.send_json({"type": "ping"})
+            assert ws.receive_json()["type"] == "pong"
+
+    def test_earn_resets_the_stretch(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._make_stale(session_id, "Zahna")
+            # The earn itself refreshes the tracker before the nudge check runs.
+            ws.send_json({"type": "spark_earn", "player_name": "Zahna", "reason": "great scene"})
+            assert ws.receive_json()["type"] == "spark_earned"
+            ws.send_json({"type": "ping"})
+            assert ws.receive_json()["type"] == "pong"
+
+    def test_spend_records_flow(self, client, session_with_character):
+        import time
+        from app.api.websocket import SPARK_FLOW_NUDGE_SECONDS
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        self._make_stale(session_id, "Zahna")
+        player_token = create_session_token("Zahna", session_id)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            ws.send_json({
+                "type": "roll", "attribute_id": "intelligence",
+                "difficulty": "Standard", "sparks_spent": 1,
+            })
+            assert ws.receive_json()["type"] == "roll_result"
+        flow = session_store.get(session_id).spark_flow["Zahna"]
+        assert time.monotonic() - flow["last_flow"] < SPARK_FLOW_NUDGE_SECONDS

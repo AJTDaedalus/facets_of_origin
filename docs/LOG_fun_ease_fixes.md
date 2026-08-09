@@ -1416,6 +1416,33 @@ anything unexpected.
   (`test_websocket test_api_enemy test_encounter test_session
   test_agentic_playtest`) → **464 passed**.
 
+### T6.3 — Spark-flow nudge (C-2 app-side) (2026-08-09)
+
+- **TDD:** 6 tests red first (`TestSparkFlowNudge` in `test_websocket.py`):
+  stale player prompts the MM; the prompt never reaches player sockets;
+  fresh flow stays quiet; one-per-stretch cooldown; an earn resets the
+  stretch; a spend (roll with `sparks_spent`) records flow.
+- **Session state:** `GameSession.spark_flow` (player → {last_flow,
+  last_nudge}, monotonic timestamps) + `record_spark_flow()`;
+  `add_character` opens the stretch at join.
+- **WS layer:** `SPARK_FLOW_NUDGE_SECONDS = 25 * 60` with the required
+  comment — a TOOL prompt, not a rule; the books state no timer; guidance
+  surfaced is MM5 §Spark Flow (midpoint diagnostic) and MM2 §Target Economy;
+  threshold approximates "an act" (DESIGN §7). `_maybe_nudge_spark_flow()`
+  runs as a heartbeat at the end of `_dispatch` after every handled event
+  (no timers/background tasks) and sends `spark_flow_nudge` via the new
+  `ConnectionManager.send_to_identity(session_id, "mm", ...)` — MM
+  connections only. Earn recorded in `_handle_spark_earn`; spends recorded
+  inside `_spend_sparks(..., session)` (all three call sites: roll, strike,
+  cast); `session_reset` reopens every stretch (Sparks just reset to 3).
+- **Client:** `app.js` case `spark_flow_nudge` → `onSparkFlowNudge` in
+  `play.js`: a dim local system-chat line, MM role only — quiet by design.
+- **Note:** the unknown-event branch of `_dispatch` now `return`s before the
+  heartbeat (no flow check on garbage input).
+- **Commands:** `pytest tests/test_websocket.py tests/test_session.py
+  tests/test_api.py tests/test_agentic_playtest.py` → **454 passed**;
+  `node --check` on app.js/play.js.
+
 ---
 
 ## Escalations

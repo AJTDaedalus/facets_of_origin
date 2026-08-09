@@ -438,7 +438,7 @@ listed greps return the expected result; LOG updated.
   `software/app/static/js/builder.js` (live band in encounter builder),
   `play.js` (warning badge when a mid-combat spawn crosses a band), tests.
 
-- [ ] **T6.3 — Spark-flow nudge (C-2 app-side).**
+- [x] **T6.3 — Spark-flow nudge (C-2 app-side).**
   Files: session state (per-player last-earn/last-spend), websocket MM-only prompt
   event, `play.js` MM display, tests (≥3).
 
