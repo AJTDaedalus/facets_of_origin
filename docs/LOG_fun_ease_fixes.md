@@ -1207,6 +1207,62 @@ anything unexpected.
 - **Commands:** `build_table_register` + `build_index`; docs suite →
   32 passed.
 
+### T5.8 — Background pair divergence (P-10) — **FOR USER REVIEW** (2026-08-09)
+
+- **Status:** unblocked by orchestrator ruling as draft + apply; the swaps
+  below are live on the branch and flagged here for user review per DESIGN
+  §9.2 ("proposal shown as a diff in PR review, not invented silently").
+- **The two duplicate pairs and the swaps chosen (skill slots only — no
+  Title, Description, or Specialty changed; both replacement skills are
+  existing same-Facet skills from II.6):**
+  1. **Traveling Merchant's Guard** (title "Road Guard") / **Dockworker** —
+     both were Athletics (Practiced) + Endurance (Novice, 1 mark).
+     **Changed: Traveling Merchant's Guard's secondary → Combat (Novice,
+     1 mark).** Rationale from its existing text: the description is
+     "guarding someone else's goods **from bandits**, weather, and bad
+     luck" and "assess a threat from a distance," and its alternate titles
+     include **Caravan Blade** and Hired Escort — the fighting half of the
+     job was already written, only unmechanized. Dockworker keeps
+     Athletics+Endurance because its description ("moved things — heavy
+     things, constantly") *is* those two skills; its watching-the-docks
+     half is already carried by the Specialty example (falsified cargo
+     manifests). New secondary clause drawn from description facts only:
+     "the job is standing between the cargo and the bandits who want it."
+     No new collision: {Athletics, Combat} duplicates no other Body pair
+     (CWV = Combat+Endurance, Arena = Combat+Finesse, Scout =
+     Stealth+Athletics).
+  2. **Guild Apprentice** / **Hedge Scholar** — both were Lore (Practiced)
+     + Investigate (Novice, 1 mark, non-magical slot).
+     **Changed: Guild Apprentice's non-magical secondary → Craft (Novice,
+     1 mark).** Rationale from its existing text: "formally apprenticed to
+     a **guild**… a **structured education**… the foundations of a
+     **discipline**" — a guild apprenticeship trains a practiced
+     discipline, which is Craft's territory (II.6: making, fixing,
+     understanding made things); the old Investigate clause ("formal
+     training involves a lot of finding things") was the strained one.
+     Hedge Scholar keeps Investigate because its existing clause is
+     Investigate's literal definition ("self-directed study is, at its
+     core, research"). New clause: "a structured education builds the
+     foundations of a discipline by practicing it, not just reading about
+     it." No new collision: (Lore, Craft) vs Physician's Assistant's
+     (Craft, Lore) differ in which skill is Practiced — same ordered-pair
+     distinction the book already uses for Archive Researcher
+     (Investigate, Lore) vs the old Guild Apprentice.
+- **Files:** `player_handbook/II.5_Character_Creation_Backgrounds.md`
+  (both secondary lines), `software/facets/base/facet.yaml`
+  (`traveling_merchants_guard.secondary_skill: combat`,
+  `guild_apprentice.secondary_skill: craft`),
+  `software/tests/test_api.py` (both guild_apprentice background tests →
+  craft, docstrings note T5.8).
+- **Pregens/characters checked:** Zahna is a *magical* Guild Apprentice —
+  her domain origin replaces the secondary slot, so QS, `Zahna.fof`, and
+  every II.3/QS example are untouched by the Craft swap (verified: no
+  shipped or adventure character uses Traveling Merchant's Guard,
+  Dockworker, or a non-magical Guild Apprentice). Test-data session
+  fixtures store already-created characters and load unchanged.
+- **Commands:** api + docs suites → 115 passed; `build_index` (no diff).
+  **FULL suite → 1471 passed** (334s).
+
 ---
 
 ## Escalations

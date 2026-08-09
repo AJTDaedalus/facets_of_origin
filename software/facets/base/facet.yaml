@@ -1812,7 +1812,7 @@ backgrounds:
     name: "Traveling Merchant's Guard"
     facet: body
     starting_skill: athletics
-    secondary_skill: endurance
+    secondary_skill: combat
     specialty: "Can read road conditions and assess the likelihood of ambush or delay based on terrain, weather, and recent traffic sign."
 
   - id: arena_fighter
@@ -1841,7 +1841,7 @@ backgrounds:
     name: "Guild Apprentice"
     facet: mind
     starting_skill: lore
-    secondary_skill: investigate
+    secondary_skill: craft
     specialty: "Artificers' Guild technical records — Standard becomes Easy when directly applicable."
     domain_origin: mind
     domain_replaces_secondary: true

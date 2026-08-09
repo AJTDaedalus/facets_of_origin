@@ -405,7 +405,7 @@ listed greps return the expected result; LOG updated.
   consolidated here; II.3 keeps prose + pointer), regen Lists/Index.
   Accept: no domain data exists in two places with independent wording.
 
-- [ ] **T5.8 — Background pair divergence (P-10). ⛔ BLOCKED on DESIGN §9.2.**
+- [x] **T5.8 — Background pair divergence (P-10).** *(Unblocked by user ruling as draft + apply; swaps live, flagged FOR USER REVIEW in the LOG.)*
   Do first: draft the two skill-slot diffs (Road Guard/Dockworker; Guild
   Apprentice/Hedge Scholar) as a proposal in the LOG for user approval — skill
   slots only, no new fiction. On approval: `II.5`, `software/facets/base/facet.yaml`

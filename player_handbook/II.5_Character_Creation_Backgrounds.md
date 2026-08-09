@@ -160,7 +160,7 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Starting Skill:** Athletics (Practiced)
 
-**Secondary Skill:** Endurance (Novice, 1 mark) — weeks between cities with no days off.
+**Secondary Skill:** Combat (Novice, 1 mark) — the job is standing between the cargo and the bandits who want it.
 
 **Specialty:** Can read road conditions and assess the likelihood of ambush or delay based on terrain, weather, and recent traffic sign.
 
@@ -220,7 +220,7 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Starting Skill:** Lore (Practiced)
 
-**Secondary Skill (non-magical):** Investigate (Novice, 1 mark) — formal training involves a lot of finding things, cross-referencing things, and noticing when something doesn't fit.
+**Secondary Skill (non-magical):** Craft (Novice, 1 mark) — a structured education builds the foundations of a discipline by practicing it, not just reading about it.
 
 **Domain origin (if magical, replaces secondary skill):** Choose one domain from the Domains of the Mind list. Your apprenticeship was the beginning of formal magical education. Specify the institution and what domain it taught.
 
