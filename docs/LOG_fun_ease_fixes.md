@@ -1162,6 +1162,24 @@ anything unexpected.
 - **Commands:** `build_index` + `build_table_register` (76/72; index
   needed a second regen after the Lists rebuild); docs suite → 32 passed.
 
+### T5.6 — Weapon vocabulary join (P-14) (2026-08-09)
+
+- **Files:** `player_handbook/IV.1_Equipment.md` (Table IV.1–1 gains a
+  "Weapon Type (Chapter II.4a)" column + the one-sentence join under it:
+  "a longsword is a Standard-category weapon of the blades type; the
+  category names the attribute, the type is what Weapon Mastery keys to"),
+  Index regenerated (no List diff — same caption).
+- **Mapping (no rule change; every type comes from II.4a's Choose field —
+  blades, blunt, polearms, unarmed):** Heavy = blades/blunt; Standard =
+  blades/blunt/polearms (spear = polearms, staff = blunt); Light = blades,
+  with hand crossbow pointed at Ranged; Ranged = no weapon type — the cell
+  states Steady Hand eases ranged Strikes, matching II.4a's existing
+  ranged-build note verbatim in substance; Unarmed = unarmed.
+- **II.4a cross-ref check:** the Choose field's four types and the Grace/
+  Steady Hand ranged note agree with every cell; no II.4a change needed.
+- **Commands:** `build_index` ×2 around `build_table_register`; docs suite
+  → 32 passed.
+
 ---
 
 ## Escalations

@@ -395,7 +395,7 @@ listed greps return the expected result; LOG updated.
   `career_advances` — unchanged, verify wording), `test_docs_consistency.py`
   (references), regen Lists/Index. App keeps the field.
 
-- [ ] **T5.6 — Weapon vocabulary join (P-14).**
+- [x] **T5.6 — Weapon vocabulary join (P-14).**
   Files: `player_handbook/IV.1_Equipment.md` (Table IV.1-1 gains a type column
   with examples: longsword = standard / blades), `II.4a` cross-ref check.
 
