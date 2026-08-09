@@ -904,17 +904,22 @@ material. They also sit in a vernacular register the settled names do not share.
 attribute-keyed wording and prints no tradition proper nouns, and Body magic
 domains stay deferred to the Shattered Origin setting Facet.
 
-**Left open — these block that Facet, not this name:**
+**The practitioner noun** *(owner ruling, same day)*: a practitioner is **a
+Tempered**; collectively, **the Tempered**. Rejected: *Temperer*, which names
+someone who tempers other things. The chosen form is passive on purpose — the
+practice is something the practitioner has undergone, not a trade they perform,
+which is the distinction that separates Tempering from smithing. It completes
+the set with an Invoker and a Thaumaturge.
 
-1. **The practitioner noun.** Invocation gives an Invoker and Thaumaturgy a
-   Thaumaturge; *Temperer* is clumsy. *A Tempered* — someone the practice has
-   tempered — is the strongest candidate but is not decided.
-2. **The casting attribute and skill.** D7 requires every tradition to key
-   both. Constitution + Endurance is the obvious pairing and matches the
-   description's own word, but Endurance also sets the combat pool (4 +
-   Constitution modifier + Endurance rank). A Tempering caster would then
-   advance one skill and gain both better magic *and* more Endurance, where a
-   Thaumaturge advancing Lore gains only better magic. Athletics, or a
-   Body-magic skill that does not exist yet, are the alternatives.
+**Left open — this blocks that Facet, not the name:**
 
-**Status:** ✅ Name decided; mechanics deferred with the Body domains.
+- **The casting attribute and skill.** D7 requires every tradition to key
+  both. Constitution + Endurance is the obvious pairing and matches the
+  description's own word, but Endurance also sets the combat pool (4 +
+  Constitution modifier + Endurance rank). A Tempered would then advance one
+  skill and gain both better magic *and* more Endurance, where a Thaumaturge
+  advancing Lore gains only better magic. Athletics, or a Body-magic skill that
+  does not exist yet, are the alternatives.
+
+**Status:** ✅ Name and practitioner noun decided; the casting key is deferred
+with the Body domains.
