@@ -989,3 +989,59 @@ class TestSkillPointBankingAndTraining:
     def test_yaml_carries_banking_and_training_config(self, ruleset):
         assert ruleset.advancement.bank_cap == 2
         assert ruleset.advancement.training_marks_per_session == 1
+
+
+# ---------------------------------------------------------------------------
+# T4.4 (P-6): ranks granted at character creation count toward career
+# advances but NOT toward Facet levels. The behavior pre-existed (creation
+# never routes through advance_skill); these are the missing verification.
+# ---------------------------------------------------------------------------
+
+class TestCreationRanksAndFacetLevels:
+    def test_background_starting_skill_counts_toward_career_only(self, ruleset, valid_attributes):
+        """A Background's Practiced starting skill is 1 career advance and
+        0 Facet-level progress."""
+        char, errors = create_default_character(
+            name="Mordai", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+            background_id="city_watch_veteran",
+        )
+        assert not errors, errors
+        assert char.career_advances == 1
+        assert char.facet_level == 0
+        assert char.rank_advances_by_facet == {}
+
+    def test_facet_level_needs_five_played_advances_regardless_of_creation_rank(
+        self, ruleset, valid_attributes
+    ):
+        """The 5-advance threshold counts advances earned in play only: four
+        played advances leave the character at level 0 even with a creation
+        rank on the sheet; the fifth played advance lands level 1."""
+        char, errors = create_default_character(
+            name="Mordai", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+            background_id="city_watch_veteran",  # Combat Practiced at creation
+        )
+        assert not errors, errors
+        # Four played rank advances (9 marks = 3 advances, 3 marks = 1)
+        char.advance_skill("athletics", 9, ruleset)
+        char.advance_skill("finesse", 3, ruleset)
+        assert char.career_advances == 5  # 1 creation + 4 played
+        assert char.facet_level == 0      # creation advance does not count
+        # The fifth played advance in the Facet crosses the threshold
+        char.advance_skill("stealth", 3, ruleset)
+        assert char.facet_level == 1
+
+    def test_played_advance_on_the_creation_skill_counts_normally(self, ruleset, valid_attributes):
+        """Advancing the creation-granted skill in play (Practiced → Expert)
+        is a normal played advance for both counters."""
+        char, errors = create_default_character(
+            name="Mordai", player_name="P", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+            background_id="city_watch_veteran",
+        )
+        assert not errors, errors
+        char.advance_skill("combat", 3, ruleset)  # Practiced -> Expert
+        assert char.skills["combat"].rank == "expert"
+        assert char.career_advances == 2
+        assert char.rank_advances_by_facet.get("body") == 1

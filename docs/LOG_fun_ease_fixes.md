@@ -881,6 +881,31 @@ anything unexpected.
   `python -m tools.build_index`. FULL suite → **1466 passed** (323s;
   1449 → +5 T4.2 + 12 T4.3).
 
+### T4.4 — Facet-level counting sentence (P-6) (2026-08-09)
+
+- **Files:** `player_handbook/II.4_Character_Creation_Facets.md` (§Facet
+  Levels gains "Ranks granted at character creation … count toward career
+  advances but not toward Facet levels: a Facet level is earned by growth in
+  play"; §Career Advances' starting-skill sentence gains the mirror clause +
+  cross-ref), `software/facets/base/facet.yaml` (comment at
+  `facet_level_threshold` documenting the counting rule and its mechanism),
+  `software/tests/test_character.py` (+3).
+- **Table II.4-3 verified:** the benchmark rows hold under the codified rule
+  — "6–10: Facet level 1–2" is exactly 1 creation + 5 played advances at the
+  bottom edge; the Zulnut counting example already treated Finesse's creation
+  rank as not-counting ("Finesse started Practiced at creation, so this is
+  its first advance"). No benchmark prose change needed beyond the
+  career-only clause.
+- **Engine verified (behavior pre-existed, tests were missing — red not
+  achievable, per the T2.1 precedent):** creation ranks are set directly by
+  `create_default_character` (career_advances += 1) and never route through
+  `advance_skill`, the only writer of `rank_advances_by_facet`. New
+  `TestCreationRanksAndFacetLevels`: creation rank = 1 career / 0 facet
+  progress; 4 played advances + creation rank ≠ level 1, the 5th played
+  advance lands it; advancing the creation skill in play counts normally.
+- **Commands:** 3 new tests green; docs + character suites 132 passed;
+  `python -m tools.build_index` (no diff).
+
 ---
 
 ## Escalations

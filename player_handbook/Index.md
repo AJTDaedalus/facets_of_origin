@@ -71,7 +71,7 @@
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
-- [II.4 — Career Advances](II.4_Character_Creation_Facets.md#career-advances)
+- [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.5 — What Is a Background?](II.5_Character_Creation_Backgrounds.md#what-is-a-background)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
@@ -191,7 +191,6 @@
 *Defined in [II.4](II.4_Character_Creation_Facets.md).*
 
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
-- [II.4 — Career Advances](II.4_Character_Creation_Facets.md#career-advances)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
@@ -369,7 +368,6 @@
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [II.4 — Career Advances](II.4_Character_Creation_Facets.md#career-advances)
 - [II.5 — Magic and Backgrounds](II.5_Character_Creation_Backgrounds.md#magic-and-backgrounds)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM3 — Recognizing When It Is Done](../mm_manual/MM3_Campaign_Design.md#recognizing-when-it-is-done)
@@ -639,7 +637,6 @@
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [II.4 — Career Advances](II.4_Character_Creation_Facets.md#career-advances)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
 - [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
@@ -771,7 +768,6 @@
 *Defined in [II.5](II.5_Character_Creation_Backgrounds.md).*
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.4 — Career Advances](II.4_Character_Creation_Facets.md#career-advances)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
 - [II.5 — Body Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#body-facet-backgrounds)
@@ -899,7 +895,7 @@
 *Defined in [II.5](II.5_Character_Creation_Backgrounds.md).*
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.4 — Career Advances](II.4_Character_Creation_Facets.md#career-advances)
+- [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
 - [II.5 — Body Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#body-facet-backgrounds)

@@ -1369,6 +1369,9 @@ advancement:
   # Techniques — inside the primary Facet's 15-advance ceiling (5 skills × 3
   # rank advances). See DESIGN_v0.3 §6.2. session_skill_points stays 4: raising
   # it to hit an earlier Major would inflate skill ranks as a side effect.
+  # P-6 (II.4, Facet Levels): ranks granted at character creation count toward
+  # career_advances but NOT toward Facet levels — only advance_skill writes
+  # rank_advances_by_facet, and creation never routes through it.
   facet_level_threshold: 5
 
   # Every 3 total Facet Levels triggers a Major Advancement, so the first Major

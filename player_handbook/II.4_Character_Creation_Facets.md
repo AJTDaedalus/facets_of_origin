@@ -79,7 +79,7 @@ Points go to skills you used this session, with two allowances:
 
 As you develop skills within a Facet, you grow as a practitioner of that Facet's approach to the world. Your **Facet level** in your Primary Facet advances every time you accumulate **5 skill rank advances** within it.
 
-A skill rank advance is any time a skill in that Facet moves from one rank to the next (Novice → Practiced, Practiced → Expert, or Expert → Master).
+A skill rank advance is any time a skill in that Facet moves from one rank to the next (Novice → Practiced, Practiced → Expert, or Expert → Master). Ranks granted at character creation — your Background's starting skill — count toward career advances but not toward Facet levels: a Facet level is earned by growth in play.
 
 With 5 skills and 3 possible advances each, a fully developed Facet produces 15 total advances — exactly enough to reach Facet level 1 (at 5 advances), Facet level 2 (at 10), and Facet level 3 (at 15). Reaching Facet level 3 means you have mastered every skill your Facet has to offer. Facet level 4 and beyond require cross-training into other Facets.
 
@@ -211,7 +211,7 @@ It is the progression metric for Facets of Origin: a rough, honest gauge of how 
 | 11–15 | Seasoned — Facet level 3 and first Major Advancement within reach |
 | 16+ | Veteran — Primary Facet mastered; cross-Facet development begins |
 
-Career advances are stored in the character file as `career_advances` and updated whenever a skill rank advances. The Background starting skill counts as 1 advance at character creation. Background Marks (the secondary skill's head start) do not count until the skill actually advances to Practiced.
+Career advances are stored in the character file as `career_advances` and updated whenever a skill rank advances. The Background starting skill counts as 1 advance at character creation — toward this total only, not toward Facet levels (see *Facet Levels*, above). Background Marks (the secondary skill's head start) do not count until the skill actually advances to Practiced.
 
 > **Example — the cast at one career advance**
 >

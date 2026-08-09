@@ -322,7 +322,7 @@ listed greps return the expected result; LOG updated.
   `software/app/static/js/builder.js` if it enforces used-only/forfeit.
   Register: `unspent points are lost`; `unspent points do not carry over`.
 
-- [ ] **T4.4 — Facet-level counting sentence (P-6).**
+- [x] **T4.4 — Facet-level counting sentence (P-6).**
   Files: `player_handbook/II.4_Character_Creation_Facets.md` (§Facet Levels:
   "Ranks granted at character creation count toward career advances but not toward
   Facet levels"; verify Table II.4-3 benchmark prose no longer misleads),
