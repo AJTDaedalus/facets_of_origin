@@ -428,7 +428,7 @@ listed greps return the expected result; LOG updated.
 
 ## WS-6 — App features (branch `feat/app-fun-ease`)
 
-- [ ] **T6.1 — Band computation backend (K-3; TDD).**
+- [x] **T6.1 — Band computation backend (K-3; TDD).**
   Files: encounter model/logic + `software/tests/test_encounter.py`.
   Do: `compute_band(enemies, party_strength)` from Recipe-Table logic
   (actor-count of Named/Boss + Mook steps). ≥3 tests keyed to published sim rows.

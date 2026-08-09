@@ -1354,6 +1354,30 @@ anything unexpected.
 - **Result:** WS-5 complete. 11/11 tasks, suite steady at 1471, no
   escalations. T5.8 swaps remain flagged FOR USER REVIEW in that entry.
 
+### T6.1 — Band computation backend (K-3; TDD) (2026-08-09)
+
+- **Red first:** 20 new tests appended to `software/tests/test_encounter.py`
+  (four classes: PS-3 calibrated rows, PS-3 edges, outside-PS-3, errors) —
+  collection failed on the missing import, as intended.
+- **Implementation:** `compute_band(enemy_tiers, party_strength)` +
+  `DIFFICULTY_BANDS` in `software/app/game/encounter.py`. Pure function; every
+  branch keyed to a published source, no invented numbers:
+  - PS-3 (calibrated=True): Table MM1–5 rows (3–7 Mooks 100%; 3N+1M 76/74.5/80;
+    3N+2M 47.5/48/47; 3N+3M 20/20/22.5; 4N+1M 20/16.5/21) plus §Sizing prose
+    (1–2 Named trivial; 3 Named alone ~96% → Skirmish; 4 Named alone coin-flip
+    → Hard; 5+ Named → Deadly with a "near-certain party loss" note).
+  - PS≠3 (calibrated=False, always): Table MM1–6 shape shifted by the
+    "+1 Named per additional PC" rule of thumb (threshold Named alone =
+    Standard, +1 Mook per band); note text states the extrapolation is
+    un-simulated, mirroring MM1's own PS-4 caveat. No silent extrapolation.
+  - Returns dict: band / band_index / calibrated / named_boss_count /
+    mook_count / party_strength / note. Empty roster → band None.
+  - Errors: unknown tier and party_strength < 1 raise ValueError; tiers are
+    case-insensitive.
+- **Doctrine check:** `test_one_mook_is_one_band` asserts band_index climbs
+  exactly one step per Mook on the 3-Named core (76 → 47 → 20).
+- **Commands:** `pytest tests/test_encounter.py -q` → **59 passed** (was 39).
+
 ---
 
 ## Escalations
