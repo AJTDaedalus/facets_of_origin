@@ -875,7 +875,46 @@ reused as a tradition name.
 introduces no tradition proper nouns. Invocation and Thaumaturgy live in the
 setting layer (the Shattered Origin setting Facet, when written) and in
 project-level descriptions. The Body tradition's name remains the one open
-naming question.
+naming question — closed by D16.
 
 **Status:** ✅ Decided. Recorded in `research/magic_system_analysis.md` §6
 naming note; README project description updated.
+
+---
+
+### D16 — The Body tradition is Tempering *(owner ruling, 2026-08-09)*
+
+**Decision:** The third tradition is **Tempering**, the Body-aligned practice —
+named for the metallurgical process, where controlled stress and heat leave the
+material harder than it began. It completes the set with Invocation and
+Thaumaturgy (D15).
+
+**What it covers** is II.3 §*A Brief Note on Body Magic*, unchanged: earth,
+endurance, and the transformation of physical limits — the fighter who becomes
+immovable, the warrior whose wounds close on command, the guardian whose body is
+a ward in itself.
+
+**Why the earlier shortlist was dropped.** Wildcraft, The Root, Bloodcraft, and
+The Waking were drafted while Body magic was still imagined as nature-flavoured.
+That territory has since gone to **Soul** — Verdance, The Living World, and
+Beasts are Soul domains — so those names would now point at another Facet's
+material. They also sit in a vernacular register the settled names do not share.
+
+**Scope:** as with D15, setting-layer only. The core PHB keeps its
+attribute-keyed wording and prints no tradition proper nouns, and Body magic
+domains stay deferred to the Shattered Origin setting Facet.
+
+**Left open — these block that Facet, not this name:**
+
+1. **The practitioner noun.** Invocation gives an Invoker and Thaumaturgy a
+   Thaumaturge; *Temperer* is clumsy. *A Tempered* — someone the practice has
+   tempered — is the strongest candidate but is not decided.
+2. **The casting attribute and skill.** D7 requires every tradition to key
+   both. Constitution + Endurance is the obvious pairing and matches the
+   description's own word, but Endurance also sets the combat pool (4 +
+   Constitution modifier + Endurance rank). A Tempering caster would then
+   advance one skill and gain both better magic *and* more Endurance, where a
+   Thaumaturge advancing Lore gains only better magic. Athletics, or a
+   Body-magic skill that does not exist yet, are the alternatives.
+
+**Status:** ✅ Name decided; mechanics deferred with the Body domains.
