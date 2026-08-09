@@ -379,6 +379,13 @@ class AdvancementDef(BaseModel):
     skill_point_costs: list[SkillPointCostDef] = Field(default_factory=list)
     session_skill_points: int = 4
     marks_per_rank: int = 3
+    # T4.3/D10: the forfeit is dead. Up to `bank_cap` unspent points carry
+    # into the next session, and `training_marks_per_session` of the session
+    # points may go to an UNUSED Primary-Facet skill ("training between
+    # sessions"). Both enforced by Character.spend_skill_point /
+    # Character.start_new_session.
+    bank_cap: int = 2
+    training_marks_per_session: int = 1
     # Defaults mirror facets/base/facet.yaml. A Facet that omits these must land
     # on canon, not on a stale earlier revision (v0.3 moved 6 -> 5 and 4 -> 3).
     facet_level_threshold: int = 5

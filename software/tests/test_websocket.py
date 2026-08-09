@@ -2292,23 +2292,70 @@ class TestSpendSkillPoint:
 class TestSkillUseEnforcement:
     """PHB II.4: Only skills used this session can receive advancement points."""
 
-    def test_spend_rejected_when_skill_not_used(self, client, mm_token, session_with_character):
-        """Spending on a skill that wasn't used returns error when other skills were used."""
+    def test_unused_primary_skill_spend_is_a_training_mark(self, client, mm_token, session_with_character):
+        """T4.3/D10: an unused PRIMARY-Facet skill accepts 1 point per session
+        — the training-between-sessions mark. (Pre-D10 this was rejected.)"""
         session, _ = session_with_character
         session_id = session["session_id"]
         player_token = create_session_token("Zahna", session_id)
 
         sess = session_store.get(session_id)
         sess.characters["Zahna"].session_skill_points_remaining = 4
-        # Mark combat as used but NOT lore
+        # Mark combat as used but NOT lore (Zahna's primary Facet is Mind)
         sess.characters["Zahna"].skills_used_this_session = {"combat"}
 
         with client.websocket_connect("/ws") as ws:
             _auth_player(ws, player_token)
             ws.send_json({"type": "spend_skill_point", "skill_id": "lore"})
             msg = ws.receive_json()
+            assert msg["type"] == "skill_point_spent"
+            assert msg["training_mark"] is True
+            # The allowance is 1 per session: a second unused-primary spend fails
+            ws.send_json({"type": "spend_skill_point", "skill_id": "investigate"})
+            msg = ws.receive_json()
+            assert msg["type"] == "error"
+            assert "training" in msg["message"].lower()
+
+    def test_spend_rejected_on_unused_cross_facet_skill(self, client, mm_token, session_with_character):
+        """The training point is Primary-Facet only — an unused cross-Facet
+        skill still returns an error."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+
+        sess = session_store.get(session_id)
+        sess.characters["Zahna"].session_skill_points_remaining = 4
+        sess.characters["Zahna"].skills_used_this_session = {"lore"}
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, player_token)
+            # athletics is a Body skill — cross-Facet for Zahna, and unused
+            ws.send_json({"type": "spend_skill_point", "skill_id": "athletics"})
+            msg = ws.receive_json()
             assert msg["type"] == "error"
             assert "not used this session" in msg["message"].lower()
+
+    def test_session_reset_banks_unspent_points(self, client, mm_token, session_with_character):
+        """T4.3/D10: session_reset carries up to 2 unspent points into the new
+        session's allowance and clears the used-skills list."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+
+        sess = session_store.get(session_id)
+        sess.characters["Zahna"].session_skill_points_remaining = 3
+        sess.characters["Zahna"].skills_used_this_session = {"lore"}
+        sess.characters["Zahna"].training_marks_this_session = 1
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "session_reset"})
+            msg = ws.receive_json()
+            assert msg["type"] == "session_reset"
+
+        char = sess.characters["Zahna"]
+        assert char.session_skill_points_remaining == 6  # 4 + min(3, 2)
+        assert char.skills_used_this_session == set()
+        assert char.training_marks_this_session == 0
 
     def test_spend_allowed_when_skill_was_used(self, client, mm_token, session_with_character):
         """Spending on a used skill succeeds."""

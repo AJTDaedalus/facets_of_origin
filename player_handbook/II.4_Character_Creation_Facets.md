@@ -58,7 +58,10 @@ Skills improve through use. At the end of each session, you have **4 skill point
 | Primary Facet skill | 1 point |
 | Cross-Facet skill | 2 points |
 
-You may only advance skills you used this session. You may not save points between sessions — unspent points are lost.
+Points go to skills you used this session, with two allowances:
+
+- **Banking.** Unspent points are not lost — you may carry up to **2** of them into the next session, on top of that session's 4.
+- **Training between sessions.** **1** of your 4 points each session may go to a Primary-Facet skill you did *not* use — the practice your character puts in on the road, between adventures. Cross-Facet skills still require use at the table.
 
 > **Example — spending skill points across Facets**
 >
@@ -68,7 +71,7 @@ You may only advance skills you used this session. You may not save points betwe
 
 > **Example — a Background mark completing a rank**
 >
-> Zulnut (Primary Facet: Body) uses Stealth twice this session. He spends 2 points (1 each) and marks Stealth twice. Combined with the 1 mark he already carries from his Background, that's 3 marks — Stealth advances to Practiced. He has 2 points left; he didn't use another skill this session, so they go unspent, and unspent points are lost.
+> Zulnut (Primary Facet: Body) uses Stealth twice this session. He spends 2 points (1 each) and marks Stealth twice. Combined with the 1 mark he already carries from his Background, that's 3 marks — Stealth advances to Practiced. He has 2 points left and didn't use another skill this session, so he banks them: next session he'll have 6 to spend. (He could instead put 1 of them into an unused Body skill as his training point — Zulnut, characteristically, chooses the option that requires nothing of him now.)
 
 ---
 

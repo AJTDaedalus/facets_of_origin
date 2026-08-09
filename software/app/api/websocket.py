@@ -1449,36 +1449,22 @@ async def _handle_spend_skill_point(
         await manager.send_to(websocket, {"type": "error", "message": "Missing skill_id."})
         return
 
-    # Enforce "only skills used this session" rule (PHB II.4)
-    if character.skills_used_this_session and skill_id not in character.skills_used_this_session:
-        await manager.send_to(websocket, {
-            "type": "error",
-            "message": f"Skill '{skill_id}' was not used this session. Ask the MM to mark it as used.",
-        })
+    # All spend rules — used-skills enforcement, the T4.3/D10 training-mark
+    # exception, cost, and budget — live in Character.spend_skill_point.
+    try:
+        result = character.spend_skill_point(skill_id, session.ruleset)
+    except ValueError as e:
+        await manager.send_to(websocket, {"type": "error", "message": str(e)})
         return
-
-    # Determine cost
-    sk_def = session.ruleset.get_skill(skill_id)
-    is_primary = sk_def is not None and sk_def.facet == character.primary_facet
-    cost_context = "primary_facet" if is_primary else "cross_facet"
-    sp_cost = session.ruleset.get_skill_point_cost(cost_context)
-
-    if character.session_skill_points_remaining < sp_cost:
-        await manager.send_to(websocket, {
-            "type": "error",
-            "message": f"Insufficient skill points: need {sp_cost}, have {character.session_skill_points_remaining}.",
-        })
-        return
-
-    character.session_skill_points_remaining -= sp_cost
-    result = character.advance_skill(skill_id, 1, session.ruleset)
 
     session.save_character_to_disk(player_name)
     await manager.broadcast(session_id, {
         "type": "skill_point_spent",
         "player": player_name,
         "skill_id": skill_id,
-        "sp_cost": sp_cost,
+        "sp_cost": result["sp_cost"],
+        "training_mark": result["training_mark"],
+        "training_marks_this_session": character.training_marks_this_session,
         "marks_added": 1,
         "rank_advances": result["rank_advances"],
         "facet_level_advances": result["facet_level_advances"],
@@ -1568,6 +1554,9 @@ async def _handle_session_reset(session, session_id: str) -> None:
     for character in session.characters.values():
         character.techniques_used_this_session = []
         character.sparks = session.ruleset.spark.base_sparks_per_session if session.ruleset.spark else 3
+        # T4.3/D10: unspent skill points bank (cap 2) into the new session's
+        # allowance; used-skills list and training allowance reset.
+        character.start_new_session(session.ruleset)
     # Once-per-session use is being reset, so any offer from the old session must
     # go with it — otherwise a stale confirm burns the fresh session's use.
     session.pending_final_blows.clear()

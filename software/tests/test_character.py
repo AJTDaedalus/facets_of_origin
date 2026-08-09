@@ -916,3 +916,76 @@ class TestCharacterInventoryAndNotes:
         assert char.inventory == []
         assert char.notes_player == ""
         assert char.notes_mm == ""
+
+
+# ---------------------------------------------------------------------------
+# T4.3 (P-5, D10): the forfeit dies — unspent points bank (cap 2) and 1 of the
+# 4 session points may train an unused Primary-Facet skill.
+# ---------------------------------------------------------------------------
+
+class TestSkillPointBankingAndTraining:
+    def test_unspent_points_bank_up_to_cap(self, body_character, ruleset):
+        """3 points left at session end → 2 bank (cap) → 6 next session."""
+        body_character.session_skill_points_remaining = 3
+        body_character.start_new_session(ruleset)
+        assert body_character.session_skill_points_remaining == 6
+
+    def test_full_spend_banks_nothing(self, body_character, ruleset):
+        body_character.session_skill_points_remaining = 0
+        body_character.start_new_session(ruleset)
+        assert body_character.session_skill_points_remaining == 4
+
+    def test_one_point_banks_one(self, body_character, ruleset):
+        body_character.session_skill_points_remaining = 1
+        body_character.start_new_session(ruleset)
+        assert body_character.session_skill_points_remaining == 5
+
+    def test_new_session_resets_used_skills_and_training(self, body_character, ruleset):
+        body_character.skills_used_this_session = {"combat"}
+        body_character.training_marks_this_session = 1
+        body_character.start_new_session(ruleset)
+        assert body_character.skills_used_this_session == set()
+        assert body_character.training_marks_this_session == 0
+
+    def test_training_mark_on_unused_primary_skill(self, body_character, ruleset):
+        """With a used-skills list active, 1 point may still go to an unused
+        Primary-Facet skill — training between sessions."""
+        body_character.session_skill_points_remaining = 4
+        body_character.skills_used_this_session = {"combat"}
+        result = body_character.spend_skill_point("athletics", ruleset)
+        assert result["training_mark"] is True
+        assert body_character.training_marks_this_session == 1
+        assert body_character.skills["athletics"].marks == 1
+        assert body_character.session_skill_points_remaining == 3
+
+    def test_second_training_mark_refused(self, body_character, ruleset):
+        body_character.session_skill_points_remaining = 4
+        body_character.skills_used_this_session = {"combat"}
+        body_character.spend_skill_point("athletics", ruleset)
+        with pytest.raises(ValueError, match="[Tt]raining"):
+            body_character.spend_skill_point("finesse", ruleset)
+
+    def test_training_mark_cannot_go_cross_facet(self, body_character, ruleset):
+        """The training point is Primary-Facet only — an unused cross-Facet
+        skill is still off the table."""
+        body_character.session_skill_points_remaining = 4
+        body_character.skills_used_this_session = {"combat"}
+        with pytest.raises(ValueError, match="not used this session"):
+            body_character.spend_skill_point("lore", ruleset)
+
+    def test_used_skill_spend_is_not_a_training_mark(self, body_character, ruleset):
+        body_character.session_skill_points_remaining = 4
+        body_character.skills_used_this_session = {"combat"}
+        result = body_character.spend_skill_point("combat", ruleset)
+        assert result["training_mark"] is False
+        assert body_character.training_marks_this_session == 0
+
+    def test_insufficient_points_raises(self, body_character, ruleset):
+        body_character.session_skill_points_remaining = 0
+        body_character.skills_used_this_session = {"combat"}
+        with pytest.raises(ValueError, match="[Ii]nsufficient"):
+            body_character.spend_skill_point("combat", ruleset)
+
+    def test_yaml_carries_banking_and_training_config(self, ruleset):
+        assert ruleset.advancement.bank_cap == 2
+        assert ruleset.advancement.training_marks_per_session == 1

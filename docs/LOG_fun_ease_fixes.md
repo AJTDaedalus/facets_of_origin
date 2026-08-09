@@ -841,6 +841,46 @@ anything unexpected.
 - **Commands:** red 3 → ascendant/character/websocket/docs suites
   **394 passed**; `python -m tools.build_index`.
 
+### T4.3 — Points economy: banking + training mark (P-5, D10) (2026-08-09)
+
+- **Files:** `player_handbook/II.4_Character_Creation_Facets.md` (rule
+  rewritten as two allowances — bank ≤2 across sessions, 1 training point to
+  an unused Primary-Facet skill; the Zulnut example now demonstrates banking
+  and name-checks the training option in his voice),
+  `player_handbook/Glossary.md` (Skill Point entry),
+  `mm_manual/MM5_Quick_Reference.md` ("use-it-or-lose-it" died),
+  `software/facets/base/facet.yaml` (`bank_cap: 2`,
+  `training_marks_per_session: 1`), `software/app/facets/schema.py`
+  (AdvancementDef fields), `software/app/game/character.py` (new
+  `spend_skill_point` — the single home for spend rules, `start_new_session`
+  — banking + resets, `training_marks_this_session` field persisted through
+  to_fof/from_fof), `software/app/api/websocket.py` (spend handler now
+  delegates to the character method; `session_reset` banks),
+  `software/app/static/js/builder.js` (canSpend allows the training point;
+  "train (1/session)" badge; banking note; syntax-checked),
+  `software/app/static/js/app.js` (tab blurb), tests, register,
+  `player_handbook/Index.md` (regen).
+- **TDD:** `TestSkillPointBankingAndTraining` red first (10 failed) → green.
+  Coverage: bank cap (3→2 banked→6; 0→4; 1→5), session reset clears
+  used-skills + training count, training mark on unused primary succeeds and
+  is capped at 1, unused cross-Facet still refused, used-skill spends don't
+  touch the allowance, insufficient points, yaml config present.
+- **WS tests updated with reason:** `test_spend_rejected_when_skill_not_used`
+  asserted the OLD rule (unused primary lore → error); under D10 that spend
+  is the training mark — replaced by
+  `test_unused_primary_skill_spend_is_a_training_mark` (success + second
+  attempt refused), plus `test_spend_rejected_on_unused_cross_facet_skill`
+  (the rejection case that still exists) and
+  `test_session_reset_banks_unspent_points` (3→6, resets).
+- **Fresh-session bootstrap preserved:** an empty used-skills list still
+  permits any spend without touching the training allowance (pre-existing
+  behavior, still tested by `test_spend_allowed_when_no_skills_tracked`).
+- **Register:** `unspent points are lost`; `unspent points do not carry
+  over`; `use-it-or-lose-it` (all verified present pre-edit, gone post-edit).
+- **Commands:** red 10 → all targeted suites green; `node --check` OK ×2;
+  `python -m tools.build_index`. FULL suite → **1466 passed** (323s;
+  1449 → +5 T4.2 + 12 T4.3).
+
 ---
 
 ## Escalations

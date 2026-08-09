@@ -1290,7 +1290,7 @@ const HELP_PLAYER = [
   ['Play — Combat', 'Declare a Posture each exchange, then Strike, React, Support, or Maneuver. Press spends 1 Endurance for an extra die. At 0 Endurance you can only Absorb.'],
   ['Play — Magic', 'Domain plus Intent plus Scope. Describe what you want; the difficulty comes from your domain type and the scope you reach for.'],
   ['Play — Sparks', 'Nominate another player any time; the MM confirms. On a 6-, narrate how it makes things worse and claim a Graceful Failure Spark.'],
-  ['Builder', 'Spend Skill Points on skills you actually used, pick Techniques as Facet levels open them, and keep your own notes.'],
+  ['Builder', 'Spend Skill Points on skills you used (plus one training point for an unused Primary-Facet skill), pick Techniques as Facet levels open them, and keep your own notes.'],
   ['Tools', 'Your sheet, the rest of the party, your inventory, and rules quick references.'],
 ];
 

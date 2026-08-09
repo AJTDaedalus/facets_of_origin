@@ -103,7 +103,7 @@ the full rule, follow the pointer.
 
 **Skill** — A specific area of developed capability, associated with one Facet and one governing Minor Attribute, rated Novice through Master. *(Chapter II.6)*
 
-**Skill Point** — One of 4 points a character has to distribute among skills they actually used during a session; each point spent adds one mark toward the skill's next rank, and unspent points do not carry over. *(Chapter II.4)*
+**Skill Point** — One of 4 points a character has to distribute among skills they actually used during a session; each point spent adds one mark toward the skill's next rank. Up to 2 unspent points bank into the next session, and 1 point per session may train an unused Primary-Facet skill. *(Chapter II.4)*
 
 **Spark** — A narrative resource earned for remarkable moments and spent before a roll to add a d6, dropping the lowest die — any roll, including every magic roll. In magic only, a Spark can instead buy reach in exactly two cases: a pre-Technique Significant-scope attempt, or easing a Focused domain's Major working one step. Sparks do not carry over; every character starts every session with 3. *(Chapters III.1, II.3)*
 

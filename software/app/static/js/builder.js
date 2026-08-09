@@ -41,10 +41,13 @@ function renderBuilderSkills() {
 
   const sp = char.session_skill_points_remaining || 0;
   spEl.innerHTML = `<strong style="color:var(--gold);">${sp}</strong> Skill Point${sp === 1 ? '' : 's'}
-    left this session. Primary-Facet skills cost 1, everything else costs 2.`;
+    left this session. Primary-Facet skills cost 1, everything else costs 2.
+    Up to 2 unspent points bank into the next session.`;
 
   const usedSkills = char.skills_used_this_session || [];
   const hasUsedSkills = usedSkills.length > 0;
+  // T4.3/D10: 1 point per session may train an UNUSED Primary-Facet skill.
+  const trainingAvailable = (char.training_marks_this_session || 0) < 1;
 
   listEl.innerHTML = '';
   if (!hasUsedSkills) {
@@ -53,7 +56,7 @@ function renderBuilderSkills() {
     const note = document.createElement('div');
     note.className = 'inline-note';
     note.textContent = 'Nothing is marked as used yet. Roll a skill in play, or ask the MM to mark one — '
-      + 'you may only advance skills you actually used this session.';
+      + 'points go to skills you used this session, plus 1 training point for an unused Primary-Facet skill.';
     listEl.appendChild(note);
   }
 
@@ -64,12 +67,17 @@ function renderBuilderSkills() {
     const cost = isPrimary ? 1 : 2;
     const canAfford = (char.session_skill_points_remaining || 0) >= cost;
     const wasUsed = usedSkills.includes(skill.id);
-    const canSpend = canAfford && (!hasUsedSkills || wasUsed);
+    const canTrain = isPrimary && trainingAvailable;
+    const canSpend = canAfford && (!hasUsedSkills || wasUsed || canTrain);
     const marksNeeded = state.ruleset.advancement ? state.ruleset.advancement.marks_per_rank : 3;
     const dots = '\u25CF'.repeat(ss.marks) + '\u25CB'.repeat(Math.max(0, marksNeeded - ss.marks));
 
     const usedBadge = wasUsed ? '<span style="color:var(--success);font-size:10px;margin-left:4px;">USED</span>' : '';
-    const notUsedNote = hasUsedSkills && !wasUsed && canAfford ? '<span style="color:var(--text-dim);font-size:10px;margin-left:4px;">not used</span>' : '';
+    const notUsedNote = hasUsedSkills && !wasUsed && canAfford
+      ? (canTrain
+        ? '<span style="color:var(--gold);font-size:10px;margin-left:4px;">train (1/session)</span>'
+        : '<span style="color:var(--text-dim);font-size:10px;margin-left:4px;">not used</span>')
+      : '';
 
     const div = document.createElement('div');
     div.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;';

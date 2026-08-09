@@ -1359,6 +1359,12 @@ advancement:
 
   session_skill_points: 4
   marks_per_rank: 3
+  # T4.3/D10 (II.4, Advancing Skills): unspent points are not forfeited — up
+  # to bank_cap carry into the next session, and training_marks_per_session
+  # of the 4 session points may go to an unused Primary-Facet skill
+  # ("training between sessions").
+  bank_cap: 2
+  training_marks_per_session: 1
   # Threshold 5 (not 6) puts all three Facet levels — and therefore Tier 3
   # Techniques — inside the primary Facet's 15-advance ceiling (5 skills × 3
   # rank advances). See DESIGN_v0.3 §6.2. session_skill_points stays 4: raising

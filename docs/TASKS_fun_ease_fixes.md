@@ -312,7 +312,7 @@ listed greps return the expected result; LOG updated.
   `software/app/static/js/builder.js` + `app.js` (grep `Second Domain` — update
   any displayed penalty text).
 
-- [ ] **T4.3 — Points economy: banking + training mark (P-5, D10).**
+- [x] **T4.3 — Points economy: banking + training mark (P-5, D10).**
   Files: `player_handbook/II.4_Character_Creation_Facets.md` (rule ~line 61 and the
   Zulnut example ~line 71 — the example must demonstrate banking, not forfeiture),
   `player_handbook/Glossary.md` (Skill Point entry ~106: "unspent points do not

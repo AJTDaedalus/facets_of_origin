@@ -1078,6 +1078,9 @@ RETIRED_PHRASES: list[tuple[str, str]] = [
     ("Knowledge or Spirit (by tradition)", "P-2/D7 (T4.1): the attribute-only casting formula is dead — the roll is Spirit + Attune or Knowledge + Lore"),
     ("Spirit or Knowledge (by tradition)", "P-2/D7 (T4.1): the attribute-only casting formula is dead — the roll is Spirit + Attune or Knowledge + Lore"),
     ("always one difficulty step harder", "P-7/D9 (T4.2): the Second Domain penalty is an arc, not a permanent tax — it lifts at the character's next Facet level after acquisition"),
+    ("unspent points are lost", "P-5/D10 (T4.3): the forfeit is dead — up to 2 unspent points bank across sessions"),
+    ("unspent points do not carry over", "P-5/D10 (T4.3): the forfeit is dead — up to 2 unspent points bank across sessions"),
+    ("use-it-or-lose-it", "P-5/D10 (T4.3): MM5's compression of the dead forfeit rule"),
 ]
 
 # Live rules surfaces, relative to the repo root. Scope is the anti-fragment

@@ -333,7 +333,7 @@ TR = offense_value + durability_value + armor_bonus + technique_bonus
 
 ## Skill Advancement
 
-- **4 skill points** per session (use-it-or-lose-it)
+- **4 skill points** per session — up to 2 unspent bank into the next session; 1 per session may train an unused Primary-Facet skill
 - **3 marks** to advance one rank (Novice → Practiced → Expert → Master)
 - Primary Facet skills: **1 SP per mark**
 - Cross-Facet skills: **2 SP per mark**
