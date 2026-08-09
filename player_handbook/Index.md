@@ -468,8 +468,6 @@
 - [II.5 — Soul Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
-- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
@@ -751,8 +749,6 @@
 - [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
-- [Quick Start — Example Scene: The Sealed Door](Quick_Start.md#example-scene-the-sealed-door)
 - [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
@@ -773,7 +769,6 @@
 - [II.5 — Mind Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
 - [II.5 — Soul Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
 - [II.6 — Starting Skills](II.6_Character_Creation_Skills.md#starting-skills)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 
 ## Shaken
 
@@ -819,7 +814,6 @@
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
 - [MM1 — Named NPCs](../mm_manual/MM1_Encounters_and_Enemies.md#named-npcs)
@@ -942,7 +936,6 @@
 - [II.6 — Skills of the Body](II.6_Character_Creation_Skills.md#skills-of-the-body)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
 - [MM2 — Difficulty and Technique Steps](../mm_manual/MM2_Session_Design.md#difficulty-and-technique-steps)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)

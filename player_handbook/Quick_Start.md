@@ -32,13 +32,17 @@ A studious young mage. Entirely absorbed in books, magical theory, and intellect
 | Luck | 3 | +1 |
 | Charisma | 1 | -1 |
 
-**Primary Facet:** Mind | **Background:** Guild Apprentice (magical — the domain origin takes the place of a secondary skill)
+**Major Attributes:** Body +0 | Mind +0 | Soul +0
+
+**Primary Facet:** Mind | **Background:** Guild Apprentice
 **Skills:** Lore (Practiced, +1) | **Sparks:** 3
-**Magic Domain:** Inscription (Focused, Minor scope only until Facet Technique unlocked)
+**Magic Domain:** Inscription
 **Specialty:** Artificers' Guild technical records — Standard becomes Easy when directly applicable
 **Endurance:** 3 (base 4, Constitution -1)
 
 *When Zahna rolls Knowledge for a lore question: 2d6 +1 (Knowledge) +1 (Lore skill) = 2d6+2*
+
+*When Zahna casts with Inscription: 2d6 +1 (Knowledge) +1 (Lore skill) = 2d6+2*
 
 ---
 
@@ -60,8 +64,10 @@ A strong warrior with a genuine heart. Considers himself a defender of the weak.
 | Luck | 2 | +0 |
 | Charisma | 2 | +0 |
 
+**Major Attributes:** Body +1 | Mind -1 | Soul +0
+
 **Primary Facet:** Body | **Background:** City Watch Veteran
-**Skills:** Combat (Practiced, +1), Endurance (Novice, 1 mark) | **Sparks:** 3
+**Skills:** Combat (Practiced, +1), Endurance (Novice, +0) | **Sparks:** 3
 **Specialty:** City Watch protocols and criminal behavior — Standard becomes Easy when directly applicable
 **Endurance:** 5 (base 4, Constitution +1)
 
@@ -87,8 +93,10 @@ Profoundly, almost philosophically lazy. Exceptionally nimble. Prefers to accomp
 | Luck | 3 | +1 |
 | Charisma | 2 | +0 |
 
-**Primary Facet:** Body | **Background:** Wandering Disciple (custom — see Chapter II.5)
-**Skills:** Finesse (Practiced, +1), Stealth (Novice, 1 mark) | **Sparks:** 3
+**Major Attributes:** Body +0 | Mind +0 | Soul +0
+
+**Primary Facet:** Body | **Background:** Wandering Disciple
+**Skills:** Finesse (Practiced, +1), Stealth (Novice, +0) | **Sparks:** 3
 **Specialty:** Monastery training and movement arts — Standard becomes Easy when directly applicable
 **Endurance:** 3 (base 4, Constitution -1)
 
@@ -128,7 +136,7 @@ Zulnut rolls 2d6+0 (Wisdom +0) and gets a **6**. Failure.
 
 **MM:** "For Zulnut's player? Absolutely — 'you cannot tell which' is exactly the kind of moment worth recognizing. Spark awarded."
 
-**Zahna:** "I write the counter-sign. Inscription domain, minor scope."
+**Zahna:** "I write the counter-sign. Inscription domain."
 
 **MM:** "Easy — it is your domain and you just identified the notation. Roll Knowledge and Lore."
 

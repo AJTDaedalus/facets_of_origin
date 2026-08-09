@@ -1002,6 +1002,39 @@ anything unexpected.
   websocket, 3 facet-level counting, 2 never-surprised wording).
 - **Result:** 8/8 WS-4 tasks done, 8 commits, no escalations.
 
+### T5.1 — Quick Start pregens (C-1a/c/d) (2026-08-09)
+
+- **Files:** `player_handbook/Quick_Start.md`, `player_handbook/Index.md`
+  (regen).
+- **Major Attribute derivations (II.2 Table II.2–2: sum of three minors →
+  3–4 = −1, 5–7 = +0, 8–9 = +1):**
+  - Zahna: Body 1+3+1 = 5 → **+0**; Mind 3+1+3 = 7 → **+0**;
+    Soul 2+3+1 = 6 → **+0**.
+  - Mordai: Body 3+2+3 = 8 → **+1**; Mind 1+1+2 = 4 → **−1**;
+    Soul 2+2+2 = 6 → **+0**.
+  - Zulnut: Body 2+3+1 = 6 → **+0**; Mind 2+2+2 = 6 → **+0**;
+    Soul 1+3+2 = 6 → **+0**.
+- **Did:** each pregen gains a **Major Attributes** line (three modifiers,
+  above). Zahna gains the resolved spell line "*When Zahna casts with
+  Inscription: 2d6 +1 (Knowledge) +1 (Lore skill) = 2d6+2*" (per T4.1;
+  Mordai/Zulnut have no domain, no line). Stripped advancement metadata:
+  "(Novice, 1 mark)" → "(Novice, +0)" (Mordai Endurance, Zulnut Stealth —
+  Novice stays, QS–4 defines the rank ladder; the mark is chargen
+  bookkeeping); Zahna's Background loses "(magical — the domain origin takes
+  the place of a secondary skill)"; her domain line loses "(Focused, Minor
+  scope only until Facet Technique unlocked)" (scope caveat, C-1d); Zulnut's
+  Background loses "(custom — see Chapter II.5)". Sealed-door scene: Zahna's
+  "Inscription domain, minor scope" dialogue → "Inscription domain" (the
+  sheet no longer teaches scope; the term would be undefined in-document).
+- **Acceptance check:** every remaining number derives from II.2–II.6 or a
+  shown breakdown — attribute modifiers (Table II.2–1), Major modifiers
+  (Table II.2–2, above), skill bonuses (rank ladder, restated in QS–4),
+  Endurance pools shown with their base-4 + Constitution breakdown, Sparks 3
+  (QS–4 Spark row). Every term on a sheet is defined in-document (QS–4) or
+  is a plain label.
+- **Commands:** `python -m tools.build_index` (QS wording feeds index
+  terms); docs suite → 32 passed.
+
 ---
 
 ## Escalations

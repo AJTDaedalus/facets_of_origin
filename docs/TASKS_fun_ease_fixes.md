@@ -355,7 +355,7 @@ listed greps return the expected result; LOG updated.
 
 ## WS-5 — Apparatus & polish (branch `feat/apparatus-polish`; after WS-2/3/4 merge)
 
-- [ ] **T5.1 — Quick Start pregens (C-1a/c/d).**
+- [x] **T5.1 — Quick Start pregens (C-1a/c/d).**
   Files: `player_handbook/Quick_Start.md`.
   Do: Major Attributes line (three modifiers, derived per II.2 Table II.2-2 — show
   your derivation in the LOG); spell line resolved per pregen (with skill, per
