@@ -458,3 +458,39 @@ class TestComputeBandErrors:
     def test_tier_is_case_insensitive(self):
         result = compute_band(["Named"] * 3 + ["Mook"], party_strength=3)
         assert result["band"] == "standard"
+
+
+class TestEncounterBandAdapter:
+    """Encounter.band expands the roster into tiers and defers to compute_band."""
+
+    def _library_tiers(self):
+        return {"thug": "mook", "sergeant": "named", "guardian": "boss"}
+
+    def test_band_expands_counts(self):
+        e = Encounter(id="e", name="E", enemies=[
+            EncounterEnemy(enemy_id="sergeant", count=3),
+            EncounterEnemy(enemy_id="thug", count=1),
+        ])
+        result = e.band(self._library_tiers(), party_strength=3)
+        assert result["band"] == "standard"  # MM1-5: 3 Named + 1 Mook
+        assert result["named_boss_count"] == 3
+        assert result["mook_count"] == 1
+
+    def test_band_skips_unknown_enemy_ids(self):
+        # An encounter can reference a deleted library enemy ("will no longer
+        # resolve") - the band is computed from the enemies that still do.
+        e = Encounter(id="e", name="E", enemies=[
+            EncounterEnemy(enemy_id="sergeant", count=3),
+            EncounterEnemy(enemy_id="ghost_of_deleted", count=5),
+        ])
+        result = e.band(self._library_tiers(), party_strength=3)
+        assert result["named_boss_count"] == 3
+        assert result["band"] == "skirmish"
+
+    def test_band_passes_party_strength_through(self):
+        e = Encounter(id="e", name="E", enemies=[
+            EncounterEnemy(enemy_id="sergeant", count=4),
+        ])
+        result = e.band(self._library_tiers(), party_strength=4)
+        assert result["band"] == "standard"  # MM1-6 Standard row
+        assert result["calibrated"] is False

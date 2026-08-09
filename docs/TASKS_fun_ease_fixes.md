@@ -433,7 +433,7 @@ listed greps return the expected result; LOG updated.
   Do: `compute_band(enemies, party_strength)` from Recipe-Table logic
   (actor-count of Named/Boss + Mook steps). ≥3 tests keyed to published sim rows.
 
-- [ ] **T6.2 — Band display + spawn warning.**
+- [x] **T6.2 — Band display + spawn warning.**
   Files: `software/app/api/websocket.py` (band in encounter/tracker payloads),
   `software/app/static/js/builder.js` (live band in encounter builder),
   `play.js` (warning badge when a mid-combat spawn crosses a band), tests.

@@ -297,6 +297,26 @@ class Encounter(BaseModel):
         )
         return raw_tr * self.action_economy_multiplier(total_count, all_mooks)
 
+    def band(self, enemy_tiers: dict[str, str], party_strength: int) -> dict:
+        """Difficulty band for this encounter's roster (T6.2, K-3).
+
+        Expands each entry by its count and defers to :func:`compute_band`.
+        Entries whose enemy_id is not in *enemy_tiers* (a deleted library
+        enemy — "will no longer resolve") are skipped: the band describes the
+        actors that will actually hit the table.
+
+        Args:
+            enemy_tiers: Dict mapping enemy_id → tier string.
+            party_strength: Sum of participating characters' career advances.
+        """
+        tiers: list[str] = []
+        for entry in self.enemies:
+            tier = enemy_tiers.get(entry.enemy_id)
+            if tier is None:
+                continue
+            tiers.extend([tier] * entry.count)
+        return compute_band(tiers, party_strength)
+
     def to_client_dict(self) -> dict:
         """Serialize for sending to clients."""
         return self.model_dump()

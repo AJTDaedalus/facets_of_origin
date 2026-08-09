@@ -1378,6 +1378,44 @@ anything unexpected.
   exactly one step per Mook on the 3-Named core (76 → 47 → 20).
 - **Commands:** `pytest tests/test_encounter.py -q` → **59 passed** (was 39).
 
+### T6.2 — Band display + spawn warning (2026-08-09)
+
+- **TDD:** 17 new tests written red first — `test_encounter.py`
+  (Encounter.band adapter ×3), `test_session.py` (party_strength /
+  active_encounter_band ×4), `test_api_enemy.py` (band in create/list +
+  preview_band happy/403/404-session/404-enemy ×6), `test_websocket.py`
+  (`TestEncounterBandWS` ×4: spawn band + crossing, within-band not flagged,
+  removal band, MM-state-has/player-state-lacks).
+- **Server:** `GameSession.party_strength()` (MM1: sum of career_advances;
+  falls back to 3 — the calibrated baseline — when no characters) and
+  `active_encounter_band()` (defers to `compute_band`; defeated-but-unremoved
+  Named at Resolve 0 leave the count). `Encounter.band()` adapter expands
+  counts and skips deleted library ids. `encounter_band` ships in the MM
+  join-state dict and is deliberately absent from the player state.
+- **Transport decision (deviation noted):** rather than a new MM-only WS
+  event after every spawn (which would have inserted an extra message into
+  ~15 existing MM-socket test sequences and the agentic-playtest broker),
+  `band` + `band_crossed` ride the existing `enemy_spawned` /
+  `enemy_removed` / `enemy_updated`(defeat, incl. Final Blow) broadcasts via
+  `_band_fields()`. "MM-only" is enforced at display (players' clients ignore
+  the fields) — consistent with the existing trust posture where
+  `to_client_dict` already ships tactics/notes to all clients; the join-state
+  dict split still keeps the band out of the player payload.
+- **REST:** `POST /api/encounters/preview_band` (MM-only, 404 on unknown
+  session or enemy ids) so the builder's live readout is computed server-side
+  — the front end never carries a copy of the Recipe-Table logic. Band also
+  added to encounter create/list responses.
+- **Front end:** `renderBandChip()` in `components.js` (+ `.band-chip`
+  ladder colors in `style.css`); builder budget readout fetches the preview
+  band debounced (250ms); `play.js` `noteBandChange()` stores the band,
+  `renderEncounterBand()` renders the chip into the new MM-only
+  `#play-encounter-band` div (`index.html`), and a spawn that crosses a band
+  fires the MM warning toast: "one Mook is one band (MM1)". Removal/defeat
+  crossings update quietly.
+- **Commands:** `node --check` on all four JS files; affected suites
+  (`test_websocket test_api_enemy test_encounter test_session
+  test_agentic_playtest`) → **464 passed**.
+
 ---
 
 ## Escalations

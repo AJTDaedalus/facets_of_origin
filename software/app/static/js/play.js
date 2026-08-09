@@ -468,6 +468,7 @@ function renderEnemyTracker() {
   // MM gets full controls + phase markers; players get a read-only Resolve view.
   const isMM = state.role === 'mm';
   const container = document.getElementById(isMM ? 'play-enemy-tracker' : 'play-player-enemy-tracker');
+  renderEncounterBand();
   if (!container) return;
 
   const keys = Object.keys(state.activeEnemies);
@@ -570,8 +571,38 @@ async function removeEnemy(trackerKey) {
   sendWS({ type: 'remove_enemy', tracker_key: trackerKey });
 }
 
+/**
+ * T6.2 (K-3): live difficulty band over the tracker. The band rides the
+ * tracker broadcasts (computed server-side by compute_band); display is
+ * MM-only. `warnIfCrossed` fires the badge only for spawns — MM1's
+ * "adding enemies mid-fight is the sharpest dial you own".
+ */
+function noteBandChange(msg, warnIfCrossed) {
+  if (!msg.band) return;
+  const prev = state.encounterBand;
+  state.encounterBand = msg.band;
+  if (state.role === 'mm' && warnIfCrossed && msg.band_crossed && msg.band.band) {
+    const from = prev && prev.band ? prev.band : 'none';
+    notify('Spawn crossed a difficulty band: ' + from + ' → ' + msg.band.band
+      + ' — one Mook is one band (MM1).', 'warn', { duration: 8000 });
+  }
+}
+
+function renderEncounterBand() {
+  // MM-only surface — the element exists only in the MM tracker card.
+  const el = document.getElementById('play-encounter-band');
+  if (!el) return;
+  if (state.role !== 'mm' || !state.encounterBand || !state.encounterBand.band) {
+    el.innerHTML = '';
+    return;
+  }
+  el.innerHTML = '<span style="font-size:11px;color:var(--text-dim);">Difficulty band: </span>'
+    + renderBandChip(state.encounterBand);
+}
+
 function onEnemySpawned(msg) {
   state.activeEnemies[msg.tracker_key] = { ...msg.enemy, tr: msg.tr };
+  noteBandChange(msg, true);
   renderEnemyTracker();
   updateSpawnEnemySelect();
   populateTargetSelects();  // a new enemy is immediately Strikeable
@@ -614,12 +645,14 @@ function onEnemyUpdated(msg) {
     addSystemChat(`${name}: −${msg.depletion} Resolve (now ${msg.resolve_current}).`);
   }
 
+  noteBandChange(msg, false);  // a defeat can drop the band — update quietly
   renderEnemyTracker();
   populateTargetSelects();
 }
 
 function onEnemyRemoved(msg) {
   delete state.activeEnemies[msg.tracker_key];
+  noteBandChange(msg, false);
   renderEnemyTracker();
   populateTargetSelects();
 }

@@ -563,10 +563,40 @@ function updateEncounterBudget() {
 
   el.innerHTML = `
     <div><strong style="color:var(--gold);">${actors}</strong> Named/Boss actor${actors === 1 ? '' : 's'}
-      · <strong>${mooks}</strong> Mook${mooks === 1 ? '' : 's'} · total TR ${totalTR}</div>
+      · <strong>${mooks}</strong> Mook${mooks === 1 ? '' : 's'} · total TR ${totalTR}
+      <span id="builder-encounter-band" style="margin-left:8px;"></span></div>
     <div style="color:var(--text-dim);margin-top:2px;">Difficulty tracks the number of Named/Boss actors, not
       total TR. A Mook swarm on its own is never dangerous. For a 3-character party: 3 Named + 1 Mook is
       Standard; add 2 Mooks for Hard; add 3, or use 4 Named + 1 Mook, for Deadly.</div>`;
+
+  // T6.2 (K-3): the live band comes from the server (compute_band via
+  // /api/encounters/preview_band) — this file never carries its own copy of
+  // the Recipe-Table logic. Debounced: count inputs fire per keystroke.
+  clearTimeout(updateEncounterBudget._bandTimer);
+  updateEncounterBudget._bandTimer = setTimeout(fetchEncounterBandPreview, 250);
+}
+
+async function fetchEncounterBandPreview() {
+  const el = document.getElementById('builder-encounter-band');
+  if (!el) return;
+  const enemies = [];
+  document.querySelectorAll('.encounter-enemy-row').forEach(row => {
+    enemies.push({
+      enemy_id: row.dataset.enemyId,
+      count: parseInt(row.querySelector('.encounter-enemy-count').value) || 1,
+    });
+  });
+  if (enemies.length === 0) { el.innerHTML = ''; return; }
+  try {
+    const resp = await apiFetch('/api/encounters/preview_band', 'POST', {
+      session_id: state.sessionId, enemies: enemies,
+    });
+    if (!resp.ok) { el.innerHTML = ''; return; }
+    const data = await resp.json();
+    el.innerHTML = renderBandChip(data.band);
+  } catch (e) {
+    el.innerHTML = '';
+  }
 }
 
 async function saveEncounter(ev) {

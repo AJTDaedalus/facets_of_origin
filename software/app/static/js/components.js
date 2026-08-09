@@ -245,6 +245,26 @@ function renderEnemyCard(key, enemy, opts) {
 }
 
 // ---------------------------------------------------------------------------
+// Difficulty band chip (T6.2, K-3) — MM-only surfaces (encounter builder,
+// enemy tracker). The band itself is computed server-side (compute_band);
+// this only renders what the server said.
+// ---------------------------------------------------------------------------
+function renderBandChip(band) {
+  if (!band || !band.band) return '';
+  const label = band.band.charAt(0).toUpperCase() + band.band.slice(1);
+  const caveat = band.calibrated
+    ? ''
+    : ' <span style="color:var(--text-dim);font-size:10px;" title="'
+      + escapeHtml(band.note || '') + '">un-simulated (PS ' + band.party_strength + ')</span>';
+  const note = band.calibrated && band.note
+    ? ' <span style="color:var(--text-dim);font-size:10px;">' + escapeHtml(band.note) + '</span>'
+    : '';
+  return '<span class="band-chip band-' + escapeHtml(band.band) + '" title="'
+    + escapeHtml(band.note || 'Recipe Table (MM1): actor count of Named/Boss enemies drives difficulty.')
+    + '">' + label + '</span>' + caveat + note;
+}
+
+// ---------------------------------------------------------------------------
 // Threat Clock card (PHB III.2, D4) — visible to the whole table
 // ---------------------------------------------------------------------------
 function renderThreatClockCard(clock, opts) {

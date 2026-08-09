@@ -1567,6 +1567,20 @@ async def _handle_session_reset(session, session_id: str) -> None:
 # Enemy tracker handlers
 # ---------------------------------------------------------------------------
 
+def _band_fields(session, band_before: dict) -> dict:
+    """Difficulty-band payload for tracker broadcasts (T6.2, K-3).
+
+    `band` is the roster's band after the change; `band_crossed` flags a
+    change of band ("one Mook is one difficulty band" — MM1). The data rides
+    the existing broadcasts; clients display it to the MM only.
+    """
+    band = session.active_encounter_band()
+    return {
+        "band": band,
+        "band_crossed": band["band_index"] != band_before["band_index"],
+    }
+
+
 async def _handle_spawn_enemy(msg: dict, session, session_id: str) -> None:
     """MM spawns an enemy into the active combat tracker."""
     from app.game.enemy import Enemy
@@ -1601,6 +1615,7 @@ async def _handle_spawn_enemy(msg: dict, session, session_id: str) -> None:
         )
 
     enemy.init_combat()
+    band_before = session.active_encounter_band()
     tracker_key = instance_name or f"{enemy_id}_{len(session.active_enemies)}"
     session.active_enemies[tracker_key] = enemy
 
@@ -1609,6 +1624,7 @@ async def _handle_spawn_enemy(msg: dict, session, session_id: str) -> None:
         "tracker_key": tracker_key,
         "enemy": enemy.to_client_dict(),
         "tr": enemy.calculate_tr(),
+        **_band_fields(session, band_before),
     })
 
 
@@ -1704,6 +1720,9 @@ async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -
     # contests the exchange even when the roll happened off-app.
     session.offensive_actions_this_exchange.add(f"enemy_strike:{tracker_key}")
 
+    # A defeat changes the roster, so the band payload rides along (T6.2).
+    band_before = session.active_encounter_band()
+
     # Mooks have no Resolve pool — one Strike removes them (10+ if armoured).
     if enemy.tier == "mook":
         removed = combat_module.mook_removed(
@@ -1720,6 +1739,7 @@ async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -
             "mook_removed": removed,
             "conditions": list(enemy.conditions),
             "open": enemy.open,
+            **_band_fields(session, band_before),
         })
         return
 
@@ -1739,6 +1759,7 @@ async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -
         "mook_removed": False,
         "conditions": list(enemy.conditions),
         "open": enemy.open,
+        **_band_fields(session, band_before),
     })
 
     if result.phase_index is not None:
@@ -1814,6 +1835,7 @@ async def _handle_final_blow_confirm(msg: dict, session, session_id: str) -> Non
         })
         return
 
+    band_before = session.active_encounter_band()
     before = enemy.resolve_current if enemy.resolve_current is not None else enemy.resolve
     result = combat_module.apply_final_blow_removal(
         before, phase_thresholds=[p.resolve_threshold for p in enemy.phases] or None,
@@ -1837,6 +1859,7 @@ async def _handle_final_blow_confirm(msg: dict, session, session_id: str) -> Non
         "cause": result.cause,
         "player": player_name,
         "technique_id": "the_final_blow",
+        **_band_fields(session, band_before),
     })
 
     if result.phase_index is not None:
@@ -1851,11 +1874,13 @@ async def _handle_final_blow_confirm(msg: dict, session, session_id: str) -> Non
 async def _handle_remove_enemy(msg: dict, session, session_id: str) -> None:
     """MM removes an enemy from the active combat tracker."""
     tracker_key = str(msg.get("tracker_key", ""))
+    band_before = session.active_encounter_band()
     if tracker_key in session.active_enemies:
         del session.active_enemies[tracker_key]
     await manager.broadcast(session_id, {
         "type": "enemy_removed",
         "tracker_key": tracker_key,
+        **_band_fields(session, band_before),
     })
 
 

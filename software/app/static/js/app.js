@@ -33,6 +33,7 @@ const state = {
   connectionStatus: 'connecting',  // 'online' | 'connecting' | 'offline'
   sessions: [],            // MM dashboard: sessions listed from the API
   editingEnemyId: null,    // Builder: enemy currently loaded for edit, if any
+  encounterBand: null,     // T6.2 (K-3): live tracker difficulty band — MM display only
 };
 
 // ---------------------------------------------------------------------------
@@ -614,6 +615,8 @@ function onStateReceived(data) {
   state.enemyLibrary = data.enemy_library || {};
   state.encounterLibrary = data.encounter_library || {};
   state.threatClocks = data.threat_clocks || {};
+  // MM state only — the server omits it from player state (K-3, MM dial).
+  state.encounterBand = data.encounter_band || null;
 
   if (state.role === 'player' && data.your_character) {
     state.character = data.your_character;

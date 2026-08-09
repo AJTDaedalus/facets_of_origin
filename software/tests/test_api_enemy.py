@@ -387,3 +387,77 @@ class TestEnemyPhasesRoundTrip:
 
         assert resp.status_code == 200
         assert resp.json()["enemy"]["phases"] == []
+
+
+# ---------------------------------------------------------------------------
+# Encounter difficulty band (T6.2, K-3)
+# ---------------------------------------------------------------------------
+
+class TestEncounterBandAPI:
+    def _seed_library(self, client, mm_headers, sid):
+        client.post("/api/enemies/", json={
+            "session_id": sid, "id": "sergeant", "name": "Sergeant",
+            "tier": "named", "resolve": 3, "attack_modifier": 2, "armor": "light",
+        }, headers=mm_headers)
+        client.post("/api/enemies/", json={
+            "session_id": sid, "id": "thug", "name": "Thug", "tier": "mook",
+        }, headers=mm_headers)
+
+    def test_create_encounter_returns_band(self, client, mm_headers, active_session):
+        sid = active_session["session_id"]
+        self._seed_library(client, mm_headers, sid)
+        resp = client.post("/api/encounters/", json={
+            "session_id": sid, "id": "gate-fight", "name": "Gate Fight",
+            "enemies": [
+                {"enemy_id": "sergeant", "count": 3},
+                {"enemy_id": "thug", "count": 1},
+            ],
+        }, headers=mm_headers)
+        assert resp.status_code == 200
+        band = resp.json()["band"]
+        assert band["band"] == "standard"  # MM1-5: 3 Named + 1 Mook
+
+    def test_list_encounters_returns_band(self, client, mm_headers, active_session):
+        sid = active_session["session_id"]
+        self._seed_library(client, mm_headers, sid)
+        client.post("/api/encounters/", json={
+            "session_id": sid, "id": "gate-fight", "name": "Gate Fight",
+            "enemies": [{"enemy_id": "sergeant", "count": 3},
+                        {"enemy_id": "thug", "count": 2}],
+        }, headers=mm_headers)
+        resp = client.get(f"/api/encounters/{sid}", headers=mm_headers)
+        assert resp.status_code == 200
+        assert resp.json()["encounters"]["gate-fight"]["band"]["band"] == "hard"
+
+    def test_preview_band_happy_path(self, client, mm_headers, active_session):
+        sid = active_session["session_id"]
+        self._seed_library(client, mm_headers, sid)
+        resp = client.post("/api/encounters/preview_band", json={
+            "session_id": sid,
+            "enemies": [{"enemy_id": "sergeant", "count": 3},
+                        {"enemy_id": "thug", "count": 3}],
+        }, headers=mm_headers)
+        assert resp.status_code == 200
+        band = resp.json()["band"]
+        assert band["band"] == "deadly"  # MM1-5: 3 Named + 3 Mooks
+        assert band["calibrated"] is True
+
+    def test_preview_band_requires_mm(self, client, active_session):
+        player_token = create_session_token("Alice", active_session["session_id"])
+        resp = client.post("/api/encounters/preview_band", json={
+            "session_id": active_session["session_id"], "enemies": [],
+        }, headers={"Authorization": f"Bearer {player_token}"})
+        assert resp.status_code == 403
+
+    def test_preview_band_session_not_found(self, client, mm_headers):
+        resp = client.post("/api/encounters/preview_band", json={
+            "session_id": "no-such-session", "enemies": [],
+        }, headers=mm_headers)
+        assert resp.status_code == 404
+
+    def test_preview_band_unknown_enemy_404(self, client, mm_headers, active_session):
+        resp = client.post("/api/encounters/preview_band", json={
+            "session_id": active_session["session_id"],
+            "enemies": [{"enemy_id": "nobody_home", "count": 1}],
+        }, headers=mm_headers)
+        assert resp.status_code == 404

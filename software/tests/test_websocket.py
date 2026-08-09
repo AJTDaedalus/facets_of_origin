@@ -4552,3 +4552,86 @@ class TestSceneEndVisibility:
 
         assert msg["type"] == "scene_ended"
         assert "Zahna" in msg["characters"]
+
+# ---------------------------------------------------------------------------
+# Encounter difficulty band over the tracker (T6.2, K-3)
+# ---------------------------------------------------------------------------
+
+class TestEncounterBandWS:
+    """Band data rides the existing tracker broadcasts; the MM state dict
+    carries the live band on join. Display is MM-only (client-side)."""
+
+    def _create_session_with_library(self, client, mm_headers):
+        resp = client.post("/api/sessions/", json={"name": "Band Test"}, headers=mm_headers)
+        session_id = resp.json()["session_id"]
+        client.post("/api/enemies/", json={
+            "session_id": session_id, "id": "sergeant", "name": "Sergeant",
+            "tier": "named", "resolve": 3, "attack_modifier": 2,
+        }, headers=mm_headers)
+        client.post("/api/enemies/", json={
+            "session_id": session_id, "id": "thug", "name": "Thug", "tier": "mook",
+        }, headers=mm_headers)
+        return session_id
+
+    def test_spawn_carries_band_and_crossing(self, client, mm_headers, mm_token):
+        """Adding the Mook to a 3-Named core crosses Skirmish -> Standard —
+        the one-Mook-is-one-band doctrine (MM1, 76% -> 47% -> 20%)."""
+        session_id = self._create_session_with_library(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            for i in range(3):
+                ws.send_json({"type": "spawn_enemy", "enemy_id": "sergeant",
+                              "instance_name": f"Sgt {i}"})
+                msg = ws.receive_json()
+                assert msg["type"] == "enemy_spawned"
+            assert msg["band"]["band"] == "skirmish"  # 3 Named alone (~96%)
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "thug"})
+            msg = ws.receive_json()
+            assert msg["band"]["band"] == "standard"
+            assert msg["band_crossed"] is True
+
+    def test_spawn_within_band_not_flagged(self, client, mm_headers, mm_token):
+        session_id = self._create_session_with_library(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "thug", "instance_name": "T1"})
+            first = ws.receive_json()
+            assert first["band"]["band"] == "skirmish"
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "thug", "instance_name": "T2"})
+            second = ws.receive_json()
+            assert second["band"]["band"] == "skirmish"
+            assert second["band_crossed"] is False
+
+    def test_remove_enemy_carries_band(self, client, mm_headers, mm_token):
+        session_id = self._create_session_with_library(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            for i in range(3):
+                ws.send_json({"type": "spawn_enemy", "enemy_id": "sergeant",
+                              "instance_name": f"Sgt {i}"})
+                ws.receive_json()
+            ws.send_json({"type": "spawn_enemy", "enemy_id": "thug", "instance_name": "T1"})
+            assert ws.receive_json()["band"]["band"] == "standard"
+            ws.send_json({"type": "remove_enemy", "tracker_key": "T1"})
+            msg = ws.receive_json()
+            assert msg["type"] == "enemy_removed"
+            assert msg["band"]["band"] == "skirmish"
+            assert msg["band_crossed"] is True
+
+    def test_mm_state_has_band_player_state_does_not(self, client, mm_token,
+                                                     session_with_character):
+        """The band is an MM dial (K-3): it ships in the MM join state, and
+        not in the player's."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            ws.send_json({"token": mm_token, "session_id": session_id})
+            state = ws.receive_json()
+            assert state["type"] == "state"
+            assert "encounter_band" in state["data"]
+        player_token = create_session_token("Zahna", session_id)
+        with client.websocket_connect("/ws") as ws:
+            ws.send_json({"token": player_token})
+            state = ws.receive_json()
+            assert state["type"] == "state"
+            assert "encounter_band" not in state["data"]

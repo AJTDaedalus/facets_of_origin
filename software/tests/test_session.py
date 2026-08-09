@@ -204,3 +204,37 @@ class TestStateDictCompleteness:
         s = store.create_session("My Campaign")
         d = s.to_state_dict()
         assert d["session_name"] == "My Campaign"
+
+
+class TestPartyStrengthAndBand:
+    """T6.2: the session derives Party Strength (MM1: sum of career_advances)
+    and the live tracker's difficulty band from it."""
+
+    def test_party_strength_defaults_to_calibrated_baseline(self, session):
+        # No characters yet: assume the PS-3 calibrated baseline rather than
+        # raising or claiming PS 0.
+        assert session.party_strength() == 3
+
+    def test_party_strength_sums_career_advances(self, session, body_character):
+        body_character.career_advances = 2
+        session.characters[body_character.player_name] = body_character
+        assert session.party_strength() == 2
+
+    def test_active_encounter_band_reads_active_enemies(self, session):
+        from app.game.enemy import Enemy
+        for i in range(3):
+            session.active_enemies[f"named_{i}"] = Enemy(
+                id=f"named_{i}", name=f"Named {i}", tier="named", resolve=3)
+        session.active_enemies["mook_0"] = Enemy(id="mook_0", name="Mook", tier="mook")
+        band = session.active_encounter_band()
+        assert band["band"] == "standard"  # MM1-5: 3 Named + 1 Mook at PS 3
+
+    def test_defeated_enemies_leave_the_band(self, session):
+        from app.game.enemy import Enemy
+        for i in range(4):
+            e = Enemy(id=f"named_{i}", name=f"Named {i}", tier="named", resolve=3)
+            e.init_combat()
+            session.active_enemies[f"named_{i}"] = e
+        session.active_enemies["named_3"].resolve_current = 0  # defeated, not yet removed
+        band = session.active_encounter_band()
+        assert band["named_boss_count"] == 3

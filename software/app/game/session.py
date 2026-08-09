@@ -11,7 +11,7 @@ import yaml
 from app.config import settings
 from app.game.character import Character
 from app.game.enemy import Enemy
-from app.game.encounter import Encounter
+from app.game.encounter import Encounter, compute_band
 from app.facets.registry import MergedRuleset, build_ruleset
 
 
@@ -137,6 +137,30 @@ class GameSession:
         if len(self.roll_log) > 500:
             self.roll_log = self.roll_log[-500:]
 
+    def party_strength(self) -> int:
+        """Party Strength: the sum of participating characters' career
+        advances (MM1 §Party Strength). Falls back to 3 — the simulation-
+        calibrated baseline — when no characters have joined yet (or the sum
+        is degenerate), rather than raising or claiming a PS of zero.
+        """
+        total = sum(c.career_advances for c in self.characters.values())
+        return total if total >= 1 else 3
+
+    def active_encounter_band(self) -> dict:
+        """Difficulty band of the live tracker roster (T6.2, K-3).
+
+        Defers to `encounter.compute_band` — the Recipe-Table logic's only
+        home. Defeated Named/Boss enemies (Resolve 0, not yet removed) no
+        longer act, so they leave the count.
+        """
+        tiers = [
+            e.tier for e in self.active_enemies.values()
+            if e.tier == "mook"
+            or e.resolve_current is None
+            or e.resolve_current > 0
+        ]
+        return compute_band(tiers, self.party_strength())
+
     def to_state_dict(self) -> dict:
         """Full session state sent to the MM on WebSocket join.
 
@@ -154,6 +178,8 @@ class GameSession:
             "encounter_library": {eid: e.to_client_dict() for eid, e in self.encounter_library.items()},
             "active_enemies": {key: e.to_client_dict() for key, e in self.active_enemies.items()},
             "threat_clocks": {cid: c.to_client_dict() for cid, c in self.threat_clocks.items()},
+            # MM dial only (K-3): deliberately absent from the player state.
+            "encounter_band": self.active_encounter_band(),
         }
 
     def to_player_state_dict(self, player_name: str) -> dict:
