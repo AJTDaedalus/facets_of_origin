@@ -451,7 +451,7 @@ listed greps return the expected result; LOG updated.
   Files: printable sheet template(s): armor checkboxes per scene, "Endurance
   Pool" label, modifier-first — consistent with T5.3/T5.9.
 
-- [ ] **T6.6 — WS-6 close.** Full suite; report pass/fail counts in LOG.
+- [x] **T6.6 — WS-6 close.** Full suite; report pass/fail counts in LOG.
 
 ## WS-7 — Global close-out
 

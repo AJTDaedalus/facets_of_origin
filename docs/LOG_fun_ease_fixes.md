@@ -1501,6 +1501,20 @@ anything unexpected.
   tests/test_build_index.py` → **47 passed**; `build_index` idempotent (no
   diff).
 
+### T6.6 — WS-6 close (2026-08-09)
+
+- **Full suite:** `cd software && python -m pytest tests/ -q` →
+  **1519 passed, 0 failed** (339s). WS-5 close stood at 1471; WS-6 added 48
+  tests (T6.1 compute_band ×21, T6.2 band surfaces ×17, T6.3 Spark nudge
+  ×6, T6.4 posture panel ×4).
+- **Result:** WS-6 complete — 6/6 tasks, one commit each, no escalations.
+  Features: Recipe-Table band computation (honest `calibrated: false`
+  outside PS-3), live band in the encounter builder + MM tracker with
+  spawn-crossing warning, quiet MM-only Spark-flow nudge (tool prompt,
+  constant documented against MM5 §Spark Flow), enemy posture panel with
+  Table III.3–9 labels and conduct triggers, and the paper sheet's armor
+  checkboxes.
+
 ---
 
 ## Escalations
