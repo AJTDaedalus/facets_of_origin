@@ -1287,7 +1287,7 @@ const HELP_MM = [
 const HELP_PLAYER = [
   ['Play — Rolling', 'Click an Attribute, or hit Roll on a skill to use both. Stage Sparks on the pips first — each adds a d6 and drops the lowest.'],
   ['Play — Saving Throws', 'When something happens to you rather than something you attempt, roll a Major Attribute save.'],
-  ['Play — Combat', 'Declare a Posture each exchange, then Strike, React, Support, or Maneuver. Press spends 1 Endurance for an extra die. At 0 Endurance you can only Absorb.'],
+  ['Play — Combat', 'Declare a Posture each exchange, then Strike, React, Support, or Maneuver. Press spends 1 Endurance Pool point for an extra die. At 0 you can only Absorb.'],
   ['Play — Magic', 'Domain plus Intent plus Scope. Describe what you want; the difficulty comes from your domain type and the scope you reach for.'],
   ['Play — Sparks', 'Nominate another player any time; the MM confirms. On a 6-, narrate how it makes things worse and claim a Graceful Failure Spark.'],
   ['Builder', 'Spend Skill Points on skills you used (plus one training point for an unused Primary-Facet skill), pick Techniques as Facet levels open them, and keep your own notes.'],

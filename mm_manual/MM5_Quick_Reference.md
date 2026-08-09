@@ -104,7 +104,7 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 3. Declare and resolve Actions (Strike / Maneuver / Support / Magic)
 4. Targets declare and resolve Reactions
 5. Apply results: deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, note an enemy left Open
-6. End of exchange: Tier 1 Conditions clear, Withdrawn recover 2 Endurance (up to the pool)
+6. End of exchange: Tier 1 Conditions clear, Withdrawn recover 2 Endurance Pool points (up to the maximum)
 
 An exchange with **no PC offensive action** is uncontested — the situation advances for free: reposition, reinforce, progress a clock, or take the objective. No roll.
 ```
@@ -117,10 +117,10 @@ An exchange with **no PC offensive action** is uncontested — the situation adv
 
 | Posture | Offense | Reaction Cost | Special |
 |---|---|---|---|
-| **Aggressive** | +1 | +1 Endurance, first reaction of the exchange only | — |
+| **Aggressive** | +1 | +1 Endurance Pool cost, first reaction of the exchange only | — |
 | **Measured** | +0 | +0 | Baseline |
-| **Defensive** | -1 | -1 Endurance (min 0) | — |
-| **Withdrawn** | No offense | Free (0) | Recover 2 Endurance end of exchange, up to the pool |
+| **Defensive** | -1 | -1 Endurance Pool cost (min 0) | — |
+| **Withdrawn** | No offense | Free (0) | Recover 2 Endurance Pool points end of exchange, up to the maximum |
 
 PC Posture is declared blind. Enemy stances are **stated, not concealed** — announce them as the exchange opens, driven by the stat block's `triggers:`. Insight reads past a stated stance (a feint, a shift about to happen).
 
@@ -137,7 +137,7 @@ PC Posture is declared blind. Enemy stances are **stated, not concealed** — an
 | **Support** | 2d6 + relevant skill | Grant ally +1d6 drop lowest OR difficulty one step easier on next roll |
 | **Magic** | 2d6 + Spirit + Attune, or Knowledge + Lore (by tradition) | Domain + Intent + Scope; vs enemy depletes Resolve like a Strike |
 
-**Press:** Spend 1 Endurance before a Strike to add 1d6 drop lowest (stacks with Sparks).
+**Press:** Spend 1 Endurance Pool point before a Strike to add 1d6 drop lowest (stacks with Sparks).
 
 ---
 
@@ -172,7 +172,7 @@ Default Strike difficulty: **Standard**. Adjust for posture and situation; an Op
 | **Absorb** | 0 End | No roll | — | — | Take hit at full tier |
 | **Intercept** | 2 End | — | Protect ally, then Dodge/Parry — once per exchange; if two would step in, the protected ally decides who | — | — |
 
-At **0 Endurance**: Absorb only.
+At **0 Endurance Pool**: Absorb only.
 
 ---
 
@@ -209,7 +209,7 @@ At **0 Endurance**: Absorb only.
 | Tier | Conditions | Effect | Duration |
 |---|---|---|---|
 | **1** | Winded | -1 to next roll | Clears end of exchange |
-| **1** | Off-Balance | +1 Endurance cost on next reaction | Clears end of exchange |
+| **1** | Off-Balance | +1 Endurance Pool cost on next reaction | Clears end of exchange |
 | **1** | Shaken | MM directs next action | Clears end of exchange |
 | **2** | Staggered | -1 to offensive rolls | Persists until treated |
 | **2** | Cornered | Cannot take Aggressive posture | Persists until treated |
@@ -235,15 +235,15 @@ A charge is consumed only when armor provides the reduction actually applied —
 
 ---
 
-## Endurance
+## Endurance Pool
 
 **Pool:** 4 + Constitution modifier + Endurance skill rank bonus
 
 **Range:** 3 (Con 1, no skill) to 8 (Con 3, Master)
 
-**0 Endurance:** Absorb only, regardless of Posture (Conditions land at their normal tier — no extra penalty)
+**0 Endurance Pool:** Absorb only, regardless of Posture (Conditions land at their normal tier — no extra penalty)
 
-**Recovery:** Withdrawn posture restores 2 per exchange
+**Recovery:** Withdrawn posture restores 2 per exchange, up to the maximum
 
 ---
 

@@ -203,9 +203,9 @@ This is a guideline, not a formula. Some arcs work better with the hardest fight
 
 ### The Resource Tax
 
-Every encounter — combat or otherwise — costs the party something. Endurance, Sparks, information leverage, NPC goodwill, time. The resource tax is the cumulative cost of everything the party has spent getting to this point.
+Every encounter — combat or otherwise — costs the party something. Endurance Pool points, Sparks, information leverage, NPC goodwill, time. The resource tax is the cumulative cost of everything the party has spent getting to this point.
 
-In a single session, the resource tax is straightforward: the party enters the climactic encounter with whatever Endurance and Sparks they have left after the earlier encounters. This is why a Skirmish before a Hard encounter is useful — it is not about the Skirmish itself, it is about the 2–3 Endurance points the party spent getting through it.
+In a single session, the resource tax is straightforward: the party enters the climactic encounter with whatever Endurance Pool and Sparks they have left after the earlier encounters. This is why a Skirmish before a Hard encounter is useful — it is not about the Skirmish itself, it is about the 2–3 Endurance Pool points the party spent getting through it.
 
 Across multiple sessions, the resource tax is more subtle. It is the NPC the party alienated in session two who will not help them in session four. It is the information they chose not to pursue that would have made the final encounter easier.
 

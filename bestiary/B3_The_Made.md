@@ -129,7 +129,7 @@ That is, in certain lights, worse.
 
 **What makes it a Boss and not a large latchman** is that its instruction has no seam in it. Latchmen keep doors, and a door has a hundred edges to argue about. The Guardian was told to prevent unauthorized access to the contents of a room, and there is no clever reading of that sentence, no borrowed coat, and no successor office — the guild that could have countermanded it dissolved along with every record of who held authority over it.
 
-So this one is a fight, or it is a problem solved sideways: structural weaknesses, the fixed patrol logic, a sealed door, the joints. A straight fight is survivable and very expensive, which the simulation data supports — a by-the-book party wins essentially every time, several exchanges in, having spent real Sparks and real Endurance to do it.
+So this one is a fight, or it is a problem solved sideways: structural weaknesses, the fixed patrol logic, a sealed door, the joints. A straight fight is survivable and very expensive, which the simulation data supports — a by-the-book party wins essentially every time, several exchanges in, having spent real Sparks and real Endurance Pool points to do it.
 
 > **What Characters Can Know — the Archive Guardian**
 >
@@ -139,7 +139,7 @@ So this one is a fight, or it is a problem solved sideways: structural weaknesse
 >
 > **10+** — *"There's no argument to be had with this one; the office that could have called it off doesn't exist. But it was built by people, which means it has joints, and a maneuver that lands on one takes something off its attack — permanently, for the fight. And when it's nearly done it changes: it hits softer and stops noticing the small hurts entirely, because whatever registers those has shut down and it is running on something else."*
 
-**Encounter.** *(1 Boss alone — expensive, not deadly, and intended to be solved laterally.)* Its TR of 16 puts it well above the budget for a party of three, and the budget is the wrong instrument: a lone Boss is trivial for a fresh party whatever its TR, because difficulty is gated by actor count. A by-the-book party wins essentially every time — after several exchanges and real Spark and Endurance expenditure. It is not meant to be met head-on. Everything the party needs — the patrol logic, the joints, the room itself — is available before the first exchange to anyone who looks.
+**Encounter.** *(1 Boss alone — expensive, not deadly, and intended to be solved laterally.)* Its TR of 16 puts it well above the budget for a party of three, and the budget is the wrong instrument: a lone Boss is trivial for a fresh party whatever its TR, because difficulty is gated by actor count. A by-the-book party wins essentially every time — after several exchanges and real Spark and Endurance Pool expenditure. It is not meant to be met head-on. Everything the party needs — the patrol logic, the joints, the room itself — is available before the first exchange to anyone who looks.
 
 ---
 

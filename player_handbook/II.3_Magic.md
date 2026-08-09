@@ -143,7 +143,7 @@ The complication is the MM's call, and it should move the story forward, not sim
 >
 > *The domain bleeds.* The effect lands in the right place but with the wrong character. The Shadow mage's darkness is also cold in a way that reads as malicious — the people sheltering in it are frightened, not simply hidden. The intent was protection; the fiction creates something more complicated.
 >
-> *The cost arrives early.* The magic succeeded — but the mage carries a consequence that should have been deferred: a migraine that makes their next roll Hard, a visible magical signature they cannot suppress, a drain on Endurance that signals physical cost.
+> *The cost arrives early.* The magic succeeded — but the mage carries a consequence that should have been deferred: a migraine that makes their next roll Hard, a visible magical signature they cannot suppress, a drain on the Endurance Pool that signals physical cost.
 >
 > *Nothing happens.* The rarest and most useful failure. The domain reaches and finds nothing — the lock is not what Zahna thought it was, the creature is not susceptible in the way the theory suggested. The failure is informative. They now know something they didn't before.
 >

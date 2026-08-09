@@ -197,7 +197,7 @@ A three-exchange fight should take 15-25 minutes at the table. If it is taking l
 >
 > A Skirmish fight (a Mook-only roster, per the Encounter Recipe Table) will last 1-2 exchanges and produce minimal resource drain. That is by design — Skirmish encounters introduce combat mechanics without risking the party. Do not expect tactical depth from them. Use Skirmish encounters early in a session or campaign to teach the exchange structure, posture decisions, and reaction economy. Save Standard and Hard encounters for when the party understands the system and meaningful tactical pressure serves the story.
 
-End fights when they are won, not when the stat block is depleted. If the Named NPC is down to its last point of Resolve, left Open, and the party has three characters with full Endurance pools, the fight is over — narrate the ending and move on. Do not make the players grind through the last two exchanges of a foregone conclusion.
+End fights when they are won, not when the stat block is depleted. If the Named NPC is down to its last point of Resolve, left Open, and the party has three characters with full Endurance Pools, the fight is over — narrate the ending and move on. Do not make the players grind through the last two exchanges of a foregone conclusion.
 
 ### Downtime
 
@@ -622,7 +622,7 @@ Facets of Origin is designed for digital play, and the software toolset is there
 
 The Play Field is your primary session interface. It handles:
 - **Posture declaration and blind reveal.** All players submit simultaneously; the app reveals together. This is faster and cleaner than paper slips and eliminates the "I changed mine" problem.
-- **Endurance tracking.** Automatic deduction on reactions and Press. The players see their own pool; you see everyone's.
+- **Endurance Pool tracking.** Automatic deduction on reactions and Press. The players see their own pool; you see everyone's.
 - **Condition tracking.** Applied and cleared by the system at appropriate times. No one forgets that Off-Balance clears at end of exchange.
 - **Roll resolution.** The dice are visible to everyone. Modifiers are calculated. The result tier is shown. No mental arithmetic.
 
@@ -631,7 +631,7 @@ Use the Play Field whenever you are in a structured scene — combat, contested 
 > **MM Note — two buttons, two jobs**
 >
 > The app gives you `End Combat` and `End Scene`, and the difference between them
-> is a rule rather than a preference. `End Combat` clears Endurance, Conditions,
+> is a rule rather than a preference. `End Combat` clears Endurance Pools, Conditions,
 > and Postures — the fight is over. `End Scene` refreshes every character's armor
 > downgrade budget, because that budget is scoped to the scene and not to the
 > fight (see *Armor*, III.3).

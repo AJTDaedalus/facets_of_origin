@@ -757,7 +757,7 @@ async def _handle_strike(
         if character.endurance_current is not None and character.endurance_current >= press_cost:
             character.endurance_current -= press_cost
         else:
-            await manager.send_to(websocket, {"type": "error", "message": "No Endurance to Press."})
+            await manager.send_to(websocket, {"type": "error", "message": "No Endurance Pool points to Press."})
             return
 
     sparks_to_spend = _spend_sparks(character, sparks_requested)

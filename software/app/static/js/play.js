@@ -375,7 +375,7 @@ function renderPlayPlayerList() {
     // Spark economy without being able to see anyone's balance.
     const sparkChip = `<span class="spark-chip" title="Sparks">✦ ${char.sparks != null ? char.sparks : 0}</span>`;
     const combatChip = inCombat
-      ? `<span class="status-chip" title="Endurance">${char.endurance_current}/${char.endurance_max || '?'}</span>`
+      ? `<span class="status-chip" title="Endurance Pool">${char.endurance_current}/${char.endurance_max || '?'}</span>`
       : '';
     const condChip = (char.conditions || []).length
       ? `<span class="status-chip status-chip-warn" title="${escapeHtml((char.conditions || []).map(prettyCondition).join(', '))}">${char.conditions.length} cond</span>`
@@ -751,7 +751,7 @@ function declaredWeaponFields() {
 async function endCombat() {
   const ok = await confirmDialog(
     'End combat?',
-    'Endurance, Conditions, and Postures are cleared for every character, and the enemy tracker is emptied.',
+    'Endurance Pools, Conditions, and Postures are cleared for every character, and the enemy tracker is emptied.',
     'End Combat');
   if (!ok) return;
   sendWS({ type: 'combat_end' });
@@ -841,7 +841,7 @@ function renderMMCombatantRow(playerName, char) {
       </div>
       ${inCombat ? `
         <div class="endurance-bar"><div class="${fillClass}" style="width:${pct}%;"></div></div>
-        <div style="font-size:11px;color:var(--text-dim);">Endurance ${current}/${max}</div>` : ''}
+        <div style="font-size:11px;color:var(--text-dim);">Endurance Pool ${current}/${max}</div>` : ''}
       <div class="mm-conditions">${condHtml}</div>
       <div class="mm-attack-row">
         <label class="mm-attack-label">Enemy attack lands as</label>
@@ -1190,7 +1190,7 @@ function performStrike() {
 
   if (!target) { notify('Choose a target.', 'warn'); focusElement('strike-target'); return; }
   if (press && (state.character.endurance_current || 0) < 1) {
-    notify('No Endurance left to Press.', 'warn');
+    notify('No Endurance Pool points left to Press.', 'warn');
     return;
   }
   if (finalBlow && state.sparksToSpend < 1) {

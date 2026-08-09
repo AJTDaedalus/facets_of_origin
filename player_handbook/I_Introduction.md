@@ -38,7 +38,7 @@ Otherwise: read the chapters in order when you are creating your first character
 
 ## Playing Without Software
 
-Everything in this handbook is designed to work with only dice and paper. The digital tools handle bookkeeping and enable online play, but none of the rules require them. If you are playing without software, Postures are declared on hidden slips of paper and revealed simultaneously, and Endurance and Conditions are tracked on your character sheet. A printed character sheet, a pair of six-sided dice, and the people at your table are the only things you actually need.
+Everything in this handbook is designed to work with only dice and paper. The digital tools handle bookkeeping and enable online play, but none of the rules require them. If you are playing without software, Postures are declared on hidden slips of paper and revealed simultaneously, and Endurance Pools and Conditions are tracked on your character sheet. A printed character sheet, a pair of six-sided dice, and the people at your table are the only things you actually need.
 
 The most important thing is not in this book. It is the people at your table.
 

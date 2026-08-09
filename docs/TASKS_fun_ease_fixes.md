@@ -370,7 +370,7 @@ listed greps return the expected result; LOG updated.
   same 2d6 roll." Every remaining QS-4 term must be defined in-document or
   pointered.
 
-- [ ] **T5.3 — "Endurance Pool" qualifier (C-6, D13).**
+- [x] **T5.3 — "Endurance Pool" qualifier (C-6, D13).**
   Files: everywhere the POOL is meant: `player_handbook/III.3_Combat.md`,
   `Quick_Start.md`, `Appendix_Character_Sheet.md`, `Glossary.md`,
   `mm_manual/MM5_Quick_Reference.md`, `software/facets/base/facet.yaml` (display

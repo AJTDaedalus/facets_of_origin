@@ -428,7 +428,7 @@ techniques:
                 use: "Once per scene"
                 normal: >
                   An incoming attack is answered with a reaction, which
-                  costs Endurance and may still land a Condition (see
+                  costs Endurance Pool points and may still land a Condition (see
                   *Reactions*, III.3).
                 prerequisites: []
 
@@ -1620,11 +1620,11 @@ combat:
 
   # D5: the floor is absolute — it overrides Posture, not just the reaction's
   # base cost. Withdrawn's free_reactions and Defensive's reaction_cost_modifier
-  # (above) only matter once there is at least 1 Endurance to spend.
+  # (above) only matter once there is at least 1 Endurance Pool point to spend.
   endurance_floor_rule: >-
-    At 0 Endurance, only Absorb is available as a reaction, regardless of
-    Posture. Withdrawn's free reactions and Defensive's reduced reaction
-    cost apply only while Endurance is 1 or higher.
+    At 0 Endurance Pool, only Absorb is available as a reaction, regardless
+    of Posture. Withdrawn's free reactions and Defensive's reduced reaction
+    cost apply only while the Endurance Pool is 1 or higher.
 
   postures:
     aggressive:
@@ -1633,8 +1633,8 @@ combat:
       # K1 (BRIEF D8, adopted after Gate G3 passed robustly across 7 seeds,
       # 2026-07-10): the surcharge applies to a combatant's first reaction
       # of the exchange only; every reaction after that pays the base cost.
-      # Softens the Aggressive "death spiral" (a low-Endurance PC facing
-      # several simultaneous attacks burns Endurance on the surcharge alone
+      # Softens the Aggressive "death spiral" (a low-Endurance-Pool PC facing
+      # several simultaneous attacks burns pool points on the surcharge alone
       # and has nothing left to react with) without changing the offense
       # modifier above. See research/simulation_log.md Series 8.
       reaction_cost_modifier_applies: first_reaction_only
@@ -1644,7 +1644,7 @@ combat:
     defensive:
       offense_modifier: -1
       reaction_cost_modifier: -1
-      min_reaction_cost: 0   # III.3 posture table: "-1 Endurance cost per reaction (min 0)"
+      min_reaction_cost: 0   # III.3 posture table: "-1 Endurance Pool cost per reaction (min 0)"
     withdrawn:
       offense_modifier: null
       reaction_cost_modifier: 0
@@ -1657,7 +1657,7 @@ combat:
     absorb: 0
     intercept: 2
 
-  # Spend 1 Endurance before a Strike to add 1d6 and drop the lowest — the
+  # Spend 1 Endurance Pool point before a Strike to add 1d6 and drop the lowest — the
   # same mechanical effect as a Spark, drawn from a different resource, and
   # stackable with one (III.3, Press).
   press:
@@ -1686,7 +1686,7 @@ combat:
       - id: off_balance
         clears: end_of_exchange
         out_of_combat_clears: end_of_scene
-        description: "Your next reaction costs 1 additional Endurance."
+        description: "Your next reaction costs 1 additional Endurance Pool point."
       - id: shaken
         clears: end_of_exchange
         out_of_combat_clears: end_of_scene

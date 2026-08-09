@@ -39,7 +39,7 @@ the full rule, follow the pointer.
 
 **Encounter Recipe Table** — The simulation-validated table of enemy rosters mapped to difficulty bands (Skirmish/Standard/Hard/Deadly), keyed to Party Strength. Actor count — the number of Named/Boss enemies acting at once, not total TR — is what drives difficulty; the retired TR budget is preserved only as a historical record in `docs/DECISIONS.md`. *(MM1)*
 
-**Endurance** — A character's combat stamina, spent to react to incoming attacks and to Press on offense. The pool equals 4 plus the Constitution modifier plus Endurance skill rank; at 0 Endurance, Absorb is the only available reaction. *(Chapter III.3)*
+**Endurance Pool** — A character's combat stamina, spent to react to incoming attacks and to Press on offense. The pool equals 4 plus the Constitution modifier plus Endurance skill rank; at 0, Absorb is the only available reaction. Distinct from the Endurance skill (Chapter II.6). *(Chapter III.3)*
 
 **Exchange** — One dramatic beat of combat: every participant declares Posture simultaneously, actions and reactions are declared and resolved together, and the MM narrates the beat as a whole — there is no initiative order. *(Chapter III.3)*
 
@@ -67,7 +67,7 @@ the full rule, follow the pointer.
 
 **Named NPC** — A significant antagonist that uses the full combat structure — Resolve, Posture, Techniques — with a Resolve of 3 or 4 by default. It never rolls: when it attacks, the PCs roll reactions. *(Chapter III.3)*
 
-**Off-Balance** — A Tier 1 Condition: the character's next reaction costs 1 additional Endurance. *(Chapter III.3)*
+**Off-Balance** — A Tier 1 Condition: the character's next reaction costs 1 additional Endurance Pool point. *(Chapter III.3)*
 
 **Open** — The one mark a Strike can put on an enemy: on a full success (10+), the attacker may leave the enemy Open — Easy to Strike for everyone — narrating what that looks like. The enemy clears Open only by visibly spending its action to recover; Open never defeats an enemy on its own. *(Chapter III.3)*
 
@@ -77,15 +77,15 @@ the full rule, follow the pointer.
 
 **Pinnacle Technique** — A powerful, character-defining ability outside the normal Technique tree, chosen at Major Advancement with MM approval; it should feel like the culmination of a demonstrated arc of play, not an item on a checklist. *(Chapter II.4)*
 
-**Posture (Aggressive/Measured/Defensive/Withdrawn)** — The broad tactical stance taken for one exchange. Player characters declare theirs simultaneously and blind; enemy stances are stated openly by the MM, driven by the stat block's conduct triggers. Aggressive trades a first-reaction Endurance surcharge for +1 offense, Measured is the baseline, Defensive trades offense for cheaper reactions, and Withdrawn forgoes offense to recover 2 Endurance, up to the pool maximum. *(Chapter III.3)*
+**Posture (Aggressive/Measured/Defensive/Withdrawn)** — The broad tactical stance taken for one exchange. Player characters declare theirs simultaneously and blind; enemy stances are stated openly by the MM, driven by the stat block's conduct triggers. Aggressive trades a first-reaction Endurance Pool surcharge for +1 offense, Measured is the baseline, Defensive trades offense for cheaper reactions, and Withdrawn forgoes offense to recover 2 Endurance Pool points, up to the maximum. *(Chapter III.3)*
 
-**Press** — Spending 1 Endurance before a Strike roll to add a d6 and drop the lowest die — the same mechanical effect as a Spark, drawn from a different resource, and stackable with one. *(Chapter III.3)*
+**Press** — Spending 1 Endurance Pool point before a Strike roll to add a d6 and drop the lowest die — the same mechanical effect as a Spark, drawn from a different resource, and stackable with one. *(Chapter III.3)*
 
 **Primary Facet** — The Facet a character declares at character creation, which determines which skills cost less to advance (1 point per mark rather than 2) and which Techniques are available to them. *(Chapter II.4)*
 
 **Rank (Novice/Practiced/Expert/Master)** — A skill's level of developed capability: Novice (+0, the starting rank for every skill), Practiced (+1, 3 marks), Expert (+2, 6 marks), or Master (+3, 9 marks). *(Chapter II.6)*
 
-**Reaction (Dodge/Parry/Absorb/Intercept)** — A character's response to an incoming action — at most one per incoming action, each costing Endurance unless Posture reduces it: Dodge (Dexterity), Parry (weapon attribute + Combat), Absorb (free, take the hit), or Intercept (step in front of an attack meant for an ally). *(Chapter III.3)*
+**Reaction (Dodge/Parry/Absorb/Intercept)** — A character's response to an incoming action — at most one per incoming action, each costing Endurance Pool points unless Posture reduces it: Dodge (Dexterity), Parry (weapon attribute + Combat), Absorb (free, take the hit), or Intercept (step in front of an attack meant for an ally). *(Chapter III.3)*
 
 **Reflection Scene** — A brief in-world moment, once per session, where a character acknowledges growth that happened in play; encouraged but not required, since advancement itself happens whether or not the scene takes place. *(Chapter II.4)*
 

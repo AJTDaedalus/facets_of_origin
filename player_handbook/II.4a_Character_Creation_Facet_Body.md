@@ -158,7 +158,7 @@ When moving in darkness, dim light, or natural cover, you do not need to roll St
 
 When you would be targeted by an attack or sudden physical threat, you may spend a Spark to simply not be where they expected. You are not harmed, and the attacker must re-establish their approach.
 
-**Normal:** An incoming attack is answered with a reaction, which costs Endurance and may still land a Condition (see *Reactions*, III.3).
+**Normal:** An incoming attack is answered with a reaction, which costs Endurance Pool points and may still land a Condition (see *Reactions*, III.3).
 
 ---
 

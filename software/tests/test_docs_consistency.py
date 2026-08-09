@@ -207,7 +207,7 @@ CHARACTER_SHEET_FIELDS = {
     "Technique": "techniques",
     "Choice (if any)": "technique_choices",
     "Magic Domain": "magic_domain",
-    "Endurance (current / max) — max is 4 + Constitution modifier + Endurance skill rank": "endurance_current",
+    "Endurance Pool (current / max) — max is 4 + Constitution modifier + Endurance skill rank": "endurance_current",
     "Armor Type": "armor",
     "Armor Downgrade Budget Remaining This Scene": "armor_downgrades_remaining",
     "Active Conditions": "conditions",
@@ -251,7 +251,7 @@ def test_character_sheet_fields_map_to_model() -> None:
 NEW_CHARACTER_SHEET_SECTION_LABELS = [
     "Career Advances",
     "Magic Domain",
-    "Endurance (current / max) — max is 4 + Constitution modifier + Endurance skill rank",
+    "Endurance Pool (current / max) — max is 4 + Constitution modifier + Endurance skill rank",
     "Armor Type",
     "Armor Downgrade Budget Remaining This Scene",
     "Active Conditions",

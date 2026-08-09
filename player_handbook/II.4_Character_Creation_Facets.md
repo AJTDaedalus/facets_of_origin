@@ -111,7 +111,7 @@ The three trees are in Chapters II.4a (Body), II.4b (Mind), and II.4c (Soul). Ev
 >
 > **Name** *(Branch, Tier — governing Attribute)*. The attribute named here is the one the branch is built on; a Technique may still be used with whatever roll its text describes.
 >
-> **Use:** how often it is available — *Passive* (always on, never declared), *At will* (you invoke it, no limit), *Once per scene*, or *Once per session*. A Spark or Endurance cost, where one exists, is stated here too.
+> **Use:** how often it is available — *Passive* (always on, never declared), *At will* (you invoke it, no limit), *Once per scene*, or *Once per session*. A Spark or Endurance Pool cost, where one exists, is stated here too.
 >
 > **Choose:** the decision you make once, at the moment you unlock it. It does not change afterward.
 >
@@ -138,7 +138,7 @@ At a Major Advancement, choose one:
 - **+1 to a Minor Attribute** — raise one Minor Attribute by one step (maximum 3). If this raises a Major Attribute's derived sum into the next bracket, the Major Attribute modifier increases as well.
 - **Pinnacle Technique** — a powerful, character-defining ability that lives outside the normal Technique tree. These require MM approval and should feel like the culmination of a long arc of play, not an item on a checklist. A Pinnacle Technique captures something the character has demonstrably *become* through play.
 
-  > *A duelist who has spent five sessions as the party's primary combatant might choose:* **Last Stand** — *Once per session, when you would be Broken, you may remain standing until the end of the exchange at 1 Endurance.* The MM ensures the Pinnacle feels earned by the character's demonstrated arc. A character who has never led a fight does not earn Last Stand — not because the rules forbid it, but because the fiction doesn't support it yet.
+  > *A duelist who has spent five sessions as the party's primary combatant might choose:* **Last Stand** — *Once per session, when you would be Broken, you may remain standing until the end of the exchange at 1 Endurance Pool point.* The MM ensures the Pinnacle feels earned by the character's demonstrated arc. A character who has never led a fight does not earn Last Stand — not because the rules forbid it, but because the fiction doesn't support it yet.
 
 Major Advancements require a **significant reflection scene** — more than the brief aside of a standard advancement. This should be a full scene at the table, tied to a meaningful story moment. The MM should look for the right moment in the fiction rather than forcing it at a mechanical threshold.
 

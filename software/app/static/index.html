@@ -298,14 +298,14 @@
               <div class="card-title">Combat</div>
 
               <div id="combat-idle-note" class="inline-note hidden">
-                Not in combat. This is your readiness: the Endurance pool you'll start a fight with,
+                Not in combat. This is your readiness: the Endurance Pool you'll start a fight with,
                 your armour budget, and what each reaction will cost. The MM starts combat when it begins.
               </div>
 
               <!-- Endurance bar -->
               <div class="combat-status-bar">
                 <div class="endurance-bar-wrap">
-                  <label style="font-size:0.75rem;color:var(--text-dim);">Endurance</label>
+                  <label style="font-size:0.75rem;color:var(--text-dim);">Endurance Pool</label>
                   <div class="endurance-bar">
                     <div class="endurance-fill" id="combat-endurance-fill"></div>
                   </div>
@@ -341,7 +341,7 @@
                   </label>
                   <label class="posture-opt">
                     <input type="radio" name="combat-posture" value="withdrawn"> Withdrawn
-                    <span class="opt-hint">no offense · free reactions · recover 2 Endurance (up to your pool)</span>
+                    <span class="opt-hint">no offense · free reactions · recover 2 Endurance Pool points (up to your maximum)</span>
                   </label>
                 </div>
                 <button class="btn btn-secondary btn-sm combat-live-only" onclick="declarePosture()"
@@ -396,7 +396,7 @@
                     <option value="Very Hard">Very Hard (−2)</option>
                   </select>
                   <label class="checkbox-inline" style="margin:6px 0;">
-                    <input type="checkbox" id="strike-press"> Press — spend 1 Endurance for +1d6, drop lowest
+                    <input type="checkbox" id="strike-press"> Press — spend 1 Endurance Pool point for +1d6, drop lowest
                   </label>
                   <label class="checkbox-inline" style="margin:6px 0;">
                     <input type="checkbox" id="strike-final-blow">
@@ -412,7 +412,7 @@
                 <div id="combat-form-react" class="combat-sub-form hidden">
                   <div class="sub-form-title">React</div>
                   <p class="card-help">
-                    One reaction per incoming action. At 0 Endurance only Absorb is available.
+                    One reaction per incoming action. At 0 Endurance Pool only Absorb is available.
                   </p>
                   <div class="combat-action-row" style="margin-bottom:6px;">
                     <button class="btn btn-secondary btn-sm" onclick="performReact('dodge')"

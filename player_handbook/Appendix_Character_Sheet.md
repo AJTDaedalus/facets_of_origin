@@ -101,7 +101,7 @@ Leave blank if your character has no magic. Consult the Appendix: Magic Domain C
 
 | Field | Value |
 |---|---|
-| Endurance (current / max) — max is 4 + Constitution modifier + Endurance skill rank | |
+| Endurance Pool (current / max) — max is 4 + Constitution modifier + Endurance skill rank | |
 | Armor Type | |
 | Armor Downgrade Budget Remaining This Scene | |
 | Active Conditions | |

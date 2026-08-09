@@ -38,7 +38,7 @@ A studious young mage. Entirely absorbed in books, magical theory, and intellect
 **Skills:** Lore (Practiced, +1) | **Sparks:** 3
 **Magic Domain:** Inscription
 **Specialty:** Artificers' Guild technical records — Standard becomes Easy when directly applicable
-**Endurance:** 3 (base 4, Constitution -1)
+**Endurance Pool:** 3 (base 4, Constitution -1)
 
 *When Zahna rolls Knowledge for a lore question: 2d6 +1 (Knowledge) +1 (Lore skill) = 2d6+2*
 
@@ -69,7 +69,7 @@ A strong warrior with a genuine heart. Considers himself a defender of the weak.
 **Primary Facet:** Body | **Background:** City Watch Veteran
 **Skills:** Combat (Practiced, +1), Endurance (Novice, +0) | **Sparks:** 3
 **Specialty:** City Watch protocols and criminal behavior — Standard becomes Easy when directly applicable
-**Endurance:** 5 (base 4, Constitution +1)
+**Endurance Pool:** 5 (base 4, Constitution +1)
 
 *When Mordai rolls a Strike: 2d6 +1 (Strength) +1 (Combat skill) = 2d6+2*
 
@@ -98,7 +98,7 @@ Profoundly, almost philosophically lazy. Exceptionally nimble. Prefers to accomp
 **Primary Facet:** Body | **Background:** Wandering Disciple
 **Skills:** Finesse (Practiced, +1), Stealth (Novice, +0) | **Sparks:** 3
 **Specialty:** Monastery training and movement arts — Standard becomes Easy when directly applicable
-**Endurance:** 3 (base 4, Constitution -1)
+**Endurance Pool:** 3 (base 4, Constitution -1)
 
 *When Zulnut picks a lock: 2d6 +1 (Dexterity) +1 (Finesse skill) = 2d6+2*
 
@@ -169,5 +169,5 @@ Zahna rolls 2d6+2 (Knowledge +1, Lore +1) at Easy (+1), total modifier +3, and g
 1. Combat runs in **exchanges** — everyone picks their move at once and the whole beat resolves together. No turn order, no waiting.
 2. Each exchange you declare a **Posture** — the stance you are taking for that beat (Aggressive, Measured, Defensive, or Withdrawn).
 3. Attacking is a **Strike** — the same 2d6 roll (see "Hit something," above).
-4. When something attacks you, you may **react** — one reaction per incoming attack, paid for from your Endurance. At 0 Endurance you can only take the hit.
+4. When something attacks you, you may **react** — one reaction per incoming attack, paid for from your Endurance Pool. At 0 you can only take the hit.
 5. Everything else: Chapter III.3 — the same 2d6 roll.

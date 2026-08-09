@@ -91,7 +91,7 @@ enemy:
     weaknesses, Zahna's glyph, exploitation of its fixed patrol logic.
     A straight fight is survivable but very expensive — G1 confirms this by
     sim: the by-the-book party wins essentially every time, but only after
-    several exchanges and real Spark/Endurance expenditure.
+    several exchanges and real Spark and Endurance Pool expenditure.
 
     Joint weakness: its attack_modifier can be reduced by successful Maneuvers
     targeting specific joints. Each successful joint Maneuver (10+) reduces

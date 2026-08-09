@@ -177,7 +177,7 @@ Party Strength is the sum of all participating characters' `career_advances`. Th
 
 Mooks need only four things: an attack modifier, a fictional description, an armor decision, and a TR number. They do not have Resolve. They do not have individual Condition tracks. Any successful Strike (7+) removes one — an armored Mook takes a full success (10+).
 
-**What makes a Mook dangerous is volume.** Three Mooks attacking simultaneously each demand a reaction decision. Absorbing a Mook attack costs no Endurance — but it lands a Tier 1 Condition, and Winded (−1 to your next roll) or Off-Balance (your next reaction costs 1 additional Endurance) is exactly the handicap a character cannot afford in the same exchange a Named NPC's Tier 2 attack comes in. Mook chip damage defeats no one; it degrades the reactions that matter.
+**What makes a Mook dangerous is volume.** Three Mooks attacking simultaneously each demand a reaction decision. Absorbing a Mook attack costs no Endurance Pool points — but it lands a Tier 1 Condition, and Winded (−1 to your next roll) or Off-Balance (your next reaction costs 1 additional Endurance Pool point) is exactly the handicap a character cannot afford in the same exchange a Named NPC's Tier 2 attack comes in. Mook chip damage defeats no one; it degrades the reactions that matter.
 
 **A Mook-only encounter must carry a clock or an objective.** Pure Mook attrition cannot lose — the simulation record is unambiguous — because the party can always recover faster than chip damage accumulates. What makes a Mook fight matter is what the Mooks are *for*: the ritual finishing behind them, the gate closing, the reinforcements a Threat Clock is counting down, the prisoner being dragged away. Give every Mook-only fight a stake the uncontested-exchange rule can advance (see *The Exchange*, Chapter III.3), and the fight is about time, not survival.
 
@@ -216,7 +216,7 @@ Enemy Techniques are the "feel distinct" line above made concrete. These three a
   # enemy's usual tier); each target reacts separately.
 ```
 
-A reaction-economy attack: it trades one heavy blow for a demand on everybody's Endurance in the same exchange. Strongest alongside a second enemy whose Tier 2 is arriving simultaneously — the chip degrades the reactions that matter. Reskin freely: a sweeping tail, a volley, a shove through the whole line.
+A reaction-economy attack: it trades one heavy blow for a demand on everybody's Endurance Pool in the same exchange. Strongest alongside a second enemy whose Tier 2 is arriving simultaneously — the chip degrades the reactions that matter. Reskin freely: a sweeping tail, a volley, a shove through the whole line.
 
 **Telegraphed Finisher** — the visible killing blow.
 
@@ -236,7 +236,7 @@ This is the incoming-Condition selection rule (III.3) sharpened into a signature
   techniques: [sapping_strike]
   # Sapping Strike: its attacks drain the tank instead of landing a
   # Condition — a hit that lands (Absorb, or a failed reaction) costs
-  # the target 2 Endurance instead of the Condition tier. A partial
+  # the target 2 Endurance Pool points instead of the Condition tier. A partial
   # reaction halves it to 1.
 ```
 
@@ -454,7 +454,7 @@ Every encounter exists to serve the narrative. Ask: what does this fight (or pot
 
 ### Step 2: Pick a difficulty feel.
 
-- **Skirmish** — The party should win. This encounter taxes a few Endurance points and establishes the threat. Use when: introducing a new enemy type, pacing between major beats, rewarding players for good preparation.
+- **Skirmish** — The party should win. This encounter taxes a few Endurance Pool points and establishes the threat. Use when: introducing a new enemy type, pacing between major beats, rewarding players for good preparation.
 - **Standard** — A real fight. Someone will take conditions. Sparks will be spent. This is the default difficulty for most encounters. Use when: the stakes matter and the outcome is uncertain.
 - **Hard** — Someone might go down. Requires smart posture choices and possibly a lateral solution. Use when: the climax of an arc, protecting something important, facing a worthy adversary.
 - **Deadly** — The party should NOT fight this straight. This encounter exists to be solved, circumvented, or fled from. If they fight it and win, that's a story they'll tell forever. Use when: the Big Bad, a force of nature, a fight that should feel impossible.
@@ -469,7 +469,7 @@ For Standard and above, design at least one way the party can shortcut the encou
 
 ### Step 5: Sanity check.
 
-Run through one exchange mentally. Does the first exchange feel dangerous but survivable? Can the party's tank absorb two hits? Can the fragile character contribute without dying immediately? If yes, you're good. If the math says "party wipe in exchange 1," dial it back. If the math says "party wins without spending Endurance," dial it up.
+Run through one exchange mentally. Does the first exchange feel dangerous but survivable? Can the party's tank absorb two hits? Can the fragile character contribute without dying immediately? If yes, you're good. If the math says "party wipe in exchange 1," dial it back. If the math says "party wins without spending Endurance Pool points," dial it up.
 
 > **MM Note — The golden rule**
 >

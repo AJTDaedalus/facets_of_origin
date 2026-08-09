@@ -257,7 +257,7 @@ Online sessions have a different energy than in-person ones. This is not a faili
 
 **Managing cross-talk.** Online platforms flatten conversation. Two people talking at once produces noise, not banter. Develop a light hand-raising or queue system for tense scenes. In relaxed moments, let it be messy — some crosstalk is healthy.
 
-**Use the digital tools.** Facets of Origin is designed for digital play. The software handles simultaneous posture declaration, dice rolling, character state, and Endurance tracking. Let it do its job. The less time you spend on logistics, the more time you spend on story.
+**Use the digital tools.** Facets of Origin is designed for digital play. The software handles simultaneous posture declaration, dice rolling, character state, and Endurance Pool tracking. Let it do its job. The less time you spend on logistics, the more time you spend on story.
 
 **The chat channel is your friend.** Players can use text chat to communicate in-character side conversations, pass notes, react to events without interrupting narration. Encourage this. It adds a layer of engagement that doesn't exist at a physical table.
 

@@ -273,24 +273,15 @@
 - [MM2 — The Tools Tab](../mm_manual/MM2_Session_Design.md#the-tools-tab)
 - [MM5 — Encounter Recipe Table (PS 3 — simulation-validated)](../mm_manual/MM5_Quick_Reference.md#encounter-recipe-table-ps-3--simulation-validated)
 
-## Endurance
+## Endurance Pool
 
 *Defined in [III.3](III.3_Combat.md).*
 
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.4 — What Is a Facet?](II.4_Character_Creation_Facets.md#what-is-a-facet)
-- [II.4a — Skills of the Body](II.4a_Character_Creation_Facet_Body.md#skills-of-the-body)
-- [II.4a — Iron Branch](II.4a_Character_Creation_Facet_Body.md#iron-branch)
-- [II.5 — Body Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#body-facet-backgrounds)
-- [II.6 — Complete Skill Reference](II.6_Character_Creation_Skills.md#complete-skill-reference)
-- [II.6 — Skills of the Body](II.6_Character_Creation_Skills.md#skills-of-the-body)
-- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
-- [III.3 — Endurance](III.3_Combat.md#endurance)
+- [III.3 — Endurance Pool](III.3_Combat.md#endurance-pool)
 - [III.3 — Calculating Your Endurance Pool](III.3_Combat.md#calculating-your-endurance-pool)
-- [III.3 — Running Out of Endurance](III.3_Combat.md#running-out-of-endurance)
-- [III.3 — Recovering Endurance](III.3_Combat.md#recovering-endurance)
-- [III.3 — Endurance](III.3_Combat.md#endurance)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
+- [III.3 — An Empty Endurance Pool](III.3_Combat.md#an-empty-endurance-pool)
+- [III.3 — Recovering Your Endurance Pool](III.3_Combat.md#recovering-your-endurance-pool)
+- [III.3 — Endurance Pool](III.3_Combat.md#endurance-pool)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
 - [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
@@ -300,7 +291,7 @@
 - [MM1 — Step 2: Pick a difficulty feel.](../mm_manual/MM1_Encounters_and_Enemies.md#step-2-pick-a-difficulty-feel)
 - [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
 - [MM4 — Practical Adjustments](../mm_manual/MM4_Running_the_Table.md#practical-adjustments)
-- [MM5 — Endurance](../mm_manual/MM5_Quick_Reference.md#endurance)
+- [MM5 — Endurance Pool](../mm_manual/MM5_Quick_Reference.md#endurance-pool)
 
 ## Exchange
 
@@ -614,7 +605,7 @@
 - [MM5 — Postures](../mm_manual/MM5_Quick_Reference.md#postures)
 - [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — Endurance](../mm_manual/MM5_Quick_Reference.md#endurance)
+- [MM5 — Endurance Pool](../mm_manual/MM5_Quick_Reference.md#endurance-pool)
 
 ## Press
 
@@ -667,7 +658,7 @@
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
-- [MM5 — Endurance](../mm_manual/MM5_Quick_Reference.md#endurance)
+- [MM5 — Endurance Pool](../mm_manual/MM5_Quick_Reference.md#endurance-pool)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
@@ -950,7 +941,7 @@
 
 - [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
 - [III.2 — In Play: The Mill at Millhaven](III.2_Adventuring.md#in-play-the-mill-at-millhaven)
-- [III.3 — Recovering Endurance](III.3_Combat.md#recovering-endurance)
+- [III.3 — Recovering Your Endurance Pool](III.3_Combat.md#recovering-your-endurance-pool)
 - [MM2 — Hazards as a Pacing Tool](../mm_manual/MM2_Session_Design.md#hazards-as-a-pacing-tool)
 
 ## Threat Rating
@@ -1010,7 +1001,7 @@
 - [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
 - [MM5 — Armor (PC downgrade budget)](../mm_manual/MM5_Quick_Reference.md#armor-pc-downgrade-budget)
-- [MM5 — Endurance](../mm_manual/MM5_Quick_Reference.md#endurance)
+- [MM5 — Endurance Pool](../mm_manual/MM5_Quick_Reference.md#endurance-pool)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
 ## Weapon

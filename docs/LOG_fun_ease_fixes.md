@@ -1058,6 +1058,49 @@ anything unexpected.
   available") in shorter form; no new rule wording introduced.
 - **Commands:** `python -m tools.build_index`; docs suite → 32 passed.
 
+### T5.3 — "Endurance Pool" qualifier (C-6, D13) (2026-08-09)
+
+- **Rule applied:** every POOL mention prints "Endurance Pool"; the SKILL
+  stays bare "Endurance"; identifiers/keys (yaml `endurance:`, `.fof`
+  fields, `updateEnduranceBar`, `endurance_current`) untouched per D13.
+  Point-spends read "N Endurance Pool point(s)"; cost-modifier cells read
+  "±1 Endurance Pool cost"; recovery reads "recover 2 Endurance Pool
+  points, up to your maximum" (the old "up to your pool" tail is circular
+  once the points themselves are pool points — synced at every carrier).
+- **Disposition table (119 replacements, 25 files; scripted, exact-match,
+  count-checked — script in session scratchpad `t53_endurance_pool.py`):**
+  | Surface | Pool-sense hits → qualified | Notes |
+  |---|---|---|
+  | `III.3_Combat.md` | 52 (in 48 edits) | §Endurance heading → "Endurance Pool"; "Running Out of Endurance" → "An Empty Endurance Pool"; "Recovering Endurance" → "Recovering Your Endurance Pool"; quick-ref "### Endurance" → "### Endurance Pool"; posture/reaction/Off-Balance tables; Press; example box "**5 Endurance**" → "**Endurance Pool 5**"; Table III.3–16 app-mapping row; vignette speech re-voiced naturally ("I have three points in the pool", "2 from the pool", "One point left", "An empty Endurance Pool means Absorb…") |
+  | `Quick_Start.md` | 4 | three pregen "**Endurance:**" stat lines → "**Endurance Pool:**"; primer line 4 |
+  | `MM5_Quick_Reference.md` | 10 | "## Endurance" → "## Endurance Pool"; posture cells; Press; 0-pool lines; **Recovery line also gained the missing "up to the maximum" cap** (T3.5 canon; pre-existing compression gap fixed here since the line was in hand) |
+  | `Glossary.md` | 6 | headword **Endurance → Endurance Pool** (same alphabetical slot) + "Distinct from the Endurance skill (Chapter II.6)"; Off-Balance, Posture, Press, Reaction entries |
+  | `MM1` | 6 | Mook chip paragraph, Flurry note, Sapping Strike template comment, Skirmish tax, five-minute check |
+  | `MM2` | 3 | boss-fight example, digital-tool bullet ("**Endurance Pool tracking.**"), End Combat box |
+  | `MM3` | 3 | resource-tax list + both climax-econ mentions |
+  | `MM4` | 1 | digital-tools bullet |
+  | `I_Introduction` | 1 | paper-play sentence |
+  | `II.3` | 1 | 7–9 cost example |
+  | `II.4` | 2 | Use-field box; Last Stand Pinnacle example |
+  | `II.4a` + `facet.yaml` mirror | 2 | Shadowstep `normal:` line (both homes, same wording) |
+  | `Appendix_Character_Sheet.md` | 1 | combat block label → "Endurance Pool (current / max)…" (skill row at :59 stays bare) |
+  | `facet.yaml` (display strings/comments only) | 7 | `endurance_floor_rule` prose, Off-Balance `description:` (app-displayed), Press/Defensive comments; **no identifier renamed** (no display-name field exists for the pool — prose strings are the display surface) |
+  | app (`websocket.py`, `play.js`, `tools.js`, `app.js`, `index.html`) | 12 | Press error message, Endurance bar label + chip title, session-reset text, rules cards, posture hint |
+  | `enemies/` ×2, `bestiary/B3` ×2, `characters/` ×5, `spec/examples/` ×1 | 10 | conduct/notes prose (tactics not rendered into stat blocks — bestiary regen no-diff confirmed) |
+- **Kept bare (audited post-edit — every remaining hit dispositioned):**
+  skill-sense only: II.6 skill entry + list; II.4a Body skill table/Technique
+  entries ("Endurance roll"); II.5 secondary-skill lines; III.2 Tier-2
+  treatment ("Endurance to push through it"); sheet skill row; QS/III.3
+  "Endurance (Novice/Practiced…)" rank mentions; yaml skill `name:` +
+  Iron Will/hardship descriptions; plus code identifiers and dev comments.
+- **Test touchpoint:** `test_docs_consistency.py` INV-2
+  `CHARACTER_SHEET_FIELDS` label updated to the new sheet label (caught by
+  the suite on first run — the mapping guards label drift, as designed).
+- **Commands:** script → OK 119/119; `build_bestiary` + `--check` (0 files
+  changed — no stat-block churn); `build_index`; `build_table_register`
+  (76/72 — box title "Endurance Pools" re-registered); `node --check` ×3 OK;
+  docs suite → 32 passed; websocket/character/combat suites → 487 passed.
+
 ---
 
 ## Escalations

@@ -2,7 +2,7 @@
 
 Six guards come through the door at once. Mordai is already moving, Zahna is already talking, and Zulnut has already decided he is going out the window — and none of them is waiting for permission, because a fight is not a queue.
 
-Everything in this chapter follows from that. Everyone declares at once. Everyone acts at once. What you spend is Endurance, what you take is Conditions, and what you wear down in the thing across the room is its Resolve. The dice are the same two dice as every other chapter.
+Everything in this chapter follows from that. Everyone declares at once. Everyone acts at once. What you spend is your Endurance Pool, what you take is Conditions, and what you wear down in the thing across the room is its Resolve. The dice are the same two dice as every other chapter.
 
 ## The Shape of a Fight
 
@@ -10,7 +10,7 @@ A fight here is a conversation conducted at speed, and everybody speaks at the s
 
 Combat in Facets of Origin is structured around **exchanges** — dramatic beats where everyone acts and reacts simultaneously. There is no initiative order, no waiting for your moment while someone else's moment stretches on. Every participant in a fight is present every exchange: choosing a posture, taking action, responding to incoming threats. The whole thing resolves as a single beat of fiction, then the MM narrates what actually happened.
 
-The central resource in combat is **Endurance** — your physical stamina, the reserve of effort that lets you press hard or react quickly when it matters. Endurance is not hit points; it is how much you have in the tank. A character with no Endurance left is not bleeding out — they are exhausted, overextended, outmaneuvered. They can still fight. They are just fighting on grit alone.
+The central resource in combat is your **Endurance Pool** — your physical stamina, the reserve of effort that lets you press hard or react quickly when it matters. The Endurance Pool is not hit points; it is how much you have in the tank. A character with an empty pool is not bleeding out — they are exhausted, overextended, outmaneuvered. They can still fight. They are just fighting on grit alone.
 
 **Conditions** replace hit points for player characters as the measure of how a fight is going. They are named states with immediate mechanical and fictional weight: you are not "at 14 HP," you are Staggered — your offensive rolls suffer. Conditions are concrete, narratively rich, and temporary by design. They resolve when the fiction resolves them, not on a countdown.
 
@@ -20,9 +20,9 @@ The goal is a combat system where every participant is engaged every moment, whe
 
 ---
 
-## Endurance
+## Endurance Pool
 
-**Endurance** is your combat stamina. You spend it to react to incoming attacks and to press hard on offense. When you run out, your options narrow sharply.
+Your **Endurance Pool** is your combat stamina. You spend it to react to incoming attacks and to press hard on offense. When you run out, your options narrow sharply.
 
 ### Calculating Your Endurance Pool
 
@@ -39,30 +39,30 @@ The goal is a combat system where every participant is engaged every moment, whe
 | Endurance skill: Expert | +2 |
 | Endurance skill: Master | +3 |
 
-A character with no particular investment in Constitution or the Endurance skill has a pool of 4. A heavily invested character tops out at 8. The range in practice is 3 (fragile but fast) to 8 (a deliberate, durable choice).
+A character with no particular investment in Constitution or the Endurance skill has an Endurance Pool of 4. A heavily invested character tops out at 8. The range in practice is 3 (fragile but fast) to 8 (a deliberate, durable choice).
 
-> **Example — Endurance pools**
+> **Example — Endurance Pools**
 >
 >
-> Mordai — Constitution 3 (+1), Endurance Novice (+0): **5 Endurance**
-> Zahna — Constitution 1 (−1), Endurance Novice (+0): **3 Endurance**
-> Zulnut — Constitution 1 (−1), Endurance Novice (+0): **3 Endurance**
+> Mordai — Constitution 3 (+1), Endurance Novice (+0): **Endurance Pool 5**
+> Zahna — Constitution 1 (−1), Endurance Novice (+0): **Endurance Pool 3**
+> Zulnut — Constitution 1 (−1), Endurance Novice (+0): **Endurance Pool 3**
 
-### Running Out of Endurance
+### An Empty Endurance Pool
 
-When your Endurance hits 0, you cannot spend it on reactions. You may still declare Postures and attempt to Dodge or Parry, but with nothing in the tank you cannot pay the cost — **Absorb** is your only reaction option. Conditions you Absorb land at their normal tier; there is no extra penalty for taking them on an empty tank. You remain in the fight until Conditions remove you.
+When your Endurance Pool hits 0, you cannot spend it on reactions. You may still declare Postures and attempt to Dodge or Parry, but with nothing in the tank you cannot pay the cost — **Absorb** is your only reaction option. Conditions you Absorb land at their normal tier; there is no extra penalty for taking them on an empty tank. You remain in the fight until Conditions remove you.
 
-Running on empty is still dangerous — every incoming Condition now lands in full, because you have no Endurance to buy a Dodge or a Parry that might have softened it. Your armor still helps (see Armor), but your reactive options are gone until you recover.
+Running on empty is still dangerous — every incoming Condition now lands in full, because you have nothing left in the pool to buy a Dodge or a Parry that might have softened it. Your armor still helps (see Armor), but your reactive options are gone until you recover.
 
-### Recovering Endurance
+### Recovering Your Endurance Pool
 
-**Withdrawn posture** restores 2 Endurance at the end of the exchange, **up to your pool** — recovery never carries you past your maximum. This requires giving up all offensive action for that beat — you are catching your breath, finding your footing, creating space between yourself and the pressure.
+**Withdrawn posture** restores 2 Endurance Pool points at the end of the exchange, **up to your maximum** — recovery never carries you past it. This requires giving up all offensive action for that beat — you are catching your breath, finding your footing, creating space between yourself and the pressure.
 
 **The uncontested exchange.** An exchange in which no player character takes an offensive action is **uncontested**: the situation advances for free. The MM may reposition the opposition, bring in reinforcements, progress a Threat Clock, or simply take the objective — no roll. Recovering is a real choice with a real price: while everyone catches their breath, the fight moves without them.
 
 > **MM Note — Withdrawn is a tempo move, not a permanent position**
 >
-> The uncontested-exchange rule is what makes that true at the table: a party that cycles Withdrawn to refill Endurance hands you the scene, one free advance at a time. You do not need to punish the players — just spend the exchange they gave you, visibly, and let them decide whether the trade is still worth it.
+> The uncontested-exchange rule is what makes that true at the table: a party that cycles Withdrawn to refill Endurance Pools hands you the scene, one free advance at a time. You do not need to punish the players — just spend the exchange they gave you, visibly, and let them decide whether the trade is still worth it.
 
 ---
 
@@ -78,7 +78,7 @@ A combat **exchange** is one dramatic beat — a moment of the fight where every
 
 3. **Actions and reactions are declared and resolved.** Each participant takes an offensive action, a support action, or passes. Targets of those actions may declare reactions. Rolls happen.
 
-4. **End-of-exchange cleanup.** Tier 1 Conditions clear. Withdrawn characters recover 2 Endurance, up to their pool.
+4. **End-of-exchange cleanup.** Tier 1 Conditions clear. Withdrawn characters recover 2 Endurance Pool points, up to their maximum.
 
 5. **The MM narrates the exchange as a single dramatic beat.** The dice have told you what happened mechanically; the MM tells you what it looked like.
 
@@ -98,12 +98,12 @@ Player Posture is declared blind. You do not know what your allies have committe
 
 | Posture | Offense | Reactions | Other |
 |---|---|---|---|
-| **Aggressive** | +1 to offensive rolls | +1 Endurance cost on your **first** reaction this exchange; every reaction after that costs the standard amount | You are pressing hard — and exposed for it, once, per exchange |
+| **Aggressive** | +1 to offensive rolls | +1 Endurance Pool cost on your **first** reaction this exchange; every reaction after that costs the standard amount | You are pressing hard — and exposed for it, once, per exchange |
 | **Measured** | No modifier | Standard cost | The baseline — flexible and uncommitted |
-| **Defensive** | −1 to offensive rolls | −1 Endurance cost per reaction (min 0) | Trading offensive presence for resilience |
-| **Withdrawn** | Cannot make offensive actions | All reactions are free | Recover 2 Endurance at end of exchange, up to your pool |
+| **Defensive** | −1 to offensive rolls | −1 Endurance Pool cost per reaction (min 0) | Trading offensive presence for resilience |
+| **Withdrawn** | Cannot make offensive actions | All reactions are free | Recover 2 Endurance Pool points at end of exchange, up to your maximum |
 
-**Aggressive:** You are driving the action. Everything you do this exchange hits harder and faster. The first hit that comes back at you costs extra to answer — you were over-committed for that opening — but you are not paying the surcharge over and over: every reaction after your first this exchange costs the standard amount. Useful when you have momentum and Endurance to spend; still costs you something when a single exchange throws several attacks your way at once.
+**Aggressive:** You are driving the action. Everything you do this exchange hits harder and faster. The first hit that comes back at you costs extra to answer — you were over-committed for that opening — but you are not paying the surcharge over and over: every reaction after your first this exchange costs the standard amount. Useful when you have momentum and Endurance Pool points to spend; still costs you something when a single exchange throws several attacks your way at once.
 
 **Measured:** The default. You have not handed your opponent an advantage. You have not bought yourself a discount, either. Measured posture is for when you want options.
 
@@ -149,11 +149,11 @@ What a success *does* depends on what you are Striking. Almost always, that is a
 
 ### Press
 
-Before rolling a Strike, you may spend **1 Endurance** to add 1d6 to the roll and drop the lowest die. This is the same mechanical effect as spending a Spark, drawing from a completely different resource — going in hard costs stamina.
+Before rolling a Strike, you may spend **1 Endurance Pool point** to add 1d6 to the roll and drop the lowest die. This is the same mechanical effect as spending a Spark, drawing from a completely different resource — going in hard costs stamina.
 
-**Press and Sparks stack.** You may spend 1 Endurance for Press and also spend a Spark on the same roll. A character who Presses and Sparks rolls 4d6 and drops the two lowest.
+**Press and Sparks stack.** You may spend 1 Endurance Pool point for Press and also spend a Spark on the same roll. A character who Presses and Sparks rolls 4d6 and drops the two lowest.
 
-Pressing when your Endurance is already low is a calculation. The dice improvement is real. So is the cost.
+Pressing when your Endurance Pool is already low is a calculation. The dice improvement is real. So is the cost.
 
 ---
 
@@ -184,7 +184,7 @@ The bonus applies to the ally's very next roll only, then expires. Bonuses from 
 
 ## Reactions
 
-When an opponent takes action against you, you may **react**. You may declare a maximum of **one reaction per incoming action**. Each reaction costs Endurance unless your Posture reduces the cost. If your Endurance is at 0, only Absorb is available — this is absolute, regardless of Posture: Withdrawn's free reactions and Defensive's reduced reaction cost only apply while you have at least 1 Endurance to spend. Aggressive posture's surcharge applies only to your first reaction of the exchange — see Postures, above.
+When an opponent takes action against you, you may **react**. You may declare a maximum of **one reaction per incoming action**. Each reaction costs Endurance Pool points unless your Posture reduces the cost. If your Endurance Pool is at 0, only Absorb is available — this is absolute, regardless of Posture: Withdrawn's free reactions and Defensive's reduced reaction cost only apply while you have at least 1 point to spend. Aggressive posture's surcharge applies only to your first reaction of the exchange — see Postures, above.
 
 The choice to react, and which reaction to use, is made after the attacker rolls but before any Condition is formally applied.
 
@@ -192,7 +192,7 @@ The choice to react, and which reaction to use, is made after the attacker rolls
 
 ### Dodge
 
-**Cost:** 1 Endurance
+**Cost:** 1 Endurance Pool point
 
 You move — out, aside, low — using speed and awareness to take yourself out of the path of what's coming.
 
@@ -210,7 +210,7 @@ You move — out, aside, low — using speed and awareness to take yourself out 
 
 ### Parry
 
-**Cost:** 1 Endurance
+**Cost:** 1 Endurance Pool point
 
 You meet force with force — interposing weapon, shield, or forearm to deflect rather than avoid.
 
@@ -226,19 +226,19 @@ Outcome tiers are the same as Dodge, flavored as deflection rather than avoidanc
 
 ### Absorb
 
-**Cost:** 0 Endurance
+**Cost:** 0 Endurance Pool points
 
-You do not react. You take the hit, accept the Condition, and remain composed. Absorb is the reaction for when Endurance is gone or better spent elsewhere — a calculation, not a failure.
+You do not react. You take the hit, accept the Condition, and remain composed. Absorb is the reaction for when the Endurance Pool is empty or better spent elsewhere — a calculation, not a failure.
 
 ---
 
 ### Intercept
 
-**Cost:** 2 Endurance
+**Cost:** 2 Endurance Pool points
 
 You step in front of an attack targeting an ally. You take the incoming action instead of them, then roll Dodge or Parry as normal.
 
-Intercepting is how you protect someone who cannot protect themselves — a mage mid-cast, someone whose low Endurance pool is about to become a serious problem.
+Intercepting is how you protect someone who cannot protect themselves — a mage mid-cast, someone whose low Endurance Pool is about to become a serious problem.
 
 You may Intercept **one incoming action per exchange**. Only one character may Intercept a given action — if two try to Intercept the same attack, the protected ally decides who steps in. You must be aware of the incoming action and physically able to reach the ally before declaring.
 
@@ -271,7 +271,7 @@ Applied by partial Strike successes (7–9). **Tier 1 Conditions clear automatic
 | Condition | Effect |
 |---|---|
 | **Winded** | −1 to your next roll |
-| **Off-Balance** | Your next reaction costs 1 additional Endurance |
+| **Off-Balance** | Your next reaction costs 1 additional Endurance Pool point |
 | **Shaken** | The MM may direct your next action — you flinch, hesitate, or briefly retreat |
 
 Tier 1 Conditions are the texture of a fight — they shift the next beat without defining the outcome.
@@ -506,7 +506,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Mordai:** "Aggressive."
 
-**Zulnut:** "Defensive." *(Quietly, to nobody in particular:)* "I have three Endurance."
+**Zulnut:** "Defensive." *(Quietly, to nobody in particular:)* "I have three points in the pool."
 
 **Zahna:** "Measured. I'm looking for an opening — something I can use."
 
@@ -536,11 +536,11 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Mordai:** "Parry."
 
-**MM:** "First reaction of the exchange, and you're Aggressive, so that's 1 Endurance plus the 1-Endurance Aggressive surcharge — 2 total. You drop from 5 to 3. Roll Combat."
+**MM:** "First reaction of the exchange, and you're Aggressive, so that's 1 from your Endurance Pool plus the 1-point Aggressive surcharge — 2 total. You drop from 5 to 3. Roll Combat."
 
 → Mordai rolls **2d6 + Strength (3 → +1) + Combat Practiced (+1)** and gets a **9**. Partial success.
 
-**MM:** "You catch the blow — the blade turns it — but the force behind that arm is not organic. A partial Parry knocks the incoming Tier 2 down one tier, so it lands as Tier 1: **Off-Balance**. Your next reaction costs 1 additional Endurance."
+**MM:** "You catch the blow — the blade turns it — but the force behind that arm is not organic. A partial Parry knocks the incoming Tier 2 down one tier, so it lands as Tier 1: **Off-Balance**. Your next reaction costs 1 additional Endurance Pool point."
 
 *Mordai staggers half a step. His arm is still working. He is not sure for how long.*
 
@@ -612,7 +612,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Mordai:** "Parry. I know what this costs."
 
-**MM:** "First reaction, still Aggressive — 2 Endurance. You go from 3 to 1. Roll."
+**MM:** "First reaction, still Aggressive — 2 from the pool. You go from 3 to 1. Roll."
 
 → Mordai rolls and gets a **7**. Partial success.
 
@@ -632,7 +632,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **MM:** "Third exchange. Postures."
 
-**Mordai:** "Aggressive. One Endurance left, and I'm spending it."
+**Mordai:** "Aggressive. One point left, and I'm spending it."
 
 **Zulnut:** "Measured."
 
@@ -642,13 +642,13 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Mordai:** "Press. I put everything into it."
 
-→ Mordai spends his last Endurance to Press: **3d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** at Easy difficulty (+1), drop the lowest, and gets an **11**. Full success. Mordai is now at **0 Endurance**.
+→ Mordai spends his last Endurance Pool point to Press: **3d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** at Easy difficulty (+1), drop the lowest, and gets an **11**. Full success. Mordai's Endurance Pool is now **empty**.
 
 **MM:** "Two more Resolve — that takes it to **2**. And 2 is a threshold." *The MM checks the stat block.* "The guardian changes. Its next blow won't have the weight the others did — but something else happens: it stops registering harm entirely. It's entered **Reduced Mode**. The subsystem that would notice the seam you've opened — notice it is Open at all — has shut down. It will never stop to close it now. It is running on something else, and none of you know what."
 
 *The light in its eyes flickers — not dimmer, exactly. Differently lit.*
 
-**MM:** "It reaches for you one more time, Mordai — weaker, but you're empty. No Endurance means Absorb is your only option."
+**MM:** "It reaches for you one more time, Mordai — weaker, but you're empty. An empty Endurance Pool means Absorb is your only option."
 
 **Mordai:** "I take it. I don't have a choice."
 
@@ -666,7 +666,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 ---
 
-**MM:** "The room is quiet. The guardian is kneeling. It is still watching the door — your door, the one you came in through. Mordai, you are at 0 Endurance and you're going to feel this tomorrow. Zahna, the glyph is on the floor."
+**MM:** "The room is quiet. The guardian is kneeling. It is still watching the door — your door, the one you came in through. Mordai, your Endurance Pool is empty and you're going to feel this tomorrow. Zahna, the glyph is on the floor."
 
 **Zahna:** "I inspect the glyph. Can I refine the patrol boundary now that the fight is over?"
 
@@ -696,7 +696,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 ---
 
-*(The fight ran the three exchanges the MM planned for, and it cost the party for it: Mordai emptied his Endurance to the last point and Pressed the final blow on fumes, Zulnut carried the last two exchanges because Mordai had nothing left to spend, and the glyph rewrote the room in a way nobody has fully reckoned with yet. That is the shape of a by-the-book Boss fight — a full party will grind down any Resolve pool eventually, but "eventually" is measured in spent resources and complications, not in a clean two-hit finish. Leaving it Open is what made it this fast; without that Easy opening — and with a guardian willing to spend an action closing it — the fight would have cost them another exchange and more Endurance than they had. The glyph on the floor will matter later. These things always do.)*
+*(The fight ran the three exchanges the MM planned for, and it cost the party for it: Mordai emptied his Endurance Pool to the last point and Pressed the final blow on fumes, Zulnut carried the last two exchanges because Mordai had nothing left to spend, and the glyph rewrote the room in a way nobody has fully reckoned with yet. That is the shape of a by-the-book Boss fight — a full party will grind down any Resolve pool eventually, but "eventually" is measured in spent resources and complications, not in a clean two-hit finish. Leaving it Open is what made it this fast; without that Easy opening — and with a guardian willing to spend an action closing it — the fight would have cost them another exchange and more Endurance Pool points than they had. The glyph on the floor will matter later. These things always do.)*
 
 ---
 
@@ -710,7 +710,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 3. Resolve actions → roll 2d6 + attribute + skill + difficulty + posture modifier
 4. Declare reactions to incoming actions
 5. Apply results — deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, note an enemy left Open
-6. End exchange: clear Tier 1 conditions, Withdrawn characters recover 2 Endurance (up to the pool)
+6. End exchange: clear Tier 1 conditions, Withdrawn characters recover 2 Endurance Pool points (up to the maximum)
 ```
 
 An exchange in which no PC took an offensive action is **uncontested** — the situation advances for free: the MM may reposition, reinforce, progress a clock, or take the objective, no roll.
@@ -724,7 +724,7 @@ An exchange in which no PC took an offensive action is **uncontested** — the s
 | Aggressive | +1 | +1, first reaction of the exchange only | — |
 | Measured | +0 | +0 | Baseline |
 | Defensive | -1 | -1 | — |
-| Withdrawn | No offense | Free (0) | Recover 2 Endurance at end of exchange, up to your pool |
+| Withdrawn | No offense | Free (0) | Recover 2 Endurance Pool points at end of exchange, up to your maximum |
 
 ### Reactions (1 per incoming action)
 
@@ -732,10 +732,10 @@ An exchange in which no PC took an offensive action is **uncontested** — the s
 
 | Reaction | Cost | Roll | Effect |
 |---|---|---|---|
-| Dodge | 1 Endurance | Dexterity | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
-| Parry | 1 Endurance | Weapon attribute + Combat | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
-| Absorb | 0 Endurance | No roll | Take the hit at full tier. Always available. |
-| Intercept | 2 Endurance | — | Take a hit meant for an ally — once per exchange; the protected ally decides who steps in. |
+| Dodge | 1 Endurance Pool point | Dexterity | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
+| Parry | 1 Endurance Pool point | Weapon attribute + Combat | 10+: avoid entirely. 7-9: reduce by one tier. 6-: full hit. |
+| Absorb | 0 Endurance Pool points | No roll | Take the hit at full tier. Always available. |
+| Intercept | 2 Endurance Pool points | — | Take a hit meant for an ally — once per exchange; the protected ally decides who steps in. |
 
 ### Strike Outcomes
 
@@ -789,11 +789,11 @@ Armor and partial reaction downgrades **do not stack** — apply the greater red
 
 Budget resets at **end of scene**, not exchange; two fights in one scene share it. When it's spent, Conditions land at full tier.
 
-### Endurance
+### Endurance Pool
 
 - Base: 4 + Constitution modifier + Endurance skill rank
-- 0 Endurance = Absorb only, regardless of Posture (Conditions land at their normal tier — your armor still helps; there's no extra penalty for an empty tank)
-- Press: spend 1 Endurance before Strike to add a d6 and drop the lowest
+- Endurance Pool at 0 = Absorb only, regardless of Posture (Conditions land at their normal tier — your armor still helps; there's no extra penalty for an empty tank)
+- Press: spend 1 Endurance Pool point before Strike to add a d6 and drop the lowest
 
 ### Your Five Numbers On Screen
 
@@ -803,7 +803,7 @@ The app tracks every combat number for you. Where each one lives:
 
 | Number | On screen |
 |---|---|
-| **Endurance** | the Endurance bar in the Combat panel |
+| **Endurance Pool** | the Endurance Pool bar in the Combat panel |
 | **Posture** | the Posture badge / "Declare Posture" selector |
 | **Conditions** | the Conditions row beneath your posture |
 | **Sparks** | the Spark pips at the top of the Play tab |

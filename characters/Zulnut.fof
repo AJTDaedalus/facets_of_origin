@@ -78,7 +78,7 @@ character:
   notes: >
     Dexterity 3 (+1) and Luck 3 (+1) are the defining axes — precise and
     fortunate, exceptional in exact moments, unremarkable everywhere else.
-    Constitution 1 gives Endurance pool of 3 (base 4 − 1). Zulnut is extremely
+    Constitution 1 gives an Endurance Pool of 3 (base 4 − 1). Zulnut is extremely
     fragile in a sustained fight. This is intentional: the character's answer
     to "what happens when you take a hit" is "don't."
 
@@ -88,7 +88,7 @@ character:
 
     Finesse roll: 2d6 + Dexterity (+1) + Finesse Practiced (+1) = 2d6+2.
     Dodge roll: 2d6 + Dexterity (+1) = 2d6+1.
-    Endurance pool: 3.
+    Endurance Pool: 3.
 
     All three Major modifiers are +0 — genuinely average in the broad sense.
     The character lives in the specifics.
