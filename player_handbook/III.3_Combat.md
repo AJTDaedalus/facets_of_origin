@@ -56,11 +56,13 @@ Running on empty is still dangerous — every incoming Condition now lands in fu
 
 ### Recovering Endurance
 
-**Withdrawn posture** restores 2 Endurance at the end of the exchange. This requires giving up all offensive action for that beat — you are catching your breath, finding your footing, creating space between yourself and the pressure.
+**Withdrawn posture** restores 2 Endurance at the end of the exchange, **up to your pool** — recovery never carries you past your maximum. This requires giving up all offensive action for that beat — you are catching your breath, finding your footing, creating space between yourself and the pressure.
+
+**The uncontested exchange.** An exchange in which no player character takes an offensive action is **uncontested**: the situation advances for free. The MM may reposition the opposition, bring in reinforcements, progress a Threat Clock, or simply take the objective — no roll. Recovering is a real choice with a real price: while everyone catches their breath, the fight moves without them.
 
 > **MM Note — Withdrawn is a tempo move, not a permanent position**
 >
-> Make it tactically costly: an aware opponent will advance, apply pressure elsewhere, or use the exchange to regroup their own forces. A fighter who Withdraws three exchanges in a row is buying time, not winning the fight, and the fiction should say so.
+> The uncontested-exchange rule is what makes that true at the table: a party that cycles Withdrawn to refill Endurance hands you the scene, one free advance at a time. You do not need to punish the players — just spend the exchange they gave you, visibly, and let them decide whether the trade is still worth it.
 
 ---
 
@@ -76,7 +78,7 @@ A combat **exchange** is one dramatic beat — a moment of the fight where every
 
 3. **Actions and reactions are declared and resolved.** Each participant takes an offensive action, a support action, or passes. Targets of those actions may declare reactions. Rolls happen.
 
-4. **End-of-exchange cleanup.** Tier 1 Conditions clear. Withdrawn characters recover 2 Endurance.
+4. **End-of-exchange cleanup.** Tier 1 Conditions clear. Withdrawn characters recover 2 Endurance, up to their pool.
 
 5. **The MM narrates the exchange as a single dramatic beat.** The dice have told you what happened mechanically; the MM tells you what it looked like.
 
@@ -97,7 +99,7 @@ Posture is declared blind. You do not know what your opponent has declared until
 | **Aggressive** | +1 to offensive rolls | +1 Endurance cost on your **first** reaction this exchange; every reaction after that costs the standard amount | You are pressing hard — and exposed for it, once, per exchange |
 | **Measured** | No modifier | Standard cost | The baseline — flexible and uncommitted |
 | **Defensive** | −1 to offensive rolls | −1 Endurance cost per reaction (min 0) | Trading offensive presence for resilience |
-| **Withdrawn** | Cannot make offensive actions | All reactions are free | Recover 2 Endurance at end of exchange |
+| **Withdrawn** | Cannot make offensive actions | All reactions are free | Recover 2 Endurance at end of exchange, up to your pool |
 
 **Aggressive:** You are driving the action. Everything you do this exchange hits harder and faster. The first hit that comes back at you costs extra to answer — you were over-committed for that opening — but you are not paying the surcharge over and over: every reaction after your first this exchange costs the standard amount. Useful when you have momentum and Endurance to spend; still costs you something when a single exchange throws several attacks your way at once.
 
@@ -700,8 +702,10 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 3. Resolve actions → roll 2d6 + attribute + skill + difficulty + posture modifier
 4. Declare reactions to incoming actions
 5. Apply results — deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, note an enemy left Open
-6. End exchange: clear Tier 1 conditions, Withdrawn characters recover 2 Endurance
+6. End exchange: clear Tier 1 conditions, Withdrawn characters recover 2 Endurance (up to the pool)
 ```
+
+An exchange in which no PC took an offensive action is **uncontested** — the situation advances for free: the MM may reposition, reinforce, progress a clock, or take the objective, no roll.
 
 ### Postures
 
@@ -712,7 +716,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 | Aggressive | +1 | +1, first reaction of the exchange only | — |
 | Measured | +0 | +0 | Baseline |
 | Defensive | -1 | -1 | — |
-| Withdrawn | No offense | Free (0) | Recover 2 Endurance at end of exchange |
+| Withdrawn | No offense | Free (0) | Recover 2 Endurance at end of exchange, up to your pool |
 
 ### Reactions (1 per incoming action)
 

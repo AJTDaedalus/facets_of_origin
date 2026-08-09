@@ -77,7 +77,7 @@ the full rule, follow the pointer.
 
 **Pinnacle Technique** — A powerful, character-defining ability outside the normal Technique tree, chosen at Major Advancement with MM approval; it should feel like the culmination of a demonstrated arc of play, not an item on a checklist. *(Chapter II.4)*
 
-**Posture (Aggressive/Measured/Defensive/Withdrawn)** — The broad tactical stance every combat participant declares simultaneously each exchange, before actions are chosen. Aggressive trades a first-reaction Endurance surcharge for +1 offense, Measured is the baseline, Defensive trades offense for cheaper reactions, and Withdrawn forgoes offense to recover 2 Endurance. *(Chapter III.3)*
+**Posture (Aggressive/Measured/Defensive/Withdrawn)** — The broad tactical stance every combat participant declares simultaneously each exchange, before actions are chosen. Aggressive trades a first-reaction Endurance surcharge for +1 offense, Measured is the baseline, Defensive trades offense for cheaper reactions, and Withdrawn forgoes offense to recover 2 Endurance, up to the pool maximum. *(Chapter III.3)*
 
 **Press** — Spending 1 Endurance before a Strike roll to add a d6 and drop the lowest die — the same mechanical effect as a Spark, drawn from a different resource, and stackable with one. *(Chapter III.3)*
 

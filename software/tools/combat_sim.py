@@ -773,9 +773,9 @@ def run_combat(
                 continue
             combat_module.end_exchange(pc.conditions, ruleset)
             if pc.posture == "withdrawn":
-                pc.endurance_current = min(
-                    pc.endurance_max,
-                    pc.endurance_current + combat_module.withdrawn_recovery_amount(ruleset),
+                # Up to the pool (D5) — the clamp is combat.py's rule.
+                pc.endurance_current = combat_module.apply_withdrawn_recovery(
+                    pc.endurance_current, pc.endurance_max, ruleset,
                 )
         for enemy in enemies:
             if not enemy.is_out:
@@ -784,9 +784,8 @@ def run_combat(
                     resolve_max = enemy.resolve + combat_module.enemy_armor_resolve_bonus(
                         enemy.armor, ruleset,
                     )
-                    enemy.resolve_current = min(
-                        resolve_max,
-                        enemy.resolve_current + combat_module.withdrawn_recovery_amount(ruleset),
+                    enemy.resolve_current = combat_module.apply_withdrawn_recovery(
+                        enemy.resolve_current, resolve_max, ruleset,
                     )
 
     # Timeout: draw (counted as loss)

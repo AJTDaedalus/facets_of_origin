@@ -1585,7 +1585,8 @@ magic:
 combat:
   endurance:
     base: 4
-    recovery_withdrawn: 2
+    recovery_withdrawn: 2   # recovered at end of exchange when Withdrawn,
+                            # up to your pool — never overfills (D5)
 
   # D5: the floor is absolute — it overrides Posture, not just the reaction's
   # base cost. Withdrawn's free_reactions and Defensive's reaction_cost_modifier

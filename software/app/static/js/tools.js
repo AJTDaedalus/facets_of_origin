@@ -219,7 +219,7 @@ function renderToolsRuleSummaries() {
         <li>Aggressive: +1 offense, +1 reaction cost</li>
         <li>Measured: baseline</li>
         <li>Defensive: -1 offense, -1 reaction cost</li>
-        <li>Withdrawn: no offense, free reactions, recover 2 End</li>
+        <li>Withdrawn: no offense, free reactions, recover 2 End (up to your pool)</li>
       </ul>
       <p style="margin-top:6px;"><strong>Reactions:</strong> Dodge (1 End, Dexterity), Parry (1 End, Strength+Combat),
          Absorb (0 End), Intercept (2 End, once per exchange)</p>

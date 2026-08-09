@@ -519,6 +519,51 @@ anything unexpected.
   in `app/game/enemy.py` remains); enemy/docs/sim/characterization/
   agentic suites → 97 + 90 + 128 passed.
 
+### T3.5 — Uncontested-exchange rule + Withdrawn cap (K-2, D5) (2026-08-08)
+
+- **Files:** `player_handbook/III.3_Combat.md`, `mm_manual/MM5_Quick_Reference.md`,
+  `mm_manual/MM1_Encounters_and_Enemies.md`, `software/facets/base/facet.yaml`,
+  `software/app/facets/schema.py` (EnduranceDef docstring),
+  `software/app/game/combat.py`, `software/app/game/session.py`,
+  `software/app/api/websocket.py`, `software/tools/combat_sim.py` (recovery
+  clamp callers), plus unlisted quick-ref carriers of "recover 2 Endurance":
+  `player_handbook/Glossary.md` (Posture), `player_handbook/Quick_Start.md`
+  (QS-4 posture row), `software/app/static/js/tools.js`,
+  `software/app/static/index.html`; `player_handbook/Index.md` (regen);
+  tests in `test_combat.py` + `test_websocket.py`.
+- **Red first:** 7 engine tests failed (`TestWithdrawnRecoveryCap` 4,
+  `TestUncontestedExchange` 3); the 3 WS tests hung on `receive_json` for
+  the not-yet-existing prompt (red by absence).
+- **Did (engine):** `apply_withdrawn_recovery(current, pool_max, ruleset)`
+  — recovery up to the pool, the clamp now a combat.py rule (WS handler and
+  both sim recovery sites switched off their inline `min()` copies);
+  `exchange_uncontested(offensive_actions)` — the rule's only home.
+- **Did (WS):** `Session.offensive_actions_this_exchange` set; marked by
+  the strike handler (post-validation — a missed Strike still contests),
+  the maneuver handler, and `enemy_strike` (an MM-recorded off-app Strike
+  contests too); cleared at `combat_start` and every `end_exchange`. On an
+  uncontested exchange the MM's own socket (only) receives
+  `uncontested_exchange` with the advance-for-free prompt.
+- **Did (text):** III.3 §Recovering Endurance gains "up to your pool" + the
+  new **uncontested exchange** rule paragraph; the Withdrawn MM Note
+  re-grounded on the rule (spend the exchange visibly, no punishing);
+  posture table, exchange step 4, and both in-chapter quick-ref spots
+  updated; MM5 exchange flow + posture card; MM1 §Mooks gains "A Mook-only
+  encounter must carry a clock or an objective" with the
+  attrition-cannot-lose rationale. facet.yaml `recovery_withdrawn` comment
+  states the cap (engine reads the clamp from `apply_withdrawn_recovery`).
+- **Register:** none — no phrase died; the old wording was extended, not
+  replaced ("recover 2 Endurance" remains true).
+- **Commands:** red 7+3 → engine 7 passed, WS 3 passed; docs suite 32
+  passed after `python -m tools.build_index`. FULL suite → **1436 passed**
+  (441s; 1421 at T3.1 → +4 T3.3 WS, +1 T3.4 xfail→pass and net test
+  changes, +7 T3.5 engine, +3 T3.5 WS).
+- **Session note:** execution was interrupted mid-T3.5 by a usage limit and
+  resumed; the in-flight diff was reviewed against the task spec before
+  completion. T3.6 text edits begun while the T3.5 full suite ran were
+  reverse-staged out (stash + inverse edits) so this commit stays
+  single-task; they are replayed in T3.6's own commit.
+
 ---
 
 ## Escalations

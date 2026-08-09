@@ -104,7 +104,9 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 3. Declare and resolve Actions (Strike / Maneuver / Support / Magic)
 4. Targets declare and resolve Reactions
 5. Apply results: deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, note an enemy left Open
-6. End of exchange: Tier 1 Conditions clear, Withdrawn recover 2 Endurance
+6. End of exchange: Tier 1 Conditions clear, Withdrawn recover 2 Endurance (up to the pool)
+
+An exchange with **no PC offensive action** is uncontested — the situation advances for free: reposition, reinforce, progress a clock, or take the objective. No roll.
 ```
 
 ---
@@ -118,7 +120,7 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 | **Aggressive** | +1 | +1 Endurance, first reaction of the exchange only | — |
 | **Measured** | +0 | +0 | Baseline |
 | **Defensive** | -1 | -1 Endurance (min 0) | — |
-| **Withdrawn** | No offense | Free (0) | Recover 2 Endurance end of exchange |
+| **Withdrawn** | No offense | Free (0) | Recover 2 Endurance end of exchange, up to the pool |
 
 ---
 

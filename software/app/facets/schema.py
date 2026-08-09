@@ -450,7 +450,9 @@ class EnduranceDef(BaseModel):
 
     Fields:
         base: Starting Endurance before Constitution and skill modifiers.
-        recovery_withdrawn: Endurance restored per exchange when posture is Withdrawn.
+        recovery_withdrawn: Endurance restored per exchange when posture is
+                            Withdrawn — up to the pool maximum (D5); the
+                            clamp lives in `combat.apply_withdrawn_recovery`.
     """
 
     base: int = 4

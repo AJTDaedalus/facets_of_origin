@@ -218,7 +218,7 @@ listed greps return the expected result; LOG updated.
   Accept: `grep -rn "tier1_immunity" enemies/ mm_manual/ bestiary/ facets/` → only
   the schema deprecation path remains.
 
-- [ ] **T3.5 — Uncontested-exchange rule + Withdrawn cap (K-2, D5).**
+- [x] **T3.5 — Uncontested-exchange rule + Withdrawn cap (K-2, D5).**
   Files: `player_handbook/III.3_Combat.md` (new rule + Withdrawn "up to your pool"),
   `mm_manual/MM5_Quick_Reference.md` (card line),
   `mm_manual/MM1_Encounters_and_Enemies.md` (Mook-only encounters must carry a

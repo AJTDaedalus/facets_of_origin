@@ -94,6 +94,13 @@ class GameSession:
     #: Final Blow, and a single shared slot meant one player's Strike silently
     #: destroyed the other's earned offer.
     pending_final_blows: dict[str, dict] = field(default_factory=dict)
+    #: Player names who took an offensive action (Strike, Maneuver, or an
+    #: MM-recorded enemy_strike) this exchange. Read by the end-exchange
+    #: handler through `combat.exchange_uncontested` (K-2/D5): an exchange
+    #: nobody contested lets the situation advance for free, and the MM
+    #: gets prompted to say so. Cleared at combat start and every
+    #: end-exchange.
+    offensive_actions_this_exchange: set[str] = field(default_factory=set)
     _character_dir: Path | None = field(default=None)
 
     def add_character(self, character: Character) -> None:

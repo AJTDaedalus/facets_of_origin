@@ -1680,6 +1680,60 @@ class TestCombatGameplayLoop:
             msg = ws.receive_json()
             assert "staggered" in msg["characters"]["Zahna"]["conditions"]
 
+    def test_uncontested_exchange_prompts_mm(self, client, mm_token, session_with_character):
+        """K-2/D5: an exchange with no PC offensive action is uncontested —
+        the MM gets a prompt that the situation advances for free."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            ws.send_json({"type": "end_exchange"})
+            msg = ws.receive_json()
+            assert msg["type"] == "exchange_ended"
+            prompt = ws.receive_json()
+            assert prompt["type"] == "uncontested_exchange"
+            assert "advance" in prompt["message"].lower()
+
+    def test_contested_exchange_no_prompt(self, client, mm_token, session_with_character):
+        """A Strike during the exchange contests it — no MM prompt, and the
+        tracker resets so the NEXT exchange is judged on its own actions."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+            sess = session_store.get(session_id)
+            # Simulate a PC having taken an offensive action this exchange.
+            sess.offensive_actions_this_exchange.add("Zahna")
+            ws.send_json({"type": "end_exchange"})
+            msg = ws.receive_json()
+            assert msg["type"] == "exchange_ended"
+            # Tracker cleared for the next exchange...
+            assert sess.offensive_actions_this_exchange == set()
+            # ...and no prompt follows: the next message on this socket is the
+            # next exchange's own broadcast, not a stale uncontested prompt.
+            ws.send_json({"type": "end_exchange"})
+            nxt = ws.receive_json()
+            assert nxt["type"] == "exchange_ended"
+
+    def test_strike_marks_exchange_contested(self, client, mm_token, session_with_character):
+        """The strike handler records the offensive action that contests
+        the exchange."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        player_token = create_session_token("Zahna", session_id)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._start_combat(ws)
+        with client.websocket_connect("/ws") as ws:
+            ws.send_json({"type": "auth", "token": player_token})
+            ws.receive_json()  # session_state
+            ws.send_json({"type": "strike", "attribute": "strength", "skill": "combat"})
+            ws.receive_json()  # roll broadcast
+            sess = session_store.get(session_id)
+            assert "Zahna" in sess.offensive_actions_this_exchange
+
     def test_withdrawn_endurance_recovery(self, client, mm_token, session_with_character):
         """Withdrawn posture recovers 2 Endurance at end of exchange."""
         session, _ = session_with_character

@@ -950,6 +950,7 @@
 
 - [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
 - [III.2 — In Play: The Mill at Millhaven](III.2_Adventuring.md#in-play-the-mill-at-millhaven)
+- [III.3 — Recovering Endurance](III.3_Combat.md#recovering-endurance)
 - [MM2 — Hazards as a Pacing Tool](../mm_manual/MM2_Session_Design.md#hazards-as-a-pacing-tool)
 
 ## Threat Rating

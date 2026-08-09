@@ -263,6 +263,30 @@ def withdrawn_recovery_amount(ruleset) -> int:
     return ruleset.combat.endurance.recovery_withdrawn
 
 
+def apply_withdrawn_recovery(current: int, pool_max: int, ruleset) -> int:
+    """Withdrawn's end-of-exchange recovery, **up to your pool** (III.3,
+    D5): returns the new Endurance value, clamped at `pool_max`. The clamp
+    is a rule — callers (the WS end-exchange handler, the simulator loop)
+    apply this function to their own Endurance field instead of re-deriving
+    `min(max, current + amount)` inline.
+    """
+    return min(pool_max, current + withdrawn_recovery_amount(ruleset))
+
+
+def exchange_uncontested(offensive_actions) -> bool:
+    """The uncontested exchange (III.3, K-2/D5): an exchange in which no
+    player character took an offensive action lets the situation advance
+    for free — the MM may reposition, reinforce, progress a clock, or take
+    the objective, no roll.
+
+    `offensive_actions` is one truthy/falsy entry per offensive action
+    considered (or per PC: "did they act offensively?"). This is the
+    rule's only home — the WS end-exchange handler and any sim series read
+    it from here, never re-derive it.
+    """
+    return not any(offensive_actions)
+
+
 # ---------------------------------------------------------------------------
 # Dice
 # ---------------------------------------------------------------------------

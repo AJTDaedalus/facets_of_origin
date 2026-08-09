@@ -751,6 +751,43 @@ class TestOpenTag:
         assert eased.total == baseline.total + 1
 
 
+class TestWithdrawnRecoveryCap:
+    """D5: Withdrawn recovers 2 Endurance, up to your pool — the clamp is
+    a rule and lives here, not re-derived by each caller."""
+
+    def test_recovery_clamps_at_pool(self, ruleset):
+        assert combat.apply_withdrawn_recovery(4, 5, ruleset) == 5
+
+    def test_recovery_full_amount_below_cap(self, ruleset):
+        assert combat.apply_withdrawn_recovery(1, 5, ruleset) == 3
+
+    def test_recovery_at_pool_stays_at_pool(self, ruleset):
+        assert combat.apply_withdrawn_recovery(5, 5, ruleset) == 5
+
+    def test_recovery_amount_read_from_ruleset(self, ruleset):
+        original = ruleset.combat.endurance.recovery_withdrawn
+        try:
+            ruleset.combat.endurance.recovery_withdrawn = 3
+            assert combat.apply_withdrawn_recovery(1, 8, ruleset) == 4
+        finally:
+            ruleset.combat.endurance.recovery_withdrawn = original
+
+
+class TestUncontestedExchange:
+    """K-2/D5: an exchange in which no PC took an offensive action lets the
+    situation advance for free — the MM may reposition, reinforce,
+    progress a clock, or take the objective, no roll."""
+
+    def test_no_participants_is_uncontested(self, ruleset):
+        assert combat.exchange_uncontested([]) is True
+
+    def test_all_defensive_is_uncontested(self, ruleset):
+        assert combat.exchange_uncontested([False, False, False]) is True
+
+    def test_single_offensive_action_contests(self, ruleset):
+        assert combat.exchange_uncontested([False, True, False]) is False
+
+
 class TestPvPOutcomesUnchanged:
     """K-6 scope guard: the Open merge touches only the enemy-target path.
     PC-vs-PC Strikes keep the tier outcomes (10+ = Tier 2, 7-9 = Tier 1)

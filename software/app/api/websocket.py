@@ -205,7 +205,7 @@ async def _dispatch(
     elif event_type == "clear_condition" and is_mm:
         await _handle_clear_condition(msg, session, session_id)
     elif event_type == "end_exchange" and is_mm:
-        await _handle_end_exchange(session, session_id)
+        await _handle_end_exchange(websocket, session, session_id)
     elif event_type == "combat_end" and is_mm:
         await _handle_combat_end(session, session_id)
     elif event_type == "support":
@@ -616,6 +616,7 @@ async def _handle_combat_start(msg: dict, session, session_id: str) -> None:
     scene. See `combat.armor_budget`.
     """
     state: dict = {}
+    session.offensive_actions_this_exchange.clear()
     for player_name, character in session.characters.items():
         character.endurance_current = character.endurance_max(session.ruleset)
         character.conditions = []
@@ -760,6 +761,9 @@ async def _handle_strike(
             return
 
     sparks_to_spend = _spend_sparks(character, sparks_requested)
+
+    # K-2/D5: a Strike — landed or not — contests the exchange.
+    session.offensive_actions_this_exchange.add(player_name)
 
     # Accept attribute/skill from client; default to strength/combat for backward compat
     attribute_id = str(msg.get("attribute_id", "strength"))
@@ -1085,8 +1089,11 @@ async def _handle_clear_condition(msg: dict, session, session_id: str) -> None:
     })
 
 
-async def _handle_end_exchange(session, session_id: str) -> None:
-    """MM signals end of exchange: clear Tier 1 conditions, apply Withdrawn recovery."""
+async def _handle_end_exchange(websocket, session, session_id: str) -> None:
+    """MM signals end of exchange: clear Tier 1 conditions, apply Withdrawn
+    recovery (up to the pool, D5), and prompt the MM when the exchange was
+    uncontested (K-2/D5). `websocket` is the MM's own socket — the
+    uncontested prompt goes only there, not to the table."""
     updates: dict = {}
     for player_name, character in session.characters.items():
         if character.endurance_current is None:
@@ -1100,11 +1107,14 @@ async def _handle_end_exchange(session, session_id: str) -> None:
         # III.3:219 — Intercept's once-per-exchange cap resets too.
         character.intercepts_this_exchange = 0
 
-        # Withdrawn endurance recovery (only if not striking, enforced by declare_posture)
+        # Withdrawn endurance recovery, up to the pool — the clamp is a rule
+        # (III.3/D5) and lives in combat.apply_withdrawn_recovery.
         if character.posture == "withdrawn":
-            max_end = character.endurance_max(session.ruleset)
-            recovery_amount = combat_module.withdrawn_recovery_amount(session.ruleset)
-            character.endurance_current = min(character.endurance_current + recovery_amount, max_end)
+            character.endurance_current = combat_module.apply_withdrawn_recovery(
+                character.endurance_current,
+                character.endurance_max(session.ruleset),
+                session.ruleset,
+            )
 
         updates[player_name] = {
             "conditions": list(character.conditions),
@@ -1118,6 +1128,20 @@ async def _handle_end_exchange(session, session_id: str) -> None:
     # a stale toast could commit against a later, different Strike (TODO T12).
     session.pending_final_blows.clear()
     await manager.broadcast(session_id, {"type": "exchange_ended", "characters": updates})
+
+    # K-2/D5: an exchange no PC contested lets the situation advance for
+    # free. The rule reads from combat.exchange_uncontested (its only home);
+    # this handler only relays the prompt to the MM who ended the exchange.
+    if combat_module.exchange_uncontested(session.offensive_actions_this_exchange):
+        await manager.send_to(websocket, {
+            "type": "uncontested_exchange",
+            "message": (
+                "No one took an offensive action this exchange — the situation "
+                "advances for free. Reposition, reinforce, progress a clock, "
+                "or take the objective. No roll."
+            ),
+        })
+    session.offensive_actions_this_exchange.clear()
 
 
 async def _handle_combat_end(session, session_id: str) -> None:
@@ -1303,6 +1327,9 @@ async def _handle_maneuver(
         return
 
     target_name = str(msg.get("target", ""))
+
+    # K-2/D5: a Maneuver is an offensive action — it contests the exchange.
+    session.offensive_actions_this_exchange.add(player_name)
 
     request, technique_step = _build_roll_request(character, msg, session.ruleset)
     result = resolve_roll(request, session.ruleset)
@@ -1684,6 +1711,10 @@ async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -
                        f"{', '.join(sorted(known_outcomes))}.",
         })
         return
+
+    # K-2/D5: an MM-recorded Strike outcome is a PC offensive action — it
+    # contests the exchange even when the roll happened off-app.
+    session.offensive_actions_this_exchange.add(f"enemy_strike:{tracker_key}")
 
     # Mooks have no Resolve pool — one Strike removes them (10+ if armoured).
     if enemy.tier == "mook":

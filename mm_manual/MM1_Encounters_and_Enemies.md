@@ -209,6 +209,8 @@ Mooks need only four things: an attack modifier, a fictional description, an arm
 
 **What makes a Mook dangerous is volume.** Three Mooks attacking simultaneously each demand a reaction decision. Absorbing a Mook attack costs no Endurance — but it lands a Tier 1 Condition, and Winded (−1 to your next roll) or Off-Balance (your next reaction costs 1 additional Endurance) is exactly the handicap a character cannot afford in the same exchange a Named NPC's Tier 2 attack comes in. Mook chip damage defeats no one; it degrades the reactions that matter.
 
+**A Mook-only encounter must carry a clock or an objective.** Pure Mook attrition cannot lose — the simulation record is unambiguous — because the party can always recover faster than chip damage accumulates. What makes a Mook fight matter is what the Mooks are *for*: the ritual finishing behind them, the gate closing, the reinforcements a Threat Clock is counting down, the prisoner being dragged away. Give every Mook-only fight a stake the uncontested-exchange rule can advance (see *The Exchange*, Chapter III.3), and the fight is about time, not survival.
+
 **Building a Mook:**
 1. Assign an attack modifier (usually −1 to +1 for cannon fodder; up to +2 for elite troops)
 2. Give them one sentence of fictional description — what do they look like, how do they move?
