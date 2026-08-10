@@ -216,12 +216,12 @@ function renderToolsRuleSummaries() {
       <p><strong>Exchange Flow:</strong> Declare Posture &rarr; Reveal &rarr; Actions &rarr; Reactions &rarr; Conditions &rarr; End Exchange</p>
       <p style="margin-top:6px;"><strong>Postures:</strong></p>
       <ul style="list-style:disc;padding-left:20px;">
-        <li>Aggressive: +1 offense, +1 reaction cost</li>
+        <li>Aggressive: +1 offense, +1 reaction cost on your first reaction this exchange only</li>
         <li>Measured: baseline</li>
-        <li>Defensive: -1 offense, -1 reaction cost</li>
+        <li>Defensive: -1 offense, -1 reaction cost (min 0)</li>
         <li>Withdrawn: no offense, free reactions, recover 2 End (up to your pool)</li>
       </ul>
-      <p style="margin-top:6px;"><strong>Reactions:</strong> Dodge (1 End, Dexterity), Parry (1 End, Strength+Combat),
+      <p style="margin-top:6px;"><strong>Reactions:</strong> Dodge (1 End, Dexterity), Parry (1 End, weapon attribute + Combat),
          Absorb (0 End), Intercept (2 End, once per exchange)</p>
       <p><strong>0 Endurance Pool:</strong> Absorb only.</p>
       <p style="margin-top:6px;"><strong>Strike vs an enemy:</strong> 10+ depletes 2 Resolve and may leave the enemy
@@ -251,8 +251,9 @@ function renderToolsRuleSummaries() {
         <li>Standard: Standard/Hard/Very Hard</li>
         <li>Prismatic: Hard/VH/VH (reach-Sparks cannot move the difficulty; dice-Sparks work normally)</li>
       </ul>
-      <p style="margin-top:6px;"><strong>Spark Uses:</strong> Improve Roll (add die, drop lowest),
-         Ease Focused Major</p>
+      <p style="margin-top:6px;"><strong>Spark Uses:</strong> Improve Roll (add die, drop lowest, any roll);
+         or buy reach in exactly two cases &mdash; one pre-Technique Significant-scope attempt at normal
+         difficulty, or ease a Focused domain's Major working one step</p>
       <p><strong>Pre-Technique:</strong> Minor scope only. The scope restriction is the whole limitation
          &mdash; there is no extra difficulty step.</p>
       <p><strong>Second domain:</strong> one difficulty step harder than normal for that domain
@@ -276,9 +277,10 @@ function renderToolsRuleSummaries() {
   html += renderRuleSummaryCard('Sparks', `
     <div style="font-size:13px;">
       <p>Spend a Spark <em>before</em> rolling. Each adds 1d6 and drops the lowest die.</p>
-      <p style="margin-top:6px;"><strong>Earning:</strong> MM award, peer nomination at an act break
-         (the MM confirms), and Graceful Failure &mdash; on a 6-, narrate how the failure makes the story
-         richer and claim it.</p>
+      <p style="margin-top:6px;">Every character starts every session with 3. Sparks do not carry over.</p>
+      <p style="margin-top:6px;"><strong>Earning:</strong> MM award, a peer calling "Spark?" for your moment
+         at any time, nomination at an act break (the MM confirms), and Graceful Failure &mdash; on a 6-,
+         narrate how the failure makes the story richer and claim it.</p>
       <p style="margin-top:6px;">Click the Spark pips on your sheet to stage how many to spend. The staged
          amount applies to your next Roll, Strike, or Cast.</p>
     </div>

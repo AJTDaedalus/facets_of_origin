@@ -1842,7 +1842,7 @@ backgrounds:
     facet: mind
     starting_skill: lore
     secondary_skill: craft
-    specialty: "Artificers' Guild technical records — Standard becomes Easy when directly applicable."
+    specialty: "Knows the technical vocabulary, record-keeping, and internal personnel of the guild or institution that trained you, well enough to read its documents and recognise its work."
     domain_origin: mind
     domain_replaces_secondary: true
 
