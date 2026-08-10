@@ -889,3 +889,53 @@ void, not open.
 
 **Status:** ✅ Decided. Recorded in `research/magic_system_analysis.md` §6
 naming note; README project description updated.
+
+---
+
+### D16 — A Facet is a category of archetypes, not an archetype: the primary Facet must not be exhaustible *(owner ruling, 2026-08-09)*
+
+**Decision:** "Everyone masters their primary Facet" is wrong and is retired as a
+design goal. Skill advancement must carry opportunity cost inside a single Facet,
+so that two characters sharing a Facet end a campaign with different sheets.
+
+**The argument (owner):** *"A lot of different classes fall under each Facet — a
+ranger shouldn't be as good at hand-to-hand as a barbarian."* A Facet is a
+*category* of archetypes, not an archetype. Body contains the brawler, the scout,
+the duellist, the acrobat. Under the rules as written, every one of them arrives at
+the identical sheet — Athletics, Combat, Stealth, Finesse and Endurance all at
+Master — in roughly eleven sessions. The Facet therefore cannot express the
+difference between the archetypes it contains, which is the one job a broad
+category most needs to do.
+
+**This is an identity problem before it is a pacing problem.** The measured rate
+(one Facet level per 3.75 sessions; full primary mastery at ~11.25) is defensible
+against the field — comparable to Savage Worlds' 20 Advances or Apocalypse World's
+~12 improvements. What is *not* defensible is the shape: Facets is the only system
+surveyed whose advancement track terminates in total completion. Call of Cthulhu 7e
+asymptotes (improve only on a d100 roll *over* the current skill value), Apocalypse
+World and Savage Worlds offer menus wider than the available picks, D&D 5e forks
+exclusively. Evidence and sources: `docs/RESEARCH_advancement_benchmark.md`.
+
+**Supersedes:** `DESIGN_v0.3_ruleset_revision.md` §6.2, which set
+`facet_level_threshold: 5` specifically so all three Facet levels would fit inside
+the 15-advance ceiling. That choice optimised for the Facet levels landing tidily
+and did not weigh intra-Facet differentiation. The coincidence of "Facet level 3"
+and "every skill at Master" was deliberate; it is now the defect.
+
+**Known insufficient:** an escalating mark cost per rank tier *alone*. It delays
+completion to roughly twenty sessions but the track still completes, so a long
+campaign reconverges the ranger and the barbarian. Delivering this ruling needs a
+genuine ceiling, with a cost curve underneath it rather than instead of it.
+
+**Explicitly out of scope:** the Technique layer. Three picks from a tree of 18–20,
+branch-gated so that reaching Tier 3 costs all three picks in one branch, is the
+only genuine exclusive choice the game has today and is preserved intact.
+
+**Also on the table, same root cause:** the cross-training incentive runs backwards
+(`RESEARCH_advancement_benchmark.md` §4). A fourth Technique *from your own tree*
+requires Facet level 4, which only cross-training reaches — so breadth is the sole
+source of further depth, the inverse of the 5e/PF2e convention where breadth costs
+depth. Whether to fix this in the same change is handed to Brain.
+
+**Status:** ✅ Decided (whether). Brain holds the *how* —
+`docs/BRIEF_advancement_differentiation.md`.

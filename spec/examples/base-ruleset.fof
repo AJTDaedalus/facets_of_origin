@@ -526,5 +526,14 @@ advancement:
       cost: 4
 
   session_skill_points: 4
-  marks_per_rank: 3
-  facet_level_threshold: 5
+  # D16: marks escalate per rank, and a Facet caps how many skills may pass
+  # Practiced. A bare `marks_per_rank: 3` is the pre-D16 shape and still loads
+  # with a DeprecationWarning.
+  marks_per_rank:
+    practiced: 3
+    expert: 5
+    master: 8
+  rank_caps:
+    beyond_practiced: 3
+    master: 1
+  facet_level_threshold: 3

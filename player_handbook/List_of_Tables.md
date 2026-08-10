@@ -19,6 +19,7 @@
 | **II.3–2** | [Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope) | II.3_Magic.md |
 | **II.4–1** | [Skill Ranks](II.4_Character_Creation_Facets.md#skills) | II.4_Character_Creation_Facets.md |
 | **II.4–2** | [Skill Point Cost per Mark](II.4_Character_Creation_Facets.md#advancing-skills) | II.4_Character_Creation_Facets.md |
+| **II.4–3** | [Marks per Rank Advance](II.4_Character_Creation_Facets.md#advancing-skills) | II.4_Character_Creation_Facets.md |
 | **II.4a–1** | [Skills of the Body](II.4a_Character_Creation_Facet_Body.md#skills-of-the-body) | II.4a_Character_Creation_Facet_Body.md |
 | **II.4b–1** | [Skills of the Mind](II.4b_Character_Creation_Facet_Mind.md#skills-of-the-mind) | II.4b_Character_Creation_Facet_Mind.md |
 | **II.4c–1** | [Skills of the Soul](II.4c_Character_Creation_Facet_Soul.md#skills-of-the-soul) | II.4c_Character_Creation_Facet_Soul.md |
@@ -47,9 +48,9 @@
 | **III.3–16** | [Where Each Combat Number Appears in the App](III.3_Combat.md#your-five-numbers-on-screen) | III.3_Combat.md |
 | **IV.1–1** | [Weapon Categories](IV.1_Equipment.md#weapons) | IV.1_Equipment.md |
 | **IV.1–2** | [Armor](IV.1_Equipment.md#armor) | IV.1_Equipment.md |
-| **QS–1** | [Zahna — Attributes](Quick_Start.md#zahna-the-scholar) | Quick_Start.md |
-| **QS–2** | [Mordai — Attributes](Quick_Start.md#mordai-the-warrior) | Quick_Start.md |
-| **QS–3** | [Zulnut — Attributes](Quick_Start.md#zulnut-the-rogue) | Quick_Start.md |
+| **QS–1** | [The Three Facets](Quick_Start.md#2-pick-a-primary-facet) | Quick_Start.md |
+| **QS–2** | [Minor Attributes](Quick_Start.md#3-spend-18-points-on-the-nine-minor-attributes) | Quick_Start.md |
+| **QS–3** | [Major Attribute Modifiers](Quick_Start.md#4-derive-the-three-major-attributes) | Quick_Start.md |
 | **QS–4** | [Quick Reference](Quick_Start.md#quick-reference) | Quick_Start.md |
 | **A–1** | [Soul Domains at a Glance](Appendix_Magic_Domains.md#domains-of-the-soul) | Appendix_Magic_Domains.md |
 | **A–2** | [Mind Domains at a Glance](Appendix_Magic_Domains.md#domains-of-the-mind) | Appendix_Magic_Domains.md |

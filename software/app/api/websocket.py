@@ -628,6 +628,16 @@ async def _handle_skill_advance(msg: dict, session, session_id: str) -> None:
                 "message": f"Insufficient skill points: need {sp_cost}, have {character.session_skill_points_remaining}.",
             })
             return
+        # D16: the rank caps are checked BEFORE the deduction — advance_skill
+        # refuses a walled-off skill, and deducting first would strand the point.
+        current = character.skills.get(skill_id)
+        current_rank = current.rank if current else "novice"
+        if current_rank == character.rank_ceiling_for(skill_id, session.ruleset):
+            await manager.broadcast(session_id, {
+                "type": "error",
+                "message": character.cap_refusal_reason(skill_id, session.ruleset),
+            })
+            return
         character.session_skill_points_remaining -= sp_cost
         result = character.advance_skill(skill_id, marks, session.ruleset)
         await manager.broadcast(session_id, {

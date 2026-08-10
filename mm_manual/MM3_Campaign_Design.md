@@ -229,14 +229,16 @@ The Facets advancement system is not just a reward mechanism — it is a pacing 
 
 **Table MM3–2: Advancement Thresholds and Story Beats**
 
-| Threshold | Approximate Timeline | Story Beat |
-|---|---|---|
-| First skill rank advance | Sessions 1–3 | The character finds their footing; early competence emerges |
-| Facet Level 1 (5 primary advances) | Sessions 4–8 | The character has a clear identity; first Technique defines their approach |
-| Facet Level 2 (10 primary advances) | Sessions 8–15 | The character is established; a second Technique deepens their specialty |
-| Facet Level 3 + first Major Advancement (15 primary advances) | Sessions 12–20 | Primary Facet mastered — a third Technique unlock and the Major Advancement (+1 Attribute or Pinnacle Technique) land together. Breadth (level 4+) begins here. |
+| Threshold | Fastest Legal | Typical | Story Beat |
+|---|---|---|---|
+| First skill rank advance | Session 1 | Sessions 1–2 | The character finds their footing; early competence emerges |
+| Facet Level 1 (3 advances) | Session 2 | Sessions 2–4 | The character has a clear identity; first Technique defines their approach |
+| Facet Level 2 (6 advances) | Session 5 | Sessions 5–8 | The character is established; a second Technique deepens their specialty. The Expert slots are being committed around here — this is where the sheet starts diverging from the next character's |
+| Facet Level 3 + first Major Advancement (9 advances) | Session 9 | Sessions 10–14 | The Facet is **finished** — not mastered. A third Technique and the Major Advancement (+1 Attribute or Pinnacle Technique) land together, the Master slot is spent, and two skills are permanently at Practiced. Breadth (level 4+) begins here. |
 
-These timelines assume 4 skill points per session and primary Facet advancement. Actual pace depends on how the player distributes their points, whether they cross-train early, and how often they use the skills they want to advance.
+These timelines assume 4 skill points per session and primary-Facet spending. **Fastest Legal** is the floor a table optimising for Facet levels will actually hit — buy the cheapest advances first, which under the 3/5/8 curve means taking everything to Practiced before any Expert. Publish it to yourself so the table cannot outrun your prep. **Typical** assumes the normal spread: some cross-training, some points on skills the player wanted rather than the ones that levelled fastest.
+
+The Background's starting rank counts as one advance toward the first Facet level, so a character with a Background reaches level 1 one advance sooner than the raw arithmetic suggests.
 
 ### Using career_advances as a Campaign Clock
 
@@ -248,11 +250,11 @@ When you are designing an arc, ask: *what career_advances range is this party in
 
 | Career Advances | Rough Equivalent |
 |---|---|
-| 0–2 | Freshly started — Background skills plus early play |
-| 3–5 | Developing — first Facet level (5 advances) within reach |
-| 6–10 | Capable — Facet level 1–2, first Techniques unlocked |
-| 11–15 | Seasoned — Facet level 3 and first Major Advancement within reach |
-| 16+ | Veteran — Primary Facet mastered; cross-Facet development begins |
+| 0–2 | Freshly started — Background skill plus early play |
+| 3–5 | Developing — first Facet level (3 advances) behind them, Expert slots not yet committed |
+| 6–9 | Shaped — Facet level 2–3, first Techniques unlocked, the Master slot chosen or about to be |
+| 10–18 | Cross-training — the primary Facet is finished; every further advance is breadth, at 2 SP per mark |
+| 19+ | Veteran — two or more Facets shaped. The career ceiling is 27 advances across all three |
 
 **Table MM3–4: Party Capability by Career Advances**
 
@@ -260,18 +262,20 @@ When you are designing an arc, ask: *what career_advances range is this party in
 |---|---|---|
 | 0–2 | Freshly started | Build straight from the PS-3 Recipe Table (MM1); a lone Named NPC falls fast to focused fire — difficulty comes from actor count, not TR |
 | 3–5 | Developing, gaining tools | The Recipe Table still applies; nudge a fight up a band with one extra Mook |
-| 6–10 | Capable, first Techniques | Techniques shift the actor-count thresholds — expect to add actors and re-check at the table |
-| 11–15 | Seasoned | The party has answers to most problems; challenge them with situations, not raw difficulty |
-| 16+ | Veterans, cross-trained | Difficulty alone will not challenge them; the stakes must be narrative, not mechanical |
+| 6–9 | Shaped, first Techniques | Techniques shift the actor-count thresholds — expect to add actors and re-check at the table. Party capability is now *lopsided* by design: aim problems at the gaps between their Master slots |
+| 10–18 | Cross-training | The party has answers to most problems inside their shapes; challenge them with situations, not raw difficulty |
+| 19+ | Veterans, multi-Facet | Difficulty alone will not challenge them; the stakes must be narrative, not mechanical |
 
 ### Pacing Advancement Faster or Slower
 
-The default is 4 skill points per session, with primary Facet skills costing 1 point per mark and cross-Facet skills costing 2. This produces a steady, moderate pace of advancement. But you can adjust this to serve your campaign.
+The default is 4 skill points per session, with primary Facet skills costing 1 point per mark and cross-Facet skills costing 2, and marks escalating 3/5/8 as a skill climbs. This produces a steady, moderate pace of advancement that back-loads its cost — the early ranks come quickly, the Master slot is a grind. But you can adjust this to serve your campaign.
 
-**Faster advancement** — for short campaigns (8–12 sessions) where you want the party to reach Facet Level 1 and feel the Technique unlock:
+**Faster advancement** — for short campaigns (8–12 sessions) where you want the party to finish their shapes and feel all three Technique unlocks:
 - Award 5–6 skill points per session instead of 4
 - Allow an extra mark for skills used in particularly dramatic moments
 - Run shorter arcs so the advancement feels dense
+
+Do **not** raise the rank caps to speed things up. The caps are what make two Body characters different from each other (II.4, *How Far a Skill Can Go*); loosening them buys a few sessions and costs the party their distinctiveness for the rest of the campaign.
 
 **Slower advancement** — for long campaigns (30+ sessions) where you want growth to feel earned and the early phases to breathe:
 - Keep the default 4 skill points

@@ -10,7 +10,7 @@
 
 | Box | Title | Section |
 |---|---|---|
-| **Example** | [six steps, one lazy man](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains) | II.1_Character_Creation_Overview.md |
+| **Example** | [six steps, one lazy man](II.1_Character_Creation_Overview.md#the-six-steps) | II.1_Character_Creation_Overview.md |
 | **Example** | [the arithmetic](II.2_Character_Creation_Attributes.md#distributing-your-attributes) | II.2_Character_Creation_Attributes.md |
 | **Example** | [The Scholar](II.2_Character_Creation_Attributes.md#deriving-your-major-attribute-modifiers) | II.2_Character_Creation_Attributes.md |
 | **Through the Mirror** | [why the spread matters](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play) | II.2_Character_Creation_Attributes.md |
@@ -19,6 +19,7 @@
 | **Through the Mirror** | [why early magic is capped by scope, not by difficulty](II.3_Magic.md#acquiring-a-domain) | II.3_Magic.md |
 | **Example** | [spending skill points across Facets](II.4_Character_Creation_Facets.md#advancing-skills) | II.4_Character_Creation_Facets.md |
 | **Example** | [a Background mark completing a rank](II.4_Character_Creation_Facets.md#advancing-skills) | II.4_Character_Creation_Facets.md |
+| **Through the Mirror** | [why your Facet has a shape](II.4_Character_Creation_Facets.md#how-far-a-skill-can-go) | II.4_Character_Creation_Facets.md |
 | **Through the Mirror** | [a single Facet stops at level 3](II.4_Character_Creation_Facets.md#facet-levels) | II.4_Character_Creation_Facets.md |
 | **Example** | [counting Facet levels](II.4_Character_Creation_Facets.md#facet-levels) | II.4_Character_Creation_Facets.md |
 | **Reading the Entries** | [Techniques](II.4_Character_Creation_Facets.md#techniques) | II.4_Character_Creation_Facets.md |
@@ -53,6 +54,7 @@
 | **Through the Mirror** | [why armor is a budget and not a subtraction](IV.1_Equipment.md#armor) | IV.1_Equipment.md |
 | **Example** | [spending a downgrade budget](IV.1_Equipment.md#armor-in-play) | IV.1_Equipment.md |
 | **MM Note** | [Money and wealth](IV.1_Equipment.md#currency-and-trade) | IV.1_Equipment.md |
+| **Example** | [six steps, one lazy man](Quick_Start.md#6-fill-in-the-rest) | Quick_Start.md |
 | **Reading the Entries** | [the domain descriptions](Appendix_Magic_Domains.md#appendix-magic-domain-catalog) | Appendix_Magic_Domains.md |
 | **Reading the Entries** | [the example intents](Appendix_Magic_Domains.md#appendix-magic-domain-catalog) | Appendix_Magic_Domains.md |
 

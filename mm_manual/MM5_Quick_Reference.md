@@ -334,11 +334,13 @@ TR = offense_value + durability_value + armor_bonus + technique_bonus
 ## Skill Advancement
 
 - **4 skill points** per session — up to 2 unspent bank into the next session; 1 per session may train an unused Primary-Facet skill
-- **3 marks** to advance one rank (Novice → Practiced → Expert → Master)
+- Marks to advance one rank: **3** to Practiced, **5** to Expert, **8** to Master
+- **Rank caps, per Facet:** at most **3** skills beyond Practiced, only **1** of them Master. A finished Facet is 1 Master / 2 Expert / 2 Practiced. A slot is claimed the moment a mark goes past Practiced, and is never freed
 - Primary Facet skills: **1 SP per mark**
 - Cross-Facet skills: **2 SP per mark**
-- Every **5** skill rank advances in a Facet = +1 Facet Level (that Facet)
+- Every **3** skill rank advances in a Facet = +1 Facet Level (that Facet); the Background's starting rank counts as one
 - Facet Level = unlock 1 Technique from any tree whose prerequisites you meet
+- A finished Facet = **9** advances = Facet level 3; level 4+ is cross-training
 - Every **3** total Facet levels (any Facet) = Major Advancement
 
 ---

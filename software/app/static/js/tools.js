@@ -190,9 +190,10 @@ function renderToolsRuleSummaries() {
   // Numbers come from the loaded ruleset, never from literals — a quick
   // reference that drifts from facet.yaml is a rules bug (see CLAUDE.md).
   const adv = Object.assign({
-    marks_per_rank: 3,
+    marks_per_rank: { practiced: 3, expert: 5, master: 8 },
+    rank_caps: { beyond_practiced: 3, master: 1 },
     session_skill_points: 4,
-    facet_level_threshold: 5,
+    facet_level_threshold: 3,
     major_advancement_threshold: 3,
   }, (state.ruleset && state.ruleset.advancement) || {});
 
@@ -264,7 +265,11 @@ function renderToolsRuleSummaries() {
   html += renderRuleSummaryCard('Skill Advancement', `
     <div style="font-size:13px;">
       <p><strong>Ranks:</strong> Novice (0) &rarr; Practiced (+1) &rarr; Expert (+2) &rarr; Master (+3)</p>
-      <p><strong>Marks per rank:</strong> ${adv.marks_per_rank}</p>
+      <p><strong>Marks per rank:</strong> Practiced ${adv.marks_per_rank?.practiced ?? 3},
+         Expert ${adv.marks_per_rank?.expert ?? 5}, Master ${adv.marks_per_rank?.master ?? 8}</p>
+      <p><strong>Rank caps (per Facet):</strong> at most
+         ${adv.rank_caps?.beyond_practiced ?? 3} skills beyond Practiced,
+         ${adv.rank_caps?.master ?? 1} of them Master</p>
       <p><strong>SP Cost:</strong> Primary Facet: 1 SP, Cross-Facet: 2 SP</p>
       <p><strong>Session Skill Points:</strong> ${adv.session_skill_points}</p>
       <p><strong>Facet Level:</strong> Every ${adv.facet_level_threshold} primary skill rank advances = +1 Facet Level</p>

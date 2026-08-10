@@ -45,7 +45,7 @@ the full rule, follow the pointer.
 
 **Facet** — The broad shape of who a character is becoming through play — Body, Mind, or Soul — declared at character creation but confirmed by what the character actually does over a campaign. *(Chapter II.4)*
 
-**Facet Level** — A measure of growth within a Facet, advancing every time a character accumulates 5 skill rank advances in that Facet. Each Facet level unlocks one Technique from any tree whose prerequisites are met. *(Chapter II.4)*
+**Facet Level** — A measure of growth within a Facet, advancing every time a character accumulates 3 skill rank advances in that Facet. Each Facet level unlocks one Technique from any tree whose prerequisites are met. A finished Facet is 9 advances — Facet level 3. *(Chapter II.4)*
 
 **Full Success** — A roll total of 10 or higher: the character achieves their goal cleanly, with no hidden cost or complication added by the MM. *(Chapter III.1)*
 
@@ -59,7 +59,7 @@ the full rule, follow the pointer.
 
 **Maneuver** — An offensive action that reshapes the fight rather than depleting Resolve directly: a 10+ makes rolls against the target Easy until the situation changes, a 7–9 works but costs something, a 6− backfires. *(Chapter III.3)*
 
-**Mark** — One point spent toward a skill's next rank. A skill advances to its next rank when it accumulates 3 marks; marks carry over between sessions. *(Chapter II.4)*
+**Mark** — One point spent toward a skill's next rank. A rank costs the marks its own tier charges — 3 to Practiced, 5 to Expert, 8 to Master; marks carry over between sessions. *(Chapter II.4)*
 
 **Mirror Master (MM)** — The player who describes the world and adjudicates the fiction — one player among equals, whose job is to reflect the spotlight back onto the other players rather than to author their story. *(Chapter I)*
 
@@ -83,7 +83,7 @@ the full rule, follow the pointer.
 
 **Primary Facet** — The Facet a character declares at character creation, which determines which skills cost less to advance (1 point per mark rather than 2) and which Techniques are available to them. *(Chapter II.4)*
 
-**Rank (Novice/Practiced/Expert/Master)** — A skill's level of developed capability: Novice (+0, the starting rank for every skill), Practiced (+1, 3 marks), Expert (+2, 6 marks), or Master (+3, 9 marks). *(Chapter II.6)*
+**Rank (Novice/Practiced/Expert/Master)** — A skill's level of developed capability: Novice (+0, the starting rank for every skill), Practiced (+1, 3 marks), Expert (+2, 8 marks total), or Master (+3, 16 marks total). Within one Facet at most three skills may pass Practiced and only one may reach Master. *(Chapters II.6, II.4)*
 
 **Reaction (Dodge/Parry/Absorb/Intercept)** — A character's response to an incoming action — at most one per incoming action, each costing Endurance Pool points unless Posture reduces it: Dodge (Dexterity), Parry (weapon attribute + Combat), Absorb (free, take the hit), or Intercept (step in front of an attack meant for an ally). *(Chapter III.3)*
 

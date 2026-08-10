@@ -825,15 +825,20 @@ class TestQuickReferencesMatchCanon:
         assert "+1 difficulty step" not in player.inner_text("#tools-rule-summaries")
 
     def test_advancement_numbers_come_from_the_ruleset(self, table):
-        """The card hard-coded a pre-v0.3 threshold of 6 and a Major every 4."""
+        """The card hard-coded a pre-v0.3 threshold of 6 and a Major every 4.
+        D16 moved the threshold to 3 and added the rank caps and the 3/5/8
+        mark curve — all of which must come from the ruleset, not the card."""
         _, player = table
         player.click("button[data-tab='tools']")
         player.wait_for_timeout(400)
         player.click(".rule-summary-toggle:has-text('Skill Advancement')")
         player.wait_for_timeout(200)
         text = player.inner_text(".rule-summary-card:has-text('Skill Advancement')")
-        assert "Every 5 primary" in text
+        assert "Every 3 primary" in text
         assert "Every 3 total" in text
+        assert "Practiced 3" in text and "Expert 5" in text and "Master 8" in text
+        assert "3 skills beyond Practiced" in text
+        assert "1 of them Master" in text
 
 
 # ---------------------------------------------------------------------------

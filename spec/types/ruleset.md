@@ -225,8 +225,14 @@ advancement:
     - context: primary_facet_success
       cost: 1
   session_skill_points: 4
-  marks_per_rank: 3
-  facet_level_threshold: 6
+  marks_per_rank:          # a bare integer is the pre-D16 shape; still loads
+    practiced: 3           # with a DeprecationWarning
+    expert: 5
+    master: 8
+  rank_caps:               # omit entirely to leave a homebrew Facet uncapped
+    beyond_practiced: 3
+    master: 1
+  facet_level_threshold: 3
 ```
 
 **Merge type:** singleton.

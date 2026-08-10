@@ -55,12 +55,11 @@
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
-- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
-- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
+- [Quick Start — 4. Derive the three Major Attributes](Quick_Start.md#4-derive-the-three-major-attributes)
 - [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
 - [MM1 — Named NPCs](../mm_manual/MM1_Encounters_and_Enemies.md#named-npcs)
+- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
 - [MM5 — Attribute Ratings](../mm_manual/MM5_Quick_Reference.md#attribute-ratings)
 
 ## Background
@@ -69,6 +68,7 @@
 
 - [Appendix Character Sheet — Background](Appendix_Character_Sheet.md#background)
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
+- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
@@ -79,12 +79,11 @@
 - [II.6 — Character Creation: Skills](II.6_Character_Creation_Skills.md#character-creation-skills)
 - [II.6 — Starting Skills](II.6_Character_Creation_Skills.md#starting-skills)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
-- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
-- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
+- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
 - [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
 - [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM4 — The Player Who Disengages](../mm_manual/MM4_Running_the_Table.md#the-player-who-disengages)
+- [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
 ## Boss
 
@@ -159,6 +158,7 @@
 - [IV.1 — Weapons](IV.1_Equipment.md#weapons)
 - [IV.1 — Armor in Play](IV.1_Equipment.md#armor-in-play)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
+- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
 - [MM1 — Three Worked Enemy Techniques](../mm_manual/MM1_Encounters_and_Enemies.md#three-worked-enemy-techniques)
 - [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
@@ -194,7 +194,6 @@
 
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
@@ -236,6 +235,7 @@
 
 - [Appendix Magic Domains — Appendix: Magic Domain Catalog](Appendix_Magic_Domains.md#appendix-magic-domain-catalog)
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
+- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
 - [II.1 — Where to Go From Here](II.1_Character_Creation_Overview.md#where-to-go-from-here)
 - [II.3 — Domain](II.3_Magic.md#domain)
 - [II.3 — Domain Types](II.3_Magic.md#domain-types)
@@ -256,8 +256,7 @@
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
-- [Quick Start — Example Scene: The Sealed Door](Quick_Start.md#example-scene-the-sealed-door)
+- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
 - [MM2 — Domain Boundary Calls](../mm_manual/MM2_Session_Design.md#domain-boundary-calls)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
@@ -282,15 +281,15 @@
 *Defined in [III.3](III.3_Combat.md).*
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
+- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
 - [III.3 — Endurance Pool](III.3_Combat.md#endurance-pool)
 - [III.3 — Calculating Your Endurance Pool](III.3_Combat.md#calculating-your-endurance-pool)
 - [III.3 — An Empty Endurance Pool](III.3_Combat.md#an-empty-endurance-pool)
 - [III.3 — Recovering Your Endurance Pool](III.3_Combat.md#recovering-your-endurance-pool)
 - [III.3 — Endurance Pool](III.3_Combat.md#endurance-pool)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
-- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
-- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
+- [Quick Start — 6. Fill in the rest](Quick_Start.md#6-fill-in-the-rest)
+- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
 - [MM1 — Three Worked Enemy Techniques](../mm_manual/MM1_Encounters_and_Enemies.md#three-worked-enemy-techniques)
 - [MM1 — Step 2: Pick a difficulty feel.](../mm_manual/MM1_Encounters_and_Enemies.md#step-2-pick-a-difficulty-feel)
@@ -328,6 +327,7 @@
 
 - [Appendix Character Sheet — Facet](Appendix_Character_Sheet.md#facet)
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
+- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
 - [II.1 — Where to Go From Here](II.1_Character_Creation_Overview.md#where-to-go-from-here)
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
 - [II.4 — What Is a Facet?](II.4_Character_Creation_Facets.md#what-is-a-facet)
@@ -347,10 +347,10 @@
 - [II.6 — Complete Skill Reference](II.6_Character_Creation_Skills.md#complete-skill-reference)
 - [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
-- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
-- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
+- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
+- [Quick Start — 2. Pick a Primary Facet](Quick_Start.md#2-pick-a-primary-facet)
 - [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
+- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
 - [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM3 — Recognizing When It Is Done](../mm_manual/MM3_Campaign_Design.md#recognizing-when-it-is-done)
@@ -364,8 +364,8 @@
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
+- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
 - [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
-- [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM3 — Recognizing When It Is Done](../mm_manual/MM3_Campaign_Design.md#recognizing-when-it-is-done)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
@@ -385,7 +385,7 @@
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
 - [IV.1 — Weapons](IV.1_Equipment.md#weapons)
 - [Quick Start — The One Rule](Quick_Start.md#the-one-rule)
-- [Quick Start — Example Scene: The Sealed Door](Quick_Start.md#example-scene-the-sealed-door)
+- [Quick Start — The Three Tiers in Play](Quick_Start.md#the-three-tiers-in-play)
 - [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
 - [MM4 — In Play: Sharing the Spotlight](../mm_manual/MM4_Running_the_Table.md#in-play-sharing-the-spotlight)
 - [MM5 — Core Resolution](../mm_manual/MM5_Quick_Reference.md#core-resolution)
@@ -397,6 +397,8 @@
 - [II.3 — Outcome Tiers for Magic](II.3_Magic.md#outcome-tiers-for-magic)
 - [III.1 — Earning Sparks](III.1_Core_Resolution.md#earning-sparks)
 - [III.1 — Failure (6-)](III.1_Core_Resolution.md#failure-6-)
+- [Quick Start — The Three Tiers in Play](Quick_Start.md#the-three-tiers-in-play)
+- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM5 — Sparks](../mm_manual/MM5_Quick_Reference.md#sparks)
 - [MM5 — Spark Flow (MM Guidance)](../mm_manual/MM5_Quick_Reference.md#spark-flow-mm-guidance)
@@ -436,7 +438,7 @@
 
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
+- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
 - [MM3 — Recognizing When It Is Done](../mm_manual/MM3_Campaign_Design.md#recognizing-when-it-is-done)
 
 ## Maneuver
@@ -454,8 +456,10 @@
 
 - [Appendix Magic Domains — Core Mind Domains](Appendix_Magic_Domains.md#core-mind-domains)
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
+- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
+- [II.4 — How Far a Skill Can Go](II.4_Character_Creation_Facets.md#how-far-a-skill-can-go)
 - [II.4 — Advancement and Reflection](II.4_Character_Creation_Facets.md#advancement-and-reflection)
 - [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
 - [II.4a — Iron Branch](II.4a_Character_Creation_Facet_Body.md#iron-branch)
@@ -466,6 +470,10 @@
 - [II.5 — Soul Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
+- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
+- [Quick Start — 6. Fill in the rest](Quick_Start.md#6-fill-in-the-rest)
+- [Quick Start — The Three Tiers in Play](Quick_Start.md#the-three-tiers-in-play)
+- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
@@ -476,6 +484,7 @@
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
+- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
 - [MM1 — Mirror Master's Manual: Encounters and Enemies](../mm_manual/MM1_Encounters_and_Enemies.md#mirror-masters-manual-encounters-and-enemies)
 - [MM2 — Mirror Master's Manual: Session Design](../mm_manual/MM2_Session_Design.md#mirror-masters-manual-session-design)
 - [MM3 — Mirror Master's Manual: Campaign Design](../mm_manual/MM3_Campaign_Design.md#mirror-masters-manual-campaign-design)
@@ -574,7 +583,6 @@
 - [III.2 — In Play: The Mill at Millhaven](III.2_Adventuring.md#in-play-the-mill-at-millhaven)
 - [III.3 — Strike](III.3_Combat.md#strike)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [Quick Start — Example Scene: The Sealed Door](Quick_Start.md#example-scene-the-sealed-door)
 - [MM2 — In Play: The Price of a Partial Success](../mm_manual/MM2_Session_Design.md#in-play-the-price-of-a-partial-success)
 - [MM4 — In Play: Sharing the Spotlight](../mm_manual/MM4_Running_the_Table.md#in-play-sharing-the-spotlight)
 - [MM5 — Common Rulings](../mm_manual/MM5_Quick_Reference.md#common-rulings)
@@ -595,6 +603,7 @@
 *Defined in [II.4](II.4_Character_Creation_Facets.md).*
 
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
+- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
 
 ## Posture
 
@@ -629,22 +638,21 @@
 *Defined in [II.4](II.4_Character_Creation_Facets.md).*
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
+- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
 - [II.4 — What Is a Facet?](II.4_Character_Creation_Facets.md#what-is-a-facet)
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
+- [II.4 — How Far a Skill Can Go](II.4_Character_Creation_Facets.md#how-far-a-skill-can-go)
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
-- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
-- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
+- [Quick Start — 2. Pick a Primary Facet](Quick_Start.md#2-pick-a-primary-facet)
 - [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
 ## Rank
 
-*Defined in [II.6](II.6_Character_Creation_Skills.md).*
-
+- [Appendix Character Sheet — Rank Slots](Appendix_Character_Sheet.md#rank-slots)
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [II.3 — Rolling Magic](II.3_Magic.md#rolling-magic)
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
@@ -665,7 +673,9 @@
 - [III.3 — Parry](III.3_Combat.md#parry)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
+- [Quick Start — 6. Fill in the rest](Quick_Start.md#6-fill-in-the-rest)
 - [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
+- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
 - [MM5 — Endurance Pool](../mm_manual/MM5_Quick_Reference.md#endurance-pool)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
@@ -678,6 +688,7 @@
 - [III.3 — Armor and Reaction Downgrades](III.3_Combat.md#armor-and-reaction-downgrades)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
+- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
 - [MM1 — Three Worked Enemy Techniques](../mm_manual/MM1_Encounters_and_Enemies.md#three-worked-enemy-techniques)
 - [MM4 — After Every Session](../mm_manual/MM4_Running_the_Table.md#after-every-session)
@@ -710,6 +721,7 @@
 - [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
 - [IV.1 — Weapons](IV.1_Equipment.md#weapons)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
+- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
 - [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
@@ -747,6 +759,7 @@
 - [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
+- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
 - [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
@@ -761,12 +774,14 @@
 *Defined in [II.5](II.5_Character_Creation_Backgrounds.md).*
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
+- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
 - [II.5 — Body Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#body-facet-backgrounds)
 - [II.5 — Mind Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
 - [II.5 — Soul Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
 - [II.6 — Starting Skills](II.6_Character_Creation_Skills.md#starting-skills)
+- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
 
 ## Shaken
 
@@ -785,11 +800,9 @@
 *Defined in [II.6](II.6_Character_Creation_Skills.md).*
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
+- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
 - [II.3 — Rolling Magic](II.3_Magic.md#rolling-magic)
-- [II.4 — Skills](II.4_Character_Creation_Facets.md#skills)
-- [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
-- [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
-- [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
+- [II.4 — How Far a Skill Can Go](II.4_Character_Creation_Facets.md#how-far-a-skill-can-go)
 - [II.4a — Skills of the Body](II.4a_Character_Creation_Facet_Body.md#skills-of-the-body)
 - [II.4b — Skills of the Mind](II.4b_Character_Creation_Facet_Mind.md#skills-of-the-mind)
 - [II.4c — Skills of the Soul](II.4c_Character_Creation_Facet_Soul.md#skills-of-the-soul)
@@ -811,9 +824,13 @@
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
+- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
+- [Quick Start — 6. Fill in the rest](Quick_Start.md#6-fill-in-the-rest)
 - [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
 - [MM1 — Named NPCs](../mm_manual/MM1_Encounters_and_Enemies.md#named-npcs)
+- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
+- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM5 — Skill Ranks](../mm_manual/MM5_Quick_Reference.md#skill-ranks)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
@@ -843,7 +860,6 @@
 - [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
 - [III.3 — Your Five Numbers On Screen](III.3_Combat.md#your-five-numbers-on-screen)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [Quick Start — Example Scene: The Sealed Door](Quick_Start.md#example-scene-the-sealed-door)
 - [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM2 — Spark Nominations as a Balancing Tool](../mm_manual/MM2_Session_Design.md#spark-nominations-as-a-balancing-tool)
 - [MM2 — Spark Cadence](../mm_manual/MM2_Session_Design.md#spark-cadence)
@@ -854,6 +870,7 @@
 ## Specialty
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
+- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
 - [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
@@ -861,9 +878,9 @@
 - [II.5 — Mind Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
 - [II.5 — Soul Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
 - [IV.1 — Specialized Gear](IV.1_Equipment.md#specialized-gear)
-- [Quick Start — Zahna — The Scholar](Quick_Start.md#zahna--the-scholar)
-- [Quick Start — Mordai — The Warrior](Quick_Start.md#mordai--the-warrior)
-- [Quick Start — Zulnut — The Rogue](Quick_Start.md#zulnut--the-rogue)
+- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
+- [Quick Start — 6. Fill in the rest](Quick_Start.md#6-fill-in-the-rest)
+- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
 - [MM5 — Common Rulings](../mm_manual/MM5_Quick_Reference.md#common-rulings)
 
 ## Staggered
@@ -885,12 +902,13 @@
 *Defined in [II.5](II.5_Character_Creation_Backgrounds.md).*
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
+- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
 - [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
 - [II.5 — Body Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#body-facet-backgrounds)
 - [II.5 — Mind Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
 - [II.5 — Soul Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
+- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
 
 ## Strike
 
@@ -934,8 +952,10 @@
 - [II.6 — Skills of the Body](II.6_Character_Creation_Skills.md#skills-of-the-body)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
+- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
 - [MM2 — Difficulty and Technique Steps](../mm_manual/MM2_Session_Design.md#difficulty-and-technique-steps)
+- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 - [MM5 — Adjudicating Magic (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#adjudicating-magic-compressed-from-mm2--see-mm2-for-full-text)
