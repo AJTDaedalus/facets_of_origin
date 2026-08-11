@@ -81,6 +81,7 @@
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
 - [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
+- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
 - [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM4 — The Player Who Disengages](../mm_manual/MM4_Running_the_Table.md#the-player-who-disengages)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)

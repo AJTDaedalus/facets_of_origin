@@ -86,5 +86,11 @@ which builds a real character with a Background and drives it to the cap.
 
 ---
 
-*All tasks complete. Open for playtest: A3's veteran revisit trigger and A4's
-cross-Facet pacing, per the BRIEF.*
+*All tasks complete.*
+
+**Settled since:** D16a (2026-08-11) — Facet level 1 arriving earlier is the
+intent, not a side effect. Recorded in `DECISIONS.md` and framed for MMs in MM3
+so it is not read as a defect and slowed down.
+
+**Still open for playtest:** A3's veteran revisit trigger (the deferred §4
+cross-training inversion) and A4's cross-Facet pacing under the 2 SP cost.

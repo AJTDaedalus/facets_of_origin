@@ -939,3 +939,34 @@ depth. Whether to fix this in the same change is handed to Brain.
 
 **Status:** ✅ Decided (whether). Brain holds the *how* —
 `docs/BRIEF_advancement_differentiation.md`.
+
+### D16a — The first Technique arriving early is the intent, not a side effect *(owner ruling, 2026-08-11)*
+
+**Decision:** Facet level 1 landing sooner under D16 — a floor of 2.25 sessions
+against v0.3's 3.75 — is accepted and intended. *"Facet lvl 1 makes sense to be
+faster."*
+
+**Why it was an open question.** D16 was adopted to answer "this seems way too
+rapid," and level 1 is the one threshold that moved in the *faster* direction.
+Everything else slowed: level 2 from 7.5 to 5 sessions of cheap advances but
+then a longer climb, and level 3 from 11.25 to 9.5 (8.75 with a Background) at
+the floor, with the realistic window running to 14. The escalating 3/5/8 curve
+front-loads the cheap ranks and back-loads the expensive ones, so the opening
+accelerates and the endgame lengthens.
+
+**Why the acceleration is worth keeping.** The three advances that buy level 1
+cost 3 marks each — they are reachable before a new player has finished working
+out what their character is for, and the Technique is what turns the sheet from
+arithmetic into a person. The pacing complaint that produced D16 was never about
+the first Technique; it was about every character ending identical. The caps fix
+that, and they fix it in the back half of the track where Expert and Master are
+decided.
+
+**Recorded in the books** so a future MM does not read it as a defect and slow it
+down: MM3, *Through the Mirror — the first Technique is supposed to arrive
+early*, which also names the correct lever for a longer campaign (stretch the
+middle, not the opening).
+
+**Status:** ✅ Decided. Still open from D16: the §4 cross-training inversion
+(deferred with a playtest revisit trigger) and veteran pacing under the 2 SP
+cross-Facet cost.

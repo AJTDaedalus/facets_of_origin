@@ -240,6 +240,12 @@ These timelines assume 4 skill points per session and primary-Facet spending. **
 
 The Background's starting rank counts as one advance toward the first Facet level, so a character with a Background reaches level 1 one advance sooner than the raw arithmetic suggests.
 
+> **Through the Mirror — the first Technique is supposed to arrive early**
+>
+> Facet level 1 can land in the second session, and that is deliberate. The curve is front-loaded on purpose: the first rank of anything costs 3 marks, and the three cheap advances that buy level 1 are the ones a new player can reach before they have finished working out what their character is for. Getting a Technique into their hands that early is the point — it is the moment the sheet stops being arithmetic and starts being a person.
+>
+> The cost lands later, where it belongs. Expert is 5 marks and Master is 8, so the back half of the track is where the grind lives and where the Master slot gets decided. Resist the urge to slow the opening down to make the campaign feel weightier; you will be taxing the part of the game that earns the table's attention in order to protect a part that already has it. If you want a longer campaign, stretch the middle.
+
 ### Using career_advances as a Campaign Clock
 
 Every character's `career_advances` is a single number that tells you how far they have come. It is also a useful planning tool.

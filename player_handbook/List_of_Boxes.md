@@ -91,6 +91,7 @@
 | **Example** | [campaign pitch: Arc-Based — "The Shattered Road"](../mm_manual/MM3_Campaign_Design.md#example-pitches) | MM3_Campaign_Design.md |
 | **Example** | [campaign pitch: Sandbox — "The Free Marches"](../mm_manual/MM3_Campaign_Design.md#example-pitches) | MM3_Campaign_Design.md |
 | **Example** | [campaign pitch: Mystery-Box — "The Silence"](../mm_manual/MM3_Campaign_Design.md#example-pitches) | MM3_Campaign_Design.md |
+| **Through the Mirror** | [the first Technique is supposed to arrive early](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure) | MM3_Campaign_Design.md |
 | **Through the Mirror** | [why a quick reference may never introduce a rule](../mm_manual/MM5_Quick_Reference.md#mirror-masters-quick-reference) | MM5_Quick_Reference.md |
 
 ---
