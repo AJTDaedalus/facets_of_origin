@@ -22,6 +22,33 @@ This is the only resolution mechanic in the game. Combat, magic, exploration, so
 
 ---
 
+## The Natural 12 and the Natural 2
+
+Two results are about the dice rather than the total.
+
+**The natural 12.** When both dice you keep show a **6**, you have a full success no matter what the modifiers say — and you get *something more besides*. You name what the something is; the MM confirms it. This is the one moment in the game where the player, not the Mirror Master, says what the world does.
+
+It cannot be earned by being good. It is the same one-in-thirty-six for the Master and the Novice, and it ignores difficulty entirely — two sixes against a Very Hard task is still a full success, which is exactly why the table remembers it. If you are wondering what *something more* looks like: the door opens **and** the hinge does not make a sound. The lie lands **and** you learn why they wanted to believe it. The blow lands **and** the enemy is left Open without you having to choose (see *Strike*, III.3). Reach for the thing you would not have dared ask for.
+
+**The natural 2.** When both dice you keep show a **1**, and the roll failed, the **Graceful Fail is confirmed without asking** — narrate how you make the failure worse or richer and take the Spark. No judgment call, no MM discretion. The worst roll on the table is the one that always pays.
+
+A natural 2 never drags an outcome downward. If your modifiers carried the total to a 7 anyway, that is a partial success and it stays one. The dice can hand you something you did not earn; they cannot take away something you did.
+
+> **Through the Mirror — why only the good one overrides**
+>
+> The asymmetry is deliberate. A system where the bottom of the dice cancels your competence is a system where a Master fails as catastrophically as a Novice, and that is the single most common complaint about flat-die games. The 2d6 curve exists to make training *show up in outcomes*. So the natural 12 promotes and the natural 2 does not demote. The floor is protected; only the ceiling is open.
+
+Sparks change both, in your favour. Rolling more dice and keeping the best two makes a natural 12 **almost three times as likely** — and a natural 2 nearly impossible, since every die would have to come up 1.
+
+**Table III.1–2: Natural Results**
+
+| Roll | Natural 12 | Natural 2 |
+|---|---|---|
+| 2d6 | 1 in 36 | 1 in 36 |
+| With 1 Spark (or Press, or Borrowed Trouble) | **1 in 13.5** | 1 in 216 |
+
+---
+
 ## Modifiers
 
 Your roll total is **2d6 + attribute modifier + skill modifier + difficulty modifier**. Each component:
@@ -30,7 +57,7 @@ Your roll total is **2d6 + attribute modifier + skill modifier + difficulty modi
 
 The Minor Attribute most relevant to what you are attempting provides the modifier. See Chapter II.2 for the full attribute list.
 
-**Table III.1–2: Minor Attribute Modifiers**
+**Table III.1–3: Minor Attribute Modifiers**
 
 | Rating | Label | Modifier |
 |---|---|---|
@@ -44,7 +71,7 @@ The Minor Attribute most relevant to what you are attempting provides the modifi
 
 If you have a relevant skill, its rank provides an additional modifier:
 
-**Table III.1–3: Skill Rank Modifiers**
+**Table III.1–4: Skill Rank Modifiers**
 
 | Rank | Modifier |
 |---|---|
@@ -59,7 +86,7 @@ Skills are optional on any roll. You always roll with an attribute; you add a sk
 
 Before calling for a roll, the MM declares a **difficulty** — a statement about the circumstances, not a judgment about your character.
 
-**Table III.1–4: Difficulty**
+**Table III.1–5: Difficulty**
 
 | Difficulty | Modifier | When |
 |---|---|---|
@@ -74,7 +101,7 @@ From there, adjustments apply in a fixed order. Set the base difficulty from the
 
 Those descriptions are the rule. The table below is the calibration — the same four tiers against tasks you can picture, and against the rank that clears them most of the time. Use it when a difficulty call is taking longer than the roll would.
 
-**Table III.1–5: Difficulty Benchmarks**
+**Table III.1–6: Difficulty Benchmarks**
 
 | Difficulty | A task that sits here | Who succeeds most of the time |
 |---|---|---|
@@ -114,6 +141,38 @@ In magic only, a Spark can also buy **reach**, in exactly two cases: before your
 > *One Spark: roll 3d6, drop the lowest. Two Sparks: roll 4d6, drop the two lowest.*
 
 Sparks are always spent **before** you roll — there is no spending a Spark after you see the result. Sparks are most useful when everything is on the line. A Spark spent on a trivial roll is a Spark you won't have at the moment that matters.
+
+---
+
+## Borrowed Trouble
+
+Sometimes you need the die and you do not have the Spark. You can always buy one.
+
+**Before a roll, the MM — or any player at the table — may offer you a complication.** If you accept it, add a d6 to your roll and drop the lowest, exactly as a Spark does. You may accept one Borrowed Trouble per roll.
+
+The price is not the risk of the complication. The price is the complication itself: **it happens whether you succeed or fail.** You are not gambling. You are selling a piece of your own near future for a better chance right now.
+
+> **Example — Borrowed Trouble**
+>
+> **Zulnut:** I go up the outside of the building.
+>
+> **MM:** Hard — wet stone, and you are carrying more than you should be. *(then, after a moment)* Borrowed Trouble: you make it up either way, but you leave the satchel on the ledge to do it, and it is still up there when you come back down.
+>
+> **Zulnut:** *(who has thought about this for slightly too long)* Yes. Obviously yes.
+>
+> *Zulnut rolls `3d6 + Dexterity (3 → +1) + Finesse Practiced (+1)` at Hard's −1, drops the lowest — and the satchel is on the ledge regardless of what the dice do.*
+
+**Offering costs nothing, and declining costs nothing.** An offer that is refused simply did not happen; the MM does not get to impose it anyway. A good offer is specific, is something the player can picture, and is genuinely bad — "you get seen" is an offer, "something bad happens later" is not.
+
+**Any player may offer.** A table where the other players are inventing each other's trouble is a table that is paying attention, and it spreads the invention around instead of leaving it all with the MM.
+
+Borrowed Trouble stacks with Sparks and with Press: a character who Presses, spends a Spark, and takes Borrowed Trouble rolls 5d6 and drops the three lowest. That is the ceiling of what one roll can be made into, and it costs an Endurance Pool point, a Spark, and a piece of the future.
+
+> **MM Note — what Borrowed Trouble is for**
+>
+> It is the pressure valve. When a player wants something badly and the odds are poor, the answer does not have to be "roll and hope" or "no." It can be "yes, and here is what it costs you." Every offer you make is a piece of story you did not have to invent later.
+>
+> Two failure modes to avoid. Do not offer trouble that removes the player's agency — the complication should give them a new problem, never take away their next choice. And do not offer it on every roll; it stops being a bargain and becomes a tax. Once or twice a session, at the moments that are already tense, is the right rhythm.
 
 ---
 

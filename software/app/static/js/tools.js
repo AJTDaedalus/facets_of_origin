@@ -208,6 +208,12 @@ function renderToolsRuleSummaries() {
         <tr><td><strong>6-</strong></td><td style="color:var(--failure);">Things Go Wrong</td><td>The story moves forward, not in your favor.</td></tr>
       </table>
       <p style="margin-top:8px;"><strong>Sparks:</strong> Spend before rolling. Each adds 1d6, drop lowest.</p>
+      <p><strong>Natural 12</strong> (both kept dice show 6): full success whatever the modifiers say,
+         plus something more the player names.</p>
+      <p><strong>Natural 2</strong> (both kept dice show 1): if the roll failed, the Graceful Fail is
+         confirmed without asking. Never lowers a tier.</p>
+      <p><strong>Borrowed Trouble:</strong> accept an offered complication for 1d6 drop lowest. Costs no
+         Spark, and the complication happens whether you succeed or fail. One per roll.</p>
       <p><strong>Difficulty:</strong> Easy (+1), Standard (0), Hard (-1), Very Hard (-2)</p>
     </div>
   `);

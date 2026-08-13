@@ -24,6 +24,21 @@ Keep it open. Look things up. Do not read it.
 | **7–9** | **Success with Cost** — succeed, but complication |
 | **6-** | **Things Go Wrong** — story advances, not in player's favor |
 
+**Natural 12** (both kept dice show 6): full success whatever the modifiers say, **plus something more the player names** and you confirm. Ignores difficulty.
+
+**Natural 2** (both kept dice show 1): if the roll failed, the Graceful Fail is confirmed without the player asking. **Never lowers a tier** — a natural 2 that totalled 7 is still a partial success.
+
+---
+
+## Borrowed Trouble
+
+Before a roll, you — or any player — may offer a complication. Accepted, it adds 1d6 drop lowest, exactly as a Spark. **It costs no Spark, and it happens whether the roll succeeds or fails.** One per roll; offering and declining are both free.
+
+- Make it **specific and genuinely bad** — "you get seen" is an offer; "something bad happens later" is not
+- Never take away the player's next choice; give them a new problem instead
+- Once or twice a session, at moments already tense. Every roll turns a bargain into a tax
+- Stacks with Sparks and Press (Press + Spark + Borrowed Trouble = 5d6 drop three)
+
 ---
 
 ## Modifiers at a Glance
@@ -273,6 +288,19 @@ A charge is consumed only when armor provides the reduction actually applied —
 - **Domain boundaries — lean toward yes.** The test is substance vs. rhyme: does it run through the domain's actual material, or only share its mood? Fire burning the breathable content out of the air = yes; fire commanding the weather = no. Shadow muffling sound = yes; shadow granting invisibility = no. Don't surcharge a creative stretch — if the reach is more ambitious, that shows up as scope. A "no" is a **"No, but..."**. A "yes" is precedent — you are setting it permanently.
 - **7–9: the magic worked.** Pick the cost first — **affects more than intended** / **costs something unexpected** / **creates a consequence nobody planned** — then name it while narrating the success it rides on; the complication is added to a success, never a discount on one. Mine the player's stated intent for the specifics. Rotate categories — four costs in a row and 7–9 becomes a flat fee. Test: does the table now have something to *do*?
 - **Active opposition = Standard floor.** A floor, not a surcharge. It only ever moves the **Easy** cell (Focused domain, Minor scope); every other combination already meets it, so raising a Hard roll "because combat" applies it twice. Opposition = something with its own will resisting *this working, right now* — a sealed door is difficulty, the rival holding it shut is opposition. Specific circumstances (distracted, wounded, constrained) may still adjust; "it is a battle" is not a circumstance.
+
+### Social 7–9 Costs (compressed from MM2 — see MM2 for full text)
+
+**They know you needed it** — you get it; they learn its price to you.
+**The debt** — a favour owed, unspecified, callable.
+**The witness** — someone who should not have heard it did.
+**The narrower yes** — you get the part that costs them least.
+**The wrong believer** — it lands too well on the wrong person.
+**The record** — it is written down somewhere other people read.
+
+Pick before you narrate; name the cost as part of the success; rotate the shapes. A social **6-** is almost never a refusal — it is a worse relationship than the one you walked in with.
+
+---
 
 ### Magic 6- Templates (compressed from II.3 — see II.3 for full text)
 

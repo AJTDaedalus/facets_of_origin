@@ -15,6 +15,8 @@ the full rule, follow the pointer.
 
 **Background** — Who a character was before the story started: a title, a short history, a Starting Skill, a Secondary Skill (or domain origin, if magical), and a Specialty. *(Chapter II.5)*
 
+**Borrowed Trouble** — A complication offered before a roll by the MM or any player. Accepting it adds a d6 to the roll, dropping the lowest, exactly as a Spark does — and the complication happens whether the roll succeeds or fails. One per roll; offering and declining both cost nothing. *(Chapter III.1)*
+
 **Boss** — A climactic antagonist with a much larger Resolve pool than a Named NPC, often carrying a phase change keyed to a Resolve threshold that shifts the fight when crossed. *(Chapter III.3)*
 
 **Branch** — One of the thematic paths within a Facet's Technique tree (for example, the Body Facet's Might, Grace, and Iron). A Tier 2 or Tier 3 Technique requires a prerequisite Technique in the same branch. *(Chapter II.4)*
@@ -66,6 +68,10 @@ the full rule, follow the pointer.
 **Mook** — A minor antagonist with no Resolve pool and no Condition track. Any successful Strike (7+) removes a Mook from the fight; an armored Mook needs a full success (10+). *(Chapter III.3)*
 
 **Named NPC** — A significant antagonist that uses the full combat structure — Resolve, Posture, Techniques — with a Resolve of 3 or 4 by default. It never rolls: when it attacks, the PCs roll reactions. *(Chapter III.3)*
+
+**Natural 12** — Both kept dice showing 6. A full success regardless of modifiers or difficulty, plus something more that the player names and the MM confirms. *(Chapter III.1)*
+
+**Natural 2** — Both kept dice showing 1. If the roll failed, the Graceful Fail is confirmed without the player having to ask. It never lowers an outcome tier. *(Chapter III.1)*
 
 **Off-Balance** — A Tier 1 Condition: the character's next reaction costs 1 additional Endurance Pool point. *(Chapter III.3)*
 

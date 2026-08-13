@@ -459,6 +459,7 @@ async def _handle_roll(
         skill_rank_id=character.skills[skill_id].rank if skill_id and skill_id in character.skills else None,
         difficulty_label=difficulty,
         sparks_spent=sparks_to_spend,
+        borrowed_trouble=bool(msg.get("borrowed_trouble")),
         description=str(msg.get("description", ""))[:200],
     )
 

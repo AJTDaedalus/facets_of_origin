@@ -311,6 +311,38 @@ class GroupRollDef(BaseModel):
     lead_roller_alternative: bool = True
 
 
+class NaturalResultDef(BaseModel):
+    """A result keyed to the dice themselves rather than the modified total.
+
+    Fields:
+        natural: "high" — every kept die shows the maximum face; "low" — every
+            kept die shows 1.
+        min_outcome: Tier this result can never fall below, whatever the
+            modifiers say. None leaves the tier alone.
+        max_outcome: Tier this result can never rise above. **Left None for the
+            fumble on purpose** — overriding a tier upward rewards, overriding
+            it downward punishes competence, which is the d20 failure mode
+            `research/dice_system_analysis.md` rejects.
+        label: What the table calls it.
+    """
+    natural: Literal["high", "low"]
+    min_outcome: Optional[str] = None
+    max_outcome: Optional[str] = None
+    label: str = ""
+    description: str = ""
+
+
+class BorrowedTroubleDef(BaseModel):
+    """Accept a complication, take an extra die (PHB III.1, *Borrowed Trouble*).
+
+    Mechanically identical to spending a Spark, drawn from a different place:
+    nothing is spent, and the complication lands whatever the dice say.
+    """
+    extra_dice: int = 1
+    spark_cost: int = 0
+    max_per_roll: int = 1
+
+
 class RollResolutionDef(BaseModel):
     dice: str = "2d6"
     modifier_source: str = "minor_attribute"
@@ -321,6 +353,9 @@ class RollResolutionDef(BaseModel):
     saving_throw: SavingThrowDef = Field(default_factory=SavingThrowDef)
     contested_roll: ContestedRollDef = Field(default_factory=ContestedRollDef)
     group_roll: GroupRollDef = Field(default_factory=GroupRollDef)
+    critical: Optional[NaturalResultDef] = None
+    fumble: Optional[NaturalResultDef] = None
+    borrowed_trouble: Optional[BorrowedTroubleDef] = None
 
 
 # ---------------------------------------------------------------------------

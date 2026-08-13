@@ -26,10 +26,11 @@
 | **II.6–1** | [Skill Reference](II.6_Character_Creation_Skills.md#complete-skill-reference) | II.6_Character_Creation_Skills.md |
 | **II.6–2** | [Skill Ranks at a Glance](II.6_Character_Creation_Skills.md#skill-ranks-at-a-glance) | II.6_Character_Creation_Skills.md |
 | **III.1–1** | [Outcome Tiers](III.1_Core_Resolution.md#the-2d6-system) | III.1_Core_Resolution.md |
-| **III.1–2** | [Minor Attribute Modifiers](III.1_Core_Resolution.md#attribute-modifier) | III.1_Core_Resolution.md |
-| **III.1–3** | [Skill Rank Modifiers](III.1_Core_Resolution.md#skill-modifier) | III.1_Core_Resolution.md |
-| **III.1–4** | [Difficulty](III.1_Core_Resolution.md#difficulty) | III.1_Core_Resolution.md |
-| **III.1–5** | [Difficulty Benchmarks](III.1_Core_Resolution.md#difficulty) | III.1_Core_Resolution.md |
+| **III.1–2** | [Natural Results](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2) | III.1_Core_Resolution.md |
+| **III.1–3** | [Minor Attribute Modifiers](III.1_Core_Resolution.md#attribute-modifier) | III.1_Core_Resolution.md |
+| **III.1–4** | [Skill Rank Modifiers](III.1_Core_Resolution.md#skill-modifier) | III.1_Core_Resolution.md |
+| **III.1–5** | [Difficulty](III.1_Core_Resolution.md#difficulty) | III.1_Core_Resolution.md |
+| **III.1–6** | [Difficulty Benchmarks](III.1_Core_Resolution.md#difficulty) | III.1_Core_Resolution.md |
 | **III.3–1** | [Endurance Pool](III.3_Combat.md#calculating-your-endurance-pool) | III.3_Combat.md |
 | **III.3–2** | [Postures](III.3_Combat.md#postures) | III.3_Combat.md |
 | **III.3–3** | [Strike Outcomes](III.3_Combat.md#strike) | III.3_Combat.md |
@@ -67,9 +68,10 @@
 | **MM1–4** | [TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples) | MM1_Encounters_and_Enemies.md |
 | **MM1–5** | [Encounter Recipes at Party Strength 3](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-3-3-fresh-characters-1-career-advance-each) | MM1_Encounters_and_Enemies.md |
 | **MM1–6** | [Encounter Recipes at Other Party Strengths](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-4-4-pcs-or-3-advanced-pcs) | MM1_Encounters_and_Enemies.md |
-| **MM2–1** | [What Walks In](../mm_manual/MM2_Session_Design.md#the-complication-table) | MM2_Session_Design.md |
-| **MM2–2** | [Generic 6− Consequences](../mm_manual/MM2_Session_Design.md#the-trouble-table) | MM2_Session_Design.md |
-| **MM2–3** | [Spark Target Economy](../mm_manual/MM2_Session_Design.md#target-economy) | MM2_Session_Design.md |
+| **MM2–1** | [What a Social 7–9 Costs](../mm_manual/MM2_Session_Design.md#social) | MM2_Session_Design.md |
+| **MM2–2** | [What Walks In](../mm_manual/MM2_Session_Design.md#the-complication-table) | MM2_Session_Design.md |
+| **MM2–3** | [Generic 6− Consequences](../mm_manual/MM2_Session_Design.md#the-trouble-table) | MM2_Session_Design.md |
+| **MM2–4** | [Spark Target Economy](../mm_manual/MM2_Session_Design.md#target-economy) | MM2_Session_Design.md |
 | **MM3–1** | [Encounter Difficulty Across a Four-Session Arc](../mm_manual/MM3_Campaign_Design.md#difficulty-should-breathe) | MM3_Campaign_Design.md |
 | **MM3–2** | [Advancement Thresholds and Story Beats](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure) | MM3_Campaign_Design.md |
 | **MM3–3** | [Career Advance Benchmarks](../mm_manual/MM3_Campaign_Design.md#using-career-advances-as-a-campaign-clock) | MM3_Campaign_Design.md |

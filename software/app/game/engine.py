@@ -41,6 +41,9 @@ class RollRequest:
         difficulty_label: One of "Easy", "Standard", "Hard", "Very Hard".
         sparks_spent: Number of Sparks to spend (adds dice and drops lowest).
         press: Whether the Press combat mechanic is active (costs 1 Endurance, adds 1 die).
+        borrowed_trouble: Whether an offered complication was accepted (PHB III.1).
+            Adds a die exactly as a Spark does, but costs no Spark — the price
+            is the complication, which lands whatever the dice say.
         description: Free-text description of the attempted action.
     """
 
@@ -51,6 +54,7 @@ class RollRequest:
     difficulty_label: str
     sparks_spent: int = 0
     press: bool = False
+    borrowed_trouble: bool = False
     description: str = ""
 
     def __post_init__(self) -> None:
@@ -74,6 +78,9 @@ class RollResult:
         outcome_label: Human-readable label (e.g. "Full Success").
         outcome_description: Narrative prompt for the outcome.
         sparks_spent: How many Sparks were actually spent.
+        borrowed_trouble: Whether a complication was accepted for the extra die.
+        critical: Every kept die showed its maximum face (PHB III.1).
+        fumble: Every kept die showed 1 (PHB III.1).
         request: The original RollRequest that produced this result.
     """
 
@@ -89,6 +96,43 @@ class RollResult:
     outcome_description: str
     sparks_spent: int
     request: RollRequest
+    borrowed_trouble: bool = False
+    critical: bool = False
+    fumble: bool = False
+
+
+def _natural_flags(dice_kept: list[int], sides: int, ruleset) -> tuple[bool, bool]:
+    """(critical, fumble) for the kept dice, per the ruleset's natural results.
+
+    Keyed to the dice rather than the total on purpose (III.1): a total-based
+    tier scales with modifiers and stops being rare. Mutually exclusive by
+    construction — the same dice cannot all be maximum and all be 1.
+    """
+    rr = getattr(ruleset, "roll_resolution", None)
+    if not rr or not dice_kept:
+        return False, False
+
+    def _matches(rule) -> bool:
+        if rule is None:
+            return False
+        face = sides if rule.natural == "high" else 1
+        return all(d == face for d in dice_kept)
+
+    return _matches(getattr(rr, "critical", None)), _matches(getattr(rr, "fumble", None))
+
+
+def _apply_outcome_floor(outcome: str, rule, ruleset) -> str:
+    """Raise `outcome` to the rule's `min_outcome` if it sits below it.
+
+    Only ever raises. A natural result may promote a tier; nothing in the
+    ruleset demotes one, because demoting punishes competence.
+    """
+    if rule is None or not getattr(rule, "min_outcome", None):
+        return outcome
+    tiers = [t.id for t in _get_outcome_tiers(ruleset)]  # best first
+    if outcome not in tiers or rule.min_outcome not in tiers:
+        return outcome
+    return rule.min_outcome if tiers.index(outcome) > tiers.index(rule.min_outcome) else outcome
 
 
 def _roll_and_resolve(
@@ -98,7 +142,8 @@ def _roll_and_resolve(
     sparks_spent: int,
     press: bool,
     ruleset: MergedRuleset,
-) -> tuple[list[int], list[int], int, int, int, str, str, str]:
+    borrowed_trouble: bool = False,
+) -> tuple[list[int], list[int], int, int, int, str, str, str, bool, bool]:
     """Shared dice-rolling and outcome core: roll the ruleset's dice formula
     (Sparks/Press add dice, lowest extras dropped), sum against the given
     modifiers, and determine the outcome tier. `resolve_roll` and
@@ -117,7 +162,9 @@ def _roll_and_resolve(
 
     base_dice = dice_spec.count
     press_dice = ruleset.combat.press.extra_dice if press else 0
-    extra_dice = max(0, sparks_spent) + press_dice
+    bt_def = getattr(ruleset.roll_resolution, "borrowed_trouble", None) if ruleset.roll_resolution else None
+    bt_dice = (bt_def.extra_dice if bt_def else 1) if borrowed_trouble else 0
+    extra_dice = max(0, sparks_spent) + press_dice + bt_dice
     total_dice = base_dice + extra_dice
 
     dice_rolled = [random.randint(1, dice_spec.sides) for _ in range(total_dice)]
@@ -130,7 +177,25 @@ def _roll_and_resolve(
     total = dice_sum + attr_modifier + skill_modifier + diff_modifier
 
     outcome, outcome_label, outcome_desc = _determine_outcome(total, ruleset)
-    return dice_rolled, dice_kept, dice_sum, diff_modifier, total, outcome, outcome_label, outcome_desc
+
+    critical, fumble = _natural_flags(dice_kept, dice_spec.sides, ruleset)
+    if critical:
+        promoted = _apply_outcome_floor(
+            outcome, ruleset.roll_resolution.critical if ruleset.roll_resolution else None, ruleset
+        )
+        if promoted != outcome:
+            outcome, outcome_label, outcome_desc = _outcome_by_id(promoted, ruleset)
+
+    return (dice_rolled, dice_kept, dice_sum, diff_modifier, total,
+            outcome, outcome_label, outcome_desc, critical, fumble)
+
+
+def _outcome_by_id(outcome_id: str, ruleset) -> tuple[str, str, str]:
+    """(id, label, description) for a tier named directly rather than by total."""
+    for tier in _get_outcome_tiers(ruleset):
+        if tier.id == outcome_id:
+            return tier.id, tier.label, tier.description
+    return outcome_id, outcome_id.replace("_", " ").title(), ""
 
 
 def resolve_roll(request: RollRequest, ruleset: MergedRuleset) -> RollResult:
@@ -152,10 +217,12 @@ def resolve_roll(request: RollRequest, ruleset: MergedRuleset) -> RollResult:
     if request.skill_id and request.skill_rank_id:
         skill_modifier = ruleset.get_skill_rank_modifier(request.skill_rank_id)
 
-    dice_rolled, dice_kept, dice_sum, diff_modifier, total, outcome, outcome_label, outcome_desc = (
+    (dice_rolled, dice_kept, dice_sum, diff_modifier, total,
+     outcome, outcome_label, outcome_desc, critical, fumble) = (
         _roll_and_resolve(
             attr_modifier, skill_modifier, request.difficulty_label,
             request.sparks_spent, request.press, ruleset,
+            request.borrowed_trouble,
         )
     )
 
@@ -172,6 +239,9 @@ def resolve_roll(request: RollRequest, ruleset: MergedRuleset) -> RollResult:
         outcome_description=outcome_desc,
         sparks_spent=request.sparks_spent,
         request=request,
+        borrowed_trouble=request.borrowed_trouble,
+        critical=critical,
+        fumble=fumble,
     )
 
 
@@ -190,7 +260,8 @@ def resolve_saving_throw(
     """
     attr_modifier = character.get_major_attribute_modifier(major_attribute_id, ruleset)
 
-    dice_rolled, dice_kept, dice_sum, diff_modifier, total, outcome, outcome_label, outcome_desc = (
+    (dice_rolled, dice_kept, dice_sum, diff_modifier, total,
+     outcome, outcome_label, outcome_desc, critical, fumble) = (
         _roll_and_resolve(attr_modifier, 0, difficulty_label, sparks_spent, False, ruleset)
     )
 
@@ -218,6 +289,8 @@ def resolve_saving_throw(
         outcome_description=outcome_desc,
         sparks_spent=sparks_spent,
         request=request,
+        critical=critical,
+        fumble=fumble,
     )
 
 
@@ -554,6 +627,9 @@ def roll_result_to_dict(result: RollResult) -> dict:
         "outcome_label": result.outcome_label,
         "outcome_description": result.outcome_description,
         "sparks_spent": result.sparks_spent,
+        "borrowed_trouble": result.borrowed_trouble,
+        "critical": result.critical,
+        "fumble": result.fumble,
         "attribute_id": result.request.attribute_id,
         "skill_id": result.request.skill_id,
         "difficulty": result.request.difficulty_label,

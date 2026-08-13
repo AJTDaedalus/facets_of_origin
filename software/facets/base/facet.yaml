@@ -1228,6 +1228,32 @@ roll_resolution:
     failure:
       label: "Things Go Wrong"
       description: "Things go wrong — but the story always moves forward."
+
+  # III.1, The Natural 12 and the Natural 2. Keyed to the DICE, not the total:
+  # a total-based crit tier would scale with modifiers (a +3 character would
+  # crit on better than a quarter of rolls), which both dilutes the moment and
+  # adds a fourth tier to every difficulty call.
+  critical:
+    natural: high              # every kept die shows its maximum face
+    min_outcome: full_success  # two sixes always land, whatever the modifiers say
+    label: "Natural 12"
+    description: "A full success, and something more besides — the player names it."
+  fumble:
+    natural: low               # every kept die shows 1
+    # max_outcome is deliberately unset. A natural 2 never drags the tier down:
+    # overriding upward rewards, overriding downward punishes competence, which
+    # is the d20 flaw research/dice_system_analysis.md rejects. It only
+    # auto-confirms the Graceful Fail when the roll failed anyway.
+    label: "Natural 2"
+    description: "If the roll failed, the Graceful Fail is confirmed without asking."
+
+  # III.1, Borrowed Trouble. Same dice effect as a Spark, different source:
+  # accept a complication that lands whatever the dice say, and take a die.
+  borrowed_trouble:
+    extra_dice: 1
+    spark_cost: 0
+    max_per_roll: 1
+
   difficulty_modifiers:
     - label: Easy
       modifier: 1

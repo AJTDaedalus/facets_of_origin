@@ -32,7 +32,10 @@
 | **Example** | [the Turning](II.4c_Character_Creation_Facet_Soul.md#tier-1) | II.4c_Character_Creation_Facet_Soul.md |
 | **Reading the Entries** | [Skills](II.6_Character_Creation_Skills.md#the-skill-list) | II.6_Character_Creation_Skills.md |
 | **Example** | [when a skill is worth a roll](II.6_Character_Creation_Skills.md#skills-and-the-fiction) | II.6_Character_Creation_Skills.md |
+| **Through the Mirror** | [why only the good one overrides](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2) | III.1_Core_Resolution.md |
 | **Example** | [spending Sparks](III.1_Core_Resolution.md#spending-sparks) | III.1_Core_Resolution.md |
+| **Example** | [Borrowed Trouble](III.1_Core_Resolution.md#borrowed-trouble) | III.1_Core_Resolution.md |
+| **MM Note** | [what Borrowed Trouble is for](III.1_Core_Resolution.md#borrowed-trouble) | III.1_Core_Resolution.md |
 | **MM Note** | [Saving throw or skill check?](III.1_Core_Resolution.md#saving-throws) | III.1_Core_Resolution.md |
 | **MM Note** | [Group roll or individual rolls?](III.1_Core_Resolution.md#group-rolls) | III.1_Core_Resolution.md |
 | **MM Note** | [The "Don't Roll, Just Do It" principle](III.1_Core_Resolution.md#when-not-to-roll) | III.1_Core_Resolution.md |

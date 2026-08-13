@@ -86,6 +86,14 @@
 - [MM4 — The Player Who Disengages](../mm_manual/MM4_Running_the_Table.md#the-player-who-disengages)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
+## Borrowed Trouble
+
+*Defined in [III.1](III.1_Core_Resolution.md).*
+
+- [III.1 — Borrowed Trouble](III.1_Core_Resolution.md#borrowed-trouble)
+- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
+- [MM5 — Borrowed Trouble](../mm_manual/MM5_Quick_Reference.md#borrowed-trouble)
+
 ## Boss
 
 *Defined in [III.3](III.3_Combat.md).*
@@ -283,6 +291,7 @@
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
+- [III.1 — Borrowed Trouble](III.1_Core_Resolution.md#borrowed-trouble)
 - [III.3 — Endurance Pool](III.3_Combat.md#endurance-pool)
 - [III.3 — Calculating Your Endurance Pool](III.3_Combat.md#calculating-your-endurance-pool)
 - [III.3 — An Empty Endurance Pool](III.3_Combat.md#an-empty-endurance-pool)
@@ -396,11 +405,13 @@
 *Defined in [III.1](III.1_Core_Resolution.md).*
 
 - [II.3 — Outcome Tiers for Magic](II.3_Magic.md#outcome-tiers-for-magic)
+- [III.1 — The Natural 12 and the Natural 2](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2)
 - [III.1 — Earning Sparks](III.1_Core_Resolution.md#earning-sparks)
 - [III.1 — Failure (6-)](III.1_Core_Resolution.md#failure-6-)
 - [Quick Start — The Three Tiers in Play](Quick_Start.md#the-three-tiers-in-play)
 - [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
+- [MM5 — Core Resolution](../mm_manual/MM5_Quick_Reference.md#core-resolution)
 - [MM5 — Sparks](../mm_manual/MM5_Quick_Reference.md#sparks)
 - [MM5 — Spark Flow (MM Guidance)](../mm_manual/MM5_Quick_Reference.md#spark-flow-mm-guidance)
 - [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
@@ -532,6 +543,20 @@
 - [MM1 — Named NPCs](../mm_manual/MM1_Encounters_and_Enemies.md#named-npcs)
 - [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)
 
+## Natural 12
+
+*Defined in [III.1](III.1_Core_Resolution.md).*
+
+- [III.1 — The Natural 12 and the Natural 2](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2)
+- [MM5 — Core Resolution](../mm_manual/MM5_Quick_Reference.md#core-resolution)
+
+## Natural 2
+
+*Defined in [III.1](III.1_Core_Resolution.md).*
+
+- [III.1 — The Natural 12 and the Natural 2](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2)
+- [MM5 — Core Resolution](../mm_manual/MM5_Quick_Reference.md#core-resolution)
+
 ## Off-Balance
 
 *Defined in [III.3](III.3_Combat.md).*
@@ -630,6 +655,8 @@
 *Defined in [III.3](III.3_Combat.md).*
 
 - [II.2 — Soul](II.2_Character_Creation_Attributes.md#soul)
+- [III.1 — The Natural 12 and the Natural 2](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2)
+- [III.1 — Borrowed Trouble](III.1_Core_Resolution.md#borrowed-trouble)
 - [III.3 — Press](III.3_Combat.md#press)
 - [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
 - [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
@@ -855,8 +882,10 @@
 - [II.4a — Grace Branch](II.4a_Character_Creation_Facet_Body.md#grace-branch)
 - [II.4a — Iron Branch](II.4a_Character_Creation_Facet_Body.md#iron-branch)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
+- [III.1 — The Natural 12 and the Natural 2](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2)
 - [III.1 — Sparks](III.1_Core_Resolution.md#sparks)
 - [III.1 — Spending Sparks](III.1_Core_Resolution.md#spending-sparks)
+- [III.1 — Borrowed Trouble](III.1_Core_Resolution.md#borrowed-trouble)
 - [III.3 — Press](III.3_Combat.md#press)
 - [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
 - [III.3 — Your Five Numbers On Screen](III.3_Combat.md#your-five-numbers-on-screen)
@@ -1024,6 +1053,7 @@
 - [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
 - [MM2 — Designing the 7-9 Complication](../mm_manual/MM2_Session_Design.md#designing-the-7-9-complication)
 - [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
+- [MM5 — Core Resolution](../mm_manual/MM5_Quick_Reference.md#core-resolution)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Reactions (1 per incoming action)](../mm_manual/MM5_Quick_Reference.md#reactions-1-per-incoming-action)
 - [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)
