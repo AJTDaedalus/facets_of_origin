@@ -117,9 +117,14 @@ def rules_digest(ruleset) -> str:
         "scope restriction is the whole limitation, there is no extra difficulty.",
         "",
         f"**Advancement:** {r.advancement.session_skill_points} Skill Points per "
-        f"session, spendable only on skills you actually used. "
-        f"{r.advancement.marks_per_rank} marks advance a rank. Primary-Facet skills "
-        f"cost 1 SP, everything else 2.",
+        f"session, spendable only on skills you actually used. A rank advance "
+        f"costs {r.advancement.marks_per_rank.practiced} marks to Practiced, "
+        f"{r.advancement.marks_per_rank.expert} to Expert, "
+        f"{r.advancement.marks_per_rank.master} to Master. Primary-Facet skills "
+        f"cost 1 SP, everything else 2. Within one Facet at most "
+        f"{r.advancement.rank_caps.beyond_practiced} skills may pass Practiced "
+        f"and only {r.advancement.rank_caps.master} may reach Master — the slot "
+        f"is claimed the moment a mark goes past Practiced and is never freed.",
         "",
     ]
     return "\n".join(lines)

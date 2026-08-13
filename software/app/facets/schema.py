@@ -1,6 +1,7 @@
 """Pydantic schema for Facet YAML files — the ruleset data format."""
 from __future__ import annotations
 
+import warnings
 from typing import Any, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -310,6 +311,38 @@ class GroupRollDef(BaseModel):
     lead_roller_alternative: bool = True
 
 
+class NaturalResultDef(BaseModel):
+    """A result keyed to the dice themselves rather than the modified total.
+
+    Fields:
+        natural: "high" — every kept die shows the maximum face; "low" — every
+            kept die shows 1.
+        min_outcome: Tier this result can never fall below, whatever the
+            modifiers say. None leaves the tier alone.
+        max_outcome: Tier this result can never rise above. **Left None for the
+            fumble on purpose** — overriding a tier upward rewards, overriding
+            it downward punishes competence, which is the d20 failure mode
+            `research/dice_system_analysis.md` rejects.
+        label: What the table calls it.
+    """
+    natural: Literal["high", "low"]
+    min_outcome: Optional[str] = None
+    max_outcome: Optional[str] = None
+    label: str = ""
+    description: str = ""
+
+
+class BorrowedTroubleDef(BaseModel):
+    """Accept a complication, take an extra die (PHB III.1, *Borrowed Trouble*).
+
+    Mechanically identical to spending a Spark, drawn from a different place:
+    nothing is spent, and the complication lands whatever the dice say.
+    """
+    extra_dice: int = 1
+    spark_cost: int = 0
+    max_per_roll: int = 1
+
+
 class RollResolutionDef(BaseModel):
     dice: str = "2d6"
     modifier_source: str = "minor_attribute"
@@ -320,6 +353,9 @@ class RollResolutionDef(BaseModel):
     saving_throw: SavingThrowDef = Field(default_factory=SavingThrowDef)
     contested_roll: ContestedRollDef = Field(default_factory=ContestedRollDef)
     group_roll: GroupRollDef = Field(default_factory=GroupRollDef)
+    critical: Optional[NaturalResultDef] = None
+    fumble: Optional[NaturalResultDef] = None
+    borrowed_trouble: Optional[BorrowedTroubleDef] = None
 
 
 # ---------------------------------------------------------------------------
@@ -374,11 +410,58 @@ class SkillPointCostDef(BaseModel):
     cost: int
 
 
+class MarksPerRankDef(BaseModel):
+    """Marks required for each rank advance (PHB II.4, *Advancing Skills*).
+
+    D16 replaced the flat cost with an escalating curve: the first advance stays
+    cheap so onboarding is untouched, and Master is expensive enough that pushing
+    one skill to the top is visibly a decision not to raise two others.
+    """
+    practiced: int = 3   # Novice → Practiced
+    expert: int = 5      # Practiced → Expert
+    master: int = 8      # Expert → Master
+
+    def for_rank(self, target_rank: str) -> int:
+        """Marks needed to reach `target_rank` from the rank below it."""
+        return getattr(self, target_rank, self.practiced)
+
+
+class RankCapsDef(BaseModel):
+    """How many skills in one Facet may exceed Practiced (PHB II.4; D16).
+
+    The ceiling that makes a Body character a *particular* Body character. Caps
+    bind every Facet uniformly — primary and cross-trained alike — so there is
+    one rule rather than two. `None` means uncapped, which is what a homebrew
+    Facet that omits the block inherits: base's counts are tuned for five skills
+    and must not silently constrain a Facet with a different count.
+    """
+    beyond_practiced: Optional[int] = None
+    master: Optional[int] = None
+
+
 class AdvancementDef(BaseModel):
     skill_ranks: list[SkillRankDef] = Field(default_factory=list)
     skill_point_costs: list[SkillPointCostDef] = Field(default_factory=list)
     session_skill_points: int = 4
-    marks_per_rank: int = 3
+    # D16: per-tier marks. A bare integer is the pre-D16 shape and still loads —
+    # same deprecation contract as `enemy.endurance` → `resolve`.
+    marks_per_rank: MarksPerRankDef = Field(default_factory=MarksPerRankDef)
+    rank_caps: RankCapsDef = Field(default_factory=RankCapsDef)
+
+    @field_validator("marks_per_rank", mode="before")
+    @classmethod
+    def _accept_legacy_flat_marks(cls, value):
+        """Expand the pre-D16 `marks_per_rank: 3` integer across all three tiers."""
+        if isinstance(value, int) and not isinstance(value, bool):
+            warnings.warn(
+                "advancement.marks_per_rank as a single integer is deprecated "
+                "(PHB II.4 / D16 gives each rank its own cost). Use a mapping: "
+                "{practiced: 3, expert: 5, master: 8}.",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            return {"practiced": value, "expert": value, "master": value}
+        return value
     # T4.3/D10: the forfeit is dead. Up to `bank_cap` unspent points carry
     # into the next session, and `training_marks_per_session` of the session
     # points may go to an UNUSED Primary-Facet skill ("training between
@@ -387,8 +470,9 @@ class AdvancementDef(BaseModel):
     bank_cap: int = 2
     training_marks_per_session: int = 1
     # Defaults mirror facets/base/facet.yaml. A Facet that omits these must land
-    # on canon, not on a stale earlier revision (v0.3 moved 6 -> 5 and 4 -> 3).
-    facet_level_threshold: int = 5
+    # on canon, not on a stale earlier revision (v0.3 moved 6 -> 5 and 4 -> 3;
+    # D16 moved the threshold 5 -> 3 to fit the 9-advance shaped ceiling).
+    facet_level_threshold: int = 3
     major_advancement_threshold: int = 3   # total Facet levels before a Major Advancement
 
 

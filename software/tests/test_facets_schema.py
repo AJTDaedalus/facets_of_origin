@@ -429,18 +429,21 @@ class TestAdvancementDef:
     def test_defaults_match_canon(self):
         """Schema defaults must equal facets/base/facet.yaml, not an earlier
         revision. v0.3 moved facet_level_threshold 6 -> 5 and
-        major_advancement_threshold 4 -> 3; the defaults lagged behind, so any
-        Facet omitting them would silently load pre-v0.3 advancement pacing.
+        major_advancement_threshold 4 -> 3; D16 moved the threshold again
+        (5 -> 3) and replaced the flat mark cost with the 3/5/8 curve. The
+        defaults have lagged before, so any Facet omitting them would silently
+        load stale advancement pacing.
         """
         adv = AdvancementDef()
         assert adv.session_skill_points == 4
-        assert adv.marks_per_rank == 3
-        assert adv.facet_level_threshold == 5
+        assert (adv.marks_per_rank.practiced,
+                adv.marks_per_rank.expert,
+                adv.marks_per_rank.master) == (3, 5, 8)
+        assert adv.facet_level_threshold == 3
         assert adv.major_advancement_threshold == 3
 
     @pytest.mark.parametrize("field", [
         "session_skill_points",
-        "marks_per_rank",
         "facet_level_threshold",
         "major_advancement_threshold",
     ])
@@ -466,8 +469,40 @@ class TestAdvancementDef:
         assert adv.skill_point_costs == []
 
     def test_custom_marks_per_rank(self):
-        adv = AdvancementDef(marks_per_rank=5)
-        assert adv.marks_per_rank == 5
+        adv = AdvancementDef(marks_per_rank={"practiced": 2, "expert": 4, "master": 6})
+        assert adv.marks_per_rank.for_rank("expert") == 4
+
+    def test_marks_per_rank_default_does_not_drift_from_base_facet(self):
+        """The per-tier curve gets its own pin — it is a mapping, not a scalar."""
+        import yaml
+        from app.config import settings
+
+        with open(settings.facets_dir / "base" / "facet.yaml", encoding="utf-8") as fh:
+            marks = yaml.safe_load(fh)["advancement"]["marks_per_rank"]
+
+        default = AdvancementDef().marks_per_rank
+        for rank, value in marks.items():
+            assert default.for_rank(rank) == value, (
+                f"AdvancementDef.marks_per_rank.{rank} disagrees with base/facet.yaml"
+            )
+
+    def test_rank_caps_default_does_not_drift_from_base_facet(self):
+        """Caps default to uncapped, but base must state them — a Facet that
+        omits the block is homebrew and stays unconstrained on purpose."""
+        import yaml
+        from app.config import settings
+
+        with open(settings.facets_dir / "base" / "facet.yaml", encoding="utf-8") as fh:
+            caps = yaml.safe_load(fh)["advancement"]["rank_caps"]
+
+        assert caps == {"beyond_practiced": 3, "master": 1}
+        assert AdvancementDef().rank_caps.beyond_practiced is None
+        assert AdvancementDef().rank_caps.master is None
+
+    def test_legacy_flat_marks_per_rank_deprecates(self):
+        with pytest.warns(DeprecationWarning, match="marks_per_rank"):
+            adv = AdvancementDef(marks_per_rank=3)
+        assert adv.marks_per_rank.for_rank("master") == 3
 
 
 # ---------------------------------------------------------------------------

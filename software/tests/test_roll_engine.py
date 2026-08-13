@@ -482,7 +482,8 @@ class TestRequestResultFields:
             "dice_rolled", "dice_kept", "dice_sum",
             "attribute_modifier", "skill_modifier", "difficulty_modifier",
             "total", "outcome", "outcome_label", "outcome_description",
-            "sparks_spent", "attribute_id", "skill_id", "difficulty", "description",
+            "sparks_spent", "borrowed_trouble", "critical", "fumble",
+            "attribute_id", "skill_id", "difficulty", "description",
         }
         assert expected_keys == set(d.keys())
 

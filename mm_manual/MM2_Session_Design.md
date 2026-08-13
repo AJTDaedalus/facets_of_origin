@@ -179,6 +179,23 @@ The party is talking to people. Negotiation, interrogation, persuasion, seductio
 
 **Know the NPC's breaking point.** Every NPC has something they will not do regardless of the roll. No Charisma check makes the loyal guard betray their captain. No Persuade roll makes the grieving parent forgive the killer. Know where the line is before the scene starts, so you can say "this NPC cannot be convinced of that" without it feeling arbitrary.
 
+**What a 7–9 costs in a social scene.** Combat tells you what a partial success looks like; a conversation does not. The result is that social 7–9s drift toward "you get it, but they're a bit annoyed," which costs the player nothing and teaches the table that talking is the safe pillar. It is not supposed to be. Below are the shapes a social partial success actually takes — the same job the Magic 6- Templates do for a failed working.
+
+**Table MM2–1: What a Social 7–9 Costs**
+
+| Shape | The cost | Looks like |
+|---|---|---|
+| **They know you needed it** | You get the thing; they learn what it is worth to you, and they will price it that way next time | The harbourmaster signs the writ, and now knows you cannot leave without one |
+| **The debt** | You get it on credit — a favour owed, unspecified, callable | "I'll do it. And one day I'll ask you for something." |
+| **The witness** | You get it, and someone who should not have heard it did | The clerk agrees quietly. The other clerk was not as absorbed in her ledger as she looked |
+| **The narrower yes** | You get part of it — the part that costs them least | They will not vouch for you, but they will not contradict you either |
+| **The wrong believer** | It lands, and lands too well on the wrong person | The crowd believes you. One of them believes you enough to act on it tonight |
+| **The record** | You get it, and it is written down somewhere | Permission granted, and your name is now in a book that other people read |
+
+Pick before you narrate, name the cost as part of the success, and rotate the shapes — six partials in a row that all cost a favour turns the debt into a flat fee. The test is the same one the magic complications use: *does the table now have something to do?*
+
+**And when it goes wrong, it is rarely "they say no."** A 6- in a social scene should almost never be a refusal, because a refusal ends the scene and the story has to keep moving. It should be a *worse relationship than the one you walked in with*: they agree and mean something different by it; they refuse and tell someone why you asked; they say yes and you realise, too late, that they were waiting to be asked.
+
 ### Investigation
 
 The party is trying to learn something. Searching for clues, following leads, researching in a library, interrogating witnesses.
@@ -314,7 +331,7 @@ Each clue is available through a different approach — social, investigative, p
 
 Every entry below is an active want or an unfolding situation, not a noun. Weighted on the 2d6 curve, so the common results sit at 7 and the table's teeth are on the ends. Roll it when a scene needs a reason to start, or when the party has solved the thing you prepared and it is only nine o'clock.
 
-**Table MM2–1: What Walks In**
+**Table MM2–2: What Walks In**
 
 | 2d6 | What is happening |
 |---|---|
@@ -356,7 +373,7 @@ Earlier in this chapter you were told that something always happens on a 6-. Tha
 
 This table is for that moment. Six categories of trouble, one of which fits nearly any situation the game can produce. **Roll a d6 or simply pick the row you like** — both are legitimate — and use the result as a prompt for the consequence you narrate. It works for any roll, magical or not.
 
-**Table MM2–2: Generic 6− Consequences**
+**Table MM2–3: Generic 6− Consequences**
 
 | d6 | Category | The 6- consequence |
 |---|---|---|
@@ -792,7 +809,7 @@ When a player deliberately plays into their character's weakness — low attribu
 
 Sparks do not carry over — every character starts every session with 3, so an unspent Spark at the end of the night is simply gone. The target is spend-what-you-earn: each player should **spend 2–4 Sparks during the session** and **earn 2–4 back**, so Sparks feel like a renewable resource, not a finite one.
 
-**Table MM2–3: Spark Target Economy**
+**Table MM2–4: Spark Target Economy**
 
 | | Start | Earned | Spent |
 |---|---|---|---|

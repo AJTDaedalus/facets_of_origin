@@ -6,7 +6,7 @@
 
 ## How to Read This Book
 
-**If you have never played a tabletop roleplaying game before**, don't start here. Start with the **Quick Start** — it hands you a finished character, the one rule the whole game runs on, and an example scene, and has you playing in about ten minutes. This book will still be here afterward, and it will make far more sense once you have rolled a few dice.
+**If you have never played a tabletop roleplaying game before**, don't start here. Start with the **Quick Start** — it hands you the one rule the whole game runs on, character creation in six steps, and an example scene, and has you playing in about ten minutes. This book will still be here afterward, and it will make far more sense once you have rolled a few dice.
 
 **If you are a player**, you need less of this book than you might think:
 

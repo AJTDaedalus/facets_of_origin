@@ -69,6 +69,18 @@ The modifier is the number you roll with — write it large. The rating is chara
 | Attune | Soul | | |
 | Gamble | Soul | | |
 
+Marks needed for the next rank: **3** to Practiced, **5** to Expert, **8** to Master.
+
+### Rank Slots
+
+Within each Facet, at most **3** skills may pass Practiced and only **1** of those may reach Master (II.4, *How Far a Skill Can Go*). Write the skill in as you commit the slot — the commitment is permanent.
+
+| Facet | Beyond Practiced (3) | Master (1) |
+|---|---|---|
+| Body | | |
+| Mind | | |
+| Soul | | |
+
 ---
 
 ### Techniques
