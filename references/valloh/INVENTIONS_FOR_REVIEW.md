@@ -45,6 +45,30 @@ Canon describes what each tribe's gift *does*; the names are mine. **Crystal**,
 **Wildspeech**, **The Weave**, **Mindshare**, **Resonance of Stone**. Rename freely
 — each appears in `facet.yaml`, `V1`, and the appendix format, and nowhere else.
 
+## 2b. The thirty example intents — now in the book
+
+They were drafted in `BRIEF_valloh_facet.md` §5 and, until now, never carried into
+`settings/valloh/V2`, which claimed a catalog it did not contain. Written in, in the
+core appendix's format: territory, beyond-the-focus, three intents at each scope.
+
+**Three gifts arrived carrying rules, and all of them are cut.** Blade-bond let its
+Strike leave an enemy Open on a 7–9 as well as a 10+, and resolve as a Final Blow
+once per session at Major scope. Stone-flesh let its holder take a Tier 2 Condition
+as Tier 1 once per scene, and refuse to be Broken once per session.
+
+Cut for the reason the Thenya Bond's reaction clause was cut: we have measured what
+happens when a gift carries a mechanic, and it put the Hard encounter row at 75%
+against a 40–60% band. A gift granting an extra Condition tier or a second Final Blow
+is a Technique that skipped the Technique economy, handed out at creation to a
+character who paid nothing for it.
+
+Those intents are replaced with fiction of the same weight — *the blade goes through
+what should have stopped it*; *be the last thing between a thing and a door, for as
+long as that has to be true* — and a Through the Mirror box says why. **If you want
+any of the three as real mechanics, say so and they become Techniques in a Facet
+tree, simulated before they print.** A new invariant now refuses a gift entry that
+carries one.
+
 ## 3. The *beyond this domain's focus* lines
 
 Every domain in the core catalog prints what it cannot do; these ten needed the
