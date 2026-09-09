@@ -10,7 +10,7 @@
 
 | Box | Title | Section |
 |---|---|---|
-| **Example** | [six steps, one lazy man](II.1_Character_Creation_Overview.md#the-six-steps) | II.1_Character_Creation_Overview.md |
+| **Example** | [six steps, one lazy man](II.1_Character_Creation_Overview.md#the-seven-steps) | II.1_Character_Creation_Overview.md |
 | **Example** | [the arithmetic](II.2_Character_Creation_Attributes.md#distributing-your-attributes) | II.2_Character_Creation_Attributes.md |
 | **Example** | [The Scholar](II.2_Character_Creation_Attributes.md#deriving-your-major-attribute-modifiers) | II.2_Character_Creation_Attributes.md |
 | **Through the Mirror** | [why the spread matters](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play) | II.2_Character_Creation_Attributes.md |
@@ -30,8 +30,8 @@
 | **Example** | [a Tier 1 Technique doing its job](II.4a_Character_Creation_Facet_Body.md#might-branch) | II.4a_Character_Creation_Facet_Body.md |
 | **Example** | [buying an answer instead of rolling for one](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-clarity-tier-2) | II.4b_Character_Creation_Facet_Mind.md |
 | **Example** | [the Turning](II.4c_Character_Creation_Facet_Soul.md#tier-1) | II.4c_Character_Creation_Facet_Soul.md |
-| **Reading the Entries** | [Skills](II.6_Character_Creation_Skills.md#the-skill-list) | II.6_Character_Creation_Skills.md |
-| **Example** | [when a skill is worth a roll](II.6_Character_Creation_Skills.md#skills-and-the-fiction) | II.6_Character_Creation_Skills.md |
+| **Reading the Entries** | [Skills](II.7_Character_Creation_Skills.md#the-skill-list) | II.7_Character_Creation_Skills.md |
+| **Example** | [when a skill is worth a roll](II.7_Character_Creation_Skills.md#skills-and-the-fiction) | II.7_Character_Creation_Skills.md |
 | **Through the Mirror** | [why only the good one overrides](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2) | III.1_Core_Resolution.md |
 | **Example** | [spending Sparks](III.1_Core_Resolution.md#spending-sparks) | III.1_Core_Resolution.md |
 | **Example** | [Borrowed Trouble](III.1_Core_Resolution.md#borrowed-trouble) | III.1_Core_Resolution.md |
@@ -57,6 +57,7 @@
 | **Through the Mirror** | [why armor is a budget and not a subtraction](IV.1_Equipment.md#armor) | IV.1_Equipment.md |
 | **Example** | [spending a downgrade budget](IV.1_Equipment.md#armor-in-play) | IV.1_Equipment.md |
 | **MM Note** | [Money and wealth](IV.1_Equipment.md#currency-and-trade) | IV.1_Equipment.md |
+| **MM Note** | [why one-use, and nothing else](IV.1_Equipment.md#one-use-items) | IV.1_Equipment.md |
 | **Example** | [six steps, one lazy man](Quick_Start.md#6-fill-in-the-rest) | Quick_Start.md |
 | **Reading the Entries** | [the domain descriptions](Appendix_Magic_Domains.md#appendix-magic-domain-catalog) | Appendix_Magic_Domains.md |
 | **Reading the Entries** | [the example intents](Appendix_Magic_Domains.md#appendix-magic-domain-catalog) | Appendix_Magic_Domains.md |

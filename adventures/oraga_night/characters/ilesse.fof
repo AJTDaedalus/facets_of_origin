@@ -1,0 +1,64 @@
+fof_version: '0.1'
+type: character
+id: ilesse-kethaun-oraga_ni
+name: Ilesse Kethaun
+version: 1.0.0
+authors:
+- Ilesse Kethaun
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+  - id: valloh
+    version: 0.1.0
+campaign_id: oraga_night
+character:
+  name: Ilesse Kethaun
+  player_name: Ilesse Kethaun
+  primary_facet: soul
+  attributes:
+    strength: 1
+    dexterity: 2
+    constitution: 1
+    intelligence: 2
+    wisdom: 3
+    knowledge: 2
+    spirit: 2
+    luck: 2
+    charisma: 3
+  skills:
+    persuade:
+      rank: practiced
+      marks: 0
+  sparks: 3
+  session_skill_points_remaining: 4
+  training_marks_this_session: 0
+  facet_levels: {}
+  rank_advances_by_facet:
+    soul: 1
+  facet_level: 0
+  total_facet_levels: 0
+  career_advances: 1
+  technique_picks_available: 0
+  techniques: []
+  technique_choices: {}
+  specialty: The Thenya border and the Nolonaire family — its history, its debts, and everything
+    Veier was before Rekuzan.
+  magic_domain: crystal
+  magic_tradition: intuitive
+  magic_technique_active: false
+  inventory:
+  - veil_of_quiet
+  - seal_a_door
+  - steady_light
+  lineage: orthaen
+  gifted: true
+  domain_source: lineage
+  module_role: The Border Cousin
+  description: A courtier of House Kethaun's border branch, whose family has traded, feuded
+    and married across the Thenya frontier for five generations. Ilesse knew the Nolonaire
+    name long before the rest of Rekuzan learned to gossip about it.
+  suggested_agenda: The Cousin's Errand.
+  technique_at_facet_level_1: lasting_impression
+created_at: '2026-09-09T11:54:53.807898+00:00'
+last_modified: '2026-09-09T11:54:53.807898+00:00'

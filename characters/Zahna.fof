@@ -64,7 +64,7 @@ character:
       skill: lore
       rank: practiced
     # Magic-granting Background: the Inscription domain origin takes the
-    # place of a secondary skill (PHB II.5; facet.yaml domain_replaces_secondary).
+    # place of a secondary skill (PHB II.6; facet.yaml domain_replaces_secondary).
     specialty: >
       Deep familiarity with the Artificers' Guild records, technical vocabulary,
       and personnel — and with the circumstances of the Guild's dissolution.
@@ -86,7 +86,7 @@ character:
 
     Domain note: Inscription is active from session one at Minor scope only,
     at the domain's normal difficulty — the scope restriction is the only
-    limitation (per II.5 — Background grants narrative origin, Technique
+    limitation (per II.6 — Background grants narrative origin, Technique
     formalizes full capacity). Arcane Study (Archive Branch, Tier 1) at
     Facet level 1 unlocks full scope.
 

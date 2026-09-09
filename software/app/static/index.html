@@ -178,6 +178,19 @@
               <select id="cc-facet"></select>
               <div id="cc-facet-info" class="choice-info"></div>
 
+              <!-- PHB II.5. Hidden entirely when the merged ruleset holds
+                   only Human, so a Shattered Origin table never sees a
+                   one-option choice. -->
+              <div id="cc-lineage-wrap" class="hidden">
+                <label for="cc-lineage">Lineage</label>
+                <select id="cc-lineage"></select>
+                <div id="cc-lineage-info" class="choice-info"></div>
+                <div id="cc-gift-wrap" class="hidden">
+                  <label for="cc-gift">Gift</label>
+                  <select id="cc-gift"><option value="">-- ungifted --</option></select>
+                </div>
+              </div>
+
               <label for="cc-background">Background</label>
               <select id="cc-background"><option value="">-- none (custom) --</option></select>
               <div id="cc-background-info" class="choice-info"></div>

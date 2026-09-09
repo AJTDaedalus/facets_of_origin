@@ -679,6 +679,170 @@ def open_clear_mode(ruleset) -> str:
     return ruleset.combat.enemy_durability.open_clears
 
 
+def open_clears_at_end_of_exchange(ruleset) -> bool:
+    """Whether the Open tag expires with the Tier 1 Conditions (R2), rather
+    than only when the enemy visibly spends its action.
+
+    The one-line predicate every caller actually wants, so no caller has to
+    compare `open_clear_mode`'s string itself and none of them can drift.
+    """
+    return open_clear_mode(ruleset) == "end_of_exchange"
+
+
+def strike_riders(ruleset) -> list:
+    """The rider menu a full-success Strike chooses from (R3), read from
+    `combat.enemy_durability.strike_riders`. A setting may trim or extend
+    it, so nothing downstream may hardcode the three the base book prints.
+    """
+    return list(ruleset.combat.enemy_durability.strike_riders)
+
+
+def rider_menu(outcome: str, target_removed: bool, ruleset) -> list:
+    """The riders actually on offer for this Strike result.
+
+    Empty unless the Strike was a full success (`can_apply_open`'s
+    eligibility — the rider replaced the bare Open option and inherits its
+    tier), and empty when the target was removed: against a Mook a 10+ takes
+    it off the board, and a tempo tag on a departed enemy is nothing.
+    """
+    if target_removed or not can_apply_open(outcome, ruleset):
+        return []
+    return strike_riders(ruleset)
+
+
+def _rider_def(rider_id: str, ruleset):
+    for rider in strike_riders(ruleset):
+        if rider.id == rider_id:
+            return rider
+    raise ValueError(
+        f"No rider '{rider_id}' in this ruleset's menu "
+        f"({', '.join(r.id for r in strike_riders(ruleset))}). "
+        "The menu is data (combat.enemy_durability.strike_riders); a rider "
+        "the book does not print must not be applied."
+    )
+
+
+def apply_rider(rider_id: str, target, ruleset, *, ally=None,
+                exchange_no: int = 1) -> list[str]:
+    """Apply one full-success Strike rider and report the tags it wrote.
+
+    The first post-roll decision in combat that is not "pay or don't": the
+    attacker chooses after seeing the 10+, and all three options are things
+    the fight already let them do, folded into the roll everyone makes.
+
+    `target` is the enemy that was Struck; `ally` is the ally named by
+    Cover. Duck-typed on both, for the same reason `expire_end_of_exchange`
+    is: the app's models and the simulator's dataclasses carry the same tags
+    and the rule lives here once.
+
+    Cover buys a reaction's Endurance cost, never its outcome — the reaction
+    is still rolled. That is what keeps it from being a free success, and it
+    is the line the acceptance's PCs-Broken gate is watching.
+    """
+    rider = _rider_def(rider_id, ruleset)
+
+    if rider.effect == "easy_tag":
+        target.open = True
+        return ["open"]
+
+    if rider.effect == "easy_tag_next_roll":
+        # "this exchange or next" — so it survives the end of the exchange
+        # it was applied in and expires at the end of the following one.
+        target.position = {"uses": 1, "expires_after_exchange": exchange_no + 1}
+        return ["position"]
+
+    if rider.effect == "free_reaction_ally":
+        if ally is None:
+            raise ValueError(
+                "Cover names an ally; apply_rider needs `ally=` to know whose "
+                "reaction is free."
+            )
+        ally.free_reaction = True
+        return ["cover"]
+
+    raise ValueError(f"Rider effect '{rider.effect}' has no engine behaviour.")
+
+
+def has_easy_tag(target) -> bool:
+    """Whether this target is currently Easy to Strike from a rider — Open,
+    or a Position that has not been spent.
+
+    Open and Position never stack: both feed the single `easy_tag` input to
+    `compose_difficulty`, and III.1's precedence makes Easy an absolute
+    override. This function is the reason that stays true in one place.
+    """
+    if getattr(target, "open", False):
+        return True
+    position = getattr(target, "position", None)
+    return bool(position) and position.get("uses", 0) > 0
+
+
+def consume_position(target) -> bool:
+    """Spend a Position tag on the roll that just used it. Returns whether
+    there was one to spend."""
+    position = getattr(target, "position", None)
+    if not position or position.get("uses", 0) <= 0:
+        return False
+    position["uses"] -= 1
+    return True
+
+
+def consume_free_reaction(character) -> bool:
+    """Spend Cover on a reaction. Returns whether the reaction was free.
+
+    One reaction, and only for the ally Cover named. The roll still happens
+    — this waives the Endurance cost, not the result.
+    """
+    if not getattr(character, "free_reaction", False):
+        return False
+    character.free_reaction = False
+    return True
+
+
+def expire_end_of_exchange(target, ruleset, *, exchange_no: int = None) -> list[str]:
+    """Expire end-of-exchange combat *tags* on a combatant, and report which
+    ones went. Returns the tag names cleared, so the caller can narrate them.
+
+    The sibling of `end_exchange`, which clears Conditions. Open is not a
+    Condition — it is a tag on an enemy — so it needs its own expiry, and
+    `end_exchange`'s signature (a bare condition list) has several callers
+    and is deliberately left alone.
+
+    Duck-typed on the target: the app's `Enemy` and the simulator's
+    `EnemyState` are different types carrying the same tags, and the rule
+    must live here once rather than once in each.
+
+    Under `open_clears: enemy_action` this function must leave Open standing —
+    the mode is the authority on the lifecycle, and end of exchange does not
+    get to clear the tag behind its back.
+
+    `exchange_no` is what lets Position expire on the right beat; without it
+    Position is left alone rather than guessed at, so a pre-R3 caller that
+    only cares about Open keeps working unchanged.
+    """
+    expired: list[str] = []
+
+    if getattr(target, "open", False) and open_clears_at_end_of_exchange(ruleset):
+        target.open = False
+        expired.append("open")
+
+    # Position outlives the exchange it was taken in ("this exchange or
+    # next"), so it expires only once `exchange_no` has reached the
+    # deadline written on it. Called without an exchange number — the
+    # pre-R3 call shape — it is left alone rather than guessed at.
+    position = getattr(target, "position", None)
+    if position and exchange_no is not None:
+        if exchange_no >= position.get("expires_after_exchange", 0):
+            target.position = None
+            expired.append("position")
+
+    if getattr(target, "free_reaction", False):
+        target.free_reaction = False
+        expired.append("cover")
+
+    return expired
+
+
 def target_strike_difficulty(base_difficulty: str, target_open: bool, ruleset) -> str:
     """An Open enemy is Easy to Strike for everyone (K-6/D4) — this is what
     makes the attacker's 10+ option on the *previous* Strike real: leave
@@ -807,7 +971,7 @@ def apply_character_difficulty_step(
 
     # Specialty shares the one character-side step pool (T2.4/D2). It is
     # always player-declared — the MM confirms it applies in the fiction —
-    # and always eases (II.5: a directly applicable Specialty turns a
+    # and always eases (II.6: a directly applicable Specialty turns a
     # Standard roll Easy; composed here as one step easier).
     if context.get("specialty_declared") and getattr(character, "specialty", None):
         candidates.append((1, "specialty"))

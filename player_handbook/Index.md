@@ -44,9 +44,9 @@
 - [II.4a — Skills of the Body](II.4a_Character_Creation_Facet_Body.md#skills-of-the-body)
 - [II.4b — Skills of the Mind](II.4b_Character_Creation_Facet_Mind.md#skills-of-the-mind)
 - [II.4c — Skills of the Soul](II.4c_Character_Creation_Facet_Soul.md#skills-of-the-soul)
-- [II.6 — Complete Skill Reference](II.6_Character_Creation_Skills.md#complete-skill-reference)
-- [II.6 — Using Skills](II.6_Character_Creation_Skills.md#using-skills)
-- [II.6 — Skill Ranks at a Glance](II.6_Character_Creation_Skills.md#skill-ranks-at-a-glance)
+- [II.7 — Complete Skill Reference](II.7_Character_Creation_Skills.md#complete-skill-reference)
+- [II.7 — Using Skills](II.7_Character_Creation_Skills.md#using-skills)
+- [II.7 — Skill Ranks at a Glance](II.7_Character_Creation_Skills.md#skill-ranks-at-a-glance)
 - [III.1 — Attribute Modifier](III.1_Core_Resolution.md#attribute-modifier)
 - [III.3 — Strike](III.3_Combat.md#strike)
 - [III.3 — Maneuver](III.3_Combat.md#maneuver)
@@ -64,20 +64,24 @@
 
 ## Background
 
-*Defined in [II.5](II.5_Character_Creation_Backgrounds.md).*
+*Defined in [II.6](II.6_Character_Creation_Backgrounds.md).*
 
-- [Appendix Character Sheet — Background](Appendix_Character_Sheet.md#background)
+- [Appendix Character Sheet — Lineage and Background](Appendix_Character_Sheet.md#lineage-and-background)
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
+- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
-- [II.5 — What Is a Background?](II.5_Character_Creation_Backgrounds.md#what-is-a-background)
-- [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [II.5 — In Play: What the Background Sounds Like](II.5_Character_Creation_Backgrounds.md#in-play-what-the-background-sounds-like)
-- [II.6 — Character Creation: Skills](II.6_Character_Creation_Skills.md#character-creation-skills)
-- [II.6 — Starting Skills](II.6_Character_Creation_Skills.md#starting-skills)
+- [II.5 — Character Creation: Lineage](II.5_Lineage.md#character-creation-lineage)
+- [II.5 — Reading the Entries — Lineages](II.5_Lineage.md#reading-the-entries--lineages)
+- [II.5 — Human](II.5_Lineage.md#human)
+- [II.5 — Formalization](II.5_Lineage.md#formalization)
+- [II.6 — What Is a Background?](II.6_Character_Creation_Backgrounds.md#what-is-a-background)
+- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
+- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
+- [II.6 — In Play: What the Background Sounds Like](II.6_Character_Creation_Backgrounds.md#in-play-what-the-background-sounds-like)
+- [II.7 — Character Creation: Skills](II.7_Character_Creation_Skills.md#character-creation-skills)
+- [II.7 — Starting Skills](II.7_Character_Creation_Skills.md#starting-skills)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
 - [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
@@ -189,7 +193,6 @@
 *Defined in [III.3](III.3_Combat.md).*
 
 - [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
-- [III.3 — Strike](III.3_Combat.md#strike)
 - [III.3 — Tier 2 Conditions](III.3_Combat.md#tier-2-conditions)
 - [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
 - [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
@@ -202,7 +205,7 @@
 *Defined in [II.4](II.4_Character_Creation_Facets.md).*
 
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
-- [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
+- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
@@ -221,7 +224,7 @@
 - [II.4b — Tier 3 *(requires one Clarity Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-clarity-tier-2)
 - [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [II.5 — Magic and Backgrounds](II.5_Character_Creation_Backgrounds.md#magic-and-backgrounds)
+- [II.6 — Magic and Backgrounds](II.6_Character_Creation_Backgrounds.md#magic-and-backgrounds)
 - [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
 - [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
 - [III.2 — In Play: The Mill at Millhaven](III.2_Adventuring.md#in-play-the-mill-at-millhaven)
@@ -244,7 +247,7 @@
 
 - [Appendix Magic Domains — Appendix: Magic Domain Catalog](Appendix_Magic_Domains.md#appendix-magic-domain-catalog)
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
+- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
 - [II.1 — Where to Go From Here](II.1_Character_Creation_Overview.md#where-to-go-from-here)
 - [II.3 — Domain](II.3_Magic.md#domain)
 - [II.3 — Domain Types](II.3_Magic.md#domain-types)
@@ -254,11 +257,12 @@
 - [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
 - [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.5 — Magic and Backgrounds](II.5_Character_Creation_Backgrounds.md#magic-and-backgrounds)
-- [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [II.5 — Mind Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
-- [II.5 — Soul Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
+- [II.5 — The Gift Is a Domain](II.5_Lineage.md#the-gift-is-a-domain)
+- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
+- [II.6 — Magic and Backgrounds](II.6_Character_Creation_Backgrounds.md#magic-and-backgrounds)
+- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
+- [II.6 — Mind Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
+- [II.6 — Soul Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
 - [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
 - [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
@@ -266,6 +270,7 @@
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
 - [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
+- [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
 - [MM2 — Domain Boundary Calls](../mm_manual/MM2_Session_Design.md#domain-boundary-calls)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
@@ -290,7 +295,7 @@
 *Defined in [III.3](III.3_Combat.md).*
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
+- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
 - [III.1 — Borrowed Trouble](III.1_Core_Resolution.md#borrowed-trouble)
 - [III.3 — Endurance Pool](III.3_Combat.md#endurance-pool)
 - [III.3 — Calculating Your Endurance Pool](III.3_Combat.md#calculating-your-endurance-pool)
@@ -313,7 +318,7 @@
 
 - [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
 - [II.4b — Tier 3 *(requires one Instinct Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-instinct-tier-2)
-- [II.5 — Body Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#body-facet-backgrounds)
+- [II.6 — Body Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#body-facet-backgrounds)
 - [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
 - [III.3 — The Exchange](III.3_Combat.md#the-exchange)
 - [III.3 — How an Exchange Runs](III.3_Combat.md#how-an-exchange-runs)
@@ -337,7 +342,7 @@
 
 - [Appendix Character Sheet — Facet](Appendix_Character_Sheet.md#facet)
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
+- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
 - [II.1 — Where to Go From Here](II.1_Character_Creation_Overview.md#where-to-go-from-here)
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
 - [II.4 — What Is a Facet?](II.4_Character_Creation_Facets.md#what-is-a-facet)
@@ -351,15 +356,19 @@
 - [II.4c — Character Creation: Facet of the Soul](II.4c_Character_Creation_Facet_Soul.md#character-creation-facet-of-the-soul)
 - [II.4c — The Soul Facet](II.4c_Character_Creation_Facet_Soul.md#the-soul-facet)
 - [II.4c — Facet of the Soul — Technique Tree](II.4c_Character_Creation_Facet_Soul.md#facet-of-the-soul--technique-tree)
-- [II.5 — Body Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#body-facet-backgrounds)
-- [II.5 — Mind Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
-- [II.5 — Soul Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
-- [II.6 — Complete Skill Reference](II.6_Character_Creation_Skills.md#complete-skill-reference)
+- [II.5 — Human](II.5_Lineage.md#human)
+- [II.5 — Formalization](II.5_Lineage.md#formalization)
+- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
+- [II.6 — Body Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#body-facet-backgrounds)
+- [II.6 — Mind Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
+- [II.6 — Soul Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
+- [II.7 — Complete Skill Reference](II.7_Character_Creation_Skills.md#complete-skill-reference)
 - [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [Quick Start — 2. Pick a Primary Facet](Quick_Start.md#2-pick-a-primary-facet)
 - [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
+- [MM3 — When Your World Has Its Own Peoples](../mm_manual/MM3_Campaign_Design.md#when-your-world-has-its-own-peoples)
 - [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
 - [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
@@ -374,6 +383,8 @@
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
+- [II.5 — Formalization](II.5_Lineage.md#formalization)
+- [II.6 — Magic and Backgrounds](II.6_Character_Creation_Backgrounds.md#magic-and-backgrounds)
 - [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
 - [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM3 — Recognizing When It Is Done](../mm_manual/MM3_Campaign_Design.md#recognizing-when-it-is-done)
@@ -400,6 +411,15 @@
 - [MM4 — In Play: Sharing the Spotlight](../mm_manual/MM4_Running_the_Table.md#in-play-sharing-the-spotlight)
 - [MM5 — Core Resolution](../mm_manual/MM5_Quick_Reference.md#core-resolution)
 
+## Gift
+
+*Defined in [II.5](II.5_Lineage.md).*
+
+- [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
+- [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
+- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
+- [II.5 — The Gift Is a Domain](II.5_Lineage.md#the-gift-is-a-domain)
+
 ## Graceful Fail
 
 *Defined in [III.1](III.1_Core_Resolution.md).*
@@ -424,6 +444,14 @@
 - [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 
+## Heritage
+
+*Defined in [II.5](II.5_Lineage.md).*
+
+- [II.5 — Reading the Entries — Lineages](II.5_Lineage.md#reading-the-entries--lineages)
+- [II.5 — Human](II.5_Lineage.md#human)
+- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
+
 ## Intent
 
 *Defined in [II.3](II.3_Magic.md).*
@@ -431,8 +459,8 @@
 - [II.3 — Intent](II.3_Magic.md#intent)
 - [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [II.6 — Skills of the Body](II.6_Character_Creation_Skills.md#skills-of-the-body)
-- [II.6 — Skills of the Soul](II.6_Character_Creation_Skills.md#skills-of-the-soul)
+- [II.7 — Skills of the Body](II.7_Character_Creation_Skills.md#skills-of-the-body)
+- [II.7 — Skills of the Soul](II.7_Character_Creation_Skills.md#skills-of-the-soul)
 - [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
 - [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
@@ -443,6 +471,20 @@
 - [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
 - [MM2 — Designing the 7-9 Complication](../mm_manual/MM2_Session_Design.md#designing-the-7-9-complication)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
+
+## Lineage
+
+*Defined in [II.5](II.5_Lineage.md).*
+
+- [Appendix Character Sheet — Lineage and Background](Appendix_Character_Sheet.md#lineage-and-background)
+- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
+- [II.1 — Where to Go From Here](II.1_Character_Creation_Overview.md#where-to-go-from-here)
+- [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
+- [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
+- [II.5 — Character Creation: Lineage](II.5_Lineage.md#character-creation-lineage)
+- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
+- [II.6 — Magic and Backgrounds](II.6_Character_Creation_Backgrounds.md#magic-and-backgrounds)
+- [Quick Start — 2. Pick a Primary Facet](Quick_Start.md#2-pick-a-primary-facet)
 
 ## Major Advancement
 
@@ -468,18 +510,18 @@
 
 - [Appendix Magic Domains — Core Mind Domains](Appendix_Magic_Domains.md#core-mind-domains)
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
+- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
 - [II.4 — How Far a Skill Can Go](II.4_Character_Creation_Facets.md#how-far-a-skill-can-go)
 - [II.4 — Advancement and Reflection](II.4_Character_Creation_Facets.md#advancement-and-reflection)
 - [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
 - [II.4a — Iron Branch](II.4a_Character_Creation_Facet_Body.md#iron-branch)
-- [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [II.5 — Body Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#body-facet-backgrounds)
-- [II.5 — Mind Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
-- [II.5 — Soul Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
+- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
+- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
+- [II.6 — Body Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#body-facet-backgrounds)
+- [II.6 — Mind Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
+- [II.6 — Soul Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
@@ -493,7 +535,7 @@
 
 *Defined in [I](I_Introduction.md).*
 
-- [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
+- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
 - [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
@@ -580,7 +622,7 @@
 - [II.4 — What Is a Facet?](II.4_Character_Creation_Facets.md#what-is-a-facet)
 - [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
 - [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
-- [II.6 — Skills of the Body](II.6_Character_Creation_Skills.md#skills-of-the-body)
+- [II.7 — Skills of the Body](II.7_Character_Creation_Skills.md#skills-of-the-body)
 - [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
 - [III.1 — When Not to Roll](III.1_Core_Resolution.md#when-not-to-roll)
 - [III.3 — Postures](III.3_Combat.md#postures)
@@ -589,6 +631,7 @@
 - [III.3 — Named NPCs](III.3_Combat.md#named-npcs)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
 - [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
+- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
 - [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
 - [MM2 — The Three-Act Framework](../mm_manual/MM2_Session_Design.md#the-three-act-framework)
 - [MM2 — In Play: The Price of a Partial Success](../mm_manual/MM2_Session_Design.md#in-play-the-price-of-a-partial-success)
@@ -631,6 +674,28 @@
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
 - [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
 
+## Position
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [II.4a — Grace Branch](II.4a_Character_Creation_Facet_Body.md#grace-branch)
+- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
+- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
+- [III.3 — Recovering Your Endurance Pool](III.3_Combat.md#recovering-your-endurance-pool)
+- [III.3 — Strike](III.3_Combat.md#strike)
+- [III.3 — Maneuver](III.3_Combat.md#maneuver)
+- [III.3 — Conditions](III.3_Combat.md#conditions)
+- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
+- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
+- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
+- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
+- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
+- [MM4 — In Play: Sharing the Spotlight](../mm_manual/MM4_Running_the_Table.md#in-play-sharing-the-spotlight)
+- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
+- [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
+- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
+
 ## Posture
 
 *Defined in [III.3](III.3_Combat.md).*
@@ -666,14 +731,14 @@
 *Defined in [II.4](II.4_Character_Creation_Facets.md).*
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
+- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
 - [II.4 — What Is a Facet?](II.4_Character_Creation_Facets.md#what-is-a-facet)
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
 - [II.4 — How Far a Skill Can Go](II.4_Character_Creation_Facets.md#how-far-a-skill-can-go)
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
+- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
+- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
 - [Quick Start — 2. Pick a Primary Facet](Quick_Start.md#2-pick-a-primary-facet)
 - [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
@@ -688,14 +753,15 @@
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
 - [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.6 — Character Creation: Skills](II.6_Character_Creation_Skills.md#character-creation-skills)
-- [II.6 — Using Skills](II.6_Character_Creation_Skills.md#using-skills)
-- [II.6 — Skills of the Body](II.6_Character_Creation_Skills.md#skills-of-the-body)
-- [II.6 — Skills of the Mind](II.6_Character_Creation_Skills.md#skills-of-the-mind)
-- [II.6 — Skills of the Soul](II.6_Character_Creation_Skills.md#skills-of-the-soul)
-- [II.6 — Skill Ranks at a Glance](II.6_Character_Creation_Skills.md#skill-ranks-at-a-glance)
-- [II.6 — Starting Skills](II.6_Character_Creation_Skills.md#starting-skills)
+- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
+- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
+- [II.7 — Character Creation: Skills](II.7_Character_Creation_Skills.md#character-creation-skills)
+- [II.7 — Using Skills](II.7_Character_Creation_Skills.md#using-skills)
+- [II.7 — Skills of the Body](II.7_Character_Creation_Skills.md#skills-of-the-body)
+- [II.7 — Skills of the Mind](II.7_Character_Creation_Skills.md#skills-of-the-mind)
+- [II.7 — Skills of the Soul](II.7_Character_Creation_Skills.md#skills-of-the-soul)
+- [II.7 — Skill Ranks at a Glance](II.7_Character_Creation_Skills.md#skill-ranks-at-a-glance)
+- [II.7 — Starting Skills](II.7_Character_Creation_Skills.md#starting-skills)
 - [III.1 — Skill Modifier](III.1_Core_Resolution.md#skill-modifier)
 - [III.3 — Strike](III.3_Combat.md#strike)
 - [III.3 — Parry](III.3_Combat.md#parry)
@@ -732,6 +798,7 @@
 - [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
 - [II.4 — Advancement and Reflection](II.4_Character_Creation_Facets.md#advancement-and-reflection)
+- [II.5 — Formalization](II.5_Lineage.md#formalization)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 
 ## Resolve
@@ -760,6 +827,18 @@
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Threat Rating (TR)](../mm_manual/MM5_Quick_Reference.md#threat-rating-tr)
 
+## Rider
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [III.3 — Strike](III.3_Combat.md#strike)
+- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
+- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
+- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
+- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
+- [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
+
 ## Saving Throw
 
 *Defined in [III.1](III.1_Core_Resolution.md).*
@@ -779,7 +858,9 @@
 - [II.3 — Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope)
 - [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [II.5 — Magic and Backgrounds](II.5_Character_Creation_Backgrounds.md#magic-and-backgrounds)
+- [II.5 — Reading the Entries — Lineages](II.5_Lineage.md#reading-the-entries--lineages)
+- [II.5 — The Gift Is a Domain](II.5_Lineage.md#the-gift-is-a-domain)
+- [II.6 — Magic and Backgrounds](II.6_Character_Creation_Backgrounds.md#magic-and-backgrounds)
 - [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
 - [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
@@ -799,16 +880,17 @@
 
 ## Secondary Skill
 
-*Defined in [II.5](II.5_Character_Creation_Backgrounds.md).*
+*Defined in [II.6](II.6_Character_Creation_Backgrounds.md).*
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
-- [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [II.5 — Body Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#body-facet-backgrounds)
-- [II.5 — Mind Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
-- [II.5 — Soul Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
-- [II.6 — Starting Skills](II.6_Character_Creation_Skills.md#starting-skills)
+- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
+- [II.5 — Reading the Entries — Lineages](II.5_Lineage.md#reading-the-entries--lineages)
+- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
+- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
+- [II.6 — Body Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#body-facet-backgrounds)
+- [II.6 — Mind Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
+- [II.6 — Soul Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
+- [II.7 — Starting Skills](II.7_Character_Creation_Skills.md#starting-skills)
 - [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
 
 ## Shaken
@@ -825,23 +907,25 @@
 
 ## Skill
 
-*Defined in [II.6](II.6_Character_Creation_Skills.md).*
+*Defined in [II.7](II.7_Character_Creation_Skills.md).*
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
+- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
 - [II.3 — Rolling Magic](II.3_Magic.md#rolling-magic)
 - [II.4 — How Far a Skill Can Go](II.4_Character_Creation_Facets.md#how-far-a-skill-can-go)
 - [II.4a — Skills of the Body](II.4a_Character_Creation_Facet_Body.md#skills-of-the-body)
 - [II.4b — Skills of the Mind](II.4b_Character_Creation_Facet_Mind.md#skills-of-the-mind)
 - [II.4c — Skills of the Soul](II.4c_Character_Creation_Facet_Soul.md#skills-of-the-soul)
-- [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [II.5 — Body Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#body-facet-backgrounds)
-- [II.5 — Mind Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
-- [II.5 — Soul Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
-- [II.6 — Complete Skill Reference](II.6_Character_Creation_Skills.md#complete-skill-reference)
-- [II.6 — The Skill List](II.6_Character_Creation_Skills.md#the-skill-list)
-- [II.6 — Skill Ranks at a Glance](II.6_Character_Creation_Skills.md#skill-ranks-at-a-glance)
+- [II.5 — Reading the Entries — Lineages](II.5_Lineage.md#reading-the-entries--lineages)
+- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
+- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
+- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
+- [II.6 — Body Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#body-facet-backgrounds)
+- [II.6 — Mind Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
+- [II.6 — Soul Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
+- [II.7 — Complete Skill Reference](II.7_Character_Creation_Skills.md#complete-skill-reference)
+- [II.7 — The Skill List](II.7_Character_Creation_Skills.md#the-skill-list)
+- [II.7 — Skill Ranks at a Glance](II.7_Character_Creation_Skills.md#skill-ranks-at-a-glance)
 - [III.1 — Skill Modifier](III.1_Core_Resolution.md#skill-modifier)
 - [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
 - [III.3 — Calculating Your Endurance Pool](III.3_Combat.md#calculating-your-endurance-pool)
@@ -868,7 +952,7 @@
 *Defined in [II.4](II.4_Character_Creation_Facets.md).*
 
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
-- [II.6 — Character Creation: Skills](II.6_Character_Creation_Skills.md#character-creation-skills)
+- [II.7 — Character Creation: Skills](II.7_Character_Creation_Skills.md#character-creation-skills)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 
 ## Spark
@@ -900,13 +984,15 @@
 ## Specialty
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
+- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
 - [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
-- [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [II.5 — Body Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#body-facet-backgrounds)
-- [II.5 — Mind Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
-- [II.5 — Soul Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
+- [II.5 — Reading the Entries — Lineages](II.5_Lineage.md#reading-the-entries--lineages)
+- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
+- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
+- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
+- [II.6 — Body Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#body-facet-backgrounds)
+- [II.6 — Mind Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
+- [II.6 — Soul Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
 - [IV.1 — Specialized Gear](IV.1_Equipment.md#specialized-gear)
 - [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
 - [Quick Start — 6. Fill in the rest](Quick_Start.md#6-fill-in-the-rest)
@@ -929,15 +1015,15 @@
 
 ## Starting Skill
 
-*Defined in [II.5](II.5_Character_Creation_Backgrounds.md).*
+*Defined in [II.6](II.6_Character_Creation_Backgrounds.md).*
 
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Six Steps](II.1_Character_Creation_Overview.md#the-six-steps)
-- [II.5 — What a Background Contains](II.5_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.5 — Creating a Custom Background](II.5_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [II.5 — Body Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#body-facet-backgrounds)
-- [II.5 — Mind Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
-- [II.5 — Soul Facet Backgrounds](II.5_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
+- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
+- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
+- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
+- [II.6 — Body Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#body-facet-backgrounds)
+- [II.6 — Mind Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
+- [II.6 — Soul Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
 - [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
 
 ## Strike
@@ -978,11 +1064,13 @@
 - [II.4a — Facet of the Body — Technique Tree](II.4a_Character_Creation_Facet_Body.md#facet-of-the-body--technique-tree)
 - [II.4b — Facet of the Mind — Technique Tree](II.4b_Character_Creation_Facet_Mind.md#facet-of-the-mind--technique-tree)
 - [II.4c — Facet of the Soul — Technique Tree](II.4c_Character_Creation_Facet_Soul.md#facet-of-the-soul--technique-tree)
-- [II.5 — Magic and Backgrounds](II.5_Character_Creation_Backgrounds.md#magic-and-backgrounds)
-- [II.6 — Skills of the Body](II.6_Character_Creation_Skills.md#skills-of-the-body)
+- [II.5 — Formalization](II.5_Lineage.md#formalization)
+- [II.6 — Magic and Backgrounds](II.6_Character_Creation_Backgrounds.md#magic-and-backgrounds)
+- [II.7 — Skills of the Body](II.7_Character_Creation_Skills.md#skills-of-the-body)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
 - [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
+- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
 - [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
 - [MM2 — Difficulty and Technique Steps](../mm_manual/MM2_Session_Design.md#difficulty-and-technique-steps)
 - [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
@@ -1033,6 +1121,7 @@
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
+- [II.5 — Formalization](II.5_Lineage.md#formalization)
 - [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
 - [III.3 — Tier 1 Conditions](III.3_Combat.md#tier-1-conditions)
 - [III.3 — Tier 2 Conditions](III.3_Combat.md#tier-2-conditions)
@@ -1068,7 +1157,7 @@
 
 - [II.2 — Body](II.2_Character_Creation_Attributes.md#body)
 - [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
-- [II.6 — Skills of the Body](II.6_Character_Creation_Skills.md#skills-of-the-body)
+- [II.7 — Skills of the Body](II.7_Character_Creation_Skills.md#skills-of-the-body)
 - [III.3 — Strike](III.3_Combat.md#strike)
 - [III.3 — Parry](III.3_Combat.md#parry)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)

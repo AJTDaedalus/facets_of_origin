@@ -4,52 +4,27 @@
 common rumor — safe to share with players as their characters would know it. The
 final section is yours alone.*
 
-## Val'loh, 3164 PG
+## Before You Read This Chapter
 
-The continent of Val'loh is in perpetual conflict, and has been for as long as its
-stories reach back. To the west, the mage tribes skirmish with Mazaa in the sacred
-mountains, where the power of the gods draws nearer to the land than anywhere else and
-the ungifted Mazaaians dig for god-touched stones — desecration, the tribes say,
-disturbing things that should not be disturbed. To the east, the Blackwatch keeps its
-vigil over the mists that roll in from the sea like tides — the mists the Church calls
-a warning against pride and blasphemy, left over from sins old enough that no one can
-name them anymore.
+*The continent, the city, the eight sects, the written-word law and the weapons
+custom are all in the Val'loh Facet's gazetteer (`settings/valloh/V3`). They are
+public knowledge, they are the same in every adventure set here, and they do not
+belong to this module.*
 
-These two threats unite the tribes under the gods and their Church. Nothing else does.
-The tribes war over territory as their grandparents did, and the Church blesses it:
-the strong are chosen by Fraden, and so the strong deserve what they take.
+**The three things from there that matter tonight, in one line each:**
 
-This year, something is different, and almost nobody has noticed. **The eastern mists
-have receded to record lows.** The coast is clearer than living memory. The Blackwatch,
-who prefer predictable, are quietly unnerved — an unexplained low tide is not a gift,
-it is a held breath. News of it travels inland as a curiosity, a line of gossip for
-people who like eerie stories. Keep it in the players' peripheral vision. It matters.
+- **Rekuzan is nine walled districts grown together**, and House Boranis holds the
+  Orthaen chieftaincy. The walls are grown pink crystal and they glow at dusk.
+- **There are no books.** The Church writes; everyone else remembers. A great
+  house's formal invitation is one of the two exceptions, which is why a discarded
+  one is worth stealing.
+- **Everyone wears a knife.** Drawing it is the crime, and the room enforces that
+  before the guards do.
 
-## Rekuzan
-
-The first city of Val'loh, and still by far its largest and most stable — the crown
-jewel of the Orthaen, the dominant tribe of the central farmlands. In the deep past
-Rekuzan was nine walled districts: one for each of the eight sects of the Orthaen, and
-a ninth at the center for trade. The city has long since swallowed the gaps between
-them with wood-and-stone homes, taverns, and industry, but the old district walls still
-stand — walls of **pink crystal**, grown over generations by the Orthaen gift, luminous
-at dusk. The sect palaces are crystal too. Everything else in the city is dull by
-comparison, and knows it.
-
-The eight sects of the Orthaen are, in the order their banners hang in the Chiefs'
-Concourse: **Boranis, Draunel, Morrain, Vaskarin, Solvane, Kethaun, Tessarin, and
-Ilvane.** House Boranis holds the chieftaincy, and has for generations.
-
-One fact about this world that players raised on other settings must hear early:
-**there are no books.** By god-ordained law, ancient beyond memory, the written word
-belongs to the Church and to no one else — the Church writes what its necessity
-requires, and everyone else remembers. Val'loh's knowledge lives in memory, in
-apprenticeship, in the Scora's sanctioned cloth-strip rite, and in crystal.
-Histories are recited, accounts are kept in tally-cords and in stewards' heads,
-testaments are sworn aloud before witnesses. The rare exceptions are jealously
-narrow: a great house's formal invitation, a few lines under a chief's own hand,
-is among the few writings the Church suffers outside its walls, which is part of
-why a genuine invitation is worth so much to the wrong person.
+**And the recent wound, which this module is quietly about:** the eastern mists have
+receded to record lows this year. The Blackwatch is frightened and saying so quietly.
+Inland it is a dinner-table curiosity. Keep it in the players' peripheral vision. It
+matters.
 
 ## The Oraga Nights
 
@@ -82,7 +57,7 @@ What every guest at the ball knows, in order:
 2. **3161 — The Return.** Raunu walks back into his hall one day and takes his seat,
    receiving ministers as if nothing had happened. Vorlain — a conniving man who has
    feared exactly one person in his life — yields without a word. Where Raunu went, and
-   why, he has never said. *(See the rumor table in Chapter IX. The module does not
+   why, he has never said. *(See the rumor table in Chapter VIII. The module does not
    answer this question, and neither should you.)*
 3. **3162 — The Pact and the Marriage.** Raunu announces a pact with the Thenya — a
    diminished tribe under heavy Orthaen border pressure — trading protection for a

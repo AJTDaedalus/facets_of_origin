@@ -20,7 +20,7 @@ Soul Facet characters solve problems by moving people and bending the world towa
 | **Attune** | Spirit |
 | **Gamble** | Luck |
 
-Full descriptions are in Chapter II.6 — Skills.
+Full descriptions are in Chapter II.7 — Skills.
 
 ---
 

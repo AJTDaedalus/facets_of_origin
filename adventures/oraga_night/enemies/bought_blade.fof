@@ -1,0 +1,40 @@
+fof_version: '0.1'
+type: enemy
+id: bought_blade
+name: Blade of the Bought
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+enemy:
+  tier: mook
+  attack_modifier: 1
+  armor: light
+  techniques: []
+  special: null
+  description: Contracted muscle in a matched coat — grey wool, cut plainly, the company's
+    mark stitched at the shoulder where a house badge would sit. In a city where everyone
+    wears a knife to a ball, sixteen people wearing the same coat is the thing that stands
+    out.
+  disposition: Professional. Not cruel, not enthusiastic, and paying close attention to the
+    terms.
+  first_target: Whoever the contract names. Everyone else is an obstacle to be moved.
+  triggers:
+  - Will not pursue past the boundary the contract specifies, and knows exactly where that
+    is.
+  - Fights to the terms — a contract to detain produces no killing blows, and everyone on
+    both sides can tell the difference.
+  morale: Down two of four and the rest disengage in order. Nobody in the Bought has ever
+    been paid enough to die for a clause.
+  organization: Sixteen walked into the trade district at dusk. Four hold the Boranis gatehouse;
+    the rest hold the outer perimeter and are not on the scene card.
+  notes: 'TR breakdown: offense(+1 → 3) + durability(Mook → 0) + armor(light → 1) + techniques(0)
+    = 4.
+
+
+    MODULE RESKIN (Oraga Night). Flavour fields only — description and organization. Tier,
+    resolve, attack_modifier, armor, techniques and special are the Bestiary''s and must stay
+    identical to enemies/bought_blade.fof; a test asserts it. The Bestiary files stay setting-agnostic
+    (B9), which is why the Val''loh colour lives here instead.'
+created_at: '2026-08-02T00:00:00+00:00'
+last_modified: '2026-08-02T00:00:00+00:00'

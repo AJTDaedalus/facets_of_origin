@@ -548,6 +548,55 @@ function confirmFinalBlow(playerName, trackerKey, offerId) {
   });
 }
 
+/**
+ * R3: a 10+ Strike depletes 2 Resolve and chooses one rider. The menu is
+ * rendered from `msg.rider_menu`, which the server reads out of the ruleset
+ * — adding or cutting a rider is a `facet.yaml` edit, never a JS edit, so
+ * nothing here may hardcode a rider id or a label.
+ */
+function offerStrikeRider(trackerKey, menu) {
+  if (!Array.isArray(menu) || menu.length === 0) return;
+  const enemy = state.activeEnemies[trackerKey];
+  const name = (enemy && enemy.name) || trackerKey;
+  notify(`10+ on ${name} — take a rider.`, 'info', {
+    duration: 20000,
+    key: `strike-rider-${trackerKey}`,
+    // One button per rider the ruleset prints, in the ruleset's order.
+    actions: menu.map((rider) => ({
+      label: rider.label,
+      onAction: () => sendStrikeRider(trackerKey, rider.id),
+    })),
+  });
+}
+
+function sendStrikeRider(trackerKey, riderId) {
+  sendWS({
+    type: 'strike_rider',
+    tracker_key: trackerKey,
+    rider: riderId,
+    exchange_no: state.exchangeNumber || 1,
+  });
+}
+
+function onRiderApplied(msg) {
+  const enemy = state.activeEnemies[msg.tracker_key];
+  if (!enemy) return;
+  const name = enemy.name || msg.tracker_key;
+  enemy.open = msg.open;
+  enemy.position = msg.position;
+
+  if (msg.rider === 'open') {
+    // R2 made this a duration, not a switch — say so, or the table will
+    // keep playing it as the permanent tag it used to be.
+    addSystemChat(`${name} is left Open — Easy to Strike for everyone until the end of the exchange.`);
+  } else if (msg.rider === 'position') {
+    addSystemChat(`${name} is out of position — the next roll against it is Easy, this exchange or next.`);
+  } else if (msg.ally) {
+    addSystemChat(`${msg.ally} is Covered — their next reaction this exchange is free.`);
+  }
+  renderEnemyTracker();
+}
+
 /** Manual correction — an undo, not a rule. Stays on `enemy_update`. */
 function enemyAdjustResolve(trackerKey, delta) {
   const enemy = state.activeEnemies[trackerKey];
@@ -635,12 +684,14 @@ function onEnemyUpdated(msg) {
   enemy.resolve_current = msg.resolve_current;
   enemy.conditions = msg.conditions;
   if ('open' in msg) {
-    // K-6/D4: announce the tag's edges — leaving an enemy Open and the
-    // enemy visibly spending its action to clear it are both table beats.
+    // Announce the tag's edges. Under R2 Open expires at end of exchange
+    // and the enemy keeps its action, so an enemy losing the tag here is a
+    // manual MM correction rather than the old recover-its-guard beat —
+    // the expiry itself is announced by `exchange_ended`.
     if (msg.open && !enemy.open) {
-      addSystemChat(`${name} is left Open — Easy to Strike for everyone.`);
+      addSystemChat(`${name} is left Open — Easy to Strike until the end of the exchange.`);
     } else if (!msg.open && enemy.open) {
-      addSystemChat(`${name} spends its action recovering — no longer Open.`);
+      addSystemChat(`${name} is no longer Open.`);
     }
     enemy.open = msg.open;
   }
@@ -676,6 +727,12 @@ function onEnemyUpdated(msg) {
   noteBandChange(msg, false);  // a defeat can drop the band — update quietly
   renderEnemyTracker();
   populateTargetSelects();
+
+  // R3: the server only *offers* the menu on a 10+; nothing is applied
+  // until the attacker chooses, the same discipline Final Blow uses.
+  if (state.role === 'mm' && !msg.defeated) {
+    offerStrikeRider(msg.tracker_key, msg.rider_menu);
+  }
 }
 
 function onEnemyRemoved(msg) {
@@ -1362,6 +1419,30 @@ function onCombatStarted(msg) {
 
   renderCombatPanel();
   renderMagicPanel();
+  // R2: Open expires with the Tier 1 Conditions. Announcing it is what
+  // teaches the table that the tag is a tempo window and not a switch — the
+  // exchange it was taken in is the exchange to spend it.
+  if (msg.enemies) {
+    Object.entries(msg.enemies).forEach(([key, upd]) => {
+      const enemy = state.activeEnemies[key];
+      if (!enemy) return;
+      const name = enemy.name || key;
+      enemy.open = upd.open;
+      enemy.conditions = upd.conditions || [];
+      (upd.expired_tags || []).forEach((tag) => {
+        if (tag === 'open') {
+          addSystemChat(`${name} is no longer Open — the window closed.`);
+        } else if (tag === 'position') {
+          addSystemChat(`${name} has recovered its position.`);
+        }
+      });
+      if (upd.cleared_conditions && upd.cleared_conditions.length > 0) {
+        addSystemChat(`${name}: cleared ` + upd.cleared_conditions.join(', ').replace(/_/g, ' '));
+      }
+    });
+    renderEnemyTracker();
+  }
+
   renderMMCombatConsole();
   updateCombatStatusBanner();
   notify('Combat has begun — declare your Posture.', 'gold');

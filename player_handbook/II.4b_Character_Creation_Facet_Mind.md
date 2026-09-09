@@ -22,7 +22,7 @@ Their tools are attention, memory, and analysis. Their superpower is that they a
 | **Insight** | Wisdom |
 | **Survival** | Wisdom |
 
-Full descriptions are in Chapter II.6 — Skills.
+Full descriptions are in Chapter II.7 — Skills.
 
 ---
 

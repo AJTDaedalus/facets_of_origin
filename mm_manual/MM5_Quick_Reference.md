@@ -118,7 +118,7 @@ The Spark economy works when Sparks flow — earned and spent regularly, not hoa
 2. State enemy stances openly (from their `triggers:`); PCs declare Postures simultaneously, blind
 3. Declare and resolve Actions (Strike / Maneuver / Support / Magic)
 4. Targets declare and resolve Reactions
-5. Apply results: deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, note an enemy left Open
+5. Apply results: deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, name the rider taken on a 10+
 6. End of exchange: Tier 1 Conditions clear, Withdrawn recover 2 Endurance Pool points (up to the maximum)
 
 An exchange with **no PC offensive action** is uncontested — the situation advances for free: reposition, reinforce, progress a clock, or take the objective. No roll.
@@ -147,7 +147,7 @@ PC Posture is declared blind. Enemy stances are **stated, not concealed** — an
 
 | Action | Roll | Effect |
 |---|---|---|
-| **Strike** | 2d6 + weapon attribute + Combat or Finesse (default melee/ranged; the fiction may say otherwise) | Deplete enemy Resolve (10+: −2, 7–9: −1); 10+ may leave the enemy Open |
+| **Strike** | 2d6 + weapon attribute + Combat or Finesse (default melee/ranged; the fiction may say otherwise) | Deplete enemy Resolve (10+: −2, 7–9: −1); 10+ also chooses one rider — Open or Position |
 | **Maneuver** | 2d6 + relevant skill | 10+: rolls against the target are Easy until the situation changes. 7–9: rolls against the target stay Standard. 6-: backfire |
 | **Support** | 2d6 + relevant skill | Grant ally +1d6 drop lowest OR difficulty one step easier on next roll |
 | **Magic** | 2d6 + Spirit + Attune, or Knowledge + Lore (by tradition) | Domain + Intent + Scope; vs enemy depletes Resolve like a Strike |
@@ -162,17 +162,17 @@ PC Posture is declared blind. Enemy stances are **stated, not concealed** — an
 
 **Table MM5–8: Strike Outcomes**
 
-| Roll | Resolve | Open (10+ only) |
+| Roll | Resolve | Rider (10+ only) |
 |---|---|---|
-| **10+** | **−2** | may leave the enemy **Open** — **Easy to Strike** for everyone; the player narrates what it looks like |
+| **10+** | **−2** | **choose one** — **Open** (Easy to Strike for everyone, until the end of this exchange; the player narrates what it looks like) or **Position** (the next roll against it is Easy, this exchange or next) |
 | **7–9** | **−1** | — |
 | **6-** | 0 | consequence for the **attacker** |
 
-Enemy at **0 Resolve = defeated**. Open never defeats — Resolve does; the enemy clears Open only by visibly spending its action. Mook: removed on any success (7+); armored Mook needs 10+.
+Enemy at **0 Resolve = defeated**. A rider never defeats — Resolve does. Open and Position are both Easy and do not stack. Open clears at the end of the exchange, and an Open enemy still acts. Mook: removed on any success (7+); armored Mook needs 10+, and a removed Mook takes no rider.
 
 **Against another character (duel/PvP):** 10+ = Tier 2 Condition, 7–9 = Tier 1 Condition, 6- = consequence for attacker.
 
-Default Strike difficulty: **Standard**. Adjust for posture and situation; an Open enemy is Easy for everyone.
+Default Strike difficulty: **Standard**. Adjust for posture and situation; an Open enemy is Easy for everyone, until the end of the exchange.
 
 ---
 
@@ -408,7 +408,7 @@ Roll or pick a d6 for a generic 6- consequence when nothing specific comes to mi
 
 **When not to roll:** Only roll when outcome is uncertain, stakes matter, and both success and failure move the story.
 
-**Specialty:** A Background Specialty that *directly* applies turns a Standard roll Easy — its step shares the single character-side step with Techniques (III.1, *Difficulty*). When it is only tangential, hand over the information free — no roll (II.5, *Specialty*).
+**Specialty:** A Background Specialty that *directly* applies turns a Standard roll Easy — its step shares the single character-side step with Techniques (III.1, *Difficulty*). When it is only tangential, hand over the information free — no roll (II.6, *Specialty*).
 
 **Saving throws:** 2d6 + Major Attribute modifier (Body / Mind / Soul). Same three-tier outcomes. Use when something happens *to* the character, not something they choose.
 

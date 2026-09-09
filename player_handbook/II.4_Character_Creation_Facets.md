@@ -137,7 +137,9 @@ The Technique tree has three tiers. Tier 1 is available at Facet level 1. Tier 2
 
 When you unlock a Technique, you choose it during your **reflection scene** — the moment where this growth becomes real in the fiction (see *Advancement and Reflection*, II.4).
 
-If your Background grants a magical domain, your Facet level 1 pick is spoken for: the magic-granting Technique is your **formalization**, and your first free choice comes at Facet level 2. That is the shape of the arc, not a tax — the formalization is the milestone your Background has been walking toward since session one (see *Magic and Backgrounds*, II.5).
+If your Background grants a magical domain, your Facet level 1 pick is spoken for: the magic-granting Technique is your **formalization**, and your first free choice comes at Facet level 2. That is the shape of the arc, not a tax — the formalization is the milestone your Background has been walking toward since session one (see *Magic and Backgrounds*, II.6).
+
+A **Lineage Gift** is different. It formalizes at your first Facet level on its own and leaves the pick free, because it was never a curriculum to finish (Chapter II.5, *Formalization*).
 
 The three trees are in Chapters II.4a (Body), II.4b (Mind), and II.4c (Soul). Every Technique in all three is written the same way.
 

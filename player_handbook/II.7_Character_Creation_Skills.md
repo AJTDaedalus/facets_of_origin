@@ -6,7 +6,7 @@ A skill is narrower than a talent and broader than a trick: fifteen areas of dev
 
 Skills are specific areas of developed capability — what your character has learned to do through practice, training, or hard experience. Where attributes represent your fundamental nature, skills represent what you have made of yourself.
 
-Every character begins with all skills at **Novice** rank. Your Background determines your starting skills — you don't choose them separately (see Chapter II.5). Through play, skills you actually use advance toward **Practiced**, **Expert**, and eventually **Master**.
+Every character begins with all skills at **Novice** rank. Your Background determines your starting skills — you don't choose them separately (see Chapter II.6). Through play, skills you actually use advance toward **Practiced**, **Expert**, and eventually **Master**.
 
 Full rules for skill advancement, the session skill point economy, and reflection scenes are in **Chapter II.4 (Facets)**. Technique trees are in the Facet chapters (II.4a, II.4b, II.4c). This chapter is the canonical source for skill descriptions and explains how skill checks work.
 
@@ -16,7 +16,7 @@ Full rules for skill advancement, the session skill point economy, and reflectio
 
 Every skill, its Facet, and the Minor Attribute that governs it. What each skill covers is in *The Skill List*, later in this chapter — this table is the lookup, not the definition.
 
-**Table II.6–1: Skill Reference**
+**Table II.7–1: Skill Reference**
 
 | Skill | Facet | Attribute |
 |---|---|---|
@@ -58,7 +58,7 @@ Skills are grouped by Facet. This is where each one is defined.
 >
 > Then what the skill covers, and where its territory ends. Where an entry names another skill, that is a boundary, not a suggestion: the neighbouring skill owns that ground.
 >
-> There is no "untrained" entry, because there is no untrained state. Every character holds every skill at Novice, and Novice is a real rank with a real modifier (see Table II.6–2). Retries and repeated attempts follow one rule for all skills — see *Trying Again*, III.1.
+> There is no "untrained" entry, because there is no untrained state. Every character holds every skill at Novice, and Novice is a real rank with a real modifier (see Table II.7–2). Retries and repeated attempts follow one rule for all skills — see *Trying Again*, III.1.
 
 ---
 
@@ -166,7 +166,7 @@ Pressing fortune: reading probability in the moment, knowing when to push and wh
 
 ## Skill Ranks at a Glance
 
-**Table II.6–2: Skill Ranks at a Glance**
+**Table II.7–2: Skill Ranks at a Glance**
 
 | Rank | Marks Required | Roll Modifier |
 |---|---|---|
@@ -185,7 +185,7 @@ Not every skill can get there. Within one Facet, at most three of your skills ma
 
 All characters begin with every skill at Novice. Apart from what your Background grants, there are no starting skill choices — your skills emerge from play, not from a menu.
 
-Your **Background** (Chapter II.5) grants a single skill at Practiced rank at character creation, reflecting prior training or life experience. Most Backgrounds also grant a **secondary skill** — a second skill from your Primary Facet starting at Novice with 1 mark already recorded (the Background Mark); magic-granting Backgrounds provide a domain origin in its place. These are the only exceptions to the "all skills start at Novice with no marks" rule.
+Your **Background** (Chapter II.6) grants a single skill at Practiced rank at character creation, reflecting prior training or life experience. Most Backgrounds also grant a **secondary skill** — a second skill from your Primary Facet starting at Novice with 1 mark already recorded (the Background Mark); magic-granting Backgrounds provide a domain origin in its place. These are the only exceptions to the "all skills start at Novice with no marks" rule.
 
 ---
 

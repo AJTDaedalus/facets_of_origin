@@ -1,0 +1,61 @@
+fof_version: '0.1'
+type: character
+id: dassa-oraga_ni
+name: Dassa
+version: 1.0.0
+authors:
+- Dassa
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+  - id: valloh
+    version: 0.1.0
+campaign_id: oraga_night
+character:
+  name: Dassa
+  player_name: Dassa
+  primary_facet: body
+  attributes:
+    strength: 3
+    dexterity: 2
+    constitution: 3
+    intelligence: 1
+    wisdom: 2
+    knowledge: 2
+    spirit: 1
+    luck: 2
+    charisma: 2
+  skills:
+    combat:
+      rank: practiced
+      marks: 0
+    endurance:
+      rank: novice
+      marks: 1
+  sparks: 3
+  session_skill_points_remaining: 4
+  training_marks_this_session: 0
+  facet_levels: {}
+  rank_advances_by_facet:
+    body: 1
+  facet_level: 0
+  total_facet_levels: 0
+  career_advances: 1
+  technique_picks_available: 0
+  techniques: []
+  technique_choices: {}
+  background_id: city_watch_veteran
+  specialty: Knows the layout, regular occupants, and unofficial rules of one specific district
+    or settlement from your service years.
+  lineage: orthaen
+  gifted: false
+  module_role: The House-Blade
+  description: A hired blade of no house, who has guarded richer and softer people for twenty
+    years. One Orthaen in five is born without the gift; Dassa has spent a lifetime being
+    reminded of it politely, and has outlived several of the people who did the reminding.
+    Slow to speak, impossible to move.
+  suggested_agenda: The Vanished Servant, or bodyguard to another player character.
+  technique_at_facet_level_1: weapon_mastery
+created_at: '2026-09-09T11:54:53.805180+00:00'
+last_modified: '2026-09-09T11:54:53.805180+00:00'

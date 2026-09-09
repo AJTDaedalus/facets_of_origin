@@ -23,8 +23,8 @@
 | **II.4a–1** | [Skills of the Body](II.4a_Character_Creation_Facet_Body.md#skills-of-the-body) | II.4a_Character_Creation_Facet_Body.md |
 | **II.4b–1** | [Skills of the Mind](II.4b_Character_Creation_Facet_Mind.md#skills-of-the-mind) | II.4b_Character_Creation_Facet_Mind.md |
 | **II.4c–1** | [Skills of the Soul](II.4c_Character_Creation_Facet_Soul.md#skills-of-the-soul) | II.4c_Character_Creation_Facet_Soul.md |
-| **II.6–1** | [Skill Reference](II.6_Character_Creation_Skills.md#complete-skill-reference) | II.6_Character_Creation_Skills.md |
-| **II.6–2** | [Skill Ranks at a Glance](II.6_Character_Creation_Skills.md#skill-ranks-at-a-glance) | II.6_Character_Creation_Skills.md |
+| **II.7–1** | [Skill Reference](II.7_Character_Creation_Skills.md#complete-skill-reference) | II.7_Character_Creation_Skills.md |
+| **II.7–2** | [Skill Ranks at a Glance](II.7_Character_Creation_Skills.md#skill-ranks-at-a-glance) | II.7_Character_Creation_Skills.md |
 | **III.1–1** | [Outcome Tiers](III.1_Core_Resolution.md#the-2d6-system) | III.1_Core_Resolution.md |
 | **III.1–2** | [Natural Results](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2) | III.1_Core_Resolution.md |
 | **III.1–3** | [Minor Attribute Modifiers](III.1_Core_Resolution.md#attribute-modifier) | III.1_Core_Resolution.md |

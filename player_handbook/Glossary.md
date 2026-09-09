@@ -13,7 +13,7 @@ the full rule, follow the pointer.
 
 **Attribute (Major/Minor)** — A character's fundamental capabilities. Major Attributes (Body, Mind, Soul) ground saving throws and broad, undefined situations, and are derived from their three Minor Attributes; Minor Attributes are rated 1–3 and used for most active rolls. *(Chapter II.2)*
 
-**Background** — Who a character was before the story started: a title, a short history, a Starting Skill, a Secondary Skill (or domain origin, if magical), and a Specialty. *(Chapter II.5)*
+**Background** — Who a character was before the story started: a title, a short history, a Starting Skill, a Secondary Skill (or domain origin, if magical), and a Specialty. *(Chapter II.6)*
 
 **Borrowed Trouble** — A complication offered before a roll by the MM or any player. Accepting it adds a d6 to the roll, dropping the lowest, exactly as a Spark does — and the complication happens whether the roll succeeds or fails. One per roll; offering and declining both cost nothing. *(Chapter III.1)*
 
@@ -25,7 +25,7 @@ the full rule, follow the pointer.
 
 **Career Advance** — A single integer counting every skill rank advance a character has ever taken, across all skills and Facets, since character creation — the game's rough overall progression gauge. *(Chapter II.4)*
 
-**Condition (Tier 1/2/3)** — The measure of how a fight is going for a player character, in place of hit points. Tier 1 (Winded, Off-Balance, Shaken) clears at the end of the exchange; Tier 2 (Staggered, Cornered) persists until treated; Tier 3 is Broken. Conditions belong to characters only — enemies run on Resolve, and the one mark a Strike can put on them is the Open tag. *(Chapter III.3)*
+**Condition (Tier 1/2/3)** — The measure of how a fight is going for a player character, in place of hit points. Tier 1 (Winded, Off-Balance, Shaken) clears at the end of the exchange; Tier 2 (Staggered, Cornered) persists until treated; Tier 3 is Broken. Conditions belong to characters only — enemies run on Resolve, and the only marks a Strike can put on them are the riders, Open and Position. *(Chapter III.3)*
 
 **Contested Roll** — A roll made against active opposition. Against an NPC, only the player rolls, and the NPC's attribute informs the difficulty; against another player character, both roll and the higher total wins, with a tie granting both a partial success. *(Chapter III.1)*
 
@@ -41,7 +41,7 @@ the full rule, follow the pointer.
 
 **Encounter Recipe Table** — The simulation-validated table of enemy rosters mapped to difficulty bands (Skirmish/Standard/Hard/Deadly), keyed to Party Strength. Actor count — the number of Named/Boss enemies acting at once, not total TR — is what drives difficulty; the retired TR budget is preserved only as a historical record in `docs/DECISIONS.md`. *(MM1)*
 
-**Endurance Pool** — A character's combat stamina, spent to react to incoming attacks and to Press on offense. The pool equals 4 plus the Constitution modifier plus Endurance skill rank; at 0, Absorb is the only available reaction. Distinct from the Endurance skill (Chapter II.6). *(Chapter III.3)*
+**Endurance Pool** — A character's combat stamina, spent to react to incoming attacks and to Press on offense. The pool equals 4 plus the Constitution modifier plus Endurance skill rank; at 0, Absorb is the only available reaction. Distinct from the Endurance skill (Chapter II.7). *(Chapter III.3)*
 
 **Exchange** — One dramatic beat of combat: every participant declares Posture simultaneously, actions and reactions are declared and resolved together, and the MM narrates the beat as a whole — there is no initiative order. *(Chapter III.3)*
 
@@ -75,7 +75,11 @@ the full rule, follow the pointer.
 
 **Off-Balance** — A Tier 1 Condition: the character's next reaction costs 1 additional Endurance Pool point. *(Chapter III.3)*
 
-**Open** — The one mark a Strike can put on an enemy: on a full success (10+), the attacker may leave the enemy Open — Easy to Strike for everyone — narrating what that looks like. The enemy clears Open only by visibly spending its action to recover; Open never defeats an enemy on its own. *(Chapter III.3)*
+**Position** — One of the two riders a full-success Strike may choose: you or an ally you name may act as though a Maneuver's full success applied, making the **next** roll against that target Easy, this exchange or the next. Spent by that roll. Position and Open are both Easy and do not stack. *(Chapter III.3)*
+
+**Lineage** — Who a character was born as, chosen at creation and orthogonal to the Background's what-they-did. The core rules ship one, Human, with no Gift and no Heritage; setting Facets add more. *(Chapter II.5)*
+
+**Open** — One of the two riders a full-success Strike may choose: the enemy is Easy to Strike for everyone, and the attacker narrates what that looks like. Open lasts until the **end of the exchange** and then clears on its own, with the Tier 1 Conditions. An Open enemy still acts, and Open never defeats an enemy on its own. *(Chapter III.3)*
 
 **Partial Success** — A roll total of 7–9: the character achieves something, but not cleanly — the MM names the cost before narrating the success; the cost is part of the outcome, not an offer to weigh. *(Chapter III.1)*
 
@@ -85,15 +89,21 @@ the full rule, follow the pointer.
 
 **Posture (Aggressive/Measured/Defensive/Withdrawn)** — The broad tactical stance taken for one exchange. Player characters declare theirs simultaneously and blind; enemy stances are stated openly by the MM, driven by the stat block's conduct triggers. Aggressive trades a first-reaction Endurance Pool surcharge for +1 offense, Measured is the baseline, Defensive trades offense for cheaper reactions, and Withdrawn forgoes offense to recover 2 Endurance Pool points, up to the maximum. *(Chapter III.3)*
 
+**Heritage** — One narrow fact every member of a lineage grows up with, gifted or not. It works as a Specialty does — Standard becomes Easy when it bears directly, information without a roll when tangential — and draws from the same single character-side step, so a Heritage and a Specialty that both apply are still one step. *(Chapter II.5)*
+
+**Gift** — A domain carried in a lineage's blood rather than learned. A Gift is a domain in every respect, replaces the Background's Secondary Skill, and formalizes at the character's first Facet level in any Facet without spending a Technique pick. A character holds one domain at creation, from Lineage or Background, never both. *(Chapter II.5)*
+
 **Press** — Spending 1 Endurance Pool point before a Strike roll to add a d6 and drop the lowest die — the same mechanical effect as a Spark, drawn from a different resource, and stackable with one. *(Chapter III.3)*
 
 **Primary Facet** — The Facet a character declares at character creation, which determines which skills cost less to advance (1 point per mark rather than 2) and which Techniques are available to them. *(Chapter II.4)*
 
-**Rank (Novice/Practiced/Expert/Master)** — A skill's level of developed capability: Novice (+0, the starting rank for every skill), Practiced (+1, 3 marks), Expert (+2, 8 marks total), or Master (+3, 16 marks total). Within one Facet at most three skills may pass Practiced and only one may reach Master. *(Chapters II.6, II.4)*
+**Rank (Novice/Practiced/Expert/Master)** — A skill's level of developed capability: Novice (+0, the starting rank for every skill), Practiced (+1, 3 marks), Expert (+2, 8 marks total), or Master (+3, 16 marks total). Within one Facet at most three skills may pass Practiced and only one may reach Master. *(Chapters II.7, II.4)*
 
 **Reaction (Dodge/Parry/Absorb/Intercept)** — A character's response to an incoming action — at most one per incoming action, each costing Endurance Pool points unless Posture reduces it: Dodge (Dexterity), Parry (weapon attribute + Combat), Absorb (free, take the hit), or Intercept (step in front of an attack meant for an ally). *(Chapter III.3)*
 
 **Reflection Scene** — A brief in-world moment, once per session, where a character acknowledges growth that happened in play; encouraged but not required, since advancement itself happens whether or not the scene takes place. *(Chapter II.4)*
+
+**Rider** — The option a full-success Strike takes on top of its 2 Resolve: **Open** or **Position**. Three things are true of both. The choice is made *after* the roll. Neither defeats an enemy on its own. And both expire by themselves, so nothing has to be spent to end one and nobody has to track it into a later exchange. *(Chapter III.3)*
 
 **Resolve** — An enemy's durability pool, depleted directly by Strikes — 2 on a full success, 1 on a partial — with no Condition track to manage. At 0 Resolve, the enemy is defeated. *(Chapter III.3)*
 
@@ -103,21 +113,21 @@ the full rule, follow the pointer.
 
 **Second Domain** — A Tier 3 Technique, in the Mind and Soul trees, that grants a second standard magical domain complementary to a character's original practice; effects within it are one difficulty step harder than normal for that domain until the character earns their next Facet level, after which the penalty lifts. A character holds one. *(Chapters II.4b, II.4c)*
 
-**Secondary Skill** — A second skill from a character's Primary Facet, granted by their Background, starting at Novice with 1 mark already recorded. Magic-granting Backgrounds replace it with a domain origin instead. *(Chapter II.5)*
+**Secondary Skill** — A second skill from a character's Primary Facet, granted by their Background, starting at Novice with 1 mark already recorded. Magic-granting Backgrounds replace it with a domain origin instead. *(Chapter II.6)*
 
 **Shaken** — A Tier 1 Condition: the MM may direct the character's next action — a flinch, a hesitation, a brief retreat. *(Chapter III.3)*
 
-**Skill** — A specific area of developed capability, associated with one Facet and one governing Minor Attribute, rated Novice through Master. *(Chapter II.6)*
+**Skill** — A specific area of developed capability, associated with one Facet and one governing Minor Attribute, rated Novice through Master. *(Chapter II.7)*
 
 **Skill Point** — One of 4 points a character has to distribute among skills they actually used during a session; each point spent adds one mark toward the skill's next rank. Up to 2 unspent points bank into the next session, and 1 point per session may train an unused Primary-Facet skill. *(Chapter II.4)*
 
 **Spark** — A narrative resource earned for remarkable moments and spent before a roll to add a d6, dropping the lowest die — any roll, including every magic roll. In magic only, a Spark can instead buy reach in exactly two cases: a pre-Technique Significant-scope attempt, or easing a Focused domain's Major working one step. Sparks do not carry over; every character starts every session with 3. *(Chapters III.1, II.3)*
 
-**Specialty** — A narrow, specific area of fictional expertise granted by a Background — not a second skill, but a fact about a character's history that turns a Standard roll Easy when it directly applies. Its step draws from the same allowance as a Technique's — at most one character-side step moves any single roll. *(Chapters II.5, III.1)*
+**Specialty** — A narrow, specific area of fictional expertise granted by a Background — not a second skill, but a fact about a character's history that turns a Standard roll Easy when it directly applies. Its step draws from the same allowance as a Technique's — at most one character-side step moves any single roll. *(Chapters II.6, III.1)*
 
 **Staggered** — A Tier 2 Condition: −1 to offensive rolls, persisting until treated. *(Chapter III.3)*
 
-**Starting Skill** — The one skill from a character's Primary Facet that their Background grants at Practiced rank rather than Novice, reflecting prior training or life experience. *(Chapter II.5)*
+**Starting Skill** — The one skill from a character's Primary Facet that their Background grants at Practiced rank rather than Novice, reflecting prior training or life experience. *(Chapter II.6)*
 
 **Strike** — The foundational offensive action in combat: a roll of 2d6 + weapon attribute + relevant skill that, against an enemy, depletes Resolve (2 on a full success, 1 on a partial), or, against another character, applies a Condition directly. *(Chapter III.3)*
 

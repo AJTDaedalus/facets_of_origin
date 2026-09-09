@@ -105,14 +105,15 @@ The Latchmen's Boss expression is not a bigger latchman. It is what the same com
 
 **When it acts:** attack +3 · incoming Tier 2
 
-**At Resolve 2:** Reduced Mode. When the Guardian's Resolve drops to 2 or below, its attack_modifier drops to +1 and its blows land as Tier 1. However, it stops registering harm entirely — left Open, it will not spend an action recovering, because the sensory subsystem that would notice has shut down. It is running on something else. What that is, the party does not know.
+**At Resolve 4:** Reduced Mode. When the Guardian's Resolve drops to 4 or below, the subsystem that was weighing consequences shuts down, and what is left is more dangerous rather than less. Its blows stop being measured: they land at Tier 2. And it fixes on whoever last left it Open and does not look away — that character is its target until one of them is finished. It is running on something else now. What that is, the party does not know.
 
 **Disposition:** Patient beyond anything alive. It has never needed to hurry and does not start now.
 
 **In play:**
 
-- Always Measured. It does not Press, does not go Aggressive, does not go Defensive.
-- At Resolve 2 or below it enters Reduced Mode: its attack drops, its blows land at Tier 1, and it no longer spends actions recovering — once Open, it stays Open.
+- Measured while both arms answer it. It does not Press and it does not go Defensive — it has never needed to hurry.
+- Aggressive from the exchange it is first left Open. Being opened is the only thing in fifteen years that has told it something was wrong, and its answer is to stop being careful.
+- At Resolve 4 or below it enters Reduced Mode: its blows land at Tier 2 and it fixes on whoever last opened it.
 - Each joint Maneuver that lands (10+) reduces its attack modifier by 1, to a minimum of 0 — a fictional weakness the party discovers, not a printed stat.
 
 **Morale:** None. It was not built with any. It stops when its Resolve is gone or when the thing it guards is no longer in the room.

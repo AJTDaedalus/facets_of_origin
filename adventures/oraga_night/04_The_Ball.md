@@ -26,6 +26,33 @@ rewards investigation, and every Undercurrent runs through at least two of them.
 
 ---
 
+### The Palace on Alert
+
+*Written once, here, so that no room entry has to carry it. Room text says "if
+alerted" and stops.*
+
+**When steel is bared** anywhere a guest can see: four honor guards converge inside
+two exchanges. They do not fight to hurt — they detain and expel, and the offender's
+invitation is void for the rest of the night. Whoever drew spends the next hour in
+the gatehouse cell unless somebody with a name intervenes, and the room remembers
+their face after the Unmasking. *(Scene card S4 if the party is the one being
+detained.)*
+
+**When the east wing is forced:** the doors are doubled, Corval is informed within
+the Movement, and the offender's invitation is void whether or not they were caught
+in the act. The east wing stays doubled for the rest of the night.
+
+**When the lights die** (Movement VI, midnight): the nine go to the dais and stay
+there. The corridor wards fire — every warded route is lit, loud, and watched — and
+the **service passages become the only unwarded way through the palace**. Every
+alert rule above is suspended, because there is no longer anybody enforcing it. The
+honor guard is doing one thing now.
+
+**What the Bought do, at each bell:** see the night clock in Chapter VIII. In short —
+nothing at all until the quarter-bells, and then the gate.
+
+---
+
 ### The Public Rooms
 
 *Each public room has its own gossip climate — roll the rumor table anywhere, but
@@ -33,6 +60,57 @@ flavor the teller by the room: arrivals gossip at the gate, politics in the Crys
 Court, household talk in the banquet galleries, dangerous frankness in the gardens,
 and policy in the Audience Hall, where people whisper about what they're waiting
 to ask for.*
+
+**B0. The Approach and the Line.** The module opens here, on the hill, in the
+queue. This is not a transition into the ball; it is the first scene of the
+adventure, and it is where a table learns what rolling feels like in this game.
+
+*Read on first sight of the palace:*
+
+> *The whole hill is lit. Not with lamps — the walls themselves are doing it, pink
+> crystal grown course over course by hands that have been dead for two hundred
+> years, holding the last of the day and giving it back. The line of carriages
+> reaches down to the second gate. Nobody in it is hurrying. Being seen waiting to
+> get into Boranis tonight is most of the point.*
+
+**The line is the best gossip hour of the year**, and everything in it is happening
+whether the party engages or not:
+
+- **Corval receives by name**, personally, from memory, without a written list —
+  because there is no written list, and with Corval there has never needed to be.
+- **The Thenya delegation waits**, and has been waiting, with visibly thinning
+  patience. They are the only non-Orthaen faces in fifty and they know exactly how
+  that is being read.
+- **A footman is quietly selling a card** to somebody two places ahead — a genuine
+  invitation with a scorched corner and somebody else's name on it. *(This is the
+  Discarded Invitation hook, made visible. A character who took that hook is
+  watching their own arrival happen to a stranger.)*
+- **Every great house's hired swords idle at the edge of the court** in unmatched
+  colours, waiting for masters who will be inside for six hours. There are a great
+  many of them this season. *House Boranis hired none.*
+- **A tall, pale factor is already inside**, having arrived early and entirely
+  unremarkably. Nobody in the line saw him arrive. Nobody in the line is thinking
+  about him.
+
+**The omen** *(unchanged, and the one thing in this scene that is not gossip)*: nine
+honor guards on the gate, and every one of them is facing **inward**.
+
+**The approach loop starts here.** A player character either seeks somebody in this
+line or is sought by them — that is the module's engine and it should turn over once
+before anyone reaches the door. Rumor Table rolls are legal from the first minute.
+
+> **MM Note — the first roll of the night**
+>
+> **Default:** make it a **social** roll at **Standard**, and name the 7–9 cost out
+> loud before you resolve it.
+>
+> **The dial:** you could open on something easier, to give the table a win.
+>
+> **The cost:** the first roll teaches the tier the game lives in. Open on an Easy
+> success and the table learns that rolls are things you pass; open on a Standard
+> and let a 7–9 land honestly — *you get what you asked for, and here is what it
+> costs* — and they have learned the actual game in thirty seconds. This module is
+> full of 7–9s. Teach it here, where the cost is a rumour and somebody's dignity.
 
 **B1. The Gatehouse Court.** Where invitations are presented — by name, against
 Minister Corval's memory, personally; there is no written list, and with Corval
@@ -187,17 +265,33 @@ matters again: the palace's defenses are deepest here, and a character who under
 the wards (Agenda 5, or study in this room) can *steer* them from the Root the way
 Raunu does from memory.
 
+**B13. The Room You Put Here.** *(Deliberately empty. Fill it.)*
+
+Somewhere off the lower gallery there is a door this module does not open. It is on
+the plan, it is reachable from B7 and from the service run, and it is yours.
+
+What it should be depends on what your table has done by Movement IV. If they have
+been chasing the household question, make it the room where twenty-two people's
+effects are stacked and labelled in a hand nobody recognises. If they have been
+chasing Veier, make it a nursery that was prepared and then unprepared. If they have
+been chasing nothing in particular, make it the one room in the palace that is warm,
+with a fire lit and two chairs, and let them find out later who was sitting in them.
+
+Two rules, and they are the only ones. **Nothing in B13 contradicts Chapter II** —
+it may hint at the truth, never state it. And **B13 does not contain a Fracture**;
+the four that exist are the four, and adding a fifth changes what the night costs.
+
 ## Running the Room
 
 Two hundred guests, fourteen of them named (Chapter VII). Between scheduled events,
 run the ball as a loop of **approaches**: a player character seeks someone out, or is
 sought out — patrons checking on agendas, rivals testing masks, strangers flirting,
 Vorlain's cousin Essin recruiting drinking companions who might talk. Every named NPC's
-entry lists where they stand in each Movement; the night-tracker in Chapter IX puts it
+entry lists where they stand in each Movement; the night-tracker in Chapter VIII puts it
 on one page.
 
 **Rumors** circulate all night: any social scene can yield one (roll on the table in
-Chapter IX, or choose). They are contradictory by design. Nobody at this ball knows
+Chapter VIII, or choose). They are contradictory by design. Nobody at this ball knows
 the truth. Not even you.
 
 ---
@@ -232,6 +326,9 @@ who opens doors. Letting it run costs nothing but bruises and reputations — an
 fills the galleries with guards for a Movement, which some agendas will find
 inconvenient and one crew (below) finds very interesting indeed.
 
+***Scene card S1, Chapter IX*** — the bench clock, the kinsmen's stat line, the outs,
+and what ending it well is worth.
+
 ### The Other Thieves *(Movements III–VI — one trouble in three sightings)*
 
 Tavva's crew (Chapter VII; `enemies/tavva.fof`, `enemies/gallery_knife.fof`) is working the ball tonight,
@@ -253,9 +350,11 @@ one promise of a fight a starting party can flatly win tonight.
   quiet chance to stop what is coming, and the only one where the whole crew is
   in one place. A fight here is knives in the dark, hushed on both sides —
   because whoever makes noise answers to the guards, and both sides know it.
+  ***Scene card S2, Chapter IX*** — the shared noise clock, Tavva's stance triggers
+  and Technique, and the three ways out that are not a fight.
 - **The raid** *(Movement VI–VII)*: see Chapter V — when the lights die, the crew
   goes to work, and stopping them becomes a thing worth doing in front of
-  witnesses.
+  witnesses. ***Half-card S5, Chapter IX.***
 
 *(Agenda 5's player has a private stake in all three sightings: the crew's list
 and their grandmother's crystal hang in the same gallery.)*
@@ -271,6 +370,7 @@ and their grandmother's crystal hang in the same gallery.)*
 > The win condition is the getaway, and a clean getaway is absolutely on the
 > table. For a table hungry for honest combat, the house's own guards are the
 > honest opponent: real, dangerous, and survivable.
+> ***Half-card S4, Chapter IX.***
 
 ---
 
@@ -592,6 +692,48 @@ said where the polite thing was expected. And he knows things he should not know
 kitchens), and shows it without threat, almost absently. He is *sounding* people —
 though for what, he does not say. Each summons ends the same way: abruptly, with
 something that is nearly a kindness, and the long walk back.
+
+> **Raunu's summons — the questions, and what he says**
+>
+> *He is not the warm charmer anyone expected. Long pauses, no pleasantries, the true
+> thing said where the polite thing was expected. "If friendly" here means he has
+> decided, in the first thirty seconds, that this one is worth the effort — and he
+> decides that far more readily than his reputation suggests.*
+>
+> *(Silence. He lets it run. He is waiting to see what the guest does with it, and
+> what they do with it is the whole audience.)*
+>
+> *Why did you send for me?*
+> "I wanted to see what you would do with a long walk." *(Beat.)* "You did rather
+> well. Most people talk."
+>
+> *Where have you been for two years?*
+> "Here." *(No elaboration. He does not consider this an evasion, and it isn't one.)*
+> — **if friendly:** "Here. Working. The distinction between here and away turned out
+> to be less useful than I expected."
+>
+> *Why open the house tonight?*
+> "Because I have something to say, and it needs two hundred witnesses who cannot
+> agree on anything else." *(He seems mildly surprised to have said it aloud.)*
+>
+> *What are you going to say at the Unmasking?*
+> "Something true." *(A long look.)* "You will be in the room. That is more than most
+> of them are getting."
+>
+> *Are you in danger?*
+> — *This is the question that stops him.* "That is a very good question, and you are
+> the second person to ask it." *(He does not say who the first was.)*
+> — **if friendly:** "I have spent two years arranging for the answer to be no. I
+> find, tonight, that I am not certain the arranging was sufficient."
+>
+> *Something about their own agenda — a patron, a debt, a sister in his kitchens.*
+> — *He already knows. He says so without threat, almost absently, the way you would
+> mention the weather to someone standing in it.* "Yes, I know about that. It doesn't
+> signify. Was there something else?"
+>
+> *(Every summons ends the same way: abruptly, with something that is nearly a
+> kindness, and the long walk back.)* "Thank you. Genuinely. Go and enjoy the wine —
+> it is the last good thing I have left to give anyone."
 
 **Agenda beats:** a summons is the only route to the host — Agenda 2's one close
 study, Agenda 1's one chance to simply *ask* (which gets a long look, and then,

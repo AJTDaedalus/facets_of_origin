@@ -4,7 +4,7 @@ Zahna has never once looked up a spell. He has a territory — the marks people 
 
 That is the whole of magic here. A domain says where you can reach. An intent says what you are reaching for. A scope says how far. Then you roll the same two dice as everyone else.
 
-**If your concept isn't magical, skip this chapter.** Nothing else in character creation depends on it. Magic enters a character through a Background with a domain origin (Chapter II.5) and grows through the Facet Techniques (Chapter II.4); a character with neither loses nothing by never reading a word of this. Come back if a domain ever finds you.
+**If your concept isn't magical, skip this chapter.** Nothing else in character creation depends on it. Magic enters a character through a Background with a domain origin (Chapter II.6) and grows through the Facet Techniques (Chapter II.4); a character with neither loses nothing by never reading a word of this. Come back if a domain ever finds you.
 
 ## What Is Magic?
 
@@ -211,9 +211,13 @@ There are 21 domains: twelve for the Soul (nine core and three Prismatic) and ni
 >
 > Capping scope does the same work from the other end. A starting caster succeeds at their magic, reliably, at their normal difficulty, and simply cannot yet do the big thing. The limit is legible in the fiction instead of hidden in the dice, and the Technique becomes a door that opens rather than a penalty that lifts.
 
-**Before the Technique.** Your domain origin comes from your Background (Chapter II.5), not your Technique. Until you unlock the corresponding Facet Technique, magic is real but limited: **Minor scope only**. You can light a candle, sense a vibration, or leave a small mark — but you cannot fill a room with fire or shatter a wall with sound. The Technique is not when you gain magic — it is when your magic becomes what it is capable of being. Minor scope uses the domain's normal difficulty table: Easy for Focused, Standard for Standard, Hard for Prismatic.
+**Before the Technique.** Your domain origin comes from your Background (Chapter II.6) or your Lineage (Chapter II.5), not your Technique. Until you unlock the corresponding Facet Technique, magic is real but limited: **Minor scope only**. You can light a candle, sense a vibration, or leave a small mark — but you cannot fill a room with fire or shatter a wall with sound. The Technique is not when you gain magic — it is when your magic becomes what it is capable of being. Minor scope uses the domain's normal difficulty table: Easy for Focused, Standard for Standard, Hard for Prismatic.
+
+A **Lineage Gift** is the one exception to how that lock opens. It formalizes at your first Facet level, in whichever Facet that level lands, and spends no Technique pick — blood is not study (Chapter II.5, *Formalization*). The scope restriction before then is exactly the same.
 
 A domain is not granted by raw potential — it requires both narrative origin and developed practice. At character creation, your **Background** establishes the story of how your magic began: you were raised in a temple, apprenticed to a hedge mage, discovered your domain through a crisis you barely survived, or spent years studying at an institution that understood what you were. The Background provides the narrative legitimacy. The **Facet Technique** provides the mechanical activation.
+
+Or your **Lineage**, if the setting's lineages are gifted (Chapter II.5). Some peoples carry a domain in the blood, and for a character born to one the origin is not a story of learning but a fact about their family. You hold **one** domain at creation, from Lineage or Background, never both.
 
 When you choose your domain, take a moment to answer these questions — even briefly, even just for yourself. They will make every magical roll feel like it belongs to your character rather than to a rule.
 

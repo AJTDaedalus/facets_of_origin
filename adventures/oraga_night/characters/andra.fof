@@ -1,0 +1,64 @@
+fof_version: '0.1'
+type: character
+id: andra-tessarin-oraga_ni
+name: Andra Tessarin
+version: 1.0.0
+authors:
+- Andra Tessarin
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+  - id: valloh
+    version: 0.1.0
+campaign_id: oraga_night
+character:
+  name: Andra Tessarin
+  player_name: Andra Tessarin
+  primary_facet: mind
+  attributes:
+    strength: 1
+    dexterity: 2
+    constitution: 1
+    intelligence: 3
+    wisdom: 2
+    knowledge: 3
+    spirit: 2
+    luck: 2
+    charisma: 2
+  skills:
+    lore:
+      rank: practiced
+      marks: 0
+  sparks: 3
+  session_skill_points_remaining: 4
+  training_marks_this_session: 0
+  facet_levels: {}
+  rank_advances_by_facet:
+    mind: 1
+  facet_level: 0
+  total_facet_levels: 0
+  career_advances: 1
+  technique_picks_available: 0
+  techniques: []
+  technique_choices: {}
+  specialty: The collected history of House Boranis — every public fact and most of the private
+    ones, held in memory and lattice.
+  magic_domain: crystal
+  magic_tradition: intuitive
+  magic_technique_active: false
+  inventory:
+  - held_image
+  - held_image
+  - chime_at_a_threshold
+  lineage: orthaen
+  gifted: true
+  domain_source: lineage
+  module_role: The Pattern-Keeper
+  description: 'A lattice-scholar of a quiet Tessarin branch, three years into a private record
+    of a pattern nobody else believes is there: the mist-tides, the silent house, the strange
+    marriage. In a world without books, Andra *is* her research.'
+  suggested_agenda: The Story of a Lifetime.
+  technique_at_facet_level_1: sharp_analysis
+created_at: '2026-09-09T11:54:53.803152+00:00'
+last_modified: '2026-09-09T11:54:53.803152+00:00'
