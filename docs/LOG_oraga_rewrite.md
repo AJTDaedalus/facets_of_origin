@@ -105,7 +105,7 @@ The acceptance list for the rewrite. Eighteen items, ticked honestly.
 | 9 | A visible clock with indented conditional lines as the mission menu | ✅ | Table IX–2b, the night clock, with the *what the players can move* column |
 | 10 | Alert-state paragraph once per site | ✅ | *The Palace on Alert*, above the keyed rooms |
 | 11 | Paired branches; failure continues with a named cost; finale scores earlier missions | ✅ | S3's three endings are written as paired conditionals; the Fractures score the finale mechanically |
-| 12 | One-page combat cards per chapter: ID, tier recipe, trigger read-aloud, tactics, stat lines, terrain-as-rules, pointers both ways | ✅ | `09_Scene_Cards.md`, five cards, **generated** stat lines, INV-19 |
+| 12 | One-page combat cards per chapter: ID, tier recipe, trigger read-aloud, tactics, stat lines, **map letter key**, terrain-as-rules, pointers both ways | ⚠️ **partial** | `09_Scene_Cards.md`, five cards, **generated** stat lines, INV-19 — every field except the map letter key, because the module ships no maps. Ticking this ✅ first time round was me grading my own homework generously; the honest mark is partial, and the fix is a map, not a card edit |
 | 13 | Social set-pieces as italic-question / quoted-answer with "if friendly" tiers | ✅ | Corval at the gate, Vorlain by the wine, Raunu's summons |
 | 14 | Settlements: stat line, authority figure, six NPCs, keyed sites | **n/a** | Single-site module. The palace *is* the settlement and is keyed |
 | 15 | Second-person coaching, forecast mistakes, two-option troubleshooting, signed designer's note per part | ✅ | Four sidebars, each with two in-fiction answers; one signed note in the Overture |
@@ -113,10 +113,22 @@ The acceptance list for the rewrite. Eighteen items, ticked honestly.
 | 17 | Names its own optional cuts, and reserves one location for the MM to fill | ✅ | **Both added this pass.** The abridged-run box, and **B13, The Room You Put Here** |
 | 18 | Appendices hold what the table touches repeatedly | ✅ | `08` handouts, `09` cards, `characters/`, `enemies/` |
 
-**16 of 18 met, 1 partial, 1 not applicable.** The two that were missing when I first
+**15 of 18 met, 2 partial, 1 not applicable.** The two that were missing when I first
 called this done — the prologue and the reserved room — are now written. The partial
 (item 8) is a genuine mismatch between the checklist and this module rather than an
-omission: an adventure with no dungeon has no floorboard to hide a ledger under.
+omission: an adventure with no dungeon has no floorboard to hide a ledger under. The
+second (item 12's map letter key) is a real absence — the module has no maps at all,
+which is a larger question than a rewrite should answer, and it is now recorded as
+open rather than quietly ticked.
+
+### Loose ends swept after the commit
+
+Two stale references to the deleted prelude survived the first pass: `04`'s pointer
+to Otta Vesh "(prelude wing)", and the README's running order telling a table to
+start with `06`'s prelude nights. Both fixed. `06_Wings.md` is now `06_Aftermath.md`,
+since it holds one wing and its chapter title says so. The rename swept
+`adventures/` only — `docs/` records what was true when they were written, which is
+the rule I broke once already this session and did not break again.
 
 ### Chapter numbering, fixed
 
