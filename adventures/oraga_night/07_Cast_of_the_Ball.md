@@ -2,7 +2,7 @@
 
 *Fifteen named guests. Each entry: who they are, what they want, what they fear,
 their secret, and how to play them. NPCs never roll dice — their entries note the
-difficulties they impose instead. The night-tracker (Chapter IX) maps where each
+difficulties they impose instead. The night-tracker (Chapter VIII) maps where each
 stands in every Movement.*
 
 ---
@@ -90,6 +90,39 @@ night's strangest hero — hauling guests from the burning banquet gallery (B3),
 everyone's permanent confusion including his own — and by dawn, the prime suspect.
 Both facts are true, and the aftermath wing runs on them.
 
+> **Vorlain by the wine — the overtures, and the non-answers**
+>
+> *For Agenda 3's player especially. Vorlain is delighted to be approached and will
+> agree with everything while committing to nothing. "If friendly" here means
+> "drunk", which takes real work and Essin will try to stop it.*
+>
+> *If it came to it, would the house follow you?*
+> "It followed me for a year. It was very comfortable about it." *(A smile. Nothing
+> else. He has not said yes.)*
+>
+> *Do you want the seat?*
+> "Everybody wants something they can see from where they're standing. I have
+> excellent eyesight." *(Still not a yes. He is enjoying this.)*
+>
+> *What happened during the missing year?*
+> "I ran a house. Rather well, since you ask. Then he came back." *(Beat.)* "And I
+> gave it back. That's the part nobody finds interesting, and it's the only part
+> that's remarkable."
+>
+> *Two cousins died.*
+> "Yes." *(No deflection at all, which is worse. He does not look away.)*
+>
+> *What is your brother like?*
+> — **drunk, and only drunk:** "You think I want him dead. I want him to LOOK at me
+> the way he looks at his ministers." *(And then, quieter, into the glass:)* "Gods
+> help whoever actually touches him — I've seen what he does to surprises."
+>
+> *Are you doing anything tonight?*
+> "I am drinking my brother's wine in my brother's house and being pleasant to people
+> who despise me. I have a very full evening."
+> — **drunk:** "Nothing. I'm doing nothing. Do you know how much work it is, doing
+> nothing where everybody can see you?"
+
 ### Minister Corval — the Majordomo
 *The last of the old household's officers; runs the whole ball with two dozen staff.*
 
@@ -106,6 +139,44 @@ chamberlains. Bribing Corval is impossible — not Hard, *impossible*, tell the
 players so. Helping him — genuinely, with the wine crisis or the escalating seating
 feud — earns more than gold buys: gratitude, gossip, and doors. Deceiving him about
 household matters is **Hard**; about anything else he is too tired to check.
+
+> **Corval at the gate — what the line asks him**
+>
+> *The questions every party asks in Movement I, and what he says. "If friendly"
+> lines are for anyone who has done him a kindness or is simply not being difficult.*
+>
+> *Is the master receiving tonight?*
+> "The master will be present." *(A pause exactly one beat too long.)* "As is
+> customary."
+> — **if friendly:** "He will be present, and I have not seen him since the second
+> bell. Both of those things are true, and I would rather you had asked me something
+> else."
+>
+> *Where is the household? There used to be sixty of you.*
+> "There are enough of us." *(Flat, and final. This is the one place he will not be
+> drawn, tonight or ever.)*
+> — **if friendly:** "Twenty-two. And every one of them chose to stay, which is the
+> part nobody asks about."
+>
+> *Why is the honor guard facing inward?*
+> "The honor guard is placed where the house requires." *(He has noticed. He has not
+> let himself finish the thought.)*
+> — **if friendly:** "I did not place them. I asked. I was told it was the master's
+> instruction, and I have been carrying that answer around all evening like a stone
+> in my shoe."
+>
+> *Have you a written list?*
+> "I have never needed one." *(Genuine, unforced pride — the one place where Corval
+> is entirely himself.)*
+>
+> *There are three guests in gray masks. Who are they?*
+> — *This is the question that makes him slide.* "Three—" *(He stops. He starts
+> again, and something behind his eyes does not connect.)* "They are accounted for."
+> *(He believes this while he says it. He will not remember being asked. A character
+> watching closely may roll **Insight, Hard**, to see that something in the answer
+> arrived from somewhere other than his memory.)*
+> — **if friendly, and if pressed a second time:** "I—" *(A long silence.)* "Ask me
+> again tomorrow. Please ask me again tomorrow."
 
 ### Anha — the Under-Cook
 *Agenda 8's sister. Four years in the kitchens; two years in the silence.*
@@ -329,9 +400,76 @@ information: she can prove she planned the gallery job for a season, which makes
 her the aftermath's most convenient scapegoat, and she knows it before her
 questioners do. *(Stat files: `enemies/tavva.fof`, `enemies/gallery_knife.fof`.)*
 
-### Otta Vesh — the Mask-Maker *(prelude wing)*
+### Otta Vesh — the Mask-Maker *(aftermath)*
 The finest spirit-mask maker in Rekuzan; her workshop is Night One's best scene, and
 her wall of casting-blanks — one kept for every face she has ever fitted, her rite
-and her pride — is the thread that later proves the three gray masks came from no
-hand in the city. **Play her:** an artist at festival peak — imperious, overbooked,
+and her pride — is the thread that proves the three gray masks came from no hand in
+the city. She is an aftermath scene now (Chapter VI); ask her about the masks and
+the answer is *nobody made them*, and nobody in Rekuzan would know how. **Play her:** an artist at festival peak — imperious, overbooked,
 susceptible to nothing but genuine appreciation of the craft.
+
+---
+
+## The Bought
+
+*A contract company, hired two nights ago by a factor nobody can describe, holding
+the Boranis gatehouse from the first bell of midnight to the last bell of Oraga.
+They are the only antagonists tonight who can be beaten, and the only ones who can
+be talked to. Full stat lines on **scene card S3**; module files
+`adventures/oraga_night/enemies/bought_*.fof`.*
+
+### Sergeant of the Bought — the One Reading the Room
+*Grey wool, cut plainly, the company's mark at the shoulder. A case chained at the
+hip, produced more readily than steel.*
+
+**Wants:** the contract satisfied, or voided. Either ends the fight and he does not
+much mind which. **Fears:** nothing about tonight. He fears a company that breaks
+terms, because that is a company nobody hires again. **Secret:** he has not read the
+Second Clause. Only the captain has.
+
+**Play him:** as someone doing a job he has done a hundred times, in a city that is
+on fire for reasons that are not his business. He opens by naming the terms aloud
+and expects to be believed, because in his experience the contract settles more
+arguments than the sword does.
+
+**The negotiation surface, printed:**
+
+- **What he wants:** to fulfil the contract and go home.
+- **What shifts him:** proof the employer has broken terms. The named target already
+  gone. A better-paying offer made *in front of his Blades*, which he will take, out
+  loud, because a company that hides its dealings from its own people does not last.
+- **What deal he honours:** any of them, absolutely, and he will say so before he
+  takes it. **He surrenders the field the moment the contract is void.**
+
+### Captain-under-Contract — the One Who Read It All
+*Older than the sergeants and quieter than the Blades. The coat is very good. The
+scar is older than the coat. The chain on the case has been replaced more recently
+than the case.*
+
+**Wants:** the company's reputation intact at dawn. That is the whole of it, and it
+explains everything he does tonight. **Fears:** exactly one thing — that somebody has
+used the Bought's name for something the Bought would not have signed, which he began
+to suspect around the time the second district caught. **Secret:** the Second Clause.
+*If a woman in Thenya wool comes out the front, hold her, and send word to the river.*
+He does not know who she is or why, and he has been thinking about it all night.
+
+**Play him:** a businessperson who has been shot at, and it shows in both directions.
+No heroics, no waste, and no cruelty — he never goes Aggressive, tonight or ever. He
+spends his first exchange placing Blades and watching who the party protects, and on
+his second he starts talking while the attacks continue.
+
+**The negotiation surface, printed:**
+
+- **What he wants:** to be paid, to keep his people, and to walk out of a burning
+  city with his name unspoiled.
+- **What shifts him:** the fires. He contracted for two diversions, not for this, and
+  a party who says so plainly is telling him something he already half knows. Also:
+  money, honestly offered, in front of witnesses.
+- **What deal he honours:** all of them, permanently. A bought-out captain **will not
+  resume the fight tonight for any inducement.**
+
+> **MM — the factor.** The captain never learns who hired him, and neither does the
+> module. If a table asks him directly he will tell them the truth, which is that he
+> does not know, and that this has begun to bother him a great deal. That is not a
+> dead end; it is the aftermath's best lead, because a captain who wants to know is
+> a captain who will help you find out.

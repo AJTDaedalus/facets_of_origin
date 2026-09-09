@@ -4999,3 +4999,185 @@ class TestEnemyUpdateIsAllOrNothing:
             msg = ws.receive_json()
         assert msg["type"] == "enemy_updated"
         assert (msg["resolve_current"], msg["open"], msg["posture"]) == (1, True, "aggressive")
+
+
+class TestStrikeRiders:
+    """R3: a 10+ Strike depletes 2 Resolve and chooses one rider. The menu
+    is offered from data by `enemy_strike`; the choice comes back as its own
+    `strike_rider` event, because it is a decision made after the roll, not
+    an outcome of it.
+    """
+
+    def _session_with_enemy(self, client, mm_headers, tier="named", resolve=6,
+                            armor="none"):
+        session_id = client.post(
+            "/api/sessions/", json={"name": "Riders"}, headers=mm_headers,
+        ).json()["session_id"]
+        client.post("/api/enemies/", json={
+            "session_id": session_id, "id": "guard", "name": "Guard",
+            "tier": tier, "resolve": resolve, "armor": armor,
+        }, headers=mm_headers)
+        return session_id
+
+    def _spawn(self, ws, enemy_id="guard"):
+        ws.send_json({"type": "spawn_enemy", "enemy_id": enemy_id})
+        msg = ws.receive_json()
+        assert msg["type"] == "enemy_spawned"
+        return msg["tracker_key"]
+
+    # -- the menu comes from data ------------------------------------------
+
+    def test_full_success_offers_the_menu_from_the_ruleset(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            msg = ws.receive_json()
+        assert [r["id"] for r in msg["rider_menu"]] == ["open", "position"]
+        assert msg["rider_menu"][0]["label"] == "Open"
+
+    def test_partial_success_offers_no_rider(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "partial_success"})
+            msg = ws.receive_json()
+        assert msg["rider_menu"] == []
+
+    def test_a_removed_mook_offers_no_rider(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers, tier="mook", resolve=0)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            msg = ws.receive_json()
+        assert msg["mook_removed"] is True
+        assert msg["rider_menu"] == []
+
+    def test_a_defeated_enemy_offers_no_rider(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers, resolve=2)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            msg = ws.receive_json()
+        assert msg["defeated"] is True
+        assert msg["rider_menu"] == []
+
+    # -- taking a rider -----------------------------------------------------
+
+    def test_open_rider_carries_its_duration(self, client, mm_headers, mm_token):
+        """R2 made Open a tempo tag, so the relay says how long it lasts
+        rather than only that it is set."""
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            ws.receive_json()
+            ws.send_json({"type": "strike_rider", "tracker_key": key,
+                          "rider": "open", "exchange_no": 1})
+            msg = ws.receive_json()
+        assert msg["type"] == "rider_applied"
+        assert msg["rider"] == "open"
+        assert msg["open"] is True
+        assert msg["open_until"] == "end_of_exchange"
+
+    def test_position_rider_records_its_deadline(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            ws.receive_json()
+            ws.send_json({"type": "strike_rider", "tracker_key": key,
+                          "rider": "position", "exchange_no": 2})
+            msg = ws.receive_json()
+        assert msg["rider"] == "position"
+        assert msg["open"] is False
+        assert msg["position"]["expires_after_exchange"] == 3
+
+    def test_a_cut_rider_is_refused(self, client, mm_headers, mm_token):
+        """Cover was cut at the gate (D20). The handler must refuse it, or
+        the cut is cosmetic."""
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "strike_rider", "tracker_key": key,
+                          "rider": "cover", "exchange_no": 1})
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert "cover" in msg["message"]
+
+    def test_unknown_enemy_is_refused(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._spawn(ws)
+            ws.send_json({"type": "strike_rider", "tracker_key": "nope",
+                          "rider": "open"})
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+
+    # -- expiry -------------------------------------------------------------
+
+    def test_open_expires_at_end_of_exchange(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            ws.receive_json()
+            ws.send_json({"type": "strike_rider", "tracker_key": key,
+                          "rider": "open", "exchange_no": 1})
+            ws.receive_json()
+            ws.send_json({"type": "end_exchange"})
+            msg = ws.receive_json()
+        assert msg["type"] == "exchange_ended"
+        assert msg["enemies"][key]["open"] is False
+        assert "open" in msg["enemies"][key]["expired_tags"]
+
+
+class TestUseItem:
+    """Crystal charges over the wire. No roll, no arithmetic — the event says
+    the charge is gone and what it did.
+    """
+
+    def _session(self, client, mm_headers):
+        return client.post(
+            "/api/sessions/", json={"name": "Charges"}, headers=mm_headers,
+        ).json()["session_id"]
+
+    def test_the_core_ruleset_carries_no_items_to_spend(
+            self, client, mm_headers, mm_token, session_with_character):
+        """Loot is a setting's business. On the core ruleset every item id is
+        unknown, and the handler says so rather than half-working."""
+        session, _ = session_with_character
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session["session_id"])
+            ws.send_json({"type": "use_item", "player_name": "Zahna",
+                          "item_id": "steady_light"})
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert "steady_light" in msg["message"]
+
+    def test_an_unknown_character_is_refused(
+            self, client, mm_headers, mm_token, session_with_character):
+        session, _ = session_with_character
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session["session_id"])
+            ws.send_json({"type": "use_item", "player_name": "Nobody",
+                          "item_id": "warmth"})
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert "Nobody" in msg["message"]

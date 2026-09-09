@@ -53,6 +53,20 @@ class Character(BaseModel):
         technique_choices: Dict of technique_id → chosen option (for Techniques with choices).
         background_id: The character's chosen Background ID (or None for custom backgrounds).
         specialty: The character's specialty text (from Background or custom).
+        lineage: Who the character was born as (PHB II.5, D18). Defaults to
+            "human" so every .fof written before the step existed loads
+            unchanged and the loader never requires the field.
+        gifted: Whether this character carries their lineage's Gift. An
+            ungifted member of a gifted lineage is a real and common case —
+            it is what "one Orthaen in five" means on a sheet — and keeps
+            the Background's secondary skill and the lineage's Heritage.
+        domain_source: Where `magic_domain` came from, so the formalization
+            rule knows which route applies: a Gift formalizes free at the
+            first Facet level (D18), a Background domain formalizes through
+            the Tier 1 Technique. `magic_domain` stays the single
+            primary-domain field — there is deliberately no parallel
+            `lineage_domain`, because two fields meaning the same thing is
+            how implementations drift apart.
         magic_domain: Primary magic domain ID if the character has magic.
         magic_tradition: "intuitive" (Spirit) or "scholarly" (Knowledge).
         magic_technique_active: True once the Tier 1 magic Technique is unlocked.
@@ -67,6 +81,12 @@ class Character(BaseModel):
         reactions_this_exchange: Count of reactions taken so far this
             exchange (K1, BRIEF D8) — feeds `combat.reaction_cost`'s
             `is_first_reaction`. Reset to 0 by `_handle_end_exchange`.
+        free_reaction: Whether this character's next reaction this exchange
+            costs no Endurance. Written by an ally's Cover rider — which is
+            not in the core menu (cut at the gate, D20) but stays
+            implemented for a setting or a future Technique. Ephemeral;
+            spent by one reaction and expired by
+            `combat.expire_end_of_exchange`.
         intercepts_this_exchange: Count of Intercept reactions taken so far
             this exchange. Intercept is capped at one per exchange (III.3:219),
             unlike other reaction types. Reset to 0 by `_handle_end_exchange`.
@@ -103,6 +123,9 @@ class Character(BaseModel):
     specialty: Optional[str] = None
 
     # Magic (persisted)
+    lineage: str = "human"
+    gifted: bool = False
+    domain_source: Optional[Literal["lineage", "background", "technique"]] = None
     magic_domain: Optional[str] = None
     secondary_magic_domain: Optional[str] = None  # Soul Communion T3 "Second Domain"
     # T4.2/D9: total_facet_levels at the moment Second Domain was taken. The
@@ -135,6 +158,7 @@ class Character(BaseModel):
     armor_downgrades_remaining: Optional[int] = None
     reactions_this_exchange: int = 0
     intercepts_this_exchange: int = 0
+    free_reaction: bool = False
 
     # --- Derived Facet-level views (read-only; kept for .fof and UI compat) ---
 
@@ -400,6 +424,33 @@ class Character(BaseModel):
                 levels_gained += 1
         return levels_gained
 
+    def _formalize_lineage_gift(self, ruleset: MergedRuleset) -> bool:
+        """Bring a Lineage Gift to full scope at the first Facet level (D18).
+
+        Returns whether it fired. Idempotent by construction: once
+        `magic_technique_active` is set there is nothing left to do, so a
+        second Facet level is a no-op rather than a second formalization.
+
+        Deliberately narrow. It fires only for a domain whose recorded source
+        is the lineage, and only when that lineage's `formalizes_on` says so —
+        a Background domain still formalizes through its Tier 1 Technique, and
+        the two routes never combine, because a character holds one creation
+        domain.
+
+        No Technique pick is consumed and nothing is appended to `techniques`.
+        That is the whole point: the Technique economy is untouched, and a
+        three-pick career is still three picks.
+        """
+        if self.domain_source != "lineage" or not self.magic_domain:
+            return False
+        if self.magic_technique_active:
+            return False
+        lin = ruleset.get_lineage(self.lineage)
+        if lin is None or lin.formalizes_on != "first_facet_level":
+            return False
+        self.magic_technique_active = True
+        return True
+
     def _check_major_advancement(self, major_threshold: int) -> bool:
         """Return True if total_facet_levels just crossed a Major Advancement threshold."""
         return self.total_facet_levels > 0 and self.total_facet_levels % major_threshold == 0
@@ -452,6 +503,14 @@ class Character(BaseModel):
 
         # Each Facet level (any Facet) grants one Technique pick to spend later.
         self.technique_picks_available += facet_level_advances
+
+        # D18: a Lineage Gift formalizes at the character's FIRST Facet level,
+        # in whichever Facet that level lands, and spends no pick. Called here
+        # rather than inside _check_facet_level_threshold because that method
+        # has no ruleset to read `formalizes_on` from, and the rule must not be
+        # guessed at from the character alone.
+        if facet_level_advances > 0:
+            self._formalize_lineage_gift(ruleset)
 
         major = False
         if facet_level_advances > 0:
@@ -640,6 +699,43 @@ class Character(BaseModel):
                     self.cross_facet_domain = str(choice)
         return True, "ok"
 
+    def use_item(self, item_id: str, ruleset: MergedRuleset) -> dict:
+        """Spend a one-use item from this character's inventory.
+
+        The whole of the loot system: remove the entry, report what it was.
+        No roll, no arithmetic, no charges-remaining counter — a charge either
+        is in the inventory or it is not. When the fiction makes a *release*
+        chancy (fumbled in the dark, near something that eats magic), that is
+        an ordinary Luck roll the table already knows how to make, and it does
+        not live here.
+
+        Raises:
+            ValueError: if the item is unknown to the ruleset, is not a
+                consumable, or is not in this character's inventory. Refusing
+                is the point — a spent charge that quietly works twice is a
+                worse bug than an error message.
+        """
+        item = ruleset.get_item(item_id)
+        if item is None:
+            raise ValueError(
+                f"Unknown item '{item_id}'. Items come from a setting Facet; "
+                "the core ruleset carries none."
+            )
+        if item.kind != "consumable":
+            raise ValueError(f"'{item.name}' is not a one-use item.")
+        if item_id not in self.inventory:
+            raise ValueError(
+                f"{self.name} is not carrying '{item.name}'."
+            )
+        self.inventory.remove(item_id)
+        return {
+            "item_id": item.id,
+            "name": item.name,
+            "scope": item.scope,
+            "effect": item.effect,
+            "remaining": self.inventory.count(item_id),
+        }
+
     def held_domains(self) -> list[str]:
         """Every domain the character currently practises, by any route."""
         return [
@@ -658,6 +754,12 @@ class Character(BaseModel):
         Keyed on the *Technique's* Facet, not the character's primary one: a
         cross-training character choosing from Soul's tree picks Soul domains
         (PHB II.3 — "choosing from that Facet's domain list").
+
+        Lineage Gifts are excluded. A setting's blood-magic sits in the same
+        catalog — it is a domain in every respect — but it is not something a
+        character can decide to learn, so it never appears on a Technique's
+        shopping list. A Soul mage in Shattered Origin cannot pick "Crystal";
+        an Orthaen is born to it, and it formalizes on its own (PHB II.5).
         """
         if not ruleset.magic or facet_id is None:
             return []
@@ -665,7 +767,7 @@ class Character(BaseModel):
             "soul": ruleset.magic.soul_domains,
             "mind": ruleset.magic.mind_domains,
         }
-        return pools.get(facet_id, [])
+        return [d for d in pools.get(facet_id, []) if not d.lineage_gift]
 
     def _validate_domain_choice(
         self, tech_def, choice: str, ruleset, technique_id: str
@@ -694,8 +796,22 @@ class Character(BaseModel):
 
         # Re-selecting the domain a Background already granted is not a duplicate:
         # the Tier 1 Technique *formalizes* that domain and unlocks full scope
-        # (II.3, II.5). It adds nothing, so it is exempt from the checks below.
-        formalizing = tech_def.magic_granting and choice == self.magic_domain
+        # (II.3, II.6). It adds nothing, so it is exempt from the checks below.
+        # Re-selecting a Background's domain is formalization, not a
+        # duplicate. A Lineage Gift that has ALREADY formalized (D18, free at
+        # the first Facet level) is neither: there is nothing left to
+        # formalize, so treating it as formalization would let a pick be spent
+        # re-buying a domain the character already has at full scope.
+        gift_already_formalized = (
+            self.domain_source == "lineage"
+            and choice == self.magic_domain
+            and self.magic_technique_active
+        )
+        formalizing = (
+            tech_def.magic_granting
+            and choice == self.magic_domain
+            and not gift_already_formalized
+        )
 
         # Otherwise no domain may be practised twice, by any route.
         if choice in self.held_domains() and not formalizing:
@@ -798,10 +914,20 @@ class Character(BaseModel):
             char_block["background_id"] = self.background_id
         if self.specialty is not None:
             char_block["specialty"] = self.specialty
+        # Lineage (II.5). `lineage` is written only when it is not the default,
+        # so every .fof already in the repo round-trips byte-identical; `gifted`
+        # rides with it because the pair is meaningless apart.
+        if self.lineage != "human":
+            char_block["lineage"] = self.lineage
+            char_block["gifted"] = self.gifted
         if self.magic_domain is not None:
             char_block["magic_domain"] = self.magic_domain
             char_block["magic_tradition"] = self.magic_tradition
             char_block["magic_technique_active"] = self.magic_technique_active
+            # Which route granted the domain decides how it formalizes, so a
+            # sheet that loses it loses the rule that applies to it.
+            if self.domain_source is not None:
+                char_block["domain_source"] = self.domain_source
         if self.secondary_magic_domain is not None:
             char_block["secondary_magic_domain"] = self.secondary_magic_domain
             if self.second_domain_acquired_at_total_facet_levels is not None:
@@ -919,6 +1045,9 @@ class Character(BaseModel):
             technique_choices=char_block.get("technique_choices") or {},
             background_id=char_block.get("background_id"),
             specialty=char_block.get("specialty"),
+            lineage=char_block.get("lineage") or "human",
+            gifted=bool(char_block.get("gifted", False)),
+            domain_source=char_block.get("domain_source"),
             magic_domain=char_block.get("magic_domain"),
             secondary_magic_domain=char_block.get("secondary_magic_domain"),
             second_domain_acquired_at_total_facet_levels=char_block.get(
@@ -952,6 +1081,8 @@ def create_default_character(
     ruleset: MergedRuleset,
     background_id: str | None = None,
     magic_domain: str | None = None,
+    lineage: str = "human",
+    gifted: bool = False,
 ) -> tuple[Character | None, list[str]]:
     """Create a character and validate it against the ruleset.
 
@@ -966,7 +1097,10 @@ def create_default_character(
         attributes: Minor attribute ratings (must satisfy the ruleset's distribution rules).
         ruleset: The session's merged ruleset.
         background_id: Optional background ID to apply at creation.
-        magic_domain: Domain ID if the character has magic via a magic-granting background.
+        magic_domain: Domain ID if the character has magic — via a
+            magic-granting Background, or via a Lineage Gift when `gifted`.
+        lineage: Lineage ID (PHB II.5). Defaults to the core's Human.
+        gifted: Whether this character carries their lineage's Gift.
 
     Returns:
         A tuple (Character, []) on success, or (None, [error strings]) on validation failure.
@@ -978,7 +1112,37 @@ def create_default_character(
     specialty: str | None = None
     resolved_magic_domain: str | None = magic_domain
     resolved_magic_tradition: str | None = None
+    domain_source: str | None = None
     career_advances = 0
+
+    # ---- Lineage (PHB II.5, D18) ----------------------------------------
+    # A character holds ONE domain at creation, from Lineage or Background,
+    # never both. That is the whole of the interaction between the two
+    # steps, and it is enforced here rather than in any handler.
+    lin = ruleset.get_lineage(lineage)
+    if lin is None:
+        return None, [
+            f"Unknown lineage '{lineage}'. The core rules ship one lineage "
+            "(human); others come from a setting Facet."
+        ]
+    if gifted:
+        if not lin.gift_domains:
+            return None, [
+                f"Lineage '{lineage}' is ungifted — it carries no Gift to "
+                "take. An ungifted lineage's members are simply not gifted; "
+                "they keep their Background's secondary skill."
+            ]
+        if magic_domain is None:
+            return None, [
+                f"A gifted {lin.name} character must name which domain their "
+                f"blood carries: {', '.join(lin.gift_domains)}."
+            ]
+        if magic_domain not in lin.gift_domains:
+            return None, [
+                f"'{magic_domain}' is not a Gift of lineage '{lineage}'. "
+                f"Its blood carries: {', '.join(lin.gift_domains)}."
+            ]
+        domain_source = "lineage"
 
     # Apply Background
     bg = ruleset.get_background(background_id) if background_id else None
@@ -999,9 +1163,14 @@ def create_default_character(
 
         # Secondary Skill → Novice with 1 mark.
         # Magic-granting Backgrounds replace the secondary skill with the
-        # domain origin when a domain is actually chosen (PHB II.5); without
+        # domain origin when a domain is actually chosen (PHB II.6); without
         # a domain they grant the secondary skill like any other Background.
-        skip_secondary = bg.domain_replaces_secondary and magic_domain
+        # A magic-granting Background whose domain was actually chosen
+        # replaces the secondary skill — and so does a Lineage Gift, for
+        # exactly the same reason: the domain origin *is* the second thing
+        # the sheet gets, rather than a third.
+        skip_secondary = (bg.domain_replaces_secondary and magic_domain) or (
+            gifted and magic_domain)
         if bg.secondary_skill and not skip_secondary:
             if bg.secondary_skill in skills:
                 skills[bg.secondary_skill].marks = 1
@@ -1010,13 +1179,32 @@ def create_default_character(
                     skill_id=bg.secondary_skill, rank="novice", marks=1
                 )
 
+        # One domain at creation, from one source. A gifted character takes
+        # a Background that grants no domain; a character whose Background
+        # grants one takes an ungifted lineage, or plays an ungifted member
+        # of a gifted one.
+        if gifted and bg.domain_origin is not None:
+            return None, [
+                f"A gifted {lin.name} character cannot also take "
+                f"'{bg.id}', which grants a domain of its own — a character "
+                "holds one domain at creation, from Lineage or Background, "
+                "never both."
+            ]
+
         # Resolve magic domain and tradition if magic_domain is provided
         if magic_domain:
             resolved_magic_domain = magic_domain
+            if domain_source is None:
+                domain_source = "background"
             if ruleset.magic:
                 domain_def = ruleset.magic.get_domain(magic_domain)
                 if domain_def:
                     resolved_magic_tradition = domain_def.tradition
+
+    if resolved_magic_domain and resolved_magic_tradition is None and ruleset.magic:
+        domain_def = ruleset.magic.get_domain(resolved_magic_domain)
+        if domain_def:
+            resolved_magic_tradition = domain_def.tradition
 
     # P-6 revised (D16): the Background's starting rank is credited to its
     # Facet's level track.
@@ -1050,6 +1238,9 @@ def create_default_character(
         session_skill_points_remaining=session_points,
         background_id=background_id,
         specialty=specialty,
+        lineage=lineage,
+        gifted=gifted,
+        domain_source=domain_source,
         magic_domain=resolved_magic_domain,
         magic_tradition=resolved_magic_tradition,
         career_advances=career_advances,

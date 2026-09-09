@@ -13,8 +13,9 @@
 - II.4a Facet of the Body
 - II.4b Facet of the Mind
 - II.4c Facet of the Soul
-- II.5 Backgrounds
-- II.6 Skills
+- II.5 Lineage
+- II.6 Backgrounds
+- II.7 Skills
 
 ## III — Rules
 - III.1 Core Resolution *(dice mechanics, modifiers, difficulty, Sparks, contested rolls, saving throws)*

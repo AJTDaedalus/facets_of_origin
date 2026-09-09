@@ -1102,3 +1102,449 @@ class TestNeverSurprisedWarningBeat:
         success on the notice roll."""
         tech = self._entry(ruleset)
         assert "automatically succeed" not in tech.description
+
+
+# ---------------------------------------------------------------------------
+# Lineage (D18 — PHB II.5)
+# ---------------------------------------------------------------------------
+
+def _gifted_ruleset(base):
+    """A ruleset whose lineages include a gifted one, so the gifted paths can
+    be tested without waiting on the Val'loh Facet."""
+    import copy
+    from app.facets.schema import LineageDefinition
+    rs = copy.deepcopy(base)
+    domain = next(d for d in rs.magic.soul_domains)
+    rs.lineages = list(rs.lineages) + [LineageDefinition(
+        id="orthaen", name="Orthaen", variants=["Orthain"],
+        description="They grow crystal.",
+        gift_domains=[domain.id], gift_rate="four in five",
+        heritage="Reads grown crystalwork: its age, its maker's hand.",
+    )]
+    rs._lineage_map = {lin.id: lin for lin in rs.lineages}
+    return rs, domain.id
+
+
+class TestLineageAtCreation:
+    def test_lineage_defaults_to_human(self, ruleset, valid_attributes):
+        """Every existing .fof predates the step and must load unchanged."""
+        char, errors = create_default_character(
+            name="Mordai", player_name="P1", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        assert errors == []
+        assert char.lineage == "human"
+        assert char.gifted is False
+        assert char.domain_source is None
+
+    def test_an_unknown_lineage_is_rejected(self, ruleset, valid_attributes):
+        char, errors = create_default_character(
+            name="X", player_name="P1", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset, lineage="dragonborn",
+        )
+        assert char is None
+        assert any("dragonborn" in e for e in errors)
+
+    def test_gifted_creation_sets_the_domain_and_records_its_source(
+            self, ruleset, valid_attributes):
+        rs, domain_id = _gifted_ruleset(ruleset)
+        char, errors = create_default_character(
+            name="Serane", player_name="P1", primary_facet="soul",
+            attributes=valid_attributes, ruleset=rs,
+            lineage="orthaen", gifted=True, magic_domain=domain_id,
+        )
+        assert errors == []
+        assert char.magic_domain == domain_id
+        assert char.domain_source == "lineage"
+        assert char.gifted is True
+
+    def test_a_gift_must_be_one_the_lineage_carries(self, ruleset, valid_attributes):
+        rs, _ = _gifted_ruleset(ruleset)
+        other = next(d.id for d in rs.magic.mind_domains)
+        char, errors = create_default_character(
+            name="Serane", player_name="P1", primary_facet="soul",
+            attributes=valid_attributes, ruleset=rs,
+            lineage="orthaen", gifted=True, magic_domain=other,
+        )
+        assert char is None
+        assert any(other in e for e in errors)
+
+    def test_an_ungifted_lineage_cannot_be_taken_gifted(self, ruleset, valid_attributes):
+        char, errors = create_default_character(
+            name="X", player_name="P1", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+            lineage="human", gifted=True,
+        )
+        assert char is None
+        assert any("human" in e.lower() for e in errors)
+
+    def test_one_domain_at_creation_never_two(self, ruleset, valid_attributes):
+        """The rule the whole step turns on: a gifted character takes a
+        Background that grants no domain."""
+        rs, domain_id = _gifted_ruleset(ruleset)
+        magic_bg = next(
+            bg.id for bg in rs.backgrounds if bg.domain_origin is not None)
+        char, errors = create_default_character(
+            name="Serane", player_name="P1", primary_facet="soul",
+            attributes=valid_attributes, ruleset=rs,
+            lineage="orthaen", gifted=True, magic_domain=domain_id,
+            background_id=magic_bg,
+        )
+        assert char is None
+        assert any("one domain" in e.lower() for e in errors)
+
+    def test_a_gift_replaces_the_backgrounds_secondary_skill(
+            self, ruleset, valid_attributes):
+        """Exactly as a magic-granting Background's domain origin does."""
+        rs, domain_id = _gifted_ruleset(ruleset)
+        plain_bg = next(
+            bg for bg in rs.backgrounds
+            if bg.domain_origin is None and bg.secondary_skill)
+        char, errors = create_default_character(
+            name="Serane", player_name="P1", primary_facet=plain_bg.facet,
+            attributes=valid_attributes, ruleset=rs,
+            lineage="orthaen", gifted=True, magic_domain=domain_id,
+            background_id=plain_bg.id,
+        )
+        assert errors == []
+        assert char.skills[plain_bg.secondary_skill].marks == 0, (
+            "a Gift replaces the secondary skill; the Background Mark should "
+            "not also be recorded"
+        )
+
+    def test_an_ungifted_member_keeps_the_secondary_skill_and_holds_no_domain(
+            self, ruleset, valid_attributes):
+        """One Orthaen in five is born without the gift, and the fiction has
+        to be expressible: same lineage, same Heritage, no domain."""
+        rs, _ = _gifted_ruleset(ruleset)
+        plain_bg = next(
+            bg for bg in rs.backgrounds
+            if bg.domain_origin is None and bg.secondary_skill)
+        char, errors = create_default_character(
+            name="Dassa", player_name="P1", primary_facet=plain_bg.facet,
+            attributes=valid_attributes, ruleset=rs,
+            lineage="orthaen", gifted=False, background_id=plain_bg.id,
+        )
+        assert errors == []
+        assert char.lineage == "orthaen"
+        assert char.gifted is False
+        assert char.magic_domain is None
+        assert char.skills[plain_bg.secondary_skill].marks == 1
+
+    def test_a_background_domain_records_its_own_source(
+            self, ruleset, valid_attributes):
+        magic_bg = next(
+            bg for bg in ruleset.backgrounds if bg.domain_origin is not None)
+        domain_id = next(
+            d.id for d in (ruleset.magic.soul_domains + ruleset.magic.mind_domains))
+        char, errors = create_default_character(
+            name="Zahna", player_name="P1", primary_facet=magic_bg.facet,
+            attributes=valid_attributes, ruleset=ruleset,
+            background_id=magic_bg.id, magic_domain=domain_id,
+        )
+        if char is not None and char.magic_domain:
+            assert char.domain_source == "background"
+
+
+class TestLineageGiftFormalization:
+    """D18 option 1: a Gift formalizes at the character's first Facet level, in
+    whichever Facet that level lands, and spends NO Technique pick.
+
+    Blood is not study. A Background domain is a practice the character is
+    still learning and the Tier 1 Technique is the curriculum that finishes it,
+    so it costs the pick a curriculum costs. Charging a Body-Facet gifted
+    character a cross-Facet Technique to reach full scope would make "born
+    gifted" cost more than "studied magic", which is the wrong way round.
+    """
+
+    def _gifted_character(self, ruleset, valid_attributes, **kw):
+        rs, domain_id = _gifted_ruleset(ruleset)
+        char, errors = create_default_character(
+            name="Serane", player_name="P1",
+            primary_facet=kw.pop("primary_facet", "soul"),
+            attributes=valid_attributes, ruleset=rs,
+            lineage="orthaen", gifted=True, magic_domain=domain_id, **kw,
+        )
+        assert errors == [], errors
+        return char, rs, domain_id
+
+    def _advance_to_first_facet_level(self, char, rs):
+        """Advance until a Facet level lands, rotating across the Facet's
+        skills — D16's rank caps refuse a single skill climbing forever."""
+        skill_ids = [sk.id for sk in rs.skills
+                     if sk.status == "active" and sk.facet == char.primary_facet]
+        for _ in range(40):
+            for skill_id in skill_ids:
+                try:
+                    char.advance_skill(skill_id, 3, rs)
+                except ValueError:
+                    continue
+                if char.total_facet_levels > 0:
+                    return True
+        return False
+
+    def test_a_gift_is_minor_scope_until_it_formalizes(
+            self, ruleset, valid_attributes):
+        char, _, domain_id = self._gifted_character(ruleset, valid_attributes)
+        assert char.magic_domain == domain_id
+        assert char.magic_technique_active is False
+
+    def test_the_gift_formalizes_at_the_first_facet_level(
+            self, ruleset, valid_attributes):
+        char, rs, _ = self._gifted_character(ruleset, valid_attributes)
+        assert self._advance_to_first_facet_level(char, rs)
+        assert char.magic_technique_active is True
+
+    def test_formalization_spends_no_technique_pick(
+            self, ruleset, valid_attributes):
+        """The Technique economy is untouched: a three-pick career is still
+        three picks."""
+        char, rs, _ = self._gifted_character(ruleset, valid_attributes)
+        assert self._advance_to_first_facet_level(char, rs)
+        assert char.technique_picks_available == char.total_facet_levels
+        assert char.techniques == []
+
+    def test_it_formalizes_in_whichever_facet_the_level_lands_in(
+            self, ruleset, valid_attributes):
+        """A Body-Facet gifted character reaches full scope through their own
+        Facet — the case option 2 could not serve."""
+        char, rs, _ = self._gifted_character(
+            ruleset, valid_attributes, primary_facet="body")
+        assert self._advance_to_first_facet_level(char, rs)
+        assert char.magic_technique_active is True
+        assert char.techniques == []
+
+    def test_an_ungifted_character_formalizes_nothing(
+            self, ruleset, valid_attributes):
+        char, errors = create_default_character(
+            name="Mordai", player_name="P1", primary_facet="body",
+            attributes=valid_attributes, ruleset=ruleset,
+        )
+        assert errors == []
+        rules = ruleset
+        skill_ids = [sk.id for sk in rules.skills
+                     if sk.status == "active" and sk.facet == "body"]
+        for _ in range(40):
+            for skill_id in skill_ids:
+                try:
+                    char.advance_skill(skill_id, 3, rules)
+                except ValueError:
+                    continue
+            if char.total_facet_levels > 0:
+                break
+        assert char.magic_technique_active is False
+
+    def test_the_technique_route_is_unchanged_for_background_domains(
+            self, ruleset, valid_attributes):
+        """A Background domain still waits for its Tier 1 Technique — the two
+        routes never combine, because a character holds one creation domain."""
+        magic_bg = next(
+            bg for bg in ruleset.backgrounds if bg.domain_origin is not None)
+        domain_id = next(
+            d.id for d in (ruleset.magic.soul_domains + ruleset.magic.mind_domains))
+        char, errors = create_default_character(
+            name="Zahna", player_name="P1", primary_facet=magic_bg.facet,
+            attributes=valid_attributes, ruleset=ruleset,
+            background_id=magic_bg.id, magic_domain=domain_id,
+        )
+        if char is None:
+            pytest.skip("this ruleset's magic Background/domain pairing differs")
+        skill_id = next(
+            sk.id for sk in ruleset.skills
+            if sk.status == "active" and sk.facet == char.primary_facet)
+        for _ in range(60):
+            char.advance_skill(skill_id, 3, ruleset)
+            if char.total_facet_levels > 0:
+                break
+        assert char.magic_technique_active is False, (
+            "a Background domain must not formalize for free — that route "
+            "costs the Tier 1 Technique pick"
+        )
+
+    def test_formalizing_twice_does_not_consume_a_pick_later(
+            self, ruleset, valid_attributes):
+        """The delicate one: the existing `formalizing` branch must not fire
+        for a lineage domain that is already active, or a later Facet level
+        would try to spend a pick re-formalizing a Gift that has arrived."""
+        char, rs, _ = self._gifted_character(ruleset, valid_attributes)
+        assert self._advance_to_first_facet_level(char, rs)
+        picks_after_first = char.technique_picks_available
+        levels_after_first = char.total_facet_levels
+        skill_ids = [sk.id for sk in rs.skills
+                     if sk.status == "active" and sk.facet == char.primary_facet]
+        for _ in range(40):
+            for skill_id in skill_ids:
+                try:
+                    char.advance_skill(skill_id, 3, rs)
+                except ValueError:
+                    continue
+            if char.total_facet_levels > levels_after_first:
+                break
+        assert char.technique_picks_available > picks_after_first
+        assert char.techniques == []
+
+    def test_option_two_leaves_the_old_behaviour_intact(
+            self, ruleset, valid_attributes):
+        """`formalizes_on: technique` stays legal data so a setting could
+        choose it; under it a Gift waits for the Technique like any domain."""
+        import copy
+        rs, domain_id = _gifted_ruleset(ruleset)
+        rs = copy.deepcopy(rs)
+        rs.get_lineage("orthaen").formalizes_on = "technique"
+        rs._lineage_map = {lin.id: lin for lin in rs.lineages}
+        char, errors = create_default_character(
+            name="Serane", player_name="P1", primary_facet="soul",
+            attributes=valid_attributes, ruleset=rs,
+            lineage="orthaen", gifted=True, magic_domain=domain_id,
+        )
+        assert errors == []
+        rules = rs
+        skill_ids = [sk.id for sk in rules.skills
+                     if sk.status == "active" and sk.facet == "soul"]
+        for _ in range(40):
+            for skill_id in skill_ids:
+                try:
+                    char.advance_skill(skill_id, 3, rules)
+                except ValueError:
+                    continue
+            if char.total_facet_levels > 0:
+                break
+        assert char.magic_technique_active is False
+
+
+class TestLineageGiftDomainsAreNotLearnable:
+    """A Gift is a domain in every respect and lives in the same catalog — but
+    it is not something a character can decide to learn. It never appears on a
+    Technique's shopping list; it is reached by being born to it.
+    """
+
+    def _valloh(self):
+        from pathlib import Path
+        from app.facets.loader import load_facet_file
+        from app.facets.registry import MergedRuleset
+        root = Path(__file__).resolve().parents[1] / "facets"
+        return MergedRuleset([
+            load_facet_file(root / "base" / "facet.yaml"),
+            load_facet_file(root / "valloh" / "facet.yaml"),
+        ])
+
+    def test_a_soul_mage_cannot_pick_crystal(self, valid_attributes):
+        rs = self._valloh()
+        pool = Character._facet_domains("soul", rs)
+        assert "crystal" not in {d.id for d in pool}
+
+    def test_the_cores_own_domains_are_untouched(self, valid_attributes):
+        rs = self._valloh()
+        pool = {d.id for d in Character._facet_domains("soul", rs)}
+        assert "fire" in pool and "shadow" in pool
+
+    def test_every_valloh_gift_is_excluded(self):
+        rs = self._valloh()
+        pool = {d.id for d in Character._facet_domains("soul", rs)}
+        gifts = {d.id for d in rs.magic.soul_domains if d.lineage_gift}
+        assert len(gifts) == 10
+        assert not (gifts & pool)
+
+    def test_a_gifted_character_still_holds_their_gift(self, valid_attributes):
+        """Excluded from the shopping list, reachable by birth — which is the
+        whole distinction."""
+        rs = self._valloh()
+        char, errors = create_default_character(
+            name="Serane", player_name="P1", primary_facet="soul",
+            attributes=valid_attributes, ruleset=rs,
+            lineage="orthaen", gifted=True, magic_domain="crystal",
+        )
+        assert errors == []
+        assert char.magic_domain == "crystal"
+        assert char.domain_source == "lineage"
+
+    def test_a_gift_formalizes_free_under_the_real_facet(self, valid_attributes):
+        rs = self._valloh()
+        char, errors = create_default_character(
+            name="Pello", player_name="P1", primary_facet="body",
+            attributes=valid_attributes, ruleset=rs,
+            lineage="phern", gifted=True, magic_domain="warning",
+        )
+        assert errors == []
+        assert char.magic_technique_active is False
+        skill_ids = [sk.id for sk in rs.skills
+                     if sk.status == "active" and sk.facet == "body"]
+        for _ in range(40):
+            for skill_id in skill_ids:
+                try:
+                    char.advance_skill(skill_id, 3, rs)
+                except ValueError:
+                    continue
+            if char.total_facet_levels > 0:
+                break
+        assert char.magic_technique_active is True
+        assert char.techniques == []
+
+
+class TestUseItem:
+    """Crystal charges — the smallest loot system the game can have."""
+
+    def _valloh(self):
+        from pathlib import Path
+        from app.facets.loader import load_facet_file
+        from app.facets.registry import MergedRuleset
+        root = Path(__file__).resolve().parents[1] / "facets"
+        return MergedRuleset([
+            load_facet_file(root / "base" / "facet.yaml"),
+            load_facet_file(root / "valloh" / "facet.yaml"),
+        ])
+
+    def _carrier(self, rs, valid_attributes, *items):
+        char, errors = create_default_character(
+            name="Serane", player_name="P1", primary_facet="soul",
+            attributes=valid_attributes, ruleset=rs,
+        )
+        assert errors == []
+        char.inventory = list(items)
+        return char
+
+    def test_using_a_charge_removes_it_and_reports_what_it_did(
+            self, valid_attributes):
+        rs = self._valloh()
+        char = self._carrier(rs, valid_attributes, "steady_light")
+        result = char.use_item("steady_light", rs)
+        assert result["name"] == "Charge: Steady Light"
+        assert result["scope"] == "minor"
+        assert "steady_light" not in char.inventory
+
+    def test_a_spent_charge_cannot_be_spent_again(self, valid_attributes):
+        rs = self._valloh()
+        char = self._carrier(rs, valid_attributes, "warmth")
+        char.use_item("warmth", rs)
+        with pytest.raises(ValueError):
+            char.use_item("warmth", rs)
+
+    def test_a_charge_you_are_not_carrying_is_refused(self, valid_attributes):
+        rs = self._valloh()
+        char = self._carrier(rs, valid_attributes)
+        with pytest.raises(ValueError):
+            char.use_item("veil_of_quiet", rs)
+
+    def test_an_unknown_item_is_refused(self, valid_attributes):
+        rs = self._valloh()
+        char = self._carrier(rs, valid_attributes, "moon_on_a_stick")
+        with pytest.raises(ValueError):
+            char.use_item("moon_on_a_stick", rs)
+
+    def test_two_of_the_same_charge_are_spent_one_at_a_time(
+            self, valid_attributes):
+        rs = self._valloh()
+        char = self._carrier(rs, valid_attributes, "warmth", "warmth")
+        first = char.use_item("warmth", rs)
+        assert first["remaining"] == 1
+        second = char.use_item("warmth", rs)
+        assert second["remaining"] == 0
+
+    def test_free_text_inventory_still_works_alongside_item_ids(
+            self, valid_attributes):
+        """`inventory` is list[str] and always was. A table that wants none of
+        this can write 'a good knife' and lose nothing."""
+        rs = self._valloh()
+        char = self._carrier(rs, valid_attributes, "a good knife", "warmth")
+        char.use_item("warmth", rs)
+        assert char.inventory == ["a good knife"]

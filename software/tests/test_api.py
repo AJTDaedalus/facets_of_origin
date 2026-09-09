@@ -290,7 +290,7 @@ class TestCharacterAPI:
     def test_background_temple_acolyte_domain_replaces_secondary(
         self, client, mm_headers, active_session, valid_attributes
     ):
-        """Temple Acolyte: choosing a magic domain replaces the secondary skill (PHB II.5)."""
+        """Temple Acolyte: choosing a magic domain replaces the secondary skill (PHB II.6)."""
         resp = client.post(
             "/api/characters/",
             json={
@@ -955,3 +955,60 @@ class TestCharacterDeletion:
 
         assert msg["type"] == "character_removed"
         assert msg["player"] == "Zahna"
+
+
+class TestCharacterCreationCarriesLineage:
+    """PHB II.5 / D18. The request model gains two fields; every rule about
+    them lives in the character model, so the handler stays a router.
+    """
+
+    def _payload(self, session_id, **kw):
+        payload = {
+            "session_id": session_id,
+            "character_name": "Serane",
+            "primary_facet": "soul",
+            "attributes": {
+                "strength": 1, "dexterity": 3, "constitution": 1,
+                "intelligence": 3, "wisdom": 1, "knowledge": 3,
+                "spirit": 2, "luck": 3, "charisma": 1,
+            },
+        }
+        payload.update(kw)
+        return payload
+
+    def test_lineage_defaults_to_human_when_unsent(self, client, mm_headers, mm_token):
+        """An older client that has never heard of Lineage keeps working."""
+        session_id = client.post(
+            "/api/sessions/", json={"name": "Lin"}, headers=mm_headers,
+        ).json()["session_id"]
+        resp = client.post("/api/characters/", json=self._payload(session_id),
+                           headers=mm_headers)
+        assert resp.status_code == 200, resp.text
+        assert resp.json()["character"]["lineage"] == "human"
+        assert resp.json()["character"]["gifted"] is False
+
+    def test_an_unknown_lineage_is_rejected(self, client, mm_headers, mm_token):
+        session_id = client.post(
+            "/api/sessions/", json={"name": "Lin"}, headers=mm_headers,
+        ).json()["session_id"]
+        resp = client.post(
+            "/api/characters/",
+            json=self._payload(session_id, lineage="dragonborn"),
+            headers=mm_headers,
+        )
+        assert resp.status_code == 422
+        assert "dragonborn" in str(resp.json())
+
+    def test_gifted_on_an_ungifted_lineage_is_rejected_by_the_model(
+            self, client, mm_headers, mm_token):
+        """The rule is the character model's; the handler only relays it."""
+        session_id = client.post(
+            "/api/sessions/", json={"name": "Lin"}, headers=mm_headers,
+        ).json()["session_id"]
+        resp = client.post(
+            "/api/characters/",
+            json=self._payload(session_id, lineage="human", gifted=True),
+            headers=mm_headers,
+        )
+        assert resp.status_code == 422
+        assert "ungifted" in str(resp.json()).lower()

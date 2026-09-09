@@ -156,6 +156,14 @@ Build outward from what the players can see. Session one needs:
 - **Three NPCs.** One who gives them information, one who wants something from them, and one who is watching. You can combine these if you are feeling efficient.
 - **One problem.** The thing that makes session one a story instead of a tour.
 
+### When Your World Has Its Own Peoples
+
+The core rules ship one lineage — Human — and assume it. If your world has others, they belong in a **setting Facet** rather than in your head, and Chapter II.5's *Creating a Custom Lineage* gives you the five steps: name them, decide whether they are gifted, state the rate as fiction, write the Heritage, and say what the Facet adds.
+
+Two things are worth saying twice. A lineage is a *people*, not a profession — if your draft reads like a job, you have written a Background. And a lineage is not a stat bonus; the core hands out no numbers at creation beyond the eighteen points, and the first lineage that grants one obliges you to price every other lineage against it.
+
+When you write the Facet up for your players, lead with the counted-novelty line — *this Facet adds seven lineages, seven Gift domains, and one item; it changes no rule* — so a player can learn the whole shape of your setting's mechanical footprint in a sentence before they read a word of its geography.
+
 Everything else — the wider world, the political landscape, the ancient history — can be built as the players encounter it. And when you build it at the table, it will be better than what you would have built alone, because it will be shaped by what the players have already done and cared about.
 
 ### The Concentric Circles Approach

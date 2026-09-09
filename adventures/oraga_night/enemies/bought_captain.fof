@@ -1,0 +1,61 @@
+fof_version: '0.1'
+type: enemy
+id: bought_captain
+name: Captain-under-Contract
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+enemy:
+  tier: boss
+  attack_modifier: 3
+  armor: heavy
+  techniques:
+  - the_second_clause
+  - reform_the_line
+  special: 'THE SECOND CLAUSE — every contract the Bought sign has one, and only the captain
+    has read it. Once per fight the captain invokes it and the company''s objective changes
+    mid-scene, in a direction the party did not plan for.
+
+    REFORM THE LINE — once per scene, every Blade that disengaged this scene returns to the
+    field in good order.'
+  description: The only one who has read the whole contract, and the only one who knows there
+    is a third clause. Older than the sergeants, quieter than the Blades, and entirely uninterested
+    in the ball, the house, or the dead. The company's asset is its reputation; the captain
+    is the person that costs the most to spend.
+  disposition: 'Runs the fight the way a foreman runs a site: no heroics, no waste, and a
+    very clear idea of when to stop.'
+  first_target: Nobody, at first. The captain spends the opening exchange placing Blades and
+    watching who the party protects.
+  triggers:
+  - Invokes the Second Clause the exchange after the party looks like winning.
+  - Reforms the line once, and only once, and only if the company still has somewhere to withdraw
+    to.
+  - Never goes Aggressive. Ever. It is not that kind of company.
+  morale: Calls the withdrawal at Resolve 2 and means it. A captain who has called a withdrawal
+    will not resume the fight tonight for any inducement, including a better offer.
+  organization: One. Arrives at the gatehouse on the clock's third segment, or when the sergeant
+    falls, whichever comes first.
+  notes: 'TR breakdown: offense(+3 → 5) + durability(Resolve 6) + armor(heavy → 2) + techniques(2)
+    = 15.
+
+
+    MODULE RESKIN (Oraga Night). Flavour fields only — description and organization. Tier,
+    resolve, attack_modifier, armor, techniques and special are the Bestiary''s and must stay
+    identical to enemies/bought_captain.fof; a test asserts it. The Bestiary files stay setting-agnostic
+    (B9), which is why the Val''loh colour lives here instead.'
+  negotiation: Wants the fee, the company intact, and the reputation that gets the next contract.
+    Shifts for a better-paying, better-terms offer made in front of the sergeants. Honours
+    a bought-out contract absolutely — it is the only asset the Bought actually sell.
+  resolve: 5
+  phases:
+  - resolve_threshold: 3
+    description: 'Starts negotiating mid-exchange — out loud, while the attacks continue.
+      Anyone who answers is talking to someone genuinely listening. TRIGGER, not a threshold:
+      the captain does this on the SECOND exchange he is on the field, or the exchange after
+      the party looks like winning, whichever comes first. The Resolve number below is a fallback
+      for a fight that gets there first, and in a long fight it will not (Series 13). A Boss''s
+      second act is keyed to conduct when the fight is long and to Resolve only when it is
+      short.'
+created_at: '2026-08-02T00:00:00+00:00'
+last_modified: '2026-08-02T00:00:00+00:00'

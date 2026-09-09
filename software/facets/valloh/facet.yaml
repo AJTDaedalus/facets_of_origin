@@ -1,0 +1,384 @@
+# Facets of Origin — The Val'loh Setting Facet v0.1.0
+#
+# COUNTED NOVELTY (the sentence everything in this file must agree with, and
+# which INV-17 machine-checks against V0_Ten_Things.md):
+#
+#   The core 2d6, Sparks, Conditions, exchanges, advancement, magic, and the
+#   three Facets are unchanged. Val'loh adds exactly: ten Lineages (two
+#   playable in Oraga Night), ten Gift domains, and crystal charges as one-use
+#   items. It removes nothing and it changes no rule.
+#
+# So: nothing in roll_resolution, spark, advancement, the magic RULES, or
+# combat. Domains append to the base catalog; they do not replace it.
+#
+# DRAFT STATUS: every domain below carries `draft: true`. The territories are
+# grounded in canon (/root/wanvil/docs/systems.md §Magic, §Mage Tribe Magic;
+# references/oraga_night/TUXXE_NAVAA_CANON.md); the example intents and every
+# Heritage are new invention awaiting the owner's read. See
+# references/valloh/INVENTIONS_FOR_REVIEW.md.
+
+id: "valloh"
+name: "Val'loh"
+version: "0.1.0"
+authors: ["AJTDaedalus"]
+description: >
+  The setting Facet for Val'loh: ten human lineages, the Gift domains their
+  blood carries, and the Orthaen crystal charges that make magic a thing
+  anyone can carry and spend. Changes no rule.
+priority: 1
+
+# ---------------------------------------------------------------------------
+# Lineages (PHB II.5)
+# ---------------------------------------------------------------------------
+# The tribes of Val'loh are HUMAN. That is canon and it is the point: the
+# difference between them is what their blood carries, not what they are.
+#
+# `playable: false` here means "not offered by default in a Val'loh campaign".
+# Krenn are gone by 3164 and exist so Master Vell can be statted honestly;
+# Tyndi are MM-side for the same reason. A module may override the flag for
+# its own pregens — Oraga Night opens Orthaen and Phern and no others.
+lineages:
+  - id: orthaen
+    name: Orthaen
+    variants: [Orthain]
+    description: >
+      The crystal-growers, and the reason Rekuzan's walls glow at dusk. Four in
+      five are born able to coax soul-crystal out of stone and shape it while
+      it sets; the rest live surrounded by the work of hands that could do what
+      theirs cannot.
+    gift_domains: [crystal]
+    gift_rate: "four in five"
+    heritage: >
+      Reads grown crystalwork the way a mason reads a wall: its age, whose hand
+      shaped it, and whether it is holding a working right now.
+    playable: true
+    formalizes_on: first_facet_level
+
+  - id: phern
+    name: Phern
+    variants: []
+    description: >
+      Caravanners and factors, on every road worth walking and most that are
+      not. Nearly all of them feel trouble before it arrives, which is either
+      why they took to the roads or why the roads have not killed them.
+    gift_domains: [warning]
+    gift_rate: "nearly all"
+    heritage: >
+      Knows the caravan roads, who moves what along them, and the fair price of
+      anything.
+    playable: true
+    formalizes_on: first_facet_level
+
+  - id: thenya
+    name: Thenya
+    variants: []
+    description: >
+      Border people, and the rarest gift in Val'loh by a wide margin — fewer
+      than one in a hundred. What theirs does, it does for someone else, and
+      it does not wait to be asked.
+    gift_domains: [the_bond]
+    gift_rate: "fewer than one in a hundred"
+    heritage: >
+      Border survival, and the reading of intentions in people who are trying
+      to hide them.
+    playable: false
+    formalizes_on: first_facet_level
+
+  - id: scora
+    name: Scora
+    variants: []
+    description: >
+      The rememberers. In a land where the written word is forbidden to all but
+      the Church, the Scora are the record — and all of them carry the gift,
+      which is why the arrangement has held.
+    gift_domains: [the_weave]
+    gift_rate: "all known"
+    heritage: >
+      The sanctioned cloth-strip rite; recognizes any Scora's record on sight
+      and can name who tied it.
+    playable: false
+    formalizes_on: first_facet_level
+
+  - id: akathi
+    name: Akathi
+    variants: []
+    description: >
+      Weapon-folk, half of them bonded to a single blade from the year they are
+      judged old enough to hold one. The other half are not lesser; they are
+      simply expected to be better at everything else.
+    gift_domains: [blade_bond]
+    gift_rate: "half"
+    heritage: >
+      The forms and their counters; reads a fighter's school in three exchanges.
+    playable: false
+    formalizes_on: first_facet_level
+
+  - id: dekhi
+    name: Dekhi
+    variants: []
+    description: >
+      Northerners, and nearly all of them harder to stop than they look. Cold,
+      poison, hunger and exhaustion arrive at a Dekhi later than they arrive at
+      anyone else, and leave sooner.
+    gift_domains: [stone_flesh]
+    gift_rate: "nearly all"
+    heritage: >
+      Winter-craft and the northern passes — which ones are open, which ones
+      are lying about it.
+    playable: false
+    formalizes_on: first_facet_level
+
+  - id: kshalo
+    name: Kshalo
+    variants: []
+    description: >
+      Dream-walkers, though only one in twenty actually walks. The rest keep the
+      herb-lore and the interpretations, and are consulted about both far more
+      often than the gifted are.
+    gift_domains: [dream]
+    gift_rate: "one in twenty"
+    heritage: >
+      The meaning of dreams, and the herb-lore of sleep and waking.
+    playable: false
+    formalizes_on: first_facet_level
+
+  - id: fthala
+    name: Fthala
+    variants: [Vethala]
+    description: >
+      People of the paths that are not roads. Most of them can make themselves
+      understood to something that does not use words, and none of them find
+      this remarkable.
+    gift_domains: [wildspeech]
+    gift_rate: "most"          # DRAFT — canon does not state a rate for the Fthala
+    heritage: >
+      Paths that are not roads, and beast-sign: what passed, how long ago, and
+      whether it was hunting.
+    playable: false
+    formalizes_on: first_facet_level
+
+  - id: krenn
+    name: Krenn
+    variants: []
+    description: >
+      Gone, by 3164 — or so everyone says, and everyone is wrong in at least one
+      case. All of them shared thoughts among kin, and enough of them could
+      reach further than kin that the rest of Val'loh stopped asking which.
+    gift_domains: [mindshare]
+    gift_rate: "all known"
+    heritage: null
+    playable: false            # MM-side only. Never shown to players.
+    formalizes_on: first_facet_level
+
+  - id: tyndi
+    name: Tyndi
+    variants: []
+    description: >
+      Gadget-makers, working stone and metal that hold power and give it back.
+      Most carry the gift in one narrow specialty and are useless outside it,
+      which they will tell you at length.
+    gift_domains: [resonance_of_stone]
+    gift_rate: "most, in specialties"
+    heritage: >
+      Gadget-lore; reads a device's control gem and can usually say what it was
+      built to do.
+    playable: false            # MM-side only.
+    formalizes_on: first_facet_level
+
+# ---------------------------------------------------------------------------
+# Gift domains (PHB II.3 catalog format)
+# ---------------------------------------------------------------------------
+# Appended to the base soul_domains catalog — the base's twenty-one are
+# untouched. Every one is Focused (a people's magic does one thing deeply),
+# intuitive tradition (Spirit + Attune), and `lineage_gift: true`, which keeps
+# it out of the Tier 1 Technique's choice list: a Soul mage in Shattered Origin
+# cannot pick "Crystal", because Crystal is not something you can decide to
+# learn.
+magic:
+  soul_domains:
+    - id: crystal
+      name: "Crystal"
+      type: focused
+      tradition: intuitive
+      requires_tier3: false
+      lineage_gift: true
+      draft: true
+      description: >-
+        Growing, shaping, charging, and reading soul-crystal; holding a working
+        in a lattice. Beyond this domain's focus: light that is not
+        crystal-light; stone that was never grown; and any working the crystal
+        merely holds, which is the spellform's domain and not this one.
+
+    - id: warning
+      name: "Warning"
+      type: focused
+      tradition: intuitive
+      requires_tier3: false
+      lineage_gift: true
+      draft: true
+      description: >-
+        Sensing hidden danger, its direction, and the intent behind it, before
+        it lands. Beyond this domain's focus: seeing the unseen — this is a
+        prickle, not sight; reading a specific mind; and danger nobody has
+        decided on yet.
+
+    - id: the_bond
+      name: "The Bond"
+      type: focused
+      tradition: intuitive
+      requires_tier3: false
+      lineage_gift: true
+      draft: true
+      description: >-
+        Protective intervention for someone the caster loves, fired by feeling
+        rather than technique. Beyond this domain's focus: anyone the caster
+        does not love; harm to the caster themselves; and anything premeditated
+        — the Bond answers a moment, never a plan.
+
+    - id: blade_bond
+      name: "Blade-bond"
+      type: focused
+      tradition: intuitive
+      requires_tier3: false
+      lineage_gift: true
+      draft: true
+      description: >-
+        One bonded weapon: finding it, calling it, striking with it as a part of
+        the self. Beyond this domain's focus: any other weapon; armor; and
+        anyone else wielding the bonded blade.
+
+    - id: stone_flesh
+      name: "Stone-flesh"
+      type: focused
+      tradition: intuitive
+      requires_tier3: false
+      lineage_gift: true
+      draft: true
+      description: >-
+        Enduring: cold, poison, hunger, exhaustion, and blows that would drop
+        another. Beyond this domain's focus: healing others; strength as such —
+        this is lasting, not lifting; and anything that requires speed.
+
+    - id: dream
+      name: "Dream"
+      type: focused
+      tradition: intuitive
+      requires_tier3: false
+      lineage_gift: true
+      draft: true
+      description: >-
+        Entering and shaping the dreams of the sleeping. Beyond this domain's
+        focus: the waking mind; anyone the caster has not met or does not hold
+        something truly theirs; and anything that leaves a physical mark.
+
+    - id: wildspeech
+      name: "Wildspeech"
+      type: focused
+      tradition: intuitive
+      requires_tier3: false
+      lineage_gift: true
+      draft: true
+      description: >-
+        Speaking with, bonding with, and moving among animals and wild places.
+        Beyond this domain's focus: commanding a beast against its nature;
+        plants, which are Verdance's; and anything inside a city's walls that is
+        not an animal.
+
+    - id: the_weave
+      name: "The Weave"
+      type: focused
+      tradition: intuitive
+      requires_tier3: false
+      lineage_gift: true
+      draft: true
+      description: >-
+        Perfect recall of anything witnessed or recorded; pattern across memory;
+        one true question of the past. Beyond this domain's focus: things never
+        witnessed by anyone; the future; and changing what was recorded.
+
+    - id: mindshare
+      name: "Mindshare"
+      type: focused
+      tradition: intuitive
+      requires_tier3: false
+      lineage_gift: true
+      draft: true
+      description: >-
+        Telepathy among kin; reading and, at scope, steering other minds. Beyond
+        this domain's focus: the dead; anyone shielded by deep crystal; and
+        changing what someone is rather than what they do next. An NPC domain in
+        3164 — it exists to stat Master Vell honestly.
+
+    - id: resonance_of_stone
+      name: "Resonance of Stone"
+      type: focused
+      tradition: intuitive
+      requires_tier3: false
+      lineage_gift: true
+      draft: true
+      description: >-
+        Metals and stones that carry and release magical power; gadgets and
+        their control gems. Beyond this domain's focus: crystal grown by the
+        Orthaen gift; living things; and anything without a stone or a metal in
+        it.
+
+# ---------------------------------------------------------------------------
+# Items — crystal charges
+# ---------------------------------------------------------------------------
+# A charged Orthaen crystal is a stored working: released at a touch, by
+# anyone, with no roll. Growing one is an ordinary Crystal working done in
+# downtime under II.3's normal rules; nothing extra is tracked. This is why
+# crystal is wealth in Val'loh — it is magic the ungifted can carry and spend.
+#
+# When the fiction makes a RELEASE chancy (fumbled in the dark, near something
+# that eats magic), that is an ordinary Luck roll at Standard. Not a rule here.
+items:
+  - id: steady_light
+    name: "Charge: Steady Light"
+    kind: consumable
+    scope: minor
+    effect: >-
+      A grown crystal sheds a steady, sourceless light for a scene. It does not
+      flicker and it does not go out, which is how you tell it from a lamp.
+
+  - id: seal_a_door
+    name: "Charge: Seal a Door"
+    kind: consumable
+    scope: minor
+    effect: >-
+      Crystal grows across a doorframe in the time it takes to say so. It will
+      not hold against a determined crowd, but it will hold long enough that
+      everyone hears them coming.
+
+  - id: veil_of_quiet
+    name: "Charge: Veil of Quiet"
+    kind: consumable
+    scope: minor
+    effect: >-
+      Sound does not leave the room for a scene. Conversation inside is
+      unaffected; a scream does not reach the corridor.
+
+  - id: chime_at_a_threshold
+    name: "Charge: Chime at a Threshold"
+    kind: consumable
+    scope: minor
+    effect: >-
+      The crystal is set at a doorway or a window and sounds once, softly, the
+      first time anything crosses it. It sounds for the person who set it and
+      for nobody else.
+
+  - id: warmth
+    name: "Charge: Warmth"
+    kind: consumable
+    scope: minor
+    effect: >-
+      Enough held heat for one person through one cold night, or four people
+      through a bad hour of one.
+
+  - id: held_image
+    name: "Charge: Held Image"
+    kind: consumable
+    scope: minor
+    effect: >-
+      A moment the crystal was grown to hold, shown once — a face, a room, a
+      hand signing something. It shows; it does not prove.

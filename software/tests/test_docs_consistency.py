@@ -7,7 +7,7 @@ where those live. See docs/DESIGN_production_apparatus.md §5 for the full
 table (INV-1 through INV-6) and which task lands each one.
 
 Currently implemented:
-  INV-1  every skill's facet.yaml description matches its II.6 prose entry
+  INV-1  every skill's facet.yaml description matches its II.7 prose entry
   INV-2  every Character Sheet field maps to a real Character model attribute
   INV-3  every Glossary entry's chapter pointer resolves and contains the term
   INV-4  Index.md is byte-identical to a fresh regeneration
@@ -42,7 +42,7 @@ PLAYER_HANDBOOK = REPO_ROOT / "player_handbook"
 MM_MANUAL = REPO_ROOT / "mm_manual"
 BESTIARY = REPO_ROOT / "bestiary"
 FACET_YAML = REPO_ROOT / "software" / "facets" / "base" / "facet.yaml"
-SKILLS_CHAPTER = PLAYER_HANDBOOK / "II.6_Character_Creation_Skills.md"
+SKILLS_CHAPTER = PLAYER_HANDBOOK / "II.7_Character_Creation_Skills.md"
 CHARACTER_SHEET = PLAYER_HANDBOOK / "Appendix_Character_Sheet.md"
 GLOSSARY = PLAYER_HANDBOOK / "Glossary.md"
 INDEX_FILE = PLAYER_HANDBOOK / "Index.md"
@@ -135,7 +135,7 @@ def _facet_yaml_skills() -> list[dict]:
     return data["skills"]
 
 
-# A skill entry in II.6's "The Skill List": a bold name, an italic
+# A skill entry in II.7's "The Skill List": a bold name, an italic
 # "(Facet — Attribute)" line, a **Roll:** field, then the prose paragraph that
 # defines what the skill covers (audit finding P3 gave the entries a field
 # skeleton; before that the prose followed the name directly).
@@ -146,7 +146,7 @@ _SKILL_ENTRY = re.compile(
 
 
 def _skill_list_entries() -> dict[str, str]:
-    """Parse {skill name: prose} out of II.6's "## The Skill List" section."""
+    """Parse {skill name: prose} out of II.7's "## The Skill List" section."""
     text = SKILLS_CHAPTER.read_text()
     start = text.index("## The Skill List")
     rest = text[start:]
@@ -161,8 +161,8 @@ def test_skill_descriptions_match_facet_yaml() -> None:
     """INV-1: facet.yaml's `description` for every skill is the canonical prose.
 
     Four copies of every skill description used to drift independently. Now
-    there are two coupled homes — data (facet.yaml) and prose (II.6) — and
-    this is what stops them from becoming two different rules. II.6 may add
+    there are two coupled homes — data (facet.yaml) and prose (II.7) — and
+    this is what stops them from becoming two different rules. II.7 may add
     a trailing usage sentence; it must not alter or contradict the data
     description itself, so the check is verbatim substring containment.
     """
@@ -174,12 +174,12 @@ def test_skill_descriptions_match_facet_yaml() -> None:
         expected = _normalize(skill["description"])
         prose = entries.get(name)
         if prose is None:
-            mismatches.append(f"{name}: no entry in II.6 'The Skill List'")
+            mismatches.append(f"{name}: no entry in II.7 'The Skill List'")
         elif expected not in prose:
             mismatches.append(
-                f"{name}: facet.yaml description not found verbatim in II.6\n"
+                f"{name}: facet.yaml description not found verbatim in II.7\n"
                 f"    facet.yaml: {expected}\n"
-                f"    II.6:       {prose}"
+                f"    II.7:       {prose}"
             )
 
     assert not mismatches, "Skill description mismatches:\n" + "\n".join(mismatches)
@@ -428,7 +428,7 @@ def test_first_move_matches_phb_ii4b_timing_and_scope() -> None:
     assert "trap" in description
 
 
-# A pre-built Background entry in II.5: "**Name**\n\n*Title:* ...", up to the
+# A pre-built Background entry in II.6: "**Name**\n\n*Title:* ...", up to the
 # next thematic break. Distinguishes the 15 real entries from the five bold
 # element-definition headers (**Title**, **Specialty**, etc.) earlier in the
 # chapter, which are never followed by a "**Title:**" line.
@@ -441,7 +441,7 @@ _BACKGROUND_SECTION = re.compile(
     r"^\*\*([A-Z][^\n*]+)\*\*\n\n\*\*Title:\*\*.*?(?=\n---\n|\Z)", re.M | re.S
 )
 _SPECIALTY_LINE = re.compile(r"^\*\*Specialty:\*\*\s*(.+?)\.?\s*$", re.M)
-BACKGROUNDS_CHAPTER = PLAYER_HANDBOOK / "II.5_Character_Creation_Backgrounds.md"
+BACKGROUNDS_CHAPTER = PLAYER_HANDBOOK / "II.6_Character_Creation_Backgrounds.md"
 
 
 def _phb_background_specialties() -> dict[str, str | None]:
@@ -466,7 +466,7 @@ _EXAMPLE_CAST_NOUNS = ("Zahna", "Mordai", "Zulnut", "Thornwall", "Artificers")
 
 
 def test_no_background_specialty_restates_the_difficulty_mechanic() -> None:
-    """A Background's Specialty is fiction; the mechanic lives in II.5 *Specialty*.
+    """A Background's Specialty is fiction; the mechanic lives in II.6 *Specialty*.
 
     Guild Apprentice used to carry "— Standard becomes Easy when directly
     applicable" inline, which is the section-level rule copied into one of
@@ -482,7 +482,7 @@ def test_no_background_specialty_restates_the_difficulty_mechanic() -> None:
         or "difficulty" in b["specialty"].lower()
     })
     assert not offenders, (
-        "These Background Specialties restate the difficulty rule that II.5's "
+        "These Background Specialties restate the difficulty rule that II.6's "
         f"*Specialty* section owns: {sorted(offenders)}")
 
 
@@ -500,7 +500,7 @@ def test_no_background_specialty_names_the_example_cast() -> None:
     for name, spec in _phb_background_specialties().items():
         for noun in _EXAMPLE_CAST_NOUNS:
             if spec and noun in spec:
-                offenders.append(f"II.5 {name}: names {noun!r}")
+                offenders.append(f"II.6 {name}: names {noun!r}")
     for background in _yaml_backgrounds():
         for noun in _EXAMPLE_CAST_NOUNS:
             if noun in background["specialty"]:
@@ -512,12 +512,12 @@ def test_no_background_specialty_names_the_example_cast() -> None:
 
 
 def test_all_fifteen_backgrounds_have_a_specialty_in_phb_and_yaml() -> None:
-    """II.5's five-elements claim (Title, Description, Starting Skill, Secondary
+    """II.6's five-elements claim (Title, Description, Starting Skill, Secondary
     Skill/Domain Origin, Specialty) must hold for every pre-built Background."""
     phb = _phb_background_specialties()
     assert len(phb) == 15
     missing_in_phb = [name for name, spec in phb.items() if not spec]
-    assert not missing_in_phb, f"No Specialty in II.5 for: {missing_in_phb}"
+    assert not missing_in_phb, f"No Specialty in II.6 for: {missing_in_phb}"
 
     yaml_bgs = _yaml_backgrounds()
     assert len(yaml_bgs) == 15
@@ -579,10 +579,10 @@ def test_the_strike_rule_is_stated_somewhere() -> None:
 
 
 def test_specialty_covers_the_no_skill_case() -> None:
-    """II.5 defined a Specialty only as a difficulty shift, which says nothing
+    """II.6 defined a Specialty only as a difficulty shift, which says nothing
     about an action with no roll attached — the gap an MM had to rule on live
     (report F3). A Specialty must never manufacture a roll."""
-    text = (PLAYER_HANDBOOK / "II.5_Character_Creation_Backgrounds.md").read_text(
+    text = (PLAYER_HANDBOOK / "II.6_Character_Creation_Backgrounds.md").read_text(
         encoding="utf-8").lower()
     assert "when no skill fits" in text
     assert "do not invent a roll" in text
@@ -1211,3 +1211,487 @@ def test_skill_point_broadcast_fields_are_ingested_by_the_client() -> None:
     app_js = (REPO_ROOT / "software/app/static/js/app.js").read_text(encoding="utf-8")
     assert '"training_marks_this_session": character.training_marks_this_session' in websocket_py
     assert "msg.training_marks_this_session" in app_js
+
+
+# ---------------------------------------------------------------------------
+# INV-8b  worked example-of-play arithmetic reconciles with the printed tiers
+# ---------------------------------------------------------------------------
+
+_ROLL_LINE = re.compile(
+    r"^→ .*?\bgets? (?:a|an) \*\*(\d+)\*\*\.\s*(Full success|Partial success|Failure)\b",
+)
+
+
+def _example_roll_lines(text: str):
+    for lineno, line in enumerate(text.split("\n"), start=1):
+        m = _ROLL_LINE.match(line.strip())
+        if m:
+            yield lineno, int(m.group(1)), m.group(2)
+
+
+def test_example_of_play_rolls_match_the_outcome_tiers() -> None:
+    """A worked example that narrates a partial success off a 10 teaches the
+    table the wrong game, and it is the kind of error that survives every
+    other check in this file — the prose is well-formed, the cross-references
+    resolve, and only the arithmetic is wrong.
+
+    Every `→ ... gets a **N**. <Outcome>` line in either book is checked
+    against the printed thresholds (10+ full, 7-9 partial, 6- failure), which
+    are read from the ruleset rather than restated here.
+    """
+    from app.facets.registry import build_ruleset
+
+    tiers = {t.id: t.threshold for t in build_ruleset([]).roll_resolution.outcome_tiers}
+    full, partial = tiers["full_success"], tiers["partial_success"]
+
+    def expected(total: int) -> str:
+        if total >= full:
+            return "Full success"
+        if total >= partial:
+            return "Partial success"
+        return "Failure"
+
+    problems = []
+    checked = 0
+    for path in sorted(PLAYER_HANDBOOK.glob("*.md")) + sorted(MM_MANUAL.glob("*.md")):
+        text = path.read_text(encoding="utf-8")
+        for lineno, total, stated in _example_roll_lines(text):
+            checked += 1
+            if stated != expected(total):
+                problems.append(
+                    f"{path.name}:{lineno} — a {total} is {expected(total)}, "
+                    f"but the example says {stated}"
+                )
+
+    assert checked, "no worked example rolls found — has the → notation changed?"
+    assert not problems, "worked example arithmetic disagrees with the tiers:\n" + "\n".join(problems)
+
+
+def test_the_guardian_vignette_shows_the_whole_outcome_range() -> None:
+    """The style guide's example-of-play rule: a vignette that only ever rolls
+    10+ teaches the table that 7-9 and 6- are failures to be avoided rather
+    than the two bands the game actually lives in. The Archive Guardian fight
+    is the book's flagship combat example and must show all three.
+    """
+    text = (PLAYER_HANDBOOK / "III.3_Combat.md").read_text(encoding="utf-8")
+    outcomes = {stated for _, _, stated in _example_roll_lines(text)}
+    for wanted in ("Full success", "Partial success", "Failure"):
+        assert wanted in outcomes, (
+            f"III.3's example of play never shows a {wanted}. "
+            "A combat example that only rolls well is not an example of this game."
+        )
+
+
+def test_the_guardian_vignette_spends_its_resolve_exactly() -> None:
+    """The vignette's Resolve bookkeeping is arithmetic the reader checks
+    against their own sheet. It starts at 10 (base 8 + 2 heavy armour), every
+    full-success Strike takes 2, and it must land on 0 — not 1, not -2.
+    """
+    text = (PLAYER_HANDBOOK / "III.3_Combat.md").read_text(encoding="utf-8")
+    body = text[text.index("## In Play: The Archive's Guardian"):]
+
+    # The vignette states the pool two ways — "**Resolve 8**" when it names the
+    # stat, "at **6**" when it is just counting down. Both are the same number
+    # and both have to be in the sequence, or the check silently skips a step.
+    stated = [
+        int(a or b)
+        for a, b in re.findall(r"\*\*Resolve (\d+)\*\*|\bat \*\*(\d+)\*\*", body)
+    ]
+    assert stated, "the vignette no longer states the Guardian's Resolve in bold"
+    # Every stated value must be even and descending by 2 — one full-success
+    # Strike at a time, which is what the rule says a 10+ takes.
+    for earlier, later in zip(stated, stated[1:]):
+        assert later == earlier - 2, (
+            f"Resolve goes {earlier} -> {later} in the Guardian vignette; a "
+            "full-success Strike depletes exactly 2."
+        )
+    assert stated[-1] == 2, (
+        "the vignette's last stated Resolve should be 2, with the final "
+        f"Strike taking it to 0; it is {stated[-1]}."
+    )
+
+
+# ---------------------------------------------------------------------------
+# INV-17  a setting Facet's counted-novelty line matches its data
+# ---------------------------------------------------------------------------
+
+VALLOH_BOOK = REPO_ROOT / "settings" / "valloh"
+VALLOH_FACET = REPO_ROOT / "software" / "facets" / "valloh" / "facet.yaml"
+
+_NUMBER_WORDS = {
+    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+    "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
+    "eleven": 11, "twelve": 12,
+}
+
+
+def _valloh_ruleset():
+    from app.facets.loader import load_facet_file
+    from app.facets.registry import MergedRuleset
+    return MergedRuleset([
+        load_facet_file(REPO_ROOT / "software" / "facets" / "base" / "facet.yaml"),
+        load_facet_file(VALLOH_FACET),
+    ])
+
+
+def _counted_novelty_claims() -> dict[str, int]:
+    """Pull the numbers out of the pitch's counted-novelty sentence.
+
+    The sentence is the setting book's promise to the reader about how much
+    they have to learn, and it is the one line in a setting Facet that a reader
+    is entitled to trust absolutely.
+    """
+    text = (VALLOH_BOOK / "V0_Ten_Things.md").read_text(encoding="utf-8")
+    sentence = next(
+        (line for line in text.split("\n") if "adds exactly" in line), None)
+    assert sentence, "V0 no longer carries a counted-novelty sentence"
+    claims = {}
+    for word, label in ((r"Lineages", "lineages"),
+                        (r"Gift domains", "gift_domains")):
+        m = re.search(r"\*\*(\w+) " + word + r"\*\*", sentence)
+        assert m, f"the counted-novelty sentence does not count {label}"
+        claims[label] = _NUMBER_WORDS[m.group(1).lower()]
+    return claims
+
+
+def test_valloh_counted_novelty_matches_the_data() -> None:
+    """INV-17. The pitch cannot drift from the file.
+
+    A setting book's counted-novelty line is a promise about how much a reader
+    has to learn, and it is the first thing to rot: someone adds a lineage,
+    nobody edits the pitch, and the sentence quietly becomes a lie. Counting it
+    from the merged ruleset means adding a lineage without updating V0 fails
+    the suite, and so does the reverse.
+    """
+    claims = _counted_novelty_claims()
+    rs = _valloh_ruleset()
+
+    setting_lineages = [lin for lin in rs.lineages if lin.id != "human"]
+    gift_domains = [d for d in rs.magic.soul_domains if d.lineage_gift]
+
+    assert len(setting_lineages) == claims["lineages"], (
+        f"V0 promises {claims['lineages']} Lineages; the Facet ships "
+        f"{len(setting_lineages)}."
+    )
+    assert len(gift_domains) == claims["gift_domains"], (
+        f"V0 promises {claims['gift_domains']} Gift domains; the Facet ships "
+        f"{len(gift_domains)}."
+    )
+
+
+def test_valloh_ships_the_items_it_claims() -> None:
+    """The third addition. The sentence says "crystal charges as one-use
+    items" without a count, so the invariant is that there ARE some and they
+    are all consumables — a claim of one-use items backed by nothing, or by a
+    permanent bonus, is the same drift in a different place."""
+    rs = _valloh_ruleset()
+    assert rs.items, "V0 promises crystal charges; the Facet ships no items"
+    assert all(item.kind == "consumable" for item in rs.items)
+
+
+def test_valloh_changes_no_rule() -> None:
+    """The rest of the counted-novelty promise, and the one that actually
+    matters: "it removes nothing and it changes no rule". A setting Facet that
+    quietly retunes the Spark economy or the difficulty ladder has broken the
+    only guarantee the pitch makes.
+    """
+    from app.facets.loader import load_facet_file
+    valloh = load_facet_file(VALLOH_FACET)
+    for section in ("roll_resolution", "spark", "advancement", "combat",
+                    "hazards", "death", "equipment"):
+        assert getattr(valloh, section) is None, (
+            f"the Val'loh Facet writes into `{section}`, but its pitch promises "
+            "it changes no rule."
+        )
+    # It may add domains; it may not rewrite how magic works.
+    assert valloh.magic is not None
+    assert not valloh.magic.traditions
+    assert not valloh.magic.domain_types
+    assert not valloh.skills and not valloh.techniques and not valloh.backgrounds
+
+
+def test_loading_valloh_leaves_the_core_untouched() -> None:
+    """The regression guard that makes "additive" mean something. With the
+    Facet loaded the core's own domains, skills, backgrounds and rules must be
+    exactly what they are without it.
+    """
+    from app.facets.loader import load_facet_file
+    from app.facets.registry import MergedRuleset
+    base_only = MergedRuleset([
+        load_facet_file(REPO_ROOT / "software" / "facets" / "base" / "facet.yaml")])
+    with_valloh = _valloh_ruleset()
+
+    base_soul = {d.id for d in base_only.magic.soul_domains}
+    assert base_soul < {d.id for d in with_valloh.magic.soul_domains}
+    assert ({d.id for d in base_only.magic.mind_domains}
+            == {d.id for d in with_valloh.magic.mind_domains})
+    assert ({s.id for s in base_only.skills} == {s.id for s in with_valloh.skills})
+    assert ({b.id for b in base_only.backgrounds}
+            == {b.id for b in with_valloh.backgrounds})
+    assert base_only.magic.traditions == with_valloh.magic.traditions
+    assert (base_only.combat.enemy_durability.open_clears
+            == with_valloh.combat.enemy_durability.open_clears)
+
+
+def test_valloh_book_and_data_agree_on_the_lineages() -> None:
+    """INV-7's sibling, extended to the Facet: every lineage in the data has an
+    entry in V1, and V1 introduces no lineage the data does not carry."""
+    rs = _valloh_ruleset()
+    text = (VALLOH_BOOK / "V1_Lineages.md").read_text(encoding="utf-8")
+    headings = set(re.findall(r"^## ([A-Z][A-Za-z'`]+)$", text, re.M))
+    for lin in rs.lineages:
+        if lin.id == "human" or not lin.playable and lin.id == "krenn":
+            continue  # Krenn are never shown to players (V1 says so in prose)
+        assert lin.name in headings, (
+            f"lineage '{lin.id}' is in the Facet data but has no entry in V1"
+        )
+
+
+def test_valloh_gift_domains_resolve() -> None:
+    """INV-16, run against the Facet that actually exercises it."""
+    rs = _valloh_ruleset()
+    known = {d.id for d in rs.magic.soul_domains} | {
+        d.id for d in rs.magic.mind_domains}
+    for lin in rs.lineages:
+        for domain_id in lin.gift_domains:
+            assert domain_id in known, (
+                f"lineage '{lin.id}' carries gift domain '{domain_id}', which "
+                "resolves to nothing"
+            )
+
+
+def test_the_module_no_longer_asserts_retired_canon() -> None:
+    """The claims the Val'loh Facet retires: "there are no magic domains in
+    Val'loh", "nobody casts in a crisis", "gifts are flair". They were a prior
+    reading of the slow-spellform rule; the rule is real, the conclusion was
+    wrong (D19). Nothing in the repo may still say them.
+    """
+    retired = [
+        "no magic domains",
+        "gifts are mostly flair",
+        "This is flair, not a subsystem",
+    ]
+    offenders = []
+    for path in sorted((REPO_ROOT / "adventures").rglob("*.md")):
+        text = path.read_text(encoding="utf-8")
+        for phrase in retired:
+            if phrase in text:
+                offenders.append(f"{path.relative_to(REPO_ROOT)}: {phrase!r}")
+    assert not offenders, "retired canon still asserted:\n" + "\n".join(offenders)
+
+
+# ---------------------------------------------------------------------------
+# INV-18  a module reskin may change flavour, never numbers
+# ---------------------------------------------------------------------------
+
+MODULE_ENEMY_DIRS = sorted((REPO_ROOT / "adventures").glob("*/enemies"))
+
+# What a reskin exists to change. Everything else is the Bestiary's.
+_RESKIN_FLAVOUR_FIELDS = {"description", "organization", "notes", "name"}
+
+
+def test_module_enemy_reskins_do_not_fork_the_numbers() -> None:
+    """INV-18. A module may reskin a Bestiary enemy so it reads like the
+    setting — the Bestiary is setting-agnostic by design (B9), so Val'loh
+    colour has to live in the module. What it may not do is change the
+    enemy's *numbers*.
+
+    This is the divergence the iron law exists to prevent, in its most
+    tempting form: the module author who wants the gate captain a point
+    tougher edits the copy in front of them, the simulated numbers the scene
+    card was tuned against quietly stop applying, and nothing says so.
+    """
+    mechanical = ("tier", "resolve", "attack_modifier", "defense_modifier",
+                  "armor", "techniques", "special", "tr", "phases")
+    problems: list[str] = []
+
+    for enemy_dir in MODULE_ENEMY_DIRS:
+        for path in sorted(enemy_dir.glob("*.fof")):
+            canonical = REPO_ROOT / "enemies" / path.name
+            if not canonical.exists():
+                continue  # module-original enemy; nothing to diverge from
+            here = yaml.safe_load(path.read_text(encoding="utf-8"))["enemy"]
+            there = yaml.safe_load(canonical.read_text(encoding="utf-8"))["enemy"]
+            for field in mechanical:
+                if here.get(field) != there.get(field):
+                    problems.append(
+                        f"{path.relative_to(REPO_ROOT)} changes `{field}` "
+                        f"({there.get(field)!r} -> {here.get(field)!r}); a reskin "
+                        f"may only change {sorted(_RESKIN_FLAVOUR_FIELDS)}"
+                    )
+
+    assert not problems, "module reskins fork Bestiary numbers:\n" + "\n".join(problems)
+
+
+def test_the_bestiary_originals_stay_setting_agnostic() -> None:
+    """B9. The reason the reskins exist at all: no Bestiary enemy may name a
+    setting. If the colour leaks back into `enemies/`, the Bestiary stops
+    being usable in anyone else's world.
+    """
+    setting_words = ("Val'loh", "Rekuzan", "Orthaen", "Oraga", "Boranis",
+                     "Blackwatch")
+    offenders = []
+    for path in sorted((REPO_ROOT / "enemies").glob("*.fof")):
+        text = path.read_text(encoding="utf-8")
+        for word in setting_words:
+            if word in text:
+                offenders.append(f"{path.name}: {word!r}")
+    assert not offenders, (
+        "setting names leaked into the setting-agnostic Bestiary:\n"
+        + "\n".join(offenders))
+
+
+# ---------------------------------------------------------------------------
+# INV-19  scene-card stat lines regenerate to no diff
+# INV-20  a module's `Chapter X.Y` pointers resolve
+# INV-21  read-aloud blocks stay short enough to read aloud
+# ---------------------------------------------------------------------------
+
+ADVENTURE_DIRS = sorted(p for p in (REPO_ROOT / "adventures").iterdir() if p.is_dir())
+
+
+def test_scene_card_statlines_are_up_to_date() -> None:
+    """INV-19. A scene card's numbers are generated from the module's enemy
+    files, exactly as the Bestiary's stat blocks are.
+
+    The failure this prevents is specific and expensive: someone retunes an
+    enemy after a simulation, the card still shows the old Resolve, and the
+    MM runs a fight that was never tested at the numbers in front of them.
+    """
+    from tools.build_scene_cards import build
+
+    stale = build(write=False)
+    assert not stale, (
+        "Scene card stat lines are stale — regenerate with "
+        "`python -m tools.build_scene_cards` (from software/):\n  "
+        + "\n  ".join(stale))
+
+
+def test_pregen_blocks_are_up_to_date() -> None:
+    """The same no-diff rule as the scene cards, applied to the pregenerated
+    characters.
+
+    A pregen used to exist twice — a paragraph of prose in the module, and a
+    block of numbers somebody typed under it — and the two could disagree
+    without anything noticing. They now have one source, `characters/*.fof`,
+    and the printed block is generated from it. `build_scene_cards` fills both
+    kinds of marker, so this shares its check.
+    """
+    from tools.build_scene_cards import build
+
+    stale = build(write=False)
+    assert not stale, (
+        "Pregen or scene-card blocks are stale — regenerate with "
+        "`python -m tools.build_scene_cards` (from software/):\n  "
+        + "\n  ".join(stale))
+
+
+def test_module_chapter_references_resolve() -> None:
+    """INV-20 (INV-5 extended to `adventures/`). A module cites the rulebooks
+    constantly — "see *Strike*, III.3" — and a renumber that misses the
+    adventures leaves a starter module pointing new tables at chapters that do
+    not exist. This is the guard the II.5 renumber wanted and did not have.
+    """
+    known = _chapter_numbers()
+    dangling: list[str] = []
+    for module_dir in ADVENTURE_DIRS:
+        for path in sorted(module_dir.rglob("*.md")):
+            for lineno, line in enumerate(path.read_text().splitlines(), start=1):
+                for number in CHAPTER_REFERENCE.findall(line):
+                    if number not in known:
+                        dangling.append(
+                            f"{path.relative_to(REPO_ROOT)}:{lineno} cites "
+                            f"Chapter {number}")
+    assert not dangling, ("Unresolved chapter references in adventures:\n"
+                          + "\n".join(dangling))
+
+
+def _read_aloud_blocks(text: str):
+    """Yield (line number, words) for every read-aloud block in a module.
+
+    A read-aloud block is a *paragraph* of blockquote whose content is
+    italicised — which means consecutive `> ` lines have to be joined before
+    anything is measured. Matching one line at a time (the first version of
+    this check) silently exempted every multi-line block, which is to say it
+    exempted exactly the blocks most likely to be too long. It also counted
+    every one-line italic aside — a Q&A question, a handout caption — as a
+    read-aloud, so it was loud about the wrong things and quiet about the right
+    ones.
+    """
+    lines = text.split("\n")
+    i = 0
+    while i < len(lines):
+        if not lines[i].startswith(">"):
+            i += 1
+            continue
+        start = i
+        chunk = []
+        while i < len(lines) and lines[i].startswith(">"):
+            chunk.append(lines[i].lstrip("> ").rstrip())
+            i += 1
+        body = " ".join(part for part in chunk if part).strip()
+        # Italic-wrapped, and not a bolded sidebar header (**Sidebar — ...**).
+        if body.startswith("*") and body.endswith("*") and not body.startswith("**"):
+            yield start + 1, len(body.strip("*").split())
+
+
+def test_read_aloud_blocks_stay_readable() -> None:
+    """INV-21. Nothing anyone will actually say at a table runs past 120 words.
+
+    A long read-aloud is not a style problem, it is a play problem: the table
+    stops listening halfway, the MM loses the room, and the detail that
+    mattered was in the second half. The style analysis puts the target at
+    2-6 sentences; 120 words is the outer bound that catches a runaway.
+    """
+    offenders: list[str] = []
+    for module_dir in ADVENTURE_DIRS:
+        for path in sorted(module_dir.rglob("*.md")):
+            for lineno, words in _read_aloud_blocks(path.read_text()):
+                if words > 120:
+                    offenders.append(
+                        f"{path.relative_to(REPO_ROOT)}:{lineno} — {words} words")
+    assert not offenders, ("Read-aloud blocks too long to read aloud:\n"
+                           + "\n".join(offenders))
+
+
+def test_the_read_aloud_check_actually_sees_multiline_blocks() -> None:
+    """The guard on the guard. An invariant that cannot fail is decoration, and
+    this one silently could not: its first version matched a single line at a
+    time, so a 300-word block spread over six lines passed."""
+    long_block = "> *" + " ".join(["word"] * 200) + "\n> more words here.*"
+    found = list(_read_aloud_blocks(long_block))
+    assert found and found[0][1] > 120
+
+    short_block = "> *The whole hill is lit. Nobody is hurrying.*"
+    assert list(_read_aloud_blocks(short_block))[0][1] < 120
+
+    # A bolded sidebar is not a read-aloud and must not be measured as one.
+    assert not list(_read_aloud_blocks("> **Sidebar — steel at the ball**"))
+
+
+def test_every_scene_card_enemy_exists_and_its_tr_recomputes() -> None:
+    """A card that names an enemy the module cannot load is a card the MM
+    cannot run, and a printed TR that no longer matches the stat block is a
+    budget the MM cannot trust."""
+    from app.game.enemy import Enemy
+    from tools.build_scene_cards import STATLINE, load_enemies
+
+    problems: list[str] = []
+    for module_dir in ADVENTURE_DIRS:
+        enemies = load_enemies(module_dir)
+        for path in sorted(module_dir.glob("*.md")):
+            text = path.read_text()
+            for match in STATLINE.finditer(text):
+                enemy_id = match.group(2)
+                enemy = enemies.get(enemy_id)
+                if enemy is None:
+                    problems.append(
+                        f"{path.relative_to(REPO_ROOT)} references unknown "
+                        f"enemy '{enemy_id}'")
+                    continue
+                printed = re.search(r"\*\*TR (\d+)\*\*", match.group(0))
+                if printed and int(printed.group(1)) != enemy.calculate_tr():
+                    problems.append(
+                        f"{enemy_id}: card prints TR {printed.group(1)}, "
+                        f"stat block computes {enemy.calculate_tr()}")
+    assert not problems, "\n".join(problems)

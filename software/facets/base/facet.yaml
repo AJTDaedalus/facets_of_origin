@@ -1778,7 +1778,46 @@ combat:
     mook_removed_on: partial_success        # armored mook: full_success
     armored_mook_removed_on: full_success
     open_on: full_success                   # a 10+ may leave the enemy Open (attacker's option, K-6/D4)
-    open_clears: enemy_action               # cleared ONLY by the enemy visibly spending its action
+    # R2 (D20): Open expires with the Tier 1 Conditions, so it is a tempo tag —
+    # exploit it now — and an Open enemy keeps its action. Under the old
+    # `enemy_action` value the first 10+ flipped a switch that stayed flipped:
+    # every later Strike from anyone was Easy, the enemy's only answer forfeited
+    # its one attack, and a solo Boss had a median two-exchange fight whose phase
+    # fired in the exchange it ended (Series 12 Part A: 20.5-27.0% of runs saw the
+    # phase land before the final exchange). `enemy_action` stays legal so a
+    # setting may choose it and so Part A's regression floor still runs.
+    open_clears: end_of_exchange
+
+    # R3 (D20): a full-success Strike depletes 2 Resolve and chooses ONE of
+    # these. The menu is data so the app renders the confirm from it and a
+    # setting may trim it; the effects are engine (see StrikeRiderDef), so an
+    # effect the engine does not implement fails at load.
+    #
+    # Why these: they are things the fight already lets you do, folded into
+    # the roll everyone actually makes. Open is the pre-R3 behaviour.
+    # Position is the Maneuver result arriving on a hit — which is what stops
+    # Maneuver from being dominated, while Maneuver stays the action for the
+    # character who wants to reshape the fight without striking.
+    #
+    # A third rider, COVER (a named ally's next reaction is free), was
+    # drafted and CUT AT THE GATE (Series 12 Part C, D20). Free reactions
+    # keep the party's Endurance up, which drives postures aggressive, which
+    # took the solo-Boss fight from a median 3 exchanges back to 2 and
+    # dropped phase-lands-before-the-final-exchange from 51-58.5% to 19-23%.
+    # It undid R2. The `free_reaction_ally` effect is still implemented, so
+    # a setting or a future Technique can offer it deliberately.
+    #
+    # THREE IS THE CAP if a setting adds one back. A fourth option on the
+    # most common outcome in the game is where a pick-list stops being fast.
+    strike_riders:
+      - id: open
+        label: Open
+        effect: easy_tag
+        duration: end_of_exchange
+      - id: position
+        label: Position
+        effect: easy_tag_next_roll
+        duration: next_roll_or_end_of_next_exchange
     # Working Resolve band (base, before armor bonus), confirmed by Gate G1
     # (task A8, 2026-07-10, DESIGN §5-bis; data in research/simulation_log.md
     # Series 7): Named 3-4, Boss 8. Widened from the BRIEF's original 2-6
@@ -1847,8 +1886,32 @@ equipment:
   weapon_types: [blades, blunt, polearms, unarmed]
 
 # ---------------------------------------------------------------------------
-# Backgrounds (PHB II.5)
+# Backgrounds (PHB II.6)
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Lineages (PHB II.5, D18)
+# ---------------------------------------------------------------------------
+# Who a character was born as, orthogonal to the Background's what-they-did.
+# The core ships exactly one, and it is deliberately empty: a lineage with
+# nothing in it is not a placeholder, it is the baseline every other lineage
+# is measured against. Shattered Origin defaults to human, so a new table has
+# one fewer choice to make, and every lineage a setting Facet adds is a
+# *counted* difference from a known shape.
+lineages:
+  - id: human
+    name: Human
+    variants: [folk, people]
+    description: >
+      The default of the core rules and of Shattered Origin. Humans are what
+      the rest of the book assumes: no gift, no heritage, nothing on the sheet
+      that a Background and a Facet do not put there. Every example character
+      in this book is human.
+    gift_domains: []          # empty = ungifted
+    gift_rate: null           # fiction only; a string when present
+    heritage: null
+    playable: true
+    formalizes_on: first_facet_level   # ignored while gift_domains is empty
+
 backgrounds:
   # === Body Facet Backgrounds ===
   - id: city_watch_veteran

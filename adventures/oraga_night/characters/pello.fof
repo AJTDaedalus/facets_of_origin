@@ -1,0 +1,59 @@
+fof_version: '0.1'
+type: character
+id: pello-oraga_ni
+name: Pello
+version: 1.0.0
+authors:
+- Pello
+ruleset:
+  modules:
+  - id: base
+    version: 0.1.0
+  - id: valloh
+    version: 0.1.0
+campaign_id: oraga_night
+character:
+  name: Pello
+  player_name: Pello
+  primary_facet: body
+  attributes:
+    strength: 1
+    dexterity: 3
+    constitution: 2
+    intelligence: 2
+    wisdom: 3
+    knowledge: 2
+    spirit: 1
+    luck: 2
+    charisma: 2
+  skills:
+    finesse:
+      rank: practiced
+      marks: 0
+  sparks: 3
+  session_skill_points_remaining: 4
+  training_marks_this_session: 0
+  facet_levels: {}
+  rank_advances_by_facet:
+    body: 1
+  facet_level: 0
+  total_facet_levels: 0
+  career_advances: 1
+  technique_picks_available: 0
+  techniques: []
+  technique_choices: {}
+  specialty: Contracts, caravans, and smugglers' roads — who moves goods, and around which
+    laws.
+  magic_domain: warning
+  magic_tradition: intuitive
+  magic_technique_active: false
+  lineage: phern
+  gifted: true
+  domain_source: lineage
+  module_role: The Factor's Nephew
+  description: A small, quick, cheerful man who has carried other people's valuables through
+    five tribes' territory and lost none of them, including himself.
+  suggested_agenda: The Circle's Reckoning, or The Gate at Midnight.
+  technique_at_facet_level_1: fleet_step
+created_at: '2026-09-09T11:54:53.801340+00:00'
+last_modified: '2026-09-09T11:54:53.801340+00:00'

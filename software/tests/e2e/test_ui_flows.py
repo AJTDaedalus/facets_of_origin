@@ -935,3 +935,210 @@ class TestSceneAndCombatControls:
         mm.evaluate("endScene()")
         mm.wait_for_timeout(400)
         assert mm.evaluate("Object.keys(state.activeEnemies).length") == 1
+
+
+# ---------------------------------------------------------------------------
+# Lineage picker (PHB II.5, D18) and the 10+ rider menu (R3, D20)
+# ---------------------------------------------------------------------------
+
+class TestLineagePicker:
+    """The Lineage step is a real choice only when the loaded ruleset offers
+    more than one. On the core rules it offers Human and nothing else, so the
+    control hides itself rather than making every table click past a menu with
+    one item in it.
+    """
+
+    def test_the_picker_is_hidden_on_the_core_ruleset(self, table):
+        """Shattered Origin has one lineage. A step with one possible answer is
+        not a choice, and a visible one-option select is the kind of dead
+        control the front-end audit was full of."""
+        mm, _ = table
+        hidden = mm.evaluate(
+            "() => document.getElementById('cc-lineage-wrap')"
+            "?.classList.contains('hidden')")
+        assert hidden is True, "the Lineage picker renders with only Human loaded"
+
+    def test_the_core_ruleset_really_does_ship_one_lineage(self, table):
+        """The guard on the test above: if the base ruleset ever gained a
+        second lineage, 'hidden' would become the wrong assertion and this
+        says so instead of passing quietly."""
+        mm, _ = table
+        ids = mm.evaluate("() => (state.ruleset.lineages || []).map(l => l.id)")
+        assert ids == ["human"], ids
+
+    def test_a_setting_facet_makes_the_picker_appear(self, table):
+        """With lineages in the ruleset the control renders, and it renders
+        from the data — nothing about Val'loh is hardcoded in the client."""
+        mm, _ = table
+        mm.evaluate("""() => {
+            state.ruleset.lineages = [
+              {id: 'human', name: 'Human', variants: [], description: 'The default.',
+               gift_domains: [], gift_rate: null, heritage: null, playable: true},
+              {id: 'orthaen', name: 'Orthaen', variants: ['Orthain'],
+               description: 'They grow crystal.', gift_domains: ['fire'],
+               gift_rate: 'four in five', heritage: 'Reads crystalwork.',
+               playable: true},
+            ];
+            populateLineageSelect();
+        }""")
+        mm.wait_for_timeout(200)
+        assert mm.evaluate(
+            "() => !document.getElementById('cc-lineage-wrap')"
+            ".classList.contains('hidden')")
+        options = mm.eval_on_selector_all(
+            "#cc-lineage option", "els => els.map(e => e.textContent)")
+        assert any("Orthaen" in o for o in options)
+        assert any("Orthain" in o for o in options), "variants are not shown"
+
+    def test_choosing_a_gifted_lineage_offers_its_gift(self, table):
+        """And an ungifted one offers nothing — the Gift select is not a
+        permanently visible empty control."""
+        mm, _ = table
+        mm.evaluate("""() => {
+            state.ruleset.lineages = [
+              {id: 'human', name: 'Human', variants: [], description: 'd',
+               gift_domains: [], playable: true},
+              {id: 'orthaen', name: 'Orthaen', variants: [],
+               description: 'They grow crystal.', gift_domains: ['fire'],
+               gift_rate: 'four in five', heritage: 'Reads crystalwork.',
+               playable: true},
+            ];
+            populateLineageSelect();
+        }""")
+        mm.wait_for_timeout(200)
+        # The fixture's MM already has a character, so the creation panel is
+        # hidden; show it to drive the picker as a player actually would.
+        mm.evaluate(
+            "() => document.getElementById('char-create-panel')"
+            ".classList.remove('hidden')")
+        mm.wait_for_timeout(150)
+        # Human first: no Gift control.
+        mm.select_option("#cc-lineage", "human")
+        mm.wait_for_timeout(200)
+        assert mm.evaluate(
+            "() => document.getElementById('cc-gift-wrap').classList.contains('hidden')")
+        assert mm.evaluate("() => selectedGift()") is None
+
+        # Orthaen: the Gift control appears, carrying the lineage's domains.
+        mm.select_option("#cc-lineage", "orthaen")
+        mm.wait_for_timeout(200)
+        assert not mm.evaluate(
+            "() => document.getElementById('cc-gift-wrap').classList.contains('hidden')")
+        gifts = mm.eval_on_selector_all(
+            "#cc-gift option", "els => els.map(e => e.value)")
+        assert "fire" in gifts
+        info = mm.inner_text("#cc-lineage-info")
+        assert "four in five" in info, "the gift rate is not shown"
+        assert "crystalwork" in info, "the Heritage is not shown"
+
+    def test_an_unpicked_lineage_never_becomes_a_gift(self, table):
+        """`selectedGift` must return null while the control is hidden, or a
+        core-rules character would be submitted as gifted."""
+        mm, _ = table
+        assert mm.evaluate("() => selectedGift()") is None
+
+
+class TestStrikeRiderMenu:
+    """R3: a 10+ Strike depletes 2 Resolve and chooses one rider. The menu is
+    rendered from the ruleset, so trimming or adding a rider is a facet.yaml
+    edit and never a JS edit.
+    """
+
+    def _spawn_named(self, mm):
+        mm.click("button[data-tab='builder']")
+        mm.wait_for_timeout(300)
+        mm.fill("#builder-enemy-name", "Gate Sergeant")
+        mm.select_option("#builder-enemy-tier", "named")
+        mm.click("button:has-text('Save to Library')")
+        mm.wait_for_timeout(600)
+        mm.click("button[data-tab='play']")
+        mm.wait_for_timeout(300)
+        mm.select_option("#play-spawn-enemy-select", "gate_sergeant")
+        mm.click("button:has-text('Spawn')")
+        mm.wait_for_timeout(700)
+        return mm.evaluate("() => Object.keys(state.activeEnemies)[0]")
+
+    def test_a_full_success_offers_the_riders_the_ruleset_prints(self, table):
+        mm, _ = table
+        key = self._spawn_named(mm)
+        assert key
+        mm.evaluate("""key => onEnemyUpdated({
+            tracker_key: key, resolve_current: 4, depletion: 2, defeated: false,
+            mook_removed: false, conditions: [], open: false,
+            rider_menu: [
+              {id: 'open', label: 'Open', effect: 'easy_tag',
+               duration: 'end_of_exchange'},
+              {id: 'position', label: 'Position', effect: 'easy_tag_next_roll',
+               duration: 'next_roll_or_end_of_next_exchange'},
+            ],
+        })""", key)
+        mm.wait_for_timeout(400)
+        buttons = mm.eval_on_selector_all(
+            "#toast-host button", "els => els.map(e => e.textContent)")
+        assert "Open" in buttons and "Position" in buttons, buttons
+
+    def test_an_empty_menu_offers_nothing(self, table):
+        """A 7-9, or a Mook a 10+ removed — no rider, and therefore no toast
+        with a dead button on it."""
+        mm, _ = table
+        key = self._spawn_named(mm)
+        mm.evaluate("""key => onEnemyUpdated({
+            tracker_key: key, resolve_current: 5, depletion: 1, defeated: false,
+            mook_removed: false, conditions: [], open: false, rider_menu: [],
+        })""", key)
+        mm.wait_for_timeout(400)
+        buttons = mm.eval_on_selector_all(
+            "#toast-host button", "els => els.map(e => e.textContent)")
+        assert "Open" not in buttons and "Position" not in buttons
+
+    def test_a_third_rider_renders_without_a_client_change(self, table):
+        """The promise the data-driven menu makes: a setting that adds Cover
+        back gets a third button and no JS edit."""
+        mm, _ = table
+        key = self._spawn_named(mm)
+        mm.evaluate("""key => onEnemyUpdated({
+            tracker_key: key, resolve_current: 4, depletion: 2, defeated: false,
+            mook_removed: false, conditions: [], open: false,
+            rider_menu: [
+              {id: 'open', label: 'Open', effect: 'easy_tag',
+               duration: 'end_of_exchange'},
+              {id: 'position', label: 'Position', effect: 'easy_tag_next_roll',
+               duration: 'next_roll_or_end_of_next_exchange'},
+              {id: 'cover', label: 'Cover', effect: 'free_reaction_ally',
+               duration: 'end_of_exchange'},
+            ],
+        })""", key)
+        mm.wait_for_timeout(400)
+        buttons = mm.eval_on_selector_all(
+            "#toast-host button", "els => els.map(e => e.textContent)")
+        assert "Cover" in buttons, buttons
+
+    def test_taking_a_rider_reaches_the_engine(self, table):
+        """The button is wired: clicking it sends `strike_rider` and the server
+        answers with the tag applied and its duration."""
+        mm, _ = table
+        key = self._spawn_named(mm)
+        mm.evaluate("""key => onEnemyUpdated({
+            tracker_key: key, resolve_current: 4, depletion: 2, defeated: false,
+            mook_removed: false, conditions: [], open: false,
+            rider_menu: [{id: 'open', label: 'Open', effect: 'easy_tag',
+                          duration: 'end_of_exchange'}],
+        })""", key)
+        mm.wait_for_timeout(400)
+        mm.locator("#toast-host button:has-text('Open')").first.click()
+        mm.wait_for_timeout(800)
+        assert mm.evaluate("key => state.activeEnemies[key].open === true", key), (
+            "the rider button did not reach the engine")
+
+    def test_the_table_is_told_open_expires(self, table):
+        """R2 made Open a duration, not a switch. If the log does not say so,
+        the table keeps playing it as the permanent tag it used to be."""
+        mm, _ = table
+        key = self._spawn_named(mm)
+        mm.evaluate("""key => onRiderApplied({
+            tracker_key: key, rider: 'open', tags: ['open'], open: true,
+            open_until: 'end_of_exchange', position: null, ally: null,
+        })""", key)
+        mm.wait_for_timeout(300)
+        log = mm.inner_text("#play-chat-log")
+        assert "end of the exchange" in log, log[-400:]
