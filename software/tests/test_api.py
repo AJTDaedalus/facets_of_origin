@@ -1012,3 +1012,102 @@ class TestCharacterCreationCarriesLineage:
         )
         assert resp.status_code == 422
         assert "ungifted" in str(resp.json()).lower()
+
+
+class TestASettingFacetCanActuallyBeTurnedOn:
+    """The opt-in path, end to end: a Facet is discovered, offered, selected at
+    session creation, and its content reaches the table.
+
+    Every link in that chain existed and was tested in isolation — discovery,
+    the merge, the schema, the picker's rendering — and nothing tested the
+    chain. A setting Facet that loads perfectly in a unit test and cannot be
+    switched on from the app is the "control wired to nothing" failure in its
+    most expensive form: the whole workstream, unreachable.
+    """
+
+    def test_valloh_is_offered_as_an_optional_facet(self, client, mm_headers):
+        resp = client.get("/api/facets/available", headers=mm_headers)
+        assert resp.status_code == 200, resp.text
+        facets = {f["id"]: f for f in resp.json()["facets"] if not f.get("error")}
+        assert "base" in facets
+        assert "valloh" in facets, "the Val'loh Facet is not offered to the MM"
+
+    def test_a_session_without_it_sees_only_the_core(self, client, mm_headers):
+        """The default has to stay the default. A setting Facet sitting in the
+        directory must not leak into every table's game."""
+        sid = client.post("/api/sessions/", json={"name": "Core only"},
+                          headers=mm_headers).json()["session_id"]
+        from app.game.session import session_store
+        rs = session_store.get(sid).ruleset
+        assert [lin.id for lin in rs.lineages] == ["human"]
+        assert rs.items == []
+
+    def test_a_session_that_opts_in_gets_the_whole_facet(self, client, mm_headers):
+        sid = client.post(
+            "/api/sessions/",
+            json={"name": "Val'loh", "active_facet_ids": ["valloh"]},
+            headers=mm_headers,
+        ).json()["session_id"]
+        from app.game.session import session_store
+        rs = session_store.get(sid).ruleset
+
+        assert len([l for l in rs.lineages if l.id != "human"]) == 10
+        assert len([d for d in rs.magic.soul_domains if d.lineage_gift]) == 10
+        assert len(rs.items) == 6
+        # And the core is still all there.
+        assert rs.get_lineage("human") is not None
+        assert any(d.id == "fire" for d in rs.magic.soul_domains)
+        assert rs.magic.traditions
+
+    def test_the_opted_in_session_serves_lineages_to_its_clients(
+            self, client, mm_headers):
+        """The builder's picker renders from the session payload, so a lineage
+        the server knows and never sends is a lineage no player can choose."""
+        sid = client.post(
+            "/api/sessions/",
+            json={"name": "Val'loh", "active_facet_ids": ["valloh"]},
+            headers=mm_headers,
+        ).json()["session_id"]
+        from app.game.session import session_store
+        payload = session_store.get(sid).ruleset.to_client_dict()
+        ids = {l["id"] for l in payload["lineages"]}
+        assert {"orthaen", "phern"} <= ids
+        assert payload["items"], "crystal charges never reach the client"
+
+    def test_a_gifted_character_can_be_created_in_an_opted_in_session(
+            self, client, mm_headers):
+        """The whole point of the Facet, exercised through the real API."""
+        sid = client.post(
+            "/api/sessions/",
+            json={"name": "Val'loh", "active_facet_ids": ["valloh"]},
+            headers=mm_headers,
+        ).json()["session_id"]
+        resp = client.post("/api/characters/", json={
+            "session_id": sid, "character_name": "Serane",
+            "primary_facet": "soul",
+            "attributes": {"strength": 1, "dexterity": 2, "constitution": 1,
+                           "intelligence": 3, "wisdom": 2, "knowledge": 2,
+                           "spirit": 2, "luck": 2, "charisma": 3},
+            "lineage": "orthaen", "gifted": True, "magic_domain": "crystal",
+        }, headers=mm_headers)
+        assert resp.status_code == 200, resp.text
+        char = resp.json()["character"]
+        assert char["lineage"] == "orthaen"
+        assert char["gifted"] is True
+        assert char["magic_domain"] == "crystal"
+
+    def test_a_valloh_gift_is_refused_in_a_core_session(self, client, mm_headers):
+        """The other half of opt-in: a table that did not load the Facet cannot
+        reach its content by guessing an id."""
+        sid = client.post("/api/sessions/", json={"name": "Core only"},
+                          headers=mm_headers).json()["session_id"]
+        resp = client.post("/api/characters/", json={
+            "session_id": sid, "character_name": "Serane",
+            "primary_facet": "soul",
+            "attributes": {"strength": 1, "dexterity": 2, "constitution": 1,
+                           "intelligence": 3, "wisdom": 2, "knowledge": 2,
+                           "spirit": 2, "luck": 2, "charisma": 3},
+            "lineage": "orthaen", "gifted": True, "magic_domain": "crystal",
+        }, headers=mm_headers)
+        assert resp.status_code == 422
+        assert "orthaen" in str(resp.json())
