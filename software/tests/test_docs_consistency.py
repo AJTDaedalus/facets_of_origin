@@ -25,6 +25,26 @@ Style-guide apparatus (docs/RESEARCH_style_audit.md, 2026-08):
   INV-14  every Technique carries use/normal, and its header agrees with facet.yaml
   INV-15  the Bestiary's stat blocks, finding aids, and Lore boxes are complete
           and regenerate to no diff
+
+Lineage and setting Facets (D18, D21, 2026-09):
+  INV-16  every lineage gift domain resolves in the merged catalog
+          (schema half in test_facet_loading.py; Facet half here)
+  INV-17  a setting Facet's counted-novelty line matches its data, it writes
+          into no rules section, and loading it leaves the core identical
+  INV-18  a module enemy reskin changes flavour only, never numbers -- and no
+          setting name leaks into the setting-agnostic Bestiary
+
+Adventures (2026-09):
+  INV-19  scene-card stat lines and pregen blocks regenerate to no diff
+  INV-20  every `Chapter X.Y` reference in an adventure resolves (INV-5's reach
+          extended past the three books)
+  INV-21  read-aloud blocks stay under 120 words -- measured per blockquote
+          *paragraph*, not per line
+
+Also enforced here without a number: worked example-of-play arithmetic agrees
+with the printed outcome tiers; the Guardian vignette shows all three outcome
+bands and spends its Resolve exactly; a gift domain entry carries territory and
+never a mechanic.
 """
 from __future__ import annotations
 
