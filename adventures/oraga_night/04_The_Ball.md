@@ -559,7 +559,7 @@ Corval, pressed, discovers he cannot keep the question in his head and becomes
 frightened of his own mind (a superb scene: the unflappable majordomo asking a
 guest to *hold the thought for him*); Corro, walked deliberately around the room,
 is worst near the three — a living compass reading he refuses to interpret; Otta
-Vesh's recall and her wall of casting-blanks (prelude wing), or any guest's
+Vesh's recall and her wall of casting-blanks (Chapter VI, in the aftermath), or any guest's
 craft-eye, confirms the gray masks match no maker's style in Rekuzan, and the
 material is wrong; conversation with them turns up speech and manners a century
 dead, delivered by warm, living, charming people; and any Orthaen who stands near

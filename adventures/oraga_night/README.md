@@ -36,7 +36,7 @@ carries the right one, because the night has an agenda of its own.
 | `03_Masks_and_Agendas.md` | Character creation, invitations, masks, and the eight agendas |
 | `04_The_Ball.md` | The palace, the guests, and the seven Movements of the night |
 | `05_The_Longest_Night.md` | The Unmasking — the attack, the Fractures, and every ending |
-| `06_Wings.md` | The optional aftermath wing — the inquest, the mask-maker, and where a character reaches Facet level 1 |
+| `06_Aftermath.md` | The optional aftermath wing — the inquest, the mask-maker, and where a character reaches Facet level 1 |
 | `07_Cast_of_the_Ball.md` | Every named NPC — wants, fears, secrets, and how to play them |
 | `09_Scene_Cards.md` | The five fights, one page each — recipes, clocks, objectives, outs, and **generated** stat lines |
 | `characters/` | The five pregenerated characters as `.fof` files; `03` prints them from these |
@@ -48,8 +48,9 @@ carries the right one, because the night has an agenda of its own.
 ## Running Order
 
 Read `01` and `02` fully. Skim `04` and `05` once, then run from the night-tracker in
-`09` with `07` open for the cast. If your table wants the short campaign, start with
-`06`'s prelude nights instead of at the palace gates.
+`08` with `07` open for the cast and `09`'s scene cards to hand for the three fights.
+If your table wants the short campaign, run the night as written and continue into
+`06`'s aftermath — that is where a character reaches Facet level 1.
 
 ## A Note on Secrets
 
