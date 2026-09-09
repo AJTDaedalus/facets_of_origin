@@ -16,21 +16,24 @@ enemy:
                          # Easy-to-Strike snowball (then a Tier-2 rider, now
                          # the Open tag); 8 is the smallest value that
                          # clears the median->=3 floor (confirmed by sim,
-                         # research/simulation_log.md Series 7).
+                         # research/simulation_log.md Series 7). Held at 8
+                         # through the R2/R3 re-author (Series 12): the
+                         # phase threshold moved, the pool did not.
   attack_modifier: 3    # Strength +2, Combat Expert +2, −1 from fifteen years of wear — iron weight, not technique
   armor: heavy
   techniques: [phase_change]
   special: null
   tr: 16                 # offense(+3→5) + durability(Resolve 8) + armor(heavy→2) + techniques(1) = 16
   phases:
-    - resolve_threshold: 2
+    - resolve_threshold: 4
       description: >
-        Reduced Mode. When the Guardian's Resolve drops to 2 or below, its
-        attack_modifier drops to +1 and its blows land as Tier 1. However,
-        it stops registering harm entirely — left Open, it will not spend
-        an action recovering, because the sensory subsystem that would
-        notice has shut down. It is running on something else. What that
-        is, the party does not know.
+        Reduced Mode. When the Guardian's Resolve drops to 4 or below, the
+        subsystem that was weighing consequences shuts down, and what is
+        left is more dangerous rather than less. Its blows stop being
+        measured: they land at Tier 2. And it fixes on whoever last left it
+        Open and does not look away — that character is its target until
+        one of them is finished. It is running on something else now. What
+        that is, the party does not know.
 
   disposition: >
     Patient beyond anything alive. It has never needed to hurry and does
@@ -47,12 +50,15 @@ enemy:
 
   triggers:
     - >
-      Always Measured. It does not Press, does not go Aggressive, does
-      not go Defensive.
+      Measured while both arms answer it. It does not Press and it does
+      not go Defensive — it has never needed to hurry.
     - >
-      At Resolve 2 or below it enters Reduced Mode: its attack drops,
-      its blows land at Tier 1, and it no longer spends actions
-      recovering — once Open, it stays Open.
+      Aggressive from the exchange it is first left Open. Being opened is
+      the only thing in fifteen years that has told it something was
+      wrong, and its answer is to stop being careful.
+    - >
+      At Resolve 4 or below it enters Reduced Mode: its blows land at
+      Tier 2 and it fixes on whoever last opened it.
     - >
       Each joint Maneuver that lands (10+) reduces its attack modifier
       by 1, to a minimum of 0 — a fictional weakness the party
@@ -74,8 +80,20 @@ enemy:
     + armor(heavy → 2) + technique_bonus(phase_change → 1) = 16.
     (Was 17 with a second listed technique, the retired Tier-1-Condition
     immunity — enemies stopped taking Strike Conditions when the Open tag
-    landed, K-6/D4, so it became immunity to nothing; Reduced Mode's
-    texture now lives in the no-recovery trigger above.)
+    landed, K-6/D4, so it became immunity to nothing.)
+
+    Reduced Mode re-authored 2026-09-08 (R2/D20, task T15). It used to
+    read "it never spends an action recovering — once Open, it stays
+    Open", which was a real lever only while Open had to be cleared by
+    spending an action. Under R2 Open expires by itself, so that Special
+    became inert — the simulator confirmed it, producing numbers identical
+    to the decimal with the flag on and off. Re-authored to MM1's *raise
+    its danger* lever instead. The threshold moved 2 -> 4 at the same
+    time and for a plainer reason: at 2 of an effective 10 the phase fired
+    in the exchange the fight ended in three runs out of four, so the
+    party read about it instead of playing against it. At 4 it lands
+    before the last exchange in 99% of runs, and costs nothing in length
+    or win rate (Series 12 Part B).
 
     Resolve retuned 5 → 8 by task A8/Gate G1 (2026-07-10, DESIGN §5-bis):
     a solo, single-target Boss cannot be tuned to a 45-55% party-loss rate
@@ -98,9 +116,11 @@ enemy:
     attack_modifier by 1, to a minimum of 0. This is not in the stat block
     formally — it is a fictional fact the party can discover through play.
 
-    Posture: always Measured. It does not press. It does not go Aggressive.
-    It does not go Defensive. It approaches and acts with the patience of
-    something that has never needed to hurry.
+    Posture: Measured until it is first left Open, then Aggressive for the
+    rest of the fight. It does not Press and it never goes Defensive. The
+    stance change is the fight's turn and the MM should say it out loud:
+    for fifteen years nothing has told this thing that anything was wrong,
+    and the first Strike that opens it does.
 
 created_at: '2026-03-05T00:00:00+00:00'
 last_modified: '2026-08-08T00:00:00+00:00'

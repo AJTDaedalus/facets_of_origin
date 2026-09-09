@@ -31,3 +31,12 @@ Each chapter should have one brief vignette demonstrating the chapter's core mec
 - **II.3 Magic** — The party returns to the Thornwall archive after dark and finds the lower-archive door sealed from the inside by an Inscription glyph. Zahna identifies the working (Knowledge, full success); Mordai forces the hinges (Athletics vs. Hard, partial — the door opens, something inside is not pleased).
 - **III.2 Adventuring** — Millhaven at last: the undercroft of the village's mill floods when the sluice winch snaps (the Threat Clock demo — Zahna finds the relief valve, Mordai clears the quern-stones, Zulnut winds the clock back with a pry bar, the clock fills anyway). Then the soaked main beam goes; Mordai holds it so the others escape, is Broken with the fiction unambiguous, and takes the permanent scar over the heroic death. **Canon going forward: Mordai's shoulder set wrong and stays that way — the strongest back in the party has one thing it can never carry again.** Any vignette set after this scene must respect the scar.
 - **III.3 Combat** — Inside the lower archive: a Constructed guardian (Boss, Resolve 10 with heavy plating) commissioned by the city before the Artificers' Guild dissolved. Postures, Strikes, riders, reactions, and Support all demonstrated. *(Arc order: II.2 → II.3 → III.3 happen in Thornwall; III.2's Millhaven scene happens after them.)*
+
+## Lineage and the recurring cast
+
+Every example character in the PHB is **human**, and the Lineage step (II.5) is one
+word for all of them. Where a vignette walks through character creation, Lineage is
+answered and moved past in a single line — Zulnut's is the model: *"Lineage? —
+Human. Everyone at this table is."* Do not give a recurring cast member a gift, a
+Heritage, or a non-human lineage; the setting's peoples live in setting Facets, and
+the PHB's cast is deliberately the baseline those are measured against.

@@ -18,6 +18,29 @@ def ruleset():
     return build_ruleset([])
 
 
+class _TagBearer:
+    """Minimal stand-in for anything carrying end-of-exchange combat tags.
+
+    `expire_end_of_exchange` is duck-typed on purpose: the app's `Enemy`
+    (pydantic) and the simulator's `EnemyState` (dataclass) are different
+    types that carry the same tags, and the rule must not be written twice
+    to serve both.
+    """
+
+    def __init__(self, **tags):
+        for k, v in tags.items():
+            setattr(self, k, v)
+
+
+def _with_open_clears(base, mode: str):
+    """A copy of `base` whose Open lifecycle is `mode`. Both modes are legal
+    data (schema `EnemyDurabilityDef.open_clears`), so a test may pin either."""
+    import copy
+    rs = copy.deepcopy(base)
+    rs.combat.enemy_durability.open_clears = mode
+    return rs
+
+
 # ---------------------------------------------------------------------------
 # roll()
 # ---------------------------------------------------------------------------
@@ -724,8 +747,10 @@ class TestOpenTag:
         expected, _ = combat.compose_difficulty("Hard", ruleset=ruleset, easy_tag=True)
         assert combat.target_strike_difficulty("Hard", True, ruleset) == expected
 
-    def test_open_clears_only_by_enemy_action(self, ruleset):
-        assert combat.open_clear_mode(ruleset) == "enemy_action"
+    def test_base_ruleset_expires_open_at_end_of_exchange(self, ruleset):
+        """R2/D20. The base ruleset's choice; `enemy_action` stays a legal
+        value a setting may take (schema `EnemyDurabilityDef.open_clears`)."""
+        assert combat.open_clear_mode(ruleset) == "end_of_exchange"
 
     def test_open_never_reduces_resolve(self, ruleset):
         """Open is a tag, not damage — the 10+'s Resolve depletion comes
@@ -736,7 +761,39 @@ class TestOpenTag:
         # Applying Open is a state flag on the enemy; nothing here touches Resolve.
         assert damage.resolve_current == 3
 
-    def test_rider_menu_is_retired(self):
+    # -- R2: Open expires with the Tier 1 Conditions --------------------
+    # BRIEF_fun_second_act §2. The lifecycle is data
+    # (`combat.enemy_durability.open_clears`), so these tests pin both
+    # modes rather than the one the base ruleset happens to carry.
+
+    def test_open_clears_at_end_of_exchange_reads_the_mode(self, ruleset):
+        assert combat.open_clears_at_end_of_exchange(ruleset) is True
+        assert combat.open_clears_at_end_of_exchange(
+            _with_open_clears(ruleset, "enemy_action")) is False
+
+    def test_expire_clears_open_under_end_of_exchange(self, ruleset):
+        enemy = _TagBearer(open=True)
+        assert combat.expire_end_of_exchange(enemy, ruleset) == ["open"]
+        assert enemy.open is False
+
+    def test_expire_leaves_open_standing_under_enemy_action(self, ruleset):
+        """The pre-R2 rule stays reachable: under `enemy_action` nothing but
+        the enemy's own spent action takes the tag off, and end of exchange
+        must not do it behind the mode's back."""
+        enemy = _TagBearer(open=True)
+        rs = _with_open_clears(ruleset, "enemy_action")
+        assert combat.expire_end_of_exchange(enemy, rs) == []
+        assert enemy.open is True
+
+    def test_expire_reports_nothing_when_no_tag_is_set(self, ruleset):
+        enemy = _TagBearer(open=False)
+        assert combat.expire_end_of_exchange(enemy, ruleset) == []
+
+    def test_the_tier_condition_rider_menu_stays_retired(self):
+        """WS-3/T3.4 killed the *Tier-Condition* rider menu vs enemies (a
+        10+ hanging 'staggered' or 'cornered' on a Named). R3's rider menu
+        is a different animal — three tempo options, no Conditions — so the
+        old names must stay dead even though `apply_rider` now exists."""
         assert not hasattr(combat, "can_apply_rider")
         assert not hasattr(combat, "rider_tier_eligible")
 
@@ -1302,3 +1359,145 @@ class TestReviewFindingsB4:
             label, applied = combat.apply_character_difficulty_step(
                 "Hard", character, {"declared_technique_ids": junk}, ruleset)
             assert label == "Hard" and applied is None
+
+
+class TestStrikeRiders:
+    """R3 (BRIEF_fun_second_act §3): a 10+ Strike depletes 2 Resolve and
+    chooses one of three riders. The menu is data; the effects are engine.
+    """
+
+    # -- the menu ---------------------------------------------------------
+
+    def test_menu_is_read_from_the_ruleset(self, ruleset):
+        """Two in the core book: Cover was cut at the gate (D20)."""
+        assert [r.id for r in combat.strike_riders(ruleset)] == ["open", "position"]
+
+    def test_menu_is_offered_only_on_a_full_success(self, ruleset):
+        assert combat.rider_menu("full_success", False, ruleset)
+        assert combat.rider_menu("partial_success", False, ruleset) == []
+        assert combat.rider_menu("failure", False, ruleset) == []
+
+    def test_a_removed_mook_takes_no_rider(self, ruleset):
+        """Against a Mook a 10+ removes it, and there is nothing left to
+        hang a tempo tag on."""
+        assert combat.rider_menu("full_success", True, ruleset) == []
+
+    # -- Open -------------------------------------------------------------
+
+    def test_open_rider_sets_the_tag(self, ruleset):
+        enemy = _TagBearer(open=False)
+        combat.apply_rider("open", enemy, ruleset, exchange_no=1)
+        assert enemy.open is True
+
+    def test_open_rider_expires_at_end_of_exchange(self, ruleset):
+        enemy = _TagBearer(open=False)
+        combat.apply_rider("open", enemy, ruleset, exchange_no=1)
+        assert combat.expire_end_of_exchange(enemy, ruleset, exchange_no=1) == ["open"]
+        assert enemy.open is False
+
+    # -- Position ---------------------------------------------------------
+
+    def test_position_makes_the_next_roll_easy(self, ruleset):
+        enemy = _TagBearer(open=False)
+        combat.apply_rider("position", enemy, ruleset, exchange_no=1)
+        assert combat.has_easy_tag(enemy) is True
+
+    def test_position_is_consumed_by_one_roll(self, ruleset):
+        enemy = _TagBearer(open=False)
+        combat.apply_rider("position", enemy, ruleset, exchange_no=1)
+        assert combat.consume_position(enemy) is True
+        assert combat.has_easy_tag(enemy) is False
+        assert combat.consume_position(enemy) is False
+
+    def test_position_survives_this_exchange_and_expires_after_the_next(self, ruleset):
+        """'this exchange or next' — so it must NOT expire at the end of the
+        exchange it was applied in."""
+        enemy = _TagBearer(open=False)
+        combat.apply_rider("position", enemy, ruleset, exchange_no=1)
+        assert combat.expire_end_of_exchange(enemy, ruleset, exchange_no=1) == []
+        assert combat.has_easy_tag(enemy) is True
+        assert combat.expire_end_of_exchange(enemy, ruleset, exchange_no=2) == ["position"]
+        assert combat.has_easy_tag(enemy) is False
+
+    # -- Open and Position do not stack ------------------------------------
+
+    def test_open_and_position_do_not_stack(self, ruleset):
+        """Both are Easy-tag sources, and III.1's precedence makes Easy an
+        absolute override that does not stack with itself. The composed
+        difficulty with both must equal the composed difficulty with one."""
+        both = _TagBearer(open=True)
+        combat.apply_rider("position", both, ruleset, exchange_no=1)
+        one = _TagBearer(open=True)
+        assert (combat.target_strike_difficulty("Hard", combat.has_easy_tag(both), ruleset)
+                == combat.target_strike_difficulty("Hard", combat.has_easy_tag(one), ruleset))
+
+    def test_easy_tag_is_true_for_either_source(self, ruleset):
+        assert combat.has_easy_tag(_TagBearer(open=True)) is True
+        assert combat.has_easy_tag(_TagBearer(open=False)) is False
+
+    # -- Cover --------------------------------------------------------------
+    # Cut from the core menu at the gate (D20) because it undid R2, but the
+    # effect stays implemented for a setting or a future Technique to offer.
+    # These tests run against a ruleset that puts it back, which is also the
+    # regression guard on that promise.
+
+    @pytest.fixture
+    def cover_ruleset(self, ruleset):
+        import copy
+        from app.facets.schema import StrikeRiderDef
+        rs = copy.deepcopy(ruleset)
+        rs.combat.enemy_durability.strike_riders = list(
+            rs.combat.enemy_durability.strike_riders
+        ) + [StrikeRiderDef(id="cover", label="Cover",
+                            effect="free_reaction_ally",
+                            duration="end_of_exchange")]
+        return rs
+
+    def test_cover_is_not_in_the_core_menu(self, ruleset):
+        assert "cover" not in [r.id for r in combat.strike_riders(ruleset)]
+
+    def test_cover_frees_one_reaction_for_the_named_ally(self, cover_ruleset):
+        ally = _TagBearer()
+        enemy = _TagBearer(open=False)
+        combat.apply_rider("cover", enemy, cover_ruleset, ally=ally, exchange_no=1)
+        assert combat.consume_free_reaction(ally) is True
+
+    def test_cover_frees_exactly_one_reaction(self, cover_ruleset):
+        ally = _TagBearer()
+        combat.apply_rider("cover", _TagBearer(open=False), cover_ruleset,
+                           ally=ally, exchange_no=1)
+        assert combat.consume_free_reaction(ally) is True
+        assert combat.consume_free_reaction(ally) is False
+
+    def test_cover_reaches_only_the_named_ally(self, cover_ruleset):
+        ally, bystander = _TagBearer(), _TagBearer()
+        combat.apply_rider("cover", _TagBearer(open=False), cover_ruleset,
+                           ally=ally, exchange_no=1)
+        assert combat.consume_free_reaction(bystander) is False
+
+    def test_cover_expires_at_end_of_exchange(self, cover_ruleset):
+        ally = _TagBearer()
+        enemy = _TagBearer(open=False)
+        combat.apply_rider("cover", enemy, cover_ruleset, ally=ally, exchange_no=1)
+        assert combat.expire_end_of_exchange(ally, cover_ruleset, exchange_no=1) == ["cover"]
+        assert combat.consume_free_reaction(ally) is False
+
+    def test_cover_requires_an_ally(self, cover_ruleset):
+        with pytest.raises(ValueError):
+            combat.apply_rider("cover", _TagBearer(open=False), cover_ruleset,
+                               exchange_no=1)
+
+    # -- errors -------------------------------------------------------------
+
+    def test_unknown_rider_is_rejected(self, ruleset):
+        with pytest.raises(ValueError):
+            combat.apply_rider("banish", _TagBearer(open=False), ruleset,
+                               exchange_no=1)
+
+    def test_the_core_ruleset_refuses_the_cut_rider(self, ruleset):
+        """The engine must refuse a rider the book does not print, rather
+        than quietly applying it — this is what makes the D20 cut real
+        rather than cosmetic."""
+        with pytest.raises(ValueError):
+            combat.apply_rider("cover", _TagBearer(open=False), ruleset,
+                               ally=_TagBearer(), exchange_no=1)

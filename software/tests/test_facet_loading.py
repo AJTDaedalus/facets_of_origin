@@ -594,3 +594,206 @@ class TestFacetOverridePriority:
         merged = MergedRuleset([lff(path_base), lff(path_mod)])
         skill = merged.get_skill("common_skill")
         assert skill.description == "Expansion description"
+
+
+# ---------------------------------------------------------------------------
+# Lineages merge (D18)
+# ---------------------------------------------------------------------------
+
+class TestLineageMerge:
+    """Lineages merge by id exactly as Backgrounds do, so a setting Facet adds
+    its peoples without disturbing the core's Human — the property the Val'loh
+    Facet is built on.
+    """
+
+    def _facet(self, **kw):
+        return FacetFile(id=kw.pop("id", "extra"), name="Extra",
+                         version="0.0.1", **kw)
+
+    def test_base_ships_exactly_one_lineage(self, ruleset):
+        assert [lin.id for lin in ruleset.lineages] == ["human"]
+
+    def test_the_core_lineage_is_deliberately_empty(self, ruleset):
+        """Human is the baseline every other lineage is measured against, so
+        it carries no gift and no heritage — not as an oversight."""
+        human = ruleset.get_lineage("human")
+        assert human.gift_domains == []
+        assert human.heritage is None
+        assert human.gift_rate is None
+
+    def test_a_second_module_adds_a_lineage_and_human_survives(self):
+        base = load_facet_file(
+            Path(__file__).resolve().parents[1] / "facets" / "base" / "facet.yaml")
+        extra = self._facet(lineages=[{
+            "id": "orthaen", "name": "Orthaen", "description": "Crystal-growers.",
+            "gift_domains": [], "heritage": "Reads grown crystalwork.",
+        }])
+        merged = MergedRuleset([base, extra])
+        ids = {lin.id for lin in merged.lineages}
+        assert ids == {"human", "orthaen"}
+
+    def test_a_collision_replaces_by_id(self):
+        a = self._facet(id="a", lineages=[
+            {"id": "human", "name": "Human", "description": "first"}])
+        b = self._facet(id="b", lineages=[
+            {"id": "human", "name": "Human", "description": "second"}])
+        merged = MergedRuleset([a, b])
+        assert len(merged.lineages) == 1
+        assert merged.get_lineage("human").description == "second"
+
+    def test_unknown_lineage_lookup_returns_none(self, ruleset):
+        assert ruleset.get_lineage("nope") is None
+
+    def test_lineages_are_serialized_to_clients(self, ruleset):
+        """The builder's Lineage picker renders from the session payload, so a
+        lineage the server knows and never sends is a lineage no player can
+        choose."""
+        assert "lineages" in ruleset.to_client_dict()
+        assert ruleset.to_client_dict()["lineages"][0]["id"] == "human"
+
+
+class TestLineageGiftDomainsResolve:
+    """INV-16: every id in a lineage's `gift_domains` resolves in the merged
+    domain catalog. INV-7's sibling, and the guard that stops a setting Facet
+    from shipping a gift that points at nothing.
+    """
+
+    def _domain_ids(self, ruleset) -> set[str]:
+        ids = set()
+        magic = ruleset.magic
+        for attr in ("mind_domains", "soul_domains", "prismatic_domains"):
+            for dom in getattr(magic, attr, None) or []:
+                ids.add(dom.id)
+        return ids
+
+    def test_every_base_gift_domain_resolves(self, ruleset):
+        known = self._domain_ids(ruleset)
+        for lin in ruleset.lineages:
+            for domain_id in lin.gift_domains:
+                assert domain_id in known, (
+                    f"lineage '{lin.id}' carries gift domain '{domain_id}', "
+                    "which is in no loaded domain catalog"
+                )
+
+    def test_human_has_nothing_to_resolve(self, ruleset):
+        assert ruleset.get_lineage("human").gift_domains == []
+
+    def test_a_dangling_gift_domain_is_detectable(self, ruleset):
+        """The invariant has to be able to fail, or it is decoration."""
+        known = self._domain_ids(ruleset)
+        assert "not_a_real_domain" not in known
+
+
+class TestItemMerge:
+    """Items merge by id like every other collection. The base ruleset ships
+    none — loot is a setting's business, not the core's.
+    """
+
+    def _facet(self, **kw):
+        return FacetFile(id=kw.pop("id", "extra"), name="Extra",
+                         version="0.0.1", **kw)
+
+    def test_the_core_ships_no_items(self, ruleset):
+        assert ruleset.items == []
+
+    def test_a_module_adds_items(self):
+        merged = MergedRuleset([self._facet(items=[
+            {"id": "steady_light", "name": "Steady Light", "kind": "consumable",
+             "scope": "minor", "effect": "Sheds steady light for a scene."},
+        ])])
+        assert [i.id for i in merged.items] == ["steady_light"]
+        assert merged.get_item("steady_light").name == "Steady Light"
+
+    def test_a_collision_replaces_by_id(self):
+        a = self._facet(id="a", items=[
+            {"id": "warmth", "name": "Warmth", "effect": "first"}])
+        b = self._facet(id="b", items=[
+            {"id": "warmth", "name": "Warmth", "effect": "second"}])
+        merged = MergedRuleset([a, b])
+        assert len(merged.items) == 1
+        assert merged.get_item("warmth").effect == "second"
+
+    def test_unknown_item_lookup_returns_none(self, ruleset):
+        assert ruleset.get_item("nope") is None
+
+    def test_items_are_serialized_to_clients(self, ruleset):
+        assert "items" in ruleset.to_client_dict()
+
+
+class TestMagicDomainsMergeAsCollections:
+    """`magic` mixes two kinds of thing: RULES (traditions, domain types,
+    the pre-Technique cap, the Spark rules) and CATALOGS (`soul_domains`,
+    `mind_domains`). The rules are singleton — one game, one answer. The
+    catalogs are collections keyed by `id`, exactly as `skills` and
+    `backgrounds` are.
+
+    Before this was fixed, `magic` was replaced wholesale by the last module
+    to declare it, so a setting Facet that added one domain silently deleted
+    the core's twenty-one, both traditions, and every domain type. Nothing
+    failed; the ruleset simply came back empty of magic.
+    """
+
+    def _base(self):
+        return load_facet_file(
+            Path(__file__).resolve().parents[1] / "facets" / "base" / "facet.yaml")
+
+    def _setting(self, **magic):
+        return FacetFile(id="setting", name="Setting", version="0.0.1",
+                         priority=1, magic=magic)
+
+    def test_a_setting_domain_is_appended_not_substituted(self):
+        base = self._base()
+        base_ids = {d.id for d in base.magic.soul_domains}
+        merged = MergedRuleset([base, self._setting(soul_domains=[{
+            "id": "crystal", "name": "Crystal", "type": "focused",
+            "tradition": "intuitive", "description": "Soul-crystal.",
+            "lineage_gift": True,
+        }])])
+        merged_ids = {d.id for d in merged.magic.soul_domains}
+        assert base_ids < merged_ids
+        assert "crystal" in merged_ids
+
+    def test_the_rules_survive_a_setting_that_only_adds_domains(self):
+        base = self._base()
+        merged = MergedRuleset([base, self._setting(soul_domains=[{
+            "id": "crystal", "name": "Crystal", "type": "focused",
+            "tradition": "intuitive", "description": "Soul-crystal.",
+        }])])
+        assert merged.magic.traditions == base.magic.traditions
+        assert merged.magic.domain_types == base.magic.domain_types
+        assert merged.magic.pre_technique_scope_limit == (
+            base.magic.pre_technique_scope_limit)
+
+    def test_mind_domains_survive_a_soul_only_setting(self):
+        base = self._base()
+        merged = MergedRuleset([base, self._setting(soul_domains=[{
+            "id": "crystal", "name": "Crystal", "type": "focused",
+            "tradition": "intuitive", "description": "Soul-crystal.",
+        }])])
+        assert {d.id for d in merged.magic.mind_domains} == {
+            d.id for d in base.magic.mind_domains}
+
+    def test_a_domain_collision_replaces_by_id(self):
+        base = self._base()
+        original = next(d for d in base.magic.soul_domains if d.id == "fire")
+        merged = MergedRuleset([base, self._setting(soul_domains=[{
+            "id": "fire", "name": "Fire", "type": "standard",
+            "tradition": "intuitive", "description": "Rewritten by the setting.",
+        }])])
+        fire = next(d for d in merged.magic.soul_domains if d.id == "fire")
+        assert fire.type == "standard"
+        assert fire.description != original.description
+
+    def test_a_setting_may_still_replace_the_rules(self):
+        """A setting that genuinely wants a different magic *rule* is allowed
+        to say so — that is what a singleton section is for."""
+        base = self._base()
+        merged = MergedRuleset([base, self._setting(
+            pre_technique_scope_limit="significant")])
+        assert merged.magic.pre_technique_scope_limit == "significant"
+
+    def test_base_alone_is_unchanged(self, ruleset):
+        """The regression guard: loading only `base` must give exactly what it
+        gave before any of this existed."""
+        assert len(ruleset.magic.soul_domains) == 12
+        assert len(ruleset.magic.mind_domains) == 9

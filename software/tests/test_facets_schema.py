@@ -20,6 +20,9 @@ from app.facets.schema import (
     DeathDef,
     DifficultyModifier,
     EnemyDurabilityDef,
+    LineageDefinition,
+    ItemDefinition,
+    StrikeRiderDef,
     EquipmentDef,
     FacetFile,
     FacetTreeDef,
@@ -569,6 +572,81 @@ class TestEnemyDurabilityDef:
         assert e.strike_depletion.full_success == 3
         assert e.armor_resolve_bonus.light == 2
 
+    # -- open_clears is a closed set (R2, BRIEF_fun_second_act §2) ----------
+    # The lifecycle of the Open tag is a rule, and a ruleset that names a
+    # lifecycle the engine does not implement must fail at load, not at the
+    # table. Both values stay legal: `end_exchange` is the base ruleset's
+    # choice, `enemy_action` is what a setting may choose and what Series 12
+    # Part A's regression floor runs under.
+
+    def test_open_clears_accepts_enemy_action(self):
+        assert EnemyDurabilityDef(open_clears="enemy_action").open_clears == "enemy_action"
+
+    def test_open_clears_accepts_end_of_exchange(self):
+        e = EnemyDurabilityDef(open_clears="end_of_exchange")
+        assert e.open_clears == "end_of_exchange"
+
+    def test_open_clears_rejects_unknown_lifecycle(self):
+        with pytest.raises(ValidationError):
+            EnemyDurabilityDef(open_clears="never")
+
+    # -- R3: the 10+ rider menu (BRIEF_fun_second_act §3) -------------------
+    # A 10+ Strike depletes 2 Resolve and chooses one rider. The menu is
+    # data so the app can render the confirm from it and a setting can add
+    # or remove one; the *effects* are engine, so a rider naming an effect
+    # the engine does not implement must fail at load.
+
+    def test_strike_riders_default_to_the_two_the_book_prints(self):
+        """Cover was drafted as a third and cut at the gate (Series 12 Part
+        C, D20) — it undid R2 by shortening the Boss fight back to a median
+        2 exchanges. Its effect stays implemented for a setting to offer
+        deliberately; the core menu is two."""
+        e = EnemyDurabilityDef()
+        assert [r.id for r in e.strike_riders] == ["open", "position"]
+
+    def test_cover_remains_constructible_for_a_setting(self):
+        rider = StrikeRiderDef(id="cover", label="Cover",
+                               effect="free_reaction_ally",
+                               duration="end_of_exchange")
+        assert rider.effect == "free_reaction_ally"
+
+    def test_strike_rider_carries_label_effect_and_duration(self):
+        e = EnemyDurabilityDef()
+        open_rider = next(r for r in e.strike_riders if r.id == "open")
+        assert open_rider.label == "Open"
+        assert open_rider.effect == "easy_tag"
+        assert open_rider.duration == "end_of_exchange"
+
+    def test_strike_riders_reject_an_unimplemented_effect(self):
+        with pytest.raises(ValidationError):
+            StrikeRiderDef(id="banish", label="Banish", effect="delete_enemy",
+                           duration="end_of_exchange")
+
+    def test_strike_riders_reject_an_unknown_duration(self):
+        with pytest.raises(ValidationError):
+            StrikeRiderDef(id="open", label="Open", effect="easy_tag",
+                           duration="forever")
+
+    def test_a_setting_may_reshape_the_menu(self):
+        """The menu is data. A setting may trim to one rider or add Cover
+        back; neither is a schema error."""
+        one = EnemyDurabilityDef(strike_riders=[
+            StrikeRiderDef(id="open", label="Open", effect="easy_tag",
+                           duration="end_of_exchange"),
+        ])
+        assert [r.id for r in one.strike_riders] == ["open"]
+        three = EnemyDurabilityDef(strike_riders=[
+            StrikeRiderDef(id="open", label="Open", effect="easy_tag",
+                           duration="end_of_exchange"),
+            StrikeRiderDef(id="position", label="Position",
+                           effect="easy_tag_next_roll",
+                           duration="next_roll_or_end_of_next_exchange"),
+            StrikeRiderDef(id="cover", label="Cover",
+                           effect="free_reaction_ally",
+                           duration="end_of_exchange"),
+        ])
+        assert [r.id for r in three.strike_riders] == ["open", "position", "cover"]
+
 
 # ---------------------------------------------------------------------------
 # FacetFile — root model
@@ -888,3 +966,119 @@ class TestTraditionDef:
         from app.facets.schema import TraditionDef
         for key in ("intuitive", "scholarly"):
             assert isinstance(ruleset.magic.traditions[key], TraditionDef)
+
+
+# ---------------------------------------------------------------------------
+# LineageDefinition (D18 — Lineage as a core creation step, PHB II.5)
+# ---------------------------------------------------------------------------
+
+class TestLineageDefinition:
+    """A lineage is who a character was born as, orthogonal to the Background's
+    what-they-did. The core ships exactly one — Human, ungifted — and every
+    other lineage belongs to a setting Facet.
+    """
+
+    def test_minimal_ungifted_lineage(self):
+        lin = LineageDefinition(id="human", name="Human", description="The default.")
+        assert lin.gift_domains == []
+        assert lin.gift_rate is None
+        assert lin.heritage is None
+        assert lin.playable is True
+
+    def test_formalizes_on_defaults_to_the_first_facet_level(self):
+        """D18 option 1: blood is not study, so a Gift arrives at the first
+        Facet level in any Facet and spends no Technique pick."""
+        assert LineageDefinition(id="x", name="X", description="d").formalizes_on == (
+            "first_facet_level")
+
+    def test_formalizes_on_keeps_the_technique_route_reachable(self):
+        """Option 2 stays legal data so a setting could choose it, even though
+        the core does not."""
+        lin = LineageDefinition(id="x", name="X", description="d",
+                                formalizes_on="technique")
+        assert lin.formalizes_on == "technique"
+
+    def test_formalizes_on_rejects_an_unknown_route(self):
+        with pytest.raises(ValidationError):
+            LineageDefinition(id="x", name="X", description="d",
+                              formalizes_on="whenever")
+
+    def test_a_gifted_lineage_carries_domains_a_rate_and_a_heritage(self):
+        lin = LineageDefinition(
+            id="orthaen", name="Orthaen", variants=["Orthain"],
+            description="Crystal-growers.", gift_domains=["crystal"],
+            gift_rate="four in five",
+            heritage="Reads grown crystalwork: its age, its maker's hand.",
+        )
+        assert lin.gift_domains == ["crystal"]
+        assert lin.gift_rate == "four in five"
+
+    def test_variants_default_to_empty(self):
+        assert LineageDefinition(id="x", name="X", description="d").variants == []
+
+    def test_playable_false_is_expressible(self):
+        """Krenn and Tyndi exist in data so their NPCs can be statted honestly
+        and are never offered to a player."""
+        assert LineageDefinition(id="krenn", name="Krenn", description="Gone.",
+                                 playable=False).playable is False
+
+
+# ---------------------------------------------------------------------------
+# ItemDefinition + lineage_gift / draft flags (Val'loh Facet)
+# ---------------------------------------------------------------------------
+
+class TestItemDefinition:
+    """The smallest loot system the game can have: a one-use item, declared
+    when it is made, released at a touch, with no roll and no arithmetic.
+    """
+
+    def test_a_consumable_charge(self):
+        item = ItemDefinition(id="steady_light", name="Steady Light",
+                              kind="consumable", scope="minor",
+                              effect="A grown crystal sheds steady light for a scene.")
+        assert item.kind == "consumable"
+        assert item.scope == "minor"
+
+    def test_kind_is_a_closed_set(self):
+        with pytest.raises(ValidationError):
+            ItemDefinition(id="x", name="X", kind="artifact", scope="minor",
+                           effect="...")
+
+    def test_scope_is_the_magic_scope_ladder(self):
+        """A charge holds a working at a scope, so the ladder is II.3's, not
+        a second vocabulary."""
+        for scope in ("minor", "significant", "major"):
+            assert ItemDefinition(id="x", name="X", kind="consumable",
+                                  scope=scope, effect="...").scope == scope
+        with pytest.raises(ValidationError):
+            ItemDefinition(id="x", name="X", kind="consumable", scope="huge",
+                           effect="...")
+
+
+class TestDomainSettingFlags:
+    def test_lineage_gift_defaults_false(self):
+        from app.facets.schema import MagicDomainDef
+        d = MagicDomainDef(id="fire", name="Fire", type="focused",
+                           tradition="intuitive", description="...")
+        assert d.lineage_gift is False
+        assert d.draft is False
+
+    def test_a_gift_domain_marks_itself(self):
+        """`lineage_gift` is what keeps a setting's blood-magic out of the
+        core's Tier 1 shopping list — a Soul mage in Shattered Origin cannot
+        pick "Crystal"."""
+        from app.facets.schema import MagicDomainDef
+        d = MagicDomainDef(id="crystal", name="Crystal", type="focused",
+                           tradition="intuitive", description="...",
+                           lineage_gift=True, draft=True)
+        assert d.lineage_gift is True
+        assert d.draft is True
+
+    def test_draft_is_a_flag_not_a_gate(self):
+        """`draft: true` says the owner has not read the example intents yet.
+        It must not stop the domain loading, or the Facet cannot be tested
+        before it is approved."""
+        from app.facets.schema import MagicDomainDef
+        d = MagicDomainDef(id="x", name="X", type="focused",
+                           tradition="intuitive", description="...", draft=True)
+        assert d.id == "x"

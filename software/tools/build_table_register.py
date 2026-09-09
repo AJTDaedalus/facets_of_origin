@@ -60,7 +60,7 @@ BOOK_ORDER = [
         "II.4a_Character_Creation_Facet_Body.md",
         "II.4b_Character_Creation_Facet_Mind.md",
         "II.4c_Character_Creation_Facet_Soul.md",
-        "II.6_Character_Creation_Skills.md",
+        "II.7_Character_Creation_Skills.md",
         "III.1_Core_Resolution.md",
         "III.2_Adventuring.md",
         "III.3_Combat.md",

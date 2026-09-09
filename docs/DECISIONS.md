@@ -970,3 +970,97 @@ middle, not the opening).
 **Status:** ✅ Decided. Still open from D16: the §4 cross-training inversion
 (deferred with a playtest revisit trigger) and veteran pacing under the 2 SP
 cross-Facet cost.
+
+
+## Oraga Night as Starter Module, Lineages, Val'loh (2026-09-08)
+
+Recorded from the Brain fun audit (`docs/RESEARCH_fun_audit_2026-09.md`) and the same-day scoping session. Briefs: `BRIEF_oraga_starter_module.md` (umbrella), `BRIEF_lineage.md`, `BRIEF_valloh_facet.md`, `BRIEF_oraga_rewrite.md`.
+
+### D17 — Magic has no daily limit; it is balanced by per-roll cost, not by counting *(owner ruling, 2026-09-08)*
+
+**Decision:** "Remove the spell complexity entirely; let magic users use magic freely, as is written." No spell slots, no uses per day, no mana, and no setting-level tempo rule for Val'loh's spellforms. The core's II.3 stands unchanged and every setting Facet inherits it.
+
+**Why it holds against the field.** Games that count spells (D&D, 13th Age, Savage Worlds) need the count because a cast spell there is a guaranteed effect. Here nothing is guaranteed: scope sets difficulty (Focused: Easy/Standard/Hard; Standard and Prismatic worse), the 7–9 band costs something on roughly half of all castings and the 6− templates hurt, active opposition floors combat magic at Standard, a magical Strike depletes 2/1 Resolve exactly as steel does, pre-Technique casting is Minor only, and a Background caster spends their first Technique pick formalizing. Free-use magic balanced by consequence is the choice Fate, Forged in the Dark, and Ars Magica's spontaneous casting make; their communities do not report caster supremacy.
+
+**Numbers at +2:** a fighter's Standard Strike is 42/42/17 (full/partial/fail); a Focused caster's Minor at Easy is 58/33/8; any caster in combat is 42/42/17. Casters do *small* things more reliably than fighters hit and do not hit better.
+
+**Where the gap is:** versatility outside combat, not power. If a human playtest shows casters holding more spotlight than martials, the fix is on the martial side (audit R3 Strike riders, R5 Body signatures), never a limit on magic. MM2's adjudication guidance (name the 7–9 cost; judge scope honestly) is load-bearing and goes on every scene card.
+
+**Status:** ✅ Decided. Do not reopen without human-playtest evidence.
+
+### D18 — Lineage is a core creation step; a lineage Gift is a domain that formalizes free at the first Facet level *(owner rulings, 2026-09-08)*
+
+**Decision:** Lineage becomes step 3 of seven (II.5; Backgrounds → II.6, Skills → II.7, renumbered). The core ships Human only. A gifted lineage's Gift is a domain (intuitive, Focused, Minor until formalized) that replaces the Background's secondary skill; one domain at creation from Lineage or Background, never both. **A lineage Gift formalizes at the character's first Facet level in any Facet and spends no Technique pick** ("blood is not study"). The tribes of Val'loh are human and are the first non-default lineages. Detail: `BRIEF_lineage.md`.
+
+**Shipped (2026-09-09).** II.5 written; Backgrounds → II.6 and Skills → II.7; `lineages` merged by id with `LineageDefinition`; `lineage` / `gifted` / `domain_source` on the character, defaulted so every pre-existing `.fof` loads and round-trips unchanged; the one-domain rule enforced at creation; `_formalize_lineage_gift` fires on the first Facet level and records no pick; INV-16. The builder's picker hides itself when the ruleset holds only Human. `LOG_lineage.md` carries the renumber post-mortem — a `Chapter II.6`-shaped sweep silently repointed the Glossary's *Rank* entry from Skills to Backgrounds, and **no invariant in this repo can catch a reference that resolves to the wrong existing chapter.**
+
+**Status:** ✅ Decided and shipped.
+
+### D19 — Oraga Night scoping rulings *(owner, 2026-09-08)*
+
+| Ruling | Decision |
+|---|---|
+| Val'loh has domains | Yes. "No domains / gifts are flair / nobody casts in a crisis" (prior model) retired. Gifts are custom Focused domains; spellforms are the scholarly tradition as written; crystal charges are one-use items. |
+| The Bought hold the gate | Yes. The Bestiary's contract company, hired through an intermediary, set the diversion fires and hold the gatehouse from first bell to last, with a Second Clause about a woman in Thenya wool. New canon. |
+| "Old coin" | Kept as a deliberate red herring pointing at Vell; the aftermath can untangle it, never confirm it. |
+| The prelude | Cut. The module opens on the approach and the line, Movement I. |
+| One world | Val'loh is a continent of Shattered Origin's world. No rename of the PHB example character: the Gambit's Zahna is never named player-side. |
+| Written-word ban | Canon, with both carve-outs (formal invitations; private slates). |
+| Krenn and Tyndi | In Facet data, MM-only, never player-facing in 3164. |
+| Sequence | Audit R2/R3 are simmed and settled (`BRIEF_fun_second_act.md`) before the module's fights are tuned. |
+
+**Status:** ✅ Decided.
+
+### D20 — Open expires; a 10+ Strike chooses a rider; Cover was cut at the gate *(simulated and settled, 2026-09-08)*
+
+**Source:** `docs/BRIEF_fun_second_act.md`, from the fun audit's §9 R2/R3/R7.
+**Evidence:** `research/simulation_log.md` Series 12 Parts A, B, C.
+**Problem:** every Named and Boss fight had one shape. The first 10+ hung Open on the enemy, Open came off only when the enemy forfeited its one attack to clear it, so in practice it never came off, and every later Strike from anyone was Easy. A solo Boss had a median of **two** exchanges, and its Resolve-2 phase fired in the exchange the fight ended in three runs out of four — a second act nobody played against.
+
+**R2 — Open clears at the end of the exchange. ADOPTED.**
+`combat.enemy_durability.open_clears: end_of_exchange`. Open expires with the Tier 1 Conditions; nothing is spent to end it; and an Open enemy **still acts**. Open becomes a window to crowd into rather than a switch that stays flipped.
+Solo Guardian median 2 → **3**, mean 2.68, win rate still 100%, Sparks 5.87, party Endurance drawn further down. Every recipe row moved down and every one held its band within the acceptance's ±5pp: Standard 73.0–78.0%, Hard 38.0–45.0% (now at its floor rather than its middle), Deadly 17.5–26.5%.
+
+> **The prescribed repair was tried and rejected.** The acceptance said to retune Named/Boss Resolve by −1 before touching anything else. At Resolve 2 a Named NPC dies to a single full-success Strike, so it stops having a second exchange at all, and every row overshot on the high side (Standard 88.5–97.0%, Hard 61.5–73.0%). **The Named tier has no −1 step** — MM1's 3–4 authoring band has no interior. Worth remembering the next time an acceptance assumes a one-point Resolve dial: a Boss at 8 has that room, a Named does not.
+
+**R3 — a 10+ Strike chooses one rider. ADOPTED WITH TWO.**
+`strike_riders: [open, position]`. A full success depletes 2 Resolve **and** chooses: **Open** (Easy to Strike for everyone until the end of the exchange) or **Position** (the next roll against the target is Easy, this exchange or next). Both are Easy tags and do not stack; neither defeats; the choice is made after the roll, which is the first post-roll decision in combat that is not "pay or don't". Against a Mook a 10+ removes it and no rider applies. PvP is unchanged.
+
+**Cover was cut.** The drafted third rider — a named ally's next reaction is free — undid R2. Waiving reaction Endurance keeps the party's pool high, which drives postures aggressive, which took the solo-Boss fight from a median 3 exchanges back to **2** and dropped phase-lands-before-the-final-exchange from 51–58.5% to **19–23%**. It was not too strong or too weak; it was a length-shortener wearing a defensive rider's clothes. The `free_reaction_ally` effect stays implemented and tested so a setting Facet or a future Technique can offer it deliberately, and the core ruleset refuses it.
+
+> **A note on the acceptance itself.** Cover's gate was "mean PCs-Broken in the Hard row". That metric turned out to be blind: in any multi-enemy encounter the party always has a target that is not yet Open, so the menu collapses to Open and no other rider ever fires. **The riders are a Named/Boss-fight mechanic**, and a gate on a multi-enemy row cannot see them. The cut was made on the solo-Boss numbers instead. Future acceptances for rider-shaped mechanics should measure where the mechanic actually operates.
+
+**R7 — the Archive Guardian re-authored.** Its Reduced Mode used to read "once Open, it stays Open", which under R2 is inert — the simulator returned numbers identical to the decimal with the flag on and off. Re-authored to MM1's *raise its danger* lever (blows land Tier 2 again; it fixes on whoever last opened it) and the threshold moved **2 → 4**, so the phase lands before the final exchange in **99–100%** of runs instead of 20–27%, at no cost in length or win rate. The Guardian now also changes stance once, on a stated conduct trigger: Measured until it is first left Open, Aggressive thereafter. Its III.3 vignette was rewritten to show all of it — the stance change, the enemy acting while Open, both riders being chosen for different reasons, Open expiring unused, a telegraphed Technique that makes Intercept matter, the phase landing mid-fight, and (per the style guide) a 7–9 and a 6− alongside the good rolls.
+
+**Swept and clean:** no other Bestiary Boss (`bought_captain`, `glassback_bull`, `the_unfinished`) had a phase or Technique that assumed persistent Open. Two Named stance triggers that said "once left Open" were tightened to name the exchange.
+
+**Status:** ✅ Decided by simulation. Shipped in `facets/base/facet.yaml`, `app/game/combat.py`, `app/api/websocket.py`, the app, III.3, III.1, MM1, MM5, Quick Start, II.4a, and the Glossary, in one change. `BRIEF_oraga_rewrite.md` §11 tunes S2/S3 against these rules.
+
+### D21 — A setting Facet is additive by construction, and the schema now enforces it *(2026-09-09)*
+
+**Source:** building `software/facets/valloh/facet.yaml`, the game's first setting Facet.
+
+**The bug.** `magic` was a **singleton** section, replaced wholesale by the last module to declare it. The Val'loh Facet as briefed — "the merge appends them to the base list" — would instead have *deleted* the core's twenty-one domains, both traditions, and every domain type the moment it loaded. Nothing would have failed: the ruleset would simply have come back empty of magic, and INV-7 would have compared an empty catalog against the appendix and had nothing to say.
+
+**The fix.** `magic` mixes two kinds of thing, and the merge now treats them as the spec's own vocabulary already distinguishes. `soul_domains` and `mind_domains` are **collections** keyed by id, exactly like `skills`. Everything else — traditions, domain types, the pre-Technique cap, the Spark rules — stays **singleton**. The rules half merges field-by-field on `model_fields_set`, because a setting that lists domains and says nothing about traditions is not asking for traditions to be blank.
+
+**Generalisable, and worth checking before the next setting Facet.** Any schema section that mixes rules with catalogs has this latent. `combat` is the next candidate: it holds `conditions` and `strike_riders` (catalogs) beside `endurance` and `enemy_durability` (rules). Nothing needs it today because no Facet writes into `combat`, and INV-17 forbids Val'loh from doing so — fix it the first time one wants to.
+
+**And the promise is now testable.** A setting Facet's counted-novelty line is a promise about how much a reader has to learn, and it is the first thing to rot. **INV-17** counts the lineages and gift domains claimed in `V0_Ten_Things.md` against the merged ruleset; siblings check that the Facet writes into no rules section, and that loading it leaves every core skill, Background, domain and rule identical. Adding a lineage without updating the pitch fails the suite, and so does the reverse.
+
+**Status:** ✅ Decided and enforced.
+
+### D22 — Key a Boss's second act to conduct when the fight is long, to Resolve when it is short *(2026-09-09)*
+
+**Source:** `research/simulation_log.md` Series 12 Part B (the Archive Guardian) and Series 13 (the Bought captain).
+
+**The pattern.** A phase keyed to a Resolve threshold fires when the arithmetic reaches it, which is reliably later than the author imagined.
+
+- **Archive Guardian**, a three-exchange fight: phase at Resolve 2 of an effective 10 fired *in the exchange the fight ended* in three runs out of four. Fixable by raising the threshold to 4 — 99–100% of runs then see it land before the last exchange (D20/T15).
+- **The Bought captain**, an eight-exchange fight: **no threshold works.** Even at 6 of an effective 7, under 1% of runs saw the phase by exchange 3, because the party needs six exchanges to grind him down. Re-authored as a stated conduct trigger — *his second exchange on the field, or the exchange after the party looks like winning* — which is MM1-legal, was already what the module's fiction said, and cannot arrive too late.
+
+**The rule.** Short fight: a Resolve threshold is fine, set it near half the effective pool. Long fight: use a conduct trigger, because a threshold in a long fight is a phase the party reads about rather than plays against. **A second act nobody sees is not a second act.**
+
+**Corollary, from the same two series:** free reactions are not defensive in this system. Three were measured — R3's Cover, the Guardian's old no-clear-Open Special, the Thenya Bond's reaction clause — and two were cut. Waiving a reaction cost preserves Endurance, high Endurance drives aggressive postures, and aggressive postures shorten fights. **Assume anything that waives a reaction cost is an offensive buff until a simulation says otherwise.**
+
+**Status:** ✅ Decided.

@@ -477,11 +477,11 @@ class AdvancementDef(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# Backgrounds (PHB II.5)
+# Backgrounds (PHB II.6)
 # ---------------------------------------------------------------------------
 
 class BackgroundDefinition(BaseModel):
-    """A pre-built character background (PHB II.5).
+    """A pre-built character background (PHB II.6).
 
     Fields:
         facet: The primary Facet this background belongs to ("body" | "mind" | "soul").
@@ -503,6 +503,86 @@ class BackgroundDefinition(BaseModel):
     specialty: str
     domain_origin: Optional[str] = None
     domain_replaces_secondary: bool = False
+
+
+class ItemDefinition(BaseModel):
+    """A catalog item — currently only one-use charges (Val'loh crystals).
+
+    The smallest loot system the game can have, and deliberately so: a charge
+    holds one finished working at one scope, is released at a touch by anyone,
+    and needs no roll and no arithmetic. Making one is an ordinary domain
+    working done in downtime under II.3's normal rules; nothing extra is
+    tracked. When the fiction makes a *release* chancy — fumbled in the dark,
+    near something that eats magic — that is an ordinary Luck roll, not a rule
+    that lives here.
+
+    `Character.inventory` is already `list[str]`, so an item id is a valid
+    entry alongside free text: a table that wants none of this can ignore the
+    collection entirely and lose nothing.
+
+    Fields:
+        kind: What sort of thing it is. Only "consumable" exists; the field is
+              here so adding a second sort is a data change.
+        scope: The scope of the working the charge holds — II.3's ladder, not
+              a second vocabulary.
+        effect: One sentence, in the fiction's voice.
+    """
+
+    id: str
+    name: str
+    kind: Literal["consumable"] = "consumable"
+    scope: Literal["minor", "significant", "major"] = "minor"
+    effect: str
+
+
+class LineageDefinition(BaseModel):
+    """A lineage — who a character was born as (PHB II.5, D18).
+
+    Orthogonal to the Background, which is what they *did*. The core rules
+    ship exactly one lineage, Human, with no gift and no heritage; every
+    other lineage belongs to a setting Facet, and a lineage that wants to
+    add to an attribute, a skill rank, or the Endurance Pool is asking for a
+    number the core deliberately does not hand out at creation.
+
+    Fields:
+        variants: The common in-world names for these people, printed in
+                  italics after the name.
+        gift_domains: Domain IDs this lineage's blood may carry. Empty means
+                  ungifted, which is the core's Human. A Gift is a domain in
+                  every respect (II.3) and it *replaces* the Background's
+                  secondary skill, exactly as a magic-granting Background's
+                  domain origin does — a character holds one domain at
+                  creation, from Lineage or Background, never both.
+        gift_rate: Fiction only ("four in five", "vanishingly rare"). Never a
+                  roll; it is texture, and a prompt for how the ungifted are
+                  treated.
+        heritage: One narrow fact every member grows up with, gifted or not.
+                  Works as a Specialty does — Standard becomes Easy when it
+                  bears directly, information without a roll when tangential
+                  — and draws from the *same* one-step allowance (III.1,
+                  Difficulty). It is not a second Specialty in the arithmetic.
+        playable: Whether a player may choose this lineage. False for
+                  lineages that exist in data only so their NPCs can be
+                  statted honestly.
+        formalizes_on: How a Gift reaches full scope. "first_facet_level"
+                  (D18, the ruling): at the character's first Facet level in
+                  whichever Facet it lands, spending no Technique pick —
+                  blood is not study, and charging a Body-Facet gifted
+                  character a cross-Facet Technique would make "born gifted"
+                  cost more than "studied magic". "technique" is the
+                  Background route, kept as legal data so a setting could
+                  choose it. Ignored when `gift_domains` is empty.
+    """
+
+    id: str
+    name: str
+    variants: list[str] = Field(default_factory=list)
+    description: str
+    gift_domains: list[str] = Field(default_factory=list)
+    gift_rate: Optional[str] = None
+    heritage: Optional[str] = None
+    playable: bool = True
+    formalizes_on: Literal["first_facet_level", "technique"] = "first_facet_level"
 
 
 # ---------------------------------------------------------------------------
@@ -696,6 +776,69 @@ class EnemyAttacksDef(BaseModel):
     mook_declares_posture: bool = False
 
 
+class StrikeRiderDef(BaseModel):
+    """One option on the full-success Strike's rider menu (R3, III.3 Table
+    III.3-3): *10+ — deplete 2 Resolve and choose one.*
+
+    The menu is data so the app renders the confirm from it and a setting
+    may add or trim one; the *effects* are engine, so `effect` is a closed
+    set and a rider naming behaviour the engine does not implement fails at
+    load rather than silently doing nothing at the table.
+
+    Fields:
+        id: Stable identifier the client sends back on the confirm.
+        label: What the table sees on the button.
+        effect: What the engine does.
+                "easy_tag" — Open: Easy to Strike for everyone.
+                "easy_tag_next_roll" — Position: Easy for the next roll
+                against this target, whoever makes it.
+                "free_reaction_ally" — Cover: a named ally's next reaction
+                costs no Endurance. The reaction is still rolled; Cover
+                buys the cost, never the outcome.
+        duration: When it expires. Open and Cover expire with the Tier 1
+                  Conditions; Position is consumed by the next roll against
+                  the target, or expires at the end of the following
+                  exchange if nobody takes it.
+
+    Three is the working cap, not a schema limit. A fourth option on the
+    most common outcome in the game is where a pick-list stops being fast
+    (BRIEF_fun_second_act §8), so the base ruleset ships two and the schema
+    lets a setting decide otherwise.
+    """
+
+    id: str
+    label: str
+    effect: Literal["easy_tag", "easy_tag_next_roll", "free_reaction_ally"]
+    duration: Literal[
+        "end_of_exchange",
+        "next_roll_or_end_of_next_exchange",
+    ]
+
+
+def _default_strike_riders() -> list[StrikeRiderDef]:
+    """The two riders III.3 prints. Open is the pre-R3 behaviour kept as an
+    option; Position is the Maneuver result arriving on a hit.
+
+    Cover — Intercept's effect without Intercept's Endurance cost — was
+    drafted as a third and **cut at the gate** (Series 12 Part C, D20). It
+    was not too weak; it was too good in the wrong direction. Waiving
+    reaction costs keeps the party's Endurance up, which drives postures
+    aggressive, which shortened the solo-Boss fight from a median 3
+    exchanges back to 2 and dropped the fraction of runs where the Boss's
+    phase landed before the final exchange from 51-58.5% to 19-23% —
+    erasing exactly what R2 had just bought. The `free_reaction_ally`
+    effect stays implemented so a setting or a future Technique can offer
+    it deliberately; the core menu does not.
+    """
+    return [
+        StrikeRiderDef(id="open", label="Open", effect="easy_tag",
+                       duration="end_of_exchange"),
+        StrikeRiderDef(id="position", label="Position",
+                       effect="easy_tag_next_roll",
+                       duration="next_roll_or_end_of_next_exchange"),
+    ]
+
+
 class EnemyDurabilityDef(BaseModel):
     """Enemy Resolve pool rules (D1): depletion, armor bonus, and Mook removal.
 
@@ -710,9 +853,20 @@ class EnemyDurabilityDef(BaseModel):
                  Easy to Strike for everyone; the player narrates what
                  Open looks like. Open never defeats an enemy — Resolve
                  does.
-        open_clears: How Open clears. "enemy_action": only by the enemy
-                     visibly spending its action — never at end of
+        open_clears: How Open clears — a closed set, because a lifecycle
+                     the engine does not implement must fail at load
+                     rather than at the table.
+                     "end_of_exchange" (R2, the base ruleset's choice):
+                     Open expires with the Tier 1 Conditions, so it is a
+                     tempo tag — exploit it now — and the enemy keeps its
+                     action while Open.
+                     "enemy_action" (the pre-R2 rule, kept legal so a
+                     setting may choose it and so Series 12 Part A's
+                     regression floor still runs): cleared only by the
+                     enemy visibly spending its action, never at end of
                      exchange.
+        strike_riders: The menu a full-success Strike chooses one option
+                     from (R3). See StrikeRiderDef.
     """
 
     strike_depletion: StrikeDepletionDef = Field(default_factory=StrikeDepletionDef)
@@ -720,7 +874,10 @@ class EnemyDurabilityDef(BaseModel):
     mook_removed_on: str = "partial_success"
     armored_mook_removed_on: str = "full_success"
     open_on: str = "full_success"
-    open_clears: str = "enemy_action"
+    open_clears: Literal["enemy_action", "end_of_exchange"] = "enemy_action"
+    strike_riders: list["StrikeRiderDef"] = Field(
+        default_factory=lambda: _default_strike_riders(),
+    )
 
 
 class CombatDef(BaseModel):
@@ -837,6 +994,17 @@ class MagicDomainDef(BaseModel):
                    "intuitive" (Spirit + Attune) or "scholarly"
                    (Knowledge + Lore); see MagicDef.traditions.
         requires_tier3: True for Prismatic domains that need a Tier 3 Technique.
+        lineage_gift: True for a domain a setting's lineage carries in the
+                   blood (PHB II.5). Such a domain is excluded from the Tier 1
+                   Technique's choice list — a Soul mage in Shattered Origin
+                   cannot pick "Crystal" — and reachable only by being born to
+                   it. This is what keeps a setting's blood-magic out of the
+                   core's shopping list without a second domain model.
+        draft: True while the entry's example intents are still awaiting the
+                   owner's read. A flag, never a gate: a drafted domain loads,
+                   validates, and can be simulated, because a Facet that
+                   cannot be tested before it is approved cannot be approved
+                   on evidence.
     """
 
     id: str
@@ -845,6 +1013,8 @@ class MagicDomainDef(BaseModel):
     tradition: str
     description: str
     requires_tier3: bool = False
+    lineage_gift: bool = False
+    draft: bool = False
 
 
 class SparkEaseFocusedMajorDef(BaseModel):
@@ -953,6 +1123,8 @@ class FacetFile(BaseModel):
     skills: list[SkillDef] = Field(default_factory=list)
     techniques: dict[str, FacetTreeDef] = Field(default_factory=dict)  # keyed by character facet ID
     backgrounds: list[BackgroundDefinition] = Field(default_factory=list)
+    lineages: list[LineageDefinition] = Field(default_factory=list)
+    items: list[ItemDefinition] = Field(default_factory=list)
     roll_resolution: RollResolutionDef | None = None
     spark: SparkDef | None = None
     advancement: AdvancementDef | None = None
