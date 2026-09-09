@@ -1142,3 +1142,48 @@ class TestStrikeRiderMenu:
         mm.wait_for_timeout(300)
         log = mm.inner_text("#play-chat-log")
         assert "end of the exchange" in log, log[-400:]
+
+
+class TestSettingFacetIsSelectable:
+    """The MM's side of opt-in. `/api/facets/available` is rendered as a
+    checkbox list on the session-creation card, and the box has to exist, carry
+    the right value, and not exist for `base` — which is always loaded and must
+    not look like a choice.
+    """
+
+    def test_the_facet_list_offers_valloh_with_a_checkbox(self, table):
+        mm, _ = table
+        mm.evaluate("() => loadAvailableFacets()")
+        mm.wait_for_timeout(600)
+        text = mm.inner_text("#facet-list")
+        assert "Val'loh" in text, text
+        box = mm.locator("#facet-valloh")
+        assert box.count() == 1, "no checkbox to switch the Facet on"
+        assert mm.eval_on_selector("#facet-valloh", "e => e.value") == "valloh"
+
+    def test_the_base_ruleset_is_not_offered_as_a_choice(self, table):
+        """It is always loaded. A checkbox for it would be a control that
+        cannot change anything."""
+        mm, _ = table
+        mm.evaluate("() => loadAvailableFacets()")
+        mm.wait_for_timeout(600)
+        assert mm.locator("#facet-base").count() == 0
+        assert "always loaded" in mm.inner_text("#facet-list")
+
+    def test_ticking_it_reaches_the_create_call(self, table):
+        """The checkbox is read by `createSession`; this pins the selector it
+        reads, which is the link most likely to rot silently."""
+        mm, _ = table
+        # The MM is already in a session, so the dashboard that carries the
+        # facet list is hidden. Show it and click for real, rather than setting
+        # `.checked` from script — a box that cannot be clicked is exactly the
+        # bug this class exists to catch.
+        mm.evaluate("() => document.getElementById('mm-dashboard')"
+                    ".classList.remove('hidden')")
+        mm.evaluate("() => loadAvailableFacets()")
+        mm.wait_for_timeout(600)
+        mm.check("#facet-valloh")
+        selected = mm.evaluate(
+            "() => Array.from(document.querySelectorAll('[id^=\"facet-\"]:checked'))"
+            ".map(cb => cb.value)")
+        assert selected == ["valloh"], selected
