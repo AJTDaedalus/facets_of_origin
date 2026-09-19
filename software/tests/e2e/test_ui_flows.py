@@ -975,7 +975,8 @@ class TestLineagePicker:
               {id: 'human', name: 'Human', variants: [], description: 'The default.',
                gift_domains: [], gift_rate: null, heritage: null, playable: true},
               {id: 'orthaen', name: 'Orthaen', variants: ['Orthain'],
-               description: 'They grow crystal.', gift_domains: ['fire'],
+               description: 'They grow crystal.',
+               gift: 'Shows itself through grown crystal.', gift_domains: [],
                gift_rate: 'four in five', heritage: 'Reads crystalwork.',
                playable: true},
             ];
@@ -999,7 +1000,8 @@ class TestLineagePicker:
               {id: 'human', name: 'Human', variants: [], description: 'd',
                gift_domains: [], playable: true},
               {id: 'orthaen', name: 'Orthaen', variants: [],
-               description: 'They grow crystal.', gift_domains: ['fire'],
+               description: 'They grow crystal.',
+               gift: 'Shows itself through grown crystal.', gift_domains: [],
                gift_rate: 'four in five', heritage: 'Reads crystalwork.',
                playable: true},
             ];
@@ -1019,15 +1021,21 @@ class TestLineagePicker:
             "() => document.getElementById('cc-gift-wrap').classList.contains('hidden')")
         assert mm.evaluate("() => selectedGift()") is None
 
-        # Orthaen: the Gift control appears, carrying the lineage's domains.
+        # Orthaen: the Gift control appears offering EVERY eligible domain —
+        # the player chooses (D24) — and never a Prismatic one.
         mm.select_option("#cc-lineage", "orthaen")
         mm.wait_for_timeout(200)
         assert not mm.evaluate(
             "() => document.getElementById('cc-gift-wrap').classList.contains('hidden')")
         gifts = mm.eval_on_selector_all(
             "#cc-gift option", "els => els.map(e => e.value)")
-        assert "fire" in gifts
+        assert "fire" in gifts and "transmutation" in gifts, gifts
+        broad = mm.evaluate(
+            "() => [...state.ruleset.magic.soul_domains, ...state.ruleset.magic.mind_domains]"
+            ".filter(d => d.type === 'broad').map(d => d.id)")
+        assert broad and not (set(broad) & set(gifts)), "a Prismatic domain is offered"
         info = mm.inner_text("#cc-lineage-info")
+        assert "grown crystal" in info, "the gift's flavour line is not shown"
         assert "four in five" in info, "the gift rate is not shown"
         assert "crystalwork" in info, "the Heritage is not shown"
 
@@ -1187,3 +1195,85 @@ class TestSettingFacetIsSelectable:
             "() => Array.from(document.querySelectorAll('[id^=\"facet-\"]:checked'))"
             ".map(cb => cb.value)")
         assert selected == ["valloh"], selected
+
+
+class TestReadiedIntentsPanel:
+    """D23 in the browser: the panel appears only for a formalized caster,
+    offers the ruleset's purposes, readies through the server, and the cast
+    form asks for a purpose only when the scope needs one.
+    """
+
+    def test_the_ruleset_ships_the_five_purposes_to_the_client(self, table):
+        _, player = table
+        ids = player.evaluate(
+            "() => state.ruleset.magic.prepared_intents.purposes.map(p => p.id)")
+        assert ids == ["harm", "ward", "mend", "shape", "reveal"]
+
+    def test_an_unformalized_caster_sees_no_readied_panel(self, table):
+        _, player = table
+        player.evaluate("""() => {
+            state.character.magic_domain = 'inscription';
+            state.character.magic_technique_active = false;
+            renderMagicPanel();
+        }""")
+        player.wait_for_timeout(200)
+        assert player.evaluate(
+            "() => document.getElementById('magic-readied-wrap').classList.contains('hidden')")
+
+    def test_a_formalized_caster_is_offered_one_input_per_purpose(self, table):
+        _, player = table
+        player.evaluate("""() => {
+            state.character.magic_domain = 'inscription';
+            state.character.magic_technique_active = true;
+            state.character.readied_intents = null;
+            renderMagicPanel();
+        }""")
+        player.wait_for_timeout(200)
+        assert not player.evaluate(
+            "() => document.getElementById('magic-readied-wrap').classList.contains('hidden')")
+        purposes = player.eval_on_selector_all(
+            ".ready-intent-input", "els => els.map(e => e.dataset.purpose)")
+        assert purposes == ["harm", "ward", "mend", "shape", "reveal"]
+
+    def test_minor_asks_for_no_purpose_and_significant_does(self, table):
+        _, player = table
+        player.evaluate("""() => {
+            state.character.magic_domain = 'inscription';
+            state.character.magic_technique_active = true;
+            state.character.readied_intents = {harm: 1};
+            renderMagicPanel();
+            document.querySelector('input[name="magic-scope"][value="minor"]').checked = true;
+            renderPurposeSelect();
+        }""")
+        player.wait_for_timeout(150)
+        assert player.evaluate(
+            "() => document.getElementById('magic-purpose-wrap').classList.contains('hidden')")
+        player.evaluate("""() => {
+            document.querySelector('input[name="magic-scope"][value="significant"]').checked = true;
+            renderPurposeSelect();
+        }""")
+        player.wait_for_timeout(150)
+        assert not player.evaluate(
+            "() => document.getElementById('magic-purpose-wrap').classList.contains('hidden')")
+
+    def test_the_price_is_shown_before_casting(self, table):
+        """Off-purpose costs a Spark, and the player should know that before
+        pressing Cast, not after."""
+        _, player = table
+        player.evaluate("""() => {
+            state.character.magic_domain = 'inscription';
+            state.character.magic_technique_active = true;
+            state.character.readied_intents = {harm: 1};
+            renderMagicPanel();
+            document.querySelector('input[name="magic-scope"][value="major"]').checked = true;
+            renderPurposeSelect();
+            document.getElementById('magic-purpose').value = 'reveal';
+            renderPurposeSelect();
+        }""")
+        player.wait_for_timeout(150)
+        cost = player.inner_text("#magic-purpose-cost")
+        assert "Spark" in cost, cost
+
+    def test_the_mm_has_a_full_rest_button(self, table):
+        mm, _ = table
+        assert mm.locator("button:has-text('Full Rest')").count() >= 1

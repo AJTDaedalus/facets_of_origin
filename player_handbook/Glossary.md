@@ -75,8 +75,6 @@ the full rule, follow the pointer.
 
 **Off-Balance** — A Tier 1 Condition: the character's next reaction costs 1 additional Endurance Pool point. *(Chapter III.3)*
 
-**Position** — One of the two riders a full-success Strike may choose: you or an ally you name may act as though a Maneuver's full success applied, making the **next** roll against that target Easy, this exchange or the next. Spent by that roll. Position and Open are both Easy and do not stack. *(Chapter III.3)*
-
 **Lineage** — Who a character was born as, chosen at creation and orthogonal to the Background's what-they-did. The core rules ship one, Human, with no Gift and no Heritage; setting Facets add more. *(Chapter II.5)*
 
 **Open** — One of the two riders a full-success Strike may choose: the enemy is Easy to Strike for everyone, and the attacker narrates what that looks like. Open lasts until the **end of the exchange** and then clears on its own, with the Tier 1 Conditions. An Open enemy still acts, and Open never defeats an enemy on its own. *(Chapter III.3)*
@@ -87,25 +85,31 @@ the full rule, follow the pointer.
 
 **Pinnacle Technique** — A powerful, character-defining ability outside the normal Technique tree, chosen at Major Advancement with MM approval; it should feel like the culmination of a demonstrated arc of play, not an item on a checklist. *(Chapter II.4)*
 
+**Position** — One of the two riders a full-success Strike may choose: you or an ally you name may act as though a Maneuver's full success applied, making the **next** roll against that target Easy, this exchange or the next. Spent by that roll. Position and Open are both Easy and do not stack. *(Chapter III.3)*
+
 **Posture (Aggressive/Measured/Defensive/Withdrawn)** — The broad tactical stance taken for one exchange. Player characters declare theirs simultaneously and blind; enemy stances are stated openly by the MM, driven by the stat block's conduct triggers. Aggressive trades a first-reaction Endurance Pool surcharge for +1 offense, Measured is the baseline, Defensive trades offense for cheaper reactions, and Withdrawn forgoes offense to recover 2 Endurance Pool points, up to the maximum. *(Chapter III.3)*
 
 **Heritage** — One narrow fact every member of a lineage grows up with, gifted or not. It works as a Specialty does — Standard becomes Easy when it bears directly, information without a roll when tangential — and draws from the same single character-side step, so a Heritage and a Specialty that both apply are still one step. *(Chapter II.5)*
 
-**Gift** — A domain carried in a lineage's blood rather than learned. A Gift is a domain in every respect, replaces the Background's Secondary Skill, and formalizes at the character's first Facet level in any Facet without spending a Technique pick. A character holds one domain at creation, from Lineage or Background, never both. *(Chapter II.5)*
+**Gift** — A domain carried in a lineage's blood rather than learned. The lineage says how it shows itself; the player chooses which non-Prismatic domain it is. A Gift is a domain in every respect, is always cast intuitively (Spirit + Attune), replaces the Background's Secondary Skill, and formalizes at the character's first Facet level in any Facet without spending a Technique pick. A character holds one domain at creation, from Lineage or Background, never both. *(Chapter II.5)*
 
 **Press** — Spending 1 Endurance Pool point before a Strike roll to add a d6 and drop the lowest die — the same mechanical effect as a Spark, drawn from a different resource, and stackable with one. *(Chapter III.3)*
 
 **Primary Facet** — The Facet a character declares at character creation, which determines which skills cost less to advance (1 point per mark rather than 2) and which Techniques are available to them. *(Chapter II.4)*
 
+**Purpose** — One of five broad shapes a magical intent takes: Harm, Ward, Mend, Shape, Reveal. For Minor magic it is only a description; for Significant and Major magic it is what the caster readied an intent for. *(Chapter II.3)*
+
 **Rank (Novice/Practiced/Expert/Master)** — A skill's level of developed capability: Novice (+0, the starting rank for every skill), Practiced (+1, 3 marks), Expert (+2, 8 marks total), or Master (+3, 16 marks total). Within one Facet at most three skills may pass Practiced and only one may reach Master. *(Chapters II.7, II.4)*
 
 **Reaction (Dodge/Parry/Absorb/Intercept)** — A character's response to an incoming action — at most one per incoming action, each costing Endurance Pool points unless Posture reduces it: Dodge (Dexterity), Parry (weapon attribute + Combat), Absorb (free, take the hit), or Intercept (step in front of an attack meant for an ally). *(Chapter III.3)*
 
+**Readied Intent** — A commitment a formalized caster makes at the start of each session: three intents spread across the five purposes. A Significant or Major working spends one of its purpose — or a Spark if none is readied. Minor magic spends nothing. Readied intents return after a full rest, which the MM calls, or at the next session. *(Chapter II.3)*
+
 **Reflection Scene** — A brief in-world moment, once per session, where a character acknowledges growth that happened in play; encouraged but not required, since advancement itself happens whether or not the scene takes place. *(Chapter II.4)*
 
-**Rider** — The option a full-success Strike takes on top of its 2 Resolve: **Open** or **Position**. Three things are true of both. The choice is made *after* the roll. Neither defeats an enemy on its own. And both expire by themselves, so nothing has to be spent to end one and nobody has to track it into a later exchange. *(Chapter III.3)*
-
 **Resolve** — An enemy's durability pool, depleted directly by Strikes — 2 on a full success, 1 on a partial — with no Condition track to manage. At 0 Resolve, the enemy is defeated. *(Chapter III.3)*
+
+**Rider** — The option a full-success Strike takes on top of its 2 Resolve: **Open** or **Position**. Three things are true of both. The choice is made *after* the roll. Neither defeats an enemy on its own. And both expire by themselves, so nothing has to be spent to end one and nobody has to track it into a later exchange. *(Chapter III.3)*
 
 **Saving Throw** — A reactive roll made when something happens *to* a character rather than something they choose to attempt: 2d6 + the relevant Major Attribute modifier, resolved on the standard three-tier table. *(Chapter III.1)*
 

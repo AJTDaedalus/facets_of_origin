@@ -1052,8 +1052,12 @@ class TestASettingFacetCanActuallyBeTurnedOn:
         rs = session_store.get(sid).ruleset
 
         assert len([l for l in rs.lineages if l.id != "human"]) == 10
-        assert len([d for d in rs.magic.soul_domains if d.lineage_gift]) == 10
         assert len(rs.items) == 6
+        # D24: Val'loh adds no domains — gifts are chosen from the core catalog.
+        from app.facets.registry import build_ruleset
+        core = build_ruleset([])
+        assert ({d.id for d in rs.magic.soul_domains}
+                == {d.id for d in core.magic.soul_domains})
         # And the core is still all there.
         assert rs.get_lineage("human") is not None
         assert any(d.id == "fire" for d in rs.magic.soul_domains)
@@ -1088,13 +1092,15 @@ class TestASettingFacetCanActuallyBeTurnedOn:
             "attributes": {"strength": 1, "dexterity": 2, "constitution": 1,
                            "intelligence": 3, "wisdom": 2, "knowledge": 2,
                            "spirit": 2, "luck": 2, "charisma": 3},
-            "lineage": "orthaen", "gifted": True, "magic_domain": "crystal",
+            "lineage": "orthaen", "gifted": True, "magic_domain": "transmutation",
         }, headers=mm_headers)
         assert resp.status_code == 200, resp.text
         char = resp.json()["character"]
         assert char["lineage"] == "orthaen"
         assert char["gifted"] is True
-        assert char["magic_domain"] == "crystal"
+        assert char["magic_domain"] == "transmutation"
+        # A Mind domain, cast intuitively: the gift's one rule, through the API.
+        assert char["magic_tradition"] == "intuitive"
 
     def test_a_valloh_gift_is_refused_in_a_core_session(self, client, mm_headers):
         """The other half of opt-in: a table that did not load the Facet cannot
@@ -1107,7 +1113,7 @@ class TestASettingFacetCanActuallyBeTurnedOn:
             "attributes": {"strength": 1, "dexterity": 2, "constitution": 1,
                            "intelligence": 3, "wisdom": 2, "knowledge": 2,
                            "spirit": 2, "luck": 2, "charisma": 3},
-            "lineage": "orthaen", "gifted": True, "magic_domain": "crystal",
+            "lineage": "orthaen", "gifted": True, "magic_domain": "transmutation",
         }, headers=mm_headers)
         assert resp.status_code == 422
         assert "orthaen" in str(resp.json())

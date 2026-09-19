@@ -237,6 +237,12 @@ async def _dispatch(
         await _handle_technique_select(msg, session, session_id, identity, is_mm)
     elif event_type == "session_reset" and is_mm:
         await _handle_session_reset(session, session_id)
+
+    elif event_type == "ready_intents":
+        await _handle_ready_intents(websocket, msg, session, session_id, identity)
+
+    elif event_type == "full_rest" and is_mm:
+        await _handle_full_rest(msg, session, session_id)
     # --- Enemy tracker events ---
     elif event_type == "spawn_enemy" and is_mm:
         await _handle_spawn_enemy(msg, session, session_id)
@@ -1332,6 +1338,30 @@ async def _handle_cast(
         await manager.send_to(websocket, {"type": "error", "message": "No Sparks remaining."})
         return
 
+    # D23: price the working before rolling it. Every rule is the character
+    # model's; the handler only refuses what the caster cannot afford.
+    purpose = msg.get("purpose")
+    purpose = str(purpose) if purpose else None
+    try:
+        intent_cost = character.intent_cost(purpose, scope, session.ruleset)
+    except ValueError as e:
+        await manager.send_to(websocket, {"type": "error", "message": str(e)})
+        return
+    pi = session.ruleset.magic.prepared_intents if session.ruleset.magic else None
+    off_purpose_sparks = (
+        pi.off_purpose_spark_cost if (intent_cost == "spark" and pi) else 0)
+    if character.sparks < off_purpose_sparks + (1 if spark_declared else 0):
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": (
+                f"Nothing readied for {purpose}: an off-purpose working costs "
+                f"{off_purpose_sparks} Spark"
+                + (" on top of the Spark for the dice" if spark_declared else "")
+                + f", and you have {character.sparks}."
+            ),
+        })
+        return
+
     try:
         result = resolve_magic_roll(
             character=character,
@@ -1347,6 +1377,12 @@ async def _handle_cast(
 
     if spark_declared:
         _spend_sparks(character, 1, session)
+
+    # D23: the engine accepted the working, so it is paid for now — a refused
+    # working never costs an intent or a Spark.
+    paid = character.pay_intent_cost(purpose, scope, session.ruleset)
+    if paid == "spark" and off_purpose_sparks:
+        _spend_sparks(character, off_purpose_sparks, session)
 
     # T4.1/D7: the cast rolled the tradition's skill, so the caster used it —
     # the same mark every other rolling handler records, and what advancement
@@ -1366,6 +1402,9 @@ async def _handle_cast(
         "technique_active": character.magic_technique_active,
         "roll": result_dict,
         "sparks_remaining": character.sparks,
+        "purpose": purpose,
+        "intent_cost": paid,
+        "readied_intents": character.readied_intents,
     })
 
 
@@ -1653,6 +1692,53 @@ async def _handle_scene_end(session, session_id: str) -> None:
     await manager.broadcast(session_id, {
         "type": "scene_ended",
         "characters": sorted(session.characters),
+    })
+
+
+async def _handle_ready_intents(websocket, msg: dict, session, session_id: str,
+                                identity: str) -> None:
+    """A caster commits this rest's readied intents (D23). The rule lives in
+    `Character.ready_intents`; this routes and reports."""
+    character = session.characters.get(identity)
+    if not character:
+        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
+        return
+    allocation = msg.get("allocation") or {}
+    if not isinstance(allocation, dict):
+        await manager.send_to(websocket, {
+            "type": "error", "message": "allocation must map purposes to counts."})
+        return
+    try:
+        character.ready_intents(
+            {str(k): v for k, v in allocation.items()}, session.ruleset)
+    except ValueError as e:
+        await manager.send_to(websocket, {"type": "error", "message": str(e)})
+        return
+    session.save_character_to_disk(identity)
+    await manager.broadcast(session_id, {
+        "type": "intents_readied",
+        "player": identity,
+        "readied_intents": character.readied_intents,
+    })
+
+
+async def _handle_full_rest(msg: dict, session, session_id: str) -> None:
+    """The MM calls a full rest (D23): every caster, or one named caster, may
+    ready their intents again. When the party has rested is the MM's call —
+    that is the lever that keeps the limit fictional rather than a clock."""
+    named = msg.get("player_name")
+    targets = ([str(named)] if named else list(session.characters))
+    refreshed = []
+    for player_name in targets:
+        character = session.characters.get(player_name)
+        if character is None:
+            continue
+        character.refresh_intents()
+        session.save_character_to_disk(player_name)
+        refreshed.append(player_name)
+    await manager.broadcast(session_id, {
+        "type": "intents_refreshed",
+        "characters": sorted(refreshed),
     })
 
 

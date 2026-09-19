@@ -472,6 +472,12 @@ def resolve_magic_roll(
     # from ruleset.magic.traditions (facet.yaml), with the II.3 defaults as
     # fallback.
     tradition = domain_def.tradition
+    # D24: a lineage Gift is cast intuitively whatever the domain's own
+    # tradition — blood is not study. The character records it at creation.
+    if (getattr(character, "domain_source", None) == "lineage"
+            and domain_id == getattr(character, "magic_domain", None)
+            and getattr(character, "magic_tradition", None)):
+        tradition = character.magic_tradition
     _tradition_defaults = {
         "intuitive": ("spirit", "attune"),
         "scholarly": ("knowledge", "lore"),

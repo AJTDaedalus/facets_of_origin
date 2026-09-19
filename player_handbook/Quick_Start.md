@@ -68,7 +68,7 @@ A Background is your character's history, and it is where most of your starting 
 - **Secondary Skill** at **Novice** with **1 mark** already on it — same Facet, two marks from Practiced instead of three
 - **Specialty** — one narrow area of fictional expertise. When it directly applies, a Standard roll becomes Easy; when it is merely tangential, the Mirror Master hands over the information without a roll
 
-If your Background grants magic, a **Domain** origin replaces the Secondary Skill. Until you unlock your first Facet Technique, that Domain works at **Minor scope only**.
+If your Background grants magic, a **Domain** origin replaces the Secondary Skill. Until you unlock your first Facet Technique, that Domain works at **Minor scope only**. After it, small magic stays free and larger workings spend one of three **readied intents** you choose at the start of each session (Chapter II.3).
 
 ### 6. Fill in the rest
 

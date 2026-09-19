@@ -96,7 +96,7 @@ Magic requires two things: a narrative origin and a Facet Technique. The Backgro
 
 **Before the Technique is unlocked:** You can use your domain, but your practice is genuine without being disciplined. Effects are limited to Minor scope — the normal difficulty table applies. You are working from instinct and partial understanding.
 
-**After the Technique is unlocked:** Your domain operates at full capacity — all scopes available, normal difficulty table, any additional benefits the Technique provides. The Technique is not the moment you gain magic. It is the moment your magic becomes what it is capable of being.
+**After the Technique is unlocked:** Your domain operates at full capacity — all scopes available, normal difficulty table, any additional benefits the Technique provides. Small magic stays free; Significant and Major workings spend one of the three intents you ready each session (see *Readied Intents*, II.3). The Technique is not the moment you gain magic. It is the moment your magic becomes what it is capable of being.
 
 This means starting characters with magical Backgrounds have a real but limited version of their domain from session one. The first Facet level — and the Technique that comes with it — is a meaningful mechanical milestone: the moment of formalization, of understanding, of arriving somewhere you have been walking toward. Own that when you choose a magical Background: your first Technique is your formalization, and your first *free* Technique choice comes at Facet level 2.
 

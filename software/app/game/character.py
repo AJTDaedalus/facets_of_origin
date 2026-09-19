@@ -87,6 +87,10 @@ class Character(BaseModel):
             implemented for a setting or a future Technique. Ephemeral;
             spent by one reaction and expired by
             `combat.expire_end_of_exchange`.
+        readied_intents: D23. Remaining readied intents by purpose, or None
+            when none have been readied since the last refresh (the start of
+            a session, or a full rest the MM calls). None is what lets the
+            caster ready; a dict is what locks the choice in.
         intercepts_this_exchange: Count of Intercept reactions taken so far
             this exchange. Intercept is capped at one per exchange (III.3:219),
             unlike other reaction types. Reset to 0 by `_handle_end_exchange`.
@@ -159,6 +163,7 @@ class Character(BaseModel):
     reactions_this_exchange: int = 0
     intercepts_this_exchange: int = 0
     free_reaction: bool = False
+    readied_intents: Optional[dict[str, int]] = None
 
     # --- Derived Facet-level views (read-only; kept for .fof and UI compat) ---
 
@@ -603,6 +608,107 @@ class Character(BaseModel):
         self.session_skill_points_remaining = session_points + banked
         self.skills_used_this_session = set()
         self.training_marks_this_session = 0
+        # D23: a new session is a fresh chance to guess what it will need.
+        self.refresh_intents()
+
+    # ------------------------------------------------------------------
+    # Readied intents (D23 — supersedes D17)
+    # ------------------------------------------------------------------
+
+    def _prepared_intents(self, ruleset: MergedRuleset):
+        return ruleset.magic.prepared_intents if ruleset.magic else None
+
+    def ready_intents(self, allocation: dict[str, int], ruleset: MergedRuleset) -> None:
+        """Commit this rest's readied intents: up to `capacity`, spread across
+        the purposes however the player likes.
+
+        Single source of truth for the rule; the WebSocket handler delegates.
+        Refuses rather than clamping, and mutates nothing on refusal.
+
+        Raises:
+            ValueError: no magic, magic not yet formalized, already readied
+                since the last rest, an unknown purpose, a negative count, or
+                a total over capacity.
+        """
+        pi = self._prepared_intents(ruleset)
+        if pi is None:
+            raise ValueError("This game's rules have no readied intents to ready.")
+        if not self.magic_domain:
+            raise ValueError(f"{self.name} has no magic to ready intents for.")
+        if not self.magic_technique_active:
+            raise ValueError(
+                "Readied intents begin when your magic formalizes — until then "
+                "you work at Minor scope, which is free (II.3, Before the Technique)."
+            )
+        if self.readied_intents is not None:
+            raise ValueError(
+                "You have already readied your intents. They come back after a "
+                "full rest, or at the start of the next session."
+            )
+        known = {p.id for p in pi.purposes}
+        for purpose, count in allocation.items():
+            if purpose not in known:
+                raise ValueError(
+                    f"'{purpose}' is not a purpose. Choose from: "
+                    f"{', '.join(p.id for p in pi.purposes)}."
+                )
+            if not isinstance(count, int) or count < 0:
+                raise ValueError(f"'{purpose}' needs a whole number, 0 or more.")
+        total = sum(allocation.values())
+        if total > pi.capacity:
+            raise ValueError(
+                f"That is {total} readied intents; you may ready {pi.capacity}."
+            )
+        self.readied_intents = {k: v for k, v in allocation.items() if v > 0}
+
+    def refresh_intents(self) -> None:
+        """A full rest, or a new session: the caster may ready again."""
+        self.readied_intents = None
+
+    def intent_cost(self, purpose: Optional[str], scope: str,
+                    ruleset: MergedRuleset) -> str:
+        """What a working will cost, without paying it: "free", "intent" (one
+        readied intent of `purpose`), or "spark" (off-purpose, or the purpose
+        is spent).
+
+        Asked before the roll so the handler can refuse a working the caster
+        cannot afford; paid by `pay_intent_cost` only after the engine accepts
+        it — the same order Sparks already follow, so a refused working never
+        costs anything.
+        """
+        pi = self._prepared_intents(ruleset)
+        if pi is None or scope in pi.free_scopes:
+            return "free"
+        # Before formalization the pre-Technique scope rules govern (II.3):
+        # Minor only, with the Spark push to Significant — no intents yet.
+        if not self.magic_technique_active:
+            return "free"
+        if not purpose:
+            raise ValueError(
+                f"A {scope} working needs a purpose: "
+                f"{', '.join(p.id for p in pi.purposes)}."
+            )
+        if pi.purpose(purpose) is None:
+            raise ValueError(f"'{purpose}' is not a purpose.")
+        if self.readied_intents is None:
+            raise ValueError(
+                "Ready your intents for this session before a Significant or "
+                "Major working."
+            )
+        return "intent" if self.readied_intents.get(purpose, 0) > 0 else "spark"
+
+    def pay_intent_cost(self, purpose: Optional[str], scope: str,
+                        ruleset: MergedRuleset) -> str:
+        """Pay for a working the engine has accepted, and report what was paid.
+
+        Spends one readied intent when the cost is "intent". When it is
+        "spark", the caller spends the Sparks — Spark spending is tracked by
+        the session (Spark flow, peer awards), so it stays where it lives.
+        """
+        cost = self.intent_cost(purpose, scope, ruleset)
+        if cost == "intent":
+            self.readied_intents[purpose] -= 1
+        return cost
 
     def select_technique(
         self, technique_id: str, ruleset: MergedRuleset, choice: Optional[str] = None
@@ -755,11 +861,6 @@ class Character(BaseModel):
         cross-training character choosing from Soul's tree picks Soul domains
         (PHB II.3 — "choosing from that Facet's domain list").
 
-        Lineage Gifts are excluded. A setting's blood-magic sits in the same
-        catalog — it is a domain in every respect — but it is not something a
-        character can decide to learn, so it never appears on a Technique's
-        shopping list. A Soul mage in Shattered Origin cannot pick "Crystal";
-        an Orthaen is born to it, and it formalizes on its own (PHB II.5).
         """
         if not ruleset.magic or facet_id is None:
             return []
@@ -767,7 +868,7 @@ class Character(BaseModel):
             "soul": ruleset.magic.soul_domains,
             "mind": ruleset.magic.mind_domains,
         }
-        return [d for d in pools.get(facet_id, []) if not d.lineage_gift]
+        return pools.get(facet_id, [])
 
     def _validate_domain_choice(
         self, tech_def, choice: str, ruleset, technique_id: str
@@ -917,6 +1018,8 @@ class Character(BaseModel):
         # Lineage (II.5). `lineage` is written only when it is not the default,
         # so every .fof already in the repo round-trips byte-identical; `gifted`
         # rides with it because the pair is meaningless apart.
+        if self.readied_intents is not None:
+            char_block["readied_intents"] = dict(self.readied_intents)
         if self.lineage != "human":
             char_block["lineage"] = self.lineage
             char_block["gifted"] = self.gifted
@@ -1045,6 +1148,7 @@ class Character(BaseModel):
             technique_choices=char_block.get("technique_choices") or {},
             background_id=char_block.get("background_id"),
             specialty=char_block.get("specialty"),
+            readied_intents=char_block.get("readied_intents"),
             lineage=char_block.get("lineage") or "human",
             gifted=bool(char_block.get("gifted", False)),
             domain_source=char_block.get("domain_source"),
@@ -1126,7 +1230,7 @@ def create_default_character(
             "(human); others come from a setting Facet."
         ]
     if gifted:
-        if not lin.gift_domains:
+        if not lin.is_gifted:
             return None, [
                 f"Lineage '{lineage}' is ungifted — it carries no Gift to "
                 "take. An ungifted lineage's members are simply not gifted; "
@@ -1134,15 +1238,33 @@ def create_default_character(
             ]
         if magic_domain is None:
             return None, [
-                f"A gifted {lin.name} character must name which domain their "
-                f"blood carries: {', '.join(lin.gift_domains)}."
+                f"A gifted {lin.name} character chooses which domain their "
+                "gift is (II.5): any Soul or Mind domain that is not Prismatic."
             ]
-        if magic_domain not in lin.gift_domains:
+        # D24: the player chooses the domain. The lineage colours the gift;
+        # it does not pick it — unless a setting has deliberately narrowed it.
+        domain_def = ruleset.magic.get_domain(magic_domain) if ruleset.magic else None
+        if domain_def is None:
             return None, [
-                f"'{magic_domain}' is not a Gift of lineage '{lineage}'. "
-                f"Its blood carries: {', '.join(lin.gift_domains)}."
+                f"'{magic_domain}' is not a domain in this game's catalog. A "
+                "gift is one of the existing domains, chosen by the player."
+            ]
+        if domain_def.type == "broad":
+            return None, [
+                f"'{domain_def.name}' is a Prismatic territory, and nobody is "
+                "born holding one — they are reached through Ascendant Domain "
+                "(Tier 3). Choose a Focused or Standard domain."
+            ]
+        if lin.gift_domains and magic_domain not in lin.gift_domains:
+            return None, [
+                f"This setting narrows the {lin.name} gift to: "
+                f"{', '.join(lin.gift_domains)}. '{magic_domain}' is not one."
             ]
         domain_source = "lineage"
+        # Blood is not study: a gift is cast intuitively (Spirit + Attune)
+        # whatever the chosen domain's own tradition, or a gift that happened
+        # to be a Mind domain would roll Knowledge like a library education.
+        resolved_magic_tradition = "intuitive"
 
     # Apply Background
     bg = ruleset.get_background(background_id) if background_id else None
@@ -1196,7 +1318,7 @@ def create_default_character(
             resolved_magic_domain = magic_domain
             if domain_source is None:
                 domain_source = "background"
-            if ruleset.magic:
+            if ruleset.magic and domain_source != "lineage":
                 domain_def = ruleset.magic.get_domain(magic_domain)
                 if domain_def:
                     resolved_magic_tradition = domain_def.tradition

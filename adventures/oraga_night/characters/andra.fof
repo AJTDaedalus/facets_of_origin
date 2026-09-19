@@ -44,7 +44,7 @@ character:
   technique_choices: {}
   specialty: The collected history of House Boranis — every public fact and most of the private
     ones, held in memory and lattice.
-  magic_domain: crystal
+  magic_domain: inscription
   magic_tradition: intuitive
   magic_technique_active: false
   inventory:

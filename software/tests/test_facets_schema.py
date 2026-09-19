@@ -980,6 +980,7 @@ class TestLineageDefinition:
 
     def test_minimal_ungifted_lineage(self):
         lin = LineageDefinition(id="human", name="Human", description="The default.")
+        assert lin.gift is None
         assert lin.gift_domains == []
         assert lin.gift_rate is None
         assert lin.heritage is None
@@ -1003,15 +1004,39 @@ class TestLineageDefinition:
             LineageDefinition(id="x", name="X", description="d",
                               formalizes_on="whenever")
 
-    def test_a_gifted_lineage_carries_domains_a_rate_and_a_heritage(self):
+    def test_a_gifted_lineage_carries_a_gift_a_rate_and_a_heritage(self):
+        """D24: the lineage says how its gift shows up in these people; the
+        player chooses which domain it is."""
         lin = LineageDefinition(
             id="orthaen", name="Orthaen", variants=["Orthain"],
-            description="Crystal-growers.", gift_domains=["crystal"],
+            description="Crystal-growers.",
+            gift="Shows itself through grown crystal.",
             gift_rate="four in five",
             heritage="Reads grown crystalwork: its age, its maker's hand.",
         )
-        assert lin.gift_domains == ["crystal"]
-        assert lin.gift_rate == "four in five"
+        assert lin.gift == "Shows itself through grown crystal."
+        assert lin.gift_domains == [], "empty restriction = any domain"
+        assert lin.is_gifted is True
+
+    def test_an_ungifted_lineage_has_no_gift(self):
+        lin = LineageDefinition(id="human", name="Human", description="d")
+        assert lin.gift is None
+        assert lin.is_gifted is False
+
+    def test_a_setting_may_still_narrow_the_choice(self):
+        """Players choose by default. A setting that wants to may name a short
+        list, and that is data rather than a special case."""
+        lin = LineageDefinition(id="x", name="X", description="d",
+                                gift="Through the sea.",
+                                gift_domains=["storm", "the_tide"])
+        assert lin.gift_domains == ["storm", "the_tide"]
+
+    def test_a_restriction_without_a_gift_is_rejected(self):
+        """A domain list on an ungifted lineage is a contradiction, and it is
+        the kind that silently does nothing."""
+        with pytest.raises(ValidationError):
+            LineageDefinition(id="x", name="X", description="d",
+                              gift_domains=["storm"])
 
     def test_variants_default_to_empty(self):
         assert LineageDefinition(id="x", name="X", description="d").variants == []
@@ -1055,30 +1080,80 @@ class TestItemDefinition:
                            effect="...")
 
 
-class TestDomainSettingFlags:
-    def test_lineage_gift_defaults_false(self):
+class TestDomainCarriesNoSettingFlags:
+    """D24: a setting's gifts are the player's choice of an existing domain,
+    so there are no gift-only domains and no flags to mark them. The two flags
+    the custom-domain draft introduced are gone; a setting that writes them
+    must fail at load rather than carry dead data."""
+
+    def test_lineage_gift_is_not_a_domain_field(self):
+        from app.facets.schema import MagicDomainDef
+        assert "lineage_gift" not in MagicDomainDef.model_fields
+
+    def test_draft_is_not_a_domain_field(self):
+        from app.facets.schema import MagicDomainDef
+        assert "draft" not in MagicDomainDef.model_fields
+
+    def test_a_plain_domain_still_loads(self):
         from app.facets.schema import MagicDomainDef
         d = MagicDomainDef(id="fire", name="Fire", type="focused",
                            tradition="intuitive", description="...")
-        assert d.lineage_gift is False
-        assert d.draft is False
+        assert d.id == "fire"
 
-    def test_a_gift_domain_marks_itself(self):
-        """`lineage_gift` is what keeps a setting's blood-magic out of the
-        core's Tier 1 shopping list — a Soul mage in Shattered Origin cannot
-        pick "Crystal"."""
-        from app.facets.schema import MagicDomainDef
-        d = MagicDomainDef(id="crystal", name="Crystal", type="focused",
-                           tradition="intuitive", description="...",
-                           lineage_gift=True, draft=True)
-        assert d.lineage_gift is True
-        assert d.draft is True
 
-    def test_draft_is_a_flag_not_a_gate(self):
-        """`draft: true` says the owner has not read the example intents yet.
-        It must not stop the domain loading, or the Facet cannot be tested
-        before it is approved."""
-        from app.facets.schema import MagicDomainDef
-        d = MagicDomainDef(id="x", name="X", type="focused",
-                           tradition="intuitive", description="...", draft=True)
-        assert d.id == "x"
+# ---------------------------------------------------------------------------
+# Prepared intents (D23 — supersedes D17)
+# ---------------------------------------------------------------------------
+
+class TestPreparedIntentsDef:
+    """Significant and Major magic spends a readied intent of the matching
+    purpose; Minor is free. The purposes, the capacity and the off-purpose
+    price are data, so a setting can tune them without touching the engine.
+    """
+
+    def _purposes(self):
+        from app.facets.schema import IntentPurposeDef
+        return [IntentPurposeDef(id=i, label=i.title(), description="...")
+                for i in ("harm", "ward", "mend", "shape", "reveal")]
+
+    def test_defaults_are_the_ruling(self):
+        from app.facets.schema import PreparedIntentsDef
+        pi = PreparedIntentsDef(purposes=self._purposes())
+        assert pi.capacity == 3
+        assert pi.free_scopes == ["minor"]
+        assert pi.off_purpose_spark_cost == 1
+
+    def test_capacity_must_be_positive(self):
+        from app.facets.schema import PreparedIntentsDef
+        with pytest.raises(ValidationError):
+            PreparedIntentsDef(purposes=self._purposes(), capacity=0)
+
+    def test_a_free_scope_must_be_a_real_scope(self):
+        from app.facets.schema import PreparedIntentsDef
+        with pytest.raises(ValidationError):
+            PreparedIntentsDef(purposes=self._purposes(), free_scopes=["huge"])
+
+    def test_purposes_are_required(self):
+        """A limit with nothing to ready is not a limit; it is a lock."""
+        from app.facets.schema import PreparedIntentsDef
+        with pytest.raises(ValidationError):
+            PreparedIntentsDef(purposes=[])
+
+    def test_purpose_ids_are_unique(self):
+        from app.facets.schema import IntentPurposeDef, PreparedIntentsDef
+        dup = [IntentPurposeDef(id="harm", label="Harm", description="."),
+               IntentPurposeDef(id="harm", label="Harm", description=".")]
+        with pytest.raises(ValidationError):
+            PreparedIntentsDef(purposes=dup)
+
+    def test_the_base_ruleset_ships_the_five_purposes(self, ruleset):
+        pi = ruleset.magic.prepared_intents
+        assert pi is not None
+        assert [p.id for p in pi.purposes] == ["harm", "ward", "mend", "shape", "reveal"]
+        assert pi.capacity == 3
+
+    def test_magic_without_the_section_has_no_limit(self):
+        """None means unlimited: the pre-D23 game, which a setting may still
+        choose. The section is a rule, not a mandatory field."""
+        from app.facets.schema import MagicDef
+        assert MagicDef().prepared_intents is None

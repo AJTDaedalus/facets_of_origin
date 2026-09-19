@@ -511,6 +511,16 @@ And say it in the fiction, not in the mechanics. Not "you take a complication, t
 
 (For the other end of the range, the 6- templates in II.3 are a separate toolkit and a genuinely good one. Different problem, different sidebar.)
 
+### Calling a Full Rest
+
+Readied intents come back after a full rest, and whether the party has had one is your call (II.3, *Readied Intents*). That is the one lever the magic system hands you directly, and it is worth using deliberately.
+
+**Default:** a full rest is a night's sleep somewhere the party can actually sleep. Most sessions contain none, and the start of the next session refreshes everyone anyway.
+
+**The dial:** grant one more readily — a quiet afternoon in a safe house — or less — a night on watch in hostile country is not rest.
+
+**The cost of turning it:** grant rests freely and readied intents stop being a guess, which is the only thing they are for; the party will simply ready what the last scene needed. Withhold them entirely and a caster's big magic becomes something that happens once per session, which is a smaller game than the one on the page. Say the call out loud, before anyone readies, so the table knows what the next stretch costs.
+
 ### Magic Against Active Opposition
 
 **Active opposition counts as at least Standard difficulty for magical actions.** That is the whole rule, and it is worth understanding precisely, because it is narrower than it first appears.

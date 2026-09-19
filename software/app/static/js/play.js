@@ -1717,6 +1717,10 @@ function renderMagicPanel() {
   }
 
   panel.classList.remove('hidden');
+  renderReadiedIntents();
+  document.querySelectorAll('input[name="magic-scope"]').forEach(r => {
+    r.addEventListener('change', renderPurposeSelect);
+  });
 
   // Domain name and type
   const domainName = state.character.magic_domain.replace(/_/g, ' ');
@@ -1828,6 +1832,130 @@ function updateMagicDifficultyPreview() {
   preview.textContent = 'Base difficulty: ' + difficulty + notes;
 }
 
+// ---------------------------------------------------------------------------
+// Readied intents (D23). Every rule is the server's; this renders state and
+// sends choices. Purposes, capacity and the off-purpose price are read from
+// the ruleset, so a setting that retunes them needs no client change.
+// ---------------------------------------------------------------------------
+
+function preparedIntents() {
+  const magic = (state.ruleset && state.ruleset.magic) || {};
+  return magic.prepared_intents || null;
+}
+
+function renderReadiedIntents() {
+  const wrap = document.getElementById('magic-readied-wrap');
+  const pi = preparedIntents();
+  const ch = state.character;
+  if (!wrap || !ch) return;
+  // Readied intents begin at formalization; before it, magic is Minor only.
+  const applies = Boolean(pi && ch.magic_domain && ch.magic_technique_active);
+  wrap.classList.toggle('hidden', !applies);
+  if (!applies) { renderPurposeSelect(); return; }
+
+  const pips = document.getElementById('magic-readied-pips');
+  const form = document.getElementById('magic-ready-form');
+  const readied = ch.readied_intents;
+  if (readied === null || readied === undefined) {
+    pips.textContent = 'Not readied yet — choose how to spread your ' + pi.capacity + '.';
+    form.classList.remove('hidden');
+    const inputs = document.getElementById('magic-ready-inputs');
+    inputs.innerHTML = '';
+    pi.purposes.forEach(p => {
+      const row = document.createElement('label');
+      row.style.display = 'inline-block';
+      row.style.marginRight = '8px';
+      row.title = p.description;
+      row.innerHTML = `${p.label} <input type="number" min="0" max="${pi.capacity}" value="0"
+        data-purpose="${p.id}" class="ready-intent-input" style="width:3em;">`;
+      inputs.appendChild(row);
+    });
+    inputs.querySelectorAll('input').forEach(i => i.oninput = updateReadyRemaining);
+    updateReadyRemaining();
+  } else {
+    form.classList.add('hidden');
+    pips.innerHTML = pi.purposes.map(p => {
+      const n = readied[p.id] || 0;
+      return `<span title="${p.description}" style="margin-right:10px;">${p.label} `
+        + '●'.repeat(n) + (n ? '' : '—') + '</span>';
+    }).join('');
+  }
+  renderPurposeSelect();
+}
+
+function updateReadyRemaining() {
+  const pi = preparedIntents();
+  const total = [...document.querySelectorAll('.ready-intent-input')]
+    .reduce((a, i) => a + (parseInt(i.value, 10) || 0), 0);
+  const el = document.getElementById('magic-ready-remaining');
+  if (el && pi) el.textContent = `${total} of ${pi.capacity}`;
+}
+
+function submitReadyIntents() {
+  const allocation = {};
+  document.querySelectorAll('.ready-intent-input').forEach(i => {
+    const n = parseInt(i.value, 10) || 0;
+    if (n > 0) allocation[i.dataset.purpose] = n;
+  });
+  sendWS({ type: 'ready_intents', allocation });
+}
+
+function renderPurposeSelect() {
+  const wrap = document.getElementById('magic-purpose-wrap');
+  const select = document.getElementById('magic-purpose');
+  const pi = preparedIntents();
+  const ch = state.character;
+  if (!wrap || !select || !ch) return;
+  const scope = (document.querySelector('input[name="magic-scope"]:checked') || {}).value || 'minor';
+  const needsPurpose = Boolean(pi && ch.magic_technique_active
+                               && !pi.free_scopes.includes(scope));
+  wrap.classList.toggle('hidden', !needsPurpose);
+  if (!needsPurpose) return;
+  const current = select.value;
+  select.innerHTML = '';
+  pi.purposes.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.id;
+    const n = (ch.readied_intents || {})[p.id] || 0;
+    opt.textContent = `${p.label} (${n} readied)`;
+    select.appendChild(opt);
+  });
+  if (current) select.value = current;
+  const chosen = select.value;
+  const left = (ch.readied_intents || {})[chosen] || 0;
+  document.getElementById('magic-purpose-cost').textContent = left > 0
+    ? 'Spends one readied ' + chosen + ' intent.'
+    : `Nothing readied for ${chosen} — costs ${pi.off_purpose_spark_cost} Spark.`;
+  select.onchange = renderPurposeSelect;
+}
+
+function onIntentsReadied(msg) {
+  if (state.allCharacters[msg.player]) {
+    state.allCharacters[msg.player].readied_intents = msg.readied_intents;
+  }
+  if (msg.player === state.playerName && state.character) {
+    state.character.readied_intents = msg.readied_intents;
+    renderReadiedIntents();
+    addSystemChat('Intents readied.');
+  }
+}
+
+function onIntentsRefreshed(msg) {
+  (msg.characters || []).forEach(pn => {
+    if (state.allCharacters[pn]) state.allCharacters[pn].readied_intents = null;
+  });
+  if (state.character && (msg.characters || []).includes(state.playerName)) {
+    state.character.readied_intents = null;
+    renderReadiedIntents();
+  }
+  addSystemChat('A full rest — casters may ready their intents again.');
+}
+
+/** MM only: the party has had a full rest. */
+function callFullRest() {
+  sendWS({ type: 'full_rest' });
+}
+
 function performCast() {
   if (!state.character || !state.character.magic_domain) return;
 
@@ -1845,11 +1973,16 @@ function performCast() {
     return;
   }
 
+  const purposeWrap = document.getElementById('magic-purpose-wrap');
+  const purpose = (purposeWrap && !purposeWrap.classList.contains('hidden'))
+    ? document.getElementById('magic-purpose').value : undefined;
+
   sendWS({
     type: 'cast',
     domain_id: domainId,
     scope,
     intent,
+    purpose,
     spark_use: sparkUse || undefined,
   });
 }
@@ -2058,14 +2191,18 @@ function onCastResult(msg) {
   });
   renderPlayRollLog();
 
-  // Update sparks
+  // Update sparks, and what the working cost (D23)
   if (msg.player === state.playerName && state.character) {
     state.character.sparks = msg.sparks_remaining;
+    if ('readied_intents' in msg) state.character.readied_intents = msg.readied_intents;
     renderPlaySparkCounter();
+    renderReadiedIntents();
   }
 
   const casterName = (state.allCharacters[msg.player] || {}).name || msg.player;
-  const techStr = msg.technique_active ? '' : ' (pre-technique)';
+  const techStr = (msg.technique_active ? '' : ' (pre-technique)')
+    + (msg.intent_cost === 'intent' ? ` · spent a readied ${msg.purpose} intent`
+       : msg.intent_cost === 'spark' ? ` · off-purpose (${msg.purpose}), paid a Spark` : '');
   addSystemChat(casterName + ' casts ' + msg.domain_id.replace(/_/g, ' ') + ' [' + msg.scope + ']: ' + roll.outcome_label + techStr);
 
   checkGracefulFailPrompt({ ...msg, character_name: casterName, roll });

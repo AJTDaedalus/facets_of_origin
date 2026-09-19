@@ -579,6 +579,13 @@ function handleServerMessage(msg) {
     case 'cast_result':
       onCastResult(msg);
       break;
+    // D23: readied intents
+    case 'intents_readied':
+      onIntentsReadied(msg);
+      break;
+    case 'intents_refreshed':
+      onIntentsRefreshed(msg);
+      break;
     case 'saving_throw_result':
       onSavingThrowResult(msg);
       break;
@@ -780,22 +787,35 @@ function onLineageChanged() {
   const bits = [lin.description];
   // The rate is fiction and a prompt, never a roll — so it is shown as the
   // entry prints it rather than turned into a number.
-  if (lin.gift_rate) bits.push(`Gift: ${lin.gift_rate} carry it.`);
+  if (lin.gift) bits.push(`Gift: ${lin.gift}`);
+  if (lin.gift_rate) bits.push(`(${lin.gift_rate} carry it.)`);
   if (lin.heritage) bits.push(`Heritage: ${lin.heritage}`);
   infoEl.textContent = bits.join(' ');
 
-  const gifts = lin.gift_domains || [];
-  giftWrap.classList.toggle('hidden', gifts.length === 0);
+  // D24: the lineage colours the gift; the player chooses the domain. Any
+  // non-Prismatic Soul or Mind domain, unless the setting has narrowed it.
+  const gifted = Boolean(lin.gift);
+  giftWrap.classList.toggle('hidden', !gifted);
   giftSelect.innerHTML = '<option value="">-- ungifted --</option>';
-  gifts.forEach(id => {
-    const domain = findDomainById(id);
-    const opt = document.createElement('option');
-    opt.value = id;
-    opt.textContent = domain ? domain.name : id;
-    giftSelect.appendChild(opt);
-  });
+  if (gifted) {
+    eligibleGiftDomains(lin).forEach(domain => {
+      const opt = document.createElement('option');
+      opt.value = domain.id;
+      opt.textContent = domain.name;
+      giftSelect.appendChild(opt);
+    });
+  }
   giftSelect.onchange = onBackgroundChanged;
   onBackgroundChanged();
+}
+
+/** Every domain a gifted character of this lineage may choose (D24). */
+function eligibleGiftDomains(lin) {
+  const magic = state.ruleset.magic || {};
+  const pool = [...(magic.soul_domains || []), ...(magic.mind_domains || [])]
+    .filter(d => d.type !== 'broad');
+  const narrowed = lin.gift_domains || [];
+  return narrowed.length ? pool.filter(d => narrowed.includes(d.id)) : pool;
 }
 
 function findDomainById(id) {

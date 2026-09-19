@@ -986,7 +986,7 @@ Recorded from the Brain fun audit (`docs/RESEARCH_fun_audit_2026-09.md`) and the
 
 **Where the gap is:** versatility outside combat, not power. If a human playtest shows casters holding more spotlight than martials, the fix is on the martial side (audit R3 Strike riders, R5 Body signatures), never a limit on magic. MM2's adjudication guidance (name the 7–9 cost; judge scope honestly) is load-bearing and goes on every scene card.
 
-**Status:** ✅ Decided. Do not reopen without human-playtest evidence.
+**Status:** ⛔ **Superseded by D23** (owner, 2026-09-18). Kept for its reasoning, which D23 answers rather than discards: D17's own "where the gap is" paragraph named the problem D23 fixes.
 
 ### D18 — Lineage is a core creation step; a lineage Gift is a domain that formalizes free at the first Facet level *(owner rulings, 2026-09-08)*
 
@@ -1000,7 +1000,7 @@ Recorded from the Brain fun audit (`docs/RESEARCH_fun_audit_2026-09.md`) and the
 
 | Ruling | Decision |
 |---|---|
-| Val'loh has domains | Yes. "No domains / gifts are flair / nobody casts in a crisis" (prior model) retired. Gifts are custom Focused domains; spellforms are the scholarly tradition as written; crystal charges are one-use items. |
+| Val'loh has domains | Yes. "No domains / gifts are flair / nobody casts in a crisis" (prior model) retired. ~~Gifts are custom Focused domains~~ — **superseded by D24: a gift is the player's choice of an existing domain.** Spellforms are the scholarly tradition as written; crystal charges are one-use items. |
 | The Bought hold the gate | Yes. The Bestiary's contract company, hired through an intermediary, set the diversion fires and hold the gatehouse from first bell to last, with a Second Clause about a woman in Thenya wool. New canon. |
 | "Old coin" | Kept as a deliberate red herring pointing at Vell; the aftermath can untangle it, never confirm it. |
 | The prelude | Cut. The module opens on the approach and the line, Movement I. |
@@ -1064,3 +1064,39 @@ Solo Guardian median 2 → **3**, mean 2.68, win rate still 100%, Sparks 5.87, p
 **Corollary, from the same two series:** free reactions are not defensive in this system. Three were measured — R3's Cover, the Guardian's old no-clear-Open Special, the Thenya Bond's reaction clause — and two were cut. Waiving a reaction cost preserves Endurance, high Endurance drives aggressive postures, and aggressive postures shorten fights. **Assume anything that waives a reaction cost is an offensive buff until a simulation says otherwise.**
 
 **Status:** ✅ Decided.
+
+### D24 — A gift is the player's choice of an existing domain *(owner ruling, 2026-09-18)*
+
+**Decision:** "No need to map tribes to domains, let players choose." A gifted lineage carries one line saying how its gift **shows itself** in that people — *through grown crystal*, *as a prickle before danger* — and the **player chooses which domain it is**: any Soul or Mind domain in the core catalog that is not Prismatic. Gifts are always cast in the **intuitive** tradition (Spirit + Attune), whatever the chosen domain's own tradition, because blood is not study.
+
+**What this reverses.** The ten custom Val'loh domains (Crystal, Warning, The Bond, Blade-bond, Stone-flesh, Dream, Wildspeech, The Weave, Mindshare, Resonance of Stone), their thirty example intents, and the `lineage_gift` / `draft` domain flags are gone. The owner's reasoning: one domain per tribe counters the flexibility the magic system was built for — it turns ten peoples into ten fixed classes. D19's row "Gifts are custom Focused domains" is superseded; D18 stands otherwise.
+
+**What remains a setting's option.** `gift_domains` survives as an optional restriction list. Empty is the default and the norm; a setting that genuinely wants a people narrower may name a short list, and it is data rather than a special case.
+
+**Effect on Val'loh:** the counted-novelty line is now *ten Lineages and crystal charges; no new domains, no rule changes*, machine-checked (INV-17). Val'loh writes nothing into `magic` at all.
+
+**Status:** ✅ Decided and shipped.
+
+### D23 — Significant and Major magic is prepared for; Minor is free *(owner ruling, 2026-09-18 — supersedes D17)*
+
+**Problem, in the owner's words:** "If players can use magic indiscriminately they can use it to fix anything. Let's find a way to limit its use without the complexity of preparing spells." D17 had already located it — *"the gap is versatility outside combat, not power"* — and chose to fix it on the martial side. The owner reopened it on the magic side.
+
+**Decision — readied intents** (the owner's own idea, refined):
+
+- Every intent has one of five broad **purposes**: Harm · Ward · Mend · Shape · Reveal.
+- **Minor scope is free** and unlimited. Small magic is what makes a caster feel like one, and it is not what breaks a campaign.
+- A caster whose magic has formalized **readies three intents** at the start of each session, spread across the purposes as they choose. A **Significant or Major** working spends one of its purpose. The domain and what the magic actually does are still chosen in the moment — only the *shape* was committed.
+- Nothing readied for the purpose → the working costs **a Spark** instead, and that Spark buys nothing else.
+- Readied intents return after a **full rest, which the MM calls**, or at the next session. They cannot be re-readied until then.
+- A spent intent stays spent whatever the roll: the commitment is what is paid for.
+- **Formalization is what grants them**, so pre-Technique casters are unaffected (Minor only, with the existing Spark push to Significant) and the Tier 1 Technique finally has a concrete payoff beyond scope.
+
+**Alternatives weighed** (mechanics are not copyrightable; licences noted for quoting): a shrinking *usage die* (The Black Hack, OGL) — the runner-up, zero prep but a random budget; *Endurance as cost* (Cairn CC BY-SA 4.0, Blades stress CC BY 3.0) — rejected because Endurance has no out-of-combat refresh, so it limits fights and not the problem; *spells as charged items* (Knave, CC BY 4.0) — Val'loh's crystals already do this; *7–9 backlash menus* (Dungeon World, CC BY 3.0) — price each cast but do not cap them; *spell slots* (SRD 5.1, CC BY 4.0) — the complexity the owner ruled out.
+
+**Why it holds.** The limit comes from guessing: a party that readied Harm and Ward and walks into a negotiation has no Reveal. That preserves every bit of the in-the-moment invention Domain + Intent + Scope was built for — the thing slots would have destroyed — while making "the caster fixes everything" cost a prediction.
+
+**What it does not change.** Per-roll difficulty, the 7–9 costs, and the Series 11 casting curves are untouched; this limits how *many* large workings happen, not how well each one goes. No combat simulation was run, because the simulator models no casters — the effect is on session-level versatility, and **three is a design number to be tested at a human table**, not a simulated one.
+
+**Data:** `magic.prepared_intents` in `facet.yaml` — purposes, capacity, free scopes and the off-purpose price are all data, and a setting may drop the section to restore the unlimited game.
+
+**Status:** ✅ Decided and shipped.

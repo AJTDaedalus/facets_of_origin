@@ -5181,3 +5181,183 @@ class TestUseItem:
             msg = ws.receive_json()
         assert msg["type"] == "error"
         assert "Nobody" in msg["message"]
+
+
+class TestReadiedIntentsOverTheWire:
+    """D23 through the socket. Readying is a player event; a full rest is the
+    MM's call; a cast carries its purpose and reports what it cost. Every rule
+    is the character model's — the handlers route and report.
+    """
+
+    def _mage(self, session_id, formalized=True, sparks=3):
+        char = session_store.get(session_id).characters["Zahna"]
+        char.magic_domain = "inscription"
+        char.magic_technique_active = formalized
+        char.sparks = sparks
+        char.readied_intents = None
+        return char
+
+    def _cast(self, ws, scope, purpose=None, **extra):
+        msg = {"type": "cast", "domain_id": "inscription", "scope": scope,
+               "intent": "test"}
+        if purpose is not None:
+            msg["purpose"] = purpose
+        msg.update(extra)
+        ws.send_json(msg)
+        return ws.receive_json()
+
+    # -- readying ----------------------------------------------------------
+
+    def test_a_player_readies_their_intents(self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            ws.send_json({"type": "ready_intents",
+                          "allocation": {"harm": 2, "reveal": 1}})
+            msg = ws.receive_json()
+        assert msg["type"] == "intents_readied"
+        assert msg["readied_intents"] == {"harm": 2, "reveal": 1}
+        assert char.readied_intents == {"harm": 2, "reveal": 1}
+
+    def test_over_capacity_is_refused_and_changes_nothing(self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            ws.send_json({"type": "ready_intents",
+                          "allocation": {"harm": 4}})
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert char.readied_intents is None
+
+    def test_an_unformalized_caster_is_told_why(self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        self._mage(sid, formalized=False)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            ws.send_json({"type": "ready_intents", "allocation": {"harm": 1}})
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert "formaliz" in msg["message"]
+
+    # -- casting -------------------------------------------------------------
+
+    def test_minor_casts_without_readying(self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        self._mage(sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._cast(ws, "minor")
+        assert msg["type"] == "cast_result"
+        assert msg["intent_cost"] == "free"
+
+    def test_significant_spends_the_matching_intent(self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        char.readied_intents = {"harm": 2}
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._cast(ws, "significant", purpose="harm")
+        assert msg["type"] == "cast_result"
+        assert msg["intent_cost"] == "intent"
+        assert msg["purpose"] == "harm"
+        assert msg["readied_intents"] == {"harm": 1}
+        assert char.sparks == 3
+
+    def test_off_purpose_costs_a_spark(self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        char.readied_intents = {"harm": 2}
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._cast(ws, "significant", purpose="reveal")
+        assert msg["type"] == "cast_result"
+        assert msg["intent_cost"] == "spark"
+        assert char.sparks == 2
+        assert char.readied_intents == {"harm": 2}
+
+    def test_off_purpose_with_no_spark_is_refused_and_costs_nothing(
+            self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, sparks=0)
+        char.readied_intents = {"harm": 2}
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._cast(ws, "significant", purpose="reveal")
+        assert msg["type"] == "error"
+        assert "reveal" in msg["message"].lower()
+        assert char.readied_intents == {"harm": 2}
+
+    def test_off_purpose_and_a_dice_spark_need_two(self, client, session_with_character):
+        """The two Spark costs are separate: one buys the working, one buys
+        the dice. Holding one Spark covers only one of them."""
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, sparks=1)
+        char.readied_intents = {"harm": 1}
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._cast(ws, "significant", purpose="reveal",
+                             spark_use="improve_roll")
+        assert msg["type"] == "error"
+        assert char.sparks == 1
+
+    def test_a_significant_cast_without_readying_prompts(self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._cast(ws, "significant", purpose="harm")
+        assert msg["type"] == "error"
+        assert "ready" in msg["message"].lower()
+        assert char.sparks == 3
+
+    # -- resting ------------------------------------------------------------
+
+    def test_the_mm_calls_a_full_rest(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        char.readied_intents = {"harm": 0}
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, sid)
+            ws.send_json({"type": "full_rest"})
+            msg = ws.receive_json()
+        assert msg["type"] == "intents_refreshed"
+        assert "Zahna" in msg["characters"]
+        assert char.readied_intents is None
+
+    def test_a_player_cannot_call_a_rest(self, client, session_with_character):
+        """When the party has rested is the MM's call — it is the lever that
+        makes the limit fictional rather than a clock."""
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        char.readied_intents = {"harm": 0}
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            ws.send_json({"type": "full_rest"})
+            ws.send_json({"type": "ready_intents", "allocation": {"harm": 1}})
+            msg = ws.receive_json()
+        assert msg["type"] == "error", "the player's rest went through"
+        assert char.readied_intents == {"harm": 0}
+
+    def test_a_new_session_refreshes_intents(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        char.readied_intents = {"harm": 0}
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, sid)
+            ws.send_json({"type": "session_reset"})
+            ws.receive_json()
+        assert char.readied_intents is None
