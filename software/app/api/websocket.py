@@ -404,6 +404,11 @@ def _build_roll_request(
         difficulty_label=difficulty,
         sparks_spent=0,  # sparks are tracked separately via _spend_sparks
         press=press,
+        # N5: Borrowed Trouble is offered on any roll the MM prices, and III.1
+        # says in print that it stacks with Press — which only a Strike has.
+        # Wiring it only to the generic roll handler made the book's own
+        # 5d6-drop-three example impossible at the table.
+        borrowed_trouble=bool(msg.get("borrowed_trouble")),
         description=str(msg.get("description", ""))[:200],
     ), technique_step
 
@@ -465,7 +470,7 @@ async def _handle_roll(
 
     result = resolve_roll(request, session.ruleset)
     result_dict = roll_result_to_dict(result)
-    session.record_roll(player_name, result_dict)
+    _record_roll(session, player_name, result_dict)
 
     # Auto-mark skill as used this session (PHB II.4 advancement rule)
     used_skill = msg.get("skill_id")
@@ -516,6 +521,19 @@ async def _handle_act_break(msg: dict, session, session_id: str) -> None:
         "type": "act_break_opened",
         "message": "Act break — nominate a player for something they did this scene.",
     })
+
+
+def _record_roll(session, player_name: str, roll_dict: dict) -> None:
+    """Apply the natural 2's automatic Graceful Fail, then log the roll.
+
+    Every rolling handler goes through here so the rule cannot be true on one
+    path and false on another — which is how the Specialty step and Borrowed
+    Trouble each ended up half-wired. The award rides on the roll payload the
+    handler is about to broadcast, so the table sees the Spark with the roll
+    that earned it rather than in a race before it.
+    """
+    session.confirm_natural_two_graceful_fail(player_name, roll_dict)
+    session.record_roll(player_name, roll_dict)
 
 
 async def _handle_claim_graceful_fail(msg: dict, session, session_id: str, caller: str) -> None:
@@ -639,8 +657,16 @@ async def _handle_skill_advance(msg: dict, session, session_id: str) -> None:
                 "message": character.cap_refusal_reason(skill_id, session.ruleset),
             })
             return
+        # N4: advance_skill also refuses a batch bigger than the cap can
+        # absorb, so the point is only spent once the marks are known to land.
+        # Deducting first was how an over-cap batch cost a point and dropped
+        # the overflow in silence.
+        try:
+            result = character.advance_skill(skill_id, marks, session.ruleset)
+        except ValueError as e:
+            await manager.broadcast(session_id, {"type": "error", "message": str(e)})
+            return
         character.session_skill_points_remaining -= sp_cost
-        result = character.advance_skill(skill_id, marks, session.ruleset)
         await manager.broadcast(session_id, {
             "type": "skill_advanced",
             "player": player_name,
@@ -876,6 +902,7 @@ async def _handle_strike(
         difficulty_label=difficulty,
         sparks_spent=sparks_to_spend,
         press=press,
+        borrowed_trouble=bool(msg.get("borrowed_trouble")),
         description=str(msg.get("description", ""))[:200],
     )
     result = resolve_roll(request, session.ruleset)
@@ -892,7 +919,7 @@ async def _handle_strike(
         result_dict["outcome_label"] = label
         result_dict["outcome_description"] = desc
 
-    session.record_roll(player_name, result_dict)
+    _record_roll(session, player_name, result_dict)
 
     # Auto-mark skill as used this session
     if skill_id and skill_id in character.skills:
@@ -1027,11 +1054,12 @@ async def _handle_react(
             skill_id=skill_id,
             skill_rank_id=character.skills[skill_id].rank if skill_id and skill_id in character.skills else None,
             difficulty_label=difficulty,
+            borrowed_trouble=bool(msg.get("borrowed_trouble")),
             description=f"{reaction} reaction",
         )
         roll = resolve_roll(request, session.ruleset)
         roll_result = roll_result_to_dict(roll)
-        session.record_roll(player_name, roll_result)
+        _record_roll(session, player_name, roll_result)
 
     # Auto-mark skill as used this session (parry uses combat skill)
     if reaction == "parry" and "combat" in character.skills:
@@ -1260,7 +1288,7 @@ async def _handle_saving_throw(
         difficulty_label=difficulty, sparks_spent=sparks_to_spend,
     )
     result_dict = roll_result_to_dict(result)
-    session.record_roll(player_name, result_dict)
+    _record_roll(session, player_name, result_dict)
 
     await manager.broadcast(session_id, {
         "type": "saving_throw_result",
@@ -1326,7 +1354,7 @@ async def _handle_cast(
         character.skills_used_this_session.add(result.request.skill_id)
 
     result_dict = roll_result_to_dict(result)
-    session.record_roll(player_name, result_dict)
+    _record_roll(session, player_name, result_dict)
 
     await manager.broadcast(session_id, {
         "type": "cast_result",
@@ -1368,7 +1396,7 @@ async def _handle_support(
     request, technique_step = _build_roll_request(character, msg, session.ruleset)
     result = resolve_roll(request, session.ruleset)
     result_dict = roll_result_to_dict(result)
-    session.record_roll(player_name, result_dict)
+    _record_roll(session, player_name, result_dict)
 
     # Auto-mark skill as used this session
     used_skill = msg.get("skill_id")
@@ -1412,7 +1440,7 @@ async def _handle_maneuver(
     request, technique_step = _build_roll_request(character, msg, session.ruleset)
     result = resolve_roll(request, session.ruleset)
     result_dict = roll_result_to_dict(result)
-    session.record_roll(player_name, result_dict)
+    _record_roll(session, player_name, result_dict)
 
     # Auto-mark skill as used this session
     used_skill = msg.get("skill_id")
@@ -1475,6 +1503,7 @@ async def _handle_contested_roll(
             skill_rank_id=(character.skills[skill_id].rank
                            if skill_id and skill_id in character.skills else None),
             difficulty_label=label,
+            borrowed_trouble=bool(msg.get("borrowed_trouble_" + suffix)),
             description=str(msg.get("description", ""))[:200],
         ), step
 
@@ -1493,8 +1522,8 @@ async def _handle_contested_roll(
     else:
         winner = "tie"
 
-    session.record_roll(player_a, dict_a)
-    session.record_roll(player_b, dict_b)
+    _record_roll(session, player_a, dict_a)
+    _record_roll(session, player_b, dict_b)
 
     await manager.broadcast(session_id, {
         "type": "contested_roll_result",

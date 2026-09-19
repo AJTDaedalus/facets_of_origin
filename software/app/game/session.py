@@ -156,6 +156,30 @@ class GameSession:
         if len(self.roll_log) > 500:
             self.roll_log = self.roll_log[-500:]
 
+    def confirm_natural_two_graceful_fail(self, player_name: str, roll_dict: dict) -> bool:
+        """III.1, the natural 2: when both kept dice show 1 and the roll
+        failed, the Graceful Fail is "confirmed without asking — no judgment
+        call, no MM discretion". Awards the Spark and marks the roll.
+
+        The marks go on the roll payload rather than into a separate event so
+        the table reads them with the roll that earned them, and so one
+        chokepoint carries the rule for every handler. Returns True when it
+        fired; the player still narrates.
+        """
+        if roll_dict.get("outcome") != "failure" or not roll_dict.get("fumble"):
+            return False
+        if roll_dict.get("graceful_fail_claimed"):
+            return False
+        character = self.characters.get(player_name)
+        if character is None:
+            return False
+        character.earn_spark()
+        self.record_spark_flow(player_name)
+        roll_dict["graceful_fail_claimed"] = True
+        roll_dict["graceful_fail_reason"] = "natural_2"
+        roll_dict["graceful_fail_sparks_now"] = character.sparks
+        return True
+
     def party_strength(self) -> int:
         """Party Strength: the sum of participating characters' career
         advances (MM1 §Party Strength). Falls back to 3 — the simulation-

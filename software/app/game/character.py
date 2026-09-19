@@ -271,6 +271,21 @@ class Character(BaseModel):
         """Award one Spark to this character."""
         self.sparks += 1
 
+    @staticmethod
+    def _marks_absorbable(state: "SkillState", marks_per_rank, ceiling: str) -> int:
+        """How many marks `state` can still take before it reaches `ceiling`.
+
+        Counts what is already banked toward the next rank, so a skill one mark
+        short of Practiced whose ceiling is Practiced absorbs exactly one more.
+        """
+        rank_order = ["novice", "practiced", "expert", "master"]
+        banked = state.marks
+        total = 0
+        for i in range(rank_order.index(state.rank), rank_order.index(ceiling)):
+            total += marks_per_rank.for_rank(rank_order[i + 1]) - banked
+            banked = 0
+        return total
+
     def _try_advance_rank(
         self, state: "SkillState", marks_to_add: int, marks_per_rank, ceiling: str = "master"
     ) -> int:
@@ -338,12 +353,12 @@ class Character(BaseModel):
             return (
                 f"'{skill_id}' cannot rise past Practiced: all {limit} of your "
                 f"{facet} skills allowed beyond Practiced are already committed "
-                f"(II.4, Advancing Skills)."
+                f"(II.4, How Far a Skill Can Go)."
             )
         if ceiling == "expert":
             return (
                 f"'{skill_id}' cannot rise past Expert: another {facet} skill "
-                f"already holds this Facet's Master slot (II.4, Advancing Skills)."
+                f"already holds this Facet's Master slot (II.4, How Far a Skill Can Go)."
             )
         return f"'{skill_id}' is already at Master."
 
@@ -440,6 +455,11 @@ class Character(BaseModel):
 
         ceiling = self.rank_ceiling_for(skill_id, ruleset)
         if marks_to_add > 0 and state.rank == ceiling:
+            raise ValueError(self.cap_refusal_reason(skill_id, ruleset))
+        # A batch that cannot land in full is refused, not truncated: the
+        # caller has already spent the session's skill point by the time we
+        # get here, and _try_advance_rank would quietly drop the overflow.
+        if marks_to_add > self._marks_absorbable(state, marks_per_rank, ceiling):
             raise ValueError(self.cap_refusal_reason(skill_id, ruleset))
 
         rank_advances = self._try_advance_rank(state, marks_to_add, marks_per_rank, ceiling)
