@@ -459,22 +459,56 @@ def _yaml_backgrounds() -> list[dict]:
     return yaml.safe_load(FACET_YAML.read_text())["backgrounds"]
 
 
-def test_guild_apprentice_specialty_matches_quick_start() -> None:
-    """rul-H1 / D4: the Quick Start text is the source of truth. II.5 had no
-    Specialty at all for Guild Apprentice, and facet.yaml carried a third,
-    different string ("Formal training in a structured discipline...") —
-    both must now equal Quick Start's wording exactly, not merge with it.
-    """
-    quick_start_text = (
-        "Artificers' Guild technical records — Standard becomes Easy when directly applicable"
-    )
-    phb_specialty = _phb_background_specialties()["Guild Apprentice"]
-    assert phb_specialty == quick_start_text
+#: Proper nouns that belong to the recurring example cast and their fiction.
+#: A pre-built Background is a template every table shares; none of these may
+#: appear in one.
+_EXAMPLE_CAST_NOUNS = ("Zahna", "Mordai", "Zulnut", "Thornwall", "Artificers")
 
-    yaml_specialty = next(
-        b["specialty"] for b in _yaml_backgrounds() if b["id"] == "guild_apprentice"
-    )
-    assert yaml_specialty.rstrip(".") == quick_start_text
+
+def test_no_background_specialty_restates_the_difficulty_mechanic() -> None:
+    """A Background's Specialty is fiction; the mechanic lives in II.5 *Specialty*.
+
+    Guild Apprentice used to carry "— Standard becomes Easy when directly
+    applicable" inline, which is the section-level rule copied into one of
+    fifteen data rows. A rule stated in fifteen places drifts in fourteen.
+    """
+    offenders = {
+        name: spec for name, spec in _phb_background_specialties().items()
+        if spec and ("becomes easy" in spec.lower() or "difficulty" in spec.lower())
+    }
+    offenders.update({
+        b["name"]: b["specialty"] for b in _yaml_backgrounds()
+        if "becomes easy" in b["specialty"].lower()
+        or "difficulty" in b["specialty"].lower()
+    })
+    assert not offenders, (
+        "These Background Specialties restate the difficulty rule that II.5's "
+        f"*Specialty* section owns: {sorted(offenders)}")
+
+
+def test_no_background_specialty_names_the_example_cast() -> None:
+    """A pre-built Background is a template, not one character's sheet.
+
+    This replaces an earlier test that pinned Guild Apprentice's Specialty to the
+    Quick Start's wording (rul-H1 / D4). That pin wrote *Zahna's* personal
+    Specialty — "Artificers' Guild technical records" — into the generic
+    Background every guild apprentice at every table shares, and the Quick Start
+    it pointed at no longer carries pregen sheets. The leak, not the wording, is
+    what needs guarding: example-cast detail must stay in vignettes.
+    """
+    offenders = []
+    for name, spec in _phb_background_specialties().items():
+        for noun in _EXAMPLE_CAST_NOUNS:
+            if spec and noun in spec:
+                offenders.append(f"II.5 {name}: names {noun!r}")
+    for background in _yaml_backgrounds():
+        for noun in _EXAMPLE_CAST_NOUNS:
+            if noun in background["specialty"]:
+                offenders.append(f"facet.yaml {background['id']}: names {noun!r}")
+
+    assert not offenders, (
+        "A pre-built Background's Specialty names the example cast's own "
+        "fiction. Write the generic capability instead:\n" + "\n".join(offenders))
 
 
 def test_all_fifteen_backgrounds_have_a_specialty_in_phb_and_yaml() -> None:

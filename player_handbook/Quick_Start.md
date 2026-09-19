@@ -10,139 +10,118 @@ Roll **2d6 + modifier**. **10+ = full success.** **7–9 = success with a cost.*
 
 ---
 
-## Pre-Generated Characters
+## Build a Character in Six Steps
 
-Pick one. You are ready to play.
+Everything below is the short form of Chapters II.1 through II.6. Work down the list; you will have a playable character before the snacks come out.
 
-### Zahna — The Scholar
+### 1. Decide who they are
 
-A studious young mage. Entirely absorbed in books, magical theory, and intellectual problems. Will solve the puzzle correctly while being completely oblivious to the social situation around him.
+One sentence is enough. *A studious young mage who is better with books than with people.* *A watchman who left the watch.* The numbers are easier to spend once you know what you are buying.
 
-**Table QS–1: Zahna — Attributes**
+### 2. Pick a Primary Facet
 
-| Attribute | Rating | Modifier |
+Your Facet is the direction your character grows — not a class, and not a lock on what they can do. Growth outside your Primary Facet is simply harder won.
+
+**Table QS–1: The Three Facets**
+
+| Facet | Characters of… | Solves problems by… |
 |---|---|---|
-| Strength | 1 | -1 |
-| Dexterity | 3 | +1 |
-| Constitution | 1 | -1 |
-| Intelligence | 3 | +1 |
-| Wisdom | 1 | -1 |
-| Knowledge | 3 | +1 |
-| Spirit | 2 | +0 |
-| Luck | 3 | +1 |
-| Charisma | 1 | -1 |
+| **Body** | Strength, speed, and endurance | Physical presence in the world |
+| **Mind** | Knowledge, perception, and reasoning | Understanding the problem |
+| **Soul** | Will, presence, and connection | Moving the people around it |
 
-**Major Attributes:** Body +0 | Mind +0 | Soul +0
+### 3. Spend 18 points on the nine Minor Attributes
 
-**Primary Facet:** Mind | **Background:** Guild Apprentice
-**Skills:** Lore (Practiced, +1) | **Sparks:** 3
-**Magic Domain:** Inscription
-**Specialty:** Artificers' Guild technical records — Standard becomes Easy when directly applicable
-**Endurance Pool:** 3 (base 4, Constitution -1)
+Every Minor Attribute is rated 1 to 3. The default is 2 across the board; every 3 you take costs one extra point, and every 1 you take saves one. They must balance to 18.
 
-*When Zahna rolls Knowledge for a lore question: 2d6 +1 (Knowledge) +1 (Lore skill) = 2d6+2*
+**Table QS–2: Minor Attributes**
 
-*When Zahna casts with Inscription: 2d6 +1 (Knowledge) +1 (Lore skill) = 2d6+2*
+| Under Body | Under Mind | Under Soul |
+|---|---|---|
+| Strength | Intelligence | Spirit |
+| Dexterity | Wisdom | Luck |
+| Constitution | Knowledge | Charisma |
+
+Rating 1 is **-1**, rating 2 is **+0**, rating 3 is **+1**.
+
+### 4. Derive the three Major Attributes
+
+Add up the three Minor Attributes under each Major and read the modifier off the table. You never set these directly. They cover broad, undefined situations and every saving throw.
+
+**Table QS–3: Major Attribute Modifiers**
+
+| Sum of Three Minors | Major Modifier |
+|---|---|
+| 3 – 4 | -1 |
+| 5 – 7 | +0 |
+| 8 – 9 | +1 |
+
+### 5. Pick a Background
+
+A Background is your character's history, and it is where most of your starting capability comes from. Chapter II.5 has fifteen pre-built ones and a five-step path for building your own. Each gives you five things:
+
+- **Title** — what you call yourself, or what others call you
+- **Description** — the history itself, in a few sentences
+- **Starting Skill** at **Practiced (+1)** — always a skill of your Primary Facet
+- **Secondary Skill** at **Novice** with **1 mark** already on it — same Facet, two marks from Practiced instead of three
+- **Specialty** — one narrow area of fictional expertise. When it directly applies, a Standard roll becomes Easy; when it is merely tangential, the Mirror Master hands over the information without a roll
+
+If your Background grants magic, a **Domain** origin replaces the Secondary Skill. Until you unlock your first Facet Technique, that Domain works at **Minor scope only**.
+
+### 6. Fill in the rest
+
+Every skill you did not just name sits at **Novice (+0)** — you can still roll it. Then note two numbers:
+
+- **Endurance Pool** = 4 + your Constitution modifier + your Endurance skill rank. This is what you spend to react in combat.
+- **Sparks: 3.** Every character starts every session with three.
+
+> **Example — six steps, one lazy man**
+>
+> **Zulnut's player:** I want someone who is very good at things and does not want to do any of them. Getting into places, mostly.
+>
+> **MM:** Body Facet, then. Eighteen points?
+>
+> **Zulnut's player:** Dexterity 3 and Luck 3, because those are the character. Constitution 1 and Spirit 1 to pay for them. Everything else at 2.
+>
+> *Body 2+3+1 = 6 → **+0**. Mind 2+2+2 = 6 → **+0**. Soul 1+3+2 = 6 → **+0**. Genuinely average in the broad sense; the character lives in the specifics.*
+>
+> **MM:** Background?
+>
+> **Zulnut's player:** He trained somewhere serious and left before they finished with him.
+>
+> **MM:** Wandering Disciple — custom, so we build it. Finesse at Practiced, Stealth at Novice with a mark on it. Specialty?
+>
+> **Zulnut's player:** He knows the exact moment a person's attention moves off him.
+>
+> **MM:** (That is going to be a problem for me for years.) Endurance Pool 3, three Sparks, write it down.
 
 ---
 
-### Mordai — The Warrior
+## The Three Tiers in Play
 
-A strong warrior with a genuine heart. Considers himself a defender of the weak. Prefers the direct solution to every problem, usually the most physical one available.
+One sealed door, three rolls, three outcomes. This is the whole game.
 
-**Table QS–2: Mordai — Attributes**
+**MM:** "A door at the far end — iron-banded, no visible lock, one glyph carved into the center."
 
-| Attribute | Rating | Modifier |
-|---|---|---|
-| Strength | 3 | +1 |
-| Dexterity | 2 | +0 |
-| Constitution | 3 | +1 |
-| Intelligence | 1 | -1 |
-| Wisdom | 1 | -1 |
-| Knowledge | 2 | +0 |
-| Spirit | 2 | +0 |
-| Luck | 2 | +0 |
-| Charisma | 2 | +0 |
+**Zahna:** "Knowledge check. What is this?"
 
-**Major Attributes:** Body +1 | Mind -1 | Soul +0
+**MM:** "Standard." — *2d6+2 (Knowledge +1, Lore Practiced +1) → **10**.*
 
-**Primary Facet:** Body | **Background:** City Watch Veteran
-**Skills:** Combat (Practiced, +1), Endurance (Novice, +0) | **Sparks:** 3
-**Specialty:** City Watch protocols and criminal behavior — Standard becomes Easy when directly applicable
-**Endurance Pool:** 5 (base 4, Constitution +1)
+**10+, full success.** No hidden cost, no "yes, but." "It is an Inscription. Someone encoded a locking instruction into the mark, and it releases to a counter-sign you know how to write."
 
-*When Mordai rolls a Strike: 2d6 +1 (Strength) +1 (Combat skill) = 2d6+2*
+**Mordai:** "Can I just force it?"
 
----
+**MM:** "Hard — it is reinforced iron." — *2d6+1 (Strength +1) at Hard (-1) → **8**.*
 
-### Zulnut — The Rogue
+**7–9, success with a cost.** The MM names the cost, then narrates the success it rides on. "The door shifts half an inch. The glyph flares — everything magically active in this building now knows something pushed on a sealed door."
 
-Profoundly, almost philosophically lazy. Exceptionally nimble. Prefers to accomplish things with the minimum possible effort and maximum possible flair.
+**Zulnut:** "Is anything coming up the corridor?"
 
-**Table QS–3: Zulnut — Attributes**
+**MM:** "Standard." — *2d6+0 (Wisdom +0) → **6**.*
 
-| Attribute | Rating | Modifier |
-|---|---|---|
-| Strength | 2 | +0 |
-| Dexterity | 3 | +1 |
-| Constitution | 1 | -1 |
-| Intelligence | 2 | +0 |
-| Wisdom | 2 | +0 |
-| Knowledge | 2 | +0 |
-| Spirit | 1 | -1 |
-| Luck | 3 | +1 |
-| Charisma | 2 | +0 |
+**6 or less, things go wrong — and the story still moves.** "You hear nothing. Something is very quiet, or nothing is there. You cannot tell which."
 
-**Major Attributes:** Body +0 | Mind +0 | Soul +0
-
-**Primary Facet:** Body | **Background:** Wandering Disciple
-**Skills:** Finesse (Practiced, +1), Stealth (Novice, +0) | **Sparks:** 3
-**Specialty:** Monastery training and movement arts — Standard becomes Easy when directly applicable
-**Endurance Pool:** 3 (base 4, Constitution -1)
-
-*When Zulnut picks a lock: 2d6 +1 (Dexterity) +1 (Finesse skill) = 2d6+2*
-
----
-
-## Example Scene: The Sealed Door
-
-**MM:** "The lower archive. Dust, empty shelves, and a door at the far end — iron-banded, no visible lock, a single glyph carved into the center. It is faintly warm to the touch."
-
-**Zahna:** "I examine the glyph. Knowledge check — what is this?"
-
-**MM:** "Standard. Roll it."
-
-Zahna rolls 2d6+2 (Knowledge +1, Lore +1) and gets a **10**. Full success.
-
-**MM:** "It is a ward — old Artificers' Guild work. The glyph responds to a specific counter-sign. You know the notation system. You can write one."
-
-**Mordai:** "Can I just force the door?"
-
-**MM:** "You can try. Hard — it is reinforced iron and the ward resists brute force. Roll Strength."
-
-Mordai rolls 2d6+1 (Strength +1) against Hard (-1), net +0, and gets an **8**. Partial success.
-
-**MM:** "The hinges groan. The door shifts half an inch. The ward flares — and now everything in the building that is magically active knows something just pushed against a sealed door. You have maybe two minutes before that matters."
-
-**Zulnut:** "I watch the corridor behind us. Is anything coming?"
-
-**MM:** "Roll Wisdom. Standard."
-
-Zulnut rolls 2d6+0 (Wisdom +0) and gets a **6**. Failure.
-
-**MM:** "You hear nothing. This is not reassuring. Something is very quiet, or nothing is there. You cannot tell which."
-
-**Another player:** "Spark?"
-
-**MM:** "For Zulnut's player? Absolutely — 'you cannot tell which' is exactly the kind of moment worth recognizing. Spark awarded."
-
-**Zahna:** "I write the counter-sign. Inscription domain."
-
-**MM:** "Easy — it is your domain and you just identified the notation. Roll Knowledge and Lore."
-
-Zahna rolls 2d6+2 (Knowledge +1, Lore +1) at Easy (+1), total modifier +3, and gets a **12**. Full success.
-
-*The glyph dims. The door swings open.*
+Zulnut's player leans into it: *"Then I sit down facing the corridor, so whatever it is has to walk past me first."* That is a **Graceful Fail** — narrate a 6- into something the story can use and claim a Spark for it.
 
 ---
 
@@ -158,16 +137,18 @@ Zahna rolls 2d6+2 (Knowledge +1, Lore +1) at Easy (+1), total modifier +3, and g
 | Persuade someone | 2d6 + Charisma + Persuade skill |
 | Cast a spell | 2d6 + Spirit + Attune skill, or Knowledge + Lore skill (by tradition) |
 | Resist an effect | 2d6 + Major Attribute (Body/Mind/Soul) |
-| Use a Spark | Add 1d6, drop lowest die |
+| Use a Spark | Add 1d6, drop the lowest die — declared **before** you roll |
 
 **Difficulty:** Easy (+1), Standard (+0), Hard (-1), Very Hard (-2)
 
 **Skill Ranks:** Novice (+0), Practiced (+1), Expert (+2), Master (+3)
 
+**Sparks:** You start every session with 3, and they do not carry over — so spend them. You earn more for the moments that make the table sit up, including a **Graceful Fail**, which you claim yourself by narrating a 6- into something the story can use.
+
 **Combat in five lines:**
 
 1. Combat runs in **exchanges** — everyone picks their move at once and the whole beat resolves together. No turn order, no waiting.
 2. Each exchange you declare a **Posture** — the stance you are taking for that beat (Aggressive, Measured, Defensive, or Withdrawn).
-3. Attacking is a **Strike** — the same 2d6 roll (see "Hit something," above).
-4. When something attacks you, you may **react** — one reaction per incoming attack, paid for from your Endurance Pool. At 0 you can only take the hit.
+3. Attacking is a **Strike** — the same 2d6 roll (see "Hit something," above). A hit wears down an enemy's **Resolve**: 2 on a 10+, 1 on a 7–9. At 0 Resolve it is out of the fight.
+4. When something attacks you, you may **react** — one reaction per incoming attack, paid for from your Endurance Pool. At 0 you can only take the hit, and a hit you take lands as a **Condition**.
 5. Everything else: Chapter III.3 — the same 2d6 roll.

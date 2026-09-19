@@ -32,7 +32,7 @@ You are not required to play in Shattered Origin. It is an invitation, not an ob
 
 ## How to Use This Handbook
 
-If you have never played a tabletop roleplaying game — or simply want to play *right now* — start with the **Quick Start** instead of this chapter's neighbors. It gives you a finished character, the one rule the game runs on, and an example scene, and has you playing in about ten minutes. Come back here when you want to build a character of your own.
+If you have never played a tabletop roleplaying game — or simply want to play *right now* — start with the **Quick Start** instead of this chapter's neighbors. It gives you the one rule the game runs on, character creation in six steps, and an example scene, and has you playing in about ten minutes. Come back here when you want the reasoning behind any of it.
 
 Otherwise: read the chapters in order when you are creating your first character — each section builds on the last. After that, use it as a reference. You should rarely need to look something up mid-session; if you do, the rules are designed to be found quickly.
 

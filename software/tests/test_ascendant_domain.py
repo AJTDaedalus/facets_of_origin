@@ -597,10 +597,12 @@ class TestSecondDomainPenaltyExpiry:
         char = _soul_mage(ruleset)
         assert char.select_technique("second_domain", ruleset=ruleset, choice="storm")[0]
         levels_before = char.total_facet_levels
-        # Advance skills until a new Facet level lands (threshold: 5 rank
-        # advances in the Facet; 9 marks = 3 rank advances per skill).
-        char.advance_skill("persuade", 9, ruleset)
-        char.advance_skill("deceive", 9, ruleset)
+        # Advance skills until a new Facet level lands. 8 marks is exactly
+        # Novice→Practiced→Expert (3 + 5), two advances each — and stops short
+        # of banking toward Master, which would claim the Facet's single
+        # Master slot and wall the second skill off (D16).
+        char.advance_skill("persuade", 8, ruleset)
+        char.advance_skill("deceive", 8, ruleset)
         assert char.total_facet_levels > levels_before
         result = resolve_magic_roll(
             character=char, domain_id="storm", scope="minor",

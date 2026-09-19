@@ -61,8 +61,12 @@ class TestBaseRulesetLoading:
         adv = ruleset.advancement
         assert adv is not None
         assert adv.session_skill_points == 4
-        assert adv.marks_per_rank == 3
-        assert adv.facet_level_threshold == 5
+        assert (adv.marks_per_rank.practiced,
+                adv.marks_per_rank.expert,
+                adv.marks_per_rank.master) == (3, 5, 8)
+        assert adv.rank_caps.beyond_practiced == 3
+        assert adv.rank_caps.master == 1
+        assert adv.facet_level_threshold == 3
         assert adv.major_advancement_threshold == 3
 
     def test_attribute_ratings_three_tiers(self, ruleset):

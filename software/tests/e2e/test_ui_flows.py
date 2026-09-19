@@ -707,14 +707,15 @@ class TestTechniqueChoicePicker:
         # skill advances cross the 5-rank-advance Facet-level threshold
         # (facet.yaml advancement.facet_level_threshold). Zahna is created
         # with no Background (custom/none is the create-character default in
-        # `table`), so both skills start clean at Novice/0 marks — each maxes
-        # to Master (3 rank advances) well within the 100 marks sent, and two
-        # skills' worth (6 advances) crosses the threshold of 5 for 1 SP each,
-        # inside the 4-SP session budget.
+        # `table`), so both skills start clean at Novice/0 marks. 8 marks is
+        # exactly Novice→Practiced→Expert (3 + 5), two rank advances each; four
+        # advances crosses the threshold for 1 SP each, inside the 4-SP session
+        # budget. Asking for more than a skill can hold is refused outright
+        # (N4), and D16's caps allow only one Master per Facet regardless.
         for skill_id in ("athletics", "stealth"):
             mm.evaluate(
                 "args => sendWS({type: 'skill_advance', player_name: args.p, "
-                "skill_id: args.s, marks: 100})",
+                "skill_id: args.s, marks: 8})",
                 {"p": "Zahna", "s": skill_id})
             mm.wait_for_timeout(400)
 
@@ -825,15 +826,20 @@ class TestQuickReferencesMatchCanon:
         assert "+1 difficulty step" not in player.inner_text("#tools-rule-summaries")
 
     def test_advancement_numbers_come_from_the_ruleset(self, table):
-        """The card hard-coded a pre-v0.3 threshold of 6 and a Major every 4."""
+        """The card hard-coded a pre-v0.3 threshold of 6 and a Major every 4.
+        D16 moved the threshold to 3 and added the rank caps and the 3/5/8
+        mark curve — all of which must come from the ruleset, not the card."""
         _, player = table
         player.click("button[data-tab='tools']")
         player.wait_for_timeout(400)
         player.click(".rule-summary-toggle:has-text('Skill Advancement')")
         player.wait_for_timeout(200)
         text = player.inner_text(".rule-summary-card:has-text('Skill Advancement')")
-        assert "Every 5 primary" in text
+        assert "Every 3 primary" in text
         assert "Every 3 total" in text
+        assert "Practiced 3" in text and "Expert 5" in text and "Master 8" in text
+        assert "3 skills beyond Practiced" in text
+        assert "1 of them Master" in text
 
 
 # ---------------------------------------------------------------------------

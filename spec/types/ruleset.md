@@ -192,7 +192,33 @@ roll_resolution:
     - label: Easy
       modifier: 1
       description: "..."
+  critical:                     # III.1, the natural 12
+    natural: high               # every kept die shows its maximum face
+    min_outcome: full_success   # promotes the tier, whatever the difficulty
+    label: "Natural 12"
+    description: "..."
+  fumble:                       # III.1, the natural 2
+    natural: low                # every kept die shows 1
+    label: "Natural 2"
+    description: "..."
+  borrowed_trouble:             # III.1, Borrowed Trouble
+    extra_dice: 1
+    spark_cost: 0
+    max_per_roll: 1
 ```
+
+`critical` and `fumble` take `natural: high | low`, an optional `min_outcome`
+and the pair of display strings. `min_outcome` can only raise an outcome tier;
+**`max_outcome` is parsed and deliberately never read** — a natural low must not
+drag a tier down (III.1: "only the ceiling is open"), so a module that sets it
+gets silence rather than an error. A `fumble` block's own promise is the
+automatic Graceful Fail: on a failed roll where every kept die is a 1, the
+engine awards the Spark unasked and marks the roll `graceful_fail_claimed` with
+reason `natural_2`.
+
+`borrowed_trouble` buys `extra_dice` for `spark_cost` Sparks (0 — the price is
+the complication), at most `max_per_roll` times, and stacks with Press and
+Sparks on any roll the MM prices.
 
 **Merge type:** singleton.
 
@@ -225,8 +251,14 @@ advancement:
     - context: primary_facet_success
       cost: 1
   session_skill_points: 4
-  marks_per_rank: 3
-  facet_level_threshold: 6
+  marks_per_rank:          # a bare integer is the pre-D16 shape; still loads
+    practiced: 3           # with a DeprecationWarning
+    expert: 5
+    master: 8
+  rank_caps:               # omit entirely to leave a homebrew Facet uncapped
+    beyond_practiced: 3
+    master: 1
+  facet_level_threshold: 3
 ```
 
 **Merge type:** singleton.

@@ -67,7 +67,15 @@ Points go to skills you used this session, with two allowances:
 >
 > Mordai (Primary Facet: Body) uses Combat twice this session — 2 points for 2 marks. He also used Persuade (Soul Facet) once. That costs 2 points for 1 mark. All 4 points spent.
 
-**Marks:** Each point spent toward a skill's next rank is called a mark. A skill advances when it accumulates **3 marks**. Marks carry over between sessions — you do not lose partial progress.
+**Marks:** Each point spent toward a skill's next rank is called a mark. Marks carry over between sessions — you do not lose partial progress. How many a rank costs depends on which rank you are reaching for: competence is cheap, mastery is not.
+
+**Table II.4–3: Marks per Rank Advance**
+
+| Advance | Marks |
+|---|---|
+| Novice → Practiced | 3 |
+| Practiced → Expert | 5 |
+| Expert → Master | 8 |
 
 > **Example — a Background mark completing a rank**
 >
@@ -75,21 +83,47 @@ Points go to skills you used this session, with two allowances:
 
 ---
 
+## How Far a Skill Can Go
+
+Within any one Facet, **at most three of your skills may rise beyond Practiced, and only one of those may reach Master.**
+
+That is the whole rule. A finished Facet looks like this: one skill at Master, two at Expert, two at Practiced.
+
+The cap applies to every Facet separately — your Primary Facet and any you cross-train into — and it applies from the moment you commit. A skill claims one of your three slots the instant you put a mark on it past Practiced, not when it arrives; you cannot part-pay four skills toward Expert and decide later.
+
+Practiced is not capped. Everyone can be broadly competent across their whole Facet. The ceiling starts where excellence starts.
+
+> **Through the Mirror — why your Facet has a shape**
+>
+> A Facet is a category, not a character. The Body Facet holds the brawler, the scout, the duellist and the acrobat, and a ranger should not end a campaign as good in a brawl as a barbarian who spent everything on it. Without a ceiling every Body character eventually arrives at the same sheet, and the Facet stops being able to tell you apart.
+>
+> So the interesting question is never *how much* can I have — it is *which*. Your Master slot is the single thing your character is the best at. Choose it late if you like: nothing forces the decision until you spend the mark.
+
+Choices here are permanent. You do not un-Master a skill to free the slot for another. If you want the fourth skill, that is what cross-training is for — and Facet levels earned elsewhere still buy Techniques from your own tree (see *Techniques*, below).
+
+---
+
 ## Facet Levels
 
-As you develop skills within a Facet, you grow as a practitioner of that Facet's approach to the world. Your **Facet level** in your Primary Facet advances every time you accumulate **5 skill rank advances** within it.
+As you develop skills within a Facet, you grow as a practitioner of that Facet's approach to the world. Your **Facet level** in your Primary Facet advances every time you accumulate **3 skill rank advances** within it.
 
-A skill rank advance is any time a skill in that Facet moves from one rank to the next (Novice → Practiced, Practiced → Expert, or Expert → Master). Ranks granted at character creation — your Background's starting skill — count toward career advances but not toward Facet levels: a Facet level is earned by growth in play.
+A skill rank advance is any time a skill in that Facet moves from one rank to the next (Novice → Practiced, Practiced → Expert, or Expert → Master). The rank your Background granted at creation counts as one of them — it is a head start of one advance toward your first Facet level, not a free level.
 
-With 5 skills and 3 possible advances each, a fully developed Facet produces 15 total advances — exactly enough to reach Facet level 1 (at 5 advances), Facet level 2 (at 10), and Facet level 3 (at 15). Reaching Facet level 3 means you have mastered every skill your Facet has to offer. Facet level 4 and beyond require cross-training into other Facets.
+A finished Facet — one Master, two Expert, two Practiced — produces 9 total advances: exactly enough to reach Facet level 1 (at 3 advances), Facet level 2 (at 6), and Facet level 3 (at 9). Reaching Facet level 3 means you have finished becoming the character this Facet was going to make you. Facet level 4 and beyond require cross-training into other Facets.
 
 > **Through the Mirror — a single Facet stops at level 3**
 >
-> Facet level 3 is the top of a single Facet — you've taken it as far as it goes. Level 4 and beyond is where breadth begins, which is how mastery tends to work anyway: at the highest levels, experts grow by absorbing adjacent disciplines. The supreme warrior who studies philosophy. The master mage who learns a craftsperson's patience.
+> Facet level 3 is the top of a single Facet — you've taken it as far as *your* version of it goes. Level 4 and beyond is where breadth begins, which is how mastery tends to work anyway: at the highest levels, experts grow by absorbing adjacent disciplines. The supreme warrior who studies philosophy. The master mage who learns a craftsperson's patience.
 
 > **Example — counting Facet levels**
 >
-> Zulnut advances Combat to Practiced (1 advance), Stealth to Practiced (2), Athletics to Practiced (3), Stealth to Expert (4), Finesse to Expert (5) — Finesse started Practiced at creation, so this is its first advance. *Facet level 1.* Several sessions later, Combat to Expert (6), Athletics to Expert (7), Endurance to Practiced (8), Finesse to Master (9), Endurance to Expert (10). *Facet level 2.*
+> Zulnut starts with Finesse at Practiced from his Background: 1 advance banked. He takes Stealth to Practiced (2) and Combat to Practiced (3). *Facet level 1* — and none of his three beyond-Practiced slots is committed yet.
+>
+> Several sessions later: Stealth to Expert (4, first slot), Finesse to Expert (5, second slot), Athletics to Practiced (6). *Facet level 2*, one slot left — and the Master pick still unspent.
+>
+> He spends the Master pick on Stealth, the slot it already holds, and grinds out the 8 marks (7). Then Endurance to Practiced (8), and Combat to Expert (9) — the third slot. *Facet level 3.* Stealth is what he is best at; Combat and Finesse are what he is good at; Athletics and Endurance are where he stopped, permanently.
+>
+> (Zulnut's player, counting on his fingers: *"So Athletics is stuck at Practiced forever?"* The MM, who has been waiting years for this: **"Yes."** Zulnut's player, after a pause: *"...Good. Running is for people who planned badly."*)
 
 Facet level advances outside your Primary Facet follow the same counting, and those levels **do** count toward your Major Advancement threshold (see *Major Advancement*, II.4) — Major Advancement is earned across every Facet you've invested in, not just your Primary one.
 
@@ -183,12 +217,16 @@ Session end:
   └─ Optional reflection scene — makes advancement feel real in the fiction
 
 Each point spent = 1 Mark on that skill
-3 Marks = Rank advance (Novice → Practiced → Expert → Master) = 1 Career Advance
+Marks per rank advance: 3 to Practiced, 5 to Expert, 8 to Master = 1 Career Advance each
   └─ Skill modifier increases (+1 / +2 / +3)
 
-Every 5 rank advances in any Facet:
+Per Facet: at most 3 skills beyond Practiced, only 1 of them Master
+  └─ A finished Facet: 1 Master, 2 Expert, 2 Practiced. Slots are claimed on
+     commitment and never freed.
+
+Every 3 rank advances in any Facet:
   └─ +1 Facet Level → unlock one Technique from any tree whose prerequisites you meet
-  └─ 5 skills × 3 advances = 15 max per Facet = Facet level 3; level 4+ requires cross-training
+  └─ A finished Facet = 9 advances = Facet level 3; level 4+ requires cross-training
 
 Every 3 Facet Levels total (Primary + any Facet):
   └─ Major Advancement: +1 Minor Attribute OR Pinnacle Technique (MM approval)
@@ -203,7 +241,7 @@ Every 3 Facet Levels total (Primary + any Facet):
 
 It is the progression metric for Facets of Origin: a rough, honest gauge of how much a character has grown. Two characters with the same career advances are broadly comparable in power, regardless of where those advances landed. Benchmark ranges for what a given total looks like in play are the MM's pacing tool and live in the MM Manual (MM3, *Using career_advances as a Campaign Clock*).
 
-Career advances are tracked by the app and stored in the character file as `career_advances`, updated whenever a skill rank advances. The Background starting skill counts as 1 advance at character creation — toward this total only, not toward Facet levels (see *Facet Levels*, above). Background Marks (the secondary skill's head start) do not count until the skill actually advances to Practiced.
+Career advances are tracked by the app and stored in the character file as `career_advances`, updated whenever a skill rank advances. The Background starting skill counts as 1 advance at character creation, toward this total and toward its Facet's level track (see *Facet Levels*, above). Background Marks (the secondary skill's head start) do not count until the skill actually advances to Practiced.
 
 > **Example — the cast at one career advance**
 >

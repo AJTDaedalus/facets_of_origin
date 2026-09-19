@@ -8,6 +8,7 @@ from typing import Literal, Optional
 from pydantic import BaseModel, Field, computed_field, model_validator
 
 from app.facets.registry import MergedRuleset
+from app.facets.schema import MarksPerRankDef
 
 
 SkillRankId = Literal["novice", "practiced", "expert", "master"]
@@ -270,25 +271,133 @@ class Character(BaseModel):
         """Award one Spark to this character."""
         self.sparks += 1
 
-    def _try_advance_rank(self, state: "SkillState", marks_to_add: int, marks_per_rank: int) -> int:
+    @staticmethod
+    def _marks_absorbable(state: "SkillState", marks_per_rank, ceiling: str) -> int:
+        """How many marks `state` can still take before it reaches `ceiling`.
+
+        Counts what is already banked toward the next rank, so a skill one mark
+        short of Practiced whose ceiling is Practiced absorbs exactly one more.
+        """
+        rank_order = ["novice", "practiced", "expert", "master"]
+        banked = state.marks
+        total = 0
+        for i in range(rank_order.index(state.rank), rank_order.index(ceiling)):
+            total += marks_per_rank.for_rank(rank_order[i + 1]) - banked
+            banked = 0
+        return total
+
+    def _try_advance_rank(
+        self, state: "SkillState", marks_to_add: int, marks_per_rank, ceiling: str = "master"
+    ) -> int:
         """Add marks to a skill state, advancing rank as thresholds are crossed.
 
         Mutates state in place. Returns the number of rank advances that occurred.
-        Stops at expert rank (the ceiling for advancement).
+        Stops at `ceiling` — normally Master, or lower when D16's rank caps have
+        no slot left for this skill.
+
+        `marks_per_rank` is a MarksPerRankDef: each advance costs the marks its
+        own target rank charges (3 / 5 / 8), so the threshold is re-read as the
+        rank climbs rather than fixed at entry.
         """
         rank_order = ["novice", "practiced", "expert", "master"]
         current_idx = rank_order.index(state.rank)
+        ceiling_idx = rank_order.index(ceiling)
         advances = 0
         for _ in range(marks_to_add):
-            if state.rank == "master":
+            if current_idx >= ceiling_idx:
                 break
+            next_rank = rank_order[current_idx + 1]
             state.marks += 1
-            if state.marks >= marks_per_rank:
+            if state.marks >= marks_per_rank.for_rank(next_rank):
                 state.marks = 0
-                state.rank = rank_order[current_idx + 1]
+                state.rank = next_rank
                 current_idx += 1
                 advances += 1
         return advances
+
+    # --- D16 rank caps -----------------------------------------------------
+    #
+    # A slot is claimed on *commitment*, not on arrival: a skill occupies a
+    # beyond-Practiced slot as soon as it has any progress past Practiced. That
+    # removes the race where two skills bank marks toward the last slot and one
+    # of them strands, and it reads correctly at the table — you claim the slot
+    # when you start training past Practiced, not when you get there.
+
+    @staticmethod
+    def _occupies_beyond_practiced(state: "SkillState") -> bool:
+        return state.rank in ("expert", "master") or (
+            state.rank == "practiced" and state.marks > 0
+        )
+
+    @staticmethod
+    def _occupies_master(state: "SkillState") -> bool:
+        return state.rank == "master" or (state.rank == "expert" and state.marks > 0)
+
+    def _facet_skill_states(self, facet_id: str, ruleset: MergedRuleset, exclude: str):
+        """Every skill state this character holds in `facet_id`, minus `exclude`."""
+        for sid, state in self.skills.items():
+            if sid == exclude:
+                continue
+            sk = ruleset.get_skill(sid)
+            if sk is not None and sk.facet == facet_id:
+                yield state
+
+    def cap_refusal_reason(self, skill_id: str, ruleset: MergedRuleset) -> str:
+        """Why `skill_id` cannot climb right now, phrased for the player."""
+        caps = ruleset.advancement.rank_caps if ruleset.advancement else None
+        ceiling = self.rank_ceiling_for(skill_id, ruleset)
+        sk_def = ruleset.get_skill(skill_id)
+        facet = (sk_def.facet if sk_def else "this Facet") or "this Facet"
+        if ceiling == "practiced":
+            limit = caps.beyond_practiced if caps else "the"
+            return (
+                f"'{skill_id}' cannot rise past Practiced: all {limit} of your "
+                f"{facet} skills allowed beyond Practiced are already committed "
+                f"(II.4, How Far a Skill Can Go)."
+            )
+        if ceiling == "expert":
+            return (
+                f"'{skill_id}' cannot rise past Expert: another {facet} skill "
+                f"already holds this Facet's Master slot (II.4, How Far a Skill Can Go)."
+            )
+        return f"'{skill_id}' is already at Master."
+
+    def rank_ceiling_for(self, skill_id: str, ruleset: MergedRuleset) -> str:
+        """The highest rank `skill_id` may currently reach under D16's caps.
+
+        Single source of truth for the cap rule — `advance_skill` and the
+        WebSocket handler both read it, so the wall sits in exactly one place.
+        Returns "master" when uncapped or when this skill already holds the
+        Master slot.
+        """
+        caps = ruleset.advancement.rank_caps if ruleset.advancement else None
+        if caps is None or (caps.beyond_practiced is None and caps.master is None):
+            return "master"
+
+        sk_def = ruleset.get_skill(skill_id)
+        if sk_def is None or not sk_def.facet:
+            return "master"
+
+        state = self.skills.get(skill_id)
+        others = list(self._facet_skill_states(sk_def.facet, ruleset, exclude=skill_id))
+
+        # Already holding a slot? Then the cap cannot retroactively take it.
+        holds_beyond = state is not None and self._occupies_beyond_practiced(state)
+        holds_master = state is not None and self._occupies_master(state)
+
+        if caps.master is not None and not holds_master:
+            if sum(1 for s in others if self._occupies_master(s)) >= caps.master:
+                ceiling = "expert"
+            else:
+                ceiling = "master"
+        else:
+            ceiling = "master"
+
+        if caps.beyond_practiced is not None and not holds_beyond:
+            used = sum(1 for s in others if self._occupies_beyond_practiced(s))
+            if used >= caps.beyond_practiced:
+                return "practiced"
+        return ceiling
 
     def _check_facet_level_threshold(self, facet_id: str, rank_advances: int, threshold: int) -> int:
         """Credit `rank_advances` in `facet_id` toward that Facet's level track.
@@ -314,26 +423,46 @@ class Character(BaseModel):
         """Add marks to a skill, advancing rank if the threshold is met.
 
         Creates the skill at Novice rank if it does not yet exist on the character.
-        Stops adding marks once Expert rank is reached.
+        Marks cost what their target rank charges (3 / 5 / 8) and stop at the
+        skill's current cap ceiling.
 
         Args:
             skill_id: The skill to advance.
             marks_to_add: Number of marks to add (0 is a no-op).
-            ruleset: Used to look up marks_per_rank, advancement config, and skill facet.
+            ruleset: Used to look up marks_per_rank, rank caps, advancement
+                config, and skill facet.
 
         Returns:
             A dict with keys: skill_id, rank_advances (int), facet_level_advances (int),
             major_advancement (bool).
+
+        Raises:
+            ValueError: When D16's rank caps leave no room for this skill to
+                climb. Refuses rather than absorbing — a mark must never
+                accumulate toward a rank the cap forbids, or a player banks
+                into a wall.
         """
         if skill_id not in self.skills:
             self.skills[skill_id] = SkillState(skill_id=skill_id)
 
         state = self.skills[skill_id]
-        marks_per_rank = ruleset.advancement.marks_per_rank if ruleset.advancement else 3
-        threshold = ruleset.advancement.facet_level_threshold if ruleset.advancement else 5
+        marks_per_rank = (
+            ruleset.advancement.marks_per_rank if ruleset.advancement
+            else MarksPerRankDef()
+        )
+        threshold = ruleset.advancement.facet_level_threshold if ruleset.advancement else 3
         major_threshold = ruleset.advancement.major_advancement_threshold if ruleset.advancement else 3
 
-        rank_advances = self._try_advance_rank(state, marks_to_add, marks_per_rank)
+        ceiling = self.rank_ceiling_for(skill_id, ruleset)
+        if marks_to_add > 0 and state.rank == ceiling:
+            raise ValueError(self.cap_refusal_reason(skill_id, ruleset))
+        # A batch that cannot land in full is refused, not truncated: the
+        # caller has already spent the session's skill point by the time we
+        # get here, and _try_advance_rank would quietly drop the overflow.
+        if marks_to_add > self._marks_absorbable(state, marks_per_rank, ceiling):
+            raise ValueError(self.cap_refusal_reason(skill_id, ruleset))
+
+        rank_advances = self._try_advance_rank(state, marks_to_add, marks_per_rank, ceiling)
         self.career_advances += rank_advances
 
         sk_def = ruleset.get_skill(skill_id)
@@ -405,6 +534,13 @@ class Character(BaseModel):
                 f"Insufficient skill points: need {sp_cost}, "
                 f"have {self.session_skill_points_remaining}."
             )
+
+        # D16: check the cap BEFORE spending. advance_skill refuses a capped
+        # skill, and deducting first would burn the point on the refusal.
+        current = self.skills.get(skill_id)
+        current_rank = current.rank if current else "novice"
+        if current_rank == self.rank_ceiling_for(skill_id, ruleset):
+            raise ValueError(self.cap_refusal_reason(skill_id, ruleset))
 
         self.session_skill_points_remaining -= sp_cost
         if training_mark:
@@ -902,6 +1038,28 @@ def create_default_character(
                 if domain_def:
                     resolved_magic_tradition = domain_def.tradition
 
+    # P-6 revised (D16): the Background's starting rank is credited to its
+    # Facet's level track.
+    #
+    # It used to be excluded, on the reasoning that a Facet level should be
+    # earned in play. The arithmetic never worked: a Background's starting skill
+    # is always in the Primary Facet, so excluding it left every character one
+    # advance short of the in-Facet ceiling — 14 of 15 under v0.3, 8 of 9 under
+    # D16 — and Facet level 3 was therefore unreachable inside the primary Facet
+    # for *every character that has a Background*, which is all of them. The
+    # book claimed otherwise in both revisions and no test caught it, because
+    # the reachability test compared thresholds against the raw skill count and
+    # never built a character.
+    #
+    # One banked advance out of the three a level costs is a head start, not a
+    # free level: a fresh character is still at Facet level 0 and still needs
+    # two advances in play to reach level 1.
+    rank_advances_by_facet: dict[str, int] = {}
+    if bg and bg.starting_skill:
+        start_def = ruleset.get_skill(bg.starting_skill)
+        if start_def is not None and start_def.facet:
+            rank_advances_by_facet[start_def.facet] = 1
+
     character = Character(
         name=name,
         player_name=player_name,
@@ -915,6 +1073,7 @@ def create_default_character(
         magic_domain=resolved_magic_domain,
         magic_tradition=resolved_magic_tradition,
         career_advances=career_advances,
+        rank_advances_by_facet=rank_advances_by_facet,
     )
 
     errors = character.validate_against_ruleset(ruleset)

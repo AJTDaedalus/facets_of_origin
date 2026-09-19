@@ -229,7 +229,7 @@ class TestRoundTrip:
             attributes=valid_attributes,
             ruleset=ruleset,
         )
-        char.advance_skill("athletics", 9, ruleset)  # novice → master
+        char.advance_skill("athletics", 16, ruleset)  # novice → master (D16: 3+5+8)
         assert char.skills["athletics"].rank == "master"
         fof_dict = char.to_fof(MODULE_REFS, SESSION_ID)
         assert fof_dict["character"]["skills"]["athletics"]["rank"] == "master"

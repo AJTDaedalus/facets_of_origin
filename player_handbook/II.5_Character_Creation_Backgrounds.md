@@ -224,7 +224,7 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Domain origin (if magical, replaces secondary skill):** Choose one domain from the Domains of the Mind list. Your apprenticeship was the beginning of formal magical education. Specify the institution and what domain it taught.
 
-**Specialty:** Artificers' Guild technical records — Standard becomes Easy when directly applicable.
+**Specialty:** Knows the technical vocabulary, record-keeping, and internal personnel of the guild or institution that trained you, well enough to read its documents and recognise its work.
 
 ---
 

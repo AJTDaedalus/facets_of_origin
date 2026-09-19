@@ -1228,6 +1228,32 @@ roll_resolution:
     failure:
       label: "Things Go Wrong"
       description: "Things go wrong — but the story always moves forward."
+
+  # III.1, The Natural 12 and the Natural 2. Keyed to the DICE, not the total:
+  # a total-based crit tier would scale with modifiers (a +3 character would
+  # crit on better than a quarter of rolls), which both dilutes the moment and
+  # adds a fourth tier to every difficulty call.
+  critical:
+    natural: high              # every kept die shows its maximum face
+    min_outcome: full_success  # two sixes always land, whatever the modifiers say
+    label: "Natural 12"
+    description: "A full success, and something more besides — the player names it."
+  fumble:
+    natural: low               # every kept die shows 1
+    # max_outcome is deliberately unset. A natural 2 never drags the tier down:
+    # overriding upward rewards, overriding downward punishes competence, which
+    # is the d20 flaw research/dice_system_analysis.md rejects. It only
+    # auto-confirms the Graceful Fail when the roll failed anyway.
+    label: "Natural 2"
+    description: "If the roll failed, the Graceful Fail is confirmed without asking."
+
+  # III.1, Borrowed Trouble. Same dice effect as a Spark, different source:
+  # accept a complication that lands whatever the dice say, and take a die.
+  borrowed_trouble:
+    extra_dice: 1
+    spark_cost: 0
+    max_per_roll: 1
+
   difficulty_modifiers:
     - label: Easy
       modifier: 1
@@ -1361,21 +1387,46 @@ advancement:
       cost: 2
 
   session_skill_points: 4
-  marks_per_rank: 3
+
+  # D16 (II.4, Advancing Skills): marks escalate per rank. Novice → Practiced
+  # stays 3 so onboarding is untouched; Expert → Master costs 8, which is what
+  # makes pushing one skill to the top a visible decision not to raise two
+  # others. A bare integer here is the pre-D16 shape and still loads with a
+  # DeprecationWarning.
+  marks_per_rank:
+    practiced: 3
+    expert: 5
+    master: 8
+
+  # D16, the ruling itself: a Facet is a category of archetypes, not an
+  # archetype, so it must be able to express the difference between the
+  # archetypes it contains. At most 3 of a Facet's skills may rise beyond
+  # Practiced and only 1 of those may reach Master — 1 Master / 2 Expert /
+  # 2 Practiced, 30 distinct shapes per Facet, permanent at any campaign
+  # length. The caps bind every Facet uniformly, primary and cross-trained
+  # alike. Omit the block entirely to leave a homebrew Facet uncapped.
+  rank_caps:
+    beyond_practiced: 3
+    master: 1
+
   # T4.3/D10 (II.4, Advancing Skills): unspent points are not forfeited — up
   # to bank_cap carry into the next session, and training_marks_per_session
   # of the 4 session points may go to an unused Primary-Facet skill
   # ("training between sessions").
   bank_cap: 2
   training_marks_per_session: 1
-  # Threshold 5 (not 6) puts all three Facet levels — and therefore Tier 3
-  # Techniques — inside the primary Facet's 15-advance ceiling (5 skills × 3
-  # rank advances). See DESIGN_v0.3 §6.2. session_skill_points stays 4: raising
-  # it to hit an earlier Major would inflate skill ranks as a side effect.
-  # P-6 (II.4, Facet Levels): ranks granted at character creation count toward
-  # career_advances but NOT toward Facet levels — only advance_skill writes
-  # rank_advances_by_facet, and creation never routes through it.
-  facet_level_threshold: 5
+  # Threshold 3 (D16, superseding DESIGN_v0.3 §6.2's 5). Under the rank caps a
+  # fully-shaped Facet yields 9 rank advances, not 15, so threshold 5 would
+  # land only one level. At 3, Facet levels fall at 3 / 6 / 9 advances and all
+  # three Technique picks — including the magic formalization arc — stay
+  # reachable inside the primary Facet alone. session_skill_points stays 4:
+  # raising it to hit an earlier Major would inflate skill ranks as a side
+  # effect.
+  # P-6 revised (D16, II.4 Facet Levels): the Background's starting rank counts
+  # toward career_advances AND toward its Facet's level track — one advance
+  # banked at creation, not a free level. create_default_character seeds
+  # rank_advances_by_facet; advance_skill adds to it from there.
+  facet_level_threshold: 3
 
   # Every 3 total Facet Levels triggers a Major Advancement, so the first Major
   # lands together with Facet level 3 (Tier 3 unlock) at roughly session 12–15.
@@ -1842,7 +1893,7 @@ backgrounds:
     facet: mind
     starting_skill: lore
     secondary_skill: craft
-    specialty: "Artificers' Guild technical records — Standard becomes Easy when directly applicable."
+    specialty: "Knows the technical vocabulary, record-keeping, and internal personnel of the guild or institution that trained you, well enough to read its documents and recognise its work."
     domain_origin: mind
     domain_replaces_secondary: true
 

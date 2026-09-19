@@ -889,3 +889,84 @@ void, not open.
 
 **Status:** ✅ Decided. Recorded in `research/magic_system_analysis.md` §6
 naming note; README project description updated.
+
+---
+
+### D16 — A Facet is a category of archetypes, not an archetype: the primary Facet must not be exhaustible *(owner ruling, 2026-08-09)*
+
+**Decision:** "Everyone masters their primary Facet" is wrong and is retired as a
+design goal. Skill advancement must carry opportunity cost inside a single Facet,
+so that two characters sharing a Facet end a campaign with different sheets.
+
+**The argument (owner):** *"A lot of different classes fall under each Facet — a
+ranger shouldn't be as good at hand-to-hand as a barbarian."* A Facet is a
+*category* of archetypes, not an archetype. Body contains the brawler, the scout,
+the duellist, the acrobat. Under the rules as written, every one of them arrives at
+the identical sheet — Athletics, Combat, Stealth, Finesse and Endurance all at
+Master — in roughly eleven sessions. The Facet therefore cannot express the
+difference between the archetypes it contains, which is the one job a broad
+category most needs to do.
+
+**This is an identity problem before it is a pacing problem.** The measured rate
+(one Facet level per 3.75 sessions; full primary mastery at ~11.25) is defensible
+against the field — comparable to Savage Worlds' 20 Advances or Apocalypse World's
+~12 improvements. What is *not* defensible is the shape: Facets is the only system
+surveyed whose advancement track terminates in total completion. Call of Cthulhu 7e
+asymptotes (improve only on a d100 roll *over* the current skill value), Apocalypse
+World and Savage Worlds offer menus wider than the available picks, D&D 5e forks
+exclusively. Evidence and sources: `docs/RESEARCH_advancement_benchmark.md`.
+
+**Supersedes:** `DESIGN_v0.3_ruleset_revision.md` §6.2, which set
+`facet_level_threshold: 5` specifically so all three Facet levels would fit inside
+the 15-advance ceiling. That choice optimised for the Facet levels landing tidily
+and did not weigh intra-Facet differentiation. The coincidence of "Facet level 3"
+and "every skill at Master" was deliberate; it is now the defect.
+
+**Known insufficient:** an escalating mark cost per rank tier *alone*. It delays
+completion to roughly twenty sessions but the track still completes, so a long
+campaign reconverges the ranger and the barbarian. Delivering this ruling needs a
+genuine ceiling, with a cost curve underneath it rather than instead of it.
+
+**Explicitly out of scope:** the Technique layer. Three picks from a tree of 18–20,
+branch-gated so that reaching Tier 3 costs all three picks in one branch, is the
+only genuine exclusive choice the game has today and is preserved intact.
+
+**Also on the table, same root cause:** the cross-training incentive runs backwards
+(`RESEARCH_advancement_benchmark.md` §4). A fourth Technique *from your own tree*
+requires Facet level 4, which only cross-training reaches — so breadth is the sole
+source of further depth, the inverse of the 5e/PF2e convention where breadth costs
+depth. Whether to fix this in the same change is handed to Brain.
+
+**Status:** ✅ Decided (whether). Brain holds the *how* —
+`docs/BRIEF_advancement_differentiation.md`.
+
+### D16a — The first Technique arriving early is the intent, not a side effect *(owner ruling, 2026-08-11)*
+
+**Decision:** Facet level 1 landing sooner under D16 — a floor of 2.25 sessions
+against v0.3's 3.75 — is accepted and intended. *"Facet lvl 1 makes sense to be
+faster."*
+
+**Why it was an open question.** D16 was adopted to answer "this seems way too
+rapid," and level 1 is the one threshold that moved in the *faster* direction.
+Everything else slowed: level 2 from 7.5 to 5 sessions of cheap advances but
+then a longer climb, and level 3 from 11.25 to 9.5 (8.75 with a Background) at
+the floor, with the realistic window running to 14. The escalating 3/5/8 curve
+front-loads the cheap ranks and back-loads the expensive ones, so the opening
+accelerates and the endgame lengthens.
+
+**Why the acceleration is worth keeping.** The three advances that buy level 1
+cost 3 marks each — they are reachable before a new player has finished working
+out what their character is for, and the Technique is what turns the sheet from
+arithmetic into a person. The pacing complaint that produced D16 was never about
+the first Technique; it was about every character ending identical. The caps fix
+that, and they fix it in the back half of the track where Expert and Master are
+decided.
+
+**Recorded in the books** so a future MM does not read it as a defect and slow it
+down: MM3, *Through the Mirror — the first Technique is supposed to arrive
+early*, which also names the correct lever for a longer campaign (stretch the
+middle, not the opening).
+
+**Status:** ✅ Decided. Still open from D16: the §4 cross-training inversion
+(deferred with a playtest revisit trigger) and veteran pacing under the 2 SP
+cross-Facet cost.

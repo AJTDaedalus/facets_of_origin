@@ -251,6 +251,7 @@ function performRoll() {
     description,
     hazard_type: hazardType,
     knowledge_field: knowledgeField,
+    ...borrowedTroubleField(),
   });
 
   state.sparksToSpend = 0;
@@ -802,6 +803,21 @@ function startCombat() {
  * your hand does not change between two actions in one exchange, so this reads
  * one control rather than duplicating a picker onto every form.
  */
+/**
+ * N6/III.1: the Borrowed Trouble a player has accepted for this roll.
+ *
+ * Read-and-clear, like `state.sparksToSpend`: the offer is per roll, and a
+ * checkbox left ticked would silently buy a die on the next one. Every roll
+ * sender spreads this, so the book's Press + Spark + Borrowed Trouble stack
+ * is actually reachable.
+ */
+function borrowedTroubleField() {
+  const el = document.getElementById('play-borrowed-trouble');
+  if (!el || !el.checked) return {};
+  el.checked = false;
+  return { borrowed_trouble: true };
+}
+
 function declaredWeaponFields() {
   const categoryEl = document.getElementById('strike-weapon-category');
   const typeEl = document.getElementById('strike-weapon-type');
@@ -1272,6 +1288,7 @@ function performStrike() {
     weapon_category: weaponCategory,
     weapon_type: weaponType,
     final_blow: finalBlow,
+    ...borrowedTroubleField(),
   });
   if (finalBlowEl) finalBlowEl.checked = false;
   state.sparksToSpend = 0;
@@ -1283,6 +1300,7 @@ function performReact(reaction) {
     type: 'react',
     reaction,
     difficulty: 'Standard',
+    ...borrowedTroubleField(),
   });
 }
 
@@ -1301,6 +1319,7 @@ function performSupport() {
     skill_id: skillId,
     difficulty: 'Standard',
     ...declaredWeaponFields(),
+    ...borrowedTroubleField(),
   });
 }
 
@@ -1324,6 +1343,7 @@ function performManeuver() {
     skill_id: skillId,
     difficulty: 'Standard',
     ...declaredWeaponFields(),
+    ...borrowedTroubleField(),
     description,
   });
 }
@@ -1784,6 +1804,29 @@ function performCast() {
 function checkGracefulFailPrompt(msg) {
   const roll = msg.roll || msg;
   if (roll.outcome !== 'failure') return;
+
+  // III.1, the natural 2: confirmed without asking. The server has already
+  // paid the Spark, so nobody is prompted — the table is told, and the
+  // counters are corrected from the same payload.
+  if (roll.graceful_fail_claimed) {
+    const who = msg.player || msg.attacker || msg.player_name || 'Unknown';
+    const name = msg.character_name ||
+      (state.allCharacters[who] && state.allCharacters[who].name) || who;
+    addSystemChat(name + ' rolled a natural 2 — Graceful Fail confirmed, Spark awarded.');
+    if (typeof roll.graceful_fail_sparks_now === 'number') {
+      if (state.allCharacters[who]) state.allCharacters[who].sparks = roll.graceful_fail_sparks_now;
+      if (who === state.playerName && state.character) {
+        state.character.sparks = roll.graceful_fail_sparks_now;
+        renderPlaySparkCounter();
+      }
+      renderPlayPlayerList();
+      renderMMCombatConsole();
+    }
+    if (who === state.playerName) {
+      notify('Natural 2 — the Spark is yours. Narrate how the failure lands.', 'gold');
+    }
+    return;
+  }
 
   const playerName = msg.player || msg.attacker || msg.player_name || 'Unknown';
   const charName = msg.character_name ||

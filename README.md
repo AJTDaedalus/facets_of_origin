@@ -23,7 +23,7 @@ The complete rulebook for players:
 - **Core Resolution** — 2d6 + modifier with three-tier outcomes (10+ full success, 7-9 partial, 6- consequence). Sparks add dice and drop lowest for pre-roll agency
 - **Combat** — Exchange-based (simultaneous action, no turn order), posture system, Endurance pool, conditions instead of HP, armor as condition downgrade
 - **Equipment** — Weapons, armor, adventuring gear, and services
-- **Quick Start** — Pre-generated characters and a ten-minute intro scene
+- **Quick Start** — The one rule, character creation in six steps, and a ten-minute intro scene
 
 ### Mirror Master's Manual (`mm_manual/`)
 

@@ -28,6 +28,19 @@ At the top, before any of its sections, the sheet records two names: your charac
 
 ---
 
+## The Six Steps
+
+The rest of Part II works through these in order. The Quick Start carries the same six in short form, if you would rather build first and read afterward.
+
+1. **Decide who they are.** One sentence, before any numbers (*Before the Numbers*, below).
+2. **Pick a Primary Facet** — Body, Mind, or Soul (Chapter II.4).
+3. **Spend 18 points** across the nine Minor Attributes, each rated 1 to 3 (Chapter II.2).
+4. **Derive the three Major Attributes** from the Minor Attributes under each (Chapter II.2).
+5. **Pick a Background**, which grants a Title, a Starting Skill at Practiced, a Secondary Skill at Novice with one mark — or a Domain origin in its place — and a Specialty (Chapters II.5, II.3).
+6. **Fill in the rest.** Every other skill sits at Novice; note your Endurance Pool and your three Sparks (Chapters II.6, III.3, III.1).
+
+---
+
 > **Example — six steps, one lazy man**
 >
 > **Zulnut's player:** I want someone who is very good at things and does not want to do any of them.
@@ -36,7 +49,7 @@ At the top, before any of its sections, the sheet records two names: your charac
 >
 > **Zulnut's player:** Getting into places. Ideally without anybody noticing, and definitely without climbing anything twice.
 >
-> *Body Facet, then — the Grace branch. Eighteen points: Dexterity 3 and Luck 3 because those are the character, Constitution 1 and Charisma 2 and Spirit 1 because every 3 has to be bought with a 1, and the rest at 2.*
+> *Body Facet, then — the Grace branch. Eighteen points: Dexterity 3 and Luck 3 because those are the character, Constitution 1 and Spirit 1 because every 3 has to be bought with a 1, and the rest at 2.*
 >
 > **MM:** Background?
 >

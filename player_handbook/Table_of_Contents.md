@@ -26,7 +26,7 @@
 - IV.2 Magical Items *(Planned)*
 
 ## Quick Start
-- Pre-generated characters, core resolution summary, and an example scene to get playing in ten minutes.
+- Core resolution summary, character creation in six steps, and an example scene to get playing in ten minutes.
 
 ## Appendices
 - Appendix: Magic Domain Catalog
