@@ -24,8 +24,9 @@ That is the whole of it. This section is one page and it does not restate the Fa
   use and for other adventures.
 - **A tribe's gift is a domain.** Not flair and not a special case — magic, in
   exactly the sense Chapter II.3 means it: intuitive tradition, Focused, Minor scope
-  until it formalizes. An Orthaen's Crystal and a Phern's Warning are domains the
-  same way a Soul mage's Shadow is. Formal spellcraft is the scholarly tradition and
+  until it formalizes. **The player chooses which domain** — the lineage says how
+  it looks (an Orthaen's gift always comes through grown crystal; a Phern's is a
+  prickle before danger), not what it is. Formal spellcraft is the scholarly tradition and
   works exactly as the core writes it. See `settings/valloh/V2_Magic_of_Valloh.md`.
 - **Everyone gets a hook and an agenda.** The six hooks are in the Overture and every
   one of them starts you at the Gatehouse Court; the agendas are below.
@@ -214,7 +215,7 @@ know all its dances, far enough to be sent on its errands.
 
 **Skills:** Persuade (Practiced, +1)
 
-**Gift:** Crystal — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
+**Gift:** Transmutation — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
 
 **Specialty:** Sect heraldry and old grudges — knows who hates whom, and why, and since when.
 
@@ -237,7 +238,7 @@ tribes' territory and lost none of them, including himself.
 
 **Skills:** Finesse (Practiced, +1)
 
-**Gift:** Warning — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
+**Gift:** Divination — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
 
 **Specialty:** Contracts, caravans, and smugglers' roads — who moves goods, and around which laws.
 
@@ -260,7 +261,7 @@ research.
 
 **Skills:** Lore (Practiced, +1)
 
-**Gift:** Crystal — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
+**Gift:** Inscription — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
 
 **Specialty:** The collected history of House Boranis — every public fact and most of the private ones, held in memory and lattice.
 
@@ -307,7 +308,7 @@ of Ilesse's evening.
 
 **Skills:** Persuade (Practiced, +1)
 
-**Gift:** Crystal — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
+**Gift:** Warding — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
 
 **Specialty:** The Thenya border and the Nolonaire family — its history, its debts, and everything Veier was before Rekuzan.
 

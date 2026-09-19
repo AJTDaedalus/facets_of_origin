@@ -547,12 +547,21 @@ class LineageDefinition(BaseModel):
     Fields:
         variants: The common in-world names for these people, printed in
                   italics after the name.
-        gift_domains: Domain IDs this lineage's blood may carry. Empty means
-                  ungifted, which is the core's Human. A Gift is a domain in
-                  every respect (II.3) and it *replaces* the Background's
-                  secondary skill, exactly as a magic-granting Background's
-                  domain origin does — a character holds one domain at
-                  creation, from Lineage or Background, never both.
+        gift: How the gift shows itself in these people — one line of
+                  fiction ("through grown crystal", "as a prickle before
+                  danger"). Present means the lineage is gifted; absent means
+                  it is not, which is the core's Human. **The player chooses
+                  which domain the gift is** (D24): any Soul or Mind domain
+                  that is not Prismatic. The lineage colours it; it does not
+                  pick it. A Gift is a domain in every respect (II.3), cast in
+                  the intuitive tradition whatever the domain's own, and it
+                  *replaces* the Background's secondary skill — a character
+                  holds one domain at creation, from Lineage or Background,
+                  never both.
+        gift_domains: An optional restriction. Empty — the default and the
+                  norm — means any eligible domain. A setting that wants its
+                  people narrower may name a short list here; it is data, not
+                  a special case.
         gift_rate: Fiction only ("four in five", "vanishingly rare"). Never a
                   roll; it is texture, and a prompt for how the ungifted are
                   treated.
@@ -578,11 +587,26 @@ class LineageDefinition(BaseModel):
     name: str
     variants: list[str] = Field(default_factory=list)
     description: str
+    gift: Optional[str] = None
     gift_domains: list[str] = Field(default_factory=list)
     gift_rate: Optional[str] = None
     heritage: Optional[str] = None
     playable: bool = True
     formalizes_on: Literal["first_facet_level", "technique"] = "first_facet_level"
+
+    @property
+    def is_gifted(self) -> bool:
+        return self.gift is not None
+
+    @model_validator(mode="after")
+    def _restriction_needs_a_gift(self) -> "LineageDefinition":
+        if self.gift_domains and self.gift is None:
+            raise ValueError(
+                f"Lineage '{self.id}' lists gift_domains but carries no gift. "
+                "A restriction on a gift that does not exist silently does "
+                "nothing; give the lineage a `gift` line or drop the list."
+            )
+        return self
 
 
 # ---------------------------------------------------------------------------
@@ -994,17 +1018,6 @@ class MagicDomainDef(BaseModel):
                    "intuitive" (Spirit + Attune) or "scholarly"
                    (Knowledge + Lore); see MagicDef.traditions.
         requires_tier3: True for Prismatic domains that need a Tier 3 Technique.
-        lineage_gift: True for a domain a setting's lineage carries in the
-                   blood (PHB II.5). Such a domain is excluded from the Tier 1
-                   Technique's choice list — a Soul mage in Shattered Origin
-                   cannot pick "Crystal" — and reachable only by being born to
-                   it. This is what keeps a setting's blood-magic out of the
-                   core's shopping list without a second domain model.
-        draft: True while the entry's example intents are still awaiting the
-                   owner's read. A flag, never a gate: a drafted domain loads,
-                   validates, and can be simulated, because a Facet that
-                   cannot be tested before it is approved cannot be approved
-                   on evidence.
     """
 
     id: str
@@ -1013,8 +1026,6 @@ class MagicDomainDef(BaseModel):
     tradition: str
     description: str
     requires_tier3: bool = False
-    lineage_gift: bool = False
-    draft: bool = False
 
 
 class SparkEaseFocusedMajorDef(BaseModel):
@@ -1065,6 +1076,56 @@ class MagicSparkRulesDef(BaseModel):
     pre_technique_push: SparkPreTechniquePushDef = Field(default_factory=SparkPreTechniquePushDef)
 
 
+class IntentPurposeDef(BaseModel):
+    """One broad purpose a caster can ready an intent for (D23).
+
+    Deliberately broad. A purpose is not a spell and not a list of effects —
+    it is the *shape* of what the caster expects to need, decided ahead of
+    time, with the domain and the finishing form still chosen in the moment.
+    """
+
+    id: str
+    label: str
+    description: str
+
+
+class PreparedIntentsDef(BaseModel):
+    """Readied intents: the limit on Significant and Major magic (D23).
+
+    At the start of each session — and again after a full rest, which the MM
+    calls — a formalized caster readies up to `capacity` intents spread across
+    the purposes as they choose. A Significant or Major working spends one of
+    the matching purpose; the domain and what the magic actually does are
+    still decided when it is cast. Scopes in `free_scopes` spend nothing, so
+    small magic stays unlimited. Casting for a purpose with nothing readied
+    costs `off_purpose_spark_cost` Sparks instead.
+
+    The limit comes from having to guess. A party that readied Harm and Ward
+    and walks into a negotiation has no Reveal — a story about preparation,
+    not a spreadsheet.
+
+    Absent from a ruleset means no limit, which is the pre-D23 game; a setting
+    may choose that.
+    """
+
+    capacity: int = Field(3, ge=1)
+    free_scopes: list[Literal["minor", "significant", "major"]] = Field(
+        default_factory=lambda: ["minor"])
+    off_purpose_spark_cost: int = Field(1, ge=0)
+    purposes: list[IntentPurposeDef] = Field(min_length=1)
+
+    @field_validator("purposes")
+    @classmethod
+    def _unique_purposes(cls, v: list[IntentPurposeDef]) -> list[IntentPurposeDef]:
+        ids = [p.id for p in v]
+        if len(ids) != len(set(ids)):
+            raise ValueError(f"duplicate intent purpose ids: {ids}")
+        return v
+
+    def purpose(self, purpose_id: str) -> Optional[IntentPurposeDef]:
+        return next((p for p in self.purposes if p.id == purpose_id), None)
+
+
 class MagicDef(BaseModel):
     """Full magic configuration for a Facet module (PHB II.3).
 
@@ -1084,6 +1145,8 @@ class MagicDef(BaseModel):
         mind_domains: Domains available to Mind Facet characters.
         spark_rules: The two Spark-reach rules (Focused Major ease,
                      D8's pre-Technique push).
+        prepared_intents: The limit on Significant and Major magic (D23).
+                     None means unlimited.
     """
 
     traditions: dict[str, TraditionDef] = Field(default_factory=dict)
@@ -1094,6 +1157,7 @@ class MagicDef(BaseModel):
     soul_domains: list[MagicDomainDef] = Field(default_factory=list)
     mind_domains: list[MagicDomainDef] = Field(default_factory=list)
     spark_rules: MagicSparkRulesDef = Field(default_factory=MagicSparkRulesDef)
+    prepared_intents: Optional[PreparedIntentsDef] = None
 
     @property
     def all_domains(self) -> list[MagicDomainDef]:

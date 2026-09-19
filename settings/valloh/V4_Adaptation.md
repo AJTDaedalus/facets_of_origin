@@ -8,7 +8,7 @@ So a character built for Shattered Origin can walk into Val'loh with nothing cha
 
 ## What This Facet Changes, Counted
 
-> The core 2d6, Sparks, Conditions, exchanges, advancement, magic, and the three Facets are unchanged. Val'loh adds exactly: **ten Lineages** (two playable in Oraga Night), **ten Gift domains**, and **crystal charges** as one-use items. It removes nothing and it changes no rule.
+> The core 2d6, Sparks, Conditions, exchanges, advancement, magic, and the three Facets are unchanged. Val'loh adds exactly: **ten Lineages** (two playable in Oraga Night) and **crystal charges** as one-use items. It adds no domains, removes nothing, and changes no rule.
 
 That sentence is the whole mechanical footprint, and it is checked against the ruleset data by a test — the pitch cannot drift from the file.
 

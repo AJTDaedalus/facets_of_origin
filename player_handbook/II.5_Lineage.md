@@ -18,7 +18,7 @@ Your Lineage is who you were born as. Your **Background** is what you did about 
 >
 > **Description:** two or three sentences — where they are from, how they live, what the world expects of them.
 >
-> **Gift:** *None*, or a **domain**. A gifted lineage names the domain its blood carries, or a short list to choose from if the gift takes more than one shape. The Gift is a domain in every respect (Chapter II.3): intuitive tradition, Spirit + Attune, Minor scope until it formalizes, full scope after. It **replaces the Background's Secondary Skill**, exactly as a magic-granting Background's Domain origin does. Where a lineage is gifted only in part, the entry states the rate as fiction — *four in five carry it* — and you say which your character is.
+> **Gift:** *None*, or a line saying how the gift **shows itself** in these people — *through grown crystal*, *as a prickle before danger*. The lineage colours the gift; **the player chooses which domain it is**, from any Soul or Mind domain in the catalog that is not Prismatic. The Gift is a domain in every respect (Chapter II.3): Minor scope until it formalizes, full scope after — and it is always cast in the **intuitive** tradition, Spirit + Attune, even when the domain chosen is one scholars reach through Knowledge and Lore. Blood is not study. It **replaces the Background's Secondary Skill**, exactly as a magic-granting Background's Domain origin does. Where a lineage is gifted only in part, the entry states the rate as fiction — *four in five carry it* — and you say which your character is.
 >
 > **Heritage:** one narrow fact every member of the lineage grows up with, gifted or not. It works the way a Specialty works: when it bears directly on a roll, Standard becomes Easy; when it is tangential, the MM hands you the information without a roll. It draws from the **same** one-step allowance as Specialties and Techniques (Chapter III.1, *Difficulty*) — a Heritage and a Specialty that both apply are still one step, not two.
 
@@ -58,7 +58,7 @@ A gifted character's domain works as Chapter II.3 describes it. Three things are
 
 ## Formalization
 
-A Lineage Gift **formalizes at your first Facet level, in whichever Facet that level lands, and spends no Technique pick.** The reflection scene for that level is the Gift arriving in full.
+A Lineage Gift **formalizes at your first Facet level, in whichever Facet that level lands, and spends no Technique pick.** The reflection scene for that level is the Gift arriving in full — and from then on you ready intents for it at the start of each session, exactly as any formalized caster does (Chapter II.3, *Readied Intents*).
 
 A Background domain still formalizes through the Soul or Mind Tier 1 Technique, as Chapter II.4 says. The two routes never combine, because a character holds one creation domain.
 
@@ -78,7 +78,7 @@ Five steps, mirroring the custom Background in Chapter II.6.
 
 **1. Name it, and say who they are.** Two or three sentences. A lineage is a *people*, not a profession. If the description reads like a job — what they do for money, who employs them, what they trained in — you have written a Background.
 
-**2. Decide whether it is gifted.** If not, skip to step 4. If so, the gift is a domain, and you write it in the catalog format the appendix uses: territory, *beyond this domain's focus*, three example intents at each scope. **Focused** is the default type for a gift — a people's magic does one thing deeply. **Standard** if the gift genuinely spans a territory. Never Prismatic; a prismatic territory is a lifetime's mastery, not a birthright.
+**2. Decide whether it is gifted.** If not, skip to step 4. If so, write one line saying how the gift **shows itself** in these people — what it looks like, sounds like, costs them — and stop there. **Do not write a new domain.** Your players choose which existing domain the gift is, and that choice is where the variety lives: two members of the same people can carry gifts as different as Fire and Divination and still be unmistakably kin, because the gift *looks* the same. If your setting genuinely needs a people narrower than that, you may name a short list of allowed domains — but try it open first. A catalog of one domain per people is a catalog of fixed classes, and this game does not have those.
 
 **3. State the rate as fiction.** "Nearly all." "One in five." "Vanishingly rare." The rate is texture, and it is a prompt: it tells you how the ungifted are treated, which is usually the more interesting half of the question. It is never a roll.
 

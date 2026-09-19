@@ -355,14 +355,17 @@ class TestLineageRoundTrips:
             attributes=dict(strength=1, dexterity=2, constitution=1,
                             intelligence=3, wisdom=2, knowledge=2, spirit=2,
                             luck=2, charisma=3),
-            ruleset=rs, lineage="orthaen", gifted=True, magic_domain="crystal")
+            ruleset=rs, lineage="orthaen", gifted=True, magic_domain="transmutation")
         assert errors == []
         back = Character.from_fof(
             char.to_fof([{"id": "base", "version": "0.1.0"}], "s"), rs)
         assert back.lineage == "orthaen"
         assert back.gifted is True
         assert back.domain_source == "lineage"
-        assert back.magic_domain == "crystal"
+        assert back.magic_domain == "transmutation"
+        # A Mind domain chosen as a gift keeps its intuitive tradition across a
+        # save and load, or the reloaded character rolls the wrong attribute.
+        assert back.magic_tradition == "intuitive"
 
     def test_an_ungifted_member_survives_a_round_trip(self):
         from app.game.character import Character, create_default_character

@@ -1484,6 +1484,35 @@ magic:
   # (D14) and is reachable only via the
   # Ascendant Domain Tier 3 Technique. INV-7 (test_docs_consistency.py) enforces
   # that this list and the appendix never drift apart.
+  # ---------------------------------------------------------------------------
+  # Readied intents (D23 — supersedes D17). The limit on Significant and Major
+  # magic. Minor is free and unlimited. At the start of each session, and after
+  # a full rest the MM calls, a formalized caster readies `capacity` intents
+  # across these purposes; a Significant or Major working spends one of the
+  # matching purpose, with the domain and the finishing form still chosen in
+  # the moment. With nothing readied for the purpose, it costs a Spark instead.
+  # The limit comes from having to guess what the session will need.
+  prepared_intents:
+    capacity: 3
+    free_scopes: [minor]
+    off_purpose_spark_cost: 1
+    purposes:
+      - id: harm
+        label: Harm
+        description: "Destroy, damage, disable, drive off."
+      - id: ward
+        label: Ward
+        description: "Protect, block, bind, conceal."
+      - id: mend
+        label: Mend
+        description: "Heal, restore, calm, repair."
+      - id: shape
+        label: Shape
+        description: "Create, move, transform, build."
+      - id: reveal
+        label: Reveal
+        description: "Sense, learn, find, communicate."
+
   soul_domains:
     - id: fire
       name: "Fire"

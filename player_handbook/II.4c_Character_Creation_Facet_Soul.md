@@ -190,7 +190,7 @@ You always know when something supernatural is present in a scene — a spirit, 
 
 **Roll:** Spirit + Attune.
 
-You have developed an intuitive magical domain through spiritual practice, natural gift, or a bond you do not entirely understand. Choose one domain from the Domains of the Soul list (Chapter II.3). You may use magic within that domain using the Domain + Intent + Scope framework. Roll Spirit, adding your Attune rank, when doing so.
+You have developed an intuitive magical domain through spiritual practice, natural gift, or a bond you do not entirely understand. Choose one domain from the Domains of the Soul list (Chapter II.3). You may use magic within that domain using the Domain + Intent + Scope framework. Roll Spirit, adding your Attune rank, when doing so. From now on you ready three intents at the start of each session, and your Significant and Major workings spend them (see *Readied Intents*, II.3).
 
 **Normal:** A domain's origin is a Background, and it is limited to Minor scope until a Facet Technique unlocks it (see *Acquiring a Domain*, II.3).
 
@@ -248,6 +248,6 @@ You may anchor something spiritual that is failing or breaking: a ritual unravel
 
 *Requires an existing Soul domain (Spiritual Domain).* Your practice has outgrown a single territory. Choose one prismatic domain from the Domains of the Soul list (Chapter II.3). You may work within it using the Domain + Intent + Scope framework, rolling Spirit. The Prismatic difficulty table applies — Hard at Minor scope, Very Hard at Significant and Major — and reach-Sparks cannot move a Prismatic working's difficulty, though dice-Sparks work normally (Chapter II.3, *Sparks and Magic*). Your original domain is unchanged; the prismatic territory is a wider practice built on everything it taught you. A character masters one prismatic territory — Ascendant Domain is taken once, however many Facet trees they eventually climb (Chapter II.3).
 
-**Normal:** Domains are Focused or Standard; prismatic territories are not otherwise available (see Table II.3–2).
+**Normal:** Domains are Focused or Standard; prismatic territories are not otherwise available (see Table II.3–3).
 
 ---

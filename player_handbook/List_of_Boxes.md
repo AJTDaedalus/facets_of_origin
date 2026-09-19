@@ -15,6 +15,8 @@
 | **Example** | [The Scholar](II.2_Character_Creation_Attributes.md#deriving-your-major-attribute-modifiers) | II.2_Character_Creation_Attributes.md |
 | **Through the Mirror** | [why the spread matters](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play) | II.2_Character_Creation_Attributes.md |
 | **Example** | [the same intent at three scopes](II.3_Magic.md#scope) | II.3_Magic.md |
+| **Example** | [readying, and then deciding](II.3_Magic.md#readied-intents) | II.3_Magic.md |
+| **Through the Mirror** | [why magic is prepared for, and why only the big half](II.3_Magic.md#readied-intents) | II.3_Magic.md |
 | **MM Note** | [When magic goes wrong (6− templates)](II.3_Magic.md#outcome-tiers-for-magic) | II.3_Magic.md |
 | **Through the Mirror** | [why early magic is capped by scope, not by difficulty](II.3_Magic.md#acquiring-a-domain) | II.3_Magic.md |
 | **Example** | [spending skill points across Facets](II.4_Character_Creation_Facets.md#advancing-skills) | II.4_Character_Creation_Facets.md |

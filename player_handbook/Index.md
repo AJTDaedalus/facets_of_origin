@@ -75,7 +75,6 @@
 - [II.5 — Character Creation: Lineage](II.5_Lineage.md#character-creation-lineage)
 - [II.5 — Reading the Entries — Lineages](II.5_Lineage.md#reading-the-entries--lineages)
 - [II.5 — Human](II.5_Lineage.md#human)
-- [II.5 — Formalization](II.5_Lineage.md#formalization)
 - [II.6 — What Is a Background?](II.6_Character_Creation_Backgrounds.md#what-is-a-background)
 - [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
@@ -417,7 +416,6 @@
 
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
 - [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 - [II.5 — The Gift Is a Domain](II.5_Lineage.md#the-gift-is-a-domain)
 
 ## Graceful Fail
@@ -457,7 +455,6 @@
 *Defined in [II.3](II.3_Magic.md).*
 
 - [II.3 — Intent](II.3_Magic.md#intent)
-- [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 - [II.7 — Skills of the Body](II.7_Character_Creation_Skills.md#skills-of-the-body)
 - [II.7 — Skills of the Soul](II.7_Character_Creation_Skills.md#skills-of-the-soul)
@@ -466,6 +463,7 @@
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
+- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
 - [MM2 — "Yes, And" / "Yes, But" / "No, But"](../mm_manual/MM2_Session_Design.md#yes-and--yes-but--no-but)
 - [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
@@ -511,6 +509,7 @@
 - [Appendix Magic Domains — Core Mind Domains](Appendix_Magic_Domains.md#core-mind-domains)
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
+- [II.3 — Readied Intents](II.3_Magic.md#readied-intents)
 - [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
 - [II.4 — How Far a Skill Can Go](II.4_Character_Creation_Facets.md#how-far-a-skill-can-go)
@@ -619,6 +618,7 @@
 
 *Defined in [III.3](III.3_Combat.md).*
 
+- [II.3 — Readied Intents](II.3_Magic.md#readied-intents)
 - [II.4 — What Is a Facet?](II.4_Character_Creation_Facets.md#what-is-a-facet)
 - [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
 - [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
@@ -645,6 +645,7 @@
 *Defined in [III.1](III.1_Core_Resolution.md).*
 
 - [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Attributes.md#in-play-the-vanishing-of-millhaven)
+- [II.3 — Intent](II.3_Magic.md#intent)
 - [II.3 — Example: A Mage, a Beam, a Problem](II.3_Magic.md#example-a-mage-a-beam-a-problem)
 - [II.3 — In Play: The Thornwall Lower Archive](II.3_Magic.md#in-play-the-thornwall-lower-archive)
 - [III.1 — Partial Success (7–9)](III.1_Core_Resolution.md#partial-success-79)
@@ -743,6 +744,15 @@
 - [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
 - [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
 
+## Purpose
+
+*Defined in [II.3](II.3_Magic.md).*
+
+- [II.3 — Intent](II.3_Magic.md#intent)
+- [II.3 — Readied Intents](II.3_Magic.md#readied-intents)
+- [II.3 — Sparks and Magic](II.3_Magic.md#sparks-and-magic)
+- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
+
 ## Rank
 
 - [Appendix Character Sheet — Rank Slots](Appendix_Character_Sheet.md#rank-slots)
@@ -751,8 +761,6 @@
 - [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
 - [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 - [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
 - [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [II.7 — Character Creation: Skills](II.7_Character_Creation_Skills.md#character-creation-skills)
@@ -791,6 +799,14 @@
 - [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)
 - [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
 
+## Readied Intent
+
+*Defined in [II.3](II.3_Magic.md).*
+
+- [II.3 — Readied Intents](II.3_Magic.md#readied-intents)
+- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
+- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
+
 ## Reflection Scene
 
 *Defined in [II.4](II.4_Character_Creation_Facets.md).*
@@ -798,7 +814,6 @@
 - [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
 - [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
 - [II.4 — Advancement and Reflection](II.4_Character_Creation_Facets.md#advancement-and-reflection)
-- [II.5 — Formalization](II.5_Lineage.md#formalization)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 
 ## Resolve
@@ -856,8 +871,6 @@
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [II.3 — Scope](II.3_Magic.md#scope)
 - [II.3 — Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope)
-- [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 - [II.5 — Reading the Entries — Lineages](II.5_Lineage.md#reading-the-entries--lineages)
 - [II.5 — The Gift Is a Domain](II.5_Lineage.md#the-gift-is-a-domain)
 - [II.6 — Magic and Backgrounds](II.6_Character_Creation_Backgrounds.md#magic-and-backgrounds)
@@ -960,6 +973,7 @@
 - [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
 - [II.2 — How Attributes Work in Play](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play)
 - [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Attributes.md#in-play-the-vanishing-of-millhaven)
+- [II.3 — Readied Intents](II.3_Magic.md#readied-intents)
 - [II.3 — Sparks and Magic](II.3_Magic.md#sparks-and-magic)
 - [II.4 — Advancement and Reflection](II.4_Character_Creation_Facets.md#advancement-and-reflection)
 - [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
@@ -1121,7 +1135,6 @@
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
 - [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [II.5 — Formalization](II.5_Lineage.md#formalization)
 - [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
 - [III.3 — Tier 1 Conditions](III.3_Combat.md#tier-1-conditions)
 - [III.3 — Tier 2 Conditions](III.3_Combat.md#tier-2-conditions)

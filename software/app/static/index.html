@@ -526,6 +526,24 @@
                 <div id="magic-difficulty-preview" class="magic-difficulty-preview"></div>
               </div>
 
+              <!-- D23: readied intents. Minor is free; Significant and Major
+                   spend one of the matching purpose, or a Spark. -->
+              <div id="magic-readied-wrap" class="hidden" style="margin-bottom:8px;">
+                <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:4px;">READIED INTENTS</div>
+                <div id="magic-readied-pips"></div>
+                <div id="magic-ready-form" class="hidden">
+                  <div id="magic-ready-inputs"></div>
+                  <button class="btn btn-sm" onclick="submitReadyIntents()">Ready these</button>
+                  <span id="magic-ready-remaining" style="font-size:0.75rem;color:var(--text-dim);"></span>
+                </div>
+              </div>
+
+              <div id="magic-purpose-wrap" class="hidden">
+                <label for="magic-purpose">Purpose</label>
+                <select id="magic-purpose"></select>
+                <div id="magic-purpose-cost" style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px;"></div>
+              </div>
+
               <!-- Intent -->
               <label>Intent</label>
               <input type="text" id="magic-intent" placeholder="What does the magic do?">
@@ -581,6 +599,8 @@
                       title="Clear Tier 1 Conditions, apply Withdrawn recovery, reset reactions">End Exchange</button>
               <button class="btn btn-secondary btn-sm" onclick="endCombat()">End Combat</button>
               <button class="btn btn-secondary btn-sm" onclick="endScene()">End Scene</button>
+              <button class="btn btn-secondary btn-sm" onclick="callFullRest()"
+                      title="The party has had a full rest: casters may ready their intents again">Full Rest</button>
             </div>
             <p class="card-help">
               Enemies never roll. When one attacks, land the incoming Condition on the target below —

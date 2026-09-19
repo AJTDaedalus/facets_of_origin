@@ -462,7 +462,7 @@ night with. Nobody sits out the Longest Night.
 
 **⟨The Bought change sides.⟩** A table that buys the captain out *before* midnight
 holds the gate open from the first scream. This is genuinely reachable: the company
-is visible in the trade district at dusk to a Phern with the Warning gift, the
+is visible in the trade district at dusk to a gifted Phern, the
 sergeants will talk to anyone who opens with money, and a Draunel or a Circle patron
 could be talked into fronting the fee by a party who explains what it buys.
 

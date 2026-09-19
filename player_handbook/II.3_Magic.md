@@ -42,13 +42,27 @@ The player describes the intent. The dice determine how cleanly it resolves. If 
 
 The intent matters because it anchors the outcome to something real. Vague intent gets you a vague result. Precise intent gets you a precise one — or at least a precisely interesting failure.
 
+Every intent also has a **purpose** — one of five broad shapes that magic takes:
+
+**Table II.3–1: The Five Purposes**
+
+| Purpose | What it covers |
+|---|---|
+| **Harm** | Destroy, damage, disable, drive off |
+| **Ward** | Protect, block, bind, conceal |
+| **Mend** | Heal, restore, calm, repair |
+| **Shape** | Create, move, transform, build |
+| **Reveal** | Sense, learn, find, communicate |
+
+For small magic the purpose is just a description. For large magic it is what you prepared for (see *Readied Intents*, below).
+
 ---
 
 ### Scope
 
 **Scope** is how ambitious the effect is. Declare it before you roll. It determines the base difficulty.
 
-**Table II.3–1: Scope**
+**Table II.3–2: Scope**
 
 | Scope | Description | Examples |
 |---|---|---|
@@ -90,7 +104,7 @@ There are three domain types:
 
 ### Base Difficulty by Domain Type and Scope
 
-**Table II.3–2: Base Difficulty by Domain Type and Scope**
+**Table II.3–3: Base Difficulty by Domain Type and Scope**
 
 | Domain Type | Minor | Significant | Major |
 |---|---|---|---|
@@ -101,6 +115,44 @@ There are three domain types:
 A Focused domain mage lighting a candle rolls at Easy difficulty. A Prismatic domain mage doing the same rolls at Hard. Power at scale requires either the right domain type or the right Techniques. Reach-Sparks cannot move a Prismatic working's difficulty; dice-Sparks work normally (see *Sparks and Magic* below).
 
 Techniques within the Mind and Soul trees can extend what your domain can do — Second Domain (Tier 3) opens an adjacent territory, and Ascendant Domain (Tier 3) unlocks prismatic practice. The domain defines what is on the table; Techniques define how far you can reach beyond it.
+
+---
+
+## Readied Intents
+
+**Minor magic is free.** Light the candle, feel the vibration, leave the small mark — as often as the fiction allows.
+
+**Significant and Major magic is prepared for.** At the start of each session, a caster whose magic has formalized **readies three intents**, spread across the five purposes however they like — three of one, one of each of three, anything that adds to three. A Significant or Major working **spends one readied intent of its purpose.** Your domain, and what the magic actually does, are still yours to decide when you cast. What you committed to in advance is only the *shape*.
+
+> **Example — readying, and then deciding**
+>
+> Once Zahna's Inscription formalizes, a session might open with him readying **Reveal, Reveal, Ward**. Later, in some archive, he spends a Reveal reading a sealed door's history back to the hand that sealed it — Significant, Inscription, and nothing about the working itself was decided until he was standing in front of that door.
+
+**With nothing readied for the purpose you need**, you may still cast: it costs **a Spark** instead. That Spark does nothing else — it does not improve the roll — so a caster who wants both pays for both.
+
+**Readied intents come back after a full rest.** When the party has genuinely rested is the MM's call. Otherwise they return at the start of the next session. You cannot re-ready what you have until then; a choice you can revise whenever it turns out wrong is not a choice.
+
+**Before your magic formalizes**, you have no readied intents and need none: you work at Minor scope, which is free (see *Before the Technique*, below). The Technique that formalizes your domain is what gives you your three.
+
+A spent intent stays spent whatever the roll. It was the commitment, not the success, that you paid for.
+
+**Table II.3–4: What a Working Costs**
+
+| Scope | Cost |
+|---|---|
+| Minor | Nothing |
+| Significant | One readied intent of its purpose — or a Spark if none is readied |
+| Major | One readied intent of its purpose — or a Spark if none is readied |
+
+> **Through the Mirror — why magic is prepared for, and why only the big half**
+>
+> For a while this game had no limit on magic at all. Every working was priced by its roll — scope set the difficulty, a 7–9 always cost something, a 6− always hurt — and that does keep a caster from doing any one thing *too well*. What it does not do is keep them from doing *everything*. A caster with no limit on how many large things they can do in a day is the solution to every problem the session contains, and the rest of the party watches.
+>
+> Spell slots fix that by making the caster choose their spells in advance, which is precise and dreadful: it turns the most creative mechanic in the book into a shopping list, and the list is always wrong. So we moved the choice up a level. You do not prepare a spell; you prepare a *purpose* — "I expect to need to hurt something, and to find something out" — and keep every bit of the in-the-moment invention the Domain + Intent + Scope system was built for.
+>
+> The limit comes from guessing. A party that readied Harm and Ward and then walks into a negotiation has no Reveal, and has to decide whether knowing the truth is worth a Spark. That is a story about preparation, told by the people at the table, not a table of spells.
+>
+> And the small magic stays free because it is not the problem. Nobody's campaign was ever broken by a candle.
 
 ---
 
@@ -175,9 +227,11 @@ Notably: Zahna could have attempted Major scope instead, requesting the entire f
 
 ## Sparks and Magic
 
-Two rules cover everything a Spark does for a caster.
+Three rules cover everything a Spark does for a caster.
 
 **The dice.** A Spark improves the dice: +1d6, drop the lowest. This works on any roll, including every magic roll — a Prismatic working included.
+
+**Off-purpose.** A Significant or Major working with nothing readied for its purpose costs a Spark instead of a readied intent (see *Readied Intents*, above). That Spark buys the working and nothing else.
 
 **The reach.** A Spark buys reach in exactly two cases:
 
@@ -211,7 +265,7 @@ There are 21 domains: twelve for the Soul (nine core and three Prismatic) and ni
 >
 > Capping scope does the same work from the other end. A starting caster succeeds at their magic, reliably, at their normal difficulty, and simply cannot yet do the big thing. The limit is legible in the fiction instead of hidden in the dice, and the Technique becomes a door that opens rather than a penalty that lifts.
 
-**Before the Technique.** Your domain origin comes from your Background (Chapter II.6) or your Lineage (Chapter II.5), not your Technique. Until you unlock the corresponding Facet Technique, magic is real but limited: **Minor scope only**. You can light a candle, sense a vibration, or leave a small mark — but you cannot fill a room with fire or shatter a wall with sound. The Technique is not when you gain magic — it is when your magic becomes what it is capable of being. Minor scope uses the domain's normal difficulty table: Easy for Focused, Standard for Standard, Hard for Prismatic.
+**Before the Technique.** Your domain origin comes from your Background (Chapter II.6) or your Lineage (Chapter II.5), not your Technique. Until you unlock the corresponding Facet Technique, magic is real but limited: **Minor scope only**. You can light a candle, sense a vibration, or leave a small mark — but you cannot fill a room with fire or shatter a wall with sound. The Technique is not when you gain magic — it is when your magic becomes what it is capable of being. It is also when you gain your three **readied intents** (see *Readied Intents*, above). Minor scope uses the domain's normal difficulty table: Easy for Focused, Standard for Standard, Hard for Prismatic.
 
 A **Lineage Gift** is the one exception to how that lock opens. It formalizes at your first Facet level, in whichever Facet that level lands, and spends no Technique pick — blood is not study (Chapter II.5, *Formalization*). The scope restriction before then is exactly the same.
 

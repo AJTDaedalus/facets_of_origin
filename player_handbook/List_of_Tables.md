@@ -15,8 +15,10 @@
 | **II.2–2** | [Major Attribute Modifiers](II.2_Character_Creation_Attributes.md#deriving-your-major-attribute-modifiers) | II.2_Character_Creation_Attributes.md |
 | **II.2–3** | [Outcome Tiers](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play) | II.2_Character_Creation_Attributes.md |
 | **II.2–4** | [Difficulty Modifiers](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play) | II.2_Character_Creation_Attributes.md |
-| **II.3–1** | [Scope](II.3_Magic.md#scope) | II.3_Magic.md |
-| **II.3–2** | [Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope) | II.3_Magic.md |
+| **II.3–1** | [The Five Purposes](II.3_Magic.md#intent) | II.3_Magic.md |
+| **II.3–2** | [Scope](II.3_Magic.md#scope) | II.3_Magic.md |
+| **II.3–3** | [Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope) | II.3_Magic.md |
+| **II.3–4** | [What a Working Costs](II.3_Magic.md#readied-intents) | II.3_Magic.md |
 | **II.4–1** | [Skill Ranks](II.4_Character_Creation_Facets.md#skills) | II.4_Character_Creation_Facets.md |
 | **II.4–2** | [Skill Point Cost per Mark](II.4_Character_Creation_Facets.md#advancing-skills) | II.4_Character_Creation_Facets.md |
 | **II.4–3** | [Marks per Rank Advance](II.4_Character_Creation_Facets.md#advancing-skills) | II.4_Character_Creation_Facets.md |

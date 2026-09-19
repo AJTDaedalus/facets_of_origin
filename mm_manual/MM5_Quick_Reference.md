@@ -150,7 +150,7 @@ PC Posture is declared blind. Enemy stances are **stated, not concealed** — an
 | **Strike** | 2d6 + weapon attribute + Combat or Finesse (default melee/ranged; the fiction may say otherwise) | Deplete enemy Resolve (10+: −2, 7–9: −1); 10+ also chooses one rider — Open or Position |
 | **Maneuver** | 2d6 + relevant skill | 10+: rolls against the target are Easy until the situation changes. 7–9: rolls against the target stay Standard. 6-: backfire |
 | **Support** | 2d6 + relevant skill | Grant ally +1d6 drop lowest OR difficulty one step easier on next roll |
-| **Magic** | 2d6 + Spirit + Attune, or Knowledge + Lore (by tradition) | Domain + Intent + Scope; vs enemy depletes Resolve like a Strike |
+| **Magic** | 2d6 + Spirit + Attune, or Knowledge + Lore (by tradition) | Domain + Intent + Scope; Significant/Major spends a readied intent; vs enemy depletes Resolve like a Strike |
 
 **Press:** Spend 1 Endurance Pool point before a Strike to add 1d6 drop lowest (stacks with Sparks).
 
@@ -273,8 +273,9 @@ A charge is consumed only when armor provides the reduction actually applied —
 | Major | Hard | Very Hard | Very Hard (ceiling) |
 
 - **The roll:** casting with Spirit adds the Attune rank; casting with Knowledge adds the Lore rank (Novice +0 if untrained)
-- **Pre-technique:** Minor scope only, at the domain's normal difficulty (no extra penalty — the scope restriction *is* the limitation)
-- **Sparks and magic** — dice-Sparks work on any roll, including every magic roll. A Spark buys **reach** in exactly two cases, player-declared before the roll:
+- **Readied intents:** Minor is free. **Significant and Major spend one readied intent of their purpose** (Harm · Ward · Mend · Shape · Reveal). A formalized caster readies **3** at the start of each session, spread as they like; domain and effect are still chosen when cast. Nothing readied for the purpose → costs **a Spark** instead. They come back after a **full rest — your call** — or at the next session. A spent intent stays spent whatever the roll.
+- **Pre-technique:** Minor scope only, at the domain's normal difficulty (no extra penalty — the scope restriction *is* the limitation). No readied intents until the Technique formalizes the domain.
+- **Sparks and magic** — dice-Sparks work on any roll, including every magic roll. An off-purpose Significant or Major working costs a Spark that buys the working and nothing else. A Spark buys **reach** in exactly two cases, player-declared before the roll:
   - **Pre-Technique Significant:** a pre-Technique caster may spend a Spark to attempt **one** Significant-scope effect at the domain's normal Significant difficulty. One effect per Spark — not an unlock; Major stays closed until the Tier 1 Technique.
   - **Focused eases Major:** a Focused domain may spend a Spark to shift a Major effect one step easier (Hard → Standard). Focused only.
   - **Prismatic:** reach-Sparks cannot move a Prismatic working's difficulty; dice-Sparks work normally.
@@ -287,6 +288,7 @@ A charge is consumed only when armor provides the reduction actually applied —
 - **Check the ceiling before you price the roll.** A pre-technique caster is capped at **Minor** — except that a Spark buys one Significant-scope attempt at normal difficulty. Beyond that it is an availability question, not a difficulty one. Tell them what their magic can do now and let them re-aim.
 - **Domain boundaries — lean toward yes.** The test is substance vs. rhyme: does it run through the domain's actual material, or only share its mood? Fire burning the breathable content out of the air = yes; fire commanding the weather = no. Shadow muffling sound = yes; shadow granting invisibility = no. Don't surcharge a creative stretch — if the reach is more ambitious, that shows up as scope. A "no" is a **"No, but..."**. A "yes" is precedent — you are setting it permanently.
 - **7–9: the magic worked.** Pick the cost first — **affects more than intended** / **costs something unexpected** / **creates a consequence nobody planned** — then name it while narrating the success it rides on; the complication is added to a success, never a discount on one. Mine the player's stated intent for the specifics. Rotate categories — four costs in a row and 7–9 becomes a flat fee. Test: does the table now have something to *do*?
+- **Full rests are your call** (compressed from MM2, *Calling a Full Rest*). Default: a night's sleep somewhere safe; most sessions have none. Grant them freely and readied intents stop being a guess. Say the call before anyone readies.
 - **Active opposition = Standard floor.** A floor, not a surcharge. It only ever moves the **Easy** cell (Focused domain, Minor scope); every other combination already meets it, so raising a Hard roll "because combat" applies it twice. Opposition = something with its own will resisting *this working, right now* — a sealed door is difficulty, the rival holding it shut is opposition. Specific circumstances (distracted, wounded, constrained) may still adjust; "it is a battle" is not a circumstance.
 
 ### Social 7–9 Costs (compressed from MM2 — see MM2 for full text)

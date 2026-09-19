@@ -38,72 +38,35 @@ change: each is one sentence in `V1_Lineages.md` and one field in the data.
 | Krenn | *(none — the entry exists only to stat Vell)* |
 | Tyndi | Gadget-lore; reads a device's control gem |
 
-## 2. The domain names
+## 2. Retired: the ten custom domains *(owner ruling, 2026-09-18 — D24)*
 
-Canon describes what each tribe's gift *does*; the names are mine. **Crystal**,
-**Warning**, **The Bond**, **Blade-bond**, **Stone-flesh**, **Dream**,
-**Wildspeech**, **The Weave**, **Mindshare**, **Resonance of Stone**. Rename freely
-— each appears in `facet.yaml`, `V1`, and the appendix format, and nowhere else.
+The domain names, beyond-the-focus lines, thirty example intents, and the three
+gift mechanics (Blade-bond, Stone-flesh, the Bond's reaction clause) that used to be
+reviewed here are **gone**. Your ruling: tribal magic is a variation of the domains the
+game already has, and the player chooses which. A gifted lineage now carries one line
+saying how its gift *shows itself*; the domain is the player's pick from the core
+catalog (any non-Prismatic Soul or Mind domain), always cast intuitively.
 
-## 2b. The thirty example intents — now in the book
+What is left to review from that layer is just the ten **gift lines** in
+`software/facets/valloh/facet.yaml` and `V1`. They paraphrase canon — *"shows itself
+through grown soul-crystal"* for the Orthaen, *"as warning: a prickle before danger"*
+for the Phern — and add nothing canon does not say, except that each is worded as
+appearance rather than capability, so it never restricts a player's domain choice.
 
-They were drafted in `BRIEF_valloh_facet.md` §5 and, until now, never carried into
-`settings/valloh/V2`, which claimed a catalog it did not contain. Written in, in the
-core appendix's format: territory, beyond-the-focus, three intents at each scope.
+## 3. The Oraga pregens' gift domains *(my choice — please check)*
 
-**Three gifts arrived carrying rules, and all of them are cut.** Blade-bond let its
-Strike leave an enemy Open on a 7–9 as well as a 10+, and resolve as a Final Blow
-once per session at Major scope. Stone-flesh let its holder take a Tier 2 Condition
-as Tier 1 once per scene, and refuse to be Broken once per session.
+The four gifted pregens needed a domain once the custom ones were gone. Chosen to fit
+each pregen's existing concept; change any of them and the printed block regenerates.
 
-Cut for the reason the Thenya Bond's reaction clause was cut: we have measured what
-happens when a gift carries a mechanic, and it put the Hard encounter row at 75%
-against a 40–60% band. A gift granting an extra Condition tier or a second Final Blow
-is a Technique that skipped the Technique economy, handed out at creation to a
-character who paid nothing for it.
+| Pregen | Lineage | Domain chosen | Why |
+|---|---|---|---|
+| Serane | Orthaen | **Transmutation** | the Orthaen gift as crystal grown and shaped |
+| Andra | Orthaen | **Inscription** | "her charges are her notebook" — recording into lattice |
+| Ilesse | Orthaen | **Warding** | the palaces' stored defensive crystalwork |
+| Pello | Phern | **Divination** | the Phern gift in canon is danger sense |
 
-Those intents are replaced with fiction of the same weight — *the blade goes through
-what should have stopped it*; *be the last thing between a thing and a door, for as
-long as that has to be true* — and a Through the Mirror box says why. **If you want
-any of the three as real mechanics, say so and they become Techniques in a Facet
-tree, simulated before they print.** A new invariant now refuses a gift entry that
-carries one.
-
-## 3. The *beyond this domain's focus* lines
-
-Every domain in the core catalog prints what it cannot do; these ten needed the
-same, and every one is invention. They are the load-bearing half of a Focused
-domain — they are what stops "Crystal" from meaning "anything made of matter" at a
-table three sessions in — so they are worth your read even if the names stand.
-
-The ones that make a real ruling rather than an obvious one:
-
-| Domain | The line that decides something | Why |
-|---|---|---|
-| Crystal | *"any working the crystal merely holds — that is the spellform's domain, not this one"* | Draws the line between the Orthaen gift and traditional spellcraft, which canon says the crystal *stores*. Without it, Crystal absorbs the whole magic system. |
-| The Bond | *"anything premeditated — the Bond answers a moment, never a plan"* | Canon says the Thenya gift fires when a bonded loved one faces death. This makes that a limit rather than flavour. |
-| Warning | *"this is a prickle, not sight"* | Keeps Warning from becoming clairvoyance. |
-| Wildspeech | *"plants — that is Verdance's"* | Deconflicts with the core catalog. |
-| Mindshare | *"changing what someone is, rather than what they do next"* | The line that keeps Vell's nudge a nudge. |
-
-## 4. Fthala gift rate — **"most"** *(⚠ not in canon)*
-
-`systems.md` gives a rate for every tribe except the Fthala. "Most" is a guess
-chosen to sit between the Phern's "nearly all" and the Akathi's "half". Flagged in
-the data with an inline comment. One word to change.
-
-## 5. The Bond's reaction clause — **drafted, simulated, CUT**
-
-The brief proposed that a Thenya could invoke the Bond as a *reaction* on a loved
-one's behalf — Intercept without the Endurance cost. It was simulated before it
-printed (`docs/LOG_valloh_facet.md` V9) and cut: it took the Hard encounter row from
-41% to **75%** party wins, making one lineage's gift worth more than a category of
-encounter difficulty.
-
-**Nothing is lost in the fiction.** A Thenya can still throw themselves between a
-loved one and a blade — that is an ordinary Bond working at Significant scope, and
-it is rolled. What was cut is the free, unrolled, always-on version. Raise it again
-if you want it; the numbers are recorded.
+All four are cast intuitively (Spirit + Attune), including the three that are Mind
+domains.
 
 ## 6. The six crystal charges
 

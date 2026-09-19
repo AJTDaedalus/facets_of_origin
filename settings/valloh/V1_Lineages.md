@@ -2,7 +2,7 @@
 
 Ten peoples, and all of them human. That is the first thing to know and the thing most outsiders get wrong: the tribes of Val'loh are not different kinds of people. They are the same kind of people, and some of them are born carrying something.
 
-What they carry is a **domain** — magic, in the sense the core rules use the word, and not a lesser or stranger kind. A Phern who feels the ambush before it lands is doing what a Soul mage does when they reach for Shadow. The difference is where it came from: one was learned, and one was not.
+What they carry is a **domain** — magic, in the sense the core rules use the word, and not a lesser or stranger kind. **You choose which domain.** Each entry below says how the gift *shows itself* in that people; it does not say which domain it is. A Phern's gift is always a prickle before danger, and whether that prickle is Divination or Fate or something stranger is the player's call. The difference between a gift and a learned domain is where it came from, never what it can do.
 
 Entries follow the format in Chapter II.5. A field is never printed empty.
 
@@ -16,7 +16,7 @@ Entries follow the format in Chapter II.5. A field is never printed empty.
 
 **Description:** The crystal-growers, and the reason Rekuzan's walls glow at dusk. They coax soul-crystal out of stone and shape it while it sets, and they have been doing it long enough that most of the capital is, structurally, something an Orthaen grew. Four in five are born to it. The fifth spends a life surrounded by the work of hands that could do what theirs cannot.
 
-**Gift:** **Crystal** — growing, shaping, charging, and reading soul-crystal; holding a working in a lattice. *Four in five carry it.*
+**Gift:** Shows itself through grown soul-crystal: coaxed out of stone, shaped as it sets, and able to hold a working. **A domain of your choice** — any non-Prismatic Soul or Mind domain. *Four in five carry it.*
 
 **Heritage:** Reads grown crystalwork the way a mason reads a wall — its age, whose hand shaped it, and whether it is holding a working right now.
 
@@ -28,7 +28,7 @@ Entries follow the format in Chapter II.5. A field is never printed empty.
 
 **Description:** Caravanners and factors, on every road worth walking and most that are not. Nearly all of them feel trouble before it arrives, which is either why they took to the roads or why the roads have not killed them. A Phern factor's word is currency in three cities, and they will remind you of it.
 
-**Gift:** **Warning** — sensing hidden danger, its direction, and the intent behind it, before it lands. *Nearly all carry it.*
+**Gift:** Shows itself as warning: a prickle before danger, and a sense of where it is coming from. **A domain of your choice** — any non-Prismatic Soul or Mind domain. *Nearly all carry it.*
 
 **Heritage:** Knows the caravan roads, who moves what along them, and the fair price of anything.
 
@@ -40,7 +40,7 @@ Entries follow the format in Chapter II.5. A field is never printed empty.
 
 **Description:** Border people, holding ground nobody else wanted and several people have since decided they do. Their gift is the rarest in Val'loh by a wide margin — fewer than one in a hundred — and it is the only one that does nothing at all for the person who has it.
 
-**Gift:** **The Bond** — protective intervention for someone the caster loves, fired by feeling rather than technique. *Fewer than one in a hundred carry it.*
+**Gift:** Shows itself only on behalf of someone loved, and only when they are in danger. It does nothing for the one who carries it. **A domain of your choice** — any non-Prismatic Soul or Mind domain. *Fewer than one in a hundred carry it.*
 
 **Heritage:** Border survival, and the reading of intentions in people who are trying to hide them.
 
@@ -54,7 +54,7 @@ Entries follow the format in Chapter II.5. A field is never printed empty.
 
 **Description:** The rememberers. Writing belongs to the Church in Val'loh and to nobody else, with two carve-outs a chief's household will recite at you: a formal invitation, and private scratch-work on a slate that is wiped before anyone leaves the room. Everything else that must be kept is kept in a Scora's head, and every Scora has the gift. That is not a coincidence, and nobody is quite sure which way the causation runs.
 
-**Gift:** **The Weave** — perfect recall of anything witnessed or recorded; pattern across memory; one true question of the past. *All known Scora carry it.*
+**Gift:** Shows itself as memory: what was witnessed or recorded, held exactly and set beside everything else held. **A domain of your choice** — any non-Prismatic Soul or Mind domain. *All known carry it.*
 
 **Heritage:** The sanctioned cloth-strip rite — recognizes any Scora's record on sight, and can name who tied it.
 
@@ -66,7 +66,7 @@ Entries follow the format in Chapter II.5. A field is never printed empty.
 
 **Description:** Weapon-folk. Half of them bond to a single blade in the year they are judged old enough to hold one, and carry it for the rest of their lives; a bonded Akathi without their blade is a subject people avoid. The unbonded half are not lesser. They are simply expected to be better at everything else, and usually are.
 
-**Gift:** **Blade-bond** — one bonded weapon: finding it, calling it, striking with it as a part of the self. *Half carry it.*
+**Gift:** Shows itself through one bonded weapon, carried for life. **A domain of your choice** — any non-Prismatic Soul or Mind domain. *Half carry it.*
 
 **Heritage:** The forms and their counters — reads a fighter's school in three exchanges.
 
@@ -78,7 +78,7 @@ Entries follow the format in Chapter II.5. A field is never printed empty.
 
 **Description:** Northerners, and nearly all of them harder to stop than they look. Cold, poison, hunger and exhaustion arrive at a Dekhi later than they arrive at anyone else, and leave sooner. They are aware of the reputation and find it slightly insulting, since it implies the winters are the interesting thing about them.
 
-**Gift:** **Stone-flesh** — enduring cold, poison, hunger, exhaustion, and blows that would drop another. *Nearly all carry it.*
+**Gift:** Shows itself as endurance: cold, poison, hunger and exhaustion arrive late and leave early. **A domain of your choice** — any non-Prismatic Soul or Mind domain. *Nearly all carry it.*
 
 **Heritage:** Winter-craft and the northern passes — which ones are open, and which ones are lying about it.
 
@@ -90,7 +90,7 @@ Entries follow the format in Chapter II.5. A field is never printed empty.
 
 **Description:** Dream-walkers, though only one in twenty actually walks. The rest keep the herb-lore and the interpretations, and are consulted about both far more often than the gifted are — partly because there are nineteen times as many of them, and partly because a Kshalo who can enter your dream is a Kshalo most people would rather consult by letter.
 
-**Gift:** **Dream** — entering and shaping the dreams of the sleeping. *One in twenty carries it.*
+**Gift:** Shows itself in the dreams of the sleeping. **A domain of your choice** — any non-Prismatic Soul or Mind domain. *One in twenty carry it.*
 
 **Heritage:** The meaning of dreams, and the herb-lore of sleep and waking.
 
@@ -102,7 +102,7 @@ Entries follow the format in Chapter II.5. A field is never printed empty.
 
 **Description:** People of the paths that are not roads. Most of them can make themselves understood to something that does not use words, and none of them find this remarkable enough to mention. They come into the cities to trade and leave before the gates shut, and the cities have never worked out whether this is caution or preference.
 
-**Gift:** **Wildspeech** — speaking with, bonding with, and moving among animals and wild places. *Most carry it.*
+**Gift:** Shows itself among animals and wild places. **A domain of your choice** — any non-Prismatic Soul or Mind domain. *Most carry it.*
 
 **Heritage:** Paths that are not roads, and beast-sign — what passed, how long ago, and whether it was hunting.
 
@@ -114,7 +114,7 @@ Entries follow the format in Chapter II.5. A field is never printed empty.
 
 **Description:** Gadget-makers, working stone and metal that hold power and give it back. Most carry the gift in one narrow specialty and are frank to the point of tedium about the boundaries of it. Their devices outlive them by generations and are usually still running, which is either excellent craft or a design flaw depending on the device.
 
-**Gift:** **Resonance of Stone** — metals and stones that carry and release magical power; gadgets and their control gems. *Most carry it, in specialties.*
+**Gift:** Shows itself through stone and metal that carry power, and the devices built from them. **A domain of your choice** — any non-Prismatic Soul or Mind domain. *Most, in specialties carry it.*
 
 **Heritage:** Gadget-lore — reads a device's control gem and can usually say what it was built to do.
 

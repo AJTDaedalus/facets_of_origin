@@ -1354,24 +1354,12 @@ def _valloh_ruleset():
     ])
 
 
-def _counted_novelty_claims() -> dict[str, int]:
-    """Pull the numbers out of the pitch's counted-novelty sentence.
-
-    The sentence is the setting book's promise to the reader about how much
-    they have to learn, and it is the one line in a setting Facet that a reader
-    is entitled to trust absolutely.
-    """
+def _counted_novelty_sentence() -> str:
     text = (VALLOH_BOOK / "V0_Ten_Things.md").read_text(encoding="utf-8")
     sentence = next(
         (line for line in text.split("\n") if "adds exactly" in line), None)
     assert sentence, "V0 no longer carries a counted-novelty sentence"
-    claims = {}
-    for word, label in ((r"Lineages", "lineages"),
-                        (r"Gift domains", "gift_domains")):
-        m = re.search(r"\*\*(\w+) " + word + r"\*\*", sentence)
-        assert m, f"the counted-novelty sentence does not count {label}"
-        claims[label] = _NUMBER_WORDS[m.group(1).lower()]
-    return claims
+    return sentence
 
 
 def test_valloh_counted_novelty_matches_the_data() -> None:
@@ -1381,22 +1369,21 @@ def test_valloh_counted_novelty_matches_the_data() -> None:
     has to learn, and it is the first thing to rot: someone adds a lineage,
     nobody edits the pitch, and the sentence quietly becomes a lie. Counting it
     from the merged ruleset means adding a lineage without updating V0 fails
-    the suite, and so does the reverse.
+    the suite, and so does the reverse. Since D24 the sentence also promises
+    *no* new domains, and that is checked the same way.
     """
-    claims = _counted_novelty_claims()
+    sentence = _counted_novelty_sentence()
+    m = re.search(r"\*\*(\w+) Lineages\*\*", sentence)
+    assert m, "the counted-novelty sentence does not count lineages"
+    claimed = _NUMBER_WORDS[m.group(1).lower()]
+
     rs = _valloh_ruleset()
+    shipped = len([lin for lin in rs.lineages if lin.id != "human"])
+    assert shipped == claimed, (
+        f"V0 promises {claimed} Lineages; the Facet ships {shipped}.")
 
-    setting_lineages = [lin for lin in rs.lineages if lin.id != "human"]
-    gift_domains = [d for d in rs.magic.soul_domains if d.lineage_gift]
-
-    assert len(setting_lineages) == claims["lineages"], (
-        f"V0 promises {claims['lineages']} Lineages; the Facet ships "
-        f"{len(setting_lineages)}."
-    )
-    assert len(gift_domains) == claims["gift_domains"], (
-        f"V0 promises {claims['gift_domains']} Gift domains; the Facet ships "
-        f"{len(gift_domains)}."
-    )
+    assert "adds no domains" in sentence, (
+        "V0 no longer promises that Val'loh adds no domains")
 
 
 def test_valloh_ships_the_items_it_claims() -> None:
@@ -1423,10 +1410,8 @@ def test_valloh_changes_no_rule() -> None:
             f"the Val'loh Facet writes into `{section}`, but its pitch promises "
             "it changes no rule."
         )
-    # It may add domains; it may not rewrite how magic works.
-    assert valloh.magic is not None
-    assert not valloh.magic.traditions
-    assert not valloh.magic.domain_types
+    # Since D24 it adds no domains either, so it writes nothing into magic.
+    assert valloh.magic is None, "the Val'loh Facet writes into `magic`"
     assert not valloh.skills and not valloh.techniques and not valloh.backgrounds
 
 
@@ -1441,8 +1426,8 @@ def test_loading_valloh_leaves_the_core_untouched() -> None:
         load_facet_file(REPO_ROOT / "software" / "facets" / "base" / "facet.yaml")])
     with_valloh = _valloh_ruleset()
 
-    base_soul = {d.id for d in base_only.magic.soul_domains}
-    assert base_soul < {d.id for d in with_valloh.magic.soul_domains}
+    assert ({d.id for d in base_only.magic.soul_domains}
+            == {d.id for d in with_valloh.magic.soul_domains})
     assert ({d.id for d in base_only.magic.mind_domains}
             == {d.id for d in with_valloh.magic.mind_domains})
     assert ({s.id for s in base_only.skills} == {s.id for s in with_valloh.skills})
@@ -1467,91 +1452,27 @@ def test_valloh_book_and_data_agree_on_the_lineages() -> None:
         )
 
 
-def _gift_domain_entries(text: str) -> list[tuple[str, str]]:
-    """(name, body) for each `## Name *(Lineage)*` catalog entry in V2.
-
-    Each body stops at the `---` that closes it, so the Through the Mirror box
-    after the last entry is not read as part of it — that box *discusses* the
-    mechanics the entries may not contain, and a check that cannot tell the
-    difference between using a rule and explaining why one was cut is a check
-    nobody will keep.
-    """
-    out = []
-    for chunk in re.split(r"^## (?=[^*\n]+? \*\()", text, flags=re.M)[1:]:
-        name = chunk.split(" *(")[0].strip()
-        body = chunk.split("\n---", 1)[0]
-        out.append((name, body))
-    return out
+def test_valloh_adds_no_domains() -> None:
+    """D24: a gift is the player's choice of a core domain, so a setting Facet
+    that ships gift-only domains has drifted back into one-domain-per-people —
+    the fixed-class shape this game does not have. Val'loh adds none."""
+    from app.facets.loader import load_facet_file
+    valloh = load_facet_file(VALLOH_FACET)
+    assert valloh.magic is None or not (
+        valloh.magic.soul_domains or valloh.magic.mind_domains), (
+        "the Val'loh Facet ships its own domains again")
 
 
-def test_valloh_book_and_data_agree_on_the_domains() -> None:
-    """INV-7 extended to the Facet: every gift domain in the data has a catalog
-    entry in `V2`, and `V2` introduces no domain the data does not carry.
-
-    The DESIGN said this was extended and it was not — only the *lineage* half
-    was written. That omission is exactly why `V2` shipped claiming a catalog
-    it did not contain: the invariant that would have caught it did not exist.
-    A book that promises an appendix and has none is worse than one that never
-    promised, because the reader goes looking.
-    """
+def test_valloh_gifts_are_flavour_not_territory() -> None:
+    """Each gifted lineage says how its gift shows itself, and none of them
+    names a domain the player must take."""
     rs = _valloh_ruleset()
-    text = (VALLOH_BOOK / "V2_Magic_of_Valloh.md").read_text(encoding="utf-8")
-    # Catalog entries are `## Name *(Lineage)*` headings.
-    catalogued = set(re.findall(r"^## ([^*\n]+?) \*\(", text, re.M))
-
-    gifts = {d.name for d in rs.magic.soul_domains if d.lineage_gift}
-    missing = sorted(g for g in gifts if g not in catalogued)
-    assert not missing, (
-        "gift domains in the Facet data with no catalog entry in V2: "
-        + ", ".join(missing))
-
-    invented = sorted(c for c in catalogued if c not in gifts)
-    assert not invented, (
-        "V2 catalogues domains the Facet data does not carry: "
-        + ", ".join(invented))
-
-
-def test_every_gift_domain_entry_is_complete() -> None:
-    """Each entry prints territory, the beyond-the-focus line, and all three
-    scopes. A Focused domain whose boundary is missing is the one that grows
-    to mean everything by the third session, and a scope with no example is
-    the one the MM and the player price differently."""
-    text = (VALLOH_BOOK / "V2_Magic_of_Valloh.md").read_text(encoding="utf-8")
-    entries = _gift_domain_entries(text)
-    assert entries, "V2 has no gift domain catalog at all"
-
-    problems: list[str] = []
-    for name, entry in entries:
-        for field in ("**Territory:**", "**Beyond this domain's focus:**",
-                      "**Minor:**", "**Significant:**", "**Major:**"):
-            if field not in entry:
-                problems.append(f"{name} is missing {field}")
-    assert not problems, "\n".join(problems)
-
-
-def test_no_gift_domain_entry_carries_a_rule() -> None:
-    """Gifts get territory, never mechanics.
-
-    Three drafted gifts originally carried rules — an extra Condition tier, a
-    second Final Blow, an Open on a 7-9. The Thenya Bond's reaction clause was
-    the same shape and simulation put the Hard row at 75% against a 40-60%
-    band: one lineage's blood outweighing a whole difficulty step. A gift that
-    should grant a mechanic belongs in a Facet tree where it costs a Technique
-    pick and gets simulated before it prints.
-    """
-    text = (VALLOH_BOOK / "V2_Magic_of_Valloh.md").read_text(encoding="utf-8")
-    entries = _gift_domain_entries(text)
-    mechanical = re.compile(
-        r"Tier [123]\b|once per (?:scene|session|exchange)|Final Blow|"
-        r"leaves the enemy Open|Endurance Pool|\bResolve\b|\b[0-9]d6\b|"
-        r"on a (?:7\u20139|10\+)", re.I)
-    problems = []
-    for name, entry in entries:
-        for hit in mechanical.finditer(entry):
-            problems.append(f"{name}: {entry[max(0, hit.start()-50):hit.end()+50]!r}")
-    assert not problems, (
-        "gift domain entries carrying mechanics rather than territory:\n"
-        + "\n".join(problems))
+    for lin in rs.lineages:
+        if lin.id == "human":
+            continue
+        assert lin.is_gifted, f"{lin.id} has lost its gift line"
+        assert lin.gift_domains == [], (
+            f"{lin.id} narrows the player's choice; D24 leaves it open")
 
 
 def test_valloh_gift_domains_resolve() -> None:
