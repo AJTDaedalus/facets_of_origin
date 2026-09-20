@@ -446,13 +446,19 @@ When the reaction already provides the reduction, the armor charge is **not spen
 
 Magical effects in combat follow the same **Domain + Intent + Scope** framework as any other use of magic. The rules below govern how magic integrates with the exchange structure.
 
+**A magical Strike is always a full form.** A blow aimed at putting someone down *is* meaningful power (II.3, *Scope*) — so magic used as a Strike is **Significant**, declared with its domain and purpose, and it **spends a readied intent** (or a Spark, if nothing of that purpose is readied). There is no free magical attack. The swordsman's Strike costs nothing because a sword is what he brought; the caster's costs an intent, and buys the same result.
+
+**Minor magic still fights.** It simply does not end anyone. A free working that blinds, trips, snuffs the lantern, ices the flagstones, or makes a grip too hot to hold is a **Maneuver** (or a **Support**, when it is helping an ally rather than hindering an enemy) — the actions that reshape a fight without deciding it. A Maneuver's 10+ makes rolls against the target Easy until the situation changes, which is frequently worth more than a hit. Free magic is not weak in a fight. It is indirect.
+
+**Mooks are unchanged.** A Mook falls to one Strike, magical or not — the caster's Strike simply costs an intent to make.
+
 **Casting time.** Magic is instant. Using your domain as an offensive action has the same action economy as a Strike — you do not need a setup exchange or additional preparation. The fiction determines what it looks like: a Scholar inscribing a glyph does it faster than it sounds; a Channeler reaching through their domain acts on instinct. Scope and intent are declared before the roll, as always.
 
 **Reactions against magical Strikes.** All three active reactions — Dodge, Parry, and Intercept — can apply against magical actions. Feasibility is the MM's call based on what is happening in the fiction: you cannot Parry a wave of force you never saw coming, but you can Parry a summoned blade meeting yours. Dodge remains valid against most magical effects that have a physical direction. When the nature of the magic makes a physical reaction implausible, Absorb is available as always.
 
-**Resolving magical Strikes.** A magical Strike resolves exactly like a physical one (see *Strike*, above): against an enemy, it depletes Resolve — a full success (10+) depletes 2 and takes a rider, a partial (7–9) depletes 1. Against another character, there is no Resolve pool; it applies a Condition directly on the PvP tier table — a 10+ applies a Tier 2 Condition, a 7–9 applies a Tier 1 Condition. A 6− produces a consequence for the caster either way. Against a character the attacker chooses which Condition to apply, within the appropriate tier; against an enemy the caster narrates what the rider looks like — a binding of frost, a blinding flare, a working that leaves it facing the wrong way; whatever the fiction supports.
+**Resolving magical Strikes.** Once declared and paid for, a magical Strike resolves exactly like a physical one (see *Strike*, above): against an enemy, it depletes Resolve — a full success (10+) depletes 2 and takes a rider, a partial (7–9) depletes 1. Against another character, there is no Resolve pool; it applies a Condition directly on the PvP tier table — a 10+ applies a Tier 2 Condition, a 7–9 applies a Tier 1 Condition. A 6− produces a consequence for the caster either way. Against a character the attacker chooses which Condition to apply, within the appropriate tier; against an enemy the caster narrates what the rider looks like — a binding of frost, a blinding flare, a working that leaves it facing the wrong way; whatever the fiction supports.
 
-**Scope in combat.** Active opposition counts as at least Standard difficulty for magical actions. Scope difficulty applies normally — a Focused domain character attempting a Major working mid-fight is rolling at Hard, same as always. The chaos of combat does not add difficulty on its own, but the MM may adjust for specific circumstances (distracted, wounded, constrained).
+**Scope in combat.** A Strike is Significant or Major; a Maneuver or Support may be Minor and free. Active opposition counts as at least Standard difficulty for magical actions. Scope difficulty applies normally — a Focused domain character attempting a Major working mid-fight is rolling at Hard, same as always. The chaos of combat does not add difficulty on its own, but the MM may adjust for specific circumstances (distracted, wounded, constrained).
 
 ---
 
@@ -462,7 +468,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Insight (Wisdom):** Read what the stated stance does not say. Enemy stances are announced openly, but a successful Insight roll at the start of an exchange reads past them — a feint, a stance about to change, an ambusher whose conduct you have not seen yet. That information matters most in the beat before you commit your own blind declaration.
 
-**Attune (Spirit):** Channel your domain's force as a direct Strike. Spirit + Attune is the roll for intuitive magical attacks; scholarly casters Strike with Knowledge + Lore. Domain + Intent + Scope sets the difficulty; the Strike outcome table applies exactly as it would for a physical Strike — Resolve against an enemy, a Condition against another character.
+**Attune (Spirit):** Channel your domain's force as a direct Strike — a full form, spending a readied intent of the purpose it serves (usually Harm; Ward, when the blow is a shield that happens to hurt). Spirit + Attune is the roll for intuitive magical attacks; scholarly casters Strike with Knowledge + Lore. Domain + Intent + Scope sets the difficulty; the Strike outcome table applies exactly as it would for a physical Strike — Resolve against an enemy, a Condition against another character.
 
 **Investigate (Intelligence):** Find the structural weakness in the fight — a bad angle, a compromised footing, an environmental factor the enemy hasn't noticed. A successful Investigate roll translates directly into a difficulty modifier on the party's next actions against that target.
 
@@ -759,7 +765,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 ```
 1. MM states enemy stances openly; PCs declare Postures (simultaneously, blind)
-2. Declare actions (Strike / Support / Maneuver / Magic)
+2. Declare actions (Strike / Support / Maneuver / Magic — a magical Strike is a full form: Significant or Major, and it spends a readied intent)
 3. Resolve actions → roll 2d6 + attribute + skill + difficulty + posture modifier
 4. Declare reactions to incoming actions
 5. Apply results — deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, and on a 10+ name the rider taken (Open or Position)

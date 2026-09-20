@@ -551,6 +551,7 @@
 
 - [III.3 — Mooks](III.3_Combat.md#mooks)
 - [III.3 — Incoming Condition Tier](III.3_Combat.md#incoming-condition-tier)
+- [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
 - [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
 - [III.3 — Enemy Attacks](III.3_Combat.md#enemy-attacks)
 - [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
@@ -564,6 +565,7 @@
 - [MM1 — Step 3: Build the enemy roster.](../mm_manual/MM1_Encounters_and_Enemies.md#step-3-build-the-enemy-roster)
 - [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
 - [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)
+- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 - [MM5 — Threat Rating (TR)](../mm_manual/MM5_Quick_Reference.md#threat-rating-tr)
 - [MM5 — Encounter Recipe Table (PS 3 — simulation-validated)](../mm_manual/MM5_Quick_Reference.md#encounter-recipe-table-ps-3--simulation-validated)
 
@@ -751,6 +753,8 @@
 - [II.3 — Intent](II.3_Magic.md#intent)
 - [II.3 — Readied Intents](II.3_Magic.md#readied-intents)
 - [II.3 — Sparks and Magic](II.3_Magic.md#sparks-and-magic)
+- [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
+- [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
 ## Rank
@@ -804,6 +808,8 @@
 *Defined in [II.3](II.3_Magic.md).*
 
 - [II.3 — Readied Intents](II.3_Magic.md#readied-intents)
+- [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
+- [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
 - [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
 - [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
 
@@ -985,6 +991,7 @@
 - [III.1 — Spending Sparks](III.1_Core_Resolution.md#spending-sparks)
 - [III.1 — Borrowed Trouble](III.1_Core_Resolution.md#borrowed-trouble)
 - [III.3 — Press](III.3_Combat.md#press)
+- [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
 - [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
 - [III.3 — Your Five Numbers On Screen](III.3_Combat.md#your-five-numbers-on-screen)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)

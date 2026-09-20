@@ -411,6 +411,25 @@
                     <option value="polearms">Polearms</option>
                     <option value="unarmed">Unarmed</option>
                   </select>
+                  <!-- D25: a magical Strike is a full form. The domain sets
+                       the difficulty, so the attribute, skill and difficulty
+                       pickers above are ignored when this is ticked. -->
+                  <div class="card" style="margin:8px 0;padding:8px;">
+                    <label class="checkbox-inline" style="margin:0;">
+                      <input type="checkbox" id="strike-magical" onchange="onStrikeMagicalToggle()">
+                      Strike with magic — a full form, spends a readied intent
+                    </label>
+                    <div id="strike-magic-fields" hidden style="margin-top:6px;">
+                      <label for="strike-magic-scope">Scope</label>
+                      <select id="strike-magic-scope">
+                        <option value="significant" selected>Significant</option>
+                        <option value="major">Major</option>
+                      </select>
+                      <label for="strike-magic-purpose">Purpose</label>
+                      <select id="strike-magic-purpose"></select>
+                      <div id="strike-magic-cost" style="font-size:0.72rem;color:var(--text-dim);margin-top:4px;"></div>
+                    </div>
+                  </div>
                   <label for="strike-attribute">Attribute</label>
                   <select id="strike-attribute"></select>
                   <label for="strike-skill">Skill (optional)</label>

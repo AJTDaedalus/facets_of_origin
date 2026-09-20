@@ -150,7 +150,7 @@ PC Posture is declared blind. Enemy stances are **stated, not concealed** — an
 | **Strike** | 2d6 + weapon attribute + Combat or Finesse (default melee/ranged; the fiction may say otherwise) | Deplete enemy Resolve (10+: −2, 7–9: −1); 10+ also chooses one rider — Open or Position |
 | **Maneuver** | 2d6 + relevant skill | 10+: rolls against the target are Easy until the situation changes. 7–9: rolls against the target stay Standard. 6-: backfire |
 | **Support** | 2d6 + relevant skill | Grant ally +1d6 drop lowest OR difficulty one step easier on next roll |
-| **Magic** | 2d6 + Spirit + Attune, or Knowledge + Lore (by tradition) | Domain + Intent + Scope; Significant/Major spends a readied intent; vs enemy depletes Resolve like a Strike |
+| **Magic** | 2d6 + Spirit + Attune, or Knowledge + Lore (by tradition) | Domain + Intent + Scope; Significant/Major spends a readied intent. **A magical Strike is always a full form** — never Minor, never free. Free Minor magic fights as a Maneuver or Support |
 
 **Press:** Spend 1 Endurance Pool point before a Strike to add 1d6 drop lowest (stacks with Sparks).
 
@@ -273,6 +273,7 @@ A charge is consumed only when armor provides the reduction actually applied —
 | Major | Hard | Very Hard | Very Hard (ceiling) |
 
 - **The roll:** casting with Spirit adds the Attune rank; casting with Knowledge adds the Lore rank (Novice +0 if untrained)
+- **Meaningful power or finesse is a full form.** Minor magic lights, snuffs, marks, stings, trips. Real force or real precision is **Significant** — and a blow aimed at putting someone down is always meaningful power, so a magical Strike is never Minor. A Mook still falls to one Strike; the caster's Strike just costs an intent to make. Repetition does not make it free either: when a string of small workings adds up to one large result, price the result.
 - **Readied intents:** Minor is free. **Significant and Major spend one readied intent of their purpose** (Harm · Ward · Mend · Shape · Reveal). A formalized caster readies **3** at the start of each session, spread as they like; domain and effect are still chosen when cast. Nothing readied for the purpose → costs **a Spark** instead. They come back after a **full rest — your call** — or at the next session. A spent intent stays spent whatever the roll.
 - **Pre-technique:** Minor scope only, at the domain's normal difficulty (no extra penalty — the scope restriction *is* the limitation). No readied intents until the Technique formalizes the domain.
 - **Sparks and magic** — dice-Sparks work on any roll, including every magic roll. An off-purpose Significant or Major working costs a Spark that buys the working and nothing else. A Spark buys **reach** in exactly two cases, player-declared before the roll:

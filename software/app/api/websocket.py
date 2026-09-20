@@ -861,6 +861,56 @@ async def _handle_strike(
             })
             return
 
+    # D25 (III.3, *A magical Strike is always a full form*): a blow aimed at
+    # putting someone down is meaningful power, so magic used as a Strike is
+    # Significant or Major and spends a readied intent. The free Minor working
+    # is a Maneuver, not a Strike. Everything here happens before a single
+    # Endurance point or Spark is spent, so a refused declaration costs nothing.
+    magical = bool(msg.get("magical", False))
+    magic_domain_id = magic_scope = magic_purpose = None
+    magic_intent_cost = None
+    off_purpose_sparks = 0
+    if magical:
+        if not character.magic_domain:
+            await manager.send_to(websocket, {
+                "type": "error", "message": "Character has no magic domain."})
+            return
+        magic_domain_id = str(msg.get("domain_id") or character.magic_domain)
+        magic_scope = str(msg.get("scope", "significant"))
+        _pi = session.ruleset.magic.prepared_intents if session.ruleset.magic else None
+        strike_scopes = _pi.strike_scopes if _pi else ["significant", "major"]
+        if magic_scope not in strike_scopes:
+            await manager.send_to(websocket, {
+                "type": "error",
+                "message": (
+                    "A Minor working cannot be a Strike (III.3, D25). Reshape "
+                    "the fight with a Maneuver or a Support — those are free — "
+                    "or declare Significant and spend the intent."
+                ),
+            })
+            return
+        magic_purpose = msg.get("purpose")
+        magic_purpose = str(magic_purpose) if magic_purpose else None
+        try:
+            magic_intent_cost = character.intent_cost(
+                magic_purpose, magic_scope, session.ruleset)
+        except ValueError as e:
+            await manager.send_to(websocket, {"type": "error", "message": str(e)})
+            return
+        pi = session.ruleset.magic.prepared_intents if session.ruleset.magic else None
+        off_purpose_sparks = (
+            pi.off_purpose_spark_cost if (magic_intent_cost == "spark" and pi) else 0)
+        if character.sparks < off_purpose_sparks + sparks_requested:
+            await manager.send_to(websocket, {
+                "type": "error",
+                "message": (
+                    f"Nothing readied for {magic_purpose}: an off-purpose "
+                    f"working costs {off_purpose_sparks} Spark, and you have "
+                    f"{character.sparks}."
+                ),
+            })
+            return
+
     # PHB III.3: Press costs Endurance (facet.yaml combat.press.endurance_cost)
     if press:
         press_cost = session.ruleset.combat.press.endurance_cost
@@ -917,7 +967,30 @@ async def _handle_strike(
         borrowed_trouble=bool(msg.get("borrowed_trouble")),
         description=str(msg.get("description", ""))[:200],
     )
-    result = resolve_roll(request, session.ruleset)
+    if magical:
+        # The difficulty of a working comes from domain + scope, and every rule
+        # that shapes it — pre-Technique ceilings, reach-Sparks, the Second
+        # Domain tax, the tradition's attribute and skill — lives in
+        # resolve_magic_roll. This path asks it rather than rebuilding any of
+        # it; the MM's declared label and Technique steps do not apply, because
+        # nobody declared a label. Posture and Conditions still do, below.
+        try:
+            result = resolve_magic_roll(
+                character=character,
+                domain_id=magic_domain_id,
+                scope=magic_scope,
+                intent=str(msg.get("description", ""))[:200],
+                ruleset=session.ruleset,
+                spark_use=msg.get("spark_use"),
+                press=press,
+                borrowed_trouble=bool(msg.get("borrowed_trouble")),
+            )
+        except ValueError as e:
+            await manager.send_to(websocket, {"type": "error", "message": str(e)})
+            return
+        technique_step = None
+    else:
+        result = resolve_roll(request, session.ruleset)
     result_dict = roll_result_to_dict(result)
 
     # Apply posture offense modifier to total
@@ -932,6 +1005,17 @@ async def _handle_strike(
         result_dict["outcome_description"] = desc
 
     _record_roll(session, player_name, result_dict)
+
+    # D23/D25: the working was accepted, so it is paid for now — same order as
+    # `cast`, so a refused Strike never costs an intent or a Spark.
+    if magical:
+        paid = character.pay_intent_cost(magic_purpose, magic_scope, session.ruleset)
+        if paid == "spark" and off_purpose_sparks:
+            _spend_sparks(character, off_purpose_sparks, session)
+        magic_intent_cost = paid
+        # The tradition's skill rolled, so the caster used it (T4.1/D7).
+        if result.request.skill_id:
+            character.skills_used_this_session.add(result.request.skill_id)
 
     # Auto-mark skill as used this session
     if skill_id and skill_id in character.skills:
@@ -968,6 +1052,12 @@ async def _handle_strike(
         "attacker": player_name,
         "target": target_name,
         "roll": result_dict,
+        "magical": magical,
+        "domain_id": magic_domain_id,
+        "scope": magic_scope,
+        "purpose": magic_purpose,
+        "intent_cost": magic_intent_cost,
+        "readied_intents": character.readied_intents,
         "press_used": press,
         "posture": character.posture,
         "endurance_remaining": character.endurance_current,

@@ -1278,3 +1278,69 @@ class TestReadiedIntentsPanel:
     def test_the_mm_has_a_full_rest_button(self, table):
         mm, _ = table
         assert mm.locator("button:has-text('Full Rest')").count() >= 1
+
+
+class TestMagicalStrikeControl:
+    """D25 in the browser: the Strike panel can declare a working, the scope
+    picker never offers Minor (a Minor working is a Maneuver, not a Strike),
+    and the price is shown before the blow is thrown."""
+
+    def _caster(self, player):
+        player.evaluate("""() => {
+            state.character.magic_domain = 'inscription';
+            state.character.magic_technique_active = true;
+            state.character.readied_intents = {harm: 2};
+            document.getElementById('strike-magical').checked = true;
+            onStrikeMagicalToggle();
+        }""")
+        player.wait_for_timeout(200)
+
+    def test_the_fields_are_hidden_until_the_box_is_ticked(self, table):
+        _, player = table
+        assert player.evaluate(
+            "() => document.getElementById('strike-magic-fields').hidden")
+
+    def test_the_scope_picker_never_offers_minor(self, table):
+        _, player = table
+        self._caster(player)
+        scopes = player.eval_on_selector_all(
+            "#strike-magic-scope option", "els => els.map(e => e.value)")
+        assert "minor" not in scopes
+        assert scopes == ["significant", "major"]
+
+    def test_the_purposes_come_from_the_ruleset(self, table):
+        _, player = table
+        self._caster(player)
+        ids = player.eval_on_selector_all(
+            "#strike-magic-purpose option", "els => els.map(e => e.value)")
+        assert ids == ["harm", "ward", "mend", "shape", "reveal"]
+
+    def test_the_price_is_shown_before_the_blow(self, table):
+        _, player = table
+        self._caster(player)
+        assert "2 harm readied" in player.evaluate(
+            "() => document.getElementById('strike-magic-cost').textContent")
+        player.evaluate("""() => {
+            document.getElementById('strike-magic-purpose').value = 'mend';
+            renderStrikeMagicCost();
+        }""")
+        player.wait_for_timeout(150)
+        assert "Spark" in player.evaluate(
+            "() => document.getElementById('strike-magic-cost').textContent")
+
+    def test_the_declaration_rides_on_the_strike_message(self, table):
+        _, player = table
+        self._caster(player)
+        sent = player.evaluate("""() => {
+            const captured = [];
+            const original = window.sendWS;
+            window.sendWS = (m) => captured.push(m);
+            document.getElementById('strike-target').innerHTML =
+              '<option value="goblin" selected>goblin</option>';
+            performStrike();
+            window.sendWS = original;
+            return captured[0];
+        }""")
+        assert sent["magical"] is True
+        assert sent["scope"] == "significant"
+        assert sent["purpose"] == "harm"
