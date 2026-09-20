@@ -1141,7 +1141,24 @@ every edge case lands on the MM mid-fight. Ruling 2 is what keeps that cost
 bounded: the one case that would come up every exchange — *is this attack
 Significant?* — is answered in advance, always, yes.
 
-**Status:** ✅ Decided; implementing.
+**Implementation note (2026-09-20, after review).** The first implementation
+priced the working but left four ways around the price: a declared `spark_use`
+was never charged, an unformalized caster reached Significant for nothing, the
+Press and the Sparks were spent above four refusals that could still reject the
+Strike, and leaving the flag off a Spirit + Attune roll — the pairing III.3
+names in print as the magical attack — bought a full Strike for free. All are
+closed, and each has a regression test. The scope rule also needed reconciling:
+II.3's example box and MM5 both defined scope as "scale of change and duration,
+**nothing else**", which the precision clause contradicts; both now read *scale,
+duration and precision*.
+
+**Not re-checked:** the encounter recipes and the Threat Rating budget were
+calibrated by `tools/combat_sim.py`, which models no casters at all — so the
+corpus is not invalidated by D25, but it cannot confirm the recipes still hold
+now that a third of a party's offense is capped at three uses per session. Add
+it to what the first human table is watching for.
+
+**Status:** ✅ Decided; implemented and reviewed.
 
 ---
 

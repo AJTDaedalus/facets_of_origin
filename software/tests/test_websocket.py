@@ -5721,3 +5721,327 @@ class TestAMagicalStrikeIsAFullForm:
         assert msg["type"] == "strike_result"
         assert len(msg["roll"]["dice_rolled"]) == 3
         assert char.endurance_current == endurance_before - 1
+
+
+class TestTheFullFormCannotBeDodged:
+    """The ways a magical Strike escaped its price before the D25 review.
+    Every test here failed when it was written."""
+
+    def _mage(self, session_id, formalized=True, sparks=3, intents=None):
+        char = session_store.get(session_id).characters["Zahna"]
+        char.magic_domain = "inscription"
+        char.magic_technique_active = formalized
+        char.sparks = sparks
+        char.readied_intents = intents
+        return char
+
+    def _combat(self, client, mm_token, session_id):
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "combat_start"})
+            ws.receive_json()
+
+    def _send(self, ws, **extra):
+        msg = {"type": "strike", "target": "goblin"}
+        msg.update(extra)
+        with patch("random.randint", return_value=4):
+            ws.send_json(msg)
+            return ws.receive_json()
+
+    # -- B1: a declared Spark use is paid for -------------------------------
+
+    def test_improve_roll_costs_its_spark_and_buys_its_die(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, intents={"harm": 2})
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._send(ws, magical=True, scope="significant",
+                             purpose="harm", spark_use="improve_roll")
+        assert msg["type"] == "strike_result"
+        assert len(msg["roll"]["dice_rolled"]) == 3
+        assert char.sparks == 2
+
+    # -- B4: the dice Sparks asked for actually buy dice ---------------------
+
+    def test_sparks_spent_buy_dice_on_a_working(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, intents={"harm": 2})
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._send(ws, magical=True, scope="significant",
+                             purpose="harm", sparks_spent=2)
+        assert len(msg["roll"]["dice_rolled"]) == 4
+        assert char.sparks == 1
+
+    # -- B2: the unformalized caster has no magical Strike -------------------
+
+    def test_a_pre_technique_caster_cannot_strike_with_magic(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, formalized=False, sparks=0)
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._send(ws, magical=True, scope="significant", purpose="harm")
+        assert msg["type"] == "error"
+        assert "Maneuver" in msg["message"]
+        assert char.sparks == 0
+
+    def test_the_reach_spark_buys_one_and_is_charged_for_it(
+        self, client, mm_token, session_with_character
+    ):
+        """II.3, Reaching Significant Early: a Spark buys the scope — and the
+        Spark is real."""
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, formalized=False, sparks=2)
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._send(ws, magical=True, scope="significant",
+                             purpose="harm", spark_use="pre_technique_push")
+        assert msg["type"] == "strike_result"
+        assert char.sparks == 1
+
+    # -- B3: a refused Strike costs nothing at all ---------------------------
+
+    def test_a_refusal_below_the_declaration_still_costs_nothing(
+        self, client, mm_token, session_with_character
+    ):
+        """The pre-Technique refusal fires inside resolve_magic_roll, below
+        the Press and the Sparks. It used to take both with it, and the
+        exchange's contested flag."""
+        session, _ = session_with_character
+        sid = session["session_id"]
+        store = session_store.get(sid)
+        char = self._mage(sid, formalized=False, sparks=2)
+        self._combat(client, mm_token, sid)
+        endurance_before = char.endurance_current
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._send(ws, magical=True, scope="major", purpose="harm",
+                             press=True, sparks_spent=2,
+                             spark_use="pre_technique_push")
+        assert msg["type"] == "error"
+        assert char.sparks == 2
+        assert char.endurance_current == endurance_before
+        assert "Zahna" not in store.offensive_actions_this_exchange
+
+    def test_an_unknown_attribute_costs_nothing(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        store = session_store.get(sid)
+        char = self._mage(sid, intents={"harm": 1})
+        self._combat(client, mm_token, sid)
+        endurance_before = char.endurance_current
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._send(ws, attribute_id="moxie", press=True, sparks_spent=1)
+        assert msg["type"] == "error"
+        assert char.sparks == 3
+        assert char.endurance_current == endurance_before
+        assert "Zahna" not in store.offensive_actions_this_exchange
+
+    # -- B5: the flag cannot be left off the book's own magical roll ---------
+
+    def test_striking_on_the_tradition_skill_must_be_declared(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, intents={"harm": 2})
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._send(ws, attribute_id="spirit", skill_id="attune")
+        assert msg["type"] == "error"
+        assert "full form" in msg["message"]
+        assert char.readied_intents == {"harm": 2}
+
+    def test_a_character_with_no_domain_may_still_swing_a_sword(
+        self, client, mm_token, session_with_character
+    ):
+        """The guard is for casters. A non-caster rolling Attune is doing
+        something odd, not something magical."""
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = session_store.get(sid).characters["Zahna"]
+        char.magic_domain = None
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._send(ws, attribute_id="spirit", skill_id="attune")
+        assert msg["type"] == "strike_result"
+
+    # -- B7 / B8 -------------------------------------------------------------
+
+    def test_a_working_credits_only_the_skill_it_rolled(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, intents={"harm": 1})
+        char.skills_used_this_session = set()
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            self._send(ws, magical=True, scope="significant",
+                       purpose="harm", skill_id="stealth")
+        assert "lore" in char.skills_used_this_session
+        assert "stealth" not in char.skills_used_this_session
+
+    def test_the_final_blow_is_not_available_to_a_working(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, intents={"harm": 1})
+        char.techniques.append("the_final_blow")
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._send(ws, magical=True, scope="significant",
+                             purpose="harm", final_blow=True, sparks_spent=1)
+        assert msg["type"] == "error"
+        assert "Combat roll" in msg["message"]
+        assert char.sparks == 3
+
+    # -- B9: a setting that drops the section gets the unlimited game back ---
+
+    def test_without_prepared_intents_a_minor_working_may_strike(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        store = session_store.get(sid)
+        char = self._mage(sid)
+        store.ruleset.magic.prepared_intents = None
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._send(ws, magical=True, scope="minor")
+        assert msg["type"] == "strike_result"
+        assert msg["intent_cost"] == "free"
+
+    def test_major_scope_spends_its_intent_too(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, intents={"harm": 1})
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._send(ws, magical=True, scope="major", purpose="harm")
+        assert msg["type"] == "strike_result"
+        assert msg["intent_cost"] == "intent"
+        assert char.readied_intents == {"harm": 0}
+
+
+class TestFreeMagicFightsAsAManeuver:
+    """III.3 sends the caster's free Minor magic through Maneuver and Support,
+    so those two have to be able to express a working — at the domain's own
+    difficulty, which is where a Prismatic caster's Minor is Hard."""
+
+    def _mage(self, session_id, domain="inscription"):
+        char = session_store.get(session_id).characters["Zahna"]
+        char.magic_domain = domain
+        char.magic_technique_active = True
+        char.readied_intents = {"harm": 1}
+        return char
+
+    def _combat(self, client, mm_token, session_id):
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "combat_start"})
+            ws.receive_json()
+
+    def test_a_minor_working_maneuvers_on_its_domain(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            with patch("random.randint", return_value=4):
+                ws.send_json({
+                    "type": "maneuver", "target": "goblin", "magical": True,
+                    "description": "ice the flagstones under it",
+                })
+                msg = ws.receive_json()
+        assert msg["type"] == "maneuver_result"
+        assert msg["magical"] is True
+        assert msg["roll"]["skill_id"] == "lore"
+        assert char.readied_intents == {"harm": 1}  # free
+
+    def test_a_significant_working_is_refused_as_a_maneuver(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        store = session_store.get(sid)
+        self._mage(sid)
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            ws.send_json({
+                "type": "maneuver", "target": "goblin", "magical": True,
+                "scope": "significant", "description": "crush it",
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert "full form" in msg["message"]
+        assert "Zahna" not in store.offensive_actions_this_exchange
+
+    def test_a_minor_working_supports_an_ally(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            with patch("random.randint", return_value=4):
+                ws.send_json({
+                    "type": "support", "target": "Mordai", "magical": True,
+                    "bonus_type": "add_die", "description": "light his target",
+                })
+                msg = ws.receive_json()
+        assert msg["type"] == "support_result"
+        assert msg["magical"] is True
+        assert char.readied_intents == {"harm": 1}
+
+    def test_an_ordinary_maneuver_is_untouched(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        self._mage(sid)
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            with patch("random.randint", return_value=4):
+                ws.send_json({
+                    "type": "maneuver", "target": "goblin",
+                    "attribute_id": "dexterity", "skill_id": "finesse",
+                    "description": "trip it",
+                })
+                msg = ws.receive_json()
+        assert msg["type"] == "maneuver_result"
+        assert msg["magical"] is False
+        assert msg["roll"]["skill_id"] == "finesse"
