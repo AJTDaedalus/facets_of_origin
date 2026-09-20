@@ -29,11 +29,12 @@ ARCHIVE_GUARDIAN = {
     "id": "archive_guardian", "name": "Archive Guardian", "tier": "boss",
     "resolve": 8, "attack_modifier": 3, "armor": "heavy",
     "techniques": ["phase_change"],
-    "phases": [{"resolve_threshold": 2,
-                "description": "Reduced Mode — its attacks weaken and land as "
-                               "Tier 1, but it stops registering harm: left "
-                               "Open, it will not spend an action recovering. "
-                               "It is running on something else."}],
+    "phases": [{"resolve_threshold": 4,
+                "description": "Reduced Mode — the part of it that was weighing "
+                               "consequences shuts down, and what is left is "
+                               "more dangerous. Its blows land at Tier 2 again, "
+                               "and it fixes on whoever last left it Open. It "
+                               "is running on something else."}],
     "description": "An ancient construct protecting the sealed vault.",
     "tactics": "Holds the vault door. Does not pursue. Strikes whoever is nearest.",
 }

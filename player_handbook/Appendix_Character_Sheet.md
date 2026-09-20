@@ -38,10 +38,13 @@ The modifier is the number you roll with — write it large. The rating is chara
 
 ---
 
-### Background
+### Lineage and Background
 
 | Field | Value |
 |---|---|
+| Lineage | |
+| Gifted? | |
+| Heritage | |
 | Title & Origin | |
 | Starting Skill (Practiced) | |
 | Secondary Skill (Novice, 1 mark) or Domain Origin | |

@@ -237,6 +237,12 @@ async def _dispatch(
         await _handle_technique_select(msg, session, session_id, identity, is_mm)
     elif event_type == "session_reset" and is_mm:
         await _handle_session_reset(session, session_id)
+
+    elif event_type == "ready_intents":
+        await _handle_ready_intents(websocket, msg, session, session_id, identity)
+
+    elif event_type == "full_rest" and is_mm:
+        await _handle_full_rest(msg, session, session_id)
     # --- Enemy tracker events ---
     elif event_type == "spawn_enemy" and is_mm:
         await _handle_spawn_enemy(msg, session, session_id)
@@ -246,6 +252,12 @@ async def _dispatch(
         await _handle_enemy_strike(websocket, msg, session, session_id)
     elif event_type == "scene_end" and is_mm:
         await _handle_scene_end(session, session_id)
+    elif event_type == "use_item":
+        await _handle_use_item(websocket, msg, session, session_id, identity, is_mm)
+
+    elif event_type == "strike_rider" and is_mm:
+        await _handle_strike_rider(websocket, msg, session, session_id)
+
     elif event_type == "final_blow_confirm" and is_mm:
         await _handle_final_blow_confirm(msg, session, session_id)
     elif event_type == "remove_enemy" and is_mm:
@@ -1206,6 +1218,9 @@ async def _handle_end_exchange(websocket, session, session_id: str) -> None:
         character.reactions_this_exchange = 0
         # III.3:219 — Intercept's once-per-exchange cap resets too.
         character.intercepts_this_exchange = 0
+        # R3 Cover expires with the Tier 1 Conditions, like every other
+        # end-of-exchange tag; the rule is combat.expire_end_of_exchange's.
+        combat_module.expire_end_of_exchange(character, session.ruleset)
 
         # Withdrawn endurance recovery, up to the pool — the clamp is a rule
         # (III.3/D5) and lives in combat.apply_withdrawn_recovery.
@@ -1222,12 +1237,32 @@ async def _handle_end_exchange(websocket, session, session_id: str) -> None:
             "endurance_current": character.endurance_current,
         }
 
+    # R2: end-of-exchange tag expiry on the tracked enemies. Open is not a
+    # Condition, so it needs its own pass; whether it actually expires is the
+    # ruleset's call (`combat.enemy_durability.open_clears`), read through
+    # combat.expire_end_of_exchange rather than decided here.
+    enemy_updates: dict = {}
+    for tracker_key, enemy in session.active_enemies.items():
+        expired = combat_module.expire_end_of_exchange(enemy, session.ruleset)
+        cleared = combat_module.end_exchange(enemy.conditions, session.ruleset)
+        if expired or cleared:
+            enemy_updates[tracker_key] = {
+                "open": enemy.open,
+                "conditions": list(enemy.conditions),
+                "cleared_conditions": cleared,
+                "expired_tags": expired,
+            }
+
     for pn in updates:
         session.save_character_to_disk(pn)
     # A Final Blow offer belongs to the exchange that produced it. Left standing,
     # a stale toast could commit against a later, different Strike (TODO T12).
     session.pending_final_blows.clear()
-    await manager.broadcast(session_id, {"type": "exchange_ended", "characters": updates})
+    await manager.broadcast(session_id, {
+        "type": "exchange_ended",
+        "characters": updates,
+        "enemies": enemy_updates,
+    })
 
     # K-2/D5: an exchange no PC contested lets the situation advance for
     # free. The rule reads from combat.exchange_uncontested (its only home);
@@ -1331,6 +1366,30 @@ async def _handle_cast(
         await manager.send_to(websocket, {"type": "error", "message": "No Sparks remaining."})
         return
 
+    # D23: price the working before rolling it. Every rule is the character
+    # model's; the handler only refuses what the caster cannot afford.
+    purpose = msg.get("purpose")
+    purpose = str(purpose) if purpose else None
+    try:
+        intent_cost = character.intent_cost(purpose, scope, session.ruleset)
+    except ValueError as e:
+        await manager.send_to(websocket, {"type": "error", "message": str(e)})
+        return
+    pi = session.ruleset.magic.prepared_intents if session.ruleset.magic else None
+    off_purpose_sparks = (
+        pi.off_purpose_spark_cost if (intent_cost == "spark" and pi) else 0)
+    if character.sparks < off_purpose_sparks + (1 if spark_declared else 0):
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": (
+                f"Nothing readied for {purpose}: an off-purpose working costs "
+                f"{off_purpose_sparks} Spark"
+                + (" on top of the Spark for the dice" if spark_declared else "")
+                + f", and you have {character.sparks}."
+            ),
+        })
+        return
+
     try:
         result = resolve_magic_roll(
             character=character,
@@ -1346,6 +1405,12 @@ async def _handle_cast(
 
     if spark_declared:
         _spend_sparks(character, 1, session)
+
+    # D23: the engine accepted the working, so it is paid for now — a refused
+    # working never costs an intent or a Spark.
+    paid = character.pay_intent_cost(purpose, scope, session.ruleset)
+    if paid == "spark" and off_purpose_sparks:
+        _spend_sparks(character, off_purpose_sparks, session)
 
     # T4.1/D7: the cast rolled the tradition's skill, so the caster used it —
     # the same mark every other rolling handler records, and what advancement
@@ -1365,6 +1430,9 @@ async def _handle_cast(
         "technique_active": character.magic_technique_active,
         "roll": result_dict,
         "sparks_remaining": character.sparks,
+        "purpose": purpose,
+        "intent_cost": paid,
+        "readied_intents": character.readied_intents,
     })
 
 
@@ -1656,6 +1724,53 @@ async def _handle_scene_end(session, session_id: str) -> None:
     })
 
 
+async def _handle_ready_intents(websocket, msg: dict, session, session_id: str,
+                                identity: str) -> None:
+    """A caster commits this rest's readied intents (D23). The rule lives in
+    `Character.ready_intents`; this routes and reports."""
+    character = session.characters.get(identity)
+    if not character:
+        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
+        return
+    allocation = msg.get("allocation") or {}
+    if not isinstance(allocation, dict):
+        await manager.send_to(websocket, {
+            "type": "error", "message": "allocation must map purposes to counts."})
+        return
+    try:
+        character.ready_intents(
+            {str(k): v for k, v in allocation.items()}, session.ruleset)
+    except ValueError as e:
+        await manager.send_to(websocket, {"type": "error", "message": str(e)})
+        return
+    session.save_character_to_disk(identity)
+    await manager.broadcast(session_id, {
+        "type": "intents_readied",
+        "player": identity,
+        "readied_intents": character.readied_intents,
+    })
+
+
+async def _handle_full_rest(msg: dict, session, session_id: str) -> None:
+    """The MM calls a full rest (D23): every caster, or one named caster, may
+    ready their intents again. When the party has rested is the MM's call —
+    that is the lever that keeps the limit fictional rather than a clock."""
+    named = msg.get("player_name")
+    targets = ([str(named)] if named else list(session.characters))
+    refreshed = []
+    for player_name in targets:
+        character = session.characters.get(player_name)
+        if character is None:
+            continue
+        character.refresh_intents()
+        session.save_character_to_disk(player_name)
+        refreshed.append(player_name)
+    await manager.broadcast(session_id, {
+        "type": "intents_refreshed",
+        "characters": sorted(refreshed),
+    })
+
+
 async def _handle_session_reset(session, session_id: str) -> None:
     """MM signals start of new session: reset once-per-session technique tracking."""
     for character in session.characters.values():
@@ -1882,6 +1997,14 @@ async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -
             "mook_removed": removed,
             "conditions": list(enemy.conditions),
             "open": enemy.open,
+            # A 10+ takes a Mook off the board, and a tempo tag on a
+            # departed enemy is nothing — `rider_menu` returns [] for a
+            # removed target and the client offers no confirm.
+            "rider_menu": [
+                r.model_dump() for r in combat_module.rider_menu(
+                    outcome, removed, session.ruleset,
+                )
+            ],
             **_band_fields(session, band_before),
         })
         return
@@ -1893,6 +2016,11 @@ async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -
     )
     enemy.resolve_current = result.resolve_current
 
+    # R3: on a full success against a surviving enemy the attacker chooses
+    # one rider. The menu rides along so the client renders the confirm from
+    # data — adding or cutting a rider is a ruleset edit, not a JS edit.
+    menu = combat_module.rider_menu(outcome, result.defeated, session.ruleset)
+
     await manager.broadcast(session_id, {
         "type": "enemy_updated",
         "tracker_key": tracker_key,
@@ -1902,6 +2030,7 @@ async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -
         "mook_removed": False,
         "conditions": list(enemy.conditions),
         "open": enemy.open,
+        "rider_menu": [r.model_dump() for r in menu],
         **_band_fields(session, band_before),
     })
 
@@ -1912,6 +2041,104 @@ async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -
             "phase_index": result.phase_index,
             "description": enemy.phases[result.phase_index].description,
         })
+
+
+async def _handle_use_item(websocket, msg: dict, session, session_id: str,
+                           identity: str, is_mm: bool) -> None:
+    """Spend a one-use item (a Val'loh crystal charge, or whatever a setting
+    Facet ships).
+
+    No roll and no arithmetic — the whole event is "this is gone now, and here
+    is what it did". Every rule belongs to `Character.use_item`; this handler
+    routes and narrates. A player may spend their own; the MM may spend
+    anyone's, which is what an MM running an NPC's pocket needs.
+    """
+    player_name = str(msg.get("player_name") or identity or "")
+    if not is_mm and player_name != identity:
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": "You can only spend items from your own inventory.",
+        })
+        return
+
+    character = session.characters.get(player_name)
+    if not character:
+        await manager.send_to(websocket, {
+            "type": "error", "message": f"No character for '{player_name}'.",
+        })
+        return
+
+    try:
+        used = character.use_item(str(msg.get("item_id", "")), session.ruleset)
+    except ValueError as exc:
+        await manager.send_to(websocket, {"type": "error", "message": str(exc)})
+        return
+
+    session.save_character_to_disk(player_name)
+    await manager.broadcast(session_id, {
+        "type": "item_used",
+        "player_name": player_name,
+        "inventory": list(character.inventory),
+        **used,
+    })
+
+
+async def _handle_strike_rider(websocket, msg: dict, session, session_id: str) -> None:
+    """MM records which rider the attacker took on a 10+ (R3, III.3 Table
+    III.3-3): *deplete 2 Resolve and choose one.*
+
+    The sibling of `final_blow_confirm` — a choice made after the roll, not
+    an outcome of it, so it is its own event. Every rule here belongs to
+    `combat.apply_rider`: which riders exist is the ruleset's
+    (`strike_riders`), what each does is the engine's, and this handler only
+    routes and reports. A rider the ruleset does not print is refused, which
+    is what keeps a cut rider (Cover, D20) actually cut.
+    """
+    tracker_key = str(msg.get("tracker_key", ""))
+    rider_id = str(msg.get("rider", ""))
+
+    enemy = session.active_enemies.get(tracker_key)
+    if not enemy:
+        await manager.send_to(websocket, {
+            "type": "error", "message": f"No active enemy with key '{tracker_key}'.",
+        })
+        return
+
+    ally = None
+    ally_name = msg.get("ally")
+    if ally_name is not None:
+        ally = session.characters.get(str(ally_name))
+        if ally is None:
+            await manager.send_to(websocket, {
+                "type": "error",
+                "message": f"No character named '{ally_name}' to name for a rider.",
+            })
+            return
+
+    exchange_no = int(msg.get("exchange_no", 1))
+    try:
+        tags = combat_module.apply_rider(
+            rider_id, enemy, session.ruleset, ally=ally, exchange_no=exchange_no,
+        )
+    except ValueError as exc:
+        await manager.send_to(websocket, {"type": "error", "message": str(exc)})
+        return
+
+    await manager.broadcast(session_id, {
+        "type": "rider_applied",
+        "tracker_key": tracker_key,
+        "rider": rider_id,
+        "tags": tags,
+        "open": enemy.open,
+        # How long the tag has: `end_of_exchange` for Open, or the exchange
+        # a Position expires after. The client shows a duration rather than
+        # a switch, because that is what R2 made Open into.
+        "open_until": (
+            "end_of_exchange" if enemy.open else None
+        ),
+        "position": enemy.position,
+        "ally": ally_name,
+    })
 
 
 async def _handle_final_blow_confirm(msg: dict, session, session_id: str) -> None:

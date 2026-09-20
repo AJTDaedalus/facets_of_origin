@@ -11,7 +11,7 @@
 **If you are a player**, you need less of this book than you might think:
 
 - **Chapter I** — what the game is and how it thinks
-- **Chapters II.1 through II.6** — creating your character: attributes, magic, Facets and advancement, Background, and skills
+- **Chapters II.1 through II.7** — creating your character: attributes, magic, Facets and advancement, Lineage, Background, and skills
 - **Chapter III.1** — the core resolution system: one roll, three outcomes
 - **Chapter III.2, Chapter III.3, and Chapter IV.1** — hazards and recovery, combat, and equipment; skim them now, look things up later
 

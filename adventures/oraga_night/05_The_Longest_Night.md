@@ -85,7 +85,7 @@ fixed order, fast:
 
 Then release the beats. From here the module cannot script — it can only tell you
 where everything is and what everything wants. The night-tracker's crisis panel
-(Chapter IX) holds the map: **the Wept → Raunu. The Radiant → Veier. The Hollow →
+(Chapter VIII) holds the map: **the Wept → Raunu. The Radiant → Veier. The Hollow →
 the doors, herding, keeping the herd from mattering.** Master Vell is already moving
 along the service passages toward the east wing, and the fastest route to the river
 gate runs through the garden stair.
@@ -311,6 +311,70 @@ but enough that every house's blades were pulled two ways at midnight. *(That is
 all the module knows about the other attacks. Diversions, of course. By whom is the
 same answer as everything else tonight.)*
 
+Three creatures on a leash did not set fires across a city. Somebody was paid to,
+and they are standing at the front gate right now.
+
+---
+
+### B12. The Gatehouse Court, Held
+
+**The contract.** Two nights ago a factor nobody can describe hired a company of
+the Bought — sixteen blades, four sergeants, a captain — and paid half in old coin,
+for three tasks written in a case chained to the captain's belt:
+
+1. At the quarter-bells, fire in two named sect districts and the Blackwatch
+   courier post.
+2. From the first bell of midnight to the last bell of Oraga, hold the Boranis
+   gatehouse. Nobody in, nobody out.
+3. **The Second Clause**, which the captain alone has read: *if a woman in Thenya
+   wool comes out the front, hold her, and send word to the river.*
+
+They do not know who paid them. They do not know why. They are not cruel, and they
+are not monsters. They are exactly as dangerous as their terms, and their terms end
+at the gate.
+
+> **MM — what you must not say.** The factor has no face and no name. He is the same
+> answer as everything else tonight, and the module never gives it. Vell knows the
+> company is there and planned around it, which is why the escape is the river gate
+> and the front was never anything but a decoy.
+>
+> **And the coin.** "Old coin" is also Vell's signature — Agenda 6, the boat, the
+> carter — and that collision is **deliberate**. A table that notices will suspect
+> the pale factor of hiring the company. Let them. The aftermath is where it comes
+> apart: a bought-out captain, asked, describes a payer who was not tall, not pale,
+> and not soft-spoken, and the coin in the Bought's case is older than Vell's by a
+> dynasty. Write the herring so it *can* be untangled. Never confirm it.
+
+**Trigger:** the first fleeing guests reach the Gatehouse Court and find the outer
+gate barred from the far side, and a sergeant of the Bought standing on the wrong
+side of it, reading the terms aloud.
+
+> *The outer gate is shut, and it was shut from the far side. Through the grille:
+> matched grey coats, more of them than there are of you, arranged with the
+> unhurried spacing of people who have done this before. One of them is holding a
+> chained case up where you can see it, the way you would hold a lantern, and he is
+> reading aloud from it in a voice pitched to carry over a crowd.*
+
+**Objective: open the way out.** Two hundred people are behind the party.
+
+***Scene card S3, Chapter IX*** — the fire clock, all three stat lines, the tactics,
+the terrain, and the three endings written out. Everything below is what the scene
+*means*; the card is what you run it from.
+
+**Why this fight, here.** It is the only antagonist tonight that can be beaten,
+talked out of it, or simply outlasted — and it arrives in the hour when a table most
+needs a problem that answers to a sword after six hours of being unable to touch
+anything. It also tells them something: when the captain invokes the Second Clause,
+the party learns that somebody wanted Veier held, which is a fact about the night
+that nothing else in the module will give them.
+
+**Development.** A captured sergeant, contract case and all, is the inquest's best
+evidence and the only mortal thread that leads east. A bought-out captain honours the
+deal absolutely and **will not resume the fight tonight for any inducement** — which
+a clever table can turn into sixteen blades holding the gate *open*.
+
+---
+
 And then the counting: Raunu Boranis is dead. Veier Nolonaire is gone. Whatever
 each player character saw, they are now the most important witnesses in Val'loh —
 which by morning will make them assets, threats, or scapegoats to every faction in
@@ -395,3 +459,32 @@ aftermath wing leans into it.
 a death that holds a corridor or a gate is written into the night forever. Then,
 between beats, hand the player Corval, Anha, Maiven, or Vorlain to finish the
 night with. Nobody sits out the Longest Night.
+
+**⟨The Bought change sides.⟩** A table that buys the captain out *before* midnight
+holds the gate open from the first scream. This is genuinely reachable: the company
+is visible in the trade district at dusk to a gifted Phern, the
+sergeants will talk to anyone who opens with money, and a Draunel or a Circle patron
+could be talked into fronting the fee by a party who explains what it buys.
+
+If they manage it: two hundred guests are out in minutes. The sect guard is inside
+before the Crossing. The Radiant's hunt is *watched* — by forty blades who do not
+understand what they are seeing and will spend the rest of their lives not talking
+about it.
+
+Canon still holds. The Radiant is faster than doors, and Raunu still dies on his own
+choice. But the morning is a completely different morning: the inquest has forty
+sworn witnesses instead of two hundred frightened ones, the Church's editing job is
+far harder, and the party has a captain of the Bought who owes them and wants very
+much to know who used his company's name to burn a city.
+
+**⟨The Second Clause succeeds.⟩** It must not — Veier leaves by the river, and the
+front gate was always a decoy. If a table somehow brings her to the front anyway,
+two outs are already on the board and you should reach for whichever is closer. The
+captain's honour clause: a bought-out or contract-voided company does not resume for
+any inducement, including the one it was originally hired for. And the sect guard:
+on the clock's last segment they are at the outer wall, and no company of the Bought
+has ever held a gate against a sect banner for a fee.
+
+If neither is available, the honest answer is the one this module gives everywhere
+else — **be generous.** A party that fought their way to holding the front gate
+against sixteen blades has earned the woman in Thenya wool getting past them.

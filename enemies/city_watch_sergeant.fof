@@ -29,8 +29,9 @@ enemy:
 
   triggers:
     - >
-      Opens Measured; shifts to Defensive once left Open — guard low,
-      looking for the moment to spend an action recovering.
+      Opens Measured; shifts to Defensive for the rest of the fight from
+      the first exchange it is left Open — guard low, having learned it
+      can be reached.
     - >
       Goes Aggressive only if the party is clearly losing.
     - >
@@ -47,7 +48,8 @@ enemy:
     TR breakdown: offense(+2 → value 4) + durability(Resolve 3)
     + armor(light → 1) + techniques(0) = 8. Meets Named NPC minimum of 8.
 
-    Posture tendency: Measured first exchange, Defensive once Open.
+    Posture tendency: Measured first exchange, Defensive from the
+    exchange it is first left Open onward.
     Will not go Aggressive unless the party is clearly losing. Stances
     are stated openly, driven by the triggers above (III.3, Postures).
 

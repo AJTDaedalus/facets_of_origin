@@ -141,7 +141,16 @@ The foundational offensive action. You bring force to bear on a target — weapo
 
 What a success *does* depends on what you are Striking. Almost always, that is an enemy.
 
-**Against an enemy** — the usual case. Your success depletes the enemy's **Resolve** (see *Facing Mooks and Named Antagonists*): a full success (10+) depletes **2**, a partial (7–9) depletes **1**. When an enemy's Resolve reaches 0, it is defeated. On a **full success only**, you may *additionally* — on top of that 2 Resolve — leave the enemy **Open**: it is **Easy to Strike for everyone** until it recovers. You narrate what Open looks like — staggered, cornered, blinded, disarmed, its guard beaten aside. The fiction supplies the variety; the mechanics carry one tag. An enemy clears Open only one way: by **visibly spending its action** to recover — and an action spent recovering is an action not spent on the party. Open never defeats an enemy on its own — **Resolve does that; Open only shapes the blows that follow.**
+**Against an enemy** — the usual case. Your success depletes the enemy's **Resolve** (see *Facing Mooks and Named Antagonists*): a full success (10+) depletes **2**, a partial (7–9) depletes **1**. When an enemy's Resolve reaches 0, it is defeated.
+
+On a **full success only**, you also **choose one rider** — on top of that 2 Resolve, and on top of whatever you narrate:
+
+- **Open.** The enemy is **Easy to Strike for everyone** until the end of this exchange. You narrate what Open looks like — staggered, blinded, disarmed, its guard beaten aside. The fiction supplies the variety; the mechanics carry one tag.
+- **Position.** You, or an ally you name, may act as though a Maneuver's full success applied against this target: the **next** roll against it is Easy, this exchange or the next.
+
+The choice is yours and it is made after you see the roll. Neither rider defeats an enemy on its own — **Resolve does that; a rider only shapes the blows that follow.** Open and Position are both Easy, and Easy does not stack with itself: an enemy that is already Open gains nothing from a second Open, which is exactly when Position is worth taking.
+
+Open clears with the Tier 1 Conditions, at the end of the exchange. Nobody has to spend anything to end it and nobody has to remember it next exchange — but it also means an Open enemy **still acts**, and the window closes whether you use it or not. Strike it now.
 
 **Against another character** — a duel, a charmed ally, PvP. There is no Resolve pool; apply a Condition directly, exactly as an enemy's attack lands on a player character: a 10+ applies a **Tier 2 Condition**, a 7–9 applies a **Tier 1 Condition**. The attacker chooses which Condition, within the appropriate tier — a precise blow might apply Staggered; one forcing an opponent into a corner might apply Cornered.
 
@@ -166,6 +175,8 @@ You use your action to reshape the fight rather than deal damage directly. Force
 A successful Maneuver does not apply Conditions directly. Instead, it shifts difficulty: on a 10+, rolls **against** the target are Easy until the situation changes. On a 7–9, the Maneuver works, but the MM describes what it costs — a moment of exposure, a position ceded, an opening the opponent seizes; rolls against the target stay at Standard rather than dropping to Easy. On a 6−, the attempt backfires.
 
 Maneuvering well opens fights. It is the action for characters who think geometrically about combat, and for anyone helping a hard-hitting ally land the blow that matters.
+
+A 10+ Strike's **Position** rider is this same result arriving on a hit (see *Strike*). Maneuver remains the action for the character who wants to reshape the fight *without* striking — and it is the stronger version, because a Maneuver's Easy holds until the situation changes, where Position is spent by the next roll.
 
 ---
 
@@ -252,9 +263,9 @@ Conditions replace hit points for player characters as the measure of how a figh
 >
 > These are two tools, and the asymmetry is deliberate. A Condition is interesting because it changes how *you* play the next exchange — Off-Balance is a decision, not a number — and that only pays off for a character somebody is steering. An enemy the MM runs for three exchanges does not need an inner life. It needs to visibly wear down, on one number the MM can track for six enemies at once without a spreadsheet.
 >
-> So Resolve is durability and nothing else: not an action-economy pool, never spent to defend, and the Open tag never takes an enemy out on its own. Give enemies a Condition track and you have doubled the MM's bookkeeping to buy tactical texture the players mostly cannot see.
+> So Resolve is durability and nothing else: not an action-economy pool, never spent to defend, and a Strike's rider never takes an enemy out on its own. Give enemies a Condition track and you have doubled the MM's bookkeeping to buy tactical texture the players mostly cannot see.
 
-The tiers below govern player characters in full. Enemies do not carry Conditions at all — they run on Resolve, and the one mark a Strike can put on them is the **Open** tag (see *Strike*, above).
+The tiers below govern player characters in full. Enemies do not carry Conditions at all — they run on Resolve, and the only marks a Strike can put on them are the two riders, **Open** and **Position**, both of which expire on their own (see *Strike*, above).
 
 ### Tier 1 Conditions
 
@@ -363,7 +374,7 @@ A Named NPC is defined by:
 - **Armor**, if any — armor raises Resolve by a flat amount (light +1, heavy +2), so an armored enemy simply takes longer to run down
 - **Techniques**, if the MM wants them to have specific capabilities
 
-A Named NPC can be left **Open** by a full-success Strike — Easy to Strike for everyone until it recovers, and it recovers only by visibly spending its action to do so. The party sees the recovery happen and can answer it; the NPC buys its guard back at the price of a lost action. Open never accumulates into anything worse. An enemy leaves the fight when its Resolve is gone, and no other way.
+A Named NPC can be left **Open** by a full-success Strike — Easy to Strike for everyone until the end of the exchange, and then it is over. Nothing is spent to end it. That makes Open a window rather than a wound: the party's job is to crowd into it before it shuts, and the NPC's job is to make that expensive, because it is still acting while Open. Open never accumulates into anything worse. An enemy leaves the fight when its Resolve is gone, and no other way.
 
 Named NPCs do not need a full character sheet. A veteran soldier might be: Resolve 4, Attack +3 (Strength +2, Combat Practiced +1), Light armor. That is enough to run the full exchange structure against a party.
 
@@ -439,7 +450,7 @@ Magical effects in combat follow the same **Domain + Intent + Scope** framework 
 
 **Reactions against magical Strikes.** All three active reactions — Dodge, Parry, and Intercept — can apply against magical actions. Feasibility is the MM's call based on what is happening in the fiction: you cannot Parry a wave of force you never saw coming, but you can Parry a summoned blade meeting yours. Dodge remains valid against most magical effects that have a physical direction. When the nature of the magic makes a physical reaction implausible, Absorb is available as always.
 
-**Resolving magical Strikes.** A magical Strike resolves exactly like a physical one (see *Strike*, above): against an enemy, it depletes Resolve — a full success (10+) depletes 2 and may leave the target Open, a partial (7–9) depletes 1. Against another character, there is no Resolve pool; it applies a Condition directly on the PvP tier table — a 10+ applies a Tier 2 Condition, a 7–9 applies a Tier 1 Condition. A 6− produces a consequence for the caster either way. Against a character the attacker chooses which Condition to apply, within the appropriate tier; against an enemy the caster narrates what Open looks like — a binding of frost, a blinding flare, whatever the working's fiction supports.
+**Resolving magical Strikes.** A magical Strike resolves exactly like a physical one (see *Strike*, above): against an enemy, it depletes Resolve — a full success (10+) depletes 2 and takes a rider, a partial (7–9) depletes 1. Against another character, there is no Resolve pool; it applies a Condition directly on the PvP tier table — a 10+ applies a Tier 2 Condition, a 7–9 applies a Tier 1 Condition. A 6− produces a consequence for the caster either way. Against a character the attacker chooses which Condition to apply, within the appropriate tier; against an enemy the caster narrates what the rider looks like — a binding of frost, a blinding flare, a working that leaves it facing the wrong way; whatever the fiction supports.
 
 **Scope in combat.** Active opposition counts as at least Standard difficulty for magical actions. Scope difficulty applies normally — a Focused domain character attempting a Major working mid-fight is rolling at Hard, same as always. The chaos of combat does not add difficulty on its own, but the MM may adjust for specific circumstances (distracted, wounded, constrained).
 
@@ -498,7 +509,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zahna:** "Is that the encouraging or discouraging reading of this situation?"
 
-**MM:** "Yes. It takes another step. Combat this exchange. The guardian is Measured — flat, patient, giving nothing away. It always is. Declare Postures."
+**MM:** "Yes. It takes another step. Combat this exchange. The guardian is **Measured** — flat, patient, giving nothing away. Its stat block says it stays that way while both arms answer it, so you know what you're facing this beat. Declare Postures."
 
 ---
 
@@ -512,7 +523,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 *All three Postures revealed, against the stance the MM already named. The guardian gives away nothing else.*
 
-*(Behind the screen, the MM is tracking one number for the guardian: **Resolve 10**. Base 8, plus 2 for its heavy plating. That is the whole fight's clock — no Condition track to grind, just a pool to run dry.)*
+*(Behind the screen, the MM is tracking one number for the guardian: **Resolve 10**. Base 8, plus 2 for its heavy plating. That is the whole fight's clock — no Condition track to grind, just a pool to run dry. The MM has one other note: at Resolve 4, the thing changes.)*
 
 ---
 
@@ -524,21 +535,29 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 → Mordai rolls **2d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** against Easy difficulty (+1) and gets a **12**. Full success.
 
-**MM:** "Full success — that's 2 Resolve off. And because you rolled a 10 or better, you can leave it Open, on top of the damage. Your call. If you do, tell us what that looks like."
+**MM:** "Full success — that's 2 Resolve off, and on a 10 or better you pick up a rider. Open or Position. Open means it's Easy to Strike for everyone, but only until the end of this exchange. Position means the *next* roll against it is Easy, and that one keeps until somebody spends it."
 
-**Mordai:** "I do. The seam I just opened — I want it to stay open. The joint's grinding, the arm can't cover its right side."
+**Mordai:** "Zulnut and Zahna both still get to act. Open. Everyone gets it, right now."
 
-**MM:** "The blade finds the seam. Exactly the seam. There is a sound like a key turning in a lock that has not been oiled in fifteen years — grinding, then a hollow click. The arm does not fall off, but it is not doing what it was doing before. The guardian is **Open** — and until it stops to reset that joint, it is **Easy to Strike** for the whole party. Guardian is at **Resolve 8**."
+**MM:** "Tell us what it looks like."
+
+**Mordai:** "The seam I just opened — the joint's grinding, the arm can't cover its right side."
+
+**MM:** "The blade finds the seam. Exactly the seam. There is a sound like a key turning in a lock that has not been oiled in fifteen years — grinding, then a hollow click. The arm does not fall off, but it is not doing what it was doing before. The guardian is **Open** — **Easy to Strike** for all three of you, until the end of this exchange. Guardian is at **Resolve 8**." *A beat, and the MM reads the next line off the stat block out loud, because that is what it is for.* "And something else. It was Measured. It is not any more. Being opened is the first thing in fifteen years that has told this machine that anything was wrong, and its answer is to stop being careful. It goes **Aggressive**, and it stays Aggressive."
+
+**Zulnut:** "That seems bad."
+
+**MM:** "It also does not stop to close the seam. Nothing makes it. The window shuts on its own at the end of the exchange, so it spends its action the way it wants to spend it — on Mordai."
 
 *The guardian rotates toward Mordai with the patience of something that was not designed to feel surprise. It reaches for him anyway.*
 
-**MM:** "It's striking back, Mordai. It's a Named threat — a Boss — so this comes in as a Tier 2 hit. Declare a reaction."
+**MM:** "It's striking back, Mordai. It's a Boss, so this comes in as a Tier 2 hit, and it's Aggressive now, which makes your reaction harder. Declare one."
 
 **Mordai:** "Parry."
 
-**MM:** "First reaction of the exchange, and you're Aggressive, so that's 1 from your Endurance Pool plus the 1-point Aggressive surcharge — 2 total. You drop from 5 to 3. Roll Combat."
+**MM:** "First reaction of the exchange, and you're Aggressive too, so that's 1 from your Endurance Pool plus the 1-point Aggressive surcharge — 2 total. You drop from 5 to 3. Roll Combat, at Hard."
 
-→ Mordai rolls **2d6 + Strength (3 → +1) + Combat Practiced (+1)** and gets a **9**. Partial success.
+→ Mordai rolls **2d6 + Strength (3 → +1) + Combat Practiced (+1)** against Hard difficulty (net +1) and gets a **9**. Partial success.
 
 **MM:** "You catch the blow — the blade turns it — but the force behind that arm is not organic. A partial Parry knocks the incoming Tier 2 down one tier, so it lands as Tier 1: **Off-Balance**. Your next reaction costs 1 additional Endurance Pool point."
 
@@ -588,7 +607,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zahna:** "Measurably."
 
-*End-of-exchange cleanup: Off-Balance on Mordai clears. The guardian is still Open — it spent its action reaching for Mordai, not resetting the joint, so it stays Easy to Strike. Guardian: Resolve 8.*
+*End-of-exchange cleanup: Off-Balance on Mordai clears — and so does **Open**. Nobody spent anything to close it and the guardian never stopped to reset the joint; the window simply ran out. Guardian: Resolve 8, Aggressive, and no longer Easy to Strike.*
 
 ---
 
@@ -600,37 +619,55 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zahna:** "Measured. Holding the glyph steady."
 
-**MM:** "The guardian is Measured. It could spend this exchange resetting that joint and close itself back up — it doesn't. It was built to hold the room, not to protect itself. It is learning you instead. Mordai — left joint. Easy while it's Open, and you've got Zulnut's die. Roll Combat."
+**MM:** "The guardian is Aggressive — that's locked in now. And before anyone rolls: it is not reaching this exchange. It sets its feet, both hands come up, and something under the plating begins to wind. You can all hear it. Whatever that is, it lands *next* exchange, and it is going to land on somebody."
+
+**Zahna:** "It's telling us."
+
+**MM:** "It doesn't know it's telling you. It was never built to hide anything. Mordai — left joint. It's not Open any more, so you're back to Standard, one step easier for Weapon Mastery, so Easy. And you've still got Zulnut's die. Roll Combat."
 
 → Mordai spends Zulnut's Support: **3d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** at Easy difficulty (+1), drop the lowest, and gets a **13**. Full success.
 
-**MM:** "The left joint goes the way the right one went, but worse. That's another 2 Resolve — it's at **6**. It's already Open; the seam just widens."
+**MM:** "The left joint goes the way the right one went, but worse. Another 2 Resolve — it's at **6**. Rider?"
 
-*The guardian reaches for him again — slower now, but no less certain.*
+**Mordai:** "Open again. Zulnut's right behind me."
 
-**MM:** "It's striking you again, Mordai. Tier 2. Reaction?"
-
-**Mordai:** "Parry. I know what this costs."
-
-**MM:** "First reaction, still Aggressive — 2 from the pool. You go from 3 to 1. Roll."
-
-→ Mordai rolls and gets a **7**. Partial success.
-
-**MM:** "Down a tier to Tier 1 — **Winded**, −1 on your next roll. You're breathing hard and you're nearly out of tank."
-
-**MM:** "Zulnut, you're up, and it's Easy for you too."
+**MM:** "Then it's Easy for Zulnut. Zulnut?"
 
 **Zulnut:** "Same joint. I finish what Mordai started."
 
 → Zulnut rolls **2d6 + Dexterity (3 → +1) + Finesse Practiced (+1)** at Easy difficulty (+1) and gets a **10**. Full success.
 
-**MM:** "Two more Resolve. The guardian is at **4**." *A pause.* "It is noticeably less fluid than it was two exchanges ago. Whatever you're doing, it's working."
+**MM:** "Two more Resolve. The guardian is at **4**. You get a rider too — and think about it, because Open runs out in a minute and that wound-up thing is still coming."
 
-*End-of-exchange cleanup: Winded on Mordai clears. The guardian stays Open — it pressed the attack again. Guardian: Resolve 4.*
+**Zulnut:** "Then not Open. Position. I want the *next* roll against it to be easy, whenever that is — I'll take it into next exchange rather than spend it now."
+
+**MM:** "Good. You put it where it can't set itself properly, and that's going to still be true when the exchange turns over." *The MM's hand goes to the stat block.* "And 4 is a threshold."
+
+*The light in its eyes flickers — not dimmer, exactly. Differently lit.*
+
+**MM:** "The guardian changes. The part of it that was weighing how hard to hit has stopped answering. It is not gentler for that. Its blows land at **Tier 2** again — no more half-measures — and it fixes on the person who opened it. Mordai. It does not look at either of you again."
+
+**Zahna:** "Can I do anything about that?"
+
+**MM:** "Try. You've got an action."
+
+**Zahna:** "I want to overwrite the targeting instruction. Push a second glyph into the first — tell it Mordai is authorized. Minor scope."
+
+**MM:** "Hard again, and you're rushing a rushed thing. Roll."
+
+→ Zahna rolls **2d6 + Knowledge (3 → +1) + Lore (Practiced, +1)** against Hard difficulty (net +1) and gets a **5**. Failure.
+
+**MM:** "The second glyph doesn't take — worse, it argues with the first. The line on the floor flares, and for a moment every one of you reads as *unauthorized* to something that has just decided it does not need to be careful. It does not change its mind about Mordai. It adds you to the list."
+
+**Zahna:** "That is the opposite of what I wanted."
+
+**Zulnut:** "You did say measurably."
+
+*End-of-exchange cleanup: the guardian's **Open** expires again. Zulnut's **Position** does not — it holds into the next exchange, waiting for someone to spend it. Guardian: Resolve 4, Reduced Mode, Aggressive, and winding.*
 
 ---
 
-**MM:** "Third exchange. Postures."
+**MM:** "Third exchange. Postures. And remember what's coming."
 
 **Mordai:** "Aggressive. One point left, and I'm spending it."
 
@@ -638,25 +675,39 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 **Zahna:** "Measured."
 
-**MM:** "Mordai, left joint, Easy. What are you doing with that last point?"
+**MM:** "It releases what it's been winding. Both hands, straight down, at Mordai — the blow it has been building since last exchange. Mordai, your Endurance Pool is at 1. If you Press, it's empty, and an empty pool means Absorb is the only reaction you have left. Against Tier 2. From a Boss that has stopped measuring."
 
-**Mordai:** "Press. I put everything into it."
+**Mordai:** "…I'm still swinging."
+
+**Zulnut:** "No. I'm stepping in front of it. Intercept."
+
+**MM:** "That's 2 from your pool, Zulnut, and you're at 3. You get one Intercept an exchange and this is it — you sure?"
+
+**Zulnut:** "It told us a whole exchange ago. It would be rude not to have listened."
+
+**MM:** "Then you take the blow meant for Mordai. Roll your reaction — Dodge, at Hard, because it's Aggressive."
+
+→ Zulnut rolls **2d6 + Dexterity (3 → +1)** against Hard difficulty (net 0) and gets a **7**. Partial success.
+
+**MM:** "You get most of yourself out of the way of most of it. A partial knocks Tier 2 down to Tier 1 — you're **Winded**, −1 on your next roll. You are also standing exactly where Mordai was, which is the entire point." *A beat.* "Mordai. You still have your action, your last Endurance Pool point, and a machine that is not looking at Zulnut."
+
+**Mordai:** "Left joint. Press. I put everything into it."
+
+**MM:** "You've got Zulnut's Position sitting on it from last exchange — that makes this Easy, and it's spent when you roll."
 
 → Mordai spends his last Endurance Pool point to Press: **3d6 + Strength (3 → +1) + Combat Practiced (+1) + Aggressive posture (+1)** at Easy difficulty (+1), drop the lowest, and gets an **11**. Full success. Mordai's Endurance Pool is now **empty**.
 
-**MM:** "Two more Resolve — that takes it to **2**. And 2 is a threshold." *The MM checks the stat block.* "The guardian changes. Its next blow won't have the weight the others did — but something else happens: it stops registering harm entirely. It's entered **Reduced Mode**. The subsystem that would notice the seam you've opened — notice it is Open at all — has shut down. It will never stop to close it now. It is running on something else, and none of you know what."
+**MM:** "Two more Resolve — it's at **2**. Take a rider; there's one of you left to act."
 
-*The light in its eyes flickers — not dimmer, exactly. Differently lit.*
+**Mordai:** "Open. Zahna, it's yours."
 
-**MM:** "It reaches for you one more time, Mordai — weaker, but you're empty. An empty Endurance Pool means Absorb is your only option."
+**MM:** "Zahna. It's at 2, it's Open, and it is finally, belatedly turning toward the person who has been writing on its floor."
 
-**Mordai:** "I take it. I don't have a choice."
+**Zahna:** "Then I stop being subtle. The glyph is already there and it is already arguing. I stop trying to correct it and I *push* — I tell the line on the floor that the thing standing on it has departed its position."
 
-**MM:** "You take the hit. In Reduced Mode its blows land at Tier 1 — you're **Winded**, −1 on your next roll, and the exchange is nearly over anyway. You stay standing. Zulnut, Zahna — it's down to 2 Resolve and it's still Open. Finish it."
+**MM:** "Easy, because it's Open. Roll Knowledge and Lore."
 
-**Zulnut:** "Left joint. One more time."
-
-→ Zulnut rolls **2d6 + Dexterity (3 → +1) + Finesse Practiced (+1)** at Easy difficulty (+1) and gets a **12**. Full success.
+→ Zahna rolls **2d6 + Knowledge (3 → +1) + Lore (Practiced, +1)** at Easy difficulty (+1) and gets a **12**. Full success.
 
 **MM:** "Two Resolve. That's the pool. That's the fight."
 
@@ -696,7 +747,9 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 
 ---
 
-*(The fight ran the three exchanges the MM planned for, and it cost the party for it: Mordai emptied his Endurance Pool to the last point and Pressed the final blow on fumes, Zulnut carried the last two exchanges because Mordai had nothing left to spend, and the glyph rewrote the room in a way nobody has fully reckoned with yet. That is the shape of a by-the-book Boss fight — a full party will grind down any Resolve pool eventually, but "eventually" is measured in spent resources and complications, not in a clean two-hit finish. Leaving it Open is what made it this fast; without that Easy opening — and with a guardian willing to spend an action closing it — the fight would have cost them another exchange and more Endurance Pool points than they had. The glyph on the floor will matter later. These things always do.)*
+*(The fight ran the three exchanges the MM planned for, and it cost the party for it: Mordai emptied his Endurance Pool to the last point and Pressed on fumes, Zulnut spent his Intercept on a blow the guardian had announced an exchange early, and Zahna's second glyph failed and made things worse before his third ended the fight. That is the shape of a by-the-book Boss fight — a full party will grind down any Resolve pool eventually, but "eventually" is measured in spent resources and complications, not in a clean two-hit finish.*
+
+*Notice what the riders did. Open never lasted longer than the exchange it was taken in, so it was never a lever the party could lean on — it was a window they had to crowd into, twice, while the guardian went on acting through it. Mordai took Open both times because somebody was still to act behind him; Zulnut took Position once because he could see the window closing and wanted the advantage to survive into an exchange he could not yet see. Those are two different decisions on the same roll, and neither of them is arithmetic. And the guardian's turn — Measured to Aggressive the moment it was first opened, then Reduced Mode at 4 of 10 — landed in the middle of the fight, where the party could still do something about it, rather than in the exchange it died. The glyph on the floor will matter later. These things always do.)*
 
 ---
 
@@ -709,7 +762,7 @@ A character whose primary development is in Mind or Soul is not helpless in comb
 2. Declare actions (Strike / Support / Maneuver / Magic)
 3. Resolve actions → roll 2d6 + attribute + skill + difficulty + posture modifier
 4. Declare reactions to incoming actions
-5. Apply results — deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, note an enemy left Open
+5. Apply results — deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, and on a 10+ name the rider taken (Open or Position)
 6. End exchange: clear Tier 1 conditions, Withdrawn characters recover 2 Endurance Pool points (up to the maximum)
 ```
 
@@ -743,13 +796,13 @@ An exchange in which no PC took an offensive action is **uncontested** — the s
 
 **Table III.3–12: Strike Outcomes (quick reference)**
 
-| Roll | Resolve | Open (10+ only) |
+| Roll | Resolve | Rider (10+ only) |
 |---|---|---|
-| 10+ | −2 | may leave the enemy **Open** — **Easy to Strike** for everyone; you narrate what it looks like |
+| 10+ | −2 | **choose one** — **Open** (Easy to Strike for everyone until the end of this exchange) or **Position** (the next roll against it is Easy, this exchange or next) |
 | 7-9 | −1 | — |
 | 6- | 0 | consequence for the attacker |
 
-Enemy at **0 Resolve = defeated**. An enemy clears Open only by visibly spending its action. Mook: removed on any success (7+); armored Mook needs a 10+.
+Enemy at **0 Resolve = defeated**. Open and Position are both Easy and do not stack. Open clears at the end of the exchange; an Open enemy still acts. Mook: removed on any success (7+); armored Mook needs a 10+ — and a removed Mook takes no rider.
 
 **Against another character (duel / PvP) — apply a Condition:** 10+ = Tier 2 (Staggered or Cornered), 7-9 = Tier 1 (Winded/Off-Balance/Shaken), 6- = consequence for the attacker.
 

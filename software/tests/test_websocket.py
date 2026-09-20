@@ -496,11 +496,14 @@ class TestCastSparkNotBurnedOnRefusedUse:
         char = self._mage(session_id)
         with client.websocket_connect("/ws") as ws:
             _auth_player(ws, create_session_token("Zahna", session_id))
-            ws.send_json({
-                "type": "cast", "domain_id": "inscription", "scope": "minor",
-                "intent": "test", "spark_use": "improve_roll",
-            })
-            msg = ws.receive_json()
+            # Pinned: a natural 2 would pay its own Spark back (III.1) and
+            # this test is counting Sparks.
+            with patch("random.randint", return_value=4):
+                ws.send_json({
+                    "type": "cast", "domain_id": "inscription", "scope": "minor",
+                    "intent": "test", "spark_use": "improve_roll",
+                })
+                msg = ws.receive_json()
         assert msg["type"] == "cast_result"
         assert char.sparks == 2
         assert msg["sparks_remaining"] == 2
@@ -5004,6 +5007,370 @@ class TestEnemyUpdateIsAllOrNothing:
         assert (msg["resolve_current"], msg["open"], msg["posture"]) == (1, True, "aggressive")
 
 
+class TestStrikeRiders:
+    """R3: a 10+ Strike depletes 2 Resolve and chooses one rider. The menu
+    is offered from data by `enemy_strike`; the choice comes back as its own
+    `strike_rider` event, because it is a decision made after the roll, not
+    an outcome of it.
+    """
+
+    def _session_with_enemy(self, client, mm_headers, tier="named", resolve=6,
+                            armor="none"):
+        session_id = client.post(
+            "/api/sessions/", json={"name": "Riders"}, headers=mm_headers,
+        ).json()["session_id"]
+        client.post("/api/enemies/", json={
+            "session_id": session_id, "id": "guard", "name": "Guard",
+            "tier": tier, "resolve": resolve, "armor": armor,
+        }, headers=mm_headers)
+        return session_id
+
+    def _spawn(self, ws, enemy_id="guard"):
+        ws.send_json({"type": "spawn_enemy", "enemy_id": enemy_id})
+        msg = ws.receive_json()
+        assert msg["type"] == "enemy_spawned"
+        return msg["tracker_key"]
+
+    # -- the menu comes from data ------------------------------------------
+
+    def test_full_success_offers_the_menu_from_the_ruleset(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            msg = ws.receive_json()
+        assert [r["id"] for r in msg["rider_menu"]] == ["open", "position"]
+        assert msg["rider_menu"][0]["label"] == "Open"
+
+    def test_partial_success_offers_no_rider(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "partial_success"})
+            msg = ws.receive_json()
+        assert msg["rider_menu"] == []
+
+    def test_a_removed_mook_offers_no_rider(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers, tier="mook", resolve=0)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            msg = ws.receive_json()
+        assert msg["mook_removed"] is True
+        assert msg["rider_menu"] == []
+
+    def test_a_defeated_enemy_offers_no_rider(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers, resolve=2)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            msg = ws.receive_json()
+        assert msg["defeated"] is True
+        assert msg["rider_menu"] == []
+
+    # -- taking a rider -----------------------------------------------------
+
+    def test_open_rider_carries_its_duration(self, client, mm_headers, mm_token):
+        """R2 made Open a tempo tag, so the relay says how long it lasts
+        rather than only that it is set."""
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            ws.receive_json()
+            ws.send_json({"type": "strike_rider", "tracker_key": key,
+                          "rider": "open", "exchange_no": 1})
+            msg = ws.receive_json()
+        assert msg["type"] == "rider_applied"
+        assert msg["rider"] == "open"
+        assert msg["open"] is True
+        assert msg["open_until"] == "end_of_exchange"
+
+    def test_position_rider_records_its_deadline(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            ws.receive_json()
+            ws.send_json({"type": "strike_rider", "tracker_key": key,
+                          "rider": "position", "exchange_no": 2})
+            msg = ws.receive_json()
+        assert msg["rider"] == "position"
+        assert msg["open"] is False
+        assert msg["position"]["expires_after_exchange"] == 3
+
+    def test_a_cut_rider_is_refused(self, client, mm_headers, mm_token):
+        """Cover was cut at the gate (D20). The handler must refuse it, or
+        the cut is cosmetic."""
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "strike_rider", "tracker_key": key,
+                          "rider": "cover", "exchange_no": 1})
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert "cover" in msg["message"]
+
+    def test_unknown_enemy_is_refused(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            self._spawn(ws)
+            ws.send_json({"type": "strike_rider", "tracker_key": "nope",
+                          "rider": "open"})
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+
+    # -- expiry -------------------------------------------------------------
+
+    def test_open_expires_at_end_of_exchange(self, client, mm_headers, mm_token):
+        session_id = self._session_with_enemy(client, mm_headers)
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            key = self._spawn(ws)
+            ws.send_json({"type": "enemy_strike", "tracker_key": key,
+                          "outcome": "full_success"})
+            ws.receive_json()
+            ws.send_json({"type": "strike_rider", "tracker_key": key,
+                          "rider": "open", "exchange_no": 1})
+            ws.receive_json()
+            ws.send_json({"type": "end_exchange"})
+            msg = ws.receive_json()
+        assert msg["type"] == "exchange_ended"
+        assert msg["enemies"][key]["open"] is False
+        assert "open" in msg["enemies"][key]["expired_tags"]
+
+
+class TestUseItem:
+    """Crystal charges over the wire. No roll, no arithmetic — the event says
+    the charge is gone and what it did.
+    """
+
+    def _session(self, client, mm_headers):
+        return client.post(
+            "/api/sessions/", json={"name": "Charges"}, headers=mm_headers,
+        ).json()["session_id"]
+
+    def test_the_core_ruleset_carries_no_items_to_spend(
+            self, client, mm_headers, mm_token, session_with_character):
+        """Loot is a setting's business. On the core ruleset every item id is
+        unknown, and the handler says so rather than half-working."""
+        session, _ = session_with_character
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session["session_id"])
+            ws.send_json({"type": "use_item", "player_name": "Zahna",
+                          "item_id": "steady_light"})
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert "steady_light" in msg["message"]
+
+    def test_an_unknown_character_is_refused(
+            self, client, mm_headers, mm_token, session_with_character):
+        session, _ = session_with_character
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session["session_id"])
+            ws.send_json({"type": "use_item", "player_name": "Nobody",
+                          "item_id": "warmth"})
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert "Nobody" in msg["message"]
+
+
+class TestReadiedIntentsOverTheWire:
+    """D23 through the socket. Readying is a player event; a full rest is the
+    MM's call; a cast carries its purpose and reports what it cost. Every rule
+    is the character model's — the handlers route and report.
+    """
+
+    def _mage(self, session_id, formalized=True, sparks=3):
+        char = session_store.get(session_id).characters["Zahna"]
+        char.magic_domain = "inscription"
+        char.magic_technique_active = formalized
+        char.sparks = sparks
+        char.readied_intents = None
+        return char
+
+    def _cast(self, ws, scope, purpose=None, **extra):
+        msg = {"type": "cast", "domain_id": "inscription", "scope": scope,
+               "intent": "test"}
+        if purpose is not None:
+            msg["purpose"] = purpose
+        msg.update(extra)
+        # Pinned dice: these tests count Sparks, and an unpinned cast rolls a
+        # natural 2 once in 36 — which now pays a Spark of its own (III.1),
+        # and made this class fail about that often.
+        with patch("random.randint", return_value=4):
+            ws.send_json(msg)
+            return ws.receive_json()
+
+    # -- readying ----------------------------------------------------------
+
+    def test_a_player_readies_their_intents(self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            ws.send_json({"type": "ready_intents",
+                          "allocation": {"harm": 2, "reveal": 1}})
+            msg = ws.receive_json()
+        assert msg["type"] == "intents_readied"
+        assert msg["readied_intents"] == {"harm": 2, "reveal": 1}
+        assert char.readied_intents == {"harm": 2, "reveal": 1}
+
+    def test_over_capacity_is_refused_and_changes_nothing(self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            ws.send_json({"type": "ready_intents",
+                          "allocation": {"harm": 4}})
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert char.readied_intents is None
+
+    def test_an_unformalized_caster_is_told_why(self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        self._mage(sid, formalized=False)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            ws.send_json({"type": "ready_intents", "allocation": {"harm": 1}})
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert "formaliz" in msg["message"]
+
+    # -- casting -------------------------------------------------------------
+
+    def test_minor_casts_without_readying(self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        self._mage(sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._cast(ws, "minor")
+        assert msg["type"] == "cast_result"
+        assert msg["intent_cost"] == "free"
+
+    def test_significant_spends_the_matching_intent(self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        char.readied_intents = {"harm": 2}
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._cast(ws, "significant", purpose="harm")
+        assert msg["type"] == "cast_result"
+        assert msg["intent_cost"] == "intent"
+        assert msg["purpose"] == "harm"
+        assert msg["readied_intents"] == {"harm": 1}
+        assert char.sparks == 3
+
+    def test_off_purpose_costs_a_spark(self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        char.readied_intents = {"harm": 2}
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._cast(ws, "significant", purpose="reveal")
+        assert msg["type"] == "cast_result"
+        assert msg["intent_cost"] == "spark"
+        assert char.sparks == 2
+        assert char.readied_intents == {"harm": 2}
+
+    def test_off_purpose_with_no_spark_is_refused_and_costs_nothing(
+            self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, sparks=0)
+        char.readied_intents = {"harm": 2}
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._cast(ws, "significant", purpose="reveal")
+        assert msg["type"] == "error"
+        assert "reveal" in msg["message"].lower()
+        assert char.readied_intents == {"harm": 2}
+
+    def test_off_purpose_and_a_dice_spark_need_two(self, client, session_with_character):
+        """The two Spark costs are separate: one buys the working, one buys
+        the dice. Holding one Spark covers only one of them."""
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, sparks=1)
+        char.readied_intents = {"harm": 1}
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._cast(ws, "significant", purpose="reveal",
+                             spark_use="improve_roll")
+        assert msg["type"] == "error"
+        assert char.sparks == 1
+
+    def test_a_significant_cast_without_readying_prompts(self, client, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._cast(ws, "significant", purpose="harm")
+        assert msg["type"] == "error"
+        assert "ready" in msg["message"].lower()
+        assert char.sparks == 3
+
+    # -- resting ------------------------------------------------------------
+
+    def test_the_mm_calls_a_full_rest(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        char.readied_intents = {"harm": 0}
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, sid)
+            ws.send_json({"type": "full_rest"})
+            msg = ws.receive_json()
+        assert msg["type"] == "intents_refreshed"
+        assert "Zahna" in msg["characters"]
+        assert char.readied_intents is None
+
+    def test_a_player_cannot_call_a_rest(self, client, session_with_character):
+        """When the party has rested is the MM's call — it is the lever that
+        makes the limit fictional rather than a clock."""
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        char.readied_intents = {"harm": 0}
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            ws.send_json({"type": "full_rest"})
+            ws.send_json({"type": "ready_intents", "allocation": {"harm": 1}})
+            msg = ws.receive_json()
+        assert msg["type"] == "error", "the player's rest went through"
+        assert char.readied_intents == {"harm": 0}
+
+    def test_a_new_session_refreshes_intents(self, client, mm_token, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid)
+        char.readied_intents = {"harm": 0}
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, sid)
+            ws.send_json({"type": "session_reset"})
+            ws.receive_json()
+        assert char.readied_intents is None
 class TestBorrowedTroubleOverTheWire:
     """N5 (III.1): Borrowed Trouble is offered on any roll the MM prices, and
     the book prints the stack it makes with Press — `5d6 drop three`. It was

@@ -26,7 +26,7 @@ Every Background — pre-built or custom — has five elements, and every entry 
 >
 > **Starting Skill:** one skill from your Primary Facet, at Practiced.
 >
-> **Secondary Skill:** one more from the same Facet, at Novice with a mark already on it. A magic-granting Background prints **Domain origin** here *instead* — the domain replaces the secondary skill rather than joining it (see *Magic and Backgrounds*, II.5).
+> **Secondary Skill:** one more from the same Facet, at Novice with a mark already on it. A magic-granting Background prints **Domain origin** here *instead* — the domain replaces the secondary skill rather than joining it (see *Magic and Backgrounds*, II.6).
 >
 > **Specialty:** one narrow area of fictional expertise.
 >
@@ -90,13 +90,13 @@ And "nothing happens" is never that answer. A correctly executed procedure that 
 
 ## Magic and Backgrounds
 
-If your character has a magical domain, the Background is where it begins.
+If your character has a magical domain, the Background is where it begins — unless their Lineage got there first. A character holds **one domain at creation**, from Lineage or Background, never both (Chapter II.5). A gifted character takes a Background that grants no domain; a character who wants a magical Background takes an ungifted lineage, or plays an ungifted member of a gifted one.
 
 Magic requires two things: a narrative origin and a Facet Technique. The Background provides the first. The Technique — unlocked at Facet level 1 — provides the second.
 
 **Before the Technique is unlocked:** You can use your domain, but your practice is genuine without being disciplined. Effects are limited to Minor scope — the normal difficulty table applies. You are working from instinct and partial understanding.
 
-**After the Technique is unlocked:** Your domain operates at full capacity — all scopes available, normal difficulty table, any additional benefits the Technique provides. The Technique is not the moment you gain magic. It is the moment your magic becomes what it is capable of being.
+**After the Technique is unlocked:** Your domain operates at full capacity — all scopes available, normal difficulty table, any additional benefits the Technique provides. Small magic stays free; Significant and Major workings spend one of the three intents you ready each session (see *Readied Intents*, II.3). The Technique is not the moment you gain magic. It is the moment your magic becomes what it is capable of being.
 
 This means starting characters with magical Backgrounds have a real but limited version of their domain from session one. The first Facet level — and the Technique that comes with it — is a meaningful mechanical milestone: the moment of formalization, of understanding, of arriving somewhere you have been walking toward. Own that when you choose a magical Background: your first Technique is your formalization, and your first *free* Technique choice comes at Facet level 2.
 

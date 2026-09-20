@@ -49,6 +49,10 @@ class CreateCharacterRequest(BaseModel):
     attributes: dict[str, int] = Field(description="Minor attribute ID -> rating (1-3).")
     background_id: str | None = None
     magic_domain: str | None = None
+    # PHB II.5 (D18). Defaulted so every client written before the step
+    # existed keeps working; a table on the core ruleset never sends them.
+    lineage: str = "human"
+    gifted: bool = False
 
 
 class UploadCharacterRequest(BaseModel):
@@ -88,6 +92,8 @@ async def create_character(body: CreateCharacterRequest, request: Request):
         ruleset=session.ruleset,
         background_id=body.background_id,
         magic_domain=body.magic_domain,
+        lineage=body.lineage,
+        gifted=body.gifted,
     )
 
     if errors:

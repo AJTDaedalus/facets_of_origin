@@ -64,16 +64,20 @@ class Enemy(BaseModel):
     notes: str = ""
     phases: list[PhaseDef] = Field(default_factory=list)
 
-    # Combat tracker state (ephemeral, not saved to .fof). `open` is the
-    # K-6/D4 Open tag: set at the attacker's option on a full-success
-    # Strike, Easy to Strike for everyone while it holds, and cleared only
-    # by the enemy visibly spending its action (`combat.open_clear_mode`).
+    # Combat tracker state (ephemeral, not saved to .fof). `open` and
+    # `position` are the two R3 Strike riders: a full-success Strike
+    # depletes 2 Resolve and takes one of them. `open` is Easy to Strike
+    # for everyone until the end of the exchange; `position` is Easy for
+    # the *next* roll against this enemy, this exchange or next, and holds
+    # {"uses", "expires_after_exchange"}. They never stack — both feed
+    # `combat.has_easy_tag`, and III.1's precedence makes Easy absolute.
     # `posture` (T6.4, K-10/D12) is the stance the MM states openly for a
     # Named/Boss (III.3 §Postures) — it shifts PC reaction difficulty per
     # Table III.3-9. Mooks never declare Postures, so theirs stays None.
     resolve_current: Optional[int] = None
     conditions: list[str] = Field(default_factory=list)
     open: bool = False
+    position: Optional[dict] = None
     posture: Optional[str] = None
 
     def calculate_tr(self) -> int:
@@ -118,6 +122,7 @@ class Enemy(BaseModel):
             self.resolve_current = self.resolve + armor_bonus
         self.conditions = []
         self.open = False
+        self.position = None
         # T6.4: Named/Boss enter at the baseline stance; Mooks never hold one.
         self.posture = None if self.tier == "mook" else "measured"
 
