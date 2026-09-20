@@ -1100,3 +1100,73 @@ Solo Guardian median 2 → **3**, mean 2.68, win rate still 100%, Sparks 5.87, p
 **Data:** `magic.prepared_intents` in `facet.yaml` — purposes, capacity, free scopes and the off-purpose price are all data, and a setting may drop the section to restore the unlimited game.
 
 **Status:** ✅ Decided and shipped.
+
+---
+
+### D25 — A magical Strike is a full form *(owner ruling, 2026-09-20)*
+
+**Decision:** four answers, taken together.
+
+1. **Meaningful power or finesse requires a full form.** Scope is assigned by
+   what the working asks of the world, not by how impressive it looks. A Minor
+   working is small and coarse — it lights, snuffs, marks, stings, dazzles,
+   trips. The moment it needs real force or real precision it is **Significant**,
+   and Significant spends a readied intent (D23).
+2. **A Strike made with magic is therefore always a full form.** A blow aimed at
+   putting someone down *is* meaningful power, by definition. A magical Strike
+   declares domain, scope and purpose, and spends the intent. Free Minor magic
+   still acts in a fight — as a **Maneuver** or **Support**, the actions that
+   reshape a fight without ending anyone.
+3. **Mooks are unchanged.** A Mook falls to one Strike, magical or not. The
+   swordsman's Strike is free because a sword is what he brought; the caster's
+   costs an intent. Magic is not the cheapest weapon at the table.
+4. **Out of combat, Minor magic stays free and unlimited** — but when a string of
+   small workings is adding up to one large result, *that result* is what is
+   being cast, and the MM prices it accordingly.
+
+**Why.** D23 priced magic by scope and stopped at the edge of combat. III.3 said
+a magical Strike "resolves exactly like a physical one", and Minor is free, so a
+formalized caster could attack every exchange, forever, for nothing, at parity
+with the character who trained for it — and in the software the Strike path never
+asked about scope or purpose at all. The limit existed in print and nowhere else.
+
+**Alternatives rejected.** A numeric clamp on Minor workings (never more than 1
+Resolve, never a rider) was the mechanically tidiest and was declined: it prices
+the *outcome* where this game prices the *intent*, and it left a second set of
+combat numbers to remember. Barring Minor magic from unwilling targets outright
+was declined for taking the snuffed torch and the too-hot lock with it.
+
+**The cost we accepted.** "Meaningful" and "finesse" are judgement words, and
+every edge case lands on the MM mid-fight. Ruling 2 is what keeps that cost
+bounded: the one case that would come up every exchange — *is this attack
+Significant?* — is answered in advance, always, yes.
+
+**Status:** ✅ Decided; implementing.
+
+---
+
+### D26 — No hit points, for now *(owner ruling, 2026-09-20)*
+
+**Decision:** "HP can be scrapped for now." Characters keep **Conditions**;
+enemies keep **Resolve**. The asymmetry stands.
+
+**What was on the table.** Three options: keep Conditions as they are; give
+characters a small Resolve pool as well, so both sides of the table share one
+vocabulary and players get a progress bar; or replace Conditions with hit points
+outright. The case for changing something was real — Conditions answer *what is
+happening to me*, not *are we winning*, and the 2026-09-08 fun audit found combat
+short but shallow. The case against is that Conditions are the fiction-first
+layer (*Staggered* tells you what to narrate; 11 hit points tells you nothing),
+that a third tracked number joins Endurance and Sparks, and that Resolve is the
+durability term in the Threat Rating formula — so every enemy file, the encounter
+recipes and the simulator's calibration move with it.
+
+**Why now is the wrong time to decide it.** Nobody has played this game at a
+human table (fun audit R1). Whether combat *feels* shallow is exactly the
+question a simulation cannot answer and one session can. Reversing a pillar
+first, and finding out second, is the expensive order.
+
+**Revisit when:** a human table has played, and the report is either "we never
+knew how the fight was going" or "Conditions carried it".
+
+**Status:** ⏸️ Declined for now, not closed.

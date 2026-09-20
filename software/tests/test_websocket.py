@@ -5578,3 +5578,146 @@ class TestSkillAdvanceRefusesAnOverflowingBatch:
             msg = ws.receive_json()
         assert msg["type"] == "skill_advanced"
         assert char.skills["lore"].rank == "practiced"
+
+
+class TestAMagicalStrikeIsAFullForm:
+    """D25: a blow aimed at putting someone down is meaningful power, so magic
+    used as a Strike is Significant or Major and spends a readied intent. The
+    free Minor working is a Maneuver, not a Strike."""
+
+    def _mage(self, session_id, formalized=True, sparks=3, intents=None):
+        char = session_store.get(session_id).characters["Zahna"]
+        char.magic_domain = "inscription"
+        char.magic_technique_active = formalized
+        char.sparks = sparks
+        char.readied_intents = intents
+        return char
+
+    def _combat(self, client, mm_token, session_id):
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "combat_start"})
+            ws.receive_json()
+
+    def _strike(self, ws, **extra):
+        msg = {"type": "strike", "target": "goblin", "magical": True,
+               "scope": "significant", "purpose": "harm"}
+        msg.update(extra)
+        with patch("random.randint", return_value=4):
+            ws.send_json(msg)
+            return ws.receive_json()
+
+    def test_a_significant_magical_strike_spends_the_intent(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, intents={"harm": 2})
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._strike(ws)
+        assert msg["type"] == "strike_result"
+        assert msg["magical"] is True
+        assert msg["intent_cost"] == "intent"
+        assert msg["readied_intents"] == {"harm": 1}
+        assert char.readied_intents == {"harm": 1}
+
+    def test_a_minor_magical_strike_is_refused_and_costs_nothing(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, intents={"harm": 2})
+        self._combat(client, mm_token, sid)
+        endurance_before = char.endurance_current
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._strike(ws, scope="minor", press=True)
+        assert msg["type"] == "error"
+        assert "Maneuver" in msg["message"]
+        assert char.readied_intents == {"harm": 2}
+        assert char.sparks == 3
+        assert char.endurance_current == endurance_before
+
+    def test_an_off_purpose_strike_costs_a_spark_instead(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, intents={"ward": 1})
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._strike(ws)
+        assert msg["type"] == "strike_result"
+        assert msg["intent_cost"] == "spark"
+        assert char.sparks == 2
+        assert char.readied_intents == {"ward": 1}
+
+    def test_a_refused_working_spends_no_endurance_and_no_spark(
+        self, client, mm_token, session_with_character
+    ):
+        """Nothing readied and no Spark to pay with: the Strike is refused
+        before the Press is deducted."""
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, sparks=0, intents={"ward": 1})
+        self._combat(client, mm_token, sid)
+        endurance_before = char.endurance_current
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._strike(ws, press=True)
+        assert msg["type"] == "error"
+        assert char.endurance_current == endurance_before
+        assert char.sparks == 0
+        assert char.readied_intents == {"ward": 1}
+
+    def test_the_working_rolls_its_domain_not_the_weapon(
+        self, client, mm_token, session_with_character
+    ):
+        """Inscription is scholarly, so the roll is Knowledge + Lore at the
+        domain's own difficulty — not Strength + Combat at the MM's label."""
+        session, _ = session_with_character
+        sid = session["session_id"]
+        self._mage(sid, intents={"harm": 1})
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._strike(ws)
+        roll = msg["roll"]
+        assert roll["attribute_id"] == "knowledge"
+        assert roll["skill_id"] == "lore"
+        assert "[magic:inscription:significant]" in roll["description"]
+
+    def test_an_ordinary_strike_is_untouched(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, intents={"harm": 1})
+        self._combat(client, mm_token, sid)
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            with patch("random.randint", return_value=4):
+                ws.send_json({"type": "strike", "target": "goblin"})
+                msg = ws.receive_json()
+        assert msg["type"] == "strike_result"
+        assert msg["magical"] is False
+        assert msg["intent_cost"] is None
+        assert char.readied_intents == {"harm": 1}
+
+    def test_press_still_works_on_a_working(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        char = self._mage(sid, intents={"harm": 1})
+        self._combat(client, mm_token, sid)
+        endurance_before = char.endurance_current
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", sid))
+            msg = self._strike(ws, press=True)
+        assert msg["type"] == "strike_result"
+        assert len(msg["roll"]["dice_rolled"]) == 3
+        assert char.endurance_current == endurance_before - 1

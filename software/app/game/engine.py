@@ -337,6 +337,8 @@ def resolve_magic_roll(
     intent: str,
     ruleset: MergedRuleset,
     spark_use: str | None = None,
+    press: bool = False,
+    borrowed_trouble: bool = False,
 ) -> RollResult:
     """Resolve a magical effect using the Domain + Intent + Scope framework.
 
@@ -351,6 +353,9 @@ def resolve_magic_roll(
                    "pre_technique_push" (reach: pre-Technique Significant only).
                    Any other value — including the retired "push_scope" —
                    raises ValueError so the handler never wastes a Spark on it.
+        press: The caster Pressed (D25: a magical Strike is a Strike, and can
+            spend Endurance for the extra die like any other).
+        borrowed_trouble: A complication was accepted for an extra die (III.1).
 
     Returns:
         A RollResult with difficulty and modifiers resolved from domain + scope.
@@ -511,6 +516,8 @@ def resolve_magic_roll(
         skill_rank_id=skill_rank_id,
         difficulty_label=difficulty_label,
         sparks_spent=sparks_spent,
+        press=press,
+        borrowed_trouble=borrowed_trouble,
         description=f"[magic:{domain_id}:{scope}] {intent}",
     )
     return resolve_roll(request, ruleset)

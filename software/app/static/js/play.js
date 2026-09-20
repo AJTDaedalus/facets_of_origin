@@ -1303,6 +1303,51 @@ function onStrikeWeaponCategoryChange() {
   }
 }
 
+/**
+ * D25: reveal the magical Strike's own fields, and say what it will cost
+ * before it is thrown. The purposes come from the ruleset, and what is left
+ * readied comes from the character — neither is a list this file invents.
+ */
+function onStrikeMagicalToggle() {
+  const box = document.getElementById('strike-magical');
+  const fields = document.getElementById('strike-magic-fields');
+  if (!box || !fields) return;
+  fields.hidden = !box.checked;
+  if (!box.checked) return;
+
+  const select = document.getElementById('strike-magic-purpose');
+  const pi = (state.ruleset && state.ruleset.magic && state.ruleset.magic.prepared_intents) || null;
+  const purposes = (pi && pi.purposes) || [];
+  if (select && !select.options.length) {
+    purposes.forEach((p) => {
+      const opt = document.createElement('option');
+      opt.value = p.id;
+      opt.textContent = p.label + (p.description ? ' — ' + p.description : '');
+      select.appendChild(opt);
+    });
+  }
+  renderStrikeMagicCost();
+  if (select && !select.dataset.bound) {
+    select.dataset.bound = '1';
+    select.addEventListener('change', renderStrikeMagicCost);
+  }
+}
+
+function renderStrikeMagicCost() {
+  const out = document.getElementById('strike-magic-cost');
+  const select = document.getElementById('strike-magic-purpose');
+  if (!out || !select) return;
+  const readied = (state.character && state.character.readied_intents) || null;
+  if (!readied) {
+    out.textContent = 'Nothing readied this session — this will cost a Spark.';
+    return;
+  }
+  const left = readied[select.value] || 0;
+  out.textContent = left > 0
+    ? `${left} ${select.value} readied — this spends one.`
+    : `No ${select.value} readied — this will cost a Spark instead.`;
+}
+
 function performStrike() {
   const target = (document.getElementById('strike-target').value || '').trim();
   const attrId = document.getElementById('strike-attribute').value;
@@ -1323,6 +1368,16 @@ function performStrike() {
   // Spark-spent; this checkbox only carries the player's declaration.
   const finalBlowEl = document.getElementById('strike-final-blow');
   const finalBlow = !!(finalBlowEl && finalBlowEl.checked);
+  // D25: a Strike made with magic carries its scope and purpose, and the
+  // server prices it. Minor is not offered here because a Minor working is
+  // not a Strike at all — it is a Maneuver.
+  const magicalEl = document.getElementById('strike-magical');
+  const magical = !!(magicalEl && magicalEl.checked);
+  const magicFields = magical ? {
+    magical: true,
+    scope: (document.getElementById('strike-magic-scope') || {}).value || 'significant',
+    purpose: (document.getElementById('strike-magic-purpose') || {}).value || null,
+  } : {};
 
   if (!target) { notify('Choose a target.', 'warn'); focusElement('strike-target'); return; }
   if (press && (state.character.endurance_current || 0) < 1) {
@@ -1345,6 +1400,7 @@ function performStrike() {
     weapon_category: weaponCategory,
     weapon_type: weaponType,
     final_blow: finalBlow,
+    ...magicFields,
     ...borrowedTroubleField(),
   });
   if (finalBlowEl) finalBlowEl.checked = false;
