@@ -74,7 +74,7 @@ Scope is not a ceiling on creativity. A fire mage lighting a dozen torches simul
 
 **Meaningful power or finesse requires a full form.** Minor magic is small and coarse. It lights, snuffs, marks, warms, stings, dazzles, trips. The moment a working needs real force — enough to break something, bind someone, put a person down — or real precision — the exact lock, the exact word, the one thread in the weave — it has stopped being Minor. That is a **full form**: Significant, and it spends a readied intent (see *Readied Intents*, below).
 
-This is the whole of the rule, and it is deliberately a judgement rather than a number. The question is never *how impressive was that?* but *how much did you ask of the world?* A candle lit across a crowded room is a small ask and stays free however beautifully you describe it. A flame placed inside a lock, at the one point where the mechanism will fail, is a precise ask — that is a full form, and you pay for it.
+This is the whole of the rule, and it is deliberately a judgement rather than a number. The question is never *how impressive was that?* but *how much did you ask of the world?* A candle lit across a crowded room is a small ask and stays free however beautifully you describe it. So does making a lock too hot to hold — that is heat, applied bluntly, and Table II.3–2 keeps it Minor. Setting that same heat at the one point inside the mechanism where it will fail is a precise ask, and precision is a full form: you pay for it.
 
 A Minor working never has to be prepared for, and it never decides anything. That is the trade. If what you want is for something to *change* — a door that will not open, a man who will not stand, a truth that will not stay hidden — you are casting a full form, and the intent you readied this session is what lets you.
 
@@ -88,7 +88,7 @@ A Minor working never has to be prepared for, and it never decides anything. Tha
 >
 > *Major:* Reclaim a road by accelerating the forest's growth across it — world-changing, persistent, reshapes an environment. Hard for Focused, Very Hard for Standard.
 >
-> The same wish — "let things grow" — expressed at three different scales. Scope is determined by **scale of change and duration**, not by how impressive the result looks. A single bloom is always Minor even if it's the most beautiful thing in the room.
+> The same wish — "let things grow" — expressed at three different scales. Scope is determined by **scale of change, duration, and precision** — not by how impressive the result looks. A single bloom is always Minor even if it's the most beautiful thing in the room.
 
 ---
 

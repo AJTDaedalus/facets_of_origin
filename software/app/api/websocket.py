@@ -846,7 +846,10 @@ async def _handle_strike(
                 "type": "error", "message": "The Final Blow has already been used this session.",
             })
             return
-        if str(msg.get("skill_id", "combat")) != "combat":
+        # B8: on a working the declared skill is discarded and the tradition's
+        # is rolled, so the declared field cannot answer this — a magical
+        # Strike is never a Combat roll.
+        if bool(msg.get("magical", False)) or str(msg.get("skill_id", "combat")) != "combat":
             await manager.send_to(websocket, {
                 "type": "error", "message": "The Final Blow requires a Combat roll.",
             })
@@ -861,25 +864,79 @@ async def _handle_strike(
             })
             return
 
+    # Accept attribute/skill from client; default to strength/combat for backward
+    # compat. This is read and validated before anything is spent: a Strike that
+    # names an attribute the character does not have is refused, and a refusal
+    # must cost nothing.
+    attribute_id = str(msg.get("attribute_id", "strength"))
+    skill_id = msg.get("skill_id", "combat")
+    if attribute_id not in character.attributes:
+        await manager.send_to(websocket, {"type": "error", "message": f"Unknown attribute '{attribute_id}'."})
+        return
+
     # D25 (III.3, *A magical Strike is always a full form*): a blow aimed at
     # putting someone down is meaningful power, so magic used as a Strike is
     # Significant or Major and spends a readied intent. The free Minor working
-    # is a Maneuver, not a Strike. Everything here happens before a single
-    # Endurance point or Spark is spent, so a refused declaration costs nothing.
+    # is a Maneuver, not a Strike.
+    #
+    # Nothing below pays for anything. Every cost — Endurance for the Press,
+    # Sparks, the intent, and the exchange's contested flag — is applied after
+    # the roll is accepted, because four separate refusals live between here and
+    # there. This block only checks that the declaration is legal and affordable.
     magical = bool(msg.get("magical", False))
     magic_domain_id = magic_scope = magic_purpose = None
     magic_intent_cost = None
     off_purpose_sparks = 0
+    spark_use = msg.get("spark_use")
+    spark_declared = spark_use in VALID_SPARK_USES
+    reach_push = spark_use == "pre_technique_push"
+
+    # The declaration cannot be taken on trust: II.3 gives each tradition its
+    # roll, and III.3 names those same pairings as the magical attack. A Strike
+    # rolled on Attune or Lore *is* a working, so an undeclared one is refused
+    # rather than resolved for free. The set of skills comes from the ruleset
+    # (combat.tradition_skills), not from a list kept here.
+    if (not magical and character.magic_domain
+            and skill_id in combat_module.tradition_skills(session.ruleset)):
+        await manager.send_to(websocket, {
+            "type": "error",
+            "message": (
+                f"A Strike rolled on {skill_id} is a magical Strike (III.3, "
+                "*Mind and Soul in a Fight*) — declare it as a full form. It "
+                "spends a readied intent."
+            ),
+        })
+        return
+
     if magical:
         if not character.magic_domain:
             await manager.send_to(websocket, {
                 "type": "error", "message": "Character has no magic domain."})
             return
+        # II.3, *Before the Technique*: an unformalized caster works at Minor
+        # scope and has no intents to spend, so they have no magical Strike —
+        # except the one the reach-Spark buys (II.3, Reaching Significant
+        # Early), which resolve_magic_roll validates and which is paid for
+        # below like any other Spark.
+        if not character.magic_technique_active and not reach_push:
+            await manager.send_to(websocket, {
+                "type": "error",
+                "message": (
+                    "Before the Technique formalizes your domain you work at "
+                    "Minor scope, and a Minor working is not a Strike (II.3, "
+                    "III.3). Reshape the fight with a Maneuver or a Support, "
+                    "or spend a Spark to reach Significant."
+                ),
+            })
+            return
         magic_domain_id = str(msg.get("domain_id") or character.magic_domain)
         magic_scope = str(msg.get("scope", "significant"))
         _pi = session.ruleset.magic.prepared_intents if session.ruleset.magic else None
-        strike_scopes = _pi.strike_scopes if _pi else ["significant", "major"]
-        if magic_scope not in strike_scopes:
+        # D23's contract: a setting that drops `prepared_intents` gets the
+        # unlimited game back. With no section there is no intent to spend and
+        # so no scope to withhold — any scope may be Struck with.
+        strike_scopes = _pi.strike_scopes if _pi else None
+        if strike_scopes is not None and magic_scope not in strike_scopes:
             await manager.send_to(websocket, {
                 "type": "error",
                 "message": (
@@ -900,39 +957,35 @@ async def _handle_strike(
         pi = session.ruleset.magic.prepared_intents if session.ruleset.magic else None
         off_purpose_sparks = (
             pi.off_purpose_spark_cost if (magic_intent_cost == "spark" and pi) else 0)
-        if character.sparks < off_purpose_sparks + sparks_requested:
+        # Every Spark this Strike will cost, counted before any is spent: the
+        # dice the player asked for, the one a declared `spark_use` costs
+        # (the same price `cast` charges for it), and the off-purpose working.
+        needed = off_purpose_sparks + sparks_requested + (1 if spark_declared else 0)
+        if character.sparks < needed:
             await manager.send_to(websocket, {
                 "type": "error",
                 "message": (
-                    f"Nothing readied for {magic_purpose}: an off-purpose "
-                    f"working costs {off_purpose_sparks} Spark, and you have "
-                    f"{character.sparks}."
+                    f"That working costs {needed} Spark"
+                    f"{'s' if needed != 1 else ''} — "
+                    + (f"{off_purpose_sparks} because nothing is readied for "
+                       f"{magic_purpose}, " if off_purpose_sparks else "")
+                    + f"and you have {character.sparks}."
                 ),
             })
             return
 
-    # PHB III.3: Press costs Endurance (facet.yaml combat.press.endurance_cost)
-    if press:
-        press_cost = session.ruleset.combat.press.endurance_cost
-        if character.endurance_current is not None and character.endurance_current >= press_cost:
-            character.endurance_current -= press_cost
-        else:
-            await manager.send_to(websocket, {"type": "error", "message": "No Endurance Pool points to Press."})
-            return
-
-    sparks_to_spend = _spend_sparks(character, sparks_requested, session)
-
-    # K-2/D5: a Strike — landed or not — contests the exchange.
-    session.offensive_actions_this_exchange.add(player_name)
-
-    # Accept attribute/skill from client; default to strength/combat for backward compat
-    attribute_id = str(msg.get("attribute_id", "strength"))
-    skill_id = msg.get("skill_id", "combat")
-
-    # Validate attribute exists on character
-    if attribute_id not in character.attributes:
-        await manager.send_to(websocket, {"type": "error", "message": f"Unknown attribute '{attribute_id}'."})
+    # PHB III.3: Press costs Endurance (facet.yaml combat.press.endurance_cost).
+    # Checked here, paid after the roll is accepted — a refused Strike must not
+    # leave the character a point poorer for an action that never happened.
+    press_cost = session.ruleset.combat.press.endurance_cost if press else 0
+    if press and (character.endurance_current is None
+                  or character.endurance_current < press_cost):
+        await manager.send_to(websocket, {"type": "error", "message": "No Endurance Pool points to Press."})
         return
+
+    # The dice the Sparks buy. _spend_sparks clamps to what the character holds,
+    # so the roll is built from the same number that will actually be paid.
+    sparks_to_spend = min(sparks_requested, max(0, character.sparks))
 
     # Posture offense modifier plus any Condition penalty (Staggered −1, PHB III.3).
     # Both come from combat.offense_modifier so this path and the simulator's
@@ -943,18 +996,22 @@ async def _handle_strike(
 
     # B4 Q1 (TD-9): the MM's declared label composes with at most one
     # character-side Technique step — declared label first, step second
-    # (combat.apply_character_difficulty_step is the rule's only home).
-    difficulty, technique_step = _apply_difficulty_step(
-        character, difficulty_declared,
-        {
-            "skill_id": skill_id,
-            "weapon_category": weapon_category,
-            "weapon_type": weapon_type,
-            "declared_technique_ids": msg.get("declared_technique_ids"),
-            "specialty_declared": bool(msg.get("specialty_declared")),
-        },
-        session.ruleset,
-    )
+    # (combat.apply_character_difficulty_step is the rule's only home). A
+    # working has no declared label: its difficulty comes from domain and
+    # scope, so the step is neither computed nor reported for one.
+    difficulty, technique_step = difficulty_declared, None
+    if not magical:
+        difficulty, technique_step = _apply_difficulty_step(
+            character, difficulty_declared,
+            {
+                "skill_id": skill_id,
+                "weapon_category": weapon_category,
+                "weapon_type": weapon_type,
+                "declared_technique_ids": msg.get("declared_technique_ids"),
+                "specialty_declared": bool(msg.get("specialty_declared")),
+            },
+            session.ruleset,
+        )
 
     request = RollRequest(
         attribute_id=attribute_id,
@@ -981,14 +1038,14 @@ async def _handle_strike(
                 scope=magic_scope,
                 intent=str(msg.get("description", ""))[:200],
                 ruleset=session.ruleset,
-                spark_use=msg.get("spark_use"),
+                spark_use=spark_use,
                 press=press,
                 borrowed_trouble=bool(msg.get("borrowed_trouble")),
+                sparks_spent=sparks_to_spend,
             )
         except ValueError as e:
             await manager.send_to(websocket, {"type": "error", "message": str(e)})
             return
-        technique_step = None
     else:
         result = resolve_roll(request, session.ruleset)
     result_dict = roll_result_to_dict(result)
@@ -1006,19 +1063,33 @@ async def _handle_strike(
 
     _record_roll(session, player_name, result_dict)
 
-    # D23/D25: the working was accepted, so it is paid for now — same order as
-    # `cast`, so a refused Strike never costs an intent or a Spark.
+    # ---- Everything the Strike costs is paid here, and only here ----------
+    # The roll was accepted, so from this point nothing can refuse it. Before
+    # this line four things could: an unaffordable declaration, an unknown
+    # attribute, a Press with no Endurance, and resolve_magic_roll's own rules.
+    # Paying above any of them is how a rejected action used to cost a Spark.
+    if press:
+        character.endurance_current -= press_cost
+    if sparks_to_spend:
+        _spend_sparks(character, sparks_to_spend, session)
+    # K-2/D5: a Strike — landed or not — contests the exchange.
+    session.offensive_actions_this_exchange.add(player_name)
+
     if magical:
-        paid = character.pay_intent_cost(magic_purpose, magic_scope, session.ruleset)
-        if paid == "spark" and off_purpose_sparks:
+        # A declared Spark use costs its Spark, exactly as it does on `cast`:
+        # the dice bonus, or the reach that bought this scope.
+        if spark_declared:
+            _spend_sparks(character, 1, session)
+        magic_intent_cost = character.pay_intent_cost(
+            magic_purpose, magic_scope, session.ruleset)
+        if magic_intent_cost == "spark" and off_purpose_sparks:
             _spend_sparks(character, off_purpose_sparks, session)
-        magic_intent_cost = paid
-        # The tradition's skill rolled, so the caster used it (T4.1/D7).
+        # The tradition's skill rolled, so the caster used it (T4.1/D7). The
+        # skill the message named was not rolled at all, so it earns nothing.
         if result.request.skill_id:
             character.skills_used_this_session.add(result.request.skill_id)
-
-    # Auto-mark skill as used this session
-    if skill_id and skill_id in character.skills:
+    elif skill_id and skill_id in character.skills:
+        # Auto-mark skill as used this session
         character.skills_used_this_session.add(skill_id)
 
     # TD-14: Final Blow fires on 7+ (both success tiers, per the BRIEF) —
@@ -1530,6 +1601,44 @@ async def _handle_cast(
 # Support / Maneuver handlers (2.1)
 # ---------------------------------------------------------------------------
 
+async def _free_working_roll(websocket, msg: dict, character, ruleset):
+    """Resolve a free Minor working declared on a Maneuver or a Support.
+
+    III.3 (*Minor magic still fights*) sends the caster's free magic through
+    these two actions, so they have to be able to express it: the difficulty
+    of a working comes from its domain and scope, not from the MM's label, and
+    a Prismatic domain's Minor working is Hard where a Focused one is Easy.
+    Every rule stays in resolve_magic_roll.
+
+    Returns (result, None) when the working resolved, (None, error_message)
+    when it was refused, and (None, None) when this message declared no magic.
+    """
+    if not bool(msg.get("magical", False)):
+        return None, None
+    if not character.magic_domain:
+        return None, "Character has no magic domain."
+    scope = str(msg.get("scope", "minor"))
+    pi = ruleset.magic.prepared_intents if ruleset.magic else None
+    free_scopes = pi.free_scopes if pi else ["minor", "significant", "major"]
+    if scope not in free_scopes:
+        return None, (
+            f"A {scope} working is a full form — it is a Strike, or a cast, "
+            "and it spends a readied intent (III.3, D25). A Maneuver or a "
+            "Support carries the free magic."
+        )
+    try:
+        return resolve_magic_roll(
+            character=character,
+            domain_id=str(msg.get("domain_id") or character.magic_domain),
+            scope=scope,
+            intent=str(msg.get("description", ""))[:200],
+            ruleset=ruleset,
+            borrowed_trouble=bool(msg.get("borrowed_trouble")),
+        ), None
+    except ValueError as e:
+        return None, str(e)
+
+
 async def _handle_support(
     websocket, msg: dict, session, session_id: str, identity: str,
 ) -> None:
@@ -1551,18 +1660,27 @@ async def _handle_support(
         await manager.send_to(websocket, {"type": "error", "message": f"Invalid bonus_type '{bonus_type}'."})
         return
 
-    request, technique_step = _build_roll_request(character, msg, session.ruleset)
-    result = resolve_roll(request, session.ruleset)
+    working, error = await _free_working_roll(websocket, msg, character, session.ruleset)
+    if error:
+        await manager.send_to(websocket, {"type": "error", "message": error})
+        return
+    if working is not None:
+        result, technique_step = working, None
+    else:
+        request, technique_step = _build_roll_request(character, msg, session.ruleset)
+        result = resolve_roll(request, session.ruleset)
     result_dict = roll_result_to_dict(result)
     _record_roll(session, player_name, result_dict)
 
-    # Auto-mark skill as used this session
-    used_skill = msg.get("skill_id")
+    # Auto-mark skill as used this session — the tradition's skill on a
+    # working, the declared one otherwise.
+    used_skill = result.request.skill_id if working is not None else msg.get("skill_id")
     if used_skill and used_skill in character.skills:
         character.skills_used_this_session.add(used_skill)
 
     await manager.broadcast(session_id, {
         "type": "support_result",
+        "magical": working is not None,
         "player": player_name,
         "target": target_player,
         "technique_step": technique_step,
@@ -1592,21 +1710,33 @@ async def _handle_maneuver(
 
     target_name = str(msg.get("target", ""))
 
+    working, error = await _free_working_roll(websocket, msg, character, session.ruleset)
+    if error:
+        await manager.send_to(websocket, {"type": "error", "message": error})
+        return
+    if working is not None:
+        result, technique_step = working, None
+    else:
+        request, technique_step = _build_roll_request(character, msg, session.ruleset)
+        result = resolve_roll(request, session.ruleset)
+
     # K-2/D5: a Maneuver is an offensive action — it contests the exchange.
+    # Below the refusals above, so a rejected working does not silently spend
+    # the exchange's free advance.
     session.offensive_actions_this_exchange.add(player_name)
 
-    request, technique_step = _build_roll_request(character, msg, session.ruleset)
-    result = resolve_roll(request, session.ruleset)
     result_dict = roll_result_to_dict(result)
     _record_roll(session, player_name, result_dict)
 
-    # Auto-mark skill as used this session
-    used_skill = msg.get("skill_id")
+    # Auto-mark skill as used this session — the tradition's skill on a
+    # working, the declared one otherwise.
+    used_skill = result.request.skill_id if working is not None else msg.get("skill_id")
     if used_skill and used_skill in character.skills:
         character.skills_used_this_session.add(used_skill)
 
     await manager.broadcast(session_id, {
         "type": "maneuver_result",
+        "magical": working is not None,
         "player": player_name,
         "target": target_name,
         "technique_step": technique_step,

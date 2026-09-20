@@ -446,7 +446,9 @@ When the reaction already provides the reduction, the armor charge is **not spen
 
 Magical effects in combat follow the same **Domain + Intent + Scope** framework as any other use of magic. The rules below govern how magic integrates with the exchange structure.
 
-**A magical Strike is always a full form.** A blow aimed at putting someone down *is* meaningful power (II.3, *Scope*) — so magic used as a Strike is **Significant**, declared with its domain and purpose, and it **spends a readied intent** (or a Spark, if nothing of that purpose is readied). There is no free magical attack. The swordsman's Strike costs nothing because a sword is what he brought; the caster's costs an intent, and buys the same result.
+**A magical Strike is always a full form.** A blow aimed at putting someone down *is* meaningful power (II.3, *Scope*) — so magic used as a Strike is **Significant or Major**, declared with its domain and purpose, and it **spends a readied intent** (or a Spark, if nothing of that purpose is readied). There is no free magical attack. The swordsman's Strike costs nothing because a sword is what he brought; the caster's costs an intent, and buys the same result.
+
+Before your domain formalizes you have no intents to spend, and so no magical Strike at all: your magic fights as a Maneuver or a Support until the Technique — or, for one exchange, on a Spark (II.3, *Reaching Significant Early*).
 
 **Minor magic still fights.** It simply does not end anyone. A free working that blinds, trips, snuffs the lantern, ices the flagstones, or makes a grip too hot to hold is a **Maneuver** (or a **Support**, when it is helping an ally rather than hindering an enemy) — the actions that reshape a fight without deciding it. A Maneuver's 10+ makes rolls against the target Easy until the situation changes, which is frequently worth more than a hit. Free magic is not weak in a fight. It is indirect.
 

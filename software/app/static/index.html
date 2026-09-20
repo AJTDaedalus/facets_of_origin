@@ -414,7 +414,7 @@
                   <!-- D25: a magical Strike is a full form. The domain sets
                        the difficulty, so the attribute, skill and difficulty
                        pickers above are ignored when this is ticked. -->
-                  <div class="card" style="margin:8px 0;padding:8px;">
+                  <div class="card" id="strike-magical-wrap" hidden style="margin:8px 0;padding:8px;">
                     <label class="checkbox-inline" style="margin:0;">
                       <input type="checkbox" id="strike-magical" onchange="onStrikeMagicalToggle()">
                       Strike with magic — a full form, spends a readied intent
@@ -478,6 +478,10 @@
                   <div class="sub-form-title">Support</div>
                   <label for="support-target">Target Ally</label>
                   <select id="support-target"></select>
+                  <label class="checkbox-inline" id="support-magical-wrap" hidden style="margin:6px 0;">
+                    <input type="checkbox" id="support-magical">
+                    With magic — a free Minor working (III.3)
+                  </label>
                   <label for="support-bonus-type">Bonus Type</label>
                   <select id="support-bonus-type">
                     <option value="add_die">Add Die — ally rolls +1d6 and drops the lowest</option>
@@ -503,6 +507,10 @@
                   <select id="maneuver-attribute"></select>
                   <label for="maneuver-skill">Skill (optional)</label>
                   <select id="maneuver-skill"><option value="">-- none --</option></select>
+                  <label class="checkbox-inline" id="maneuver-magical-wrap" hidden style="margin:6px 0;">
+                    <input type="checkbox" id="maneuver-magical">
+                    With magic — a free Minor working (III.3)
+                  </label>
                   <label for="maneuver-description">What are you trying to do?</label>
                   <input type="text" id="maneuver-description" placeholder="e.g. kick the brazier into his path">
                   <button class="btn btn-secondary btn-sm" onclick="performManeuver()" style="margin-top:4px;">Maneuver</button>
