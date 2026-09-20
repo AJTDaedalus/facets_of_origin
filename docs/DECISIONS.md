@@ -1142,3 +1142,31 @@ bounded: the one case that would come up every exchange — *is this attack
 Significant?* — is answered in advance, always, yes.
 
 **Status:** ✅ Decided; implementing.
+
+---
+
+### D26 — No hit points, for now *(owner ruling, 2026-09-20)*
+
+**Decision:** "HP can be scrapped for now." Characters keep **Conditions**;
+enemies keep **Resolve**. The asymmetry stands.
+
+**What was on the table.** Three options: keep Conditions as they are; give
+characters a small Resolve pool as well, so both sides of the table share one
+vocabulary and players get a progress bar; or replace Conditions with hit points
+outright. The case for changing something was real — Conditions answer *what is
+happening to me*, not *are we winning*, and the 2026-09-08 fun audit found combat
+short but shallow. The case against is that Conditions are the fiction-first
+layer (*Staggered* tells you what to narrate; 11 hit points tells you nothing),
+that a third tracked number joins Endurance and Sparks, and that Resolve is the
+durability term in the Threat Rating formula — so every enemy file, the encounter
+recipes and the simulator's calibration move with it.
+
+**Why now is the wrong time to decide it.** Nobody has played this game at a
+human table (fun audit R1). Whether combat *feels* shallow is exactly the
+question a simulation cannot answer and one session can. Reversing a pillar
+first, and finding out second, is the expensive order.
+
+**Revisit when:** a human table has played, and the report is either "we never
+knew how the fight was going" or "Conditions carried it".
+
+**Status:** ⏸️ Declined for now, not closed.
