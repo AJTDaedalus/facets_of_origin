@@ -72,6 +72,12 @@ For small magic the purpose is just a description. For large magic it is what yo
 
 Scope is not a ceiling on creativity. A fire mage lighting a dozen torches simultaneously is a Minor effect — there are many targets but each is trivially small. A fire mage collapsing a burning building to trap an army beneath it is Major. The fiction determines scope; the difficulty follows.
 
+**Meaningful power or finesse requires a full form.** Minor magic is small and coarse. It lights, snuffs, marks, warms, stings, dazzles, trips. The moment a working needs real force — enough to break something, bind someone, put a person down — or real precision — the exact lock, the exact word, the one thread in the weave — it has stopped being Minor. That is a **full form**: Significant, and it spends a readied intent (see *Readied Intents*, below).
+
+This is the whole of the rule, and it is deliberately a judgement rather than a number. The question is never *how impressive was that?* but *how much did you ask of the world?* A candle lit across a crowded room is a small ask and stays free however beautifully you describe it. A flame placed inside a lock, at the one point where the mechanism will fail, is a precise ask — that is a full form, and you pay for it.
+
+A Minor working never has to be prepared for, and it never decides anything. That is the trade. If what you want is for something to *change* — a door that will not open, a man who will not stand, a truth that will not stay hidden — you are casting a full form, and the intent you readied this session is what lets you.
+
 > **Example — the same intent at three scopes**
 >
 > The same magical intent reads very differently depending on scope. Using the Verdance domain as an example:
@@ -129,6 +135,8 @@ Techniques within the Mind and Soul trees can extend what your domain can do —
 > Once Zahna's Inscription formalizes, a session might open with him readying **Reveal, Reveal, Ward**. Later, in some archive, he spends a Reveal reading a sealed door's history back to the hand that sealed it — Significant, Inscription, and nothing about the working itself was decided until he was standing in front of that door.
 
 **With nothing readied for the purpose you need**, you may still cast: it costs **a Spark** instead. That Spark does nothing else — it does not improve the roll — so a caster who wants both pays for both.
+
+**Small magic does not become free by being repeated.** Minor workings are unlimited — light the candle as often as you like. But when a string of them is adding up to one large result, *that result* is what you are casting: six Minor workings that between them empty a guardroom are a Significant working with extra steps, and the MM prices what is actually happening. This is not a trap for clever players. It is the same rule as everywhere else — the fiction determines scope — applied to a plan instead of a gesture.
 
 **Readied intents come back after a full rest.** When the party has genuinely rested is the MM's call. Otherwise they return at the start of the next session. You cannot re-ready what you have until then; a choice you can revise whenever it turns out wrong is not a choice.
 
