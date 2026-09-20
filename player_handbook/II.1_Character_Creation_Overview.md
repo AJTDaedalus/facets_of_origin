@@ -52,7 +52,7 @@ Lineage sits before attributes because a gift is part of who the character *is* 
 >
 > **Zulnut's player:** Getting into places. Ideally without anybody noticing, and definitely without climbing anything twice.
 >
-> *Body Facet, then — the Grace branch. Eighteen points: Dexterity 3 and Luck 3 because those are the character, Constitution 1 and Charisma 2 and Spirit 1 because every 3 has to be bought with a 1, and the rest at 2.*
+> *Body Facet, then — the Grace branch. Eighteen points: Dexterity 3 and Luck 3 because those are the character, Constitution 1 and Spirit 1 because every 3 has to be bought with a 1, and the rest at 2.*
 >
 > **MM:** Background?
 >

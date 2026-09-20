@@ -119,9 +119,9 @@ A finished Facet — one Master, two Expert, two Practiced — produces 9 total 
 >
 > Zulnut starts with Finesse at Practiced from his Background: 1 advance banked. He takes Stealth to Practiced (2) and Combat to Practiced (3). *Facet level 1* — and none of his three beyond-Practiced slots is committed yet.
 >
-> Several sessions later: Stealth to Expert (4, first slot), Finesse to Expert (5, second slot), Athletics to Practiced (6). *Facet level 2*, one slot left.
+> Several sessions later: Stealth to Expert (4, first slot), Finesse to Expert (5, second slot), Athletics to Practiced (6). *Facet level 2*, one slot left — and the Master pick still unspent.
 >
-> He spends it on Stealth and grinds out the 8 marks to Master (7). Then Endurance to Practiced (8), and Combat to Expert (9) — the third slot. *Facet level 3.* Stealth is what he is best at; Combat and Finesse are what he is good at; Athletics and Endurance are where he stopped, permanently.
+> He spends the Master pick on Stealth, the slot it already holds, and grinds out the 8 marks (7). Then Endurance to Practiced (8), and Combat to Expert (9) — the third slot. *Facet level 3.* Stealth is what he is best at; Combat and Finesse are what he is good at; Athletics and Endurance are where he stopped, permanently.
 >
 > (Zulnut's player, counting on his fingers: *"So Athletics is stuck at Practiced forever?"* The MM, who has been waiting years for this: **"Yes."** Zulnut's player, after a pause: *"...Good. Running is for people who planned badly."*)
 

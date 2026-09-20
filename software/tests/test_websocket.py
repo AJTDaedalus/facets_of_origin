@@ -496,11 +496,14 @@ class TestCastSparkNotBurnedOnRefusedUse:
         char = self._mage(session_id)
         with client.websocket_connect("/ws") as ws:
             _auth_player(ws, create_session_token("Zahna", session_id))
-            ws.send_json({
-                "type": "cast", "domain_id": "inscription", "scope": "minor",
-                "intent": "test", "spark_use": "improve_roll",
-            })
-            msg = ws.receive_json()
+            # Pinned: a natural 2 would pay its own Spark back (III.1) and
+            # this test is counting Sparks.
+            with patch("random.randint", return_value=4):
+                ws.send_json({
+                    "type": "cast", "domain_id": "inscription", "scope": "minor",
+                    "intent": "test", "spark_use": "improve_roll",
+                })
+                msg = ws.receive_json()
         assert msg["type"] == "cast_result"
         assert char.sparks == 2
         assert msg["sparks_remaining"] == 2
@@ -911,10 +914,13 @@ class TestWebSocketSkillAdvance:
 
         with client.websocket_connect("/ws") as ws:
             _auth_mm(ws, mm_token, session_id)
-            # Enough marks to cross a Facet level threshold and earn a pick.
+            # Exactly a Novice→Master climb (3 + 5 + 8): three rank advances,
+            # which crosses the Facet-level threshold and earns a pick. A
+            # round "more than enough" number is refused now — N4: a batch the
+            # cap cannot absorb in full is rejected rather than truncated.
             ws.send_json({
                 "type": "skill_advance", "player_name": "Zahna",
-                "skill_id": "lore", "marks": 60,
+                "skill_id": "lore", "marks": 16,
             })
             msg = ws.receive_json()
 
@@ -5203,8 +5209,12 @@ class TestReadiedIntentsOverTheWire:
         if purpose is not None:
             msg["purpose"] = purpose
         msg.update(extra)
-        ws.send_json(msg)
-        return ws.receive_json()
+        # Pinned dice: these tests count Sparks, and an unpinned cast rolls a
+        # natural 2 once in 36 — which now pays a Spark of its own (III.1),
+        # and made this class fail about that often.
+        with patch("random.randint", return_value=4):
+            ws.send_json(msg)
+            return ws.receive_json()
 
     # -- readying ----------------------------------------------------------
 
@@ -5361,3 +5371,210 @@ class TestReadiedIntentsOverTheWire:
             ws.send_json({"type": "session_reset"})
             ws.receive_json()
         assert char.readied_intents is None
+class TestBorrowedTroubleOverTheWire:
+    """N5 (III.1): Borrowed Trouble is offered on any roll the MM prices, and
+    the book prints the stack it makes with Press — `5d6 drop three`. It was
+    wired to the generic roll handler only, so the printed example could not
+    happen at the table."""
+
+    def test_a_plain_roll_takes_the_extra_die(self, client, session_with_character):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            ws.send_json({
+                "type": "roll", "attribute_id": "knowledge", "skill_id": "lore",
+                "difficulty": "Standard", "borrowed_trouble": True,
+            })
+            msg = ws.receive_json()
+        roll = msg["roll"]
+        assert roll["borrowed_trouble"] is True
+        assert len(roll["dice_rolled"]) == 3
+        assert len(roll["dice_kept"]) == 2
+
+    def test_a_strike_takes_it_too_and_stacks_with_press(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({"type": "combat_start"})
+            ws.receive_json()
+
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            ws.send_json({
+                "type": "strike", "target": "goblin",
+                "press": True, "borrowed_trouble": True,
+            })
+            msg = ws.receive_json()
+        roll = msg["roll"]
+        # Press's die plus Borrowed Trouble's: 4d6 keep 2. With a Spark as
+        # well this is the book's 5d6-drop-three ceiling.
+        assert roll["borrowed_trouble"] is True
+        assert len(roll["dice_rolled"]) == 4
+        assert len(roll["dice_kept"]) == 2
+
+    def test_a_roll_that_did_not_borrow_keeps_two_dice(
+        self, client, session_with_character
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            ws.send_json({
+                "type": "roll", "attribute_id": "knowledge", "skill_id": "lore",
+                "difficulty": "Standard",
+            })
+            msg = ws.receive_json()
+        roll = msg["roll"]
+        assert roll["borrowed_trouble"] is False
+        assert len(roll["dice_rolled"]) == 2
+
+
+class TestNaturalTwoConfirmsItself:
+    """N7 (III.1): 'the Graceful Fail is confirmed without asking — no
+    judgment call, no MM discretion.' The natural 12's promotion was
+    implemented; the natural 2's only mechanical promise was not."""
+
+    def test_a_natural_two_awards_the_spark_unasked(
+        self, client, session_with_character
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = session_store.get(session_id).characters["Zahna"]
+        before = char.sparks
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            with patch("random.randint", return_value=1):
+                ws.send_json({
+                    "type": "roll", "attribute_id": "strength",
+                    "difficulty": "Very Hard",
+                })
+                first = ws.receive_json()
+        roll = first["roll"]
+        assert roll["fumble"] is True
+        assert roll["outcome"] == "failure"
+        assert roll["graceful_fail_claimed"] is True
+        assert roll["graceful_fail_reason"] == "natural_2"
+        assert roll["graceful_fail_sparks_now"] == before + 1
+        assert char.sparks == before + 1
+
+    def test_an_ordinary_six_minus_still_waits_to_be_claimed(
+        self, client, session_with_character
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        char = session_store.get(session_id).characters["Zahna"]
+        before = char.sparks
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            with patch("random.randint", return_value=2):
+                ws.send_json({
+                    "type": "roll", "attribute_id": "strength",
+                    "difficulty": "Very Hard",
+                })
+                first = ws.receive_json()
+            ws.send_json({"type": "ping"})
+            second = ws.receive_json()
+        assert first["roll"]["fumble"] is False
+        assert first["roll"]["outcome"] == "failure"
+        assert "graceful_fail_claimed" not in first["roll"]
+        assert second["type"] == "pong"
+        assert char.sparks == before
+
+    def test_a_natural_two_that_still_succeeded_pays_nothing(
+        self, client, session_with_character
+    ):
+        """III.1: 'A natural 2 never drags an outcome downward.' The Graceful
+        Fail rides on the failure, not on the dice — so a natural 2 whose
+        modifiers carried it to a 7 is a partial success and pays no Spark."""
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        store_session = session_store.get(session_id)
+        char = store_session.characters["Zahna"]
+        # 2 (the dice) + 1 (Knowledge 3) + 3 (Lore Master) + 1 (Easy) = 7:
+        # the highest a natural 2 can be carried, and exactly a partial.
+        char.attributes["knowledge"] = 3
+        char.skills["lore"].rank = "master"
+        before = char.sparks
+        with client.websocket_connect("/ws") as ws:
+            _auth_player(ws, create_session_token("Zahna", session_id))
+            with patch("random.randint", return_value=1):
+                ws.send_json({
+                    "type": "roll", "attribute_id": "knowledge", "skill_id": "lore",
+                    "difficulty": "Easy",
+                })
+                first = ws.receive_json()
+            ws.send_json({"type": "ping"})
+            second = ws.receive_json()
+        assert first["roll"]["total"] == 7
+        assert first["roll"]["outcome"] == "partial_success"
+        assert first["roll"]["fumble"] is True
+        assert "graceful_fail_claimed" not in first["roll"]
+        assert second["type"] == "pong"
+        assert char.sparks == before
+
+
+class TestSkillAdvanceRefusesAnOverflowingBatch:
+    """N4: the handler deducts the skill point before advancing, and
+    `_try_advance_rank` stopped at the ceiling and dropped the rest. The
+    model's own docstring promises a refusal instead."""
+
+    def test_a_capped_skill_refuses_more_marks_than_it_can_hold(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        store_session = session_store.get(session_id)
+        char = store_session.characters["Zahna"]
+        ruleset = store_session.ruleset
+        # D16 allows three beyond-Practiced slots per Facet. Spend all three on
+        # other Mind skills, and Lore is walled at Practiced.
+        state_cls = type(char.skills["lore"])
+        for other in ("investigate", "craft", "insight"):
+            st = char.skills.setdefault(other, state_cls(skill_id=other))
+            st.rank = "expert"
+            st.marks = 0
+        lore = char.skills["lore"]
+        lore.rank = "novice"
+        lore.marks = 1  # one short of the two Practiced still owes
+        assert char.rank_ceiling_for("lore", ruleset) == "practiced"
+        char.session_skill_points_remaining = 5
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({
+                "type": "skill_advance", "player_name": "Zahna",
+                "skill_id": "lore", "marks": 5,
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "error"
+        assert char.skills["lore"].rank == "novice"
+        assert char.skills["lore"].marks == 1
+
+    def test_a_batch_that_fits_exactly_still_lands(
+        self, client, mm_token, session_with_character
+    ):
+        session, _ = session_with_character
+        session_id = session["session_id"]
+        store_session = session_store.get(session_id)
+        char = store_session.characters["Zahna"]
+        state_cls = type(char.skills["lore"])
+        for other in ("investigate", "craft", "insight"):
+            st = char.skills.setdefault(other, state_cls(skill_id=other))
+            st.rank = "expert"
+            st.marks = 0
+        lore = char.skills["lore"]
+        lore.rank = "novice"
+        lore.marks = 1
+        char.session_skill_points_remaining = 5
+        with client.websocket_connect("/ws") as ws:
+            _auth_mm(ws, mm_token, session_id)
+            ws.send_json({
+                "type": "skill_advance", "player_name": "Zahna",
+                "skill_id": "lore", "marks": 2,
+            })
+            msg = ws.receive_json()
+        assert msg["type"] == "skill_advanced"
+        assert char.skills["lore"].rank == "practiced"
