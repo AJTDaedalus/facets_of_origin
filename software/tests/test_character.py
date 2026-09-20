@@ -306,7 +306,10 @@ def _advance_facet(char, ruleset, facet, advances):
             rank = state.rank if state else "novice"
             if rank == char.rank_ceiling_for(sid, ruleset):
                 continue
-            cost = mpr.for_rank(order[order.index(rank) + 1])
+            # Marks already banked count toward the next rank, and
+            # advance_skill refuses a batch bigger than the cap can absorb,
+            # so ask for exactly what is still owed.
+            cost = mpr.for_rank(order[order.index(rank) + 1]) - (state.marks if state else 0)
             if target is None or cost < target[0]:
                 target = (cost, sid)
         if target is None:

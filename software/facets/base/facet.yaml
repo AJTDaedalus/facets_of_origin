@@ -1422,9 +1422,10 @@ advancement:
   # reachable inside the primary Facet alone. session_skill_points stays 4:
   # raising it to hit an earlier Major would inflate skill ranks as a side
   # effect.
-  # P-6 (II.4, Facet Levels): ranks granted at character creation count toward
-  # career_advances but NOT toward Facet levels — only advance_skill writes
-  # rank_advances_by_facet, and creation never routes through it.
+  # P-6 revised (D16, II.4 Facet Levels): the Background's starting rank counts
+  # toward career_advances AND toward its Facet's level track — one advance
+  # banked at creation, not a free level. create_default_character seeds
+  # rank_advances_by_facet; advance_skill adds to it from there.
   facet_level_threshold: 3
 
   # Every 3 total Facet Levels triggers a Major Advancement, so the first Major
