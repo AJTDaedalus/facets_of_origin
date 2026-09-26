@@ -1,336 +1,332 @@
-"""Merged ruleset registry — loads, validates, and merges Facet files for a session."""
+"""Merged ruleset registry — loads, validates and merges Facet files for a session.
+
+One core file (the one that defines `stats`; normally `facets/base`) supplies
+every rule. Setting Facets are additive only (DESIGN §3.1, INV-17): they may
+add lineages, talents, classes, backgrounds, items, magic domains and tables,
+but may not write a core rule section nor redefine an id the core already has.
+"""
 from __future__ import annotations
 
-from pathlib import Path
+import logging
+from typing import Optional
 
 from pydantic import BaseModel
 
+from app.config import settings
 from app.facets.loader import FacetLoadError, discover_facet_files, load_facet_file
 from app.facets.schema import (
-    AdvancementDef,
-    BackgroundDefinition,
-    LineageDefinition,
-    ItemDefinition,
-    MagicDomainDef,
-    CharacterFacetDef,
-    CombatDef,
-    DeathDef,
-    EquipmentDef,
-    FacetFile,
-    FacetTreeDef,
-    HazardsDef,
-    MagicDef,
-    RollResolutionDef,
-    SkillDef,
-    SparkDef,
-    TechniqueDef,
+    BackgroundDef, ClassDef, FacetDef, FacetFile, ItemDef, LineageDef,
+    MagicDomainDef, StatDef, TableDef, TalentDef,
 )
-from app.config import settings
+
+logger = logging.getLogger(__name__)
+
+#: Tables the MM toolbox and the engine expect (DESIGN §3.2).
+REQUIRED_TABLE_IDS = (
+    "reaction", "reaction_wants", "pressure_generic", "pressure_underground",
+    "pressure_wild", "pressure_settlement", "pressure_occasion", "trouble",
+    "complications_fight", "complications_explore", "complications_social",
+    "magic_complications", "magic_mishaps", "wounds", "scars", "trinkets",
+    "curios", "relics", "npc_names", "npc_traits", "npc_wants", "npc_secrets",
+    "oracle_actions", "oracle_themes",
+)
+
+_SINGLETONS = (
+    "stat_rules", "roll_resolution", "spark", "advancement", "hp", "recovery",
+    "wounds", "hold_on", "death", "slots", "magic", "combat", "monsters",
+    "hazards", "exploration", "treasure",
+)
 
 
 class MergedRuleset:
-    """The fully merged, validated ruleset for an active session.
-
-    Built once at session creation; immutable thereafter.
-    """
+    """The fully merged, validated ruleset for an active session. Immutable after build."""
 
     def __init__(self, facet_files: list[FacetFile]) -> None:
         self._files = sorted(facet_files, key=lambda f: f.priority)
+        self.warnings: list[str] = []
         self._merge()
 
+    # ------------------------------------------------------------------ merge
     def _merge(self) -> None:
-        # Dicts keyed by ID for deduplication; later Facets override earlier ones.
-        major_attrs: dict[str, object] = {}
-        minor_attrs: dict[str, object] = {}
-        ratings: dict[int, object] = {}
-        character_facets: dict[str, CharacterFacetDef] = {}
-        skills: dict[str, SkillDef] = {}
-        techniques: dict[str, FacetTreeDef] = {}
-        backgrounds: dict[str, BackgroundDefinition] = {}
-        lineages: dict[str, LineageDefinition] = {}
-        items: dict[str, ItemDefinition] = {}
-        distribution = None
-        major_derivation: list = []
-        soul_domains: dict[str, MagicDomainDef] = {}
-        mind_domains: dict[str, MagicDomainDef] = {}
-        roll_resolution: RollResolutionDef | None = None
-        spark: SparkDef | None = None
-        advancement: AdvancementDef | None = None
-        combat: CombatDef | None = None
-        magic: MagicDef | None = None
-        hazards: HazardsDef | None = None
-        death: DeathDef | None = None
-        equipment: EquipmentDef | None = None
+        cores = [f for f in self._files if f.is_core]
+        if len(cores) != 1:
+            raise FacetLoadError(
+                f"Exactly one core ruleset (a file defining `stats`) is required; "
+                f"found {len(cores)}: {[f.id for f in cores]}.")
+        core = cores[0]
+        for name in _SINGLETONS:
+            setattr(self, name, getattr(core, name))
+            if getattr(core, name) is None:
+                raise FacetLoadError(f"{core.id}: core ruleset is missing section '{name}'.")
+        self.stats: list[StatDef] = list(core.stats)
+        self.facets: list[FacetDef] = list(core.facets)
+        self.equipment = core.equipment
 
-        for ff in self._files:
-            for ma in ff.attributes.major:
-                major_attrs[ma.id] = ma
-            for mi in ff.attributes.minor:
-                minor_attrs[mi.id] = mi
-            for r in ff.attributes.ratings:
-                ratings[r.rating] = r
-            if ff.attributes.distribution:
-                distribution = ff.attributes.distribution
-            if ff.attributes.major_derivation:
-                major_derivation = ff.attributes.major_derivation
+        collections: dict[str, dict[str, BaseModel]] = {
+            "talents": {}, "classes": {}, "backgrounds": {}, "lineages": {},
+            "items": {}, "magic_domains": {}, "tables": {},
+        }
+        errors: list[str] = []
+        for ff in [core] + [f for f in self._files if f is not core]:
+            self.warnings.extend(ff.load_warnings)
+            if ff is not core:
+                written = ff.written_core_sections()
+                if written:
+                    errors.append(
+                        f"Setting Facet '{ff.id}' may only add content; it writes core "
+                        f"rule section(s): {', '.join(written)}.")
+            sources = {
+                "talents": ff.talents, "classes": ff.classes,
+                "backgrounds": ff.backgrounds, "lineages": ff.lineages,
+                "items": ff.all_items(), "magic_domains": ff.magic_domains,
+                "tables": ff.all_tables(),
+            }
+            for kind, entries in sources.items():
+                for entry in entries:
+                    if entry.id in collections[kind]:
+                        errors.append(f"'{ff.id}' redefines {kind[:-1]} '{entry.id}'; "
+                                      "setting Facets are additive only.")
+                        continue
+                    collections[kind][entry.id] = entry
+        if errors:
+            raise FacetLoadError("Ruleset merge failed:\n" + "\n".join(f"  {e}" for e in errors))
 
-            for cf in ff.facets:
-                character_facets[cf.id] = cf
+        self.talents: list[TalentDef] = list(collections["talents"].values())
+        self.classes: list[ClassDef] = list(collections["classes"].values())
+        self.backgrounds: list[BackgroundDef] = list(collections["backgrounds"].values())
+        self.lineages: list[LineageDef] = list(collections["lineages"].values())
+        self.items: list[ItemDef] = list(collections["items"].values())
+        self.magic_domains: list[MagicDomainDef] = list(collections["magic_domains"].values())
+        self.tables: dict[str, TableDef] = dict(collections["tables"])
 
-            for sk in ff.skills:
-                skills[sk.id] = sk
-
-            for facet_id, tree in ff.techniques.items():
-                techniques[facet_id] = tree
-
-            for bg in ff.backgrounds:
-                backgrounds[bg.id] = bg
-
-            # Lineages merge exactly as Backgrounds do — by id, later Facet
-            # wins — so a setting Facet adds its peoples without touching
-            # the core's Human (D18).
-            for lin in ff.lineages:
-                lineages[lin.id] = lin
-
-            for item in ff.items:
-                items[item.id] = item
-
-            if ff.roll_resolution:
-                roll_resolution = ff.roll_resolution
-            if ff.spark:
-                spark = ff.spark
-            if ff.advancement:
-                advancement = ff.advancement
-            if ff.combat:
-                combat = ff.combat
-            if ff.magic:
-                # `magic` mixes rules with catalogs. The RULES (traditions,
-                # domain types, the pre-Technique cap, the Spark rules) are
-                # singleton — one game, one answer — and the last module to
-                # declare them wins, as with every other singleton section.
-                # The CATALOGS (`soul_domains`, `mind_domains`) are
-                # collections keyed by id, exactly as `skills` is.
-                #
-                # Replacing the whole section instead would mean a setting
-                # Facet that adds one domain silently deletes the core's
-                # twenty-one, both traditions, and every domain type — and
-                # nothing would fail, because the ruleset would simply come
-                # back empty of magic.
-                for dom in ff.magic.soul_domains:
-                    soul_domains[dom.id] = dom
-                for dom in ff.magic.mind_domains:
-                    mind_domains[dom.id] = dom
-                if magic is None:
-                    magic = ff.magic
-                else:
-                    # Only the rule fields this module actually WROTE override
-                    # the ones already in force. A setting that lists domains
-                    # and says nothing about traditions is not asking for
-                    # traditions to be empty — but a bare model_copy of its
-                    # magic block would say exactly that, because every field
-                    # it left alone is sitting at its schema default.
-                    written = {
-                        field: getattr(ff.magic, field)
-                        for field in ff.magic.model_fields_set
-                        if field not in ("soul_domains", "mind_domains")
-                    }
-                    if written:
-                        magic = magic.model_copy(update=written)
-            if ff.hazards:
-                hazards = ff.hazards
-            if ff.death:
-                death = ff.death
-            if ff.equipment:
-                equipment = ff.equipment
-
-        self.major_attributes = list(major_attrs.values())
-        self.minor_attributes = list(minor_attrs.values())
-        self.attribute_ratings = sorted(ratings.values(), key=lambda r: r.rating)
-        self.attribute_distribution = distribution
-        self.major_derivation_bands = major_derivation
-        self.character_facets = list(character_facets.values())
-        self.skills = list(skills.values())
-        self.techniques = techniques
-        self.backgrounds = list(backgrounds.values())
-        self.lineages = list(lineages.values())
-        self.items = list(items.values())
-        self.roll_resolution = roll_resolution
-        self.spark = spark
-        self.advancement = advancement
-        self.combat = combat
-        # Rebuild the magic section with the accumulated catalogs on the
-        # last-declared rules, so neither half of it can be lost.
-        if magic is not None:
-            magic = magic.model_copy(update={
-                "soul_domains": list(soul_domains.values()),
-                "mind_domains": list(mind_domains.values()),
-            })
-        self.magic = magic
-        self.hazards = hazards
-        self.death = death
-        self.equipment = equipment
-
-        # Fast-lookup maps built once at merge time
-        self._skill_map: dict[str, SkillDef] = {sk.id: sk for sk in self.skills}
-        self._background_map: dict[str, BackgroundDefinition] = {bg.id: bg for bg in self.backgrounds}
-        self._lineage_map: dict[str, LineageDefinition] = {lin.id: lin for lin in self.lineages}
-        self._item_map: dict[str, ItemDefinition] = {it.id: it for it in self.items}
-        self._rating_map: dict[int, object] = {r.rating: r for r in self.attribute_ratings}
-        self._technique_map: dict[str, TechniqueDef] = {}
-        self._technique_facet_map: dict[str, str] = {}
-        self._technique_branch_map: dict[str, str] = {}
-        self._technique_tier_map: dict[str, int] = {}
-        for facet_id, tree in self.techniques.items():
-            for branch in tree.branches:
-                for tier_def in branch.tiers:
-                    for tech in tier_def.techniques:
-                        self._technique_map[tech.id] = tech
-                        self._technique_facet_map[tech.id] = facet_id
-                        self._technique_branch_map[tech.id] = branch.id
-                        self._technique_tier_map[tech.id] = tier_def.tier
+        self._stat_map = {s.id: s for s in self.stats}
+        self._facet_map = {f.id: f for f in self.facets}
+        self._talent_map = {t.id: t for t in self.talents}
+        self._class_map = {c.id: c for c in self.classes}
+        self._background_map = {b.id: b for b in self.backgrounds}
+        self._lineage_map = {x.id: x for x in self.lineages}
+        self._item_map = {i.id: i for i in self.items}
+        self._domain_map = {d.id: d for d in self.magic_domains}
 
         self._validate_cross_references()
+        for w in self.warnings:
+            logger.warning(w)
 
     def _validate_cross_references(self) -> None:
-        """Fail loudly if skills/techniques reference undefined attributes or facets."""
-        known_minor = {ma.id for ma in self.minor_attributes}
-        known_facets = {cf.id for cf in self.character_facets}
-
+        """Fail loudly on any dangling reference inside the merged ruleset."""
         errors: list[str] = []
-        for skill in self.skills:
-            if skill.attribute not in known_minor:
-                errors.append(f"Skill '{skill.id}' references unknown attribute '{skill.attribute}'.")
-            if skill.facet not in known_facets:
-                errors.append(f"Skill '{skill.id}' references unknown facet '{skill.facet}'.")
+        stat_ids = set(self._stat_map)
+        facet_ids = set(self._facet_map)
+        traditions = self.magic.traditions
+        scope_ids = {s.id for s in self.magic.scopes}
+        difficulties = {d.label for d in self.roll_resolution.difficulty_modifiers}
+
+        for f in self.facets:
+            if f.stat not in stat_ids:
+                errors.append(f"Facet '{f.id}' uses unknown stat '{f.stat}'.")
+            if f.tradition and f.tradition not in traditions:
+                errors.append(f"Facet '{f.id}' names unknown tradition '{f.tradition}'.")
+        for tid, tdef in traditions.items():
+            if tdef.stat not in stat_ids:
+                errors.append(f"Tradition '{tid}' casts with unknown stat '{tdef.stat}'.")
+            if tdef.facet not in facet_ids:
+                errors.append(f"Tradition '{tid}' belongs to unknown Facet '{tdef.facet}'.")
+        for s in self.magic.scopes:
+            if s.difficulty not in difficulties:
+                errors.append(f"Scope '{s.id}' has unknown difficulty '{s.difficulty}'.")
+        for gap in self.combat.level_gap:
+            if gap.difficulty not in difficulties:
+                errors.append(f"Level gap {gap.gap} has unknown difficulty '{gap.difficulty}'.")
+        if self.combat.defend.enemy_difficulty not in difficulties:
+            errors.append("combat.defend.enemy_difficulty is not a difficulty label.")
+        for opts in (self.combat.attack.full_success.pick_one,):
+            for o in opts:
+                if o not in self.combat.options:
+                    errors.append(f"Attack option '{o}' is not defined in combat.options.")
+        if self.hold_on.stat not in stat_ids:
+            errors.append(f"hold_on.stat '{self.hold_on.stat}' is not a stat.")
+        if self.slots.plus_stat not in stat_ids:
+            errors.append(f"slots.plus_stat '{self.slots.plus_stat}' is not a stat.")
+        levels = sorted(r.level for r in self.monsters.level_table)
+        if levels != list(range(1, self.advancement.max_level + 1)):
+            errors.append(f"monsters.level_table must cover levels 1-{self.advancement.max_level}.")
+
+        for t in self.talents:
+            if t.facet not in facet_ids:
+                errors.append(f"Talent '{t.id}' belongs to unknown Facet '{t.facet}'.")
+            for other in t.shared_with:
+                if other not in facet_ids:
+                    errors.append(f"Talent '{t.id}' is shared with unknown Facet '{other}'.")
+            if t.requires:
+                for req in t.requires.any_talent:
+                    if req not in self._talent_map:
+                        errors.append(f"Talent '{t.id}' requires unknown talent '{req}'.")
+            granted = t.effects.get("grants_tradition")
+            if granted and granted not in traditions:
+                errors.append(f"Talent '{t.id}' grants unknown tradition '{granted}'.")
+
+        for c in self.classes:
+            if c.facet not in facet_ids:
+                errors.append(f"Class '{c.id}' belongs to unknown Facet '{c.facet}'.")
+            if len(c.talents) != self.advancement.starting_talents:
+                errors.append(f"Class '{c.id}' has {len(c.talents)} talents; "
+                              f"expected {self.advancement.starting_talents}.")
+            for tid in c.talents:
+                t = self._talent_map.get(tid)
+                if t is None:
+                    errors.append(f"Class '{c.id}' names unknown talent '{tid}'.")
+                elif t.kind != "talent" or not t.on_menu_of(c.facet):
+                    errors.append(f"Class '{c.id}': '{tid}' is not a talent on the {c.facet} menu.")
+            sig = self._talent_map.get(c.signature)
+            if sig is None:
+                errors.append(f"Class '{c.id}' names unknown signature '{c.signature}'.")
+            elif sig.kind != "signature" or not sig.on_menu_of(c.facet):
+                errors.append(f"Class '{c.id}': '{c.signature}' is not a {c.facet} signature.")
+            for item_id in c.kit:
+                if item_id not in self._item_map:
+                    errors.append(f"Class '{c.id}' kit names unknown item '{item_id}'.")
+
+        for b in self.backgrounds:
+            if b.facet and b.facet not in facet_ids:
+                errors.append(f"Background '{b.id}' names unknown Facet '{b.facet}'.")
+        for d in self.magic_domains:
+            if d.tradition not in traditions:
+                errors.append(f"Domain '{d.id}' names unknown tradition '{d.tradition}'.")
+            if d.facet not in facet_ids:
+                errors.append(f"Domain '{d.id}' names unknown Facet '{d.facet}'.")
+        for lin in self.lineages:
+            if lin.gift_domain_scope and lin.gift_domain_scope not in scope_ids:
+                errors.append(f"Lineage '{lin.id}' gift scope '{lin.gift_domain_scope}' is not a scope.")
+            if lin.gift_domain_scope and not lin.gift:
+                errors.append(f"Lineage '{lin.id}' has a gift domain scope but no gift.")
+            for dom in lin.gift_domains:
+                if dom not in self._domain_map:
+                    errors.append(f"Lineage '{lin.id}' gift domain '{dom}' is not a domain.")
+        eq = self.equipment
+        if eq is not None:
+            for i in self.items:
+                if i.weapon and i.weapon not in eq.weapon_categories:
+                    errors.append(f"Item '{i.id}' has unknown weapon category '{i.weapon}'.")
+                if i.armor and i.armor not in eq.armor:
+                    errors.append(f"Item '{i.id}' has unknown armor category '{i.armor}'.")
+                if i.kind and eq.weapon_kinds and i.kind not in eq.weapon_kinds:
+                    errors.append(f"Item '{i.id}' has unknown weapon kind '{i.kind}'.")
 
         if errors:
-            raise FacetLoadError("Cross-reference validation failed:\n" + "\n".join(f"  {e}" for e in errors))
+            raise FacetLoadError("Cross-reference validation failed:\n"
+                                 + "\n".join(f"  {e}" for e in errors))
 
-    def get_minor_attribute_modifier(self, attribute_id: str, rating: int) -> int:
-        r = self._rating_map.get(rating)
-        return r.modifier if r else 0
+    # ---------------------------------------------------------------- lookups
+    def get_stat(self, stat_id: str) -> Optional[StatDef]:
+        return self._stat_map.get(stat_id)
 
-    def get_major_attribute_modifier(self, minor_sum: int) -> int:
-        """Modifier for a Major Attribute given the sum of its three Minor
-        Attributes (II.2, Deriving Your Major Attribute Modifiers). Read
-        from `attributes.major_derivation`, not hardcoded. Out-of-range
-        sums (outside every configured band — not reachable under the
-        standard 18-point distribution, but a homebrew ruleset could shift
-        the bands) default to +0, the same neutral fallback
-        `get_minor_attribute_modifier` uses for an unknown rating.
-        """
-        for band in self.major_derivation_bands:
-            if band.min_sum <= minor_sum <= band.max_sum:
-                return band.modifier
-        return 0
+    def get_facet(self, facet_id: str) -> Optional[FacetDef]:
+        return self._facet_map.get(facet_id)
 
-    def get_skill(self, skill_id: str) -> SkillDef | None:
-        return self._skill_map.get(skill_id)
+    def get_talent(self, talent_id: str) -> Optional[TalentDef]:
+        return self._talent_map.get(talent_id)
 
-    def get_technique(self, technique_id: str) -> TechniqueDef | None:
-        """Return the TechniqueDef for a given technique ID, or None if not found."""
-        return self._technique_map.get(technique_id)
+    def get_class(self, class_id: str) -> Optional[ClassDef]:
+        return self._class_map.get(class_id)
 
-    def get_technique_facet(self, technique_id: str) -> str | None:
-        """Which Facet's tree a Technique lives in, or None if unknown.
-
-        A domain-granting Technique draws from *that Facet's* domain list, not
-        the character's primary Facet — a Body character who cross-trains into
-        Soul's tree still chooses from the Soul domains (PHB II.3).
-        """
-        return self._technique_facet_map.get(technique_id)
-
-    def get_technique_branch(self, technique_id: str) -> str | None:
-        """Which branch (within its Facet's tree) a Technique lives in, or None.
-
-        PHB II.4:83 — Tier 2 requires any Tier 1 Technique in the same branch;
-        Tier 3 requires any Tier 2 in the same branch. Branch membership, not a
-        specific Technique id, is what the rule keys on.
-        """
-        return self._technique_branch_map.get(technique_id)
-
-    def get_technique_tier(self, technique_id: str) -> int | None:
-        """Which tier (1-3) a Technique sits at, or None if unknown."""
-        return self._technique_tier_map.get(technique_id)
-
-    def get_skill_rank_modifier(self, rank_id: str) -> int:
-        if not self.advancement:
-            return 0
-        for sr in self.advancement.skill_ranks:
-            if sr.id == rank_id:
-                return sr.modifier
-        return 0
-
-    def get_skill_point_cost(self, context: str) -> int:
-        if not self.advancement:
-            return 1
-        for cost_def in self.advancement.skill_point_costs:
-            if cost_def.context == context:
-                return cost_def.cost
-        return 1
-
-    def get_background(self, background_id: str) -> "BackgroundDefinition | None":
+    def get_background(self, background_id: str) -> Optional[BackgroundDef]:
         return self._background_map.get(background_id)
 
-    def get_lineage(self, lineage_id: str) -> "LineageDefinition | None":
+    def get_lineage(self, lineage_id: str) -> Optional[LineageDef]:
         return self._lineage_map.get(lineage_id)
 
-    def get_item(self, item_id: str) -> "ItemDefinition | None":
+    def get_item(self, item_id: str) -> Optional[ItemDef]:
         return self._item_map.get(item_id)
 
+    def get_domain(self, domain_id: str) -> Optional[MagicDomainDef]:
+        return self._domain_map.get(domain_id)
+
+    def get_table(self, table_id: str) -> Optional[TableDef]:
+        return self.tables.get(table_id)
+
+    def talent_menu(self, facet_id: str, kind: str = "talent") -> list[TalentDef]:
+        """Every talent (or signature) on a Facet's menu, shared talents included."""
+        return [t for t in self.talents if t.kind == kind and t.on_menu_of(facet_id)]
+
+    def classes_for_facet(self, facet_id: str) -> list[ClassDef]:
+        return [c for c in self.classes if c.facet == facet_id]
+
+    def domains_for_tradition(self, tradition: str, prismatic: Optional[bool] = None) -> list[MagicDomainDef]:
+        return [d for d in self.magic_domains if d.tradition == tradition
+                and (prismatic is None or d.prismatic == prismatic)]
+
+    def difficulty_modifier(self, label: str) -> int:
+        return self.roll_resolution.get_difficulty_modifier(label)
+
+    def shift_difficulty(self, label: str, steps: int) -> str:
+        """Move a difficulty `steps` easier (positive) or harder (negative), clamped."""
+        order = self.roll_resolution.difficulty_labels_hard_to_easy()
+        idx = order.index(label) if label in order else None
+        if idx is None:
+            raise ValueError(f"Unknown difficulty {label!r}")
+        return order[max(0, min(len(order) - 1, idx + steps))]
+
+    def harder_of(self, a: str, b: str) -> str:
+        return a if self.difficulty_modifier(a) <= self.difficulty_modifier(b) else b
+
+    def missing_required_tables(self) -> list[str]:
+        """Required MM table ids (DESIGN §3.2) not present in the loaded tables."""
+        return [t for t in REQUIRED_TABLE_IDS if t not in self.tables]
+
+    # ------------------------------------------------------------- serialise
     def to_client_dict(self) -> dict:
-        """Serialise the ruleset to a JSON-safe dict for sending to clients."""
-        def _serialize(obj):
+        """The ruleset as a JSON-safe dict for clients."""
+        def dump(obj):
             if isinstance(obj, BaseModel):
                 return obj.model_dump()
             if isinstance(obj, list):
-                return [_serialize(i) for i in obj]
+                return [dump(i) for i in obj]
             if isinstance(obj, dict):
-                return {k: _serialize(v) for k, v in obj.items()}
+                return {k: dump(v) for k, v in obj.items()}
             return obj
 
-        return {
-            "major_attributes": _serialize(self.major_attributes),
-            "minor_attributes": _serialize(self.minor_attributes),
-            "attribute_ratings": _serialize(self.attribute_ratings),
-            "attribute_distribution": _serialize(self.attribute_distribution),
-            "character_facets": _serialize(self.character_facets),
-            "skills": _serialize(self.skills),
-            "techniques": _serialize(self.techniques),
-            "backgrounds": _serialize(self.backgrounds),
-            "lineages": _serialize(self.lineages),
-            "items": _serialize(self.items),
-            "roll_resolution": _serialize(self.roll_resolution),
-            "spark": _serialize(self.spark),
-            "advancement": _serialize(self.advancement),
-            "combat": _serialize(self.combat),
-            "magic": _serialize(self.magic),
-            "hazards": _serialize(self.hazards),
-            "death": _serialize(self.death),
-            "equipment": _serialize(self.equipment),
-        }
+        out = {name: dump(getattr(self, name)) for name in _SINGLETONS}
+        out.update({
+            "stats": dump(self.stats),
+            "facets": dump(self.facets),
+            "talents": dump(self.talents),
+            "classes": dump(self.classes),
+            "backgrounds": dump(self.backgrounds),
+            "lineages": dump(self.lineages),
+            "items": dump(self.items),
+            "magic_domains": dump(self.magic_domains),
+            "equipment": dump(self.equipment),
+            "tables": {tid: dump(t) for tid, t in self.tables.items()},
+            "modules": [{"id": f.id, "name": f.name, "version": f.version} for f in self._files],
+        })
+        return out
+
+    def module_refs(self) -> list[dict]:
+        return [{"id": f.id, "version": f.version} for f in self._files]
 
 
 def build_ruleset(active_facet_ids: list[str] | None = None) -> MergedRuleset:
-    """Discover, load, and merge Facet files.
+    """Discover, load and merge Facet files: the core always, others by id.
 
-    Always loads the base facet. Loads additional facets named in active_facet_ids.
-    Raises FacetLoadError if any file is invalid.
+    Raises:
+        FacetLoadError: no files, no core, an invalid file, or a merge error.
     """
     facets_dir = settings.facets_dir
     all_paths = discover_facet_files(facets_dir)
-
     if not all_paths:
         raise FacetLoadError(f"No ruleset files found in {facets_dir.resolve()}.")
 
+    wanted = set(active_facet_ids or [])
     loaded: list[FacetFile] = []
+    found_ids: set[str] = set()
     for path in all_paths:
         ff = load_facet_file(path)
-        # Always include base; include others only if requested
-        if ff.id == "base" or (active_facet_ids and ff.id in active_facet_ids):
+        found_ids.add(ff.id)
+        if ff.id == "base" or ff.id in wanted:
             loaded.append(ff)
-
-    if not loaded:
-        raise FacetLoadError("No Facet files matched. At minimum, the base facet must be present.")
-
+    unknown = wanted - found_ids
+    if unknown:
+        raise FacetLoadError(f"Unknown Facet module(s): {', '.join(sorted(unknown))}.")
+    if not any(f.id == "base" for f in loaded):
+        raise FacetLoadError("The base Facet must be present.")
     return MergedRuleset(loaded)

@@ -1,51 +1,56 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: the_unfinished
 name: The Unfinished
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
+    version: 1.0.0
 enemy:
-  tier: boss
-  attack_modifier: 2
-  armor: none
-  techniques:
-  - the_great_work
-  - conscription
-  special: 'THE GREAT WORK — the Unfinished is not doing a task. It is running one,
-    and it has been recruiting.
+  # v0.3: Boss, durability 8, attack +2, two specials (the Great Work, Conscription), rating 14.
+  level: 4
+  role: boss
+  armor: 0
+  morale: 12
+  weapon: Whatever tool the work needs next
+  wants: The great work completed.
+  special: 'CONSCRIPTION — once per scene, it sets a character a task. They may spend their
+    action doing it, or refuse. Refusing is free, but every Waiting One in the scene treats
+    them as an obstruction from then on. A character who completes a task is staff: it will
+    not attack them.'
+  when_bloodied: It stops assigning and does the work itself, at speed, with its own hands.
+    Its attacks target the site, not the party, and every exchange the work visibly advances.
+    The party has to decide whether that is a problem.
+  tells: Something at the centre of the work looks at you, then past you, and makes a gesture
+    that plainly means take the other end.
+  breaks: 'Never breaks; the work is not finishable, and it will not stop for anything short
+    of the party making it so. Bring it a credible plan and it will listen at length, mid-fight,
+    and a good plan ends the fight: it lays down the tools, and so does everyone else.'
+  twists:
+  - The quarry that fed the work closed a century ago, and somebody still owns it.
+  - The district behind the wall is populated, and nobody there wants anything resolved.
+  - One of the Waiting Ones was reassigned from a job three streets away and would like to
+    go back to it.
+  - The work is a road through the mountains, and the party needs the road.
+  - The authority that could approve a change of plan has a successor office, and it is sitting
+    today.
+  - The thing the wall was built to keep out stopped existing long ago.
+  nastier: It can conscript once every exchange instead of once per scene.
+  description: >-
+    A foreman, or a prior, or a harbourmaster — whatever the place needed most. It is at the
+    centre of the work, and the work has grown. Around it the others labour at jobs that were
+    never theirs, on a project none of them began, and it is going to be finished.
+  notes: >-
+    Level 4 Boss: no overrides. The Great Work is what it is rather than a rule, so it lives
+    in WANTS; Conscription is the card's gimmick. Fearless (morale 12).
 
-    CONSCRIPTION — once per scene, the Unfinished sets a task for a character. That
-    character may spend their action doing it, or refuse; refusing is free, but
-    every Waiting One in the scene now considers them an obstruction.'
-  description: A foreman, or a prior, or a harbourmaster — whatever the place needed
-    most. It is at the centre of the work, and the work has grown. Around it the
-    others labour at jobs that were never theirs, on a project none of them began,
-    and it is going to be finished.
-  disposition: Administrative. It does not fight so much as assign.
-  first_target: Whoever is disrupting the most labour.
-  triggers:
-  - Spends its first exchange assessing, and its second conscripting.
-  - Never leaves the work. It has never once left the work.
-  - Treats a character who completes an assigned task as staff, which is both an
-    enormous tactical advantage and a genuinely unsettling place to be.
-  morale: None. The work is not finishable — that is the tragedy of the entry —
-    and it will not stop for anything short of the party making it finishable.
-  organization: One, with four to twelve Waiting Ones, at a site where something
-    large was left half-done.
-  notes: 'TR breakdown: offense(+2 → 4) + durability(Resolve 8) + armor(none → 0)
-    + techniques(2) = 14. Rated as a Boss; intended to be finished rather than beaten.'
-  negotiation: 'Wants the great work completed. Shifts for a credible plan to finish
-    it, and it will listen to one at length, mid-fight. Honours a completed plan
-    absolutely: it lays down the tools, and so does everyone else, and that is the
-    intended ending of this entry.'
-  resolve: 8
-  phases:
-  - resolve_threshold: 3
-    description: It stops assigning and starts doing the work itself, at speed,
-      with its own hands. Its attack no longer targets anyone — it targets the site.
-      Every exchange from here, the work advances visibly, and the party has to
-      decide whether that is a problem.
-created_at: '2026-08-02T00:00:00+00:00'
-last_modified: '2026-08-02T00:00:00+00:00'
+
+    Administrative: it does not fight so much as assign. It spends its first exchange assessing
+    and its second conscripting, and it has never once left the work. Its first target is
+    whoever is disrupting the most labour. Rated as a Boss; intended to be finished rather
+    than beaten.
+
+
+    Appears: one, with four to twelve Waiting Ones, at a site where something large was left
+    half-done.
+  reskin_of: null

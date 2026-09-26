@@ -1,30 +1,50 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: chalk_hound
 name: Chalk Hound
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
+    version: 1.0.0
 enemy:
-  tier: mook
-  attack_modifier: 1
-  armor: none
-  techniques: []
-  special: null
-  description: A dog's shape assembled out of road-dust, chalk, and whatever the
-    last cart shed. It holds together only while it is running. Standing still,
-    a chalk hound is a drift of pale grit with two dark stones in it.
-  disposition: Runs. That is the entire animal. It does not circle, feint, or wait.
-  first_target: Whoever is moving fastest, which is usually whoever is fleeing.
-  triggers:
-  - It attacks only on the pass; it cannot strike from a standstill.
-  - A character who stops moving entirely is not a target — the pack has nothing
-    to chase, and goes past.
-  morale: A hound that is made to stop for one full exchange comes apart and does
-    not reassemble. The pack does not mourn it and does not scatter for it.
-  organization: Four to nine on a stretch of road, always the same stretch.
-  notes: 'TR breakdown: offense(+1 → 3) + durability(Mook → 0) + armor(none → 0)
-    + techniques(0) = 3.'
-created_at: '2026-08-02T00:00:00+00:00'
-last_modified: '2026-08-02T00:00:00+00:00'
+  # v0.3: Mook, attack +1, rating 3.
+  level: 2
+  role: mook
+  armor: 0
+  morale: 12
+  weapon: Teeth of packed grit
+  wants: To chase whatever is moving fastest along its road.
+  special: ON THE PASS — it attacks only something that is moving. A character who stops dead
+    and stays stopped for the exchange is not a target; the mob runs past. A hound that is
+    made to stop for a full exchange comes apart and does not reassemble.
+  when_bloodied: null
+  tells: Dust comes up off the road in a line, at the speed of a horse, with no horse. The
+    pack never leaves the road's surface.
+  breaks: It does not break; it stops, and stopping is the end of it. The pack cannot follow
+    anyone off its road.
+  twists:
+  - A cart is already being chased, and the carter is shouting instructions nobody can hear.
+  - The road runs through a narrow cutting, and there is nowhere to step aside to.
+  - 'It is raining: the hounds are heavy and slow, and a hit leaves one as mud on the road.'
+  - The road was ploughed over two generations ago, and the pack runs through a field of standing
+    crops.
+  - One hound keeps breaking from the line to circle a single spot on the road. Something
+    is buried there.
+  - The pack is running down the party's own tracks from an hour ago.
+  nastier: The pack's Lead is watching from the far end of the road.
+  description: >-
+    A dog's shape assembled out of road-dust, chalk, and whatever the last cart shed. It holds
+    together only while it is running. Standing still, a chalk hound is a drift of pale grit
+    with two dark stones in it.
+  notes: >-
+    Level 2 Mook: no overrides. Fearless (morale 12): a hound is not frightened off, it is
+    stopped.
+
+
+    It attacks only on the pass; it cannot attack from a standstill. Its first target is whoever
+    is moving fastest, which is usually whoever is fleeing. The pack does not mourn a hound
+    that comes apart and does not scatter for it.
+
+
+    Appears: four to nine on a stretch of road, always the same stretch.
+  reskin_of: null

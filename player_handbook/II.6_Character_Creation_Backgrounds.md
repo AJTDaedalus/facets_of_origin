@@ -1,152 +1,66 @@
-# Character Creation: Backgrounds
+# Character Creation: Backgrounds, Knacks and Specialties
 
-Mordai spent eleven years on a city watch, and it shows in three separate places on his sheet — the skill he arrived already good at, the one he picked up without meaning to, and the fact that he can walk any street in one particular district blind.
+Mordai spent eleven years on a city watch, and it shows in two places on his sheet: a knack that fits whenever the watch would know what to do, and one district he can walk blind.
 
-That is what a Background does. It takes the sentence you would answer "so who is this?" with and turns it into mechanics that keep paying out, session after session, in the specific places your character's history should matter and nowhere else.
-
-## What Is a Background?
-
-Your Background is who you were before the story started.
-
-It is not a character class, and it decides nothing about where you're headed. It is the life that shaped you — the work you did, the world you moved through, the people and institutions that left their mark on you before anyone at this table knew your name. A Background gives you a title, a history, and three things the fiction made true about you: a skill you genuinely developed, a second skill you've touched but not mastered, and a narrow area where your specific experience gives you an edge no generalist would have.
-
-For characters with magic, the Background is also the origin story. Not "I have the Fire domain" — but *where were you when you first understood what you could do?* The Background answers that question. The Facet Technique activates it.
+That is what a background does. It takes the sentence you would answer "so who is this?" with, and turns it into two small things that keep paying out in the places your character's history should matter, and nowhere else.
 
 ---
 
-## What a Background Contains
+## What a Background Is
 
-Every Background — pre-built or custom — has five elements, and every entry in this chapter prints them in this order.
+Your **background** is who you were before the story started. It is not a class and it decides nothing about where you are headed. It is the life that shaped you: the work you did, the world you moved through, the people who shaped you.
 
-> **Reading the Entries — Backgrounds**
->
-> **Title:** what you call yourself, with the common alternatives in italics after it.
->
-> **Description:** two or three sentences of history.
->
-> **Starting Skill:** one skill from your Primary Facet, at Practiced.
->
-> **Secondary Skill:** one more from the same Facet, at Novice with a mark already on it. A magic-granting Background prints **Domain origin** here *instead* — the domain replaces the secondary skill rather than joining it (see *Magic and Backgrounds*, II.6).
->
-> **Specialty:** one narrow area of fictional expertise.
->
-> A field is never printed empty. If a Background shows no Secondary Skill, look for the Domain origin line that took its place.
+A background gives you three things:
+
+**A history.** Two or three sentences. Where you came from, what you did, what it cost or taught you. The MM will read it; write for them.
+
+**A background knack.** A short phrase naming the trade, place, people or tradition your history gave you. It works like your class knack (Chapter II.4): +1 when it fits the roll, and knacks never stack.
+
+**A Specialty.** One narrow thing you know better than almost anyone.
+
+A caster's background is often the story of how the magic started (a temple, a guild, a night something went wrong) but the magic itself comes from the casting talent (Chapter II.3), not the background. Any background suits a caster, and any caster may take any background.
 
 ---
 
-**Title**
+## Specialties
 
-What you call yourself, or what others call you. Not a formal designation unless your history has one. This is the word that fits: *Caravan Guard. Hedge Scholar. Former Priest. Dockworker.* It belongs to the fiction, not the mechanics. Choose something true.
+A **Specialty** is one narrow area of expertise, specific enough that the MM knows exactly when it applies.
 
----
+**Inside your Specialty, routine and informational tasks just happen.** No roll. You know the answer, you read the document correctly, you recognize the symptom. **Risky tasks inside your Specialty are Easy.**
 
-**Description**
+"Good with people" is not a Specialty. "Can read a crowd's mood within a few moments" is. If you cannot picture the moment it would come up, it is too broad; if you cannot picture it coming up twice, it is too narrow.
 
-Two or three sentences of history. Where did you come from? What did you do? What did it cost or teach you? Keep it to the relevant context rather than a biography. The Mirror Master will read it. Write for them.
+**When no roll fits.** Sometimes a character does exactly what their history trained them for (a former watchman giving a formal challenge, an apprentice inspecting a seal to the letter) and nothing about it is risky. Don't invent a roll. The Specialty says the character did it correctly, and the *world* answers. "Nothing happens" is never that answer: a correct procedure that gets no response has still told the character something.
 
----
-
-**Starting Skill**
-
-One skill from your Primary Facet's list, starting at **Practiced** rather than Novice. This is the thing you had already gotten good at before the campaign began — the skill that defines what your Background made you.
-
-You may only choose a skill from your Primary Facet at character creation. Cross-Facet starting skills are not available — if your history led you toward something outside your Primary Facet's territory, that growth happens through play.
-
----
-
-**Secondary Skill**
-
-One additional skill from your Primary Facet's list, starting at Novice but with **1 mark already recorded**. This is the adjacent capability your life developed without ever making it your focus — the thing you've done enough to be ahead of someone who has never done it at all, but not enough to call yourself practiced.
-
-A Background Mark is worth exactly one mark toward the Practiced rank. It has no mechanical effect on its own. It simply means that the first time you use this skill and earn a mark through play, you will reach Practiced in two marks rather than three.
-
-> **Example — a Secondary Skill**
+> **Example — a Specialty doing its job**
 >
-> *A City Watch Veteran's years on patrol left them with more than just combat training — they walked miles every shift, chased people through crowded markets, and hauled drunks out of alleys at two in the morning. Endurance starts at Novice, but with a mark already on it.*
-
----
-
-**Specialty**
-
-One narrow, specific area of fictional expertise — something too precise to be a skill, but real enough to matter. The MM treats this as a detail that changes difficulty: when the specialty directly applies, a Standard roll becomes Easy. When it is tangential, it gives the MM permission to offer information without a roll. A Specialty's step and a Technique's step draw from the same allowance — at most one character-side step moves any single roll, whichever source you pick (see *Difficulty*, III.1).
-
-A Specialty is not a second skill. It is a *fact about your history* that occasionally bends the fiction in your favor.
-
-> **Example — Specialties**
+> **MM:** You're back in the district you walked for eleven years. The tavern on the corner has a new sign over the door.
 >
-> *A City Watch Veteran might have: "Knows the street grid and tavern owners of one specific city district well enough to navigate it blind."*
+> **Mordai:** Who owns it now? And where does the old owner drink?
 >
-> *A Merchant's Child might have: "Can read a trade contract well enough to spot an unfavorable clause before signing."*
+> **MM:** That's your Specialty, so no roll. You know both. The old owner drinks here still, at the back table, because the new one owes him money and he likes to watch it being earned.
 >
-> *A Hedge Scholar might have: "Recognizes the flora of the northern hill country and knows which ones are edible, medicinal, or quietly dangerous."*
-
-The Specialty should be specific enough that the MM knows when it applies. "Good with people" is not a Specialty. "Has worked harbor docks and knows how cargo manifests get falsified" is.
-
-**When no skill fits.** Sometimes a character does something their history has trained them for and no skill honestly covers it — a former watchman delivering a formal sentry challenge, a guild apprentice performing an inspection to the letter. Do not invent a roll so there is something to resolve. The Specialty establishes, for free, that the character did the thing correctly; the *world* then answers, not the dice.
-
-And "nothing happens" is never that answer. A correctly executed procedure that gets no response has still produced information — now you know the thing you addressed is not running that protocol, and that is a real result the character earned.
-
----
-
-## Magic and Backgrounds
-
-If your character has a magical domain, the Background is where it begins — unless their Lineage got there first. A character holds **one domain at creation**, from Lineage or Background, never both (Chapter II.5). A gifted character takes a Background that grants no domain; a character who wants a magical Background takes an ungifted lineage, or plays an ungifted member of a gifted one.
-
-Magic requires two things: a narrative origin and a Facet Technique. The Background provides the first. The Technique — unlocked at Facet level 1 — provides the second.
-
-**Before the Technique is unlocked:** You can use your domain, but your practice is genuine without being disciplined. Effects are limited to Minor scope — the normal difficulty table applies. You are working from instinct and partial understanding.
-
-**After the Technique is unlocked:** Your domain operates at full capacity — all scopes available, normal difficulty table, any additional benefits the Technique provides. Small magic stays free; Significant and Major workings spend one of the three intents you ready each session (see *Readied Intents*, II.3). The Technique is not the moment you gain magic. It is the moment your magic becomes what it is capable of being.
-
-This means starting characters with magical Backgrounds have a real but limited version of their domain from session one. The first Facet level — and the Technique that comes with it — is a meaningful mechanical milestone: the moment of formalization, of understanding, of arriving somewhere you have been walking toward. Own that when you choose a magical Background: your first Technique is your formalization, and your first *free* Technique choice comes at Facet level 2.
-
-> **Example — a domain origin**
+> **Mordai:** Then I sit at the back table.
 >
-> *Zahna could write glyphs before the Guild dissolved. They worked, more or less. But the Guild's formal curriculum — the notation system, the trigger theory, the precision encoding that makes Inscription reliable rather than approximate — is what he was still learning when the institution collapsed. Arcane Study, at Facet level 1, is him finishing what he started.*
+> **MM:** (Of course you do.)
 
 ---
 
-## Creating a Custom Background
+## The Fifteen Backgrounds
 
-If none of the pre-built Backgrounds fit, build your own. The process is five steps:
+These are examples. Any character may take any of them, whatever their Facet; they are grouped by the Facet they most often suit because that is where a new player looks first.
 
-1. **Choose a title.** What do you call yourself, or what do others call you?
+> **Reading the Entries — backgrounds**
+>
+> Each background prints its **name**, then a short **history**, then its **knack** and its **Specialty**. The knack is printed as the background's name; you may write it shorter on your sheet, as long as the MM knows what it covers.
 
-2. **Write the description.** Two or three sentences: where you came from, what you did, what it made you.
-
-3. **Choose your starting skill.** Pick one skill from your Primary Facet's list. It begins at Practiced.
-
-4. **Choose your secondary skill.** Pick a second skill from your Primary Facet's list — a different one. It begins at Novice with 1 mark. Choose something that honestly fits the life you described in step 2.
-
-5. **Name your Specialty.** One narrow area of specific expertise. Write it as a fact, not an ability.
-
-If your character has a magical domain, replace step 4 with:
-
-4. **Describe your domain origin.** Answer in one or two sentences: *Where were you when you first understood what you could do? How did it begin?* This is narrative, not mechanical — but it is load-bearing narrative. The MM will use it.
-
-Bring your custom Background to the first session. The Mirror Master may ask a clarifying question or two — not to approve it, but to understand how it fits the world you're building together.
-
----
-
-## Pre-Built Backgrounds
-
-The following Backgrounds are ready to use as-is, or as starting points for customization. Each covers a recognizable archetype with enough specificity to be useful and enough open space to be yours.
-
----
-
-### Body Facet Backgrounds
-
----
+### Suited to the Body
 
 **City Watch Veteran**
 
-**Title:** City Watch Veteran *(or Former Guard, Discharged Soldier, Patrol Officer)*
+You served in a city or town watch — years of street patrol, crowd management, and the kind of violence that happens at close range in narrow alleys. You learned to read a situation before it turned, and you learned that the direct approach usually works, right up until it doesn't.
 
-**Description:** You served in a city or town watch — years of street patrol, crowd management, and the kind of violence that happens at close range in narrow alleys. You learned to read a situation before it turned, and you learned that the direct approach usually works, right up until it doesn't.
-
-**Starting Skill:** Combat (Practiced)
-
-**Secondary Skill:** Endurance (Novice, 1 mark) — patrol is miles walked, not just fights won.
+**Knack:** City Watch Veteran
 
 **Specialty:** Knows the layout, regular occupants, and unofficial rules of one specific district or settlement from your service years.
 
@@ -154,13 +68,9 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Traveling Merchant's Guard**
 
-**Title:** Road Guard *(or Caravan Blade, Hired Escort, Trade Route Veteran)*
+You spent years on the roads between cities, guarding someone else's goods from bandits, weather, and bad luck. You learned patience, light sleeping, and how to assess a threat from a distance before it knows you've noticed it.
 
-**Description:** You spent years on the roads between cities, guarding someone else's goods from bandits, weather, and bad luck. You learned patience, light sleeping, and how to assess a threat from a distance before it knows you've noticed it.
-
-**Starting Skill:** Athletics (Practiced)
-
-**Secondary Skill:** Combat (Novice, 1 mark) — the job is standing between the cargo and the bandits who want it.
+**Knack:** Traveling Merchant's Guard
 
 **Specialty:** Can read road conditions and assess the likelihood of ambush or delay based on terrain, weather, and recent traffic sign.
 
@@ -168,13 +78,9 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Arena Fighter**
 
-**Title:** Arena Fighter *(or Pit Veteran, Former Gladiator, Crowd Favorite)*
+You fought for money and an audience. Not the clean duels of noble tradition — crowd-pleasing, high-stakes bouts where showmanship mattered almost as much as survival. You know how to read a crowd and how to perform victory, and you know what it costs to lose in public.
 
-**Description:** You fought for money and an audience. Not the clean duels of noble tradition — crowd-pleasing, high-stakes bouts where showmanship mattered almost as much as survival. You know how to read a crowd and how to perform victory, and you know what it costs to lose in public.
-
-**Starting Skill:** Combat (Practiced)
-
-**Secondary Skill:** Finesse (Novice, 1 mark) — crowd-pleasing fights reward precision and timing, not just strength.
+**Knack:** Arena Fighter
 
 **Specialty:** Reads an opponent's fighting style and general skill level within the first exchange of a fight, accurately enough to brief an ally.
 
@@ -182,13 +88,9 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Wilderness Scout**
 
-**Title:** Scout *(or Ranger, Pathfinder, Outrider)*
+You worked ahead of groups — scouting routes, tracking quarry, returning with information that let other people make decisions. You spent more time alone in wild country than in any settlement, and you learned to trust your own judgment because there was nobody else to ask.
 
-**Description:** You worked ahead of groups — scouting routes, tracking quarry, returning with information that let other people make decisions. You spent more time alone in wild country than in any settlement, and you learned to trust your own judgment because there was nobody else to ask.
-
-**Starting Skill:** Stealth (Practiced)
-
-**Secondary Skill:** Athletics (Novice, 1 mark) — wild country doesn't care how tired you are.
+**Knack:** Wilderness Scout
 
 **Specialty:** Can track a person or animal across terrain they've passed through within the last day, given minimal sign.
 
@@ -196,33 +98,21 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Dockworker**
 
-**Title:** Dockhand *(or Longshoreman, Harbor Worker, Cargo Handler)*
+You moved things — heavy things, constantly, in physically demanding conditions. You also watched things move: goods, people, information. Docks are where the world's commerce actually happens, which means they're where the world's less visible commerce happens too.
 
-**Description:** You moved things — heavy things, constantly, in physically demanding conditions. You also watched things move: goods, people, information. Docks are where the world's commerce actually happens, which means they're where the world's less visible commerce happens too.
-
-**Starting Skill:** Athletics (Practiced)
-
-**Secondary Skill:** Endurance (Novice, 1 mark) — the work is relentless, the shifts are long, and nobody stops the tide.
+**Knack:** Dockworker
 
 **Specialty:** Knows how cargo manifests work, how they get falsified, and what a legitimate versus suspicious shipment looks like on paper and on the dock.
 
 ---
 
-### Mind Facet Backgrounds
-
----
+### Suited to the Mind
 
 **Guild Apprentice**
 
-**Title:** Apprentice *(or Former Apprentice, Guild Initiate, Lapsed Student)*
+You were formally apprenticed to a guild, institution, or individual practitioner — a structured education that was either completed, interrupted, or that you left before it finished. You carry the foundations of a discipline that may or may not have had time to fully form.
 
-**Description:** You were formally apprenticed to a guild, institution, or individual practitioner — a structured education that was either completed, interrupted, or that you left before it finished. You carry the foundations of a discipline that may or may not have had time to fully form.
-
-**Starting Skill:** Lore (Practiced)
-
-**Secondary Skill (non-magical):** Craft (Novice, 1 mark) — a structured education builds the foundations of a discipline by practicing it, not just reading about it.
-
-**Domain origin (if magical, replaces secondary skill):** Choose one domain from the Domains of the Mind list. Your apprenticeship was the beginning of formal magical education. Specify the institution and what domain it taught.
+**Knack:** Guild Apprentice
 
 **Specialty:** Knows the technical vocabulary, record-keeping, and internal personnel of the guild or institution that trained you, well enough to read its documents and recognise its work.
 
@@ -230,13 +120,9 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Physician's Assistant**
 
-**Title:** Physician's Assistant *(or Field Medic, Healer's Apprentice, Combat Surgeon)*
+You worked alongside someone who treated the sick and injured — in a hospital, a battlefield, a traveling practice, or a rough-and-ready ship's surgery. You learned anatomy, pharmacology, and the art of working quickly under conditions that do not forgive hesitation.
 
-**Description:** You worked alongside someone who treated the sick and injured — in a hospital, a battlefield, a traveling practice, or a rough-and-ready ship's surgery. You learned anatomy, pharmacology, and the art of working quickly under conditions that do not forgive hesitation.
-
-**Starting Skill:** Craft (Practiced)
-
-**Secondary Skill:** Lore (Novice, 1 mark) — understanding what is wrong requires knowing what normal looks like.
+**Knack:** Physician's Assistant
 
 **Specialty:** Recognizes symptoms of common diseases, poisons, and injuries accurately enough to name them and describe their progression.
 
@@ -244,13 +130,9 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Court Interpreter**
 
-**Title:** Court Interpreter *(or Translator, Diplomatic Aide, Polyglot)*
+You worked in the spaces between languages and cultures — translating not just words but meaning, context, and the things people say without saying them. You learned to be invisible in a room while hearing everything, and to speak with precision in situations where imprecision had consequences.
 
-**Description:** You worked in the spaces between languages and cultures — translating not just words but meaning, context, and the things people say without saying them. You learned to be invisible in a room while hearing everything, and to speak with precision in situations where imprecision had consequences.
-
-**Starting Skill:** Insight (Practiced)
-
-**Secondary Skill:** Lore (Novice, 1 mark) — working in formal and diplomatic settings requires knowing history, protocol, and the context that makes a phrase mean one thing in one culture and something quite different in another.
+**Knack:** Court Interpreter
 
 **Specialty:** Fluent in two languages beyond your native tongue; can make oneself understood in a third through careful effort.
 
@@ -258,47 +140,31 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Archive Researcher**
 
-**Title:** Researcher *(or Archivist's Assistant, Record Keeper, Scholar)*
+You spent years in an archive, a library, or a private collection — finding things, organizing things, and understanding how information gets buried and how it gets found again. You developed a researcher's instinct: the knowledge that the answer is probably in there somewhere, and the patience to find it.
 
-**Description:** You spent years in an archive, a library, or a private collection — finding things, organizing things, and understanding how information gets buried and how it gets found again. You developed a researcher's instinct: the knowledge that the answer is probably in there somewhere, and the patience to find it.
+**Knack:** Archive Researcher
 
-**Starting Skill:** Investigate (Practiced)
-
-**Secondary Skill:** Lore (Novice, 1 mark) — you cannot spend years surrounded by records without absorbing their contents as well as their organization.
-
-**Specialty:** Can navigate any organized record system — legal archives, guild registers, census records, church rolls — to find what is actually there, including things that have been quietly misfiled.
+**Specialty:** Can navigate any organized record system to find what is actually there, including things that have been quietly misfiled.
 
 ---
 
 **Hedge Scholar**
 
-**Title:** Hedge Scholar *(or Self-Taught Mage, Independent Researcher, Unlicensed Practitioner)*
+You educated yourself — through books, observation, correspondence with practitioners who had no reason to take you seriously, and a great deal of trial and error. You never had the formal grounding of guild or institution. You also never had their limitations.
 
-**Description:** You educated yourself — through books, observation, correspondence with practitioners who had no reason to take you seriously, and a great deal of trial and error. You never had the formal grounding of guild or institution. You also never had their limitations.
+**Knack:** Hedge Scholar
 
-**Starting Skill:** Lore (Practiced)
-
-**Secondary Skill (non-magical):** Investigate (Novice, 1 mark) — self-directed study is, at its core, research: following a thread until it either goes somewhere or runs out.
-
-**Domain origin (if magical, replaces secondary skill):** Choose one domain from the Domains of the Mind list. Your domain developed through self-directed study: experimentation, recovered texts, and the occasional alarming accident. You understood it before you had language for what it was.
-
-**Specialty:** Has read widely enough to have encountered at least a surface familiarity with almost any scholarly topic — enough to know what questions to ask and where to look.
+**Specialty:** Has read widely enough to have encountered at least a surface familiarity with almost any scholarly topic.
 
 ---
 
-### Soul Facet Backgrounds
-
----
+### Suited to the Soul
 
 **Street Performer**
 
-**Title:** Performer *(or Entertainer, Busker, Market Artist)*
+You worked crowds — acrobatics, music, sleight of hand, storytelling, whatever the audience would pay for. You learned to read a crowd before they knew you were reading them, and you learned that the best performance is the one where nobody notices you working.
 
-**Description:** You worked crowds — acrobatics, music, sleight of hand, storytelling, whatever the audience would pay for. You learned to read a crowd before they knew you were reading them, and you learned that the best performance is the one where nobody notices you working.
-
-**Starting Skill:** Perform (Practiced)
-
-**Secondary Skill:** Persuade (Novice, 1 mark) — getting strangers to stop, stay, and pay requires a working knowledge of what people want to hear.
+**Knack:** Street Performer
 
 **Specialty:** Can assess a crowd's mood, attention, and the best angle of approach within a few moments of observation.
 
@@ -306,15 +172,9 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Temple Acolyte**
 
-**Title:** Acolyte *(or Former Priest, Temple Initiate, Lapsed Devout)*
+You were raised in or joined a religious institution — and whether you stayed devoted, drifted, or left in a specific direction is your own. You understand ritual, community, and the way belief shapes people's decisions in ways that have nothing to do with whether the belief is literally true.
 
-**Description:** You were raised in or joined a religious institution — and whether you stayed devoted, drifted, or left in a specific direction is your own. You understand ritual, community, and the way belief shapes people's decisions in ways that have nothing to do with whether the belief is literally true.
-
-**Starting Skill:** Attune (Practiced)
-
-**Secondary Skill (non-magical):** Perform (Novice, 1 mark) — acolytes lead ceremonies, chant liturgies, and guide communal ritual. The line between devotion and performance is thinner than most devout would admit.
-
-**Domain origin (if magical, replaces secondary skill):** Choose one domain from the Domains of the Soul list. Your domain developed through spiritual practice — prayer, ritual, communion with forces your tradition named and yours to describe.
+**Knack:** Temple Acolyte
 
 **Specialty:** Recognizes the rituals, symbols, and internal politics of one specific religious tradition in detail.
 
@@ -322,13 +182,9 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Traveling Merchant**
 
-**Title:** Merchant *(or Trader, Factor, Traveling Seller)*
+You moved goods between places and negotiated the difference between what things are worth and what people will pay. You learned to read people quickly, to find the argument that lands, and to know when you've lost a negotiation before the other person knows they've won it.
 
-**Description:** You moved goods between places and negotiated the difference between what things are worth and what people will pay. You learned to read people quickly, to find the argument that lands, and to know when you've lost a negotiation before the other person knows they've won it.
-
-**Starting Skill:** Persuade (Practiced)
-
-**Secondary Skill:** Attune (Novice, 1 mark) — years of reading strangers across a table develops an instinct for what people are actually after beneath what they're saying.
+**Knack:** Traveling Merchant
 
 **Specialty:** Can accurately assess the fair market value of common goods and identify when a price represents opportunity, desperation, or a trap.
 
@@ -336,52 +192,42 @@ The following Backgrounds are ready to use as-is, or as starting points for cust
 
 **Former Criminal**
 
-**Title:** Former Criminal *(or Reformed Thief, Lapsed Grifter, Retired Smuggler — name it honestly)*
+You did things that were not strictly legal, for reasons that made sense at the time. Maybe they still do. You learned a particular way of reading situations — the exits, the guards, the person in the room with something to lose — and that reading doesn't turn off just because you've nominally changed directions.
 
-**Description:** You did things that were not strictly legal, for reasons that made sense at the time. Maybe they still do. You learned a particular way of reading situations — the exits, the guards, the person in the room with something to lose — and that reading doesn't turn off just because you've nominally changed directions.
+**Knack:** Former Criminal
 
-**Starting Skill:** Deceive (Practiced)
-
-**Secondary Skill:** Attune (Novice, 1 mark) — when getting caught means violence or imprisonment, you learn to read people's moods and intentions with some urgency.
-
-**Specialty:** Knows how a particular type of criminal operation works from the inside — smuggling, grifting, burglary, or another specific area. Can recognize one when they see it.
+**Specialty:** Knows how a particular type of criminal operation works from the inside and can recognize one when they see it.
 
 ---
 
 **Luck-Touched Wanderer**
 
-**Title:** Wanderer *(or Drifter, Luck-Touched, Fortune's Fool)*
+You've been places and done things, and the common thread is that you survived situations that statistically shouldn't have worked out. You don't entirely know why. You've stopped asking. You've learned to trust the feeling that says *go left*, *not this tavern*, *wait five more minutes* — and you've learned that the feeling is usually right.
 
-**Description:** You've been places and done things, and the common thread is that you survived situations that statistically shouldn't have worked out. You don't entirely know why. You've stopped asking. You've learned to trust the feeling that says *go left*, *not this tavern*, *wait five more minutes* — and you've learned that the feeling is usually right.
+**Knack:** Luck-Touched Wanderer
 
-**Starting Skill:** Gamble (Practiced)
-
-**Secondary Skill:** Perform (Novice, 1 mark) — wanderers who want to eat pick up whatever earns a coin: a song, a trick, a story told well enough that the innkeeper feels charitable.
-
-**Specialty:** Has an uncanny sense for when a situation is about to turn — when the calm is the wrong kind of calm, when someone's goodwill has quietly become something else, when to be somewhere else before the thing that is about to happen, happens.
+**Specialty:** Has an uncanny sense for when a situation is about to turn — when the calm is the wrong kind of calm.
 
 ---
 
-## A Note on Backgrounds and Identity
+## Writing Your Own Background
 
-The Background you choose is a point of departure, not a cage.
+If none of the fifteen fit, write one. Four steps:
 
-Mordai might have the City Watch Veteran Background and spend the entire campaign moving away from what that trained him to be. Zahna's Guild Apprentice Background might define him for three sessions and become irrelevant background detail by session twenty. The Background gives the Mirror Master something to work with at the start. What your character becomes is up to the play that follows.
+**1. Name it.** What you call yourself, or what others call you: *Caravan Cook. Lapsed Priest. Wandering Disciple.*
 
-The title you choose — *Guard, Apprentice, Wanderer, Performer* — is the word that was true before the story began. What word is true by the end is the story.
+**2. Write the history.** Two or three sentences.
 
----
+**3. Name the knack.** A trade, place, people or tradition from that history. Not a bare verb.
 
-## In Play: What the Background Sounds Like
+**4. Write the Specialty.** One narrow thing, phrased so the MM knows when it applies.
 
-From the vignette in Chapter II.2 — Zahna at the archive, Mordai's argument with the archivist, Zulnut's opportunistic lift of the keyring:
+Zulnut's background is custom (Chapter II.4), and shares his class's name, *Wandering Disciple*: a teacher who moved on, and the habits that stayed. His knack is *Sleight of hand and quiet feet*, and his Specialty is noticing the exact moment a room's attention shifts off him.
 
-Three different Backgrounds, three different shapes of competence at the table:
-
-*Zahna's Guild Apprentice Background explains why he goes directly to the cross-reference approach — and his Lore at Practiced adds +1 when he does. He's not discovering how archives work. He's using a skill he already has.*
-
-*Mordai's City Watch Veteran Background explains why his instinct is to confront the archivist directly, and why his Specialty (knowing how city institutions work) doesn't help here — the archivist knows it too, and better. His Charisma roll is still Hard. The Background doesn't make him good at everything. It makes him specifically good at one thing.*
-
-*Zulnut's Wandering Disciple Background (a custom Background, built with the five-step path above) explains why the MM calls the keyring lift Easy rather than Standard — noticing the exact moment attention shifts is exactly the discipline his training built. The Background is what justified the difficulty call.*
-
-The Background doesn't override the dice. It changes the context the dice live in.
+> **MM Note — keeping knacks honest**
+>
+> **Default:** a knack fits when the player can say in one sentence why their history bears on this roll.
+>
+> **The dial:** you can read knacks loosely (the Soldiering knack fits anything with a sword in it) or tightly (only formation fighting and drill).
+>
+> **The cost:** too loose, and every character has +1 on every roll that matters and the knack stops being a choice. Too tight, and players stop writing interesting ones. About one roll in four is a healthy rate.

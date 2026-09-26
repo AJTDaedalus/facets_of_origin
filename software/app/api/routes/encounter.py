@@ -1,7 +1,7 @@
-"""Encounter CRUD routes — MM only."""
+"""Encounter CRUD routes and the danger read — MM only (MM1)."""
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 
 from app.api.routes.session import require_mm
@@ -13,14 +13,13 @@ router = APIRouter(prefix="/api/encounters", tags=["encounters"])
 
 class EncounterEnemyRequest(BaseModel):
     enemy_id: str
-    count: int = Field(default=1, ge=1)
+    count: int = Field(default=1, ge=1, le=50)
 
 
 class CreateEncounterRequest(BaseModel):
     session_id: str
     id: str = Field(min_length=1)
     name: str = Field(min_length=1, max_length=256)
-    difficulty: str = "standard"
     environment: str = ""
     description: str = ""
     enemies: list[EncounterEnemyRequest] = Field(default_factory=list)
@@ -30,116 +29,70 @@ class CreateEncounterRequest(BaseModel):
     notes: str = ""
 
 
-class PreviewBandRequest(BaseModel):
-    """Roster for a live difficulty-band preview (T6.2, K-3)."""
+class PreviewRequest(BaseModel):
+    """Roster for a live danger read. Party size/level default to the session's."""
 
     session_id: str
     enemies: list[EncounterEnemyRequest] = Field(default_factory=list)
+    party_size: int | None = Field(default=None, ge=1, le=12)
+    party_level: int | None = Field(default=None, ge=1, le=10)
 
 
-def _library_tiers(session) -> dict[str, str]:
-    return {eid: e.tier for eid, e in session.enemy_library.items()}
+def _session(session_id: str):
+    session = session_store.get(session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found.")
+    return session
+
+
+def _encounter(body) -> Encounter:
+    return Encounter(id=getattr(body, "id", "_preview"), name=getattr(body, "name", "_preview"),
+                     enemies=[EncounterEnemy(e.enemy_id, e.count) for e in body.enemies])
 
 
 @router.post("/", dependencies=[Depends(require_mm)])
 async def create_encounter(body: CreateEncounterRequest):
-    """Save an encounter definition to a session."""
-    session = session_store.get(body.session_id)
-    if not session:
-        raise HTTPException(status_code=404, detail="Session not found.")
-
+    session = _session(body.session_id)
     encounter = Encounter(
-        id=body.id,
-        name=body.name,
-        difficulty=body.difficulty,
-        environment=body.environment,
+        id=body.id, name=body.name, environment=body.environment,
         description=body.description,
-        enemies=[
-            EncounterEnemy(enemy_id=e.enemy_id, count=e.count)
-            for e in body.enemies
-        ],
-        lateral_solutions=body.lateral_solutions,
-        rewards_sparks=body.rewards_sparks,
-        rewards_narrative=body.rewards_narrative,
-        notes=body.notes,
-    )
-
-    # Calculate effective TR if enemies are in the library
-    enemy_trs = {
-        eid: e.calculate_tr()
-        for eid, e in session.enemy_library.items()
-    }
-    effective_tr = encounter.calculate_effective_tr(enemy_trs)
-
+        enemies=[EncounterEnemy(e.enemy_id, e.count) for e in body.enemies],
+        lateral_solutions=body.lateral_solutions, rewards_sparks=body.rewards_sparks,
+        rewards_narrative=body.rewards_narrative, notes=body.notes)
     session.encounter_library[encounter.id] = encounter
-    return {
-        "encounter": encounter.to_client_dict(),
-        "effective_tr": effective_tr,
-        # Recipe-Table difficulty band (T6.2, K-3) — the calibrated readout;
-        # effective_tr above is only the legacy rough-ordering number.
-        "band": encounter.band(_library_tiers(session), session.party_strength()),
-    }
+    return {"encounter": encounter.to_client_dict(),
+            "danger": encounter.danger(session.enemy_library, session.party_size(),
+                                       session.party_level()),
+            "missing": encounter.missing(session.enemy_library)}
 
 
-@router.post("/preview_band", dependencies=[Depends(require_mm)])
-async def preview_band(body: PreviewBandRequest):
-    """Live difficulty band for an unsaved roster (T6.2, K-3).
-
-    The encounter builder calls this as enemies are added, so the band logic
-    stays server-side in `encounter.compute_band` — the front end never
-    carries its own copy of the Recipe-Table doctrine.
-    """
-    session = session_store.get(body.session_id)
-    if not session:
-        raise HTTPException(status_code=404, detail="Session not found.")
-
-    tiers = _library_tiers(session)
-    unknown = sorted({e.enemy_id for e in body.enemies} - set(tiers))
-    if unknown:
-        raise HTTPException(
-            status_code=404,
-            detail=f"Enemy id(s) not in the session library: {', '.join(unknown)}.",
-        )
-
-    encounter = Encounter(
-        id="_preview", name="_preview",
-        enemies=[EncounterEnemy(enemy_id=e.enemy_id, count=e.count) for e in body.enemies],
-    )
-    return {"band": encounter.band(tiers, session.party_strength())}
+@router.post("/preview", dependencies=[Depends(require_mm)])
+async def preview(body: PreviewRequest):
+    """Danger read for an unsaved roster (foes from the session library)."""
+    session = _session(body.session_id)
+    encounter = _encounter(body)
+    missing = encounter.missing(session.enemy_library)
+    if missing:
+        raise HTTPException(status_code=404,
+                            detail=f"Enemy id(s) not in the session library: {', '.join(missing)}.")
+    return {"danger": encounter.danger(session.enemy_library,
+                                       body.party_size or session.party_size(),
+                                       body.party_level or session.party_level())}
 
 
 @router.get("/{session_id}", dependencies=[Depends(require_mm)])
 async def list_encounters(session_id: str):
-    """List all encounters in a session."""
-    session = session_store.get(session_id)
-    if not session:
-        raise HTTPException(status_code=404, detail="Session not found.")
-
-    enemy_trs = {
-        eid: e.calculate_tr()
-        for eid, e in session.enemy_library.items()
-    }
-    tiers = _library_tiers(session)
-    party_strength = session.party_strength()
-
-    return {
-        "encounters": {
-            eid: {
-                **enc.to_client_dict(),
-                "effective_tr": enc.calculate_effective_tr(enemy_trs),
-                "band": enc.band(tiers, party_strength),
-            }
-            for eid, enc in session.encounter_library.items()
-        }
-    }
+    session = _session(session_id)
+    size, level = session.party_size(), session.party_level()
+    return {"encounters": {
+        eid: {**enc.to_client_dict(),
+              "danger": enc.danger(session.enemy_library, size, level)}
+        for eid, enc in session.encounter_library.items()}}
 
 
 @router.delete("/{session_id}/{encounter_id}", dependencies=[Depends(require_mm)])
 async def delete_encounter(session_id: str, encounter_id: str):
-    """Remove an encounter from the session."""
-    session = session_store.get(session_id)
-    if not session:
-        raise HTTPException(status_code=404, detail="Session not found.")
+    session = _session(session_id)
     if encounter_id not in session.encounter_library:
         raise HTTPException(status_code=404, detail="Encounter not found.")
     del session.encounter_library[encounter_id]

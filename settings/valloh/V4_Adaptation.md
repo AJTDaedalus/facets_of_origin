@@ -8,11 +8,11 @@ So a character built for Shattered Origin can walk into Val'loh with nothing cha
 
 ## What This Facet Changes, Counted
 
-> The core 2d6, Sparks, Conditions, exchanges, advancement, magic, and the three Facets are unchanged. Val'loh adds exactly: **ten Lineages** (two playable in Oraga Night) and **crystal charges** as one-use items. It adds no domains, removes nothing, and changes no rule.
+> The core 2d6, Sparks, HP, exchanges, levels, magic, and the three Facets are unchanged. Val'loh adds exactly: **ten Lineages** (two playable in Oraga Night) and **crystal charges** as curios. It adds no domains, removes nothing, and changes no rule.
 
 That sentence is the whole mechanical footprint, and it is checked against the ruleset data by a test — the pitch cannot drift from the file.
 
-If you want the longer version: nothing in this Facet touches how you roll, how difficulty is set, how Sparks work, how Conditions land, how exchanges run, how skills or Facets advance, or how magic is cast. There is no Val'loh combat rule, no Val'loh Spark rule, and no Val'loh casting rule.
+If you want the longer version: nothing in this Facet touches how you roll, how difficulty is set, how Sparks work, how damage and Wounds land, how exchanges run, how characters level, or how magic is cast. There is no Val'loh combat rule, no Val'loh Spark rule, and no Val'loh casting rule.
 
 ---
 
@@ -20,9 +20,9 @@ If you want the longer version: nothing in this Facet touches how you roll, how 
 
 **Their Lineage is Human, and that is a real answer.** Val'loh has ten peoples and every one of them is human; a Shattered Origin human is not a curiosity, just someone from a very long way off with no tribe anyone recognizes. Socially this is awkward — a great deal of Val'loh runs on knowing which tribe a person's obligations point at — and the awkwardness is playable rather than a problem to solve.
 
-**Their domain, if they have one, is spellcraft.** Whatever a core character's Background gave them, Val'loh will file it under study rather than blood, because that is the only other category the place has. A Soul caster with Shadow is, to a Val'loh eye, a scholar with an unusual and slightly disreputable specialty. Nobody will assume it is a gift; gifts run in families, and this one has no family here.
+**Their domain, if they have one, is spellcraft.** Whatever a core character's casting talent gave them, Val'loh will file it under study rather than blood, because that is the only other category the place has. A Soul caster with Shadow is, to a Val'loh eye, a scholar with an unusual and slightly disreputable specialty. Nobody will assume it is a gift; gifts run in families, and this one has no family here.
 
-**They cannot acquire a Gift.** Not through a Technique, not through study, not through a very good session. A Gift is inherited or it is nothing, and a campaign that breaks this breaks the only thing the ten lineages actually mean.
+**They cannot acquire a Gift.** Not through a talent, not through study, not through a very good session. A Gift is inherited or it is nothing, and a campaign that breaks this breaks the only thing the ten lineages actually mean.
 
 **They can carry charges.** Anyone can. This is the single fastest way to make a visiting character feel like they are somewhere: hand them a splinter of pink crystal that makes light, and let them work out what it cost.
 
@@ -30,9 +30,9 @@ If you want the longer version: nothing in this Facet touches how you roll, how 
 
 ## Taking a Val'loh Character Out
 
-The reverse is easier. A gifted character's domain travels with them and behaves like any other domain, because it is one. The Heritage travels too and stops being useful the moment they leave the region it is about, which is what a Heritage is.
+The reverse is easier. A gifted character's gift knack and Minor workings travel with them, and the domain behaves like any other domain, because it is one. The Heritage travels too and stops being useful the moment they leave the region it is about, which is what a Heritage is.
 
-The one thing that does not travel is the crystal economy. A charge is worth a season's wages in Rekuzan and is a curiosity somewhere that has never seen grown crystal — expensive, unrepeatable, and impossible to explain to a merchant. Play that.
+The one thing that does not travel is the crystal economy. A charge is still a curio anywhere, and still works; but it is worth a season's wages in Rekuzan and is a curiosity somewhere that has never seen grown crystal — expensive, unrepeatable, and impossible to explain to a merchant. Play that.
 
 ---
 

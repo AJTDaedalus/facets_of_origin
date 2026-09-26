@@ -9,7 +9,7 @@ style guide's Law 6 exists to prevent.
 Every real lookup table in `player_handbook/` and `mm_manual/` carries a caption
 line immediately above it:
 
-    **Table III.3-2: Postures**
+    **Table III.3-2: Attack Results**
 
     | Posture | Offense | ... |
 
@@ -42,7 +42,7 @@ BOX_REGISTER_FILE = PLAYER_HANDBOOK / "List_of_Boxes.md"
 BOX_CAPTION = re.compile(r"^>\s*\*\*(Through the Mirror|MM Note|Example|Variant|"
                          r"Reading the Entries)(?: — (.+?))?\*\*", re.M)
 
-# "**Table III.3-2: Postures**" on its own line. The en dash between chapter and
+# "**Table III.3-2: Attack Results**" on its own line. The en dash between chapter and
 # sequence number is the typographic convention (style/analysis/rulebooks.md §5);
 # the ASCII hyphen is rejected rather than accepted, so drift is caught here
 # instead of surviving into the register.
@@ -53,21 +53,24 @@ CAPTION = re.compile(r"^\*\*Table ([A-Za-z0-9.]+)–(\d+): (.+?)\*\*$", re.M)
 # contiguous and in the place combat sits in the book.
 BOOK_ORDER = [
     ("Player Handbook", PLAYER_HANDBOOK, [
+        # Lean Facets v1.0 chapter order (DESIGN §5). A file that does not
+        # exist yet is skipped, so the register follows the book as it lands.
         "II.1_Character_Creation_Overview.md",
-        "II.2_Character_Creation_Attributes.md",
+        "II.2_Character_Creation_Stats.md",
         "II.3_Magic.md",
         "II.4_Character_Creation_Facets.md",
         "II.4a_Character_Creation_Facet_Body.md",
         "II.4b_Character_Creation_Facet_Mind.md",
         "II.4c_Character_Creation_Facet_Soul.md",
-        "II.7_Character_Creation_Skills.md",
+        "II.5_Lineage.md",
+        "II.6_Character_Creation_Backgrounds.md",
         "III.1_Core_Resolution.md",
         "III.2_Adventuring.md",
         "III.3_Combat.md",
         "IV.1_Equipment.md",
+        "IV.2_Treasure.md",
         "Quick_Start.md",
-        # T5.7 (P-12): the domain at-a-glance tables consolidated into the
-        # appendix, which therefore joined the register's scan order.
+        "Appendix_Character_Sheet.md",
         "Appendix_Magic_Domains.md",
     ]),
     ("Mirror Master's Manual", MM_MANUAL, [
@@ -76,6 +79,7 @@ BOOK_ORDER = [
         "MM3_Campaign_Design.md",
         "MM4_Running_the_Table.md",
         "MM5_Quick_Reference.md",
+        "MM6_The_Toolbox.md",
     ]),
     ("Bestiary", BESTIARY, [
         "Front_Matter.md",
@@ -148,7 +152,7 @@ def generate_register_text() -> str:
         " diff (INV-9); if it doesn't, the register is stale.*",
         "",
         "*Tables are numbered per chapter. Body text cites them by full designation"
-        " — \"Table III.3–2: Postures\" — never as \"the table above\".*",
+        " — \"Table III.3–2: Attack Results\" — never as \"the table above\".*",
         "",
     ]
     for book_name, rows in collect_tables():

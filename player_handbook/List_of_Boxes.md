@@ -10,57 +10,35 @@
 
 | Box | Title | Section |
 |---|---|---|
-| **Example** | [six steps, one lazy man](II.1_Character_Creation_Overview.md#the-seven-steps) | II.1_Character_Creation_Overview.md |
-| **Example** | [the arithmetic](II.2_Character_Creation_Attributes.md#distributing-your-attributes) | II.2_Character_Creation_Attributes.md |
-| **Example** | [The Scholar](II.2_Character_Creation_Attributes.md#deriving-your-major-attribute-modifiers) | II.2_Character_Creation_Attributes.md |
-| **Through the Mirror** | [why the spread matters](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play) | II.2_Character_Creation_Attributes.md |
-| **Example** | [the same intent at three scopes](II.3_Magic.md#scope) | II.3_Magic.md |
-| **Example** | [readying, and then deciding](II.3_Magic.md#readied-intents) | II.3_Magic.md |
-| **Through the Mirror** | [why magic is prepared for, and why only the big half](II.3_Magic.md#readied-intents) | II.3_Magic.md |
-| **MM Note** | [When magic goes wrong (6− templates)](II.3_Magic.md#outcome-tiers-for-magic) | II.3_Magic.md |
-| **Through the Mirror** | [why early magic is capped by scope, not by difficulty](II.3_Magic.md#acquiring-a-domain) | II.3_Magic.md |
-| **Example** | [spending skill points across Facets](II.4_Character_Creation_Facets.md#advancing-skills) | II.4_Character_Creation_Facets.md |
-| **Example** | [a Background mark completing a rank](II.4_Character_Creation_Facets.md#advancing-skills) | II.4_Character_Creation_Facets.md |
-| **Through the Mirror** | [why your Facet has a shape](II.4_Character_Creation_Facets.md#how-far-a-skill-can-go) | II.4_Character_Creation_Facets.md |
-| **Through the Mirror** | [a single Facet stops at level 3](II.4_Character_Creation_Facets.md#facet-levels) | II.4_Character_Creation_Facets.md |
-| **Example** | [counting Facet levels](II.4_Character_Creation_Facets.md#facet-levels) | II.4_Character_Creation_Facets.md |
-| **Reading the Entries** | [Techniques](II.4_Character_Creation_Facets.md#techniques) | II.4_Character_Creation_Facets.md |
-| **Through the Mirror** | [the advancement math](II.4_Character_Creation_Facets.md#major-advancement) | II.4_Character_Creation_Facets.md |
-| **Example** | [a reflection scene after a Major Advancement](II.4_Character_Creation_Facets.md#major-advancement) | II.4_Character_Creation_Facets.md |
-| **Example** | [a quiet reflection scene](II.4_Character_Creation_Facets.md#advancement-and-reflection) | II.4_Character_Creation_Facets.md |
-| **Example** | [the cast at one career advance](II.4_Character_Creation_Facets.md#career-advances) | II.4_Character_Creation_Facets.md |
-| **Example** | [a Tier 1 Technique doing its job](II.4a_Character_Creation_Facet_Body.md#might-branch) | II.4a_Character_Creation_Facet_Body.md |
-| **Example** | [buying an answer instead of rolling for one](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-clarity-tier-2) | II.4b_Character_Creation_Facet_Mind.md |
-| **Example** | [the Turning](II.4c_Character_Creation_Facet_Soul.md#tier-1) | II.4c_Character_Creation_Facet_Soul.md |
-| **Reading the Entries** | [Skills](II.7_Character_Creation_Skills.md#the-skill-list) | II.7_Character_Creation_Skills.md |
-| **Example** | [when a skill is worth a roll](II.7_Character_Creation_Skills.md#skills-and-the-fiction) | II.7_Character_Creation_Skills.md |
-| **Through the Mirror** | [why only the good one overrides](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2) | III.1_Core_Resolution.md |
-| **Example** | [spending Sparks](III.1_Core_Resolution.md#spending-sparks) | III.1_Core_Resolution.md |
+| **Through the Mirror** | [why only three](II.2_Character_Creation_Stats.md#two-characters-one-stat-line) | II.2_Character_Creation_Stats.md |
+| **Example** | [one intent at three scopes](II.3_Magic.md#scope) | II.3_Magic.md |
+| **Through the Mirror** | [why magic takes up room in your pack](II.3_Magic.md#fatigue) | II.3_Magic.md |
+| **Through the Mirror** | [where the classes come from](II.4_Character_Creation_Facets.md#classes) | II.4_Character_Creation_Facets.md |
+| **Example** | [the model custom class](II.4_Character_Creation_Facets.md#writing-a-custom-class) | II.4_Character_Creation_Facets.md |
+| **Reading the Entries** | [class cards](II.4a_Character_Creation_Facet_Body.md#preset-classes) | II.4a_Character_Creation_Facet_Body.md |
+| **Reading the Entries** | [talents and signatures](II.4a_Character_Creation_Facet_Body.md#talents) | II.4a_Character_Creation_Facet_Body.md |
+| **Reading the Entries** | [class cards](II.4b_Character_Creation_Facet_Mind.md#preset-classes) | II.4b_Character_Creation_Facet_Mind.md |
+| **Reading the Entries** | [talents and signatures](II.4b_Character_Creation_Facet_Mind.md#talents) | II.4b_Character_Creation_Facet_Mind.md |
+| **Reading the Entries** | [class cards](II.4c_Character_Creation_Facet_Soul.md#preset-classes) | II.4c_Character_Creation_Facet_Soul.md |
+| **Reading the Entries** | [talents and signatures](II.4c_Character_Creation_Facet_Soul.md#talents) | II.4c_Character_Creation_Facet_Soul.md |
+| **Reading the Entries** | [lineages](II.5_Lineage.md#character-creation-lineage) | II.5_Lineage.md |
+| **Through the Mirror** | [why the core lineage is empty](II.5_Lineage.md#human) | II.5_Lineage.md |
+| **MM Note** | [a lineage is not a stat bonus](II.5_Lineage.md#mm-creating-a-custom-lineage) | II.5_Lineage.md |
+| **Example** | [a Specialty doing its job](II.6_Character_Creation_Backgrounds.md#specialties) | II.6_Character_Creation_Backgrounds.md |
+| **Reading the Entries** | [backgrounds](II.6_Character_Creation_Backgrounds.md#the-fifteen-backgrounds) | II.6_Character_Creation_Backgrounds.md |
+| **MM Note** | [keeping knacks honest](II.6_Character_Creation_Backgrounds.md#writing-your-own-background) | II.6_Character_Creation_Backgrounds.md |
+| **MM Note** | [say it out loud](III.1_Core_Resolution.md#difficulty) | III.1_Core_Resolution.md |
 | **Example** | [Borrowed Trouble](III.1_Core_Resolution.md#borrowed-trouble) | III.1_Core_Resolution.md |
 | **MM Note** | [what Borrowed Trouble is for](III.1_Core_Resolution.md#borrowed-trouble) | III.1_Core_Resolution.md |
-| **MM Note** | [Saving throw or skill check?](III.1_Core_Resolution.md#saving-throws) | III.1_Core_Resolution.md |
-| **MM Note** | [Group roll or individual rolls?](III.1_Core_Resolution.md#group-rolls) | III.1_Core_Resolution.md |
-| **MM Note** | [The "Don't Roll, Just Do It" principle](III.1_Core_Resolution.md#when-not-to-roll) | III.1_Core_Resolution.md |
-| **Example** | [one roll, three tiers, and a ruling said out loud](III.1_Core_Resolution.md#in-play-the-front-desk) | III.1_Core_Resolution.md |
+| **MM Note** | [the "don't roll, just do it" principle](III.1_Core_Resolution.md#when-not-to-roll) | III.1_Core_Resolution.md |
 | **MM Note** | ["What's different this time?"](III.1_Core_Resolution.md#trying-again) | III.1_Core_Resolution.md |
 | **MM Note** | [nobody plays the janitor](III.2_Adventuring.md#hazards-and-threat-clocks) | III.2_Adventuring.md |
-| **Example** | [Endurance Pools](III.3_Combat.md#calculating-your-endurance-pool) | III.3_Combat.md |
-| **MM Note** | [Withdrawn is a tempo move, not a permanent position](III.3_Combat.md#recovering-your-endurance-pool) | III.3_Combat.md |
-| **MM Note** | [Reading past the stated stance](III.3_Combat.md#postures) | III.3_Combat.md |
-| **MM Note** | [Dodge or Parry?](III.3_Combat.md#parry) | III.3_Combat.md |
-| **Through the Mirror** | [why enemies lose Resolve and characters take Conditions](III.3_Combat.md#conditions) | III.3_Combat.md |
-| **Through the Mirror** | [why Tier 1 Conditions clear so fast](III.3_Combat.md#tier-1-conditions) | III.3_Combat.md |
-| **Variant** | [running it on paper](III.3_Combat.md#armor) | III.3_Combat.md |
-| **MM Note** | [Mooks as roleplay opportunities](III.3_Combat.md#mooks) | III.3_Combat.md |
-| **Through the Mirror** | [why NPCs never roll](III.3_Combat.md#enemy-attacks) | III.3_Combat.md |
-| **Through the Mirror** | [why armor and partial reactions do not stack](III.3_Combat.md#armor-and-reaction-downgrades) | III.3_Combat.md |
-| **MM Note** | [Rewarding creative lateral play](III.3_Combat.md#mind-and-soul-in-a-fight) | III.3_Combat.md |
-| **Through the Mirror** | [why there are no damage numbers](IV.1_Equipment.md#weapons) | IV.1_Equipment.md |
-| **Through the Mirror** | [why armor is a budget and not a subtraction](IV.1_Equipment.md#armor) | IV.1_Equipment.md |
-| **Example** | [spending a downgrade budget](IV.1_Equipment.md#armor-in-play) | IV.1_Equipment.md |
-| **MM Note** | [Money and wealth](IV.1_Equipment.md#currency-and-trade) | IV.1_Equipment.md |
-| **MM Note** | [why one-use, and nothing else](IV.1_Equipment.md#one-use-items) | IV.1_Equipment.md |
-| **Example** | [six steps, one lazy man](Quick_Start.md#6-fill-in-the-rest) | Quick_Start.md |
+| **Through the Mirror** | [why death is a choice](III.2_Adventuring.md#the-death-choice) | III.2_Adventuring.md |
+| **Through the Mirror** | [why the enemies roll](III.3_Combat.md#when-the-enemies-roll) | III.3_Combat.md |
+| **MM Note** | [rewarding the clever answer](III.3_Combat.md#other-things-to-do) | III.3_Combat.md |
+| **Example** | [filling a pack](IV.1_Equipment.md#coin) | IV.1_Equipment.md |
+| **Through the Mirror** | [why treasure comes early](IV.2_Treasure.md#relics) | IV.2_Treasure.md |
+| **Example** | [ten minutes, one Warrior](Quick_Start.md#5-fill-in-the-numbers) | Quick_Start.md |
 | **Reading the Entries** | [the domain descriptions](Appendix_Magic_Domains.md#appendix-magic-domain-catalog) | Appendix_Magic_Domains.md |
 | **Reading the Entries** | [the example intents](Appendix_Magic_Domains.md#appendix-magic-domain-catalog) | Appendix_Magic_Domains.md |
 
@@ -70,35 +48,23 @@
 
 | Box | Title | Section |
 |---|---|---|
-| **Example** | [rating an enemy from scratch](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples) | MM1_Encounters_and_Enemies.md |
-| **Example** | [Party Strength](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength) | MM1_Encounters_and_Enemies.md |
-| **Example** | [why summed TR cannot size a fight](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength) | MM1_Encounters_and_Enemies.md |
-| **Example** | [the Archive Guardian changes phase](../mm_manual/MM1_Encounters_and_Enemies.md#bosses) | MM1_Encounters_and_Enemies.md |
-| **MM Note** | [build for the early exit, not against it](../mm_manual/MM1_Encounters_and_Enemies.md#bosses) | MM1_Encounters_and_Enemies.md |
-| **MM Note** | [a lateral solution is the encounter working](../mm_manual/MM1_Encounters_and_Enemies.md#running-asymmetric-encounters) | MM1_Encounters_and_Enemies.md |
-| **Through the Mirror** | [these numbers are not yet simulated](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-4-4-pcs-or-3-advanced-pcs) | MM1_Encounters_and_Enemies.md |
-| **MM Note** | [The golden rule](../mm_manual/MM1_Encounters_and_Enemies.md#step-5-sanity-check) | MM1_Encounters_and_Enemies.md |
+| **Reading the Entries** | [the monster card](../mm_manual/MM1_Encounters_and_Enemies.md#the-monster-card) | MM1_Encounters_and_Enemies.md |
+| **Example** | [numbers from level and role](../mm_manual/MM1_Encounters_and_Enemies.md#choosing-a-level) | MM1_Encounters_and_Enemies.md |
+| **Through the Mirror** | [why morale does so much work](../mm_manual/MM1_Encounters_and_Enemies.md#morale) | MM1_Encounters_and_Enemies.md |
+| **Through the Mirror** | [these bands are a starting read](../mm_manual/MM1_Encounters_and_Enemies.md#count-the-threats) | MM1_Encounters_and_Enemies.md |
+| **MM Note** | [a lateral solution is the encounter working](../mm_manual/MM1_Encounters_and_Enemies.md#dials-other-than-headcount) | MM1_Encounters_and_Enemies.md |
+| **Through the Mirror** | [why the foes roll](../mm_manual/MM1_Encounters_and_Enemies.md#rolling-in-the-open) | MM1_Encounters_and_Enemies.md |
+| **Example** | [one exchange on the bridge](../mm_manual/MM1_Encounters_and_Enemies.md#ending-the-fight) | MM1_Encounters_and_Enemies.md |
+| **MM Note** | [when in doubt, the easier fight](../mm_manual/MM1_Encounters_and_Enemies.md#building-your-own-in-five-minutes) | MM1_Encounters_and_Enemies.md |
 | **MM Note** | [where to see this chapter working](../mm_manual/MM2_Session_Design.md#mirror-masters-manual-session-design) | MM2_Session_Design.md |
-| **MM Note** | [The cliffhanger is not mandatory](../mm_manual/MM2_Session_Design.md#the-three-act-framework) | MM2_Session_Design.md |
-| **MM Note** | [Practical test](../mm_manual/MM2_Session_Design.md#when-to-call-for-rolls) | MM2_Session_Design.md |
-| **MM Note** | [Pressure Point does not stack with an auto-applied step](../mm_manual/MM2_Session_Design.md#difficulty-and-technique-steps) | MM2_Session_Design.md |
-| **MM Note** | [Skirmish encounters are tutorial encounters](../mm_manual/MM2_Session_Design.md#combat) | MM2_Session_Design.md |
-| **Example** | [saying yes to an unnarrated detail](../mm_manual/MM2_Session_Design.md#yes-and-yes-but-no-but) | MM2_Session_Design.md |
-| **Example** | [saying yes, and charging for it](../mm_manual/MM2_Session_Design.md#yes-and-yes-but-no-but) | MM2_Session_Design.md |
-| **Example** | [saying no to the plan, yes to the intent](../mm_manual/MM2_Session_Design.md#yes-and-yes-but-no-but) | MM2_Session_Design.md |
-| **Example** | [pricing a Significant working](../mm_manual/MM2_Session_Design.md#judging-scope) | MM2_Session_Design.md |
-| **Example** | [the same glyph at Major scope](../mm_manual/MM2_Session_Design.md#judging-scope) | MM2_Session_Design.md |
-| **MM Note** | [Check the ceiling before you price the roll](../mm_manual/MM2_Session_Design.md#judging-scope) | MM2_Session_Design.md |
-| **Through the Mirror** | [magic in an exchange is not taxed](../mm_manual/MM2_Session_Design.md#magic-against-active-opposition) | MM2_Session_Design.md |
-| **MM Note** | [two buttons, two jobs](../mm_manual/MM2_Session_Design.md#the-play-field) | MM2_Session_Design.md |
-| **Through the Mirror** | [why nominations work](../mm_manual/MM2_Session_Design.md#1-act-break-nomination-structured-predictable) | MM2_Session_Design.md |
+| **Example** | [three turns under the mill](../mm_manual/MM2_Session_Design.md#journeys) | MM2_Session_Design.md |
+| **Example** | [one glyph, two scopes](../mm_manual/MM2_Session_Design.md#judging-scope) | MM2_Session_Design.md |
 | **MM Note** | [where to see this chapter working](../mm_manual/MM3_Campaign_Design.md#mirror-masters-manual-campaign-design) | MM3_Campaign_Design.md |
-| **Example** | [campaign pitch: Episodic — "The Thornwall Watch"](../mm_manual/MM3_Campaign_Design.md#example-pitches) | MM3_Campaign_Design.md |
-| **Example** | [campaign pitch: Arc-Based — "The Shattered Road"](../mm_manual/MM3_Campaign_Design.md#example-pitches) | MM3_Campaign_Design.md |
-| **Example** | [campaign pitch: Sandbox — "The Free Marches"](../mm_manual/MM3_Campaign_Design.md#example-pitches) | MM3_Campaign_Design.md |
-| **Example** | [campaign pitch: Mystery-Box — "The Silence"](../mm_manual/MM3_Campaign_Design.md#example-pitches) | MM3_Campaign_Design.md |
-| **Through the Mirror** | [the first Technique is supposed to arrive early](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure) | MM3_Campaign_Design.md |
+| **Example** | [an episodic pitch: "The Thornwall Watch"](../mm_manual/MM3_Campaign_Design.md#the-campaign-pitch) | MM3_Campaign_Design.md |
+| **Example** | [an arc pitch: "The Shattered Road"](../mm_manual/MM3_Campaign_Design.md#the-campaign-pitch) | MM3_Campaign_Design.md |
+| **MM Note** | [the three novice errors](../mm_manual/MM4_Running_the_Table.md#handling-disagreements) | MM4_Running_the_Table.md |
 | **Through the Mirror** | [why a quick reference may never introduce a rule](../mm_manual/MM5_Quick_Reference.md#mirror-masters-quick-reference) | MM5_Quick_Reference.md |
+| **Reading the Entries** | [the toolbox tables](../mm_manual/MM6_The_Toolbox.md#mirror-masters-manual-the-toolbox) | MM6_The_Toolbox.md |
 
 ---
 
@@ -106,4 +72,4 @@
 
 | Box | Title | Section |
 |---|---|---|
-| **Reading the Entries** | [creatures](../bestiary/Front_Matter.md#how-to-read-this-book) | Front_Matter.md |
+| **Reading the Entries** | [creatures](../bestiary/Front_Matter.md#how-to-read-an-entry) | Front_Matter.md |

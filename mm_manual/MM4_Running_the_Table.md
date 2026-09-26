@@ -2,24 +2,25 @@
 
 ## The Mirror Master Philosophy
 
-You are not the author of the story, and you are not the antagonist. You are not even the narrator, really — not in the way that word usually implies, with its suggestion of someone who already knows what happens next.
+You aren't the author of the story, and you aren't the antagonist. You aren't even the narrator, not in the sense that word usually carries, of someone who already knows what happens next.
 
 You are the world, responding to protagonists.
 
-That distinction matters more than any other piece of advice in this chapter. The best Mirror Masters are not the ones who build the most intricate plots or the most devious encounters. They are the ones who build a world that feels alive, put interesting things in it, and then get out of the way when the players start making decisions they never anticipated.
+That distinction matters more than any other advice in this chapter. The best Mirror Masters aren't the ones who build the most intricate plots or the most devious fights. They build a world that feels alive, put interesting things in it, and get out of the way when the players start making decisions nobody anticipated.
 
-Your job is to reflect the spotlight. The name is literal. You are a mirror. The light — the attention, the drama, the narrative weight — belongs to the players. You angle it, you catch it, you throw it back at them from unexpected directions. But it is their light.
+Your job is to reflect the spotlight, and the name means it literally. The light (the attention, the drama, the weight of the story) belongs to the players. You angle it, catch it, and throw it back at them from directions they didn't expect. But it's their light.
 
-This means the best sessions are the ones where *you* were surprised. Where a player did something you hadn't considered, and you had to improvise, and what emerged was better than anything you had planned. If you finish a session and everything went exactly according to your notes, you probably talked too much.
+So the best sessions are the ones where *you* were surprised: a player did something you hadn't considered, you had to improvise, and what came out was better than your notes. If a session went exactly according to plan, you probably talked too much.
 
-Success as a Mirror Master is not measured by how clever your world is. It is measured by whether the players felt like the stars of their own story.
+A few things follow from that.
 
-A few things that follow from this:
+**Say "yes, but" more than "no."** When a player proposes something creative, look for the way to make it work: with a roll, with a cost, rarely with a flat refusal. "No" stops the story. "Yes, but" keeps it moving.
 
-- **Say "yes, and" more than "no."** When a player proposes something creative, your instinct should be to find a way to make it work — perhaps with a roll, perhaps with a complication, but rarely with a flat refusal. "No" stops the story. "Yes, but" keeps it moving.
-- **Ask questions you don't know the answer to.** "What does your character think about that?" and "How does that make you feel?" are not filler. They are invitations for the player to build the story alongside you.
-- **Prepare situations, not scripts.** Know who is in the room, what they want, and what happens if the players never show up. Do not plan what the players will do. They will not do it.
-- **Let the dice surprise you, too.** When a roll produces an outcome you didn't expect, lean into it. The game is more interesting when the MM is genuinely uncertain what happens next.
+**Ask questions you don't know the answer to.** "What does your character think of that?" isn't filler. It's an invitation to build the story with you.
+
+**Prepare situations, not scripts.** Know who's in the room, what they want, and what happens if the players never show up. Don't plan what the players will do. They won't do it.
+
+**Let the dice surprise you too.** When a roll lands somewhere you didn't expect, lean into it. The game is better when you honestly don't know what happens next, and rolling the foes' attacks in the open (see MM1) means you often won't.
 
 ---
 
@@ -27,35 +28,33 @@ A few things that follow from this:
 
 ### Setting Expectations
 
-Before the first session — ideally before character creation — have a conversation about what kind of game this is going to be. Not a lecture. A conversation. Cover these:
+Before the first session, ideally before anyone builds a character, talk about what kind of game this is going to be. A conversation, not a lecture. Cover the **tone** (light adventure, intrigue, comedy, something darker), the **content** everyone is and isn't comfortable with, the **commitment** (how often, how long, what happens when someone can't make it), and the **characters**: the game assumes a party that works together, and you should say so up front. MM2's *Session Zero* has the checklist.
 
-- **Tone.** Is this lighthearted adventure? Dark intrigue? Comedic chaos? All of those are valid. None of them work well when half the table expects one and half expects another.
-- **Content.** What subjects are off-limits? What is everyone comfortable exploring? (More on this in Safety and Consent below.)
-- **Commitment.** How often are you meeting? How long are sessions? What happens when someone can't make it?
-- **Characters.** Are the player characters a team? Do they have a reason to work together? Facets assumes cooperative play — the system does not support players who are actively working against each other, and you should say so up front.
-
-Write none of this down if your group hates paperwork. Write all of it down if your group likes structure. The format doesn't matter. The conversation does.
+Write none of it down if your group hates paperwork, or all of it if they like structure. The conversation is what matters.
 
 ### Make a Ruling, Look It Up Later
 
-This is the single most important operational principle for running a smooth table: **when a rules question comes up mid-session, make a ruling and move on.** Do not pause the game to look things up. Do not let someone read a chapter aloud while four other people check their phones.
+When a rules question comes up mid-session, make a ruling and move on. Don't pause the game to look things up, and don't let someone read a chapter aloud while four people check their phones.
 
-Make the call. Write a note. Check the book after the session. If you got it wrong, tell the table at the start of the next session and adjust going forward. No one has ever told a great story about the time the MM paused the action for six minutes to verify how Sparks interact with contested rolls.
+Make the call, write a note, and check the book after the session. If you got it wrong, say so at the start of the next one and adjust from there. Nobody has ever told a great story about the time the MM stopped the game for six minutes to check how Help works with a Spark.
 
-Your rulings will not always be correct. They will almost always be good enough. And the game will keep moving, which is the thing that actually matters.
+Your rulings won't always be right. They'll almost always be good enough, and the game will keep moving, which is what actually matters.
 
 ### Handling Disagreements
 
-Players will sometimes disagree with your calls. This is normal. It is not a crisis.
+Players will sometimes disagree with a call. That's normal, not a crisis. **Listen** to the objection. **Decide**: you may change your mind or not, and both are fine. **Move on**; once the ruling's made, the game continues. And **follow up** after the session if the player still feels strongly, not in front of the table.
 
-The protocol is simple:
+You have final say on rulings during play. That's a responsibility, not a trophy. Use it to keep the game moving and fun. If you ever find yourself citing your authority as the reason someone should accept a decision, something has gone wrong.
 
-1. **Listen.** Hear the objection. Do not dismiss it.
-2. **Decide.** You may change your mind, or you may not. Both are fine.
-3. **Move on.** Once the ruling is made, the game continues. Extended debate at the table helps no one.
-4. **Follow up.** If the player still feels strongly after the session, talk about it then. Not in front of the table, not in the middle of a scene.
-
-The underlying principle: the MM has final authority on rulings during play, but that authority is a responsibility, not a trophy. Use it to keep the game moving and the experience fun. If you find yourself citing your authority as a reason someone should accept your decision, something has gone wrong.
+> **MM Note — the three novice errors**
+>
+> Watch a new MM run this game and you'll see the same three mistakes, each a habit brought in from somewhere else. The app nudges against all three; the book should too.
+>
+> **Everything is Hard.** It feels dramatic, and it's wrong. The default is **Standard**, every time, and moving off it needs a reason you can say in one clause ("Hard, because she's expecting you"). A table where everything is Hard learns that trying things is a bad idea.
+>
+> **A 7–9 read as a penalty.** A 7–9 is a **success**. The character gets what they wanted, and a cost comes with it that gives the table something new to deal with. It is not a −1 on the next roll or a half-success. If a 7–9 ever ends with the player not getting what they went for, the roll was read wrong.
+>
+> **Turn order creeping back.** There's **no turn order** anywhere in this game, not even in a fight. Telegraph what the foes are about to do, ask the whole table what they do, and take answers as they come. If you catch yourself going round the table clockwise, stop and ask, "Who's doing what?"
 
 ---
 
@@ -63,299 +62,245 @@ The underlying principle: the MM has final authority on rulings during play, but
 
 ### The Default Register
 
-Facets of Origin is tuned for **wonder, heroism, and discovery**. The default assumption is that the world contains danger and conflict, but the register is adventure — not trauma, not horror, not cruelty for its own sake.
+Facets of Origin is tuned for **wonder, heroism and discovery**. The world has danger and conflict in it, but the register is adventure: not trauma, not horror, not cruelty for its own sake.
 
-This does not mean your game cannot go to dark places. It means that going to dark places should be a deliberate, consensual choice made by the whole table, not something that happens because the MM thought it would be dramatic.
+That doesn't mean your game can't go to dark places. It means going there is a deliberate choice the whole table makes together, not something that happens because the MM thought it would be dramatic.
 
 ### Lines and Veils
 
-Two concepts worth establishing before play:
+**Lines** are hard limits: content that won't appear in the game at all. Nobody needs to justify one. "I don't want that in our game" is a complete sentence.
 
-- **Lines** are hard limits. Content that will not appear in the game at all, under any circumstances. No one needs to justify a Line. "I don't want that in our game" is a complete sentence.
-- **Veils** are soft limits. Content that can exist in the fiction but will be handled off-screen or abstractly. "It happened, but we don't play through it."
+**Veils** are soft limits: content that can exist in the fiction but happens off-screen. "It happened, but we don't play through it."
 
-Establish Lines and Veils in the pre-session conversation. Check in periodically — people's comfort levels shift over time, and something that seemed fine in session one may feel different by session ten.
+Set both before play. Check in now and then, because comfort shifts. Something that seemed fine in session one may feel different by session ten.
 
-### The X-Card and Calibration Tools
+### The X-Card and Other Tools
 
-The **X-card** is a simple, widely-used safety tool: any player can tap or raise the card (or type "X" in chat) at any time to indicate that the current content has crossed a line. When someone uses it, you stop, adjust, and move on. No explanation required. No discussion. No negotiation.
+The **X-card** is simple and widely used: anyone can tap it, raise it, or type an X in chat at any time to say the current content has crossed a line. When someone does, you stop, adjust and move on. No explanation, no discussion.
 
-Other calibration tools exist — the **Script Change** framework (rewind, fast-forward, pause), **Lines and Veils** worksheets, **Stars and Wishes** for feedback. Use whatever your table is comfortable with. The specific tool matters less than the underlying principle: **anyone at the table can flag discomfort, and the table responds immediately.**
-
-For a thorough treatment of safety tools in TTRPGs, the TTRPG Safety Toolkit (curated by Kienna Shaw and Lauren Bryant-Monk) is freely available online and covers far more ground than this chapter can or should.
+There are other tools, such as rewind, fast-forward and pause, or stars and wishes for feedback. Use whatever your table is comfortable with. The tool matters less than the principle: **anyone at the table can flag discomfort, and the table responds at once.** For a thorough treatment, the TTRPG Safety Toolkit, curated by Kienna Shaw and Lauren Bryant-Monk, is free online and covers far more ground than this chapter should.
 
 ### Checking In
 
-Do not wait for someone to use a safety tool. Check in proactively.
+Don't wait for someone to use a tool. Before a scene you suspect will be intense: "This next part might get heavy. Is everyone good to go on?" When someone goes quiet mid-scene: a private message, a glance, a pause. After a session that went somewhere unexpected: "How did that feel? Anything we should change?"
 
-Before a scene you suspect might be intense: "This next part might get heavy — is everyone good to proceed?" During a scene if someone goes quiet: a private message, a glance, a pause. After a session that went to unexpected places: "How did that feel? Anything we should adjust?"
-
-Most discomfort never reaches the X-card. It sits quietly with a player who doesn't want to make a fuss. Your job is to notice before it becomes a problem.
+Most discomfort never reaches the X-card. It sits quietly with someone who doesn't want to make a fuss. Your job is to notice first.
 
 ### Character Death Is the Player's Call
 
-The hardest content this game can produce is the death of a character, and the rules already treat that as a consent question rather than an outcome you deliver. **Broken never kills.** A character at Tier 3 is out of the conflict, not out of the story. Death enters the game in exactly one circumstance — when a Broken result would end that character's life in the fiction — and at that moment the choice belongs to the player: a permanent scar the two of you name together, or a heroic death whose final action succeeds automatically. Never the MM's to impose, in either direction.
+The heaviest thing this game can produce is a character's death, and the rules treat it as a matter of consent, not an outcome you hand down.
 
-Which means you are never the one deciding whether a character dies, and you should not try to be. Your job at that moment is narrow: say both options plainly, out loud, and then stop talking. The silence that follows is not indecision — it is someone weighing the end of a person they have been for a year of Tuesdays. Give it as much room as it needs, and take whichever answer comes back without arguing for the more dramatic one.
+A character who drops to 0 HP takes a Wound and rolls to **Hold On**. A good roll keeps them standing or conscious. A 6− means they're dying, and an ally who tends them before the scene ends saves them. Only if nobody reaches them does the **death choice** arrive, and it belongs entirely to the player: a heroic final action that succeeds, or a life lived afterward with a permanent Scar (see Chapter III.2). Never yours to impose, in either direction.
 
-The full rule is in Chapter III.2, *When a Character Would Die*.
+So you are never the one who decides whether a character dies, and you shouldn't try to be. Your job at that moment is narrow: say both options plainly, out loud, and then stop talking. The silence that follows isn't indecision. It's someone weighing the end of a person they've played for a year of Tuesdays. Give it all the room it needs, and take whichever answer comes back without arguing for the more dramatic one.
 
 ---
 
 ## Difficult Situations
 
-Every one of these is a communication problem, not a behavior problem. People are not being difficult on purpose — or, more precisely, even when they are, the solution is still communication. Punishing unwanted behavior in-game (rocks fall, everyone dies) is not a solution. It is an escalation.
+Every one of these is a communication problem, not a behavior problem. People aren't usually being difficult on purpose, and even when they are, the answer is still to talk. Punishing unwanted behavior in the fiction (the rocks fall, everyone dies) isn't a solution. It's an escalation.
 
 ### The Player Who Dominates
 
-**What it looks like:** One player talks over others, declares actions for the party, and takes up a disproportionate share of every scene. Other players grow quiet.
+**What it looks like:** one player talks over the others, declares actions for the party, and takes up a lopsided share of every scene. The others go quiet.
 
-**What is usually happening:** This player is enthusiastic. They are engaged. They are having a great time. They genuinely may not realize they are crowding others out.
+**What's usually happening:** enthusiasm. They're engaged and having a great time, and they may honestly not notice they're crowding people out.
 
-**What to do:**
+**What to do:** at the table, direct questions to the quiet players by name. "Mordai, what are you doing while Zahna reads the records?" It's a redirect, not a correction, and the dominant player usually doesn't even notice. In tense moments, go round everyone once: "Each of you, what's your character doing right now?" If it persists, talk privately: "You're clearly into this, and I love that. Can you help me by holding back a beat sometimes, so the others jump in first?" Ask for help rather than complaining.
 
-**At the table:** Direct questions to quiet players by name. "Mordai, what are you doing while Zahna is reading the records?" This is not a correction — it is a redirect. The dominant player usually doesn't even notice.
+### The Player Who Drifts Away
 
-**Structured moments:** In tense scenes, go around the table. "Each of you — what is your character doing right now?" This gives everyone a guaranteed moment without singling anyone out.
+**What it looks like:** phone out, short answers, "I follow the group."
 
-**Privately, if it persists:** "You're clearly into this, and I love that. I want to make sure everyone else gets that same energy. Can you help me by holding back a beat sometimes and letting the others jump in first?" Frame it as a request for help, not a complaint.
+**What's usually happening:** they may be tired or distracted, or dealing with something outside the game. They may also be lost: unsure of the plot, unsure of their character's place, or feeling there's no room for what they want to do.
 
-### The Player Who Disengages
-
-**What it looks like:** Phone out. Short answers. "I follow the group." No questions, no character moments, no investment.
-
-**What is usually happening:** They may be tired, distracted, or dealing with something outside the game. They may also be lost — confused by the plot, unsure of their character's role, or feeling like the game doesn't have space for what they want to do. Or the session pacing may not match their engagement style.
-
-**What to do:**
-
-**At the table:** Create a moment specifically for them. Use their character's background, their skills, their stated interests. "The symbol on the wall — Zulnut, you've seen this before. Where?" Give them something only their character can contribute.
-
-- **Between sessions:** Ask, without pressure. "Are you having fun? Is there something you'd like more of?" Sometimes the answer is "I'm just tired" and that is fine. Sometimes the answer reveals a mismatch you can fix.
-- **Accept the range.** Not every player engages the same way. Some people are happy being along for the ride, contributing when the moment calls for it and otherwise enjoying the story. If they are having fun, that is enough.
+**What to do:** at the table, make a moment specifically for them. Use their character's background, knacks, talents and the things they've shown interest in. "The symbol on the wall. Zulnut, you've seen this before. Where?" Give them something only their character can contribute. Between sessions, ask without pressure: "Are you having fun? Is there something you'd like more of?" Sometimes the answer is "I'm just tired," and that's fine. Sometimes it shows you a mismatch you can fix. And accept the range: some people are happy along for the ride, contributing when the moment calls. If they're enjoying it, that's enough.
 
 ### The Player Who Argues Rules
 
-**What it looks like:** Frequent objections to rulings. Citing page numbers. Wanting to relitigate settled calls. Bringing up edge cases during combat.
+**What it looks like:** frequent objections, citations, relitigating settled calls, edge cases in the middle of a fight.
 
-**What is usually happening:** This player cares about fairness. They probably come from a system where precise rules adjudication mattered, and they are applying that same standard here. They are not trying to undermine you — they are trying to get the game right.
+**What's usually happening:** this player cares about fairness. They probably come from a game where precise rulings mattered, and they're holding this one to the same standard. They aren't trying to undermine you; they're trying to get it right.
 
-**What to do:**
+**What to do:** acknowledge it. "Fair point. Here's my ruling for now; let's check after the session and I'll adjust if I got it wrong." That costs you nothing and gives them what they need, which is knowing accuracy matters to you too. Hold the line on pacing: one objection, heard, is fine; a second on the same call is for after the session, and you can say so. Privately: "I appreciate that you care about getting this right. What I need is for you to trust the mid-session ruling and bring it to me afterward. Can we do that?" Most rules-minded players agree at once, once they feel heard.
 
-- **Acknowledge the concern.** "That's a fair point. Here's what I'm ruling for now — let's check the book after the session and I'll adjust if I got it wrong." This costs you nothing and gives them what they actually need: the assurance that accuracy matters to you, too.
-- **Hold the line on pacing.** One objection, heard and addressed, is fine. A second objection on the same ruling is a conversation for after the session. Say so directly: "I hear you. We're going with this for now. Let's talk after."
-- **Privately:** "I appreciate that you care about getting this right — it helps me stay honest. The thing I need from you is to trust the mid-session ruling and bring concerns to me between sessions. Can we do that?" Most rules-focused players will agree immediately once they feel heard.
+### The Player Who Derails on Purpose
 
-### The Player Who Derails Deliberately
+**What it looks like:** attacking friendly NPCs for fun, splitting the party for no reason, pursuing goals that wreck everyone else's. "It's what my character would do."
 
-**What it looks like:** Attacking friendly NPCs for fun. Splitting the party for no reason. Pursuing personal goals that actively undermine the group's objectives. "It's what my character would do."
+**What's usually happening:** sometimes testing boundaries. Sometimes boredom, making their own entertainment. Occasionally a real grievance with the game or the group, expressed sideways.
 
-**What is usually happening:** Sometimes it is a player testing boundaries. Sometimes it is a player who is bored and creating their own entertainment. Occasionally it is a player who has a genuine grievance with the game or the group and is expressing it sideways.
+**What to do:** in the moment, let the fiction respond honestly. The watch arrives, the NPC is offended, the party's name suffers. Don't escalate as punishment; let the world react as it would. If it continues: "This is a cooperative game. Your character needs a reason to work with the party. If we can't find one, let's talk about a character who has one." And privately, always: "I've noticed a pattern. Is something going on? Are you not into the game we're playing?" Sometimes the answer is yes, and the kindest thing is to help them bow out gracefully.
 
-**What to do:**
-
-**In the moment:** Let consequences happen in the fiction. The town guard responds. The NPC is offended. The party's reputation suffers. Do not escalate punitively — just let the world react honestly.
-
-**At the table, if it continues:** "This is a cooperative game. Your character needs a reason to work with the party. If we can't find one, we should talk about making a character who has one."
-
-**Privately, always:** "I've noticed a pattern. Is something going on? Are you not into the game we're playing?" Sometimes the answer is yes, and the kindest thing is to help them bow out gracefully.
-
-The nuclear option — asking a player to leave the table — exists, and sometimes it is the right call. But it is always the last resort, and it is always done privately, with respect, after other approaches have been exhausted. You are not firing an employee. You are ending a social arrangement that is no longer working for everyone involved.
+Asking a player to leave the table is a real option, and sometimes it's right. It's the last resort, done privately and with respect, after everything else. You're not firing anyone. You're ending a social arrangement that's no longer working for everyone in it.
 
 ---
 
-## Player Types and Motivations
+## What Players Come For
 
-People come to the table wanting different things. None of these wants are wrong. Your job is to create moments for each of them.
+People come to the table wanting different things, and none of them is wrong. This isn't a rigid taxonomy (most players want several of these in shifting amounts), but a loose vocabulary helps.
 
-This is not a rigid taxonomy. Most players want several of these things in different proportions, and those proportions shift from session to session. But it helps to have a loose vocabulary for what your players are looking for.
+**The tactician** wants meaningful choices with real consequences. Give them fights where the telegraph matters, where the terrain offers stunts, and where morale can be broken as well as HP run down.
 
-- **The Tactician** wants meaningful choices with real consequences. They engage most when the situation is a puzzle with multiple viable approaches. Give them encounters where positioning, resource management, and clever use of abilities matters. The exchange structure and posture system are built for this player.
-- **The Actor** wants to inhabit their character. They engage most during dialogue, personal moments, and scenes where their character's personality and history are relevant. Give them NPCs who react to them as people, not quest-dispensers. Ask them what their character is feeling.
-- **The Socializer** is here for the people at the table as much as the game. They engage most when the table is laughing, arguing in-character, or building on each other's ideas. Give them scenes that require collaboration. Create opportunities for characters to bounce off each other.
-- **The Explorer** wants to discover the world. They engage most when there are mysteries to unravel, lore to uncover, places to see. Give them details that reward curiosity. Leave things unexplained. Let them find the answers themselves.
-- **The Storyteller** wants a satisfying narrative arc. They engage most when events connect, when themes recur, when their character's choices have lasting consequences. Give them callbacks to earlier sessions. Let the story remember what they did.
+**The actor** wants to be their character. Give them NPCs who react to them as people, and ask what their character is feeling.
 
-A good session has at least one moment for each type of player at the table. You do not need to do this mechanically or consciously every time — but if you finish a session and one player never had a moment that was *for them*, notice that, and adjust next time.
+**The socializer** is here for the people as much as the game. Give them scenes that need the characters to work together and bounce off each other.
+
+**The explorer** wants to discover the world. Give them details that reward curiosity, and leave some things unexplained so they can find the answers themselves.
+
+**The storyteller** wants the arc to mean something. Give them callbacks to earlier sessions, and let the story remember what they did.
+
+A good session has at least one moment for each kind of player at your table. You don't need to plan that mechanically. But if a session ends and one player never had a moment that was for them, notice, and fix it next time.
 
 ---
 
 ## In Play: Sharing the Spotlight
 
-A well-run exchange doesn't just resolve the mechanics — it creates space for each character to matter.
+A well-run exchange does more than settle the dice. It makes room for each character to matter.
 
----
+*The party is cornered in a narrow alley. Two harbor thugs block the exit, a watch sergeant is coming from the far end, and there's a locked iron gate in the wall to their left.*
 
-The party is cornered in a narrow alley. Two Harbor Thugs are blocking the exit, a City Watch Sergeant is approaching from the far end, and there is a locked gate in the wall to their left.
+MM: "The sergeant's thirty paces out and closing. The two thugs are shoulder to shoulder at the alley mouth. Neither looks thrilled to be here, but they aren't moving. The thugs are about to rush whoever's nearest, and that's you, Mordai. The gate is old iron, rusted shut or locked, hard to tell from here. What do you do?"
 
-**MM:** "The Sergeant is thirty paces out and closing. The two thugs are shoulder-to-shoulder at the alley mouth, and neither looks thrilled about being here, but they are not moving. The gate is old iron, rusted shut or locked — hard to tell from here. What do you do?"
+**Mordai:** "I put myself between the thugs and the others."
 
-**Mordai:** "I put myself between the thugs and the others. Aggressive posture."
+**Zahna:** "The gate. Can I see a lock?"
 
-**Zahna:** "The gate — is there a lock mechanism I can see?"
+MM: "A heavy padlock. Corroded, but working."
 
-**MM:** "A heavy padlock. Corroded but functional."
+**Zahna:** "I work out how it opens."
 
-**Zahna:** "I examine the lock mechanism — Intelligence to work out how it functions?"
+MM: "Standard. Roll Mind."
 
-**MM:** "Standard. Roll it."
+→ Zahna rolls **2d6 + Mind (+2)** and gets an **11**. Full success.
 
-→ Zahna rolls **2d6 + Intelligence (3 → +1)** and gets an **11**. Full success.
-
-**MM:** "The lock is old. The pin mechanism is a simple two-tumbler design — crude, but the corrosion has essentially welded it in place. Brute force would work. So would something thin and precise in the keyhole."
+MM: "Two tumblers, crude, and the rust has more or less welded them in place. Brute force would work. So would something thin and precise in the keyhole."
 
 *Zahna glances at Zulnut.*
 
-**Zulnut:** "I'm already there." *He produces a bent nail from somewhere.* "Dexterity?"
+**Zulnut:** "I'm already there." *He produces a bent nail from somewhere.*
 
-**MM:** "Standard. Though the Sergeant is getting closer — this is about speed as much as finesse."
+MM: "Standard, but the sergeant is getting closer, so this is about speed as much as finesse. Body."
 
-→ Zulnut rolls **2d6 + Dexterity (3 → +1) + Finesse Practiced (+1)** and gets a **9**. Partial success.
+→ Zulnut rolls **2d6 + Body (+2)** and gets a **9**. Success, with a cost.
 
-**MM:** "The lock pops — but it takes a second longer than you wanted. The Sergeant has halved the distance and is calling for you to stop."
+MM: "The lock pops, but it takes a second longer than you wanted. The sergeant has halved the distance and is shouting at you to stop."
 
-(The MM notices that Mordai's player has been quiet, holding position. Time to make that matter.)
+(The MM notices Mordai's player has been quiet, holding position. Time to make that matter.)
 
-**MM:** "Mordai — the thugs see the gate opening. One of them moves toward it. What do you do?"
+MM: "Mordai, the thugs see the gate open. One of them goes for it. What do you do?"
 
 **Mordai:** "He doesn't get past me."
 
-**MM:** "He doesn't."
+MM: "He doesn't."
 
-*The thug pulls up short. Mordai hasn't drawn a weapon. He hasn't moved. He is simply standing there, and it is enough.*
+*The thug pulls up short. Mordai hasn't drawn a weapon. He hasn't moved. He's standing there, and it's enough.*
 
 **Zulnut:** "Go. Now."
 
 *Zahna goes through the gate. Zulnut follows. Mordai backs through last, eyes on the alley.*
 
-(Every character contributed something only they could. Zahna identified the solution. Zulnut executed it. Mordai held the line. The MM didn't plan this — the MM put three things in an alley and let the players figure out which ones mattered.)
+(Every character did something only they could. Zahna found the answer, Zulnut executed it, and Mordai held the line. The MM didn't plan any of that. The MM put three things in an alley and let the players work out which ones mattered.)
 
 ---
 
-## Online Play Considerations
+## Playing Online
 
-### The Energy Difference
+### The Energy Is Different
 
-Online sessions have a different energy than in-person ones. This is not a failing — it is a fact. Some things are harder online. Some things are easier. The MM who acknowledges this and adjusts will run better sessions than the one who tries to replicate the in-person experience exactly.
-
-**What is harder online:**
-- Reading body language and emotional cues
-- Crosstalk and natural interruption (the lifeblood of good table banter)
-- Sustained attention over long sessions
-- The physical pleasure of rolling dice, moving tokens, being in a shared space
-
-**What is easier online:**
-- Scheduling across distances and time zones
-- Private communication between MM and individual players
-- Digital tools handling bookkeeping, dice rolling, and state tracking
-- Accessibility for players with mobility, sensory, or social challenges
+Online sessions feel different from sessions around a table. That isn't a failing, just a fact. Some things are harder online: reading faces, cross-talk and banter, holding attention over a long session, the physical pleasure of dice in the hand. Some things are easier: scheduling across distance, private messages between you and one player, the app carrying the bookkeeping, and access for players who find a physical table hard to get to. The MM who adjusts runs better sessions than the one who tries to recreate the kitchen table.
 
 ### Practical Adjustments
 
-**Shorter sessions.** Three hours in person might be two hours online. Attention spans compress when you are staring at a screen. Plan accordingly — tighter scenes, fewer encounters per session, more frequent breaks.
+**Shorter sessions.** Three hours in person might be two online. Plan tighter scenes and more breaks.
 
-**Cameras optional but helpful.** Seeing faces helps everyone read the room. But not everyone is comfortable on camera, and mandatory cameras create a barrier to entry that is not worth the cost. Let players choose. If cameras are off, compensate with verbal check-ins: "How is everyone feeling about this?"
+**Cameras optional but helpful.** Faces help everyone read the room, but mandatory cameras keep some people away. Let players choose, and if cameras are off, check in out loud more often.
 
-**Managing cross-talk.** Online platforms flatten conversation. Two people talking at once produces noise, not banter. Develop a light hand-raising or queue system for tense scenes. In relaxed moments, let it be messy — some crosstalk is healthy.
+**Manage cross-talk.** Online, two people talking at once is noise, not banter. Use a light hand-raise in tense scenes and let it be messy in relaxed ones.
 
-**Use the digital tools.** Facets of Origin is designed for digital play. The software handles simultaneous posture declaration, dice rolling, character state, and Endurance Pool tracking. Let it do its job. The less time you spend on logistics, the more time you spend on story.
+**Let the app carry it.** The app rolls the dice, tracks HP, slots, Wounds and Fatigue, rolls the foes' attacks in the open, and keeps the Toolbox a click away. Let it do its job. The less time you spend on logistics, the more you spend on the story.
 
-**The chat channel is your friend.** Players can use text chat to communicate in-character side conversations, pass notes, react to events without interrupting narration. Encourage this. It adds a layer of engagement that doesn't exist at a physical table.
+**Use the chat.** Players can pass notes, run side conversations in character and react without interrupting you. Encourage it.
 
-**Energy management.** Check in at the midpoint of every session. Not "are you having fun" (people will say yes reflexively) but "do we have energy for one more scene, or should we find a stopping point?" Trust the answers.
+**Check the tank.** At the midpoint of every session, ask: "Do we have energy for one more scene, or should we find a stopping point?" Not "are you having fun," which everyone answers yes. Trust the answers.
 
-**End on a moment.** This applies to any session, but it is especially important online where the energy cliff is steeper. End on a revelation, a cliffhanger, a quiet character moment — something that makes people think about the game between sessions. "We'll pick up here next week" is fine. "We'll pick up here next week, with Mordai standing in the doorway of the room he was told didn't exist" is better.
+**End on a moment.** "We'll pick up here next week" is fine. "We'll pick up next week with Mordai standing in the doorway of the room he was told didn't exist" is better, and online, where the energy falls off a cliff at the end, it matters more.
 
 ---
 
 ## Growing as an MM
 
-Running a game is a skill. Like any skill, you get better at it by doing it, reflecting on it, and being patient with yourself while you learn.
+Running a game is a craft. You get better at it by doing it, thinking about it afterward, and being patient with yourself while you learn.
 
 ### After Every Session
 
-Take five minutes — not more — and ask yourself three questions:
+Take five minutes, no more, and ask yourself three questions. **What moment worked?** The scene that landed, the description that got a reaction, so you can do it again. **What moment didn't?** The scene that fell flat or the fight that dragged, so you can adjust (not to beat yourself up). **What surprised me?** The choice you didn't expect, the roll that changed everything. Those are the best moments; notice what made room for them.
 
-1. **What moment worked?** The scene that landed, the description that got a reaction, the ruling that felt right. Identify it so you can do it again.
-2. **What moment didn't?** The scene that fell flat, the encounter that dragged, the moment a player checked out. Identify it so you can adjust. Not to beat yourself up — to learn.
-3. **What surprised me?** The player decision you didn't expect, the roll that changed everything, the moment the game went somewhere you hadn't planned. These are the best moments. Notice what enabled them.
+### Asking for Feedback
 
-You do not need to write this down, though some MMs find a brief session journal helpful. The act of asking is what matters.
-
-### Getting Feedback
-
-Ask your players. Not "did you have fun?" (they will say yes) but specific questions:
-
-- "What was the best moment for you tonight?"
-- "Was there anything you wanted to do but didn't get a chance to?"
-- "Is the pacing working for you — too fast, too slow, about right?"
-- "Is there anything about your character you wish the game explored more?"
-
-Ask these between sessions, not at the table. Give people time to think. Accept the answers without defensiveness — they are giving you a gift, even when the feedback is "that part was kind of boring."
+Ask your players, but not "did you have fun?" Try: "What was the best moment for you tonight?" "Was there anything you wanted to do and didn't get to?" "Is the pace working: too fast, too slow, about right?" Ask between sessions, not at the table, so people have time to think. Take the answers without defending yourself. They're a gift, even when the gift is "that part was a bit boring."
 
 ### Common Early Mistakes
 
-Everyone makes these. They are not failures — they are the learning curve.
+Everyone makes these. They're the learning curve, not failures.
 
-- **Over-preparing.** You wrote three pages of backstory for an NPC the players spoke to for forty seconds. The fix: prepare problems, not scripts. Know what the NPC wants. Improvise the rest.
-- **Under-preparing.** You had nothing ready and spent half the session stalling. The fix: a one-page session outline with three bullet points — what is the situation, what are the NPCs doing, what happens if the players do nothing.
-- **Saying no too much.** A player tried something creative and you shut it down because it wasn't in your plan. The fix: your plan is a suggestion. The players' enthusiasm is the game.
-- **Saying yes too much.** You let a player do something that trivialized a challenge because you didn't want to say no. The fix: "Yes, and here is what it costs" is almost always better than either "no" or "sure, no problem."
-- **Talking too much.** You described a room for four minutes. No one remembers anything past the first thirty seconds. The fix: three details. That is all a room needs. Three things the players can see, hear, or interact with. Everything else is answered when they ask.
-- **Not talking enough.** You skimmed a description and the players had nothing to latch onto. The fix: those three details should be specific and concrete. Not "a large room" but "a room with a cracked mosaic floor, a smell like old copper, and a door that is slightly ajar."
-- **Never calling for Luck or Spirit.** Most rolls players volunteer for themselves lean on Body and Mind — climb, strike, notice, recall. Luck and Spirit earn their points through the rolls the *MM* invokes: the coincidence that wants a Gamble, the presence that wants an Attune. Call for them. Otherwise the players who invested there never get to spend what they paid for, and the ones who didn't learn that shorting those attributes was the right call.
-- **Letting a fight drag.** The encounter has been running for six exchanges and everyone is going through the motions. The fix: if the outcome is no longer in doubt, narrate the conclusion. "The last two thugs break and run." The exchange structure is there for when it matters. When it stops mattering, stop using it.
-- **Making it about you.** Your favorite NPC delivered a monologue. Your cool plot twist took center stage. The players watched politely. The fix: NPCs exist to create situations for the players to resolve. If an NPC is talking for more than sixty seconds without a player responding, you have become the audience for your own game.
+**Over-preparing.** Three pages of history for an NPC the party spoke to for forty seconds. Prepare problems, not scripts; know what the NPC wants and improvise the rest.
 
-### Stealing Shamelessly
+**Under-preparing.** Nothing ready, and half the session spent stalling. A one-page outline fixes it: what's the situation, what are the NPCs doing, and what happens if the players do nothing? MM2's *Prep by the Clock* has the twenty-minute version.
 
-Every experienced MM has a collection of things they stole from other games, books, films, and conversations. This is not a character flaw. It is the job.
+**Saying no too much.** A player tried something creative and you shut it down because it wasn't in your plan. Your plan is a suggestion. Their enthusiasm is the game.
 
-Steal situations, not stories. You do not need the plot of a novel or a film's three-act structure — you need the premise of its most interesting chapter, the scene where the characters are trapped in a room with a problem they cannot punch their way out of.
+**Saying yes too much.** You let something trivialize a challenge because you didn't want to say no. "Yes, and here's what it costs" is almost always better than either.
 
-Keep a note somewhere — a phone app, a scrap of paper, a text file — for moments that give you ideas. An interesting historical fact. A building you walked past. A line of dialogue from a show. A question someone asked you. Most of these will never become anything. A few will become the best sessions you ever run.
+**Talking too much.** A four-minute room description. Nobody remembers past the first thirty seconds. Three details are all a room needs; the rest gets answered when they ask.
 
-### Being Kind to Yourself
+**Not talking enough.** A skimmed description gives the players nothing to hold. Those three details should be concrete: not "a large room" but "a cracked mosaic floor, a smell like old copper, and a door standing slightly open."
 
-You will have bad sessions. Sessions where the pacing was off, where the players seemed bored, where the big reveal landed with a thud, where you forgot a rule and it mattered. These sessions happen to everyone. They happen to experienced MMs. They will happen to you.
+**Forgetting Soul.** Players volunteer Body and Mind rolls all night: climb, fight, notice, recall. Soul gets rolled when *you* call for it: nerve under pressure, reading a stranger, the long shot that needs luck. Call for it. Otherwise the players who built around Soul never get to use what they chose.
 
-A bad session is not evidence that you are a bad MM. It is evidence that you are a person running a complex, improvisational, collaborative creative exercise in real time, and sometimes that does not go perfectly.
+**Letting a fight drag.** Six exchanges in, and everyone's going through the motions. If the outcome isn't in doubt anymore, narrate the end. Roll morale if you haven't. "The last two drop their clubs and run."
 
-The players at your table chose to spend their evening with you. They will be back next week. That tells you everything you need to know.
+**Making it about you.** Your favorite NPC gave a monologue; your plot twist took center stage; the players watched politely. NPCs exist to make situations for the players to deal with. If one talks for more than a minute without a player answering, you've become the audience for your own game.
+
+### Steal Shamelessly
+
+Every experienced MM carries a collection of things lifted from other games, books, films and conversations. That isn't a flaw; it's the job. Steal situations, not stories: not a novel's plot, but the premise of its best chapter, the scene where the characters are stuck in a room with a problem they can't punch. Keep a note for anything that gives you an idea. Most of it will never become anything. A few will become the best sessions you ever run.
+
+### Be Kind to Yourself
+
+You'll have bad sessions: the pacing was off, the players seemed bored, the big reveal landed with a thud, you forgot a rule and it mattered. They happen to everyone, including people who've been doing this for decades. A bad session isn't evidence that you're a bad MM. It's evidence that you're a person running a collaborative, improvised story in real time, and sometimes that doesn't go perfectly.
+
+The people at your table chose to spend their evening with you, and they'll be back next week. That tells you what you need to know.
 
 ### The Long Game
 
-The MM who runs their tenth session is meaningfully better than the MM who ran their first. The MM who runs their fiftieth is better still. Not because they have memorized more rules or built more elaborate worlds, but because they have developed instincts: when to push, when to hold back, when to let silence do the work, when a scene needs to end.
+The MM running their tenth session is noticeably better than the one who ran their first, and the fiftieth better still. That isn't because they've memorized more rules. It's because they've grown instincts: when to push, when to hold back, when to let a silence work, when a scene needs to end. You grow them the way anyone grows an instinct, by paying attention. Every session is information.
 
-You develop these instincts the same way you develop any instinct — by paying attention. Every session is data. Every player reaction is feedback. Every moment that landed, and every moment that didn't, teaches you something about how stories work and how people engage with them.
-
-There is no point at which you have "figured it out." The MMs who have been doing this for decades will tell you the same thing: they are still learning, still surprised, and they still have bad sessions.
-
-That is the whole point. If you could master it completely, it would stop being interesting. The fact that every table is different, every group dynamic is new, every campaign is a fresh experiment — that is what makes this worth doing for years.
+There's no point where you've figured it out. The people who've run games for thirty years will tell you they're still learning, still surprised, and still have bad nights. That's the point. Every table is different and every campaign is a fresh experiment, which is exactly why it's worth doing for years.
 
 ---
 
 ## Quick Reference: Running the Table
 
 ```
-Before the Campaign
-  - Discuss tone, content, commitment, and character cooperation
-  - Establish Lines and Veils
-  - Choose safety tools the table is comfortable with
+BEFORE THE CAMPAIGN
+  - Talk tone, content, commitment, and a party that works together
+  - Set lines and veils; choose the safety tools
+  - Say how the death choice works before it matters
 
-Before Each Session
-  - One-page outline: situation, NPC goals, what happens if players do nothing
-  - Review notes from last session
-  - Check in on any open player concerns
+BEFORE EACH SESSION
+  - One page: the situation, what the NPCs want, what happens if nobody acts
+  - Reread last session's notes
+  - Any open player concerns?
 
-During Play
-  - Make rulings, not research trips
-  - Direct questions to quiet players by name
-  - Three details per scene — specific and concrete
-  - Check in proactively, especially before intense scenes
-  - Let consequences flow naturally from choices
+DURING PLAY
+  - Rulings, not research trips
+  - Standard by default; a 7-9 is a success with a cost; no turn order
+  - Questions to quiet players, by name
+  - Three concrete details per scene
+  - Check in before intense scenes, and whenever someone goes quiet
 
-After Each Session
-  - Three questions: what worked, what didn't, what surprised you
-  - Periodic player feedback between sessions
-  - Adjust and keep going
+AFTER EACH SESSION
+  - What worked, what didn't, what surprised you
+  - Feedback between sessions, not at the table
 ```

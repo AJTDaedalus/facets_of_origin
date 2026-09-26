@@ -1,62 +1,53 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: veteran_soldier
 name: Veteran Soldier
-
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
-
+    version: 1.0.0
 enemy:
-  tier: named
-  resolve: 4
-  attack_modifier: 3    # Strength +2, Combat Practiced +1
-  armor: light
-  techniques: [telegraphed_finisher]
-  # Telegraphed Finisher (MM1, Three Worked Enemy Techniques): once per
-  # scene, against a character already carrying a Tier 2 Condition, its
-  # attack repeats that Condition's type — a landed repeat is Broken.
-  # Named one full exchange before it can land. Always.
-  special: null
-  tr: 11                # offense(+3→5) + durability(Resolve 4) + armor(light→1) + techniques(1) = 11
+  # v0.3: Named, durability 4, attack +3, light armor, Telegraphed Finisher, rating 11.
+  level: 4
+  role: elite
+  armor: 1
+  morale: 9
+  weapon: Soldier's sword
+  wants: To be paid, to go home, and to finish this without a new scar.
+  special: 'TELEGRAPHED FINISHER — once per scene, against a character already below half
+    HP, it names the blow a full exchange early: the measured step, the blade drawn back.
+    Next exchange it makes that one attack, and only that one, and a hit deals double damage.'
+  when_bloodied: It stops committing and Defends (no attack; attacks on it are Hard) until
+    someone in the party is below half HP; then it comes back for them.
+  tells: It watches weight, not weapons, and it has not wasted a movement since the fight
+    started.
+  breaks: 'Withdraws in good order when the fight stops being worth the wound. It never routs:
+    it walks backwards, blade up.'
+  twists:
+  - Three of them served together, and all three will leave at the same moment.
+  - It recognises a party member's training, and says out loud where they learned it.
+  - It is guarding someone it despises, for money it needs.
+  - 'It carries an old wound: on a natural 12 against it, the wound opens and it withdraws.'
+  - Its pension was stopped last month, and whoever stopped it is the party's real opponent.
+  - It offers single combat, to spare the people it came with.
+  nastier: Level 6, and it can name the Finisher twice a scene.
+  description: >-
+    A hardened fighter with years of real combat experience. Not a tactician — a survivor.
+    Knows how to absorb punishment, how to read an opponent's weight shift, and exactly how
+    long to wait before committing. Fights economically: no wasted motion, no bravado. Will
+    press hard only when the opponent is already compromised. Difficult to rattle, difficult
+    to put down.
+  notes: >-
+    Level 4 elite, armor 1: no overrides. One level above the latchman because it hit harder
+    (attack +3) and carried a signature move.
 
-  disposition: >
-    Trained, unhurried, and entirely without anything to prove.
 
-  morale: >
-    Withdraws in good order when a fight stops being worth the wound.
-    Does not rout.
+    Trained, unhurried, and entirely without anything to prove. Not a tactician: a survivor.
+    Its first target is the party member who looks most dangerous; it shifts to whoever is
+    already hurt, and that is when the Finisher comes out, with the whole table given one
+    exchange to answer it (Defend, Intercept, or get out of reach).
 
-  description: >
-    A hardened fighter with years of real combat experience. Not a
-    tactician — a survivor. Knows how to absorb punishment, how to
-    read an opponent's weight shift, and exactly how long to wait
-    before committing. Fights economically: no wasted motion, no
-    bravado. Will push Aggressive only when the opponent is already
-    compromised. Difficult to rattle, difficult to put down.
 
-  tactics: >
-    Posture: Measured by default. Goes Aggressive if a party member
-    is Cornered or Staggered. Goes Defensive from the exchange it is
-    first left Open onward.
-    Defends by meeting force with the blade, not by giving ground —
-    while set (Measured or Defensive), lean toward Hard difficulty
-    for Strikes against them (Chapter III.3). Targets the fullest-Endurance-Pool
-    party member first to neutralize the biggest threat; shifts to
-    a Cornered/Staggered party member to press the advantage — and
-    that is when the Telegraphed Finisher comes out: the measured
-    step, the blade drawn back, the whole table given one exchange
-    to answer it.
-
-  notes: >
-    TR breakdown: offense(+3 → value 5) + durability(Resolve 4)
-    + armor(light → 1) + techniques(1) = 11. (Was 10; gained the
-    Telegraphed Finisher when MM1's worked enemy Techniques landed.)
-    Actor count drives difficulty, not total TR (MM1, Encounter Recipe
-    Table): a single Named enemy, however high its TR, is trivial for
-    a fresh party. Use Veteran Soldier as part of a multi-actor roster
-    to reach Standard or Hard difficulty, not alone.
-
-created_at: '2026-03-05T00:00:00+00:00'
-last_modified: '2026-08-08T00:00:00+00:00'
+    A single elite is a real fight for a level 1 party of three; use it with company when
+    you want a hard one.
+  reskin_of: null

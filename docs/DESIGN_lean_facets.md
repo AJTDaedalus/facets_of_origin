@@ -37,7 +37,7 @@ Fatigue fills a slot; a night's rest clears it. No free slot, no full working. *
 
 **Gear.** Items take 1 slot (heavy armor and heavy weapons 2); Wounds and Fatigue take slots; 100 coin per slot. **Usage die** (d8 → d6 → d4 → gone): roll after a scene of use; 1–2 steps it down. Curios (one-use, carry 3), relics (a power and a quirk; anyone may use one — a relic does not make its bearer a caster).
 
-**Monsters.** Level 1–10 sets HP / damage / attack from `monsters.level_table`; role modifies (Mook, Standard, Elite ×2 HP two attacks, Boss ×4 HP two attacks +1 damage and a Bloodied phase); armor 0–2; morale 2–12 (default 7, fearless 12). The card: WANTS · SPECIAL · WHEN BLOODIED · TELLS · BREAKS · TWISTS (d6) · NASTIER (optional).
+**Monsters.** Level 1–10 sets HP / damage / attack from `monsters.level_table`; role modifies (Mook, Standard, Elite ×2 HP two attacks, Boss ×5 HP two attacks +2 damage +1 attack and a Bloodied phase); armor 0–2; morale 2–12 (default 7, fearless 12). The card: WANTS · SPECIAL · WHEN BLOODIED · TELLS · BREAKS · TWISTS (d6) · NASTIER (optional).
 
 ---
 

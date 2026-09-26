@@ -1,494 +1,339 @@
 # Mirror Master's Manual: Encounters and Enemies
 
-Building a fight is three jobs, and only one of them is arithmetic.
+A fight is a question with teeth. *Can they hold the bridge? Will the ogre take the toll or the traveler? Who breaks first?* Everything in this chapter is there to make that question sharper and the answer quicker to reach.
 
-The first is **stating an enemy** — the smallest set of numbers that lets you run something in a full exchange without writing it a character sheet. The second is **rating it**, so you can compare a harbour tough to an archive guardian without playing both fights first. The third is **choosing how many**, which is the one that actually decides whether your table has a good evening, and the one where the obvious tool is the wrong tool.
+The work comes in five parts. **Reading a monster card**, so you can run anything in the Bestiary without studying it. **Choosing a level and a role**, which gives you every number a foe needs. **Deciding how many**, which decides whether your table has a good evening. **Running the exchange**: telegraphing, rolling in the open, morale and the Bloodied moment. And **converting**, for the night you want a creature from some other book.
 
-This chapter does them in that order, and it is honest about which of its numbers are simulation-validated and which are educated guesses.
+There's less arithmetic here than you might expect. A foe has one dial, its level, and one choice, its role. Everything else on the card is behavior, because behavior is what your players will actually remember.
 
-And when you would rather not build anything: the **Bestiary** is eighteen creatures that arrive finished, sorted by Threat Rating, every one of them already carrying the conduct this chapter would otherwise have you invent.
-
-This chapter gives you the tools to build enemies, assign them a Threat Rating, and calibrate how hard an encounter will feel for a given party — without requiring a full character sheet for every bandit in the room.
-
-The system has three layers:
-
-1. **Enemy stat blocks** — a minimal set of numbers sufficient to run any enemy in the full exchange structure
-2. **Threat Rating (TR)** — a single number summarizing how dangerous one enemy is
-3. **The Encounter Recipe Table** — simulation-validated rosters mapped to difficulty; this is the tool you actually build encounters from. Actor count, not summed TR, is what drives difficulty (see *Sizing an Encounter*, MM1).
+When you would rather not build anything, the **Bestiary** is a catalog of creatures that arrive finished, each already carrying the fields this chapter would otherwise have you write.
 
 ---
 
-## Enemy Stat Blocks
+## The Monster Card
 
-Enemy stat blocks are intentionally minimal. You do not need everything a player character has. You need enough to run the exchange structure faithfully.
+Every foe in these books, from a chicken to a city's last defender, is written on the same card. The numbers sit on two lines at the top. The rest is a handful of short fields that tell you what the thing does when the party is in front of it.
 
-### The Minimal Stat Block
+> **Reading the Entries — the monster card**
+>
+> **Name line:** the creature's name, then its **level** (1–10) and its **role** (Mook, Standard, Elite or Boss).
+>
+> **Numbers line:** **HP**, **armor** (0–2), **attack** (the bonus on its 2d6), **damage** (a flat number per hit), **attacks** per exchange, and **morale** (2–12). HP, attack, damage and attacks come from the level and role (Tables MM1–1 and MM1–2); armor and morale are chosen to fit the creature. A number flagged with **†** has been set by hand rather than read off the tables.
+>
+> **WANTS:** what it's doing when the party meets it, in one line. This is what you play when nobody has drawn a weapon yet.
+>
+> **SPECIAL:** the one thing that makes it more than a generic brute, stated so you can run it without asking anyone.
+>
+> **WHEN BLOODIED:** what changes when it drops to half its HP. For a Boss, this is its second phase.
+>
+> **TELLS:** what the party can see, hear or learn before the SPECIAL bites. Information before impact.
+>
+> **BREAKS:** what it does when its morale fails: flees, surrenders, bargains, or something stranger.
+>
+> **TWISTS (d6):** six one-line variations. Roll one, or pick one, and the same card gives you a different fight.
+>
+> **NASTIER:** optional. One extra line for a harder version, used when the party has outgrown the plain one.
+>
+> A missing NASTIER means the card offers no harder version; use a higher level instead. Every other field is always present.
+
+The order is the order you need them in. WANTS matters when the party first sees it. TELLS matters while they're deciding what to do. SPECIAL and WHEN BLOODIED matter once the fight is running, and BREAKS matters at the end. TWISTS you use at the prep table, before any of that.
+
+Here's a card built from scratch, so you can see every field doing its job. It's an example, not a creature from any setting.
 
 ```
-Name/Type
-Tier: Mook | Named | Boss
-Resolve: [number]  — the durability pool Strikes deplete; Named 3–4, Boss ~8; Mooks have none
-Attack: [modifier]  — e.g. +2 (Strength +1, Combat Practiced +1)
-Armor: None | Light | Heavy  — adds a flat bonus to Resolve (light +1, heavy +2)
-Techniques: [list, if any]
-Special: [phase changes, triggers, or narrative rules — Boss only]
-TR: [Threat Rating — calculated below]
+TOLL OGRE                                   Level 3 Elite
+HP 28   Armor 1   Attack +2   Damage 6   Attacks 2   Morale 8
+
+WANTS          A toll from everyone who crosses its bridge, and it
+               decides the price by looking at you.
+SPECIAL        Grab and hurl: on a hard hit it can throw its target
+               off the bridge instead of dealing damage.
+WHEN BLOODIED  It drops the club, grabs the rail with both hands and
+               shakes the whole span. Everyone on the bridge must
+               avoid it with Body or go over the side.
+TELLS          Coins nailed to the rail. Torn cloaks snagged on the rocks
+               below. It licks its lips at anyone light enough to throw.
+BREAKS         It jumps into the river and swims for its cave, cursing.
+TWISTS (d6)    1 Two of them, and they argue about the toll.
+               2 It has a toll collector: a frightened child it stole.
+               3 The bridge is rotten; the ogre knows exactly which
+                 planks are safe.
+               4 It's lonely, and the toll is an hour of conversation.
+               5 A rival is paying it to let nobody cross today.
+               6 It is guarding the bridge for a family that
+                 stopped paying it years ago.
+NASTIER        It throws people at other people.
 ```
 
-An enemy has no Condition track of its own. A PC's Strike depletes Resolve — 2 on a full success (10+), 1 on a partial (7–9) — and the enemy is defeated when Resolve reaches 0. On a full success the attacker also chooses a **rider** — **Open** (Easy to Strike for everyone, with the player narrating what it looks like) or **Position** (the next roll against it is Easy, this exchange or the next). Both expire on their own: Open clears at the end of the exchange with the Tier 1 Conditions, and Position is spent by the next roll against the target.
-
-That expiry is deliberate, and it changes your job. You have no anti-snowball move to spend, because you no longer need one: the window shuts by itself, and your enemy keeps its action while it is open. What you *do* have is the three levers the stat block already gives you — **change its stance**, **use its Technique**, and **change its target**. An Open Boss that answers a good hit by turning on the character who landed it is the fight arguing back, and it costs the enemy nothing it was going to spend anyway. Neither rider defeats an enemy on its own. A **Mook** has no Resolve at all: any success removes it (an armored Mook needs a full success).
-
-**Named NPC example** — City Watch Sergeant:
-```
-City Watch Sergeant
-Tier: Named
-Resolve: 3
-Attack: +2 (Strength +1, Combat Practiced +1)
-Armor: Light
-Techniques: —
-TR: 8
-```
-
-**Mook example** — Harbor Thug:
-```
-Harbor Thug
-Tier: Mook
-Resolve: — (Mooks have no pool; one Strike removes them)
-Attack: +0 (Strength +0, Combat Novice +0)
-Armor: None
-TR: 2
-```
-
-**Boss example** — The Archive Guardian (from Chapter III.3):
-```
-Archive Guardian
-Tier: Boss
-Resolve: 8 (effective 10 with heavy armor)
-Attack: +3 (Strength +2, Combat Expert +2, −1 from fifteen years of wear) — iron weight, not technique
-Armor: Heavy
-Techniques: phase_change
-Special: Phase change — when Resolve drops to 2 or below, enters Reduced Mode
-         (Attack drops to +1 and its blows land as Tier 1, but it stops
-         registering harm — its blows land Tier 2 again, and it fixes on
-         whoever last opened it)
-TR: 16
-```
+Read the card top to bottom and the whole fight is already there. WANTS says the party can pay and walk on. TELLS says what happens to people who don't. SPECIAL says what a hard hit looks like, and WHEN BLOODIED gives the fight a second act without a single new number. BREAKS says it won't fight to the death, and the TWISTS say there are at least six other ways this bridge could go.
 
 ---
 
-## Threat Rating
+## Level and Role
 
-**Threat Rating (TR)** is a single number summarizing how dangerous an enemy is in combat. It is not a precise simulation — it is a calibration tool.
+### The Level Table
 
-### Calculating TR
+A foe's level sets three numbers: how much HP it has, how hard it hits, and the bonus it adds to its attack roll. Read the row and you're done.
 
-```
-TR = offense + durability + armor_bonus + technique_bonus
-```
+**Table MM1–1: Monster Levels**
 
-**Offense** — the enemy's attack modifier (attribute + skill, an authoring input — NPCs don't roll):
+| Level | HP | Damage | Attack |
+|---|---|---|---|
+| 1 | 8 | 4 | +1 |
+| 2 | 11 | 5 | +1 |
+| 3 | 14 | 6 | +2 |
+| 4 | 17 | 7 | +2 |
+| 5 | 20 | 8 | +2 |
+| 6 | 23 | 9 | +3 |
+| 7 | 26 | 10 | +3 |
+| 8 | 29 | 11 | +3 |
+| 9 | 32 | 12 | +4 |
+| 10 | 35 | 13 | +4 |
 
-**Table MM1–1: Offense Value by Attack Modifier**
+Damage is a flat number, not a roll: a level 3 foe that hits deals 4, before the target's armor comes off. A hard hit adds 2 (see *Rolling in the Open*, MM1). Monster levels use the same 1–10 scale as the characters', which is the point: a level 5 foe is a fair match for one level 5 character.
 
-| Attack Modifier | Offense Value |
+### Roles
+
+The role says how the foe fights and how much of the scene it owns. It changes the numbers from Table MM1–1 in fixed ways.
+
+**Table MM1–2: Roles**
+
+| Role | HP | Damage | Attack | Attacks | Also |
+|---|---|---|---|---|---|
+| Mook | drops to any hit (7+) | −1 | −1 | 1 | Attacks as one mob: +1 damage per extra Mook, up to +4 |
+| Standard | as the level | +0 | +0 | 1 | — |
+| Elite | ×2 | +0 | +0 | 2 | — |
+| Boss | ×5 | +2 | +1 | 2 | Has a Bloodied phase |
+
+**Mooks** are the crowd: thugs, rats, cultists in matching robes. They have no HP to track. Any attack that hits, a 7–9 as much as a 10+, drops one. They don't attack one by one. A group of Mooks makes a single attack roll as a mob, and each Mook beyond the first adds 1 to its damage, to a maximum of +4. Five Mooks at level 2 roll once at +0 and deal 2 + 4 = 6 on a hit. When three of them are down, the survivors deal 2 + 1 = 3. The mob gets weaker as it gets smaller, which is exactly how a crowd should feel.
+
+**Standard** foes are the default: a sergeant, a wolf, a hired sword. One attack, the level's HP.
+
+**Elites** are the foes a scene is built around: the ogre on the bridge, the captain of the guard. Double HP and two attacks per exchange, which means an Elite can threaten two characters at once or hit one of them twice.
+
+**Bosses** are the reason the session happened. Five times the HP, two attacks, +2 damage and +1 to attack, and a WHEN BLOODIED line that changes the fight halfway through. A Boss with no second phase is just a large Standard foe, and your players will feel the difference.
+
+### Armor and Overrides
+
+Armor runs from 0 to 2 and comes off each hit the party lands, to a minimum of 1 damage. Hide and scale are 1, plate or stone is 2. Most foes are 0 or 1.
+
+A card may override any number by hand, with a † on the card to show it. Use this sparingly: the bog creature whose HP is half again what its level says, the construct with armor 3 because that is the entire point of it. If you find yourself overriding three numbers, you've picked the wrong level.
+
+### Choosing a Level
+
+Start at the party's level. Go up a level or two for a foe that should feel dangerous, down a level or two for one that should feel like a warm-up. Stay inside a two-level band either side and the fight will behave the way Table MM1–4 predicts.
+
+The rules put a hard edge on the far side. A foe three or more levels above an attacker makes that character's attacks Hard; six or more makes them Very Hard (see Chapter III.3). A level 1 party that walks into a level 5 anything isn't in a fight. It's in trouble, and the right move is to make that visible early (in the TELLS, in the ruin the thing left behind) so running away is a choice rather than a punchline.
+
+> **Example — numbers from level and role**
+>
+> The Toll Ogre is level 3 and an Elite. Table MM1–1's level 3 row reads HP 14, damage 6, attack +2. Elite doubles the HP and gives two attacks. Its card reads HP 28, damage 6, attack +2, two attacks. Hide over muscle is armor 1. It's greedy, but it doesn't want to die for a bridge, so morale 8, just above the default. That's every number it will ever need, and none of it took longer than reading two rows.
+
+---
+
+## Morale
+
+Nothing in these books fights to the death by default. Every foe has a **morale** number from 2 to 12. The default is 7; a foe that will never break is 12.
+
+At certain moments you roll 2d6 for the foe. If the roll is **over** its morale, its nerve goes and it does whatever its BREAKS line says. If the roll is equal to its morale or under it, it fights on.
+
+**The triggers.** Roll morale when:
+
+- **the first of them falls**, dropped or fled;
+- **half of them are down**;
+- **their leader is down**;
+- **one is left alone and hurt**, the last of its group or a lone foe at half HP or less.
+
+Roll once per trigger, for the whole group. Mooks don't check one at a time; they break as a crowd. A character who forces a check with a talent (*Dread Presence*, Chapter II.4a) is making one of these moments happen early, and that's what the talent is for.
+
+**Table MM1–3: Choosing Morale**
+
+| Morale | It breaks on | How often | Who |
+|---|---|---|---|
+| 3 | 4 or more | Almost always | Conscripts, bullies, anything that was promised this would be easy |
+| 5 | 6 or more | Usually | Hired muscle, hungry animals, looters |
+| 7 | 8 or more | Often (the default) | Soldiers, ordinary beasts, most people |
+| 9 | 10 or more | Sometimes | Veterans, anything defending its young or its home |
+| 11 | 12 only | Rarely | Zealots, the cornered, the truly desperate |
+| 12 | never | Never | Constructs, the mindless, the bound |
+
+A broken foe is out of the fight but not out of the story. BREAKS says how. The ogre swims for home and remembers faces. The hired sword drops her blade and asks what the party pays. The pack scatters into the trees, and the party will hear them again tonight. Play it the way the card says, and then let the players decide what to do with a beaten enemy, because that's one of the more interesting choices the game offers.
+
+> **Through the Mirror — why morale does so much work**
+>
+> We count morale as the single largest lever on how long a fight lasts. Without it, every fight runs to the last HP, which is slow, samey, and teaches the party that every enemy is a sack of numbers to be emptied. With it, most fights end somewhere around their middle, and the end is a story beat (a surrender, a rout, a parley) instead of bookkeeping. If you house-rule it away, expect fights to run half again as long and feel less alive.
+
+---
+
+## Meeting Someone: The Reaction Roll
+
+Most encounters don't begin as fights. When the party meets a creature or person whose attitude the fiction hasn't already settled, roll 2d6 before anyone says a word. Low is hostile. The middle is wary or uncertain, and high is open or friendly. The full table, with a d66 list of what they want right now, is in MM6.
+
+Because 2d6 bunches in the middle, the result you'll see most often is *uncertain*: they'll talk, but they want something first. That's deliberate. It puts the next move in the players' hands and turns a random meeting into a conversation instead of a brawl. Roll it for the ogre on the bridge, the patrol on the road and the thing in the cellar, and your campaign will have far fewer fights nobody wanted.
+
+Don't roll when the fiction has already answered. The assassin sent after the party is hostile; the grandmother who raised one of them is friendly. The roll is for when you honestly don't know.
+
+---
+
+## Building a Fight
+
+### Count the Threats
+
+Whether a fight is easy or deadly depends mostly on how many real threats are in it compared with how many characters are facing them. Levels matter at the edges; headcount matters everywhere. So count.
+
+**Table MM1–4: Reading a Fight**
+
+| Foe | Counts as |
 |---|---|
-| −2 or lower | 0 |
-| −1 | 1 |
-| +0 | 2 |
-| +1 | 3 |
-| +2 | 4 |
-| +3 | 5 |
-| +4 | 6 |
+| Every four Mooks (round up) | 1 threat |
+| A Standard foe | 1 threat |
+| An Elite | 2 threats |
+| A Boss | 4 threats |
+| Any foe 3+ levels above the party | double its count |
+| Any foe 3+ levels below the party | half its count |
 
-**Durability** — an enemy's base Resolve (the armor bonus below is added separately):
+Add them up and hold the total against the number of characters:
 
-**Table MM1–2: Durability Value by Enemy Type**
+- **Fewer threats than two-thirds of the party** is a **skirmish**. The party wins. It costs a little HP and establishes that the danger is real.
+- **Up to one threat per character** is a **real fight**. Someone gets hurt, Sparks get spent, and it takes two to four exchanges.
+- **Up to one and a half per character** is **hard**. Someone may drop to 0 HP. Morale and terrain will decide it as much as the dice do.
+- **More than that** is **deadly**. It exists to be avoided, bargained with, or fought only after the party has found an edge.
 
-| Enemy Type | Durability Value |
-|---|---|
-| Mook (no Resolve, one Strike) | 0 |
-| Named NPC | its base Resolve (typically 3–4) |
-| Boss | its base Resolve (typically ~8) |
+Three level 1 characters against the Toll Ogre face 2 threats: a real fight. Put a Boss in front of the same three and it's 4 threats against 3, which is hard, and that is correct: a level 1 Boss should frighten a level 1 party.
 
-Durability is simply the enemy's base Resolve — the pool a party's Strikes deplete. A Mook has none, so its durability is 0.
-
-**Armor bonus:**
-
-**Table MM1–3: Armor Bonus**
-
-| Armor | Bonus |
-|---|---|
-| None | 0 |
-| Light | 1 |
-| Heavy | 2 |
-
-**Technique bonus** — **+1 for each Technique or special ability** listed on the enemy (a phase change, a Weapon Mastery, an area attack, and the like each count as one). The bonus is simply the number of entries in the enemy's Techniques list, so an enemy with two Techniques adds +2. Keep the list to abilities that materially affect the exchange — don't pad it with flavor.
-
-### TR Reference Examples
-
-**Table MM1–4: TR Reference Examples**
-
-| Enemy | TR | Notes |
-|---|---|---|
-| Basic Mook (unskilled, no armor) | 2 | Offense 2, Durability 0 |
-| Skilled Mook (Combat Practiced, light armor) | 4 | Offense 3, Durability 0, Armor 1 |
-| City Watch Sergeant | 8 | Offense 4, Durability 3, Armor 1 |
-| Veteran Soldier | 11 | Offense 5, Durability 4 (Resolve 4), Armor 1, Techniques 1 (Telegraphed Finisher) |
-| The Archive Guardian | 16 | Offense 5, Durability 8 (Resolve 8), Armor 2, Techniques 1 |
-
-> **Example — rating an enemy from scratch**
+> **Through the Mirror — these bands are a starting read**
 >
-> The MM needs a harbour tough for a scene at the Thornwall docks. Not a name, not a threat — a body in a doorway.
->
-> **Offense.** Strength 2, no Combat rank: attack modifier +0, which is offense value **2**.
-> **Durability.** A Mook, so base Resolve 0 — durability value **0**.
-> **Armor.** A leather jerkin, which is light: **+1**.
-> **Techniques.** None: **+0**.
->
-> `TR = 2 + 0 + 1 + 0 = 3`. Above the Mook minimum of 1, well under the Named minimum of 8, which is the arithmetic agreeing with the fiction: this is somebody's muscle, not somebody.
->
-> Now the same body promoted. Give him Combat at Practiced (attack +1 → offense 3), a name, and Resolve 3, and TR goes to 7 — *below* the Named minimum. That is the formula telling the MM something true: a Named NPC at Resolve 3 with one skill rank is not yet worth the party's attention. Either give him a Technique, better armor, or leave him a Mook.
+> The bands in Table MM1–4 follow from the roles themselves: an Elite has twice a Standard foe's HP and attacks, a Boss has five times the HP. The shape we're aiming for is four Mooks being trivial, a mixed fight of Standard foes lasting two to four exchanges, and a lone Boss at the party's level being dangerous at every level from 1 to 10. The app's encounter read uses the same counts. What no count can tell you is how clever your players are, so treat the band as a forecast and your own table as the weather.
 
-**TR minimums by tier.** A **Mook** is TR 1 at minimum — even the most incompetent attacker occupies space and splits attention. A **Named NPC** is TR 8: one that poses no real threat is not named, it is a Mook with a name. A **Boss** is TR 12: one that does not require sustained effort is not a Boss, it is a Named NPC with a phase.
+### Dials Other Than Headcount
 
----
+**Morale** turns a hard fight into a real one: a crowd with morale 5 will scatter after the first two fall. Raise it for the fight that's supposed to be grim; lower it for one that should end in a chase.
 
-## Sizing an Encounter
+**Terrain** gives both sides something to do besides trade blows. A bridge, a burning barn, a rope over a pit, a hallway only one foe wide. Terrain is where the players' stunts come from (on a 10+ they can trip, disarm, push or pin instead of dealing more damage), so give them things worth pushing someone into.
 
-**Actor count drives difficulty, not total TR.** This is the single most important thing to know about building encounters in this system. Simulation (`research/simulation_log.md` Series 9) is unambiguous: **the number of Named/Boss enemies acting at once** is the primary difficulty variable. One Named or one Boss is trivial for a fresh party no matter how high its TR — the party simply concentrates fire and removes it. Two of them are still nearly a walkover, and even three on their own is a near-clean win (~96%). **A real fight begins once three simultaneously-acting Named/Boss enemies are backed by a Mook or two** — four Named is a coin-flip (Hard), five is a near-certain loss. Mook swarms, meanwhile, never produce genuine danger at any size a table would field.
+**Arrivals** are the sharpest dial you own. One more Mook at the door, a second wolf on the ridge. Add them when a fight is going too easily; hold them back when it's going badly. Nobody at the table knows how many were supposed to come.
 
-Because of this, **the calibrated tool you build from is the [Encounter Recipe Table](#encounter-recipe-table) below** — concrete, simulation-validated rosters mapped to difficulty. There is deliberately no TR-summing budget in this book: earlier editions carried one, and simulation proved it structurally non-predictive — summed TR cannot see the actor-count threshold that actually gates difficulty. (The retired budget and its multipliers are preserved for the record in `docs/DECISIONS.md`.) TR remains what it always was: a per-enemy build and ordering number, not an encounter-sizing one.
-
-### Party Strength
-
-Party Strength is the sum of all participating characters' `career_advances`. The Recipe Table is keyed to it.
-
-> **Example — Party Strength**
->
-> *Zahna, Mordai, and Zulnut each have `career_advances: 1`. Party Strength = 3.*
-
-> **Example — why summed TR cannot size a fight**
->
-> Three City Watch Sergeants total 24 TR — eight times a Party Strength of 3, a number that looks catastrophic. Simulation says otherwise: three TR-8 Named enemies against a fresh PS-3 party is a near-clean win (~96% party win) — a Standard fight only *once you add a Mook*. What the sum cannot see is that three Named is barely the threshold at which difficulty becomes *tunable* at all — you climb from there by adding actors, one at a time.
-
----
-
-## Building Enemies
-
-### Mooks
-
-Mooks need only four things: an attack modifier, a fictional description, an armor decision, and a TR number. They do not have Resolve. They do not have individual Condition tracks. Any successful Strike (7+) removes one — an armored Mook takes a full success (10+).
-
-**What makes a Mook dangerous is volume.** Three Mooks attacking simultaneously each demand a reaction decision. Absorbing a Mook attack costs no Endurance Pool points — but it lands a Tier 1 Condition, and Winded (−1 to your next roll) or Off-Balance (your next reaction costs 1 additional Endurance Pool point) is exactly the handicap a character cannot afford in the same exchange a Named NPC's Tier 2 attack comes in. Mook chip damage defeats no one; it degrades the reactions that matter.
-
-**A Mook-only encounter must carry a clock or an objective.** Pure Mook attrition cannot lose — the simulation record is unambiguous — because the party can always recover faster than chip damage accumulates. What makes a Mook fight matter is what the Mooks are *for*: the ritual finishing behind them, the gate closing, the reinforcements a Threat Clock is counting down, the prisoner being dragged away. Give every Mook-only fight a stake the uncontested-exchange rule can advance (see *The Exchange*, Chapter III.3), and the fight is about time, not survival.
-
-**Building a Mook:**
-1. Assign an attack modifier (usually −1 to +1 for cannon fodder; up to +2 for elite troops)
-2. Give them one sentence of fictional description — what do they look like, how do they move?
-3. Decide if they have armor (most don't; light armor on guard captains is fine)
-4. Calculate TR
-
-You rarely need more than two or three Mook types per setting. Players will not notice if every city guard uses the same stat block.
-
----
-
-### Named NPCs
-
-Named NPCs use the full exchange structure. Build them the same way you'd build a player character — Primary Facet, relevant attributes, a skill or two — but you only need the numbers you'll actually use at the table.
-
-**The short list you actually need:**
-- Resolve (3–4 for a Named NPC; armor adds to it)
-- Attack modifier (the best offensive attribute-plus-skill pairing, as an authoring input)
-- Armor
-- One or two Techniques if they should feel distinct
-
-**Resist over-building.** A Named NPC who lasts two exchanges and dies memorably is better than one who lasts six exchanges and becomes a slog. Use Hard difficulty against them to make fights meaningful; don't pad their Resolve to make them last.
-
-### Three Worked Enemy Techniques
-
-Enemy Techniques are the "feel distinct" line above made concrete. These three are mechanical templates — setting-agnostic shapes you reskin to fit the enemy in front of you. Each adds +1 TR, and each is a stat-block-ready `techniques:` entry.
-
-**Flurry** — pressure everyone at once.
-
-```yaml
-  techniques: [flurry]
-  # Flurry: once per scene, its attack targets every PC engaged with it
-  # in one action. Each incoming hit lands at Tier 1 (whatever the
-  # enemy's usual tier); each target reacts separately.
-```
-
-A reaction-economy attack: it trades one heavy blow for a demand on everybody's Endurance Pool in the same exchange. Strongest alongside a second enemy whose Tier 2 is arriving simultaneously — the chip degrades the reactions that matter. Reskin freely: a sweeping tail, a volley, a shove through the whole line.
-
-**Telegraphed Finisher** — the visible killing blow.
-
-```yaml
-  techniques: [telegraphed_finisher]
-  # Telegraphed Finisher: once per scene, against a character already
-  # carrying a Tier 2 Condition, its attack repeats that Condition's
-  # type — a landed repeat is Broken (III.3). The MM names the move
-  # one full exchange before it can land. Always.
-```
-
-This is the incoming-Condition selection rule (III.3) sharpened into a signature move. The telegraph is not a courtesy, it is the mechanic: the whole table gets one exchange to answer — Intercept, Withdraw, treat the Condition, end the fight first. Reskin: the raised axe, the drawn-back sting, the word of unbinding half-spoken.
-
-**Sapping Strike** — exhaust instead of injure.
-
-```yaml
-  techniques: [sapping_strike]
-  # Sapping Strike: its attacks drain the tank instead of landing a
-  # Condition — a hit that lands (Absorb, or a failed reaction) costs
-  # the target 2 Endurance Pool points instead of the Condition tier. A partial
-  # reaction halves it to 1.
-```
-
-A tempo weapon: it never moves anyone toward Broken, but it empties the pool that pays for Dodges and Parries — the enemy that follows it hits a party that can no longer afford to react. Reskin: draining cold, a wrestler's clinch, anything that wins by exhaustion.
-
----
-
-### Bosses
-
-Bosses should be built to last *and* to change. A Boss that simply has more Resolve is a longer fight, not a better one. A Boss with a phase change is a fight with a second act.
-
-**Phase changes** are narrative triggers — keyed to a `resolve_threshold` on the Boss's stat block, crossed when a Strike depletes their Resolve past that point — that shift something about how the fight works. Not necessarily harder; sometimes stranger.
-
-> **Example — the Archive Guardian changes phase**
->
-> *The Archive Guardian's phase change: when its Resolve drops to 4 or below, it enters Reduced Mode. The subsystem that was weighing consequences shuts down — and what is left is more dangerous, not less. Its blows land at Tier 2 again, and it fixes on whoever last opened it and does not look away. It's running on something else now. What that is, the party doesn't know.*
-
-**What a phase change may actually do.** A phase must change something that is live *right now*, in the exchange the party is fighting through — a piece of the enemy's runtime state, not a number that was already spent. Four levers do this, and they are the whole toolbox:
-
-- **Raise its danger.** The Boss's attack grows — a higher incoming Condition tier, or a more aggressive posture. It hits harder, or its Strikes are harder to react to. ("It stops holding back.")
-- **Grant or revoke a Special.** The Boss gains or loses a standing rule. A held-in-reserve domain that switches on, a vulnerability that opens, an immunity that drops — all the same lever.
-- **Second wind.** The Boss adds Resolve — a genuine durability spike the party can *see*, because it moves the same bar they've been grinding down. Use it sparingly; it is the honest version of "the fight isn't over."
-- **Change the space or the target.** The Boss floods the room, collapses the floor, pulls Mooks in, or fixes on a new PC. This is MM-narrated — the engine doesn't track it — but it changes the tactical picture as much as any stat.
-
-**What a phase change may *not* do: crack its own armor.** Do not write a phase as "its armor falls away" or "it trades defense for offense." Under our rules armor is a flat, one-time bonus baked into the Boss's starting Resolve pool the moment the fight begins (see *Armor bonus*, above) — there is no armor value sitting on the stat block mid-fight for a phase to reduce. A "the plating cracks, now it's vulnerable" phase looks evocative and does *nothing*: the pool it would have drained was already spent into the starting number. If you want a Boss to get more fragile, that is not a phase — it is simply a lower Resolve. If you want a phase to raise the stakes, use one of the four levers above.
-
-Phase changes should feel like story beats, not just mechanical resets. The fiction should change *and* something the party can act on should change with it — never the fiction alone dressed over a stat that can't move.
-
-> **MM Note — build for the early exit, not against it**
->
-> A Tier 3 capstone like *The Final Blow* (Body/Might, II.4a) can end a Boss outright, on any target, once per session — that is what the Technique is for, and it is not subject to the riders' never-defeats limit (see *Strike*, III.3). If a Boss's second act only exists in your notes and never in the fiction the party can act on, a capstone landing early does not just skip a phase — it skips the *encounter*. Build Bosses so the party deleting them is a win, not a broken script: front-load anything the phase change was protecting (a hostage taken, information dropped mid-fight, an environmental threat the Boss was suppressing) so it is already live by the time a capstone could land, rather than something the party only sees by grinding Resolve down in order.
-
----
-
-## Running Asymmetric Encounters
-
-Sometimes an encounter is designed to be asymmetric — the party cannot win by hitting things until they stop moving. The Archive Guardian encounter from Chapter III.3 is an example: at TR 16 against a Party Strength of 3, it is a Deadly encounter on paper, but it was never intended as a straight fight. Zahna's glyph, Zulnut's structural read, and the specific weak joint Mordai exploited were all intended paths around the raw numbers.
-
-**Design asymmetric encounters deliberately:**
-- Give the party something to notice (an environmental element, a phase change trigger, a behavioral rule)
-- Give the party something to exploit (a structural weakness, a limitation in the enemy's programming, a negotiation opening)
-- Make the straight fight winnable but costly — it should be a real option, just an expensive one
+**A way out** is a dial too. Every real fight or harder should have at least one route to winning that isn't emptying the foe's HP: a leader who can be talked to, a weakness the TELLS point at, a door that can be barred. That isn't a consolation prize.
 
 > **MM Note — a lateral solution is the encounter working**
 >
-> If a player finds a clever lateral solution that bypasses most of the TR, they have not broken the encounter — that is the encounter working correctly. TR is a calibration tool, not a ceiling.
+> When a player finds a way around most of the fight (the ogre is paid off, the bridge is cut, the Boss is locked in its own vault), they haven't broken your encounter. That is the encounter doing its job. The default is to let it work. The dial is how much it costs: a Spark, a 7–9, something left behind. The guardrail is that the clever route should never be cheaper than it looks from the outside.
 
 ---
 
-## Enemy Conduct Fields
+## Running the Exchange
 
-A stat block says how hard something is. These say how it behaves, and the Bestiary
-renders them straight out of the file — an enemy written without them is a
-spreadsheet row.
+Combat runs in **exchanges**, and each exchange goes the same way (see Chapter III.3). You telegraph, the players act, the foes attack in the open, you narrate, and anything that lasts an exchange ends. What follows is the MM's half of that.
 
-**`disposition:`** its whole combat philosophy in one sentence.
-**`first_target:`** who it goes for, and why.
-**`triggers:`** a list of if-then rules — not a round-by-round script. **Posture
-lives here.** Enemy stances are not declared blind — you state them openly as
-each exchange opens (see *Postures*, Chapter III.3) — so write the stance as a
-rule the table can learn: "Aggressive while its allies stand; Defensive once
-Open; Withdrawn when its morale line is crossed." A stated stance driven by a
-visible trigger is threat texture the party can read and play against; a
-stance you invent fresh each exchange is noise.
-**`morale:`** when it stops. Every enemy needs one; nothing fights to the death by
-default.
-**`organization:`** how many turn up together.
-**`negotiation:`** for Named and Bosses that can be dealt with — what it wants,
-what shifts it, what deal it honours. Leave it out when there is no deal to be had,
-and the absence means exactly that.
+### Telegraph Intent
 
-The older free-text `tactics:` field still loads and is still read, but new enemies
-should use the fields above: they are what the Bestiary and the app can actually
-find.
+Start every exchange by saying what each foe is about to do, and to whom. *"The ogre winds up to swing at Mordai. The two thugs are edging round behind Zahna."* This is the most important thing you'll say all fight. It turns combat from a slugging match into a set of problems. Mordai can step in, Zahna can move, Zulnut can do something unwise with the rope. The players make their choices knowing what's coming, which is the only way their choices mean anything.
 
----
+Telegraphing isn't a promise. If the party does something that changes the situation (the thugs' target leaves, the ogre is pinned), the foes adapt. But what you said is what they were going to do, and if nobody stops it, it happens.
 
-## Enemy TR in `.fof` Files
+The TELLS line is the long-range version of the same thing. A telegraph is what happens in the next few seconds; a tell is what the party could have noticed before the fight started. Use both.
 
-Enemy stat blocks can be stored as `.fof` files using `type: enemy`. The format mirrors the character format for the fields that matter:
+### Players Act, In Any Order
 
-```yaml
-fof_version: '0.1'
-type: enemy
-id: city_watch_sergeant
-name: City Watch Sergeant
+There is no turn order. After you've telegraphed, ask the table what they do, take the answers in whatever order they come, and have them roll. Everyone acts every exchange. If two players both want to go first, let the one who spoke first go first and move on. It matters much less than it feels like it does.
 
-enemy:
-  tier: named
-  resolve: 3              # base durability pool; armor adds to it in play
-  attack_modifier: 2      # Strength +1, Combat Practiced +1
-  armor: light
-  techniques: []
-  special: null
-  tr: 8
+### Rolling in the Open
 
-  description: >
-    A mid-rank officer of the city watch. Experienced in crowd control,
-    street violence, and the particular skill of making someone feel
-    arrested before they've decided whether to resist. Fights
-    methodically — not inspired, but very hard to rattle.
-```
+Foes roll their own attacks: 2d6 plus their attack bonus, in front of everyone. The app rolls it for you and shows it to the table. Say who's being attacked, roll, and read the result:
 
-The durability field is `resolve`. (Older files that still use `endurance` load
-with a deprecation warning — they are mapped to a `resolve` value automatically
-— but write `resolve` in anything new.) A **Boss** adds a `phases` block: each
-phase has a `resolve_threshold` and a `description`, and crossing that threshold
-as Resolve is depleted triggers the phase in play. For example, the Archive
-Guardian's:
+- **10+:** a hard hit, damage +2.
+- **7–9:** a hit, the card's damage.
+- **6−:** a miss.
 
-```yaml
-  phases:
-    - resolve_threshold: 2
-      description: >
-        Reduced Mode. Its attack drops — blows land as Tier 1 — but it
-        stops weighing consequences: its blows land Tier 2 again and it
-        fixes on whoever last opened it.
-```
+A natural 12 is a hard hit and something more, which you name: the target is thrown, disarmed, knocked through a door. A natural 2 is a miss that gives the target an opening, and that character's next attack on this foe is Easy. Armor comes off every hit, to a minimum of 1.
 
-For Mooks, the format simplifies further — a Mook has no `resolve` field at all:
+Three things change the roll. A character who took a 7–9 on their own attack this exchange is **exposed**: a foe that can reach them rolls an extra die on its next attack at them this exchange and keeps the best two. A character who **defends** makes attacks on them Hard (−1). A character who **intercepts** defends and takes the attacks aimed at an ally within reach.
 
-```yaml
-fof_version: '0.1'
-type: enemy
-id: harbor_thug
-name: Harbor Thug
+Rolling in the open does something your players will feel before they can name it. When the ogre's dice come up 11 in front of the whole table, the damage isn't your choice, and nobody at the table thinks it is. You stop being the person hurting their characters and become the person narrating what the dice did.
 
-enemy:
-  tier: mook
-  attack_modifier: 0
-  armor: none
-  tr: 2
-
-  description: >
-    Hired muscle. Doesn't want to die for this job.
-    Will absolutely run if the Named NPC they're working for goes down first.
-```
-
----
-
-## Quick Reference: Encounter Building
-
-```
-1. Establish party career_advances total → Party Strength
-2. Choose difficulty: Skirmish / Standard / Hard / Deadly
-3. Look up the roster in the Encounter Recipe Table (below) — this is the build step
-4. Reflavor the roster to fit the story (numbers stay, fiction changes)
-5. Add one lateral solution / asymmetric hook if the fight has a clever path
-
-Actor-count rule of thumb (PS 3 fresh party):
-  0–3 Named/Boss ........ clean win at any TR (3 Named ~96%)
-  3 Named + 1 Mook ...... Standard (first real fight)
-  +1 Mook each step ..... Standard → Hard → Deadly (1/2/3 Mooks)
-  4 Named + 1 Mook ...... also Deadly
-  Mook swarms alone ..... only ever a Skirmish
-
-TR Formula (for building one enemy):
-  TR = offense_value + durability_value + armor_bonus + technique_bonus
-```
-
----
-
-## Encounter Recipe Table
-
-This is the tool you build encounters from. It maps difficulty to concrete enemy compositions that automated simulation has *measured* landing in the intended band — not derived from TR arithmetic, which (as shown above) mis-predicts multi-enemy fights.
-
-**How to use:** Find your party's column. Pick the difficulty row. Use the suggested enemy composition. Adjust flavor (Mooks become cultists, Named becomes a captain, Boss becomes a dragon) without changing the mechanical profile.
-
-### Party Strength 3 (3 fresh characters, 1 career advance each)
-
-Validated in `research/simulation_log.md` Series 9 Part D (200 iterations per seed, seeds 1/2/3; the Sim Win Rate column lists all three seeds).
-
-**Table MM1–5: Encounter Recipes at Party Strength 3**
-
-| Difficulty | Win Rate Target | Suggested Composition | Sim Win Rate (seeds 1/2/3) |
-|------------|----------------|-----------------------|-------------|
-| **Skirmish** | 85–100% | 3–7 Mooks | 100% / 100% / 100% |
-| **Standard** | 65–85% | 3 Named (TR 8) + 1 Mook | 76% / 74.5% / 80% |
-| **Hard** | 40–60% | 3 Named (TR 8) + 2 Mooks | 47.5% / 48% / 47% |
-| **Deadly** | 15–35% | 3 Named (TR 8) + 3 Mooks, or 4 Named (TR 8) + 1 Mook | 20% / 20% / 22.5% · 20% / 16.5% / 21% |
-
-Note what these rosters have in common and what a TR budget would never tell you: **the Standard-through-Deadly ladder is built by adding actors, not by raising TR.** The core is three TR-8 Named in every band; you climb the ladder by adding a single throwaway Mook at a time — one Mook is Standard, two is Hard, three is Deadly. (Swapping that third Mook for a fourth Named, then trimming a Mook, lands the same Deadly window — the "upgrade a throwaway to a real threat" reading.) Per-enemy TR is a fine-tuning knob *after* you've set the actor count — 3× TR-10 Named is far harder than 3× TR-8 — but actor count is the dial you reach for first.
-
-### Party Strength 4 (4 PCs or 3 advanced PCs)
-
-> **Through the Mirror — these numbers are not yet simulated**
+> **Through the Mirror — why the foes roll**
 >
-> Series 9 measured the PS-3 party only. The compositions below are *un-simulated extrapolations* from the PS-3 findings and the "each additional PC shifts the actor-count thresholds up by roughly one Named" rule of thumb — treat them as a starting guess to be confirmed at your table, not as validated recipes. Do not present them to players as calibrated.
+> Earlier versions of this game kept every die in the players' hands, and foes never rolled. We changed it because the players we watched wanted to see the danger arrive. A roll everyone can see is a moment everyone shares: the table groans at the 11 and cheers at the 2. The players still roll far more often than you do, since every one of them acts every exchange. Outside combat, NPCs still never roll against the characters. The players roll, and the NPC sets the difficulty.
 
-**Table MM1–6: Encounter Recipes at Other Party Strengths**
+### When a Player Rolls 6−
 
-| Difficulty | Win Rate Target | Suggested Composition (extrapolated, unvalidated) |
-|------------|----------------|-----------------------|
-| **Skirmish** | 85–100% | 4–8 Mooks |
-| **Standard** | 65–85% | 4 Named (TR 8) |
-| **Hard** | 40–60% | 4 Named (TR 8) + 1 Mook |
-| **Deadly** | 15–35% | 5 Named (TR 8) |
+On a missed attack, the foe gets a move. Look at the fiction first, then the card, then the Fight Complications table in MM6 if nothing comes. The foe might push its advantage, grab the thing it wants, pull back into cover or hurt someone. Whatever you choose, it should change the situation, not merely subtract HP. A miss that only means "nothing happens" is a wasted roll.
 
-### Scaling Notes
+### Bloodied
 
-- **Actor count is the primary dial; per-enemy TR is secondary.** For a fresh PS-3 party, one or two Named/Boss enemies is trivial at *any* TR (a solo TR-17 Boss wins for the party as reliably as a solo TR-8 Named). Three simultaneously-acting Named/Boss enemies is the first genuine fight; four is Deadly; five is a near-certain party loss. Set the count first, then adjust per-enemy TR to fine-tune.
-- **Mook swarms only ever produce Skirmishes.** For a PS-3 party, mean PCs Broken stays at zero through 30 Mooks — the party is never in real danger, the fight just gets longer. (Win rate does eventually dip past ~40 Mooks, but that is the simulator's exchange cap timing out an unfinished-but-unlost fight, not a defeat.) Use Mooks for texture, action-economy pressure, and to nudge a Named fight up a band — not as a difficulty lever in their own right.
-- **Each additional PC** shifts the actor-count thresholds up by roughly one Named enemy (unvalidated beyond PS 3 — see the PS-4 caveat above).
-- **Advanced parties** (Techniques active) trivialize encounters designed for fresh PS-3 parties. Expect to add actors, not just TR — and re-check at the table, since the actor-count thresholds themselves move.
-- **The recipes above are calibrated for a baseline party** — `standard_party()` in the simulation corpus carries no Techniques. A party fielding *Weapon Mastery* — the one step-easier Technique that eases a Strike — or a Tier 3 capstone like *The Final Blow* runs a Recipe Table encounter about a band hot. The other step-easier Techniques ease rolls a fight rarely calls for — hardship, scholarship, precision work, and acting on a hunch — so they do not shift a combat recipe at all — treat the difficulty row you picked as one notch easier than printed.
+When a foe drops to half its HP or lower, it's **Bloodied**, and its WHEN BLOODIED line happens at once, in the middle of whatever was going on. For a Boss this is its second phase: new behavior, new threat, sometimes a new goal. Say it out loud as it happens. The table should feel the fight change.
+
+Build a Boss's second phase so the party can meet it early. If the Bloodied line only protects something the party would never otherwise see (a hostage, a collapsing roof, a secret the Boss shouts), put that thing into the fight from the start. A party that burns a Boss down in two exchanges should get the whole story, not skip half of it.
+
+### Ending the Fight
+
+A fight is over when its question is answered, not when the last HP is gone. If the foes are broken and the party is standing, say so and move on. *"The last two drop their clubs and run."* Nobody needs to roll their way through a result the whole table can already see.
+
+> **Example — one exchange on the bridge**
+>
+> The party has refused the toll. The ogre is at full HP, 28.
+>
+> MM: "The ogre swings at Mordai with the club. And it's looking at Zahna like he's the right size to throw. What do you do?"
+>
+> **Mordai** attacks. The MM agrees his knack, *Soldiering*, applies: 2d6 + Body (+2) + knack (+1). He rolls 4 and 5, plus 3, for 12: a full success. His longsword deals 1d8, showing 5, and he picks +1d6 damage from the three options, rolling 3, for 8. Armor 1 comes off, so 7. The ogre is on 21.
+>
+> **Zulnut** goes for the ogre's ankle to trip it: 2d6 + Body (+2), rolling 1 and 3, plus 2, for 6. A miss.
+>
+> MM: "It's like trying to trip a tree. The ogre doesn't even look down. It just puts a foot on your chest, and you're pinned flat on the planks."
+>
+> (The MM took that from the fiction, not a table. Zulnut is now on his back under an ogre, which is a much better problem than "you miss.")
+>
+> **Zahna** backs away, casting nothing yet.
+>
+> The ogre attacks twice. At Mordai: 2d6 + 2, showing 6 and 3, for 11: a hard hit, 4 + 2 = 6 damage. Mordai's heavy armor and shield stop 3, so he takes 3. At Zahna, and the ogre wants to throw him: 2d6 + 2, showing 2 and 3, for 7: a hit. That's no hard hit, so no throw. It deals 4, and Zahna's light armor stops 1. Zahna takes 3 and is on 3 of his 6 HP.
+>
+> MM: "It grabs for you and gets a fistful of your coat instead of you. You're bruised, and you're very aware of the river."
+>
+> (Two rolls, both public, one of them close. Nobody at the table blames the MM for either.)
 
 ---
 
-## The Five-Minute Encounter Design Method
+## Converting Creatures from Other Games
 
-A quick framework for designing balanced encounters without a calculator.
+Sooner or later you'll want a creature from another game's book. You can have it, but bring the idea across, not the text or the numbers. Our cards are written in our own words, and a stat block copied from someone else's book is both a copyright problem and a bad fit.
 
-### Step 1: What's the story?
+Read the original for four things and translate each one:
 
-Every encounter exists to serve the narrative. Ask: what does this fight (or potential fight) accomplish? If the answer is "I need a fight here," redesign the scene. A good fight creates decisions — and the best ones send the table home with a story.
+1. **How tough is it, where it comes from?** Something that game treats as a fair fight for a starting party is level 1 or 2 here. Something it treats as a campaign's final enemy is level 9 or 10. Put everything else between by feel.
+2. **How does it fight alongside others?** Things that come in swarms and die in one blow are Mooks. Ordinary foes are Standard. The creature a scene is built around is an Elite. The creature an adventure is built around is a Boss.
+3. **How well protected is it?** Nothing special is armor 0, a thick hide or mail is 1, plate or stone is 2.
+4. **How brave is it?** Pick a morale from Table MM1–3.
 
-### Step 2: Pick a difficulty feel.
+That's the numbers. Then write the card fields yourself, and that's where the creature really lives. What does it want? What's the one thing it does that nothing else does? How would the party know? What does it do when it loses its nerve? Six twists. If the original has a dozen special abilities, pick the one that makes the best scene and let the rest go. A creature with one SPECIAL that the table remembers beats a creature with six that you forget to use.
 
-- **Skirmish** — The party should win. This encounter taxes a few Endurance Pool points and establishes the threat. Use when: introducing a new enemy type, pacing between major beats, rewarding players for good preparation.
-- **Standard** — A real fight. Someone will take conditions. Sparks will be spent. This is the default difficulty for most encounters. Use when: the stakes matter and the outcome is uncertain.
-- **Hard** — Someone might go down. Requires smart posture choices and possibly a lateral solution. Use when: the climax of an arc, protecting something important, facing a worthy adversary.
-- **Deadly** — The party should NOT fight this straight. This encounter exists to be solved, circumvented, or fled from. If they fight it and win, that's a story they'll tell forever. Use when: the Big Bad, a force of nature, a fight that should feel impossible.
+---
 
-### Step 3: Build the enemy roster.
+## Building Your Own in Five Minutes
 
-Use the Encounter Recipe Table above. Find your party's column, pick the difficulty row, and use the suggested enemy composition. Adjust flavor without changing the mechanical profile. And remember while the fight runs: **adding enemies mid-fight is the sharpest dial you own — one Mook is one difficulty band (76% → 47% → 20%).**
+When you need a foe and don't have one, work through these in order.
 
-### Step 4: Add one lateral solution.
+**1. The question.** What is this fight about? *Can they get past it? Will they save the prisoner? Who gets the map?* If you can't say, the scene may not need a fight.
 
-For Standard and above, design at least one way the party can shortcut the encounter through clever play: an environmental hazard they can exploit, a weakness they can discover, a social angle that ends the fight. This isn't a consolation prize — it's the intended design. The lateral solution IS the encounter.
+**2. Level and role.** Start at the party's level. Pick the role from the scene's shape: a crowd, a foe, a centerpiece or a finale. Read the numbers off Tables MM1–1 and MM1–2.
 
-### Step 5: Sanity check.
+**3. WANTS and SPECIAL.** One line each. The want should be something the party could give it, deny it or trick it out of. The special should be something you can describe in a sentence and run without looking anything up.
 
-Run through one exchange mentally. Does the first exchange feel dangerous but survivable? Can the party's tank absorb two hits? Can the fragile character contribute without dying immediately? If yes, you're good. If the math says "party wipe in exchange 1," dial it back. If the math says "party wins without spending Endurance Pool points," dial it up.
+**4. TELLS and BREAKS.** How the party could learn about the special before it lands, and what it does when its nerve goes.
 
-> **MM Note — The golden rule**
+**5. Twists.** Six, if you have time. One, if you don't. The first twist you think of is usually the best one.
+
+Then count the threats (Table MM1–4) and add a way out.
+
+> **MM Note — when in doubt, the easier fight**
 >
-> If you're unsure between two difficulties, pick the easier one. Players who feel competent take bigger risks. Players who feel punished play conservatively. The easier fight leads to more interesting decisions.
+> If you're torn between two sizes of fight, pick the smaller one. A party that feels competent takes risks, tries stunts and does something interesting. A party that feels outmatched hunkers down and plays safe, and safe is dull. You can always add an arrival at the door. Taking one away is much harder to do gracefully.
 
-### The "Three Encounter Session" Template
+### The Three-Fight Session
 
-Most sessions have 2–3 encounters. The ideal difficulty arc:
+Most sessions that have fights have one to three of them. When there are three, give them a shape:
 
-1. **Opening:** Skirmish or light Standard — warm-up, establish the threat, let players feel competent
-2. **Rising action:** Standard or Hard — the real challenge, resource drain, stakes escalate
-3. **Climax:** Hard or Deadly — the payoff, lateral solutions welcome, maximum tension
+1. **Opening:** a skirmish. Establish the threat and let the players feel good at this.
+2. **Middle:** a real fight. The stakes rise, HP runs down, Sparks come out.
+3. **Climax:** hard, with a way out. The payoff.
 
-**Never:** Hard → Hard → Hard. This exhausts resources without narrative payoff. The second fight feels like grinding, and the third feels unfair.
-
-**Never:** Deadly as the opener. Players need to feel competent before you challenge them.
-
-The Encounter Recipe Table above confirms the shape of this arc at each individual band — Skirmish (100% win rate), Standard (~76–80%), Hard (~47–48%) — so a Skirmish → Standard → Hard session climbs through progressively tighter margins by design, ending in genuine late-session tension where smart play and lateral solutions determine the outcome.
+Never hard, hard, hard: by the third one the party is spent and the fight feels unfair rather than dramatic. And never open with the deadly one. Players need to feel competent before you test them.

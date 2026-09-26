@@ -1,6 +1,6 @@
 # Appendix: Character Sheet
 
-**Chapter II.1** has described this sheet since the book began: two names at the top, then nine sections, holding both the fiction of your character and the statistics that let them act in it. This appendix is that sheet — print it, copy it into a notebook, or use it as a checklist while filling in the digital tool. Every field below is one II.1 already named; nothing here is new.
+Print this, copy it into a notebook, or use it as a checklist beside the app. Every field on it is described in Chapter II.1, and nothing here is new.
 
 ---
 
@@ -10,136 +10,137 @@
 
 ---
 
-### Attributes
-
-| Major Attribute | Minor Attribute | Modifier | Rating (1–3) |
-|---|---|---|---|
-| Body | Strength | | |
-| Body | Dexterity | | |
-| Body | Constitution | | |
-| Mind | Intelligence | | |
-| Mind | Wisdom | | |
-| Mind | Knowledge | | |
-| Soul | Spirit | | |
-| Soul | Luck | | |
-| Soul | Charisma | | |
-
-The modifier is the number you roll with — write it large. The rating is character-creation bookkeeping (see Table II.2–1 for the mapping).
-
----
-
-### Facet
+### Who You Are
 
 | Field | Value |
 |---|---|
-| Primary Facet | |
-| Facet Level | |
-| Rank Advances Toward Next Level | |
-
----
-
-### Lineage and Background
-
-| Field | Value |
-|---|---|
+| Facet (Body / Mind / Soul) | |
+| Level | |
+| Class | |
+| Concept (*I am a ___ who ___*) | |
+| Preset or custom | |
 | Lineage | |
-| Gifted? | |
-| Heritage | |
-| Title & Origin | |
-| Starting Skill (Practiced) | |
-| Secondary Skill (Novice, 1 mark) or Domain Origin | |
+| Background | |
+
+---
+
+### Stats
+
+| Stat | Modifier |
+|---|---|
+| Body | |
+| Mind | |
+| Soul | |
+
+---
+
+### Hit Points and Armor
+
+| Field | Value |
+|---|---|
+| Maximum HP | |
+| Current HP | |
+| Armor (worn + shield, 3 at most) | |
+| Weapon and damage die | |
+| Damage bonus (level 3+) | |
+
+---
+
+### Knacks and Specialty
+
+| Field | Value |
+|---|---|
+| Class knack | |
+| Background knack | |
+| Gift knack (if any) | |
 | Specialty | |
 
 ---
 
-### Skills
+### Talents and Signature
 
-| Skill | Facet | Rank | Marks |
+| Talent | Choice (if any) | Improved? | Uses spent |
 |---|---|---|---|
-| Athletics | Body | | |
-| Combat | Body | | |
-| Stealth | Body | | |
-| Finesse | Body | | |
-| Endurance | Body | | |
-| Lore | Mind | | |
-| Investigate | Mind | | |
-| Craft | Mind | | |
-| Insight | Mind | | |
-| Survival | Mind | | |
-| Persuade | Soul | | |
-| Deceive | Soul | | |
-| Perform | Soul | | |
-| Attune | Soul | | |
-| Gamble | Soul | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| Signature (level 3) | | — | |
 
-Marks needed for the next rank: **3** to Practiced, **5** to Expert, **8** to Master.
+---
 
-### Rank Slots
+### Magic (casters only)
 
-Within each Facet, at most **3** skills may pass Practiced and only **1** of those may reach Master (II.4, *How Far a Skill Can Go*). Write the skill in as you commit the slot — the commitment is permanent.
+| Field | Value |
+|---|---|
+| Tradition (Thaumaturgy / Invocation) | |
+| Domain(s) | |
+| Signature workings | |
 
-| Facet | Beyond Practiced (3) | Master (1) |
+---
+
+### Slots (10 + Body)
+
+| Slot | Item, Wound or Fatigue | Usage die |
 |---|---|---|
-| Body | | |
-| Mind | | |
-| Soul | | |
+| 1 | | |
+| 2 | | |
+| 3 | | |
+| 4 | | |
+| 5 | | |
+| 6 | | |
+| 7 | | |
+| 8 | | |
+| 9 | | |
+| 10 | | |
+| 11 | | |
+| 12 | | |
+| 13 | | |
 
 ---
 
-### Techniques
-
-List each unlocked Technique and any choice made at unlock (weapon type, hardship, branch option, and so on).
-
-| Technique | Choice (if any) |
-|---|---|
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-
----
-
-### Magic
-
-Leave blank if your character has no magic. Consult the Appendix: Magic Domain Catalog for your domain's type and territory.
+### Resources and Marks of the Road
 
 | Field | Value |
 |---|---|
-| Magic Domain | |
+| Coin | |
+| Sparks (3 each session) | |
+| Fatigue | |
+| Wounds | |
+| Scars | |
 
 ---
 
-### Combat
+### Notes
 
-| Field | Value |
-|---|---|
-| Endurance Pool (current / max) — max is 4 + Constitution modifier + Endurance skill rank | |
-| Armor Type | |
-| Armor Downgrades This Scene — tick a box each time armor softens a Condition (light armor: the first 2 boxes; heavy: all 4); boxes refresh when the scene ends | ☐ ☐ ☐ ☐ |
-| Active Conditions | |
-| Sparks | |
-
----
-
-### Inventory
-
-| Item |
+| Player notes |
 |---|
 | |
-| |
-| |
-| |
-| |
-| |
 
 ---
 
-### Session Resources
+### For the App
 
-| Field | Value |
+The app saves this sheet as a character file. Each section above is one or more fields in that file.
+
+| Sheet section | Character file field |
 |---|---|
-| Skill Points Remaining This Session | |
+| Character Name / Player Name | `name`, `player_name` |
+| Facet, Level | `facet`, `level` |
+| Class, Concept, Preset or custom | `class.name`, `class.concept`, `class.custom` |
+| Lineage | `lineage` |
+| Background | `background` |
+| Stats | `stats.body`, `stats.mind`, `stats.soul` |
+| Maximum and current HP | `hp.max`, `hp.current` |
+| Armor, weapon | `equipped.armor`, `equipped.shield`, `equipped.weapon` |
+| Knacks | `knacks` |
+| Specialty | `specialty` |
+| Talents, choice, improved | `talents` |
+| Uses spent | `talent_uses` |
+| Signature | `signature` |
+| Magic | `magic.tradition`, `magic.domains`, `magic.signature_workings` |
+| Slots | `inventory` |
+| Coin, Sparks, Fatigue | `coin`, `sparks`, `fatigue` |
+| Wounds, Scars | `wounds`, `scars` |
+| Player notes | `notes_player` |

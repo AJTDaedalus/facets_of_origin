@@ -126,7 +126,7 @@ line is long, and the custom of masks was made for this.)*
 > Player characters can bring whatever they own. Anything short of enormous
 > draws no attention at all; enormous draws an occasional eyeroll; the only real
 > line is *brandishing* — bare steel pointed at a person — which brings guards
-> at a run and ends invitations (guard stat blocks: `enemies/boranis_honor_guard.fof`). That
+> at a run and ends invitations (guard card: `enemies/boranis_honor_guard.fof`). That
 > House Boranis does not even try to disarm its guests unsettles the ones who
 > expected the paranoid recluse to insist: the house that prepared for
 > everything apparently does not care about your knife. Sit with what that
@@ -316,11 +316,13 @@ then a bench going over — and two knots of kinsmen and hangers-on wading in be
 their principals, masked, drunk, and delighted for an excuse.
 
 This is an honest brawl, and anyone can join it: fists, elbows, harvest fruit,
-someone's ceremonial staff — combat rules as written, all of it Tier 1 bruising.
+someone's ceremonial staff — combat rules as written, with one mercy: nobody here
+has a weapon worth the name, so player characters hit with the unarmed d4, and
+anyone dropped to 0 HP is simply out of the brawl, bruised — no Wound, no Hold On.
 The one line is the ball's own: **bare steel** turns a scuffle into a scandal and
 brings guards at a run (see the sidebar below). Player characters can pick a side,
-shield the innocent, or end it — hauling the principals apart, a Commanding
-Presence, a well-timed joke at both houses' expense. Ending it *well* earns
+shield the innocent, or end it — hauling the principals apart, a voice that
+expects to be obeyed, a well-timed joke at both houses' expense. Ending it *well* earns
 Corval's open gratitude, which is worth more than either house's: he is the man
 who opens doors. Letting it run costs nothing but bruises and reputations — and
 fills the galleries with guards for a Movement, which some agendas will find
@@ -350,8 +352,8 @@ one promise of a fight a starting party can flatly win tonight.
   quiet chance to stop what is coming, and the only one where the whole crew is
   in one place. A fight here is knives in the dark, hushed on both sides —
   because whoever makes noise answers to the guards, and both sides know it.
-  ***Scene card S2, Chapter IX*** — the shared noise clock, Tavva's stance triggers
-  and Technique, and the three ways out that are not a fight.
+  ***Scene card S2, Chapter IX*** — the shared noise clock, Tavva's card and her
+  SPECIAL, and the three ways out that are not a fight.
 - **The raid** *(Movement VI–VII)*: see Chapter V — when the lights die, the crew
   goes to work, and stopping them becomes a thing worth doing in front of
   witnesses. ***Half-card S5, Chapter IX.***
@@ -403,12 +405,12 @@ seen upstairs.
   when it shifted, packed in salt. (Anha, befriended, offers this unprompted; a
   festival-hire cellar hand can be charmed into showing the knots instead.)
 - *The wine cellar:* the far wall is older than the rest — living crystal, faintly
-  warm, with a seam in it that is not a crack. Finding the seam is Investigate
+  warm, with a seam in it that is not a crack. Finding the seam is a Mind roll
   (Standard; Easy for anyone who saw the study's lattice diagram). The seam is a
   **door**, and it is sealed the way Boranis things are sealed: grown, not locked.
 - *Opening it:* the lattice diagram from the study is the key — literally; traced on
-  the seam it opens (automatic if a player copied or memorized the slate; Attune at
-  Hard to improvise it from ward-study, e.g. Agenda 5's gallery work). Brute force is
+  the seam it opens (automatic if a player copied or memorized the slate; a Soul
+  roll at Hard to improvise it from ward-study, e.g. Agenda 5's gallery work). Brute force is
   worse than useless: the Root's wards answer, and the house's few guards arrive with
   real fear on their faces — nobody but the master goes down there.
 
@@ -431,8 +433,8 @@ gifts.** What an hour in the laboratory yields, in rising order:
   Raunu's own, dry and private, a man thinking aloud into stone because the law
   left him nowhere else to put it: *"The Church says the gifts are given. Wrong
   verb. The gift is not given. It is remembered."*
-- **Instruments** of glass and lattice nobody can name — but an Orthaen or an
-  Attune-inclined character can *feel* what they do: they read the gift itself, the
+- **Instruments** of glass and lattice nobody can name — but an Orthaen or any
+  character who casts can *feel* what they do: they read the gift itself, the
   way a jeweler's glass reads a stone. Reading the gift in what, the room answers
   quietly: a chair with a wide armrest, a stool beside it, a lap-blanket of Thenya
   wool folded over its back.
@@ -629,7 +631,7 @@ table stands empty under its canopy.
 kitchens (B10); patrons make contact and confirm asks; first reconnaissance.
 
 **The omen:** the honor guard. A house this rich should field forty blades in
-ceremony. There are nine. A soldier or bodyguard (Brakka's Specialty is built for
+ceremony. There are nine. A soldier or bodyguard (Dassa's *Bodyguard work* is built for
 this) counts them without trying — and notes that the nine are placed *inward*, facing
 the palace doors, not the gates.
 

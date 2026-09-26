@@ -1,5 +1,6 @@
-"""Shared fixtures for the Facets of Origin test suite."""
+"""Shared fixtures for the Facets of Origin test suite (Lean Facets v1.0)."""
 import os
+import random
 import sys
 from pathlib import Path
 
@@ -15,25 +16,29 @@ os.environ.setdefault("DATA_DIR", str(Path(__file__).parent / "_test_data"))
 os.environ.setdefault("DB_PATH", str(Path(__file__).parent / "_test_data" / "test.db"))
 os.environ.setdefault("SECRET_KEY", "test-secret-key-do-not-use-in-production")
 
-from app.main import app
-from app.facets.registry import build_ruleset, MergedRuleset
-from app.game.character import Character, SkillState, create_default_character
-from app.game.engine import RollRequest, resolve_roll, roll_result_to_dict
-from app.auth.tokens import (
-    create_mm_token,
-    create_invite_token,
-    create_session_token,
-    decode_token,
-    hash_password,
-)
-from app.api.routes.session import set_mm_password
-from app.game.session import session_store
+from app.main import app  # noqa: E402
+from app.facets.registry import build_ruleset, MergedRuleset  # noqa: E402
+from app.game.character import Character, create_character  # noqa: E402
+from app.game.enemy import Enemy  # noqa: E402
+from app.auth.tokens import create_mm_token  # noqa: E402
+from app.api.routes.session import set_mm_password  # noqa: E402
 
 
 @pytest.fixture(scope="session")
 def ruleset() -> MergedRuleset:
     """The fully loaded base ruleset — expensive to build, shared across tests."""
     return build_ruleset([])
+
+
+@pytest.fixture(scope="session")
+def valloh_ruleset() -> MergedRuleset:
+    """Base plus the Val'loh setting Facet."""
+    return build_ruleset(["valloh"])
+
+
+@pytest.fixture
+def rng() -> random.Random:
+    return random.Random(12345)
 
 
 @pytest.fixture
@@ -68,34 +73,60 @@ def mm_password():
     return pw
 
 
-@pytest.fixture
-def valid_attributes() -> dict:
-    """An 18-point attribute distribution matching the base ruleset rules."""
-    return {
-        "strength": 3,
-        "dexterity": 3,
-        "constitution": 2,
-        "intelligence": 2,
-        "wisdom": 2,
-        "knowledge": 2,
-        "spirit": 1,
-        "luck": 2,
-        "charisma": 1,
-    }
+def make_character(ruleset, **overrides) -> Character:
+    """A valid character; defaults to Mordai the Warrior."""
+    kwargs = dict(name="Mordai", player_name="Player1", facet="body", second_stat="soul",
+                  class_id="warrior", background_id="city_watch_veteran",
+                  talent_choices={"weapon_master": "blades"}, coin=40)
+    kwargs.update(overrides)
+    ch, errors = create_character(ruleset, **kwargs)
+    assert not errors, errors
+    return ch
+
+
+def make_caster(ruleset, **overrides) -> Character:
+    """A Mind Thaumaturge with Inscription."""
+    kwargs = dict(name="Zahna", player_name="Zahna", facet="mind", second_stat="soul",
+                  class_id="thaumaturge", background_id="guild_apprentice",
+                  magic={"domain": "inscription",
+                         "signature_workings": ["A sealing glyph", "A warning rune"]},
+                  coin=30)
+    kwargs.update(overrides)
+    return make_character(ruleset, **kwargs)
+
+
+def make_enemy(level=1, role="standard", armor=0, morale=7, **kw) -> Enemy:
+    return Enemy(id=kw.pop("id", f"{role}_{level}"), name=kw.pop("name", f"{role} {level}"),
+                 level=level, role=role, armor=armor, morale=morale, wants="w", special="s",
+                 tells="t", breaks="b", twists=["x"] * 6,
+                 when_bloodied=None if role == "mook" else "wb", **kw)
 
 
 @pytest.fixture
-def body_character(ruleset, valid_attributes) -> Character:
-    """A valid Facet of the Body character."""
-    char, errors = create_default_character(
-        name="Mordai",
-        player_name="Player1",
-        primary_facet="body",
-        attributes=valid_attributes,
-        ruleset=ruleset,
-    )
-    assert not errors, f"Character creation failed: {errors}"
-    return char
+def body_character(ruleset) -> Character:
+    return make_character(ruleset)
+
+
+@pytest.fixture
+def caster(ruleset) -> Character:
+    return make_caster(ruleset)
+
+
+CREATE_PAYLOAD = {
+    "character_name": "Zahna",
+    "facet": "mind",
+    "second_stat": "soul",
+    "class_id": "thaumaturge",
+    "background_id": "guild_apprentice",
+    "magic": {"domain": "inscription",
+              "signature_workings": ["A sealing glyph", "A warning rune"]},
+    "coin": 30,
+}
+
+
+@pytest.fixture
+def create_payload() -> dict:
+    return dict(CREATE_PAYLOAD)
 
 
 @pytest.fixture
@@ -107,18 +138,10 @@ def active_session(mm_headers, client) -> dict:
 
 
 @pytest.fixture
-def session_with_character(active_session, client, mm_headers, valid_attributes) -> tuple[dict, dict]:
+def session_with_character(active_session, client, mm_headers, create_payload) -> tuple[dict, dict]:
     """A session with a character already created. Returns (session, character)."""
     session_id = active_session["session_id"]
-    resp = client.post(
-        "/api/characters/",
-        json={
-            "session_id": session_id,
-            "character_name": "Zahna",
-            "primary_facet": "mind",
-            "attributes": valid_attributes,
-        },
-        headers=mm_headers,
-    )
-    assert resp.status_code == 200
+    resp = client.post("/api/characters/",
+                       json={"session_id": session_id, **create_payload}, headers=mm_headers)
+    assert resp.status_code == 200, resp.text
     return active_session, resp.json()["character"]

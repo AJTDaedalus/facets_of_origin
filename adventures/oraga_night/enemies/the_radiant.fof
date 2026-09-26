@@ -1,56 +1,58 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: the_radiant
 name: The Radiant
-
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
-
+    version: 1.0.0
 enemy:
-  tier: named
-  resolve: 4
-  attack_modifier: 2
-  armor: light
-  techniques: [fracture_devotion, unraveling_presence, shadow_step]
+  level: 5
+  role: elite
+  armor: 1
+  morale: 12              # fearless
+  weapon: "Bare hands, offered upward"
+  wants: >
+    Veier Nolonaire — and to be seen doing it, because worship must be
+    witnessed to count. It re-stages the kill if nobody saw.
   special: >
-    THE LEASH — as the_wept.fof. THE HUNT — the Radiant's assignment is Veier;
-    it is faster than locked doors but not faster than witnesses.
-  tr: 12                # offense(+2→4) + durability(Resolve 4) + armor(light→1) + techniques(3) = 12
-  phases: []
-
-  disposition: >
-    Believes its service is worship, and worship must be witnessed to
-    count.
-
-  first_target: >
-    Whatever its errand names, and it re-stages the kill if nobody saw.
-
-  morale: >
-    It cannot be turned. Not by darkness, not by doubt, not by damage —
-    nothing short of the leash ends its errand. It can only be made to
-    feel, and guilt is slow, and slow is hallways.
-
-  organization: >
-    One of three. Takes the Dance while the others take the doors and
-    the dais.
-
-  negotiation: >
-    None. There is no deal here; that is the point of it.
-
-  triggers:
-    - >
-      Fracture — Deny the Congregation, at Hard: douse the lights,
-      empty the room, turn every back, or make someone else the better
-      spectacle. Unwitnessed, it hurries, stops savouring, and does
-      the work badly.
-    - >
-      Fracture — Plant the Doubt, at Hard: anyone armed with what they
-      have seen of its rites, declaring to its face that no god worth
-      the name asks for a stolen child. On a hit, guilt gets into the
-      errand — it falters at thresholds, looks back, re-stages kills.
-
+    UNDEFEATABLE — at 0 HP it is not defeated: it removes whoever struck the
+    last blow (they drop to 0 HP and are out of the scene), steps into the
+    world's shadow, and returns the next exchange at full HP, resuming the
+    hunt. A player character it drops to 0 HP takes the Wound, but Hold On can
+    go no lower than 7–9. THE HUNT — its errand is Veier; it is faster than
+    locked doors but not faster than witnesses. Every exchange in which a
+    player character chases, harries, or simply watches it buys Veier another
+    hallway. THE LEASH — as the Wept.
+  when_bloodied: >
+    It re-stages. It steps back into wherever the most eyes are and poses — one
+    exchange with no attack at all — then resumes.
+  tells: >
+    FRACTURE TELLS (one tell: Hard; two or more: Standard). Before midnight:
+    makes an antique sign of blessing over the food — Prelate Kovaun
+    recognizes the form; lights up when conversation turns to duty, and asks a
+    guest, warmly, "Whom do you serve?"; joins the Dead Dance and cannot resist
+    dancing beautifully, where the light falls. During the attack: kills are
+    staged, offered upward, like rites; it visibly slows and poses when
+    watched. In a fight, it turns toward the room before it strikes.
+  breaks: >
+    Morale never breaks it, and neither does anything else: the Radiant cannot
+    be turned from the hunt. It can only be made to feel. FRACTURE — DEVOTION
+    (once), a Soul roll by either road: DENY THE CONGREGATION (douse the
+    lights, empty the room, turn every back, or a performance that makes
+    someone else the better spectacle) or PLANT THE DOUBT (a priest, a
+    believer, or anyone armed with what they have seen of its rites, declaring
+    to its face that no god worth the name asks for a stolen child). On a 10+
+    guilt gets into the errand: it falters at thresholds, looks back,
+    re-stages kills — and at the Crossing it does not break past Vell. On a
+    7–9 the same, but it answers first with one parting blow or word.
+  twists:
+  - "A lantern bursts as it passes; the corridor goes dark, and it hurries — nobody is watching."
+  - "It stops to stage a kill that is not there — a bystander it has already passed — and loses an exchange."
+  - "A crystal charge in a player character's hand goes cold and dark."
+  - "It steps through the world's shadow and is ahead of whoever was chasing it."
+  - "A door Raunu sealed holds for one exchange longer than it should."
+  - "It asks the nearest player character, warmly, whom they serve — and waits for the answer."
   description: >
     A mirror-bright spirit-mask that catches every lamp in the hall. He is a
     person — warm, courtly, genuinely delightful on the subject of duty — who
@@ -63,39 +65,20 @@ enemy:
     He hunts Veier Nolonaire through corridors that seal themselves behind
     her, and he is losing time he does not have every moment somebody
     WATCHES him.
-
   notes: >
-    FRACTURE — DEVOTION (once): it believes revelations were spoken to it and
-    that its service is worship — which must be witnessed to count. THE
-    RADIANT CANNOT BE TURNED — not from the hunt, not by darkness or doubt;
-    nothing short of the leash ends its errand. It can only be made to FEEL.
-    Two roads in, either at Hard: DENY THE CONGREGATION (douse the lights,
-    empty the room, turn every back, or a Perform action that makes someone
-    else the better spectacle — unwitnessed, its service stops counting as
-    worship, and it hurries, stops savoring, does the work badly), or PLANT
-    THE DOUBT (a priest, a believer, or anyone armed with what they have seen
-    of its rites, declaring to its face that no god worth the name asks for a
-    stolen child). On a hit the words lodge: it does not stop or turn, but
-    guilt gets into the errand — it falters at thresholds, looks back,
-    re-stages kills. Guilt is slow, and slow is hallways; the margin at the
-    river gate is made of exactly this.
+    Reward pursuit with progress even when rolls fail — failure costs the
+    pursuer, not the escape. Guilt is slow, and slow is hallways; the margin at
+    the river gate is made of exactly this.
 
-    SHADOW-STEP: as the_wept.fof.
-
-    Conversely, witnesses SLOW it: every scene in which player characters
-    chase, harry, or simply see it buys Veier another hallway. Reward pursuit
-    with progress even when rolls fail — failure costs the pursuer, not the
-    escape.
-
-    UNRAVELING PRESENCE: as the_wept.fof.
-
-    UNDEFEATABLE: as the_wept.fof — Resolve 0 is never a kill; it removes the
-    obstacle and resumes the hunt. Force buys Veier hallways, nothing more.
+    SHADOW-STEP and UNRAVELING PRESENCE: as the_wept.fof.
 
     THE CROSSING: at the climax the Radiant is intercepted in the gardens by
     Master Vell — the one being at the ball it is wary of. It breaks past him
     exactly once — unless guilt is already dragging at it, which is what its
     Fracture is for. See module Chapter V.
-
+  organization: >
+    One of three. Takes the Dance while the others take the doors and the
+    dais.
+  reskin_of: null
 created_at: '2026-07-12T00:00:00+00:00'
-last_modified: '2026-07-13T00:00:00+00:00'
+last_modified: '2026-09-25T00:00:00+00:00'

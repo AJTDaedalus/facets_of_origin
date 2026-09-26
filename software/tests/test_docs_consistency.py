@@ -1,50 +1,39 @@
-"""Consistency invariants for the PHB and MM Manual.
+"""Consistency invariants for the three books, the module, and the ruleset data.
 
-The books are prose, but the *apparatus* around them — cross-references,
-glossary pointers, the character sheet, the generated index — is mechanical,
-and every piece of it has an invariant a machine can check. This module is
-where those live. See docs/DESIGN_production_apparatus.md §5 for the full
-table (INV-1 through INV-6) and which task lands each one.
+Lean Facets v1.0 (docs/DESIGN_lean_facets.md §6). The books are prose, but the
+apparatus around them is mechanical, and every piece of it has an invariant a
+machine can check. The v0.3 suite is preserved at tag `pre-lean-facets`; the
+generic apparatus invariants carried over unchanged, the mechanic-specific ones
+were rewritten against v1.
 
-Currently implemented:
-  INV-1  every skill's facet.yaml description matches its II.7 prose entry
-  INV-2  every Character Sheet field maps to a real Character model attribute
-  INV-3  every Glossary entry's chapter pointer resolves and contains the term
-  INV-4  Index.md is byte-identical to a fresh regeneration
-  INV-5  every `Chapter X.Y` reference in either book resolves to a file
-  INV-6  MM5 uses typographic dashes, not ASCII `--` / `-->`
-  INV-7  facet.yaml's domain catalog matches the Magic Domain appendix
-  INV-8  the books may not restrict a Strike pairing the engine permits
-
-Style-guide apparatus (docs/RESEARCH_style_audit.md, 2026-08):
+  INV-2   the Character Sheet names every field the character file carries
+  INV-3   every Glossary entry's chapter pointer resolves and contains the term
+  INV-4   Index.md is byte-identical to a fresh regeneration
+  INV-5   every `Chapter X.Y` reference in the books resolves to a file
+  INV-6   MM5 uses typographic dashes, not ASCII `--` / `-->`
+  INV-7   facet.yaml's domain catalog matches the Magic Domain appendix
   INV-9   every lookup table carries a numbered caption, unique and 1..n per chapter
   INV-10  List_of_Tables.md and List_of_Boxes.md regenerate to no diff
   INV-11  no "see below" / "as mentioned above" — pointers must resolve
   INV-12  no capitalized term the Glossary does not define
-  INV-13  every box declares one of the six species, and Front Matter declares each
-  INV-14  every Technique carries use/normal, and its header agrees with facet.yaml
+  INV-13  every box declares a species, and Front Matter declares each
   INV-15  the Bestiary's stat blocks, finding aids, and Lore boxes are complete
-          and regenerate to no diff
-
-Lineage and setting Facets (D18, D21, 2026-09):
-  INV-16  every lineage gift domain resolves in the merged catalog
-          (schema half in test_facet_loading.py; Facet half here)
-  INV-17  a setting Facet's counted-novelty line matches its data, it writes
-          into no rules section, and loading it leaves the core identical
-  INV-18  a module enemy reskin changes flavour only, never numbers -- and no
-          setting name leaks into the setting-agnostic Bestiary
-
-Adventures (2026-09):
+  INV-16  every lineage gift domain resolves
+  INV-17  a setting Facet is additive: it changes no core number
+  INV-18  a module enemy reskin changes flavour only, never numbers
   INV-19  scene-card stat lines and pregen blocks regenerate to no diff
-  INV-20  every `Chapter X.Y` reference in an adventure resolves (INV-5's reach
-          extended past the three books)
-  INV-21  read-aloud blocks stay under 120 words -- measured per blockquote
-          *paragraph*, not per line
+  INV-20  every `Chapter X.Y` reference in an adventure resolves
+  INV-21  read-aloud blocks stay under 120 words
+  INV-22  every talent has use/text/normal (talents also improved) and the
+          books print it with a header that agrees with facet.yaml
+  INV-23  every preset class resolves and is printed in its Facet chapter
+  INV-24  every MM table covers its die exactly once
+  INV-25  MM6's tables regenerate to no diff
+  INV-26  the books print the numbers facet.yaml holds (weapon dice, grit
+          dice, the monster level table)
+  INV-27  no retired v0.3 term survives on a live rules surface
 
-Also enforced here without a number: worked example-of-play arithmetic agrees
-with the printed outcome tiers; the Guardian vignette shows all three outcome
-bands and spends its Resolve exactly; a gift domain entry carries territory and
-never a mechanic.
+Also: worked example-of-play arithmetic agrees with the printed outcome tiers.
 """
 from __future__ import annotations
 
@@ -54,7 +43,6 @@ from pathlib import Path
 import pytest
 import yaml
 
-from app.game.character import Character
 from tools.build_index import generate_index_text
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -62,7 +50,6 @@ PLAYER_HANDBOOK = REPO_ROOT / "player_handbook"
 MM_MANUAL = REPO_ROOT / "mm_manual"
 BESTIARY = REPO_ROOT / "bestiary"
 FACET_YAML = REPO_ROOT / "software" / "facets" / "base" / "facet.yaml"
-SKILLS_CHAPTER = PLAYER_HANDBOOK / "II.7_Character_Creation_Skills.md"
 CHARACTER_SHEET = PLAYER_HANDBOOK / "Appendix_Character_Sheet.md"
 GLOSSARY = PLAYER_HANDBOOK / "Glossary.md"
 INDEX_FILE = PLAYER_HANDBOOK / "Index.md"
@@ -150,153 +137,6 @@ def _normalize(text: str) -> str:
     return " ".join(text.split())
 
 
-def _facet_yaml_skills() -> list[dict]:
-    data = yaml.safe_load(FACET_YAML.read_text())
-    return data["skills"]
-
-
-# A skill entry in II.7's "The Skill List": a bold name, an italic
-# "(Facet — Attribute)" line, a **Roll:** field, then the prose paragraph that
-# defines what the skill covers (audit finding P3 gave the entries a field
-# skeleton; before that the prose followed the name directly).
-_SKILL_ENTRY = re.compile(
-    r"\*\*([A-Za-z]+)\*\* \*\([A-Za-z]+ — [A-Za-z]+\)\*\n\n"
-    r"\*\*Roll:\*\*[^\n]*\n\n(.+?)(?=\n\n|\Z)", re.S
-)
-
-
-def _skill_list_entries() -> dict[str, str]:
-    """Parse {skill name: prose} out of II.7's "## The Skill List" section."""
-    text = SKILLS_CHAPTER.read_text()
-    start = text.index("## The Skill List")
-    rest = text[start:]
-    next_heading = re.search(r"\n## ", rest[1:])
-    section = rest[: next_heading.start() + 1] if next_heading else rest
-    return {
-        name: _normalize(body) for name, body in _SKILL_ENTRY.findall(section)
-    }
-
-
-def test_skill_descriptions_match_facet_yaml() -> None:
-    """INV-1: facet.yaml's `description` for every skill is the canonical prose.
-
-    Four copies of every skill description used to drift independently. Now
-    there are two coupled homes — data (facet.yaml) and prose (II.7) — and
-    this is what stops them from becoming two different rules. II.7 may add
-    a trailing usage sentence; it must not alter or contradict the data
-    description itself, so the check is verbatim substring containment.
-    """
-    entries = _skill_list_entries()
-    mismatches: list[str] = []
-
-    for skill in _facet_yaml_skills():
-        name = skill["name"]
-        expected = _normalize(skill["description"])
-        prose = entries.get(name)
-        if prose is None:
-            mismatches.append(f"{name}: no entry in II.7 'The Skill List'")
-        elif expected not in prose:
-            mismatches.append(
-                f"{name}: facet.yaml description not found verbatim in II.7\n"
-                f"    facet.yaml: {expected}\n"
-                f"    II.7:       {prose}"
-            )
-
-    assert not mismatches, "Skill description mismatches:\n" + "\n".join(mismatches)
-
-
-# Every field on Appendix_Character_Sheet.md, mapped to the Character model
-# attribute that stores it. Keys are the human-readable labels as they appear
-# on the sheet; values must be real Character attributes (declared field or
-# @computed_field). Multiple sheet fields may share one model attribute (e.g.
-# Starting Skill and Secondary Skill both live in the `skills` dict) — that's
-# not duplication, it's two views onto one piece of state.
-CHARACTER_SHEET_FIELDS = {
-    "Character Name": "name",
-    "Player Name": "player_name",
-    "Attributes": "attributes",
-    "Primary Facet": "primary_facet",
-    "Facet Level": "facet_level",
-    "Rank Advances Toward Next Level": "rank_advances_this_facet_level",
-    # "Career Advances" left the paper sheet in T5.5 (P-13) — the app and
-    # `.fof` keep the field; it is an app/MM concept, not sheet bookkeeping.
-    "Title & Origin": "background_id",
-    "Starting Skill (Practiced)": "skills",
-    "Secondary Skill (Novice, 1 mark) or Domain Origin": "skills",
-    "Specialty": "specialty",
-    "Skills": "skills",
-    "Technique": "techniques",
-    "Choice (if any)": "technique_choices",
-    "Magic Domain": "magic_domain",
-    "Endurance Pool (current / max) — max is 4 + Constitution modifier + Endurance skill rank": "endurance_current",
-    "Armor Type": "armor",
-    # T6.5: the printed sheet carries the III.3 paper-variant checkboxes
-    # (one per downgrade, ticked as armor softens a Condition) — the model
-    # still stores the same state as a remaining count.
-    "Armor Downgrades This Scene — tick a box each time armor softens a Condition (light armor: the first 2 boxes; heavy: all 4); boxes refresh when the scene ends": "armor_downgrades_remaining",
-    "Active Conditions": "conditions",
-    "Sparks": "sparks",
-    "Inventory": "inventory",
-    "Item": "inventory",
-    "Skill Points Remaining This Session": "session_skill_points_remaining",
-}
-
-
-def test_character_sheet_fields_map_to_model() -> None:
-    """INV-2: every Character Sheet field has a real home on the Character model.
-
-    A sheet field with no model attribute behind it is a sheet that lets a
-    player record something the engine cannot store — it lies about the game.
-    Checks both directions: every mapped attribute must actually exist on
-    `Character` (guards the sheet against the model drifting out from under
-    it), and every field label must actually appear on the sheet (guards the
-    mapping against going stale relative to the document).
-    """
-    known_attrs = set(Character.model_fields) | set(Character.model_computed_fields)
-    sheet_text = _normalize(CHARACTER_SHEET.read_text())
-
-    bad_attrs = [
-        f"{label!r} -> {attr!r} (no such Character attribute)"
-        for label, attr in CHARACTER_SHEET_FIELDS.items()
-        if attr not in known_attrs
-    ]
-    missing_labels = [
-        f"{label!r} not found on the sheet"
-        for label in CHARACTER_SHEET_FIELDS
-        if _normalize(label) not in sheet_text
-    ]
-
-    errors = bad_attrs + missing_labels
-    assert not errors, "Character Sheet / model mismatches:\n" + "\n".join(errors)
-
-
-# The Magic, Combat, and Inventory sections (new in this task). The Facet
-# section's Career Advances row left the sheet in T5.5 (P-13); the armor row
-# became the III.3 paper-variant checkboxes in T6.5.
-NEW_CHARACTER_SHEET_SECTION_LABELS = [
-    "Magic Domain",
-    "Endurance Pool (current / max) — max is 4 + Constitution modifier + Endurance skill rank",
-    "Armor Type",
-    "Armor Downgrades This Scene — tick a box each time armor softens a Condition (light armor: the first 2 boxes; heavy: all 4); boxes refresh when the scene ends",
-    "Active Conditions",
-    "Inventory",
-]
-
-
-def test_new_character_sheet_sections_need_no_new_model_field() -> None:
-    """D7 (W3-2/W3-3): the Magic, Combat, and Inventory sections are new
-    *sheet* content, but every field they add was already tracked on
-    `Character` before this task (DESIGN Section 1 S3) — no new Character
-    field was added to support them.
-    """
-    known_attrs = set(Character.model_fields) | set(Character.model_computed_fields)
-    for label in NEW_CHARACTER_SHEET_SECTION_LABELS:
-        assert label in CHARACTER_SHEET_FIELDS, f"{label!r} not registered in CHARACTER_SHEET_FIELDS"
-        assert CHARACTER_SHEET_FIELDS[label] in known_attrs, (
-            f"{label!r} maps to {CHARACTER_SHEET_FIELDS[label]!r}, not a real Character attribute"
-        )
-
-
 # A Glossary entry: `**Term** — definition text. *(pointer)*`. The pointer is
 # either a PHB citation (`Chapter II.4b`) or a bare MM manual citation (`MM1`)
 # — the book's own convention never writes "Chapter MM1" (see Front_Matter.md,
@@ -343,53 +183,6 @@ def test_glossary_pointers_resolve() -> None:
 
 # A domain heading in the appendix: `**Fire** *(Focused)*` on its own line. The
 # appendix is canon; facet.yaml is a transcription of it.
-_APPENDIX_DOMAIN = re.compile(r"^\*\*([A-Z][\w '&-]+?)\*\* \*\(([A-Za-z]+)\)\*\s*$", re.M)
-DOMAIN_APPENDIX = PLAYER_HANDBOOK / "Appendix_Magic_Domains.md"
-
-
-def _appendix_domains() -> dict[str, str]:
-    """{domain id: type} as the appendix declares them, across both Facets.
-
-    D14 (T5.4): "Prismatic" is the player-facing print name of the `broad`
-    type key — the appendix prints Prismatic, facet.yaml keeps the key.
-    """
-    domains: dict[str, str] = {}
-    for name, dtype in _APPENDIX_DOMAIN.findall(DOMAIN_APPENDIX.read_text()):
-        domain_id = re.sub(r"[^a-z0-9]+", "_", name.lower()).strip("_")
-        dtype = dtype.lower()
-        domains[domain_id] = "broad" if dtype == "prismatic" else dtype
-    return domains
-
-
-def test_domain_catalog_matches_appendix() -> None:
-    """INV-7: facet.yaml's domain catalog is the appendix, transcribed.
-
-    The catalog now lives in two coupled homes — canon prose (the appendix) and
-    data (facet.yaml) — and a domain whose *type* differs between them is a
-    domain that rolls one difficulty at the table and another in the engine.
-    That divergence is exactly what let prismatic domains be silently treated as
-    standard ones (issue #8).
-    """
-    data = yaml.safe_load(FACET_YAML.read_text())["magic"]
-    catalog = {
-        d["id"]: d["type"]
-        for d in data.get("soul_domains", []) + data.get("mind_domains", [])
-    }
-    appendix = _appendix_domains()
-
-    errors: list[str] = []
-    for domain_id, dtype in sorted(appendix.items()):
-        if domain_id not in catalog:
-            errors.append(f"{domain_id}: in the appendix, missing from facet.yaml")
-        elif catalog[domain_id] != dtype:
-            errors.append(
-                f"{domain_id}: appendix says {dtype!r}, facet.yaml says {catalog[domain_id]!r}"
-            )
-    for domain_id in sorted(set(catalog) - set(appendix)):
-        errors.append(f"{domain_id}: in facet.yaml, missing from the appendix")
-
-    assert not errors, "Domain catalog / appendix mismatches:\n" + "\n".join(errors)
-
 
 def test_index_is_up_to_date() -> None:
     """INV-4: Index.md is byte-identical to a fresh regeneration.
@@ -403,209 +196,6 @@ def test_index_is_up_to_date() -> None:
         "Index.md is stale — regenerate with "
         "`python -m tools.build_index` (from software/)."
     )
-
-
-def _find_technique(technique_id: str) -> dict:
-    """Find a Technique's yaml block anywhere in facet.yaml's `techniques` tree."""
-    data = yaml.safe_load(FACET_YAML.read_text())["techniques"]
-    for tree in data.values():
-        for branch in tree.get("branches", []):
-            for tier in branch.get("tiers", []):
-                for technique in tier.get("techniques", []):
-                    if technique["id"] == technique_id:
-                        return technique
-    raise AssertionError(f"No technique {technique_id!r} found in facet.yaml")
-
-
-def test_overwhelming_force_matches_phb_ii4a() -> None:
-    """sync-H-1: Overwhelming Force is the current (once/scene, 10+) rule.
-
-    facet.yaml still carried the pre-v0.3 "succeed by 3 or more above the
-    threshold... staggered... act last... no reactions" version, which no
-    longer matches PHB II.4a:39-40's rule at all.
-    """
-    description = _find_technique("overwhelming_force")["description"].lower()
-    assert "once per scene" in description
-    assert "10+" in description or "full success" in description
-
-
-def test_no_pre_v03_overwhelming_force_text_survives() -> None:
-    """The old threshold-margin wording must not survive anywhere in facet.yaml,
-    not just in the Overwhelming Force entry itself."""
-    assert "3 or more above the threshold" not in FACET_YAML.read_text()
-
-
-def test_first_move_matches_phb_ii4b_timing_and_scope() -> None:
-    """sync-M-1: First Move governs *this* exchange, not the next, and
-    includes the ambush/trap-negation clause (PHB II.4b:96). facet.yaml had
-    drifted to "acts first in the next exchange" with no mention of
-    ambushes or traps.
-    """
-    description = _find_technique("first_move")["description"].lower()
-    assert "this exchange" in description
-    assert "next exchange" not in description
-    assert "ambush" in description
-    assert "trap" in description
-
-
-# A pre-built Background entry in II.6: "**Name**\n\n*Title:* ...", up to the
-# next thematic break. Distinguishes the 15 real entries from the five bold
-# element-definition headers (**Title**, **Specialty**, etc.) earlier in the
-# chapter, which are never followed by a "**Title:**" line.
-#
-# Field labels are bold, not italic: bold marks a field label, italics mark a
-# named game object (style guide Law 5, audit finding S9). The instances used
-# italic labels while the legend defining them used bold, which made the two
-# typographic signals mean the same thing in one file.
-_BACKGROUND_SECTION = re.compile(
-    r"^\*\*([A-Z][^\n*]+)\*\*\n\n\*\*Title:\*\*.*?(?=\n---\n|\Z)", re.M | re.S
-)
-_SPECIALTY_LINE = re.compile(r"^\*\*Specialty:\*\*\s*(.+?)\.?\s*$", re.M)
-BACKGROUNDS_CHAPTER = PLAYER_HANDBOOK / "II.6_Character_Creation_Backgrounds.md"
-
-
-def _phb_background_specialties() -> dict[str, str | None]:
-    """{Background name: Specialty text, or None if the entry has no Specialty line}."""
-    text = BACKGROUNDS_CHAPTER.read_text()
-    result: dict[str, str | None] = {}
-    for m in _BACKGROUND_SECTION.finditer(text):
-        name, block = m.group(1), m.group(0)
-        spec = _SPECIALTY_LINE.search(block)
-        result[name] = spec.group(1).strip() if spec else None
-    return result
-
-
-def _yaml_backgrounds() -> list[dict]:
-    return yaml.safe_load(FACET_YAML.read_text())["backgrounds"]
-
-
-#: Proper nouns that belong to the recurring example cast and their fiction.
-#: A pre-built Background is a template every table shares; none of these may
-#: appear in one.
-_EXAMPLE_CAST_NOUNS = ("Zahna", "Mordai", "Zulnut", "Thornwall", "Artificers")
-
-
-def test_no_background_specialty_restates_the_difficulty_mechanic() -> None:
-    """A Background's Specialty is fiction; the mechanic lives in II.6 *Specialty*.
-
-    Guild Apprentice used to carry "— Standard becomes Easy when directly
-    applicable" inline, which is the section-level rule copied into one of
-    fifteen data rows. A rule stated in fifteen places drifts in fourteen.
-    """
-    offenders = {
-        name: spec for name, spec in _phb_background_specialties().items()
-        if spec and ("becomes easy" in spec.lower() or "difficulty" in spec.lower())
-    }
-    offenders.update({
-        b["name"]: b["specialty"] for b in _yaml_backgrounds()
-        if "becomes easy" in b["specialty"].lower()
-        or "difficulty" in b["specialty"].lower()
-    })
-    assert not offenders, (
-        "These Background Specialties restate the difficulty rule that II.6's "
-        f"*Specialty* section owns: {sorted(offenders)}")
-
-
-def test_no_background_specialty_names_the_example_cast() -> None:
-    """A pre-built Background is a template, not one character's sheet.
-
-    This replaces an earlier test that pinned Guild Apprentice's Specialty to the
-    Quick Start's wording (rul-H1 / D4). That pin wrote *Zahna's* personal
-    Specialty — "Artificers' Guild technical records" — into the generic
-    Background every guild apprentice at every table shares, and the Quick Start
-    it pointed at no longer carries pregen sheets. The leak, not the wording, is
-    what needs guarding: example-cast detail must stay in vignettes.
-    """
-    offenders = []
-    for name, spec in _phb_background_specialties().items():
-        for noun in _EXAMPLE_CAST_NOUNS:
-            if spec and noun in spec:
-                offenders.append(f"II.6 {name}: names {noun!r}")
-    for background in _yaml_backgrounds():
-        for noun in _EXAMPLE_CAST_NOUNS:
-            if noun in background["specialty"]:
-                offenders.append(f"facet.yaml {background['id']}: names {noun!r}")
-
-    assert not offenders, (
-        "A pre-built Background's Specialty names the example cast's own "
-        "fiction. Write the generic capability instead:\n" + "\n".join(offenders))
-
-
-def test_all_fifteen_backgrounds_have_a_specialty_in_phb_and_yaml() -> None:
-    """II.6's five-elements claim (Title, Description, Starting Skill, Secondary
-    Skill/Domain Origin, Specialty) must hold for every pre-built Background."""
-    phb = _phb_background_specialties()
-    assert len(phb) == 15
-    missing_in_phb = [name for name, spec in phb.items() if not spec]
-    assert not missing_in_phb, f"No Specialty in II.6 for: {missing_in_phb}"
-
-    yaml_bgs = _yaml_backgrounds()
-    assert len(yaml_bgs) == 15
-    missing_in_yaml = [b["id"] for b in yaml_bgs if not b.get("specialty")]
-    assert not missing_in_yaml, f"No specialty in facet.yaml for: {missing_in_yaml}"
-
-
-# ---------------------------------------------------------------------------
-# INV-8: the books may not restrict a Strike pairing the engine permits
-# ---------------------------------------------------------------------------
-
-#: A line that states the Strike roll and names both skills. Whatever it says
-#: about Combat and Finesse has to be a default, not a restriction.
-_STRIKE_SKILL_HEDGES = ("default", "whichever", "usually", "or finesse —",
-                        "fits", "the fiction")
-
-
-def _strike_skill_lines() -> list[tuple[Path, int, str]]:
-    """Every book line that pairs a Strike with both Combat and Finesse."""
-    found = []
-    for path in _book_files():
-        for number, line in _prose_lines(path):
-            lowered = line.lower()
-            if "combat" not in lowered or "finesse" not in lowered:
-                continue
-            if "strike" in lowered or "hit something" in lowered:
-                found.append((path, number, line))
-    return found
-
-
-def test_books_do_not_restrict_the_strike_pairing() -> None:
-    """INV-8. `_handle_strike` accepts any attribute/skill the client sends —
-    `test_websocket.py::...Strike can use any attribute` pins that. III.3 said
-    "the skill is **Combat** for melee and unarmed Strikes, **Finesse** for
-    ranged ones", which reads as a restriction the engine does not enforce, and
-    which makes a Finesse-based unarmed character unbuildable by the book.
-
-    Found by an agentic playtest, 2026-07-31
-    (playtest/08_npc_variance/subagent_session/report.md, F1) — a monk-adjacent
-    PC struck with Dexterity + Finesse, the engine allowed it, and the book
-    forbade it.
-
-    Any line naming both skills for a Strike must hedge. Quick references are
-    compressions, not paraphrases: if the body text hedges, they must too.
-    """
-    offenders = []
-    for path, number, line in _strike_skill_lines():
-        if not any(hedge in line.lower() for hedge in _STRIKE_SKILL_HEDGES):
-            offenders.append(f"{path.relative_to(REPO_ROOT)}:{number}: {line.strip()}")
-
-    assert not offenders, (
-        "These lines state the Strike skill as a rule the engine does not "
-        "enforce:\n" + "\n".join(offenders))
-
-
-def test_the_strike_rule_is_stated_somewhere() -> None:
-    """Guard against the previous test passing because the rule vanished."""
-    assert _strike_skill_lines(), "No book line describes the Strike pairing at all"
-
-
-def test_specialty_covers_the_no_skill_case() -> None:
-    """II.6 defined a Specialty only as a difficulty shift, which says nothing
-    about an action with no roll attached — the gap an MM had to rule on live
-    (report F3). A Specialty must never manufacture a roll."""
-    text = (PLAYER_HANDBOOK / "II.6_Character_Creation_Backgrounds.md").read_text(
-        encoding="utf-8").lower()
-    assert "when no skill fits" in text
-    assert "do not invent a roll" in text
 
 
 # ---------------------------------------------------------------------------
@@ -898,124 +488,6 @@ def test_front_matter_declares_every_species_in_use() -> None:
         f"'The Boxes': {undeclared}")
 
 
-# ---------------------------------------------------------------------------
-# INV-14: every Technique entry has the fields its legend promises
-# ---------------------------------------------------------------------------
-
-FACET_CHAPTERS = {
-    "body": PLAYER_HANDBOOK / "II.4a_Character_Creation_Facet_Body.md",
-    "mind": PLAYER_HANDBOOK / "II.4b_Character_Creation_Facet_Mind.md",
-    "soul": PLAYER_HANDBOOK / "II.4c_Character_Creation_Facet_Soul.md",
-}
-
-# "**Forcing Hand** *(Might, Tier 1 — Strength)*"
-TECHNIQUE_HEAD = re.compile(
-    r"^\*\*([A-Z][^*]+?)\*\* \*\(([A-Za-z ]+), Tier ([123]) — ([A-Za-z]+)\)\*$", re.M)
-
-
-def _facet_yaml_techniques() -> dict[str, list[dict]]:
-    """{facet: [technique, ...]} with branch and tier folded into each entry."""
-    data = yaml.safe_load(FACET_YAML.read_text())
-    out: dict[str, list[dict]] = {}
-    for facet, tree in data["techniques"].items():
-        entries = []
-        for branch in tree["branches"]:
-            for tier in branch["tiers"]:
-                for technique in tier["techniques"]:
-                    entries.append({**technique,
-                                    "branch": branch["name"],
-                                    "branch_attribute": branch["attribute"],
-                                    "tier": tier["tier"]})
-        out[facet] = entries
-    return out
-
-
-def test_every_technique_has_use_and_normal_in_facet_yaml() -> None:
-    """INV-14: facet.yaml carries `use` and `normal` for every Technique.
-
-    `normal` restates the baseline a Technique departs from — the field
-    rulebooks.md §4 calls "a masterstroke worth stealing", because without it a
-    reader cannot tell how big the exception is. Audit findings P1 and P2.
-    """
-    missing = []
-    for facet, techniques in _facet_yaml_techniques().items():
-        for technique in techniques:
-            for field in ("use", "normal"):
-                if not technique.get(field):
-                    missing.append(f"{facet}/{technique['id']}: no `{field}`")
-
-    assert not missing, "Techniques missing their fields:\n" + "\n".join(missing)
-
-
-def test_every_technique_entry_states_branch_tier_and_attribute() -> None:
-    """INV-14: no Technique entry in II.4a-c omits its header fields.
-
-    The audit found the first catalog a reader meets drifting inside one file:
-    Tier 1 entries carried an attribute tag and Tier 2/3 did not. Format drift
-    mid-catalog is the "no mid-catalog format drift" anti-pattern.
-    """
-    yaml_names = {t["name"] for ts in _facet_yaml_techniques().values() for t in ts}
-    offenders = []
-    for facet, path in FACET_CHAPTERS.items():
-        text = path.read_text(encoding="utf-8")
-        headed = {m.group(1) for m in TECHNIQUE_HEAD.finditer(text)}
-        for name in sorted(yaml_names):
-            # Only require a header for Techniques this chapter actually lists.
-            if re.search(rf"^\*\*{re.escape(name)}\*\*", text, re.M) and name not in headed:
-                offenders.append(f"{path.name}: '{name}' has no "
-                                 f"*(Branch, Tier N — Attribute)* header")
-
-    assert not offenders, "Technique headers are incomplete:\n" + "\n".join(offenders)
-
-
-def test_technique_headers_match_facet_yaml() -> None:
-    """INV-14: a Technique's branch, tier, and attribute agree with facet.yaml.
-
-    Two Techniques share a name across Facets (Second Domain, Ascendant Domain).
-    Anything that keys Technique data by name alone silently gives the Mind
-    entries the Soul entries' branch and roll — which is exactly what happened
-    while this format was being applied.
-    """
-    attribute_names = {
-        "strength": "Strength", "dexterity": "Dexterity",
-        "constitution": "Constitution", "intelligence": "Intelligence",
-        "wisdom": "Wisdom", "knowledge": "Knowledge", "spirit": "Spirit",
-        "luck": "Luck", "charisma": "Charisma",
-    }
-    mismatches = []
-    for facet, path in FACET_CHAPTERS.items():
-        expected = {t["name"]: t for t in _facet_yaml_techniques()[facet]}
-        for match in TECHNIQUE_HEAD.finditer(path.read_text(encoding="utf-8")):
-            name, branch, tier, attribute = match.groups()
-            technique = expected.get(name)
-            if technique is None:
-                mismatches.append(f"{path.name}: '{name}' is not in facet.yaml's "
-                                  f"{facet} tree")
-                continue
-            actual = (branch, int(tier), attribute)
-            wanted = (technique["branch"], technique["tier"],
-                      attribute_names[technique["branch_attribute"]])
-            if actual != wanted:
-                mismatches.append(f"{path.name}: '{name}' says {actual}, "
-                                  f"facet.yaml says {wanted}")
-
-    assert not mismatches, "Technique headers disagree with facet.yaml:\n" + "\n".join(mismatches)
-
-
-def test_every_technique_entry_carries_a_normal_line() -> None:
-    """INV-14: each Technique entry in the books prints its Normal field."""
-    missing = []
-    for facet, path in FACET_CHAPTERS.items():
-        text = path.read_text(encoding="utf-8")
-        blocks = TECHNIQUE_HEAD.split(text)
-        # split() yields [prefix, name, branch, tier, attr, body, name, ...]
-        for i in range(1, len(blocks), 5):
-            name, body = blocks[i], blocks[i + 4]
-            if "**Normal:**" not in body:
-                missing.append(f"{path.name}: '{name}' has no **Normal:** line")
-
-    assert not missing, "Techniques without a Normal line:\n" + "\n".join(missing)
-
 
 def test_bestiary_is_up_to_date() -> None:
     """INV-15: every Bestiary stat block and its finding aids regenerate to no diff.
@@ -1035,7 +507,7 @@ def test_bestiary_is_up_to_date() -> None:
 
 
 def test_every_bestiary_creature_is_in_the_finding_aids() -> None:
-    """INV-15: no creature has an entry the TR-sorted list does not carry.
+    """INV-15: no creature has an entry the level-sorted list does not carry.
 
     `monster_books.md` §1: the difficulty-sorted list is the single most-used
     finding aid an MM has. One it does not list is one nobody finds.
@@ -1075,162 +547,6 @@ def test_every_bestiary_creature_has_a_lore_box() -> None:
 
     assert not problems, "Lore boxes are incomplete:\n" + "\n".join(problems)
 
-
-# ---------------------------------------------------------------------------
-# B4 Q2 (docs/DECISIONS.md) — the Second Domain wording defect (TD-2)
-# ---------------------------------------------------------------------------
-
-def test_second_domain_wording_does_not_anchor_on_primary_domain() -> None:
-    """B4 Q2 regression guard: no book or facet.yaml surface says a Second
-    Domain is "harder than your primary domain".
-
-    That anchoring is wrong for a Focused-primary caster: Focused-plus-one-step
-    *is* the Standard table, so the phrase silently deletes the penalty. The
-    correct, re-anchored wording is "harder than normal for that domain" —
-    the ruling prices the *grant*, not the caster's other domain. The string
-    is short and copy-pastable, hence the standing regression guard rather
-    than a one-time fix.
-    """
-    offenders = []
-    for path in _book_files():
-        if "harder than your primary domain" in path.read_text():
-            offenders.append(str(path.relative_to(REPO_ROOT)))
-    if "harder than your primary domain" in FACET_YAML.read_text():
-        offenders.append(str(FACET_YAML.relative_to(REPO_ROOT)))
-    assert not offenders, (
-        f"stale 'harder than your primary domain' wording in: {offenders}"
-    )
-
-
-# ---------------------------------------------------------------------------
-# Retired-phrase register (fun/ease pipeline — docs/TASKS_fun_ease_fixes.md T0.1)
-# ---------------------------------------------------------------------------
-
-# Every entry is (phrase, reason/finding-id). When a task in the fun/ease
-# pipeline removes or rewrites rule wording, the dead phrase is appended here
-# so the suite fails forever if it reappears anywhere in live rules surfaces.
-# Historical archives (playtest/, docs/, research/simulation_log.md,
-# research/advancement_priority_questions.md) are excluded by construction:
-# they are simply not in the scanned paths below.
-RETIRED_PHRASES: list[tuple[str, str]] = [
-    ("reactions, the works", "K-1: Named NPCs do not roll reactions"),
-    ("they use for Strikes and Parries", "K-1: enemy attack modifier is an authoring input, not a rolled modifier"),
-    ("same roll for Parry", "K-1: enemies never roll Parry"),
-    ("feeds the TR formula", "K-11 prep: defense_modifier does not feed the TR formula"),
-    ("Parry: same roll", "K-1: enemies never roll Parry"),
-    ("Reaction preference: Parry over Dodge", "K-1: enemies do not choose or roll reactions"),
-    ("Dodges erratically", "K-1: enemies do not Dodge; defense text is authoring guidance"),
-    ("arrive at the Named NPC already worn down", "K §4.3: Absorb costs nothing; Mook pressure is Tier 1 chip, not Endurance attrition"),
-    ("end a session with 2-4 unspent Sparks", "C-2/D1: Sparks reset to 3 each session; the target is spend-what-you-earn (hyphen variant, facet.yaml)"),
-    ("end a session with **2–4 unspent Sparks**", "C-2/D1: Sparks reset to 3 each session; the target is spend-what-you-earn (en-dash+bold variant, MM2)"),
-    ("end a session with 2–4 unspent Sparks", "C-2/D1: Sparks reset to 3 each session; the target is spend-what-you-earn (en-dash variant)"),
-    ("Pushing scope", "P-1: un-executable rule deleted — no scope tier exists beyond Major"),
-    ("natural ceiling", "P-1: the 'one tier beyond the natural ceiling' framing died with Pushing scope"),
-    ("pushed beyond Very Hard under any circumstances", "P-3/D8: rewritten as 'Reach-Sparks cannot move a Broad working's difficulty; dice-Sparks work normally'"),
-    ("Their ceiling is their ceiling", "P-3/D8: the misreadable 'Sparks don't work here' framing died; dice-Sparks are legal on Broad rolls"),
-    ("something the roll already carries", "C-3/D2: III.1's Technique trigger taxonomy moved to II.4 Reading the Entries; III.1 keeps the precedence paragraph + one-sentence pointer"),
-    ("before the player decides how to proceed", "C-7/D3: 7-9 is narration sequencing, not a decline-offer — the MM names the cost before narrating the success"),
-    ("a Tier 1 or Tier 2 Condition of your choice", "K-6/D4: the five-option Condition menu vs enemies became the single Open tag"),
-    ("rider Condition", "K-6/D4: riders retired — a 10+ vs an enemy may leave it Open instead; PvP tier outcomes unchanged"),
-    ("x multiplier", "K-5/D6: the TR budget and its multipliers are cut — actor count drives difficulty; historical record in docs/DECISIONS.md"),
-    ("Action Economy Multipliers", "K-5/D6: Table MM1-6 cut with the budget — the multipliers never predicted the actor-count threshold"),
-    ("defense_modifier", "K-11: retired — never in the TR formula, and NPCs never roll; loader warns on legacy files"),
-    ("player characters and significant antagonists alike", "K-4/K-10/D12: the enemy blind-posture-reveal ceremony is dropped — the MM states enemy stances openly, driven by conduct triggers; PC-side blind declaration stays"),
-    ("Roll Knowledge when doing so", "P-2/D7 (T4.1): casting adds the tradition's skill — casting with Knowledge adds the Lore rank"),
-    ("Roll Spirit when doing so", "P-2/D7 (T4.1): casting adds the tradition's skill — casting with Spirit adds the Attune rank"),
-    ("Knowledge or Spirit (by tradition)", "P-2/D7 (T4.1): the attribute-only casting formula is dead — the roll is Spirit + Attune or Knowledge + Lore"),
-    ("Spirit or Knowledge (by tradition)", "P-2/D7 (T4.1): the attribute-only casting formula is dead — the roll is Spirit + Attune or Knowledge + Lore"),
-    ("always one difficulty step harder", "P-7/D9 (T4.2): the Second Domain penalty is an arc, not a permanent tax — it lifts at the character's next Facet level after acquisition"),
-    ("unspent points are lost", "P-5/D10 (T4.3): the forfeit is dead — up to 2 unspent points bank across sessions"),
-    ("unspent points do not carry over", "P-5/D10 (T4.3): the forfeit is dead — up to 2 unspent points bank across sessions"),
-    ("use-it-or-lose-it", "P-5/D10 (T4.3): MM5's compression of the dead forfeit rule"),
-    ("before it lands, you automatically succeed", "P-8/D11 (T4.5): Never Surprised is a warning beat, not an auto-success — the absolute is gone"),
-    ("Broad (Prismatic)", "P-11/D14 (T5.4): Prismatic is the player-facing word; Broad survives only in II.3's one definitional sentence (and as the untouched `broad` type key)"),
-    ("Broad-Prismatic", "P-11/D14 (T5.4): Glossary headword variant of the dead double name"),
-    ("Broad difficulty table", "P-11/D14 (T5.4): the table is printed 'the Prismatic difficulty table'"),
-    ("Body magic domains are deferred", "The Facet of the Body has no domains — nothing is deferred to a setting module; a Body character cross-trains into Mind or Soul (II.3, A Brief Note on Body Magic)"),
-    ("Body magic domains are covered", "Same: there are no Body domains to cover, in this book or a later one"),
-    ("Body magic practitioners", "There is no Body tradition; a Body character who casts is cross-trained into Mind or Soul"),
-    ("including Body magic domains", "The setting Facet's contents list promised Body domains that do not exist"),
-    ("like Body magic domains", "I_Introduction's example of forthcoming setting content promised Body domains that do not exist"),
-]
-
-# Live rules surfaces, relative to the repo root. Scope is the anti-fragment
-# protocol's: books, data, and specs — not archives.
-_RETIRED_SCAN_DIRS = [
-    "player_handbook",
-    "mm_manual",
-    "bestiary",
-    "facets",
-    "software/facets",
-    "enemies",
-    "characters",
-    "spec",
-    # The in-app rule summaries are a quick reference a player reads at the
-    # table, so they are a live rules surface under the same rule as MM5 and
-    # Quick Start — and they drifted exactly once before this was guarded.
-    "software/app/static",
-]
-
-
-def _retired_scan_files() -> list[Path]:
-    """Every readable text file under the live rules surfaces."""
-    files: list[Path] = []
-    for rel in _RETIRED_SCAN_DIRS:
-        root = REPO_ROOT / rel
-        if not root.exists():
-            continue
-        files.extend(sorted(p for p in root.rglob("*") if p.is_file()))
-    return files
-
-
-def test_retired_phrases_do_not_reappear() -> None:
-    """No retired rule wording survives (or returns) on a live rules surface.
-
-    The drift the fun/ease review found came from a rewrite landing in one
-    file and missing siblings. This register makes each removal permanent:
-    the exact dead string, greppable, with the finding that killed it.
-    """
-    offenders: list[str] = []
-    for path in _retired_scan_files():
-        try:
-            text = path.read_text(encoding="utf-8")
-        except (UnicodeDecodeError, OSError):
-            continue  # binary or unreadable — not a rules surface
-        for lineno, line in enumerate(text.splitlines(), start=1):
-            for phrase, reason in RETIRED_PHRASES:
-                if phrase in line:
-                    rel = path.relative_to(REPO_ROOT)
-                    offenders.append(f"{rel}:{lineno} — {phrase!r} ({reason})")
-    assert not offenders, (
-        "Retired phrases reappeared on live rules surfaces:\n"
-        + "\n".join(offenders)
-    )
-
-
-def test_client_reads_advancement_caps_from_the_ruleset() -> None:
-    """The two D10 advancement numbers live in `advancement:`, and the server
-    enforces them from there (`Character.spend_skill_point`,
-    `start_new_session`). The builder mirrored both as JS literals, so a Facet
-    that retuned either would have the UI offering what the server refuses.
-    """
-    builder = (REPO_ROOT / "software/app/static/js/builder.js").read_text(encoding="utf-8")
-    for key in ("bank_cap", "training_marks_per_session"):
-        assert key in builder, (
-            f"builder.js no longer reads advancement.{key} from the ruleset — "
-            "the cap is hardcoded again."
-        )
-
-
-def test_skill_point_broadcast_fields_are_ingested_by_the_client() -> None:
-    """A field the server broadcasts and the client ignores is a UI that goes
-    stale mid-session. `training_marks_this_session` gates the builder's
-    training affordance, and it was broadcast but never read.
-    """
-    websocket_py = (REPO_ROOT / "software/app/api/websocket.py").read_text(encoding="utf-8")
-    app_js = (REPO_ROOT / "software/app/static/js/app.js").read_text(encoding="utf-8")
-    assert '"training_marks_this_session": character.training_marks_this_session' in websocket_py
-    assert "msg.training_marks_this_session" in app_js
 
 
 # ---------------------------------------------------------------------------
@@ -1286,287 +602,6 @@ def test_example_of_play_rolls_match_the_outcome_tiers() -> None:
     assert checked, "no worked example rolls found — has the → notation changed?"
     assert not problems, "worked example arithmetic disagrees with the tiers:\n" + "\n".join(problems)
 
-
-def test_the_guardian_vignette_shows_the_whole_outcome_range() -> None:
-    """The style guide's example-of-play rule: a vignette that only ever rolls
-    10+ teaches the table that 7-9 and 6- are failures to be avoided rather
-    than the two bands the game actually lives in. The Archive Guardian fight
-    is the book's flagship combat example and must show all three.
-    """
-    text = (PLAYER_HANDBOOK / "III.3_Combat.md").read_text(encoding="utf-8")
-    outcomes = {stated for _, _, stated in _example_roll_lines(text)}
-    for wanted in ("Full success", "Partial success", "Failure"):
-        assert wanted in outcomes, (
-            f"III.3's example of play never shows a {wanted}. "
-            "A combat example that only rolls well is not an example of this game."
-        )
-
-
-def test_the_guardian_vignette_spends_its_resolve_exactly() -> None:
-    """The vignette's Resolve bookkeeping is arithmetic the reader checks
-    against their own sheet. It starts at 10 (base 8 + 2 heavy armour), every
-    full-success Strike takes 2, and it must land on 0 — not 1, not -2.
-    """
-    text = (PLAYER_HANDBOOK / "III.3_Combat.md").read_text(encoding="utf-8")
-    body = text[text.index("## In Play: The Archive's Guardian"):]
-
-    # The vignette states the pool two ways — "**Resolve 8**" when it names the
-    # stat, "at **6**" when it is just counting down. Both are the same number
-    # and both have to be in the sequence, or the check silently skips a step.
-    stated = [
-        int(a or b)
-        for a, b in re.findall(r"\*\*Resolve (\d+)\*\*|\bat \*\*(\d+)\*\*", body)
-    ]
-    assert stated, "the vignette no longer states the Guardian's Resolve in bold"
-    # Every stated value must be even and descending by 2 — one full-success
-    # Strike at a time, which is what the rule says a 10+ takes.
-    for earlier, later in zip(stated, stated[1:]):
-        assert later == earlier - 2, (
-            f"Resolve goes {earlier} -> {later} in the Guardian vignette; a "
-            "full-success Strike depletes exactly 2."
-        )
-    assert stated[-1] == 2, (
-        "the vignette's last stated Resolve should be 2, with the final "
-        f"Strike taking it to 0; it is {stated[-1]}."
-    )
-
-
-# ---------------------------------------------------------------------------
-# INV-17  a setting Facet's counted-novelty line matches its data
-# ---------------------------------------------------------------------------
-
-VALLOH_BOOK = REPO_ROOT / "settings" / "valloh"
-VALLOH_FACET = REPO_ROOT / "software" / "facets" / "valloh" / "facet.yaml"
-
-_NUMBER_WORDS = {
-    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
-    "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
-    "eleven": 11, "twelve": 12,
-}
-
-
-def _valloh_ruleset():
-    from app.facets.loader import load_facet_file
-    from app.facets.registry import MergedRuleset
-    return MergedRuleset([
-        load_facet_file(REPO_ROOT / "software" / "facets" / "base" / "facet.yaml"),
-        load_facet_file(VALLOH_FACET),
-    ])
-
-
-def _counted_novelty_sentence() -> str:
-    text = (VALLOH_BOOK / "V0_Ten_Things.md").read_text(encoding="utf-8")
-    sentence = next(
-        (line for line in text.split("\n") if "adds exactly" in line), None)
-    assert sentence, "V0 no longer carries a counted-novelty sentence"
-    return sentence
-
-
-def test_valloh_counted_novelty_matches_the_data() -> None:
-    """INV-17. The pitch cannot drift from the file.
-
-    A setting book's counted-novelty line is a promise about how much a reader
-    has to learn, and it is the first thing to rot: someone adds a lineage,
-    nobody edits the pitch, and the sentence quietly becomes a lie. Counting it
-    from the merged ruleset means adding a lineage without updating V0 fails
-    the suite, and so does the reverse. Since D24 the sentence also promises
-    *no* new domains, and that is checked the same way.
-    """
-    sentence = _counted_novelty_sentence()
-    m = re.search(r"\*\*(\w+) Lineages\*\*", sentence)
-    assert m, "the counted-novelty sentence does not count lineages"
-    claimed = _NUMBER_WORDS[m.group(1).lower()]
-
-    rs = _valloh_ruleset()
-    shipped = len([lin for lin in rs.lineages if lin.id != "human"])
-    assert shipped == claimed, (
-        f"V0 promises {claimed} Lineages; the Facet ships {shipped}.")
-
-    assert "adds no domains" in sentence, (
-        "V0 no longer promises that Val'loh adds no domains")
-
-
-def test_valloh_ships_the_items_it_claims() -> None:
-    """The third addition. The sentence says "crystal charges as one-use
-    items" without a count, so the invariant is that there ARE some and they
-    are all consumables — a claim of one-use items backed by nothing, or by a
-    permanent bonus, is the same drift in a different place."""
-    rs = _valloh_ruleset()
-    assert rs.items, "V0 promises crystal charges; the Facet ships no items"
-    assert all(item.kind == "consumable" for item in rs.items)
-
-
-def test_valloh_changes_no_rule() -> None:
-    """The rest of the counted-novelty promise, and the one that actually
-    matters: "it removes nothing and it changes no rule". A setting Facet that
-    quietly retunes the Spark economy or the difficulty ladder has broken the
-    only guarantee the pitch makes.
-    """
-    from app.facets.loader import load_facet_file
-    valloh = load_facet_file(VALLOH_FACET)
-    for section in ("roll_resolution", "spark", "advancement", "combat",
-                    "hazards", "death", "equipment"):
-        assert getattr(valloh, section) is None, (
-            f"the Val'loh Facet writes into `{section}`, but its pitch promises "
-            "it changes no rule."
-        )
-    # Since D24 it adds no domains either, so it writes nothing into magic.
-    assert valloh.magic is None, "the Val'loh Facet writes into `magic`"
-    assert not valloh.skills and not valloh.techniques and not valloh.backgrounds
-
-
-def test_loading_valloh_leaves_the_core_untouched() -> None:
-    """The regression guard that makes "additive" mean something. With the
-    Facet loaded the core's own domains, skills, backgrounds and rules must be
-    exactly what they are without it.
-    """
-    from app.facets.loader import load_facet_file
-    from app.facets.registry import MergedRuleset
-    base_only = MergedRuleset([
-        load_facet_file(REPO_ROOT / "software" / "facets" / "base" / "facet.yaml")])
-    with_valloh = _valloh_ruleset()
-
-    assert ({d.id for d in base_only.magic.soul_domains}
-            == {d.id for d in with_valloh.magic.soul_domains})
-    assert ({d.id for d in base_only.magic.mind_domains}
-            == {d.id for d in with_valloh.magic.mind_domains})
-    assert ({s.id for s in base_only.skills} == {s.id for s in with_valloh.skills})
-    assert ({b.id for b in base_only.backgrounds}
-            == {b.id for b in with_valloh.backgrounds})
-    assert base_only.magic.traditions == with_valloh.magic.traditions
-    assert (base_only.combat.enemy_durability.open_clears
-            == with_valloh.combat.enemy_durability.open_clears)
-
-
-def test_valloh_book_and_data_agree_on_the_lineages() -> None:
-    """INV-7's sibling, extended to the Facet: every lineage in the data has an
-    entry in V1, and V1 introduces no lineage the data does not carry."""
-    rs = _valloh_ruleset()
-    text = (VALLOH_BOOK / "V1_Lineages.md").read_text(encoding="utf-8")
-    headings = set(re.findall(r"^## ([A-Z][A-Za-z'`]+)$", text, re.M))
-    for lin in rs.lineages:
-        if lin.id == "human" or not lin.playable and lin.id == "krenn":
-            continue  # Krenn are never shown to players (V1 says so in prose)
-        assert lin.name in headings, (
-            f"lineage '{lin.id}' is in the Facet data but has no entry in V1"
-        )
-
-
-def test_valloh_adds_no_domains() -> None:
-    """D24: a gift is the player's choice of a core domain, so a setting Facet
-    that ships gift-only domains has drifted back into one-domain-per-people —
-    the fixed-class shape this game does not have. Val'loh adds none."""
-    from app.facets.loader import load_facet_file
-    valloh = load_facet_file(VALLOH_FACET)
-    assert valloh.magic is None or not (
-        valloh.magic.soul_domains or valloh.magic.mind_domains), (
-        "the Val'loh Facet ships its own domains again")
-
-
-def test_valloh_gifts_are_flavour_not_territory() -> None:
-    """Each gifted lineage says how its gift shows itself, and none of them
-    names a domain the player must take."""
-    rs = _valloh_ruleset()
-    for lin in rs.lineages:
-        if lin.id == "human":
-            continue
-        assert lin.is_gifted, f"{lin.id} has lost its gift line"
-        assert lin.gift_domains == [], (
-            f"{lin.id} narrows the player's choice; D24 leaves it open")
-
-
-def test_valloh_gift_domains_resolve() -> None:
-    """INV-16, run against the Facet that actually exercises it."""
-    rs = _valloh_ruleset()
-    known = {d.id for d in rs.magic.soul_domains} | {
-        d.id for d in rs.magic.mind_domains}
-    for lin in rs.lineages:
-        for domain_id in lin.gift_domains:
-            assert domain_id in known, (
-                f"lineage '{lin.id}' carries gift domain '{domain_id}', which "
-                "resolves to nothing"
-            )
-
-
-def test_the_module_no_longer_asserts_retired_canon() -> None:
-    """The claims the Val'loh Facet retires: "there are no magic domains in
-    Val'loh", "nobody casts in a crisis", "gifts are flair". They were a prior
-    reading of the slow-spellform rule; the rule is real, the conclusion was
-    wrong (D19). Nothing in the repo may still say them.
-    """
-    retired = [
-        "no magic domains",
-        "gifts are mostly flair",
-        "This is flair, not a subsystem",
-    ]
-    offenders = []
-    for path in sorted((REPO_ROOT / "adventures").rglob("*.md")):
-        text = path.read_text(encoding="utf-8")
-        for phrase in retired:
-            if phrase in text:
-                offenders.append(f"{path.relative_to(REPO_ROOT)}: {phrase!r}")
-    assert not offenders, "retired canon still asserted:\n" + "\n".join(offenders)
-
-
-# ---------------------------------------------------------------------------
-# INV-18  a module reskin may change flavour, never numbers
-# ---------------------------------------------------------------------------
-
-MODULE_ENEMY_DIRS = sorted((REPO_ROOT / "adventures").glob("*/enemies"))
-
-# What a reskin exists to change. Everything else is the Bestiary's.
-_RESKIN_FLAVOUR_FIELDS = {"description", "organization", "notes", "name"}
-
-
-def test_module_enemy_reskins_do_not_fork_the_numbers() -> None:
-    """INV-18. A module may reskin a Bestiary enemy so it reads like the
-    setting — the Bestiary is setting-agnostic by design (B9), so Val'loh
-    colour has to live in the module. What it may not do is change the
-    enemy's *numbers*.
-
-    This is the divergence the iron law exists to prevent, in its most
-    tempting form: the module author who wants the gate captain a point
-    tougher edits the copy in front of them, the simulated numbers the scene
-    card was tuned against quietly stop applying, and nothing says so.
-    """
-    mechanical = ("tier", "resolve", "attack_modifier", "defense_modifier",
-                  "armor", "techniques", "special", "tr", "phases")
-    problems: list[str] = []
-
-    for enemy_dir in MODULE_ENEMY_DIRS:
-        for path in sorted(enemy_dir.glob("*.fof")):
-            canonical = REPO_ROOT / "enemies" / path.name
-            if not canonical.exists():
-                continue  # module-original enemy; nothing to diverge from
-            here = yaml.safe_load(path.read_text(encoding="utf-8"))["enemy"]
-            there = yaml.safe_load(canonical.read_text(encoding="utf-8"))["enemy"]
-            for field in mechanical:
-                if here.get(field) != there.get(field):
-                    problems.append(
-                        f"{path.relative_to(REPO_ROOT)} changes `{field}` "
-                        f"({there.get(field)!r} -> {here.get(field)!r}); a reskin "
-                        f"may only change {sorted(_RESKIN_FLAVOUR_FIELDS)}"
-                    )
-
-    assert not problems, "module reskins fork Bestiary numbers:\n" + "\n".join(problems)
-
-
-def test_the_bestiary_originals_stay_setting_agnostic() -> None:
-    """B9. The reason the reskins exist at all: no Bestiary enemy may name a
-    setting. If the colour leaks back into `enemies/`, the Bestiary stops
-    being usable in anyone else's world.
-    """
-    setting_words = ("Val'loh", "Rekuzan", "Orthaen", "Oraga", "Boranis",
-                     "Blackwatch")
-    offenders = []
-    for path in sorted((REPO_ROOT / "enemies").glob("*.fof")):
-        text = path.read_text(encoding="utf-8")
-        for word in setting_words:
-            if word in text:
-                offenders.append(f"{path.name}: {word!r}")
-    assert not offenders, (
-        "setting names leaked into the setting-agnostic Bestiary:\n"
-        + "\n".join(offenders))
 
 
 # ---------------------------------------------------------------------------
@@ -1697,29 +732,379 @@ def test_the_read_aloud_check_actually_sees_multiline_blocks() -> None:
     assert not list(_read_aloud_blocks("> **Sidebar — steel at the ball**"))
 
 
-def test_every_scene_card_enemy_exists_and_its_tr_recomputes() -> None:
-    """A card that names an enemy the module cannot load is a card the MM
-    cannot run, and a printed TR that no longer matches the stat block is a
-    budget the MM cannot trust."""
-    from app.game.enemy import Enemy
-    from tools.build_scene_cards import STATLINE, load_enemies
 
-    problems: list[str] = []
-    for module_dir in ADVENTURE_DIRS:
-        enemies = load_enemies(module_dir)
-        for path in sorted(module_dir.glob("*.md")):
-            text = path.read_text()
-            for match in STATLINE.finditer(text):
-                enemy_id = match.group(2)
-                enemy = enemies.get(enemy_id)
-                if enemy is None:
-                    problems.append(
-                        f"{path.relative_to(REPO_ROOT)} references unknown "
-                        f"enemy '{enemy_id}'")
-                    continue
-                printed = re.search(r"\*\*TR (\d+)\*\*", match.group(0))
-                if printed and int(printed.group(1)) != enemy.calculate_tr():
-                    problems.append(
-                        f"{enemy_id}: card prints TR {printed.group(1)}, "
-                        f"stat block computes {enemy.calculate_tr()}")
+# ---------------------------------------------------------------------------
+# Lean Facets v1.0 invariants (INV-2, 7, 16-18, 22-27)
+# ---------------------------------------------------------------------------
+
+def _facet() -> dict:
+    return yaml.safe_load(FACET_YAML.read_text(encoding="utf-8"))
+
+
+FACET_CHAPTERS = {
+    "body": PLAYER_HANDBOOK / "II.4a_Character_Creation_Facet_Body.md",
+    "mind": PLAYER_HANDBOOK / "II.4b_Character_Creation_Facet_Mind.md",
+    "soul": PLAYER_HANDBOOK / "II.4c_Character_Creation_Facet_Soul.md",
+}
+
+# `**Weapon Master** *(Body, talent — passive)*` — the talent entry header.
+TALENT_HEAD = re.compile(
+    r"^\*\*([^*]+)\*\* \*\(((?:Body|Mind|Soul)(?: and (?:Body|Mind|Soul))?), "
+    r"(talent|signature) — ([^)]+)\)\*\s*$", re.M)
+
+_USE_WORDS = {
+    "passive": "passive",
+    "at_will": "at will",
+    "once_per_scene": "once per scene",
+    "once_per_session": "once per session",
+    "once_per_rest": "once per rest",
+}
+
+CHARACTER_SHEET_LABELS = [
+    "Facet", "Class", "Level", "Body", "Mind", "Soul", "HP", "Knacks",
+    "Specialty", "Background", "Lineage", "Talents", "Signature", "Slots",
+    "Fatigue", "Wounds", "Sparks", "Coin",
+]
+
+
+def test_character_sheet_names_every_character_field() -> None:
+    """INV-2: the printed sheet carries a place for every field the character
+    file does (DESIGN §3.3). A sheet missing HP or Slots is a sheet a player
+    cannot play from."""
+    sheet = CHARACTER_SHEET.read_text(encoding="utf-8")
+    missing = [label for label in CHARACTER_SHEET_LABELS if label not in sheet]
+    assert not missing, f"Character sheet has no place for: {missing}"
+
+
+_APPENDIX_DOMAIN = re.compile(r"^\*\*([A-Z][\w '&-]+?)\*\* \*\(([^)]*)\)\*\s*$", re.M)
+DOMAIN_APPENDIX = PLAYER_HANDBOOK / "Appendix_Magic_Domains.md"
+
+
+def test_domain_catalog_matches_appendix() -> None:
+    """INV-7: facet.yaml's domain catalog is the appendix, transcribed — same
+    names, and the prismatic ones marked prismatic in both."""
+    catalog = {d["name"]: d for d in _facet()["magic_domains"]}
+    appendix = dict(_APPENDIX_DOMAIN.findall(DOMAIN_APPENDIX.read_text(encoding="utf-8")))
+    errors = []
+    for name in sorted(set(catalog) - set(appendix)):
+        errors.append(f"{name}: in facet.yaml, missing from the appendix")
+    for name in sorted(set(appendix) - set(catalog)):
+        errors.append(f"{name}: in the appendix, missing from facet.yaml")
+    for name in sorted(set(catalog) & set(appendix)):
+        says_prismatic = "prismatic" in appendix[name].lower()
+        if says_prismatic != bool(catalog[name].get("prismatic")):
+            errors.append(f"{name}: prismatic flag disagrees")
+    assert not errors, "Domain catalog / appendix mismatches:\n" + "\n".join(errors)
+
+
+def test_every_talent_has_its_fields_in_facet_yaml() -> None:
+    """INV-22 (data half): every talent carries use, text and normal, and every
+    menu talent (not a signature) has an improved form."""
+    problems = []
+    for t in _facet()["talents"]:
+        for field in ("use", "text", "normal"):
+            if not t.get(field):
+                problems.append(f"{t['id']}: no {field}")
+        if t["kind"] == "talent" and not t.get("improved"):
+            problems.append(f"{t['id']}: a menu talent with no improved form")
+        if t["use"] not in _USE_WORDS:
+            problems.append(f"{t['id']}: unknown use {t['use']!r}")
+    assert not problems, "\n".join(problems)
+
+
+def test_every_talent_is_printed_with_a_matching_header() -> None:
+    """INV-22 (book half): each talent appears in its Facet's chapter with a
+    header whose Facet, kind and use agree with facet.yaml, and the entry
+    prints its Normal line (and Improved line for menu talents)."""
+    problems = []
+    printed: dict[str, tuple[str, str, str, str]] = {}
+    for facet_id, path in FACET_CHAPTERS.items():
+        text = path.read_text(encoding="utf-8")
+        for match in TALENT_HEAD.finditer(text):
+            name, facet, kind, use = match.groups()
+            entry = text[match.end():].split("\n**", 1)[0]
+            rest = text[match.end():]
+            nxt = TALENT_HEAD.search(rest)
+            entry = rest[: nxt.start()] if nxt else rest
+            # A shared talent prints "Mind and Soul"; its home Facet is the first.
+            printed.setdefault(name, (facet.split(" and ")[0].lower(), kind,
+                                      use.strip().lower(), entry))
+    for t in _facet()["talents"]:
+        got = printed.get(t["name"])
+        if got is None:
+            problems.append(f"{t['name']}: not printed in {FACET_CHAPTERS[t['facet']].name}")
+            continue
+        facet, kind, use, entry = got
+        if facet != t["facet"]:
+            problems.append(f"{t['name']}: printed under {facet}, data says {t['facet']}")
+        if kind != t["kind"]:
+            problems.append(f"{t['name']}: printed as {kind}, data says {t['kind']}")
+        if use != _USE_WORDS[t["use"]]:
+            problems.append(f"{t['name']}: printed use {use!r}, data says {_USE_WORDS[t['use']]!r}")
+        if "**Normal:**" not in entry:
+            problems.append(f"{t['name']}: no Normal line")
+        if t["kind"] == "talent" and "**Improved:**" not in entry:
+            problems.append(f"{t['name']}: no Improved line")
+    assert not problems, "Talent entries disagree with facet.yaml:\n" + "\n".join(problems)
+
+
+def test_every_preset_class_resolves_and_is_printed() -> None:
+    """INV-23: a preset's talents, signature and kit exist, belong to its Facet,
+    and the preset appears in its Facet chapter."""
+    data = _facet()
+    talents = {t["id"]: t for t in data["talents"]}
+    items = {i["id"] for i in data["equipment"]["items"]}
+    problems = []
+    for c in data["classes"]:
+        for tid in c["talents"] + [c["signature"]]:
+            t = talents.get(tid)
+            if t is None:
+                problems.append(f"{c['id']}: unknown talent {tid}")
+            elif t["facet"] != c["facet"] and c["facet"] not in t.get("shared_with", []):
+                problems.append(f"{c['id']}: {tid} is not on the {c['facet']} menu")
+        if talents.get(c["signature"], {}).get("kind") != "signature":
+            problems.append(f"{c['id']}: signature {c['signature']} is not a signature")
+        for k in c["kit"]:
+            if k not in items:
+                problems.append(f"{c['id']}: unknown kit item {k}")
+        if c["name"] not in FACET_CHAPTERS[c["facet"]].read_text(encoding="utf-8"):
+            problems.append(f"{c['name']}: not printed in its Facet chapter")
+    assert not problems, "\n".join(problems)
+
+
+TABLES_YAML = REPO_ROOT / "software" / "facets" / "base" / "tables.yaml"
+
+
+def _die_faces(die: str) -> list[str]:
+    if die == "d66":
+        return [f"{a}{b}" for a in range(1, 7) for b in range(1, 7)]
+    if die == "2d6":
+        return [str(n) for n in range(2, 13)]
+    sides = int(die.split("d")[1])
+    return [str(n) for n in range(1, sides + 1)]
+
+
+def _expand(roll: str) -> list[str]:
+    roll = str(roll).replace("–", "-")
+    if "-" in roll:
+        lo, hi = roll.split("-")
+        if len(lo) == 2 and len(hi) == 2 and lo[0] != hi[0]:
+            faces = [f"{a}{b}" for a in range(1, 7) for b in range(1, 7)]
+            return [f for f in faces if lo <= f <= hi]
+        return [str(n) for n in range(int(lo), int(hi) + 1)]
+    return [roll]
+
+
+REQUIRED_TABLES = [
+    "reaction", "reaction_wants", "pressure_generic", "pressure_underground",
+    "pressure_wild", "pressure_settlement", "pressure_occasion", "trouble",
+    "complications_fight", "complications_explore", "complications_social",
+    "magic_complications", "magic_mishaps", "wounds", "scars", "trinkets",
+    "curios", "relics", "npc_names", "npc_traits", "npc_wants", "npc_secrets",
+    "oracle_actions", "oracle_themes",
+]
+
+
+def test_every_mm_table_covers_its_die_exactly_once() -> None:
+    """INV-24: a table with a gap is a table the app cannot roll, and one with
+    an overlap is a table the MM reads two ways."""
+    tables = yaml.safe_load(TABLES_YAML.read_text(encoding="utf-8"))["tables"]
+    by_id = {t["id"]: t for t in tables}
+    problems = [f"missing table {tid}" for tid in REQUIRED_TABLES if tid not in by_id]
+    for t in tables:
+        seen: list[str] = []
+        for e in t["entries"]:
+            seen.extend(_expand(e["roll"]))
+        faces = _die_faces(t["die"])
+        if sorted(seen) != sorted(faces):
+            extra = sorted(set(seen) - set(faces))
+            gaps = sorted(set(faces) - set(seen))
+            dupes = sorted({x for x in seen if seen.count(x) > 1})
+            problems.append(f"{t['id']} ({t['die']}): gaps {gaps} extra {extra} dupes {dupes}")
+        if any(not str(e.get("text", "")).strip() for e in t["entries"]):
+            problems.append(f"{t['id']}: an entry with no text")
+    assert not problems, "\n".join(problems)
+
+
+def test_mm6_tables_are_up_to_date() -> None:
+    """INV-25: MM6's tables are generated from tables.yaml, like the Bestiary's
+    stat blocks, so the book and the app cannot disagree about a table."""
+    from tools.build_toolbox import build
+    stale = build(write=False)
+    assert not stale, (
+        f"MM6 is stale ({stale}) — regenerate with `python -m tools.build_toolbox`.")
+
+
+def test_books_print_the_weapon_and_grit_dice() -> None:
+    """INV-26: every weapon category's die and every Facet's grit die is printed
+    as facet.yaml holds it."""
+    data = _facet()
+    equipment = (PLAYER_HANDBOOK / "IV.1_Equipment.md").read_text(encoding="utf-8")
+    problems = []
+    for cat, spec in data["equipment"]["weapon_categories"].items():
+        row = next((ln for ln in equipment.splitlines()
+                    if ln.startswith("|") and cat.lower() in ln.lower()), None)
+        if row is None or f"d{spec['die']}" not in row:
+            problems.append(f"IV.1: no table row printing {cat} as d{spec['die']}")
+    facets_chapter = (PLAYER_HANDBOOK / "II.4_Character_Creation_Facets.md").read_text(encoding="utf-8")
+    for f in data["facets"]:
+        if f"d{f['grit_die']}" not in facets_chapter:
+            problems.append(f"II.4: {f['id']} grit die d{f['grit_die']} not printed")
+    assert not problems, "\n".join(problems)
+
+
+def test_mm1_prints_the_monster_level_table() -> None:
+    """INV-26: the MM builds monsters from MM1's level table, the app from
+    facet.yaml's; each level's row must carry the same HP, damage and attack."""
+    mm1 = (MM_MANUAL / "MM1_Encounters_and_Enemies.md").read_text(encoding="utf-8")
+    problems = []
+    for row in _facet()["monsters"]["level_table"]:
+        pattern = re.compile(
+            rf"^\|\s*{row['level']}\s*\|\s*{row['hp']}\s*\|\s*{row['damage']}\s*\|\s*\+?{row['attack']}\s*\|", re.M)
+        if not pattern.search(mm1):
+            problems.append(f"level {row['level']}: no row | {row['level']} | {row['hp']} | {row['damage']} | +{row['attack']} |")
+    assert not problems, "MM1's level table disagrees with facet.yaml:\n" + "\n".join(problems)
+
+
+# Retired v0.3 rules vocabulary. Each is a term of art that no longer exists.
+RETIRED_TERMS: list[tuple[str, str]] = [
+    (r"\bEndurance Pool\b", "L7: grit HP and slots replace the Endurance Pool"),
+    (r"\bPostures?\b", "L2/L7: postures are cut"),
+    (r"\bResolve (?:pool|\d)", "L3: enemies have HP"),
+    (r"\bdepletes? (?:its |an enemy's |the enemy's )?Resolve", "L3"),
+    (r"\bThreat Rating\b", "L3: monsters are levelled, not rated"),
+    (r"\bTR \d", "L3"),
+    (r"\bTechniques?\b", "L9: talents replace Techniques"),
+    (r"\bFacet levels?\b", "L8: levels replace Facet levels"),
+    (r"\bskill points?\b", "L8"),
+    (r"\bMinor Attributes?\b", "L4"),
+    (r"\bMajor Attributes?\b", "L4"),
+    (r"\breadied intents?\b", "L5: Fatigue replaces readied intents"),
+    (r"\bTier [12] Conditions?\b", "L3/L7"),
+    (r"\bManeuver\b", "L7: stunts replace Maneuver"),
+    (r"\bAbsorb\b", "L2: enemies roll; no reactions"),
+    (r"\bParry\b", "L2"),
+    (r"\bEncounter Recipe", "L3"),
+    (r"\bcareer[_ ]advances\b", "L8"),
+    (r"\bMajor Advancement\b", "L8"),
+    (r"\bAscendant Domain\b", "L6"),
+]
+
+_RETIRED_SCAN = ["player_handbook", "mm_manual", "bestiary", "adventures",
+                 "settings", "characters", "enemies", "software/facets",
+                 "software/app/static"]
+
+
+def test_no_retired_term_survives() -> None:
+    """INV-27: a rewrite that lands in one file and misses its siblings is the
+    drift this project has fought every release. No v0.3 term of art may
+    survive on a live rules surface."""
+    patterns = [(re.compile(p), why) for p, why in RETIRED_TERMS]
+    offenders = []
+    for rel in _RETIRED_SCAN:
+        root = REPO_ROOT / rel
+        if not root.exists():
+            continue
+        for path in sorted(p for p in root.rglob("*") if p.is_file()):
+            if path.suffix not in {".md", ".yaml", ".fof", ".js", ".html", ".css"}:
+                continue
+            for lineno, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+                for pat, why in patterns:
+                    if pat.search(line):
+                        offenders.append(f"{path.relative_to(REPO_ROOT)}:{lineno} {pat.pattern} ({why})")
+    assert not offenders, ("Retired v0.3 terms survive:\n" + "\n".join(offenders[:60])
+                           + (f"\n... and {len(offenders) - 60} more" if len(offenders) > 60 else ""))
+
+
+# ---------------------------------------------------------------------------
+# INV-16 / 17 / 18: setting Facets and module reskins
+# ---------------------------------------------------------------------------
+
+VALLOH_FACET = REPO_ROOT / "software" / "facets" / "valloh" / "facet.yaml"
+VALLOH_BOOK = REPO_ROOT / "settings" / "valloh"
+_CORE_RULE_SECTIONS = ("stats", "stat_rules", "facets", "roll_resolution", "spark",
+                       "advancement", "hp", "recovery", "wounds", "hold_on", "death",
+                       "slots", "magic", "combat", "monsters", "hazards", "exploration")
+
+
+def test_setting_facet_changes_no_core_rule() -> None:
+    """INV-17: a setting Facet is additive. It may add lineages, items, talents,
+    classes, backgrounds, domains and tables; it may not write a core rule."""
+    data = yaml.safe_load(VALLOH_FACET.read_text(encoding="utf-8"))
+    written = [s for s in _CORE_RULE_SECTIONS if data.get(s)]
+    assert not written, f"the Val'loh Facet writes core rule sections: {written}"
+
+
+def test_setting_facet_loads_without_changing_the_core() -> None:
+    """INV-17: loading the setting leaves the core's numbers as they were."""
+    from app.facets.registry import build_ruleset
+    base = build_ruleset([])
+    with_setting = build_ruleset(["valloh"])
+    assert base.to_client_dict().get("combat") == with_setting.to_client_dict().get("combat")
+    assert base.to_client_dict().get("advancement") == with_setting.to_client_dict().get("advancement")
+
+
+def test_lineage_gift_domains_resolve() -> None:
+    """INV-16: a lineage that names a gift domain names a real one."""
+    known = {d["id"] for d in _facet()["magic_domains"]}
+    data = yaml.safe_load(VALLOH_FACET.read_text(encoding="utf-8"))
+    known |= {d["id"] for d in data.get("magic_domains") or []}
+    problems = []
+    for lin in (data.get("lineages") or []) + _facet()["lineages"]:
+        for dom in lin.get("gift_domains") or []:
+            if dom not in known:
+                problems.append(f"{lin['id']}: gift domain {dom} resolves to nothing")
+    assert not problems, "\n".join(problems)
+
+
+def test_valloh_book_and_data_agree_on_the_lineages() -> None:
+    """Every playable lineage in the data has an entry in V1."""
+    data = yaml.safe_load(VALLOH_FACET.read_text(encoding="utf-8"))
+    text = (VALLOH_BOOK / "V1_Lineages.md").read_text(encoding="utf-8")
+    missing = [lin["name"] for lin in data.get("lineages") or []
+               if lin.get("playable", True) and lin["name"] not in text]
+    assert not missing, f"lineages missing from V1: {missing}"
+
+
+MODULE_ENEMY_DIRS = sorted((REPO_ROOT / "adventures").glob("*/enemies"))
+_MECHANICAL_ENEMY_FIELDS = ("level", "role", "armor", "morale", "hp", "damage",
+                            "attack", "attacks", "special", "when_bloodied")
+
+
+def test_module_enemy_reskins_do_not_fork_the_numbers() -> None:
+    """INV-18: a module may reskin a Bestiary enemy's flavour; never its numbers."""
+    problems = []
+    for enemy_dir in MODULE_ENEMY_DIRS:
+        for path in sorted(enemy_dir.glob("*.fof")):
+            here = yaml.safe_load(path.read_text(encoding="utf-8"))["enemy"]
+            original = here.get("reskin_of") or (path.stem if (REPO_ROOT / "enemies" / path.name).exists() else None)
+            if not original:
+                continue
+            there = yaml.safe_load((REPO_ROOT / "enemies" / f"{original}.fof").read_text(encoding="utf-8"))["enemy"]
+            for field in ("level", "role", "armor", "morale", "hp", "damage", "attack", "attacks"):
+                if here.get(field) != there.get(field):
+                    problems.append(f"{path.relative_to(REPO_ROOT)} changes {field}: {there.get(field)!r} -> {here.get(field)!r}")
+    assert not problems, "\n".join(problems)
+
+
+def test_the_bestiary_originals_stay_setting_agnostic() -> None:
+    """B9: no Bestiary enemy names a setting."""
+    setting_words = ("Val'loh", "Rekuzan", "Orthaen", "Oraga", "Boranis", "Blackwatch")
+    offenders = [f"{p.name}: {w!r}" for p in sorted((REPO_ROOT / "enemies").glob("*.fof"))
+                 for w in setting_words if w in p.read_text(encoding="utf-8")]
+    assert not offenders, "\n".join(offenders)
+
+
+def test_every_enemy_card_is_complete() -> None:
+    """A card missing its gimmick or its twists is a card that plays as a bag of
+    HP — the exact failure the card format exists to prevent."""
+    problems = []
+    for path in sorted((REPO_ROOT / "enemies").glob("*.fof")) + [
+            p for d in MODULE_ENEMY_DIRS for p in sorted(d.glob("*.fof"))]:
+        e = yaml.safe_load(path.read_text(encoding="utf-8"))["enemy"]
+        for field in ("level", "role", "morale", "wants", "special", "breaks"):
+            if e.get(field) in (None, ""):
+                problems.append(f"{path.relative_to(REPO_ROOT)}: no {field}")
+        if len(e.get("twists") or []) != 6:
+            problems.append(f"{path.relative_to(REPO_ROOT)}: needs exactly six twists")
     assert not problems, "\n".join(problems)

@@ -1,64 +1,65 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: character
-id: ilesse-kethaun-oraga_ni
+id: ilesse
 name: Ilesse Kethaun
-version: 1.0.0
+version: 2.0.0
 authors:
 - Ilesse Kethaun
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
+    version: 1.0.0
   - id: valloh
-    version: 0.1.0
+    version: 1.0.0
 campaign_id: oraga_night
 character:
   name: Ilesse Kethaun
   player_name: Ilesse Kethaun
-  primary_facet: soul
-  attributes:
-    strength: 1
-    dexterity: 2
-    constitution: 1
-    intelligence: 2
-    wisdom: 3
-    knowledge: 2
-    spirit: 2
-    luck: 2
-    charisma: 3
-  skills:
-    persuade:
-      rank: practiced
-      marks: 0
-  sparks: 3
-  session_skill_points_remaining: 4
-  training_marks_this_session: 0
-  facet_levels: {}
-  rank_advances_by_facet:
-    soul: 1
-  facet_level: 0
-  total_facet_levels: 0
-  career_advances: 1
-  technique_picks_available: 0
-  techniques: []
-  technique_choices: {}
+  facet: soul
+  level: 1
+  class:
+    id: go_between
+    name: Go-Between
+    concept: "I carry words between people who cannot be seen talking to each other."
+    custom: true
+    talents: [empath, warding_presence]
+  stats: {body: 0, mind: 1, soul: 2}
+  hp: {max: 8, current: 8}          # Soul grit die maximum 8 + Body 0
+  knacks: ["Discreet errands", "The Thenya border", "Orthaen gift"]   # class, background, gift
   specialty: The Thenya border and the Nolonaire family — its history, its debts, and everything
     Veier was before Rekuzan.
-  magic_domain: warding
-  magic_tradition: intuitive
-  magic_technique_active: false
+  background:
+    id: border_kethaun
+    name: Border Courtier
+    custom: true
+    description: >
+      A courtier of House Kethaun's border branch, whose family has traded,
+      feuded and married across the Thenya frontier for five generations.
+  lineage: {id: orthaen, gifted: true, gift_knack: "Orthaen gift", gift_domain: warding}
+  talents:
+  - {id: empath, improved: false}
+  - {id: warding_presence, improved: false}
+  signature: null
+  magic: null
   inventory:
-  - veil_of_quiet
-  - seal_a_door
-  - steady_light
-  lineage: orthaen
-  gifted: true
-  domain_source: lineage
+  - {id: light_weapon, name: "Knife", slots: 1, kind: blades}
+  - {id: fine_clothes, name: "Fine clothes", slots: 1}
+  - {id: veil_of_quiet, name: "Charge: Veil of Quiet", slots: 0, curio: true}
+  - {id: seal_a_door, name: "Charge: Seal a Door", slots: 0, curio: true}
+  - {id: steady_light, name: "Charge: Steady Light", slots: 0, curio: true}
+  equipped: {weapon: light_weapon, armor: none, shield: false}
+  coin: 50
+  fatigue: 0
+  wounds: []
+  scars: []
+  sparks: 3
+  talent_uses: {}
   module_role: The Border Cousin
   description: A courtier of House Kethaun's border branch, whose family has traded, feuded
     and married across the Thenya frontier for five generations. Ilesse knew the Nolonaire
     name long before the rest of Rekuzan learned to gossip about it.
   suggested_agenda: The Cousin's Errand.
-  technique_at_facet_level_1: lasting_impression
+  notes_player: ""
+  notes_mm: ""
 created_at: '2026-09-09T11:54:53.807898+00:00'
-last_modified: '2026-09-09T11:54:53.807898+00:00'
+last_modified: '2026-09-25T00:00:00+00:00'

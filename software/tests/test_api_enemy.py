@@ -1,463 +1,211 @@
-"""API tests for enemy and encounter CRUD endpoints."""
+"""REST tests for enemy cards and encounters (MM only)."""
 import pytest
 
-from app.auth.tokens import create_mm_token, create_session_token
+from app.auth.tokens import create_session_token
+
+CARD = {
+    "id": "city_watch_sergeant", "name": "City Watch Sergeant", "level": 3, "role": "standard",
+    "armor": 1, "morale": 8, "weapon": "Cudgel", "wants": "An arrest.",
+    "special": "BACKUP — two watch arrive.", "when_bloodied": "Defends every exchange.",
+    "tells": "Glances up the street.", "breaks": "Surrenders.",
+    "twists": ["a", "b", "c", "d", "e", "f"],
+}
+MOOK = {**CARD, "id": "thug", "name": "Thug", "level": 1, "role": "mook", "armor": 0,
+        "when_bloodied": None}
+
+
+def _add(client, mm_headers, sid, card):
+    return client.post("/api/enemies/", json={"session_id": sid, **card}, headers=mm_headers)
 
 
 # ---------------------------------------------------------------------------
-# Enemy API
+# Card preview
 # ---------------------------------------------------------------------------
 
-class TestEnemyAPI:
-    def test_create_enemy_requires_mm(self, client, active_session):
-        player_token = create_session_token("Alice", active_session["session_id"])
-        headers = {"Authorization": f"Bearer {player_token}"}
-        resp = client.post("/api/enemies/", json={
-            "session_id": active_session["session_id"],
-            "id": "thug", "name": "Thug",
-        }, headers=headers)
-        assert resp.status_code == 403
-
-    def test_create_enemy_success(self, client, mm_headers, active_session):
-        resp = client.post("/api/enemies/", json={
-            "session_id": active_session["session_id"],
-            "id": "harbor_thug",
-            "name": "Harbor Thug",
-            "tier": "mook",
-            "attack_modifier": 0,
-            "description": "A hired thug.",
-        }, headers=mm_headers)
+class TestPreviewCard:
+    def test_preview_without_session(self, client, mm_headers):
+        resp = client.post("/api/enemies/preview-card", json={"level": 3, "role": "standard"},
+                           headers=mm_headers)
         assert resp.status_code == 200
-        data = resp.json()
-        assert data["enemy"]["name"] == "Harbor Thug"
-        assert data["tr"] >= 1
+        card = resp.json()["card"]
+        assert (card["hp"], card["damage"], card["attack"], card["attacks"]) == (14, 6, 2, 1)
 
-    def test_create_named_enemy_with_tr(self, client, mm_headers, active_session):
-        resp = client.post("/api/enemies/", json={
-            "session_id": active_session["session_id"],
-            "id": "sergeant",
-            "name": "City Watch Sergeant",
-            "tier": "named",
-            "resolve": 3,
-            "attack_modifier": 2,
-            "armor": "light",
+    def test_preview_with_session_and_overrides(self, client, mm_headers, active_session):
+        resp = client.post("/api/enemies/preview-card", json={
+            "session_id": active_session["session_id"], "level": 2, "role": "boss", "damage": 9,
         }, headers=mm_headers)
-        assert resp.status_code == 200
-        assert resp.json()["tr"] == 8
+        card = resp.json()["card"]
+        assert card["hp"] == 55 and card["damage"] == 9 and card["overrides"] == ["damage"]
+        assert card["bloodied_phase"] is True
 
-    def test_created_enemy_echoes_resolve(self, client, mm_headers, active_session):
-        # Guards the Endurance -> Resolve rename (A12): the API surface and the
-        # serialized enemy both speak `resolve`, and `endurance` is not an alias.
-        resp = client.post("/api/enemies/", json={
-            "session_id": active_session["session_id"],
-            "id": "sarge",
-            "name": "Sergeant",
-            "tier": "named",
-            "resolve": 6,
-            "attack_modifier": 1,
-        }, headers=mm_headers)
-        assert resp.status_code == 200
-        enemy = resp.json()["enemy"]
-        assert enemy["resolve"] == 6
-        assert "endurance" not in enemy
+    def test_mook_preview_has_no_hp(self, client, mm_headers):
+        card = client.post("/api/enemies/preview-card", json={"level": 1, "role": "mook"},
+                           headers=mm_headers).json()["card"]
+        assert card["hp"] is None and card["mob"] is True
 
-    def test_list_enemies(self, client, mm_headers, active_session):
-        # Create two enemies
-        sid = active_session["session_id"]
-        client.post("/api/enemies/", json={
-            "session_id": sid, "id": "thug1", "name": "Thug A",
-        }, headers=mm_headers)
-        client.post("/api/enemies/", json={
-            "session_id": sid, "id": "thug2", "name": "Thug B",
-        }, headers=mm_headers)
-        resp = client.get(f"/api/enemies/{sid}", headers=mm_headers)
-        assert resp.status_code == 200
-        assert "thug1" in resp.json()["enemies"]
-        assert "thug2" in resp.json()["enemies"]
+    def test_bad_role_422(self, client, mm_headers):
+        resp = client.post("/api/enemies/preview-card", json={"level": 1, "role": "dragon"},
+                           headers=mm_headers)
+        assert resp.status_code == 422
 
-    def test_delete_enemy(self, client, mm_headers, active_session):
-        sid = active_session["session_id"]
-        client.post("/api/enemies/", json={
-            "session_id": sid, "id": "to_delete", "name": "Delete Me",
-        }, headers=mm_headers)
-        resp = client.delete(f"/api/enemies/{sid}/to_delete", headers=mm_headers)
-        assert resp.status_code == 200
-        assert resp.json()["deleted"] == "to_delete"
-        # Verify gone
-        resp = client.get(f"/api/enemies/{sid}", headers=mm_headers)
-        assert "to_delete" not in resp.json()["enemies"]
+    def test_level_out_of_range_422(self, client, mm_headers):
+        resp = client.post("/api/enemies/preview-card", json={"level": 11}, headers=mm_headers)
+        assert resp.status_code == 422
 
-    def test_delete_nonexistent_enemy_returns_404(self, client, mm_headers, active_session):
-        resp = client.delete(
-            f"/api/enemies/{active_session['session_id']}/nope",
-            headers=mm_headers,
-        )
+    def test_unknown_session_404(self, client, mm_headers):
+        resp = client.post("/api/enemies/preview-card",
+                           json={"session_id": "nope", "level": 1}, headers=mm_headers)
         assert resp.status_code == 404
 
-    def test_create_enemy_session_not_found(self, client, mm_headers):
-        resp = client.post("/api/enemies/", json={
-            "session_id": "no-such-session", "id": "thug", "name": "Thug",
-        }, headers=mm_headers)
-        assert resp.status_code == 404
-
-    def test_enemy_with_tactics_and_personality(self, client, mm_headers, active_session):
-        resp = client.post("/api/enemies/", json={
-            "session_id": active_session["session_id"],
-            "id": "boss",
-            "name": "Archive Guardian",
-            "tier": "boss",
-            "resolve": 5,
-            "attack_modifier": 3,
-            "tactics": "Fights defensively at first.",
-            "personality": "Not malevolent. Patient.",
-            "loot": ["Guardian Core", "Ancient Key"],
-        }, headers=mm_headers)
-        assert resp.status_code == 200
-        data = resp.json()["enemy"]
-        assert data["tactics"] == "Fights defensively at first."
-        assert data["loot"] == ["Guardian Core", "Ancient Key"]
-
-
-# ---------------------------------------------------------------------------
-# Encounter API
-# ---------------------------------------------------------------------------
-
-class TestEncounterAPI:
-    def test_create_encounter_requires_mm(self, client, active_session):
-        player_token = create_session_token("Alice", active_session["session_id"])
-        headers = {"Authorization": f"Bearer {player_token}"}
-        resp = client.post("/api/encounters/", json={
-            "session_id": active_session["session_id"],
-            "id": "fight", "name": "Fight",
-        }, headers=headers)
-        assert resp.status_code == 403
-
-    def test_create_encounter_success(self, client, mm_headers, active_session):
-        sid = active_session["session_id"]
-        # First create an enemy
-        client.post("/api/enemies/", json={
-            "session_id": sid, "id": "thug", "name": "Thug", "tier": "mook",
-        }, headers=mm_headers)
-        # Create encounter
-        resp = client.post("/api/encounters/", json={
-            "session_id": sid,
-            "id": "tavern-brawl",
-            "name": "Tavern Brawl",
-            "difficulty": "standard",
-            "enemies": [{"enemy_id": "thug", "count": 4}],
-            "lateral_solutions": ["Bribe the bartender"],
-            "rewards_sparks": 1,
-        }, headers=mm_headers)
-        assert resp.status_code == 200
-        data = resp.json()
-        assert data["encounter"]["name"] == "Tavern Brawl"
-        assert data["effective_tr"] > 0
-
-    def test_list_encounters(self, client, mm_headers, active_session):
-        sid = active_session["session_id"]
-        client.post("/api/encounters/", json={
-            "session_id": sid, "id": "enc1", "name": "Encounter 1",
-        }, headers=mm_headers)
-        resp = client.get(f"/api/encounters/{sid}", headers=mm_headers)
-        assert resp.status_code == 200
-        assert "enc1" in resp.json()["encounters"]
-
-    def test_delete_encounter(self, client, mm_headers, active_session):
-        sid = active_session["session_id"]
-        client.post("/api/encounters/", json={
-            "session_id": sid, "id": "to_delete", "name": "Delete Me",
-        }, headers=mm_headers)
-        resp = client.delete(f"/api/encounters/{sid}/to_delete", headers=mm_headers)
-        assert resp.status_code == 200
-
-    def test_create_encounter_session_not_found(self, client, mm_headers):
-        resp = client.post("/api/encounters/", json={
-            "session_id": "no-such-session", "id": "enc", "name": "Enc",
-        }, headers=mm_headers)
-        assert resp.status_code == 404
-
-
-# ---------------------------------------------------------------------------
-# Character notes/inventory API
-# ---------------------------------------------------------------------------
-
-class TestCharacterNotesAPI:
-    def test_player_updates_own_notes(self, client, session_with_character):
-        session, char = session_with_character
-        sid = session["session_id"]
-        pname = char["player_name"]
-        token = create_session_token(pname, sid)
-        headers = {"Authorization": f"Bearer {token}"}
-        resp = client.put(
-            f"/api/characters/{sid}/{pname}/notes",
-            json={"notes_player": "My notes"},
-            headers=headers,
-        )
-        assert resp.status_code == 200
-        assert resp.json()["notes_player"] == "My notes"
-
-    def test_player_cannot_set_mm_notes(self, client, session_with_character):
-        session, char = session_with_character
-        sid = session["session_id"]
-        pname = char["player_name"]
-        token = create_session_token(pname, sid)
-        headers = {"Authorization": f"Bearer {token}"}
-        resp = client.put(
-            f"/api/characters/{sid}/{pname}/notes",
-            json={"notes_mm": "Secret info"},
-            headers=headers,
-        )
-        assert resp.status_code == 403
-
-    def test_mm_updates_both_notes(self, client, mm_headers, session_with_character):
-        session, char = session_with_character
-        sid = session["session_id"]
-        pname = char["player_name"]
-        resp = client.put(
-            f"/api/characters/{sid}/{pname}/notes",
-            json={"notes_player": "Player note", "notes_mm": "MM secret"},
-            headers=mm_headers,
-        )
-        assert resp.status_code == 200
-        assert resp.json()["notes_player"] == "Player note"
-        assert resp.json()["notes_mm"] == "MM secret"
-
-    def test_notes_character_not_found(self, client, mm_headers, active_session):
-        resp = client.put(
-            f"/api/characters/{active_session['session_id']}/Nobody/notes",
-            json={"notes_player": "test"},
-            headers=mm_headers,
-        )
-        assert resp.status_code == 404
-
-    def test_player_cannot_update_other_player_notes(self, client, session_with_character):
-        session, char = session_with_character
-        sid = session["session_id"]
-        pname = char["player_name"]
-        token = create_session_token("SomeOtherPlayer", sid)
-        headers = {"Authorization": f"Bearer {token}"}
-        resp = client.put(
-            f"/api/characters/{sid}/{pname}/notes",
-            json={"notes_player": "Hacked"},
-            headers=headers,
-        )
-        assert resp.status_code == 403
-
-
-class TestCharacterInventoryAPI:
-    def test_player_updates_own_inventory(self, client, session_with_character):
-        session, char = session_with_character
-        sid = session["session_id"]
-        pname = char["player_name"]
-        token = create_session_token(pname, sid)
-        headers = {"Authorization": f"Bearer {token}"}
-        resp = client.put(
-            f"/api/characters/{sid}/{pname}/inventory",
-            json={"inventory": ["Sword", "Shield", "Rope"]},
-            headers=headers,
-        )
-        assert resp.status_code == 200
-        assert resp.json()["inventory"] == ["Sword", "Shield", "Rope"]
-
-    def test_mm_updates_any_inventory(self, client, mm_headers, session_with_character):
-        session, char = session_with_character
-        sid = session["session_id"]
-        pname = char["player_name"]
-        resp = client.put(
-            f"/api/characters/{sid}/{pname}/inventory",
-            json={"inventory": ["Magic Ring"]},
-            headers=mm_headers,
-        )
-        assert resp.status_code == 200
-        assert resp.json()["inventory"] == ["Magic Ring"]
-
-    def test_inventory_character_not_found(self, client, mm_headers, active_session):
-        resp = client.put(
-            f"/api/characters/{active_session['session_id']}/Nobody/inventory",
-            json={"inventory": []},
-            headers=mm_headers,
-        )
-        assert resp.status_code == 404
-
-    def test_player_cannot_update_other_inventory(self, client, session_with_character):
-        session, char = session_with_character
-        sid = session["session_id"]
-        pname = char["player_name"]
-        token = create_session_token("OtherPlayer", sid)
-        headers = {"Authorization": f"Bearer {token}"}
-        resp = client.put(
-            f"/api/characters/{sid}/{pname}/inventory",
-            json={"inventory": ["Stolen Goods"]},
-            headers=headers,
-        )
-        assert resp.status_code == 403
-
-
-# ---------------------------------------------------------------------------
-# Front-end audit — TR must reach the client from the server, never be
-# recomputed there
-# ---------------------------------------------------------------------------
-
-class TestThreatRatingReachesTheClient:
-    """`tr` is derived, not a stored field, so `model_dump()` dropped it and the
-    Builder's enemy library rendered "TR ?". The front end used to paper over
-    that with its own copy of the MM1 formula in JavaScript — a second
-    implementation of a rule, which is exactly what the Software-PHB sync rule
-    forbids. TR now ships with every enemy payload, and unsaved form values get
-    a preview endpoint instead of a client-side formula.
-    """
-
-    def test_to_client_dict_includes_tr(self):
-        from app.game.enemy import Enemy
-
-        enemy = Enemy(id="thug", name="Thug", tier="named", resolve=4, attack_modifier=1)
-        payload = enemy.to_client_dict()
-        assert payload["tr"] == enemy.calculate_tr()
-
-    def test_listed_enemies_carry_tr(self, client, mm_headers, active_session):
-        session_id = active_session["session_id"]
-        client.post("/api/enemies/", json={
-            "session_id": session_id, "id": "guardian", "name": "Guardian",
-            "tier": "boss", "resolve": 8, "attack_modifier": 2, "armor": "heavy",
-        }, headers=mm_headers)
-
-        listed = client.get(f"/api/enemies/{session_id}", headers=mm_headers).json()
-        # offense max(0, 2+2)=4 + resolve 8 + heavy armor 2 = 14, above the boss floor of 12
-        assert listed["enemies"]["guardian"]["tr"] == 14
-
-    def test_preview_tr_scores_unsaved_values(self, client, mm_headers):
-        """The Builder needs TR while the MM is still tuning numbers, before
-        anything is saved."""
-        resp = client.post("/api/enemies/preview-tr", json={
-            "tier": "boss", "resolve": 8, "attack_modifier": 2,
-            "armor": "heavy", "techniques": ["Riposte", "Shield Wall"],
-        }, headers=mm_headers)
-        assert resp.status_code == 200
-        # 4 offense + 8 resolve + 2 heavy armor + 2 techniques
-        assert resp.json()["tr"] == 16
-
-    def test_preview_tr_applies_the_tier_minimum(self, client, mm_headers):
-        """A Named NPC never scores below 8 however weak its stat line."""
-        resp = client.post("/api/enemies/preview-tr", json={
-            "tier": "named", "resolve": 0, "attack_modifier": -2, "armor": "none",
-        }, headers=mm_headers)
-        assert resp.json()["tr"] == 8
-
-    def test_preview_tr_requires_mm(self, client):
-        resp = client.post("/api/enemies/preview-tr", json={"tier": "mook"})
+    def test_requires_mm(self, client, active_session):
+        headers = {"Authorization":
+                   f"Bearer {create_session_token('P', active_session['session_id'])}"}
+        resp = client.post("/api/enemies/preview-card", json={"level": 1}, headers=headers)
         assert resp.status_code in (401, 403)
-
-
-class TestEnemyPhasesRoundTrip:
-    """`Enemy` carries `phases` (the Boss phase-change thresholds that
-    `apply_resolve_damage` reports crossings for), but `CreateEnemyRequest`
-    omitted the field — so the API accepted a phased Boss and silently dropped
-    its phases. No phased enemy could be created except by writing a .fof.
-    """
-
-    def test_phases_survive_creation(self, client, mm_headers, active_session):
-        session_id = active_session["session_id"]
-        resp = client.post("/api/enemies/", json={
-            "session_id": session_id, "id": "guardian", "name": "Archive Guardian",
-            "tier": "boss", "resolve": 8,
-            "phases": [{"resolve_threshold": 2, "description": "Reduced Mode"}],
-        }, headers=mm_headers)
-
-        assert resp.status_code == 200
-        assert resp.json()["enemy"]["phases"] == [
-            {"resolve_threshold": 2, "description": "Reduced Mode"}
-        ]
-
-    def test_phases_survive_listing(self, client, mm_headers, active_session):
-        session_id = active_session["session_id"]
-        client.post("/api/enemies/", json={
-            "session_id": session_id, "id": "guardian", "name": "Archive Guardian",
-            "tier": "boss", "resolve": 8,
-            "phases": [{"resolve_threshold": 2, "description": "Reduced Mode"}],
-        }, headers=mm_headers)
-
-        listed = client.get(f"/api/enemies/{session_id}", headers=mm_headers).json()
-        assert listed["enemies"]["guardian"]["phases"][0]["resolve_threshold"] == 2
-
-    def test_omitting_phases_still_works(self, client, mm_headers, active_session):
-        session_id = active_session["session_id"]
-        resp = client.post("/api/enemies/", json={
-            "session_id": session_id, "id": "thug", "name": "Thug", "tier": "mook",
-        }, headers=mm_headers)
-
-        assert resp.status_code == 200
-        assert resp.json()["enemy"]["phases"] == []
+        assert client.post("/api/enemies/preview-card", json={"level": 1}).status_code in (401, 403)
 
 
 # ---------------------------------------------------------------------------
-# Encounter difficulty band (T6.2, K-3)
+# Enemy CRUD
 # ---------------------------------------------------------------------------
 
-class TestEncounterBandAPI:
-    def _seed_library(self, client, mm_headers, sid):
-        client.post("/api/enemies/", json={
-            "session_id": sid, "id": "sergeant", "name": "Sergeant",
-            "tier": "named", "resolve": 3, "attack_modifier": 2, "armor": "light",
-        }, headers=mm_headers)
-        client.post("/api/enemies/", json={
-            "session_id": sid, "id": "thug", "name": "Thug", "tier": "mook",
-        }, headers=mm_headers)
+class TestEnemyCrud:
+    def test_create_complete_card(self, client, mm_headers, active_session):
+        resp = _add(client, mm_headers, active_session["session_id"], CARD)
+        assert resp.status_code == 200, resp.text
+        enemy = resp.json()["enemy"]
+        assert enemy["card"]["hp"] == 14 and enemy["name"] == "City Watch Sergeant"
 
-    def test_create_encounter_returns_band(self, client, mm_headers, active_session):
+    def test_incomplete_card_422(self, client, mm_headers, active_session):
+        resp = _add(client, mm_headers, active_session["session_id"],
+                    {**CARD, "twists": ["only one"], "special": ""})
+        assert resp.status_code == 422
+        errors = resp.json()["detail"]["errors"]
+        assert any("twists" in e for e in errors) and any("SPECIAL" in e for e in errors)
+
+    def test_non_mook_needs_when_bloodied(self, client, mm_headers, active_session):
+        resp = _add(client, mm_headers, active_session["session_id"],
+                    {**CARD, "when_bloodied": None})
+        assert resp.status_code == 422
+
+    def test_mook_without_when_bloodied_ok(self, client, mm_headers, active_session):
+        assert _add(client, mm_headers, active_session["session_id"], MOOK).status_code == 200
+
+    def test_create_unknown_session_404(self, client, mm_headers):
+        assert _add(client, mm_headers, "nope", CARD).status_code == 404
+
+    def test_list(self, client, mm_headers, active_session):
         sid = active_session["session_id"]
-        self._seed_library(client, mm_headers, sid)
+        _add(client, mm_headers, sid, CARD)
+        resp = client.get(f"/api/enemies/{sid}", headers=mm_headers)
+        assert resp.status_code == 200
+        assert resp.json()["enemies"]["city_watch_sergeant"]["card"]["attack"] == 2
+
+    def test_list_unknown_session_404(self, client, mm_headers):
+        assert client.get("/api/enemies/nope", headers=mm_headers).status_code == 404
+
+    def test_delete(self, client, mm_headers, active_session):
+        sid = active_session["session_id"]
+        _add(client, mm_headers, sid, CARD)
+        resp = client.delete(f"/api/enemies/{sid}/city_watch_sergeant", headers=mm_headers)
+        assert resp.status_code == 200
+        assert client.get(f"/api/enemies/{sid}", headers=mm_headers).json()["enemies"] == {}
+
+    def test_delete_missing_404(self, client, mm_headers, active_session):
+        sid = active_session["session_id"]
+        assert client.delete(f"/api/enemies/{sid}/ghost", headers=mm_headers).status_code == 404
+        assert client.delete("/api/enemies/nope/ghost", headers=mm_headers).status_code == 404
+
+    def test_crud_requires_mm(self, client, active_session):
+        sid = active_session["session_id"]
+        headers = {"Authorization": f"Bearer {create_session_token('P', sid)}"}
+        assert client.post("/api/enemies/", json={"session_id": sid, **CARD},
+                           headers=headers).status_code in (401, 403)
+        assert client.get(f"/api/enemies/{sid}", headers=headers).status_code in (401, 403)
+
+
+# ---------------------------------------------------------------------------
+# Encounters
+# ---------------------------------------------------------------------------
+
+@pytest.fixture
+def stocked(client, mm_headers, active_session):
+    sid = active_session["session_id"]
+    assert _add(client, mm_headers, sid, CARD).status_code == 200
+    assert _add(client, mm_headers, sid, MOOK).status_code == 200
+    return sid
+
+
+class TestEncounters:
+    def test_create_with_danger_read(self, client, mm_headers, stocked):
         resp = client.post("/api/encounters/", json={
-            "session_id": sid, "id": "gate-fight", "name": "Gate Fight",
-            "enemies": [
-                {"enemy_id": "sergeant", "count": 3},
-                {"enemy_id": "thug", "count": 1},
-            ],
+            "session_id": stocked, "id": "street", "name": "Street Brawl",
+            "enemies": [{"enemy_id": "thug", "count": 4}],
         }, headers=mm_headers)
         assert resp.status_code == 200
-        band = resp.json()["band"]
-        assert band["band"] == "standard"  # MM1-5: 3 Named + 1 Mook
+        data = resp.json()
+        assert data["danger"]["points"] == 1.0
+        assert data["missing"] == []
+        assert data["encounter"]["name"] == "Street Brawl"
 
-    def test_list_encounters_returns_band(self, client, mm_headers, active_session):
-        sid = active_session["session_id"]
-        self._seed_library(client, mm_headers, sid)
+    def test_create_reports_missing_foes(self, client, mm_headers, stocked):
+        resp = client.post("/api/encounters/", json={
+            "session_id": stocked, "id": "x", "name": "X",
+            "enemies": [{"enemy_id": "ghost"}]}, headers=mm_headers)
+        assert resp.json()["missing"] == ["ghost"]
+
+    def test_create_unknown_session_404(self, client, mm_headers):
+        resp = client.post("/api/encounters/", json={"session_id": "nope", "id": "x", "name": "X"},
+                           headers=mm_headers)
+        assert resp.status_code == 404
+
+    def test_preview_with_party_overrides(self, client, mm_headers, stocked):
+        resp = client.post("/api/encounters/preview", json={
+            "session_id": stocked, "enemies": [{"enemy_id": "city_watch_sergeant", "count": 2}],
+            "party_size": 4, "party_level": 3,
+        }, headers=mm_headers)
+        assert resp.status_code == 200
+        assert resp.json()["danger"]["read"] == "skirmish"     # 2 points vs 4 PCs
+
+    def test_preview_level_gap_scales_points(self, client, mm_headers, stocked):
+        near = client.post("/api/encounters/preview", json={
+            "session_id": stocked, "enemies": [{"enemy_id": "city_watch_sergeant", "count": 2}],
+            "party_size": 4, "party_level": 1,
+        }, headers=mm_headers).json()["danger"]
+        assert near["points"] == 2.0          # level 3 vs party 1: gap 2, no doubling
+        low = client.post("/api/encounters/preview", json={
+            "session_id": stocked, "enemies": [{"enemy_id": "thug", "count": 4}],
+            "party_size": 4, "party_level": 4,
+        }, headers=mm_headers).json()["danger"]
+        assert low["points"] == 0.5           # level 1 Mooks vs party 4: halved
+
+    def test_preview_defaults_to_session_party(self, client, mm_headers, stocked):
+        resp = client.post("/api/encounters/preview", json={
+            "session_id": stocked, "enemies": [{"enemy_id": "city_watch_sergeant", "count": 2}],
+        }, headers=mm_headers)
+        assert resp.json()["danger"]["read"] == "deadly"       # 2 points vs 1 (empty party)
+
+    def test_preview_unknown_enemy_404(self, client, mm_headers, stocked):
+        resp = client.post("/api/encounters/preview", json={
+            "session_id": stocked, "enemies": [{"enemy_id": "ghost"}]}, headers=mm_headers)
+        assert resp.status_code == 404
+
+    def test_list_and_delete(self, client, mm_headers, stocked):
         client.post("/api/encounters/", json={
-            "session_id": sid, "id": "gate-fight", "name": "Gate Fight",
-            "enemies": [{"enemy_id": "sergeant", "count": 3},
-                        {"enemy_id": "thug", "count": 2}],
-        }, headers=mm_headers)
-        resp = client.get(f"/api/encounters/{sid}", headers=mm_headers)
-        assert resp.status_code == 200
-        assert resp.json()["encounters"]["gate-fight"]["band"]["band"] == "hard"
+            "session_id": stocked, "id": "street", "name": "Street",
+            "enemies": [{"enemy_id": "thug", "count": 4}]}, headers=mm_headers)
+        listed = client.get(f"/api/encounters/{stocked}", headers=mm_headers).json()
+        assert listed["encounters"]["street"]["danger"]["read"] in (
+            "skirmish", "fight", "hard", "deadly")
+        assert client.delete(f"/api/encounters/{stocked}/street",
+                             headers=mm_headers).status_code == 200
+        assert client.delete(f"/api/encounters/{stocked}/street",
+                             headers=mm_headers).status_code == 404
 
-    def test_preview_band_happy_path(self, client, mm_headers, active_session):
+    def test_list_unknown_session_404(self, client, mm_headers):
+        assert client.get("/api/encounters/nope", headers=mm_headers).status_code == 404
+
+    def test_encounters_require_mm(self, client, active_session):
         sid = active_session["session_id"]
-        self._seed_library(client, mm_headers, sid)
-        resp = client.post("/api/encounters/preview_band", json={
-            "session_id": sid,
-            "enemies": [{"enemy_id": "sergeant", "count": 3},
-                        {"enemy_id": "thug", "count": 3}],
-        }, headers=mm_headers)
-        assert resp.status_code == 200
-        band = resp.json()["band"]
-        assert band["band"] == "deadly"  # MM1-5: 3 Named + 3 Mooks
-        assert band["calibrated"] is True
-
-    def test_preview_band_requires_mm(self, client, active_session):
-        player_token = create_session_token("Alice", active_session["session_id"])
-        resp = client.post("/api/encounters/preview_band", json={
-            "session_id": active_session["session_id"], "enemies": [],
-        }, headers={"Authorization": f"Bearer {player_token}"})
-        assert resp.status_code == 403
-
-    def test_preview_band_session_not_found(self, client, mm_headers):
-        resp = client.post("/api/encounters/preview_band", json={
-            "session_id": "no-such-session", "enemies": [],
-        }, headers=mm_headers)
-        assert resp.status_code == 404
-
-    def test_preview_band_unknown_enemy_404(self, client, mm_headers, active_session):
-        resp = client.post("/api/encounters/preview_band", json={
-            "session_id": active_session["session_id"],
-            "enemies": [{"enemy_id": "nobody_home", "count": 1}],
-        }, headers=mm_headers)
-        assert resp.status_code == 404
+        headers = {"Authorization": f"Bearer {create_session_token('P', sid)}"}
+        assert client.get(f"/api/encounters/{sid}", headers=headers).status_code in (401, 403)

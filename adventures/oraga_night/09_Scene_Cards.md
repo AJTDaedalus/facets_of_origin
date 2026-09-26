@@ -2,13 +2,15 @@
 
 Five fights, and none of them mandatory. Each card is one page, in the same field order, so that mid-scene your eye lands in the same place every time. Every stat line on these cards is **generated from the module's enemy files** — the card and the numbers cannot disagree, and neither can be edited by hand.
 
-**How to read a card.** The recipe line names the difficulty band and, where the band is a guess or a compromise, says so. The objective is never a body count. The clock is what actually ends the scene. And the *outs* are the section to read twice: every one of these fights has at least two ways to stop that are not "everyone falls down".
+**How to read a card.** The recipe line names the foes and how hard the fight should feel, and where that is a guess, says so. The objective is never a body count. The clock is what actually ends the scene. And the *outs* are the section to read twice: every one of these fights has at least two ways to stop that are not "everyone falls down".
+
+**Running an exchange,** on every card: tell the table what each foe is about to do and to whom; let the players act in any order and roll; roll the foes' attacks in the open; narrate; clear what the exchange set up. Morale is checked when the first foe falls, when half are down, when the leader goes down, and when one is left alone and hurt.
 
 | ID | Fight | Where | Teaches |
 |---|---|---|---|
-| **S1** | The Seating Feud | Movements II–IV, B3 | Postures; Tier 1 Conditions clearing; Absorb as a choice |
-| **S2** | Knives in the Dark | Movement V, service corridors | A Named with a stated stance and a Technique; Press; Sparks; morale |
-| **S3** | The Gate at Midnight | Movement VII, B12 | Intercept; a Boss phase; negotiation ending a fight |
+| **S1** | The Seating Feud | Movements II–IV, B3 | The exchange; foes rolling in the open; a 7–9 leaving you exposed |
+| **S2** | Knives in the Dark | Movement V, service corridors | A foe's SPECIAL and TELLS; Sparks and Help; morale breaking |
+| **S3** | The Gate at Midnight | Movement VII, B12 | Defend and Intercept; a Boss going Bloodied; negotiation ending a fight |
 | S4 *(half)* | The East Wing Doors | Movement V, B9 | Outs are visible; losing costs the evening, not the character |
 | S5 *(half)* | The Looters | Movement VII, B7/B3 | A branch of S3's night, not a set piece |
 
@@ -18,7 +20,7 @@ Five fights, and none of them mandatory. Each card is one page, in the same fiel
 
 ***Use with:*** B3, the galleries. Any time in Movements II–IV. *(The room text says "Scene card S1".)*
 
-**Recipe:** **Skirmish** — four to six kinsmen of two houses, drunk and masked. No armor, no steel, Tier 1 bruising only. Bare steel voids the whole scene and summons the honor guard instead.
+**Recipe:** **Easy** — four to six kinsmen of two houses, drunk and masked, fighting as one mob. No armor, no steel: player characters hit with the unarmed d4, and anyone dropped to 0 HP is out of the brawl, bruised — no Wound, no Hold On. Bare steel voids the whole scene and summons the honor guard instead.
 
 ***Trigger — read when a player character is within earshot of the third bench:***
 
@@ -31,18 +33,26 @@ Five fights, and none of them mandatory. Each card is one page, in the same fiel
 **Enemies**
 
 <!-- statline: harbor_thug -->
-**Harbor Thug** · *Mook* · Resolve **—** · attack +0 · armor none · incoming Tier 1 · **TR 2**
+**Harbor Thug** · *level 1 Mook* · drops to any hit · attack +0 · damage 3 (+1 per extra in the mob, max +4) · armor 0 · morale 5
 
-**Morale:** Alone, a harbour thug is atmosphere, not a threat, and behaves like it.
+**Wants:** Paid, and home before anything goes badly.
+
+**Special:** NUMBERS FIRST — fewer than four thugs will not start a fight: they posture, shout, and wait for more to arrive. From four up they attack as one mob.
+
+**Tells:** They keep counting each other, and the loudest one keeps looking back at whoever hired them.
+
+**Breaks:** Runs, loudly, the moment whoever they are working for goes down or leaves, and takes the nearest portable cargo along.
+
+**Nastier:** A crew boss is with them: a level 2 standard, and the thugs do not check morale while the boss is standing.
 <!-- /statline -->
 
-*(Use the Bestiary's brawler line for a kinsman; nothing about a Boranis cousin in a spirit-mask changes what a thrown punch does.)*
+*(Use the Bestiary's harbor thug card for a kinsman — a mob of Mooks; nothing about a Boranis cousin in a spirit-mask changes what a thrown punch does. Swap the weapon for fists and harvest fruit.)*
 
-**Tactics:** they open by shoving, not striking. Nobody here wants to be the one who drew. A kinsman who takes a Tier 1 Condition steps back and shouts instead of swinging, which is one fewer attacker without anyone being hurt. **Morale:** the whole thing stops the instant an adult of either house arrives and is obeyed — which a player character can *be*, with one good Persuade.
+**Tactics:** they open by shoving, not swinging. Nobody here wants to be the one who drew. Any hit drops a kinsman out of the brawl — he steps back and shouts instead of swinging, which is one fewer in the mob without anyone being hurt. **Morale:** the whole thing stops the instant an adult of either house arrives and is obeyed — which a player character can *be*, with one good Soul roll.
 
-**Terrain as rules:** the benches are fixed and crowded (*Maneuver to Cornered is Easy; retreating is Hard*). The gallery rail is waist-high over a twelve-foot drop (*anyone who goes over it stops being in this scene and starts being in a much worse one*). The noise of two hundred guests covers almost anything (*Stealth Easy; being heard shouting a warning is Hard*).
+**Terrain as rules:** the benches are fixed and crowded (*a stunt pins someone against them; getting out through them is Hard*). The gallery rail is waist-high over a twelve-foot drop (*anyone who goes over it stops being in this scene and starts being in a much worse one*). The noise of two hundred guests covers almost anything (*slipping about unseen is Easy; being heard shouting a warning is Hard*).
 
-**Outs:** name either principal's house obligation out loud (Persuade at Standard). Physically get between them (Athletics, and take the Tier 1 yourself). Or be visibly more important than the argument — a Minor Scion, an honor guard, anybody with a name they recognise.
+**Outs:** name either principal's house obligation out loud (Soul at Standard). Physically get between them (Body; the swings meant for each other land on you). Or be visibly more important than the argument — a Minor Scion, an honor guard, anybody with a name they recognise.
 
 **Sparks printed:** one to whoever ends it without anyone drawing.
 
@@ -54,7 +64,7 @@ Five fights, and none of them mandatory. Each card is one page, in the same fiel
 
 ***Use with:*** the service corridors, Movement V, during the Dead Dance. *(Room text says "Scene card S2".)*
 
-**Recipe:** **Skirmish roster, Standard tension.** Tavva, plus two or three gallery knives. *Honest note: this is a Skirmish by the Recipe Table and the party will very likely win the fight — measured at 100% across five seeds (Series 13). The difficulty of this scene is the clock, not the roster, and the card is written that way rather than pretending otherwise. Do not add a second Named to "fix" it; that is a cliff, not a step.*
+**Recipe:** **Easy foes, Standard tension.** Tavva, plus a mob of two or three gallery knives. *Honest note: the party will very likely win the fight. The difficulty of this scene is the clock, not the roster, and the card is written that way rather than pretending otherwise. Do not add a second standard foe to "fix" it; that is a cliff, not a step.*
 
 ***Trigger — read on entering the corridor:***
 
@@ -67,44 +77,40 @@ Five fights, and none of them mandatory. Each card is one page, in the same fiel
 **Enemies**
 
 <!-- statline: tavva -->
-**Tavva** · *Named* · Resolve **3** · attack +2 · armor light (+1 Resolve) · incoming Tier 2 · **TR 9**
+**Tavva** · *level 2 Standard* · HP **11** · attack +1 · damage 5 · armor 1 · morale 6
 
-**Techniques:** vanisher
+**Wants:** Out with something. Shifts for a clear exit or a better payer, and honours any deal that ends with her walking and somebody else holding the bag.
 
-**Special:** VANISHER — Tavva carries two bought crystal charges (a dark-burst and a door-seal) and spends them only to break contact. When either fires, she and anyone of her crew in reach are simply elsewhere by the next exchange unless a player character spends their action staying on her.
+**Special:** VANISHER — Tavva carries two bought crystal charges (a dark-burst and a door-seal) and spends them only to break contact. When either fires, she and anyone of her crew in reach are simply elsewhere by the next exchange, unless a player character spends their action staying on her.
 
-**Stance triggers:**
+**When bloodied:** She spends a charge. If she has none left, she starts bargaining, out loud, between blows.
 
-- Spends a crystal charge only to break contact.
-- Abandons any prize — including crew — that starts costing blood.
+**Tells:** Opens with feints and furniture, not the knife. A hand going to her sleeve means a charge is about to fire.
 
-**Opens on:** Nobody. She fights to leave, and opens with feints and furniture.
-
-**Morale:** Cornered with no way out, she bargains fast and honestly: names, the crew's routes, what she saw in the dark. All of it is true.
+**Breaks:** Cornered with no way out, she bargains fast and honestly: names (not her buyers'; she does not know them), the crew's routes, what she saw in the dark. All of it is true. With a way out, she takes it and abandons any prize — including crew — that starts costing blood.
 <!-- /statline -->
 
 <!-- statline: gallery_knife -->
-**Gallery Knife** · *Mook* · Resolve **—** · attack +1 · armor none · incoming Tier 1 · **TR 3**
+**Gallery Knife** · *level 1 Mook* · drops to any hit · attack +0 · damage 3 (+1 per extra in the mob, max +4) · armor 0 · morale 5
 
-**Stance triggers:**
+**Wants:** Out, with the sack. Paid for a burglary, not a war, and entirely clear on the difference.
 
-- Opens with a slash to make space, then leaves.
-- A fight in the dark is hushed on both sides — whoever makes noise answers to the guards, and everyone in the corridor knows it.
+**Special:** SLASH AND GO — a knife's first attack is to make space. On any hit, the knife may take the space instead of dealing damage and be gone into the service passages next exchange.
 
-**Opens on:** Whoever is between them and the service passages.
+**Tells:** Eyes on the service doors, not on you. A knife that stops watching the exits is about to bolt.
 
-**Morale:** One good hit — any Condition, or a lost exchange — usually makes one drop the sack and run. They will not kill a downed opponent, and they will not stand with Tavva past the point she would leave herself.
+**Breaks:** Drops the sack and runs for the service passages. Will not kill a downed opponent, and will not stand with Tavva past the point she would leave herself.
 <!-- /statline -->
 
 **Tactics:** Tavva opens by talking, because she is a professional and the clock is hers too. She does not fight to win; she fights to leave, and she spends her charges only for that. The knives fight to cover her, and stop the moment she is out.
 
-**Terrain as rules:** the lowered service lamps (*Stealth Easy, Insight Hard*). The wall to the Dance is one plank thick (*anything loud advances the clock; the MM does not have to be subtle about reminding them*). Crates of table linen (*cover, and Maneuver to Cornered is Easy against anyone who backs into them*).
+**Terrain as rules:** the lowered service lamps (*moving unseen is Easy; reading faces is Hard*). The wall to the Dance is one plank thick (*anything loud advances the clock; the MM does not have to be subtle about reminding them*). Crates of table linen (*cover — attacks on anyone behind them are Hard — and a stunt pins anyone who backs into them*).
 
 **Outs:** let her go. Trade — she knows two things about tonight that nobody else in the palace will tell you. Take the job's proceeds and let her keep her life. Or make enough noise to lose, which is also an out, just a bad one.
 
 **Sparks printed:** one to whoever ends it without the clock filling. One to whoever gets something out of Tavva that was not violence.
 
-**Development:** whatever the party did here, Tavva is alive and in the palace unless they went well out of their way. She becomes S5's Named if they meet again in Movement VII. **Return to Movement V, B10.**
+**Development:** whatever the party did here, Tavva is alive and in the palace unless they went well out of their way. She leads S5's crew if they meet again in Movement VII. **Return to Movement V, B10.**
 
 ---
 
@@ -112,9 +118,9 @@ Five fights, and none of them mandatory. Each card is one page, in the same fiel
 
 ***Use with:*** B12, the Gatehouse Court, Movement VII. *(Room text says "Scene card S3".)*
 
-**Recipe:** **Hard for a party of three** — one Sergeant of the Bought and four Blades hold the gate; the Captain arrives on the clock's **second segment**, or the exchange the Sergeant falls, whichever is first. Simulated at **42.5–53.0%** party victory across five seeds counting only a fight fought to the end (Series 13).
+**Recipe:** **Hard for a party of three** — one Sergeant of the Bought and a mob of four Blades hold the gate; the Captain arrives on the clock's **second segment**, or the exchange the Sergeant falls, whichever is first. The Captain is three levels above a starting party, so attacks on him are Hard. *Honest note: this fight has not been simulated at the v1.0 numbers yet. It is built to be the hardest thing in the night that can be beaten, and the three endings below exist so that nobody has to beat it.*
 
-> **Scaling.** At four or five players, add **two more Blades** and nothing else. **Do not add a second Sergeant.** A second Named actor takes a four-player party from 78% to 8% — it is a cliff, not a step, and this is the single most reliable way to accidentally kill a table.
+> **Scaling.** At four or five players, add **two more Blades** to the mob and nothing else. **Do not add a second Sergeant.** A second standard foe is a cliff, not a step, and it is the single most reliable way to accidentally kill a table.
 
 ***Trigger — read when the first fleeing guests reach the court:***
 
@@ -122,75 +128,69 @@ Five fights, and none of them mandatory. Each card is one page, in the same fiel
 
 **Objective: open the way out.** Two hundred people are behind you.
 
-**The fire clock — four segments.** Advances on every partial and every failure near the gate, **and once per exchange the gate is still shut**. **Full:** the gallery fire reaches the Crystal Court's doors, and from then on every exchange costs the crowd — the MM narrates who did not get out. A Spark per person carried out still applies, and always will.
+**The fire clock — four segments.** Advances on every 7–9 and every 6− near the gate, **and once per exchange the gate is still shut**. **Full:** the gallery fire reaches the Crystal Court's doors, and from then on every exchange costs the crowd — the MM narrates who did not get out. A Spark per person carried out still applies, and always will.
 
 **Enemies**
 
 <!-- statline: bought_sergeant -->
-**Sergeant-at-Arms** · *Named* · Resolve **3** · attack +2 · armor light (+1 Resolve) · incoming Tier 2 · **TR 9**
+**Sergeant-at-Arms** · *level 3 Standard* · HP **14** · attack +2 · damage 6 · armor 1 · morale 8
 
-**Techniques:** hold the terms
+**Wants:** The contract satisfied or voided. Either one ends the fight.
 
-**Special:** HOLD THE TERMS — once per scene, the sergeant states the contract's boundary aloud. Every Blade in earshot immediately behaves as though the boundary is where the sergeant just said it is, whatever they believed a moment ago.
+**Special:** HOLD THE TERMS — once per scene, the sergeant states the contract's boundary aloud, and every Blade in earshot at once behaves as though the boundary is where the sergeant just said it is.
 
-**Stance triggers:**
+**When bloodied:** Calls the Blades back to the boundary and starts offering terms out loud, still fighting.
 
-- Opens by naming the contract's terms aloud. This is not a bluff; it is how the company works.
-- Spends Hold the Terms when the party splits, to keep the Blades from following anyone past the line.
+**Tells:** It opens by reading the contract's terms aloud. This is not a bluff; it is how the company works.
 
-**Opens on:** Whoever is closest to breaking the contract's boundary.
+**Breaks:** Surrenders the field the moment the contract is void (payment withdrawn, terms broken by the employer, or the named target gone), says so, and expects to be believed.
 
-**Morale:** Surrenders the field the moment the contract is void — payment withdrawn, terms broken by the employer, or the named target gone. Will say so out loud and expect to be believed.
+**Nastier:** Level 5, and Hold the Terms can be used again each time a Blade falls.
 <!-- /statline -->
 
 <!-- statline: bought_blade -->
-**Blade of the Bought** · *Mook* · Resolve **—** · attack +1 · armor light (+1 Resolve) · incoming Tier 1 · **TR 4**
+**Blade of the Bought** · *level 2 Mook* · drops to any hit · attack +0 · damage 4 (+1 per extra in the mob, max +4) · armor 1 · morale 6
 
-**Stance triggers:**
+**Wants:** The contract's terms met and the fee paid.
 
-- Will not pursue past the boundary the contract specifies, and knows exactly where that is.
-- Fights to the terms — a contract to detain produces no killing blows, and everyone on both sides can tell the difference.
+**Special:** TO THE TERMS — Blades fight only as the contract allows and never cross its boundary. On a contract to detain, a character their hits would drop to 0 HP is left at 1 HP and held instead.
 
-**Opens on:** Whoever the contract names. Everyone else is an obstacle to be moved.
+**Tells:** Matched coats, positions taken rather than a room walked into, and someone at the back opening a document case.
 
-**Morale:** Down two of four and the rest disengage in order. Nobody in the Bought has ever been paid enough to die for a clause.
+**Breaks:** Disengages in good order and walks back to the boundary. Nobody in the Bought has ever been paid enough to die for a clause.
+
+**Nastier:** Their sergeant is in earshot, and has already said where the boundary is.
 <!-- /statline -->
 
 <!-- statline: bought_captain -->
-**Captain-under-Contract** · *Boss* · Resolve **5** · attack +3 · armor heavy (+2 Resolve) · incoming Tier 2 · **TR 14**
+**Captain-under-Contract** · *level 4 Boss* · HP **85** · attack +3 · damage 9 · two attacks · armor 2 · morale 9
 
-**Techniques:** the second clause, reform the line
+**Wants:** The fee, the company intact, and the reputation that gets the next contract.
 
-**Special:** THE SECOND CLAUSE — every contract the Bought sign has one, and only the captain has read it. Once per fight the captain invokes it and the company's objective changes mid-scene, in a direction the party did not plan for.
+**Special:** THE SECOND CLAUSE — once per fight, in the exchange after the party looks like winning, the captain invokes the clause only it has read, and the company's objective changes mid-scene in a direction the party did not plan for.
 
-**Special:** REFORM THE LINE — once per scene, every Blade that disengaged this scene returns to the field in good order.
+**When bloodied:** It starts negotiating out loud, mid-exchange, while the attacks continue. Anyone who answers is talking to someone genuinely listening. If the fight is going long, do this on its second exchange on the field instead of waiting.
 
-**Phase:** Starts negotiating mid-exchange — out loud, while the attacks continue. Anyone who answers is talking to someone genuinely listening. TRIGGER, not a threshold: the captain does this on the SECOND exchange he is on the field, or the exchange after the party looks like winning, whichever comes first. The Resolve number below is a fallback for a fight that gets there first, and in a long fight it will not (Series 13). A Boss's second act is keyed to conduct when the fight is long and to Resolve only when it is short.
+**Tells:** It spends the opening exchange placing Blades and watching who the party protects. The contract case is chained to its belt.
 
-**Stance triggers:**
+**Breaks:** Calls the withdrawal and means it. A captain who has called a withdrawal will not resume the fight tonight for any inducement, including a better offer.
 
-- Invokes the Second Clause the exchange after the party looks like winning.
-- Reforms the line once, and only once, and only if the company still has somewhere to withdraw to.
-- Never goes Aggressive. Ever. It is not that kind of company.
-
-**Opens on:** Nobody, at first. The captain spends the opening exchange placing Blades and watching who the party protects.
-
-**Morale:** Calls the withdrawal at Resolve 2 and means it. A captain who has called a withdrawal will not resume the fight tonight for any inducement, including a better offer.
+**Nastier:** REFORM THE LINE — once per scene, and only if the company still has somewhere to withdraw to, every Blade that disengaged this scene returns to the field in good order.
 <!-- /statline -->
 
-**Tactics:** the Sergeant opens by naming the terms aloud — this is not a bluff, it is how the company works. The Blades fight to *detain*, not to kill. **Nobody in the Bought ever goes Aggressive, including the Captain.** The Captain spends his first exchange placing Blades and watching who the party protects; that is his first-target read, and he will use it.
+**Tactics:** the Sergeant opens by naming the terms aloud — this is not a bluff, it is how the company works. The Blades fight to *detain*, not to kill: a character their hits would drop to 0 HP is left at 1 HP and held instead. **Nobody in the Bought ever commits recklessly, including the Captain.** The Captain spends his first exchange placing Blades and watching who the party protects; that is his first-target read, and he will use it. A party that Defends and Intercepts at the gate is doing exactly what the Captain is watching for — which is fine, because holding is one of the three ways this ends.
 
 **Three ways this ends. All of them are wins.**
 
-**1 — Fight through.** Break the Sergeant and two Blades and the rest disengage in order. The Captain, arriving, invokes the **Second Clause** the exchange after the party looks like winning, and the company's objective changes mid-scene: they stop holding the gate and start looking for a woman in Thenya wool. The party has just been told something enormous. On his second exchange on the field he **starts negotiating**, out loud, while the attacks continue.
+**1 — Fight through.** Drop the Sergeant and half the Blades, and a morale check will usually see the rest disengage in order. The Captain, arriving, invokes the **Second Clause** the exchange after the party looks like winning, and the company's objective changes mid-scene: they stop holding the gate and start looking for a woman in Thenya wool. The party has just been told something enormous. Bloodied — or on his second exchange on the field, if the fight is going long — he **starts negotiating**, out loud, while the attacks continue.
 
-*Honest warning: fought to the last Blade this is an eight-exchange fight. That is the cost of the ending the module least expects a table to choose, and it is printed here so you can see it coming and reach for the clock or an out.*
+*Honest warning: fought to the last Blade, with the Captain dropped too, this is a long fight. That is the cost of the ending the module least expects a table to choose, and it is printed here so you can see it coming and reach for the clock or an out.*
 
-**2 — Void the contract.** Proof the employer broke terms (the fires were not meant to spread; the palace is burning). Or the named target already gone — Veier is out the river gate, and a party that knows it can simply *say so*. Or a better offer, made in front of the Sergeants: a Circle magnate, a Draunel, a Boranis cousin all have coin and reasons. **The Sergeant surrenders the field the moment the contract is void, and says so out loud.** This is the Persuade-ends-the-fight route III.3 promises, and it is the best thing in this module.
+**2 — Void the contract.** Proof the employer broke terms (the fires were not meant to spread; the palace is burning). Or the named target already gone — Veier is out the river gate, and a party that knows it can simply *say so*. Or a better offer, made in front of the Sergeants: a Circle magnate, a Draunel, a Boranis cousin all have coin and reasons. **The Sergeant surrenders the field the moment the contract is void, and says so out loud.** This is the talking-ends-the-fight route Chapter III.3 promises, and it is the best thing in this module.
 
 **3 — The sect guard.** On the clock's last segment, word arrives that the districts' guards are at the outer wall. The Captain calls the withdrawal at the first sight of a sect banner, if the party has held even one exchange. **A party that only held has won.**
 
-**Terrain as rules:** the gate grille (*anything through it is Hard; conversation through it is not*). The court's crystal wall, lit (*no Stealth at all on the party's side; the Bought are silhouetted too*). The gatehouse stair (*Maneuver to Cornered is Easy at the top; whoever holds it is Hard to Strike*).
+**Terrain as rules:** the gate grille (*anything through it is Hard; conversation through it is not*). The court's crystal wall, lit (*nobody on the party's side goes unseen; the Bought are silhouetted too*). The gatehouse stair (*a stunt at the top sends someone down it; attacks on whoever holds it are Hard*).
 
 **Outs:** the river gate, if anyone thinks of it. The wall, if anyone can climb it — *and if they do, they meet four more Blades, because the other twelve are holding the perimeter*. The Captain's price, if anyone asks what it is.
 
@@ -204,25 +204,22 @@ Five fights, and none of them mandatory. Each card is one page, in the same fiel
 
 ***Use with:*** B9, Movement V.
 
-**Recipe:** the Boranis honor guard, detaining and expelling. Two or three exchanges. Not a fight the party is meant to win, and not one they can lose anything permanent to.
+**Recipe:** the Boranis honor guard, detaining and expelling. Two or three exchanges. Not a fight the party is meant to win, and not one they can lose anything permanent to: a character the guards drop to 0 HP takes the Wound, and Hold On goes no lower than 7–9.
 
 **Enemies**
 
 <!-- statline: boranis_honor_guard -->
-**Boranis Honor Guard** · *Named* · Resolve **3** · attack +2 · armor light (+1 Resolve) · incoming Tier 2 · **TR 9**
+**Boranis Honor Guard** · *level 3 Standard* · HP **14** · attack +2 · damage 6 · armor 1 · morale 10
 
-**Techniques:** warder
+**Wants:** The room held and the offender out of it — detained and expelled, never killed.
 
-**Special:** WARDER — each honor guard carries two charged house crystals (a seal and a flare) and knows the palace's ward-points by heart. In a crisis they fight to positions, not to kills.
+**Special:** WARDER — each honor guard carries two charged house crystals (a seal and a flare) and knows the palace's ward-points by heart. Once per scene a guard fires one instead of attacking: a door seals across the party's way out, or a flare lights the corridor so that nobody in it can hide.
 
-**Stance triggers:**
+**When bloodied:** Falls back to the nearest ward-point and calls out. Four more honor guards are two exchanges away, and this one holds until they come.
 
-- Fights to detain and expel, never to kill.
-- At midnight the nine die or fall protecting their chief, around the edges of the frame — scripted regardless of these numbers (Chapter V).
+**Tells:** Glances at the nearest ward-point before moving; touches the crystal at the belt before firing it. A guard who turns his back to the palace doors has stopped detaining and started defending.
 
-**Opens on:** Whoever is between them and the room being crossed.
-
-**Morale:** Surrender ends it. It costs the evening — mask, invitation, and the rest of the night in the gatehouse cell — and not the character.
+**Breaks:** Never flees the house. Broken, a guard steps back, lowers the blade and offers terms: surrender, and the evening ends in the gatehouse cell.
 <!-- /statline -->
 
 **Objective:** get through, or get out, before four more arrive.
@@ -237,7 +234,7 @@ Five fights, and none of them mandatory. Each card is one page, in the same fiel
 
 ***Use with:*** B7 or B3, Movement VII — a branch of the gate's night, not a separate set piece.
 
-**Recipe:** Tavva (if she lives) plus two gallery knives, stripping the abandoned galleries while the palace burns. They fight to leave, exactly as in S2.
+**Recipe:** Tavva (if she lives) plus a mob of two gallery knives, stripping the abandoned galleries while the palace burns. They fight to leave, exactly as in S2.
 
 **Enemies:** as **S2**.
 

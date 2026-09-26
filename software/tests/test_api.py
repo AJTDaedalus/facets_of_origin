@@ -153,35 +153,44 @@ class TestInviteLinks:
 # ---------------------------------------------------------------------------
 
 class TestCharacterAPI:
-    def test_create_character_with_mm_token(self, client, mm_headers, active_session, valid_attributes):
-        resp = client.post(
-            "/api/characters/",
-            json={
-                "session_id": active_session["session_id"],
-                "character_name": "Zahna",
-                "primary_facet": "mind",
-                "attributes": valid_attributes,
-            },
-            headers=mm_headers,
-        )
+    def test_create_character_with_mm_token(self, client, mm_headers, active_session, create_payload):
+        resp = client.post("/api/characters/",
+                           json={"session_id": active_session["session_id"], **create_payload},
+                           headers=mm_headers)
         assert resp.status_code == 200
-        assert resp.json()["character"]["name"] == "Zahna"
+        char = resp.json()["character"]
+        assert char["name"] == "Zahna"
+        assert char["stats"] == {"body": 0, "mind": 2, "soul": 1}
+        assert char["derived"]["hp_max"] == 6
+        assert char["magic"]["domains"] == ["inscription"]
 
-    def test_create_character_invalid_attributes_returns_422(self, client, mm_headers, active_session):
-        bad_attrs = {"strength": 5, "dexterity": 5, "constitution": 5,
-                     "intelligence": 5, "wisdom": 5, "knowledge": 5,
-                     "spirit": 5, "luck": 5, "charisma": 5}
-        resp = client.post(
-            "/api/characters/",
-            json={
-                "session_id": active_session["session_id"],
-                "character_name": "Invalid",
-                "primary_facet": "body",
-                "attributes": bad_attrs,
-            },
-            headers=mm_headers,
-        )
+    def test_create_character_bad_second_stat_returns_422(self, client, mm_headers, active_session,
+                                                           create_payload):
+        payload = {**create_payload, "second_stat": "mind"}   # the Facet's own stat
+        resp = client.post("/api/characters/",
+                           json={"session_id": active_session["session_id"], **payload},
+                           headers=mm_headers)
         assert resp.status_code == 422
+        assert resp.json()["detail"]["errors"]
+
+    def test_create_custom_class_character(self, client, mm_headers, active_session):
+        resp = client.post("/api/characters/", json={
+            "session_id": active_session["session_id"], "character_name": "Zulnut",
+            "facet": "body", "second_stat": "soul",
+            "custom_class": {"name": "Wandering Disciple", "concept": "I move and I am still.",
+                             "knack": "Motion and stillness",
+                             "talents": ["unarmored_discipline", "athlete"],
+                             "kit": ["rope", "rations"], "signature": "ghost"},
+            "custom_background": {"name": "Pilgrim", "knack": "Roads and shrines",
+                                  "specialty": "Knows every shrine on the pilgrim road."},
+            "coin": 10,
+        }, headers=mm_headers)
+        assert resp.status_code == 200, resp.text
+        char = resp.json()["character"]
+        assert char["class"]["custom"] is True
+        assert char["class"]["signature"] == "ghost"
+        assert char["knacks"] == ["Motion and stillness", "Roads and shrines"]
+        assert char["derived"]["armor"] == 1          # Unarmored Discipline
 
     def test_list_characters_requires_auth(self, client, active_session):
         resp = client.get(f"/api/characters/{active_session['session_id']}")
@@ -191,169 +200,66 @@ class TestCharacterAPI:
         session, _ = session_with_character
         resp = client.get(f"/api/characters/{session['session_id']}", headers=mm_headers)
         assert resp.status_code == 200
-        assert "characters" in resp.json()
+        assert "Zahna" in resp.json()["characters"]
 
-    def test_player_creates_own_character(self, client, active_session, valid_attributes):
-        """A player with a valid session token can create a character."""
+    def test_player_creates_own_character(self, client, active_session, create_payload):
         session_id = active_session["session_id"]
-        player_token = create_session_token("Alice", session_id)
-        headers = {"Authorization": f"Bearer {player_token}"}
-        resp = client.post(
-            "/api/characters/",
-            json={
-                "session_id": session_id,
-                "character_name": "Alice the Brave",
-                "primary_facet": "body",
-                "attributes": valid_attributes,
-            },
-            headers=headers,
-        )
+        headers = {"Authorization": f"Bearer {create_session_token('Alice', session_id)}"}
+        resp = client.post("/api/characters/",
+                           json={"session_id": session_id, **create_payload}, headers=headers)
         assert resp.status_code == 200
+        assert resp.json()["character"]["player_name"] == "Alice"
 
-    def test_player_cannot_create_char_in_other_session(self, client, active_session, valid_attributes):
-        player_token = create_session_token("Alice", "different-session-id")
-        headers = {"Authorization": f"Bearer {player_token}"}
-        resp = client.post(
-            "/api/characters/",
-            json={
-                "session_id": active_session["session_id"],
-                "character_name": "Alice",
-                "primary_facet": "body",
-                "attributes": valid_attributes,
-            },
-            headers=headers,
-        )
+    def test_player_cannot_create_char_in_other_session(self, client, active_session, create_payload):
+        headers = {"Authorization": f"Bearer {create_session_token('Alice', 'other-session')}"}
+        resp = client.post("/api/characters/",
+                           json={"session_id": active_session["session_id"], **create_payload},
+                           headers=headers)
         assert resp.status_code == 403
 
-    def test_invalid_background_id_returns_422(self, client, mm_headers, active_session, valid_attributes):
-        """B3.3: Creating a character with an unknown background_id must return 422."""
-        resp = client.post(
-            "/api/characters/",
-            json={
-                "session_id": active_session["session_id"],
-                "character_name": "Zahna",
-                "primary_facet": "mind",
-                "attributes": valid_attributes,
-                "background_id": "nonexistent_bg_xyz",
-            },
-            headers=mm_headers,
-        )
+    def test_invalid_background_id_returns_422(self, client, mm_headers, active_session, create_payload):
+        payload = {**create_payload, "background_id": "nonexistent_bg_xyz"}
+        resp = client.post("/api/characters/",
+                           json={"session_id": active_session["session_id"], **payload},
+                           headers=mm_headers)
         assert resp.status_code == 422
 
-    def test_background_guild_apprentice_replaces_secondary_with_domain(
-        self, client, mm_headers, active_session, valid_attributes
-    ):
-        """Guild Apprentice: choosing a magic domain skips secondary skill (craft, per T5.8)."""
-        resp = client.post(
-            "/api/characters/",
-            json={
-                "session_id": active_session["session_id"],
-                "character_name": "Lyra",
-                "primary_facet": "mind",
-                "attributes": valid_attributes,
-                "background_id": "guild_apprentice",
-                "magic_domain": "warding",
-            },
-            headers=mm_headers,
-        )
+    def test_any_character_may_take_any_background(self, client, mm_headers, active_session,
+                                                   create_payload):
+        """PHB ruling: backgrounds are not tied to a Facet."""
+        payload = {**create_payload, "background_id": "dockworker"}   # a 'body' example
+        resp = client.post("/api/characters/",
+                           json={"session_id": active_session["session_id"], **payload},
+                           headers=mm_headers)
         assert resp.status_code == 200
-        char = resp.json()["character"]
-        # Starting skill: lore at practiced
-        assert char["skills"]["lore"]["rank"] == "practiced"
-        # Secondary skill (craft) is SKIPPED because domain replaces it
-        assert char["skills"]["craft"]["marks"] == 0
-        # Magic domain is set
-        assert char["magic_domain"] == "warding"
-        assert char["career_advances"] == 1
 
-    def test_background_guild_apprentice_no_domain_keeps_secondary(
-        self, client, mm_headers, active_session, valid_attributes
-    ):
-        """Guild Apprentice: without a magic domain, secondary skill (craft, per T5.8) is granted."""
-        resp = client.post(
-            "/api/characters/",
-            json={
-                "session_id": active_session["session_id"],
-                "character_name": "Scholar",
-                "primary_facet": "mind",
-                "attributes": valid_attributes,
-                "background_id": "guild_apprentice",
-            },
-            headers=mm_headers,
-        )
-        assert resp.status_code == 200
-        char = resp.json()["character"]
-        assert char["skills"]["lore"]["rank"] == "practiced"
-        assert char["skills"]["craft"]["marks"] == 1  # secondary granted
-        assert char["magic_domain"] is None
+    def test_caster_without_domain_returns_422(self, client, mm_headers, active_session,
+                                               create_payload):
+        payload = {k: v for k, v in create_payload.items() if k != "magic"}
+        resp = client.post("/api/characters/",
+                           json={"session_id": active_session["session_id"], **payload},
+                           headers=mm_headers)
+        assert resp.status_code == 422
 
-    def test_background_temple_acolyte_domain_replaces_secondary(
-        self, client, mm_headers, active_session, valid_attributes
-    ):
-        """Temple Acolyte: choosing a magic domain replaces the secondary skill (PHB II.6)."""
-        resp = client.post(
-            "/api/characters/",
-            json={
-                "session_id": active_session["session_id"],
-                "character_name": "Sable",
-                "primary_facet": "soul",
-                "attributes": valid_attributes,
-                "background_id": "temple_acolyte",
-                "magic_domain": "resonance",
-            },
-            headers=mm_headers,
-        )
-        assert resp.status_code == 200
-        char = resp.json()["character"]
-        # Starting skill: attune at practiced
-        assert char["skills"]["attune"]["rank"] == "practiced"
-        # Secondary skill (perform) is replaced by the domain origin
-        assert char["skills"].get("perform", {}).get("marks", 0) == 0
-        # Magic domain is set
-        assert char["magic_domain"] == "resonance"
-        assert char["career_advances"] == 1
+    def test_update_inventory_checks_slots(self, client, mm_headers, session_with_character):
+        session, _ = session_with_character
+        sid = session["session_id"]
+        ok = client.put(f"/api/characters/{sid}/Zahna/inventory",
+                        json={"inventory": [{"id": "staff"}, {"id": "rope"}],
+                              "equipped": {"weapon": "staff", "armor": "none"}},
+                        headers=mm_headers)
+        assert ok.status_code == 200, ok.text
+        assert ok.json()["slots_free"] == 8
+        too_many = client.put(f"/api/characters/{sid}/Zahna/inventory",
+                              json={"inventory": [{"id": "rope"}] * 11,
+                                    "equipped": {"weapon": None, "armor": "none"}},
+                              headers=mm_headers)
+        assert too_many.status_code == 422
 
-    def test_background_temple_acolyte_keeps_secondary_without_domain(
-        self, client, mm_headers, active_session, valid_attributes
-    ):
-        """Temple Acolyte without a domain keeps the secondary skill (perform)."""
-        resp = client.post(
-            "/api/characters/",
-            json={
-                "session_id": active_session["session_id"],
-                "character_name": "Vesh",
-                "primary_facet": "soul",
-                "attributes": valid_attributes,
-                "background_id": "temple_acolyte",
-            },
-            headers=mm_headers,
-        )
-        assert resp.status_code == 200
-        char = resp.json()["character"]
-        assert char["skills"]["attune"]["rank"] == "practiced"
-        assert char["skills"]["perform"]["marks"] == 1
-        assert char["magic_domain"] is None
-
-    def test_background_city_watch_veteran_no_domain(
-        self, client, mm_headers, active_session, valid_attributes
-    ):
-        """City Watch Veteran: non-magical background with secondary skill."""
-        resp = client.post(
-            "/api/characters/",
-            json={
-                "session_id": active_session["session_id"],
-                "character_name": "Rowan",
-                "primary_facet": "body",
-                "attributes": valid_attributes,
-                "background_id": "city_watch_veteran",
-            },
-            headers=mm_headers,
-        )
-        assert resp.status_code == 200
-        char = resp.json()["character"]
-        assert char["skills"]["combat"]["rank"] == "practiced"
-        assert char["skills"]["endurance"]["marks"] == 1
-        assert char["magic_domain"] is None
+    def test_update_inventory_unknown_character_404(self, client, mm_headers, active_session):
+        resp = client.put(f"/api/characters/{active_session['session_id']}/Nobody/inventory",
+                          json={"inventory": []}, headers=mm_headers)
+        assert resp.status_code == 404
 
 
 # ---------------------------------------------------------------------------
@@ -380,18 +286,18 @@ class TestRollEndpoint:
     def test_roll_requires_auth(self, client, active_session):
         resp = client.post("/api/rolls/", json={
             "session_id": active_session["session_id"],
-            "attribute_id": "strength",
+            "stat": "body",
         })
         assert resp.status_code == 401
 
-    def test_roll_returns_result(self, client, session_with_character, valid_attributes):
+    def test_roll_returns_result(self, client, session_with_character):
         session, char = session_with_character
         session_id = session["session_id"]
         player_token = create_session_token("Zahna", session_id)
         headers = {"Authorization": f"Bearer {player_token}"}
         resp = client.post("/api/rolls/", json={
             "session_id": session_id,
-            "attribute_id": "intelligence",
+            "stat": "mind",
             "difficulty": "Standard",
             "sparks_spent": 0,
         }, headers=headers)
@@ -407,19 +313,19 @@ class TestRollEndpoint:
         headers = {"Authorization": f"Bearer {player_token}"}
         resp = client.post("/api/rolls/", json={
             "session_id": session_id,
-            "attribute_id": "intelligence",
+            "stat": "mind",
         }, headers=headers)
         total = resp.json()["roll"]["total"]
         assert isinstance(total, int)
 
-    def test_roll_unknown_attribute_returns_422(self, client, session_with_character):
+    def test_roll_unknown_stat_returns_422(self, client, session_with_character):
         session, char = session_with_character
         session_id = session["session_id"]
         player_token = create_session_token("Zahna", session_id)
         headers = {"Authorization": f"Bearer {player_token}"}
         resp = client.post("/api/rolls/", json={
             "session_id": session_id,
-            "attribute_id": "nonexistent",
+            "stat": "nonexistent",
         }, headers=headers)
         assert resp.status_code == 422
 
@@ -462,14 +368,14 @@ class TestMalformedRequests:
     def test_create_character_missing_session_id_returns_422(self, client, mm_headers):
         resp = client.post("/api/characters/", json={
             "character_name": "Test",
-            "primary_facet": "body",
-            "attributes": {},
+            "facet": "body",
+            "second_stat": "soul",
         }, headers=mm_headers)
         assert resp.status_code == 422
 
     def test_roll_missing_session_id_returns_422(self, client, mm_headers):
         resp = client.post("/api/rolls/", json={
-            "attribute_id": "strength",
+            "stat": "body",
         }, headers=mm_headers)
         assert resp.status_code == 422
 
@@ -507,7 +413,7 @@ class TestRollDifficulties:
         headers = {"Authorization": f"Bearer {player_token}"}
         resp = client.post("/api/rolls/", json={
             "session_id": session_id,
-            "attribute_id": "intelligence",
+            "stat": "mind",
             "difficulty": difficulty,
         }, headers=headers)
         assert resp.status_code == 200
@@ -545,7 +451,7 @@ class TestPlayerSessionMismatch:
         headers = {"Authorization": f"Bearer {player_token}"}
         resp = client.post("/api/rolls/", json={
             "session_id": session_id,
-            "attribute_id": "intelligence",
+            "stat": "mind",
         }, headers=headers)
         assert resp.status_code == 403
 
@@ -605,39 +511,14 @@ class TestRateLimiting:
 # Character upload endpoint
 # ---------------------------------------------------------------------------
 
-# Zahna's attributes from character-example.fof (sum = 18)
-_ZAHNA_ATTRIBUTES = {
-    "strength": 1, "dexterity": 2, "constitution": 2,
-    "intelligence": 3, "wisdom": 3, "knowledge": 2,
-    "spirit": 1, "luck": 2, "charisma": 2,
-}
-
-
 def _make_character_fof_yaml(player_name: str, session_id: str | None = None) -> str:
-    """Build a minimal valid character .fof YAML string."""
-    fof_dict = {
-        "fof_version": "0.1",
-        "type": "character",
-        "id": f"{player_name.lower()}-test",
-        "name": player_name,
-        "version": "1.0.0",
-        "authors": [player_name],
-        "ruleset": {"modules": [{"id": "base", "version": "0.1.0"}]},
-        "campaign_id": session_id or "test-session",
-        "character": {
-            "name": player_name,
-            "player_name": player_name,
-            "primary_facet": "mind",
-            "attributes": _ZAHNA_ATTRIBUTES,
-            "skills": {"investigate": {"rank": "practiced", "marks": 2}},
-            "sparks": 2,
-            "session_skill_points_remaining": 4,
-            "facet_level": 1,
-            "rank_advances_this_facet_level": 3,
-            "techniques": [],
-        },
-    }
-    return yaml.dump(fof_dict, allow_unicode=True, sort_keys=False)
+    """A minimal valid v1.0 character .fof (a preset Thaumaturge)."""
+    from app.facets.registry import build_ruleset
+    from tests.conftest import make_caster
+    ruleset = build_ruleset([])
+    ch = make_caster(ruleset, name=player_name, player_name=player_name)
+    fof = ch.to_fof(ruleset.module_refs(), session_id, ruleset=ruleset)
+    return yaml.dump(fof, allow_unicode=True, sort_keys=False)
 
 
 class TestCharacterUpload:
@@ -652,7 +533,7 @@ class TestCharacterUpload:
         assert resp.status_code == 200
         char = resp.json()["character"]
         assert char["name"] == "Zahna"
-        assert char["primary_facet"] == "mind"
+        assert char["facet"] == "mind"
 
     def test_upload_character_appears_in_session(self, client, mm_headers, active_session):
         session_id = active_session["session_id"]
@@ -736,8 +617,9 @@ class TestCharacterUpload:
         )
         assert resp.status_code == 404
 
-    def test_upload_character_example_fof(self, client, mm_headers, active_session):
-        """The canonical character-example.fof from spec/ should upload successfully."""
+    def test_upload_retired_v03_example_fof_is_refused_clearly(self, client, mm_headers,
+                                                                active_session):
+        """spec/'s character example is still v0.3; uploading it must say why it fails."""
         session_id = active_session["session_id"]
         fof_yaml = (SPEC_EXAMPLES / "character-example.fof").read_text(encoding="utf-8")
         resp = client.post(
@@ -745,8 +627,18 @@ class TestCharacterUpload:
             json={"session_id": session_id, "fof_yaml": fof_yaml},
             headers=mm_headers,
         )
-        assert resp.status_code == 200
-        assert resp.json()["character"]["name"] == "Zahna"
+        assert resp.status_code == 422
+        assert "v0.3" in resp.json()["detail"]
+
+    def test_upload_cast_character_file(self, client, mm_headers, active_session):
+        """The cast's Mordai.fof (v1.0) uploads and keeps its computed HP."""
+        session_id = active_session["session_id"]
+        path = Path(__file__).parent.parent.parent / "characters" / "Mordai.fof"
+        resp = client.post("/api/characters/upload",
+                           json={"session_id": session_id, "fof_yaml": path.read_text()},
+                           headers=mm_headers)
+        assert resp.status_code == 200, resp.text
+        assert resp.json()["character"]["derived"]["hp_max"] == 16
 
 
 class TestCharacterExport:
@@ -783,37 +675,26 @@ class TestCharacterExport:
         assert parsed["type"] == "character"
         assert parsed["character"]["name"] == char["name"]
 
-    def test_export_reimport_roundtrip(self, client, mm_headers, active_session, valid_attributes):
+    def test_export_reimport_roundtrip(self, client, mm_headers, active_session, create_payload):
         """Export → re-upload should produce an identical character."""
         session_id = active_session["session_id"]
-        # Create the character
-        client.post(
-            "/api/characters/",
-            json={
-                "session_id": session_id,
-                "character_name": "Roundtrip",
-                "primary_facet": "body",
-                "attributes": valid_attributes,
-            },
-            headers=mm_headers,
-        )
-        # Export
-        export_resp = client.get(
-            f"/api/characters/{session_id}/Roundtrip/export",
-            headers=mm_headers,
-        )
+        client.post("/api/characters/",
+                    json={"session_id": session_id, **create_payload,
+                          "character_name": "Roundtrip"},
+                    headers=mm_headers)
+        export_resp = client.get(f"/api/characters/{session_id}/Roundtrip/export",
+                                 headers=mm_headers)
         assert export_resp.status_code == 200
-
-        # Re-upload (overwrites same character)
         upload_resp = client.post(
             "/api/characters/upload",
             json={"session_id": session_id, "fof_yaml": export_resp.text},
             headers=mm_headers,
         )
-        assert upload_resp.status_code == 200
+        assert upload_resp.status_code == 200, upload_resp.text
         reimported = upload_resp.json()["character"]
         assert reimported["name"] == "Roundtrip"
-        assert reimported["primary_facet"] == "body"
+        assert reimported["facet"] == "mind"
+        assert reimported["magic"]["signature_workings"] == create_payload["magic"]["signature_workings"]
 
     def test_export_session_not_found_returns_404(self, client, mm_headers):
         resp = client.get(
@@ -958,60 +839,41 @@ class TestCharacterDeletion:
 
 
 class TestCharacterCreationCarriesLineage:
-    """PHB II.5 / D18. The request model gains two fields; every rule about
-    them lives in the character model, so the handler stays a router.
-    """
+    """PHB II.5 / L14. Every rule about lineage lives in the character model;
+    the handler only relays it."""
 
     def _payload(self, session_id, **kw):
-        payload = {
-            "session_id": session_id,
-            "character_name": "Serane",
-            "primary_facet": "soul",
-            "attributes": {
-                "strength": 1, "dexterity": 3, "constitution": 1,
-                "intelligence": 3, "wisdom": 1, "knowledge": 3,
-                "spirit": 2, "luck": 3, "charisma": 1,
-            },
-        }
+        payload = {"session_id": session_id, "character_name": "Serane", "facet": "soul",
+                   "second_stat": "mind", "class_id": "speaker",
+                   "background_id": "street_performer", "coin": 0}
         payload.update(kw)
         return payload
 
-    def test_lineage_defaults_to_human_when_unsent(self, client, mm_headers, mm_token):
-        """An older client that has never heard of Lineage keeps working."""
-        session_id = client.post(
-            "/api/sessions/", json={"name": "Lin"}, headers=mm_headers,
-        ).json()["session_id"]
-        resp = client.post("/api/characters/", json=self._payload(session_id),
-                           headers=mm_headers)
-        assert resp.status_code == 200, resp.text
-        assert resp.json()["character"]["lineage"] == "human"
-        assert resp.json()["character"]["gifted"] is False
+    def _session(self, client, mm_headers, facets=None):
+        return client.post("/api/sessions/",
+                           json={"name": "Lin", **({"active_facet_ids": facets} if facets else {})},
+                           headers=mm_headers).json()["session_id"]
 
-    def test_an_unknown_lineage_is_rejected(self, client, mm_headers, mm_token):
-        session_id = client.post(
-            "/api/sessions/", json={"name": "Lin"}, headers=mm_headers,
-        ).json()["session_id"]
-        resp = client.post(
-            "/api/characters/",
-            json=self._payload(session_id, lineage="dragonborn"),
-            headers=mm_headers,
-        )
+    def test_lineage_defaults_to_human_when_unsent(self, client, mm_headers):
+        sid = self._session(client, mm_headers)
+        resp = client.post("/api/characters/", json=self._payload(sid), headers=mm_headers)
+        assert resp.status_code == 200, resp.text
+        assert resp.json()["character"]["lineage"] == {"id": "human"}
+
+    def test_an_unknown_lineage_is_rejected(self, client, mm_headers):
+        sid = self._session(client, mm_headers)
+        resp = client.post("/api/characters/", json=self._payload(sid, lineage="dragonborn"),
+                           headers=mm_headers)
         assert resp.status_code == 422
         assert "dragonborn" in str(resp.json())
 
-    def test_gifted_on_an_ungifted_lineage_is_rejected_by_the_model(
-            self, client, mm_headers, mm_token):
-        """The rule is the character model's; the handler only relays it."""
-        session_id = client.post(
-            "/api/sessions/", json={"name": "Lin"}, headers=mm_headers,
-        ).json()["session_id"]
-        resp = client.post(
-            "/api/characters/",
-            json=self._payload(session_id, lineage="human", gifted=True),
-            headers=mm_headers,
-        )
+    def test_gifted_on_an_ungifted_lineage_is_rejected_by_the_model(self, client, mm_headers):
+        sid = self._session(client, mm_headers)
+        resp = client.post("/api/characters/",
+                           json=self._payload(sid, lineage="human", gifted=True),
+                           headers=mm_headers)
         assert resp.status_code == 422
-        assert "ungifted" in str(resp.json()).lower()
+        assert "no gift" in str(resp.json()).lower()
 
 
 class TestASettingFacetCanActuallyBeTurnedOn:
@@ -1040,7 +902,7 @@ class TestASettingFacetCanActuallyBeTurnedOn:
         from app.game.session import session_store
         rs = session_store.get(sid).ruleset
         assert [lin.id for lin in rs.lineages] == ["human"]
-        assert rs.items == []
+        assert not any(i.curio for i in rs.items)
 
     def test_a_session_that_opts_in_gets_the_whole_facet(self, client, mm_headers):
         sid = client.post(
@@ -1050,18 +912,14 @@ class TestASettingFacetCanActuallyBeTurnedOn:
         ).json()["session_id"]
         from app.game.session import session_store
         rs = session_store.get(sid).ruleset
-
         assert len([l for l in rs.lineages if l.id != "human"]) == 10
-        assert len(rs.items) == 6
+        curios = [i for i in rs.items if i.curio]
+        assert len(curios) == 6
         # D24: Val'loh adds no domains — gifts are chosen from the core catalog.
         from app.facets.registry import build_ruleset
         core = build_ruleset([])
-        assert ({d.id for d in rs.magic.soul_domains}
-                == {d.id for d in core.magic.soul_domains})
-        # And the core is still all there.
+        assert {d.id for d in rs.magic_domains} == {d.id for d in core.magic_domains}
         assert rs.get_lineage("human") is not None
-        assert any(d.id == "fire" for d in rs.magic.soul_domains)
-        assert rs.magic.traditions
 
     def test_the_opted_in_session_serves_lineages_to_its_clients(
             self, client, mm_headers):
@@ -1087,33 +945,24 @@ class TestASettingFacetCanActuallyBeTurnedOn:
             headers=mm_headers,
         ).json()["session_id"]
         resp = client.post("/api/characters/", json={
-            "session_id": sid, "character_name": "Serane",
-            "primary_facet": "soul",
-            "attributes": {"strength": 1, "dexterity": 2, "constitution": 1,
-                           "intelligence": 3, "wisdom": 2, "knowledge": 2,
-                           "spirit": 2, "luck": 2, "charisma": 3},
-            "lineage": "orthaen", "gifted": True, "magic_domain": "transmutation",
+            "session_id": sid, "character_name": "Serane", "facet": "soul",
+            "second_stat": "mind", "class_id": "speaker", "background_id": "street_performer",
+            "lineage": "orthaen", "gift_domain": "transmutation", "coin": 0,
         }, headers=mm_headers)
         assert resp.status_code == 200, resp.text
         char = resp.json()["character"]
-        assert char["lineage"] == "orthaen"
-        assert char["gifted"] is True
-        assert char["magic_domain"] == "transmutation"
-        # A Mind domain, cast intuitively: the gift's one rule, through the API.
-        assert char["magic_tradition"] == "intuitive"
+        assert char["lineage"] == {"id": "orthaen", "gifted": True, "gift_domain": "transmutation"}
+        assert "Orthaen gift" in char["knacks"]
+        assert char["magic"] is None
 
     def test_a_valloh_gift_is_refused_in_a_core_session(self, client, mm_headers):
-        """The other half of opt-in: a table that did not load the Facet cannot
-        reach its content by guessing an id."""
+        """A table that did not load the Facet cannot reach its content by guessing an id."""
         sid = client.post("/api/sessions/", json={"name": "Core only"},
                           headers=mm_headers).json()["session_id"]
         resp = client.post("/api/characters/", json={
-            "session_id": sid, "character_name": "Serane",
-            "primary_facet": "soul",
-            "attributes": {"strength": 1, "dexterity": 2, "constitution": 1,
-                           "intelligence": 3, "wisdom": 2, "knowledge": 2,
-                           "spirit": 2, "luck": 2, "charisma": 3},
-            "lineage": "orthaen", "gifted": True, "magic_domain": "transmutation",
+            "session_id": sid, "character_name": "Serane", "facet": "soul",
+            "second_stat": "mind", "class_id": "speaker", "background_id": "street_performer",
+            "lineage": "orthaen", "gift_domain": "transmutation",
         }, headers=mm_headers)
         assert resp.status_code == 422
         assert "orthaen" in str(resp.json())

@@ -1,250 +1,174 @@
-# Character Creation: Facets and Advancement
+# Character Creation: Facets, Classes and Levels
 
-Nobody in this game levels up. What happens instead is that a character does something enough times, in enough trouble, that the table stops being surprised when it works.
+Every character belongs to a Facet, and every character has a class. The Facet is the broad thing you are: a Body, a Mind or a Soul. The class is the particular shape you have taken inside it. A Warrior and a Scout are both Body. A Physician and a Thaumaturge are both Mind. They share a Facet's numbers and draw from the same menu, and they could hardly be more different at the table.
 
-This chapter is the bookkeeping under that sentence: how the skills you actually use turn into ranks, how ranks turn into Facet levels, how Facet levels turn into Techniques, and where the whole thing eventually asks you to stop being only one kind of person.
-
-## What Is a Facet?
-
-A Facet is the broad shape of who your character is becoming through play.
-
-A Facet is not a class you pick from a menu, and it never locks you into a role. It is the direction your character naturally grows — the part of themselves they keep reaching for when things get hard. You declare a Facet at character creation, but what confirms it is what you actually do over the course of a campaign.
-
-There are three Facets, mirroring the three Major Attributes:
+This is the one part of character creation with real weight. Take a preset if you want to start playing. Write your own class if you already know who your character is.
 
 ---
 
-**Facet of the Body** — Characters of strength, speed, and endurance. Warriors, scouts, athletes, brawlers, dancers. People who solve problems with their physical presence in the world.
+## The Facet Owns the Numbers
 
-**Facet of the Mind** — Characters of knowledge, perception, and reasoning. Scholars, detectives, navigators, arcane theorists. People who solve problems by understanding them.
+Your Facet sets every number that affects balance. Your class never does.
 
-**Facet of the Soul** — Characters of will, presence, and connection. Diplomats, spiritual practitioners, luck-touched wanderers. Where a Body character forces a door and a Mind character finds the hidden latch, a Soul character persuades someone to open it — or simply finds the door already unlocked, because it has always worked out that way.
+**Table II.4–1: What Each Facet Owns**
+
+| | Body | Mind | Soul |
+|---|---|---|---|
+| Best stat (+2 at creation) | Body | Mind | Soul |
+| Grit die (HP per level) | d10, or 6 | d6, or 4 | d8, or 5 |
+| Magic tradition | none | Thaumaturgy | Invocation |
+| Talent menu | Chapter II.4a | Chapter II.4b | Chapter II.4c |
+| Preset classes | Warrior, Scout, Guardian, Brawler | Thaumaturge, Investigator, Physician, Tactician | Invoker, Speaker, Wanderer, Captain |
+
+**Body** is for warriors, scouts, guardians and brawlers: people who solve problems with their physical presence in the world. **Mind** is for scholars, investigators, physicians, tacticians and thaumaturges: people who solve problems by understanding them. **Soul** is for invokers, speakers, wanderers and captains: people who solve problems by moving the people around them, or by having it work out.
+
+Every Facet gets a menu of twelve talents and six signatures, and every character has 10 + Body slots. The Body pays for its big grit die by having no magic. The Mind pays for the most flexible tools in the game with the smallest die.
 
 ---
 
-Your **Primary Facet** is declared at character creation. It determines which skills cost less to advance and which Techniques are available to you. You are not forbidden from developing skills or abilities outside your Primary Facet — growth outside your lane is simply harder won.
+## Classes
+
+A class, preset or custom, is made of the same parts:
+
+1. **A name**, and **a concept** in one sentence: *I am a ___ who ___.*
+2. **A class knack**: what you trained as.
+3. **Two starting talents** from your Facet's menu.
+4. **A starting kit**: the things you carry that say who you are.
+5. **A signature**, chosen from your Facet's signature list at level 3.
+
+A **preset class** is one of these, already filled in. There are four per Facet, printed as class cards at the start of Chapter II.4a, Chapter II.4b and Chapter II.4c. They are good builds, and there is nothing a preset can do that a custom class cannot.
+
+A **custom class** is the same five lines, written by you. Take your two talents from your Facet's menu, pick a kit, and name the thing. That's it.
+
+> **Through the Mirror — where the classes come from**
+>
+> The idea is borrowed from an old computer game about a strange island, which let you pick a class from a list or write your own inside a broad specialization. We liked that it made the list a set of suggestions rather than a fence.
+>
+> It only works if a custom class can never out-muscle a preset. That's why the Facet owns every number: hit points, the stat that goes to +2, and whether you can cast. A class is words, gear and picks from a shared menu. You can build something odd, but you cannot build something broken, and a table can say yes to your idea without doing arithmetic first.
+
+### Knacks
+
+A **knack** is a short phrase naming something your character knows deeply: a trade, a place, a people, or a tradition. *Soldiering. Arcane theory. Harbor life. City Watch Veteran.* When one of your knacks fits what you are doing, add **+1** to the roll.
+
+You have two knacks: your **class knack** (what you trained as) and your **background knack** (where you come from, Chapter II.6). A gifted lineage adds a third. However many fit, the bonus is +1. Knacks never stack.
+
+A knack is never a bare verb. "Fighting" and "sneaking" are not knacks, because they would fit every roll of that kind forever. "Arena bouts" is a knack. So is "Street fighting". A good knack fits about one roll in four, and you should be able to tell the MM *why* it fits.
+
+### Writing a Custom Class
+
+Pick your Facet and set your stats first. Then:
+
+**Name it and write the concept.** One sentence. If it takes two, you have two characters.
+
+**Name your class knack.** Something you trained as, narrow enough that it doesn't fit every roll.
+
+**Take two talents** from your Facet's menu. Look for two that tell the same story.
+
+**Pick a kit.** A weapon, armor if you wear it, and the two or three tools your concept can't do without. The presets carry between 3 and 6 slots of kit. Stay inside that and nobody will blink.
+
+**Look ahead to your signature.** You choose it at level 3, from your Facet's list. Knowing which one you want helps you choose talents now.
+
+> **Example — the model custom class**
+>
+> **Zulnut's player:** Body. Body +2, Soul +1, Mind +0. He learned from a wandering teacher who moved on, and kept the habits. None of the presets is right; the Brawler is closest, and the Brawler is far too keen.
+>
+> **MM:** Then write your own. Name?
+>
+> **Zulnut's player:** Wandering Disciple. *I am a disciple of a wandering ascetic tradition: discipline built through motion and stillness, and the minimum possible effort.* Class knack is *Motion and stillness*.
+>
+> **MM:** Talents?
+>
+> **Zulnut's player:** *Unarmored Discipline*, because armor is heavy. *Athlete*, because the only thing he enjoys more than not fighting is climbing away from a fight. And at level 3 he takes *Ghost*.
+>
+> **MM:** Kit?
+>
+> **Zulnut's player:** Whatever the Brawler carries. It's the shortest list. A knife, rope, rations, torches.
+>
+> **MM:** Four slots of twelve. HP is 10 plus 2, so 12. No armor, but *Unarmored Discipline* gives you armor 1.
+>
+> **Zulnut's player:** Background's custom too, same name, because it's the same life. Knack, *Sleight of hand and quiet feet*. Specialty: he notices the exact moment a room's attention shifts off him.
+>
+> **MM:** (That is going to be a problem for me for years.) Three Sparks. Write it down.
 
 ---
 
-## Skills
+## Talents and Signatures
 
-Skills are specific areas of developed capability. Where your attributes represent your fundamental nature, skills represent what you have learned to do.
+A **talent** is something your character can do that the rules don't otherwise allow: a permission, an option, a way to bend a rule. Talents are not +1 bonuses. Each one prints the rule it changes as a **Normal:** line, so you can always see how big the exception is.
 
-Each skill is associated with one of the three Facets and one Minor Attribute that typically governs it. When you roll a skill, use the associated Minor Attribute modifier unless circumstances clearly call for something else.
+Every talent has an **improved** form. You may improve a talent you have held for at least one full level; it keeps its first effect and adds the improved one.
 
-Skills have four ranks:
+A **signature** is taken at level 3, once, from your Facet's signature list. It is the thing your class is known for, and it has no improved form. A few signatures need a casting talent; they say so.
 
-**Table II.4–1: Skill Ranks**
+Talent entries have one shape, explained in the Reading the Entries box at the head of each menu (Chapter II.4a).
 
-| Rank | Modifier |
+---
+
+## Levels
+
+Characters grow from level 1 to level 10. **The MM decides when the table levels up.** There are no experience points to count.
+
+At the end of each session, the MM (or the app) asks the table five questions:
+
+- Did we discover something new about the world?
+- Did we bring treasure home?
+- Did someone pursue their character's goal?
+- Did we change the world, for better or worse?
+- Did someone make a moment the whole table will remember?
+
+The answers are how the MM judges when a level is earned. Notice what is missing. Kills don't count, and neither does rolling a lot of dice. The game rewards the things it is about.
+
+**Table II.4–2: Default Pacing**
+
+| Level | Reached after session |
 |---|---|
-| Novice | +0 (default — everyone starts here) |
-| Practiced | +1 |
-| Expert | +2 |
-| Master | +3 |
+| 2 | 1 |
+| 3 | 3 |
+| 4 | 5 |
+| 5 | 7 |
+| 6 | 10 |
+| 7 | 13 |
+| 8 | 16 |
+| 9 | 19 |
+| 10 | 22 |
 
-Skill rank stacks with your attribute modifier. A character with Dexterity 3 (+1) and Expert rank in Stealth (+2) rolls at a net +3 — genuinely exceptional. A Master rank pushes that to +4 — a level of capability that defines a character's legend.
+A table that plays long sessions, or wants a faster climb, can level sooner. The pacing is a default the MM tunes (MM3).
 
----
+### What Each Level Gives
 
-## Advancing Skills
+Each time you level up:
 
-Skills improve through use. At the end of each session, you have **4 skill points** to distribute among skills you actually used during that session. Each point spent on a skill adds one mark toward its next rank.
+**Hit points.** Roll your Facet's grit die and add the result to your maximum HP, or take the average instead (Body 6, Soul 5, Mind 4). You always gain at least 1.
 
-**Table II.4–2: Skill Point Cost per Mark**
+**One pick.** Either a new talent from your Facet's menu, or the improved form of a talent you have held for at least one level. At level 3 the pick is always your signature.
 
-| Situation | Cost per Mark |
-|---|---|
-| Primary Facet skill | 1 point |
-| Cross-Facet skill | 2 points |
+**Table II.4–3: Levels**
 
-Points go to skills you used this session, with two allowances:
+| Level | Hit points | Pick | Also |
+|---|---|---|---|
+| 1 | grit die maximum + Body | your class's two starting talents | casters: a domain and 2 signature workings |
+| 2 | + grit die or average | a talent or an improvement | — |
+| 3 | + grit die or average | your signature | damage bonus +1; Major workings; rebuilding stops being free |
+| 4 | + grit die or average | a talent or an improvement | +1 to a stat |
+| 5 | + grit die or average | a talent or an improvement | casters: a new signature working |
+| 6 | + grit die or average | a talent or an improvement | damage bonus +2 |
+| 7 | + grit die or average | a talent or an improvement | — |
+| 8 | + grit die or average | a talent or an improvement | +1 to a stat |
+| 9 | + grit die or average | a talent or an improvement | damage bonus +3; casters: a new signature working |
+| 10 | + grit die or average | a talent or an improvement | — |
 
-- **Banking.** Unspent points are not lost — you may carry up to **2** of them into the next session, on top of that session's 4.
-- **Training between sessions.** **1** of your 4 points each session may go to a Primary-Facet skill you did *not* use — the practice your character puts in on the road, between adventures. Cross-Facet skills still require use at the table.
+**Damage bonus.** From level 3 you add +1 to every damage roll you make, +2 from level 6 and +3 from level 9. It counts for weapons and harmful workings alike.
 
-> **Example — spending skill points across Facets**
->
-> Mordai (Primary Facet: Body) uses Combat twice this session — 2 points for 2 marks. He also used Persuade (Soul Facet) once. That costs 2 points for 1 mark. All 4 points spent.
+**Stats.** At levels 4 and 8, add +1 to one stat. A stat never goes above +3.
 
-**Marks:** Each point spent toward a skill's next rank is called a mark. Marks carry over between sessions — you do not lose partial progress. How many a rank costs depends on which rank you are reaching for: competence is cheap, mastery is not.
+### Rebuilding
 
-**Table II.4–3: Marks per Rank Advance**
+Until you reach level 3, you may rebuild your character freely between sessions: change your class, swap talents, even change Facet. You will not know what you like until you have played, and the game would rather you found out cheaply.
 
-| Advance | Marks |
-|---|---|
-| Novice → Practiced | 3 |
-| Practiced → Expert | 5 |
-| Expert → Master | 8 |
+At level 3 you take your signature and the class commits. After that, a character changes the way people do, one level at a time.
 
-> **Example — a Background mark completing a rank**
->
-> Zulnut (Primary Facet: Body) uses Stealth twice this session. He spends 2 points (1 each) and marks Stealth twice. Combined with the 1 mark he already carries from his Background, that's 3 marks — Stealth advances to Practiced. He has 2 points left and didn't use another skill this session, so he banks them: next session he'll have 6 to spend. (He could instead put 1 of them into an unused Body skill as his training point — Zulnut, characteristically, chooses the option that requires nothing of him now.)
+### Talents From Another Facet
 
----
+Your picks come from your own Facet's menu. To take a talent from another Facet's menu, you need a **teacher**: someone in the world who has it and is willing to teach you. Finding one is a story. The MM decides whether a teacher exists and what they want, and once you have learned, the talent is yours like any other.
 
-## How Far a Skill Can Go
-
-Within any one Facet, **at most three of your skills may rise beyond Practiced, and only one of those may reach Master.**
-
-That is the whole rule. A finished Facet looks like this: one skill at Master, two at Expert, two at Practiced.
-
-The cap applies to every Facet separately — your Primary Facet and any you cross-train into — and it applies from the moment you commit. A skill claims one of your three slots the instant you put a mark on it past Practiced, not when it arrives; you cannot part-pay four skills toward Expert and decide later.
-
-Practiced is not capped. Everyone can be broadly competent across their whole Facet. The ceiling starts where excellence starts.
-
-> **Through the Mirror — why your Facet has a shape**
->
-> A Facet is a category, not a character. The Body Facet holds the brawler, the scout, the duellist and the acrobat, and a ranger should not end a campaign as good in a brawl as a barbarian who spent everything on it. Without a ceiling every Body character eventually arrives at the same sheet, and the Facet stops being able to tell you apart.
->
-> So the interesting question is never *how much* can I have — it is *which*. Your Master slot is the single thing your character is the best at. Choose it late if you like: nothing forces the decision until you spend the mark.
-
-Choices here are permanent. You do not un-Master a skill to free the slot for another. If you want the fourth skill, that is what cross-training is for — and Facet levels earned elsewhere still buy Techniques from your own tree (see *Techniques*, below).
-
----
-
-## Facet Levels
-
-As you develop skills within a Facet, you grow as a practitioner of that Facet's approach to the world. Your **Facet level** in your Primary Facet advances every time you accumulate **3 skill rank advances** within it.
-
-A skill rank advance is any time a skill in that Facet moves from one rank to the next (Novice → Practiced, Practiced → Expert, or Expert → Master). The rank your Background granted at creation counts as one of them — it is a head start of one advance toward your first Facet level, not a free level.
-
-A finished Facet — one Master, two Expert, two Practiced — produces 9 total advances: exactly enough to reach Facet level 1 (at 3 advances), Facet level 2 (at 6), and Facet level 3 (at 9). Reaching Facet level 3 means you have finished becoming the character this Facet was going to make you. Facet level 4 and beyond require cross-training into other Facets.
-
-> **Through the Mirror — a single Facet stops at level 3**
->
-> Facet level 3 is the top of a single Facet — you've taken it as far as *your* version of it goes. Level 4 and beyond is where breadth begins, which is how mastery tends to work anyway: at the highest levels, experts grow by absorbing adjacent disciplines. The supreme warrior who studies philosophy. The master mage who learns a craftsperson's patience.
-
-> **Example — counting Facet levels**
->
-> Zulnut starts with Finesse at Practiced from his Background: 1 advance banked. He takes Stealth to Practiced (2) and Combat to Practiced (3). *Facet level 1* — and none of his three beyond-Practiced slots is committed yet.
->
-> Several sessions later: Stealth to Expert (4, first slot), Finesse to Expert (5, second slot), Athletics to Practiced (6). *Facet level 2*, one slot left — and the Master pick still unspent.
->
-> He spends the Master pick on Stealth, the slot it already holds, and grinds out the 8 marks (7). Then Endurance to Practiced (8), and Combat to Expert (9) — the third slot. *Facet level 3.* Stealth is what he is best at; Combat and Finesse are what he is good at; Athletics and Endurance are where he stopped, permanently.
->
-> (Zulnut's player, counting on his fingers: *"So Athletics is stuck at Practiced forever?"* The MM, who has been waiting years for this: **"Yes."** Zulnut's player, after a pause: *"...Good. Running is for people who planned badly."*)
-
-Facet level advances outside your Primary Facet follow the same counting, and those levels **do** count toward your Major Advancement threshold (see *Major Advancement*, II.4) — Major Advancement is earned across every Facet you've invested in, not just your Primary one.
-
----
-
-## Techniques
-
-At each **Facet level** — in any Facet — you unlock one **Technique** from any tree whose prerequisites you meet. Techniques are specific abilities — things your character can now do that others cannot, or ways they do ordinary things that are distinctly their own.
-
-The Technique tree has three tiers. Tier 1 is available at Facet level 1. Tier 2 requires at least one Tier 1 Technique in the same branch. Tier 3 requires at least one Tier 2 Technique in the same branch.
-
-When you unlock a Technique, you choose it during your **reflection scene** — the moment where this growth becomes real in the fiction (see *Advancement and Reflection*, II.4).
-
-If your Background grants a magical domain, your Facet level 1 pick is spoken for: the magic-granting Technique is your **formalization**, and your first free choice comes at Facet level 2. That is the shape of the arc, not a tax — the formalization is the milestone your Background has been walking toward since session one (see *Magic and Backgrounds*, II.6).
-
-A **Lineage Gift** is different. It formalizes at your first Facet level on its own and leaves the pick free, because it was never a curriculum to finish (Chapter II.5, *Formalization*).
-
-The three trees are in Chapters II.4a (Body), II.4b (Mind), and II.4c (Soul). Every Technique in all three is written the same way.
-
-> **Reading the Entries — Techniques**
->
-> **Name** *(Branch, Tier — governing Attribute)*. The attribute named here is the one the branch is built on; a Technique may still be used with whatever roll its text describes.
->
-> **Use:** how often it is available — *Passive* (always on, never declared), *At will* (you invoke it, no limit), *Once per scene*, or *Once per session*. A Spark or Endurance Pool cost, where one exists, is stated here too.
->
-> **Choose:** the decision you make once, at the moment you unlock it. It does not change afterward.
->
-> **Roll:** the roll the Technique itself calls for. Techniques that add no roll of their own omit this field.
->
-> Then the Technique's rule, in prose.
->
-> **Normal:** the baseline rule this Technique departs from, restated so the size of the departure is unambiguous. Every Technique has one; if the Normal line surprises you, read it before you read the Technique again.
->
-> **Triggers and the difficulty step.** A Technique that eases a roll moves the MM's declared difficulty one step in your favor — it never replaces the call, only shifts the label already given. How the step arrives depends on the trigger. If the trigger is a fact the roll brings with it — a weapon type, a hazard, a field of study — the step applies on its own and the roll result names it; the digital roller applies these automatically. If the trigger is a judgment call — a hunch, a genuine coincidence — you declare it yourself when you roll. However many Techniques you hold, at most one character-side step moves any single roll, and a Specialty draws from the same allowance (see *Difficulty*, III.1).
-
----
-
-## Major Advancement
-
-Every **3 Facet levels total** — accumulated across any Facet — you reach a **Major Advancement**.
-
-> **Through the Mirror — the advancement math**
->
-> A fully developed Primary Facet produces 15 total skill rank advances — exactly Facet level 3. Because a Major Advancement lands every 3 Facet levels, your **first** Major arrives together with Facet level 3: the moment you have mastered your Primary Facet. Later Major Advancements (at 6 levels, 9 levels, and so on) do require cross-training, since a single Facet caps at level 3.
-
-At a Major Advancement, choose one:
-
-- **+1 to a Minor Attribute** — raise one Minor Attribute by one step (maximum 3). If this raises a Major Attribute's derived sum into the next bracket, the Major Attribute modifier increases as well.
-- **Pinnacle Technique** — a powerful, character-defining ability that lives outside the normal Technique tree. These require MM approval and should feel like the culmination of a long arc of play, not an item on a checklist. A Pinnacle Technique captures something the character has demonstrably *become* through play.
-
-  > *A duelist who has spent five sessions as the party's primary combatant might choose:* **Last Stand** — *Once per session, when you would be Broken, you may remain standing until the end of the exchange at 1 Endurance Pool point.* The MM ensures the Pinnacle feels earned by the character's demonstrated arc. A character who has never led a fight does not earn Last Stand — not because the rules forbid it, but because the fiction doesn't support it yet.
-
-Major Advancements require a **significant reflection scene** — more than the brief aside of a standard advancement. This should be a full scene at the table, tied to a meaningful story moment. The MM should look for the right moment in the fiction rather than forcing it at a mechanical threshold.
-
-> **Example — a reflection scene after a Major Advancement**
->
-> *A character who reaches their first Major Advancement after a campaign of hard physical growth might have their scene in the aftermath of a battle they barely survived — a quiet moment where they understand something about themselves they didn't before.*
-
----
-
-## Advancement and Reflection
-
-Advancement is not automatic. Numbers tell you when you *can* advance — the reflection scene is when you *do*.
-
-**Once per session**, at a natural pause or at session's end, one character may have a **reflection scene**: a brief in-world moment where they acknowledge the growth that happened. It need not be long. It does not need to be dramatic. But it should be witnessed by the table.
-
-Reflection scenes are encouraged but not required. Advancement happens whether or not the scene takes place — the numbers move regardless. But a reflection scene makes the growth feel real in the fiction and gives the table a shared moment. When a player takes one, the MM may reward it with a bonus mark or a Spark. When the moment isn't right, skip it and move on.
-
-> **Example — a quiet reflection scene**
->
-> *Zahna spends a quiet moment after the Millhaven investigation re-reading his notes, marking the connections he didn't see until he had to look for them. His Lore rank ticks to Practiced. The table watches. Nobody comments. Mordai refills his drink.*
-
-**Running reflection scenes (MM guidance):**
-
-Keep them brief — a paragraph of narration or a few lines of in-character exchange is enough. The scene should tie the advancement to something that actually happened this session. A Lore advancement is richer when it echoes Zahna's archive research. A Combat advancement feels earned after a fight where the character showed their improvement under pressure.
-
-One reflection scene per session means one character gets the spotlight. The MM should track whose turn it is informally — not rigidly rotating, but ensuring no character goes three or four sessions without one.
-
-When multiple characters qualify for advancement simultaneously, the MM picks the one whose fiction is most ready. "Your threshold is met — when the fiction gives us the right moment, we'll take it" is a valid response. The mechanical trigger and the fictional opportunity don't have to land at the same time; the mark carries.
-
-Technique unlocks during reflection scenes are worth a sentence of fiction: *what changed? What did this character realize, survive, or decide?* The player should name it. It doesn't have to be deep. It just has to be real.
-
-The Mirror Master's guide covers running reflection scenes in greater depth, including how to use them to develop the relationships around the character who is growing.
-
----
-
-## Advancement at a Glance
-
-```
-Session end:
-  └─ 4 skill points to spend
-       Primary Facet: 1 point per mark  |  Cross-Facet: 2 points per mark
-  └─ Optional reflection scene — makes advancement feel real in the fiction
-
-Each point spent = 1 Mark on that skill
-Marks per rank advance: 3 to Practiced, 5 to Expert, 8 to Master = 1 Career Advance each
-  └─ Skill modifier increases (+1 / +2 / +3)
-
-Per Facet: at most 3 skills beyond Practiced, only 1 of them Master
-  └─ A finished Facet: 1 Master, 2 Expert, 2 Practiced. Slots are claimed on
-     commitment and never freed.
-
-Every 3 rank advances in any Facet:
-  └─ +1 Facet Level → unlock one Technique from any tree whose prerequisites you meet
-  └─ A finished Facet = 9 advances = Facet level 3; level 4+ requires cross-training
-
-Every 3 Facet Levels total (Primary + any Facet):
-  └─ Major Advancement: +1 Minor Attribute OR Pinnacle Technique (MM approval)
-  └─ Significant reflection scene recommended
-```
-
----
-
-## Career Advances
-
-**Career advances** is a single integer that counts every skill rank advance a character has ever taken — across all skills and all Facets — since character creation.
-
-It is the progression metric for Facets of Origin: a rough, honest gauge of how much a character has grown. Two characters with the same career advances are broadly comparable in power, regardless of where those advances landed. Benchmark ranges for what a given total looks like in play are the MM's pacing tool and live in the MM Manual (MM3, *Using career_advances as a Campaign Clock*).
-
-Career advances are tracked by the app and stored in the character file as `career_advances`, updated whenever a skill rank advances. The Background starting skill counts as 1 advance at character creation, toward this total and toward its Facet's level track (see *Facet Levels*, above). Background Marks (the secondary skill's head start) do not count until the skill actually advances to Practiced.
-
-> **Example — the cast at one career advance**
->
-> *All three example characters — Zahna, Mordai, and Zulnut — begin at career_advances: 1. They are at the same tier and broadly comparable in capability, despite their very different shapes.*
+Two things never cross Facets. Your grit die stays your Facet's, and so does your magic: a casting talent can only come from your own Facet.

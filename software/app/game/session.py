@@ -11,8 +11,9 @@ import yaml
 
 from app.config import settings
 from app.game.character import Character
+from app.game.combat import CombatState
 from app.game.enemy import Enemy
-from app.game.encounter import Encounter, compute_band
+from app.game.encounter import Encounter, danger_read
 from app.facets.registry import MergedRuleset, build_ruleset
 
 
@@ -84,24 +85,12 @@ class GameSession:
     encounter_library: dict[str, Encounter] = field(default_factory=dict)
     active_enemies: dict[str, Enemy] = field(default_factory=dict)
     threat_clocks: dict[str, ThreatClock] = field(default_factory=dict)
-    #: Open Final Blow offers, keyed by attacker: {player: {"tracker_key",
-    #: "offer_id"}}. A confirm that does not match a live offer is refused.
-    #: Without this the confirm handler re-checked only "unlocked" and "not used
-    #: this session" — the 7+ requirement and the Spark cost live in an advisory
-    #: flag on the roll, so a stale or replayed confirm could remove an enemy
-    #: after a failed Strike (TODO T12).
-    #:
-    #: Keyed per attacker, not per session: two characters can each hold The
-    #: Final Blow, and a single shared slot meant one player's Strike silently
-    #: destroyed the other's earned offer.
-    pending_final_blows: dict[str, dict] = field(default_factory=dict)
-    #: Player names who took an offensive action (Strike, Maneuver, or an
-    #: MM-recorded enemy_strike) this exchange. Read by the end-exchange
-    #: handler through `combat.exchange_uncontested` (K-2/D5): an exchange
-    #: nobody contested lets the situation advance for free, and the MM
-    #: gets prompted to say so. Cleared at combat start and every
-    #: end-exchange.
-    offensive_actions_this_exchange: set[str] = field(default_factory=set)
+    #: Live combat (exchange number, exposures, defenders, cover); None out of combat.
+    combat: CombatState | None = None
+    #: Sessions played so far (drives the default level pacing).
+    session_number: int = 1
+    #: Player names the MM has called a level-up for, awaiting their pick.
+    level_up_ready: set[str] = field(default_factory=set)
     #: Per-player Spark-flow tracker (T6.3, C-2 app-side): player_name →
     #: {"last_flow": monotonic ts of the last earn OR spend, "last_nudge":
     #: monotonic ts of the last MM prompt about it, or None}. Feeds the quiet
@@ -138,8 +127,7 @@ class GameSession:
         character = self.characters.get(player_name)
         if not character or not self._character_dir:
             return
-        module_refs = [{"id": f.id, "version": f.version} for f in self.ruleset._files]
-        fof_dict = character.to_fof(module_refs, self.id)
+        fof_dict = character.to_fof(self.ruleset.module_refs(), self.id, ruleset=self.ruleset)
         path = self._character_dir / f"{player_name}.fof"
         try:
             path.write_text(yaml.dump(fof_dict, allow_unicode=True, sort_keys=False), encoding="utf-8")
@@ -166,7 +154,7 @@ class GameSession:
         chokepoint carries the rule for every handler. Returns True when it
         fired; the player still narrates.
         """
-        if roll_dict.get("outcome") != "failure" or not roll_dict.get("fumble"):
+        if roll_dict.get("outcome") != "failure" or not roll_dict.get("natural_low"):
             return False
         if roll_dict.get("graceful_fail_claimed"):
             return False
@@ -180,29 +168,69 @@ class GameSession:
         roll_dict["graceful_fail_sparks_now"] = character.sparks
         return True
 
-    def party_strength(self) -> int:
-        """Party Strength: the sum of participating characters' career
-        advances (MM1 §Party Strength). Falls back to 3 — the simulation-
-        calibrated baseline — when no characters have joined yet (or the sum
-        is degenerate), rather than raising or claiming a PS of zero.
-        """
-        total = sum(c.career_advances for c in self.characters.values())
-        return total if total >= 1 else 3
+    # ------------------------------------------------------------ combat
+    def start_combat(self) -> CombatState:
+        """Begin a fight: exchange 1, a fresh scene for talent uses."""
+        self.combat = CombatState()
+        for c in self.characters.values():
+            c.reset_uses(self.ruleset, "scene")
+        return self.combat
 
-    def active_encounter_band(self) -> dict:
-        """Difficulty band of the live tracker roster (T6.2, K-3).
+    def end_combat(self) -> None:
+        self.combat = None
 
-        Defers to `encounter.compute_band` — the Recipe-Table logic's only
-        home. Defeated Named/Boss enemies (Resolve 0, not yet removed) no
-        longer act, so they leave the count.
-        """
-        tiers = [
-            e.tier for e in self.active_enemies.values()
-            if e.tier == "mook"
-            or e.resolve_current is None
-            or e.resolve_current > 0
-        ]
-        return compute_band(tiers, self.party_strength())
+    def end_exchange(self) -> int:
+        """Exchange effects expire (exposure, Defend, cover, stunt openings,
+        Studied Foe). A natural-2 opening (named for its target) lasts until used."""
+        if self.combat is None:
+            raise ValueError("No fight is running.")
+        from app.game.combat import expire_exchange_effects
+        for e in self.active_enemies.values():
+            expire_exchange_effects(e)
+        return self.combat.end_exchange()
+
+    def party_size(self) -> int:
+        return max(1, sum(1 for c in self.characters.values() if c.status != "dead"))
+
+    def party_level(self) -> int:
+        """The party's typical (median, rounded down) level; 1 with nobody present."""
+        levels = sorted(c.level for c in self.characters.values())
+        return levels[(len(levels) - 1) // 2] if levels else 1
+
+    def active_danger(self) -> dict:
+        """Danger read of the live tracker (foes still standing)."""
+        roster = [(e.role, e.level, e.count if e.is_mook else 1)
+                  for e in self.active_enemies.values() if not e.defeated and not e.broken]
+        return danger_read(roster, self.party_size(), self.party_level())
+
+    # ------------------------------------------------------------ session end
+    def end_session_prompts(self) -> dict:
+        """The five level-up prompts and the default pacing hint for the MM."""
+        adv = self.ruleset.advancement
+        suggested = [p.level for p in adv.pacing if p.after_session == self.session_number]
+        return {
+            "session_number": self.session_number,
+            "prompts": [p.model_dump() for p in adv.prompts],
+            "pacing_suggests_level": suggested[0] if suggested else None,
+        }
+
+    def call_level_up(self, player_names: list[str] | None = None) -> list[str]:
+        """The MM calls a level-up (for everyone, or the named players)."""
+        names = list(self.characters) if player_names is None else player_names
+        unknown = [n for n in names if n not in self.characters]
+        if unknown:
+            raise ValueError(f"No such character(s): {', '.join(unknown)}.")
+        ready = [n for n in names
+                 if self.characters[n].level < self.ruleset.advancement.max_level]
+        self.level_up_ready.update(ready)
+        return ready
+
+    def next_session(self) -> int:
+        """Start the next session: Sparks reset (no carry-over), session uses refresh."""
+        self.session_number += 1
+        for c in self.characters.values():
+            c.start_session(self.ruleset)
+        return self.session_number
 
     def to_state_dict(self) -> dict:
         """Full session state sent to the MM on WebSocket join.
@@ -214,15 +242,18 @@ class GameSession:
         return {
             "session_id": self.id,
             "session_name": self.name,
-            "all_characters": {pn: c.to_client_dict() for pn, c in self.characters.items()},
+            "all_characters": {pn: c.to_client_dict(self.ruleset) for pn, c in self.characters.items()},
             "ruleset": self.ruleset.to_client_dict(),
             "roll_log": self.roll_log[-50:],
-            "enemy_library": {eid: e.to_client_dict() for eid, e in self.enemy_library.items()},
+            "enemy_library": {eid: e.to_client_dict(self.ruleset) for eid, e in self.enemy_library.items()},
             "encounter_library": {eid: e.to_client_dict() for eid, e in self.encounter_library.items()},
-            "active_enemies": {key: e.to_client_dict() for key, e in self.active_enemies.items()},
+            "active_enemies": {key: e.to_client_dict(self.ruleset) for key, e in self.active_enemies.items()},
             "threat_clocks": {cid: c.to_client_dict() for cid, c in self.threat_clocks.items()},
-            # MM dial only (K-3): deliberately absent from the player state.
-            "encounter_band": self.active_encounter_band(),
+            "combat": self.combat.to_dict() if self.combat else None,
+            "session_number": self.session_number,
+            "level_up_ready": sorted(self.level_up_ready),
+            # MM dial only: deliberately absent from the player state.
+            "danger": self.active_danger(),
         }
 
     def to_player_state_dict(self, player_name: str) -> dict:
@@ -236,13 +267,23 @@ class GameSession:
         return {
             "session_id": self.id,
             "session_name": self.name,
-            "your_character": character.to_client_dict() if character else None,
-            "all_characters": {pn: c.to_client_dict() for pn, c in self.characters.items()},
+            "your_character": character.to_client_dict(self.ruleset) if character else None,
+            "all_characters": {pn: c.to_client_dict(self.ruleset) for pn, c in self.characters.items()},
             "ruleset": self.ruleset.to_client_dict(),
             "roll_log": self.roll_log[-50:],
-            "active_enemies": {key: e.to_client_dict() for key, e in self.active_enemies.items()},
+            "active_enemies": {key: _player_enemy_view(e, self.ruleset)
+                               for key, e in self.active_enemies.items()},
             "threat_clocks": {cid: c.to_client_dict() for cid, c in self.threat_clocks.items()},
+            "combat": self.combat.to_dict() if self.combat else None,
+            "level_up_ready": player_name in self.level_up_ready,
         }
+
+
+def _player_enemy_view(enemy: Enemy, ruleset) -> dict:
+    """What players see of a foe: name, level, role, state — not the card's secrets."""
+    return {"key": enemy.key or enemy.id, "id": enemy.id, "name": enemy.name,
+            "level": enemy.level, "role": enemy.role, "count": enemy.count,
+            "bloodied": enemy.bloodied, "defeated": enemy.defeated, "broken": enemy.broken}
 
 
 class SessionStore:

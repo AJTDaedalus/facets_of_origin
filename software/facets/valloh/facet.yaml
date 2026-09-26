@@ -1,24 +1,28 @@
-# Facets of Origin — The Val'loh Setting Facet v0.1.0
+# Facets of Origin — The Val'loh Setting Facet v1.0.0
 #
 # COUNTED NOVELTY (the sentence everything in this file must agree with, and
-# which INV-17 machine-checks against V0_Ten_Things.md):
+# which INV-17 machine-checks):
 #
-#   The core 2d6, Sparks, Conditions, exchanges, advancement, magic, and the
-#   three Facets are unchanged. Val'loh adds exactly: ten Lineages (two
-#   playable in Oraga Night) and crystal charges as one-use items. It adds no
-#   domains, removes nothing, and changes no rule.
+#   The core 2d6, Sparks, HP, exchanges, levels, magic, and the three Facets
+#   are unchanged. Val'loh adds exactly: ten Lineages (two playable in Oraga
+#   Night) and crystal charges as curios. It adds no domains, removes nothing,
+#   and changes no rule.
 #
-# So: nothing in roll_resolution, spark, advancement, magic, or combat.
+# So: no core rule section appears in this file (stats, roll_resolution,
+# spark, advancement, magic, combat and the rest belong to the base Facet).
 #
-# GIFTS ARE THE PLAYER'S CHOICE (D24). A gifted lineage says how its gift shows
-# itself; the player picks which core domain it is. There are no Val'loh-only
-# domains. The `gift:` lines paraphrase canon ([author's private setting notes]
-# §Mage Tribe Magic); every Heritage is invention awaiting the owner's read —
-# see references/valloh/INVENTIONS_FOR_REVIEW.md.
+# GIFTS ARE THE PLAYER'S CHOICE (D24, L14). A gifted lineage says how its gift
+# shows itself; the character's gift knack ("Orthaen gift", and so on) covers
+# exactly what that sentence describes. `gift_domain_scope: minor` means the
+# player picks one core domain in which the character may cast Minor
+# workings. There are no Val'loh-only domains. The `gift:` lines paraphrase
+# canon ([author's private setting notes] §Mage Tribe Magic); every
+# Heritage is invention awaiting the owner's read — see
+# references/valloh/INVENTIONS_FOR_REVIEW.md.
 
 id: "valloh"
 name: "Val'loh"
-version: "0.1.0"
+version: "1.0.0"
 authors: ["AJTDaedalus"]
 description: >
   The setting Facet for Val'loh: ten human lineages, most of them gifted, and
@@ -52,7 +56,7 @@ lineages:
       Reads grown crystalwork the way a mason reads a wall: its age, whose hand
       shaped it, and whether it is holding a working right now.
     playable: true
-    formalizes_on: first_facet_level
+    gift_domain_scope: minor
 
   - id: phern
     name: Phern
@@ -68,7 +72,7 @@ lineages:
       Knows the caravan roads, who moves what along them, and the fair price of
       anything.
     playable: true
-    formalizes_on: first_facet_level
+    gift_domain_scope: minor
 
   - id: thenya
     name: Thenya
@@ -84,7 +88,7 @@ lineages:
       Border survival, and the reading of intentions in people who are trying
       to hide them.
     playable: false
-    formalizes_on: first_facet_level
+    gift_domain_scope: minor
 
   - id: scora
     name: Scora
@@ -100,7 +104,7 @@ lineages:
       The sanctioned cloth-strip rite; recognizes any Scora's record on sight
       and can name who tied it.
     playable: false
-    formalizes_on: first_facet_level
+    gift_domain_scope: minor
 
   - id: akathi
     name: Akathi
@@ -115,7 +119,7 @@ lineages:
     heritage: >
       The forms and their counters; reads a fighter's school in three exchanges.
     playable: false
-    formalizes_on: first_facet_level
+    gift_domain_scope: minor
 
   - id: dekhi
     name: Dekhi
@@ -131,7 +135,7 @@ lineages:
       Winter-craft and the northern passes — which ones are open, which ones
       are lying about it.
     playable: false
-    formalizes_on: first_facet_level
+    gift_domain_scope: minor
 
   - id: kshalo
     name: Kshalo
@@ -146,7 +150,7 @@ lineages:
     heritage: >
       The meaning of dreams, and the herb-lore of sleep and waking.
     playable: false
-    formalizes_on: first_facet_level
+    gift_domain_scope: minor
 
   - id: fthala
     name: Fthala
@@ -162,7 +166,7 @@ lineages:
       Paths that are not roads, and beast-sign: what passed, how long ago, and
       whether it was hunting.
     playable: false
-    formalizes_on: first_facet_level
+    gift_domain_scope: minor
 
   - id: krenn
     name: Krenn
@@ -176,7 +180,7 @@ lineages:
     gift_rate: "all known"
     heritage: null
     playable: false            # MM-side only. Never shown to players.
-    formalizes_on: first_facet_level
+    gift_domain_scope: minor
 
   - id: tyndi
     name: Tyndi
@@ -192,31 +196,33 @@ lineages:
       Gadget-lore; reads a device's control gem and can usually say what it was
       built to do.
     playable: false            # MM-side only.
-    formalizes_on: first_facet_level
+    gift_domain_scope: minor
 
 # ---------------------------------------------------------------------------
-# Items — crystal charges
+# Items — crystal charges (curios)
 # ---------------------------------------------------------------------------
 # A charged Orthaen crystal is a stored working: released at a touch, by
-# anyone, with no roll. Growing one is an ordinary working in the grower's gift done in
-# downtime under II.3's normal rules; nothing extra is tracked. This is why
-# crystal is wealth in Val'loh — it is magic the ungifted can carry and spend.
+# anyone, with no roll. Growing one is an ordinary working in the grower's
+# gift done in downtime under II.3's normal rules; nothing extra is tracked.
+# This is why crystal is wealth in Val'loh — it is magic the ungifted can
+# carry and spend.
 #
-# When the fiction makes a RELEASE chancy (fumbled in the dark, near something
-# that eats magic), that is an ordinary Luck roll at Standard. Not a rule here.
+# In v1 terms each charge is a curio (PHB IV.2): one use, and it counts
+# against the curio limit. Releasing one does not make its bearer a caster.
+# When the fiction makes a RELEASE chancy (fumbled in the dark, near
+# something that eats magic), that is an ordinary Soul roll at Standard. Not
+# a rule here.
 items:
   - id: steady_light
     name: "Charge: Steady Light"
-    kind: consumable
-    scope: minor
+    curio: true
     effect: >-
       A grown crystal sheds a steady, sourceless light for a scene. It does not
       flicker and it does not go out, which is how you tell it from a lamp.
 
   - id: seal_a_door
     name: "Charge: Seal a Door"
-    kind: consumable
-    scope: minor
+    curio: true
     effect: >-
       Crystal grows across a doorframe in the time it takes to say so. It will
       not hold against a determined crowd, but it will hold long enough that
@@ -224,16 +230,14 @@ items:
 
   - id: veil_of_quiet
     name: "Charge: Veil of Quiet"
-    kind: consumable
-    scope: minor
+    curio: true
     effect: >-
       Sound does not leave the room for a scene. Conversation inside is
       unaffected; a scream does not reach the corridor.
 
   - id: chime_at_a_threshold
     name: "Charge: Chime at a Threshold"
-    kind: consumable
-    scope: minor
+    curio: true
     effect: >-
       The crystal is set at a doorway or a window and sounds once, softly, the
       first time anything crosses it. It sounds for the person who set it and
@@ -241,16 +245,14 @@ items:
 
   - id: warmth
     name: "Charge: Warmth"
-    kind: consumable
-    scope: minor
+    curio: true
     effect: >-
       Enough held heat for one person through one cold night, or four people
       through a bad hour of one.
 
   - id: held_image
     name: "Charge: Held Image"
-    kind: consumable
-    scope: minor
+    curio: true
     effect: >-
       A moment the crystal was grown to hold, shown once — a face, a room, a
       hand signing something. It shows; it does not prove.

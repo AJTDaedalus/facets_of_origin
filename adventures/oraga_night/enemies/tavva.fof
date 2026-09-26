@@ -1,76 +1,62 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: tavva
 name: Tavva
-
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
-
+    version: 1.0.0
 enemy:
-  tier: named
-  resolve: 3
-  attack_modifier: 2
-  armor: light
-  techniques: [vanisher]
+  level: 2
+  role: standard
+  armor: 1
+  morale: 6
+  weapon: "Knife, feints and furniture"
+  wants: >
+    Out with something. Shifts for a clear exit or a better payer, and honours
+    any deal that ends with her walking and somebody else holding the bag.
   special: >
     VANISHER — Tavva carries two bought crystal charges (a dark-burst and a
     door-seal) and spends them only to break contact. When either fires, she
-    and anyone of her crew in reach are simply elsewhere by the next exchange
+    and anyone of her crew in reach are simply elsewhere by the next exchange,
     unless a player character spends their action staying on her.
-  tr: 9                 # offense(+2→4) + durability(Resolve 3) + armor(light→1) + techniques(1) = 9
-  phases: []
-
-  disposition: >
-    The finest working thief in Rekuzan tonight, mid-job when the world
-    fell in, professional enough to treat that as an opportunity.
-
-  first_target: >
-    Nobody. She fights to leave, and opens with feints and furniture.
-
-  morale: >
-    Cornered with no way out, she bargains fast and honestly: names, the
-    crew's routes, what she saw in the dark. All of it is true.
-
-  organization: >
-    Herself plus two to four gallery knives, never in the same room as
-    each other by choice.
-
-  negotiation: >
-    Wants out with something. Shifts for a clear exit or a better payer.
-    Honours any deal that ends with her walking and somebody else
-    holding the bag.
-
-  triggers:
-    - >
-      Spends a crystal charge only to break contact.
-    - >
-      Abandons any prize — including crew — that starts costing blood.
-
+  when_bloodied: >
+    She spends a charge. If she has none left, she starts bargaining, out loud,
+    between blows.
+  tells: >
+    Opens with feints and furniture, not the knife. A hand going to her sleeve
+    means a charge is about to fire.
+  breaks: >
+    Cornered with no way out, she bargains fast and honestly: names (not her
+    buyers'; she does not know them), the crew's routes, what she saw in the
+    dark. All of it is true. With a way out, she takes it and abandons any
+    prize — including crew — that starts costing blood.
+  twists:
+  - "The dark-burst fires early: nobody sees anything for an exchange, including her."
+  - "She throws the sack at a player character's feet — keep it, or keep after her."
+  - "A knife goes down and she does not look back."
+  - "She names the player character she is fighting, correctly, from the festival hiring list."
+  - "The door-seal fires across the corridor behind her, and the party is on the wrong side of it."
+  - "She stops, hands open, and offers the one thing she saw tonight that nobody else did."
   description: >
     Steward's livery, coastal manners, a different name on every festival
     hiring list. The finest working thief in Rekuzan tonight, mid-job when the
     world falls in, professional enough to treat that as an opportunity. Full
-    entry in module Chapter VII; her crew's three sightings are Chapter IV;
-    the midnight raid is Chapter V.
-
+    entry in module Chapter VII; her crew's three sightings are Chapter IV; the
+    midnight raid is Chapter V.
   notes: >
-    CONDUCT: Tavva fights to leave, never to kill. She opens with feints and
-    furniture, spends her charges to break contact, and abandons any prize —
-    including crew — that starts costing blood. Cornered with no way out, she
-    bargains, fast and honestly: names (not her buyers'; she does not know
-    them), the crew's routes, what she saw in the dark. All of it is true.
-
     ENTIRELY WINNABLE: unlike nearly everything else abroad at midnight, Tavva
-    and her crew are a fight a starting party can flatly win. Resolve 0 means
-    exactly what the core rules say it means. Give the table this one clean
-    victory with both hands.
+    and her crew are a fight a starting party can flatly win. 0 HP means
+    exactly what the core rules say it means for a foe: she is down, and
+    caught. Give the table this one clean victory with both hands.
 
     CAUGHT AND HELD: a captured Tavva is worth more than the goods — the
     inquest's favorite scapegoat, the players' proof of what they saw, and a
     season of professional observations about the palace that nobody else
     thought to make.
-
+  organization: >
+    Herself plus two to four gallery knives, never in the same room as each
+    other by choice.
+  reskin_of: null
 created_at: '2026-07-13T00:00:00+00:00'
-last_modified: '2026-07-13T00:00:00+00:00'
+last_modified: '2026-09-25T00:00:00+00:00'

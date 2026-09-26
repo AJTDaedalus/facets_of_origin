@@ -1,419 +1,173 @@
 # Mirror Master's Quick Reference
 
-This chapter is for the middle of a session, not the week before one. Everything here is a compression of a rule that lives somewhere else — the section named beside each heading owns it. Nothing on these pages is new, and if a line here ever disagrees with the chapter it compresses, the chapter is right.
-
-Keep it open. Look things up. Do not read it.
+Everything you need mid-session, on as few pages as it fits. Each line compresses a rule stated in full elsewhere; the chapter it comes from is named in each heading.
 
 > **Through the Mirror — why a quick reference may never introduce a rule**
 >
-> We have already been bitten by this once. Two implementations of combat resolution drifted apart because both were treated as authoritative, and a corpus of recorded simulation numbers turned out to be measuring a rule set nobody had written down. A quick reference is the same hazard in prose: the moment a card states something its parent chapter does not, the game has two rules and the table is playing whichever one it read most recently.
->
-> So this chapter compresses and never paraphrases, and a change to any rule updates the body text, every quick reference that touches it, `facet.yaml`, and the engine in the same commit. If you write your own reference card, inherit the discipline — a card that is allowed to say something new is a house rule with no author.
+> A card like this is where rules drift. Someone shortens a sentence, drops a condition, and the card quietly becomes a second rulebook that disagrees with the first. So this page may only shorten what the chapters already say. If something here seems to say more than its source, the source wins and this page is wrong.
 
 ---
 
-## Core Resolution
+## The Roll (Chapter III.1)
 
-**Roll: 2d6 + Attribute Modifier + Skill Modifier + Difficulty Modifier**
+**2d6 + stat**, +1 if a knack applies (one knack, never stacked), ± difficulty. Stat + knack + talent bonuses never exceed **+4**.
 
-**Table MM5–1: Outcome Tiers**
+**Table MM5–1: Outcomes**
 
-| Roll Total | Outcome |
+| Total | Result |
 |---|---|
-| **10+** | **Full Success** — achieve goal cleanly |
-| **7–9** | **Success with Cost** — succeed, but complication |
-| **6-** | **Things Go Wrong** — story advances, not in player's favor |
+| **10+** | Full success |
+| **7–9** | Success, with a cost |
+| **6−** | Things go wrong; the story moves |
 
-**Natural 12** (both kept dice show 6): full success whatever the modifiers say, **plus something more the player names** and you confirm. Ignores difficulty.
+**Natural 12** (kept dice 6 + 6): a full success whatever the modifiers, and something more the player names. **Natural 2** (1 + 1) on a failed roll: the Graceful Fail is confirmed without asking.
 
-**Natural 2** (both kept dice show 1): if the roll failed, the Graceful Fail is confirmed without the player asking. **Never lowers a tier** — a natural 2 that totalled 7 is still a partial success.
+**Table MM5–2: Difficulty**
 
----
-
-## Borrowed Trouble
-
-Before a roll, you — or any player — may offer a complication. Accepted, it adds 1d6 drop lowest, exactly as a Spark. **It costs no Spark, and it happens whether the roll succeeds or fails.** One per roll; offering and declining are both free.
-
-- Make it **specific and genuinely bad** — "you get seen" is an offer; "something bad happens later" is not
-- Never take away the player's next choice; give them a new problem instead
-- Once or twice a session, at moments already tense. Every roll turns a bargain into a tax
-- Stacks with Sparks and Press (Press + Spark + Borrowed Trouble = 5d6 drop three)
-
----
-
-## Modifiers at a Glance
-
-### Attribute Ratings
-
-**Table MM5–2: Attribute Ratings**
-
-| Rating | Label | Modifier |
-|---|---|---|
-| 1 | Weak | -1 |
-| 2 | Average | +0 |
-| 3 | Strong | +1 |
-
-### Difficulty
-
-**Table MM5–3: Difficulty**
-
-| Difficulty | Modifier | When |
-|---|---|---|
-| Easy | +1 | Clear advantage, weak opposition |
-| Standard | +0 | Default — uncertain outcome |
-| Hard | -1 | Skilled opposition, poor conditions |
-| Very Hard | -2 | Extraordinary opposition, nearly impossible |
-
-Adjustments apply in a fixed order: base from the situation → an Easy tag (an Open enemy, a Maneuver) overrides downward, never stacking with itself → at most **one** character-side step (Technique OR Specialty, whichever the player picks) → Support's step → Easy is the floor, Very Hard the ceiling. Carried triggers auto-apply; judgment-call triggers are player-declared (III.1 *Difficulty*; II.4 *Reading the Entries*).
-
-### Skill Ranks
-
-**Table MM5–4: Skill Ranks**
-
-| Rank | Modifier |
+| Difficulty | Modifier |
 |---|---|
-| Novice | +0 |
-| Practiced | +1 |
-| Expert | +2 |
-| Master | +3 |
+| Easy | +1 |
+| Standard (the default) | +0 |
+| Hard | −1 |
+| Very Hard | −2 |
+
+**Extra dice.** Each adds a d6; keep the best two. They all stack. A **Spark** (spent before the roll). **Help**: an ally's action; the helper shares the cost. **Borrowed Trouble**: accept a complication that happens whatever the roll; one per roll.
+
+**Avoid:** 2d6 + the stat that fits what's acting on you. 10+ avoid it · 7–9 avoid the worst · 6− it takes hold.
+
+**Sparks:** 3 per session, no carry-over. Earned by MM award, peer call ("Spark?"), act-break nomination, and the Graceful Fail (narrate a 6− into something richer; you confirm).
 
 ---
 
-## Sparks
+## Combat (Chapter III.3; MM1)
 
-- Earned via MM award, Act Break Nomination, peer nomination ("Spark?"), or a player-claimed Graceful Fail
-- Spend **before** rolling: each Spark adds 1d6, drop lowest; no post-roll spending
-- 1 Spark = 3d6 drop lowest; 2 Sparks = 4d6 drop two lowest
-- Start of session: 3 Sparks per character — Sparks do not carry over
-- **Graceful Fail:** player-initiated — on any 6-, the player may claim it by narrating how they make the failure worse or richer; MM confirms
+**The exchange:** 1. Telegraph what each foe is about to do, and to whom. 2. Players act in any order and roll. 3. Foes attack in the open. 4. Narrate. 5. Exchange effects end. No turn order.
 
-### Spark Flow (MM Guidance)
+**Table MM5–3: Attacking**
 
-The Spark economy works when Sparks flow — earned and spent regularly, not hoarded.
-
-- **Target:** Confirm **1–2 Graceful Fail claims per session**, across the whole table.
-- **Graceful Fail is your best tool.** Every 6- is an opportunity for the player to claim it. When a player leans into the consequence with commitment, confirm the Spark immediately. This creates a virtuous cycle: players spend Sparks because they expect to earn more.
-- **Midpoint diagnostic:** If a player hasn't spent a Spark by the session's midpoint, design a moment that rewards it.
-- **Hoarding is a behavioral problem, not a mechanical one.** Players who don't earn enough Sparks during play won't feel comfortable spending them — structured earning moments (Act Break Nomination, Graceful Fail) are the fix.
-
-### Spark Earning
-
-**Table MM5–5: Spark Earning**
-
-| Trigger | Who Awards | Target/Session |
-|---|---|---|
-| **MM award / peer "Spark?"** (remarkable moments) | MM, or any player calls it and MM confirms | As they happen |
-| **Act Break Nomination** | Players nominate each other | 2–3 per player |
-| **Graceful Failure** (6- played for story) | Player claims, MM confirms | 1–2 across table |
-| **Spark for Weakness** (played into flaw) | MM | 0–1 across table |
-
-**Target economy** (by session type, everyone starting at 3): Low-activity — earn 1–2, spend 1–2. Standard — earn 2–3, spend 3–4. High-combat — earn 3–4, spend 4–6. Spend-what-you-earn: an unspent Spark at session end is simply gone (MM2, *Target Economy*).
-
----
-
-## Combat: Exchange Flow
-
-```
-1. MM describes the situation
-2. State enemy stances openly (from their `triggers:`); PCs declare Postures simultaneously, blind
-3. Declare and resolve Actions (Strike / Maneuver / Support / Magic)
-4. Targets declare and resolve Reactions
-5. Apply results: deplete enemy Resolve (2 / 1 / 0), apply Conditions to characters, name the rider taken on a 10+
-6. End of exchange: Tier 1 Conditions clear, Withdrawn recover 2 Endurance Pool points (up to the maximum)
-
-An exchange with **no PC offensive action** is uncontested — the situation advances for free: reposition, reinforce, progress a clock, or take the objective. No roll.
-```
-
----
-
-## Postures
-
-**Table MM5–6: Postures**
-
-| Posture | Offense | Reaction Cost | Special |
-|---|---|---|---|
-| **Aggressive** | +1 | +1 Endurance Pool cost, first reaction of the exchange only | — |
-| **Measured** | +0 | +0 | Baseline |
-| **Defensive** | -1 | -1 Endurance Pool cost (min 0) | — |
-| **Withdrawn** | No offense | Free (0) | Recover 2 Endurance Pool points end of exchange, up to the maximum |
-
-PC Posture is declared blind. Enemy stances are **stated, not concealed** — announce them as the exchange opens, driven by the stat block's `triggers:`. Insight reads past a stated stance (a feint, a shift about to happen).
-
----
-
-## Offensive Actions
-
-**Table MM5–7: Offensive Actions**
-
-| Action | Roll | Effect |
-|---|---|---|
-| **Strike** | 2d6 + weapon attribute + Combat or Finesse (default melee/ranged; the fiction may say otherwise) | Deplete enemy Resolve (10+: −2, 7–9: −1); 10+ also chooses one rider — Open or Position |
-| **Maneuver** | 2d6 + relevant skill | 10+: rolls against the target are Easy until the situation changes. 7–9: rolls against the target stay Standard. 6-: backfire |
-| **Support** | 2d6 + relevant skill | Grant ally +1d6 drop lowest OR difficulty one step easier on next roll |
-| **Magic** | 2d6 + Spirit + Attune, or Knowledge + Lore (by tradition) | Domain + Intent + Scope; Significant/Major spends a readied intent. **A magical Strike is always a full form** — Significant or Major, never free, and not available at all before the Technique. Free Minor magic fights as a Maneuver or Support |
-
-**Press:** Spend 1 Endurance Pool point before a Strike to add 1d6 drop lowest (stacks with Sparks).
-
----
-
-## Strike Outcomes
-
-**Against an enemy (usual case) — deplete Resolve:**
-
-**Table MM5–8: Strike Outcomes**
-
-| Roll | Resolve | Rider (10+ only) |
-|---|---|---|
-| **10+** | **−2** | **choose one** — **Open** (Easy to Strike for everyone, until the end of this exchange; the player narrates what it looks like) or **Position** (the next roll against it is Easy, this exchange or next) |
-| **7–9** | **−1** | — |
-| **6-** | 0 | consequence for the **attacker** |
-
-Enemy at **0 Resolve = defeated**. A rider never defeats — Resolve does. Open and Position are both Easy and do not stack. Open clears at the end of the exchange, and an Open enemy still acts. Mook: removed on any success (7+); armored Mook needs 10+, and a removed Mook takes no rider.
-
-**Against another character (duel/PvP):** 10+ = Tier 2 Condition, 7–9 = Tier 1 Condition, 6- = consequence for attacker.
-
-Default Strike difficulty: **Standard**. Adjust for posture and situation; an Open enemy is Easy for everyone, until the end of the exchange.
-
----
-
-## Reactions (1 per incoming action)
-
-**Table MM5–9: Reactions**
-
-| Reaction | Cost (Endurance Pool points) | Roll | 10+ | 7–9 | 6- |
-|---|---|---|---|---|---|
-| **Dodge** | 1 | Dexterity | Avoid entirely | Downgrade 1 tier | Full hit |
-| **Parry** | 1 | Weapon attribute + Combat | Avoid entirely | Downgrade 1 tier | Full hit |
-| **Absorb** | 0 | No roll | — | — | Take hit at full tier |
-| **Intercept** | 2 | — | Protect ally, then Dodge/Parry — once per exchange; if two would step in, the protected ally decides who | — | — |
-
-At **0 Endurance Pool**: Absorb only.
-
----
-
-## Enemy Attacks
-
-**Table MM5–10: Enemy Attacks**
-
-| Enemy Type | Incoming Tier | Posture? |
-|---|---|---|
-| Mook | Tier 1 | No (MM sets difficulty) |
-| Named NPC | Tier 2 | Yes |
-| Boss | Tier 2 | Yes (Techniques may escalate) |
-
-**Aggressive enemy:** PC reactions one step **harder**
-
-- **Defensive enemy:** PC reactions one step **easier**
-- Armor and reaction downgrades **do not stack** — apply the greater reduction
-- The MM chooses the incoming Condition; repeating a carried type is the telegraphed finisher (a landed repeat of a Tier 2 = Broken — telegraph it an exchange ahead)
-
----
-
-## Group Rolls
-
-- Each character rolls; **majority success** = group succeeds
-- Partial (7–9) counts as success for majority calculation
-- Or: designate a **lead roller**, others Support
-
----
-
-## Conditions
-
-**Table MM5–11: Conditions**
-
-| Tier | Conditions | Effect | Duration |
-|---|---|---|---|
-| **1** | Winded | -1 to next roll | Clears end of exchange |
-| **1** | Off-Balance | +1 Endurance Pool cost on next reaction | Clears end of exchange |
-| **1** | Shaken | MM directs next action | Clears end of exchange |
-| **2** | Staggered | -1 to offensive rolls | Persists until treated |
-| **2** | Cornered | Cannot take Aggressive posture | Persists until treated |
-| **3** | Broken | Out of the fight | End of scene |
-
-**Stacking:** 2nd Tier 2 Condition **of the same type** = **Broken**. (Staggered + Cornered coexist without escalating.)
-
----
-
-## Armor (PC downgrade budget)
-
-**Table MM5–12: Armor**
-
-| Type | Softens incoming Conditions |
+| Roll | Result |
 |---|---|
-| None | — |
-| Light | first **2** per scene, one tier each (T2→T1, T1→none) |
-| Heavy | first **4** per scene, one tier each |
+| **10+** | Weapon die damage, and pick one: +1d6 damage · stunt (an ally's next attack on it is Easy) · cover (attacks on a named ally are Hard this exchange) |
+| **7–9** | Weapon die damage, and you're **exposed**: a foe that can reach you rolls an extra die on its next attack at you this exchange, keep the best two |
+| **6−** | Miss; the MM makes a move |
 
-Resets at **end of scene**, not exchange; shared across fights in one scene. When spent, Conditions land at full tier.
+**Table MM5–4: Foes Attacking**
 
-A charge is consumed only when armor provides the reduction actually applied — if a partial reaction (Dodge/Parry 7-9) already delivers the downgrade, the armor charge is kept (III.3, *Armor and Reaction Downgrades*).
+| Roll (2d6 + attack) | Result |
+|---|---|
+| **10+** | Hard hit: damage +2 |
+| **7–9** | Hit |
+| **6−** | Miss |
 
----
+Natural 12: something more (you name it). Natural 2: the target's next attack on this foe is Easy.
 
-## Endurance Pool
+**Defend:** no attack; attacks on you are Hard. **Intercept:** defend, and attacks aimed at an ally within reach come to you instead. **Level gap:** attacks on a foe 3+ levels above you are Hard, 6+ Very Hard.
 
-**Pool:** 4 + Constitution modifier + Endurance skill rank bonus
+**Table MM5–5: Weapons and Armor**
 
-**Range:** 3 (Con 1, no skill) to 8 (Con 3, Master)
-
-**0 Endurance Pool:** Absorb only, regardless of Posture (Conditions land at their normal tier — no extra penalty)
-
-**Recovery:** Withdrawn posture restores 2 per exchange, up to the maximum
-
----
-
-## Magic: Domain + Intent + Scope
-
-**Table MM5–13: Magic Difficulty by Scope**
-
-| Scope | Focused | Standard | Prismatic |
-|---|---|---|---|
-| Minor | Easy | Standard | Hard |
-| Significant | Standard | Hard | Very Hard |
-| Major | Hard | Very Hard | Very Hard (ceiling) |
-
-- **The roll:** casting with Spirit adds the Attune rank; casting with Knowledge adds the Lore rank (Novice +0 if untrained)
-- **Meaningful power or finesse is a full form.** Minor magic lights, snuffs, marks, stings, trips. Real force or real precision is **Significant** — and a blow aimed at putting someone down is always meaningful power, so a magical Strike is never Minor. A Mook still falls to one Strike; the caster's Strike just costs an intent to make. Repetition does not make it free either: when a string of small workings adds up to one large result, price the result.
-- **Readied intents:** Minor is free. **Significant and Major spend one readied intent of their purpose** (Harm · Ward · Mend · Shape · Reveal). A formalized caster readies **3** at the start of each session, spread as they like; domain and effect are still chosen when cast. Nothing readied for the purpose → costs **a Spark** instead. They come back after a **full rest — your call** — or at the next session. A spent intent stays spent whatever the roll.
-- **Pre-technique:** Minor scope only, at the domain's normal difficulty (no extra penalty — the scope restriction *is* the limitation). No readied intents until the Technique formalizes the domain.
-- **Sparks and magic** — dice-Sparks work on any roll, including every magic roll. An off-purpose Significant or Major working costs a Spark that buys the working and nothing else. A Spark buys **reach** in exactly two cases, player-declared before the roll:
-  - **Pre-Technique Significant:** a pre-Technique caster may spend a Spark to attempt **one** Significant-scope effect at the domain's normal Significant difficulty. One effect per Spark — not an unlock; Major stays closed until the Tier 1 Technique.
-  - **Focused eases Major:** a Focused domain may spend a Spark to shift a Major effect one step easier (Hard → Standard). Focused only.
-  - **Prismatic:** reach-Sparks cannot move a Prismatic working's difficulty; dice-Sparks work normally.
-- **Second domain** (Tier 3, Mind and Soul trees): a second **standard** domain only — prismatic territories require Ascendant Domain. Effects in the second domain are one difficulty step harder than normal for that domain until the character earns their next Facet level; then the penalty lifts.
-
-### Adjudicating Magic (compressed from MM2 — see MM2 for full text)
-
-- **Rule out loud, before the dice.** Say the scope, say the difficulty, then roll. A ruling delivered after the result sounds like an adjustment.
-- **Scope = scale of change + duration + precision.** Not how impressive it looks, not how well it was described, not target count (a dozen torches lit at once is still Minor). "And it stays that way" moves the tier on duration alone — catch it before the roll. When you correct scope upward, name the new difficulty and *pause*; scaling the intent back down is the player's call.
-- **Check the ceiling before you price the roll.** A pre-technique caster is capped at **Minor** — except that a Spark buys one Significant-scope attempt at normal difficulty. Beyond that it is an availability question, not a difficulty one. Tell them what their magic can do now and let them re-aim.
-- **Domain boundaries — lean toward yes.** The test is substance vs. rhyme: does it run through the domain's actual material, or only share its mood? Fire burning the breathable content out of the air = yes; fire commanding the weather = no. Shadow muffling sound = yes; shadow granting invisibility = no. Don't surcharge a creative stretch — if the reach is more ambitious, that shows up as scope. A "no" is a **"No, but..."**. A "yes" is precedent — you are setting it permanently.
-- **7–9: the magic worked.** Pick the cost first — **affects more than intended** / **costs something unexpected** / **creates a consequence nobody planned** — then name it while narrating the success it rides on; the complication is added to a success, never a discount on one. Mine the player's stated intent for the specifics. Rotate categories — four costs in a row and 7–9 becomes a flat fee. Test: does the table now have something to *do*?
-- **Full rests are your call** (compressed from MM2, *Calling a Full Rest*). Default: a night's sleep somewhere safe; most sessions have none. Grant them freely and readied intents stop being a guess. Say the call before anyone readies.
-- **Active opposition = Standard floor.** A floor, not a surcharge. It only ever moves the **Easy** cell (Focused domain, Minor scope); every other combination already meets it, so raising a Hard roll "because combat" applies it twice. Opposition = something with its own will resisting *this working, right now* — a sealed door is difficulty, the rival holding it shut is opposition. Specific circumstances (distracted, wounded, constrained) may still adjust; "it is a battle" is not a circumstance.
-
-### Social 7–9 Costs (compressed from MM2 — see MM2 for full text)
-
-**They know you needed it** — you get it; they learn its price to you.
-**The debt** — a favour owed, unspecified, callable.
-**The witness** — someone who should not have heard it did.
-**The narrower yes** — you get the part that costs them least.
-**The wrong believer** — it lands too well on the wrong person.
-**The record** — it is written down somewhere other people read.
-
-Pick before you narrate; name the cost as part of the success; rotate the shapes. A social **6-** is almost never a refusal — it is a worse relationship than the one you walked in with.
-
----
-
-### Magic 6- Templates (compressed from II.3 — see II.3 for full text)
-
-**Wrong target:** the effect manifests on the wrong target.
-
-**Keeps working:** the effect works — and keeps working.
-
-**Attracts attention:** the working attracts attention.
-
-**Domain bleeds:** the effect lands in the right place but with the wrong character.
-
-**Cost arrives early:** the magic succeeded — but the mage carries a consequence that should have been deferred.
-
-**Nothing happens:** the domain reaches and finds nothing — the rarest and most useful failure.
-
-**Player option:** a magical 6- is a Graceful Fail opportunity — the player describes the response and claims the Spark; the MM confirms.
-
----
-
-## Encounter Building
-
-### Threat Rating (TR)
-
-```
-TR = offense_value + durability_value + armor_bonus + technique_bonus
-```
-
-**Table MM5–14: Threat Rating Components**
-
-| Attack Mod | Offense | | Component | Value |
+| Weapon | Die | | Armor | Value |
 |---|---|---|---|---|
-| -2 or lower | 0 | | **Durability** | base Resolve (Mook 0; Named ~3–4; Boss ~8) |
-| -1 | 1 | | **Armor** | None 0 / Light +1 / Heavy +2 |
-| +0 | 2 | | **Technique** | +1 per Technique or special (count them) |
-| +1 | 3 | | | |
-| +2 | 4 | | | |
-| +3 | 5 | | | |
-| +4 | 6 | | | |
+| Unarmed | d4 | | Light | 1 |
+| Light | d6 | | Heavy | 2 |
+| Standard | d8 | | Shield | +1 |
+| Heavy (2 slots) | d10 | | Cap | 3 |
+| Ranged | d8 | | Every hit | at least 1 |
 
-**TR Minimums:** Mook >= 1, Named >= 8, Boss >= 12
-
-### Encounter Recipe Table (PS 3 — simulation-validated)
-
-**Actor count drives difficulty, not total TR.** The number of Named/Boss enemies acting at once is the real dial — there is no TR budget (MM1, *Sizing an Encounter*). Party Strength = sum of `career_advances`. Adding enemies mid-fight is the sharpest dial you own: one Mook is one difficulty band (76% → 47% → 20%).
-
-**Table MM5–15: Encounter Recipes (Party Strength 3)**
-
-| Difficulty | Suggested Enemies | Sim Win Rate |
-|---|---|---|
-| **Skirmish** | 3–7 Mooks | ~100% |
-| **Standard** | 3 Named (TR 8) + 1 Mook | ~75–80% |
-| **Hard** | 3 Named (TR 8) + 2 Mooks | ~47–48% |
-| **Deadly** | 3 Named (TR 8) + 3 Mooks, or 4 Named + 1 Mook | ~17–22% |
-
-**Actor count is the dial:** 1–3 Named/Boss = clean win at any TR (3 Named ~96%); a fixed 3-Named core climbs Standard → Hard → Deadly by adding one Mook at a time (1/2/3); 5 Named = near-certain loss. Mook swarms alone only ever make a Skirmish. Each additional PC shifts the thresholds up ~1 Named.
+**Damage bonus** on every damage roll: +1 at level 3, +2 at 6, +3 at 9.
 
 ---
 
-## Skill Advancement
+## Monsters (MM1)
 
-- **4 skill points** per session — up to 2 unspent bank into the next session; 1 per session may train an unused Primary-Facet skill
-- Marks to advance one rank: **3** to Practiced, **5** to Expert, **8** to Master
-- **Rank caps, per Facet:** at most **3** skills beyond Practiced, only **1** of them Master. A finished Facet is 1 Master / 2 Expert / 2 Practiced. A slot is claimed the moment a mark goes past Practiced, and is never freed
-- Primary Facet skills: **1 SP per mark**
-- Cross-Facet skills: **2 SP per mark**
-- Every **3** skill rank advances in a Facet = +1 Facet Level (that Facet); the Background's starting rank counts as one
-- Facet Level = unlock 1 Technique from any tree whose prerequisites you meet
-- A finished Facet = **9** advances = Facet level 3; level 4+ is cross-training
-- Every **3** total Facet levels (any Facet) = Major Advancement
+**Table MM5–6: Monster Levels**
+
+| Level | HP | Damage | Attack |
+|---|---|---|---|
+| 1 | 8 | 4 | +1 |
+| 2 | 11 | 5 | +1 |
+| 3 | 14 | 6 | +2 |
+| 4 | 17 | 7 | +2 |
+| 5 | 20 | 8 | +2 |
+| 6 | 23 | 9 | +3 |
+| 7 | 26 | 10 | +3 |
+| 8 | 29 | 11 | +3 |
+| 9 | 32 | 12 | +4 |
+| 10 | 35 | 13 | +4 |
+
+**Table MM5–7: Roles**
+
+| Role | HP | Damage | Attack | Attacks |
+|---|---|---|---|---|
+| Mook | drops to any hit (7+) | −1 | −1 | 1, as one mob: +1 damage per extra Mook, up to +4 |
+| Standard | ×1 | +0 | +0 | 1 |
+| Elite | ×2 | +0 | +0 | 2 |
+| Boss | ×5 | +2 | +1 | 2, plus a Bloodied phase |
+
+Armor 0–2. Morale 2–12; default 7, fearless 12.
+
+**Morale:** at a trigger (the first falls · half are down · the leader is down · one is left alone and hurt), roll 2d6 once for the group. Over their morale, they break: do their BREAKS line.
+
+**Bloodied** (half HP or less): the WHEN BLOODIED line happens at once. Bosses change phase.
+
+**Reading a fight:** Standard 1 threat · Elite 2 · Boss 4 · every four Mooks 1. Double a foe 3+ levels above the party, halve one 3+ below. Against the number of characters: under two-thirds is a skirmish, up to one each is a real fight, up to one and a half each is hard, more is deadly.
 
 ---
 
-## MM Trouble Table (compressed from MM2 — see MM2 for full text)
+## 0 HP and Rest (Chapter III.2)
 
-Roll or pick a d6 for a generic 6- consequence when nothing specific comes to mind. Any roll, magical or not.
+**At 0 HP:** take a **Wound** (d6; it fills a slot; rolls that strain it are Hard) and roll **Hold On**, 2d6 + Body. 10+ stand at 1 HP · 7–9 out of the fight, conscious · 6− dying: an ally who tends you before the scene ends saves you; otherwise the **death choice** (a heroic final action that succeeds, or a permanent Scar). The choice is the player's.
 
-**Table MM5–16: Generic 6− Consequences**
-
-| d6 | Category | The 6- consequence |
-|---|---|---|
-| 1 | **Cost** | Something spent, broken, or used up that can't be easily replaced — a resource, a favor, an opportunity. |
-| 2 | **Position** | Somewhere worse — cornered, separated from the group, or committed to a course they can't undo. |
-| 3 | **Attention** | Something notices that wasn't paying attention before — guard, rival, nearby threat. Better if it only starts looking. |
-| 4 | **Equipment** | Gear fails, jams, or is lost — not gone forever, just unavailable right now. Keep it recoverable. |
-| 5 | **Condition** | Worse for wear — winded, shaken, off-balance. Narrated flavor, **not** a mechanical Condition unless already in combat (III.3). |
-| 6 | **Revelation** | New information that complicates things. Decide whether it helps or hurts first; make it cost something. |
-
-- **Pick over roll** unless you want to be surprised too. The category is a prompt, not the line you say out loud.
-- **Size the trouble to the risk**; never pick the row that halts the story.
-- **Magic:** pair a category with the Magic 6- Templates above — template = how the domain misbehaved, category = what it cost.
-
-**Graceful Fail:** hand the player the category, let them narrate the specifics, confirm the Spark.
+**Breather:** a few quiet minutes; restore half max HP. In danger, roll the Pressure die.
+**Night's rest in safety:** full HP, all Fatigue cleared, one Wound cleared.
 
 ---
 
-## Common Rulings
+## Magic (Chapter II.3; MM2)
 
-**Unnarrated details:** Players cannot act on details the MM has not described. A player may always ask — and the default answer leans yes — but cannot declare an action that assumes the answer (III.1, *Acting on Unnarrated Details*).
+Domain + intent + scope. Roll Mind (Thaumaturgy) or Soul (Invocation), +1 if a knack applies.
 
-**Contested roll (PvP):** Both sides roll; higher total wins. On a tie, both achieve partial success.
+**Table MM5–8: Scope**
 
-**Contested roll (vs NPC):** Only the player rolls. NPC capability sets difficulty.
+| Scope | Difficulty | Fatigue | From level | Harm |
+|---|---|---|---|---|
+| Minor | Standard | 0 | 1 | None; in a fight it's a stunt |
+| Significant | Standard | 1 | 1 | 1d8 to one target |
+| Major | Hard | 2 | 3 | 2d8 to a group |
 
-**"Can I try again?":** Only if the fiction changed — new approach, new information, or time passing that cost something. Otherwise the first result stands. A new approach gets a freshly declared difficulty (III.1, *Trying Again*).
+Scope = how much changes, for how long. Meaningful power or precision is never Minor; Minor never deals damage. Fatigue fills a slot until a night's rest; no free slot, no full working. Signature workings are one step Easier. Heavy armor: +1 Fatigue per full working. A second domain (the *Wider Domain* talent) is one step Harder until improved.
 
-**When not to roll:** Only roll when outcome is uncertain, stakes matter, and both success and failure move the story.
+**7–9:** it works; the caster picks one of two Magic Complications. **6−:** the Fatigue is spent; roll a Magic Mishap; the Graceful Fail applies.
 
-**Specialty:** A Background Specialty that *directly* applies turns a Standard roll Easy — its step shares the single character-side step with Techniques (III.1, *Difficulty*). When it is only tangential, hand over the information free — no roll (II.6, *Specialty*).
+---
 
-**Saving throws:** 2d6 + Major Attribute modifier (Body / Mind / Soul). Same three-tier outcomes. Use when something happens *to* the character, not something they choose.
+## The Toolbox (MM6)
 
-**Mooks:** No Resolve, no Condition track. Any successful Strike (7+) removes one; an armored Mook needs a full success (10+).
+**Reaction (2d6):** 2–4 hostile · 5–6 wary · 7–9 uncertain, wants something first · 10–11 open · 12 friendly.
 
+**Pressure die (d6)**, each exploration turn, journey leg, or breather in danger: 1 encounter · 2 sign · 3 local hazard · 4 cost · 5 opportunity · 6 quiet.
+
+**Oracle:** 2d6 with odds as difficulty (likely +1, even +0, unlikely −1, very unlikely −2). 10+ yes · 7–9 yes, but · 6− no. Natural 12 yes, and · natural 2 no, and.
+
+**Stuck?** Pick one: a threat moves · someone arrives with a want · a secret surfaces.
+
+**A hoard:** 2d6 × 10 coin × site level; one curio; a relic on a 6 on a d6. A trinket from every pocket searched. A character carries three curios at a time.
+
+**Usage die:** d8 → d6 → d4 → gone. Roll after a scene of use; a 1 or 2 steps it down.
+
+**Threat Clock:** four segments, visible to all. Advances on every 7–9 or 6− rolled near the danger. Winding it back one segment costs an action and no roll.
+
+---
+
+## Levels (MM3; Chapter II.4)
+
+You call the level. Default pace: level 2 after session 1, 3 after session 3, then one every two or three sessions, reaching 10 around session 22.
+
+**The five questions**, at every session's end: Did we discover something new about the world? Bring treasure home? Pursue a character's goal? Change the world? Make a moment the whole table will remember?
+
+**Each level:** HP (grit die or its average) and one pick: a new talent, or the improved form of one held a level. **Level 3:** the signature; free rebuilds end. **Levels 4 and 8:** +1 stat. **Levels 5 and 9:** casters name another signature working.
+
+---
+
+## Three Things to Remember
+
+Start every difficulty at **Standard**. A **7–9 is a success** with a cost, never a penalty. There is **no turn order**, anywhere.

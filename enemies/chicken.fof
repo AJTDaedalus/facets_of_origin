@@ -1,50 +1,64 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: chicken
 name: Chicken
-
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
-
+    version: 1.0.0
 enemy:
-  tier: mook
-  attack_modifier: -1   # Dexterity −1 (weak), no Combat skill to speak of
-  armor: none
-  techniques: []
-  special: null
-  tr: 1                 # Mook minimum. Offense(−1→value 1) + Durability(0) + Armor(0) = 1.
+  # v0.3: Mook, attack -1, rating 1 (the baseline).
+  level: 1
+  role: mook
+  armor: 0
+  morale: 2
+  weapon: Beak, claws, and opinions
+  damage: 1
+  attack: -1
+  wants: To be somewhere else. It has not decided where.
+  special: 'UNDERFOOT — when the chicken hits, the MM may skip the damage and put it in someone''s
+    face instead: that character''s next roll this exchange is Hard.'
+  when_bloodied: null
+  tells: It has been making the same noise since you came in, and the noise has been getting
+    louder.
+  breaks: Wanders off the moment nothing is chasing it, and turns up later somewhere nobody
+    can explain.
+  twists:
+  - It is not one chicken. It has never been one chicken.
+  - It belongs to someone nearby, who is on the way and wants to know what you are doing to
+    it.
+  - It is sitting on the thing the party came for, and will not move for anything short of
+    being picked up.
+  - It got into the party's supplies first. Somebody's rations are now mostly chicken's.
+  - It is the only calm thing in the room, which is somehow worse.
+  - It follows the party out, and keeps following them for the rest of the session.
+  nastier: There is no nastier chicken. There is only more chicken.
+  description: >-
+    A chicken. Technically alive. Technically a threat, in the sense that it occupies space
+    and has opinions about personal boundaries. Attacks by pecking at ankles or flapping directly
+    into someone's face at the worst possible moment. Not malevolent. Just a chicken.
+  notes: >-
+    The canonical weakest creature in the game, and the baseline the rest of the Bestiary
+    is read against. Level 1 Mook with two overrides, both deliberate: attack −1 and damage
+    1, one step under the level-1 Mook floor (attack 0, damage 2), so that nothing else in
+    the book can be weaker than the chicken.
 
-  disposition: >
-    A chicken. It is not fighting; it is having a bad time in the same
-    room as a fight.
 
-  morale: >
-    Wanders off the moment nothing is chasing it.
+    Like every Mook it drops to any hit. Its erratic movement is not evasion. A chicken does
+    not dodge. It simply goes somewhere unpredictable. This is functionally the same thing
+    and somehow more annoying.
 
-  organization: >
-    Alone, in pairs, or in a genuinely alarming quantity.
 
-  description: >
-    A chicken. Technically alive. Technically a threat, in the sense
-    that it occupies space and has opinions about personal boundaries.
-    Attacks by pecking at ankles or flapping directly into someone's
-    face at the worst possible moment. Not malevolent. Just a chicken.
+    Morale 2: at any morale trigger it leaves unless the MM rolls snake eyes.
 
-  notes: >
-    Mook — one Strike at any tier removes from fight.
 
-    Its erratic movement is not evasion. A chicken does not dodge. It
-    simply goes somewhere unpredictable. This is functionally the same
-    thing and somehow more annoying.
+    MMs are encouraged to have the chicken survive the encounter through sheer irrelevance
+    and wander off at the end. It was never really part of this.
 
-    MMs are encouraged to have the chicken survive the encounter through
-    sheer irrelevance and wander off at the end. It was never really
-    part of this.
 
-    Do not give the chicken a name. If the party gives it a name, that
-    is entirely their fault and the MM should remember it forever.
+    Do not give the chicken a name. If the party gives it a name, that is entirely their fault
+    and the MM should remember it forever.
 
-created_at: '2026-03-05T00:00:00+00:00'
-last_modified: '2026-03-05T00:00:00+00:00'
+
+    Appears: alone, in pairs, or in a genuinely alarming quantity.
+  reskin_of: null

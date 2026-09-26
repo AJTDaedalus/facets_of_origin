@@ -1,41 +1,56 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: latchman
 name: Latchman
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
+    version: 1.0.0
 enemy:
-  tier: named
-  attack_modifier: 2
-  armor: heavy
-  techniques:
-  - the_standing_order
-  special: THE STANDING ORDER — a latchman states its instruction aloud, once, when
-    first engaged. The instruction is always the true one, always decades old, and
-    frequently no longer means what whoever gave it intended.
-  description: Man-height, iron-jointed, with a face that is a plate with two holes
-    in it and a voice like a drawer closing. It is standing exactly where it was
-    told to stand. It has been standing there since before the building's owners
-    stopped existing.
-  disposition: Literal. Absolutely, ruinously literal, and entirely without malice
-    about it.
-  first_target: Whoever crossed the line its instruction describes, and only them.
-  triggers:
-  - States its standing order in the first exchange. Players who listen are being
-    handed the solution.
-  - Will not act on anything outside the order — a party that satisfies the letter
-    of it walks past while the latchman holds the door.
-  morale: None to break. It stops when the order is satisfied, countermanded by
-    the authority that gave it, or made impossible.
-  organization: One per building that mattered, sometimes with three or four latchlings
-    on the lesser doors.
-  notes: 'TR breakdown: offense(+2 → 4) + durability(Resolve 4) + armor(heavy →
-    2) + techniques(1) = 11.'
-  negotiation: Wants the order carried out. Shifts for nothing but the order's own
-    terms — and those terms are usually satisfiable by somebody willing to read
-    them very carefully. Honours the letter, always.
-  resolve: 4
-created_at: '2026-08-02T00:00:00+00:00'
-last_modified: '2026-08-02T00:00:00+00:00'
+  # v0.3: Named, durability 4, attack +2, heavy armor, rating 11.
+  level: 3
+  role: elite
+  armor: 2
+  morale: 12
+  weapon: Iron hands
+  wants: The standing order carried out, to the letter.
+  special: 'THE STANDING ORDER — the first time it is engaged it states its instruction aloud,
+    and the instruction is always the true one and always decades old. It acts on nothing
+    outside the order: a party that satisfies the letter of it walks past while the latchman
+    holds the door.'
+  when_bloodied: It stops following anyone and stands in the doorway, Defending (no attack;
+    attacks on it are Hard), repeating the order to anyone who will listen.
+  tells: It has not moved since you came in. When it speaks, the voice is like a drawer closing.
+  breaks: Nothing to break. It stops when the order is satisfied, countermanded by the authority
+    that gave it, or made impossible.
+  twists:
+  - The order is "not before the eleventh bell", and no bell here has rung eleven in sixty
+    years.
+  - The order names a guild livery. One still exists, in a chest, in a family that will want
+    something for it.
+  - The order covers the door. Nothing in it mentions the wall.
+  - Latchlings keep the lesser doors, and each will recite a different piece of the building's
+    rules.
+  - The order lets the owner's heir through, and one of the party might count.
+  - The building has been divided up, and half the order's words now describe the shop next
+    door.
+  nastier: It holds two standing orders from two authorities, they contradict each other,
+    and it enforces both.
+  description: >-
+    Man-height, iron-jointed, with a face that is a plate with two holes in it and a voice
+    like a drawer closing. It is standing exactly where it was told to stand. It has been
+    standing there since before the building's owners stopped existing.
+  notes: >-
+    Level 3 elite, armor 2: no overrides. Elite because it sat at the top of the old middle
+    rank with the veteran soldier and is the harder of the two to wear down; fearless because
+    it has nothing to break.
+
+
+    Literal. Absolutely, ruinously literal, and entirely without malice about it. Its only
+    target is whoever crossed the line its instruction describes. Players who listen to the
+    order are being handed the solution.
+
+
+    Appears: one per building that mattered, sometimes with three or four latchlings on the
+    lesser doors.
+  reskin_of: null

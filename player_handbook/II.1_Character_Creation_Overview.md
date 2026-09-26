@@ -1,120 +1,64 @@
-# Character Creation
+# Character Creation: Overview
 
-Somebody at your table is about to say a name out loud for the first time, and after that the name will belong to a person. Everything in this chapter exists to get you from here to there: a sheet with nine numbers on it, a history worth having survived, and a first sentence in somebody else's world.
+A character in this game is five answers. Which Facet are you? What are your stats? What is your class? Where do you come from? What were you born as? Most tables answer all five in ten minutes, and most of that is choosing a name.
 
-You do not need to know who they are before you start. Most people find out somewhere around step four, when the numbers stop being a budget and start being a temperament.
-
-Your character is how you interact with the world and the people at the table. They are a combination of backstory, personality, and your own internal vision — plus the game statistics that define how they move through the fiction.
-
-Both aspects live together in the Facets Character Sheet, on paper or in the digital interface. This chapter walks you through creating your character and beginning their story.
-
-### What the Character Sheet Contains
-
-At the top, before any of its sections, the sheet records two names: your character's and your own. Below that, it has nine sections:
-
-**Table II.1–1: What the Character Sheet Contains**
-
-| Section | What It Holds |
-|---|---|
-| **Attributes** | Your nine Minor Attributes (Strength, Dexterity, Constitution, Intelligence, Wisdom, Knowledge, Spirit, Luck, Charisma), each rated 1–3, grouped under the three Major Attributes (Body, Mind, Soul) |
-| **Facet** | Your chosen Primary Facet (Body, Mind, or Soul), your current Facet level, and your rank advances toward the next level |
-| **Background** | Your character's title and origin, your Starting Skill (Practiced), your Secondary Skill (Novice with 1 mark) or Domain Origin if your Background grants magic, and your Specialty |
-| **Skills** | All 15 skills across the three Facets — current rank (Novice/Practiced/Expert/Master) and marks toward the next rank |
-| **Techniques** | The specific abilities you have unlocked from the Facet Technique trees (any tree whose prerequisites you meet), plus any choices made at unlock |
-| **Magic** | Your magic domain's name and type (Focused, Standard, or Prismatic), and whether you're still pre-Technique (Minor scope only) or have unlocked full scope |
-| **Combat** | Your Endurance Pool (current / max — 4 plus your Constitution modifier plus Endurance skill rank), your Armor type and downgrade budget, your active Conditions, and your current Spark count |
-| **Inventory** | Your equipment, including the armor whose type sets your Combat section's downgrade budget |
-| **Session Resources** | The skill points you receive to spend at each session's end |
+The numbers belong to the Facet. The class is words, kit and picks. The background is history. None of those three can make a character stronger than another at the same level, so you can choose for the story and never be punished for it.
 
 ---
 
-## The Seven Steps
+## The Steps
 
-The rest of Part II works through these in order. The Quick Start carries the same seven in short form, if you would rather build first and read afterward.
+**Table II.1–1: Making a Character**
 
-1. **Decide who they are.** One sentence, before any numbers (*Before the Numbers*, below).
-2. **Pick a Primary Facet** — Body, Mind, or Soul (Chapter II.4).
-3. **Choose a Lineage** — who you were born as. In the core rules that is Human; setting Facets add more, and a gifted lineage grants a domain (Chapter II.5).
-4. **Spend 18 points** across the nine Minor Attributes, each rated 1 to 3 (Chapter II.2).
-5. **Derive the three Major Attributes** from the Minor Attributes under each (Chapter II.2).
-6. **Pick a Background**, which grants a Title, a Starting Skill at Practiced, a Secondary Skill at Novice with one mark — or a Domain origin in its place — and a Specialty (Chapters II.6, II.3). A character holds **one domain at creation**, from Lineage or Background, never both.
-7. **Fill in the rest.** Every other skill sits at Novice; note your Endurance Pool and your three Sparks (Chapters II.7, III.3, III.1).
+| Step | You choose | Where it's ruled |
+|---|---|---|
+| 1. Facet | Body, Mind or Soul | Chapter II.4 |
+| 2. Stats | Your Facet's stat +2, one other +1, the last +0 | Chapter II.2 |
+| 3. Class | A preset, or your own from the Facet's menu | Chapter II.4 |
+| 4. Magic | A domain and two signature workings, if your class casts | Chapter II.3 |
+| 5. Lineage | Human, unless your setting offers more | Chapter II.5 |
+| 6. Background | A history, a knack and a Specialty | Chapter II.6 |
+| 7. Kit and coin | Your class kit, plus 2d6 × 10 coin to spend | Chapter IV.1 |
+| 8. Numbers | HP, slots, armor, Sparks | this chapter |
 
-Lineage sits before attributes because a gift is part of who the character *is* before any number is spent — a table building a party in a gifted setting wants "gifted or not" settled before it starts pricing Constitution. It sits after the Facet because the formalization rule reads off the Facet.
-
----
-
-> **Example — six steps, one lazy man**
->
-> **Zulnut's player:** I want someone who is very good at things and does not want to do any of them.
->
-> **MM:** That's a temperament, not a sheet. What's he *for*?
->
-> **Zulnut's player:** Getting into places. Ideally without anybody noticing, and definitely without climbing anything twice.
->
-> *Body Facet, then — the Grace branch. Eighteen points: Dexterity 3 and Luck 3 because those are the character, Constitution 1 and Spirit 1 because every 3 has to be bought with a 1, and the rest at 2.*
->
-> **MM:** Background?
->
-> **Zulnut's player:** He trained somewhere serious and left before they finished with him.
->
-> **MM:** Wandering Disciple. Custom, so we build it: Finesse at Practiced, Stealth at Novice with a mark on it, and a Specialty — what's the narrow thing the training left him?
->
-> **Zulnut's player:** He knows the exact moment a person's attention moves off him.
->
-> **MM:** (That is going to be a problem for me for years.) Write it down.
+Steps 1 to 3 are the only ones with real consequences for how you play. The rest is flavor you will be glad to have.
 
 ---
 
-## Before the Numbers
+## The Numbers
 
-Before you touch any statistics, spend a few minutes on the person. A character with a clear inner life makes every roll feel like it belongs to someone, not just something.
+**Hit points.** Your grit die's highest face plus your Body. Body characters roll a d10, Soul characters a d8, Mind characters a d6. A Body character with Body +2 starts on 12; a Mind character with Body +0 starts on 6. Talents can add to it.
 
-Some questions to consider:
+**Slots.** 10 + Body. Most items fill one slot; heavy armor and heavy weapons fill two. Wounds and Fatigue fill slots too, which is why a full pack is a risk.
 
-- What drove them to the life they're living?
-- What makes them want to travel with this particular group?
-- What do they value — and what would they sacrifice it for?
-- What do they have to prove, and to whom?
-- Where are they from, and what did they leave behind?
+**Armor.** The total of your worn armor and shield: light 1, heavy 2, shield +1, never more than 3. It comes off the damage of every hit you take.
 
-You do not need answers to all of these before you start. Some characters reveal themselves through play. But having one or two clear answers gives the Mirror Master something to work with — and gives you something to play toward.
+**Sparks.** Three, at the start of every session.
+
+**Level.** You start at level 1. The MM decides when the table levels up (Chapter II.4).
 
 ---
 
-## The Table Builds the World Together
+## The Character Sheet
 
-Facets of Origin is a collaborative medium. The Mirror Master presents the world; the players author the characters who live in it. That authorship is real — your character's background, domain, relationships, and choices leave marks on the fiction that the MM cannot erase without explanation.
-
-Before the first session, it is worth the table asking a few shared questions:
-
-- What kind of story does everyone want to be in? (Investigative mystery? Political intrigue? Survival? Adventure of discovery?)
-- Are there themes the table wants to explore, or themes to avoid?
-- How do these characters know each other, or how do they meet?
-
-These are not logistics. They are the beginning of the collaborative worldbuilding that makes Facets of Origin work.
+The sheet has room for everything above: name and player, Facet, class and concept, level, the three stats, HP, armor, knacks and Specialty, talents (with a box for uses), signature, magic, the slot grid, coin, Sparks, Wounds and Scars, and notes. The Appendix: Character Sheet prints it. In the app, the sheet fills itself in as you go through the steps.
 
 ---
 
-## Where to Go From Here
+## Where the Cast Comes From
 
-The following sections walk you through creating your character's statistics:
+The book's examples follow three characters and their long-suffering MM. Each shows a different way through these steps.
 
-**II.2 — Attributes:** Your character's fundamental nature, from broad physical capability to soul and presence
+**Table II.1–2: The Recurring Cast**
 
-**II.3 — Magic:** How magic works in Facets of Origin, and how to establish your domain if your character uses it
+| | Zahna | Mordai | Zulnut |
+|---|---|---|---|
+| Facet | Mind | Body | Body |
+| Stats | Mind +2, Soul +1, Body +0 | Body +2, Soul +1, Mind +0 | Body +2, Soul +1, Mind +0 |
+| Class | Thaumaturge (preset) | Warrior (preset) | Wandering Disciple (custom) |
+| Knacks | Arcane theory, Guild Apprentice | Soldiering, City Watch Veteran | Motion and stillness, Sleight of hand and quiet feet |
+| Background | Guild Apprentice | City Watch Veteran | Wandering Disciple (custom) |
+| HP at level 1 | 6 | 16 | 12 |
+| Magic | Inscription | none | none |
 
-**II.4 — Facets & Advancement:** Your character's direction of growth, and how skills, Facet levels, and Techniques advance
-
-**II.4a — Facet of the Body:** Skills and Techniques for physical, forceful, and enduring characters
-
-**II.4b — Facet of the Mind:** Skills and Techniques for scholarly, perceptive, and analytical characters
-
-**II.4c — Facet of the Soul:** Skills and Techniques for diplomatic, spiritual, and luck-touched characters
-
-**II.5 — Lineage:** Who your character was born as, and what a setting's peoples carry in the blood
-
-**II.6 — Backgrounds:** Your character's history, relationships, and the narrative origin of any magical domains
-
-**II.7 — Skills:** The full skill list and how skill advancement works in play
-
+Zahna is a preset Thaumaturge who reads the room last and the glyph first. Mordai is a preset Warrior who asks a locked door and an archivist the same way. Zulnut wrote his own class because none of the presets was lazy enough. His build is in Chapter II.4.

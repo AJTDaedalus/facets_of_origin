@@ -1,7 +1,7 @@
 """B3.6 — Full session lifecycle integration test.
 
 Covers: session creation → MM auth → invite → player join → character upload
-        → roll → condition applied → character export.
+        → roll → character export.
 """
 from __future__ import annotations
 
@@ -33,8 +33,8 @@ def _auth_player(ws, player_token: str) -> None:
 # ---------------------------------------------------------------------------
 
 class TestFullSessionLifecycle:
-    def test_full_session_lifecycle(self, client, mm_headers, valid_attributes):
-        """B3.6: Create session → invite → join → upload character → roll → condition → export."""
+    def test_full_session_lifecycle(self, client, mm_headers):
+        """Create session → invite → join → upload character → roll → export."""
 
         # 1. Create session
         resp = client.post("/api/sessions/", json={"name": "Integration Test Session"}, headers=mm_headers)
@@ -56,23 +56,12 @@ class TestFullSessionLifecycle:
         assert resp.status_code == 200
         player_token = resp.json()["access_token"]
 
-        # 4. Upload a character via the character API
-        # Build a minimal .fof YAML directly from a Character object
+        # 4. Upload a character .fof built through the v1 model
         from app.facets.registry import build_ruleset
+        from tests.conftest import make_character
         ruleset = build_ruleset([])
-        from app.game.character import create_default_character
-        char, errors = create_default_character(
-            name="Mordai",
-            player_name="Mordai",
-            primary_facet="body",
-            attributes=valid_attributes,
-            ruleset=ruleset,
-        )
-        assert not errors
-        fof_dict = char.to_fof(
-            module_refs=[{"id": f.id, "version": f.version} for f in ruleset._files],
-            session_id=session_id,
-        )
+        char = make_character(ruleset, name="Mordai", player_name="Mordai")
+        fof_dict = char.to_fof(ruleset.module_refs(), session_id=session_id, ruleset=ruleset)
         fof_yaml = yaml.dump(fof_dict, allow_unicode=True, sort_keys=False)
 
         player_headers = {"Authorization": f"Bearer {player_token}"}
@@ -84,31 +73,15 @@ class TestFullSessionLifecycle:
         assert resp.status_code == 200
         assert resp.json()["character"]["name"] == "Mordai"
 
-        # 5. Player rolls via WebSocket
-        with client.websocket_connect("/ws") as ws:
-            _auth_player(ws, player_token)
-            ws.send_json({
-                "type": "roll",
-                "attribute_id": "strength",
-                "difficulty": "Standard",
-                "sparks_spent": 0,
-            })
-            msg = ws.receive_json()
-        assert msg["type"] == "roll_result"
-        assert msg["roll"]["outcome"] in ("full_success", "partial_success", "failure")
-
-        # 6. MM applies a condition
-        mm_token = create_mm_token()
-        with client.websocket_connect("/ws") as ws:
-            _auth_mm(ws, mm_token, session_id)
-            ws.send_json({
-                "type": "apply_condition",
-                "player_name": "Mordai",
-                "condition": "winded",
-            })
-            msg = ws.receive_json()
-        assert msg["type"] == "condition_applied"
-        assert "winded" in msg["all_conditions"]
+        # 5. Player rolls over HTTP (the WebSocket events are the APP layer's)
+        resp = client.post("/api/rolls/", json={
+            "session_id": session_id, "stat": "body", "knack": True,
+            "difficulty": "Standard", "sparks_spent": 1,
+        }, headers=player_headers)
+        assert resp.status_code == 200, resp.text
+        assert resp.json()["roll"]["outcome"] in ("full_success", "partial_success", "failure")
+        assert len(resp.json()["roll"]["dice"]) == 3
+        assert resp.json()["sparks_remaining"] == 2
 
         # 7. Export character
         resp = client.get(

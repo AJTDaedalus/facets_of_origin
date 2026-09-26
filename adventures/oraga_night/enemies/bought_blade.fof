@@ -1,40 +1,52 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: bought_blade
 name: Blade of the Bought
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
+    version: 1.0.0
 enemy:
-  tier: mook
-  attack_modifier: 1
-  armor: light
-  techniques: []
-  special: null
-  description: Contracted muscle in a matched coat — grey wool, cut plainly, the company's
-    mark stitched at the shoulder where a house badge would sit. In a city where everyone
-    wears a knife to a ball, sixteen people wearing the same coat is the thing that stands
-    out.
-  disposition: Professional. Not cruel, not enthusiastic, and paying close attention to the
-    terms.
-  first_target: Whoever the contract names. Everyone else is an obstacle to be moved.
-  triggers:
-  - Will not pursue past the boundary the contract specifies, and knows exactly where that
-    is.
-  - Fights to the terms — a contract to detain produces no killing blows, and everyone on
-    both sides can tell the difference.
-  morale: Down two of four and the rest disengage in order. Nobody in the Bought has ever
-    been paid enough to die for a clause.
+  level: 2
+  role: mook
+  armor: 1
+  morale: 6
+  weapon: Company blade, or a cudgel on a contract to detain
+  wants: The contract's terms met and the fee paid.
+  special: TO THE TERMS — Blades fight only as the contract allows and never cross its boundary.
+    On a contract to detain, a character their hits would drop to 0 HP is left at 1 HP and held
+    instead.
+  when_bloodied: null
+  tells: Matched coats, positions taken rather than a room walked into, and someone at the back
+    opening a document case.
+  breaks: Disengages in good order and walks back to the boundary. Nobody in the Bought has
+    ever been paid enough to die for a clause.
+  twists:
+  - 'The contract is to delay, not to stop: they only need to hold for three exchanges.'
+  - The contract names one party member, and the Blades step politely around everyone else.
+  - The boundary is a painted line on the floor of this room, and the party is standing on it.
+  - One Blade is new and does not yet know exactly where the boundary is.
+  - The fee was paid in bad coin, and the Blades have just been told.
+  - They are escorting a prisoner who very much wants the party to win.
+  nastier: Their sergeant is in earshot, and has already said where the boundary is.
+  description: Contracted muscle in a matched coat — grey wool, cut plainly, the company's mark
+    stitched at the shoulder where a house badge would sit. In a city where everyone wears a
+    knife to a ball, sixteen people wearing the same coat is the thing that stands out.
+  notes: 'Level 2 Mook, armor 1: no overrides. Morale 6 so that "down two of four and the rest
+    disengage" is what usually happens at the half-down trigger.
+
+
+    Their first target is whoever the contract names; everyone else is an obstacle to be moved.
+    A contract to detain produces no killing blows, and everyone on both sides can tell the
+    difference.
+
+
+    MODULE RESKIN (Oraga Night). Flavour fields only — name, description, organization and notes.
+    Level, role, armor, morale and every card line are the Bestiary''s and must stay identical
+    to enemies/bought_blade.fof; a test asserts it (INV-18). The Bestiary stays setting-agnostic
+    (B9), which is why the Val''loh colour lives here instead.'
   organization: Sixteen walked into the trade district at dusk. Four hold the Boranis gatehouse;
     the rest hold the outer perimeter and are not on the scene card.
-  notes: 'TR breakdown: offense(+1 → 3) + durability(Mook → 0) + armor(light → 1) + techniques(0)
-    = 4.
-
-
-    MODULE RESKIN (Oraga Night). Flavour fields only — description and organization. Tier,
-    resolve, attack_modifier, armor, techniques and special are the Bestiary''s and must stay
-    identical to enemies/bought_blade.fof; a test asserts it. The Bestiary files stay setting-agnostic
-    (B9), which is why the Val''loh colour lives here instead.'
+  reskin_of: bought_blade
 created_at: '2026-08-02T00:00:00+00:00'
-last_modified: '2026-08-02T00:00:00+00:00'
+last_modified: '2026-09-25T00:00:00+00:00'

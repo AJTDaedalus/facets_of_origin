@@ -1,32 +1,49 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: latchling
 name: Latchling
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
+    version: 1.0.0
 enemy:
-  tier: mook
-  attack_modifier: 1
-  armor: heavy
-  techniques: []
-  special: null
-  description: Knee-high, brass-jointed, and built to sit in a doorway and be a
-    nuisance to anyone without the right token. A latchling has one arm that is
-    a bolt and one that is a hand, and it is very clear about which is for whom.
-  disposition: Obstructive rather than violent. It would much rather block than
-    hit.
-  first_target: Whoever is nearest the door it keeps.
-  triggers:
-  - Never leaves its doorway. Not to chase, not to help another latchling, not for
-    anything.
-  - Steps aside for correct authority — a seal, a phrase, a livery — without a roll
-    and without resentment.
-  morale: Cannot be frightened and does not need to be. It stops when the door is
+  # v0.3: Mook, attack +1, heavy armor, rating 5 (the armored Mook that needed a 10+).
+  level: 2
+  role: mook
+  armor: 2
+  morale: 12
+  weapon: One bolt-arm; the other arm is a hand
+  wants: Nobody through its doorway without the right token.
+  special: BRASS — a latchling drops only to a hit of 10+. On a 7–9 the blow rings off it
+    and it is still in the doorway.
+  when_bloodied: null
+  tells: Something small and brass sits in the exact middle of a doorway, and the dust around
+    it has not been disturbed in years.
+  breaks: Cannot be frightened. It steps aside, without a roll and without resentment, for
+    correct authority (a seal, a phrase, a livery), and it stops for good when the door is
     no longer a door.
-  organization: One per doorway, in buildings that once had rules.
-  notes: 'TR breakdown: offense(+1 → 3) + durability(Mook → 0) + armor(heavy → 2)
-    + techniques(0) = 5.'
-created_at: '2026-08-02T00:00:00+00:00'
-last_modified: '2026-08-02T00:00:00+00:00'
+  twists:
+  - The token it wants is hanging on a hook in plain sight, on the wrong side of the door.
+  - Three latchlings keep three doors, and each accepts a different livery.
+  - The door it keeps was bricked up long ago. It keeps the bricks.
+  - It is keeping the cupboard the party's confiscated gear was locked in.
+  - 'It is jammed half-open: each exchange it can bar the way or hit, not both.'
+  - Someone in the building has been handing it buttons, and it now accepts buttons as authority.
+  nastier: Its doorway leads to a latchman's door, and the latchman hears the brass ring.
+  description: >-
+    Knee-high, brass-jointed, and built to sit in a doorway and be a nuisance to anyone without
+    the right token. A latchling has one arm that is a bolt and one that is a hand, and it
+    is very clear about which is for whom.
+  notes: >-
+    Level 2 Mook, armor 2. The v0.3 armored-Mook rule survives as its special, because under
+    the lean rules a Mook drops to any hit and armor alone would not make a latchling any
+    different from a chicken.
+
+
+    It never leaves its doorway: not to chase, not to help another latchling, not for anything.
+    Its first target is whoever is nearest the door it keeps. It would much rather block than
+    hit.
+
+
+    Appears: one per doorway, in buildings that once had rules.
+  reskin_of: null

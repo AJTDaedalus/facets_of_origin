@@ -28,9 +28,9 @@ It is written to be run with *Oraga Night*, which is a single night at a single 
 
 **1. The tribes are human**, all ten of them, and four in five Orthaen are born able to grow crystal out of stone.
 
-**2. A gift is a domain, and you choose which.** Not flair, not a knack — magic, in exactly the sense the core rules mean it. Your people decide how it looks; you decide what it is. It is Minor scope until you have grown into it.
+**2. A gift is a knack and a little real magic, and you choose which magic.** Your people decide how it looks; you decide which domain it touches. It gives you a gift knack and Minor workings in that domain, for life — magic in exactly the sense the core rules mean it, only small.
 
-**3. Spellcraft is the other road.** The scholarly tradition, learned over years, cast like any other domain. The fiction says it is patient work. The rules say nothing special about it at all.
+**3. Spellcraft is the other road.** Thaumaturgy, the scholarly tradition, learned over years and cast like any other domain. The fiction says it is patient work. The rules say nothing special about it at all.
 
 **4. Crystal is wealth**, because a charged crystal is magic that anyone can carry and spend — including the four people in five who were born without a gift, and the visitors who were born without a tribe.
 
@@ -50,9 +50,9 @@ It is written to be run with *Oraga Night*, which is a single night at a single 
 
 ## What It Adds, Counted
 
-> The core 2d6, Sparks, Conditions, exchanges, advancement, magic, and the three Facets are unchanged. Val'loh adds exactly: **ten Lineages** (two playable in Oraga Night) and **crystal charges** as one-use items. It adds no domains, removes nothing, and changes no rule.
+> The core 2d6, Sparks, HP, exchanges, levels, magic, and the three Facets are unchanged. Val'loh adds exactly: **ten Lineages** (two playable in Oraga Night) and **crystal charges** as curios. It adds no domains, removes nothing, and changes no rule.
 
-Nothing in this Facet touches how you roll, how difficulty is set, how Sparks work, how Conditions land, how exchanges run, how skills and Facets advance, or how magic is cast. There is no Val'loh combat rule and no Val'loh casting rule. A table that has played one session of Facets of Origin can play this one without learning anything new about the game — only about the place.
+Nothing in this Facet touches how you roll, how difficulty is set, how Sparks work, how damage and Wounds land, how exchanges run, how characters level, or how magic is cast. There is no Val'loh combat rule and no Val'loh casting rule. A table that has played one session of Facets of Origin can play this one without learning anything new about the game — only about the place.
 
 ---
 

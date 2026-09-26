@@ -1187,3 +1187,67 @@ first, and finding out second, is the expensive order.
 knew how the fight was going" or "Conditions carried it".
 
 **Status:** ⏸️ Declined for now, not closed.
+
+---
+
+## Lean Facets v1.0 (2026-09-25)
+
+The owner judged v0.3 "nearly as complicated [as d20] just to be different" and
+opened a full overhaul toward early-D&D simplicity with MM-driven variety,
+keeping the Facets as parents of classes (Morrowind-style, custom classes
+allowed). BRIEF: `docs/BRIEF_lean_facets.md`; DESIGN: `docs/DESIGN_lean_facets.md`.
+The owner's `/goal` of 2026-09-25 ("implement a first pass of this, with a pin on
+the repo so we can revert if this fails to impress") adopts every BRIEF §9
+recommendation for the first pass. **Revert pin: git tag `pre-lean-facets`.**
+Everything below is first-pass status: decided for building, reversible by the pin.
+
+### L1 — The overhaul proceeds on `feat/lean-facets`, pinned at `pre-lean-facets`
+**Decision:** v0.3's mechanics are salvage, not canon. Canon (Shattered Origin,
+the cast, Mordai's scar, the traditions, Val'loh, Oraga Night's story) is kept.
+
+### L2 — Enemies roll their attacks in the open *(supersedes "NPCs never roll" for combat)*
+**Decision:** The app rolls 2d6 + the foe's attack bonus; 10+ hard hit, 7–9 hit,
+6− miss. Outside combat NPCs still never roll against players.
+**Why:** familiarity to the target audience, table drama, foes that visibly try
+and fail, variance spread off the player; the app removes the MM-load cost that
+justified the old rule. Reasoning in BRIEF §4.6a; `research/dice_system_analysis.md`
+§"NPCs Never Roll" is overridden for combat attacks only. No survey evidence
+either way; A/B at the first human table.
+
+### L3 — Hit points and damage dice *(supersedes D26, Resolve, Conditions-as-HP)*
+**Decision:** HP is grit for everyone; weapons roll damage; armor subtracts. At
+0 HP a Wound and a Hold On roll; the death choice is kept.
+**Why:** DW2's round trip back to HP; Shadowdark; the fun evidence that HP,
+damage dice and levels each serve a measured motive (RESEARCH_lean_fun_evidence §2).
+
+### L4 — Three stats: Body, Mind, Soul *(supersedes nine Minor + three Major attributes)*
+
+### L5 — Magic is paid in Fatigue that fills inventory slots *(supersedes D23, D17)*
+**Why:** one attrition track shared with gear and Wounds; Whitehack's evidence
+that HP/slot-cost casters are not stronger than others.
+
+### L6 — Signature workings replace domain types; breadth is the Wider Domain talent *(supersedes Focused/Standard/Prismatic, Second Domain, Ascendant Domain)*
+
+### L7 — Inventory slots unify gear, Wounds and Fatigue *(supersedes P4 armor budget, the Endurance Pool, Tier-1 Conditions)*
+
+### L8 — Levels 1–10, called by the MM with session-end prompts *(supersedes skills, marks, skill points, Facet levels, D16 caps, Major Advancement, career advances)*
+**Why:** players prefer MM-called levels ~3:1; use-based marks rewarded rolling
+(Morrowind's known flaw) against III.1's "roll less".
+
+### L9 — Facets own the numbers; classes own words, kit and picks; 12 presets *(supersedes Techniques and Backgrounds-as-build)*
+**Presets:** Warrior, Scout, Guardian, Brawler · Thaumaturge, Investigator,
+Physician, Tactician · Invoker, Speaker, Wanderer, Captain. Custom classes use the
+same menus; off-Facet talents need a teacher found in play.
+
+### L10 — Relics are usable by anyone and never make a character a caster; Body has no magic
+
+### L11 — The Scars table is in (used by the death choice)
+
+### L12 — Generator tables ship setting-neutral; no new Shattered Origin names
+
+### L13 — Build on `feat/full-form-magic` (contains PR #30 and #31); `fix/engine-housekeeping` is abandoned
+
+### L14 — A gifted lineage gives a gift knack and, optionally, Minor-only workings in one domain of the player's choice *(supersedes D18/D24 formalization mechanics; keeps D24's player choice)*
+
+**Status (all L-rulings):** ✅ Adopted for the first pass; revisit after the first
+human session (gate G0).

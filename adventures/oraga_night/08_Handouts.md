@@ -163,7 +163,7 @@ Everything in the last column is a thing a table can actually reach.*
 | **S1** | Mv II–IV | The seating feud boils over in B3 — a thrown cup, a circle forming | **Bench**, 4 seg. Advances per exchange still swinging, and on any 6−. Full: honor guard fills the galleries for a Movement; one agenda door shuts |
 | — | Mv III | A footman in ill-fitting livery counting the gallery guards (B7) | No clock. Follow or brace the scout — this is a lead, not a fight |
 | **S2** | Mv V | Figures with rope and sacking in the dark service corridors | **Noise**, 4 seg., *shared*. Advances on any 6− and any bare steel. Full: guards arrive and **both sides lose** |
-| **S3** | Mv VII | The outer gate barred from the far side, and grey coats behind it | **Fire**, 4 seg. Advances on every partial or failure near the gate, and once per exchange the gate stays shut. Full: the fire reaches the Crystal Court and every exchange after costs the crowd |
+| **S3** | Mv VII | The outer gate barred from the far side, and grey coats behind it | **Fire**, 4 seg. Advances on every 7–9 or 6− near the gate, and once per exchange the gate stays shut. Full: the fire reaches the Crystal Court and every exchange after costs the crowd |
 | **S5** | Mv VI–VII | Looters working the gallery (B7) and the fallen (B3) | No clock. A branch of S3's night |
 | **S4** | Any | Players cross the house — heist gone loud, east wing forced | No clock. Detain-and-expel, 2–3 exchanges, outs visible from the first |
 
@@ -171,23 +171,26 @@ Everything in the last column is a thing a table can actually reach.*
 
 **Trigger:** mid-speech, on the dais, as the promised announcement begins.
 **Assignments:** Wept → Raunu (B2 dais). Radiant → Veier (B9 → private stair →
-B5: **the Crossing**, where Vell meets it — crossfire rules, Ch. V). Hollow →
+B5: **the Crossing**, where Vell meets it — the crossfire hazard, Ch. V: avoid
+roll, 10+ clear / 7–9 d4 or lose an action / 6− d8 or the ground gets worse). Hollow →
 main doors (B2), herding. Vell → service passages → garden stair → river gate (B5).
 
-**You cannot beat them:** Resolve 0 ≠ kill — it stops indulging, removes the
-obstacle (Tier 2, out of scene), resumes; Resolve resets. Force buys time; only
-ward-fire, the leash, and Fractures change outcomes.
+**You cannot beat them:** 0 HP ≠ kill — it stops indulging, puts the attacker
+through a wall (0 HP, out of scene, Hold On no worse than 7–9), steps into
+shadow, returns at full HP. Force buys time; only ward-fire, the leash, and
+Fractures change outcomes.
 
 **The palace fights back:** barriers seal corridors; light floods stairwells; ward
 over huddled guests. Agenda-5 player reads wards at Standard, others Hard.
 
-**Crystals near an Uninvited:** trigger only on Luck (Standard); 6− = dark.
+**Crystals near an Uninvited:** a curio released works only on Soul (Standard);
+6− = dark, and spent.
 
 **Fractures (Ch. V — tell-table there):** Wept = sorrow (pages, chapel rite,
 cradle-song, "my daughter") · Radiant = devotion (antique blessing, "whom do you
 serve?"; deny the congregation or plant the doubt — guilt slows it; it cannot
 be turned) · Hollow = despair (exits, flat answers; sincerity, not ferocity).
-Soul action; 1 witnessed tell = Hard, 2+ = Standard; once each.
+Soul roll; 1 witnessed tell = Hard, 2+ = Standard; once each.
 
 **The leash:** ~half an hour of story. Late = faster, sloppier, more human. Ring
 the last bell when the table needs the end.

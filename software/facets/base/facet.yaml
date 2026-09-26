@@ -570,7 +570,7 @@ talents:
     use: passive
     text: >
       You may keep up to two retainers, loyal hirelings who follow you into
-      danger. Their morale uses your Soul.
+      danger. Their morale is 7 + your Soul.
     improved: "Up to four retainers, and theirs never breaks while you are standing."
     normal: "Hirelings are NPCs with their own morale."
 
@@ -1029,21 +1029,21 @@ combat:
 # ---------------------------------------------------------------------------
 monsters:
   level_table:
-    - {level: 1,  hp: 8,  damage: 3, attack: 1}
-    - {level: 2,  hp: 11, damage: 3, attack: 1}
-    - {level: 3,  hp: 14, damage: 4, attack: 2}
-    - {level: 4,  hp: 17, damage: 4, attack: 2}
-    - {level: 5,  hp: 20, damage: 5, attack: 2}
-    - {level: 6,  hp: 23, damage: 5, attack: 3}
-    - {level: 7,  hp: 26, damage: 6, attack: 3}
-    - {level: 8,  hp: 29, damage: 6, attack: 3}
-    - {level: 9,  hp: 32, damage: 7, attack: 4}
-    - {level: 10, hp: 35, damage: 7, attack: 4}
+    - {level: 1,  hp: 8, damage: 4, attack: 1}
+    - {level: 2,  hp: 11, damage: 5, attack: 1}
+    - {level: 3,  hp: 14, damage: 6, attack: 2}
+    - {level: 4,  hp: 17, damage: 7, attack: 2}
+    - {level: 5,  hp: 20, damage: 8, attack: 2}
+    - {level: 6,  hp: 23, damage: 9, attack: 3}
+    - {level: 7,  hp: 26, damage: 10, attack: 3}
+    - {level: 8,  hp: 29, damage: 11, attack: 3}
+    - {level: 9,  hp: 32, damage: 12, attack: 4}
+    - {level: 10, hp: 35, damage: 13, attack: 4}
   roles:
     mook:     {hp: drops_to_any_hit, damage_mod: -1, attack_mod: -1, attacks: 1, mob: true, mob_damage_per_extra: 1, mob_damage_cap: 4}
     standard: {hp_mult: 1, damage_mod: 0, attack_mod: 0, attacks: 1}
     elite:    {hp_mult: 2, damage_mod: 0, attack_mod: 0, attacks: 2}
-    boss:     {hp_mult: 4, damage_mod: 1, attack_mod: 0, attacks: 2, bloodied_phase: true}
+    boss:     {hp_mult: 5, damage_mod: 2, attack_mod: 1, attacks: 2, bloodied_phase: true}
   morale:
     dice: "2d6"
     breaks_when: roll_exceeds_morale

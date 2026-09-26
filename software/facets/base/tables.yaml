@@ -1,0 +1,713 @@
+# Facets of Origin — the Mirror Master's Toolbox tables (Lean Facets v1.0.0)
+#
+# The data behind MM6 The Toolbox. `python -m tools.build_toolbox` renders every
+# table here into its `<!-- table: <id> -->` marker in mm_manual/MM6_The_Toolbox.md;
+# never hand-edit the rendered copy. The procedures that use these tables are
+# written in MM6's prose; this file only holds the entries.
+#
+# Rules for every table (INV-24):
+#   - `die` is one of 1d6, 1d8, 1d12, 1d20, 2d6, d66.
+#   - The entries cover every result of the die exactly once. Ranges are "a-b";
+#     d66 rolls are "11".."66" (tens die first, ones die second, each 1-6).
+#   - Every entry is original, one line, and playable as written.
+#   - Setting-neutral (ruling L12): no Shattered Origin names, places or peoples.
+#     A setting Facet may ship its own tables beside these.
+#   - A result is a prompt, not a verdict. The MM may reroll, defer or ignore
+#     any result that fights the fiction.
+
+tables:
+
+  # -------------------------------------------------------------------------
+  # Social: reaction
+  # -------------------------------------------------------------------------
+  - id: reaction
+    name: "Reaction"
+    die: "2d6"
+    pillar: social
+    use: "When the party meets someone whose attitude the fiction hasn't fixed."
+    entries:
+      - {roll: "2-4", text: "Hostile. They attack, drive the party off or raise the alarm, unless someone gives them a very good reason in the next breath."}
+      - {roll: "5-6", text: "Wary. They keep their distance and a hand near a weapon; they want the party gone and will say so."}
+      - {roll: "7-9", text: "Uncertain. They'll talk, but they want something first; take it from Reaction Wants or from their card."}
+      - {roll: "10-11", text: "Open. Willing to talk, trade or swap news, and curious about who the party are."}
+      - {roll: "12", text: "Friendly. Glad of the company; they offer help, a warning or a favor before anyone asks."}
+
+  - id: reaction_wants
+    name: "Reaction Wants"
+    die: "d66"
+    pillar: social
+    use: "On an uncertain reaction, or any time you need to know what someone wants right now."
+    entries:
+      - {roll: "11", text: "To be left alone to finish what they're doing."}
+      - {roll: "12", text: "Food, and they aren't proud about how they get it."}
+      - {roll: "13", text: "Directions out of here; they're lost and won't admit it."}
+      - {roll: "14", text: "Someone to blame for the thing that just went wrong."}
+      - {roll: "15", text: "To sell something that isn't theirs to sell."}
+      - {roll: "16", text: "A witness who'll swear they were somewhere else last night."}
+      - {roll: "21", text: "News from wherever the party came from."}
+      - {roll: "22", text: "Help carrying something heavier than it looks."}
+      - {roll: "23", text: "To know who sent the party, before anything else is said."}
+      - {roll: "24", text: "To get past a gate, a wall or a toll without being counted."}
+      - {roll: "25", text: "A healer, or anyone willing to pretend to be one."}
+      - {roll: "26", text: "Someone to carry a message to a person they can't face."}
+      - {roll: "31", text: "Coin, and they'll do a small job to earn it."}
+      - {roll: "32", text: "To be taken seriously by people who never have."}
+      - {roll: "33", text: "To win an argument that has been going on for an hour."}
+      - {roll: "34", text: "To find an animal that ran off: a goat, a dog, a hawk that won't come down."}
+      - {roll: "35", text: "Revenge on someone the party may already have met."}
+      - {roll: "36", text: "A drink, and someone to listen while they have it."}
+      - {roll: "41", text: "To keep a secret they are visibly bad at keeping."}
+      - {roll: "42", text: "To trade a rumor for a rumor."}
+      - {roll: "43", text: "Protection until morning."}
+      - {roll: "44", text: "To steer the party away from one particular door."}
+      - {roll: "45", text: "A second opinion on something odd they found."}
+      - {roll: "46", text: "To join the party, for reasons they'll explain later."}
+      - {roll: "51", text: "To pay off a debt before the lender arrives."}
+      - {roll: "52", text: "To watch the party fail, so they can say they told everyone."}
+      - {roll: "53", text: "The name of whoever leads the party, and they'll remember it."}
+      - {roll: "54", text: "To be let out of a promise they made."}
+      - {roll: "55", text: "Proof that the thing they saw was real."}
+      - {roll: "56", text: "Someone to hold their place while they fetch something."}
+      - {roll: "61", text: "To recruit the party into a scheme they are very excited about."}
+      - {roll: "62", text: "To give away something they've become afraid of."}
+      - {roll: "63", text: "Their tools back from whoever borrowed them."}
+      - {roll: "64", text: "To cross a name off a list, and one of the party's names is on it."}
+      - {roll: "65", text: "To be home before dark."}
+      - {roll: "66", text: "To tell someone, anyone, what really happened."}
+
+  # -------------------------------------------------------------------------
+  # Exploration: the Pressure die
+  # -------------------------------------------------------------------------
+  - id: pressure_generic
+    name: "Pressure Die"
+    die: "1d6"
+    pillar: explore
+    use: "Once per exploration turn, once per journey leg, and on a breather taken in danger."
+    entries:
+      - {roll: "1", text: "Encounter. Something arrives or is found; take it from the site's own list, or build one."}
+      - {roll: "2", text: "Sign. Evidence of what's coming: tracks, a noise, a smell, a fire still warm. The thing it points to is real."}
+      - {roll: "3", text: "Local hazard. The place itself turns: its own hazard, or water rising, a floor giving, a light failing."}
+      - {roll: "4", text: "Cost. Something runs down: a usage die is rolled, time slips away, or a favor or supply runs thin."}
+      - {roll: "5", text: "Opportunity. A lucky find, a shortcut, a vantage, or someone who needs help and could help back."}
+      - {roll: "6", text: "Quiet. Nothing troubles the party; give them one detail worth noticing."}
+
+  - id: pressure_underground
+    name: "Pressure Die: Underground"
+    die: "1d6"
+    pillar: explore
+    use: "The Pressure die in caves, cellars, mines, tombs and anywhere else without a sky."
+    entries:
+      - {roll: "1", text: "Encounter. Something that lives in the dark finds the party's light before they find it."}
+      - {roll: "2", text: "Sign. Fresh scratches at knee height, and a draft that wasn't there a minute ago."}
+      - {roll: "3", text: "Local hazard. The passage settles, grit pours down, and the way back is narrower than it was."}
+      - {roll: "4", text: "Cost. The damp gets into everything; roll the usage die for the party's light."}
+      - {roll: "5", text: "Opportunity. An old cache, a side passage nobody sealed, or a chalk sign left by someone who came before."}
+      - {roll: "6", text: "Quiet. Only dripping water; the party can hear their own breathing."}
+
+  - id: pressure_wild
+    name: "Pressure Die: Wild"
+    die: "1d6"
+    pillar: explore
+    use: "The Pressure die on the road, in forest, marsh, hill and anywhere between settlements."
+    entries:
+      - {roll: "1", text: "Encounter. Something on the trail, hunting or being hunted."}
+      - {roll: "2", text: "Sign. A carcass picked clean, the birds gone quiet, or smoke on the far ridge."}
+      - {roll: "3", text: "Local hazard. The weather turns, a ford rises, or the ground ahead isn't what the map promised."}
+      - {roll: "4", text: "Cost. A strap snaps, a boot splits, or the day runs short; roll the usage die for rations."}
+      - {roll: "5", text: "Opportunity. Clean water, a sheltered hollow, a game trail going the right way, or a traveler with news."}
+      - {roll: "6", text: "Quiet. Good walking; the land shows the party something worth stopping for."}
+
+  - id: pressure_settlement
+    name: "Pressure Die: Settlement"
+    die: "1d6"
+    pillar: explore
+    use: "The Pressure die in towns and cities, when the party is moving through streets with a purpose."
+    entries:
+      - {roll: "1", text: "Encounter. Someone with authority, or a grudge, picks the party out of the crowd."}
+      - {roll: "2", text: "Sign. Notices on a wall, whispers, a shutter closed as the party passes; someone knows they're here."}
+      - {roll: "3", text: "Local hazard. A fire, a bolting cart, a riot starting two streets over, a collapse in the market."}
+      - {roll: "4", text: "Cost. A toll, a fee, a bribe, a pocket picked, or the inn is full and its price is not."}
+      - {roll: "5", text: "Opportunity. A useful stranger, an overheard secret, a bargain, or a door left unlocked."}
+      - {roll: "6", text: "Quiet. The town goes about its business, and someone offers the party a small kindness."}
+
+  - id: pressure_occasion
+    name: "Pressure Die: Occasion"
+    die: "1d6"
+    pillar: explore
+    use: "The Pressure die at a feast, court, wedding, market day or any gathering where the danger is people."
+    entries:
+      - {roll: "1", text: "Encounter. A rival arrives, dressed to be noticed, and makes straight for the party."}
+      - {roll: "2", text: "Sign. Two guests stop talking as the party approaches; a servant hurries off with a note."}
+      - {roll: "3", text: "Local hazard. A scene breaks out: a spilled drink, a public accusation, a duel proposed."}
+      - {roll: "4", text: "Cost. Manners demand something: a gift, a dance, an apology, an hour of listening."}
+      - {roll: "5", text: "Opportunity. Someone important is alone for a moment and in the mood to talk."}
+      - {roll: "6", text: "Quiet. Music, food and gossip; the party may choose whom to approach."}
+
+  # -------------------------------------------------------------------------
+  # Moves and complications
+  # -------------------------------------------------------------------------
+  - id: trouble
+    name: "Trouble"
+    die: "1d6"
+    pillar: oracle
+    use: "When a roll comes up 6- and you need a move now. The category is a prompt; say the consequence, never the category."
+    entries:
+      - {roll: "1", text: "Cost. Something is spent, broken or used up: a supply, a favor, an opportunity."}
+      - {roll: "2", text: "Position. The character ends up somewhere worse: cornered, cut off, or committed to a course."}
+      - {roll: "3", text: "Attention. Someone or something that wasn't looking starts looking."}
+      - {roll: "4", text: "Gear. An item fails, jams or is lost at the worst moment; recoverable later, but not now."}
+      - {roll: "5", text: "Harm. The danger touches them: damage from whatever threatens them, or a hurt that slows them down."}
+      - {roll: "6", text: "Revelation. New information arrives, and it makes everything harder."}
+
+  - id: complications_fight
+    name: "Fight Complications"
+    die: "d66"
+    pillar: fight
+    use: "A cost for a 7-9 in a fight, or a move when an attack comes up 6-."
+    entries:
+      - {roll: "11", text: "Your weapon sticks in a shield, a door or a foe; freeing it is your next action."}
+      - {roll: "12", text: "You're driven back a step, onto worse footing."}
+      - {roll: "13", text: "A second foe turns toward you."}
+      - {roll: "14", text: "A light goes out; the next exchange is fought half-blind."}
+      - {roll: "15", text: "Something falls from your pack and lands between you and them."}
+      - {roll: "16", text: "An ally has to give ground to stay out of your swing."}
+      - {roll: "21", text: "The noise carries; more are coming, and they'll be here in an exchange or two."}
+      - {roll: "22", text: "The foe gets a grip on you; you're tied up with it until someone breaks the hold."}
+      - {roll: "23", text: "Your shield strap tears; the shield is useless until the fight ends."}
+      - {roll: "24", text: "You overreach: you're exposed, exactly as if you'd rolled 7-9."}
+      - {roll: "25", text: "The foe backs toward something it wants: a lever, a hostage, a door."}
+      - {roll: "26", text: "Smoke, dust or spray fills the air; ranged attacks are Hard this exchange."}
+      - {roll: "31", text: "A crowd, a table or a closing gate cuts you off from the others."}
+      - {roll: "32", text: "A floor gives or a railing splinters, and someone is left hanging."}
+      - {roll: "33", text: "A bystander screams, bolts, or blunders into the middle of it."}
+      - {roll: "34", text: "The foes' leader shouts an order, and the fight changes shape."}
+      - {roll: "35", text: "Your ammunition, torch or tool is used up faster; its usage die steps down now."}
+      - {roll: "36", text: "You win the moment and lose sight of the one foe that mattered most."}
+      - {roll: "41", text: "A foe breaks off to go after whoever looks weakest."}
+      - {roll: "42", text: "Fire catches on something that will burn for a while."}
+      - {roll: "43", text: "Your weapon is knocked away; it's within reach, but not in your hand."}
+      - {roll: "44", text: "An exit is blocked, or a new one opens where nobody wanted one."}
+      - {roll: "45", text: "The foe sees through the trick; the same stunt won't work on it twice."}
+      - {roll: "46", text: "A glancing knock gets through: take 1 damage."}
+      - {roll: "51", text: "A foe you thought was finished gets back up at 1 HP."}
+      - {roll: "52", text: "A foe begs for mercy at the exact moment stopping costs you most."}
+      - {roll: "53", text: "Something valuable gets broken in the scuffle."}
+      - {roll: "54", text: "The foe puts its back to a wall; stunts to push or trip it won't work there."}
+      - {roll: "55", text: "Someone outside the fight arrives to watch, and they'll remember faces."}
+      - {roll: "56", text: "The foe snatches something of yours and runs with it."}
+      - {roll: "61", text: "The foe mocks you, its friends laugh, and from now on it comes for you first."}
+      - {roll: "62", text: "Blood, ice or spilled oil takes your feet; you're on the ground."}
+      - {roll: "63", text: "The foe pulls back into cover; reaching it will take an action."}
+      - {roll: "64", text: "One more Mook arrives at the door, on their side."}
+      - {roll: "65", text: "The fight spills somewhere worse: a street, a kitchen, a stair."}
+      - {roll: "66", text: "The foe calls out your name, and now everyone here knows who you are."}
+
+  - id: complications_explore
+    name: "Exploration Complications"
+    die: "d66"
+    pillar: explore
+    use: "A cost for a 7-9 while searching, climbing, travelling or poking at a place, or a move on a 6-."
+    entries:
+      - {roll: "11", text: "It takes longer than hoped; roll the Pressure die again."}
+      - {roll: "12", text: "Roll a usage die now: light, rations or rope."}
+      - {roll: "13", text: "The way back closes: a rockfall, a rising tide, a door that locked behind you."}
+      - {roll: "14", text: "You leave a trail anyone could follow."}
+      - {roll: "15", text: "Something in the pack gets soaked, crushed or tangled."}
+      - {roll: "16", text: "The route forks, and the map disagrees with both branches."}
+      - {roll: "21", text: "You're split up; one of you is on the far side of the gap."}
+      - {roll: "22", text: "You found it, but you're not the first; someone has been here recently."}
+      - {roll: "23", text: "A dropped tool rings out and echoes a long way."}
+      - {roll: "24", text: "A turned ankle or a cut hand: take 1 damage."}
+      - {roll: "25", text: "The thing you need is out of reach: on a ledge, under water, in a nest."}
+      - {roll: "26", text: "A light gutters; its usage die steps down."}
+      - {roll: "31", text: "The ground is worse than it looked; the next climb or crossing is Hard."}
+      - {roll: "32", text: "The air turns cold, smoky or foggy, and whatever caused it is getting closer."}
+      - {roll: "33", text: "An animal takes an interest in the party, and it isn't scared of them."}
+      - {roll: "34", text: "There was a carved warning here, and you've only just read it."}
+      - {roll: "35", text: "The prize is here, and heavier than it should be: 2 slots, not 1."}
+      - {roll: "36", text: "You disturb a nest, a hive or a sleeper."}
+      - {roll: "41", text: "A door opens and won't close again."}
+      - {roll: "42", text: "The shortcut turns out to be the long way round."}
+      - {roll: "43", text: "Food spoils or water fouls; roll the usage die for rations."}
+      - {roll: "44", text: "You've been seen from a distance."}
+      - {roll: "45", text: "A trap half-springs and jams, and so does the only route past it."}
+      - {roll: "46", text: "Someone's gear snags; freeing it means leaving what it's caught on."}
+      - {roll: "51", text: "You mistook one place for another; what you want is one room, or one valley, over."}
+      - {roll: "52", text: "The site's own hazard stirs; use face 3 of its Pressure die."}
+      - {roll: "53", text: "A torch sets something smoldering."}
+      - {roll: "54", text: "A lost traveler from some other expedition asks for help."}
+      - {roll: "55", text: "The map you're following was a lie, and whoever drew it is waiting to see who uses it."}
+      - {roll: "56", text: "You bring down more than you meant (stone, ice, shelving) and something is buried under it."}
+      - {roll: "61", text: "Night falls sooner than planned."}
+      - {roll: "62", text: "The way narrows to single file, and whoever goes first goes alone."}
+      - {roll: "63", text: "An old camp: whoever left it left in a hurry and left something behind."}
+      - {roll: "64", text: "The echo gives away how many of you there are."}
+      - {roll: "65", text: "Something behind you has started following at a distance."}
+      - {roll: "66", text: "The place isn't as you left it: something has been moved while your backs were turned."}
+
+  - id: complications_social
+    name: "Social Complications"
+    die: "d66"
+    pillar: social
+    use: "A cost for a 7-9 when persuading, bargaining, lying or asking, or a move on a 6-."
+    entries:
+      - {roll: "11", text: "They know you needed it, and they'll price it that way next time."}
+      - {roll: "12", text: "You get it on credit: a favor owed, unnamed, callable at any time."}
+      - {roll: "13", text: "Someone who shouldn't have heard, did."}
+      - {roll: "14", text: "You get the part that costs them least, and not the rest."}
+      - {roll: "15", text: "It lands too well with the wrong person, who acts on it tonight."}
+      - {roll: "16", text: "It's written down somewhere that other people read."}
+      - {roll: "21", text: "They agree, and mean something different by it."}
+      - {roll: "22", text: "They'll help if one of you stays behind as surety."}
+      - {roll: "23", text: "They want a token: something one of you is carrying."}
+      - {roll: "24", text: "Their superior has to approve it, and their superior is in the room."}
+      - {roll: "25", text: "They tell someone else why you asked."}
+      - {roll: "26", text: "They take offense on behalf of somebody who isn't here."}
+      - {roll: "31", text: "You made a promise in the heat of it, and it's due."}
+      - {roll: "32", text: "A rival hears you asking and asks louder."}
+      - {roll: "33", text: "They want your name, your real one."}
+      - {roll: "34", text: "They'll do it, after you do something for them first."}
+      - {roll: "35", text: "Your story has to hold up now; someone is going to check it."}
+      - {roll: "36", text: "They'll only deal with one of you, and it's the one you'd least choose."}
+      - {roll: "41", text: "They believed you completely, and now they want to follow you."}
+      - {roll: "42", text: "The price goes up a step: Cheap to Fair, Fair to Costly."}
+      - {roll: "43", text: "They ask a question back, and the true answer hurts."}
+      - {roll: "44", text: "You got the truth, and it's worse than the lie you expected."}
+      - {roll: "45", text: "Their friend doesn't like you, and their friend is bigger than you."}
+      - {roll: "46", text: "They agree loudly, in public, and now everyone knows you're involved."}
+      - {roll: "51", text: "They want to come along."}
+      - {roll: "52", text: "They've mistaken one of you for someone else; it helps, for now."}
+      - {roll: "53", text: "A small insult slipped out, and it'll be remembered."}
+      - {roll: "54", text: "They trade it for one of your secrets."}
+      - {roll: "55", text: "It costs you an evening: a dinner, a game, a long story, and you don't have the time."}
+      - {roll: "56", text: "They give you what you asked for, and a warning you didn't want."}
+      - {roll: "61", text: "They'll help, but they're terrible at keeping quiet about it."}
+      - {roll: "62", text: "The deal holds until sundown, and then it's renegotiated."}
+      - {roll: "63", text: "Someone nearby recognized a word you used."}
+      - {roll: "64", text: "Winning embarrassed someone important."}
+      - {roll: "65", text: "They're relieved you asked, which ought to worry you."}
+      - {roll: "66", text: "It went so well they want you to meet their employer."}
+
+  # -------------------------------------------------------------------------
+  # Magic
+  # -------------------------------------------------------------------------
+  - id: magic_complications
+    name: "Magic Complications"
+    die: "1d12"
+    pillar: magic
+    use: "A working rolls 7-9: it works. Roll twice (reroll a match) and the caster picks which cost to pay."
+    entries:
+      - {roll: "1", text: "It spills over: the effect reaches further than you meant, and touches something you didn't aim at."}
+      - {roll: "2", text: "It's loud: light, sound or smell tells everyone nearby what you just did."}
+      - {roll: "3", text: "It leaves a trace (a scorch, a frost, a sigil) that anyone learned can read back to you."}
+      - {roll: "4", text: "It takes more out of you: take 1 more Fatigue."}
+      - {roll: "5", text: "It's brief: the effect ends when this exchange or this minute does."}
+      - {roll: "6", text: "It needs holding: it lasts only while you stay still and do nothing else."}
+      - {roll: "7", text: "It feeds on something you carry: an item, a tool, ink, a lock of hair. It's gone."}
+      - {roll: "8", text: "It lands late, a heartbeat after something else has already happened."}
+      - {roll: "9", text: "It's noticed: something that lives close to the domain turns its attention your way."}
+      - {roll: "10", text: "It clings: until your next rest the domain shows on you as cold hands, a glow or a smell of ash."}
+      - {roll: "11", text: "It bites back: take 1 damage."}
+      - {roll: "12", text: "It isn't quite what you pictured: the MM names one detail that came out differently."}
+
+  - id: magic_mishaps
+    name: "Magic Mishaps"
+    die: "1d12"
+    pillar: magic
+    use: "A working rolls 6-. The Fatigue is spent, the Graceful Fail applies, and something from this list happens."
+    entries:
+      - {roll: "1", text: "Backlash: the working turns on you; take 1d6 damage."}
+      - {roll: "2", text: "Wrong target: it lands in full, on someone or something you didn't choose."}
+      - {roll: "3", text: "Inverted: for a moment it does the opposite of what you intended."}
+      - {roll: "4", text: "Drained: it fizzles, and you take 1 more Fatigue."}
+      - {roll: "5", text: "Beacon: everything within a long way that is attuned to the domain knows where you are."}
+      - {roll: "6", text: "Overgrown: it happens one scope larger than you asked, in a shape you don't control."}
+      - {roll: "7", text: "Echo: the working repeats itself, unasked, at the worst moment later this scene."}
+      - {roll: "8", text: "Silenced: you can't work this domain again until you've taken a breather."}
+      - {roll: "9", text: "Consumed: the working eats an item you're carrying; the MM picks which."}
+      - {roll: "10", text: "Witnessed: someone you'd rather hadn't saw it go wrong, and now knows what you are."}
+      - {roll: "11", text: "Unsealed: it tears open something that was keeping something else shut: a seal, a ward, a door."}
+      - {roll: "12", text: "Changed: the domain leaves its sign on your hair, eyes or voice until the end of the session."}
+
+  # -------------------------------------------------------------------------
+  # Body: Wounds and Scars
+  # -------------------------------------------------------------------------
+  - id: wounds
+    name: "Wounds"
+    die: "1d6"
+    pillar: body
+    use: "A character drops to 0 HP. The Wound fills a slot, and rolls that strain it are Hard."
+    entries:
+      - {roll: "1", text: "Cracked ribs. Every breath is a negotiation. Strained by running, lifting and shouting."}
+      - {roll: "2", text: "Twisted knee. It folds without warning. Strained by running, climbing and jumping."}
+      - {roll: "3", text: "Split brow. Blood keeps running into one eye. Strained by aiming, spotting and reading."}
+      - {roll: "4", text: "Wrenched shoulder. The arm answers slowly. Strained by swinging, climbing and carrying."}
+      - {roll: "5", text: "Rung head. The world lags half a beat behind. Strained by quick thinking, remembering and casting."}
+      - {roll: "6", text: "Torn hand. The grip won't close properly. Strained by fine work, holding on and anything held in that hand."}
+
+  - id: scars
+    name: "Scars"
+    die: "1d12"
+    pillar: body
+    use: "A character takes the death choice and lives. The Scar is permanent; it changes what the fiction allows."
+    entries:
+      - {roll: "1", text: "A limp. You'll get there, but you'll never sprint again."}
+      - {roll: "2", text: "A shoulder that set wrong. There is one thing you will never be able to lift again."}
+      - {roll: "3", text: "A lost eye. Distance and depth are educated guesses now."}
+      - {roll: "4", text: "A ruined voice. You speak in a rasp and can no longer shout or sing."}
+      - {roll: "5", text: "Missing fingers. Two gone from one hand; fine work takes you twice as long."}
+      - {roll: "6", text: "A face scar. Strangers remember you, whether you want them to or not."}
+      - {roll: "7", text: "A shaking hand. It steadies with time, but never when you're in a hurry."}
+      - {roll: "8", text: "Dulled hearing. One ear rings for good; whispers on that side are lost to you."}
+      - {roll: "9", text: "Burned skin. Heat and cold both find you before they find anyone else."}
+      - {roll: "10", text: "A weak lung. Long climbs, long swims and long shouts leave you gasping."}
+      - {roll: "11", text: "Night terrors. You sleep light and wake at the smallest sound."}
+      - {roll: "12", text: "A lost memory. A year of your life, or one face you loved, is simply gone."}
+
+  # -------------------------------------------------------------------------
+  # Treasure: trinkets, curios, relics
+  # -------------------------------------------------------------------------
+  - id: trinkets
+    name: "Trinkets"
+    die: "d66"
+    pillar: treasure
+    use: "Whenever a pocket, a drawer or a body is searched. Flavor only; a trinket does nothing but exist."
+    entries:
+      - {roll: "11", text: "A brass button stamped with a crest nobody remembers."}
+      - {roll: "12", text: "A sealed letter addressed to 'whoever gets to the end of the road'."}
+      - {roll: "13", text: "A wooden whistle that plays two notes at once."}
+      - {roll: "14", text: "Half a map, torn neatly along a river."}
+      - {roll: "15", text: "A toy knight whose head has been glued on backward."}
+      - {roll: "16", text: "A tin of very old, very good tea."}
+      - {roll: "21", text: "A ring of keys, none of which fits anything nearby."}
+      - {roll: "22", text: "A pressed flower of a kind that doesn't grow here."}
+      - {roll: "23", text: "A die with seven pips on one face."}
+      - {roll: "24", text: "A blue glass eye in a velvet pouch."}
+      - {roll: "25", text: "A soup recipe, annotated furiously in three different hands."}
+      - {roll: "26", text: "A lock of hair tied with red thread."}
+      - {roll: "31", text: "A tooth, far too large, drilled to hang on a cord."}
+      - {roll: "32", text: "A tiny portrait of a stern woman holding a cat."}
+      - {roll: "33", text: "A compass with the needle painted on."}
+      - {roll: "34", text: "A pawn ticket for something expensive."}
+      - {roll: "35", text: "A spoon engraved 'for good behavior'."}
+      - {roll: "36", text: "A small bell with no clapper."}
+      - {roll: "41", text: "An unfinished love poem with the rhymes circled."}
+      - {roll: "42", text: "A coin worn so smooth the face on it could be anyone."}
+      - {roll: "43", text: "A fish carved from bone."}
+      - {roll: "44", text: "A bag of marbles, one of them chipped."}
+      - {roll: "45", text: "A wax seal with no letter under it."}
+      - {roll: "46", text: "A list of names, three of them crossed out."}
+      - {roll: "51", text: "A clay pipe that still smells of cherries."}
+      - {roll: "52", text: "A pair of dice, loaded, badly."}
+      - {roll: "53", text: "A needle case holding one needle and a very small knife."}
+      - {roll: "54", text: "An IOU for twelve chickens."}
+      - {roll: "55", text: "A single embroidered glove for a left hand."}
+      - {roll: "56", text: "A playbill for a show that closed after one night."}
+      - {roll: "61", text: "A jar of buttons sorted by color."}
+      - {roll: "62", text: "A brass key shaped like a bird."}
+      - {roll: "63", text: "A small, very bad painting of the sea."}
+      - {roll: "64", text: "A medal for bravery with the name scratched off."}
+      - {roll: "65", text: "A folded note that says only: 'Not this one either.'"}
+      - {roll: "66", text: "A wedding ring, engraved with two names and a date that hasn't happened yet."}
+
+  - id: curios
+    name: "Curios"
+    die: "1d20"
+    pillar: treasure
+    use: "One per hoard. Each works once and is gone; a character carries three at a time."
+    entries:
+      - {roll: "1", text: "Mender's salve, in a stoppered pot. Spread it on a hurt: restore 1d6 HP."}
+      - {roll: "2", text: "Warm-water flask. Drink it: restore 2d6 HP."}
+      - {roll: "3", text: "Bonesetter's splint. Bind it on through a breather: clear one Wound."}
+      - {roll: "4", text: "Sleepless draught. Drink it: clear up to 2 Fatigue."}
+      - {roll: "5", text: "Lucky tooth. Snap it before a roll: add a d6 and keep the best two."}
+      - {roll: "6", text: "Dust-fall flask. Shatter it at the start of an exchange: enemy attacks this exchange are Hard."}
+      - {roll: "7", text: "Thunder pellet. Throw it: every Mook in a small area drops, and every other foe there checks morale."}
+      - {roll: "8", text: "Whetstone of one edge. Rub it along a blade: that weapon's next hit deals +1d6 damage."}
+      - {roll: "9", text: "Truthful coin. Flip it and ask one yes-or-no question about what's in front of you: the MM answers truly."}
+      - {roll: "10", text: "Lodestone chip. Hold it and close your eyes: you know exactly where you are and the quickest way out."}
+      - {roll: "11", text: "Stick of oath-wax. Seal a bargain with it: whoever breaks that promise before sunrise is seen to break it."}
+      - {roll: "12", text: "Candle of hush. Light it: for one scene, no sound inside its glow carries beyond it."}
+      - {roll: "13", text: "Standing stone the size of a plum. Drop it at your feet: no attack can reach you or one ally beside you this exchange."}
+      - {roll: "14", text: "Bitter leaf. Chew it before you'd roll Hold On this scene: treat that roll as a 10+."}
+      - {roll: "15", text: "Climber's chalk. Dust your hands: your next roll to climb, catch or hang on is Easy."}
+      - {roll: "16", text: "Salt of warding. Pour a circle and name a kind of creature: until the circle breaks, that kind can't cross it."}
+      - {roll: "17", text: "Tinder that won't die. Light it: a fire that burns through rain and wind for one night."}
+      - {roll: "18", text: "Refill bottle. Tip it into your pack: step one item's usage die back up a size."}
+      - {roll: "19", text: "Honey lozenge. Suck it: your next roll to persuade, bargain or deceive is Easy."}
+      - {roll: "20", text: "Ghost-lamp oil. Burn it: for one scene you see anything hidden, invisible or disguised within the lamp's light."}
+
+  - id: relics
+    name: "Relics"
+    die: "1d20"
+    pillar: treasure
+    use: "Rare, and kept. Anyone may use a relic; its power belongs to the thing, not the bearer, and carrying one never makes anyone a caster."
+    entries:
+      - {roll: "1", text: "The Patient Lantern. Power: its light shows the way back to wherever you last slept. Quirk: it gutters out whenever someone in its light tells a lie."}
+      - {roll: "2", text: "The Sexton's Spade. Power: once per session, dig for a minute and turn up whatever was buried nearby, if anything was. Quirk: it hums, loudly, whenever you step on a grave."}
+      - {roll: "3", text: "The Courteous Knocker. Power: once per session, knock it against a door and the door opens. Quirk: it works only if you say please, and it keeps count of the times you didn't."}
+      - {roll: "4", text: "Cloak of Other Weather. Power: you're always dry and warm in it. Quirk: the weather you're avoiding follows you at a polite distance."}
+      - {roll: "5", text: "The Arguing Knife (a light weapon). Power: once per scene, a hit with it deals +1d6 damage. Quirk: it offers loud opinions on your form."}
+      - {roll: "6", text: "Bell of Last Call. Power: once per session, ring it: every foe who hears it checks morale. Quirk: it rings by itself at midnight, wherever you are."}
+      - {roll: "7", text: "The Honest Mirror. Power: once per scene, show it to someone; your next roll to persuade them is Easy. Quirk: it shows you the truth about yourself too, every time you look."}
+      - {roll: "8", text: "Ironbark Shield. Power: it's a shield (+1 armor), and once per scene it turns one hit into 1 damage. Quirk: set it down overnight and it takes root; digging it up is an hour's work."}
+      - {roll: "9", text: "The Cartographer's Thread. Power: tie one end somewhere and you always know the way back to it. Quirk: the spool never runs out, but it tangles itself around anything valuable nearby."}
+      - {roll: "10", text: "Crown of Small Kingdoms. Power: animals smaller than a cat treat you as their ruler and run small errands for you. Quirk: they bring tribute, constantly, and most of it is dead."}
+      - {roll: "11", text: "The Hospitable Kettle. Power: anyone who drinks tea from it with you is Open toward you, at worst, until morning. Quirk: it won't boil while anyone at the fire is lying."}
+      - {roll: "12", text: "The Brass Owl. Power: set it on watch and the party can't be surprised while it watches. Quirk: it also wakes everyone for every real owl."}
+      - {roll: "13", text: "Glove of the Second Hand. Power: once per session, reach for something within a few paces and it's in your hand. Quirk: now and then it takes things by itself, mostly from friends."}
+      - {roll: "14", text: "Boots of the Long Road. Power: you can walk all day and all night without tiring. Quirk: they hate standing still, and sitting down in them is misery."}
+      - {roll: "15", text: "The Homing Coin. Power: spend it and it's back in your purse by morning. Quirk: whoever you spent it with forgets your face."}
+      - {roll: "16", text: "Mask of the Expected. Power: wearing it, you're taken for whoever the watcher expects to see. Quirk: for an hour after you take it off, nobody recognizes you, friends included."}
+      - {roll: "17", text: "The Weighing Stone. Power: hold it over food, drink or medicine and it grows heavy if the thing is poisoned. Quirk: it also grows heavy near lies about money."}
+      - {roll: "18", text: "Horn of the Ford. Power: once per session, blow it at running water and it calms long enough to cross. Quirk: every fish and ferryman for miles knows you did it."}
+      - {roll: "19", text: "The Unlit Candle. Power: once per session, light it: for one scene, every working inside its glow is one step Harder, anyone's. Quirk: it relights itself at the worst possible moment."}
+      - {roll: "20", text: "The Borrowed Chain. Power: once per scene, wrap it round your fist and your next roll to lift, break, hold or shove is Easy. Quirk: somewhere, someone suddenly feels weak and knows exactly why."}
+
+  # -------------------------------------------------------------------------
+  # NPCs
+  # -------------------------------------------------------------------------
+  - id: npc_names
+    name: "NPC Names"
+    die: "d66"
+    pillar: npc
+    use: "Someone the party talks to needs a name, now. Setting-neutral; a setting Facet may add its own lists."
+    entries:
+      - {roll: "11", text: "Ansel"}
+      - {roll: "12", text: "Bettany"}
+      - {roll: "13", text: "Corwen"}
+      - {roll: "14", text: "Dilys"}
+      - {roll: "15", text: "Emeric"}
+      - {roll: "16", text: "Fenna"}
+      - {roll: "21", text: "Garrick"}
+      - {roll: "22", text: "Hollis"}
+      - {roll: "23", text: "Ines"}
+      - {roll: "24", text: "Jory"}
+      - {roll: "25", text: "Kestrel"}
+      - {roll: "26", text: "Linnet"}
+      - {roll: "31", text: "Maddox"}
+      - {roll: "32", text: "Nell"}
+      - {roll: "33", text: "Osric"}
+      - {roll: "34", text: "Pim"}
+      - {roll: "35", text: "Quill"}
+      - {roll: "36", text: "Rosalind"}
+      - {roll: "41", text: "Sabin"}
+      - {roll: "42", text: "Tamsin"}
+      - {roll: "43", text: "Ulric"}
+      - {roll: "44", text: "Vesna"}
+      - {roll: "45", text: "Wendel"}
+      - {roll: "46", text: "Yara"}
+      - {roll: "51", text: "Aurek"}
+      - {roll: "52", text: "Brannoc"}
+      - {roll: "53", text: "Calla"}
+      - {roll: "54", text: "Dov"}
+      - {roll: "55", text: "Elspeth"}
+      - {roll: "56", text: "Florian"}
+      - {roll: "61", text: "Greta"}
+      - {roll: "62", text: "Haskel"}
+      - {roll: "63", text: "Ivo"}
+      - {roll: "64", text: "Juniper"}
+      - {roll: "65", text: "Kasimir"}
+      - {roll: "66", text: "Lark"}
+
+  - id: npc_traits
+    name: "NPC Traits"
+    die: "d66"
+    pillar: npc
+    use: "The one thing the party will remember about someone. Say it in the first sentence you describe them."
+    entries:
+      - {roll: "11", text: "Talks with their hands, and the hands are always holding something."}
+      - {roll: "12", text: "Laughs a beat too late at everything."}
+      - {roll: "13", text: "Wears far too much jewelry, all of it real."}
+      - {roll: "14", text: "Never sits with their back to a door."}
+      - {roll: "15", text: "Smells of woodsmoke and horses."}
+      - {roll: "16", text: "Corrects everyone's pronunciation, gently, every time."}
+      - {roll: "21", text: "Keeps one bandaged hand out of sight."}
+      - {roll: "22", text: "Whistles the same four notes over and over."}
+      - {roll: "23", text: "Eats constantly and neatly from a paper bag."}
+      - {roll: "24", text: "Tall, stooped, and apologetic about the ceiling."}
+      - {roll: "25", text: "Speaks in a whisper that makes everyone lean in."}
+      - {roll: "26", text: "Wears mourning colors, freshly dyed."}
+      - {roll: "31", text: "Missing a front tooth, and proud of how it happened."}
+      - {roll: "32", text: "Ink stains up to both elbows."}
+      - {roll: "33", text: "Cheerfully rude to anyone with a title."}
+      - {roll: "34", text: "Carries a small and furious dog."}
+      - {roll: "35", text: "Answers every question with a question."}
+      - {roll: "36", text: "Remembers everyone's name after hearing it once."}
+      - {roll: "41", text: "Keeps glancing at the sky."}
+      - {roll: "42", text: "Dressed for somewhere much grander than here."}
+      - {roll: "43", text: "Walks with a cane they very obviously don't need."}
+      - {roll: "44", text: "Knits through every conversation without looking down."}
+      - {roll: "45", text: "Counts coins when nervous, which is often."}
+      - {roll: "46", text: "Quotes proverbs, most of them made up on the spot."}
+      - {roll: "51", text: "Scarred knuckles and a gentle voice."}
+      - {roll: "52", text: "Always slightly damp."}
+      - {roll: "53", text: "Hums under their breath whenever they lie."}
+      - {roll: "54", text: "Wears a hat whose feather has seen better years."}
+      - {roll: "55", text: "Stares hard at anyone carrying a weapon."}
+      - {roll: "56", text: "Sneezes whenever magic is worked nearby."}
+      - {roll: "61", text: "Has an enormous laugh and uses it as a weapon."}
+      - {roll: "62", text: "Checks a small notebook before answering anything."}
+      - {roll: "63", text: "Treats the party like old friends from the first word."}
+      - {roll: "64", text: "Pauses a long time before every answer."}
+      - {roll: "65", text: "Barefoot, whatever the weather."}
+      - {roll: "66", text: "Looks exactly like someone the party has already met."}
+
+  - id: npc_wants
+    name: "NPC Wants"
+    die: "d66"
+    pillar: npc
+    use: "What someone is working toward, beyond this scene. Every NPC who comes back needs one."
+    entries:
+      - {roll: "11", text: "To buy back the family land."}
+      - {roll: "12", text: "To be named heir ahead of a sibling."}
+      - {roll: "13", text: "To leave town without anyone noticing."}
+      - {roll: "14", text: "To clear a dead friend's name."}
+      - {roll: "15", text: "To marry for love against everyone's advice."}
+      - {roll: "16", text: "To be paid what they're owed, all of it."}
+      - {roll: "21", text: "To find whoever sold them out."}
+      - {roll: "22", text: "To learn to read, without anyone finding out they can't."}
+      - {roll: "23", text: "To open a shop of their own."}
+      - {roll: "24", text: "To be forgiven by one particular person."}
+      - {roll: "25", text: "To see the sea, or the mountains, just once."}
+      - {roll: "26", text: "To keep their child out of trouble."}
+      - {roll: "31", text: "To win a contest everyone says is rigged."}
+      - {roll: "32", text: "To get a rival thrown out of their guild."}
+      - {roll: "33", text: "To publish a book that nobody wants published."}
+      - {roll: "34", text: "To pay for a sibling's cure."}
+      - {roll: "35", text: "To find a lost pet that matters more than they're letting on."}
+      - {roll: "36", text: "To retire before the next master takes over."}
+      - {roll: "41", text: "To go adventuring, like the party."}
+      - {roll: "42", text: "To get their name in the records for something, anything."}
+      - {roll: "43", text: "To sell a secret to the highest bidder."}
+      - {roll: "44", text: "To see the party gone before trouble follows them in."}
+      - {roll: "45", text: "To build something that will outlast them."}
+      - {roll: "46", text: "To bury someone properly."}
+      - {roll: "51", text: "To win back someone they lost."}
+      - {roll: "52", text: "To be kept well out of whatever the party is doing."}
+      - {roll: "53", text: "To free someone held for a debt."}
+      - {roll: "54", text: "To stop a wedding."}
+      - {roll: "55", text: "To find the place in an old story."}
+      - {roll: "56", text: "To break a bad habit, with help."}
+      - {roll: "61", text: "To get even with someone powerful."}
+      - {roll: "62", text: "To keep a promise made to the dead."}
+      - {roll: "63", text: "To hide something until spring."}
+      - {roll: "64", text: "To become someone else entirely."}
+      - {roll: "65", text: "To start a feud they'll come to regret."}
+      - {roll: "66", text: "To protect the town from something only they believe in."}
+
+  - id: npc_secrets
+    name: "NPC Secrets"
+    die: "1d20"
+    pillar: npc
+    use: "What someone isn't saying. Decide it before they speak, even if it never comes out."
+    entries:
+      - {roll: "1", text: "They owe money to someone dangerous."}
+      - {roll: "2", text: "They aren't who they say they are, and the real one is dead or missing."}
+      - {roll: "3", text: "They saw the crime and said nothing."}
+      - {roll: "4", text: "They're informing for someone: the watch, a rival, a guild."}
+      - {roll: "5", text: "They're hiding a fugitive in their home."}
+      - {roll: "6", text: "They stole the thing everyone is looking for, and regret it."}
+      - {roll: "7", text: "They're in love with someone they shouldn't be."}
+      - {roll: "8", text: "They can work a little magic, and hide it."}
+      - {roll: "9", text: "They've been paid to slow the party down."}
+      - {roll: "10", text: "They know a way in that everyone else has forgotten."}
+      - {roll: "11", text: "They're dying, and have told no one."}
+      - {roll: "12", text: "They set the fire."}
+      - {roll: "13", text: "Their famous deed was somebody else's."}
+      - {roll: "14", text: "They send money to someone the town counts as an enemy."}
+      - {roll: "15", text: "They forged the document everyone is relying on."}
+      - {roll: "16", text: "They're leaving tonight, for good."}
+      - {roll: "17", text: "Their family is not what it claims to be."}
+      - {roll: "18", text: "They know the party's employer, and don't trust them."}
+      - {roll: "19", text: "They're afraid of something in their own cellar."}
+      - {roll: "20", text: "They wrote the anonymous letter."}
+
+  # -------------------------------------------------------------------------
+  # Oracle prompts
+  # -------------------------------------------------------------------------
+  - id: oracle_actions
+    name: "Oracle Verbs"
+    die: "d66"
+    pillar: oracle
+    use: "Roll with Oracle Themes when you need an idea, not an answer: read the pair as what someone or something does next."
+    entries:
+      - {roll: "11", text: "Seek"}
+      - {roll: "12", text: "Hide"}
+      - {roll: "13", text: "Break"}
+      - {roll: "14", text: "Guard"}
+      - {roll: "15", text: "Bargain"}
+      - {roll: "16", text: "Betray"}
+      - {roll: "21", text: "Follow"}
+      - {roll: "22", text: "Summon"}
+      - {roll: "23", text: "Steal"}
+      - {roll: "24", text: "Heal"}
+      - {roll: "25", text: "Abandon"}
+      - {roll: "26", text: "Reveal"}
+      - {roll: "31", text: "Trap"}
+      - {roll: "32", text: "Warn"}
+      - {roll: "33", text: "Build"}
+      - {roll: "34", text: "Hunt"}
+      - {roll: "35", text: "Flee"}
+      - {roll: "36", text: "Bind"}
+      - {roll: "41", text: "Offer"}
+      - {roll: "42", text: "Demand"}
+      - {roll: "43", text: "Mourn"}
+      - {roll: "44", text: "Celebrate"}
+      - {roll: "45", text: "Delay"}
+      - {roll: "46", text: "Hurry"}
+      - {roll: "51", text: "Trade"}
+      - {roll: "52", text: "Spoil"}
+      - {roll: "53", text: "Rescue"}
+      - {roll: "54", text: "Lose"}
+      - {roll: "55", text: "Restore"}
+      - {roll: "56", text: "Change"}
+      - {roll: "61", text: "Watch"}
+      - {roll: "62", text: "Lure"}
+      - {roll: "63", text: "Question"}
+      - {roll: "64", text: "Refuse"}
+      - {roll: "65", text: "Promise"}
+      - {roll: "66", text: "Return"}
+
+  - id: oracle_themes
+    name: "Oracle Themes"
+    die: "d66"
+    pillar: oracle
+    use: "The second half of an oracle prompt: what the action is about."
+    entries:
+      - {roll: "11", text: "A debt"}
+      - {roll: "12", text: "A door"}
+      - {roll: "13", text: "A name"}
+      - {roll: "14", text: "The dead"}
+      - {roll: "15", text: "A child"}
+      - {roll: "16", text: "A rival"}
+      - {roll: "21", text: "Home"}
+      - {roll: "22", text: "A map"}
+      - {roll: "23", text: "Hunger"}
+      - {roll: "24", text: "An oath"}
+      - {roll: "25", text: "Fire"}
+      - {roll: "26", text: "Water"}
+      - {roll: "31", text: "A secret"}
+      - {roll: "32", text: "Power"}
+      - {roll: "33", text: "A gift"}
+      - {roll: "34", text: "A mistake"}
+      - {roll: "35", text: "Weather"}
+      - {roll: "36", text: "A crowd"}
+      - {roll: "41", text: "Money"}
+      - {roll: "42", text: "Love"}
+      - {roll: "43", text: "An old grudge"}
+      - {roll: "44", text: "The law"}
+      - {roll: "45", text: "A beast"}
+      - {roll: "46", text: "A stranger"}
+      - {roll: "51", text: "Faith"}
+      - {roll: "52", text: "A message"}
+      - {roll: "53", text: "A key"}
+      - {roll: "54", text: "Memory"}
+      - {roll: "55", text: "Trust"}
+      - {roll: "56", text: "A road"}
+      - {roll: "61", text: "The past"}
+      - {roll: "62", text: "Pride"}
+      - {roll: "63", text: "Silence"}
+      - {roll: "64", text: "A treasure"}
+      - {roll: "65", text: "An ending"}
+      - {roll: "66", text: "A beginning"}

@@ -1,35 +1,47 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: chalk_lead
 name: The Lead
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
+    version: 1.0.0
 enemy:
-  tier: named
-  attack_modifier: 2
-  armor: none
-  techniques:
-  - unmaking_run
-  special: UNMAKING RUN — once per scene, the Lead runs the full length of the road
-    the pack claims. Every chalk hound that has come apart this scene reassembles
-    behind it.
-  description: The oldest dust on the road, and the only one of the pack with a
-    colour to it — a rust-brown seam through the chalk where something bled here
-    a long time ago. It is a head taller than the others and it never runs first.
-  disposition: Patient in a way none of its pack is. It watches one full pass before
-    it commits.
-  first_target: Whoever the pack has already failed to catch.
-  triggers:
-  - Holds back through the first exchange, then joins on the second.
-  - Spends its Unmaking Run the moment three or more hounds are down.
-  morale: Withdraws down its own road at Resolve 1, and takes what is left of the
-    pack with it. It does not follow anyone off the road; it has never been off
-    the road.
-  organization: One per pack, and a pack per road.
-  notes: 'TR breakdown: offense(+2 → 4) + durability(Resolve 3) + armor(none → 0)
-    + techniques(1) = 8. Meets the Named minimum exactly.'
-  resolve: 3
-created_at: '2026-08-02T00:00:00+00:00'
-last_modified: '2026-08-02T00:00:00+00:00'
+  # v0.3: Named, durability 3, attack +2, rating 8.
+  level: 3
+  role: standard
+  armor: 0
+  morale: 7
+  weapon: Grit, and a rust-brown seam
+  wants: Whatever the pack has already failed to catch.
+  special: UNMAKING RUN — once per scene, the Lead runs the whole length of the pack's road,
+    and every chalk hound that has come apart this scene reassembles behind it.
+  when_bloodied: It stops holding back. If it has not made its Unmaking Run yet, it makes
+    it now.
+  tells: One of the pack is a head taller than the rest, with a rust-brown seam through it,
+    and it has not run yet. It is watching the pass.
+  breaks: Withdraws down its own road and takes what is left of the pack with it. It does
+    not follow anyone off the road; it has never been off the road.
+  twists:
+  - 'The seam is wet: something bled on this road last night.'
+  - It holds back through the whole fight and runs only when someone tries to leave.
+  - The road ends at a bridge that is out, and the Lead knows exactly where the drop is.
+  - Two roads cross here, and two packs are contesting the crossing.
+  - It has started running beside one carter's cart every night, and only that cart.
+  - The pack is down to the Lead and two hounds, and it runs harder than any full pack.
+  nastier: It can make the Unmaking Run twice a scene, and the hounds it reassembles attack
+    in the exchange they come back.
+  description: >-
+    The oldest dust on the road, and the only one of the pack with a colour to it — a rust-brown
+    seam through the chalk where something bled here a long time ago. It is a head taller
+    than the others and it never runs first.
+  notes: >-
+    Level 3 standard: no overrides.
+
+
+    Patient in a way none of its pack is. It holds back through the first exchange and joins
+    on the second, and it spends the Unmaking Run the moment three or more hounds are down.
+
+
+    Appears: one per pack, and a pack per road.
+  reskin_of: null

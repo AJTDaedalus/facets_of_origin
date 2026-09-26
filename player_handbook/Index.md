@@ -10,84 +10,113 @@
 
 *Defined in [III.3](III.3_Combat.md).*
 
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
+- [Appendix Character Sheet — Hit Points and Armor](Appendix_Character_Sheet.md#hit-points-and-armor)
+- [II.1 — The Numbers](II.1_Character_Creation_Overview.md#the-numbers)
+- [II.3 — Fatigue](II.3_Magic.md#fatigue)
+- [II.4 — Writing a Custom Class](II.4_Character_Creation_Facets.md#writing-a-custom-class)
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [II.4b — Signatures](II.4b_Character_Creation_Facet_Mind.md#signatures)
 - [III.3 — Armor](III.3_Combat.md#armor)
-- [III.3 — Armor and Reaction Downgrades](III.3_Combat.md#armor-and-reaction-downgrades)
-- [III.3 — Armor (your per-scene downgrade budget)](III.3_Combat.md#armor-your-per-scene-downgrade-budget)
 - [IV.1 — Armor](IV.1_Equipment.md#armor)
-- [IV.1 — Armor in the Fiction](IV.1_Equipment.md#armor-in-the-fiction)
-- [IV.1 — Armor in Play](IV.1_Equipment.md#armor-in-play)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
-- [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
-- [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
-- [MM1 — Named NPCs](../mm_manual/MM1_Encounters_and_Enemies.md#named-npcs)
-- [MM5 — Armor (PC downgrade budget)](../mm_manual/MM5_Quick_Reference.md#armor-pc-downgrade-budget)
+- [Quick Start — 5. Fill in the numbers](Quick_Start.md#5-fill-in-the-numbers)
+- [Quick Start — Combat in Five Lines](Quick_Start.md#combat-in-five-lines)
+- [MM1 — Armor and Overrides](../mm_manual/MM1_Encounters_and_Enemies.md#armor-and-overrides)
+- [MM2 — Fatigue and Rest](../mm_manual/MM2_Session_Design.md#fatigue-and-rest)
+- [MM5 — Combat (Chapter III.3; MM1)](../mm_manual/MM5_Quick_Reference.md#combat-chapter-iii3-mm1)
+- [MM5 — Monsters (MM1)](../mm_manual/MM5_Quick_Reference.md#monsters-mm1)
 
-## Ascendant Domain
+## Attack
 
-- [Appendix Magic Domains — Prismatic Soul Domains](Appendix_Magic_Domains.md#prismatic-soul-domains)
-- [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
-- [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
-- [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
+*Defined in [III.3](III.3_Combat.md).*
 
-## Attribute
-
-*Defined in [II.2](II.2_Character_Creation_Attributes.md).*
-
-- [II.2 — Deriving Your Major Attribute Modifiers](II.2_Character_Creation_Attributes.md#deriving-your-major-attribute-modifiers)
-- [II.3 — Rolling Magic](II.3_Magic.md#rolling-magic)
-- [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [II.4a — Skills of the Body](II.4a_Character_Creation_Facet_Body.md#skills-of-the-body)
-- [II.4b — Skills of the Mind](II.4b_Character_Creation_Facet_Mind.md#skills-of-the-mind)
-- [II.4c — Skills of the Soul](II.4c_Character_Creation_Facet_Soul.md#skills-of-the-soul)
-- [II.7 — Complete Skill Reference](II.7_Character_Creation_Skills.md#complete-skill-reference)
-- [II.7 — Using Skills](II.7_Character_Creation_Skills.md#using-skills)
-- [II.7 — Skill Ranks at a Glance](II.7_Character_Creation_Skills.md#skill-ranks-at-a-glance)
-- [III.1 — Attribute Modifier](III.1_Core_Resolution.md#attribute-modifier)
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — Maneuver](III.3_Combat.md#maneuver)
-- [III.3 — Parry](III.3_Combat.md#parry)
-- [IV.1 — Weapons](IV.1_Equipment.md#weapons)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [II.4a — Signatures](II.4a_Character_Creation_Facet_Body.md#signatures)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [III.1 — Contested Rolls and Group Rolls](III.1_Core_Resolution.md#contested-rolls-and-group-rolls)
+- [III.3 — Attacking](III.3_Combat.md#attacking)
+- [III.3 — When the Enemies Roll](III.3_Combat.md#when-the-enemies-roll)
+- [III.3 — Defend and Intercept](III.3_Combat.md#defend-and-intercept)
+- [III.3 — Kinds of Foe](III.3_Combat.md#kinds-of-foe)
+- [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
+- [III.3 — Other Things to Do](III.3_Combat.md#other-things-to-do)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [Quick Start — 4. Derive the three Major Attributes](Quick_Start.md#4-derive-the-three-major-attributes)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
-- [MM1 — Named NPCs](../mm_manual/MM1_Encounters_and_Enemies.md#named-npcs)
-- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
-- [MM5 — Attribute Ratings](../mm_manual/MM5_Quick_Reference.md#attribute-ratings)
+- [Quick Start — Combat in Five Lines](Quick_Start.md#combat-in-five-lines)
+- [MM1 — The Monster Card](../mm_manual/MM1_Encounters_and_Enemies.md#the-monster-card)
+- [MM1 — Roles](../mm_manual/MM1_Encounters_and_Enemies.md#roles)
+- [MM1 — Rolling in the Open](../mm_manual/MM1_Encounters_and_Enemies.md#rolling-in-the-open)
+- [MM2 — Threat Clocks](../mm_manual/MM2_Session_Design.md#threat-clocks)
+- [MM2 — The App in Session](../mm_manual/MM2_Session_Design.md#the-app-in-session)
+- [MM5 — Combat (Chapter III.3; MM1)](../mm_manual/MM5_Quick_Reference.md#combat-chapter-iii3-mm1)
+- [MM5 — Monsters (MM1)](../mm_manual/MM5_Quick_Reference.md#monsters-mm1)
+
+## Avoid
+
+*Defined in [III.1](III.1_Core_Resolution.md).*
+
+- [II.4c — Signatures](II.4c_Character_Creation_Facet_Soul.md#signatures)
+- [III.1 — Avoid](III.1_Core_Resolution.md#avoid)
+- [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
+- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
+- [MM5 — The Roll (Chapter III.1)](../mm_manual/MM5_Quick_Reference.md#the-roll-chapter-iii1)
 
 ## Background
 
 *Defined in [II.6](II.6_Character_Creation_Backgrounds.md).*
 
-- [Appendix Character Sheet — Lineage and Background](Appendix_Character_Sheet.md#lineage-and-background)
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
-- [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
-- [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
-- [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
-- [II.5 — Character Creation: Lineage](II.5_Lineage.md#character-creation-lineage)
-- [II.5 — Reading the Entries — Lineages](II.5_Lineage.md#reading-the-entries--lineages)
+- [II.4 — Knacks](II.4_Character_Creation_Facets.md#knacks)
 - [II.5 — Human](II.5_Lineage.md#human)
-- [II.6 — What Is a Background?](II.6_Character_Creation_Backgrounds.md#what-is-a-background)
-- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [II.6 — In Play: What the Background Sounds Like](II.6_Character_Creation_Backgrounds.md#in-play-what-the-background-sounds-like)
-- [II.7 — Character Creation: Skills](II.7_Character_Creation_Skills.md#character-creation-skills)
-- [II.7 — Starting Skills](II.7_Character_Creation_Skills.md#starting-skills)
+- [II.6 — What a Background Is](II.6_Character_Creation_Backgrounds.md#what-a-background-is)
+- [II.6 — Writing Your Own Background](II.6_Character_Creation_Backgrounds.md#writing-your-own-background)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
-- [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
-- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
-- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
-- [MM4 — The Player Who Disengages](../mm_manual/MM4_Running_the_Table.md#the-player-who-disengages)
-- [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
+- [Quick Start — 4. Pick a background](Quick_Start.md#4-pick-a-background)
+
+## Bloodied
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [III.3 — Bloodied](III.3_Combat.md#bloodied)
+- [MM1 — Bloodied](../mm_manual/MM1_Encounters_and_Enemies.md#bloodied)
+- [MM2 — The App in Session](../mm_manual/MM2_Session_Design.md#the-app-in-session)
+- [MM5 — Monsters (MM1)](../mm_manual/MM5_Quick_Reference.md#monsters-mm1)
+
+## Body
+
+*Defined in [II.2](II.2_Character_Creation_Stats.md).*
+
+- [Appendix Character Sheet — Slots (10 + Body)](Appendix_Character_Sheet.md#slots-10--body)
+- [II.1 — The Numbers](II.1_Character_Creation_Overview.md#the-numbers)
+- [II.2 — The Three Stats](II.2_Character_Creation_Stats.md#the-three-stats)
+- [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Stats.md#in-play-the-vanishing-of-millhaven)
+- [II.3 — Magic Outside the Traditions](II.3_Magic.md#magic-outside-the-traditions)
+- [II.3 — In Play: The Thornwall Lower Archive](II.3_Magic.md#in-play-the-thornwall-lower-archive)
+- [II.4 — The Facet Owns the Numbers](II.4_Character_Creation_Facets.md#the-facet-owns-the-numbers)
+- [II.4 — Writing a Custom Class](II.4_Character_Creation_Facets.md#writing-a-custom-class)
+- [II.4 — What Each Level Gives](II.4_Character_Creation_Facets.md#what-each-level-gives)
+- [II.4a — Character Creation: Facet of the Body](II.4a_Character_Creation_Facet_Body.md#character-creation-facet-of-the-body)
+- [II.4a — Building a Body Character](II.4a_Character_Creation_Facet_Body.md#building-a-body-character)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+- [II.6 — Suited to the Body](II.6_Character_Creation_Backgrounds.md#suited-to-the-body)
+- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
+- [III.1 — Avoid](III.1_Core_Resolution.md#avoid)
+- [III.2 — In Play: The Mill at Millhaven](III.2_Adventuring.md#in-play-the-mill-at-millhaven)
+- [III.2 — At 0 HP](III.2_Adventuring.md#at-0-hp)
+- [III.2 — In Play: The Beam](III.2_Adventuring.md#in-play-the-beam)
+- [III.3 — Attacking](III.3_Combat.md#attacking)
+- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [IV.1 — Slots](IV.1_Equipment.md#slots)
+- [IV.2 — Relics](IV.2_Treasure.md#relics)
+- [Quick Start — 3. Pick a preset class](Quick_Start.md#3-pick-a-preset-class)
+- [Quick Start — 5. Fill in the numbers](Quick_Start.md#5-fill-in-the-numbers)
+- [Quick Start — The Three Tiers in Play](Quick_Start.md#the-three-tiers-in-play)
+- [MM1 — Ending the Fight](../mm_manual/MM1_Encounters_and_Enemies.md#ending-the-fight)
+- [MM2 — In Play: The Price of a Partial Success](../mm_manual/MM2_Session_Design.md#in-play-the-price-of-a-partial-success)
+- [MM4 — In Play: Sharing the Spotlight](../mm_manual/MM4_Running_the_Table.md#in-play-sharing-the-spotlight)
+- [MM5 — 0 HP and Rest (Chapter III.2)](../mm_manual/MM5_Quick_Reference.md#0-hp-and-rest-chapter-iii2)
+- [MM6 — Loot](../mm_manual/MM6_The_Toolbox.md#loot)
 
 ## Borrowed Trouble
 
@@ -95,1011 +124,826 @@
 
 - [III.1 — Borrowed Trouble](III.1_Core_Resolution.md#borrowed-trouble)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [MM5 — Borrowed Trouble](../mm_manual/MM5_Quick_Reference.md#borrowed-trouble)
+- [MM5 — The Roll (Chapter III.1)](../mm_manual/MM5_Quick_Reference.md#the-roll-chapter-iii1)
 
 ## Boss
 
 *Defined in [III.3](III.3_Combat.md).*
 
-- [III.3 — Postures](III.3_Combat.md#postures)
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — Incoming Condition Tier](III.3_Combat.md#incoming-condition-tier)
-- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [III.3 — Enemy Attacks](III.3_Combat.md#enemy-attacks)
-- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
-- [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
-- [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
-- [MM1 — Sizing an Encounter](../mm_manual/MM1_Encounters_and_Enemies.md#sizing-an-encounter)
-- [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
-- [MM1 — Enemy TR in `.fof` Files](../mm_manual/MM1_Encounters_and_Enemies.md#enemy-tr-in-fof-files)
-- [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)
-- [MM5 — Threat Rating (TR)](../mm_manual/MM5_Quick_Reference.md#threat-rating-tr)
+- [MM1 — The Monster Card](../mm_manual/MM1_Encounters_and_Enemies.md#the-monster-card)
+- [MM1 — Roles](../mm_manual/MM1_Encounters_and_Enemies.md#roles)
+- [MM1 — Count the Threats](../mm_manual/MM1_Encounters_and_Enemies.md#count-the-threats)
+- [MM1 — Converting Creatures from Other Games](../mm_manual/MM1_Encounters_and_Enemies.md#converting-creatures-from-other-games)
+- [MM5 — Monsters (MM1)](../mm_manual/MM5_Quick_Reference.md#monsters-mm1)
 
-## Branch
+## Breather
 
-*Defined in [II.4](II.4_Character_Creation_Facets.md).*
+*Defined in [III.2](III.2_Adventuring.md).*
 
-- [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
-- [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
-- [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
-- [II.4a — Grace Branch](II.4a_Character_Creation_Facet_Body.md#grace-branch)
-- [II.4a — Iron Branch](II.4a_Character_Creation_Facet_Body.md#iron-branch)
-- [II.4b — Clarity Branch](II.4b_Character_Creation_Facet_Mind.md#clarity-branch)
-- [II.4b — Instinct Branch](II.4b_Character_Creation_Facet_Mind.md#instinct-branch)
-- [II.4b — Archive Branch](II.4b_Character_Creation_Facet_Mind.md#archive-branch)
-- [II.4c — Presence Branch](II.4c_Character_Creation_Facet_Soul.md#presence-branch)
-- [II.4c — Fortune Branch](II.4c_Character_Creation_Facet_Soul.md#fortune-branch)
-- [II.4c — Communion Branch](II.4c_Character_Creation_Facet_Soul.md#communion-branch)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [MM5 — 0 HP and Rest (Chapter III.2)](../mm_manual/MM5_Quick_Reference.md#0-hp-and-rest-chapter-iii2)
+- [MM5 — The Toolbox (MM6)](../mm_manual/MM5_Quick_Reference.md#the-toolbox-mm6)
 
-## Broken
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
-- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
-- [III.2 — When a Character Would Die](III.2_Adventuring.md#when-a-character-would-die)
-- [III.2 — In Play: The Beam](III.2_Adventuring.md#in-play-the-beam)
-- [III.3 — Tier 3: Broken](III.3_Combat.md#tier-3-broken)
-- [MM1 — Three Worked Enemy Techniques](../mm_manual/MM1_Encounters_and_Enemies.md#three-worked-enemy-techniques)
-- [MM1 — Scaling Notes](../mm_manual/MM1_Encounters_and_Enemies.md#scaling-notes)
-- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
-- [MM2 — Tone and Expectations](../mm_manual/MM2_Session_Design.md#tone-and-expectations)
-- [MM4 — Character Death Is the Player's Call](../mm_manual/MM4_Running_the_Table.md#character-death-is-the-players-call)
-- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
-
-## Career Advance
+## Class
 
 *Defined in [II.4](II.4_Character_Creation_Facets.md).*
 
-- [II.4 — Career Advances](II.4_Character_Creation_Facets.md#career-advances)
+- [II.3 — Character Creation: Magic](II.3_Magic.md#character-creation-magic)
+- [II.4 — Writing a Custom Class](II.4_Character_Creation_Facets.md#writing-a-custom-class)
+- [II.4a — Preset Classes](II.4a_Character_Creation_Facet_Body.md#preset-classes)
+- [II.4a — Warrior](II.4a_Character_Creation_Facet_Body.md#warrior)
+- [II.4a — Scout](II.4a_Character_Creation_Facet_Body.md#scout)
+- [II.4a — Guardian](II.4a_Character_Creation_Facet_Body.md#guardian)
+- [II.4a — Brawler](II.4a_Character_Creation_Facet_Body.md#brawler)
+- [II.4b — Preset Classes](II.4b_Character_Creation_Facet_Mind.md#preset-classes)
+- [II.4b — Thaumaturge](II.4b_Character_Creation_Facet_Mind.md#thaumaturge)
+- [II.4b — Investigator](II.4b_Character_Creation_Facet_Mind.md#investigator)
+- [II.4b — Physician](II.4b_Character_Creation_Facet_Mind.md#physician)
+- [II.4b — Tactician](II.4b_Character_Creation_Facet_Mind.md#tactician)
+- [II.4c — Preset Classes](II.4c_Character_Creation_Facet_Soul.md#preset-classes)
+- [II.4c — Invoker](II.4c_Character_Creation_Facet_Soul.md#invoker)
+- [II.4c — Speaker](II.4c_Character_Creation_Facet_Soul.md#speaker)
+- [II.4c — Wanderer](II.4c_Character_Creation_Facet_Soul.md#wanderer)
+- [II.4c — Captain](II.4c_Character_Creation_Facet_Soul.md#captain)
+- [II.5 — Human](II.5_Lineage.md#human)
+- [II.6 — What a Background Is](II.6_Character_Creation_Backgrounds.md#what-a-background-is)
+- [I — The Philosophy](I_Introduction.md#the-philosophy)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [MM1 — Party Strength 3 (3 fresh characters, 1 career advance each)](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-3-3-fresh-characters-1-career-advance-each)
-- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
-
-## Condition
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
-- [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
-- [III.3 — Incoming Condition Tier](III.3_Combat.md#incoming-condition-tier)
-- [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
-- [IV.1 — Weapons](IV.1_Equipment.md#weapons)
-- [IV.1 — Armor in Play](IV.1_Equipment.md#armor-in-play)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
-- [MM1 — Three Worked Enemy Techniques](../mm_manual/MM1_Encounters_and_Enemies.md#three-worked-enemy-techniques)
-- [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
-- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
-- [MM2 — Tone and Expectations](../mm_manual/MM2_Session_Design.md#tone-and-expectations)
-- [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
-- [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
-- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
+- [Quick Start — 3. Pick a preset class](Quick_Start.md#3-pick-a-preset-class)
+- [MM3 — What the Party Finds](../mm_manual/MM3_Campaign_Design.md#what-the-party-finds)
 
-## Contested Roll
+## Coin
 
-*Defined in [III.1](III.1_Core_Resolution.md).*
+*Defined in [IV.1](IV.1_Equipment.md).*
 
-- [MM5 — Common Rulings](../mm_manual/MM5_Quick_Reference.md#common-rulings)
+- [IV.1 — Coin](IV.1_Equipment.md#coin)
+- [IV.2 — Coin](IV.2_Treasure.md#coin)
+- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
+- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
+- [Quick Start — 5. Fill in the numbers](Quick_Start.md#5-fill-in-the-numbers)
+- [MM3 — What the Party Finds](../mm_manual/MM3_Campaign_Design.md#what-the-party-finds)
+- [MM3 — Making It Matter](../mm_manual/MM3_Campaign_Design.md#making-it-matter)
+- [MM5 — The Toolbox (MM6)](../mm_manual/MM5_Quick_Reference.md#the-toolbox-mm6)
+- [MM6 — Loot](../mm_manual/MM6_The_Toolbox.md#loot)
 
-## Cornered
+## Cover
 
 *Defined in [III.3](III.3_Combat.md).*
 
-- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
-- [III.3 — Tier 2 Conditions](III.3_Combat.md#tier-2-conditions)
-- [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
-- [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
-- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
-- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [III.3 — Attacking](III.3_Combat.md#attacking)
+- [III.3 — Other Things to Do](III.3_Combat.md#other-things-to-do)
+- [Quick Start — Combat in Five Lines](Quick_Start.md#combat-in-five-lines)
+- [MM5 — Combat (Chapter III.3; MM1)](../mm_manual/MM5_Quick_Reference.md#combat-chapter-iii3-mm1)
+- [MM6 — Mirror Master's Manual: The Toolbox](../mm_manual/MM6_The_Toolbox.md#mirror-masters-manual-the-toolbox)
+- [MM6 — Writing Your Own Tables](../mm_manual/MM6_The_Toolbox.md#writing-your-own-tables)
 
-## Cross-Facet
+## Curio
+
+*Defined in [IV.2](IV.2_Treasure.md).*
+
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [IV.2 — Curios](IV.2_Treasure.md#curios)
+- [MM5 — The Toolbox (MM6)](../mm_manual/MM5_Quick_Reference.md#the-toolbox-mm6)
+- [MM6 — Loot](../mm_manual/MM6_The_Toolbox.md#loot)
+
+## Custom Class
 
 *Defined in [II.4](II.4_Character_Creation_Facets.md).*
 
-- [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
-- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
-- [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
+- [II.4 — Writing a Custom Class](II.4_Character_Creation_Facets.md#writing-a-custom-class)
+- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
+
+## Damage Bonus
+
+*Defined in [II.4](II.4_Character_Creation_Facets.md).*
+
+- [II.4 — What Each Level Gives](II.4_Character_Creation_Facets.md#what-each-level-gives)
+- [III.3 — Damage](III.3_Combat.md#damage)
+- [MM5 — Combat (Chapter III.3; MM1)](../mm_manual/MM5_Quick_Reference.md#combat-chapter-iii3-mm1)
+
+## Death Choice
+
+*Defined in [III.2](III.2_Adventuring.md).*
+
+- [III.2 — The Death Choice](III.2_Adventuring.md#the-death-choice)
+- [MM4 — Character Death Is the Player's Call](../mm_manual/MM4_Running_the_Table.md#character-death-is-the-players-call)
+- [MM5 — 0 HP and Rest (Chapter III.2)](../mm_manual/MM5_Quick_Reference.md#0-hp-and-rest-chapter-iii2)
+
+## Defend
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [III.3 — Defend and Intercept](III.3_Combat.md#defend-and-intercept)
+- [Quick Start — Combat in Five Lines](Quick_Start.md#combat-in-five-lines)
+- [MM5 — Combat (Chapter III.3; MM1)](../mm_manual/MM5_Quick_Reference.md#combat-chapter-iii3-mm1)
 
 ## Difficulty
 
 *Defined in [III.1](III.1_Core_Resolution.md).*
 
-- [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
-- [II.2 — How Attributes Work in Play](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play)
-- [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Attributes.md#in-play-the-vanishing-of-millhaven)
-- [II.3 — Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope)
-- [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
-- [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
-- [II.4a — Grace Branch](II.4a_Character_Creation_Facet_Body.md#grace-branch)
-- [II.4a — Iron Branch](II.4a_Character_Creation_Facet_Body.md#iron-branch)
-- [II.4b — Tier 3 *(requires one Clarity Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-clarity-tier-2)
-- [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [II.6 — Magic and Backgrounds](II.6_Character_Creation_Backgrounds.md#magic-and-backgrounds)
+- [II.3 — Scope](II.3_Magic.md#scope)
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
 - [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
-- [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
-- [III.2 — In Play: The Mill at Millhaven](III.2_Adventuring.md#in-play-the-mill-at-millhaven)
-- [III.2 — In Play: The Beam](III.2_Adventuring.md#in-play-the-beam)
-- [III.3 — Enemy Posture and Reaction Difficulty](III.3_Combat.md#enemy-posture-and-reaction-difficulty)
-- [IV.1 — Specialized Gear](IV.1_Equipment.md#specialized-gear)
+- [III.2 — The Death Choice](III.2_Adventuring.md#the-death-choice)
+- [III.3 — Other Things to Do](III.3_Combat.md#other-things-to-do)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM1 — Step 2: Pick a difficulty feel.](../mm_manual/MM1_Encounters_and_Enemies.md#step-2-pick-a-difficulty-feel)
-- [MM2 — Difficulty and Technique Steps](../mm_manual/MM2_Session_Design.md#difficulty-and-technique-steps)
+- [MM2 — Setting Difficulty](../mm_manual/MM2_Session_Design.md#setting-difficulty)
 - [MM3 — Difficulty Should Breathe](../mm_manual/MM3_Campaign_Design.md#difficulty-should-breathe)
-- [MM5 — Difficulty](../mm_manual/MM5_Quick_Reference.md#difficulty)
+- [MM5 — The Roll (Chapter III.1)](../mm_manual/MM5_Quick_Reference.md#the-roll-chapter-iii1)
+- [MM5 — The Toolbox (MM6)](../mm_manual/MM5_Quick_Reference.md#the-toolbox-mm6)
 
 ## Domain
 
 *Defined in [II.3](II.3_Magic.md).*
 
 - [Appendix Magic Domains — Appendix: Magic Domain Catalog](Appendix_Magic_Domains.md#appendix-magic-domain-catalog)
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
-- [II.1 — Where to Go From Here](II.1_Character_Creation_Overview.md#where-to-go-from-here)
+- [II.3 — Domain, Intent, Scope](II.3_Magic.md#domain-intent-scope)
 - [II.3 — Domain](II.3_Magic.md#domain)
-- [II.3 — Domain Types](II.3_Magic.md#domain-types)
-- [II.3 — Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope)
-- [II.3 — The Domain Catalog](II.3_Magic.md#the-domain-catalog)
-- [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
-- [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
-- [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [II.5 — The Gift Is a Domain](II.5_Lineage.md#the-gift-is-a-domain)
-- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.6 — Magic and Backgrounds](II.6_Character_Creation_Backgrounds.md#magic-and-backgrounds)
-- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [II.6 — Mind Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
-- [II.6 — Soul Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
-- [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
-- [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
-- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [II.3 — More Than One Domain](II.3_Magic.md#more-than-one-domain)
+- [II.4 — What Each Level Gives](II.4_Character_Creation_Facets.md#what-each-level-gives)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+- [II.5 — Character Creation: Lineage](II.5_Lineage.md#character-creation-lineage)
+- [II.5 — Human](II.5_Lineage.md#human)
+- [II.5 — Gifted Lineages](II.5_Lineage.md#gifted-lineages)
+- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
+- [IV.2 — Relics](IV.2_Treasure.md#relics)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
-- [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
-- [MM2 — Domain Boundary Calls](../mm_manual/MM2_Session_Design.md#domain-boundary-calls)
-- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
+- [MM2 — Domain Boundaries](../mm_manual/MM2_Session_Design.md#domain-boundaries)
 
-## Domain Type
-
-*Defined in [II.3](II.3_Magic.md).*
-
-- [II.3 — Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope)
-- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [MM2 — Domain Boundary Calls](../mm_manual/MM2_Session_Design.md#domain-boundary-calls)
-
-## Encounter Recipe Table
-
-*Defined in [MM1](../mm_manual/MM1_Encounters_and_Enemies.md).*
-
-- [MM1 — Encounter Recipe Table](../mm_manual/MM1_Encounters_and_Enemies.md#encounter-recipe-table)
-- [MM2 — The Tools Tab](../mm_manual/MM2_Session_Design.md#the-tools-tab)
-- [MM5 — Encounter Recipe Table (PS 3 — simulation-validated)](../mm_manual/MM5_Quick_Reference.md#encounter-recipe-table-ps-3--simulation-validated)
-
-## Endurance Pool
+## Elite
 
 *Defined in [III.3](III.3_Combat.md).*
 
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
-- [III.1 — Borrowed Trouble](III.1_Core_Resolution.md#borrowed-trouble)
-- [III.3 — Endurance Pool](III.3_Combat.md#endurance-pool)
-- [III.3 — Calculating Your Endurance Pool](III.3_Combat.md#calculating-your-endurance-pool)
-- [III.3 — An Empty Endurance Pool](III.3_Combat.md#an-empty-endurance-pool)
-- [III.3 — Recovering Your Endurance Pool](III.3_Combat.md#recovering-your-endurance-pool)
-- [III.3 — Endurance Pool](III.3_Combat.md#endurance-pool)
-- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [Quick Start — 6. Fill in the rest](Quick_Start.md#6-fill-in-the-rest)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
-- [MM1 — Three Worked Enemy Techniques](../mm_manual/MM1_Encounters_and_Enemies.md#three-worked-enemy-techniques)
-- [MM1 — Step 2: Pick a difficulty feel.](../mm_manual/MM1_Encounters_and_Enemies.md#step-2-pick-a-difficulty-feel)
-- [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
-- [MM4 — Practical Adjustments](../mm_manual/MM4_Running_the_Table.md#practical-adjustments)
-- [MM5 — Endurance Pool](../mm_manual/MM5_Quick_Reference.md#endurance-pool)
+- [MM1 — The Monster Card](../mm_manual/MM1_Encounters_and_Enemies.md#the-monster-card)
+- [MM1 — Roles](../mm_manual/MM1_Encounters_and_Enemies.md#roles)
+- [MM1 — Count the Threats](../mm_manual/MM1_Encounters_and_Enemies.md#count-the-threats)
+- [MM1 — Converting Creatures from Other Games](../mm_manual/MM1_Encounters_and_Enemies.md#converting-creatures-from-other-games)
+- [MM3 — The Campaign Pitch](../mm_manual/MM3_Campaign_Design.md#the-campaign-pitch)
+- [MM5 — Monsters (MM1)](../mm_manual/MM5_Quick_Reference.md#monsters-mm1)
 
 ## Exchange
 
 *Defined in [III.3](III.3_Combat.md).*
 
-- [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
-- [II.4b — Tier 3 *(requires one Instinct Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-instinct-tier-2)
-- [II.6 — Body Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#body-facet-backgrounds)
-- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+- [II.6 — Suited to the Body](II.6_Character_Creation_Backgrounds.md#suited-to-the-body)
 - [III.3 — The Exchange](III.3_Combat.md#the-exchange)
-- [III.3 — How an Exchange Runs](III.3_Combat.md#how-an-exchange-runs)
-- [III.3 — Exchange Flow](III.3_Combat.md#exchange-flow)
 - [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM1 — Mirror Master's Manual: Encounters and Enemies](../mm_manual/MM1_Encounters_and_Enemies.md#mirror-masters-manual-encounters-and-enemies)
-- [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
-- [MM1 — Three Worked Enemy Techniques](../mm_manual/MM1_Encounters_and_Enemies.md#three-worked-enemy-techniques)
-- [MM1 — Scaling Notes](../mm_manual/MM1_Encounters_and_Enemies.md#scaling-notes)
-- [MM2 — Combat](../mm_manual/MM2_Session_Design.md#combat)
-- [MM2 — Magic Against Active Opposition](../mm_manual/MM2_Session_Design.md#magic-against-active-opposition)
-- [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
-- [MM4 — Player Types and Motivations](../mm_manual/MM4_Running_the_Table.md#player-types-and-motivations)
-- [MM4 — Common Early Mistakes](../mm_manual/MM4_Running_the_Table.md#common-early-mistakes)
-- [MM5 — Combat: Exchange Flow](../mm_manual/MM5_Quick_Reference.md#combat-exchange-flow)
+- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
+- [MM1 — Running the Exchange](../mm_manual/MM1_Encounters_and_Enemies.md#running-the-exchange)
+- [MM3 — What the Party Finds](../mm_manual/MM3_Campaign_Design.md#what-the-party-finds)
+- [MM5 — Combat (Chapter III.3; MM1)](../mm_manual/MM5_Quick_Reference.md#combat-chapter-iii3-mm1)
+
+## Exploration Turn
+
+*Defined in [III.2](III.2_Adventuring.md).*
+
+- [MM2 — The Exploration Turn](../mm_manual/MM2_Session_Design.md#the-exploration-turn)
+- [MM5 — The Toolbox (MM6)](../mm_manual/MM5_Quick_Reference.md#the-toolbox-mm6)
+
+## Exposed
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [III.1 — Reading the Result](III.1_Core_Resolution.md#reading-the-result)
+- [III.3 — Attacking](III.3_Combat.md#attacking)
+- [Quick Start — Combat in Five Lines](Quick_Start.md#combat-in-five-lines)
+- [MM1 — Rolling in the Open](../mm_manual/MM1_Encounters_and_Enemies.md#rolling-in-the-open)
+- [MM5 — Combat (Chapter III.3; MM1)](../mm_manual/MM5_Quick_Reference.md#combat-chapter-iii3-mm1)
 
 ## Facet
 
 *Defined in [II.4](II.4_Character_Creation_Facets.md).*
 
-- [Appendix Character Sheet — Facet](Appendix_Character_Sheet.md#facet)
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
-- [II.1 — Where to Go From Here](II.1_Character_Creation_Overview.md#where-to-go-from-here)
-- [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
-- [II.4 — What Is a Facet?](II.4_Character_Creation_Facets.md#what-is-a-facet)
-- [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
+- [II.2 — Setting Your Stats](II.2_Character_Creation_Stats.md#setting-your-stats)
+- [II.4 — The Facet Owns the Numbers](II.4_Character_Creation_Facets.md#the-facet-owns-the-numbers)
+- [II.4 — Talents From Another Facet](II.4_Character_Creation_Facets.md#talents-from-another-facet)
 - [II.4a — Character Creation: Facet of the Body](II.4a_Character_Creation_Facet_Body.md#character-creation-facet-of-the-body)
-- [II.4a — The Body Facet](II.4a_Character_Creation_Facet_Body.md#the-body-facet)
-- [II.4a — Facet of the Body — Technique Tree](II.4a_Character_Creation_Facet_Body.md#facet-of-the-body--technique-tree)
 - [II.4b — Character Creation: Facet of the Mind](II.4b_Character_Creation_Facet_Mind.md#character-creation-facet-of-the-mind)
-- [II.4b — The Mind Facet](II.4b_Character_Creation_Facet_Mind.md#the-mind-facet)
-- [II.4b — Facet of the Mind — Technique Tree](II.4b_Character_Creation_Facet_Mind.md#facet-of-the-mind--technique-tree)
 - [II.4c — Character Creation: Facet of the Soul](II.4c_Character_Creation_Facet_Soul.md#character-creation-facet-of-the-soul)
-- [II.4c — The Soul Facet](II.4c_Character_Creation_Facet_Soul.md#the-soul-facet)
-- [II.4c — Facet of the Soul — Technique Tree](II.4c_Character_Creation_Facet_Soul.md#facet-of-the-soul--technique-tree)
 - [II.5 — Human](II.5_Lineage.md#human)
-- [II.5 — Formalization](II.5_Lineage.md#formalization)
-- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
-- [II.6 — Body Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#body-facet-backgrounds)
-- [II.6 — Mind Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
-- [II.6 — Soul Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
-- [II.7 — Complete Skill Reference](II.7_Character_Creation_Skills.md#complete-skill-reference)
-- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [Quick Start — 2. Pick a Primary Facet](Quick_Start.md#2-pick-a-primary-facet)
-- [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
+- [Quick Start — 1. Pick a Facet](Quick_Start.md#1-pick-a-facet)
 - [MM3 — When Your World Has Its Own Peoples](../mm_manual/MM3_Campaign_Design.md#when-your-world-has-its-own-peoples)
-- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
-- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
-- [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
-- [MM3 — Recognizing When It Is Done](../mm_manual/MM3_Campaign_Design.md#recognizing-when-it-is-done)
-- [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
+- [MM3 — What a Level Gives](../mm_manual/MM3_Campaign_Design.md#what-a-level-gives)
+- [MM6 — Mirror Master's Manual: The Toolbox](../mm_manual/MM6_The_Toolbox.md#mirror-masters-manual-the-toolbox)
 
-## Facet Level
+## Fatigue
 
-*Defined in [II.4](II.4_Character_Creation_Facets.md).*
+*Defined in [II.3](II.3_Magic.md).*
 
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
-- [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
-- [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [II.5 — Formalization](II.5_Lineage.md#formalization)
-- [II.6 — Magic and Backgrounds](II.6_Character_Creation_Backgrounds.md#magic-and-backgrounds)
-- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
-- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
-- [MM3 — Recognizing When It Is Done](../mm_manual/MM3_Campaign_Design.md#recognizing-when-it-is-done)
-- [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
+- [II.1 — The Numbers](II.1_Character_Creation_Overview.md#the-numbers)
+- [II.3 — Fatigue](II.3_Magic.md#fatigue)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [II.4b — Signatures](II.4b_Character_Creation_Facet_Mind.md#signatures)
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+- [II.4c — Signatures](II.4c_Character_Creation_Facet_Soul.md#signatures)
+- [IV.1 — Slots](IV.1_Equipment.md#slots)
+- [IV.1 — Armor](IV.1_Equipment.md#armor)
+- [IV.2 — Relics](IV.2_Treasure.md#relics)
+- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
+- [MM2 — Fatigue and Rest](../mm_manual/MM2_Session_Design.md#fatigue-and-rest)
+- [MM4 — Practical Adjustments](../mm_manual/MM4_Running_the_Table.md#practical-adjustments)
+- [MM6 — Magic Costs and Mishaps](../mm_manual/MM6_The_Toolbox.md#magic-costs-and-mishaps)
 
-## Full Success
+## Full-Form Rule
 
-*Defined in [III.1](III.1_Core_Resolution.md).*
+*Defined in [II.3](II.3_Magic.md).*
 
-- [II.2 — How Attributes Work in Play](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play)
-- [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Attributes.md#in-play-the-vanishing-of-millhaven)
-- [II.3 — Outcome Tiers for Magic](II.3_Magic.md#outcome-tiers-for-magic)
-- [II.3 — In Play: The Thornwall Lower Archive](II.3_Magic.md#in-play-the-thornwall-lower-archive)
-- [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
-- [III.1 — Full Success (10+)](III.1_Core_Resolution.md#full-success-10)
-- [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — Mooks](III.3_Combat.md#mooks)
-- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [IV.1 — Weapons](IV.1_Equipment.md#weapons)
-- [Quick Start — The One Rule](Quick_Start.md#the-one-rule)
-- [Quick Start — The Three Tiers in Play](Quick_Start.md#the-three-tiers-in-play)
-- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
-- [MM4 — In Play: Sharing the Spotlight](../mm_manual/MM4_Running_the_Table.md#in-play-sharing-the-spotlight)
-- [MM5 — Core Resolution](../mm_manual/MM5_Quick_Reference.md#core-resolution)
+- [II.3 — Scope](II.3_Magic.md#scope)
 
 ## Gift
 
 *Defined in [II.5](II.5_Lineage.md).*
 
-- [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
-- [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
-- [II.5 — The Gift Is a Domain](II.5_Lineage.md#the-gift-is-a-domain)
+- [II.3 — Magic Outside the Traditions](II.3_Magic.md#magic-outside-the-traditions)
+- [II.5 — Character Creation: Lineage](II.5_Lineage.md#character-creation-lineage)
+- [II.5 — Human](II.5_Lineage.md#human)
+- [II.5 — Gifted Lineages](II.5_Lineage.md#gifted-lineages)
+- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
+- [MM3 — When Your World Has Its Own Peoples](../mm_manual/MM3_Campaign_Design.md#when-your-world-has-its-own-peoples)
 
 ## Graceful Fail
 
 *Defined in [III.1](III.1_Core_Resolution.md).*
 
-- [II.3 — Outcome Tiers for Magic](II.3_Magic.md#outcome-tiers-for-magic)
-- [III.1 — The Natural 12 and the Natural 2](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2)
 - [III.1 — Earning Sparks](III.1_Core_Resolution.md#earning-sparks)
-- [III.1 — Failure (6-)](III.1_Core_Resolution.md#failure-6-)
 - [Quick Start — The Three Tiers in Play](Quick_Start.md#the-three-tiers-in-play)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
-- [MM5 — Core Resolution](../mm_manual/MM5_Quick_Reference.md#core-resolution)
-- [MM5 — Sparks](../mm_manual/MM5_Quick_Reference.md#sparks)
-- [MM5 — Spark Flow (MM Guidance)](../mm_manual/MM5_Quick_Reference.md#spark-flow-mm-guidance)
-- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
+- [MM2 — Something Always Happens on a 6−](../mm_manual/MM2_Session_Design.md#something-always-happens-on-a-6)
+- [MM5 — The Roll (Chapter III.1)](../mm_manual/MM5_Quick_Reference.md#the-roll-chapter-iii1)
 
-## Group Roll
+## Grit Die
+
+*Defined in [II.4](II.4_Character_Creation_Facets.md).*
+
+- [II.1 — The Numbers](II.1_Character_Creation_Overview.md#the-numbers)
+- [II.4 — The Facet Owns the Numbers](II.4_Character_Creation_Facets.md#the-facet-owns-the-numbers)
+- [II.4 — What Each Level Gives](II.4_Character_Creation_Facets.md#what-each-level-gives)
+- [Quick Start — 5. Fill in the numbers](Quick_Start.md#5-fill-in-the-numbers)
+- [MM5 — Levels (MM3; Chapter II.4)](../mm_manual/MM5_Quick_Reference.md#levels-mm3-chapter-ii4)
+
+## Help
 
 *Defined in [III.1](III.1_Core_Resolution.md).*
 
-- [III.1 — Group Rolls](III.1_Core_Resolution.md#group-rolls)
-- [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
+- [II.3 — Sparks and Help](II.3_Magic.md#sparks-and-help)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+- [III.1 — Extra Dice](III.1_Core_Resolution.md#extra-dice)
+- [III.3 — Other Things to Do](III.3_Combat.md#other-things-to-do)
+- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [MM2 — The Exploration Turn](../mm_manual/MM2_Session_Design.md#the-exploration-turn)
+- [MM3 — Retainers](../mm_manual/MM3_Campaign_Design.md#retainers)
+- [MM4 — Practical Adjustments](../mm_manual/MM4_Running_the_Table.md#practical-adjustments)
+- [MM5 — The Roll (Chapter III.1)](../mm_manual/MM5_Quick_Reference.md#the-roll-chapter-iii1)
 
-## Heritage
+## Hit Points
 
-*Defined in [II.5](II.5_Lineage.md).*
+*Defined in [III.2](III.2_Adventuring.md).*
 
-- [II.5 — Reading the Entries — Lineages](II.5_Lineage.md#reading-the-entries--lineages)
-- [II.5 — Human](II.5_Lineage.md#human)
-- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
+- [Appendix Character Sheet — Hit Points and Armor](Appendix_Character_Sheet.md#hit-points-and-armor)
+- [II.1 — The Numbers](II.1_Character_Creation_Overview.md#the-numbers)
+- [II.4 — What Each Level Gives](II.4_Character_Creation_Facets.md#what-each-level-gives)
+- [III.2 — Hit Points and Wounds](III.2_Adventuring.md#hit-points-and-wounds)
+- [III.3 — Kinds of Foe](III.3_Combat.md#kinds-of-foe)
+- [III.3 — Other Things to Do](III.3_Combat.md#other-things-to-do)
+- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+
+## Hold On
+
+*Defined in [III.2](III.2_Adventuring.md).*
+
+- [II.2 — The Three Stats](II.2_Character_Creation_Stats.md#the-three-stats)
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [II.4a — Signatures](II.4a_Character_Creation_Facet_Body.md#signatures)
+- [III.2 — At 0 HP](III.2_Adventuring.md#at-0-hp)
+- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
+- [Quick Start — Combat in Five Lines](Quick_Start.md#combat-in-five-lines)
+- [MM2 — Session Zero](../mm_manual/MM2_Session_Design.md#session-zero)
+- [MM4 — Character Death Is the Player's Call](../mm_manual/MM4_Running_the_Table.md#character-death-is-the-players-call)
+- [MM5 — 0 HP and Rest (Chapter III.2)](../mm_manual/MM5_Quick_Reference.md#0-hp-and-rest-chapter-iii2)
+
+## Improved Form
+
+*Defined in [II.4](II.4_Character_Creation_Facets.md).*
+
+- [II.4 — What Each Level Gives](II.4_Character_Creation_Facets.md#what-each-level-gives)
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [MM5 — Levels (MM3; Chapter II.4)](../mm_manual/MM5_Quick_Reference.md#levels-mm3-chapter-ii4)
 
 ## Intent
 
 *Defined in [II.3](II.3_Magic.md).*
 
+- [II.3 — Domain, Intent, Scope](II.3_Magic.md#domain-intent-scope)
 - [II.3 — Intent](II.3_Magic.md#intent)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [II.7 — Skills of the Body](II.7_Character_Creation_Skills.md#skills-of-the-body)
-- [II.7 — Skills of the Soul](II.7_Character_Creation_Skills.md#skills-of-the-soul)
-- [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
-- [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
-- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
+- [MM1 — Telegraph Intent](../mm_manual/MM1_Encounters_and_Enemies.md#telegraph-intent)
+
+## Intercept
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [II.4a — Signatures](II.4a_Character_Creation_Facet_Body.md#signatures)
+- [III.3 — Defend and Intercept](III.3_Combat.md#defend-and-intercept)
+- [Quick Start — Combat in Five Lines](Quick_Start.md#combat-in-five-lines)
+- [MM5 — Combat (Chapter III.3; MM1)](../mm_manual/MM5_Quick_Reference.md#combat-chapter-iii3-mm1)
+
+## Invocation
+
+*Defined in [II.3](II.3_Magic.md).*
+
+- [II.3 — Casting](II.3_Magic.md#casting)
+- [II.4 — The Facet Owns the Numbers](II.4_Character_Creation_Facets.md#the-facet-owns-the-numbers)
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+
+## Knack
+
+*Defined in [II.4](II.4_Character_Creation_Facets.md).*
+
+- [II.3 — Casting](II.3_Magic.md#casting)
+- [II.3 — In Play: The Thornwall Lower Archive](II.3_Magic.md#in-play-the-thornwall-lower-archive)
+- [II.4 — Classes](II.4_Character_Creation_Facets.md#classes)
+- [II.4 — Knacks](II.4_Character_Creation_Facets.md#knacks)
+- [II.4 — Writing a Custom Class](II.4_Character_Creation_Facets.md#writing-a-custom-class)
+- [II.4a — Preset Classes](II.4a_Character_Creation_Facet_Body.md#preset-classes)
+- [II.4a — Warrior](II.4a_Character_Creation_Facet_Body.md#warrior)
+- [II.4a — Scout](II.4a_Character_Creation_Facet_Body.md#scout)
+- [II.4a — Guardian](II.4a_Character_Creation_Facet_Body.md#guardian)
+- [II.4a — Brawler](II.4a_Character_Creation_Facet_Body.md#brawler)
+- [II.4b — Preset Classes](II.4b_Character_Creation_Facet_Mind.md#preset-classes)
+- [II.4b — Thaumaturge](II.4b_Character_Creation_Facet_Mind.md#thaumaturge)
+- [II.4b — Investigator](II.4b_Character_Creation_Facet_Mind.md#investigator)
+- [II.4b — Physician](II.4b_Character_Creation_Facet_Mind.md#physician)
+- [II.4b — Tactician](II.4b_Character_Creation_Facet_Mind.md#tactician)
+- [II.4c — Preset Classes](II.4c_Character_Creation_Facet_Soul.md#preset-classes)
+- [II.4c — Invoker](II.4c_Character_Creation_Facet_Soul.md#invoker)
+- [II.4c — Speaker](II.4c_Character_Creation_Facet_Soul.md#speaker)
+- [II.4c — Wanderer](II.4c_Character_Creation_Facet_Soul.md#wanderer)
+- [II.4c — Captain](II.4c_Character_Creation_Facet_Soul.md#captain)
+- [II.5 — Character Creation: Lineage](II.5_Lineage.md#character-creation-lineage)
+- [II.5 — Human](II.5_Lineage.md#human)
+- [II.5 — Gifted Lineages](II.5_Lineage.md#gifted-lineages)
+- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
+- [II.6 — What a Background Is](II.6_Character_Creation_Backgrounds.md#what-a-background-is)
+- [II.6 — The Fifteen Backgrounds](II.6_Character_Creation_Backgrounds.md#the-fifteen-backgrounds)
+- [II.6 — Suited to the Body](II.6_Character_Creation_Backgrounds.md#suited-to-the-body)
+- [II.6 — Suited to the Mind](II.6_Character_Creation_Backgrounds.md#suited-to-the-mind)
+- [II.6 — Suited to the Soul](II.6_Character_Creation_Backgrounds.md#suited-to-the-soul)
+- [II.6 — Writing Your Own Background](II.6_Character_Creation_Backgrounds.md#writing-your-own-background)
+- [III.1 — In Play: The Front Desk](III.1_Core_Resolution.md#in-play-the-front-desk)
+- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [Quick Start — 3. Pick a preset class](Quick_Start.md#3-pick-a-preset-class)
+- [Quick Start — 4. Pick a background](Quick_Start.md#4-pick-a-background)
+- [Quick Start — The Three Tiers in Play](Quick_Start.md#the-three-tiers-in-play)
+- [MM2 — In Play: The Price of a Partial Success](../mm_manual/MM2_Session_Design.md#in-play-the-price-of-a-partial-success)
+- [MM3 — When Your World Has Its Own Peoples](../mm_manual/MM3_Campaign_Design.md#when-your-world-has-its-own-peoples)
+- [MM5 — The Roll (Chapter III.1)](../mm_manual/MM5_Quick_Reference.md#the-roll-chapter-iii1)
+
+## Level
+
+*Defined in [II.4](II.4_Character_Creation_Facets.md).*
+
+- [II.1 — The Numbers](II.1_Character_Creation_Overview.md#the-numbers)
+- [II.3 — Scope](II.3_Magic.md#scope)
+- [II.4 — What Each Level Gives](II.4_Character_Creation_Facets.md#what-each-level-gives)
+- [II.4a — Preset Classes](II.4a_Character_Creation_Facet_Body.md#preset-classes)
+- [II.4a — Warrior](II.4a_Character_Creation_Facet_Body.md#warrior)
+- [II.4a — Scout](II.4a_Character_Creation_Facet_Body.md#scout)
+- [II.4a — Guardian](II.4a_Character_Creation_Facet_Body.md#guardian)
+- [II.4a — Brawler](II.4a_Character_Creation_Facet_Body.md#brawler)
+- [II.4b — Preset Classes](II.4b_Character_Creation_Facet_Mind.md#preset-classes)
+- [II.4b — Thaumaturge](II.4b_Character_Creation_Facet_Mind.md#thaumaturge)
+- [II.4b — Investigator](II.4b_Character_Creation_Facet_Mind.md#investigator)
+- [II.4b — Physician](II.4b_Character_Creation_Facet_Mind.md#physician)
+- [II.4b — Tactician](II.4b_Character_Creation_Facet_Mind.md#tactician)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [II.4c — Preset Classes](II.4c_Character_Creation_Facet_Soul.md#preset-classes)
+- [II.4c — Invoker](II.4c_Character_Creation_Facet_Soul.md#invoker)
+- [II.4c — Speaker](II.4c_Character_Creation_Facet_Soul.md#speaker)
+- [II.4c — Wanderer](II.4c_Character_Creation_Facet_Soul.md#wanderer)
+- [II.4c — Captain](II.4c_Character_Creation_Facet_Soul.md#captain)
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+- [II.6 — Suited to the Body](II.6_Character_Creation_Backgrounds.md#suited-to-the-body)
+- [III.3 — Foe Level](III.3_Combat.md#foe-level)
 - [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [MM2 — "Yes, And" / "Yes, But" / "No, But"](../mm_manual/MM2_Session_Design.md#yes-and--yes-but--no-but)
+- [List of Tables — Bestiary](List_of_Tables.md#bestiary)
+- [MM1 — Level and Role](../mm_manual/MM1_Encounters_and_Enemies.md#level-and-role)
+- [MM1 — The Level Table](../mm_manual/MM1_Encounters_and_Enemies.md#the-level-table)
+- [MM1 — Choosing a Level](../mm_manual/MM1_Encounters_and_Enemies.md#choosing-a-level)
 - [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
-- [MM2 — Designing the 7-9 Complication](../mm_manual/MM2_Session_Design.md#designing-the-7-9-complication)
-- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
+- [MM3 — You Call the Level](../mm_manual/MM3_Campaign_Design.md#you-call-the-level)
+- [MM3 — What a Level Gives](../mm_manual/MM3_Campaign_Design.md#what-a-level-gives)
+- [MM3 — Name Level: The Optional Endgame](../mm_manual/MM3_Campaign_Design.md#name-level-the-optional-endgame)
+- [MM5 — Combat (Chapter III.3; MM1)](../mm_manual/MM5_Quick_Reference.md#combat-chapter-iii3-mm1)
+- [MM5 — Monsters (MM1)](../mm_manual/MM5_Quick_Reference.md#monsters-mm1)
+- [MM5 — The Toolbox (MM6)](../mm_manual/MM5_Quick_Reference.md#the-toolbox-mm6)
+- [MM5 — Levels (MM3; Chapter II.4)](../mm_manual/MM5_Quick_Reference.md#levels-mm3-chapter-ii4)
+- [MM6 — Loot](../mm_manual/MM6_The_Toolbox.md#loot)
+
+## Level Gap
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [III.3 — Foe Level](III.3_Combat.md#foe-level)
+- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
+- [MM5 — Combat (Chapter III.3; MM1)](../mm_manual/MM5_Quick_Reference.md#combat-chapter-iii3-mm1)
 
 ## Lineage
 
 *Defined in [II.5](II.5_Lineage.md).*
 
-- [Appendix Character Sheet — Lineage and Background](Appendix_Character_Sheet.md#lineage-and-background)
-- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
-- [II.1 — Where to Go From Here](II.1_Character_Creation_Overview.md#where-to-go-from-here)
-- [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
-- [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
+- [II.3 — Magic Outside the Traditions](II.3_Magic.md#magic-outside-the-traditions)
 - [II.5 — Character Creation: Lineage](II.5_Lineage.md#character-creation-lineage)
 - [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
-- [II.6 — Magic and Backgrounds](II.6_Character_Creation_Backgrounds.md#magic-and-backgrounds)
-- [Quick Start — 2. Pick a Primary Facet](Quick_Start.md#2-pick-a-primary-facet)
-
-## Major Advancement
-
-*Defined in [II.4](II.4_Character_Creation_Facets.md).*
-
-- [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
-- [MM3 — Recognizing When It Is Done](../mm_manual/MM3_Campaign_Design.md#recognizing-when-it-is-done)
+- [MM3 — When Your World Has Its Own Peoples](../mm_manual/MM3_Campaign_Design.md#when-your-world-has-its-own-peoples)
 
-## Maneuver
+## Mind
 
-*Defined in [III.3](III.3_Combat.md).*
+*Defined in [II.2](II.2_Character_Creation_Stats.md).*
 
-- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
-- [III.3 — Maneuver](III.3_Combat.md#maneuver)
-- [MM5 — Difficulty](../mm_manual/MM5_Quick_Reference.md#difficulty)
-- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
-
-## Mark
-
-*Defined in [II.4](II.4_Character_Creation_Facets.md).*
-
-- [Appendix Magic Domains — Core Mind Domains](Appendix_Magic_Domains.md#core-mind-domains)
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
-- [II.3 — Readied Intents](II.3_Magic.md#readied-intents)
-- [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
-- [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
-- [II.4 — How Far a Skill Can Go](II.4_Character_Creation_Facets.md#how-far-a-skill-can-go)
-- [II.4 — Advancement and Reflection](II.4_Character_Creation_Facets.md#advancement-and-reflection)
-- [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
-- [II.4a — Iron Branch](II.4a_Character_Creation_Facet_Body.md#iron-branch)
-- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [II.6 — Body Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#body-facet-backgrounds)
-- [II.6 — Mind Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
-- [II.6 — Soul Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
-- [Quick Start — 6. Fill in the rest](Quick_Start.md#6-fill-in-the-rest)
+- [Appendix Magic Domains — Domains of the Mind](Appendix_Magic_Domains.md#domains-of-the-mind)
+- [Appendix Magic Domains — Mind Domains](Appendix_Magic_Domains.md#mind-domains)
+- [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
+- [II.1 — The Numbers](II.1_Character_Creation_Overview.md#the-numbers)
+- [II.2 — The Three Stats](II.2_Character_Creation_Stats.md#the-three-stats)
+- [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Stats.md#in-play-the-vanishing-of-millhaven)
+- [II.3 — Casting](II.3_Magic.md#casting)
+- [II.3 — In Play: The Thornwall Lower Archive](II.3_Magic.md#in-play-the-thornwall-lower-archive)
+- [II.4 — The Facet Owns the Numbers](II.4_Character_Creation_Facets.md#the-facet-owns-the-numbers)
+- [II.4 — Writing a Custom Class](II.4_Character_Creation_Facets.md#writing-a-custom-class)
+- [II.4 — What Each Level Gives](II.4_Character_Creation_Facets.md#what-each-level-gives)
+- [II.4b — Character Creation: Facet of the Mind](II.4b_Character_Creation_Facet_Mind.md#character-creation-facet-of-the-mind)
+- [II.4b — Building a Mind Character](II.4b_Character_Creation_Facet_Mind.md#building-a-mind-character)
+- [II.6 — Suited to the Mind](II.6_Character_Creation_Backgrounds.md#suited-to-the-mind)
+- [III.1 — Avoid](III.1_Core_Resolution.md#avoid)
+- [III.1 — In Play: The Front Desk](III.1_Core_Resolution.md#in-play-the-front-desk)
+- [III.2 — In Play: The Mill at Millhaven](III.2_Adventuring.md#in-play-the-mill-at-millhaven)
+- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [Quick Start — 3. Pick a preset class](Quick_Start.md#3-pick-a-preset-class)
+- [Quick Start — 5. Fill in the numbers](Quick_Start.md#5-fill-in-the-numbers)
 - [Quick Start — The Three Tiers in Play](Quick_Start.md#the-three-tiers-in-play)
-- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
-- [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
-- [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
+- [MM2 — Something Always Happens on a 6−](../mm_manual/MM2_Session_Design.md#something-always-happens-on-a-6)
+- [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
+- [MM2 — In Play: The Price of a Partial Success](../mm_manual/MM2_Session_Design.md#in-play-the-price-of-a-partial-success)
+- [MM4 — Handling Disagreements](../mm_manual/MM4_Running_the_Table.md#handling-disagreements)
+- [MM4 — In Play: Sharing the Spotlight](../mm_manual/MM4_Running_the_Table.md#in-play-sharing-the-spotlight)
 
 ## Mirror Master
 
 *Defined in [I](I_Introduction.md).*
 
-- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
 - [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
 - [MM1 — Mirror Master's Manual: Encounters and Enemies](../mm_manual/MM1_Encounters_and_Enemies.md#mirror-masters-manual-encounters-and-enemies)
 - [MM2 — Mirror Master's Manual: Session Design](../mm_manual/MM2_Session_Design.md#mirror-masters-manual-session-design)
 - [MM3 — Mirror Master's Manual: Campaign Design](../mm_manual/MM3_Campaign_Design.md#mirror-masters-manual-campaign-design)
 - [MM4 — Mirror Master's Manual: Running the Table](../mm_manual/MM4_Running_the_Table.md#mirror-masters-manual-running-the-table)
 - [MM4 — The Mirror Master Philosophy](../mm_manual/MM4_Running_the_Table.md#the-mirror-master-philosophy)
 - [MM5 — Mirror Master's Quick Reference](../mm_manual/MM5_Quick_Reference.md#mirror-masters-quick-reference)
+- [MM6 — Mirror Master's Manual: The Toolbox](../mm_manual/MM6_The_Toolbox.md#mirror-masters-manual-the-toolbox)
+
+## Mob
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [MM1 — Roles](../mm_manual/MM1_Encounters_and_Enemies.md#roles)
+- [MM5 — Monsters (MM1)](../mm_manual/MM5_Quick_Reference.md#monsters-mm1)
 
 ## Mook
 
 *Defined in [III.3](III.3_Combat.md).*
 
-- [III.3 — Mooks](III.3_Combat.md#mooks)
-- [III.3 — Incoming Condition Tier](III.3_Combat.md#incoming-condition-tier)
-- [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
-- [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
-- [III.3 — Enemy Attacks](III.3_Combat.md#enemy-attacks)
-- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
-- [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
-- [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
-- [MM1 — Sizing an Encounter](../mm_manual/MM1_Encounters_and_Enemies.md#sizing-an-encounter)
-- [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
-- [MM1 — Party Strength 3 (3 fresh characters, 1 career advance each)](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-3-3-fresh-characters-1-career-advance-each)
-- [MM1 — Party Strength 4 (4 PCs or 3 advanced PCs)](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-4-4-pcs-or-3-advanced-pcs)
-- [MM1 — Scaling Notes](../mm_manual/MM1_Encounters_and_Enemies.md#scaling-notes)
-- [MM1 — Step 3: Build the enemy roster.](../mm_manual/MM1_Encounters_and_Enemies.md#step-3-build-the-enemy-roster)
-- [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
-- [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)
-- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
-- [MM5 — Threat Rating (TR)](../mm_manual/MM5_Quick_Reference.md#threat-rating-tr)
-- [MM5 — Encounter Recipe Table (PS 3 — simulation-validated)](../mm_manual/MM5_Quick_Reference.md#encounter-recipe-table-ps-3--simulation-validated)
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [III.3 — Kinds of Foe](III.3_Combat.md#kinds-of-foe)
+- [MM1 — The Monster Card](../mm_manual/MM1_Encounters_and_Enemies.md#the-monster-card)
+- [MM1 — Roles](../mm_manual/MM1_Encounters_and_Enemies.md#roles)
+- [MM1 — Dials Other Than Headcount](../mm_manual/MM1_Encounters_and_Enemies.md#dials-other-than-headcount)
+- [MM3 — Retainers](../mm_manual/MM3_Campaign_Design.md#retainers)
+- [MM5 — Monsters (MM1)](../mm_manual/MM5_Quick_Reference.md#monsters-mm1)
 
-## Named NPC
+## Morale
 
 *Defined in [III.3](III.3_Combat.md).*
 
-- [III.3 — Postures](III.3_Combat.md#postures)
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — Named NPCs](III.3_Combat.md#named-npcs)
-- [III.3 — Incoming Condition Tier](III.3_Combat.md#incoming-condition-tier)
-- [III.3 — Armor and Reaction Downgrades](III.3_Combat.md#armor-and-reaction-downgrades)
-- [III.3 — Enemy Attacks](III.3_Combat.md#enemy-attacks)
-- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
-- [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
-- [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
-- [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
-- [MM1 — Named NPCs](../mm_manual/MM1_Encounters_and_Enemies.md#named-npcs)
-- [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)
-
-## Natural 12
-
-*Defined in [III.1](III.1_Core_Resolution.md).*
-
-- [III.1 — The Natural 12 and the Natural 2](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2)
-- [MM5 — Core Resolution](../mm_manual/MM5_Quick_Reference.md#core-resolution)
-
-## Natural 2
-
-*Defined in [III.1](III.1_Core_Resolution.md).*
-
-- [III.1 — The Natural 12 and the Natural 2](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2)
-- [MM5 — Core Resolution](../mm_manual/MM5_Quick_Reference.md#core-resolution)
-
-## Off-Balance
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
-- [III.3 — Tier 1 Conditions](III.3_Combat.md#tier-1-conditions)
-- [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
-- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
-- [IV.1 — Armor in Play](IV.1_Equipment.md#armor-in-play)
-- [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
-- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
-- [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
-- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
-
-## Open
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [II.3 — Readied Intents](II.3_Magic.md#readied-intents)
-- [II.4 — What Is a Facet?](II.4_Character_Creation_Facets.md#what-is-a-facet)
-- [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
-- [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
-- [II.7 — Skills of the Body](II.7_Character_Creation_Skills.md#skills-of-the-body)
-- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
-- [III.1 — When Not to Roll](III.1_Core_Resolution.md#when-not-to-roll)
-- [III.3 — Postures](III.3_Combat.md#postures)
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — Conditions](III.3_Combat.md#conditions)
-- [III.3 — Named NPCs](III.3_Combat.md#named-npcs)
-- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
-- [MM2 — The Three-Act Framework](../mm_manual/MM2_Session_Design.md#the-three-act-framework)
-- [MM2 — In Play: The Price of a Partial Success](../mm_manual/MM2_Session_Design.md#in-play-the-price-of-a-partial-success)
-- [MM3 — In Play: The End of the Road](../mm_manual/MM3_Campaign_Design.md#in-play-the-end-of-the-road)
-- [MM5 — Difficulty](../mm_manual/MM5_Quick_Reference.md#difficulty)
-- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
-- [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
-
-## Partial Success
-
-*Defined in [III.1](III.1_Core_Resolution.md).*
-
-- [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Attributes.md#in-play-the-vanishing-of-millhaven)
-- [II.3 — Intent](II.3_Magic.md#intent)
-- [II.3 — Example: A Mage, a Beam, a Problem](II.3_Magic.md#example-a-mage-a-beam-a-problem)
-- [II.3 — In Play: The Thornwall Lower Archive](II.3_Magic.md#in-play-the-thornwall-lower-archive)
-- [III.1 — Partial Success (7–9)](III.1_Core_Resolution.md#partial-success-79)
-- [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
-- [III.2 — In Play: The Mill at Millhaven](III.2_Adventuring.md#in-play-the-mill-at-millhaven)
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [MM2 — In Play: The Price of a Partial Success](../mm_manual/MM2_Session_Design.md#in-play-the-price-of-a-partial-success)
-- [MM4 — In Play: Sharing the Spotlight](../mm_manual/MM4_Running_the_Table.md#in-play-sharing-the-spotlight)
-- [MM5 — Common Rulings](../mm_manual/MM5_Quick_Reference.md#common-rulings)
-
-## Party Strength
-
-*Defined in [MM1](../mm_manual/MM1_Encounters_and_Enemies.md).*
-
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+- [III.3 — Morale](III.3_Combat.md#morale)
 - [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [MM1 — Party Strength](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength)
-- [MM1 — Party Strength 3 (3 fresh characters, 1 career advance each)](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-3-3-fresh-characters-1-career-advance-each)
-- [MM1 — Party Strength 4 (4 PCs or 3 advanced PCs)](../mm_manual/MM1_Encounters_and_Enemies.md#party-strength-4-4-pcs-or-3-advanced-pcs)
-- [MM5 — Encounter Recipe Table (PS 3 — simulation-validated)](../mm_manual/MM5_Quick_Reference.md#encounter-recipe-table-ps-3--simulation-validated)
+- [MM1 — Morale](../mm_manual/MM1_Encounters_and_Enemies.md#morale)
+- [MM2 — The App in Session](../mm_manual/MM2_Session_Design.md#the-app-in-session)
+- [MM3 — Retainers](../mm_manual/MM3_Campaign_Design.md#retainers)
+- [MM4 — What Players Come For](../mm_manual/MM4_Running_the_Table.md#what-players-come-for)
+- [MM4 — Common Early Mistakes](../mm_manual/MM4_Running_the_Table.md#common-early-mistakes)
+- [MM5 — Monsters (MM1)](../mm_manual/MM5_Quick_Reference.md#monsters-mm1)
+- [MM6 — Morale](../mm_manual/MM6_The_Toolbox.md#morale)
 
-## Pinnacle Technique
-
-*Defined in [II.4](II.4_Character_Creation_Facets.md).*
-
-- [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
-
-## Position
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [II.4a — Grace Branch](II.4a_Character_Creation_Facet_Body.md#grace-branch)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
-- [III.3 — Recovering Your Endurance Pool](III.3_Combat.md#recovering-your-endurance-pool)
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — Maneuver](III.3_Combat.md#maneuver)
-- [III.3 — Conditions](III.3_Combat.md#conditions)
-- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
-- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
-- [MM4 — In Play: Sharing the Spotlight](../mm_manual/MM4_Running_the_Table.md#in-play-sharing-the-spotlight)
-- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
-- [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
-- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
-
-## Posture
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [III.3 — Enemy Posture and Reaction Difficulty](III.3_Combat.md#enemy-posture-and-reaction-difficulty)
-- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
-- [MM1 — Enemy Conduct Fields](../mm_manual/MM1_Encounters_and_Enemies.md#enemy-conduct-fields)
-- [MM1 — Step 2: Pick a difficulty feel.](../mm_manual/MM1_Encounters_and_Enemies.md#step-2-pick-a-difficulty-feel)
-- [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
-- [MM4 — Player Types and Motivations](../mm_manual/MM4_Running_the_Table.md#player-types-and-motivations)
-- [MM4 — In Play: Sharing the Spotlight](../mm_manual/MM4_Running_the_Table.md#in-play-sharing-the-spotlight)
-- [MM4 — Practical Adjustments](../mm_manual/MM4_Running_the_Table.md#practical-adjustments)
-- [MM5 — Postures](../mm_manual/MM5_Quick_Reference.md#postures)
-- [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)
-- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — Endurance Pool](../mm_manual/MM5_Quick_Reference.md#endurance-pool)
-
-## Press
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [II.2 — Soul](II.2_Character_Creation_Attributes.md#soul)
-- [III.1 — The Natural 12 and the Natural 2](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2)
-- [III.1 — Borrowed Trouble](III.1_Core_Resolution.md#borrowed-trouble)
-- [III.3 — Press](III.3_Combat.md#press)
-- [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
-- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
-
-## Primary Facet
-
-*Defined in [II.4](II.4_Character_Creation_Facets.md).*
-
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
-- [II.4 — What Is a Facet?](II.4_Character_Creation_Facets.md#what-is-a-facet)
-- [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
-- [II.4 — How Far a Skill Can Go](II.4_Character_Creation_Facets.md#how-far-a-skill-can-go)
-- [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
-- [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [Quick Start — 2. Pick a Primary Facet](Quick_Start.md#2-pick-a-primary-facet)
-- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
-- [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
-
-## Purpose
-
-*Defined in [II.3](II.3_Magic.md).*
-
-- [II.3 — Intent](II.3_Magic.md#intent)
-- [II.3 — Readied Intents](II.3_Magic.md#readied-intents)
-- [II.3 — Sparks and Magic](II.3_Magic.md#sparks-and-magic)
-- [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
-- [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
-- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
-
-## Rank
-
-- [Appendix Character Sheet — Rank Slots](Appendix_Character_Sheet.md#rank-slots)
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.3 — Rolling Magic](II.3_Magic.md#rolling-magic)
-- [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
-- [II.4 — Facet Levels](II.4_Character_Creation_Facets.md#facet-levels)
-- [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
-- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.7 — Character Creation: Skills](II.7_Character_Creation_Skills.md#character-creation-skills)
-- [II.7 — Using Skills](II.7_Character_Creation_Skills.md#using-skills)
-- [II.7 — Skills of the Body](II.7_Character_Creation_Skills.md#skills-of-the-body)
-- [II.7 — Skills of the Mind](II.7_Character_Creation_Skills.md#skills-of-the-mind)
-- [II.7 — Skills of the Soul](II.7_Character_Creation_Skills.md#skills-of-the-soul)
-- [II.7 — Skill Ranks at a Glance](II.7_Character_Creation_Skills.md#skill-ranks-at-a-glance)
-- [II.7 — Starting Skills](II.7_Character_Creation_Skills.md#starting-skills)
-- [III.1 — Skill Modifier](III.1_Core_Resolution.md#skill-modifier)
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — Parry](III.3_Combat.md#parry)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [Quick Start — 6. Fill in the rest](Quick_Start.md#6-fill-in-the-rest)
-- [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
-- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
-- [MM5 — Endurance Pool](../mm_manual/MM5_Quick_Reference.md#endurance-pool)
-- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
-- [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
-
-## Reaction
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [III.3 — Enemy Posture and Reaction Difficulty](III.3_Combat.md#enemy-posture-and-reaction-difficulty)
-- [III.3 — Armor and Reaction Downgrades](III.3_Combat.md#armor-and-reaction-downgrades)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
-- [MM1 — Three Worked Enemy Techniques](../mm_manual/MM1_Encounters_and_Enemies.md#three-worked-enemy-techniques)
-- [MM4 — After Every Session](../mm_manual/MM4_Running_the_Table.md#after-every-session)
-- [MM5 — Postures](../mm_manual/MM5_Quick_Reference.md#postures)
-- [MM5 — Reactions (1 per incoming action)](../mm_manual/MM5_Quick_Reference.md#reactions-1-per-incoming-action)
-- [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)
-- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-
-## Readied Intent
-
-*Defined in [II.3](II.3_Magic.md).*
-
-- [II.3 — Readied Intents](II.3_Magic.md#readied-intents)
-- [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
-- [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
-- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
-- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
-
-## Reflection Scene
-
-*Defined in [II.4](II.4_Character_Creation_Facets.md).*
-
-- [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
-- [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [II.4 — Advancement and Reflection](II.4_Character_Creation_Facets.md#advancement-and-reflection)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-
-## Resolve
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [III.3 — The Shape of a Fight](III.3_Combat.md#the-shape-of-a-fight)
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — Conditions](III.3_Combat.md#conditions)
-- [III.3 — Mooks](III.3_Combat.md#mooks)
-- [III.3 — Named NPCs](III.3_Combat.md#named-npcs)
-- [III.3 — Bosses and Climactic Antagonists](III.3_Combat.md#bosses-and-climactic-antagonists)
-- [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
-- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
-- [IV.1 — Weapons](IV.1_Equipment.md#weapons)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
-- [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
-- [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
-- [MM1 — Named NPCs](../mm_manual/MM1_Encounters_and_Enemies.md#named-npcs)
-- [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
-- [MM3 — Arc-Based](../mm_manual/MM3_Campaign_Design.md#arc-based)
-- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
-- [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
-- [MM5 — Threat Rating (TR)](../mm_manual/MM5_Quick_Reference.md#threat-rating-tr)
-
-## Rider
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
-- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
-- [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
-
-## Saving Throw
+## Natural
 
 *Defined in [III.1](III.1_Core_Resolution.md).*
 
-- [III.1 — Saving Throws](III.1_Core_Resolution.md#saving-throws)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
+- [Appendix Magic Domains — Soul Domains](Appendix_Magic_Domains.md#soul-domains)
+- [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
+- [III.1 — Naturals](III.1_Core_Resolution.md#naturals)
+- [III.3 — When the Enemies Roll](III.3_Combat.md#when-the-enemies-roll)
+- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
+- [MM1 — Rolling in the Open](../mm_manual/MM1_Encounters_and_Enemies.md#rolling-in-the-open)
+- [MM5 — The Roll (Chapter III.1)](../mm_manual/MM5_Quick_Reference.md#the-roll-chapter-iii1)
+- [MM5 — Combat (Chapter III.3; MM1)](../mm_manual/MM5_Quick_Reference.md#combat-chapter-iii3-mm1)
+- [MM5 — The Toolbox (MM6)](../mm_manual/MM5_Quick_Reference.md#the-toolbox-mm6)
+
+## Night's Rest
+
+*Defined in [III.2](III.2_Adventuring.md).*
+
+- [II.3 — Fatigue](II.3_Magic.md#fatigue)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [III.2 — At 0 HP](III.2_Adventuring.md#at-0-hp)
+- [MM2 — Fatigue and Rest](../mm_manual/MM2_Session_Design.md#fatigue-and-rest)
+- [MM5 — 0 HP and Rest (Chapter III.2)](../mm_manual/MM5_Quick_Reference.md#0-hp-and-rest-chapter-iii2)
+- [MM6 — Wounds and Scars](../mm_manual/MM6_The_Toolbox.md#wounds-and-scars)
+
+## Preset Class
+
+*Defined in [II.4](II.4_Character_Creation_Facets.md).*
+
+- [II.4 — Classes](II.4_Character_Creation_Facets.md#classes)
+- [I — The Philosophy](I_Introduction.md#the-philosophy)
+- [Quick Start — 3. Pick a preset class](Quick_Start.md#3-pick-a-preset-class)
+
+## Pressure Die
+
+*Defined in [III.2](III.2_Adventuring.md).*
+
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [III.2 — The Pressure Die](III.2_Adventuring.md#the-pressure-die)
+- [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
+- [MM2 — Exploration Turns and the Pressure Die](../mm_manual/MM2_Session_Design.md#exploration-turns-and-the-pressure-die)
+- [MM5 — 0 HP and Rest (Chapter III.2)](../mm_manual/MM5_Quick_Reference.md#0-hp-and-rest-chapter-iii2)
+- [MM5 — The Toolbox (MM6)](../mm_manual/MM5_Quick_Reference.md#the-toolbox-mm6)
+- [MM6 — The Pressure Die](../mm_manual/MM6_The_Toolbox.md#the-pressure-die)
+
+## Prismatic
+
+*Defined in [II.3](II.3_Magic.md).*
+
+- [Appendix Magic Domains — Prismatic Soul Domains](Appendix_Magic_Domains.md#prismatic-soul-domains)
+- [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
+- [II.3 — More Than One Domain](II.3_Magic.md#more-than-one-domain)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+- [II.5 — Gifted Lineages](II.5_Lineage.md#gifted-lineages)
+
+## Reaction Roll
+
+*Defined in [III.2](III.2_Adventuring.md).*
+
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+- [II.4c — Signatures](II.4c_Character_Creation_Facet_Soul.md#signatures)
+- [III.2 — Meeting People](III.2_Adventuring.md#meeting-people)
+- [MM1 — Meeting Someone: The Reaction Roll](../mm_manual/MM1_Encounters_and_Enemies.md#meeting-someone-the-reaction-roll)
+- [MM6 — The Reaction Roll](../mm_manual/MM6_The_Toolbox.md#the-reaction-roll)
+
+## Relic
+
+*Defined in [IV.2](IV.2_Treasure.md).*
+
+- [II.3 — Magic Outside the Traditions](II.3_Magic.md#magic-outside-the-traditions)
+- [IV.2 — Relics](IV.2_Treasure.md#relics)
+- [MM5 — The Toolbox (MM6)](../mm_manual/MM5_Quick_Reference.md#the-toolbox-mm6)
+- [MM6 — Loot](../mm_manual/MM6_The_Toolbox.md#loot)
+
+## Scar
+
+*Defined in [III.2](III.2_Adventuring.md).*
+
+- [III.2 — The Death Choice](III.2_Adventuring.md#the-death-choice)
+- [III.2 — In Play: The Beam](III.2_Adventuring.md#in-play-the-beam)
+- [MM5 — 0 HP and Rest (Chapter III.2)](../mm_manual/MM5_Quick_Reference.md#0-hp-and-rest-chapter-iii2)
+- [MM6 — Wounds and Scars](../mm_manual/MM6_The_Toolbox.md#wounds-and-scars)
 
 ## Scope
 
 *Defined in [II.3](II.3_Magic.md).*
 
 - [Appendix Magic Domains — Appendix: Magic Domain Catalog](Appendix_Magic_Domains.md#appendix-magic-domain-catalog)
-- [Appendix Magic Domains — Core Mind Domains](Appendix_Magic_Domains.md#core-mind-domains)
+- [Appendix Magic Domains — Mind Domains](Appendix_Magic_Domains.md#mind-domains)
 - [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
+- [II.3 — Domain, Intent, Scope](II.3_Magic.md#domain-intent-scope)
 - [II.3 — Scope](II.3_Magic.md#scope)
-- [II.3 — Base Difficulty by Domain Type and Scope](II.3_Magic.md#base-difficulty-by-domain-type-and-scope)
-- [II.5 — Reading the Entries — Lineages](II.5_Lineage.md#reading-the-entries--lineages)
-- [II.5 — The Gift Is a Domain](II.5_Lineage.md#the-gift-is-a-domain)
-- [II.6 — Magic and Backgrounds](II.6_Character_Creation_Backgrounds.md#magic-and-backgrounds)
-- [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
-- [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
-- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
+- [II.4b — Signatures](II.4b_Character_Creation_Facet_Mind.md#signatures)
+- [II.5 — Gifted Lineages](II.5_Lineage.md#gifted-lineages)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
 - [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
 - [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
-- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
+- [MM5 — Magic (Chapter II.3; MM2)](../mm_manual/MM5_Quick_Reference.md#magic-chapter-ii3-mm2)
 
-## Second Domain
-
-- [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
-
-## Secondary Skill
-
-*Defined in [II.6](II.6_Character_Creation_Backgrounds.md).*
-
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
-- [II.5 — Reading the Entries — Lineages](II.5_Lineage.md#reading-the-entries--lineages)
-- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [II.6 — Body Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#body-facet-backgrounds)
-- [II.6 — Mind Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
-- [II.6 — Soul Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
-- [II.7 — Starting Skills](II.7_Character_Creation_Skills.md#starting-skills)
-- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
-
-## Shaken
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
-- [III.3 — Tier 1 Conditions](III.3_Combat.md#tier-1-conditions)
-- [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
-- [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
-- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
-- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
-
-## Skill
-
-*Defined in [II.7](II.7_Character_Creation_Skills.md).*
-
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
-- [II.3 — Rolling Magic](II.3_Magic.md#rolling-magic)
-- [II.4 — How Far a Skill Can Go](II.4_Character_Creation_Facets.md#how-far-a-skill-can-go)
-- [II.4a — Skills of the Body](II.4a_Character_Creation_Facet_Body.md#skills-of-the-body)
-- [II.4b — Skills of the Mind](II.4b_Character_Creation_Facet_Mind.md#skills-of-the-mind)
-- [II.4c — Skills of the Soul](II.4c_Character_Creation_Facet_Soul.md#skills-of-the-soul)
-- [II.5 — Reading the Entries — Lineages](II.5_Lineage.md#reading-the-entries--lineages)
-- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
-- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [II.6 — Body Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#body-facet-backgrounds)
-- [II.6 — Mind Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
-- [II.6 — Soul Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
-- [II.7 — Complete Skill Reference](II.7_Character_Creation_Skills.md#complete-skill-reference)
-- [II.7 — The Skill List](II.7_Character_Creation_Skills.md#the-skill-list)
-- [II.7 — Skill Ranks at a Glance](II.7_Character_Creation_Skills.md#skill-ranks-at-a-glance)
-- [III.1 — Skill Modifier](III.1_Core_Resolution.md#skill-modifier)
-- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
-- [III.3 — Calculating Your Endurance Pool](III.3_Combat.md#calculating-your-endurance-pool)
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — Maneuver](III.3_Combat.md#maneuver)
-- [III.3 — Parry](III.3_Combat.md#parry)
-- [IV.1 — Specialized Gear](IV.1_Equipment.md#specialized-gear)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
-- [Quick Start — 6. Fill in the rest](Quick_Start.md#6-fill-in-the-rest)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
-- [MM1 — Named NPCs](../mm_manual/MM1_Encounters_and_Enemies.md#named-npcs)
-- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
-- [MM3 — Using career_advances as a Campaign Clock](../mm_manual/MM3_Campaign_Design.md#using-career_advances-as-a-campaign-clock)
-- [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
-- [MM5 — Skill Ranks](../mm_manual/MM5_Quick_Reference.md#skill-ranks)
-- [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
-
-## Skill Point
+## Signature
 
 *Defined in [II.4](II.4_Character_Creation_Facets.md).*
 
-- [II.4 — Advancing Skills](II.4_Character_Creation_Facets.md#advancing-skills)
-- [II.7 — Character Creation: Skills](II.7_Character_Creation_Skills.md#character-creation-skills)
+- [Appendix Character Sheet — Talents and Signature](Appendix_Character_Sheet.md#talents-and-signature)
+- [II.3 — Signature Workings](II.3_Magic.md#signature-workings)
+- [II.4 — Classes](II.4_Character_Creation_Facets.md#classes)
+- [II.4 — Writing a Custom Class](II.4_Character_Creation_Facets.md#writing-a-custom-class)
+- [II.4 — Talents and Signatures](II.4_Character_Creation_Facets.md#talents-and-signatures)
+- [II.4 — What Each Level Gives](II.4_Character_Creation_Facets.md#what-each-level-gives)
+- [II.4a — Preset Classes](II.4a_Character_Creation_Facet_Body.md#preset-classes)
+- [II.4a — Warrior](II.4a_Character_Creation_Facet_Body.md#warrior)
+- [II.4a — Scout](II.4a_Character_Creation_Facet_Body.md#scout)
+- [II.4a — Guardian](II.4a_Character_Creation_Facet_Body.md#guardian)
+- [II.4a — Brawler](II.4a_Character_Creation_Facet_Body.md#brawler)
+- [II.4b — Preset Classes](II.4b_Character_Creation_Facet_Mind.md#preset-classes)
+- [II.4b — Thaumaturge](II.4b_Character_Creation_Facet_Mind.md#thaumaturge)
+- [II.4b — Investigator](II.4b_Character_Creation_Facet_Mind.md#investigator)
+- [II.4b — Physician](II.4b_Character_Creation_Facet_Mind.md#physician)
+- [II.4b — Tactician](II.4b_Character_Creation_Facet_Mind.md#tactician)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [II.4c — Preset Classes](II.4c_Character_Creation_Facet_Soul.md#preset-classes)
+- [II.4c — Invoker](II.4c_Character_Creation_Facet_Soul.md#invoker)
+- [II.4c — Speaker](II.4c_Character_Creation_Facet_Soul.md#speaker)
+- [II.4c — Wanderer](II.4c_Character_Creation_Facet_Soul.md#wanderer)
+- [II.4c — Captain](II.4c_Character_Creation_Facet_Soul.md#captain)
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+- [MM2 — Fatigue and Rest](../mm_manual/MM2_Session_Design.md#fatigue-and-rest)
+- [MM3 — You Call the Level](../mm_manual/MM3_Campaign_Design.md#you-call-the-level)
+- [MM5 — Levels (MM3; Chapter II.4)](../mm_manual/MM5_Quick_Reference.md#levels-mm3-chapter-ii4)
+
+## Signature Working
+
+*Defined in [II.3](II.3_Magic.md).*
+
+- [II.4 — What Each Level Gives](II.4_Character_Creation_Facets.md#what-each-level-gives)
+
+## Slot
+
+*Defined in [IV.1](IV.1_Equipment.md).*
+
+- [II.1 — The Numbers](II.1_Character_Creation_Overview.md#the-numbers)
+- [II.3 — Fatigue](II.3_Magic.md#fatigue)
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
+- [III.2 — At 0 HP](III.2_Adventuring.md#at-0-hp)
+- [IV.1 — Slots](IV.1_Equipment.md#slots)
+- [MM2 — Fatigue and Rest](../mm_manual/MM2_Session_Design.md#fatigue-and-rest)
+- [MM3 — What the Party Finds](../mm_manual/MM3_Campaign_Design.md#what-the-party-finds)
+- [MM5 — 0 HP and Rest (Chapter III.2)](../mm_manual/MM5_Quick_Reference.md#0-hp-and-rest-chapter-iii2)
+- [MM6 — Loot](../mm_manual/MM6_The_Toolbox.md#loot)
+
+## Soul
+
+*Defined in [II.2](II.2_Character_Creation_Stats.md).*
+
+- [Appendix Magic Domains — Domains of the Soul](Appendix_Magic_Domains.md#domains-of-the-soul)
+- [Appendix Magic Domains — Soul Domains](Appendix_Magic_Domains.md#soul-domains)
+- [Appendix Magic Domains — Prismatic Soul Domains](Appendix_Magic_Domains.md#prismatic-soul-domains)
+- [II.1 — The Numbers](II.1_Character_Creation_Overview.md#the-numbers)
+- [II.2 — The Three Stats](II.2_Character_Creation_Stats.md#the-three-stats)
+- [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Stats.md#in-play-the-vanishing-of-millhaven)
+- [II.3 — Casting](II.3_Magic.md#casting)
+- [II.3 — Magic Outside the Traditions](II.3_Magic.md#magic-outside-the-traditions)
+- [II.4 — The Facet Owns the Numbers](II.4_Character_Creation_Facets.md#the-facet-owns-the-numbers)
+- [II.4 — Writing a Custom Class](II.4_Character_Creation_Facets.md#writing-a-custom-class)
+- [II.4 — What Each Level Gives](II.4_Character_Creation_Facets.md#what-each-level-gives)
+- [II.4c — Character Creation: Facet of the Soul](II.4c_Character_Creation_Facet_Soul.md#character-creation-facet-of-the-soul)
+- [II.4c — Building a Soul Character](II.4c_Character_Creation_Facet_Soul.md#building-a-soul-character)
+- [II.5 — Gifted Lineages](II.5_Lineage.md#gifted-lineages)
+- [II.6 — Suited to the Soul](II.6_Character_Creation_Backgrounds.md#suited-to-the-soul)
+- [III.1 — Avoid](III.1_Core_Resolution.md#avoid)
+- [III.1 — In Play: The Front Desk](III.1_Core_Resolution.md#in-play-the-front-desk)
 - [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
+- [Quick Start — 3. Pick a preset class](Quick_Start.md#3-pick-a-preset-class)
+- [Quick Start — 5. Fill in the numbers](Quick_Start.md#5-fill-in-the-numbers)
+- [MM2 — In Play: The Price of a Partial Success](../mm_manual/MM2_Session_Design.md#in-play-the-price-of-a-partial-success)
+- [MM4 — Common Early Mistakes](../mm_manual/MM4_Running_the_Table.md#common-early-mistakes)
 
 ## Spark
 
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.2 — How Attributes Work in Play](II.2_Character_Creation_Attributes.md#how-attributes-work-in-play)
-- [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Attributes.md#in-play-the-vanishing-of-millhaven)
-- [II.3 — Readied Intents](II.3_Magic.md#readied-intents)
-- [II.3 — Sparks and Magic](II.3_Magic.md#sparks-and-magic)
-- [II.4 — Advancement and Reflection](II.4_Character_Creation_Facets.md#advancement-and-reflection)
-- [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
-- [II.4a — Grace Branch](II.4a_Character_Creation_Facet_Body.md#grace-branch)
-- [II.4a — Iron Branch](II.4a_Character_Creation_Facet_Body.md#iron-branch)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [III.1 — The Natural 12 and the Natural 2](III.1_Core_Resolution.md#the-natural-12-and-the-natural-2)
+*Defined in [III.1](III.1_Core_Resolution.md).*
+
+- [II.2 — In Play: The Vanishing of Millhaven](II.2_Character_Creation_Stats.md#in-play-the-vanishing-of-millhaven)
+- [II.3 — Magic Outside the Traditions](II.3_Magic.md#magic-outside-the-traditions)
+- [III.1 — Extra Dice](III.1_Core_Resolution.md#extra-dice)
 - [III.1 — Sparks](III.1_Core_Resolution.md#sparks)
-- [III.1 — Spending Sparks](III.1_Core_Resolution.md#spending-sparks)
-- [III.1 — Borrowed Trouble](III.1_Core_Resolution.md#borrowed-trouble)
-- [III.3 — Press](III.3_Combat.md#press)
-- [III.3 — Mind and Soul in a Fight](III.3_Combat.md#mind-and-soul-in-a-fight)
-- [III.3 — Your Five Numbers On Screen](III.3_Combat.md#your-five-numbers-on-screen)
+- [III.1 — Earning Sparks](III.1_Core_Resolution.md#earning-sparks)
+- [III.3 — Attacking](III.3_Combat.md#attacking)
 - [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM2 — Spark Nominations as a Balancing Tool](../mm_manual/MM2_Session_Design.md#spark-nominations-as-a-balancing-tool)
 - [MM2 — Spark Cadence](../mm_manual/MM2_Session_Design.md#spark-cadence)
-- [MM2 — 3. Spark for Weakness (organic, MM-awarded)](../mm_manual/MM2_Session_Design.md#3-spark-for-weakness-organic-mm-awarded)
-- [MM5 — Spark Flow (MM Guidance)](../mm_manual/MM5_Quick_Reference.md#spark-flow-mm-guidance)
-- [MM5 — Spark Earning](../mm_manual/MM5_Quick_Reference.md#spark-earning)
+- [MM5 — The Roll (Chapter III.1)](../mm_manual/MM5_Quick_Reference.md#the-roll-chapter-iii1)
 
 ## Specialty
 
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
-- [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
-- [II.5 — Reading the Entries — Lineages](II.5_Lineage.md#reading-the-entries--lineages)
-- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
-- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [II.6 — Body Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#body-facet-backgrounds)
-- [II.6 — Mind Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
-- [II.6 — Soul Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
-- [IV.1 — Specialized Gear](IV.1_Equipment.md#specialized-gear)
-- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
-- [Quick Start — 6. Fill in the rest](Quick_Start.md#6-fill-in-the-rest)
-- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
-- [MM5 — Common Rulings](../mm_manual/MM5_Quick_Reference.md#common-rulings)
-
-## Staggered
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
-- [III.3 — The Shape of a Fight](III.3_Combat.md#the-shape-of-a-fight)
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — Conditions](III.3_Combat.md#conditions)
-- [III.3 — Tier 2 Conditions](III.3_Combat.md#tier-2-conditions)
-- [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
-- [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
-- [IV.1 — Armor in Play](IV.1_Equipment.md#armor-in-play)
-- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-
-## Starting Skill
-
 *Defined in [II.6](II.6_Character_Creation_Backgrounds.md).*
 
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.1 — The Seven Steps](II.1_Character_Creation_Overview.md#the-seven-steps)
-- [II.6 — What a Background Contains](II.6_Character_Creation_Backgrounds.md#what-a-background-contains)
-- [II.6 — Creating a Custom Background](II.6_Character_Creation_Backgrounds.md#creating-a-custom-background)
-- [II.6 — Body Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#body-facet-backgrounds)
-- [II.6 — Mind Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#mind-facet-backgrounds)
-- [II.6 — Soul Facet Backgrounds](II.6_Character_Creation_Backgrounds.md#soul-facet-backgrounds)
-- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
-
-## Strike
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — Strike Outcomes](III.3_Combat.md#strike-outcomes)
-- [IV.1 — Weapons](IV.1_Equipment.md#weapons)
-- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
-- [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
-- [MM1 — Three Worked Enemy Techniques](../mm_manual/MM1_Encounters_and_Enemies.md#three-worked-enemy-techniques)
-- [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
-- [MM2 — Magic Against Active Opposition](../mm_manual/MM2_Session_Design.md#magic-against-active-opposition)
-- [MM2 — Quiet Players vs. Dominant Players](../mm_manual/MM2_Session_Design.md#quiet-players-vs-dominant-players)
-- [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
-
-## Support
-
-*Defined in [III.3](III.3_Combat.md).*
-
-- [III.1 — Group Rolls](III.1_Core_Resolution.md#group-rolls)
-- [III.3 — Support](III.3_Combat.md#support)
-- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
-
-## Technique
-
-- [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
-- [II.1 — What the Character Sheet Contains](II.1_Character_Creation_Overview.md#what-the-character-sheet-contains)
-- [II.3 — Sparks and Magic](II.3_Magic.md#sparks-and-magic)
-- [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
-- [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
-- [II.4 — Major Advancement](II.4_Character_Creation_Facets.md#major-advancement)
-- [II.4a — Facet of the Body — Technique Tree](II.4a_Character_Creation_Facet_Body.md#facet-of-the-body--technique-tree)
-- [II.4b — Facet of the Mind — Technique Tree](II.4b_Character_Creation_Facet_Mind.md#facet-of-the-mind--technique-tree)
-- [II.4c — Facet of the Soul — Technique Tree](II.4c_Character_Creation_Facet_Soul.md#facet-of-the-soul--technique-tree)
-- [II.5 — Formalization](II.5_Lineage.md#formalization)
-- [II.6 — Magic and Backgrounds](II.6_Character_Creation_Backgrounds.md#magic-and-backgrounds)
-- [II.7 — Skills of the Body](II.7_Character_Creation_Skills.md#skills-of-the-body)
+- [Appendix Character Sheet — Knacks and Specialty](Appendix_Character_Sheet.md#knacks-and-specialty)
+- [II.6 — What a Background Is](II.6_Character_Creation_Backgrounds.md#what-a-background-is)
+- [II.6 — Specialties](II.6_Character_Creation_Backgrounds.md#specialties)
+- [II.6 — The Fifteen Backgrounds](II.6_Character_Creation_Backgrounds.md#the-fifteen-backgrounds)
+- [II.6 — Suited to the Body](II.6_Character_Creation_Backgrounds.md#suited-to-the-body)
+- [II.6 — Suited to the Mind](II.6_Character_Creation_Backgrounds.md#suited-to-the-mind)
+- [II.6 — Suited to the Soul](II.6_Character_Creation_Backgrounds.md#suited-to-the-soul)
+- [II.6 — Writing Your Own Background](II.6_Character_Creation_Backgrounds.md#writing-your-own-background)
 - [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
-- [Quick Start — 5. Pick a Background](Quick_Start.md#5-pick-a-background)
-- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
-- [MM1 — Calculating TR](../mm_manual/MM1_Encounters_and_Enemies.md#calculating-tr)
-- [MM2 — Difficulty and Technique Steps](../mm_manual/MM2_Session_Design.md#difficulty-and-technique-steps)
-- [MM3 — Advancement as Story Structure](../mm_manual/MM3_Campaign_Design.md#advancement-as-story-structure)
-- [MM3 — Pacing Advancement Faster or Slower](../mm_manual/MM3_Campaign_Design.md#pacing-advancement-faster-or-slower)
-- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
-- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
-- [MM5 — Adjudicating Magic (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#adjudicating-magic-compressed-from-mm2--see-mm2-for-full-text)
-- [MM5 — Threat Rating (TR)](../mm_manual/MM5_Quick_Reference.md#threat-rating-tr)
-- [MM5 — Skill Advancement](../mm_manual/MM5_Quick_Reference.md#skill-advancement)
+- [Quick Start — 4. Pick a background](Quick_Start.md#4-pick-a-background)
+- [MM2 — When to Call for a Roll](../mm_manual/MM2_Session_Design.md#when-to-call-for-a-roll)
+
+## Standard Foe
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+- [III.3 — Kinds of Foe](III.3_Combat.md#kinds-of-foe)
+- [MM1 — Count the Threats](../mm_manual/MM1_Encounters_and_Enemies.md#count-the-threats)
+
+## Stat
+
+*Defined in [II.2](II.2_Character_Creation_Stats.md).*
+
+- [II.2 — Two Characters, One Stat Line](II.2_Character_Creation_Stats.md#two-characters-one-stat-line)
+- [II.4 — The Facet Owns the Numbers](II.4_Character_Creation_Facets.md#the-facet-owns-the-numbers)
+- [II.4 — What Each Level Gives](II.4_Character_Creation_Facets.md#what-each-level-gives)
+- [II.5 — MM: Creating a Custom Lineage](II.5_Lineage.md#mm-creating-a-custom-lineage)
+- [III.1 — The Roll](III.1_Core_Resolution.md#the-roll)
+- [III.1 — Difficulty](III.1_Core_Resolution.md#difficulty)
+- [III.1 — Avoid](III.1_Core_Resolution.md#avoid)
+- [III.3 — Other Things to Do](III.3_Combat.md#other-things-to-do)
+- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
+- [Quick Start — The One Rule](Quick_Start.md#the-one-rule)
+- [MM2 — Setting Difficulty](../mm_manual/MM2_Session_Design.md#setting-difficulty)
+- [MM5 — The Roll (Chapter III.1)](../mm_manual/MM5_Quick_Reference.md#the-roll-chapter-iii1)
+- [MM5 — Levels (MM3; Chapter II.4)](../mm_manual/MM5_Quick_Reference.md#levels-mm3-chapter-ii4)
+
+## Stunt
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [II.3 — Scope](II.3_Magic.md#scope)
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [III.3 — Attacking](III.3_Combat.md#attacking)
+- [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
+- [Quick Start — Combat in Five Lines](Quick_Start.md#combat-in-five-lines)
+- [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
+- [MM5 — Combat (Chapter III.3; MM1)](../mm_manual/MM5_Quick_Reference.md#combat-chapter-iii3-mm1)
+
+## Talent
+
+*Defined in [II.4](II.4_Character_Creation_Facets.md).*
+
+- [II.3 — Magic Outside the Traditions](II.3_Magic.md#magic-outside-the-traditions)
+- [II.4 — The Facet Owns the Numbers](II.4_Character_Creation_Facets.md#the-facet-owns-the-numbers)
+- [II.4 — Talents and Signatures](II.4_Character_Creation_Facets.md#talents-and-signatures)
+- [II.4 — What Each Level Gives](II.4_Character_Creation_Facets.md#what-each-level-gives)
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+- [MM5 — The Roll (Chapter III.1)](../mm_manual/MM5_Quick_Reference.md#the-roll-chapter-iii1)
+- [MM5 — Levels (MM3; Chapter II.4)](../mm_manual/MM5_Quick_Reference.md#levels-mm3-chapter-ii4)
+
+## Teacher
+
+*Defined in [II.4](II.4_Character_Creation_Facets.md).*
+
+- [II.4 — Writing a Custom Class](II.4_Character_Creation_Facets.md#writing-a-custom-class)
+- [II.4 — Talents From Another Facet](II.4_Character_Creation_Facets.md#talents-from-another-facet)
+- [MM3 — What a Level Gives](../mm_manual/MM3_Campaign_Design.md#what-a-level-gives)
+- [MM3 — Making It Matter](../mm_manual/MM3_Campaign_Design.md#making-it-matter)
+
+## Telegraph
+
+*Defined in [III.3](III.3_Combat.md).*
+
+- [III.3 — Other Things to Do](III.3_Combat.md#other-things-to-do)
+- [MM1 — Telegraph Intent](../mm_manual/MM1_Encounters_and_Enemies.md#telegraph-intent)
+- [MM4 — What Players Come For](../mm_manual/MM4_Running_the_Table.md#what-players-come-for)
+- [MM5 — Combat (Chapter III.3; MM1)](../mm_manual/MM5_Quick_Reference.md#combat-chapter-iii3-mm1)
+
+## Thaumaturgy
+
+*Defined in [II.3](II.3_Magic.md).*
+
+- [II.2 — The Three Stats](II.2_Character_Creation_Stats.md#the-three-stats)
+- [II.3 — Casting](II.3_Magic.md#casting)
+- [II.4 — The Facet Owns the Numbers](II.4_Character_Creation_Facets.md#the-facet-owns-the-numbers)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
 
 ## Threat Clock
 
@@ -1107,97 +951,84 @@
 
 - [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
 - [III.2 — In Play: The Mill at Millhaven](III.2_Adventuring.md#in-play-the-mill-at-millhaven)
-- [III.3 — Recovering Your Endurance Pool](III.3_Combat.md#recovering-your-endurance-pool)
-- [MM2 — Hazards as a Pacing Tool](../mm_manual/MM2_Session_Design.md#hazards-as-a-pacing-tool)
+- [MM2 — Threat Clocks](../mm_manual/MM2_Session_Design.md#threat-clocks)
+- [MM2 — When You're Stuck](../mm_manual/MM2_Session_Design.md#when-youre-stuck)
+- [MM5 — The Toolbox (MM6)](../mm_manual/MM5_Quick_Reference.md#the-toolbox-mm6)
+- [MM6 — Stuck? Three Options](../mm_manual/MM6_The_Toolbox.md#stuck-three-options)
 
-## Threat Rating
+## Tradition
 
-*Defined in [MM1](../mm_manual/MM1_Encounters_and_Enemies.md).*
+*Defined in [II.3](II.3_Magic.md).*
 
-- [List of Tables — Mirror Master's Manual](List_of_Tables.md#mirror-masters-manual)
-- [List of Tables — Bestiary](List_of_Tables.md#bestiary)
-- [MM1 — Threat Rating](../mm_manual/MM1_Encounters_and_Enemies.md#threat-rating)
-- [MM5 — Threat Rating (TR)](../mm_manual/MM5_Quick_Reference.md#threat-rating-tr)
+- [II.4 — The Facet Owns the Numbers](II.4_Character_Creation_Facets.md#the-facet-owns-the-numbers)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+- [II.6 — What a Background Is](II.6_Character_Creation_Backgrounds.md#what-a-background-is)
+- [II.6 — Suited to the Body](II.6_Character_Creation_Backgrounds.md#suited-to-the-body)
+- [II.6 — Suited to the Soul](II.6_Character_Creation_Backgrounds.md#suited-to-the-soul)
+- [II.6 — Writing Your Own Background](II.6_Character_Creation_Backgrounds.md#writing-your-own-background)
+- [IV.2 — Relics](IV.2_Treasure.md#relics)
 
-## Tier
+## Trinket
 
-*Defined in [II.4](II.4_Character_Creation_Facets.md).*
+*Defined in [IV.2](IV.2_Treasure.md).*
 
-- [Appendix Magic Domains — Prismatic Mind Domains](Appendix_Magic_Domains.md#prismatic-mind-domains)
-- [II.3 — Sparks and Magic](II.3_Magic.md#sparks-and-magic)
-- [II.3 — Acquiring a Domain](II.3_Magic.md#acquiring-a-domain)
-- [II.4 — Techniques](II.4_Character_Creation_Facets.md#techniques)
-- [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
-- [II.4a — Grace Branch](II.4a_Character_Creation_Facet_Body.md#grace-branch)
-- [II.4a — Iron Branch](II.4a_Character_Creation_Facet_Body.md#iron-branch)
-- [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
-- [II.4b — Tier 2 *(requires one Clarity Tier 1)*](II.4b_Character_Creation_Facet_Mind.md#tier-2-requires-one-clarity-tier-1)
-- [II.4b — Tier 3 *(requires one Clarity Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-clarity-tier-2)
-- [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
-- [II.4b — Tier 2 *(requires one Instinct Tier 1)*](II.4b_Character_Creation_Facet_Mind.md#tier-2-requires-one-instinct-tier-1)
-- [II.4b — Tier 3 *(requires one Instinct Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-instinct-tier-2)
-- [II.4b — Tier 1](II.4b_Character_Creation_Facet_Mind.md#tier-1)
-- [II.4b — Tier 2 *(requires one Archive Tier 1)*](II.4b_Character_Creation_Facet_Mind.md#tier-2-requires-one-archive-tier-1)
-- [II.4b — Tier 3 *(requires one Archive Tier 2)*](II.4b_Character_Creation_Facet_Mind.md#tier-3-requires-one-archive-tier-2)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [II.4c — Tier 1](II.4c_Character_Creation_Facet_Soul.md#tier-1)
-- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
-- [III.3 — Tier 1 Conditions](III.3_Combat.md#tier-1-conditions)
-- [III.3 — Tier 2 Conditions](III.3_Combat.md#tier-2-conditions)
-- [III.3 — Tier 3: Broken](III.3_Combat.md#tier-3-broken)
-- [III.3 — Incoming Condition Tier](III.3_Combat.md#incoming-condition-tier)
-- [IV.1 — Weapons](IV.1_Equipment.md#weapons)
-- [IV.1 — Armor](IV.1_Equipment.md#armor)
-- [IV.1 — Armor in Play](IV.1_Equipment.md#armor-in-play)
-- [IV.1 — Specialized Gear](IV.1_Equipment.md#specialized-gear)
-- [List of Boxes — Player Handbook](List_of_Boxes.md#player-handbook)
-- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [List of Tables — Bestiary](List_of_Tables.md#bestiary)
-- [MM1 — The Minimal Stat Block](../mm_manual/MM1_Encounters_and_Enemies.md#the-minimal-stat-block)
-- [MM1 — TR Reference Examples](../mm_manual/MM1_Encounters_and_Enemies.md#tr-reference-examples)
-- [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
-- [MM1 — Three Worked Enemy Techniques](../mm_manual/MM1_Encounters_and_Enemies.md#three-worked-enemy-techniques)
-- [MM1 — Bosses](../mm_manual/MM1_Encounters_and_Enemies.md#bosses)
-- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
-- [MM2 — Designing the 7-9 Complication](../mm_manual/MM2_Session_Design.md#designing-the-7-9-complication)
-- [MM2 — The Play Field](../mm_manual/MM2_Session_Design.md#the-play-field)
-- [MM5 — Core Resolution](../mm_manual/MM5_Quick_Reference.md#core-resolution)
-- [MM5 — Strike Outcomes](../mm_manual/MM5_Quick_Reference.md#strike-outcomes)
-- [MM5 — Reactions (1 per incoming action)](../mm_manual/MM5_Quick_Reference.md#reactions-1-per-incoming-action)
-- [MM5 — Enemy Attacks](../mm_manual/MM5_Quick_Reference.md#enemy-attacks)
-- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — Armor (PC downgrade budget)](../mm_manual/MM5_Quick_Reference.md#armor-pc-downgrade-budget)
-- [MM5 — Endurance Pool](../mm_manual/MM5_Quick_Reference.md#endurance-pool)
-- [MM5 — Magic: Domain + Intent + Scope](../mm_manual/MM5_Quick_Reference.md#magic-domain--intent--scope)
+- [IV.2 — Trinkets](IV.2_Treasure.md#trinkets)
+- [MM5 — The Toolbox (MM6)](../mm_manual/MM5_Quick_Reference.md#the-toolbox-mm6)
+- [MM6 — Loot](../mm_manual/MM6_The_Toolbox.md#loot)
 
-## Weapon
+## Usage Die
 
 *Defined in [IV.1](IV.1_Equipment.md).*
 
-- [II.2 — Body](II.2_Character_Creation_Attributes.md#body)
-- [II.4a — Might Branch](II.4a_Character_Creation_Facet_Body.md#might-branch)
-- [II.7 — Skills of the Body](II.7_Character_Creation_Skills.md#skills-of-the-body)
-- [III.3 — Strike](III.3_Combat.md#strike)
-- [III.3 — Parry](III.3_Combat.md#parry)
+- [IV.1 — The Usage Die](IV.1_Equipment.md#the-usage-die)
+- [MM2 — The Exploration Turn](../mm_manual/MM2_Session_Design.md#the-exploration-turn)
+- [MM2 — Running It Well](../mm_manual/MM2_Session_Design.md#running-it-well)
+- [MM5 — The Toolbox (MM6)](../mm_manual/MM5_Quick_Reference.md#the-toolbox-mm6)
+- [MM6 — Usage Dice](../mm_manual/MM6_The_Toolbox.md#usage-dice)
+
+## Working
+
+*Defined in [II.3](II.3_Magic.md).*
+
+- [II.3 — Scope](II.3_Magic.md#scope)
+- [II.3 — Casting](II.3_Magic.md#casting)
+- [II.3 — Fatigue](II.3_Magic.md#fatigue)
+- [II.3 — In Play: The Thornwall Lower Archive](II.3_Magic.md#in-play-the-thornwall-lower-archive)
+- [II.4 — What Each Level Gives](II.4_Character_Creation_Facets.md#what-each-level-gives)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [II.4b — Signatures](II.4b_Character_Creation_Facet_Mind.md#signatures)
+- [II.4c — Talents](II.4c_Character_Creation_Facet_Soul.md#talents)
+- [II.4c — Signatures](II.4c_Character_Creation_Facet_Soul.md#signatures)
+- [II.6 — Suited to the Mind](II.6_Character_Creation_Backgrounds.md#suited-to-the-mind)
+- [II.6 — Suited to the Soul](II.6_Character_Creation_Backgrounds.md#suited-to-the-soul)
+- [III.3 — Magic in Combat](III.3_Combat.md#magic-in-combat)
 - [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [IV.1 — Weapon Specialization](IV.1_Equipment.md#weapon-specialization)
-- [List of Tables — Player Handbook](List_of_Tables.md#player-handbook)
-- [Quick Start — Quick Reference](Quick_Start.md#quick-reference)
-- [MM5 — Offensive Actions](../mm_manual/MM5_Quick_Reference.md#offensive-actions)
-- [MM5 — Reactions (1 per incoming action)](../mm_manual/MM5_Quick_Reference.md#reactions-1-per-incoming-action)
+- [List of Boxes — Mirror Master's Manual](List_of_Boxes.md#mirror-masters-manual)
+- [Quick Start — 3. Pick a preset class](Quick_Start.md#3-pick-a-preset-class)
+- [MM1 — Dials Other Than Headcount](../mm_manual/MM1_Encounters_and_Enemies.md#dials-other-than-headcount)
+- [MM2 — Mirror Master's Manual: Session Design](../mm_manual/MM2_Session_Design.md#mirror-masters-manual-session-design)
+- [MM2 — Judging Scope](../mm_manual/MM2_Session_Design.md#judging-scope)
+- [MM2 — Domain Boundaries](../mm_manual/MM2_Session_Design.md#domain-boundaries)
+- [MM2 — The 7–9 and the 6−](../mm_manual/MM2_Session_Design.md#the-79-and-the-6)
+- [MM2 — Fatigue and Rest](../mm_manual/MM2_Session_Design.md#fatigue-and-rest)
+- [MM2 — In Play: The Price of a Partial Success](../mm_manual/MM2_Session_Design.md#in-play-the-price-of-a-partial-success)
+- [MM3 — Mirror Master's Manual: Campaign Design](../mm_manual/MM3_Campaign_Design.md#mirror-masters-manual-campaign-design)
+- [MM4 — In Play: Sharing the Spotlight](../mm_manual/MM4_Running_the_Table.md#in-play-sharing-the-spotlight)
+- [MM6 — Magic Costs and Mishaps](../mm_manual/MM6_The_Toolbox.md#magic-costs-and-mishaps)
 
-## Winded
+## Wound
 
-*Defined in [III.3](III.3_Combat.md).*
+*Defined in [III.2](III.2_Adventuring.md).*
 
-- [III.2 — In Play: The Mill at Millhaven](III.2_Adventuring.md#in-play-the-mill-at-millhaven)
-- [III.2 — Getting Hurt and Getting Better](III.2_Adventuring.md#getting-hurt-and-getting-better)
-- [III.3 — Tier 1 Conditions](III.3_Combat.md#tier-1-conditions)
-- [III.3 — Condition Summary](III.3_Combat.md#condition-summary)
-- [III.3 — In Play: The Archive's Guardian](III.3_Combat.md#in-play-the-archives-guardian)
-- [III.3 — Condition Tiers](III.3_Combat.md#condition-tiers)
-- [MM1 — Mooks](../mm_manual/MM1_Encounters_and_Enemies.md#mooks)
-- [MM2 — The Trouble Table](../mm_manual/MM2_Session_Design.md#the-trouble-table)
-- [MM5 — Conditions](../mm_manual/MM5_Quick_Reference.md#conditions)
-- [MM5 — MM Trouble Table (compressed from MM2 — see MM2 for full text)](../mm_manual/MM5_Quick_Reference.md#mm-trouble-table-compressed-from-mm2--see-mm2-for-full-text)
+- [II.4a — Talents](II.4a_Character_Creation_Facet_Body.md#talents)
+- [II.4a — Signatures](II.4a_Character_Creation_Facet_Body.md#signatures)
+- [II.4b — Talents](II.4b_Character_Creation_Facet_Mind.md#talents)
+- [II.4b — Signatures](II.4b_Character_Creation_Facet_Mind.md#signatures)
+- [III.2 — Hazards and Threat Clocks](III.2_Adventuring.md#hazards-and-threat-clocks)
+- [III.2 — At 0 HP](III.2_Adventuring.md#at-0-hp)
+- [IV.1 — Slots](IV.1_Equipment.md#slots)
+- [Quick Start — Combat in Five Lines](Quick_Start.md#combat-in-five-lines)
+- [MM2 — Session Zero](../mm_manual/MM2_Session_Design.md#session-zero)
+- [MM5 — 0 HP and Rest (Chapter III.2)](../mm_manual/MM5_Quick_Reference.md#0-hp-and-rest-chapter-iii2)
+- [MM6 — Wounds and Scars](../mm_manual/MM6_The_Toolbox.md#wounds-and-scars)

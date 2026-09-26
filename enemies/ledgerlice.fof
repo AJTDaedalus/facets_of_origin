@@ -1,35 +1,50 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: ledgerlice
 name: Ledgerlice
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
+    version: 1.0.0
 enemy:
-  tier: mook
-  attack_modifier: 0
-  armor: none
-  techniques:
-  - swarm
-  special: SWARM — a Strike that lands scatters the ledgerlice rather than killing
-    them. They are gone from the exchange and back in the room within the hour.
-  description: Grey, flat, and the size of a thumbnail, with a jaw built for one
-    job. A ledgerlouse eats paper, prefers ink, and will take a page out of a bound
-    volume so cleanly that the book does not sag. An infested archive looks perfectly
-    well until somebody opens something.
-  disposition: Hungry and entirely uninterested in people, except as an obstacle
-    between it and a page.
-  first_target: Whatever written thing is nearest. Characters are attacked only
-    for carrying one.
-  triggers:
-  - Goes for satchels, scroll cases, and open books before it goes for skin.
-  - A page laid down away from the party draws the whole swarm to it within one
-    exchange.
-  morale: Cannot be routed and does not need to be. It leaves when the paper does.
-  organization: Never fewer than a hundred; counted as one to three Mooks by mass.
-  notes: 'TR breakdown: offense(+0 → 2) + durability(Mook → 0) + armor(none → 0)
-    + techniques(1) = 3. The number is almost meaningless — this is a problem, not
-    a fight.'
-created_at: '2026-08-02T00:00:00+00:00'
-last_modified: '2026-08-02T00:00:00+00:00'
+  # v0.3: Mook, attack +0, rating 3.
+  level: 1
+  role: mook
+  armor: 0
+  morale: 12
+  weapon: A jaw built for one job
+  wants: The nearest page, and then the next one.
+  special: 'SWARM — a hit scatters the swarm instead of killing it: it is out of the exchange
+    and back in the room within the hour. On a hard hit it also eats one written thing the
+    target is carrying.'
+  when_bloodied: null
+  tells: Clean holes in the paper, exactly the shape of a paragraph, in a book that looked
+    fine until somebody opened it.
+  breaks: Cannot be routed. It leaves when the paper does, and a page laid down away from
+    the party draws the whole swarm to it within one exchange.
+  twists:
+  - The swarm is four pages from eating the one paragraph the party came for.
+  - It has already eaten the building's register, and nobody here knows what used to be in
+    it.
+  - It is in somebody's pack, and has been since the last library.
+  - Someone has been feeding it on purpose, to make a record disappear.
+  - The room is cold and the swarm is sluggish; warm it up and the swarm wakes.
+  - An archivist is shielding the shelves with their own body and needs help, not rescuing.
+  nastier: 'Wet ink draws it at a run: anyone who writes, reads aloud from a page, or works
+    magic from notes in its presence is its only target.'
+  description: >-
+    Grey, flat, and the size of a thumbnail, with a jaw built for one job. A ledgerlouse eats
+    paper, prefers ink, and will take a page out of a bound volume so cleanly that the book
+    does not sag. An infested archive looks perfectly well until somebody opens something.
+  notes: >-
+    Level 1 Mook: no overrides. Fearless (morale 12) because it cannot be routed; its way
+    out is the decoy.
+
+
+    This is a problem, not a fight. A swarm is never fewer than a hundred, and counts as one
+    to three Mooks by mass. It goes for satchels, scroll cases and open books before it goes
+    for skin; characters are attacked only for carrying something written.
+
+
+    Appears: never fewer than a hundred; counted as one to three Mooks by mass.
+  reskin_of: null

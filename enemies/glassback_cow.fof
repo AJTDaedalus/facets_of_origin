@@ -1,35 +1,50 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: glassback_cow
 name: Glassback Cow
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
+    version: 1.0.0
 enemy:
-  tier: named
-  attack_modifier: 2
-  armor: light
-  techniques: []
-  special: null
-  description: An elk the colour of wet slate, seven feet at the shoulder, with
-    antlers that are not bone. They are a clear mineral that rings when struck and
-    carries light a surprising distance down its length. In herd country you hear
-    a glassback before you see one, and what you hear is chiming.
-  disposition: Wants you to leave. Every single thing it does is an escalating request
-    that you leave.
-  first_target: Whoever is nearest a calf, regardless of what that person is doing.
-  triggers:
-  - Opens with display — a stamp, a bellow, a lowered rack — never a blow. The first
-    exchange of any glassback encounter is a warning the MM should narrate as unmistakable.
-  - Strikes only if the party closes after the display, or if a calf is between
-    the party and the herd.
-  morale: Stops the instant the distance opens. It does not pursue, it does not
-    finish anyone down, and it will stand over a fallen character without touching
-    them until the rest of the party backs away.
-  organization: Herds of eight to twenty, one calf in three.
-  notes: 'TR breakdown: offense(+2 → 4) + durability(Resolve 4) + armor(light →
-    1) + techniques(0) = 9. Rated for a fight the party should not be having.'
-  resolve: 4
-created_at: '2026-08-02T00:00:00+00:00'
-last_modified: '2026-08-02T00:00:00+00:00'
+  # v0.3: Named, durability 4, attack +2, light armor, rating 9.
+  level: 3
+  role: standard
+  armor: 1
+  morale: 5
+  weapon: Ringing antler rack
+  wants: You gone, and further from the calves than you are now.
+  special: 'DISPLAY FIRST — the first exchange is a warning, never a blow: a stamp, a bellow,
+    a lowered rack. After that it attacks only someone who closed after the display, or who
+    stands between a calf and the herd.'
+  when_bloodied: It plants itself over the nearest calf and Defends (no attack; attacks on
+    it are Hard) until the party backs away.
+  tells: Chiming over the treeline before you see anything. Then one of the herd stops eating
+    and looks at you.
+  breaks: Stops the instant the distance opens. It does not pursue, does not finish anyone
+    who is down, and will stand over a fallen character without touching them until the rest
+    of the party backs away.
+  twists:
+  - A calf has wandered into the party's camp and gone to sleep there.
+  - It is autumn, and shed racks lie in the grass for anyone patient enough to pick one up.
+  - The herd is crossing the only ford for a day's walk in either direction.
+  - One cow is lame, and the herd will not leave her.
+  - Poachers took a calf this morning, and the herd is following the trail straight through
+    the party.
+  - A local guide offers to walk the party past the herd for a fee, and actually knows how.
+  nastier: It is the season, and the bull is within a mile.
+  description: >-
+    An elk the colour of wet slate, seven feet at the shoulder, with antlers that are not
+    bone. They are a clear mineral that rings when struck and carries light a surprising distance
+    down its length. In herd country you hear a glassback before you see one, and what you
+    hear is chiming.
+  notes: >-
+    Level 3 standard, armor 1: no overrides. Rated for a fight the party should not be having.
+
+
+    Wants you to leave; every single thing it does is an escalating request that you leave.
+    Its first target is whoever is nearest a calf, regardless of what that person is doing.
+
+
+    Appears: herds of eight to twenty, one calf in three.
+  reskin_of: null

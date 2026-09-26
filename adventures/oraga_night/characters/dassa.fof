@@ -1,61 +1,58 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: character
-id: dassa-oraga_ni
+id: dassa
 name: Dassa
-version: 1.0.0
+version: 2.0.0
 authors:
 - Dassa
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
+    version: 1.0.0
   - id: valloh
-    version: 0.1.0
+    version: 1.0.0
 campaign_id: oraga_night
 character:
   name: Dassa
   player_name: Dassa
-  primary_facet: body
-  attributes:
-    strength: 3
-    dexterity: 2
-    constitution: 3
-    intelligence: 1
-    wisdom: 2
-    knowledge: 2
-    spirit: 1
-    luck: 2
-    charisma: 2
-  skills:
-    combat:
-      rank: practiced
-      marks: 0
-    endurance:
-      rank: novice
-      marks: 1
-  sparks: 3
-  session_skill_points_remaining: 4
-  training_marks_this_session: 0
-  facet_levels: {}
-  rank_advances_by_facet:
-    body: 1
-  facet_level: 0
-  total_facet_levels: 0
-  career_advances: 1
-  technique_picks_available: 0
-  techniques: []
-  technique_choices: {}
-  background_id: city_watch_veteran
+  facet: body
+  level: 1
+  class:
+    id: guardian
+    name: Guardian
+    concept: "I am a shield for the people behind me."
+    custom: false
+  stats: {body: 2, mind: 0, soul: 1}
+  hp: {max: 16, current: 16}        # Body grit die maximum 10 + Body 2 + Tough 4
+  knacks: ["Bodyguard work", "City Watch Veteran"]   # class, background (ungifted: no gift knack)
   specialty: Knows the layout, regular occupants, and unofficial rules of one specific district
     or settlement from your service years.
-  lineage: orthaen
-  gifted: false
+  background:
+    id: city_watch_veteran
+    name: City Watch Veteran
+  lineage: {id: orthaen, gifted: false}
+  talents:
+  - {id: sentinel, improved: false}
+  - {id: tough, improved: false}
+  signature: null
+  magic: null
+  inventory:
+  - {id: standard_weapon, name: "Sword", slots: 1, kind: blades}
+  - {id: light_armor, name: "Light armor", slots: 1}
+  equipped: {weapon: standard_weapon, armor: light, shield: false}
+  coin: 30
+  fatigue: 0
+  wounds: []
+  scars: []
+  sparks: 3
+  talent_uses: {}
   module_role: The House-Blade
   description: A hired blade of no house, who has guarded richer and softer people for twenty
     years. One Orthaen in five is born without the gift; Dassa has spent a lifetime being
     reminded of it politely, and has outlived several of the people who did the reminding.
     Slow to speak, impossible to move.
   suggested_agenda: The Vanished Servant, or bodyguard to another player character.
-  technique_at_facet_level_1: weapon_mastery
+  notes_player: ""
+  notes_mm: ""
 created_at: '2026-09-09T11:54:53.805180+00:00'
-last_modified: '2026-09-09T11:54:53.805180+00:00'
+last_modified: '2026-09-25T00:00:00+00:00'

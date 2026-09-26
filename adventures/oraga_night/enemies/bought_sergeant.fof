@@ -1,47 +1,54 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: bought_sergeant
 name: Sergeant-at-Arms
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
+    version: 1.0.0
 enemy:
-  tier: named
-  attack_modifier: 2
-  armor: light
-  techniques:
-  - hold_the_terms
-  special: HOLD THE TERMS — once per scene, the sergeant states the contract's boundary aloud.
-    Every Blade in earshot immediately behaves as though the boundary is where the sergeant
-    just said it is, whatever they believed a moment ago.
+  level: 3
+  role: standard
+  armor: 1
+  morale: 8
+  weapon: Company blade, drawn second; the contract case, drawn first
+  wants: The contract satisfied or voided. Either one ends the fight.
+  special: HOLD THE TERMS — once per scene, the sergeant states the contract's boundary aloud,
+    and every Blade in earshot at once behaves as though the boundary is where the sergeant
+    just said it is.
+  when_bloodied: Calls the Blades back to the boundary and starts offering terms out loud, still
+    fighting.
+  tells: It opens by reading the contract's terms aloud. This is not a bluff; it is how the
+    company works.
+  breaks: Surrenders the field the moment the contract is void (payment withdrawn, terms broken
+    by the employer, or the named target gone), says so, and expects to be believed.
+  twists:
+  - The employer broke the terms an hour ago, and the sergeant does not know yet.
+  - The sergeant has read the contract twice and privately thinks the party is right.
+  - Two sergeants, two fours, and the fours have been told two different boundaries.
+  - The named target is standing behind the sergeant, and is a friend of the party.
+  - The contract case is gone from its belt, stolen, and the sergeant is improvising.
+  - The party splits up, and the sergeant spends Hold the Terms to keep every Blade on one side
+    of the line.
+  nastier: Level 5, and Hold the Terms can be used again each time a Blade falls.
   description: The one reading the room instead of the target. Sergeants of the Bought carry
     the contract itself in a case chained at the hip and produce it more readily than steel
-    — which lands strangely in Val'loh, where the written word belongs to the Church and a
-    chained case of it is either blasphemy or a very expensive dispensation. Nobody at the
-    gate is going to ask which tonight.
-  disposition: Reads first, fights second, and would genuinely rather not.
-  first_target: Whoever is closest to breaking the contract's boundary.
-  triggers:
-  - Opens by naming the contract's terms aloud. This is not a bluff; it is how the company
-    works.
-  - Spends Hold the Terms when the party splits, to keep the Blades from following anyone
-    past the line.
-  morale: Surrenders the field the moment the contract is void — payment withdrawn, terms
-    broken by the employer, or the named target gone. Will say so out loud and expect to be
-    believed.
-  organization: One per four Blades. Four of them are in Rekuzan.
-  notes: 'TR breakdown: offense(+2 → 4) + durability(Resolve 3) + armor(light → 1) + techniques(1)
-    = 9.
+    — which lands strangely in Val'loh, where the written word belongs to the Church and a chained
+    case of it is either blasphemy or a very expensive dispensation. Nobody at the gate is going
+    to ask which tonight.
+  notes: 'Level 3 standard, armor 1: no overrides.
 
 
-    MODULE RESKIN (Oraga Night). Flavour fields only — description and organization. Tier,
-    resolve, attack_modifier, armor, techniques and special are the Bestiary''s and must stay
-    identical to enemies/bought_sergeant.fof; a test asserts it. The Bestiary files stay setting-agnostic
+    Reads first, fights second, and would genuinely rather not. Its first target is whoever
+    is closest to breaking the contract''s boundary. It shifts for proof the employer has broken
+    terms, and honours any deal that lets the company withdraw with its fee and its reputation.
+
+
+    MODULE RESKIN (Oraga Night). Flavour fields only — name, description, organization and notes.
+    Level, role, armor, morale and every card line are the Bestiary''s and must stay identical
+    to enemies/bought_sergeant.fof; a test asserts it (INV-18). The Bestiary stays setting-agnostic
     (B9), which is why the Val''loh colour lives here instead.'
-  negotiation: Wants the contract satisfied or voided; either ends the fight. Shifts for proof
-    the employer has broken terms. Honours any deal that lets the company withdraw with its
-    fee and its reputation.
-  resolve: 3
+  organization: One per four Blades. Four of them are in Rekuzan.
+  reskin_of: bought_sergeant
 created_at: '2026-08-02T00:00:00+00:00'
-last_modified: '2026-08-02T00:00:00+00:00'
+last_modified: '2026-09-25T00:00:00+00:00'

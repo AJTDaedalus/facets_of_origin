@@ -18,24 +18,30 @@ They cannot leave their road. Not will not — cannot. A pack's territory is mea
 
 <!-- statblock: chalk_hound -->
 
-**Chalk Hound** · *Mook* · **TR 3**
+**Chalk Hound** · *Level 2 Mook* · Teeth of packed grit
 
-**When they act on it:** Resolve — · armor none
+**HP** — (drops to any hit) · **Armor** 0 · **Attack** +0 · **Damage** 4 · **Attacks** 1 · **Morale** 12 (fearless)
 
-**When it acts:** attack +1 · incoming Tier 1
+*Attacks as a mob: +1 damage per extra Mook (max +4).*
 
-**Disposition:** Runs. That is the entire animal. It does not circle, feint, or wait.
+**Wants:** To chase whatever is moving fastest along its road.
 
-**Goes for:** Whoever is moving fastest, which is usually whoever is fleeing.
+**Special:** ON THE PASS — it attacks only something that is moving. A character who stops dead and stays stopped for the exchange is not a target; the mob runs past. A hound that is made to stop for a full exchange comes apart and does not reassemble.
 
-**In play:**
+**Tells:** Dust comes up off the road in a line, at the speed of a horse, with no horse. The pack never leaves the road's surface.
 
-- It attacks only on the pass; it cannot strike from a standstill.
-- A character who stops moving entirely is not a target — the pack has nothing to chase, and goes past.
+**Breaks:** It does not break; it stops, and stopping is the end of it. The pack cannot follow anyone off its road.
 
-**Morale:** A hound that is made to stop for one full exchange comes apart and does not reassemble. The pack does not mourn it and does not scatter for it.
+**Twists (d6):**
 
-**Appears:** Four to nine on a stretch of road, always the same stretch.
+1. A cart is already being chased, and the carter is shouting instructions nobody can hear.
+2. The road runs through a narrow cutting, and there is nowhere to step aside to.
+3. It is raining: the hounds are heavy and slow, and a hit leaves one as mud on the road.
+4. The road was ploughed over two generations ago, and the pack runs through a field of standing crops.
+5. One hound keeps breaking from the line to circle a single spot on the road. Something is buried there.
+6. The pack is running down the party's own tracks from an hour ago.
+
+**Nastier:** The pack's Lead is watching from the far end of the road.
 
 *`enemies/chalk_hound.fof`*
 
@@ -43,26 +49,30 @@ They cannot leave their road. Not will not — cannot. A pack's territory is mea
 
 <!-- statblock: chalk_lead -->
 
-**The Lead** · *Named* · **TR 8**
+**The Lead** · *Level 3 Standard* · Grit, and a rust-brown seam
 
-**When they act on it:** Resolve 3 · armor none
+**HP** 14 · **Armor** 0 · **Attack** +2 · **Damage** 6 · **Attacks** 1 · **Morale** 7
 
-**When it acts:** attack +2 · incoming Tier 2
+**Wants:** Whatever the pack has already failed to catch.
 
-**Special:** UNMAKING RUN — once per scene, the Lead runs the full length of the road the pack claims. Every chalk hound that has come apart this scene reassembles behind it.
+**Special:** UNMAKING RUN — once per scene, the Lead runs the whole length of the pack's road, and every chalk hound that has come apart this scene reassembles behind it.
 
-**Disposition:** Patient in a way none of its pack is. It watches one full pass before it commits.
+**When bloodied:** It stops holding back. If it has not made its Unmaking Run yet, it makes it now.
 
-**Goes for:** Whoever the pack has already failed to catch.
+**Tells:** One of the pack is a head taller than the rest, with a rust-brown seam through it, and it has not run yet. It is watching the pass.
 
-**In play:**
+**Breaks:** Withdraws down its own road and takes what is left of the pack with it. It does not follow anyone off the road; it has never been off the road.
 
-- Holds back through the first exchange, then joins on the second.
-- Spends its Unmaking Run the moment three or more hounds are down.
+**Twists (d6):**
 
-**Morale:** Withdraws down its own road at Resolve 1, and takes what is left of the pack with it. It does not follow anyone off the road; it has never been off the road.
+1. The seam is wet: something bled on this road last night.
+2. It holds back through the whole fight and runs only when someone tries to leave.
+3. The road ends at a bridge that is out, and the Lead knows exactly where the drop is.
+4. Two roads cross here, and two packs are contesting the crossing.
+5. It has started running beside one carter's cart every night, and only that cart.
+6. The pack is down to the Lead and two hounds, and it runs harder than any full pack.
 
-**Appears:** One per pack, and a pack per road.
+**Nastier:** It can make the Unmaking Run twice a scene, and the hounds it reassembles attack in the exchange they come back.
 
 *`enemies/chalk_lead.fof`*
 
@@ -78,8 +88,8 @@ They cannot leave their road. Not will not — cannot. A pack's territory is mea
 
 **Encounters.**
 
-- **Four hounds on the mile-post road** *(4 Mooks — Skirmish at Party Strength 3)*. The classic, and the one to open with. It is not dangerous. It is terrifying, which is a different thing, and a party that works out the standing-still rule here will feel clever for the rest of the campaign.
-- **The Lead and seven hounds, at the parish boundary** *(1 Named + 7 Mooks — between Skirmish and Standard; the Lead is the whole encounter)*. The Unmaking Run turns a resolved fight back into an unresolved one exactly once, and the table will remember it.
+- **Four hounds on the mile-post road** *(four level 2 Mooks — easy for a party of three)*. The classic, and the one to open with. It is not dangerous. It is terrifying, which is a different thing, and a party that works out the standing-still rule here will feel clever for the rest of the campaign.
+- **The Lead and seven hounds, at the parish boundary** *(the Lead and seven Mooks — a fair fight, and the Lead is the whole of it)*. Seven hounds running as one mob hit hard enough to matter. The Unmaking Run turns a resolved fight back into an unresolved one exactly once, and the table will remember it.
 - **The carter's problem** *(no fight)*. A carter needs a load moved along nine miles of hound-run road tonight. She has done it before by walking the whole way beside a stopped cart, taking eleven hours, and she cannot afford eleven hours this time. Everything the party needs to solve this is in the entry.
 
 **Ecology.** A road with a pack on it is a road with reliable trade and unreliable travellers — the surface stays maintained, because the traffic keeps coming, and the traffic keeps coming because the pack has never taken a load. They do not eat. They chase. A region that hosts a mature pack develops a particular kind of carter: unhurried, unbothered, and very slightly smug.
@@ -100,24 +110,30 @@ Glassbacks are not dangerous. Glassbacks defending a calf are extremely dangerou
 
 <!-- statblock: glassback_cow -->
 
-**Glassback Cow** · *Named* · **TR 9**
+**Glassback Cow** · *Level 3 Standard* · Ringing antler rack
 
-**When they act on it:** Resolve 4 · armor light (+1 Resolve)
+**HP** 14 · **Armor** 1 · **Attack** +2 · **Damage** 6 · **Attacks** 1 · **Morale** 5
 
-**When it acts:** attack +2 · incoming Tier 2
+**Wants:** You gone, and further from the calves than you are now.
 
-**Disposition:** Wants you to leave. Every single thing it does is an escalating request that you leave.
+**Special:** DISPLAY FIRST — the first exchange is a warning, never a blow: a stamp, a bellow, a lowered rack. After that it attacks only someone who closed after the display, or who stands between a calf and the herd.
 
-**Goes for:** Whoever is nearest a calf, regardless of what that person is doing.
+**When bloodied:** It plants itself over the nearest calf and Defends (no attack; attacks on it are Hard) until the party backs away.
 
-**In play:**
+**Tells:** Chiming over the treeline before you see anything. Then one of the herd stops eating and looks at you.
 
-- Opens with display — a stamp, a bellow, a lowered rack — never a blow. The first exchange of any glassback encounter is a warning the MM should narrate as unmistakable.
-- Strikes only if the party closes after the display, or if a calf is between the party and the herd.
+**Breaks:** Stops the instant the distance opens. It does not pursue, does not finish anyone who is down, and will stand over a fallen character without touching them until the rest of the party backs away.
 
-**Morale:** Stops the instant the distance opens. It does not pursue, it does not finish anyone down, and it will stand over a fallen character without touching them until the rest of the party backs away.
+**Twists (d6):**
 
-**Appears:** Herds of eight to twenty, one calf in three.
+1. A calf has wandered into the party's camp and gone to sleep there.
+2. It is autumn, and shed racks lie in the grass for anyone patient enough to pick one up.
+3. The herd is crossing the only ford for a day's walk in either direction.
+4. One cow is lame, and the herd will not leave her.
+5. Poachers took a calf this morning, and the herd is following the trail straight through the party.
+6. A local guide offers to walk the party past the herd for a fee, and actually knows how.
+
+**Nastier:** It is the season, and the bull is within a mile.
 
 *`enemies/glassback_cow.fof`*
 
@@ -125,30 +141,32 @@ Glassbacks are not dangerous. Glassbacks defending a calf are extremely dangerou
 
 <!-- statblock: glassback_bull -->
 
-**Glassback Bull** · *Boss* · **TR 13**
+**Glassback Bull** · *Level 3 Boss* · A rack wider than a cart
 
-**When they act on it:** Resolve 6 · armor light (+1 Resolve)
+**HP** 70 · **Armor** 1 · **Attack** +3 · **Damage** 8 · **Attacks** 2 · **Morale** 6
 
-**When it acts:** attack +3 · incoming Tier 2
+*Changes phase when Bloodied (half HP).*
 
-**Special:** RINGING CHARGE — when the bull closes from a distance, its antlers ring on impact and the note carries. Every glassback within a mile knows where the fight is, and the MM may bring one Glassback Cow to the edge of the scene at the end of the next exchange.
+**Wants:** Distance, the clearing, and the herd behind it.
 
-**At Resolve 2:** The season goes out of it. The bull stops charging, turns broadside, and begins backing toward the herd. It will still answer anyone who closes, but it has stopped starting anything.
+**Special:** RINGING CHARGE — it charges in a straight line and cannot turn inside the charge: anyone who commits to stepping aside instead of meeting it is not in the path. When it closes from a distance its antlers ring, and at the end of the next exchange the MM may bring one Glassback Cow to the edge of the scene.
 
-**Disposition:** In season, and therefore not reasonable. Out of season it is the single most avoidable danger in this book.
+**When bloodied:** The season goes out of it. It stops charging, turns broadside and backs toward the herd. It still answers anyone who closes, but it has stopped starting anything.
 
-**Goes for:** The largest thing in the clearing. Armour makes you a candidate; standing still does not save you.
+**Tells:** Nine feet at the shoulder and a small sunrise on its head, pawing a straight line in the turf toward the largest thing in the clearing.
 
-**In play:**
+**Breaks:** Walks, not runs, back to the herd. Nothing in this book is less interested in finishing a fight.
 
-- Charges in a straight line and cannot turn inside the charge — a character who commits to moving aside rather than meeting it is not in the path.
-- Rings the charge every time it closes from distance.
+**Twists (d6):**
 
-**Morale:** Breaks off at Resolve 2 and walks — not runs — back to the herd. Nothing in this book is less interested in finishing a fight.
+1. It is out of season and entirely avoidable, and someone in the party wants the antlers anyway.
+2. It has already shed one side of its rack, and it is lopsided and furious about it.
+3. A hunter has wounded it: it starts the fight already bloodied.
+4. The clearing is narrow, with trees on both sides, and stepping aside is Hard.
+5. Another bull is contesting the herd, and the party has walked into the middle of it.
+6. It has picked the largest, most armoured party member, and nothing else exists for it.
 
-**Negotiation:** It wants distance and the herd behind it. Every step backwards buys real ground, and a party that gives it the clearing gets to keep everything else, including any antler already shed.
-
-**Appears:** One bull per herd, and only dangerous in the eight weeks of season.
+**Nastier:** The charge rings every time it closes, and a cow arrives at the end of every exchange it rings.
 
 *`enemies/glassback_bull.fof`*
 
@@ -164,9 +182,9 @@ Glassbacks are not dangerous. Glassbacks defending a calf are extremely dangerou
 
 **Encounters.**
 
-- **The meadow crossing** *(1 Named — well under Standard, and not meant to be fought)*. The party's route runs through the herd. There is a way around costing two hours. The entry's whole job is that both options are real.
-- **The bull in season** *(1 Boss — a Standard-to-Hard fight if the party insists, and a non-event if they back up)*. Eight weeks a year. The phase change at Resolve 2 is the bull losing interest, and it is written to be reached by *withdrawing* rather than by winning.
-- **The poacher's mess** *(1 Named + 3 Mooks — below Standard; the Recipe Table's Standard is 3 Named + 1 Mook)*. Someone has taken a calf, the herd has been following the trail for a day and a half, and the poachers' camp is directly between the party and where they were going. The glassbacks are not the antagonists here and the party will work that out in about a minute.
+- **The meadow crossing** *(one cow — a fair fight, and not meant to be fought)*. The party's route runs through the herd. There is a way around costing two hours. The entry's whole job is that both options are real.
+- **The bull in season** *(one level 3 Boss — a hard fight if the party insists, and a non-event if they back up)*. Eight weeks a year. Its bloodied line is the bull losing interest, and a party that gives ground reaches the same place without drawing blood: every step backwards is one it does not have to win.
+- **The poacher's mess** *(three poachers as level 1 Mooks, and a cow on nobody's side — easy, and not the point)*. Someone has taken a calf, the herd has been following the trail for a day and a half, and the poachers' camp is directly between the party and where they were going. The glassbacks are not the antagonists here and the party will work that out in about a minute.
 
 **Ecology.** A herd on its circuit is a moving economy. Villages along the route time markets to the shedding, guides make a living knowing where the herd is this month, and the whole arrangement collapses the first time somebody kills an adult — the herd changes its circuit, permanently, and a dozen villages stop having a spring trade. Everyone local knows this. Everyone local will explain it to an outsider with a bow, at length, in the road, before the outsider gets anywhere near the meadow.
 
@@ -184,26 +202,30 @@ A ledgerlouse is grey, flat, thumbnail-sized, and built around a jaw that does o
 
 <!-- statblock: ledgerlice -->
 
-**Ledgerlice** · *Mook* · **TR 3**
+**Ledgerlice** · *Level 1 Mook* · A jaw built for one job
 
-**When they act on it:** Resolve — · armor none
+**HP** — (drops to any hit) · **Armor** 0 · **Attack** +0 · **Damage** 3 · **Attacks** 1 · **Morale** 12 (fearless)
 
-**When it acts:** attack +0 · incoming Tier 1
+*Attacks as a mob: +1 damage per extra Mook (max +4).*
 
-**Special:** SWARM — a Strike that lands scatters the ledgerlice rather than killing them. They are gone from the exchange and back in the room within the hour.
+**Wants:** The nearest page, and then the next one.
 
-**Disposition:** Hungry and entirely uninterested in people, except as an obstacle between it and a page.
+**Special:** SWARM — a hit scatters the swarm instead of killing it: it is out of the exchange and back in the room within the hour. On a hard hit it also eats one written thing the target is carrying.
 
-**Goes for:** Whatever written thing is nearest. Characters are attacked only for carrying one.
+**Tells:** Clean holes in the paper, exactly the shape of a paragraph, in a book that looked fine until somebody opened it.
 
-**In play:**
+**Breaks:** Cannot be routed. It leaves when the paper does, and a page laid down away from the party draws the whole swarm to it within one exchange.
 
-- Goes for satchels, scroll cases, and open books before it goes for skin.
-- A page laid down away from the party draws the whole swarm to it within one exchange.
+**Twists (d6):**
 
-**Morale:** Cannot be routed and does not need to be. It leaves when the paper does.
+1. The swarm is four pages from eating the one paragraph the party came for.
+2. It has already eaten the building's register, and nobody here knows what used to be in it.
+3. It is in somebody's pack, and has been since the last library.
+4. Someone has been feeding it on purpose, to make a record disappear.
+5. The room is cold and the swarm is sluggish; warm it up and the swarm wakes.
+6. An archivist is shielding the shelves with their own body and needs help, not rescuing.
 
-**Appears:** Never fewer than a hundred; counted as one to three Mooks by mass.
+**Nastier:** Wet ink draws it at a run: anyone who writes, reads aloud from a page, or works magic from notes in its presence is its only target.
 
 *`enemies/ledgerlice.fof`*
 
@@ -219,8 +241,8 @@ A ledgerlouse is grey, flat, thumbnail-sized, and built around a jaw that does o
 
 **Encounters.**
 
-- **The infestation** *(1–3 Mooks by mass — Skirmish, and the wrong tool for it)*. The party can absolutely fight a swarm of ledgerlice. They will scatter it, and it will be back before they have finished congratulating each other.
-- **The document** *(no fight)*. The thing the party needs is in the room, the swarm is between them and it, and it is currently four pages from eating the relevant paragraph. This is a Threat Clock, not a combat: four segments, and the party's rolls near the shelves advance it.
+- **The infestation** *(one to three Mooks by mass — trivial, and the wrong tool for it)*. The party can absolutely fight a swarm of ledgerlice. They will scatter it, and it will be back before they have finished congratulating each other.
+- **The document** *(no fight)*. The thing the party needs is in the room, the swarm is between them and it, and it is currently four pages from eating the relevant paragraph. This is a threat clock, not a fight: four segments, and the party's rolls near the shelves advance it.
 - **The archivist's silence** *(no fight)*. Somebody in this building already knows about the decoy trick and has not told anyone, because admitting it means admitting how long the infestation has been here. That person is the encounter.
 
 **Ecology.** Ledgerlice are why old archives smell of camphor, why bound volumes in some regions are stored with a blank sheet at front and back, and why a certain kind of scholar flinches when a book is opened too fast. A building that has hosted a swarm for a decade has holes in its record that nobody has catalogued, and some of those holes are load-bearing — a lawsuit, a lineage, a boundary that no longer has documentary evidence in either direction.
@@ -235,25 +257,40 @@ A ledgerlouse is grey, flat, thumbnail-sized, and built around a jaw that does o
 
 <!-- statblock: chicken -->
 
-**Chicken** · *Mook* · **TR 1**
+**Chicken** · *Level 1 Mook* · Beak, claws, and opinions
 
-**When they act on it:** Resolve — · armor none
+**HP** — (drops to any hit) · **Armor** 0 · **Attack** −1† · **Damage** 1† · **Attacks** 1 · **Morale** 2
 
-**When it acts:** attack −1 · incoming Tier 1
+*Attacks as a mob: +1 damage per extra Mook (max +4).*
 
-**Disposition:** A chicken. It is not fighting; it is having a bad time in the same room as a fight.
+*† The card overrides the level table.*
 
-**Morale:** Wanders off the moment nothing is chasing it.
+**Wants:** To be somewhere else. It has not decided where.
 
-**Appears:** Alone, in pairs, or in a genuinely alarming quantity.
+**Special:** UNDERFOOT — when the chicken hits, the MM may skip the damage and put it in someone's face instead: that character's next roll this exchange is Hard.
+
+**Tells:** It has been making the same noise since you came in, and the noise has been getting louder.
+
+**Breaks:** Wanders off the moment nothing is chasing it, and turns up later somewhere nobody can explain.
+
+**Twists (d6):**
+
+1. It is not one chicken. It has never been one chicken.
+2. It belongs to someone nearby, who is on the way and wants to know what you are doing to it.
+3. It is sitting on the thing the party came for, and will not move for anything short of being picked up.
+4. It got into the party's supplies first. Somebody's rations are now mostly chicken's.
+5. It is the only calm thing in the room, which is somehow worse.
+6. It follows the party out, and keeps following them for the rest of the session.
+
+**Nastier:** There is no nastier chicken. There is only more chicken.
 
 *`enemies/chicken.fof`*
 
 <!-- /statblock -->
 
-The chicken is the Threat Rating 1 baseline. Every number in the Mirror Master's Manual's encounter math is calibrated against it, which means that somewhere in this system's foundations there is a chicken, and everything else in this book is measured in multiples of it.
+The chicken is the baseline. It is the one card in this book that sits under the monster level table on purpose: a level 1 Mook with its attack and damage marked down a further step, so that nothing anyone builds can ever be weaker than it. Somewhere in this system's foundations there is a chicken, and everything else in this book is measured in multiples of it.
 
-It has a defense modifier of −1, which reflects erratic movement rather than evasion. A chicken does not dodge. It goes somewhere unpredictable, which is functionally identical and considerably more annoying.
+Like every Mook it drops to any hit. Its erratic movement is not evasion. A chicken does not dodge. It goes somewhere unpredictable, which is functionally identical and considerably more annoying.
 
 > **What Characters Can Know — the chicken**
 >
@@ -263,7 +300,7 @@ It has a defense modifier of −1, which reflects erratic movement rather than e
 >
 > **10+** — *"It's a chicken."*
 
-**Encounters.** Three chickens is a Skirmish at Party Strength 3, and the party wins every time. So is five. So is seven — a Mook roster alone is only ever a Skirmish, however many of them there are, which is a sentence this project has had to live with since March.
+**Encounters.** Three chickens are no danger to anyone, and the party wins every time. So are five. Seven chickens attacking as one mob will genuinely hurt somebody, which is a sentence this project has had to live with since March.
 
 **Ecology.** It was never really part of this. Mirror Masters are encouraged to let the chicken survive the encounter through sheer irrelevance and wander off at the end.
 

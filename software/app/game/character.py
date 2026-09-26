@@ -1,1403 +1,1352 @@
-"""Character model — creation, validation, and skill advancement."""
+"""The Lean Facets v1.0 character (PHB II, DESIGN §1 and §3.3).
+
+A character is a Facet (which owns the numbers), a class (words, kit, picks),
+a background (a knack and a Specialty) and a lineage. Every rule is read from
+the merged ruleset; methods that need a rule take `ruleset` explicitly, so a
+`Character` is plain data that round-trips through `.fof` files.
+
+Level-ups, respec, damage, Hold On, rests, Fatigue, Wounds, slots, the usage
+die, Sparks and talent-use tracking all live here. Combat and casting
+(`combat.py`, `magic.py`) call into these methods rather than editing fields.
+"""
 from __future__ import annotations
 
-import re
-from datetime import datetime, timezone
-from typing import Literal, Optional
-
-from pydantic import BaseModel, Field, computed_field, model_validator
-
-from app.facets.registry import MergedRuleset
-from app.facets.schema import MarksPerRankDef
-
-
-SkillRankId = Literal["novice", "practiced", "expert", "master"]
-
-
-class SkillState(BaseModel):
-    """Tracks a character's current rank and advancement marks for one skill.
-
-    Attributes:
-        skill_id: The skill's canonical ID (e.g. "athletics").
-        rank: Current proficiency tier: novice (default), practiced, or expert.
-        marks: Progress marks toward the next rank. Resets to 0 on rank advance.
-    """
-
-    skill_id: str
-    rank: SkillRankId = "novice"
-    marks: int = Field(default=0, ge=0)
-
-
-class Character(BaseModel):
-    """A player character. Validated against the active ruleset at creation.
-
-    Attributes:
-        name: The character's in-fiction name (1–64 characters).
-        player_name: The player's display name; keys the character in the session store.
-        primary_facet: The character's chosen Facet ID (e.g. "body", "mind", "soul").
-        attributes: Minor attribute ratings keyed by attribute ID. Values are 1, 2, or 3.
-        skills: SkillState instances keyed by skill ID.
-        sparks: Current Spark tokens. Sparks do not carry over between sessions:
-            the value starts at the ruleset's base_sparks_per_session and is reset
-            to it on every `session_reset` event.
-        session_skill_points_remaining: Points left to spend on skill advancement this session.
-        facet_levels: Facet levels earned per Facet, keyed by Facet ID. Cross-Facet
-            levels are tracked separately so they can each count toward Major Advancement.
-        rank_advances_by_facet: Rank advances toward the next level, per Facet.
-        facet_level: (computed) primary-Facet levels earned; = facet_levels[primary_facet].
-        total_facet_levels: (computed) sum of levels across ALL Facets (for Major Advancement).
-        rank_advances_this_facet_level: (computed) advances toward the next primary-Facet level.
-        career_advances: Total skill rank advances across all sessions (for encounter budget).
-        techniques: List of unlocked technique IDs.
-        techniques_used_this_session: Technique IDs marked used for "once per session" tracking.
-        technique_choices: Dict of technique_id → chosen option (for Techniques with choices).
-        background_id: The character's chosen Background ID (or None for custom backgrounds).
-        specialty: The character's specialty text (from Background or custom).
-        lineage: Who the character was born as (PHB II.5, D18). Defaults to
-            "human" so every .fof written before the step existed loads
-            unchanged and the loader never requires the field.
-        gifted: Whether this character carries their lineage's Gift. An
-            ungifted member of a gifted lineage is a real and common case —
-            it is what "one Orthaen in five" means on a sheet — and keeps
-            the Background's secondary skill and the lineage's Heritage.
-        domain_source: Where `magic_domain` came from, so the formalization
-            rule knows which route applies: a Gift formalizes free at the
-            first Facet level (D18), a Background domain formalizes through
-            the Tier 1 Technique. `magic_domain` stays the single
-            primary-domain field — there is deliberately no parallel
-            `lineage_domain`, because two fields meaning the same thing is
-            how implementations drift apart.
-        magic_domain: Primary magic domain ID if the character has magic.
-        magic_tradition: "intuitive" (Spirit) or "scholarly" (Knowledge).
-        magic_technique_active: True once the Tier 1 magic Technique is unlocked.
-        endurance_current: Current Endurance in combat; None when not in combat.
-        conditions: Active condition IDs in combat.
-        posture: Current combat posture ("aggressive"|"measured"|"defensive"|"withdrawn").
-        armor_downgrades_remaining: PC armor's per-scene Condition-downgrade
-            budget (D2); None when unarmored or outside a scene. Persists
-            across `combat_start`/`combat_end` within the same scene — two
-            fights in one scene share the budget — and is only reinitialised
-            via `combat.armor_budget` at the start of a new scene.
-        reactions_this_exchange: Count of reactions taken so far this
-            exchange (K1, BRIEF D8) — feeds `combat.reaction_cost`'s
-            `is_first_reaction`. Reset to 0 by `_handle_end_exchange`.
-        free_reaction: Whether this character's next reaction this exchange
-            costs no Endurance. Written by an ally's Cover rider — which is
-            not in the core menu (cut at the gate, D20) but stays
-            implemented for a setting or a future Technique. Ephemeral;
-            spent by one reaction and expired by
-            `combat.expire_end_of_exchange`.
-        readied_intents: D23. Remaining readied intents by purpose, or None
-            when none have been readied since the last refresh (the start of
-            a session, or a full rest the MM calls). None is what lets the
-            caster ready; a dict is what locks the choice in.
-        intercepts_this_exchange: Count of Intercept reactions taken so far
-            this exchange. Intercept is capped at one per exchange (III.3:219),
-            unlike other reaction types. Reset to 0 by `_handle_end_exchange`.
-    """
-
-    name: str = Field(min_length=1, max_length=64)
-    player_name: str = Field(min_length=1, max_length=32)
-    primary_facet: str
-
-    attributes: dict[str, int] = Field(default_factory=dict)
-    skills: dict[str, SkillState] = Field(default_factory=dict)
-
-    sparks: int = Field(default=3, ge=0)
-
-    session_skill_points_remaining: int = Field(default=4, ge=0)
-    skills_used_this_session: set[str] = Field(default_factory=set)
-    # T4.3/D10: how many of this session's points went to an UNUSED
-    # Primary-Facet skill ("training between sessions"). Capped by
-    # advancement.training_marks_per_session; reset by start_new_session.
-    training_marks_this_session: int = Field(default=0, ge=0)
-    facet_levels: dict[str, int] = Field(default_factory=dict)
-    rank_advances_by_facet: dict[str, int] = Field(default_factory=dict)
-    career_advances: int = Field(default=0, ge=0)
-    # One Technique pick is granted per Facet level earned in ANY Facet and
-    # spent by `technique_select` (D3, §6.4). Persisted across sessions.
-    technique_picks_available: int = Field(default=0, ge=0)
-
-    techniques: list[str] = Field(default_factory=list)
-    techniques_used_this_session: list[str] = Field(default_factory=list)
-    technique_choices: dict[str, str] = Field(default_factory=dict)
-
-    # Background
-    background_id: Optional[str] = None
-    specialty: Optional[str] = None
-
-    # Magic (persisted)
-    lineage: str = "human"
-    gifted: bool = False
-    domain_source: Optional[Literal["lineage", "background", "technique"]] = None
-    magic_domain: Optional[str] = None
-    secondary_magic_domain: Optional[str] = None  # Soul Communion T3 "Second Domain"
-    # T4.2/D9: total_facet_levels at the moment Second Domain was taken. The
-    # one-step penalty lifts at the next Facet level after acquisition; None
-    # (a hand-authored or legacy secondary domain) keeps the penalty standing.
-    second_domain_acquired_at_total_facet_levels: Optional[int] = None
-    # Tier 3 "Ascendant Domain" — a prismatic domain held *alongside* the
-    # original. Kept apart from secondary_magic_domain because the routes cost
-    # differently: Second Domain is one difficulty step harder, while Ascendant
-    # pays with the Broad table instead and takes no step penalty (II.4b/II.4c).
-    # One per character (II.3).
-    ascendant_domain: Optional[str] = None
-    # A domain taken from the *other* Facet's Tier 1, held alongside the first at
-    # no difficulty penalty (II.3). One field per acquisition route, because the
-    # route is what sets the price.
-    cross_facet_domain: Optional[str] = None
-    magic_tradition: Optional[str] = None  # "intuitive" | "scholarly"
-    magic_technique_active: bool = False
-
-    # Player-facing fields
-    inventory: list[str] = Field(default_factory=list)
-    notes_player: str = ""
-    notes_mm: str = ""
-
-    # Combat state — ephemeral, not persisted to .fof between sessions
-    endurance_current: Optional[int] = None
-    conditions: list[str] = Field(default_factory=list)
-    posture: Optional[str] = None  # "aggressive"|"measured"|"defensive"|"withdrawn"
-    armor: Optional[str] = None  # None | "light" | "heavy"
-    armor_downgrades_remaining: Optional[int] = None
-    reactions_this_exchange: int = 0
-    intercepts_this_exchange: int = 0
-    free_reaction: bool = False
-    readied_intents: Optional[dict[str, int]] = None
-
-    # --- Derived Facet-level views (read-only; kept for .fof and UI compat) ---
-
-    @computed_field
-    @property
-    def facet_level(self) -> int:
-        """Primary-Facet levels earned. Backward-compatible with .fof and UI."""
-        return self.facet_levels.get(self.primary_facet, 0)
-
-    @computed_field
-    @property
-    def total_facet_levels(self) -> int:
-        """Sum of Facet levels across all Facets — the Major Advancement counter."""
-        return sum(self.facet_levels.values())
-
-    @computed_field
-    @property
-    def rank_advances_this_facet_level(self) -> int:
-        """Rank advances banked toward the next primary-Facet level."""
-        return self.rank_advances_by_facet.get(self.primary_facet, 0)
-
-    @property
-    def second_domain_penalty_expired(self) -> bool:
-        """T4.2/D9: True once the character has earned a Facet level after
-        acquiring Second Domain — the one-step penalty is an arc, not a
-        permanent tax. Without an acquisition record (legacy/hand-authored
-        characters), the penalty stands."""
-        acquired = self.second_domain_acquired_at_total_facet_levels
-        if acquired is None:
-            return False
-        return self.total_facet_levels > acquired
-
-    def validate_against_ruleset(self, ruleset: MergedRuleset) -> list[str]:
-        """Return a list of validation errors against the ruleset. Empty list = valid.
-
-        Checks:
-        - Primary facet must exist in the ruleset.
-        - All attribute IDs must be recognised.
-        - All attribute ratings must be within valid_ratings.
-        - If the ruleset specifies a distribution, all attributes must be present,
-          total must match, and each must be within min/max bounds.
-        - All skill IDs must be recognised.
-        """
-        errors: list[str] = []
-
-        # Primary facet must exist
-        facet_ids = {cf.id for cf in ruleset.character_facets}
-        if self.primary_facet not in facet_ids:
-            errors.append(f"Unknown primary facet '{self.primary_facet}'. Must be one of: {', '.join(facet_ids)}.")
-
-        # All minor attributes must exist and be in range
-        dist = ruleset.attribute_distribution
-        known_minor = {ma.id for ma in ruleset.minor_attributes}
-        valid_ratings = {r.rating for r in ruleset.attribute_ratings}
-
-        for attr_id, rating in self.attributes.items():
-            if attr_id not in known_minor:
-                errors.append(f"Unknown attribute '{attr_id}'.")
-                continue
-            if rating not in valid_ratings:
-                errors.append(f"Attribute '{attr_id}' has invalid rating {rating}. Valid: {sorted(valid_ratings)}.")
-
-        if dist:
-            missing = known_minor - set(self.attributes.keys())
-            if missing:
-                errors.append(f"Missing attributes: {', '.join(sorted(missing))}.")
-
-            total = sum(self.attributes.values())
-            if total != dist.total_points:
-                errors.append(f"Total attribute points must equal {dist.total_points}, got {total}.")
-
-            for attr_id, rating in self.attributes.items():
-                if rating < dist.min_per_attribute:
-                    errors.append(f"Attribute '{attr_id}' is {rating}, minimum is {dist.min_per_attribute}.")
-                if rating > dist.max_per_attribute:
-                    errors.append(f"Attribute '{attr_id}' is {rating}, maximum is {dist.max_per_attribute}.")
-
-        # Skills must reference known skills
-        known_skills = {sk.id for sk in ruleset.skills}
-        for skill_id in self.skills:
-            if skill_id not in known_skills:
-                errors.append(f"Unknown skill '{skill_id}'.")
-
-        return errors
-
-    @property
-    def endurance_max_base(self) -> int:
-        """Base Endurance before ruleset modifiers. Use endurance_max(ruleset) for the real value."""
-        return 4
-
-    def endurance_max(self, ruleset: MergedRuleset) -> int:
-        """Maximum Endurance pool: base 4 + Constitution modifier + Endurance skill rank modifier."""
-        if not ruleset.combat:
-            base = 4
-        else:
-            base = ruleset.combat.endurance.base
-        con_mod = self.get_attribute_modifier("constitution", ruleset)
-        end_skill_mod = self.get_skill_modifier("endurance", ruleset)
-        return base + con_mod + end_skill_mod
-
-    def get_attribute_modifier(self, attribute_id: str, ruleset: MergedRuleset) -> int:
-        """Return the numeric modifier for one of this character's attributes."""
-        rating = self.attributes.get(attribute_id, 2)
-        return ruleset.get_minor_attribute_modifier(attribute_id, rating)
-
-    def get_major_attribute_modifier(self, major_id: str, ruleset: MergedRuleset) -> int:
-        """Return this character's modifier for a Major Attribute (Body,
-        Mind, or Soul) — II.2, Deriving Your Major Attribute Modifiers:
-        the sum of the three Minor Attributes under that Major maps to a
-        modifier via `ruleset.get_major_attribute_modifier`. Used for
-        saving throws (III.1).
-        """
-        major = next((m for m in ruleset.major_attributes if m.id == major_id), None)
-        if not major:
-            return 0
-        minor_sum = sum(self.attributes.get(minor_id, 2) for minor_id in major.minor_attributes)
-        return ruleset.get_major_attribute_modifier(minor_sum)
-
-    def get_skill_modifier(self, skill_id: str, ruleset: MergedRuleset) -> int:
-        """Return the numeric modifier for a skill. Returns 0 if skill is unknown."""
-        state = self.skills.get(skill_id)
-        if not state:
-            return 0
-        return ruleset.get_skill_rank_modifier(state.rank)
-
-    def spend_spark(self) -> bool:
-        """Spend one Spark. Returns True on success, False if no Sparks remain."""
-        if self.sparks <= 0:
-            return False
-        self.sparks -= 1
-        return True
-
-    def earn_spark(self) -> None:
-        """Award one Spark to this character."""
-        self.sparks += 1
-
-    @staticmethod
-    def _marks_absorbable(state: "SkillState", marks_per_rank, ceiling: str) -> int:
-        """How many marks `state` can still take before it reaches `ceiling`.
-
-        Counts what is already banked toward the next rank, so a skill one mark
-        short of Practiced whose ceiling is Practiced absorbs exactly one more.
-        """
-        rank_order = ["novice", "practiced", "expert", "master"]
-        banked = state.marks
-        total = 0
-        for i in range(rank_order.index(state.rank), rank_order.index(ceiling)):
-            total += marks_per_rank.for_rank(rank_order[i + 1]) - banked
-            banked = 0
-        return total
-
-    def _try_advance_rank(
-        self, state: "SkillState", marks_to_add: int, marks_per_rank, ceiling: str = "master"
-    ) -> int:
-        """Add marks to a skill state, advancing rank as thresholds are crossed.
-
-        Mutates state in place. Returns the number of rank advances that occurred.
-        Stops at `ceiling` — normally Master, or lower when D16's rank caps have
-        no slot left for this skill.
-
-        `marks_per_rank` is a MarksPerRankDef: each advance costs the marks its
-        own target rank charges (3 / 5 / 8), so the threshold is re-read as the
-        rank climbs rather than fixed at entry.
-        """
-        rank_order = ["novice", "practiced", "expert", "master"]
-        current_idx = rank_order.index(state.rank)
-        ceiling_idx = rank_order.index(ceiling)
-        advances = 0
-        for _ in range(marks_to_add):
-            if current_idx >= ceiling_idx:
-                break
-            next_rank = rank_order[current_idx + 1]
-            state.marks += 1
-            if state.marks >= marks_per_rank.for_rank(next_rank):
-                state.marks = 0
-                state.rank = next_rank
-                current_idx += 1
-                advances += 1
-        return advances
-
-    # --- D16 rank caps -----------------------------------------------------
-    #
-    # A slot is claimed on *commitment*, not on arrival: a skill occupies a
-    # beyond-Practiced slot as soon as it has any progress past Practiced. That
-    # removes the race where two skills bank marks toward the last slot and one
-    # of them strands, and it reads correctly at the table — you claim the slot
-    # when you start training past Practiced, not when you get there.
-
-    @staticmethod
-    def _occupies_beyond_practiced(state: "SkillState") -> bool:
-        return state.rank in ("expert", "master") or (
-            state.rank == "practiced" and state.marks > 0
-        )
-
-    @staticmethod
-    def _occupies_master(state: "SkillState") -> bool:
-        return state.rank == "master" or (state.rank == "expert" and state.marks > 0)
-
-    def _facet_skill_states(self, facet_id: str, ruleset: MergedRuleset, exclude: str):
-        """Every skill state this character holds in `facet_id`, minus `exclude`."""
-        for sid, state in self.skills.items():
-            if sid == exclude:
-                continue
-            sk = ruleset.get_skill(sid)
-            if sk is not None and sk.facet == facet_id:
-                yield state
-
-    def cap_refusal_reason(self, skill_id: str, ruleset: MergedRuleset) -> str:
-        """Why `skill_id` cannot climb right now, phrased for the player."""
-        caps = ruleset.advancement.rank_caps if ruleset.advancement else None
-        ceiling = self.rank_ceiling_for(skill_id, ruleset)
-        sk_def = ruleset.get_skill(skill_id)
-        facet = (sk_def.facet if sk_def else "this Facet") or "this Facet"
-        if ceiling == "practiced":
-            limit = caps.beyond_practiced if caps else "the"
-            return (
-                f"'{skill_id}' cannot rise past Practiced: all {limit} of your "
-                f"{facet} skills allowed beyond Practiced are already committed "
-                f"(II.4, How Far a Skill Can Go)."
-            )
-        if ceiling == "expert":
-            return (
-                f"'{skill_id}' cannot rise past Expert: another {facet} skill "
-                f"already holds this Facet's Master slot (II.4, How Far a Skill Can Go)."
-            )
-        return f"'{skill_id}' is already at Master."
-
-    def rank_ceiling_for(self, skill_id: str, ruleset: MergedRuleset) -> str:
-        """The highest rank `skill_id` may currently reach under D16's caps.
-
-        Single source of truth for the cap rule — `advance_skill` and the
-        WebSocket handler both read it, so the wall sits in exactly one place.
-        Returns "master" when uncapped or when this skill already holds the
-        Master slot.
-        """
-        caps = ruleset.advancement.rank_caps if ruleset.advancement else None
-        if caps is None or (caps.beyond_practiced is None and caps.master is None):
-            return "master"
-
-        sk_def = ruleset.get_skill(skill_id)
-        if sk_def is None or not sk_def.facet:
-            return "master"
-
-        state = self.skills.get(skill_id)
-        others = list(self._facet_skill_states(sk_def.facet, ruleset, exclude=skill_id))
-
-        # Already holding a slot? Then the cap cannot retroactively take it.
-        holds_beyond = state is not None and self._occupies_beyond_practiced(state)
-        holds_master = state is not None and self._occupies_master(state)
-
-        if caps.master is not None and not holds_master:
-            if sum(1 for s in others if self._occupies_master(s)) >= caps.master:
-                ceiling = "expert"
-            else:
-                ceiling = "master"
-        else:
-            ceiling = "master"
-
-        if caps.beyond_practiced is not None and not holds_beyond:
-            used = sum(1 for s in others if self._occupies_beyond_practiced(s))
-            if used >= caps.beyond_practiced:
-                return "practiced"
-        return ceiling
-
-    def _check_facet_level_threshold(self, facet_id: str, rank_advances: int, threshold: int) -> int:
-        """Credit `rank_advances` in `facet_id` toward that Facet's level track.
-
-        Every Facet — primary or cross — accrues its own levels, and each level
-        counts toward `total_facet_levels` (and therefore Major Advancement).
-        Returns the number of new Facet levels reached in this Facet.
-        """
-        levels_gained = 0
-        for _ in range(rank_advances):
-            self.rank_advances_by_facet[facet_id] = self.rank_advances_by_facet.get(facet_id, 0) + 1
-            if self.rank_advances_by_facet[facet_id] >= threshold:
-                self.facet_levels[facet_id] = self.facet_levels.get(facet_id, 0) + 1
-                self.rank_advances_by_facet[facet_id] = 0
-                levels_gained += 1
-        return levels_gained
-
-    def _formalize_lineage_gift(self, ruleset: MergedRuleset) -> bool:
-        """Bring a Lineage Gift to full scope at the first Facet level (D18).
-
-        Returns whether it fired. Idempotent by construction: once
-        `magic_technique_active` is set there is nothing left to do, so a
-        second Facet level is a no-op rather than a second formalization.
-
-        Deliberately narrow. It fires only for a domain whose recorded source
-        is the lineage, and only when that lineage's `formalizes_on` says so —
-        a Background domain still formalizes through its Tier 1 Technique, and
-        the two routes never combine, because a character holds one creation
-        domain.
-
-        No Technique pick is consumed and nothing is appended to `techniques`.
-        That is the whole point: the Technique economy is untouched, and a
-        three-pick career is still three picks.
-        """
-        if self.domain_source != "lineage" or not self.magic_domain:
-            return False
-        if self.magic_technique_active:
-            return False
-        lin = ruleset.get_lineage(self.lineage)
-        if lin is None or lin.formalizes_on != "first_facet_level":
-            return False
-        self.magic_technique_active = True
-        return True
-
-    def _check_major_advancement(self, major_threshold: int) -> bool:
-        """Return True if total_facet_levels just crossed a Major Advancement threshold."""
-        return self.total_facet_levels > 0 and self.total_facet_levels % major_threshold == 0
-
-    def advance_skill(self, skill_id: str, marks_to_add: int, ruleset: MergedRuleset) -> dict:
-        """Add marks to a skill, advancing rank if the threshold is met.
-
-        Creates the skill at Novice rank if it does not yet exist on the character.
-        Marks cost what their target rank charges (3 / 5 / 8) and stop at the
-        skill's current cap ceiling.
-
-        Args:
-            skill_id: The skill to advance.
-            marks_to_add: Number of marks to add (0 is a no-op).
-            ruleset: Used to look up marks_per_rank, rank caps, advancement
-                config, and skill facet.
-
-        Returns:
-            A dict with keys: skill_id, rank_advances (int), facet_level_advances (int),
-            major_advancement (bool).
-
-        Raises:
-            ValueError: When D16's rank caps leave no room for this skill to
-                climb. Refuses rather than absorbing — a mark must never
-                accumulate toward a rank the cap forbids, or a player banks
-                into a wall.
-        """
-        if skill_id not in self.skills:
-            self.skills[skill_id] = SkillState(skill_id=skill_id)
-
-        state = self.skills[skill_id]
-        marks_per_rank = (
-            ruleset.advancement.marks_per_rank if ruleset.advancement
-            else MarksPerRankDef()
-        )
-        threshold = ruleset.advancement.facet_level_threshold if ruleset.advancement else 3
-        major_threshold = ruleset.advancement.major_advancement_threshold if ruleset.advancement else 3
-
-        ceiling = self.rank_ceiling_for(skill_id, ruleset)
-        if marks_to_add > 0 and state.rank == ceiling:
-            raise ValueError(self.cap_refusal_reason(skill_id, ruleset))
-        # N4: when D16's caps have lowered this skill's ceiling, a batch the
-        # cap cannot absorb in full is refused rather than truncated — the
-        # caller has already spent the session's skill point, and
-        # _try_advance_rank would drop the overflow in silence.
-        #
-        # At the natural top the opposite is true: marks past Master have
-        # nowhere to go by design, not because a slot is occupied, and
-        # refusing the batch would block a legitimate climb over surplus the
-        # rules never promised to keep.
-        if ceiling != "master" and marks_to_add > self._marks_absorbable(
-                state, marks_per_rank, ceiling):
-            raise ValueError(self.cap_refusal_reason(skill_id, ruleset))
-
-        rank_advances = self._try_advance_rank(state, marks_to_add, marks_per_rank, ceiling)
-        self.career_advances += rank_advances
-
-        sk_def = ruleset.get_skill(skill_id)
-        facet_level_advances = 0
-        if sk_def is not None and sk_def.facet:
-            facet_level_advances = self._check_facet_level_threshold(sk_def.facet, rank_advances, threshold)
-
-        # Each Facet level (any Facet) grants one Technique pick to spend later.
-        self.technique_picks_available += facet_level_advances
-
-        # D18: a Lineage Gift formalizes at the character's FIRST Facet level,
-        # in whichever Facet that level lands, and spends no pick. Called here
-        # rather than inside _check_facet_level_threshold because that method
-        # has no ruleset to read `formalizes_on` from, and the rule must not be
-        # guessed at from the character alone.
-        if facet_level_advances > 0:
-            self._formalize_lineage_gift(ruleset)
-
-        major = False
-        if facet_level_advances > 0:
-            major = self._check_major_advancement(major_threshold)
-
-        return {
-            "skill_id": skill_id,
-            "rank_advances": rank_advances,
-            "facet_level_advances": facet_level_advances,
-            "major_advancement": major,
-        }
-
-    def spend_skill_point(self, skill_id: str, ruleset: MergedRuleset) -> dict:
-        """Spend one session skill point on `skill_id` (II.4, Advancing Skills;
-        T4.3/D10). Single source of truth for the spend rules — the WebSocket
-        handler delegates here.
-
-        Rules enforced:
-        - Points go to skills used this session. Exception ("training between
-          sessions"): up to `advancement.training_marks_per_session` of the
-          session's points may go to an UNUSED Primary-Facet skill.
-        - When no used-skills list exists yet (fresh/offline session), every
-          skill is spendable without touching the training allowance.
-        - Primary-Facet marks cost 1 point, cross-Facet marks cost 2.
-
-        Returns:
-            advance_skill's result dict, plus "sp_cost" and "training_mark".
-
-        Raises:
-            ValueError: On an unused cross-Facet skill, an exhausted training
-                allowance, or insufficient points.
-        """
-        sk_def = ruleset.get_skill(skill_id)
-        is_primary = sk_def is not None and sk_def.facet == self.primary_facet
-
-        training_mark = False
-        if self.skills_used_this_session and skill_id not in self.skills_used_this_session:
-            training_cap = (
-                ruleset.advancement.training_marks_per_session
-                if ruleset.advancement else 1
-            )
-            if not is_primary:
-                raise ValueError(
-                    f"Skill '{skill_id}' was not used this session, and the "
-                    "training point covers Primary-Facet skills only. Ask the "
-                    "MM to mark it as used."
-                )
-            if self.training_marks_this_session >= training_cap:
-                raise ValueError(
-                    "Skill was not used this session, and this session's "
-                    "training point is already spent — 1 point per session "
-                    "may train an unused Primary-Facet skill (II.4)."
-                )
-            training_mark = True
-
-        cost_context = "primary_facet" if is_primary else "cross_facet"
-        sp_cost = ruleset.get_skill_point_cost(cost_context)
-        if self.session_skill_points_remaining < sp_cost:
-            raise ValueError(
-                f"Insufficient skill points: need {sp_cost}, "
-                f"have {self.session_skill_points_remaining}."
-            )
-
-        # D16: check the cap BEFORE spending. advance_skill refuses a capped
-        # skill, and deducting first would burn the point on the refusal.
-        current = self.skills.get(skill_id)
-        current_rank = current.rank if current else "novice"
-        if current_rank == self.rank_ceiling_for(skill_id, ruleset):
-            raise ValueError(self.cap_refusal_reason(skill_id, ruleset))
-
-        self.session_skill_points_remaining -= sp_cost
-        if training_mark:
-            self.training_marks_this_session += 1
-
-        result = self.advance_skill(skill_id, 1, ruleset)
-        result["sp_cost"] = sp_cost
-        result["training_mark"] = training_mark
-        return result
-
-    def start_new_session(self, ruleset: MergedRuleset) -> None:
-        """Roll the per-session advancement state over (T4.3/D10): up to
-        `advancement.bank_cap` unspent points carry into the new session's
-        allowance — unspent points are banked, never lost — and the
-        used-skills list and training allowance reset."""
-        session_points = (
-            ruleset.advancement.session_skill_points if ruleset.advancement else 4
-        )
-        bank_cap = ruleset.advancement.bank_cap if ruleset.advancement else 2
-        banked = min(max(self.session_skill_points_remaining, 0), bank_cap)
-        self.session_skill_points_remaining = session_points + banked
-        self.skills_used_this_session = set()
-        self.training_marks_this_session = 0
-        # D23: a new session is a fresh chance to guess what it will need.
-        self.refresh_intents()
-
-    # ------------------------------------------------------------------
-    # Readied intents (D23 — supersedes D17)
-    # ------------------------------------------------------------------
-
-    def _prepared_intents(self, ruleset: MergedRuleset):
-        return ruleset.magic.prepared_intents if ruleset.magic else None
-
-    def ready_intents(self, allocation: dict[str, int], ruleset: MergedRuleset) -> None:
-        """Commit this rest's readied intents: up to `capacity`, spread across
-        the purposes however the player likes.
-
-        Single source of truth for the rule; the WebSocket handler delegates.
-        Refuses rather than clamping, and mutates nothing on refusal.
-
-        Raises:
-            ValueError: no magic, magic not yet formalized, already readied
-                since the last rest, an unknown purpose, a negative count, or
-                a total over capacity.
-        """
-        pi = self._prepared_intents(ruleset)
-        if pi is None:
-            raise ValueError("This game's rules have no readied intents to ready.")
-        if not self.magic_domain:
-            raise ValueError(f"{self.name} has no magic to ready intents for.")
-        if not self.magic_technique_active:
-            raise ValueError(
-                "Readied intents begin when your magic formalizes — until then "
-                "you work at Minor scope, which is free (II.3, Before the Technique)."
-            )
-        if self.readied_intents is not None:
-            raise ValueError(
-                "You have already readied your intents. They come back after a "
-                "full rest, or at the start of the next session."
-            )
-        known = {p.id for p in pi.purposes}
-        for purpose, count in allocation.items():
-            if purpose not in known:
-                raise ValueError(
-                    f"'{purpose}' is not a purpose. Choose from: "
-                    f"{', '.join(p.id for p in pi.purposes)}."
-                )
-            if not isinstance(count, int) or count < 0:
-                raise ValueError(f"'{purpose}' needs a whole number, 0 or more.")
-        total = sum(allocation.values())
-        if total > pi.capacity:
-            raise ValueError(
-                f"That is {total} readied intents; you may ready {pi.capacity}."
-            )
-        self.readied_intents = {k: v for k, v in allocation.items() if v > 0}
-
-    def refresh_intents(self) -> None:
-        """A full rest, or a new session: the caster may ready again."""
-        self.readied_intents = None
-
-    def intent_cost(self, purpose: Optional[str], scope: str,
-                    ruleset: MergedRuleset) -> str:
-        """What a working will cost, without paying it: "free", "intent" (one
-        readied intent of `purpose`), or "spark" (off-purpose, or the purpose
-        is spent).
-
-        Asked before the roll so the handler can refuse a working the caster
-        cannot afford; paid by `pay_intent_cost` only after the engine accepts
-        it — the same order Sparks already follow, so a refused working never
-        costs anything.
-        """
-        pi = self._prepared_intents(ruleset)
-        if pi is None or scope in pi.free_scopes:
-            return "free"
-        # Before formalization the pre-Technique scope rules govern (II.3):
-        # Minor only, with the Spark push to Significant — no intents yet.
-        if not self.magic_technique_active:
-            return "free"
-        if not purpose:
-            raise ValueError(
-                f"A {scope} working needs a purpose: "
-                f"{', '.join(p.id for p in pi.purposes)}."
-            )
-        if pi.purpose(purpose) is None:
-            raise ValueError(f"'{purpose}' is not a purpose.")
-        if self.readied_intents is None:
-            raise ValueError(
-                "Ready your intents for this session before a Significant or "
-                "Major working."
-            )
-        return "intent" if self.readied_intents.get(purpose, 0) > 0 else "spark"
-
-    def pay_intent_cost(self, purpose: Optional[str], scope: str,
-                        ruleset: MergedRuleset) -> str:
-        """Pay for a working the engine has accepted, and report what was paid.
-
-        Spends one readied intent when the cost is "intent". When it is
-        "spark", the caller spends the Sparks — Spark spending is tracked by
-        the session (Spark flow, peer awards), so it stays where it lives.
-        """
-        cost = self.intent_cost(purpose, scope, ruleset)
-        if cost == "intent":
-            self.readied_intents[purpose] -= 1
-        return cost
-
-    def select_technique(
-        self, technique_id: str, ruleset: MergedRuleset, choice: Optional[str] = None
-    ) -> tuple[bool, str]:
-        """Spend one Technique pick on `technique_id` (§6.4). Single source of
-        truth for the rule; the WebSocket handler and playtest harness both call it.
-
-        Order of checks: not already held → explicit prerequisites met (for
-        homebrew Facets that set them) → branch/tier rule met (PHB II.4:83:
-        Tier 2 requires any Tier 1 in the same branch, Tier 3 requires any
-        Tier 2 in the same branch) → domain guard (sync-H-2) → a pick is
-        available. On success, appends the Technique, decrements the pick
-        budget, records any choice, and activates magic if the Technique is
-        magic-granting. On failure, mutates nothing.
-
-        Returns (ok, message); message is "ok" on success, else the reason.
-        """
-        if technique_id in self.techniques:
-            return False, f"Technique '{technique_id}' already selected."
-
-        tech_def = ruleset.get_technique(technique_id)
-        if tech_def:
-            missing = [p for p in tech_def.prerequisites if p not in self.techniques]
-            if missing:
-                return False, f"Technique '{technique_id}' requires: {', '.join(missing)}."
-
-            tier = ruleset.get_technique_tier(technique_id)
-            branch = ruleset.get_technique_branch(technique_id)
-            if tier and tier > 1 and branch is not None:
-                needed_tier = tier - 1
-                has_lower_tier_in_branch = any(
-                    ruleset.get_technique_branch(t) == branch
-                    and ruleset.get_technique_tier(t) == needed_tier
-                    for t in self.techniques
-                )
-                if not has_lower_tier_in_branch:
-                    return False, (
-                        f"Technique '{technique_id}' requires a Tier {needed_tier} "
-                        f"Technique in the same branch."
-                    )
-
-            if tech_def.requires_domain:
-                facet_domain_ids = {
-                    d.id for d in self._facet_domains(tech_def.requires_domain, ruleset)
-                }
-                if not any(d in facet_domain_ids for d in self.held_domains()):
-                    return False, (
-                        f"Technique '{technique_id}' requires an existing "
-                        f"{tech_def.requires_domain.capitalize()} domain."
-                    )
-
-        if self.technique_picks_available <= 0:
-            return False, "No Technique picks available — reach a Facet level to earn one."
-
-        # Validated before anything is consumed: an illegal domain pick must not
-        # burn the Technique slot on its way out.
-        if tech_def and choice:
-            valid, reason = self._validate_domain_choice(
-                tech_def, str(choice), ruleset, technique_id
-            )
-            if not valid:
-                return False, reason
-
-        self.technique_picks_available -= 1
-        self.techniques.append(technique_id)
-        if choice:
-            self.technique_choices[technique_id] = str(choice)
-        if tech_def and tech_def.magic_granting:
-            self.magic_technique_active = True
-        if tech_def and choice:
-            # Which slot the choice lands in is the whole difference between the
-            # magic Techniques, and the slot is what sets the price:
-            #   ascendant_domain      — prismatic, Broad table, no step penalty
-            #   secondary_magic_domain — Second Domain, one step harder
-            #   cross_facet_domain    — the other Facet's Tier 1, untaxed
-            #   magic_domain          — the original
-            if tech_def.grants_prismatic_domain:
-                self.ascendant_domain = str(choice)
-            elif tech_def.grants_secondary_domain:
-                self.secondary_magic_domain = str(choice)
-                # T4.2/D9: record the acquisition level so the one-step
-                # penalty can lift at the next Facet level — driven by the
-                # Technique's own penalty_expires field, not hardcoded.
-                if getattr(tech_def, "penalty_expires", None) == "next_facet_level":
-                    self.second_domain_acquired_at_total_facet_levels = (
-                        self.total_facet_levels
-                    )
-            elif tech_def.magic_granting:
-                # Formalizing the Background's domain re-sets the same value;
-                # anything else is a genuine second domain from the other Facet.
-                if self.magic_domain in (None, str(choice)):
-                    self.magic_domain = str(choice)
-                else:
-                    self.cross_facet_domain = str(choice)
-        return True, "ok"
-
-    def use_item(self, item_id: str, ruleset: MergedRuleset) -> dict:
-        """Spend a one-use item from this character's inventory.
-
-        The whole of the loot system: remove the entry, report what it was.
-        No roll, no arithmetic, no charges-remaining counter — a charge either
-        is in the inventory or it is not. When the fiction makes a *release*
-        chancy (fumbled in the dark, near something that eats magic), that is
-        an ordinary Luck roll the table already knows how to make, and it does
-        not live here.
-
-        Raises:
-            ValueError: if the item is unknown to the ruleset, is not a
-                consumable, or is not in this character's inventory. Refusing
-                is the point — a spent charge that quietly works twice is a
-                worse bug than an error message.
-        """
-        item = ruleset.get_item(item_id)
-        if item is None:
-            raise ValueError(
-                f"Unknown item '{item_id}'. Items come from a setting Facet; "
-                "the core ruleset carries none."
-            )
-        if item.kind != "consumable":
-            raise ValueError(f"'{item.name}' is not a one-use item.")
-        if item_id not in self.inventory:
-            raise ValueError(
-                f"{self.name} is not carrying '{item.name}'."
-            )
-        self.inventory.remove(item_id)
-        return {
-            "item_id": item.id,
-            "name": item.name,
-            "scope": item.scope,
-            "effect": item.effect,
-            "remaining": self.inventory.count(item_id),
-        }
-
-    def held_domains(self) -> list[str]:
-        """Every domain the character currently practises, by any route."""
-        return [
-            d for d in (
-                self.magic_domain,
-                self.cross_facet_domain,
-                self.secondary_magic_domain,
-                self.ascendant_domain,
-            ) if d
-        ]
-
-    @staticmethod
-    def _facet_domains(facet_id: str | None, ruleset) -> list:
-        """The domain catalog for a Facet's tree. Body has no domains of its own.
-
-        Keyed on the *Technique's* Facet, not the character's primary one: a
-        cross-training character choosing from Soul's tree picks Soul domains
-        (PHB II.3 — "choosing from that Facet's domain list").
-
-        """
-        if not ruleset.magic or facet_id is None:
-            return []
-        pools = {
-            "soul": ruleset.magic.soul_domains,
-            "mind": ruleset.magic.mind_domains,
-        }
-        return pools.get(facet_id, [])
-
-    def _validate_domain_choice(
-        self, tech_def, choice: str, ruleset, technique_id: str
-    ) -> tuple[bool, str]:
-        """Ascendant Domain takes a prismatic domain; Second Domain takes a
-        non-prismatic one that differs from the first. Both draw from the domain
-        list of the Facet whose tree the Technique lives in. Techniques whose
-        choice isn't a domain at all pass straight through.
-        """
-        grants_domain = (
-            tech_def.grants_prismatic_domain
-            or tech_def.grants_secondary_domain
-            or tech_def.magic_granting
-        )
-        if not grants_domain:
-            return True, "ok"
-
-        facet_id = ruleset.get_technique_facet(technique_id)
-        pool = self._facet_domains(facet_id, ruleset)
-        domain = next((d for d in pool if d.id == choice), None)
-        if domain is None:
-            return False, (
-                f"'{choice}' is not a domain of the Facet of the "
-                f"{(facet_id or 'unknown').capitalize()}."
-            )
-
-        # Re-selecting the domain a Background already granted is not a duplicate:
-        # the Tier 1 Technique *formalizes* that domain and unlocks full scope
-        # (II.3, II.6). It adds nothing, so it is exempt from the checks below.
-        # Re-selecting a Background's domain is formalization, not a
-        # duplicate. A Lineage Gift that has ALREADY formalized (D18, free at
-        # the first Facet level) is neither: there is nothing left to
-        # formalize, so treating it as formalization would let a pick be spent
-        # re-buying a domain the character already has at full scope.
-        gift_already_formalized = (
-            self.domain_source == "lineage"
-            and choice == self.magic_domain
-            and self.magic_technique_active
-        )
-        formalizing = (
-            tech_def.magic_granting
-            and choice == self.magic_domain
-            and not gift_already_formalized
-        )
-
-        # Otherwise no domain may be practised twice, by any route.
-        if choice in self.held_domains() and not formalizing:
-            return False, f"You already practise '{choice}'."
-
-        if tech_def.grants_prismatic_domain:
-            if domain.type != "broad":
-                return False, (
-                    f"Ascendant Domain requires a prismatic domain; "
-                    f"'{choice}' is not one."
-                )
-            # One prismatic territory per character (II.3).
-            if self.ascendant_domain:
-                return False, (
-                    f"You already hold the prismatic domain "
-                    f"'{self.ascendant_domain}' — a character masters only one."
-                )
-            return True, "ok"
-
-        # Every non-Ascendant route takes a non-prismatic domain.
-        if domain.type == "broad":
-            return False, (
-                f"Prismatic territories like '{choice}' require the Ascendant "
-                f"Domain Technique."
-            )
-
-        # One Second Domain per character (II.4b/II.4c). Both trees offer the
-        # Technique, so a cross-trained mage can reach two Tier 3 gates — the
-        # second is refused, not silently written over the first.
-        if tech_def.grants_secondary_domain and self.secondary_magic_domain:
-            return False, (
-                f"You already hold the second domain "
-                f"'{self.secondary_magic_domain}' — a character holds one."
-            )
-
-        if (
-            tech_def.magic_granting
-            and not formalizing
-            and self.magic_domain
-            and self.cross_facet_domain
-        ):
-            return False, (
-                "You already practise a domain in each Facet — a further domain "
-                "requires the Second Domain Technique."
-            )
-        return True, "ok"
-
-    def to_client_dict(self) -> dict:
-        """Serialize the character to a JSON-safe dict for sending to clients."""
-        d = self.model_dump()
-        # Pydantic preserves set type; JSON requires list
-        d["skills_used_this_session"] = sorted(self.skills_used_this_session)
+import random
+from dataclasses import dataclass, field
+from typing import Any, Optional
+
+from app.game.dice import DiceSpec
+from app.game.engine import RollResult, resolve_roll
+
+FOF_VERSION = "1.0"
+DIE_SIZES = [4, 6, 8, 10, 12]
+STATUSES = ("ok", "out", "dying", "dead")
+_USE_PERIOD = {"once_per_scene": "scene", "once_per_session": "session", "once_per_rest": "rest"}
+_RESET_PERIODS = {"scene": {"scene"}, "rest": {"rest", "scene"}, "session": {"session", "scene"}}
+
+
+class CharacterFormatError(ValueError):
+    """A character file that cannot be read as a v1.0 character."""
+
+
+# ---------------------------------------------------------------------------
+# Parts
+# ---------------------------------------------------------------------------
+
+@dataclass
+class TalentState:
+    id: str
+    improved: bool = False
+    choice: Optional[str] = None
+    level_taken: int = 1
+    via_teacher: bool = False
+
+    def to_dict(self) -> dict:
+        d: dict[str, Any] = {"id": self.id, "improved": self.improved}
+        if self.choice is not None:
+            d["choice"] = self.choice
+        if self.level_taken != 1:
+            d["level_taken"] = self.level_taken
+        if self.via_teacher:
+            d["via_teacher"] = True
         return d
 
-    def to_fof(
-        self,
-        module_refs: list[dict],
-        session_id: str,
-        created_at: str | None = None,
-    ) -> dict:
-        """Serialize this character to a FOF-format dict suitable for yaml.dump.
+    @classmethod
+    def from_dict(cls, d: dict) -> "TalentState":
+        return cls(id=d["id"], improved=bool(d.get("improved", False)),
+                   choice=d.get("choice"), level_taken=int(d.get("level_taken", 1)),
+                   via_teacher=bool(d.get("via_teacher", False)))
 
-        Only skills with non-default state (rank != novice OR marks != 0) are
-        included in the output. Absent skills are implicitly novice/0 on reload.
 
-        Args:
-            module_refs: List of {"id": ..., "version": ...} dicts for loaded modules.
-            session_id: Used as the campaign_id and to suffix the character's file id.
-            created_at: ISO timestamp string; defaults to now if not supplied.
-        """
-        now = datetime.now(tz=timezone.utc).isoformat()
-        slug = re.sub(r"[^a-z0-9]+", "-", self.player_name.lower()).strip("-")
+@dataclass
+class InventoryItem:
+    id: str
+    name: str
+    slots: int = 1
+    kind: Optional[str] = None          # weapon kind: blades, bows ...
+    weapon: Optional[str] = None        # weapon category: light, standard ...
+    armor: Optional[str] = None         # armor category: light, heavy, shield
+    usage_die: Optional[int] = None
+    curio: bool = False
+    effect: Optional[str] = None
 
-        non_default_skills = {
-            skill_id: {"rank": state.rank, "marks": state.marks}
-            for skill_id, state in self.skills.items()
-            if state.rank != "novice" or state.marks != 0
-        }
-
-        char_block: dict = {
-            "name": self.name,
-            "player_name": self.player_name,
-            "primary_facet": self.primary_facet,
-            "attributes": dict(self.attributes),
-            "skills": non_default_skills,
-            "sparks": self.sparks,
-            "session_skill_points_remaining": self.session_skill_points_remaining,
-            "training_marks_this_session": self.training_marks_this_session,
-            "facet_levels": dict(self.facet_levels),
-            "rank_advances_by_facet": dict(self.rank_advances_by_facet),
-            # Derived views, written for human readability and older readers.
-            "facet_level": self.facet_level,
-            "total_facet_levels": self.total_facet_levels,
-            "career_advances": self.career_advances,
-            "technique_picks_available": self.technique_picks_available,
-            "techniques": list(self.techniques),
-            "technique_choices": dict(self.technique_choices),
-        }
-        if self.background_id is not None:
-            char_block["background_id"] = self.background_id
-        if self.specialty is not None:
-            char_block["specialty"] = self.specialty
-        # Lineage (II.5). `lineage` is written only when it is not the default,
-        # so every .fof already in the repo round-trips byte-identical; `gifted`
-        # rides with it because the pair is meaningless apart.
-        if self.readied_intents is not None:
-            char_block["readied_intents"] = dict(self.readied_intents)
-        if self.lineage != "human":
-            char_block["lineage"] = self.lineage
-            char_block["gifted"] = self.gifted
-        if self.magic_domain is not None:
-            char_block["magic_domain"] = self.magic_domain
-            char_block["magic_tradition"] = self.magic_tradition
-            char_block["magic_technique_active"] = self.magic_technique_active
-            # Which route granted the domain decides how it formalizes, so a
-            # sheet that loses it loses the rule that applies to it.
-            if self.domain_source is not None:
-                char_block["domain_source"] = self.domain_source
-        if self.secondary_magic_domain is not None:
-            char_block["secondary_magic_domain"] = self.secondary_magic_domain
-            if self.second_domain_acquired_at_total_facet_levels is not None:
-                char_block["second_domain_acquired_at_total_facet_levels"] = (
-                    self.second_domain_acquired_at_total_facet_levels
-                )
-        if self.ascendant_domain is not None:
-            char_block["ascendant_domain"] = self.ascendant_domain
-        if self.cross_facet_domain is not None:
-            char_block["cross_facet_domain"] = self.cross_facet_domain
-        # Persist combat state so server restarts mid-combat can resume
-        if self.endurance_current is not None:
-            char_block["endurance_current"] = self.endurance_current
-        if self.conditions:
-            char_block["conditions"] = list(self.conditions)
-        if self.posture is not None:
-            char_block["posture"] = self.posture
-        if self.armor is not None:
-            char_block["armor"] = self.armor
-        if self.armor_downgrades_remaining is not None:
-            char_block["armor_downgrades_remaining"] = self.armor_downgrades_remaining
-        if self.inventory:
-            char_block["inventory"] = list(self.inventory)
-        if self.notes_player:
-            char_block["notes_player"] = self.notes_player
-        if self.notes_mm:
-            char_block["notes_mm"] = self.notes_mm
-
-        return {
-            "fof_version": "0.1",
-            "type": "character",
-            "id": f"{slug}-{session_id[:8]}",
-            "name": self.name,
-            "version": "1.0.0",
-            "authors": [self.player_name],
-            "ruleset": {"modules": module_refs},
-            "campaign_id": session_id,
-            "character": char_block,
-            "created_at": created_at or now,
-            "last_modified": now,
-        }
+    def to_dict(self) -> dict:
+        d: dict[str, Any] = {"id": self.id, "name": self.name, "slots": self.slots}
+        for key in ("kind", "weapon", "armor", "usage_die", "effect"):
+            if getattr(self, key) is not None:
+                d[key] = getattr(self, key)
+        if self.curio:
+            d["curio"] = True
+        return d
 
     @classmethod
-    def from_fof(cls, fof_dict: dict, ruleset=None) -> "Character":
-        """Deserialize a Character from a FOF-format dict.
+    def from_dict(cls, d: dict, ruleset=None) -> "InventoryItem":
+        """Build from a .fof entry; fields missing there are filled from the ruleset item."""
+        base = ruleset.get_item(d.get("id", "")) if ruleset is not None else None
+        def pick(key, default=None):
+            if key in d:
+                return d[key]
+            return getattr(base, key, default) if base is not None else default
+        return cls(
+            id=d.get("id", ""), name=d.get("name") or (base.name if base else d.get("id", "")),
+            slots=int(pick("slots", 1)), kind=pick("kind"), weapon=pick("weapon"),
+            armor=pick("armor"), usage_die=pick("usage_die"), curio=bool(pick("curio", False)),
+            effect=pick("effect"))
 
-        Args:
-            fof_dict: A dict produced by yaml.safe_load on a character .fof file.
-            ruleset: Optional MergedRuleset. When provided, validate_against_ruleset()
-                     is called and any validation errors are raised as ValueError.
-                     Without a ruleset, the caller must validate manually.
+    @classmethod
+    def from_ruleset(cls, ruleset, item_id: str) -> "InventoryItem":
+        item = ruleset.get_item(item_id)
+        if item is None:
+            raise ValueError(f"Unknown item {item_id!r}.")
+        return cls(id=item.id, name=item.name, slots=item.slots, kind=item.kind,
+                   weapon=item.weapon, armor=item.armor, usage_die=item.usage_die,
+                   curio=item.curio, effect=item.effect)
 
-        Returns:
-            A Character instance.
+
+@dataclass
+class MagicState:
+    tradition: str
+    domains: list[str] = field(default_factory=list)       # [primary, wider ...]
+    signature_workings: list[str] = field(default_factory=list)
+    origin: str = ""
+
+    def to_dict(self) -> dict:
+        d = {"tradition": self.tradition, "domains": list(self.domains),
+             "signature_workings": list(self.signature_workings)}
+        if self.origin:
+            d["origin"] = self.origin
+        return d
+
+    @classmethod
+    def from_dict(cls, d: Optional[dict]) -> Optional["MagicState"]:
+        if not d:
+            return None
+        return cls(tradition=d["tradition"], domains=list(d.get("domains") or []),
+                   signature_workings=list(d.get("signature_workings") or []),
+                   origin=d.get("origin") or "")
+
+
+# ---------------------------------------------------------------------------
+# Character
+# ---------------------------------------------------------------------------
+
+@dataclass
+class Character:
+    name: str
+    player_name: str
+    facet: str
+    stats: dict[str, int]
+    class_id: Optional[str] = None
+    class_name: str = ""
+    concept: str = ""
+    custom_class: bool = False
+    class_talents: list[str] = field(default_factory=list)   # a custom class's starting pair
+    class_signature: Optional[str] = None                   # its planned level-3 signature
+    level: int = 1
+    knacks: list[str] = field(default_factory=list)
+    specialty: str = ""
+    background: dict = field(default_factory=dict)       # {id, name, description}
+    lineage: str = "human"
+    gifted: bool = False                                # carries the lineage's gift
+    gift_domain: Optional[str] = None
+    talents: list[TalentState] = field(default_factory=list)
+    signature: Optional[str] = None
+    magic: Optional[MagicState] = None
+    inventory: list[InventoryItem] = field(default_factory=list)
+    equipped: dict = field(default_factory=lambda: {"weapon": None, "armor": "none", "shield": False})
+    coin: int = 0
+    fatigue: int = 0
+    wounds: list[dict] = field(default_factory=list)
+    scars: list[dict] = field(default_factory=list)
+    sparks: int = 3
+    talent_uses: dict[str, int] = field(default_factory=dict)
+    hp_current: int = 0
+    hp_gains: list[int] = field(default_factory=list)   # HP gained at levels 2..level
+    hp_max_stored: Optional[int] = None                 # as read from a .fof
+    status: str = "ok"                                  # ok | out | dying | dead
+    notes_player: str = ""
+    notes_mm: str = ""
+    id: Optional[str] = None
+    arcane_mastery_working: Optional[str] = None      # the working Arcane Mastery cheapens
+
+    # ------------------------------------------------------------ talents
+    def talent(self, talent_id: str) -> Optional[TalentState]:
+        for t in self.talents:
+            if t.id == talent_id:
+                return t
+        return None
+
+    def has_talent(self, talent_id: str, improved: Optional[bool] = None) -> bool:
+        """True if held (as a talent or as the signature); `improved` narrows it."""
+        if self.signature == talent_id:
+            return improved is not True
+        t = self.talent(talent_id)
+        if t is None:
+            return False
+        return improved is None or t.improved == improved
+
+    def held_talent_ids(self) -> set[str]:
+        ids = {t.id for t in self.talents}
+        if self.signature:
+            ids.add(self.signature)
+        return ids
+
+    def _effect_total(self, ruleset, key: str) -> int:
+        total = 0
+        for t in self.talents:
+            tdef = ruleset.get_talent(t.id)
+            if tdef is not None:
+                total += int(tdef.effect(key, t.improved, 0) or 0)
+        return total
+
+    def _effect_max(self, ruleset, key: str) -> Optional[int]:
+        best = None
+        for t in self.talents:
+            tdef = ruleset.get_talent(t.id)
+            if tdef is not None:
+                v = tdef.effect(key, t.improved)
+                if v is not None:
+                    best = v if best is None else max(best, v)
+        return best
+
+    # ------------------------------------------------------------ derived
+    def facet_def(self, ruleset):
+        f = ruleset.get_facet(self.facet)
+        if f is None:
+            raise ValueError(f"Unknown Facet {self.facet!r}.")
+        return f
+
+    def expected_gains(self, ruleset) -> list[int]:
+        """Per-level HP gains, padded with the Facet average for unrecorded levels."""
+        avg = self.facet_def(ruleset).grit_average
+        gains = list(self.hp_gains[: max(0, self.level - 1)])
+        gains += [avg] * (max(0, self.level - 1) - len(gains))
+        return gains
+
+    def hp_max(self, ruleset) -> int:
+        """Grit die max + Body at level 1, plus each later level's gain, plus talent HP."""
+        f = self.facet_def(ruleset)
+        total = (f.grit_die + self.stats.get("body", 0) + sum(self.expected_gains(ruleset))
+                 + self._effect_total(ruleset, "hp_bonus"))
+        return max(1, total)
+
+    def slots_total(self, ruleset) -> int:
+        s = ruleset.slots
+        return s.base + self.stats.get(s.plus_stat, 0) + self._effect_total(ruleset, "slots_bonus")
+
+    def coin_slots(self, ruleset) -> int:
+        return self.coin // ruleset.slots.coin_per_slot
+
+    def slots_used(self, ruleset) -> int:
+        used = sum(i.slots for i in self.inventory) + self.coin_slots(ruleset)
+        if ruleset.wounds.takes_slot:
+            used += len(self.wounds)
+        if ruleset.magic.fatigue_takes_slot:
+            used += self.fatigue
+        return used
+
+    def slots_free(self, ruleset) -> int:
+        return self.slots_total(ruleset) - self.slots_used(ruleset)
+
+    def curio_limit(self, ruleset) -> int:
+        return ruleset.slots.curio_limit + self._effect_total(ruleset, "curio_bonus")
+
+    def curios_carried(self) -> int:
+        return sum(1 for i in self.inventory if i.curio)
+
+    def equipped_weapon(self) -> Optional[InventoryItem]:
+        wid = self.equipped.get("weapon")
+        if not wid:
+            return None
+        for i in self.inventory:
+            if i.id == wid and i.weapon:
+                return i
+        return None
+
+    def is_ranged(self, ruleset=None) -> bool:
+        w = self.equipped_weapon()
+        return bool(w and w.weapon == "ranged")
+
+    def armor_value(self, ruleset) -> int:
+        """Worn armor + shield, capped; Unarmored Discipline when wearing neither."""
+        eq = ruleset.equipment
+        worn = self.equipped.get("armor") or "none"
+        shield = bool(self.equipped.get("shield"))
+        value = eq.armor[worn].armor if worn in eq.armor else 0
+        if shield and "shield" in eq.armor:
+            value += eq.armor["shield"].armor
+        if worn == "none" and not shield:
+            unarmored = self._effect_max(ruleset, "unarmored_armor")
+            if unarmored is not None:
+                value = max(value, int(unarmored))
+        return min(value, ruleset.combat.armor.cap)
+
+    def weapon_die(self, ruleset) -> int:
+        """The equipped weapon's die (unarmed if none), after Weapon Master's step."""
+        w = self.equipped_weapon()
+        if w is None:
+            die = ruleset.combat.unarmed_die
+            better = self._effect_max(ruleset, "unarmed_die")
+            return max(die, int(better)) if better else die
+        die = ruleset.equipment.weapon_categories[w.weapon].die
+        wm = self.talent("weapon_master")
+        if wm and w.kind and wm.choice == w.kind:
+            tdef = ruleset.get_talent("weapon_master")
+            step = int(tdef.effect("weapon_die_step", wm.improved, 1)) if tdef else 1
+            idx = DIE_SIZES.index(die) if die in DIE_SIZES else None
+            if idx is not None:
+                die = DIE_SIZES[min(len(DIE_SIZES) - 1, idx + step)]
+        return die
+
+    def damage_bonus(self, ruleset) -> int:
+        return ruleset.advancement.damage_bonus_at(self.level)
+
+    def traditions(self, ruleset) -> list[str]:
+        out = []
+        for t in self.talents:
+            tdef = ruleset.get_talent(t.id)
+            g = tdef.effects.get("grants_tradition") if tdef else None
+            if g:
+                out.append(g)
+        return out
+
+    @property
+    def is_caster(self) -> bool:
+        return self.magic is not None
+
+    # ------------------------------------------------------------ sparks
+    def spend_spark(self, n: int = 1) -> int:
+        if n < 1:
+            raise ValueError("Spend at least one Spark.")
+        if n > self.sparks:
+            raise ValueError(f"{self.name} has only {self.sparks} Spark(s).")
+        self.sparks -= n
+        return self.sparks
+
+    def earn_spark(self, n: int = 1) -> int:
+        if n < 1:
+            raise ValueError("Earn at least one Spark.")
+        self.sparks += n
+        return self.sparks
+
+    def start_session(self, ruleset) -> None:
+        """Sparks reset to the base (no carry-over); session and scene uses refresh."""
+        self.sparks = ruleset.spark.base_sparks_per_session
+        self.reset_uses(ruleset, "session")
+
+    # ------------------------------------------------------------ talent uses
+    def _period_of(self, ruleset, key: str) -> Optional[str]:
+        if "@" in key:
+            return key.split("@", 1)[1]
+        tdef = ruleset.get_talent(key)
+        return _USE_PERIOD.get(tdef.use) if tdef else None
+
+    def uses_remaining(self, ruleset, talent_id: str, period: Optional[str] = None,
+                       limit: Optional[int] = None) -> Optional[int]:
+        tdef = ruleset.get_talent(talent_id)
+        if tdef is None:
+            raise ValueError(f"Unknown talent {talent_id!r}.")
+        state = self.talent(talent_id)
+        key = talent_id if period is None else f"{talent_id}@{period}"
+        allowed = limit if limit is not None else (
+            1 if period is not None else tdef.uses_allowed(bool(state and state.improved)))
+        if allowed is None:
+            return None
+        return max(0, allowed - self.talent_uses.get(key, 0))
+
+    def use_talent(self, ruleset, talent_id: str, period: Optional[str] = None,
+                   limit: Optional[int] = None) -> Optional[int]:
+        """Spend one use of a talent. Returns uses left (None = untracked).
+
+        `period` ("scene" | "session" | "rest") tracks an improved-form ability
+        whose period differs from the talent's own `use`.
 
         Raises:
-            ValueError: If the dict is not a character file, is missing required fields,
-                        or fails ruleset validation when a ruleset is provided.
+            ValueError: not held, unknown, or no uses left.
         """
-        if fof_dict.get("type") != "character":
-            raise ValueError(
-                f"Expected type 'character', got {fof_dict.get('type')!r}. "
-                "Only character .fof files can be loaded here."
-            )
+        if not self.has_talent(talent_id):
+            raise ValueError(f"{self.name} does not have {talent_id!r}.")
+        if period is not None and period not in _RESET_PERIODS:
+            raise ValueError(f"Unknown period {period!r}.")
+        remaining = self.uses_remaining(ruleset, talent_id, period, limit)
+        if remaining is None:
+            return None
+        if remaining < 1:
+            raise ValueError(f"{talent_id} has no uses left.")
+        key = talent_id if period is None else f"{talent_id}@{period}"
+        self.talent_uses[key] = self.talent_uses.get(key, 0) + 1
+        return remaining - 1
 
-        char_block = fof_dict.get("character")
-        if not isinstance(char_block, dict):
-            raise ValueError("Missing or invalid 'character' block in FOF file.")
+    def reset_uses(self, ruleset, period: str) -> None:
+        """Refresh uses: 'scene' → scene; 'rest' → rest + scene; 'session' → session + scene."""
+        if period not in _RESET_PERIODS:
+            raise ValueError(f"Unknown period {period!r}.")
+        clear = _RESET_PERIODS[period]
+        for key in list(self.talent_uses):
+            if self._period_of(ruleset, key) in clear:
+                del self.talent_uses[key]
 
-        for required_field in ("name", "player_name", "primary_facet", "attributes"):
-            if required_field not in char_block:
-                raise ValueError(f"Missing required field 'character.{required_field}'.")
+    # ------------------------------------------------------------ damage & rest
+    def take_damage(self, ruleset, amount: int, allow_unstoppable: bool = True) -> dict:
+        """Lose HP (not below 0). Unstoppable turns a drop to 0 into 1, once per scene."""
+        if amount < 0:
+            raise ValueError("Damage cannot be negative.")
+        before = self.hp_current
+        after = max(0, before - amount)
+        unstoppable = False
+        if (after == 0 and before > 0 and allow_unstoppable and self.signature == "unstoppable"
+                and self.uses_remaining(ruleset, "unstoppable")):
+            self.use_talent(ruleset, "unstoppable")
+            after, unstoppable = 1, True
+        self.hp_current = after
+        return {"hp_before": before, "hp_after": after, "damage": amount,
+                "dropped": after == 0 and before > 0, "unstoppable_used": unstoppable}
 
-        raw_skills = char_block.get("skills") or {}
-        skills: dict[str, SkillState] = {}
-        for skill_id, state in raw_skills.items():
-            if isinstance(state, dict):
-                skills[skill_id] = SkillState(
-                    skill_id=skill_id,
-                    rank=state.get("rank", "novice"),
-                    marks=state.get("marks", 0),
-                )
+    def heal(self, ruleset, amount: int) -> int:
+        if amount < 0:
+            raise ValueError("Healing cannot be negative.")
+        if self.status == "dead":
+            raise ValueError(f"{self.name} is dead.")
+        self.hp_current = min(self.hp_max(ruleset), self.hp_current + amount)
+        if self.hp_current > 0 and self.status == "out":
+            self.status = "ok"
+        return self.hp_current
 
-        # Per-Facet level tracking. Prefer the canonical dicts; fall back to the
-        # older flat fields (facet_level / rank_advances_this_facet_level) by
-        # crediting them to the primary Facet.
-        primary_facet = char_block["primary_facet"]
-        facet_levels = char_block.get("facet_levels")
-        rank_advances_by_facet = char_block.get("rank_advances_by_facet")
-        if facet_levels is None:
-            facet_levels = {}
-            legacy_level = char_block.get("facet_level", 0)
-            if legacy_level:
-                facet_levels[primary_facet] = legacy_level
-        if rank_advances_by_facet is None:
-            rank_advances_by_facet = {}
-            legacy_advances = char_block.get("rank_advances_this_facet_level", 0)
-            if legacy_advances:
-                rank_advances_by_facet[primary_facet] = legacy_advances
+    def add_wound(self, name: str) -> dict:
+        """Take a Wound. It fills a slot; if none is free the Wound is still
+        taken and `items_to_drop()` says how many items must be dropped (PHB
+        ruling: the character drops an item)."""
+        if not name or not name.strip():
+            raise ValueError("A Wound needs a name.")
+        wound = {"name": name.strip()}
+        self.wounds.append(wound)
+        return wound
 
-        character = cls(
-            name=char_block["name"],
-            player_name=char_block["player_name"],
-            primary_facet=primary_facet,
-            attributes=char_block["attributes"],
-            skills=skills,
-            sparks=char_block.get("sparks", 3),
-            session_skill_points_remaining=char_block.get("session_skill_points_remaining", 4),
-            training_marks_this_session=char_block.get("training_marks_this_session", 0),
-            facet_levels=facet_levels,
-            rank_advances_by_facet=rank_advances_by_facet,
-            career_advances=char_block.get("career_advances", 0),
-            technique_picks_available=char_block.get("technique_picks_available", 0),
-            techniques=char_block.get("techniques") or [],
-            technique_choices=char_block.get("technique_choices") or {},
-            background_id=char_block.get("background_id"),
-            specialty=char_block.get("specialty"),
-            readied_intents=char_block.get("readied_intents"),
-            lineage=char_block.get("lineage") or "human",
-            gifted=bool(char_block.get("gifted", False)),
-            domain_source=char_block.get("domain_source"),
-            magic_domain=char_block.get("magic_domain"),
-            secondary_magic_domain=char_block.get("secondary_magic_domain"),
-            second_domain_acquired_at_total_facet_levels=char_block.get(
-                "second_domain_acquired_at_total_facet_levels"
-            ),
-            ascendant_domain=char_block.get("ascendant_domain"),
-            cross_facet_domain=char_block.get("cross_facet_domain"),
-            magic_tradition=char_block.get("magic_tradition"),
-            magic_technique_active=char_block.get("magic_technique_active", False),
-            endurance_current=char_block.get("endurance_current"),
-            conditions=char_block.get("conditions") or [],
-            posture=char_block.get("posture"),
-            armor=char_block.get("armor"),
-            armor_downgrades_remaining=char_block.get("armor_downgrades_remaining"),
-            inventory=char_block.get("inventory") or [],
-            notes_player=char_block.get("notes_player") or "",
-            notes_mm=char_block.get("notes_mm") or "",
+    def items_to_drop(self, ruleset) -> int:
+        """Slots over capacity (e.g. after a Wound): items the character must drop."""
+        return max(0, -self.slots_free(ruleset))
+
+    def remove_wound(self, index: int = 0) -> dict:
+        if not self.wounds:
+            raise ValueError(f"{self.name} has no Wounds.")
+        if not 0 <= index < len(self.wounds):
+            raise ValueError(f"No Wound at {index}.")
+        return self.wounds.pop(index)
+
+    def hold_on(self, ruleset, dice=None, rng=None, sparks: int = 0) -> RollResult:
+        """Roll Hold On (2d6 + Body) at 0 HP. Sets status and HP from the tier.
+
+        10+ stand at 1 HP · 7-9 out of the fight (Tough improved: stand at 1)
+        · 6- dying. Improved Tough makes the roll Easy.
+        """
+        if self.status == "dead":
+            raise ValueError(f"{self.name} is dead.")
+        if sparks > self.sparks:
+            raise ValueError(f"{self.name} has only {self.sparks} Spark(s).")
+        tough_plus = self.has_talent("tough", improved=True)
+        stat = ruleset.hold_on.stat
+        result = resolve_roll(ruleset, stat_value=self.stats.get(stat, 0), stat=stat,
+                              difficulty="Easy" if tough_plus else "Standard",
+                              sparks=sparks, dice=dice, rng=rng, kind="hold_on")
+        self.sparks -= sparks
+        if result.outcome == "full_success" or (result.outcome == "partial_success" and tough_plus):
+            self.hp_current, self.status = 1, "ok"
+        elif result.outcome == "partial_success":
+            self.hp_current, self.status = 0, "out"
+        else:
+            self.hp_current, self.status = 0, "dying"
+        result.extra["status"] = self.status
+        result.extra["text"] = ruleset.hold_on.outcomes.get(result.outcome, "")
+        return result
+
+    def fall(self, ruleset, wound: Optional[str] = None, dice=None, rng=None) -> dict:
+        """At 0 HP: take a Wound (rolled on the wounds table unless named) and roll Hold On."""
+        if wound is None:
+            from app.game.toolbox import roll_table   # local: toolbox imports nothing of ours
+            table_id = ruleset.wounds.table
+            wound = (roll_table(ruleset, table_id, rng=rng)["text"]
+                     if ruleset.get_table(table_id) else "Wound")
+        w = self.add_wound(wound)
+        result = self.hold_on(ruleset, dice=dice, rng=rng)
+        return {"wound": w, "hold_on": result, "items_to_drop": self.items_to_drop(ruleset)}
+
+    def tend(self, field_surgeon: bool = False) -> str:
+        """An ally tends a dying character: saved (out of the fight), or with
+        Field Surgeon counted as a 10+ Hold On (standing at 1 HP)."""
+        if self.status != "dying":
+            raise ValueError(f"{self.name} is not dying.")
+        if field_surgeon:
+            self.hp_current, self.status = 1, "ok"
+        else:
+            self.status = "out"
+        return self.status
+
+    def death_choice(self, ruleset, choice: str, scar: Optional[str] = None, rng=None) -> dict:
+        """Untended at scene's end: a permanent Scar (and live), or a heroic final action."""
+        if self.status != "dying":
+            raise ValueError(f"{self.name} is not dying.")
+        if choice == "scar":
+            if scar is None:
+                from app.game.toolbox import roll_table
+                tid = ruleset.death.scar_table
+                scar = roll_table(ruleset, tid, rng=rng)["text"] if ruleset.get_table(tid) else "Scar"
+            entry = {"name": scar}
+            self.scars.append(entry)
+            self.status = "out"
+            return {"choice": "scar", "scar": entry, "status": self.status}
+        if choice == "heroic":
+            self.status = "dead"
+            return {"choice": "heroic", "status": self.status,
+                    "text": "A heroic final action that succeeds."}
+        raise ValueError("The death choice is 'scar' or 'heroic'.")
+
+    def breather(self, ruleset) -> int:
+        """A few quiet minutes: recover half max HP (Iron Lungs improved: all)."""
+        if self.status in ("dying", "dead"):
+            raise ValueError(f"{self.name} is {self.status}; tend them first.")
+        mx = self.hp_max(ruleset)
+        gain = mx if self.has_talent("iron_lungs", improved=True) else mx // 2
+        self.hp_current = min(mx, self.hp_current + gain)
+        if self.hp_current > 0:
+            self.status = "ok"
+        return self.hp_current
+
+    def night_rest(self, ruleset, wound_index: int = 0) -> dict:
+        """A night's rest in safety: full HP, all Fatigue, one Wound, rest+scene uses."""
+        if self.status == "dead":
+            raise ValueError(f"{self.name} is dead.")
+        if self.status == "dying":
+            raise ValueError(f"{self.name} is dying; tend them first.")
+        nr = ruleset.recovery.night_rest
+        self.hp_current = self.hp_max(ruleset)
+        self.status = "ok"
+        cleared_fatigue = self.fatigue
+        self.fatigue = 0
+        cleared = []
+        for _ in range(nr.clears_wounds):
+            if self.wounds:
+                idx = wound_index if 0 <= wound_index < len(self.wounds) else 0
+                cleared.append(self.wounds.pop(idx))
+        self.reset_uses(ruleset, "rest")
+        return {"hp": self.hp_current, "fatigue_cleared": cleared_fatigue, "wounds_cleared": cleared}
+
+    def add_fatigue(self, ruleset, n: int) -> int:
+        """Fatigue fills slots. No free slot, no Fatigue (and so no full working)."""
+        if n < 0:
+            raise ValueError("Fatigue cannot be negative.")
+        if ruleset.magic.fatigue_takes_slot and n > self.slots_free(ruleset):
+            raise ValueError(f"{self.name} has {self.slots_free(ruleset)} free slot(s); "
+                             f"{n} Fatigue will not fit.")
+        self.fatigue += n
+        return self.fatigue
+
+    # ------------------------------------------------------------ gear
+    def add_item(self, ruleset, item) -> InventoryItem:
+        """Add an item (an id from the ruleset, or an InventoryItem).
+
+        Raises:
+            ValueError: unknown id, not enough free slots, or the curio limit reached.
+        """
+        it = InventoryItem.from_ruleset(ruleset, item) if isinstance(item, str) else item
+        if it.slots > self.slots_free(ruleset):
+            raise ValueError(f"{it.name} needs {it.slots} slot(s); "
+                             f"{self.slots_free(ruleset)} free.")
+        if it.curio and self.curios_carried() >= self.curio_limit(ruleset):
+            raise ValueError(f"{self.name} already carries {self.curio_limit(ruleset)} curios.")
+        self.inventory.append(it)
+        return it
+
+    def remove_item(self, item_id: str) -> InventoryItem:
+        for idx, it in enumerate(self.inventory):
+            if it.id == item_id:
+                removed = self.inventory.pop(idx)
+                if self.equipped.get("weapon") == item_id and not any(
+                        i.id == item_id for i in self.inventory):
+                    self.equipped["weapon"] = None
+                return removed
+        raise ValueError(f"{self.name} carries no {item_id!r}.")
+
+    def usage_roll(self, ruleset, item_id: str, roll: Optional[int] = None, rng=None) -> dict:
+        """Roll an item's usage die after a scene of use; 1-2 steps it down (d8→d6→d4→gone)."""
+        item = next((i for i in self.inventory if i.id == item_id), None)
+        if item is None:
+            raise ValueError(f"{self.name} carries no {item_id!r}.")
+        if not item.usage_die:
+            raise ValueError(f"{item.name} has no usage die.")
+        ud = ruleset.exploration.usage_die
+        die = item.usage_die
+        if roll is None:
+            roll = (rng or random).randint(1, die)
+        elif not 1 <= roll <= die:
+            raise ValueError(f"A d{die} cannot roll {roll}.")
+        stepped, gone = False, False
+        if roll in ud.steps_down_on:
+            stepped = True
+            idx = ud.steps.index(die) if die in ud.steps else len(ud.steps) - 1
+            if idx + 1 < len(ud.steps):
+                item.usage_die = ud.steps[idx + 1]
+            else:
+                gone = True
+                self.inventory.remove(item)
+        return {"item": item.id, "roll": roll, "die": die, "stepped_down": stepped,
+                "usage_die": None if gone else item.usage_die, "gone": gone}
+
+    def spend_coin(self, amount: int) -> int:
+        if amount < 0:
+            raise ValueError("Amount cannot be negative.")
+        if amount > self.coin:
+            raise ValueError(f"{self.name} has only {self.coin} coin.")
+        self.coin -= amount
+        return self.coin
+
+    def add_coin(self, amount: int) -> int:
+        if amount < 0:
+            raise ValueError("Amount cannot be negative.")
+        self.coin += amount
+        return self.coin
+
+    # ------------------------------------------------------------ advancement
+    def _menu_errors(self, ruleset, tdef, teacher: bool, kind: str) -> list[str]:
+        errors = []
+        if tdef.kind != kind:
+            errors.append(f"{tdef.name} is a {tdef.kind}, not a {kind}.")
+        casting = bool(tdef.effects.get("grants_tradition"))
+        if not tdef.on_menu_of(self.facet):
+            if casting:
+                errors.append(f"{tdef.name} is a casting talent of another Facet; "
+                              "only its own Facet can take it.")
+            elif ruleset.advancement.off_facet_requires == "teacher" and not teacher:
+                errors.append(f"{tdef.name} is off your Facet's menu; it needs a teacher "
+                              "found in play.")
+        if tdef.requires and tdef.requires.any_talent:
+            if not (self.held_talent_ids() & set(tdef.requires.any_talent)):
+                errors.append(f"{tdef.name} requires one of: {', '.join(tdef.requires.any_talent)}.")
+        return errors
+
+    def _choice_errors(self, ruleset, tdef, choice: Optional[str]) -> list[str]:
+        if tdef.id == "weapon_master":
+            if choice not in ruleset.equipment.weapon_kinds:
+                return [f"Weapon Master needs a weapon kind: {ruleset.equipment.weapon_kinds}."]
+        elif tdef.id == "wider_domain":
+            if self.magic is None:
+                return ["Wider Domain needs a tradition."]
+            dom = ruleset.get_domain(choice or "")
+            if dom is None or dom.tradition != self.magic.tradition or dom.prismatic:
+                return ["Wider Domain needs a non-prismatic domain of your tradition."]
+            if dom.id in self.magic.domains:
+                return [f"You already hold {dom.name}."]
+        return []
+
+    def _apply_talent_choice(self, tdef, choice: Optional[str]) -> None:
+        if tdef.id == "wider_domain" and self.magic is not None and choice:
+            self.magic.domains.append(choice)
+
+    def level_up(self, ruleset, *, kind: str, talent_id: Optional[str] = None,
+                 choice: Optional[str] = None, teacher: bool = False,
+                 stat: Optional[str] = None, signature_working: Optional[str] = None,
+                 hp_roll: Optional[int] = None, extra_talents: Optional[list[str]] = None) -> list[str]:
+        """Advance one level (MM-called). Returns errors; nothing changes if any.
+
+        kind: "talent" (a new talent), "improve" (the improved form of a held
+        talent) or "signature" (required at the signature level, and only then).
+        stat: required at levels 4 and 8 (+1, max 3).
+        signature_working: required for casters at levels 5 and 9.
+        hp_roll: the grit die result; None takes the Facet average.
+        extra_talents: Polymath's two talents from any menu (no casting talents).
+        """
+        adv = ruleset.advancement
+        errors: list[str] = []
+        if self.status == "dead":
+            return [f"{self.name} is dead."]
+        if self.level >= adv.max_level:
+            return [f"{self.name} is already level {adv.max_level}."]
+        new_level = self.level + 1
+        tdef = ruleset.get_talent(talent_id or "")
+        if tdef is None:
+            return [f"Unknown talent {talent_id!r}."]
+
+        # --- the pick
+        if new_level == adv.signature_level:
+            if kind != "signature":
+                errors.append(f"At level {adv.signature_level} the pick is your signature.")
+            else:
+                errors += self._menu_errors(ruleset, tdef, teacher, "signature")
+                if tdef.id == "arcane_mastery" and self.magic and choice and \
+                        choice not in self.magic.signature_workings:
+                    errors.append("Arcane Mastery must name one of your signature workings.")
+                if tdef.id == "polymath":
+                    extras = extra_talents or []
+                    if len(extras) != 2 or len(set(extras)) != 2:
+                        errors.append("Polymath takes two different talents.")
+                    for eid in extras:
+                        e = ruleset.get_talent(eid)
+                        if e is None or e.kind != "talent":
+                            errors.append(f"{eid!r} is not a talent.")
+                        elif e.effects.get("grants_tradition"):
+                            errors.append("Polymath never takes a casting talent.")
+                        elif self.has_talent(eid):
+                            errors.append(f"You already hold {e.name}.")
+        elif kind == "signature":
+            errors.append(f"A signature is taken at level {adv.signature_level}.")
+        elif kind == "talent":
+            if self.has_talent(tdef.id):
+                errors.append(f"You already hold {tdef.name}.")
+            errors += self._menu_errors(ruleset, tdef, teacher, "talent")
+            if not errors:
+                errors += self._choice_errors(ruleset, tdef, choice)
+        elif kind == "improve":
+            held = self.talent(tdef.id)
+            if held is None:
+                errors.append(f"You do not hold {tdef.name}.")
+            elif held.improved:
+                errors.append(f"{tdef.name} is already improved.")
+            elif not tdef.improved:
+                errors.append(f"{tdef.name} has no improved form.")
+            elif self.level - held.level_taken + 1 < adv.improve_requires_levels_held:
+                errors.append(f"Hold {tdef.name} for {adv.improve_requires_levels_held} "
+                              "level(s) before improving it.")
+            if tdef.id == "wider_domain" and choice:
+                dom = ruleset.get_domain(choice)
+                if dom is None or not dom.prismatic or self.magic is None \
+                        or dom.tradition != self.magic.tradition:
+                    errors.append("Wider Domain can only trade up to a prismatic domain of your tradition.")
+                elif new_level < 5:
+                    errors.append("A prismatic domain needs level 5.")
+        else:
+            errors.append(f"Unknown pick kind {kind!r}.")
+
+        # --- stat increase
+        if new_level in adv.stat_increase_levels:
+            if stat not in self.stats:
+                errors.append(f"Level {new_level} raises a stat: name body, mind or soul.")
+            elif self.stats[stat] + ruleset.stat_rules.increase_amount > ruleset.stat_rules.maximum:
+                errors.append(f"{stat} is already at the maximum.")
+        elif stat is not None:
+            errors.append(f"Level {new_level} does not raise a stat.")
+
+        # --- casters' signature working
+        if self.magic is not None and new_level in adv.signature_working_levels:
+            if not signature_working or not signature_working.strip():
+                errors.append(f"At level {new_level} a caster names another signature working.")
+
+        # --- HP
+        die = self.facet_def(ruleset).grit_die
+        if hp_roll is not None and not 1 <= hp_roll <= die:
+            errors.append(f"A d{die} cannot roll {hp_roll}.")
+
+        if errors:
+            return errors
+
+        # --- apply (measure max HP first, so a new Tough or Body point also
+        # raises current HP by what it adds to the maximum)
+        old_max = self.hp_max(ruleset)
+        if kind == "signature":
+            self.signature = tdef.id
+            if tdef.id == "arcane_mastery" and self.magic:
+                self.arcane_mastery_working = choice or (self.magic.signature_workings[0]
+                                                         if self.magic.signature_workings else None)
+            for eid in extra_talents or []:
+                self.talents.append(TalentState(id=eid, level_taken=new_level))
+        elif kind == "talent":
+            self.talents.append(TalentState(id=tdef.id, choice=choice, level_taken=new_level,
+                                            via_teacher=not tdef.on_menu_of(self.facet)))
+            self._apply_talent_choice(tdef, choice)
+        else:
+            held = self.talent(tdef.id)
+            held.improved = True
+            if tdef.id == "wider_domain" and choice and self.magic:
+                old = held.choice
+                if old in self.magic.domains:
+                    self.magic.domains[self.magic.domains.index(old)] = choice
+                else:
+                    self.magic.domains.append(choice)
+                held.choice = choice
+        if stat is not None:
+            self.stats[stat] += ruleset.stat_rules.increase_amount
+        if signature_working and self.magic is not None:
+            self.magic.signature_workings.append(signature_working.strip())
+        f = self.facet_def(ruleset)
+        gain = max(ruleset.hp.minimum_gain, hp_roll if hp_roll is not None else f.grit_average)
+        self.hp_gains = self.expected_gains(ruleset) + [gain]
+        self.level = new_level
+        self.hp_current += self.hp_max(ruleset) - old_max
+        return []
+
+    def can_respec(self, ruleset) -> bool:
+        return self.level < ruleset.advancement.respec_until_level
+
+    def respec(self, ruleset, talents: list[dict], magic: Optional[dict] = None) -> list[str]:
+        """Rebuild talent picks for free before the signature level.
+
+        `talents` lists {id, improved?, choice?}; each improved counts as a pick.
+        Picks must equal starting talents + (level - 1), all from your own menu.
+        """
+        if not self.can_respec(ruleset):
+            return [f"Rebuilding stops being free at level {ruleset.advancement.respec_until_level}."]
+        errors: list[str] = []
+        picks = sum(1 + (1 if t.get("improved") else 0) for t in talents)
+        expected = ruleset.advancement.starting_talents + self.level - 1
+        if picks != expected:
+            errors.append(f"A level-{self.level} character has {expected} picks; got {picks}.")
+        ids = [t.get("id") for t in talents]
+        if len(set(ids)) != len(ids):
+            errors.append("A talent is listed twice.")
+        new_states = []
+        for spec in talents:
+            tdef = ruleset.get_talent(spec.get("id", ""))
+            if tdef is None:
+                errors.append(f"Unknown talent {spec.get('id')!r}.")
+                continue
+            if tdef.kind != "talent" or not tdef.on_menu_of(self.facet):
+                errors.append(f"{tdef.name} is not on your Facet's talent menu.")
+            new_states.append(TalentState(id=tdef.id, improved=bool(spec.get("improved")),
+                                          choice=spec.get("choice")))
+        if errors:
+            return errors
+        trial = Character.from_fof(self.to_fof([]))
+        trial.talents = new_states
+        trial.magic = None
+        if magic is None and self.magic is not None and trial.traditions(ruleset):
+            magic = {"domain": self.magic.domains[0],
+                     "signature_workings": list(self.magic.signature_workings)}
+        errors += _magic_setup_errors(ruleset, trial, magic)
+        for st in new_states:
+            tdef = ruleset.get_talent(st.id)
+            if tdef.requires and tdef.requires.any_talent and not (
+                    {s.id for s in new_states} & set(tdef.requires.any_talent)):
+                errors.append(f"{tdef.name} requires one of: {', '.join(tdef.requires.any_talent)}.")
+            if st.id == "weapon_master" and st.choice not in ruleset.equipment.weapon_kinds:
+                errors.append("Weapon Master needs a weapon kind.")
+        if errors:
+            return errors
+        self.talents = new_states
+        self.magic = trial.magic
+        self.hp_current = min(self.hp_current, self.hp_max(ruleset))
+        return []
+
+    # ------------------------------------------------------------ validation
+    def validate_against_ruleset(self, ruleset) -> list[str]:
+        """Hard errors: anything the engine cannot run."""
+        errors: list[str] = []
+        f = ruleset.get_facet(self.facet)
+        if f is None:
+            return [f"Unknown Facet {self.facet!r}."]
+        if set(self.stats) != {s.id for s in ruleset.stats}:
+            errors.append(f"Stats must be exactly {[s.id for s in ruleset.stats]}.")
+        for sid, v in self.stats.items():
+            if v > ruleset.stat_rules.maximum or v < -1:
+                errors.append(f"Stat {sid} = {v} is out of range.")
+        if not 1 <= self.level <= ruleset.advancement.max_level:
+            errors.append(f"Level {self.level} is out of range.")
+        if self.status not in STATUSES:
+            errors.append(f"Unknown status {self.status!r}.")
+        if self.class_id and not self.custom_class and ruleset.get_class(self.class_id) is None:
+            errors.append(f"Unknown class {self.class_id!r}.")
+        if not self.knacks:
+            errors.append("A character needs a class knack.")
+        if ruleset.get_lineage(self.lineage) is None:
+            errors.append(f"Unknown lineage {self.lineage!r}.")
+        for t in self.talents:
+            tdef = ruleset.get_talent(t.id)
+            if tdef is None:
+                errors.append(f"Unknown talent {t.id!r}.")
+            elif tdef.kind != "talent":
+                errors.append(f"{t.id} is a signature, not a talent.")
+        if self.signature:
+            sdef = ruleset.get_talent(self.signature)
+            if sdef is None or sdef.kind != "signature":
+                errors.append(f"Unknown signature {self.signature!r}.")
+            if self.level < ruleset.advancement.signature_level:
+                errors.append("A signature is taken at level "
+                              f"{ruleset.advancement.signature_level}.")
+        traditions = self.traditions(ruleset)
+        if traditions and self.magic is None:
+            errors.append("A character with a casting talent needs a magic block "
+                          "(tradition, domain, signature workings).")
+        if self.magic is not None and not traditions:
+            errors.append("Only a character with a casting talent has a magic block.")
+        if self.magic is not None:
+            if traditions and self.magic.tradition not in traditions:
+                errors.append(f"Tradition {self.magic.tradition!r} does not match the casting talent.")
+            if self.magic.tradition not in ruleset.magic.traditions:
+                errors.append(f"Unknown tradition {self.magic.tradition!r}.")
+            for d in self.magic.domains:
+                if ruleset.get_domain(d) is None:
+                    errors.append(f"Unknown domain {d!r}.")
+        lin = ruleset.get_lineage(self.lineage)
+        if self.gifted and lin is not None and not lin.gifted:
+            errors.append(f"The {lin.name} lineage carries no gift.")
+        if self.gift_domain:
+            if not self.gifted:
+                errors.append("Only a gifted character has a gift domain.")
+            if ruleset.get_domain(self.gift_domain) is None:
+                errors.append(f"Unknown gift domain {self.gift_domain!r}.")
+            elif lin is not None and not lin.gift_domain_scope:
+                errors.append(f"The {lin.name} lineage has no gift domain.")
+        if self.class_signature:
+            sdef = ruleset.get_talent(self.class_signature)
+            if sdef is None or sdef.kind != "signature":
+                errors.append(f"Class signature {self.class_signature!r} is not a signature.")
+        eq = ruleset.equipment
+        armor = self.equipped.get("armor") or "none"
+        if armor not in eq.armor or armor == "shield":
+            errors.append(f"Unknown worn armor {armor!r}.")
+        elif armor != "none" and not any(i.armor == armor for i in self.inventory):
+            errors.append(f"Wearing {armor} armor that is not in the inventory.")
+        if self.equipped.get("shield") and not any(i.armor == "shield" for i in self.inventory):
+            errors.append("Carrying a shield that is not in the inventory.")
+        wid = self.equipped.get("weapon")
+        if wid and self.equipped_weapon() is None:
+            errors.append(f"Equipped weapon {wid!r} is not a weapon in the inventory.")
+        for i in self.inventory:
+            if i.weapon and i.weapon not in eq.weapon_categories:
+                errors.append(f"Item {i.id!r} has unknown weapon category {i.weapon!r}.")
+        if self.fatigue < 0 or self.sparks < 0 or self.coin < 0:
+            errors.append("Fatigue, Sparks and coin cannot be negative.")
+        return errors
+
+    def warnings(self, ruleset) -> list[str]:
+        """Soft problems a sheet should flag but the engine can play through."""
+        out = []
+        if self.hp_max_stored is not None and self.hp_max_stored != self.hp_max(ruleset):
+            out.append(f"Stored max HP {self.hp_max_stored} differs from the computed "
+                       f"{self.hp_max(ruleset)}.")
+        if self.slots_free(ruleset) < 0:
+            out.append(f"Over-burdened by {-self.slots_free(ruleset)} slot(s).")
+        if self.curios_carried() > self.curio_limit(ruleset):
+            out.append("Carrying more curios than the limit.")
+        return out
+
+    # ------------------------------------------------------------ serialise
+    def to_fof(self, module_refs: list[dict], session_id: Optional[str] = None,
+               ruleset=None) -> dict:
+        """Character .fof v1.0 (DESIGN §3.3)."""
+        hp_max = self.hp_max(ruleset) if ruleset is not None else self.hp_max_stored
+        hp: dict[str, Any] = {"max": hp_max, "current": self.hp_current}
+        if self.hp_gains:
+            hp["gains"] = list(self.hp_gains)
+        lineage: dict[str, Any] = {"id": self.lineage}
+        if self.gifted:
+            lineage["gifted"] = True
+        elif self.lineage != "human":
+            lineage["gifted"] = False
+        if self.gift_domain:
+            lineage["gift_domain"] = self.gift_domain
+        body: dict[str, Any] = {
+            "name": self.name,
+            "player_name": self.player_name,
+            "facet": self.facet,
+            "level": self.level,
+            "class": _class_block(self),
+            "stats": dict(self.stats),
+            "hp": hp,
+            "knacks": list(self.knacks),
+            "specialty": self.specialty,
+            "background": dict(self.background),
+            "lineage": lineage,
+            "talents": [t.to_dict() for t in self.talents],
+            "signature": self.signature,
+            "magic": self.magic.to_dict() if self.magic else None,
+            "inventory": [i.to_dict() for i in self.inventory],
+            "equipped": dict(self.equipped),
+            "coin": self.coin,
+            "fatigue": self.fatigue,
+            "wounds": [dict(w) for w in self.wounds],
+            "scars": [dict(s) for s in self.scars],
+            "sparks": self.sparks,
+            "talent_uses": dict(self.talent_uses),
+            "notes_player": self.notes_player,
+            "notes_mm": self.notes_mm,
+        }
+        if self.status != "ok":
+            body["status"] = self.status
+        if self.arcane_mastery_working:
+            body["arcane_mastery_working"] = self.arcane_mastery_working
+        out: dict[str, Any] = {
+            "fof_version": FOF_VERSION,
+            "type": "character",
+            "id": self.id or _slug(self.name),
+            "name": self.name,
+            "ruleset": {"modules": list(module_refs)},
+        }
+        if session_id:
+            out["session_id"] = session_id
+        out["character"] = body
+        return out
+
+    @classmethod
+    def from_fof(cls, fof: dict, ruleset=None) -> "Character":
+        """Read a character .fof v1.0. A v0.3 file fails with a clear message.
+
+        Raises:
+            CharacterFormatError (a ValueError): wrong type, old format, or missing fields.
+        """
+        if not isinstance(fof, dict) or fof.get("type") != "character":
+            raise CharacterFormatError("Not a character file (type: character).")
+        c = fof.get("character")
+        if not isinstance(c, dict):
+            raise CharacterFormatError("Character file has no `character:` block.")
+        if str(fof.get("fof_version")) != FOF_VERSION or "attributes" in c or "primary_facet" in c:
+            raise CharacterFormatError(
+                "This character file uses the retired v0.3 format (nine attributes, skills, "
+                "Techniques). Lean Facets v1.0 characters have three stats, a class and "
+                "talents: rebuild the character in the app, or see PHB II.1. The old rules "
+                "are preserved at git tag `pre-lean-facets`.")
+        missing = [k for k in ("name", "facet", "stats") if k not in c]
+        if missing:
+            raise CharacterFormatError(f"Character file is missing: {', '.join(missing)}.")
+        klass = c.get("class") or {}
+        hp = c.get("hp") or {}
+        lineage = c.get("lineage") or {"id": "human"}
+        if isinstance(lineage, str):
+            lineage = {"id": lineage}
+        equipped = {"weapon": None, "armor": "none", "shield": False}
+        equipped.update(c.get("equipped") or {})
+        ch = cls(
+            id=fof.get("id"),
+            name=c["name"],
+            player_name=c.get("player_name") or c["name"],
+            facet=c["facet"],
+            stats={k: int(v) for k, v in (c.get("stats") or {}).items()},
+            class_id=klass.get("id"),
+            class_name=klass.get("name", ""),
+            concept=klass.get("concept", ""),
+            custom_class=bool(klass.get("custom", False)),
+            class_talents=list(klass.get("talents") or []),
+            class_signature=klass.get("signature"),
+            level=int(c.get("level", 1)),
+            knacks=list(c.get("knacks") or []),
+            specialty=c.get("specialty") or "",
+            background=dict(c.get("background") or {}),
+            lineage=lineage.get("id", "human"),
+            gifted=bool(lineage.get("gifted", bool(lineage.get("gift_domain")))),
+            gift_domain=lineage.get("gift_domain"),
+            talents=[TalentState.from_dict(t) for t in c.get("talents") or []],
+            signature=c.get("signature"),
+            magic=MagicState.from_dict(c.get("magic")),
+            inventory=[InventoryItem.from_dict(i, ruleset) for i in c.get("inventory") or []],
+            equipped=equipped,
+            coin=int(c.get("coin", 0)),
+            fatigue=int(c.get("fatigue", 0)),
+            wounds=[_named(w) for w in c.get("wounds") or []],
+            scars=[_named(s) for s in c.get("scars") or []],
+            sparks=int(c.get("sparks", 3)),
+            talent_uses={k: int(v) for k, v in (c.get("talent_uses") or {}).items()},
+            hp_current=int(hp.get("current", hp.get("max", 0)) or 0),
+            hp_gains=[int(g) for g in hp.get("gains") or []],
+            hp_max_stored=hp.get("max"),
+            status=c.get("status", "ok"),
+            notes_player=c.get("notes_player") or "",
+            notes_mm=c.get("notes_mm") or "",
         )
+        ch.arcane_mastery_working = c.get("arcane_mastery_working")
+        return ch
+
+    def to_client_dict(self, ruleset=None) -> dict:
+        """JSON-safe view for clients; derived numbers included when a ruleset is given."""
+        d = self.to_fof([], ruleset=ruleset)["character"]
+        d["id"] = self.id or _slug(self.name)
+        d["status"] = self.status
         if ruleset is not None:
-            errors = character.validate_against_ruleset(ruleset)
-            if errors:
-                raise ValueError(f"Character fails ruleset validation: {'; '.join(errors)}")
-        return character
+            d["derived"] = {
+                "hp_max": self.hp_max(ruleset),
+                "slots_total": self.slots_total(ruleset),
+                "slots_used": self.slots_used(ruleset),
+                "slots_free": self.slots_free(ruleset),
+                "armor": self.armor_value(ruleset),
+                "weapon_die": self.weapon_die(ruleset),
+                "ranged": self.is_ranged(ruleset),
+                "damage_bonus": self.damage_bonus(ruleset),
+                "curio_limit": self.curio_limit(ruleset),
+                "items_to_drop": self.items_to_drop(ruleset),
+                "grit_die": self.facet_def(ruleset).grit_die,
+                "warnings": self.warnings(ruleset),
+            }
+        return d
 
 
-def create_default_character(
+def _class_block(ch: "Character") -> dict:
+    d: dict[str, Any] = {"id": ch.class_id, "name": ch.class_name, "concept": ch.concept,
+                         "custom": ch.custom_class}
+    if ch.class_talents:
+        d["talents"] = list(ch.class_talents)
+    if ch.class_signature:
+        d["signature"] = ch.class_signature
+    return d
+
+
+def planned_signature(ruleset, ch: "Character") -> Optional[str]:
+    """The class's level-3 signature: the preset's, or a custom class's stated one."""
+    if ch.class_signature:
+        return ch.class_signature
+    klass = ruleset.get_class(ch.class_id or "") if not ch.custom_class else None
+    return klass.signature if klass else None
+
+
+def _named(entry) -> dict:
+    if isinstance(entry, str):
+        return {"name": entry}
+    return dict(entry)
+
+
+def _slug(name: str) -> str:
+    out = "".join(ch.lower() if ch.isalnum() else "_" for ch in name).strip("_")
+    while "__" in out:
+        out = out.replace("__", "_")
+    return out or "character"
+
+
+# ---------------------------------------------------------------------------
+# Creation
+# ---------------------------------------------------------------------------
+
+def _magic_setup_errors(ruleset, character: Character, magic: Optional[dict]) -> list[str]:
+    """Validate and install the magic block for a character's casting talent."""
+    traditions = character.traditions(ruleset)
+    if not traditions:
+        if magic:
+            return ["Only a character with a casting talent (Thaumaturgy or Invocation) "
+                    "has a domain and signature workings."]
+        character.magic = None
+        return []
+    tradition = traditions[0]
+    magic = magic or {}
+    errors: list[str] = []
+    domain = ruleset.get_domain(magic.get("domain") or "")
+    if domain is None:
+        errors.append(f"A {tradition} caster chooses a domain.")
+    elif domain.tradition != tradition or domain.prismatic:
+        errors.append(f"{domain.name} is not a non-prismatic {tradition} domain.")
+    workings = [w.strip() for w in magic.get("signature_workings") or [] if w and w.strip()]
+    need = ruleset.magic.starting_signature_workings
+    if len(workings) != need:
+        errors.append(f"Name {need} signature workings.")
+    if errors:
+        return errors
+    character.magic = MagicState(tradition=tradition, domains=[domain.id],
+                                 signature_workings=workings)
+    return []
+
+
+def roll_starting_coin(ruleset, rng=None) -> int:
+    """Starting coin, e.g. '2d6x10'."""
+    expr = ruleset.equipment.starting_coin or "0d6"
+    mult = 1
+    if "x" in expr:
+        expr, m = expr.split("x", 1)
+        mult = int(m)
+    try:
+        spec = DiceSpec.parse(expr)
+    except ValueError:
+        return 0
+    r = rng or random
+    return spec.total([r.randint(1, spec.sides) for _ in range(spec.count)]) * mult
+
+
+def _auto_equip(ruleset, character: Character) -> None:
+    eq = ruleset.equipment
+    weapons = [i for i in character.inventory if i.weapon]
+    if weapons:
+        best = max(weapons, key=lambda i: eq.weapon_categories[i.weapon].die
+                   if i.weapon in eq.weapon_categories else 0)
+        character.equipped["weapon"] = best.id
+    worn = [i.armor for i in character.inventory if i.armor and i.armor != "shield"]
+    if worn:
+        character.equipped["armor"] = max(worn, key=lambda a: eq.armor[a].armor)
+    character.equipped["shield"] = any(i.armor == "shield" for i in character.inventory)
+
+
+def create_character(
+    ruleset,
+    *,
     name: str,
     player_name: str,
-    primary_facet: str,
-    attributes: dict[str, int],
-    ruleset: MergedRuleset,
-    background_id: str | None = None,
-    magic_domain: str | None = None,
+    facet: str,
+    second_stat: str,
+    class_id: Optional[str] = None,
+    custom_class: Optional[dict] = None,
+    background_id: Optional[str] = None,
+    custom_background: Optional[dict] = None,
     lineage: str = "human",
-    gifted: bool = False,
-) -> tuple[Character | None, list[str]]:
-    """Create a character and validate it against the ruleset.
-
-    Initialises all active skills at Novice rank. If a background_id is
-    supplied, applies its Starting Skill (Practiced), Secondary Skill (Novice
-    with 1 mark), specialty, and domain_origin if applicable.
+    gifted: Optional[bool] = None,
+    gift_domain: Optional[str] = None,
+    talent_choices: Optional[dict[str, str]] = None,
+    magic: Optional[dict] = None,
+    kit: Optional[list[str]] = None,
+    coin: Optional[int] = None,
+    rng=None,
+) -> tuple[Optional[Character], list[str]]:
+    """Build a level-1 character from a preset class or a custom one.
 
     Args:
-        name: Character's in-fiction name.
-        player_name: Player's display name (used as the session key).
-        primary_facet: Chosen Facet ID.
-        attributes: Minor attribute ratings (must satisfy the ruleset's distribution rules).
-        ruleset: The session's merged ruleset.
-        background_id: Optional background ID to apply at creation.
-        magic_domain: Domain ID if the character has magic — via a
-            magic-granting Background, or via a Lineage Gift when `gifted`.
-        lineage: Lineage ID (PHB II.5). Defaults to the core's Human.
-        gifted: Whether this character carries their lineage's Gift.
+        facet: body | mind | soul — that stat is +2.
+        second_stat: the other stat that is +1 (the third is +0).
+        class_id: a preset class of that Facet; or
+        custom_class: {name, concept, knack, talents: [2 ids], kit: [item ids]}.
+        background_id / custom_background: a listed background, or
+            {name, knack, specialty, description}.
+        lineage: a lineage id; a gifted lineage adds its gift knack, and one
+            with `gift_domain_scope` needs `gift_domain` (Minor workings only).
+        gifted: whether this character carries the lineage's gift (default:
+            yes, for a gifted lineage). An ungifted member has no gift knack.
+        talent_choices: {talent_id: choice} (Weapon Master's kind, Wider Domain's domain).
+        magic: {domain, signature_workings: [two]} for a character with a casting talent.
+        kit: override the class kit (item ids).
+        coin: starting coin; None rolls it.
 
     Returns:
-        A tuple (Character, []) on success, or (None, [error strings]) on validation failure.
+        (character, []) or (None, errors).
     """
-    skills = {sk.id: SkillState(skill_id=sk.id) for sk in ruleset.skills if sk.status == "active"}
-    sparks = ruleset.spark.base_sparks_per_session if ruleset.spark else 3
-    session_points = ruleset.advancement.session_skill_points if ruleset.advancement else 4
+    errors: list[str] = []
+    choices = dict(talent_choices or {})
+    if not name or not name.strip():
+        errors.append("A character needs a name.")
+    f = ruleset.get_facet(facet)
+    if f is None:
+        return None, [f"Unknown Facet {facet!r}."]
+    stat_ids = [s.id for s in ruleset.stats]
+    rules = ruleset.stat_rules.creation
+    if second_stat not in stat_ids or second_stat == f.stat:
+        errors.append(f"The second stat must be one of {[s for s in stat_ids if s != f.stat]}.")
+    stats = {s: rules.third for s in stat_ids}
+    stats[f.stat] = rules.facet_stat
+    if second_stat in stats and second_stat != f.stat:
+        stats[second_stat] = rules.second
 
-    specialty: str | None = None
-    resolved_magic_domain: str | None = magic_domain
-    resolved_magic_tradition: str | None = None
-    domain_source: str | None = None
-    career_advances = 0
+    # --- class
+    klass = None
+    if class_id and custom_class:
+        errors.append("Choose a preset class or write a custom one, not both.")
+    if class_id:
+        klass = ruleset.get_class(class_id)
+        if klass is None:
+            return None, errors + [f"Unknown class {class_id!r}."]
+        if klass.facet != facet:
+            errors.append(f"{klass.name} is a {klass.facet} class.")
+        class_name, concept, class_knack = klass.name, klass.concept, klass.knack
+        talent_ids = list(klass.talents)
+        kit_ids = list(kit if kit is not None else klass.kit)
+        custom = False
+    elif custom_class:
+        class_name = (custom_class.get("name") or "").strip()
+        concept = (custom_class.get("concept") or "").strip()
+        class_knack = (custom_class.get("knack") or "").strip()
+        talent_ids = list(custom_class.get("talents") or [])
+        kit_ids = list(kit if kit is not None else custom_class.get("kit") or [])
+        custom = True
+        planned = custom_class.get("signature")
+        if planned:
+            sdef = ruleset.get_talent(planned)
+            if sdef is None or sdef.kind != "signature" or not sdef.on_menu_of(facet):
+                errors.append(f"{planned!r} is not a {facet} signature.")
+        if not class_name:
+            errors.append("A custom class needs a name.")
+        if not concept:
+            errors.append("A custom class needs a one-sentence concept.")
+        if not class_knack:
+            errors.append("A custom class needs a class knack.")
+    else:
+        return None, errors + ["Choose a preset class or write a custom one."]
 
-    # ---- Lineage (PHB II.5, D18) ----------------------------------------
-    # A character holds ONE domain at creation, from Lineage or Background,
-    # never both. That is the whole of the interaction between the two
-    # steps, and it is enforced here rather than in any handler.
+    need = ruleset.advancement.starting_talents
+    if len(talent_ids) != need or len(set(talent_ids)) != len(talent_ids):
+        errors.append(f"A class starts with {need} different talents.")
+    talent_states = []
+    for tid in talent_ids:
+        tdef = ruleset.get_talent(tid)
+        if tdef is None:
+            errors.append(f"Unknown talent {tid!r}.")
+            continue
+        if tdef.kind != "talent" or not tdef.on_menu_of(facet):
+            errors.append(f"{tdef.name} is not on the {facet} talent menu.")
+        if tdef.requires and tdef.requires.any_talent and not set(talent_ids) & set(tdef.requires.any_talent):
+            errors.append(f"{tdef.name} requires one of: {', '.join(tdef.requires.any_talent)}.")
+        if tid == "weapon_master" and choices.get(tid) not in ruleset.equipment.weapon_kinds:
+            errors.append(f"Weapon Master needs a weapon kind: {ruleset.equipment.weapon_kinds}.")
+        talent_states.append(TalentState(id=tid, choice=choices.get(tid)))
+
+    # --- background
+    if background_id and custom_background:
+        errors.append("Choose a listed background or write your own, not both.")
+    if background_id:
+        bg = ruleset.get_background(background_id)
+        if bg is None:
+            return None, errors + [f"Unknown background {background_id!r}."]
+        background = {"id": bg.id, "name": bg.name, "description": bg.description}
+        bg_knack, specialty = bg.knack, bg.specialty
+    elif custom_background:
+        background = {"id": None, "name": (custom_background.get("name") or "").strip(),
+                      "description": (custom_background.get("description") or "").strip()}
+        bg_knack = (custom_background.get("knack") or "").strip()
+        specialty = (custom_background.get("specialty") or "").strip()
+        if not background["name"] or not bg_knack or not specialty:
+            errors.append("A custom background needs a name, a knack and a Specialty.")
+    else:
+        errors.append("Choose a background or write your own.")
+        background, bg_knack, specialty = {}, "", ""
+
+    # --- lineage
     lin = ruleset.get_lineage(lineage)
+    knacks = [k for k in (class_knack, bg_knack) if k]
+    is_gifted = False
     if lin is None:
-        return None, [
-            f"Unknown lineage '{lineage}'. The core rules ship one lineage "
-            "(human); others come from a setting Facet."
-        ]
-    if gifted:
-        if not lin.is_gifted:
-            return None, [
-                f"Lineage '{lineage}' is ungifted — it carries no Gift to "
-                "take. An ungifted lineage's members are simply not gifted; "
-                "they keep their Background's secondary skill."
-            ]
-        if magic_domain is None:
-            return None, [
-                f"A gifted {lin.name} character chooses which domain their "
-                "gift is (II.5): any Soul or Mind domain that is not Prismatic."
-            ]
-        # D24: the player chooses the domain. The lineage colours the gift;
-        # it does not pick it — unless a setting has deliberately narrowed it.
-        domain_def = ruleset.magic.get_domain(magic_domain) if ruleset.magic else None
-        if domain_def is None:
-            return None, [
-                f"'{magic_domain}' is not a domain in this game's catalog. A "
-                "gift is one of the existing domains, chosen by the player."
-            ]
-        if domain_def.type == "broad":
-            return None, [
-                f"'{domain_def.name}' is a Prismatic territory, and nobody is "
-                "born holding one — they are reached through Ascendant Domain "
-                "(Tier 3). Choose a Focused or Standard domain."
-            ]
-        if lin.gift_domains and magic_domain not in lin.gift_domains:
-            return None, [
-                f"This setting narrows the {lin.name} gift to: "
-                f"{', '.join(lin.gift_domains)}. '{magic_domain}' is not one."
-            ]
-        domain_source = "lineage"
-        # Blood is not study: a gift is cast intuitively (Spirit + Attune)
-        # whatever the chosen domain's own tradition, or a gift that happened
-        # to be a Mind domain would roll Knowledge like a library education.
-        resolved_magic_tradition = "intuitive"
+        errors.append(f"Unknown lineage {lineage!r}.")
+    else:
+        is_gifted = lin.gifted if gifted is None else bool(gifted)
+        if is_gifted and not lin.gifted:
+            errors.append(f"The {lin.name} lineage carries no gift.")
+            is_gifted = False
+        if is_gifted and lin.gift_knack:
+            knacks.append(lin.gift_knack)
+        if not is_gifted:
+            if gift_domain:
+                errors.append("Only a gifted character has a gift domain.")
+        elif lin.gift_domain_scope:
+            dom = ruleset.get_domain(gift_domain or "")
+            if dom is None:
+                errors.append(f"The {lin.name} gift needs a domain of the player's choice.")
+            elif dom.prismatic:
+                errors.append("A gift domain cannot be prismatic.")
+            elif lin.gift_domains and dom.id not in lin.gift_domains:
+                errors.append(f"The {lin.name} gift is one of: {lin.gift_domains}.")
+        elif gift_domain:
+            errors.append(f"The {lin.name} lineage has no gift domain.")
 
-    # Apply Background
-    bg = ruleset.get_background(background_id) if background_id else None
-    if bg:
-        specialty = bg.specialty
-
-        # Starting Skill → Practiced
-        if bg.starting_skill in skills:
-            skills[bg.starting_skill].rank = "practiced"
-            skills[bg.starting_skill].marks = 0
-            career_advances += 1  # one rank advance (novice → practiced)
-        elif bg.starting_skill:
-            # Skill not initialised yet (shouldn't happen with active skills) — create it
-            skills[bg.starting_skill] = SkillState(
-                skill_id=bg.starting_skill, rank="practiced", marks=0
-            )
-            career_advances += 1
-
-        # Secondary Skill → Novice with 1 mark.
-        # Magic-granting Backgrounds replace the secondary skill with the
-        # domain origin when a domain is actually chosen (PHB II.6); without
-        # a domain they grant the secondary skill like any other Background.
-        # A magic-granting Background whose domain was actually chosen
-        # replaces the secondary skill — and so does a Lineage Gift, for
-        # exactly the same reason: the domain origin *is* the second thing
-        # the sheet gets, rather than a third.
-        skip_secondary = (bg.domain_replaces_secondary and magic_domain) or (
-            gifted and magic_domain)
-        if bg.secondary_skill and not skip_secondary:
-            if bg.secondary_skill in skills:
-                skills[bg.secondary_skill].marks = 1
-            else:
-                skills[bg.secondary_skill] = SkillState(
-                    skill_id=bg.secondary_skill, rank="novice", marks=1
-                )
-
-        # One domain at creation, from one source. A gifted character takes
-        # a Background that grants no domain; a character whose Background
-        # grants one takes an ungifted lineage, or plays an ungifted member
-        # of a gifted one.
-        if gifted and bg.domain_origin is not None:
-            return None, [
-                f"A gifted {lin.name} character cannot also take "
-                f"'{bg.id}', which grants a domain of its own — a character "
-                "holds one domain at creation, from Lineage or Background, "
-                "never both."
-            ]
-
-        # Resolve magic domain and tradition if magic_domain is provided
-        if magic_domain:
-            resolved_magic_domain = magic_domain
-            if domain_source is None:
-                domain_source = "background"
-            if ruleset.magic and domain_source != "lineage":
-                domain_def = ruleset.magic.get_domain(magic_domain)
-                if domain_def:
-                    resolved_magic_tradition = domain_def.tradition
-
-    if resolved_magic_domain and resolved_magic_tradition is None and ruleset.magic:
-        domain_def = ruleset.magic.get_domain(resolved_magic_domain)
-        if domain_def:
-            resolved_magic_tradition = domain_def.tradition
-
-    # P-6 revised (D16): the Background's starting rank is credited to its
-    # Facet's level track.
-    #
-    # It used to be excluded, on the reasoning that a Facet level should be
-    # earned in play. The arithmetic never worked: a Background's starting skill
-    # is always in the Primary Facet, so excluding it left every character one
-    # advance short of the in-Facet ceiling — 14 of 15 under v0.3, 8 of 9 under
-    # D16 — and Facet level 3 was therefore unreachable inside the primary Facet
-    # for *every character that has a Background*, which is all of them. The
-    # book claimed otherwise in both revisions and no test caught it, because
-    # the reachability test compared thresholds against the raw skill count and
-    # never built a character.
-    #
-    # One banked advance out of the three a level costs is a head start, not a
-    # free level: a fresh character is still at Facet level 0 and still needs
-    # two advances in play to reach level 1.
-    rank_advances_by_facet: dict[str, int] = {}
-    if bg and bg.starting_skill:
-        start_def = ruleset.get_skill(bg.starting_skill)
-        if start_def is not None and start_def.facet:
-            rank_advances_by_facet[start_def.facet] = 1
-
-    character = Character(
-        name=name,
-        player_name=player_name,
-        primary_facet=primary_facet,
-        attributes=attributes,
-        skills=skills,
-        sparks=sparks,
-        session_skill_points_remaining=session_points,
-        background_id=background_id,
-        specialty=specialty,
-        lineage=lineage,
-        gifted=gifted,
-        domain_source=domain_source,
-        magic_domain=resolved_magic_domain,
-        magic_tradition=resolved_magic_tradition,
-        career_advances=career_advances,
-        rank_advances_by_facet=rank_advances_by_facet,
-    )
-
-    errors = character.validate_against_ruleset(ruleset)
     if errors:
         return None, errors
 
-    return character, []
+    ch = Character(
+        name=name.strip(), player_name=player_name, facet=facet, stats=stats,
+        class_id=klass.id if klass else _slug(class_name), class_name=class_name,
+        concept=concept, custom_class=custom, knacks=knacks, specialty=specialty,
+        background=background, lineage=lineage, gifted=is_gifted,
+        gift_domain=gift_domain if (is_gifted and lin and lin.gift_domain_scope) else None,
+        talents=talent_states, id=_slug(name),
+        sparks=ruleset.spark.base_sparks_per_session,
+        class_talents=list(talent_ids) if custom else [],
+        class_signature=(custom_class or {}).get("signature") if custom else None,
+    )
+    errors += _magic_setup_errors(ruleset, ch, magic)
+    for st in talent_states:
+        if st.id == "wider_domain" and ch.magic is not None:
+            dom = ruleset.get_domain(st.choice or "")
+            if dom is None or dom.tradition != ch.magic.tradition or dom.prismatic \
+                    or dom.id in ch.magic.domains:
+                errors.append("Wider Domain needs a second non-prismatic domain of your tradition.")
+            else:
+                ch.magic.domains.append(dom.id)
+
+    for item_id in kit_ids:
+        try:
+            ch.add_item(ruleset, item_id)
+        except ValueError as e:
+            errors.append(f"Kit: {e}")
+    if errors:
+        return None, errors
+    _auto_equip(ruleset, ch)
+    ch.coin = coin if coin is not None else roll_starting_coin(ruleset, rng)
+    if ch.coin < 0:
+        return None, ["Coin cannot be negative."]
+    ch.hp_current = ch.hp_max(ruleset)
+    ch.hp_max_stored = ch.hp_current
+    return ch, []

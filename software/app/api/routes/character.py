@@ -7,7 +7,8 @@ from jose import JWTError
 from pydantic import BaseModel, Field
 
 from app.auth.tokens import decode_token
-from app.game.character import Character, create_default_character
+from app.game.character import Character
+from app.game.character import create_character as build_character
 from app.game.session import session_store
 
 router = APIRouter(prefix="/api/characters", tags=["characters"])
@@ -27,7 +28,7 @@ async def _announce_character(session_id: str, character: Character) -> None:
     await manager.broadcast(session_id, {
         "type": "character_created",
         "player": character.player_name,
-        "character": character.to_client_dict(),
+        "character": character.to_client_dict(session_store.get(session_id).ruleset),
     })
 
 
@@ -42,17 +43,46 @@ def _require_player_or_mm(request: Request):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=str(e))
 
 
+class CustomClassRequest(BaseModel):
+    name: str = Field(min_length=1, max_length=64)
+    concept: str = Field(min_length=1, max_length=300)
+    knack: str = Field(min_length=1, max_length=64)
+    talents: list[str]
+    kit: list[str] = Field(default_factory=list)
+    signature: str | None = None
+
+
+class CustomBackgroundRequest(BaseModel):
+    name: str = Field(min_length=1, max_length=64)
+    knack: str = Field(min_length=1, max_length=64)
+    specialty: str = Field(min_length=1, max_length=300)
+    description: str = Field(default="", max_length=2000)
+
+
+class MagicRequest(BaseModel):
+    domain: str
+    signature_workings: list[str]
+
+
 class CreateCharacterRequest(BaseModel):
+    """Lean Facets v1.0 creation (PHB II.1): Facet, second stat, a preset
+    class or a custom one, a background (listed or custom), lineage."""
+
     session_id: str
     character_name: str = Field(min_length=1, max_length=64)
-    primary_facet: str
-    attributes: dict[str, int] = Field(description="Minor attribute ID -> rating (1-3).")
+    facet: str
+    second_stat: str
+    class_id: str | None = None
+    custom_class: CustomClassRequest | None = None
     background_id: str | None = None
-    magic_domain: str | None = None
-    # PHB II.5 (D18). Defaulted so every client written before the step
-    # existed keeps working; a table on the core ruleset never sends them.
+    custom_background: CustomBackgroundRequest | None = None
     lineage: str = "human"
-    gifted: bool = False
+    gifted: bool | None = None
+    gift_domain: str | None = None
+    talent_choices: dict[str, str] = Field(default_factory=dict)
+    magic: MagicRequest | None = None
+    kit: list[str] | None = None
+    coin: int | None = Field(default=None, ge=0)
 
 
 class UploadCharacterRequest(BaseModel):
@@ -78,22 +108,23 @@ async def create_character(body: CreateCharacterRequest, request: Request):
         # MM can specify a player_name or it defaults to character name
         player_name = body.character_name
 
-    if body.background_id and not session.ruleset.get_background(body.background_id):
-        raise HTTPException(
-            status_code=422,
-            detail=f"Unknown background: {body.background_id}",
-        )
-
-    character, errors = create_default_character(
+    character, errors = build_character(
+        session.ruleset,
         name=body.character_name,
         player_name=player_name or body.character_name,
-        primary_facet=body.primary_facet,
-        attributes=body.attributes,
-        ruleset=session.ruleset,
+        facet=body.facet,
+        second_stat=body.second_stat,
+        class_id=body.class_id,
+        custom_class=body.custom_class.model_dump() if body.custom_class else None,
         background_id=body.background_id,
-        magic_domain=body.magic_domain,
+        custom_background=body.custom_background.model_dump() if body.custom_background else None,
         lineage=body.lineage,
         gifted=body.gifted,
+        gift_domain=body.gift_domain,
+        talent_choices=body.talent_choices,
+        magic=body.magic.model_dump() if body.magic else None,
+        kit=body.kit,
+        coin=body.coin,
     )
 
     if errors:
@@ -101,7 +132,7 @@ async def create_character(body: CreateCharacterRequest, request: Request):
 
     session.add_character(character)
     await _announce_character(body.session_id, character)
-    return {"character": character.to_client_dict()}
+    return {"character": character.to_client_dict(session.ruleset)}
 
 
 @router.post("/upload")
@@ -129,7 +160,7 @@ async def upload_character(body: UploadCharacterRequest, request: Request):
         )
 
     try:
-        character = Character.from_fof(fof_dict)
+        character = Character.from_fof(fof_dict, session.ruleset)
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e))
 
@@ -149,7 +180,7 @@ async def upload_character(body: UploadCharacterRequest, request: Request):
 
     session.add_character(character)
     await _announce_character(body.session_id, character)
-    return {"character": character.to_client_dict()}
+    return {"character": character.to_client_dict(session.ruleset)}
 
 
 @router.get("/{session_id}/{player_name}/export")
@@ -171,8 +202,7 @@ async def export_character(session_id: str, player_name: str, request: Request):
     if not character:
         raise HTTPException(status_code=404, detail="Character not found in session.")
 
-    module_refs = [{"id": f.id, "version": f.version} for f in session.ruleset._files]
-    fof_dict = character.to_fof(module_refs, session_id)
+    fof_dict = character.to_fof(session.ruleset.module_refs(), session_id, ruleset=session.ruleset)
     yaml_str = yaml.dump(fof_dict, allow_unicode=True, sort_keys=False)
 
     return Response(
@@ -220,7 +250,8 @@ async def list_characters(session_id: str, request: Request):
     session = session_store.get(session_id)
     if not session:
         raise HTTPException(status_code=404, detail="Session not found.")
-    return {"characters": {pn: c.to_client_dict() for pn, c in session.characters.items()}}
+    return {"characters": {pn: c.to_client_dict(session.ruleset)
+                           for pn, c in session.characters.items()}}
 
 
 class UpdateNotesRequest(BaseModel):
@@ -262,13 +293,26 @@ async def update_notes(session_id: str, player_name: str, body: UpdateNotesReque
     return {"notes_player": character.notes_player, "notes_mm": character.notes_mm}
 
 
+class InventoryItemRequest(BaseModel):
+    id: str = Field(min_length=1, max_length=64)
+    name: str = Field(default="", max_length=200)
+    slots: int | None = Field(default=None, ge=0, le=4)
+    kind: str | None = None
+    usage_die: int | None = None
+
+
 class UpdateInventoryRequest(BaseModel):
-    inventory: list[str]
+    inventory: list[InventoryItemRequest] = Field(max_length=100)
+    equipped: dict | None = None
 
 
 @router.put("/{session_id}/{player_name}/inventory")
 async def update_inventory(session_id: str, player_name: str, body: UpdateInventoryRequest, request: Request):
-    """Update a character's inventory. Players update their own; MM can update any."""
+    """Replace a character's inventory (items fill slots; Wounds and Fatigue
+    keep theirs). Players update their own; the MM can update any. Refused if
+    the items would not fit, or the equipped gear is not carried."""
+    from app.game.character import InventoryItem
+
     token_data = _require_player_or_mm(request)
 
     session = session_store.get(session_id)
@@ -285,6 +329,24 @@ async def update_inventory(session_id: str, player_name: str, body: UpdateInvent
         if token_data.player_name != player_name:
             raise HTTPException(status_code=403, detail="You can only update your own inventory.")
 
-    character.inventory = [item[:200] for item in body.inventory[:100]]
+    ruleset = session.ruleset
+    items = []
+    for req in body.inventory:
+        raw = {k: v for k, v in req.model_dump().items() if v not in (None, "")}
+        items.append(InventoryItem.from_dict(raw, ruleset))
+    old_items, old_equipped = character.inventory, dict(character.equipped)
+    character.inventory = items
+    if body.equipped is not None:
+        character.equipped.update(body.equipped)
+    errors = character.validate_against_ruleset(ruleset)
+    if character.slots_free(ruleset) < 0:
+        errors.append(f"That is {-character.slots_free(ruleset)} slot(s) too many.")
+    if character.curios_carried() > character.curio_limit(ruleset):
+        errors.append("That is more curios than the limit.")
+    if errors:
+        character.inventory, character.equipped = old_items, old_equipped
+        raise HTTPException(status_code=422, detail={"errors": errors})
     session.save_character_to_disk(player_name)
-    return {"inventory": character.inventory}
+    return {"inventory": [i.to_dict() for i in character.inventory],
+            "equipped": character.equipped,
+            "slots_free": character.slots_free(ruleset)}

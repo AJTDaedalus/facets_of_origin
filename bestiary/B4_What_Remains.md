@@ -22,28 +22,30 @@ Damage the work and it becomes something else entirely.
 
 <!-- statblock: waiting_one -->
 
-**A Waiting One** · *Named* · **TR 9**
+**A Waiting One** · *Level 3 Standard* · The tools of its trade
 
-**When they act on it:** Resolve 4 · armor none
+**HP** 14 · **Armor** 0 · **Attack** +2 · **Damage** 6 · **Attacks** 1 · **Morale** 12 (fearless)
 
-**When it acts:** attack +2 · incoming Tier 2
+**Wants:** The work done properly, and then done again.
 
-**Special:** THE TASK — a Waiting One is doing something, and the MM knows what. Any character who takes an action that genuinely advances that task is not a target this exchange, and the Waiting One will work around them.
+**Special:** THE TASK — the MM knows the job it is doing. A character who spends their action genuinely advancing that job is not a target this exchange, and it works around them. Anyone who damages the work is its target from then on, and every hit it lands on them is a hard hit.
 
-**Disposition:** Occupied. Violence is an interruption, and it is treated as one.
+**When bloodied:** It turns its back and goes back to the job. From here it attacks only someone who damages the work or stands between it and the job.
 
-**Goes for:** Whoever is between it and the work.
+**Tells:** It is finishing something that was finished before any of you were born. It has not looked up.
 
-**In play:**
+**Breaks:** Never breaks. It stops when the task is finished, and only then. At 0 HP it simply cannot go on, which is not the same thing, and the fiction should say so.
 
-- Never strikes first, and never strikes anyone who is helping.
-- Becomes immediately and comprehensively dangerous to anyone who damages the work.
+**Twists (d6):**
 
-**Morale:** Stops when the task is finished, and only then. Nothing else stops it; at Resolve 0 it simply cannot continue, which is not the same thing and the fiction should say so.
+1. The job takes ten minutes with a second pair of hands.
+2. The thing the party came for is part of the work, and taking it is damaging the work.
+3. The job needs a material that no longer exists.
+4. Someone has been leaving materials at the door for forty years and has never once gone in.
+5. Two Waiting Ones are doing the same job, and each has been undoing the other's work.
+6. The job went wrong the day they died, and it will never come out right until someone finds out why.
 
-**Negotiation:** Wants the work done. Shifts for help. Honours nothing, because it is not making agreements — but a party that finishes the job is not opposed again.
-
-**Appears:** Where people died mid-task: one to four, each on its own job.
+**Nastier:** An Unfinished runs this site, and this one has been reassigned.
 
 *`enemies/waiting_one.fof`*
 
@@ -59,9 +61,9 @@ Damage the work and it becomes something else entirely.
 
 **Encounters.**
 
-- **The workshop** *(1 Named — under Standard, and not a fight unless the party makes it one)*. One Waiting One, one job, and the job is completable in about ten minutes by anyone with hands. The correct outcome of this encounter is that the party finishes somebody's work and it is quietly one of the better scenes of the session.
-- **The salvage** *(2 Named + 1 Mook — a soft Standard)*. Two Waiting Ones on two jobs, and the thing the party came for is part of one of them. Taking it is damaging the work. This is a real dilemma and the entry does not resolve it for you.
-- **The one that can't be finished** *(1 Named — under Standard, and tragic)*. The task requires a material, a person, or a place that no longer exists. There is no clean ending here. There is a good one, but the party has to build it, and the Mirror Master should let them try things.
+- **The workshop** *(one level 3 standard — a fair fight, and not a fight at all unless the party makes it one)*. One Waiting One, one job, and the job is completable in about ten minutes by anyone with hands. The correct outcome of this encounter is that the party finishes somebody's work and it is quietly one of the better scenes of the session.
+- **The salvage** *(two Waiting Ones — hard for a new party)*. Two Waiting Ones on two jobs, and the thing the party came for is part of one of them. Taking it is damaging the work. This is a real dilemma and the entry does not resolve it for you.
+- **The one that can't be finished** *(one Waiting One — a fair fight, and tragic)*. The task requires a material, a person, or a place that no longer exists. There is no clean ending here. There is a good one, but the party has to build it, and the Mirror Master should let them try things.
 
 **Ecology.** A site with Waiting Ones on it is a site nobody works and everybody knows about. The local arrangement is usually an accommodation rather than a solution: a fence, a story told to children, an annual visit by somebody who leaves materials at the door and does not go in. Occasionally that somebody is a descendant. Occasionally they have been doing it for forty years and have never once considered going inside and picking up the other end.
 
@@ -81,39 +83,38 @@ The conditions are the same — a task considered unfinished, an interruption ne
 
 It will recruit the party too, and the entry means this literally. Being conscripted by the Unfinished is not a mind-control effect and there is no roll to resist it; there is a task, stated clearly, and a character may do it or not. Refusing is free. Refusing also means that everyone else on the site now regards you as an obstruction, and there are between four and twelve of them.
 
-**The work cannot be finished.** That is the tragedy of the entry and the Mirror Master should know it going in. Whatever it is, it is beyond the labour available, or the materials no longer exist, or the thing it was for stopped mattering two centuries ago. The Unfinished has no morale because there is no condition under which it stops.
+**The work cannot be finished.** That is the tragedy of the entry and the Mirror Master should know it going in. Whatever it is, it is beyond the labour available, or the materials no longer exist, or the thing it was for stopped mattering two centuries ago. The Unfinished's morale is 12 because there is no roll under which it stops.
 
 Which means the only real ending is to make it finishable.
 
 <!-- statblock: the_unfinished -->
 
-**The Unfinished** · *Boss* · **TR 14**
+**The Unfinished** · *Level 4 Boss* · Whatever tool the work needs next
 
-**When they act on it:** Resolve 8 · armor none
+**HP** 85 · **Armor** 0 · **Attack** +3 · **Damage** 9 · **Attacks** 2 · **Morale** 12 (fearless)
 
-**When it acts:** attack +2 · incoming Tier 2
+*Changes phase when Bloodied (half HP).*
 
-**Special:** THE GREAT WORK — the Unfinished is not doing a task. It is running one, and it has been recruiting.
+**Wants:** The great work completed.
 
-**Special:** CONSCRIPTION — once per scene, the Unfinished sets a task for a character. That character may spend their action doing it, or refuse; refusing is free, but every Waiting One in the scene now considers them an obstruction.
+**Special:** CONSCRIPTION — once per scene, it sets a character a task. They may spend their action doing it, or refuse. Refusing is free, but every Waiting One in the scene treats them as an obstruction from then on. A character who completes a task is staff: it will not attack them.
 
-**At Resolve 3:** It stops assigning and starts doing the work itself, at speed, with its own hands. Its attack no longer targets anyone — it targets the site. Every exchange from here, the work advances visibly, and the party has to decide whether that is a problem.
+**When bloodied:** It stops assigning and does the work itself, at speed, with its own hands. Its attacks target the site, not the party, and every exchange the work visibly advances. The party has to decide whether that is a problem.
 
-**Disposition:** Administrative. It does not fight so much as assign.
+**Tells:** Something at the centre of the work looks at you, then past you, and makes a gesture that plainly means take the other end.
 
-**Goes for:** Whoever is disrupting the most labour.
+**Breaks:** Never breaks; the work is not finishable, and it will not stop for anything short of the party making it so. Bring it a credible plan and it will listen at length, mid-fight, and a good plan ends the fight: it lays down the tools, and so does everyone else.
 
-**In play:**
+**Twists (d6):**
 
-- Spends its first exchange assessing, and its second conscripting.
-- Never leaves the work. It has never once left the work.
-- Treats a character who completes an assigned task as staff, which is both an enormous tactical advantage and a genuinely unsettling place to be.
+1. The quarry that fed the work closed a century ago, and somebody still owns it.
+2. The district behind the wall is populated, and nobody there wants anything resolved.
+3. One of the Waiting Ones was reassigned from a job three streets away and would like to go back to it.
+4. The work is a road through the mountains, and the party needs the road.
+5. The authority that could approve a change of plan has a successor office, and it is sitting today.
+6. The thing the wall was built to keep out stopped existing long ago.
 
-**Morale:** None. The work is not finishable — that is the tragedy of the entry — and it will not stop for anything short of the party making it finishable.
-
-**Negotiation:** Wants the great work completed. Shifts for a credible plan to finish it, and it will listen to one at length, mid-fight. Honours a completed plan absolutely: it lays down the tools, and so does everyone else, and that is the intended ending of this entry.
-
-**Appears:** One, with four to twelve Waiting Ones, at a site where something large was left half-done.
+**Nastier:** It can conscript once every exchange instead of once per scene.
 
 *`enemies/the_unfinished.fof`*
 
@@ -129,10 +130,10 @@ Which means the only real ending is to make it finishable.
 
 **Encounters.**
 
-- **The site** *(1 Boss + 4 Named — Deadly at Party Strength 3, and the wrong reading of the entry)*. The full roster, played as a fight, is a slaughter in one direction or the other and satisfies nobody.
-- **The conscription** *(1 Boss + 4 Named — the same roster, played correctly)*. The Unfinished spends its first exchange assessing and its second conscripting. A party that works — even one character, even briefly — is being handed the negotiation surface, and they will feel it happen.
+- **The site** *(the Unfinished and four Waiting Ones — deadly, and the wrong reading of the entry)*. The full roster, played as a fight, is a slaughter in one direction or the other and satisfies nobody.
+- **The conscription** *(the same roster, played correctly)*. The Unfinished spends its first exchange assessing and its second conscripting. A party that works — even one character, even briefly — is being handed the negotiation surface, and they will feel it happen.
 - **The plan** *(the intended ending)*. The party finds the reason the work stalled, and does something about it: the quarry that closed, the successor authority that could authorise a change, the fact that the thing being walled out stopped existing in the last century. Bring that to the site and the entry ends the way it was built to.
-- **The phase change** matters here more than in most Boss entries. At Resolve 3 the Unfinished stops assigning and starts building, itself, at speed — its attacks stop targeting anyone and start targeting the *site*, and every exchange the work visibly advances. The party then has to decide whether a half-mad foreman completing a two-century project at ruinous speed is a problem. Sometimes it is not. That is the good version of this scene.
+- **The bloodied line** matters here more than on most Boss cards. Once it is bloodied the Unfinished stops assigning and starts building, itself, at speed — its attacks stop targeting anyone and start targeting the *site*, and every exchange the work visibly advances. The party then has to decide whether a half-mad foreman completing a two-century project at ruinous speed is a problem. Sometimes it is not. That is the good version of this scene.
 
 **Ecology.** A great work with an Unfinished on it is a regional fact. The road is not usable. The wall is not maintained by anyone living. The levee holds — that is the awkward part, because it does hold, and the district behind it is populated, and nobody in that district is in a hurry for outsiders to resolve anything. A party that solves this entry cleanly should expect at least one person to be furious with them about it.
 
@@ -144,9 +145,9 @@ Which means the only real ending is to make it finishable.
 
 *The conversation stops. Not because anyone has stopped talking — you can see the man across the yard still talking, mouth moving, hands going, and there is nothing. Then the sound of your own breathing goes. Then the sound of your heart, which you had not known you were hearing until it was not there.*
 
-A hushfall is a moving absence of sound. It has no body, no stat block, and no Threat Rating, and putting one in this book at all is a deliberate argument: not everything the party meets is an enemy, and the system already has the tool for the ones that are not.
+A hushfall is a moving absence of sound. It has no body, no card, and no hit points, and putting one in this book at all is a deliberate argument: not everything the party meets is an enemy, and the system already has the tool for the ones that are not.
 
-**Run a hushfall as a hazard on a four-segment Threat Clock.** It advances one segment on any partial success or failure rolled by a character inside it, exactly as III.2 describes, and a character can wind it back one segment by spending an action doing something that genuinely works against it — finding the edge, marking a route out, getting somebody moving in the right direction. When the clock fills, everyone still inside takes a Tier 2 Condition as the silence takes something it should not have access to: balance, orientation, the memory of which way they came in.
+**Run a hushfall as a hazard on a four-segment threat clock.** It advances one segment on any partial success or failure rolled by a character inside it, exactly as III.2 describes, and a character can wind it back one segment by spending an action doing something that genuinely works against it — finding the edge, marking a route out, getting somebody moving in the right direction. When the clock fills, everyone still inside rolls to Avoid with Mind. On a 10+ they keep their bearings. On a 7–9 they are turned around, and their next roll is Hard. On a 6− the silence takes something it should not have access to (balance, orientation, the memory of which way they came in): they lose 1d6 HP that armor does not stop, and they are lost until somebody leads them out.
 
 Nothing about that requires a new subsystem, and that is the entire point of the entry.
 
@@ -164,10 +165,10 @@ Nothing about that requires a new subsystem, and that is the entire point of the
 
 **Encounters.**
 
-- **The crossing** *(a 4-segment Threat Clock; no combat)*. A hushfall is between the party and where they are going, and going around costs time they do not have. The whole encounter is coordination without speech, and it is one of the best things this system does.
-- **The fight inside one** *(any roster, one band harder than it looks)*. Nothing in the combat rules changes. Everything about running the combat changes, because nobody can be told anything. Use this once per campaign and not twice.
+- **The crossing** *(a four-segment threat clock; no fight)*. A hushfall is between the party and where they are going, and going around costs time they do not have. The whole encounter is coordination without speech, and it is one of the best things this system does.
+- **The fight inside one** *(any roster, and harder than it looks)*. Nothing in the combat rules changes. Everything about running the combat changes, because nobody can be told anything. Use this once per campaign and not twice.
 - **The eleven days** *(no fight)*. A hushfall has stopped over a building, and it has been there for nine days, and there are people inside. This is not a monster encounter. It is a rescue with a very strange constraint, and the party will talk about it afterwards.
 
 **Ecology.** Regions with recurring hushfalls develop hand-signal vocabularies, and the vocabularies leak into ordinary life — a gesture for *stop*, a gesture for *this way*, a gesture for *I am here* that people use in crowded markets without remembering why. That leakage is the best hook in this entry: the party can meet the signs long before they meet the thing.
 
-**Adaptation.** The absence can be of anything a table would miss: sound, light, warmth, colour, the ability to be certain of the time. Keep the drift, keep the Threat Clock, and keep the fact that it cannot be attacked. The moment a hushfall has hit points it stops being the entry that argues for the rest of this book.
+**Adaptation.** The absence can be of anything a table would miss: sound, light, warmth, colour, the ability to be certain of the time. Keep the drift, keep the threat clock, and keep the fact that it cannot be attacked. The moment a hushfall has hit points it stops being the entry that argues for the rest of this book.

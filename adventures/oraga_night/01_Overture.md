@@ -21,17 +21,17 @@ the house.*
 
 ## What This Adventure Is
 
-Oraga Night is a masquerade for **three to five characters**, freshly made or taken from the pregenerations in Chapter III. It starts at **Facet level 0** and expects no Techniques — this is a first-session module, and every problem in it can be solved by people who own nothing but a Background and a good idea.
+Oraga Night is a masquerade for **three to five characters**, freshly made or taken from the pregenerations in Chapter III. It starts at **level 1** — this is a first-session module, and every problem in it can be solved by people who own nothing but two talents, a background, and a good idea.
 
-**Characters grow.** The night ends with the standard four skill points and a reflection scene at the epilogue, exactly as any session does. Run the aftermath wing in Chapter VI for two more sessions and a starting character reaches **Facet level 1** — their first Technique, and for a gifted character, the moment their gift arrives in full. What they also leave with is Sparks, obligations, three or four people who now know their names, and the only first-hand account of something the city will spend a generation lying about.
+**Characters grow.** The night ends with the session-end prompts, exactly as any session does, and by the default pacing the MM calls **level 2** at the epilogue. Run the aftermath wing in Chapter VI for two more sessions and a starting character reaches **level 3** — the level where a class commits and takes its signature. What they also leave with is Sparks, obligations, three or four people who now know their names, and the only first-hand account of something the city will spend a generation lying about.
 
 **One session**, four to six hours, as written. **Three sessions** with the aftermath wing in Chapter VI.
 
 ## What You Need
 
-The Facets of Origin core rules — 2d6 plus attribute plus skill against a difficulty, Sparks, Conditions, and the exchange structure for the two Movements that turn violent. No grid, no miniatures.
+The Facets of Origin core rules — 2d6 plus a stat (and a knack, if one fits) against a difficulty, Sparks, HP and Wounds, and the exchange structure for the Movements that turn violent. No grid, no miniatures.
 
-You need the core rules and the **Val'loh Facet** (`settings/valloh/`), which carries the tribes as Lineages, their gifts as domains, and crystal charges as items. Chapter VII holds every named guest; the enemy `.fof` files hold every stat line you will need.
+You need the core rules and the **Val'loh Facet** (`settings/valloh/`), which carries the tribes as Lineages, their gifts as gift knacks and Minor-only domains, and crystal charges as curios. Chapter VII holds every named guest; the enemy `.fof` files hold every card you will need.
 
 Print the handouts in Chapter VIII before you sit down — the agenda cards and the invitation, at minimum, and the night-tracker for yourself.
 
@@ -91,15 +91,15 @@ Run session zero as a table: each player picks a hook and an agenda, and the par
 
 **Scene cards** are `S1`–`S3` (full page) and `S4`–`S5` (half page), all in Chapter IX. A room that has a fight points at its card by ID, and the card points back at the room. Nothing else in the module carries an enemy's numbers.
 
-**Enemy notation**, wherever one appears: *tier · Resolve · attack · armor · incoming tier · TR*, then stance triggers, then Techniques. Every one of those lines is **generated from the module's enemy files** — if a card and a stat block ever disagree, the card is stale and a test will have said so.
+**Enemy notation**, wherever one appears: *level · role · HP · attack · damage · armor · morale*, then the card's lines — WANTS, SPECIAL, WHEN BLOODIED, TELLS, BREAKS, and six TWISTS. Every one of those lines is **generated from the module's enemy files** — if a scene card and a stat line ever disagree, the scene card is stale and a test will have said so.
 
 **Clocks** are four-segment and named. Each says what advances it, and what happens when it fills. The night-tracker in Chapter VIII has a column for them.
 
 ***Italic blocks*** are read-aloud. Every one has a trigger line above it in plain text saying when to read it. They describe only what the characters can perceive, they never say what anyone feels or does, and they never name a thing the players have not identified for themselves. Cut anything in one that your table's approach has already contradicted.
 
-**Boxed sidebars** come in three kinds, and the label says which: **Sidebar —** for a piece of the world that would otherwise derail the paragraph it sits in; **⟨If History Breaks⟩** for the places where the players can genuinely overturn the recorded outcome, each one telling you what changes and how to run forward; and **MM Note** for technique.
+**Boxed sidebars** come in three kinds, and the label says which: **Sidebar —** for a piece of the world that would otherwise derail the paragraph it sits in; **⟨If History Breaks⟩** for the places where the players can genuinely overturn the recorded outcome, each one telling you what changes and how to run forward; and **MM Note** for table craft.
 
-**Enemies** are named by their stat file — `enemies/tavva.fof` — and every one of them carries its conduct and its morale line in the file, not just its numbers. No fight in this module is to the death by default.
+**Enemies** are named by their card file — `enemies/tavva.fof` — and every one of them carries what it wants and what it does when its morale breaks, not just its numbers. No fight in this module is to the death by default.
 
 **Where the module says *the module does not say*,** that is load-bearing. See *What the MM Knows*, below in this chapter.
 
@@ -123,7 +123,7 @@ None of these replaces the ordinary earning rules. A Graceful Fail is still a Gr
 
 ### The Three Fights, and How to Offer Them
 
-Every fight in this module is visible before it starts and optional once it has. Nobody is ambushed and nobody is forced to draw. That is deliberate — but a table that came to play a game with Postures and Endurance Pools should not have to go home without touching them, so here is how to put each one in front of them without pushing.
+Every fight in this module is visible before it starts and optional once it has. Nobody is ambushed and nobody is forced to draw. That is deliberate — but a table that came to play a game with damage dice and enemies rolling in the open should not have to go home without touching them, so here is how to put each one in front of them without pushing.
 
 **The seating feud (S1)** offers itself: it is loud, it is nearby, and it is two drunk men about to embarrass their houses. A player character with any standing at all will be *looked at* by the people around the benches. That look is the invitation.
 
@@ -150,7 +150,7 @@ regardless of the players, open time for the characters to chase their agendas, 
 says so, not when a timer does; the night-tracker in Chapter VIII gives you the whole
 program on one page.
 
-For most of the evening this is a social adventure. The player characters maneuver,
+For most of the evening this is a social adventure. The player characters scheme,
 charm, eavesdrop, trespass, and trade favors under two hundred masks. Then, at midnight,
 the masks come off — and three guests keep theirs on. The last two Movements are a
 different game: darkness, fire, terror, and choices about who to save and what to carry
@@ -225,7 +225,7 @@ correction, because correcting a player mid-scene costs more than the error did.
 > monsters are for in every other game they have played.
 >
 > **In-fiction answer one: make the purchase visible.** Force buys hallways. When
-> Mordai's player commits everything to a Strike, do not say "it does nothing" — say
+> Mordai's player commits everything to an attack, do not say "it does nothing" — say
 > that the thing staggers back three steps, and that three steps is nine feet, and
 > nine feet is how far Veier gets down the private stair. He bought that. Say so.
 >
@@ -257,15 +257,16 @@ correction, because correcting a player mid-scene costs more than the error did.
 > it, but…". Cost first, then the thing they wanted, and the thing they wanted
 > *always arrives*.
 >
-> **In-fiction answer two: the MM2 social table is on the night-tracker.** It is
-> there so you can read a cost off a page at speed instead of inventing one while
-> five people watch you.
+> **In-fiction answer two: keep the social complications table open.** It is in
+> MM6, *The Toolbox*, beside the night-tracker, so you can read a cost off a page at
+> speed instead of inventing one while five people watch you.
 
 > **Troubleshooting — somebody asked whose turn it is**
 >
-> **In-fiction answer one: nobody's.** Everyone declares a Posture, everyone acts,
-> the whole beat resolves together. Say "declare Postures" and go round the table
-> collecting them before anything resolves.
+> **In-fiction answer one: nobody's.** You say what each foe is about to do and to
+> whom; then the players act in any order they like, and the foes roll their
+> attacks in the open. Say "here is what's coming — what do you do?" and go round
+> the table.
 >
 > **In-fiction answer two: read the exchange flow off the scene card.** Every card
 > has it. If the table is still confused, run one exchange out loud with the card in

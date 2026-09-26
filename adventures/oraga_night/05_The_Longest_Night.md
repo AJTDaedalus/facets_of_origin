@@ -91,8 +91,8 @@ along the service passages toward the east wing, and the fastest route to the ri
 gate runs through the garden stair.
 
 > **Sidebar — Crystals gutter:** Within a stone's throw of an Uninvited, a
-> triggered crystal charge works only on a Luck roll (Standard) — on a 6− the light
-> simply goes out of it. The palace's great wards are older and deeper and hold
+> released crystal charge works only on a Soul roll (Standard) — on a 6− the light
+> simply goes out of it, and the curio is spent. The palace's great wards are older and deeper and hold
 > longer, but even they gutter when one of the three stands close. This is worth
 > foreshadowing the exact moment a player's clever crystal plan meets it.
 
@@ -114,8 +114,9 @@ What history records, told in scenes. Bend everything except what the players be
   river seals itself behind her, one by one, all the way down. What the Wept does
   then is quick.
   *(If a player character is about to die shielding Raunu, the Wept takes them out
-  of the fight instead of out of the world — a Tier 2 Condition and a broken wall.
-  It has no orders about them, and no appetite either.)*
+  of the fight instead of out of the world — through a broken wall, at 0 HP, with a
+  Wound and a Hold On that can go no lower than 7–9. It has no orders about them,
+  and no appetite either.)*
 - **The east wing.** The Radiant hunts Veier through corridors that lock themselves
   behind her (Raunu's last gift, working), but it is faster than doors. What it is
   not faster than: witnesses. Its Fracture (below) is that it *performs*; alone with
@@ -140,8 +141,7 @@ What history records, told in scenes. Bend everything except what the players be
   the fallen and the fleeing. **This is the night's one fully winnable fight,
   and it is aimed straight at the players' better natures**: guests being robbed
   as they crawl from the fire is a sight no decent character walks past, and no
-  Fracture, leash, or ward-lore is needed — just a blade, a posture, and the
-  willingness. The crew fights to escape, not to kill, breaks off the moment the
+  Fracture, leash, or ward-lore is needed — just a blade and the willingness. The crew fights to escape, not to kill, breaks off the moment the
   price turns real, and any of them caught and held is worth more than the
   goods: by dawn, a captured looter is the inquest's favorite scapegoat and the
   players' proof of what they saw. If nobody interferes, the crew gets away
@@ -202,22 +202,25 @@ tears catching the fire-light, and watches the boat go. If any player character
 earned its Fracture, this is where it looks at them. Then east.
 
 > **Sidebar — Caught in the crossfire:** while the Crossing runs, any player
-> character in the duel's path faces one consequence per beat — flying crystal,
-> collapsing stonework, a shear of force that was aimed at no one. Call for a
-> reaction (Dexterity or whatever the fiction offers, Standard): on a 10+ they
-> ride it; on a 7–9 they take a Tier 1 Condition or lose their next action
-> shielding someone; on a 6− a Tier 2 Condition or the ground between them and
-> the gate gets worse. Never aim the duel *at* a player character — the terror
-> of the Crossing is precisely that neither combatant cares that they are there.
+> character in the duel's path faces one hazard per beat — flying crystal,
+> collapsing stonework, a shear of force that was aimed at no one. Call for an
+> avoid roll (Body to get clear, or whatever stat the fiction offers, Standard):
+> on a **10+** they ride it; on a **7–9** they take d4 damage or lose their next
+> action shielding someone, their choice; on a **6−** they take d8 damage, or the
+> ground between them and the gate gets worse, the MM's choice. Armor does not
+> help against a garden coming apart. Never aim the duel *at* a player character —
+> the terror of the Crossing is precisely that neither combatant cares that they
+> are there.
 
 ### You Cannot Beat Them
 
 Say it plainly at the table when the fiction earns it: **the Uninvited cannot be
 defeated by force tonight — not by the players, not by fifty guards, not by the
-palace.** Weapons land and matter less than they should. A stat block reaching
-Resolve 0 does not mean a kill: it means the killer *stops indulging the
-interference* — puts the attacker through a wall (Tier 2 Condition, out of
-this scene), stops toying, and walks on toward the task, Resolve track reset. Fighting the Uninvited never ends in victory. It buys time with bodies,
+palace.** Weapons land and matter less than they should. A card reaching 0 HP
+does not mean a kill: it means the killer *stops indulging the interference* —
+puts the attacker through a wall (0 HP and out of this scene, with a Wound and a
+Hold On that can go no lower than 7–9), steps into the world's shadow, and walks
+back on toward the task at full HP. Fighting the Uninvited never ends in victory. It buys time with bodies,
 and time is real currency tonight: every exchange spent on a stubborn defender is
 a hallway Veier gains, a dozen guests out the service doors, a ward resealed.
 Make the cost honest and the purchase visible, and a hopeless fight becomes the
@@ -244,10 +247,11 @@ Sella, Kovaun, or another player) **one tell** unlocks that Fracture at **Hard**
 Uninvited do openly (below) counts as tells too — a table that arrives at
 midnight with nothing can still earn a Fracture in the fire.
 
-Invoking a Fracture is a Soul-facet action (usually Persuade, Perform, or Attune;
-sometimes just a bared truth). On a 10+, the effect lands in full; on a 7–9 it
-lands and the Uninvited answers with one terrible parting blow or word. Each
-Fracture works once.
+Invoking a Fracture is a **Soul roll**, with a knack if one fits the words —
+persuasion, performance, rite, or just a bared truth. On a 10+, the effect lands
+in full; on a 7–9 it lands and the Uninvited answers with one terrible parting
+blow (rolled in the open) or word; on a 6−, the MM makes a move. Each Fracture
+works once.
 
 **Table V–1: Fracture Tells**
 
@@ -271,7 +275,7 @@ Fracture works once.
   **the Radiant cannot be turned.** Not from the hunt, not from the errand, not
   by darkness or doubt — nothing short of the leash ends his night. What he can
   be made to do is *feel*. Two roads to the guilt: **deny the congregation** —
-  douse the lights, empty the room, turn every back, or a Perform action that
+  douse the lights, empty the room, turn every back, or a performance that
   makes a player character the better spectacle; unwitnessed, his service stops
   counting as worship, and the liturgy collapses into plain ugly work that even
   he can feel the shame of — he hurries, stops savoring, does it *badly*. Or

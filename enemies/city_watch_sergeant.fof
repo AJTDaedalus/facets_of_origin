@@ -1,57 +1,47 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: city_watch_sergeant
 name: City Watch Sergeant
-
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
-
+    version: 1.0.0
 enemy:
-  tier: named
-  resolve: 3
-  attack_modifier: 2    # Strength +1, Combat Practiced +1
-  armor: light
-  techniques: []
-  special: null
-  tr: 8                 # offense(+2→4) + durability(Resolve 3) + armor(light→1) + techniques(0) = 8
+  # v0.3: Named, durability 3, attack +2, light armor, rating 8.
+  level: 3
+  role: standard
+  armor: 1
+  morale: 8
+  weapon: Cudgel
+  wants: An arrest, a clean report, and nobody dead on this shift.
+  special: 'BACKUP — if the fight runs past its second exchange, the sergeant has already
+    whistled: at the end of the third exchange, two watch arrive (level 1 Mooks).'
+  when_bloodied: Guard comes down low. It Defends every exchange (no attack; attacks on it
+    are Hard) until help arrives or the party is clearly losing.
+  tells: It keeps glancing up the street, and the whistle is already on its lanyard.
+  breaks: Surrenders, or accepts a surrender, at once, and starts the paperwork.
+  twists:
+  - The sergeant has the wrong people, knows it, and still has to arrest somebody.
+  - The sergeant's brother-in-law owns the warehouse the party is standing in.
+  - It is the end of a double shift, and the sergeant will take any excuse to go home.
+  - The backup is already here, out of sight, and heard everything the party just said.
+  - The order came from someone the sergeant does not trust, and the sergeant would like to
+    be talked out of it.
+  - A crowd has gathered, and it is on the party's side.
+  nastier: 'A watch captain: level 5, and the backup arrives at the end of the second exchange.'
+  description: >-
+    A mid-rank officer of the city watch. Experienced in crowd control, street violence, and
+    the particular skill of making someone feel arrested before they've decided whether to
+    resist. Fights methodically — not inspired, but very hard to rattle. Will call for backup
+    if the fight runs more than two exchanges.
+  notes: >-
+    Level 3 standard, armor 1: no overrides.
 
-  disposition: >
-    Methodical, uninspired, and very hard to rattle.
 
-  morale: >
-    Fights to arrest, not to kill. Surrender ends the fight immediately
-    and starts the paperwork.
+    Methodical, uninspired, and very hard to rattle. Fights to arrest, not to kill. Experienced
+    in crowd control, street violence, and the particular skill of making someone feel arrested
+    before they've decided whether to resist.
 
-  organization: >
-    One sergeant per four to six watch on a shift.
 
-  triggers:
-    - >
-      Opens Measured; shifts to Defensive for the rest of the fight from
-      the first exchange it is left Open — guard low, having learned it
-      can be reached.
-    - >
-      Goes Aggressive only if the party is clearly losing.
-    - >
-      Calls for backup if the fight runs more than two exchanges.
-
-  description: >
-    A mid-rank officer of the city watch. Experienced in crowd control,
-    street violence, and the particular skill of making someone feel
-    arrested before they've decided whether to resist. Fights
-    methodically — not inspired, but very hard to rattle. Will call
-    for backup if the fight runs more than two exchanges.
-
-  notes: >
-    TR breakdown: offense(+2 → value 4) + durability(Resolve 3)
-    + armor(light → 1) + techniques(0) = 8. Meets Named NPC minimum of 8.
-
-    Posture tendency: Measured first exchange, Defensive from the
-    exchange it is first left Open onward.
-    Will not go Aggressive unless the party is clearly losing. Stances
-    are stated openly, driven by the triggers above (III.3, Postures).
-
-created_at: '2026-03-05T00:00:00+00:00'
-last_modified: '2026-08-08T00:00:00+00:00'
+    Appears: one sergeant per four to six watch on a shift.
+  reskin_of: null

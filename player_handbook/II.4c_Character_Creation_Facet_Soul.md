@@ -1,253 +1,261 @@
 # Character Creation: Facet of the Soul
 
-Six guards, drawn steel, and a great deal of shouting. Zulnut steps into the middle of it with his hands open and says something quiet, and the shouting stops, and nobody afterward can agree on what he actually said.
+Invokers, speakers, wanderers and captains. People who solve problems by moving the people around them, or by having it work out.
 
-## The Soul Facet
+A Soul character rolls a d8 for grit (or 5 a level) and starts with Soul +2. The Soul menu holds the intuitive magic, *Invocation*, and a set of talents that work on people and on luck: turning a hostile crowd, keeping hirelings loyal, rerolling a roll that was about to ruin everything.
 
-Soul Facet characters solve problems by moving people and bending the world toward them. Where a Body character forces a door and a Mind character finds the hidden latch, a Soul character persuades someone to open it — or simply finds the door already unlocked, because it has always worked out that way. They are the diplomats, spiritual practitioners, luck-touched wanderers, and performers who shift the atmosphere of a scene before they have said a word. Their tools are presence, fortune, and connection to forces that do not show up on any map.
-
----
-
-## Skills of the Soul
-
-**Table II.4c–1: Skills of the Soul**
-
-| Skill | Attribute |
-|---|---|
-| **Persuade** | Charisma |
-| **Deceive** | Charisma |
-| **Perform** | Charisma |
-| **Attune** | Spirit |
-| **Gamble** | Luck |
-
-Full descriptions are in Chapter II.7 — Skills.
+None of the recurring cast is Soul. Everyone at their table has noticed, and none of them will admit it would help.
 
 ---
 
-## Facet of the Soul — Technique Tree
+## Preset Classes
 
-The Soul tree has three branches: **Presence** (Charisma), **Fortune** (Luck), and **Communion** (Spirit).
-
----
-
-### Presence Branch
-
-Presence Techniques represent the weight a person carries into a room — the ability to read what people want, say the one thing they cannot wave away, and shift a scene by standing in the middle of it and speaking. A sword ends an argument; Presence ends the need for one.
-
----
-
-#### Tier 1
-
-**Read the Room** *(Presence, Tier 1 — Charisma)*
-
-**Use:** At will.
-
-When you enter a social situation, you may ask the MM one question about anyone present: what do they want, what do they fear, or what would it take to change their mind? The MM must answer honestly. You may not use this ability if you are not paying attention to the people around you.
-
-**Normal:** Reading what someone wants or fears is an Insight roll.
-
-**Lasting Impression** *(Presence, Tier 1 — Charisma)*
-
-**Use:** Passive.
-
-When you succeed on a Persuade or Perform roll, the effect holds. The MM cannot have the target reverse course without a fictional reason — a change in circumstances, new information, or something that genuinely shifts their position. Being convinced and then unconvinced offscreen does not count.
-
-**Normal:** A successful Persuade or Perform moves someone now; whether it holds is the MM's to narrate.
-
----
-
-**Tier 2** *(requires one Presence Tier 1)*
-
-**The Aimed Truth** *(Presence, Tier 2 — Charisma)*
-
-**Use:** Once per scene.
-
-You may say something so precisely targeted at what someone actually believes about themselves — their fear, their hope, their unspoken justification — that they cannot ignore it. They must respond in kind: denial, anger, grief, or acknowledgment. They may not deflect, change the subject, or pretend they did not hear it. The MM determines how they respond; you determine that they must.
-
-**Normal:** How an NPC answers anything you say is the MM's call.
-
-**Commanding Presence** *(Presence, Tier 2 — Charisma)*
-
-**Use:** Once per scene.
-
-When you speak with clear authority in a tense situation — giving orders, stopping a confrontation, demanding attention — anyone who does not have a compelling reason to ignore you does not. You do not roll. The MM may only override this with active, established fictional reasons why this particular person would resist you specifically.
-
-**Normal:** Getting a room to listen to you is a Persuade roll.
-
----
-
-**Tier 3** *(requires one Presence Tier 2)*
-
-**The Turning** *(Presence, Tier 3 — Charisma)*
-
-**Use:** Once per session.
-
-Your words or presence shifts the direction of a scene in a way that cannot be ignored. An armed standoff ends. A hostile crowd turns uncertain. An official reconsidering their position decides. The MM cannot refuse the shift — they can only determine how it unfolds and what it costs the other side. You do not need to roll, but you must speak.
-
-**Normal:** A scene turns when the fiction turns it. A roll wins a moment, not a scene.
-
-> **Example — the Turning**
+> **Reading the Entries — class cards**
 >
-> *Zulnut steps between Mordai and the six guards, hands open, and speaks. The Turning. The standoff doesn't explode — it deflates. The guard in front sheathes his blade. The door is still closed, but nothing is broken yet.*
+> Each preset prints its name, its concept, its **class knack**, its two starting **talents**, the **signature** it takes at level 3, and its starting **kit** with the slots the kit fills. The talents and signature are described in full later in this chapter; the kit items are in Chapter IV.1.
 
-**Unforgettable** *(Presence, Tier 3 — Charisma)*
+### Invoker
 
-**Use:** Passive.
+*"I am a channel for a power that answers when I call."*
 
-Anyone who has a meaningful interaction with you remembers you — specifically, favorably, and personally — unless they have a concrete reason not to. More than that: when you reappear in someone's life after an absence, they are glad to see you. Old contacts become warm contacts. Strangers who met you once treat you like someone they have been looking for. The MM cannot make people who had no reason to resent you cold or neutral on your return.
+**Class knack:** Rites and spirits
 
-**Normal:** Whether an NPC remembers you, and how warmly, is the MM's to decide.
+**Talents:** *Invocation*, *Empath*
 
----
+**Signature (level 3):** *Miracle*
 
-### Fortune Branch
-
-Fortune Techniques represent a strange, standing arrangement with probability — the unlocked door, the guard called away a moment ago, the hunch that turns out to be load-bearing. Fortune cannot be planned, aimed, or explained, which has never once stopped it from working.
+**Kit:** Staff; Holy symbol; Light armor; Rations (4 slots)
 
 ---
 
-#### Tier 1
+### Speaker
 
-**When It Matters** *(Fortune, Tier 1 — Luck)*
+*"I am the voice that ends fights before they start."*
 
-**Use:** Once per scene.
+**Class knack:** Courts and bargains
 
-When a roll you make produces a 6- result, you may treat it as a 7–9 instead. Something still goes wrong — the universe is not actually on your side in that moment — but not catastrophically. The complication the MM names must be real, but it must be survivable.
+**Talents:** *Silver Tongue*, *Streetwise*
 
-**Normal:** A 6− means things go wrong (see *Failure (6−)*, III.1).
+**Signature (level 3):** *Voice of Command*
 
-**The Uncanny Angle** *(Fortune, Tier 1 — Luck)*
-
-**Use:** Passive.
-
-When you act on a hunch — doing something improbable because it simply feels right, with no rational justification you could explain — rolls for that action are treated as one difficulty step easier. You cannot plan this. It must be an impulse. The MM decides whether you are acting on instinct or strategy; be honest.
-
-**Normal:** Difficulty is Standard by default, and the MM adjusts it one step from the situation (see *Difficulty*, III.1).
+**Kit:** Light weapon; Fine clothes; Rations (3 slots)
 
 ---
 
-**Tier 2** *(requires one Fortune Tier 1)*
+### Wanderer
 
-**Convenient Coincidence** *(Fortune, Tier 2 — Luck)*
+*"I am luck-touched, and it has always worked out, somehow."*
 
-**Use:** Once per scene.
+**Class knack:** The open road
 
-You may declare that something small but useful is already true: a door was left unlocked, a guard stepped away a moment ago, the contact you needed happens to be in this tavern, the tool you need is in the third drawer. The MM determines the exact form and any edges it carries — convenient does not mean perfect — but they cannot refuse the coincidence entirely. It happened. The world arranged it.
+**Talents:** *Lucky*, *Hunch*
 
-**Normal:** You act on details the fiction has established; you do not add them (see *Acting on Unnarrated Details*, III.1).
+**Signature (level 3):** *Serendipity*
 
-**The Lucky Break** *(Fortune, Tier 2 — Luck)*
-
-**Use:** At will, costs 1 Spark.
-
-When you would suffer a consequence — injury, capture, an irreversible loss — you may spend a Spark to declare that something intervenes. The consequence is delayed, deflected, or redirected to something recoverable. The MM determines what actually happened; you determine that the worst did not. This does not stack: the same consequence cannot be deflected twice.
-
-**Normal:** A Spark is spent before a roll to add a d6 and drop the lowest. It does not undo a consequence after the fact (see *Spending Sparks*, III.1).
+**Kit:** Light weapon; Bedroll; Rope, 50 ft; Rations (4 slots)
 
 ---
 
-**Tier 3** *(requires one Fortune Tier 2)*
+### Captain
 
-**Fated** *(Fortune, Tier 3 — Luck)*
+*"I am the one people follow into danger."*
 
-**Use:** Once per session.
+**Class knack:** Command
 
-Declare that something improbable happens in your favor. You do not specify what it is or how — only that it does. The MM must make it true and must make it significant. It may be strange. It may be inexplicable. It may leave witnesses unsure of what they saw. But it happens, and it helps you, and neither you nor the MM gets to pretend afterward that it was ordinary.
+**Talents:** *Captain*, *Inspiring*
 
-**Normal:** The MM decides what the world does; players declare what their characters do.
+**Signature (level 3):** *Rallying Cry*
 
-**The Odds Were Never Real** *(Fortune, Tier 3 — Luck)*
-
-**Use:** Passive.
-
-When you spend a Spark on a roll, add two dice instead of one and still drop the lowest. Your luck does not merely tip the scales — it removes them. The MM may comment on this. The other players may comment on this. This is appropriate.
-
-**Normal:** A Spark adds one d6 and drops the lowest (see *Spending Sparks*, III.1).
+**Kit:** Standard weapon; Light armor; Shield; Rations (4 slots)
 
 ---
 
-### Communion Branch
+## Talents
 
-Communion Techniques represent connection with what lives beneath the visible world — spirits, bonds, and the thin places most people walk past without a shiver. Communion does not command these forces; it stands in honest relation to them, which turns out to be the thing they answer.
+> **Reading the Entries — talents and signatures**
+>
+> Entries follow the same shape as the Body menu: header, **Requires** and **Choose** where they apply, the rule, **Improved** (talents only), and **Normal**. The full legend is at the head of the talent menu in Chapter II.4a.
 
----
+**Invocation** *(Soul, talent — passive)*
 
-#### Tier 1
+**Choose:** A Soul domain (not a prismatic one), and two signature workings.
 
-**Sense the Unseen** *(Communion, Tier 1 — Spirit)*
+You cast. Choose a domain from the Soul list; you cast in it with Soul (Chapter II.3). Name two signature workings; they are one step Easier.
 
-**Use:** Passive.
+**Improved:** Once per scene, reduce one working's Fatigue by 1.
 
-You always know when something supernatural is present in a scene — a spirit, an active ritual working, a place where the boundary between worlds has worn thin, a creature that is not what it appears. You cannot identify it without investigation, but you cannot be kept ignorant of its presence. The MM must tell you: *something is here.*
-
-**Normal:** Noticing that something supernatural is present is an Attune roll.
-
-**Spiritual Domain** *(Communion, Tier 1 — Spirit)*
-
-**Use:** Passive.
-
-**Choose:** One domain from the Domains of the Soul list.
-
-**Roll:** Spirit + Attune.
-
-You have developed an intuitive magical domain through spiritual practice, natural gift, or a bond you do not entirely understand. Choose one domain from the Domains of the Soul list (Chapter II.3). You may use magic within that domain using the Domain + Intent + Scope framework. Roll Spirit, adding your Attune rank, when doing so. From now on you ready three intents at the start of each session, and your Significant and Major workings spend them (see *Readied Intents*, II.3).
-
-**Normal:** A domain's origin is a Background, and it is limited to Minor scope until a Facet Technique unlocks it (see *Acquiring a Domain*, II.3).
+**Normal:** Without a casting talent you have no domain and cannot cast.
 
 ---
 
-**Tier 2** *(requires one Communion Tier 1)*
+**Wider Domain** *(Mind and Soul, talent — passive)*
 
-**Formed Bond** *(Communion, Tier 2 — Spirit)*
+**Requires:** *Thaumaturgy or Invocation*.
 
-**Use:** Once per scene, one bond at a time.
+**Choose:** A second domain from your tradition.
 
-You may form a temporary spiritual bond with a willing creature — an animal, a spirit, a person of significant spiritual presence, or a place that holds accumulated meaning. While bonded, you sense their emotional state and general awareness of their surroundings, and they sense yours. The bond lasts until the scene ends or you choose to release it. You may not maintain more than one bond at a time.
+You hold a second domain. Workings in it are one step Harder.
 
-**Normal:** Sensing another creature's emotional state is an Insight or Attune roll.
+**Improved:** The second domain is no longer Harder, or trade it for a prismatic domain of your tradition, which is always one step Harder (level 5+).
 
-**The Language Beneath Language** *(Communion, Tier 2 — Spirit)*
-
-**Use:** Passive.
-
-When you attempt to communicate intent to a creature that cannot speak your language — an animal, a spirit, a being of alien origin, someone whose tongue you do not share — you do not need to roll for them to understand what you mean. They understand your intent. Whether they respond, cooperate, or care is a separate matter entirely.
-
-**Normal:** Making yourself understood across a language barrier is a roll the MM prices from the situation.
+**Normal:** A caster holds one domain.
 
 ---
 
-**Tier 3** *(requires one Communion Tier 2)*
+**Silver Tongue** *(Soul, talent — passive)*
 
-**Hold the Line** *(Communion, Tier 3 — Spirit)*
+When you persuade, bargain or deceive and roll 7–9, the MM offers two costs and you choose.
 
-**Use:** Once per session.
+**Improved:** Once per scene, shift a reaction one step warmer: hostile to wary, wary to open.
 
-You may anchor something spiritual that is failing or breaking: a ritual unraveling, a protective ward dissolving, a spirit's grief turning to rage, a boundary giving way. Your presence is sufficient to hold it steady. No roll is required. You do not need to know what you are doing — you need only to stand in it and refuse to let go. The MM determines what holding the line costs you in the fiction, but it holds.
-
-**Normal:** Whether a failing ritual, ward, or boundary holds is settled by the fiction, and by a roll where it is uncertain.
-
-**Second Domain** *(Communion, Tier 3 — Spirit)*
-
-**Use:** Passive.
-
-**Choose:** A second standard domain from the Domains of the Soul list (must differ from your first; prismatic domains excluded). A Focused pick suffers the settling-in penalty least while it lasts.
-
-**Roll:** Spirit + Attune, one difficulty step harder than normal for that domain until your next Facet level.
-
-*Requires an existing Soul domain (Spiritual Domain).* You have grown into a second intuitive magical domain — a complementary territory that your original practice has opened. Choose a second standard domain from the Domains of the Soul list (prismatic territories require Ascendant Domain, below). You may use magic within that domain using the Domain + Intent + Scope framework, rolling Spirit as normal. Effects within your second domain are treated as one difficulty step harder than normal for that domain until you earn your next Facet level — the cost of a practice still settling, not a permanent tax. A character holds one Second Domain.
-
-**Normal:** A character has one magical domain, and its origin is a Background (see *Acquiring a Domain*, II.3).
-
-**Ascendant Domain** *(Communion, Tier 3 — Spirit)*
-
-**Use:** Passive.
-
-**Choose:** One prismatic domain from the Domains of the Soul list.
-
-**Roll:** Spirit + Attune, on the Prismatic difficulty table.
-
-*Requires an existing Soul domain (Spiritual Domain).* Your practice has outgrown a single territory. Choose one prismatic domain from the Domains of the Soul list (Chapter II.3). You may work within it using the Domain + Intent + Scope framework, rolling Spirit. The Prismatic difficulty table applies — Hard at Minor scope, Very Hard at Significant and Major — and reach-Sparks cannot move a Prismatic working's difficulty, though dice-Sparks work normally (Chapter II.3, *Sparks and Magic*). Your original domain is unchanged; the prismatic territory is a wider practice built on everything it taught you. A character masters one prismatic territory — Ascendant Domain is taken once, however many Facet trees they eventually climb (Chapter II.3).
-
-**Normal:** Domains are Focused or Standard; prismatic territories are not otherwise available (see Table II.3–3).
+**Normal:** On a 7–9 the MM names the cost.
 
 ---
+
+**Lucky** *(Soul, talent — once per session)*
+
+Once per session, reroll any roll you can see, yours or anyone's, and keep whichever result you prefer.
+
+**Improved:** Twice per session.
+
+**Normal:** A roll stands.
+
+---
+
+**Inspiring** *(Soul, talent — once per scene)*
+
+Once per scene, speak a rousing word. Each ally who hears it adds a d6 to their next roll and keeps the best two.
+
+**Improved:** Each ally who hears it also recovers d6 HP.
+
+**Normal:** Help gives one ally one extra die.
+
+---
+
+**Empath** *(Soul, talent — passive)*
+
+You can always tell what the person in front of you feels most strongly, and ask the MM one question about what they want.
+
+**Improved:** Once per scene, calm a creature or a crowd one step (hostile to wary) without a roll.
+
+**Normal:** Reading people is a roll.
+
+---
+
+**Beast Friend** *(Soul, talent — passive)*
+
+Animals are never hostile to you unless provoked. You may keep a loyal animal companion: a Mook of your level with one trick.
+
+**Improved:** Your companion becomes a Standard foe of your level, fighting at your side.
+
+**Normal:** Animals react as the reaction roll says.
+
+---
+
+**Performer** *(Soul, talent — at will)*
+
+When you perform for a crowd, roll Soul. On a 10+ they are yours: a favor, coin, or a distraction you choose. On a 7–9, some of them are.
+
+**Improved:** Your performance can hold a hostile group still for one exchange.
+
+**Normal:** Performing is a roll with no set reward.
+
+---
+
+**Captain** *(Soul, talent — passive)*
+
+You may keep up to two retainers, loyal hirelings who follow you into danger. Their morale is 7 + your Soul.
+
+**Improved:** Up to four retainers, and theirs never breaks while you are standing.
+
+**Normal:** Hirelings are NPCs with their own morale.
+
+---
+
+**Warding Presence** *(Soul, talent — once per scene)*
+
+Once per scene, before an enemy rolls against an ally within your reach, make that roll Hard.
+
+**Improved:** Twice per scene.
+
+**Normal:** Enemy attacks roll at the difficulty the fight sets.
+
+---
+
+**Streetwise** *(Soul, talent — passive)*
+
+In any settlement, a scene of looking finds the person, fence, rumor or safe house you need. Rumors rolled for you are true.
+
+**Improved:** You have a contact in every sizable town; name them when you need them.
+
+**Normal:** Finding people is a roll, and rumors may be false.
+
+---
+
+**Hunch** *(Soul, talent — once per scene)*
+
+Once per scene, ask the MM a yes-or-no question ("is this a trap?", "is this the way?") and get a truthful yes, no or maybe.
+
+**Improved:** Twice per scene.
+
+**Normal:** The MM answers what your character could perceive.
+
+---
+
+## Signatures
+
+Chosen at level 3, once. A signature is the thing your class is known for.
+
+**Miracle** *(Soul, signature — once per session)*
+
+**Requires:** *Thaumaturgy or Invocation*.
+
+Once per session, cast a Major working for no Fatigue.
+
+**Normal:** A Major working costs 2 Fatigue.
+
+---
+
+**Rallying Cry** *(Soul, signature — once per session)*
+
+Once per session, every ally at 0 HP within earshot stands with d6 HP, and every ally adds a d6 to their next roll.
+
+**Normal:** An ally at 0 HP stays down until tended or rested.
+
+---
+
+**Beloved** *(Soul, signature — passive)*
+
+Reaction rolls toward you are never hostile unless you have given them cause.
+
+**Normal:** The reaction roll can come up hostile.
+
+---
+
+**Serendipity** *(Soul, signature — once per session)*
+
+Once per session, declare a coincidence that helps you. It happens; the MM adds a twist.
+
+**Normal:** The world's coincidences are the MM's.
+
+---
+
+**Unbreakable Will** *(Soul, signature — passive)*
+
+You shrug off fear, charm and possession without a roll, unless the source is 3 or more levels above you.
+
+**Normal:** Resisting fear, charm and possession is an avoid roll.
+
+---
+
+**Voice of Command** *(Soul, signature — once per scene)*
+
+Once per scene, give a one-word command to a foe of your level or lower. It obeys for one exchange, unless obeying would kill it.
+
+**Normal:** Foes do as their conduct says.
+
+---
+
+## Building a Soul Character
+
+A Soul character's best talents change situations before they become fights. *Silver Tongue*, *Empath* and *Streetwise* pay off out of combat; *Inspiring*, *Warding Presence* and *Captain* keep the party standing inside one. *Lucky* and *Hunch* are for players who like to be right at the last moment.

@@ -113,24 +113,30 @@ investigation with a hole in it — which is the shape the file will keep foreve
 
 ## Advancement: What the Party Carries Out
 
-**The one-shot.** The night ends with the standard **four skill points** and a
-reflection scene at the epilogue question, exactly as any session does. Do not skip
-this because the module is a one-shot; a table that plays Oraga Night as their first
-session should leave it having advanced a character, because that is the half of this
-game a single evening otherwise never shows them.
+**The one-shot.** The night ends with the session-end prompts, exactly as any
+session does — *did we discover something new, bring treasure home, pursue a goal,
+change the world, make a moment the table will remember?* Oraga Night answers most
+of them for you. By the default pacing the MM calls **level 2** here: a little more
+HP and one new talent (Chapter II.4). Do not skip this because the module is a
+one-shot; a table that plays Oraga Night as their first session should leave it
+having grown a character, because that is the half of this game a single evening
+otherwise never shows them.
 
 **The wing.** Run the aftermath for two sessions and a starting character reaches
-**Facet level 1** — their first Technique pick, and the first Facet level that
-matters. Place the reflection scene at the **inquest**, and say the line out loud:
+**level 3** — the level where a class commits, the pick is the signature, and
+rebuilding stops being free. Call it at the **inquest**, and say the line out loud:
 
 > *Your threshold is met. Take it on the dais, where the pen is not yours.*
 
 A character sitting in front of three factions and a Church notary, giving the only
 testimony that will ever exist about what happened, and choosing in that moment what
-they are going to be — that is what a reflection scene is for, and this module hands
-you the best one it will ever have.
+they are going to be — that is what a signature is for, and this module hands you
+the best moment it will ever have to take one.
 
-**For a gifted character**, that same Facet level is when their **Gift formalizes**:
-Minor scope becomes full, and it costs no Technique pick (Chapter II.5). Serane's
-crystal stops being a party trick in the same session she learns what the city is
-going to say about the night she survived. Say that out loud too.
+**For a gifted character**, the gift itself does not grow: a gift is a knack and
+Minor workings, for life (Chapter II.5). A player who wants their crystal to do more
+than a party trick takes a casting talent at a level-up — Thaumaturgy on the Mind
+menu, Invocation on the Soul menu, or either from another Facet with a teacher
+found in play (Chapter II.4). Serane learning what her crystal can really do in the
+same session she learns what the city is going to say about the night she survived
+is a scene worth saying out loud too.

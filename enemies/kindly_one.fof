@@ -1,46 +1,56 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: kindly_one
 name: A Kindly One
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
+    version: 1.0.0
 enemy:
-  tier: named
-  attack_modifier: 0
-  armor: none
-  techniques:
-  - fair_offer
-  - the_unforgiven_slight
-  special: 'FAIR OFFER — a Kindly One cannot decline a genuinely fair trade, and
-    knows fair from unfair without being told. No roll. The MM does not get to refuse
-    on its behalf.
+  # v0.3: Named, durability 4, attack +0, rating 8.
+  level: 2
+  role: standard
+  armor: 0
+  morale: 2
+  weapon: None. It is holding something out.
+  wants: A fair trade, where fair means what a thing is worth to its owner.
+  special: 'FAIR DEALING — it cannot decline a genuinely fair offer, and knows fair from unfair
+    without being told: no roll, and the MM does not get to refuse on its behalf. Cheat it
+    once and neither it nor any other Kindly One ever trades with that person again: no roll,
+    and no apology that works.'
+  when_bloodied: It leaves, whatever the morale roll said.
+  tells: It spoke first, politely, in your language, and it has been holding the thing out
+    for longer than anyone should be able to.
+  breaks: It never strikes back. If struck it Defends (attacks on it are Hard) and leaves
+    at the end of the exchange, and does not come back. Neither does any other Kindly One,
+    anywhere, for the rest of the campaign.
+  twists:
+  - What it holds out is something the party will need later and cannot yet know they want.
+  - It is holding out something a party member lost years ago.
+  - Someone at the crossing already cheated one, and is trying to get the party to trade on
+    their behalf.
+  - It wants something nobody in the party thinks is worth anything, and it is right.
+  - A local has taught the party the rhyme. The rhyme is wrong about two details and right
+    about the important one.
+  - It has been given so many coats that it can barely lift its arms, and it would like to
+    trade one away.
+  description: >-
+    Waist-high, dressed in whatever it has most recently been given, and holding something
+    out. The Kindly are always holding something out. They speak politely, in whatever language
+    you used first, and they will wait a very long time for an answer.
+  notes: >-
+    Level 2 standard: no overrides. Morale 2 because it leaves at the first hurt; any hit
+    makes it lone and hurt, and at morale 2 only snake eyes keeps it there.
 
-    THE UNFORGIVEN SLIGHT — a Kindly One cheated once never trades with that person
-    again, nor does any other. There is no roll for this either, and no apology
-    that works.'
-  description: Waist-high, dressed in whatever it has most recently been given,
-    and holding something out. The Kindly are always holding something out. They
-    speak politely, in whatever language you used first, and they will wait a very
-    long time for an answer.
-  disposition: Does not fight. Has never fought. Will absolutely stand there while
-    you decide whether you are going to.
-  first_target: None. If struck, a Kindly One defends itself by being extremely
-    difficult to hit and by leaving.
-  triggers:
-  - Opens every encounter with an offer, and the offer is always real.
-  - Never lies, never haggles twice, and never mentions the slight again — to you.
-  morale: Leaves at the first Condition, and does not come back. Neither does any
-    other Kindly One, anywhere, for the rest of the campaign.
-  organization: Alone, at a crossing, a threshold, or a place where something was
-    lost.
-  notes: 'TR breakdown: offense(+0 → 2) + durability(Resolve 4) + armor(none → 0)
-    + techniques(2) = 8. The number exists so a table that starts a fight has one
-    to finish. It is not an invitation.'
-  negotiation: Wants a fair trade, and defines fair generously. Shifts for anything
-    genuinely valued by its owner rather than anything expensive. Honours every
-    bargain to the letter, including the ones you would rather it read loosely.
-  resolve: 4
-created_at: '2026-08-02T00:00:00+00:00'
-last_modified: '2026-08-02T00:00:00+00:00'
+
+    The numbers exist so a table that starts a fight has one to finish. They are not an invitation.
+    It does not fight and has never fought, and nothing in this book costs a campaign more
+    than attacking one.
+
+
+    It opens every encounter with an offer, and the offer is always real. It never lies, never
+    haggles twice, and never mentions the slight again, to you.
+
+
+    Appears: alone, at a crossing, a threshold, or a place where something was lost.
+  reskin_of: null

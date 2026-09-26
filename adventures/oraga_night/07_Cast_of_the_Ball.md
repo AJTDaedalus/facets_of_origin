@@ -1,8 +1,8 @@
 # VII. Cast of the Ball
 
 *Fifteen named guests. Each entry: who they are, what they want, what they fear,
-their secret, and how to play them. NPCs never roll dice — their entries note the
-difficulties they impose instead. The night-tracker (Chapter VIII) maps where each
+their secret, and how to play them. Outside a fight NPCs never roll dice — their
+entries note the difficulties they impose instead. The night-tracker (Chapter VIII) maps where each
 stands in every Movement.*
 
 ---
@@ -173,7 +173,7 @@ household matters is **Hard**; about anything else he is too tired to check.
 > — *This is the question that makes him slide.* "Three—" *(He stops. He starts
 > again, and something behind his eyes does not connect.)* "They are accounted for."
 > *(He believes this while he says it. He will not remember being asked. A character
-> watching closely may roll **Insight, Hard**, to see that something in the answer
+> watching closely may roll **Soul, Hard**, to see that something in the answer
 > arrived from somewhere other than his memory.)*
 > — **if friendly, and if pressed a second time:** "I—" *(A long silence.)* "Ask me
 > again tomorrow. Please ask me again tomorrow."
@@ -316,7 +316,7 @@ something unbeatable while deliberately not using his weapon — let them notice
 
 **Play him:** courteous, brief, and *finished* — every conversation with Vell ends
 when he decides, somehow without rudeness. He answers questions with smaller
-questions. He is immune to every lever: bribery, flattery, threat, Charisma — mark
+questions. He is immune to every lever: bribery, flattery, threat, charm — make
 all social pressure on Vell **Very Hard**, and let even full successes buy honesty
 rather than compliance ("You are observant. Enjoy the ball."). Players who shadow
 him find only preparations: a walked garden, a tested gate, a purchased boat. All
@@ -325,8 +325,8 @@ at — and that last is not luck. *(MM truth: his unmemorability is a gentle,
 constant pressure on the minds around him; he reads most guests as easily as
 faces, and can steer a weak mind outright. Corval's inability to hold the
 gray-mask question has a cousin: nobody can quite hold Vell either. A player
-with an exceptional will who studies him directly may feel it — a Very Hard
-Spirit roll to notice the nudge — and earns, on a success, the most dangerous
+with an exceptional will who studies him directly may feel it — a Soul roll at
+Very Hard to notice the nudge — and earns, on a success, the most dangerous
 piece of information at the ball: someone is editing you.)*
 
 **One line he does not cross, and one he does:** he will take the path that
@@ -350,7 +350,7 @@ now, when you hear this night has finally mattered — that was you."* Then the
 water takes him.
 
 ### The Uninvited — the Three Gray Masks
-*Stat files: `enemies/the_wept.fof`, `the_radiant.fof`, `the_hollow.fof`. Their
+*Cards: `enemies/the_wept.fof`, `the_radiant.fof`, `the_hollow.fof`. Their
 truth is Chapter II; their Fractures and full tell-tables are Chapter V; their
 conduct before midnight is here.*
 
@@ -398,7 +398,7 @@ crew's three sightings are in Chapter IV; the raid itself is in Chapter V. Caugh
 and held — tonight or by the inquest — she is a gold mine of exactly the wrong
 information: she can prove she planned the gallery job for a season, which makes
 her the aftermath's most convenient scapegoat, and she knows it before her
-questioners do. *(Stat files: `enemies/tavva.fof`, `enemies/gallery_knife.fof`.)*
+questioners do. *(Cards: `enemies/tavva.fof`, `enemies/gallery_knife.fof`.)*
 
 ### Otta Vesh — the Mask-Maker *(aftermath)*
 The finest spirit-mask maker in Rekuzan; her workshop is Night One's best scene, and
@@ -415,7 +415,7 @@ susceptible to nothing but genuine appreciation of the craft.
 *A contract company, hired two nights ago by a factor nobody can describe, holding
 the Boranis gatehouse from the first bell of midnight to the last bell of Oraga.
 They are the only antagonists tonight who can be beaten, and the only ones who can
-be talked to. Full stat lines on **scene card S3**; module files
+be talked to. Full cards on **scene card S3**; module files
 `adventures/oraga_night/enemies/bought_*.fof`.*
 
 ### Sergeant of the Bought — the One Reading the Room
@@ -454,7 +454,7 @@ to suspect around the time the second district caught. **Secret:** the Second Cl
 He does not know who she is or why, and he has been thinking about it all night.
 
 **Play him:** a businessperson who has been shot at, and it shows in both directions.
-No heroics, no waste, and no cruelty — he never goes Aggressive, tonight or ever. He
+No heroics, no waste, and no cruelty — he never commits recklessly, tonight or ever. He
 spends his first exchange placing Blades and watching who the party protects, and on
 his second he starts talking while the attacks continue.
 

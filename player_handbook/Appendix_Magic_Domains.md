@@ -1,14 +1,16 @@
 # Appendix: Magic Domain Catalog
 
-This appendix contains the full descriptions of all 21 magic domains available in Facets of Origin. For the system rules governing how domains work — scope, intent, difficulty, rolling, and Sparks — see **Chapter II.3 (Magic)**.
+This appendix describes all 21 magic domains. The rules for casting (scope, intent, Fatigue, signature workings) are in Chapter II.3. A caster takes one domain from their own tradition's list: Invocation casters from the Soul domains, Thaumaturgy casters from the Mind domains.
+
+Each entry's header names the domain and its tradition. **Prismatic** domains are the widest in the catalog. No character starts with one; the improved form of the *Wider Domain* talent can trade a caster's second domain for a prismatic domain of their tradition from level 5, and workings in it are always one step Harder.
 
 > **Reading the Entries — the domain descriptions**
 >
-> Each domain lists effects that are *beyond its focus*. These are not hard walls — they are signals for where a domain's strength ends and another's begins. If a player attempts something borderline, the MM's default should lean toward yes, possibly at increased difficulty or with the suggestion that a different domain would handle it more naturally.
+> Each domain lists effects that are *beyond its focus*. These are not hard walls — they are signals for where a domain's strength ends and another's begins. If a player attempts something borderline, the MM's default leans toward yes, perhaps one step Harder, or with the suggestion that a different domain would handle it more naturally.
 
 > **Reading the Entries — the example intents**
 >
-> Each domain lists three example intents per scope — Minor, Significant, and Major. These are **design patterns, not a menu**. They exist to calibrate what kind of ambition each scope licenses, not to enumerate a fixed list of "spells" a player is limited to. A player is always free to invent an intent the examples don't cover, so long as it stays within the domain's stated boundaries. If an example ever gets treated at the table as the one correct way to use a domain at a given scope, that is the appendix failing at its one job — flag it.
+> Each domain lists three example intents per scope — Minor, Significant, and Major. These are **patterns, not a menu**. They show what kind of ambition each scope allows (Minor never harms and never decides anything; Major needs level 3), not a fixed list of spells. A player is always free to invent an intent the examples don't cover, so long as it stays within the domain's stated boundaries. If an example ever gets treated at the table as the one correct way to use a domain at a given scope, that is the appendix failing at its one job — flag it.
 
 ---
 
@@ -16,32 +18,32 @@ This appendix contains the full descriptions of all 21 magic domains available i
 
 Soul magic flows from will, presence, and spiritual connection. It is felt before it is understood. Soul mages command domains rooted in the living world, the elements of presence and sensation, and the forces that move through creatures and the space between them.
 
-The soul domain list includes nine core domains and three prismatic domains. Core domains (each Focused or Standard in type) are available at Tier 1 of the Soul Facet Technique tree. Prismatic domains require the Ascendant Domain Technique (Tier 3) — they represent mastery so complete that the domain's breadth has become a practitioner's natural territory rather than an overwhelming one.
+Soul magic is the tradition of Invocation, cast with Soul. The list has nine domains and three prismatic domains.
 
 **Table A–1: Soul Domains at a Glance**
 
-| Domain | Type | Territory |
+| Domain | yes | Territory |
 |---|---|---|
-| Fire | Focused | Heat, flame, and light produced by fire |
-| Shadow | Focused | Darkness, absence of light, physical cold |
-| Storm | Standard | Wind, rain, lightning, concussive thunder |
-| Beasts | Standard | Communication and command of natural animals |
-| Resonance | Standard | Sound, vibration, harmonic force |
-| Verdance | Standard | Living plants: growing, shaping, animating |
-| Binding | Standard | Oaths, pacts, and spiritual constraints |
-| Presence | Standard | Projecting spiritual weight, emotional aura |
-| The Tide | Standard | Vitality flowing between living things |
-| The Undying | Prismatic | Death, spirits of the departed, undead |
-| Fate | Prismatic | Probability, luck, threads of possibility |
-| The Living World | Prismatic | Animating current through all living things |
+| Fire | — | Heat, flame, and light produced by fire |
+| Shadow | — | Darkness, absence of light, physical cold |
+| Storm | — | Wind, rain, lightning, concussive thunder |
+| Beasts | — | Communication and command of natural animals |
+| Resonance | — | Sound, vibration, harmonic force |
+| Verdance | — | Living plants: growing, shaping, animating |
+| Binding | — | Oaths, pacts, and spiritual constraints |
+| Presence | — | Projecting spiritual weight, emotional aura |
+| The Tide | — | Vitality flowing between living things |
+| The Undying | yes | Death, spirits of the departed, undead |
+| Fate | yes | Probability, luck, threads of possibility |
+| The Living World | yes | Animating current through all living things |
 
 ---
 
-### Core Soul Domains
+### Soul Domains
 
 ---
 
-**Fire** *(Focused)*
+**Fire** *(Invocation)*
 
 Heat, flame, combustion, and the light produced by fire. A Fire mage controls the temperature of surfaces and open air, directs or suppresses existing flame, and generates new fire from available fuel or ambient heat. The most precise of the elemental domains: a skilled Fire mage can hold a flame to a single thread without scorching the cloth around it, or flash-heat a lock mechanism without warming the door it is set in.
 
@@ -54,7 +56,7 @@ Heat, flame, combustion, and the light produced by fire. A Fire mage controls th
 
 ---
 
-**Shadow** *(Focused)*
+**Shadow** *(Invocation)*
 
 Darkness, the absence of light, and the physical sensation of cold that accompanies true shadow. A Shadow mage can create darkness in a lit space, deepen existing shadow until it becomes functionally opaque, muffle the sense of being watched, and generate the bone-deep chill that follows when the light goes out entirely. Shadow is a physical force, not a metaphysical one — it can be felt, directed, and shaped.
 
@@ -67,7 +69,7 @@ Darkness, the absence of light, and the physical sensation of cold that accompan
 
 ---
 
-**Storm** *(Standard)*
+**Storm** *(Invocation)*
 
 Wind, rain, lightning, thunder, and the behavior of weather within a scene. A Storm mage can summon gusts of directed force, call rain to a localized area, ground or redirect lightning from existing storm conditions, and generate concussive peals of thunder. At Significant scope, a Storm mage can sustain weather effects across a building or open field. At Major scope, they can change the weather of an entire region for an hour or bring a storm down on a specific target like a hammer.
 
@@ -80,7 +82,7 @@ Wind, rain, lightning, thunder, and the behavior of weather within a scene. A St
 
 ---
 
-**Beasts** *(Standard)*
+**Beasts** *(Invocation)*
 
 Communication with, calming of, commanding of, and minor shaping of animals and mundane creatures. A Beasts mage can speak and be understood by any natural animal, project calm that prevents aggression, issue simple commands a creature can follow, and at Major scope, exert sustained dominion over a creature's behavior for a scene or longer. Beasts magic is relational — the most powerful effects come from creatures that are already inclined toward trust.
 
@@ -93,7 +95,7 @@ Communication with, calming of, commanding of, and minor shaping of animals and 
 
 ---
 
-**Resonance** *(Standard)*
+**Resonance** *(Invocation)*
 
 Sound, vibration, and harmonic force. A Resonance mage can move physical objects with directed sound, create sounds from anywhere within their range of awareness, silence noise within a defined area, and sense the world through the vibrations that pass through it — detecting movement through walls, hearing conversations across a building, feeling the structural tension in a surface. At Major scope, Resonance can shatter materials, cause disorientation across a crowd, or produce effects felt as physical force.
 
@@ -106,7 +108,7 @@ Sound, vibration, and harmonic force. A Resonance mage can move physical objects
 
 ---
 
-**Verdance** *(Standard)*
+**Verdance** *(Invocation)*
 
 Living plants: growing, shaping, animating, and communicating with plant life. A Verdance mage can accelerate growth from seeds or roots, shape existing growth into forms (barriers, bridges, restraints), animate plant material to move with directed intent, and receive impressions from plant life — which is a slow and patient witness to the world around it. Verdance magic often produces effects that persist long after the casting: a wall of thorns does not require sustained attention to remain a wall of thorns.
 
@@ -119,7 +121,7 @@ Living plants: growing, shaping, animating, and communicating with plant life. A
 
 ---
 
-**Binding** *(Standard)*
+**Binding** *(Invocation)*
 
 The creation and enforcement of oaths, pacts, and spiritual constraints. A Binding mage can render a spoken agreement magically enforceable, anchor a creature or person to a location or state of being, prevent a specific action from being taken, and sense when a promise is kept or broken within the scope of a working they have placed. Binding magic does not compel — it constrains. The bound party can still choose to break a binding, but doing so has a cost the magic ensures they feel.
 
@@ -132,7 +134,7 @@ The creation and enforcement of oaths, pacts, and spiritual constraints. A Bindi
 
 ---
 
-**Presence** *(Standard)*
+**Presence** *(Invocation)*
 
 The force of a person's spiritual weight in a space — their warmth, authority, terror, or calm, projected outward as a tangible thing. A Presence mage can make themselves felt in a room before they speak, project an emotional state (calm, dread, trust, urgency) that those nearby experience as genuine feeling, sustain an aura that makes a space feel watched or welcoming or wrong, and at Major scope, reshape the emotional weather of an entire scene. Presence magic is not illusion and it is not mind control — it is influence, and aware targets can resist it.
 
@@ -145,7 +147,7 @@ The force of a person's spiritual weight in a space — their warmth, authority,
 
 ---
 
-**The Tide** *(Standard)*
+**The Tide** *(Invocation)*
 
 The ebb and flow of natural energy between living things — vitality passing from one form to another. A Tide mage can draw off excess vitality from a creature that has it to spare, share it with one that does not, slow the rate at which a wound bleeds or a poison spreads, and at Significant scope, push energy through a group — strengthening those who need it by drawing from those who can afford the gift. The Tide flows between willing participants most easily; taking from an unwilling source is possible but significantly harder.
 
@@ -160,7 +162,7 @@ The ebb and flow of natural energy between living things — vitality passing fr
 
 ### Prismatic Soul Domains
 
-Prismatic domains require the **Ascendant Domain** Technique (Tier 3, Communion branch) to access. They represent the broadest magical territories available — commanding them at all requires a practitioner whose understanding spans multiple thematic spaces rather than a single focused one. All Prismatic domains share one difficulty table: Hard at Minor scope, Very Hard at Significant, and Very Hard at Major — reach-Sparks cannot move a Prismatic working's difficulty, though dice-Sparks work normally (Chapter II.3, *Sparks and Magic*).
+Prismatic Soul domains are reached only through the improved form of *Wider Domain*, from level 5. Workings in them are always one step Harder.
 
 ---
 
@@ -207,29 +209,29 @@ The animating current that runs through all living things simultaneously — not
 
 Mind magic is constructed rather than felt. Where Soul mages reach inward and outward simultaneously, Mind mages build: they study, analyze, and assemble effects from principles they understand. Mind magic tends toward precision, inscription, and the manipulation of information and perception. A Mind mage who does not understand what they are doing does not do it well — and a Mind mage who understands it completely is extraordinarily difficult to surprise.
 
-The mind domain list includes six core domains and three prismatic domains — the same core/prismatic split as Soul, though Mind's core list is shorter. Core domains are available at Tier 1 of the Mind Facet Technique tree. Prismatic domains require the Ascendant Domain Technique (Tier 3).
+Mind magic is the tradition of Thaumaturgy, cast with Mind. The list has six domains and three prismatic domains.
 
 **Table A–2: Mind Domains at a Glance**
 
-| Domain | Type | Territory |
+| Domain | yes | Territory |
 |---|---|---|
-| Illusion | Standard | False sensory experience: images, sounds, smells |
-| Warding | Standard | Protective limits inscribed into space or objects |
-| Inscription | Focused | Magical effects encoded into physical marks |
-| Transmutation | Standard | Structural alteration of non-living material |
-| Divination | Standard | Gathering information through magical means |
-| Constructed Force | Focused | Invisible force, telekinesis, barriers |
-| The Arcane | Prismatic | Perceiving and manipulating magic itself |
-| The Constructed Mind | Prismatic | Artificial intelligence and construct cognition |
-| Chronomancy | Prismatic | Time: acceleration, perception, brief stepping |
+| Illusion | — | False sensory experience: images, sounds, smells |
+| Warding | — | Protective limits inscribed into space or objects |
+| Inscription | — | Magical effects encoded into physical marks |
+| Transmutation | — | Structural alteration of non-living material |
+| Divination | — | Gathering information through magical means |
+| Constructed Force | — | Invisible force, telekinesis, barriers |
+| The Arcane | yes | Perceiving and manipulating magic itself |
+| The Constructed Mind | yes | Artificial intelligence and construct cognition |
+| Chronomancy | yes | Time: acceleration, perception, brief stepping |
 
 ---
 
-### Core Mind Domains
+### Mind Domains
 
 ---
 
-**Illusion** *(Standard)*
+**Illusion** *(Thaumaturgy)*
 
 The construction of false sensory experience: images, sounds, smells, textures, and temperatures that are not there. An Illusion mage can create static images, moving scenes, voices that appear to come from empty air, and sensory environments that feel genuine to those within them. The more senses engaged, the harder the working. Illusions require ongoing attention to remain detailed — left unattended, they tend to simplify and repeat. A creature that investigates an illusion carefully and succeeds on a Mind saving throw perceives it for what it is.
 
@@ -242,7 +244,7 @@ The construction of false sensory experience: images, sounds, smells, textures, 
 
 ---
 
-**Warding** *(Standard)*
+**Warding** *(Thaumaturgy)*
 
 The inscription of protective limits into physical space or objects. A Ward mage can establish barriers to magical perception, prevent entities of defined types from entering a space, create alert conditions that trigger when violated, and at Major scope, erect wards that prevent significant magical workings within their boundaries. Wards are persistent — the defining feature of Warding magic is that it lasts without continued attention. An Expert Ward mage who is asleep or dead may still have wards standing.
 
@@ -255,7 +257,7 @@ The inscription of protective limits into physical space or objects. A Ward mage
 
 ---
 
-**Inscription** *(Focused)*
+**Inscription** *(Thaumaturgy)*
 
 The encoding of magical effects into physical surfaces: runes, marks, glyphs, and patterns that hold an effect in suspended state until a defined trigger releases it. An Inscription mage can write a magical trap, encode information that only specific readers can perceive, anchor small persistent magical effects to objects, and create delayed workings that fire independently when conditions are met. Inscription magic is slower than other domains — the preparation time is part of the working — but its effects are reliable and do not require the mage's presence to function.
 
@@ -268,7 +270,7 @@ The encoding of magical effects into physical surfaces: runes, marks, glyphs, an
 
 ---
 
-**Transmutation** *(Standard)*
+**Transmutation** *(Thaumaturgy)*
 
 The structural alteration of non-living material: changing what something is made of, reshaping its form, altering its properties. A Transmutation mage can turn stone to mud, harden cloth to the strength of iron, reshape metal without heat, change the temperature of materials, and alter the basic physical characteristics of objects. Living creatures cannot be transmuted without their conscious cooperation — the will of a living thing resists material change in a way that stone does not.
 
@@ -281,7 +283,7 @@ The structural alteration of non-living material: changing what something is mad
 
 ---
 
-**Divination** *(Standard)*
+**Divination** *(Thaumaturgy)*
 
 The gathering of information through magical means: reading the history of an object or place, perceiving events at a distance, asking precise questions about the state of the world and receiving answers, sensing lies and hidden truths, and at Major scope, perceiving the broad shape of events across significant distances or time gaps (recent past and near future only). Divination does not create effects in the world — it gathers them. It is among the most useful domains in investigation, negotiation, and preparation.
 
@@ -294,7 +296,7 @@ The gathering of information through magical means: reading the history of an ob
 
 ---
 
-**Constructed Force** *(Focused)*
+**Constructed Force** *(Thaumaturgy)*
 
 The generation and direction of invisible force — telekinesis, barriers, shaped pressure, and impact without physical source. A Constructed Force mage can move objects, arrest movement, generate walls of pressure that hold things in place or push them away, and at Major scope, create force constructs substantial enough to hold a door closed against battering or deflect a ranged volley. Constructed Force is the most immediately physical of the Mind domains, and Mind mages who develop it often find that fights get simpler and more geometric simultaneously.
 
@@ -309,7 +311,7 @@ The generation and direction of invisible force — telekinesis, barriers, shape
 
 ### Prismatic Mind Domains
 
-Prismatic Mind domains require the **Ascendant Domain** Technique (Tier 3, Archive branch) to access. They are the widest, most powerful thematic territories available to Mind practitioners, requiring mastery across multiple disciplines before they can be wielded at all. All use the Prismatic difficulty table (Chapter II.3).
+Prismatic Mind domains are reached only through the improved form of *Wider Domain*, from level 5. Workings in them are always one step Harder.
 
 ---
 

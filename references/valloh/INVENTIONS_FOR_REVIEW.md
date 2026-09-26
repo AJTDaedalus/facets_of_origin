@@ -65,8 +65,9 @@ each pregen's existing concept; change any of them and the printed block regener
 | Ilesse | Orthaen | **Warding** | the palaces' stored defensive crystalwork |
 | Pello | Phern | **Divination** | the Phern gift in canon is danger sense |
 
-All four are cast intuitively (Spirit + Attune), including the three that are Mind
-domains.
+*(Lean Facets v1.0, 2026-09-25:)* a gift is now a **gift knack** plus **Minor
+workings, for life** (L14). The domains above are unchanged; they no longer
+formalize, and the intuitive-tradition rule is gone with the traditions' old stats.
 
 ## 6. The six crystal charges
 
@@ -74,6 +75,11 @@ domains.
 image.* These were the module's own suggested charges; what is new is the one-line
 effect text for each and the decision that all six are Minor scope. Adding a
 Significant charge is a data change.
+
+*(Lean Facets v1.0:)* each charge is now a **curio** (PHB IV.2) — one use, counted
+against the three a character can carry. The gift knacks are named *Orthaen gift*,
+*Phern gift* and so on, and cover exactly what each lineage's Gift line says; the
+Heritage lines stay, as knowledge rather than a bonus. `V1` and `V2` say so.
 
 ## 7. Prose inventions in the book text
 

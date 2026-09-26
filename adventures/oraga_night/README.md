@@ -7,8 +7,8 @@ and three guests nobody invited.*
 **Players:** 3–5, fresh characters or the included pregens
 **Length:** One session (4–6 hours) as written; 3 sessions with the aftermath wing
 **You need:** the Facets of Origin core rules and the **Val'loh Facet**
-(`settings/valloh/`) — the tribes as Lineages, their gifts as domains, and crystal
-charges as items
+(`settings/valloh/`) — the tribes as Lineages, their gifts as gift knacks and
+Minor-only domains, and crystal charges as curios
 **Tone:** Glamour over a blade — festival splendor and social fencing, with something
 wrong accumulating underneath
 
@@ -36,21 +36,21 @@ carries the right one, because the night has an agenda of its own.
 | `03_Masks_and_Agendas.md` | Character creation, invitations, masks, and the eight agendas |
 | `04_The_Ball.md` | The palace, the guests, and the seven Movements of the night |
 | `05_The_Longest_Night.md` | The Unmasking — the attack, the Fractures, and every ending |
-| `06_Aftermath.md` | The optional aftermath wing — the inquest, the mask-maker, and where a character reaches Facet level 1 |
+| `06_Aftermath.md` | The optional aftermath wing — the inquest, the mask-maker, and where a character reaches level 3 |
 | `07_Cast_of_the_Ball.md` | Every named NPC — wants, fears, secrets, and how to play them |
 | `09_Scene_Cards.md` | The five fights, one page each — recipes, clocks, objectives, outs, and **generated** stat lines |
 | `characters/` | The five pregenerated characters as `.fof` files; `03` prints them from these |
-| `enemies/` | Module-local enemies, including the Bought reskinned for Val'loh |
-| *(retired)* | The tribes, their gifts, and the crystals now live in the **Val'loh Facet**, `settings/valloh/` — as Lineages, domains, and items in the core's own terms rather than as a mini-Facet beside them |
+| `enemies/` | Module-local enemy cards, including the Bought reskinned for Val'loh |
+| *(retired)* | The tribes, their gifts, and the crystals now live in the **Val'loh Facet**, `settings/valloh/` — as Lineages, gift knacks, and curios in the core's own terms rather than as a mini-Facet beside them |
 | `08_Handouts.md` | The invitation, agenda cards, rumor table, and the MM's night-tracker |
-| `enemies/*.fof` | Stat files for the Uninvited |
+| `enemies/*.fof` | Cards for the Uninvited |
 
 ## Running Order
 
 Read `01` and `02` fully. Skim `04` and `05` once, then run from the night-tracker in
 `08` with `07` open for the cast and `09`'s scene cards to hand for the three fights.
 If your table wants the short campaign, run the night as written and continue into
-`06`'s aftermath — that is where a character reaches Facet level 1.
+`06`'s aftermath — that is where a character reaches level 3.
 
 ## A Note on Secrets
 

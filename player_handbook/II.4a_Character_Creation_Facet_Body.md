@@ -1,250 +1,269 @@
 # Character Creation: Facet of the Body
 
-The wall is nine feet of wet stone and the gate is a hundred yards the wrong way. Mordai does not discuss it.
+Warriors, scouts, guardians, brawlers. People who solve problems with their physical presence in the world.
 
-## The Body Facet
+A Body character rolls the biggest grit die in the game (d10, or 6 a level) and starts with Body +2. They have no magic, and they don't need it. Their talents are about taking hits, dealing them, and being somewhere nobody else can reach: on the wall, in front of the door, behind the guard.
 
-Body Facet characters solve problems with their physical presence in the world. They are warriors and scouts, athletes, brawlers, and dancers — the ones who arrive first, who put themselves between the danger and everyone else, and who are still standing when the clever plan has come apart. Where a Mind character finds the flaw in the wall and a Soul character talks the guard into looking the other way, a Body character goes over the wall, on the theory that the wall was never really the problem and standing around debating it was.
-
-Their tools are strength, speed, and endurance. Their superpower is that the distance between deciding and doing is shorter for them than for anyone else at the table.
+Mordai is Body, and so is Zulnut. That should tell you how wide this Facet is.
 
 ---
 
-### Skills of the Body
+## Preset Classes
 
-**Table II.4a–1: Skills of the Body**
-
-| Skill | Attribute |
-|---|---|
-| **Athletics** | Strength |
-| **Combat** | Strength |
-| **Stealth** | Dexterity |
-| **Finesse** | Dexterity |
-| **Endurance** | Constitution |
-
-Full descriptions are in Chapter II.7 — Skills.
-
----
-
-### Facet of the Body — Technique Tree
-
-The Body tree has three branches: **Might** (Strength), **Grace** (Dexterity), and **Iron** (Constitution).
-
----
-
-#### Might Branch
-
-Might Techniques represent strength with intent behind it — the ability to move what will not move, break what will not open, and leave the world visibly changed by the fact that you passed through it. Where other approaches look for the way around, Might is the way through.
-
-**Tier 1**
-
-**Forcing Hand** *(Might, Tier 1 — Strength)*
-
-**Use:** At will.
-
-When you succeed on an Athletics roll involving raw force, you may choose to leave a lasting mark on the environment — a door that cannot be resealed, a wall that bears your impact. The MM cannot undo this without explanation.
-
-**Normal:** A full success achieves what you set out to do; how much of the world it permanently changes is the MM's to narrate.
-
-**Weapon Mastery** *(Might, Tier 1 — Strength)*
-
-**Use:** Passive.
-
-**Choose:** A weapon type: blades, blunt, polearms, or unarmed.
-
-Rolls using your chosen weapon type are treated as one difficulty step easier.
-
-**Normal:** Difficulty is Standard by default, and the MM adjusts it one step from the situation (see *Difficulty*, III.1).
-
-*Might is the Strength branch, and the four weapon types it names are the shapes you swing. A ranged build is served by Grace instead: ranged Strikes default to Finesse, and Grace's* **Steady Hand** *eases every Finesse roll — including that one.*
-
----
-
-**Tier 2** *(requires one Might Tier 1)*
-
-**Overwhelming Force** *(Might, Tier 2 — Strength)*
-
-**Use:** Once per scene.
-
-When your Strike scores a full success (10+) against a single target, you may drive the blow home: the target takes no offensive action in the next exchange. It is reeling, regrouping, or picking itself up off the ground while the fight moves on without it.
-
-**Normal:** A full-success Strike depletes 2 Resolve and chooses a rider. It does not stop the target acting (see *Strike*, III.3).
-
-**Lift the World** *(Might, Tier 2 — Strength)*
-
-**Use:** Once per scene.
-
-**Roll:** Athletics, Hard.
-
-You may attempt a feat of Strength that would normally be impossible without tools or assistance — holding up a collapsing ceiling, halting a moving cart, forcing open a sealed vault. Roll Athletics at Hard difficulty. On a 10+, you succeed. On a 7–9, you succeed at a cost.
-
-**Normal:** A feat that is impossible without tools or help is not a roll — the MM says it cannot be done.
-
----
-
-**Tier 3** *(requires one Might Tier 2)*
-
-**Unstoppable** *(Might, Tier 3 — Strength)*
-
-**Use:** Passive.
-
-When you move toward a goal in a straight line — physically, narratively — difficult terrain, minor obstacles, and crowds do not slow you. Only something that can genuinely stop you requires a roll. Everything else simply moves.
-
-**Normal:** Difficult terrain, crowds, and minor obstacles are the MM's to price, as a roll or as a cost in the fiction.
-
-**The Final Blow** *(Might, Tier 3 — Strength)*
-
-**Use:** Once per session.
-
-When you spend a Spark on a Combat roll and succeed, the outcome is final. The target is removed from the conflict entirely — defeated, fled, or broken — regardless of any remaining resources or abilities they had.
-
-"Succeed" means a **10+ or a 7–9** — both success tiers count. On a 7–9, the partial's usual cost still applies and shapes how the removal happens in the fiction, but never whether it happens: the target is gone either way.
-
-**Normal:** A Spark adds a d6 and drops the lowest. A Strike depletes Resolve, and a rider never defeats an enemy on its own (see *Strike*, III.3).
-
----
-
-> **Example — a Tier 1 Technique doing its job**
+> **Reading the Entries — class cards**
 >
-> **MM:** The hinges are on the inside and the door is oak. Athletics, Hard.
+> Each preset prints its name, its concept, its **class knack**, its two starting **talents**, the **signature** it takes at level 3, and its starting **kit** with the slots the kit fills. The talents and signature are described in full later in this chapter; the kit items are in Chapter IV.1.
+
+### Warrior
+
+*"I am a trained fighter who stands where the fighting is thickest."*
+
+**Class knack:** Soldiering
+
+**Talents:** *Weapon Master*, *Tough*
+
+**Signature (level 3):** *Unstoppable*
+
+**Kit:** Standard weapon; Heavy armor; Shield; Rope, 50 ft; Rations (6 slots)
+
+---
+
+### Scout
+
+*"I am a pathfinder and bowman who sees trouble first."*
+
+**Class knack:** Wild country
+
+**Talents:** *Scout's Eye*, *Marksman*
+
+**Signature (level 3):** *Deadeye*
+
+**Kit:** Longbow; Arrows; Light weapon; Light armor; Rope, 50 ft; Rations (6 slots)
+
+---
+
+### Guardian
+
+*"I am a shield for the people behind me."*
+
+**Class knack:** Bodyguard work
+
+**Talents:** *Sentinel*, *Tough*
+
+**Signature (level 3):** *Bulwark*
+
+**Kit:** Standard weapon; Shield; Heavy armor; Rations (5 slots)
+
+---
+
+### Brawler
+
+*"I am a fighter who needs nothing but my hands."*
+
+**Class knack:** Street fighting
+
+**Talents:** *Brawler*, *Unarmored Discipline*
+
+**Signature (level 3):** *Second Wind*
+
+**Kit:** Light weapon; Rope, 50 ft; Rations; Torches (4 slots)
+
+---
+
+## Talents
+
+> **Reading the Entries — talents and signatures**
 >
-> **Mordai:** *(rolls 9)* Partial. It opens, but something in there heard it.
+> Every entry has the same shape, in this order.
 >
-> **MM:** It does and it did. What's the mark?
+> **Header:** the name in bold, then *(Facet, talent or signature — use)*. The use is **passive** (always on), **at will** (whenever you spend your action on it), **once per scene**, **once per session**, or **once per rest** (once between nights of rest).
 >
-> **Mordai:** Forcing Hand. The frame is split — that door doesn't shut again tonight.
+> **Requires:** printed only when the talent needs another talent first.
 >
-> **MM:** (Of course it doesn't.) Noted, and I can't quietly un-note it later. Whatever comes through after you has an open doorway to come through.
+> **Choose:** printed only when you make a choice as you take it. Write the choice on your sheet.
+>
+> **The rule:** what the talent lets you do.
+>
+> **Improved:** what it adds once you improve it (Chapter II.4). Signatures have no improved form, so they print no Improved line.
+>
+> **Normal:** the baseline rule the talent departs from. It tells you how big the exception is.
+
+**Weapon Master** *(Body, talent — passive)*
+
+**Choose:** A weapon kind: blades, blunt, polearms, bows, or thrown.
+
+With your chosen kind of weapon, your damage die is one size larger (d6 becomes d8, d8 becomes d10, d10 becomes d12).
+
+**Improved:** When you roll 10+ attacking with your chosen kind, pick two options instead of one.
+
+**Normal:** A weapon deals the die its category gives it (Chapter IV.1).
 
 ---
 
-#### Grace Branch
+**Sentinel** *(Body, talent — passive)*
 
-Grace Techniques represent total command of the body in motion — economy, precision, and the knack for being exactly where you meant to be, with no one quite sure how you got there. Grace does not overpower a problem; it slips past while the problem is still turning around.
+When you Intercept, you may take the attacks aimed at every ally within your reach, not just one.
 
-**Tier 1**
+**Improved:** While you Defend or Intercept you may still attack, at Hard.
 
-**Fleet Step** *(Grace, Tier 1 — Dexterity)*
-
-**Use:** Passive.
-
-You can move through or past obstacles — crowds, furniture, narrow gaps, uneven terrain — without requiring a roll, as long as you are not in direct combat and the obstacle is not actively blocking you.
-
-**Normal:** Moving through obstacles under pressure is a roll the MM prices from the situation.
-
-**Steady Hand** *(Grace, Tier 1 — Dexterity)*
-
-**Use:** Passive.
-
-**Finesse** rolls are treated as one difficulty step easier — precision work under pressure, whether that is picking a lock, threading a needle, disabling a mechanism mid-crisis, or putting an arrow where you meant it to go.
-
-**Normal:** Difficulty is Standard by default, and the MM adjusts it one step from the situation (see *Difficulty*, III.1).
+**Normal:** Intercept protects one ally, and Defend means you do not attack.
 
 ---
 
-**Tier 2** *(requires one Grace Tier 1)*
+**Tough** *(Body, talent — passive)*
 
-**Shadow Walk** *(Grace, Tier 2 — Dexterity)*
+Your maximum HP increases by 4.
 
-**Use:** Passive.
+**Improved:** Your Hold On rolls are Easy, and on a 7–9 you stay on your feet at 1 HP instead of dropping out of the fight.
 
-When moving in darkness, dim light, or natural cover, you do not need to roll Stealth to remain undetected while moving. You only roll when performing an action that might draw attention.
-
-**Normal:** Staying unseen while you move is a Stealth roll.
-
-**Blur of Motion** *(Grace, Tier 2 — Dexterity)*
-
-**Use:** Once per scene.
-
-When you would be targeted by an attack or sudden physical threat, you may spend a Spark to simply not be where they expected. You are not harmed, and the attacker must re-establish their approach.
-
-**Normal:** An incoming attack is answered with a reaction, which costs Endurance Pool points and may still land a Condition (see *Reactions*, III.3).
+**Normal:** At 0 HP you take a Wound and roll Hold On at Standard.
 
 ---
 
-**Tier 3** *(requires one Grace Tier 2)*
+**Unarmored Discipline** *(Body, talent — passive)*
 
-**Ghost Step** *(Grace, Tier 3 — Dexterity)*
+Wearing no armor and carrying no shield, you have armor 1.
 
-**Use:** Passive.
+**Improved:** Your unarmored armor becomes 2, and your unarmed strikes deal d8.
 
-You never roll Stealth for movement alone. You only roll when you take an action — speaking, attacking, interacting with an object. Your passage leaves no trace the MM can use against you.
-
-**Normal:** Staying unseen while you move is a Stealth roll.
-
-**The Vanishing** *(Grace, Tier 3 — Dexterity)*
-
-**Use:** Once per session.
-
-You may disappear from a scene entirely without explanation to anyone watching. You reappear at the start of the next scene in any position that is plausibly reachable. No roll required. The MM does not ask how.
-
-**Normal:** Leaving a scene unseen is a Stealth roll, and where you come out is the MM's to decide.
+**Normal:** Without armor you have armor 0, and unarmed strikes deal d4.
 
 ---
 
-#### Iron Branch
+**Scout's Eye** *(Body, talent — passive)*
 
-Iron Techniques represent endurance as a decision — the refusal to stop, kept up long past the point where anyone would have blamed you for stopping. Iron does not win the exchange; it wins the day, by still being there at the end of it.
+You, and anyone following your lead, are never caught by surprise. When the MM rolls the Pressure die while you are scouting ahead, roll it twice and the MM uses the result you choose.
 
-**Tier 1**
+**Improved:** Once per scene, ask the MM "what here is most dangerous to us?" and get a true answer.
 
-**Hard to Kill** *(Iron, Tier 1 — Constitution)*
-
-**Use:** At will, then locked until the consequence is resolved.
-
-When you fail an Endurance roll, you may choose to succeed at a cost instead — you push through, but mark one consequence the MM names immediately. You cannot use this ability again until the consequence is resolved or acknowledged in the fiction.
-
-**Normal:** A 6− means things go wrong, and it stays a failure. The Graceful Fail lets you narrate that failure as worse or richer rather than convert it into a success, and not every failure earns a Spark (see *Sparks*, III.1).
-
-**Acclimated** *(Iron, Tier 1 — Constitution)*
-
-**Use:** Passive.
-
-**Choose:** One hardship type: extreme cold, extreme heat, altitude, or deprivation.
-
-Choose one type of environmental hardship: extreme cold, extreme heat, altitude, or deprivation (hunger/thirst/sleep). Endurance rolls against your chosen hardship are treated as one difficulty step easier.
-
-**Normal:** Difficulty is Standard by default, and the MM adjusts it one step from the situation (see *Difficulty*, III.1).
+**Normal:** Surprise is the MM's call, and the Pressure die is rolled once.
 
 ---
 
-**Tier 2** *(requires one Iron Tier 1)*
+**Brawler** *(Body, talent — passive)*
 
-**Shrug It Off** *(Iron, Tier 2 — Constitution)*
+Grapples, shoves and throws are attacks for you. On a 7+ you deal your unarmed die and also pin, trip or hurl the target, as a stunt.
 
-**Use:** Once per scene.
+**Improved:** On a 10+ with a brawling attack, take a stunt and +1d6 damage both.
 
-You may ignore a minor wound or physical consequence entirely. It happened — it simply does not slow you down this scene.
-
-**Normal:** Tier 1 Conditions clear at the end of the exchange; Tier 2 persist until treated (see *Conditions*, III.3).
-
-**Grinding Advance** *(Iron, Tier 2 — Constitution)*
-
-**Use:** Once per session.
-
-When everyone else at the table has spent their resources or run out of options, you have not. Once per session, you may declare that you still have something left — a Spark, a second wind, a reserve of will. Gain one Spark immediately.
-
-**Normal:** Sparks are earned from play — an MM award, a peer call, an act-break nomination, or a Graceful Fail (see *Earning Sparks*, III.1).
+**Normal:** A stunt is one of the options on a 10+, in place of extra damage.
 
 ---
 
-**Tier 3** *(requires one Iron Tier 2)*
+**Cleave** *(Body, talent — passive)*
 
-**Unbreakable** *(Iron, Tier 3 — Constitution)*
+When your attack drops a foe, deal the damage left over to another foe within your reach.
 
-**Use:** Once per session.
+**Improved:** Against a mob of Mooks, a 7–9 drops two of them and a 10+ drops three.
 
-When something would remove you from the scene — defeat, collapse, capture, death — you may choose to remain. You are battered, spent, and at the edge. But you are still standing. The MM may not remove you from the scene against your will once per session.
-
-**Normal:** A Tier 3 Condition takes a character out of the fight (see *Conditions*, III.3).
-
-**The Long Road** *(Iron, Tier 3 — Constitution)*
-
-**Use:** Once per session, at the end of the session.
-
-At the end of any session in which your character endured significant hardship, you recover fully — wounds, consequences, and spent resources — without requiring downtime or rest. You are what hardship makes you.
-
-**Normal:** Tier 2 Conditions persist until treated, and recovery follows the rules in III.2.
+**Normal:** Leftover damage is lost, and one hit drops one Mook.
 
 ---
 
+**Marksman** *(Body, talent — passive)*
+
+Your ranged attacks ignore the difficulty cover adds, and ignore 1 point of the target's armor.
+
+**Improved:** Once per scene, spend an exchange taking aim (no attack). If your next ranged attack rolls 7+, it counts as 10+.
+
+**Normal:** Cover can make a ranged attack Hard, and armor subtracts in full.
+
+---
+
+**Iron Lungs** *(Body, talent — passive)*
+
+You have 2 extra inventory slots. Forced marches, cold, hunger and thirst are Easy for you.
+
+**Improved:** A breather restores all your HP instead of half.
+
+**Normal:** Slots are 10 + Body; a breather restores half your maximum HP.
+
+---
+
+**Dread Presence** *(Body, talent — once per scene)*
+
+Once per scene, when you drop a foe or land a 10+, force an immediate morale check on its allies.
+
+**Improved:** Morale checks you force are rolled with +2, so foes break more easily.
+
+**Normal:** Morale is checked at the MM's triggers only.
+
+---
+
+**Athlete** *(Body, talent — passive)*
+
+Climbing, swimming, jumping and running need no roll unless the danger is real; when it is, the roll is Easy.
+
+**Improved:** Once per scene, move to anywhere you could plausibly reach and still act in the same exchange.
+
+**Normal:** Athletic feats under pressure are rolled at the MM's difficulty.
+
+---
+
+**Fast Hands** *(Body, talent — passive)*
+
+Drawing, stowing, swapping or passing an item is a free part of any action. Picking locks and sleight of hand are Easy.
+
+**Improved:** Once per session, pull a mundane item from your pack that you never listed. It takes a slot you had free.
+
+**Normal:** Juggling gear takes an action, and fine handwork is rolled normally.
+
+---
+
+## Signatures
+
+Chosen at level 3, once. A signature is the thing your class is known for.
+
+**Unstoppable** *(Body, signature — once per scene)*
+
+Once per scene, when damage would drop you to 0 HP, drop to 1 instead.
+
+**Normal:** Damage that takes you to 0 HP means a Wound and a Hold On roll.
+
+---
+
+**Whirlwind** *(Body, signature — once per scene)*
+
+Once per scene, one attack roll strikes every foe within your reach.
+
+**Normal:** An attack roll strikes one foe.
+
+---
+
+**Bulwark** *(Body, signature — passive)*
+
+While you Intercept, allies behind you cannot be targeted by ranged attacks at all.
+
+**Normal:** Intercept redirects attacks aimed at allies within reach.
+
+---
+
+**Deadeye** *(Body, signature — passive)*
+
+When a ranged attack rolls 10+, roll your weapon die twice and add them.
+
+**Normal:** A 10+ deals your weapon die once, plus one option.
+
+---
+
+**Ghost** *(Body, signature — passive)*
+
+Moving alone, you are unseen unless you choose to be seen or roll 6− on something loud.
+
+**Normal:** Staying hidden is rolled whenever someone might notice you.
+
+---
+
+**Second Wind** *(Body, signature — once per scene)*
+
+Once per scene, take a breather as a free part of any action, mid-fight.
+
+**Normal:** A breather takes a few quiet minutes.
+
+---
+
+## Building a Body Character
+
+Pair talents that tell one story. *Sentinel* and *Tough* make a wall; *Scout's Eye* and *Athlete* make someone who is never where the trouble is. *Weapon Master* is the plainest talent on the menu and one of the best, because it improves every attack you make.
+
+If your character wears heavy armor, remember it makes stealth Hard (Chapter IV.1). *Unarmored Discipline* exists so that a nimble fighter does not have to choose between being hard to hit and being quiet.

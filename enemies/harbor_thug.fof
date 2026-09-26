@@ -1,41 +1,48 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: harbor_thug
 name: Harbor Thug
-
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
-
+    version: 1.0.0
 enemy:
-  tier: mook
-  attack_modifier: 0    # Strength +0, Combat Novice +0
-  armor: none
-  techniques: []
-  special: null
-  tr: 2                 # offense(0→2) + durability(Mook→0) + armor(0) + techniques(0) = 2
+  # v0.3: Mook, attack +0, rating 2.
+  level: 1
+  role: mook
+  armor: 0
+  morale: 5
+  weapon: Club, boat hook, or the nearest piece of cargo
+  wants: Paid, and home before anything goes badly.
+  special: 'NUMBERS FIRST — fewer than four thugs will not start a fight: they posture, shout,
+    and wait for more to arrive. From four up they attack as one mob.'
+  when_bloodied: null
+  tells: They keep counting each other, and the loudest one keeps looking back at whoever
+    hired them.
+  breaks: Runs, loudly, the moment whoever they are working for goes down or leaves, and takes
+    the nearest portable cargo along.
+  twists:
+  - They are owed a week's wages and have just worked out they are not getting it.
+  - One of them is somebody a party member knows, and would much rather not have been recognised.
+  - 'The fight is on a pier: anyone who goes in the water is out of it until someone fishes
+    them out.'
+  - They were hired to frighten, not to hurt, and nobody told them what to do if someone got
+    hurt.
+  - A second crew, hired by somebody else for the same job, arrives in the middle of it.
+  - Their employer is watching from a window and will not come down.
+  nastier: 'A crew boss is with them: a level 2 standard, and the thugs do not check morale
+    while the boss is standing.'
+  description: >-
+    Hired muscle. Doesn't want to die for this job. Will absolutely run if whoever they're
+    working for goes down first. Fights with clubs, boat hooks, or improvised cargo implements.
+    Loud. Not subtle.
+  notes: >-
+    Level 1 Mook: no overrides.
 
-  disposition: >
-    Muscle for hire, and unenthusiastic about it.
 
-  morale: >
-    Alone, a harbour thug is atmosphere, not a threat, and behaves like
-    it.
+    Effective in groups of four or more; alone they are atmosphere, not threat. Hired muscle.
+    Doesn't want to die for this job. Loud. Not subtle.
 
-  organization: >
-    Effective in groups of four or more; below that they posture and
-    wait for numbers.
 
-  description: >
-    Hired muscle. Doesn't want to die for this job. Will absolutely
-    run if the Named NPC they're working for goes down first. Fights
-    with clubs, boat hooks, or improvised cargo implements. Loud.
-    Not subtle.
-
-  notes: >
-    Mook — one Strike at any tier removes from fight.
-    Effective in groups of 4+; alone they are atmosphere, not threat.
-
-created_at: '2026-03-05T00:00:00+00:00'
-last_modified: '2026-03-05T00:00:00+00:00'
+    Appears: in groups of four or more; below that they posture and wait for numbers.
+  reskin_of: null

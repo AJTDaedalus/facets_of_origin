@@ -1,250 +1,227 @@
-"""Enemy model — stat blocks, TR calculation, and .fof serialization."""
+"""Monster cards (MM1, DESIGN §1 "Monsters" and §3.4).
+
+One dial (level 1-10) and a role set a foe's HP, damage, attack and number of
+attacks from `monsters.level_table` and `monsters.roles`. Overrides on the card
+are final values (not modifiers) and are flagged so the Bestiary can print a †.
+The card carries the texture: WANTS · SPECIAL · WHEN BLOODIED · TELLS · BREAKS ·
+TWISTS (d6) · NASTIER.
+
+An `Enemy` is also the live tracker entry: `spawn()` returns a copy with HP set,
+and for a Mook mob `count` is the number of Mooks still standing.
+"""
 from __future__ import annotations
 
-import warnings
-from datetime import datetime, timezone
-from typing import Literal, Optional
+import copy
+from dataclasses import dataclass, field
+from typing import Any, Optional
 
-from pydantic import BaseModel, Field
-
-
-EnemyTier = Literal["mook", "named", "boss"]
-
-# v0.1 -> v0.2 migration map (DESIGN §4.1): resolve := old durability_value.
-_LEGACY_ENDURANCE_TO_RESOLVE = [
-    (2, 1), (4, 2), (6, 3), (8, 4), (10, 5), (12, 6),
-]
+FOF_VERSION = "1.0"
+ROLES = ("mook", "standard", "elite", "boss")
+OVERRIDE_FIELDS = ("hp", "damage", "attack", "attacks")
+CARD_TEXT_FIELDS = ("weapon", "wants", "special", "when_bloodied", "tells", "breaks",
+                    "nastier", "description", "notes")
 
 
-def _map_legacy_endurance_to_resolve(endurance: int) -> int:
-    for ceiling, resolve in _LEGACY_ENDURANCE_TO_RESOLVE:
-        if endurance <= ceiling:
-            return resolve
-    return 7
+class EnemyFormatError(ValueError):
+    """An enemy file that cannot be read as a v1.0 card."""
 
 
-class PhaseDef(BaseModel):
-    """A durability-threshold phase change (DESIGN §4.1)."""
-
-    resolve_threshold: int = Field(ge=0)
+@dataclass
+class Enemy:
+    id: str
+    name: str
+    level: int
+    role: str = "standard"
+    armor: int = 0
+    morale: int = 7
+    weapon: str = ""
+    hp_override: Optional[int] = None
+    damage_override: Optional[int] = None
+    attack_override: Optional[int] = None
+    attacks_override: Optional[int] = None
+    wants: str = ""
+    special: str = ""
+    when_bloodied: Optional[str] = None
+    tells: str = ""
+    breaks: str = ""
+    twists: list[str] = field(default_factory=list)
+    nastier: Optional[str] = None
     description: str = ""
-
-
-class Enemy(BaseModel):
-    """An enemy stat block for use in encounters and the combat tracker.
-
-    Mirrors the enemy .fof format defined in MM1: Encounters & Enemies.
-    """
-
-    id: str = Field(min_length=1)
-    name: str = Field(min_length=1, max_length=128)
-    tier: EnemyTier = "mook"
-    resolve: int = Field(default=0, ge=0)
-    attack_modifier: int = 0
-    armor: str = "none"  # "none" | "light" | "heavy"
-    techniques: list[str] = Field(default_factory=list)
-    special: Optional[str] = None
-    description: str = ""
-
-    # Conduct — grouped by the moment the MM needs it, which is the ordering
-    # principle a 2007-era stat block is built on (monster_books.md §3): what
-    # the enemy is like, who it goes for, what changes mid-fight, and when it
-    # stops fighting. `tactics` predates these and stays as free prose; the
-    # fields below are what MM1 and the enemy chapter actually render.
-    disposition: str = ""
-    first_target: str = ""
-    triggers: list[str] = Field(default_factory=list)
-    morale: str = ""
-    organization: str = ""
-    negotiation: str = ""
-
-    tactics: str = ""
-    personality: str = ""
-    loot: list[str] = Field(default_factory=list)
     notes: str = ""
-    phases: list[PhaseDef] = Field(default_factory=list)
+    reskin_of: Optional[str] = None
+    # --- live state (tracker)
+    hp_current: Optional[int] = None
+    count: int = 1
+    bloodied: bool = False
+    defeated: bool = False
+    broken: bool = False
+    phase: int = 1
+    key: Optional[str] = None
+    openings: list[str] = field(default_factory=list)   # names whose next attack is Easy
+    studied: bool = False
 
-    # Combat tracker state (ephemeral, not saved to .fof). `open` and
-    # `position` are the two R3 Strike riders: a full-success Strike
-    # depletes 2 Resolve and takes one of them. `open` is Easy to Strike
-    # for everyone until the end of the exchange; `position` is Easy for
-    # the *next* roll against this enemy, this exchange or next, and holds
-    # {"uses", "expires_after_exchange"}. They never stack — both feed
-    # `combat.has_easy_tag`, and III.1's precedence makes Easy absolute.
-    # `posture` (T6.4, K-10/D12) is the stance the MM states openly for a
-    # Named/Boss (III.3 §Postures) — it shifts PC reaction difficulty per
-    # Table III.3-9. Mooks never declare Postures, so theirs stays None.
-    resolve_current: Optional[int] = None
-    conditions: list[str] = Field(default_factory=list)
-    open: bool = False
-    position: Optional[dict] = None
-    posture: Optional[str] = None
+    # ------------------------------------------------------------ derived
+    def _row(self, ruleset):
+        return ruleset.monsters.row(self.level)
 
-    def calculate_tr(self) -> int:
-        """Calculate Threat Rating using the MM1 formula.
+    def _role(self, ruleset):
+        role = ruleset.monsters.roles.get(self.role)
+        if role is None:
+            raise ValueError(f"Unknown role {self.role!r}.")
+        return role
 
-        TR = offense_value + durability_value + armor_bonus + technique_bonus
+    @property
+    def is_mook(self) -> bool:
+        return self.role == "mook"
 
-        Offense: attack_modifier mapped: -2->0, -1->1, 0->2, +1->3, +2->4, +3->5, +4->6
-        Durability: Mook=0, else = Resolve
-        Armor: none=0, light=1, heavy=2
-        Techniques: 1 per technique (simplified)
-        """
-        # Offense value
-        offense = max(0, self.attack_modifier + 2)
+    def hp_max(self, ruleset) -> Optional[int]:
+        """Level HP × role multiplier; None for a Mook (drops to any hit)."""
+        role = self._role(ruleset)
+        if role.hp_mult is None:
+            return None
+        if self.hp_override is not None:
+            return self.hp_override
+        return self._row(ruleset).hp * role.hp_mult
 
-        # Durability value
-        durability = 0 if self.tier == "mook" else self.resolve
+    def damage(self, ruleset) -> int:
+        if self.damage_override is not None:
+            return self.damage_override
+        return max(1, self._row(ruleset).damage + self._role(ruleset).damage_mod)
 
-        # Armor bonus
-        armor_bonus = {"none": 0, "light": 1, "heavy": 2}.get(self.armor, 0)
+    def attack(self, ruleset) -> int:
+        if self.attack_override is not None:
+            return self.attack_override
+        return self._row(ruleset).attack + self._role(ruleset).attack_mod
 
-        # Technique bonus (1 per technique)
-        technique_bonus = len(self.techniques)
+    def attacks(self, ruleset) -> int:
+        if self.attacks_override is not None:
+            return self.attacks_override
+        return self._role(ruleset).attacks
 
-        raw_tr = offense + durability + armor_bonus + technique_bonus
+    def overridden(self) -> list[str]:
+        """Which derived numbers the card overrides (the Bestiary prints a †)."""
+        return [f for f in OVERRIDE_FIELDS if getattr(self, f"{f}_override") is not None]
 
-        # Enforce tier minimums
-        minimums = {"mook": 1, "named": 8, "boss": 12}
-        return max(raw_tr, minimums.get(self.tier, 1))
+    def validate(self, ruleset) -> list[str]:
+        errors = []
+        if self.role not in ruleset.monsters.roles:
+            errors.append(f"{self.id}: unknown role {self.role!r}.")
+        if not 1 <= self.level <= len(ruleset.monsters.level_table):
+            errors.append(f"{self.id}: level {self.level} is off the level table.")
+        lo, hi = ruleset.monsters.armor_range
+        if not lo <= self.armor <= hi:
+            errors.append(f"{self.id}: armor {self.armor} is outside {lo}-{hi}.")
+        if not 2 <= self.morale <= 12:
+            errors.append(f"{self.id}: morale {self.morale} is outside 2-12.")
+        if len(self.twists) != 6:
+            errors.append(f"{self.id}: a card has exactly six twists, not {len(self.twists)}.")
+        for f_ in ("wants", "special", "tells", "breaks"):
+            if not (getattr(self, f_) or "").strip():
+                errors.append(f"{self.id}: the card has no {f_.upper()}.")
+        if self.role != "mook" and not (self.when_bloodied or "").strip():
+            errors.append(f"{self.id}: a {self.role} needs a WHEN BLOODIED line.")
+        if self.count < 1:
+            errors.append(f"{self.id}: count must be at least 1.")
+        return errors
 
-    def init_combat(self) -> None:
-        """Initialize combat tracker state.
-
-        Armor grants a flat Resolve bonus at combat start (D1) — the same
-        `armor_bonus` value `calculate_tr()` adds as a separate TR term,
-        applied here to the actual fight pool. Mooks have no Resolve pool.
-        """
-        if self.tier == "mook":
-            self.resolve_current = 0
-        else:
-            armor_bonus = {"none": 0, "light": 1, "heavy": 2}.get(self.armor, 0)
-            self.resolve_current = self.resolve + armor_bonus
-        self.conditions = []
-        self.open = False
-        self.position = None
-        # T6.4: Named/Boss enter at the baseline stance; Mooks never hold one.
-        self.posture = None if self.tier == "mook" else "measured"
-
-    def to_client_dict(self) -> dict:
-        """Serialize for sending to clients.
-
-        `tr` is derived rather than stored, so `model_dump()` alone omits it and
-        every client that showed a Threat Rating had either to receive it as a
-        sibling field or recompute the MM1 formula itself. It ships with the
-        enemy instead: the formula stays in one place.
-        """
-        return {**self.model_dump(), "tr": self.calculate_tr()}
-
-    def to_fof(self) -> dict:
-        """Serialize to .fof format."""
-        now = datetime.now(tz=timezone.utc).isoformat()
-        enemy_block: dict = {
-            "tier": self.tier,
-            "attack_modifier": self.attack_modifier,
-            "armor": self.armor,
-            "techniques": list(self.techniques),
-            "special": self.special,
-            "tr": self.calculate_tr(),
-            "description": self.description,
-            "notes": self.notes,
-        }
-        if self.tier != "mook":
-            enemy_block["resolve"] = self.resolve
-        for field in ("disposition", "first_target", "morale",
-                      "organization", "negotiation"):
-            value = getattr(self, field)
-            if value:
-                enemy_block[field] = value
-        if self.triggers:
-            enemy_block["triggers"] = list(self.triggers)
-        if self.tactics:
-            enemy_block["tactics"] = self.tactics
-        if self.personality:
-            enemy_block["personality"] = self.personality
-        if self.loot:
-            enemy_block["loot"] = list(self.loot)
-        if self.phases:
-            enemy_block["phases"] = [p.model_dump() for p in self.phases]
-
+    def card(self, ruleset) -> dict:
+        """The derived numbers the MM builds from (the card preview)."""
+        role = self._role(ruleset)
         return {
-            "fof_version": "0.1",
-            "type": "enemy",
-            "id": self.id,
-            "name": self.name,
-            "ruleset": {"modules": [{"id": "base", "version": "0.1.0"}]},
-            "enemy": enemy_block,
-            "created_at": now,
-            "last_modified": now,
+            "level": self.level, "role": self.role, "hp": self.hp_max(ruleset),
+            "damage": self.damage(ruleset), "attack": self.attack(ruleset),
+            "attacks": self.attacks(ruleset), "armor": self.armor, "morale": self.morale,
+            "mob": role.mob, "mob_damage_per_extra": role.mob_damage_per_extra,
+            "mob_damage_cap": role.mob_damage_cap, "bloodied_phase": role.bloodied_phase,
+            "overrides": self.overridden(),
+            "fearless": self.morale >= ruleset.monsters.morale.fearless,
+        }
+
+    # ------------------------------------------------------------ live
+    def spawn(self, ruleset, count: int = 1, key: Optional[str] = None) -> "Enemy":
+        """A fresh tracker copy at full HP (for a Mook mob, `count` Mooks)."""
+        if count < 1:
+            raise ValueError("Spawn at least one.")
+        if count > 1 and not self.is_mook:
+            raise ValueError("Only Mooks spawn as a mob; spawn others one at a time.")
+        live = copy.deepcopy(self)
+        live.hp_current = self.hp_max(ruleset)
+        live.count = count
+        live.bloodied = live.defeated = live.broken = False
+        live.phase = 1
+        live.openings = []
+        live.studied = False
+        live.key = key or self.id
+        return live
+
+    # ------------------------------------------------------------ serialise
+    def to_fof(self, module_refs: Optional[list[dict]] = None) -> dict:
+        body: dict[str, Any] = {"level": self.level, "role": self.role, "armor": self.armor,
+                                "morale": self.morale}
+        for f_ in OVERRIDE_FIELDS:
+            v = getattr(self, f"{f_}_override")
+            if v is not None:
+                body[f_] = v
+        body["weapon"] = self.weapon
+        for f_ in ("wants", "special", "when_bloodied", "tells", "breaks"):
+            body[f_] = getattr(self, f_)
+        body["twists"] = list(self.twists)
+        if self.nastier:
+            body["nastier"] = self.nastier
+        body["description"] = self.description
+        body["notes"] = self.notes
+        body["reskin_of"] = self.reskin_of
+        return {
+            "fof_version": FOF_VERSION, "type": "enemy", "id": self.id, "name": self.name,
+            "ruleset": {"modules": module_refs or [{"id": "base", "version": "1.0.0"}]},
+            "enemy": body,
         }
 
     @classmethod
-    def from_fof(cls, fof_dict: dict) -> "Enemy":
-        """Deserialize from a .fof format dict."""
-        if fof_dict.get("type") != "enemy":
-            raise ValueError(
-                f"Expected type 'enemy', got {fof_dict.get('type')!r}."
-            )
-        enemy_block = fof_dict.get("enemy")
-        if not isinstance(enemy_block, dict):
-            raise ValueError("Missing or invalid 'enemy' block in FOF file.")
-
-        if "defense_modifier" in enemy_block:
-            warnings.warn(
-                "Enemy .fof carries the retired 'defense_modifier' field; it "
-                "was never part of the TR formula and NPCs never roll it "
-                "(K-11) — difficulty against an enemy is the MM's situational "
-                "call plus posture (Chapter III.3). The field is ignored on "
-                "load and support will be removed in v0.4.",
-                DeprecationWarning,
-                stacklevel=2,
-            )
-
-        techniques = list(enemy_block.get("techniques") or [])
-        if "tier1_immunity" in techniques:
-            warnings.warn(
-                "Enemy .fof lists the retired 'tier1_immunity' technique; "
-                "enemies no longer take Strike Conditions (the Open tag "
-                "replaced the rider menu, K-6/D4), so it is immunity to "
-                "nothing. Remove the entry (and recompute TR); support "
-                "will be removed in v0.4.",
-                DeprecationWarning,
-                stacklevel=2,
-            )
-
-        if "resolve" in enemy_block:
-            resolve = enemy_block["resolve"]
-        elif "endurance" in enemy_block:
-            warnings.warn(
-                "Enemy .fof uses the legacy 'endurance' key; migrate to "
-                "'resolve' (DESIGN §4.1). Support for 'endurance' will be "
-                "removed in v0.4.",
-                DeprecationWarning,
-                stacklevel=2,
-            )
-            resolve = _map_legacy_endurance_to_resolve(enemy_block["endurance"])
-        else:
-            resolve = 0
-
+    def from_fof(cls, fof: dict) -> "Enemy":
+        """Read an enemy card. A v0.3 file (tier/Resolve/TR) fails with a clear message."""
+        if not isinstance(fof, dict) or fof.get("type") != "enemy":
+            raise EnemyFormatError("Not an enemy file (type: enemy).")
+        e = fof.get("enemy")
+        if not isinstance(e, dict):
+            raise EnemyFormatError(f"{fof.get('id')}: no `enemy:` block.")
+        if "tier" in e or "resolve" in e or str(fof.get("fof_version")) != FOF_VERSION:
+            raise EnemyFormatError(
+                f"{fof.get('id')}: this enemy uses the retired v0.3 format (tier, Resolve, "
+                "Threat Rating). v1.0 cards have a level and a role (MM1).")
+        if "level" not in e:
+            raise EnemyFormatError(f"{fof.get('id')}: a card needs a level.")
         return cls(
-            id=fof_dict.get("id", "unknown"),
-            name=fof_dict.get("name", "Unknown Enemy"),
-            tier=enemy_block.get("tier", "mook"),
-            resolve=resolve,
-            attack_modifier=enemy_block.get("attack_modifier", 0),
-            armor=enemy_block.get("armor", "none"),
-            techniques=techniques,
-            special=enemy_block.get("special"),
-            description=enemy_block.get("description", ""),
-            disposition=enemy_block.get("disposition", ""),
-            first_target=enemy_block.get("first_target", ""),
-            triggers=enemy_block.get("triggers") or [],
-            morale=enemy_block.get("morale", ""),
-            organization=enemy_block.get("organization", ""),
-            negotiation=enemy_block.get("negotiation", ""),
-            tactics=enemy_block.get("tactics", ""),
-            personality=enemy_block.get("personality", ""),
-            loot=enemy_block.get("loot") or [],
-            notes=enemy_block.get("notes", ""),
-            phases=enemy_block.get("phases") or [],
+            id=fof["id"], name=fof.get("name") or fof["id"], level=int(e["level"]),
+            role=e.get("role", "standard"), armor=int(e.get("armor", 0) or 0),
+            morale=int(e.get("morale", 7) or 7), weapon=e.get("weapon") or "",
+            hp_override=e.get("hp"), damage_override=e.get("damage"),
+            attack_override=e.get("attack"), attacks_override=e.get("attacks"),
+            wants=_text(e.get("wants")), special=_text(e.get("special")),
+            when_bloodied=e.get("when_bloodied"), tells=_text(e.get("tells")),
+            breaks=_text(e.get("breaks")), twists=[str(t) for t in e.get("twists") or []],
+            nastier=e.get("nastier"), description=_text(e.get("description")),
+            notes=_text(e.get("notes")), reskin_of=e.get("reskin_of"),
         )
+
+    def to_client_dict(self, ruleset=None) -> dict:
+        d = {
+            "id": self.id, "key": self.key or self.id, "name": self.name, "level": self.level,
+            "role": self.role, "armor": self.armor, "morale": self.morale, "weapon": self.weapon,
+            "wants": self.wants, "special": self.special, "when_bloodied": self.when_bloodied,
+            "tells": self.tells, "breaks": self.breaks, "twists": list(self.twists),
+            "nastier": self.nastier, "description": self.description, "notes": self.notes,
+            "reskin_of": self.reskin_of,
+            "overrides": {f_: getattr(self, f"{f_}_override") for f_ in OVERRIDE_FIELDS
+                          if getattr(self, f"{f_}_override") is not None},
+            "hp_current": self.hp_current, "count": self.count, "bloodied": self.bloodied,
+            "defeated": self.defeated, "broken": self.broken, "phase": self.phase,
+            "openings": list(self.openings), "studied": self.studied,
+        }
+        if ruleset is not None:
+            d["card"] = self.card(ruleset)
+        return d
+
+
+def _text(v) -> str:
+    return "" if v is None else str(v)

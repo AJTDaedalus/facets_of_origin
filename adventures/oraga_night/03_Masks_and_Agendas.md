@@ -2,14 +2,15 @@
 
 ## Making Characters for Oraga Night
 
-Build by the core's **seven steps** (Chapter II.1) with the Val'loh Facet loaded.
-Nothing about this module changes how a character is made; it only narrows step 3.
+Build by the core's steps (Chapter II.1) at **level 1**, with the Val'loh Facet
+loaded. Nothing about this module changes how a character is made; it only narrows
+the Lineage step.
 
-At **step 3, Lineage**, the answer is Orthaen — or, rarely and with MM agreement,
-Phern. At **step 6, Background**, take any core Background you like, with one rule
-you already know: a character holds **one domain at creation**, from Lineage or
-Background, never both. A gifted character therefore takes a non-magical Background,
-and gets their magic from their blood instead.
+At the **Lineage** step, the answer is Orthaen — or, rarely and with MM agreement,
+Phern. Take any Facet, class and background you like. A gifted character's magic
+comes from the blood: a **gift knack** and **Minor workings in one domain** of the
+player's choice. A character who wants full workings takes Thaumaturgy or
+Invocation as one of their talents, exactly as the core writes it.
 
 That is the whole of it. This section is one page and it does not restate the Facet —
 `settings/valloh/V1_Lineages.md` has the two lineages in full, and
@@ -22,12 +23,13 @@ That is the whole of it. This section is one page and it does not restate the Fa
   all night. Both are **Lineages** (Chapter II.5), and the Val'loh Facet
   (`settings/valloh/`) carries them along with the other eight tribes for the MM's
   use and for other adventures.
-- **A tribe's gift is a domain.** Not flair and not a special case — magic, in
-  exactly the sense Chapter II.3 means it: intuitive tradition, Focused, Minor scope
-  until it formalizes. **The player chooses which domain** — the lineage says how
-  it looks (an Orthaen's gift always comes through grown crystal; a Phern's is a
-  prickle before danger), not what it is. Formal spellcraft is the scholarly tradition and
-  works exactly as the core writes it. See `settings/valloh/V2_Magic_of_Valloh.md`.
+- **A tribe's gift is a knack and a domain.** Not flair and not a special case —
+  magic, in exactly the sense Chapter II.3 means it, at **Minor scope, always**
+  (Chapter II.5). **The player chooses which domain** — the lineage says how it
+  looks (an Orthaen's gift always comes through grown crystal; a Phern's is a
+  prickle before danger), not what it is. The gift knack covers exactly what that
+  sentence describes. Formal spellcraft is the Thaumaturgy talent and works exactly
+  as the core writes it. See `settings/valloh/V2_Magic_of_Valloh.md`.
 - **Everyone gets a hook and an agenda.** The six hooks are in the Overture and every
   one of them starts you at the Gatehouse Court; the agendas are below.
 
@@ -48,7 +50,7 @@ same first scene. Pick one there, then pick an agenda here.
 Every guest wears a spirit-mask until the midnight Unmasking. Mechanically, a mask is
 worth exactly what the fiction says it is worth: faces are hidden, voices are
 recognizable to those who know them, builds and manners give people away to a careful
-eye. Identifying a masked guest you know is **Standard** (Insight); one you have merely
+eye. Identifying a masked guest you know is a Mind roll at **Standard**; one you have merely
 heard described is **Hard**. Behind a mask, approaching someone far above your station
 is **Easy** rather than Standard — the custom protects the conversation, and everyone
 at this ball is someone else tonight.
@@ -190,15 +192,15 @@ through — and two hundred guests are about to need it.
 
 ## The Ready-Made Guests
 
-Five pregenerated characters, one per agenda archetype, built on standard arrays
-(18 points, three Sparks, Endurance 4 + Constitution modifier + Endurance rank).
-Lineages and gifts come from the Val'loh Facet. Hand them out as-is or let players
-reskin freely.
+Five pregenerated characters, one per agenda archetype, built by the core's steps at
+level 1: your Facet's stat +2, one other +1, the last +0; two talents; three Sparks;
+HP from the Facet's grit die. Lineages and gifts come from the Val'loh Facet. Two use
+preset classes and three write their own, which is how most tables will build. Hand
+them out as-is or let players reskin freely.
 
-Two of the five carry a real Endurance Pool — **Dassa at 5 and Pello at 4** — so the
-party can afford to react in the fights, and one of them, **Dassa, is ungifted**,
-because one Orthaen in five is and the table should see what that looks like on a
-sheet.
+Two of the five carry real HP — **Dassa at 16 and Pello at 12** — so the party can
+afford to stand in the fights, and one of them, **Dassa, is ungifted**, because one
+Orthaen in five is and the table should see what that looks like on a sheet.
 
 *Every block below is generated from `characters/*.fof`. The prose is hand-written;
 the numbers are not, and cannot be edited here.*
@@ -207,21 +209,21 @@ the numbers are not, and cannot be edited here.*
 Fourth child of a middling branch of House Vaskarin: born close enough to power to
 know all its dances, far enough to be sent on its errands.
 <!-- pregen: serane -->
-**Lineage:** Orthaen — **gifted**
+**Lineage:** Orthaen — **gifted** (gift knack *Orthaen gift*; Minor workings in Transmutation)
 
-**Primary Facet:** Soul · **Endurance Pool 3** · **Sparks 3**
+**Facet:** Soul · **Level 1** · **HP 8** · **Slots 10** · **Sparks 3**
 
-**Attributes:** Str 1 (−1), Dex 2 (+0), Con 1 (−1), Int 3 (+1), Wis 2 (+0), Kno 2 (+0), Spi 2 (+0), Luc 2 (+0), Cha 3 (+1)
+**Class:** Speaker — *I am the voice that ends fights before they start.*
 
-**Skills:** Persuade (Practiced, +1)
+**Stats:** Body +0 · Mind +1 · Soul +2
 
-**Gift:** Transmutation — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
+**Knacks:** Courts and bargains · The great houses · Orthaen gift
+
+**Talents:** Silver Tongue · Streetwise
 
 **Specialty:** Sect heraldry and old grudges — knows who hates whom, and why, and since when.
 
-**Carrying:** steady light, seal a door, veil of quiet
-
-**At Facet level 1 you would likely take:** *Read The Room*
+**Carrying:** Knife (d6) · Fine clothes · *curios:* steady light, seal a door, veil of quiet
 
 **Suggested agenda:** A House's Long Game, or The Prelate's Question.
 <!-- /pregen -->
@@ -230,19 +232,21 @@ know all its dances, far enough to be sent on its errands.
 A small, quick, cheerful man who has carried other people's valuables through five
 tribes' territory and lost none of them, including himself.
 <!-- pregen: pello -->
-**Lineage:** Phern — **gifted**
+**Lineage:** Phern — **gifted** (gift knack *Phern gift*; Minor workings in Divination)
 
-**Primary Facet:** Body · **Endurance Pool 4** · **Sparks 3**
+**Facet:** Body · **Level 1** · **HP 12** · **Slots 12** · **Sparks 3**
 
-**Attributes:** Str 1 (−1), Dex 3 (+1), Con 2 (+0), Int 2 (+0), Wis 3 (+1), Kno 2 (+0), Spi 1 (−1), Luc 2 (+0), Cha 2 (+0)
+**Class:** Courier *(custom)* — *I carry other people's valuables through dangerous country, and lose none of them.*
 
-**Skills:** Finesse (Practiced, +1)
+**Stats:** Body +2 · Mind +1 · Soul +0
 
-**Gift:** Divination — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
+**Knacks:** Moving things unseen · Trade and contracts · Phern gift
+
+**Talents:** Fast Hands · Athlete
 
 **Specialty:** Contracts, caravans, and smugglers' roads — who moves goods, and around which laws.
 
-**At Facet level 1 you would likely take:** *Fleet Step*
+**Carrying:** Knife (d6) · Light armor (armor 1) · Tools of a trade
 
 **Suggested agenda:** The Circle's Reckoning, or The Gate at Midnight.
 <!-- /pregen -->
@@ -253,21 +257,21 @@ private record of a pattern nobody else believes is there: the mist-tides, the
 silent house, the strange marriage. In a world without books, Andra *is* her
 research.
 <!-- pregen: andra -->
-**Lineage:** Orthaen — **gifted**
+**Lineage:** Orthaen — **gifted** (gift knack *Orthaen gift*; Minor workings in Inscription)
 
-**Primary Facet:** Mind · **Endurance Pool 3** · **Sparks 3**
+**Facet:** Mind · **Level 1** · **HP 6** · **Slots 10** · **Sparks 3**
 
-**Attributes:** Str 1 (−1), Dex 2 (+0), Con 1 (−1), Int 3 (+1), Wis 2 (+0), Kno 3 (+1), Spi 2 (+0), Luc 2 (+0), Cha 2 (+0)
+**Class:** Pattern-Keeper *(custom)* — *I keep the record of a pattern nobody else believes is there.*
 
-**Skills:** Lore (Practiced, +1)
+**Stats:** Body +0 · Mind +2 · Soul +1
 
-**Gift:** Inscription — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
+**Knacks:** Patterns and records · Rekuzan's history · Orthaen gift
+
+**Talents:** Loremaster · Investigator
 
 **Specialty:** The collected history of House Boranis — every public fact and most of the private ones, held in memory and lattice.
 
-**Carrying:** held image, held image, chime at a threshold
-
-**At Facet level 1 you would likely take:** *Sharp Analysis*
+**Carrying:** Knife (d6) · Chalk and a wiping slate · *curios:* held image, held image, chime at a threshold
 
 **Suggested agenda:** The Story of a Lifetime.
 <!-- /pregen -->
@@ -280,15 +284,19 @@ reminding. Slow to speak, impossible to move.
 <!-- pregen: dassa -->
 **Lineage:** Orthaen — ungifted
 
-**Primary Facet:** Body · **Endurance Pool 5** · **Sparks 3**
+**Facet:** Body · **Level 1** · **HP 16** · **Slots 12** · **Sparks 3**
 
-**Attributes:** Str 3 (+1), Dex 2 (+0), Con 3 (+1), Int 1 (−1), Wis 2 (+0), Kno 2 (+0), Spi 1 (−1), Luc 2 (+0), Cha 2 (+0)
+**Class:** Guardian — *I am a shield for the people behind me.*
 
-**Skills:** Combat (Practiced, +1), Endurance (Novice, 1 mark)
+**Stats:** Body +2 · Mind +0 · Soul +1
+
+**Knacks:** Bodyguard work · City Watch Veteran
+
+**Talents:** Sentinel · Tough
 
 **Specialty:** Knows the layout, regular occupants, and unofficial rules of one specific district or settlement from your service years.
 
-**At Facet level 1 you would likely take:** *Weapon Mastery*
+**Carrying:** Sword (d8) · Light armor (armor 1)
 
 **Suggested agenda:** The Vanished Servant, or bodyguard to another player character.
 <!-- /pregen -->
@@ -300,21 +308,21 @@ name long before the rest of Rekuzan learned to gossip about it — which is exa
 why a certain delegation, watched everywhere it goes, has quietly asked for an hour
 of Ilesse's evening.
 <!-- pregen: ilesse -->
-**Lineage:** Orthaen — **gifted**
+**Lineage:** Orthaen — **gifted** (gift knack *Orthaen gift*; Minor workings in Warding)
 
-**Primary Facet:** Soul · **Endurance Pool 3** · **Sparks 3**
+**Facet:** Soul · **Level 1** · **HP 8** · **Slots 10** · **Sparks 3**
 
-**Attributes:** Str 1 (−1), Dex 2 (+0), Con 1 (−1), Int 2 (+0), Wis 3 (+1), Kno 2 (+0), Spi 2 (+0), Luc 2 (+0), Cha 3 (+1)
+**Class:** Go-Between *(custom)* — *I carry words between people who cannot be seen talking to each other.*
 
-**Skills:** Persuade (Practiced, +1)
+**Stats:** Body +0 · Mind +1 · Soul +2
 
-**Gift:** Warding — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
+**Knacks:** Discreet errands · The Thenya border · Orthaen gift
+
+**Talents:** Empath · Warding Presence
 
 **Specialty:** The Thenya border and the Nolonaire family — its history, its debts, and everything Veier was before Rekuzan.
 
-**Carrying:** veil of quiet, seal a door, steady light
-
-**At Facet level 1 you would likely take:** *Lasting Impression*
+**Carrying:** Knife (d6) · Fine clothes · *curios:* veil of quiet, seal a door, steady light
 
 **Suggested agenda:** The Cousin's Errand.
 <!-- /pregen -->

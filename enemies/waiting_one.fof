@@ -1,38 +1,52 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: enemy
 id: waiting_one
 name: A Waiting One
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
+    version: 1.0.0
 enemy:
-  tier: named
-  attack_modifier: 2
-  armor: none
-  techniques:
-  - the_task
-  special: THE TASK — a Waiting One is doing something, and the MM knows what. Any
-    character who takes an action that genuinely advances that task is not a target
-    this exchange, and the Waiting One will work around them.
-  description: Someone at work. The hands move, the tools are real, and the job
-    is being done properly. It is only when you have watched for a while that you
-    notice the job was finished a long time ago, and is being done again.
-  disposition: Occupied. Violence is an interruption, and it is treated as one.
-  first_target: Whoever is between it and the work.
-  triggers:
-  - Never strikes first, and never strikes anyone who is helping.
-  - Becomes immediately and comprehensively dangerous to anyone who damages the
-    work.
-  morale: Stops when the task is finished, and only then. Nothing else stops it;
-    at Resolve 0 it simply cannot continue, which is not the same thing and the
-    fiction should say so.
-  organization: 'Where people died mid-task: one to four, each on its own job.'
-  notes: 'TR breakdown: offense(+2 → 4) + durability(Resolve 4) + armor(none → 0)
-    + techniques(1) = 9.'
-  negotiation: Wants the work done. Shifts for help. Honours nothing, because it
-    is not making agreements — but a party that finishes the job is not opposed
+  # v0.3: Named, durability 4, attack +2, rating 9.
+  level: 3
+  role: standard
+  armor: 0
+  morale: 12
+  weapon: The tools of its trade
+  wants: The work done properly, and then done again.
+  special: THE TASK — the MM knows the job it is doing. A character who spends their action
+    genuinely advancing that job is not a target this exchange, and it works around them.
+    Anyone who damages the work is its target from then on, and every hit it lands on them
+    is a hard hit.
+  when_bloodied: It turns its back and goes back to the job. From here it attacks only someone
+    who damages the work or stands between it and the job.
+  tells: It is finishing something that was finished before any of you were born. It has not
+    looked up.
+  breaks: Never breaks. It stops when the task is finished, and only then. At 0 HP it simply
+    cannot go on, which is not the same thing, and the fiction should say so.
+  twists:
+  - The job takes ten minutes with a second pair of hands.
+  - The thing the party came for is part of the work, and taking it is damaging the work.
+  - The job needs a material that no longer exists.
+  - Someone has been leaving materials at the door for forty years and has never once gone
+    in.
+  - Two Waiting Ones are doing the same job, and each has been undoing the other's work.
+  - The job went wrong the day they died, and it will never come out right until someone finds
+    out why.
+  nastier: An Unfinished runs this site, and this one has been reassigned.
+  description: >-
+    Someone at work. The hands move, the tools are real, and the job is being done properly.
+    It is only when you have watched for a while that you notice the job was finished a long
+    time ago, and is being done again.
+  notes: >-
+    Level 3 standard: no overrides. Fearless (morale 12): nothing but a finished task stops
+    it.
+
+
+    Occupied. Violence is an interruption, and it is treated as one. It never attacks first,
+    and never attacks anyone who is helping. A party that finishes the job is not opposed
     again.
-  resolve: 4
-created_at: '2026-08-02T00:00:00+00:00'
-last_modified: '2026-08-02T00:00:00+00:00'
+
+
+    Appears: where people died mid-task, one to four, each on its own job.
+  reskin_of: null

@@ -8,6 +8,8 @@ The rules exist to serve that experience. They are intentionally lean. When you 
 
 If this is your first tabletop roleplaying game, here is the whole shape of it: one player — the Mirror Master — describes a world, everyone else plays a character living in it, and the dice decide what happens when the outcome is genuinely uncertain. That is the entire activity. Everything else in this book is refinement.
 
+The game underneath will feel familiar if you have played older fantasy games: hit points, damage dice, armor, levels one to ten, and treasure worth carrying home. What is ours is the roll (two six-sided dice, three possible outcomes, and the story always moving) and the Facets that frame every character.
+
 ## The Philosophy
 
 Most TTRPGs were designed around a table — physical dice, paper character sheets, and everyone in the same room. Facets is built for how people actually play today: online sessions, mixed schedules, players spread across time zones. The digital tools handle bookkeeping, track your character, and keep the game moving so that you and your fellow players can focus on the only thing that actually matters: the story.
@@ -15,7 +17,7 @@ Most TTRPGs were designed around a table — physical dice, paper character shee
 This is what that looks like in practice:
 
 - **Story over rules.** When a rule would slow the game down or get in the way of a good moment, the story wins. The rules are a framework, not a ceiling.
-- **Fun over complexity.** Character creation should take minutes, not hours. A new player should be able to sit down and meaningfully participate in their first session.
+- **Fun over complexity.** A character takes about ten minutes from a preset class. A new player should be able to sit down and matter in their first session.
 - **Community over gatekeeping.** Facets is entirely open source. Everything in this book, and everything built on top of it, belongs to the community that makes it.
 
 ## The Facets System
@@ -23,6 +25,8 @@ This is what that looks like in practice:
 The game is built around a modular core. The rules in this handbook cover the fundamentals — how to create a character, how to resolve what happens when things get uncertain, and how to build a world together. These fundamentals work for any genre and any tone.
 
 On top of that core, the community can build **Facets** — optional modules that adapt the game for specific styles of play. High fantasy, science fiction, horror, political intrigue: each becomes a Facet, a set of additions and adjustments that plug into the core without rewriting it. Your Mirror Master (MM) will tell you which Facets your campaign uses.
+
+The word does a second job at the character level. Every character belongs to one of three Facets (Body, Mind or Soul), and that choice sets their best stat, their hit points and the menu their class is built from (Chapter II.4). The two meanings share a name because they share an idea: a broad frame you fill in yourself.
 
 ## Shattered Origin
 
@@ -32,13 +36,13 @@ You are not required to play in Shattered Origin. It is an invitation, not an ob
 
 ## How to Use This Handbook
 
-If you have never played a tabletop roleplaying game — or simply want to play *right now* — start with the **Quick Start** instead of this chapter's neighbors. It gives you the one rule the game runs on, character creation in six steps, and an example scene, and has you playing in about ten minutes. Come back here when you want the reasoning behind any of it.
+If you have never played a tabletop roleplaying game, or simply want to play *right now*, start with the **Quick Start**. It gives you the one rule the game runs on, a ready-made character in about ten minutes, and a short example of play. Come back here when you want the reasoning behind any of it.
 
-Otherwise: read the chapters in order when you are creating your first character — each section builds on the last. After that, use it as a reference. You should rarely need to look something up mid-session; if you do, the rules are designed to be found quickly.
+Otherwise, read Part II in order while you make your first character; each chapter builds on the last. After that, use the book as a reference. The rules are short on purpose. Most players learn their own class's talents and the three bands of the roll, and never need much more.
 
 ## Playing Without Software
 
-Everything in this handbook is designed to work with only dice and paper. The digital tools handle bookkeeping and enable online play, but none of the rules require them. If you are playing without software, Postures are declared on hidden slips of paper and revealed simultaneously, and Endurance Pools and Conditions are tracked on your character sheet. A printed character sheet, a pair of six-sided dice, and the people at your table are the only things you actually need.
+Everything in this handbook works with dice and paper. The digital tools roll the enemies' attacks, count your slots, and keep the tables one click away, but none of the rules need them. On paper you want a pair of six-sided dice (a few more for Sparks), one each of d4, d8, d10 and d12 for damage and grit, a printed character sheet, and a pencil. Your hit points, slots and Fatigue all live on the sheet.
 
 The most important thing is not in this book. It is the people at your table.
 

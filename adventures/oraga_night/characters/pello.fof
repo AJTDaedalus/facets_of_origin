@@ -1,59 +1,63 @@
-fof_version: '0.1'
+fof_version: '1.0'
 type: character
-id: pello-oraga_ni
+id: pello
 name: Pello
-version: 1.0.0
+version: 2.0.0
 authors:
 - Pello
 ruleset:
   modules:
   - id: base
-    version: 0.1.0
+    version: 1.0.0
   - id: valloh
-    version: 0.1.0
+    version: 1.0.0
 campaign_id: oraga_night
 character:
   name: Pello
   player_name: Pello
-  primary_facet: body
-  attributes:
-    strength: 1
-    dexterity: 3
-    constitution: 2
-    intelligence: 2
-    wisdom: 3
-    knowledge: 2
-    spirit: 1
-    luck: 2
-    charisma: 2
-  skills:
-    finesse:
-      rank: practiced
-      marks: 0
-  sparks: 3
-  session_skill_points_remaining: 4
-  training_marks_this_session: 0
-  facet_levels: {}
-  rank_advances_by_facet:
-    body: 1
-  facet_level: 0
-  total_facet_levels: 0
-  career_advances: 1
-  technique_picks_available: 0
-  techniques: []
-  technique_choices: {}
+  facet: body
+  level: 1
+  class:
+    id: courier
+    name: Courier
+    concept: "I carry other people's valuables through dangerous country, and lose none of them."
+    custom: true
+    talents: [fast_hands, athlete]
+  stats: {body: 2, mind: 1, soul: 0}
+  hp: {max: 12, current: 12}        # Body grit die maximum 10 + Body 2
+  knacks: ["Moving things unseen", "Trade and contracts", "Phern gift"]   # class, background, gift
   specialty: Contracts, caravans, and smugglers' roads — who moves goods, and around which
     laws.
-  magic_domain: divination
-  magic_tradition: intuitive
-  magic_technique_active: false
-  lineage: phern
-  gifted: true
-  domain_source: lineage
+  background:
+    id: factors_nephew
+    name: Factor's Nephew
+    custom: true
+    description: >
+      Nephew to a Phern factor, and the family's carrier: other people's
+      valuables, five tribes' roads, and the contracts that say who owns what
+      at the far end.
+  lineage: {id: phern, gifted: true, gift_knack: "Phern gift", gift_domain: divination}
+  talents:
+  - {id: fast_hands, improved: false}
+  - {id: athlete, improved: false}
+  signature: null
+  magic: null
+  inventory:
+  - {id: light_weapon, name: "Knife", slots: 1, kind: blades}
+  - {id: light_armor, name: "Light armor", slots: 1}
+  - {id: tools, name: "Tools of a trade", slots: 1}
+  equipped: {weapon: light_weapon, armor: light, shield: false}
+  coin: 80
+  fatigue: 0
+  wounds: []
+  scars: []
+  sparks: 3
+  talent_uses: {}
   module_role: The Factor's Nephew
   description: A small, quick, cheerful man who has carried other people's valuables through
     five tribes' territory and lost none of them, including himself.
   suggested_agenda: The Circle's Reckoning, or The Gate at Midnight.
-  technique_at_facet_level_1: fleet_step
+  notes_player: ""
+  notes_mm: ""
 created_at: '2026-09-09T11:54:53.801340+00:00'
-last_modified: '2026-09-09T11:54:53.801340+00:00'
+last_modified: '2026-09-25T00:00:00+00:00'

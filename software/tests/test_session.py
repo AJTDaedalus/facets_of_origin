@@ -109,19 +109,11 @@ class TestStateDict:
 # ---------------------------------------------------------------------------
 
 class TestDuplicateCharacter:
-    def test_adding_same_player_name_overwrites(self, session, body_character, ruleset, valid_attributes):
-        from app.game.character import create_default_character
+    def test_adding_same_player_name_overwrites(self, session, body_character, ruleset):
+        from tests.conftest import make_caster
         session.add_character(body_character)
         assert session.characters["Player1"].name == "Mordai"
-
-        # Add a new character under the same player_name
-        char2, errors = create_default_character(
-            name="Zaryn", player_name="Player1",
-            primary_facet="soul", attributes=valid_attributes, ruleset=ruleset,
-        )
-        assert not errors
-        session.add_character(char2)
-        # New character replaces old
+        session.add_character(make_caster(ruleset, name="Zaryn", player_name="Player1"))
         assert session.characters["Player1"].name == "Zaryn"
 
 
@@ -206,35 +198,93 @@ class TestStateDictCompleteness:
         assert d["session_name"] == "My Campaign"
 
 
-class TestPartyStrengthAndBand:
-    """T6.2: the session derives Party Strength (MM1: sum of career_advances)
-    and the live tracker's difficulty band from it."""
+class TestCombatAndDanger:
+    def test_start_combat_opens_exchange_one(self, session):
+        state = session.start_combat()
+        assert state.exchange == 1
+        assert session.to_state_dict()["combat"]["exchange"] == 1
 
-    def test_party_strength_defaults_to_calibrated_baseline(self, session):
-        # No characters yet: assume the PS-3 calibrated baseline rather than
-        # raising or claiming PS 0.
-        assert session.party_strength() == 3
+    def test_end_exchange_without_combat_raises(self, session):
+        with pytest.raises(ValueError):
+            session.end_exchange()
 
-    def test_party_strength_sums_career_advances(self, session, body_character):
-        body_character.career_advances = 2
+    def test_end_exchange_keeps_named_openings_and_drops_stunts(self, session, ruleset):
+        from tests.conftest import make_enemy
+        session.start_combat()
+        foe = make_enemy().spawn(ruleset)
+        foe.openings = ["Mordai", "*"]
+        foe.studied = True
+        session.active_enemies[foe.key] = foe
+        assert session.end_exchange() == 2
+        assert foe.openings == ["Mordai"]
+        assert foe.studied is False
+
+    def test_end_combat_clears_state(self, session):
+        session.start_combat()
+        session.end_combat()
+        assert session.combat is None
+
+    def test_party_level_defaults_to_one(self, session):
+        assert session.party_level() == 1
+        assert session.party_size() == 1
+
+    def test_active_danger_reads_the_tracker(self, session, ruleset, body_character):
+        from tests.conftest import make_enemy
         session.characters[body_character.player_name] = body_character
-        assert session.party_strength() == 2
+        for i in range(2):
+            e = make_enemy(id=f"s{i}").spawn(ruleset, key=f"s{i}")
+            session.active_enemies[e.key] = e
+        assert session.active_danger()["read"] == "deadly"      # 2 points vs 1 PC
 
-    def test_active_encounter_band_reads_active_enemies(self, session):
-        from app.game.enemy import Enemy
-        for i in range(3):
-            session.active_enemies[f"named_{i}"] = Enemy(
-                id=f"named_{i}", name=f"Named {i}", tier="named", resolve=3)
-        session.active_enemies["mook_0"] = Enemy(id="mook_0", name="Mook", tier="mook")
-        band = session.active_encounter_band()
-        assert band["band"] == "standard"  # MM1-5: 3 Named + 1 Mook at PS 3
+    def test_defeated_foes_leave_the_danger_read(self, session, ruleset, body_character):
+        from tests.conftest import make_enemy
+        session.characters[body_character.player_name] = body_character
+        e = make_enemy().spawn(ruleset)
+        e.defeated = True
+        session.active_enemies[e.key] = e
+        assert session.active_danger()["points"] == 0
 
-    def test_defeated_enemies_leave_the_band(self, session):
-        from app.game.enemy import Enemy
-        for i in range(4):
-            e = Enemy(id=f"named_{i}", name=f"Named {i}", tier="named", resolve=3)
-            e.init_combat()
-            session.active_enemies[f"named_{i}"] = e
-        session.active_enemies["named_3"].resolve_current = 0  # defeated, not yet removed
-        band = session.active_encounter_band()
-        assert band["named_boss_count"] == 3
+
+class TestSessionEnd:
+    def test_prompts_are_the_five_from_the_ruleset(self, session):
+        data = session.end_session_prompts()
+        assert [p["id"] for p in data["prompts"]] == [
+            "discovery", "treasure", "goal", "change", "moment"]
+        assert data["pacing_suggests_level"] == 2          # after session 1
+
+    def test_call_level_up_marks_characters_ready(self, session, body_character):
+        session.characters[body_character.player_name] = body_character
+        assert session.call_level_up() == ["Player1"]
+        assert session.to_player_state_dict("Player1")["level_up_ready"] is True
+
+    def test_call_level_up_unknown_player_raises(self, session):
+        with pytest.raises(ValueError):
+            session.call_level_up(["Nobody"])
+
+    def test_next_session_resets_sparks_without_carry_over(self, session, body_character):
+        body_character.sparks = 7
+        session.characters[body_character.player_name] = body_character
+        assert session.next_session() == 2
+        assert body_character.sparks == 3
+
+    def test_natural_two_failure_confirms_graceful_fail(self, session, body_character):
+        session.characters[body_character.player_name] = body_character
+        roll = {"outcome": "failure", "natural_low": True}
+        assert session.confirm_natural_two_graceful_fail("Player1", roll) is True
+        assert body_character.sparks == 4
+        assert roll["graceful_fail_claimed"] is True
+
+    def test_natural_two_on_success_does_not_fire(self, session, body_character):
+        session.characters[body_character.player_name] = body_character
+        assert not session.confirm_natural_two_graceful_fail(
+            "Player1", {"outcome": "partial_success", "natural_low": True})
+
+
+class TestPlayerView:
+    def test_player_view_hides_the_card(self, session, ruleset):
+        from tests.conftest import make_enemy
+        e = make_enemy().spawn(ruleset)
+        session.active_enemies[e.key] = e
+        view = session.to_player_state_dict("nobody")["active_enemies"][e.key]
+        assert "special" not in view and "twists" not in view
+        assert view["name"] == e.name
