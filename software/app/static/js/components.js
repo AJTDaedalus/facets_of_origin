@@ -1,391 +1,188 @@
 /**
- * Shared rendering components used across tabs.
- * Depends on: state, escapeHtml from app.js
+ * Facets of Origin — shared helpers and rendering pieces.
+ *
+ * Nothing here decides a rule. Numbers shown come from the server (the
+ * engine's derived values) or straight from the ruleset data.
  */
 
-// ---------------------------------------------------------------------------
-// Character sheet (read-only, used in Tools tab and player list)
-// ---------------------------------------------------------------------------
-function renderCharacterSheetReadOnly(char, ruleset, containerId) {
-  const container = document.getElementById(containerId);
-  if (!container || !char || !ruleset) return;
+// ---------------------------------------------------------------- basics
+function esc(v) {
+  return String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+const $ = (sel, root) => (root || document).querySelector(sel);
+const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+function cap(s) { s = String(s || ''); return s.charAt(0).toUpperCase() + s.slice(1); }
+function signed(n) { n = Number(n) || 0; return n >= 0 ? `+${n}` : `${n}`; }
+function slugify(s) { return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '').slice(0, 60); }
 
-  const facetDef = ruleset.character_facets.find(cf => cf.id === char.primary_facet);
-  const facetName = facetDef ? facetDef.name : char.primary_facet;
+const TIER_TEXT = { full_success: 'Full success', partial_success: 'Success with a cost', failure: 'Things go wrong' };
 
-  let html = `
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-      <h3 style="font-size:1.1rem;margin:0;">${escapeHtml(char.name)}</h3>
-      <span class="facet-badge facet-${char.primary_facet}">${facetName}</span>
-      <span style="font-size:0.8rem;color:var(--text-dim);">Level ${char.facet_level}</span>
-    </div>
-  `;
+// ---------------------------------------------------------------- ruleset lookups
+function R() { return state.ruleset || {}; }
+function talentDef(id) { return (R().talents || []).find(t => t.id === id); }
+function talentName(id) { const t = talentDef(id); return t ? t.name : cap(String(id || '').replace(/_/g, ' ')); }
+function classDef(id) { return (R().classes || []).find(c => c.id === id); }
+function domainDef(id) { return (R().magic_domains || []).find(d => d.id === id); }
+function domainName(id) { const d = domainDef(id); return d ? d.name : id; }
+function itemDef(id) { return (R().items || []).find(i => i.id === id); }
+function facetDef(id) { return (R().facets || []).find(f => f.id === id); }
+function statName(id) { const s = (R().stats || []).find(x => x.id === id); return s ? s.name : cap(id); }
+function difficultyLabels() { return ((R().roll_resolution || {}).difficulty_modifiers || []).map(d => d.label); }
+function onMenuOf(t, facet) { return t.facet === facet || (t.shared_with || []).includes(facet); }
+function isCastingTalent(t) { return !!(t && t.effects && t.effects.grants_tradition); }
 
-  // Attributes grid
-  html += '<div class="card-title">Attributes</div>';
-  ruleset.major_attributes.forEach(major => {
-    html += `<div class="major-group"><div class="major-label">${major.name}</div><div class="attr-grid">`;
-    major.minor_attributes.forEach(minorId => {
-      const minor = ruleset.minor_attributes.find(m => m.id === minorId);
-      if (!minor) return;
-      const rating = char.attributes[minorId] || 2;
-      const ratingDef = ruleset.attribute_ratings.find(r => r.rating === rating);
-      const mod = ratingDef ? ratingDef.modifier : 0;
-      const modStr = mod >= 0 ? `+${mod}` : `${mod}`;
-      html += `
-        <div class="attr-block" style="cursor:default;">
-          <div class="attr-name">${minor.name}</div>
-          <div class="attr-modifier">${modStr}</div>
-          <div class="attr-rating">rating ${rating}</div>
-          <div class="attr-label">${ratingDef ? ratingDef.label : ''}</div>
-        </div>`;
-    });
-    html += '</div></div>';
-  });
+// ---------------------------------------------------------------- dice + rolls
+function diceHtml(dice, kept, cls) {
+  const keep = (kept || []).slice();
+  return `<span class="dice">${(dice || []).map(d => {
+    const i = keep.indexOf(d);
+    const k = i >= 0; if (k) keep.splice(i, 1);
+    return `<span class="die ${cls || ''} ${k ? '' : 'drop'}">${esc(d)}</span>`;
+  }).join('')}</span>`;
+}
 
-  // Skills table
-  html += '<div class="card-title" style="margin-top:16px;">Skills</div>';
-  html += '<table class="skills-table"><thead><tr><th>Skill</th><th>Rank</th><th>Progress</th></tr></thead><tbody>';
-  ruleset.skills.forEach(skill => {
-    if (skill.status === 'stub') return;
-    const ss = char.skills[skill.id] || { rank: 'novice', marks: 0 };
-    const marksNeeded = ruleset.advancement ? ruleset.advancement.marks_per_rank : 3;
-    const dots = String.fromCodePoint(0x25CF).repeat(ss.marks) + String.fromCodePoint(0x25CB).repeat(Math.max(0, marksNeeded - ss.marks));
-    const isPrimary = skill.facet === char.primary_facet;
-    // data-marks re-surfaces the progress dots on mobile, where the Progress
-    // column is hidden for width.
-    html += `<tr>
-      <td data-marks="${dots}">${skill.name}${isPrimary ? '' : ' <span style="color:var(--text-dim);font-size:10px" title="Outside the primary Facet">' + String.fromCodePoint(0x25CF) + '</span>'}</td>
-      <td><span class="rank-badge rank-${ss.rank}">${ss.rank}</span></td>
-      <td class="marks-dots" title="${ss.marks}/${marksNeeded} marks toward the next rank">${dots}</td>
-    </tr>`;
-  });
-  html += '</tbody></table>';
+function rollLine(roll) {
+  if (!roll) return '';
+  const mods = [];
+  if (roll.stat) mods.push(`${statName(roll.stat)} ${signed(roll.stat_value)}`);
+  if (roll.knack) mods.push('knack +1');
+  if (roll.bonus) mods.push(`bonus ${signed(roll.bonus)}`);
+  if (roll.difficulty && roll.difficulty !== 'Standard') mods.push(`${roll.difficulty} ${signed(roll.difficulty_modifier)}`);
+  const extras = [];
+  if (roll.sparks) extras.push(`${roll.sparks} Spark${roll.sparks > 1 ? 's' : ''}`);
+  if (roll.help) extras.push('Help');
+  if (roll.borrowed_trouble) extras.push('Borrowed Trouble');
+  const nat = roll.natural_high ? '<span class="chip gold">Natural 12: name something more</span>'
+    : (roll.natural_low ? '<span class="chip bad">Natural 2</span>' : '');
+  return `<div class="line">${diceHtml(roll.dice, roll.kept)}
+      <span class="total">${esc(roll.total)}</span>
+      <span class="tier ${esc(roll.outcome)}">${esc(TIER_TEXT[roll.outcome] || roll.outcome_label)}</span> ${nat}</div>
+    <div class="note">${esc(mods.join(' · '))}${extras.length ? ' · extra dice: ' + esc(extras.join(', ')) : ''}${roll.capped ? ' · capped at +4' : ''}</div>
+    ${roll.graceful_fail_reason === 'natural_2' ? '<div class="note">The natural 2 confirms the Graceful Fail: a Spark, and the player narrates.</div>' : ''}`;
+}
 
-  // Techniques
-  if (char.techniques && char.techniques.length > 0) {
-    html += '<div class="card-title" style="margin-top:16px;">Techniques</div>';
-    html += '<ul style="list-style:none;font-size:13px;">';
-    char.techniques.forEach(t => {
-      const choice = char.technique_choices && char.technique_choices[t];
-      html += `<li style="padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${t}${choice ? ' (' + escapeHtml(choice) + ')' : ''}</li>`;
-    });
-    html += '</ul>';
-  }
+// ---------------------------------------------------------------- bars and pips
+function hpBar(cur, max, thin) {
+  const pct = max ? Math.max(0, Math.min(100, Math.round(100 * cur / max))) : 0;
+  const cls = pct <= 25 ? 'low' : (pct <= 50 ? 'half' : '');
+  return `<div class="bar ${thin ? 'thin' : ''} ${cls}"><span style="width:${pct}%"></span></div>`;
+}
 
-  // Background & specialty
-  if (char.background_id || char.specialty) {
-    html += '<div class="card-title" style="margin-top:16px;">Background</div>';
-    if (char.background_id) html += `<div style="font-size:13px;margin-bottom:4px;">${escapeHtml(char.background_id)}</div>`;
-    if (char.specialty) html += `<div style="font-size:12px;color:var(--text-dim);font-style:italic;">${escapeHtml(char.specialty)}</div>`;
-  }
+function sparkPips(n, base) {
+  const total = Math.max(n, base || 3);
+  let out = '';
+  for (let i = 0; i < total; i++) out += `<span class="spark ${i < n ? 'lit' : ''}"></span>`;
+  return `<span class="sparks" title="${n} Spark${n === 1 ? '' : 's'}">${out}</span>`;
+}
 
-  // Magic
-  if (char.magic_domain) {
-    html += '<div class="card-title" style="margin-top:16px;">Magic</div>';
-    html += `<div style="font-size:13px;">Domain: ${escapeHtml(char.magic_domain)}${char.magic_technique_active ? '' : ' (pre-technique)'}</div>`;
-    if (char.secondary_magic_domain) {
-      html += `<div style="font-size:13px;">Secondary: ${escapeHtml(char.secondary_magic_domain)}</div>`;
+function usePips(left, allowed) {
+  if (left === null || left === undefined) return '';
+  const total = Math.max(allowed || 1, left);
+  let out = '';
+  for (let i = 0; i < total; i++) out += `<span class="use-pip ${i < left ? 'full' : ''}"></span>`;
+  return `<span class="uses" title="${left} use${left === 1 ? '' : 's'} left">${out}</span>`;
+}
+
+function statusChip(status) {
+  if (!status || status === 'ok') return '';
+  const map = { out: ['cost', 'Out of the fight'], dying: ['bad', 'Dying'], dead: ['bad', 'Dead'] };
+  const [cls, text] = map[status] || ['info', status];
+  return `<span class="chip ${cls}">${text}</span>`;
+}
+
+function useLabel(use) {
+  return { passive: 'always on', at_will: 'at will', once_per_scene: 'once a scene', once_per_session: 'once a session', once_per_rest: 'once a rest' }[use] || use;
+}
+
+// ---------------------------------------------------------------- slots grid
+/** The slots grid: items (a 2-slot item spans two boxes), Wounds, Fatigue, coin, free space. */
+function slotsGrid(ch) {
+  const d = ch.derived || {};
+  const total = d.slots_total || 0;
+  const boxes = [];
+  (ch.inventory || []).forEach(it => {
+    const n = it.slots ?? 1;
+    const eq = ch.equipped || {};
+    const worn = eq.weapon === it.id || (it.armor && it.armor !== 'shield' && eq.armor === it.armor) || (it.armor === 'shield' && eq.shield);
+    for (let i = 0; i < n; i++) {
+      boxes.push(`<div class="slot item ${i ? 'cont' : ''}"><span>${i ? '↳ ' : ''}${esc(it.name || it.id)}${worn && !i ? ' <span class="tiny muted">(in hand)</span>' : ''}</span>
+        ${it.usage_die && !i ? `<span class="ud">d${esc(it.usage_die)}</span>` : ''}</div>`);
     }
-  }
-
-  // Career stats
-  html += `<div style="margin-top:16px;font-size:12px;color:var(--text-dim);">
-    Career Advances: ${char.career_advances} | Total Facet Levels: ${char.total_facet_levels} | SP Remaining: ${char.session_skill_points_remaining}
-  </div>`;
-
-  container.innerHTML = html;
+  });
+  (ch.wounds || []).forEach(w => boxes.push(`<div class="slot wound"><b>Wound</b><span>${esc(w.name)}</span></div>`));
+  for (let i = 0; i < (ch.fatigue || 0); i++) boxes.push('<div class="slot fatigue"><b>Fatigue</b><span class="tiny">clears on a night\'s rest</span></div>');
+  const coinSlots = Math.floor((ch.coin || 0) / (((R().slots || {}).coin_per_slot) || 100));
+  for (let i = 0; i < coinSlots; i++) boxes.push('<div class="slot coin"><b>Coin</b></div>');
+  const out = boxes.map((b, i) => i >= total ? b.replace('class="slot', 'class="slot over') : b);
+  for (let i = boxes.length; i < total; i++) out.push('<div class="slot empty">free</div>');
+  return `<div class="slots">${out.join('')}</div>`;
 }
 
-// ---------------------------------------------------------------------------
-// Compact character card (used in player list)
-// ---------------------------------------------------------------------------
-function renderCharacterCompact(char, ruleset) {
-  if (!char) return '';
-  const facetDef = ruleset ? ruleset.character_facets.find(cf => cf.id === char.primary_facet) : null;
-  const facetName = facetDef ? facetDef.name : char.primary_facet;
-  return `
-    <span>${escapeHtml(char.player_name)}${char.name !== char.player_name ? ' (' + escapeHtml(char.name) + ')' : ''}</span>
-    <span class="facet-badge facet-${char.primary_facet}">${facetName}</span>
-  `;
+// ---------------------------------------------------------------- toasts + dialogs
+function notify(message, kind, ms) {
+  const host = $('#toast-host');
+  if (!host) return;
+  const el = document.createElement('div');
+  el.className = `toast ${kind || ''}`;
+  el.textContent = message;
+  host.appendChild(el);
+  setTimeout(() => el.remove(), ms || 5000);
 }
 
-// ---------------------------------------------------------------------------
-// Combat state rendering (shared between Play and Tools)
-// ---------------------------------------------------------------------------
-function renderCombatStateCompact(char) {
-  if (!char || char.endurance_current === null || char.endurance_current === undefined) return '';
-  const condStr = char.conditions && char.conditions.length > 0 ? char.conditions.join(', ') : 'none';
-  return `<span style="font-size:11px;color:var(--text-dim);">End: ${char.endurance_current} | ${char.posture || 'measured'} | ${condStr}</span>`;
+/** A modal. `body` is HTML; `buttons` is [{label, cls, value}]. Resolves with the clicked value (null on Escape). */
+function modal(title, body, buttons, onMount) {
+  return new Promise(resolve => {
+    const host = $('#modal-host');
+    const wrap = document.createElement('div');
+    wrap.className = 'backdrop';
+    wrap.innerHTML = `<div class="modal" role="dialog" aria-modal="true"><h2>${esc(title)}</h2><div class="modal-body">${body}</div>
+      <div class="actions">${(buttons || [{ label: 'OK', cls: 'primary', value: true }]).map((b, i) =>
+        `<button class="btn ${b.cls || ''}" data-i="${i}">${esc(b.label)}</button>`).join('')}</div></div>`;
+    host.appendChild(wrap);
+    const close = v => { wrap.remove(); document.removeEventListener('keydown', onKey); resolve(v); };
+    const onKey = e => { if (e.key === 'Escape') close(null); };
+    document.addEventListener('keydown', onKey);
+    $$('.actions button', wrap).forEach(btn => btn.addEventListener('click', () => {
+      const b = buttons[Number(btn.dataset.i)];
+      close(typeof b.value === 'function' ? b.value(wrap) : b.value);
+    }));
+    if (onMount) onMount(wrap, close);
+    const f = $('input, select, textarea, .btn.primary', wrap);
+    if (f) f.focus();
+  });
 }
 
-// ---------------------------------------------------------------------------
-// Enemy card rendering (shared between MM tracker and player view)
-// ---------------------------------------------------------------------------
-// Mooks have no Resolve pool — they fall to one Strike. Returns null for mooks,
-// otherwise {current, max} where current falls back to max before combat starts.
-function enemyResolveDisplay(enemy) {
-  if (enemy.tier === 'mook') return null;
-  const max = enemy.resolve || 0;
-  const current = (enemy.resolve_current !== null && enemy.resolve_current !== undefined)
-    ? enemy.resolve_current : max;
-  return { current: current, max: max };
+async function confirmDialog(title, body, label) {
+  return !!(await modal(title, `<p>${esc(body)}</p>`, [{ label: 'Cancel', value: false }, { label: label || 'OK', cls: 'primary', value: true }]));
 }
 
-/**
- * T6.4 (K-10/D12): Table III.3-9 shift for an enemy stance, read from the
- * ruleset (`combat.enemy_attacks.posture_reaction_shift`) — display never
- * carries its own copy of the table.
- */
-function enemyPostureShift(posture) {
-  const ea = state.ruleset && state.ruleset.combat && state.ruleset.combat.enemy_attacks;
-  const shifts = (ea && ea.posture_reaction_shift) || {};
-  return shifts[posture] || 'none';
+function formatApiError(detail, fallback) {
+  if (!detail) return fallback;
+  if (typeof detail === 'string') return detail;
+  if (detail.errors) return detail.errors.join(' ');
+  if (Array.isArray(detail)) return detail.map(d => d.msg || JSON.stringify(d)).join(' ');
+  return fallback;
 }
 
-/**
- * How a stance's reaction shift reads at the table (Table III.3-9). One
- * wording, used by both surfaces that describe it — the tracker panel and the
- * system-chat beat drifted to two phrasings of the same effect.
- */
-function enemyPostureShiftLabel(shift) {
-  if (shift === 'harder') return 'reactions vs its attacks one step harder';
-  if (shift === 'easier') return 'reactions vs its attacks one step easier';
-  return 'reactions vs its attacks unadjusted';
+async function apiFetch(url, method, body) {
+  const opts = { method: method || 'GET', headers: { 'Content-Type': 'application/json' } };
+  if (state.token) opts.headers.Authorization = `Bearer ${state.token}`;
+  if (body !== undefined) opts.body = JSON.stringify(body);
+  return fetch(url, opts);
 }
 
-function enemyPostureOptions() {
-  const ea = state.ruleset && state.ruleset.combat && state.ruleset.combat.enemy_attacks;
-  return Object.keys((ea && ea.posture_reaction_shift) || {});
+/** Toggle chip markup, wired by the delegated click handler in app.js. */
+function toggleChip(key, label, on, extra) {
+  return `<span class="toggle ${on ? 'on' : ''}" data-toggle="${esc(key)}" ${extra || ''}>${esc(label)}</span>`;
 }
 
-/**
- * Posture panel for a Named/Boss tracker entry (T6.4, K-10). The MM states
- * the stance openly (III.3 §Postures, T3.8/D12), so the stance and the
- * reaction-difficulty label it implies are visible to everyone; the stance
- * select and the conduct triggers are MM-side.
- */
-function renderEnemyPosturePanel(key, enemy, mmControls) {
-  if (enemy.tier === 'mook') return '';
-  const posture = enemy.posture || 'measured';
-  const shift = enemyPostureShift(posture);
-  // Table III.3-9: Aggressive - reactions one step harder; Measured - no
-  // adjustment; Defensive - reactions one step easier.
-  const reactLabel = enemyPostureShiftLabel(shift);
-  // Strike difficulty hint (III.3 §Strike): Standard by default; Open is
-  // Easy for everyone; a Defensive stance may push the MM's call to Hard.
-  const strikeHint = enemy.open
-    ? 'Easy to Strike (Open)'
-    : posture === 'defensive'
-      ? 'Strike: Standard, consider Hard (Defensive)'
-      : 'Strike: Standard by default';
-
-  const stanceControl = mmControls
-    ? '<select class="enemy-posture-select" title="The MM states this stance openly (III.3)"'
-      + ' onchange="enemySetPosture(\'' + escapeHtml(key) + '\', this.value)">'
-      + enemyPostureOptions().map(function (p) {
-          return '<option value="' + escapeHtml(p) + '"' + (p === posture ? ' selected' : '') + '>'
-            + escapeHtml(p) + '</option>';
-        }).join('')
-      + '</select>'
-    : '<span class="posture-badge posture-' + escapeHtml(posture) + '">' + escapeHtml(posture) + '</span>';
-
-  // Conduct triggers (T3.8): rule-driven stance changes the MM authored on
-  // the stat block — shown beside the stance so the MM plays them.
-  const triggers = mmControls && enemy.triggers && enemy.triggers.length
-    ? '<div class="enemy-tactics"><strong>Triggers:</strong> '
-      + enemy.triggers.map(function (t) { return escapeHtml(t); }).join(' · ') + '</div>'
-    : '';
-
-  return '<div class="enemy-posture-panel" style="margin-top:4px;font-size:11px;">'
-    + '<span style="color:var(--text-dim);">Stance:</span> ' + stanceControl
-    + ' <span style="color:var(--text-dim);">— ' + reactLabel + ' · ' + strikeHint + '</span>'
-    + '</div>'
-    + triggers;
+function segmented(key, options, current) {
+  return `<span class="seg" data-seg="${esc(key)}">${options.map(o => {
+    const v = typeof o === 'string' ? o : o.value; const l = typeof o === 'string' ? o : o.label;
+    return `<button type="button" data-v="${esc(v)}" class="${v === current ? 'on' : ''}" ${o.disabled ? 'disabled' : ''}>${esc(l)}</button>`;
+  }).join('')}</span>`;
 }
 
-function renderEnemyCard(key, enemy, opts) {
-  opts = opts || {};
-  const conditions = enemy.conditions || [];
-  const res = enemyResolveDisplay(enemy);
-  const hasPhases = opts.showPhases && enemy.phases && enemy.phases.length > 0;
-
-  // K-6/D4: the one mark a Strike can put on an enemy is the Open tag —
-  // Easy to Strike for everyone until the enemy visibly spends its action.
-  const openBadge = enemy.open
-    ? '<span class="condition-badge condition-tier2" title="Easy to Strike for everyone until it spends its action recovering">OPEN — Easy to Strike</span>'
-    : '';
-
-  // Legacy Condition badges: enemies no longer take Strike Conditions, but
-  // the MM can still lift a stale badge off a pre-Open tracker entry.
-  const condHtml = conditions.length
-    ? conditions.map(function (c) {
-        const label = escapeHtml(String(c).replace(/_/g, ' '));
-        return opts.mmControls
-          ? '<button class="condition-badge condition-tier1 condition-clearable" title="Remove"'
-            + ' onclick="enemyRemoveCondition(\'' + escapeHtml(key) + '\',\'' + escapeHtml(c) + '\')">'
-            + label + ' ×</button>'
-          : '<span class="condition-badge condition-tier1">' + label + '</span>';
-      }).join(' ')
-    : '';
-
-  let resolveBlock;
-  if (res) {
-    const denom = res.max || res.current || 1;
-    const pct = Math.round((res.current / denom) * 100);
-    const fillClass = 'resolve-fill' + (pct <= 25 ? ' critical' : pct <= 50 ? ' low' : '');
-    let markers = '';
-    if (hasPhases) {
-      markers = enemy.phases.map(function (p) {
-        const left = Math.max(0, Math.min(100, Math.round((p.resolve_threshold / denom) * 100)));
-        return '<span class="resolve-phase-marker" style="left:' + left + '%;"'
-          + ' title="Phase at ' + p.resolve_threshold + ': ' + escapeHtml(p.description || '') + '"></span>';
-      }).join('');
-    }
-    resolveBlock =
-      '<div class="resolve-bar"><div class="' + fillClass + '" style="width:' + pct + '%;"></div>' + markers + '</div>'
-      + '<div style="font-size:11px;color:var(--text-dim);">Resolve <span class="enemy-resolve">'
-      + res.current + '</span>/' + res.max + '</div>';
-  } else {
-    resolveBlock = '<div style="font-size:12px;color:var(--text-dim);">Mook &mdash; falls to one Strike</div>';
-  }
-
-  let phaseNote = '';
-  if (hasPhases) {
-    phaseNote = '<div style="font-size:11px;color:var(--text-dim);margin-top:2px;">Phases at Resolve: '
-      + enemy.phases.map(function (p) { return escapeHtml(String(p.resolve_threshold)); }).join(', ')
-      + '</div>';
-  }
-
-  let controls = '';
-  if (opts.mmControls) {
-    // Buttons send the Strike *outcome*; the engine decides what it costs.
-    // They used to send a pre-computed Resolve value, which put the depletion
-    // rule in the browser. +1 stays an arithmetic nudge because it is an undo,
-    // not a rule.
-    const resolveButtons =
-      '<button class="btn btn-secondary btn-sm" title="Strike landed 10+"'
-      + ' onclick="enemyStrikeOutcome(\'' + escapeHtml(key) + '\', \'full_success\')">Hit 10+</button>'
-      + '<button class="btn btn-secondary btn-sm" title="Strike landed 7-9"'
-      + ' onclick="enemyStrikeOutcome(\'' + escapeHtml(key) + '\', \'partial_success\')">Hit 7-9</button>'
-      + (res
-        ? '<button class="btn btn-secondary btn-sm" title="Undo one point"'
-          + ' onclick="enemyAdjustResolve(\'' + escapeHtml(key) + '\', 1)">+1</button>'
-        : '');
-
-    // Open toggle (K-6/D4) replaces the retired "+ Condition" prompt: on a
-    // 10+ the attacker may leave the enemy Open; the enemy clears it only
-    // by visibly spending its action.
-    const openButton = enemy.open
-      ? '<button class="btn btn-secondary btn-sm" title="The enemy visibly spends its action recovering"'
-        + ' onclick="enemyToggleOpen(\'' + escapeHtml(key) + '\')">Clears Open (action)</button>'
-      : '<button class="btn btn-secondary btn-sm" title="Attacker’s option on a 10+ — Easy to Strike for everyone"'
-        + ' onclick="enemyToggleOpen(\'' + escapeHtml(key) + '\')">Leave Open</button>';
-
-    controls =
-      '<div class="btn-row" style="margin-top:6px;">'
-      + resolveButtons
-      + openButton
-      + '<button class="btn btn-secondary btn-sm" onclick="removeEnemy(\'' + escapeHtml(key) + '\')">Remove</button>'
-      + '</div>';
-  }
-
-  const tactics = opts.mmControls && enemy.tactics
-    ? '<div class="enemy-tactics" title="Tactics">' + escapeHtml(enemy.tactics) + '</div>' : '';
-  const special = opts.mmControls && enemy.special
-    ? '<div class="enemy-tactics"><strong>Special:</strong> ' + escapeHtml(enemy.special) + '</div>' : '';
-  const defeated = res && res.current <= 0 ? ' enemy-defeated' : '';
-
-  return ''
-    + '<div class="enemy-tracker-entry' + defeated + '">'
-    + '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">'
-    + '<strong>' + escapeHtml(enemy.name) + '</strong>'
-    + '<span style="font-size:11px;color:var(--text-dim);white-space:nowrap;">'
-    + escapeHtml(enemy.tier) + ' | TR ' + (enemy.tr || '?') + '</span>'
-    + '</div>'
-    + '<div style="margin-top:4px;">' + resolveBlock + '</div>'
-    + renderEnemyPosturePanel(key, enemy, opts.mmControls)
-    + '<div style="font-size:12px;margin-top:4px;">'
-    + (openBadge || condHtml
-        ? [openBadge, condHtml].filter(Boolean).join(' ')
-        : '<span style="color:var(--text-dim);font-size:11px;">no marks</span>')
-    + '</div>'
-    + phaseNote
-    + tactics
-    + special
-    + controls
-    + '</div>';
-}
-
-// ---------------------------------------------------------------------------
-// Difficulty band chip (T6.2, K-3) — MM-only surfaces (encounter builder,
-// enemy tracker). The band itself is computed server-side (compute_band);
-// this only renders what the server said.
-// ---------------------------------------------------------------------------
-function renderBandChip(band) {
-  if (!band || !band.band) return '';
-  const label = band.band.charAt(0).toUpperCase() + band.band.slice(1);
-  const caveat = band.calibrated
-    ? ''
-    : ' <span style="color:var(--text-dim);font-size:10px;" title="'
-      + escapeHtml(band.note || '') + '">un-simulated (PS ' + band.party_strength + ')</span>';
-  const note = band.calibrated && band.note
-    ? ' <span style="color:var(--text-dim);font-size:10px;">' + escapeHtml(band.note) + '</span>'
-    : '';
-  return '<span class="band-chip band-' + escapeHtml(band.band) + '" title="'
-    + escapeHtml(band.note || 'Recipe Table (MM1): actor count of Named/Boss enemies drives difficulty.')
-    + '">' + label + '</span>' + caveat + note;
-}
-
-// ---------------------------------------------------------------------------
-// Threat Clock card (PHB III.2, D4) — visible to the whole table
-// ---------------------------------------------------------------------------
-function renderThreatClockCard(clock, opts) {
-  opts = opts || {};
-  const segments = [];
-  for (let i = 0; i < clock.segments; i++) {
-    segments.push('<span class="clock-segment' + (i < clock.filled_segments ? ' filled' : '') + '"></span>');
-  }
-
-  let controls = '';
-  if (opts.mmControls) {
-    controls =
-      '<div class="btn-row" style="margin-top:4px;">'
-      + '<button class="btn btn-secondary btn-sm" title="A 7-9 advances the clock"'
-      + ' onclick="clockAdvance(\'' + escapeHtml(clock.id) + '\', \'partial_success\')">Advance (7-9)</button>'
-      + '<button class="btn btn-secondary btn-sm" title="A 6- advances the clock"'
-      + ' onclick="clockAdvance(\'' + escapeHtml(clock.id) + '\', \'failure\')">Advance (6-)</button>'
-      + '<button class="btn btn-secondary btn-sm" title="Spend an action to push the hazard back"'
-      + ' onclick="clockWindBack(\'' + escapeHtml(clock.id) + '\')">Wind Back</button>'
-      + '<button class="btn btn-secondary btn-sm" title="Remove this clock"'
-      + ' onclick="deleteClock(\'' + escapeHtml(clock.id) + '\')">Remove</button>'
-      + '</div>'
-      + '<div style="font-size:11px;color:var(--text-dim);margin-top:2px;">'
-      + 'A 10+ never advances a clock.</div>';
-  }
-
-  return ''
-    + '<div class="threat-clock-entry' + (clock.is_full ? ' clock-full' : '') + '">'
-    + '<div style="display:flex;justify-content:space-between;align-items:center;">'
-    + '<strong>' + escapeHtml(clock.name) + '</strong>'
-    + '<span style="font-size:11px;color:var(--text-dim);">' + clock.filled_segments + '/' + clock.segments
-    + (clock.is_full ? ' — STRIKES' : '') + '</span>'
-    + '</div>'
-    + '<div class="clock-segments">' + segments.join('') + '</div>'
-    + controls
-    + '</div>';
-}
-
-// ---------------------------------------------------------------------------
-// Rule summary card (collapsible, used in Tools tab)
-// ---------------------------------------------------------------------------
-function renderRuleSummaryCard(title, content) {
-  return `
-    <div class="card rule-summary-card">
-      <div class="card-title rule-summary-toggle" onclick="this.parentElement.classList.toggle('expanded')" style="cursor:pointer;">
-        ${escapeHtml(title)} <span class="toggle-arrow">+</span>
-      </div>
-      <div class="rule-summary-content">${content}</div>
-    </div>
-  `;
+function stepper(key, value, max) {
+  return `<span class="stepper" data-stepper="${esc(key)}" data-max="${max}"><button type="button" data-d="-1">−</button><span>${value}</span><button type="button" data-d="1">+</button></span>`;
 }

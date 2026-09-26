@@ -25,11 +25,13 @@ async def _announce_character(session_id: str, character: Character) -> None:
     """
     from app.api.websocket import manager
 
-    await manager.broadcast(session_id, {
-        "type": "character_created",
-        "player": character.player_name,
-        "character": character.to_client_dict(session_store.get(session_id).ruleset),
-    })
+    view = character.to_client_dict(session_store.get(session_id).ruleset)
+    player_view = {k: v for k, v in view.items() if k != "notes_mm"}
+    await manager.broadcast_split(
+        session_id,
+        {"type": "character_created", "player": character.player_name, "character": view},
+        {"type": "character_created", "player": character.player_name, "character": player_view},
+    )
 
 
 def _require_player_or_mm(request: Request):

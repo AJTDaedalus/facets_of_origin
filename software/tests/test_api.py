@@ -966,3 +966,53 @@ class TestASettingFacetCanActuallyBeTurnedOn:
         }, headers=mm_headers)
         assert resp.status_code == 422
         assert "orthaen" in str(resp.json())
+
+
+class TestCharacterCreatedBroadcastPrivacy:
+    """The REST creation broadcast is split like every socket push: the MM sees
+    the MM's notes, players never do (APP review finding, 2026-09-25)."""
+
+    def _capture(self, monkeypatch):
+        from app.api import websocket as ws
+        calls = []
+
+        async def fake_split(session_id, mm_message, player_message):
+            calls.append((mm_message, player_message))
+
+        async def fake_broadcast(session_id, message):
+            calls.append((message, message))
+
+        monkeypatch.setattr(ws.manager, "broadcast_split", fake_split)
+        monkeypatch.setattr(ws.manager, "broadcast", fake_broadcast)
+        return calls
+
+    def test_players_do_not_receive_mm_notes(self, client, mm_headers, active_session,
+                                             create_payload, monkeypatch):
+        calls = self._capture(monkeypatch)
+        resp = client.post("/api/characters/",
+                           json={"session_id": active_session["session_id"], **create_payload},
+                           headers=mm_headers)
+        assert resp.status_code == 200
+        created = [c for c in calls if c[0].get("type") == "character_created"]
+        assert created, "no character_created broadcast"
+        mm_msg, player_msg = created[0]
+        assert "notes_mm" not in player_msg["character"]
+
+    def test_mm_still_receives_the_full_character(self, client, mm_headers, active_session,
+                                                  create_payload, monkeypatch):
+        calls = self._capture(monkeypatch)
+        client.post("/api/characters/",
+                    json={"session_id": active_session["session_id"], **create_payload},
+                    headers=mm_headers)
+        mm_msg, _ = [c for c in calls if c[0].get("type") == "character_created"][0]
+        assert "notes_mm" in mm_msg["character"]
+        assert mm_msg["player"] == mm_msg["character"]["player_name"] or mm_msg["player"]
+
+    def test_both_views_name_the_same_player(self, client, mm_headers, active_session,
+                                             create_payload, monkeypatch):
+        calls = self._capture(monkeypatch)
+        client.post("/api/characters/",
+                    json={"session_id": active_session["session_id"], **create_payload},
+                    headers=mm_headers)
+        mm_msg, player_msg = [c for c in calls if c[0].get("type") == "character_created"][0]
+        assert mm_msg["player"] == player_msg["player"]

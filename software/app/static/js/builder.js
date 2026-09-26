@@ -1,925 +1,549 @@
 /**
- * Builder tab — character advancement (player), enemy/encounter builder (MM).
- * Depends on: state, sendWS, escapeHtml, apiFetch from app.js
- */
-
-// ---------------------------------------------------------------------------
-// Builder tab initialization
-// ---------------------------------------------------------------------------
-function initBuilderTab() {
-  if (state.role === 'mm') {
-    renderBuilderEnemyLibrary();
-    renderBuilderEncounterLibrary();
-    renderBuilderEncounterEnemySelect();
-    renderBuilderAdvanceSkillSelect();
-    renderBuilderMarkSkillSelect();
-    renderBuilderCampaignNotes();
-    renderPlayerPickers();
-    previewEnemyTR();
-  } else {
-    renderBuilderSkills();
-    renderBuilderTechniques();
-    renderBuilderPlayerNotes();
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Player: Skill advancement
-// ---------------------------------------------------------------------------
-function renderBuilderSkills() {
-  const spEl = document.getElementById('builder-sp-remaining');
-  const listEl = document.getElementById('builder-skills-list');
-  if (!spEl || !listEl) return;
-
-  const char = state.character;
-  if (!char || !state.ruleset) {
-    spEl.textContent = '';
-    listEl.innerHTML = '<div class="empty-state">Create your character on the Play tab first — '
-      + 'advancement opens up once you have one.</div>';
-    return;
-  }
-
-  // T4.3/D10's two numbers are ruleset data the server enforces
-  // (Character.spend_skill_point / start_new_session), so read them rather
-  // than mirroring them here — a Facet that retunes either would otherwise
-  // leave the UI offering what the server refuses.
-  const adv = state.ruleset.advancement || {};
-  const bankCap = adv.bank_cap !== undefined ? adv.bank_cap : 2;
-  const trainingCap = adv.training_marks_per_session !== undefined
-    ? adv.training_marks_per_session : 1;
-
-  const sp = char.session_skill_points_remaining || 0;
-  spEl.innerHTML = `<strong style="color:var(--gold);">${sp}</strong> Skill Point${sp === 1 ? '' : 's'}
-    left this session. Primary-Facet skills cost 1, everything else costs 2.
-    Up to ${bankCap} unspent point${bankCap === 1 ? '' : 's'} bank into the next session.`;
-
-  const usedSkills = char.skills_used_this_session || [];
-  const hasUsedSkills = usedSkills.length > 0;
-  // T4.3/D10: a point per session may train an UNUSED Primary-Facet skill.
-  const trainingAvailable = (char.training_marks_this_session || 0) < trainingCap;
-
-  listEl.innerHTML = '';
-  if (!hasUsedSkills) {
-    // Explains why every Spend button is disabled — previously they were just
-    // greyed out with nothing saying what would enable them.
-    const note = document.createElement('div');
-    note.className = 'inline-note';
-    note.textContent = 'Nothing is marked as used yet. Roll a skill in play, or ask the MM to mark one — '
-      + 'points go to skills you used this session, plus 1 training point for an unused Primary-Facet skill.';
-    listEl.appendChild(note);
-  }
-
-  state.ruleset.skills.forEach(skill => {
-    if (skill.status === 'stub') return;
-    const ss = char.skills[skill.id] || { rank: 'novice', marks: 0 };
-    const isPrimary = skill.facet === char.primary_facet;
-    const cost = isPrimary ? 1 : 2;
-    const canAfford = (char.session_skill_points_remaining || 0) >= cost;
-    const wasUsed = usedSkills.includes(skill.id);
-    const canTrain = isPrimary && trainingAvailable;
-    const canSpend = canAfford && (!hasUsedSkills || wasUsed || canTrain);
-    const marksNeeded = state.ruleset.advancement ? state.ruleset.advancement.marks_per_rank : 3;
-    const dots = '\u25CF'.repeat(ss.marks) + '\u25CB'.repeat(Math.max(0, marksNeeded - ss.marks));
-
-    const usedBadge = wasUsed ? '<span style="color:var(--success);font-size:10px;margin-left:4px;">USED</span>' : '';
-    const notUsedNote = hasUsedSkills && !wasUsed && canAfford
-      ? (canTrain
-        ? `<span style="color:var(--gold);font-size:10px;margin-left:4px;">train (${trainingCap}/session)</span>`
-        : '<span style="color:var(--text-dim);font-size:10px;margin-left:4px;">not used</span>')
-      : '';
-
-    const div = document.createElement('div');
-    div.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;';
-    div.innerHTML = `
-      <div>
-        <span>${skill.name}</span>
-        ${isPrimary ? '' : '<span style="color:var(--text-dim);font-size:10px;margin-left:4px;">(cross ' + cost + ' SP)</span>'}
-        <span class="rank-badge rank-${ss.rank}" style="margin-left:6px;">${ss.rank}</span>
-        <span class="marks-dots" style="margin-left:6px;">${dots}</span>
-        ${usedBadge}${notUsedNote}
-      </div>
-      <button class="btn btn-secondary btn-sm" ${canSpend ? '' : 'disabled'} onclick="spendSkillPoint('${skill.id}')" style="padding:3px 10px;min-height:28px;font-size:11px;">Spend</button>
-    `;
-    listEl.appendChild(div);
-  });
-}
-
-function spendSkillPoint(skillId) {
-  sendWS({ type: 'spend_skill_point', skill_id: skillId });
-}
-
-// ---------------------------------------------------------------------------
-// Player: Technique selection
-// ---------------------------------------------------------------------------
-function renderBuilderTechniques() {
-  const container = document.getElementById('builder-technique-list');
-  if (!container) return;
-
-  const char = state.character;
-  if (!char || !state.ruleset) {
-    container.innerHTML = '<div class="empty-state">Create your character on the Play tab first.</div>';
-    return;
-  }
-
-  const picks = char.technique_picks_available || 0;
-  const held = char.techniques || [];
-
-  let html = `<div class="inline-note" style="margin-bottom:10px;">
-    <strong style="color:var(--gold);">${picks}</strong> Technique pick${picks === 1 ? '' : 's'} available.
-    You earn one at each Facet level. Tier 2 needs a Tier 1 in the same branch; Tier 3 needs a Tier 2.
-  </div>`;
-
-  if (held.length > 0) {
-    html += '<div class="section-label">Learned</div>';
-    held.forEach(t => {
-      const choice = char.technique_choices && char.technique_choices[t];
-      html += `<div class="technique-row technique-held">
-        <div><strong>${escapeHtml(techniqueDisplayName(t))}</strong>
-        ${choice ? `<span class="library-meta">${escapeHtml(choice.replace(/_/g, ' '))}</span>` : ''}</div>
-      </div>`;
-    });
-  }
-
-  // The tree lives at ruleset.techniques[facetId], nested branch → tier →
-  // technique. `character_facets[]` has never carried a `techniques` field, so
-  // reaching for it silently produced an empty list and this panel always said
-  // "Every Technique in this Facet is learned" (TODO T9).
-  const techniques = techniquesForFacet(char.primary_facet);
-  const available = techniques.filter(t => !held.includes(t.id));
-
-  if (available.length > 0) {
-    html += '<div class="section-label">Available</div>';
-    available.forEach(t => {
-      // Show WHY a Technique is locked rather than hiding it. Seeing the shape of
-      // the tree ahead is most of the point of an advancement screen.
-      const missing = (t.prerequisites || []).filter(p => !held.includes(p));
-
-      // The tier ladder is the real gate and no Technique in the ruleset states
-      // it as a `prerequisites` entry: Tier 2 needs any Tier 1 in the same
-      // branch, Tier 3 any Tier 2. `select_technique` enforces it server-side
-      // and broadcasts its refusal to the whole table, so an enabled button here
-      // means a player publicly fails at something the panel invited them to do.
-      const heldInBranch = techniques.filter(
-        o => held.includes(o.id) && o.branch_id === t.branch_id);
-      const tierMissing = (t.tier || 1) > 1
-        && !heldInBranch.some(o => o.tier === (t.tier || 1) - 1);
-
-      // Second Domain and Ascendant Domain need a domain in their own tree first.
-      const domainMissing = !!t.requires_domain && !state.character.magic_domain;
-
-      const blocked = missing.length > 0 || tierMissing || domainMissing || picks <= 0;
-      const reasons = [];
-      if (missing.length) reasons.push('Requires ' + missing.map(techniqueDisplayName).join(', '));
-      if (tierMissing) {
-        reasons.push(`Requires a Tier ${(t.tier || 1) - 1} Technique in ${t.branch_name || 'the same branch'}`);
-      }
-      if (domainMissing) reasons.push('Requires an existing domain');
-      if (picks <= 0) reasons.push('No pick available');
-
-      html += `<div class="technique-row${blocked ? ' technique-locked' : ''}">
-        <div>
-          <strong>${escapeHtml(t.name || t.id)}</strong>
-          ${t.has_choice ? '<span class="library-meta">choice required</span>' : ''}
-          <div class="library-desc">${escapeHtml(t.description || '')}</div>
-          ${reasons.length ? `<div class="technique-blocked">${escapeHtml(reasons.join(' · '))}</div>` : ''}
-        </div>
-        <button class="btn btn-secondary btn-sm" ${blocked ? 'disabled' : ''}
-                onclick="selectTechnique('${escapeHtml(t.id)}')">Select</button>
-      </div>`;
-    });
-  } else if (held.length) {
-    html += '<div class="empty-state">Every Technique in this Facet is learned.</div>';
-  }
-
-  container.innerHTML = html;
-}
-
-/**
- * Select a Technique, prompting for its choice first when it needs one.
+ * Facets of Origin — the Build tab.
  *
- * This previously fired `technique_select` with no `choice` at all, even for
- * magic-granting Techniques whose whole effect is the domain they name — and the
- * event was MM-gated besides, so it always came back as an error.
+ * Players: the creation wizard (Facet → stats → class → background → kit →
+ * magic → review), then the level-up pick screen when the MM calls a level.
+ * Mirror Master: the monster-card builder (level + role → the numbers, asked
+ * of the engine) and the card library, plus the wizard for building
+ * characters on a player's behalf.
  */
-async function selectTechnique(techId) {
-  const def = techniquesForFacet(state.character.primary_facet)
-    .find(t => t.id === techId);
 
-  let choice;
-  if (def && def.has_choice) {
-    choice = await pickTechniqueChoice(def);
-    if (!choice) return;  // cancelled
-  }
-  sendWS({ type: 'technique_select', technique_id: techId, choice });
+const wiz = { step: 'facet' };
+const mb = { level: 1, role: 'standard', armor: 0, morale: 7, twists: ['', '', '', '', '', ''] };
+
+function renderBuild() {
+  const root = $('#tab-build');
+  if (isMM()) { root.innerHTML = mmBuildHtml(); wireMMBuild(root); return; }
+  const me = state.me;
+  if (me && me.level_up_ready) { root.innerHTML = levelUpHtml(me); wireLevelUp(root, me); return; }
+  if (me) { root.innerHTML = builtHtml(me); wireBuilt(root, me); return; }
+  root.innerHTML = wizardHtml();
+  wireWizard(root);
 }
 
-/**
- * Offer the legal choices for a Technique. For the domain-granting Techniques
- * that means the right domain list: Ascendant Domain takes prismatic territories,
- * Second Domain takes standard ones only (PHB II.4b/II.4c).
- *
- * TD-20 (DESIGN §8): non-domain `has_choice` Techniques — Weapon Mastery,
- * Acclimated, Field of Mastery — used to fall through to the domain logic
- * below and get offered the character's primary Facet's *domain* names as
- * candidate weapon types, hardships, or fields of knowledge, which is not
- * merely wrong but doesn't even overlap the Technique's real vocabulary.
- * TD-19 gave these three Techniques a `choices` list of their own in
- * facet.yaml; when a Technique carries one, it is authoritative and the
- * domain-list branch never runs for it.
- */
-function pickTechniqueChoice(def) {
-  if (def.choices && def.choices.length) {
-    return pickFromChoicesList(def);
-  }
-
-  const magic = (state.ruleset && state.ruleset.magic) || {};
-  const facetForDomains = def.requires_domain || state.character.primary_facet;
-  const list = (facetForDomains === 'mind' ? magic.mind_domains : magic.soul_domains) || [];
-
-  let options = list;
-  if (def.grants_prismatic_domain) {
-    options = list.filter(d => d.type === 'broad' || d.type === 'prismatic');
-  } else if (def.grants_secondary_domain) {
-    options = list.filter(d => d.type !== 'broad' && d.type !== 'prismatic');
-  }
-  const held = new Set([
-    state.character.magic_domain,
-    state.character.secondary_magic_domain,
-    state.character.ascendant_domain,
-  ].filter(Boolean));
-  options = options.filter(d => !held.has(d.id));
-
-  if (options.length === 0) {
-    notify('No eligible domain remains for this Technique.', 'warn');
-    return Promise.resolve(null);
-  }
-  return selectDialog(
-    def.name || def.id,
-    def.choice_prompt || 'Choose a domain.',
-    options.map(d => ({ value: d.id, label: `${d.name} (${d.type})` })));
+// =====================================================================
+// The creation wizard
+// =====================================================================
+function wizSteps() {
+  const s = [['facet', 'Facet'], ['stats', 'Stats'], ['class', 'Class'], ['background', 'Background'], ['kit', 'Kit']];
+  if (wizIsCaster()) s.push(['magic', 'Magic']);
+  if (wizGiftLineage()) s.push(['lineage', 'Gift']);
+  s.push(['review', 'Review']);
+  return s;
 }
 
-/**
- * Picker for a non-domain Technique's `choices` list (TD-19/TD-20).
- *
- * Field of Mastery is deliberately open-ended in the fiction (II.4a: "or
- * another domain with MM approval") — nothing gates membership (INV-8) —
- * so it alone gets an "Other..." entry that drops into free text via
- * `promptDialog`. Weapon Mastery and Acclimated are closed sets (the book
- * lists exactly four/four options each) and offer only what `choices` says.
- */
-async function pickFromChoicesList(def) {
-  const OTHER = '__other__';
-  const options = def.choices.map(c => ({ value: c, label: c }));
-  if (def.id === 'field_of_mastery') {
-    options.push({ value: OTHER, label: 'Other (type your own)...' });
+function wizTalents() {
+  if (wiz.mode === 'custom') return (wiz.custom && wiz.custom.talents) || [];
+  const c = classDef(wiz.classId);
+  return c ? c.talents : [];
+}
+function wizIsCaster() { return wizTalents().some(id => isCastingTalent(talentDef(id))); }
+function wizTradition() { const t = wizTalents().map(talentDef).find(isCastingTalent); return t ? t.effects.grants_tradition : null; }
+function wizGiftLineage() { const l = (R().lineages || []).find(x => x.id === (wiz.lineage || 'human')); return l && l.gift ? l : null; }
+function wizFacet() { return facetDef(wiz.facet); }
+function wizStats() {
+  const out = {}; const rules = (R().stat_rules || {}).creation || { facet_stat: 2, second: 1, third: 0 };
+  (R().stats || []).forEach(s => out[s.id] = rules.third);
+  const f = wizFacet(); if (f) out[f.stat] = rules.facet_stat;
+  if (wiz.second && wiz.second !== (f && f.stat)) out[wiz.second] = rules.second;
+  return out;
+}
+
+function wizardHtml() {
+  const steps = wizSteps();
+  if (!steps.some(s => s[0] === wiz.step)) wiz.step = 'review';
+  const idx = steps.findIndex(s => s[0] === wiz.step);
+  const body = { facet: stepFacet, stats: stepStats, class: stepClass, background: stepBackground, kit: stepKit,
+    magic: stepMagic, lineage: stepLineage, review: stepReview }[wiz.step]();
+  return `<div class="wizard">
+    <div class="panel"><h2>${isMM() ? 'Build a character' : 'Build your character'}</h2>
+      <p class="muted small">Pick a Facet, take a ready-made class or write your own, choose a past. The app keeps the numbers straight.</p>
+      <div class="stepper-nav">${steps.map(([k, l], i) => `<button data-wstep="${k}" class="${k === wiz.step ? 'on' : (i < idx ? 'done' : '')}">${i + 1}. ${l}</button>`).join('')}</div>
+      ${body}
+      <div class="wizard-foot"><button class="btn ghost" data-wprev ${idx === 0 ? 'disabled' : ''}>Back</button>
+        <span class="msg error" id="wiz-err"></span>
+        ${wiz.step === 'review' ? '<button class="btn primary big" data-wcreate>Create character</button>' : `<button class="btn primary" data-wnext>Next</button>`}</div>
+    </div></div>`;
+}
+
+function stepFacet() {
+  return `<h3>Which Facet are you?</h3><p class="small muted">Your Facet is what you are best at. Its stat starts at +2, and it sets your grit die (HP) and your class menu.</p>
+    <div class="choices">${(R().facets || []).map(f => {
+      const classes = (R().classes || []).filter(c => c.facet === f.id).map(c => c.name);
+      return `<button class="choice big ${wiz.facet === f.id ? 'on' : ''}" data-facet="${esc(f.id)}"><h4>${esc(f.name)}</h4>
+        <div class="desc">${esc(f.description)}</div>
+        <div class="small mt">Grit die <b>d${f.grit_die}</b> · ${f.tradition ? `can learn <b>${esc(cap(f.tradition))}</b>` : 'no casting'}</div>
+        <div class="tiny muted mt">${classes.map(esc).join(' · ')}</div></button>`;
+    }).join('')}</div>`;
+}
+
+function stepStats() {
+  const f = wizFacet();
+  if (!f) return '<p class="msg error">Pick a Facet first.</p>';
+  const stats = wizStats();
+  const others = (R().stats || []).filter(s => s.id !== f.stat);
+  const slots = R().slots || {};
+  return `<h3>Your stats</h3><p class="small muted">${esc(statName(f.stat))} is your Facet's stat: <b>+2</b>. Choose which of the others is <b>+1</b>; the last is +0.</p>
+    <div class="choices">${others.map(s => `<button class="choice ${wiz.second === s.id ? 'on' : ''}" data-second="${esc(s.id)}"><h4>${esc(s.name)} +1</h4><div class="desc">${esc(s.description)}</div></button>`).join('')}</div>
+    <div class="stats mt">${(R().stats || []).map(s => `<div class="stat"><div class="v">${signed(stats[s.id])}</div><div class="n">${esc(s.name)}</div></div>`).join('')}</div>
+    <div class="subtle small">HP at level 1: your grit die's maximum (${f.grit_die}) + Body (${signed(stats.body)}), before talents. Slots: ${slots.base || 10} + ${esc(statName(slots.plus_stat || 'body'))}.</div>`;
+}
+
+function talentChoiceField(id) {
+  if (id === 'weapon_master') {
+    const kinds = ((R().equipment || {}).weapon_kinds) || [];
+    return `<label>Weapon Master: which kind of weapon?</label><select data-wchoice="weapon_master">${kinds.map(k => `<option ${(wiz.talentChoices || {}).weapon_master === k ? 'selected' : ''}>${k}</option>`).join('')}</select>`;
   }
-  const picked = await selectDialog(
-    def.name || def.id,
-    def.choice_prompt || 'Choose an option.',
-    options);
-  if (picked === OTHER) {
-    return promptDialog('Field of Mastery', 'e.g. cartography, herbalism...', '');
+  return '';
+}
+
+function stepClass() {
+  const f = wizFacet();
+  if (!f) return '<p class="msg error">Pick a Facet first.</p>';
+  const presets = (R().classes || []).filter(c => c.facet === f.id);
+  if (!wiz.mode) wiz.mode = 'preset';
+  if (wiz.mode === 'preset' && !presets.some(c => c.id === wiz.classId)) wiz.classId = presets[0] && presets[0].id;
+  const tabs = `<div class="subtabs"><button data-wmode="preset" class="${wiz.mode === 'preset' ? 'on' : ''}">Ready-made class</button><button data-wmode="custom" class="${wiz.mode === 'custom' ? 'on' : ''}">Write your own</button></div>`;
+  if (wiz.mode === 'preset') {
+    const c = classDef(wiz.classId);
+    return `${tabs}<div class="choices">${presets.map(p => `<button class="choice ${p.id === wiz.classId ? 'on' : ''}" data-class="${esc(p.id)}"><h4>${esc(p.name)}</h4>
+        <div class="desc"><i>${esc(p.concept)}</i></div><div class="small mt">Knack: <b>${esc(p.knack)}</b></div>
+        <div class="small">Talents: ${p.talents.map(talentName).map(esc).join(', ')}</div>
+        <div class="tiny muted">Signature at level 3: ${esc(talentName(p.signature))}</div></button>`).join('')}</div>
+      ${c ? `<div class="panel mt"><h3>${esc(c.name)}'s talents</h3>${c.talents.map(id => { const t = talentDef(id); return t ? `<div class="talent"><div class="talent-top"><span class="talent-name">${esc(t.name)}</span><span class="tiny muted">${esc(useLabel(t.use))}</span></div><div class="talent-text">${esc(t.text)}</div></div>` : ''; }).join('')}
+        ${c.talents.map(talentChoiceField).join('')}</div>` : ''}`;
   }
-  return picked;
+  const cu = wiz.custom = wiz.custom || { name: '', concept: '', knack: '', talents: [], signature: '' };
+  const menu = (R().talents || []).filter(t => t.kind === 'talent' && onMenuOf(t, f.id));
+  const sigs = (R().talents || []).filter(t => t.kind === 'signature' && onMenuOf(t, f.id));
+  return `${tabs}<div class="two-col"><div>
+      <label>Class name</label><input type="text" data-wc="name" value="${esc(cu.name)}" maxlength="64" placeholder="e.g. Wandering Disciple">
+      <label>Concept (one sentence)</label><input type="text" data-wc="concept" value="${esc(cu.concept)}" maxlength="300" placeholder="I am…">
+      <label>Class knack</label><input type="text" data-wc="knack" value="${esc(cu.knack)}" maxlength="64" placeholder="A field you know: e.g. Motion and stillness">
+      <label>Signature you're working toward (level 3, optional)</label><select data-wc="signature"><option value="">Decide later</option>
+        ${sigs.map(s => `<option value="${esc(s.id)}" ${cu.signature === s.id ? 'selected' : ''}>${esc(s.name)}</option>`).join('')}</select>
+      ${cu.talents.map(talentChoiceField).join('')}
+    </div><div><div class="label">Two starting talents from the ${esc(f.name)} menu (${cu.talents.length}/2)</div>
+      ${menu.map(t => `<div class="talent choice ${cu.talents.includes(t.id) ? 'on' : ''}" data-wtalent="${esc(t.id)}" style="padding:.55rem .7rem">
+        <div class="talent-top"><span class="talent-name">${esc(t.name)}</span><span class="tiny muted">${esc(useLabel(t.use))}</span>${isCastingTalent(t) ? '<span class="chip magic">casting</span>' : ''}</div>
+        <div class="talent-text">${esc(t.text)}</div></div>`).join('')}</div></div>`;
 }
 
-// ---------------------------------------------------------------------------
-// Player: Character notes
-// ---------------------------------------------------------------------------
-function renderBuilderPlayerNotes() {
-  const textarea = document.getElementById('builder-player-notes');
-  if (!textarea || !state.character) return;
-  textarea.value = state.character.notes_player || '';
-}
-
-async function savePlayerNotes() {
-  if (!state.character || !state.sessionId) return;
-  const notes = document.getElementById('builder-player-notes').value;
-  const resp = await apiFetch('/api/characters/' + state.sessionId + '/' + state.playerName + '/notes', 'PUT', {
-    notes_player: notes,
-  });
-  if (resp.ok) {
-    const data = await resp.json();
-    state.character.notes_player = data.notes_player;
+function stepBackground() {
+  if (!wiz.bgMode) wiz.bgMode = 'list';
+  const tabs = `<div class="subtabs"><button data-wbg="list" class="${wiz.bgMode === 'list' ? 'on' : ''}">Pick one</button><button data-wbg="custom" class="${wiz.bgMode === 'custom' ? 'on' : ''}">Write your own</button></div>`;
+  const lin = (R().lineages || []).filter(l => l.playable !== false);
+  const lineage = lin.length > 1 ? `<label>Lineage</label><select data-wlineage>${lin.map(l => `<option value="${esc(l.id)}" ${(wiz.lineage || 'human') === l.id ? 'selected' : ''}>${esc(l.name)}</option>`).join('')}</select>` : '';
+  if (wiz.bgMode === 'list') {
+    const groups = {};
+    (R().backgrounds || []).forEach(b => (groups[b.facet] = groups[b.facet] || []).push(b));
+    return `${tabs}<p class="small muted">Your past gives you a background knack and a Specialty: one narrow thing where routine tasks just happen and risky ones are Easy. Any background suits any Facet.</p>
+      ${Object.entries(groups).map(([fid, list]) => `<div class="label">${esc((facetDef(fid) || {}).name || fid)}</div><div class="choices">${list.map(b =>
+        `<button class="choice ${wiz.bgId === b.id ? 'on' : ''}" data-bg="${esc(b.id)}"><h4>${esc(b.name)}</h4><div class="desc">${esc(b.specialty)}</div></button>`).join('')}</div>`).join('')}${lineage}`;
   }
+  const cb = wiz.customBg = wiz.customBg || { name: '', knack: '', specialty: '', description: '' };
+  return `${tabs}<div class="two-col"><div><label>Background name</label><input type="text" data-wbgf="name" value="${esc(cb.name)}" maxlength="64" placeholder="e.g. Lighthouse keeper's child">
+    <label>Background knack</label><input type="text" data-wbgf="knack" value="${esc(cb.knack)}" maxlength="64" placeholder="e.g. Ships and weather">
+    <label>Specialty (one narrow thing)</label><input type="text" data-wbgf="specialty" value="${esc(cb.specialty)}" maxlength="300" placeholder="e.g. Reads a coastline's tides and hazards at a glance"></div>
+    <div><label>Your history (optional)</label><textarea data-wbgf="description" maxlength="2000">${esc(cb.description)}</textarea>${lineage}</div></div>`;
 }
 
-// ---------------------------------------------------------------------------
-// MM: Enemy builder
-// ---------------------------------------------------------------------------
-/**
- * Score the stat line currently in the form.
- *
- * This used to carry its own copy of the MM1 Threat Rating formula in
- * JavaScript — and it had already drifted: its durability table bucketed Resolve
- * (<=4 -> 2, <=6 -> 3, ...) while the engine simply uses Resolve, so the preview
- * disagreed with the TR the server assigned on save. Duplicated rule logic is
- * the exact failure the Software-PHB sync policy forbids, so the engine scores
- * it now.
- */
-async function previewEnemyTR() {
-  const out = document.getElementById('builder-enemy-tr');
-  if (!out) return;
-
-  const resp = await apiFetch('/api/enemies/preview-tr', 'POST', {
-    tier: document.getElementById('builder-enemy-tier').value,
-    resolve: parseInt(document.getElementById('builder-enemy-resolve').value) || 0,
-    attack_modifier: parseInt(document.getElementById('builder-enemy-attack').value) || 0,
-    armor: document.getElementById('builder-enemy-armor').value,
-    techniques: document.getElementById('builder-enemy-techniques').value
-      .split(',').map(s => s.trim()).filter(Boolean),
-  });
-
-  if (!resp.ok) { out.textContent = ''; return; }
-  const { tr } = await resp.json();
-  const tier = document.getElementById('builder-enemy-tier').value;
-  const floors = { mook: 1, named: 8, boss: 12 };
-  out.textContent = `Threat Rating: ${tr}`
-    + (tr === floors[tier] ? ` (the ${tier} minimum)` : '');
+function stepKit() {
+  if (!wiz.kit) wiz.kit = wiz.mode === 'preset' && classDef(wiz.classId) ? classDef(wiz.classId).kit.slice() : [];
+  const items = R().items || [];
+  const stats = wizStats();
+  const slots = R().slots || {};
+  const total = (slots.base || 10) + (stats[slots.plus_stat || 'body'] || 0);
+  const used = wiz.kit.reduce((n, id) => n + ((itemDef(id) || {}).slots ?? 1), 0);
+  return `<h3>Your kit</h3><p class="small muted">Everything you carry takes slots (heavy armor and heavy weapons take two). ${wiz.mode === 'preset' ? 'This is your class kit: swap anything you like.' : 'Tap items to pack them.'}
+    Leave room: Wounds and Fatigue take slots too.</p>
+    <div class="row gap mb"><span class="slot-meter ${used > total ? 'over' : ''}">${used} / ${total} slots</span><span class="small muted">(${slots.base || 10} + ${esc(statName(slots.plus_stat || 'body'))}; talents may add more)</span></div>
+    <div class="catalog mb">${wiz.kit.map((id, i) => `<button data-kitrm="${i}" title="Remove">${esc((itemDef(id) || {}).name || id)} ✕</button>`).join('') || '<span class="empty">Nothing packed.</span>'}</div>
+    <div class="label">Add</div><div class="catalog">${items.map(it => `<button data-kitadd="${esc(it.id)}">+ ${esc(it.name)}${it.slots !== 1 ? ` (${it.slots})` : ''}${it.weapon ? ` · d${((R().equipment || {}).weapon_categories || {})[it.weapon]?.die || '?'}` : ''}</button>`).join('')}</div>`;
 }
 
-async function saveEnemy(ev) {
-  const name = document.getElementById('builder-enemy-name').value.trim();
-  if (!name) { notify('Give the enemy a name.', 'warn'); focusElement('builder-enemy-name'); return; }
+function stepMagic() {
+  const trad = wizTradition();
+  const doms = (R().magic_domains || []).filter(d => d.tradition === trad && !d.prismatic);
+  const m = wiz.magic = wiz.magic || { domain: '', workings: ['', ''] };
+  const wider = wizTalents().includes('wider_domain');
+  return `<h3>${esc(cap(trad))}</h3><p class="small muted">Magic is Domain + Intent + Scope. Pick your domain, then name two <b>signature workings</b>: the things you do so often they are one step Easier.</p>
+    <div class="choices">${doms.map(d => `<button class="choice ${m.domain === d.id ? 'on' : ''}" data-domain="${esc(d.id)}"><h4>${esc(d.name)}</h4><div class="desc">${esc(d.description)}</div></button>`).join('')}</div>
+    <div class="two-col mt"><div><label>Signature working 1</label><input type="text" data-wwork="0" value="${esc(m.workings[0])}" maxlength="200" placeholder="e.g. A sealing glyph"></div>
+      <div><label>Signature working 2</label><input type="text" data-wwork="1" value="${esc(m.workings[1])}" maxlength="200" placeholder="e.g. A warning rune"></div></div>
+    ${wider ? `<label>Wider Domain: your second domain</label><select data-wchoice="wider_domain"><option value="">Choose…</option>${doms.filter(d => d.id !== m.domain).map(d => `<option value="${esc(d.id)}" ${(wiz.talentChoices || {}).wider_domain === d.id ? 'selected' : ''}>${esc(d.name)}</option>`).join('')}</select>` : ''}`;
+}
 
-  // Editing keeps the original id so the save overwrites rather than forking a
-  // near-duplicate under a new slug.
-  const id = state.editingEnemyId || name.toLowerCase().replace(/[^a-z0-9]+/g, '_');
-  const techniques = document.getElementById('builder-enemy-techniques').value.split(',').map(s => s.trim()).filter(Boolean);
+function stepLineage() {
+  const lin = wizGiftLineage();
+  if (!lin) return '';
+  if (wiz.gifted === undefined) wiz.gifted = true;
+  const doms = (R().magic_domains || []).filter(d => !d.prismatic && (!(lin.gift_domains || []).length || lin.gift_domains.includes(d.id)));
+  return `<h3>${esc(lin.name)}</h3><p class="small muted">${esc(lin.description)}</p>
+    <label class="row gap" style="text-transform:none;letter-spacing:0"><input type="checkbox" data-wgifted ${wiz.gifted ? 'checked' : ''}> This character carries the gift</label>
+    ${wiz.gifted ? `<div class="subtle small mt">${esc(lin.gift)}</div>${lin.gift_domain_scope ? `<label>Gift domain (Minor workings only, cast with Soul)</label>
+      <select data-wgiftdom><option value="">Choose…</option>${doms.map(d => `<option value="${esc(d.id)}" ${wiz.giftDomain === d.id ? 'selected' : ''}>${esc(d.name)}</option>`).join('')}</select>` : ''}` : ''}`;
+}
 
-  const enemy = {
-    session_id: state.sessionId,
-    id: id,
-    name: name,
-    tier: document.getElementById('builder-enemy-tier').value,
-    resolve: parseInt(document.getElementById('builder-enemy-resolve').value) || 0,
-    attack_modifier: parseInt(document.getElementById('builder-enemy-attack').value) || 0,
-    armor: document.getElementById('builder-enemy-armor').value,
-    techniques: techniques,
-    special: document.getElementById('builder-enemy-special').value.trim() || null,
-    description: document.getElementById('builder-enemy-description').value.trim(),
-    tactics: document.getElementById('builder-enemy-tactics').value.trim(),
+function stepReview() {
+  const f = wizFacet(); const stats = wizStats();
+  const c = wiz.mode === 'custom' ? wiz.custom || {} : classDef(wiz.classId) || {};
+  const bg = wiz.bgMode === 'custom' ? wiz.customBg || {} : (R().backgrounds || []).find(b => b.id === wiz.bgId) || {};
+  return `<div class="two-col"><div><label>Character name</label><input type="text" data-wname value="${esc(wiz.name || '')}" maxlength="64" placeholder="What does the table call you?">
+    ${isMM() ? '<p class="small muted">Built by the MM, the character is filed under its own name.</p>' : ''}</div>
+    <div class="summary"><dl>
+      <dt>Facet</dt><dd>${esc(f ? f.name : '—')}</dd>
+      <dt>Stats</dt><dd>${(R().stats || []).map(s => `${esc(s.name)} ${signed(stats[s.id])}`).join(' · ')}</dd>
+      <dt>Class</dt><dd>${esc(c.name || '—')}${wiz.mode === 'custom' ? ' (custom)' : ''}</dd>
+      <dt>Knacks</dt><dd>${esc([c.knack, bg.knack].filter(Boolean).join(', ') || '—')}</dd>
+      <dt>Talents</dt><dd>${wizTalents().map(talentName).map(esc).join(', ') || '—'}</dd>
+      <dt>Background</dt><dd>${esc(bg.name || '—')}</dd>
+      <dt>Specialty</dt><dd>${esc(bg.specialty || '—')}</dd>
+      <dt>Kit</dt><dd>${(wiz.kit || (c.kit || [])).map(id => esc((itemDef(id) || {}).name || id)).join(', ') || '—'}</dd>
+      ${wizIsCaster() ? `<dt>Magic</dt><dd>${esc(domainName((wiz.magic || {}).domain) || '—')}: ${((wiz.magic || {}).workings || []).filter(Boolean).map(esc).join('; ')}</dd>` : ''}
+    </dl></div></div>`;
+}
+
+function wizCheck(step) {
+  if (step === 'facet' && !wiz.facet) return 'Pick a Facet.';
+  if (step === 'stats' && !wiz.second) return 'Choose your +1 stat.';
+  if (step === 'class') {
+    if (wiz.mode === 'custom') {
+      const c = wiz.custom || {};
+      if (!c.name || !c.concept || !c.knack) return 'A custom class needs a name, a concept and a knack.';
+      if ((c.talents || []).length !== 2) return 'Pick exactly two talents.';
+    }
+  }
+  if (step === 'background') {
+    if (wiz.bgMode === 'custom') { const b = wiz.customBg || {}; if (!b.name || !b.knack || !b.specialty) return 'A background needs a name, a knack and a Specialty.'; }
+    else if (!wiz.bgId) return 'Pick a background.';
+  }
+  if (step === 'magic') {
+    const m = wiz.magic || {};
+    if (!m.domain) return 'Pick your domain.';
+    if ((m.workings || []).filter(w => w && w.trim()).length !== 2) return 'Name two signature workings.';
+  }
+  return '';
+}
+
+function wireWizard(root) {
+  const rerender = () => { root.innerHTML = wizardHtml(); wireWizard(root); };
+  const steps = wizSteps().map(s => s[0]);
+  const go = dir => {
+    const i = steps.indexOf(wiz.step);
+    if (dir > 0) { const err = wizCheck(wiz.step); if (err) { $('#wiz-err').textContent = err; return; } }
+    wiz.step = steps[Math.max(0, Math.min(steps.length - 1, i + dir))];
+    rerender();
   };
-
-  await withPending(ev && ev.target, 'Saving...', async () => {
-    const resp = await apiFetch('/api/enemies/', 'POST', enemy);
-    if (resp.ok) {
-      const data = await resp.json();
-      state.enemyLibrary[data.enemy.id] = data.enemy;
-      renderBuilderEnemyLibrary();
-      renderBuilderEncounterEnemySelect();
-      updateSpawnEnemySelect();
-      notify(`${name} saved (TR ${data.enemy.tr}).`, 'success');
-      clearEnemyForm();
-    } else {
-      const err = await resp.json().catch(() => ({}));
-      notify(formatApiError(err.detail, 'Failed to save enemy.'), 'error');
-    }
+  $$('[data-wstep]', root).forEach(b => b.onclick = () => {
+    const target = steps.indexOf(b.dataset.wstep), cur = steps.indexOf(wiz.step);
+    for (let i = cur; i < target; i++) { const err = wizCheck(steps[i]); if (err) { wiz.step = steps[i]; rerender(); $('#wiz-err').textContent = err; return; } }
+    wiz.step = b.dataset.wstep; rerender();
   });
-}
-
-/**
- * Load a saved enemy back into the form. Without this, changing one stat meant
- * retyping the whole block and hoping the generated slug matched.
- */
-function editEnemy(enemyId) {
-  const enemy = state.enemyLibrary[enemyId];
-  if (!enemy) return;
-  state.editingEnemyId = enemyId;
-
-  document.getElementById('builder-enemy-name').value = enemy.name || '';
-  document.getElementById('builder-enemy-tier').value = enemy.tier || 'named';
-  document.getElementById('builder-enemy-resolve').value = enemy.resolve != null ? enemy.resolve : 0;
-  document.getElementById('builder-enemy-attack').value = enemy.attack_modifier || 0;
-  document.getElementById('builder-enemy-armor').value = enemy.armor || 'none';
-  document.getElementById('builder-enemy-techniques').value = (enemy.techniques || []).join(', ');
-  document.getElementById('builder-enemy-special').value = enemy.special || '';
-  document.getElementById('builder-enemy-description').value = enemy.description || '';
-  document.getElementById('builder-enemy-tactics').value = enemy.tactics || '';
-
-  updateEnemyFormMode();
-  previewEnemyTR();
-  focusElement('builder-enemy-name');
-}
-
-function clearEnemyForm() {
-  state.editingEnemyId = null;
-  ['builder-enemy-name', 'builder-enemy-techniques', 'builder-enemy-special',
-   'builder-enemy-description', 'builder-enemy-tactics'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = '';
+  const n = $('[data-wnext]', root); if (n) n.onclick = () => go(1);
+  const p = $('[data-wprev]', root); if (p) p.onclick = () => go(-1);
+  $$('[data-facet]', root).forEach(b => b.onclick = () => {
+    if (wiz.facet !== b.dataset.facet) { wiz.facet = b.dataset.facet; wiz.second = null; wiz.classId = null; wiz.kit = null; wiz.custom = null; wiz.magic = null; wiz.talentChoices = {}; }
+    rerender();
   });
-  document.getElementById('builder-enemy-tier').value = 'named';
-  document.getElementById('builder-enemy-resolve').value = 4;
-  document.getElementById('builder-enemy-attack').value = 0;
-  document.getElementById('builder-enemy-armor').value = 'none';
-  updateEnemyFormMode();
-  previewEnemyTR();
+  $$('[data-second]', root).forEach(b => b.onclick = () => { wiz.second = b.dataset.second; wiz.kit = wiz.kit; rerender(); });
+  $$('[data-wmode]', root).forEach(b => b.onclick = () => { wiz.mode = b.dataset.wmode; wiz.kit = null; rerender(); });
+  $$('[data-class]', root).forEach(b => b.onclick = () => { wiz.classId = b.dataset.class; wiz.kit = null; wiz.magic = null; rerender(); });
+  $$('[data-wc]', root).forEach(el => el.oninput = el.onchange = () => { wiz.custom[el.dataset.wc] = el.value; });
+  $$('[data-wtalent]', root).forEach(el => el.onclick = () => {
+    const t = wiz.custom.talents, id = el.dataset.wtalent;
+    if (t.includes(id)) t.splice(t.indexOf(id), 1); else if (t.length < 2) t.push(id); else { t.shift(); t.push(id); }
+    rerender();
+  });
+  $$('[data-wchoice]', root).forEach(el => {
+    wiz.talentChoices = wiz.talentChoices || {};
+    if (!wiz.talentChoices[el.dataset.wchoice] && el.value) wiz.talentChoices[el.dataset.wchoice] = el.value;
+    el.onchange = () => { wiz.talentChoices[el.dataset.wchoice] = el.value; };
+  });
+  $$('[data-wbg]', root).forEach(b => b.onclick = () => { wiz.bgMode = b.dataset.wbg; rerender(); });
+  $$('[data-bg]', root).forEach(b => b.onclick = () => { wiz.bgId = b.dataset.bg; rerender(); });
+  $$('[data-wbgf]', root).forEach(el => el.oninput = () => { wiz.customBg[el.dataset.wbgf] = el.value; });
+  const lin = $('[data-wlineage]', root); if (lin) lin.onchange = () => { wiz.lineage = lin.value; wiz.gifted = undefined; rerender(); };
+  $$('[data-kitrm]', root).forEach(b => b.onclick = () => { wiz.kit.splice(Number(b.dataset.kitrm), 1); rerender(); });
+  $$('[data-kitadd]', root).forEach(b => b.onclick = () => { wiz.kit.push(b.dataset.kitadd); rerender(); });
+  $$('[data-domain]', root).forEach(b => b.onclick = () => { wiz.magic.domain = b.dataset.domain; rerender(); });
+  $$('[data-wwork]', root).forEach(el => el.oninput = () => { wiz.magic.workings[Number(el.dataset.wwork)] = el.value; });
+  const gifted = $('[data-wgifted]', root); if (gifted) gifted.onchange = () => { wiz.gifted = gifted.checked; rerender(); };
+  const gd = $('[data-wgiftdom]', root); if (gd) gd.onchange = () => { wiz.giftDomain = gd.value; };
+  const nm = $('[data-wname]', root); if (nm) nm.oninput = () => { wiz.name = nm.value; };
+  const cr = $('[data-wcreate]', root); if (cr) cr.onclick = createCharacter;
 }
 
-function updateEnemyFormMode() {
-  const title = document.getElementById('builder-enemy-form-title');
-  const cancel = document.getElementById('builder-enemy-cancel-edit');
-  const editing = !!state.editingEnemyId;
-  if (title) title.textContent = editing ? 'Editing: ' + state.editingEnemyId : 'Enemy Builder';
-  if (cancel) cancel.classList.toggle('hidden', !editing);
+async function createCharacter() {
+  for (const s of wizSteps().map(x => x[0])) { const err = wizCheck(s); if (err) { wiz.step = s; renderBuild(); $('#wiz-err').textContent = err; return; } }
+  if (!(wiz.name || '').trim()) { $('#wiz-err').textContent = 'Give your character a name.'; return; }
+  const body = { session_id: state.sessionId, character_name: wiz.name.trim(), facet: wiz.facet, second_stat: wiz.second,
+    lineage: wiz.lineage || 'human', talent_choices: {}, kit: wiz.kit || null };
+  const talents = wizTalents();
+  talents.forEach(id => { if ((wiz.talentChoices || {})[id]) body.talent_choices[id] = wiz.talentChoices[id]; });
+  if (talents.includes('weapon_master') && !body.talent_choices.weapon_master) body.talent_choices.weapon_master = ((R().equipment || {}).weapon_kinds || [])[0];
+  if (wiz.mode === 'custom') body.custom_class = { name: wiz.custom.name, concept: wiz.custom.concept, knack: wiz.custom.knack, talents: wiz.custom.talents, kit: wiz.kit || [], signature: wiz.custom.signature || null };
+  else body.class_id = wiz.classId;
+  if (wiz.bgMode === 'custom') body.custom_background = wiz.customBg; else body.background_id = wiz.bgId;
+  if (wizIsCaster()) body.magic = { domain: wiz.magic.domain, signature_workings: wiz.magic.workings.map(w => w.trim()) };
+  if (wizGiftLineage()) { body.gifted = !!wiz.gifted; if (wiz.gifted && wiz.giftDomain) body.gift_domain = wiz.giftDomain; }
+  const resp = await apiFetch('/api/characters/', 'POST', body);
+  if (!resp.ok) { $('#wiz-err').textContent = formatApiError((await resp.json()).detail, 'The character could not be made.'); return; }
+  const d = await resp.json();
+  if (isMM()) notify(`${d.character.name} is ready.`, 'success');
+  Object.keys(wiz).forEach(k => delete wiz[k]); wiz.step = 'facet';
+  if (isMM()) { ui.mmBuild = 'chars'; renderBuild(); }
 }
 
-function renderBuilderEnemyLibrary() {
-  const container = document.getElementById('builder-enemy-library-list');
-  if (!container) return;
+// =====================================================================
+// A built character: summary, export, import
+// =====================================================================
+function builtHtml(me) {
+  return `<div class="wizard"><div class="panel"><h2>${esc(me.name)}</h2>
+    <p class="muted">Level ${me.level} ${esc((me.class || {}).name || '')}. Your sheet lives on the Play tab; gear and notes live in Tools.</p>
+    <p class="small muted">When the Mirror Master calls a level-up at the end of a session, your pick appears here.</p>
+    <div class="row gap"><button class="btn primary" data-go-play>Open my sheet</button><button class="btn" data-export>Download .fof</button></div></div>
+    <div class="panel"><h3>Level track</h3>${levelTrackHtml(me)}</div></div>`;
+}
 
-  const entries = Object.entries(state.enemyLibrary);
-  if (entries.length === 0) {
-    container.innerHTML = '<div class="empty-state">No enemies saved yet. Build one above — '
-      + 'saved enemies can be spawned into the tracker from the Play tab and added to Encounters.</div>';
-    return;
+function levelTrackHtml(me) {
+  const adv = R().advancement || {};
+  const rows = [];
+  for (let l = 2; l <= (adv.max_level || 10); l++) {
+    const bits = [l === adv.signature_level ? 'your signature' : 'a talent, or improve one'];
+    if ((adv.stat_increase_levels || []).includes(l)) bits.push('+1 to a stat');
+    if (me.magic && (adv.signature_working_levels || []).includes(l)) bits.push('another signature working');
+    const db = (adv.damage_bonus || []).find(d => d.level === l);
+    if (db) bits.push(`+${db.bonus} damage`);
+    rows.push(`<tr class="${l <= me.level ? 'muted' : ''}"><td>${l}</td><td>${bits.join(' · ')}</td></tr>`);
   }
-
-  container.innerHTML = '';
-  entries.forEach(([id, enemy]) => {
-    const div = document.createElement('div');
-    div.className = 'library-row';
-    div.innerHTML = `
-      <div>
-        <strong>${escapeHtml(enemy.name)}</strong>
-        <span class="library-meta">${escapeHtml(enemy.tier)} · TR ${enemy.tr || '?'}
-          · Resolve ${enemy.resolve != null ? enemy.resolve : 0}
-          ${enemy.armor && enemy.armor !== 'none' ? '· ' + escapeHtml(enemy.armor) + ' armor' : ''}</span>
-        ${enemy.description ? `<div class="library-desc">${escapeHtml(enemy.description)}</div>` : ''}
-      </div>
-      <span class="btn-row" style="margin:0;"></span>`;
-    const actions = div.querySelector('.btn-row');
-
-    const spawn = document.createElement('button');
-    spawn.className = 'btn btn-secondary btn-sm';
-    spawn.textContent = 'Spawn';
-    spawn.title = 'Put one into the active tracker';
-    spawn.onclick = () => spawnEnemyById(id);
-    actions.appendChild(spawn);
-
-    const edit = document.createElement('button');
-    edit.className = 'btn btn-secondary btn-sm';
-    edit.textContent = 'Edit';
-    edit.onclick = () => editEnemy(id);
-    actions.appendChild(edit);
-
-    const del = document.createElement('button');
-    del.className = 'btn btn-secondary btn-sm';
-    del.textContent = 'Delete';
-    del.onclick = () => deleteEnemy(id);
-    actions.appendChild(del);
-
-    container.appendChild(div);
-  });
+  return `<table class="t"><tr><th>Level</th><th>You gain HP, plus</th></tr>${rows.join('')}</table>`;
 }
 
-function spawnEnemyById(enemyId) {
-  sendWS({ type: 'spawn_enemy', enemy_id: enemyId });
-  notify(`${(state.enemyLibrary[enemyId] || {}).name || enemyId} added to the tracker on the Play tab.`, 'success');
+function wireBuilt(root, me) {
+  $('[data-go-play]', root).onclick = () => switchTab('play');
+  $('[data-export]', root).onclick = () => exportCharacter(me.player_name);
 }
 
-async function deleteEnemy(enemyId) {
-  const enemy = state.enemyLibrary[enemyId];
-  const ok = await confirmDialog(
-    'Delete this enemy?',
-    `"${enemy ? enemy.name : enemyId}" is removed from the library. Encounters that reference it will no longer resolve.`,
-    'Delete');
-  if (!ok) return;
+async function exportCharacter(player) {
+  const resp = await apiFetch(`/api/characters/${state.sessionId}/${encodeURIComponent(player)}/export`);
+  if (!resp.ok) return notify('Export failed.', 'error');
+  const blob = await resp.blob();
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `${slugify(charName(player)) || 'character'}.fof`;
+  a.click();
+}
 
-  const resp = await apiFetch('/api/enemies/' + state.sessionId + '/' + enemyId, 'DELETE');
-  if (resp.ok) {
-    delete state.enemyLibrary[enemyId];
-    if (state.editingEnemyId === enemyId) clearEnemyForm();
-    renderBuilderEnemyLibrary();
-    renderBuilderEncounterEnemySelect();
-    updateSpawnEnemySelect();
-    notify('Enemy deleted.', 'success');
+// =====================================================================
+// Level up
+// =====================================================================
+function levelUpHtml(me) {
+  const adv = R().advancement || {};
+  const next = me.level + 1;
+  const f = facetDef(me.facet);
+  const sigLevel = next === adv.signature_level;
+  const statUp = (adv.stat_increase_levels || []).includes(next);
+  const workingUp = me.magic && (adv.signature_working_levels || []).includes(next);
+  const held = new Set((me.talents || []).map(t => t.id));
+  let pick = '';
+  if (sigLevel) {
+    const sigs = (R().talents || []).filter(t => t.kind === 'signature' && onMenuOf(t, me.facet));
+    const planned = (classDef((me.class || {}).id) || {}).signature;
+    if (!ui.lvTalent && planned) ui.lvTalent = planned;
+    pick = `<h3>Level ${next}: your signature</h3><p class="small muted">The class commits. From here on, rebuilding is no longer free.</p>
+      <div class="choices">${sigs.map(t => `<button class="choice ${ui.lvTalent === t.id ? 'on' : ''}" data-lvt="${esc(t.id)}"><h4>${esc(t.name)}${t.id === planned ? ' <span class="chip gold">your class</span>' : ''}</h4><div class="desc">${esc(t.text)}</div></button>`).join('')}</div>
+      ${ui.lvTalent === 'arcane_mastery' && me.magic ? `<label>Arcane Mastery: which signature working?</label><select data-ui="lvChoice">${me.magic.signature_workings.map(w => `<option ${uiv('lvChoice') === w ? 'selected' : ''}>${esc(w)}</option>`).join('')}</select>` : ''}
+      ${ui.lvTalent === 'polymath' ? `<label>Polymath: two talents from any menu</label>${[0, 1].map(i => `<select data-ui="poly${i}">${(R().talents || []).filter(t => t.kind === 'talent' && !isCastingTalent(t) && !held.has(t.id)).map(t => `<option value="${esc(t.id)}" ${uiv('poly' + i) === t.id ? 'selected' : ''}>${esc(t.name)} (${esc(t.facet)})</option>`).join('')}</select>`).join('')}` : ''}`;
   } else {
-    notify('Failed to delete enemy.', 'error');
+    const kind = uiv('lvKind', 'talent');
+    const menu = (R().talents || []).filter(t => t.kind === 'talent' && !held.has(t.id));
+    const own = menu.filter(t => onMenuOf(t, me.facet));
+    const other = menu.filter(t => !onMenuOf(t, me.facet) && !isCastingTalent(t));
+    const improvable = (me.talents || []).filter(t => !t.improved && (talentDef(t.id) || {}).improved);
+    const card = (t, attr) => `<button class="choice ${ui.lvTalent === t.id ? 'on' : ''}" ${attr}="${esc(t.id)}"><h4>${esc(t.name)}</h4><div class="desc">${esc(kind === 'improve' ? t.improved : t.text)}</div></button>`;
+    pick = `<h3>Level ${next}: your pick</h3>${segmented('lvKind', [{ value: 'talent', label: 'A new talent' }, { value: 'improve', label: 'Improve a talent' }], kind)}
+      ${kind === 'talent' ? `<div class="label">${esc(f ? f.name : '')} menu</div><div class="choices">${own.map(t => card(t, 'data-lvt')).join('') || '<div class="empty">You hold every talent on your menu.</div>'}</div>
+        <details class="mt"><summary class="small muted">Another Facet's talent (needs a teacher found in play)</summary>
+          <label class="row gap" style="text-transform:none;letter-spacing:0"><input type="checkbox" data-ui="lvTeacher" ${uiv('lvTeacher') ? 'checked' : ''}> We found a teacher in play</label>
+          <div class="choices mt">${other.map(t => card(t, 'data-lvt')).join('')}</div></details>`
+      : `<div class="choices mt">${improvable.map(s => card(talentDef(s.id), 'data-lvt')).join('') || '<div class="empty">Nothing to improve yet.</div>'}</div>`}
+      ${ui.lvTalent === 'weapon_master' && kind === 'talent' ? `<label>Weapon kind</label><select data-ui="lvChoice">${((R().equipment || {}).weapon_kinds || []).map(k => `<option ${uiv('lvChoice') === k ? 'selected' : ''}>${k}</option>`).join('')}</select>` : ''}
+      ${ui.lvTalent === 'wider_domain' && kind === 'talent' && me.magic ? `<label>Second domain</label><select data-ui="lvChoice">${(R().magic_domains || []).filter(d => d.tradition === me.magic.tradition && !d.prismatic && !me.magic.domains.includes(d.id)).map(d => `<option value="${esc(d.id)}" ${uiv('lvChoice') === d.id ? 'selected' : ''}>${esc(d.name)}</option>`).join('')}</select>` : ''}`;
   }
+  const grit = f ? f.grit_die : 6, avg = f ? f.grit_average : 4;
+  return `<div class="wizard"><div class="panel"><div class="banner gold"><div class="grow"><h3>Level ${me.level} → ${next}</h3><div class="small">The Mirror Master called it. Choose, then confirm.</div></div></div>
+    ${pick}
+    ${statUp ? `<div class="label">Level ${next} also raises a stat by 1 (maximum ${(R().stat_rules || {}).maximum || 3})</div>${segmented('lvStat', (R().stats || []).map(s => ({ value: s.id, label: `${s.name} ${signed(me.stats[s.id])}`, disabled: me.stats[s.id] >= ((R().stat_rules || {}).maximum || 3) })), uiv('lvStat'))}` : ''}
+    ${workingUp ? `<label>Name another signature working</label><input type="text" data-ui="lvWorking" value="${inputVal('lvWorking')}" maxlength="200">` : ''}
+    <div class="label">HP</div>${segmented('lvHp', [{ value: 'average', label: `Take the average (${avg})` }, { value: 'roll', label: `Roll the d${grit}` }], uiv('lvHp', 'average'))}
+    <div class="wizard-foot"><span class="msg error" id="lv-err"></span><button class="btn primary big" data-lvgo>Level up</button></div></div></div>`;
 }
 
-// ---------------------------------------------------------------------------
-// MM: Encounter builder
-// ---------------------------------------------------------------------------
-function renderBuilderEncounterEnemySelect() {
-  const select = document.getElementById('builder-encounter-add-enemy');
-  if (!select) return;
-  select.innerHTML = '<option value="">-- add enemy --</option>';
-  Object.entries(state.enemyLibrary).forEach(([id, enemy]) => {
-    const opt = document.createElement('option');
-    opt.value = id;
-    opt.textContent = enemy.name + ' (TR ' + (enemy.tr || '?') + ')';
-    select.appendChild(opt);
-  });
-}
-
-function addEncounterEnemy() {
-  const select = document.getElementById('builder-encounter-add-enemy');
-  const enemyId = select ? select.value : '';
-  if (!enemyId) { notify('Pick an enemy to add.', 'warn'); return; }
-  addEncounterEnemyRow(enemyId, 1);
-  updateEncounterBudget();
-}
-
-function addEncounterEnemyRow(enemyId, count) {
-  const container = document.getElementById('builder-encounter-enemies');
-  const enemy = state.enemyLibrary[enemyId];
-  if (!container || !enemy) return;
-
-  const div = document.createElement('div');
-  div.className = 'encounter-enemy-row';
-  div.dataset.enemyId = enemyId;
-  div.innerHTML = `
-    <span>${escapeHtml(enemy.name)}
-      <span class="library-meta">${escapeHtml(enemy.tier)} · TR ${enemy.tr || '?'}</span></span>
-    <div style="display:flex;align-items:center;gap:6px;">
-      <label style="margin:0;font-size:11px;">Count</label>
-      <input type="number" class="encounter-enemy-count" value="${count || 1}" min="1" max="20"
-             style="width:56px;padding:4px;margin:0;" oninput="updateEncounterBudget()">
-      <button class="btn btn-secondary btn-sm" style="padding:2px 8px;min-height:24px;font-size:11px;"
-              onclick="this.closest('.encounter-enemy-row').remove(); updateEncounterBudget();">×</button>
-    </div>`;
-  container.appendChild(div);
-}
-
-/**
- * Live encounter readout.
- *
- * The `builder-encounter-budget` element existed but nothing ever wrote to it.
- * Actor count is the real difficulty dial in v0.3 — the TR total is only a rough
- * ordering check — so both are shown, with the actor count first.
- */
-function updateEncounterBudget() {
-  const el = document.getElementById('builder-encounter-budget');
-  if (!el) return;
-
-  let totalTR = 0, mooks = 0, actors = 0;
-  document.querySelectorAll('.encounter-enemy-row').forEach(row => {
-    const enemy = state.enemyLibrary[row.dataset.enemyId];
-    const count = parseInt(row.querySelector('.encounter-enemy-count').value) || 1;
-    if (!enemy) return;
-    totalTR += (enemy.tr || 0) * count;
-    if (enemy.tier === 'mook') mooks += count; else actors += count;
-  });
-
-  if (totalTR === 0 && mooks === 0) {
-    el.innerHTML = '<span style="color:var(--text-dim);">Add enemies to see the difficulty readout.</span>';
-    return;
-  }
-
-  el.innerHTML = `
-    <div><strong style="color:var(--gold);">${actors}</strong> Named/Boss actor${actors === 1 ? '' : 's'}
-      · <strong>${mooks}</strong> Mook${mooks === 1 ? '' : 's'} · total TR ${totalTR}
-      <span id="builder-encounter-band" style="margin-left:8px;"></span></div>
-    <div style="color:var(--text-dim);margin-top:2px;">Difficulty tracks the number of Named/Boss actors, not
-      total TR. A Mook swarm on its own is never dangerous. For a 3-character party: 3 Named + 1 Mook is
-      Standard; add 2 Mooks for Hard; add 3, or use 4 Named + 1 Mook, for Deadly.</div>`;
-
-  // T6.2 (K-3): the live band comes from the server (compute_band via
-  // /api/encounters/preview_band) — this file never carries its own copy of
-  // the Recipe-Table logic. Debounced: count inputs fire per keystroke.
-  clearTimeout(updateEncounterBudget._bandTimer);
-  updateEncounterBudget._bandTimer = setTimeout(fetchEncounterBandPreview, 250);
-}
-
-async function fetchEncounterBandPreview() {
-  const el = document.getElementById('builder-encounter-band');
-  if (!el) return;
-  const enemies = [];
-  document.querySelectorAll('.encounter-enemy-row').forEach(row => {
-    enemies.push({
-      enemy_id: row.dataset.enemyId,
-      count: parseInt(row.querySelector('.encounter-enemy-count').value) || 1,
-    });
-  });
-  if (enemies.length === 0) { el.innerHTML = ''; return; }
-  try {
-    const resp = await apiFetch('/api/encounters/preview_band', 'POST', {
-      session_id: state.sessionId, enemies: enemies,
-    });
-    if (!resp.ok) { el.innerHTML = ''; return; }
-    const data = await resp.json();
-    el.innerHTML = renderBandChip(data.band);
-  } catch (e) {
-    el.innerHTML = '';
-  }
-}
-
-async function saveEncounter(ev) {
-  const name = document.getElementById('builder-encounter-name').value.trim();
-  if (!name) { notify('Give the encounter a name.', 'warn'); focusElement('builder-encounter-name'); return; }
-
-  const id = state.editingEncounterId || name.toLowerCase().replace(/[^a-z0-9]+/g, '_');
-  const enemies = [];
-  document.querySelectorAll('.encounter-enemy-row').forEach(row => {
-    enemies.push({
-      enemy_id: row.dataset.enemyId,
-      count: parseInt(row.querySelector('.encounter-enemy-count').value) || 1,
-    });
-  });
-
-  const laterals = document.getElementById('builder-encounter-laterals').value.split('\n').map(s => s.trim()).filter(Boolean);
-
-  const encounter = {
-    session_id: state.sessionId,
-    id: id,
-    name: name,
-    difficulty: document.getElementById('builder-encounter-difficulty').value,
-    environment: document.getElementById('builder-encounter-environment').value.trim(),
-    description: document.getElementById('builder-encounter-description').value.trim(),
-    enemies: enemies,
-    lateral_solutions: laterals,
-  };
-
-  await withPending(ev && ev.target, 'Saving...', async () => {
-    const resp = await apiFetch('/api/encounters/', 'POST', encounter);
-    if (resp.ok) {
-      const data = await resp.json();
-      state.encounterLibrary[data.encounter.id] = data.encounter;
-      renderBuilderEncounterLibrary();
-      notify(`Encounter "${name}" saved.`, 'success');
-      clearEncounterForm();
-    } else {
-      const err = await resp.json().catch(() => ({}));
-      notify(formatApiError(err.detail, 'Failed to save encounter.'), 'error');
-    }
-  });
-}
-
-/**
- * The encounter library.
- *
- * Encounters could previously be saved and never seen again — nothing rendered,
- * loaded, ran, or deleted them, so the Encounter Builder was a write-only form.
- * "Run" is the point of the whole feature: it spawns every enemy in the recipe
- * into the live tracker in one action.
- */
-function renderBuilderEncounterLibrary() {
-  const container = document.getElementById('builder-encounter-library-list');
-  if (!container) return;
-
-  const entries = Object.entries(state.encounterLibrary);
-  if (entries.length === 0) {
-    container.innerHTML = '<div class="empty-state">No encounters saved yet. Build one below, '
-      + 'then Run it to drop every enemy into the tracker at once.</div>';
-    return;
-  }
-
-  container.innerHTML = '';
-  entries.forEach(([id, enc]) => {
-    const roster = (enc.enemies || []).map(e => {
-      const name = (state.enemyLibrary[e.enemy_id] || {}).name || e.enemy_id;
-      return e.count > 1 ? `${e.count}× ${name}` : name;
-    }).join(', ');
-
-    const div = document.createElement('div');
-    div.className = 'library-row';
-    div.innerHTML = `
-      <div>
-        <strong>${escapeHtml(enc.name)}</strong>
-        <span class="library-meta">${escapeHtml(enc.difficulty || 'standard')}
-          ${enc.environment ? '· ' + escapeHtml(enc.environment) : ''}</span>
-        ${roster ? `<div class="library-desc">${escapeHtml(roster)}</div>`
-                 : '<div class="library-desc" style="color:var(--failure);">No enemies in this encounter.</div>'}
-      </div>
-      <span class="btn-row" style="margin:0;"></span>`;
-    const actions = div.querySelector('.btn-row');
-
-    const run = document.createElement('button');
-    run.className = 'btn btn-primary btn-sm';
-    run.textContent = 'Run';
-    run.title = 'Spawn every enemy in this encounter into the tracker';
-    run.disabled = !(enc.enemies || []).length;
-    run.onclick = () => runEncounter(id);
-    actions.appendChild(run);
-
-    const edit = document.createElement('button');
-    edit.className = 'btn btn-secondary btn-sm';
-    edit.textContent = 'Edit';
-    edit.onclick = () => editEncounter(id);
-    actions.appendChild(edit);
-
-    const del = document.createElement('button');
-    del.className = 'btn btn-secondary btn-sm';
-    del.textContent = 'Delete';
-    del.onclick = () => deleteEncounter(id);
-    actions.appendChild(del);
-
-    container.appendChild(div);
-  });
-}
-
-async function runEncounter(encounterId) {
-  const enc = state.encounterLibrary[encounterId];
-  if (!enc) return;
-
-  const missing = (enc.enemies || []).filter(e => !state.enemyLibrary[e.enemy_id]);
-  if (missing.length) {
-    notify(`Cannot run: ${missing.map(m => m.enemy_id).join(', ')} no longer in the enemy library.`, 'error');
-    return;
-  }
-
-  const total = (enc.enemies || []).reduce((n, e) => n + (e.count || 1), 0);
-  const ok = await confirmDialog(
-    `Run "${enc.name}"?`,
-    `${total} enem${total === 1 ? 'y' : 'ies'} join the active tracker on the Play tab.`,
-    'Run Encounter');
-  if (!ok) return;
-
-  (enc.enemies || []).forEach(entry => {
-    const base = (state.enemyLibrary[entry.enemy_id] || {}).name || entry.enemy_id;
-    const count = entry.count || 1;
-    for (let i = 0; i < count; i++) {
-      sendWS({
-        type: 'spawn_enemy',
-        enemy_id: entry.enemy_id,
-        instance_name: count > 1 ? `${base} ${i + 1}` : undefined,
-      });
-    }
-  });
-  notify(`"${enc.name}" is on the board. Switch to Play to run it.`, 'success');
-}
-
-function editEncounter(encounterId) {
-  const enc = state.encounterLibrary[encounterId];
-  if (!enc) return;
-  state.editingEncounterId = encounterId;
-
-  document.getElementById('builder-encounter-name').value = enc.name || '';
-  document.getElementById('builder-encounter-difficulty').value = enc.difficulty || 'standard';
-  document.getElementById('builder-encounter-environment').value = enc.environment || '';
-  document.getElementById('builder-encounter-description').value = enc.description || '';
-  document.getElementById('builder-encounter-laterals').value = (enc.lateral_solutions || []).join('\n');
-
-  const container = document.getElementById('builder-encounter-enemies');
-  container.innerHTML = '';
-  (enc.enemies || []).forEach(e => addEncounterEnemyRow(e.enemy_id, e.count || 1));
-
-  updateEncounterFormMode();
-  updateEncounterBudget();
-  focusElement('builder-encounter-name');
-}
-
-function clearEncounterForm() {
-  state.editingEncounterId = null;
-  ['builder-encounter-name', 'builder-encounter-environment',
-   'builder-encounter-description', 'builder-encounter-laterals'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = '';
-  });
-  document.getElementById('builder-encounter-difficulty').value = 'standard';
-  document.getElementById('builder-encounter-enemies').innerHTML = '';
-  updateEncounterFormMode();
-  updateEncounterBudget();
-}
-
-function updateEncounterFormMode() {
-  const title = document.getElementById('builder-encounter-form-title');
-  const cancel = document.getElementById('builder-encounter-cancel-edit');
-  const editing = !!state.editingEncounterId;
-  if (title) title.textContent = editing ? 'Editing: ' + state.editingEncounterId : 'Encounter Builder';
-  if (cancel) cancel.classList.toggle('hidden', !editing);
-}
-
-async function deleteEncounter(encounterId) {
-  const enc = state.encounterLibrary[encounterId];
-  const ok = await confirmDialog(
-    'Delete this encounter?',
-    `"${enc ? enc.name : encounterId}" is removed. The enemies in it stay in the enemy library.`,
-    'Delete');
-  if (!ok) return;
-
-  const resp = await apiFetch('/api/encounters/' + state.sessionId + '/' + encounterId, 'DELETE');
-  if (resp.ok) {
-    delete state.encounterLibrary[encounterId];
-    if (state.editingEncounterId === encounterId) clearEncounterForm();
-    renderBuilderEncounterLibrary();
-    notify('Encounter deleted.', 'success');
-  } else {
-    notify('Failed to delete encounter.', 'error');
-  }
-}
-
-// ---------------------------------------------------------------------------
-// MM: Campaign notes
-//
-// These were written to sessionStorage and never read back — and logout() clears
-// sessionStorage anyway, so the MM's notes vanished on reload. localStorage
-// keyed by session survives both, and the field is now loaded on tab init.
-// ---------------------------------------------------------------------------
-function campaignNotesKey() {
-  return 'facets_campaign_notes_' + state.sessionId;
-}
-
-function renderBuilderCampaignNotes() {
-  const el = document.getElementById('builder-campaign-notes');
-  if (!el || el.dataset.loaded === '1') return;
-  try {
-    el.value = localStorage.getItem(campaignNotesKey())
-      || sessionStorage.getItem(campaignNotesKey())  // migrate any pre-existing draft
-      || '';
-  } catch (e) { /* storage disabled — the textarea still works for this sitting */ }
-  el.dataset.loaded = '1';
-
-  // Autosave on idle so a note is never lost to a mistimed reload.
-  let timer = null;
-  el.oninput = () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => saveCampaignNotes(true), 800);
+function wireLevelUp(root, me) {
+  $$('[data-lvt]', root).forEach(b => b.onclick = () => { ui.lvTalent = b.dataset.lvt; ui.lvChoice = undefined; renderBuild(); });
+  $('[data-lvgo]', root).onclick = () => {
+    const adv = R().advancement || {};
+    const next = me.level + 1;
+    const sig = next === adv.signature_level;
+    if (!ui.lvTalent) { $('#lv-err').textContent = 'Choose your pick.'; return; }
+    const sel = $('[data-ui="lvChoice"]', root);
+    const msg = { type: 'level_pick', kind: sig ? 'signature' : uiv('lvKind', 'talent'), talent_id: ui.lvTalent,
+      choice: sel ? sel.value : null, teacher: !!ui.lvTeacher, hp: uiv('lvHp', 'average') };
+    if ((adv.stat_increase_levels || []).includes(next)) msg.stat = ui.lvStat || null;
+    if (me.magic && (adv.signature_working_levels || []).includes(next)) msg.signature_working = ui.lvWorking || '';
+    if (ui.lvTalent === 'polymath') msg.extra_talents = [0, 1].map(i => ($(`[data-ui="poly${i}"]`, root) || {}).value);
+    send(msg);
+    ['lvTalent', 'lvChoice', 'lvStat', 'lvWorking', 'lvTeacher'].forEach(k => delete ui[k]);
   };
 }
 
-function saveCampaignNotes(silent) {
-  const notes = document.getElementById('builder-campaign-notes').value;
-  try {
-    localStorage.setItem(campaignNotesKey(), notes);
-    const stamp = document.getElementById('builder-campaign-notes-status');
-    if (stamp) stamp.textContent = 'Saved to this browser.';
-    if (!silent) notify('Campaign notes saved to this browser.', 'success');
-  } catch (e) {
-    notify('Could not save notes — browser storage is unavailable.', 'error');
+function showLevelErrors(errors) {
+  const el = $('#lv-err');
+  if (el) el.textContent = errors.join(' ');
+  else notify(errors.join(' '), 'error');
+}
+
+// =====================================================================
+// Mirror Master: monster-card builder, library, characters
+// =====================================================================
+function mmBuildHtml() {
+  const sub = uiv('mmBuild', 'monsters');
+  const tabs = `<div class="subtabs"><button data-mmsub="monsters" class="${sub === 'monsters' ? 'on' : ''}">Monster cards</button><button data-mmsub="chars" class="${sub === 'chars' ? 'on' : ''}">Characters</button></div>`;
+  if (sub === 'chars') {
+    const chars = Object.values(state.chars);
+    return `${tabs}<div class="panel"><h3>The party</h3>${chars.length ? chars.map(c => `<div class="lib-row"><span class="grow"><b>${esc(c.name)}</b> <span class="muted small">${esc(c.player_name)} · level ${c.level} ${esc((c.class || {}).name || '')}</span></span>
+      <button class="btn small" data-exp="${esc(c.player_name)}">Download .fof</button></div>`).join('') : '<div class="empty">No characters yet.</div>'}</div><div id="wiz-root">${wizardHtml()}</div>`;
   }
+  return `${tabs}<div class="builder-grid"><div>${monsterFormHtml()}</div><div>${monsterPreviewHtml()}${libraryHtml()}</div></div>`;
 }
 
-// ---------------------------------------------------------------------------
-// MM: Mark skill as used (PHB II.4 enforcement)
-// ---------------------------------------------------------------------------
-function renderBuilderMarkSkillSelect() {
-  const select = document.getElementById('builder-mark-skill');
-  if (!select || !state.ruleset) return;
-  select.innerHTML = '';
-  state.ruleset.skills.forEach(skill => {
-    if (skill.status === 'stub') return;
-    const opt = document.createElement('option');
-    opt.value = skill.id;
-    opt.textContent = skill.name;
-    select.appendChild(opt);
-  });
+function monsterFormHtml() {
+  const roles = Object.keys((R().monsters || {}).roles || {});
+  const num = (k, lo, hi, ph) => `<input type="number" min="${lo}" max="${hi}" data-mb="${k}" value="${esc(mb[k] ?? '')}" placeholder="${esc(ph || '')}">`;
+  const txt = (k, ph) => `<input type="text" data-mb="${k}" value="${esc(mb[k] || '')}" placeholder="${esc(ph || '')}" maxlength="500">`;
+  return `<div class="panel"><h3>${mb.editing ? 'Edit card' : 'New monster card'}</h3>
+    <p class="small muted">One dial and a role. Level and role set HP, damage and attack from the monster table; the card carries the texture.</p>
+    <div class="two-col"><div><label>Name</label>${txt('name', 'e.g. Chalk Hound')}</div><div><label>Weapon (flavour)</label>${txt('weapon', 'e.g. Teeth')}</div></div>
+    <label>Level: <b>${mb.level}</b></label><input type="range" min="1" max="10" value="${mb.level}" data-mb="level" style="width:100%;accent-color:var(--gold)">
+    <label>Role</label>${segmented('mbRole', roles.map(r => ({ value: r, label: cap(r) })), mb.role)}
+    <div class="two-col"><div><label>Armor</label>${segmented('mbArmor', ['0', '1', '2'], String(mb.armor))}</div>
+      <div><label>Morale (2–12; 12 is fearless)</label>${num('morale', 2, 12)}</div></div>
+    <details class="mt"><summary class="small muted">Override a number (the Bestiary marks it with †)</summary>
+      <div class="two-col"><div><label>HP</label>${num('hp', 1, 500, 'from the table')}</div><div><label>Damage</label>${num('damage', 0, 50, 'from the table')}</div>
+      <div><label>Attack bonus</label>${num('attack', -3, 10, 'from the table')}</div><div><label>Attacks</label>${num('attacks', 1, 4, 'from the role')}</div></div></details>
+    <label>Wants</label>${txt('wants', 'What it is after')}
+    <label>Special</label>${txt('special', 'One gimmick, stated so you can run it')}
+    <label>When bloodied</label>${txt('when_bloodied', 'What changes at half HP (not needed for Mooks)')}
+    <label>Tells</label>${txt('tells', 'What the table sees before it acts')}
+    <label>Breaks</label>${txt('breaks', 'What it does when its morale breaks')}
+    <label>Twists (d6)</label>${mb.twists.map((t, i) => `<input type="text" data-twist="${i}" value="${esc(t)}" placeholder="${i + 1}." maxlength="300" style="margin-bottom:.3rem">`).join('')}
+    <label>Nastier (optional)</label>${txt('nastier', 'How to make it worse')}
+    <label>Description</label><textarea data-mb="description" maxlength="2000">${esc(mb.description || '')}</textarea>
+    <div class="wizard-foot"><button class="btn ghost" data-mbnew>Clear</button><span class="msg error" id="mb-err"></span><button class="btn primary" data-mbsave>Save to library</button></div></div>`;
 }
 
-function mmMarkSkillUsed() {
-  const playerName = document.getElementById('builder-mark-player').value;
-  const skillId = document.getElementById('builder-mark-skill').value;
-  if (!playerName || !skillId) { notify('Pick a player and a skill.', 'warn'); return; }
-  sendWS({ type: 'mark_skill_used', player_name: playerName, skill_id: skillId });
+function monsterPreviewHtml() {
+  const c = mb.card;
+  return `<div class="panel preview-card"><h3>Preview</h3>${c ? `<div class="foe"><div class="foe-top"><span class="foe-name">${esc(mb.name || 'Unnamed')}</span><span class="tiny muted">level ${c.level} ${esc(c.role)}</span>
+      ${c.fearless ? '<span class="chip">Fearless</span>' : ''}</div>
+      <div class="foe-nums"><span>HP <b>${c.hp === null ? 'drops to any hit' : c.hp}${c.overrides.includes('hp') ? '†' : ''}</b></span><span>Attack <b>${signed(c.attack)}${c.overrides.includes('attack') ? '†' : ''}</b></span>
+        <span>Damage <b>${c.damage}${c.overrides.includes('damage') ? '†' : ''}</b></span><span>Attacks <b>${c.attacks}${c.overrides.includes('attacks') ? '†' : ''}</b></span><span>Armor <b>${c.armor}</b></span><span>Morale <b>${c.morale}</b></span></div>
+      ${c.mob ? `<div class="small muted">Mooks attack as one mob: +${c.mob_damage_per_extra} damage per extra, max +${c.mob_damage_cap}.</div>` : ''}
+      ${c.bloodied_phase ? '<div class="small muted">Bloodied: the card changes phase.</div>' : ''}
+      <dl class="foe-card">${mb.wants ? `<dt>Wants</dt><dd>${esc(mb.wants)}</dd>` : ''}${mb.special ? `<dt>Special</dt><dd>${esc(mb.special)}</dd>` : ''}
+        ${mb.when_bloodied ? `<dt>When bloodied</dt><dd>${esc(mb.when_bloodied)}</dd>` : ''}${mb.tells ? `<dt>Tells</dt><dd>${esc(mb.tells)}</dd>` : ''}
+        ${mb.breaks ? `<dt>Breaks</dt><dd>${esc(mb.breaks)}</dd>` : ''}${mb.twists.some(Boolean) ? `<dt>Twists</dt><dd>${mb.twists.map((t, i) => `${i + 1}. ${esc(t)}`).join('<br>')}</dd>` : ''}</dl></div>`
+    : '<div class="empty">Working out the numbers…</div>'}</div>`;
 }
 
-// ---------------------------------------------------------------------------
-// MM: Skill advancement controls
-// ---------------------------------------------------------------------------
-function renderBuilderAdvanceSkillSelect() {
-  const select = document.getElementById('builder-advance-skill');
-  if (!select || !state.ruleset) return;
-  select.innerHTML = '';
-  state.ruleset.skills.forEach(skill => {
-    if (skill.status === 'stub') return;
-    const opt = document.createElement('option');
-    opt.value = skill.id;
-    opt.textContent = skill.name;
-    select.appendChild(opt);
-  });
+function libraryHtml() {
+  const lib = Object.values(state.library).sort((a, b) => a.level - b.level || a.name.localeCompare(b.name));
+  return `<div class="panel"><div class="panel-head"><h3>Library</h3><button class="btn small ghost right" data-bestiary>Load the Bestiary</button></div>
+    ${lib.length ? lib.map(e => `<div class="lib-row"><span class="grow"><b>${esc(e.name)}</b> <span class="tiny muted">L${e.level} ${esc(e.role)} · HP ${e.card ? (e.card.hp ?? '—') : '?'} · dmg ${e.card ? e.card.damage : '?'}</span></span>
+      ${e.role === 'mook' ? `<input type="number" min="1" max="30" value="4" data-libcount="${esc(e.id)}">` : ''}
+      <button class="btn small primary" data-libspawn="${esc(e.id)}">Spawn</button><button class="btn small" data-libedit="${esc(e.id)}">Edit</button>
+      <button class="btn small danger" data-libdel="${esc(e.id)}">×</button></div>`).join('') : '<div class="empty">No cards yet.</div>'}</div>`;
 }
 
-function mmAdvanceSkill() {
-  const playerName = document.getElementById('builder-advance-player').value;
-  const skillId = document.getElementById('builder-advance-skill').value;
-  if (!playerName || !skillId) { notify('Pick a player and a skill.', 'warn'); return; }
-  sendWS({ type: 'skill_advance', player_name: playerName, skill_id: skillId });
-}
-
-// ---------------------------------------------------------------------------
-// MM: private per-character notes
-//
-// The character model and the notes endpoint both carry `notes_mm`, and nothing
-// in the UI ever wrote it — the MM's private notes on a PC had nowhere to live.
-// ---------------------------------------------------------------------------
-function renderBuilderMMNotes() {
-  const picker = document.getElementById('builder-mm-notes-player');
-  const area = document.getElementById('builder-mm-notes');
-  if (!picker || !area) return;
-  const char = state.allCharacters[picker.value];
-  area.value = (char && char.notes_mm) || '';
-  area.disabled = !char;
-}
-
-async function saveMMNotes(ev) {
-  const playerName = document.getElementById('builder-mm-notes-player').value;
-  if (!playerName) { notify('Pick a character first.', 'warn'); return; }
-  const notes = document.getElementById('builder-mm-notes').value;
-
-  await withPending(ev && ev.target, 'Saving...', async () => {
-    const resp = await apiFetch(`/api/characters/${state.sessionId}/${playerName}/notes`, 'PUT', {
-      notes_mm: notes,
-    });
-    if (resp.ok) {
-      const data = await resp.json();
-      if (state.allCharacters[playerName]) state.allCharacters[playerName].notes_mm = data.notes_mm;
-      notify('Notes saved.', 'success');
-    } else {
-      notify('Failed to save notes.', 'error');
+let _mbTimer = null;
+function requestCardPreview() {
+  clearTimeout(_mbTimer);
+  _mbTimer = setTimeout(async () => {
+    const body = { session_id: state.sessionId, level: Number(mb.level), role: mb.role, armor: Number(mb.armor), morale: Number(mb.morale) || 7 };
+    ['hp', 'damage', 'attack', 'attacks'].forEach(k => { if (mb[k] !== undefined && mb[k] !== '' && mb[k] !== null) body[k] = Number(mb[k]); });
+    const resp = await apiFetch('/api/enemies/preview-card', 'POST', body);
+    if (!resp.ok) { mb.card = null; }
+    else mb.card = (await resp.json()).card;
+    if (state.tab === 'build' && isMM() && uiv('mmBuild', 'monsters') === 'monsters') {
+      const box = $('.preview-card');
+      if (box) box.outerHTML = monsterPreviewHtml();
     }
+  }, 150);
+}
+
+function wireMMBuild(root) {
+  $$('[data-mmsub]', root).forEach(b => b.onclick = () => { ui.mmBuild = b.dataset.mmsub; renderBuild(); });
+  if (uiv('mmBuild', 'monsters') === 'chars') {
+    $$('[data-exp]', root).forEach(b => b.onclick = () => exportCharacter(b.dataset.exp));
+    wireWizard($('#wiz-root', root));
+    return;
+  }
+  $$('[data-mb]', root).forEach(el => el.oninput = () => {
+    mb[el.dataset.mb] = el.value;
+    if (el.dataset.mb === 'level') { const b = el.previousElementSibling && $('b', el.previousElementSibling); if (b) b.textContent = el.value; }
+    if (['level', 'morale', 'hp', 'damage', 'attack', 'attacks'].includes(el.dataset.mb)) requestCardPreview();
+    else { const box = $('.preview-card'); if (box) box.outerHTML = monsterPreviewHtml(); }
   });
+  $$('[data-twist]', root).forEach(el => el.oninput = () => { mb.twists[Number(el.dataset.twist)] = el.value; });
+  $('[data-mbnew]', root).onclick = () => { Object.keys(mb).forEach(k => delete mb[k]); Object.assign(mb, { level: 1, role: 'standard', armor: 0, morale: 7, twists: ['', '', '', '', '', ''] }); renderBuild(); requestCardPreview(); };
+  $('[data-mbsave]', root).onclick = saveCard;
+  $('[data-bestiary]', root).onclick = () => send({ type: 'bestiary_load' });
+  $$('[data-libspawn]', root).forEach(b => b.onclick = () => {
+    const cnt = $(`[data-libcount="${b.dataset.libspawn}"]`, root);
+    send({ type: 'enemy_spawn', enemy_id: b.dataset.libspawn, count: cnt ? Number(cnt.value) || 1 : 1 });
+    notify('Added to the tracker (Play tab).', 'success');
+  });
+  $$('[data-libedit]', root).forEach(b => b.onclick = () => {
+    const e = state.library[b.dataset.libedit];
+    Object.keys(mb).forEach(k => delete mb[k]);
+    Object.assign(mb, { editing: e.id, id: e.id, name: e.name, level: e.level, role: e.role, armor: e.armor, morale: e.morale, weapon: e.weapon,
+      wants: e.wants, special: e.special, when_bloodied: e.when_bloodied || '', tells: e.tells, breaks: e.breaks, nastier: e.nastier || '',
+      description: e.description, twists: (e.twists || []).concat(['', '', '', '', '', '']).slice(0, 6), ...(e.overrides || {}) });
+    renderBuild(); requestCardPreview(); window.scrollTo(0, 0);
+  });
+  $$('[data-libdel]', root).forEach(b => b.onclick = async () => {
+    if (!await confirmDialog('Delete this card?', 'It leaves the library; foes already on the tracker stay.', 'Delete')) return;
+    const resp = await apiFetch(`/api/enemies/${state.sessionId}/${encodeURIComponent(b.dataset.libdel)}`, 'DELETE');
+    if (resp.ok) { delete state.library[b.dataset.libdel]; renderBuild(); }
+  });
+  if (!mb.card) requestCardPreview();
+}
+
+/** Segmented controls in the builder map onto the card being built. */
+const _prevUiChange = onUiChange;
+onUiChange = function (key) {
+  if (isMM() && state.tab === 'build') {
+    if (key === 'mbRole') { mb.role = ui.mbRole; requestCardPreview(); return; }
+    if (key === 'mbArmor') { mb.armor = Number(ui.mbArmor); requestCardPreview(); return; }
+  }
+  if (state.tab === 'build' && ['lvKind', 'lvStat', 'lvHp'].includes(key)) { if (key === 'lvKind') { delete ui.lvTalent; renderBuild(); } return; }
+  _prevUiChange(key);
+};
+
+async function saveCard() {
+  const err = $('#mb-err');
+  if (!(mb.name || '').trim()) { err.textContent = 'Name the card.'; return; }
+  const body = { session_id: state.sessionId, id: mb.editing || slugify(mb.name), name: mb.name.trim(), level: Number(mb.level), role: mb.role,
+    armor: Number(mb.armor), morale: Number(mb.morale) || 7, weapon: mb.weapon || '', wants: mb.wants || '', special: mb.special || '',
+    when_bloodied: mb.when_bloodied || null, tells: mb.tells || '', breaks: mb.breaks || '', twists: mb.twists.map(t => t.trim()).filter(Boolean),
+    nastier: mb.nastier || null, description: mb.description || '' };
+  ['hp', 'damage', 'attack', 'attacks'].forEach(k => { if (mb[k] !== undefined && mb[k] !== '' && mb[k] !== null) body[k] = Number(mb[k]); });
+  const resp = await apiFetch('/api/enemies/', 'POST', body);
+  if (!resp.ok) { err.textContent = formatApiError((await resp.json()).detail, 'The card is not complete.'); return; }
+  const e = (await resp.json()).enemy;
+  state.library[e.id] = e;
+  mb.editing = e.id;
+  notify(`${e.name} saved to the library.`, 'success');
+  renderBuild();
 }

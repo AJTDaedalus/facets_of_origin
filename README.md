@@ -10,30 +10,32 @@ A digital-first, open-source tabletop RPG designed so the rules never get in the
 ## What's In The Box
 
 <!-- Figures below are derived from canon, not hand-maintained — verify against
-     source before editing: skill/domain counts from player_handbook/II.6 and
-     II.3; test count from `pytest --collect-only -q` (software/); enemy TR
-     values from enemies/*.fof; playtest count from committed playtest/ dirs. -->
+     source before editing: talent/class/domain counts from software/facets/base/facet.yaml;
+     test count from `pytest --collect-only -q` (software/); enemy levels
+     from enemies/*.fof; playtest count from committed playtest/ dirs. -->
 
 ### Player's Handbook (`player_handbook/`)
 
 The complete rulebook for players:
 
-- **Character Creation** — Attributes (9 stats, 18-point buy), three Facets (Body, Mind, Soul), 15 Backgrounds with starting skills and specialties, 15 skills across three facets
-- **Magic** — Domain + Intent + Scope system with no spell lists. 21 domains across the two traditions (Thaumaturgy/Mind, Invocation/Soul); the Facet of the Body has no domains of its own, and Body characters reach magic by cross-training. Focused, Standard, Broad, and Prismatic domain types
-- **Core Resolution** — 2d6 + modifier with three-tier outcomes (10+ full success, 7-9 partial, 6- consequence). Sparks add dice and drop lowest for pre-roll agency
-- **Combat** — Exchange-based (simultaneous action, no turn order), posture system, Endurance pool, conditions instead of HP, armor as condition downgrade
-- **Equipment** — Weapons, armor, adventuring gear, and services
-- **Quick Start** — The one rule, character creation in six steps, and a ten-minute intro scene
+- **Character Creation** — three stats (Body, Mind, Soul); three Facets that each hold four preset classes, or build your own class from the Facet's talent menu (Morrowind-style); 15 example backgrounds with knacks and Specialties; ten minutes to play
+- **Magic** — Domain + Intent + Scope with no spell lists. 21 domains across the two traditions (Thaumaturgy/Mind, Invocation/Soul); Minor workings are free, Significant and Major ones cost Fatigue that fills inventory slots; each caster names signature workings. The Facet of the Body has no magic
+- **Core Resolution** — 2d6 + stat (+1 for a knack) with three-tier outcomes (10+ full success, 7–9 success with a cost, 6− things go wrong). Sparks, Help and Borrowed Trouble each add a die, keep the best two
+- **Combat** — exchanges with no initiative; players roll to act, enemies roll their attacks in the open; HP, weapon damage dice, flat armor; morale ends most fights; monster cards with one gimmick and a Bloodied phase
+- **Levels** — 1 to 10, called by the MM from five end-of-session prompts; each level brings HP and a new talent or an improved one, with a signature at level 3
+- **Equipment and Treasure** — inventory slots, weapon dice, flat armor, usage dice, curios and relics
+- **Quick Start** — the one rule, a preset character in ten minutes, and combat in five lines
 
 ### Mirror Master's Manual (`mm_manual/`)
 
 The companion guide for running the game:
 
-- **MM1** — Encounters and Enemies: stat blocks, Threat Rating formula, encounter budget, action economy
+- **MM1** — Encounters and Enemies: monster cards, the level table and roles, morale, the reaction roll, reading a fight's danger
 - **MM2** — Session Design: three-act structure, pacing, scene types, improvisation, spotlight management
-- **MM3** — Campaign Design: campaign structures, NPC design, world-building, encounter sequencing
+- **MM3** — Campaign Design: level pacing and prompts, treasure and the reward loop, retainers, the optional name-level endgame
 - **MM4** — Running the Table: MM philosophy, table culture, safety and consent, difficult situations
 - **MM5** — Quick Reference: mid-session cheat sheet for all core mechanics
+- **MM6** — The Toolbox: reaction, morale, the Pressure die, complications, loot, NPCs and the oracle, with 24 generated tables (503 entries)
 
 ### Bestiary (`bestiary/`)
 
@@ -45,7 +47,7 @@ a fight.
 - **B2** — Folk: the ordinary dangerous, the Bought, the Kindly
 - **B3** — The Made: latchlings, latchmen, and the Archive Guardian
 - **B4** — What Remains: the Waiting, the Unfinished, hushfall
-- **Finding Aids** — every creature by Threat Rating and by tier *(generated)*
+- **Finding Aids** — every creature by level, role and morale *(generated)*
 
 Entries carry a read-aloud opener, lore, a stat block generated from the
 creature's `.fof` file, a tiered "What Characters Can Know" box keyed to the
@@ -58,11 +60,11 @@ canon.
 A self-hosted web app for running sessions online. The Mirror Master starts the server; players join via single-use invite links. See the [software README](software/README.md) for setup and usage.
 
 Features:
-- **Play Field** — Dice rolling, combat tracker (postures, strikes, reactions, conditions), magic casting, Spark economy, enemy tracker, table chat
-- **Tools** — Read-only character sheets, inventory management, rule reference cards, encounter budget calculator
-- **Builder** — Skill advancement (with PHB II.4 usage enforcement), technique selection, enemy/encounter builder, campaign notes
+- **Build** — a creation wizard (preset or custom class), level-up picks, and the MM's monster-card builder
+- **Play** — character sheet with slots, Wounds and Fatigue; roll, attack, cast, defend and avoid; the MM's combat tracker with enemy attacks rolled in the open, morale and Bloodied phases; the Toolbox (reaction, Pressure die, complications, loot, NPCs, oracle, and Stuck?); threat clocks; end-of-session level prompts; Sparks and chat
+- **Tools** — rules reference from the loaded ruleset, inventory, notes, `.fof` export
 
-1029 tests. TDD throughout.
+1103 tests (engine, WebSocket, docs invariants, and Playwright browser flows). TDD throughout.
 
 ### .fof File Format (`spec/`)
 
@@ -117,9 +119,9 @@ facets_of_origin/
 
 ## Roadmap
 
-- [x] Core ruleset: attributes, skills, Facets, Backgrounds, advancement
+- [x] Core ruleset (Lean Facets v1.0): stats, Facets and classes, talents, levels 1–10, knacks and Specialties
 - [x] 2d6 resolution engine with Sparks
-- [x] Combat system: exchanges, postures, conditions, armor
+- [x] Combat system: exchanges, HP and damage, enemy rolls, morale, monster cards
 - [x] Magic system: Domain + Intent + Scope
 - [x] Digital toolset: three-tab web app with real-time WebSocket
 - [x] Enemy/encounter design system with Threat Rating

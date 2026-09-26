@@ -63,13 +63,13 @@ Do not reproduce, closely paraphrase, or derive mechanics, text, lore, or art fr
 
 ## PHB Scope Decisions
 
-**Core PHB (v1):** Introduction, Character Creation (Overview, Attributes, Lineage, Classes, Backgrounds, Skills), Rules (Overview, Adventuring, Combat), Compendium (Skills, Equipment, Magical Items).
+**Core PHB (Lean Facets v1.0):** Introduction, Quick Start, Character Creation (Overview, Stats, Magic, Facets Classes and Levels, the three Facet talent chapters, Lineage, Backgrounds Knacks and Specialties), Rules (Core Resolution, Adventuring, Combat), Compendium (Equipment, Treasure). There is no skill list: knacks and Specialties do that job. The v0.3 ruleset is pinned at git tag `pre-lean-facets` (see `docs/BRIEF_lean_facets.md`, `docs/DESIGN_lean_facets.md`, DECISIONS L1–L14).
 
 **Deferred to Facet modules:** Downtime, Crafting, Economy, Feats, Technology. These are listed in the ToC as optional modules but not written in the core PHB.
 
 **Lineage (formerly Races):** The character ancestry chapter is called Lineage. Shattered Origin defaults to human — the core PHB describes humans and provides MM guidance for creating custom lineages. Non-human lineages belong in setting Facets or homebrew. This keeps onboarding simple and puts creative world-building in the MM's hands.
 
-**Combat:** Has its own chapter (III.3) but uses the same 2d6 resolution system as everything else — no separate tactical subsystem.
+**Combat:** Has its own chapter (III.3) and uses the same 2d6 roll as everything else. Players roll to act; enemies roll their attacks in the open (the app rolls); HP, damage dice and flat armor. No initiative, no grid, no player-side option menus beyond the 10+ pick.
 
 ## The Three Books
 
@@ -97,21 +97,23 @@ no-diff invariant in `software/tests/test_docs_consistency.py`.
 
 Regenerate from `software/`:
 `python tools/build_index.py` · `python tools/build_table_register.py` ·
-`python -m tools.build_bestiary` · `python -m tools.build_scene_cards`
+`python -m tools.build_bestiary` · `python -m tools.build_scene_cards` ·
+`python -m tools.build_toolbox` (MM6's tables, from `software/facets/base/tables.yaml`)
 
 **Style guide.** `style/STYLE_GUIDE.md` (untracked, local) is the house style for
 all three books. `docs/RESEARCH_style_audit.md` is the audit against it and
 `docs/LOG_style_audit.md` the remediation record. The mechanical rules — numbered
 tables, declared box species, resolvable cross-references, invariant entry
-formats — are enforced as invariants INV-9 through INV-21, so a style regression
+formats — are enforced as invariants INV-9 through INV-27, so a style regression
 fails the suite rather than surviving review.
 
 ## Software-PHB Synchronization
 
 The software layer (`software/`) is the mechanical implementation of the PHB.
 `software/facets/base/facet.yaml` is the machine-readable encoding of every
-mechanic the engine needs: attributes, skills, Techniques, advancement rules,
-combat parameters, and magic domains.
+mechanic the engine needs: stats, Facets, talents, preset classes, levels,
+combat and monster numbers, magic scopes and domains. The MM's generator tables
+live beside it in `tables.yaml`.
 
 **When to update the software:** Any time a PHB decision settles a mechanic
 (new system, changed rule, renamed concept), update the software in the same

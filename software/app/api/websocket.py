@@ -1,26 +1,50 @@
-"""WebSocket connection manager and event dispatcher."""
+"""WebSocket connection manager and event dispatcher (Lean Facets v1.0, DESIGN §4.2).
+
+This module is plumbing: authentication, permissions, message limits, and
+broadcasting. Every rule lives in the engine (`app.game.engine`, `combat`,
+`magic`, `character`, `toolbox`); a handler reads the message, calls the
+engine, and tells the table what happened. No handler carries a rule of its
+own (CLAUDE.md: the simulator and the app may only drive the rules module).
+
+Security patterns kept from v0.3: the token arrives in the first message (not
+the URL), unauthenticated sockets time out, every message is size-capped, and
+MM-only events are refused for players. Players act only as themselves; the
+MM may act for any character by naming `player`.
+
+Dice: handlers pass the module-level `RNG` to the engine so tests can script
+the dice. Clients can never supply dice.
+"""
 from __future__ import annotations
 
 import asyncio
 import json
 import logging
+import random
 import time
 import uuid
-from typing import Any, Optional
+from collections import OrderedDict
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Any, Awaitable, Callable, Optional
 
+import yaml
 from fastapi import WebSocket, WebSocketDisconnect
 from jose import JWTError
 
 from app.auth.tokens import decode_token
-from app.game import combat as combat_module
-from app.game.dice import DiceSpec
-from app.game.engine import (
-    VALID_SPARK_USES,
-    RollRequest, resolve_roll, resolve_magic_roll, resolve_saving_throw, roll_result_to_dict,
-)
-from app.game.session import ThreatClock, session_store
+from app.game import combat, magic, toolbox
+from app.game.engine import resolve_avoid, roll_character, roll_result_to_dict
+from app.game.enemy import Enemy, EnemyFormatError
+from app.game.session import ThreatClock, _player_enemy_view, session_store
 
 logger = logging.getLogger(__name__)
+
+#: The dice source for every handler. Tests replace it with a scripted one.
+RNG: random.Random = random.Random()
+
+#: Where the Bestiary's cards live (repo/enemies/*.fof); seeded into a
+#: session's enemy library the first time its MM connects.
+BESTIARY_DIR = Path(__file__).resolve().parents[3] / "enemies"
 
 
 class ConnectionManager:
@@ -32,10 +56,11 @@ class ConnectionManager:
 
     async def connect(self, websocket: WebSocket, session_id: str, identity: str) -> None:
         await websocket.accept()
-        if session_id not in self._connections:
-            self._connections[session_id] = []
-        self._connections[session_id].append((websocket, identity))
+        self._connections.setdefault(session_id, []).append((websocket, identity))
         logger.info("WS connected: %s in session %s", identity, session_id)
+
+    def register(self, websocket: WebSocket, session_id: str, identity: str) -> None:
+        self._connections.setdefault(session_id, []).append((websocket, identity))
 
     def disconnect(self, websocket: WebSocket, session_id: str) -> None:
         connections = self._connections.get(session_id, [])
@@ -44,9 +69,20 @@ class ConnectionManager:
     async def broadcast(self, session_id: str, message: dict) -> None:
         """Send a message to all connections in a session."""
         dead: list[WebSocket] = []
-        for ws, _ in self._connections.get(session_id, []):
+        for ws, _ in list(self._connections.get(session_id, [])):
             try:
                 await ws.send_json(message)
+            except Exception:
+                dead.append(ws)
+        for ws in dead:
+            self.disconnect(ws, session_id)
+
+    async def broadcast_split(self, session_id: str, mm_message: dict, player_message: dict) -> None:
+        """The MM gets one view, everyone else another (e.g. a foe's HP)."""
+        dead: list[WebSocket] = []
+        for ws, ident in list(self._connections.get(session_id, [])):
+            try:
+                await ws.send_json(mm_message if ident == "mm" else player_message)
             except Exception:
                 dead.append(ws)
         for ws in dead:
@@ -62,11 +98,13 @@ class ConnectionManager:
             return False
 
     async def send_to_identity(self, session_id: str, identity: str, message: dict) -> None:
-        """Send to every connection in *session_id* held by *identity*
-        (e.g. ``"mm"``) — for prompts that are not table broadcasts."""
+        """Send to every connection in *session_id* held by *identity* (e.g. ``"mm"``)."""
         for ws, ident in list(self._connections.get(session_id, [])):
             if ident == identity:
                 await self.send_to(ws, message)
+
+    def identities(self, session_id: str) -> list[tuple[WebSocket, str]]:
+        return list(self._connections.get(session_id, []))
 
 
 manager = ConnectionManager()
@@ -75,7 +113,61 @@ manager = ConnectionManager()
 WS_MAX_MESSAGE_BYTES = 8_192
 # Seconds to wait for the auth message before closing unauthenticated connections (L-03).
 WS_AUTH_TIMEOUT_SECONDS = 30
+# How many private toolbox results the MM can still reveal.
+PRIVATE_RESULTS_KEPT = 50
 
+
+# ---------------------------------------------------------------------------
+# Table state the app keeps beside the engine's (pending choices, reveals)
+# ---------------------------------------------------------------------------
+
+@dataclass
+class TableState:
+    """App-layer bookkeeping for a session: nothing here is a rule."""
+
+    #: player -> a 10+ attack awaiting its option pick (replayed with the same dice).
+    pending_attacks: dict[str, dict] = field(default_factory=dict)
+    #: player -> the two 7-9 casting costs offered.
+    pending_complications: dict[str, list[dict]] = field(default_factory=dict)
+    #: players at 0 HP who have taken their Wound and must roll Hold On.
+    pending_hold_on: set[str] = field(default_factory=set)
+    #: MM-private toolbox results that can still be revealed.
+    private_results: "OrderedDict[str, dict]" = field(default_factory=OrderedDict)
+    bestiary_seeded: bool = False
+
+
+_tables: dict[str, TableState] = {}
+
+
+def table_state(session_id: str) -> TableState:
+    return _tables.setdefault(session_id, TableState())
+
+
+class WSError(Exception):
+    """A refusal sent back to the sender only."""
+
+
+@dataclass
+class Ctx:
+    websocket: WebSocket
+    msg: dict
+    session: Any
+    session_id: str
+    identity: str
+    is_mm: bool
+
+    @property
+    def rs(self):
+        return self.session.ruleset
+
+    @property
+    def table(self) -> TableState:
+        return table_state(self.session_id)
+
+
+# ---------------------------------------------------------------------------
+# Connection
+# ---------------------------------------------------------------------------
 
 async def handle_websocket(websocket: WebSocket) -> None:
     """Main WebSocket handler — authentication then event loop."""
@@ -83,28 +175,22 @@ async def handle_websocket(websocket: WebSocket) -> None:
     identity: str = "unknown"
 
     try:
-        # Step 1: Authenticate via token in the first message
-        # (Not in the URL query string — avoids logging the token)
+        # Step 1: authenticate via the first message (not the URL — avoids logging the token)
         await websocket.accept()
-
-        # L-03: close unauthenticated connections that never send their auth message.
         try:
-            auth_text = await asyncio.wait_for(
-                websocket.receive_text(), timeout=WS_AUTH_TIMEOUT_SECONDS
-            )
+            auth_text = await asyncio.wait_for(websocket.receive_text(), timeout=WS_AUTH_TIMEOUT_SECONDS)
         except asyncio.TimeoutError:
             await websocket.send_json({"type": "error", "message": "Authentication timeout."})
             await websocket.close(code=1008)
             return
-
-        # M-03: enforce message size on the auth message too.
         if len(auth_text) > WS_MAX_MESSAGE_BYTES:
             await websocket.send_json({"type": "error", "message": "Message too large."})
             await websocket.close(code=1009)
             return
-
         try:
             auth_msg = json.loads(auth_text)
+            if not isinstance(auth_msg, dict):
+                raise ValueError
         except (json.JSONDecodeError, ValueError):
             await websocket.send_json({"type": "error", "message": "Invalid JSON."})
             await websocket.close(code=1008)
@@ -117,36 +203,32 @@ async def handle_websocket(websocket: WebSocket) -> None:
             await websocket.send_json({"type": "error", "message": f"Authentication failed: {e}"})
             await websocket.close(code=1008)
             return
+        if token_data.token_type == "invite":
+            await websocket.send_json({"type": "error", "message": "Redeem the invite first."})
+            await websocket.close(code=1008)
+            return
 
         session_id = token_data.session_id if token_data.role == "player" else auth_msg.get("session_id")
         if not session_id:
             await websocket.send_json({"type": "error", "message": "Missing session_id."})
             await websocket.close(code=1008)
             return
-
         session = session_store.get(session_id)
         if not session:
             await websocket.send_json({"type": "error", "message": "Session not found."})
             await websocket.close(code=1008)
+            session_id = None
             return
 
         identity = "mm" if token_data.is_mm else (token_data.player_name or "player")
-
-        # Register connection (already accepted above)
-        if session_id not in manager._connections:
-            manager._connections[session_id] = []
-        manager._connections[session_id].append((websocket, identity))
-
-        # Send initial state
+        manager.register(websocket, session_id, identity)
         if token_data.is_mm:
-            await manager.send_to(websocket, {"type": "state", "data": session.to_state_dict()})
-        else:
-            await manager.send_to(websocket, {"type": "state", "data": session.to_player_state_dict(identity)})
-
-        # Announce join to all
+            _seed_bestiary(session, table_state(session_id))
+        await manager.send_to(websocket, {"type": "state",
+                                          "data": state_for(session, identity, token_data.is_mm)})
         await manager.broadcast(session_id, {"type": "player_joined", "player": identity})
 
-        # Step 2: Event loop — enforce message size on every incoming message (M-03).
+        # Step 2: event loop — enforce message size on every incoming message (M-03).
         while True:
             text = await websocket.receive_text()
             if len(text) > WS_MAX_MESSAGE_BYTES:
@@ -157,11 +239,14 @@ async def handle_websocket(websocket: WebSocket) -> None:
             except (json.JSONDecodeError, ValueError):
                 await manager.send_to(websocket, {"type": "error", "message": "Invalid JSON."})
                 continue
+            if not isinstance(raw, dict):
+                await manager.send_to(websocket, {"type": "error", "message": "Invalid message."})
+                continue
             await _dispatch(websocket, raw, session_id, identity, token_data.is_mm)
 
     except WebSocketDisconnect:
         pass
-    except Exception as e:
+    except Exception as e:  # pragma: no cover - defensive
         logger.exception("Unexpected WS error for %s: %s", identity, e)
     finally:
         if session_id:
@@ -169,2415 +254,1182 @@ async def handle_websocket(websocket: WebSocket) -> None:
             await manager.broadcast(session_id, {"type": "player_left", "player": identity})
 
 
-async def _dispatch(
-    websocket: WebSocket,
-    msg: dict,
-    session_id: str,
-    identity: str,
-    is_mm: bool,
-) -> None:
-    """Route an incoming WebSocket message to the appropriate handler."""
-    event_type = msg.get("type")
+# ---------------------------------------------------------------------------
+# Views
+# ---------------------------------------------------------------------------
+
+def character_view(session, ch) -> dict:
+    """A character for clients: the engine's view plus use trackers and table flags."""
+    rs = session.ruleset
+    d = ch.to_client_dict(rs)
+    uses = {}
+    for t in ch.talents:
+        tdef = rs.get_talent(t.id)
+        if tdef is not None and tdef.use not in ("passive", "at_will"):
+            uses[t.id] = ch.uses_remaining(rs, t.id)
+    if ch.signature:
+        sdef = rs.get_talent(ch.signature)
+        if sdef is not None and sdef.use not in ("passive", "at_will"):
+            uses[ch.signature] = ch.uses_remaining(rs, ch.signature)
+    d["talent_uses_left"] = uses
+    d["player_name"] = ch.player_name
+    d["level_up_ready"] = ch.player_name in session.level_up_ready
+    d["must_hold_on"] = ch.player_name in table_state(session.id).pending_hold_on
+    d["can_respec"] = ch.can_respec(rs)
+    return d
+
+
+def state_for(session, identity: str, is_mm: bool) -> dict:
+    """The join-time state, with character views that carry use trackers."""
+    if is_mm:
+        data = session.to_state_dict()
+    else:
+        data = session.to_player_state_dict(identity)
+        ch = session.characters.get(identity)
+        data["your_character"] = _player_safe(character_view(session, ch)) if ch else None
+    views = {pn: character_view(session, c) for pn, c in session.characters.items()}
+    data["all_characters"] = views if is_mm else {pn: _player_safe(v) for pn, v in views.items()}
+    data["role"] = "mm" if is_mm else "player"
+    data["you"] = identity
+    return data
+
+
+def _enemy_msgs(session, enemy, kind: str = "enemy_updated") -> tuple[dict, dict]:
+    rs = session.ruleset
+    return ({"type": kind, "enemy": enemy.to_client_dict(rs)},
+            {"type": kind, "enemy": _player_enemy_view(enemy, rs)})
+
+
+async def _push_enemy(ctx: Ctx, enemy, kind: str = "enemy_updated") -> None:
+    mm, pl = _enemy_msgs(ctx.session, enemy, kind)
+    await manager.broadcast_split(ctx.session_id, mm, pl)
+    await _push_danger(ctx)
+
+
+async def _push_danger(ctx: Ctx) -> None:
+    await manager.send_to_identity(ctx.session_id, "mm",
+                                   {"type": "danger", "danger": ctx.session.active_danger()})
+
+
+def _player_safe(view: dict) -> dict:
+    """What players see of a character: everything but the MM's private notes."""
+    return {k: v for k, v in view.items() if k != "notes_mm"}
+
+
+async def _push_character(ctx: Ctx, ch) -> None:
+    view = character_view(ctx.session, ch)
+    base = {"type": "character_updated", "player": ch.player_name}
+    await manager.broadcast_split(ctx.session_id, {**base, "character": view},
+                                  {**base, "character": _player_safe(view)})
+    _save(ctx.session, ch.player_name)
+
+
+async def _push_state(session_id: str) -> None:
     session = session_store.get(session_id)
-    if not session:
+    if session is None:
         return
+    for ws, ident in manager.identities(session_id):
+        await manager.send_to(ws, {"type": "state", "data": state_for(session, ident, ident == "mm")})
 
-    if event_type == "roll":
-        await _handle_roll(websocket, msg, session, session_id, identity)
-    elif event_type == "spark_earn" and is_mm:
-        await _handle_spark_earn(msg, session, session_id)
-    elif event_type == "spark_earn_peer":
-        await _handle_spark_earn_peer(msg, session, session_id, identity)
-    elif event_type == "chat":
-        await _handle_chat(msg, session_id, identity)
-    elif event_type == "skill_advance" and is_mm:
-        await _handle_skill_advance(msg, session, session_id)
-    elif event_type == "mark_skill_used" and is_mm:
-        await _handle_mark_skill_used(msg, session, session_id)
-    elif event_type == "table_roll" and is_mm:
-        await _handle_table_roll(websocket, msg, session_id, identity)
-    elif event_type == "ping":
-        await manager.send_to(websocket, {"type": "pong"})
-    # --- Combat events ---
-    elif event_type == "combat_start" and is_mm:
-        await _handle_combat_start(msg, session, session_id)
-    elif event_type == "declare_posture":
-        await _handle_declare_posture(websocket, msg, session, session_id, identity)
-    elif event_type == "reveal_postures" and is_mm:
-        await _handle_reveal_postures(session, session_id)
-    elif event_type == "strike":
-        await _handle_strike(websocket, msg, session, session_id, identity)
-    elif event_type == "react":
-        await _handle_react(websocket, msg, session, session_id, identity)
-    elif event_type == "apply_condition" and is_mm:
-        await _handle_apply_condition(msg, session, session_id)
-    elif event_type == "clear_condition" and is_mm:
-        await _handle_clear_condition(msg, session, session_id)
-    elif event_type == "end_exchange" and is_mm:
-        await _handle_end_exchange(websocket, session, session_id)
-    elif event_type == "combat_end" and is_mm:
-        await _handle_combat_end(session, session_id)
-    elif event_type == "support":
-        await _handle_support(websocket, msg, session, session_id, identity)
-    elif event_type == "maneuver":
-        await _handle_maneuver(websocket, msg, session, session_id, identity)
-    # --- Magic events ---
-    elif event_type == "cast":
-        await _handle_cast(websocket, msg, session, session_id, identity)
-    elif event_type == "saving_throw":
-        await _handle_saving_throw(websocket, msg, session, session_id, identity)
-    # --- Contested roll ---
-    elif event_type == "contested_roll" and is_mm:
-        await _handle_contested_roll(websocket, msg, session, session_id)
-    # --- Player skill spending ---
-    elif event_type == "spend_skill_point":
-        await _handle_spend_skill_point(websocket, msg, session, session_id, identity)
-    # --- Technique events ---
-    elif event_type == "technique_select":
-        await _handle_technique_select(msg, session, session_id, identity, is_mm)
-    elif event_type == "session_reset" and is_mm:
-        await _handle_session_reset(session, session_id)
 
-    elif event_type == "ready_intents":
-        await _handle_ready_intents(websocket, msg, session, session_id, identity)
+def _save(session, player_name: str) -> None:
+    try:
+        session.save_character_to_disk(player_name)
+    except IOError as e:  # pragma: no cover - disk trouble is logged, not fatal
+        logger.warning("%s", e)
 
-    elif event_type == "full_rest" and is_mm:
-        await _handle_full_rest(msg, session, session_id)
-    # --- Enemy tracker events ---
-    elif event_type == "spawn_enemy" and is_mm:
-        await _handle_spawn_enemy(msg, session, session_id)
-    elif event_type == "enemy_update" and is_mm:
-        await _handle_enemy_update(msg, session, session_id)
-    elif event_type == "enemy_strike" and is_mm:
-        await _handle_enemy_strike(websocket, msg, session, session_id)
-    elif event_type == "scene_end" and is_mm:
-        await _handle_scene_end(session, session_id)
-    elif event_type == "use_item":
-        await _handle_use_item(websocket, msg, session, session_id, identity, is_mm)
 
-    elif event_type == "strike_rider" and is_mm:
-        await _handle_strike_rider(websocket, msg, session, session_id)
+def _strip_enemy_hp(result: Optional[dict]) -> Optional[dict]:
+    """Players see what a hit did, not how much HP the foe has left."""
+    if not result:
+        return result
+    r = dict(result)
+    for k in ("hp_before", "hp_after"):
+        r.pop(k, None)
+    return r
 
-    elif event_type == "final_blow_confirm" and is_mm:
-        await _handle_final_blow_confirm(msg, session, session_id)
-    elif event_type == "remove_enemy" and is_mm:
-        await _handle_remove_enemy(msg, session, session_id)
-    # --- Threat Clock events (D4, PHB III.2) ---
-    elif event_type == "clock_create" and is_mm:
-        await _handle_clock_create(msg, session, session_id)
-    elif event_type == "clock_advance" and is_mm:
-        await _handle_clock_advance(msg, session, session_id)
-    elif event_type == "clock_wind_back" and is_mm:
-        await _handle_clock_wind_back(msg, session, session_id)
-    elif event_type == "clock_delete" and is_mm:
-        await _handle_clock_delete(msg, session, session_id)
-    # --- Spark: Act Break Nomination / Graceful Fail (D6) ---
-    elif event_type == "act_break" and is_mm:
-        await _handle_act_break(msg, session, session_id)
-    elif event_type == "claim_graceful_fail":
-        await _handle_claim_graceful_fail(msg, session, session_id, identity)
+
+# ---------------------------------------------------------------------------
+# Message parsing
+# ---------------------------------------------------------------------------
+
+def _int(msg: dict, key: str, default: int = 0, lo: int = 0, hi: int = 99) -> int:
+    v = msg.get(key, default)
+    if v is None or v == "":
+        v = default
+    try:
+        n = int(v)
+    except (TypeError, ValueError):
+        raise WSError(f"{key} must be a number.")
+    if not lo <= n <= hi:
+        raise WSError(f"{key} must be between {lo} and {hi}.")
+    return n
+
+
+def _bool(msg: dict, key: str) -> bool:
+    return bool(msg.get(key, False))
+
+
+def _str(msg: dict, key: str, limit: int = 200, default: str = "") -> str:
+    v = msg.get(key, default)
+    return default if v is None else str(v)[:limit].strip()
+
+
+def _difficulty(ctx: Ctx, key: str = "difficulty", default: str = "Standard") -> str:
+    label = _str(ctx.msg, key, 20) or default
+    labels = [d.label for d in ctx.rs.roll_resolution.difficulty_modifiers]
+    if label not in labels:
+        raise WSError(f"Difficulty must be one of {labels}.")
+    return label
+
+
+def _stat(ctx: Ctx, default: Optional[str] = None) -> str:
+    stat = _str(ctx.msg, "stat", 20) or (default or "")
+    if stat not in {s.id for s in ctx.rs.stats}:
+        raise WSError("Name a stat: body, mind or soul.")
+    return stat
+
+
+def _extra_dice(ctx: Ctx) -> dict:
+    """Sparks, Help and Borrowed Trouble, as the engine takes them."""
+    return {"sparks": _int(ctx.msg, "sparks", 0, 0, 10),
+            "help": _int(ctx.msg, "help", 0, 0, 1),
+            "borrowed_trouble": _bool(ctx.msg, "borrowed_trouble")}
+
+
+def _actor(ctx: Ctx):
+    """The character acting: a player acts as themselves; the MM names `player`."""
+    if ctx.is_mm:
+        player = _str(ctx.msg, "player", 64)
+        if not player:
+            raise WSError("Name the player this is for.")
     else:
-        await manager.send_to(websocket, {"type": "error", "message": f"Unknown event type: {event_type}"})
-        return
-
-    # T6.3 (C-2 app-side): any handled table activity is the heartbeat for
-    # the quiet Spark-flow check — no timers, no background tasks.
-    await _maybe_nudge_spark_flow(session, session_id)
-
-
-# T6.3 (C-2 app-side): how long a player can go without earning OR spending a
-# Spark before the MM gets a quiet prompt. This is a TOOL prompt, not a rule —
-# the books state no timer. The guidance it surfaces is MM5 §Spark Flow ("the
-# Spark economy works when Sparks flow"; "midpoint diagnostic: if a player
-# hasn't spent a Spark by the session's midpoint, design a moment that rewards
-# it") and MM2 §Target Economy. The threshold approximates "an act" of quiet
-# (DESIGN §7) and is free to tune.
-SPARK_FLOW_NUDGE_SECONDS = 25 * 60
+        player = ctx.identity
+    ch = ctx.session.characters.get(player)
+    if ch is None:
+        raise WSError(f"No character for {player}." if ctx.is_mm else "You have no character yet.")
+    return ch
 
 
-async def _maybe_nudge_spark_flow(session, session_id: str) -> None:
-    """Prompt the MM — quietly, MM-only — about any player whose Spark flow
-    has stalled for a full stretch (T6.3). One prompt per stretch: the
-    cooldown suppresses repeats until the player's flow resets it.
-    """
-    now = time.monotonic()
-    for player_name in session.characters:
-        flow = session.spark_flow.setdefault(
-            player_name, {"last_flow": now, "last_nudge": None},
-        )
-        if now - flow["last_flow"] < SPARK_FLOW_NUDGE_SECONDS:
-            continue
-        if (
-            flow["last_nudge"] is not None
-            and now - flow["last_nudge"] < SPARK_FLOW_NUDGE_SECONDS
-        ):
-            continue
-        flow["last_nudge"] = now
-        await manager.send_to_identity(session_id, "mm", {
-            "type": "spark_flow_nudge",
-            "player": player_name,
-            "minutes_quiet": int((now - flow["last_flow"]) // 60),
-            "message": (
-                f"{player_name} hasn't earned or spent a Spark in a while. "
-                "MM5, Spark Flow: every 6- is a Graceful Fail opportunity, "
-                "and an unspent Spark at session end is simply gone."
-            ),
-        })
+def _target_character(ctx: Ctx, key: str = "player"):
+    name = _str(ctx.msg, key, 64)
+    ch = ctx.session.characters.get(name)
+    if ch is None:   # accept a character name as well as a player name
+        ch = next((c for c in ctx.session.characters.values() if c.name == name), None)
+    if ch is None:
+        raise WSError(f"No character {name!r}.")
+    return ch
 
 
-def _spend_sparks(character, count: int, session=None) -> int:
-    """Spend up to `count` Sparks from character, returning the amount actually spent.
-
-    Passing *session* records the spend in the Spark-flow tracker (T6.3) —
-    every real spend site does; only rule-level tests omit it.
-    """
-    actual = min(count, character.sparks)
-    for _ in range(actual):
-        character.spend_spark()
-    if actual > 0 and session is not None:
-        session.record_spark_flow(character.player_name)
-    return actual
+def _enemy(ctx: Ctx, key: str = "enemy", required: bool = True):
+    k = _str(ctx.msg, key, 64)
+    if not k:
+        if required:
+            raise WSError("Name the foe.")
+        return None
+    e = ctx.session.active_enemies.get(k)
+    if e is None:
+        raise WSError(f"No foe {k!r} on the tracker.")
+    return e
 
 
-def _apply_difficulty_step(
-    character, declared_difficulty: str, context: dict, ruleset,
-) -> tuple[str, Optional[dict]]:
-    """Compose the MM's declared difficulty with any qualifying character-side
-    Technique step (B4 Q1). All the *rule* lives in
-    `combat.apply_character_difficulty_step` — this wrapper only looks up the
-    applied Technique's display name so the caller can put both moves on the
-    broadcast payload for the roll banner (DESIGN_technique_difficulty.md §2.7:
-    "Hard (MM) -> Standard (Weapon Mastery)").
-
-    Every WS handler that resolves a difficulty label (strike, generic roll,
-    reaction) calls this — never `combat_module.apply_character_difficulty_step`
-    directly and never a re-derived step — per TD-9.
-
-    Returns `(final_label, step_info)`. `step_info` is `None` when no
-    Technique fired, which is exactly the "unaffected" case the backward
-    compatibility requirement (TD-7/8/9) hinges on: a caller that ignores a
-    `None` gets today's behaviour byte-for-byte.
-    """
-    final_label, applied_id = combat_module.apply_character_difficulty_step(
-        declared_difficulty, character, context, ruleset,
-    )
-    if applied_id is None:
-        return final_label, None
-    if applied_id == "specialty":
-        # T2.4/D2: a Specialty step shares the Technique pool; the banner
-        # names it so the table sees which single source moved the label.
-        display_name = "Specialty"
-    else:
-        tech_def = ruleset.get_technique(applied_id)
-        display_name = tech_def.name if tech_def else applied_id
-    step_info = {
-        "technique_id": applied_id,
-        "technique_name": display_name,
-        "from": declared_difficulty,
-        "to": final_label,
-    }
-    return final_label, step_info
+def _party(session) -> dict:
+    return {c.name: c for c in session.characters.values()}
 
 
-def _build_roll_request(
-    character, msg: dict, ruleset, *, press: bool = False,
-) -> tuple[RollRequest, Optional[dict]]:
-    """Build a RollRequest from a WebSocket message and character state.
-
-    Returns the request and the Technique step that moved its difficulty, if any.
-
-    B7: a Technique's step applies on every roll the MM prices, not only on the
-    three handlers the first implementation happened to wire. Weapon Mastery eases
-    "Rolls using your chosen weapon type" — so Striking with a sword and
-    Maneuvering with the same sword in the same exchange must not land on
-    different labels.
-    """
-    attribute_id = msg.get("attribute_id", "strength")
-    skill_id = msg.get("skill_id")
-    difficulty, technique_step = _apply_difficulty_step(
-        character,
-        str(msg.get("difficulty", "Standard")),
-        {
-            "skill_id": skill_id,
-            "weapon_category": msg.get("weapon_category"),
-            "weapon_type": msg.get("weapon_type"),
-            "hazard_type": msg.get("hazard_type"),
-            "knowledge_field": msg.get("knowledge_field"),
-            "declared_technique_ids": msg.get("declared_technique_ids"),
-            "specialty_declared": bool(msg.get("specialty_declared")),
-        },
-        ruleset,
-    )
-    return RollRequest(
-        attribute_id=attribute_id,
-        attribute_rating=character.attributes.get(attribute_id, 2),
-        skill_id=skill_id,
-        skill_rank_id=character.skills[skill_id].rank if skill_id and skill_id in character.skills else None,
-        difficulty_label=difficulty,
-        sparks_spent=0,  # sparks are tracked separately via _spend_sparks
-        press=press,
-        # N5: Borrowed Trouble is offered on any roll the MM prices, and III.1
-        # says in print that it stacks with Press — which only a Strike has.
-        # Wiring it only to the generic roll handler made the book's own
-        # 5d6-drop-three example impossible at the table.
-        borrowed_trouble=bool(msg.get("borrowed_trouble")),
-        description=str(msg.get("description", ""))[:200],
-    ), technique_step
-
-
-async def _handle_roll(
-    websocket: WebSocket,
-    msg: dict,
-    session,
-    session_id: str,
-    identity: str,
-) -> None:
-    """Resolve a dice roll request from a player."""
-    player_name = identity
-    character = session.characters.get(player_name)
-    if not character:
-        await manager.send_to(websocket, {"type": "error", "message": "No character found for this player."})
-        return
-
-    attribute_id = msg.get("attribute_id", "")
-    sparks_requested = int(msg.get("sparks_spent", 0))
-
-    # Validate attribute exists in character
-    if attribute_id not in character.attributes:
-        await manager.send_to(websocket, {"type": "error", "message": f"Unknown attribute '{attribute_id}'."})
-        return
-
-    sparks_to_spend = _spend_sparks(character, sparks_requested, session)
-    skill_id = msg.get("skill_id")
-
-    # B4 Q1 (TD-8/TD-9): hazard_type and knowledge_field are optional strings
-    # a generic roll may carry so Acclimated/Field of Mastery can auto-fire.
-    # Absent (None) means the corresponding auto trigger simply does not fire
-    # — existing roll messages that never sent these fields are unaffected.
-    hazard_type = msg.get("hazard_type")
-    knowledge_field = msg.get("knowledge_field")
-    difficulty_declared = str(msg.get("difficulty", "Standard"))
-    difficulty, technique_step = _apply_difficulty_step(
-        character, difficulty_declared,
-        {
-            "skill_id": skill_id,
-            "hazard_type": str(hazard_type) if hazard_type is not None else None,
-            "knowledge_field": str(knowledge_field) if knowledge_field is not None else None,
-            "declared_technique_ids": msg.get("declared_technique_ids"),
-            "specialty_declared": bool(msg.get("specialty_declared")),
-        },
-        session.ruleset,
-    )
-
-    request = RollRequest(
-        attribute_id=attribute_id,
-        attribute_rating=character.attributes[attribute_id],
-        skill_id=skill_id,
-        skill_rank_id=character.skills[skill_id].rank if skill_id and skill_id in character.skills else None,
-        difficulty_label=difficulty,
-        sparks_spent=sparks_to_spend,
-        borrowed_trouble=bool(msg.get("borrowed_trouble")),
-        description=str(msg.get("description", ""))[:200],
-    )
-
-    result = resolve_roll(request, session.ruleset)
-    result_dict = roll_result_to_dict(result)
-    _record_roll(session, player_name, result_dict)
-
-    # Auto-mark skill as used this session (PHB II.4 advancement rule)
-    used_skill = msg.get("skill_id")
-    if used_skill and used_skill in character.skills:
-        character.skills_used_this_session.add(used_skill)
-
-    # Broadcast the roll result to everyone in the session
-    await manager.broadcast(session_id, {
-        "type": "roll_result",
-        "player": player_name,
-        "character_name": character.name,
-        "roll": result_dict,
-        "character_sparks_remaining": character.sparks,
-        "technique_step": technique_step,
-    })
-
-
-async def _handle_spark_earn(msg: dict, session, session_id: str) -> None:
-    """MM awards a Spark to a player."""
-    player_name = msg.get("player_name", "")
-    reason = str(msg.get("reason", "MM award"))[:200]
-    character = session.characters.get(player_name)
-    if character:
-        character.earn_spark()
-        session.record_spark_flow(player_name)  # T6.3: an earn resets the stretch
-        await manager.broadcast(session_id, {
-            "type": "spark_earned",
-            "player": player_name,
-            "reason": reason,
-            "sparks_now": character.sparks,
-        })
-
-
-async def _handle_spark_earn_peer(msg: dict, session, session_id: str, caller: str) -> None:
-    """Any player calls 'Spark?' for another player. MM must confirm."""
-    target_player = msg.get("player_name", "")
-    await manager.broadcast(session_id, {
-        "type": "spark_nomination",
-        "nominated_by": caller,
-        "player": target_player,
-        "message": f"{caller} nominated {target_player} for a Spark — MM to confirm.",
-    })
-
-
-async def _handle_act_break(msg: dict, session, session_id: str) -> None:
-    """MM opens an Act Break Nomination window after a major scene transition."""
-    await manager.broadcast(session_id, {
-        "type": "act_break_opened",
-        "message": "Act break — nominate a player for something they did this scene.",
-    })
+def _by_character_name(session, name: str):
+    return next((c for c in session.characters.values() if c.name == name), None)
 
 
 def _record_roll(session, player_name: str, roll_dict: dict) -> None:
-    """Apply the natural 2's automatic Graceful Fail, then log the roll.
-
-    Every rolling handler goes through here so the rule cannot be true on one
-    path and false on another — which is how the Specialty step and Borrowed
-    Trouble each ended up half-wired. The award rides on the roll payload the
-    handler is about to broadcast, so the table sees the Spark with the roll
-    that earned it rather than in a race before it.
-    """
+    """The natural 2's automatic Graceful Fail, then the roll log. Every
+    rolling handler goes through here so the rule reads the same everywhere."""
     session.confirm_natural_two_graceful_fail(player_name, roll_dict)
     session.record_roll(player_name, roll_dict)
 
 
-async def _handle_claim_graceful_fail(msg: dict, session, session_id: str, caller: str) -> None:
-    """Player-initiated Graceful Fail (D6): on any 6-, the player may claim it
-    by narrating how they make the failure worse or richer. Mirrors the
-    `spark_earn_peer` nomination shape — broadcasts a claim, MM confirms
-    separately with `spark_earn`.
-    """
-    last_roll = None
-    for entry in reversed(session.roll_log):
-        if entry.get("player_name") == caller:
-            last_roll = entry
-            break
+# ---------------------------------------------------------------------------
+# Dispatch
+# ---------------------------------------------------------------------------
 
-    if not last_roll or last_roll.get("outcome") != "failure":
-        await manager.broadcast(session_id, {
-            "type": "error",
-            "message": f"{caller} has no unclaimed 6- roll to claim a Graceful Fail on.",
-        })
+Handler = Callable[[Ctx], Awaitable[None]]
+#: event -> (handler, MM only)
+HANDLERS: dict[str, tuple[Handler, bool]] = {}
+
+
+def on(event: str, mm_only: bool = False):
+    def deco(fn: Handler) -> Handler:
+        HANDLERS[event] = (fn, mm_only)
+        return fn
+    return deco
+
+
+async def _dispatch(websocket: WebSocket, msg: dict, session_id: str, identity: str,
+                    is_mm: bool) -> None:
+    """Route an incoming message: permission first, then the handler."""
+    event_type = msg.get("type")
+    session = session_store.get(session_id)
+    if session is None:
         return
-
-    if last_roll.get("graceful_fail_claimed"):
-        await manager.broadcast(session_id, {
-            "type": "error",
-            "message": f"{caller} already claimed a Graceful Fail on that roll.",
-        })
+    entry = HANDLERS.get(event_type) if isinstance(event_type, str) else None
+    if entry is None:
+        await manager.send_to(websocket, {"type": "error", "message": f"Unknown event: {event_type!r}"})
         return
-
-    last_roll["graceful_fail_claimed"] = True
-    await manager.broadcast(session_id, {
-        "type": "graceful_fail_claimed",
-        "player": caller,
-        "message": f"{caller} claims a Graceful Fail — MM to confirm.",
-    })
-
-
-#: Bounds for the MM's table roller. Wide enough for any random table an MM
-#: would reach for, narrow enough that the roller cannot be used to flood every
-#: connected client with a single message.
-_TABLE_ROLL_MAX_DICE = 100
-_TABLE_ROLL_MAX_SIDES = 1000
-
-
-async def _handle_table_roll(websocket, msg: dict, session_id: str, identity: str) -> None:
-    """Roll raw dice for the things around the game that are not the game —
-    random tables, oracles, "which of you does it notice first".
-
-    Deliberately NOT a resolution mechanic. It returns dice and a total and
-    nothing else: no outcome tier, no attribute, no skill. A 2d6 here with a
-    success band would be a second implementation of the core resolution system
-    (III.1), and would hand the MM a way to roll for an NPC — which PHB III.3
-    says never happens. It also stays out of the character roll log, which is a
-    record of what characters did.
-    """
-    notation = str(msg.get("notation", "")).strip()
-    label = str(msg.get("label", ""))[:120].strip()
-
+    handler, mm_only = entry
+    if mm_only and not is_mm:
+        await manager.send_to(websocket, {"type": "error", "event": event_type,
+                                          "message": "Only the Mirror Master can do that."})
+        return
+    ctx = Ctx(websocket, msg, session, session_id, identity, is_mm)
     try:
-        spec = DiceSpec.parse(notation)
-    except ValueError as e:
-        await manager.send_to(websocket, {"type": "error", "message": str(e)})
+        await handler(ctx)
+    except (WSError, ValueError, KeyError) as e:
+        text = e.args[0] if isinstance(e, KeyError) and e.args else str(e)
+        await manager.send_to(websocket, {"type": "error", "event": event_type, "message": str(text)})
         return
+    await _maybe_nudge_spark_flow(session, session_id)
 
-    if spec.count > _TABLE_ROLL_MAX_DICE or spec.sides > _TABLE_ROLL_MAX_SIDES:
-        await manager.send_to(websocket, {
-            "type": "error",
-            "message": (
-                f"Table roll is capped at {_TABLE_ROLL_MAX_DICE} dice "
-                f"of up to d{_TABLE_ROLL_MAX_SIDES}."
-            ),
-        })
-        return
 
-    dice = spec.roll()
-    await manager.broadcast(session_id, {
-        "type": "table_roll_result",
-        "rolled_by": identity,
-        "notation": notation,
-        "label": label,
-        "dice": dice,
-        "modifier": spec.modifier,
-        "total": spec.total(dice),
-    })
+# T6.3: how long a player can go without earning or spending a Spark before
+# the MM gets a quiet prompt. A tool prompt, not a rule (MM5, Spark flow).
+SPARK_FLOW_NUDGE_SECONDS = 25 * 60
 
 
-async def _handle_chat(msg: dict, session_id: str, identity: str) -> None:
-    text = str(msg.get("text", ""))[:2000].strip()
-    if text:
-        await manager.broadcast(session_id, {
-            "type": "chat",
-            "from": identity,
-            "text": text,
-        })
-
-
-async def _handle_skill_advance(msg: dict, session, session_id: str) -> None:
-    """MM triggers end-of-session skill advancement for a player."""
-    player_name = msg.get("player_name", "")
-    skill_id = msg.get("skill_id", "")
-    marks = int(msg.get("marks", 0))
-    character = session.characters.get(player_name)
-    if character and skill_id and marks > 0:
-        # Determine SP cost and check remaining budget
-        sk_def = session.ruleset.get_skill(skill_id)
-        is_primary = sk_def is not None and sk_def.facet == character.primary_facet
-        cost_context = "primary_facet" if is_primary else "cross_facet"
-        sp_cost = session.ruleset.get_skill_point_cost(cost_context)
-        if character.session_skill_points_remaining < sp_cost:
-            await manager.broadcast(session_id, {
-                "type": "error",
-                "message": f"Insufficient skill points: need {sp_cost}, have {character.session_skill_points_remaining}.",
-            })
-            return
-        # D16: the rank caps are checked BEFORE the deduction — advance_skill
-        # refuses a walled-off skill, and deducting first would strand the point.
-        current = character.skills.get(skill_id)
-        current_rank = current.rank if current else "novice"
-        if current_rank == character.rank_ceiling_for(skill_id, session.ruleset):
-            await manager.broadcast(session_id, {
-                "type": "error",
-                "message": character.cap_refusal_reason(skill_id, session.ruleset),
-            })
-            return
-        # N4: advance_skill also refuses a batch bigger than the cap can
-        # absorb, so the point is only spent once the marks are known to land.
-        # Deducting first was how an over-cap batch cost a point and dropped
-        # the overflow in silence.
-        try:
-            result = character.advance_skill(skill_id, marks, session.ruleset)
-        except ValueError as e:
-            await manager.broadcast(session_id, {"type": "error", "message": str(e)})
-            return
-        character.session_skill_points_remaining -= sp_cost
-        await manager.broadcast(session_id, {
-            "type": "skill_advanced",
-            "player": player_name,
-            "skill_id": skill_id,
-            "marks_added": marks,
-            "rank_advances": result["rank_advances"],
-            "facet_level_advances": result["facet_level_advances"],
-            "major_advancement": result.get("major_advancement", False),
-            "new_rank": character.skills[skill_id].rank if skill_id in character.skills else "novice",
-            "new_facet_level": character.facet_level,
-            "total_facet_levels": character.total_facet_levels,
-            "career_advances": character.career_advances,
-            # A Facet level grants a Technique pick (character.advance_skill).
-            # Without this the client's counter stays stale until a reload, so a
-            # player who just levelled cannot see the pick they earned.
-            "technique_picks_available": character.technique_picks_available,
-        })
-
-
-async def _handle_mark_skill_used(msg: dict, session, session_id: str) -> None:
-    """MM marks a skill as used this session for a player, enabling advancement."""
-    player_name = msg.get("player_name", "")
-    skill_id = msg.get("skill_id", "")
-    character = session.characters.get(player_name)
-    if character and skill_id:
-        character.skills_used_this_session.add(skill_id)
-        await manager.broadcast(session_id, {
-            "type": "skill_marked_used",
-            "player": player_name,
-            "skill_id": skill_id,
-            "skills_used": sorted(character.skills_used_this_session),
-        })
-
-
-# ---------------------------------------------------------------------------
-# Combat handlers
-# ---------------------------------------------------------------------------
-
-async def _handle_combat_start(msg: dict, session, session_id: str) -> None:
-    """MM initialises combat. Sets all characters' endurance_current = endurance_max.
-
-    Armor's per-scene downgrade budget (D2) is initialised here only if it
-    isn't already set — a second `combat_start` within the same scene (a
-    second fight) must not top the budget back up; it resets only at end of
-    scene. See `combat.armor_budget`.
-    """
-    state: dict = {}
-    session.offensive_actions_this_exchange.clear()
-    for player_name, character in session.characters.items():
-        character.endurance_current = character.endurance_max(session.ruleset)
-        character.conditions = []
-        character.posture = "measured"
-        if character.armor and character.armor_downgrades_remaining is None:
-            character.armor_downgrades_remaining = combat_module.armor_budget(
-                character.armor, session.ruleset,
-            )
-        state[player_name] = {
-            "endurance_current": character.endurance_current,
-            "endurance_max": character.endurance_current,
-            "conditions": [],
-            "posture": "measured",
-        }
-    await manager.broadcast(session_id, {"type": "combat_started", "characters": state})
-
-
-async def _handle_declare_posture(
-    websocket, msg: dict, session, session_id: str, identity: str,
-) -> None:
-    """Character declares their posture for this exchange. Stored but not broadcast."""
-    player_name = identity
-    character = session.characters.get(player_name)
-    posture = msg.get("posture", "measured")
-    valid_postures = {"aggressive", "measured", "defensive", "withdrawn"}
-    if character and posture in valid_postures:
-        character.posture = posture
-        await manager.send_to(websocket, {"type": "posture_declared", "posture": posture})
-    else:
-        await manager.send_to(websocket, {"type": "error", "message": f"Invalid posture '{posture}'."})
-
-
-async def _handle_reveal_postures(session, session_id: str) -> None:
-    """MM reveals all postures simultaneously."""
-    postures = {
-        player_name: (character.posture or "measured")
-        for player_name, character in session.characters.items()
-    }
-    await manager.broadcast(session_id, {"type": "postures_revealed", "postures": postures})
-
-
-async def _handle_strike(
-    websocket, msg: dict, session, session_id: str, identity: str,
-) -> None:
-    """Character attempts a Strike. Resolves roll and broadcasts result."""
-    player_name = identity
-    character = session.characters.get(player_name)
-    if not character:
-        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
-        return
-
-    if character.endurance_current is None:
-        await manager.send_to(websocket, {"type": "error", "message": "Not in combat."})
-        return
-
-    if character.posture == "withdrawn":
-        await manager.send_to(websocket, {"type": "error", "message": "Cannot Strike from Withdrawn posture."})
-        return
-
-    press = bool(msg.get("press", False))
-    sparks_requested = int(msg.get("sparks_spent", 0))
-    difficulty_declared = str(msg.get("difficulty", "Standard"))
-    target_name = str(msg.get("target", ""))
-
-    # TD-7 (B4 Q1 side benefit, IV.1:13-19): an optional weapon category on
-    # the Strike. Reference data only — like `ruleset.equipment.weapon_categories`
-    # itself, this never gates which attribute/skill pairing the client sends
-    # (INV-8: the books may not restrict a Strike pairing the engine permits).
-    # It only (a) feeds Weapon Mastery's auto-trigger and (b) lets the client
-    # default the attribute picker, which is a client-side UX choice, not
-    # something this handler enforces.
-    weapon_category = msg.get("weapon_category")
-    if weapon_category is not None:
-        weapon_category = str(weapon_category)
-        valid_categories = set(session.ruleset.equipment.weapon_categories)
-        if weapon_category not in valid_categories:
-            await manager.send_to(websocket, {
-                "type": "error",
-                "message": f"Unknown weapon category '{weapon_category}'.",
-            })
-            return
-
-    # TD-18 (DESIGN §8): a second, orthogonal, optional field — `weapon_type`
-    # (blades/blunt/polearms/unarmed) is the *fictional* vocabulary Weapon
-    # Mastery masters, not the mechanical one `weapon_category` carries.
-    # Reference data only, same INV-8 reasoning as above; it feeds only
-    # Weapon Mastery's auto-trigger and sets no attribute default.
-    weapon_type = msg.get("weapon_type")
-    if weapon_type is not None:
-        weapon_type = str(weapon_type)
-        valid_types = set(session.ruleset.equipment.weapon_types)
-        if weapon_type not in valid_types:
-            await manager.send_to(websocket, {
-                "type": "error",
-                "message": f"Unknown weapon type '{weapon_type}'.",
-            })
-            return
-
-    # TD-14 (B4 Q3): *The Final Blow* is a licensed override, declared with
-    # the Strike. Preconditions are checked here, before the roll resolves
-    # and before any Spark is actually spent (`_spend_sparks` below), so a
-    # rejected declaration costs the player nothing: not unlocked, already
-    # used this session, not a Combat roll, or no Spark requested on this
-    # roll all refuse outright. Whether it *fires* is decided after the
-    # roll, from the outcome (7+ per the BRIEF). Whether it *commits* is a
-    # separate, later step — MM confirmation via `final_blow_confirm` — per
-    # DESIGN §4: auto-apply governs difficulty steps, not actor removal.
-    final_blow_requested = bool(msg.get("final_blow", False))
-    if final_blow_requested:
-        if "the_final_blow" not in character.techniques:
-            await manager.send_to(websocket, {
-                "type": "error", "message": "The Final Blow is not unlocked.",
-            })
-            return
-        if "the_final_blow" in character.techniques_used_this_session:
-            await manager.send_to(websocket, {
-                "type": "error", "message": "The Final Blow has already been used this session.",
-            })
-            return
-        # B8: on a working the declared skill is discarded and the tradition's
-        # is rolled, so the declared field cannot answer this — a magical
-        # Strike is never a Combat roll.
-        if bool(msg.get("magical", False)) or str(msg.get("skill_id", "combat")) != "combat":
-            await manager.send_to(websocket, {
-                "type": "error", "message": "The Final Blow requires a Combat roll.",
-            })
-            return
-        # Check the Spark the character *has*, not the one the client asked to
-        # spend: `_spend_sparks` clamps to `character.sparks` and silently
-        # spends 0, so testing the request alone hands the capstone out free to
-        # anyone at 0 Sparks.
-        if sparks_requested < 1 or character.sparks < 1:
-            await manager.send_to(websocket, {
-                "type": "error", "message": "The Final Blow requires spending a Spark on this roll.",
-            })
-            return
-
-    # Accept attribute/skill from client; default to strength/combat for backward
-    # compat. This is read and validated before anything is spent: a Strike that
-    # names an attribute the character does not have is refused, and a refusal
-    # must cost nothing.
-    attribute_id = str(msg.get("attribute_id", "strength"))
-    skill_id = msg.get("skill_id", "combat")
-    if attribute_id not in character.attributes:
-        await manager.send_to(websocket, {"type": "error", "message": f"Unknown attribute '{attribute_id}'."})
-        return
-
-    # D25 (III.3, *A magical Strike is always a full form*): a blow aimed at
-    # putting someone down is meaningful power, so magic used as a Strike is
-    # Significant or Major and spends a readied intent. The free Minor working
-    # is a Maneuver, not a Strike.
-    #
-    # Nothing below pays for anything. Every cost — Endurance for the Press,
-    # Sparks, the intent, and the exchange's contested flag — is applied after
-    # the roll is accepted, because four separate refusals live between here and
-    # there. This block only checks that the declaration is legal and affordable.
-    magical = bool(msg.get("magical", False))
-    magic_domain_id = magic_scope = magic_purpose = None
-    magic_intent_cost = None
-    off_purpose_sparks = 0
-    spark_use = msg.get("spark_use")
-    spark_declared = spark_use in VALID_SPARK_USES
-    reach_push = spark_use == "pre_technique_push"
-
-    # The declaration cannot be taken on trust: II.3 gives each tradition its
-    # roll, and III.3 names those same pairings as the magical attack. A Strike
-    # rolled on Attune or Lore *is* a working, so an undeclared one is refused
-    # rather than resolved for free. The set of skills comes from the ruleset
-    # (combat.tradition_skills), not from a list kept here.
-    if (not magical and character.magic_domain
-            and skill_id in combat_module.tradition_skills(session.ruleset)):
-        await manager.send_to(websocket, {
-            "type": "error",
-            "message": (
-                f"A Strike rolled on {skill_id} is a magical Strike (III.3, "
-                "*Mind and Soul in a Fight*) — declare it as a full form. It "
-                "spends a readied intent."
-            ),
-        })
-        return
-
-    if magical:
-        if not character.magic_domain:
-            await manager.send_to(websocket, {
-                "type": "error", "message": "Character has no magic domain."})
-            return
-        # II.3, *Before the Technique*: an unformalized caster works at Minor
-        # scope and has no intents to spend, so they have no magical Strike —
-        # except the one the reach-Spark buys (II.3, Reaching Significant
-        # Early), which resolve_magic_roll validates and which is paid for
-        # below like any other Spark.
-        if not character.magic_technique_active and not reach_push:
-            await manager.send_to(websocket, {
-                "type": "error",
-                "message": (
-                    "Before the Technique formalizes your domain you work at "
-                    "Minor scope, and a Minor working is not a Strike (II.3, "
-                    "III.3). Reshape the fight with a Maneuver or a Support, "
-                    "or spend a Spark to reach Significant."
-                ),
-            })
-            return
-        magic_domain_id = str(msg.get("domain_id") or character.magic_domain)
-        magic_scope = str(msg.get("scope", "significant"))
-        _pi = session.ruleset.magic.prepared_intents if session.ruleset.magic else None
-        # D23's contract: a setting that drops `prepared_intents` gets the
-        # unlimited game back. With no section there is no intent to spend and
-        # so no scope to withhold — any scope may be Struck with.
-        strike_scopes = _pi.strike_scopes if _pi else None
-        if strike_scopes is not None and magic_scope not in strike_scopes:
-            await manager.send_to(websocket, {
-                "type": "error",
-                "message": (
-                    "A Minor working cannot be a Strike (III.3, D25). Reshape "
-                    "the fight with a Maneuver or a Support — those are free — "
-                    "or declare Significant and spend the intent."
-                ),
-            })
-            return
-        magic_purpose = msg.get("purpose")
-        magic_purpose = str(magic_purpose) if magic_purpose else None
-        try:
-            magic_intent_cost = character.intent_cost(
-                magic_purpose, magic_scope, session.ruleset)
-        except ValueError as e:
-            await manager.send_to(websocket, {"type": "error", "message": str(e)})
-            return
-        pi = session.ruleset.magic.prepared_intents if session.ruleset.magic else None
-        off_purpose_sparks = (
-            pi.off_purpose_spark_cost if (magic_intent_cost == "spark" and pi) else 0)
-        # Every Spark this Strike will cost, counted before any is spent: the
-        # dice the player asked for, the one a declared `spark_use` costs
-        # (the same price `cast` charges for it), and the off-purpose working.
-        needed = off_purpose_sparks + sparks_requested + (1 if spark_declared else 0)
-        if character.sparks < needed:
-            await manager.send_to(websocket, {
-                "type": "error",
-                "message": (
-                    f"That working costs {needed} Spark"
-                    f"{'s' if needed != 1 else ''} — "
-                    + (f"{off_purpose_sparks} because nothing is readied for "
-                       f"{magic_purpose}, " if off_purpose_sparks else "")
-                    + f"and you have {character.sparks}."
-                ),
-            })
-            return
-
-    # PHB III.3: Press costs Endurance (facet.yaml combat.press.endurance_cost).
-    # Checked here, paid after the roll is accepted — a refused Strike must not
-    # leave the character a point poorer for an action that never happened.
-    press_cost = session.ruleset.combat.press.endurance_cost if press else 0
-    if press and (character.endurance_current is None
-                  or character.endurance_current < press_cost):
-        await manager.send_to(websocket, {"type": "error", "message": "No Endurance Pool points to Press."})
-        return
-
-    # The dice the Sparks buy. _spend_sparks clamps to what the character holds,
-    # so the roll is built from the same number that will actually be paid.
-    sparks_to_spend = min(sparks_requested, max(0, character.sparks))
-
-    # Posture offense modifier plus any Condition penalty (Staggered −1, PHB III.3).
-    # Both come from combat.offense_modifier so this path and the simulator's
-    # resolve_strike cannot drift apart again.
-    offense_mod = combat_module.offense_modifier(
-        character.posture or "measured", character.conditions, session.ruleset,
-    ) or 0
-
-    # B4 Q1 (TD-9): the MM's declared label composes with at most one
-    # character-side Technique step — declared label first, step second
-    # (combat.apply_character_difficulty_step is the rule's only home). A
-    # working has no declared label: its difficulty comes from domain and
-    # scope, so the step is neither computed nor reported for one.
-    difficulty, technique_step = difficulty_declared, None
-    if not magical:
-        difficulty, technique_step = _apply_difficulty_step(
-            character, difficulty_declared,
-            {
-                "skill_id": skill_id,
-                "weapon_category": weapon_category,
-                "weapon_type": weapon_type,
-                "declared_technique_ids": msg.get("declared_technique_ids"),
-                "specialty_declared": bool(msg.get("specialty_declared")),
-            },
-            session.ruleset,
-        )
-
-    request = RollRequest(
-        attribute_id=attribute_id,
-        attribute_rating=character.attributes.get(attribute_id, 2),
-        skill_id=skill_id,
-        skill_rank_id=character.skills[skill_id].rank if skill_id and skill_id in character.skills else None,
-        difficulty_label=difficulty,
-        sparks_spent=sparks_to_spend,
-        press=press,
-        borrowed_trouble=bool(msg.get("borrowed_trouble")),
-        description=str(msg.get("description", ""))[:200],
-    )
-    if magical:
-        # The difficulty of a working comes from domain + scope, and every rule
-        # that shapes it — pre-Technique ceilings, reach-Sparks, the Second
-        # Domain tax, the tradition's attribute and skill — lives in
-        # resolve_magic_roll. This path asks it rather than rebuilding any of
-        # it; the MM's declared label and Technique steps do not apply, because
-        # nobody declared a label. Posture and Conditions still do, below.
-        try:
-            result = resolve_magic_roll(
-                character=character,
-                domain_id=magic_domain_id,
-                scope=magic_scope,
-                intent=str(msg.get("description", ""))[:200],
-                ruleset=session.ruleset,
-                spark_use=spark_use,
-                press=press,
-                borrowed_trouble=bool(msg.get("borrowed_trouble")),
-                sparks_spent=sparks_to_spend,
-            )
-        except ValueError as e:
-            await manager.send_to(websocket, {"type": "error", "message": str(e)})
-            return
-    else:
-        result = resolve_roll(request, session.ruleset)
-    result_dict = roll_result_to_dict(result)
-
-    # Apply posture offense modifier to total
-    if offense_mod != 0:
-        result_dict["offense_modifier"] = offense_mod
-        result_dict["total"] += offense_mod
-        # Re-evaluate outcome with adjusted total
-        from app.game.engine import _determine_outcome
-        outcome, label, desc = _determine_outcome(result_dict["total"], session.ruleset)
-        result_dict["outcome"] = outcome
-        result_dict["outcome_label"] = label
-        result_dict["outcome_description"] = desc
-
-    _record_roll(session, player_name, result_dict)
-
-    # ---- Everything the Strike costs is paid here, and only here ----------
-    # The roll was accepted, so from this point nothing can refuse it. Before
-    # this line four things could: an unaffordable declaration, an unknown
-    # attribute, a Press with no Endurance, and resolve_magic_roll's own rules.
-    # Paying above any of them is how a rejected action used to cost a Spark.
-    if press:
-        character.endurance_current -= press_cost
-    if sparks_to_spend:
-        _spend_sparks(character, sparks_to_spend, session)
-    # K-2/D5: a Strike — landed or not — contests the exchange.
-    session.offensive_actions_this_exchange.add(player_name)
-
-    if magical:
-        # A declared Spark use costs its Spark, exactly as it does on `cast`:
-        # the dice bonus, or the reach that bought this scope.
-        if spark_declared:
-            _spend_sparks(character, 1, session)
-        magic_intent_cost = character.pay_intent_cost(
-            magic_purpose, magic_scope, session.ruleset)
-        if magic_intent_cost == "spark" and off_purpose_sparks:
-            _spend_sparks(character, off_purpose_sparks, session)
-        # The tradition's skill rolled, so the caster used it (T4.1/D7). The
-        # skill the message named was not rolled at all, so it earns nothing.
-        if result.request.skill_id:
-            character.skills_used_this_session.add(result.request.skill_id)
-    elif skill_id and skill_id in character.skills:
-        # Auto-mark skill as used this session
-        character.skills_used_this_session.add(skill_id)
-
-    # TD-14: Final Blow fires on 7+ (both success tiers, per the BRIEF) —
-    # never on a 6- failure. Firing only *offers* the removal; it does not
-    # touch any enemy and does not mark the Technique used. That happens
-    # only in `_handle_final_blow_confirm`, gated to the MM.
-    final_blow_available = bool(
-        final_blow_requested
-        and sparks_to_spend >= 1          # the Spark was actually paid, not just requested
-        and result_dict["outcome"] in ("full_success", "partial_success")
-    )
-
-    # Record the offer so the MM's confirm can be checked against it. Without a
-    # live offer to match, `final_blow_available: false` is only a client hint,
-    # and a stale or replayed confirm could remove an enemy after a failed
-    # Strike (TODO T12). One offer per attacker: a Final Blow Strike replaces or
-    # clears only its own, and an ordinary Strike touches none.
-    if final_blow_available:
-        session.pending_final_blows[player_name] = {
-            "tracker_key": target_name,
-            "offer_id": uuid.uuid4().hex,
-        }
-    elif final_blow_requested:
-        # This attacker's own failed attempt closes their offer. Another
-        # character's offer is none of this Strike's business.
-        session.pending_final_blows.pop(player_name, None)
-
-    session.save_character_to_disk(player_name)
-    await manager.broadcast(session_id, {
-        "type": "strike_result",
-        "attacker": player_name,
-        "target": target_name,
-        "roll": result_dict,
-        "magical": magical,
-        "domain_id": magic_domain_id,
-        "scope": magic_scope,
-        "purpose": magic_purpose,
-        "intent_cost": magic_intent_cost,
-        "readied_intents": character.readied_intents,
-        "press_used": press,
-        "posture": character.posture,
-        "endurance_remaining": character.endurance_current,
-        "sparks_remaining": character.sparks,
-        "weapon_category": weapon_category,
-        "weapon_type": weapon_type,
-        "technique_step": technique_step,
-        "final_blow_available": final_blow_available,
-        # Names the specific offer, so the MM's confirm commits this Strike's
-        # offer and not a stale one still on screen (TODO T12).
-        "final_blow_offer_id": session.pending_final_blows.get(player_name, {}).get("offer_id"),
-    })
-
-
-async def _handle_react(
-    websocket, msg: dict, session, session_id: str, identity: str,
-) -> None:
-    """Character declares a reaction (dodge/parry/absorb/intercept)."""
-    player_name = identity
-    character = session.characters.get(player_name)
-    if not character:
-        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
-        return
-
-    if character.endurance_current is None:
-        await manager.send_to(websocket, {"type": "error", "message": "Not in combat."})
-        return
-
-    reaction = str(msg.get("reaction", "absorb"))
-
-    # PHB III.3: 0 Endurance = Absorb only, regardless of Posture. The floor
-    # applies unconditionally — Withdrawn's free reactions and Defensive's
-    # reduced cost only matter once there is at least 1 Endurance to spend.
-    if character.endurance_current <= 0 and reaction != "absorb":
-        await manager.send_to(websocket, {
-            "type": "error",
-            "message": (
-                session.ruleset.combat.endurance_floor_rule
-                or "No Endurance remaining — only Absorb is available."
-            ),
-        })
-        return
-    valid_reactions = {"dodge", "parry", "absorb", "intercept"}
-    if reaction not in valid_reactions:
-        await manager.send_to(websocket, {"type": "error", "message": f"Unknown reaction '{reaction}'."})
-        return
-
-    # PHB III.3:219 — Intercept is capped at one per exchange, unlike other
-    # reaction types.
-    if reaction == "intercept" and character.intercepts_this_exchange >= 1:
-        await manager.send_to(websocket, {
-            "type": "error",
-            "message": "Already Intercepted an action this exchange.",
-        })
-        return
-
-    # Compute Endurance cost (adjust for posture). K1 (BRIEF D8): the
-    # Aggressive surcharge applies only to the first reaction of the
-    # exchange — see `reactions_this_exchange`'s docstring on Character.
-    is_first_reaction = character.reactions_this_exchange == 0
-    character.reactions_this_exchange += 1
-    if reaction == "intercept":
-        character.intercepts_this_exchange += 1
-    cost = combat_module.reaction_cost(
-        reaction, character.posture or "measured", session.ruleset, is_first_reaction,
-    )
-
-    if character.endurance_current < cost:
-        # Cannot pay — forced to Absorb
-        reaction = "absorb"
-        cost = 0
-
-    character.endurance_current = max(0, character.endurance_current - cost)
-
-    # Active reactions (dodge/parry) require a roll
-    roll_result = None
-    technique_step = None
-    if reaction in ("dodge", "parry"):
-        attr_id = "dexterity" if reaction == "dodge" else "strength"
-        skill_id = None if reaction == "dodge" else "combat"
-        difficulty_declared = str(msg.get("difficulty", "Standard"))
-        # B4 Q1 (TD-9): same composition as Strike/roll — declared label
-        # first, at most one character-side Technique step second.
-        difficulty, technique_step = _apply_difficulty_step(
-            character, difficulty_declared,
-            {
-                "skill_id": skill_id,
-                "declared_technique_ids": msg.get("declared_technique_ids"),
-                "specialty_declared": bool(msg.get("specialty_declared")),
-            },
-            session.ruleset,
-        )
-        request = RollRequest(
-            attribute_id=attr_id,
-            attribute_rating=character.attributes.get(attr_id, 2),
-            skill_id=skill_id,
-            skill_rank_id=character.skills[skill_id].rank if skill_id and skill_id in character.skills else None,
-            difficulty_label=difficulty,
-            borrowed_trouble=bool(msg.get("borrowed_trouble")),
-            description=f"{reaction} reaction",
-        )
-        roll = resolve_roll(request, session.ruleset)
-        roll_result = roll_result_to_dict(roll)
-        _record_roll(session, player_name, roll_result)
-
-    # Auto-mark skill as used this session (parry uses combat skill)
-    if reaction == "parry" and "combat" in character.skills:
-        character.skills_used_this_session.add("combat")
-
-    session.save_character_to_disk(player_name)
-    await manager.broadcast(session_id, {
-        "type": "react_result",
-        "player": player_name,
-        "reaction": reaction,
-        "endurance_cost": cost,
-        "endurance_remaining": character.endurance_current,
-        "roll": roll_result,
-        "technique_step": technique_step,
-    })
-
-
-def _reduce_incoming_condition(
-    condition: str, character, ruleset, reaction_downgraded: bool = False,
-) -> tuple[str, bool]:
-    """Reduce an incoming condition by armor and/or a partial reaction, under
-    PHB III.3's non-stacking rule (`combat.resolve_incoming_condition`).
-
-    Returns `(condition, armor_spent)` — the condition after the single greater
-    reduction, or `""` if it was reduced away entirely. `armor_spent` says
-    whether an armor charge actually paid for it, so the broadcast can tell a
-    player their armor absorbed the hit versus their Parry did.
-
-    Callers pass the **raw** incoming condition and set `reaction_downgraded`
-    when a Dodge/Parry already partially succeeded — they must not hand in a
-    pre-downgraded condition, or armor would reduce it a second time. Updates
-    `character.armor_downgrades_remaining` in place.
-    """
-    if not ruleset.combat:
-        return condition, False
-
-    original_tier = combat_module.condition_tier(condition, ruleset)
-    if original_tier <= 0:
-        return condition, False
-
-    result = combat_module.resolve_incoming_condition(
-        original_tier,
-        character.armor,
-        character.armor_downgrades_remaining or 0,
-        ruleset,
-        reaction_downgraded=reaction_downgraded,
-    )
-    character.armor_downgrades_remaining = result.downgrades_remaining
-
-    if result.tier == original_tier:
-        return condition, False
-    if result.tier == 0:
-        return "", result.armor_spent
-
-    # Map back to a condition of the lower tier (pick first available)
-    conds = ruleset.combat.conditions
-    tier_map = {1: conds.tier1, 2: conds.tier2, 3: conds.tier3}
-    lower_tier_conds = tier_map.get(result.tier, [])
-    if lower_tier_conds:
-        return lower_tier_conds[0].id, result.armor_spent
-    return condition, result.armor_spent
-
-
-async def _handle_apply_condition(msg: dict, session, session_id: str) -> None:
-    """MM applies a condition to a character."""
-    player_name = msg.get("player_name", "")
-    condition = str(msg.get("condition", ""))
-    character = session.characters.get(player_name)
-    if not character:
-        return
-
-    # `reaction_downgraded` is set when the target's Dodge/Parry partially
-    # succeeded. The MM sends the RAW incoming condition either way; armor and
-    # the reaction do not stack (PHB III.3), so the engine — not the MM —
-    # applies the single greater reduction. Absent the flag, behaviour is
-    # exactly as before: armor alone reduces, and pays a charge for it.
-    reaction_downgraded = bool(msg.get("reaction_downgraded", False))
-    condition, armor_spent = _reduce_incoming_condition(
-        condition, character, session.ruleset, reaction_downgraded,
-    )
-    if not condition:
-        await manager.broadcast(session_id, {
-            "type": "condition_applied",
-            "player": player_name,
-            "condition": None,
-            "armor_absorbed": armor_spent,
-            "reaction_downgraded": reaction_downgraded,
-            "all_conditions": list(character.conditions),
-        })
-        return
-
-    # Stacking: a second Tier 2 condition of the SAME type escalates to Broken (D5 ledger row 2).
-    # A duplicate of anything below Tier 2 is a silent no-op (pre-existing engine
-    # behaviour, orthogonal to the simulator's list-based semantics — see LOG WS-A0).
-    tier = combat_module.condition_tier(condition, session.ruleset)
-    if condition in character.conditions and tier < 2:
-        pass
-    else:
-        result = combat_module.apply_condition(character.conditions, condition, tier, session.ruleset)
-        if result.broken:
-            condition = "broken"
-            if condition not in character.conditions:
-                character.conditions.append(condition)
-
-    session.save_character_to_disk(player_name)
-    await manager.broadcast(session_id, {
-        "type": "condition_applied",
-        "player": player_name,
-        "condition": condition,
-        "all_conditions": list(character.conditions),
-    })
-
-
-async def _handle_clear_condition(msg: dict, session, session_id: str) -> None:
-    """MM clears a condition from a character."""
-    player_name = msg.get("player_name", "")
-    condition = str(msg.get("condition", ""))
-    character = session.characters.get(player_name)
-    if character and condition in character.conditions:
-        character.conditions.remove(condition)
-    session.save_character_to_disk(player_name)
-    await manager.broadcast(session_id, {
-        "type": "condition_cleared",
-        "player": player_name,
-        "condition": condition,
-        "all_conditions": list(character.conditions) if character else [],
-    })
-
-
-async def _handle_end_exchange(websocket, session, session_id: str) -> None:
-    """MM signals end of exchange: clear Tier 1 conditions, apply Withdrawn
-    recovery (up to the pool, D5), and prompt the MM when the exchange was
-    uncontested (K-2/D5). `websocket` is the MM's own socket — the
-    uncontested prompt goes only there, not to the table."""
-    updates: dict = {}
-    for player_name, character in session.characters.items():
-        if character.endurance_current is None:
-            continue
-
-        # Clear Tier 1 conditions
-        cleared = combat_module.end_exchange(character.conditions, session.ruleset)
-
-        # K1 (BRIEF D8): reset the per-exchange reaction count.
-        character.reactions_this_exchange = 0
-        # III.3:219 — Intercept's once-per-exchange cap resets too.
-        character.intercepts_this_exchange = 0
-        # R3 Cover expires with the Tier 1 Conditions, like every other
-        # end-of-exchange tag; the rule is combat.expire_end_of_exchange's.
-        combat_module.expire_end_of_exchange(character, session.ruleset)
-
-        # Withdrawn endurance recovery, up to the pool — the clamp is a rule
-        # (III.3/D5) and lives in combat.apply_withdrawn_recovery.
-        if character.posture == "withdrawn":
-            character.endurance_current = combat_module.apply_withdrawn_recovery(
-                character.endurance_current,
-                character.endurance_max(session.ruleset),
-                session.ruleset,
-            )
-
-        updates[player_name] = {
-            "conditions": list(character.conditions),
-            "cleared_conditions": cleared,
-            "endurance_current": character.endurance_current,
-        }
-
-    # R2: end-of-exchange tag expiry on the tracked enemies. Open is not a
-    # Condition, so it needs its own pass; whether it actually expires is the
-    # ruleset's call (`combat.enemy_durability.open_clears`), read through
-    # combat.expire_end_of_exchange rather than decided here.
-    enemy_updates: dict = {}
-    for tracker_key, enemy in session.active_enemies.items():
-        expired = combat_module.expire_end_of_exchange(enemy, session.ruleset)
-        cleared = combat_module.end_exchange(enemy.conditions, session.ruleset)
-        if expired or cleared:
-            enemy_updates[tracker_key] = {
-                "open": enemy.open,
-                "conditions": list(enemy.conditions),
-                "cleared_conditions": cleared,
-                "expired_tags": expired,
-            }
-
-    for pn in updates:
-        session.save_character_to_disk(pn)
-    # A Final Blow offer belongs to the exchange that produced it. Left standing,
-    # a stale toast could commit against a later, different Strike (TODO T12).
-    session.pending_final_blows.clear()
-    await manager.broadcast(session_id, {
-        "type": "exchange_ended",
-        "characters": updates,
-        "enemies": enemy_updates,
-    })
-
-    # K-2/D5: an exchange no PC contested lets the situation advance for
-    # free. The rule reads from combat.exchange_uncontested (its only home);
-    # this handler only relays the prompt to the MM who ended the exchange.
-    if combat_module.exchange_uncontested(session.offensive_actions_this_exchange):
-        await manager.send_to(websocket, {
-            "type": "uncontested_exchange",
-            "message": (
-                "No one took an offensive action this exchange — the situation "
-                "advances for free. Reposition, reinforce, progress a clock, "
-                "or take the objective. No roll."
-            ),
-        })
-    session.offensive_actions_this_exchange.clear()
-
-
-async def _handle_combat_end(session, session_id: str) -> None:
-    """MM ends combat: clear all ephemeral combat state."""
-    for character in session.characters.values():
-        character.endurance_current = None
-        character.conditions = []
-        character.posture = None
-    session.pending_final_blows.clear()
-    await manager.broadcast(session_id, {"type": "combat_ended"})
-
-
-# ---------------------------------------------------------------------------
-# Magic handler
-# ---------------------------------------------------------------------------
-
-async def _handle_saving_throw(
-    websocket, msg: dict, session, session_id: str, identity: str,
-) -> None:
-    """Character makes a saving throw (III.1:84-99): 2d6 + the Major
-    Attribute modifier. Something is happening *to* the character, not
-    something they chose to attempt."""
-    player_name = identity
-    character = session.characters.get(player_name)
-    if not character:
-        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
-        return
-
-    major_attribute_id = str(msg.get("major_attribute_id", ""))
-    known_majors = {ma.id for ma in session.ruleset.major_attributes}
-    if major_attribute_id not in known_majors:
-        await manager.send_to(websocket, {
-            "type": "error",
-            "message": f"Unknown Major Attribute '{major_attribute_id}'.",
-        })
-        return
-
-    difficulty = str(msg.get("difficulty", "Standard"))
-    sparks_requested = int(msg.get("sparks_spent", 0))
-    sparks_to_spend = _spend_sparks(character, sparks_requested, session)
-
-    result = resolve_saving_throw(
-        major_attribute_id, character, session.ruleset,
-        difficulty_label=difficulty, sparks_spent=sparks_to_spend,
-    )
-    result_dict = roll_result_to_dict(result)
-    _record_roll(session, player_name, result_dict)
-
-    await manager.broadcast(session_id, {
-        "type": "saving_throw_result",
-        "player": player_name,
-        "major_attribute_id": major_attribute_id,
-        "roll": result_dict,
-        "outcome": result_dict["outcome"],
-        "sparks_remaining": character.sparks,
-    })
-
-
-async def _handle_cast(
-    websocket, msg: dict, session, session_id: str, identity: str,
-) -> None:
-    """Player declares a magical action. Server resolves difficulty and rolls."""
-    player_name = identity
-    character = session.characters.get(player_name)
-    if not character:
-        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
-        return
-
-    if not character.magic_domain:
-        await manager.send_to(websocket, {"type": "error", "message": "Character has no magic domain."})
-        return
-
-    domain_id = str(msg.get("domain_id", character.magic_domain))
-    scope = str(msg.get("scope", "minor"))
-    intent = str(msg.get("intent", ""))[:500]
-    spark_use = msg.get("spark_use")
-
-    if scope not in ("minor", "significant", "major"):
-        await manager.send_to(websocket, {"type": "error", "message": f"Invalid scope '{scope}'."})
-        return
-
-    # A declared Spark use needs a Spark available — but the Spark is only
-    # spent AFTER the engine accepts the use (T2.2/D8: a refused reach attempt
-    # must not consume the Spark; the old order burned it before rejection).
-    spark_declared = spark_use in VALID_SPARK_USES
-    if spark_declared and character.sparks <= 0:
-        await manager.send_to(websocket, {"type": "error", "message": "No Sparks remaining."})
-        return
-
-    # D23: price the working before rolling it. Every rule is the character
-    # model's; the handler only refuses what the caster cannot afford.
-    purpose = msg.get("purpose")
-    purpose = str(purpose) if purpose else None
-    try:
-        intent_cost = character.intent_cost(purpose, scope, session.ruleset)
-    except ValueError as e:
-        await manager.send_to(websocket, {"type": "error", "message": str(e)})
-        return
-    pi = session.ruleset.magic.prepared_intents if session.ruleset.magic else None
-    off_purpose_sparks = (
-        pi.off_purpose_spark_cost if (intent_cost == "spark" and pi) else 0)
-    if character.sparks < off_purpose_sparks + (1 if spark_declared else 0):
-        await manager.send_to(websocket, {
-            "type": "error",
-            "message": (
-                f"Nothing readied for {purpose}: an off-purpose working costs "
-                f"{off_purpose_sparks} Spark"
-                + (" on top of the Spark for the dice" if spark_declared else "")
-                + f", and you have {character.sparks}."
-            ),
-        })
-        return
-
-    try:
-        result = resolve_magic_roll(
-            character=character,
-            domain_id=domain_id,
-            scope=scope,
-            intent=intent,
-            ruleset=session.ruleset,
-            spark_use=spark_use,
-        )
-    except ValueError as e:
-        await manager.send_to(websocket, {"type": "error", "message": str(e)})
-        return
-
-    if spark_declared:
-        _spend_sparks(character, 1, session)
-
-    # D23: the engine accepted the working, so it is paid for now — a refused
-    # working never costs an intent or a Spark.
-    paid = character.pay_intent_cost(purpose, scope, session.ruleset)
-    if paid == "spark" and off_purpose_sparks:
-        _spend_sparks(character, off_purpose_sparks, session)
-
-    # T4.1/D7: the cast rolled the tradition's skill, so the caster used it —
-    # the same mark every other rolling handler records, and what advancement
-    # reads to decide whether a skill may take a point.
-    if result.request.skill_id:
-        character.skills_used_this_session.add(result.request.skill_id)
-
-    result_dict = roll_result_to_dict(result)
-    _record_roll(session, player_name, result_dict)
-
-    await manager.broadcast(session_id, {
-        "type": "cast_result",
-        "player": player_name,
-        "domain_id": domain_id,
-        "scope": scope,
-        "intent": intent,
-        "technique_active": character.magic_technique_active,
-        "roll": result_dict,
-        "sparks_remaining": character.sparks,
-        "purpose": purpose,
-        "intent_cost": paid,
-        "readied_intents": character.readied_intents,
-    })
-
-
-# ---------------------------------------------------------------------------
-# Support / Maneuver handlers (2.1)
-# ---------------------------------------------------------------------------
-
-async def _free_working_roll(websocket, msg: dict, character, ruleset):
-    """Resolve a free Minor working declared on a Maneuver or a Support.
-
-    III.3 (*Minor magic still fights*) sends the caster's free magic through
-    these two actions, so they have to be able to express it: the difficulty
-    of a working comes from its domain and scope, not from the MM's label, and
-    a Prismatic domain's Minor working is Hard where a Focused one is Easy.
-    Every rule stays in resolve_magic_roll.
-
-    Returns (result, None) when the working resolved, (None, error_message)
-    when it was refused, and (None, None) when this message declared no magic.
-    """
-    if not bool(msg.get("magical", False)):
-        return None, None
-    if not character.magic_domain:
-        return None, "Character has no magic domain."
-    scope = str(msg.get("scope", "minor"))
-    pi = ruleset.magic.prepared_intents if ruleset.magic else None
-    free_scopes = pi.free_scopes if pi else ["minor", "significant", "major"]
-    if scope not in free_scopes:
-        return None, (
-            f"A {scope} working is a full form — it is a Strike, or a cast, "
-            "and it spends a readied intent (III.3, D25). A Maneuver or a "
-            "Support carries the free magic."
-        )
-    try:
-        return resolve_magic_roll(
-            character=character,
-            domain_id=str(msg.get("domain_id") or character.magic_domain),
-            scope=scope,
-            intent=str(msg.get("description", ""))[:200],
-            ruleset=ruleset,
-            borrowed_trouble=bool(msg.get("borrowed_trouble")),
-        ), None
-    except ValueError as e:
-        return None, str(e)
-
-
-async def _handle_support(
-    websocket, msg: dict, session, session_id: str, identity: str,
-) -> None:
-    """Character uses their action to support an ally."""
-    player_name = identity
-    character = session.characters.get(player_name)
-    if not character:
-        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
-        return
-
-    if character.endurance_current is None:
-        await manager.send_to(websocket, {"type": "error", "message": "Not in combat."})
-        return
-
-    target_player = str(msg.get("target", ""))
-    bonus_type = str(msg.get("bonus_type", "add_die"))  # PHB III.3: the supporting character's choice
-
-    if bonus_type not in combat_module.support_bonus_modes(session.ruleset):
-        await manager.send_to(websocket, {"type": "error", "message": f"Invalid bonus_type '{bonus_type}'."})
-        return
-
-    working, error = await _free_working_roll(websocket, msg, character, session.ruleset)
-    if error:
-        await manager.send_to(websocket, {"type": "error", "message": error})
-        return
-    if working is not None:
-        result, technique_step = working, None
-    else:
-        request, technique_step = _build_roll_request(character, msg, session.ruleset)
-        result = resolve_roll(request, session.ruleset)
-    result_dict = roll_result_to_dict(result)
-    _record_roll(session, player_name, result_dict)
-
-    # Auto-mark skill as used this session — the tradition's skill on a
-    # working, the declared one otherwise.
-    used_skill = result.request.skill_id if working is not None else msg.get("skill_id")
-    if used_skill and used_skill in character.skills:
-        character.skills_used_this_session.add(used_skill)
-
-    await manager.broadcast(session_id, {
-        "type": "support_result",
-        "magical": working is not None,
-        "player": player_name,
-        "target": target_player,
-        "technique_step": technique_step,
-        "bonus_type": bonus_type,
-        "roll": result_dict,
-        "outcome": result_dict["outcome"],
-    })
-
-
-async def _handle_maneuver(
-    websocket, msg: dict, session, session_id: str, identity: str,
-) -> None:
-    """Character uses their action to reposition, create advantage, or disarm."""
-    player_name = identity
-    character = session.characters.get(player_name)
-    if not character:
-        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
-        return
-
-    if character.endurance_current is None:
-        await manager.send_to(websocket, {"type": "error", "message": "Not in combat."})
-        return
-
-    if character.posture == "withdrawn":
-        await manager.send_to(websocket, {"type": "error", "message": "Cannot Maneuver from Withdrawn posture."})
-        return
-
-    target_name = str(msg.get("target", ""))
-
-    working, error = await _free_working_roll(websocket, msg, character, session.ruleset)
-    if error:
-        await manager.send_to(websocket, {"type": "error", "message": error})
-        return
-    if working is not None:
-        result, technique_step = working, None
-    else:
-        request, technique_step = _build_roll_request(character, msg, session.ruleset)
-        result = resolve_roll(request, session.ruleset)
-
-    # K-2/D5: a Maneuver is an offensive action — it contests the exchange.
-    # Below the refusals above, so a rejected working does not silently spend
-    # the exchange's free advance.
-    session.offensive_actions_this_exchange.add(player_name)
-
-    result_dict = roll_result_to_dict(result)
-    _record_roll(session, player_name, result_dict)
-
-    # Auto-mark skill as used this session — the tradition's skill on a
-    # working, the declared one otherwise.
-    used_skill = result.request.skill_id if working is not None else msg.get("skill_id")
-    if used_skill and used_skill in character.skills:
-        character.skills_used_this_session.add(used_skill)
-
-    await manager.broadcast(session_id, {
-        "type": "maneuver_result",
-        "magical": working is not None,
-        "player": player_name,
-        "target": target_name,
-        "technique_step": technique_step,
-        "roll": result_dict,
-        "outcome": result_dict["outcome"],
-    })
-
-
-# ---------------------------------------------------------------------------
-# Contested roll handler (2.2)
-# ---------------------------------------------------------------------------
-
-async def _handle_contested_roll(
-    websocket, msg: dict, session, session_id: str,
-) -> None:
-    """MM triggers a contested roll between two characters."""
-    player_a = str(msg.get("player_a", ""))
-    player_b = str(msg.get("player_b", ""))
-    char_a = session.characters.get(player_a)
-    char_b = session.characters.get(player_b)
-
-    if not char_a or not char_b:
-        await manager.send_to(websocket, {"type": "error", "message": "Both players must have characters."})
-        return
-
-    attr_a = str(msg.get("attribute_a", "strength"))
-    attr_b = str(msg.get("attribute_b", attr_a))
-    skill_a = msg.get("skill_a")
-    skill_b = msg.get("skill_b")
-    difficulty = str(msg.get("difficulty", "Standard"))
-
-    # B7: each side is priced against the MM's one declared label, so each side's
-    # own Techniques compose with it independently. A contested roll is two rolls,
-    # not one, and a Technique one participant holds must not ease the other's.
-    def _side(character, attribute_id, skill_id, suffix):
-        label, step = _apply_difficulty_step(
-            character, difficulty,
-            {
-                "skill_id": skill_id,
-                "weapon_category": msg.get("weapon_category_" + suffix),
-                "weapon_type": msg.get("weapon_type_" + suffix),
-                "hazard_type": msg.get("hazard_type_" + suffix),
-                "knowledge_field": msg.get("knowledge_field_" + suffix),
-                "declared_technique_ids": msg.get("declared_technique_ids_" + suffix),
-            },
-            session.ruleset,
-        )
-        return RollRequest(
-            attribute_id=attribute_id,
-            attribute_rating=character.attributes.get(attribute_id, 2),
-            skill_id=skill_id,
-            skill_rank_id=(character.skills[skill_id].rank
-                           if skill_id and skill_id in character.skills else None),
-            difficulty_label=label,
-            borrowed_trouble=bool(msg.get("borrowed_trouble_" + suffix)),
-            description=str(msg.get("description", ""))[:200],
-        ), step
-
-    req_a, step_a = _side(char_a, attr_a, skill_a, "a")
-    req_b, step_b = _side(char_b, attr_b, skill_b, "b")
-
-    result_a = resolve_roll(req_a, session.ruleset)
-    result_b = resolve_roll(req_b, session.ruleset)
-    dict_a = roll_result_to_dict(result_a)
-    dict_b = roll_result_to_dict(result_b)
-
-    if result_a.total > result_b.total:
-        winner = player_a
-    elif result_b.total > result_a.total:
-        winner = player_b
-    else:
-        winner = "tie"
-
-    _record_roll(session, player_a, dict_a)
-    _record_roll(session, player_b, dict_b)
-
-    await manager.broadcast(session_id, {
-        "type": "contested_roll_result",
-        "player_a": player_a,
-        "player_b": player_b,
-        "roll_a": dict_a,
-        "roll_b": dict_b,
-        "technique_step_a": step_a,
-        "technique_step_b": step_b,
-        "winner": winner,
-    })
-
-
-# ---------------------------------------------------------------------------
-# Player skill point spending (2.3)
-# ---------------------------------------------------------------------------
-
-async def _handle_spend_skill_point(
-    websocket, msg: dict, session, session_id: str, identity: str,
-) -> None:
-    """Player spends a skill point to mark a skill for advancement."""
-    player_name = identity
-    character = session.characters.get(player_name)
-    if not character:
-        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
-        return
-
-    skill_id = str(msg.get("skill_id", ""))
-    if not skill_id:
-        await manager.send_to(websocket, {"type": "error", "message": "Missing skill_id."})
-        return
-
-    # All spend rules — used-skills enforcement, the T4.3/D10 training-mark
-    # exception, cost, and budget — live in Character.spend_skill_point.
-    try:
-        result = character.spend_skill_point(skill_id, session.ruleset)
-    except ValueError as e:
-        await manager.send_to(websocket, {"type": "error", "message": str(e)})
-        return
-
-    session.save_character_to_disk(player_name)
-    await manager.broadcast(session_id, {
-        "type": "skill_point_spent",
-        "player": player_name,
-        "skill_id": skill_id,
-        "sp_cost": result["sp_cost"],
-        "training_mark": result["training_mark"],
-        "training_marks_this_session": character.training_marks_this_session,
-        "marks_added": 1,
-        "rank_advances": result["rank_advances"],
-        "facet_level_advances": result["facet_level_advances"],
-        "major_advancement": result.get("major_advancement", False),
-        "new_rank": character.skills[skill_id].rank if skill_id in character.skills else "novice",
-        "new_marks": character.skills[skill_id].marks if skill_id in character.skills else 0,
-        "new_facet_level": character.facet_level,
-        # Same reason as skill_advanced: crossing a Facet level grants a
-        # Technique pick, and this is the path the *player* drives (TODO T10).
-        "technique_picks_available": character.technique_picks_available,
-        "session_skill_points_remaining": character.session_skill_points_remaining,
-    })
-
-
-# ---------------------------------------------------------------------------
-# Technique handler
-# ---------------------------------------------------------------------------
-
-async def _handle_technique_select(
-    msg: dict, session, session_id: str, identity: str, is_mm: bool,
-) -> None:
-    """Select a Technique at a Facet level advancement.
-
-    A player selects for themselves — `player_name` in the message is ignored
-    for non-MM callers, so nobody can spend another character's pick. The MM may
-    still select on any player's behalf (advancement is often walked through at
-    the table). Every selection rule stays in `Character.select_technique`.
-    """
-    player_name = str(msg.get("player_name", "")) if is_mm else identity
-    technique_id = str(msg.get("technique_id", ""))
-    choice = msg.get("choice")  # optional, for Techniques with choices
-    character = session.characters.get(player_name)
-    if not character or not technique_id:
-        return
-
-    # All selection rules (already-held, prerequisites, pick budget, magic
-    # activation) live in Character.select_technique — the single source of truth.
-    ok, message = character.select_technique(technique_id, session.ruleset, choice)
-    if not ok:
-        await manager.broadcast(session_id, {"type": "error", "message": message})
-        return
-
-    session.save_character_to_disk(player_name)
-    await manager.broadcast(session_id, {
-        "type": "technique_selected",
-        "player": player_name,
-        "technique_id": technique_id,
-        "choice": choice,
-        "all_techniques": list(character.techniques),
-        "technique_picks_available": character.technique_picks_available,
-    })
-
-
-async def _handle_scene_end(session, session_id: str) -> None:
-    """MM ends a scene: reset everything the rules scope to one (B6).
-
-    The scene is a published boundary — armor's downgrade budget refreshes at it
-    (III.3, IV.1), *Once per scene* Techniques recharge at it — and the engine had
-    no event for it. `_handle_combat_start` initialises the armor budget only when
-    it is `None`, deliberately, so a second fight inside one scene cannot top it
-    back up; nothing ever set it back, so a budget the book says refreshes every
-    scene refreshed exactly never. Meanwhile `tools/combat_sim.py` reset it per
-    fight, so the simulator and the app disagreed about a defensive resource.
-
-    Clearing the budget to `None` here — rather than re-initialising it — is what
-    keeps the `is None` guard meaningful: the next `combat_start` hands out a fresh
-    budget, and a second fight in the *same* scene still does not.
-
-    A scene is not a fight. Plenty of scenes contain no combat, and III.3's own
-    armor text assumes a scene can contain two fights, so this is deliberately a
-    separate event from `combat_end`.
-    """
-    for character in session.characters.values():
-        character.armor_downgrades_remaining = None
-    # A Final Blow offer cannot outlive the scene that produced it.
-    session.pending_final_blows.clear()
-    # The MM presses this button and usually holds no character of their own, so
-    # naming who was refreshed is what makes the effect visible on their screen.
-    await manager.broadcast(session_id, {
-        "type": "scene_ended",
-        "characters": sorted(session.characters),
-    })
-
-
-async def _handle_ready_intents(websocket, msg: dict, session, session_id: str,
-                                identity: str) -> None:
-    """A caster commits this rest's readied intents (D23). The rule lives in
-    `Character.ready_intents`; this routes and reports."""
-    character = session.characters.get(identity)
-    if not character:
-        await manager.send_to(websocket, {"type": "error", "message": "No character found."})
-        return
-    allocation = msg.get("allocation") or {}
-    if not isinstance(allocation, dict):
-        await manager.send_to(websocket, {
-            "type": "error", "message": "allocation must map purposes to counts."})
-        return
-    try:
-        character.ready_intents(
-            {str(k): v for k, v in allocation.items()}, session.ruleset)
-    except ValueError as e:
-        await manager.send_to(websocket, {"type": "error", "message": str(e)})
-        return
-    session.save_character_to_disk(identity)
-    await manager.broadcast(session_id, {
-        "type": "intents_readied",
-        "player": identity,
-        "readied_intents": character.readied_intents,
-    })
-
-
-async def _handle_full_rest(msg: dict, session, session_id: str) -> None:
-    """The MM calls a full rest (D23): every caster, or one named caster, may
-    ready their intents again. When the party has rested is the MM's call —
-    that is the lever that keeps the limit fictional rather than a clock."""
-    named = msg.get("player_name")
-    targets = ([str(named)] if named else list(session.characters))
-    refreshed = []
-    for player_name in targets:
-        character = session.characters.get(player_name)
-        if character is None:
-            continue
-        character.refresh_intents()
-        session.save_character_to_disk(player_name)
-        refreshed.append(player_name)
-    await manager.broadcast(session_id, {
-        "type": "intents_refreshed",
-        "characters": sorted(refreshed),
-    })
-
-
-async def _handle_session_reset(session, session_id: str) -> None:
-    """MM signals start of new session: reset once-per-session technique tracking."""
-    for character in session.characters.values():
-        character.techniques_used_this_session = []
-        character.sparks = session.ruleset.spark.base_sparks_per_session if session.ruleset.spark else 3
-        # T4.3/D10: unspent skill points bank (cap 2) into the new session's
-        # allowance; used-skills list and training allowance reset.
-        character.start_new_session(session.ruleset)
-    # Once-per-session use is being reset, so any offer from the old session must
-    # go with it — otherwise a stale confirm burns the fresh session's use.
-    session.pending_final_blows.clear()
-    # T6.3: a new session opens a fresh Spark-flow stretch for everyone —
-    # Sparks just reset to 3, so nobody is "quiet" yet.
+async def _maybe_nudge_spark_flow(session, session_id: str) -> None:
+    now = time.monotonic()
     for player_name in session.characters:
-        session.record_spark_flow(player_name)
-    await manager.broadcast(session_id, {"type": "session_reset"})
+        flow = session.spark_flow.setdefault(player_name, {"last_flow": now, "last_nudge": None})
+        if now - flow["last_flow"] < SPARK_FLOW_NUDGE_SECONDS:
+            continue
+        if flow["last_nudge"] is not None and now - flow["last_nudge"] < SPARK_FLOW_NUDGE_SECONDS:
+            continue
+        flow["last_nudge"] = now
+        await manager.send_to_identity(session_id, "mm", {
+            "type": "spark_flow_nudge", "player": player_name,
+            "minutes_quiet": int((now - flow["last_flow"]) // 60),
+            "message": (f"{player_name} hasn't earned or spent a Spark in a while. Every 6- is "
+                        "a Graceful Fail waiting to happen, and unspent Sparks vanish at session end."),
+        })
 
 
 # ---------------------------------------------------------------------------
-# Enemy tracker handlers
+# Basics
 # ---------------------------------------------------------------------------
 
-def _band_fields(session, band_before: dict) -> dict:
-    """Difficulty-band payload for tracker broadcasts (T6.2, K-3).
-
-    `band` is the roster's band after the change; `band_crossed` flags a
-    change of band ("one Mook is one difficulty band" — MM1). The data rides
-    the existing broadcasts; clients display it to the MM only.
-    """
-    band = session.active_encounter_band()
-    return {
-        "band": band,
-        "band_crossed": band["band_index"] != band_before["band_index"],
-    }
+@on("ping")
+async def _ping(ctx: Ctx) -> None:
+    await manager.send_to(ctx.websocket, {"type": "pong"})
 
 
-async def _handle_spawn_enemy(msg: dict, session, session_id: str) -> None:
-    """MM spawns an enemy into the active combat tracker."""
-    from app.game.enemy import Enemy
-
-    enemy_id = str(msg.get("enemy_id", ""))
-    # An explicit JSON null must not become the string "None" and rename the
-    # enemy — any client that sends the key unset would lose the stat block's name.
-    instance_name = str(msg.get("instance_name") or "")
-
-    # Try loading from library first
-    library_enemy = session.enemy_library.get(enemy_id)
-    if library_enemy:
-        enemy = library_enemy.model_copy(deep=True)
-        if instance_name:
-            enemy.name = instance_name
-    else:
-        # Inline enemy data
-        enemy_data = msg.get("enemy_data")
-        if not enemy_data or not isinstance(enemy_data, dict):
-            await manager.broadcast(session_id, {
-                "type": "error",
-                "message": f"Enemy '{enemy_id}' not in library and no inline data provided.",
-            })
-            return
-        enemy = Enemy(
-            id=enemy_id,
-            name=enemy_data.get("name", enemy_id),
-            tier=enemy_data.get("tier", "mook"),
-            resolve=enemy_data.get("resolve", 0),
-            attack_modifier=enemy_data.get("attack_modifier", 0),
-            armor=enemy_data.get("armor", "none"),
-        )
-
-    enemy.init_combat()
-    band_before = session.active_encounter_band()
-    tracker_key = instance_name or f"{enemy_id}_{len(session.active_enemies)}"
-    session.active_enemies[tracker_key] = enemy
-
-    await manager.broadcast(session_id, {
-        "type": "enemy_spawned",
-        "tracker_key": tracker_key,
-        "enemy": enemy.to_client_dict(),
-        "tr": enemy.calculate_tr(),
-        **_band_fields(session, band_before),
-    })
+@on("chat")
+async def _chat(ctx: Ctx) -> None:
+    text = _str(ctx.msg, "text", 2000)
+    if not text:
+        raise WSError("Say something first.")
+    await manager.broadcast(ctx.session_id, {"type": "chat", "from": ctx.identity, "text": text})
 
 
-async def _handle_enemy_update(msg: dict, session, session_id: str) -> None:
-    """MM updates an active enemy's resolve, conditions, or Open state.
+# ---------------------------------------------------------------------------
+# Rolls
+# ---------------------------------------------------------------------------
 
-    `open` (K-6/D4): setting it records the attacker's 10+ option; clearing
-    it records the enemy visibly spending its action to recover
-    (`combat.open_clear_mode`) — both are table events the MM relays, so
-    both go through this manual-update handler rather than `enemy_strike`
-    (which resolves depletion only; the Open option is a choice, not an
-    outcome).
-    """
-    tracker_key = str(msg.get("tracker_key", ""))
-    enemy = session.active_enemies.get(tracker_key)
-    if not enemy:
-        await manager.broadcast(session_id, {
-            "type": "error",
-            "message": f"No active enemy with key '{tracker_key}'.",
-        })
+@on("roll")
+async def _roll(ctx: Ctx) -> None:
+    """A general roll: 2d6 + stat (+knack) at a difficulty, with extra dice."""
+    ch = _actor(ctx)
+    extra = _extra_dice(ctx)
+    result = roll_character(ctx.rs, ch, _stat(ctx), knack=_bool(ctx.msg, "knack"),
+                            bonus=_int(ctx.msg, "bonus", 0, 0, 2), difficulty=_difficulty(ctx),
+                            rng=RNG, description=_str(ctx.msg, "description"), **extra)
+    rd = roll_result_to_dict(result)
+    rd["helper"] = _str(ctx.msg, "helper", 64) or None
+    if extra["sparks"]:
+        ctx.session.record_spark_flow(ch.player_name)
+    _record_roll(ctx.session, ch.player_name, rd)
+    await manager.broadcast(ctx.session_id, {"type": "roll_result", "player": ch.player_name,
+                                             "character": ch.name, "roll": rd})
+    await _push_character(ctx, ch)
+
+
+@on("avoid")
+async def _avoid(ctx: Ctx) -> None:
+    """The avoid roll: 2d6 + the stat that fits what is acting on you."""
+    ch = _actor(ctx)
+    extra = _extra_dice(ctx)
+    if extra["sparks"] > ch.sparks:
+        raise WSError(f"{ch.name} has only {ch.sparks} Spark(s).")
+    stat = _stat(ctx)
+    result = resolve_avoid(ctx.rs, stat_value=ch.stats.get(stat, 0), stat=stat,
+                           difficulty=_difficulty(ctx), knack=_bool(ctx.msg, "knack"),
+                           rng=RNG, description=_str(ctx.msg, "description"), **extra)
+    if extra["sparks"]:
+        ch.spend_spark(extra["sparks"])
+        ctx.session.record_spark_flow(ch.player_name)
+    rd = roll_result_to_dict(result)
+    _record_roll(ctx.session, ch.player_name, rd)
+    await manager.broadcast(ctx.session_id, {"type": "avoid_result", "player": ch.player_name,
+                                             "character": ch.name, "roll": rd})
+    await _push_character(ctx, ch)
+
+
+# ---------------------------------------------------------------------------
+# Combat — the exchange
+# ---------------------------------------------------------------------------
+
+def _combat_msg(session) -> dict:
+    return {"type": "combat_state", "combat": session.combat.to_dict() if session.combat else None}
+
+
+@on("start_combat", mm_only=True)
+async def _start_combat(ctx: Ctx) -> None:
+    if ctx.session.combat is not None:
+        raise WSError("A fight is already running.")
+    state = ctx.session.start_combat()
+    await manager.broadcast(ctx.session_id, {"type": "combat_started", "combat": state.to_dict()})
+    for ch in ctx.session.characters.values():
+        await _push_character(ctx, ch)
+
+
+@on("end_exchange", mm_only=True)
+async def _end_exchange(ctx: Ctx) -> None:
+    n = ctx.session.end_exchange()     # raises when no fight is running
+    ctx.table.pending_attacks.clear()
+    await manager.broadcast(ctx.session_id, {"type": "exchange_ended", "exchange": n,
+                                             "combat": ctx.session.combat.to_dict()})
+    for e in ctx.session.active_enemies.values():
+        mm, pl = _enemy_msgs(ctx.session, e)
+        await manager.broadcast_split(ctx.session_id, mm, pl)
+
+
+@on("end_combat", mm_only=True)
+async def _end_combat(ctx: Ctx) -> None:
+    if ctx.session.combat is None:
+        raise WSError("No fight is running.")
+    ctx.session.end_combat()
+    ctx.table.pending_attacks.clear()
+    await manager.broadcast(ctx.session_id, {"type": "combat_ended"})
+
+
+@on("telegraph", mm_only=True)
+async def _telegraph(ctx: Ctx) -> None:
+    """Step 1 of the exchange: the MM says what a foe is about to do, and to whom."""
+    if ctx.session.combat is None:
+        raise WSError("Start the fight first.")
+    enemy = _enemy(ctx)
+    text = _str(ctx.msg, "text", 300)
+    if not text:
+        raise WSError("Say what the foe is about to do.")
+    ctx.session.combat.telegraphs[enemy.key or enemy.id] = text
+    await manager.broadcast(ctx.session_id, {"type": "telegraph", "enemy": enemy.key or enemy.id,
+                                             "name": enemy.name, "text": text,
+                                             "combat": ctx.session.combat.to_dict()})
+
+
+def _attack_kwargs(ctx: Ctx, ch) -> dict:
+    opts = ctx.msg.get("options") or []
+    if isinstance(opts, str):
+        opts = [opts]
+    if not isinstance(opts, list) or len(opts) > 2:
+        raise WSError("options is a list of up to two picks.")
+    kw = {"difficulty": _difficulty(ctx), "options": [str(o)[:20] for o in opts],
+          "knack": _bool(ctx.msg, "knack"), "brawling": _bool(ctx.msg, "brawling"),
+          "in_cover": _bool(ctx.msg, "in_cover"),
+          "within_reach": ctx.msg.get("within_reach", True) is not False,
+          **_extra_dice(ctx)}
+    if kw["sparks"] > ch.sparks:
+        raise WSError(f"{ch.name} has only {ch.sparks} Spark(s).")
+    return kw
+
+
+def _cover_ally(ctx: Ctx, attacker, options: list[str], ally_name: str) -> Optional[str]:
+    if "cover" not in options:
+        return None
+    ally = ctx.session.characters.get(ally_name) or _by_character_name(ctx.session, ally_name)
+    if ally is None or ally is attacker:
+        raise WSError("Cover names an ally (not yourself).")
+    return ally.name
+
+
+async def _finish_attack(ctx: Ctx, ch, enemy, kw: dict, dice, damage_dice, cover_ally: str) -> None:
+    """Resolve (apply) an attack with known dice and broadcast it."""
+    res = combat.resolve_attack(ctx.rs, ch, enemy, state=ctx.session.combat, rng=RNG,
+                                dice=dice, damage_dice=damage_dice or None, apply=True, **kw)
+    cover_for = None
+    if "cover" in res.options and ctx.session.combat is not None and cover_ally:
+        ctx.session.combat.covered[cover_ally] = ch.name
+        cover_for = cover_ally
+    d = res.to_dict()
+    d["cover_for"] = cover_for
+    d["target_name"] = enemy.name if enemy is not None else None
+    if kw["sparks"]:
+        ctx.session.record_spark_flow(ch.player_name)
+    _record_roll(ctx.session, ch.player_name, d["roll"])
+    player_d = dict(d, enemy_result=_strip_enemy_hp(d["enemy_result"]))
+    base = {"type": "attack_result", "player": ch.player_name, "character": ch.name,
+            "combat": ctx.session.combat.to_dict() if ctx.session.combat else None}
+    await manager.broadcast_split(ctx.session_id, {**base, "result": d}, {**base, "result": player_d})
+    await _push_character(ctx, ch)
+    if enemy is not None:
+        await _push_enemy(ctx, enemy)
+
+
+@on("attack")
+async def _attack(ctx: Ctx) -> None:
+    """A character attacks. On a 10+ with no option named in advance, the
+    player picks it afterwards (`choose_option`); the engine then replays the
+    same dice with the pick, so the choice never re-rolls the attack."""
+    ch = _actor(ctx)
+    if ch.player_name in ctx.table.pending_attacks:
+        raise WSError("Pick your 10+ option first.")
+    enemy = _enemy(ctx, "target", required=False)
+    if enemy is not None and (enemy.defeated or enemy.broken):
+        raise WSError(f"{enemy.name} is out of the fight.")
+    kw = _attack_kwargs(ctx, ch)
+    cover_ally = _cover_ally(ctx, ch, kw["options"], _str(ctx.msg, "cover_ally", 64))
+    preview = combat.resolve_attack(ctx.rs, ch, enemy, state=ctx.session.combat, rng=RNG,
+                                    apply=False, **kw)
+    dice, dmg = preview.roll.dice, preview.damage_dice
+    if preview.tier == "full_success" and not kw["options"]:
+        ctx.table.pending_attacks[ch.player_name] = {
+            "enemy": (enemy.key or enemy.id) if enemy is not None else None,
+            "dice": dice, "damage_dice": dmg, "kwargs": kw}
+        choices = [{"id": o, **ctx.rs.combat.options[o].model_dump()}
+                   for o in ctx.rs.combat.attack.full_success.pick_one]
+        await manager.broadcast(ctx.session_id, {
+            "type": "attack_choose", "player": ch.player_name, "character": ch.name,
+            "target_name": enemy.name if enemy is not None else None,
+            "roll": roll_result_to_dict(preview.roll), "options_allowed": preview.options_allowed,
+            "choices": choices})
         return
-
-    # T6.4 (K-10/D12): the MM states Named/Boss stances openly. Valid enemy
-    # stances are the Table III.3-9 set, read from the ruleset
-    # (`combat.enemy_attacks.posture_reaction_shift`), never hardcoded.
-    #
-    # Validated BEFORE anything is applied: a rejection returns without the
-    # `enemy_updated` broadcast, so any field applied first would live on the
-    # server and nowhere else — and the next Resolve adjustment is computed
-    # from the stale value the clients still show.
-    posture = None
-    if "posture" in msg:
-        if enemy.tier == "mook":
-            await manager.broadcast(session_id, {
-                "type": "error",
-                "message": "Mooks do not declare Postures — the MM sets "
-                           "reaction difficulty by situation (III.3).",
-            })
-            return
-        posture = str(msg["posture"])
-        valid_postures = set(
-            session.ruleset.combat.enemy_attacks.posture_reaction_shift.model_dump()
-        )
-        if posture not in valid_postures:
-            await manager.broadcast(session_id, {
-                "type": "error",
-                "message": f"Unknown enemy Posture '{posture}'. Expected one "
-                           f"of: {', '.join(sorted(valid_postures))}.",
-            })
-            return
-
-    phase_index = None
-    if "resolve_current" in msg:
-        resolve_before = enemy.resolve_current
-        enemy.resolve_current = max(0, int(msg["resolve_current"]))
-        if resolve_before is not None and enemy.phases:
-            phase_index = combat_module.phase_crossed(
-                resolve_before, enemy.resolve_current,
-                [p.resolve_threshold for p in enemy.phases],
-            )
-    if "add_condition" in msg:
-        cond = str(msg["add_condition"])
-        if cond and cond not in enemy.conditions:
-            enemy.conditions.append(cond)
-    if "remove_condition" in msg:
-        cond = str(msg["remove_condition"])
-        if cond in enemy.conditions:
-            enemy.conditions.remove(cond)
-    if "open" in msg:
-        enemy.open = bool(msg["open"])
-    if posture is not None:
-        enemy.posture = posture
-
-    await manager.broadcast(session_id, {
-        "type": "enemy_updated",
-        "tracker_key": tracker_key,
-        "resolve_current": enemy.resolve_current,
-        "conditions": list(enemy.conditions),
-        "open": enemy.open,
-        "posture": enemy.posture,
-    })
-
-    if phase_index is not None:
-        await manager.broadcast(session_id, {
-            "type": "enemy_phase_change",
-            "enemy_id": tracker_key,
-            "phase_index": phase_index,
-            "description": enemy.phases[phase_index].description,
-        })
+    await _finish_attack(ctx, ch, enemy, kw, dice, dmg, cover_ally)
 
 
-async def _handle_enemy_strike(websocket, msg: dict, session, session_id: str) -> None:
-    """Apply a Strike outcome to an enemy and let the engine decide the cost.
-
-    `enemy_update` takes `resolve_current` as a raw number, which left the D1
-    depletion rule (10+ takes 2, 7-9 takes 1) implemented in the front end and
-    the simulator but nowhere on the server. That is a second copy of a rule —
-    the failure the Software-PHB sync policy exists to prevent — and it forces
-    any non-browser client to do rule arithmetic itself.
-
-    Here the caller sends the *outcome* and `combat.apply_resolve_damage` (or
-    `combat.mook_removed`, since Mooks have no Resolve pool) decides. Manual MM
-    corrections still go through `enemy_update`.
-    """
-    tracker_key = str(msg.get("tracker_key", ""))
-    outcome = str(msg.get("outcome", ""))
-
-    enemy = session.active_enemies.get(tracker_key)
-    if not enemy:
-        await manager.send_to(websocket, {
-            "type": "error", "message": f"No active enemy with key '{tracker_key}'.",
-        })
-        return
-
-    known_outcomes = {t.id for t in session.ruleset.roll_resolution.outcome_tiers}
-    if outcome not in known_outcomes:
-        await manager.send_to(websocket, {
-            "type": "error",
-            "message": f"Unknown outcome '{outcome}'. Expected one of: "
-                       f"{', '.join(sorted(known_outcomes))}.",
-        })
-        return
-
-    # K-2/D5: an MM-recorded Strike outcome is a PC offensive action — it
-    # contests the exchange even when the roll happened off-app.
-    session.offensive_actions_this_exchange.add(f"enemy_strike:{tracker_key}")
-
-    # A defeat changes the roster, so the band payload rides along (T6.2).
-    band_before = session.active_encounter_band()
-
-    # Mooks have no Resolve pool — one Strike removes them (10+ if armoured).
-    if enemy.tier == "mook":
-        removed = combat_module.mook_removed(
-            outcome, enemy.armor != "none", session.ruleset,
-        )
-        if removed:
-            del session.active_enemies[tracker_key]
-        await manager.broadcast(session_id, {
-            "type": "enemy_updated",
-            "tracker_key": tracker_key,
-            "resolve_current": None,
-            "depletion": 0,
-            "defeated": removed,
-            "mook_removed": removed,
-            "conditions": list(enemy.conditions),
-            "open": enemy.open,
-            # A 10+ takes a Mook off the board, and a tempo tag on a
-            # departed enemy is nothing — `rider_menu` returns [] for a
-            # removed target and the client offers no confirm.
-            "rider_menu": [
-                r.model_dump() for r in combat_module.rider_menu(
-                    outcome, removed, session.ruleset,
-                )
-            ],
-            **_band_fields(session, band_before),
-        })
-        return
-
-    before = enemy.resolve_current if enemy.resolve_current is not None else enemy.resolve
-    result = combat_module.apply_resolve_damage(
-        before, outcome, session.ruleset,
-        phase_thresholds=[p.resolve_threshold for p in enemy.phases] or None,
-    )
-    enemy.resolve_current = result.resolve_current
-
-    # R3: on a full success against a surviving enemy the attacker chooses
-    # one rider. The menu rides along so the client renders the confirm from
-    # data — adding or cutting a rider is a ruleset edit, not a JS edit.
-    menu = combat_module.rider_menu(outcome, result.defeated, session.ruleset)
-
-    await manager.broadcast(session_id, {
-        "type": "enemy_updated",
-        "tracker_key": tracker_key,
-        "resolve_current": result.resolve_current,
-        "depletion": result.depletion,
-        "defeated": result.defeated,
-        "mook_removed": False,
-        "conditions": list(enemy.conditions),
-        "open": enemy.open,
-        "rider_menu": [r.model_dump() for r in menu],
-        **_band_fields(session, band_before),
-    })
-
-    if result.phase_index is not None:
-        await manager.broadcast(session_id, {
-            "type": "enemy_phase_change",
-            "enemy_id": tracker_key,
-            "phase_index": result.phase_index,
-            "description": enemy.phases[result.phase_index].description,
-        })
+@on("choose_option")
+async def _choose_option(ctx: Ctx) -> None:
+    """The 10+ pick for a pending attack: +1d6 damage, a stunt, or cover."""
+    ch = _actor(ctx)
+    pending = ctx.table.pending_attacks.get(ch.player_name)
+    if pending is None:
+        raise WSError("You have no 10+ attack waiting for an option.")
+    opts = ctx.msg.get("options") or ctx.msg.get("option") or []
+    if isinstance(opts, str):
+        opts = [opts]
+    if not isinstance(opts, list) or not opts:
+        raise WSError("Pick an option.")
+    kw = dict(pending["kwargs"], options=[str(o)[:20] for o in opts])
+    enemy = ctx.session.active_enemies.get(pending["enemy"]) if pending["enemy"] else None
+    if pending["enemy"] and (enemy is None or enemy.defeated):
+        ctx.table.pending_attacks.pop(ch.player_name, None)
+        raise WSError("That foe is gone.")
+    cover_ally = _cover_ally(ctx, ch, kw["options"], _str(ctx.msg, "cover_ally", 64))
+    await _finish_attack(ctx, ch, enemy, kw, pending["dice"], pending["damage_dice"], cover_ally)
+    ctx.table.pending_attacks.pop(ch.player_name, None)
 
 
-async def _handle_use_item(websocket, msg: dict, session, session_id: str,
-                           identity: str, is_mm: bool) -> None:
-    """Spend a one-use item (a Val'loh crystal charge, or whatever a setting
-    Facet ships).
-
-    No roll and no arithmetic — the whole event is "this is gone now, and here
-    is what it did". Every rule belongs to `Character.use_item`; this handler
-    routes and narrates. A player may spend their own; the MM may spend
-    anyone's, which is what an MM running an NPC's pocket needs.
-    """
-    player_name = str(msg.get("player_name") or identity or "")
-    if not is_mm and player_name != identity:
-        await manager.send_to(websocket, {
-            "type": "error",
-            "message": "You can only spend items from your own inventory.",
-        })
-        return
-
-    character = session.characters.get(player_name)
-    if not character:
-        await manager.send_to(websocket, {
-            "type": "error", "message": f"No character for '{player_name}'.",
-        })
-        return
-
-    try:
-        used = character.use_item(str(msg.get("item_id", "")), session.ruleset)
-    except ValueError as exc:
-        await manager.send_to(websocket, {"type": "error", "message": str(exc)})
-        return
-
-    session.save_character_to_disk(player_name)
-    await manager.broadcast(session_id, {
-        "type": "item_used",
-        "player_name": player_name,
-        "inventory": list(character.inventory),
-        **used,
-    })
+async def _drop_to_zero(ctx: Ctx, ch) -> dict:
+    """At 0 HP: take a Wound (rolled on the wounds table); Hold On is the player's roll."""
+    tid = ctx.rs.wounds.table
+    name = toolbox.roll_table(ctx.rs, tid, rng=RNG)["text"] if ctx.rs.get_table(tid) else "Wound"
+    wound = ch.add_wound(name)
+    ctx.table.pending_hold_on.add(ch.player_name)
+    return {"wound": wound, "items_to_drop": ch.items_to_drop(ctx.rs)}
 
 
-async def _handle_strike_rider(websocket, msg: dict, session, session_id: str) -> None:
-    """MM records which rider the attacker took on a 10+ (R3, III.3 Table
-    III.3-3): *deplete 2 Resolve and choose one.*
+@on("enemy_attack", mm_only=True)
+async def _enemy_attack(ctx: Ctx) -> None:
+    """A foe attacks in the open: the app rolls 2d6 + attack, reads exposure,
+    Defend, cover, Warding and armor from the exchange, and applies damage."""
+    enemy = _enemy(ctx)
+    if enemy.defeated or enemy.broken:
+        raise WSError(f"{enemy.name} is out of the fight.")
+    target = _target_character(ctx, "target")
+    if target.status == "dead":
+        raise WSError(f"{target.name} is dead.")
+    res = combat.resolve_enemy_attack(ctx.rs, enemy, target, state=ctx.session.combat,
+                                      party=_party(ctx.session), rng=RNG, apply=True)
+    d = res.to_dict()
+    d["enemy_name"] = enemy.name
+    hit_ch = _by_character_name(ctx.session, res.target) if res.target else None
+    fall = None
+    if hit_ch is not None and res.target_result and res.target_result.get("dropped"):
+        fall = await _drop_to_zero(ctx, hit_ch)
+    await manager.broadcast(ctx.session_id, {
+        "type": "enemy_attack_result", "result": d, "fall": fall,
+        "player": hit_ch.player_name if hit_ch else None,
+        "combat": ctx.session.combat.to_dict() if ctx.session.combat else None})
+    if hit_ch is not None:
+        await _push_character(ctx, hit_ch)
+    await _push_enemy(ctx, enemy)
 
-    The sibling of `final_blow_confirm` — a choice made after the roll, not
-    an outcome of it, so it is its own event. Every rule here belongs to
-    `combat.apply_rider`: which riders exist is the ruleset's
-    (`strike_riders`), what each does is the engine's, and this handler only
-    routes and reports. A rider the ruleset does not print is refused, which
-    is what keeps a cut rider (Cover, D20) actually cut.
-    """
-    tracker_key = str(msg.get("tracker_key", ""))
-    rider_id = str(msg.get("rider", ""))
 
-    enemy = session.active_enemies.get(tracker_key)
-    if not enemy:
-        await manager.send_to(websocket, {
-            "type": "error", "message": f"No active enemy with key '{tracker_key}'.",
-        })
-        return
-
-    ally = None
-    ally_name = msg.get("ally")
-    if ally_name is not None:
-        ally = session.characters.get(str(ally_name))
+@on("defend")
+async def _defend(ctx: Ctx) -> None:
+    """Defend (attacks on you are Hard), or Intercept for allies."""
+    ch = _actor(ctx)
+    if ctx.session.combat is None:
+        raise WSError("Defend is a combat action; no fight is running.")
+    raw = ctx.msg.get("intercept_for") or []
+    if isinstance(raw, str):
+        raw = [raw]
+    if not isinstance(raw, list) or len(raw) > 12:
+        raise WSError("intercept_for is a list of allies.")
+    allies = []
+    for name in raw:
+        name = str(name)[:64]
+        if name == "*":
+            allies.append("*")
+            continue
+        ally = ctx.session.characters.get(name) or _by_character_name(ctx.session, name)
         if ally is None:
-            await manager.send_to(websocket, {
-                "type": "error",
-                "message": f"No character named '{ally_name}' to name for a rider.",
-            })
-            return
-
-    exchange_no = int(msg.get("exchange_no", 1))
-    try:
-        tags = combat_module.apply_rider(
-            rider_id, enemy, session.ruleset, ally=ally, exchange_no=exchange_no,
-        )
-    except ValueError as exc:
-        await manager.send_to(websocket, {"type": "error", "message": str(exc)})
-        return
-
-    await manager.broadcast(session_id, {
-        "type": "rider_applied",
-        "tracker_key": tracker_key,
-        "rider": rider_id,
-        "tags": tags,
-        "open": enemy.open,
-        # How long the tag has: `end_of_exchange` for Open, or the exchange
-        # a Position expires after. The client shows a duration rather than
-        # a switch, because that is what R2 made Open into.
-        "open_until": (
-            "end_of_exchange" if enemy.open else None
-        ),
-        "position": enemy.position,
-        "ally": ally_name,
-    })
-
-
-async def _handle_final_blow_confirm(msg: dict, session, session_id: str) -> None:
-    """MM confirms a Final Blow removal offered by a Strike (B4 Q3, TD-14).
-
-    The Strike handler (`_handle_strike`) only *offers* the removal via
-    `final_blow_available` on the roll — it never touches an enemy and
-    never marks the Technique used. This handler is the commit: MM-gated
-    at dispatch, per DESIGN §4 ("auto-apply governs difficulty steps, not
-    actor removal — these are different questions"). It resolves the
-    removal through `combat.apply_final_blow_removal`, the canonical
-    defeat path (P11 invariant, TD-13), and only *here* does the once-
-    per-session use actually get recorded — a Strike that offered Final
-    Blow but was never confirmed leaves the Technique available.
-    """
-    player_name = str(msg.get("player", ""))
-    tracker_key = str(msg.get("tracker_key", ""))
-
-    character = session.characters.get(player_name)
-    if not character:
-        await manager.broadcast(session_id, {
-            "type": "error", "message": f"No character '{player_name}'.",
-        })
-        return
-
-    enemy = session.active_enemies.get(tracker_key)
-    if not enemy:
-        await manager.broadcast(session_id, {
-            "type": "error", "message": f"No active enemy with key '{tracker_key}'.",
-        })
-        return
-
-    if "the_final_blow" not in character.techniques:
-        await manager.broadcast(session_id, {
-            "type": "error", "message": "The Final Blow is not unlocked.",
-        })
-        return
-    if "the_final_blow" in character.techniques_used_this_session:
-        await manager.broadcast(session_id, {
-            "type": "error", "message": "The Final Blow has already been used this session.",
-        })
-        return
-
-    # The 7+ outcome and the Spark cost are checked by the Strike that made the
-    # offer, not here — so this handler has to verify an offer was actually made,
-    # and that it was for this attacker and this target. Otherwise a stale toast,
-    # a replay, or a hand-made message removes an enemy off the back of a Strike
-    # that failed (TODO T12).
-    offer = session.pending_final_blows.get(player_name)
-    offer_id = str(msg.get("offer_id", "")) or None
-    # The id is required, not optional: without it the check degrades to
-    # attacker+target, which is not "*that* Strike" and lets a stale toast
-    # commit against a newer offer. Every in-tree client sends it.
-    matches = bool(
-        offer
-        and offer["tracker_key"] == tracker_key
-        and offer_id is not None
-        and offer_id == offer["offer_id"]
-    )
-    if not matches:
-        await manager.broadcast(session_id, {
-            "type": "error",
-            "message": "No Final Blow is on offer for that attacker and target.",
-        })
-        return
-
-    band_before = session.active_encounter_band()
-    before = enemy.resolve_current if enemy.resolve_current is not None else enemy.resolve
-    result = combat_module.apply_final_blow_removal(
-        before, phase_thresholds=[p.resolve_threshold for p in enemy.phases] or None,
-    )
-    enemy.resolve_current = result.resolve_current
-    character.techniques_used_this_session.append("the_final_blow")
-    session.pending_final_blows.pop(player_name, None)   # consumed; a replay finds nothing
-    session.save_character_to_disk(player_name)
-
-    await manager.broadcast(session_id, {
-        "type": "enemy_updated",
-        "tracker_key": tracker_key,
-        "resolve_current": result.resolve_current,
-        "depletion": result.depletion,
-        "defeated": result.defeated,
-        "mook_removed": False,
-        "conditions": list(enemy.conditions),
-        "open": enemy.open,
-        # Distinguishes this event from an ordinary enemy_strike defeat
-        # (DESIGN §4 / TD-13's "distinguishable in the transcript").
-        "cause": result.cause,
-        "player": player_name,
-        "technique_id": "the_final_blow",
-        **_band_fields(session, band_before),
-    })
-
-    if result.phase_index is not None:
-        await manager.broadcast(session_id, {
-            "type": "enemy_phase_change",
-            "enemy_id": tracker_key,
-            "phase_index": result.phase_index,
-            "description": enemy.phases[result.phase_index].description,
-        })
-
-
-async def _handle_remove_enemy(msg: dict, session, session_id: str) -> None:
-    """MM removes an enemy from the active combat tracker."""
-    tracker_key = str(msg.get("tracker_key", ""))
-    band_before = session.active_encounter_band()
-    if tracker_key in session.active_enemies:
-        del session.active_enemies[tracker_key]
-    await manager.broadcast(session_id, {
-        "type": "enemy_removed",
-        "tracker_key": tracker_key,
-        **_band_fields(session, band_before),
-    })
+            raise WSError(f"No ally {name!r}.")
+        allies.append(ally.name)
+    info = combat.declare_defend(ctx.rs, ctx.session.combat, ch, allies or None)
+    await manager.broadcast(ctx.session_id, {"type": "defend_declared", "player": ch.player_name,
+                                             **info, "combat": ctx.session.combat.to_dict()})
 
 
 # ---------------------------------------------------------------------------
-# Threat Clock handlers (D4, PHB III.2)
+# Magic
 # ---------------------------------------------------------------------------
 
-async def _handle_clock_create(msg: dict, session, session_id: str) -> None:
-    """MM creates a new Threat Clock, visible to the whole table.
-
-    Segment count defaults to `hazards.threat_clock.segments` from the
-    ruleset (facet.yaml) unless the MM overrides it.
-    """
-    name = str(msg.get("name", "Threat"))[:128]
-    default_segments = 4
-    if session.ruleset.hazards:
-        default_segments = session.ruleset.hazards.threat_clock.segments
-    segments = int(msg.get("segments", default_segments))
-    clock_id = str(msg.get("clock_id") or uuid.uuid4())
-
-    clock = ThreatClock(id=clock_id, name=name, segments=segments)
-    session.threat_clocks[clock_id] = clock
-
-    await manager.broadcast(session_id, {
-        "type": "clock_created",
-        "clock": clock.to_client_dict(),
-    })
+def _cast_args(ctx: Ctx) -> dict:
+    sig = ctx.msg.get("signature")
+    return {"domain": _str(ctx.msg, "domain", 64), "scope": _str(ctx.msg, "scope", 20),
+            "working": _str(ctx.msg, "working", 200) or None,
+            "signature": None if sig is None else bool(sig),
+            "reduce_fatigue": _bool(ctx.msg, "reduce_fatigue"), "miracle": _bool(ctx.msg, "miracle")}
 
 
-async def _handle_clock_advance(msg: dict, session, session_id: str) -> None:
-    """MM advances a Threat Clock by one segment, if the outcome tier qualifies.
+@on("cast_preview")
+async def _cast_preview(ctx: Ctx) -> None:
+    """What a working will cost before it is cast (difficulty, Fatigue, why)."""
+    ch = _actor(ctx)
+    plan = magic.plan_cast(ctx.rs, ch, **_cast_args(ctx))
+    await manager.send_to(ctx.websocket, {"type": "cast_plan", "plan": {**plan.__dict__, "ok": plan.ok}})
 
-    `outcome_tier` is checked against `hazards.threat_clock.advances_on`
-    (default: partial_success, failure) — a 10+ (full_success) never advances
-    the clock. No new resolution mechanic: this reuses the existing roll
-    outcome tiers (BRIEF non-goal).
-    """
-    clock_id = str(msg.get("clock_id", ""))
-    clock = session.threat_clocks.get(clock_id)
-    if not clock:
-        await manager.broadcast(session_id, {
-            "type": "error",
-            "message": f"No Threat Clock with id '{clock_id}'.",
-        })
+
+@on("cast")
+async def _cast(ctx: Ctx) -> None:
+    """Cast a working: the engine plans it, rolls it, pays Fatigue and resolves harm."""
+    ch = _actor(ctx)
+    args = _cast_args(ctx)
+    enemy = _enemy(ctx, "target", required=False)
+    group = []
+    raw_targets = ctx.msg.get("targets") or []
+    if not isinstance(raw_targets, list) or len(raw_targets) > 20:
+        raise WSError("targets is a list of foes.")
+    for k in raw_targets:
+        e = ctx.session.active_enemies.get(str(k))
+        if e is None:
+            raise WSError(f"No foe {k!r} on the tracker.")
+        group.append(e)
+    extra = _extra_dice(ctx)
+    res = magic.resolve_cast(ctx.rs, ch, intent=_str(ctx.msg, "intent", 300), knack=_bool(ctx.msg, "knack"),
+                             enemy=enemy, enemies=group or None, rng=RNG, **args, **extra)
+    d = res.to_dict()
+    if extra["sparks"]:
+        ctx.session.record_spark_flow(ch.player_name)
+    _record_roll(ctx.session, ch.player_name, d["roll"])
+    if res.complication_options:
+        ctx.table.pending_complications[ch.player_name] = res.complication_options
+    player_d = dict(d, enemy_result=_strip_enemy_hp(d["enemy_result"]),
+                    enemy_results=[_strip_enemy_hp(r) for r in d["enemy_results"]])
+    base = {"type": "cast_result", "player": ch.player_name, "character": ch.name}
+    await manager.broadcast_split(ctx.session_id, {**base, "result": d}, {**base, "result": player_d})
+    await _push_character(ctx, ch)
+    for e in {id(x): x for x in ([enemy] if enemy else []) + group}.values():
+        await _push_enemy(ctx, e)
+
+
+@on("choose_complication")
+async def _choose_complication(ctx: Ctx) -> None:
+    """On a 7-9 working the player picks one of the two costs offered."""
+    ch = _actor(ctx)
+    options = ctx.table.pending_complications.get(ch.player_name)
+    if not options:
+        raise WSError("No casting cost is waiting for a choice.")
+    idx = _int(ctx.msg, "index", 0, 0, len(options) - 1)
+    chosen = ctx.table.pending_complications.pop(ch.player_name)[idx]
+    await manager.broadcast(ctx.session_id, {"type": "complication_chosen", "player": ch.player_name,
+                                             "character": ch.name, "complication": chosen})
+
+
+# ---------------------------------------------------------------------------
+# 0 HP, Hold On, recovery
+# ---------------------------------------------------------------------------
+
+@on("hold_on")
+async def _hold_on(ctx: Ctx) -> None:
+    """Roll Hold On (2d6 + Body) at 0 HP."""
+    ch = _actor(ctx)
+    if ch.player_name not in ctx.table.pending_hold_on and not (ch.hp_current == 0 and ch.status == "ok"):
+        raise WSError(f"{ch.name} is not at 0 HP waiting to Hold On.")
+    sparks = _int(ctx.msg, "sparks", 0, 0, 10)
+    result = ch.hold_on(ctx.rs, rng=RNG, sparks=sparks)
+    ctx.table.pending_hold_on.discard(ch.player_name)
+    rd = roll_result_to_dict(result)
+    _record_roll(ctx.session, ch.player_name, rd)
+    await manager.broadcast(ctx.session_id, {"type": "hold_on_result", "player": ch.player_name,
+                                             "character": ch.name, "roll": rd,
+                                             "status": ch.status, "text": result.extra.get("text", "")})
+    await _push_character(ctx, ch)
+
+
+@on("tend")
+async def _tend(ctx: Ctx) -> None:
+    """An ally tends a dying character before the scene ends."""
+    target = _target_character(ctx, "target")
+    tender = ctx.session.characters.get(ctx.identity) if not ctx.is_mm else None
+    if tender is target:
+        raise WSError("You cannot tend yourself.")
+    surgeon = bool(tender and tender.signature == "field_surgeon")
+    status = target.tend(field_surgeon=surgeon)
+    await manager.broadcast(ctx.session_id, {"type": "tended", "player": target.player_name,
+                                             "by": ctx.identity, "status": status,
+                                             "field_surgeon": surgeon})
+    await _push_character(ctx, target)
+
+
+@on("death_choice")
+async def _death_choice(ctx: Ctx) -> None:
+    """Untended at scene's end: live with a Scar, or a heroic final action."""
+    ch = _actor(ctx)
+    choice = _str(ctx.msg, "choice", 10)
+    out = ch.death_choice(ctx.rs, choice, rng=RNG)
+    await manager.broadcast(ctx.session_id, {"type": "death_choice_made", "player": ch.player_name,
+                                             "character": ch.name, **out})
+    await _push_character(ctx, ch)
+
+
+@on("rest")
+async def _rest(ctx: Ctx) -> None:
+    """A breather (half HP) or a night's rest (full HP, Fatigue, a Wound).
+    Players take a breather themselves; the MM calls either for anyone."""
+    kind = _str(ctx.msg, "kind", 10)
+    if kind not in ("breather", "night"):
+        raise WSError("A rest is a breather or a night.")
+    if ctx.is_mm:
+        names = ctx.msg.get("players") or list(ctx.session.characters)
+        if not isinstance(names, list):
+            raise WSError("players is a list.")
+        chars = []
+        for n in names:
+            c = ctx.session.characters.get(str(n))
+            if c is None:
+                raise WSError(f"No character for {n}.")
+            chars.append(c)
+    else:
+        if kind == "night":
+            raise WSError("The MM calls a night's rest.")
+        chars = [_actor(ctx)]
+    results = []
+    for c in chars:
+        if c.status in ("dead",):
+            continue
+        try:
+            if kind == "breather":
+                results.append({"player": c.player_name, "hp": c.breather(ctx.rs)})
+            else:
+                r = c.night_rest(ctx.rs, _int(ctx.msg, "wound_index", 0, 0, 20))
+                results.append({"player": c.player_name, **r})
+        except ValueError as e:
+            results.append({"player": c.player_name, "error": str(e)})
+    await manager.broadcast(ctx.session_id, {"type": "rest_result", "kind": kind, "results": results})
+    for c in chars:
+        await _push_character(ctx, c)
+    if kind == "breather" and ctx.is_mm and _bool(ctx.msg, "in_danger"):
+        res = toolbox.pressure_roll(ctx.rs, _str(ctx.msg, "variant", 20) or "generic", rng=RNG)
+        await _private_result(ctx, "pressure", res, reveal=False)
+
+
+@on("hp_adjust", mm_only=True)
+async def _hp_adjust(ctx: Ctx) -> None:
+    """The MM applies damage (a hazard, a filled clock) or healing to a character."""
+    ch = _target_character(ctx)
+    delta = _int(ctx.msg, "delta", 0, -200, 200)
+    if delta == 0:
+        raise WSError("Give a non-zero amount.")
+    fall = None
+    if delta < 0:
+        r = ch.take_damage(ctx.rs, -delta)
+        if r["dropped"]:
+            fall = await _drop_to_zero(ctx, ch)
+    else:
+        ch.heal(ctx.rs, delta)
+    await manager.broadcast(ctx.session_id, {"type": "hp_adjusted", "player": ch.player_name,
+                                             "delta": delta, "hp": ch.hp_current, "fall": fall})
+    await _push_character(ctx, ch)
+
+
+@on("wound_add")
+async def _wound_add(ctx: Ctx) -> None:
+    ch = _actor(ctx)
+    name = _str(ctx.msg, "name", 120)
+    if not name:
+        tid = ctx.rs.wounds.table
+        name = toolbox.roll_table(ctx.rs, tid, rng=RNG)["text"] if ctx.rs.get_table(tid) else "Wound"
+    wound = ch.add_wound(name)
+    await manager.broadcast(ctx.session_id, {"type": "wound_added", "player": ch.player_name,
+                                             "wound": wound, "items_to_drop": ch.items_to_drop(ctx.rs)})
+    await _push_character(ctx, ch)
+
+
+@on("wound_remove", mm_only=True)
+async def _wound_remove(ctx: Ctx) -> None:
+    ch = _actor(ctx)
+    wound = ch.remove_wound(_int(ctx.msg, "index", 0, 0, 50))
+    await manager.broadcast(ctx.session_id, {"type": "wound_removed", "player": ch.player_name,
+                                             "wound": wound})
+    await _push_character(ctx, ch)
+
+
+@on("usage_roll")
+async def _usage_roll(ctx: Ctx) -> None:
+    """Roll an item's usage die after a scene of use."""
+    ch = _actor(ctx)
+    item = _str(ctx.msg, "item", 64)
+    res = ch.usage_roll(ctx.rs, item, rng=RNG)
+    await manager.broadcast(ctx.session_id, {"type": "usage_result", "player": ch.player_name,
+                                             "character": ch.name, "result": res})
+    await _push_character(ctx, ch)
+
+
+@on("talent_use")
+async def _talent_use(ctx: Ctx) -> None:
+    """Tick a limited talent's use (once per scene / session / rest)."""
+    ch = _actor(ctx)
+    tid = _str(ctx.msg, "talent_id", 64)
+    if not ch.has_talent(tid):
+        raise WSError(f"{ch.name} does not have that talent.")
+    left = ch.use_talent(ctx.rs, tid, period=_str(ctx.msg, "period", 10) or None)
+    tdef = ctx.rs.get_talent(tid)
+    await manager.broadcast(ctx.session_id, {"type": "talent_used", "player": ch.player_name,
+                                             "character": ch.name, "talent_id": tid,
+                                             "talent": tdef.name if tdef else tid, "uses_left": left})
+    await _push_character(ctx, ch)
+
+
+
+@on("character_sync")
+async def _character_sync(ctx: Ctx) -> None:
+    """Re-broadcast a character after a REST change (inventory, notes)."""
+    await _push_character(ctx, _actor(ctx))
+
+
+@on("scene_end", mm_only=True)
+async def _scene_end(ctx: Ctx) -> None:
+    """A new scene: once-per-scene uses refresh."""
+    for c in ctx.session.characters.values():
+        c.reset_uses(ctx.rs, "scene")
+    await manager.broadcast(ctx.session_id, {"type": "scene_ended"})
+    for c in ctx.session.characters.values():
+        await _push_character(ctx, c)
+
+
+# ---------------------------------------------------------------------------
+# Sparks
+# ---------------------------------------------------------------------------
+
+@on("award_spark", mm_only=True)
+async def _award_spark(ctx: Ctx) -> None:
+    ch = _target_character(ctx)
+    ch.earn_spark()
+    ctx.session.record_spark_flow(ch.player_name)
+    await manager.broadcast(ctx.session_id, {"type": "spark_earned", "player": ch.player_name,
+                                             "reason": _str(ctx.msg, "reason", 200) or "MM award",
+                                             "sparks_now": ch.sparks})
+    await _push_character(ctx, ch)
+
+
+@on("spend_spark")
+async def _spend_spark(ctx: Ctx) -> None:
+    """Spend a Spark outside a roll (a talent that costs one, a named moment)."""
+    ch = _actor(ctx)
+    ch.spend_spark(1)
+    ctx.session.record_spark_flow(ch.player_name)
+    await manager.broadcast(ctx.session_id, {"type": "spark_spent", "player": ch.player_name,
+                                             "reason": _str(ctx.msg, "reason", 200),
+                                             "sparks_now": ch.sparks})
+    await _push_character(ctx, ch)
+
+
+@on("peer_call")
+async def _peer_call(ctx: Ctx) -> None:
+    """"Spark?" — any player calls it for another player's moment; the MM confirms."""
+    target = _target_character(ctx)
+    if not ctx.is_mm and target.player_name == ctx.identity:
+        raise WSError("Call it for someone else.")
+    await manager.broadcast(ctx.session_id, {"type": "spark_nomination", "kind": "peer_call",
+                                             "nominated_by": ctx.identity, "player": target.player_name,
+                                             "message": f"{ctx.identity} calls \"Spark?\" for "
+                                                        f"{target.player_name}. MM to confirm."})
+
+
+@on("act_break", mm_only=True)
+async def _act_break(ctx: Ctx) -> None:
+    await manager.broadcast(ctx.session_id, {
+        "type": "act_break_opened",
+        "message": "Act break: nominate someone for something they did in the scene just past."})
+
+
+@on("act_break_nominate")
+async def _act_break_nominate(ctx: Ctx) -> None:
+    target = _target_character(ctx)
+    if not ctx.is_mm and target.player_name == ctx.identity:
+        raise WSError("Nominate someone else.")
+    await manager.broadcast(ctx.session_id, {"type": "spark_nomination", "kind": "act_break",
+                                             "nominated_by": ctx.identity, "player": target.player_name,
+                                             "reason": _str(ctx.msg, "reason", 200),
+                                             "message": f"{ctx.identity} nominates {target.player_name} "
+                                                        "at the act break. MM to confirm."})
+
+
+@on("graceful_fail")
+async def _graceful_fail(ctx: Ctx) -> None:
+    """Claim the Graceful Fail on your last 6-: narrate it richer; the MM confirms."""
+    ch = _actor(ctx)
+    last = next((e for e in reversed(ctx.session.roll_log) if e.get("player_name") == ch.player_name), None)
+    if not last or last.get("outcome") != "failure":
+        raise WSError("Your last roll was not a 6-.")
+    if last.get("graceful_fail_claimed"):
+        raise WSError("That roll's Graceful Fail is already claimed.")
+    last["graceful_fail_claimed"] = True
+    last["graceful_fail_pending"] = True
+    await manager.broadcast(ctx.session_id, {"type": "graceful_fail_claimed", "player": ch.player_name,
+                                             "narration": _str(ctx.msg, "narration", 500),
+                                             "message": f"{ch.name} claims a Graceful Fail. MM to confirm."})
+
+
+@on("graceful_fail_confirm", mm_only=True)
+async def _graceful_fail_confirm(ctx: Ctx) -> None:
+    ch = _target_character(ctx)
+    last = next((e for e in reversed(ctx.session.roll_log)
+                 if e.get("player_name") == ch.player_name and e.get("graceful_fail_pending")), None)
+    if last is None:
+        raise WSError(f"{ch.name} has no Graceful Fail waiting.")
+    last["graceful_fail_pending"] = False
+    ch.earn_spark()
+    ctx.session.record_spark_flow(ch.player_name)
+    await manager.broadcast(ctx.session_id, {"type": "spark_earned", "player": ch.player_name,
+                                             "reason": "Graceful Fail", "sparks_now": ch.sparks})
+    await _push_character(ctx, ch)
+
+
+# ---------------------------------------------------------------------------
+# Levels
+# ---------------------------------------------------------------------------
+
+@on("session_end", mm_only=True)
+async def _session_end(ctx: Ctx) -> None:
+    """The five prompts and the pacing hint, for the MM's level-up call."""
+    prompts = ctx.session.end_session_prompts()
+    prompts["characters"] = [{"player": c.player_name, "name": c.name, "level": c.level,
+                              "ready": c.player_name in ctx.session.level_up_ready}
+                             for c in ctx.session.characters.values()]
+    await manager.send_to_identity(ctx.session_id, "mm", {"type": "session_end_prompts", **prompts})
+
+
+@on("level_up", mm_only=True)
+async def _level_up(ctx: Ctx) -> None:
+    """The MM grants a level (to everyone, or to the players named)."""
+    names = ctx.msg.get("players")
+    if names is not None and (not isinstance(names, list) or len(names) > 20):
+        raise WSError("players is a list.")
+    ready = ctx.session.call_level_up([str(n) for n in names] if names is not None else None)
+    await manager.broadcast(ctx.session_id, {"type": "level_up_ready", "players": ready})
+    for n in ready:
+        await _push_character(ctx, ctx.session.characters[n])
+
+
+@on("level_pick")
+async def _level_pick(ctx: Ctx) -> None:
+    """The player's pick for a granted level: a talent, an improved form, or
+    the signature (plus the stat at levels 4/8 and a working at 5/9)."""
+    ch = _actor(ctx)
+    if ch.player_name not in ctx.session.level_up_ready:
+        raise WSError("The MM has not called a level-up for you.")
+    hp = _str(ctx.msg, "hp", 10) or "average"
+    hp_roll = None
+    if hp == "roll":
+        hp_roll = RNG.randint(1, ch.facet_def(ctx.rs).grit_die)
+    elif hp != "average":
+        raise WSError("HP is 'roll' or 'average'.")
+    extras = ctx.msg.get("extra_talents")
+    if extras is not None and (not isinstance(extras, list) or len(extras) > 2):
+        raise WSError("extra_talents is a list of two.")
+    old_level = ch.level
+    errors = ch.level_up(ctx.rs, kind=_str(ctx.msg, "kind", 12), talent_id=_str(ctx.msg, "talent_id", 64),
+                         choice=_str(ctx.msg, "choice", 64) or None, teacher=_bool(ctx.msg, "teacher"),
+                         stat=_str(ctx.msg, "stat", 10) or None,
+                         signature_working=_str(ctx.msg, "signature_working", 200) or None,
+                         hp_roll=hp_roll, extra_talents=[str(e) for e in extras] if extras else None)
+    if errors:
+        await manager.send_to(ctx.websocket, {"type": "level_pick_error", "errors": errors})
         return
-
-    outcome_tier = str(msg.get("outcome_tier", ""))
-    advances_on = (
-        session.ruleset.hazards.threat_clock.advances_on
-        if session.ruleset.hazards else ["partial_success", "failure"]
-    )
-
-    just_filled = False
-    if outcome_tier in advances_on:
-        just_filled = clock.advance()
-
-    await manager.broadcast(session_id, {
-        "type": "clock_advanced",
-        "clock": clock.to_client_dict(),
-    })
-
-    if just_filled:
-        await manager.broadcast(session_id, {
-            "type": "clock_fill",
-            "clock": clock.to_client_dict(),
-        })
+    ctx.session.level_up_ready.discard(ch.player_name)
+    await manager.broadcast(ctx.session_id, {"type": "level_up_done", "player": ch.player_name,
+                                             "character": ch.name, "from": old_level, "level": ch.level,
+                                             "hp_roll": hp_roll})
+    await _push_character(ctx, ch)
 
 
-async def _handle_clock_wind_back(msg: dict, session, session_id: str) -> None:
-    """Spend an action to wind a Threat Clock back one segment.
+@on("respec")
+async def _respec(ctx: Ctx) -> None:
+    """Rebuild talents for free before the signature level."""
+    ch = _actor(ctx)
+    talents = ctx.msg.get("talents")
+    if not isinstance(talents, list) or len(talents) > 12:
+        raise WSError("talents is a list.")
+    errors = ch.respec(ctx.rs, talents=[t for t in talents if isinstance(t, dict)],
+                       magic=ctx.msg.get("magic") if isinstance(ctx.msg.get("magic"), dict) else None)
+    if errors:
+        raise WSError("; ".join(errors))
+    await _push_character(ctx, ch)
 
-    Unconditional — no roll (Brain, BRIEF §EF4). A rolled wind-back would let
-    a 7-9 advance the very clock being wound.
-    """
-    clock_id = str(msg.get("clock_id", ""))
-    clock = session.threat_clocks.get(clock_id)
-    if not clock:
-        await manager.broadcast(session_id, {
-            "type": "error",
-            "message": f"No Threat Clock with id '{clock_id}'.",
-        })
+
+@on("next_session", mm_only=True)
+async def _next_session(ctx: Ctx) -> None:
+    """Start the next session: Sparks back to 3, session uses refresh."""
+    n = ctx.session.next_session()
+    await manager.broadcast(ctx.session_id, {"type": "session_started", "session_number": n})
+    await _push_state(ctx.session_id)
+
+
+# ---------------------------------------------------------------------------
+# The tracker: foes
+# ---------------------------------------------------------------------------
+
+def _seed_bestiary(session, table: TableState) -> list[str]:
+    """Load the Bestiary's cards into the library (once per session)."""
+    if table.bestiary_seeded:
+        return []
+    table.bestiary_seeded = True
+    return _load_bestiary(session)
+
+
+def _load_bestiary(session) -> list[str]:
+    loaded = []
+    if not BESTIARY_DIR.is_dir():
+        return loaded
+    for path in sorted(BESTIARY_DIR.glob("*.fof")):
+        try:
+            enemy = Enemy.from_fof(yaml.safe_load(path.read_text(encoding="utf-8")))
+        except (EnemyFormatError, yaml.YAMLError, KeyError, TypeError, ValueError) as e:
+            logger.warning("Bestiary card %s skipped: %s", path.name, e)
+            continue
+        if enemy.id not in session.enemy_library and not enemy.validate(session.ruleset):
+            session.enemy_library[enemy.id] = enemy
+            loaded.append(enemy.id)
+    return loaded
+
+
+@on("bestiary_load", mm_only=True)
+async def _bestiary_load(ctx: Ctx) -> None:
+    loaded = _load_bestiary(ctx.session)
+    ctx.table.bestiary_seeded = True
+    rs = ctx.rs
+    await manager.send_to_identity(ctx.session_id, "mm", {
+        "type": "enemy_library", "loaded": loaded,
+        "library": {eid: e.to_client_dict(rs) for eid, e in ctx.session.enemy_library.items()}})
+
+
+@on("enemy_spawn", mm_only=True)
+async def _enemy_spawn(ctx: Ctx) -> None:
+    """Put a card from the library on the tracker (a Mook mob with `count`)."""
+    eid = _str(ctx.msg, "enemy_id", 64)
+    card = ctx.session.enemy_library.get(eid)
+    if card is None:
+        raise WSError(f"No card {eid!r} in the library.")
+    count = _int(ctx.msg, "count", 1, 1, 30)
+    if len(ctx.session.active_enemies) >= 40:
+        raise WSError("The tracker is full.")
+    base = _str(ctx.msg, "key", 64) or eid
+    key, n = base, 1
+    while key in ctx.session.active_enemies:
+        n += 1
+        key = f"{base}-{n}"
+    live = card.spawn(ctx.rs, count=count, key=key)
+    name = _str(ctx.msg, "name", 128)
+    if name:
+        live.name = name
+    elif n > 1:
+        live.name = f"{card.name} {n}"
+    ctx.session.active_enemies[key] = live
+    await _push_enemy(ctx, live, "enemy_spawned")
+
+
+@on("enemy_update", mm_only=True)
+async def _enemy_update(ctx: Ctx) -> None:
+    """Damage (through the engine), healing, or a manual correction."""
+    enemy = _enemy(ctx, "key")
+    rs = ctx.rs
+    report = None
+    if "damage" in ctx.msg:
+        report = combat.apply_damage_to_enemy(rs, enemy, _int(ctx.msg, "damage", 0, 0, 500)).to_dict()
+    if "heal" in ctx.msg and not enemy.is_mook:
+        mx = enemy.hp_max(rs)
+        enemy.hp_current = min(mx, (enemy.hp_current or 0) + _int(ctx.msg, "heal", 0, 0, 500))
+        if enemy.hp_current > 0:
+            enemy.defeated = False
+    if "hp_current" in ctx.msg and not enemy.is_mook:
+        enemy.hp_current = _int(ctx.msg, "hp_current", 0, 0, enemy.hp_max(rs))
+        enemy.defeated = enemy.hp_current == 0
+    if "count" in ctx.msg and enemy.is_mook:
+        enemy.count = _int(ctx.msg, "count", 1, 0, 30)
+        enemy.defeated = enemy.count == 0
+    for flag in ("bloodied", "broken", "defeated"):
+        if flag in ctx.msg:
+            setattr(enemy, flag, _bool(ctx.msg, flag))
+    if "name" in ctx.msg and _str(ctx.msg, "name", 128):
+        enemy.name = _str(ctx.msg, "name", 128)
+    if report is not None:
+        await manager.send_to_identity(ctx.session_id, "mm", {"type": "enemy_damage", "result": report,
+                                                             "name": enemy.name})
+    await _push_enemy(ctx, enemy)
+
+
+@on("enemy_remove", mm_only=True)
+async def _enemy_remove(ctx: Ctx) -> None:
+    enemy = _enemy(ctx, "key")
+    del ctx.session.active_enemies[enemy.key or enemy.id]
+    await manager.broadcast(ctx.session_id, {"type": "enemy_removed", "key": enemy.key or enemy.id})
+    await _push_danger(ctx)
+
+
+@on("morale_check", mm_only=True)
+async def _morale_check(ctx: Ctx) -> None:
+    """2d6 over the foe's morale and it breaks (flees, surrenders, parleys)."""
+    enemy = _enemy(ctx)
+    res = combat.morale_check(ctx.rs, enemy, bonus=_int(ctx.msg, "bonus", 0, 0, 4), rng=RNG)
+    await manager.broadcast(ctx.session_id, {"type": "morale_result", "name": enemy.name,
+                                             "result": res.to_dict()})
+    await _push_enemy(ctx, enemy)
+
+
+# ---------------------------------------------------------------------------
+# Toolbox (MM6) — private to the MM unless revealed
+# ---------------------------------------------------------------------------
+
+async def _private_result(ctx: Ctx, kind: str, result: Any, reveal: bool) -> None:
+    msg = {"type": "toolbox_result", "kind": kind, "result": result, "revealed": reveal}
+    if reveal:
+        await manager.broadcast(ctx.session_id, msg)
         return
+    rid = uuid.uuid4().hex[:12]
+    store = ctx.table.private_results
+    store[rid] = {"kind": kind, "result": result}
+    while len(store) > PRIVATE_RESULTS_KEPT:
+        store.popitem(last=False)
+    await manager.send_to_identity(ctx.session_id, "mm", {**msg, "result_id": rid})
 
+
+@on("toolbox_roll", mm_only=True)
+async def _toolbox_roll(ctx: Ctx) -> None:
+    res = toolbox.roll_table(ctx.rs, _str(ctx.msg, "table", 64), rng=RNG)
+    await _private_result(ctx, "table", res, _bool(ctx.msg, "reveal"))
+
+
+@on("toolbox_reveal", mm_only=True)
+async def _toolbox_reveal(ctx: Ctx) -> None:
+    entry = ctx.table.private_results.pop(_str(ctx.msg, "result_id", 32), None)
+    if entry is None:
+        raise WSError("That result is no longer available to reveal.")
+    await manager.broadcast(ctx.session_id, {"type": "toolbox_result", "kind": entry["kind"],
+                                             "result": entry["result"], "revealed": True})
+
+
+@on("reaction_roll", mm_only=True)
+async def _reaction_roll(ctx: Ctx) -> None:
+    res = toolbox.reaction_roll(ctx.rs, modifier=_int(ctx.msg, "modifier", 0, -3, 3), rng=RNG)
+    await _private_result(ctx, "reaction", res, _bool(ctx.msg, "reveal"))
+
+
+@on("pressure_roll", mm_only=True)
+async def _pressure_roll(ctx: Ctx) -> None:
+    res = toolbox.pressure_roll(ctx.rs, _str(ctx.msg, "variant", 20) or "generic", rng=RNG)
+    await _private_result(ctx, "pressure", res, _bool(ctx.msg, "reveal"))
+
+
+@on("oracle", mm_only=True)
+async def _oracle(ctx: Ctx) -> None:
+    res = toolbox.oracle(ctx.rs, _str(ctx.msg, "odds", 20) or "even", rng=RNG)
+    res["question"] = _str(ctx.msg, "question", 300)
+    await _private_result(ctx, "oracle", res, _bool(ctx.msg, "reveal"))
+
+
+@on("stuck", mm_only=True)
+async def _stuck(ctx: Ctx) -> None:
+    """"Stuck?" — three ways forward: a threat moves, someone arrives, a secret surfaces."""
+    clock = None
+    cid = _str(ctx.msg, "clock_id", 64)
+    if cid and cid in ctx.session.threat_clocks:
+        clock = ctx.session.threat_clocks[cid].name
+    elif ctx.session.threat_clocks:
+        clock = next(iter(ctx.session.threat_clocks.values())).name
+    res = toolbox.stuck_helper(ctx.rs, rng=RNG, clock=clock)
+    await _private_result(ctx, "stuck", res, False)
+
+
+@on("hoard", mm_only=True)
+async def _hoard(ctx: Ctx) -> None:
+    res = toolbox.roll_hoard(ctx.rs, _int(ctx.msg, "site_level", 1, 1, 10), rng=RNG)
+    await _private_result(ctx, "hoard", res, _bool(ctx.msg, "reveal"))
+
+
+@on("npc", mm_only=True)
+async def _npc(ctx: Ctx) -> None:
+    """An NPC on the spot: a name, a trait, a want and a secret."""
+    card = {}
+    for key, tid in (("name", "npc_names"), ("trait", "npc_traits"), ("want", "npc_wants"),
+                     ("secret", "npc_secrets")):
+        card[key] = toolbox.roll_table(ctx.rs, tid, rng=RNG)["text"] if ctx.rs.get_table(tid) else None
+    await _private_result(ctx, "npc", card, _bool(ctx.msg, "reveal"))
+
+
+# ---------------------------------------------------------------------------
+# Threat clocks (PHB III.2)
+# ---------------------------------------------------------------------------
+
+def _clock(ctx: Ctx) -> ThreatClock:
+    cid = _str(ctx.msg, "clock_id", 64)
+    clock = ctx.session.threat_clocks.get(cid)
+    if clock is None:
+        raise WSError(f"No Threat Clock {cid!r}.")
+    return clock
+
+
+@on("threat_clock_create", mm_only=True)
+async def _clock_create(ctx: Ctx) -> None:
+    name = _str(ctx.msg, "name", 128) or "Threat"
+    segments = _int(ctx.msg, "segments", ctx.rs.hazards.threat_clock.segments, 2, 12)
+    if len(ctx.session.threat_clocks) >= 20:
+        raise WSError("Twenty clocks is plenty.")
+    clock = ThreatClock(id=uuid.uuid4().hex[:10], name=name, segments=segments)
+    ctx.session.threat_clocks[clock.id] = clock
+    await manager.broadcast(ctx.session_id, {"type": "clock_updated", "clock": clock.to_client_dict()})
+
+
+@on("threat_clock_advance", mm_only=True)
+async def _clock_advance(ctx: Ctx) -> None:
+    """Tick a clock. With `outcome_tier`, only a tier that advances clocks ticks it."""
+    clock = _clock(ctx)
+    tier = _str(ctx.msg, "outcome_tier", 20)
+    filled = False
+    if not tier or tier in ctx.rs.hazards.threat_clock.advances_on:
+        filled = clock.advance()
+    await manager.broadcast(ctx.session_id, {"type": "clock_updated", "clock": clock.to_client_dict(),
+                                             "filled": filled})
+
+
+@on("threat_clock_wind_back", mm_only=True)
+async def _clock_wind_back(ctx: Ctx) -> None:
+    clock = _clock(ctx)
     clock.wind_back()
-
-    await manager.broadcast(session_id, {
-        "type": "clock_wound_back",
-        "clock": clock.to_client_dict(),
-    })
+    await manager.broadcast(ctx.session_id, {"type": "clock_updated", "clock": clock.to_client_dict()})
 
 
-async def _handle_clock_delete(msg: dict, session, session_id: str) -> None:
-    """Remove a Threat Clock once the hazard it tracked is resolved.
-
-    Clocks are visible to the whole table, so a spent one lingers on every
-    player's screen until it is cleared.
-    """
-    clock_id = str(msg.get("clock_id", ""))
-    if clock_id not in session.threat_clocks:
-        await manager.broadcast(session_id, {
-            "type": "error",
-            "message": f"No Threat Clock with id '{clock_id}'.",
-        })
-        return
-
-    del session.threat_clocks[clock_id]
-    await manager.broadcast(session_id, {
-        "type": "clock_deleted",
-        "clock_id": clock_id,
-    })
+@on("threat_clock_delete", mm_only=True)
+async def _clock_delete(ctx: Ctx) -> None:
+    clock = _clock(ctx)
+    del ctx.session.threat_clocks[clock.id]
+    await manager.broadcast(ctx.session_id, {"type": "clock_deleted", "clock_id": clock.id})

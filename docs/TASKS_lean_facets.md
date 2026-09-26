@@ -15,6 +15,6 @@ Spec: `docs/DESIGN_lean_facets.md` · Data: `software/facets/base/facet.yaml` ·
 | T8 | MM Manual rewrite + MM6 Toolbox + tables.yaml content | MM | done |
 | T9 | Bestiary: 18 enemy cards + prose | Bestiary | done |
 | T10 | Oraga Night + Val'loh books + pregens + cast .fof | Module | done |
-| T11 | WebSocket handlers + SPA rebuild + e2e | APP | open (after T1–T4) |
-| T12 | Docs invariants rewritten (INV-3..27), generators run, full suite green | Integration | open |
-| T13 | DECISIONS L1–L14, CLAUDE.md/README/memory updates, commit | Integration | open |
+| T11 | WebSocket handlers + SPA rebuild + e2e | APP | done |
+| T12 | Docs invariants rewritten (INV-3..27), generators run, full suite green | Integration | done |
+| T13 | DECISIONS L1–L14, CLAUDE.md/README/memory updates, commit | Integration | done |

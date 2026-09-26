@@ -60,58 +60,41 @@ Each link is **single-use**. Once the player clicks it and joins, it can't be re
 
 ## Playing
 
-The app has three tabs: **Play Field**, **Tools**, and **Builder**. Both the MM and players see all three tabs, but the content differs by role.
+The app has three tabs: **Build**, **Play**, and **Tools**. Everyone sees all three; what is on them depends on whether you are the Mirror Master or a player. The rules are Lean Facets v1.0 (the PHB's Quick Start is the ten-minute version).
 
-### Play Field
+### Build
 
-Where the action happens during a session.
+**Players:**
+- **Creation wizard** — Facet → stats (+2 / +1 / +0) → a preset class (the default) or *write your own* (name, concept, knack, two talents from your Facet's menu, kit) → a background (fifteen examples or your own: knack + Specialty) → kit by slots → magic (domain + two signature workings, for Thaumaturges and Invokers) → review. A gifted lineage also picks its gift domain.
+- **Level-up** — when the MM grants a level, pick a new talent, improve one you hold, take your signature (level 3), and raise a stat (levels 4 and 8). Before level 3 you may rebuild freely.
 
-**Rolling dice:**
-- Select an attribute and optionally a skill from the dropdowns.
-- Choose a difficulty level (Easy / Standard / Hard / Very Hard).
-- Click the Spark pips to spend Sparks before rolling (each adds a d6, drop lowest).
-- Click **Roll 2d6**. The result is broadcast to the whole table.
+**Mirror Master:**
+- **Monster-card builder** — choose a level and a role; the numbers come from the level table, live. Fill in the card (Wants, Special, When Bloodied, Tells, Breaks, six Twists, Nastier) and save it to the session library. The Bestiary's cards load into the library the first time you connect.
 
-**Combat:**
-- The MM starts combat from the Play Field controls. All characters enter combat with full Endurance.
-- Players declare postures (Aggressive / Measured / Defensive / Withdrawn) each exchange.
-- Use the Strike, React, Support, and Maneuver buttons to take actions. The server resolves rolls and applies Endurance costs automatically.
-- The MM can spawn enemies from the library, track their Endurance and conditions, and end exchanges/combat.
+### Play
 
-**Magic:**
-- Characters with a magic domain see the Magic panel. Select scope (Minor / Significant / Major), describe the intent, and cast.
-- The server determines difficulty from domain type and scope, then resolves the roll.
+**Players:** the character sheet (stats, HP, knacks, Specialty, talents with use trackers, magic, a slots grid holding gear, Wounds and Fatigue, Sparks) and five actions:
+- **Roll** — 2d6 + a stat, +1 if a knack applies, at the MM's difficulty.
+- **Attack** — on a 10+ pick one: +1d6 damage, a stunt, or cover for an ally. On a 7–9 you are exposed.
+- **Cast** — domain, scope, working and intent; the app previews difficulty and Fatigue before you roll. On a 7–9 you choose between two costs.
+- **Defend / Intercept** — attacks on you (or aimed at an ally) are Hard this exchange.
+- **Avoid** — the old saving throw: 2d6 + the stat that fits.
+Every action takes Spark, Help and Borrowed Trouble toggles (each adds a d6; keep the best two). At 0 HP the app rolls your Wound and prompts **Hold On**.
 
-**Sparks:**
-- The MM awards Sparks from the Play Field controls.
-- Players nominate each other for Sparks — the MM confirms.
+**Mirror Master:**
+- **Combat tracker** — add foes from the library (Mooks fight as one mob), write each foe's telegraph, and press **Attack (rolls in the open)**; the app rolls, applies armor and exposure, and shows the table. HP bars, Bloodied and broken badges, **Morale** checks, and the danger read.
+- **Toolbox** (private until you reveal it) — reaction roll, Pressure die (with terrain variants), fight / explore / social complications, MM move, NPC on the spot, trinkets, curios, relics, hoards, the oracle, any table by name, and **Stuck?**, which offers three ways forward.
+- **Threat clocks**, **scenes and act breaks**, **breathers and nights' rest**, and **End of session**: the five level-up prompts and a Grant Level button.
+- **Sparks** — award them, and confirm players' peer calls and nominations.
 
-**Chat:** visible to everyone in the session.
+**Chat** is visible to everyone in the session.
 
 ### Tools
 
-Reference and management during play.
-
-- **Character sheet** — full read-only view of attributes, skills, techniques, background, and specialty
-- **Inventory** — add/remove items (freeform list)
-- **Rule summaries** — collapsible cards for core resolution, combat, and magic quick reference
-- **Encounter budget calculator** (MM only) — input party strength and difficulty to get TR budget
-- **Export character** — download as a `.fof` file
-
-### Builder
-
-Between-session advancement and content creation.
-
-**Players:**
-- **Skill advancement** — spend session skill points on skills you used this session. Skills are auto-marked as used when you roll with them; the MM can also mark skills manually.
-- **Technique selection** — choose new techniques when your Facet level advances.
-- **Character notes** — personal notes that persist with your character.
-
-**Mirror Master:**
-- **Enemy builder** — create enemy stat blocks with auto-calculated Threat Rating. Saves to the session library.
-- **Encounter builder** — assemble enemies from the library, set difficulty, define lateral solutions.
-- **Skill advancement controls** — mark skills as used for players, award advancement marks directly.
-- **Campaign notes** — freeform session planning and NPC notes.
+- **Rules reference** — rendered from the loaded ruleset (and any setting Facet).
+- **Inventory editor** — slot-checked; equip weapon, armor and shield.
+- **Notes** — player notes, and the MM's private notes (never sent to players).
+- **Export** — download a character as a `.fof` file.
 
 ---
 
@@ -247,28 +230,38 @@ The ruleset is defined by YAML files in the `facets/` directory. Each subdirecto
 
 ### Writing Your Own Facet
 
-A minimal `facet.yaml`:
+A minimal `facet.yaml` adds content; it never changes a core rule:
 
 ```yaml
 id: "my-expansion"          # slug: alphanumeric, hyphens, underscores only
 name: "My Expansion"
 version: "0.1.0"
 authors: ["Your Name"]
-description: "Adds new skills and techniques."
-priority: 10                # higher priority wins on conflicting keys; base uses 0
+description: "Adds a sea-going class and one talent."
+priority: 10
 
-skills:
-  - id: sailing
-    name: Sailing
+talents:
+  - id: sea_legs
+    name: Sea Legs
     facet: body
-    attribute: dexterity
-    description: "Navigating watercraft in any conditions."
-    status: active
+    kind: talent
+    use: passive
+    text: "On a moving deck, climbing and fighting are never harder than Standard."
+    improved: "Once per scene, keep your footing through anything the sea does."
+    normal: "A pitching deck can make physical rolls Hard."
+
+classes:
+  - id: corsair
+    name: Corsair
+    facet: body
+    concept: "I am a raider of the coast roads and the sea lanes."
+    knack: "Ships and the sea"
+    talents: [sea_legs, fast_hands]
+    signature: whirlwind
+    kit: [light_weapon, rope, rations]
 ```
 
-See `facets/base/facet.yaml` for a complete example including attributes, character facets, techniques, roll resolution, Spark economy, and advancement rules. See `research/facet_system_design.md` for the full format specification.
-
-**Override behaviour:** If two loaded facets define the same key (e.g., the same skill ID), the one with the higher `priority` value wins. This lets expansion modules replace or extend base content without forking it.
+A setting Facet may add `lineages`, `talents`, `classes`, `backgrounds`, `magic_domains`, curio `items` and `tables`. It may not write the core rule sections (`stats`, `facets`, `roll_resolution`, `spark`, `advancement`, `hp`, `combat`, `monsters`, `magic` and the rest), and it may not redefine a core id; the loader rejects a Facet that tries. See `facets/base/facet.yaml` for the full core, `facets/valloh/facet.yaml` for a real setting Facet, and `docs/DESIGN_lean_facets.md` §3 for the formats.
 
 ---
 
