@@ -1,0 +1,2412 @@
+{
+ "title": "Oraga Night — 5e Edition: the Night as a Graph",
+ "phases": [
+  {
+   "id": "pre",
+   "label": "Before the Ball",
+   "time": "Session zero",
+   "summary": "Each player picks a hook and an agenda. All six hooks converge on the Gatehouse Court."
+  },
+  {
+   "id": "m1",
+   "label": "I. The Receiving Line",
+   "time": "Dusk",
+   "summary": "The line, the gate, Corval receiving by name. Nobody is disarmed. The honor guard faces inward."
+  },
+  {
+   "id": "m2",
+   "label": "II. The Empty Rooms",
+   "time": "Early night",
+   "summary": "The ball proper and the longest Movement. Agendas breathe; the host does not appear; Corro's gift rings."
+  },
+  {
+   "id": "m3",
+   "label": "III. The Summons",
+   "time": "Mid-night",
+   "summary": "A glimpse on the gallery; Corval fetches chosen guests to the Audience Hall. Three gray masks arrive."
+  },
+  {
+   "id": "m4",
+   "label": "IV. The Toast",
+   "time": "Dinner",
+   "summary": "Raunu appears, promises words at the Unmasking, takes two plates and leaves. The mews scream."
+  },
+  {
+   "id": "m5",
+   "label": "V. The Hour of Spirits",
+   "time": "Approaching midnight",
+   "summary": "Lamps low, the Dead Dance, quarter-bells. Every thread comes taut. Vell walks to the river gate."
+  },
+  {
+   "id": "m6",
+   "label": "VI. The Unmasking",
+   "time": "Midnight",
+   "summary": "The lights die mid-sentence. The Uninvited go to work; the snakes draw in the dark; the Crossing."
+  },
+  {
+   "id": "m7",
+   "label": "VII. The Longest Night",
+   "time": "After midnight to the last bell",
+   "summary": "Fire, rescue, and the gate held by the Bought. The last bell takes the Uninvited."
+  },
+  {
+   "id": "end",
+   "label": "Endings",
+   "time": "Dawn",
+   "summary": "The recorded history by default, and every If-History-Breaks branch."
+  },
+  {
+   "id": "after",
+   "label": "Aftermath",
+   "time": "The morning after (optional wing)",
+   "summary": "The inquest, the tidy trail, Vorlain's offer. No one is ever charged."
+  }
+ ],
+ "nodes": [
+  {
+   "id": "hook-invited",
+   "label": "The Invited",
+   "phase": "pre",
+   "kind": "event",
+   "summary": "Sent for by name, or serving someone who was. Fits A House's Long Game, The Prelate's Question.",
+   "ref": "01_Overture.md#getting-the-party-in",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "hook-entourage",
+   "label": "The Entourage",
+   "phase": "pre",
+   "kind": "event",
+   "summary": "Companion, bodyguard or witness to someone invited. Best vantage, worst position to act.",
+   "ref": "01_Overture.md#getting-the-party-in",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "hook-discarded",
+   "label": "The Discarded Invitation",
+   "phase": "pre",
+   "kind": "event",
+   "summary": "A genuine invitation with someone else's name on it. The mask custom protects you until midnight.",
+   "ref": "01_Overture.md#getting-the-party-in",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "hook-hired",
+   "label": "Hired for the Night",
+   "phase": "pre",
+   "kind": "event",
+   "summary": "Festival staff: a servant's freedom of the halls, and a servant's invisibility.",
+   "ref": "01_Overture.md#getting-the-party-in",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "hook-patron",
+   "label": "The Patron's Errand",
+   "phase": "pre",
+   "kind": "event",
+   "summary": "Untraceable hands for a faction. In this edition, your patron is also a snake.",
+   "ref": "01_Overture.md#getting-the-party-in",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "hook-wrong",
+   "label": "The Wrong Place, Deliberately",
+   "phase": "pre",
+   "kind": "event",
+   "summary": "Your own reason to be inside. The ball is your cover.",
+   "ref": "01_Overture.md#getting-the-party-in",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "b0",
+   "label": "B0. The Approach and the Line",
+   "phase": "m1",
+   "kind": "scene",
+   "summary": "The first scene: gossip hour in the queue. First check at DC 13, near-misses offered at a cost.",
+   "ref": "04_The_Ball.md#the-public-rooms (B0)",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "b1",
+   "label": "B1. The Gatehouse Court",
+   "phase": "m1",
+   "kind": "room",
+   "summary": "Corval receives every guest by name from memory. Borrowed invitations tested. Nobody is disarmed.",
+   "ref": "04_The_Ball.md#the-public-rooms (B1)",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "omen-1",
+   "label": "Omen: nine guards facing inward",
+   "phase": "m1",
+   "kind": "omen",
+   "summary": "Forty blades expected; nine present, all facing the palace doors, not the gates. House Boranis hired no swords.",
+   "ref": "04_The_Ball.md#movement-i--the-receiving-line",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "b2",
+   "label": "B2. The Crystal Court",
+   "phase": "m2",
+   "kind": "room",
+   "summary": "The grand hall of rose-lit crystal; dance floor, musicians, the empty high table. Nearly every scheduled event lands here.",
+   "ref": "04_The_Ball.md#the-public-rooms (B2)",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "b3",
+   "label": "B3. The Banquet Galleries",
+   "phase": "m2",
+   "kind": "room",
+   "summary": "Feast halls with half-private alcoves. Best room for agenda work, and where the feud boils over.",
+   "ref": "04_The_Ball.md#the-public-rooms (B3)",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "ev-m2",
+   "label": "The host does not appear",
+   "phase": "m2",
+   "kind": "event",
+   "summary": "Vorlain holds court by the wine; Kovaun takes a census of souls; Callun and Corro compare margins; Maiven presses Corval.",
+   "ref": "04_The_Ball.md#movement-ii--the-empty-rooms",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "omen-2",
+   "label": "Omen: Corro's gift rings",
+   "phase": "m2",
+   "kind": "omen",
+   "summary": "The Phern magnate loses his sentences and watches doors. His gift points nowhere.",
+   "ref": "04_The_Ball.md#movement-ii--the-empty-rooms",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "b5",
+   "label": "B5. Garden Terraces & River Gate",
+   "phase": "m2",
+   "kind": "room",
+   "summary": "Lantern gardens stepping down to a locked iron river gate. The escape route. Know it cold.",
+   "ref": "04_The_Ball.md#the-public-rooms (B5)",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "b6",
+   "label": "B6. The Chapel",
+   "phase": "m2",
+   "kind": "room",
+   "summary": "Fresh offerings in Elanna's niche. Mother Sella's room; the ball's only short rest.",
+   "ref": "04_The_Ball.md#the-public-rooms (B6)",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "b7",
+   "label": "B7. The Trophy Gallery",
+   "phase": "m2",
+   "kind": "room",
+   "summary": "Plunder, guards, and a grandmother's soul-crystal. Studying the wards here pays off at midnight.",
+   "ref": "04_The_Ball.md#the-private-palace (B7)",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "b8",
+   "label": "B8. Raunu's Study",
+   "phase": "m2",
+   "kind": "room",
+   "summary": "No papers anywhere: a crystal relief of the eastern coast, the lattice-key slate, scorched invitation duplicates.",
+   "ref": "04_The_Ball.md#the-private-palace (B8)",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "b9",
+   "label": "B9. The East Wing",
+   "phase": "m2",
+   "kind": "room",
+   "summary": "Sealed and guarded. Veier's emptied pack, two slings, and the nursery. Reached only by errand, passage, or Undercurrent C.",
+   "ref": "04_The_Ball.md#the-private-palace (B9)",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "b10",
+   "label": "B10. Kitchens & Service Passages",
+   "phase": "m2",
+   "kind": "room",
+   "summary": "Anha and the skeleton staff. The passages thread everything; at midnight, the only unwarded way through.",
+   "ref": "04_The_Ball.md#the-private-palace (B10)",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "b11",
+   "label": "B11. The Root of the House",
+   "phase": "m2",
+   "kind": "room",
+   "summary": "Hidden laboratory beneath the cellars: recall-lattices, the skeleton, the orrery. The Uninvited will not enter.",
+   "ref": "04_The_Ball.md#undercurrent-a--the-root-of-the-house",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "b13",
+   "label": "B13. The Room You Put Here",
+   "phase": "m2",
+   "kind": "room",
+   "summary": "Deliberately empty; the MM fills it from what the table has chased. No Fracture, no contradiction of Chapter II.",
+   "ref": "04_The_Ball.md#the-private-palace (B13)",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "a1",
+   "label": "1. The Circle's Reckoning",
+   "phase": "m2",
+   "kind": "agenda",
+   "summary": "Learn the Tithe of Hands before it is proclaimed. It lives in Corval's head; kindness opens him.",
+   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "optional": true,
+   "faction": "circle"
+  },
+  {
+   "id": "a2",
+   "label": "2. The Prelate's Question",
+   "phase": "m2",
+   "kind": "agenda",
+   "summary": "Is the man who came back the man who left? Four windows to study Raunu.",
+   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "optional": true,
+   "faction": "church"
+  },
+  {
+   "id": "a3",
+   "label": "3. A House's Long Game",
+   "phase": "m2",
+   "kind": "agenda",
+   "summary": "Get Vorlain to say anything Draunel could call an understanding. Essin stands in the way.",
+   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "optional": true,
+   "faction": "draunel"
+  },
+  {
+   "id": "a4",
+   "label": "4. The Cousin's Errand",
+   "phase": "m2",
+   "kind": "agenda",
+   "summary": "A memorized message and a ring, into Veier's own hands. The east wing is the only way.",
+   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "optional": true,
+   "faction": "thenya"
+  },
+  {
+   "id": "a5",
+   "label": "5. The Unpaid Debt",
+   "phase": "m2",
+   "kind": "agenda",
+   "summary": "Take grandmother's soul-crystal home from the trophy gallery. Another crew is working the same room.",
+   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "a6",
+   "label": "6. The Gate at Midnight",
+   "phase": "m2",
+   "kind": "agenda",
+   "summary": "Triple rates in old coin to unlock the river gate at midnight. The payer was Vell.",
+   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "a7",
+   "label": "7. The Story of a Lifetime",
+   "phase": "m2",
+   "kind": "agenda",
+   "summary": "Witness truly and carry the testimony out alive, in a land with no books.",
+   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "a8",
+   "label": "8. The Vanished Servant",
+   "phase": "m2",
+   "kind": "agenda",
+   "summary": "Find Anha in the kitchens; decide what to do with what she half-knows.",
+   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "uc-a",
+   "label": "Undercurrent A: The Root of the House",
+   "phase": "m2",
+   "kind": "scene",
+   "summary": "Barred stair, tally-cords, the wall seam, the slate key. Find: the gift-source laboratory. 'Both rivers, one spring.'",
+   "ref": "04_The_Ball.md#undercurrent-a--the-root-of-the-house",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "uc-b",
+   "label": "Undercurrent B: The Household That Wasn't",
+   "phase": "m2",
+   "kind": "scene",
+   "summary": "A returned footman, Corval's recitation, the sworn testament. Find: the staff were evacuated with love; the remainers volunteered.",
+   "ref": "04_The_Ball.md#undercurrent-b--the-household-that-wasnt",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "uc-c",
+   "label": "Undercurrent C: The Third Plate",
+   "phase": "m2",
+   "kind": "scene",
+   "summary": "The midwife, small linens, protective guards. Find: the pregnancy, and the nursery, before the announcement that never comes.",
+   "ref": "04_The_Ball.md#undercurrent-c--the-third-plate",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "uc-d",
+   "label": "Undercurrent D: The Guests Who Cast No Gossip",
+   "phase": "m2",
+   "kind": "scene",
+   "summary": "Corval's slipping mind, Corro's compass, maskless craft. Find: three impossible guests, Fracture ammunition, Raunu's 'I know.'",
+   "ref": "04_The_Ball.md#undercurrent-d--the-guests-who-cast-no-gossip",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "S1",
+   "label": "S1. The Seating Feud",
+   "phase": "m2",
+   "kind": "fight",
+   "summary": "Two drunk branches brawl in B3. Nonlethal. End it before the bench clock fills; earn Corval's gratitude.",
+   "ref": "09_The_Snakes.md (S1)",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "snk-circle",
+   "label": "The Circle's line",
+   "phase": "m2",
+   "kind": "snake",
+   "summary": "Callun's Hired Knives count arrivals, shadow Corval, question the summoned, lean on Anha after the toast.",
+   "ref": "04_The_Ball.md#the-snakes-in-the-pen; 09_The_Snakes.md",
+   "optional": true,
+   "faction": "circle"
+  },
+  {
+   "id": "snk-church",
+   "label": "The Church's line",
+   "phase": "m2",
+   "kind": "snake",
+   "summary": "Kovaun's Wardens watch the dais and east doors, ask which rooms the master uses, then pick the study lock.",
+   "ref": "04_The_Ball.md#the-snakes-in-the-pen; 09_The_Snakes.md",
+   "optional": true,
+   "faction": "church"
+  },
+  {
+   "id": "snk-draunel",
+   "label": "House Draunel's line",
+   "phase": "m2",
+   "kind": "snake",
+   "summary": "Duelists bait Essin's blades to draw first, then make a public appointment on the terraces after the bells.",
+   "ref": "04_The_Ball.md#the-snakes-in-the-pen; 09_The_Snakes.md",
+   "optional": true,
+   "faction": "draunel"
+  },
+  {
+   "id": "snk-boranis",
+   "label": "House Boranis's line",
+   "phase": "m2",
+   "kind": "snake",
+   "summary": "Essin's Cousin's Blades ring Vorlain and quietly steer anyone working him toward the garden doors.",
+   "ref": "04_The_Ball.md#the-snakes-in-the-pen; 09_The_Snakes.md",
+   "optional": true,
+   "faction": "boranis"
+  },
+  {
+   "id": "snk-phern",
+   "label": "Phern: the mirrored dread",
+   "phase": "m2",
+   "kind": "snake",
+   "summary": "Corro's Bodyguards catch his fear: hands to hilts, backs to walls, exits marked, facing the way the guards face.",
+   "ref": "04_The_Ball.md#the-snakes-in-the-pen; 09_The_Snakes.md",
+   "optional": true,
+   "faction": "phern"
+  },
+  {
+   "id": "snk-thenya",
+   "label": "The Thenya: one bad hour",
+   "phase": "m2",
+   "kind": "snake",
+   "summary": "Maiven's slingers scout and time the east wing guard; after the refused audience, a rope below the wall.",
+   "ref": "04_The_Ball.md#the-snakes-in-the-pen; 09_The_Snakes.md",
+   "optional": true,
+   "faction": "thenya"
+  },
+  {
+   "id": "ev-glimpse",
+   "label": "A figure on the high gallery",
+   "phase": "m3",
+   "kind": "event",
+   "summary": "Raunu glimpsed once above the Crystal Court, watching like weather, gone when looked for.",
+   "ref": "04_The_Ball.md#movement-iii--the-summons",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "b4",
+   "label": "B4. The Audience Hall — the summons",
+   "phase": "m3",
+   "kind": "scene",
+   "summary": "Corval: 'The master will see you.' At least one PC walks the long room. Deceiving Raunu: DC 25.",
+   "ref": "04_The_Ball.md#movement-iii--the-summons",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "omen-3",
+   "label": "Omen: three gray masks",
+   "phase": "m3",
+   "kind": "omen",
+   "summary": "Gracious, antique, on no list. Corval cannot account for them, and cannot hold the question.",
+   "ref": "04_The_Ball.md#movement-iii--the-summons",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "tavva-scout",
+   "label": "The scout",
+   "phase": "m3",
+   "kind": "scene",
+   "summary": "A footman in ill-fitting livery counts the gallery guards on his fingers. A lead, not a fight.",
+   "ref": "04_The_Ball.md#the-other-thieves-movements-iiivi--one-trouble-in-three-sightings",
+   "optional": true,
+   "faction": "tavva"
+  },
+  {
+   "id": "ev-toast",
+   "label": "The Toast and the two plates",
+   "phase": "m4",
+   "kind": "event",
+   "summary": "Raunu appears unmasked: 'At the Unmasking I will have something to say.' Fills two plates; leaves by the east doors.",
+   "ref": "04_The_Ball.md#movement-iv--the-toast",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "ev-maiven",
+   "label": "Maiven's audience refused",
+   "phase": "m4",
+   "kind": "event",
+   "summary": "Still no Veier. Corval, miserable, declines. The Thenya stop drinking.",
+   "ref": "04_The_Ball.md#movement-iv--the-toast",
+   "optional": false,
+   "faction": "thenya"
+  },
+  {
+   "id": "sc-dinner",
+   "label": "Dinner for two",
+   "phase": "m4",
+   "kind": "scene",
+   "summary": "Players who reach the east wing find Raunu and Veier at ease together — the night's one warm glimpse.",
+   "ref": "04_The_Ball.md#movement-iv--the-toast",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "omen-4",
+   "label": "Omen: the mews scream",
+   "phase": "m4",
+   "kind": "omen",
+   "summary": "Every falcon screams, then all fall silent. The gardens go quiet. Corro does not laugh.",
+   "ref": "04_The_Ball.md#movement-iv--the-toast",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "snk-escalate",
+   "label": "The snakes turn",
+   "phase": "m4",
+   "kind": "snake",
+   "summary": "The toast turns every line: Circle fears an heir, Draunel fears succession, Essin stops smiling, Phern mark exits.",
+   "ref": "04_The_Ball.md#movement-iv--the-toast",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "ev-dance",
+   "label": "The Dead Dance",
+   "phase": "m5",
+   "kind": "event",
+   "summary": "Lamps lowered, slow strange music, quarter-bells. Stealth has Advantage. Custom compels the host back at midnight.",
+   "ref": "04_The_Ball.md#movement-v--the-hour-of-spirits",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "ev-vell",
+   "label": "Vell at the river gate",
+   "phase": "m5",
+   "kind": "event",
+   "summary": "The pale factor walks the terraces once and confirms the gate — or unlocks it himself.",
+   "ref": "04_The_Ball.md#movement-v--the-hour-of-spirits",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "ev-guard",
+   "label": "East wing guard doubled",
+   "phase": "m5",
+   "kind": "event",
+   "summary": "Corval quietly doubles the east wing doors. Noticed only by those watching.",
+   "ref": "04_The_Ball.md#movement-v--the-hour-of-spirits",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "omen-5",
+   "label": "Omen: 'You dance like my daughter would have'",
+   "phase": "m5",
+   "kind": "omen",
+   "summary": "The Wept, as a dance partner. Sorrow ammunition for her Fracture; needs no check.",
+   "ref": "04_The_Ball.md#movement-v--the-hour-of-spirits",
+   "optional": false,
+   "faction": "uninvited"
+  },
+  {
+   "id": "S2",
+   "label": "S2. Knives in the Dark (the staging)",
+   "phase": "m5",
+   "kind": "fight",
+   "summary": "Tavva's crew with rope and sacking in the dark service run. A shared noise clock: if it fills, both sides lose.",
+   "ref": "09_The_Snakes.md (S2)",
+   "optional": true,
+   "faction": "tavva"
+  },
+  {
+   "id": "S4",
+   "label": "S4. The East Wing Doors",
+   "phase": "m5",
+   "kind": "fight",
+   "summary": "Forcing B9 or crossing the house: the honor guard detains and expels. Losing costs the evening, not the character.",
+   "ref": "09_The_Snakes.md (S4)",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "ev-unmask",
+   "label": "The Unmasking",
+   "phase": "m6",
+   "kind": "event",
+   "summary": "Raunu leads the rite. 'House Boranis has been silent because—' He never finishes.",
+   "ref": "05_The_Longest_Night.md#movement-vi--the-unmasking",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "ev-dark",
+   "label": "The lights die",
+   "phase": "m6",
+   "kind": "event",
+   "summary": "The rose drains from the walls. Three faces still masked. 'Corval. The stairs.' Wept to Raunu, Radiant to Veier, Hollow to the doors.",
+   "ref": "05_The_Longest_Night.md#movement-vi--the-unmasking",
+   "optional": false,
+   "faction": "uninvited"
+  },
+  {
+   "id": "sc-corro",
+   "label": "Corro moves first",
+   "phase": "m6",
+   "kind": "scene",
+   "summary": "Three seconds before the dark, the Phern magnate is already moving. Following him saves lives.",
+   "ref": "05_The_Longest_Night.md#movement-vi--the-unmasking",
+   "optional": true,
+   "faction": "phern"
+  },
+  {
+   "id": "beat-dais",
+   "label": "The dais",
+   "phase": "m6",
+   "kind": "scene",
+   "summary": "Raunu spends his house's wards like coin. The nine fall. Any PC beside him steers wards at DC 10.",
+   "ref": "05_The_Longest_Night.md#the-default-beats",
+   "optional": false,
+   "faction": "uninvited"
+  },
+  {
+   "id": "ev-raunu",
+   "label": "Raunu crushes the twin crystal",
+   "phase": "m6",
+   "kind": "event",
+   "summary": "He spends his last charge sealing every door between Veier and the river, instead of saving himself.",
+   "ref": "05_The_Longest_Night.md#the-default-beats",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "beat-east",
+   "label": "The east wing hunt",
+   "phase": "m6",
+   "kind": "scene",
+   "summary": "The Radiant hunts Veier through self-sealing corridors. Every watching witness buys her a hallway.",
+   "ref": "05_The_Longest_Night.md#the-default-beats",
+   "optional": false,
+   "faction": "uninvited"
+  },
+  {
+   "id": "beat-doors",
+   "label": "The hall doors",
+   "phase": "m6",
+   "kind": "scene",
+   "summary": "The Hollow holds the main doors; the crowd breaks around it like water. Two hundred hostages.",
+   "ref": "05_The_Longest_Night.md#the-default-beats",
+   "optional": false,
+   "faction": "uninvited"
+  },
+  {
+   "id": "fight-uninvited",
+   "label": "Fighting an Uninvited",
+   "phase": "m6",
+   "kind": "fight",
+   "summary": "Lethal and Leashed: at 0 HP it stops indulging, throws the attacker clear, returns whole. Force and spells buy time only.",
+   "ref": "05_The_Longest_Night.md#you-cannot-beat-them; 10_Bestiary.md",
+   "optional": true,
+   "faction": "uninvited"
+  },
+  {
+   "id": "sc-wards",
+   "label": "Steering the wards",
+   "phase": "m6",
+   "kind": "scene",
+   "summary": "Ward-literate PCs seal corridors, flood stairs, shelter guests. From the Root, palace-wide at DC 13.",
+   "ref": "05_The_Longest_Night.md#how-to-run-the-attack",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "fr-wept",
+   "label": "Fracture: the Wept (sorrow)",
+   "phase": "m6",
+   "kind": "branch",
+   "summary": "DC 18 with one tell, DC 15 with two or more. She stops for one full round — mid-kill.",
+   "ref": "05_The_Longest_Night.md#the-fractures",
+   "optional": true,
+   "faction": "uninvited"
+  },
+  {
+   "id": "fr-radiant",
+   "label": "Fracture: the Radiant (devotion)",
+   "phase": "m6",
+   "kind": "branch",
+   "summary": "Deny the congregation or plant the doubt. It cannot be turned; guilt slows the errand and it does not break past Vell.",
+   "ref": "05_The_Longest_Night.md#the-fractures",
+   "optional": true,
+   "faction": "uninvited"
+  },
+  {
+   "id": "fr-hollow",
+   "label": "Fracture: the Hollow (despair)",
+   "phase": "m6",
+   "kind": "branch",
+   "summary": "Sincerity, never ferocity. He opens his hands, the doors open, and he goes home early.",
+   "ref": "05_The_Longest_Night.md#the-fractures",
+   "optional": true,
+   "faction": "uninvited"
+  },
+  {
+   "id": "S5",
+   "label": "S5. The Looters",
+   "phase": "m6",
+   "kind": "fight",
+   "summary": "Tavva's crew strips the gallery and the fallen. The night's one fully winnable fight, aimed at better natures.",
+   "ref": "09_The_Snakes.md (S5)",
+   "optional": true,
+   "faction": "tavva"
+  },
+  {
+   "id": "kd-circle",
+   "label": "Knives: the Circle's delivery",
+   "phase": "m6",
+   "kind": "snake",
+   "summary": "Heat 3–4: Hired Knives walk one of the two Tithe ministers out through the smoke to Callun. Corval is on the stairs, untouched. Heat 0–2: they just get Callun out.",
+   "ref": "05_The_Longest_Night.md#knives-in-the-dark",
+   "optional": true,
+   "faction": "circle"
+  },
+  {
+   "id": "kd-church",
+   "label": "Knives: the Church's filing",
+   "phase": "m6",
+   "kind": "snake",
+   "summary": "Heat 3–4: Wardens come down the dark-wing stair with the drawer of scorched invitations, the slate wiped behind them. Heat 0–2: they get the Prelate out.",
+   "ref": "05_The_Longest_Night.md#knives-in-the-dark",
+   "optional": true,
+   "faction": "church"
+  },
+  {
+   "id": "kd-draunel",
+   "label": "Knives: Draunel's fourth iron",
+   "phase": "m6",
+   "kind": "snake",
+   "summary": "Heat 3–4: Duelists take Vorlain by the arms in the burning gallery (B3), to hand him to the sect guard. Default: Essin's cousins fight for him and he is not taken.",
+   "ref": "05_The_Longest_Night.md#knives-in-the-dark",
+   "optional": true,
+   "faction": "draunel"
+  },
+  {
+   "id": "kd-boranis",
+   "label": "Knives: the cousins in the fire",
+   "phase": "m6",
+   "kind": "snake",
+   "summary": "Essin and the cousins go into the burning gallery with Vorlain. If Draunel's heat is 3–4, they stand between him and Draunel's men.",
+   "ref": "05_The_Longest_Night.md#knives-in-the-dark",
+   "optional": true,
+   "faction": "boranis"
+  },
+  {
+   "id": "kd-phern",
+   "label": "Knives: the Phern door",
+   "phase": "m6",
+   "kind": "snake",
+   "summary": "Heat 3–4: Bodyguards hold a gallery-side service door off B2 for Corro alone, and the crowd crushes. Turn it: no check if Corro trusts you, else DC 15 Persuasion.",
+   "ref": "05_The_Longest_Night.md#knives-in-the-dark",
+   "optional": true,
+   "faction": "phern"
+  },
+  {
+   "id": "kd-thenya",
+   "label": "Toward the fire: Maiven",
+   "phase": "m6",
+   "kind": "snake",
+   "summary": "Maiven goes toward the east wing. She dies there unless somebody competent goes with her.",
+   "ref": "05_The_Longest_Night.md#knives-in-the-dark",
+   "optional": true,
+   "faction": "thenya"
+  },
+  {
+   "id": "cross-1",
+   "label": "The Crossing: the terrace",
+   "phase": "m6",
+   "kind": "scene",
+   "summary": "Vell turns and moves the way the Uninvited move. The wrapped sword stays wrapped. The Radiant: '...You.'",
+   "ref": "05_The_Longest_Night.md#the-crossing--vell-and-the-radiant",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "cross-2",
+   "label": "The Crossing: the lower garden",
+   "phase": "m6",
+   "kind": "scene",
+   "summary": "'Take her. The gate. Don't stop.' The crossfire: DC 13 Dexterity save each beat.",
+   "ref": "05_The_Longest_Night.md#the-crossing--vell-and-the-radiant",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "cross-3",
+   "label": "The Crossing: the river gate",
+   "phase": "m6",
+   "kind": "scene",
+   "summary": "The boat. If the Radiant breaks past, whatever stands at the gate is what it must go through.",
+   "ref": "05_The_Longest_Night.md#the-crossing--vell-and-the-radiant",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "ev-bell",
+   "label": "The last bell",
+   "phase": "m7",
+   "kind": "event",
+   "summary": "The leash takes all three, finished or not. The Wept looks back at whoever earned it.",
+   "ref": "05_The_Longest_Night.md#the-default-beats",
+   "optional": false,
+   "faction": "uninvited"
+  },
+  {
+   "id": "sc-rescue",
+   "label": "The Longest Night",
+   "phase": "m7",
+   "kind": "scene",
+   "summary": "Fire and smoke; the PCs are the only order. Inspiration per person carried out. Vorlain, a hero.",
+   "ref": "05_The_Longest_Night.md#movement-vii--the-longest-night",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "ev-word",
+   "label": "Word of other attacks",
+   "phase": "m7",
+   "kind": "event",
+   "summary": "Fires in two sect districts; a Blackwatch courier post dark. Diversions. Somebody was paid.",
+   "ref": "05_The_Longest_Night.md#movement-vii--the-longest-night",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "b12",
+   "label": "B12. The Gatehouse Court, Held",
+   "phase": "m7",
+   "kind": "room",
+   "summary": "The outer gate barred from the far side; grey coats; a sergeant reading terms from a chained case.",
+   "ref": "05_The_Longest_Night.md#b12-the-gatehouse-court-held",
+   "optional": false,
+   "faction": "bought"
+  },
+  {
+   "id": "S3",
+   "label": "S3. The Gate at Midnight",
+   "phase": "m7",
+   "kind": "fight",
+   "summary": "The Bought hold the gate: sergeant, Blades, then the captain. Fire clock. Three endings, all wins.",
+   "ref": "09_The_Snakes.md (S3)",
+   "optional": false,
+   "faction": "bought"
+  },
+  {
+   "id": "ev-clause",
+   "label": "The Second Clause",
+   "phase": "m7",
+   "kind": "event",
+   "summary": "'If a woman in Thenya wool comes out the front, hold her.' Somebody wanted Veier held.",
+   "ref": "05_The_Longest_Night.md#b12-the-gatehouse-court-held",
+   "optional": false,
+   "faction": "bought"
+  },
+  {
+   "id": "gate-fight",
+   "label": "Fight through",
+   "phase": "m7",
+   "kind": "branch",
+   "summary": "Drop the sergeant and half the Blades; the rest disengage. Long if fought to the last.",
+   "ref": "05_The_Longest_Night.md#b12-the-gatehouse-court-held",
+   "optional": false,
+   "faction": "bought"
+  },
+  {
+   "id": "gate-void",
+   "label": "Void the contract",
+   "phase": "m7",
+   "kind": "branch",
+   "summary": "Employer broke terms (DC 13 Persuasion to the sergeant; the captain needs no check), target already gone, or a better offer in front of the sergeants — snake coin included.",
+   "ref": "05_The_Longest_Night.md#b12-the-gatehouse-court-held",
+   "optional": false,
+   "faction": "bought"
+  },
+  {
+   "id": "gate-sect",
+   "label": "The sect guard arrives",
+   "phase": "m7",
+   "kind": "branch",
+   "summary": "On the clock's last segment, sect banners at the wall; the captain withdraws. A party that held has won.",
+   "ref": "05_The_Longest_Night.md#b12-the-gatehouse-court-held",
+   "optional": false,
+   "faction": "bought"
+  },
+  {
+   "id": "end-default",
+   "label": "History as recorded",
+   "phase": "end",
+   "kind": "ending",
+   "summary": "Raunu dead mid-sentence; Veier gone into the river dark; the Uninvited without trace; no one ever charged.",
+   "ref": "05_The_Longest_Night.md#epilogue-one-shot-ending",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "epilogue",
+   "label": "Epilogue: what do you carry out?",
+   "phase": "end",
+   "kind": "ending",
+   "summary": "The mists are rising again. Each player names what their character carries out. 4th level.",
+   "ref": "05_The_Longest_Night.md#epilogue-one-shot-ending",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "ihb-raunu",
+   "label": "⟨They save Raunu⟩",
+   "phase": "end",
+   "kind": "ending",
+   "summary": "The Wept's Fracture found early plus real sacrifice at the dais. Veier and the child must still vanish.",
+   "ref": "05_The_Longest_Night.md#if-history-breaks",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "ihb-child",
+   "label": "⟨The child is taken⟩",
+   "phase": "end",
+   "kind": "ending",
+   "summary": "Nothing held the gate. The aftermath becomes a pursuit, with Vell as a terrifyingly forthcoming patron.",
+   "ref": "05_The_Longest_Night.md#if-history-breaks",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "ihb-trap",
+   "label": "⟨They trap one of the Uninvited⟩",
+   "phase": "end",
+   "kind": "ending",
+   "summary": "Only deep Boranis ward-crystal holds one, until the last bell. It answers one question about itself.",
+   "ref": "05_The_Longest_Night.md#if-history-breaks",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "ihb-expose",
+   "label": "⟨They expose the truth⟩",
+   "phase": "end",
+   "kind": "ending",
+   "summary": "Real evidence, and nobody powerful wants it. Exposure, not power: a campaign frame.",
+   "ref": "05_The_Longest_Night.md#if-history-breaks",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "ihb-pcdies",
+   "label": "⟨A player character dies⟩",
+   "phase": "end",
+   "kind": "ending",
+   "summary": "A death that holds a gate is written into the night. The player finishes as Corval, Anha, Maiven, or Vorlain.",
+   "ref": "05_The_Longest_Night.md#if-history-breaks",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "ihb-bought",
+   "label": "⟨The Bought change sides⟩",
+   "phase": "end",
+   "kind": "ending",
+   "summary": "Bought out before midnight, the company holds the gate open. Forty sworn witnesses instead of two hundred frightened ones.",
+   "ref": "05_The_Longest_Night.md#if-history-breaks",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "ihb-clause",
+   "label": "⟨The Second Clause succeeds⟩",
+   "phase": "end",
+   "kind": "ending",
+   "summary": "It must not. Reach for the honour clause or the sect guard; otherwise be generous.",
+   "ref": "05_The_Longest_Night.md#if-history-breaks",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "ihb-snakefed",
+   "label": "⟨A snake gets what it came for⟩",
+   "phase": "end",
+   "kind": "ending",
+   "summary": "The Church files the scorched invitations, a Tithe minister leaves in Circle hands. History, unrecorded: why the story is wrong by noon.",
+   "ref": "05_The_Longest_Night.md#if-history-breaks",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "ihb-turned",
+   "label": "⟨The party turns one snake on another⟩",
+   "phase": "end",
+   "kind": "ending",
+   "summary": "Set the factions on each other; hands stay clean. Paid as ending a fight without finishing it.",
+   "ref": "05_The_Longest_Night.md#if-history-breaks",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "af-inquest",
+   "label": "The inquest",
+   "phase": "after",
+   "kind": "scene",
+   "summary": "Draunel, Church and Circle run one inquest in three coats; the notary edits testimony as it is spoken. 5th level here.",
+   "ref": "06_Aftermath.md",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "af-vorlain",
+   "label": "Vorlain's offer",
+   "phase": "after",
+   "kind": "scene",
+   "summary": "Chief in all but ceremony, and afraid. Find out what happened, on his coin. The only patron who wants the truth.",
+   "ref": "06_Aftermath.md",
+   "optional": true,
+   "faction": "boranis"
+  },
+  {
+   "id": "af-trail",
+   "label": "The tidy trail",
+   "phase": "after",
+   "kind": "scene",
+   "summary": "Oiled river gate, a boat paid thrice over, a carter's 'factor and his sick daughter' — then nothing.",
+   "ref": "06_Aftermath.md",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "af-vesh",
+   "label": "The mask-maker",
+   "phase": "after",
+   "kind": "scene",
+   "summary": "Otta Vesh on the gray masks: nobody made them, and nobody in the city would know how.",
+   "ref": "06_Aftermath.md",
+   "optional": true,
+   "faction": null
+  },
+  {
+   "id": "af-close",
+   "label": "The file closes",
+   "phase": "after",
+   "kind": "ending",
+   "summary": "'Agents unknown, likely Mazaaian.' Everyone signs. You know more than the record: what do you do with it?",
+   "ref": "06_Aftermath.md",
+   "optional": false,
+   "faction": null
+  },
+  {
+   "id": "S6",
+   "label": "S6. The Quiet Word",
+   "phase": "m3",
+   "kind": "fight",
+   "summary": "An invitation to take the air: Essin's cousins warn off whoever pressed Vorlain. A warning with fists.",
+   "ref": "09_The_Snakes.md (S6)",
+   "optional": true,
+   "faction": "boranis"
+  },
+  {
+   "id": "S7",
+   "label": "S7. The Second Plate",
+   "phase": "m4",
+   "kind": "fight",
+   "summary": "A Circle knife leans on Anha, then works the service run toward the east wing. Service-door clock.",
+   "ref": "09_The_Snakes.md (S7)",
+   "optional": true,
+   "faction": "circle"
+  },
+  {
+   "id": "S8",
+   "label": "S8. The Study Door",
+   "phase": "m5",
+   "kind": "fight",
+   "summary": "Church Wardens pick the study's crystal lock for the scorched invitations and the slate — the Root's key. Lock clock.",
+   "ref": "09_The_Snakes.md (S8)",
+   "optional": true,
+   "faction": "church"
+  },
+  {
+   "id": "S9",
+   "label": "S9. The Appointment",
+   "phase": "m5",
+   "kind": "fight",
+   "summary": "Draunel's duelist and Essin's cousin on the upper terrace, steel about to come out. Circle clock.",
+   "ref": "09_The_Snakes.md (S9)",
+   "optional": true,
+   "faction": "draunel"
+  },
+  {
+   "id": "S10",
+   "label": "S10. Over the Wall",
+   "phase": "m5",
+   "kind": "fight",
+   "summary": "Thenya slingers with a rope below the east wing. Only if provoked; going with them is the better bet.",
+   "ref": "09_The_Snakes.md (S10)",
+   "optional": true,
+   "faction": "thenya"
+  },
+  {
+   "id": "S11",
+   "label": "S11. The Phern Door",
+   "phase": "m6",
+   "kind": "fight",
+   "summary": "Corro's bodyguards hold a service door for their master alone while the crowd crushes. Turn it into an exit.",
+   "ref": "09_The_Snakes.md (S11)",
+   "optional": true,
+   "faction": "phern"
+  },
+  {
+   "id": "S12",
+   "label": "S12. The Minister in the Smoke",
+   "phase": "m7",
+   "kind": "fight",
+   "summary": "Circle knives walk a Tithe-carrying minister out through the smoke. The minister's choice, not the Circle's.",
+   "ref": "09_The_Snakes.md (S12)",
+   "optional": true,
+   "faction": "circle"
+  },
+  {
+   "id": "S13",
+   "label": "S13. The Arrest in the Fire",
+   "phase": "m7",
+   "kind": "fight",
+   "summary": "Draunel's duelists drag Vorlain out of his own rescue; Essin's cousins fight for him. Gallery clock.",
+   "ref": "09_The_Snakes.md (S13)",
+   "optional": true,
+   "faction": "draunel"
+  }
+ ],
+ "edges": [
+  {
+   "from": "hook-invited",
+   "to": "b0",
+   "label": "arrive",
+   "kind": "default"
+  },
+  {
+   "from": "hook-entourage",
+   "to": "b0",
+   "label": "arrive",
+   "kind": "default"
+  },
+  {
+   "from": "hook-discarded",
+   "to": "b0",
+   "label": "arrive",
+   "kind": "default"
+  },
+  {
+   "from": "hook-hired",
+   "to": "b0",
+   "label": "arrive",
+   "kind": "default"
+  },
+  {
+   "from": "hook-patron",
+   "to": "b0",
+   "label": "arrive",
+   "kind": "default"
+  },
+  {
+   "from": "hook-wrong",
+   "to": "b0",
+   "label": "arrive",
+   "kind": "default"
+  },
+  {
+   "from": "b0",
+   "to": "b1",
+   "label": "head of the line",
+   "kind": "default"
+  },
+  {
+   "from": "b0",
+   "to": "omen-1",
+   "label": "on the gate",
+   "kind": "default"
+  },
+  {
+   "from": "b1",
+   "to": "b2",
+   "label": "inside",
+   "kind": "default"
+  },
+  {
+   "from": "omen-1",
+   "to": "b2",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "b2",
+   "to": "ev-m2",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "ev-m2",
+   "to": "omen-2",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "b2",
+   "to": "b3",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "b2",
+   "to": "b5",
+   "label": "air",
+   "kind": "optional"
+  },
+  {
+   "from": "b2",
+   "to": "b6",
+   "label": "quiet",
+   "kind": "optional"
+  },
+  {
+   "from": "b3",
+   "to": "b10",
+   "label": "service door",
+   "kind": "optional"
+  },
+  {
+   "from": "b10",
+   "to": "b7",
+   "label": "passages",
+   "kind": "optional"
+  },
+  {
+   "from": "b10",
+   "to": "b9",
+   "label": "passages",
+   "kind": "optional"
+  },
+  {
+   "from": "b10",
+   "to": "b8",
+   "label": "passages",
+   "kind": "optional"
+  },
+  {
+   "from": "b7",
+   "to": "b13",
+   "label": "lower gallery",
+   "kind": "optional"
+  },
+  {
+   "from": "b3",
+   "to": "S1",
+   "label": "the feud boils over",
+   "kind": "optional"
+  },
+  {
+   "from": "b1",
+   "to": "a1",
+   "label": "patron",
+   "kind": "optional"
+  },
+  {
+   "from": "a1",
+   "to": "b10",
+   "label": "find Corval",
+   "kind": "optional"
+  },
+  {
+   "from": "b1",
+   "to": "a2",
+   "label": "patron",
+   "kind": "optional"
+  },
+  {
+   "from": "a2",
+   "to": "b4",
+   "label": "earn a summons",
+   "kind": "optional"
+  },
+  {
+   "from": "b1",
+   "to": "a3",
+   "label": "patron",
+   "kind": "optional"
+  },
+  {
+   "from": "a3",
+   "to": "b3",
+   "label": "Vorlain by the wine",
+   "kind": "optional"
+  },
+  {
+   "from": "b1",
+   "to": "a4",
+   "label": "patron",
+   "kind": "optional"
+  },
+  {
+   "from": "a4",
+   "to": "b9",
+   "label": "into her hands",
+   "kind": "optional"
+  },
+  {
+   "from": "b1",
+   "to": "a5",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "a5",
+   "to": "b7",
+   "label": "the crystal",
+   "kind": "optional"
+  },
+  {
+   "from": "b1",
+   "to": "a6",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "a6",
+   "to": "b5",
+   "label": "unlock at midnight",
+   "kind": "optional"
+  },
+  {
+   "from": "b1",
+   "to": "a7",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "a7",
+   "to": "uc-d",
+   "label": "witness",
+   "kind": "optional"
+  },
+  {
+   "from": "b1",
+   "to": "a8",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "a8",
+   "to": "b10",
+   "label": "find Anha",
+   "kind": "optional"
+  },
+  {
+   "from": "b3",
+   "to": "uc-a",
+   "label": "rumor 5, Anha",
+   "kind": "optional"
+  },
+  {
+   "from": "b8",
+   "to": "uc-a",
+   "label": "the slate",
+   "kind": "optional"
+  },
+  {
+   "from": "uc-a",
+   "to": "b11",
+   "label": "trace the lattice key",
+   "kind": "optional"
+  },
+  {
+   "from": "a8",
+   "to": "uc-b",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "uc-b",
+   "to": "b3",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "b10",
+   "to": "uc-c",
+   "label": "three plates",
+   "kind": "optional"
+  },
+  {
+   "from": "uc-c",
+   "to": "b9",
+   "label": "the nursery",
+   "kind": "optional"
+  },
+  {
+   "from": "omen-3",
+   "to": "uc-d",
+   "label": "Corval cannot hold it",
+   "kind": "optional"
+  },
+  {
+   "from": "omen-2",
+   "to": "uc-d",
+   "label": "Corro's compass",
+   "kind": "optional"
+  },
+  {
+   "from": "b2",
+   "to": "snk-circle",
+   "label": "a tell, shown once",
+   "kind": "optional"
+  },
+  {
+   "from": "b2",
+   "to": "snk-church",
+   "label": "a tell, shown once",
+   "kind": "optional"
+  },
+  {
+   "from": "b2",
+   "to": "snk-draunel",
+   "label": "a tell, shown once",
+   "kind": "optional"
+  },
+  {
+   "from": "b2",
+   "to": "snk-boranis",
+   "label": "a tell, shown once",
+   "kind": "optional"
+  },
+  {
+   "from": "b2",
+   "to": "snk-phern",
+   "label": "a tell, shown once",
+   "kind": "optional"
+  },
+  {
+   "from": "b2",
+   "to": "snk-thenya",
+   "label": "a tell, shown once",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-circle",
+   "to": "a1",
+   "label": "rival hands",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-boranis",
+   "to": "a3",
+   "label": "Essin's blades",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-thenya",
+   "to": "a4",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "ev-m2",
+   "to": "ev-glimpse",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "ev-glimpse",
+   "to": "b4",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "b4",
+   "to": "omen-3",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "b7",
+   "to": "tavva-scout",
+   "label": "counting guards",
+   "kind": "optional"
+  },
+  {
+   "from": "omen-3",
+   "to": "ev-toast",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "ev-toast",
+   "to": "ev-maiven",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "ev-toast",
+   "to": "omen-4",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "ev-toast",
+   "to": "sc-dinner",
+   "label": "via B9",
+   "kind": "optional"
+  },
+  {
+   "from": "b9",
+   "to": "sc-dinner",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "ev-toast",
+   "to": "snk-escalate",
+   "label": "every line turns",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-circle",
+   "to": "snk-escalate",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-church",
+   "to": "snk-escalate",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-draunel",
+   "to": "snk-escalate",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-boranis",
+   "to": "snk-escalate",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-phern",
+   "to": "snk-escalate",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-thenya",
+   "to": "snk-escalate",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "omen-4",
+   "to": "ev-dance",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "ev-dance",
+   "to": "ev-vell",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "ev-dance",
+   "to": "ev-guard",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "ev-dance",
+   "to": "omen-5",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "tavva-scout",
+   "to": "S2",
+   "label": "the staging",
+   "kind": "optional"
+  },
+  {
+   "from": "b10",
+   "to": "S2",
+   "label": "dark corridors",
+   "kind": "optional"
+  },
+  {
+   "from": "b9",
+   "to": "S4",
+   "label": "force the doors",
+   "kind": "optional"
+  },
+  {
+   "from": "uc-c",
+   "to": "S4",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-escalate",
+   "to": "S9",
+   "label": "the appointment",
+   "kind": "optional"
+  },
+  {
+   "from": "ev-maiven",
+   "to": "S10",
+   "label": "one bad hour",
+   "kind": "optional"
+  },
+  {
+   "from": "S10",
+   "to": "S4",
+   "label": "guards answer",
+   "kind": "optional"
+  },
+  {
+   "from": "a6",
+   "to": "ev-vell",
+   "label": "gate confirmed",
+   "kind": "optional"
+  },
+  {
+   "from": "omen-5",
+   "to": "ev-unmask",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "ev-vell",
+   "to": "ev-unmask",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "ev-guard",
+   "to": "ev-unmask",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "ev-unmask",
+   "to": "ev-dark",
+   "label": "mid-sentence",
+   "kind": "default"
+  },
+  {
+   "from": "ev-dark",
+   "to": "beat-dais",
+   "label": "Wept to Raunu",
+   "kind": "default"
+  },
+  {
+   "from": "ev-dark",
+   "to": "beat-east",
+   "label": "Radiant to Veier",
+   "kind": "default"
+  },
+  {
+   "from": "ev-dark",
+   "to": "beat-doors",
+   "label": "Hollow to the doors",
+   "kind": "default"
+  },
+  {
+   "from": "snk-phern",
+   "to": "sc-corro",
+   "label": "watched him all night",
+   "kind": "optional"
+  },
+  {
+   "from": "ev-dark",
+   "to": "sc-corro",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "beat-dais",
+   "to": "ev-raunu",
+   "label": "his choice",
+   "kind": "default"
+  },
+  {
+   "from": "ev-raunu",
+   "to": "beat-east",
+   "label": "doors seal behind her",
+   "kind": "default"
+  },
+  {
+   "from": "beat-dais",
+   "to": "fight-uninvited",
+   "label": "stand between",
+   "kind": "optional"
+  },
+  {
+   "from": "beat-east",
+   "to": "fight-uninvited",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "beat-doors",
+   "to": "fight-uninvited",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "b7",
+   "to": "sc-wards",
+   "label": "studied wards",
+   "kind": "optional"
+  },
+  {
+   "from": "b11",
+   "to": "sc-wards",
+   "label": "master valve",
+   "kind": "optional"
+  },
+  {
+   "from": "ev-dark",
+   "to": "sc-wards",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "uc-d",
+   "to": "fr-wept",
+   "label": "ammunition",
+   "kind": "optional"
+  },
+  {
+   "from": "omen-5",
+   "to": "fr-wept",
+   "label": "sorrow",
+   "kind": "optional"
+  },
+  {
+   "from": "uc-d",
+   "to": "fr-radiant",
+   "label": "ammunition",
+   "kind": "optional"
+  },
+  {
+   "from": "uc-d",
+   "to": "fr-hollow",
+   "label": "ammunition",
+   "kind": "optional"
+  },
+  {
+   "from": "fr-wept",
+   "to": "beat-dais",
+   "label": "one full round",
+   "kind": "optional"
+  },
+  {
+   "from": "fr-hollow",
+   "to": "beat-doors",
+   "label": "the doors open",
+   "kind": "optional"
+  },
+  {
+   "from": "fr-radiant",
+   "to": "cross-3",
+   "label": "it does not break past",
+   "kind": "optional"
+  },
+  {
+   "from": "tavva-scout",
+   "to": "S5",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "S2",
+   "to": "S5",
+   "label": "if Tavva lives",
+   "kind": "optional"
+  },
+  {
+   "from": "ev-dark",
+   "to": "S5",
+   "label": "the gallery's wards gutter",
+   "kind": "optional"
+  },
+  {
+   "from": "ev-dark",
+   "to": "kd-circle",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-circle",
+   "to": "kd-circle",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "ev-dark",
+   "to": "kd-church",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-church",
+   "to": "kd-church",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "b8",
+   "to": "kd-church",
+   "label": "the drawer and the slate",
+   "kind": "optional"
+  },
+  {
+   "from": "ev-dark",
+   "to": "kd-draunel",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-draunel",
+   "to": "kd-draunel",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "ev-dark",
+   "to": "kd-boranis",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-boranis",
+   "to": "kd-boranis",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "kd-draunel",
+   "to": "kd-boranis",
+   "label": "three paces apart",
+   "kind": "optional"
+  },
+  {
+   "from": "sc-corro",
+   "to": "kd-phern",
+   "label": "the wedge",
+   "kind": "optional"
+  },
+  {
+   "from": "ev-dark",
+   "to": "kd-thenya",
+   "label": "toward the fire",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-thenya",
+   "to": "kd-thenya",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "kd-thenya",
+   "to": "beat-east",
+   "label": "competent company",
+   "kind": "optional"
+  },
+  {
+   "from": "beat-east",
+   "to": "cross-1",
+   "label": "the garden stair",
+   "kind": "default"
+  },
+  {
+   "from": "cross-1",
+   "to": "cross-2",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "cross-2",
+   "to": "cross-3",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "a4",
+   "to": "cross-1",
+   "label": "beside Veier",
+   "kind": "optional"
+  },
+  {
+   "from": "a6",
+   "to": "cross-3",
+   "label": "the unlocked gate",
+   "kind": "optional"
+  },
+  {
+   "from": "cross-3",
+   "to": "ev-bell",
+   "label": "the bell",
+   "kind": "default"
+  },
+  {
+   "from": "beat-doors",
+   "to": "ev-bell",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "ev-raunu",
+   "to": "ev-bell",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "ev-bell",
+   "to": "sc-rescue",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "sc-rescue",
+   "to": "ev-word",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "ev-word",
+   "to": "b12",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "b12",
+   "to": "S3",
+   "label": "two hundred behind you",
+   "kind": "default"
+  },
+  {
+   "from": "S3",
+   "to": "ev-clause",
+   "label": "the party looks like winning",
+   "kind": "default"
+  },
+  {
+   "from": "S3",
+   "to": "gate-fight",
+   "label": "",
+   "kind": "branch"
+  },
+  {
+   "from": "S3",
+   "to": "gate-void",
+   "label": "",
+   "kind": "branch"
+  },
+  {
+   "from": "S3",
+   "to": "gate-sect",
+   "label": "",
+   "kind": "branch"
+  },
+  {
+   "from": "ev-clause",
+   "to": "gate-void",
+   "label": "'Veier is already gone'",
+   "kind": "branch"
+  },
+  {
+   "from": "b10",
+   "to": "sc-rescue",
+   "label": "the other way out",
+   "kind": "optional"
+  },
+  {
+   "from": "a8",
+   "to": "sc-rescue",
+   "label": "Anha's passages",
+   "kind": "optional"
+  },
+  {
+   "from": "gate-fight",
+   "to": "end-default",
+   "label": "dawn",
+   "kind": "default"
+  },
+  {
+   "from": "gate-void",
+   "to": "end-default",
+   "label": "dawn",
+   "kind": "default"
+  },
+  {
+   "from": "gate-sect",
+   "to": "end-default",
+   "label": "dawn",
+   "kind": "default"
+  },
+  {
+   "from": "end-default",
+   "to": "epilogue",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "epilogue",
+   "to": "af-inquest",
+   "label": "campaign continues",
+   "kind": "optional"
+  },
+  {
+   "from": "fr-wept",
+   "to": "ihb-raunu",
+   "label": "found early, plus sacrifice",
+   "kind": "history-breaks"
+  },
+  {
+   "from": "cross-3",
+   "to": "ihb-child",
+   "label": "nobody held the gate",
+   "kind": "history-breaks"
+  },
+  {
+   "from": "sc-wards",
+   "to": "ihb-trap",
+   "label": "an Uninvited crosses deep ward",
+   "kind": "history-breaks"
+  },
+  {
+   "from": "b11",
+   "to": "ihb-trap",
+   "label": "the Root's threshold",
+   "kind": "history-breaks"
+  },
+  {
+   "from": "uc-a",
+   "to": "ihb-expose",
+   "label": "real evidence",
+   "kind": "history-breaks"
+  },
+  {
+   "from": "kd-church",
+   "to": "ihb-expose",
+   "label": "if the drawer is kept",
+   "kind": "history-breaks"
+  },
+  {
+   "from": "S3",
+   "to": "ihb-pcdies",
+   "label": "a death that holds a gate",
+   "kind": "history-breaks"
+  },
+  {
+   "from": "snk-circle",
+   "to": "ihb-bought",
+   "label": "snake coin, before midnight",
+   "kind": "history-breaks"
+  },
+  {
+   "from": "snk-draunel",
+   "to": "ihb-bought",
+   "label": "",
+   "kind": "history-breaks"
+  },
+  {
+   "from": "ev-clause",
+   "to": "ihb-clause",
+   "label": "Veier brought to the front",
+   "kind": "history-breaks"
+  },
+  {
+   "from": "kd-church",
+   "to": "ihb-snakefed",
+   "label": "unopposed",
+   "kind": "history-breaks"
+  },
+  {
+   "from": "kd-circle",
+   "to": "ihb-snakefed",
+   "label": "unopposed",
+   "kind": "history-breaks"
+  },
+  {
+   "from": "kd-draunel",
+   "to": "ihb-turned",
+   "label": "set them on each other",
+   "kind": "history-breaks"
+  },
+  {
+   "from": "gate-void",
+   "to": "ihb-turned",
+   "label": "snakes pay the Bought",
+   "kind": "history-breaks"
+  },
+  {
+   "from": "ihb-raunu",
+   "to": "af-inquest",
+   "label": "the morning after",
+   "kind": "optional"
+  },
+  {
+   "from": "ihb-child",
+   "to": "af-inquest",
+   "label": "the morning after",
+   "kind": "optional"
+  },
+  {
+   "from": "ihb-trap",
+   "to": "af-inquest",
+   "label": "the morning after",
+   "kind": "optional"
+  },
+  {
+   "from": "ihb-expose",
+   "to": "af-inquest",
+   "label": "the morning after",
+   "kind": "optional"
+  },
+  {
+   "from": "ihb-pcdies",
+   "to": "af-inquest",
+   "label": "the morning after",
+   "kind": "optional"
+  },
+  {
+   "from": "ihb-bought",
+   "to": "af-inquest",
+   "label": "the morning after",
+   "kind": "optional"
+  },
+  {
+   "from": "ihb-clause",
+   "to": "af-inquest",
+   "label": "the morning after",
+   "kind": "optional"
+  },
+  {
+   "from": "ihb-snakefed",
+   "to": "af-inquest",
+   "label": "the morning after",
+   "kind": "optional"
+  },
+  {
+   "from": "ihb-turned",
+   "to": "af-inquest",
+   "label": "the morning after",
+   "kind": "optional"
+  },
+  {
+   "from": "af-inquest",
+   "to": "af-vorlain",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "af-inquest",
+   "to": "af-trail",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "af-inquest",
+   "to": "af-vesh",
+   "label": "",
+   "kind": "optional"
+  },
+  {
+   "from": "af-inquest",
+   "to": "af-close",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "af-vorlain",
+   "to": "af-close",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "af-trail",
+   "to": "af-close",
+   "label": "",
+   "kind": "default"
+  },
+  {
+   "from": "snk-boranis",
+   "to": "S6",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "a3",
+   "to": "S6",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-circle",
+   "to": "S7",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "a8",
+   "to": "S7",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "uc-c",
+   "to": "S7",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-church",
+   "to": "S8",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "b8",
+   "to": "S8",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "uc-a",
+   "to": "S8",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "kd-church",
+   "to": "S8",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-draunel",
+   "to": "S9",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-boranis",
+   "to": "S9",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "snk-thenya",
+   "to": "S10",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "kd-phern",
+   "to": "S11",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "sc-corro",
+   "to": "S11",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "kd-circle",
+   "to": "S12",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "kd-draunel",
+   "to": "S13",
+   "label": "steps in",
+   "kind": "optional"
+  },
+  {
+   "from": "kd-boranis",
+   "to": "S13",
+   "label": "steps in",
+   "kind": "optional"
+  }
+ ],
+ "clocks": [
+  {
+   "id": "clk-bench",
+   "label": "Bench clock (S1)",
+   "segments": 4,
+   "advances": "End of each round the principals are still swinging, and whenever anyone in the brawl rolls a 1 on a d20",
+   "fills": "The honor guard floods the galleries for a Movement; one agenda door closes, named aloud"
+  },
+  {
+   "id": "clk-noise",
+   "label": "Noise clock (S2, shared)",
+   "segments": 4,
+   "advances": "Any 1 on a d20, by either side; the end of each round anyone attacked with a drawn blade; anything loud",
+   "fills": "The honor guard arrives and both sides lose: party detained alongside the crew"
+  },
+  {
+   "id": "clk-fire",
+   "label": "Fire clock (S3)",
+   "segments": 4,
+   "advances": "End of each round the gate stays shut; any 1 on a d20, or any check failed by 5 or more, near the gate",
+   "fills": "The fire reaches the Crystal Court doors; every round after costs the crowd"
+  },
+  {
+   "id": "clk-service",
+   "label": "Service-door clock (S7)",
+   "segments": 4,
+   "advances": "Each round a Circle knife moves toward the east wing's service door unhindered, or gets past a party member",
+   "fills": "The knife sees the midwife and the linens, and tells Callun there may be an heir"
+  },
+  {
+   "id": "clk-lock",
+   "label": "Lock clock (S8)",
+   "segments": 4,
+   "advances": "Each round the Wardens work the study lock undisturbed, and on any natural 1 in the corridor",
+   "fills": "The Wardens are inside; a round later the slate is wiped and the drawer taken"
+  },
+  {
+   "id": "clk-circle",
+   "label": "Circle clock (S9)",
+   "segments": 4,
+   "advances": "Each round the principals face each other; by two when a Cousin's Blade is provoked into drawing",
+   "fills": "Steel meets steel; one principal goes down bleeding; Draunel's second iron is done"
+  },
+  {
+   "id": "clk-halfbell",
+   "label": "Half-bell clock (S10)",
+   "segments": 4,
+   "advances": "Each round, whatever anyone does",
+   "fills": "The rope goes up; the honor guard answers (S4) with the Thenya as offenders"
+  },
+  {
+   "id": "clk-crush",
+   "label": "Crush clock (S11)",
+   "segments": 4,
+   "advances": "Each round the door is held for Corro alone",
+   "fills": "People go down at the door; it jams and nobody else gets through tonight"
+  },
+  {
+   "id": "clk-gallery",
+   "label": "Gallery clock (S13)",
+   "segments": 4,
+   "advances": "Each round; each segment is a guest still inside B3",
+   "fills": "The gallery roof comes down on whoever is still inside"
+  },
+  {
+   "id": "clk-heat",
+   "label": "Snake Tracker heat (per faction)",
+   "segments": 4,
+   "advances": "A faction's line going unanswered; automatic boxes at the toast, the Radiant's blessing and the omens (Ch. IX, Table IX-2)",
+   "fills": "Read at the first scream: 0-2 they get out; 3 the faction's midnight card is live; 4 it starts with steel already out"
+  },
+  {
+   "id": "clk-leash",
+   "label": "The leash",
+   "segments": 4,
+   "advances": "Story-time from the first scream (about half an hour in all); late, the Uninvited grow faster, sloppier, more human",
+   "fills": "The last bell of Oraga: all three leave, finished or not"
+  }
+ ]
+}

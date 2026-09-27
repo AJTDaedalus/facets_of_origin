@@ -1,0 +1,408 @@
+# XI. Pregenerated Characters
+
+*Five ready-made guests at **3rd level**, built by the SRD 5.2.1 rules: Human species,
+a background in the SRD's shape, the standard array, and an SRD class and subclass.
+Every one of them is Orthaen or Phern, as Chapter III requires, and four of the five
+carry a gift. Hand them out as they are, or let players reskin freely.*
+
+Between them the five cover what the night asks for:
+
+| Guest | Class | Does the job of | Suggested agenda | Suggested hook |
+|---|---|---|---|---|
+| **Serane Vaskarin** | Bard (College of Lore) 3 | The talker; backup healing | A House's Long Game, or The Prelate's Question | The Invited |
+| **Pello** | Rogue (Thief) 3 | The sneak | The Circle's Reckoning, or The Gate at Midnight | Hired for the Night |
+| **Andra Tessarin** | Wizard (Evoker) 3 | The one who knows things | The Story of a Lifetime | The Discarded Invitation |
+| **Dassa** | Fighter (Champion) 3 | The frontliner | The Vanished Servant, or bodyguard to another player character | The Entourage |
+| **Ilesse Kethaun** | Cleric (Life Domain) 3 | The healer | The Cousin's Errand | The Patron's Errand |
+
+Two of the five can stand in a fight — **Dassa at 28 hit points and Pello at 24** — and
+one of them, **Dassa, is ungifted**, because one Orthaen in five is and the table should
+see what that looks like on a sheet.
+
+**Common to all five.** *Human* (Chapter III): **Resourceful** — each begins the night
+with Heroic Inspiration and regains it on a long rest; **Skillful** — one extra skill,
+listed; **Versatile** — one origin feat, listed (the gifted take their gift). Size
+Medium, speed 30 ft., proficiency bonus +2. Languages: Common and two
+others the player and MM agree on. Every guest carries a knife, because everyone at this
+ball does; drawing it is the crime. Crystal charges are consumable magic items — see
+*Items of the Night* in Chapter X for what each does.
+
+**Masks.** No guest's mask is written down, because a mask is the player's to describe.
+Each sheet ends with one question to answer at session zero.
+
+*At a 2014 table:* keep the concept, the ability scores and the equipment, and rebuild
+the class features from your own rules. The gifts work at either table.
+
+---
+
+## Serane Vaskarin — The Minor Scion *(Orthaen)*
+
+Fourth child of a middling branch of House Vaskarin: born close enough to power to know
+all its dances, far enough to be sent on its errands.
+
+**Bard (College of Lore) 3** · Human (Orthaen, gifted) · Background: Minor Scion
+
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 8 (−1) | 14 (+2) | 13 (+1) | 10 (+0) | 13 (+1) | 17 (+3) |
+
+**Armor Class** 12 (fine clothes) · **Hit Points** 21 · **Hit Dice** 3d8 ·
+**Initiative** +4 · **Speed** 30 ft. · **Passive Perception** 13
+
+**Saving Throws** Dex +4, Cha +5
+
+**Skills** Persuasion +7, Insight +5, Deception +5, Intimidation +5, Performance +5,
+Perception +3, History +2, Investigation +2, Religion +2; every other skill +1
+(Jack of All Trades)
+
+**Tools** gaming set (playing cards); three musical instruments of the player's choice
+
+**Background — Minor Scion.** *Abilities:* Intelligence, Wisdom, Charisma (+2 Cha, +1
+Wis). *Origin feat:* Alert. *Skills:* History, Persuasion. *Tool:* gaming set.
+**Specialty, in 5e terms:** sect heraldry and old grudges — knows who hates whom, and
+why, and since when. When it bears, the MM gives the answer without a check.
+
+**Feats.** *Alert* (initiative bonus included; may swap initiative with a willing ally).
+*Orthaen Gift* (Versatile): advantage on checks about grown crystal; knows
+*prestidigitation* (Charisma), worked through a sliver of crystal.
+
+**Heritage.** Reads grown crystalwork the way a mason reads a wall — its age, whose hand
+shaped it, and whether it is holding a working right now.
+
+**Attacks**
+- *Dagger (her knife).* +4 to hit, reach 5 ft. or thrown 20/60 ft., 1d4 + 2 piercing.
+- *Vicious mockery.* Wisdom save DC 13, 1d6 psychic, and disadvantage on the target's
+  next attack roll.
+
+**Class Features**
+- **Bardic Inspiration** (3 uses, d6; regain on a long rest). Bonus action: a creature
+  within 60 ft. that can hear her gains a d6 to add to one failed d20 test within the
+  next hour.
+- **Expertise** in Persuasion and Insight. **Jack of All Trades.**
+- **Cutting Words** (College of Lore). Reaction, when a creature she can see within 60
+  ft. makes a damage roll or succeeds on an ability check or attack roll: spend a
+  Bardic Inspiration and subtract the roll from its total.
+- **Bonus Proficiencies** (College of Lore): Investigation, Perception, Religion.
+
+**Spellcasting** (Charisma; save DC 13, attack +5; component pouch)
+- *Slots:* 1st ×4, 2nd ×2
+- *Cantrips:* message, vicious mockery; *prestidigitation* (gift)
+- *Prepared:* charm person, disguise self, healing word, hideous laughter; *2nd:* calm
+  emotions, suggestion
+
+**Carrying.** Dagger · fine clothes · component pouch · crystal charges: *steady light*,
+*a sealed door*, *a veil of quiet* · 60 gp · Heroic Inspiration
+
+**Personality.** The voice that ends fights before they start. Serane was raised on the
+great houses' dances and sent on their errands, and has learned where every one of them
+keeps its grudges.
+
+**Agenda hook.** *A House's Long Game* puts Serane beside Vorlain with a Draunel errand
+and a Draunel's promises; *The Prelate's Question* puts her in front of Raunu with the
+Church's one question. Either way she is working a snake's errand (Chapter IX), from
+inside.
+
+**Mask.** *Whose spirit-face does Serane wear tonight — and who in her own house will
+recognise it?*
+
+---
+
+## Pello — The Factor's Nephew *(Phern)*
+
+A small, quick, cheerful man who has carried other people's valuables through five
+tribes' territory and lost none of them, including himself.
+
+**Rogue (Thief) 3** · Human (Phern, gifted) · Background: Factor's Nephew
+
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 8 (−1) | 17 (+3) | 14 (+2) | 12 (+1) | 14 (+2) | 10 (+0) |
+
+**Armor Class** 14 (leather) · **Hit Points** 24 · **Hit Dice** 3d8 ·
+**Initiative** +3 (never at disadvantage) · **Speed** 30 ft., climb 30 ft. ·
+**Passive Perception** 14
+
+**Saving Throws** Dex +5, Int +3
+
+**Skills** Stealth +7, Sleight of Hand +7, Acrobatics +5, Insight +4, Perception +4,
+Investigation +3, Deception +2, Persuasion +2, Athletics +1
+
+**Tools** thieves' tools, disguise kit, vehicles (land)
+
+**Background — Factor's Nephew.** *Abilities:* Dexterity, Intelligence, Wisdom (+2 Dex,
++1 Wis). *Origin feat:* Skilled (Deception, Investigation, disguise kit). *Skills:*
+Insight, Persuasion. *Tool:* vehicles (land).
+**Specialty, in 5e terms:** contracts, caravans, and smugglers' roads — who moves goods,
+and around which laws. When it bears, the MM gives the answer without a check.
+
+**Feats.** *Skilled.* *Phern Gift* (Versatile): advantage on checks to sense danger
+coming or where it comes from; knows *guidance* (Wisdom); **The Prickle** — never has
+disadvantage on Initiative, and knows the direction of an attack from a creature he
+can't see.
+
+**Heritage.** Knows the caravan roads, who moves what along them, and the fair price of
+anything.
+
+**Attacks**
+- *Dagger ×2.* +5 to hit, reach 5 ft. or thrown 20/60 ft., 1d4 + 3 piercing. **Nick:**
+  the extra attack from his second dagger is part of the Attack action, not a bonus
+  action.
+- **Sneak Attack** 2d6, once per turn, with advantage or with an ally beside the target.
+
+**Class Features**
+- **Expertise** in Stealth and Sleight of Hand. **Thieves' Cant** — in a country
+  without writing, it is all signs, knots and chalk that gets wiped.
+- **Weapon Mastery:** dagger (Nick), shortsword (Vex).
+- **Cunning Action.** Bonus action: Dash, Disengage, or Hide.
+- **Steady Aim.** Bonus action, if he hasn't moved this turn: advantage on his next
+  attack roll this turn; his speed is 0 until the turn ends.
+- **Fast Hands** (Thief). Cunning Action can also make a Sleight of Hand check, use
+  thieves' tools on a lock or trap, take the Utilize action, or take the Magic action to
+  use a magic item — a crystal charge included.
+- **Second-Story Work** (Thief). Climb speed equal to his speed; jumps use Dexterity.
+
+**Carrying.** Two daggers (one in plain sight, one not) · leather armor · thieves' tools
+· disguise kit · 80 gp · Heroic Inspiration
+
+**Personality.** Small, quick, and cheerful, with the particular calm of a man who has
+never yet lost a parcel. A Phern at an Orthaen ball is conspicuous, and Pello has
+decided to enjoy it.
+
+**Agenda hook.** *The Circle's Reckoning* gives him a Circle patron and a Phern's
+standing to use it — and the Circle is a snake (Chapter IX). *The Gate at Midnight*
+gives him triple rates in old coin, and the river gate is exactly the kind of lock he
+is good at.
+
+**Mask.** *A Phern face under an Orthaen spirit-mask — does Pello wear it to blend in,
+or to be seen trying?*
+
+---
+
+## Andra Tessarin — The Pattern-Keeper *(Orthaen)*
+
+A lattice-scholar of a quiet Tessarin branch, who has spent three years growing a
+private record of a pattern nobody else believes is there: the mist-tides, the silent
+house, the strange marriage. In a world without books, Andra *is* her research.
+
+**Wizard (Evoker) 3** · Human (Orthaen, gifted) · Background: Lattice-Scholar
+
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 8 (−1) | 14 (+2) | 14 (+2) | 17 (+3) | 12 (+1) | 10 (+0) |
+
+**Armor Class** 12, or 15 with *mage armor* · **Hit Points** 20 · **Hit Dice** 3d6 ·
+**Initiative** +2 · **Speed** 30 ft. · **Passive Perception** 13
+
+**Saving Throws** Int +5, Wis +3
+
+**Skills** History +7, Arcana +5, Investigation +5, Nature +5, Religion +5, Insight +3,
+Medicine +3, Perception +3
+
+**Tools** jeweler's tools (the crystal-grower's kit)
+
+**Background — Lattice-Scholar.** *Abilities:* Constitution, Intelligence, Wisdom (+2
+Int, +1 Con). *Origin feat:* Skilled (Insight, Medicine, Nature). *Skills:* History,
+Investigation. *Tool:* jeweler's tools.
+**Specialty, in 5e terms:** the collected history of House Boranis — every public fact
+and most of the private ones, held in memory and lattice. When it bears, the MM gives
+the answer without a check.
+
+**Feats.** *Skilled.* *Orthaen Gift* (Versatile): advantage on checks about grown
+crystal; knows *prestidigitation* (Intelligence), worked through a sliver of crystal.
+
+**Heritage.** Reads grown crystalwork the way a mason reads a wall — its age, whose hand
+shaped it, and whether it is holding a working right now.
+
+**Attacks**
+- *Fire bolt.* +5 to hit, range 120 ft., 1d10 fire.
+- *Dagger (her knife).* +4 to hit, reach 5 ft. or thrown 20/60 ft., 1d4 + 2 piercing.
+
+**Class Features**
+- **Ritual Adept.** Casts any ritual spell in her lattice as a ritual without preparing
+  it, with the lattice in hand.
+- **Arcane Recovery.** Once a day, on a short rest, recovers spell slots totalling 2
+  levels.
+- **Scholar.** Expertise in History.
+- **Evocation Savant** (Evoker). *Magic missile* and *darkness* added to her lattice
+  free.
+- **Potent Cantrip** (Evoker). A damaging cantrip that misses, or that the target saves
+  against, still deals half its damage.
+
+**Spellcasting** (Intelligence; save DC 13, attack +5; the lattice as focus)
+- *Slots:* 1st ×4, 2nd ×2
+- *Cantrips:* fire bolt, mage hand, minor illusion; *prestidigitation* (gift)
+- *Prepared:* mage armor, shield, silent image, sleep; *2nd:* darkness, misty step
+- **The lattice** (her spellbook — see *Casting in a Country Without Books*, Chapter
+  III): alarm (ritual), comprehend languages (ritual), detect magic (ritual), identify
+  (ritual), mage armor, magic missile, shield, silent image, sleep; *2nd:* darkness,
+  hold person, misty step
+
+**Carrying.** Dagger · the lattice · chalk and a wiping slate · jeweler's tools · crystal
+charges: *a held image* ×2, *a chime at a threshold* · 40 gp · Heroic Inspiration
+
+**Personality.** Three years into a record nobody else believes in, and tired of being
+the only one who can see the shape of it. Tonight every thread she has followed knots
+in one palace.
+
+**Agenda hook.** *The Story of a Lifetime* is Andra's agenda: be there, witness truly,
+carry it out alive. *Darkness* and a patient eye make her the guest likeliest to catch
+a tell — the Uninvited's, or a snake's.
+
+**Mask.** *Andra will be watching all night. What does she want the mask to hide — her
+face, or where she is looking?*
+
+---
+
+## Dassa — The House-Blade *(Orthaen, ungifted)*
+
+A hired blade of no house, who has guarded richer and softer people for twenty years.
+One Orthaen in five is born without the gift; Dassa has spent a lifetime being reminded
+of it politely, and has outlived several of the people who did the reminding. Slow to
+speak, impossible to move.
+
+**Fighter (Champion) 3** · Human (Orthaen, ungifted) · Background: City Watch Veteran
+
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 17 (+3) | 13 (+1) | 15 (+2) | 8 (−1) | 12 (+1) | 10 (+0) |
+
+**Armor Class** 14 (studded leather under a plain coat, Defense) · **Hit Points** 28 ·
+**Hit Dice** 3d10 · **Initiative** +3, with advantage · **Speed** 30 ft. ·
+**Passive Perception** 13
+
+**Saving Throws** Str +5, Con +4
+
+**Skills** Athletics +5 (with advantage), Insight +3, Medicine +3, Perception +3,
+Intimidation +2
+
+**Tools** gaming set (dice)
+
+**Background — City Watch Veteran.** *Abilities:* Strength, Constitution, Wisdom (+2
+Str, +1 Con). *Origin feat:* Savage Attacker. *Skills:* Athletics, Insight. *Tool:*
+gaming set.
+**Specialty, in 5e terms:** knows the layout, regular occupants, and unofficial rules
+of one district of Rekuzan from her service years — the player names which. When it
+bears, the MM gives the answer without a check.
+
+**Feats.** *Savage Attacker* — once per turn, roll a weapon's damage dice twice and use
+either. *Alert* (Versatile) — initiative bonus included; may swap initiative with a
+willing ally. Dassa is ungifted: no gift feat, and no cantrip.
+
+**Heritage.** Reads grown crystalwork the way a mason reads a wall — its age, whose hand
+shaped it, and whether it is holding a working right now. The gift is not in her. The
+knowing is.
+
+**Attacks**
+- *Longsword.* +5 to hit, reach 5 ft., 1d8 + 3 slashing, or 1d10 + 3 two-handed.
+  **Sap:** a creature she hits has disadvantage on its next attack roll before her next
+  turn.
+- *Dagger.* +5 to hit, reach 5 ft. or thrown 20/60 ft., 1d4 + 3 piercing.
+- Critical hits on 19–20.
+
+**Class Features**
+- **Fighting Style: Defense** (+1 AC in armor, included).
+- **Second Wind** (2 uses; one back on a short rest, all on a long rest). Bonus action:
+  regain 1d10 + 3 hit points.
+- **Tactical Mind.** When she fails an ability check, she can spend a Second Wind use to
+  add 1d10 to it; if it still fails, the use is not spent.
+- **Action Surge** (1 use per short rest). One additional action on her turn.
+- **Weapon Mastery:** longsword (Sap), dagger (Nick), greatsword (Graze) — the last for
+  whatever she pulls off the trophy gallery wall when it matters.
+- **Improved Critical** (Champion). Crits on 19–20.
+- **Remarkable Athlete** (Champion). Advantage on Initiative and on Strength (Athletics)
+  checks; after a critical hit she can move half her speed without provoking
+  opportunity attacks.
+
+**Carrying.** Longsword · dagger · studded leather under a plain coat · 30 gp · Heroic
+Inspiration
+
+**Personality.** Slow to speak, impossible to move. Twenty years of standing slightly
+behind richer and softer people, and a lifetime of being politely reminded of what she
+was born without.
+
+**Agenda hook.** *The Vanished Servant* sends her looking for someone the house has
+swallowed; as bodyguard to another player character, she is the reason that character
+walks out. Either way she is the one standing in the door when a snake comes through it.
+
+**Mask.** *Dassa is working tonight. Did she choose her own mask, or did whoever hired
+her?*
+
+---
+
+## Ilesse Kethaun — The Border Cousin *(Orthaen)*
+
+A courtier of House Kethaun's border branch, whose family has traded, feuded, and
+married across the Thenya frontier for five generations. Ilesse knew the Nolonaire name
+long before the rest of Rekuzan learned to gossip about it — which is exactly why a
+certain delegation, watched everywhere it goes, has quietly asked for an hour of
+Ilesse's evening.
+
+**Cleric (Life Domain) 3** · Human (Orthaen, gifted) · Background: Border Courtier
+
+| STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|
+| 8 (−1) | 12 (+1) | 13 (+1) | 10 (+0) | 17 (+3) | 15 (+2) |
+
+**Armor Class** 11 (fine clothes), 13 with *shield of faith* · **Hit Points** 21 ·
+**Hit Dice** 3d8 · **Initiative** +3 · **Speed** 30 ft. · **Passive Perception** 13
+
+**Saving Throws** Wis +5, Cha +4
+
+**Skills** Insight +5, Medicine +5, Persuasion +4, Stealth +3, Religion +3, History +2
+
+**Tools** disguise kit
+
+**Background — Border Courtier.** *Abilities:* Constitution, Wisdom, Charisma (+2 Wis,
++1 Cha). *Origin feat:* Alert. *Skills:* Insight, Persuasion. *Tool:* disguise kit.
+**Specialty, in 5e terms:** the Thenya border and the Nolonaire family — its history,
+its debts, and everything Veier was before Rekuzan. When it bears, the MM gives the
+answer without a check.
+
+**Feats.** *Alert* (initiative bonus included; may swap initiative with a willing ally).
+*Orthaen Gift* (Versatile): advantage on checks about grown crystal; knows *resistance*
+(Wisdom), worked through a sliver of crystal — a warding hum in the stone.
+
+**Heritage.** Reads grown crystalwork the way a mason reads a wall — its age, whose hand
+shaped it, and whether it is holding a working right now.
+
+**Attacks**
+- *Guiding bolt* (1st-level slot). +5 to hit, range 120 ft., 4d6 radiant, and the next
+  attack against the target has advantage.
+- *Sacred flame.* Dexterity save DC 13, 1d8 radiant.
+- *Dagger (her knife).* +3 to hit, reach 5 ft. or thrown 20/60 ft., 1d4 + 1 piercing.
+
+**Class Features**
+- **Divine Order: Thaumaturge.** One extra cantrip, and +3 to Intelligence (Arcana or
+  Religion) checks (included). *The SRD's word, not Val'loh's — it has nothing to do
+  with the Thaumaturgy of Chapter III.*
+- **Channel Divinity** (2 uses; one back on a short rest, all on a long rest).
+  *Divine Spark:* a creature within 30 ft. regains 1d8 + 3 hit points, or makes a
+  Constitution save or takes 1d8 + 3 radiant. *Preserve Life:* restore up to 15 hit
+  points, divided among Bloodied creatures within 30 ft., none above half its maximum.
+  *Turn Undead:* nothing at this ball is undead. It finds nothing to turn.
+- **Disciple of Life.** Healing from a spell slot restores an extra 2 + the slot's
+  level.
+
+**Spellcasting** (Wisdom; save DC 13, attack +5; a sliver of her own warding crystal as
+focus). Ilesse's spells are what Val'loh calls **Invocation**. What answers her, the
+module does not say, and neither should the sheet.
+- *Slots:* 1st ×4, 2nd ×2
+- *Cantrips:* guidance, light, sacred flame, spare the dying; *resistance* (gift)
+- *Always prepared (Life Domain):* bless, cure wounds; *2nd:* aid, lesser restoration
+- *Prepared:* command, guiding bolt, healing word, sanctuary, shield of faith; *2nd:*
+  warding bond
+
+**Carrying.** Dagger · fine clothes · crystal focus · crystal charges: *a veil of
+quiet*, *a sealed door*, *steady light* · 50 gp · Heroic Inspiration
+
+**Personality.** A carrier of words between people who cannot be seen talking to each
+other. Five generations of Kethaun border-trading taught Ilesse which silences are
+safe, and she knows the Nolonaire name better than anyone else at this ball.
+
+**Agenda hook.** *The Cousin's Errand* is Ilesse's: a message learned by heart and a
+grandmother's ring, for Veier Nolonaire's hands alone. It is the one agenda that has to
+reach the east wing — and the one that puts a player character beside Veier when the
+lights die.
+
+**Mask.** *Ilesse is carrying a Thenya message under an Orthaen mask. What would the
+delegation think of the one she chose?*

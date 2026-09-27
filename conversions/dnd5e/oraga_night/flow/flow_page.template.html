@@ -1,0 +1,285 @@
+<title>Oraga Night Flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#F2F0F5; --surface:#FFFFFF; --sunk:#E8E4EE; --ink:#1D1928; --muted:#655E78; --rule:#D6D0E0;
+  --accent:#B3305F; --accent-soft:#F6DCE6; --focus:#B3305F;
+  --f-uninvited:#6F7688; --f-bought:#8A6A33; --f-tavva:#23857A; --f-circle:#B07A08; --f-church:#4D5FCB;
+  --f-draunel:#B23A27; --f-boranis:#8540A8; --f-phern:#2F7F3A; --f-thenya:#C35A1C; --f-none:#655E78;
+  --shadow:0 1px 2px rgba(29,25,40,.08),0 4px 14px rgba(29,25,40,.06);
+  --display:"Cormorant SC","Cormorant Garamond",Georgia,serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#14111C; --surface:#1D1928; --sunk:#241F31; --ink:#ECE7F4; --muted:#A79FBB; --rule:#352E45;
+    --accent:#F0799F; --accent-soft:#3A2030; --focus:#F0799F;
+    --f-uninvited:#A9B0C2; --f-bought:#C9A15E; --f-tavva:#4FC3B4; --f-circle:#E3B03C; --f-church:#8D9BF2;
+    --f-draunel:#EE7A63; --f-boranis:#C08BE0; --f-phern:#6BC477; --f-thenya:#F29A5E; --f-none:#A79FBB;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#14111C; --surface:#1D1928; --sunk:#241F31; --ink:#ECE7F4; --muted:#A79FBB; --rule:#352E45;
+  --accent:#F0799F; --accent-soft:#3A2030; --focus:#F0799F;
+  --f-uninvited:#A9B0C2; --f-bought:#C9A15E; --f-tavva:#4FC3B4; --f-circle:#E3B03C; --f-church:#8D9BF2;
+  --f-draunel:#EE7A63; --f-boranis:#C08BE0; --f-phern:#6BC477; --f-thenya:#F29A5E; --f-none:#A79FBB;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font:14px/1.5 var(--body);margin:0}
+.wrap{padding-inline:clamp(16px,3vw,40px);padding-block:28px 48px;max-width:1800px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+header{display:grid;gap:10px;max-width:78ch}
+.eyebrow{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+h1{font:700 clamp(30px,4.4vw,52px)/1 var(--display);margin:0;letter-spacing:.01em;text-wrap:balance}
+.lede{color:var(--muted);margin:0;font-size:15px;max-width:68ch}
+.lede strong{color:var(--ink);font-weight:600}
+.controls{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:flex-start}
+.ctl-group{display:flex;flex-direction:column;gap:6px}
+.ctl-label{font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 12px/1 var(--body);border:1px solid var(--rule);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip[aria-pressed="false"]{opacity:.45;background:transparent}
+.chip:focus-visible,.node:focus-visible,button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--c,var(--f-none));flex:none}
+.toggle{font:500 12px/1 var(--body);border:1px solid var(--accent);background:var(--accent-soft);color:var(--ink);border-radius:6px;padding:7px 11px;cursor:pointer}
+.toggle[aria-pressed="false"]{background:transparent;border-color:var(--rule)}
+.board{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}
+@media (max-width:980px){.board{grid-template-columns:minmax(0,1fr)}}
+.scroller{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--surface);box-shadow:var(--shadow);position:relative}
+.grid{display:grid;position:relative;min-width:max-content}
+.cell{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:8px;display:flex;flex-direction:column;gap:6px;min-width:176px;width:176px}
+.cell.lane{position:sticky;left:0;z-index:3;background:var(--sunk);min-width:132px;width:132px;justify-content:flex-start}
+.cell.head{background:var(--sunk);position:sticky;top:0;z-index:2}
+.cell.corner{z-index:4}
+.phase-no{font:700 22px/1 var(--display);color:var(--accent)}
+.phase-tag{font:500 10.5px/22px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.phase-name{font:600 12.5px/1.25 var(--body)}
+.phase-time{font:400 11px/1.2 var(--mono);color:var(--muted)}
+.lane-name{font:600 12px/1.25 var(--body);display:flex;gap:6px;align-items:center}
+.lane-sub{font:400 10.5px/1.3 var(--mono);color:var(--muted)}
+.lane-row-snake .cell:not(.lane){background:color-mix(in srgb,var(--c) 5%,var(--surface))}
+.node{all:unset;box-sizing:border-box;cursor:pointer;display:block;border:1px solid var(--rule);border-left:3px solid var(--c,var(--f-none));background:var(--surface);border-radius:6px;padding:6px 8px;font:500 12px/1.3 var(--body);color:var(--ink);transition:opacity .15s,box-shadow .15s}
+.node .k{display:block;font:500 9.5px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.node.opt{border-style:dashed;border-left-style:solid}
+.node.kind-fight{background:color-mix(in srgb,var(--c,var(--accent)) 12%,var(--surface));font-weight:600}
+.node.kind-ending{background:var(--sunk)}
+.node.kind-omen .k{color:var(--accent)}
+.node:hover{box-shadow:var(--shadow)}
+.node.sel{box-shadow:0 0 0 2px var(--accent);}
+.grid.focus .node:not(.lit){opacity:.28}
+.grid.dim-filter .node.off{display:none}
+svg.edges{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:visible}
+svg.edges path{fill:none;stroke-width:1.6}
+svg.edges path.default{stroke:var(--ink);opacity:.55}
+svg.edges path.optional{stroke:var(--muted);stroke-dasharray:4 4;opacity:.7}
+svg.edges path.branch{stroke:var(--accent);opacity:.85}
+svg.edges path.history-breaks{stroke:var(--accent);stroke-dasharray:2 3;opacity:.95}
+.node{position:relative;z-index:2}
+aside.detail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);background:var(--surface);border:1px solid var(--rule);border-radius:10px;box-shadow:var(--shadow);padding:16px;display:flex;flex-direction:column;gap:10px;max-height:calc(100vh - 40px);overflow:auto}
+aside h2{font:700 24px/1.05 var(--display);margin:0;text-wrap:balance}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font:500 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--rule);border-radius:4px;padding:4px 6px;color:var(--muted);display:inline-flex;gap:5px;align-items:center}
+.ref{font:400 12px/1.4 var(--mono);color:var(--muted);word-break:break-all}
+.links h3{font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:8px 0 6px}
+.links ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.links button{all:unset;cursor:pointer;display:flex;gap:8px;align-items:baseline;font:13px/1.3 var(--body);padding:3px 0}
+.links button:hover{color:var(--accent)}
+.links .ek{font:400 10.5px/1 var(--mono);color:var(--muted);min-width:78px}
+.hint{color:var(--muted);font-size:13px;margin:0}
+section.lower{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.card h3{font:700 18px/1.1 var(--display);margin:0}
+.segs{display:flex;gap:4px}
+.segs span{flex:1;height:10px;border-radius:2px;border:1px solid var(--accent);background:transparent}
+.card dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:13px}
+.card dt{font:500 10.5px/1.6 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.card dd{margin:0}
+h2.sec{font:700 26px/1 var(--display);margin:6px 0 0}
+.phase-sum{font:400 11.5px/1.35 var(--body);color:var(--muted)}
+footer{color:var(--muted);font-size:12px;max-width:90ch}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Oraga Night · D&amp;D 5e edition · module flow</span>
+    <h1>The Snakes in the Chicken Pen</h1>
+    <p class="lede">Raunu Boranis invited every enemy he has into his own house for one night. Read left to right through the seven Movements; each faction gets its own lane so you can see <strong>what every snake is doing, hour by hour</strong>, next to the fights you can walk into and the three guests nobody invited. Select any card to trace where it leads.</p>
+  </header>
+
+  <div class="controls">
+    <div class="ctl-group"><span class="ctl-label">Factions</span><div class="chips" id="factionChips"></div></div>
+    <div class="ctl-group"><span class="ctl-label">Card types</span><div class="chips" id="kindChips"></div></div>
+    <div class="ctl-group"><span class="ctl-label">Trace</span><div class="chips">
+      <button class="toggle" id="traceDefault" aria-pressed="false">The night as history records it</button>
+      <button class="toggle" id="traceBreaks" aria-pressed="false">Where history can break</button>
+    </div></div>
+  </div>
+
+  <div class="board">
+    <div class="scroller" id="scroller"><div class="grid" id="grid"><svg class="edges" id="edges"></svg></div></div>
+    <aside class="detail" id="detail" aria-live="polite">
+      <span class="eyebrow">Selected</span>
+      <h2 id="dTitle">Nothing yet</h2>
+      <p class="hint" id="dHint">Pick a card on the board. Its connections draw as lines: solid for the default night, dashed for optional paths, rose for branches where history can break.</p>
+      <div class="meta" id="dMeta"></div>
+      <p id="dSum"></p>
+      <div class="ref" id="dRef"></div>
+      <div class="links" id="dLinks"></div>
+    </aside>
+  </div>
+
+  <h2 class="sec">Clocks</h2>
+  <section class="lower" id="clocks"></section>
+
+  <footer>Generated from <span class="ref">conversions/dnd5e/oraga_night/flow/flow.json</span> by <span class="ref">flow/build_flow_page.py</span>. Facets of Origin, GPLv3. Rules references use the System Reference Document 5.2.1 by Wizards of the Coast LLC, licensed under CC BY 4.0.</footer>
+</div>
+
+<script>
+const FLOW = /*FLOW_DATA*/null;
+(function(){
+  const FACTIONS = [
+    ["circle","Merchant's Circle"],["church","The Church"],["draunel","House Draunel"],["boranis","House Boranis"],
+    ["phern","Phern"],["thenya","Thenya"],["tavva","Tavva's crew"],["bought","The Bought"],["uninvited","The Uninvited"]
+  ];
+  const FNAME = Object.fromEntries(FACTIONS);
+  const KINDS = ["event","omen","scene","room","agenda","snake","fight","branch","ending"];
+  const KLABEL = {event:"Event",omen:"Omen",scene:"Scene",room:"Room",agenda:"Agenda",snake:"Snake move",fight:"Fight",branch:"Branch",ending:"Ending"};
+  // Lanes: the program, the palace, agendas, one lane per snake, then the fixed threats, loose fights, endings.
+  const LANES = [
+    {id:"program", name:"The program", sub:"events · omens", test:n=>!n.faction && (n.kind==="event"||n.kind==="omen")},
+    {id:"palace", name:"Rooms & scenes", sub:"where it happens", test:n=>!n.faction && (n.kind==="room"||n.kind==="scene")},
+    {id:"agenda", name:"Agendas", sub:"the players' errands", test:n=>!n.faction && n.kind==="agenda"},
+    ...FACTIONS.map(([f,name])=>({id:"f-"+f, name, sub:["tavva","bought","uninvited"].includes(f)?"":"snake", faction:f, test:n=>n.faction===f})),
+    {id:"fights", name:"Other fights", sub:"steel you can walk into", test:n=>!n.faction && n.kind==="fight"},
+    {id:"ends", name:"Branches & endings", sub:"how it lands", test:n=>!n.faction && (n.kind==="branch"||n.kind==="ending")},
+  ];
+  const lanes = LANES.filter(l=>FLOW.nodes.some(l.test)).concat(
+    FLOW.nodes.some(n=>!LANES.some(l=>l.test(n))) ? [{id:"misc",name:"Other",sub:"",test:n=>!LANES.some(l=>l.test(n))}] : []);
+  const byId = Object.fromEntries(FLOW.nodes.map(n=>[n.id,n]));
+  const out = {}, inc = {};
+  FLOW.edges.forEach(e=>{ if(!byId[e.from]||!byId[e.to]) return; (out[e.from]=out[e.from]||[]).push(e); (inc[e.to]=inc[e.to]||[]).push(e); });
+
+  const grid = document.getElementById("grid"), svg = document.getElementById("edges");
+  grid.style.gridTemplateColumns = `132px repeat(${FLOW.phases.length},176px)`;
+  const colOf = Object.fromEntries(FLOW.phases.map((p,i)=>[p.id,i]));
+  const roman = ["","I","II","III","IV","V","VI","VII"];
+  const cvar = f => `var(--f-${f||"none"})`;
+  const nodeEls = {};
+  const mk = (tag,cls,html)=>{const e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e;};
+  const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+  grid.appendChild(mk("div","cell lane head corner",'<span class="lane-sub">Movement →</span>'));
+  FLOW.phases.forEach(p=>{
+    const m = /^m(\d)$/.exec(p.id);
+    const c = mk("div","cell head",
+      `<span class="phase-no">${m?roman[+m[1]]:"<span class=\"phase-tag\">"+esc(p.id==="pre"?"Prelude":p.id==="end"?"Dawn":"After")+"</span>"}</span><span class="phase-name">${esc(p.label.replace(/^[IVX]+\.\s*/,""))}</span><span class="phase-time">${esc(p.time)}</span><span class="phase-sum">${esc(p.summary)}</span>`);
+    grid.appendChild(c);
+  });
+  lanes.forEach(l=>{
+    const lc = mk("div","cell lane",`<span class="lane-name">${l.faction?`<span class="dot" style="--c:${cvar(l.faction)}"></span>`:""}${esc(l.name)}</span>${l.sub?`<span class="lane-sub">${esc(l.sub)}</span>`:""}`);
+    grid.appendChild(lc);
+    FLOW.phases.forEach(p=>{
+      const cell = mk("div","cell");
+      if(l.faction) cell.style.setProperty("--c",cvar(l.faction)), cell.classList.add("snake-cell");
+      FLOW.nodes.filter(n=>n.phase===p.id && l.test(n)).forEach(n=>{
+        const b = mk("button",`node kind-${n.kind}${n.optional?" opt":""}`);
+        b.style.setProperty("--c", n.faction?cvar(n.faction):(n.kind==="fight"||n.kind==="branch"||n.kind==="ending"||n.kind==="omen")?"var(--accent)":"var(--f-none)");
+        b.innerHTML = `<span class="k">${esc(KLABEL[n.kind]||n.kind)}${n.optional?" · optional":""}</span>${esc(n.label)}`;
+        b.dataset.id = n.id; b.title = n.summary;
+        b.addEventListener("click",()=>select(n.id));
+        nodeEls[n.id]=b; cell.appendChild(b);
+      });
+      grid.appendChild(cell);
+    });
+  });
+  grid.appendChild(svg);
+
+  // Filters
+  const active = {f:new Set([...FACTIONS.map(f=>f[0]),"none"]), k:new Set(KINDS)};
+  const fc = document.getElementById("factionChips");
+  FACTIONS.forEach(([f,name])=>{
+    if(!FLOW.nodes.some(n=>n.faction===f)) return;
+    const b = mk("button","chip",`<span class="dot" style="--c:${cvar(f)}"></span>${esc(name)}`);
+    b.setAttribute("aria-pressed","true");
+    b.onclick=()=>{ active.f.has(f)?active.f.delete(f):active.f.add(f); b.setAttribute("aria-pressed",active.f.has(f)); applyFilter(); };
+    fc.appendChild(b);
+  });
+  const kc = document.getElementById("kindChips");
+  KINDS.filter(k=>FLOW.nodes.some(n=>n.kind===k)).forEach(k=>{
+    const b = mk("button","chip",esc(KLABEL[k]));
+    b.setAttribute("aria-pressed","true");
+    b.onclick=()=>{ active.k.has(k)?active.k.delete(k):active.k.add(k); b.setAttribute("aria-pressed",active.k.has(k)); applyFilter(); };
+    kc.appendChild(b);
+  });
+  function applyFilter(){
+    grid.classList.add("dim-filter");
+    FLOW.nodes.forEach(n=>{ const on = active.f.has(n.faction||"none") && active.k.has(n.kind); nodeEls[n.id].classList.toggle("off",!on); });
+    redraw();
+  }
+
+  // Selection and edge drawing
+  let selected = null, trace = null;
+  function pos(el){ const g=grid.getBoundingClientRect(), r=el.getBoundingClientRect(); return {x:r.left-g.left, y:r.top-g.top, w:r.width, h:r.height}; }
+  function path(a,b){
+    const A=pos(a), B=pos(b);
+    let x1,y1,x2,y2;
+    if(Math.abs((A.x)-(B.x))<4){ x1=A.x+A.w; y1=A.y+A.h/2; x2=B.x+B.w; y2=B.y+B.h/2; const dx=36; return `M${x1},${y1} C${x1+dx},${y1} ${x2+dx},${y2} ${x2},${y2}`; }
+    if(B.x>A.x){ x1=A.x+A.w; x2=B.x; } else { x1=A.x; x2=B.x+B.w; }
+    y1=A.y+A.h/2; y2=B.y+B.h/2; const dx=Math.max(30,Math.abs(x2-x1)/2);
+    const s = B.x>A.x?1:-1;
+    return `M${x1},${y1} C${x1+s*dx},${y1} ${x2-s*dx},${y2} ${x2},${y2}`;
+  }
+  function edgesToDraw(){
+    if(trace) return FLOW.edges.filter(e=>trace.includes(e.kind));
+    if(selected) return (out[selected]||[]).concat(inc[selected]||[]);
+    return [];
+  }
+  function redraw(){
+    const r = grid.getBoundingClientRect();
+    svg.setAttribute("width",r.width); svg.setAttribute("height",r.height);
+    svg.setAttribute("viewBox",`0 0 ${r.width} ${r.height}`);
+    const es = edgesToDraw().filter(e=>nodeEls[e.from]&&nodeEls[e.to]&&!nodeEls[e.from].classList.contains("off")&&!nodeEls[e.to].classList.contains("off"));
+    svg.innerHTML = es.map(e=>`<path class="${esc(e.kind)}" d="${path(nodeEls[e.from],nodeEls[e.to])}"/>`).join("");
+    const lit = new Set(); es.forEach(e=>{lit.add(e.from);lit.add(e.to);}); if(selected) lit.add(selected);
+    grid.classList.toggle("focus", lit.size>0);
+    Object.entries(nodeEls).forEach(([id,el])=>{ el.classList.toggle("lit",lit.has(id)); el.classList.toggle("sel",id===selected); });
+  }
+  function select(id){
+    trace=null; document.querySelectorAll(".toggle").forEach(t=>t.setAttribute("aria-pressed","false"));
+    selected = selected===id?null:id; redraw(); renderDetail();
+    if(selected) try{ nodeEls[id].scrollIntoView({block:"nearest",inline:"nearest",behavior:"smooth"}); }catch(e){}
+  }
+  function renderDetail(){
+    const T=document.getElementById("dTitle"),H=document.getElementById("dHint"),M=document.getElementById("dMeta"),S=document.getElementById("dSum"),R=document.getElementById("dRef"),L=document.getElementById("dLinks");
+    if(!selected){ T.textContent="Nothing yet"; H.hidden=false; M.innerHTML=S.textContent=R.textContent=L.innerHTML=""; return; }
+    const n=byId[selected], ph=FLOW.phases[colOf[n.phase]];
+    H.hidden=true; T.textContent=n.label;
+    M.innerHTML = `<span class="tag">${esc(KLABEL[n.kind]||n.kind)}</span><span class="tag">${esc(ph?ph.label:n.phase)}</span>`+
+      (n.faction?`<span class="tag"><span class="dot" style="--c:${cvar(n.faction)}"></span>${esc(FNAME[n.faction]||n.faction)}</span>`:"")+
+      (n.optional?`<span class="tag">optional</span>`:"");
+    S.textContent=n.summary; R.textContent=n.ref?("→ "+n.ref):"";
+    const list=(title,es,key)=> es&&es.length?`<h3>${title}</h3><ul>${es.map(e=>`<li><button data-go="${esc(e[key])}"><span class="ek">${esc(e.label||e.kind)}</span><span>${esc(byId[e[key]].label)}</span></button></li>`).join("")}</ul>`:"";
+    L.innerHTML = list("Leads to",out[selected],"to")+list("Comes from",inc[selected],"from");
+    L.querySelectorAll("button[data-go]").forEach(b=>b.onclick=()=>{selected=null;select(b.dataset.go);});
+  }
+  document.getElementById("traceDefault").onclick=function(){ const on=this.getAttribute("aria-pressed")!=="true"; document.querySelectorAll(".toggle").forEach(t=>t.setAttribute("aria-pressed","false")); this.setAttribute("aria-pressed",on); trace=on?["default"]:null; selected=null; renderDetail(); redraw(); };
+  document.getElementById("traceBreaks").onclick=function(){ const on=this.getAttribute("aria-pressed")!=="true"; document.querySelectorAll(".toggle").forEach(t=>t.setAttribute("aria-pressed","false")); this.setAttribute("aria-pressed",on); trace=on?["branch","history-breaks"]:null; selected=null; renderDetail(); redraw(); };
+  window.addEventListener("resize",()=>redraw());
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(redraw);
+
+  // Clocks
+  const ck=document.getElementById("clocks");
+  (FLOW.clocks||[]).forEach(c=>{
+    const d=mk("div","card",`<h3>${esc(c.label)}</h3><div class="segs">${"<span></span>".repeat(c.segments||4)}</div><dl><dt>Advances</dt><dd>${esc(c.advances)}</dd><dt>When full</dt><dd>${esc(c.fills)}</dd></dl>`);
+    ck.appendChild(d);
+  });
+  redraw();
+})();
+</script>
