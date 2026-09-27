@@ -1278,3 +1278,143 @@ class TestReadiedIntentsPanel:
     def test_the_mm_has_a_full_rest_button(self, table):
         mm, _ = table
         assert mm.locator("button:has-text('Full Rest')").count() >= 1
+
+
+class TestMagicalStrikeControl:
+    """D25 in the browser: the Strike panel can declare a working, the scope
+    picker never offers Minor (a Minor working is a Maneuver, not a Strike),
+    and the price is shown before the blow is thrown."""
+
+    def _caster(self, player):
+        player.evaluate("""() => {
+            state.character.magic_domain = 'inscription';
+            state.character.magic_technique_active = true;
+            state.character.readied_intents = {harm: 2};
+            document.getElementById('strike-magical').checked = true;
+            onStrikeMagicalToggle();
+        }""")
+        player.wait_for_timeout(200)
+
+    def test_the_fields_are_hidden_until_the_box_is_ticked(self, table):
+        _, player = table
+        assert player.evaluate(
+            "() => document.getElementById('strike-magic-fields').hidden")
+
+    def test_the_scope_picker_never_offers_minor(self, table):
+        _, player = table
+        self._caster(player)
+        scopes = player.eval_on_selector_all(
+            "#strike-magic-scope option", "els => els.map(e => e.value)")
+        assert "minor" not in scopes
+        assert scopes == ["significant", "major"]
+
+    def test_the_purposes_come_from_the_ruleset(self, table):
+        _, player = table
+        self._caster(player)
+        ids = player.eval_on_selector_all(
+            "#strike-magic-purpose option", "els => els.map(e => e.value)")
+        assert ids == ["harm", "ward", "mend", "shape", "reveal"]
+
+    def test_the_price_is_shown_before_the_blow(self, table):
+        _, player = table
+        self._caster(player)
+        assert "2 harm readied" in player.evaluate(
+            "() => document.getElementById('strike-magic-cost').textContent")
+        player.evaluate("""() => {
+            document.getElementById('strike-magic-purpose').value = 'mend';
+            renderStrikeMagicCost();
+        }""")
+        player.wait_for_timeout(150)
+        assert "Spark" in player.evaluate(
+            "() => document.getElementById('strike-magic-cost').textContent")
+
+    def test_the_declaration_rides_on_the_strike_message(self, table):
+        _, player = table
+        self._caster(player)
+        sent = player.evaluate("""() => {
+            const captured = [];
+            const original = window.sendWS;
+            window.sendWS = (m) => captured.push(m);
+            document.getElementById('strike-target').innerHTML =
+              '<option value="goblin" selected>goblin</option>';
+            performStrike();
+            window.sendWS = original;
+            return captured[0];
+        }""")
+        assert sent["magical"] is True
+        assert sent["scope"] == "significant"
+        assert sent["purpose"] == "harm"
+
+
+class TestMagicalStrikeCostStaysHonest:
+    """The review's S3/S4: the price shown before the blow has to be the price
+    the server will charge, and it has to change once the blow has landed."""
+
+    def _caster(self, player, formalized=True, readied="{harm: 2}"):
+        player.evaluate("""(args) => {
+            state.character.magic_domain = 'inscription';
+            state.character.magic_technique_active = args.formalized;
+            state.character.readied_intents = args.readied;
+            renderMagicPanel();
+            if (args.formalized) {
+              document.getElementById('strike-magical').checked = true;
+              onStrikeMagicalToggle();
+            }
+        }""", {"formalized": formalized,
+               "readied": {"harm": 2} if readied else None})
+        player.wait_for_timeout(200)
+
+    def test_an_unformalized_caster_is_not_offered_the_option(self, table):
+        _, player = table
+        self._caster(player, formalized=False)
+        assert player.evaluate(
+            "() => document.getElementById('strike-magical-wrap').hidden")
+
+    def test_a_caster_who_has_not_readied_is_told_to_ready(self, table):
+        _, player = table
+        self._caster(player, readied=None)
+        assert "Ready your intents" in player.evaluate(
+            "() => document.getElementById('strike-magic-cost').textContent")
+
+    def test_the_price_falls_when_the_working_lands(self, table):
+        """The server spends the intent and broadcasts what is left; the panel
+        used to keep showing the pre-Strike count."""
+        _, player = table
+        self._caster(player)
+        assert "2 harm readied" in player.evaluate(
+            "() => document.getElementById('strike-magic-cost').textContent")
+        player.evaluate("""() => onStrikeResult({
+            attacker: state.playerName,
+            target: 'goblin',
+            magical: true,
+            readied_intents: {harm: 1},
+            intent_cost: 'intent',
+            endurance_remaining: 4,
+            sparks_remaining: 3,
+            roll: {outcome: 'full_success', outcome_label: 'Full Success',
+                   total: 11, dice_rolled: [5, 6], dice_kept: [5, 6]},
+        })""")
+        player.wait_for_timeout(200)
+        assert "1 harm readied" in player.evaluate(
+            "() => document.getElementById('strike-magic-cost').textContent")
+
+    def test_a_caster_is_offered_free_magic_on_a_maneuver(self, table):
+        _, player = table
+        self._caster(player)
+        assert not player.evaluate(
+            "() => document.getElementById('maneuver-magical-wrap').hidden")
+        sent = player.evaluate("""() => {
+            const captured = [];
+            const original = window.sendWS;
+            window.sendWS = (m) => captured.push(m);
+            document.getElementById('maneuver-magical').checked = true;
+            const t = document.getElementById('maneuver-target');
+            if (t.tagName === 'SELECT') t.innerHTML = '<option value="goblin" selected>goblin</option>';
+            t.value = 'goblin';
+            document.getElementById('maneuver-description').value = 'ice the flagstones';
+            performManeuver();
+            window.sendWS = original;
+            return captured[0];
+        }""")
+        assert sent["magical"] is True
+        assert sent["scope"] == "minor"

@@ -194,6 +194,20 @@ def posture_offense_modifier(posture: str, ruleset) -> Optional[int]:
     return posture_def.get("offense_modifier", 0)
 
 
+def tradition_skills(ruleset) -> set[str]:
+    """The skills a magical working is rolled on, from the ruleset's traditions.
+
+    II.3 (*Rolling Magic*) gives each tradition an attribute and a skill —
+    Spirit + Attune for the intuitive, Knowledge + Lore for the scholarly — and
+    III.3 names those same pairings as "the roll for magical attacks". So a
+    Strike rolled on one of them IS a magical Strike, whatever the message
+    claims, and D25 prices it. Reading the set from data rather than naming the
+    two skills here keeps a setting Facet's own tradition covered.
+    """
+    traditions = getattr(getattr(ruleset, "magic", None), "traditions", None) or {}
+    return {t.skill for t in traditions.values() if getattr(t, "skill", None)}
+
+
 def condition_offense_modifier(conditions: list[str], ruleset) -> int:
     """Total offensive-roll modifier from the conditions a combatant holds.
 

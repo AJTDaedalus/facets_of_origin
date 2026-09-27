@@ -1497,6 +1497,10 @@ magic:
     capacity: 3
     free_scopes: [minor]
     off_purpose_spark_cost: 1
+    # D25 (III.3): a magical Strike is a full form — a blow meant to put
+    # someone down is meaningful power, so it is never free. Minor magic still
+    # fights, as a Maneuver or a Support.
+    strike_scopes: [significant, major]
     purposes:
       - id: harm
         label: Harm

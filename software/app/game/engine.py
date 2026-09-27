@@ -337,6 +337,9 @@ def resolve_magic_roll(
     intent: str,
     ruleset: MergedRuleset,
     spark_use: str | None = None,
+    press: bool = False,
+    borrowed_trouble: bool = False,
+    sparks_spent: int = 0,
 ) -> RollResult:
     """Resolve a magical effect using the Domain + Intent + Scope framework.
 
@@ -351,6 +354,12 @@ def resolve_magic_roll(
                    "pre_technique_push" (reach: pre-Technique Significant only).
                    Any other value — including the retired "push_scope" —
                    raises ValueError so the handler never wastes a Spark on it.
+        press: The caster Pressed (D25: a magical Strike is a Strike, and can
+            spend Endurance for the extra die like any other).
+        borrowed_trouble: A complication was accepted for an extra die (III.1).
+        sparks_spent: Dice-Sparks the caller is charging for this roll, each
+            adding a die (III.1). A declared `spark_use` of "improve_roll" adds
+            one more, the way `cast` has always charged it.
 
     Returns:
         A RollResult with difficulty and modifiers resolved from domain + scope.
@@ -431,7 +440,7 @@ def resolve_magic_roll(
 
     # Spark use — the dice rule plus reach case 2, both read from
     # ruleset.magic.spark_rules, not hardcoded domain-type/scope literals.
-    sparks_spent = 0
+    sparks_spent = max(0, sparks_spent)
     if spark_use == "ease_focused_major":
         if not can_spark_ease_major(domain_def.type, scope, ruleset):
             raise ValueError(
@@ -441,7 +450,7 @@ def resolve_magic_roll(
             )
         difficulty_label = _step_difficulty_easier(difficulty_label, ruleset)
     elif spark_use == "improve_roll":
-        sparks_spent = 1  # consumed by caller; here we model the dice bonus
+        sparks_spent += 1  # consumed by caller; here we model the dice bonus
     # pre_technique_push needs no further action here: the scope ceiling was
     # already bypassed above, and the difficulty stays at its normal value —
     # no dice bonus, no difficulty shift.
@@ -511,6 +520,8 @@ def resolve_magic_roll(
         skill_rank_id=skill_rank_id,
         difficulty_label=difficulty_label,
         sparks_spent=sparks_spent,
+        press=press,
+        borrowed_trouble=borrowed_trouble,
         description=f"[magic:{domain_id}:{scope}] {intent}",
     )
     return resolve_roll(request, ruleset)

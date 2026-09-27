@@ -875,6 +875,18 @@ function borrowedTroubleField() {
   return { borrowed_trouble: true };
 }
 
+/**
+ * III.3: free Minor magic acts as a Maneuver or a Support. Read-and-clear like
+ * the Borrowed Trouble box — the declaration belongs to one action, not to
+ * every action after it.
+ */
+function freeWorkingField(id) {
+  const el = document.getElementById(id);
+  if (!el || !el.checked) return {};
+  el.checked = false;
+  return { magical: true, scope: 'minor' };
+}
+
 function declaredWeaponFields() {
   const categoryEl = document.getElementById('strike-weapon-category');
   const typeEl = document.getElementById('strike-weapon-type');
@@ -1303,6 +1315,58 @@ function onStrikeWeaponCategoryChange() {
   }
 }
 
+/**
+ * D25: reveal the magical Strike's own fields, and say what it will cost
+ * before it is thrown. The purposes come from the ruleset, and what is left
+ * readied comes from the character — neither is a list this file invents.
+ */
+function onStrikeMagicalToggle() {
+  const box = document.getElementById('strike-magical');
+  const fields = document.getElementById('strike-magic-fields');
+  if (!box || !fields) return;
+  fields.hidden = !box.checked;
+  if (!box.checked) return;
+
+  const select = document.getElementById('strike-magic-purpose');
+  const pi = (state.ruleset && state.ruleset.magic && state.ruleset.magic.prepared_intents) || null;
+  const purposes = (pi && pi.purposes) || [];
+  if (select && !select.options.length) {
+    purposes.forEach((p) => {
+      const opt = document.createElement('option');
+      opt.value = p.id;
+      opt.textContent = p.label + (p.description ? ' — ' + p.description : '');
+      select.appendChild(opt);
+    });
+  }
+  renderStrikeMagicCost();
+  if (select && !select.dataset.bound) {
+    select.dataset.bound = '1';
+    select.addEventListener('change', renderStrikeMagicCost);
+  }
+}
+
+function renderStrikeMagicCost() {
+  const out = document.getElementById('strike-magic-cost');
+  const select = document.getElementById('strike-magic-purpose');
+  if (!out || !select) return;
+  // Say what the server will actually do. Both of these are refusals, not
+  // prices: an unformalized caster has no magical Strike (II.3), and a
+  // formalized one who has not readied is told to ready first.
+  if (!state.character || !state.character.magic_technique_active) {
+    out.textContent = 'Your domain has not formalized — no magical Strike yet (II.3).';
+    return;
+  }
+  const readied = state.character.readied_intents;
+  if (!readied) {
+    out.textContent = 'Ready your intents for this session first.';
+    return;
+  }
+  const left = readied[select.value] || 0;
+  out.textContent = left > 0
+    ? `${left} ${select.value} readied — this spends one.`
+    : `No ${select.value} readied — this will cost a Spark instead.`;
+}
+
 function performStrike() {
   const target = (document.getElementById('strike-target').value || '').trim();
   const attrId = document.getElementById('strike-attribute').value;
@@ -1323,6 +1387,16 @@ function performStrike() {
   // Spark-spent; this checkbox only carries the player's declaration.
   const finalBlowEl = document.getElementById('strike-final-blow');
   const finalBlow = !!(finalBlowEl && finalBlowEl.checked);
+  // D25: a Strike made with magic carries its scope and purpose, and the
+  // server prices it. Minor is not offered here because a Minor working is
+  // not a Strike at all — it is a Maneuver.
+  const magicalEl = document.getElementById('strike-magical');
+  const magical = !!(magicalEl && magicalEl.checked);
+  const magicFields = magical ? {
+    magical: true,
+    scope: (document.getElementById('strike-magic-scope') || {}).value || 'significant',
+    purpose: (document.getElementById('strike-magic-purpose') || {}).value || null,
+  } : {};
 
   if (!target) { notify('Choose a target.', 'warn'); focusElement('strike-target'); return; }
   if (press && (state.character.endurance_current || 0) < 1) {
@@ -1345,6 +1419,7 @@ function performStrike() {
     weapon_category: weaponCategory,
     weapon_type: weaponType,
     final_blow: finalBlow,
+    ...magicFields,
     ...borrowedTroubleField(),
   });
   if (finalBlowEl) finalBlowEl.checked = false;
@@ -1376,6 +1451,7 @@ function performSupport() {
     skill_id: skillId,
     difficulty: 'Standard',
     ...declaredWeaponFields(),
+    ...freeWorkingField('support-magical'),
     ...borrowedTroubleField(),
   });
 }
@@ -1400,6 +1476,7 @@ function performManeuver() {
     skill_id: skillId,
     difficulty: 'Standard',
     ...declaredWeaponFields(),
+    ...freeWorkingField('maneuver-magical'),
     ...borrowedTroubleField(),
     description,
   });
@@ -1516,6 +1593,13 @@ function onStrikeResult(msg) {
     state.character.sparks = msg.sparks_remaining;
     updateEnduranceBar();
     renderPlaySparkCounter();
+    // A working spends an intent, so the pip row and the Strike panel's price
+    // line are both stale the moment it lands. `cast` already does this.
+    if (msg.magical) {
+      state.character.readied_intents = msg.readied_intents;
+      if (typeof renderReadiedIntents === 'function') renderReadiedIntents();
+      renderStrikeMagicCost();
+    }
   }
   if (state.allCharacters[msg.attacker]) {
     state.allCharacters[msg.attacker].endurance_current = msg.endurance_remaining;
@@ -1730,6 +1814,24 @@ function onCombatEnded(msg) {
 function renderMagicPanel() {
   const panel = document.getElementById('magic-panel');
   if (!panel || !state.character) return;
+
+  // The Strike panel's magical option belongs to casters whose domain has
+  // formalized — the server refuses it for anyone else (II.3, D25), and an
+  // offer the server will refuse is worse than no offer.
+  ['maneuver-magical-wrap', 'support-magical-wrap'].forEach((id) => {
+    const wrap = document.getElementById(id);
+    if (wrap) wrap.hidden = !state.character.magic_domain;
+  });
+
+  const strikeMagicWrap = document.getElementById('strike-magical-wrap');
+  if (strikeMagicWrap) {
+    const eligible = !!(state.character.magic_domain && state.character.magic_technique_active);
+    strikeMagicWrap.hidden = !eligible;
+    if (!eligible) {
+      const box = document.getElementById('strike-magical');
+      if (box && box.checked) { box.checked = false; onStrikeMagicalToggle(); }
+    }
+  }
 
   if (!state.character.magic_domain) {
     panel.classList.add('hidden');
