@@ -1,0 +1,974 @@
+# Facets d20 — Facets, talent menus, presets and signatures.
+#
+# Source of truth for chapters 03 (Body), 04 (Mind) and 05 (Soul) of facets_d20/.
+# Contract: docs/DESIGN_facets_d20.md §1–§2. Spells, domains and caster tables live in
+# facets_d20_spells.yaml (Chapter 07). Tested by software/tests/test_facets_d20_data.py.
+#
+# Talent fields:
+#   facets      — every menu the talent appears on (shared talents list several)
+#   tier        — 1 (from 1st level), 2 (from 3rd), 3 (from 6th)
+#   prereq      — null, one talent id, or a list meaning "any one of these"
+#   origin      — may be taken as a background's origin talent
+#   min_level   — only where it is higher than the tier allows
+#   repeatable  — only where true
+# Preset picks: a plain id is a talent from the preset's own menu; {id, cross: true}
+# is a cross-Facet pick (tier 1 from 2nd level; tier 2+ only with two from that Facet).
+#
+# Includes material adapted from the System Reference Document 5.2.1 by Wizards of the
+# Coast LLC, licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/legalcode).
+
+version: 0.1
+levels: {min: 1, max: 10}
+proficiency_bonus: {1: 2, 2: 2, 3: 2, 4: 2, 5: 3, 6: 3, 7: 3, 8: 3, 9: 4, 10: 4}
+talent_tiers: {1: 1, 2: 3, 3: 6}
+talents_after_first: 1          # one talent at every level from 2nd to 10th
+signature_level: 3
+
+facets:
+  body:
+    name: Body
+    hit_die: 10
+    hp_first: 10                # + Con
+    hp_per_level: 6             # + Con, fixed
+    saves: [str, con]
+    armor: [light, medium, heavy, shields]
+    weapons: [simple, martial]
+    skill_picks: 3
+    skills: [acrobatics, animal_handling, athletics, intimidation, perception,
+             sleight_of_hand, stealth, survival]
+    talents_at_first: 3
+    extra_attack_level: 5
+    tradition: null
+    feature:
+      id: second_wind
+      name: Second Wind
+      summary: >-
+        Bonus action: regain 1d10 + your level in hit points. Two uses, three from
+        5th level; you regain one use on a short rest and all on a long rest.
+  mind:
+    name: Mind
+    hit_die: 6
+    hp_first: 6
+    hp_per_level: 4
+    saves: [int, wis]
+    armor: [light]
+    weapons: [simple]
+    skill_picks: 4
+    skills: [arcana, history, insight, investigation, medicine, nature, perception,
+             religion]
+    talents_at_first: 2
+    extra_attack_level: null
+    tradition: thaumaturgy
+    feature:
+      id: studied_eye
+      name: Studied Eye
+      summary: >-
+        Bonus action: study a creature you can see within 60 feet. It is your studied
+        target until the fight ends or you study another. You learn its damage
+        resistances, immunities and vulnerabilities, and your next attack roll against
+        it this turn has advantage. Uses equal to your proficiency bonus; all return on
+        a short or long rest.
+  soul:
+    name: Soul
+    hit_die: 8
+    hp_first: 8
+    hp_per_level: 5
+    saves: [wis, cha]
+    armor: [light, medium, shields]
+    weapons: [simple]
+    skill_picks: 3
+    skills: [animal_handling, deception, insight, intimidation, medicine, nature,
+             performance, persuasion, religion, survival]
+    talents_at_first: 2
+    extra_attack_level: null
+    tradition: invocation
+    feature:
+      id: inspiring_word
+      name: Inspiring Word
+      summary: >-
+        Bonus action: a creature within 60 feet that can hear you gains a Heart die
+        (d6; d8 from 5th level). Within 10 minutes it can add the die to one d20 test
+        after rolling. Uses equal to your proficiency bonus per long rest; from 5th
+        level they also return on a short rest.
+
+talents:
+  # ------------------------------------------------------------ shared
+  - id: ability_score_improvement
+    name: Ability Score Improvement
+    facets: [body, mind, soul]
+    tier: 1
+    prereq: null
+    origin: false
+    repeatable: true
+    summary: +2 to one ability score or +1 to two, to a maximum of 20. Take it as often as you like.
+  - id: expertise
+    name: Expertise
+    facets: [body, mind]
+    tier: 1
+    prereq: null
+    origin: true
+    summary: Choose two skills you are proficient in. Your proficiency bonus is doubled for checks with them.
+  - id: martial_training
+    name: Martial Training
+    facets: [mind, soul]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      Proficiency with martial weapons, and one more step of armor: Mind gains medium
+      armor and shields, Soul gains heavy armor.
+  - id: magic_initiate
+    name: Magic Initiate
+    facets: [mind, soul]
+    tier: 1
+    prereq: null
+    origin: true
+    summary: >-
+      Pick Thaumaturgy or Invocation and one of its domains. Learn two of its cantrips
+      and one 1st-level spell, which you can cast once per long rest without a slot
+      (or with any slot you have). This does not make you a caster.
+  - id: wider_study
+    name: Wider Study
+    facets: [mind, soul]
+    tier: 2
+    prereq: [thaumaturgy, invocation]
+    origin: false
+    summary: Take a third domain from a tradition you hold. Its spells join the lists you prepare from.
+  - id: potent_cantrips
+    name: Potent Cantrips
+    facets: [mind, soul]
+    tier: 2
+    min_level: 7
+    prereq: [thaumaturgy, invocation]
+    origin: false
+    summary: When you cast a cantrip that deals damage, add your spellcasting modifier to one of its damage rolls.
+  - id: extra_attack
+    name: Extra Attack
+    facets: [mind, soul]
+    tier: 2
+    min_level: 5
+    prereq: martial_training
+    origin: false
+    summary: When you take the Attack action, you attack twice instead of once.
+
+  # ------------------------------------------------------------ Body
+  - id: fighting_style
+    name: Fighting Style
+    facets: [body]
+    tier: 1
+    prereq: null
+    origin: false
+    repeatable: true
+    summary: >-
+      Choose a style you don't have: Archery (+2 to ranged weapon attack rolls),
+      Defense (+1 AC in armor), Dueling (+2 damage with a one-handed melee weapon and no
+      other weapon), Great Weapon (treat 1s and 2s on two-handed damage dice as 3s),
+      Protection, or Two-Weapon.
+  - id: weapon_mastery
+    name: Weapon Mastery
+    facets: [body]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      You can use the SRD 5.2.1 mastery property of three kinds of weapon you are
+      proficient with. Swap one kind after a long rest.
+  - id: sneak_attack
+    name: Sneak Attack
+    facets: [body]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      Once per turn, when you hit with a finesse or ranged weapon and have advantage or
+      an ally beside the target, deal extra damage: 1d6 per two levels, rounded up. Not
+      on a turn you make more than one attack.
+  - id: cunning_action
+    name: Cunning Action
+    facets: [body]
+    tier: 1
+    prereq: null
+    origin: true
+    summary: You can Dash, Disengage or Hide as a bonus action.
+  - id: rage
+    name: Rage
+    facets: [body]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      Bonus action, not in heavy armor: resistance to bludgeoning, piercing and slashing,
+      +2 damage with Strength weapon attacks (+3 from 9th), advantage on Strength checks
+      and saves; no spells. Lasts the fight. Two uses (three from 3rd, four from 6th);
+      one returns on a short rest.
+  - id: reckless_attack
+    name: Reckless Attack
+    facets: [body]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      On your first attack of a turn you can go reckless: advantage on Strength melee
+      attack rolls this turn, and attack rolls against you have advantage until your
+      next turn.
+  - id: unarmored_defense
+    name: Unarmored Defense
+    facets: [body]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      Without armor, your AC is 10 + Dex + Con (a shield still counts) or 10 + Dex +
+      Wis (no shield). Choose which when you take this. The Constitution version also
+      gives advantage on Dex saves while unarmored.
+  - id: martial_arts
+    name: Martial Arts
+    facets: [body]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      Unarmored and without a shield: your unarmed strikes and simple or light melee
+      weapons use Dex and a d6 damage die (d8 from 5th), you can make one unarmed
+      strike as a bonus action after you Attack, and your speed rises by 10 feet.
+  - id: focus
+    name: Focus
+    facets: [body]
+    tier: 1
+    prereq: martial_arts
+    origin: false
+    summary: >-
+      Focus points equal to your level, all back on a short rest. Spend 1 for a bonus
+      action: Flurry (two unarmed strikes instead of one), Patient Defense (Dodge), or
+      Step of the Wind (Dash and Disengage).
+  - id: tough
+    name: Tough
+    facets: [body]
+    tier: 1
+    prereq: null
+    origin: true
+    summary: Your hit point maximum rises by 2 for every level you have, now and later.
+  - id: alert
+    name: Alert
+    facets: [body]
+    tier: 1
+    prereq: null
+    origin: true
+    summary: >-
+      Add your proficiency bonus to your side's initiative contest when you roll it.
+      Your side can't be surprised while you are conscious.
+  - id: action_surge
+    name: Action Surge
+    facets: [body]
+    tier: 2
+    prereq: null
+    origin: false
+    summary: Once per short rest, take one additional action on your turn. It can't be used to cast a spell.
+  - id: uncanny_dodge
+    name: Uncanny Dodge
+    facets: [body]
+    tier: 2
+    prereq: null
+    origin: false
+    summary: When an attacker you can see hits you, use your reaction to halve the attack's damage.
+  - id: evasion
+    name: Evasion
+    facets: [body]
+    tier: 2
+    prereq: null
+    origin: false
+    summary: >-
+      When an effect lets you make a Dex save for half damage, you take none on a
+      success and half on a failure.
+  - id: relentless_rage
+    name: Relentless Rage
+    facets: [body]
+    tier: 2
+    prereq: rage
+    origin: false
+    summary: >-
+      If you drop to 0 HP while raging, make a DC 10 Con save; on a success you drop to
+      1 HP instead. The DC rises by 5 each time until you finish a short rest.
+  - id: stunning_strike
+    name: Stunning Strike
+    facets: [body]
+    tier: 2
+    min_level: 5
+    prereq: focus
+    origin: false
+    summary: >-
+      Once per turn, when you hit with a Martial Arts attack, spend 1 focus point: the
+      target makes a Con save (DC 8 + prof + Dex) or is stunned until the start of your
+      next turn. On a success its speed is halved and your next attack against it has
+      advantage. A stunned boss loses one of its two turns, not both.
+  - id: indomitable
+    name: Indomitable
+    facets: [body]
+    tier: 3
+    prereq: null
+    origin: false
+    summary: Once per long rest, reroll a failed saving throw and add your level to the new roll.
+  - id: reliable_talent
+    name: Reliable Talent
+    facets: [body]
+    tier: 3
+    prereq: null
+    origin: false
+    summary: When you make an ability check with a skill or tool you are proficient in, treat a d20 roll of 9 or lower as a 10.
+  - id: cleaving_blow
+    name: Cleaving Blow
+    facets: [body]
+    tier: 3
+    prereq: null
+    origin: false
+    summary: >-
+      Once per turn, when you score a critical hit or drop a creature to 0 HP with a
+      melee weapon, make one more weapon attack at once.
+  - id: survivor
+    name: Survivor
+    facets: [body]
+    tier: 3
+    prereq: null
+    origin: false
+    summary: At the start of each of your turns, if you are Bloodied but above 0 HP, regain 5 + your Con modifier hit points.
+
+  # ------------------------------------------------------------ Mind
+  - id: thaumaturgy
+    name: Thaumaturgy
+    facets: [mind]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      You cast Thaumaturgy with Intelligence: two domains, cantrips and slots on the
+      Full table (Chapter 07), read by caster level (levels held since you took this).
+      As a cross-Facet pick you are a half caster.
+  - id: skilled
+    name: Skilled
+    facets: [mind]
+    tier: 1
+    prereq: null
+    origin: true
+    repeatable: true
+    summary: Gain proficiency in any three skills or tools, in any combination.
+  - id: exploit_weakness
+    name: Exploit Weakness
+    facets: [mind]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      Once per turn, when you hit your studied target with a weapon attack, deal extra
+      damage: 1d6 per two levels, rounded up. Not on a turn you make more than one
+      attack, and never alongside Sneak Attack.
+  - id: well_timed_word
+    name: Well-Timed Word
+    facets: [mind]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      Reaction, when a creature you can see within 60 feet makes an attack roll, ability
+      check or damage roll: roll a d6 (d8 from 5th) and subtract it. Uses equal to your
+      Int modifier (min 1), all back on a short rest.
+  - id: gadgeteer
+    name: Gadgeteer
+    facets: [mind]
+    tier: 1
+    prereq: null
+    origin: true
+    summary: >-
+      On a long rest with tinker's tools, build gadgets equal to your proficiency bonus
+      from Table 4–3 (flash-pot, smoke-pot, grapnel, tripwire alarm, spark-lighter).
+      Each works once and falls apart at your next long rest.
+  - id: field_medic
+    name: Field Medic
+    facets: [mind]
+    tier: 1
+    prereq: null
+    origin: true
+    summary: >-
+      Action with a healer's kit: a creature regains 1d6 + your proficiency bonus + your
+      level hit points (once per creature per short rest). You can stabilize someone as
+      a bonus action.
+  - id: studied_recovery
+    name: Studied Recovery
+    facets: [mind]
+    tier: 1
+    prereq: thaumaturgy
+    origin: false
+    summary: >-
+      Once per long rest, when you finish a short rest, recover spent spell slots whose
+      levels add up to half your level, rounded up. None can be 5th level.
+  - id: careful_casting
+    name: Careful Casting
+    facets: [mind]
+    tier: 2
+    prereq: thaumaturgy
+    origin: false
+    summary: >-
+      When you cast a spell that affects an area, choose up to 1 + the spell's level
+      creatures in it. They succeed on its save automatically and take no damage.
+  - id: infuse_item
+    name: Infuse Item
+    facets: [mind]
+    tier: 2
+    prereq: thaumaturgy
+    origin: false
+    summary: >-
+      On a long rest, infuse up to two objects: a +1 weapon, a +1 armor or shield, or a
+      trinket holding one 1st-level spell you have prepared, which its holder can cast
+      once at your DC. Infusions last until you infuse again.
+  - id: anticipate
+    name: Anticipate
+    facets: [mind]
+    tier: 2
+    prereq: null
+    origin: false
+    summary: >-
+      Reaction, when your studied target makes an attack roll against you or a creature
+      you can see within 30 feet: it has disadvantage. No limit on uses beyond your one
+      reaction a round.
+  - id: empowered_spell
+    name: Empowered Spell
+    facets: [mind]
+    tier: 3
+    prereq: thaumaturgy
+    origin: false
+    summary: Once per long rest, when you cast a spell that deals damage, deal the maximum on every damage die instead of rolling.
+  - id: contingency_plan
+    name: Contingency Plan
+    facets: [mind]
+    tier: 3
+    prereq: null
+    origin: false
+    summary: >-
+      Once per long rest, name a trigger and an action (for a caster, a prepared spell
+      of 3rd level or lower). When the trigger happens within a day, you take that
+      action at once as a reaction, spending the slot then.
+  - id: decisive_strike
+    name: Decisive Strike
+    facets: [mind]
+    tier: 3
+    prereq: exploit_weakness
+    origin: false
+    summary: Once per short rest, when you hit your studied target, the hit becomes a critical hit.
+  - id: iron_mind
+    name: Iron Mind
+    facets: [mind]
+    tier: 3
+    prereq: null
+    origin: false
+    summary: >-
+      Gain proficiency in Constitution, Dexterity or Charisma saving throws (choose one),
+      and you have advantage on saves against being charmed.
+
+  # ------------------------------------------------------------ Soul
+  - id: invocation
+    name: Invocation
+    facets: [soul]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      You cast Invocation with Wisdom or Charisma (chosen once): two domains, cantrips
+      and slots on the Full table (Chapter 07), read by caster level (levels held since
+      you took this). As a cross-Facet pick you are a half caster.
+  - id: sworn_strike
+    name: Sworn Strike
+    facets: [soul]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      Once per turn, when you hit with a melee weapon, spend a use to deal an extra 2d8
+      radiant damage (3d8 from 5th, 4d8 from 9th). Uses equal to your Soul modifier
+      (minimum 1) per long rest; one returns on a short rest.
+  - id: mending_hands
+    name: Mending Hands
+    facets: [soul]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      A pool of healing equal to 5 x your level, refilled on a long rest. Bonus action,
+      touch: restore any number of points from the pool, or spend 5 to end the poisoned
+      condition.
+  - id: font_of_life
+    name: Font of Life
+    facets: [soul]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      When you restore hit points with a spell, Channel or Mending Hands, the creature
+      regains 2 extra, plus the spell's level if it was a spell.
+  - id: glimpses
+    name: Glimpses
+    facets: [soul]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      You have glimpses equal to your proficiency bonus per long rest. Once per round,
+      before a creature you can see within 60 feet rolls a d20 test, spend one to give
+      that roll advantage or disadvantage.
+  - id: wild_shape
+    name: Wild Shape
+    facets: [soul]
+    tier: 1
+    prereq: null
+    origin: false
+    summary: >-
+      Bonus action: become a beast of CR 1/4 or lower (CR 1/2 from 4th, CR 1 from 8th; no
+      flying before 8th) for the fight or an hour, keeping your HP plus temporary HP
+      equal to your level. No spells in beast form. Two uses; one returns on a short
+      rest.
+  - id: channel
+    name: Channel
+    facets: [soul]
+    tier: 1
+    prereq: invocation
+    origin: false
+    summary: >-
+      Magic action, two uses per long rest (three from 6th), one back on a short rest:
+      a creature within 30 feet regains 1d8 + your casting modifier HP, or makes a Con
+      save against your DC or takes that much radiant or necrotic damage (half on a
+      success). 2d8 from 5th.
+  - id: wild_kin
+    name: Wild Kin
+    facets: [soul]
+    tier: 1
+    prereq: null
+    origin: true
+    summary: >-
+      You can speak with beasts, and they start no worse than Neutral toward you. You
+      have advantage on Survival checks to track or forage.
+  - id: silver_tongue
+    name: Silver Tongue
+    facets: [soul]
+    tier: 1
+    prereq: null
+    origin: true
+    summary: >-
+      A failed Persuasion or Deception check never moves an attitude down, and beating
+      the DC by 5 moves it two steps instead of by 10.
+  - id: prophecy
+    name: Prophecy
+    facets: [soul]
+    tier: 2
+    prereq: glimpses
+    origin: false
+    summary: >-
+      After a long rest, speak one sentence about the day ahead. The first time the MM
+      agrees it has come true, you regain every spent glimpse and each ally who heard it
+      gains a Spark.
+  - id: beast_heart
+    name: Beast Heart
+    facets: [soul]
+    tier: 2
+    prereq: wild_shape
+    origin: false
+    summary: >-
+      Your Wild Shape forms can be CR 1 (CR 2 from 8th), your temporary HP on shifting is
+      3 x your level, and your beast attacks count as magical.
+  - id: interpose
+    name: Interpose
+    facets: [soul]
+    tier: 2
+    prereq: null
+    origin: false
+    summary: >-
+      Reaction, when a creature you can see hits an ally within 5 feet of you: you take
+      the hit instead, reducing its damage by your level.
+  - id: aura_of_resolve
+    name: Aura of Resolve
+    facets: [soul]
+    tier: 3
+    prereq: interpose
+    origin: false
+    summary: >-
+      While you are conscious, you and allies within 10 feet add your Soul modifier
+      (Invocation ability, else higher of Wis/Cha; minimum +1) to saving throws.
+  - id: wellspring
+    name: Wellspring
+    facets: [soul]
+    tier: 3
+    prereq: channel
+    origin: false
+    summary: >-
+      A use of Channel can instead restore hit points equal to 5 x your level, split
+      among any creatures within 30 feet, none above half its maximum.
+  - id: twist_of_fate
+    name: Twist of Fate
+    facets: [soul]
+    tier: 3
+    prereq: glimpses
+    origin: false
+    summary: >-
+      You can spend a glimpse after a d20 is rolled but before the MM says what happens:
+      the creature rolls again and must use the new roll.
+  - id: radiant_strikes
+    name: Radiant Strikes
+    facets: [soul]
+    tier: 3
+    prereq: sworn_strike
+    origin: false
+    summary: Once on each of your turns, when you hit with a melee weapon, deal an extra 1d8 radiant damage.
+
+signatures:
+  # Body
+  - id: champions_edge
+    name: Champion's Edge
+    facet: body
+    requires: null
+    summary: Your weapon attacks score a critical hit on a 19 or 20. When you score one, you regain hit points equal to your level.
+  - id: ambush
+    name: Ambush
+    facet: body
+    requires: null
+    summary: >-
+      In the first round of a fight you have advantage on attack rolls against any
+      creature that hasn't had a turn, and your first hit on each such creature deals an
+      extra 2d6.
+  - id: fury
+    name: Fury
+    facet: body
+    requires: rage
+    summary: >-
+      While raging you can't be charmed or frightened, and once per turn when you hit,
+      roll one extra weapon damage die.
+  - id: still_water
+    name: Still Water
+    facet: body
+    requires: martial_arts
+    summary: >-
+      Once per turn, when you hit with an unarmed strike, also push the target 10 feet,
+      knock it prone (Str save against 8 + prof + Dex), or deny it reactions until its
+      next turn.
+  - id: bulwark
+    name: Bulwark
+    facet: body
+    requires: null
+    summary: >-
+      Allies within 5 feet of you have half cover (+2 AC) against ranged attacks. A
+      creature you hit with an opportunity attack has speed 0 for the rest of the turn.
+  - id: deadeye
+    name: Deadeye
+    facet: body
+    requires: null
+    summary: >-
+      Your ranged weapon attacks ignore half and three-quarters cover and long-range
+      disadvantage, and once per turn a ranged hit deals extra damage equal to your
+      proficiency bonus.
+  # Mind
+  - id: arcane_mastery
+    name: Arcane Mastery
+    facet: mind
+    requires: thaumaturgy
+    summary: >-
+      Choose two 1st-level spells and one 2nd-level spell from your domains. They are
+      always prepared and don't count against your limit, and once per short rest you
+      can cast one of them without a slot.
+  - id: master_plan
+    name: Master Plan
+    facet: mind
+    requires: null
+    summary: >-
+      Once per long rest, before a fight you had a scene to plan for, lay out the plan.
+      Your side goes first unless surprised, and in the first round you and allies who
+      follow the plan have advantage on attack rolls.
+  - id: encyclopedic
+    name: Encyclopedic
+    facet: mind
+    requires: null
+    summary: >-
+      Once per long rest, state a fact about a creature, place or piece of history. It
+      is true (the MM may add a complication). If it concerns a creature, you and your
+      allies have advantage on your first save against it.
+  - id: clockwork_companion
+    name: Clockwork Companion
+    facet: mind
+    requires: null
+    summary: >-
+      You build a small construct (AC 13, HP 5 x your level, speed 30). It acts on your
+      side when you spend a bonus action: Help, or an attack at Int + prof for 1d8 + prof
+      bludgeoning. Rebuild it on a long rest if it is destroyed.
+  - id: anatomist
+    name: Anatomist
+    facet: mind
+    requires: null
+    summary: >-
+      Your attacks against your studied target score a critical hit on a 19 or 20. On a
+      critical hit, also knock it prone, set its speed to 0 until its next turn ends, or
+      give it disadvantage on its next attack.
+  - id: fortress_of_thought
+    name: Fortress of Thought
+    facet: mind
+    requires: null
+    summary: >-
+      You have advantage on Intelligence, Wisdom and Charisma saving throws, and nothing
+      can read your thoughts or change your memories without your leave.
+  # Soul
+  - id: miracle
+    name: Miracle
+    facet: soul
+    requires: invocation
+    summary: >-
+      Once per long rest, cast any Invocation spell of a level you can cast, from any
+      domain, without a slot or preparing it. If it restores hit points, it restores the
+      maximum.
+  - id: wild_heart
+    name: Wild Heart
+    facet: soul
+    requires: wild_shape
+    summary: >-
+      You can cast your spells of 2nd level or lower in beast form, and once per long
+      rest you can Wild Shape without spending a use.
+  - id: seen_it_coming
+    name: Seen It Coming
+    facet: soul
+    requires: null
+    summary: >-
+      You and allies within 30 feet can't be surprised. Once per long rest your side
+      simply goes first, with no contest.
+  - id: oath_unbroken
+    name: Oath Unbroken
+    facet: soul
+    requires: null
+    summary: >-
+      Speak an oath of one sentence. While you keep it, once per long rest when you drop
+      to 0 HP you drop to 1 instead, and your next weapon hit that fight deals maximum
+      damage. Break it and this is gone until you make amends.
+  - id: rallying_cry
+    name: Rallying Cry
+    facet: soul
+    requires: null
+    summary: >-
+      Once per long rest, bonus action: each ally within 60 feet who can hear you regains
+      hit points equal to your level + your Wisdom or Charisma modifier, and any ally at
+      0 HP gets up.
+  - id: unbreakable_will
+    name: Unbreakable Will
+    facet: soul
+    requires: null
+    summary: >-
+      You can't be frightened, and allies within 10 feet of you have advantage on saves
+      against being charmed or frightened.
+
+presets:
+  # ------------------------------------------------------------ Body
+  - id: fighter
+    name: Fighter
+    facet: body
+    origin_talent: alert
+    abilities: [str, con, dex]
+    level1_talents: [fighting_style, weapon_mastery, tough]
+    recommended_picks:
+      2: fighting_style
+      3: action_surge
+      4: ability_score_improvement
+      5: expertise
+      6: ability_score_improvement
+      7: indomitable
+      8: ability_score_improvement
+      9: cleaving_blow
+      10: survivor
+    signature: champions_edge
+  - id: rogue
+    name: Rogue
+    facet: body
+    origin_talent: tough
+    abilities: [dex, con, int]
+    level1_talents: [sneak_attack, expertise, cunning_action]
+    recommended_picks:
+      2: weapon_mastery
+      3: uncanny_dodge
+      4: ability_score_improvement
+      5: evasion
+      6: reliable_talent
+      7: alert
+      8: ability_score_improvement
+      9: indomitable
+      10: ability_score_improvement
+    signature: ambush
+  - id: barbarian
+    name: Barbarian
+    facet: body
+    origin_talent: alert
+    abilities: [str, con, dex]
+    level1_talents: [rage, unarmored_defense, reckless_attack]
+    recommended_picks:
+      2: weapon_mastery
+      3: relentless_rage
+      4: ability_score_improvement
+      5: ability_score_improvement
+      6: survivor
+      7: tough
+      8: ability_score_improvement
+      9: cleaving_blow
+      10: indomitable
+    signature: fury
+  - id: monk
+    name: Monk
+    facet: body
+    origin_talent: tough
+    abilities: [dex, wis, con]
+    level1_talents: [martial_arts, unarmored_defense, focus]
+    recommended_picks:
+      2: alert
+      3: evasion
+      4: ability_score_improvement
+      5: stunning_strike
+      6: indomitable
+      7: uncanny_dodge
+      8: ability_score_improvement
+      9: ability_score_improvement
+      10: survivor
+    signature: still_water
+
+  # ------------------------------------------------------------ Mind
+  - id: wizard
+    name: Wizard
+    facet: mind
+    origin_talent: tough
+    abilities: [int, con, dex]
+    domains: [constructed_force, warding]
+    level1_talents: [thaumaturgy, studied_recovery]
+    recommended_picks:
+      2: expertise
+      3: careful_casting
+      4: ability_score_improvement
+      5: wider_study
+      6: empowered_spell
+      7: potent_cantrips
+      8: ability_score_improvement
+      9: contingency_plan
+      10: iron_mind
+    signature: arcane_mastery
+  - id: investigator
+    name: Investigator
+    facet: mind
+    origin_talent: skilled
+    abilities: [dex, int, con]
+    level1_talents: [martial_training, exploit_weakness]
+    recommended_picks:
+      2: expertise
+      3: anticipate
+      4: ability_score_improvement
+      5: extra_attack
+      6: decisive_strike
+      7: {id: cunning_action, cross: true}
+      8: ability_score_improvement
+      9: ability_score_improvement
+      10: iron_mind
+    signature: anatomist
+  - id: loremaster
+    name: Loremaster
+    facet: mind
+    origin_talent: silver_tongue
+    abilities: [int, dex, con]
+    domains: [illusion, divination]
+    level1_talents: [thaumaturgy, well_timed_word]
+    recommended_picks:
+      2: expertise
+      3: wider_study
+      4: ability_score_improvement
+      5: skilled
+      6: contingency_plan
+      7: potent_cantrips
+      8: ability_score_improvement
+      9: ability_score_improvement
+      10: iron_mind
+    signature: encyclopedic
+  - id: tinker
+    name: Tinker
+    facet: mind
+    origin_talent: skilled
+    abilities: [int, con, dex]
+    domains: [inscription, transmutation]
+    level1_talents: [thaumaturgy, gadgeteer]
+    recommended_picks:
+      2: martial_training
+      3: infuse_item
+      4: ability_score_improvement
+      5: field_medic
+      6: ability_score_improvement
+      7: potent_cantrips
+      8: ability_score_improvement
+      9: contingency_plan
+      10: wider_study
+    signature: clockwork_companion
+
+  # ------------------------------------------------------------ Soul
+  - id: priest
+    name: Priest
+    facet: soul
+    origin_talent: field_medic
+    abilities: [wis, con, str]
+    domains: [the_tide, presence]
+    level1_talents: [invocation, font_of_life]
+    recommended_picks:
+      2: channel
+      3: wider_study
+      4: ability_score_improvement
+      5: mending_hands
+      6: wellspring
+      7: potent_cantrips
+      8: ability_score_improvement
+      9: interpose
+      10: aura_of_resolve
+    signature: miracle
+  - id: druid
+    name: Druid
+    facet: soul
+    origin_talent: wild_kin
+    abilities: [wis, con, dex]
+    domains: [verdance, beasts]
+    level1_talents: [invocation, wild_shape]
+    recommended_picks:
+      2: channel
+      3: beast_heart
+      4: ability_score_improvement
+      5: wider_study
+      6: ability_score_improvement
+      7: potent_cantrips
+      8: ability_score_improvement
+      9: mending_hands
+      10: interpose
+    signature: wild_heart
+  - id: oracle
+    name: Oracle
+    facet: soul
+    origin_talent: alert
+    abilities: [wis, dex, con]
+    domains: [fate, divination]
+    level1_talents: [invocation, glimpses]
+    recommended_picks:
+      2: silver_tongue
+      3: prophecy
+      4: ability_score_improvement
+      5: wider_study
+      6: twist_of_fate
+      7: ability_score_improvement
+      8: potent_cantrips
+      9: ability_score_improvement
+      10: channel
+    signature: seen_it_coming
+  - id: oathsworn
+    name: Oathsworn
+    facet: soul
+    origin_talent: alert
+    abilities: [str, cha, con]
+    level1_talents: [martial_training, sworn_strike]
+    recommended_picks:
+      2: mending_hands
+      3: interpose
+      4: ability_score_improvement
+      5: extra_attack
+      6: aura_of_resolve
+      7: ability_score_improvement
+      8: radiant_strikes
+      9: ability_score_improvement
+      10: {id: tough, cross: true}
+    signature: oath_unbroken

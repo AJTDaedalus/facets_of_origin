@@ -1,0 +1,416 @@
+# Facets d20 — domains to SRD 5.2.1 spell lists, and the caster tables.
+# Contract: docs/DESIGN_facets_d20.md §2. Prose: facets_d20/07_Magic.md.
+# Slot rows list slots per spell level: [1st, 2nd, 3rd, 4th, 5th].
+# Tests: software/tests/test_facets_d20_spells.py
+source: SRD 5.2.1 (CC BY 4.0). Spell names only; rules text lives in the SRD.
+traditions:
+- name: Thaumaturgy
+  facet: Mind
+  ability: [Intelligence]
+  talent: Thaumaturgy
+  style: scholarly
+- name: Invocation
+  facet: Soul
+  ability: [Wisdom, Charisma]
+  talent: Invocation
+  style: intuitive
+casting:
+  domains_on_talent: 2
+  third_domain_talent: Wider Study
+  # Planner ruling (a): BOTH tables are read by caster level, never character level.
+  caster_level: levels since the caster talent was taken, counting that level as 1
+  full_table_index: caster_level
+  half_table_index: caster_level
+  cantrips_index: character_level
+  prepared_full: casting_mod + caster_level
+  prepared_half: 'casting_mod + half caster level (round down), min 1'
+full_table:
+  1: [2]
+  2: [3]
+  3: [4, 2]
+  4: [4, 3]
+  5: [4, 3, 2]
+  6: [4, 3, 3]
+  7: [4, 3, 3, 1]
+  8: [4, 3, 3, 2]
+  9: [4, 3, 3, 3, 1]
+  10: [4, 3, 3, 3, 2]
+half_table:
+  1: [2]
+  2: [2]
+  3: [3]
+  4: [3]
+  5: [4, 2]
+  6: [4, 2]
+  7: [4, 3]
+  8: [4, 3]
+  9: [4, 3, 2]
+  10: [4, 3, 2]
+cantrips_known: {1: 2, 2: 2, 3: 2, 4: 3, 5: 3, 6: 3, 7: 3, 8: 3, 9: 3, 10: 4}
+recommended_pairs:
+  Priest: [The Tide, Presence]
+  Druid: [Verdance, Beasts]
+  Oracle: [Fate, Divination]
+domains:
+- name: Fire
+  traditions: [Invocation]
+  prismatic: false
+  spells:
+  - {name: Fire Bolt, level: 0}
+  - {name: Light, level: 0}
+  - {name: Produce Flame, level: 0}
+  - {name: Burning Hands, level: 1}
+  - {name: Hellish Rebuke, level: 1}
+  - {name: Searing Smite, level: 1}
+  - {name: Flame Blade, level: 2}
+  - {name: Flaming Sphere, level: 2}
+  - {name: Heat Metal, level: 2}
+  - {name: Scorching Ray, level: 2}
+  - {name: Fireball, level: 3}
+  - {name: Fire Shield, level: 4}
+  - {name: Wall of Fire, level: 4}
+  - {name: Flame Strike, level: 5}
+- name: Shadow
+  traditions: [Invocation]
+  prismatic: false
+  spells:
+  - {name: Chill Touch, level: 0}
+  - {name: Ray of Frost, level: 0}
+  - {name: Fog Cloud, level: 1}
+  - {name: Sleep, level: 1}
+  - {name: Blindness/Deafness, level: 2}
+  - {name: Darkness, level: 2}
+  - {name: Darkvision, level: 2}
+  - {name: Pass without Trace, level: 2}
+  - {name: Nondetection, level: 3}
+  - {name: Sleet Storm, level: 3}
+  - {name: Black Tentacles, level: 4}
+  - {name: Ice Storm, level: 4}
+  - {name: Cone of Cold, level: 5}
+- name: Storm
+  traditions: [Invocation]
+  prismatic: false
+  spells:
+  - {name: Druidcraft, level: 0}
+  - {name: Shocking Grasp, level: 0}
+  - {name: Elementalism, level: 0}
+  - {name: Feather Fall, level: 1}
+  - {name: Fog Cloud, level: 1}
+  - {name: Thunderwave, level: 1}
+  - {name: Gust of Wind, level: 2}
+  - {name: Shatter, level: 2}
+  - {name: Call Lightning, level: 3}
+  - {name: Fly, level: 3}
+  - {name: Lightning Bolt, level: 3}
+  - {name: Wind Wall, level: 3}
+  - {name: Conjure Elemental, level: 5}
+- name: Beasts
+  traditions: [Invocation]
+  prismatic: false
+  spells:
+  - {name: Druidcraft, level: 0}
+  - {name: Poison Spray, level: 0}
+  - {name: Animal Friendship, level: 1}
+  - {name: Speak with Animals, level: 1}
+  - {name: "Hunter's Mark", level: 1}
+  - {name: Animal Messenger, level: 2}
+  - {name: Enhance Ability, level: 2}
+  - {name: Locate Animals or Plants, level: 2}
+  - {name: Conjure Animals, level: 3}
+  - {name: Dominate Beast, level: 4}
+  - {name: Polymorph, level: 4}
+  - {name: Giant Insect, level: 4}
+  - {name: Awaken, level: 5}
+  - {name: Insect Plague, level: 5}
+- name: Resonance
+  traditions: [Invocation]
+  prismatic: false
+  spells:
+  - {name: Message, level: 0}
+  - {name: Thaumaturgy, level: 0}
+  - {name: Vicious Mockery, level: 0}
+  - {name: Thunderwave, level: 1}
+  - {name: Blindness/Deafness, level: 2}
+  - {name: Knock, level: 2}
+  - {name: Shatter, level: 2}
+  - {name: Silence, level: 2}
+  - {name: Enthrall, level: 2}
+  - {name: Fear, level: 3}
+  - {name: Sending, level: 3}
+  - {name: Tongues, level: 3}
+- name: Verdance
+  traditions: [Invocation]
+  prismatic: false
+  spells:
+  - {name: Druidcraft, level: 0}
+  - {name: Shillelagh, level: 0}
+  - {name: Entangle, level: 1}
+  - {name: Goodberry, level: 1}
+  - {name: Ensnaring Strike, level: 1}
+  - {name: Barkskin, level: 2}
+  - {name: Locate Animals or Plants, level: 2}
+  - {name: Spike Growth, level: 2}
+  - {name: Plant Growth, level: 3}
+  - {name: Speak with Plants, level: 3}
+  - {name: Blight, level: 4}
+  - {name: Awaken, level: 5}
+  - {name: Tree Stride, level: 5}
+- name: Binding
+  traditions: [Invocation]
+  prismatic: false
+  spells:
+  - {name: Mending, level: 0}
+  - {name: Resistance, level: 0}
+  - {name: Bane, level: 1}
+  - {name: Protection from Evil and Good, level: 1}
+  - {name: Sanctuary, level: 1}
+  - {name: Hold Person, level: 2}
+  - {name: Warding Bond, level: 2}
+  - {name: Zone of Truth, level: 2}
+  - {name: Bestow Curse, level: 3}
+  - {name: Magic Circle, level: 3}
+  - {name: Remove Curse, level: 3}
+  - {name: Banishment, level: 4}
+  - {name: Geas, level: 5}
+  - {name: Hold Monster, level: 5}
+  - {name: Planar Binding, level: 5}
+- name: Presence
+  traditions: [Invocation]
+  prismatic: false
+  spells:
+  - {name: Sacred Flame, level: 0}
+  - {name: Thaumaturgy, level: 0}
+  - {name: Bless, level: 1}
+  - {name: Command, level: 1}
+  - {name: Heroism, level: 1}
+  - {name: Shield of Faith, level: 1}
+  - {name: Divine Smite, level: 1}
+  - {name: Aid, level: 2}
+  - {name: Calm Emotions, level: 2}
+  - {name: Spiritual Weapon, level: 2}
+  - {name: Beacon of Hope, level: 3}
+  - {name: Fear, level: 3}
+  - {name: Spirit Guardians, level: 3}
+  - {name: Guardian of Faith, level: 4}
+  - {name: Dispel Evil and Good, level: 5}
+- name: The Tide
+  traditions: [Invocation]
+  prismatic: false
+  spells:
+  - {name: Resistance, level: 0}
+  - {name: Spare the Dying, level: 0}
+  - {name: Cure Wounds, level: 1}
+  - {name: False Life, level: 1}
+  - {name: Healing Word, level: 1}
+  - {name: Inflict Wounds, level: 1}
+  - {name: Lesser Restoration, level: 2}
+  - {name: Prayer of Healing, level: 2}
+  - {name: Mass Healing Word, level: 3}
+  - {name: Revivify, level: 3}
+  - {name: Vampiric Touch, level: 3}
+  - {name: Aura of Life, level: 4}
+  - {name: Greater Restoration, level: 5}
+  - {name: Mass Cure Wounds, level: 5}
+  - {name: Raise Dead, level: 5}
+- name: The Undying
+  traditions: [Invocation]
+  prismatic: true
+  spells:
+  - {name: Chill Touch, level: 0}
+  - {name: Spare the Dying, level: 0}
+  - {name: Detect Evil and Good, level: 1}
+  - {name: False Life, level: 1}
+  - {name: Inflict Wounds, level: 1}
+  - {name: Gentle Repose, level: 2}
+  - {name: Ray of Enfeeblement, level: 2}
+  - {name: Animate Dead, level: 3}
+  - {name: Speak with Dead, level: 3}
+  - {name: Vampiric Touch, level: 3}
+  - {name: Blight, level: 4}
+  - {name: Death Ward, level: 4}
+  - {name: Contagion, level: 5}
+- name: Fate
+  traditions: [Invocation]
+  prismatic: true
+  spells:
+  - {name: Guidance, level: 0}
+  - {name: Resistance, level: 0}
+  - {name: True Strike, level: 0}
+  - {name: Starry Wisp, level: 0}
+  - {name: Bane, level: 1}
+  - {name: Bless, level: 1}
+  - {name: Augury, level: 2}
+  - {name: Bestow Curse, level: 3}
+  - {name: Blink, level: 3}
+  - {name: Death Ward, level: 4}
+  - {name: Divination, level: 4}
+  - {name: Commune, level: 5}
+- name: The Living World
+  traditions: [Invocation]
+  prismatic: true
+  spells:
+  - {name: Druidcraft, level: 0}
+  - {name: Guidance, level: 0}
+  - {name: Cure Wounds, level: 1}
+  - {name: Goodberry, level: 1}
+  - {name: Longstrider, level: 1}
+  - {name: Speak with Animals, level: 1}
+  - {name: Locate Animals or Plants, level: 2}
+  - {name: Pass without Trace, level: 2}
+  - {name: Plant Growth, level: 3}
+  - {name: Speak with Plants, level: 3}
+  - {name: Freedom of Movement, level: 4}
+  - {name: Polymorph, level: 4}
+  - {name: Antilife Shell, level: 5}
+  - {name: Awaken, level: 5}
+  - {name: Commune with Nature, level: 5}
+- name: Illusion
+  traditions: [Thaumaturgy]
+  prismatic: false
+  spells:
+  - {name: Dancing Lights, level: 0}
+  - {name: Minor Illusion, level: 0}
+  - {name: Color Spray, level: 1}
+  - {name: Disguise Self, level: 1}
+  - {name: Illusory Script, level: 1}
+  - {name: Silent Image, level: 1}
+  - {name: Blur, level: 2}
+  - {name: Invisibility, level: 2}
+  - {name: Mirror Image, level: 2}
+  - {name: Hypnotic Pattern, level: 3}
+  - {name: Major Image, level: 3}
+  - {name: Greater Invisibility, level: 4}
+  - {name: Hallucinatory Terrain, level: 4}
+  - {name: Phantasmal Killer, level: 4}
+  - {name: Seeming, level: 5}
+- name: Warding
+  traditions: [Thaumaturgy]
+  prismatic: false
+  spells:
+  - {name: Mending, level: 0}
+  - {name: Resistance, level: 0}
+  - {name: Alarm, level: 1}
+  - {name: Protection from Evil and Good, level: 1}
+  - {name: Arcane Lock, level: 2}
+  - {name: Glyph of Warding, level: 3}
+  - {name: Magic Circle, level: 3}
+  - {name: Nondetection, level: 3}
+  - {name: Protection from Energy, level: 3}
+  - {name: Tiny Hut, level: 3}
+  - {name: Faithful Hound, level: 4}
+  - {name: Private Sanctum, level: 4}
+  - {name: Dispel Evil and Good, level: 5}
+  - {name: Hallow, level: 5}
+- name: Inscription
+  traditions: [Thaumaturgy]
+  prismatic: false
+  spells:
+  - {name: Mending, level: 0}
+  - {name: Prestidigitation, level: 0}
+  - {name: Comprehend Languages, level: 1}
+  - {name: Identify, level: 1}
+  - {name: Illusory Script, level: 1}
+  - {name: Arcane Lock, level: 2}
+  - {name: Continual Flame, level: 2}
+  - {name: Magic Mouth, level: 2}
+  - {name: Magic Weapon, level: 2}
+  - {name: Glyph of Warding, level: 3}
+  - {name: Secret Chest, level: 4}
+  - {name: Teleportation Circle, level: 5}
+- name: Transmutation
+  traditions: [Thaumaturgy]
+  prismatic: false
+  spells:
+  - {name: Acid Splash, level: 0}
+  - {name: Mending, level: 0}
+  - {name: Prestidigitation, level: 0}
+  - {name: Grease, level: 1}
+  - {name: Purify Food and Drink, level: 1}
+  - {name: Enlarge/Reduce, level: 2}
+  - {name: Knock, level: 2}
+  - {name: Meld into Stone, level: 3}
+  - {name: Fabricate, level: 4}
+  - {name: Stone Shape, level: 4}
+  - {name: Stoneskin, level: 4}
+  - {name: Passwall, level: 5}
+  - {name: Wall of Stone, level: 5}
+- name: Divination
+  traditions: [Thaumaturgy, Invocation]
+  prismatic: false
+  spells:
+  - {name: Guidance, level: 0}
+  - {name: True Strike, level: 0}
+  - {name: Comprehend Languages, level: 1}
+  - {name: Detect Magic, level: 1}
+  - {name: Detect Poison and Disease, level: 1}
+  - {name: Identify, level: 1}
+  - {name: Locate Object, level: 2}
+  - {name: See Invisibility, level: 2}
+  - {name: Find Traps, level: 2}
+  - {name: Clairvoyance, level: 3}
+  - {name: Arcane Eye, level: 4}
+  - {name: Divination, level: 4}
+  - {name: Locate Creature, level: 4}
+  - {name: Legend Lore, level: 5}
+  - {name: Scrying, level: 5}
+- name: Constructed Force
+  traditions: [Thaumaturgy]
+  prismatic: false
+  spells:
+  - {name: Eldritch Blast, level: 0}
+  - {name: Mage Hand, level: 0}
+  - {name: Mage Armor, level: 1}
+  - {name: Magic Missile, level: 1}
+  - {name: Shield, level: 1}
+  - {name: Unseen Servant, level: 1}
+  - {name: Levitate, level: 2}
+  - {name: Resilient Sphere, level: 4}
+  - {name: Arcane Hand, level: 5}
+  - {name: Telekinesis, level: 5}
+  - {name: Wall of Force, level: 5}
+- name: The Arcane
+  traditions: [Thaumaturgy]
+  prismatic: true
+  spells:
+  - {name: Mage Hand, level: 0}
+  - {name: Prestidigitation, level: 0}
+  - {name: Sorcerous Burst, level: 0}
+  - {name: Detect Magic, level: 1}
+  - {name: Identify, level: 1}
+  - {name: See Invisibility, level: 2}
+  - {name: Counterspell, level: 3}
+  - {name: Dispel Magic, level: 3}
+  - {name: Nondetection, level: 3}
+  - {name: Remove Curse, level: 3}
+  - {name: Banishment, level: 4}
+  - {name: Dispel Evil and Good, level: 5}
+  - {name: Legend Lore, level: 5}
+- name: The Constructed Mind
+  traditions: [Thaumaturgy]
+  prismatic: true
+  spells:
+  - {name: Mage Hand, level: 0}
+  - {name: Mending, level: 0}
+  - {name: Find Familiar, level: 1}
+  - {name: Unseen Servant, level: 1}
+  - {name: Magic Mouth, level: 2}
+  - {name: Phantom Steed, level: 3}
+  - {name: Fabricate, level: 4}
+  - {name: Faithful Hound, level: 4}
+  - {name: Animate Objects, level: 5}
+  - {name: Arcane Hand, level: 5}
+- name: Chronomancy
+  traditions: [Thaumaturgy]
+  prismatic: true
+  spells:
+  - {name: Mending, level: 0}
+  - {name: True Strike, level: 0}
+  - {name: Expeditious Retreat, level: 1}
+  - {name: Feather Fall, level: 1}
+  - {name: Gentle Repose, level: 2}
+  - {name: Blink, level: 3}
+  - {name: Haste, level: 3}
+  - {name: Slow, level: 3}
+  - {name: Divination, level: 4}
+  - {name: Legend Lore, level: 5}
+excluded: []
