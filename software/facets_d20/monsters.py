@@ -158,13 +158,15 @@ def template(cr) -> MonsterBlock:
 
 
 def convert(block, *, role: str = "standard", uid: Optional[str] = None,
-            leader: bool = False) -> Combatant:
-    """A MonsterBlock (or library id) as a Combatant in the given role."""
+            leader: bool = False, hp_multiplier: int = 1) -> Combatant:
+    """A MonsterBlock (or library id) as a Combatant in the given role. ``hp_multiplier``
+    applies to a boss only (MM rule, balance pass V37: a boss has twice its stat block's
+    hit points — ``RuleOptions.boss_hp_multiplier``)."""
     if isinstance(block, str):
         block = get(block)
     if role not in ROLES:
         raise ValueError(f"role must be one of {ROLES}, not {role!r}")
-    hp = 1 if role == "minion" else block.hp
+    hp = 1 if role == "minion" else block.hp * (hp_multiplier if role == "boss" else 1)
     traits = set(block.traits)
     if role == "minion":
         traits.discard("undead_fortitude")  # 09: a minion doesn't get to cling on

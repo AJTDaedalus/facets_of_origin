@@ -714,8 +714,9 @@ now works once per NPC per scene (audit m16).
   *Wider Study* adds a domain, Deep Magic another. **You can cast any spell on your lists
   of a level you have a slot for; you know every cantrip on them.** No preparation, no
   cantrip picks. Rituals: any list spell with the ritual tag.
-- **The Common list** (14 SRD 5.2.1 spells, both traditions): *Fire Bolt*, *Light*,
-  *Message*; *Burning Hands*, *Magic Missile*, *Thunderwave*, *Detect Magic*;
+- **The Common list** (15 SRD 5.2.1 spells, both traditions): *Fire Bolt*, *Light*,
+  *Message*; *Burning Hands*, *Magic Missile*, *Thunderwave*, *Detect Magic*, *Mage Armor*
+  (balance pass V36, moved from Constructed Force);
   *Scorching Ray*, *Shatter*; *Fireball*, *Lightning Bolt*, *Dispel Magic*; *Ice Storm*;
   *Cone of Cold*. Area damage at every spell level for both traditions; the wizard-shaped
   Mind caster casts *Fireball*. A spell on the Common list is on no domain list.
@@ -812,6 +813,50 @@ switching to (c) also deletes six domains and re-homes their sim spells.
 
 ## 7. Encounter tables — specification (ruling 2)
 
+**Balance pass result (2026-09-28, full run of `tools/d20_sim.py all --write`; the yaml
+holds these numbers).** The MM's whole arithmetic: look up the Threat of each foe in
+Table 9–2, add until the sum reaches Table 9–1's budget per character × the number of
+players. Three adjustment lines: *a boss has twice its stat block's hit points* (V37, the
+boss column already prices it); *a lone boss counts ×1.2* (V42); *a tired party (about half
+HP and resources): build one tier down*. Party size needs no line — the budget is per
+character (measured: three players −26%, five +24%, six +43% of the four-player Threat,
+against −25/+25/+50% by the per-character rule).
+
+**Table 9–1: Threat budget per character** (the baseline party is the 4th-level row)
+
+| Level | Skirmish | Clash | Battle | Desperate |
+|---|---|---|---|---|
+| 1 | 10 | 16 | 19 | 23 |
+| 2 | 12 | 19 | 23 | 27 |
+| 3 | 16 | 25 | 31 | 34 |
+| **4** | **19** | **30** | **34** | **41** |
+| 5 | 33 | 49 | 60 | 68 |
+| 6 | 34 | 52 | 63 | 71 |
+| 7 | 40 | 63 | 76 | 84 |
+| 8 | 46 | 69 | 82 | 94 |
+| 9 | 62 | 91 | 105 | 116 |
+| 10 | 66 | 95 | 110 | 120 |
+
+**Table 9–2: Threat by CR** — standard √(HP × damage per turn); minion √(10.5 × damage per
+turn); boss = standard × 3.34 (with doubled HP); never-breaks × 1.16; lone boss ×1.2.
+
+| CR | 1/8 | 1/4 | 1/2 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Standard | 6 | 8 | 12 | 18 | 28 | 37 | 46 | 55 | 64 | 72 | 81 | 89 | 98 | 106 | 114 |
+| Minion | 6 | 7 | 9 | 11 | 13 | 15 | 17 | 18 | 20 | 21 | 22 | 23 | 24 | 25 | 26 |
+| Boss | 20 | 27 | 39 | 60 | 94 | 124 | 154 | 184 | 213 | 239 | 269 | 298 | 327 | 353 | 382 |
+
+**Outcomes at the budgets** (reference party, three shapes): Skirmish 1.9–2.4 rounds, 10%
+HP; **Clash 2.97–3.58 rounds (3.46 at 4th), 26–28% HP, 99–100% wins, a PC dies in ≤ 1.4%
+of 1st-level Clashes**; Battle 4.0–4.6 rounds, 43–48% HP, 85–95% wins; Desperate 4.1–5.1
+rounds, 57–65% HP, 67–77% wins. **The day** (three Clashes, two short rests, V34): survived
+90–99% at every level; the hard day (four Clashes) 41–78%. Robustness: 95% of random
+parties land a Clash at the 4th-level Clash budget, 90% a Battle at the Battle budget.
+Open item: real SRD monsters of a single kind built to the Clash budget (the *standards*
+and *standards + minions* classes) land in the Clash band only 32–47% of the time and cost
+40–45% HP on average — the Threat model underprices some real stat blocks (owner question
+OQ-2 in `RESEARCH_facets_d20_balance.md`).
+
 The DMG approach: every foe has a **Threat** value; each difficulty tier has a **Threat
 budget per character** by party level; add foes until the sum reaches the budget.
 **All numbers are derived by the simulator**; this section fixes the shape, the names
@@ -845,6 +890,16 @@ and the targets they must hit.
 ---
 
 ## 8. Balance band (ruling 3)
+
+**Balance pass (V32).** The **swap test is the primary measure**: the reference party with
+the build swapped in for each member in turn plays standard days (three Clashes, two short
+rests); the score is the party's HP lost per fight against the preset median. Band: every
+preset **and every sim build** within ±15% at 1st, 4th, 7th and 10th; Facet means within
+±10%; item 7 on the swap score (a hybrid at or below its Facet's best pure build, +3
+points of sampling noise) and on DPR₁/DPR₃ as before. PI (below) is kept as the
+secondary measure and reported beside it. Final table: §8.1 addendum and
+`RESEARCH_facets_d20_balance.md`. Items 1–7 below are the original PI version, kept as
+the record.
 
 - **Metrics per build and level** (L = 1, 4, 7, 10), measured by the simulator over a
   standard day (four Clashes, two short rests) against the level's reference foes:
@@ -958,6 +1013,30 @@ still open for the Planner.
 
 ---
 
+**Balance pass, final (swap test, primary; 2026-09-28, full run).** Swap score vs the
+preset median (positive = the party loses less with the build in it). Every preset and sim
+build is inside ±15% at every level; Facet means within ±7%; every hybrid at or below its
+Facet's best pure build, and no Steel-main hybrid out-hits its Facet's pure martials (DPR₁)
+nor any hybrid its tradition's casters (DPR₃) by more than 5%. PI (secondary) in the last
+column. The PI table above is the pre-pass record.
+
+| Build | Kind | L1 | L4 | L7 | L10 | PI L1/4/7/10 |
+|---|---|---|---|---|---|---|
+| Fighter | preset | +5% | +1% | +2% | -1% | +42/-9/+30/-1 |
+| Rogue | preset | -3% | -5% | +8% | +8% | +13/-20/+60/+31 |
+| Barbarian | preset | +9% | +10% | +10% | +6% | +49/+29/+27/+2 |
+| Monk | preset | +9% | +12% | +6% | +11% | +25/+7/+21/+7 |
+| Wizard | preset | -6% | -1% | -2% | +1% | -19/+9/+27/+6 |
+| Investigator | preset | +0% | -6% | -7% | -4% | +1/-22/-1/+1 |
+| Loremaster | preset | -5% | -11% | -9% | -3% | -36/-29/-21/-29 |
+| Tinker | preset | -1% | -1% | -6% | -7% | -12/-1/-15/-30 |
+| Priest | preset | -0% | +7% | +6% | +4% | -1/+8/+1/+6 |
+| Druid | preset | -10% | -7% | +7% | +6% | -31/-14/-2/-18 |
+| Oracle | preset | +2% | +9% | -9% | -7% | -9/+1/-15/-22 |
+| Oathsworn | preset | +6% | +1% | -4% | -10% | +52/+20/-1/-17 |
+| sim builds (17) | | −8…+9% | −8…+12% | −6…+12% | −10…+12% | |
+| SRD baselines (6) | | −28…−7% | −20…−1% | −21…+2% | −24…−8% | |
+
 ## 9. Simulator requirements (for the engine agent)
 
 What the Planner needs from `software/facets_d20/`, in priority order.
@@ -1016,13 +1095,13 @@ Cards are complete sheets: a player chooses only name, Drives, Specialty and a l
 | Body | Fighter | 3 · 0 | — | Weapon Expert · Guardian · Cleave · Hardy · Alert |
 | Body | Rogue | 3 · 0 | — | Precision · Cunning · Marksman · Weapon Expert · Alert |
 | Body | Barbarian | 3 · 0 | — | Rage · Hardy · Cleave · Guardian · Alert |
-| Body | Monk | 2 · 0 | — | Martial Arts · Cunning · Weapon Expert · Alert · Hardy |
+| Body | Monk | 2 · 0 | — | Martial Arts · Cunning · Weapon Expert · Hardy · Alert |
 | Mind | Wizard | 0 · 3 | Constructed Force (+ Illusion 3rd, The Arcane 5th) | Evoker · Wider Study · Turn the Odds · Iron Mind · Hardy |
-| Mind | Investigator | 3 · 0 | — | Precision · Anticipate · Anatomist · Hardy · Weapon Expert |
-| Mind | Loremaster | 0 · 2 | Illusion (+ Divination 3rd) | Turn the Odds · Wider Study · Master Plan · Alert · Iron Mind |
+| Mind | Investigator | 3 · 0 | — | Precision · Anatomist · Anticipate · Weapon Expert · Hardy |
+| Mind | Loremaster | 0 · 3 | Illusion (+ Divination 3rd, Chronomancy 9th) | Turn the Odds · Wider Study · Master Plan · Hardy · Evoker |
 | Mind | Tinker | 1 · 1 (tie: Steel) | Transmutation | Clockwork Guardian · Weapon Expert · Field Kit · Hardy · Anticipate |
 | Soul | Priest | 0 · 3 | The Tide (+ Presence 3rd, The Living World 5th) | Channel · Wider Study · Mending Hands · Warden · Hardy |
-| Soul | Druid | 0 · 3 | Verdance (+ Beasts 3rd, The Living World 5th) | Wild Shape · Wider Study · Channel · Hardy · Warden |
+| Soul | Druid | 0 · 3 | Verdance (+ The Tide 3rd, The Living World 5th) | Wild Shape · Wider Study · Channel · Hardy · Warden |
 | Soul | Oracle | 0 · 3 | Presence (+ Binding 3rd, **Fate** 5th) | Turn the Odds · Wider Study · Prophecy · Warden · Alert |
 | Soul | Oathsworn | 2 · 1 | Presence (from 3rd) | Sworn Strike · Mending Hands · Weapon Expert · Warden · Oath Unbroken |
 
@@ -1104,6 +1183,24 @@ under thresholds), so the recommendation is to let them lapse.
 | **V29** | **Steel depth 3 = Veteran** (+1 HP/level, +2 weapon damage); **Spell depth 3 = Deep Magic** (+1 domain, may be prismatic) | Both tracks reward depth symmetrically; without Veteran a Soul 2/1 hybrid out-hit the Soul pure martial at 5th | +1 HP/level only (too small); a hit die step (dead with *Hardy* at d12); +1 AC (AC inflation) |
 | **V30** | **Weapon Expert on all three menus** | Every Facet needs a Steel talent of its own so a Mind or Soul martial doesn't depend on cross picks | A new Soul/Mind weapon talent (menu growth) |
 | **V31** | **Prismatic domains: option (a), capstone of Deep Magic — provisional** (§5.1) | Owner reopened the question; (a) is the pure caster's reward and keeps canon | (b) fold in, (c) drop — both listed for the owner |
+
+**Balance pass (Balance tuner, 2026-09-28).** Log and numbers:
+`docs/RESEARCH_facets_d20_balance.md`; simulator report `docs/RESEARCH_facets_d20_sim.md`.
+
+| # | Decision | Why | Rejected |
+|---|---|---|---|
+| **V32** | **The swap test is the band's primary measure; PI is secondary.** The reference party with the build swapped in for each member plays standard days; score = the party's HP lost per fight against the preset median. Every preset *and* every sim build within ±15% at 1st/4th/7th/10th | It measures what the owner cares about (does the party do better with this character in it) and credits healers, control and protection that PI undercounts; PI multiplies a build's damage by its own toughness, so it ranked Body duelists top and healers bottom and disagreed with party outcomes (Spearman 0.46–0.82, engine E-9). Days, not single fights, so daily resources are paced as at the table | PI primary (rewards self-sufficient duelists); eDPR\* + k·eHP (a weight to pick, still solo) |
+| **V33** | **E-9: the +2 (or +1/+1) at 4th and 8th goes to the ability your main track uses** — your casting ability if Spell is main, otherwise your main weapon's. Every preset card prints its picks (`asi:`), and a test holds them to the rule | One sentence, the same rule the main track already teaches; a Steel-main hybrid is a weapon-user first. Measured: raising the casting ability instead helped the Soul hybrids 1–3 points at 10th and cost the Body hybrids 4–12 | Casting ability for anything that casts (the Designer's harness) |
+| **V34** | **The adventuring day is three Clashes with a short rest after the first and the second** (yaml `adventuring_day`); a single Clash gets a third of each daily pool. Four Clashes with two short rests is a hard day | At a Clash that costs about 27% of the party's HP, four in a row were survived 33–81% of the time; three are survived 81–99%. Fits the RP-first, short-fight table | A stronger short rest (Hit Dice at maximum moved the four-fight day only 2–10 points); a cheaper Clash (the day needs Clashes near 16% HP, below the tier) |
+| **V35** | **1st-level hit points = hit die + 8 + Constitution modifier** (then as before) | A 1st-level Clash killed a PC 15% of the time (8-HP wizards against 8-damage hits). +8 takes it to about 2%; a flat bonus helps the d6 as much as the d10, so Body stops dominating 1st level (twice the hit die was tried: fine for lethality, but Body +10 HP against Mind +6) | Twice the hit die; a death-save rule (an exception) |
+| **V36** | **Mage Armor moves to the Common list** | Every unarmored caster can defend itself; Mind casters without Constructed Force sat at AC 12 and died in a tenth of 10th-level days. Owner ruling 4: fewer choices that trap a 1st-level pick | Adding light armor to casters' kits (a d6 caster in leather is still AC 12) |
+| **V37** | **A boss has twice its stat block's hit points** (MM rule; Table 9–2's boss column already prices it) | Bosses died in two rounds, so boss fights ran 2.1–2.6 rounds and 5th–6th-level Clashes under 3; doubled, the Clash is 3.0–3.7 rounds at every level, and a lone boss is mispriced far less | Monster HP scaled by party level (a table the MM must apply to every foe); lone bosses only (leaves boss + minions short) |
+| **V38** | **Encounter method** (no rule): minions in fitted shapes are at most half the CR of a standard of the budget; generic foes deal the SRD ladder's share (15%) of non-weapon damage; every foe attacks a random standing PC (§6.2); the AI takes the higher expected value between the Attack action and area, aura and disable spells (S-5) | A few high-CR "minions" were ending 5th–10th-level Clashes in 2.6 rounds; rage's resistance met only weapon damage; bosses focusing the weakest PC contradicted §6.2; hybrids spent actions on low-DC spells | — |
+| **V39** | **Talent numbers** (the §8 knobs): *Channel* 1 use (2 from 5th, 3 from 9th); *Evoker*'s +casting-modifier damage from 1st (was 5th); *Guardian* reduces by half your level (round up), no 9th-level doubling; *Weapon Expert*'s crit heal = half your level; *Martial Arts* d4/d6/d8 die, focus = half your level, Flurry costs 2; *Second Wind* 1 use (2 from 5th); *Field Kit* temp HP = half your level; *Anatomist* adds your Int modifier to weapon damage against your studied target; *Master Plan* holds through the second round from 5th | Each closes a measured gap: 1st-level healers and the Body caster (Channel), Mind weak early (Evoker, Anatomist), the raging tank at 10th (Guardian, Weapon Expert), the Monk +33% at 7th (Martial Arts), Body at 1st–4th (Second Wind), the Tinker (Field Kit + E-D16), the Loremaster (Master Plan) | Cutting Stunning Strike (the Monk stayed +20%); a Study buff (+2–3 points for all Mind; not needed); rage damage +1 (little effect) |
+| **V40** | **Preset picks and kits**: Monk takes Hardy at 7th and Alert at 9th (Alert was worth ~10 points at 7th); Investigator Anatomist 3rd, Anticipate 5th, Weapon Expert 7th (Veteran from 7th); Loremaster Hardy 7th and Evoker 9th (Deep Magic, Chronomancy) instead of Alert/Iron Mind, Con 14, no armor; Druid's Wider Study domain is The Tide (was Beasts). Sim builds: *spellblade* takes Clockwork Guardian and Turn the Odds as its Spell picks and Dex 16/Int 15 (the strongest version of the C2 shape); *soul_blaster* unarmored | Each preset stays its concept; the spellblade tests the shape at its best, as an audit build should | Keeping the Loremaster's three general picks (−22% at 10th) |
+| **V41** | **Tier targets**: Skirmish lasts "about two rounds" (1.5–2.5); Battle wins 85–95% | The owner's definitions; a Skirmish that costs 10% of HP cannot last 2–3 rounds (engine E-10) | — |
+| **V42** | **A lone boss counts ×1.2 its boss Threat** (one line under Table 9–2) — see §7 | Measured mark-up that makes the Clash budget buy a Clash: ×1.11–1.15 at 1st–4th, ×1.20–1.24 at 5th–8th, ×1.33–1.35 at 9th–10th (median ×1.20) | ×1.5 (the engine's first guess; with V37 it makes a lone boss a Skirmish) |
+| — | *Tried and dropped:* a 9th-level scaling depth of 2 (V28 kept) | It lifted hybrids 4 points at 10th, but after V37–V40 every hybrid was inside the band without it, and with it two Soul hybrids out-hit the Soul pure martial | — |
 
 Resolved enough to implement. **Return to the engine agent for *Planner → engine* P-5
 onward (end of file), then to the balance pass (§8 tuning items), then to a prose pass

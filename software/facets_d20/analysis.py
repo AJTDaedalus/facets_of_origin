@@ -90,6 +90,23 @@ def _stat(cr: float, key: str) -> float:
     return math.exp(v) if log else v
 
 
+_WEAPON_SHARE = None
+
+
+def ladder_weapon_share() -> float:
+    """Share of the SRD ladder's attack damage that is bludgeoning, piercing or slashing."""
+    global _WEAPON_SHARE
+    if _WEAPON_SHARE is None:
+        tot = bps = 0
+        for m in M.ladder():
+            for a in m.attacks:
+                d = a.fixed * a.count
+                tot += d
+                bps += d if a.dtype in ("bludgeoning", "piercing", "slashing") else 0
+        _WEAPON_SHARE = bps / tot
+    return _WEAPON_SHARE
+
+
 def generic(cr: float) -> MonsterBlock:
     """A generic foe at a continuous CR, from the smooth fit over the SRD ladder."""
     cr = max(MIN_CR, min(MAX_CR, float(cr)))
@@ -99,10 +116,16 @@ def generic(cr: float) -> MonsterBlock:
     to_hit = round(_stat(cr, "to_hit"))
     n = max(1, round(_stat(cr, "attacks")))
     saves = {a: round(_stat(cr, a)) for a in ("str", "dex", "con", "int", "wis", "cha")}
-    per, extra = divmod(dpt, n)
+    # Damage types: the ladder's share of weapon (bludgeoning/piercing/slashing) damage;
+    # the rest arrives as one extra non-weapon strike (resistances then count as they do
+    # against real monsters).
+    other = round(dpt * (1 - ladder_weapon_share()))
+    per, extra = divmod(dpt - other, n)
     attacks = [MonsterAttack("Strike", to_hit, per + extra, None, 0, "bludgeoning", 1)]
     if n > 1:
         attacks.append(MonsterAttack("Strike", to_hit, per, None, 0, "bludgeoning", n - 1))
+    if other > 0:
+        attacks.append(MonsterAttack("Blast", to_hit, other, None, 0, "force", 1))
     return MonsterBlock(f"generic_{cr:.3f}", f"CR {cr:.2f} foe", Fraction(cr).limit_denominator(64),
                         ac, hp, tuple(attacks), saves, source="engine")
 
@@ -185,17 +208,28 @@ class ThreatModel:
 # ================================================================ encounters from a budget
 
 SHAPES = ("standards", "boss_minions", "standards_minions")
+MAX_MINIONS = 10
 
 
 def compose(shape: str, total: float, model: ThreatModel) -> S.Encounter:
     """A generic encounter of ``shape`` worth ``total`` Threat (continuous CRs)."""
     specs = []
+    # Minions are mooks: never more than half the CR of a standard foe of this budget
+    # (the CR four standards would have). Minion Threat grows only with √DPT, so without
+    # the cap a few minions of a very high CR (a CR 13 "minion" at 7th level) would carry
+    # the share. The count rises instead, up to MAX_MINIONS.
+    minion_cap = model.cr_for(total / 4, "standard") / 2
 
     def add(role, share, count):
         if share <= 0:
             return
         each = total * share / count
         cr = model.cr_for(each, role)
+        if role == "minion" and cr > minion_cap:
+            cr = minion_cap
+            k = total * share / model.of_cr(cr, role)
+            if k > MAX_MINIONS:
+                cr = model.cr_for(total * share / MAX_MINIONS, role)
         blk = generic(cr)
         real_each = model.of(blk, role)
         n = max(1, round(total * share / real_each)) if real_each > 0 else count
@@ -415,7 +449,7 @@ PARTIES = {
     "ref5": ("fighter", "rogue", "wizard", "priest", "oathsworn"),
     "ref6": ("fighter", "rogue", "wizard", "priest", "oathsworn", "druid"),
 }
-TIRED = {"start_hp_frac": 0.5, "share": 0.125}   # ~50% HP and ~50% of the fight's resources
+TIRED = {"start_hp_frac": 0.5, "share": S.DEFAULT_SHARE / 2}   # ~50% HP and ~50% of the fight's resources
 
 
 def build_profile(build_id: str, level: int, source: str = "facets"):
@@ -470,14 +504,25 @@ def task_validate(level, tier, total, cls, sample, model: ThreatModel, n, seed) 
             "outcome": o.__dict__, "landed": classify(o, tiers_spec())}
 
 
+def day_spec() -> dict:
+    """The adventuring day (yaml ``adventuring_day``): Clashes per long rest and the
+    fights (1-based) followed by a short rest."""
+    from . import data as D
+    d = D.load().raw["adventuring_day"]
+    return {"clashes": int(d["clashes"]), "short_rests_after": list(d["short_rests_after"])}
+
+
+DAY_SHAPES = ("standards", "boss_minions", "standards_minions")
+
+
 def day_encounters(total: float, model: ThreatModel) -> list:
-    return [compose(s, total, model) for s in ("standards", "boss_minions", "standards_minions",
-                                               "standards")]
+    n = day_spec()["clashes"]
+    return [compose(DAY_SHAPES[i % len(DAY_SHAPES)], total, model) for i in range(n)]
 
 
 def task_pi(build_id, source, level, clash_total, model: ThreatModel, n_days, seed) -> dict:
-    """§8 metrics for one build at one level over n standard days (four Clashes, two short
-    rests) beside three reference-party companions."""
+    """§8 metrics for one build at one level over n standard days (the yaml adventuring
+    day: three Clashes, two short rests) beside three reference-party companions."""
     me = build_profile(build_id, level, source)
     comp = [p for p in PARTIES["ref4"] if p != build_id][:3]
     party = [me] + [build_profile(p, level) for p in comp]
@@ -488,7 +533,8 @@ def task_pi(build_id, source, level, clash_total, model: ThreatModel, n_days, se
     att = hits = raw = taken = 0
     days_survived = deaths_me = 0
     for _ in range(n_days):
-        day = S.run_day(rng, party, encs, opts=RuleOptions())
+        day = S.run_day(rng, party, encs, opts=RuleOptions(),
+                        short_rests_after=tuple(day_spec()["short_rests_after"]))
         days_survived += day.survived
         for f in day.fights:
             if 0 not in f.members:
@@ -525,18 +571,76 @@ def task_pi(build_id, source, level, clash_total, model: ThreatModel, n_days, se
             "fights": fights}
 
 
+def task_solo_factor(level, clash_total, model: ThreatModel, n, seed, iters=7) -> dict:
+    """How much a lone boss must be marked up for the Clash budget to buy a Clash: the
+    factor f such that a solo boss worth clash_total ÷ f Threat costs the Clash target."""
+    tiers = tiers_spec()
+    _, target = tier_target("clash", tiers)
+    party = party_for("ref4", level)
+
+    def hp(f):
+        enc = compose("solo_boss", clash_total / f, model)
+        return outcome(run_encounter(party, enc, n=n, seed=seed)).hp_lost
+
+    lo, hi = 0.7, 3.0
+    for _ in range(iters):
+        mid = math.sqrt(lo * hi)
+        if hp(mid) > target:
+            lo = mid
+        else:
+            hi = mid
+    f = math.sqrt(lo * hi)
+    at1 = outcome(run_encounter(party, compose("solo_boss", clash_total, model), n=n, seed=seed))
+    return {"level": level, "factor": f, "hp_lost_x1": at1.hp_lost, "win_x1": at1.win}
+
+
+def task_day(level, clash_total, model: ThreatModel, n, seed, clashes=None, rests=None) -> dict:
+    """The reference party's adventuring day at the Clash budget: ``clashes`` fights (the
+    yaml day by default) with short rests after the listed fights. Survived = every fight
+    won; also reports days with a PC death."""
+    spec = day_spec()
+    k = clashes or spec["clashes"]
+    rests = tuple(rests if rests is not None else spec["short_rests_after"])
+    encs = [compose(DAY_SHAPES[i % len(DAY_SHAPES)], clash_total, model) for i in range(k)]
+    party = party_for("ref4", level)
+    rng = random.Random(seed)
+    ok = dead = 0
+    for _ in range(n):
+        d = S.run_day(rng, party, encs, opts=RuleOptions(), short_rests_after=rests)
+        ok += d.survived
+        dead += d.deaths > 0
+    return {"level": level, "clashes": k, "rests": list(rests), "survived": ok / n,
+            "any_death": dead / n}
+
+
 def task_swap(build_id, source, level, clash_total, model: ThreatModel, n, seed) -> dict:
-    """§8 item 6: the reference party with this build swapped in for each member in turn."""
+    """The swap test — the balance band's primary measure (balance pass, V32).
+
+    The reference party with this build swapped in for each member in turn plays ``n``
+    standard days (the yaml adventuring day: three Clashes, short rests between), so
+    daily resources are paced as at the table. The score is the mean share of the
+    party's hit points lost per fight (lower is stronger); rounds, fight wins and whole
+    days survived are reported beside it. Use one ``seed`` for every build at a level
+    (common random numbers) so builds are compared on the same dice."""
     me = build_profile(build_id, level, source)
     ref = party_for("ref4", level)
-    outs = []
+    encs = day_encounters(clash_total, model)
+    rests = tuple(day_spec()["short_rests_after"])
+    hp, rounds, wins, days = [], [], [], []
     for i in range(len(ref)):
         party = ref[:i] + [me] + ref[i + 1:]
-        outs.append(mixed_outcome(party, clash_total, model, n=n, seed=seed + 10 * i))
+        rng = random.Random(seed + 10 * i)
+        for _ in range(n):
+            d = S.run_day(rng, party, encs, opts=RuleOptions(), short_rests_after=rests)
+            days.append(d.survived)
+            for f in d.fights:
+                hp.append(f.party_hp_lost / max(1, f.party_hp_max))
+                rounds.append(f.rounds)
+                wins.append(f.won)
     return {"build": build_id, "source": source, "level": level,
-            "hp_lost": statistics.fmean(o.hp_lost for o in outs),
-            "rounds": statistics.fmean(o.rounds for o in outs),
-            "win": statistics.fmean(o.win for o in outs)}
+            "hp_lost": statistics.fmean(hp), "rounds": statistics.fmean(rounds),
+            "win": statistics.fmean(wins), "days_survived": statistics.fmean(days),
+            "hp_lost_sd": statistics.pstdev(hp), "fights": len(hp)}
 
 
 def task_dummy_dpr(build_id, source, level, n, seed) -> dict:

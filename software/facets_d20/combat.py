@@ -53,12 +53,15 @@ class RuleOptions:
     morale_dc: the DC of the morale save.
     boss_bloodied: the boss's Bloodied change the simulator plays ("desperate": advantage
         on its attacks and on attacks against it — 09's second option; "none").
+    boss_hp_multiplier: a boss has this many times its stat block's hit points (balance
+        pass V37: 2, so a boss lasts long enough to act; 1 = the stat block).
     """
 
     leader_morale: str = "minions"
     boss_top_of_round: bool = True
     morale_dc: int = 10
     boss_bloodied: str = "desperate"
+    boss_hp_multiplier: int = 2
 
 
 # ---------------------------------------------------------------- data shapes

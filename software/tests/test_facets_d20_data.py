@@ -563,8 +563,16 @@ class TestBalanceAndEncounterSpec:
                 assert s.get("role") == listed[s["id"]], s["id"]
 
     def test_hybrid_rule(self, data):
-        assert data["balance"]["hybrid_rule"] == {"from_level": 4, "pi_tolerance_pct": 15,
-                                                  "job_tolerance_pct": 5}
+        assert data["balance"]["hybrid_rule"] == {"from_level": 4, "swap_tolerance_pct": 3,
+                                                  "pi_tolerance_pct": 15, "job_tolerance_pct": 5}
+
+    def test_primary_measure_is_the_swap_test(self, data):
+        # Balance pass V32: the swap test is the band's primary measure, PI secondary.
+        assert data["balance"]["measure"] == "swap"
+
+    def test_adventuring_day(self, data):
+        # Balance pass V34: three Clashes, a short rest after the first and the second.
+        assert data["adventuring_day"] == {"clashes": 3, "short_rests_after": [1, 2]}
 
     def test_four_named_tiers(self, data):
         assert [t["id"] for t in data["encounter_tiers"]] == ["skirmish", "clash", "battle", "desperate"]

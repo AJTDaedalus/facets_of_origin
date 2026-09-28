@@ -24,7 +24,7 @@ advancement:
   knack_levels: [2, 6, 10]          # plus the background's knack at 1st
   asi_levels: [4, 8]
   asi_rule: choice                  # V21: +2 to one ability, +1 to two, or one extra knack (max 20); presets: +2 primary
-  hp_first: hit_die_plus_con
+  hp_first: hit_die_plus_eight_plus_con   # V35 (balance pass): 1st level = hit die + 8 + Con
   hp_per_level: half_die_plus_one_plus_con   # fixed, never rolled
   retrain: once_per_level_on_long_rest       # swap one talent, knack or domain (never your Facet)
 
@@ -149,10 +149,10 @@ facets:
         level: 1
         basis: "SRD 5.2.1 Fighter: Second Wind"
         summary: >-
-          Bonus action: regain 1d10 + your level hit points. Two uses (three from 5th);
+          Bonus action: regain 1d10 + your level hit points. One use (two from 5th);
           one returns on a short rest, all on a long rest.
         effects:
-          - {type: resource, id: second_wind, uses: 2, recharge: long, short_rest_regain: 1, by_level: {5: 3}}
+          - {type: resource, id: second_wind, uses: 1, recharge: long, short_rest_regain: 1, by_level: {5: 2}}
           - {type: heal, amount: "1d10+level", action: bonus, targets: self, resource: second_wind}
       - id: action_surge
         name: Action Surge
@@ -266,13 +266,13 @@ talents:
     summary: >-
       +1 to weapon attack rolls, and +1 AC while you wear armor. From 5th, your weapon
       attacks score a critical hit on a 19 or 20. From 9th, when you score one, regain
-      hit points equal to your level.
+      hit points equal to half your level.
     effects:
       - {type: attack_bonus, value: 1, weapon: any}
       - {type: ac_bonus, value: 1, condition: [armored]}
     scaling:
       5: [{type: crit_range, min: 19, weapon: any}]
-      9: [{type: heal, amount: level, trigger: on_crit, targets: self}]
+      9: [{type: heal, amount: half_level, trigger: on_crit, targets: self}]
 
   # ---------------------------------------------------------- shared by two
   - id: precision
@@ -355,27 +355,28 @@ talents:
     basis: "SRD 5.2.1 Monk: Martial Arts, Unarmored Defense, Monk's Focus, Stunning Strike"
     summary: >-
       Unarmored and without a shield: your unarmed strikes and simple or light melee
-      weapons can use Dex and a d6 damage die (d8 from 5th, d10 from 9th); after you take
+      weapons can use Dex and a d4 damage die (d6 from 5th, d8 from 9th); after you take
       the Attack action you can make one unarmed strike as a bonus action; your speed
-      rises by 10 feet; your AC is 10 + Dex + Wis. You have focus points equal to your
-      level (all back on a short rest): spend 1 for Flurry (two bonus-action strikes
-      instead of one), Patient Defense (Dodge) or Step of the Wind (Dash and Disengage).
+      rises by 10 feet; your AC is 10 + Dex + Wis. You have focus points equal to half
+      your level (all back on a short rest): spend 2 for Flurry (two bonus-action strikes
+      instead of one), or 1 for Patient Defense (Dodge) or Step of the Wind (Dash and
+      Disengage).
       From 5th: Stunning Strike (once per turn on a hit, 1 focus point, Con save against
       8 + prof + Wis or stunned until the start of your next turn).
     effects:
-      - {type: martial_die, die: d6, ability: dex, applies: [unarmed, simple_melee, light_melee], condition: [unarmored, no_shield]}
+      - {type: martial_die, die: d4, ability: dex, applies: [unarmed, simple_melee, light_melee], condition: [unarmored, no_shield]}
       - {type: bonus_attack, count: 1, weapon: unarmed, condition: [unarmored, no_shield, attack_action]}
       - {type: speed_bonus, value: 10, condition: [unarmored, no_shield]}
       - {type: ac_formula, base: 10, add: [dex, wis], shield_allowed: false, condition: [unarmored]}
-      - {type: resource, id: focus, uses: level, recharge: short}
-      - {type: bonus_attack, count: 2, weapon: unarmed, resource: focus, cost: 1, replaces_free: true,
+      - {type: resource, id: focus, uses: half_level, recharge: short}
+      - {type: bonus_attack, count: 2, weapon: unarmed, resource: focus, cost: 2, replaces_free: true,
          condition: [unarmored, no_shield, attack_action]}
       - {type: narrative, text: "Patient Defense (1 focus: Dodge as a bonus action); Step of the Wind (1 focus: Dash and Disengage)"}
     scaling:
-      5: [{type: martial_die, die: d8, ability: dex, applies: [unarmed, simple_melee, light_melee], condition: [unarmored, no_shield]},
+      5: [{type: martial_die, die: d6, ability: dex, applies: [unarmed, simple_melee, light_melee], condition: [unarmored, no_shield]},
           {type: condition_on_hit, inflicts: stunned, save: con, dc: "8+pb+wis", resource: focus, cost: 1,
            frequency: once_per_turn, duration: until_your_next_turn_start}]
-      9: [{type: martial_die, die: d10, ability: dex, applies: [unarmed, simple_melee, light_melee], condition: [unarmored, no_shield]}]
+      9: [{type: martial_die, die: d8, ability: dex, applies: [unarmed, simple_melee, light_melee], condition: [unarmored, no_shield]}]
   - id: cunning
     name: Cunning
     menus: [body]
@@ -399,12 +400,10 @@ talents:
     basis: original
     summary: >-
       Reaction, when a creature you can see hits an ally within 5 feet of you: you take
-      the hit and everything it carries instead, reducing its damage by your level
-      (before resistance). From 9th, reduce it by twice your level.
+      the hit and everything it carries instead, reducing its damage by half your level
+      (round up; before resistance).
     effects:
-      - {type: redirect_hit, range_ft: 5, reduce_by: level, action: reaction}
-    scaling:
-      9: [{type: redirect_hit, range_ft: 5, reduce_by: "2*level", action: reaction}]
+      - {type: redirect_hit, range_ft: 5, reduce_by: half_level_round_up, action: reaction}
   - id: marksman
     name: Marksman
     menus: [body]
@@ -446,14 +445,13 @@ talents:
     basis: "SRD 5.2.1 Evoker: Sculpt Spells, Empowered Evocation; maximise is original"
     summary: >-
       When you cast an area spell, choose up to 1 + the spell's level creatures in it:
-      they automatically succeed on its save and take no damage. From 5th, add your
-      casting modifier to one damage roll of each damaging spell you cast (cantrips
-      included). From 9th, once per long rest, a damaging spell deals the maximum on
-      every die.
+      they automatically succeed on its save and take no damage. Add your casting
+      modifier to one damage roll of each damaging spell you cast (cantrips included).
+      From 9th, once per long rest, a damaging spell deals the maximum on every die.
     effects:
       - {type: sculpt, count: "1+slot_level"}
+      - {type: damage_bonus, value: casting, applies: spell, frequency: once_per_spell}
     scaling:
-      5: [{type: damage_bonus, value: casting, applies: spell, frequency: once_per_spell}]
       9: [{type: resource, id: overcast, uses: 1, recharge: long},
           {type: maximize_spell, resource: overcast}]
   - id: anatomist
@@ -463,9 +461,11 @@ talents:
     requires: null
     basis: original
     summary: >-
-      Your weapon attacks against your studied target score a critical hit on a 19 or
-      20 (18–20 from 9th). When you crit it, it is also knocked prone.
+      You know where to strike. Your weapon attacks against your studied target deal
+      extra damage equal to your Intelligence modifier (not a rider) and score a critical
+      hit on a 19 or 20 (18–20 from 9th). When you crit it, it is also knocked prone.
     effects:
+      - {type: damage_bonus, value: int, weapon: any, condition: [studied_target]}
       - {type: crit_range, min: 19, weapon: any, condition: [studied_target]}
       - {type: condition_on_hit, inflicts: prone, trigger: crit, save: null, condition_target: [studied_target]}
     scaling:
@@ -505,10 +505,12 @@ talents:
     summary: >-
       Once per short rest, before a fight you had a scene to plan for, lay out the plan.
       In the first round, you and each ally who follows it have advantage on attack rolls
-      and saving throws. From 9th, twice per short rest.
+      and saving throws. From 5th, the plan holds through the second round too.
     effects:
-      - {type: resource, id: master_plan, uses: 1, recharge: short, by_level: {9: 2}}
+      - {type: resource, id: master_plan, uses: 1, recharge: short}
       - {type: advantage, roll: [attack, save], scope: all, targets: [self, allies], condition: [first_round, planned], resource: master_plan}
+    scaling:
+      5: [{type: advantage, roll: [attack, save], scope: all, targets: [self, allies], condition: [first_round, planned], resource: master_plan, rounds: 2}]
   - id: clockwork_guardian
     name: Clockwork Guardian
     menus: [mind]
@@ -532,9 +534,10 @@ talents:
     basis: original
     summary: >-
       After a long rest you rig the party's gear. At the start of each fight, you and up
-      to your proficiency bonus of allies gain temporary hit points equal to your level.
+      to your proficiency bonus of allies gain temporary hit points equal to half your
+      level (round up).
     effects:
-      - {type: temp_hp, amount: level, trigger: fight_start, targets: {self: true, allies: pb}}
+      - {type: temp_hp, amount: half_level_round_up, trigger: fight_start, targets: {self: true, allies: pb}}
 
   # ---------------------------------------------------------- Soul
   - id: channel
@@ -544,23 +547,24 @@ talents:
     requires: null
     basis: "SRD 5.2.1 Cleric: Divine Spark, and Life domain: Disciple of Life"
     summary: >-
-      Magic action, two uses (three from 5th), one back on a short rest: a creature within
+      Magic action, one use (two from 5th, three from 9th), one back on a short rest: a creature within
       30 feet regains 1d8 + your casting modifier HP, or makes a Con save against your
       spell DC and takes that much radiant or necrotic damage (half on a success). 2d8
       from 5th, 3d8 from 9th. Also, when you cast a spell with a slot that restores hit
       points as you cast it, one creature it heals regains 2 + the slot's level extra.
     effects:
-      - {type: resource, id: channel, uses: 2, recharge: long, short_rest_regain: 1}
+      - {type: resource, id: channel, uses: 1, recharge: long, short_rest_regain: 1}
       - {type: heal, amount: "1d8+casting", action: magic, range_ft: 30, targets: 1, resource: channel}
       - {type: save_damage, dice: 1d8, add: casting, save: con, dc: spell, half_on_success: true,
          damage_type: radiant, action: magic, range_ft: 30, resource: channel, alternative_to: heal}
       - {type: heal_boost, amount: "2+slot_level", trigger: slot_spell_heal_on_cast, targets: 1}
     scaling:
-      5: [{type: resource, id: channel, uses: 3, recharge: long, short_rest_regain: 1},
+      5: [{type: resource, id: channel, uses: 2, recharge: long, short_rest_regain: 1},
           {type: heal, amount: "2d8+casting", action: magic, range_ft: 30, targets: 1, resource: channel},
           {type: save_damage, dice: 2d8, add: casting, save: con, dc: spell, half_on_success: true,
            damage_type: radiant, action: magic, range_ft: 30, resource: channel, alternative_to: heal}]
-      9: [{type: heal, amount: "3d8+casting", action: magic, range_ft: 30, targets: 1, resource: channel},
+      9: [{type: resource, id: channel, uses: 3, recharge: long, short_rest_regain: 1},
+          {type: heal, amount: "3d8+casting", action: magic, range_ft: 30, targets: 1, resource: channel},
           {type: save_damage, dice: 3d8, add: casting, save: con, dc: spell, half_on_success: true,
            damage_type: radiant, action: magic, range_ft: 30, resource: channel, alternative_to: heal}]
   - id: wild_shape
@@ -795,6 +799,7 @@ presets:
     skills: [perception, intimidation]
     talents: {1: weapon_expert, 3: guardian, 5: cleave, 7: hardy, 9: alert}
     knacks: {2: skilled, 6: pathfinder, 10: well_travelled}
+    asi: {4: {plus2: str}, 8: {plus2: str}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: chain_mail, shield: true, weapons: [longsword, javelin]}
   - id: rogue                       # Steel 3 · Spell 0
     name: Rogue
@@ -804,6 +809,7 @@ presets:
     skills: [stealth, sleight_of_hand]
     talents: {1: precision, 3: cunning, 5: marksman, 7: weapon_expert, 9: alert}
     knacks: {2: expertise, 6: many_faces, 10: streetwise}
+    asi: {4: {plus2: dex}, 8: {plus2: dex}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: leather, shield: false, weapons: [rapier, shortbow]}
   - id: barbarian                   # Steel 3 · Spell 0
     name: Barbarian
@@ -813,6 +819,7 @@ presets:
     skills: [perception, survival]
     talents: {1: rage, 3: hardy, 5: cleave, 7: guardian, 9: alert}
     knacks: {2: pathfinder, 6: wild_kin, 10: artisan}
+    asi: {4: {plus2: str}, 8: {plus2: str}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: null, shield: false, weapons: [greataxe, handaxe]}
   - id: monk                        # Steel 2 · Spell 0
     name: Monk
@@ -820,8 +827,9 @@ presets:
     background: wilderness_scout
     abilities: {str: 12, dex: 16, con: 14, int: 10, wis: 15, cha: 8}
     skills: [acrobatics, athletics]
-    talents: {1: martial_arts, 3: cunning, 5: weapon_expert, 7: alert, 9: hardy}
+    talents: {1: martial_arts, 3: cunning, 5: weapon_expert, 7: hardy, 9: alert}
     knacks: {2: expertise, 6: wild_kin, 10: well_travelled}
+    asi: {4: {plus2: dex}, 8: {plus2: dex}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: null, shield: false, weapons: [quarterstaff, dart]}
   # ------------------------------------------------ Mind
   - id: wizard                      # Spell 3 · Steel 0 — pure caster
@@ -835,6 +843,7 @@ presets:
     extra_domains: {3: illusion}
     deep_domain: the_arcane
     knacks: {2: encyclopedic, 6: well_travelled, 10: artisan}
+    asi: {4: {plus2: int}, 8: {plus2: int}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: null, shield: false, weapons: [quarterstaff], focus: arcane_focus}
   - id: investigator                # Steel 3 · Spell 0 — pure martial
     name: Investigator
@@ -842,20 +851,23 @@ presets:
     background: physicians_assistant
     abilities: {str: 8, dex: 16, con: 13, int: 15, wis: 13, cha: 10}
     skills: [investigation, perception]
-    talents: {1: precision, 3: anticipate, 5: anatomist, 7: hardy, 9: weapon_expert}
+    talents: {1: precision, 3: anatomist, 5: anticipate, 7: weapon_expert, 9: hardy}
     knacks: {2: expertise, 6: streetwise, 10: encyclopedic}
+    asi: {4: {plus2: dex}, 8: {plus2: dex}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: chain_shirt, shield: true, weapons: [rapier, light_crossbow]}
-  - id: loremaster                  # Spell 2 · Steel 0 — caster who spends on general talents
+  - id: loremaster                  # Spell 3 · Steel 0 — a caster who spends two picks on general talents; Deep Magic only at 9th
     name: Loremaster
     facet: mind
     domain: illusion
     background: traveling_merchant
-    abilities: {str: 8, dex: 13, con: 12, int: 16, wis: 11, cha: 15}
+    abilities: {str: 8, dex: 13, con: 14, int: 16, wis: 11, cha: 13}
     skills: [history, arcana]
-    talents: {1: turn_the_odds, 3: wider_study, 5: master_plan, 7: alert, 9: iron_mind}
+    talents: {1: turn_the_odds, 3: wider_study, 5: master_plan, 7: hardy, 9: evoker}
     extra_domains: {3: divination}
+    deep_domain: chronomancy
     knacks: {2: encyclopedic, 6: well_travelled, 10: performer}
-    kit: {armor: leather, shield: false, weapons: [dagger], focus: arcane_focus}
+    asi: {4: {plus2: int}, 8: {plus2: int}}   # V21 pick, E-9: +2 to the main track's ability (V33)
+    kit: {armor: null, shield: false, weapons: [dagger], focus: arcane_focus}
   - id: tinker                      # Steel 1 · Spell 1 — hybrid (tie: Steel main; half caster in armor, no Extra Attack)
     name: Tinker
     facet: mind
@@ -865,6 +877,7 @@ presets:
     skills: [nature, perception]
     talents: {1: clockwork_guardian, 3: weapon_expert, 5: field_kit, 7: hardy, 9: anticipate}
     knacks: {2: artisan, 6: skilled, 10: expertise}
+    asi: {4: {plus2: dex}, 8: {plus2: dex}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: leather, shield: false, weapons: [light_crossbow, dagger], focus: arcane_focus}
     kit_by_level: {3: {armor: breastplate, shield: true, weapons: [rapier, light_crossbow]}}
   # ------------------------------------------------ Soul
@@ -879,6 +892,7 @@ presets:
     extra_domains: {3: presence}
     deep_domain: the_living_world
     knacks: {2: field_medic, 6: well_travelled, 10: silver_tongue}
+    asi: {4: {plus2: wis}, 8: {plus2: wis}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: scale_mail, shield: true, weapons: [mace], focus: holy_symbol}
   - id: druid                       # Spell 3 · Steel 0 — pure caster
     name: Druid
@@ -888,9 +902,10 @@ presets:
     abilities: {str: 8, dex: 14, con: 15, int: 12, wis: 16, cha: 10}
     skills: [nature, animal_handling]
     talents: {1: wild_shape, 3: wider_study, 5: channel, 7: hardy, 9: warden}
-    extra_domains: {3: beasts}
+    extra_domains: {3: the_tide}
     deep_domain: the_living_world
     knacks: {2: wild_kin, 6: field_medic, 10: well_travelled}
+    asi: {4: {plus2: wis}, 8: {plus2: wis}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: leather, shield: true, weapons: [quarterstaff], focus: druidic_focus}
   - id: oracle                      # Spell 3 · Steel 0 — pure caster; Fate arrives with Deep Magic at 5th
     name: Oracle
@@ -903,6 +918,7 @@ presets:
     extra_domains: {3: binding}
     deep_domain: fate
     knacks: {2: encyclopedic, 6: many_faces, 10: performer}
+    asi: {4: {plus2: cha}, 8: {plus2: cha}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: chain_shirt, shield: true, weapons: [spear], focus: holy_symbol}
   - id: oathsworn                   # Steel 2 · Spell 1 — the natural hybrid (paladin shape)
     name: Oathsworn
@@ -913,6 +929,7 @@ presets:
     skills: [intimidation, religion]
     talents: {1: sworn_strike, 3: mending_hands, 5: weapon_expert, 7: warden, 9: oath_unbroken}
     knacks: {2: silver_tongue, 6: field_medic, 10: well_travelled}
+    asi: {4: {plus2: str}, 8: {plus2: str}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: chain_mail, shield: true, weapons: [longsword, javelin], focus: holy_symbol}
 
 # ---------------------------------------------------------------------------- balance
@@ -920,18 +937,24 @@ presets:
 # levels and reports each against the band (DESIGN §8). Sim builds must be legal.
 balance:
   levels: [1, 4, 7, 10]
-  band_pct: 15                      # every preset's power index within ±15% of the preset median
+  # Primary measure (balance pass V32): the swap test. The reference party with the build
+  # swapped in for each member in turn plays standard days (adventuring_day); the score is
+  # the party's share of hit points lost per fight, as "vs median" = median ÷ build − 1
+  # (positive = the party loses less = stronger). The power index (PI) is secondary.
+  measure: swap
+  band_pct: 15                      # every preset AND every sim_build within ±15% of the preset median
   facet_band_pct: 10                # each Facet's preset mean within ±10% of the overall median
-  combo_ceiling_pct: 15             # a sim_build may be weaker, never more than +15% over the median
-  srd_band_pct: 15                  # preset median within ±15% of the SRD baseline median
+  combo_ceiling_pct: 15             # (kept for the PI report) a sim_build's PI ceiling
+  srd_band_pct: 15                  # PI report only; on the swap test the SRD baselines are reported, not banded
   srd_baselines: [srd_fighter_champion, srd_rogue_thief, srd_wizard_evoker, srd_cleric_life,
                   srd_paladin_devotion, srd_barbarian_berserker]
   reference_party: [fighter, rogue, wizard, priest]
   # Amendment 2: pure caster, pure martial and hybrids for every Facet (band item 7,
-  # DESIGN §8). From 4th level each hybrid must: (a) PI ≤ its Facet's best pure build's PI
-  # + pi_tolerance; (b) if Steel is its main track, DPR₁ ≤ its Facet's best pure-martial
-  # DPR₁ + job_tolerance; (c) DPR₃ ≤ the best pure caster of its tradition's DPR₃ +
-  # job_tolerance. "Best" = the highest among the builds listed for that role.
+  # DESIGN §8). From 4th level each hybrid must: (a) its swap score ≤ its Facet's best pure
+  # build's + swap_tolerance (sampling noise, in points); (b) if Steel is its main track,
+  # DPR₁ ≤ its Facet's best pure-martial DPR₁ + job_tolerance; (c) DPR₃ ≤ the best pure
+  # caster of its tradition's DPR₃ + job_tolerance. "Best" = the highest among the builds
+  # listed for that role.
   roles:
     body:
       pure_martial: [fighter, rogue, barbarian, monk, unbreakable, reckless_striker]
@@ -948,7 +971,7 @@ balance:
   tradition_casters:
     thaumaturgy: [wizard, loremaster, mind_controller, double_cross]
     invocation: [priest, druid, oracle, healer_engine, soul_blaster, summoner, body_caster]
-  hybrid_rule: {from_level: 4, pi_tolerance_pct: 15, job_tolerance_pct: 5}
+  hybrid_rule: {from_level: 4, swap_tolerance_pct: 3, pi_tolerance_pct: 15, job_tolerance_pct: 5}
 
 # `role` names the Amendment 2 shape; `audit` the finding the build tests.
 sim_builds:
@@ -998,15 +1021,17 @@ sim_builds:
     extra_domains: {7: the_tide}
     kit: {armor: chain_mail, shield: true, weapons: [longsword]}
   # Audit C2, the Spellblade, rebuilt: Precision + True Strike (Divination) + Extra Attack
-  # + full casting. Steel 2 · Spell 2.
+  # + casting. Steel 2 · Spell 2 (a tie, so Steel main: Extra Attack and the Half table).
+  # Balance pass: its Spell picks are Clockwork Guardian and Turn the Odds (the strongest
+  # Spell talents for a blade), not Wider Study and Evoker, so the build tests the shape
+  # at its best.
   - id: spellblade
     audit: C2
     role: hybrid
     facet: mind
     domain: divination
-    abilities: {str: 8, dex: 15, con: 13, int: 16, wis: 13, cha: 10}
-    talents: {1: precision, 3: wider_study, 5: anatomist, 7: evoker, 9: hardy}
-    extra_domains: {3: illusion}
+    abilities: {str: 8, dex: 16, con: 13, int: 15, wis: 13, cha: 10}
+    talents: {1: precision, 3: clockwork_guardian, 5: anatomist, 7: turn_the_odds, 9: hardy}
     kit: {armor: chain_shirt, shield: true, weapons: [rapier]}
   # Amendment 2: a full caster spending one pick on a Steel talent. Spell stays the main
   # track, so the talent brings martial weapons and its own +1 attack/+1 AC in armor, but
@@ -1099,7 +1124,7 @@ sim_builds:
     cross: [evoker]
     extra_domains: {3: storm}
     deep_domain: the_undying
-    kit: {armor: leather, shield: false, weapons: [dagger]}
+    kit: {armor: null, shield: false, weapons: [dagger]}
   # Audit M6: control against bosses. Spell 3.
   - id: mind_controller
     audit: M6
@@ -1146,167 +1171,173 @@ sim_builds:
 encounter_tiers:
   - id: skirmish
     name: Skirmish
-    targets: {win_pct_min: 99, rounds: [2, 3], party_hp_lost_pct: [5, 15], any_pc_down_pct_max: 5}
+    targets: {win_pct_min: 99, rounds: [1.5, 2.5], party_hp_lost_pct: [5, 15], any_pc_down_pct_max: 5}   # "about 2 rounds" (balance pass)
   - id: clash
     name: Clash
     targets: {win_pct_min: 97, rounds: [3, 4], party_hp_lost_pct: [20, 35], any_pc_down_pct_max: 30}
   - id: battle
     name: Battle
-    targets: {win_pct_min: 90, rounds: [3, 5], party_hp_lost_pct: [35, 55], any_pc_down_pct_max: 70}
+    targets: {win_pct_min: 85, win_pct_max: 95, rounds: [3, 5], party_hp_lost_pct: [35, 55], any_pc_down_pct_max: 70}   # "85–95% with real risk" (balance pass)
   - id: desperate
     name: Desperate
     targets: {win_pct_min: 60, win_pct_max: 85, rounds: [4, 5], party_hp_lost_pct: [55, 90]}
 encounter_baseline: {party_size: 4, level: 4, party: reference_party}
+# The adventuring day the tables and the balance band assume (balance pass V34): three
+# Clashes, a short rest after the first and the second. A single fight gets a third of
+# each long-rest pool. Four Clashes with two short rests is a hard day (DESIGN §7).
+adventuring_day: {clashes: 3, short_rests_after: [1, 2]}
+# Threat budget per character (party of four), fitted by software/tools/d20_sim.py
 # Threat budget per character (party of four), fitted by software/tools/d20_sim.py
 # Threat budget per character (party of four), fitted by software/tools/d20_sim.py
 encounter_table:
   1:
-    skirmish: 8
-    clash: 13
-    battle: 16
-    desperate: 17
-  2:
-    skirmish: 11
-    clash: 17
-    battle: 20
+    skirmish: 10
+    clash: 16
+    battle: 19
     desperate: 23
+  2:
+    skirmish: 12
+    clash: 19
+    battle: 23
+    desperate: 27
   3:
-    skirmish: 15
-    clash: 23
-    battle: 28
-    desperate: 32
+    skirmish: 16
+    clash: 25
+    battle: 31
+    desperate: 34
   4:
-    skirmish: 17
-    clash: 27
-    battle: 33
-    desperate: 35
+    skirmish: 19
+    clash: 30
+    battle: 34
+    desperate: 41
   5:
-    skirmish: 32
-    clash: 46
-    battle: 55
-    desperate: 59
+    skirmish: 33
+    clash: 49
+    battle: 60
+    desperate: 68
   6:
-    skirmish: 32
-    clash: 48
-    battle: 58
-    desperate: 61
-  7:
-    skirmish: 39
-    clash: 55
-    battle: 67
+    skirmish: 34
+    clash: 52
+    battle: 63
     desperate: 71
+  7:
+    skirmish: 40
+    clash: 63
+    battle: 76
+    desperate: 84
   8:
-    skirmish: 45
-    clash: 60
-    battle: 73
-    desperate: 79
+    skirmish: 46
+    clash: 69
+    battle: 82
+    desperate: 94
   9:
-    skirmish: 58
-    clash: 82
-    battle: 104
-    desperate: 106
-  10:
-    skirmish: 60
-    clash: 83
+    skirmish: 62
+    clash: 91
     battle: 105
-    desperate: 109
+    desperate: 116
+  10:
+    skirmish: 66
+    clash: 95
+    battle: 110
+    desperate: 120
 encounter_adjustments:
   three_players:
-    clash_pct: -23
-    rule: remove foes worth 23% of the Threat
+    clash_pct: -26
+    rule: remove foes worth 26% of the Threat
     by_tier_pct:
-      skirmish: -26
-      clash: -23
-      battle: -26
-      desperate: -25
+      skirmish: -25
+      clash: -26
+      battle: -24
+      desperate: -23
   five_players:
-    clash_pct: 23
-    rule: add foes worth 23% of the Threat
+    clash_pct: 24
+    rule: add foes worth 24% of the Threat
     by_tier_pct:
-      skirmish: 23
-      clash: 23
-      battle: 19
-      desperate: 19
+      skirmish: 22
+      clash: 24
+      battle: 23
+      desperate: 20
   six_players:
-    clash_pct: 35
-    rule: add foes worth 35% of the Threat
+    clash_pct: 43
+    rule: add foes worth 43% of the Threat
     by_tier_pct:
       skirmish: 39
-      clash: 35
-      battle: 35
-      desperate: 33
+      clash: 43
+      battle: 41
+      desperate: 39
   tired:
-    clash_pct: -5
-    rule: remove 5% of the Threat, or drop one tier
+    clash_pct: -6
+    rule: remove 6% of the Threat, or drop one tier
     by_tier_pct:
-      skirmish: 3
-      clash: -5
-      battle: -10
-      desperate: -18
+      skirmish: 14
+      clash: -6
+      battle: -9
+      desperate: -19
 monster_threat:
   model:
     standard: sqrt(HP x damage per turn)
-    minion: sqrt(11.4 x damage per turn)
-    boss: standard x 2.22
-    never_breaks: x 1.17
+    minion: sqrt(10.5 x damage per turn)
+    boss: standard x 3.34
+    never_breaks: x 1.16
+    lone_boss: boss x 1.2 (V42; measured mark-up x1.20 median)
   by_cr:
     1/8:
       standard: 6
-      minion: 7
-      boss: 13
+      minion: 6
+      boss: 20
     1/4:
       standard: 8
-      minion: 8
-      boss: 18
+      minion: 7
+      boss: 27
     1/2:
       standard: 12
       minion: 9
-      boss: 26
+      boss: 39
     '1':
       standard: 18
       minion: 11
-      boss: 40
+      boss: 60
     '2':
       standard: 28
-      minion: 14
-      boss: 63
+      minion: 13
+      boss: 94
     '3':
       standard: 37
-      minion: 16
-      boss: 83
+      minion: 15
+      boss: 124
     '4':
       standard: 46
-      minion: 18
-      boss: 103
+      minion: 17
+      boss: 154
     '5':
       standard: 55
-      minion: 19
-      boss: 123
+      minion: 18
+      boss: 184
     '6':
       standard: 64
-      minion: 21
-      boss: 142
+      minion: 20
+      boss: 213
     '7':
       standard: 72
-      minion: 22
-      boss: 159
+      minion: 21
+      boss: 239
     '8':
       standard: 81
-      minion: 23
-      boss: 179
+      minion: 22
+      boss: 269
     '9':
       standard: 89
-      minion: 24
-      boss: 198
+      minion: 23
+      boss: 298
     '10':
       standard: 98
-      minion: 25
-      boss: 218
+      minion: 24
+      boss: 327
     '11':
       standard: 106
-      minion: 26
-      boss: 235
+      minion: 25
+      boss: 353
     '12':
       standard: 114
-      minion: 27
-      boss: 254
+      minion: 26
+      boss: 382

@@ -146,10 +146,22 @@ def cmd_encounters(a, results):
          "landed": A.classify(A.Outcome(**{k: o[k] for k in A.Outcome.__dataclass_fields__}), tiers)}
         for c, o, t in zip(calls, rob, [t for _ in parties for t in ("clash", "battle")])]
 
-    # 6. the day: four Clashes, two short rests, reference party, per level
-    calls = [(("fighter", "facets", L, table["ref4"][L]["clash"], model, 60 if q else 250,
-               sd("day", L)), {}) for L in LEVELS]
-    results["day"] = pmap(A.task_pi, calls, a.procs)
+    # 5b. a lone boss: the mark-up that makes the Clash budget buy a Clash, per level
+    calls = [((L, table["ref4"][L]["clash"], model, 150 if q else 400, sd("solo", L)), {})
+             for L in LEVELS]
+    so = pmap(A.task_solo_factor, calls, a.procs)
+    results["solo_boss"] = {"by_level": so,
+                            "factor": statistics.median(x["factor"] for x in so),
+                            "hp_lost_x1": statistics.fmean(x["hp_lost_x1"] for x in so)}
+
+    # 6. the day (yaml adventuring_day: three Clashes, two short rests) and, for comparison,
+    #    the hard day (four Clashes, short rests after the 1st and 3rd), reference party
+    nd = 100 if q else 500
+    calls = [((L, table["ref4"][L]["clash"], model, nd, sd("day", L)), {}) for L in LEVELS]
+    results["day"] = pmap(A.task_day, calls, a.procs)
+    calls = [((L, table["ref4"][L]["clash"], model, nd, sd("hardday", L)),
+              {"clashes": 4, "rests": (1, 3)}) for L in LEVELS]
+    results["hard_day"] = pmap(A.task_day, calls, a.procs)
     print(f"encounters done in {time.time()-t0:.0f}s", flush=True)
     return model
 
@@ -173,12 +185,13 @@ def cmd_balance(a, results, model=None):
     levels = D.load().raw["balance"]["levels"]
     builds = all_builds()
     t0 = time.time()
-    n_days, n_swap, n_dpr = (60, 60, 300) if q else (500, 200, 2000)
+    n_days, n_swap, n_dpr = (60, 60, 300) if q else (300, 250, 2000)
     calls = [((b, src, L, clash[L], model, n_days, sd("pi", b, L)), {})
              for b, src, _ in builds for L in levels]
     results["pi"] = pmap(A.task_pi, calls, a.procs)
     print(f"PI in {time.time()-t0:.0f}s", flush=True)
-    calls = [((b, src, L, clash[L], model, n_swap, sd("swap", b, L)), {})
+    # the swap test (primary): common random numbers — one seed per level for every build
+    calls = [((b, src, L, clash[L], model, n_swap, sd("swap", L)), {})
              for b, src, _ in builds for L in levels]
     results["swap"] = pmap(A.task_swap, calls, a.procs)
     calls = [((b, src, L, n_dpr, sd("dpr", b, L)), {}) for b, src, _ in builds for L in levels]
@@ -191,6 +204,14 @@ def cmd_balance(a, results, model=None):
 
 
 def band_verdicts(results):
+    """DESIGN v0.2 §8, balance pass (V32): the swap test is the primary measure.
+
+    Swap score = median preset HP lost per fight ÷ the build's − 1 (positive = the party
+    loses less with the build in it = stronger). Band: every preset and every sim build
+    within ±band_pct at each level; each Facet's preset mean within ±facet_band_pct;
+    hybrids (item 7) at or below their Facet's best pure build (+ swap_tolerance, the
+    sampling noise) and not beating the pure builds at their jobs (DPR₁ / DPR₃, +
+    job_tolerance). PI is reported as the secondary measure."""
     rs = D.load()
     bal = rs.raw["balance"]
     kinds = results["build_kinds"]
@@ -198,36 +219,40 @@ def band_verdicts(results):
     out = {}
     for L in bal["levels"]:
         rows = {r["build"]: r for r in results["pi"] if r["level"] == L}
-        presets = [b for b in rows if kinds[b] == "preset"]
-        med = statistics.median(rows[b]["pi"] for b in presets)
-        med_e = statistics.median(rows[b]["edpr"] for b in presets)
-        med_h = statistics.median(rows[b]["ehp"] for b in presets)
-        srd_med = statistics.median(rows[b]["pi"] for b in rows if kinds[b] == "srd")
-        v = {"median_pi": med, "srd_median_pi": srd_med, "presets": {}, "sim_builds": {},
+        sw = {r["build"]: r for r in results["swap"] if r["level"] == L}
+        presets = [b for b in sw if kinds[b] == "preset"]
+        med = statistics.median(sw[b]["hp_lost"] for b in presets)
+        med_pi = statistics.median(rows[b]["pi"] for b in presets)
+
+        def score(b):
+            return 100 * (med / sw[b]["hp_lost"] - 1)
+
+        def pi_pct(b):
+            return 100 * (rows[b]["pi"] / med_pi - 1)
+
+        srd = [b for b in sw if kinds[b] == "srd"]
+        srd_med = statistics.median(sw[b]["hp_lost"] for b in srd)
+        v = {"median_hp_lost": med, "median_pi": med_pi, "presets": {}, "sim_builds": {},
              "facets": {}, "srd": {}}
-        for b in presets:
-            r = rows[b]
-            v["presets"][b] = {"pi_pct": 100 * (r["pi"] / med - 1),
-                               "in_band": abs(r["pi"] / med - 1) <= bal["band_pct"] / 100,
-                               "edpr_pct": 100 * r["edpr"] / med_e, "ehp_pct": 100 * r["ehp"] / med_h,
-                               "role_ok": 50 <= 100 * r["edpr"] / med_e <= 200
-                               and 50 <= 100 * r["ehp"] / med_h <= 200}
+        for b in sw:
+            x = {"swap_pct": score(b), "pi_pct": pi_pct(b) if b in rows else None,
+                 "in_band": abs(score(b)) <= bal["band_pct"]}
+            if kinds[b] == "preset":
+                v["presets"][b] = x
+            elif kinds[b] == "sim_build":
+                v["sim_builds"][b] = x
+            else:
+                v["srd"][b] = x
         for f in ("body", "mind", "soul"):
-            m = statistics.fmean(rows[b]["pi"] for b in presets if facet_of[b] == f)
-            v["facets"][f] = {"pi_pct": 100 * (m / med - 1),
-                              "in_band": abs(m / med - 1) <= bal["facet_band_pct"] / 100}
-        for b in rows:
-            if kinds[b] == "sim_build":
-                p = 100 * (rows[b]["pi"] / med - 1)
-                v["sim_builds"][b] = {"pi_pct": p, "ok": p <= bal["combo_ceiling_pct"]}
-            if kinds[b] == "srd":
-                v["srd"][b] = {"pi_pct": 100 * (rows[b]["pi"] / med - 1)}
-        v["srd_ok"] = abs(med / srd_med - 1) <= bal["srd_band_pct"] / 100
-        v["srd_pct"] = 100 * (med / srd_med - 1)
-        # item 7 (Amendment 2): hybrids pay (DESIGN §8 item 7, balance.hybrid_rule)
+            m = statistics.fmean(score(b) for b in presets if facet_of[b] == f)
+            v["facets"][f] = {"swap_pct": m, "in_band": abs(m) <= bal["facet_band_pct"]}
+        # the SRD baselines' median build against the preset median (negative = SRD weaker)
+        v["srd_swap_pct"] = 100 * (med / srd_med - 1)
+        v["srd_pi_pct"] = 100 * (statistics.median(rows[b]["pi"] for b in srd) / med_pi - 1)
+        # item 7 (Amendment 2): hybrids pay
         roles = bal.get("roles") or {}
         rule = bal.get("hybrid_rule") or {}
-        pi_tol = 1 + rule.get("pi_tolerance_pct", 15) / 100
+        sw_tol = rule.get("swap_tolerance_pct", 0)
         job_tol = 1 + rule.get("job_tolerance_pct", 5) / 100
         dd = {r["build"]: r for r in results.get("dummy_dpr", []) if r["level"] == L}
         casters_of = bal.get("tradition_casters") or {}
@@ -237,15 +262,15 @@ def band_verdicts(results):
 
         v["hybrids"] = {}
         for facet, rr in roles.items():
-            pure = [b for b in as_list(rr.get("pure_martial")) + as_list(rr.get("pure_caster")) if b in rows]
+            pure = [b for b in as_list(rr.get("pure_martial")) + as_list(rr.get("pure_caster")) if b in sw]
             martial = [b for b in as_list(rr.get("pure_martial")) if b in dd]
             for h in as_list(rr.get("hybrids")):
-                if h not in rows or not pure:
+                if h not in sw or not pure:
                     continue
-                best_pi = max(rows[b]["pi"] for b in pure)
+                best = max(pure, key=score)
                 trad, main = _tradition_and_main(h, L)
                 tcasters = [b for b in as_list(casters_of.get(trad)) if b in dd]
-                chk = {"pi_vs_best_pure_pct": 100 * (rows[h]["pi"] / best_pi - 1),
+                chk = {"swap_vs_best_pure": score(h) - score(best), "best_pure": best,
                        "dpr1_vs_martial_pct": (100 * (dd[h]["dpr_1"] / max(dd[b]["dpr_1"] for b in martial) - 1)
                                                if martial and h in dd and main == "steel" else None),
                        "dpr3_vs_caster_pct": (100 * (dd[h]["dpr_3"] / max(dd[b]["dpr_3"] for b in tcasters) - 1)
@@ -253,21 +278,20 @@ def band_verdicts(results):
                        "tradition_caster": trad, "main": main}
                 applies = L >= rule.get("from_level", 4)
                 chk["ok"] = (not applies) or (
-                    rows[h]["pi"] <= best_pi * pi_tol
+                    chk["swap_vs_best_pure"] <= sw_tol
                     and (chk["dpr1_vs_martial_pct"] is None or chk["dpr1_vs_martial_pct"] <= 100 * (job_tol - 1))
                     and (chk["dpr3_vs_caster_pct"] is None or chk["dpr3_vs_caster_pct"] <= 100 * (job_tol - 1)))
                 v["hybrids"][h] = chk
-        # swap test agreement
-        sw = {r["build"]: r for r in results["swap"] if r["level"] == L}
-        pi_rank = sorted(rows, key=lambda b: -rows[b]["pi"])
-        sw_rank = sorted(sw, key=lambda b: (sw[b]["hp_lost"], sw[b]["rounds"]))
+        # PI (secondary) vs the swap test: rank agreement
+        both = [b for b in sw if b in rows]
+        pi_rank = sorted(both, key=lambda b: -rows[b]["pi"])
+        sw_rank = sorted(both, key=lambda b: sw[b]["hp_lost"])
         pos_pi = {b: i for i, b in enumerate(pi_rank)}
         pos_sw = {b: i for i, b in enumerate(sw_rank)}
-        n = len(pi_rank)
-        d2 = sum((pos_pi[b] - pos_sw[b]) ** 2 for b in pi_rank)
+        n = len(both)
+        d2 = sum((pos_pi[b] - pos_sw[b]) ** 2 for b in both)
         v["swap_spearman"] = 1 - 6 * d2 / (n * (n * n - 1))
-        v["swap_displaced"] = sorted(((b, pos_pi[b] + 1, pos_sw[b] + 1) for b in pi_rank
-                                      if abs(pos_pi[b] - pos_sw[b]) > 1), key=lambda x: x[1])
+        v["pi_band"] = {b: abs(pi_pct(b)) <= bal["band_pct"] for b in presets}
         out[L] = v
     return out
 
@@ -292,43 +316,51 @@ def write_report(results, args):
     lines = []
     w = lines.append
     model = results["calibration"]["model"]
+    day = {r["level"]: r for r in results["day"]}
+    hard = {r["level"]: r for r in results.get("hard_day", [])}
     w("# RESEARCH — Facets d20 simulation: encounter tables and the balance band")
     w("")
-    w(f"*Engine builder, generated by `software/tools/d20_sim.py all{' --quick' if args.quick else ''}` "
-      f"on {time.strftime('%Y-%m-%d')}. Rules: `software/facets_d20/` (every roll through "
-      "`combat.py`). Data: `facets_d20/data/*.yaml` v0.2, SRD ladder "
+    w(f"*Generated by `software/tools/d20_sim.py all{' --quick' if args.quick else ''}` "
+      f"on {time.strftime('%Y-%m-%d')} (balance pass). Rules: `software/facets_d20/` (every roll "
+      "through `combat.py`). Data: `facets_d20/data/*.yaml` v0.2, SRD ladder "
       "`software/facets_d20/data/srd_monsters.yaml`, SRD baselines "
       "`software/facets_d20/data/srd_baselines.yaml`. Base seed "
       f"{BASE_SEED}; each cell's seed is `crc32(repr((base, task key)))`, so any cell reruns "
-      "alone. Raw numbers: `software/research/facets_d20_sim_results.json`. Method and "
-      "decisions: `docs/DESIGN_facets_d20_engine.md`.*")
+      "alone. Raw numbers: `software/research/facets_d20_sim_results.json`. Method: "
+      "`docs/DESIGN_facets_d20_engine.md`; the tuning log: `docs/RESEARCH_facets_d20_balance.md`.*")
     w("")
     w("## Headline")
     w("")
     ev4 = results["evals"]["4:clash"]
-    day = {r["level"]: r for r in results["day"]}
     bv = results.get("band")
+    clash_rounds = [results["evals"][f"{L}:clash"]["rounds"] for L in LEVELS]
     w(f"- **Clash at 4th level** (budget {results['fits']['ref4'][4]['clash'] / 4:.0f} Threat per "
       f"character): {fmt(ev4['rounds'], 2)} ± {fmt(ev4['ci_rounds'], 2)} rounds, "
       f"{100 * ev4['hp_lost']:.0f}% party HP lost, {100 * ev4['win']:.1f}% wins, a PC drops in "
-      f"{100 * ev4['p_drop']:.0f}% of fights, a PC dies in {100 * ev4['p_death']:.1f}%.")
+      f"{100 * ev4['p_drop']:.0f}% of fights, a PC dies in {100 * ev4['p_death']:.1f}%. "
+      f"Clash length at 1st–10th: {min(clash_rounds):.1f}–{max(clash_rounds):.1f} rounds.")
     w(f"- **Threat model** (measured): a boss = {model['boss']:.2f} standards of its CR; a "
       f"minion carries √({model['minion_hp']:.1f} × its damage per turn); a foe that never breaks "
       f"× {model['never']:.2f}.")
-    w(f"- **A day of four Clashes** (two short rests) at 4th: the reference party survives it "
-      f"{100 * day[4]['days_survived']:.0f}% of the time.")
+    w(f"- **The adventuring day** (three Clashes, short rests after the 1st and 2nd): the "
+      f"reference party survives it {100 * min(d['survived'] for d in day.values()):.0f}–"
+      f"{100 * max(d['survived'] for d in day.values()):.0f}% of the time across 1st–10th"
+      + (f"; a hard day of four Clashes and two short rests: "
+         f"{100 * min(d['survived'] for d in hard.values()):.0f}–"
+         f"{100 * max(d['survived'] for d in hard.values()):.0f}%." if hard else "."))
     if bv:
         for L in sorted(bv):
             v = bv[L]
-            out_band = [b for b, x in v["presets"].items() if not x["in_band"]]
-            over = [b for b, x in v["sim_builds"].items() if not x["ok"]]
-            w(f"- **Balance, level {L}:** {12 - len(out_band)}/12 presets inside ±15% of the "
-              f"median PI" + (f" (out: {', '.join(out_band)})" if out_band else "")
-              + f"; preset median vs SRD median {v['srd_pct']:+.0f}%; combos over the ceiling: "
-              + (", ".join(over) if over else "none")
-              + (f"; hybrids beating a pure build: "
-                 + (", ".join(h for h, x in v.get("hybrids", {}).items() if not x["ok"]) or "none")
-                 if v.get("hybrids") else "") + ".")
+            out_p = [b for b, x in v["presets"].items() if not x["in_band"]]
+            out_s = [b for b, x in v["sim_builds"].items() if not x["in_band"]]
+            scores = [x["swap_pct"] for x in list(v["presets"].values()) + list(v["sim_builds"].values())]
+            w(f"- **Balance, level {L} (swap test):** {len(v['presets']) - len(out_p)}/"
+              f"{len(v['presets'])} presets and {len(v['sim_builds']) - len(out_s)}/"
+              f"{len(v['sim_builds'])} sim builds inside ±15% (range {min(scores):+.0f}% to "
+              f"{max(scores):+.0f}%)" + (f"; out: {', '.join(out_p + out_s)}" if out_p or out_s else "")
+              + "; hybrids above their Facet's best pure build: "
+              + (", ".join(h for h, x in v.get("hybrids", {}).items() if not x["ok"]) or "none")
+              + f"; the SRD baselines' median {v['srd_swap_pct']:+.0f}% vs the preset median.")
     w("")
     w("## 1. Method")
     w("")
@@ -337,14 +369,17 @@ def write_report(results, args):
       "boss resolve, fixed monster damage (crits rolled), minions, morale (standard foes at first "
       "Bloodied, minions when the leader falls), E1 one rider a turn, one reaction, concentration, "
       "death saves, Sparks as +1d6 after a roll. The tactical AI is documented in `sim.py`'s "
-      "docstring and is the same for every build.")
-    w("- **Resources.** A single fight gets ¼ of each long-rest pool (rounded up, plus any "
-      "short-rest regain) and all short-rest pools — one of the day's four Clashes. The day "
-      "runner carries HP, pools, Hit Dice and Sparks across four fights with short rests after "
-      "the 1st and 3rd, pacing pools evenly.")
-    w("- **Foes for fitting.** Continuous-CR generic foes: the SRD ladder's per-CR medians "
-      "(AC, HP, to-hit, damage per turn, saves), log-interpolated. Three shapes averaged: "
-      "four standards; a boss (60% of the Threat) + minions; two standards + minions.")
+      "docstring and is the same for every build; every foe attacks a random standing PC (§6.2).")
+    w("- **Resources.** A single fight gets ⅓ of each long-rest pool (rounded up, plus any "
+      "short-rest regain) and all short-rest pools — one of the day's three Clashes. The day "
+      "runner carries HP, pools, Hit Dice and Sparks across the day's fights with short rests "
+      "between them, pacing pools evenly.")
+    w("- **Foes for fitting.** Continuous-CR generic foes: a smooth fit over the SRD ladder "
+      "(AC, HP, to-hit, damage per turn, saves); the ladder's share of non-weapon damage "
+      "(about 15%) arrives as a separate strike, so resistances count. Three shapes averaged: "
+      "four standards; a boss (60% of the Threat) + minions; two standards + minions. Minions "
+      "are at most half the CR of a standard of the same budget (more of them, not a few "
+      "high-CR ones).")
     w("- **Tier targets** (yaml `encounter_tiers`). The search hits the middle of the tier's "
       "party-HP-lost band (Skirmish 10%, Clash 27.5%, Battle 45%); Desperate hits the middle of "
       "its win band (72.5%). Rounds, wins and drops are then checked against the rest of the "
@@ -363,7 +398,7 @@ def write_report(results, args):
         xs = results["calibration"]["anchors"][role]
         w(f"| {label} | " + " | ".join(fmt(x["value"], 2) for x in xs) + f" | {fmt(statistics.median(x['value'] for x in xs), 2)} |")
     w("")
-    w("**Table 9–2: Threat by CR** (SRD 5.2.1 ladder medians)")
+    w("**Table 9–2: Threat by CR** (SRD 5.2.1 ladder, smooth fit)")
     w("")
     w("| CR | Standard | Minion | Boss |")
     w("|---|---|---|---|")
@@ -380,7 +415,7 @@ def write_report(results, args):
         row = results["fits"]["ref4"][L]
         w(f"| {L} | " + " | ".join(str(round(row[t] / 4)) for t in A.TIERS) + " |")
     w("")
-    w("**Outcomes at the fitted budgets** (reference party; mean ± 95% CI; ✗ = misses a yaml target):")
+    w("**Outcomes at the fitted budgets** (reference party; mean ± 95% CI; misses a yaml target → named):")
     w("")
     w("| Level | Tier | Rounds | HP lost | Wins | PC drops | PC dies | Misses |")
     w("|---|---|---|---|---|---|---|---|")
@@ -395,7 +430,8 @@ def write_report(results, args):
     w("## 4. Composition classes (real SRD monsters)")
     w("")
     w("Share of random real-monster encounters built to the budget that land in the intended "
-      "tier (by party HP lost; ≥ 80% wanted, < 80% flagged ⚠):")
+      "tier (by party HP lost; ≥ 80% wanted, < 80% flagged ⚠). A solo boss is priced with "
+      "the boss column (see §5 for the solo-boss line).")
     w("")
     w("| Tier | " + " | ".join(A.COMPOSITION_CLASSES) + " |")
     w("|---|" + "---|" * len(A.COMPOSITION_CLASSES))
@@ -420,6 +456,14 @@ def write_report(results, args):
           + f" | {a_['rule']} |")
     w("")
     w("Percentages are the change in the whole encounter's Threat, averaged over levels 1–10.")
+    if results.get("solo_boss"):
+        sb = results["solo_boss"]
+        w("")
+        w(f"**Lone boss.** A boss with no other foes, priced at its boss Threat and built to the "
+          f"Clash budget, costs {100 * sb['hp_lost_x1']:.0f}% party HP on average (Clash band "
+          f"20–35%). The mark-up that makes it a Clash, by level: "
+          + ", ".join(f"{x['level']}: ×{x['factor']:.2f}" for x in sb["by_level"])
+          + f" (median ×{sb['factor']:.2f}).")
     w("")
     w("## 6. Robustness: 20 random parties")
     w("")
@@ -434,15 +478,17 @@ def write_report(results, args):
     w("")
     w("## 7. The adventuring day")
     w("")
-    w("| Level | Days survived (4 Clashes, 2 short rests) |")
-    w("|---|---|")
+    w("| Level | Standard day (3 Clashes, 2 short rests) | a PC dies | Hard day (4 Clashes, 2 short rests) |")
+    w("|---|---|---|---|")
     for L in LEVELS:
-        w(f"| {L} | {100 * day[L]['days_survived']:.0f}% |")
+        hd = hard.get(L)
+        w(f"| {L} | {100 * day[L]['survived']:.0f}% | {100 * day[L]['any_death']:.0f}% | "
+          + (f"{100 * hd['survived']:.0f}%" if hd else "—") + " |")
     w("")
     if "pi" in results:
         write_balance(results, w)
     w("")
-    w("## Findings for the Designer")
+    w("## Findings")
     w("")
     for f in results.get("findings", []):
         w(f"- {f}")
@@ -473,63 +519,64 @@ def target_misses(e, t):
 def write_balance(results, w):
     bv = results["band"]
     kinds = results["build_kinds"]
-    w("## 8. Balance band (§8)")
+    rs = D.load()
+    role_of = {}
+    for f, rr in (rs.raw["balance"].get("roles") or {}).items():
+        for k, v in rr.items():
+            for b in ([v] if isinstance(v, str) else v):
+                role_of[b] = f"{f} {k.replace('pure_', '')}".replace("hybrids", "hybrid")
+    w("## 8. Balance band (§8) — the swap test is primary")
     w("")
-    w("Metrics per build and level, over 500 standard days (2,000 Clashes) beside three "
-      "reference-party companions. **eDPR\\*** = (damage dealt + healing restored to allies + "
-      "enemy damage prevented for allies, incl. disabled enemy turns) ÷ rounds. **eHP** = (HP + "
-      "temp HP per fight + self-healing per fight) × (0.55 ÷ measured hit rate against it) × "
-      "(printed damage per hit ÷ damage actually taken per hit). **PI** = eDPR\\* × eHP. "
-      "DPR₁/DPR₃ = damage per round against one / three dummies (AC of the level's foes, 4 rounds).")
+    w("**Swap test** (primary, balance pass V32): the reference party (Fighter, Rogue, Wizard, "
+      "Priest) with the build swapped in for each member in turn plays standard days (three "
+      "Clashes at the level's Clash budget, short rests between); **HP lost** is the party's "
+      "share of hit points lost per fight, and **vs median** = the preset median ÷ the build's "
+      "− 1, so +10% means the party loses a tenth less with the build in it. Common random "
+      "numbers: every build at a level plays the same dice. Band: every preset and every sim "
+      "build within ±15%. **PI** (secondary) = eDPR\\* × eHP over the same days beside three "
+      "reference companions; **DPR₁/DPR₃** = damage per round against one / three dummies "
+      "(the martial and casting jobs of item 7).")
     w("")
     for L in sorted(bv, key=int):
         v = bv[L]
-        rows = sorted([r for r in results["pi"] if r["level"] == int(L)], key=lambda r: -r["pi"])
-        dd = {r["build"]: r for r in results["dummy_dpr"] if r["level"] == int(L)}
         sw = {r["build"]: r for r in results["swap"] if r["level"] == int(L)}
+        dd = {r["build"]: r for r in results["dummy_dpr"] if r["level"] == int(L)}
+        allx = {**v["presets"], **v["sim_builds"], **v["srd"]}
         w(f"### Level {L}")
         w("")
-        w("| Build | Kind | DPR₁ | DPR₃ | eDPR* | eHP | PI | vs median | Swap HP lost | Verdict |")
-        w("|---|---|---|---|---|---|---|---|---|---|")
-        for r in rows:
-            b = r["build"]
+        w("| Build | Kind | Role | Swap vs median | HP lost / fight | Rounds | Days survived | DPR₁ | DPR₃ | PI vs median | Verdict |")
+        w("|---|---|---|---|---|---|---|---|---|---|---|")
+        for b in sorted(sw, key=lambda b: sw[b]["hp_lost"]):
+            x = allx[b]
             k = kinds[b]
-            pct = 100 * (r["pi"] / v["median_pi"] - 1)
-            if k == "preset":
-                x = v["presets"][b]
-                verdict = ("in band" if x["in_band"] else "**out of band**") + \
-                          ("" if x["role_ok"] else "; **role**")
-            elif k == "sim_build":
-                verdict = "ok" if v["sim_builds"][b]["ok"] else "**over ceiling**"
-            else:
-                verdict = "SRD"
-            w(f"| {b} | {k} | {fmt(dd[b]['dpr_1'])} | {fmt(dd[b]['dpr_3'])} | {fmt(r['edpr'])} | "
-              f"{fmt(r['ehp'], 0)} | {fmt(r['pi'], 0)} | {pct:+.0f}% | "
-              f"{100 * sw[b]['hp_lost']:.1f}% | {verdict} |")
+            verdict = "SRD" if k == "srd" else ("in band" if x["in_band"] else "**out of band**")
+            w(f"| {b} | {k} | {role_of.get(b, '—')} | {x['swap_pct']:+.0f}% | "
+              f"{100 * sw[b]['hp_lost']:.1f}% | {fmt(sw[b]['rounds'], 2)} | "
+              f"{100 * sw[b]['days_survived']:.0f}% | {fmt(dd[b]['dpr_1'])} | {fmt(dd[b]['dpr_3'])} | "
+              + (f"{x['pi_pct']:+.0f}%" if x.get("pi_pct") is not None else "—") + f" | {verdict} |")
         w("")
-        w("Facet means vs the preset median: " + ", ".join(
-            f"{f} {x['pi_pct']:+.0f}%{'' if x['in_band'] else ' **(out)**'}" for f, x in v["facets"].items())
-          + f". Preset median vs SRD median: {v['srd_pct']:+.0f}% "
-          + ("(inside ±15%)." if v["srd_ok"] else "(**outside ±15%**)."))
+        w("Facet means (swap) vs the preset median: " + ", ".join(
+            f"{f} {x['swap_pct']:+.0f}%{'' if x['in_band'] else ' **(out)**'}" for f, x in v["facets"].items())
+          + f". SRD baselines' median vs the preset median: swap {v['srd_swap_pct']:+.0f}%, "
+          f"PI {v['srd_pi_pct']:+.0f}%.")
         if v.get("hybrids"):
             w("")
-            w("Hybrids (item 7, from 4th level): PI vs the Facet's best pure build (+15% allowed); "
-              "if Steel is main, DPR₁ vs the Facet's best pure martial (+5%); DPR₃ vs the best "
-              "pure caster of its tradition (+5%).")
+            w("Hybrids (item 7, from 4th level): swap score minus the Facet's best pure build's "
+              "(≤ +3 points, sampling noise); if Steel is main, DPR₁ vs the Facet's best pure martial "
+              "(+5%); DPR₃ vs the best pure caster of its tradition (+5%).")
             w("")
-            w("| Hybrid | PI vs best pure | DPR₁ vs pure martial | DPR₃ vs tradition's caster | Verdict |")
+            w("| Hybrid | Swap vs best pure | DPR₁ vs pure martial | DPR₃ vs tradition's caster | Verdict |")
             w("|---|---|---|---|---|")
             for h, x in v["hybrids"].items():
                 def pc_(y):
                     return "—" if y is None else f"{y:+.0f}%"
-                w(f"| {h} ({x['main'] or '—'} main) | {pc_(x['pi_vs_best_pure_pct'])} | "
+                w(f"| {h} ({x['main'] or '—'} main) | {x['swap_vs_best_pure']:+.0f} pts ({x['best_pure']}) | "
                   f"{pc_(x['dpr1_vs_martial_pct'])} | "
                   f"{pc_(x['dpr3_vs_caster_pct'])} ({x['tradition_caster'] or '—'}) | "
                   f"{'ok' if x['ok'] else '**beats a pure build**'} |")
             w("")
-        w(f"Swap test vs PI rank: Spearman {v['swap_spearman']:.2f}; displaced by more than one "
-          "place: " + (", ".join(f"{b} (PI #{a}, swap #{c})" for b, a, c in v["swap_displaced"])
-                       or "none") + ".")
+        w(f"PI (secondary) vs the swap test, rank agreement: Spearman {v['swap_spearman']:.2f}. "
+          f"Presets inside ±15% on PI: {sum(v['pi_band'].values())}/{len(v['pi_band'])}.")
         w("")
 
 
@@ -566,7 +613,9 @@ def write_yaml(results):
     mt = {"model": {"standard": "sqrt(HP x damage per turn)",
                     "minion": f"sqrt({model['minion_hp']:.1f} x damage per turn)",
                     "boss": f"standard x {model['boss']:.2f}",
-                    "never_breaks": f"x {model['never']:.2f}"},
+                    "never_breaks": f"x {model['never']:.2f}",
+                    "lone_boss": "boss x 1.2 (V42; measured mark-up "
+                                 + (f"x{results['solo_boss']['factor']:.2f} median)" if results.get("solo_boss") else "pending)")},
           "by_cr": results["monster_threat"]}
     blocks = {
         "encounter_table": "# Threat budget per character (party of four), fitted by software/tools/d20_sim.py\n"
@@ -592,6 +641,31 @@ def write_yaml(results):
     YAML.write_text("\n".join(out), encoding="utf-8")
 
 
+def findings(results):
+    """Short, generated findings; the tuning narrative is docs/RESEARCH_facets_d20_balance.md."""
+    tiers = A.tiers_spec()
+    out = []
+    for t in A.TIERS:
+        rr = [results["evals"][f"{L}:{t}"] for L in LEVELS]
+        miss = sorted({m for L, e in zip(LEVELS, rr) for m in target_misses(e, tiers[t]["targets"])})
+        out.append(f"**{t.title()}**: {min(e['rounds'] for e in rr):.2f}–{max(e['rounds'] for e in rr):.2f} "
+                   f"rounds, {100 * min(e['hp_lost'] for e in rr):.0f}–{100 * max(e['hp_lost'] for e in rr):.0f}% "
+                   f"HP lost, {100 * min(e['win'] for e in rr):.0f}–{100 * max(e['win'] for e in rr):.0f}% wins "
+                   f"across 1st–10th" + (f"; yaml targets missed somewhere: {', '.join(miss)}." if miss else "; every yaml target met."))
+    day = results["day"]
+    out.append(f"**Day**: the reference party survives the standard day "
+               f"{100 * min(d['survived'] for d in day):.0f}–{100 * max(d['survived'] for d in day):.0f}% of the time.")
+    if results.get("band"):
+        bad = [(L, b) for L, v in results["band"].items()
+               for b, x in list(v["presets"].items()) + list(v["sim_builds"].items()) if not x["in_band"]]
+        hyb = [(L, h) for L, v in results["band"].items() for h, x in v["hybrids"].items() if not x["ok"]]
+        out.append("**Band (swap test)**: " + ("every preset and sim build within ±15% at 1st, 4th, 7th and 10th"
+                   if not bad else "outside ±15%: " + ", ".join(f"{b} (L{L})" for L, b in bad)) + "; "
+                   + ("every hybrid at or below its Facet's best pure build and under the pure builds' jobs."
+                      if not hyb else "hybrid checks failing: " + ", ".join(f"{h} (L{L})" for L, h in hyb)))
+    return out
+
+
 def cmd_all(a):
     results = {"base_seed": BASE_SEED, "quick": a.quick}
     model = cmd_encounters(a, results)
@@ -601,7 +675,7 @@ def cmd_all(a):
     if not a.skip_balance:
         cmd_balance(a, results, model)
         results["band"] = band_verdicts(results)
-    results["findings"] = results.get("findings", [])
+    results["findings"] = findings(results)
     RESULTS.write_text(json.dumps(results, indent=1, default=str))
     write_report(results, a)
     if a.write:

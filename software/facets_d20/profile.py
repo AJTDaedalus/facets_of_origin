@@ -106,8 +106,10 @@ class CombatProfile:
     # Mind
     study: Optional[Uses] = None            # Study: bonus action, advantage on next attack
     crit_min_studied: int = 20
+    studied_damage_bonus: int = 0           # Anatomist: + to weapon damage vs your studied target
     anticipate: bool = False
     master_plan: Optional[Uses] = None
+    master_plan_rounds: int = 1             # the plan holds for the first N rounds
     guard: Optional[dict] = None            # Clockwork Guardian {"dice", "bonus"}
     field_kit: Optional[dict] = None        # {"amount", "allies"}
     # Soul

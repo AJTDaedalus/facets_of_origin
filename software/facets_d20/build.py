@@ -18,6 +18,8 @@ from . import data as _data
 from .dice import Dice
 from .profile import CasterProfile, CombatProfile, Rider, Uses, Weapon
 
+HP_FIRST = _data.HP_FIRST_RULES
+
 ABILITIES = _data.ABILITIES
 
 
@@ -860,7 +862,8 @@ def build(rs, picks: Picks) -> Character:
         casting_ability = resolve_casting_ability(spec or tdef.get("ability"), picks.abilities)
     ctx = _ctx(lv, pb, mods, casting_ability, tradition)
 
-    # ---- hit points: hit die + Con at 1st, then half die + 1 + Con per level (fixed)
+    # ---- hit points: hit die + Con at 1st (Facets d20: hit die + 8 + Con, V35), then
+    #      half die + 1 + Con per level (fixed)
     hd = int(facet["hit_die"])
     if picks.facet in (path.get("applies_hit_die_step_to") or []):
         hd += 2 * int(path.get("hit_die_step", 0))
@@ -868,7 +871,9 @@ def build(rs, picks: Picks) -> Character:
         if e["type"] == "hit_die_step":
             hd += 2 * eval_int(e.get("value", 1), ctx)
     hd = min(hd, int(rs.build_rules.get("max_hit_die", 12)))
-    hp = hd + mods["con"] + (lv - 1) * (hd // 2 + 1 + mods["con"])
+    dice, flat = HP_FIRST[rs.advancement.get("hp_first", "hit_die_plus_con")]
+    first = dice * hd + flat
+    hp = first + mods["con"] + (lv - 1) * (hd // 2 + 1 + mods["con"])
     for _, e in effects:
         if e["type"] == "hp_per_level":
             hp += eval_int(e.get("value", 1), ctx) * lv
@@ -1141,6 +1146,8 @@ def _apply_effect(p: CombatProfile, ch: Character, src: str, e: dict, ctx: Ctx) 
             p.caster.spell_damage_bonus = eval_int(e.get("value", 0), ctx)
         elif e.get("applies") == "cantrip" and p.caster:
             p.caster.cantrip_damage_bonus = eval_int(e.get("value", 0), ctx)
+        elif "studied_target" in conds:
+            p.studied_damage_bonus = eval_int(e.get("value", 0), ctx)
     elif t == "attack_bonus" or t == "crit_range":
         if t == "crit_range" and "studied_target" in conds:
             p.crit_min_studied = min(p.crit_min_studied, int(e.get("min", 20)))
@@ -1226,6 +1233,7 @@ def _apply_effect(p: CombatProfile, ch: Character, src: str, e: dict, ctx: Ctx) 
             p.aim = True
         elif "first_round" in conds:
             p.master_plan = _uses(ch, e, ctx)
+            p.master_plan_rounds = int(e.get("rounds", 1))
     elif t == "impose_disadvantage":
         p.anticipate = True
     elif t == "companion":

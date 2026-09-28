@@ -156,6 +156,11 @@ def _index(entries, kind: str) -> dict:
     return out
 
 
+# advancement.hp_first: 1st-level hit points = dice x hit die maximum + flat + Con modifier.
+# The SRD's hit die + Con, and Facets d20's (balance pass V35): hit die + 8 + Con.
+HP_FIRST_RULES = {"hit_die_plus_con": (1, 0), "hit_die_plus_eight_plus_con": (1, 8)}
+
+
 def from_dicts(raw: dict, spells_raw: dict) -> Ruleset:
     """Build and validate a Ruleset from already-parsed yaml (tests use this)."""
     if str(raw.get("version")) != "0.2":
@@ -163,6 +168,9 @@ def from_dicts(raw: dict, spells_raw: dict) -> Ruleset:
     for key in ("proficiency_bonus", "advancement", "facets", "talents"):
         if key not in raw:
             raise DataError(f"facets_d20.yaml: missing top-level {key!r}")
+    hp_first = raw["advancement"].get("hp_first", "hit_die_plus_con")
+    if hp_first not in HP_FIRST_RULES:
+        raise DataError(f"advancement.hp_first: unknown rule {hp_first!r}")
     rs = Ruleset(raw=raw, spells_raw=spells_raw)
     rs.facets = dict(raw["facets"])
     rs.paths = dict(raw.get("paths") or {})

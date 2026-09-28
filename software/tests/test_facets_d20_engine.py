@@ -616,6 +616,19 @@ class TestConversion:
         c = monsters.convert("ogre", role="boss")
         assert c.role == "boss" and combat.turns_per_phase(c) == 2
 
+    def test_boss_hit_points_multiplier(self):
+        # Balance pass V37: a boss has twice its stat block's hit points (MM rule).
+        ogre = monsters.get("ogre").hp
+        assert monsters.convert("ogre", role="boss", hp_multiplier=2).max_hp == 2 * ogre
+        assert monsters.convert("ogre", role="standard", hp_multiplier=2).max_hp == ogre
+        assert monsters.convert("ogre", role="minion", hp_multiplier=2).max_hp == 1
+
+    def test_the_fight_doubles_a_boss(self):
+        assert RuleOptions().boss_hp_multiplier == 2
+        f = S.Fight(random.Random(1), [], S.Encounter.of(S.FoeSpec("ogre", role="boss")),
+                    RuleOptions(), 1.0)
+        assert f.foes[0].max_hp == f.foes[0].hp == 2 * monsters.get("ogre").hp
+
     def test_bad_role(self):
         with pytest.raises(ValueError):
             monsters.convert("ogre", role="champion")
@@ -957,6 +970,35 @@ class TestComputedNumbers:
         assert prof.healer and prof.caster.heal_boost
 
 
+class TestFirstLevelHitPoints:
+    """advancement.hp_first (balance pass, DESIGN v0.2 V35): the SRD's hit die + Con, or
+    Facets d20's hit die + 8 + Con at 1st. Later levels are unchanged."""
+
+    def _rs(self, rule):
+        raw = copy.deepcopy(MINI)
+        raw["advancement"]["hp_first"] = rule
+        return D.from_dicts(raw, copy.deepcopy(MINI_SPELLS))
+
+    def test_default_is_the_srd(self, mini):
+        assert B.build(mini, fighter(1)).hp == 12                  # d10 + Con 2
+
+    def test_eight_more_at_first(self):
+        assert B.build(self._rs("hit_die_plus_eight_plus_con"), fighter(1)).hp == 20   # 10 + 8 + 2
+
+    def test_later_levels_add_the_same(self):
+        rs = self._rs("hit_die_plus_eight_plus_con")
+        assert B.build(rs, fighter(4)).hp == 21 + 3 * (5 + 1 + 3)  # Con 16 at 4th: 48
+
+    def test_the_d6_gains_as_much_as_the_d10(self):
+        rs, srd = self._rs("hit_die_plus_eight_plus_con"), D.from_dicts(copy.deepcopy(MINI), copy.deepcopy(MINI_SPELLS))
+        gain = [B.build(rs, fighter(1)).hp - B.build(srd, fighter(1)).hp]
+        assert gain == [8]
+
+    def test_unknown_rule_is_a_load_error(self):
+        with pytest.raises(D.DataError):
+            self._rs("roll_for_it")
+
+
 class TestLegality:
     def _errs(self, mini, p):
         with pytest.raises(B.BuildError) as ei:
@@ -1171,6 +1213,242 @@ class TestRidersThroughTheSim:
         assert f.damage_by_pc[me.id] == 7
 
 
+class TestStudyOnSpellAttacks:
+    """Mind's Study: "your next attack roll ... against it this turn has advantage" — a
+    spell attack roll too (balance pass: the sim only applied it to weapon attacks)."""
+
+    def _caster(self):
+        from facets_d20.profile import CasterProfile
+        from facets_d20.dice import Dice as Dc
+        cst = CasterProfile(tradition="thaumaturgy", kind="full", ability="int", mod=3,
+                            attack=5, dc=13, slots=[2], cantrips=["Fire Bolt"])
+        return CombatProfile(name="w", level=1, prof=2, hp=14, ac=12, saves={}, dex_mod=2,
+                             weapon=Weapon("quarterstaff", Dc(1, 6), 1, -1),
+                             study=combat_uses(2), caster=cst)
+
+    def test_studied_target_gives_the_spell_attack_advantage(self):
+        f, me, foe = _dummy_fight(self._caster(), [], ac=15)
+        f.state[me.id].studied = foe
+        f._turns[me.id] = {"study_adv": True}
+        f.rng = Script([3, 15, 5])            # advantage: 3 and 15 -> 15 + 5 hits AC 15; d10 = 5
+        f.cast_attack(me, f._spell("Fire Bolt"), 0, foe)
+        assert f.damage_by_pc[me.id] == 5
+
+    def test_without_study_one_die(self):
+        f, me, foe = _dummy_fight(self._caster(), [], ac=15)
+        f._turns[me.id] = {}
+        f.rng = Script([3])                   # 3 + 5 misses
+        f.cast_attack(me, f._spell("Fire Bolt"), 0, foe)
+        assert f.damage_by_pc[me.id] == 0
+
+    def test_the_advantage_is_spent_once(self):
+        f, me, foe = _dummy_fight(self._caster(), [], ac=15)
+        f.state[me.id].studied = foe
+        f._turns[me.id] = {"study_adv": True}
+        f.rng = Script([3, 15, 5, 3])
+        f.cast_attack(me, f._spell("Fire Bolt"), 0, foe)
+        f.cast_attack(me, f._spell("Fire Bolt"), 0, foe)   # second roll: one die, 3 misses
+        assert f.damage_by_pc[me.id] == 5
+
+
+def combat_uses(n):
+    from facets_d20.profile import Uses
+    return Uses(n, "short")
+
+
+class TestAreaSpellsOnlyWhenTheyBeatTheAttack:
+    """S-5 policy (take the highest expected-value option): a hybrid with a strong Attack
+    action doesn't spend its action on an area spell that would do less (balance pass)."""
+
+    def _fight(self, weapon, dc):
+        from facets_d20.monsters import MonsterBlock
+        from facets_d20.profile import CasterProfile
+        cst = CasterProfile(tradition="invocation", kind="half", ability="wis", mod=0,
+                            attack=2, dc=dc, slots=[2], spells=["Burning Hands"])
+        prof = CombatProfile(name="h", level=5, prof=3, hp=40, ac=18, saves={}, dex_mod=0,
+                             weapon=weapon, attacks_per_action=2, caster=cst)
+        dummy = MonsterBlock("dummy", "Dummy", Fraction(0), 12, 10_000, (),
+                             {"str": 0, "dex": 0, "con": 0, "int": 0, "wis": 0, "cha": 0},
+                             morale="never", source="engine")
+        f = S.Fight(random.Random(1), [prof], S.Encounter.of(S.FoeSpec(dummy, count=3)),
+                    RuleOptions(), 1.0)
+        f.setup()
+        return f, f.pcs[0]
+
+    def test_strong_attack_beats_a_weak_area_spell(self):
+        f, me = self._fight(Weapon("longsword", Dice(1, 8), 10, 5), dc=8)
+        f.take_action(me, {})
+        assert f.state[me.id].slots == [2]           # no slot spent: it attacked
+
+    def test_without_a_weapon_it_casts(self):
+        f, me = self._fight(None, dc=15)
+        f.take_action(me, {})
+        assert f.state[me.id].slots == [1]
+
+    def test_attack_ev_counts_what_the_attack_really_does(self):
+        # rapier d8+3 at +5 vs AC 15: p = 0.55, crit 0.05; one attack; studied: +2 a hit and
+        # advantage from Study this turn: p = 1 - 0.45^2 = 0.7975, crit 1 - 0.95^2 = 0.0975.
+        prof = CombatProfile(name="i", level=4, prof=2, hp=30, ac=15, saves={}, dex_mod=3,
+                             weapon=Weapon("rapier", Dice(1, 8), 5, 3, "piercing", finesse=True),
+                             studied_damage_bonus=2,
+                             riders=[Rider("precision", Dice(1, 6), frozenset({"studied_target"}),
+                                           frozenset({"finesse"}))])
+        f, me, foe = _dummy_fight(prof, [], ac=15)
+        plain = 0.55 * 7.5 + 0.05 * 4.5 + 0.55 * 3.5
+        assert f.attack_ev(me, foe) == pytest.approx(plain)
+        f.state[me.id].studied = foe
+        studied = 0.7975 * 9.5 + 0.0975 * 4.5 + 0.7975 * 3.5
+        assert f.attack_ev(me, foe, {"study_adv": True}) == pytest.approx(studied)
+
+    def _boss_fight(self, weapon):
+        from facets_d20.monsters import MonsterBlock
+        from facets_d20.profile import CasterProfile
+        cst = CasterProfile(tradition="thaumaturgy", kind="half", ability="int", mod=0,
+                            attack=2, dc=12, slots=[0, 0, 2], spells=["Hypnotic Pattern"])
+        prof = CombatProfile(name="h", level=5, prof=3, hp=40, ac=18, saves={}, dex_mod=0,
+                             weapon=weapon, attacks_per_action=2, caster=cst)
+        boss = MonsterBlock("weak_boss", "Weak Boss", Fraction(1), 12, 200,
+                            (combat.MonsterAttack("Poke", 3, 2),),
+                            {"str": 0, "dex": 0, "con": 0, "int": 0, "wis": 0, "cha": 0},
+                            morale="never", source="engine")
+        f = S.Fight(random.Random(1), [prof], S.Encounter.of(S.FoeSpec(boss, role="boss")),
+                    RuleOptions(), 1.0)
+        f.setup()
+        return f, f.pcs[0]
+
+    def test_no_disable_when_the_attack_is_worth_more(self):
+        f, me = self._boss_fight(Weapon("longsword", Dice(1, 8), 10, 5))
+        f.take_action(me, {})
+        assert f.state[me.id].slots == [0, 0, 2] and me.concentrating is None
+
+    def test_a_caster_without_a_weapon_still_disables(self):
+        f, me = self._boss_fight(None)
+        f.take_action(me, {})
+        assert f.state[me.id].slots == [0, 0, 1]
+
+
+class TestStudiedTargetDamageAndPlanRounds:
+    """Balance pass: a flat damage bonus against your studied target (Anatomist), and a
+    Master Plan that holds for more than the first round (``rounds``)."""
+
+    def test_profile_reads_the_studied_damage_bonus(self, rs):
+        prof = B.build(rs, B.Picks.from_preset(rs, "investigator", 5)).profile()
+        assert prof.studied_damage_bonus == 2           # Int 15: +2
+
+    def test_bonus_only_against_the_studied_target(self):
+        prof = CombatProfile(name="i", level=5, prof=3, hp=30, ac=15, saves={}, dex_mod=3,
+                             weapon=Weapon("rapier", Dice(1, 8), 20, 3, "piercing", finesse=True),
+                             studied_damage_bonus=2)
+        f, me, foe = _dummy_fight(prof, [])
+        f.rng = Script([15, 4])
+        f.weapon_attack(me, foe, prof.weapon, attack_action=True, turn={})
+        assert f.damage_by_pc[me.id] == 7                # 4 + 3, not studied
+        f.state[me.id].studied = foe
+        f.rng = Script([15, 4])
+        f.weapon_attack(me, foe, prof.weapon, attack_action=True, turn={})
+        assert f.damage_by_pc[me.id] == 7 + 9            # 4 + 3 + 2
+
+    def test_master_plan_rounds_from_the_data(self, rs):
+        lo = B.build(rs, B.Picks.from_preset(rs, "loremaster", 5)).profile()
+        assert lo.master_plan_rounds == 2
+
+    def test_plan_holds_for_its_rounds(self):
+        prof = CombatProfile(name="p", level=5, prof=3, hp=30, ac=15, saves={}, dex_mod=0,
+                             weapon=Weapon("club", Dice(1, 4), 4, 2), master_plan_rounds=2)
+        f, me, foe = _dummy_fight(prof, [])
+        f._plan, f._plan_rounds = True, 2
+        assert [f.plan_active() for f.round in (1, 2, 3)] == [True, True, False]
+
+
+class TestE9MainTrackAbility:
+    """E-9 (balance pass, V33): the 4th/8th-level +2 goes to the ability the main track
+    uses — the casting ability when Spell is main, otherwise the main weapon's. Every
+    preset card prints its picks, and they agree with the engine's rule."""
+
+    def test_presets_pin_their_picks(self, rs):
+        assert all(rs.presets[p].get("asi") for p in rs.presets)
+
+    def test_pinned_picks_are_the_engine_rule(self, rs):
+        for pid, entry in rs.presets.items():
+            bare = dict(entry)
+            bare.pop("asi")
+            picks = B.Picks.from_entry(rs, bare, 10)
+            assert B.asi_choices(rs, picks) == {int(k): v for k, v in entry["asi"].items()}, pid
+
+    def test_steel_main_hybrid_raises_its_weapon_ability(self, rs):
+        assert rs.presets["oathsworn"]["asi"][4] == {"plus2": "str"}
+        assert rs.presets["tinker"]["asi"][4] == {"plus2": "dex"}
+
+
+class TestUpgradeDepthV28:
+    """V28 (kept by the balance pass, which tried and dropped a 9th-level depth of 2): a
+    tracked talent's 9th-level line needs three talents of its track."""
+
+    def test_two_steel_talents_stop_at_the_fifth_level_line(self, rs):
+        prof = _levels(rs, "oathsworn", 9).profile()          # Steel 2 · Spell 1
+        sworn = next(r for r in prof.riders if r.name == "sworn_strike")
+        assert (sworn.dice.count, sworn.dice.sides) == (3, 8)
+
+    def test_a_one_talent_dip_never_grows(self, rs):
+        prof = _levels(rs, "armored_caster", 10).profile()    # Weapon Expert is its only Steel talent
+        assert prof.crit_heal == 0 and prof.weapon.crit_min == 20
+
+
+class TestClockworkGuardReach:
+    """Clockwork Guardian: the Guard only covers an ally within 5 feet of the construct.
+    The sim has no map, so the construct stands beside one ally (its ward), chosen when
+    it acts right after its maker: the standing PC with the lowest share of its HP."""
+
+    def _party(self):
+        from facets_d20.monsters import MonsterBlock
+        tinker = CombatProfile(name="tinker", level=4, prof=2, hp=30, ac=18, saves={}, dex_mod=2,
+                               weapon=Weapon("rapier", Dice(1, 8), 5, 2, "piercing", finesse=True),
+                               guard={"dice": Dice(1, 8), "bonus": 3})
+        a = CombatProfile(name="a", level=4, prof=2, hp=30, ac=15, saves={}, dex_mod=0,
+                          weapon=Weapon("club", Dice(1, 4), 4, 2))
+        b = CombatProfile(name="b", level=4, prof=2, hp=30, ac=15, saves={}, dex_mod=0,
+                          weapon=Weapon("club", Dice(1, 4), 4, 2))
+        brute = MonsterBlock("brute", "Brute", Fraction(1), 12, 200,
+                             (combat.MonsterAttack("Club", 5, 10),),
+                             {"str": 0, "dex": 0, "con": 0, "int": 0, "wis": 0, "cha": 0},
+                             morale="never", source="engine")
+        f = S.Fight(Script([]), [tinker, a, b], S.Encounter.of(S.FoeSpec(brute)), RuleOptions(), 1.0)
+        return f
+
+    def test_no_guard_before_the_construct_acts(self):
+        f = self._party()
+        f.round = 1
+        f.rng = Script([15])                       # d20 15 + 5 hits AC 15
+        f.foe_attack(f.foes[0], f.pcs[1], f.foes[0].attacks[0])
+        assert f.pcs[1].hp == 20
+
+    def test_guard_covers_only_its_ward(self):
+        f = self._party()
+        f.round = 1
+        f.pcs[2].hp = 12                           # b is the most hurt: the ward
+        f.guard_step(f.pcs[0])
+        assert f.guard_ward[f.pcs[0].id] == f.pcs[2].id
+        f.rng = Script([15])                       # hit on a, not the ward: full 10
+        f.foe_attack(f.foes[0], f.pcs[1], f.foes[0].attacks[0])
+        assert f.pcs[1].hp == 20
+        f.rng = Script([15, 4])                    # hit on b, the ward: 10 − (4 + 3) = 3
+        f.foe_attack(f.foes[0], f.pcs[2], f.foes[0].attacks[0])
+        assert f.pcs[2].hp == 9
+
+    def test_guard_is_the_first_hit_only_until_the_makers_next_turn(self):
+        f = self._party()
+        f.round = 1
+        f.pcs[2].hp = 12
+        f.guard_step(f.pcs[0])
+        f.rng = Script([15, 4, 15])
+        f.foe_attack(f.foes[0], f.pcs[2], f.foes[0].attacks[0])   # 3 damage (guarded)
+        f.foe_attack(f.foes[0], f.pcs[2], f.foes[0].attacks[0])   # 10 damage
+        assert f.pcs[2].hp == 12 - 3 - 10 or f.pcs[2].state != "active"
+        f.round = 2
+        f.guard_step(f.pcs[0])                      # the construct acts again: guard back
+        assert f.guard_ready[f.pcs[0].id]
+
+
 # ================================================================ V21 ability picks and Amendment 2 (no paths)
 
 
@@ -1298,49 +1576,55 @@ from facets_d20 import spells as SP  # noqa: E402
 # depth 3. Casting: Spell depth 1 half, depth 2 full (main track only). Re-derive when a
 # preset changes.
 PRESET_NUMBERS = {
-    # Body d10, Con +2. Steel: Weapon Expert 1, Guardian 3, Cleave 5 (depth 3 → Hardened
+    # 1st-level HP = hit die + 8 + Con (V35), then half die + 1 + Con a level.
+    # Body d10, Con +2. Steel: Weapon Expert 1, Guardian 3, Cleave 5 (depth 3 → Veteran
     # +1 HP/level; depth 2 → Extra Attack at 5th). Hardy 7 → d12. Str 16→18→20.
-    # L7: 12+2+6×(7+2)=68, +7 = 75. L10: 14+9×9=95, +10 = 105. Chain mail+shield+1 = 19.
-    "fighter": {1: (12, 19, 6, None, []), 4: (36, 19, 7, None, []),
-                7: (75, 19, 8, None, []), 10: (105, 19, 10, None, [])},
+    # L1: 10+8+2 = 20. L4: 20+3×8 = 44. L7: 12+8+2 + 6×9 = 76, +7 = 83. L10: 22+9×9 = 103, +10 = 113.
+    # Chain mail + shield + Weapon Expert = 19.
+    "fighter": {1: (20, 19, 6, None, []), 4: (44, 19, 7, None, []),
+                7: (83, 19, 8, None, []), 10: (113, 19, 10, None, [])},
     # Steel: Precision 1, Marksman 5, Weapon Expert 7 (+1 hit, +1 AC in leather). Dex 16→20.
-    "rogue": {1: (12, 14, 5, None, []), 4: (36, 15, 6, None, []),
-              7: (67, 16, 8, None, []), 10: (94, 17, 10, None, [])},
-    # Steel: Rage 1, Cleave 5, Guardian 7; Hardy 3 → d12. AC 10+Dex+Con.
-    "barbarian": {1: (12, 14, 5, None, []), 4: (41, 14, 6, None, []),
-                  7: (75, 14, 7, None, []), 10: (105, 14, 9, None, [])},
-    # Steel: Martial Arts 1, Weapon Expert 5 (depth 2). Hardy 9 → d12. AC 10+Dex+Wis.
-    "monk": {1: (12, 15, 5, None, []), 4: (36, 16, 6, None, []),
-             7: (60, 16, 8, None, []), 10: (95, 17, 10, None, [])},
-    # Mind d6, Con +2. Spell: Evoker 1 (half), Wider Study 3 (full), Turn the Odds 5
-    # (Deep Magic). Hardy 9 → d8. Int 16→18→20. Quarterstaff Str −1.
-    "wizard": {1: (8, 12, 1, 13, [2]), 4: (26, 12, 1, 14, [4, 3]),
-               7: (44, 12, 2, 15, [4, 3, 3, 1]), 10: (73, 12, 3, 17, [4, 3, 3, 3, 2])},
-    # Steel main from 1st: Martial Training (d6→d8, medium armor, shields, martial).
-    # Precision 1, Anatomist 5, Weapon Expert 9 (depth 3: Hardened). Hardy 7 → d10.
-    "investigator": {1: (9, 17, 5, None, []), 4: (27, 17, 6, None, []),
-                     7: (53, 17, 7, None, []), 10: (84, 18, 10, None, [])},
-    # Spell: Turn the Odds 1, Wider Study 3 (full). Con +1. Dagger Dex +1.
-    "loremaster": {1: (7, 12, 3, 13, [2]), 4: (22, 12, 3, 14, [4, 3]),
-                   7: (37, 12, 4, 15, [4, 3, 3, 1]), 10: (52, 12, 5, 17, [4, 3, 3, 3, 2])},
-    # Spell 1 at 1st (half); Weapon Expert 3 makes a 1/1 tie → Steel main (d8, medium
-    # armor, shields) with half casting. Kit from 3rd: breastplate+shield+1 = 19, rapier.
-    # Steel main → V21 default +2 Dex (15→17→19). Hardy 7 → d10. Int stays 16.
-    "tinker": {1: (7, 13, 4, 13, [2]), 4: (27, 19, 6, 13, [3]),
-               7: (53, 19, 7, 14, [4, 3]), 10: (74, 19, 9, 15, [4, 3, 2])},
-    # Soul d8, Con +2. Spell: Channel 1, Wider Study 3, Mending Hands 5. Hardy 9 → d10.
-    "priest": {1: (10, 16, 3, 13, [2]), 4: (31, 16, 3, 14, [4, 3]),
-               7: (52, 16, 4, 15, [4, 3, 3, 1]), 10: (84, 16, 5, 17, [4, 3, 3, 3, 2])},
-    # Spell: Wild Shape 1, Wider Study 3, Channel 5. Hardy 7 → d10. Leather+shield 15.
-    "druid": {1: (10, 15, 1, 13, [2]), 4: (31, 15, 1, 14, [4, 3]),
-              7: (60, 15, 2, 15, [4, 3, 3, 1]), 10: (84, 15, 3, 17, [4, 3, 3, 3, 2])},
+    "rogue": {1: (20, 14, 5, None, []), 4: (44, 15, 6, None, []),
+              7: (75, 16, 8, None, []), 10: (102, 17, 10, None, [])},
+    # Steel: Rage 1, Cleave 5, Guardian 7; Hardy 3 → d12: 12+8+2 = 22, +3×9 = 49. AC 10+Dex+Con.
+    "barbarian": {1: (20, 14, 5, None, []), 4: (49, 14, 6, None, []),
+                  7: (83, 14, 7, None, []), 10: (113, 14, 9, None, [])},
+    # Steel: Martial Arts 1, Weapon Expert 5 (depth 2). Hardy 7 → d12 (V40: Alert moved to 9th).
+    # L7: 22 + 6×(6+1+2) = 76. AC 10+Dex+Wis.
+    "monk": {1: (20, 15, 5, None, []), 4: (44, 16, 6, None, []),
+             7: (76, 16, 8, None, []), 10: (103, 17, 10, None, [])},
+    # Mind d6, Con +2: 6+8+2 = 16. Spell: Evoker 1 (half), Wider Study 3 (full), Turn the
+    # Odds 5 (Deep Magic). Hardy 9 → d8: 8+8+2 + 9×7 = 81. Int 16→18→20. Quarterstaff Str −1.
+    "wizard": {1: (16, 12, 1, 13, [2]), 4: (34, 12, 1, 14, [4, 3]),
+               7: (52, 12, 2, 15, [4, 3, 3, 1]), 10: (81, 12, 3, 17, [4, 3, 3, 3, 2])},
+    # Steel main from 1st: Martial Training (d6→d8, medium armor, shields). Precision 1,
+    # Anatomist 3, Weapon Expert 7 (depth 3: Veteran from 7th). Hardy 9 → d10. Con +1.
+    # L1: 8+8+1 = 17. L7: 17 + 6×6 = 53, +7 = 60 (+1 AC from Weapon Expert).
+    "investigator": {1: (17, 17, 5, None, []), 4: (35, 17, 6, None, []),
+                     7: (60, 18, 8, None, []), 10: (92, 18, 10, None, [])},
+    # Spell: Turn the Odds 1, Wider Study 3 (full), Evoker 9 (Deep Magic). Con 14: +2.
+    # Hardy 7 → d8. No armor (Mage Armor is cast in play; the sheet shows 10 + Dex = 11).
+    "loremaster": {1: (16, 11, 3, 13, [2]), 4: (34, 11, 3, 14, [4, 3]),
+                   7: (60, 11, 4, 15, [4, 3, 3, 1]), 10: (81, 11, 5, 17, [4, 3, 3, 3, 2])},
+    # Spell 1 at 1st (half, d6: 6+8+1 = 15); Weapon Expert 3 makes a 1/1 tie → Steel main
+    # (d8, medium armor, shields). Kit from 3rd: breastplate + shield + 1 = 19, rapier.
+    # Steel main → +2 Dex (V33: 15→17→19). Hardy 7 → d10. Int stays 16.
+    "tinker": {1: (15, 13, 4, 13, [2]), 4: (35, 19, 6, 13, [3]),
+               7: (61, 19, 7, 14, [4, 3]), 10: (82, 19, 9, 15, [4, 3, 2])},
+    # Soul d8, Con +2: 8+8+2 = 18. Spell: Channel 1, Wider Study 3, Mending Hands 5. Hardy 9 → d10.
+    "priest": {1: (18, 16, 3, 13, [2]), 4: (39, 16, 3, 14, [4, 3]),
+               7: (60, 16, 4, 15, [4, 3, 3, 1]), 10: (92, 16, 5, 17, [4, 3, 3, 3, 2])},
+    # Spell: Wild Shape 1, Wider Study 3, Channel 5. Hardy 7 → d10. Leather + shield 15.
+    "druid": {1: (18, 15, 1, 13, [2]), 4: (39, 15, 1, 14, [4, 3]),
+              7: (68, 15, 2, 15, [4, 3, 3, 1]), 10: (92, 15, 3, 17, [4, 3, 3, 3, 2])},
     # Spell: Turn the Odds 1, Wider Study 3, Prophecy 5. Cha 16→18→20 casts. Con +1.
-    "oracle": {1: (9, 16, 1, 13, [2]), 4: (27, 16, 1, 14, [4, 3]),
-               7: (45, 16, 2, 15, [4, 3, 3, 1]), 10: (63, 16, 3, 17, [4, 3, 3, 3, 2])},
+    "oracle": {1: (17, 16, 1, 13, [2]), 4: (35, 16, 1, 14, [4, 3]),
+               7: (53, 16, 2, 15, [4, 3, 3, 1]), 10: (71, 16, 3, 17, [4, 3, 3, 3, 2])},
     # Steel: Sworn Strike 1, Weapon Expert 5 (Extra Attack); Spell: Mending Hands 3
-    # (secondary: half caster, Wis 15). Martial Training: d8→d10, heavy armor. Str 16→20.
-    "oathsworn": {1: (12, 18, 5, None, []), 4: (36, 18, 6, 12, [3]),
-                  7: (60, 19, 8, 13, [4, 3]), 10: (84, 19, 10, 14, [4, 3, 2])},
+    # (secondary: half caster, Wis 15). Martial Training: d8→d10 (10+8+2 = 20), heavy
+    # armor. Str 16→20 (V33).
+    "oathsworn": {1: (20, 18, 5, None, []), 4: (44, 18, 6, 12, [3]),
+                  7: (68, 19, 8, 13, [4, 3]), 10: (92, 19, 10, 14, [4, 3, 2])},
 }
 
 # SRD 5.2.1 baselines (engine-owned data): standard array + background +2/+1, ASI +2 main.
@@ -1615,6 +1899,15 @@ class TestDay:
         d.hp = 5
         d.short_rest(Script([10, 10, 10]), hd_bonus=0)
         assert d.left["action_surge"] == 1 and d.hp > 5 and d.hd < 4
+
+    def test_the_standard_day_comes_from_the_yaml(self, rs):
+        # Balance pass V34: a day is three Clashes with a short rest after the 1st and 2nd;
+        # a single fight gets a third of each long-rest pool.
+        day = AN.day_spec()
+        assert day == {"clashes": 3, "short_rests_after": [1, 2]}
+        assert S.DEFAULT_SHARE == pytest.approx(1 / day["clashes"])
+        assert len(AN.day_encounters(120, AN.ThreatModel())) == 3
+        assert AN.TIRED["share"] == pytest.approx(S.DEFAULT_SHARE / 2)
 
     def test_a_day_runs_four_fights(self, rs):
         party = _ref_party(rs, 4)
