@@ -1,0 +1,150 @@
+# Glossary
+
+Every proper noun the system defines, in one place. Each entry compresses the
+canonical text where the term is actually defined — the chapter cited after
+each entry is that source. This glossary is a quick reference: if you want
+the full rule, follow the pointer.
+
+---
+
+**Armor** — A per-scene downgrade budget: light armor softens the first 2 incoming Conditions by one tier each, heavy armor the first 4. The budget resets only at the end of the scene. *(Chapter III.3)*
+
+**Ascendant Domain** — A Tier 3 Technique that grants a Prismatic domain built on an existing Mind or Soul domain. It uses the Prismatic difficulty table; reach-Sparks cannot move its workings' difficulty, though dice-Sparks work normally. *(Chapters II.4b, II.4c)*
+
+**Attribute (Major/Minor)** — A character's fundamental capabilities. Major Attributes (Body, Mind, Soul) ground saving throws and broad, undefined situations, and are derived from their three Minor Attributes; Minor Attributes are rated 1–3 and used for most active rolls. *(Chapter II.2)*
+
+**Background** — Who a character was before the story started: a title, a short history, a Starting Skill, a Secondary Skill (or domain origin, if magical), and a Specialty. *(Chapter II.6)*
+
+**Borrowed Trouble** — A complication offered before a roll by the MM or any player. Accepting it adds a d6 to the roll, dropping the lowest, exactly as a Spark does — and the complication happens whether the roll succeeds or fails. One per roll; offering and declining both cost nothing. *(Chapter III.1)*
+
+**Boss** — A climactic antagonist with a much larger Resolve pool than a Named NPC, often carrying a phase change keyed to a Resolve threshold that shifts the fight when crossed. *(Chapter III.3)*
+
+**Branch** — One of the thematic paths within a Facet's Technique tree (for example, the Body Facet's Might, Grace, and Iron). A Tier 2 or Tier 3 Technique requires a prerequisite Technique in the same branch. *(Chapter II.4)*
+
+**Broken** — The Tier 3 Condition: a character is out of the current conflict — defeated, unconscious, fled, captured, or collapsed, as the fiction determines. It persists until the end of the scene; full recovery takes meaningful downtime. *(Chapter III.3)*
+
+**Career Advance** — A single integer counting every skill rank advance a character has ever taken, across all skills and Facets, since character creation — the game's rough overall progression gauge. *(Chapter II.4)*
+
+**Condition (Tier 1/2/3)** — The measure of how a fight is going for a player character, in place of hit points. Tier 1 (Winded, Off-Balance, Shaken) clears at the end of the exchange; Tier 2 (Staggered, Cornered) persists until treated; Tier 3 is Broken. Conditions belong to characters only — enemies run on Resolve, and the only marks a Strike can put on them are the riders, Open and Position. *(Chapter III.3)*
+
+**Contested Roll** — A roll made against active opposition. Against an NPC, only the player rolls, and the NPC's attribute informs the difficulty; against another player character, both roll and the higher total wins, with a tie granting both a partial success. *(Chapter III.1)*
+
+**Cornered** — A Tier 2 Condition: the character cannot take Aggressive posture, and the MM has narrative authority over their positioning. *(Chapter III.3)*
+
+**Cross-Facet** — Skill or Technique development outside a character's Primary Facet. Cross-Facet skill advancement costs 2 skill points per mark instead of 1. *(Chapter II.4)*
+
+**Difficulty (Easy/Standard/Hard/Very Hard)** — The modifier the MM declares before a roll, based on circumstances rather than a judgment of the character: Easy (+1), Standard (+0), Hard (−1), or Very Hard (−2). *(Chapter III.1)*
+
+**Domain** — A character's licensed magical territory — the thematic and physical scope their magic covers, agreed at character creation and defined by what it includes and what it does not. Casting rolls within a domain add the skill the tradition trains: casting with Spirit adds the Attune rank; casting with Knowledge adds the Lore rank. *(Chapter II.3)*
+
+**Domain Type (Focused/Standard/Prismatic)** — How wide a domain's territory is. Focused domains cover one narrow element with the highest reliability; Standard domains cover a coherent thematic territory; Prismatic domains span multiple territories at the steepest difficulties — reach-Sparks cannot move a Prismatic working's difficulty, though dice-Sparks work normally. *(Chapter II.3)*
+
+**Encounter Recipe Table** — The simulation-validated table of enemy rosters mapped to difficulty bands (Skirmish/Standard/Hard/Deadly), keyed to Party Strength. Actor count — the number of Named/Boss enemies acting at once, not total TR — is what drives difficulty; the retired TR budget is preserved only as a historical record in `docs/DECISIONS.md`. *(MM1)*
+
+**Endurance Pool** — A character's combat stamina, spent to react to incoming attacks and to Press on offense. The pool equals 4 plus the Constitution modifier plus Endurance skill rank; at 0, Absorb is the only available reaction. Distinct from the Endurance skill (Chapter II.7). *(Chapter III.3)*
+
+**Exchange** — One dramatic beat of combat: every participant declares Posture simultaneously, actions and reactions are declared and resolved together, and the MM narrates the beat as a whole — there is no initiative order. *(Chapter III.3)*
+
+**Facet** — The broad shape of who a character is becoming through play — Body, Mind, or Soul — declared at character creation but confirmed by what the character actually does over a campaign. *(Chapter II.4)*
+
+**Facet Level** — A measure of growth within a Facet, advancing every time a character accumulates 3 skill rank advances in that Facet. Each Facet level unlocks one Technique from any tree whose prerequisites are met. A finished Facet is 9 advances — Facet level 3. *(Chapter II.4)*
+
+**Full Success** — A roll total of 10 or higher: the character achieves their goal cleanly, with no hidden cost or complication added by the MM. *(Chapter III.1)*
+
+**Graceful Fail** — A player-initiated option on any roll of 6 or less: the player narrates how the failure gets worse or richer for the story and claims a Spark, subject to MM confirmation. *(Chapter III.1)*
+
+**Group Roll** — A roll structure for when the whole party attempts the same task together: each participant rolls, and the group succeeds if a majority land a partial success or better. *(Chapter III.1)*
+
+**Intent** — What a player wants their magic to do, stated plainly and specifically in the fiction before the roll — the thing that anchors a magical outcome to something real. *(Chapter II.3)*
+
+**Major Advancement** — A milestone reached every 3 Facet levels total, accumulated across any Facet, at which a character chooses either +1 to a Minor Attribute or a Pinnacle Technique, marked by a significant reflection scene. *(Chapter II.4)*
+
+**Maneuver** — An offensive action that reshapes the fight rather than depleting Resolve directly: a 10+ makes rolls against the target Easy until the situation changes, a 7–9 works but costs something, a 6− backfires. *(Chapter III.3)*
+
+**Mark** — One point spent toward a skill's next rank. A rank costs the marks its own tier charges — 3 to Practiced, 5 to Expert, 8 to Master; marks carry over between sessions. *(Chapter II.4)*
+
+**Mirror Master (MM)** — The player who describes the world and adjudicates the fiction — one player among equals, whose job is to reflect the spotlight back onto the other players rather than to author their story. *(Chapter I)*
+
+**Mook** — A minor antagonist with no Resolve pool and no Condition track. Any successful Strike (7+) removes a Mook from the fight; an armored Mook needs a full success (10+). *(Chapter III.3)*
+
+**Named NPC** — A significant antagonist that uses the full combat structure — Resolve, Posture, Techniques — with a Resolve of 3 or 4 by default. It never rolls: when it attacks, the PCs roll reactions. *(Chapter III.3)*
+
+**Natural 12** — Both kept dice showing 6. A full success regardless of modifiers or difficulty, plus something more that the player names and the MM confirms. *(Chapter III.1)*
+
+**Natural 2** — Both kept dice showing 1. If the roll failed, the Graceful Fail is confirmed without the player having to ask. It never lowers an outcome tier. *(Chapter III.1)*
+
+**Off-Balance** — A Tier 1 Condition: the character's next reaction costs 1 additional Endurance Pool point. *(Chapter III.3)*
+
+**Lineage** — Who a character was born as, chosen at creation and orthogonal to the Background's what-they-did. The core rules ship one, Human, with no Gift and no Heritage; setting Facets add more. *(Chapter II.5)*
+
+**Open** — One of the two riders a full-success Strike may choose: the enemy is Easy to Strike for everyone, and the attacker narrates what that looks like. Open lasts until the **end of the exchange** and then clears on its own, with the Tier 1 Conditions. An Open enemy still acts, and Open never defeats an enemy on its own. *(Chapter III.3)*
+
+**Partial Success** — A roll total of 7–9: the character achieves something, but not cleanly — the MM names the cost before narrating the success; the cost is part of the outcome, not an offer to weigh. *(Chapter III.1)*
+
+**Party Strength** — The sum of all participating characters' Career Advances, used to size an encounter's difficulty band (Skirmish/Standard/Hard/Deadly) via the Encounter Recipe Table. *(MM1)*
+
+**Pinnacle Technique** — A powerful, character-defining ability outside the normal Technique tree, chosen at Major Advancement with MM approval; it should feel like the culmination of a demonstrated arc of play, not an item on a checklist. *(Chapter II.4)*
+
+**Position** — One of the two riders a full-success Strike may choose: you or an ally you name may act as though a Maneuver's full success applied, making the **next** roll against that target Easy, this exchange or the next. Spent by that roll. Position and Open are both Easy and do not stack. *(Chapter III.3)*
+
+**Posture (Aggressive/Measured/Defensive/Withdrawn)** — The broad tactical stance taken for one exchange. Player characters declare theirs simultaneously and blind; enemy stances are stated openly by the MM, driven by the stat block's conduct triggers. Aggressive trades a first-reaction Endurance Pool surcharge for +1 offense, Measured is the baseline, Defensive trades offense for cheaper reactions, and Withdrawn forgoes offense to recover 2 Endurance Pool points, up to the maximum. *(Chapter III.3)*
+
+**Heritage** — One narrow fact every member of a lineage grows up with, gifted or not. It works as a Specialty does — Standard becomes Easy when it bears directly, information without a roll when tangential — and draws from the same single character-side step, so a Heritage and a Specialty that both apply are still one step. *(Chapter II.5)*
+
+**Gift** — A domain carried in a lineage's blood rather than learned. The lineage says how it shows itself; the player chooses which non-Prismatic domain it is. A Gift is a domain in every respect, is always cast intuitively (Spirit + Attune), replaces the Background's Secondary Skill, and formalizes at the character's first Facet level in any Facet without spending a Technique pick. A character holds one domain at creation, from Lineage or Background, never both. *(Chapter II.5)*
+
+**Press** — Spending 1 Endurance Pool point before a Strike roll to add a d6 and drop the lowest die — the same mechanical effect as a Spark, drawn from a different resource, and stackable with one. *(Chapter III.3)*
+
+**Primary Facet** — The Facet a character declares at character creation, which determines which skills cost less to advance (1 point per mark rather than 2) and which Techniques are available to them. *(Chapter II.4)*
+
+**Purpose** — One of five broad shapes a magical intent takes: Harm, Ward, Mend, Shape, Reveal. For Minor magic it is only a description; for Significant and Major magic it is what the caster readied an intent for. *(Chapter II.3)*
+
+**Rank (Novice/Practiced/Expert/Master)** — A skill's level of developed capability: Novice (+0, the starting rank for every skill), Practiced (+1, 3 marks), Expert (+2, 8 marks total), or Master (+3, 16 marks total). Within one Facet at most three skills may pass Practiced and only one may reach Master. *(Chapters II.7, II.4)*
+
+**Reaction (Dodge/Parry/Absorb/Intercept)** — A character's response to an incoming action — at most one per incoming action, each costing Endurance Pool points unless Posture reduces it: Dodge (Dexterity), Parry (weapon attribute + Combat), Absorb (free, take the hit), or Intercept (step in front of an attack meant for an ally). *(Chapter III.3)*
+
+**Readied Intent** — A commitment a formalized caster makes at the start of each session: three intents spread across the five purposes. A Significant or Major working spends one of its purpose — or a Spark if none is readied. Minor magic spends nothing. Readied intents return after a full rest, which the MM calls, or at the next session. *(Chapter II.3)*
+
+**Reflection Scene** — A brief in-world moment, once per session, where a character acknowledges growth that happened in play; encouraged but not required, since advancement itself happens whether or not the scene takes place. *(Chapter II.4)*
+
+**Resolve** — An enemy's durability pool, depleted directly by Strikes — 2 on a full success, 1 on a partial — with no Condition track to manage. At 0 Resolve, the enemy is defeated. *(Chapter III.3)*
+
+**Rider** — The option a full-success Strike takes on top of its 2 Resolve: **Open** or **Position**. Three things are true of both. The choice is made *after* the roll. Neither defeats an enemy on its own. And both expire by themselves, so nothing has to be spent to end one and nobody has to track it into a later exchange. *(Chapter III.3)*
+
+**Saving Throw** — A reactive roll made when something happens *to* a character rather than something they choose to attempt: 2d6 + the relevant Major Attribute modifier, resolved on the standard three-tier table. *(Chapter III.1)*
+
+**Scope (Minor/Significant/Major)** — How ambitious a magical effect is, declared before the roll: Minor (small, local, brief), Significant (a meaningful area or persisting effect), or Major (scene-changing, large-scale, or lasting). Scope, not visual impressiveness, sets the base difficulty. *(Chapter II.3)*
+
+**Second Domain** — A Tier 3 Technique, in the Mind and Soul trees, that grants a second standard magical domain complementary to a character's original practice; effects within it are one difficulty step harder than normal for that domain until the character earns their next Facet level, after which the penalty lifts. A character holds one. *(Chapters II.4b, II.4c)*
+
+**Secondary Skill** — A second skill from a character's Primary Facet, granted by their Background, starting at Novice with 1 mark already recorded. Magic-granting Backgrounds replace it with a domain origin instead. *(Chapter II.6)*
+
+**Shaken** — A Tier 1 Condition: the MM may direct the character's next action — a flinch, a hesitation, a brief retreat. *(Chapter III.3)*
+
+**Skill** — A specific area of developed capability, associated with one Facet and one governing Minor Attribute, rated Novice through Master. *(Chapter II.7)*
+
+**Skill Point** — One of 4 points a character has to distribute among skills they actually used during a session; each point spent adds one mark toward the skill's next rank. Up to 2 unspent points bank into the next session, and 1 point per session may train an unused Primary-Facet skill. *(Chapter II.4)*
+
+**Spark** — A narrative resource earned for remarkable moments and spent before a roll to add a d6, dropping the lowest die — any roll, including every magic roll. In magic only, a Spark can instead buy reach in exactly two cases: a pre-Technique Significant-scope attempt, or easing a Focused domain's Major working one step. Sparks do not carry over; every character starts every session with 3. *(Chapters III.1, II.3)*
+
+**Specialty** — A narrow, specific area of fictional expertise granted by a Background — not a second skill, but a fact about a character's history that turns a Standard roll Easy when it directly applies. Its step draws from the same allowance as a Technique's — at most one character-side step moves any single roll. *(Chapters II.6, III.1)*
+
+**Staggered** — A Tier 2 Condition: −1 to offensive rolls, persisting until treated. *(Chapter III.3)*
+
+**Starting Skill** — The one skill from a character's Primary Facet that their Background grants at Practiced rank rather than Novice, reflecting prior training or life experience. *(Chapter II.6)*
+
+**Strike** — The foundational offensive action in combat: a roll of 2d6 + weapon attribute + relevant skill that, against an enemy, depletes Resolve (2 on a full success, 1 on a partial), or, against another character, applies a Condition directly. *(Chapter III.3)*
+
+**Support** — An action that aids another combat participant instead of acting directly: the supporting character grants an ally either +1d6 drop-lowest or one difficulty step easier on the ally's very next roll. *(Chapter III.3)*
+
+**Technique** — A specific ability a character unlocks at each Facet level, chosen from any tree whose prerequisites are met — something the character can now do that others cannot, or a distinctly their-own way of doing something ordinary. When a Technique eases a roll's difficulty, its step draws from the same allowance as a Specialty's — at most one character-side step moves any single roll. *(Chapters II.4, III.1)*
+
+**Threat Clock** — A four-segment tracker representing a hazard closing in. It advances one segment on a partial success or failure near the hazard, strikes when it fills, and can be wound back one segment by a character spending an action — no roll required. *(Chapter III.2)*
+
+**Threat Rating (TR)** — A single number summarizing how dangerous one enemy is in combat, calculated as offense + durability + armor bonus + technique bonus. A calibration tool, not a precise simulation. *(MM1)*
+
+**Tier** — A level within a Facet's Technique tree. Tier 1 Techniques are available at Facet level 1; Tier 2 requires a Tier 1 Technique in the same branch, and Tier 3 requires a Tier 2 Technique in the same branch. *(Chapter II.4)*
+
+**Weapon (Heavy/Standard/Light/Ranged/Unarmed)** — A weapon's category sets which attribute a Strike uses: Heavy is Strength; Standard and Unarmed allow either Strength or Dexterity; Light and Ranged use Dexterity. All weapons have the same mechanical effect on a Strike — there are no damage dice or per-weapon stat blocks. *(Chapter IV.1)*
+
+**Winded** — A Tier 1 Condition: −1 to the character's next roll. *(Chapter III.3)*
