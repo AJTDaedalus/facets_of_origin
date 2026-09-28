@@ -1,0 +1,283 @@
+# SRD 5.2.1 baseline classes, written in the Facets d20 effect vocabulary so the same
+# engine builds and simulates them (DESIGN v0.2 §8 item 4, §9 S-9). Engine-owned data:
+# loaded by facets_d20.data.load_baselines(). Each "facet" here is one SRD class with its
+# subclass; each "preset" is that class built the way DESIGN §8 says (standard array
+# 15/14/13/12/10/8 + background +2/+1, ASIs at the SRD levels as +2 to the main ability).
+#
+# Modelled: the class and subclass features that change a fight's numbers at levels
+# 1–10. Not modelled (as for Facets): Weapon Mastery, Cunning Action mobility, Arcane
+# Recovery, Potent Cantrip (Evoker), Brutal Strike, Preserve Life, Blessed Healer, Aura of
+# Devotion/Courage, Danger Sense, origin feats (the SRD 5.2.1 origin feats are Alert,
+# Magic Initiate, Savage Attacker and Skilled; each baseline takes Skilled, which has no
+# combat effect, so the comparison is chassis to chassis).
+#
+# Includes material adapted from the System Reference Document 5.2.1 by Wizards of the
+# Coast LLC, licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/legalcode).
+
+rules:
+  version: 0.2
+  levels: {min: 1, max: 10}
+  proficiency_bonus: {1: 2, 2: 2, 3: 2, 4: 2, 5: 3, 6: 3, 7: 3, 8: 3, 9: 4, 10: 4}
+  advancement:
+    talent_levels: []
+    knack_levels: []
+    asi_levels: [4, 8]
+    asi_rule: plus_two_primary      # SRD: +2 to one ability (the build's asi_priority[0])
+  build_rules: {rider_limit_per_turn: 99, one_tradition: true, max_hit_die: 12}
+  paths:
+    martial: {name: Martial}
+    full: {name: Full caster, casting: {progression: full}}
+    half: {name: Half caster, casting: {progression: half}}
+  facets:
+    srd_fighter:
+      name: Fighter (Champion)
+      hit_die: 10
+      saves: [str, con]
+      armor: [light, medium, heavy, shields]
+      weapons: [simple, martial]
+      paths: [martial]
+      tradition: null
+      asi_levels: [4, 6, 8]
+      features:
+        - {id: dueling, level: 1, effects: [{type: damage_bonus, value: 2, weapon: melee, condition: [one_handed_melee]}]}
+        - id: second_wind
+          level: 1
+          effects:
+            - {type: resource, id: second_wind, uses: 2, recharge: long, short_rest_regain: 1, by_level: {4: 3, 10: 4}}
+            - {type: heal, amount: "1d10+level", action: bonus, targets: self, resource: second_wind}
+        - id: action_surge
+          level: 2
+          effects:
+            - {type: resource, id: action_surge, uses: 1, recharge: short}
+            - {type: extra_action, resource: action_surge}
+        - {id: improved_critical, level: 3, effects: [{type: crit_range, min: 19, weapon: any}]}
+        - {id: extra_attack, level: 5, effects: [{type: extra_attack, attacks: 2}]}
+        - id: indomitable
+          level: 9
+          effects:
+            - {type: resource, id: indomitable, uses: 1, recharge: long}
+            - {type: reroll, roll: failed_save, add: level, resource: indomitable}
+    srd_rogue:
+      name: Rogue (Thief)
+      hit_die: 8
+      saves: [dex, int]
+      armor: [light]
+      weapons: [simple, martial]
+      paths: [martial]
+      tradition: null
+      asi_levels: [4, 8, 10]
+      features:
+        - id: sneak_attack
+          level: 1
+          effects:
+            - {type: extra_damage_dice, dice: 1d6, rider: true, frequency: once_per_turn, weapon: [finesse, ranged],
+               condition_any: [has_advantage, ally_adjacent_to_target]}
+          scaling:
+            3: [{type: extra_damage_dice, dice: 2d6, rider: true, frequency: once_per_turn, weapon: [finesse, ranged], condition_any: [has_advantage, ally_adjacent_to_target]}]
+            5: [{type: extra_damage_dice, dice: 3d6, rider: true, frequency: once_per_turn, weapon: [finesse, ranged], condition_any: [has_advantage, ally_adjacent_to_target]}]
+            7: [{type: extra_damage_dice, dice: 4d6, rider: true, frequency: once_per_turn, weapon: [finesse, ranged], condition_any: [has_advantage, ally_adjacent_to_target]}]
+            9: [{type: extra_damage_dice, dice: 5d6, rider: true, frequency: once_per_turn, weapon: [finesse, ranged], condition_any: [has_advantage, ally_adjacent_to_target]}]
+        - {id: steady_aim, level: 3, effects: [{type: advantage, roll: [attack], scope: next_ranged_attack_this_turn, action: bonus, condition: [not_moved]}]}
+        - {id: uncanny_dodge, level: 5, effects: [{type: halve_damage, action: reaction, trigger: hit_by_seen_attacker}]}
+        - {id: evasion, level: 7, effects: [{type: evasion}]}
+    srd_wizard:
+      name: Wizard (Evoker)
+      hit_die: 6
+      saves: [int, wis]
+      armor: []
+      weapons: [simple]
+      paths: [full]
+      tradition: arcane
+      casting_ability: int
+      features:
+        - {id: empowered_evocation, level: 10, effects: [{type: damage_bonus, value: casting, applies: spell, frequency: once_per_spell}]}
+    srd_cleric:
+      name: Cleric (Life, Protector)
+      hit_die: 8
+      saves: [wis, cha]
+      armor: [light, medium, heavy, shields]
+      weapons: [simple, martial]
+      paths: [full]
+      tradition: divine
+      casting_ability: wis
+      features:
+        - id: divine_spark
+          level: 2
+          effects:
+            - {type: resource, id: channel, uses: 2, recharge: long, short_rest_regain: 1, by_level: {6: 3}}
+            - {type: heal, amount: "1d8+casting", action: magic, range_ft: 30, targets: 1, resource: channel}
+            - {type: save_damage, dice: 1d8, add: casting, save: con, dc: spell, half_on_success: true, damage_type: radiant, action: magic, resource: channel, alternative_to: heal}
+          scaling:
+            7: [{type: heal, amount: "2d8+casting", action: magic, range_ft: 30, targets: 1, resource: channel},
+                {type: save_damage, dice: 2d8, add: casting, save: con, dc: spell, half_on_success: true, damage_type: radiant, action: magic, resource: channel, alternative_to: heal}]
+        - {id: disciple_of_life, level: 3, effects: [{type: heal_boost, amount: "2+slot_level", trigger: slot_spell_heal_on_cast, targets: 1}]}
+        - {id: potent_spellcasting, level: 7, effects: [{type: damage_bonus, value: casting, applies: cantrip}]}
+    srd_paladin:
+      name: Paladin (Devotion)
+      hit_die: 10
+      saves: [wis, cha]
+      armor: [light, medium, heavy, shields]
+      weapons: [simple, martial]
+      paths: [half]
+      tradition: sacred
+      casting_ability: cha
+      features:
+        - {id: lay_on_hands, level: 1, effects: [{type: heal_pool, size: "5*level", action: bonus, range_ft: 5, recharge: long}]}
+        - {id: dueling, level: 2, effects: [{type: damage_bonus, value: 2, weapon: melee, condition: [one_handed_melee]}]}
+        - {id: sacred_weapon, level: 3, effects: [{type: attack_bonus, value: cha, weapon: melee}]}
+        - {id: extra_attack, level: 5, effects: [{type: extra_attack, attacks: 2}]}
+        - {id: aura_of_protection, level: 6, effects: [{type: save_bonus, value: cha, min: 1, aura_ft: 10, targets: [self, allies]}]}
+    srd_barbarian:
+      name: Barbarian (Berserker)
+      hit_die: 12
+      saves: [str, con]
+      armor: [light, medium, shields]
+      weapons: [simple, martial]
+      paths: [martial]
+      tradition: null
+      features:
+        - id: rage
+          level: 1
+          effects:
+            - {type: resource, id: rage, uses: 2, recharge: long, short_rest_regain: 1, by_level: {3: 3, 6: 4}}
+            - {type: stance, id: raging, action: bonus, duration: fight, resource: rage, forbid_armor: [heavy]}
+            - {type: resistance, damage_types: [bludgeoning, piercing, slashing], condition: [raging]}
+            - {type: damage_bonus, value: 2, weapon: str_melee, condition: [raging]}
+            - {type: forbid, what: [spellcasting, concentration], condition: [raging]}
+            - {type: ac_formula, base: 10, add: [dex, con], shield_allowed: true, condition: [unarmored]}
+          scaling:
+            9: [{type: damage_bonus, value: 3, weapon: str_melee, condition: [raging]}]
+        - {id: reckless_attack, level: 2, effects: [{type: reckless, condition: [raging]}]}
+        - id: frenzy
+          level: 3
+          effects:
+            - {type: extra_damage_dice, dice: 2d6, rider: true, frequency: once_per_turn, weapon: [melee], condition: [raging, has_advantage]}
+          scaling:
+            9: [{type: extra_damage_dice, dice: 3d6, rider: true, frequency: once_per_turn, weapon: [melee], condition: [raging, has_advantage]}]
+        - {id: extra_attack, level: 5, effects: [{type: extra_attack, attacks: 2}]}
+        - {id: feral_instinct, level: 7, effects: [{type: advantage, roll: [initiative], scope: side_roll}]}
+  talents: []
+  knacks: []
+  backgrounds: []
+  presets:
+    - id: srd_fighter_champion
+      name: SRD Fighter (Champion)
+      facet: srd_fighter
+      path: martial
+      abilities: {str: 17, dex: 13, con: 15, int: 8, wis: 12, cha: 10}
+      asi_priority: [str]
+      kit: {armor: chain_mail, shield: true, weapons: [longsword]}
+    - id: srd_rogue_thief
+      name: SRD Rogue (Thief)
+      facet: srd_rogue
+      path: martial
+      abilities: {str: 8, dex: 17, con: 15, int: 12, wis: 13, cha: 10}
+      asi_priority: [dex]
+      kit: {armor: leather, shield: false, weapons: [rapier, shortbow]}
+    - id: srd_wizard_evoker
+      name: SRD Wizard (Evoker)
+      facet: srd_wizard
+      path: full
+      domain: srd_evoker_spellbook
+      abilities: {str: 8, dex: 13, con: 15, int: 17, wis: 12, cha: 10}
+      asi_priority: [int]
+      kit: {armor: null, shield: false, weapons: [quarterstaff]}
+    - id: srd_cleric_life
+      name: SRD Cleric (Life)
+      facet: srd_cleric
+      path: full
+      domain: srd_life_cleric_spells
+      abilities: {str: 13, dex: 10, con: 15, int: 8, wis: 17, cha: 12}
+      asi_priority: [wis]
+      kit: {armor: chain_mail, shield: true, weapons: [mace]}
+    - id: srd_paladin_devotion
+      name: SRD Paladin (Devotion)
+      facet: srd_paladin
+      path: half
+      domain: srd_devotion_paladin_spells
+      abilities: {str: 17, dex: 10, con: 13, int: 8, wis: 12, cha: 15}
+      asi_priority: [str]
+      kit: {armor: chain_mail, shield: true, weapons: [longsword]}
+    - id: srd_barbarian_berserker
+      name: SRD Barbarian (Berserker)
+      facet: srd_barbarian
+      path: martial
+      abilities: {str: 17, dex: 13, con: 15, int: 8, wis: 12, cha: 10}
+      asi_priority: [str]
+      kit: {armor: null, shield: false, weapons: [greataxe]}
+
+spells:
+  version: 0.2
+  traditions:
+    arcane: {ability: [int]}
+    divine: {ability: [wis]}
+    sacred: {ability: [cha]}
+  casting: {domains_on_path: 1}
+  common_list: []
+  full_table: {1: [2], 2: [3], 3: [4, 2], 4: [4, 3], 5: [4, 3, 2], 6: [4, 3, 3], 7: [4, 3, 3, 1],
+               8: [4, 3, 3, 2], 9: [4, 3, 3, 3, 1], 10: [4, 3, 3, 3, 2]}
+  half_table: {1: [2], 2: [2], 3: [3], 4: [3], 5: [4, 2], 6: [4, 2], 7: [4, 3], 8: [4, 3],
+               9: [4, 3, 2], 10: [4, 3, 2]}
+  # One "domain" per baseline = the combat spells that class prepares (SRD class lists).
+  domains:
+    - id: srd_evoker_spellbook
+      name: Evoker spellbook
+      tradition: arcane
+      spells:
+        - {name: Fire Bolt, level: 0}
+        - {name: Ray of Frost, level: 0}
+        - {name: Shocking Grasp, level: 0}
+        - {name: Magic Missile, level: 1}
+        - {name: Shield, level: 1}
+        - {name: Mage Armor, level: 1}
+        - {name: Burning Hands, level: 1}
+        - {name: Thunderwave, level: 1}
+        - {name: Scorching Ray, level: 2}
+        - {name: Shatter, level: 2}
+        - {name: Hold Person, level: 2}
+        - {name: Fireball, level: 3}
+        - {name: Lightning Bolt, level: 3}
+        - {name: Hypnotic Pattern, level: 3}
+        - {name: Ice Storm, level: 4}
+        - {name: Blight, level: 4}
+        - {name: Banishment, level: 4}
+        - {name: Cone of Cold, level: 5}
+        - {name: Hold Monster, level: 5}
+    - id: srd_life_cleric_spells
+      name: Life cleric prepared spells
+      tradition: divine
+      spells:
+        - {name: Sacred Flame, level: 0}
+        - {name: Guidance, level: 0}
+        - {name: Light, level: 0}
+        - {name: Guiding Bolt, level: 1}
+        - {name: Cure Wounds, level: 1}
+        - {name: Healing Word, level: 1}
+        - {name: Bless, level: 1}
+        - {name: Inflict Wounds, level: 1}
+        - {name: Shield of Faith, level: 1}
+        - {name: Spiritual Weapon, level: 2}
+        - {name: Hold Person, level: 2}
+        - {name: Spirit Guardians, level: 3}
+        - {name: Mass Healing Word, level: 3}
+        - {name: Banishment, level: 4}
+        - {name: Flame Strike, level: 5}
+        - {name: Mass Cure Wounds, level: 5}
+    - id: srd_devotion_paladin_spells
+      name: Devotion paladin prepared spells
+      tradition: sacred
+      spells:
+        - {name: Divine Smite, level: 1}
+        - {name: Searing Smite, level: 1}
+        - {name: Bless, level: 1}
+        - {name: Cure Wounds, level: 1}
+        - {name: Shield of Faith, level: 1}
+        - {name: Aid, level: 2}
+        - {name: Revivify, level: 3}
+  # Spells the baselines use that the Facets list doesn't model; the rest come from
+  # facets_d20_spells.yaml sim_spells (same SRD spells, same numbers).
+  sim_spells_extra:
+    - {name: Guiding Bolt, level: 1, model: attack, dice: 4d6, upcast: 1d6, damage_type: radiant}
+    # P-11: the Facets lists dropped the smites (V24); the Paladin baseline keeps them.
+    - {name: Divine Smite, level: 1, model: weapon_rider, dice: 2d8, upcast: 1d8, damage_type: radiant, action: bonus}
+    - {name: Searing Smite, level: 1, model: weapon_rider, dice: 1d6, upcast: 1d6, damage_type: fire, action: bonus}

@@ -1,0 +1,502 @@
+# Facets d20 — the Common list, domains (SRD 5.2.1 spell lists), slot tables and the
+# spells the simulator models. v0.2. Contract: docs/DESIGN_facets_d20_v0_2.md §1.6 and §3.
+# V24: no smite spells (Divine Smite, Searing Smite) on any list — Sworn Strike is the one
+# weapon-hit rider bought with a resource, so slot count never buys weapon damage.
+# Every name is an SRD 5.2.1 spell at its SRD level (verified: docs/RESEARCH_facets_d20_srd_check.md;
+# pinned in software/tests/test_facets_d20_spells.py::SRD_521_VERIFIED).
+# Slot rows list slots per spell level: [1st, 2nd, 3rd, 4th, 5th], read by CHARACTER level.
+version: 0.2
+source: SRD 5.2.1 (CC BY 4.0). Spell names only; rules text lives in the SRD.
+traditions:
+  thaumaturgy: {name: Thaumaturgy, facet: mind, ability: [int], style: scholarly}
+  invocation: {name: Invocation, facet: soul, ability: [soul], style: intuitive}   # soul = higher of Wis/Cha
+casting:
+  known: all_on_lists            # cast any spell on your lists of a level you have a slot for; no preparation
+  cantrips: all_on_lists
+  domains_from: tracks           # domains come from `domains` effects: Spellcasting (Spell depth 1), Wider Study, Deep Magic (facets_d20.yaml tracks.spell)
+  prismatic_from: deep_magic      # a prismatic domain only as Deep Magic's domain (Spell depth 3) — pending owner ruling, DESIGN §5.1
+  domain_swap: retrain           # the once-per-level retrain (facets_d20.yaml advancement.retrain)
+  table_index: character_level   # both tables; there is no separate caster level in v0.2
+  save_dc: 8+pb+casting
+  spell_attack: pb+casting
+  rituals: any_list_spell_with_ritual_tag
+full_table:
+  1: [2]
+  2: [3]
+  3: [4, 2]
+  4: [4, 3]
+  5: [4, 3, 2]
+  6: [4, 3, 3]
+  7: [4, 3, 3, 1]
+  8: [4, 3, 3, 2]
+  9: [4, 3, 3, 3, 1]
+  10: [4, 3, 3, 3, 2]
+half_table:
+  1: [2]
+  2: [2]
+  3: [3]
+  4: [3]
+  5: [4, 2]
+  6: [4, 2]
+  7: [4, 3]
+  8: [4, 3]
+  9: [4, 3, 2]
+  10: [4, 3, 2]
+common_list:                    # both traditions; a spell here is on no domain list
+  - {name: Fire Bolt, level: 0}
+  - {name: Light, level: 0}
+  - {name: Message, level: 0}
+  - {name: Burning Hands, level: 1}
+  - {name: Magic Missile, level: 1}
+  - {name: Thunderwave, level: 1}
+  - {name: Detect Magic, level: 1}
+  - {name: Scorching Ray, level: 2}
+  - {name: Shatter, level: 2}
+  - {name: Fireball, level: 3}
+  - {name: Lightning Bolt, level: 3}
+  - {name: Dispel Magic, level: 3}
+  - {name: Ice Storm, level: 4}
+  - {name: Cone of Cold, level: 5}
+domains:
+  - id: fire
+    name: Fire
+    tradition: invocation
+    prismatic: false
+    role: offense
+    spells:
+    - {name: Produce Flame, level: 0}
+    - {name: Hellish Rebuke, level: 1}
+    - {name: Flame Blade, level: 2}
+    - {name: Flaming Sphere, level: 2}
+    - {name: Heat Metal, level: 2}
+    - {name: Fire Shield, level: 4}
+    - {name: Wall of Fire, level: 4}
+    - {name: Flame Strike, level: 5}
+  - id: shadow
+    name: Shadow
+    tradition: invocation
+    prismatic: false
+    role: control
+    spells:
+    - {name: Chill Touch, level: 0}
+    - {name: Ray of Frost, level: 0}
+    - {name: Fog Cloud, level: 1}
+    - {name: Sleep, level: 1}
+    - {name: Blindness/Deafness, level: 2}
+    - {name: Darkness, level: 2}
+    - {name: Darkvision, level: 2}
+    - {name: Pass without Trace, level: 2}
+    - {name: Nondetection, level: 3}
+    - {name: Sleet Storm, level: 3}
+    - {name: Black Tentacles, level: 4}
+  - id: storm
+    name: Storm
+    tradition: invocation
+    prismatic: false
+    role: offense
+    spells:
+    - {name: Druidcraft, level: 0}
+    - {name: Shocking Grasp, level: 0}
+    - {name: Elementalism, level: 0}
+    - {name: Feather Fall, level: 1}
+    - {name: Fog Cloud, level: 1}
+    - {name: Gust of Wind, level: 2}
+    - {name: Call Lightning, level: 3}
+    - {name: Fly, level: 3}
+    - {name: Wind Wall, level: 3}
+    - {name: Conjure Elemental, level: 5}
+  - id: beasts
+    name: Beasts
+    tradition: invocation
+    prismatic: false
+    role: support
+    spells:
+    - {name: Druidcraft, level: 0}
+    - {name: Poison Spray, level: 0}
+    - {name: Animal Friendship, level: 1}
+    - {name: Speak with Animals, level: 1}
+    - {name: "Hunter's Mark", level: 1}
+    - {name: Animal Messenger, level: 2}
+    - {name: Enhance Ability, level: 2}
+    - {name: Locate Animals or Plants, level: 2}
+    - {name: Conjure Animals, level: 3}
+    - {name: Dominate Beast, level: 4}
+    - {name: Polymorph, level: 4}
+    - {name: Giant Insect, level: 4}
+    - {name: Awaken, level: 5}
+    - {name: Insect Plague, level: 5}
+  - id: resonance
+    name: Resonance
+    tradition: invocation
+    prismatic: false
+    role: control
+    spells:
+    - {name: Thaumaturgy, level: 0}
+    - {name: Vicious Mockery, level: 0}
+    - {name: Blindness/Deafness, level: 2}
+    - {name: Knock, level: 2}
+    - {name: Silence, level: 2}
+    - {name: Enthrall, level: 2}
+    - {name: Fear, level: 3}
+    - {name: Sending, level: 3}
+    - {name: Tongues, level: 3}
+  - id: verdance
+    name: Verdance
+    tradition: invocation
+    prismatic: false
+    role: control
+    spells:
+    - {name: Druidcraft, level: 0}
+    - {name: Shillelagh, level: 0}
+    - {name: Entangle, level: 1}
+    - {name: Goodberry, level: 1}
+    - {name: Ensnaring Strike, level: 1}
+    - {name: Barkskin, level: 2}
+    - {name: Locate Animals or Plants, level: 2}
+    - {name: Spike Growth, level: 2}
+    - {name: Plant Growth, level: 3}
+    - {name: Speak with Plants, level: 3}
+    - {name: Blight, level: 4}
+    - {name: Awaken, level: 5}
+    - {name: Tree Stride, level: 5}
+  - id: binding
+    name: Binding
+    tradition: invocation
+    prismatic: false
+    role: control
+    spells:
+    - {name: Mending, level: 0}
+    - {name: Resistance, level: 0}
+    - {name: Bane, level: 1}
+    - {name: Protection from Evil and Good, level: 1}
+    - {name: Sanctuary, level: 1}
+    - {name: Hold Person, level: 2}
+    - {name: Warding Bond, level: 2}
+    - {name: Zone of Truth, level: 2}
+    - {name: Bestow Curse, level: 3}
+    - {name: Magic Circle, level: 3}
+    - {name: Remove Curse, level: 3}
+    - {name: Banishment, level: 4}
+    - {name: Geas, level: 5}
+    - {name: Hold Monster, level: 5}
+    - {name: Planar Binding, level: 5}
+  - id: presence
+    name: Presence
+    tradition: invocation
+    prismatic: false
+    role: support
+    spells:
+    - {name: Sacred Flame, level: 0}
+    - {name: Thaumaturgy, level: 0}
+    - {name: Bless, level: 1}
+    - {name: Command, level: 1}
+    - {name: Heroism, level: 1}
+    - {name: Shield of Faith, level: 1}
+    - {name: Aid, level: 2}
+    - {name: Calm Emotions, level: 2}
+    - {name: Spiritual Weapon, level: 2}
+    - {name: Beacon of Hope, level: 3}
+    - {name: Fear, level: 3}
+    - {name: Spirit Guardians, level: 3}
+    - {name: Guardian of Faith, level: 4}
+    - {name: Dispel Evil and Good, level: 5}
+  - id: the_tide
+    name: The Tide
+    tradition: invocation
+    prismatic: false
+    role: support
+    spells:
+    - {name: Resistance, level: 0}
+    - {name: Spare the Dying, level: 0}
+    - {name: Cure Wounds, level: 1}
+    - {name: False Life, level: 1}
+    - {name: Healing Word, level: 1}
+    - {name: Inflict Wounds, level: 1}
+    - {name: Lesser Restoration, level: 2}
+    - {name: Prayer of Healing, level: 2}
+    - {name: Mass Healing Word, level: 3}
+    - {name: Revivify, level: 3}
+    - {name: Vampiric Touch, level: 3}
+    - {name: Aura of Life, level: 4}
+    - {name: Greater Restoration, level: 5}
+    - {name: Mass Cure Wounds, level: 5}
+    - {name: Raise Dead, level: 5}
+  - id: the_undying
+    name: The Undying
+    tradition: invocation
+    prismatic: true
+    role: offense
+    spells:
+    - {name: Chill Touch, level: 0}
+    - {name: Spare the Dying, level: 0}
+    - {name: Detect Evil and Good, level: 1}
+    - {name: False Life, level: 1}
+    - {name: Inflict Wounds, level: 1}
+    - {name: Gentle Repose, level: 2}
+    - {name: Ray of Enfeeblement, level: 2}
+    - {name: Animate Dead, level: 3}
+    - {name: Speak with Dead, level: 3}
+    - {name: Vampiric Touch, level: 3}
+    - {name: Blight, level: 4}
+    - {name: Death Ward, level: 4}
+    - {name: Contagion, level: 5}
+  - id: fate
+    name: Fate
+    tradition: invocation
+    prismatic: true
+    role: support
+    spells:
+    - {name: Guidance, level: 0}
+    - {name: Resistance, level: 0}
+    - {name: True Strike, level: 0}
+    - {name: Starry Wisp, level: 0}
+    - {name: Bane, level: 1}
+    - {name: Bless, level: 1}
+    - {name: Augury, level: 2}
+    - {name: Bestow Curse, level: 3}
+    - {name: Blink, level: 3}
+    - {name: Death Ward, level: 4}
+    - {name: Divination, level: 4}
+    - {name: Commune, level: 5}
+  - id: the_living_world
+    name: The Living World
+    tradition: invocation
+    prismatic: true
+    role: support
+    spells:
+    - {name: Druidcraft, level: 0}
+    - {name: Guidance, level: 0}
+    - {name: Cure Wounds, level: 1}
+    - {name: Goodberry, level: 1}
+    - {name: Longstrider, level: 1}
+    - {name: Speak with Animals, level: 1}
+    - {name: Locate Animals or Plants, level: 2}
+    - {name: Pass without Trace, level: 2}
+    - {name: Plant Growth, level: 3}
+    - {name: Speak with Plants, level: 3}
+    - {name: Freedom of Movement, level: 4}
+    - {name: Polymorph, level: 4}
+    - {name: Antilife Shell, level: 5}
+    - {name: Awaken, level: 5}
+    - {name: Commune with Nature, level: 5}
+  - id: illusion
+    name: Illusion
+    tradition: thaumaturgy
+    prismatic: false
+    role: control
+    spells:
+    - {name: Dancing Lights, level: 0}
+    - {name: Minor Illusion, level: 0}
+    - {name: Color Spray, level: 1}
+    - {name: Disguise Self, level: 1}
+    - {name: Illusory Script, level: 1}
+    - {name: Silent Image, level: 1}
+    - {name: Blur, level: 2}
+    - {name: Invisibility, level: 2}
+    - {name: Mirror Image, level: 2}
+    - {name: Hypnotic Pattern, level: 3}
+    - {name: Major Image, level: 3}
+    - {name: Greater Invisibility, level: 4}
+    - {name: Hallucinatory Terrain, level: 4}
+    - {name: Phantasmal Killer, level: 4}
+    - {name: Seeming, level: 5}
+  - id: warding
+    name: Warding
+    tradition: thaumaturgy
+    prismatic: false
+    role: utility
+    spells:
+    - {name: Mending, level: 0}
+    - {name: Resistance, level: 0}
+    - {name: Alarm, level: 1}
+    - {name: Protection from Evil and Good, level: 1}
+    - {name: Arcane Lock, level: 2}
+    - {name: Glyph of Warding, level: 3}
+    - {name: Magic Circle, level: 3}
+    - {name: Nondetection, level: 3}
+    - {name: Protection from Energy, level: 3}
+    - {name: Tiny Hut, level: 3}
+    - {name: Faithful Hound, level: 4}
+    - {name: Private Sanctum, level: 4}
+    - {name: Dispel Evil and Good, level: 5}
+    - {name: Hallow, level: 5}
+  - id: inscription
+    name: Inscription
+    tradition: thaumaturgy
+    prismatic: false
+    role: utility
+    spells:
+    - {name: Mending, level: 0}
+    - {name: Prestidigitation, level: 0}
+    - {name: Comprehend Languages, level: 1}
+    - {name: Identify, level: 1}
+    - {name: Illusory Script, level: 1}
+    - {name: Arcane Lock, level: 2}
+    - {name: Continual Flame, level: 2}
+    - {name: Magic Mouth, level: 2}
+    - {name: Magic Weapon, level: 2}
+    - {name: Glyph of Warding, level: 3}
+    - {name: Secret Chest, level: 4}
+    - {name: Teleportation Circle, level: 5}
+  - id: transmutation
+    name: Transmutation
+    tradition: thaumaturgy
+    prismatic: false
+    role: utility
+    spells:
+    - {name: Acid Splash, level: 0}
+    - {name: Mending, level: 0}
+    - {name: Prestidigitation, level: 0}
+    - {name: Grease, level: 1}
+    - {name: Purify Food and Drink, level: 1}
+    - {name: Enlarge/Reduce, level: 2}
+    - {name: Knock, level: 2}
+    - {name: Meld into Stone, level: 3}
+    - {name: Fabricate, level: 4}
+    - {name: Stone Shape, level: 4}
+    - {name: Stoneskin, level: 4}
+    - {name: Passwall, level: 5}
+    - {name: Wall of Stone, level: 5}
+  - id: divination
+    name: Divination
+    tradition: thaumaturgy
+    prismatic: false
+    role: utility
+    spells:
+    - {name: Guidance, level: 0}
+    - {name: True Strike, level: 0}
+    - {name: Comprehend Languages, level: 1}
+    - {name: Detect Poison and Disease, level: 1}
+    - {name: Identify, level: 1}
+    - {name: Locate Object, level: 2}
+    - {name: See Invisibility, level: 2}
+    - {name: Find Traps, level: 2}
+    - {name: Clairvoyance, level: 3}
+    - {name: Arcane Eye, level: 4}
+    - {name: Divination, level: 4}
+    - {name: Locate Creature, level: 4}
+    - {name: Legend Lore, level: 5}
+    - {name: Scrying, level: 5}
+  - id: constructed_force
+    name: Constructed Force
+    tradition: thaumaturgy
+    prismatic: false
+    role: support
+    spells:
+    - {name: Eldritch Blast, level: 0}
+    - {name: Mage Hand, level: 0}
+    - {name: Mage Armor, level: 1}
+    - {name: Shield, level: 1}
+    - {name: Unseen Servant, level: 1}
+    - {name: Levitate, level: 2}
+    - {name: Resilient Sphere, level: 4}
+    - {name: Arcane Hand, level: 5}
+    - {name: Telekinesis, level: 5}
+    - {name: Wall of Force, level: 5}
+  - id: the_arcane
+    name: The Arcane
+    tradition: thaumaturgy
+    prismatic: true
+    role: control
+    spells:
+    - {name: Mage Hand, level: 0}
+    - {name: Prestidigitation, level: 0}
+    - {name: Sorcerous Burst, level: 0}
+    - {name: Identify, level: 1}
+    - {name: See Invisibility, level: 2}
+    - {name: Counterspell, level: 3}
+    - {name: Nondetection, level: 3}
+    - {name: Remove Curse, level: 3}
+    - {name: Banishment, level: 4}
+    - {name: Dispel Evil and Good, level: 5}
+    - {name: Legend Lore, level: 5}
+  - id: the_constructed_mind
+    name: The Constructed Mind
+    tradition: thaumaturgy
+    prismatic: true
+    role: utility
+    spells:
+    - {name: Mage Hand, level: 0}
+    - {name: Mending, level: 0}
+    - {name: Find Familiar, level: 1}
+    - {name: Unseen Servant, level: 1}
+    - {name: Magic Mouth, level: 2}
+    - {name: Phantom Steed, level: 3}
+    - {name: Fabricate, level: 4}
+    - {name: Faithful Hound, level: 4}
+    - {name: Animate Objects, level: 5}
+    - {name: Arcane Hand, level: 5}
+  - id: chronomancy
+    name: Chronomancy
+    tradition: thaumaturgy
+    prismatic: true
+    role: support
+    spells:
+    - {name: Mending, level: 0}
+    - {name: True Strike, level: 0}
+    - {name: Expeditious Retreat, level: 1}
+    - {name: Feather Fall, level: 1}
+    - {name: Gentle Repose, level: 2}
+    - {name: Blink, level: 3}
+    - {name: Haste, level: 3}
+    - {name: Slow, level: 3}
+    - {name: Divination, level: 4}
+    - {name: Legend Lore, level: 5}
+# ---------------------------------------------------------------------------- sim_spells
+# The subset the simulator models (DESIGN §9). Numbers are SRD 5.2.1; `model` is one of
+# the engine's models (DESIGN §1.4a, answer to E-1). Cantrip dice double at 5th level
+# (`scale: cantrip`); nothing in 1–10 reaches the 11th-level step. `targets` for an area
+# spell is the sim's assumed number of foes caught, not the spell's limit.
+# Models requested beyond E-1: ac_set, ac_bonus (DESIGN §9 S-4); `sustain` for spells that
+# attack again on later turns; `per_hit` on weapon_rider (Hunter's Mark).
+sim_spells:
+  # cantrips
+  - {name: Fire Bolt, level: 0, model: attack, dice: 1d10, damage_type: fire, scale: cantrip}
+  - {name: Ray of Frost, level: 0, model: attack, dice: 1d8, damage_type: cold, scale: cantrip}
+  - {name: Starry Wisp, level: 0, model: attack, dice: 1d8, damage_type: radiant, scale: cantrip}
+  - {name: Sorcerous Burst, level: 0, model: attack, dice: 1d8, damage_type: fire, scale: cantrip}
+  - {name: Produce Flame, level: 0, model: attack, dice: 1d8, damage_type: fire, scale: cantrip}
+  - {name: Poison Spray, level: 0, model: attack, dice: 1d12, damage_type: poison, scale: cantrip}
+  - {name: Chill Touch, level: 0, model: attack, dice: 1d10, damage_type: necrotic, melee: true, scale: cantrip}
+  - {name: Shocking Grasp, level: 0, model: attack, dice: 1d8, damage_type: lightning, melee: true, scale: cantrip}
+  - {name: Eldritch Blast, level: 0, model: attack, dice: 1d10, damage_type: force, beams: 1, beams_by_level: {5: 2}}
+  - {name: Sacred Flame, level: 0, model: save, dice: 1d8, save: dex, half_on_success: false, targets: 1, damage_type: radiant, scale: cantrip}
+  - {name: Vicious Mockery, level: 0, model: save, dice: 1d6, save: wis, half_on_success: false, targets: 1, damage_type: psychic, scale: cantrip}
+  - {name: Acid Splash, level: 0, model: save, dice: 1d6, save: dex, half_on_success: false, targets: 1, damage_type: acid, scale: cantrip}
+  - {name: True Strike, level: 0, model: weapon_cantrip, extra_by_level: {5: 1d6}, damage_type: radiant}
+  - {name: Shillelagh, level: 0, model: weapon_cantrip, weapon_die_by_level: {1: d8, 5: d10}, bonus_action: true}
+  # 1st
+  - {name: Magic Missile, level: 1, model: auto, dice: 1d4, plus: 1, beams: 3, beams_upcast: 1, damage_type: force}
+  - {name: Burning Hands, level: 1, model: save, dice: 3d6, save: dex, half_on_success: true, targets: 2, upcast: 1d6, damage_type: fire}
+  - {name: Thunderwave, level: 1, model: save, dice: 2d8, save: con, half_on_success: true, targets: 2, upcast: 1d8, damage_type: thunder}
+  - {name: Inflict Wounds, level: 1, model: save, dice: 2d10, save: con, half_on_success: true, targets: 1, upcast: 1d10, damage_type: necrotic}
+  - {name: Cure Wounds, level: 1, model: heal, dice: 2d8, add_mod: true, targets: 1, action: action, upcast: 2d8}
+  - {name: Healing Word, level: 1, model: heal, dice: 2d4, add_mod: true, targets: 1, action: bonus, upcast: 2d4}
+  - {name: Bless, level: 1, model: buff_attack, dice: 1d4, targets: 3, concentration: true}
+  - {name: Shield, level: 1, model: shield}
+  - {name: Mage Armor, level: 1, model: ac_set, base: 13, add: dex, precast: true}
+  - {name: Shield of Faith, level: 1, model: ac_bonus, value: 2, concentration: true, action: bonus}
+  - {name: "Hunter's Mark", level: 1, model: weapon_rider, dice: 1d6, per_hit: true, concentration: true, action: bonus, damage_type: force}
+  # 2nd
+  - {name: Scorching Ray, level: 2, model: attack, dice: 2d6, beams: 3, beams_upcast: 1, damage_type: fire}
+  - {name: Shatter, level: 2, model: save, dice: 3d8, save: con, half_on_success: true, targets: 2, upcast: 1d8, damage_type: thunder}
+  - {name: Spiritual Weapon, level: 2, model: attack, dice: 1d8, add_mod: true, action: bonus, concentration: true, sustain: bonus, upcast: 1d8, damage_type: force}
+  - {name: Flaming Sphere, level: 2, model: save, dice: 2d6, save: dex, half_on_success: true, targets: 1, concentration: true, sustain: bonus, upcast: 1d6, damage_type: fire}
+  - {name: Hold Person, level: 2, model: disable, save: wis, concentration: true, repeat_save: true, creature_types: [humanoid]}
+  # 3rd
+  - {name: Fireball, level: 3, model: save, dice: 8d6, save: dex, half_on_success: true, targets: 3, upcast: 1d6, damage_type: fire}
+  - {name: Lightning Bolt, level: 3, model: save, dice: 8d6, save: dex, half_on_success: true, targets: 2, upcast: 1d6, damage_type: lightning}
+  - {name: Spirit Guardians, level: 3, model: aura, dice: 3d8, save: wis, half_on_success: true, targets: 2, concentration: true, upcast: 1d8, damage_type: radiant}
+  - {name: Call Lightning, level: 3, model: save, dice: 3d10, save: dex, half_on_success: true, targets: 1, concentration: true, sustain: action, upcast: 1d10, damage_type: lightning}
+  - {name: Hypnotic Pattern, level: 3, model: disable, save: wis, targets: 2, concentration: true, repeat_save: false, ends_on_damage: true}
+  - {name: Mass Healing Word, level: 3, model: heal, dice: 2d4, add_mod: true, targets: 4, action: bonus, upcast: 1d4}
+  # 4th
+  - {name: Ice Storm, level: 4, model: save, dice: 2d10+4d6, save: dex, half_on_success: true, targets: 3, upcast: 1d10, damage_type: cold}
+  - {name: Blight, level: 4, model: save, dice: 8d8, save: con, half_on_success: true, targets: 1, upcast: 1d8, damage_type: necrotic}
+  - {name: Banishment, level: 4, model: disable, save: cha, concentration: true, repeat_save: false}
+  # 5th
+  - {name: Cone of Cold, level: 5, model: save, dice: 8d8, save: con, half_on_success: true, targets: 3, damage_type: cold}
+  - {name: Flame Strike, level: 5, model: save, dice: 5d6+5d6, save: dex, half_on_success: true, targets: 2, damage_type: fire}
+  - {name: Insect Plague, level: 5, model: aura, dice: 4d10, save: con, half_on_success: true, targets: 2, concentration: true, damage_type: piercing}
+  - {name: Hold Monster, level: 5, model: disable, save: wis, concentration: true, repeat_save: true}
+  - {name: Mass Cure Wounds, level: 5, model: heal, dice: 5d8, add_mod: true, targets: 4, action: action}

@@ -1,0 +1,1312 @@
+# Facets d20 — Facets, tracks, talents, knacks, backgrounds, presets, sim builds.
+#
+# v0.2 (Amendment 2 revision): no paths. Casting power and martial power are bought with
+# the same five talent picks. Every talent is tagged `track: steel | spell | null`; how
+# many you hold of a track (your *depth* in it) sets what the track gives you (`tracks:`
+# below) and whether your tracked talents grow at 5th and 9th (`tracks.scaling_depth`).
+# Contract and schema: docs/DESIGN_facets_d20_v0_2.md (§1 is the schema; every field and
+# effect type used here is defined there; §3 is the chassis; §3.5 "Why this holds").
+# Spells, domains and slot tables: facets_d20_spells.yaml.
+# Engine: software/facets_d20/. Structure tests: software/tests/test_facets_d20_data.py.
+#
+# The chapter prose in facets_d20/*.md is still v0.1 until the prose pass.
+#
+# Includes material adapted from the System Reference Document 5.2.1 by Wizards of the
+# Coast LLC, licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/legalcode).
+# Talents with `basis: original` are this project's own mechanics (BRIEF Amendment 1, ruling 5).
+
+version: 0.2
+levels: {min: 1, max: 10}
+proficiency_bonus: {1: 2, 2: 2, 3: 2, 4: 2, 5: 3, 6: 3, 7: 3, 8: 3, 9: 4, 10: 4}
+
+advancement:
+  talent_levels: [1, 3, 5, 7, 9]
+  knack_levels: [2, 6, 10]          # plus the background's knack at 1st
+  asi_levels: [4, 8]
+  asi_rule: choice                  # V21: +2 to one ability, +1 to two, or one extra knack (max 20); presets: +2 primary
+  hp_first: hit_die_plus_con
+  hp_per_level: half_die_plus_one_plus_con   # fixed, never rolled
+  retrain: once_per_level_on_long_rest       # swap one talent, knack or domain (never your Facet)
+
+build_rules:
+  cross_facet_talent_cap: 2
+  one_tradition: true               # E3: Body names its tradition with its first Spell talent
+  rider_limit_per_turn: 1           # exception E1
+  controlled_creature_limit: 1      # exception E2
+  max_hit_die: 12
+
+# ---------------------------------------------------------------------------- tracks
+# Amendment 2 (owner): balance by opportunity cost inside the talent budget, no gates.
+# depth = the number of your talents tagged with that track (talents from any menu count).
+# main track = the track you hold more talents in; Steel wins a tie. A Facet's
+# `facet_weight` counts toward it (Body: Steel +2, so a Body character's main track is
+# always Steel). Ranks marked `main: true` apply only while that track is your main
+# track — recomputed whenever your talents change, so ranks can lapse (DESIGN §3.2).
+# Every rank you qualify for applies; a higher rank's `casting` replaces a lower one's.
+tracks:
+  scaling_depth: {5: 2, 9: 3}       # a Steel or Spell talent's 5th-level line needs depth 2 in
+                                    # its track, its 9th-level line depth 3 (general talents: none)
+  main_track: {rule: more_talents, tie: steel}
+  facet_weight: {body: {steel: 2}}  # part of exception E3 (Body has no tradition of its own)
+  steel:
+    name: Steel
+    ranks:
+      - id: martial_weapons
+        name: Martial Weapons
+        depth: 1
+        main: false
+        basis: "SRD 5.2.1 martial weapon proficiency"
+        summary: Your first Steel talent gives you martial weapons, whatever your main track.
+        effects:
+          - {type: weapon_proficiency, categories: [martial]}
+      - id: martial_training
+        name: Martial Training
+        depth: 1
+        main: true
+        basis: "SRD 5.2.1 Fighter/Paladin armor training and hit dice (redistributed)"
+        summary: >-
+          While Steel is your main track: one more armor step (Mind: medium armor and
+          shields; Soul: heavy armor; Body already wears everything) and, for Mind and
+          Soul, a hit die one size larger.
+        effects:
+          - {type: armor_proficiency, categories: {body: [], mind: [medium, shields], soul: [heavy]}}
+          - {type: hit_die_step, value: 1, facets: [mind, soul]}
+      - id: extra_attack
+        name: Extra Attack
+        depth: 2
+        main: true
+        level: 5
+        basis: "SRD 5.2.1 Fighter: Extra Attack"
+        summary: >-
+          Two Steel talents, Steel your main track, from 5th level: when you take the
+          Attack action, you attack twice instead of once.
+        effects:
+          - {type: extra_attack, attacks: 2}
+      - id: veteran
+        name: Veteran
+        depth: 3
+        main: true
+        basis: original
+        summary: >-
+          Three Steel talents, Steel your main track: +1 hit point per level (retroactive)
+          and +2 damage on your weapon hits (not a rider).
+        effects:
+          - {type: hp_per_level, value: 1}
+          - {type: damage_bonus, value: 2, weapon: any}
+  spell:
+    name: Spell
+    ranks:
+      - id: spellcasting
+        name: Spellcasting
+        depth: 1
+        main: false
+        basis: "SRD 5.2.1 half-caster Spellcasting (Paladin/Ranger slot table)"
+        summary: >-
+          Your first Spell talent, whatever your main track: you cast your tradition (Mind:
+          Thaumaturgy, Int; Soul: Invocation, the higher of Wis and Cha; Body: the one you
+          name with this talent). Choose one domain of your tradition. You cast from the
+          Common list and your domains; slots on the Half table by your level.
+        effects:
+          - {type: casting, progression: half}
+          - {type: domains, count: 1}
+      - id: full_casting
+        name: Full Casting
+        depth: 2
+        main: true
+        basis: "SRD 5.2.1 full-caster Spellcasting (Wizard/Cleric slot table)"
+        summary: Two Spell talents, Spell your main track. Your slots use the Full table instead.
+        effects:
+          - {type: casting, progression: full}
+      - id: deep_magic
+        name: Deep Magic
+        depth: 3
+        main: true
+        basis: original
+        summary: >-
+          Three Spell talents, Spell your main track: one more domain of your tradition,
+          which may be a prismatic domain. (The only way to learn a prismatic domain;
+          pending owner ruling, DESIGN §5.1.)
+        effects:
+          - {type: domains, count: 1, prismatic: true}
+
+# ---------------------------------------------------------------------------- facets
+# The Facet sets the chassis a character starts with; talents add to it (tracks above).
+facets:
+  body:
+    name: Body
+    hit_die: 10
+    saves: [str, con]
+    armor: [light, medium, heavy, shields]
+    weapons: [simple, martial]
+    skill_picks: 2
+    skills: [acrobatics, animal_handling, athletics, intimidation, perception,
+             sleight_of_hand, stealth, survival]
+    tradition: null                 # E3: a Body caster names Invocation or Thaumaturgy with its first Spell talent
+    casting_ability: null           # then the tradition's ability
+    features:
+      - id: second_wind
+        name: Second Wind
+        level: 1
+        basis: "SRD 5.2.1 Fighter: Second Wind"
+        summary: >-
+          Bonus action: regain 1d10 + your level hit points. Two uses (three from 5th);
+          one returns on a short rest, all on a long rest.
+        effects:
+          - {type: resource, id: second_wind, uses: 2, recharge: long, short_rest_regain: 1, by_level: {5: 3}}
+          - {type: heal, amount: "1d10+level", action: bonus, targets: self, resource: second_wind}
+      - id: action_surge
+        name: Action Surge
+        level: 2
+        basis: "SRD 5.2.1 Fighter: Action Surge"
+        summary: Once per short rest, take one additional action on your turn. It can't be used to cast a spell.
+        effects:
+          - {type: resource, id: action_surge, uses: 1, recharge: short}
+          - {type: extra_action, resource: action_surge, forbid: [spell]}
+      - id: indomitable
+        name: Indomitable
+        level: 9
+        basis: "SRD 5.2.1 Fighter: Indomitable"
+        summary: Once per long rest, reroll a failed saving throw and add your level to the new roll.
+        effects:
+          - {type: resource, id: indomitable, uses: 1, recharge: long}
+          - {type: reroll, roll: failed_save, add: level, resource: indomitable}
+  mind:
+    name: Mind
+    hit_die: 6
+    saves: [int, wis]
+    armor: [light]
+    weapons: [simple]
+    skill_picks: 2
+    skills: [arcana, history, insight, investigation, medicine, nature, perception, religion]
+    tradition: thaumaturgy
+    casting_ability: int
+    features:
+      - id: study
+        name: Study
+        level: 1
+        basis: original
+        summary: >-
+          Bonus action: study a creature you can see within 60 feet. It is your studied
+          target until the fight ends or you study another. You learn its resistances,
+          immunities and vulnerabilities, and your next attack roll or check against it
+          this turn has advantage. Uses equal to your proficiency bonus; all return on a
+          short rest.
+        effects:
+          - {type: resource, id: study, uses: pb, recharge: short}
+          - {type: studied_target, action: bonus, range_ft: 60, duration: fight, resource: study}
+          - {type: advantage, roll: [attack, check], scope: next_roll_vs_studied_this_turn}
+          - {type: narrative, text: learn the target's resistances, immunities and vulnerabilities}
+      - id: studied_recovery
+        name: Studied Recovery
+        level: 2
+        basis: "SRD 5.2.1 Wizard: Arcane Recovery"
+        summary: >-
+          If you cast spells: once per long rest, when you finish a short rest, recover
+          spent spell slots whose levels add up to half your level, rounded up. None can
+          be 5th level. (No slots, nothing to recover: no rule needed.)
+        effects:
+          - {type: resource, id: studied_recovery, uses: 1, recharge: long}
+          - {type: slot_recovery, amount: half_level_round_up, max_slot: 4, trigger: short_rest, resource: studied_recovery}
+  soul:
+    name: Soul
+    hit_die: 8
+    saves: [wis, cha]
+    armor: [light, medium, shields]
+    weapons: [simple]
+    skill_picks: 2
+    skills: [animal_handling, deception, insight, intimidation, medicine, nature,
+             performance, persuasion, religion, survival]
+    tradition: invocation
+    casting_ability: soul           # the higher of Wis and Cha, always
+    features:
+      - id: kindle
+        name: Kindle
+        level: 1
+        basis: original
+        summary: >-
+          Bonus action: a creature within 60 feet that can hear you gains a Spark (cap 3).
+          Uses equal to your proficiency bonus; all return on a long rest.
+        effects:
+          - {type: resource, id: kindle, uses: pb, recharge: long}
+          - {type: spark, grant: 1, targets: one_creature, range_ft: 60, action: bonus, resource: kindle}
+
+# ---------------------------------------------------------------------------- talents
+# menus: every Facet menu it is printed on (a talent on your own Facet's menu is never a
+# cross-Facet pick). track: steel | spell | null — the talent counts toward that track's
+# depth (tracks: above). A tracked talent's `scaling` line at 5th needs depth 2 in its
+# track and at 9th depth 3 (tracks.scaling_depth); an untracked talent scales by level only.
+# No talent has a path, Facet or "can't take" requirement.
+talents:
+  # ---------------------------------------------------------- shared by all three
+  - id: alert
+    name: Alert
+    menus: [body, mind, soul]
+    track: null
+    requires: null
+    basis: original
+    summary: >-
+      While you are conscious, your side's initiative roll has advantage.
+    effects:
+      - {type: advantage, roll: [initiative], scope: side_roll, condition: [conscious]}
+  - id: hardy
+    name: Hardy
+    menus: [body, mind, soul]
+    track: null
+    requires: null
+    basis: original
+    summary: Your hit die is one size larger (d6→d8→d10→d12). Recalculate your hit points.
+    effects:
+      - {type: hit_die_step, value: 1}
+  - id: weapon_expert
+    name: Weapon Expert
+    menus: [body, mind, soul]
+    track: steel
+    requires: null
+    basis: "SRD 5.2.1 Fighter: Fighting Style (Archery, Defense) and Champion: Improved Critical, merged"
+    summary: >-
+      +1 to weapon attack rolls, and +1 AC while you wear armor. From 5th, your weapon
+      attacks score a critical hit on a 19 or 20. From 9th, when you score one, regain
+      hit points equal to your level.
+    effects:
+      - {type: attack_bonus, value: 1, weapon: any}
+      - {type: ac_bonus, value: 1, condition: [armored]}
+    scaling:
+      5: [{type: crit_range, min: 19, weapon: any}]
+      9: [{type: heal, amount: level, trigger: on_crit, targets: self}]
+
+  # ---------------------------------------------------------- shared by two
+  - id: precision
+    name: Precision
+    menus: [body, mind]
+    track: steel
+    requires: null
+    basis: "SRD 5.2.1 Rogue: Sneak Attack (smaller dice, because two Steel talents bring Extra Attack)"
+    summary: >-
+      Once per turn, when you hit with a finesse or ranged weapon and you had advantage,
+      an ally was next to the target, or it is your studied target: +1d6 damage (2d6
+      from 5th, 3d6 from 9th). This is a rider.
+    effects:
+      - {type: extra_damage_dice, dice: 1d6, rider: true, frequency: once_per_turn,
+         weapon: [finesse, ranged], condition_any: [has_advantage, ally_adjacent_to_target, studied_target]}
+    scaling:
+      5: [{type: extra_damage_dice, dice: 2d6, rider: true, frequency: once_per_turn,
+           weapon: [finesse, ranged], condition_any: [has_advantage, ally_adjacent_to_target, studied_target]}]
+      9: [{type: extra_damage_dice, dice: 3d6, rider: true, frequency: once_per_turn,
+           weapon: [finesse, ranged], condition_any: [has_advantage, ally_adjacent_to_target, studied_target]}]
+  - id: turn_the_odds
+    name: Turn the Odds
+    menus: [mind, soul]
+    track: spell
+    requires: null
+    basis: original
+    summary: >-
+      You bend chance with magic. You can spend a Spark on the d20 test of any creature
+      you can see within 60 feet, adding the Spark die or subtracting it. Once per round.
+      You start every fight with at least one Spark.
+    effects:
+      - {type: spark, spend_on: any_creature, range_ft: 60, subtract: true, frequency: once_per_round}
+      - {type: spark, floor: 1, trigger: fight_start}
+  - id: wider_study
+    name: Wider Study
+    menus: [mind, soul]
+    track: spell
+    requires: null
+    basis: original
+    summary: Take one more domain of your tradition. Its spells join your lists.
+    effects:
+      - {type: domains, count: 1}
+
+  # ---------------------------------------------------------- Body
+  - id: rage
+    name: Rage
+    menus: [body]
+    track: steel
+    requires: null
+    basis: "SRD 5.2.1 Barbarian: Rage, Reckless Attack, Unarmored Defense, Relentless Rage (simplified)"
+    summary: >-
+      Bonus action, not in heavy armor: until the fight ends you resist bludgeoning,
+      piercing and slashing damage, deal +2 damage with Strength weapon attacks (+3 from
+      9th), have advantage on Strength checks and saves, and can't cast spells. While
+      raging you can attack recklessly (advantage on your Strength melee attacks this
+      turn; attacks against you have advantage until your next turn). Unarmored, your AC
+      is 10 + Dex + Con (a shield counts). Two rages (three from 5th, four from 9th); one
+      returns on a short rest. From 5th, once per long rest, when you drop to 0 HP while
+      raging you drop to 1 instead.
+    effects:
+      - {type: resource, id: rage, uses: 2, recharge: long, short_rest_regain: 1}
+      - {type: stance, id: raging, action: bonus, duration: fight, resource: rage, forbid_armor: [heavy]}
+      - {type: resistance, damage_types: [bludgeoning, piercing, slashing], condition: [raging]}
+      - {type: damage_bonus, value: 2, weapon: str_melee, condition: [raging]}
+      - {type: advantage, roll: [check, save], scope: str, condition: [raging]}
+      - {type: reckless, condition: [raging]}
+      - {type: forbid, what: [spellcasting, concentration], condition: [raging]}
+      - {type: ac_formula, base: 10, add: [dex, con], shield_allowed: true, condition: [unarmored]}
+    scaling:
+      5: [{type: resource, id: rage, uses: 3, recharge: long, short_rest_regain: 1},
+          {type: resource, id: relentless, uses: 1, recharge: long},
+          {type: drop_to_one, trigger: would_drop_to_0, condition: [raging], resource: relentless}]
+      9: [{type: resource, id: rage, uses: 4, recharge: long, short_rest_regain: 1},
+          {type: damage_bonus, value: 3, weapon: str_melee, condition: [raging]}]
+  - id: martial_arts
+    name: Martial Arts
+    menus: [body]
+    track: steel
+    requires: null
+    basis: "SRD 5.2.1 Monk: Martial Arts, Unarmored Defense, Monk's Focus, Stunning Strike"
+    summary: >-
+      Unarmored and without a shield: your unarmed strikes and simple or light melee
+      weapons can use Dex and a d6 damage die (d8 from 5th, d10 from 9th); after you take
+      the Attack action you can make one unarmed strike as a bonus action; your speed
+      rises by 10 feet; your AC is 10 + Dex + Wis. You have focus points equal to your
+      level (all back on a short rest): spend 1 for Flurry (two bonus-action strikes
+      instead of one), Patient Defense (Dodge) or Step of the Wind (Dash and Disengage).
+      From 5th: Stunning Strike (once per turn on a hit, 1 focus point, Con save against
+      8 + prof + Wis or stunned until the start of your next turn).
+    effects:
+      - {type: martial_die, die: d6, ability: dex, applies: [unarmed, simple_melee, light_melee], condition: [unarmored, no_shield]}
+      - {type: bonus_attack, count: 1, weapon: unarmed, condition: [unarmored, no_shield, attack_action]}
+      - {type: speed_bonus, value: 10, condition: [unarmored, no_shield]}
+      - {type: ac_formula, base: 10, add: [dex, wis], shield_allowed: false, condition: [unarmored]}
+      - {type: resource, id: focus, uses: level, recharge: short}
+      - {type: bonus_attack, count: 2, weapon: unarmed, resource: focus, cost: 1, replaces_free: true,
+         condition: [unarmored, no_shield, attack_action]}
+      - {type: narrative, text: "Patient Defense (1 focus: Dodge as a bonus action); Step of the Wind (1 focus: Dash and Disengage)"}
+    scaling:
+      5: [{type: martial_die, die: d8, ability: dex, applies: [unarmed, simple_melee, light_melee], condition: [unarmored, no_shield]},
+          {type: condition_on_hit, inflicts: stunned, save: con, dc: "8+pb+wis", resource: focus, cost: 1,
+           frequency: once_per_turn, duration: until_your_next_turn_start}]
+      9: [{type: martial_die, die: d10, ability: dex, applies: [unarmed, simple_melee, light_melee], condition: [unarmored, no_shield]}]
+  - id: cunning
+    name: Cunning
+    menus: [body]
+    track: null
+    requires: null
+    basis: "SRD 5.2.1 Rogue: Cunning Action, Uncanny Dodge, Evasion"
+    summary: >-
+      You can Dash, Disengage or Hide as a bonus action. From 5th, when an attacker you
+      can see hits you, you can use your reaction to halve the damage. From 9th, when a
+      Dex save would halve damage, you take none on a success and half on a failure.
+    effects:
+      - {type: cunning_action, options: [dash, disengage, hide]}
+    scaling:
+      5: [{type: halve_damage, action: reaction, trigger: hit_by_seen_attacker}]
+      9: [{type: evasion}]
+  - id: guardian
+    name: Guardian
+    menus: [body]
+    track: steel
+    requires: null
+    basis: original
+    summary: >-
+      Reaction, when a creature you can see hits an ally within 5 feet of you: you take
+      the hit and everything it carries instead, reducing its damage by your level
+      (before resistance). From 9th, reduce it by twice your level.
+    effects:
+      - {type: redirect_hit, range_ft: 5, reduce_by: level, action: reaction}
+    scaling:
+      9: [{type: redirect_hit, range_ft: 5, reduce_by: "2*level", action: reaction}]
+  - id: marksman
+    name: Marksman
+    menus: [body]
+    track: steel
+    requires: null
+    basis: "SRD 5.2.1 Rogue: Steady Aim; Fighting Style: Archery; Champion: Improved Critical (ranged)"
+    summary: >-
+      Bonus action, if you haven't moved this turn: your next ranged weapon attack this
+      turn has advantage, and your speed is 0 until the turn ends. From 5th, +2 to ranged
+      weapon attack rolls. From 9th, your ranged weapon attacks score a critical hit on
+      a 19 or 20.
+    effects:
+      - {type: advantage, roll: [attack], scope: next_ranged_attack_this_turn, action: bonus, condition: [not_moved]}
+    scaling:
+      5: [{type: attack_bonus, value: 2, weapon: ranged}]
+      9: [{type: crit_range, min: 19, weapon: ranged}]
+  - id: cleave
+    name: Cleave
+    menus: [body]
+    track: steel
+    requires: null
+    basis: "SRD 5.2.1 weapon mastery: Cleave (reworked as a talent)"
+    summary: >-
+      Once per turn, when you hit with a heavy or versatile melee weapon, a second
+      creature within 5 feet of you and of the target takes damage equal to your
+      Strength modifier (Strength + proficiency bonus from 5th). No attack roll; it isn't
+      a rider.
+    effects:
+      - {type: aoe_rider, damage: str, targets: second_adjacent, weapon: heavy_or_versatile_melee, frequency: once_per_turn}
+    scaling:
+      5: [{type: aoe_rider, damage: "str+pb", targets: second_adjacent, weapon: heavy_or_versatile_melee, frequency: once_per_turn}]
+
+  # ---------------------------------------------------------- Mind
+  - id: evoker
+    name: Evoker
+    menus: [mind]
+    track: spell
+    requires: null
+    basis: "SRD 5.2.1 Evoker: Sculpt Spells, Empowered Evocation; maximise is original"
+    summary: >-
+      When you cast an area spell, choose up to 1 + the spell's level creatures in it:
+      they automatically succeed on its save and take no damage. From 5th, add your
+      casting modifier to one damage roll of each damaging spell you cast (cantrips
+      included). From 9th, once per long rest, a damaging spell deals the maximum on
+      every die.
+    effects:
+      - {type: sculpt, count: "1+slot_level"}
+    scaling:
+      5: [{type: damage_bonus, value: casting, applies: spell, frequency: once_per_spell}]
+      9: [{type: resource, id: overcast, uses: 1, recharge: long},
+          {type: maximize_spell, resource: overcast}]
+  - id: anatomist
+    name: Anatomist
+    menus: [mind]
+    track: steel
+    requires: null
+    basis: original
+    summary: >-
+      Your weapon attacks against your studied target score a critical hit on a 19 or
+      20 (18–20 from 9th). When you crit it, it is also knocked prone.
+    effects:
+      - {type: crit_range, min: 19, weapon: any, condition: [studied_target]}
+      - {type: condition_on_hit, inflicts: prone, trigger: crit, save: null, condition_target: [studied_target]}
+    scaling:
+      9: [{type: crit_range, min: 18, weapon: any, condition: [studied_target]}]
+  - id: anticipate
+    name: Anticipate
+    menus: [mind]
+    track: null
+    requires: null
+    basis: original
+    summary: >-
+      Reaction, when your studied target makes an attack roll against you or a creature
+      you can see within 30 feet: it has disadvantage. No limit beyond your one reaction.
+    effects:
+      - {type: impose_disadvantage, roll: attack, trigger: studied_target_attacks, range_ft: 30, action: reaction}
+  - id: iron_mind
+    name: Iron Mind
+    menus: [mind]
+    track: null
+    requires: null
+    basis: original
+    summary: >-
+      Advantage on saves against being charmed or frightened. From 5th, when you succeed
+      on a save against a spell, you take no damage from it. From 9th, advantage on all
+      Int, Wis and Cha saves.
+    effects:
+      - {type: advantage, roll: [save], scope: vs_charmed_or_frightened}
+    scaling:
+      5: [{type: evasion, applies: spell_saves}]
+      9: [{type: advantage, roll: [save], scope: [int, wis, cha]}]
+  - id: master_plan
+    name: Master Plan
+    menus: [mind]
+    track: null
+    requires: null
+    basis: original
+    summary: >-
+      Once per short rest, before a fight you had a scene to plan for, lay out the plan.
+      In the first round, you and each ally who follows it have advantage on attack rolls
+      and saving throws. From 9th, twice per short rest.
+    effects:
+      - {type: resource, id: master_plan, uses: 1, recharge: short, by_level: {9: 2}}
+      - {type: advantage, roll: [attack, save], scope: all, targets: [self, allies], condition: [first_round, planned], resource: master_plan}
+  - id: clockwork_guardian
+    name: Clockwork Guardian
+    menus: [mind]
+    track: spell
+    requires: null
+    basis: original
+    summary: >-
+      You build and animate a small construct (AC 15, HP 5 × your level, speed 30) that
+      never attacks. It acts right after you: it Helps (an ally's next attack against a
+      creature within 5 feet of it has advantage) or Guards (until your next turn, the
+      first hit on an ally within 5 feet of it loses 1d8 + your Int modifier damage).
+      Rebuild it on a long rest.
+    effects:
+      - {type: companion, ac: 15, hp: "5*level", speed: 30, attacks: false, actions: [help, guard],
+         guard: {reduce: "1d8+int", hits: 1, range_ft: 5}}
+  - id: field_kit
+    name: Field Kit
+    menus: [mind]
+    track: null
+    requires: null
+    basis: original
+    summary: >-
+      After a long rest you rig the party's gear. At the start of each fight, you and up
+      to your proficiency bonus of allies gain temporary hit points equal to your level.
+    effects:
+      - {type: temp_hp, amount: level, trigger: fight_start, targets: {self: true, allies: pb}}
+
+  # ---------------------------------------------------------- Soul
+  - id: channel
+    name: Channel
+    menus: [soul]
+    track: spell
+    requires: null
+    basis: "SRD 5.2.1 Cleric: Divine Spark, and Life domain: Disciple of Life"
+    summary: >-
+      Magic action, two uses (three from 5th), one back on a short rest: a creature within
+      30 feet regains 1d8 + your casting modifier HP, or makes a Con save against your
+      spell DC and takes that much radiant or necrotic damage (half on a success). 2d8
+      from 5th, 3d8 from 9th. Also, when you cast a spell with a slot that restores hit
+      points as you cast it, one creature it heals regains 2 + the slot's level extra.
+    effects:
+      - {type: resource, id: channel, uses: 2, recharge: long, short_rest_regain: 1}
+      - {type: heal, amount: "1d8+casting", action: magic, range_ft: 30, targets: 1, resource: channel}
+      - {type: save_damage, dice: 1d8, add: casting, save: con, dc: spell, half_on_success: true,
+         damage_type: radiant, action: magic, range_ft: 30, resource: channel, alternative_to: heal}
+      - {type: heal_boost, amount: "2+slot_level", trigger: slot_spell_heal_on_cast, targets: 1}
+    scaling:
+      5: [{type: resource, id: channel, uses: 3, recharge: long, short_rest_regain: 1},
+          {type: heal, amount: "2d8+casting", action: magic, range_ft: 30, targets: 1, resource: channel},
+          {type: save_damage, dice: 2d8, add: casting, save: con, dc: spell, half_on_success: true,
+           damage_type: radiant, action: magic, range_ft: 30, resource: channel, alternative_to: heal}]
+      9: [{type: heal, amount: "3d8+casting", action: magic, range_ft: 30, targets: 1, resource: channel},
+          {type: save_damage, dice: 3d8, add: casting, save: con, dc: spell, half_on_success: true,
+           damage_type: radiant, action: magic, range_ft: 30, resource: channel, alternative_to: heal}]
+  - id: wild_shape
+    name: Wild Shape
+    menus: [soul]
+    track: spell
+    requires: null
+    basis: "SRD 5.2.1 Druid: Wild Shape"
+    summary: >-
+      Bonus action: become a beast of CR 1/4 or lower (CR 1/2 from 5th, CR 1 from 9th; no
+      flying speed before 9th) for the fight or an hour. You gain temporary HP equal to
+      your level, keep your talents and Facet features, and can't cast spells. Two uses;
+      one returns on a short rest.
+    effects:
+      - {type: resource, id: wild_shape, uses: 2, recharge: long, short_rest_regain: 1}
+      - {type: wild_shape, max_cr: 0.25, temp_hp: level, action: bonus, keeps: [talents, facet_features],
+         no_spells: true, flying: false, resource: wild_shape, sim_form: wolf}
+    scaling:
+      5: [{type: wild_shape, max_cr: 0.5, temp_hp: level, action: bonus, keeps: [talents, facet_features],
+           no_spells: true, flying: false, resource: wild_shape, sim_form: black_bear}]
+      9: [{type: wild_shape, max_cr: 1, temp_hp: level, action: bonus, keeps: [talents, facet_features],
+           no_spells: true, flying: true, resource: wild_shape, sim_form: dire_wolf}]
+  - id: sworn_strike
+    name: Sworn Strike
+    menus: [soul]
+    track: steel
+    requires: null
+    basis: original
+    summary: >-
+      Once per turn, when you hit with a melee weapon, spend a use to deal an extra 2d8
+      radiant damage (3d8 from 5th, 4d8 from 9th). Uses equal to your Soul modifier
+      (minimum 1) per long rest; one returns on a short rest. From 9th, on a turn you hit
+      and spend no use, add 1d8 radiant instead. Either way it is a rider. This is the
+      game's one smite: no spell adds damage to a weapon hit (V24).
+    effects:
+      - {type: resource, id: sworn_strike, uses: soul, min: 1, recharge: long, short_rest_regain: 1}
+      - {type: extra_damage_dice, dice: 2d8, rider: true, frequency: once_per_turn, weapon: [melee],
+         damage_type: radiant, resource: sworn_strike}
+    scaling:
+      5: [{type: extra_damage_dice, dice: 3d8, rider: true, frequency: once_per_turn, weapon: [melee],
+           damage_type: radiant, resource: sworn_strike}]
+      9: [{type: extra_damage_dice, dice: 4d8, rider: true, frequency: once_per_turn, weapon: [melee],
+           damage_type: radiant, resource: sworn_strike},
+          {id: radiant_edge, type: extra_damage_dice, dice: 1d8, rider: true, frequency: once_per_turn,
+           weapon: [melee], damage_type: radiant, fallback: true}]
+  - id: mending_hands
+    name: Mending Hands
+    menus: [soul]
+    track: spell
+    requires: null
+    basis: "SRD 5.2.1 Paladin: Lay On Hands"
+    summary: >-
+      A pool of healing magic equal to 5 × your level, refilled on a long rest. Bonus
+      action, touch: restore any number of points from the pool, or spend 5 to end the
+      poisoned condition.
+    effects:
+      - {type: heal_pool, size: "5*level", action: bonus, range_ft: 5, recharge: long}
+  - id: warden
+    name: Warden
+    menus: [soul]
+    track: null
+    requires: null
+    basis: "SRD 5.2.1 Paladin: Aura of Protection (earlier and smaller)"
+    summary: >-
+      While you are conscious, you and allies within 10 feet add +1 to saving throws
+      (your Soul modifier, minimum +1, from 5th). From 9th, you can't be frightened.
+    effects:
+      - {type: save_bonus, value: 1, aura_ft: 10, targets: [self, allies]}
+    scaling:
+      5: [{type: save_bonus, value: soul, min: 1, aura_ft: 10, targets: [self, allies]}]
+      9: [{type: condition_immunity, conditions: [frightened]}]
+  - id: prophecy
+    name: Prophecy
+    menus: [soul]
+    track: spell
+    requires: null
+    basis: original
+    summary: >-
+      After a long rest, speak one sentence about the day ahead: something you can't
+      simply make happen (the MM can veto a trivial one). The first time the MM agrees it
+      has come true, each ally who heard it gains a Spark (once per ally per day). From
+      5th, you also regain every use of Kindle.
+    effects:
+      - {type: spark, grant: 1, targets: allies_who_heard, trigger: prophecy_fulfilled, frequency: once_per_day}
+    scaling:
+      5: [{type: resource_refill, resource: kindle, trigger: prophecy_fulfilled}]
+  - id: oath_unbroken
+    name: Oath Unbroken
+    menus: [soul]
+    track: null
+    requires: null
+    basis: original
+    summary: >-
+      Speak an oath of one sentence; it becomes one of your Drives. While you keep it,
+      once per long rest, when you would drop to 0 HP you drop to 1 instead, and your
+      next weapon or spell hit in that fight deals maximum damage. Break it and this does
+      nothing until you make amends.
+    effects:
+      - {type: resource, id: oath, uses: 1, recharge: long}
+      - {type: drop_to_one, trigger: would_drop_to_0, condition: [oath_kept], resource: oath}
+      - {type: max_damage_next_hit, trigger: after_drop_to_one}
+
+# ---------------------------------------------------------------------------- knacks
+# Non-combat by rule: only effect types marked (N) in DESIGN §1.4, plus field_medic's
+# hit_dice_bonus (between-fight healing, bounded by Hit Dice). Background gives one.
+knacks:
+  - id: expertise
+    name: Expertise
+    basis: "SRD 5.2.1 Rogue: Expertise"
+    summary: Choose two skills you are proficient in. Your proficiency bonus is doubled for checks with them.
+    effects: [{type: expertise, choose: 2}]
+  - id: skilled
+    name: Skilled
+    basis: "SRD 5.2.1 origin feat: Skilled"
+    summary: Gain proficiency in any three skills or tools, in any combination.
+    effects: [{type: skill_proficiency, choose: 3, from: any_skill_or_tool}]
+  - id: silver_tongue
+    name: Silver Tongue
+    basis: original
+    summary: >-
+      Once per NPC per scene, a failed Persuasion or Deception check doesn't move their
+      attitude down; and beating the DC by 5 moves it two steps instead of by 10.
+    effects: [{type: narrative, text: attitude-track protection and two-step shift (Chapter 06)}]
+  - id: wild_kin
+    name: Wild Kin
+    basis: original
+    summary: >-
+      You can speak with beasts, and they start no worse than Neutral toward you. You have
+      advantage on Survival checks to track or forage.
+    effects:
+      - {type: narrative, text: speak with beasts; beasts start Neutral}
+      - {type: advantage, roll: [check], scope: survival_track_forage}
+  - id: field_medic
+    name: Field Medic
+    basis: original
+    summary: >-
+      You can stabilize a creature as a bonus action. During a short rest, each Hit Die a
+      creature you tend spends restores extra hit points equal to your proficiency bonus.
+    effects:
+      - {type: narrative, text: stabilize as a bonus action}
+      - {type: hit_dice_bonus, amount: pb, trigger: short_rest}
+  - id: gadgeteer
+    name: Gadgeteer
+    basis: original
+    summary: >-
+      With tinker's tools and a short rest you can make one simple non-combat device: a
+      grapnel, a tripwire alarm, a lamp that won't gutter, a lock you can pick in a
+      breath. It works until your next long rest.
+    effects: [{type: tool_proficiency, choose: 1, from: [tinkers_tools]}, {type: narrative, text: non-combat gadgets}]
+  - id: encyclopedic
+    name: Encyclopedic
+    basis: original
+    summary: >-
+      Once per long rest, state a fact about a creature, place or piece of history. It is
+      true (the MM may add a complication).
+    effects: [{type: narrative, text: once per long rest a stated fact is true}]
+  - id: well_travelled
+    name: Well-Travelled
+    basis: original
+    summary: >-
+      You know two more languages, and in any settlement you can find someone to
+      translate any other language for you within the hour.
+    effects: [{type: languages, count: 2}, {type: narrative, text: find a translator in any settlement}]
+  - id: streetwise
+    name: Streetwise
+    basis: original
+    summary: In any settlement you can find someone who knows someone, given an hour and a few coins.
+    effects: [{type: narrative, text: contacts in any settlement}]
+  - id: performer
+    name: Performer
+    basis: original
+    summary: >-
+      You can earn a modest living by performing, and a crowd that watches you perform
+      starts one step friendlier toward you.
+    effects: [{type: narrative, text: crowd attitude +1 step after a performance}]
+  - id: pathfinder
+    name: Pathfinder
+    basis: original
+    summary: >-
+      Your group can't get lost except by magic, travels stealthily at a normal pace, and
+      finds twice as much food when you forage.
+    effects: [{type: narrative, text: travel and foraging benefits}]
+  - id: artisan
+    name: Artisan
+    basis: original
+    summary: Gain proficiency with two artisan's tools; you craft nonmagical items in half the time.
+    effects: [{type: tool_proficiency, choose: 2, from: artisans_tools}, {type: narrative, text: half crafting time}]
+  - id: many_faces
+    name: Many Faces
+    basis: original
+    summary: >-
+      Gain proficiency with the disguise kit. You can put on a disguise in a minute
+      without one, and your disguise holds up to a casual look without a roll; only close
+      scrutiny calls for a check.
+    effects: [{type: tool_proficiency, choose: 1, from: [disguise_kit]}, {type: narrative, text: disguise needs no roll against casual inspection}]
+
+# ---------------------------------------------------------------------------- backgrounds
+# +1 to each of the three listed abilities (no split decision). Knack is fixed.
+backgrounds:
+  - {id: city_watch_veteran, name: City Watch Veteran, abilities: [str, con, wis], skills: [athletics, insight],
+     tool: gaming_set, knack: streetwise}
+  - {id: wilderness_scout, name: Wilderness Scout, abilities: [dex, con, wis], skills: [survival, stealth],
+     tool: cartographers_tools, knack: pathfinder}
+  - {id: dockworker, name: Dockworker, abilities: [str, dex, con], skills: [athletics, investigation],
+     tool: vehicles_water, knack: skilled}
+  - {id: guild_apprentice, name: Guild Apprentice, abilities: [dex, int, wis], skills: [arcana, investigation],
+     tool: calligraphers_supplies, knack: gadgeteer}
+  - {id: physicians_assistant, name: "Physician's Assistant", abilities: [dex, int, wis], skills: [medicine, insight],
+     tool: herbalism_kit, knack: field_medic}
+  - {id: temple_acolyte, name: Temple Acolyte, abilities: [int, wis, cha], skills: [religion, insight],
+     tool: calligraphers_supplies, knack: encyclopedic}
+  - {id: street_performer, name: Street Performer, abilities: [dex, con, cha], skills: [performance, acrobatics],
+     tool: musical_instrument, knack: performer}
+  - {id: traveling_merchant, name: Traveling Merchant, abilities: [int, wis, cha], skills: [persuasion, insight],
+     tool: vehicles_land, knack: silver_tongue}
+
+# ---------------------------------------------------------------------------- presets
+# `abilities` are final (standard array 15/14/13/12/10/8 placed, background +1/+1/+1 added).
+# `talents` keys are the talent levels; `knacks` keys the knack levels.
+# Domains: `domain` arrives with the first Spell talent; `extra_domains` {level: id} are
+# Wider Study's; `deep_domain` arrives with Deep Magic (Spell depth 3) and may be prismatic.
+# `kit_by_level` {level: kit changes} is armor bought once a Steel talent opens it.
+# `tradition` is needed only on a Body build that casts (E3).
+# The comment after each id is its shape: Steel/Spell depth at 10th.
+presets:
+  # ------------------------------------------------ Body (pure martial: Body is the Steel Facet)
+  - id: fighter                     # Steel 3 · Spell 0
+    name: Fighter
+    facet: body
+    background: city_watch_veteran
+    abilities: {str: 16, dex: 13, con: 15, int: 8, wis: 13, cha: 10}
+    skills: [perception, intimidation]
+    talents: {1: weapon_expert, 3: guardian, 5: cleave, 7: hardy, 9: alert}
+    knacks: {2: skilled, 6: pathfinder, 10: well_travelled}
+    kit: {armor: chain_mail, shield: true, weapons: [longsword, javelin]}
+  - id: rogue                       # Steel 3 · Spell 0
+    name: Rogue
+    facet: body
+    background: street_performer
+    abilities: {str: 8, dex: 16, con: 15, int: 10, wis: 12, cha: 14}
+    skills: [stealth, sleight_of_hand]
+    talents: {1: precision, 3: cunning, 5: marksman, 7: weapon_expert, 9: alert}
+    knacks: {2: expertise, 6: many_faces, 10: streetwise}
+    kit: {armor: leather, shield: false, weapons: [rapier, shortbow]}
+  - id: barbarian                   # Steel 3 · Spell 0
+    name: Barbarian
+    facet: body
+    background: dockworker
+    abilities: {str: 16, dex: 14, con: 15, int: 8, wis: 12, cha: 10}
+    skills: [perception, survival]
+    talents: {1: rage, 3: hardy, 5: cleave, 7: guardian, 9: alert}
+    knacks: {2: pathfinder, 6: wild_kin, 10: artisan}
+    kit: {armor: null, shield: false, weapons: [greataxe, handaxe]}
+  - id: monk                        # Steel 2 · Spell 0
+    name: Monk
+    facet: body
+    background: wilderness_scout
+    abilities: {str: 12, dex: 16, con: 14, int: 10, wis: 15, cha: 8}
+    skills: [acrobatics, athletics]
+    talents: {1: martial_arts, 3: cunning, 5: weapon_expert, 7: alert, 9: hardy}
+    knacks: {2: expertise, 6: wild_kin, 10: well_travelled}
+    kit: {armor: null, shield: false, weapons: [quarterstaff, dart]}
+  # ------------------------------------------------ Mind
+  - id: wizard                      # Spell 3 · Steel 0 — pure caster
+    name: Wizard
+    facet: mind
+    domain: constructed_force
+    background: guild_apprentice
+    abilities: {str: 8, dex: 14, con: 14, int: 16, wis: 13, cha: 10}
+    skills: [history, religion]
+    talents: {1: evoker, 3: wider_study, 5: turn_the_odds, 7: iron_mind, 9: hardy}
+    extra_domains: {3: illusion}
+    deep_domain: the_arcane
+    knacks: {2: encyclopedic, 6: well_travelled, 10: artisan}
+    kit: {armor: null, shield: false, weapons: [quarterstaff], focus: arcane_focus}
+  - id: investigator                # Steel 3 · Spell 0 — pure martial
+    name: Investigator
+    facet: mind
+    background: physicians_assistant
+    abilities: {str: 8, dex: 16, con: 13, int: 15, wis: 13, cha: 10}
+    skills: [investigation, perception]
+    talents: {1: precision, 3: anticipate, 5: anatomist, 7: hardy, 9: weapon_expert}
+    knacks: {2: expertise, 6: streetwise, 10: encyclopedic}
+    kit: {armor: chain_shirt, shield: true, weapons: [rapier, light_crossbow]}
+  - id: loremaster                  # Spell 2 · Steel 0 — caster who spends on general talents
+    name: Loremaster
+    facet: mind
+    domain: illusion
+    background: traveling_merchant
+    abilities: {str: 8, dex: 13, con: 12, int: 16, wis: 11, cha: 15}
+    skills: [history, arcana]
+    talents: {1: turn_the_odds, 3: wider_study, 5: master_plan, 7: alert, 9: iron_mind}
+    extra_domains: {3: divination}
+    knacks: {2: encyclopedic, 6: well_travelled, 10: performer}
+    kit: {armor: leather, shield: false, weapons: [dagger], focus: arcane_focus}
+  - id: tinker                      # Steel 1 · Spell 1 — hybrid (tie: Steel main; half caster in armor, no Extra Attack)
+    name: Tinker
+    facet: mind
+    domain: transmutation
+    background: guild_apprentice
+    abilities: {str: 10, dex: 15, con: 13, int: 16, wis: 13, cha: 8}
+    skills: [nature, perception]
+    talents: {1: clockwork_guardian, 3: weapon_expert, 5: field_kit, 7: hardy, 9: anticipate}
+    knacks: {2: artisan, 6: skilled, 10: expertise}
+    kit: {armor: leather, shield: false, weapons: [light_crossbow, dagger], focus: arcane_focus}
+    kit_by_level: {3: {armor: breastplate, shield: true, weapons: [rapier, light_crossbow]}}
+  # ------------------------------------------------ Soul
+  - id: priest                      # Spell 3 · Steel 0 — pure caster
+    name: Priest
+    facet: soul
+    domain: the_tide
+    background: temple_acolyte
+    abilities: {str: 13, dex: 10, con: 14, int: 9, wis: 16, cha: 13}
+    skills: [medicine, persuasion]
+    talents: {1: channel, 3: wider_study, 5: mending_hands, 7: warden, 9: hardy}
+    extra_domains: {3: presence}
+    deep_domain: the_living_world
+    knacks: {2: field_medic, 6: well_travelled, 10: silver_tongue}
+    kit: {armor: scale_mail, shield: true, weapons: [mace], focus: holy_symbol}
+  - id: druid                       # Spell 3 · Steel 0 — pure caster
+    name: Druid
+    facet: soul
+    domain: verdance
+    background: wilderness_scout
+    abilities: {str: 8, dex: 14, con: 15, int: 12, wis: 16, cha: 10}
+    skills: [nature, animal_handling]
+    talents: {1: wild_shape, 3: wider_study, 5: channel, 7: hardy, 9: warden}
+    extra_domains: {3: beasts}
+    deep_domain: the_living_world
+    knacks: {2: wild_kin, 6: field_medic, 10: well_travelled}
+    kit: {armor: leather, shield: true, weapons: [quarterstaff], focus: druidic_focus}
+  - id: oracle                      # Spell 3 · Steel 0 — pure caster; Fate arrives with Deep Magic at 5th
+    name: Oracle
+    facet: soul
+    domain: presence
+    background: traveling_merchant
+    abilities: {str: 8, dex: 12, con: 13, int: 11, wis: 15, cha: 16}
+    skills: [religion, deception]
+    talents: {1: turn_the_odds, 3: wider_study, 5: prophecy, 7: warden, 9: alert}
+    extra_domains: {3: binding}
+    deep_domain: fate
+    knacks: {2: encyclopedic, 6: many_faces, 10: performer}
+    kit: {armor: chain_shirt, shield: true, weapons: [spear], focus: holy_symbol}
+  - id: oathsworn                   # Steel 2 · Spell 1 — the natural hybrid (paladin shape)
+    name: Oathsworn
+    facet: soul
+    domain: presence
+    background: city_watch_veteran
+    abilities: {str: 16, dex: 10, con: 14, int: 8, wis: 15, cha: 12}
+    skills: [intimidation, religion]
+    talents: {1: sworn_strike, 3: mending_hands, 5: weapon_expert, 7: warden, 9: oath_unbroken}
+    knacks: {2: silver_tongue, 6: field_medic, 10: well_travelled}
+    kit: {armor: chain_mail, shield: true, weapons: [longsword, javelin], focus: holy_symbol}
+
+# ---------------------------------------------------------------------------- balance
+# Ruling 3 and Amendment 2. The simulator runs every preset and every sim_build at these
+# levels and reports each against the band (DESIGN §8). Sim builds must be legal.
+balance:
+  levels: [1, 4, 7, 10]
+  band_pct: 15                      # every preset's power index within ±15% of the preset median
+  facet_band_pct: 10                # each Facet's preset mean within ±10% of the overall median
+  combo_ceiling_pct: 15             # a sim_build may be weaker, never more than +15% over the median
+  srd_band_pct: 15                  # preset median within ±15% of the SRD baseline median
+  srd_baselines: [srd_fighter_champion, srd_rogue_thief, srd_wizard_evoker, srd_cleric_life,
+                  srd_paladin_devotion, srd_barbarian_berserker]
+  reference_party: [fighter, rogue, wizard, priest]
+  # Amendment 2: pure caster, pure martial and hybrids for every Facet (band item 7,
+  # DESIGN §8). From 4th level each hybrid must: (a) PI ≤ its Facet's best pure build's PI
+  # + pi_tolerance; (b) if Steel is its main track, DPR₁ ≤ its Facet's best pure-martial
+  # DPR₁ + job_tolerance; (c) DPR₃ ≤ the best pure caster of its tradition's DPR₃ +
+  # job_tolerance. "Best" = the highest among the builds listed for that role.
+  roles:
+    body:
+      pure_martial: [fighter, rogue, barbarian, monk, unbreakable, reckless_striker]
+      pure_caster: [body_caster]
+      hybrids: [body_ranger, body_battlemage]
+    mind:
+      pure_martial: [investigator]
+      pure_caster: [wizard, loremaster, mind_controller, double_cross]
+      hybrids: [tinker, spellblade, armored_caster]
+    soul:
+      pure_martial: [soul_champion]
+      pure_caster: [priest, druid, oracle, healer_engine, soul_blaster, summoner]
+      hybrids: [oathsworn, battle_priest, battle_priest_deep, paladin_max]
+  tradition_casters:
+    thaumaturgy: [wizard, loremaster, mind_controller, double_cross]
+    invocation: [priest, druid, oracle, healer_engine, soul_blaster, summoner, body_caster]
+  hybrid_rule: {from_level: 4, pi_tolerance_pct: 15, job_tolerance_pct: 5}
+
+# `role` names the Amendment 2 shape; `audit` the finding the build tests.
+sim_builds:
+  # ------------------------------------------------ Amendment 2: the missing pure builds
+  - id: body_caster                 # Body's deepest caster: both cross picks on Spell talents (depth 2)
+    audit: A2
+    role: pure_caster
+    facet: body
+    tradition: invocation
+    domain: the_tide
+    abilities: {str: 10, dex: 13, con: 15, int: 8, wis: 16, cha: 12}
+    talents: {1: channel, 3: wider_study, 5: alert, 7: hardy, 9: cunning}
+    cross: [channel, wider_study]
+    extra_domains: {3: presence}
+    kit: {armor: chain_mail, shield: true, weapons: [mace]}
+  - id: soul_champion               # Soul pure martial: Steel 3, no casting
+    audit: A2
+    role: pure_martial
+    facet: soul
+    abilities: {str: 16, dex: 10, con: 14, int: 8, wis: 12, cha: 15}
+    talents: {1: sworn_strike, 3: weapon_expert, 5: guardian, 7: warden, 9: hardy}
+    cross: [guardian]
+    kit: {armor: chain_mail, shield: true, weapons: [longsword]}
+  # ------------------------------------------------ hybrids and the audit's combos
+  # Audit M8: Body archer with a cross-Facet Spell talent (Hunter's Mark). Steel 3 · Spell 1.
+  - id: body_ranger
+    audit: M8
+    role: hybrid
+    facet: body
+    tradition: invocation
+    domain: beasts
+    abilities: {str: 10, dex: 16, con: 15, int: 8, wis: 14, cha: 11}
+    talents: {1: marksman, 3: precision, 5: wider_study, 7: weapon_expert, 9: hardy}
+    cross: [wider_study]
+    extra_domains: {5: storm}
+    kit: {armor: studded_leather, shield: false, weapons: [longbow, shortsword]}
+  # Audit C1 on Body: heavy armor for free, Extra Attack at 5th, full casting at 7th. Steel 2 · Spell 2.
+  - id: body_battlemage
+    audit: C1
+    role: hybrid
+    facet: body
+    tradition: invocation
+    domain: presence
+    abilities: {str: 16, dex: 10, con: 14, int: 8, wis: 15, cha: 12}
+    talents: {1: weapon_expert, 3: channel, 5: cleave, 7: wider_study, 9: alert}
+    cross: [channel, wider_study]
+    extra_domains: {7: the_tide}
+    kit: {armor: chain_mail, shield: true, weapons: [longsword]}
+  # Audit C2, the Spellblade, rebuilt: Precision + True Strike (Divination) + Extra Attack
+  # + full casting. Steel 2 · Spell 2.
+  - id: spellblade
+    audit: C2
+    role: hybrid
+    facet: mind
+    domain: divination
+    abilities: {str: 8, dex: 15, con: 13, int: 16, wis: 13, cha: 10}
+    talents: {1: precision, 3: wider_study, 5: anatomist, 7: evoker, 9: hardy}
+    extra_domains: {3: illusion}
+    kit: {armor: chain_shirt, shield: true, weapons: [rapier]}
+  # Amendment 2: a full caster spending one pick on a Steel talent. Spell stays the main
+  # track, so the talent brings martial weapons and its own +1 attack/+1 AC in armor, but
+  # no armor training or hit die (DESIGN §3.2). Spell 3 · Steel 1.
+  - id: armored_caster
+    audit: A2
+    role: hybrid
+    facet: mind
+    domain: constructed_force
+    abilities: {str: 8, dex: 14, con: 14, int: 16, wis: 13, cha: 10}
+    talents: {1: evoker, 3: wider_study, 5: weapon_expert, 7: turn_the_odds, 9: hardy}
+    extra_domains: {3: illusion}
+    deep_domain: the_arcane
+    kit: {armor: null, shield: false, weapons: [quarterstaff]}
+  # Audit C1, the Battle Priest: full casting at 3rd; two Steel talents at 5th and 7th make
+  # it a 2/2 tie, Steel main — Extra Attack and heavy armor at 7th, and the Half table from
+  # then on. Spell 2 · Steel 2.
+  - id: battle_priest
+    audit: C1
+    role: hybrid
+    facet: soul
+    domain: presence
+    abilities: {str: 15, dex: 10, con: 14, int: 8, wis: 16, cha: 12}
+    talents: {1: channel, 3: wider_study, 5: sworn_strike, 7: weapon_expert, 9: warden}
+    extra_domains: {3: the_tide}
+    kit: {armor: scale_mail, shield: true, weapons: [mace]}
+    kit_by_level: {5: {weapons: [longsword]}, 7: {armor: chain_mail}}   # heavy armor once Steel is main (7th)
+  # Audit C1, worst case at 9th–10th: Steel first (Extra Attack at 5th), then three Spell
+  # talents. At 7th it is a 2/2 tie (Steel main: Extra Attack, heavy armor, Half table); at
+  # 9th Spell becomes main (Full table and Deep Magic) and the Steel ranks past martial
+  # weapons lapse. It can never hold Full casting and Extra Attack together. Steel 2 · Spell 3.
+  - id: battle_priest_deep
+    audit: C1
+    role: hybrid
+    facet: soul
+    domain: presence
+    abilities: {str: 16, dex: 10, con: 14, int: 8, wis: 15, cha: 12}
+    talents: {1: sworn_strike, 3: weapon_expert, 5: channel, 7: wider_study, 9: mending_hands}
+    extra_domains: {7: the_tide}
+    deep_domain: the_living_world
+    kit: {armor: chain_mail, shield: true, weapons: [longsword]}
+    kit_by_level: {9: {armor: scale_mail}}   # Spell becomes the main track at 9th: heavy armor training lapses
+  # Audit C1 (other side): the Oathsworn shape with a second Spell talent (full at 7th).
+  # Steel 2 · Spell 2.
+  - id: paladin_max
+    audit: C1
+    role: hybrid
+    facet: soul
+    domain: presence
+    abilities: {str: 16, dex: 10, con: 14, int: 8, wis: 12, cha: 15}
+    talents: {1: sworn_strike, 3: mending_hands, 5: weapon_expert, 7: wider_study, 9: hardy}
+    extra_domains: {7: binding}
+    kit: {armor: chain_mail, shield: true, weapons: [longsword]}
+  # Audit M3: the unkillable raging tank. Steel 4.
+  - id: unbreakable
+    audit: M3
+    role: pure_martial
+    facet: body
+    abilities: {str: 16, dex: 14, con: 15, int: 8, wis: 12, cha: 10}
+    talents: {1: rage, 3: hardy, 5: guardian, 7: cleave, 9: weapon_expert}
+    kit: {armor: null, shield: true, weapons: [longsword]}
+  # Rage + Precision via reckless advantage on a Strength finesse weapon. Steel 3.
+  - id: reckless_striker
+    audit: new
+    role: pure_martial
+    facet: body
+    abilities: {str: 16, dex: 14, con: 15, int: 8, wis: 12, cha: 10}
+    talents: {1: rage, 3: precision, 5: weapon_expert, 7: hardy, 9: alert}
+    kit: {armor: null, shield: false, weapons: [rapier]}
+  # Audit M1/M2: healing engine (Channel boost + Mending Hands + Field Medic + Goodberry). Spell 3.
+  - id: healer_engine
+    audit: M1
+    role: pure_caster
+    facet: soul
+    domain: the_tide
+    abilities: {str: 13, dex: 10, con: 14, int: 9, wis: 16, cha: 13}
+    talents: {1: channel, 3: mending_hands, 5: wider_study, 7: warden, 9: hardy}
+    extra_domains: {5: presence}
+    deep_domain: the_living_world
+    knacks: {2: field_medic}
+    kit: {armor: scale_mail, shield: true, weapons: [mace]}
+  # Ruling 4: the sorcerer shape — Soul blaster taking Evoker across. Spell 3.
+  - id: soul_blaster
+    audit: GF-M2
+    role: pure_caster
+    facet: soul
+    domain: fire
+    abilities: {str: 8, dex: 14, con: 14, int: 10, wis: 12, cha: 16}
+    talents: {1: evoker, 3: wider_study, 5: turn_the_odds, 7: hardy, 9: alert}
+    cross: [evoker]
+    extra_domains: {3: storm}
+    deep_domain: the_undying
+    kit: {armor: leather, shield: false, weapons: [dagger]}
+  # Audit M6: control against bosses. Spell 3.
+  - id: mind_controller
+    audit: M6
+    role: pure_caster
+    facet: mind
+    domain: illusion
+    abilities: {str: 8, dex: 14, con: 14, int: 16, wis: 13, cha: 10}
+    talents: {1: wider_study, 3: turn_the_odds, 5: master_plan, 7: clockwork_guardian, 9: hardy}
+    extra_domains: {1: divination}
+    deep_domain: the_arcane
+    kit: {armor: null, shield: false, weapons: [quarterstaff]}
+  # Audit M7: summons under exception E2 (Conjure Animals, Animate Dead via Deep Magic). Spell 3.
+  - id: summoner
+    audit: M7
+    role: pure_caster
+    facet: soul
+    domain: beasts
+    abilities: {str: 8, dex: 12, con: 14, int: 10, wis: 16, cha: 13}
+    talents: {1: channel, 3: wider_study, 5: prophecy, 7: warden, 9: hardy}
+    extra_domains: {3: the_tide}
+    deep_domain: the_undying
+    kit: {armor: scale_mail, shield: true, weapons: [mace]}
+  # Audit m15: stun against a boss (the Monk preset, run against boss encounters).
+  - id: monk_stunner
+    audit: m15
+    role: pure_martial
+    preset: monk
+  # Audit M4, cross cap: a Mind caster with both cross picks spent on Soul. Spell 3.
+  - id: double_cross
+    audit: M4
+    role: pure_caster
+    facet: mind
+    domain: constructed_force
+    abilities: {str: 8, dex: 14, con: 14, int: 16, wis: 13, cha: 10}
+    talents: {1: evoker, 3: mending_hands, 5: wider_study, 7: warden, 9: hardy}
+    cross: [mending_hands, warden]
+    extra_domains: {5: warding}
+    deep_domain: the_arcane
+    kit: {armor: null, shield: false, weapons: [quarterstaff]}
+
+# ---------------------------------------------------------------------------- encounters
+# Ruling 2. Tier names and targets are fixed here; the budget numbers are derived by the
+# simulator and written back into `encounter_table` (null until then). DESIGN §7.
+encounter_tiers:
+  - id: skirmish
+    name: Skirmish
+    targets: {win_pct_min: 99, rounds: [2, 3], party_hp_lost_pct: [5, 15], any_pc_down_pct_max: 5}
+  - id: clash
+    name: Clash
+    targets: {win_pct_min: 97, rounds: [3, 4], party_hp_lost_pct: [20, 35], any_pc_down_pct_max: 30}
+  - id: battle
+    name: Battle
+    targets: {win_pct_min: 90, rounds: [3, 5], party_hp_lost_pct: [35, 55], any_pc_down_pct_max: 70}
+  - id: desperate
+    name: Desperate
+    targets: {win_pct_min: 60, win_pct_max: 85, rounds: [4, 5], party_hp_lost_pct: [55, 90]}
+encounter_baseline: {party_size: 4, level: 4, party: reference_party}
+# Threat budget per character (party of four), fitted by software/tools/d20_sim.py
+# Threat budget per character (party of four), fitted by software/tools/d20_sim.py
+encounter_table:
+  1:
+    skirmish: 8
+    clash: 13
+    battle: 16
+    desperate: 17
+  2:
+    skirmish: 11
+    clash: 17
+    battle: 20
+    desperate: 23
+  3:
+    skirmish: 15
+    clash: 23
+    battle: 28
+    desperate: 32
+  4:
+    skirmish: 17
+    clash: 27
+    battle: 33
+    desperate: 35
+  5:
+    skirmish: 32
+    clash: 46
+    battle: 55
+    desperate: 59
+  6:
+    skirmish: 32
+    clash: 48
+    battle: 58
+    desperate: 61
+  7:
+    skirmish: 39
+    clash: 55
+    battle: 67
+    desperate: 71
+  8:
+    skirmish: 45
+    clash: 60
+    battle: 73
+    desperate: 79
+  9:
+    skirmish: 58
+    clash: 82
+    battle: 104
+    desperate: 106
+  10:
+    skirmish: 60
+    clash: 83
+    battle: 105
+    desperate: 109
+encounter_adjustments:
+  three_players:
+    clash_pct: -23
+    rule: remove foes worth 23% of the Threat
+    by_tier_pct:
+      skirmish: -26
+      clash: -23
+      battle: -26
+      desperate: -25
+  five_players:
+    clash_pct: 23
+    rule: add foes worth 23% of the Threat
+    by_tier_pct:
+      skirmish: 23
+      clash: 23
+      battle: 19
+      desperate: 19
+  six_players:
+    clash_pct: 35
+    rule: add foes worth 35% of the Threat
+    by_tier_pct:
+      skirmish: 39
+      clash: 35
+      battle: 35
+      desperate: 33
+  tired:
+    clash_pct: -5
+    rule: remove 5% of the Threat, or drop one tier
+    by_tier_pct:
+      skirmish: 3
+      clash: -5
+      battle: -10
+      desperate: -18
+monster_threat:
+  model:
+    standard: sqrt(HP x damage per turn)
+    minion: sqrt(11.4 x damage per turn)
+    boss: standard x 2.22
+    never_breaks: x 1.17
+  by_cr:
+    1/8:
+      standard: 6
+      minion: 7
+      boss: 13
+    1/4:
+      standard: 8
+      minion: 8
+      boss: 18
+    1/2:
+      standard: 12
+      minion: 9
+      boss: 26
+    '1':
+      standard: 18
+      minion: 11
+      boss: 40
+    '2':
+      standard: 28
+      minion: 14
+      boss: 63
+    '3':
+      standard: 37
+      minion: 16
+      boss: 83
+    '4':
+      standard: 46
+      minion: 18
+      boss: 103
+    '5':
+      standard: 55
+      minion: 19
+      boss: 123
+    '6':
+      standard: 64
+      minion: 21
+      boss: 142
+    '7':
+      standard: 72
+      minion: 22
+      boss: 159
+    '8':
+      standard: 81
+      minion: 23
+      boss: 179
+    '9':
+      standard: 89
+      minion: 24
+      boss: 198
+    '10':
+      standard: 98
+      minion: 25
+      boss: 218
+    '11':
+      standard: 106
+      minion: 26
+      boss: 235
+    '12':
+      standard: 114
+      minion: 27
+      boss: 254
