@@ -206,3 +206,62 @@ short and long rests; SRD equipment.
 
 Resolved enough to plan. Return to Planner/Worker to continue from
 `docs/DESIGN_facets_d20.md` (to be written) and `facets_d20/`.
+
+---
+
+## Amendment 1 — owner rulings after the critical audit (2026-09-28)
+
+Resolves `docs/AUDIT_facets_d20.md`. These override anything above that conflicts.
+
+1. **Simpler than 5e — measurably.** "It must be simpler than 5e, though 5e isn't as
+   complex as 3.5 so it doesn't need to be orders of magnitude." "Iterate on this until
+   you get it right." Targets, measured and recorded each iteration:
+   - Character creation from a preset: **≤ 12 decisions**; custom: **≤ 18** (SRD cleric ≈ 18).
+   - Levelling: a level-up is **one choice at most** (many levels are zero choices).
+   - **≤ 5 exception rules** in the whole player book; **one mechanic per job**
+     (one way to add a die, one way to get advantage, one reroll).
+   - A fresh reader who knows 5e can build a character from 01+02 alone.
+2. **Encounters use tables, the way the DMG does** — our own difficulty tables for
+   Facets d20, built for the baseline party of **four 4th-level characters**, with a
+   by-level table 1–10 and simple adjustment options ("five players: add X"; "three
+   players: remove Y"; "the party is tired: …"). Derived from simulation, not asserted.
+3. **Balance by simulation.** Build a real rules engine and combat simulator and use
+   them: every preset and every flagged combo build lands within a moderate band of the
+   others and of the SRD baselines at levels 1, 4, 7, 10. Show the numbers.
+4. **Magic is flexible.** Both traditions must offer area damage and the classic
+   evocation shapes; a wizard-shaped Mind caster can cast a fireball. Less structure,
+   not more: prefer fewer, broader domains or a shared core list over narrow lists
+   that trap a 1st-level choice.
+5. **Concepts are free; mechanics are ours.** Rewrite every talent that mirrors a
+   non-SRD feat or subclass feature as an original mechanic. Generic fantasy concepts
+   (a tough fighter, a sharpshooter, a shapeshifting druid) stay.
+6. **Tests test rules.** Replace wording checks with direct rule tests driven through
+   the engine: computed HP, attack bonus, save DC, slots, damage per round, build
+   legality, encounter outcomes, the exploit builds from the audit staying inside the
+   band.
+
+Consequence for the chassis: the Planner may cut, merge or restructure talents,
+signatures, domains and Facet features freely to meet (1), provided the owner's spin
+survives — Facets not classes, build freedom, Soul → Priest/Druid/Oracle by picks, RP
+focus, short fights.
+
+## Amendment 2 — owner rulings (2026-09-28, second round)
+
+1. **No Steel/Spell path.** Owner: "We need to find a way, like 5e does, to make it to
+   where you can be a full caster, a hybrid, or a melee user while still being balanced
+   *inside the choices you make*. The 'jack of all trades, master of none' balance tends
+   to work in D&D where picking heavy armor and extra attack means you won't be able to
+   pick the things that make magic powerful, the trade off holds the constraints."
+   → Balance must come from **opportunity cost inside the talent budget**, not from a
+   gate. A character invests picks in magic, in steel, or splits them; a hybrid is
+   genuinely viable but masters neither; a pure build of either kind is the strongest at
+   its thing. No "you can't take X" rules. Verified by simulation across pure caster,
+   pure martial and hybrid builds of every Facet.
+2. **Prismatic domains open from 1st level** in Facets d20 (d20 only; the core rules and
+   canon are unchanged).
+3. **Mordai's Drives are canon** as drafted: *protect people who can't protect
+   themselves*; *never leave a fight while someone weaker is still in it*. The "eleven
+   years" detail is still removed. Zulnut's invented details stay removed.
+4. **v0.3 books go in the tree** as a read-only snapshot, `rulesets/v0.3/`.
+5. **4th and 8th level:** one pick: +2 to one ability, +1 to two, or one extra knack
+   (DESIGN v0.2 V21).
