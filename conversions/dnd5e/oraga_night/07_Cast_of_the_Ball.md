@@ -1,9 +1,9 @@
 # VII. Cast of the Ball
 
-*Fifteen named guests. Each entry: who they are, what they want, what they fear,
+*Every named guest, and one thing that is not a guest. Each entry: who they are, what they want, what they fear,
 their secret, how to play them, and — last — what happens if it comes to steel.
 Outside a fight NPCs never roll dice — their entries note the DCs they impose
-instead, on the ladder in Chapter I. The night-tracker (Chapter VIII) maps where each
+instead, on the ladder in Chapter I. The MM sheet (Chapter VIII) maps where each
 stands in every Movement.*
 
 *Every stat block named here is in Chapter X under exactly that name. The six
@@ -105,7 +105,7 @@ want him to LOOK at me the way he looks at his ministers. Gods help whoever actu
 touches him — I've seen what he does to surprises."* **At the Unmasking:** he is the
 night's strangest hero — hauling guests from the burning banquet gallery (B3), to
 everyone's permanent confusion including his own — and by dawn, the prime suspect.
-Both facts are true, and the aftermath wing runs on them.
+Both facts are true (Chapter VI).
 
 > **Vorlain by the wine — the overtures, and the non-answers**
 >
@@ -303,8 +303,8 @@ he has three other irons in tonight's fire — a Draunel never brings one plan t
 Boranis party. The source left them to the MM; this edition names them in Chapter IX.
 
 **Play him:** the anti-Raunu — polished, obvious, ambitious in the standard
-noble key. Useful to the table as a patron, a foil, and by dawn (aftermath wing) the
-loudest voice insisting Vorlain hang for this.
+noble key. Useful to the table as a patron, a foil, and by dawn the loudest voice
+insisting Vorlain hang for this.
 
 **If it comes to steel:** stat block **Essar Draunel**, with **Draunel Duelist** for his
 retinue. House Draunel is a snake; its line is in Chapter IX (cards S9 and S13).
@@ -420,7 +420,7 @@ Fractures and full tell-tables are Chapter V; their conduct before midnight is h
 They arrive with the Movement III crush, and until midnight they do nothing but
 attend the ball — and this is the thing to play correctly: **they are people, and
 good company.** They eat. They drink and praise the vintage. They converse with
-antique courtesy and dance in a style two centuries out of fashion, and a guest
+antique courtesy and dance in a style centuries out of fashion, and a guest
 who spends ten minutes with one walks away charmed, having learned nothing and
 feeling obscurely that they were the one being kind. The wrongness is all at the
 edges: masks from no maker's hand, names on no one's memory, speech from another
@@ -437,8 +437,62 @@ witnesses is a person glimpsed through a mask, and at midnight each one becomes
 a key.
 
 **If it comes to steel:** they cannot be beaten tonight, and their blocks in Chapter X
-say exactly why. Force buys time; ward-fire, the leash, and the Fractures change
-outcomes. That is the complete list.
+say exactly why. They can be delayed — cleverness buys Delay far faster than damage
+does (*Buying Time*, Chapter V) — and ward-fire, the leash and the Fractures change
+outcomes. That is the complete list. Their Attendant, below, is another matter.
+
+### The Attendant — the Quiet Guest
+*A great house's attendant, by its clothes: a cloak folded over one arm and a cup held
+ready for a master nobody at the ball can find. It came in with the early guests.*
+
+*MM only: the Attendant is a Namak-Zai. The module never uses the word at the table
+and never says more about what that is.* It is a made thing, not a born one, and it
+serves the same master as the three gray masks. It came through with them. Players
+need never hear the name; "the Attendant" is enough.
+
+**Wants:** nothing. It has orders. Before midnight the order is to *watch*. After
+midnight it is *keep the three from being interrupted*. **Fears:** nothing; it has no
+feelings to fear with. **Secret:** it has spent centuries doing nothing, and it is
+rusty.
+
+**Before midnight — the quiet guest.** It is sent to spy ahead of the Uninvited, and it
+is bad at it. It watches the wrong people and loses interest halfway through a task.
+Asked whom it serves, it names no one, and looks around, briefly, for the master it is
+supposed to have. It has **four habits**, and they are how the party beats it at
+midnight: *it stares at worked crystal and light*; *it answers any direct question
+literally, and cannot leave one unanswered*; *it keeps a cup and cloak ready for a
+master who is not there*; *it follows music that changes*. Chapter IV shows one habit
+per Movement, visible and deniable, and a player who says one out loud before anything
+explains it has read an omen (Table I–3).
+
+It **never fights before midnight.** Followed, confronted or attacked, it walks into a
+shadow — an alcove, the far side of a pillar, a dark doorway — and it is not there
+when anyone looks. It is gone until the Unmasking. Drawing steel on it is still
+drawing steel at the ball (*The Palace on Alert*, Chapter IV), and the guards arrive
+to find a player character with a blade out and nobody in front of them.
+
+**At the Unmasking** it drops the pretence, sets the cloak and the cup down on the
+nearest table, and takes its place by the Uninvited. Read this when the lights die:
+
+> *On the nearest table, a folded cloak and a full cup, set down neatly. The
+> attendant who carried them all evening is standing beside the three gray masks,
+> facing the room. It does not look at anyone. It looks at the spaces between the
+> room and the three.*
+
+**Play it:** it speaks only when asked, and it answers exactly the question asked. It
+has no manners and no malice. Everyone who is not interrupting the three is furniture
+to it, and a creature that stops interrupting stops being its business.
+
+**If it comes to steel:** stat block **The Attendant**, Chapter X; card **S14**, Chapter
+IX, the night's boss. It has two states. **Idle** — its default — it is rusty, easily
+distracted, and cannot be bothered with its own magic. **Focused** — when one of the
+three glances at it and at the party, because the party has become a real
+interruption — it is devastating. A clever distraction breaks its focus, but only
+until one of the three glances at it again; the fourth broken focus of the night sends
+it off to stand at a window and watch the fires;
+driven to 0 hit points, it loses interest in being here and steps back into the
+shadow. It leaves no body. Anyone it drops is only knocked down (*Down, Not Out*,
+Chapter V): it removes interruptions, and it does not hunt.
 
 ### Tavva — the Other Thief
 *Somewhere in her forties, somewhere from the coast, somewhere on every festival
@@ -464,24 +518,13 @@ honestly when cornered, and abandons any prize that starts costing blood. Her
 crew's three sightings are in Chapter IV; the raid itself is in Chapter V. Caught
 and held — tonight or by the inquest — she is a gold mine of exactly the wrong
 information: she can prove she planned the gallery job for a season, which makes
-her the aftermath's most convenient scapegoat, and she knows it before her
+her the inquest's most convenient scapegoat, and she knows it before her
 questioners do. *(Stat blocks: **Tavva**, **Gallery Knife**, Chapter X. Fight cards S2 and S5, Chapter
 IX.)*
 
 **If it comes to steel:** stat block **Tavva**, with **Gallery Knife** for her crew of
-four. The night's one fully winnable fight is hers, and it is aimed at the players'
-better natures.
-
-### Otta Vesh — the Mask-Maker *(aftermath)*
-The finest spirit-mask maker in Rekuzan; her workshop is Night One's best scene, and
-her wall of casting-blanks — one kept for every face she has ever fitted, her rite
-and her pride — is the thread that proves the three gray masks came from no hand in
-the city. She is an aftermath scene now (Chapter VI); ask her about the masks and
-the answer is *nobody made them*, and nobody in Rekuzan would know how. **Play her:** an artist at festival peak — imperious, overbooked,
-susceptible to nothing but genuine appreciation of the craft.
-
-**If it comes to steel:** noncombatant — *If It Comes to It*, Chapter X. She is an
-aftermath scene; nobody should be drawing on her.
+four. Hers is the fight aimed at the noble-minded: nothing at stake in it but property
+and decency.
 
 ---
 
@@ -489,8 +532,9 @@ aftermath scene; nobody should be drawing on her.
 
 *A contract company, hired two nights ago by a factor nobody can describe, holding
 the Boranis gatehouse from the first bell of midnight to the last bell of Oraga.
-They can be beaten, and — more usefully — they can be talked to, by anyone who
-understands that the contract settles more arguments than the sword does. Full fight on **card S3**, Chapter IX;
+They are the one foe at the gate who can be beaten or bought — and, more usefully,
+they can be talked to, by anyone who understands that the contract settles more
+arguments than the sword does. Full fight on **card S3**, Chapter IX;
 stat blocks **Bought Sergeant**, **Bought Captain** and **Bought Blade**, Chapter X.*
 
 ### Sergeant of the Bought — the One Reading the Room
@@ -537,7 +581,7 @@ his second he starts talking while the attacks continue.
 
 - **What he wants:** to be paid, to keep his people, and to walk out of a burning
   city with his name unspoiled.
-- **What shifts him:** the fires. He contracted for two diversions, not for this, and
+- **What shifts him:** the fires. He contracted for diversions, not for this, and
   a party who says so plainly is telling him something he already half knows. Also:
   money, honestly offered, in front of witnesses.
 - **What deal he honours:** all of them, permanently. A bought-out captain **will not
@@ -546,8 +590,8 @@ his second he starts talking while the attacks continue.
 > **MM — the factor.** The captain never learns who hired him, and neither does the
 > module. If a table asks him directly he will tell them the truth, which is that he
 > does not know, and that this has begun to bother him a great deal. That is not a
-> dead end; it is the aftermath's best lead, because a captain who wants to know is
-> a captain who will help you find out.
+> dead end; for a table that plays on (Chapter VI) it is the best lead there is,
+> because a captain who wants to know is a captain who will help you find out.
 
 **If it comes to steel:** the Bought *are* the steel at the gate. Every round of that
 fight is on card S3, and the captain's and sergeant's negotiation surfaces above are

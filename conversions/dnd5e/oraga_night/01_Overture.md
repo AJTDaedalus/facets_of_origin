@@ -1,44 +1,64 @@
 # I. Overture — How to Run Oraga Night
 
----
-
-*Three days before the ball, in a chapel with the door shut, Raunu Boranis swore a
-testament aloud to a Church notary and two witnesses who were paid not to remember
-it. It took eleven minutes. The notary wrote what he was told to write, which is not
-the same as what was said, and neither of the witnesses has been seen since Tuesday.*
-
-*He walked back through the palace afterward and counted the crystal. Not the wealth
-of it — the charge in it, wall by wall, the way a man checks a lamp before a long
-night. The east wing wards were good. The dais wards were good. The gatehouse he
-looked at for a long time and then walked away from.*
-
-*In the kitchens, an under-cook watched him pass and thought: he is saying goodbye to
-the house.*
-
-*She was wrong about which part.*
+> **How to prep in 90 minutes**
+>
+> You run this night from three things: **the one-page MM sheet** (Chapter VIII),
+> **the fight cards** (Chapter IX) and **the stat blocks** (Chapter X). Chapters IV
+> and V are the reference behind them. Read in this order:
+>
+> 1. **This chapter, to the end of *The Snakes in the Chicken Pen*** (15 minutes).
+>    The shape of the night, the first five minutes, what pays, the four rules for
+>    steel.
+> 2. **Chapter II, *What Is Coming* and *How the Night Ends (By Default)*** (5
+>    minutes). The truth you are hiding, and where history goes if nobody bends it.
+> 3. **Chapter VIII, the MM sheet and the palace diagram** (10 minutes). Print both.
+>    From here on, everything you read is behind a line on that sheet.
+> 4. **Chapter V: *How to Run the Attack*, Movement VI's opening, *Midnight Rules*
+>    (read *Down, Not Out*, *Buying Time* and *The Attendant*; skim the Room Tricks and
+>    *Two Hundred People* — they are tables to use live), *The Crossing*, and Movement
+>    VII's opening and Epilogue** (30 minutes).
+> 5. **Chapter IX: *Running the Snakes*, then S14 and S3 in full** — the Attendant and
+>    the gate come up at almost every table — **then skim the cards your players'
+>    agendas point at** (20 minutes).
+> 6. **Chapter IV: *The Palace on Alert*, *When Somebody Draws Early*, *Running the
+>    Room*, and the box at the head of each Movement** (10 minutes). Each box says
+>    what to run and what to skip. Read Undercurrent C only if someone carries
+>    Agenda 4.
+>
+> **Skim or skip:** Chapter VII (look a guest up when the players meet them), Chapter
+> III (only if players build their own characters; hand out the agenda cards from
+> Chapter VIII either way), Chapter X beyond the Uninvited, the Attendant and the
+> Bought (open a block when its card comes up), Chapter VI (read it when the session
+> ends), Chapter XI (hand it out), and *Inventions*. The rest of Chapters IV and V is
+> depth: read it when a player goes looking for it.
 
 ---
 
 ## What This Adventure Is
 
-Oraga Night is a masquerade for **four or five characters of 3rd level**, freshly made
-or taken from the pregenerated guests in Chapter XI. It is balanced for four. Every
-problem in it can be solved by people with a good idea and the nerve to act on it, and
-most of them are better solved that way.
+Oraga Night is a masquerade for **four characters of 4th level**, freshly made or taken
+from the pregenerated guests in Chapter XI. Every fight in it is balanced for four,
+and every fight card carries lines for three or five characters and for 3rd or 5th
+level.
+Every problem in it can be solved by people with a good idea and the nerve to act on
+it, and most of them are better solved that way.
 
-**Characters grow.** By milestone, the Mirror Master (MM) calls **4th level** at the
+**It is one session: four and a half to five hours.** Play starts in the street, with
+the party walking up the hill toward the palace (B0, Chapter IV), and ends at dawn
+outside the gate. Nothing is played before the street. Hooks and agendas are a
+five-minute pick at the start (*The First Five Minutes*, below), not a scene.
+
+**Characters grow.** By milestone, the Mirror Master (MM) calls **5th level** at the
 epilogue, when the party is standing outside with whatever and whoever they carried
-out. Run the aftermath wing in Chapter VI for two more sessions and the party reaches
-**5th level** at the inquest. What they also leave with is Heroic Inspiration,
-obligations, three or four people who now know their names, and the only first-hand
-account of something the city will spend a generation lying about.
+out. What they also leave with is obligations, three or four people who now know their
+names, and the only first-hand account of something the city will spend a generation
+lying about.
 
-**One session**, four to six hours, as written. **Three sessions** with the aftermath
-wing in Chapter VI.
-
-Why 3rd level and not 1st: a 1st-level character dies to one bad crit, and this
-edition has real fights in it. Chapter IX puts knives in the hands of half the guest
-list. A 3rd-level party can stand in those fights, and it can still lose them.
+Why 4th level: this edition has real fights in it. Chapter IX puts knives in the hands
+of half the guest list, and at midnight something comes through with the Uninvited
+that is built to be the hardest fight of the night. A 4th-level party, with its
+subclass and its first ability increase in hand, can stand in those fights, and it can
+still lose them.
 
 ## What You Need
 
@@ -51,8 +71,85 @@ carries everything a player needs about the tribes: their gifts as origin feats 
 the crystal charges they carry. Chapter VII holds every named guest, Chapter IX every
 fight, and Chapter X every stat block and every crystal charge (*Items of the Night*).
 
-Print the handouts in Chapter VIII before you sit down — the agenda cards and the
-invitation, at minimum, and the night-tracker for yourself.
+Print from Chapter VIII before you sit down: the **one-page MM sheet** and the **palace
+diagram** for yourself, and the agenda cards and the invitation for the players.
+
+## The Night in Seven Movements
+
+The evening is divided into seven **Movements**, like a dance program. Each has
+scheduled events that happen whatever the players do, open time to chase agendas, and
+one **omen** — a detail that is quietly wrong. For most of the evening this is a
+social adventure: the player characters scheme, charm, eavesdrop, trespass and trade
+favors under two hundred masks. Then, at midnight, the masks come off, and three
+guests keep theirs on. The last two Movements are a different game: darkness, fire,
+terror, and choices about who to save.
+
+The minutes below are for four players. They are a budget, not a stopwatch. Move on
+when the table's energy says so. The budget tells you when you have spent too long.
+
+**Table I–1: The Runtime**
+
+| Starts at | Movement | Minutes | By the end… | If you are behind, run only… |
+|---|---|---|---|---|
+| 0:00 | **The first five minutes**, then the street | 10 | Everyone has a character, an agenda and a hook; the street read-aloud is done | Agendas dealt face-down; hooks skipped |
+| 0:10 | **I. The Receiving Line** | 25 | Everyone is inside, and the honor guard is facing the wrong way | One check in the line, then the gate |
+| 0:35 | **II. The Empty Rooms** | 45 | The host's absence has stopped being funny | One agenda beat per player; S1 only if someone asks for it |
+| 1:20 | **III. The Summons** | 35 | Somebody at the table has met him | One summons, with two player characters walked in together |
+| 1:55 | **IV. The Toast** | 25 | The room has been told something it does not know what to do with | The toast, and the one snake line that turned hardest |
+| 2:20 | **V. The Hour of Spirits** | 40 | Anyone who assembled the pattern has one chance to act on it | The Dead Dance omen, and at most one fight card |
+| 3:00 | *Break* | 10 | Take it as the bells begin to ring midnight | — |
+| 3:10 | **VI. The Unmasking** | 50 | The host is dead, and the party is choosing who to save | The dais, the Crossing, one snake in the dark |
+| 4:00 | **VII. The Longest Night** | 40 | The party is standing outside with whatever and whoever they carried out | The gate (S3) |
+| 4:40 | **Epilogue** | 10 | 5th level, and one question around the table | The read-aloud and the question |
+| | | **4 h 50 min** | | |
+
+**Two checkpoints.** If the toast has not happened by **2:15**, it happens now: Raunu is
+standing at the high table, and whatever the players were doing can wait a Movement.
+If the bells have not rung midnight by **3:15**, they ring now. The payoff the whole
+night builds toward is Movements VI and VII. Protect them.
+
+**What to leave out, in order, when you are behind:** B13; the Undercurrents nobody is
+already on (Chapter IV marks them *if you have time*); a second fight card in any one
+Movement; S1; the east-wing scene, **unless somebody carries Agenda 4**. Do not cut the
+gate. It is the only scene the ending needs, and the fight in it is still optional.
+
+## The First Five Minutes
+
+Nothing before the street is played. It is picked, in about five minutes, with the
+cards on the table.
+
+**Before anyone sits down,** agree on lines and veils (*Safety and the Table*, below),
+and put out the pregen sheets, the agenda cards and the invitation.
+
+**Then, around the table, once:**
+
+1. **A character.** A pregen from Chapter XI, or the player's own 4th-level character
+   built with Chapter III. With four players and the pregens, leave out Andra or Pello.
+   Leave out Ilesse only if another player takes Agenda 4.
+2. **An agenda.** Deal the cards from Chapter VIII. Match them to characters with the
+   table at the end of Chapter III, or deal face-down and let fate choose. Two players
+   may share one, as rivals or partners.
+3. **A hook,** said aloud in one sentence: how this character got through the gate
+   tonight. Pick one from the table below.
+4. **What the party tells each other.** They do not have to tell each other anything.
+
+**Table I–2: How You Got In**
+
+| Hook | In one line | Fits |
+|---|---|---|
+| **The Invited** | Sent for by name, or serving someone who was. The card came under a chief's own hand — one of perhaps forty pieces of writing in Rekuzan tonight | A House's Long Game · The Prelate's Question |
+| **The Entourage** | Somebody invited needed a companion, a bodyguard, a translator or a witness, and chose you. The best vantage point in the palace and the worst position to act from | The Vanished Servant · bodyguard to another player character |
+| **The Discarded Invitation** | A genuine card with someone else's name on it — bought, found, taken, or handed over by someone who wanted you to have exactly this problem. The custom protects you until midnight | The Unpaid Debt · The Story of a Lifetime |
+| **Hired for the Night** | Paid staff: musician, cook, footman, cellar hand. A servant's freedom of the halls and a servant's invisibility. You walk up the street with the others and go in through the kitchens (B10) | The Vanished Servant · The Circle's Reckoning |
+| **The Patron's Errand** | A faction needed hands it could not be traced to. Your agenda is pre-loaded and your fee half-paid — and your patron is also a snake (Chapter IX) | The Circle's Reckoning · The Prelate's Question · The Cousin's Errand |
+| **The Wrong Place, Deliberately** | Your own reason to be inside; the ball is your cover. Pick what you came for from something the palace already holds (Chapter IV) | The Unpaid Debt |
+
+**Then tell the players two things,** and only these two. *This is a glittering party
+that goes terribly wrong.* And: *some of what happens tonight answers to a sword, and
+some of it does not. When it does not, the game will show you what your time bought.*
+Do not tell them how it goes wrong.
+
+**Then read the street** (B0, Chapter IV). The night has started.
 
 ## Checks, Inspiration, and the Ladder
 
@@ -67,277 +164,152 @@ ladder. Learn it once here; every chapter prints its DCs against it.
 | **Very Hard** | **25** | Deceiving Raunu Boranis. Moving Master Vell. Very little else |
 
 Checks are written the SRD way: `DC 15 Wisdom (Insight)`. Where the source said a
-"knack applies", the 5e edition means the character's proficiency in the fitting skill
+"knack applies", this edition means the character's proficiency in the fitting skill
 or tool, and a gifted character's gift (Chapter III) gives advantage when the check is
 about the thing the gift does.
 
 **Success at a cost.** This night runs on partial wins, and it teaches them early.
 When a check misses its DC by **4 or less**, you may offer the player what they wanted
 *with a cost attached*: name the cost first, then let them take it or leave it. The
-night-tracker in Chapter VIII has a short table of costs, so you can read one off the
-page instead of inventing one while five people watch you.
+MM sheet in Chapter VIII has a short table of costs, so you can read one off the page
+instead of inventing one while four people watch you.
 
 **NPCs don't roll outside a fight.** Every entry in Chapter VII gives the DC a guest
 imposes instead. Inside a fight, they roll like anybody else.
 
-**Heroic Inspiration** replaces the Sparks of the original edition. A character either
-has it or does not; they spend it to reroll any one die immediately after rolling it,
-and they keep the new roll. If a character who already has Heroic Inspiration earns it
-again, they give it to a party member who lacks it. Human characters (and every
-character here is human) regain it on a long rest — which tonight they will not get.
-That is why the list below matters. *At a 2014 table, this is plain Inspiration, and it
-grants advantage instead of a reroll.*
+**Heroic Inspiration** replaces the Sparks of the original edition, and it works as
+the SRD says: a character either has it or does not, and spends it to reroll one die
+immediately after rolling it, keeping the new roll. A character who already has it
+when they earn it again **may give it to another player character who lacks it**.
+Human characters (and every character here is human) begin with it and regain it on a
+long rest — which tonight they will not get. *At a 2014 table, this is plain
+Inspiration, and it grants advantage instead of a reroll.*
 
-## The Story So Far
+## What the Night Pays
 
-**The house.** Raunu Boranis — genius, maniac, or both — vanished for a year, came back
-without explanation, married across tribal lines, and shut his palace for two more.
-Everyone of importance loathes him. Nearly all of them will come anyway.
+The module's rule is that clever and peaceful play is paid on the page rather than
+left to your generosity in the moment. You will be tired by Movement VI, and a reward
+you have to remember to invent is a reward that does not happen. Because Heroic
+Inspiration is have-it-or-not, the list is short. Each award goes to one character.
 
-**The night.** On the last night of the Oraga harvest festival, the doors open. Two
-hundred masked guests, a host who does not appear, and three guests nobody invited.
+**Table I–3: Heroic Inspiration, Printed**
 
-**The truth.** Chapter II gives it to you whole — who the Uninvited are, what they came
-for, what constrains them, and why none of it will ever be public. Read that chapter
-before you run anything.
+| When | To whom |
+|---|---|
+| **An agenda completed** | That character, on the spot |
+| **The pattern said out loud** — an omen read before anything explains it (the quiet guest's habits count), or an Undercurrent's find | The character whose player says it; once per Movement |
+| **A fight ended by an out** — the guards talked down, the toll paid, the thieves let go with something they can afford to lose, one snake turned on another | The character who took the out |
+| **A companion hauled up** at midnight (*Down, Not Out*, Chapter V) | The one who hauled, the first time in the night |
+| **The Attendant distracted** — the first attempt of the night, whether or not it works, and any natural 20 (card S14) | The one who tried |
+| **Somebody carried out** in Movement VII | The one who carried them, for the first person they bring out |
 
-**The record.** History says Raunu Boranis died at his own ball, that his wife and
-newborn vanished, that no one was charged, and that no one ever learned the truth.
-That is the default outcome, and Chapter V explains how the night bends toward it
-through play rather than against it.
+The best moment of the evening still earns Heroic Inspiration whether or not it is on
+this list. A fight card in Chapter IX that prints Inspiration is a reminder of one of
+these rows, not an extra award.
+
+**Table I–4: Experience** *(if you track it)*
+
+| When | XP |
+|---|---|
+| An agenda completed | 200 to that character |
+| An omen read before it is explained (the quiet guest's habits count) | 100 to that character |
+| A closed room entered without a fight — Corval's gratitude, Anha's passages, an audience-earned pass, a festival hire's livery | 100 to each character who went in |
+| A fight finished, or ended by an out | The card's XP for the party, split evenly, as if every foe had fallen |
+| A person carried out in Movement VII | 100 to the carrier |
+| Standing outside at dawn | 1,000 to each character |
+
+**Milestone is how this module is built.** The party starts at 2,700 XP (4th level). If
+you track XP, a party that plays the night fully lands close to **6,500 XP** each — 5th
+level — at the epilogue. If they arrive a little short, round up: the night is the
+milestone.
 
 ## The Snakes in the Chicken Pen
 
-This is the thing the 5e edition adds, and it starts from a fact the original already
-states: **Raunu Boranis has invited every enemy he has into his own house.**
+This is the thing the fifth edition adds, and it starts from a fact the original
+already states: **Raunu Boranis has invited every enemy he has into his own house.**
+The Merchant's Circle, the Church, House Draunel, his own brother's people, the Phern
+money — and the Thenya, who do not hate him at all and have come to see whether he has
+made a prisoner of their kinswoman. Every great house hired extra swords this season.
+*House Boranis hired none.*
 
-The Merchant's Circle, whose margins he bleeds. The Church, which cannot read him. The
-rival sects, who cannot unseat him. His own brother and his brother's fixer, who
-cannot rise past him. The Phern money that sits on the Circle. And the Thenya, who do
-not hate him at all and have come to find out whether he has made a prisoner of their
-kinswoman. Every one of them accepted. Every great house hired extra swords this
-season, and the line at the gate is full of them, idling in unmatched colours. *House
-Boranis hired none.*
+Everyone at this ball wears a knife; drawing it is the crime. So for five Movements the
+snakes coil. Each faction has a **threat line** — a scheme that starts politely, shows
+a **tell** a watchful table can catch, escalates if nobody steps on it, and comes out
+in the dark after the lights die. Chapter IX holds each line, its fight cards and the
+**Snake Tracker**; the MM sheet in Chapter VIII has the boxes you tick.
 
-Everyone at this ball wears a knife; drawing it is the crime. So for five Movements
-the snakes coil. Each faction has a **threat line** — a scheme that starts politely
-before midnight, shows a **tell** a watchful table can catch, escalates if nobody
-steps on it, and comes out in the dark after the lights die, when every alert rule in
-the palace is suspended and nobody is enforcing anything. Chapter IX, *The Snakes*,
-holds each line, its fight cards, and the **Snake Tracker**; the night-tracker in
-Chapter VIII has the column you tick as you run.
-
-Three rules hold for every snake:
+Four rules hold for everything with a weapon tonight:
 
 - **Every snake fight is visible and optional.** The players see the trouble and
   choose to walk into it. Nobody is ambushed and nobody is forced to draw.
 - **The Uninvited are the storm; the snakes are what a sword can answer.** The three
-  gray masks cannot be beaten tonight. The snakes can be beaten, bargained with,
-  outlasted, or turned on each other — and that is where a table with restless sword
-  hands should be spending them.
+  gray masks cannot be beaten tonight, only delayed (*Buying Time*, Chapter V). The
+  snakes can be beaten, bargained with, outlasted, or turned on each other.
+- **Something came with the Uninvited, and it can be beaten.** All evening a quiet
+  guest has been at the ball dressed as a great house's attendant, carrying a cloak and
+  a cup for a master nobody can find. It is **the Attendant**: a made thing, not a born
+  one, serving the same master as the three, sent to watch ahead of midnight and bad at
+  it. At the Unmasking it drops the pretence and takes up its one narrow order — keep
+  the three from being interrupted — and it ignores anyone who is not interrupting
+  them. It is the night's boss, and it only fights a party that gets in the way. Idle,
+  it is rusty and easily distracted. When one of the three turns it on the party, it
+  is **Focused**, and Focused it is devastating. The party's best weapon is the same
+  one that works on the Uninvited: a clever distraction breaks its focus for a moment,
+  and the fourth one sends it off to watch the fires. It can also be driven off by force (card
+  S14, Chapter IX; stat block, Chapter X; who it is, Chapter VII).
 - **Nobody in the snakes' lines is the Uninvited's ally.** Every faction at the ball is
-  as blindsided at midnight as the ministers are. What they do in the dark is what
-  frightened, ambitious people with hired steel do when the lights go out in their
-  enemy's house.
+  as blindsided at midnight as the ministers are.
 
 The Thenya are the exception to the name. Maiven Nolonaire is not a snake; she is a
-wary ally who can become a fight if somebody provokes her, and Chapter IX treats her
-that way.
-
-## The Night in Seven Movements
-
-**Movement I — The Receiving Line.** The party arrives, is received by name, and
-discovers that nobody is being disarmed. *By the end: everyone is inside, and the honor
-guard is facing the wrong way.*
-
-**Movement II — The Empty Rooms.** The ball proper, and the longest Movement. Agendas
-move; the host does not appear. *By the end: his absence has stopped being funny.*
-
-**Movement III — The Summons.** Raunu begins receiving guests one at a time, and at
-least one of them should be a player character. *By the end: somebody at the table has
-met him.*
-
-**Movement IV — The Toast.** The host finally appears in public, says something nobody
-expected, and leaves. *By the end: the room has been told something it does not know
-what to do with.*
-
-**Movement V — The Hour of Spirits.** The last hour before midnight. Every thread the
-party has pulled comes taut at once. *By the end: anyone who assembled the pattern has
-one chance to act on it.*
-
-**Movement VI — The Unmasking.** Midnight. The masks come off, and three guests keep
-theirs on. *By the end: the host is dead, and the party is choosing who to save.*
-
-**Movement VII — The Longest Night.** Fire, dark, and the walk out. *By the end: the
-party is standing outside with whatever and whoever they carried out.*
-
-## Getting the Party In
-
-Six hooks. Every character takes one, and all six converge on the same first scene, so
-there is no wrong choice and no party to assemble in play.
-
-**The Invited.** You are prominent enough to be sent for by name, or you serve someone
-who was. The card came under a chief's own hand, which in a country where the Church
-owns the written word makes it one of perhaps forty pieces of writing in Rekuzan
-tonight. You know exactly what everyone whispers about this house. You came anyway,
-and you have your reasons, and they are good ones. *Fits: A House's Long Game, The
-Prelate's Question.*
-**Begin at the Gatehouse Court, B1, Movement I.**
-
-**The Entourage.** Somebody invited needed a companion, a bodyguard, a translator, or a
-witness, and chose you. Their reasons are their own and they have not shared them. You
-have a name on the card that is not yours and a night's worth of standing slightly
-behind someone. This is the best vantage point in the palace and the worst position to
-act from. *Fits: The Vanished Servant, or bodyguard to another player character.*
-**Begin at the Gatehouse Court, B1, Movement I.**
-
-**The Discarded Invitation.** A great many invitations were thrown away with
-theatrical contempt this season, and a genuine Boranis invitation under a mask custom
-is as good as a key. Yours has someone else's name on it. How you came by it is your
-business — bought, found, taken, or handed over by someone who wanted you to have
-exactly this problem. The custom protects you until midnight. *Fits: The Unpaid Debt,
-The Story of a Lifetime.*
-**Begin at the Gatehouse Court, B1, Movement I.**
-
-**Hired for the Night.** House Boranis has run on a skeleton staff for two years, and
-for one night it needed musicians, cooks, footmen and cellar hands. You are paid staff,
-which grants you a servant's freedom of the halls and a servant's invisibility — you
-can go almost anywhere, and almost nobody will remember you were there. Both halves of
-that will matter before dawn. *Fits: The Vanished Servant, The Circle's Reckoning.*
-**Begin at the Gatehouse Court, B1, Movement I.**
-
-**The Patron's Errand.** One of tonight's factions — the Merchant's Circle, the Church,
-a rival sect, the Thenya delegation — needed hands that could not be traced back to
-them. You came with your agenda pre-loaded and your fee half-paid, and with the
-specific understanding that if it goes wrong nobody has ever heard of you. *Fits: The
-Circle's Reckoning, The Prelate's Question, The Cousin's Errand.* *(In this edition, a
-patron is also a snake. Your employer's threat line in Chapter IX is one you are
-standing inside, whether or not you know it.)*
-**Begin at the Gatehouse Court, B1, Movement I.**
-
-**The Wrong Place, Deliberately.** You have your own reason to be inside the Boranis
-palace, and tonight is the first night in two years the doors have been open. The ball
-is not your business; it is your cover. Work out with the MM what you actually came
-for — it should be something the palace contains and the party does not yet know
-about. *Fits: The Unpaid Debt, and anything you build with the MM.*
-**Begin at the Gatehouse Court, B1, Movement I.**
-
-Run session zero as a table: each player picks a hook and an agenda, and the party
-works out how much of that they are telling each other. They do not have to tell each
-other anything.
-
-## How This Module Is Written
-
-**Keyed rooms** are `**B1. The Room Name.**` — a code, a name, then what is there. The
-codes are the same in the text, the night-tracker, the fight cards and every
-cross-reference; they ascend in reading order, public rooms first, then the private
-palace.
-
-**Fight cards** live in Chapter IX, *The Snakes*: the original five (`S1`–`S5`) and the
-snakes' own fights, one card each. A room that has a fight points at its card by ID,
-and the card points back at the room. Every card carries its encounter budget, terrain,
-objective, clock, outs, morale, and a scaling line for 2nd level and for 4th–5th level
-or five characters.
-
-**Stat blocks** live in Chapter X, the Bestiary, alphabetically, in SRD format. Nothing
-else in the module carries an enemy's numbers. Chapter VII's cast pages name each
-guest's block exactly as Chapter X prints it, so you can turn straight to it.
-
-**Clocks** are four-segment and named. Each says what advances it, and what happens
-when it fills. The night-tracker in Chapter VIII has a column for them.
-
-***Italic blocks*** are read-aloud. Every one has a trigger line above it in plain text
-saying when to read it. They describe only what the characters can perceive, they never
-say what anyone feels or does, and they never name a thing the players have not
-identified for themselves. Cut anything in one that your table's approach has already
-contradicted.
-
-**Boxed sidebars** come in three kinds, and the label says which: **Sidebar —** for a
-piece of the world that would otherwise derail the paragraph it sits in; **⟨If History
-Breaks⟩** for the places where the players can genuinely overturn the recorded outcome,
-each one telling you what changes and how to run forward; and **MM Note** for table
-craft.
-
-**Every enemy** carries what it wants and what it does when its morale breaks, not just
-its numbers. No fight in this module is to the death by default.
-
-**Where the module says *the module does not say*,** that is load-bearing. See *What
-the MM Knows*, below in this chapter.
-
-## What the Night Pays
-
-Print these. The module's own rule is that clever and peaceful play is paid on the page
-rather than left to your generosity in the moment — you will be tired by Movement VI,
-and a reward you have to remember to invent is a reward that does not happen.
-
-**Table I–1: What the Night Pays**
-
-| When | Heroic Inspiration | XP, each character *(if you track it)* |
-|---|---|---|
-| **Completing an agenda** | To that character, on the spot, as Chapter III says | 100 per agenda completed |
-| **Reading an omen before it is explained** | To the character who says the thing out loud at the table | 50 per omen (five omens) |
-| **Getting into a closed room without a fight** — Corval's gratitude, Anha's service passages, an audience-earned pass, a festival hire's livery | To whoever talked, walked or smiled them through | 50 per room |
-| **Ending a fight without finishing it** — talking the honor guard down, paying the toll, letting the thieves leave with something they can afford to lose, turning one snake on another | To everyone involved | The fight's full XP, as if every foe had fallen |
-| **Carrying somebody out** in Movement VII | To whoever carried them — per person standing outside at the end, not per attempt | 50 per person saved |
-| **Standing outside at the last bell** | — | 600 |
-| **Telling the truth about the night afterward, at cost** (Chapter VI) | To that character | Part of the wing's award, below |
-
-**The omens.** There are five omens and they are each worth
-exactly one Inspiration. A party that catches all five has earned the right to act
-before midnight, and the Inspiration is how they afford to.
-
-**Fights the table finishes** pay their XP as Chapter IX prints it, split evenly. Most
-tables will earn about as much from the rows above as from steel, which is the point.
-
-**Milestone is how this module is built.** If you track XP, the table above is tuned so
-a party that plays the night fully lands close to **2,700 XP** — 4th level — at the
-epilogue. If they arrive a little short, round up: the night is the milestone. For the
-aftermath wing, award **1,900 XP per session** played, and round up to **6,500** (5th
-level) at the inquest.
-
-None of these replaces your ordinary judgment. The best moment of the evening still
-earns Heroic Inspiration whether or not it appears on this list.
+wary ally who can become a fight if somebody provokes her.
 
 ### The Fights, and How to Offer Them
 
-Every fight in this module is visible before it starts and optional once it has. Nobody
-is ambushed and nobody is forced to draw. That is deliberate — but a table that came to
-play a game with damage dice and initiative should not have to go home without touching
-them, so here is how to put each one in front of them without pushing.
+Every fight in this module is visible before it starts and optional once it has.
+But a table that came to play a game with damage dice and initiative should not have
+to go home without touching them, so here is how to put each in front of them without
+pushing.
 
 **The seating feud (S1)** offers itself: it is loud, it is nearby, and it is two drunk
 men about to embarrass their houses. A player character with any standing at all will
 be *looked at* by the people around the benches. That look is the invitation.
 
-**Knives in the dark (S2)** needs the party in the service corridors, which any of three
-agendas will do on its own. If none of them has, Corval mentions that a door in the east
-service run has been sticking, and would somebody who is not busy take a look, because
-he certainly is.
+**The quiet word (S6)** is the early steel for a table that cannot wait. Anyone who
+presses Vorlain, or asks around about the missing year, gets invited by one of Essin's
+cousins to take the air on the terraces in Movement II or III. It is a warning with
+fists, and it is a fight.
+
+**Knives in the dark (S2)** needs the party in the service corridors, which any of
+three agendas will do on its own. If none of them has, Corval mentions that a door in
+the east service run has been sticking, and would somebody who is not busy take a look,
+because he certainly is.
+
+**The snakes** offer themselves one tell at a time. Show a tell once, plainly, the way
+you show an omen, and let the table decide whether it is their business. After
+midnight the same factions are in the dark with steel out, and a party crossing the
+palace will walk past them. Walking past is always an option. Say so.
+
+**The Attendant (S14)** is the climax's boss card, and it fires only if the party gets
+in an Uninvited's way enough to be worth distracting. Before midnight it is only an
+oddity to notice. It will not fight until the bells.
 
 **The gate (S3)** cannot be avoided and does not need offering. Two hundred people are
-trying to leave through a gate that is barred from the far side, and the party is among
-them. The Bought hold it. The fight is optional; the gate is not.
-
-**The snakes** offer themselves one tell at a time. Each faction's line in Chapter IX
-names the tell and where it shows. Show it once, plainly, the way you show an omen — a
-Circle knife who is not looking at the dancers, a warden standing where no warden should
-— and then let the table decide whether that is their business. After midnight the same
-factions are in the dark with steel out, and a party crossing the palace will walk past
-them. Walking past is always an option. Say so.
+trying to leave through a gate barred from the far side, and the party is among them.
+The Bought hold it. The fight is optional; the gate is not.
 
 > **Designer's note — what the fights are for**
 >
 > The Uninvited cannot be beaten. That is not a difficulty setting; it is the module's
-> spine. Force buys hallways and Fractures change outcomes, and a table that spends the
-> night trying to kill a gray mask has spent the night learning the one lesson this
-> adventure is built to teach.
+> spine. Cleverness buys Delay, Delay buys hallways and lives, and Fractures change
+> outcomes. A table that spends the night trying to kill a gray mask has spent the
+> night learning the one lesson this adventure is built to teach.
 >
 > So the fights exist to give the table somewhere for that energy to go where it
 > *works*. The feud is dignity. The corridor is a job. The snakes are the host's enemies
-> doing what enemies do when the lights go out, and a sword is a fair answer to every
-> one of them. The gate is two hundred people and a mortal company who can be beaten,
-> or talked out of it, or simply outlasted — and it lands in Movement VII precisely
-> because that is the hour a table most needs a problem that answers to a sword.
+> doing what enemies do when the lights go out. The Attendant is the thing in the way. The
+> Bought are the one foe at the gate who can be beaten or bought, and they land in
+> Movement VII precisely because that is the hour a table most needs a problem that
+> answers to a sword.
 >
 > If your table only wants the ball, cut them all but the gate, and let the gate be
 > talked open. If your table only wants the fights, they will still have been at the
@@ -345,41 +317,55 @@ them. Walking past is always an option. Say so.
 >
 > — *the designers*
 
-## The Shape of the Night
+## How This Module Is Written
 
-Oraga Night is a masquerade with an event clock. The evening is divided into seven
-**Movements**, like a dance program. Each Movement has scheduled events that happen
-regardless of the players, open time for the characters to chase their agendas, and
-one **omen** — a detail that is quietly wrong. The Movements advance when the table's
-energy says so, not when a timer does; the night-tracker in Chapter VIII gives you the
-whole program on one page.
+**Keyed rooms** are `**B1. The Room Name.**` — a code, a name, then what is there. The
+codes are the same in the text, the MM sheet, the palace diagram, the fight cards and
+every cross-reference.
 
-For most of the evening this is a social adventure. The player characters scheme,
-charm, eavesdrop, trespass, and trade favors under two hundred masks. Then, at
-midnight, the masks come off — and three guests keep theirs on. The last two Movements
-are a different game: darkness, fire, terror, and choices about who to save and what to
-carry out of the wreckage.
+**Fight cards** live in Chapter IX: the original five (`S1`–`S5`) and the rest, one
+card each. A room that has a fight points at its card by ID, and the card points back.
+Every card carries its encounter budget for four 4th-level characters, terrain,
+objective, clock, outs, morale, and scaling lines for three or five characters and for
+3rd or 5th level.
 
-Tell your players honestly what they are signing up for: *a glittering party that goes
-terribly wrong.* Do not tell them how.
+**Stat blocks** live in Chapter X, alphabetically, in SRD format. Nothing else in the
+module carries an enemy's numbers.
+
+**Clocks** are four-segment and named. Each says what advances it and what happens
+when it fills.
+
+***Italic blocks*** are read-aloud. Every one has a trigger line above it saying when
+to read it. They describe only what the characters can perceive, they never say what
+anyone feels or does inside, and they never name a thing the players have not
+identified for themselves.
+
+**Boxed sidebars** come in three kinds: **Sidebar —** for a piece of the world that
+would otherwise derail the paragraph it sits in; **⟨If History Breaks⟩** for the
+places where the players can genuinely overturn the recorded outcome; and **MM Note**
+for table craft. **If you have time** marks depth a four-hour table can leave out.
+
+**Every enemy** carries what it wants and what it does when its morale breaks, not just
+its numbers. No fight in this module is to the death by default.
+
+**Where the module says *the module does not say*,** that is load-bearing. See *What
+the MM Knows*, below.
 
 ## Tone: Glamour Over a Blade
 
-Play the first five Movements warm. The wine is good, the music is better, the gossip is
-excellent, and the political fencing is genuinely fun. Rekuzan knows how to throw a
-festival, and House Boranis, silent for two years, has thrown open its doors with
-strange, sincere generosity. Let the players enjoy the party. Their enjoyment is the
-ballroom floor you will drop out from under them.
+Play the first five Movements warm. The wine is good, the music is better, the gossip
+is excellent, and the political fencing is genuinely fun. House Boranis, silent for two
+years, has thrown open its doors with strange, sincere generosity. Let the players
+enjoy the party. Their enjoyment is the ballroom floor you will drop out from under
+them.
 
 The wrongness arrives on schedule, one omen per Movement, always deniable. A merchant
 who keeps glancing at doors. A falconry mews screaming at nothing. A charming guest
-whose turns of phrase are a century out of fashion. Never underline an omen. Say it
+whose turns of phrase are centuries out of fashion. Never underline an omen. Say it
 once, plainly, and move on. Players who notice will assemble the pattern themselves,
 and players who assemble the pattern earn the best reward this night has: the chance to
-act *before* midnight.
-
-The snakes follow the same rule. A tell is shown once, and it is always deniable. The
-table that catches it chooses what to do about it.
+act *before* midnight. The snakes follow the same rule. A tell is shown once, and it is
+always deniable.
 
 When the Unmasking comes, change your voice. Shorter sentences. Fewer adjectives. The
 party is over.
@@ -400,10 +386,10 @@ through play, not against it — Chapter V explains how the night bends toward h
 without ever taking the dice out of the players' hands.
 
 But it is your table. Sidebars marked **⟨If History Breaks⟩** appear wherever the
-players might genuinely derail the recorded outcome — saving Raunu, capturing one of the
-Uninvited, stopping the escape at the river gate — and each one tells you what changes
-and how to run forward. A table that saves Raunu Boranis has not played the module
-wrong. It has written its own Val'loh, and Chapter V will help you keep it standing.
+players might genuinely derail the recorded outcome — saving Raunu, capturing one of
+the Uninvited, stopping the escape at the river gate — and each one tells you what
+changes and how to run forward. A table that saves Raunu Boranis has not played the
+module wrong. It has written its own Val'loh.
 
 ## What the MM Knows (And What the MM Doesn't)
 
@@ -414,68 +400,62 @@ run every scene and answer every reasonable player action.
 
 It is not the whole truth. Where the module says *the module does not say*, that is a
 load-bearing sentence, not a gap. Raunu's missing year, the full nature of the
-Uninvited's distant master, what the child will one day become — these are mysteries
-the module keeps on purpose. Resist the urge to invent answers at the table; the honest
-version of this night is the one where even the survivors die not knowing.
+Uninvited's distant master and of what serves him, what the child will one day
+become — these are mysteries the module keeps on purpose. Resist the urge to invent
+answers at the table; the honest version of this night is the one where even the
+survivors die not knowing.
 
-That goes for spells, too. A 5e party arrives with tools the original never had to
-answer — *detect thoughts*, *speak with dead*, *zone of truth*, *identify*. Chapter X
-says what the obvious ones do against the Uninvited.
-Nothing on a spell list opens anything in *What the Module Never Says* (Chapter II).
-A spell that would reach one of those answers gets rumor, contradiction, and the cold
-satisfaction of standing at the edge of something vast — which is what the world gives
-everybody else.
+That goes for spells, too. A fifth-edition party arrives with tools the original never
+had to answer — *detect thoughts*, *speak with dead*, *zone of truth*, *identify*.
+Chapter X says what the obvious ones do against the Uninvited. Nothing on a spell list
+opens anything in *What the Module Never Says* (Chapter II). A spell that would reach
+one of those answers gets rumor, contradiction, and the cold satisfaction of standing
+at the edge of something vast — which is what the world gives everybody else.
 
 ## When It Goes Sideways
 
-*Four things go wrong at this table, reliably, and none of them are the table's
-fault. Each has two answers that live in the fiction rather than in a rules
-correction, because correcting a player mid-scene costs more than the error did.*
+*Five things go wrong at this table, reliably, and none of them are the table's fault.
+Each has answers that live in the fiction rather than in a rules correction, because
+correcting a player mid-scene costs more than the error did.*
 
 > **Troubleshooting — the table will not stop hitting the Wept**
 >
 > They have found a monster and they are going to solve it, because that is what
-> monsters are for in every other game they have played. In 5e they will also try
-> the spell list: *banishment*, *hold person*, a lucky crit. Chapter X answers each
-> one with the Uninvited's stat blocks. None of them work the way the player hopes.
+> monsters are for in every other game they have played. They will also try the spell
+> list: *banishment*, *hold person*, a lucky crit. Chapter X answers each one.
 >
-> **In-fiction answer one: make the purchase visible.** Force buys hallways. When
-> the fighter's player spends Action Surge and everything else on an attack, do not
-> say "it does nothing" — say that the thing staggers back three steps, and that
-> three steps is nine feet, and nine feet is how far Veier gets down the private
-> stair. He bought that. Say so.
+> **Answer one: put the Delay die on the table.** Every Uninvited has a Delay count,
+> and the players can see it (*Buying Time*, Chapter V). Damage buys Delay only in
+> lumps; a door, a chandelier, a lie or the crowd buys it faster. Every point spent is a
+> hallway for Veier or a room of guests out. Say what it bought.
 >
-> **In-fiction answer two: let something else in the room need them more.** A guest
-> under a fallen beam, twenty feet away, calling. Or a snake, knife out, working the
-> dark gallery where the fallen are. The Wept is not going anywhere. The guest is.
+> **Answer two: point at the Attendant.** The thing standing between them and the Wept
+> can be beaten, and it is the hardest fight of the night. And let something else in
+> the room need them more: a guest under a fallen beam, twenty feet away, calling. The
+> Wept is not going anywhere. The guest is.
 
 > **Troubleshooting — the MM keeps defaulting to DC 20**
 >
 > This is the single most common way to make this night unfun, and it happens because
 > Hard *feels* like taking the fiction seriously.
 >
-> **In-fiction answer one: the line's first check is DC 13**, and Chapter IV says so at
-> B0 for exactly this reason. Set the tier there and let the rest of the night
-> calibrate off it.
+> **Answer one: the line's first check is DC 13**, and Chapter IV says so at B0 for
+> exactly this reason. Set the tier there and let the rest of the night calibrate off
+> it.
 >
-> **In-fiction answer two: a masked approach is Easy.** The custom protects the
-> conversation — that is what the whole masquerade is *for*, mechanically. If you
-> find yourself calling DC 20 on a social check at this ball, ask whether the mask
-> should have made it DC 10 instead.
+> **Answer two: an approach across station, behind a mask, is Easy (DC 10).** The
+> custom protects the conversation — that is what the masquerade is *for*,
+> mechanically.
 
 > **Troubleshooting — a near miss is not a failure**
 >
 > If your table groans every time a d20 comes up two short, they have learned that
 > missing a DC means nothing happens, and they learned it from how it was narrated.
 >
-> **In-fiction answer one: name the cost before the success.** "You get the answer,
-> and Corval will remember you asked." Not "you fail to — well, actually you do get
-> it, but…". Cost first, then the thing they wanted, and the thing they wanted
-> *always arrives*. A miss by 4 or less is where this lives.
->
-> **In-fiction answer two: keep the costs table open.** It is on the night-tracker in
-> Chapter VIII, so you can read a cost off a page at speed instead of inventing one
-> while five people watch you.
+> **Name the cost before the success.** "You get the answer, and Corval will remember
+> you asked." Cost first, then the thing they wanted, and the thing they wanted *always
+> arrives*. A miss by 4 or less is where this lives, and the MM sheet has a table of
+> costs.
 
 > **Troubleshooting — the table rolls initiative on everything**
 >
@@ -483,37 +463,28 @@ correction, because correcting a player mid-scene costs more than the error did.
 > is for fights, and in this module a fight starts only when somebody chooses to bare
 > steel.
 >
-> **In-fiction answer one: steel is the line.** Everyone at this ball wears a knife;
-> drawing it is the crime. Until someone draws, it is a conversation, and the
+> **Answer one: steel is the line.** Until someone draws, it is a conversation, and the
 > conversation runs on checks. Say so: "Nobody has drawn yet. What do you do?"
 >
-> **In-fiction answer two: the fight ends on its objective, not on hit points.** Every
-> card in Chapter IX has a clock and outs. When the clock fills or an out is taken,
-> the fight is over, whatever anybody's HP says. Read the outs aloud once, at the start,
-> and the table will start reaching for them instead of their dice.
+> **Answer two: the fight ends on its objective, not on hit points.** Every card has a
+> clock and outs. Read the outs aloud once, at the start, and the table will start
+> reaching for them instead of their dice.
 
-## The Abridged Run
-
-> **Four hours, and the whole night.**
+> **Troubleshooting — somebody draws in Movement I, or the party splits four ways**
 >
-> Cut **Undercurrent A** (the Root of the House) and the **east-wing scene**. Run
-> **S1 or S2, not both**, and run **at most one snake line** through to its fight —
-> the one closest to a player's agenda. Show the other snakes' tells and let them stay
-> coiled. Run the gate as written — it is the only fight the ending needs.
->
-> That is the whole abridgement, and it is what the module was built to survive.
-> Everything you cut is a card or a thread, never a Movement, so the night still has
-> its shape: the line, the absent host, the toast, the lights going out, and the walk
-> to the gate.
+> Both are handled in Chapter IV: *When Somebody Draws Early* (after *The Palace on
+> Alert*) and *Running a Scattered Party* (in *Running the Room*). The short version:
+> nobody is benched for longer than one Movement, and nobody sits unaddressed for more
+> than two cuts.
 
 ## Safety and the Table
 
 This adventure contains violence erupting inside a celebration, the death of a host in
 front of his guests, and mortal danger near (never to, and never on-screen) a woman in
-late pregnancy and a newborn. Say so during session zero. Agree on lines and veils
-before play; the pregnancy is central to the plot and cannot be cut, but every moment
-of harm can be handled by cutaway. The module's own camera never lingers: when the
-worst happens, it happens at the edge of the frame, glimpsed through a crowd.
+late pregnancy and a newborn. Say so before you start. Agree on lines and veils before
+play; the pregnancy is central to the plot and cannot be cut, but every moment of harm
+can be handled by cutaway. The module's own camera never lingers: when the worst
+happens, it happens at the edge of the frame, glimpsed through a crowd.
 
 The snakes add more steel to the night than the original had, and more of it in the
 dark. The same camera rule applies to them. Nobody's death in a snake fight is
@@ -521,4 +492,4 @@ described closer than the table has agreed to.
 
 One MM tip above all others: **know the cast, not the script.** The night survives any
 player plan if you know what each named guest wants, fears, and will do when the lights
-go out. That is Chapter VII, and it is the chapter to reread before you sit down.
+go out. That is Chapter VII, and it is the chapter to skim again before you sit down.

@@ -13,12 +13,15 @@ Chapter VII.*
 
 ## How to Read This Chapter
 
-**The blocks are built for four 3rd-level characters.** Challenge ratings and XP
+**The blocks are built for four 4th-level characters.** Challenge ratings and XP
 are the SRD's; the encounter math on every fight card in Chapter IX uses the SRD
-5.2.1 budget per character (3rd level: **Low 150 · Moderate 225 · High 400**). The
+5.2.1 budget per character (4th level: **Low 250 · Moderate 375 · High 500**; for four,
+**1,000 · 1,500 · 2,000**). The
 three Uninvited are the deliberate exception: they are CR 9 to 11, and they carry a
 trait called **Leashed** that means none of that matters, because tonight they
-cannot be killed.
+cannot be killed. The **Attendant** who came with them is the other exception, in the
+other direction: a boss that can be beaten, and is built to be more than a party can
+out-slug (its block says how the party wins anyway).
 
 **Every block has four lines after its numbers**, carried over from the original
 cards: **Wants** (what ends the fight without a body), **Tells** (what a watchful
@@ -31,12 +34,16 @@ default, and most of these people would rather be anywhere else.
 
 - **Knocked out, not killed.** A creature reduced to 0 Hit Points by an attack
   marked *detain* (the honor guard, the sect guard, the Bought on a contract to
-  detain, the Church Wardens) is **Unconscious and Stable** instead of dying. It
-  wakes after 1d4 hours, or when a guard wants to ask it something.
-- **Not their quarry.** A creature that the Uninvited reduce to 0 Hit Points and
-  that is not their quarry is **Stable**, and is out of the scene: thrown clear,
-  through a wall or down a stair, alive. They have no orders about it and no
-  appetite. See the Uninvited, below.
+  detain, the Church Wardens) is **Unconscious and Stable** instead of dying. Before
+  midnight it wakes in the gatehouse cell at the start of the next Movement, and
+  somebody comes for it (Chapter IV, *The Palace on Alert*); after midnight the crowd
+  rule in *Down, Not Out* gets it up sooner.
+- **Down, Not Out.** A creature that one of the Uninvited or the Attendant reduces
+  to 0 Hit Points, and that is not the Uninvited's quarry, is **Unconscious and
+  Stable** — no death saving throws — and is thrown clear. Anyone within 5 feet can
+  take an action to get it back up with 1 Hit Point, and if nobody does, the crowd
+  does within two rounds. The whole rule is printed once, in Chapter V (*Midnight
+  Rules*); every block below that uses it says so.
 
 **Standard numbers in the text.** DCs follow the ladder in Chapter I: **Easy 10 ·
 Standard 13–15 · Hard 18–20 · Very Hard 25.** "Bloodied" means at or below half
@@ -60,23 +67,24 @@ Uninvited speak it too, in turns of phrase two centuries out of fashion.
 | The feud | — | Feuding Kinsman (CR 1/8) | S1 |
 | Tavva's crew | Tavva (CR 2) | Gallery Knife (CR 1/4) | S2, S5 |
 | The Bought | Bought Captain (CR 4), Bought Sergeant (CR 2) | Bought Blade (CR 1/2) | S3 |
-| The city | — | Sect Guard (CR 1/8) | Aftermath |
-| The Uninvited | The Wept (CR 11), The Radiant (CR 10), The Hollow (CR 9) | — | Chapter V |
+| The city | — | Sect Guard (CR 1/8) | S3 (its last ending) |
+| The Uninvited | The Wept (CR 11), The Radiant (CR 10), The Hollow (CR 9) | The Attendant (CR 8 Focused) | Chapter V, S14 |
 
 Noncombatants — Raunu Boranis, Veier Nolonaire, Minister Corval, Anha, Mother
-Sella, Master Vell and Otta Vesh — are at the end of the chapter under **If It
-Comes to It**. Crystal charges and the night's loot are under **Items of the
+Sella, Master Vell, Otta Vesh, and any one of the two hundred guests — are at the
+end of the chapter under **If It Comes to It**. Crystal charges and the night's loot are under **Items of the
 Night**.
 
 **Table X–2: Challenge Rating, XP and Proficiency Bonus** *(SRD 5.2.1)*
 
 | CR | XP | PB | | CR | XP | PB |
 |---|---|---|---|---|---|---|
-| 1/8 | 25 | +2 | | 3 | 700 | +2 |
-| 1/4 | 50 | +2 | | 4 | 1,100 | +2 |
+| 1/8 | 25 | +2 | | 4 | 1,100 | +2 |
+| 1/4 | 50 | +2 | | 8 | 3,900 | +3 |
 | 1/2 | 100 | +2 | | 9 | 5,000 | +4 |
 | 1 | 200 | +2 | | 10 | 5,900 | +4 |
 | 2 | 450 | +2 | | 11 | 7,200 | +4 |
+| 3 | 700 | +2 | | | | |
 
 ---
 
@@ -84,65 +92,205 @@ Night**.
 
 The three gray masks are the storm, and a 5e table has spent years learning that
 every storm has a spell that ends it. This one does not. Their blocks are full and
-honest — Armor Class, Hit Points, attacks that would end a 3rd-level character in
-one turn — so that a player who reads the numbers understands what they are
+honest — Armor Class, Hit Points, attacks that would end most characters at this
+table in one turn — so that a player who reads the numbers understands what they are
 standing in front of. Then the blocks close every door a clever table will try.
 
 They close them in the fiction, not by veto. Something holds each of the three on
 a leash that runs east, and that leash holds their lives, their minds and their
-shapes, and pulls them home at the last bell. Say that at the table when a player
-reaches for the spell, and let the player watch it fail:
+shapes, and pulls them home when their work is done — or at the last bell, whichever
+comes first. Say that at the table when a player reaches for the spell, and then say
+what the spell bought. Most good ideas buy something. What they buy is **Delay**
+(Chapter V, *Buying Time*): each point costs one of the three a turn of movement
+toward their errand, and every point is spent on somebody's life.
+
+**One rule covers most of the list.** Anything that would hold, block, hide from or
+wall off one of the Uninvited works for one round at most, and that round is **1
+Delay**. Deep Boranis ward-crystal is the only thing that holds them longer (Chapter
+V, ⟨They trap one of the Uninvited⟩).
 
 | The table tries | What happens | Where it lives |
 |---|---|---|
-| Damage, a lot of it | At 0 HP it throws aside whoever struck the blow, steps into shadow, and walks back on at full HP next round | *Leashed* |
-| *Power word* anything, *disintegrate*, a long fall, drowning, "it's dead now" | It is not. The leash holds its life; see *Leashed* | *Leashed* |
-| *Banishment*, *plane shift*, any teleport it didn't choose | The leash pulls it back to where it stood, at once | *Leashed* |
-| *Hold person*, *hold monster*, *sleep*, a stunning blow, *hideous laughter* | Its body is not its own to lose. Condition immunities | *Held by Something Else* |
-| *Charm person*, *suggestion*, *command*, *dominate*, *calm emotions*, fear of any kind | Its will is not its own to give. Condition immunities, and compulsion fails | *Held by Something Else* |
-| *Polymorph*, *flesh to stone*, any shape-change | Its shape is held too | *Held by Something Else* |
-| *Counterspell*, *dispel magic* | It casts no spells. Nothing on it is a spell. The leash is older than the word | — |
-| Grapple it, pin it, drown it, chain it | It steps into shadow and is out of the grip | *Shadow-Step* |
-| A door, a wall, *arcane lock*, a barricade | Ordinary barriers do not reliably hold it | *Shadow-Step* |
-| Turn it, frighten it, make it flee | It is not undead and it is not afraid. The Radiant above all cannot be turned | *Cannot Be Turned* |
-| Just save the saving throw | Three times tonight it simply succeeds | *Centuries of Practice* |
+| Damage, a lot of it | Every round the party deals 30 or more damage to one of them, that one gains 1 Delay (never more than 1 a round). At 0 HP they step into the world's shadow and are back at full HP on their next turn; whoever dealt the last blow makes a save or is thrown | *Leashed*; Chapter V, *Buying Time* |
+| *Power word* anything, *disintegrate*, a long fall, drowning, "they're dead now" | They are not. The leash holds their lives | *Leashed* |
+| *Banishment*, *plane shift*, any teleport they didn't choose | The leash pulls them back to where they stood, at once. It landed, so it is 1 Delay | *Leashed* |
+| *Hold person*, *hold monster*, *sleep*, a stunning blow, *hideous laughter* | Their bodies are not their own to lose. Condition immunities; nothing bought | *Held by Something Else* |
+| *Charm person*, *suggestion*, *command*, *dominate*, *calm emotions*, fear of any kind | Their wills are not their own to give. Condition immunities, and compulsion fails; nothing bought | *Held by Something Else* |
+| *Polymorph*, *flesh to stone*, any shape-change | Their shapes are held too; nothing bought | *Held by Something Else* |
+| *Counterspell*, *dispel magic* | They cast no spells. Nothing on them is a spell. The leash is older than the word | — |
+| Grapple, *web*, a net, a pin | The Wept and the Hollow step into the world's shadow and out of the grip: nothing bought. The Radiant can't while he is *Witnessed*: 1 Delay, and he spends his action tearing free | *Shadow-Step*; *Witnessed* |
+| A door, a wall, *arcane lock*, a barricade | Ordinary barriers don't reliably hold them. A new one put in the way at the right moment is a trick like any other: 1 Delay | *Shadow-Step*; Chapter V |
+| *Tiny Hut* | Force is not ward-crystal. The dome buys 1 Delay, once tonight. On their next turn the Uninvited it was set against opens it, as they open anything set against them, and the spell ends | Chapter V, *Buying Time* |
+| *Blindness/deafness* | It works until they save at the end of a turn, and *Centuries of Practice* can refuse it outright. While Blinded they can't Shadow-Step, because they must see where they arrive. 1 Delay, the first time on each of them | *Shadow-Step* |
+| *Sanctuary* on Raunu or Veier | A ward, not a compulsion, and it holds once: 1 Delay, and then they walk through it and the spell ends | *Held by Something Else* |
+| *Invisibility* on Veier | It works once: **2 Delay** on the Radiant while he casts about for her. Then he finds her anyway | *Witnessed* |
+| *Slow* | 1 Delay, once on each of them. Its half Speed doesn't stack with *Witnessed* or with the Radiant's guilt | Chapter V, *Buying Time* |
+| *Darkness*, a Dark-Burst, doused lanterns | Magical darkness blinds even their darkvision, so they can't Shadow-Step inside it. On the Radiant it also takes away his witnesses: he is faster, not slower. A table that means to deny him his congregation has earned his Fracture check instead | *Witnessed*; his Fracture |
+| Steering a palace ward at them | Each ward-point in the palace steers once tonight. Against one of the Uninvited a steered ward holds 1 round: 1 Delay | Chapter V, principle 2 |
+| Turn them, frighten them, make them flee | They are not undead and they are not afraid. The Radiant above all cannot be turned | *Cannot Be Turned* |
+| Just save the saving throw | Three times tonight each of them simply succeeds | *Centuries of Practice* |
 
-None of those failures is wasted. A spell that lands and does nothing still made one of
-the three stop and deal with it, which is all that force ever buys tonight: **at best,
-time.** Treat a clever spell that fails against them the way you treat a hard blow —
-say what the moment bought, a hallway or a door or a dozen guests — and let the player
-feel the purchase.
+The same trick earns Delay twice at most on the same Uninvited (the second time at
+DC 15), and never a third time; a spell is a trick like any other. Treat a good idea
+that fails the way you treat a hard blow: say what the moment cost them, and what it
+bought.
 
-**What does work**, in ascending order, and it is the complete list: the palace's
-**deep ward-crystal** (it slows and channels them, and the Root of the House is the
-one threshold they will not cross); the **leash** itself (the last bell of Oraga
-takes all three, finished or not); and each one's **Fracture** — the person still
-inside, reachable by someone who paid attention. Force does not win, but force
-**buys time**, and time is real tonight: every round one of them spends on a
-stubborn defender is a hallway Veier gains, a dozen guests out the service doors, a
-ward resealed. Chapter V runs the attack; these blocks are what it runs on.
+**What changes the night**, and it is the complete list: **Delay**, bought with the
+room, the crowd, the wards and good ideas; each one's **Fracture**, the person still
+inside, reachable by someone who paid attention; **deep ward-crystal**, the one thing
+that can hold one of them (and the Root of the House, the one threshold they will not
+cross); and the **leash**, which takes all three east the moment their work is
+finished or lost, and at the last bell of Oraga if nothing else has. Chapter V runs
+the attack; these blocks are what it runs on.
 
 **The Fractures, one rule for all three.** Each Uninvited has **tells** — human
-moments salted through Movements III–V (the table is in Chapter V), and anything it
-does openly during the attack counts too. A creature that has witnessed, or been
+moments salted through Movements III–V (the table is in Chapter V), and anything
+they do openly during the attack counts too. A creature that has witnessed, or been
 told about, at least one of that Uninvited's tells can spend its action within 30
-feet of it, where it can hear, to reach the person inside: an ability check with
+feet of them, where they can hear, to reach the person inside: an ability check with
 whatever skill the words fit — Persuasion, Performance, Religion, Insight, or plain
 Charisma for a bared truth. **Intimidation never works, and neither does Deception**: the
 person inside the mask has been lied to enough. Heroic Inspiration may be spent on it,
 and should be.
 
-- **DC 18** with one tell. **DC 15** with two or more.
-- **Success:** the Fracture lands in full, as its block says.
+- **DC 18** with one tell. **DC 15** with two or more — and the Wept's is DC 15
+  whenever she has 2 or more Delay, whatever tells have been seen.
+- **Success:** the Fracture lands in full, as the block says, and that Uninvited
+  gains **2 Delay**.
 - **Failure by 4 or less:** it lands, at a cost — the Uninvited answers first, with
-  one attack against the speaker (rolled in the open) or one word the speaker will
-  carry home.
-- **Failure by 5 or more:** it does not land and is not spent; the MM makes a move.
-  The speaker may try again with a new tell.
+  one attack against the speaker (rolled in the open; *Down, Not Out* holds) or one
+  word the speaker will carry home.
+- **Failure by 5 or more:** it doesn't land and isn't spent. The Uninvited acts
+  against the speaker, or the scene around them gets worse — the MM chooses. The
+  speaker may try again with a new tell.
 - **Each Fracture works once.**
+
+**And one more came with them.** The **Attendant** has been at the ball all night,
+carrying a cloak and a cup for a master nobody ever sees. At midnight it stops
+pretending. It is not Leashed, it can be beaten, and it is the thing an Uninvited
+turns on the party when the party gets in the way. Its block is the first in the
+list below.
 
 ---
 ## The Blocks, A to Z
+
+### The Attendant
+*A quiet guest with no master. Medium Construct, Unaligned*
+
+**AC** 17 · **Initiative** +3 (13)
+**HP** 229 (27d8 + 108)
+**Speed** 30 ft.
+
+| | STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|---|
+| Score | 18 | 16 | 18 | 22 | 12 | 6 |
+| Mod | +4 | +3 | +4 | +6 | +1 | −2 |
+| Save | +4 | +3 | +7 | +9 | +1 | −2 |
+
+**Skills** Arcana +9, Perception +4
+**Damage Immunities** Poison, Psychic
+**Condition Immunities** Charmed, Exhaustion, Frightened, Poisoned
+**Senses** Darkvision 120 ft., Passive Perception 14
+**Languages** Common; speaks only when asked, and answers literally and truthfully
+**CR** 8 (XP 3,900; PB +3) while Focused — nearly twice High for four 4th-level
+characters, on purpose (card S14). Idle, about CR 5 by the yardstick, and High by the
+clock. Award the full XP however the party gets it out of the way.
+
+**Traits**
+
+***Idle and Focused.*** The Attendant is **Idle** until the party becomes a real
+interruption: they have earned Delay against one of the three, struck one, or stood
+between one and their errand. From then on, at the start of each of its turns, it is
+**Focused** if any one of the three in the scene has no Delay — one of them glances at
+it, then at the party, and that is enough. A distraction breaks its focus (*Can Be
+Distracted*), but only until its next turn. Delay on every one of the three in the
+scene keeps it Idle. Say it out loud when it happens, and say its state every round
+after that: *locked on you*, or *drifting*.
+
+***Literal Orders.*** Its order is to keep the three from being interrupted. It acts
+only against a creature that has attacked, hindered or interfered with one of the
+Uninvited, or attacked the Attendant, since the end of its last turn. Everyone else
+is furniture. A creature that stops interfering stops being its business.
+
+***Rusty (Idle Only).*** It has spent centuries doing nothing. While Idle, its action
+is one Joined Hands attack, with Disadvantage, instead of its Multiattack. It can use
+Put Aside instead only if it is Bloodied or its focus has been broken twice tonight.
+
+***Can Be Distracted.*** A creature the Attendant can see or hear can take an action
+to distract it: describe the trick, then roll the ability and skill that fit it
+against **DC 13 while it is Idle, DC 19 while it is Focused**. It falls for **one
+trick a round**: once anyone has tried, nobody else can until the next round, and
+Help doesn't apply. Playing the trick out in character adds +2, and using one of its
+four habits the party has seen adds +2 (+4 at most). A trick already tried on it
+tonight gets no bonus and has Disadvantage; the same trick never works a third time.
+Its habits: *it stares at worked crystal and light; it answers any direct question
+literally, and can't leave one unanswered; it keeps a cup and a cloak ready for a
+master who isn't there; it follows music that changes.* A success against it while
+it is Focused **breaks its focus** until the start of its next turn; beat the DC by 5
+and it loses that turn as well. A success while it is Idle means it does nothing on
+its next turn, but doesn't count. On a failure the trick is spent, and a Focused
+Attendant attacks the distractor next. The **fourth** time its focus is broken
+tonight, it wanders off: out of the fight, standing at a window, watching the fires.
+That is a win. *(The full rule, the natural 20, and how to hint at all of this: card
+S14.)*
+
+***Clears the Way.*** Once each round, if it hasn't lost its turn to a distraction and
+no enemy is within 5 feet of it, the Attendant removes 1 Delay from one Uninvited in
+the same scene (Chapter V, *Buying Time*). It moves the obstacle: the barricade, the guest in the
+way, the door somebody was made to go round.
+
+***Down, Not Out.*** A creature the Attendant reduces to 0 Hit Points is Unconscious
+and Stable, and is set aside somewhere out of the way (Chapter V, *Midnight Rules*).
+It removes interruptions. It doesn't hunt.
+
+***Not Here.*** At 0 Hit Points the Attendant doesn't fall. It loses interest in being
+here, steps into the world's shadow, and is gone for the night. There is no body.
+
+***Two Turns (Focused Only).*** While Focused, the Attendant takes two turns each
+round: one on its Initiative and one at Initiative count 10 lower. It still has only
+one Reaction a round.
+
+**Actions**
+
+***Multiattack.*** The Attendant makes two Joined Hands attacks. It can replace one
+of them with Put Aside, if Put Aside is available.
+
+***Joined Hands.*** *Melee Attack Roll:* +7, reach 5 ft. *Hit:* 9 (1d10 + 4)
+Bludgeoning damage, and a Medium or smaller target is pushed 5 feet away.
+
+***Put Aside (Recharge 5–6 While Focused; Recharge 6 While Idle).*** *Strength Saving
+Throw:* DC 14, each creature of its choice in a 20-foot Emanation originating from it.
+*Failure:* 9 (2d8) Force damage, and the target is pushed 15 feet straight away and has the Prone
+condition. *Success:* Half damage only. The magic is real. It rarely cares to use it.
+
+**Before Midnight**
+
+A quiet guest dressed as a great house's attendant, carrying a cloak and a cup for a
+master who never appears. It was sent to watch ahead of midnight and it is bad at
+it. It will not fight before the Unmasking: confronted or attacked, it walks into a
+shadow and is gone until midnight, and steel drawn on it is still steel drawn at the
+ball (Chapter IV, *The Palace on Alert*). Asked whom it serves, it names nobody, and
+looks round, briefly, for the master it is supposed to have.
+
+> **Wants.** Nothing. It has an order — keep the three from being interrupted — and
+> if asked what the order is, it repeats it word for word.
+> **Tells.** *Before midnight:* holds a cup for someone who never takes it; stops
+> in front of a crystal wall and watches the light for a full minute; answers a
+> guest's question precisely, then the next, then the next, until the guest gives up;
+> turns to follow the band when the tune changes; loses the people it is watching
+> whenever something bright goes past. *At midnight:* sets the cloak and
+> the cup down on the nearest table. In a fight, it goes still when one of the three
+> looks at it, and then it comes for whoever that one was looking at.
+> **Breaks.** Not from fear or pain. Its focus broken four times, or 0 Hit Points,
+> and it is gone. An argument that what the party is doing is not, strictly, interrupting the
+> three is a distraction like any other (Intelligence or Charisma, and a direct
+> question it must answer is a habit).
+> **Nastier.** It is already Focused when the party first draws its attention at
+> midnight.
+> *Made, not born, and in the service of the Uninvited's master; it came through with
+> them tonight. What it is, for the MM alone: Chapter VII. Card: S14. Chapter V.*
+
+---
 
 ### Boranis Cousin's Blade
 *Medium Humanoid (Human), Neutral*
@@ -234,7 +382,7 @@ damage.
 5 feet. *Failure:* The target has the Grappled condition (escape DC 13).
 
 ***Warder (Each 1/Scene).*** The guard carries two charged house crystals, and
-releases one instead of attacking:
+releases one in place of one House Blade attack:
 - *Seal.* One door within 30 feet swings shut and grows closed. Until the scene
   ends it is locked; forcing it takes a DC 20 Strength (Athletics) check or a key
   from Corval.
@@ -366,7 +514,7 @@ miss.
 > protects. The contract case is chained to its belt.
 > **Breaks.** Calls the withdrawal and means it. A captain who has called a
 > withdrawal will not resume the fight tonight for any inducement, including a
-> better offer. It also shifts for the fires — it contracted for two diversions, not
+> better offer. It also shifts for the fires — it contracted for diversions, not
 > for this — and for money honestly offered in front of witnesses.
 > **Nastier.** *Reform the Line* (1/Scene): if the company still has somewhere to
 > withdraw to, every Blade that disengaged this scene returns to the field in good
@@ -525,9 +673,9 @@ advantage against.
 
 > **Wants.** The job done and the fee collected. Tonight the job is *what the chief
 > will say at midnight*, and after the two plates, *who eats off the second one*.
-> **Tells.** Lips moving at every name Corval calls. The same plain good coat
+> **Tells.** Lips moving at every name Corval calls. The same good coat
 > wherever Corval goes. The one man in the Audience Hall line not rehearsing a
-> question. A plain good coat where no guest has any reason to be.
+> question. The Circle's man, where no guest has any reason to be.
 > **Breaks.** On Callun's word. Without it, when the first knife is Bloodied — they
 > were hired for pressure, not for this. A knife that breaks drops whatever it has
 > taken and walks back into the crowd like a guest.
@@ -559,7 +707,8 @@ advantage against.
 
 ***A Census of Souls.*** Lying to the Prelate about matters of faith is DC 20; she has
 heard everything. She recognises a blessing, a rite or a form of prayer, however
-old, if anyone living has ever used it — and one or two that nobody living has.
+old, if anyone living has ever used it; an older form she knows only as one that
+nobody living uses.
 
 ***Pays Her Debts.*** A promise the Prelate makes in the Church's name is kept.
 
@@ -697,7 +846,8 @@ miss.
 > the toast.
 > **Breaks.** The moment the fight would be seen as *his*. He calls his duelists off,
 > offers his hand, and is the first to say it was a misunderstanding among friends.
-> **Nastier.** He has a fourth iron you didn't find, and it is in the room.
+> **Nastier.** Iron 3 is in the room: two duelists who have watched Vorlain all night
+> and will swear to anything.
 > *Cast: Chapter VII. Cards: S9 (at the rail), S13.*
 
 ---
@@ -855,12 +1005,12 @@ passages, if they are in reach.
 > downed opponent, and will not stand with Tavva past the point she would leave
 > herself.
 > **Nastier.** One more knife, already behind the party in the service passage.
-> *Four of them tonight. Cards: S2, S5.*
+> *Three of them tonight, and Tavva makes four. Cards: S2, S5.*
 
 ---
 
 ### The Hollow
-*The blank gray mask. Medium Humanoid (Human), Neutral*
+*The blank gray mask. Medium Humanoid (Human)*
 
 **AC** 16 · **Initiative** +3 (13)
 **HP** 157 (21d8 + 63)
@@ -882,36 +1032,44 @@ Petrified, Stunned, Unconscious
 
 **Traits**
 
-***Leashed.*** The Hollow can't die tonight. If it would drop to 0 Hit Points, or be
-killed outright by any means, it instead removes whoever dealt the last blow — that
-creature drops to 0 Hit Points and is out of the scene (see *Not Its Quarry*) — steps
-into the world's shadow, and returns at the start of its next turn, at full Hit
-Points, within 60 feet of the doors it holds. If any effect would send it to another
-plane or move it against its will by magic, the leash pulls it back to where it
-stood, at once. At the last bell of Oraga it leaves, and nothing holds it.
+***Leashed.*** The Hollow can't die tonight. If he would drop to 0 Hit Points, or be
+killed outright by any means, he steps into the world's shadow instead and returns at
+the start of his next turn, at full Hit Points, within 60 feet of the doors he holds.
+At the start of that turn, whoever dealt the last blow makes a DC 15 Strength or
+Dexterity saving throw (their choice); on a failure they are pushed 15 feet and have
+the Prone condition. No damage. If any effect would send him to another plane or move
+him against his will by magic, the leash pulls him back to where he stood, at once.
+When the three's work is finished or lost, or at the last bell of Oraga, he leaves,
+and nothing holds him.
 
-***Held by Something Else.*** Its will and its shape are not its own to lose. It
+***Held by Something Else.*** His will and his shape are not his own to lose. He
 can't be charmed, frightened, put to sleep, compelled, commanded or transformed, and
 spells and effects that would do any of those simply fail.
 
-***Centuries of Practice (3/Night).*** If the Hollow fails a saving throw, it can
+***Centuries of Practice (3/Night).*** If the Hollow fails a saving throw, he can
 choose to succeed instead.
 
-***Not Its Quarry.*** A creature the Hollow reduces to 0 Hit Points is Stable, is
-thrown up to 30 feet clear, and is out of the scene. It never attacks a creature at 0
-Hit Points.
+***Delay.*** The Hollow has a Delay count (Chapter V, *Buying Time*). At the start of
+his turn, if he has any, spend 1: for that turn he is off his post — *The Post*
+doesn't apply, and a dozen guests go through the doors behind him.
+
+***Down, Not Out.*** A creature the Hollow reduces to 0 Hit Points is Unconscious and
+Stable, and is thrown up to 30 feet clear (Chapter V, *Midnight Rules*). He never
+attacks a creature at 0 Hit Points.
 
 ***Unraveling Presence.*** Within 30 feet of the Hollow, a crystal charge released by
 anyone works only if its bearer succeeds on a DC 13 Charisma check; on a failure the
 light goes out of the crystal and the charge is spent. The palace's great wards
 gutter at this range but hold.
 
-***The Post.*** While the Hollow is within 10 feet of the doors it holds, no creature
-passes through them without its leave. A creature that tries must succeed on a DC 17
-Strength saving throw or be pushed 10 feet away and have the Prone condition.
+***The Post.*** While the Hollow is within 10 feet of the doors he holds, no creature
+passes through them without his leave. A creature that tries must succeed on a DC 17
+Strength saving throw or be pushed 10 feet away and have the Prone condition. The
+crowd does not roll: it breaks around him like water (Chapter V, *Two Hundred
+People*).
 
 ***Only the Doors.*** The Hollow attacks only creatures that come for the doors or
-attack it. It never advances if holding will do, and it never follows anyone who
+attack him. He never advances if holding will do, and he never follows anyone who
 backs away.
 
 **Actions**
@@ -927,13 +1085,13 @@ The target is pushed 5 feet away.
 
 **Bonus Actions**
 
-***Shadow-Step.*** The Hollow teleports up to 60 feet to an unoccupied space it can
-see. Any grapple or restraint on it ends. It arrives rather than runs; ordinary doors,
-walls and barricades do not reliably hold it. Deep Boranis ward-crystal does.
+***Shadow-Step.*** The Hollow teleports up to 60 feet to an unoccupied space he can
+see. Any grapple or restraint on him ends. He arrives rather than runs; ordinary
+doors, walls and barricades do not reliably hold him. Deep Boranis ward-crystal does.
 
 **When Bloodied**
 
-It gives ground to the doors and holds there. It follows no one.
+He gives ground to the doors and holds there. He follows no one.
 
 **Fracture — Despair (once).** Ferocity is useless; you cannot frighten a man who
 would not much mind ending. *Sincerity* works. See him; name the emptiness truly;
@@ -951,7 +1109,7 @@ he goes home before he is called. *(Check and DCs: The Fractures, above.)*
 > her kitchen family — with something like hunger. *During the attack:* holds but
 > never advances; flinches from ward-fire the way a tired man flinches from being
 > asked to try.
-> **Breaks.** Never. Only the Fracture, the last bell, or deep ward-crystal.
+> **Breaks.** Never. Only the Fracture, the leash, or deep ward-crystal.
 > **Nastier.** None. He does not want anything enough to be nastier.
 > *A person — polite, exhausted somewhere deeper than sleep reaches. One of three.
 > Chapter V.*
@@ -1118,7 +1276,7 @@ instead.
 ---
 
 ### The Radiant
-*The mirror-bright mask. Medium Humanoid (Human), Neutral*
+*The mirror-bright mask. Medium Humanoid (Human)*
 
 **AC** 17 · **Initiative** +9 (19)
 **HP** 162 (25d8 + 50)
@@ -1140,79 +1298,104 @@ Petrified, Stunned, Unconscious
 
 **Traits**
 
-***Leashed.*** As the Hollow, except that it returns within 60 feet of its quarry,
-resuming the hunt.
+***Leashed.*** The Radiant can't die tonight. If he would drop to 0 Hit Points, or be
+killed outright by any means, he steps into the world's shadow instead and returns at
+the start of his next turn, at full Hit Points, within 60 feet of his quarry, resuming
+the hunt. At the start of that turn, whoever dealt the last blow makes a DC 15
+Strength or Dexterity saving throw (their choice); on a failure they are pushed 15
+feet and have the Prone condition. No damage. If any effect would send him to another
+plane or move him against his will by magic, the leash pulls him back to where he
+stood, at once. When the boat is out of reach — or at the last bell, if it comes
+first — he leaves, and nothing holds him.
 
-***Held by Something Else.*** As the Hollow.
+***Held by Something Else.*** His will and his shape are not his own to lose. He
+can't be charmed, frightened, put to sleep, compelled, commanded or transformed, and
+spells and effects that would do any of those simply fail.
 
-***Cannot Be Turned.*** Nothing turns the Radiant from the hunt. It is not undead and
-it is not afraid. No spell, effect, argument or wound can change its quarry, make it
-retreat, or make it stop: *command*, *suggestion*, *compulsion*, *calm emotions* and
-every effect like them simply fail. It can only be made to feel. See its Fracture.
+***Cannot Be Turned.*** Nothing turns the Radiant from the hunt. He is not undead and
+he is not afraid. No spell, effect, argument or wound can change his quarry, make him
+retreat, or make him stop: *command*, *suggestion*, *compulsion*, *calm emotions* and
+every effect like them simply fail. He can only be made to feel. See his Fracture.
 
-***Centuries of Practice (3/Night).*** As the Hollow.
+***Centuries of Practice (3/Night).*** If the Radiant fails a saving throw, he can
+choose to succeed instead.
 
-***Not Its Quarry.*** As the Hollow. Its quarry is Veier Nolonaire.
+***Delay.*** The Radiant has a Delay count (Chapter V, *Buying Time*). At the start of
+his turn, if he has any, spend 1: he doesn't move toward Veier that turn. In the east
+wing, each point spent lets one more person in his way get clear. Delay he still has
+when he breaks past Master Vell at the Crossing is spent at the river gate, and one
+point is enough.
 
-***Unraveling Presence.*** As the Hollow.
+***Down, Not Out.*** A creature other than Veier Nolonaire that the Radiant reduces
+to 0 Hit Points is Unconscious and Stable, and is thrown clear (Chapter V, *Midnight
+Rules*). He never attacks a creature at 0 Hit Points.
+
+***Unraveling Presence.*** Within 30 feet of the Radiant, a crystal charge released by
+anyone works only if its bearer succeeds on a DC 13 Charisma check; on a failure the
+light goes out of the crystal and the charge is spent. The palace's great wards
+gutter at this range but hold.
 
 ***Witnessed.*** Worship must be witnessed to count. While one or more creatures that
-aren't its allies can see the Radiant and it knows they can, its Speed is halved and
-it can't use Shadow-Step: it slows, it poses, it savours. Every round it spends
-Witnessed is a hallway Veier gains (Chapter V). A creature that spends its turn
-chasing it, harrying it, or simply standing where it must be seen is buying her
-that hallway.
+aren't his allies can see the Radiant and he knows they can, his Speed is halved and
+he can't use Shadow-Step: he slows, he poses, he savours. Nobody sees him in the dark:
+in the unlit corridors after midnight, a pursuer needs a light (a lantern, a candle, a
+Steady Light) for him to be Witnessed. *Witnessed* and his guilt (see his Fracture)
+don't stack: at their worst he moves at 20 feet, never slower.
 
 **Actions**
 
-***Multiattack.*** The Radiant makes three Offered Hands attacks.
+***Multiattack.*** The Radiant makes three Offered Hands attacks. He can replace the
+last of them with The Rite, if The Rite is available.
 
 ***Offered Hands.*** *Melee Attack Roll:* +9, reach 5 ft. *Hit:* 16 (2d10 + 5)
 Bludgeoning damage.
 
 ***The Rite (Recharge 5–6).*** *Constitution Saving Throw:* DC 17, one creature
 within 5 feet that the Radiant hit this turn. *Failure:* 22 (4d10) Bludgeoning
-damage. *Success:* Half damage. It turns toward the room before it does this, and
+damage. *Success:* Half damage. He turns toward the room before he does this, and
 offers the blow upward.
 
 **Bonus Actions**
 
-***Shadow-Step.*** As the Hollow. Not while Witnessed.
+***Shadow-Step.*** The Radiant teleports up to 60 feet to an unoccupied space he can
+see. Any grapple or restraint on him ends. He arrives rather than runs; ordinary
+doors, walls and barricades do not reliably hold him. Deep Boranis ward-crystal does.
+He can't do this while Witnessed.
 
 **When Bloodied**
 
-It re-stages. On its next turn it makes no attacks: it steps back to wherever the
-most eyes are, and poses. Then it resumes.
+He re-stages. On his next turn he makes no attacks: he steps back to wherever the
+most eyes are, and poses. Then he resumes.
 
 **Fracture — Devotion (once).** The Radiant can't be turned — not from the hunt, not
-from the errand, not by darkness or doubt. What it can be made to do is *feel*. Two
+from the errand, not by darkness or doubt. What he can be made to do is *feel*. Two
 roads, either one:
 - **Deny the congregation.** Douse the lights, empty the room, turn every back, or
   give a performance that makes a player character the better spectacle. A table
   that does this with a *dark-burst*, a *darkness* spell or a doused lantern has
   earned the check; the check itself is Charisma (Performance) or whatever the doing
   of it fits.
-- **Plant the doubt.** A priest, a believer, or anyone armed with its tells,
-  declaring to its face that no god worth the name asks for a stolen child.
+- **Plant the doubt.** A priest, a believer, or anyone armed with his tells,
+  declaring to his face that no god worth the name asks for a stolen child.
   Intelligence (Religion) or Charisma (Persuasion).
 
 On a success, guilt gets into the errand like grit into a joint. For the rest of the
-night it falters at thresholds and looks back: its Speed is halved whether or not it
-is Witnessed, it can't use Shadow-Step more than once each minute, and at the
-Crossing it does not break past Master Vell. At a cost, the same, but it answers
-first with one parting blow or word. It does not stop, does not answer, does not
+night he falters at thresholds and looks back: he moves at 20 feet whether or not he
+is Witnessed, he can't use Shadow-Step more than once each minute, and at the
+Crossing he does not break past Master Vell. At a cost, the same, but he answers
+first with one parting blow or word. He does not stop, does not answer, does not
 turn. *(Check and DCs: The Fractures, above.)*
 
 > **Wants.** Veier Nolonaire — and to be seen doing it, because worship must be
-> witnessed to count. It re-stages the kill if nobody saw.
+> witnessed to count. He re-stages the kill if nobody saw.
 > **Tells.** *Before midnight:* an antique sign of blessing over the food, in a form
 > Prelate Kovaun recognises and nobody living uses; lights up when conversation
 > turns to duty, and asks a guest, warmly, *"Whom do you serve?"*; joins the Dead
 > Dance and cannot resist dancing beautifully, where the light falls. *During the
-> attack:* kills are staged, offered upward, like rites; it visibly slows and poses
+> attack:* kills are staged, offered upward, like rites; he visibly slows and poses
 > when watched.
-> **Breaks.** Never. Not the leash's fault, and not yours.
-> **Nastier.** None needed. If the table wants it, give it a fourth Offered Hands
+> **Breaks.** Never. Only guilt slows him, and only the leash stops him.
+> **Nastier.** None needed. If the table wants it, give him a fourth Offered Hands
 > attack when no one is watching.
 > *A person — warm, courtly, genuinely delightful on the subject of duty. One of
 > three. Chapter V, and the Crossing.*
@@ -1310,8 +1493,8 @@ damage.
 > a broken patrol falls back to hold the doors and wait for the next four.
 > **Nastier.** The whistle brings a sergeant who would rather talk than fight: use
 > the Bought Sergeant's numbers without Hold the Terms.
-> *Patrols in fours. Movement VII, when the districts' guards fight their way in, and
-> the aftermath wing.*
+> *Patrols in fours. Movement VII, when the districts' guards come up Gate Street
+> behind the Bought (card S3).*
 
 ---
 ### Tavva
@@ -1500,7 +1683,7 @@ miss.
 ---
 
 ### The Wept
-*The gray mask with carved tears. Medium Humanoid (Human), Neutral*
+*The gray mask with carved tears. Medium Humanoid (Human)*
 
 **AC** 18 · **Initiative** +7 (17)
 **HP** 187 (22d8 + 88)
@@ -1523,19 +1706,41 @@ Petrified, Stunned, Unconscious
 
 **Traits**
 
-***Leashed.*** As the Hollow, except that it returns within 60 feet of its quarry,
-resuming its task. It stops indulging the interference; it does not take it
-personally.
+***Leashed.*** The Wept can't die tonight. If she would drop to 0 Hit Points, or be
+killed outright by any means, she steps into the world's shadow instead and returns at
+the start of her next turn, at full Hit Points, within 60 feet of her quarry,
+resuming her task. At the start of that turn, whoever dealt the last blow makes a
+DC 15 Strength or Dexterity saving throw (their choice); on a failure they are pushed
+15 feet and have the Prone condition. No damage. She stops indulging the
+interference; she does not take it personally. If any effect would send her to
+another plane or move her against her will by magic, the leash pulls her back to
+where she stood, at once. When the three's work is finished or lost, or at the last
+bell of Oraga, she leaves, and nothing holds her.
 
-***Held by Something Else.*** As the Hollow.
+***Held by Something Else.*** Her will and her shape are not her own to lose. She
+can't be charmed, frightened, put to sleep, compelled, commanded or transformed, and
+spells and effects that would do any of those simply fail.
 
-***Centuries of Practice (3/Night).*** As the Hollow.
+***Centuries of Practice (3/Night).*** If the Wept fails a saving throw, she can
+choose to succeed instead.
 
-***Not Its Quarry.*** As the Hollow. Its quarry is Raunu Boranis, on the dais. If a
-creature is about to die shielding him, the Wept takes it out of the fight instead
-of out of the world — through a broken wall, at 0 Hit Points, Stable.
+***Delay.*** The Wept has a Delay count (Chapter V, *Buying Time*). At the start of
+her turn, if she has any, spend 1: she doesn't move toward Raunu that turn, and he
+gets a round of work out of it (a dozen guests out of the Court, or Veier one sealed
+door further down). She reaches Raunu on her third turn of moving toward him,
+through the wards he throws up himself. While
+she has 2 or more Delay, her Fracture is DC 15.
 
-***Unraveling Presence.*** As the Hollow.
+***Down, Not Out.*** A creature other than Raunu Boranis that the Wept reduces to 0
+Hit Points is Unconscious and Stable (Chapter V, *Midnight Rules*). If a creature is
+about to die shielding him, she takes it out of the fight instead of out of the
+world — through a broken wall, at 0 Hit Points, Stable. She never attacks a creature
+at 0 Hit Points.
+
+***Unraveling Presence.*** Within 30 feet of the Wept, a crystal charge released by
+anyone works only if its bearer succeeds on a DC 13 Charisma check; on a failure the
+light goes out of the crystal and the charge is spent. The palace's great wards
+gutter at this range but hold.
 
 ***She Arrives.*** The Wept does not wind up. Whenever she uses Shadow-Step, she can
 make one Strength Like a Fact attack immediately after she arrives, against whoever
@@ -1550,16 +1755,18 @@ stands between her and the dais.
 
 **Bonus Actions**
 
-***Shadow-Step.*** As the Hollow.
+***Shadow-Step.*** The Wept teleports up to 60 feet to an unoccupied space she can
+see. Any grapple or restraint on her ends. She arrives rather than runs; ordinary
+doors, walls and barricades do not reliably hold her. Deep Boranis ward-crystal does.
 
 **When Bloodied — The Sorrow Slips**
 
 The mask's carved tears begin to run — actually run. Her attacks can't score
-Critical Hits, she hums a cradle-song mid-attack without knowing it, and her
-Fracture is DC 15 whatever tells have been seen. She is losing the argument with
-what she used to be.
+Critical Hits, and she hums a cradle-song mid-attack without knowing it. She is
+losing the argument with what she used to be.
 
-**Fracture — Sorrow (once).** It needs ammunition gathered in play. On a success she
+**Fracture — Sorrow (once).** It needs ammunition gathered in play, or 2 Delay
+banked against her (then it is DC 15). On a success she
 stops — mid-motion, mid-kill — and for one full round she takes no actions, no
 Bonus Actions, no Reactions and does not move: a woman standing in a burning
 ballroom, long enough to pull a victim clear, seal a ward, finish an escape. At a
@@ -1587,9 +1794,10 @@ before Raunu falls has earned ⟨They save Raunu⟩, Chapter V.)*
 ---
 ## If It Comes to It
 
-*Seven people the night turns on, none of whom a fight card will ever use. If a table
-somehow ends up in a fight with one of them, these lines are enough to run it — and
-each one says why it very probably should not happen. None of them earns XP.*
+*Seven people the night turns on, none of whom a fight card will ever use, and one
+line for the crowd. If a table somehow ends up in a fight with one of them, these
+lines are enough to run it — and each one says why it very probably should not
+happen. None of them earns XP.*
 
 **Raunu Boranis** — *Medium Humanoid (Human).* AC 12 · HP 40 · Speed 30 ft. He will
 not fight a guest, and nothing in this module makes him. If it comes to it, on his
@@ -1622,8 +1830,14 @@ not raise a hand, and she will not leave anyone who is dying alone.
 mask-maker, susceptible to nothing but genuine appreciation of the craft. If a fight
 reaches her workshop, the table has gone badly wrong somewhere.
 
+**A guest** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. No attacks. Any
+one of the two hundred: a merchant, a minister's cousin, a festival hire in borrowed
+livery. After midnight, count one in every 5-foot square where the crowd is (Chapter
+V, *Two Hundred People*). A guest a player character kills was seen doing it by
+somebody, and the inquest hears of it.
+
 ### Master Vell
-*The Pale Factor. Medium Humanoid (Human), Neutral*
+*The Pale Factor. Medium Humanoid (Human)*
 
 **AC** — · **HP** — · **Speed** 30 ft., and some other way
 **CR** — *(not a combatant; no XP)*
@@ -1689,8 +1903,9 @@ not, trained or not. Releasing one does not make its bearer a caster.
 - **Releasing a charge** takes the Magic action (an action, at a 2014 table), and no
   roll. The charge is spent. Charges need no attunement.
 - **The six every Orthaen knows** are *common*: minor, local, brief. A gifted Orthaen
-  with the Orthaen Gift can grow one in a day of downtime (Chapter III). Price: 50 GP,
-  which is a season's wages in the wrong district.
+  with the Orthaen Gift can grow one in a day of downtime from 25 GP of raw crystal,
+  one at a time, and no more than one a week: a gift is not a mint (Chapter III).
+  Price: 50 GP, which is a season's wages in the wrong district.
 - **The house and the trade grow larger ones.** The four below the common list are
   *uncommon*, and nobody at the ball grew them with a gift alone. Price: 200 GP, when
   they can be bought at all.
@@ -1699,8 +1914,9 @@ not, trained or not. Releasing one does not make its bearer a caster.
   the action is spent and the charge is not.
 - **Near the Uninvited** (within 30 feet of any of the three), every release needs
   that DC 13 Charisma check, and a failure means the light goes out of the crystal and
-  the charge is spent. Foreshadow this the moment a player's clever crystal plan
-  meets it.
+  the charge is spent. A charge that is already running — a Steady Light carried in,
+  a door already sealed — keeps running; only the release is at risk. Foreshadow this
+  the moment a player's clever crystal plan meets it.
 
 **Table X–3: Crystal Charges**
 
@@ -1717,8 +1933,8 @@ not, trained or not. Releasing one does not make its bearer a caster.
 | **Dark-Burst** | Uncommon | Magical Darkness fills a 15-foot-radius Sphere centred on the crystal for 1 minute. Darkvision can't see through it, and nonmagical light can't illuminate it. *(Tavva's.)* |
 | **Door-Seal** | Uncommon | One door within 30 feet slams and grows shut for 1 minute. Forcing it is a DC 18 Strength (Athletics) check. *(Tavva's.)* |
 
-*A Dark-Burst released where the Radiant is working counts as denying it the
-congregation (its Fracture). A player who thinks of that has earned the check.*
+*A Dark-Burst released where the Radiant is working counts as denying him the
+congregation (his Fracture). A player who thinks of that has earned the check.*
 
 ### The Night's Loot
 
@@ -1744,6 +1960,6 @@ before it is a reward.*
   thread that leads east. Not magic, and worth more than anything magic at the ball.
 - **The company's purse** *(S3).* The half-fee, paid in old coin — 3d6 × 10 GP by
   weight. Chapter V says what the coin means, and what it does not.
-- **A Circle knife's advance** *(S7, S12).* 2d6 GP each, and a very plain good coat.
+- **A Circle knife's advance** *(S7, S12).* 2d6 GP each, and a coat worth more than the advance.
 - **Whatever the wardens were carrying** *(S8).* Chapter IX says what it is. It is
   evidence, and it is heavy.

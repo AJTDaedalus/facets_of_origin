@@ -1,12 +1,14 @@
 # Oraga Night — Fifth Edition
 
-*A masquerade adventure for fifth-edition play. One night, one palace, two hundred
-masks, every enemy the host has — and three guests nobody invited.*
+*A masquerade adventure compatible with fifth-edition rules (SRD 5.2.1). One night, one
+palace, two hundred masks, every enemy the host has — and three guests nobody invited.*
 
 **Setting:** Rekuzan, capital of the Orthaen, continent of Val'loh — 3164 PG
-**Players:** four or five characters of **3rd level** (balanced for four), fresh or the
-five pregenerated guests in Chapter XI
-**Length:** one session (4–6 hours) as written; three sessions with the aftermath wing
+**Players:** four characters of **4th level**, fresh or chosen from the five
+pregenerated guests in Chapter XI. Every fight is balanced for four; each card has
+lines for three or five characters and for 3rd or 5th level. The night ends at 5th
+**Length:** one session, **4½–5 hours**. Play starts in the street outside the palace
+and ends at dawn (the runtime table is in Chapter I)
 **Rules:** any fifth-edition core rules; written against the **SRD 5.2.1** and playable
 at a 2014 table. You do not need the Facets of Origin books.
 **Tone:** glamour over a blade — festival splendor and social fencing, with something
@@ -34,38 +36,39 @@ midnight three guests keep their masks on.
 
 This is the fifth-edition conversion of the Facets of Origin module of the same name.
 Same night, same canon, same seven Movements, same spine: the Uninvited cannot be
-beaten, and history bends toward the recorded outcome through play. What changes is
-the rules layer, and the snakes — the host's enemies, each with a visible, optional,
-escalating threat line a party can walk into.
+beaten, only delayed, and history bends toward the recorded outcome through play. What
+changes is the rules layer, and the snakes — the host's enemies, each with a visible,
+optional, escalating threat line a party can walk into.
 
 ## Contents
 
 | File | What it is |
 |---|---|
-| `README.md` | This page — contents, running order, licence |
-| `01_Overture.md` | How to run it in 5e: level, the DC ladder, Heroic Inspiration, what the night pays, the snakes, tone, canon, safety |
+| `README.md` | This page — contents, what to read first, licence |
+| `01_Overture.md` | How to run it: the runtime table, the first five minutes, the DC ladder, Heroic Inspiration, the snakes, tone, canon, safety |
 | `02_The_World_and_the_Night.md` | Val'loh, Rekuzan, House Boranis, and what is really happening |
 | `03_Masks_and_Agendas.md` | Characters, the Val'loh gifts as origin feats, crystal charges, masks, and the eight agendas |
-| `04_The_Ball.md` | The palace, the guests, and Movements I–V, every check as a 5e DC; each snake's scheme placed as visible trouble |
-| `05_The_Longest_Night.md` | The Unmasking — the Uninvited in 5e, the Fractures, the snakes in the dark, every ending |
-| `06_Aftermath.md` | The optional aftermath wing — the inquest, the trail, the mask-maker, and 5th level |
+| `04_The_Ball.md` | The street, the palace, the guests, and Movements I–V, every check as a DC; each snake's scheme placed as visible trouble |
+| `05_The_Longest_Night.md` | The Unmasking — the Uninvited, the Fractures, Delay, the snakes in the dark, every ending |
+| `06_Aftermath.md` | One page: what happens after dawn, how to end the session, and where a table that wants more goes next |
 | `07_Cast_of_the_Ball.md` | Every named guest — wants, fears, secrets, how to play them, and which stat block is theirs |
-| `08_Handouts.md` | The invitation, agenda cards, rumor table, and the MM's night-tracker with the **Snake Tracker** |
-| `09_The_Snakes.md` | The snakes chapter: each faction's threat line, the Snake Tracker, and every fight card, S1–S13 |
+| `08_Handouts.md` | **The one-page MM sheet**, the keyed palace diagram, the Snake Tracker, the invitation, agenda cards and the rumor table |
+| `09_The_Snakes.md` | The snakes chapter: each faction's threat line, the Snake Tracker, and every fight card, S1–S14 |
 | `10_Bestiary.md` | Every stat block, A to Z, in SRD format; *If It Comes to It*; *Items of the Night* |
-| `11_Pregenerated_Characters.md` | Five 3rd-level guests, full sheets |
+| `11_Pregenerated_Characters.md` | Five 4th-level guests, full sheets |
 | `INVENTIONS_5e.md` | Every new fact this edition had to invent, for the setting author's review |
 | `flow/` | The visual workflow: `flow.json` (every Movement, scene, fight, branch and ending as nodes and edges), `build_flow_page.py`, its template, and the generated `oraga_night_flow.html` — rebuild with `python3 build_flow_page.py`, never edit the HTML by hand |
 
-## Running Order
+## What to Read First
 
-Read `01` and `02` fully. Skim `04` and `05` once, then `09` for the snakes. Run the
-night from the night-tracker in `08`, with `07` open for the cast and `09` and `10` to
-hand for the fights. Deal agendas from `03` and pregens from `11` at session zero.
+**Ninety minutes of prep.** Chapter I opens with a box, *How to prep in 90 minutes*:
+what to read, in what order, and what to skim. In short: the MM sheet in Chapter VIII,
+the fight cards in Chapter IX and the blocks in Chapter X are what you run from;
+Chapters IV and V are the reference behind them.
 
-If your table wants the short campaign, run the night as written and continue into
-`06`'s aftermath. By milestone the party reaches 4th level at the epilogue and 5th at
-the inquest.
+**At the table,** run the night from the sheet in Chapter VIII, with Chapter VII open
+for the cast and Chapters IX and X to hand for the fights. Everything else is depth.
+Read it when a player goes looking for it.
 
 ## A Note on Secrets
 
@@ -82,8 +85,17 @@ Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD 5.
 licensed under the Creative Commons Attribution 4.0 International License, available
 at https://creativecommons.org/licenses/by/4.0/legalcode.
 
-Only SRD 5.2.1 rules, classes, subclasses, feats, spells, items and creatures are
-referenced. No other Wizards of the Coast material is used.
+**Changes from the SRD.** SRD rules, classes, subclasses, feats, spells, conditions and
+equipment are referenced by name and used as the SRD writes them, except where this
+module says otherwise. These are the module's own: the origin feats (the Val'loh
+gifts), the crystal charges, the encounter rules (clocks, *Down, Not Out*, *Buying
+Time* and Delay), and how Heroic Inspiration is awarded. Every stat block is an
+original creature written in the SRD's format, and none is copied from the SRD. The
+pregenerated characters are built from SRD options; their class-feature text is
+adapted from the SRD.
+
+No other Wizards of the Coast material is used. This module is not affiliated with,
+endorsed, sponsored or approved by Wizards of the Coast.
 
 The module's own text is part of the Facets of Origin project, released under GPLv3
 (see the repository root). The world of Svara and all its canon belong to the setting's

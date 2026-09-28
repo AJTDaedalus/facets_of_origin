@@ -108,8 +108,6 @@ deal to the right wrong person, which is one of the ways player characters get i
 
 ---
 
----
-
 # The Truth of the Night — MM ONLY
 
 *Operational truth: everything you need, nothing you don't.*
@@ -144,8 +142,13 @@ terrible enough.
 *At the table:* Chapter X gives each of the three a full stat block, and every one of
 them carries the **Leashed** trait — the 5e shape of everything in this section. They
 cast no spells tonight. Their shadow-step is a movement, not a magic a counterspell
-can reach. And a 0 on their hit-point track does not end them; it ends somebody's
-interference. Read their blocks before you run Chapter V.
+can reach. A 0 on their hit-point track does not end them, but they can be delayed,
+and delay is what saves people (*Buying Time*, Chapter V). Read their blocks before
+you run Chapter V.
+
+One more came through the door with them, and it is not a person: **the Attendant**,
+their master's servant, at the ball all night in the clothes of a noble's attendant
+and at their side from midnight. It can be beaten. Chapter VII has it.
 
 **The task:** kill Raunu Boranis, kill Veier Nolonaire, and carry away the child she
 is about to deliver. The parents are the errand. **The child is the prize.** Something
@@ -167,7 +170,7 @@ vanishes by dawn, the skeleton staff keep the silence they were paid for, and th
 inquest records a vanished *bride* — never a vanished *heir*. The world never
 learns what the ball was for. The only people who may ever know are players who
 earned the east wing, and what they do with a truth that exists nowhere else is
-the aftermath's sharpest knife (Chapter VI).
+theirs to carry out of the palace (Chapter VI).
 
 Meanwhile, the ballroom guesses all night. The Merchant's Circle is *certain* the
 midnight pronouncement is a trade decree (the Tithe of Hands — see Agenda 1). They
@@ -210,14 +213,14 @@ that together, let them.
 
 Veier, wounded, goes out through the gardens on Master Vell's arm, through the river
 gate, into the dark. She will not survive the night; her child will. No player
-character learns this last part unless your campaign continues into the aftermath —
-what they see, at most, is a pale man carrying a bleeding woman toward the water,
-moving as if he has rehearsed it for years.
+character learns this last part tonight — what they see, at most, is a pale man
+carrying a bleeding woman toward the water, moving as if he has rehearsed it for
+years.
 
 By morning, three killers have vanished as if they had never existed, every great
 house prefers a version of events that blames a rival, the Church prefers no version
 at all, and the crime of the age begins its long life as an unsolved wound. Chapter V
-runs the attack in detail. Chapter VI runs the morning after.
+runs the attack in detail. Chapter VI says what happens after dawn.
 
 The snakes change none of this. Whatever the factions do in the dark — and Chapter IX
 lets them do a great deal — the pillars stand: Raunu falls by his own choice, Veier
@@ -244,5 +247,5 @@ at the edge of something vast.
 Raunu, *commune*, *legend lore*, a *zone of truth* around a captured Bought captain:
 each returns something true and small, and none of them returns an answer to this
 list. The dead chief keeps the silence he kept alive; the captain truly does not
-know; the pale factor's mind is not a room a 3rd-level caster gets into. Say it the
+know; the pale factor's mind is not a room any caster at this table gets into. Say it the
 way the world would, and move on.

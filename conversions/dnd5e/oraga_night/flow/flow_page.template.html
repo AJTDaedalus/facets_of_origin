@@ -108,7 +108,7 @@ footer{color:var(--muted);font-size:12px;max-width:90ch}
 
 <div class="wrap">
   <header>
-    <span class="eyebrow">Oraga Night · D&amp;D 5e edition · module flow</span>
+    <span class="eyebrow">Oraga Night · fifth edition (SRD 5.2.1) · module flow</span>
     <h1>The Snakes in the Chicken Pen</h1>
     <p class="lede">Raunu Boranis invited every enemy he has into his own house for one night. Read left to right through the seven Movements; each faction gets its own lane so you can see <strong>what every snake is doing, hour by hour</strong>, next to the fights you can walk into and the three guests nobody invited. Select any card to trace where it leads.</p>
   </header>
@@ -138,7 +138,7 @@ footer{color:var(--muted);font-size:12px;max-width:90ch}
   <h2 class="sec">Clocks</h2>
   <section class="lower" id="clocks"></section>
 
-  <footer>Generated from <span class="ref">conversions/dnd5e/oraga_night/flow/flow.json</span> by <span class="ref">flow/build_flow_page.py</span>. Facets of Origin, GPLv3. Rules references use the System Reference Document 5.2.1 by Wizards of the Coast LLC, licensed under CC BY 4.0.</footer>
+  <footer>Generated from <span class="ref">conversions/dnd5e/oraga_night/flow/flow.json</span> by <span class="ref">flow/build_flow_page.py</span>. Oraga Night is part of Facets of Origin, released under GPLv3, and is compatible with fifth-edition rules. This work includes material from the System Reference Document 5.2.1 ("SRD 5.2.1") by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD 5.2.1 is licensed under the Creative Commons Attribution 4.0 International License, available at https://creativecommons.org/licenses/by/4.0/legalcode. The module's rules and creatures adapt the SRD; see the module README for the changes. Not affiliated with, endorsed, sponsored or approved by Wizards of the Coast.</footer>
 </div>
 
 <script>
@@ -179,7 +179,7 @@ const FLOW = /*FLOW_DATA*/null;
   FLOW.phases.forEach(p=>{
     const m = /^m(\d)$/.exec(p.id);
     const c = mk("div","cell head",
-      `<span class="phase-no">${m?roman[+m[1]]:"<span class=\"phase-tag\">"+esc(p.id==="pre"?"Prelude":p.id==="end"?"Dawn":"After")+"</span>"}</span><span class="phase-name">${esc(p.label.replace(/^[IVX]+\.\s*/,""))}</span><span class="phase-time">${esc(p.time)}</span><span class="phase-sum">${esc(p.summary)}</span>`);
+      `<span class="phase-no">${m?roman[+m[1]]:"<span class=\"phase-tag\">"+esc(p.id==="pre"?"Start":p.id==="end"?"Dawn":"After")+"</span>"}</span><span class="phase-name">${esc(p.label.replace(/^[IVX]+\.\s*/,""))}</span><span class="phase-time">${esc(p.time)}</span><span class="phase-sum">${esc(p.summary)}</span>`);
     grid.appendChild(c);
   });
   lanes.forEach(l=>{

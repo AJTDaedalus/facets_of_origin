@@ -2,9 +2,9 @@
 
 ## Making Characters for Oraga Night
 
-Build **3rd-level** characters by the ordinary 5e steps. Nothing about this module
-changes how a character is made; it only narrows the species step and adds one set of
-options.
+Build **4th-level** characters by the ordinary fifth-edition steps. Nothing about this
+module changes how a character is made; it only narrows the species step and adds one
+set of options.
 
 - **Every character is Human.** The tribes of Val'loh are not different kinds of
   people; they are the same kind of people, and some of them are born carrying
@@ -17,13 +17,14 @@ options.
   ability scores to raise (+2 and +1, or +1 to all three), an origin feat, two skill
   proficiencies, one tool proficiency, and starting equipment. The four SRD backgrounds
   work as written; the pregens' custom backgrounds (Chapter XI) show how a Val'loh one
-  is built. A calligrapher's kit is a strange thing to own in a country where the Church
-  owns the written word; swap it for any other tool.
+  is built. Calligrapher's Supplies are a strange thing to own in a country where the
+  Church owns the written word; swap them for any other tool.
 - **A gifted character takes their tribe's gift** as the origin feat the Human's
   *Versatile* trait grants. The gifts are below. Four Orthaen in five are gifted, and
   nearly every Phern.
-- **Everyone gets a hook and an agenda.** The six hooks are in the Overture and every
-  one of them starts you at the Gatehouse Court; the agendas are below.
+- **Everyone picks a hook and an agenda** in the first five minutes (Chapter I). The
+  six hooks are there, and every one of them starts you in the street outside the
+  palace; the agendas are below.
 
 A party of Orthaen with at most one Phern is the expected shape. A Phern character is
 conspicuous — one of a handful of non-Orthaen faces in two hundred — which is not a
@@ -55,8 +56,9 @@ Every gift feat is built the same way, and three things are the same for all of 
 
 **It is Minor, for life.** Small, local, brief; never damage, never deciding anything;
 in a fight it is a stunt. The feat does not grow as you level. A gifted character who
-wants real spellcasting takes a spellcasting class, or *Magic Initiate* at 4th level,
-like anyone else — and the gift is the natural place for that magic to show itself.
+wants real spellcasting takes a spellcasting class, or *Magic Initiate* as their
+4th-level feat, like anyone else — and the gift is the natural place for that magic to
+show itself.
 
 **You choose what it does.** Your people's gift says how it *shows itself*, not what it
 is. One Orthaen's crystal holds a light, another's mends a crack by growing across it,
@@ -97,9 +99,10 @@ sets, and able to hold a working. Four in five carry it.
   which is your spellcasting focus for it; you are never without one. Its effect shows
   in the crystal — the light is the stone glowing, the mending is new crystal growing
   across the crack.
-- **Grow a Charge.** Given a day of downtime, you can grow one crystal charge from the
-  common list in *Items of the Night* (Chapter X). Your gift alone grows only those;
-  anything larger needs a spellcaster's training. There is no downtime during the ball.
+- **Grow a Charge.** Given a day of downtime and 25 gp of raw crystal, you can grow one
+  crystal charge from the common list in *Items of the Night* (Chapter X), one at a time
+  and no more than one a week. Your gift alone grows only those; anything larger needs
+  a spellcaster's training. There is no downtime during the ball.
 
 #### Phern Gift
 *Origin feat. Prerequisite: Phern, gifted.*
@@ -130,23 +133,6 @@ because the night has two gifted Thenya in it, and Chapter VII uses this one.
 *(MM: a gifted Thenya character needs your agreement. Not because the feat is strong —
 it is Minor like the rest — but because the whole of it points at another character,
 and that only works if the table has built someone for it to point at.)*
-
-#### The Other Peoples *(for the MM, and for other Val'loh adventures)*
-
-The rest of Val'loh's peoples are not player options at this ball, but their gifts
-follow the same pattern, and the MM may need one for a guest. Each is an origin feat
-with the two shared benefits and one line of its own. The **Krenn** are gone, and every
-Val'loh character will tell you so. The **Tyndi** are off by default, for reasons of
-setting rather than balance.
-
-| People | The gift shows itself… | Gift Knack covers | Its own line |
-|---|---|---|---|
-| **Scora** | as memory, held exactly | Recalling anything witnessed or recorded | You can recall, word for word, anything you have heard or seen in the last month |
-| **Akathi** | through one bonded weapon | Anything about that weapon | Nobody can make you drop your bonded weapon against your will |
-| **Dekhi** | as endurance | Enduring cold, hunger, thirst, poison, exhaustion | Advantage on saving throws against the Poisoned condition and against Exhaustion from cold, hunger, thirst, or a forced march |
-| **Kshalo** | in the dreams of the sleeping | Reading and interpreting dreams | Once per long rest, touching a sleeping creature, you see what it is dreaming |
-| **Fthala** | among animals and wild places | Beasts and paths that are not roads | You can make simple ideas understood to a Beast, and understand its answer |
-| **Tyndi** | through stone and metal that carry power | Devices and their control gems | You can work a device you have studied for an hour without knowing how it was made |
 
 ### The Ungifted
 
@@ -185,13 +171,6 @@ door**, **a veil of quiet**, **a chime at a threshold**, **warmth**, and **a hel
 image**. Their rules, their prices, and what happens when one is released near
 something that eats magic are in **Items of the Night**, Chapter X.
 
-## How You Got In
-
-*Moved.* The six hooks — **The Invited · The Entourage · The Discarded Invitation ·
-Hired for the Night · The Patron's Errand · The Wrong Place, Deliberately** — are in the
-Overture, written out, each naming the agendas that fit it and each ending at the same
-first scene. Pick one there, then pick an agenda here.
-
 ## Masks
 
 Every guest wears a spirit-mask until the midnight Unmasking. Mechanically, a mask is
@@ -219,8 +198,8 @@ Movements: while the night's events unfold on schedule, agendas give every chara
 reason to work the room, cross paths, and end up in the wrong corridor at the right
 moment.
 
-Deal agendas during session zero. Match them to characters, or hand them out face-down
-and let fate deal. Two players may share an agenda (rivals or partners — deal both
+Deal agendas in the first five minutes (Chapter I). Match them to characters, or hand
+them out face-down and let fate deal. Two players may share an agenda (rivals or partners — deal both
 ways). Every agenda card has:
 
 - **The ask** — what you were sent to do, in your patron's words.
@@ -232,8 +211,8 @@ ways). Every agenda card has:
 Agendas are written to be *completable before midnight* by fast, clever play — and the
 module rewards that. A character who finishes their agenda early has stopped being an
 errand-runner and started being a person who notices things. That is when the omens
-find them. **Completing an agenda earns Heroic Inspiration** on the spot, and XP by
-Table I–1 if you track it.
+find them. **Completing an agenda earns Heroic Inspiration** on the spot (Table I–3),
+and XP by Table I–4 if you track it.
 
 Four of the eight agendas have a patron who is also one of the night's snakes. That is
 not a trap for the player; it is a vantage point. A character running the Circle's
@@ -258,7 +237,7 @@ it hired you to undermine. *(The Tithe of Hands is a levy on each sect palace to
 festival laborers year-round — one more Raunu policy the great houses will hate. The
 module invents it here; it dies with its rememberers unless your table saves them.)*
 
-**Pays:** Heroic Inspiration on the spot, and XP by Table I–1. Mistress Callun pays on
+**Pays:** Heroic Inspiration on the spot, and XP by Table I–4. Mistress Callun pays on
 delivery — **100 gp** in Circle silver — and she pays whether or not she likes the
 answer. *Your patron is a snake: the Merchant's Circle line, Chapter IX.*
 
@@ -274,8 +253,8 @@ another. And then: your honest judgment. The Prelate will know if you shade it.
 Raunu's face all night. You saw the exact moment he understood — before anyone
 screamed, before the lights failed. He knew what they were. Remember that.
 
-**Pays:** Heroic Inspiration, and XP by Table I–1. The Church's favor: one request of
-Prelate Kovaun, spendable in the aftermath wing or after, and as large as the MM
+**Pays:** Heroic Inspiration, and XP by Table I–4. The Church's favor: one request of
+Prelate Kovaun, spendable after tonight, and as large as the MM
 decides "frightening" means at your table. *Your patron is a snake: the Church line,
 Chapter IX.*
 
@@ -290,7 +269,7 @@ in a way your patron cannot imagine. He says nothing incriminating sober.
 this — and you watched his face when it happened. Whatever you saw there, you are the
 only witness to it.
 
-**Pays:** Heroic Inspiration, and XP by Table I–1. Lord Draunel's gratitude, which is
+**Pays:** Heroic Inspiration, and XP by Table I–4. Lord Draunel's gratitude, which is
 worth exactly what a Draunel's gratitude is worth. *Your patron is a snake: the House
 Draunel line, Chapter IX.*
 
@@ -307,7 +286,7 @@ and the only way to her; this errand cannot be done from the dance floor.
 trust. When she looks for help in the dark, she will look for you. *(This agenda puts
 a player character beside Veier at the Unmasking. Chapter V leans on it.)*
 
-**Pays:** Heroic Inspiration, and XP by Table I–1. Maiven Nolonaire's trust, which
+**Pays:** Heroic Inspiration, and XP by Table I–4. Maiven Nolonaire's trust, which
 after midnight is worth more than any coin at this ball. *Your patron is not a snake —
 the Thenya line in Chapter IX is the one that turns into a fight only if somebody
 provokes it.*
@@ -326,7 +305,7 @@ you are not the only thief who noticed the first open Boranis door in two years.
 and you are the only guest who understands what the palace's defenses are doing, and
 where they are weakest. People will live or die by whether you share that.
 
-**Pays:** Heroic Inspiration, and XP by Table I–1. The crystal itself, home. It is an
+**Pays:** Heroic Inspiration, and XP by Table I–4. The crystal itself, home. It is an
 heirloom, not treasure, and nobody at your table should be selling it. *Tavva's crew
 wants the same gallery (Chapter VII).*
 
@@ -345,7 +324,7 @@ rule the payer was scouting for the Uninvited instead; if so, Vell has a second 
 prepared, because he always does.)*
 
 **Pays:** Heroic Inspiration when the gate stands unlocked at midnight, and XP by
-Table I–1. The fee is already in your purse: **30 gp** in coin of an old striking,
+Table I–4. The fee is already in your purse: **30 gp** in coin of an old striking,
 triple a hireling's rate, and nobody at the ball can say whose.
 
 ### 7. The Story of a Lifetime
@@ -361,7 +340,7 @@ next hour — and what you choose to hold in memory, or grow into crystal — is
 Val'loh will ever know of this night.
 
 **Pays:** Heroic Inspiration when you carry the testimony out through the gate, and XP
-by Table I–1. Nothing else, which is the point.
+by Table I–4. Nothing else, which is the point.
 
 ### 8. The Vanished Servant
 *Personal.*
@@ -377,15 +356,17 @@ half-knows, is the night's work.
 locked doors, you and Anha are the only people in the palace who know the other way
 through — and two hundred guests are about to need it.
 
-**Pays:** Heroic Inspiration when Anha is found and talking, and XP by Table I–1.
+**Pays:** Heroic Inspiration when Anha is found and talking, and XP by Table I–4.
 Your sister, and the only other person in the palace who knows the way through.
 
 ---
 
 ## The Ready-Made Guests
 
-Five pregenerated characters at 3rd level, one per agenda archetype. Their full sheets
-are in **Chapter XI**; this is the table to deal from.
+Five pregenerated characters at 4th level, one per agenda archetype. Their full sheets
+are in **Chapter XI**; this is the table to deal from. The module is built for four
+players: leave out Andra or Pello, and leave out Ilesse only if another player takes
+Agenda 4, because Chapter V leans on somebody reaching Veier.
 
 | Guest | People | Class | Gift | Suggested agenda |
 |---|---|---|---|---|
