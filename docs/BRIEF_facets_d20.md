@@ -265,3 +265,13 @@ focus, short fights.
 4. **v0.3 books go in the tree** as a read-only snapshot, `rulesets/v0.3/`.
 5. **4th and 8th level:** one pick: +2 to one ability, +1 to two, or one extra knack
    (DESIGN v0.2 V21).
+
+## Amendment 3 — owner rulings (2026-09-28, third round)
+
+1. **Prismatic domains are the Deep Magic reward** (DESIGN v0.2 §5.1 option a): they
+   open only through Deep Magic, the third Spell talent on a caster's main track (from
+   5th). The Oracle starts on Presence with *Turn the Odds* and gains Fate at 5th.
+   Supersedes Amendment 2 item 2 ("open from 1st").
+2. **Ranks lapse.** The main track is always recomputed from current talents; shifting
+   investment changes what a character is best at, and the builder shows it before the
+   pick is confirmed.
