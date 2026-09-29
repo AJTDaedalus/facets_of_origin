@@ -73,7 +73,7 @@ def ladder_fit() -> dict:
         ms = M.ladder()
         xs = [math.log(float(m.cr)) for m in ms]
         fits = {"hp": (_lstsq3(xs, [math.log(m.hp) for m in ms]), True),
-                "dpt": (_lstsq3(xs, [math.log(m.damage_per_turn) for m in ms]), True),
+                "dpt": (_lstsq3(xs, [math.log(m.routine_damage) for m in ms]), True),
                 "ac": (_lstsq3(xs, [m.ac for m in ms]), False),
                 "to_hit": (_lstsq3(xs, [m.to_hit for m in ms]), False),
                 "attacks": (_lstsq3(xs, [sum(a.count for a in m.attacks) for m in ms]), False)}
@@ -90,6 +90,23 @@ def _stat(cr: float, key: str) -> float:
     return math.exp(v) if log else v
 
 
+_WEAPON_SHARE = None
+
+
+def ladder_weapon_share() -> float:
+    """Share of the SRD ladder's attack damage that is bludgeoning, piercing or slashing."""
+    global _WEAPON_SHARE
+    if _WEAPON_SHARE is None:
+        tot = bps = 0
+        for m in M.ladder():
+            for a in m.attacks:
+                d = a.fixed * a.count
+                tot += d
+                bps += d if a.dtype in ("bludgeoning", "piercing", "slashing") else 0
+        _WEAPON_SHARE = bps / tot
+    return _WEAPON_SHARE
+
+
 def generic(cr: float) -> MonsterBlock:
     """A generic foe at a continuous CR, from the smooth fit over the SRD ladder."""
     cr = max(MIN_CR, min(MAX_CR, float(cr)))
@@ -99,10 +116,16 @@ def generic(cr: float) -> MonsterBlock:
     to_hit = round(_stat(cr, "to_hit"))
     n = max(1, round(_stat(cr, "attacks")))
     saves = {a: round(_stat(cr, a)) for a in ("str", "dex", "con", "int", "wis", "cha")}
-    per, extra = divmod(dpt, n)
+    # Damage types: the ladder's share of weapon (bludgeoning/piercing/slashing) damage;
+    # the rest arrives as one extra non-weapon strike (resistances then count as they do
+    # against real monsters).
+    other = round(dpt * (1 - ladder_weapon_share()))
+    per, extra = divmod(dpt - other, n)
     attacks = [MonsterAttack("Strike", to_hit, per + extra, None, 0, "bludgeoning", 1)]
     if n > 1:
         attacks.append(MonsterAttack("Strike", to_hit, per, None, 0, "bludgeoning", n - 1))
+    if other > 0:
+        attacks.append(MonsterAttack("Blast", to_hit, other, None, 0, "force", 1))
     return MonsterBlock(f"generic_{cr:.3f}", f"CR {cr:.2f} foe", Fraction(cr).limit_denominator(64),
                         ac, hp, tuple(attacks), saves, source="engine")
 
@@ -129,6 +152,15 @@ def cr_for_threat(threat: float) -> float:
     return math.sqrt(lo * hi)
 
 
+HARD_HITTER_FACTOR = 1.25   # damage per turn ≥ 1.25 × the SRD ladder's line for its CR
+
+
+def hits_hard(block: MonsterBlock) -> bool:
+    """A hard hitter: its damage per turn is at least 1.25 × the typical damage for its CR
+    (Table 9–3's damage column). Generic foes sit on the line, so never qualify."""
+    return block.routine_damage >= HARD_HITTER_FACTOR * generic(float(block.cr)).damage_per_turn
+
+
 # ================================================================ the Threat model
 
 
@@ -140,14 +172,27 @@ class ThreatModel:
     minion_hp: float = 8.0
     boss: float = 2.0
     never: float = 1.15
+    hard: float = 1.0      # a hard hitter's mark-up (playtest fix pass: Amendment 4 item 2)
 
     def of(self, block: MonsterBlock, role: str = "standard") -> float:
+        return self.price(block.hp, block.damage_per_turn, role,
+                          never=block.morale == "never", hard=hits_hard(block))
+
+    def price(self, hp: float, dpt: float, role: str = "standard", *, never: bool = False,
+              hard: bool = False) -> float:
+        """09 step 2 for a monster's pricing numbers (``monsters.turn_damage``,
+        ``monsters.effective_hp``). A hard hitter counts × ``hard`` in every role; a
+        monster that never breaks × ``never`` as a standard or minion."""
         if role == "minion":
-            t = math.sqrt(self.minion_hp * block.damage_per_turn)
+            t = math.sqrt(self.minion_hp * dpt)
+        elif role in ("standard", "boss"):
+            t = math.sqrt(hp * dpt) * (self.boss if role == "boss" else 1.0)
         else:
-            t = strength(block) * (self.boss if role == "boss" else 1.0)
-        if block.morale == "never" and role != "boss":
+            raise ValueError(f"unknown role {role!r}")
+        if never and role != "boss":
             t *= self.never
+        if hard:
+            t *= self.hard
         return t
 
     def of_cr(self, cr: float, role: str = "standard") -> float:
@@ -173,29 +218,42 @@ class ThreatModel:
         return tot
 
     def table(self) -> dict:
-        """Table 9–2: Threat by CR and role (the smooth SRD-ladder stat line at each CR)."""
+        """Table 9–3: Threat by CR and role (the smooth SRD-ladder stat line at each CR),
+        with the line's damage per turn (the hard-hitter yardstick)."""
         out = {}
         for cr in M.TEMPLATE_CRS:
             blk = generic(float(cr))
             out[str(cr)] = {"standard": round(self.of(blk)), "minion": round(self.of(blk, "minion")),
-                            "boss": round(self.of(blk, "boss"))}
+                            "boss": round(self.of(blk, "boss")),
+                            "damage": round(blk.damage_per_turn)}
         return out
 
 
 # ================================================================ encounters from a budget
 
 SHAPES = ("standards", "boss_minions", "standards_minions")
+MAX_MINIONS = 10
 
 
 def compose(shape: str, total: float, model: ThreatModel) -> S.Encounter:
     """A generic encounter of ``shape`` worth ``total`` Threat (continuous CRs)."""
     specs = []
+    # Minions are mooks: never more than half the CR of a standard foe of this budget
+    # (the CR four standards would have). Minion Threat grows only with √DPT, so without
+    # the cap a few minions of a very high CR (a CR 13 "minion" at 7th level) would carry
+    # the share. The count rises instead, up to MAX_MINIONS.
+    minion_cap = model.cr_for(total / 4, "standard") / 2
 
     def add(role, share, count):
         if share <= 0:
             return
         each = total * share / count
         cr = model.cr_for(each, role)
+        if role == "minion" and cr > minion_cap:
+            cr = minion_cap
+            k = total * share / model.of_cr(cr, role)
+            if k > MAX_MINIONS:
+                cr = model.cr_for(total * share / MAX_MINIONS, role)
         blk = generic(cr)
         real_each = model.of(blk, role)
         n = max(1, round(total * share / real_each)) if real_each > 0 else count
@@ -415,7 +473,7 @@ PARTIES = {
     "ref5": ("fighter", "rogue", "wizard", "priest", "oathsworn"),
     "ref6": ("fighter", "rogue", "wizard", "priest", "oathsworn", "druid"),
 }
-TIRED = {"start_hp_frac": 0.5, "share": 0.125}   # ~50% HP and ~50% of the fight's resources
+TIRED = {"start_hp_frac": 0.5, "share": S.DEFAULT_SHARE / 2}   # ~50% HP and ~50% of the fight's resources
 
 
 def build_profile(build_id: str, level: int, source: str = "facets"):
@@ -470,14 +528,25 @@ def task_validate(level, tier, total, cls, sample, model: ThreatModel, n, seed) 
             "outcome": o.__dict__, "landed": classify(o, tiers_spec())}
 
 
+def day_spec() -> dict:
+    """The adventuring day (yaml ``adventuring_day``): Clashes per long rest and the
+    fights (1-based) followed by a short rest."""
+    from . import data as D
+    d = D.load().raw["adventuring_day"]
+    return {"clashes": int(d["clashes"]), "short_rests_after": list(d["short_rests_after"])}
+
+
+DAY_SHAPES = ("standards", "boss_minions", "standards_minions")
+
+
 def day_encounters(total: float, model: ThreatModel) -> list:
-    return [compose(s, total, model) for s in ("standards", "boss_minions", "standards_minions",
-                                               "standards")]
+    n = day_spec()["clashes"]
+    return [compose(DAY_SHAPES[i % len(DAY_SHAPES)], total, model) for i in range(n)]
 
 
 def task_pi(build_id, source, level, clash_total, model: ThreatModel, n_days, seed) -> dict:
-    """§8 metrics for one build at one level over n standard days (four Clashes, two short
-    rests) beside three reference-party companions."""
+    """§8 metrics for one build at one level over n standard days (the yaml adventuring
+    day: three Clashes, two short rests) beside three reference-party companions."""
     me = build_profile(build_id, level, source)
     comp = [p for p in PARTIES["ref4"] if p != build_id][:3]
     party = [me] + [build_profile(p, level) for p in comp]
@@ -488,7 +557,8 @@ def task_pi(build_id, source, level, clash_total, model: ThreatModel, n_days, se
     att = hits = raw = taken = 0
     days_survived = deaths_me = 0
     for _ in range(n_days):
-        day = S.run_day(rng, party, encs, opts=RuleOptions())
+        day = S.run_day(rng, party, encs, opts=RuleOptions(),
+                        short_rests_after=tuple(day_spec()["short_rests_after"]))
         days_survived += day.survived
         for f in day.fights:
             if 0 not in f.members:
@@ -525,18 +595,111 @@ def task_pi(build_id, source, level, clash_total, model: ThreatModel, n_days, se
             "fights": fights}
 
 
+def task_solo_factor(level, clash_total, model: ThreatModel, n, seed, iters=7) -> dict:
+    """How much a lone boss must be marked up for the Clash budget to buy a Clash: the
+    factor f such that a solo boss worth clash_total ÷ f Threat costs the Clash target."""
+    tiers = tiers_spec()
+    _, target = tier_target("clash", tiers)
+    party = party_for("ref4", level)
+
+    def hp(f):
+        enc = compose("solo_boss", clash_total / f, model)
+        return outcome(run_encounter(party, enc, n=n, seed=seed)).hp_lost
+
+    lo, hi = 0.7, 3.0
+    for _ in range(iters):
+        mid = math.sqrt(lo * hi)
+        if hp(mid) > target:
+            lo = mid
+        else:
+            hi = mid
+    f = math.sqrt(lo * hi)
+    at1 = outcome(run_encounter(party, compose("solo_boss", clash_total, model), n=n, seed=seed))
+    return {"level": level, "factor": f, "hp_lost_x1": at1.hp_lost, "win_x1": at1.win}
+
+
+def task_day(level, clash_total, model: ThreatModel, n, seed, clashes=None, rests=None) -> dict:
+    """The reference party's adventuring day at the Clash budget: ``clashes`` fights (the
+    yaml day by default) with short rests after the listed fights. Survived = every fight
+    won; also reports days with a PC death."""
+    spec = day_spec()
+    k = clashes or spec["clashes"]
+    rests = tuple(rests if rests is not None else spec["short_rests_after"])
+    encs = [compose(DAY_SHAPES[i % len(DAY_SHAPES)], clash_total, model) for i in range(k)]
+    party = party_for("ref4", level)
+    rng = random.Random(seed)
+    ok = dead = 0
+    for _ in range(n):
+        d = S.run_day(rng, party, encs, opts=RuleOptions(), short_rests_after=rests)
+        ok += d.survived
+        dead += d.deaths > 0
+    return {"level": level, "clashes": k, "rests": list(rests), "survived": ok / n,
+            "any_death": dead / n}
+
+
+def task_monster_factor(block_id: str, level: int, clash_total: float, model: ThreatModel,
+                        n: int, seed: int, role: str = "standard", iters: int = 9) -> dict:
+    """How a real SRD monster plays against its price (playtest fix pass: the hard-hitter
+    mark-up, Amendment 4 item 2). A group of it (3–10 standards, or 3–14 minions) worth
+    about the Clash budget fights the reference party; the ratio is the Threat of generic
+    standards (the foes Table 9–1 was fitted on) that cost the party the same HP, over the
+    group's price. Priced with ``model`` taken as ``hard = 1``, so the ratio measures the
+    mark-up rather than including it."""
+    base = replace(model, hard=1.0)
+    blk = M.get(block_id)
+    each = base.of(blk, role)
+    lo_k, hi_k = (3, 10) if role == "standard" else (3, 14)
+    k = min(hi_k, max(lo_k, round(clash_total / each)))
+    party = party_for("ref4", level)
+    enc = S.Encounter.of(S.FoeSpec(blk, role=role, count=k, leader=(role != "minion")))
+    target = outcome(run_encounter(party, enc, n=n, seed=seed)).hp_lost
+    priced = k * each
+
+    def hp(total):
+        return outcome(run_encounter(party, compose("standards", total, base), n=n,
+                                     seed=seed + 1)).hp_lost
+
+    lo, hi = 0.25 * priced, 4.0 * priced
+    for _ in range(iters):
+        mid = math.sqrt(lo * hi)
+        if hp(mid) < target:
+            lo = mid
+        else:
+            hi = mid
+    eq = math.sqrt(lo * hi)
+    return {"id": block_id, "role": role, "level": level, "count": k, "priced": priced,
+            "equivalent": eq, "ratio": eq / priced, "hits_hard": hits_hard(blk),
+            "hp_lost": target}
+
+
 def task_swap(build_id, source, level, clash_total, model: ThreatModel, n, seed) -> dict:
-    """§8 item 6: the reference party with this build swapped in for each member in turn."""
+    """The swap test — the balance band's primary measure (balance pass, V32).
+
+    The reference party with this build swapped in for each member in turn plays ``n``
+    standard days (the yaml adventuring day: three Clashes, short rests between), so
+    daily resources are paced as at the table. The score is the mean share of the
+    party's hit points lost per fight (lower is stronger); rounds, fight wins and whole
+    days survived are reported beside it. Use one ``seed`` for every build at a level
+    (common random numbers) so builds are compared on the same dice."""
     me = build_profile(build_id, level, source)
     ref = party_for("ref4", level)
-    outs = []
+    encs = day_encounters(clash_total, model)
+    rests = tuple(day_spec()["short_rests_after"])
+    hp, rounds, wins, days = [], [], [], []
     for i in range(len(ref)):
         party = ref[:i] + [me] + ref[i + 1:]
-        outs.append(mixed_outcome(party, clash_total, model, n=n, seed=seed + 10 * i))
+        rng = random.Random(seed + 10 * i)
+        for _ in range(n):
+            d = S.run_day(rng, party, encs, opts=RuleOptions(), short_rests_after=rests)
+            days.append(d.survived)
+            for f in d.fights:
+                hp.append(f.party_hp_lost / max(1, f.party_hp_max))
+                rounds.append(f.rounds)
+                wins.append(f.won)
     return {"build": build_id, "source": source, "level": level,
-            "hp_lost": statistics.fmean(o.hp_lost for o in outs),
-            "rounds": statistics.fmean(o.rounds for o in outs),
-            "win": statistics.fmean(o.win for o in outs)}
+            "hp_lost": statistics.fmean(hp), "rounds": statistics.fmean(rounds),
+            "win": statistics.fmean(wins), "days_survived": statistics.fmean(days),
+            "hp_lost_sd": statistics.pstdev(hp), "fights": len(hp)}
 
 
 def task_dummy_dpr(build_id, source, level, n, seed) -> dict:
@@ -545,3 +708,105 @@ def task_dummy_dpr(build_id, source, level, n, seed) -> dict:
     return {"build": build_id, "source": source, "level": level, "ac": ac,
             "dpr_1": S.damage_per_round(me, ac=ac, n=n, seed=seed, foes=1, rounds=4),
             "dpr_3": S.damage_per_round(me, ac=ac, n=n, seed=seed, foes=3, rounds=4)}
+
+
+# ================================================================ Table 9–2: Threat per monster
+#
+# BRIEF Amendment 4, ruling 2: every SRD 5.2.1 monster priced from its own stat block.
+# The model's constants are the ones the simulator wrote into the yaml (`monster_threat`)
+# and the book prints, so an MM with a calculator gets the same number as the table.
+# The three presentation cut-offs below are not rules; they only say which party levels
+# a monster suits and which ones the interim hard-hitters rule (09) applies to.
+
+STANDARD_COUNT = (3, 10)    # a standard "fits" a level when 3–10 of them make a Clash for four
+BOSS_SHARE = (0.5, 1.0)     # a boss fits when it is half to all of a Clash for four (§7)
+
+_NUM = r"(\d+(?:\.\d+)?)"
+
+
+def _rules_raw(raw=None) -> dict:
+    if raw is None:
+        from . import data as D
+        raw = D.load().raw
+    return raw
+
+
+def _model_number(model: dict, key: str, pattern: str) -> float:
+    import re
+    m = re.search(pattern, str(model.get(key, "")))
+    if not m:
+        raise ValueError(f"monster_threat.model.{key}: no constant in {model.get(key)!r}")
+    return float(m.group(1))
+
+
+def threat_model_from_data(raw=None) -> ThreatModel:
+    """The ThreatModel the yaml prints (``monster_threat.model``), at the printed precision."""
+    model = (_rules_raw(raw).get("monster_threat") or {}).get("model") or {}
+    return ThreatModel(minion_hp=_model_number(model, "minion", r"sqrt\(\s*" + _NUM),
+                       boss=_model_number(model, "boss", r"x\s*" + _NUM),
+                       never=_model_number(model, "never_breaks", r"x\s*" + _NUM),
+                       hard=_model_number(model, "hard_hitter", r"x\s*" + _NUM))
+
+
+def lone_boss_factor(raw=None) -> float:
+    """V42: a lone boss counts × this (``monster_threat.model.lone_boss``)."""
+    model = (_rules_raw(raw).get("monster_threat") or {}).get("model") or {}
+    return _model_number(model, "lone_boss", r"x\s*" + _NUM)
+
+
+SMALL_COMPANY = (0.2, 1.1)   # company under a fifth of the boss's Threat: × 1.1 (measured ×1.06)
+
+
+def boss_markup(boss_threat: float, company_threat: float, raw=None) -> float:
+    """09 *Adjusting the budget* (playtest fix pass, MM #11): a boss alone counts × the
+    lone-boss factor (1.2); a boss whose company is worth less than a fifth of its own
+    Threat counts × 1.1 (the simulator: ×1.06 at a fifth; the company is usually gone in
+    the first round); otherwise × 1."""
+    if boss_threat <= 0 or company_threat < 0:
+        raise ValueError("Threat can't be negative, and a boss has some")
+    if company_threat == 0:
+        return lone_boss_factor(raw)
+    share, factor = SMALL_COMPANY
+    return factor if company_threat < share * boss_threat else 1.0
+
+
+def clash_totals(raw=None, *, party_size: int = 4, tier: str = "clash") -> dict:
+    """{level: the tier's Threat budget for the whole party} from ``encounter_table``."""
+    if tier not in TIERS:
+        raise KeyError(tier)
+    table = _rules_raw(raw)["encounter_table"]
+    return {int(L): party_size * row[tier] for L, row in sorted(table.items(), key=lambda kv: int(kv[0]))}
+
+
+def level_range(levels) -> str:
+    """[3, 4, 5] → "3–5"; [1] → "1"; [] → "—". Levels must be contiguous."""
+    levels = sorted(levels)
+    if not levels:
+        return "—"
+    if levels != list(range(levels[0], levels[-1] + 1)):
+        raise ValueError(f"levels not contiguous: {levels}")
+    return str(levels[0]) if len(levels) == 1 else f"{levels[0]}–{levels[-1]}"
+
+
+def monster_threat_row(block: MonsterBlock, model: ThreatModel, totals: dict) -> dict:
+    """One Table 9–2 row: the block's Threat in each role, the party levels it fits as a
+    standard and as a boss (against ``totals``, the Clash budget for four), and its flags."""
+    if not totals:
+        raise ValueError("need the Clash budget totals by level")
+    std, mn, bs = (round(model.of(block, r)) for r in ("standard", "minion", "boss"))
+    lo, hi = STANDARD_COUNT
+    blo, bhi = BOSS_SHARE
+    return {"id": block.id, "name": block.name, "cr": block.cr,
+            "standard": std, "minion": mn, "boss": bs,
+            "standard_levels": [L for L, t in totals.items() if lo <= t / std <= hi],
+            "boss_levels": [L for L, t in totals.items() if blo <= bs / t <= bhi],
+            "never": block.morale == "never",
+            "hits_hard": hits_hard(block)}
+
+
+def threat_appendix(raw=None) -> list:
+    """Table 9–2: every SRD monster in ``srd_monsters.yaml``, by CR then name."""
+    raw = _rules_raw(raw)
+    model = threat_model_from_data(raw)
+    totals = clash_totals(raw)
+    return [monster_threat_row(b, model, totals) for b in M.ladder()]

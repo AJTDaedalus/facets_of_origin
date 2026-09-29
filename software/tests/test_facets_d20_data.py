@@ -87,6 +87,7 @@ def everything_with_effects(data):
             yield from tr["ranks"]
     yield from data["talents"]
     yield from data["knacks"]
+    yield from data.get("edges") or []          # Amendment 5
 
 
 def menu(data, facet):
@@ -137,10 +138,13 @@ class TestAdvancement:
         assert data["advancement"]["asi_rule"] == "choice"
 
     def test_every_level_up_is_at_most_one_choice(self, data):
+        # Amendment 5 amends the budget: an even level adds an edge beside its one pick
+        # (test_facets_d20_edges.py); the talent/knack/ability pick stays one per level.
         a = data["advancement"]
         for lvl in range(2, 11):
             picks = sum(lvl in a[k] for k in ("talent_levels", "knack_levels", "asi_levels"))
             assert picks <= 1, lvl
+            assert (lvl in a.get("edge_levels", [])) == (lvl % 2 == 0), lvl
 
 
 class TestFacetsAndTracks:
@@ -178,7 +182,8 @@ class TestFacetsAndTracks:
         assert data["tracks"]["scaling_depth"] == {5: 2, 9: 3}
 
     def test_main_track_rule(self, data):
-        assert data["tracks"]["main_track"] == {"rule": "more_talents", "tie": "steel"}
+        # Playtest fix pass V43: a tie keeps the main track you had.
+        assert data["tracks"]["main_track"] == {"rule": "more_talents", "tie": "existing"}
         assert data["tracks"]["facet_weight"] == {"body": {"steel": 2}}      # E3 / V27
 
     def test_first_spell_talent_is_half_second_is_full(self, data):
@@ -563,8 +568,16 @@ class TestBalanceAndEncounterSpec:
                 assert s.get("role") == listed[s["id"]], s["id"]
 
     def test_hybrid_rule(self, data):
-        assert data["balance"]["hybrid_rule"] == {"from_level": 4, "pi_tolerance_pct": 15,
-                                                  "job_tolerance_pct": 5}
+        assert data["balance"]["hybrid_rule"] == {"from_level": 4, "swap_tolerance_pct": 3,
+                                                  "pi_tolerance_pct": 15, "job_tolerance_pct": 5}
+
+    def test_primary_measure_is_the_swap_test(self, data):
+        # Balance pass V32: the swap test is the band's primary measure, PI secondary.
+        assert data["balance"]["measure"] == "swap"
+
+    def test_adventuring_day(self, data):
+        # Balance pass V34: three Clashes, a short rest after the first and the second.
+        assert data["adventuring_day"] == {"clashes": 3, "short_rests_after": [1, 2]}
 
     def test_four_named_tiers(self, data):
         assert [t["id"] for t in data["encounter_tiers"]] == ["skirmish", "clash", "battle", "desperate"]

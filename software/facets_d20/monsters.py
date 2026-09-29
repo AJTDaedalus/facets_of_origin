@@ -46,9 +46,22 @@ class MonsterBlock:
     ctype: str = "monstrosity"
 
     @property
+    def routine_damage(self) -> int:
+        """Its ordinary attacks if they all hit, without the Recharge special: the stat line
+        the generic foes are fitted on, and the hard-hitter yardstick."""
+        return turn_damage([[{"fixed": a.fixed, "count": a.count, "targets": a.targets}
+                             for a in self.attacks]])
+
+    @property
     def damage_per_turn(self) -> int:
-        """Everything it does on an ordinary turn if it all hits (09 "What counts")."""
-        return sum(a.fixed * a.count for a in self.attacks)
+        """Damage per turn for pricing (09 step 1, ``turn_damage``): the ordinary attacks,
+        plus a quarter of a Recharge special (counted twice if it catches more than one)."""
+        routine = [{"fixed": a.fixed, "count": a.count, "targets": a.targets}
+                   for a in self.attacks]
+        if self.special is not None:
+            routine.append({"fixed": self.special.fixed, "targets": self.special.targets,
+                            "recharge": True})
+        return turn_damage([routine])
 
     @property
     def to_hit(self) -> int:
@@ -57,6 +70,47 @@ class MonsterBlock:
     @property
     def dex_mod(self) -> int:
         return self.saves.get("dex", 0)
+
+
+def turn_damage(routines) -> int:
+    """Damage per turn, 09 *Pricing Any SRD Monster* step 1 (playtest fix pass, MM #3).
+
+    ``routines``: the ways the monster can spend an ordinary turn (a Multiattack of claws,
+    or a volley of spikes), each a list of attacks ``{fixed, count=1, targets=1,
+    save=False, limited=False}``. The rules:
+      - add up a routine as if everything hits; a routine made of saves counts as if
+        every save fails, whether a success halves the damage or not (``save``);
+      - damage that can catch more than one creature (an area, several targets) counts
+        twice;
+      - a Recharge ability (``recharge``) adds a quarter of its damage, rounded down
+        (after the area doubling): the simulator measured Recharge monsters playing about
+        that much above their attacks alone;
+      - spells with uses a day (``limited``) are left out: they are spikes;
+      - with more than one routine, take the one that deals more.
+    """
+    best = 0
+    for routine in routines:
+        total = 0
+        for a in routine:
+            if a.get("limited"):
+                continue
+            each = int(a["fixed"]) * (2 if int(a.get("targets", 1)) > 1 else 1)
+            if a.get("recharge"):
+                total += each // 4
+                continue
+            total += each * int(a.get("count", 1))
+        best = max(best, total)
+    return best
+
+
+def effective_hp(hp: int, *, resists_party: bool = False, regeneration: int = 0,
+                 rounds: int = 3) -> int:
+    """Hit points for pricing, 09 step 2 (playtest fix pass, MM #3). Resistance (or
+    immunity) to the damage most of the party deals doubles them; regeneration adds three
+    rounds of it (a Clash is three or four rounds)."""
+    if hp < 0 or regeneration < 0:
+        raise ValueError("hit points and regeneration can't be negative")
+    return hp * (2 if resists_party else 1) + rounds * regeneration
 
 
 def _cr(x) -> Fraction:
@@ -142,7 +196,7 @@ def template(cr) -> MonsterBlock:
     ac = round(statistics.median(m.ac for m in ms))
     hp = round(statistics.median(m.hp for m in ms))
     to_hit = round(statistics.median(m.to_hit for m in ms))
-    dpt = round(statistics.median(m.damage_per_turn for m in ms))
+    dpt = round(statistics.median(m.routine_damage for m in ms))
     n = round(statistics.median(sum(a.count for a in m.attacks) for m in ms))
     per, extra = divmod(dpt, n)
     attacks = [MonsterAttack("Strike", to_hit, per + extra, None, 0, "bludgeoning", 1)]
@@ -158,13 +212,15 @@ def template(cr) -> MonsterBlock:
 
 
 def convert(block, *, role: str = "standard", uid: Optional[str] = None,
-            leader: bool = False) -> Combatant:
-    """A MonsterBlock (or library id) as a Combatant in the given role."""
+            leader: bool = False, hp_multiplier: int = 1) -> Combatant:
+    """A MonsterBlock (or library id) as a Combatant in the given role. ``hp_multiplier``
+    applies to a boss only (MM rule, balance pass V37: a boss has twice its stat block's
+    hit points — ``RuleOptions.boss_hp_multiplier``)."""
     if isinstance(block, str):
         block = get(block)
     if role not in ROLES:
         raise ValueError(f"role must be one of {ROLES}, not {role!r}")
-    hp = 1 if role == "minion" else block.hp
+    hp = 1 if role == "minion" else block.hp * (hp_multiplier if role == "boss" else 1)
     traits = set(block.traits)
     if role == "minion":
         traits.discard("undead_fortitude")  # 09: a minion doesn't get to cling on

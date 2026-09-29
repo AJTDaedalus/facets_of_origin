@@ -50,6 +50,7 @@ common_list:                    # both traditions; a spell here is on no domain 
   - {name: Magic Missile, level: 1}
   - {name: Thunderwave, level: 1}
   - {name: Detect Magic, level: 1}
+  - {name: Mage Armor, level: 1}         # balance pass V36: every caster can go unarmored
   - {name: Scorching Ray, level: 2}
   - {name: Shatter, level: 2}
   - {name: Fireball, level: 3}
@@ -150,7 +151,6 @@ domains:
     - {name: Shillelagh, level: 0}
     - {name: Entangle, level: 1}
     - {name: Goodberry, level: 1}
-    - {name: Ensnaring Strike, level: 1}
     - {name: Barkskin, level: 2}
     - {name: Locate Animals or Plants, level: 2}
     - {name: Spike Growth, level: 2}
@@ -385,7 +385,6 @@ domains:
     spells:
     - {name: Eldritch Blast, level: 0}
     - {name: Mage Hand, level: 0}
-    - {name: Mage Armor, level: 1}
     - {name: Shield, level: 1}
     - {name: Unseen Servant, level: 1}
     - {name: Levitate, level: 2}

@@ -11,7 +11,7 @@ Fight start: Field Kit temp HP; Kindle Sparks handed to allies (1 each, cap 3) a
 Turn the Odds' floor of 1; Mage Armor already cast (it lasts all day).
 
 Party — each PC, on its turn, in party order:
-  1. At 0 HP: death save.
+  1. At 0 HP: death save (with advantage: Die Hard). Sap (edge) laid by this PC ends.
   2. Bonus action, first that applies:
      a. Below half HP with Second Wind → use it.
      b. An ally at 0 HP and a bonus-action heal (Healing Word, Mass Healing Word,
@@ -22,15 +22,24 @@ Party — each PC, on its turn, in party order:
      e. After the Attack action: Flurry (if focus is left) or the free Martial Arts strike.
   3. Action, first that applies:
      a. An ally at 0 HP → best heal (spell, Channel, Mending Hands).
+     a2. Can't heal, and a friend at 0 HP has two failed death saves → stabilize it
+        (an action, no check: V56; RuleOptions.stabilize "check" plays the SRD roll).
      b. Healer and an ally below half → heal.
-     c. Not concentrating, ≥2 foes, an aura spell (Spirit Guardians...) → cast it.
-     d. ≥3 foes and an area damage spell → the best one by expected total damage.
+     c. Not concentrating, ≥2 foes, an aura spell (Spirit Guardians...) → cast it, if two
+        rounds of it are worth at least one Attack action (S-5: highest expected value).
+     d. ≥3 foes and an area damage spell → the best one by expected total damage, if that
+        beats the Attack action's expected damage.
      e. Not concentrating, a disable spell that works on the biggest foe (a boss, or a
-        foe holding ≥40% of enemy HP) → cast it.
+        foe holding ≥40% of enemy HP) → cast it, if holding it for two of its turns
+        (chance it fails the save × its expected turn damage × 2) beats the Attack action.
      f. Otherwise the best expected single-target damage: the Attack action (with riders),
         a cantrip, Channel damage, a sustained action spell (Call Lightning), or a
         leveled single-target spell (leveled spells only in the first two rounds).
      Action Surge: a second action (never a spell) on the first turn it is available.
+  Edges on weapon attacks: Heavy Hands is the weapon's damage-die floor; Graze deals its
+  damage on the first qualifying miss of the turn; Sap marks the first creature hit each
+  turn (its next attack roll has disadvantage). Piercing Spell is spent on the first
+  save of the first slot spell or disable spell it can reach (one target).
   Riders (E1): at most one per turn; the biggest eligible one is used, free before paid on
   a tie; paid ones (Sworn Strike) are spent on the first eligible hit.
   Targeting (focus fire): the standing foe with the highest threat per remaining HP
@@ -42,19 +51,27 @@ Party — each PC, on its turn, in party order:
   Session Sparks and MM awards are roleplay rewards and are not modelled; Kindle and Turn
   the Odds Sparks are.
 Enemies:
-  - Minions and standard foes attack a random standing PC; a boss attacks the standing PC
-    with the lowest HP. Nobody attacks a PC at 0 HP.
+  - Every foe, boss included, attacks a random standing PC (DESIGN v0.2 §6.2: the MM
+    spreads the enemy side's attacks). Nobody attacks a PC at 0 HP.
   - A recharge special (breath) is used when ready and ≥2 PCs stand; it rolls to
-    recharge once per enemy phase.
+    recharge at the start of the foe's turn (a boss: its top-of-round turn only).
+  - A boss takes its turns at the top of the round and right after the party's first
+    turn (combat.round_order); leaderless minions check morale when half are down.
   - A Bloodied boss turns desperate (advantage on its attacks, attacks against it have
     advantage) — RuleOptions.boss_bloodied.
   - PC reactions to a hit, in order: Shield (if it turns the hit into a miss);
-    Turn the Odds; Guardian (an ally with more HP to spare takes the hit, reduced);
-    Clockwork Guard (first hit each round); Uncanny Dodge (halve). Before the roll:
-    Anticipate gives disadvantage if the attacker is that PC's studied target.
+    Parry (edge; the first non-critical hit, spent without knowing whether +2 turns it —
+    hidden AC, V46 — and never by a PC with Shield to cast or Uncanny Dodge); Turn the Odds; Guardian (an ally with more HP to spare takes the hit, reduced);
+    Clockwork Guard (the first hit on its ward — the ally the construct stood beside when
+    it acted right after its maker, the one with the lowest share of HP — until the
+    maker's next turn; 5-ft reach, DESIGN §4 Clockwork Guardian); Uncanny Dodge (halve). Before the roll:
+    Anticipate gives disadvantage if the attacker is that PC's studied target, as does
+    Sap on a sapped attacker. On damage: Steady Focus spends the reaction on a failed
+    concentration save; Second Breath's temporary HP arrive the first time a PC is
+    Bloodied and standing.
 Daily resources: a fight starts with ``resource_share`` of each long-rest pool (slots per
 level, long-rest uses), rounded up, plus the short-rest regain; short-rest pools are
-full; HP full. Default share 0.5: a typical fight is one of two or three per long rest.
+full; HP full. Default share 1/3: a fight is one of the day's three Clashes (V34).
 """
 from __future__ import annotations
 
@@ -71,7 +88,7 @@ from .dice import Dice
 from .profile import CombatProfile, Uses, Weapon
 
 MAX_ROUNDS = 20
-DEFAULT_SHARE = 0.25   # a fight is one of the day's four Clashes (DESIGN v0.2 §7)
+DEFAULT_SHARE = 1 / 3  # a fight is one of the day's three Clashes (yaml adventuring_day, V34)
 
 
 # ================================================================ encounter description
@@ -180,6 +197,8 @@ def pools(prof: CombatProfile) -> dict:
         d["channel"] = prof.heal_touch["uses"]
     if prof.caster and prof.caster.maximize:
         d["maximize"] = prof.caster.maximize
+    if prof.piercing:
+        d["piercing"] = prof.piercing
     for r in prof.riders:
         if r.uses:
             d[f"rider:{r.name}"] = r.uses
@@ -213,6 +232,8 @@ class _PCState:
         self.heal_pool = allow.get("heal_pool", 0)
         self.channel = allow.get("channel", 0)
         self.maximize = allow.get("maximize", 0)
+        self.piercing = allow.get("piercing", 0)          # Piercing Spell (edge)
+        self.breathed = False                              # Second Breath used this fight
         self.rider_uses = {r.name: allow.get(f"rider:{r.name}", 0) for r in prof.riders if r.uses}
         self.raging = False
         self.sparks = 0
@@ -307,13 +328,18 @@ class Fight:
             for k in range(spec.count):
                 n += 1
                 self.foes.append(monsters.convert(spec.monster, role=spec.role,
-                                                  uid=f"f{n}", leader=spec.leader and k == 0))
+                                                  uid=f"f{n}", leader=spec.leader and k == 0,
+                                                  hp_multiplier=opts.boss_hp_multiplier))
         self.encounter = encounter
         self.damage_by_pc = {c.id: 0 for c in self.pcs}
         self.dropped = set()
         self.round = 0
-        self.guard_used_round = 0
+        self._turns = {}               # pc id -> the turn dict of its current turn
+        self.guard_ward = {}           # Clockwork Guardian: maker id -> the ally it stands beside
+        self.guard_ready = {}          # maker id -> its Guard is up (until the maker's next turn)
         self.blessed = {}
+        self._turns_this_round = {}    # foe id -> its turns so far this round (boss rule)
+        self._leaderless_checked = False
 
     # ------------------------------------------------------------ setup
     def setup(self) -> None:
@@ -411,6 +437,15 @@ class Fight:
             for other in self.standing_foes():
                 if combat.morale_triggers(other, None, leader_fell=True, opts=self.opts):
                     combat.morale_check(self.rng, other, self.opts)
+        if foe.role == "minion" and foe.state != "active":
+            mins = [f for f in self.foes if f.role == "minion"]
+            if combat.leaderless_minions_check(
+                    has_leader=any(f.leader for f in self.foes), minions=len(mins),
+                    minions_down=sum(f.state != "active" for f in mins),
+                    already=self._leaderless_checked):
+                self._leaderless_checked = True
+                for other in [f for f in mins if f.state == "active"]:
+                    combat.morale_check(self.rng, other, self.opts)
         if foe.role == "boss" and foe.state == "active" and combat.is_bloodied(foe) \
                 and self.opts.boss_bloodied == "desperate":
             foe.conditions.add("desperate")
@@ -436,8 +471,20 @@ class Fight:
             self.end_concentration(pc)
             st.raging = False
         if out.concentration_dc is not None:
+            held = pc.concentrating
             if not combat.concentration_check(self.rng, pc, dc=out.concentration_dc):
-                self.end_concentration(pc)
+                # Steady Focus (edge): spend the reaction to succeed instead.
+                if prof.steady_focus and combat.take_reaction(pc):
+                    pc.concentrating = held
+                    st.spend("steady_focus")
+                else:
+                    self.end_concentration(pc)
+        # Second Breath (edge): the first time this fight you are Bloodied and standing.
+        if prof.second_breath and not st.breathed and pc.state == "active" and pc.hp > 0 \
+                and combat.is_bloodied(pc):
+            st.breathed = True
+            pc.temp_hp = max(pc.temp_hp, prof.second_breath)
+            self.temp_by_pc[pc.id] += prof.second_breath
         return out
 
     def end_concentration(self, pc):
@@ -452,7 +499,7 @@ class Fight:
         st = self.state[pc.id]
         aura = self.party_save_bonus(pc)
         bonus = pc.saves.get(ability, 0) + aura
-        if self.round == 1 and self.party_has_plan():
+        if self.plan_active():
             advantage = True
         sres = combat.saving_throw(self.rng, bonus, dc, advantage=advantage)
         if aura and sres.success and sres.total - aura < dc and stake:
@@ -460,7 +507,10 @@ class Fight:
                          key=lambda c: c.profile.save_aura, default=None)
             if warden is not None:
                 self._credit(warden.id, stake)
-        if not sres.success and combat.spark_can_turn(total=sres.total, target=dc) \
+        # The MM calls the failure (the rule, spark_may_spend); the table spends when it
+        # judges 1d6 can turn it (AI: the party knows the DC once it has seen a save or two).
+        if combat.spark_may_spend(succeeded=sres.success, natural=sres.natural) \
+                and combat.spark_can_turn(total=sres.total, target=dc) \
                 and self.spark_holder(pc) is not None:
             sres = combat.spark_save(self.rng, sres, dc=dc)
         ok = sres.success
@@ -484,6 +534,10 @@ class Fight:
     def party_has_plan(self) -> bool:
         return getattr(self, "_plan", False)
 
+    def plan_active(self) -> bool:
+        """Master Plan: advantage on attacks and saves in the plan's first rounds."""
+        return self.party_has_plan() and self.round <= getattr(self, "_plan_rounds", 1)
+
     # ------------------------------------------------------------ PC weapon attacks
     def weapon_attack(self, pc: Combatant, target: Combatant, weapon: Weapon, *,
                       attack_action: bool, turn: dict, extra: tuple = (),
@@ -500,7 +554,7 @@ class Fight:
             adv = True
         if weapon.ranged and turn.pop("aim_adv", False):
             adv = True
-        if self.round == 1 and self.party_has_plan():
+        if self.plan_active():
             adv = True
         bonus = weapon.to_hit if to_hit is None else to_hit
         if pc.id in self.blessed:
@@ -508,17 +562,28 @@ class Fight:
         crit_min = weapon.crit_min
         if st.studied is target:
             crit_min = min(crit_min, prof.crit_min_studied)
+            m_studied = prof.studied_damage_bonus
+        else:
+            m_studied = 0
         res = combat.attack_roll(self.rng, bonus, target.ac, advantage=adv, crit_min=crit_min)
         turn["attacks"] = turn.get("attacks", 0) + 1
-        if not res.hit and res.natural != 1 and combat.spark_can_turn(total=res.total,
-                                                                      target=target.ac):
+        # The MM calls the miss (the rule); the party spends when it judges 1d6 can turn it
+        # (AI: it knows the foe's AC once it has seen a few attacks).
+        if combat.spark_may_spend(succeeded=res.hit, natural=res.natural) \
+                and combat.spark_can_turn(total=res.total, target=target.ac):
             sparker = self.spark_holder(pc)
             if sparker is not None:
                 res = combat.spark_attack(self.rng, res, ac=target.ac)
         if not res.hit:
+            # Graze (edge): once per turn, a two-handed heavy/versatile melee miss still hurts.
+            if prof.graze and not weapon.ranged and weapon.heavy_or_versatile \
+                    and weapon.two_handed and not turn.get("graze_used"):
+                turn["graze_used"] = True
+                st.spend("graze")
+                self.hurt_foe(pc, target, prof.graze, dtype=dtype or weapon.dtype)
             return False
         crit = res.crit or ("held" in target.conditions and not weapon.ranged)
-        m = weapon.mod if mod is None else mod
+        m = (weapon.mod if mod is None else mod) + m_studied
         maxed = st.max_next
         if maxed:
             st.max_next = False
@@ -549,7 +614,28 @@ class Fight:
         if crit and prof.crit_heal:
             self._heal(pc, pc, prof.crit_heal)
         self.hurt_foe(pc, target, dmg, crit=crit, dtype=dtype or weapon.dtype)
+        # Sap (edge): once per turn, the creature hit has disadvantage on its next attack roll
+        # before the start of your next turn.
+        if prof.sap and not turn.get("sap_used") and target.state == "active":
+            turn["sap_used"] = True
+            target.conditions.add("sapped")
+            target.sapped_by = pc.id  # type: ignore[attr-defined]
         return True
+
+    def clear_sap(self, pc: Combatant) -> None:
+        """Sap lasts until the start of the sapper's next turn."""
+        for f in self.foes:
+            if "sapped" in f.conditions and getattr(f, "sapped_by", None) == pc.id:
+                f.conditions.discard("sapped")
+
+    def save_disadvantage(self, pc: Combatant) -> bool:
+        """Piercing Spell (edge): spend a use so one target saves with disadvantage."""
+        st = self.state[pc.id]
+        if st.piercing > 0:
+            st.piercing -= 1
+            st.spend("piercing")
+            return True
+        return False
 
     def _riders(self, pc, target, weapon, adv, crit, turn) -> int:
         prof = pc.profile
@@ -666,6 +752,9 @@ class Fight:
             if t is None:
                 return
             adv = "desperate" in t.conditions or "held" in t.conditions
+            turn = self._turns.get(pc.id) or {}
+            if self.state[pc.id].studied is t and turn.pop("study_adv", False):
+                adv = True                      # Study: the next attack roll, spell or weapon
             res = combat.attack_roll(self.rng, cst.attack, t.ac, advantage=adv)
             if res.hit:
                 dmg = self.spell_damage_roll(pc, eff, slot, crit=res.crit)
@@ -673,13 +762,17 @@ class Fight:
                     dmg -= self._spell_bonus(pc, eff) - (cst.mod if eff.add_mod else 0)
                 self.hurt_foe(pc, t, dmg, crit=res.crit, dtype=eff.dtype)
 
-    def cast_save(self, pc, eff, slot, targets) -> None:
+    def cast_save(self, pc, eff, slot, targets, *, pierce: bool = True) -> None:
         dmg = self.spell_damage_roll(pc, eff, slot)
         dc = pc.profile.caster.dc
+        first = pierce and eff.level > 0
         for t in targets:
             if t.state != "active":
                 continue
-            saved = combat.saving_throw(self.rng, t.saves.get(eff.save, 0), dc).success
+            dis = first and self.save_disadvantage(pc)
+            first = False
+            saved = combat.saving_throw(self.rng, t.saves.get(eff.save, 0), dc,
+                                        disadvantage=dis).success
             self.hurt_foe(pc, t, combat.damage_after_save(t, dmg, saved=saved,
                                                           half_on_save=eff.half_on_save),
                           dtype=eff.dtype)
@@ -776,17 +869,29 @@ class Fight:
         down = [c for c in self.pcs if c.state in ("down", "stable")]
         if down and self.heal_ally(pc, down[0]):
             return
+        # Stabilize (V56): a character who can't heal a dying friend stabilizes it once it
+        # has two failed death saves (AI: earlier costs the party too many actions).
+        dying = [c for c in self.pcs if c.state == "down" and c.death_failures >= 2]
+        if dying and self.opts.stabilize != "none":
+            combat.stabilize(self.rng, dying[0], bonus=(prof.abilities.get("wis", 10) - 10) // 2,
+                             check=self.opts.stabilize == "check")
+            st.spend("stabilize")
+            return
         if prof.healer:
             low = [c for c in self.standing_pcs() if c.hp < c.max_hp / 2]
             if low and self.heal_ally(pc, min(low, key=lambda c: c.hp / c.max_hp)):
                 return
+        focus = self.focus_target()
+        atk_ev = self.attack_ev(pc, focus, turn) if focus is not None else 0.0
         if pc.concentrating is None and len(foes) >= 2:
             auras = self.castable(pc, ("aura",), action="action")
             if auras:
                 eff = max(auras, key=lambda e: (e.level, e.targets))
-                slot = st.take(st.best_slot(eff.level))
-                pc.concentrating, st.aura = eff.name, (eff, slot)
-                return
+                # an aura keeps ticking: worth it if two rounds of it beat one Attack action
+                if 2 * self.spell_ev(pc, eff, st.best_slot(eff.level), focus, len(foes)) >= atk_ev:
+                    slot = st.take(st.best_slot(eff.level))
+                    pc.concentrating, st.aura = eff.name, (eff, slot)
+                    return
         if len(foes) >= 3:
             areas = [e for e in self.castable(pc, ("save",), action="action")
                      if e.targets >= 2 and e.level > 0]
@@ -794,9 +899,10 @@ class Fight:
                 t = foes[0]
                 eff = max(areas, key=lambda e: self.spell_ev(pc, e, st.best_slot(e.level), t,
                                                              len(foes)))
-                slot = st.take(st.best_slot(eff.level))
-                self.cast_save(pc, eff, slot, self.area_targets(eff.targets))
-                return
+                if self.spell_ev(pc, eff, st.best_slot(eff.level), t, len(foes)) >= atk_ev:
+                    slot = st.take(st.best_slot(eff.level))
+                    self.cast_save(pc, eff, slot, self.area_targets(eff.targets))
+                    return
         if pc.concentrating is None and self.control:
             dis = self.castable(pc, ("disable",), action="action")
             total = sum(f.hp for f in foes)
@@ -807,6 +913,11 @@ class Fight:
                       or any(f"type:{ct}" in t.tags for ct in e.creature_types)]
                 if ok:
                     eff = max(ok, key=lambda e: (e.level, e.targets))
+                    # S-5: holding the foe for about two of its turns must beat the Attack action
+                    p_fail = min(0.95, max(0.05, (pc.profile.caster.dc - 1 - t.saves.get(eff.save, 0)) / 20))
+                    if 2 * p_fail * self.foe_turn_value(t) < atk_ev:
+                        ok = []
+                if ok:
                     slot = st.take(st.best_slot(eff.level))
                     pc.concentrating, st.aura = eff.name, (eff, slot)
                     self.try_disable(pc, eff, t)
@@ -824,12 +935,43 @@ class Fight:
                 return
         self.single_target(pc, turn)
 
+    def attack_ev(self, pc: Combatant, t: Combatant, turn: Optional[dict] = None) -> float:
+        """Expected damage of the Attack action against ``t`` (0 without a weapon): hit and
+        crit chances (advantage from Study this turn, a plan, a held or desperate target,
+        reckless rage), the weapon's damage with its flat bonuses (rage, studied target),
+        crit dice, and the biggest rider once if any attack hits."""
+        prof = pc.profile
+        st = self.state[pc.id]
+        w = prof.weapon
+        if w is None:
+            return 0.0
+        studied = st.studied is t
+        adv = ("desperate" in t.conditions or "held" in t.conditions
+               or "entranced" in t.conditions or self.plan_active()
+               or (prof.reckless and st.raging and w.str_based and not w.ranged)
+               or bool(turn and turn.get("study_adv") and studied))
+        p = combat.hit_chance(w.to_hit, t.ac)
+        crit_min = min(w.crit_min, prof.crit_min_studied) if studied else w.crit_min
+        pcrit = (21 - crit_min) / 20
+        if adv:
+            p, pcrit = 1 - (1 - p) ** 2, 1 - (1 - pcrit) ** 2
+        per_hit = w.dice.average + w.mod + (prof.studied_damage_bonus if studied else 0)
+        if st.raging and w.str_based:
+            per_hit += prof.rage.get("damage", 0)
+        n = prof.attacks_per_action
+        ev = n * (p * per_hit + pcrit * w.dice.average)
+        if prof.riders:
+            ev += (1 - (1 - p) ** n) * max(r.dice.average for r in prof.riders)
+        return ev
+
     def try_disable(self, pc, eff, t):
         cst = pc.profile.caster
         targets = [t] if eff.targets < 2 else self.area_targets(eff.targets)
         held_any = False
-        for tt in targets:
-            if not combat.saving_throw(self.rng, tt.saves.get(eff.save, 0), cst.dc).success:
+        for i, tt in enumerate(targets):
+            dis = i == 0 and self.save_disadvantage(pc)
+            if not combat.saving_throw(self.rng, tt.saves.get(eff.save, 0), cst.dc,
+                                       disadvantage=dis).success:
                 cond = "entranced" if eff.ends_on_damage else "held"
                 outcome = combat.inflict(tt, cond, round_no=self.round)
                 if outcome != "resisted":
@@ -850,13 +992,7 @@ class Fight:
             return
         options = []
         if prof.weapon is not None:
-            w = prof.weapon
-            ev = prof.attacks_per_action * combat.hit_chance(w.to_hit, t.ac) * (w.dice.average + w.mod)
-            if st.raging and w.str_based:
-                ev += prof.attacks_per_action * 0.65 * prof.rage.get("damage", 0)
-            if prof.riders:
-                ev += 0.6 * max(r.dice.average for r in prof.riders)
-            options.append((ev, "attack", None, None))
+            options.append((self.attack_ev(pc, t, turn), "attack", None, None))
         cst = prof.caster
         if cst and not no_spells and not (st.raging and cst.forbidden_while_raging):
             if st.aura and st.aura[0].sustain == "action" and st.sustain_used_round != self.round:
@@ -994,10 +1130,30 @@ class Fight:
         turn["bonus_used"] = True
 
     # ------------------------------------------------------------ turns
+    def guard_step(self, maker: Combatant) -> None:
+        """Clockwork Guardian acts right after its maker (E2): it steps beside one ally —
+        the standing PC with the lowest share of its HP — and Guards it until the maker's
+        next turn. The Guard covers only that ally (within 5 feet of the construct)."""
+        up = self.standing_pcs()
+        self.guard_ready[maker.id] = False
+        if not up:
+            return
+        ward = min(up, key=lambda c: (c.hp / max(1, c.max_hp), c.max_hp))
+        self.guard_ward[maker.id] = ward.id
+        self.guard_ready[maker.id] = True
+
     def pc_turn(self, pc: Combatant) -> None:
+        if pc.profile.guard:
+            self.guard_ready[pc.id] = False      # last round's Guard ends as the maker's turn begins
+        self._pc_turn(pc)
+        if pc.profile.guard and self.over() is None:
+            self.guard_step(pc)
+
+    def _pc_turn(self, pc: Combatant) -> None:
         st = self.state[pc.id]
+        self.clear_sap(pc)
         if pc.state == "down":
-            combat.death_save(self.rng, pc)
+            combat.death_save(self.rng, pc, advantage=pc.profile.death_save_advantage)
             return
         if pc.state != "active":
             return
@@ -1005,6 +1161,7 @@ class Fight:
             return
         pc.conditions.discard("shielded")
         turn = {}
+        self._turns[pc.id] = turn
         self.bonus_before(pc, turn)
         self.take_action(pc, turn)
         if st.action_surge > 0 and self.standing_foes():
@@ -1017,13 +1174,13 @@ class Fight:
         up = self.standing_pcs()
         if not up:
             return None
-        if foe.role == "boss":
-            return min(up, key=lambda c: c.hp)
         return self.rng.choice(up)
 
     def foe_turn(self, foe: Combatant) -> None:
         if foe.state != "active":
             return
+        n = self._turns_this_round[foe.id] = self._turns_this_round.get(foe.id, 0) + 1
+        refresh = combat.boss_turn_refreshes(foe, n, self.opts)
         for cond in ("held", "entranced"):
             if cond in foe.conditions:
                 holder = next((c for c in self.pcs if c.id == getattr(foe, "held_by", None)), None)
@@ -1035,12 +1192,12 @@ class Fight:
             if repeat and combat.saving_throw(self.rng, foe.saves.get(save, 0), dc).success:
                 foe.conditions.discard("held")
             return
-        if not combat.begin_turn(foe):
+        if not combat.begin_turn(foe, refresh_reaction=refresh):
             self._credit(getattr(foe, "disabled_by", None), self.foe_turn_value(foe))
             foe.conditions.discard("stunned")   # until the start of the stunner's next turn
             return
         special = getattr(foe, "special", None)
-        if special is not None:
+        if special is not None and refresh:
             combat.roll_recharge(self.rng, foe, recharge_min=special.recharge_min)
         if special is not None and getattr(foe, "special_ready", False) and len(self.standing_pcs()) >= 2:
             foe.special_ready = False  # type: ignore[attr-defined]
@@ -1079,6 +1236,13 @@ class Fight:
                 ost.spend("anticipate")
                 dis, anticipator = True, other
                 break
+        if "sapped" in foe.conditions:            # Sap (edge): its next attack roll
+            foe.conditions.discard("sapped")
+            if not dis:
+                sapper = getattr(foe, "sapped_by", None)
+                p_norm = combat.hit_chance(atk.to_hit, pc.ac)
+                self._credit(sapper, atk.fixed * (p_norm - p_norm ** 2))
+            dis = True
         ac = pc.ac + (5 if "shielded" in pc.conditions else 0)
         if anticipator is not None and anticipator is not pc:
             p_norm = combat.hit_chance(atk.to_hit, ac)
@@ -1096,8 +1260,20 @@ class Fight:
             st.take(st.low_slot(1))
             pc.conditions.add("shielded")
             return
+        # Parry (edge): reaction, +N AC against this hit. The MM calls "hit" without the
+        # total (V46), so a player parries the first hit it can and learns afterwards
+        # whether it turned: the sim spends it on the first non-critical hit — after
+        # *Shield* (a caster's better reaction) and never with Uncanny Dodge to hand.
+        has_shield = bool(cst and "Shield" in cst.spells and st.low_slot(1))
+        if pc.profile.parry and not res.crit and pc.reaction_available \
+                and not pc.profile.halve_damage and not has_shield:
+            combat.take_reaction(pc)
+            st.spend("parry")
+            if res.total < ac + pc.profile.parry:
+                return
         # Turn the Odds: subtract a Spark die when it could turn the hit into a miss.
-        if not res.crit and res.total - ac < 6:
+        if combat.spark_may_spend(succeeded=res.hit, natural=res.natural, subtract=True,
+                                  crit=res.crit) and res.total - ac < 6:
             for other in self.standing_pcs():
                 ost = self.state[other.id]
                 if other.profile.spark_subtract and ost.sparks > 0 \
@@ -1124,17 +1300,17 @@ class Fight:
                 self.state[g.id].spend("guardian")
                 self._credit(g.id, min(dmg, g.profile.redirect))
                 target, dmg = g, max(0, dmg - g.profile.redirect)
-        if self.guard_used_round != self.round:
-            for c in self.standing_pcs():
-                if c.profile.guard:
-                    self.guard_used_round = self.round
-                    gd = c.profile.guard
-                    cut = min(dmg, combat.roll_damage(self.rng, gd["dice"], gd["bonus"]))
-                    dmg -= cut
-                    self.state[c.id].spend("guard")
-                    if c is not target:
-                        self._credit(c.id, cut)
-                    break
+        for maker_id, ward_id in self.guard_ward.items():
+            if ward_id == pc.id and self.guard_ready.get(maker_id):
+                maker = next(c for c in self.pcs if c.id == maker_id)
+                self.guard_ready[maker_id] = False
+                gd = maker.profile.guard
+                cut = min(dmg, combat.roll_damage(self.rng, gd["dice"], gd["bonus"]))
+                dmg -= cut
+                self.state[maker_id].spend("guard")
+                if maker is not target:
+                    self._credit(maker_id, cut)
+                break
         own = target is pc          # redirected hits count only as the guardian's credit
         if own:
             self.hits_on[pc.id] += 1
@@ -1155,9 +1331,9 @@ class Fight:
                 continue
             eff, slot = st.aura
             if eff.kind == "aura":
-                self.cast_save(pc, eff, slot, self.area_targets(eff.targets))
+                self.cast_save(pc, eff, slot, self.area_targets(eff.targets), pierce=False)
 
-    def enemy_phase(self, *, boss_only=False, skip_boss_turns: int = 0) -> None:
+    def enemy_phase(self, *, boss_only=False) -> None:
         if not boss_only:
             self.aura_tick()
         for foe in list(self.foes):
@@ -1167,12 +1343,18 @@ class Fight:
                 if foe.role == "boss":
                     self.foe_turn(foe)
                 continue
-            turns = combat.turns_per_phase(foe) - (skip_boss_turns if foe.role == "boss" else 0)
-            for _ in range(turns):
+            for _ in range(combat.turns_in_side_half(foe, self.opts)):
                 self.foe_turn(foe)
 
-    def party_phase(self) -> None:
-        for pc in self.pcs:
+    def party_phase(self, part: str = "all") -> None:
+        """The party's half. ``part``: "all"; "first" — only the first character's turn
+        (a boss acts right after it, Table 8–1); "rest" — everyone else."""
+        order = [pc for pc in self.pcs if pc.state != "dead"]
+        if part == "first":
+            order = order[:1]
+        elif part == "rest":
+            order = order[1:]
+        for pc in order:
             if self.over() is not None:
                 return
             self.pc_turn(pc)
@@ -1188,6 +1370,7 @@ class Fight:
                 st.master_plan -= 1
                 st.spend("master_plan")
                 self._plan = True
+                self._plan_rounds = pc.profile.master_plan_rounds
                 break
         party_mods = [c.dex_mod + c.profile.initiative_bonus for c in self.pcs]
         first = combat.side_initiative(
@@ -1195,17 +1378,23 @@ class Fight:
             surprised=self.encounter.surprise,
             party_advantage=any(c.profile.initiative_advantage for c in self.pcs))
         has_boss = any(f.role == "boss" for f in self.foes)
-        order = combat.round_order(first, self.opts, enemy_has_boss=has_boss)
         result = None
         while result is None and self.round < MAX_ROUNDS:
             self.round += 1
+            self._turns_this_round = {}
+            order = combat.round_order(first, self.opts, enemy_has_boss=has_boss,
+                                       round_no=self.round, surprised=self.encounter.surprise)
             for phase in order:
                 if phase == "boss":
                     self.enemy_phase(boss_only=True)
                 elif phase == "party":
                     self.party_phase()
+                elif phase == "party_first":
+                    self.party_phase("first")
+                elif phase == "party_rest":
+                    self.party_phase("rest")
                 else:
-                    self.enemy_phase(skip_boss_turns=1 if "boss" in order else 0)
+                    self.enemy_phase()
                 result = self.over()
                 if result is not None:
                     break
@@ -1352,15 +1541,17 @@ class _DayPC:
         die = self.prof.hit_die
         while self.hd > 0 and self.prof.hp - self.hp >= (die + 1) / 2 + con + hd_bonus:
             self.hd -= 1
-            self.hp = min(self.prof.hp, self.hp + max(1, rng.randint(1, die) + con) + hd_bonus)
+            face = die if self.prof.hd_max else rng.randint(1, die)   # Hale (edge): the maximum
+            self.hp = min(self.prof.hp, self.hp + max(1, face + con) + hd_bonus)
 
 
 def run_day(rng, party: list, encounters: list, *, opts: RuleOptions = RuleOptions(),
-            short_rests_after: tuple = (1, 3)) -> DayResult:
+            short_rests_after: tuple = (1, 2)) -> DayResult:
     """Fight ``encounters`` in order with short rests after the listed fights (1-based).
 
-    Default: four fights, short rests after the first and third (DESIGN §8's standard
-    day). HP, daily pools, Hit Dice and Sparks carry over; pools are paced evenly."""
+    Default: short rests after the first and second fight (the yaml's adventuring_day:
+    three Clashes, V34). HP, daily pools, Hit Dice and Sparks carry over; pools are paced
+    evenly."""
     day = [_DayPC(p) for p in party]
     fights = []
     for k, enc in enumerate(encounters, start=1):

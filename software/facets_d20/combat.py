@@ -21,8 +21,15 @@ Rules encoded here:
                          under the v0.2 option)
     side_initiative      surprise decides, else one d20 per side + the side's best Dex
                          modifier (Alert: advantage on the party's roll); ties to players
-    round_order          the order of phases in a round (boss top-of-round option)
-    turns_per_phase      boss 2, others 1
+    round_order          the order of phases in a round: a boss's turns come at the top of
+                         the round and right after the party's first turn, so they are never
+                         back to back; a surprised boss loses its round-1 top turn
+    turns_in_side_half   how many turns a creature takes in its own side's half
+    boss_turn_refreshes  a boss's reaction returns, and its Recharge rolls, only at the start
+                         of its top-of-round turn (one reaction a round)
+    spark_may_spend      a Spark is spent after the MM calls the result: on a miss or a failed
+                         test (or, subtracting, on a hit), before its consequences
+    leaderless_minions_check  minions with no leader check morale when half are down
     inflict              a condition from a failed save; boss resolve (a boss loses its
                          next turn instead of a disabling effect, at most one a round)
     begin_turn           reaction back; resolve-owed or stunned turns are lost
@@ -53,12 +60,25 @@ class RuleOptions:
     morale_dc: the DC of the morale save.
     boss_bloodied: the boss's Bloodied change the simulator plays ("desperate": advantage
         on its attacks and on attacks against it — 09's second option; "none").
+    boss_hp_multiplier: a boss has this many times its stat block's hit points (balance
+        pass V37: 2, so a boss lasts long enough to act; 1 = the stat block).
+    stabilize: how a character stabilizes a dying ally (Edges pass, V56): "auto" — an
+        action, no check (the rule); "check" — the SRD's Help action and DC 10 Wisdom
+        (Medicine) check; "none" — nobody does (the sim before V56).
+    boss_second_turn: where a boss's second turn goes (playtest fix pass, MM #1):
+        "after_first_pc" — right after the first character's turn in the party's half, so
+        its two turns never land back to back (the rule); "side_half" — in its own side's
+        half (the v0.2 draft, kept for comparison runs).
     """
 
     leader_morale: str = "minions"
     boss_top_of_round: bool = True
     morale_dc: int = 10
     boss_bloodied: str = "desperate"
+    boss_hp_multiplier: int = 2
+    boss_second_turn: str = "after_first_pc"
+    stabilize: str = "auto"        # V56: stabilizing a dying creature is an action, no check
+                                   # ("check": the SRD's DC 10 Medicine roll; "none": nobody does)
 
 
 # ---------------------------------------------------------------- data shapes
@@ -159,8 +179,21 @@ def hit_chance(bonus: int, ac: int) -> float:
 
 
 def spark_can_turn(*, total: int, target: int) -> bool:
-    """A Spark (+1d6) is worth spending only if the roll is short by 1–6."""
+    """Whether +1d6 could turn this roll (short by 1–6). Players don't see the target
+    number, so this is not the spending rule; see ``spark_may_spend``."""
     return 0 < target - total <= 6
+
+
+def spark_may_spend(*, succeeded: bool, natural: int, subtract: bool = False,
+                    crit: bool = False) -> bool:
+    """When a Spark may be spent (06, 08; playtest fix pass, player #1). The MM says hit or
+    miss (success or failure) first; then, before its consequences, a Spark may be spent
+    to add 1d6 to a miss or a failed test, or (Turn the Odds) to subtract 1d6 from a hit or
+    a success. A natural 1 on an attack still misses and a critical hit still hits, so
+    neither can be turned."""
+    if subtract:
+        return succeeded and not crit and natural != 20
+    return not succeeded and natural != 1
 
 
 def spark_attack(rng, res: "AttackResult", *, ac: int, subtract: bool = False) -> "AttackResult":
@@ -188,13 +221,15 @@ def roll_damage(rng, d: Optional[Dice], mod: int, *, crit: bool = False,
 
 
 def monster_damage(rng, atk: MonsterAttack, *, crit: bool) -> int:
-    """Fixed damage; a critical hit is rolled (double dice + modifier)."""
+    """Fixed damage. A critical hit adds one roll of the attack's damage dice to the fixed
+    damage (playtest fix pass, MM #13): the same average as doubling the dice, and never
+    less than the fixed number. An attack with no dice listed deals its fixed damage twice."""
     if not crit:
         return atk.fixed
     if atk.dice is None:
         return atk.fixed * 2
-    extra = sum(_dice.roll(rng, d.times(2)) for d in atk.extra)
-    return max(0, _dice.roll(rng, atk.dice.times(2)) + atk.mod + extra)
+    extra = sum(_dice.roll(rng, d) for d in atk.extra)
+    return atk.fixed + _dice.roll(rng, atk.dice) + extra
 
 
 @dataclass(frozen=True)
@@ -351,6 +386,16 @@ def morale_triggers(c: Combatant, outcome: Optional[DamageOutcome], *, leader_fe
     return False
 
 
+def leaderless_minions_check(*, has_leader: bool, minions: int, minions_down: int,
+                             already: bool) -> bool:
+    """Minions with no leader in the fight check morale, all at once, the first time half
+    of them (rounded up) are down (playtest fix pass, MM #5). With a leader they check
+    when it falls (``morale_triggers``); a boss can be the leader."""
+    if has_leader or already or minions <= 0:
+        return False
+    return minions_down >= (minions + 1) // 2
+
+
 # ---------------------------------------------------------------- initiative and turns
 
 
@@ -370,17 +415,48 @@ def side_initiative(rng, party_dex_mods, enemy_dex_mods, *, surprised: Optional[
     return "party" if party >= enemy else "enemy"
 
 
-def round_order(first: str, opts: RuleOptions, *, enemy_has_boss: bool) -> list:
-    """Phases of one round. "boss" is a phase in which each boss takes one turn."""
+def round_order(first: str, opts: RuleOptions, *, enemy_has_boss: bool, round_no: int = 1,
+                surprised: Optional[str] = None) -> list:
+    """Phases of one round (Table 8–1). "boss" is a phase in which each boss takes one turn.
+
+    The rule (playtest fix pass, MM #1): a boss takes one turn at the top of the round,
+    before either side, and its second right after the first character's turn in the
+    party's half ("party_first" is that one turn, "party_rest" the others). So its two
+    turns never come back to back, whichever side won initiative. If the foes are
+    surprised, a boss loses its top-of-round turn in the first round.
+    """
     second = "enemy" if first == "party" else "party"
-    order = [first, second]
-    if enemy_has_boss and opts.boss_top_of_round:
-        order = ["boss"] + order
-    return order
+    if not (enemy_has_boss and opts.boss_top_of_round):
+        return [first, second]
+    top = [] if (round_no == 1 and surprised == "enemy") else ["boss"]
+    if opts.boss_second_turn == "side_half":
+        return top + [first, second]
+    halves = {"party": ["party_first", "boss", "party_rest"], "enemy": ["enemy"]}
+    return top + halves[first] + halves[second]
 
 
 def turns_per_phase(c: Combatant) -> int:
+    """Turns a round (boss 2, others 1)."""
     return 2 if c.role == "boss" else 1
+
+
+def turns_in_side_half(c: Combatant, opts: RuleOptions) -> int:
+    """Turns a creature takes in its own side's half. Under the rule a boss takes none
+    there: both of its turns have their own slots (``round_order``)."""
+    if c.role != "boss":
+        return 1
+    if not opts.boss_top_of_round:
+        return 2
+    return 1 if opts.boss_second_turn == "side_half" else 0
+
+
+def boss_turn_refreshes(c: Combatant, turn_of_round: int, opts: RuleOptions) -> bool:
+    """Whether this turn's start brings back the creature's reaction and rolls its
+    Recharge. Everyone: every turn. A boss (rule): only its first turn of the round, so it
+    has one reaction a round and one Recharge roll a round, like anyone else."""
+    if c.role != "boss" or opts.boss_second_turn == "side_half":
+        return True
+    return turn_of_round <= 1
 
 
 DISABLING = frozenset({"stunned", "paralyzed", "incapacitated", "banished", "polymorphed",
@@ -404,13 +480,15 @@ def inflict(c: Combatant, condition: str, *, round_no: int) -> str:
     return "applied"
 
 
-def begin_turn(c: Combatant) -> bool:
+def begin_turn(c: Combatant, *, refresh_reaction: bool = True) -> bool:
     """Start a creature's turn. Returns False if it loses the turn.
 
-    Its reaction comes back. A boss that owes a turn to boss resolve loses this one. A
-    stunned creature loses the turn (the stun's duration is the caller's business).
+    Its reaction comes back (unless ``refresh_reaction`` is False: a boss's second turn of
+    the round, ``boss_turn_refreshes``). A boss that owes a turn to boss resolve loses this
+    one. A stunned creature loses the turn (the stun's duration is the caller's business).
     """
-    c.reaction_available = True
+    if refresh_reaction:
+        c.reaction_available = True
     if c.lose_next_turn:
         c.lose_next_turn = False
         c.stun_turns_lost += 1
@@ -445,11 +523,26 @@ def provokes_opportunity_attack(*, leaves_reach: bool, disengaged: bool = False,
 # ---------------------------------------------------------------- dying
 
 
-def death_save(rng, c: Combatant) -> Optional[str]:
-    """Roll a death save for a PC at 0 HP. Returns the new state if it changed."""
+def stabilize(rng, c: Combatant, *, bonus: int = 0, dc: int = 10, check: bool = True) -> bool:
+    """Stabilize a dying creature (SRD 5.2.1: the Help action and a DC 10 Wisdom
+    (Medicine) check; ``check=False`` — no roll). Returns True if it is now stable."""
+    if c.state != "down":
+        return False
+    if check and rng.randint(1, 20) + bonus < dc:
+        return False
+    c.state = "stable"
+    c.death_successes = c.death_failures = 0
+    return True
+
+
+def death_save(rng, c: Combatant, *, advantage: bool = False) -> Optional[str]:
+    """Roll a death save for a PC at 0 HP. Returns the new state if it changed.
+    ``advantage`` (the *Die Hard* edge): roll two d20s and keep the higher."""
     if c.state != "down":
         return None
     n = rng.randint(1, 20)
+    if advantage:
+        n = max(n, rng.randint(1, 20))
     if n == 20:
         c.hp = 1
         c.state = "active"

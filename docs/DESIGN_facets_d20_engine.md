@@ -166,6 +166,53 @@ Kept only for the SRD baselines file, which models classes with `paths:
 *Anatomist*, *Master Plan*'s save half (attack half is modelled), knacks other than
 *Field Medic*, summoning spells, *Shield of Faith* (never cast by the AI).
 
+## 4a. Balance pass (Balance tuner, 2026-09-28)
+
+Changes the balance pass made to the engine, each with rule tests in
+`tests/test_facets_d20_engine.py`. Numbers and the tuning log:
+`docs/RESEARCH_facets_d20_balance.md`; decisions V32–V41 in DESIGN v0.2 §12.
+
+- **E-D16 Clockwork Guardian's 5-ft reach** (`sim.Fight.guard_step`). The construct acts
+  right after its maker and steps beside one ally — the standing PC with the lowest share
+  of its HP — and Guards only that ally, the first hit until the maker's next turn. The
+  sim used to cut the first hit on *any* ally every round, which was the Tinker's +161%.
+- **E-D17 Study on spell attacks.** Mind's Study gives "your next attack roll" advantage;
+  the sim now applies it to a spell attack roll too, not only a weapon attack.
+- **E-D18 The AI takes the higher expected value (S-5).** `Fight.attack_ev` counts what
+  the Attack action really does (advantage from Study, a plan, a held or desperate target,
+  reckless rage; the studied-target bonus; crit range; riders if any attack hits). An
+  area spell, an aura (two rounds of it) or a disable (chance to fail × the foe's turn
+  × two) is cast only when it beats that. Pure casters (no real weapon) behave as before;
+  hybrids stop spending actions on low-DC spells.
+- **E-D19 Every foe attacks a random standing PC** (DESIGN §6.2: the MM spreads the enemy
+  side's attacks). Bosses used to pick the lowest-HP PC.
+- **E-D20 Encounter method** (analysis only; no rule): minions in the fitting shapes are
+  at most half the CR of a standard of the same budget (a few CR 13 "minions" at 7th level
+  were deciding fights in two rounds); generic foes deal the SRD ladder's share of
+  non-weapon damage (15%) as a separate strike, so resistances count as against real
+  monsters.
+- **E-D21 The swap test runs days.** `analysis.task_swap` plays the adventuring day
+  (three Clashes, short rests between) so daily resources are paced as at the table; one
+  seed per level for every build (common random numbers). It is the band's primary
+  measure (V32); PI is secondary.
+- **E-D22 Boss hit points** (`RuleOptions.boss_hp_multiplier = 2`, `monsters.convert`):
+  a boss has twice its stat block's HP (V37).
+- **E-D23 1st-level hit points** from `advancement.hp_first`: `hit_die_plus_con` (SRD,
+  the baselines) or `hit_die_plus_eight_plus_con` (Facets d20, V35).
+- **E-D24 New readings of existing vocabulary:** `damage_bonus` with
+  `condition: [studied_target]` (Anatomist: + Int against your studied target, flat, not a
+  rider) and `advantage` with `condition: [first_round, …]` and `rounds: N` (Master Plan
+  holds for N rounds).
+- **E-D25 The adventuring day is data** (`adventuring_day` in the yaml); a single fight
+  gets 1/clashes of each long-rest pool (`sim.DEFAULT_SHARE = 1/3`).
+
+**Answers.** Q-3 / E-9: the +2 at 4th and 8th goes to the ability the main track uses
+(V33); every preset pins it (`asi:`) and a test holds the pins to the engine's rule.
+E-9 (PI vs swap): the swap test is primary (V32). E-10 (targets pull apart): with the
+minion cap, the day of three, 1st-level HP and boss HP the Clash lands at 3.0–3.7 rounds
+at every level; Skirmish's rounds target became "about 2" (1.5–2.5) and Battle's wins
+85–95%, the task's definitions (V41).
+
 ## 5. Questions and changes for the Designer
 
 - **Q-2** Answered (DESIGN §1.2, P-5). Closed.
