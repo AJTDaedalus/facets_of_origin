@@ -94,9 +94,10 @@ class TestShape:
         # §5.1 option (a), provisional pending the owner's ruling.
         assert data["casting"]["prismatic_from"] == "deep_magic"
 
-    @pytest.mark.parametrize("name", ["Divine Smite", "Searing Smite"])
+    @pytest.mark.parametrize("name", ["Divine Smite", "Searing Smite", "Ensnaring Strike"])
     def test_no_smite_spells(self, data, name):
-        # V24: slots never buy weapon damage; Sworn Strike is the one smite.
+        # V24: slots never buy weapon damage; Sworn Strike is the one smite. Ensnaring
+        # Strike (triggers on the next weapon hit) left Verdance in the playtest fix pass (C6).
         assert name not in {s["name"] for _, s in all_listed(data)}
         assert name not in {s["name"] for s in data["sim_spells"]}
 

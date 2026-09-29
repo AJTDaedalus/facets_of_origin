@@ -29,6 +29,7 @@ sys.path.insert(0, str(SOFTWARE))
 
 from facets_d20 import analysis as A  # noqa: E402
 from facets_d20 import data as D  # noqa: E402
+from facets_d20 import monsters as M  # noqa: E402
 from facets_d20 import sim as S  # noqa: E402
 from facets_d20.combat import RuleOptions  # noqa: E402
 
@@ -117,6 +118,30 @@ def cmd_encounters(a, results):
         table.setdefault(key, {}).setdefault(L, {})[tier] = r["total"]
     results["fits"] = table
     print(f"fitted budgets in {time.time()-t0:.0f}s", flush=True)
+
+    # 2b. the hard-hitter mark-up (playtest fix pass; Amendment 4 item 2): each SRD monster
+    #     fought as a group of standards at the middle of the levels it suits, against the
+    #     generic standards the budgets were fitted on. The mark-up is the hard hitters'
+    #     median ratio over the other monsters' median ratio.
+    clash4 = {L: 4 * table["ref4"][L]["clash"] for L in LEVELS}
+    calls = []
+    for blk in M.ladder():
+        row = A.monster_threat_row(blk, model, clash4)
+        lv = row["standard_levels"]
+        if lv:
+            L = lv[len(lv) // 2]
+            calls.append(((blk.id, L, clash4[L], model, 80 if q else 250,
+                           sd("hard", blk.id)), {}))
+    hh = pmap(A.task_monster_factor, calls, a.procs)
+    hard_r = [x["ratio"] for x in hh if x["hits_hard"]]
+    soft_r = [x["ratio"] for x in hh if not x["hits_hard"]]
+    hard = statistics.median(hard_r) / statistics.median(soft_r)
+    model = A.ThreatModel(minion_hp=model.minion_hp, boss=model.boss, never=model.never,
+                          hard=round(hard, 2))
+    results["hard_hitters"] = {"monsters": hh, "median_hard": statistics.median(hard_r),
+                               "median_other": statistics.median(soft_r), "factor": hard}
+    results["calibration"]["model"] = model.__dict__
+    print(f"hard-hitter mark-up x{hard:.2f} in {time.time()-t0:.0f}s", flush=True)
 
     # 3. evaluate each reference cell at a larger n (CIs), all shapes
     calls = [(("ref4", L, table["ref4"][L][tier], model, n_eval, sd("eval", L, tier)), {})
@@ -645,9 +670,13 @@ def write_yaml(results):
                     "minion": f"sqrt({model['minion_hp']:.1f} x damage per turn)",
                     "boss": f"standard x {model['boss']:.2f}",
                     "never_breaks": f"x {model['never']:.2f}",
+                    "hard_hitter": f"x {model.get('hard', 1.0):.2f}",
                     "lone_boss": "boss x 1.2 (V42; measured mark-up "
                                  + (f"x{results['solo_boss']['factor']:.2f} median)" if results.get("solo_boss") else "pending)")},
-          "by_cr": results["monster_threat"]}
+          # Table 9–3 from the constants as printed, so an MM's calculator agrees with it
+          "by_cr": A.ThreatModel(minion_hp=round(model["minion_hp"], 1), boss=round(model["boss"], 2),
+                                 never=round(model["never"], 2),
+                                 hard=round(model.get("hard", 1.0), 2)).table()}
     blocks = {
         "encounter_table": "# Threat budget per character (party of four), fitted by software/tools/d20_sim.py\n"
                            + _y.safe_dump({"encounter_table": table}, sort_keys=False, width=100),

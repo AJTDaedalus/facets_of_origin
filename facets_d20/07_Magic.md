@@ -55,6 +55,10 @@ If Steel is your main track, you stay on the Half table however many Spell talen
 
 **Focus.** Any object that suits your tradition works as a spellcasting focus: a notebook of formulae, a staff, a holy symbol. You don't track a component pouch; the only components you need are ones with a gold cost, which you must own.
 
+**Hands.** With Steel depth 1 or more, a weapon or shield you hold can be your focus, and you can perform somatic components with the hand holding it. A sword-and-shield caster never has to sheathe anything to cast.
+
+**Armor.** You can cast only in armor you're trained with, as the SRD says. If a pick costs you an armor training (Chapter 02, *Ranks can lapse*), change armor before your next fight or you can't cast in it.
+
 **Table 7–2: Full Casting Spell Slots**
 
 | Character level | 1st | 2nd | 3rd | 4th | 5th |
@@ -116,7 +120,7 @@ You choose your first domain with your first Spell talent, from your tradition's
 
 **Prismatic domains.** Six domains (The Undying, Fate and The Living World for Invocation; The Arcane, The Constructed Mind and Chronomancy for Thaumaturgy) are the pinnacle kinds of magic. You can learn one only as the domain Deep Magic gives you, which means three Spell talents with Spell your main track, at 5th level at the earliest. No character starts with one.
 
-**No smite spells.** No list holds a spell that adds damage to your next weapon hit for a slot. *Sworn Strike* (Chapter 05) is the one way to buy that. *Hunter's Mark* (Beasts) adds damage to each hit while you concentrate on it and isn't a rider.
+**No smite spells.** No list holds a spell that adds damage to your next weapon hit for a slot, or that triggers on your next weapon hit at all. *Sworn Strike* (Chapter 05) is the one way to buy that. *Hunter's Mark* (Beasts) adds damage to each hit while you concentrate on it and isn't a rider.
 
 **Table 7–5: Domains at a Glance**
 
@@ -160,7 +164,7 @@ The **role** is a rough guide to what the list is best at. With the Common list 
 
 **Resonance** (control). **Cantrips:** *Thaumaturgy*, *Vicious Mockery* · **2nd:** *Blindness/Deafness*, *Knock*, *Silence*, *Enthrall* · **3rd:** *Fear*, *Sending*, *Tongues*
 
-**Verdance** (control). **Cantrips:** *Druidcraft*, *Shillelagh* · **1st:** *Entangle*, *Goodberry*, *Ensnaring Strike* · **2nd:** *Barkskin*, *Locate Animals or Plants*, *Spike Growth* · **3rd:** *Plant Growth*, *Speak with Plants* · **4th:** *Blight* · **5th:** *Awaken*, *Tree Stride*
+**Verdance** (control). **Cantrips:** *Druidcraft*, *Shillelagh* · **1st:** *Entangle*, *Goodberry* · **2nd:** *Barkskin*, *Locate Animals or Plants*, *Spike Growth* · **3rd:** *Plant Growth*, *Speak with Plants* · **4th:** *Blight* · **5th:** *Awaken*, *Tree Stride*
 
 **Binding** (control). **Cantrips:** *Mending*, *Resistance* · **1st:** *Bane*, *Protection from Evil and Good*, *Sanctuary* · **2nd:** *Hold Person*, *Warding Bond*, *Zone of Truth* · **3rd:** *Bestow Curse*, *Magic Circle*, *Remove Curse* · **4th:** *Banishment* · **5th:** *Geas*, *Hold Monster*, *Planar Binding*
 

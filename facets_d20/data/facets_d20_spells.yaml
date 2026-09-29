@@ -151,7 +151,6 @@ domains:
     - {name: Shillelagh, level: 0}
     - {name: Entangle, level: 1}
     - {name: Goodberry, level: 1}
-    - {name: Ensnaring Strike, level: 1}
     - {name: Barkskin, level: 2}
     - {name: Locate Animals or Plants, level: 2}
     - {name: Spike Growth, level: 2}

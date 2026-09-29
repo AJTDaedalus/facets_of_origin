@@ -25,7 +25,7 @@ The Soul is the Facet of people who work through what they believe and who stand
 ### Kindle
 *Soul feature · 1st level*
 
-As a bonus action, a creature within 60 feet that can hear you gains a Spark (it still can't hold more than 3). You can do this a number of times equal to your proficiency bonus; all uses return on a long rest.
+As a bonus action, a creature within 60 feet that can hear you, or you yourself, gains a Spark (it still can't hold more than 3). You can do this a number of times equal to your proficiency bonus; all uses return on a long rest.
 
 ---
 
@@ -83,7 +83,7 @@ After a long rest, speak one sentence about the day ahead: something you can't s
 ### Sworn Strike
 *Steel talent · Soul*
 
-Once per turn, when you hit with a melee weapon, you can spend a use to deal an extra 2d8 radiant damage. You have uses equal to your Soul modifier (minimum 1) per long rest, and one returns on a short rest. This is a rider. It is the only way in the game to spend a resource for extra damage on a weapon hit; there are no smite spells on the lists (Chapter 07).
+Once per turn, when you hit with a melee weapon, you can spend a use to deal an extra 2d8 radiant damage. You have uses equal to your Soul modifier (minimum 1) per long rest, and one returns on a short rest. This is a rider. It is the only way in the game to spend a resource for extra damage on a weapon hit; there are no smite spells on the lists (Chapter 07). Your **Soul modifier** is the higher of your Wisdom and Charisma modifiers, whatever your Facet.
 
 **5th (Steel 2):** 3d8 instead of 2d8.
 **9th (Steel 3):** 4d8 instead. On a turn you hit with a melee weapon and spend no use, add 1d8 radiant instead. Either way it is a rider.
@@ -93,7 +93,7 @@ Once per turn, when you hit with a melee weapon, you can spend a use to deal an 
 
 While you are conscious, you and allies within 10 feet add +1 to saving throws.
 
-**5th:** the bonus is your Soul modifier (minimum +1) instead.
+**5th:** the bonus is your Soul modifier (the higher of your Wisdom and Charisma modifiers, minimum +1) instead.
 **9th:** you can't be frightened.
 
 ### Oath Unbroken
@@ -116,7 +116,7 @@ The Soul presets show how far the picks alone move a character. All four start f
 | Oracle | *Turn the Odds*, *Wider Study*, *Prophecy* | *Warden*, *Alert* | Presence; Binding, Fate | pure caster |
 | Oathsworn | *Mending Hands* | *Sworn Strike*, *Weapon Expert*, *Warden*, *Oath Unbroken* | Presence | hybrid, Steel main |
 
-The Oracle is the one that reaches a prismatic domain for its story: it starts on Presence, adds Binding at 3rd, and comes into Fate at 5th, when its third Spell talent brings Deep Magic.
+All three pure casters reach a prismatic domain at 5th, when the third Spell talent brings Deep Magic: the Priest and the Druid take The Living World, and the Oracle, which starts on Presence and adds Binding at 3rd, comes into Fate.
 
 ---
 

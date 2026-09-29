@@ -339,6 +339,66 @@ class TestPresetCards:
                 assert (int(dc[1]), int(dc[2])) == (ch.save_dc, ch.spell_attack), p["name"]
 
 
+    def test_fifth_and_tenth_level_lines_come_from_the_engine(self, rs, data, cards):
+        # Playtest fix pass (MM #12): each card prints HP and AC (and DC) at 5th and 10th.
+        for p in data["presets"]:
+            for L in (5, 10):
+                ch = B.build(rs, B.Picks.from_preset(rs, p["id"], L))
+                m = re.search(rf"\*\*At {L}th:\*\* HP (\d+) · AC (\d+)(?: · spell save DC (\d+))?",
+                              cards[p["name"]][1])
+                assert m, (p["name"], L)
+                assert (int(m[1]), int(m[2])) == (ch.hp, ch.ac), (p["name"], L)
+                assert (int(m[3]) if m[3] else None) == ch.save_dc, (p["name"], L)
+
+
+# ---------------------------------------------------------------- rulings the playtest fix pass printed
+
+class TestPlaytestFixRulings:
+    def test_round_table_has_the_boss_step_the_engine_plays(self, texts):
+        from facets_d20 import combat
+        from facets_d20.combat import RuleOptions
+        block = texts["08_Combat.md"].split("**Table 8–1")[1].split("\n\n")[1]
+        steps = re.findall(r"^\| \d\. ([^|]+?) \|", block, re.M)
+        assert steps == ["Who goes first", "Boss, top of the round", "First side acts",
+                         "Second side acts", "Next round"]
+        order = combat.round_order("party", RuleOptions(), enemy_has_boss=True)
+        assert order[0] == "boss" and order[order.index("party_first") + 1] == "boss"
+
+    def test_tie_rule_printed_as_the_yaml_says(self, data, texts):
+        assert data["tracks"]["main_track"]["tie"] == "existing"
+        assert "stays whatever it already was" in texts["02_Characters.md"]
+        assert "on a tie it stays the one you had" in texts["10_Quick_Reference.md"]
+        for t in texts.values():
+            assert "Steel wins a tie" not in t and "Steel wins ties" not in t
+
+    def test_body_weight_is_main_track_only_everywhere(self, texts):
+        for f in ("01_What_Is_Different.md", "02_Characters.md", "03_Facet_of_the_Body.md",
+                  "10_Quick_Reference.md"):
+            t = texts[f]
+            assert "not for depth" in t or "main track only" in t, f
+        assert "counts as two Steel talents" not in texts["01_What_Is_Different.md"]
+
+    def test_no_first_rank_wording_left(self, texts):
+        for t in texts.values():
+            assert "all but the first rank" not in t and "Every rank after the first" not in t
+
+    def test_sparks_are_spent_after_the_mm_calls_a_miss(self, texts):
+        for f in ("01_What_Is_Different.md", "06_Backgrounds_Sparks_and_Social.md",
+                  "08_Combat.md", "10_Quick_Reference.md"):
+            assert re.search(r"miss(ed)? or (a )?fail", texts[f]), f
+
+    def test_monster_crit_rule_matches_the_engine(self, texts):
+        from facets_d20 import combat
+        from facets_d20.dice import Dice
+        atk = combat.MonsterAttack(name="x", to_hit=0, fixed=13, dice=Dice(2, 8), mod=4)
+
+        class Low:
+            def randint(self, a, b):
+                return a
+        assert combat.monster_damage(Low(), atk, crit=True) == 13 + 2
+        assert "adds one roll of the attack's damage dice to the fixed damage" in texts["08_Combat.md"]
+
+
 # ---------------------------------------------------------------- magic
 
 class TestMagicChapter:

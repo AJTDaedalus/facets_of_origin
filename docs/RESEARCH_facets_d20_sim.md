@@ -4,13 +4,13 @@
 
 ## Headline
 
-- **Clash at 4th level** (budget 30 Threat per character): 3.46 ± 0.06 rounds, 27% party HP lost, 99.7% wins, a PC drops in 2% of fights, a PC dies in 0.3%. Clash length at 1st–10th: 3.0–3.6 rounds.
-- **Threat model** (measured): a boss = 3.34 standards of its CR; a minion carries √(10.5 × its damage per turn); a foe that never breaks × 1.16.
-- **The adventuring day** (three Clashes, short rests after the 1st and 2nd): the reference party survives it 90–99% of the time across 1st–10th; a hard day of four Clashes and two short rests: 41–78%.
-- **Balance, level 1 (swap test):** 12/12 presets and 17/17 sim builds inside ±15% (range -10% to +9%); hybrids above their Facet's best pure build: none; the SRD baselines' median -19% vs the preset median.
-- **Balance, level 4 (swap test):** 12/12 presets and 17/17 sim builds inside ±15% (range -11% to +12%); hybrids above their Facet's best pure build: none; the SRD baselines' median -13% vs the preset median.
-- **Balance, level 7 (swap test):** 12/12 presets and 17/17 sim builds inside ±15% (range -9% to +12%); hybrids above their Facet's best pure build: none; the SRD baselines' median -11% vs the preset median.
-- **Balance, level 10 (swap test):** 12/12 presets and 17/17 sim builds inside ±15% (range -10% to +12%); hybrids above their Facet's best pure build: none; the SRD baselines' median -14% vs the preset median.
+- **Clash at 4th level** (budget 29 Threat per character): 3.51 ± 0.06 rounds, 27% party HP lost, 99.7% wins, a PC drops in 2% of fights, a PC dies in 0.3%. Clash length at 1st–10th: 3.0–3.5 rounds.
+- **Threat model** (measured): a boss = 3.51 standards of its CR; a minion carries √(8.4 × its damage per turn); a foe that never breaks × 1.16.
+- **The adventuring day** (three Clashes, short rests after the 1st and 2nd): the reference party survives it 86–99% of the time across 1st–10th; a hard day of four Clashes and two short rests: 38–77%.
+- **Balance, level 1 (swap test):** 12/12 presets and 17/17 sim builds inside ±15% (range -10% to +9%); hybrids above their Facet's best pure build: none; the SRD baselines' median -17% vs the preset median.
+- **Balance, level 4 (swap test):** 12/12 presets and 17/17 sim builds inside ±15% (range -10% to +15%); hybrids above their Facet's best pure build: none; the SRD baselines' median -10% vs the preset median.
+- **Balance, level 7 (swap test):** 12/12 presets and 17/17 sim builds inside ±15% (range -10% to +10%); hybrids above their Facet's best pure build: none; the SRD baselines' median -12% vs the preset median.
+- **Balance, level 10 (swap test):** 12/12 presets and 17/17 sim builds inside ±15% (range -11% to +14%); hybrids above their Facet's best pure build: none; the SRD baselines' median -12% vs the preset median.
 
 ## 1. Method
 
@@ -26,29 +26,29 @@ Calibration anchors (party level, CR → measured value):
 
 | Role | L1 CR 0.25 | L1 CR 0.5 | L4 CR 1.0 | L4 CR 2.0 | L7 CR 3.0 | L7 CR 5.0 | L10 CR 6.0 | L10 CR 9.0 | Median |
 |---|---|---|---|---|---|---|---|---|---|
-| minion HP-equivalent | 8.05 | 8.59 | 8.94 | 8.04 | 24.47 | 13.77 | 12.06 | 13.29 | 10.50 |
-| boss = N standards | 2.83 | 3.22 | 2.85 | 3.35 | 3.33 | 3.82 | 4.39 | 4.06 | 3.34 |
+| minion HP-equivalent | 6.42 | 7.14 | 6.71 | 6.58 | 23.03 | 12.66 | 15.05 | 9.71 | 8.43 |
+| boss = N standards | 3.19 | 3.25 | 3.38 | 3.50 | 3.51 | 4.07 | 4.95 | 4.28 | 3.51 |
 | never-breaks × | 1.16 | 1.18 | 1.15 | 1.17 | 1.22 | 1.15 | 1.15 | 1.14 | 1.16 |
 
 **Table 9–2: Threat by CR** (SRD 5.2.1 ladder, smooth fit)
 
 | CR | Standard | Minion | Boss |
 |---|---|---|---|
-| 1/8 | 6 | 6 | 20 |
-| 1/4 | 8 | 7 | 27 |
-| 1/2 | 12 | 9 | 39 |
-| 1 | 18 | 11 | 60 |
-| 2 | 28 | 13 | 94 |
-| 3 | 37 | 15 | 124 |
-| 4 | 46 | 17 | 154 |
-| 5 | 55 | 18 | 184 |
-| 6 | 64 | 20 | 213 |
-| 7 | 72 | 21 | 239 |
-| 8 | 81 | 22 | 269 |
-| 9 | 89 | 23 | 298 |
-| 10 | 98 | 24 | 327 |
-| 11 | 106 | 25 | 353 |
-| 12 | 114 | 26 | 382 |
+| 1/8 | 6 | 6 | 21 |
+| 1/4 | 8 | 6 | 28 |
+| 1/2 | 12 | 8 | 40 |
+| 1 | 18 | 10 | 63 |
+| 2 | 28 | 12 | 99 |
+| 3 | 37 | 14 | 131 |
+| 4 | 46 | 15 | 162 |
+| 5 | 55 | 16 | 193 |
+| 6 | 64 | 18 | 224 |
+| 7 | 72 | 19 | 251 |
+| 8 | 81 | 20 | 282 |
+| 9 | 89 | 21 | 313 |
+| 10 | 98 | 22 | 343 |
+| 11 | 106 | 22 | 370 |
+| 12 | 114 | 23 | 401 |
 
 A foe that never breaks: × 1.16 (round to the nearest whole number).
 
@@ -56,61 +56,61 @@ A foe that never breaks: × 1.16 (round to the nearest whole number).
 
 | Level | Skirmish | Clash | Battle | Desperate |
 |---|---|---|---|---|
-| 1 | 10 | 16 | 19 | 23 |
-| 2 | 12 | 19 | 23 | 27 |
-| 3 | 16 | 25 | 31 | 34 |
-| 4 | 19 | 30 | 34 | 41 |
-| 5 | 33 | 49 | 60 | 68 |
-| 6 | 34 | 52 | 63 | 71 |
-| 7 | 40 | 63 | 76 | 84 |
-| 8 | 46 | 69 | 82 | 94 |
-| 9 | 62 | 91 | 105 | 116 |
-| 10 | 66 | 95 | 110 | 120 |
+| 1 | 9 | 16 | 18 | 23 |
+| 2 | 13 | 19 | 23 | 27 |
+| 3 | 16 | 25 | 30 | 34 |
+| 4 | 18 | 29 | 34 | 40 |
+| 5 | 33 | 50 | 60 | 66 |
+| 6 | 34 | 51 | 62 | 70 |
+| 7 | 39 | 63 | 74 | 82 |
+| 8 | 46 | 68 | 82 | 94 |
+| 9 | 61 | 89 | 105 | 116 |
+| 10 | 63 | 92 | 109 | 118 |
 
 **Outcomes at the fitted budgets** (reference party; mean ± 95% CI; misses a yaml target → named):
 
 | Level | Tier | Rounds | HP lost | Wins | PC drops | PC dies | Misses |
 |---|---|---|---|---|---|---|---|
-| 1 | skirmish | 1.91 ± 0.03 | 10% ± 0 | 100.0% | 0% | 0.0% | — |
-| 1 | clash | 3.22 ± 0.05 | 26% ± 1 | 99.4% | 19% | 1.4% | — |
-| 1 | battle | 4.18 ± 0.06 | 44% ± 1 | 93.9% | 37% | 4.5% | — |
-| 1 | desperate | 4.94 ± 0.07 | 62% ± 1 | 76.6% | 64% | 11.9% | — |
-| 2 | skirmish | 1.96 ± 0.03 | 9% ± 0 | 100.0% | 0% | 0.0% | — |
-| 2 | clash | 3.35 ± 0.05 | 26% ± 1 | 99.7% | 8% | 0.6% | — |
-| 2 | battle | 4.39 ± 0.07 | 43% ± 1 | 94.6% | 31% | 5.5% | — |
-| 2 | desperate | 5.05 ± 0.08 | 62% ± 1 | 75.4% | 54% | 11.1% | rounds |
-| 3 | skirmish | 2.02 ± 0.02 | 10% ± 0 | 100.0% | 0% | 0.0% | — |
-| 3 | clash | 3.42 ± 0.06 | 28% ± 1 | 99.3% | 4% | 0.5% | — |
-| 3 | battle | 4.58 ± 0.08 | 46% ± 1 | 89.6% | 21% | 3.5% | — |
-| 3 | desperate | 4.95 ± 0.07 | 65% ± 1 | 67.4% | 46% | 5.6% | — |
-| 4 | skirmish | 2.15 ± 0.02 | 10% ± 0 | 100.0% | 0% | 0.0% | — |
-| 4 | clash | 3.46 ± 0.06 | 27% ± 1 | 99.7% | 2% | 0.3% | — |
-| 4 | battle | 4.62 ± 0.08 | 48% ± 1 | 88.0% | 23% | 3.4% | — |
-| 4 | desperate | 5.11 ± 0.08 | 62% ± 1 | 71.6% | 42% | 6.6% | rounds |
-| 5 | skirmish | 2.00 ± 0.02 | 10% ± 0 | 100.0% | 0% | 0.0% | — |
-| 5 | clash | 2.97 ± 0.03 | 27% ± 1 | 99.8% | 5% | 0.6% | rounds |
-| 5 | battle | 3.98 ± 0.05 | 47% ± 1 | 90.7% | 32% | 2.6% | — |
-| 5 | desperate | 4.11 ± 0.06 | 62% ± 1 | 72.1% | 52% | 3.7% | — |
-| 6 | skirmish | 2.00 ± 0.02 | 10% ± 0 | 100.0% | 0% | 0.0% | — |
-| 6 | clash | 3.13 ± 0.04 | 28% ± 1 | 99.9% | 6% | 0.1% | — |
-| 6 | battle | 4.06 ± 0.05 | 46% ± 1 | 90.5% | 27% | 1.9% | — |
-| 6 | desperate | 4.39 ± 0.06 | 62% ± 1 | 73.5% | 48% | 4.2% | — |
-| 7 | skirmish | 2.03 ± 0.02 | 10% ± 0 | 100.0% | 0% | 0.0% | — |
-| 7 | clash | 3.37 ± 0.03 | 28% ± 1 | 99.2% | 7% | 0.9% | — |
-| 7 | battle | 4.18 ± 0.05 | 45% ± 1 | 92.2% | 26% | 3.0% | — |
-| 7 | desperate | 4.50 ± 0.06 | 62% ± 1 | 73.2% | 49% | 4.0% | — |
-| 8 | skirmish | 2.13 ± 0.02 | 10% ± 0 | 100.0% | 0% | 0.0% | — |
-| 8 | clash | 3.27 ± 0.03 | 27% ± 1 | 99.7% | 7% | 0.6% | — |
-| 8 | battle | 4.07 ± 0.05 | 45% ± 1 | 91.3% | 26% | 3.3% | — |
-| 8 | desperate | 4.34 ± 0.05 | 62% ± 1 | 73.0% | 44% | 3.1% | — |
-| 9 | skirmish | 2.28 ± 0.02 | 9% ± 0 | 100.0% | 0% | 0.0% | — |
-| 9 | clash | 3.46 ± 0.04 | 27% ± 1 | 98.8% | 7% | 1.0% | — |
-| 9 | battle | 4.10 ± 0.05 | 46% ± 1 | 84.9% | 28% | 2.7% | — |
-| 9 | desperate | 4.17 ± 0.06 | 57% ± 1 | 72.2% | 41% | 1.9% | — |
-| 10 | skirmish | 2.43 ± 0.03 | 10% ± 0 | 100.0% | 0% | 0.0% | — |
-| 10 | clash | 3.58 ± 0.04 | 28% ± 1 | 98.6% | 8% | 1.0% | — |
-| 10 | battle | 4.21 ± 0.05 | 46% ± 1 | 85.3% | 25% | 1.9% | — |
-| 10 | desperate | 4.28 ± 0.06 | 58% ± 1 | 71.7% | 40% | 2.5% | — |
+| 1 | skirmish | 1.95 ± 0.02 | 10% ± 0 | 100.0% | 0% | 0.0% | — |
+| 1 | clash | 3.20 ± 0.05 | 27% ± 1 | 99.5% | 20% | 1.5% | — |
+| 1 | battle | 4.40 ± 0.07 | 46% ± 1 | 92.3% | 38% | 5.9% | — |
+| 1 | desperate | 4.87 ± 0.07 | 66% ± 1 | 70.4% | 70% | 12.2% | — |
+| 2 | skirmish | 2.12 ± 0.03 | 11% ± 0 | 100.0% | 1% | 0.0% | — |
+| 2 | clash | 3.48 ± 0.05 | 27% ± 1 | 99.6% | 7% | 0.8% | — |
+| 2 | battle | 4.30 ± 0.08 | 42% ± 1 | 94.7% | 28% | 5.4% | — |
+| 2 | desperate | 5.14 ± 0.08 | 63% ± 1 | 72.2% | 55% | 12.5% | rounds |
+| 3 | skirmish | 2.10 ± 0.02 | 11% ± 0 | 100.0% | 0% | 0.0% | — |
+| 3 | clash | 3.37 ± 0.06 | 28% ± 1 | 99.3% | 4% | 0.6% | — |
+| 3 | battle | 4.36 ± 0.07 | 43% ± 1 | 94.0% | 17% | 2.2% | — |
+| 3 | desperate | 5.03 ± 0.08 | 59% ± 1 | 77.8% | 37% | 5.7% | rounds |
+| 4 | skirmish | 2.22 ± 0.02 | 11% ± 0 | 100.0% | 0% | 0.0% | — |
+| 4 | clash | 3.51 ± 0.06 | 27% ± 1 | 99.7% | 2% | 0.3% | — |
+| 4 | battle | 4.77 ± 0.08 | 51% ± 1 | 86.3% | 26% | 3.7% | — |
+| 4 | desperate | 5.28 ± 0.08 | 66% ± 1 | 68.1% | 45% | 7.0% | rounds |
+| 5 | skirmish | 1.98 ± 0.02 | 10% ± 0 | 100.0% | 0% | 0.0% | — |
+| 5 | clash | 2.96 ± 0.04 | 27% ± 1 | 99.1% | 7% | 0.4% | rounds |
+| 5 | battle | 3.85 ± 0.05 | 46% ± 1 | 89.0% | 29% | 3.0% | — |
+| 5 | desperate | 4.01 ± 0.06 | 60% ± 1 | 74.1% | 47% | 2.9% | — |
+| 6 | skirmish | 2.00 ± 0.02 | 9% ± 0 | 100.0% | 0% | 0.0% | — |
+| 6 | clash | 3.06 ± 0.03 | 27% ± 1 | 100.0% | 3% | 0.0% | — |
+| 6 | battle | 3.97 ± 0.05 | 44% ± 1 | 93.1% | 22% | 1.6% | — |
+| 6 | desperate | 4.31 ± 0.06 | 63% ± 1 | 70.8% | 49% | 3.2% | — |
+| 7 | skirmish | 2.06 ± 0.02 | 10% ± 0 | 100.0% | 0% | 0.0% | — |
+| 7 | clash | 3.34 ± 0.04 | 29% ± 1 | 99.3% | 8% | 1.0% | — |
+| 7 | battle | 4.02 ± 0.05 | 44% ± 1 | 92.7% | 24% | 2.6% | — |
+| 7 | desperate | 4.29 ± 0.05 | 57% ± 1 | 78.6% | 40% | 3.7% | — |
+| 8 | skirmish | 2.11 ± 0.02 | 10% ± 0 | 100.0% | 0% | 0.0% | — |
+| 8 | clash | 3.31 ± 0.03 | 29% ± 1 | 99.4% | 8% | 0.9% | — |
+| 8 | battle | 3.98 ± 0.05 | 44% ± 1 | 91.2% | 25% | 3.9% | — |
+| 8 | desperate | 4.12 ± 0.06 | 63% ± 1 | 69.9% | 44% | 2.4% | — |
+| 9 | skirmish | 2.15 ± 0.02 | 10% ± 0 | 100.0% | 0% | 0.0% | — |
+| 9 | clash | 3.29 ± 0.04 | 27% ± 1 | 96.5% | 8% | 0.6% | wins |
+| 9 | battle | 3.91 ± 0.05 | 45% ± 1 | 85.4% | 25% | 2.0% | — |
+| 9 | desperate | 4.08 ± 0.06 | 56% ± 1 | 73.0% | 39% | 2.2% | — |
+| 10 | skirmish | 2.25 ± 0.02 | 10% ± 0 | 100.0% | 0% | 0.0% | — |
+| 10 | clash | 3.40 ± 0.04 | 28% ± 1 | 96.3% | 8% | 0.6% | wins |
+| 10 | battle | 4.00 ± 0.05 | 46% ± 1 | 85.0% | 25% | 1.4% | — |
+| 10 | desperate | 4.15 ± 0.06 | 57% ± 1 | 72.5% | 38% | 1.9% | — |
 
 ## 4. Composition classes (real SRD monsters)
 
@@ -118,43 +118,43 @@ Share of random real-monster encounters built to the budget that land in the int
 
 | Tier | solo_boss | boss_minions | boss_standards | standards | standards_minions | minion_swarm |
 |---|---|---|---|---|---|---|
-| skirmish | 70% (HP 15%) ⚠ | 97% (HP 12%) | 90% (HP 11%) | 70% (HP 20%) ⚠ | 70% (HP 16%) ⚠ | 77% (HP 14%) ⚠ |
-| clash | 18% (HP 47%) ⚠ | 85% (HP 26%) | 93% (HP 28%) | 47% (HP 45%) ⚠ | 32% (HP 40%) ⚠ | 48% (HP 33%) ⚠ |
-| battle | 15% (HP 71%) ⚠ | 62% (HP 41%) ⚠ | 65% (HP 48%) ⚠ | 35% (HP 61%) ⚠ | 18% (HP 56%) ⚠ | 28% (HP 45%) ⚠ |
-| desperate | 100% (HP 84%) | 48% (HP 53%) ⚠ | 65% (HP 65%) ⚠ | 85% (HP 78%) | 92% (HP 67%) | 92% (HP 55%) |
+| skirmish | 83% (HP 12%) | 98% (HP 11%) | 100% (HP 10%) | 92% (HP 11%) | 75% (HP 14%) ⚠ | 57% (HP 19%) ⚠ |
+| clash | 35% (HP 39%) ⚠ | 93% (HP 25%) | 72% (HP 28%) ⚠ | 62% (HP 32%) ⚠ | 42% (HP 40%) ⚠ | 40% (HP 37%) ⚠ |
+| battle | 57% (HP 54%) ⚠ | 28% (HP 36%) ⚠ | 42% (HP 36%) ⚠ | 33% (HP 62%) ⚠ | 7% (HP 59%) ⚠ | 13% (HP 46%) ⚠ |
+| desperate | 88% (HP 74%) | 32% (HP 48%) ⚠ | 28% (HP 50%) ⚠ | 72% (HP 70%) ⚠ | 92% (HP 59%) | 82% (HP 45%) |
 
 ## 5. Adjustments (Table 9–3)
 
 | Party | skirmish | clash | battle | desperate | Rule |
 |---|---|---|---|---|---|
-| Three players | -25% | -26% | -24% | -23% | remove foes worth 26% of the Threat |
-| Five players | +22% | +24% | +23% | +20% | add foes worth 24% of the Threat |
-| Six players | +39% | +43% | +41% | +39% | add foes worth 43% of the Threat |
-| Tired (50% HP, ½ resources) | +14% | -6% | -9% | -19% | remove 6% of the Threat, or drop one tier |
+| Three players | -25% | -26% | -25% | -24% | remove foes worth 26% of the Threat |
+| Five players | +22% | +23% | +23% | +19% | add foes worth 23% of the Threat |
+| Six players | +40% | +40% | +40% | +37% | add foes worth 40% of the Threat |
+| Tired (50% HP, ½ resources) | +15% | -6% | -9% | -19% | remove 6% of the Threat, or drop one tier |
 
 Percentages are the change in the whole encounter's Threat, averaged over levels 1–10.
 
-**Lone boss.** A boss with no other foes, priced at its boss Threat and built to the Clash budget, costs 44% party HP on average (Clash band 20–35%). The mark-up that makes it a Clash, by level: 1: ×1.13, 2: ×1.15, 3: ×1.11, 4: ×1.11, 5: ×1.20, 6: ×1.20, 7: ×1.24, 8: ×1.24, 9: ×1.35, 10: ×1.33 (median ×1.20).
+**Lone boss.** A boss with no other foes, priced at its boss Threat and built to the Clash budget, costs 39% party HP on average (Clash band 20–35%). The mark-up that makes it a Clash, by level: 1: ×1.07, 2: ×1.08, 3: ×1.08, 4: ×1.08, 5: ×1.19, 6: ×1.13, 7: ×1.20, 8: ×1.20, 9: ×1.27, 10: ×1.27 (median ×1.16).
 
 ## 6. Robustness: 20 random parties
 
-- **Clash budget at 4th level:** 95% of 20 random parties of four distinct presets land in the Clash band (≥ 80% wanted). Their HP lost ranges 24–35%.
-- **Battle budget at 4th level:** 90% of 20 random parties of four distinct presets land in the Battle band (≥ 80% wanted). Their HP lost ranges 42–60%.
+- **Clash budget at 4th level:** 95% of 20 random parties of four distinct presets land in the Clash band (≥ 80% wanted). Their HP lost ranges 24–36%.
+- **Battle budget at 4th level:** 60% of 20 random parties of four distinct presets land in the Battle band (≥ 80% wanted). Their HP lost ranges 44–62%.
 
 ## 7. The adventuring day
 
 | Level | Standard day (3 Clashes, 2 short rests) | a PC dies | Hard day (4 Clashes, 2 short rests) |
 |---|---|---|---|
-| 1 | 91% | 13% | 51% |
-| 2 | 98% | 4% | 52% |
-| 3 | 96% | 2% | 41% |
-| 4 | 99% | 1% | 71% |
-| 5 | 98% | 1% | 71% |
-| 6 | 99% | 1% | 78% |
-| 7 | 98% | 2% | 51% |
-| 8 | 97% | 3% | 68% |
-| 9 | 90% | 3% | 42% |
-| 10 | 91% | 4% | 49% |
+| 1 | 86% | 13% | 50% |
+| 2 | 94% | 6% | 48% |
+| 3 | 96% | 3% | 38% |
+| 4 | 98% | 2% | 67% |
+| 5 | 96% | 2% | 59% |
+| 6 | 99% | 1% | 77% |
+| 7 | 98% | 3% | 52% |
+| 8 | 98% | 1% | 61% |
+| 9 | 87% | 1% | 47% |
+| 10 | 86% | 3% | 54% |
 
 ## 8. Balance band (§8) — the swap test is primary
 
@@ -164,242 +164,242 @@ Percentages are the change in the whole encounter's Threat, averaged over levels
 
 | Build | Kind | Role | Swap vs median | HP lost / fight | Rounds | Days survived | DPR₁ | DPR₃ | PI vs median | Verdict |
 |---|---|---|---|---|---|---|---|---|---|---|
-| barbarian | preset | body martial | +9% | 25.1% | 3.30 | 94% | 10.7 | 10.7 | +49% | in band |
-| body_caster | sim_build | body caster | +9% | 25.1% | 3.71 | 95% | 5.9 | 7.2 | +63% | in band |
-| monk | preset | body martial | +9% | 25.3% | 3.33 | 91% | 8.8 | 8.8 | +25% | in band |
-| monk_stunner | sim_build | — | +9% | 25.3% | 3.33 | 91% | 8.8 | 8.8 | +32% | in band |
-| unbreakable | sim_build | body martial | +8% | 25.5% | 3.43 | 94% | 8.7 | 8.7 | +54% | in band |
-| oathsworn | preset | soul hybrid | +6% | 25.8% | 3.48 | 91% | 10.6 | 10.6 | +52% | in band |
-| soul_champion | sim_build | soul martial | +6% | 25.8% | 3.48 | 91% | 10.5 | 10.5 | +57% | in band |
-| battle_priest_deep | sim_build | soul hybrid | +6% | 25.8% | 3.48 | 91% | 10.5 | 10.5 | +47% | in band |
-| paladin_max | sim_build | soul hybrid | +6% | 25.8% | 3.48 | 91% | 10.6 | 10.6 | +42% | in band |
-| reckless_striker | sim_build | body martial | +6% | 25.8% | 3.43 | 93% | 8.7 | 8.7 | +34% | in band |
-| fighter | preset | body martial | +5% | 26.2% | 3.75 | 91% | 5.5 | 5.5 | +42% | in band |
-| body_battlemage | sim_build | body hybrid | +5% | 26.2% | 3.75 | 91% | 5.5 | 5.5 | +38% | in band |
-| oracle | preset | soul caster | +2% | 27.0% | 3.66 | 88% | 5.5 | 6.8 | -9% | in band |
-| body_ranger | sim_build | body hybrid | +1% | 27.3% | 3.63 | 90% | 7.0 | 7.0 | -3% | in band |
-| investigator | preset | mind martial | +0% | 27.4% | 3.50 | 88% | 8.3 | 8.3 | +1% | in band |
-| spellblade | sim_build | mind hybrid | -0% | 27.5% | 3.52 | 88% | 8.2 | 8.2 | +4% | in band |
-| priest | preset | soul caster | -0% | 27.6% | 3.66 | 89% | 6.0 | 7.3 | -1% | in band |
-| healer_engine | sim_build | soul caster | -0% | 27.6% | 3.66 | 89% | 5.9 | 7.2 | +4% | in band |
-| tinker | preset | mind hybrid | -1% | 27.6% | 3.68 | 90% | 5.7 | 7.2 | -12% | in band |
-| summoner | sim_build | soul caster | -1% | 27.8% | 3.90 | 87% | 4.6 | 4.6 | -8% | in band |
-| battle_priest | sim_build | soul hybrid | -3% | 28.4% | 3.64 | 89% | 6.0 | 7.3 | +2% | in band |
-| rogue | preset | body martial | -3% | 28.4% | 3.66 | 86% | 7.5 | 7.5 | +13% | in band |
-| loremaster | preset | mind caster | -5% | 28.9% | 3.75 | 82% | 5.5 | 6.9 | -36% | in band |
-| soul_blaster | sim_build | soul caster | -5% | 29.0% | 3.55 | 85% | 7.8 | 9.3 | -14% | in band |
-| wizard | preset | mind caster | -6% | 29.4% | 3.60 | 83% | 7.7 | 9.6 | -19% | in band |
-| armored_caster | sim_build | mind hybrid | -6% | 29.4% | 3.60 | 83% | 7.8 | 9.6 | -26% | in band |
-| double_cross | sim_build | mind caster | -6% | 29.4% | 3.60 | 83% | 7.8 | 9.7 | -23% | in band |
-| srd_fighter_champion | srd | — | -7% | 29.5% | 3.85 | 83% | 6.5 | 6.5 | -24% | SRD |
-| mind_controller | sim_build | mind caster | -8% | 29.7% | 3.65 | 84% | 6.5 | 8.0 | -38% | in band |
-| druid | preset | soul caster | -10% | 30.4% | 3.75 | 84% | 5.6 | 6.7 | -31% | in band |
-| srd_barbarian_berserker | srd | — | -11% | 30.8% | 3.74 | 79% | 7.9 | 7.9 | -34% | SRD |
-| srd_paladin_devotion | srd | — | -15% | 32.3% | 4.15 | 79% | 5.1 | 5.1 | -59% | SRD |
-| srd_rogue_thief | srd | — | -22% | 35.3% | 3.96 | 67% | 7.5 | 7.5 | -72% | SRD |
-| srd_cleric_life | srd | — | -24% | 36.0% | 4.44 | 69% | 3.9 | 3.9 | -82% | SRD |
-| srd_wizard_evoker | srd | — | -28% | 38.1% | 4.24 | 59% | 5.5 | 6.8 | -82% | SRD |
+| monk | preset | body martial | +9% | 26.1% | 3.34 | 90% | 8.8 | 8.8 | +26% | in band |
+| monk_stunner | sim_build | — | +9% | 26.1% | 3.34 | 90% | 8.8 | 8.8 | +23% | in band |
+| barbarian | preset | body martial | +8% | 26.2% | 3.29 | 90% | 10.7 | 10.7 | +53% | in band |
+| body_caster | sim_build | body caster | +8% | 26.2% | 3.75 | 90% | 5.9 | 7.2 | +65% | in band |
+| unbreakable | sim_build | body martial | +8% | 26.4% | 3.42 | 90% | 8.7 | 8.7 | +51% | in band |
+| reckless_striker | sim_build | body martial | +6% | 26.7% | 3.41 | 89% | 8.7 | 8.7 | +37% | in band |
+| oathsworn | preset | soul hybrid | +6% | 26.8% | 3.43 | 89% | 10.6 | 10.6 | +38% | in band |
+| soul_champion | sim_build | soul martial | +6% | 26.8% | 3.43 | 89% | 10.5 | 10.5 | +39% | in band |
+| battle_priest_deep | sim_build | soul hybrid | +6% | 26.8% | 3.43 | 89% | 10.5 | 10.5 | +41% | in band |
+| paladin_max | sim_build | soul hybrid | +6% | 26.8% | 3.43 | 89% | 10.6 | 10.6 | +48% | in band |
+| fighter | preset | body martial | +5% | 27.1% | 3.79 | 89% | 5.5 | 5.5 | +50% | in band |
+| body_battlemage | sim_build | body hybrid | +5% | 27.1% | 3.79 | 89% | 5.5 | 5.5 | +37% | in band |
+| oracle | preset | soul caster | +4% | 27.3% | 3.60 | 84% | 5.5 | 6.8 | -7% | in band |
+| investigator | preset | mind martial | +1% | 28.1% | 3.47 | 84% | 8.3 | 8.3 | +5% | in band |
+| spellblade | sim_build | mind hybrid | +1% | 28.1% | 3.47 | 84% | 8.2 | 8.2 | -1% | in band |
+| summoner | sim_build | soul caster | +1% | 28.2% | 3.87 | 86% | 4.6 | 4.6 | -10% | in band |
+| body_ranger | sim_build | body hybrid | +1% | 28.3% | 3.57 | 85% | 7.0 | 7.0 | -3% | in band |
+| battle_priest | sim_build | soul hybrid | -1% | 28.7% | 3.62 | 85% | 6.0 | 7.3 | +5% | in band |
+| priest | preset | soul caster | -1% | 28.7% | 3.68 | 87% | 6.0 | 7.3 | +0% | in band |
+| healer_engine | sim_build | soul caster | -1% | 28.7% | 3.68 | 87% | 5.9 | 7.2 | +5% | in band |
+| tinker | preset | mind hybrid | -2% | 29.1% | 3.79 | 83% | 4.8 | 4.8 | -8% | in band |
+| rogue | preset | body martial | -4% | 29.5% | 3.64 | 82% | 7.5 | 7.5 | -0% | in band |
+| srd_fighter_champion | srd | — | -4% | 29.7% | 3.79 | 80% | 6.5 | 6.5 | -27% | SRD |
+| soul_blaster | sim_build | soul caster | -6% | 30.1% | 3.55 | 80% | 7.8 | 9.3 | -14% | in band |
+| loremaster | preset | mind caster | -6% | 30.3% | 3.75 | 78% | 5.5 | 6.9 | -37% | in band |
+| wizard | preset | mind caster | -7% | 30.4% | 3.60 | 79% | 7.7 | 9.6 | -18% | in band |
+| armored_caster | sim_build | mind hybrid | -7% | 30.4% | 3.60 | 79% | 7.8 | 9.6 | -20% | in band |
+| double_cross | sim_build | mind caster | -7% | 30.4% | 3.60 | 79% | 7.8 | 9.7 | -22% | in band |
+| druid | preset | soul caster | -9% | 31.1% | 3.64 | 78% | 5.6 | 6.7 | -30% | in band |
+| srd_barbarian_berserker | srd | — | -9% | 31.3% | 3.71 | 77% | 7.9 | 7.9 | -29% | SRD |
+| mind_controller | sim_build | mind caster | -10% | 31.7% | 3.67 | 75% | 6.5 | 8.0 | -37% | in band |
+| srd_paladin_devotion | srd | — | -12% | 32.5% | 4.09 | 76% | 5.1 | 5.1 | -57% | SRD |
+| srd_rogue_thief | srd | — | -21% | 36.0% | 3.93 | 63% | 7.5 | 7.5 | -73% | SRD |
+| srd_cleric_life | srd | — | -22% | 36.4% | 4.31 | 64% | 3.9 | 3.9 | -81% | SRD |
+| srd_wizard_evoker | srd | — | -26% | 38.3% | 4.10 | 53% | 5.5 | 6.8 | -81% | SRD |
 
-Facet means (swap) vs the preset median: body +5%, mind -3%, soul -0%. SRD baselines' median vs the preset median: swap -19%, PI -65%.
+Facet means (swap) vs the preset median: body +5%, mind -4%, soul +0%. SRD baselines' median vs the preset median: swap -17%, PI -65%.
 
 Hybrids (item 7, from 4th level): swap score minus the Facet's best pure build's (≤ +3 points, sampling noise); if Steel is main, DPR₁ vs the Facet's best pure martial (+5%); DPR₃ vs the best pure caster of its tradition (+5%).
 
 | Hybrid | Swap vs best pure | DPR₁ vs pure martial | DPR₃ vs tradition's caster | Verdict |
 |---|---|---|---|---|
-| body_ranger (steel main) | -9 pts (barbarian) | -35% | — (—) | ok |
-| body_battlemage (steel main) | -5 pts (barbarian) | -49% | — (—) | ok |
-| tinker (spell main) | -1 pts (investigator) | — | -25% (thaumaturgy) | ok |
+| body_ranger (steel main) | -8 pts (monk) | -35% | — (—) | ok |
+| body_battlemage (steel main) | -4 pts (monk) | -49% | — (—) | ok |
+| tinker (steel main) | -4 pts (investigator) | -42% | — (—) | ok |
 | spellblade (steel main) | -0 pts (investigator) | -1% | — (—) | ok |
-| armored_caster (spell main) | -7 pts (investigator) | — | -0% (thaumaturgy) | ok |
+| armored_caster (spell main) | -8 pts (investigator) | — | -0% (thaumaturgy) | ok |
 | oathsworn (steel main) | +0 pts (soul_champion) | +1% | — (—) | ok |
-| battle_priest (spell main) | -10 pts (soul_champion) | — | -22% (invocation) | ok |
+| battle_priest (spell main) | -7 pts (soul_champion) | — | -22% (invocation) | ok |
 | battle_priest_deep (steel main) | +0 pts (soul_champion) | +0% | — (—) | ok |
 | paladin_max (steel main) | +0 pts (soul_champion) | +1% | — (—) | ok |
 
-PI (secondary) vs the swap test, rank agreement: Spearman 0.93. Presets inside ±15% on PI: 5/12.
+PI (secondary) vs the swap test, rank agreement: Spearman 0.92. Presets inside ±15% on PI: 5/12.
 
 ### Level 4
 
 | Build | Kind | Role | Swap vs median | HP lost / fight | Rounds | Days survived | DPR₁ | DPR₃ | PI vs median | Verdict |
 |---|---|---|---|---|---|---|---|---|---|---|
-| monk | preset | body martial | +12% | 24.2% | 3.31 | 99% | 11.6 | 11.6 | +7% | in band |
-| monk_stunner | sim_build | — | +12% | 24.2% | 3.31 | 99% | 11.8 | 11.8 | +7% | in band |
-| healer_engine | sim_build | soul caster | +11% | 24.4% | 3.67 | 98% | 8.6 | 15.1 | +12% | in band |
-| barbarian | preset | body martial | +10% | 24.5% | 3.38 | 100% | 13.9 | 13.9 | +29% | in band |
-| oracle | preset | soul caster | +9% | 24.9% | 3.34 | 99% | 12.3 | 15.1 | +1% | in band |
-| priest | preset | soul caster | +7% | 25.2% | 3.37 | 98% | 13.1 | 15.9 | +8% | in band |
-| reckless_striker | sim_build | body martial | +7% | 25.3% | 3.33 | 100% | 14.9 | 14.9 | +26% | in band |
-| unbreakable | sim_build | body martial | +6% | 25.4% | 3.52 | 100% | 11.6 | 11.6 | +19% | in band |
-| battle_priest | sim_build | soul hybrid | +5% | 25.7% | 3.40 | 98% | 13.1 | 15.8 | +13% | in band |
-| body_ranger | sim_build | body hybrid | +5% | 25.8% | 3.49 | 99% | 12.3 | 12.3 | +5% | in band |
-| body_battlemage | sim_build | body hybrid | +3% | 26.2% | 3.76 | 98% | 8.4 | 9.5 | +15% | in band |
-| soul_blaster | sim_build | soul caster | +2% | 26.6% | 3.25 | 98% | 10.6 | 15.4 | +7% | in band |
-| fighter | preset | body martial | +1% | 26.7% | 3.83 | 99% | 7.3 | 7.3 | -9% | in band |
-| oathsworn | preset | soul hybrid | +1% | 26.8% | 3.67 | 98% | 10.9 | 12.9 | +20% | in band |
-| paladin_max | sim_build | soul hybrid | +1% | 26.8% | 3.67 | 98% | 10.9 | 12.8 | +19% | in band |
-| double_cross | sim_build | mind caster | +1% | 26.8% | 3.56 | 98% | 11.3 | 15.6 | +7% | in band |
-| srd_barbarian_berserker | srd | — | -1% | 27.2% | 3.37 | 99% | 17.5 | 17.5 | +18% | SRD |
-| tinker | preset | mind hybrid | -1% | 27.3% | 3.95 | 98% | 6.2 | 7.7 | -1% | in band |
-| wizard | preset | mind caster | -1% | 27.4% | 3.47 | 97% | 11.4 | 15.8 | +9% | in band |
-| armored_caster | sim_build | mind hybrid | -1% | 27.4% | 3.47 | 97% | 11.4 | 15.7 | +6% | in band |
-| soul_champion | sim_build | soul martial | -1% | 27.4% | 3.79 | 98% | 11.4 | 11.4 | +2% | in band |
-| battle_priest_deep | sim_build | soul hybrid | -1% | 27.4% | 3.79 | 98% | 11.4 | 11.4 | -5% | in band |
-| spellblade | sim_build | mind hybrid | -2% | 27.5% | 3.74 | 98% | 9.0 | 9.8 | +2% | in band |
-| srd_cleric_life | srd | — | -4% | 28.2% | 3.86 | 97% | 12.8 | 12.8 | -17% | SRD |
-| mind_controller | sim_build | mind caster | -4% | 28.3% | 3.56 | 97% | 9.4 | 12.9 | -21% | in band |
-| rogue | preset | body martial | -5% | 28.6% | 3.77 | 98% | 9.1 | 9.1 | -20% | in band |
-| srd_fighter_champion | srd | — | -6% | 28.9% | 3.89 | 97% | 8.4 | 8.4 | -25% | SRD |
-| investigator | preset | mind martial | -6% | 28.9% | 3.73 | 97% | 10.3 | 10.3 | -22% | in band |
-| druid | preset | soul caster | -7% | 29.2% | 3.58 | 98% | 7.9 | 14.3 | -14% | in band |
-| body_caster | sim_build | body caster | -8% | 29.2% | 4.08 | 97% | 6.5 | 7.8 | -25% | in band |
-| summoner | sim_build | soul caster | -8% | 29.5% | 3.88 | 96% | 7.9 | 10.7 | -22% | in band |
-| loremaster | preset | mind caster | -11% | 30.3% | 3.69 | 94% | 8.6 | 11.9 | -29% | in band |
-| srd_rogue_thief | srd | — | -18% | 33.1% | 3.93 | 92% | 9.7 | 9.7 | -46% | SRD |
-| srd_paladin_devotion | srd | — | -19% | 33.3% | 4.26 | 95% | 7.6 | 7.6 | -36% | SRD |
-| srd_wizard_evoker | srd | — | -20% | 33.6% | 4.01 | 91% | 8.0 | 11.2 | -52% | SRD |
+| monk | preset | body martial | +15% | 24.7% | 3.30 | 99% | 11.6 | 11.6 | +11% | in band |
+| monk_stunner | sim_build | — | +15% | 24.7% | 3.30 | 99% | 11.8 | 11.8 | +12% | in band |
+| healer_engine | sim_build | soul caster | +14% | 24.9% | 3.70 | 98% | 8.6 | 15.1 | +15% | in band |
+| oracle | preset | soul caster | +11% | 25.6% | 3.35 | 97% | 12.3 | 15.1 | -1% | in band |
+| unbreakable | sim_build | body martial | +11% | 25.6% | 3.50 | 99% | 11.6 | 11.6 | +22% | in band |
+| barbarian | preset | body martial | +10% | 25.8% | 3.40 | 99% | 13.9 | 13.9 | +23% | in band |
+| reckless_striker | sim_build | body martial | +10% | 25.8% | 3.34 | 99% | 14.9 | 14.9 | +25% | in band |
+| priest | preset | soul caster | +8% | 26.2% | 3.44 | 98% | 13.1 | 15.9 | +9% | in band |
+| battle_priest | sim_build | soul hybrid | +8% | 26.2% | 3.41 | 99% | 13.1 | 15.8 | +7% | in band |
+| body_battlemage | sim_build | body hybrid | +6% | 26.8% | 3.79 | 98% | 8.4 | 9.5 | +14% | in band |
+| body_ranger | sim_build | body hybrid | +6% | 26.8% | 3.54 | 98% | 12.3 | 12.3 | +4% | in band |
+| fighter | preset | body martial | +4% | 27.2% | 3.87 | 99% | 7.3 | 7.3 | -5% | in band |
+| oathsworn | preset | soul hybrid | +2% | 27.9% | 3.71 | 98% | 10.9 | 12.9 | +29% | in band |
+| paladin_max | sim_build | soul hybrid | +2% | 27.9% | 3.71 | 98% | 10.9 | 12.8 | +19% | in band |
+| spellblade | sim_build | mind hybrid | +1% | 28.0% | 3.73 | 98% | 9.0 | 9.8 | +1% | in band |
+| soul_blaster | sim_build | soul caster | +1% | 28.0% | 3.29 | 96% | 10.6 | 15.4 | +11% | in band |
+| double_cross | sim_build | mind caster | +1% | 28.2% | 3.61 | 96% | 11.3 | 15.6 | +4% | in band |
+| soul_champion | sim_build | soul martial | -1% | 28.8% | 3.86 | 97% | 11.4 | 11.4 | -7% | in band |
+| battle_priest_deep | sim_build | soul hybrid | -1% | 28.8% | 3.86 | 97% | 11.4 | 11.4 | -7% | in band |
+| srd_cleric_life | srd | — | -2% | 28.8% | 3.87 | 97% | 12.8 | 12.8 | -15% | SRD |
+| srd_fighter_champion | srd | — | -2% | 28.9% | 3.85 | 98% | 8.4 | 8.4 | -20% | SRD |
+| tinker | preset | mind hybrid | -2% | 28.9% | 4.02 | 98% | 6.2 | 7.7 | +1% | in band |
+| srd_barbarian_berserker | srd | — | -3% | 29.2% | 3.44 | 97% | 17.5 | 17.5 | +19% | SRD |
+| druid | preset | soul caster | -3% | 29.2% | 3.54 | 96% | 7.9 | 14.3 | -16% | in band |
+| wizard | preset | mind caster | -3% | 29.3% | 3.56 | 95% | 11.4 | 15.8 | +3% | in band |
+| armored_caster | sim_build | mind hybrid | -3% | 29.3% | 3.56 | 95% | 11.4 | 15.7 | -1% | in band |
+| rogue | preset | body martial | -5% | 29.9% | 3.78 | 96% | 9.1 | 9.1 | -14% | in band |
+| body_caster | sim_build | body caster | -6% | 30.1% | 4.14 | 95% | 6.5 | 7.8 | -27% | in band |
+| mind_controller | sim_build | mind caster | -7% | 30.4% | 3.66 | 93% | 9.4 | 12.9 | -18% | in band |
+| summoner | sim_build | soul caster | -7% | 30.6% | 3.92 | 96% | 7.9 | 10.7 | -19% | in band |
+| investigator | preset | mind martial | -8% | 30.8% | 3.82 | 94% | 10.3 | 10.3 | -25% | in band |
+| loremaster | preset | mind caster | -10% | 31.5% | 3.74 | 93% | 8.6 | 11.9 | -27% | in band |
+| srd_wizard_evoker | srd | — | -17% | 34.0% | 3.96 | 88% | 8.0 | 11.2 | -55% | SRD |
+| srd_rogue_thief | srd | — | -18% | 34.4% | 3.97 | 90% | 9.7 | 9.7 | -46% | SRD |
+| srd_paladin_devotion | srd | — | -19% | 34.9% | 4.35 | 93% | 7.6 | 7.6 | -36% | SRD |
 
-Facet means (swap) vs the preset median: body +4%, mind -5%, soul +2%. SRD baselines' median vs the preset median: swap -13%, PI -30%.
+Facet means (swap) vs the preset median: body +6%, mind -6%, soul +5%. SRD baselines' median vs the preset median: swap -10%, PI -28%.
 
 Hybrids (item 7, from 4th level): swap score minus the Facet's best pure build's (≤ +3 points, sampling noise); if Steel is main, DPR₁ vs the Facet's best pure martial (+5%); DPR₃ vs the best pure caster of its tradition (+5%).
 
 | Hybrid | Swap vs best pure | DPR₁ vs pure martial | DPR₃ vs tradition's caster | Verdict |
 |---|---|---|---|---|
-| body_ranger (steel main) | -7 pts (monk) | -17% | — (—) | ok |
+| body_ranger (steel main) | -9 pts (monk) | -17% | — (—) | ok |
 | body_battlemage (steel main) | -9 pts (monk) | -44% | -40% (invocation) | ok |
 | tinker (steel main) | -2 pts (double_cross) | -40% | -51% (thaumaturgy) | ok |
-| spellblade (steel main) | -2 pts (double_cross) | -12% | -38% (thaumaturgy) | ok |
-| armored_caster (spell main) | -2 pts (double_cross) | — | -1% (thaumaturgy) | ok |
-| oathsworn (steel main) | -10 pts (healer_engine) | -4% | -19% (invocation) | ok |
-| battle_priest (spell main) | -5 pts (healer_engine) | — | -1% (invocation) | ok |
-| battle_priest_deep (steel main) | -12 pts (healer_engine) | +0% | — (—) | ok |
-| paladin_max (steel main) | -10 pts (healer_engine) | -4% | -20% (invocation) | ok |
+| spellblade (steel main) | +1 pts (double_cross) | -12% | -38% (thaumaturgy) | ok |
+| armored_caster (spell main) | -4 pts (double_cross) | — | -1% (thaumaturgy) | ok |
+| oathsworn (steel main) | -12 pts (healer_engine) | -4% | -19% (invocation) | ok |
+| battle_priest (spell main) | -6 pts (healer_engine) | — | -1% (invocation) | ok |
+| battle_priest_deep (steel main) | -15 pts (healer_engine) | +0% | — (—) | ok |
+| paladin_max (steel main) | -12 pts (healer_engine) | -4% | -20% (invocation) | ok |
 
-PI (secondary) vs the swap test, rank agreement: Spearman 0.81. Presets inside ±15% on PI: 7/12.
+PI (secondary) vs the swap test, rank agreement: Spearman 0.79. Presets inside ±15% on PI: 7/12.
 
 ### Level 7
 
 | Build | Kind | Role | Swap vs median | HP lost / fight | Rounds | Days survived | DPR₁ | DPR₃ | PI vs median | Verdict |
 |---|---|---|---|---|---|---|---|---|---|---|
-| unbreakable | sim_build | body martial | +12% | 28.3% | 3.17 | 98% | 28.5 | 35.5 | +35% | in band |
-| barbarian | preset | body martial | +10% | 28.6% | 3.07 | 98% | 33.5 | 40.4 | +27% | in band |
-| rogue | preset | body martial | +8% | 29.1% | 3.27 | 97% | 30.0 | 30.0 | +60% | in band |
-| druid | preset | soul caster | +7% | 29.5% | 3.70 | 97% | 17.2 | 45.2 | -2% | in band |
-| reckless_striker | sim_build | body martial | +6% | 29.7% | 3.11 | 97% | 39.2 | 39.2 | +51% | in band |
-| priest | preset | soul caster | +6% | 29.9% | 3.51 | 96% | 25.7 | 42.6 | +1% | in band |
-| healer_engine | sim_build | soul caster | +6% | 29.9% | 3.51 | 96% | 25.6 | 42.7 | +0% | in band |
-| monk | preset | body martial | +6% | 30.0% | 3.51 | 96% | 22.3 | 22.3 | +21% | in band |
-| monk_stunner | sim_build | — | +6% | 30.0% | 3.51 | 96% | 22.4 | 22.4 | +21% | in band |
-| body_battlemage | sim_build | body hybrid | +4% | 30.3% | 3.52 | 98% | 19.8 | 26.0 | +4% | in band |
-| body_caster | sim_build | body caster | +4% | 30.3% | 3.66 | 97% | 15.9 | 18.6 | -25% | in band |
-| battle_priest | sim_build | soul hybrid | +4% | 30.4% | 3.56 | 96% | 24.1 | 24.1 | +9% | in band |
-| fighter | preset | body martial | +2% | 30.9% | 3.43 | 98% | 19.5 | 26.1 | +30% | in band |
-| body_ranger | sim_build | body hybrid | +2% | 30.9% | 3.24 | 95% | 32.4 | 32.4 | +32% | in band |
-| srd_barbarian_berserker | srd | — | +2% | 31.1% | 3.25 | 94% | 30.8 | 30.8 | +6% | SRD |
-| battle_priest_deep | sim_build | soul hybrid | -1% | 31.8% | 3.66 | 95% | 25.5 | 25.5 | -0% | in band |
-| mind_controller | sim_build | mind caster | -1% | 31.9% | 3.54 | 93% | 16.6 | 45.2 | -15% | in band |
-| wizard | preset | mind caster | -2% | 32.3% | 3.47 | 92% | 18.3 | 53.1 | +27% | in band |
-| armored_caster | sim_build | mind hybrid | -2% | 32.3% | 3.47 | 92% | 18.1 | 53.3 | +19% | in band |
-| summoner | sim_build | soul caster | -2% | 32.3% | 3.85 | 94% | 13.0 | 30.5 | -28% | in band |
-| paladin_max | sim_build | soul hybrid | -3% | 32.5% | 3.50 | 93% | 25.5 | 25.5 | +3% | in band |
-| soul_champion | sim_build | soul martial | -4% | 32.8% | 3.47 | 94% | 24.7 | 24.7 | -11% | in band |
-| oathsworn | preset | soul hybrid | -4% | 33.0% | 3.49 | 93% | 25.3 | 25.3 | -1% | in band |
-| srd_cleric_life | srd | — | -4% | 33.0% | 3.84 | 94% | 23.6 | 23.6 | -28% | SRD |
-| double_cross | sim_build | mind caster | -4% | 33.0% | 3.42 | 93% | 18.1 | 53.3 | +13% | in band |
-| soul_blaster | sim_build | soul caster | -4% | 33.1% | 3.36 | 91% | 18.6 | 53.4 | +10% | in band |
-| spellblade | sim_build | mind hybrid | -6% | 33.5% | 3.48 | 91% | 24.3 | 23.9 | -17% | in band |
-| tinker | preset | mind hybrid | -6% | 33.6% | 3.92 | 90% | 9.7 | 15.2 | -15% | in band |
-| srd_fighter_champion | srd | — | -7% | 34.0% | 3.57 | 92% | 21.2 | 21.2 | -18% | SRD |
-| investigator | preset | mind martial | -7% | 34.0% | 3.40 | 92% | 26.5 | 26.5 | -1% | in band |
-| loremaster | preset | mind caster | -9% | 34.6% | 3.56 | 90% | 15.3 | 45.4 | -21% | in band |
-| oracle | preset | soul caster | -9% | 34.7% | 3.43 | 88% | 24.3 | 42.6 | -15% | in band |
-| srd_wizard_evoker | srd | — | -15% | 37.0% | 3.71 | 86% | 15.9 | 45.2 | -30% | SRD |
-| srd_paladin_devotion | srd | — | -17% | 38.1% | 4.13 | 85% | 16.1 | 16.1 | -48% | SRD |
-| srd_rogue_thief | srd | — | -21% | 40.1% | 3.89 | 80% | 15.5 | 15.5 | -51% | SRD |
+| unbreakable | sim_build | body martial | +10% | 29.2% | 3.13 | 97% | 28.5 | 35.5 | +31% | in band |
+| barbarian | preset | body martial | +9% | 29.4% | 3.05 | 95% | 33.5 | 40.4 | +24% | in band |
+| rogue | preset | body martial | +7% | 30.0% | 3.22 | 95% | 30.0 | 30.0 | +54% | in band |
+| druid | preset | soul caster | +6% | 30.1% | 3.71 | 95% | 17.2 | 45.2 | -3% | in band |
+| reckless_striker | sim_build | body martial | +5% | 30.6% | 3.07 | 95% | 39.2 | 39.2 | +46% | in band |
+| battle_priest | sim_build | soul hybrid | +4% | 30.9% | 3.47 | 93% | 29.4 | 42.8 | +6% | in band |
+| healer_engine | sim_build | soul caster | +4% | 30.9% | 3.53 | 93% | 25.6 | 42.7 | +1% | in band |
+| fighter | preset | body martial | +3% | 31.0% | 3.36 | 97% | 19.5 | 26.1 | +25% | in band |
+| monk | preset | body martial | +3% | 31.0% | 3.50 | 94% | 22.3 | 22.3 | +23% | in band |
+| monk_stunner | sim_build | — | +3% | 31.0% | 3.50 | 94% | 22.4 | 22.4 | +21% | in band |
+| priest | preset | soul caster | +3% | 31.0% | 3.54 | 93% | 25.7 | 42.6 | -1% | in band |
+| body_ranger | sim_build | body hybrid | +2% | 31.4% | 3.18 | 93% | 32.4 | 32.4 | +25% | in band |
+| body_battlemage | sim_build | body hybrid | +2% | 31.5% | 3.53 | 95% | 19.8 | 26.0 | +6% | in band |
+| battle_priest_deep | sim_build | soul hybrid | +1% | 31.8% | 3.63 | 94% | 25.5 | 25.5 | -3% | in band |
+| body_caster | sim_build | body caster | -0% | 32.1% | 3.73 | 95% | 15.9 | 18.6 | -28% | in band |
+| wizard | preset | mind caster | -3% | 33.0% | 3.44 | 88% | 18.3 | 53.1 | +25% | in band |
+| armored_caster | sim_build | mind hybrid | -3% | 33.0% | 3.44 | 88% | 18.1 | 53.3 | +18% | in band |
+| mind_controller | sim_build | mind caster | -3% | 33.0% | 3.51 | 88% | 16.6 | 45.2 | -15% | in band |
+| srd_barbarian_berserker | srd | — | -3% | 33.0% | 3.28 | 90% | 30.8 | 30.8 | -0% | SRD |
+| paladin_max | sim_build | soul hybrid | -5% | 33.5% | 3.51 | 90% | 25.5 | 25.5 | -1% | in band |
+| soul_champion | sim_build | soul martial | -5% | 33.6% | 3.46 | 92% | 24.7 | 24.7 | -16% | in band |
+| soul_blaster | sim_build | soul caster | -5% | 33.8% | 3.30 | 87% | 18.6 | 53.4 | +9% | in band |
+| summoner | sim_build | soul caster | -6% | 33.9% | 3.89 | 92% | 13.0 | 30.5 | -29% | in band |
+| oathsworn | preset | soul hybrid | -6% | 34.0% | 3.50 | 91% | 25.3 | 25.3 | +1% | in band |
+| tinker | preset | mind hybrid | -6% | 34.2% | 3.94 | 89% | 9.7 | 15.2 | -18% | in band |
+| double_cross | sim_build | mind caster | -7% | 34.3% | 3.43 | 89% | 18.1 | 53.3 | +17% | in band |
+| srd_cleric_life | srd | — | -7% | 34.6% | 3.85 | 90% | 23.6 | 23.6 | -33% | SRD |
+| investigator | preset | mind martial | -8% | 34.6% | 3.37 | 88% | 26.5 | 26.5 | -1% | in band |
+| srd_fighter_champion | srd | — | -9% | 35.0% | 3.52 | 89% | 21.2 | 21.2 | -19% | SRD |
+| spellblade | sim_build | mind hybrid | -9% | 35.1% | 3.52 | 87% | 24.3 | 23.9 | -15% | in band |
+| oracle | preset | soul caster | -9% | 35.1% | 3.44 | 85% | 24.3 | 42.6 | -19% | in band |
+| loremaster | preset | mind caster | -10% | 35.5% | 3.53 | 86% | 15.3 | 45.4 | -27% | in band |
+| srd_wizard_evoker | srd | — | -16% | 37.9% | 3.62 | 81% | 15.9 | 45.2 | -31% | SRD |
+| srd_paladin_devotion | srd | — | -18% | 39.1% | 4.15 | 82% | 16.1 | 16.1 | -51% | SRD |
+| srd_rogue_thief | srd | — | -23% | 41.8% | 3.88 | 74% | 15.5 | 15.5 | -52% | SRD |
 
-Facet means (swap) vs the preset median: body +7%, mind -6%, soul -0%. SRD baselines' median vs the preset median: swap -11%, PI -29%.
+Facet means (swap) vs the preset median: body +6%, mind -7%, soul -1%. SRD baselines' median vs the preset median: swap -12%, PI -32%.
 
 Hybrids (item 7, from 4th level): swap score minus the Facet's best pure build's (≤ +3 points, sampling noise); if Steel is main, DPR₁ vs the Facet's best pure martial (+5%); DPR₃ vs the best pure caster of its tradition (+5%).
 
 | Hybrid | Swap vs best pure | DPR₁ vs pure martial | DPR₃ vs tradition's caster | Verdict |
 |---|---|---|---|---|
-| body_ranger (steel main) | -10 pts (unbreakable) | -17% | -39% (invocation) | ok |
-| body_battlemage (steel main) | -7 pts (unbreakable) | -49% | -51% (invocation) | ok |
-| tinker (steel main) | -5 pts (mind_controller) | -63% | -72% (thaumaturgy) | ok |
-| spellblade (steel main) | -5 pts (mind_controller) | -8% | -55% (thaumaturgy) | ok |
-| armored_caster (spell main) | -1 pts (mind_controller) | — | +0% (thaumaturgy) | ok |
-| oathsworn (steel main) | -11 pts (druid) | +2% | -53% (invocation) | ok |
-| battle_priest (steel main) | -3 pts (druid) | -2% | -55% (invocation) | ok |
-| battle_priest_deep (steel main) | -8 pts (druid) | +3% | -52% (invocation) | ok |
-| paladin_max (steel main) | -10 pts (druid) | +3% | -52% (invocation) | ok |
+| body_ranger (steel main) | -8 pts (unbreakable) | -17% | -39% (invocation) | ok |
+| body_battlemage (steel main) | -8 pts (unbreakable) | -49% | -51% (invocation) | ok |
+| tinker (steel main) | -3 pts (wizard) | -63% | -72% (thaumaturgy) | ok |
+| spellblade (steel main) | -6 pts (wizard) | -8% | -55% (thaumaturgy) | ok |
+| armored_caster (spell main) | +0 pts (wizard) | — | +0% (thaumaturgy) | ok |
+| oathsworn (steel main) | -12 pts (druid) | +2% | -53% (invocation) | ok |
+| battle_priest (spell main) | -3 pts (druid) | — | -20% (invocation) | ok |
+| battle_priest_deep (steel main) | -6 pts (druid) | +3% | -52% (invocation) | ok |
+| paladin_max (steel main) | -11 pts (druid) | +3% | -52% (invocation) | ok |
 
-PI (secondary) vs the swap test, rank agreement: Spearman 0.69. Presets inside ±15% on PI: 6/12.
+PI (secondary) vs the swap test, rank agreement: Spearman 0.75. Presets inside ±15% on PI: 4/12.
 
 ### Level 10
 
 | Build | Kind | Role | Swap vs median | HP lost / fight | Rounds | Days survived | DPR₁ | DPR₃ | PI vs median | Verdict |
 |---|---|---|---|---|---|---|---|---|---|---|
-| body_ranger | sim_build | body hybrid | +12% | 29.9% | 3.50 | 92% | 40.1 | 51.0 | +30% | in band |
-| unbreakable | sim_build | body martial | +12% | 29.9% | 3.58 | 90% | 36.1 | 45.1 | +13% | in band |
-| monk | preset | body martial | +11% | 30.1% | 3.89 | 90% | 27.4 | 27.4 | +7% | in band |
-| monk_stunner | sim_build | — | +11% | 30.1% | 3.89 | 90% | 27.5 | 27.5 | +8% | in band |
-| rogue | preset | body martial | +8% | 30.9% | 3.72 | 91% | 37.4 | 37.4 | +31% | in band |
-| druid | preset | soul caster | +6% | 31.5% | 4.12 | 88% | 24.0 | 66.6 | -18% | in band |
-| reckless_striker | sim_build | body martial | +6% | 31.5% | 3.49 | 86% | 48.9 | 48.9 | +29% | in band |
-| barbarian | preset | body martial | +6% | 31.7% | 3.52 | 88% | 39.1 | 48.1 | +2% | in band |
-| healer_engine | sim_build | soul caster | +5% | 31.9% | 3.75 | 88% | 36.8 | 65.1 | +5% | in band |
-| priest | preset | soul caster | +4% | 32.0% | 3.76 | 89% | 36.6 | 65.1 | +6% | in band |
-| wizard | preset | mind caster | +1% | 33.1% | 4.13 | 81% | 23.1 | 96.3 | +6% | in band |
-| armored_caster | sim_build | mind hybrid | +1% | 33.1% | 4.13 | 81% | 22.6 | 96.2 | +2% | in band |
-| battle_priest_deep | sim_build | soul hybrid | +0% | 33.3% | 3.86 | 85% | 35.5 | 61.7 | -5% | in band |
-| mind_controller | sim_build | mind caster | -1% | 33.6% | 4.15 | 82% | 20.6 | 66.7 | -26% | in band |
-| fighter | preset | body martial | -1% | 33.7% | 3.89 | 91% | 22.6 | 31.3 | -1% | in band |
-| double_cross | sim_build | mind caster | -2% | 34.1% | 4.07 | 84% | 23.0 | 95.9 | +1% | in band |
-| loremaster | preset | mind caster | -3% | 34.6% | 4.04 | 82% | 22.6 | 96.2 | -29% | in band |
-| soul_champion | sim_build | soul martial | -4% | 34.7% | 3.91 | 88% | 33.4 | 33.4 | -13% | in band |
-| investigator | preset | mind martial | -4% | 34.8% | 3.75 | 86% | 35.0 | 35.0 | +1% | in band |
-| soul_blaster | sim_build | soul caster | -5% | 35.0% | 3.67 | 79% | 30.8 | 96.1 | -2% | in band |
-| body_battlemage | sim_build | body hybrid | -5% | 35.1% | 4.06 | 88% | 25.5 | 31.8 | -24% | in band |
-| summoner | sim_build | soul caster | -5% | 35.3% | 4.24 | 85% | 20.8 | 48.1 | -28% | in band |
-| oracle | preset | soul caster | -7% | 35.8% | 3.61 | 78% | 34.1 | 65.5 | -22% | in band |
-| tinker | preset | mind hybrid | -7% | 35.9% | 4.41 | 80% | 11.5 | 30.6 | -30% | in band |
-| battle_priest | sim_build | soul hybrid | -7% | 36.1% | 4.14 | 83% | 30.2 | 30.2 | -22% | in band |
-| spellblade | sim_build | mind hybrid | -8% | 36.1% | 3.90 | 83% | 27.1 | 36.5 | -23% | in band |
-| srd_cleric_life | srd | — | -8% | 36.3% | 4.23 | 86% | 32.3 | 32.3 | -30% | SRD |
-| paladin_max | sim_build | soul hybrid | -10% | 37.0% | 4.08 | 84% | 31.7 | 31.7 | -15% | in band |
-| body_caster | sim_build | body caster | -10% | 37.0% | 4.41 | 84% | 20.3 | 26.2 | -25% | in band |
-| oathsworn | preset | soul hybrid | -10% | 37.2% | 4.06 | 84% | 31.6 | 31.6 | -17% | in band |
-| srd_wizard_evoker | srd | — | -11% | 37.6% | 4.23 | 79% | 24.2 | 78.3 | -29% | SRD |
-| srd_barbarian_berserker | srd | — | -12% | 38.0% | 3.73 | 78% | 39.3 | 39.3 | +2% | SRD |
-| srd_fighter_champion | srd | — | -15% | 39.3% | 4.22 | 80% | 21.4 | 21.4 | -40% | SRD |
-| srd_rogue_thief | srd | — | -19% | 41.2% | 4.22 | 75% | 20.1 | 20.1 | -39% | SRD |
-| srd_paladin_devotion | srd | — | -24% | 43.7% | 4.66 | 71% | 20.0 | 20.0 | -60% | SRD |
+| unbreakable | sim_build | body martial | +14% | 29.1% | 3.39 | 84% | 36.1 | 45.1 | +18% | in band |
+| monk | preset | body martial | +11% | 29.9% | 3.71 | 86% | 27.4 | 27.4 | +8% | in band |
+| monk_stunner | sim_build | — | +11% | 29.9% | 3.71 | 86% | 27.5 | 27.5 | +8% | in band |
+| body_ranger | sim_build | body hybrid | +9% | 30.4% | 3.37 | 86% | 40.1 | 51.0 | +31% | in band |
+| rogue | preset | body martial | +7% | 30.8% | 3.57 | 84% | 37.4 | 37.4 | +27% | in band |
+| barbarian | preset | body martial | +6% | 31.2% | 3.36 | 81% | 39.1 | 48.1 | +5% | in band |
+| reckless_striker | sim_build | body martial | +6% | 31.2% | 3.33 | 81% | 48.9 | 48.9 | +33% | in band |
+| healer_engine | sim_build | soul caster | +4% | 31.6% | 3.53 | 83% | 36.8 | 65.1 | +7% | in band |
+| priest | preset | soul caster | +4% | 31.8% | 3.53 | 83% | 36.6 | 65.1 | +10% | in band |
+| battle_priest | sim_build | soul hybrid | +2% | 32.3% | 3.58 | 81% | 37.5 | 65.2 | +8% | in band |
+| druid | preset | soul caster | +1% | 32.5% | 3.86 | 78% | 24.0 | 66.6 | -16% | in band |
+| battle_priest_deep | sim_build | soul hybrid | +1% | 32.8% | 3.64 | 81% | 35.5 | 61.7 | +1% | in band |
+| wizard | preset | mind caster | +0% | 33.0% | 3.90 | 78% | 23.1 | 96.3 | +15% | in band |
+| armored_caster | sim_build | mind hybrid | +0% | 33.0% | 3.90 | 78% | 22.6 | 96.2 | +7% | in band |
+| fighter | preset | body martial | -0% | 33.1% | 3.73 | 85% | 22.6 | 31.3 | +2% | in band |
+| double_cross | sim_build | mind caster | -2% | 33.6% | 3.84 | 81% | 23.0 | 95.9 | +3% | in band |
+| investigator | preset | mind martial | -3% | 34.2% | 3.58 | 80% | 35.0 | 35.0 | -2% | in band |
+| soul_blaster | sim_build | soul caster | -4% | 34.2% | 3.49 | 77% | 30.8 | 96.1 | +4% | in band |
+| mind_controller | sim_build | mind caster | -4% | 34.3% | 3.97 | 76% | 20.6 | 66.7 | -23% | in band |
+| tinker | preset | mind hybrid | -4% | 34.4% | 4.15 | 79% | 11.5 | 30.6 | -26% | in band |
+| soul_champion | sim_build | soul martial | -5% | 34.7% | 3.74 | 79% | 33.4 | 33.4 | -7% | in band |
+| summoner | sim_build | soul caster | -5% | 34.8% | 4.01 | 81% | 20.8 | 48.1 | -27% | in band |
+| loremaster | preset | mind caster | -5% | 34.8% | 3.81 | 73% | 22.6 | 96.2 | -28% | in band |
+| body_battlemage | sim_build | body hybrid | -6% | 35.0% | 3.88 | 84% | 25.5 | 31.8 | -20% | in band |
+| spellblade | sim_build | mind hybrid | -7% | 35.5% | 3.69 | 79% | 27.1 | 36.5 | -16% | in band |
+| paladin_max | sim_build | soul hybrid | -7% | 35.7% | 3.84 | 80% | 31.7 | 31.7 | -11% | in band |
+| oracle | preset | soul caster | -8% | 35.8% | 3.45 | 75% | 34.1 | 65.5 | -17% | in band |
+| srd_cleric_life | srd | — | -9% | 36.3% | 4.05 | 81% | 32.3 | 32.3 | -28% | SRD |
+| body_caster | sim_build | body caster | -11% | 36.9% | 4.18 | 80% | 20.3 | 26.2 | -23% | in band |
+| srd_barbarian_berserker | srd | — | -11% | 36.9% | 3.53 | 77% | 39.3 | 39.3 | -3% | SRD |
+| oathsworn | preset | soul hybrid | -11% | 37.1% | 3.86 | 78% | 31.6 | 31.6 | -21% | in band |
+| srd_fighter_champion | srd | — | -12% | 37.4% | 3.99 | 80% | 21.4 | 21.4 | -37% | SRD |
+| srd_wizard_evoker | srd | — | -13% | 37.8% | 3.99 | 72% | 24.2 | 78.3 | -30% | SRD |
+| srd_rogue_thief | srd | — | -19% | 40.9% | 4.11 | 73% | 20.1 | 20.1 | -39% | SRD |
+| srd_paladin_devotion | srd | — | -23% | 42.9% | 4.48 | 71% | 20.0 | 20.0 | -60% | SRD |
 
-Facet means (swap) vs the preset median: body +6%, mind -3%, soul -2%. SRD baselines' median vs the preset median: swap -14%, PI -35%.
+Facet means (swap) vs the preset median: body +6%, mind -3%, soul -3%. SRD baselines' median vs the preset median: swap -12%, PI -33%.
 
 Hybrids (item 7, from 4th level): swap score minus the Facet's best pure build's (≤ +3 points, sampling noise); if Steel is main, DPR₁ vs the Facet's best pure martial (+5%); DPR₃ vs the best pure caster of its tradition (+5%).
 
 | Hybrid | Swap vs best pure | DPR₁ vs pure martial | DPR₃ vs tradition's caster | Verdict |
 |---|---|---|---|---|
-| body_ranger (steel main) | +0 pts (unbreakable) | -18% | -47% (invocation) | ok |
-| body_battlemage (steel main) | -16 pts (unbreakable) | -48% | -67% (invocation) | ok |
-| tinker (steel main) | -8 pts (wizard) | -67% | -68% (thaumaturgy) | ok |
-| spellblade (steel main) | -9 pts (wizard) | -22% | -62% (thaumaturgy) | ok |
+| body_ranger (steel main) | -5 pts (unbreakable) | -18% | -47% (invocation) | ok |
+| body_battlemage (steel main) | -19 pts (unbreakable) | -48% | -67% (invocation) | ok |
+| tinker (steel main) | -4 pts (wizard) | -67% | -68% (thaumaturgy) | ok |
+| spellblade (steel main) | -7 pts (wizard) | -22% | -62% (thaumaturgy) | ok |
 | armored_caster (spell main) | +0 pts (wizard) | — | -0% (thaumaturgy) | ok |
-| oathsworn (steel main) | -16 pts (druid) | -5% | -67% (invocation) | ok |
-| battle_priest (steel main) | -14 pts (druid) | -9% | -69% (invocation) | ok |
-| battle_priest_deep (spell main) | -6 pts (druid) | — | -36% (invocation) | ok |
-| paladin_max (steel main) | -16 pts (druid) | -5% | -67% (invocation) | ok |
+| oathsworn (steel main) | -15 pts (healer_engine) | -5% | -67% (invocation) | ok |
+| battle_priest (spell main) | -2 pts (healer_engine) | — | -32% (invocation) | ok |
+| battle_priest_deep (spell main) | -4 pts (healer_engine) | — | -36% (invocation) | ok |
+| paladin_max (steel main) | -12 pts (healer_engine) | -5% | -67% (invocation) | ok |
 
-PI (secondary) vs the swap test, rank agreement: Spearman 0.79. Presets inside ±15% on PI: 6/12.
+PI (secondary) vs the swap test, rank agreement: Spearman 0.87. Presets inside ±15% on PI: 5/12.
 
 
 ## Findings
 
-- **Skirmish**: 1.91–2.43 rounds, 9–10% HP lost, 100–100% wins across 1st–10th; every yaml target met.
-- **Clash**: 2.97–3.58 rounds, 26–28% HP lost, 99–100% wins across 1st–10th; yaml targets missed somewhere: rounds.
-- **Battle**: 3.98–4.62 rounds, 43–48% HP lost, 85–95% wins across 1st–10th; every yaml target met.
-- **Desperate**: 4.11–5.11 rounds, 57–65% HP lost, 67–77% wins across 1st–10th; yaml targets missed somewhere: rounds.
-- **Day**: the reference party survives the standard day 90–99% of the time.
+- **Skirmish**: 1.95–2.25 rounds, 9–11% HP lost, 100–100% wins across 1st–10th; every yaml target met.
+- **Clash**: 2.96–3.51 rounds, 27–29% HP lost, 96–100% wins across 1st–10th; yaml targets missed somewhere: rounds, wins.
+- **Battle**: 3.85–4.77 rounds, 42–51% HP lost, 85–95% wins across 1st–10th; every yaml target met.
+- **Desperate**: 4.01–5.28 rounds, 56–66% HP lost, 68–79% wins across 1st–10th; yaml targets missed somewhere: rounds.
+- **Day**: the reference party survives the standard day 86–99% of the time.
 - **Band (swap test)**: every preset and sim build within ±15% at 1st, 4th, 7th and 10th; every hybrid at or below its Facet's best pure build and under the pure builds' jobs.
 
 *This work includes material from the System Reference Document 5.2.1 ("SRD 5.2.1") by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0.*

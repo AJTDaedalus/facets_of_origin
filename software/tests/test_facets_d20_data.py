@@ -178,7 +178,8 @@ class TestFacetsAndTracks:
         assert data["tracks"]["scaling_depth"] == {5: 2, 9: 3}
 
     def test_main_track_rule(self, data):
-        assert data["tracks"]["main_track"] == {"rule": "more_talents", "tie": "steel"}
+        # Playtest fix pass V43: a tie keeps the main track you had.
+        assert data["tracks"]["main_track"] == {"rule": "more_talents", "tie": "existing"}
         assert data["tracks"]["facet_weight"] == {"body": {"steel": 2}}      # E3 / V27
 
     def test_first_spell_talent_is_half_second_is_full(self, data):

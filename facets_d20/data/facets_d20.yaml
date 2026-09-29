@@ -38,7 +38,7 @@ build_rules:
 # ---------------------------------------------------------------------------- tracks
 # Amendment 2 (owner): balance by opportunity cost inside the talent budget, no gates.
 # depth = the number of your talents tagged with that track (talents from any menu count).
-# main track = the track you hold more talents in; Steel wins a tie. A Facet's
+# main track = the track you hold more talents in; a tie keeps the main track you had (V43). A Facet's
 # `facet_weight` counts toward it (Body: Steel +2, so a Body character's main track is
 # always Steel). Ranks marked `main: true` apply only while that track is your main
 # track — recomputed whenever your talents change, so ranks can lapse (DESIGN §3.2).
@@ -46,7 +46,7 @@ build_rules:
 tracks:
   scaling_depth: {5: 2, 9: 3}       # a Steel or Spell talent's 5th-level line needs depth 2 in
                                     # its track, its 9th-level line depth 3 (general talents: none)
-  main_track: {rule: more_talents, tie: steel}
+  main_track: {rule: more_talents, tie: existing}   # a tie keeps the main track you had (playtest fix pass V43)
   facet_weight: {body: {steel: 2}}  # part of exception E3 (Body has no tradition of its own)
   steel:
     name: Steel
@@ -868,18 +868,17 @@ presets:
     knacks: {2: encyclopedic, 6: well_travelled, 10: performer}
     asi: {4: {plus2: int}, 8: {plus2: int}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: null, shield: false, weapons: [dagger], focus: arcane_focus}
-  - id: tinker                      # Steel 1 · Spell 1 — hybrid (tie: Steel main; half caster in armor, no Extra Attack)
+  - id: tinker                      # Steel 1 · Spell 1 — hybrid (Steel first, so the 3rd-level tie keeps Steel main; half caster in armor, no Extra Attack)
     name: Tinker
     facet: mind
     domain: transmutation
     background: guild_apprentice
     abilities: {str: 10, dex: 15, con: 13, int: 16, wis: 13, cha: 8}
     skills: [nature, perception]
-    talents: {1: clockwork_guardian, 3: weapon_expert, 5: field_kit, 7: hardy, 9: anticipate}
+    talents: {1: weapon_expert, 3: clockwork_guardian, 5: field_kit, 7: hardy, 9: anticipate}
     knacks: {2: artisan, 6: skilled, 10: expertise}
     asi: {4: {plus2: dex}, 8: {plus2: dex}}   # V21 pick, E-9: +2 to the main track's ability (V33)
-    kit: {armor: leather, shield: false, weapons: [light_crossbow, dagger], focus: arcane_focus}
-    kit_by_level: {3: {armor: breastplate, shield: true, weapons: [rapier, light_crossbow]}}
+    kit: {armor: breastplate, shield: true, weapons: [rapier, light_crossbow], focus: arcane_focus}
   # ------------------------------------------------ Soul
   - id: priest                      # Spell 3 · Steel 0 — pure caster
     name: Priest
@@ -1047,8 +1046,9 @@ sim_builds:
     deep_domain: the_arcane
     kit: {armor: null, shield: false, weapons: [quarterstaff]}
   # Audit C1, the Battle Priest: full casting at 3rd; two Steel talents at 5th and 7th make
-  # it a 2/2 tie, Steel main — Extra Attack and heavy armor at 7th, and the Half table from
-  # then on. Spell 2 · Steel 2.
+  # it a 2/2 tie, which keeps Spell main (V43): the Full table stays; no Extra Attack or
+  # heavy armor. (Under the old "Steel wins a tie" it dropped to the Half table at 7th —
+  # the trap the playtest found.) Spell 2 · Steel 2.
   - id: battle_priest
     audit: C1
     role: hybrid
@@ -1058,7 +1058,7 @@ sim_builds:
     talents: {1: channel, 3: wider_study, 5: sworn_strike, 7: weapon_expert, 9: warden}
     extra_domains: {3: the_tide}
     kit: {armor: scale_mail, shield: true, weapons: [mace]}
-    kit_by_level: {5: {weapons: [longsword]}, 7: {armor: chain_mail}}   # heavy armor once Steel is main (7th)
+    kit_by_level: {5: {weapons: [longsword]}}   # the 7th-level 2–2 tie keeps Spell main (V43): no heavy armor
   # Audit C1, worst case at 9th–10th: Steel first (Extra Attack at 5th), then three Spell
   # talents. At 7th it is a 2/2 tie (Steel main: Extra Attack, heavy armor, Half table); at
   # 9th Spell becomes main (Full table and Deep Magic) and the Steel ranks past martial
@@ -1189,55 +1189,55 @@ adventuring_day: {clashes: 3, short_rests_after: [1, 2]}
 # Threat budget per character (party of four), fitted by software/tools/d20_sim.py
 encounter_table:
   1:
-    skirmish: 10
+    skirmish: 9
     clash: 16
-    battle: 19
+    battle: 18
     desperate: 23
   2:
-    skirmish: 12
+    skirmish: 13
     clash: 19
     battle: 23
     desperate: 27
   3:
     skirmish: 16
     clash: 25
-    battle: 31
+    battle: 30
     desperate: 34
   4:
-    skirmish: 19
-    clash: 30
+    skirmish: 18
+    clash: 29
     battle: 34
-    desperate: 41
+    desperate: 40
   5:
     skirmish: 33
-    clash: 49
+    clash: 50
     battle: 60
-    desperate: 68
+    desperate: 66
   6:
     skirmish: 34
-    clash: 52
-    battle: 63
-    desperate: 71
+    clash: 51
+    battle: 62
+    desperate: 70
   7:
-    skirmish: 40
+    skirmish: 39
     clash: 63
-    battle: 76
-    desperate: 84
+    battle: 74
+    desperate: 82
   8:
     skirmish: 46
-    clash: 69
+    clash: 68
     battle: 82
     desperate: 94
   9:
-    skirmish: 62
-    clash: 91
+    skirmish: 61
+    clash: 89
     battle: 105
     desperate: 116
   10:
-    skirmish: 66
-    clash: 95
-    battle: 110
-    desperate: 120
+    skirmish: 63
+    clash: 92
+    battle: 109
+    desperate: 118
 encounter_adjustments:
   three_players:
     clash_pct: -26
@@ -1245,97 +1245,113 @@ encounter_adjustments:
     by_tier_pct:
       skirmish: -25
       clash: -26
-      battle: -24
-      desperate: -23
+      battle: -25
+      desperate: -24
   five_players:
-    clash_pct: 24
-    rule: add foes worth 24% of the Threat
+    clash_pct: 23
+    rule: add foes worth 23% of the Threat
     by_tier_pct:
       skirmish: 22
-      clash: 24
+      clash: 23
       battle: 23
-      desperate: 20
+      desperate: 19
   six_players:
-    clash_pct: 43
-    rule: add foes worth 43% of the Threat
+    clash_pct: 40
+    rule: add foes worth 40% of the Threat
     by_tier_pct:
-      skirmish: 39
-      clash: 43
-      battle: 41
-      desperate: 39
+      skirmish: 40
+      clash: 40
+      battle: 40
+      desperate: 37
   tired:
     clash_pct: -6
     rule: remove 6% of the Threat, or drop one tier
     by_tier_pct:
-      skirmish: 14
+      skirmish: 15
       clash: -6
       battle: -9
       desperate: -19
 monster_threat:
   model:
     standard: sqrt(HP x damage per turn)
-    minion: sqrt(10.5 x damage per turn)
-    boss: standard x 3.34
+    minion: sqrt(8.4 x damage per turn)
+    boss: standard x 3.51
     never_breaks: x 1.16
-    lone_boss: boss x 1.2 (V42; measured mark-up x1.20 median)
+    hard_hitter: x 1.06
+    lone_boss: boss x 1.2 (V42; measured mark-up x1.16 median)
   by_cr:
     1/8:
       standard: 6
       minion: 6
-      boss: 20
+      boss: 21
+      damage: 4
     1/4:
       standard: 8
-      minion: 7
-      boss: 27
+      minion: 6
+      boss: 28
+      damage: 5
     1/2:
       standard: 12
-      minion: 9
-      boss: 39
+      minion: 8
+      boss: 40
+      damage: 7
     '1':
       standard: 18
-      minion: 11
-      boss: 60
+      minion: 10
+      boss: 63
+      damage: 11
     '2':
       standard: 28
-      minion: 13
-      boss: 94
+      minion: 12
+      boss: 99
+      damage: 17
     '3':
       standard: 37
-      minion: 15
-      boss: 124
+      minion: 14
+      boss: 131
+      damage: 22
     '4':
       standard: 46
-      minion: 17
-      boss: 154
+      minion: 15
+      boss: 162
+      damage: 27
     '5':
       standard: 55
-      minion: 18
-      boss: 184
+      minion: 16
+      boss: 194
+      damage: 32
     '6':
       standard: 64
-      minion: 20
-      boss: 213
+      minion: 18
+      boss: 224
+      damage: 37
     '7':
       standard: 72
-      minion: 21
-      boss: 239
+      minion: 19
+      boss: 251
+      damage: 41
     '8':
       standard: 81
-      minion: 22
-      boss: 269
+      minion: 20
+      boss: 283
+      damage: 46
     '9':
       standard: 89
-      minion: 23
-      boss: 298
+      minion: 21
+      boss: 313
+      damage: 51
     '10':
       standard: 98
-      minion: 24
-      boss: 327
+      minion: 22
+      boss: 343
+      damage: 56
     '11':
       standard: 106
-      minion: 25
-      boss: 353
+      minion: 22
+      boss: 371
+      damage: 60
     '12':
       standard: 114
-      minion: 26
-      boss: 382
+      minion: 23
+      boss: 401
+      damage: 65

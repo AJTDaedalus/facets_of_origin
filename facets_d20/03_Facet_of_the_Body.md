@@ -17,7 +17,7 @@ Body has no magic tradition of its own. A Body character can still learn magic t
 | Armor and weapons | All armor, shields; simple and martial weapons |
 | Skills | Two of Acrobatics, Animal Handling, Athletics, Intimidation, Perception, Sleight of Hand, Stealth, Survival |
 | Features | *Second Wind* (1st), *Action Surge* (2nd), *Indomitable* (9th) |
-| Main track | Always Steel (Body counts two extra Steel talents; Chapter 02) |
+| Main track | Always Steel (Body counts two extra Steel talents when finding its main track, not for depth; Chapter 02) |
 | Presets | Fighter, Rogue, Barbarian, Monk (Chapter 02) |
 
 ---
@@ -65,7 +65,7 @@ Seven Steel talents and three general ones. To read an entry, see *Reading a tal
 ### Rage
 *Steel talent · Body*
 
-As a bonus action, if you aren't wearing heavy armor, you rage until the fight ends. While raging you resist bludgeoning, piercing and slashing damage, deal +2 damage with Strength weapon attacks, have advantage on Strength checks and Strength saves, and can't cast spells or concentrate. While raging you can also attack recklessly on your first attack of a turn: you have advantage on Strength melee attacks this turn, and attacks against you have advantage until your next turn. Whenever you wear no armor, your AC is 10 + your Dexterity modifier + your Constitution modifier (a shield still counts). You have two rages; one returns on a short rest, all on a long rest.
+As a bonus action, if you aren't wearing heavy armor, you rage until the fight ends. While raging you resist bludgeoning, piercing and slashing damage, deal +2 damage with Strength weapon attacks, have advantage on Strength checks and Strength saves, and can't cast spells or concentrate. Other talents' abilities still work (they aren't spells; Chapter 02). While raging you can also attack recklessly on your first attack of a turn: you have advantage on Strength melee attacks this turn, and attacks against you have advantage until your next turn. Whenever you wear no armor, your AC is 10 + your Dexterity modifier + your Constitution modifier (a shield still counts). You have two rages; one returns on a short rest, all on a long rest.
 
 **5th (Steel 2):** three rages. Once per long rest, when you would drop to 0 hit points while raging, you drop to 1 instead.
 **9th (Steel 3):** four rages, and the damage bonus is +3.
@@ -114,7 +114,9 @@ Once per turn, when you hit with a heavy or versatile melee weapon, a second cre
 
 Body has no tradition of its own. A Body character can still take Spell talents from the Mind or Soul menus, as cross-Facet picks (at most two). With the first one, name **Invocation** or **Thaumaturgy**: that is your tradition from then on, and you cast with its ability (the higher of Wisdom and Charisma for Invocation, Intelligence for Thaumaturgy) and choose your domains from its list.
 
-Because Body counts as two extra Steel talents, Steel is always your main track. Your first Spell talent gives you Spellcasting and the Half table; Full Casting and Deep Magic stay out of reach. A Body character can learn enough magic to be a warrior with spells. It can't become a full caster.
+Because Body counts two extra Steel talents when finding its main track (not for depth), Steel is always your main track. Your first Spell talent gives you Spellcasting and the Half table; Full Casting and Deep Magic stay out of reach. A Body character can learn enough magic to be a warrior with spells. It can't become a full caster.
+
+**Which Spell talent?** With two to four slots at most, pick one that works without them: *Mending Hands* (a healing pool), *Channel* (one heal or harm a short rest), or *Turn the Odds* (Sparks). *Evoker* rewards a caster with slots to spend, and a Body character won't have many. With Steel depth 1 or more, your weapon or shield can be your focus (Chapter 07), so you needn't sheathe your sword to cast.
 
 ---
 

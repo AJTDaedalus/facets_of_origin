@@ -286,3 +286,16 @@ focus, short fights.
 3. **Presets stronger than their SRD classes is accepted:** heroic and forgiving. The MM
    guide notes that published 5e adventures may need slightly tougher encounters.
 4. **Bosses have twice their stat block's HP** (V-rule kept).
+
+## Amendment 5 — owner rulings after the fresh-eyes playtests (2026-09-28)
+
+Context: the fresh player found the build freedom thin ("a class you assemble from five
+cards") and the even levels empty.
+
+1. **Edges.** Keep the five talents at 1/3/5/7/9 and add a small combat or utility pick,
+   an **edge** (feat-sized, clearly smaller than a talent), at 2/4/6/8/10, alongside that
+   level's knack or ability pick. The simulator re-checks the balance band with edges.
+2. **Even levels** therefore become "an edge, plus a knack or the ability pick".
+3. **Simplicity budget amended:** an even-level level-up is two small picks; odd levels
+   stay one. Character creation is unchanged (edges start at 2nd). The ≤5 exception
+   rules and one-mechanic-per-job targets stand.

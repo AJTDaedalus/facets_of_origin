@@ -77,7 +77,7 @@ Assign the **standard array**, **15, 14, 13, 12, 10, 8**, to your six abilities,
 
 ### Step 6: Skills
 
-Pick two skills from your Facet's list (Table 2–2). If your background already gave you one of them, pick another.
+Pick two skills from your Facet's list (Table 2–2). If your background already gave you one of them, pick another from the same list. Chapter 06 says the same from the background's side.
 
 ### Step 7: Your First Talent
 
@@ -87,7 +87,9 @@ Pick one talent from your Facet's menu (Chapters 03–05), or up to two from ano
 
 Take the kit printed on any preset card of your Facet, as long as you can wear its armor at 1st level. If you cast and the kit has no spellcasting focus, add one. Or take 100 gp instead and buy from the SRD 5.2.1 equipment lists.
 
-### Step 9: The Rest of the Sheet
+### Step 9: Language, and the Rest of the Sheet
+
+Pick one language besides Common, from the SRD 5.2.1 list or the MM's setting. Then fill in the rest; none of it is a choice.
 
 - **Hit points:** your hit die's maximum + 8 + your Constitution modifier (Table 2–6).
 - **Armor Class:** from your armor and shield, as the SRD says; 10 + your Dexterity modifier with none.
@@ -129,9 +131,13 @@ A Mind or Soul character casts only once it takes a Spell talent.
 
 Every talent is tagged **Steel** (fighting with weapons and armor), **Spell** (magic) or neither (a **general** talent). Your **depth** in a track is how many of your talents carry its tag, from any menu.
 
-Your **main track** is the one you hold more talents in. Steel wins a tie. A Body character counts two extra Steel talents, so its main track is always Steel (Body's own menu has no Spell talents, and only two picks can come from elsewhere). A character with no Steel or Spell talents has no main track and no ranks.
+Your **main track** is the one you hold more talents in. If the two are tied, it stays whatever it already was: your main track changes only when the other track pulls ahead. A Body character counts two extra Steel talents when finding its main track (not for depth), so its main track is always Steel (Body's own menu has no Spell talents, and only two picks can come from elsewhere). A character with no Steel or Spell talents has no main track and no ranks.
 
-Depth buys **ranks**. Each rank needs a depth, and all but the first rank of each track also need the track to be your main one.
+Depth buys **ranks** (Table 2–3). Three rules decide what you have:
+
+1. **Your first talent in a track** gives that track's first rank, whatever your main track: **Martial Weapons** for Steel, **Spellcasting** for Spell.
+2. **Every other rank** needs its depth **and** that track as your main one. That includes **Martial Training**, which comes with your first Steel talent but only while Steel is your main track.
+3. **A talent's 5th- and 9th-level lines** need depth only (2 and 3 in its track), never the main track.
 
 **Table 2–3: What Depth Gives You**
 
@@ -142,9 +148,24 @@ Depth buys **ranks**. Each rank needs a depth, and all but the first rank of eac
 | 2, this track main | **Extra Attack** (from 5th level): when you take the Attack action, you attack twice | **Full Casting**: your slots use the Full table instead |
 | 3, this track main | **Veteran**: +1 hit point per level, and +2 damage on your weapon hits | **Deep Magic**: one more domain of your tradition, which may be a prismatic domain |
 
-**Upgrades.** Talents grow at 5th and 9th level, and each entry prints its lines. A Steel or Spell talent's 5th-level line also needs depth 2 in its track, and its 9th-level line depth 3; the entries mark them *(Steel 2)*, *(Spell 3)* and so on. General talents grow with level alone.
+**Upgrades.** Talents grow at 5th and 9th level, and each entry prints its lines. A Steel or Spell talent's 5th-level line also needs depth 2 in its track, and its 9th-level line depth 3 (rule 3 above); the entries mark them *(Steel 2)*, *(Spell 3)* and so on. General talents grow with level alone.
 
-**Ranks can lapse.** Your main track is worked out again whenever your talents change. If a new talent makes the other track your main one, the ranks that needed the old main track stop applying and the new one's start. Before you confirm a pick, check what it brings and what it costs. A Soul character with two Steel talents and two Spell talents (a tie, so Steel main) who takes a third Spell talent at 9th gains the Full table and Deep Magic, and loses Extra Attack, heavy armor training and the bigger hit die. The presets never change their main track in a way that costs them a rank.
+**Ranks can lapse.** Your main track is worked out again whenever your talents change. Because a tie keeps the main track you had, a talent from your other track never costs you a rank unless it puts that track ahead. When it does, the ranks that needed the old main track stop applying and the new one's start. Check what a pick brings and what it costs before you confirm it. What a lapse can take:
+
+- **A smaller hit die.** Losing *Martial Training* shrinks a Mind or Soul hit die; work your hit points out again with the smaller die, and your Hit Dice shrink with it.
+- **Armor training.** You're untrained in armor you lose training for at once, and, as the SRD says, you can't cast spells in armor you're untrained in. Change armor before your next fight.
+- **Extra Attack, Veteran, Full Casting or Deep Magic**, whichever belonged to the old main track. The domain Deep Magic brought goes with it.
+
+For example, a Soul character takes *Sworn Strike* at 1st and *Weapon Expert* at 3rd (Steel 2, Steel main), then *Mending Hands* at 5th and *Channel* at 7th. At 7th the tracks are tied 2–2, so Steel stays main: Extra Attack, heavy armor and a d10 hit die, with Spellcasting on the Half table. At 9th a third Spell talent puts Spell ahead. That character gains the Full table and Deep Magic, and loses Extra Attack, heavy armor training (out of the chain mail, or no casting) and the d10 (hit points worked out again on a d8). The presets never change their main track in a way that costs them a rank.
+
+> **After every talent pick**
+>
+> 1. Count your Steel and Spell talents. (Body: add 2 to Steel, for step 2 only.)
+> 2. Find your main track: the bigger count; on a tie, the one you had.
+> 3. Read Table 2–3: the first rank of each track needs depth 1; every other rank needs its depth and your main track.
+> 4. Check each Steel or Spell talent's 5th- and 9th-level lines against your depth.
+> 5. If your hit die changed, work out your hit points again. If you lost an armor training, change armor.
+> 6. If the pick brings a domain (your first Spell talent, *Wider Study*, Deep Magic), choose it.
 
 No talent is forbidden to anyone.
 
@@ -191,7 +212,7 @@ Characters go from 1st level to 10th. Levels come when the MM says so.
 
 That is one choice at every level. No ability goes above 20. The presets always put the +2 into the ability their main track uses, which is usually the right call.
 
-**Hit points.** At 1st level, your hit die's maximum + 8 + your Constitution modifier. Each level after, half the die + 1 + your Constitution modifier. You never roll. If your hit die gets bigger (*Martial Training*, *Hardy*), work your hit points out again as if you'd always had the bigger die. The largest hit die is a d12. Your Hit Dice (one per level) are still spent on short rests as the SRD says.
+**Hit points.** At 1st level, your hit die's maximum + 8 + your Constitution modifier. Each level after, half the die + 1 + your Constitution modifier. You never roll for them. Whenever your hit die changes size, bigger (*Martial Training*, *Hardy*) or smaller (a lapsed *Martial Training*), work your hit points out again as if you'd always had that die, and your Hit Dice change to that size too. The largest hit die is a d12. Your Hit Dice (one per level) are still spent, and rolled, on short rests as the SRD says.
 
 **Table 2–6: Hit Points Before Constitution**
 
@@ -210,6 +231,10 @@ Add your Constitution modifier once per level.
 
 There is no multiclassing. Instead, up to **two** of your five talents can come from another Facet's menu. A talent printed on your own menu is never a cross-Facet pick, even if it's on other menus too. Cross-Facet talents count toward your depth like any other.
 
+A cross-Facet talent works as printed. Where it names something from its home Facet: your **Soul modifier** is the higher of your Wisdom and Charisma modifiers, whatever your Facet; a talent that uses your **studied target** (*Anatomist*, *Anticipate*, part of *Precision*) needs *Study*, which only Mind has; *Clockwork Guardian* uses Intelligence even if you cast Invocation.
+
+If *Wider Study* is your first Spell talent, you choose two domains: one from Spellcasting and one from *Wider Study*.
+
 A character casts from **one tradition**: Mind's is Thaumaturgy, Soul's is Invocation, and a Body character names one of the two with its first Spell talent. A Mind character who takes a Soul Spell talent still casts Thaumaturgy.
 
 ### Retraining
@@ -220,7 +245,7 @@ Once each level, after a long rest, you can swap one talent, knack or domain for
 
 ## Presets
 
-Each card is a complete character. **[St]** marks a Steel talent and **[Sp]** a Spell talent. The shape line gives the card's depth in each track once all five talents are in, and its main track. Ability scores already include the background's +1s. The *At 1st* line is the character's sheet at 1st level.
+Each card is a complete character. The names borrow familiar shapes (Fighter, Rogue, Wizard) so you can find the one you're after; they are starting points, not classes, and every card is five picks you could have made yourself. **[St]** marks a Steel talent and **[Sp]** a Spell talent. The shape line gives the card's depth in each track once all five talents are in, and its main track. Ability scores already include the background's +1s. The *At 1st* line is the character's sheet at 1st level.
 
 ### Fighter
 *Preset · Body · Steel 3, Spell 0 at 10th · Steel main*
@@ -233,7 +258,9 @@ Stand at the front, take the hit meant for a friend, and make the foe beside you
 **Knacks:** Streetwise (background) · 2nd Skilled · 6th Pathfinder · 10th Well-Travelled  
 **4th and 8th:** +2 Strength each time  
 **Kit:** chain mail, shield, longsword, javelin  
-**At 1st:** HP 20 · AC 19 · longsword +6 (1d8 + 3)
+**At 1st:** HP 20 · AC 19 · longsword +6 (1d8 + 3)  
+**At 5th:** HP 57 · AC 19  
+**At 10th:** HP 113 · AC 19
 
 ### Rogue
 *Preset · Body · Steel 3, Spell 0 at 10th · Steel main*
@@ -246,7 +273,9 @@ Get an ally next to the target, or a reason for advantage, then strike and slip 
 **Knacks:** Performer (background) · 2nd Expertise · 6th Many Faces · 10th Streetwise  
 **4th and 8th:** +2 Dexterity each time  
 **Kit:** leather, rapier, shortbow  
-**At 1st:** HP 20 · AC 14 · rapier +5 (1d8 + 3)
+**At 1st:** HP 20 · AC 14 · rapier +5 (1d8 + 3)  
+**At 5th:** HP 52 · AC 15  
+**At 10th:** HP 102 · AC 17
 
 ### Barbarian
 *Preset · Body · Steel 3, Spell 0 at 10th · Steel main*
@@ -259,7 +288,9 @@ Rage on the first turn and swing the big axe. Planning can happen afterwards.
 **Knacks:** Skilled (background) · 2nd Pathfinder · 6th Wild Kin · 10th Artisan  
 **4th and 8th:** +2 Strength each time  
 **Kit:** no armor, greataxe, handaxe  
-**At 1st:** HP 20 · AC 14 · greataxe +5 (1d12 + 3)
+**At 1st:** HP 20 · AC 14 · greataxe +5 (1d12 + 3)  
+**At 5th:** HP 58 · AC 14  
+**At 10th:** HP 113 · AC 14
 
 ### Monk
 *Preset · Body · Steel 2, Spell 0 at 10th · Steel main*
@@ -272,7 +303,9 @@ Punch twice a turn and be elsewhere when they swing back. From 5th, stun the one
 **Knacks:** Pathfinder (background) · 2nd Expertise · 6th Wild Kin · 10th Well-Travelled  
 **4th and 8th:** +2 Dexterity each time  
 **Kit:** no armor, quarterstaff, dart  
-**At 1st:** HP 20 · AC 15 · quarterstaff +5 (1d8 + 3)
+**At 1st:** HP 20 · AC 15 · quarterstaff +5 (1d8 + 3)  
+**At 5th:** HP 52 · AC 16  
+**At 10th:** HP 103 · AC 17
 
 ### Wizard
 *Preset · Mind · Steel 0, Spell 3 at 10th · Spell main*
@@ -286,7 +319,9 @@ Stay at the back and drop area spells that leave your friends standing. Save a S
 **Knacks:** Gadgeteer (background) · 2nd Encyclopedic · 6th Well-Travelled · 10th Artisan  
 **4th and 8th:** +2 Intelligence each time  
 **Kit:** no armor, quarterstaff, arcane focus  
-**At 1st:** HP 16 · AC 12 · quarterstaff +1 (1d8 − 1) · spell save DC 13, spell attack +5
+**At 1st:** HP 16 · AC 12 · quarterstaff +1 (1d8 − 1) · spell save DC 13, spell attack +5  
+**At 5th:** HP 40 · AC 12 · spell save DC 15  
+**At 10th:** HP 81 · AC 12 · spell save DC 17
 
 ### Investigator
 *Preset · Mind · Steel 3, Spell 0 at 10th · Steel main*
@@ -299,7 +334,9 @@ Study the target, then take it apart with a rapier while it swings at nothing.
 **Knacks:** Field Medic (background) · 2nd Expertise · 6th Streetwise · 10th Encyclopedic  
 **4th and 8th:** +2 Dexterity each time  
 **Kit:** chain shirt, shield, rapier, light crossbow  
-**At 1st:** HP 17 · AC 17 · rapier +5 (1d8 + 3)
+**At 1st:** HP 17 · AC 17 · rapier +5 (1d8 + 3)  
+**At 5th:** HP 41 · AC 17  
+**At 10th:** HP 92 · AC 18
 
 ### Loremaster
 *Preset · Mind · Steel 0, Spell 3 at 10th · Spell main*
@@ -313,21 +350,25 @@ Win the fight in the planning scene, then spend it handing out luck and illusion
 **Knacks:** Silver Tongue (background) · 2nd Encyclopedic · 6th Well-Travelled · 10th Performer  
 **4th and 8th:** +2 Intelligence each time  
 **Kit:** no armor, dagger, arcane focus  
-**At 1st:** HP 16 · AC 11 · dagger +3 (1d4 + 1) · spell save DC 13, spell attack +5
+**At 1st:** HP 16 · AC 11 · dagger +3 (1d4 + 1) · spell save DC 13, spell attack +5  
+**At 5th:** HP 40 · AC 11 · spell save DC 15  
+**At 10th:** HP 81 · AC 11 · spell save DC 17
 
 ### Tinker
 *Preset · Mind · Steel 1, Spell 1 at 10th · Steel main*
 
-Send the clockwork guardian in first and shoot from behind it. Everyone you travel with starts each fight a little harder to hurt.
+Hold the line with rapier and shield, and from 3rd send the clockwork guardian in first. Everyone you travel with starts each fight a little harder to hurt.
 
 **Abilities:** Str 10, Dex 15, Con 13, Int 16, Wis 13, Cha 8 (background included)  
 **Background:** Guild Apprentice · **Skills:** Nature, Perception, plus Arcana, Investigation from the background  
-**Talents:** 1st *Clockwork Guardian* [Sp] · 3rd *Weapon Expert* [St] · 5th *Field Kit* · 7th *Hardy* · 9th *Anticipate*  
-**Domains:** Transmutation (1st)  
+**Talents:** 1st *Weapon Expert* [St] · 3rd *Clockwork Guardian* [Sp] · 5th *Field Kit* · 7th *Hardy* · 9th *Anticipate*  
+**Domains:** Transmutation (3rd)  
 **Knacks:** Gadgeteer (background) · 2nd Artisan · 6th Skilled · 10th Expertise  
 **4th and 8th:** +2 Dexterity each time  
-**Kit:** leather, light crossbow, dagger, arcane focus; at 3rd, when Steel becomes its main track, it trades up to a breastplate, a shield and a rapier  
-**At 1st:** HP 15 · AC 13 · light crossbow +4 (1d8 + 2) · spell save DC 13, spell attack +5
+**Kit:** breastplate, shield, rapier, light crossbow, arcane focus (Steel comes first, so the 3rd-level tie keeps Steel main)  
+**At 1st:** HP 17 · AC 19 · rapier +5 (1d8 + 2)  
+**At 5th:** HP 41 · AC 19 · spell save DC 14  
+**At 10th:** HP 82 · AC 19 · spell save DC 15
 
 ### Priest
 *Preset · Soul · Steel 0, Spell 3 at 10th · Spell main*
@@ -341,7 +382,9 @@ Heal with slots first and with Channel when the slots run low. From 7th, friends
 **Knacks:** Encyclopedic (background) · 2nd Field Medic · 6th Well-Travelled · 10th Silver Tongue  
 **4th and 8th:** +2 Wisdom each time  
 **Kit:** scale mail, shield, mace, holy symbol  
-**At 1st:** HP 18 · AC 16 · mace +3 (1d6 + 1) · spell save DC 13, spell attack +5
+**At 1st:** HP 18 · AC 16 · mace +3 (1d6 + 1) · spell save DC 13, spell attack +5  
+**At 5th:** HP 46 · AC 16 · spell save DC 15  
+**At 10th:** HP 92 · AC 16 · spell save DC 17
 
 ### Druid
 *Preset · Soul · Steel 0, Spell 3 at 10th · Spell main*
@@ -355,7 +398,9 @@ Be a wolf when the fight is close and a caster when it isn't, with a heal in you
 **Knacks:** Pathfinder (background) · 2nd Wild Kin · 6th Field Medic · 10th Well-Travelled  
 **4th and 8th:** +2 Wisdom each time  
 **Kit:** leather, shield, quarterstaff, druidic focus  
-**At 1st:** HP 18 · AC 15 · quarterstaff +1 (1d6 − 1) · spell save DC 13, spell attack +5
+**At 1st:** HP 18 · AC 15 · quarterstaff +1 (1d6 − 1) · spell save DC 13, spell attack +5  
+**At 5th:** HP 46 · AC 15 · spell save DC 15  
+**At 10th:** HP 92 · AC 15 · spell save DC 17
 
 ### Oracle
 *Preset · Soul · Steel 0, Spell 3 at 10th · Spell main*
@@ -369,7 +414,9 @@ Spend luck freely, on your friends' rolls and against your enemies'.
 **Knacks:** Silver Tongue (background) · 2nd Encyclopedic · 6th Many Faces · 10th Performer  
 **4th and 8th:** +2 Charisma each time  
 **Kit:** chain shirt, shield, spear, holy symbol  
-**At 1st:** HP 17 · AC 16 · spear +1 (1d6 − 1) · spell save DC 13, spell attack +5
+**At 1st:** HP 17 · AC 16 · spear +1 (1d6 − 1) · spell save DC 13, spell attack +5  
+**At 5th:** HP 41 · AC 16 · spell save DC 15  
+**At 10th:** HP 71 · AC 16 · spell save DC 17
 
 ### Oathsworn
 *Preset · Soul · Steel 2, Spell 1 at 10th · Steel main*
@@ -383,7 +430,9 @@ Keep your oath, stand in the front rank in heavy armor, and put radiant light be
 **Knacks:** Streetwise (background) · 2nd Silver Tongue · 6th Field Medic · 10th Well-Travelled  
 **4th and 8th:** +2 Strength each time  
 **Kit:** chain mail, shield, longsword, javelin, holy symbol  
-**At 1st:** HP 20 · AC 18 · longsword +5 (1d8 + 3)
+**At 1st:** HP 20 · AC 18 · longsword +5 (1d8 + 3)  
+**At 5th:** HP 52 · AC 19 · spell save DC 13  
+**At 10th:** HP 92 · AC 19 · spell save DC 14
 
 ---
 
@@ -394,6 +443,8 @@ Six talents appear on more than one Facet's menu. Each is printed once, here, an
 > **Reading a talent entry**
 >
 > The line under the name gives the talent's track (Steel, Spell or general) and the menus it appears on. The first paragraph is what the talent does from the level you take it. A **5th** or **9th** line is what changes at that character level; on a Steel or Spell talent the line also needs the depth shown, such as *(Steel 2)*. An entry with no such lines doesn't change as you level. A **rider** is extra damage dice added to a hit; only one rider applies on your turn (Chapter 08).
+>
+> **A talent's own ability is not a spell** unless its entry says it casts one. *Channel*, *Mending Hands*, *Kindle*, *Clockwork Guardian* and the rest use no slot and no components, can't be countered by *Counterspell* or stopped by *Silence*, and work while you rage or wear a beast's shape (*Rage* and *Wild Shape* stop only spells). The SRD rule that a turn's bonus-action spell limits your other spell that turn doesn't touch them. A Spell talent is "Spell" because of its track, not because using it is casting.
 
 ### Alert
 *General talent · Body, Mind, Soul*

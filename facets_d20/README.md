@@ -8,7 +8,7 @@ It changes three things.
 
 **Role-play that pays.** Every character has two Drives and a Specialty. Your Drives earn Sparks when they make your life harder, your Specialty gives you advantage, and talking your way through a scene has its own short rules.
 
-**Short fights.** One initiative roll per side, fixed monster damage, minions, morale, and bosses that act at the top of every round. A standard fight lasts three or four rounds.
+**Short fights.** One initiative roll per side, fixed monster damage, minions, morale, and bosses that act twice a round, at the top of it and again after the party's first turn. A standard fight lasts three or four rounds.
 
 Levels run from 1st to 10th, and spells stop at 5th level.
 
@@ -31,7 +31,7 @@ This is one of three rulesets in this repository. The other two (Lean Facets and
 | `07_Magic.md` | Thaumaturgy and Invocation, the Common list, the domains, slot tables | Casters |
 | `08_Combat.md` | Side initiative, riders, Bloodied, morale, minions, bosses | Players |
 | `09_Mirror_Masters_Guide.md` | Encounter tables, bosses, running the table, monster threat | The MM |
-| `10_Quick_Reference.md` | One page for the table | Everyone |
+| `10_Quick_Reference.md` | One page for the table, and a half page for the MM | Everyone |
 | `data/` | The machine-readable rules: talents, presets, spell lists, encounter tables | Tools |
 
 The person running the game is the **Mirror Master (MM)**.

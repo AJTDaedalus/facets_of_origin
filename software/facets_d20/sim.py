@@ -48,7 +48,9 @@ Enemies:
   - Every foe, boss included, attacks a random standing PC (DESIGN v0.2 §6.2: the MM
     spreads the enemy side's attacks). Nobody attacks a PC at 0 HP.
   - A recharge special (breath) is used when ready and ≥2 PCs stand; it rolls to
-    recharge once per enemy phase.
+    recharge at the start of the foe's turn (a boss: its top-of-round turn only).
+  - A boss takes its turns at the top of the round and right after the party's first
+    turn (combat.round_order); leaderless minions check morale when half are down.
   - A Bloodied boss turns desperate (advantage on its attacks, attacks against it have
     advantage) — RuleOptions.boss_bloodied.
   - PC reactions to a hit, in order: Shield (if it turns the hit into a miss);
@@ -322,6 +324,8 @@ class Fight:
         self.guard_ward = {}           # Clockwork Guardian: maker id -> the ally it stands beside
         self.guard_ready = {}          # maker id -> its Guard is up (until the maker's next turn)
         self.blessed = {}
+        self._turns_this_round = {}    # foe id -> its turns so far this round (boss rule)
+        self._leaderless_checked = False
 
     # ------------------------------------------------------------ setup
     def setup(self) -> None:
@@ -419,6 +423,15 @@ class Fight:
             for other in self.standing_foes():
                 if combat.morale_triggers(other, None, leader_fell=True, opts=self.opts):
                     combat.morale_check(self.rng, other, self.opts)
+        if foe.role == "minion" and foe.state != "active":
+            mins = [f for f in self.foes if f.role == "minion"]
+            if combat.leaderless_minions_check(
+                    has_leader=any(f.leader for f in self.foes), minions=len(mins),
+                    minions_down=sum(f.state != "active" for f in mins),
+                    already=self._leaderless_checked):
+                self._leaderless_checked = True
+                for other in [f for f in mins if f.state == "active"]:
+                    combat.morale_check(self.rng, other, self.opts)
         if foe.role == "boss" and foe.state == "active" and combat.is_bloodied(foe) \
                 and self.opts.boss_bloodied == "desperate":
             foe.conditions.add("desperate")
@@ -468,7 +481,10 @@ class Fight:
                          key=lambda c: c.profile.save_aura, default=None)
             if warden is not None:
                 self._credit(warden.id, stake)
-        if not sres.success and combat.spark_can_turn(total=sres.total, target=dc) \
+        # The MM calls the failure (the rule, spark_may_spend); the table spends when it
+        # judges 1d6 can turn it (AI: the party knows the DC once it has seen a save or two).
+        if combat.spark_may_spend(succeeded=sres.success, natural=sres.natural) \
+                and combat.spark_can_turn(total=sres.total, target=dc) \
                 and self.spark_holder(pc) is not None:
             sres = combat.spark_save(self.rng, sres, dc=dc)
         ok = sres.success
@@ -525,8 +541,10 @@ class Fight:
             m_studied = 0
         res = combat.attack_roll(self.rng, bonus, target.ac, advantage=adv, crit_min=crit_min)
         turn["attacks"] = turn.get("attacks", 0) + 1
-        if not res.hit and res.natural != 1 and combat.spark_can_turn(total=res.total,
-                                                                      target=target.ac):
+        # The MM calls the miss (the rule); the party spends when it judges 1d6 can turn it
+        # (AI: it knows the foe's AC once it has seen a few attacks).
+        if combat.spark_may_spend(succeeded=res.hit, natural=res.natural) \
+                and combat.spark_can_turn(total=res.total, target=target.ac):
             sparker = self.spark_holder(pc)
             if sparker is not None:
                 res = combat.spark_attack(self.rng, res, ac=target.ac)
@@ -1093,6 +1111,8 @@ class Fight:
     def foe_turn(self, foe: Combatant) -> None:
         if foe.state != "active":
             return
+        n = self._turns_this_round[foe.id] = self._turns_this_round.get(foe.id, 0) + 1
+        refresh = combat.boss_turn_refreshes(foe, n, self.opts)
         for cond in ("held", "entranced"):
             if cond in foe.conditions:
                 holder = next((c for c in self.pcs if c.id == getattr(foe, "held_by", None)), None)
@@ -1104,12 +1124,12 @@ class Fight:
             if repeat and combat.saving_throw(self.rng, foe.saves.get(save, 0), dc).success:
                 foe.conditions.discard("held")
             return
-        if not combat.begin_turn(foe):
+        if not combat.begin_turn(foe, refresh_reaction=refresh):
             self._credit(getattr(foe, "disabled_by", None), self.foe_turn_value(foe))
             foe.conditions.discard("stunned")   # until the start of the stunner's next turn
             return
         special = getattr(foe, "special", None)
-        if special is not None:
+        if special is not None and refresh:
             combat.roll_recharge(self.rng, foe, recharge_min=special.recharge_min)
         if special is not None and getattr(foe, "special_ready", False) and len(self.standing_pcs()) >= 2:
             foe.special_ready = False  # type: ignore[attr-defined]
@@ -1166,7 +1186,8 @@ class Fight:
             pc.conditions.add("shielded")
             return
         # Turn the Odds: subtract a Spark die when it could turn the hit into a miss.
-        if not res.crit and res.total - ac < 6:
+        if combat.spark_may_spend(succeeded=res.hit, natural=res.natural, subtract=True,
+                                  crit=res.crit) and res.total - ac < 6:
             for other in self.standing_pcs():
                 ost = self.state[other.id]
                 if other.profile.spark_subtract and ost.sparks > 0 \
@@ -1226,7 +1247,7 @@ class Fight:
             if eff.kind == "aura":
                 self.cast_save(pc, eff, slot, self.area_targets(eff.targets))
 
-    def enemy_phase(self, *, boss_only=False, skip_boss_turns: int = 0) -> None:
+    def enemy_phase(self, *, boss_only=False) -> None:
         if not boss_only:
             self.aura_tick()
         for foe in list(self.foes):
@@ -1236,12 +1257,18 @@ class Fight:
                 if foe.role == "boss":
                     self.foe_turn(foe)
                 continue
-            turns = combat.turns_per_phase(foe) - (skip_boss_turns if foe.role == "boss" else 0)
-            for _ in range(turns):
+            for _ in range(combat.turns_in_side_half(foe, self.opts)):
                 self.foe_turn(foe)
 
-    def party_phase(self) -> None:
-        for pc in self.pcs:
+    def party_phase(self, part: str = "all") -> None:
+        """The party's half. ``part``: "all"; "first" — only the first character's turn
+        (a boss acts right after it, Table 8–1); "rest" — everyone else."""
+        order = [pc for pc in self.pcs if pc.state != "dead"]
+        if part == "first":
+            order = order[:1]
+        elif part == "rest":
+            order = order[1:]
+        for pc in order:
             if self.over() is not None:
                 return
             self.pc_turn(pc)
@@ -1265,17 +1292,23 @@ class Fight:
             surprised=self.encounter.surprise,
             party_advantage=any(c.profile.initiative_advantage for c in self.pcs))
         has_boss = any(f.role == "boss" for f in self.foes)
-        order = combat.round_order(first, self.opts, enemy_has_boss=has_boss)
         result = None
         while result is None and self.round < MAX_ROUNDS:
             self.round += 1
+            self._turns_this_round = {}
+            order = combat.round_order(first, self.opts, enemy_has_boss=has_boss,
+                                       round_no=self.round, surprised=self.encounter.surprise)
             for phase in order:
                 if phase == "boss":
                     self.enemy_phase(boss_only=True)
                 elif phase == "party":
                     self.party_phase()
+                elif phase == "party_first":
+                    self.party_phase("first")
+                elif phase == "party_rest":
+                    self.party_phase("rest")
                 else:
-                    self.enemy_phase(skip_boss_turns=1 if "boss" in order else 0)
+                    self.enemy_phase()
                 result = self.over()
                 if result is not None:
                     break

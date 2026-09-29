@@ -9,7 +9,7 @@ Your Facet says what you can do in a fight. This chapter covers the rest of who 
 Your **background** is the life you led before the story started. It gives you:
 
 - **Abilities:** +1 to each of three abilities. No score goes above 20.
-- **Skills:** proficiency in two skills. If your Facet pick already gave you one, pick any other skill instead.
+- **Skills:** proficiency in two skills. You take these before your Facet's two picks, so if the background already gives you a skill on your Facet's list, pick a different one from that list (Chapter 02, step 6).
 - **A tool:** proficiency with one tool.
 - **A knack:** the one the background names (*Knacks*, below).
 - **A Specialty:** you write it (*Specialties*, below). Each background suggests one.
@@ -223,9 +223,9 @@ You can rewrite one Drive at the end of any session. A Drive fulfilled, or broke
 | **Start** | 1 Spark at the start of every session. Unspent Sparks don't carry over. |
 | **Most you can hold** | 3. |
 | **Earn one** | A compel (above). The MM's call, for a great moment. Some features and talents: *Kindle*, *Prophecy*, *Turn the Odds*. |
-| **Spend one** | After a d20 test by you, or by an ally whose help you describe, and before the MM says what happens: add **1d6** to the roll. |
+| **Spend one** | After the MM says a d20 test by you, or by an ally whose help you describe, missed or failed, and before anything comes of it: add **1d6** to the roll. |
 
-A Spark is added after you see the roll, so spend it when 1d6 can change the result. You can spend one Spark on a roll; two players can each spend one on the same roll, as long as each describes how they help. Helping this way costs no action, but your character has to be in a position to help. A Spark never gives advantage or a reroll.
+The MM tells you whether a roll hits or succeeds; you don't need to know the AC or the DC. If it missed or failed, you can then spend a Spark, before the MM says what happens next. The MM may still say "that's nowhere close" when a Spark obviously can't help. A natural 1 on an attack roll still misses. You can spend one Spark on a roll; two players can each spend one on the same roll, as long as each describes how they help. Helping this way costs no action, but your character has to be in a position to help. A Spark never gives advantage or a reroll.
 
 > **Through the Mirror: why Sparks reset**
 >
@@ -239,7 +239,7 @@ Talking your way through a scene uses the same d20 as everything else, and its r
 
 ### Attitude
 
-Every character the MM plays has an **attitude** toward the party, somewhere on this track:
+Every character the MM plays has an **attitude** toward the party, somewhere on this track. A stranger starts **Neutral**; someone the party has crossed, or who has reason to distrust people like them, starts **Wary**. The MM can start anyone elsewhere for a reason.
 
 **Table 6–2: The Attitude Track**
 
@@ -255,7 +255,7 @@ Anything their attitude already allows, you get by asking. The roll is for movin
 
 ### Making Your Case
 
-Say what you're doing and why it should work. The MM calls for the check that fits: usually Persuasion, Deception, Intimidation or Performance, sometimes Insight or History if the argument depends on it. In a fight this is the Influence action.
+Say what you're doing and why it should work. The MM calls for the check that fits: usually Persuasion, Deception, Intimidation or Performance, sometimes Insight or History if the argument depends on it. In a fight this is the Influence action, and a foe you move to Neutral or better stops fighting, as if it had broken (Chapter 08).
 
 The DC depends on how hard this person is to move: **10** for someone with no real reason to refuse, **15** for someone with reasons, **20** for someone with good ones.
 
@@ -268,6 +268,10 @@ The DC depends on how hard this person is to move: **10** for someone with no re
 | Miss by 1 to 4 | No change, and that argument won't work again this scene |
 | Miss by 5 or more | Moves **one** step toward Hostile |
 
+**One roll per character per person per scene.** Each of you gets one try at moving a given person in a scene. Another character can make their own case; nobody gets a second roll until something changes.
+
+**Intimidation** moves someone toward Ally only while the threat holds. They do what you want because they're afraid, not because they like you. Once the threat is gone, they fall one step toward Hostile from wherever it left them.
+
 **Advantage.** You have advantage when you have **leverage** (something they want, something they fear, a debt they owe) or when your **Specialty** fits. Both at once is still just advantage.
 
 **Limits.** Nobody moves past what makes sense for them. A guard captain who would hang for opening the gate won't open it at Friendly; at Ally he might, or he might tell you when the shift changes. The MM will tell you when you're asking for something no roll can get. There are no social hit points, and no amount of dice talks a person into anything.
@@ -278,7 +282,7 @@ The DC depends on how hard this person is to move: **10** for someone with no re
 
 Exploration uses the SRD 5.2.1 rules: travel pace, marching order, light and vision, hazards and foraging. The MM frames a journey as the moments that matter, such as the river that needs crossing, the night the watch hears something, and the arrival. Somebody navigates (a Survival check for each leg) and somebody keeps watch.
 
-Resting is the SRD rule. A short rest is an hour; a long rest is eight. You spend Hit Dice on a short rest and recover everything on a long one. Features and talents that return on a rest say which one.
+Resting is the SRD rule. A short rest is an hour; a long rest is eight. On a short rest you can spend Hit Dice, rolling each as the SRD says and adding your Constitution modifier (hit points on level-up are fixed; Hit Dice still roll). You have one Hit Die per level, of your current size. You recover everything on a long one. Features and talents that return on a rest say which one.
 
 ---
 

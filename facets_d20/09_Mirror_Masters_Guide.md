@@ -12,7 +12,7 @@ The player rules are in 08_Combat.md. This is how they look from behind the scre
 
 ### Initiative and Your Half of the Round
 
-Each side rolls **one d20** and adds its best initiative modifier: the party uses its best Dexterity modifier, you use the best among your foes. Higher side goes first; ties go to the players. A surprised side goes second.
+Each side rolls **one d20** and adds its best initiative modifier: the party uses its best Dexterity modifier, you use the best among your foes. Higher side goes first; ties go to the players. A surprised side goes second. Bosses have their own two slots in the round (*Bosses*, below).
 
 Then you take your whole side's turns in one go, in whatever order tells the story. If the captain's shout is what makes the others charge, the captain goes first. Do it fast and out loud: "The two by the door go for the priest. Miss. Hit, that's 5."
 
@@ -20,19 +20,19 @@ Then you take your whole side's turns in one go, in whatever order tells the sto
 
 ### Fixed Damage
 
-Monsters don't roll damage. Use the average the stat block prints before the dice: "13 (2d8 + 4)" deals 13. On a **critical hit**, pick up the dice: roll the damage dice twice and add the modifier once. The table will watch, which is the point.
+Monsters don't roll damage. Use the average the stat block prints before the dice: "13 (2d8 + 4)" deals 13. On a **critical hit**, pick up the dice: roll them once and add the roll to the fixed damage, so that ogre's crit is 13 + 2d8. The table will watch, which is the point.
 
-Every creature, yours included, gets **one reaction a round**. Leaving a foe's reach provokes one opportunity attack, as in the SRD.
+Every creature, yours included, gets **one reaction a round**; a boss's comes back at the start of its top-of-the-round turn. Leaving a foe's reach provokes one opportunity attack, as in the SRD.
 
 ### Morale
 
 When a foe drops to half its hit points or lower, say so: "He's Bloodied. He's holding his side and looking at the door." Players who can see a fight turning make better choices.
 
 - **A standard foe** checks once, when it is first Bloodied: a DC 10 Wisdom saving throw. On a failure it breaks.
-- **Minions** check when their **leader** falls, all at once. That's the only thing that makes them check.
-- **Bosses, the mindless and the bound** (zombies, constructs, a guardian tied to its post) never check.
+- **Minions** check when their **leader** falls, all at once. A boss can be the leader; its minions check when it falls. A group with **no leader** checks once, when half of its minions are down.
+- **Bosses, the mindless and the bound** never check. The mindless are zombies, skeletons, oozes and most constructs; the bound are a guardian tied to its post, a summoned servant, a fanatic who has already decided to die here. Anything else that can think, undead and fiends included, breaks like anyone else unless you've decided before the fight that something binds it.
 
-A foe that breaks **flees**, **surrenders** or **bargains**, whichever suits it. A fleeing foe will be somewhere later, telling someone. A surrendered one hands the party a prisoner and a question. A bargaining one offers a name, a way out, the key; it may be lying.
+A foe that breaks stops fighting at once. It **flees** on its next turn (provoking as usual), **surrenders** or **bargains**, whichever suits it. A fleeing foe will be somewhere later, telling someone. A surrendered one hands the party a prisoner and a question. A bargaining one offers a name, a way out, the key; it may be lying.
 
 Decide before the fight who leads each group, even if it's only the biggest wolf. If the party works it out and goes for the leader, that's good play, and the crowd folding is the reward.
 
@@ -44,17 +44,28 @@ Use them for the crowd around the real threat, and make it obvious which ones th
 
 ### Bosses
 
-A boss is the monster the fight is about. Four rules:
+A boss is the monster the fight is about. Every boss rule is here; Chapter 08 gives the players the same rules in short.
 
-1. **Double hit points.** A boss has twice its stat block's hit points. Double them when it appears; Table 9–2 already prices it that way.
-2. **Top of the round.** A boss takes a turn at the start of every round, before either side, and a second turn in its side's half. So the party can never finish it before it acts. A Recharge ability rolls at the start of each of its turns.
-3. **Boss resolve.** When a boss fails a save against something that would stun, paralyse, incapacitate, banish, polymorph or put it to sleep, it **loses its next turn instead, and the effect ends**. It can lose at most one turn a round this way. Cross out Legendary Resistance, legendary actions and lair actions: the second turn does their job.
-4. **It changes at Bloodied.** Say so, and make it visible. Pick one:
+1. **Double hit points.** A boss has twice its stat block's hit points. Double them when it appears; Table 9–2 already prices it that way. It is Bloodied at half the doubled number: the ogre's 68 becomes 136, Bloodied at 68.
+2. **Two turns, never back to back.** A boss takes one turn at the **top of the round**, before either side, and its second **right after the first character's turn in the party's half** (Table 8–1). It takes no turn in its own side's half. So the party can never finish it before it acts, and it never acts twice in a row. If the foes are surprised, it loses its top-of-the-round turn in the first round.
+3. **Once a round.** Its **reaction** comes back, and any **Recharge** ability rolls, only at the start of its top-of-the-round turn. Anything that lasts "until the start (or end) of its next turn" lasts until the start (or end) of its next top-of-the-round turn, so a boss shakes off a short effect no faster than anyone else.
+4. **Boss resolve.** When something would stun, paralyze, incapacitate, banish, polymorph or put a boss to sleep, whether or not it allowed a save, the boss **loses its next turn instead, and the effect ends**. It can lose at most one turn a round this way. Cross out Legendary Resistance, legendary actions and lair actions: the second turn does their job.
+5. **It changes at Bloodied**, the moment it gets there, even halfway through someone's turn. Say so, and make it visible. Pick one:
    - **It gets worse.** A new attack, a longer reach, a second breath.
    - **It gets desperate.** Advantage on its attacks; attacks against it have advantage too.
-   - **It calls for help.** A handful of minions arrive, and the fight has a new front.
+   - **It calls for help.** A handful of minions arrive, and the fight has a new front. Pay for them when you build the fight: keep up to a fifth of the budget back for them. They act from the foes' next half.
    - **It tears the room apart.** The floor gives, the fire spreads. Everyone is on a clock.
    - **It runs for what it wants.** The party chooses between chasing it and finishing what's in front of them.
+
+**A boss round, worked.** An ogre boss (136 hit points, Bloodied at 68) and three goblin minions against four characters. The party wins initiative.
+
+1. **The ogre, top of the round.** Its reaction comes back; a Recharge ability would roll now.
+2. **The party's first character.** The party picks who: often whoever can hurt or hinder the ogre most.
+3. **The ogre's second turn.** No new reaction, no Recharge roll.
+4. **The other three characters**, in any order.
+5. **The goblins.** The ogre takes no turn here.
+
+Next round starts again at 1, so the ogre's two turns always have a character's turn between them. If the goblins had won initiative, they'd go at step 2 and the party's half would follow, with the ogre's second turn after its first character.
 
 ### Ending the Fight
 
@@ -83,47 +94,56 @@ Find the party's level, read across to the tier, and multiply by the number of p
 
 | Level | Skirmish | Clash | Battle | Desperate |
 |---|---|---|---|---|
-| 1 | 10 | 16 | 19 | 23 |
-| 2 | 12 | 19 | 23 | 27 |
-| 3 | 16 | 25 | 31 | 34 |
-| **4** | **19** | **30** | **34** | **41** |
-| 5 | 33 | 49 | 60 | 68 |
-| 6 | 34 | 52 | 63 | 71 |
-| 7 | 40 | 63 | 76 | 84 |
-| 8 | 46 | 69 | 82 | 94 |
-| 9 | 62 | 91 | 105 | 116 |
-| 10 | 66 | 95 | 110 | 120 |
+| 1 | 9 | 16 | 18 | 23 |
+| 2 | 13 | 19 | 23 | 27 |
+| 3 | 16 | 25 | 30 | 34 |
+| **4** | **18** | **29** | **34** | **40** |
+| 5 | 33 | 50 | 60 | 66 |
+| 6 | 34 | 51 | 62 | 70 |
+| 7 | 39 | 63 | 74 | 82 |
+| 8 | 46 | 68 | 82 | 94 |
+| 9 | 61 | 89 | 105 | 116 |
+| 10 | 63 | 92 | 109 | 118 |
 
 Use the party's average level, rounded down. Notice the jump between 4th and 5th: Extra Attack and 3rd-level spells arrive together, and the budget moves with them.
 
-Then look each foe up in **Table 9–2** (Appendix_Monster_Threat.md), which prices every SRD monster we've tested from its own stat block, in each of its three roles. Add.
+Then look each foe up in **Table 9–2** (Appendix_Monster_Threat.md), which prices every SRD monster we've tested from its own stat block, in each of its three roles. Monsters that hit hard for their challenge rating are already marked up there, so you never adjust for them yourself. Add.
 
 **Adjusting the budget:**
 
-- **Party size.** The budget is already per character, so three players or six just multiply by three or six. (Measured against the four-player fight: three players need 26% less, five 24% more, six 43% more. Per character gives 25, 25 and 50. Close enough.)
-- **A lone boss** with nobody else in the fight counts **× 1.2** its boss Threat. Alone, it gets hit by everyone.
+- **Party size.** The budget is already per character, so three players or six just multiply by three or six. (Measured against the four-player fight: three players need 26% less, five 23% more, six 40% more. Per character gives 25, 25 and 50. Close enough.)
+- **A lone boss** counts **× 1.2** its boss Threat. Alone, it gets hit by everyone. A boss whose company is worth less than a fifth of it counts **× 1.1**, because that little company is usually gone in the first round.
 - **A tired party** (about half its hit points and half its daily resources left): build **one tier down**.
-- **Hard hitters.** Table 9–2 marks the monsters that deal more damage than their CR usually does. Until the next balance pass, **a group of hard-hitting monsters counts as the next tier up**: build a Clash of them and it plays as a Battle.
+
+**A boss-heavy fight is swingy.** When one boss is more than three-quarters of the budget, its dice decide the evening: a good run of hits and the Clash plays like a Battle. Give it more company, or build it one tier down.
+
+**Party size and a boss.** Table 9–2's *Boss at levels* column is for four characters. With three, a boss that fits there is about a quarter too big; look one level higher in the column, or use it as a standard foe.
 
 ### The Baseline Fight: Four 4th-Level Characters
 
-The Clash budget is `30 × 4 = 120` Threat. Some ways to spend it, all SRD monsters, numbers from Table 9–2:
+The Clash budget is `29 × 4 = 116` Threat. Some ways to spend it, all SRD monsters, numbers from Table 9–2:
 
-- **A crowd with a leader.** A **Bandit Captain** (boss, 83) and six **Bandit** minions (minion, 6): `83 + 6 × 6 = 119`. Knock down the captain and the bandits check morale.
-- **Standards.** An **Ettin** (standard, 49), two **Ogre**s (standard, 30) and a **Dire Wolf** (standard, 13): `49 + 2 × 30 + 13 = 122`. Each checks morale at Bloodied, so expect one to bargain.
-- **Undead.** A **Wight** (standard, 40) and ten **Zombie** minions (minion, 8): `40 + 10 × 8 = 120`. The zombies never break, which is already in their number.
-- **A lone boss.** A **Gargoyle** (boss, 102) on its own: `102 × 1.2 = 122`. Double its hit points when it lands.
-- **Hard hitters.** Three **Knight**s (standard, 38) cost `3 × 38 = 114`, but knights hit hard, so that's a Battle. For a Clash, spend the Skirmish budget on them: `19 × 4 = 76`, which is two knights, `2 × 38 = 76`.
+- **A crowd with a leader.** A **Bandit Captain** (boss, 88) and five **Bandit** minions (minion, 6): `88 + 5 × 6 = 118`. Knock down the captain and the bandits check morale.
+- **Standards.** An **Ettin** (standard, 49), two **Ogre**s (standard, 30) and a **Wolf** (standard, 7): `49 + 2 × 30 + 7 = 116`. Each checks morale at Bloodied, so expect one to bargain.
+- **Undead.** A **Wight** (standard, 40) and nine **Zombie** minions (minion, 8): `40 + 9 × 8 = 112`. The zombies never break, which is already in their number.
+- **A lone boss.** An **Ogre** (boss, 104) on its own: `104 × 1.2 = 125`, a shade over, which is close enough. Double its hit points when it arrives.
+- **Hard hitters.** Three **Knight**s (standard, 40) cost `3 × 40 = 120`. Knights hit hard for their challenge rating, and their number in Table 9–2 already says so.
 
 ### The Day
 
-A standard adventuring day is **three Clashes**, with a **short rest after the first and the second**. Parties survive that nine or ten times in ten at every level. A fourth Clash makes it a **hard day**: survived somewhere between four and eight times in ten. That's fine as a choice, when the party pushes on instead of resting. Don't make it the default.
+A standard adventuring day is **three Clashes**, with a **short rest after the first and the second**. Parties survive that about nine times in ten or better at every level (86–99% in the simulator); *survive* means the party wins every fight of the day. A lost fight doesn't have to mean deaths (*Ending the Fight*, above), and in the simulator a character died on about one standard day in eight at 1st level, one in sixteen at 2nd, and one in thirty or fewer from 3rd on. A fourth Clash makes it a **hard day**: survived somewhere between four and eight times in ten. That's fine as a choice, when the party pushes on instead of resting. Don't make it the default.
+
+**What a short rest gives back.** Hit Dice (each character spends up to one per level and rolls them), and every feature that says "returns on a short rest": Body's *Second Wind* (one use) and *Action Surge*, Mind's *Study* and once a day *Studied Recovery* (a few slot levels), a use of *Channel*, *Rage* or *Sworn Strike*, a Monk's focus. Spell slots and *Kindle* wait for a long rest. So a short rest refills hit points well; what runs down across a day is the casters' slots.
 
 Most sessions won't hold three fights anyway, and that's the point: the rest of the evening is for people and places.
 
-### Heroic by Default
-
-The preset characters in 02_Characters.md run a little stronger than the SRD classes they resemble: more hit points at 1st level and broader talents. That's deliberate. The game is pitched at heroic tables where characters rarely die by accident. If you run a published fifth-edition adventure, its fights were built for weaker characters: **make each one about one tier tougher** than written.
+> **MM Note: heroic by default**
+>
+> **Default:** the preset characters in 02_Characters.md run a little stronger than the SRD classes they resemble: more hit points at 1st level and broader talents. The game is pitched at heroic tables where characters rarely die by accident.
+>
+> **The dial:** a published fifth-edition adventure's fights were built for weaker characters. If they feel easy, make each one about a tier tougher than written.
+>
+> **The cost:** don't do it by default. Price a published fight with Table 9–2 first; it usually tells you more than the adventure's own difficulty does.
 
 ---
 
@@ -131,34 +151,42 @@ The preset characters in 02_Characters.md run a little stronger than the SRD cla
 
 Table 9–2 covers the monsters the simulator knows. For anything else in the SRD 5.2.1, it takes about a minute:
 
-1. **Damage per turn.** Add up everything it does on an ordinary turn if it all hits, using the printed averages. A Multiattack adds up. Leave out a Recharge ability; it's a spike, and you'll remember it's coming.
-2. **Threat.** Standard: **√(hit points × damage per turn)**. Minion: **√(10.5 × damage per turn)**. Boss: the standard figure **× 3.34**, which pays for the doubled hit points and the extra turn. A monster that never breaks counts **× 1.16** as a standard or minion.
-3. **Morale.** One line: what it does when it breaks. Or "never", for the mindless and the bound.
-4. **Boss only.** One line for its Bloodied change. Cross out legendary and lair actions.
+1. **Damage per turn.** Add up everything it does on an ordinary turn if it all hits, using the printed averages. A Multiattack adds up.
+   - **Two ways to spend a turn** (claws, or a volley of spikes): price the one that deals more.
+   - **A save** counts as if the target fails, whether a success halves the damage or not.
+   - **Damage that can catch more than one of you** (an area, a spray, two targets) counts twice.
+   - **Spellcasters:** count the attack or cantrip it can use every turn (most SRD casters have one, such as *Arcane Burst*). Leave out its spells with uses a day; they're spikes, and you'll remember they're coming.
+   - **A Recharge ability** (a breath, a whirlwind): add a quarter of its damage, after counting it twice if it catches more than one of you. A boss rolls Recharge once a round, like anyone else.
+2. **Hit points.** The stat block's, with two changes. A monster that **resists or is immune to** the damage most of your party deals counts its hit points twice. One that **regenerates** adds three rounds of it.
+3. **Threat.** Standard: **√(hit points × damage per turn)**. Minion: **√(8.4 × damage per turn)**. Boss: the standard figure **× 3.51**, which pays for the doubled hit points and the extra turn. A monster that never breaks counts **× 1.16** as a standard or minion. A **hard hitter**, whose damage per turn is at least 1.25 times the *Damage* column of Table 9–3 for its CR, counts **× 1.06** in every role.
+4. **Morale.** One line: what it does when it breaks. Or "never", for the mindless and the bound.
+5. **Boss only.** One line for its Bloodied change. Cross out legendary and lair actions.
 
-The owlbear, worked: 59 hit points; two Rends at 14 each, so 28 a turn. Standard: `59 × 28 = 1652`, whose square root is 41. Minion: `10.5 × 28 = 294`, whose root is 17. Boss: 41 × 3.34, which Table 9–2 gives as 136 (it works from the unrounded figure).
+**What the number doesn't know.** A monster the party can't reach (it flies, and nobody has much ranged damage) or can't hurt (the party has one damage type and it's immune) plays far above its Threat. So does a condition that takes a character out of the fight, such as a ghoul's paralysis. Give the party a way to deal with it, or build a tier down.
+
+The owlbear, worked: 59 hit points; two Rends at 14 each, so 28 a turn, which is more than 1.25 times the 22 Table 9–3 gives for CR 3, so it hits hard. Standard: `59 × 28 = 1652`, whose square root is 41; × 1.06 for hitting hard, 43. Minion: `8.4 × 28 = 235`, whose root is 15; × 1.06, 16. Boss: 41 × 3.51 × 1.06, which Table 9–2 gives as 151 (it works from the unrounded figures).
 
 No calculator? Use its challenge rating in Table 9–3. That's the typical monster of the CR, so it's rougher than the monster's own block, but it's fine for a first draft.
 
 **Table 9–3: Threat by Challenge Rating**
 
-| CR | Standard | Minion | Boss |
-|---|---|---|---|
-| 1/8 | 6 | 6 | 20 |
-| 1/4 | 8 | 7 | 27 |
-| 1/2 | 12 | 9 | 39 |
-| 1 | 18 | 11 | 60 |
-| 2 | 28 | 13 | 94 |
-| 3 | 37 | 15 | 124 |
-| 4 | 46 | 17 | 154 |
-| 5 | 55 | 18 | 184 |
-| 6 | 64 | 20 | 213 |
-| 7 | 72 | 21 | 239 |
-| 8 | 81 | 22 | 269 |
-| 9 | 89 | 23 | 298 |
-| 10 | 98 | 24 | 327 |
-| 11 | 106 | 25 | 353 |
-| 12 | 114 | 26 | 382 |
+| CR | Standard | Minion | Boss | Damage |
+|---|---|---|---|---|
+| 1/8 | 6 | 6 | 21 | 4 |
+| 1/4 | 8 | 6 | 28 | 5 |
+| 1/2 | 12 | 8 | 40 | 7 |
+| 1 | 18 | 10 | 63 | 11 |
+| 2 | 28 | 12 | 99 | 17 |
+| 3 | 37 | 14 | 131 | 22 |
+| 4 | 46 | 15 | 162 | 27 |
+| 5 | 55 | 16 | 194 | 32 |
+| 6 | 64 | 18 | 224 | 37 |
+| 7 | 72 | 19 | 251 | 41 |
+| 8 | 81 | 20 | 283 | 46 |
+| 9 | 89 | 21 | 313 | 51 |
+| 10 | 98 | 22 | 343 | 56 |
+| 11 | 106 | 22 | 371 | 60 |
+| 12 | 114 | 23 | 401 | 65 |
 
 > **MM Note — reading a stat block for the first time**
 >
@@ -177,6 +205,11 @@ Fights are a third of the game, if that. The rest is people and places, and the 
 ### Social Scenes
 
 Most talk needs no roll. When the outcome is uncertain and matters, the attitude track in 06_Backgrounds_Sparks_and_Social.md does the work: Hostile to Ally, one step per success, two when the roll beats the DC by 10, back one when it misses by 5 or more. Set the DC by how hard the person is to move: 10, 15 or 20.
+
+- **Where they start.** A stranger is Neutral. Someone the party has crossed, or who has reason to distrust people like them, is Wary. Start anyone else where the story puts them, and decide before the scene.
+- **How many tries.** One roll per character per person per scene. Four characters can each make a case; nobody makes a second until something changes (a new fact, a gift, a day).
+- **Intimidation** moves someone only while the threat holds. When it's gone, they fall one step toward Hostile, and they remember who frightened them.
+- **In a fight,** a foe moved to Neutral or better stops fighting, as if it had broken. Most won't listen until they're Bloodied.
 
 Write down where the important people sit, and move them when the party does something they'd notice, roll or no roll. The best use of the track is between sessions: someone who was wary last week and has since heard what the party did at the bridge should greet them differently. Players notice, and it tells them their choices stick.
 

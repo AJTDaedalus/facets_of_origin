@@ -6,20 +6,23 @@ Combat in Facets d20 is SRD 5.2.1 combat with less bookkeeping. You still roll a
 
 ## The Round
 
-A round has two halves: one side acts, then the other.
+A round has two halves: one side acts, then the other. A boss, if the fight has one, also acts at two fixed points of its own.
 
 **Table 8–1: The Round**
 
 | Step | What happens |
 |---|---|
-| 1. Who goes first | Each side rolls one d20 (below). |
-| 2. First side acts | Every creature on that side takes its turn, in any order the side likes. |
-| 3. Second side acts | Every creature on the other side does the same. |
-| 4. Next round | Back to step 2. The order of the sides never changes. |
+| 1. Who goes first | Each side rolls one d20 (below). Once per fight. |
+| 2. Boss, top of the round | Each boss takes a turn, before either side. |
+| 3. First side acts | Every creature on that side takes its turn, in any order the side likes. |
+| 4. Second side acts | Every creature on the other side does the same. |
+| 5. Next round | Back to step 2. The order of the sides never changes. |
+
+**A boss's second turn** comes right after the first character's turn in the party's half, whichever half that is. So a boss never acts twice in a row, and it takes no turn in its own side's half. A fight with no boss skips step 2.
 
 ### Who Goes First
 
-If one side is **surprised**, it goes second. No roll.
+If one side is **surprised**, it goes second. No roll. A surprised boss also loses its top-of-the-round turn in the first round.
 
 Otherwise each side rolls **one d20** and adds its best initiative modifier: for the party, the best Dexterity modifier among you (plus anything that adds to initiative); for the foes, the MM uses the best among them. The higher total goes first. On a tie, the players do. If anyone in the party has *Alert* and is conscious, the party's roll has advantage.
 
@@ -41,13 +44,13 @@ On your side's half, the players decide the order. If the rogue wants the fighte
 
 ### Actions
 
-The actions are the SRD 5.2.1 list: **Attack, Dash, Disengage, Dodge, Help, Hide, Influence, Magic, Ready, Search, Study** and **Utilize**. Help gives advantage, as the SRD says. Influence in a fight uses the attitude track (Chapter 06); a foe who has been hurt is often much readier to listen. Ready is how you react to something on the other side's half: "if it comes through the door, I hit it."
+The actions are the SRD 5.2.1 list: **Attack, Dash, Disengage, Dodge, Help, Hide, Influence, Magic, Ready, Search, Study** and **Utilize**. Help gives advantage, as the SRD says. Influence in a fight uses the attitude track (Chapter 06); a foe who has been hurt is often much readier to listen, and a foe you move to Neutral or better stops fighting as if it had broken (below). Ready is how you react to something on the other side's half: "if it comes through the door, I hit it."
 
 ---
 
 ## Reactions and Opportunity Attacks
 
-You get **one reaction** per round, and it comes back at the start of your turn.
+You get **one reaction** per round, and it comes back at the start of your turn. A boss's comes back only at the start of its top-of-the-round turn, so it too has one a round.
 
 **Leaving an enemy's reach provokes one opportunity attack from it**, if it has its reaction. It happens only when you move out on your own; being shoved, teleporting or taking the Disengage action doesn't provoke.
 
@@ -57,7 +60,7 @@ You get **one reaction** per round, and it comes back at the start of your turn.
 
 Attack rolls, advantage and disadvantage, critical hits and cover work as the SRD says.
 
-**You roll your damage. Monsters don't.** A monster deals the **fixed damage** printed on its stat block, which is the SRD average. On a critical hit the MM rolls it: double the damage dice, roll them, add the modifier.
+**You roll your damage. Monsters don't.** A monster deals the **fixed damage** printed on its stat block, which is the SRD average. On a critical hit the MM adds one roll of the attack's damage dice to the fixed damage, so a monster's crit is never less than its ordinary hit.
 
 ### One Rider a Turn
 
@@ -71,7 +74,7 @@ A **rider** is extra damage dice that a talent adds to a hit. The talents that h
 
 ## Sparks in a Fight
 
-A Spark is spent after a d20 test and before the MM says what happens: add 1d6 to it (Chapter 06). You can spend one on your own roll or on an ally's roll you help with, and helping this way costs no action.
+The MM tells you whether your attack hits and whether a save or check succeeds; you don't need to know the AC or the DC. **After a miss or a failure, and before anything comes of it**, you can spend a Spark to add 1d6 to the roll (Chapter 06). You can spend one on your own roll or on an ally's roll you help with, and helping this way costs no action. A natural 1 on an attack still misses.
 
 ---
 
@@ -79,7 +82,7 @@ A Spark is spent after a d20 test and before the MM says what happens: add 1d6 t
 
 A creature at or below half its hit points is **Bloodied**. This applies to everyone, you included. The MM tells you when a foe becomes Bloodied; you can see the limp, the dropped shield, the look toward the door.
 
-Most foes don't want to die. A standard foe checks its **morale** once, when it is first Bloodied: a DC 10 Wisdom save. If it fails, it **breaks**: it flees, surrenders or tries to bargain, whichever suits it. Minions check when their leader falls. Bosses never check, and neither do mindless or bound creatures; the MM knows which is which.
+Most foes don't want to die. A standard foe checks its **morale** once, when it is first Bloodied: a DC 10 Wisdom save. If it fails, it **breaks** at once and stops fighting: it flees, surrenders or tries to bargain, whichever suits it. One that flees goes on its next turn, and leaving your reach provokes an opportunity attack as usual. Minions check when their leader falls, or, with no leader, when half of them are down. Bosses never check, and neither do mindless or bound creatures; the MM knows which is which.
 
 So a fight usually ends before the last foe falls, and it often ends with somebody you can question. A foe who surrenders is a prisoner and a source of answers. What you do with one is the kind of choice the game is built to ask you, and the MM will remember it.
 
@@ -91,7 +94,9 @@ So a fight usually ends before the last foe falls, and it often ends with somebo
 
 **Standard** foes are SRD stat blocks used as written, with fixed damage.
 
-**Bosses** take a turn at the **top of every round**, before either side, and another turn in their side's half. When an effect would stun, paralyze, incapacitate, banish or polymorph a boss or put it to sleep, the boss loses its next turn instead and the effect ends; it can lose at most one turn a round this way. A boss changes when it becomes Bloodied. Bosses have no legendary or lair actions. The rest of their rules are the MM's (Chapter 09).
+**Bosses** take two turns a round: one at the **top of the round**, before either side, and one right after the first character's turn in the party's half (Table 8–1). A boss has twice its stat block's hit points, so it is Bloodied at half of the doubled number. When an effect would stun, paralyze, incapacitate, banish or polymorph a boss or put it to sleep, with a save or without one, the boss loses its next turn instead and the effect ends; it can lose at most one turn a round this way. A boss changes the moment it becomes Bloodied. Bosses have no legendary or lair actions. The rest of their rules are the MM's (Chapter 09).
+
+A creature that joins partway through a fight acts with its side, starting in that side's next half.
 
 ---
 

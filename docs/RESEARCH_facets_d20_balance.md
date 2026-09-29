@@ -278,3 +278,144 @@ into choosing the card; the book lists it as its own line. (2) The custom count 
 counted material to the data: every talent, feature, knack, background and preset printed
 once with the yaml's numbers, the preset cards' 1st-level HP/AC/attack/DC from the engine,
 Chapter 07's slot tables, Common list and all 21 domain lists.
+
+
+## Playtest fix pass
+
+*Fix-pass lead, 2026-09-28, branch `feat/facets-d20`. Source: `docs/PLAYTEST_facets_d20_fresh_mm.md`
+(MM #n = its ranked table, G = its guesses, §8 = its contradictions) and
+`docs/PLAYTEST_facets_d20_fresh_player.md` (P #n = its ranked table, C = contradictions).
+Decisions V43–V49 (below). Talent count, knacks and the even-level structure untouched
+(owner question pending; Amendment 5 edges will slot into Table 2–5 beside the existing
+pick). Every number re-derived with `python tools/d20_sim.py all --write` after the rule
+changes; Table 9–2 regenerated with `python -m tools.build_d20_threat_table`.*
+
+### Decisions
+
+| # | Decision | Playtest ref | Where |
+|---|---|---|---|
+| **V43** | **Ties keep the main track you had** (was "Steel wins a tie"). Main track is walked talent by talent in the order taken; the track that pulls ahead wins, a tie changes nothing. | P #3 (the Full→Half trap), C2 | `build.main_track_history`, yaml `tracks.main_track.tie: existing`, 01, 02, 10 |
+| **V44** | **Boss turn**: top of the round, and right after the first character's turn in the party's half; none in its side's half, so never back to back. One reaction a round and one Recharge roll a round (both at the top turn); a surprised boss loses its round-1 top turn; durations count the top turn; resolve triggers "with a save or without one"; Bloodied = half the doubled HP, immediate; reinforcements are budgeted (a fifth kept back) and act from the foes' next half. All boss rules in one list in 09; a boss step in Table 8–1; a worked boss round. | MM #1, #7, G1–G4, G6, G7, G10, G11, §8.1–3, §8.6 | `combat.round_order`, `turns_in_side_half`, `boss_turn_refreshes`, `begin_turn`; sim; 08, 09, 10 |
+| **V45** | **Monster crit** = fixed damage + one roll of the dice (same mean as doubled dice, never below the fixed hit). | MM #13 | `combat.monster_damage`; 08, 09, 10 |
+| **V46** | **Sparks after the call**: the MM says hit/miss (success/failure); a Spark may then be spent on a miss or failure (Turn the Odds: subtract from a hit or success) before consequences. Hidden AC/DC stays. | P #1 | `combat.spark_may_spend`; sim; 01, 06, 08, 10 |
+| **V47** | **Hard hitters priced in Table 9–2** (× the measured mark-up in every role; the generator measures it every run), and **Recharge abilities add a quarter of their damage** (area doubling first). The "next tier up" rule is gone from 09 and the appendix. This implements owner Amendment 4 item 2 more precisely: the ruling's intent (hard hitters cost more) with the measured amount instead of a tier cliff. | MM #2, §8.5, OQ-2 | `analysis.hits_hard`, `ThreatModel.hard/price`, `task_monster_factor`, `monsters.turn_damage`; d20_sim 2b; appendix; 09 |
+| **V48** | **Morale edges**: a boss can lead (minions check when it falls); leaderless minions check once at half down; a broken foe stops at once and flees on its next turn (provoking); "mindless and bound" given examples (intelligent undead and fiends break unless bound). | MM #5, G5, P #7 | `combat.leaderless_minions_check`; sim; 08, 09, 10 |
+| **V49** | **Social defaults**: a stranger starts Neutral, the crossed Wary; one roll per character per person per scene; Intimidation fades one step toward Hostile; Influence in a fight stops a foe at Neutral or better. | MM #6, task 5 | new `software/facets_d20/social.py` (+ `tests/test_facets_d20_social.py`); 06, 08, 09, 10 |
+
+### Conversion rules (MM #3), engine and 09 step 1–3
+
+`monsters.turn_damage`, `monsters.effective_hp`, `ThreatModel.price`, each tested
+(`TestConversionRules`): two routines → the higher; a save counts as a failed save
+(half-on-success or not); damage that can catch more than one creature counts twice;
+casters count their every-turn attack or cantrip, and spells with uses a day are spikes
+(left out); Recharge adds a quarter (V47); resistance or immunity to what most of the party
+deals doubles HP (× √2 on Threat); regeneration adds three rounds of it. A line on what the
+number doesn't know (unreachable flyers, total immunity, take-out conditions such as a
+ghoul's paralysis).
+
+### The rest, by reference
+
+- **MM #4, #8**: an MM half of 10 (Table 10–6 budget, generated-tested against the yaml;
+  Table 10–7 tiers; adjustments; the boss list; morale; the day; social defaults). 10 only
+  restates 08/09.
+- **MM #4, #9, #11**: "*Boss at levels* is for four characters" (09 and the appendix
+  text); a boss over three-quarters of the budget is flagged swingy; a lone boss ×1.2 and
+  a boss whose company is under a fifth of it ×1.1 (measured: ×1.16 alone, ×1.06 at a
+  fifth, ×0.99 at half; `analysis.boss_markup`).
+- **MM #10**: *survive* defined (win every fight of the day; deaths reported separately);
+  what a short rest gives back listed; 01 #6 now says Hit Dice still roll.
+- **MM #12**: each preset card prints HP/AC (and DC) at 5th and 10th, tested against the engine.
+- **MM "what I'd cut"**: *Heroic by Default*'s "one tier tougher" is now an MM Note dial, not a rule.
+- **§8.7** "paralyse" → "paralyze". **§8.8 / P #10** *Soul modifier* defined wherever it's used and in 02 *Talents from Other Facets* (with *Study*-dependent talents and *Clockwork Guardian*'s Int).
+- **P #2, C2**: rank gates as three numbered rules in 02 and 10; "all but the first rank" and "every rank after the first" gone; a boxed after-every-pick checklist in 02.
+- **P #3**: hit points recalculated when the die shrinks, Hit Dice change size, lost armor training means no casting in that armor; a lapse example in the other direction (Steel-first Soul going Spell at 9th); engine tests (`test_lapse_shrinks_the_hit_die…`, `test_lapsed_armor_training…`).
+- **P #4**: "a talent's own ability is not a spell" (02 *Reading a talent entry*, 03 *Rage*, 10), naming *Counterspell*, *Silence*, *Rage*, *Wild Shape* and the bonus-action spell rule.
+- **P #5**: Steel depth ≥1 → a held weapon or shield is a focus and does somatic components (07, 03, 10).
+- **P #6, C1**: skill overlap stated one way (02 step 6 and 06).
+- **P #8** *Kindle* can target you. **P #11** *Wider Study* first = two domains. **P #12, C4** Body's +2 is "for the main track, not for depth" in 01, 02, 03, 10. **P #13** a Body dabbler tip in 03. **P #14** "(max 20)" moved. **P #15** 02 step 9 heading includes language. **P #16, C5** "talents grow on their own" fixed. **C3** the prismatic line in 05 now names all three pure casters. **C6** *Ensnaring Strike* removed from Verdance (the rule now says no list spell triggers on your next weapon hit); tested with the other smites.
+- **P runners-up**: Help and "in a position to help" in 10; late arrivals act with their side from its next half (08); the preset names annotated in 02 as familiar shapes, not classes (Amendment 5 note; renaming is PQ-1).
+- **Tinker (consequence of V43)**: *Weapon Expert* 1st, *Clockwork Guardian* 3rd, breastplate and shield from 1st; *battle_priest* keeps Spell main at 7th (no heavy armor).
+
+### V43 measured: "ties to the existing main track" against "Steel wins ties"
+
+Swap test, all 29 presets and sim builds, n = 250 days × 4 positions a cell (scratch harness
+on `analysis.task_swap`, same seeds). Only two builds ever tie with Spell ahead first: the
+Tinker (3rd–10th) and *battle_priest* (7th–10th).
+
+| Variant | L1 range | L4 | L7 | L10 | Tinker L4/7/10 | *battle_priest* L7/L10 |
+|---|---|---|---|---|---|---|
+| A: Steel wins ties (old) | −10…+11 | −12…+9 | −8…+10 | −12…+13 | −2/−4/−7 | +4/−6 |
+| B: existing, Tinker unchanged | −10…+11 | −11…+11 | **−16**…+10 | −12…+13 | −11/**−16**/−12 | +8/+5 |
+| C: existing, Tinker Steel-first (adopted) | −10…+11 | −12…+9 | −8…+10 | −12…+13 | −2/−4/−7 | +8/+5 |
+
+The band holds under C, and the trap is gone: a Spell-first hybrid keeps the Full table when
+its second Steel talent ties the tracks. Adopted.
+
+### Re-derived numbers (full tool run after V43–V49)
+
+| | Before | After |
+|---|---|---|
+| Threat model | minion √(10.5 × d), boss × 3.34, never × 1.16 | minion **√(8.4 × d)**, boss **× 3.51**, never × 1.16, **hard hitter × 1.06** |
+| Table 9–1, 4th level | 19 / 30 / 34 / 41 | **18 / 29 / 34 / 40** (every level within ±3 of before; 10th 66/95/110/120 → 63/92/109/118) |
+| Clash, 1st–10th | 2.97–3.58 rounds, 99–100% wins | **2.96–3.51** rounds, 27–29% HP, **96–100%** wins (9th–10th 96.5%, just under the yaml's 97) |
+| Baseline (four 4th) | Clash 3.46 rds, 27%, 99.7% | Skirmish 2.22 rds 11% · **Clash 3.51 rds, 27%, 99.7%, 0.3% death** · Battle 4.77, 51%, 86% · Desperate 5.28, 66%, 68% |
+| Lone boss mark-up (measured) | ×1.20 | ×1.16 (the printed ×1.2 stands) |
+| Party size (three / five / six) | −26 / +24 / +43% | −26 / **+23 / +40%** |
+| Standard day survived | 90–99% | **86–99%** (1st, 9th, 10th at 86–87%; a PC death on 13% of 1st-level days, as before) |
+| Hard day (four Clashes) | 41–78% | 38–77% |
+| Swap band (±15%) | −11…+12, 0 misses | **−11…+15, 0 misses** (Monk +14.7% at 4th, *unbreakable* +13.6% at 10th are the edges) |
+| Table 9–2 examples | Bandit Captain boss 83, Ogre boss 99, Knight 38, Owlbear boss 136 | 88, 104, **40** (hits hard), **151** (hits hard) |
+
+Why the boss factor rose: with its second turn after the party's first character instead of
+in its own half, a boss acts later on average when the foes win initiative and the party
+gets a turn in before it acts twice; the boss is worth 3.51 standards instead of 3.34, and
+the minion's measured durability fell (8.4). The Clash still lands at 3–3.5 rounds.
+
+Test counts: `tests/test_facets_d20_*.py tests/test_no_private_canon.py` 683 passed; full suite
+(`--ignore=tests/e2e`) 1774 passed.
+
+### Deferred
+
+- **P #9** preset cards listing 1st-level spells, saves and skill totals: a presentation
+  pass (the cards stay the whole *decision* list; the numbers are one read of 07).
+- **MM #3 flight/range and condition pricing**: guidance only ("what the number doesn't
+  know"); pricing them needs positioning and conditions the simulator doesn't model.
+- **Clash wins at 9th–10th 96.5%** against the yaml's 97% floor, and the 1st-level day
+  death rate (13%): next balance pass.
+
+
+## Playtest fixes — owner questions
+
+*Fix-pass lead, 2026-09-28. Findings from the two fresh-eyes playtests that need a ruling
+rather than a fix. Each has the background in plain words and a recommendation; nothing
+here is changed in the books until the owner answers, unless it says "done, reversible".*
+
+- **PQ-1 — Preset names that read as 5e class names.** *Background:* the player tester
+  felt the twelve cards (Fighter, Rogue, Barbarian, Monk, Wizard, Priest, Druid, plus
+  Investigator, Loremaster, Tinker, Oracle, Oathsworn) signal "5e classes, reassembled"
+  and undercut "Facets, not classes". Renaming is not cheap: the names are ids across
+  the yaml, the sim builds, the engine's pinned numbers, the balance tables and three
+  chapters. *Done now (cheap):* 02 *Presets* says the names borrow familiar shapes so a
+  player can find what they're after, and that every card is five picks anyone could make.
+  *Recommendation:* keep the familiar names for the first human table (they are the
+  fastest way in for a 5e player), and revisit after it; if the owner wants new names now,
+  rename the seven that are SRD class names in one pass (display names only; ids can stay).
+- **PQ-2 — The hard-hitter rule had it backwards.** *Background:* Amendment 4 item 2 said
+  "a group of hard-hitting monsters counts as the next tier up". The fix pass measured
+  every SRD monster as a group against the generic foes the budgets were fitted on (the
+  generator now does this every run). Measured, hard hitters play about 6% above their square-law price, not a whole tier (a tier is +13–40%): median ratio 0.53 against 0.50 for the rest (×1.06). What made real single-kind groups play hot in OQ-2 was mostly the Recharge monsters (the young dragons, hell hound: +28–40%), whose breath the old pricing left out entirely; those now add a quarter of the breath. *Recommendation:* keep the measured
+  factor in Table 9–2 (it is generated, like never-breaks) and the Recharge pricing; drop
+  the interim rule for good (done).
+- **PQ-3 — The Tinker's first level.** *Background:* with ties keeping the main track you
+  had (V43), a Tinker that took *Clockwork Guardian* first would stay Spell main at 3rd and
+  never get medium armor, shields or the d8 (−16% at 7th, outside the band). The card now
+  takes *Weapon Expert* at 1st and *Clockwork Guardian* at 3rd, and starts in breastplate
+  and shield. Its numbers are back where they were (−4% to −7%). *Recommendation:* accept;
+  the guardian arriving at 3rd is the one visible change.
+- **PQ-4 — Influence ends a fight.** *Background:* the MM tester asked what a Neutral
+  enemy does mid-fight. The fix pass wrote "a foe moved to Neutral or better stops
+  fighting, as if it had broken". That makes talking a real combat option (one Influence
+  action at DC 10–20 against a Bloodied foe can end its part in the fight), which is on
+  brand but untested in the simulator (Influence isn't simulated). *Recommendation:* keep
+  it, and watch it at the first human table; if it proves too strong, require the foe to
+  be Bloodied first.

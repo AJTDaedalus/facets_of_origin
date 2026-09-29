@@ -158,15 +158,28 @@ class TestDamage:
         atk = combat.MonsterAttack(name="club", to_hit=3, fixed=4, dice=Dice(1, 6), mod=1)
         assert combat.monster_damage(Script([]), atk, crit=False) == 4
 
-    def test_monster_crit_rolls_double_dice_plus_mod(self):
+    def test_monster_crit_is_fixed_plus_one_roll_of_the_dice(self):
+        # Playtest fix pass (MM #13): a crit adds one roll of the dice to the fixed damage.
         atk = combat.MonsterAttack(name="club", to_hit=3, fixed=4, dice=Dice(1, 6), mod=1)
-        assert combat.monster_damage(Script([6, 5]), atk, crit=True) == 12
+        assert combat.monster_damage(Script([6]), atk, crit=True) == 10
 
-    def test_monster_crit_doubles_extra_dice_too(self):
-        # Young Red Dragon Rend: 2d6+6 plus 1d6 fire; a crit rolls 4d6 + 2d6 + 6.
+    def test_monster_crit_never_below_the_fixed_damage(self):
+        # The ogre's greatclub: fixed 13 (2d8 + 4). The lowest crit is 13 + 2 = 15.
+        atk = combat.MonsterAttack(name="Greatclub", to_hit=6, fixed=13, dice=Dice(2, 8), mod=4)
+        assert combat.monster_damage(Script([1, 1]), atk, crit=True) == 15
+
+    def test_monster_crit_rolls_extra_dice_once_too(self):
+        # Young Red Dragon Rend: fixed 16 (2d6 + 6 plus 1d6 fire); a crit adds 2d6 + 1d6.
         atk = combat.MonsterAttack(name="Rend", to_hit=10, fixed=16, dice=Dice(2, 6), mod=6,
                                    extra=(Dice(1, 6),))
-        assert combat.monster_damage(Script([1, 2, 3, 4, 5, 6]), atk, crit=True) == 27
+        assert combat.monster_damage(Script([1, 2, 3]), atk, crit=True) == 22
+
+    def test_monster_crit_has_the_old_average(self):
+        # Same mean as doubling the dice: fixed (avg dice + mod) + avg dice.
+        atk = combat.MonsterAttack(name="club", to_hit=3, fixed=4, dice=Dice(1, 6), mod=1)
+        rng = random.Random(1)
+        mean = sum(combat.monster_damage(rng, atk, crit=True) for _ in range(20000)) / 20000
+        assert mean == pytest.approx(4 + 3.5, abs=0.05)
 
     def test_monster_attack_without_dice_crits_to_double_fixed(self):
         atk = combat.MonsterAttack(name="slam", to_hit=3, fixed=5, dice=None, mod=0)
@@ -346,6 +359,21 @@ class TestMorale:
         assert not combat.morale_triggers(foe(), None, leader_fell=True,
                                           opts=RuleOptions(leader_morale="minions"))
 
+    def test_leaderless_minions_check_when_half_are_down(self):
+        # Playtest fix pass (MM #5): no leader → check once, when half (rounded up) are down.
+        f = combat.leaderless_minions_check
+        assert not f(has_leader=False, minions=5, minions_down=2, already=False)
+        assert f(has_leader=False, minions=5, minions_down=3, already=False)
+        assert f(has_leader=False, minions=4, minions_down=2, already=False)
+
+    def test_minions_with_a_leader_wait_for_it(self):
+        assert not combat.leaderless_minions_check(has_leader=True, minions=4, minions_down=4,
+                                                   already=False)
+
+    def test_leaderless_check_happens_once(self):
+        assert not combat.leaderless_minions_check(has_leader=False, minions=4, minions_down=3,
+                                                   already=True)
+
     def test_leader_falls_everyone_under_v01_option(self):
         assert combat.morale_triggers(foe(), None, leader_fell=True,
                                       opts=RuleOptions(leader_morale="all"))
@@ -434,10 +462,64 @@ class TestBossTurns:
         c.conditions.add("stunned")
         assert combat.begin_turn(c) is False
 
-    def test_enemy_phase_order_boss_top_of_round(self):
-        order = combat.round_order("party", RuleOptions(boss_top_of_round=True),
-                                   enemy_has_boss=True)
-        assert order == ["boss", "party", "enemy"]
+    def test_boss_order_party_first(self):
+        # Playtest fix pass (MM #1): top of the round, then right after the party's first turn.
+        order = combat.round_order("party", RuleOptions(), enemy_has_boss=True)
+        assert order == ["boss", "party_first", "boss", "party_rest", "enemy"]
+
+    def test_boss_order_foes_first(self):
+        order = combat.round_order("enemy", RuleOptions(), enemy_has_boss=True)
+        assert order == ["boss", "enemy", "party_first", "boss", "party_rest"]
+
+    @pytest.mark.parametrize("first", ["party", "enemy"])
+    def test_boss_turns_never_back_to_back(self, first):
+        # Two rounds in a row: no two "boss" phases are adjacent, across the round boundary too.
+        r = combat.round_order(first, RuleOptions(), enemy_has_boss=True)
+        two = r + r
+        assert all(not (a == b == "boss") for a, b in zip(two, two[1:]))
+
+    def test_surprised_boss_loses_its_first_top_turn(self):
+        opts = RuleOptions()
+        r1 = combat.round_order("party", opts, enemy_has_boss=True, round_no=1, surprised="enemy")
+        r2 = combat.round_order("party", opts, enemy_has_boss=True, round_no=2, surprised="enemy")
+        assert r1 == ["party_first", "boss", "party_rest", "enemy"]
+        assert r2[0] == "boss"
+
+    def test_surprised_party_does_not_cost_the_boss(self):
+        r1 = combat.round_order("enemy", RuleOptions(), enemy_has_boss=True, round_no=1,
+                                surprised="party")
+        assert r1[0] == "boss"
+
+    def test_boss_takes_no_turn_in_its_sides_half(self):
+        assert combat.turns_in_side_half(foe(role="boss"), RuleOptions()) == 0
+        assert combat.turns_in_side_half(foe(), RuleOptions()) == 1
+
+    def test_draft_order_kept_for_comparison(self):
+        opts = RuleOptions(boss_second_turn="side_half")
+        assert combat.round_order("party", opts, enemy_has_boss=True) == ["boss", "party", "enemy"]
+        assert combat.turns_in_side_half(foe(role="boss"), opts) == 1
+
+    def test_boss_reaction_and_recharge_refresh_once_a_round(self):
+        b, opts = foe(role="boss"), RuleOptions()
+        assert combat.boss_turn_refreshes(b, 1, opts)
+        assert not combat.boss_turn_refreshes(b, 2, opts)
+        assert combat.boss_turn_refreshes(foe(), 2, opts)
+
+    def test_boss_second_turn_keeps_a_spent_reaction_spent(self):
+        b = foe(role="boss")
+        combat.begin_turn(b)
+        combat.take_reaction(b)
+        combat.begin_turn(b, refresh_reaction=False)
+        assert not combat.take_reaction(b)
+
+    def test_boss_bloodied_is_half_its_doubled_hit_points(self):
+        from facets_d20 import monsters as M
+        ogre = M.convert("ogre", role="boss", hp_multiplier=RuleOptions().boss_hp_multiplier)
+        assert ogre.max_hp == 136
+        combat.apply_damage(Script([]), ogre, 67)
+        assert not combat.is_bloodied(ogre)
+        out = combat.apply_damage(Script([]), ogre, 1)
+        assert out.became_bloodied and ogre.hp == 68
 
     def test_enemy_phase_order_v01(self):
         order = combat.round_order("party", RuleOptions(boss_top_of_round=False),
@@ -588,7 +670,9 @@ class TestMonsterLibrary:
 
     def test_young_red_dragon_matches_09(self):
         d = monsters.LIBRARY["young_red_dragon"]
-        assert (d.ac, d.hp, d.damage_per_turn) == (18, 178, 48)
+        # Routine 48; priced damage adds a quarter of the breath, doubled for its area
+        # (09 step 1, playtest fix pass): 48 + 112 // 4 = 76.
+        assert (d.ac, d.hp, d.routine_damage, d.damage_per_turn) == (18, 178, 48, 76)
         breath = d.special
         assert breath.fixed == 56 and breath.save_dc == 17 and breath.recharge_min == 5
 
@@ -1145,6 +1229,19 @@ class TestSparkDie:
         r = combat.attack_roll(Script([1]), bonus=30, ac=10)
         assert not combat.spark_attack(Script([6]), r, ac=10).hit
 
+    def test_spark_is_spent_only_after_a_miss_or_failure(self):
+        # Playtest fix pass (player #1): the MM calls it, then a Spark may turn a miss.
+        assert combat.spark_may_spend(succeeded=False, natural=9)
+        assert not combat.spark_may_spend(succeeded=True, natural=15)
+
+    def test_spark_cannot_turn_a_natural_1_attack(self):
+        assert not combat.spark_may_spend(succeeded=False, natural=1)
+
+    def test_subtracting_spark_only_after_a_hit_and_never_a_crit(self):
+        assert combat.spark_may_spend(succeeded=True, natural=14, subtract=True)
+        assert not combat.spark_may_spend(succeeded=False, natural=14, subtract=True)
+        assert not combat.spark_may_spend(succeeded=True, natural=20, subtract=True, crit=True)
+
     def test_spark_worth_spending_only_within_six(self):
         assert combat.spark_can_turn(total=10, target=16)
         assert not combat.spark_can_turn(total=9, target=16)
@@ -1606,10 +1703,11 @@ PRESET_NUMBERS = {
     # Hardy 7 → d8. No armor (Mage Armor is cast in play; the sheet shows 10 + Dex = 11).
     "loremaster": {1: (16, 11, 3, 13, [2]), 4: (34, 11, 3, 14, [4, 3]),
                    7: (60, 11, 4, 15, [4, 3, 3, 1]), 10: (81, 11, 5, 17, [4, 3, 3, 3, 2])},
-    # Spell 1 at 1st (half, d6: 6+8+1 = 15); Weapon Expert 3 makes a 1/1 tie → Steel main
-    # (d8, medium armor, shields). Kit from 3rd: breastplate + shield + 1 = 19, rapier.
+    # V43: Weapon Expert at 1st → Steel main (d8: 8+8+1 = 17; breastplate 14+2, shield 2,
+    # Weapon Expert 1 = 19; no casting yet). Clockwork Guardian 3 makes a 1/1 tie, which
+    # keeps Steel main; Spellcasting (Half table) from 3rd.
     # Steel main → +2 Dex (V33: 15→17→19). Hardy 7 → d10. Int stays 16.
-    "tinker": {1: (15, 13, 4, 13, [2]), 4: (35, 19, 6, 13, [3]),
+    "tinker": {1: (17, 19, 5, None, []), 4: (35, 19, 6, 13, [3]),
                7: (61, 19, 7, 14, [4, 3]), 10: (82, 19, 9, 15, [4, 3, 2])},
     # Soul d8, Con +2: 8+8+2 = 18. Spell: Channel 1, Wider Study 3, Mending Hands 5. Hardy 9 → d10.
     "priest": {1: (18, 16, 3, 13, [2]), 4: (39, 16, 3, 14, [4, 3]),
@@ -1884,6 +1982,45 @@ class TestSimulator:
         assert slots == [1, 1, 1]           # ceil(¼ of [4, 3, 2]) after Mage Armor's 1st
 
 
+class TestBossTurnInTheSim:
+    """Playtest fix pass (MM #1): the simulator plays the boss where Table 8–1 puts it."""
+
+    def _log_fight(self, rs, first_party: bool):
+        party = _ref_party(rs, 4)
+        enc = S.Encounter.of(S.FoeSpec("ogre", role="boss", leader=True))
+        f = S.Fight(random.Random(2), party, enc, RuleOptions())
+        log = []
+        orig_pc, orig_foe = f.pc_turn, f.foe_turn
+        f.pc_turn = lambda c: (log.append(("pc", f.round)), orig_pc(c))
+        f.foe_turn = lambda c: (log.append(("boss", f.round)), orig_foe(c))
+        f.run()
+        return log
+
+    def test_boss_acts_twice_a_round_never_back_to_back(self, rs):
+        log = self._log_fight(rs, True)
+        kinds = [k for k, _ in log]
+        assert all(not (a == b == "boss") for a, b in zip(kinds, kinds[1:]))
+        rounds = {r for _, r in log}
+        for r in rounds - {max(rounds)}:
+            assert sum(1 for k, x in log if k == "boss" and x == r) == 2
+
+    def test_leaderless_minions_check_when_half_fall(self, rs):
+        party = _ref_party(rs, 4)
+        enc = S.Encounter.of(S.FoeSpec("goblin_warrior", role="minion", count=6))
+        f = S.Fight(random.Random(4), party, enc, RuleOptions())
+        r = f.run()
+        assert r.won and f._leaderless_checked
+        assert r.foes_killed + r.foes_broken == 6
+
+    def test_minions_with_a_leader_never_use_the_half_rule(self, rs):
+        party = _ref_party(rs, 4)
+        enc = S.Encounter.of(S.FoeSpec("bandit_captain", leader=True),
+                             S.FoeSpec("goblin_warrior", role="minion", count=6))
+        f = S.Fight(random.Random(4), party, enc, RuleOptions())
+        f.run()
+        assert not f._leaderless_checked
+
+
 class TestDay:
     def test_pacing_spreads_slots(self, rs):
         prof = B.build(rs, B.Picks.from_preset(rs, "wizard", 5)).profile()
@@ -2030,8 +2167,13 @@ class TestTracks:
         # fighter L5 vs L4: +1 level of HP (6+2) plus Hardened 5
         assert _levels(rs, "fighter", 5).hp - _levels(rs, "fighter", 4).hp == 8 + 5
 
-    def test_tie_is_steel_main_with_half_casting(self, rs):
+    def test_tie_keeps_spell_main_and_full_casting(self, rs):
+        # V43: Spell first, so the 7th-level 2–2 tie keeps Spell main (no Extra Attack).
         ch = _levels(rs, "battle_priest", 7)             # Spell 2 · Steel 2
+        assert ch.progression == "full" and ch.profile().attacks_per_action == 1
+
+    def test_tie_keeps_steel_main_when_steel_came_first(self, rs):
+        ch = _levels(rs, "battle_priest_deep", 7)        # Steel 2 · Spell 2
         assert ch.progression == "half" and ch.profile().attacks_per_action == 2
 
     def test_spell_main_again_drops_extra_attack(self, rs):
@@ -2078,8 +2220,8 @@ class TestTracks:
         assert any("names its tradition" in e for e in B.check(rs, p))
 
     def test_kit_by_level(self, rs):
-        assert _levels(rs, "tinker", 1).picks.kit["armor"] == "leather"
-        assert _levels(rs, "tinker", 3).picks.kit["armor"] == "breastplate"
+        assert _levels(rs, "battle_priest_deep", 7).picks.kit["armor"] == "chain_mail"
+        assert _levels(rs, "battle_priest_deep", 9).picks.kit["armor"] == "scale_mail"
 
     def test_facets_filter_on_rank_effects(self, rs):
         # Martial Training's die step applies to Mind and Soul, not Body.
@@ -2114,11 +2256,49 @@ class TestRanksLapseAmendment3:
         ch = B.build(rs, self._priest(rs, {1: "channel", 3: "wider_study", 5: "weapon_expert"}, 5))
         assert ch.progression == "full" and ch.slots == [4, 3, 2]
 
-    def test_two_two_priest_drops_to_the_half_table(self, rs):
+    def test_two_two_priest_keeps_the_full_table(self, rs):
+        # V43 (playtest fix pass): the tie keeps the Spell main track the Priest already had,
+        # so a second Steel talent no longer costs it its 3rd- and 4th-level slots.
         ch = B.build(rs, self._priest(rs, {1: "channel", 3: "wider_study", 5: "weapon_expert",
                                            7: "sworn_strike"}, 7))
-        assert ch.progression == "half" and ch.slots == [4, 3]
-        assert B.picks_main_track(rs, ch.picks) == "steel"
+        assert ch.progression == "full" and ch.slots == [4, 3, 3, 1]
+        assert B.picks_main_track(rs, ch.picks) == "spell"
+
+    def test_lapse_shrinks_the_hit_die_and_recalculates_hit_points_down(self, rs):
+        # Playtest fix pass (player #3): Martial Training lapses at 9th → d10 back to d8.
+        at7 = _levels(rs, "battle_priest_deep", 7)
+        at9 = _levels(rs, "battle_priest_deep", 9)
+        assert (at7.hit_die, at9.hit_die) == (10, 8)
+        con = at9.mods["con"]
+        assert at9.hp == 16 + con + 8 * (5 + con)       # as if it had always had the d8
+
+    def test_lapsed_armor_training_makes_the_old_armor_illegal(self, rs):
+        p = B.Picks.from_sim_build(rs, "battle_priest_deep", 9)
+        p.kit = dict(p.kit, armor="chain_mail")
+        assert any("not proficient with heavy armor" in e for e in B.check(rs, p))
+
+    def test_a_third_steel_talent_does_move_it(self, rs):
+        p = self._priest(rs, {1: "channel", 3: "wider_study", 5: "weapon_expert",
+                              7: "sworn_strike", 9: "precision"}, 9)
+        assert B.picks_main_track(rs, p) == "steel"
+
+    def test_history_tie_rule_directly(self, rs):
+        w = {}
+        steel_first = B.Picks(facet="soul", path=None, level=7, abilities={},
+                              talents={1: "sworn_strike", 3: "weapon_expert", 5: "channel",
+                                       7: "wider_study"})
+        spell_first = B.Picks(facet="soul", path=None, level=7, abilities={},
+                              talents={1: "channel", 3: "wider_study", 5: "sworn_strike",
+                                       7: "weapon_expert"})
+        assert B.main_track_history(rs, steel_first, w) == "steel"
+        assert B.main_track_history(rs, spell_first, w) == "spell"
+        # the old rule would call both Steel
+        assert B.main_track({"steel": 2, "spell": 2}, w, "steel") == "steel"
+
+    def test_general_talents_leave_no_main_track(self, rs):
+        p = B.Picks(facet="mind", path=None, level=3, abilities={},
+                    talents={1: "alert", 3: "hardy"})
+        assert B.main_track_history(rs, p, {}) is None
 
     def test_retraining_back_restores_full(self, rs):
         p = self._priest(rs, {1: "channel", 3: "wider_study", 5: "weapon_expert",

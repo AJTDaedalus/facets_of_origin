@@ -70,7 +70,7 @@ facets:
 tracks:
   scaling_depth: {5: 2, 9: 3}     # a tracked talent's 5th-level scaling line needs depth 2 in
                                   # its track; its 9th-level line depth 3
-  main_track: {rule: more_talents, tie: steel}
+  main_track: {rule: more_talents, tie: existing}   # V43 (was: steel)
   facet_weight: {body: {steel: 2}}
   steel:
     ranks:
@@ -476,8 +476,9 @@ size and *Hardy* one more (d12 at most).
 
 Every talent is tagged **Steel** (weapons and armor), **Spell** (magic) or neither
 (general). Your **depth** in a track is how many of your talents carry its tag. Your
-**main track** is the one you hold more talents in; Steel wins a tie; a Body character
-counts two extra Steel talents (E3).
+**main track** is the one you hold more talents in; a tie keeps the main track you had
+(V43, playtest fix pass; was "Steel wins a tie"); a Body character counts two extra Steel
+talents for the main track, not for depth (E3).
 
 | Depth | Steel | Spell |
 |---|---|---|
@@ -500,8 +501,8 @@ past its first rank.
 | Pure martial | 3+ · 0 · rest | armor step, Extra Attack, Veteran, every Steel talent's 9th-level line | fighter |
 | Pure caster | 0 · 3+ · rest | Full table (14 slots, 5th-level spells), 3 domains incl. one prismatic, every Spell talent's 9th-level line | wizard, cleric |
 | Paladin shape | 2 · 1 · 2 | Steel main: armor, Extra Attack, Half table (9 slots, 3rd-level spells), 1 domain; Steel talents' 5th-level lines | paladin, ranger |
-| Artificer shape | 1 · 1 · 3 | tie → Steel main: armor step and die, Half table, no Extra Attack | artificer |
-| Even hybrid | 2 · 2 · 1 | tie → Steel main: Extra Attack, armor, **Half** table; no depth-3 ranks, no 9th-level lines | paladin with a dip |
+| Artificer shape | 1 · 1 · 3 | tie → keeps the first track's main (Steel first: armor step and die, Half table, no Extra Attack) | artificer |
+| Even hybrid | 2 · 2 · 1 | tie → keeps the main track it had: Steel first gives Extra Attack, armor, **Half** table; Spell first keeps the **Full** table; no depth-3 ranks, no 9th-level lines | paladin with a dip |
 | Caster-leaning hybrid | 2 · 3 · 0 | Spell main: Full table and Deep Magic; its Steel side is martial weapons plus its two talents' own effects — no armor step, no Extra Attack | cleric/wizard who bought weapon talents |
 | Caster with a Steel pick | 1 · 3 · 1 | Spell main: the Steel talent brings martial weapons and its own effect, nothing else | wizard with a weapon feat |
 
@@ -769,27 +770,31 @@ switching to (c) also deletes six domains and re-homes their sim spells.
    surprised side goes second. (v0.1's best-of-four gave the party the first move ~82% of
    the time — audit m14/GF-C1; one roll each is ~52% with equal modifiers.)
 2. Within a side, creatures act in any order, each taking a whole SRD turn.
-3. **Monsters deal fixed damage** (the SRD average); a crit rolls the dice (doubled) + mod.
+3. **Monsters deal fixed damage** (the SRD average); a crit adds one roll of the damage
+   dice to the fixed damage (V45; was: doubled dice + mod — same mean, never below fixed).
 4. **One reaction a round**; leaving a foe's reach provokes one opportunity attack (SRD).
 5. **E1** one rider a turn; **E2** one controlled creature, acting right after you, fixed
    damage.
 6. **Death**: SRD death saves.
-7. **Sparks** (§6.3) are spent after a roll, before the outcome.
+7. **Sparks** (§6.3) are spent after the MM calls a miss or failure, before its
+   consequences (V46).
 
 ### 6.2 MM rules (chapter 09) — fixes K1/GF-C1, M6, M7, m15
 
-- **Bosses act at the top of every round.** A boss takes one turn at the start of each
-  round, before either side, and a second turn in its side's half. So a boss always acts
-  before the party can finish it. Recharge rolls happen at the start of each of its turns.
-- **Boss resolve** (generalises v0.1 ruling (d)): when a boss fails a save against an
-  effect that would stun, paralyse, incapacitate, banish, polymorph or put it to sleep,
+- **Bosses act at the top of every round** and again right after the party's first turn
+  (V44, playtest fix pass; was: a second turn in its side's half, which put its two turns
+  back to back). No turn in its own side's half. Its reaction returns and its Recharge
+  rolls once a round, at the top-of-round turn; a surprised boss loses its round-1 top
+  turn; durations count the top-of-round turn. Bloodied = half its doubled HP.
+- **Boss resolve** (generalises v0.1 ruling (d)): when an effect, with a save or without
+  one (V44), would stun, paralyze, incapacitate, banish, polymorph or put it to sleep,
   it **loses its next turn instead, and the effect ends**. It can lose at most one turn a
   round this way. SRD Legendary Resistance and legendary/lair actions are crossed out.
 - **Bloodied phase:** a boss changes at Bloodied (the MM's choice from 09's list).
 - **Morale:** a standard (non-boss, non-minion) foe checks once, when it is first
   Bloodied: DC 10 Wisdom save; fail = flee, surrender or bargain. **Minions** check when
-  their leader falls (the only "leader falls" trigger). Bosses, mindless and bound
-  creatures never check.
+  their leader falls (the only "leader falls" trigger); a boss can lead; a leaderless
+  group checks once, at half down (V48). Bosses, mindless and bound creatures never check.
 - **Minions:** 1 HP; any damage kills one (hit, *Graze*-type or area); a successful save
   against damage takes none; fixed damage.
 - **Focus fire:** MM guidance — spread the enemy side's attacks unless the fiction demands
@@ -800,14 +805,17 @@ switching to (c) also deletes six domains and re-homes their sim spells.
 - **Sparks:** start each session with 1; cap 3. **Earn:** (a) **a compel** — once per
   scene, when one of your Drives would make things harder, say so; if the MM agrees, you
   take the complication and a Spark (player-invoked, GF-M9); (b) the MM's call for a
-  great moment; (c) *Kindle*, *Prophecy*, *Turn the Odds*. **Spend:** after any d20 test
-  by you or an ally whose help you describe, before the MM says what happens, add **1d6**.
+  great moment; (c) *Kindle*, *Prophecy*, *Turn the Odds*. **Spend:** after the MM says a d20 test
+  by you or an ally whose help you describe missed or failed, before anything comes of it,
+  add **1d6** (V46).
   One Spark per roll per player. No nat-1 earning (removes audit m1).
 - **Drives:** two per character (a want, a line). Rewrite one at the end of any session.
   Suggested milestone: a Drive fulfilled or broken for good is a good time to level.
 - **Attitude track:** unchanged from v0.1 06 (Hostile → Ally, one step per success, two on
   beating the DC by 10, down one on a miss by 5+; DCs 10/15/20 by how hard the NPC is to
-  move). *Silver Tongue* per §4.3.
+  move). *Silver Tongue* per §4.3. Starting attitude Neutral (Wary if crossed); one roll per
+  character per person per scene; Intimidation fades one step toward Hostile; Influence
+  in a fight stops a foe at Neutral (V49; `software/facets_d20/social.py`).
 
 ---
 
@@ -1200,6 +1208,13 @@ under thresholds), so the recommendation is to let them lapse.
 | **V40** | **Preset picks and kits**: Monk takes Hardy at 7th and Alert at 9th (Alert was worth ~10 points at 7th); Investigator Anatomist 3rd, Anticipate 5th, Weapon Expert 7th (Veteran from 7th); Loremaster Hardy 7th and Evoker 9th (Deep Magic, Chronomancy) instead of Alert/Iron Mind, Con 14, no armor; Druid's Wider Study domain is The Tide (was Beasts). Sim builds: *spellblade* takes Clockwork Guardian and Turn the Odds as its Spell picks and Dex 16/Int 15 (the strongest version of the C2 shape); *soul_blaster* unarmored | Each preset stays its concept; the spellblade tests the shape at its best, as an audit build should | Keeping the Loremaster's three general picks (−22% at 10th) |
 | **V41** | **Tier targets**: Skirmish lasts "about two rounds" (1.5–2.5); Battle wins 85–95% | The owner's definitions; a Skirmish that costs 10% of HP cannot last 2–3 rounds (engine E-10) | — |
 | **V42** | **A lone boss counts ×1.2 its boss Threat** (one line under Table 9–2) — see §7 | Measured mark-up that makes the Clash budget buy a Clash: ×1.11–1.15 at 1st–4th, ×1.20–1.24 at 5th–8th, ×1.33–1.35 at 9th–10th (median ×1.20) | ×1.5 (the engine's first guess; with V37 it makes a lone boss a Skirmish) |
+| **V43** | **Ties keep the main track you had** (was: Steel wins) | Playtest P #3: a Spell-first hybrid's second Steel talent dropped it from Full to Half slots; measured band holds (RESEARCH_facets_d20_balance.md *Playtest fix pass*) | Steel wins ties (the trap) |
+| **V44** | **Boss turns**: top of the round and right after the party's first turn, never back to back; one reaction and one Recharge roll a round; surprise costs the round-1 top turn | Playtest MM #1 (back-to-back turns nearly dropped a wizard) | Second turn in its side's half |
+| **V45** | **Monster crit** = fixed + one roll of the dice | MM #13: a rolled crit could come in under the fixed hit | Doubled dice + mod |
+| **V46** | **Sparks after the call** (the MM says hit or miss; spend on a miss or failure) | P #1: hidden AC/DC made every Spark a negotiation | Open AC/DC |
+| **V47** | **Hard hitters ×1.06 in Table 9–2; Recharge adds a quarter** (Amendment 4 item 2, implemented precisely) | MM #2: the tier cliff; measured mark-up is 6%, not a tier | "Next tier up" |
+| **V48** | **Morale edges**: boss can lead; leaderless minions check at half down; broken foes stop at once | MM #5, P #7 | — |
+| **V49** | **Social defaults** (Neutral start; one roll per character per person per scene; Intimidation fades; Influence stops a foe at Neutral) | MM #6 | — |
 | — | *Tried and dropped:* a 9th-level scaling depth of 2 (V28 kept) | It lifted hybrids 4 points at 10th, but after V37–V40 every hybrid was inside the band without it, and with it two Soul hybrids out-hit the Soul pure martial | — |
 
 Resolved enough to implement. **Return to the engine agent for *Planner → engine* P-5

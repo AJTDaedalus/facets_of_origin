@@ -93,17 +93,19 @@ def render_region(raw=None) -> str:
         f"hits (a Recharge ability left out). *Minion* is √({model.minion_hp:g} × damage per "
         f"turn). *Boss* is the standard figure × {model.boss:.2f}, which already pays for the "
         f"boss's doubled hit points and its extra turn. A monster that never breaks is already "
-        f"counted × {model.never:.2f} in its standard and minion figures. A lone boss, with "
-        f"nobody else in the fight, counts × {lone:g}.",
+        f"counted × {model.never:.2f} in its standard and minion figures, and one that hits "
+        f"hard × {model.hard:.2f} in all three. A lone boss counts × {lone:g}; one whose company "
+        f"is worth less than a fifth of it, × {A.SMALL_COMPANY[1]:g}.",
         "",
         f"**Standard at levels** is where {lo} to {hi} of the monster make a Clash for four "
         f"characters; **Boss at levels** is where the boss figure is {pct(blo)} to {pct(bhi)} "
-        f"of that Clash, leaving the rest for its followers. A dash means it doesn't fit "
-        f"levels 1–10 in that role.",
+        f"of that Clash for four characters, leaving the rest for its followers. Both columns "
+        f"assume four characters: with three, look one level higher. A dash means it doesn't "
+        f"fit levels 1–10 in that role.",
         "",
         f"**Hits hard** marks a monster whose damage per turn is at least "
-        f"{pct(A.HARD_HITTER_FACTOR - 1)} above the usual for its CR. A group of these "
-        f"counts as the next tier up (09_Mirror_Masters_Guide.md).",
+        f"{pct(A.HARD_HITTER_FACTOR - 1)} above the usual for its CR (Table 9–3's *Damage* "
+        f"column). The mark-up is already in its numbers; don't adjust the fight for it.",
         "",
     ]
     return "\n".join(out)

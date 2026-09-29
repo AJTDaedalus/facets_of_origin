@@ -508,10 +508,34 @@ def main_track(depth: dict, weight: Optional[dict] = None, tie: str = "steel") -
     return "steel" if tot["steel"] > tot["spell"] else "spell"
 
 
+def main_track_history(rs, picks, weight: dict, first_tie: str = "steel") -> Optional[str]:
+    """Ties go to the main track you already had (playtest fix pass, player #3): walk the
+    talents in the order they were taken (by level); after each, the track with more wins
+    and a tie keeps the main track from before. A tie with no main track yet (a general
+    talent first) goes to ``first_tie``."""
+    main = None
+    depth = {}
+    for lvl in sorted(picks.talents):
+        tr = (rs.talents.get(picks.talents[lvl]) or {}).get("track")
+        if tr:
+            depth[tr] = depth.get(tr, 0) + 1
+        tot = {t: depth.get(t, 0) + weight.get(t, 0) for t in ("steel", "spell")}
+        if tot["steel"] == tot["spell"]:
+            if tot["steel"] > 0 and main is None:
+                main = first_tie
+        else:
+            main = "steel" if tot["steel"] > tot["spell"] else "spell"
+    if main is None:
+        return main_track(depth, weight, first_tie)
+    return main
+
+
 def picks_main_track(rs, picks) -> Optional[str]:
     tracks = rs.raw.get("tracks") or {}
     weight = (tracks.get("facet_weight") or {}).get(picks.facet) or {}
     tie = (tracks.get("main_track") or {}).get("tie", "steel")
+    if tie == "existing":
+        return main_track_history(rs, picks, weight)
     return main_track(track_depth(rs, picks), weight, tie)
 
 
