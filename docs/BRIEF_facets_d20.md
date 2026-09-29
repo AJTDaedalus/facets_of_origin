@@ -299,3 +299,15 @@ cards") and the even levels empty.
 3. **Simplicity budget amended:** an even-level level-up is two small picks; odd levels
    stay one. Character creation is unchanged (edges start at 2nd). The ≤5 exception
    rules and one-mechanic-per-job targets stand.
+
+## Amendment 6 — owner rulings on the playtest fix pass (2026-09-28)
+
+1. **Preset names stay familiar** (Fighter, Rogue, Wizard…) for the first human table;
+   revisit afterwards. (PQ-1)
+2. **Talking can end a foe's fight:** a foe moved to Neutral or better stops fighting, as
+   if broken. Watch it at the first human table; the fallback is "only against a Bloodied
+   foe". (PQ-4)
+3. **Hard hitters:** the measured mark-up (×1.06 at the fix pass, ×1.07 after edges; regenerated each run) in Table 9–2 and Recharge pricing replace
+   Amendment 4 item 2's "next tier up" rule of thumb. (PQ-2)
+4. **The Tinker** takes Weapon Expert at 1st and Clockwork Guardian at 3rd (PQ-3:
+   adopted on the fix pass's recommendation; not put to the owner separately).

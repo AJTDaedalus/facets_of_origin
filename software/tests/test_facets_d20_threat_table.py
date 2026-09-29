@@ -50,11 +50,11 @@ def rows(raw):
 
 class TestThreatModelFromData:
     def test_reads_the_printed_constants(self, model, raw):
-        # Re-derived by the playtest fix pass (boss turn spacing, Recharge pricing).
-        assert model.minion_hp == pytest.approx(8.4)
-        assert model.boss == pytest.approx(3.51)
-        assert model.never == pytest.approx(1.16)
-        assert model.hard == pytest.approx(1.06)
+        # Re-derived by the Edges pass (edges on every preset; V56 stabilizing).
+        assert model.minion_hp == pytest.approx(8.6)
+        assert model.boss == pytest.approx(3.43)
+        assert model.never == pytest.approx(1.17)
+        assert model.hard == pytest.approx(1.07)
         assert A.lone_boss_factor(raw) == pytest.approx(1.2)
 
     def test_reproduces_the_yaml_threat_by_cr_table(self, model, raw):
@@ -137,10 +137,10 @@ class TestMonsterRow:
 
     def test_ogre_pinned(self, rows):
         ogre = next(r for r in rows if r["id"] == "ogre")
-        # Playtest fix pass: minion 8.4, boss 3.51 (the boss turn now spaced; re-derived).
-        assert (ogre["standard"], ogre["minion"], ogre["boss"]) == (30, 10, 104)
+        # Edges pass: minion 8.6, boss 3.43 (re-derived with edges on every preset).
+        assert (ogre["standard"], ogre["minion"], ogre["boss"]) == (30, 11, 102)
         assert ogre["standard_levels"] == [3, 4, 5, 6, 7, 8]
-        assert ogre["boss_levels"] == [4, 5, 6]
+        assert ogre["boss_levels"] == [4, 5]
 
     def test_row_needs_budget_totals(self, model):
         with pytest.raises(ValueError):

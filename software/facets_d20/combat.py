@@ -62,6 +62,9 @@ class RuleOptions:
         on its attacks and on attacks against it — 09's second option; "none").
     boss_hp_multiplier: a boss has this many times its stat block's hit points (balance
         pass V37: 2, so a boss lasts long enough to act; 1 = the stat block).
+    stabilize: how a character stabilizes a dying ally (Edges pass, V56): "auto" — an
+        action, no check (the rule); "check" — the SRD's Help action and DC 10 Wisdom
+        (Medicine) check; "none" — nobody does (the sim before V56).
     boss_second_turn: where a boss's second turn goes (playtest fix pass, MM #1):
         "after_first_pc" — right after the first character's turn in the party's half, so
         its two turns never land back to back (the rule); "side_half" — in its own side's
@@ -74,6 +77,8 @@ class RuleOptions:
     boss_bloodied: str = "desperate"
     boss_hp_multiplier: int = 2
     boss_second_turn: str = "after_first_pc"
+    stabilize: str = "auto"        # V56: stabilizing a dying creature is an action, no check
+                                   # ("check": the SRD's DC 10 Medicine roll; "none": nobody does)
 
 
 # ---------------------------------------------------------------- data shapes
@@ -518,11 +523,26 @@ def provokes_opportunity_attack(*, leaves_reach: bool, disengaged: bool = False,
 # ---------------------------------------------------------------- dying
 
 
-def death_save(rng, c: Combatant) -> Optional[str]:
-    """Roll a death save for a PC at 0 HP. Returns the new state if it changed."""
+def stabilize(rng, c: Combatant, *, bonus: int = 0, dc: int = 10, check: bool = True) -> bool:
+    """Stabilize a dying creature (SRD 5.2.1: the Help action and a DC 10 Wisdom
+    (Medicine) check; ``check=False`` — no roll). Returns True if it is now stable."""
+    if c.state != "down":
+        return False
+    if check and rng.randint(1, 20) + bonus < dc:
+        return False
+    c.state = "stable"
+    c.death_successes = c.death_failures = 0
+    return True
+
+
+def death_save(rng, c: Combatant, *, advantage: bool = False) -> Optional[str]:
+    """Roll a death save for a PC at 0 HP. Returns the new state if it changed.
+    ``advantage`` (the *Die Hard* edge): roll two d20s and keep the higher."""
     if c.state != "down":
         return None
     n = rng.randint(1, 20)
+    if advantage:
+        n = max(n, rng.randint(1, 20))
     if n == 20:
         c.hp = 1
         c.state = "active"

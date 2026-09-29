@@ -125,6 +125,7 @@ class Picks:
     asi_priority: Optional[tuple] = None          # E-3 / SRD baselines: ASI order
     asi: dict = field(default_factory=dict)       # V21: {4: {"plus2": "str"} | {"plus1": [a, b]} | {"knack": id}}
     tradition: Optional[str] = None               # E3: a Body caster names its tradition
+    edges: Optional[dict] = None   # Amendment 5: {even level: edge id}; None = unspecified (not checked)
 
     @classmethod
     def from_entry(cls, rs, entry: dict, level: int, *, name: Optional[str] = None) -> "Picks":
@@ -162,7 +163,10 @@ class Picks:
         elif entry.get("id") in getattr(rs, "sim_builds", {}):
             knacks = None
         asi = {int(k): v for k, v in (entry.get("asi") or {}).items() if int(k) <= level}
-        return cls(facet=entry["facet"], path=entry.get("path"), level=level, asi=asi,
+        edges = entry.get("edges")
+        if edges is not None:
+            edges = {int(k): v for k, v in edges.items() if int(k) <= level}
+        return cls(facet=entry["facet"], path=entry.get("path"), level=level, asi=asi, edges=edges,
                    abilities=dict(entry["abilities"]), background=entry.get("background"),
                    talents=talents, knacks=knacks, tradition=entry.get("tradition"),
                    casting_ability=entry.get("casting_ability"), domains=domains,
@@ -647,6 +651,33 @@ def check(rs, picks: Picks) -> list:
             if l <= lv and l not in picks.knacks:
                 errs.append(f"L{l}: no knack chosen")
 
+    # ---- edges (Amendment 5): one at each edge level reached, each edge once
+    if picks.edges is not None:
+        edge_levels = adv.get("edge_levels", [])
+        edges_rs = getattr(rs, "edges", {}) or {}
+        for l in sorted(picks.edges):
+            eid = picks.edges[l]
+            if l not in edge_levels:
+                errs.append(f"L{l}: no edge pick at this level (edge levels {edge_levels})")
+                continue
+            if l > lv:
+                errs.append(f"L{l}: edge chosen above character level {lv}")
+                continue
+            e = edges_rs.get(eid)
+            if e is None:
+                kind = " (it is a talent)" if eid in rs.talents else \
+                    (" (it is a knack)" if eid in rs.knacks else "")
+                errs.append(f"L{l}: {eid!r} is not an edge{kind}")
+                continue
+            if l < int(e.get("min_level") or 0):
+                errs.append(f"L{l}: {eid} needs level {e['min_level']}")
+        for l in edge_levels:
+            if l <= lv and l not in picks.edges:
+                errs.append(f"L{l}: no edge chosen")
+        vals = list(picks.edges.values())
+        for eid in sorted({v for v in vals if vals.count(v) > 1}):
+            errs.append(f"edge {eid} taken twice")
+
     # ---- talents
     taken, cross = [], []
     is_caster = bool(_path(rs, picks).get("casting"))
@@ -876,6 +907,11 @@ def build(rs, picks: Picks) -> Character:
     for kid in kn:
         features.append(kid)
         effects += [(kid, e) for e in active_effects(rs.knacks[kid], lv)]
+    # edges (Amendment 5): never tracked, never counted toward depth (track_depth reads talents only)
+    for l in sorted(picks.edges or {}):
+        eid = picks.edges[l]
+        features.append(eid)
+        effects += [(eid, e) for e in active_effects(rs.edges[eid], lv)]
 
     # ---- casting
     tradition = progression = casting_ability = None
@@ -1012,7 +1048,8 @@ def _weapon_ok(e, wdef: WeaponDef, *, shield: bool, two_handed: bool, armored: b
                 or (c == "heavy_or_versatile" and not hv) \
                 or (c == "ranged_weapon" and not ranged) \
                 or (c == "no_shield" and shield) or (c == "shield" and not shield) \
-                or (c == "unarmored" and armored) or (c == "armored" and not armored):
+                or (c == "unarmored" and armored) or (c == "armored" and not armored) \
+                or (c == "two_handed" and not two_handed):
             return False
     return True
 
@@ -1060,8 +1097,10 @@ def _make_weapon(rs, picks, wid, abil, pb, effects, ctx, *, armored: bool) -> We
     to_hit = mods[ability] + (pb if wdef.category in profs else 0)
     dmg = mods[ability]
     crit_min = 20
+    min_face = 1
     for _, e in effects:
-        if not _static(e) or e["type"] not in ("attack_bonus", "damage_bonus", "crit_range"):
+        if not _static(e) or e["type"] not in ("attack_bonus", "damage_bonus", "crit_range",
+                                               "damage_die_floor"):
             continue
         if e.get("applies") == "spell":
             continue
@@ -1072,11 +1111,13 @@ def _make_weapon(rs, picks, wid, abil, pb, effects, ctx, *, armored: bool) -> We
             to_hit += eval_int(e.get("value", 0), ctx)
         elif e["type"] == "damage_bonus":
             dmg += eval_int(e.get("value", 0), ctx)
+        elif e["type"] == "damage_die_floor":
+            min_face = max(min_face, int(e.get("min", 1)))
         else:
             crit_min = min(crit_min, int(e.get("min", 20)))
     hv = "heavy" in wdef.props or wdef.versatile is not None
     return Weapon(wid, Dice.parse(dice), to_hit, dmg, wdef.dtype, ranged,
-                  "finesse" in wdef.props, two, 1, crit_min, hv, str_based)
+                  "finesse" in wdef.props, two, min_face, crit_min, hv, str_based)
 
 
 def _main_weapon(rs, picks, abil, pb, effects, ctx, *, armored: bool) -> Optional[Weapon]:
@@ -1247,6 +1288,9 @@ def _apply_effect(p: CombatProfile, ch: Character, src: str, e: dict, ctx: Ctx) 
     elif t == "advantage":
         on = e.get("roll") or e.get("on") or []
         on = [on] if isinstance(on, str) else on
+        if "death_save" in on:
+            p.death_save_advantage = True             # Die Hard (edge)
+            return
         if "initiative" in on:
             p.initiative_advantage = True
             return
@@ -1259,7 +1303,28 @@ def _apply_effect(p: CombatProfile, ch: Character, src: str, e: dict, ctx: Ctx) 
             p.master_plan = _uses(ch, e, ctx)
             p.master_plan_rounds = int(e.get("rounds", 1))
     elif t == "impose_disadvantage":
-        p.anticipate = True
+        if e.get("trigger") == "weapon_hit":
+            p.sap = True                              # Sap (edge)
+        elif e.get("trigger") == "your_spell":
+            p.piercing = _uses(ch, e, ctx)            # Piercing Spell (edge)
+        else:
+            p.anticipate = True
+    elif t == "damage_die_floor":
+        p.damage_floor = max(p.damage_floor, int(e.get("min", 1)))   # folded into the weapon
+    elif t == "miss_damage":
+        w = ch.weapon
+        if w is not None and _weapon_ok(e, _wdef(w), shield=ch.shield, two_handed=w.two_handed,
+                                        armored=ch.armored, str_based=w.str_based):
+            p.graze = max(0, eval_int(e.get("damage", 0), ctx))
+    elif t == "ac_reaction":
+        w = ch.weapon
+        if w is not None and not (e.get("weapon") == "melee" and w.ranged) \
+                and not armored_or_shield_blocks(ch, conds):
+            p.parry = eval_int(e.get("value", 0), ctx)
+    elif t == "hit_dice_max":
+        p.hd_max = True
+    elif t == "keep_concentration":
+        p.steady_focus = True
     elif t == "companion":
         g = e.get("guard") or {}
         d, flat = eval_amount(g.get("reduce"), ctx)
@@ -1270,6 +1335,8 @@ def _apply_effect(p: CombatProfile, ch: Character, src: str, e: dict, ctx: Ctx) 
         if e.get("trigger") == "fight_start":
             allies = eval_int(tg.get("allies", 0), ctx) if isinstance(tg, dict) else 0
             p.field_kit = {"amount": amt, "allies": allies}
+        elif e.get("trigger") == "first_bloodied":
+            p.second_breath = amt                     # Second Breath (edge)
         else:
             p.temp_hp += amt
     elif t == "spark":
@@ -1302,6 +1369,11 @@ def _apply_effect(p: CombatProfile, ch: Character, src: str, e: dict, ctx: Ctx) 
             p.notes.append(f"{src}: {t} not simulated")
     else:
         p.notes.append(f"{src}: {t} not simulated")
+
+
+def _wdef(w: Weapon) -> WeaponDef:
+    return WEAPONS.get(w.name) or WeaponDef(w.name, str(w.dice), "simple", w.dtype,
+                                              frozenset({"ranged"} if w.ranged else ()))
 
 
 def armored_or_shield_blocks(ch, conds) -> bool:

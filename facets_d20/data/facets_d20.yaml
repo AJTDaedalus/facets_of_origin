@@ -23,10 +23,11 @@ advancement:
   talent_levels: [1, 3, 5, 7, 9]
   knack_levels: [2, 6, 10]          # plus the background's knack at 1st
   asi_levels: [4, 8]
+  edge_levels: [2, 4, 6, 8, 10]     # Amendment 5 (V50): an edge beside that level's knack or ability pick
   asi_rule: choice                  # V21: +2 to one ability, +1 to two, or one extra knack (max 20); presets: +2 primary
   hp_first: hit_die_plus_eight_plus_con   # V35 (balance pass): 1st level = hit die + 8 + Con
   hp_per_level: half_die_plus_one_plus_con   # fixed, never rolled
-  retrain: once_per_level_on_long_rest       # swap one talent, knack or domain (never your Facet)
+  retrain: once_per_level_on_long_rest       # swap one talent, knack, edge or domain (never your Facet)
 
 build_rules:
   cross_facet_talent_cap: 2
@@ -761,6 +762,268 @@ knacks:
       scrutiny calls for a check.
     effects: [{type: tool_proficiency, choose: 1, from: [disguise_kit]}, {type: narrative, text: disguise needs no roll against casual inspection}]
 
+# ---------------------------------------------------------------------------- edges
+# Amendment 5 (owner), DESIGN v0.2 §3.6, V50–V56. A small combat or utility pick at 2nd, 4th,
+# 6th, 8th and 10th, beside that level's knack or ability pick. One shared list (no menus).
+# `tag` (steel | spell | general) is flavour only: an edge is NOT a talent, has no track and
+# NEVER counts toward depth or the main track. No edge gives what a talent or rank gives
+# (no attack bonus, crit range, armor or weapon training, hit die, hit points per level,
+# Extra Attack, casting or domains); none adds a die to a d20, rerolls, or adds weapon
+# damage dice (one mechanic per job, E1). `min_level`: the lowest level you can take it.
+# `sim` notes: edges whose effects are all `narrative` (or non-combat) are not simulated.
+edges:
+  # ------------------------------------------------ Steel (weapons and armor)
+  - id: heavy_hands
+    name: Heavy Hands
+    tag: steel
+    basis: "SRD 5.2.1 Fighting Style: Great Weapon Fighting"
+    summary: >-
+      When you roll damage for a melee weapon you are holding in two hands, treat any 1
+      or 2 on a damage die as a 3.
+    effects:
+      - {type: damage_die_floor, min: 3, weapon: melee, condition: [two_handed]}
+  - id: graze
+    name: Graze
+    tag: steel
+    basis: "SRD 5.2.1 weapon mastery: Graze"
+    summary: >-
+      Once per turn, when you miss with a melee attack using a heavy or versatile weapon
+      held in two hands, the target still takes damage equal to your Strength modifier.
+    effects:
+      - {type: miss_damage, damage: str, weapon: heavy_or_versatile_melee, condition: [two_handed],
+         frequency: once_per_turn}
+  - id: sap
+    name: Sap
+    tag: steel
+    basis: "SRD 5.2.1 weapon mastery: Sap"
+    summary: >-
+      Once per turn, when you hit a creature with a weapon attack, it has disadvantage on
+      its next attack roll before the start of your next turn.
+    effects:
+      - {type: impose_disadvantage, roll: attack, trigger: weapon_hit, frequency: once_per_turn,
+         duration: until_your_next_turn_start}
+  - id: drive_back
+    name: Drive Back
+    tag: steel
+    basis: "SRD 5.2.1 weapon masteries: Push and Slow"
+    summary: >-
+      Once per turn, when you hit a creature with a melee weapon attack, either push it up
+      to 10 feet straight away from you (if it is Large or smaller) or reduce its speed by
+      10 feet until the start of your next turn.
+    effects:
+      - {type: narrative, text: "on a melee hit, push 10 ft or slow 10 ft (once per turn)"}
+  - id: parry
+    name: Parry
+    tag: steel
+    basis: "SRD 5.2.1 monster reaction: Parry (Gladiator)"
+    summary: >-
+      Reaction, when a creature you can see hits you with a melee attack while you hold a
+      melee weapon and no shield: +2 AC against that attack, which can turn the hit into a
+      miss.
+    effects:
+      - {type: ac_reaction, value: 2, trigger: hit_by_melee_attack, action: reaction, weapon: melee,
+         condition: [no_shield]}
+  - id: grappler
+    name: Grappler
+    tag: steel
+    basis: "SRD 5.2.1 feat: Grappler (Punch and Grab, Attack Advantage)"
+    summary: >-
+      Once per turn, when you hit a creature with an unarmed strike, you can both deal its
+      damage and grapple it. You have advantage on attack rolls against a creature you are
+      grappling.
+    effects:
+      - {type: narrative, text: "unarmed hit damages and grapples; advantage vs a creature you grapple"}
+  - id: paired_blades
+    name: Paired Blades
+    tag: steel
+    basis: "SRD 5.2.1 Fighting Style: Two-Weapon Fighting"
+    summary: >-
+      When you make the extra attack that the Light property gives, add your ability
+      modifier to its damage.
+    effects:
+      - {type: narrative, text: "Light-property extra attack adds the ability modifier to damage"}
+  - id: armor_drill
+    name: Armor Drill
+    tag: steel
+    basis: original
+    summary: >-
+      You don or doff armor in half the usual time. Armor never gives you disadvantage on
+      Dexterity (Stealth) checks, and heavy armor never reduces your speed for lacking the
+      Strength it asks for.
+    effects:
+      - {type: narrative, text: "armor in half the time; no Stealth disadvantage; no heavy-armor speed penalty"}
+  - id: quick_draw
+    name: Quick Draw
+    tag: steel
+    basis: original
+    summary: >-
+      Whenever you could draw or stow one weapon, you can draw or stow two, and you can don
+      or doff a shield as a bonus action.
+    effects:
+      - {type: narrative, text: "draw or stow two weapons at once; shield on or off as a bonus action"}
+  # ------------------------------------------------ Spell (magic)
+  - id: cantrip_adept
+    name: Cantrip Adept
+    tag: spell
+    basis: original
+    summary: >-
+      Choose one cantrip from any domain of your tradition, even one you don't hold. You
+      know it, and you can change it when you retrain. It does nothing until you cast.
+    effects:
+      - {type: spells_known, choose: 1, domain: any, max_level: 0}
+  - id: ritual_scholar
+    name: Ritual Scholar
+    tag: spell
+    basis: original
+    summary: >-
+      You keep a ritual book. You can cast Alarm, Comprehend Languages, Identify and
+      Unseen Servant as rituals (they take 10 minutes longer and no slot), even if you don't
+      cast spells; use the highest of your Intelligence, Wisdom and Charisma for them.
+    effects:
+      - {type: narrative, text: "Alarm, Comprehend Languages, Identify, Unseen Servant as rituals from a book"}
+  - id: quiet_casting
+    name: Quiet Casting
+    tag: spell
+    basis: "SRD 5.2.1 Metamagic: Subtle Spell"
+    summary: >-
+      A number of times per long rest equal to your proficiency bonus, you can cast a spell
+      with no verbal or somatic components.
+    effects:
+      - {type: resource, id: quiet_casting, uses: pb, recharge: long}
+      - {type: narrative, text: "cast with no verbal or somatic components"}
+  - id: far_casting
+    name: Far Casting
+    tag: spell
+    basis: "SRD 5.2.1 Metamagic: Distant Spell"
+    summary: >-
+      A number of times per long rest equal to your proficiency bonus, as you cast a spell
+      you can double its range, or give a touch spell a range of 30 feet.
+    effects:
+      - {type: resource, id: far_casting, uses: pb, recharge: long}
+      - {type: narrative, text: "double a spell's range, or touch becomes 30 feet"}
+  - id: piercing_spell
+    name: Piercing Spell
+    tag: spell
+    min_level: 6
+    basis: "SRD 5.2.1 Metamagic: Heightened Spell"
+    summary: >-
+      Once per short rest, when you cast a spell that forces a saving throw, one creature
+      of your choice has disadvantage on its first save against it.
+    effects:
+      - {type: resource, id: piercing_spell, uses: 1, recharge: short}
+      - {type: impose_disadvantage, roll: save, trigger: your_spell, targets: 1, resource: piercing_spell}
+  - id: steady_focus
+    name: Steady Focus
+    tag: spell
+    min_level: 4
+    basis: original
+    summary: >-
+      When you fail a Constitution save to keep your concentration, you can use your
+      reaction to succeed instead.
+    effects:
+      - {type: keep_concentration, action: reaction}
+  - id: elemental_shift
+    name: Elemental Shift
+    tag: spell
+    basis: "SRD 5.2.1 Metamagic: Transmuted Spell"
+    summary: >-
+      Once per short rest, when you cast a spell that deals acid, cold, fire, lightning,
+      poison or thunder damage, you can change that damage to another type on this list.
+    effects:
+      - {type: resource, id: elemental_shift, uses: 1, recharge: short}
+      - {type: narrative, text: "change an elemental spell's damage type"}
+  - id: lasting_spell
+    name: Lasting Spell
+    tag: spell
+    min_level: 4
+    basis: "SRD 5.2.1 Metamagic: Extended Spell"
+    summary: >-
+      Once per long rest, when you cast a spell that lasts 1 minute or longer, you can
+      double its duration (to 24 hours at most).
+    effects:
+      - {type: resource, id: lasting_spell, uses: 1, recharge: long}
+      - {type: narrative, text: "double a spell's duration"}
+  # ------------------------------------------------ general (durability, mobility, utility)
+  - id: die_hard
+    name: Die Hard
+    tag: general
+    basis: original
+    summary: You have advantage on death saving throws.
+    effects:
+      - {type: advantage, roll: [death_save], scope: self}
+  - id: second_breath
+    name: Second Breath
+    tag: general
+    basis: original
+    summary: >-
+      The first time in each fight that you are Bloodied and still standing, you gain
+      temporary hit points equal to your level.
+    effects:
+      - {type: temp_hp, amount: level, trigger: first_bloodied, frequency: once_per_fight}
+  - id: hale
+    name: Hale
+    tag: general
+    basis: original
+    summary: >-
+      Each Hit Die you spend on a short rest restores the die's maximum instead of a roll
+      (plus your Constitution modifier, as usual).
+    effects:
+      - {type: hit_dice_max, trigger: short_rest}
+  - id: hardened
+    name: Hardened
+    tag: general
+    basis: "SRD 5.2.1 species trait: Dwarven Resilience (concept)"
+    summary: >-
+      You have resistance to poison damage, and advantage on saving throws to avoid or
+      end the poisoned condition.
+    effects:
+      - {type: resistance, damage_types: [poison]}
+      - {type: advantage, roll: [save], scope: vs_poisoned}
+  - id: sure_footed
+    name: Sure-Footed
+    tag: general
+    basis: original
+    summary: >-
+      Difficult terrain costs you no extra movement, and you have advantage on checks and
+      saves against being knocked prone or pushed.
+    effects:
+      - {type: narrative, text: "ignore difficult terrain"}
+      - {type: advantage, roll: [check, save], scope: vs_prone_or_pushed}
+  - id: climber
+    name: Climber
+    tag: general
+    basis: "SRD 5.2.1 Climb Speed and Swim Speed (rules glossary)"
+    summary: You have a climb speed and a swim speed equal to your speed.
+    effects:
+      - {type: narrative, text: "climb and swim speeds equal to your speed"}
+  - id: night_eyes
+    name: Night Eyes
+    tag: general
+    basis: "SRD 5.2.1 Darkvision (species trait concept)"
+    summary: You have darkvision out to 60 feet.
+    effects:
+      - {type: narrative, text: "darkvision 60 feet"}
+  - id: watchful
+    name: Watchful
+    tag: general
+    basis: original
+    summary: >-
+      You can take the Search action as a bonus action, and you have advantage on Wisdom
+      (Perception) checks to find hidden creatures and traps.
+    effects:
+      - {type: narrative, text: "Search as a bonus action"}
+      - {type: advantage, roll: [check], scope: perception_hidden}
+  - id: shake_it_off
+    name: Shake It Off
+    tag: general
+    basis: original
+    summary: >-
+      Once per short rest, as a bonus action, you can end one of these conditions on
+      yourself: charmed, frightened or poisoned.
+    effects:
+      - {type: resource, id: shake_it_off, uses: 1, recharge: short}
+      - {type: narrative, text: "bonus action: end charmed, frightened or poisoned on yourself"}
+
 # ---------------------------------------------------------------------------- backgrounds
 # +1 to each of the three listed abilities (no split decision). Knack is fixed.
 backgrounds:
@@ -798,6 +1061,7 @@ presets:
     abilities: {str: 16, dex: 13, con: 15, int: 8, wis: 13, cha: 10}
     skills: [perception, intimidation]
     talents: {1: weapon_expert, 3: guardian, 5: cleave, 7: hardy, 9: alert}
+    edges: {2: sap, 4: drive_back, 6: second_breath, 8: die_hard, 10: armor_drill}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     knacks: {2: skilled, 6: pathfinder, 10: well_travelled}
     asi: {4: {plus2: str}, 8: {plus2: str}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: chain_mail, shield: true, weapons: [longsword, javelin]}
@@ -808,6 +1072,7 @@ presets:
     abilities: {str: 8, dex: 16, con: 15, int: 10, wis: 12, cha: 14}
     skills: [stealth, sleight_of_hand]
     talents: {1: precision, 3: cunning, 5: marksman, 7: weapon_expert, 9: alert}
+    edges: {2: night_eyes, 4: parry, 6: climber, 8: second_breath, 10: watchful}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     knacks: {2: expertise, 6: many_faces, 10: streetwise}
     asi: {4: {plus2: dex}, 8: {plus2: dex}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: leather, shield: false, weapons: [rapier, shortbow]}
@@ -818,6 +1083,7 @@ presets:
     abilities: {str: 16, dex: 14, con: 15, int: 8, wis: 12, cha: 10}
     skills: [perception, survival]
     talents: {1: rage, 3: hardy, 5: cleave, 7: guardian, 9: alert}
+    edges: {2: heavy_hands, 4: parry, 6: graze, 8: hardened, 10: die_hard}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     knacks: {2: pathfinder, 6: wild_kin, 10: artisan}
     asi: {4: {plus2: str}, 8: {plus2: str}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: null, shield: false, weapons: [greataxe, handaxe]}
@@ -828,6 +1094,7 @@ presets:
     abilities: {str: 12, dex: 16, con: 14, int: 10, wis: 15, cha: 8}
     skills: [acrobatics, athletics]
     talents: {1: martial_arts, 3: cunning, 5: weapon_expert, 7: hardy, 9: alert}
+    edges: {2: sure_footed, 4: grappler, 6: sap, 8: shake_it_off, 10: die_hard}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     knacks: {2: expertise, 6: wild_kin, 10: well_travelled}
     asi: {4: {plus2: dex}, 8: {plus2: dex}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: null, shield: false, weapons: [quarterstaff, dart]}
@@ -840,6 +1107,7 @@ presets:
     abilities: {str: 8, dex: 14, con: 14, int: 16, wis: 13, cha: 10}
     skills: [history, religion]
     talents: {1: evoker, 3: wider_study, 5: turn_the_odds, 7: iron_mind, 9: hardy}
+    edges: {2: second_breath, 4: steady_focus, 6: piercing_spell, 8: ritual_scholar, 10: quiet_casting}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     extra_domains: {3: illusion}
     deep_domain: the_arcane
     knacks: {2: encyclopedic, 6: well_travelled, 10: artisan}
@@ -852,6 +1120,7 @@ presets:
     abilities: {str: 8, dex: 16, con: 13, int: 15, wis: 13, cha: 10}
     skills: [investigation, perception]
     talents: {1: precision, 3: anatomist, 5: anticipate, 7: weapon_expert, 9: hardy}
+    edges: {2: sap, 4: watchful, 6: second_breath, 8: night_eyes, 10: die_hard}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     knacks: {2: expertise, 6: streetwise, 10: encyclopedic}
     asi: {4: {plus2: dex}, 8: {plus2: dex}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: chain_shirt, shield: true, weapons: [rapier, light_crossbow]}
@@ -863,6 +1132,7 @@ presets:
     abilities: {str: 8, dex: 13, con: 14, int: 16, wis: 11, cha: 13}
     skills: [history, arcana]
     talents: {1: turn_the_odds, 3: wider_study, 5: master_plan, 7: hardy, 9: evoker}
+    edges: {2: second_breath, 4: steady_focus, 6: piercing_spell, 8: ritual_scholar, 10: cantrip_adept}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     extra_domains: {3: divination}
     deep_domain: chronomancy
     knacks: {2: encyclopedic, 6: well_travelled, 10: performer}
@@ -876,6 +1146,7 @@ presets:
     abilities: {str: 10, dex: 15, con: 13, int: 16, wis: 13, cha: 8}
     skills: [nature, perception]
     talents: {1: weapon_expert, 3: clockwork_guardian, 5: field_kit, 7: hardy, 9: anticipate}
+    edges: {2: quick_draw, 4: armor_drill, 6: ritual_scholar, 8: second_breath, 10: hale}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     knacks: {2: artisan, 6: skilled, 10: expertise}
     asi: {4: {plus2: dex}, 8: {plus2: dex}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: breastplate, shield: true, weapons: [rapier, light_crossbow], focus: arcane_focus}
@@ -888,6 +1159,7 @@ presets:
     abilities: {str: 13, dex: 10, con: 14, int: 9, wis: 16, cha: 13}
     skills: [medicine, persuasion]
     talents: {1: channel, 3: wider_study, 5: mending_hands, 7: warden, 9: hardy}
+    edges: {2: far_casting, 4: steady_focus, 6: die_hard, 8: lasting_spell, 10: piercing_spell}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     extra_domains: {3: presence}
     deep_domain: the_living_world
     knacks: {2: field_medic, 6: well_travelled, 10: silver_tongue}
@@ -901,6 +1173,7 @@ presets:
     abilities: {str: 8, dex: 14, con: 15, int: 12, wis: 16, cha: 10}
     skills: [nature, animal_handling]
     talents: {1: wild_shape, 3: wider_study, 5: channel, 7: hardy, 9: warden}
+    edges: {2: second_breath, 4: steady_focus, 6: climber, 8: night_eyes, 10: lasting_spell}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     extra_domains: {3: the_tide}
     deep_domain: the_living_world
     knacks: {2: wild_kin, 6: field_medic, 10: well_travelled}
@@ -914,6 +1187,7 @@ presets:
     abilities: {str: 8, dex: 12, con: 13, int: 11, wis: 15, cha: 16}
     skills: [religion, deception]
     talents: {1: turn_the_odds, 3: wider_study, 5: prophecy, 7: warden, 9: alert}
+    edges: {2: quiet_casting, 4: steady_focus, 6: piercing_spell, 8: far_casting, 10: shake_it_off}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     extra_domains: {3: binding}
     deep_domain: fate
     knacks: {2: encyclopedic, 6: many_faces, 10: performer}
@@ -927,6 +1201,7 @@ presets:
     abilities: {str: 16, dex: 10, con: 14, int: 8, wis: 15, cha: 12}
     skills: [intimidation, religion]
     talents: {1: sworn_strike, 3: mending_hands, 5: weapon_expert, 7: warden, 9: oath_unbroken}
+    edges: {2: armor_drill, 4: sap, 6: second_breath, 8: hardened, 10: far_casting}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     knacks: {2: silver_tongue, 6: field_medic, 10: well_travelled}
     asi: {4: {plus2: str}, 8: {plus2: str}}   # V21 pick, E-9: +2 to the main track's ability (V33)
     kit: {armor: chain_mail, shield: true, weapons: [longsword, javelin], focus: holy_symbol}
@@ -983,6 +1258,7 @@ sim_builds:
     domain: the_tide
     abilities: {str: 10, dex: 13, con: 15, int: 8, wis: 16, cha: 12}
     talents: {1: channel, 3: wider_study, 5: alert, 7: hardy, 9: cunning}
+    edges: {2: second_breath, 4: steady_focus, 6: die_hard, 8: far_casting, 10: piercing_spell}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     cross: [channel, wider_study]
     extra_domains: {3: presence}
     kit: {armor: chain_mail, shield: true, weapons: [mace]}
@@ -992,6 +1268,7 @@ sim_builds:
     facet: soul
     abilities: {str: 16, dex: 10, con: 14, int: 8, wis: 12, cha: 15}
     talents: {1: sworn_strike, 3: weapon_expert, 5: guardian, 7: warden, 9: hardy}
+    edges: {2: sap, 4: second_breath, 6: die_hard, 8: armor_drill, 10: hardened}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     cross: [guardian]
     kit: {armor: chain_mail, shield: true, weapons: [longsword]}
   # ------------------------------------------------ hybrids and the audit's combos
@@ -1004,6 +1281,7 @@ sim_builds:
     domain: beasts
     abilities: {str: 10, dex: 16, con: 15, int: 8, wis: 14, cha: 11}
     talents: {1: marksman, 3: precision, 5: wider_study, 7: weapon_expert, 9: hardy}
+    edges: {2: night_eyes, 4: watchful, 6: far_casting, 8: second_breath, 10: sure_footed}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     cross: [wider_study]
     extra_domains: {5: storm}
     kit: {armor: studded_leather, shield: false, weapons: [longbow, shortsword]}
@@ -1016,6 +1294,7 @@ sim_builds:
     domain: presence
     abilities: {str: 16, dex: 10, con: 14, int: 8, wis: 15, cha: 12}
     talents: {1: weapon_expert, 3: channel, 5: cleave, 7: wider_study, 9: alert}
+    edges: {2: sap, 4: steady_focus, 6: armor_drill, 8: die_hard, 10: far_casting}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     cross: [channel, wider_study]
     extra_domains: {7: the_tide}
     kit: {armor: chain_mail, shield: true, weapons: [longsword]}
@@ -1031,6 +1310,7 @@ sim_builds:
     domain: divination
     abilities: {str: 8, dex: 16, con: 13, int: 15, wis: 13, cha: 10}
     talents: {1: precision, 3: clockwork_guardian, 5: anatomist, 7: turn_the_odds, 9: hardy}
+    edges: {2: sap, 4: steady_focus, 6: second_breath, 8: quick_draw, 10: die_hard}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     kit: {armor: chain_shirt, shield: true, weapons: [rapier]}
   # Amendment 2: a full caster spending one pick on a Steel talent. Spell stays the main
   # track, so the talent brings martial weapons and its own +1 attack/+1 AC in armor, but
@@ -1042,6 +1322,7 @@ sim_builds:
     domain: constructed_force
     abilities: {str: 8, dex: 14, con: 14, int: 16, wis: 13, cha: 10}
     talents: {1: evoker, 3: wider_study, 5: weapon_expert, 7: turn_the_odds, 9: hardy}
+    edges: {2: second_breath, 4: steady_focus, 6: piercing_spell, 8: ritual_scholar, 10: die_hard}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     extra_domains: {3: illusion}
     deep_domain: the_arcane
     kit: {armor: null, shield: false, weapons: [quarterstaff]}
@@ -1056,6 +1337,7 @@ sim_builds:
     domain: presence
     abilities: {str: 15, dex: 10, con: 14, int: 8, wis: 16, cha: 12}
     talents: {1: channel, 3: wider_study, 5: sworn_strike, 7: weapon_expert, 9: warden}
+    edges: {2: sap, 4: steady_focus, 6: die_hard, 8: armor_drill, 10: far_casting}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     extra_domains: {3: the_tide}
     kit: {armor: scale_mail, shield: true, weapons: [mace]}
     kit_by_level: {5: {weapons: [longsword]}}   # the 7th-level 2–2 tie keeps Spell main (V43): no heavy armor
@@ -1070,6 +1352,7 @@ sim_builds:
     domain: presence
     abilities: {str: 16, dex: 10, con: 14, int: 8, wis: 15, cha: 12}
     talents: {1: sworn_strike, 3: weapon_expert, 5: channel, 7: wider_study, 9: mending_hands}
+    edges: {2: sap, 4: steady_focus, 6: second_breath, 8: armor_drill, 10: piercing_spell}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     extra_domains: {7: the_tide}
     deep_domain: the_living_world
     kit: {armor: chain_mail, shield: true, weapons: [longsword]}
@@ -1083,6 +1366,7 @@ sim_builds:
     domain: presence
     abilities: {str: 16, dex: 10, con: 14, int: 8, wis: 12, cha: 15}
     talents: {1: sworn_strike, 3: mending_hands, 5: weapon_expert, 7: wider_study, 9: hardy}
+    edges: {2: sap, 4: die_hard, 6: steady_focus, 8: second_breath, 10: far_casting}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     extra_domains: {7: binding}
     kit: {armor: chain_mail, shield: true, weapons: [longsword]}
   # Audit M3: the unkillable raging tank. Steel 4.
@@ -1092,6 +1376,7 @@ sim_builds:
     facet: body
     abilities: {str: 16, dex: 14, con: 15, int: 8, wis: 12, cha: 10}
     talents: {1: rage, 3: hardy, 5: guardian, 7: cleave, 9: weapon_expert}
+    edges: {2: sap, 4: hardened, 6: second_breath, 8: die_hard, 10: sure_footed}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     kit: {armor: null, shield: true, weapons: [longsword]}
   # Rage + Precision via reckless advantage on a Strength finesse weapon. Steel 3.
   - id: reckless_striker
@@ -1100,6 +1385,7 @@ sim_builds:
     facet: body
     abilities: {str: 16, dex: 14, con: 15, int: 8, wis: 12, cha: 10}
     talents: {1: rage, 3: precision, 5: weapon_expert, 7: hardy, 9: alert}
+    edges: {2: parry, 4: sap, 6: second_breath, 8: die_hard, 10: hardened}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     kit: {armor: null, shield: false, weapons: [rapier]}
   # Audit M1/M2: healing engine (Channel boost + Mending Hands + Field Medic + Goodberry). Spell 3.
   - id: healer_engine
@@ -1109,6 +1395,7 @@ sim_builds:
     domain: the_tide
     abilities: {str: 13, dex: 10, con: 14, int: 9, wis: 16, cha: 13}
     talents: {1: channel, 3: mending_hands, 5: wider_study, 7: warden, 9: hardy}
+    edges: {2: far_casting, 4: steady_focus, 6: hale, 8: die_hard, 10: lasting_spell}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     extra_domains: {5: presence}
     deep_domain: the_living_world
     knacks: {2: field_medic}
@@ -1121,6 +1408,7 @@ sim_builds:
     domain: fire
     abilities: {str: 8, dex: 14, con: 14, int: 10, wis: 12, cha: 16}
     talents: {1: evoker, 3: wider_study, 5: turn_the_odds, 7: hardy, 9: alert}
+    edges: {2: second_breath, 4: steady_focus, 6: piercing_spell, 8: elemental_shift, 10: far_casting}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     cross: [evoker]
     extra_domains: {3: storm}
     deep_domain: the_undying
@@ -1133,6 +1421,7 @@ sim_builds:
     domain: illusion
     abilities: {str: 8, dex: 14, con: 14, int: 16, wis: 13, cha: 10}
     talents: {1: wider_study, 3: turn_the_odds, 5: master_plan, 7: clockwork_guardian, 9: hardy}
+    edges: {2: second_breath, 4: steady_focus, 6: piercing_spell, 8: quiet_casting, 10: lasting_spell}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     extra_domains: {1: divination}
     deep_domain: the_arcane
     kit: {armor: null, shield: false, weapons: [quarterstaff]}
@@ -1144,6 +1433,7 @@ sim_builds:
     domain: beasts
     abilities: {str: 8, dex: 12, con: 14, int: 10, wis: 16, cha: 13}
     talents: {1: channel, 3: wider_study, 5: prophecy, 7: warden, 9: hardy}
+    edges: {2: hale, 4: steady_focus, 6: piercing_spell, 8: night_eyes, 10: lasting_spell}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     extra_domains: {3: the_tide}
     deep_domain: the_undying
     kit: {armor: scale_mail, shield: true, weapons: [mace]}
@@ -1160,6 +1450,7 @@ sim_builds:
     domain: constructed_force
     abilities: {str: 8, dex: 14, con: 14, int: 16, wis: 13, cha: 10}
     talents: {1: evoker, 3: mending_hands, 5: wider_study, 7: warden, 9: hardy}
+    edges: {2: die_hard, 4: steady_focus, 6: piercing_spell, 8: ritual_scholar, 10: hale}   # Amendment 5 (V50): 2nd/4th/6th/8th/10th
     cross: [mending_hands, warden]
     extra_domains: {5: warding}
     deep_domain: the_arcane
@@ -1191,12 +1482,12 @@ encounter_table:
   1:
     skirmish: 9
     clash: 16
-    battle: 18
+    battle: 19
     desperate: 23
   2:
     skirmish: 13
     clash: 19
-    battle: 23
+    battle: 24
     desperate: 27
   3:
     skirmish: 16
@@ -1204,40 +1495,40 @@ encounter_table:
     battle: 30
     desperate: 34
   4:
-    skirmish: 18
-    clash: 29
-    battle: 34
-    desperate: 40
+    skirmish: 19
+    clash: 30
+    battle: 35
+    desperate: 42
   5:
     skirmish: 33
     clash: 50
-    battle: 60
-    desperate: 66
+    battle: 62
+    desperate: 68
   6:
     skirmish: 34
-    clash: 51
-    battle: 62
-    desperate: 70
+    clash: 53
+    battle: 64
+    desperate: 74
   7:
     skirmish: 39
-    clash: 63
-    battle: 74
-    desperate: 82
+    clash: 64
+    battle: 76
+    desperate: 84
   8:
     skirmish: 46
-    clash: 68
-    battle: 82
-    desperate: 94
+    clash: 70
+    battle: 83
+    desperate: 95
   9:
-    skirmish: 61
-    clash: 89
-    battle: 105
-    desperate: 116
-  10:
     skirmish: 63
     clash: 92
-    battle: 109
-    desperate: 118
+    battle: 110
+    desperate: 121
+  10:
+    skirmish: 66
+    clash: 95
+    battle: 113
+    desperate: 123
 encounter_adjustments:
   three_players:
     clash_pct: -26
@@ -1245,40 +1536,40 @@ encounter_adjustments:
     by_tier_pct:
       skirmish: -25
       clash: -26
-      battle: -25
-      desperate: -24
+      battle: -24
+      desperate: -23
   five_players:
-    clash_pct: 23
-    rule: add foes worth 23% of the Threat
+    clash_pct: 24
+    rule: add foes worth 24% of the Threat
     by_tier_pct:
-      skirmish: 22
-      clash: 23
+      skirmish: 23
+      clash: 24
       battle: 23
       desperate: 19
   six_players:
-    clash_pct: 40
-    rule: add foes worth 40% of the Threat
+    clash_pct: 41
+    rule: add foes worth 41% of the Threat
     by_tier_pct:
       skirmish: 40
-      clash: 40
+      clash: 41
       battle: 40
-      desperate: 37
+      desperate: 36
   tired:
-    clash_pct: -6
-    rule: remove 6% of the Threat, or drop one tier
+    clash_pct: -3
+    rule: remove 3% of the Threat, or drop one tier
     by_tier_pct:
-      skirmish: 15
-      clash: -6
-      battle: -9
+      skirmish: 20
+      clash: -3
+      battle: -8
       desperate: -19
 monster_threat:
   model:
     standard: sqrt(HP x damage per turn)
-    minion: sqrt(8.4 x damage per turn)
-    boss: standard x 3.51
-    never_breaks: x 1.16
-    hard_hitter: x 1.06
-    lone_boss: boss x 1.2 (V42; measured mark-up x1.16 median)
+    minion: sqrt(8.6 x damage per turn)
+    boss: standard x 3.43
+    never_breaks: x 1.17
+    hard_hitter: x 1.07
+    lone_boss: boss x 1.2 (V42; measured mark-up x1.13 median)
   by_cr:
     1/8:
       standard: 6
@@ -1287,7 +1578,7 @@ monster_threat:
       damage: 4
     1/4:
       standard: 8
-      minion: 6
+      minion: 7
       boss: 28
       damage: 5
     1/2:
@@ -1298,60 +1589,60 @@ monster_threat:
     '1':
       standard: 18
       minion: 10
-      boss: 63
+      boss: 61
       damage: 11
     '2':
       standard: 28
       minion: 12
-      boss: 99
+      boss: 97
       damage: 17
     '3':
       standard: 37
       minion: 14
-      boss: 131
+      boss: 128
       damage: 22
     '4':
       standard: 46
       minion: 15
-      boss: 162
+      boss: 158
       damage: 27
     '5':
       standard: 55
-      minion: 16
-      boss: 194
+      minion: 17
+      boss: 189
       damage: 32
     '6':
       standard: 64
       minion: 18
-      boss: 224
+      boss: 219
       damage: 37
     '7':
       standard: 72
       minion: 19
-      boss: 251
+      boss: 246
       damage: 41
     '8':
       standard: 81
       minion: 20
-      boss: 283
+      boss: 276
       damage: 46
     '9':
       standard: 89
       minion: 21
-      boss: 313
+      boss: 306
       damage: 51
     '10':
       standard: 98
       minion: 22
-      boss: 343
+      boss: 336
       damage: 56
     '11':
       standard: 106
-      minion: 22
-      boss: 371
+      minion: 23
+      boss: 362
       damage: 60
     '12':
       standard: 114
-      minion: 23
-      boss: 401
+      minion: 24
+      boss: 392
       damage: 65

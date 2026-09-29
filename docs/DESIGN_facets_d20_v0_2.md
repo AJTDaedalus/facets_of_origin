@@ -12,7 +12,7 @@ chapter prose (`facets_d20/*.md`) is still v0.1 and is rewritten later from this
 revision (Designer, 2026-09-28) replaced the path sections with **tracks** (§1.2, §3),
 re-measured §2, added §3.5 *Why this holds*, §5.1 *Prismatic domains — options for the
 owner*, band item 7 and its first numbers in §8, and decisions V22–V31 in §12. The
-engine work this needs is listed exactly in *Planner → engine*, P-5 onward, at the end.
+engine work this needs is listed exactly in *Planner → engine*, P-5 onward, at the end. The Edges pass (BRIEF Amendment 5, 2026-09-28) added §1.3b, §1.4b, §3.6, the edge column in §2.3 and decisions V50–V56.
 
 ---
 
@@ -32,6 +32,7 @@ advancement:                      # what each level-up gives (ruling 1: ≤ 1 ch
   talent_levels: [1, 3, 5, 7, 9]  # one talent pick at each
   knack_levels: [2, 6, 10]        # one knack pick at each (background gives one at 1st)
   asi_levels: [4, 8]
+  edge_levels: [2, 4, 6, 8, 10]   # Amendment 5 (V50): one edge beside that level's knack or ability pick
   asi_rule: choice                # V21: +2 to one, +1 to two, or one extra knack
 build_rules:
   cross_facet_talent_cap: 2       # at most 2 of your 5 talents from other Facets' menus
@@ -43,6 +44,7 @@ tracks: {scaling_depth: ..., main_track: ..., facet_weight: ..., steel: {...}, s
 facets: {body: {...}, mind: {...}, soul: {...}}
 talents: [ ... ]                  # each tagged track: steel | spell | null
 knacks: [ ... ]
+edges: [ ... ]                    # Amendment 5, §1.3b and §3.6
 backgrounds: [ ... ]
 presets: [ ... ]
 balance: {...}                    # §8, incl. roles and hybrid_rule
@@ -144,6 +146,27 @@ Knacks live in their own top-level `knacks:` list with `id`, `name`, `basis`, `s
 and `effects` (no menus, track or scaling); they may only use the non-combat effect types
 marked **(N)** below. A test enforces it. Facet `features` and track `ranks` use the
 talent shape plus `level:` (and, for ranks, `depth:` and `main:`).
+
+### 1.3b Edges (Amendment 5)
+
+```yaml
+- id: parry                         # unique across talents, knacks and edges
+  name: Parry
+  tag: steel                        # steel | spell | general — FLAVOUR ONLY
+  min_level: null                   # optional: the lowest character level it can be taken at (even)
+  basis: "SRD 5.2.1 monster reaction: Parry (Gladiator)"
+  summary: One or two sentences of rules text.
+  effects: [...]                    # active from the level you take it; no `scaling`
+```
+
+Edges live in their own top-level `edges:` list. **An edge is not a talent: it has no
+`track`, and the engine never counts it toward depth or the main track** (`track_depth`
+reads `picks.talents` only; a test holds it). An edge may use any effect type in §1.4
+except the ones that are a talent's or a rank's job: `casting`, `domains`,
+`weapon_proficiency`, `armor_proficiency`, `hit_die_step`, `hp_per_level`,
+`extra_attack`, `crit_range`, `attack_bonus`, `ac_bonus`, `ac_formula`, `spark`,
+`reroll`, and `extra_damage_dice` (a rider) — a test enforces the list. Picks carry
+`edges: {level: id}` (§1.5); each edge once; `min_level` checked.
 
 ### 1.4 Effect vocabulary
 
@@ -258,6 +281,24 @@ creature an effect applies to.
 | `hit_dice_bonus` **(N\*)** | amount, trigger: short_rest | extra HP per Hit Die spent on a short rest (Field Medic knack). The only knack effect the sim models; allowed in knacks because it's bounded by Hit Dice |
 | `advantage` with `roll: [check]` only **(N)** | scope | a knack may grant advantage on ability checks, never attacks, saves or initiative |
 
+#### 1.4b Additions for edges (Edges designer, 2026-09-28 — binding)
+
+| type | fields | meaning |
+|---|---|---|
+| `damage_die_floor` | min, weapon, condition: [two_handed] | treat a weapon damage die below `min` as `min` (Heavy Hands; the SRD Great Weapon Fighting style) |
+| `miss_damage` | damage, weapon, condition, frequency | once per turn, a miss with that weapon still deals `damage` (Graze) |
+| `ac_reaction` | value, trigger: hit_by_melee_attack, action: reaction, weapon: melee | +value AC against one attack that hits you, as a reaction; can turn it into a miss (Parry) |
+| `hit_dice_max` | trigger: short_rest | a Hit Die spent on a short rest restores its maximum (Hale) |
+| `keep_concentration` | action: reaction | on a failed save to keep concentration, spend your reaction to succeed (Steady Focus) |
+
+Extended fields: `impose_disadvantage` takes `trigger: weapon_hit` (the creature you hit
+has disadvantage on its next attack roll before your next turn — Sap) or `roll: save,
+trigger: your_spell, resource` (one target has disadvantage on its first save against
+your spell — Piercing Spell); `advantage` takes `roll: [death_save]` (Die Hard);
+`temp_hp` takes `trigger: first_bloodied` (once a fight, the first time you are Bloodied
+and standing — Second Breath). New condition keyword: `two_handed` (you hold the weapon
+in two hands: a two-handed weapon, or a versatile one with no shield).
+
 An effect entry may carry `id:` to disambiguate two effects of the same type in
 `scaling` (Sworn Strike's 9th-level `radiant_edge`), and `fallback: true` meaning
 "applies only on a turn the other same-type effect wasn't used".
@@ -291,6 +332,7 @@ presets:
     extra_domains: {3: presence}       # {level taken: domain} for each Wider Study
     deep_domain: the_living_world      # Deep Magic's domain; arrives at Spell depth 3 (may be prismatic)
     knacks: {2: field_medic, 6: well_travelled, 10: silver_tongue}   # background knack is separate
+    edges: {2: far_casting, 4: steady_focus, 6: die_hard, 8: lasting_spell, 10: piercing_spell}   # Amendment 5
     kit: {armor: scale_mail, shield: true, weapons: [mace], focus: holy_symbol}
     # optional: tradition: invocation|thaumaturgy   (Body builds that cast, E3)
     # optional: kit_by_level: {3: {armor: breastplate, shield: true}}  (dict-merged into kit from that level)
@@ -354,8 +396,8 @@ tracks" is now.
 | Creation from a preset card | ≤ 12 | ≈ 20 (Priest card) | 6 | **6** |
 | Creation, custom, listed background | ≤ 18 | ≈ 28–30 (Soul caster) | 14 caster · 13 Mind/Soul Steel · 12 Body | **13** caster · **12** non-caster · **14** Body casting from 1st |
 | Creation, custom, written background | ≤ 18 | ≈ 33 | 18 (caster, worst case) | **17** caster · **16** non-caster · **18** Body casting from 1st |
-| Choices at a level-up | ≤ 1 | 1 every level, **2 at 3rd**, plus sub-picks | ≤ 1 | **≤ 1** (a Spell talent that brings a domain names it as part of the pick; Body's first also names its tradition) |
-| Choices over levels 2–10 | — | ≈ 12 | 10 (with V21) | **9 picks** (4 talents, 3 knacks, 2 ability picks) + 0–2 domain namings (Wider Study, Deep Magic) |
+| Choices at a level-up | ≤ 1 (Amendment 5: two small picks at even levels) | 1 every level, **2 at 3rd**, plus sub-picks | ≤ 1 | **odd levels 1, even levels 2** (knack or ability pick + an edge, Amendment 5); a Spell talent that brings a domain names it as part of the pick; Body's first also names its tradition |
+| Choices over levels 2–10 | — | ≈ 12 | 10 (with V21) | **14 picks** (4 talents, 3 knacks, 2 ability picks, **5 edges**) + 0–2 domain namings (Wider Study, Deep Magic) |
 | Exception rules, player book | ≤ 5 | ≈ 15 (GF-M7) | 3 | **3** (§2.4) |
 | Mechanics per job (add a die / grant advantage / reroll / weapon damage from a resource) | 1 / 1 / 1 / 1 | 3 / 3 currencies / 3 / 3 | 1 / 1 / 1 / 3 (*Sworn Strike*, *Divine Smite*, *Searing Smite*) | **1 / 1 / 1 / 1** (*Sworn Strike*; V24) |
 | Chassis rules a player reads | — | classes-as-talent-chains, caster level, 3 caster carve-outs | a path choice, a 5-column path table, 4 path tags, "needs casting" | **a 3-column Facet table, a 7-rank depth table, one main-track sentence, one upgrade sentence; a [Steel]/[Spell] tag on each talent card** |
@@ -402,17 +444,23 @@ knack (1): **17** for a caster, **18** for the Body caster, the cap exactly.
 
 ### 2.3 Level-ups
 
-| Level | v0.1 choices | v0.2 tracks choices | Automatic |
+| Level | v0.1 choices | v0.2 tracks choices (+ Amendment 5 edge) | Automatic |
 |---|---|---|---|
-| 2 | talent | **knack** | Body *Action Surge*; Mind *Studied Recovery* (does nothing without slots) |
+| 2 | talent | **knack + edge** | Body *Action Surge*; Mind *Studied Recovery* (does nothing without slots) |
 | 3 | talent + signature | **talent** | the ranks its track count reaches (§3.2) |
-| 4 | talent | **ability pick** (V21) | |
+| 4 | talent | **ability pick** (V21) **+ edge** | |
 | 5 | talent | **talent** | *Extra Attack* (Steel depth 2, Steel main); 3rd-level slots (Full) or 2nd (Half); tracked talents' 5th-level lines at depth 2 |
-| 6 | talent | **knack** | |
+| 6 | talent | **knack + edge** | |
 | 7 | talent | **talent** | |
-| 8 | talent | **ability pick** | |
+| 8 | talent | **ability pick + edge** | |
 | 9 | talent | **talent** | Body *Indomitable*; tracked talents' 9th-level lines at depth 3 |
-| 10 | talent | **knack** | |
+| 10 | talent | **knack + edge** | |
+
+**Amendment 5 (owner):** an even-level level-up is **two small picks** (the knack or
+ability pick, and an edge); odd levels stay one. Choices over levels 2–10 rise from 9 to
+**14** (+0–2 domain namings). Creation is unchanged (edges start at 2nd). §3.6 has the
+list; the recount from the book is in `RESEARCH_facets_d20_balance.md`, *Book simplicity
+count (with edges)*.
 
 Talents grow on their own at 5th and 9th (their `scaling`, gated by depth for tracked
 talents), so power keeps rising on levels with no talent pick. HP rises by a fixed amount
@@ -610,6 +658,80 @@ below the best pure caster of its tradition's. The exception is the **Tinker** (
 the best pure Mind build at 4th–7th while both its damage figures are 35–74% under — the
 excess is *Clockwork Guardian* and *Field Kit* (support prevented and temp HP), a talent
 tuning item for the balance pass, not the chassis.
+
+### 3.6 Edges (Amendment 5; Edges designer, 2026-09-28)
+
+The fresh player found the build freedom thin ("a class you assemble from five cards") and
+the even levels empty (a knack never touches a fight). Amendment 5: an **edge** at 2nd,
+4th, 6th, 8th and 10th, beside that level's knack or ability pick.
+
+- **One shared list, 26 edges** (9 Steel, 8 Spell, 9 general). No menus, so builds cross
+  freely: a Soul priest can parry, a Body brawler can keep a ritual book.
+- **The tag is flavour, never a track.** An edge is not a talent: it has no `track`, the
+  engine never counts it toward depth or the main track (`track_depth` reads talents
+  only), and taking, keeping or retraining one never brings or costs a rank. The book
+  says so in 01, 02 (twice) and 10; tests hold both the engine and the three sentences.
+- **Smaller than a talent.** No edge gives what a talent or rank gives: no attack bonus,
+  crit range, armor or weapon training, hit die, HP per level, Extra Attack, casting or
+  domain (data-enforced: `EDGE_FORBIDDEN_TYPES`, §1.3b). No edge copies a talent's effect
+  (a test compares every edge effect's type, trigger, roll, scope, damage types and
+  condition with every talent and rank effect).
+- **One mechanic per job holds.** No edge adds a die to a d20 (the Spark die's job),
+  rerolls (*Indomitable*'s), or adds damage dice to a hit (a rider; *Sworn Strike* stays
+  the one resource-paid weapon rider). Edges that change a roll use advantage or
+  disadvantage, the one roll-twice mechanic.
+- **Exceptions stay at three.** Every edge rule applies the same way to everyone (each
+  edge once; a few have a minimum level; the tag is flavour). None is a carve-out.
+- **Size.** Each simulated edge was swapped into each reference-party member (and the
+  two-handed ones into the Barbarian) against a narrative filler (V55): the largest moves
+  a build by +4.5 points (*Parry*, Rogue at 4th), under the ~5 ceiling; none was cut
+  (RESEARCH, *Edges pass*). Ten of the 26 are simulated; the rest are utility the
+  simulator can't see and are zero by construction.
+- **Parry needs no shield** (V52): a duellist's or a two-hander's defence. With a shield
+  allowed it was the first pick of every sword-and-board build and lifted them 5–7 points
+  at 4th, enough to put the Mind hybrids over their pure builds (item 7).
+- **Level minimums** on three (*Steady Focus* and *Lasting Spell* 4th, *Piercing Spell*
+  6th).
+- **Spell edges work on your spells**, so they do nothing until you cast, except *Ritual
+  Scholar* (anyone, from a book). That is not a gate: nothing forbids the pick.
+- **Presets and sim builds** name an edge at each even level (yaml `edges:`, printed as
+  the card's *Edges* line; tested).
+
+| Edge | Tag | Min. level | Job | Basis | Simulated |
+|---|---|---|---|---|---|
+| *Heavy Hands* | steel | — | weapon damage floor (two hands) | SRD 5.2.1 Fighting Style: Great Weapon Fighting | yes |
+| *Graze* | steel | — | damage on a miss | SRD 5.2.1 weapon mastery: Graze | yes |
+| *Sap* | steel | — | blunt the target's next attack | SRD 5.2.1 weapon mastery: Sap | yes |
+| *Drive Back* | steel | — | positioning on a hit | SRD 5.2.1 weapon masteries: Push and Slow | no (narrative) |
+| *Parry* | steel | — | reaction defence (no shield) | SRD 5.2.1 monster reaction: Parry (Gladiator) | yes |
+| *Grappler* | steel | — | grapple on an unarmed hit | SRD 5.2.1 feat: Grappler (Punch and Grab, Attack Advantage) | no (narrative) |
+| *Paired Blades* | steel | — | two-weapon fighting | SRD 5.2.1 Fighting Style: Two-Weapon Fighting | no (narrative) |
+| *Armor Drill* | steel | — | armor comfort | original | no (narrative) |
+| *Quick Draw* | steel | — | hands and shields | original | no (narrative) |
+| *Cantrip Adept* | spell | — | one extra cantrip | original | no (narrative) |
+| *Ritual Scholar* | spell | — | rituals for anyone | original | no (narrative) |
+| *Quiet Casting* | spell | — | spell tweak: no components | SRD 5.2.1 Metamagic: Subtle Spell | no (narrative) |
+| *Far Casting* | spell | — | spell tweak: range | SRD 5.2.1 Metamagic: Distant Spell | no (narrative) |
+| *Piercing Spell* | spell | 6 | spell tweak: a harder save | SRD 5.2.1 Metamagic: Heightened Spell | yes |
+| *Steady Focus* | spell | 4 | concentration | original | yes |
+| *Elemental Shift* | spell | — | spell tweak: damage type | SRD 5.2.1 Metamagic: Transmuted Spell | no (narrative) |
+| *Lasting Spell* | spell | 4 | spell tweak: duration | SRD 5.2.1 Metamagic: Extended Spell | no (narrative) |
+| *Die Hard* | general | — | death saves | original | yes |
+| *Second Breath* | general | — | temporary HP once a fight | original | yes |
+| *Hale* | general | — | short-rest healing | original | yes |
+| *Hardened* | general | — | poison | SRD 5.2.1 species trait: Dwarven Resilience (concept) | yes |
+| *Sure-Footed* | general | — | terrain, prone | original | no (narrative) |
+| *Climber* | general | — | climb and swim | SRD 5.2.1 Climb Speed and Swim Speed (rules glossary) | no (narrative) |
+| *Night Eyes* | general | — | darkvision | SRD 5.2.1 Darkvision (species trait concept) | no (narrative) |
+| *Watchful* | general | — | searching | original | no (narrative) |
+| *Shake It Off* | general | — | end a condition | original | no (narrative) |
+
+SRD safety: the concepts come from SRD 5.2.1's fighting styles (Great Weapon Fighting,
+Two-Weapon Fighting), weapon masteries (Graze, Sap, Push, Slow), the Grappler feat,
+Metamagic (Subtle, Distant, Heightened, Transmuted, Extended), a monster reaction
+(Parry), species traits (darkvision, Dwarven Resilience) and the rules glossary (climb and
+swim speeds); the rest are original. Every mechanic is restated in our own words and
+sized for an edge. No non-SRD feat is copied (a test bans their names from `basis`).
 
 ---
 
@@ -1216,6 +1338,20 @@ under thresholds), so the recommendation is to let them lapse.
 | **V48** | **Morale edges**: boss can lead; leaderless minions check at half down; broken foes stop at once | MM #5, P #7 | — |
 | **V49** | **Social defaults** (Neutral start; one roll per character per person per scene; Intimidation fades; Influence stops a foe at Neutral) | MM #6 | — |
 | — | *Tried and dropped:* a 9th-level scaling depth of 2 (V28 kept) | It lifted hybrids 4 points at 10th, but after V37–V40 every hybrid was inside the band without it, and with it two Soul hybrids out-hit the Soul pure martial | — |
+
+**Edges pass (Edges designer, 2026-09-28; BRIEF Amendment 5).** Log and numbers:
+`docs/RESEARCH_facets_d20_balance.md` *Edges pass*.
+
+| # | Decision | Why | Rejected |
+|---|---|---|---|
+| **V50** | **Edges**: one small pick at 2nd/4th/6th/8th/10th beside the knack or ability pick, from **one shared list of 26** (9 Steel, 8 Spell, 9 general). The tag is flavour: an edge has no track and never counts toward depth or the main track (§1.3b, §3.6). Presets and sim builds name one at each even level | Amendment 5: build freedom felt thin and even levels empty. A shared list lets builds cross; a flavour tag with no depth keeps edges from becoming a way around the tracks | Per-Facet edge menus (more reading, less crossing); edges that count as half a talent toward depth (a way around the tracks) |
+| **V51** | **An edge never does a talent's or rank's job** (`EDGE_FORBIDDEN_TYPES`: attack bonus, crit range, armor/weapon training, hit die, HP/level, Extra Attack, casting, domains, AC bonus or formula) **nor a Spark's, a reroll's or a rider's** (no d20 die, no reroll, no damage dice on a hit). Enforced at load and by test | "Clearly smaller than a talent", and one mechanic per job | A +1 AC or +1 to hit edge (duplicates *Weapon Expert*); *Savage Attacker*-style damage rerolls (a second reroll mechanic) |
+| **V52** | **Parry needs a melee weapon and no shield**; the sim spends it on the first non-critical hit without knowing the margin (hidden AC, V46), and never with *Shield* or Uncanny Dodge to hand | With shields it lifted every sword-and-board build 5–7 points at 4th and broke item 7 for the Mind hybrids; with perfect knowledge the sim overstated it; spending it before *Shield* cost the Wizard 3–8 points | Parry as PB uses per short rest (bookkeeping); +1 AC (fiddly); cutting it |
+| **V53** | **What the simulator models**: *Heavy Hands* (damage-die floor), *Graze*, *Sap*, *Parry*, *Die Hard*, *Second Breath*, *Hale*, *Hardened* (poison resistance), *Piercing Spell*, *Steady Focus*. The other 16 are utility or positioning and are zero in the sim by construction | Measure what can be measured; say what can't | Guessing numbers for positioning edges |
+| **V54** | **Preset edge picks**: martials take a combat edge early (*Sap*, or *Parry* without a shield); fragile casters take a durability edge at 2nd (*Second Breath*) and *Steady Focus* at 4th; utility edges fill the rest, so every card shows the list's range | With utility edges at 2nd and 4th the Loremaster measured −15% at 4th and Mind casters fell 4–5 points behind the Parry martials | All-utility caster picks (band miss); all-combat picks (hides half the list) |
+| **V55** | **Must-take check**: each simulated edge replaces a narrative filler on each reference-party member (and the Barbarian for the two-handed ones) at 4th, 7th and 10th, 500 days × 4 positions; flag above ~5 points. Result: largest +4.5, none flagged, none cut | The owner's "no single edge may be a must-take", made measurable | Pick-rate among presets (a design choice, not a measure) |
+| **V56** | **Stabilizing a dying creature is an action and needs no check** (the SRD asks for a DC 10 Wisdom (Medicine) roll). The sim now plays it: a character who can't heal a friend at two failed death saves stabilizes it | The deferred 1st-level miss: a PC died on 13.7% of standard days, all from failed death saves with nobody able to heal. With the rule: **4.2%**. The SRD's check gives 6.9%; stabilizing as soon as a friend drops gives 0.1–1% but costs fights (Clash wins 95.6% → 90–92%) | A death-save exception at low level (a fourth exception rule); Die Hard as a core rule |
+| — | *Deferred, still logged:* Clash wins at 9th–10th | 96.1% / 96.7% after the refit against the yaml's 97% floor (was 96.5%). Edges don't move it: the losses are swingy boss fights at the Clash budget, a Table 9–1/boss question, not a character one | — |
 
 Resolved enough to implement. **Return to the engine agent for *Planner → engine* P-5
 onward (end of file), then to the balance pass (§8 tuning items), then to a prose pass

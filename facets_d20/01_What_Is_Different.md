@@ -10,17 +10,17 @@ The d20 test: roll a d20, add a modifier, compare to a DC or an AC. (A **d20 tes
 
 ## What Changes
 
-**1. Facets instead of classes.** You pick **Body**, **Mind** or **Soul**. The Facet sets your hit die, saves, armor, weapons, two skill picks and one 1st-level feature. There are no classes, subclasses, feats or multiclassing, and nobody uses weapon mastery properties. (Chapter 02.)
+**1. Facets instead of classes.** You pick **Body**, **Mind** or **Soul**. The Facet sets your hit die, saves, armor, weapons, two skill picks and one 1st-level feature. There are no classes, subclasses, feats or multiclassing, and nobody uses weapon mastery properties (a few edges borrow one). (Chapter 02.)
 
 **2. Five talents.** You pick a talent at 1st, 3rd, 5th, 7th and 9th level from your Facet's menu. Up to two of the five can come from another Facet's menu. Talents grow at 5th and 9th level; a Steel or Spell talent's growth also needs depth in its track (next item). (Chapters 02–05.)
 
 **3. Steel and Spell.** Each talent is tagged Steel (weapons and armor), Spell (magic) or neither. The number you hold in a track is your **depth** in it, and the track you hold more of is your **main track**. On a tie, your main track stays the one you had. Depth buys martial weapons, armor, Extra Attack and toughness on the Steel side, and spellcasting, the Full slot table and extra domains on the Spell side. Your first talent in a track gives you martial weapons or spellcasting whatever your main track; every other rank also needs the track to be your main one, so a hybrid gets the first rank of both tracks and the higher ranks of only one. (Chapter 02.)
 
-**4. Knacks.** Small non-combat abilities: one from your background, one each at 2nd, 6th and 10th. A knack never changes attacks, damage, AC, hit points, saves, initiative or spell slots. (Chapter 06.)
+**4. Knacks and edges.** Knacks are small non-combat abilities: one from your background, one each at 2nd, 6th and 10th. A knack never changes attacks, damage, AC, hit points, saves, initiative or spell slots. (Chapter 06.) An **edge** is a small combat or utility pick, feat-sized but smaller, taken at 2nd, 4th, 6th, 8th and 10th beside that level's other pick; its Steel or Spell tag is flavour and never counts toward depth. (Chapter 02.)
 
 **5. The rest of leveling.** At 4th and 8th, pick one: +2 to one ability or +1 to two (no score above 20), or one more knack. Levels run 1st to 10th. Proficiency is +2 at 1st–4th, +3 at 5th–8th, +4 at 9th–10th. Levels come at the MM's call.
 
-**6. Fixed hit points.** At 1st level: your hit die's maximum + 8 + your Constitution modifier. Each level after: half the die + 1 + Con. You never roll for hit points when you level; Hit Dice spent on a short rest still roll, as the SRD says.
+**6. Fixed hit points.** At 1st level: your hit die's maximum + 8 + your Constitution modifier. Each level after: half the die + 1 + Con. You never roll for hit points when you level; Hit Dice spent on a short rest still roll, as the SRD says. Stabilizing a dying creature takes an action and no check. (Chapter 08.)
 
 **7. Magic from a list and a domain.** A caster casts from the **Common list** (fifteen spells, *Fireball* included) plus one or more **domains**. No preparation: you can cast any spell on your lists that you have a slot for, and you know every cantrip on them. Slots come from the Full or Half table, read by character level. (Chapter 07.)
 

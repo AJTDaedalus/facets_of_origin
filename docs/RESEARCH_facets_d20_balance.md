@@ -419,3 +419,201 @@ here is changed in the books until the owner answers, unless it says "done, reve
   brand but untested in the simulator (Influence isn't simulated). *Recommendation:* keep
   it, and watch it at the first human table; if it proves too strong, require the foe to
   be Bloodied first.
+
+
+## Edges pass
+
+*Edges designer, 2026-09-28, branch `feat/facets-d20`. Owner ruling: BRIEF Amendment 5
+(an edge at 2nd/4th/6th/8th/10th beside the knack or ability pick; even levels become two
+small picks; creation unchanged; ≤5 exceptions and one mechanic per job stand). Design:
+DESIGN v0.2 §1.3b, §1.4b, §2.3, §3.6; decisions **V50–V56**. Every number re-derived with
+`python tools/d20_sim.py all --write` after the last change; Table 9–2 regenerated with
+`python -m tools.build_d20_threat_table`; the printed encounter numbers in 09 and 10 synced
+from the yaml. Iteration numbers come from a scratch harness driving the same package
+functions (`analysis.party_for`, `day_encounters`, `sim.run_day`) at n = 150–500 days × 4
+positions, same seeds as the tool (common random numbers).*
+
+### What shipped
+
+- **26 edges in one shared list** (9 Steel, 8 Spell, 9 general), yaml `edges:`, each 1–2
+  sentences, SRD-5.2.1-safe (fighting styles, weapon masteries, the Grappler feat,
+  Metamagic, a monster reaction, species-trait concepts, the rules glossary; the rest
+  original). Three have a level minimum (*Steady Focus* and *Lasting Spell* 4th,
+  *Piercing Spell* 6th).
+- **Tags are flavour.** No `track` field; `track_depth` reads talents only; a test builds
+  the Wizard with five Steel edges and gets Spell 3, Spell main, the Full table and the
+  same ranks.
+- **Nothing a talent or rank gives**, nothing that adds a die to a d20, rerolls or adds
+  damage dice (V51; enforced at load, `data.EDGE_FORBIDDEN_TYPES`, and by a test that
+  compares every edge effect with every talent and rank effect).
+- **Engine**: five effect types (`damage_die_floor`, `miss_damage`, `ac_reaction`,
+  `hit_dice_max`, `keep_concentration`), extended fields (`impose_disadvantage` with
+  `trigger: weapon_hit` / `your_spell`, `advantage` on `death_save`, `temp_hp` with
+  `trigger: first_bloodied`), one condition keyword (`two_handed`); `Picks.edges`;
+  `check()` enforces the slots (one per even level reached, each once, minimum level,
+  not a talent or knack); `combat.death_save(advantage=)`, `combat.stabilize()`; the sim's
+  AI plays each simulated edge (documented in `sim.py`). Tests:
+  `software/tests/test_facets_d20_edges.py` (63) plus edge tests in the data and chapter
+  suites.
+- **Every preset and sim build names an edge at each even level** (yaml; printed as each
+  card's *Edges* line, tested).
+
+### Iterations
+
+Swap test against the preset median (n = 150–250), the pre-edges clash budgets:
+
+| Step | Change | L4 range | L7 range | L10 range | Misses |
+|---|---|---|---|---|---|
+| 0 | pre-edges (fix pass, full run) | −10…+15 | −10…+10 | −11…+14 | 0 |
+| 1 | first list; Parry with a shield; casters' early edges utility | −15.6…+5.9 | −10.2…+13.0 | −10.1…+13.5 | 1 (Loremaster L4) |
+| 2 | V56 stabilizing; Parry spent under hidden AC, after *Shield* | −15.3…+8.4 | −9.7…+11.7 | −10.0…+10.9 | 1 (Loremaster L4) |
+| 3 | V54: fragile casters take *Second Breath* at 2nd, *Steady Focus* at 4th | −13.0…+8.4 | −10.6…+8.0 | −9.8…+10.4 | 0, but item 7 fails: Tinker and spellblade +4–5 over the best pure Mind build at 4th |
+| 4 | **V52: Parry needs no shield**; shield users take *Sap* | −8.7…+11.3 | −9.2…+12.3 | −10.3…+12.1 | 0; item 7 holds |
+| final | full tool run (Table 9–1 re-fitted) | −11.9…+11.7 | −10.1…+9.4 | −11.3…+9.3 | **0** |
+
+Edges on every build cost the party only a little HP: the median preset loses 0–5% less HP
+per fight than without (step 1, same budgets), and Table 9–1 rose about 3% (below).
+
+### Must-take check (V55)
+
+Each simulated edge replaces a narrative filler on each reference-party member at 4th, 7th
+and 10th; the two-handed ones also on the Barbarian (whose own edges were all set to
+fillers). 500 days × 4 positions, final budgets. Points = how much less HP the party loses
+per fight with the edge (swap score). Flag above ~5.
+
+| Edge | Fighter L4/7/10 | Rogue | Wizard | Priest | Barbarian |
+|---|---|---|---|---|---|
+| *Sap* | +3.5/+3.4/+3.6 | +0.4/+4.0/+1.3 | 0 | +1.4/0/0 | +2.7/+1.1/+1.4 |
+| *Parry* (no shield) | 0 (shield) | **+4.5**/0/0 (bow from 5th) | +2.1/−0.2/−1.1 | 0 (shield) | +2.4/+0.1/+0.7 |
+| *Second Breath* | +2.3/+1.0/+1.9 | +0.3/+1.6/+2.5 | +2.1/+1.9/+2.3 | +2.8/+2.4/+0.6 | +2.7/+2.4/+1.5 |
+| *Piercing Spell* (6th) | — /0/0 | — /0/0 | — /+3.0/+2.9 | — /−0.9/+1.0 | — |
+| *Steady Focus* (4th) | 0 | 0 | 0/−0.3/+0.1 | +2.3/−0.4/+3.3 | — |
+| *Graze* | 0 | 0 | 0 | 0 | +4.4/+0.2/+1.1 |
+| *Heavy Hands* | 0 | 0 | 0 | 0 | +0.6/−0.5/+1.8 |
+| *Die Hard* | −0.2/0/−0.2 | −0.8/−0.1/−1.8 | −1.0/−0.8/+0.7 | +1.7/−0.7/+1.0 | — |
+| *Hale* | +0.4/+0.7/−1.1 | −1.1/−0.1/−2.1 | +1.1/−0.6/−0.9 | +1.3/+0.2/−0.9 | — |
+| *Hardened* | 0 | 0 | 0 | 0 | 0 |
+
+Noise on a single cell is about ±1.5 points (CRN, but builds diverge after the first
+different roll). **No edge passes 5; none was cut.** One was **redesigned**: *Parry* with a
+shield allowed, and spent by the sim only when +2 would turn the hit (perfect knowledge),
+measured up to +6.8 on the Fighter and +8.5 on the Priest (n = 250). Under hidden AC it
+fell to +4.7 on the Fighter at 4th but was still the first pick of every sword-and-board
+build and, at 4th, lifted the Mind hybrids over their pure builds (item 7). It now needs
+no shield (V52). The zeros are real: *Hardened* meets no poison from
+the generic foes (the real-monster validation has some), *Die Hard* and *Hale* matter only
+on days someone goes down or runs out of Hit Dice. The 16 narrative edges are zero by
+construction (a test holds that they leave the combat profile unchanged).
+
+### Final band table (swap test vs the preset median; PI secondary)
+
+| Build | Kind | L1 | L4 | L7 | L10 | PI L1/4/7/10 |
+|---|---|---|---|---|---|---|
+| Fighter | preset | +4% | +4% | +4% | +0% | +46/−3/+27/+4 |
+| Rogue | preset | −6% | −2% | +2% | +4% | +8/−11/+47/+22 |
+| Barbarian | preset | +8% | +9% | +6% | +1% | +52/+28/+25/+0 |
+| Monk | preset | +9% | +10% | +7% | +6% | +19/+5/+22/+9 |
+| Wizard | preset | −7% | −4% | −1% | +3% | −16/+2/+25/+15 |
+| Investigator | preset | +1% | −8% | −10% | −6% | −0/−26/−2/−0 |
+| Loremaster | preset | −6% | −12% | −10% | −5% | −36/−33/−24/−24 |
+| Tinker | preset | −1% | −1% | −8% | −8% | −8/−2/−22/−29 |
+| Priest | preset | −1% | +7% | +1% | +0% | +0/+22/−6/+6 |
+| Druid | preset | −10% | −5% | +4% | −0% | −29/−15/−6/−19 |
+| Oracle | preset | +1% | +7% | −10% | −7% | −11/+9/−22/−16 |
+| Oathsworn | preset | +6% | +1% | −3% | −10% | +41/+20/+2/−17 |
+| *body_caster* | sim | +9% | −6% | −1% | −11% | +64/−27/−27/−23 |
+| *soul_champion* | sim | +6% | −0% | −5% | −8% | +44/+5/−8/−7 |
+| *body_ranger* | sim | −1% | +2% | −0% | +6% | −7/−1/+16/+32 |
+| *body_battlemage* | sim | +4% | +7% | +1% | −7% | +27/+14/+1/−17 |
+| *spellblade* | sim | −1% | −2% | −7% | −7% | −0/+4/−13/−11 |
+| *armored_caster* | sim | −7% | −4% | −1% | +2% | −25/−4/+19/+10 |
+| *battle_priest* | sim | −2% | +6% | +3% | −0% | +5/+19/+10/+6 |
+| *battle_priest_deep* | sim | +6% | +0% | +2% | −0% | +41/−2/−1/+10 |
+| *paladin_max* | sim | +6% | +4% | −5% | −9% | +51/+21/+1/−3 |
+| *unbreakable* | sim | +9% | +8% | +9% | +9% | +58/+22/+26/+22 |
+| *reckless_striker* | sim | +6% | +9% | +6% | +5% | +36/+26/+44/+31 |
+| *healer_engine* | sim | −1% | +12% | +1% | −1% | +5/+5/−6/−1 |
+| *soul_blaster* | sim | −7% | −0% | −4% | −4% | −12/+9/+11/−0 |
+| *mind_controller* | sim | −9% | −8% | −1% | −4% | −39/−17/−11/−18 |
+| *summoner* | sim | −3% | −8% | −5% | −9% | −6/−25/−31/−30 |
+| *monk_stunner* | sim | +9% | +10% | +7% | +6% | +21/+2/+24/+12 |
+| *double_cross* | sim | −7% | −3% | −7% | −3% | −23/+1/+5/−2 |
+
+Range −10…+9 (L1), −12…+12 (L4), −10…+9 (L7), −11…+9 (L10): **0 misses of ±15%**.
+Facet means (swap): Body +3…+5%, Mind −3…−7%, Soul −4…+3% (±10% wanted). Item 7:
+every hybrid at or below its Facet's best pure build (+3 tolerance) at 4th, 7th and 10th;
+no Steel-main hybrid's DPR₁ beats its Facet's best pure martial by more than 3.3% (Soul at
+7th), no hybrid's DPR₃ beats its tradition's best caster by more than 0.1%. SRD baselines'
+median −13…−20% against the preset median (was −10…−17%: the SRD classes get no edges).
+Spearman PI vs swap 0.92 / 0.82 / 0.79 / 0.87.
+
+### Encounter derivation (re-fitted with edges on every preset)
+
+| | Before (fix pass) | After (edges + V56) |
+|---|---|---|
+| Threat model | minion √(8.4 × d), boss × 3.51, never × 1.16, hard × 1.06 | minion **√(8.6 × d)**, boss **× 3.43**, never **× 1.17**, hard **× 1.07** |
+| Table 9–1, 4th | 18 / 29 / 34 / 40 | **19 / 30 / 35 / 42** |
+| Table 9–1, 10th | 63 / 92 / 109 / 118 | **66 / 95 / 113 / 123** (every level within +5 of before) |
+| Clash, 1st–10th | 2.96–3.51 rds, 27–29% HP, 96–100% wins | **2.96–3.62** rds, 26–29% HP, **96–100%** wins |
+| Baseline (four 4th) | Clash 3.51 rds, 27%, 99.7% | Skirmish 2.20 rds 10% · **Clash 3.62 rds, 29%, 99.5%, 0.1% death** · Battle 4.72, 47%, 91% · Desperate 5.33, 65%, 69% |
+| Standard day survived | 86–99% | **84–100%** |
+| PC death on a standard day, 1st / 2nd / 3rd+ | 13.2% / 6.4% / 0.8–3.2% | **4.2% / 2.0% / 0–0.8%** |
+| Hard day (four Clashes) | 38–77% | 47–83% |
+| Party size (three / five / six) | −26 / +23 / +40% | −26 / **+24 / +41%** |
+| Lone boss mark-up (measured) | ×1.16 | ×1.13 (the printed ×1.2 stands) |
+| Table 9–2 examples | Bandit Captain boss 88, Ogre boss 104, Knight 40, Owlbear boss 151 | 86, 102, 41, 149 |
+
+Table 9–1 in 09 and 10, Table 9–3, the constants, the worked examples and the day
+paragraph in 09 were re-synced from the yaml; Table 9–2 regenerated.
+
+### The two deferred misses
+
+- **1st-level day death rate — fixed (V56).** Diagnosis (1,500 days, reference party,
+  1st level): every death was three failed death saves, 152 of 213 in the day's third
+  fight, with nobody able to heal. The simulator never stabilized anyone. Options
+  measured: nobody (13.7% of days), the SRD's Help + DC 10 Medicine at the second failure
+  (6.9%, wins 95.0%), **an action and no check at the second failure (4.4%, wins 95.4%,
+  day survival 86.4% vs 87.1%)**, either as soon as a friend drops (0.1–1.0%, but Clash
+  wins fall to 90–92%: the action is worth more in the fight). Adopted: stabilizing is an
+  action and needs no check (08, 01 item 6, 10); the AI does it at two failures. Full run:
+  **4.2%**, three Clashes' worth of the V35 per-fight target. Not an exception rule (it
+  applies to everyone); *Field Medic* keeps its bonus-action stabilize.
+- **Clash wins at 9th–10th — still open.** 96.1% / 96.7% after the refit, against the
+  yaml's 97% floor (was 96.5%). Edges don't reach it: the losses are swingy boss-heavy
+  Clashes at 9th–10th (the day's survival is 84–87% there too), which is Table 9–1's and
+  the boss rules' business, not the characters'. Battle wins at 9th also dipped to 84.1%
+  (floor 85%; 85.4% before), inside noise of the same cause. Left logged for the next
+  balance pass; candidate fix: price bosses at 9th–10th a little higher (their measured
+  factor is 4.3–5.0 standards there against the 3.43 median).
+
+### Test counts
+
+`tests/test_facets_d20_*.py tests/test_no_private_canon.py`: **756 passed** (was 683; the
+new `test_facets_d20_edges.py` has 63). Full suite (`--ignore=tests/e2e`): **1847 passed**.
+`python -m tools.build_d20_threat_table --check`: up to date.
+
+
+## Book simplicity count (with edges)
+
+*Edges designer, 2026-09-28. Recounted from the book as written (README, 01–08, 10), by
+DESIGN §2's method: one pick = one decision, N picks from a list = N, a free-text line = 1,
+accepting a printed value = 0.*
+
+| Measure (target) | Before edges | **With edges (book as written)** | Where |
+|---|---|---|---|
+| Creation from a preset (≤ 12) | 7 | **7** (edges start at 2nd; the card's *Edges* line is read, not chosen) | 02 *The Quick Way* |
+| Creation, custom (≤ 18) | 12 · 13 · 14 listed background; 16 · 17 · 18 written | **unchanged** | 02 Table 2–1 |
+| Choices at a level-up (Amendment 5: odd 1, even 2 small) | 1 every level | **odd levels 1** (a talent, + a domain naming if it brings one); **even levels 2** (knack or ability pick, and an edge; *Cantrip Adept* names its cantrip as part of the pick). A preset: 0 (read the card) | 02 Table 2–5, 10 Table 10–3 |
+| Choices over levels 2–10 | 9 + 0–2 domain namings | **14** (4 talents, 3 knacks, 2 ability picks, 5 edges) + 0–2 domain namings + 0–1 cantrip naming | 02 Table 2–5 |
+| Exception rules a player applies (≤ 5) | 3 | **3** (E1–E3). The edge rules (each once; a few minimum levels; the tag is flavour and never counts toward depth) and V56 (stabilizing: an action, no check) apply to everyone alike; none is a carve-out | 01 item 13, 02 *Edges*, 08 |
+| Mechanics per job (≤ 1 each) | 1 / 1 / 1 / 1 | **1 / 1 / 1 / 1**: no edge adds a die to a d20 (*Heavy Hands* raises low damage dice, not a d20 test), rerolls, or adds damage dice to a hit; edges that change a roll use advantage or disadvantage (*Die Hard*, *Hardened*, *Sure-Footed*, *Watchful*, *Grappler*, *Sap*, *Piercing Spell*) | 02 *Edges* |
+| Gates ("you can't take X") | 0 | **0 build gates**; 3 level minimums on edges (Amendment 5 allows them). Spell edges do nothing until you cast, but nothing forbids them | 02 *Edges* |
+| Entries a player reads | 26 talents + 13 knacks + 6 features | **+ 26 edges** (all in 02, each printed once, tested) | 02 |
+| Chassis reading | Table 2–2, Table 2–3, three rank rules, lapse paragraph, checklist | **+ one "Edges don't count" paragraph** in *Steel and Spell*, and an *Edges* section: five rules, Table 2–7, 26 one-to-three-sentence entries (1,135 words) | 02 |
+| Book length | 02: 5,425 words · 01: 874 · 10: 1,750 | 02: **6,882** · 01: **934** · 10: **1,861** | |
+
+**Reading it.** Edges cost reading, not decisions at creation: a new player still makes 7
+(preset) or 12–14 (custom) decisions before the first session. What grows is the list a
+levelling player reads at even levels (26 short entries) and five more small picks over
+ten levels, which is what Amendment 5 asked for: an even level now always holds something
+for a fight or the road. The ≤ 5 exceptions and one-mechanic-per-job targets hold.

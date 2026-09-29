@@ -102,7 +102,7 @@ A creature that joins partway through a fight acts with its side, starting in th
 
 ## Dropping and Dying
 
-The SRD rule, unchanged. At 0 hit points you fall **unconscious** and make **death saving throws** at the start of each of your turns: DC 10, no modifier. Three successes and you're stable; three failures and you die. A natural 20 brings you back with 1 hit point; a natural 1 counts as two failures. Taking damage at 0 is a failure, or two from a critical hit. Any healing wakes you.
+The SRD rule, unchanged. At 0 hit points you fall **unconscious** and make **death saving throws** at the start of each of your turns: DC 10, no modifier. Three successes and you're stable; three failures and you die. A natural 20 brings you back with 1 hit point; a natural 1 counts as two failures. Taking damage at 0 is a failure, or two from a critical hit. Any healing wakes you. One change: **stabilizing** a dying creature within your reach takes an action and needs no check (the SRD asks for a Wisdom (Medicine) roll). A stable creature stops making death saves and wakes with 1 hit point after 1d4 hours, or when healed.
 
 When you reduce a foe to 0 with a melee attack, you can knock it out instead of killing it.
 

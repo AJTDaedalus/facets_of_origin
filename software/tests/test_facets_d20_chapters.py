@@ -222,6 +222,78 @@ class TestFeaturesAndRanks:
             assert fifth == first + 4 * per and tenth == first + 9 * per
 
 
+# ---------------------------------------------------------------- edges (Amendment 5)
+
+def is_edge(kind):
+    return re.fullmatch(r"(Steel|Spell|General) edge( · \d+(st|nd|rd|th) level or higher)?", kind) is not None
+
+
+class TestEdgeEntries:
+    def test_every_edge_printed_exactly_once_in_chapter_02(self, data, entries):
+        printed = [(f, n) for f, n, k, _ in of_kind(entries, is_edge)]
+        assert Counter(n for _, n in printed) == Counter(e["name"] for e in data["edges"])
+        assert {f for f, _ in printed} == {"02_Characters.md"}
+
+    def test_kind_line_gives_the_tag_and_minimum_level(self, data, entries):
+        kinds = {n: k for _, n, k, _ in of_kind(entries, is_edge)}
+        for e in data["edges"]:
+            want = f"{e['tag'].capitalize()} edge"
+            if e.get("min_level"):
+                want += f" · {ordinal(e['min_level'])} level or higher"
+            assert kinds[e["name"]] == want, e["name"]
+
+    def test_key_numbers_match_the_yaml(self, data, entries):
+        bodies = {n: b for _, n, k, b in of_kind(entries, is_edge)}
+        for e in data["edges"]:
+            missing = key_numbers(e["summary"]) - tokens(bodies[e["name"]])
+            assert not missing, f"{e['name']}: {sorted(missing)} not in the book entry"
+
+    def test_glance_table_lists_each_edge_once_under_its_tag(self, data, texts):
+        block = re.search(r"\*\*Table 2–7: Edges at a Glance\*\*\n\n(.*?)\n\n", texts["02_Characters.md"],
+                          re.S).group(1)
+        cols = {"steel": [], "spell": [], "general": []}
+        for row in block.splitlines()[2:]:
+            cells = [c.strip() for c in row.strip("|").split("|")]
+            for tag, cell in zip(("steel", "spell", "general"), cells):
+                cols[tag] += re.findall(r"\*([^*]+)\*", cell)
+        for tag, names in cols.items():
+            assert names == [e["name"] for e in data["edges"] if e["tag"] == tag], tag
+
+    def test_edges_are_said_never_to_count_toward_depth(self, texts):
+        assert "never counts toward your depth or your main track" in texts["02_Characters.md"]
+        assert "never counts toward depth" in texts["01_What_Is_Different.md"]
+        assert "never counts toward depth" in texts["10_Quick_Reference.md"]
+
+    def test_advancement_table_shows_two_small_picks_at_even_levels(self, data, texts):
+        block = re.search(r"\*\*Table 2–5: Advancement\*\*\n\n(.*?)\n\n", texts["02_Characters.md"],
+                          re.S).group(1)
+        rows = {int(m[0]): m[1] for m in re.findall(r"^\| (\d+) \| [^|]+ \| ([^|]+) \|", block, re.M)}
+        for lvl, choice in rows.items():
+            assert ("an edge" in choice) == (lvl in data["advancement"]["edge_levels"]), lvl
+
+    def test_quick_reference_lists_every_edge_by_tag(self, data, texts):
+        line = next(l for l in texts["10_Quick_Reference.md"].splitlines() if l.startswith("**Edges** "))
+        for tag in ("Steel", "Spell", "General"):
+            part = re.search(rf"{tag}: (.*?)\.(?: [A-Z][a-z]+:|$)", line).group(1)
+            printed = re.findall(r"\*([^*]+)\*(?: \((\d+)th\))?", part)
+            want = [(e["name"], str(e["min_level"]) if e.get("min_level") else "")
+                    for e in data["edges"] if e["tag"] == tag.lower()]
+            assert printed == want, tag
+
+    def test_stabilize_rule_matches_the_engine(self, texts):
+        # V56 (Edges pass): stabilizing a dying creature is an action with no check.
+        from facets_d20.combat import RuleOptions
+        assert RuleOptions().stabilize == "auto"
+        assert "takes an action and needs no check" in texts["08_Combat.md"]
+        assert "Stabilizing a dying creature takes an action and no check" in texts["01_What_Is_Different.md"]
+        assert "Stabilizing a dying creature: an action, no check" in texts["10_Quick_Reference.md"]
+
+    def test_quick_reference_advancement_row(self, data, texts):
+        row = re.search(r"^\| Edge \|(.*)\|$", texts["10_Quick_Reference.md"], re.M).group(1)
+        cells = [c.strip() for c in row.split("|")]
+        assert [i + 1 for i, c in enumerate(cells) if c == "edge"] == data["advancement"]["edge_levels"]
+
+
 # ---------------------------------------------------------------- knacks and backgrounds
 
 class TestKnacksAndBackgrounds:
@@ -320,6 +392,13 @@ class TestPresetCards:
                 assert re.findall(r"(?:^|, )([A-Z][\w ]+?) \(", dline.group(1)) == [doms[d] for d in ids], p["name"]
             else:
                 assert dline is None, p["name"]
+
+    def test_edges_by_level(self, data, cards):
+        names = {e["id"]: e["name"] for e in data["edges"]}
+        for p in data["presets"]:
+            line = re.search(r"\*\*Edges:\*\* (.*)", cards[p["name"]][1]).group(1).strip()
+            want = " · ".join(f"{ordinal(l)} *{names[e]}*" for l, e in sorted(p["edges"].items()))
+            assert line == want, p["name"]
 
     def test_first_level_numbers_come_from_the_engine(self, rs, data, cards):
         for p in data["presets"]:

@@ -35,6 +35,8 @@ EFFECT_TYPES = {
     "evasion", "sculpt", "maximize_spell", "studied_target", "slot_recovery",
     "initiative_bonus", "save_damage", "condition_immunity", "resource_refill",
     "max_damage_next_hit", "hit_dice_bonus",
+    # §1.4b (edges, Amendment 5)
+    "damage_die_floor", "miss_damage", "ac_reaction", "hit_dice_max", "keep_concentration",
     # engine note E-7 (Amendment 2: no paths — proficiencies come from talents)
     "armor_proficiency", "weapon_proficiency",
     # (N)
@@ -43,6 +45,13 @@ EFFECT_TYPES = {
 NONCOMBAT_TYPES = {"skill_proficiency", "expertise", "tool_proficiency", "languages",
                    "narrative"}
 KNACK_EXTRA_TYPES = {"hit_dice_bonus"}   # §1.4a (N*): the one knack effect the sim models
+# §1.3b: an edge never does a talent's or a rank's job, adds a die to a d20, rerolls, or
+# adds weapon damage dice (one mechanic per job; E1).
+EDGE_FORBIDDEN_TYPES = {"casting", "domains", "weapon_proficiency", "armor_proficiency",
+                        "hit_die_step", "hp_per_level", "extra_attack", "crit_range",
+                        "attack_bonus", "ac_bonus", "ac_formula", "spark", "reroll",
+                        "extra_damage_dice"}
+EDGE_TAGS = {"steel", "spell", "general"}
 
 CONDITIONS = {"advantage_or_ally_adjacent", "studied_target", "raging", "unarmored",
               "armored", "shield", "no_shield", "one_handed_melee", "heavy_or_versatile",
@@ -50,7 +59,8 @@ CONDITIONS = {"advantage_or_ally_adjacent", "studied_target", "raging", "unarmor
               # §1.4a
               "has_advantage", "ally_adjacent_to_target", "not_moved", "planned",
               "oath_kept", "adjacent_ally_aura",
-              "conscious"}   # used by Alert; to be listed in §1.4a (engine note E-6)
+              "conscious",   # used by Alert; to be listed in §1.4a (engine note E-6)
+              "two_handed"}  # §1.4b (Heavy Hands, Graze)
 
 SIM_SPELL_MODELS = {"attack", "save", "area_save_damage", "auto", "heal", "aura",
                     "weapon_rider", "weapon_cantrip", "disable", "shield", "buff_attack",
@@ -113,6 +123,7 @@ class Ruleset:
     paths: dict = field(default_factory=dict)
     talents: dict = field(default_factory=dict)
     knacks: dict = field(default_factory=dict)
+    edges: dict = field(default_factory=dict)
     backgrounds: dict = field(default_factory=dict)
     presets: dict = field(default_factory=dict)
     domains: dict = field(default_factory=dict)
@@ -176,9 +187,22 @@ def from_dicts(raw: dict, spells_raw: dict) -> Ruleset:
     rs.paths = dict(raw.get("paths") or {})
     rs.talents = _index(raw.get("talents"), "talent")
     rs.knacks = _index(raw.get("knacks"), "knack")
+    rs.edges = _index(raw.get("edges"), "edge")
     clash = set(rs.talents) & set(rs.knacks)
     if clash:
         raise DataError(f"ids used by both a talent and a knack: {sorted(clash)}")
+    clash = (set(rs.talents) | set(rs.knacks)) & set(rs.edges)
+    if clash:
+        raise DataError(f"ids used by both an edge and a talent or knack: {sorted(clash)}")
+    for eid, e in rs.edges.items():
+        if e.get("tag") not in EDGE_TAGS:
+            raise DataError(f"edge.{eid}: tag must be one of {sorted(EDGE_TAGS)}")
+        if "track" in e:
+            raise DataError(f"edge.{eid}: an edge has no track (it never counts toward depth)")
+        for i, eff in enumerate(e.get("effects") or []):
+            check_effect(eff, f"edge.{eid}.effects[{i}]")
+            if eff["type"] in EDGE_FORBIDDEN_TYPES or eff.get("rider"):
+                raise DataError(f"edge.{eid}: {eff['type']!r} is a talent's or rank's job, not an edge's")
     rs.backgrounds = _index(raw.get("backgrounds"), "background")
     rs.presets = _index(raw.get("presets"), "preset")
     rs.sim_builds = _index(raw.get("sim_builds"), "sim_build")

@@ -11,7 +11,7 @@ Fight start: Field Kit temp HP; Kindle Sparks handed to allies (1 each, cap 3) a
 Turn the Odds' floor of 1; Mage Armor already cast (it lasts all day).
 
 Party — each PC, on its turn, in party order:
-  1. At 0 HP: death save.
+  1. At 0 HP: death save (with advantage: Die Hard). Sap (edge) laid by this PC ends.
   2. Bonus action, first that applies:
      a. Below half HP with Second Wind → use it.
      b. An ally at 0 HP and a bonus-action heal (Healing Word, Mass Healing Word,
@@ -22,6 +22,8 @@ Party — each PC, on its turn, in party order:
      e. After the Attack action: Flurry (if focus is left) or the free Martial Arts strike.
   3. Action, first that applies:
      a. An ally at 0 HP → best heal (spell, Channel, Mending Hands).
+     a2. Can't heal, and a friend at 0 HP has two failed death saves → stabilize it
+        (an action, no check: V56; RuleOptions.stabilize "check" plays the SRD roll).
      b. Healer and an ally below half → heal.
      c. Not concentrating, ≥2 foes, an aura spell (Spirit Guardians...) → cast it, if two
         rounds of it are worth at least one Attack action (S-5: highest expected value).
@@ -34,6 +36,10 @@ Party — each PC, on its turn, in party order:
         a cantrip, Channel damage, a sustained action spell (Call Lightning), or a
         leveled single-target spell (leveled spells only in the first two rounds).
      Action Surge: a second action (never a spell) on the first turn it is available.
+  Edges on weapon attacks: Heavy Hands is the weapon's damage-die floor; Graze deals its
+  damage on the first qualifying miss of the turn; Sap marks the first creature hit each
+  turn (its next attack roll has disadvantage). Piercing Spell is spent on the first
+  save of the first slot spell or disable spell it can reach (one target).
   Riders (E1): at most one per turn; the biggest eligible one is used, free before paid on
   a tie; paid ones (Sworn Strike) are spent on the first eligible hit.
   Targeting (focus fire): the standing foe with the highest threat per remaining HP
@@ -54,11 +60,15 @@ Enemies:
   - A Bloodied boss turns desperate (advantage on its attacks, attacks against it have
     advantage) — RuleOptions.boss_bloodied.
   - PC reactions to a hit, in order: Shield (if it turns the hit into a miss);
-    Turn the Odds; Guardian (an ally with more HP to spare takes the hit, reduced);
+    Parry (edge; the first non-critical hit, spent without knowing whether +2 turns it —
+    hidden AC, V46 — and never by a PC with Shield to cast or Uncanny Dodge); Turn the Odds; Guardian (an ally with more HP to spare takes the hit, reduced);
     Clockwork Guard (the first hit on its ward — the ally the construct stood beside when
     it acted right after its maker, the one with the lowest share of HP — until the
     maker's next turn; 5-ft reach, DESIGN §4 Clockwork Guardian); Uncanny Dodge (halve). Before the roll:
-    Anticipate gives disadvantage if the attacker is that PC's studied target.
+    Anticipate gives disadvantage if the attacker is that PC's studied target, as does
+    Sap on a sapped attacker. On damage: Steady Focus spends the reaction on a failed
+    concentration save; Second Breath's temporary HP arrive the first time a PC is
+    Bloodied and standing.
 Daily resources: a fight starts with ``resource_share`` of each long-rest pool (slots per
 level, long-rest uses), rounded up, plus the short-rest regain; short-rest pools are
 full; HP full. Default share 1/3: a fight is one of the day's three Clashes (V34).
@@ -187,6 +197,8 @@ def pools(prof: CombatProfile) -> dict:
         d["channel"] = prof.heal_touch["uses"]
     if prof.caster and prof.caster.maximize:
         d["maximize"] = prof.caster.maximize
+    if prof.piercing:
+        d["piercing"] = prof.piercing
     for r in prof.riders:
         if r.uses:
             d[f"rider:{r.name}"] = r.uses
@@ -220,6 +232,8 @@ class _PCState:
         self.heal_pool = allow.get("heal_pool", 0)
         self.channel = allow.get("channel", 0)
         self.maximize = allow.get("maximize", 0)
+        self.piercing = allow.get("piercing", 0)          # Piercing Spell (edge)
+        self.breathed = False                              # Second Breath used this fight
         self.rider_uses = {r.name: allow.get(f"rider:{r.name}", 0) for r in prof.riders if r.uses}
         self.raging = False
         self.sparks = 0
@@ -457,8 +471,20 @@ class Fight:
             self.end_concentration(pc)
             st.raging = False
         if out.concentration_dc is not None:
+            held = pc.concentrating
             if not combat.concentration_check(self.rng, pc, dc=out.concentration_dc):
-                self.end_concentration(pc)
+                # Steady Focus (edge): spend the reaction to succeed instead.
+                if prof.steady_focus and combat.take_reaction(pc):
+                    pc.concentrating = held
+                    st.spend("steady_focus")
+                else:
+                    self.end_concentration(pc)
+        # Second Breath (edge): the first time this fight you are Bloodied and standing.
+        if prof.second_breath and not st.breathed and pc.state == "active" and pc.hp > 0 \
+                and combat.is_bloodied(pc):
+            st.breathed = True
+            pc.temp_hp = max(pc.temp_hp, prof.second_breath)
+            self.temp_by_pc[pc.id] += prof.second_breath
         return out
 
     def end_concentration(self, pc):
@@ -549,6 +575,12 @@ class Fight:
             if sparker is not None:
                 res = combat.spark_attack(self.rng, res, ac=target.ac)
         if not res.hit:
+            # Graze (edge): once per turn, a two-handed heavy/versatile melee miss still hurts.
+            if prof.graze and not weapon.ranged and weapon.heavy_or_versatile \
+                    and weapon.two_handed and not turn.get("graze_used"):
+                turn["graze_used"] = True
+                st.spend("graze")
+                self.hurt_foe(pc, target, prof.graze, dtype=dtype or weapon.dtype)
             return False
         crit = res.crit or ("held" in target.conditions and not weapon.ranged)
         m = (weapon.mod if mod is None else mod) + m_studied
@@ -582,7 +614,28 @@ class Fight:
         if crit and prof.crit_heal:
             self._heal(pc, pc, prof.crit_heal)
         self.hurt_foe(pc, target, dmg, crit=crit, dtype=dtype or weapon.dtype)
+        # Sap (edge): once per turn, the creature hit has disadvantage on its next attack roll
+        # before the start of your next turn.
+        if prof.sap and not turn.get("sap_used") and target.state == "active":
+            turn["sap_used"] = True
+            target.conditions.add("sapped")
+            target.sapped_by = pc.id  # type: ignore[attr-defined]
         return True
+
+    def clear_sap(self, pc: Combatant) -> None:
+        """Sap lasts until the start of the sapper's next turn."""
+        for f in self.foes:
+            if "sapped" in f.conditions and getattr(f, "sapped_by", None) == pc.id:
+                f.conditions.discard("sapped")
+
+    def save_disadvantage(self, pc: Combatant) -> bool:
+        """Piercing Spell (edge): spend a use so one target saves with disadvantage."""
+        st = self.state[pc.id]
+        if st.piercing > 0:
+            st.piercing -= 1
+            st.spend("piercing")
+            return True
+        return False
 
     def _riders(self, pc, target, weapon, adv, crit, turn) -> int:
         prof = pc.profile
@@ -709,13 +762,17 @@ class Fight:
                     dmg -= self._spell_bonus(pc, eff) - (cst.mod if eff.add_mod else 0)
                 self.hurt_foe(pc, t, dmg, crit=res.crit, dtype=eff.dtype)
 
-    def cast_save(self, pc, eff, slot, targets) -> None:
+    def cast_save(self, pc, eff, slot, targets, *, pierce: bool = True) -> None:
         dmg = self.spell_damage_roll(pc, eff, slot)
         dc = pc.profile.caster.dc
+        first = pierce and eff.level > 0
         for t in targets:
             if t.state != "active":
                 continue
-            saved = combat.saving_throw(self.rng, t.saves.get(eff.save, 0), dc).success
+            dis = first and self.save_disadvantage(pc)
+            first = False
+            saved = combat.saving_throw(self.rng, t.saves.get(eff.save, 0), dc,
+                                        disadvantage=dis).success
             self.hurt_foe(pc, t, combat.damage_after_save(t, dmg, saved=saved,
                                                           half_on_save=eff.half_on_save),
                           dtype=eff.dtype)
@@ -812,6 +869,14 @@ class Fight:
         down = [c for c in self.pcs if c.state in ("down", "stable")]
         if down and self.heal_ally(pc, down[0]):
             return
+        # Stabilize (V56): a character who can't heal a dying friend stabilizes it once it
+        # has two failed death saves (AI: earlier costs the party too many actions).
+        dying = [c for c in self.pcs if c.state == "down" and c.death_failures >= 2]
+        if dying and self.opts.stabilize != "none":
+            combat.stabilize(self.rng, dying[0], bonus=(prof.abilities.get("wis", 10) - 10) // 2,
+                             check=self.opts.stabilize == "check")
+            st.spend("stabilize")
+            return
         if prof.healer:
             low = [c for c in self.standing_pcs() if c.hp < c.max_hp / 2]
             if low and self.heal_ally(pc, min(low, key=lambda c: c.hp / c.max_hp)):
@@ -903,8 +968,10 @@ class Fight:
         cst = pc.profile.caster
         targets = [t] if eff.targets < 2 else self.area_targets(eff.targets)
         held_any = False
-        for tt in targets:
-            if not combat.saving_throw(self.rng, tt.saves.get(eff.save, 0), cst.dc).success:
+        for i, tt in enumerate(targets):
+            dis = i == 0 and self.save_disadvantage(pc)
+            if not combat.saving_throw(self.rng, tt.saves.get(eff.save, 0), cst.dc,
+                                       disadvantage=dis).success:
                 cond = "entranced" if eff.ends_on_damage else "held"
                 outcome = combat.inflict(tt, cond, round_no=self.round)
                 if outcome != "resisted":
@@ -1084,8 +1151,9 @@ class Fight:
 
     def _pc_turn(self, pc: Combatant) -> None:
         st = self.state[pc.id]
+        self.clear_sap(pc)
         if pc.state == "down":
-            combat.death_save(self.rng, pc)
+            combat.death_save(self.rng, pc, advantage=pc.profile.death_save_advantage)
             return
         if pc.state != "active":
             return
@@ -1168,6 +1236,13 @@ class Fight:
                 ost.spend("anticipate")
                 dis, anticipator = True, other
                 break
+        if "sapped" in foe.conditions:            # Sap (edge): its next attack roll
+            foe.conditions.discard("sapped")
+            if not dis:
+                sapper = getattr(foe, "sapped_by", None)
+                p_norm = combat.hit_chance(atk.to_hit, pc.ac)
+                self._credit(sapper, atk.fixed * (p_norm - p_norm ** 2))
+            dis = True
         ac = pc.ac + (5 if "shielded" in pc.conditions else 0)
         if anticipator is not None and anticipator is not pc:
             p_norm = combat.hit_chance(atk.to_hit, ac)
@@ -1185,6 +1260,17 @@ class Fight:
             st.take(st.low_slot(1))
             pc.conditions.add("shielded")
             return
+        # Parry (edge): reaction, +N AC against this hit. The MM calls "hit" without the
+        # total (V46), so a player parries the first hit it can and learns afterwards
+        # whether it turned: the sim spends it on the first non-critical hit — after
+        # *Shield* (a caster's better reaction) and never with Uncanny Dodge to hand.
+        has_shield = bool(cst and "Shield" in cst.spells and st.low_slot(1))
+        if pc.profile.parry and not res.crit and pc.reaction_available \
+                and not pc.profile.halve_damage and not has_shield:
+            combat.take_reaction(pc)
+            st.spend("parry")
+            if res.total < ac + pc.profile.parry:
+                return
         # Turn the Odds: subtract a Spark die when it could turn the hit into a miss.
         if combat.spark_may_spend(succeeded=res.hit, natural=res.natural, subtract=True,
                                   crit=res.crit) and res.total - ac < 6:
@@ -1245,7 +1331,7 @@ class Fight:
                 continue
             eff, slot = st.aura
             if eff.kind == "aura":
-                self.cast_save(pc, eff, slot, self.area_targets(eff.targets))
+                self.cast_save(pc, eff, slot, self.area_targets(eff.targets), pierce=False)
 
     def enemy_phase(self, *, boss_only=False) -> None:
         if not boss_only:
@@ -1455,7 +1541,8 @@ class _DayPC:
         die = self.prof.hit_die
         while self.hd > 0 and self.prof.hp - self.hp >= (die + 1) / 2 + con + hd_bonus:
             self.hd -= 1
-            self.hp = min(self.prof.hp, self.hp + max(1, rng.randint(1, die) + con) + hd_bonus)
+            face = die if self.prof.hd_max else rng.randint(1, die)   # Hale (edge): the maximum
+            self.hp = min(self.prof.hp, self.hp + max(1, face + con) + hd_bonus)
 
 
 def run_day(rng, party: list, encounters: list, *, opts: RuleOptions = RuleOptions(),

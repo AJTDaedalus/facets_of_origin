@@ -94,16 +94,16 @@ Find the party's level, read across to the tier, and multiply by the number of p
 
 | Level | Skirmish | Clash | Battle | Desperate |
 |---|---|---|---|---|
-| 1 | 9 | 16 | 18 | 23 |
-| 2 | 13 | 19 | 23 | 27 |
+| 1 | 9 | 16 | 19 | 23 |
+| 2 | 13 | 19 | 24 | 27 |
 | 3 | 16 | 25 | 30 | 34 |
-| **4** | **18** | **29** | **34** | **40** |
-| 5 | 33 | 50 | 60 | 66 |
-| 6 | 34 | 51 | 62 | 70 |
-| 7 | 39 | 63 | 74 | 82 |
-| 8 | 46 | 68 | 82 | 94 |
-| 9 | 61 | 89 | 105 | 116 |
-| 10 | 63 | 92 | 109 | 118 |
+| **4** | **19** | **30** | **35** | **42** |
+| 5 | 33 | 50 | 62 | 68 |
+| 6 | 34 | 53 | 64 | 74 |
+| 7 | 39 | 64 | 76 | 84 |
+| 8 | 46 | 70 | 83 | 95 |
+| 9 | 63 | 92 | 110 | 121 |
+| 10 | 66 | 95 | 113 | 123 |
 
 Use the party's average level, rounded down. Notice the jump between 4th and 5th: Extra Attack and 3rd-level spells arrive together, and the budget moves with them.
 
@@ -111,7 +111,7 @@ Then look each foe up in **Table 9–2** (Appendix_Monster_Threat.md), which pri
 
 **Adjusting the budget:**
 
-- **Party size.** The budget is already per character, so three players or six just multiply by three or six. (Measured against the four-player fight: three players need 26% less, five 23% more, six 40% more. Per character gives 25, 25 and 50. Close enough.)
+- **Party size.** The budget is already per character, so three players or six just multiply by three or six. (Measured against the four-player fight: three players need 26% less, five 24% more, six 41% more. Per character gives 25, 25 and 50. Close enough.)
 - **A lone boss** counts **× 1.2** its boss Threat. Alone, it gets hit by everyone. A boss whose company is worth less than a fifth of it counts **× 1.1**, because that little company is usually gone in the first round.
 - **A tired party** (about half its hit points and half its daily resources left): build **one tier down**.
 
@@ -121,17 +121,17 @@ Then look each foe up in **Table 9–2** (Appendix_Monster_Threat.md), which pri
 
 ### The Baseline Fight: Four 4th-Level Characters
 
-The Clash budget is `29 × 4 = 116` Threat. Some ways to spend it, all SRD monsters, numbers from Table 9–2:
+The Clash budget is `30 × 4 = 120` Threat. Some ways to spend it, all SRD monsters, numbers from Table 9–2:
 
-- **A crowd with a leader.** A **Bandit Captain** (boss, 88) and five **Bandit** minions (minion, 6): `88 + 5 × 6 = 118`. Knock down the captain and the bandits check morale.
-- **Standards.** An **Ettin** (standard, 49), two **Ogre**s (standard, 30) and a **Wolf** (standard, 7): `49 + 2 × 30 + 7 = 116`. Each checks morale at Bloodied, so expect one to bargain.
-- **Undead.** A **Wight** (standard, 40) and nine **Zombie** minions (minion, 8): `40 + 9 × 8 = 112`. The zombies never break, which is already in their number.
-- **A lone boss.** An **Ogre** (boss, 104) on its own: `104 × 1.2 = 125`, a shade over, which is close enough. Double its hit points when it arrives.
-- **Hard hitters.** Three **Knight**s (standard, 40) cost `3 × 40 = 120`. Knights hit hard for their challenge rating, and their number in Table 9–2 already says so.
+- **A crowd with a leader.** A **Bandit Captain** (boss, 86) and six **Bandit** minions (minion, 6): `86 + 6 × 6 = 122`. Knock down the captain and the bandits check morale.
+- **Standards.** An **Ettin** (standard, 49), two **Ogre**s (standard, 30) and a **Wolf** (standard, 7): `49 + 2 × 30 + 7 = 116`, a shade under. Each checks morale at Bloodied, so expect one to bargain.
+- **Undead.** A **Wight** (standard, 40) and ten **Zombie** minions (minion, 8): `40 + 10 × 8 = 120`. The zombies never break, which is already in their number.
+- **A lone boss.** An **Ogre** (boss, 102) on its own: `102 × 1.2 = 122`, a shade over, which is close enough. Double its hit points when it arrives.
+- **Hard hitters.** Three **Knight**s (standard, 41) cost `3 × 41 = 123`. Knights hit hard for their challenge rating, and their number in Table 9–2 already says so.
 
 ### The Day
 
-A standard adventuring day is **three Clashes**, with a **short rest after the first and the second**. Parties survive that about nine times in ten or better at every level (86–99% in the simulator); *survive* means the party wins every fight of the day. A lost fight doesn't have to mean deaths (*Ending the Fight*, above), and in the simulator a character died on about one standard day in eight at 1st level, one in sixteen at 2nd, and one in thirty or fewer from 3rd on. A fourth Clash makes it a **hard day**: survived somewhere between four and eight times in ten. That's fine as a choice, when the party pushes on instead of resting. Don't make it the default.
+A standard adventuring day is **three Clashes**, with a **short rest after the first and the second**. Parties survive that five times in six or better at every level (84–100% in the simulator); *survive* means the party wins every fight of the day. A lost fight doesn't have to mean deaths (*Ending the Fight*, above), and in the simulator a character died on about one standard day in twenty-five at 1st level, one in fifty at 2nd, and one in a hundred or fewer from 3rd on (friends stabilize the dying: an action, no check, Chapter 08). A fourth Clash makes it a **hard day**: survived somewhere between five and eight times in ten. That's fine as a choice, when the party pushes on instead of resting. Don't make it the default.
 
 **What a short rest gives back.** Hit Dice (each character spends up to one per level and rolls them), and every feature that says "returns on a short rest": Body's *Second Wind* (one use) and *Action Surge*, Mind's *Study* and once a day *Studied Recovery* (a few slot levels), a use of *Channel*, *Rage* or *Sworn Strike*, a Monk's focus. Spell slots and *Kindle* wait for a long rest. So a short rest refills hit points well; what runs down across a day is the casters' slots.
 
@@ -158,13 +158,13 @@ Table 9–2 covers the monsters the simulator knows. For anything else in the SR
    - **Spellcasters:** count the attack or cantrip it can use every turn (most SRD casters have one, such as *Arcane Burst*). Leave out its spells with uses a day; they're spikes, and you'll remember they're coming.
    - **A Recharge ability** (a breath, a whirlwind): add a quarter of its damage, after counting it twice if it catches more than one of you. A boss rolls Recharge once a round, like anyone else.
 2. **Hit points.** The stat block's, with two changes. A monster that **resists or is immune to** the damage most of your party deals counts its hit points twice. One that **regenerates** adds three rounds of it.
-3. **Threat.** Standard: **√(hit points × damage per turn)**. Minion: **√(8.4 × damage per turn)**. Boss: the standard figure **× 3.51**, which pays for the doubled hit points and the extra turn. A monster that never breaks counts **× 1.16** as a standard or minion. A **hard hitter**, whose damage per turn is at least 1.25 times the *Damage* column of Table 9–3 for its CR, counts **× 1.06** in every role.
+3. **Threat.** Standard: **√(hit points × damage per turn)**. Minion: **√(8.6 × damage per turn)**. Boss: the standard figure **× 3.43**, which pays for the doubled hit points and the extra turn. A monster that never breaks counts **× 1.17** as a standard or minion. A **hard hitter**, whose damage per turn is at least 1.25 times the *Damage* column of Table 9–3 for its CR, counts **× 1.07** in every role.
 4. **Morale.** One line: what it does when it breaks. Or "never", for the mindless and the bound.
 5. **Boss only.** One line for its Bloodied change. Cross out legendary and lair actions.
 
 **What the number doesn't know.** A monster the party can't reach (it flies, and nobody has much ranged damage) or can't hurt (the party has one damage type and it's immune) plays far above its Threat. So does a condition that takes a character out of the fight, such as a ghoul's paralysis. Give the party a way to deal with it, or build a tier down.
 
-The owlbear, worked: 59 hit points; two Rends at 14 each, so 28 a turn, which is more than 1.25 times the 22 Table 9–3 gives for CR 3, so it hits hard. Standard: `59 × 28 = 1652`, whose square root is 41; × 1.06 for hitting hard, 43. Minion: `8.4 × 28 = 235`, whose root is 15; × 1.06, 16. Boss: 41 × 3.51 × 1.06, which Table 9–2 gives as 151 (it works from the unrounded figures).
+The owlbear, worked: 59 hit points; two Rends at 14 each, so 28 a turn, which is more than 1.25 times the 22 Table 9–3 gives for CR 3, so it hits hard. Standard: `59 × 28 = 1652`, whose square root is 40.6; × 1.07 for hitting hard, 43. Minion: `8.6 × 28 = 241`, whose root is 15.5; × 1.07, 17. Boss: 40.6 × 3.43 × 1.07, which Table 9–2 gives as 149 (it works from the unrounded figures).
 
 No calculator? Use its challenge rating in Table 9–3. That's the typical monster of the CR, so it's rougher than the monster's own block, but it's fine for a first draft.
 
@@ -173,20 +173,20 @@ No calculator? Use its challenge rating in Table 9–3. That's the typical monst
 | CR | Standard | Minion | Boss | Damage |
 |---|---|---|---|---|
 | 1/8 | 6 | 6 | 21 | 4 |
-| 1/4 | 8 | 6 | 28 | 5 |
+| 1/4 | 8 | 7 | 28 | 5 |
 | 1/2 | 12 | 8 | 40 | 7 |
-| 1 | 18 | 10 | 63 | 11 |
-| 2 | 28 | 12 | 99 | 17 |
-| 3 | 37 | 14 | 131 | 22 |
-| 4 | 46 | 15 | 162 | 27 |
-| 5 | 55 | 16 | 194 | 32 |
-| 6 | 64 | 18 | 224 | 37 |
-| 7 | 72 | 19 | 251 | 41 |
-| 8 | 81 | 20 | 283 | 46 |
-| 9 | 89 | 21 | 313 | 51 |
-| 10 | 98 | 22 | 343 | 56 |
-| 11 | 106 | 22 | 371 | 60 |
-| 12 | 114 | 23 | 401 | 65 |
+| 1 | 18 | 10 | 61 | 11 |
+| 2 | 28 | 12 | 97 | 17 |
+| 3 | 37 | 14 | 128 | 22 |
+| 4 | 46 | 15 | 158 | 27 |
+| 5 | 55 | 17 | 189 | 32 |
+| 6 | 64 | 18 | 219 | 37 |
+| 7 | 72 | 19 | 246 | 41 |
+| 8 | 81 | 20 | 276 | 46 |
+| 9 | 89 | 21 | 306 | 51 |
+| 10 | 98 | 22 | 336 | 56 |
+| 11 | 106 | 23 | 362 | 60 |
+| 12 | 114 | 24 | 392 | 65 |
 
 > **MM Note — reading a stat block for the first time**
 >

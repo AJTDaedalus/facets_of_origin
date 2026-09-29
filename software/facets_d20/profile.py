@@ -125,6 +125,16 @@ class CombatProfile:
     hit_die: int = 8
     hd_bonus: int = 0                       # Field Medic: + per Hit Die spent (short rest)
     initiative_advantage: bool = False      # Alert: the party's side roll has advantage
+    # Edges (Amendment 5, DESIGN §1.4b)
+    damage_floor: int = 1                   # Heavy Hands (folded into the weapon's min_face)
+    graze: int = 0                          # Graze: damage on a two-handed heavy/versatile melee miss
+    sap: bool = False                       # Sap: a hit gives the target disadvantage on its next attack
+    parry: int = 0                          # Parry: reaction, +N AC against one hit (melee weapon held)
+    death_save_advantage: bool = False      # Die Hard
+    second_breath: int = 0                  # Second Breath: temp HP the first time Bloodied in a fight
+    hd_max: bool = False                    # Hale: Hit Dice restore their maximum on a short rest
+    piercing: Optional[Uses] = None         # Piercing Spell: one target saves with disadvantage
+    steady_focus: bool = False              # Steady Focus: reaction keeps concentration
     resist: set = field(default_factory=set)
     temp_hp: int = 0
     caster: Optional[CasterProfile] = None

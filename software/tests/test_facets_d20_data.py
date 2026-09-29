@@ -87,6 +87,7 @@ def everything_with_effects(data):
             yield from tr["ranks"]
     yield from data["talents"]
     yield from data["knacks"]
+    yield from data.get("edges") or []          # Amendment 5
 
 
 def menu(data, facet):
@@ -137,10 +138,13 @@ class TestAdvancement:
         assert data["advancement"]["asi_rule"] == "choice"
 
     def test_every_level_up_is_at_most_one_choice(self, data):
+        # Amendment 5 amends the budget: an even level adds an edge beside its one pick
+        # (test_facets_d20_edges.py); the talent/knack/ability pick stays one per level.
         a = data["advancement"]
         for lvl in range(2, 11):
             picks = sum(lvl in a[k] for k in ("talent_levels", "knack_levels", "asi_levels"))
             assert picks <= 1, lvl
+            assert (lvl in a.get("edge_levels", [])) == (lvl % 2 == 0), lvl
 
 
 class TestFacetsAndTracks:

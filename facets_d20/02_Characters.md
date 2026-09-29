@@ -1,6 +1,6 @@
 # Characters
 
-A Facets d20 character is an SRD 5.2.1 character with no class. In its place you have a **Facet** (Body, Mind or Soul), which sets your hit die, saves and training, and five **talents** taken over ten levels, which make you who you are.
+A Facets d20 character is an SRD 5.2.1 character with no class. In its place you have a **Facet** (Body, Mind or Soul), which sets your hit die, saves and training, and five **talents** taken over ten levels, which make you who you are. Five smaller **edges**, one at each even level, add the tricks and habits.
 
 There are two ways to make one. The quick way is a preset card: twelve complete characters, printed at the end of this chapter, that leave you seven decisions. The full way is to build your own, which takes about thirteen.
 
@@ -169,6 +169,8 @@ For example, a Soul character takes *Sworn Strike* at 1st and *Weapon Expert* at
 
 No talent is forbidden to anyone.
 
+**Edges don't count.** An edge (*Edges*, at the end of this chapter) is tagged Steel, Spell or general too, but only to say what it's about. It is not a talent: it never counts toward your depth or your main track, and taking or retraining one never changes a rank.
+
 ### Three Soul Characters at 9th Level
 
 The Soul menu holds all three shapes, so it shows the trade most plainly. The Priest is a preset. The warrior is a Soul character who put three picks into Steel: *Sworn Strike*, *Weapon Expert* and *Guardian* (a cross-Facet pick from the Body menu), then *Warden* and *Hardy*. The Oathsworn is the preset hybrid: two Steel talents and one Spell talent.
@@ -200,17 +202,17 @@ Characters go from 1st level to 10th. Levels come when the MM says so.
 | Level | Proficiency | You choose | You also get |
 |---|---|---|---|
 | 1 | +2 | A talent (and a domain, if it is your first Spell talent) | Your Facet's 1st-level feature; your background's knack; the ranks your depth reaches |
-| 2 | +2 | A knack | Body: *Action Surge*. Mind: *Studied Recovery* |
+| 2 | +2 | A knack, and an edge | Body: *Action Surge*. Mind: *Studied Recovery* |
 | 3 | +2 | A talent | Any new ranks |
-| 4 | +2 | +2 to one ability, +1 to two, or one extra knack | |
+| 4 | +2 | +2 to one ability, +1 to two, or one extra knack; and an edge | |
 | 5 | +3 | A talent | *Extra Attack* at Steel 2; talents' 5th-level lines |
-| 6 | +3 | A knack | |
+| 6 | +3 | A knack, and an edge | |
 | 7 | +3 | A talent | |
-| 8 | +3 | +2 to one ability, +1 to two, or one extra knack | |
+| 8 | +3 | +2 to one ability, +1 to two, or one extra knack; and an edge | |
 | 9 | +4 | A talent | Body: *Indomitable*. Talents' 9th-level lines |
-| 10 | +4 | A knack | |
+| 10 | +4 | A knack, and an edge | |
 
-That is one choice at every level. No ability goes above 20. The presets always put the +2 into the ability their main track uses, which is usually the right call.
+That is one choice at each odd level and two small ones at each even level: the knack or ability pick, and an edge. No ability goes above 20. The presets always put the +2 into the ability their main track uses, which is usually the right call.
 
 **Hit points.** At 1st level, your hit die's maximum + 8 + your Constitution modifier. Each level after, half the die + 1 + your Constitution modifier. You never roll for them. Whenever your hit die changes size, bigger (*Martial Training*, *Hardy*) or smaller (a lapsed *Martial Training*), work your hit points out again as if you'd always had that die, and your Hit Dice change to that size too. The largest hit die is a d12. Your Hit Dice (one per level) are still spent, and rolled, on short rests as the SRD says.
 
@@ -239,7 +241,7 @@ A character casts from **one tradition**: Mind's is Thaumaturgy, Soul's is Invoc
 
 ### Retraining
 
-Once each level, after a long rest, you can swap one talent, knack or domain for another you could have taken. You can never change your Facet.
+Once each level, after a long rest, you can swap one talent, knack, edge or domain for another you could have taken. You can never change your Facet.
 
 ---
 
@@ -256,6 +258,7 @@ Stand at the front, take the hit meant for a friend, and make the foe beside you
 **Background:** City Watch Veteran · **Skills:** Perception, Intimidation, plus Athletics, Insight from the background  
 **Talents:** 1st *Weapon Expert* [St] · 3rd *Guardian* [St] · 5th *Cleave* [St] · 7th *Hardy* · 9th *Alert*  
 **Knacks:** Streetwise (background) · 2nd Skilled · 6th Pathfinder · 10th Well-Travelled  
+**Edges:** 2nd *Sap* · 4th *Drive Back* · 6th *Second Breath* · 8th *Die Hard* · 10th *Armor Drill*  
 **4th and 8th:** +2 Strength each time  
 **Kit:** chain mail, shield, longsword, javelin  
 **At 1st:** HP 20 · AC 19 · longsword +6 (1d8 + 3)  
@@ -271,6 +274,7 @@ Get an ally next to the target, or a reason for advantage, then strike and slip 
 **Background:** Street Performer · **Skills:** Stealth, Sleight of Hand, plus Performance, Acrobatics from the background  
 **Talents:** 1st *Precision* [St] · 3rd *Cunning* · 5th *Marksman* [St] · 7th *Weapon Expert* [St] · 9th *Alert*  
 **Knacks:** Performer (background) · 2nd Expertise · 6th Many Faces · 10th Streetwise  
+**Edges:** 2nd *Night Eyes* · 4th *Parry* · 6th *Climber* · 8th *Second Breath* · 10th *Watchful*  
 **4th and 8th:** +2 Dexterity each time  
 **Kit:** leather, rapier, shortbow  
 **At 1st:** HP 20 · AC 14 · rapier +5 (1d8 + 3)  
@@ -286,6 +290,7 @@ Rage on the first turn and swing the big axe. Planning can happen afterwards.
 **Background:** Dockworker · **Skills:** Perception, Survival, plus Athletics, Investigation from the background  
 **Talents:** 1st *Rage* [St] · 3rd *Hardy* · 5th *Cleave* [St] · 7th *Guardian* [St] · 9th *Alert*  
 **Knacks:** Skilled (background) · 2nd Pathfinder · 6th Wild Kin · 10th Artisan  
+**Edges:** 2nd *Heavy Hands* · 4th *Parry* · 6th *Graze* · 8th *Hardened* · 10th *Die Hard*  
 **4th and 8th:** +2 Strength each time  
 **Kit:** no armor, greataxe, handaxe  
 **At 1st:** HP 20 · AC 14 · greataxe +5 (1d12 + 3)  
@@ -301,6 +306,7 @@ Punch twice a turn and be elsewhere when they swing back. From 5th, stun the one
 **Background:** Wilderness Scout · **Skills:** Acrobatics, Athletics, plus Survival, Stealth from the background  
 **Talents:** 1st *Martial Arts* [St] · 3rd *Cunning* · 5th *Weapon Expert* [St] · 7th *Hardy* · 9th *Alert*  
 **Knacks:** Pathfinder (background) · 2nd Expertise · 6th Wild Kin · 10th Well-Travelled  
+**Edges:** 2nd *Sure-Footed* · 4th *Grappler* · 6th *Sap* · 8th *Shake It Off* · 10th *Die Hard*  
 **4th and 8th:** +2 Dexterity each time  
 **Kit:** no armor, quarterstaff, dart  
 **At 1st:** HP 20 · AC 15 · quarterstaff +5 (1d8 + 3)  
@@ -317,6 +323,7 @@ Stay at the back and drop area spells that leave your friends standing. Save a S
 **Talents:** 1st *Evoker* [Sp] · 3rd *Wider Study* [Sp] · 5th *Turn the Odds* [Sp] · 7th *Iron Mind* · 9th *Hardy*  
 **Domains:** Constructed Force (1st), Illusion (3rd, *Wider Study*), The Arcane (5th, Deep Magic)  
 **Knacks:** Gadgeteer (background) · 2nd Encyclopedic · 6th Well-Travelled · 10th Artisan  
+**Edges:** 2nd *Second Breath* · 4th *Steady Focus* · 6th *Piercing Spell* · 8th *Ritual Scholar* · 10th *Quiet Casting*  
 **4th and 8th:** +2 Intelligence each time  
 **Kit:** no armor, quarterstaff, arcane focus  
 **At 1st:** HP 16 · AC 12 · quarterstaff +1 (1d8 − 1) · spell save DC 13, spell attack +5  
@@ -332,6 +339,7 @@ Study the target, then take it apart with a rapier while it swings at nothing.
 **Background:** Physician's Assistant · **Skills:** Investigation, Perception, plus Medicine, Insight from the background  
 **Talents:** 1st *Precision* [St] · 3rd *Anatomist* [St] · 5th *Anticipate* · 7th *Weapon Expert* [St] · 9th *Hardy*  
 **Knacks:** Field Medic (background) · 2nd Expertise · 6th Streetwise · 10th Encyclopedic  
+**Edges:** 2nd *Sap* · 4th *Watchful* · 6th *Second Breath* · 8th *Night Eyes* · 10th *Die Hard*  
 **4th and 8th:** +2 Dexterity each time  
 **Kit:** chain shirt, shield, rapier, light crossbow  
 **At 1st:** HP 17 · AC 17 · rapier +5 (1d8 + 3)  
@@ -348,6 +356,7 @@ Win the fight in the planning scene, then spend it handing out luck and illusion
 **Talents:** 1st *Turn the Odds* [Sp] · 3rd *Wider Study* [Sp] · 5th *Master Plan* · 7th *Hardy* · 9th *Evoker* [Sp]  
 **Domains:** Illusion (1st), Divination (3rd, *Wider Study*), Chronomancy (9th, Deep Magic)  
 **Knacks:** Silver Tongue (background) · 2nd Encyclopedic · 6th Well-Travelled · 10th Performer  
+**Edges:** 2nd *Second Breath* · 4th *Steady Focus* · 6th *Piercing Spell* · 8th *Ritual Scholar* · 10th *Cantrip Adept*  
 **4th and 8th:** +2 Intelligence each time  
 **Kit:** no armor, dagger, arcane focus  
 **At 1st:** HP 16 · AC 11 · dagger +3 (1d4 + 1) · spell save DC 13, spell attack +5  
@@ -364,6 +373,7 @@ Hold the line with rapier and shield, and from 3rd send the clockwork guardian i
 **Talents:** 1st *Weapon Expert* [St] · 3rd *Clockwork Guardian* [Sp] · 5th *Field Kit* · 7th *Hardy* · 9th *Anticipate*  
 **Domains:** Transmutation (3rd)  
 **Knacks:** Gadgeteer (background) · 2nd Artisan · 6th Skilled · 10th Expertise  
+**Edges:** 2nd *Quick Draw* · 4th *Armor Drill* · 6th *Ritual Scholar* · 8th *Second Breath* · 10th *Hale*  
 **4th and 8th:** +2 Dexterity each time  
 **Kit:** breastplate, shield, rapier, light crossbow, arcane focus (Steel comes first, so the 3rd-level tie keeps Steel main)  
 **At 1st:** HP 17 · AC 19 · rapier +5 (1d8 + 2)  
@@ -380,6 +390,7 @@ Heal with slots first and with Channel when the slots run low. From 7th, friends
 **Talents:** 1st *Channel* [Sp] · 3rd *Wider Study* [Sp] · 5th *Mending Hands* [Sp] · 7th *Warden* · 9th *Hardy*  
 **Domains:** The Tide (1st), Presence (3rd, *Wider Study*), The Living World (5th, Deep Magic)  
 **Knacks:** Encyclopedic (background) · 2nd Field Medic · 6th Well-Travelled · 10th Silver Tongue  
+**Edges:** 2nd *Far Casting* · 4th *Steady Focus* · 6th *Die Hard* · 8th *Lasting Spell* · 10th *Piercing Spell*  
 **4th and 8th:** +2 Wisdom each time  
 **Kit:** scale mail, shield, mace, holy symbol  
 **At 1st:** HP 18 · AC 16 · mace +3 (1d6 + 1) · spell save DC 13, spell attack +5  
@@ -396,6 +407,7 @@ Be a wolf when the fight is close and a caster when it isn't, with a heal in you
 **Talents:** 1st *Wild Shape* [Sp] · 3rd *Wider Study* [Sp] · 5th *Channel* [Sp] · 7th *Hardy* · 9th *Warden*  
 **Domains:** Verdance (1st), The Tide (3rd, *Wider Study*), The Living World (5th, Deep Magic)  
 **Knacks:** Pathfinder (background) · 2nd Wild Kin · 6th Field Medic · 10th Well-Travelled  
+**Edges:** 2nd *Second Breath* · 4th *Steady Focus* · 6th *Climber* · 8th *Night Eyes* · 10th *Lasting Spell*  
 **4th and 8th:** +2 Wisdom each time  
 **Kit:** leather, shield, quarterstaff, druidic focus  
 **At 1st:** HP 18 · AC 15 · quarterstaff +1 (1d6 − 1) · spell save DC 13, spell attack +5  
@@ -412,6 +424,7 @@ Spend luck freely, on your friends' rolls and against your enemies'.
 **Talents:** 1st *Turn the Odds* [Sp] · 3rd *Wider Study* [Sp] · 5th *Prophecy* [Sp] · 7th *Warden* · 9th *Alert*  
 **Domains:** Presence (1st), Binding (3rd, *Wider Study*), Fate (5th, Deep Magic)  
 **Knacks:** Silver Tongue (background) · 2nd Encyclopedic · 6th Many Faces · 10th Performer  
+**Edges:** 2nd *Quiet Casting* · 4th *Steady Focus* · 6th *Piercing Spell* · 8th *Far Casting* · 10th *Shake It Off*  
 **4th and 8th:** +2 Charisma each time  
 **Kit:** chain shirt, shield, spear, holy symbol  
 **At 1st:** HP 17 · AC 16 · spear +1 (1d6 − 1) · spell save DC 13, spell attack +5  
@@ -428,6 +441,7 @@ Keep your oath, stand in the front rank in heavy armor, and put radiant light be
 **Talents:** 1st *Sworn Strike* [St] · 3rd *Mending Hands* [Sp] · 5th *Weapon Expert* [St] · 7th *Warden* · 9th *Oath Unbroken*  
 **Domains:** Presence (3rd)  
 **Knacks:** Streetwise (background) · 2nd Silver Tongue · 6th Field Medic · 10th Well-Travelled  
+**Edges:** 2nd *Armor Drill* · 4th *Sap* · 6th *Second Breath* · 8th *Hardened* · 10th *Far Casting*  
 **4th and 8th:** +2 Strength each time  
 **Kit:** chain mail, shield, longsword, javelin, holy symbol  
 **At 1st:** HP 20 · AC 18 · longsword +5 (1d8 + 3)  
@@ -481,6 +495,164 @@ You bend chance with magic. You can spend a Spark on the d20 test of any creatur
 *Spell talent · Mind, Soul*
 
 Take one more domain of your tradition. Its spells join your lists.
+
+---
+
+## Edges
+
+An **edge** is a small trick or habit: a way with a weapon, a twist you put on a spell, a knack for staying alive. You take one at 2nd, 4th, 6th, 8th and 10th level, beside that level's knack or ability pick (Table 2–5). Everyone chooses from the same list. There are no Facet menus for edges, so a priest can take *Sap* and a Body brawler can keep a ritual book.
+
+- **Each edge once.** A few can't be taken before a certain level; the entry says which.
+- **The tag is flavour.** Steel edges are about weapons and armor, Spell edges about magic, general edges about everything else. An edge is not a talent. It **never counts toward your depth or your main track**, so taking, keeping or retraining one never brings or costs you a rank.
+- **Smaller than a talent, on purpose.** No edge gives what a talent or rank already gives: no attack bonus, wider critical range, armor or weapon training, bigger hit die, extra attack, casting or domain. No edge adds a die to a d20 roll, lets you reroll, or adds damage dice to a hit.
+- **Spell edges work on your spells,** so they do nothing until you cast. *Ritual Scholar* is the one that works for anyone.
+- **Retraining** can swap an edge, like a talent or a knack.
+
+Like a talent's, an edge's own ability is not a spell.
+
+**Table 2–7: Edges at a Glance**
+
+| Steel | Spell | General |
+|---|---|---|
+| *Heavy Hands* | *Cantrip Adept* | *Die Hard* |
+| *Graze* | *Ritual Scholar* | *Second Breath* |
+| *Sap* | *Quiet Casting* | *Hale* |
+| *Drive Back* | *Far Casting* | *Hardened* |
+| *Parry* | *Piercing Spell* (6th+) | *Sure-Footed* |
+| *Grappler* | *Steady Focus* (4th+) | *Climber* |
+| *Paired Blades* | *Elemental Shift* | *Night Eyes* |
+| *Armor Drill* | *Lasting Spell* (4th+) | *Watchful* |
+| *Quick Draw* |  | *Shake It Off* |
+
+### Heavy Hands
+*Steel edge*
+
+When you roll damage for a melee weapon you are holding in two hands, treat any 1 or 2 on a damage die as a 3.
+
+### Graze
+*Steel edge*
+
+Once per turn, when you miss with a melee attack using a heavy or versatile weapon held in two hands, the target still takes damage equal to your Strength modifier.
+
+### Sap
+*Steel edge*
+
+Once per turn, when you hit a creature with a weapon attack, it has disadvantage on its next attack roll before the start of your next turn.
+
+### Drive Back
+*Steel edge*
+
+Once per turn, when you hit a creature with a melee weapon attack, either push it up to 10 feet straight away from you (if it is Large or smaller) or reduce its speed by 10 feet until the start of your next turn.
+
+### Parry
+*Steel edge*
+
+Reaction, when a creature you can see hits you with a melee attack while you hold a melee weapon and no shield: +2 AC against that attack, which can turn the hit into a miss.
+
+### Grappler
+*Steel edge*
+
+Once per turn, when you hit a creature with an unarmed strike, you can both deal its damage and grapple it. You have advantage on attack rolls against a creature you are grappling.
+
+### Paired Blades
+*Steel edge*
+
+When you make the extra attack that the Light property gives, add your ability modifier to its damage.
+
+### Armor Drill
+*Steel edge*
+
+You don or doff armor in half the usual time. Armor never gives you disadvantage on Dexterity (Stealth) checks, and heavy armor never reduces your speed for lacking the Strength it asks for.
+
+### Quick Draw
+*Steel edge*
+
+Whenever you could draw or stow one weapon, you can draw or stow two, and you can don or doff a shield as a bonus action.
+
+### Cantrip Adept
+*Spell edge*
+
+Choose one cantrip from any domain of your tradition, even one you don't hold. You know it, and you can change it when you retrain. It does nothing until you cast.
+
+### Ritual Scholar
+*Spell edge*
+
+You keep a ritual book. You can cast *Alarm*, *Comprehend Languages*, *Identify* and *Unseen Servant* as rituals (they take 10 minutes longer and no slot), even if you don't cast spells; use the highest of your Intelligence, Wisdom and Charisma for them.
+
+### Quiet Casting
+*Spell edge*
+
+A number of times per long rest equal to your proficiency bonus, you can cast a spell with no verbal or somatic components.
+
+### Far Casting
+*Spell edge*
+
+A number of times per long rest equal to your proficiency bonus, as you cast a spell you can double its range, or give a touch spell a range of 30 feet.
+
+### Piercing Spell
+*Spell edge · 6th level or higher*
+
+Once per short rest, when you cast a spell that forces a saving throw, one creature of your choice has disadvantage on its first save against it.
+
+### Steady Focus
+*Spell edge · 4th level or higher*
+
+When you fail a Constitution save to keep your concentration, you can use your reaction to succeed instead.
+
+### Elemental Shift
+*Spell edge*
+
+Once per short rest, when you cast a spell that deals acid, cold, fire, lightning, poison or thunder damage, you can change that damage to another type on this list.
+
+### Lasting Spell
+*Spell edge · 4th level or higher*
+
+Once per long rest, when you cast a spell that lasts 1 minute or longer, you can double its duration (to 24 hours at most).
+
+### Die Hard
+*General edge*
+
+You have advantage on death saving throws.
+
+### Second Breath
+*General edge*
+
+The first time in each fight that you are Bloodied and still standing, you gain temporary hit points equal to your level.
+
+### Hale
+*General edge*
+
+Each Hit Die you spend on a short rest restores the die's maximum instead of a roll (plus your Constitution modifier, as usual).
+
+### Hardened
+*General edge*
+
+You have resistance to poison damage, and advantage on saving throws to avoid or end the poisoned condition.
+
+### Sure-Footed
+*General edge*
+
+Difficult terrain costs you no extra movement, and you have advantage on checks and saves against being knocked prone or pushed.
+
+### Climber
+*General edge*
+
+You have a climb speed and a swim speed equal to your speed.
+
+### Night Eyes
+*General edge*
+
+You have darkvision out to 60 feet.
+
+### Watchful
+*General edge*
+
+You can take the Search action as a bonus action, and you have advantage on Wisdom (Perception) checks to find hidden creatures and traps.
+
+### Shake It Off
+*General edge*
+
+Once per short rest, as a bonus action, you can end one of these conditions on yourself: charmed, frightened or poisoned.
 
 ---
 

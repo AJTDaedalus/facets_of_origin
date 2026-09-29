@@ -45,8 +45,11 @@ Everything on this page is stated in full in the chapter named beside it. If thi
 |---|---|---|---|---|---|---|---|---|---|---|
 | Proficiency | +2 | +2 | +2 | +2 | +3 | +3 | +3 | +3 | +4 | +4 |
 | Choice | talent | knack | talent | ability or knack | talent | knack | talent | ability or knack | talent | knack |
+| Edge | — | edge | — | edge | — | edge | — | edge | — | edge |
 
-Ability pick: +2 to one, +1 to two, or one extra knack; max 20. At most two of your five talents from other Facets' menus. One tradition. Retrain one talent, knack or domain once per level after a long rest; never your Facet.
+Ability pick: +2 to one, +1 to two, or one extra knack; max 20. At most two of your five talents from other Facets' menus. One tradition. Retrain one talent, knack, edge or domain once per level after a long rest; never your Facet.
+
+**Edges** (Table 2–7): one list for everyone; each once; a few need a minimum level. The Steel/Spell/general tag is flavour and never counts toward depth or the main track. Steel: *Heavy Hands*, *Graze*, *Sap*, *Drive Back*, *Parry*, *Grappler*, *Paired Blades*, *Armor Drill*, *Quick Draw*. Spell: *Cantrip Adept*, *Ritual Scholar*, *Quiet Casting*, *Far Casting*, *Piercing Spell* (6th), *Steady Focus* (4th), *Elemental Shift*, *Lasting Spell* (4th). General: *Die Hard*, *Second Breath*, *Hale*, *Hardened*, *Sure-Footed*, *Climber*, *Night Eyes*, *Watchful*, *Shake It Off*.
 
 ## Magic (Chapter 07)
 
@@ -104,7 +107,7 @@ Ability pick: +2 to one, +1 to two, or one extra knack; max 20. At most two of y
 - **Morale:** a standard foe makes a DC 10 Wis save when first Bloodied; minions when their leader falls, or at half of them down with no leader. Fail: it stops at once, then flees (provoking), surrenders or bargains. Bosses, the mindless and the bound never break.
 - **Minions:** 1 HP. Any damage kills. A successful save takes no damage.
 - **Bosses:** twice the stat block's HP (Bloodied at half that). Two turns a round, never back to back; one reaction a round. An effect that would take one out costs it its next turn instead, at most one a round. It changes at Bloodied.
-- **Dying:** SRD death saves.
+- **Dying:** SRD death saves. Stabilizing a dying creature: an action, no check.
 
 ---
 
@@ -116,16 +119,16 @@ Ability pick: +2 to one, +1 to two, or one extra knack; max 20. At most two of y
 
 | Level | Skirmish | Clash | Battle | Desperate |
 |---|---|---|---|---|
-| 1 | 9 | 16 | 18 | 23 |
-| 2 | 13 | 19 | 23 | 27 |
+| 1 | 9 | 16 | 19 | 23 |
+| 2 | 13 | 19 | 24 | 27 |
 | 3 | 16 | 25 | 30 | 34 |
-| 4 | 18 | 29 | 34 | 40 |
-| 5 | 33 | 50 | 60 | 66 |
-| 6 | 34 | 51 | 62 | 70 |
-| 7 | 39 | 63 | 74 | 82 |
-| 8 | 46 | 68 | 82 | 94 |
-| 9 | 61 | 89 | 105 | 116 |
-| 10 | 63 | 92 | 109 | 118 |
+| 4 | 19 | 30 | 35 | 42 |
+| 5 | 33 | 50 | 62 | 68 |
+| 6 | 34 | 53 | 64 | 74 |
+| 7 | 39 | 64 | 76 | 84 |
+| 8 | 46 | 70 | 83 | 95 |
+| 9 | 63 | 92 | 110 | 121 |
+| 10 | 66 | 95 | 113 | 123 |
 
 **Table 10–7: The Four Tiers**
 
