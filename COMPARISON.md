@@ -11,11 +11,11 @@ final until that choice is made.
 | Where | `rulesets/v0.3/` (read-only snapshot) | `player_handbook/`, `mm_manual/`, `bestiary/` | `facets_d20/` |
 | Dice | 2d6 + attribute + skill, three-tier results | 2d6 + stat (+ a knack), three-tier results | d20 + modifier vs DC (SRD 5.2.1) |
 | Harm | Conditions, no HP; enemies have Resolve | HP and Wounds; damage dice | HP, AC, damage (5e) |
-| Character shape | Facet + skills advanced by marks; Techniques | Facet owns the numbers; preset or custom class; talents | Facet + five talents on Steel/Spell tracks; knacks for roleplay |
+| Character shape | Facet + skills advanced by marks; Techniques | Facet owns the numbers; preset or custom class; talents | Facet + five talents on Steel/Spell tracks; edges at even levels; knacks for roleplay |
 | Magic | Domain + intent + scope; readied intents | Workings, Fatigue in slots | SRD spells: a shared Common list + one domain; no preparation |
 | Combat | Simultaneous exchanges, postures, reactions | Players roll to act; foes roll in the open | Side initiative, morale at Bloodied, fixed monster damage, boss turns |
 | Software engine | none (superseded) | `software/app/` — the running app | `software/facets_d20/` — rules engine + simulator (no app yet) |
-| Status | Frozen at tag `pre-lean-facets` | v1.0 built; v1.1 plan awaiting owner | v0.2 designed and simulated; chapters being rewritten from `docs/DESIGN_facets_d20_v0_2.md` |
+| Status | Frozen at tag `pre-lean-facets` | v1.0 built; v1.1 plan awaiting owner | v0.2 complete: books rewritten, balanced by simulation, fresh-eyes playtested, edges added; awaiting a human table |
 | Licence base | original | original | SRD 5.2.1, CC BY 4.0 (attributed) |
 | Key docs | the tag's `docs/` | `docs/BRIEF_lean_facets*.md`, `docs/REVIEW_lean_facets.md` | `docs/BRIEF_facets_d20.md` (+ Amendments 1–3), `docs/AUDIT_facets_d20.md`, `docs/RESEARCH_facets_d20_*.md` |
 
