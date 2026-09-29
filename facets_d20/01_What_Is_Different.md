@@ -1,44 +1,44 @@
 # What Is Different
 
-You know the SRD 5.2.1 rules, or a game built on them. Good: you already know most of this one. This page lists everything that changes. If something isn't on it, it works the way you're used to.
+You know the SRD 5.2.1 rules, or a game built on them, so you already know most of this one. This page lists every change. Anything it doesn't mention works the way you're used to.
 
 ---
 
 ## Still the Same
 
-The d20 roll against a DC or AC. The six abilities and their modifiers. Proficiency bonus. The SRD skill list, saving throws, advantage and disadvantage. Armor Class and hit points. Conditions, exhaustion, concentration, short and long rests, death saves. SRD equipment. SRD spells, up to 5th level. SRD monsters, with light conversion by the MM.
+The d20 test: roll a d20, add a modifier, compare to a DC or an AC. (A **d20 test** is any attack roll, ability check or saving throw.) The six abilities, proficiency bonus, skills, saves, advantage and disadvantage, Armor Class, conditions, concentration, short and long rests, death saves, SRD equipment, SRD spells up to 5th level and SRD monsters.
 
 ## What Changes
 
-**1. Facets instead of classes.** You pick one of three Facets: **Body**, **Mind** or **Soul**. Your Facet sets your hit die, saving throws, armor and weapon training, Facet skills and one 1st-level feature (Body's *Second Wind*, Mind's *Studied Eye*, Soul's *Inspiring Word*). Nothing else does. Each Facet has four **presets**, ready-made builds you can take as printed: Fighter, Rogue, Barbarian and Monk for Body; Wizard, Investigator, Loremaster and Tinker for Mind; Priest, Druid, Oracle and Oathsworn for Soul. They are suggestions. A build of your own is just as legal. (Chapters 02–05.)
+**1. Facets instead of classes.** You pick **Body**, **Mind** or **Soul**. The Facet sets your hit die, saves, armor, weapons, two skill picks and one 1st-level feature. There are no classes, subclasses, feats or multiclassing, and nobody uses weapon mastery properties. (Chapter 02.)
 
-**2. Talents instead of class features and feats.** Each Facet has a menu of talents in three tiers (tier 1 from 1st level, tier 2 from 3rd, tier 3 from 6th). You take two at 1st level (Body takes three) and **one at every level after that**. That is your whole build. There are no separate feats or ability score increases: Ability Score Improvement is a talent on every menu. The SRD's weapon mastery is off unless you take the Body talent *Weapon Mastery*. (Chapters 03–05.)
+**2. Five talents.** You pick a talent at 1st, 3rd, 5th, 7th and 9th level from your Facet's menu. Up to two of the five can come from another Facet's menu. Talents grow on their own at 5th and 9th. (Chapters 02–05.)
 
-**3. A signature at 3rd level.** Each Facet has six. You pick one. It is the thing your character is known for, and it doesn't cost a talent.
+**3. Steel and Spell.** Each talent is tagged Steel (weapons and armor), Spell (magic) or neither. The number you hold in a track is your **depth** in it, and the track you hold more of is your **main track**. Depth buys martial weapons, armor, Extra Attack and toughness on the Steel side, and spellcasting, the Full slot table and extra domains on the Spell side. Every rank after the first needs the track to be your main one, so a hybrid gets the first rank of both tracks and the higher ranks of only one. (Chapter 02.)
 
-**4. Spellcasting is a talent, and spells come from domains.** Mind's tradition is **Thaumaturgy** (Intelligence); Soul's is **Invocation** (Wisdom or Charisma, your choice). Take your own Facet's and you are a full caster; take the other Facet's, or either as Body, and you are a half caster. Either slot table counts from the level you took the talent. Instead of a class list, you pick two **domains** and prepare your spells from their lists after a long rest. That's how a Priest and a Druid come out of the same Soul menu. (Chapter 07.)
+**4. Knacks.** Small non-combat abilities: one from your background, one each at 2nd, 6th and 10th. A knack never changes attacks, damage, AC, hit points, saves, initiative or spell slots. (Chapter 06.)
 
-**5. No multiclassing.** From 2nd level you can spend a talent pick on another Facet's tier 1 talent. Its tier 2 and 3 talents need two talents from that Facet first. (Chapter 02.)
+**5. The rest of leveling.** At 4th and 8th, pick one: +2 to one ability, +1 to two, or one more knack (maximum 20). Levels run 1st to 10th. Proficiency is +2 at 1st–4th, +3 at 5th–8th, +4 at 9th–10th. Levels come at the MM's call.
 
-**6. Levels 1 to 10, and fixed hit points.** Proficiency is +2 at 1st–4th, +3 at 5th–8th, +4 at 9th–10th. Spells stop at 5th level. Body gets Extra Attack at 5th; Mind and Soul only through a talent. Hit points are full hit die + Con at 1st level and a fixed number each level after. You never roll for them.
+**6. Fixed hit points.** At 1st level: your hit die's maximum + 8 + your Constitution modifier. Each level after: half the die + 1 + Con. You never roll.
 
-**7. Backgrounds give an origin talent and a Specialty.** The SRD background shape, but the origin feat is a free tier 1 talent marked *origin*, from any Facet. Your **Specialty** is one narrow thing you know; when it applies, you have advantage. Everyone is human unless the MM's setting says otherwise; when it does, SRD species work as written. (Chapter 06.)
+**7. Magic from a list and a domain.** A caster casts from the **Common list** (fifteen spells, *Fireball* included) plus one or more **domains**. No preparation: you can cast any spell on your lists that you have a slot for, and you know every cantrip on them. Slots come from the Full or Half table, read by character level. (Chapter 07.)
 
-**8. Sparks replace Heroic Inspiration.** You start every session with 1 Spark and can hold 3. You earn them when your **Drives** (a want and a line you won't cross) cost you something, when you narrate a natural 1 with flair, or at the MM's call. Spend one for advantage before a roll, a reroll after it, or +1d6 on an ally's roll you help with. (Chapter 06.)
+**8. Backgrounds.** Three abilities +1 each, two skills, a tool, a knack and a **Specialty**: one narrow thing you know, which gives you advantage when it applies. Everyone is human unless the MM's setting says otherwise. (Chapter 06.)
 
-**9. Social scenes have a track.** People are Hostile, Wary, Neutral, Friendly or Ally. A good check moves them a step. (Chapter 06.)
+**9. Sparks replace Heroic Inspiration.** You start each session with 1 and can hold 3. Earn one when a **Drive** (you have two) makes things harder for you and the MM agrees. Spend one after any d20 test, yours or an ally's you help with, to add 1d6. (Chapter 06.)
 
-**10. Side initiative, one reaction.** One Dexterity contest decides which side goes first. Then that whole side acts, in any order its players like, and then the other side. You get one reaction a round, and leaving an enemy's reach provokes one attack from it. (Chapter 08.)
+**10. Social scenes have a track.** A person is Hostile, Wary, Neutral, Friendly or an Ally. A good check moves them a step. (Chapter 06.)
 
-**11. Monsters don't roll damage, and most give up.** A monster deals its average damage; only a critical hit gets rolled. At half HP or less a creature is **Bloodied**, and foes that aren't bosses check morale when they're first Bloodied and when their leader falls. Most fights end in a rout or a surrender, not a pile of bodies.
+**11. Side initiative.** Each side rolls one d20. The winning side acts first, its creatures in any order it likes, then the other side. (Chapter 08.)
 
-**12. Minions and bosses.** Minions have 1 HP. Bosses take two turns per round and change when Bloodied. No legendary or lair actions.
+**12. Monsters don't roll damage, and most give up.** A monster deals its average damage; only a critical hit is rolled. A foe checks morale when it is first Bloodied. Minions have 1 hit point. Bosses act at the top of every round as well as with their side. (Chapter 08.)
+
+**13. Three limits.** Only one **rider** (extra damage dice a talent adds to a hit) applies on your turn. You control at most one summoned or conjured creature, companion or undead at a time. Body has no magic tradition of its own: a Body character who takes a Spell talent names Invocation or Thaumaturgy, and Body counts as two Steel talents when finding its main track. These three are the only exceptions in the player's rules. (Chapters 02 and 08.)
 
 ---
 
-The person running the game is the **Mirror Master**, or MM. The job is the one you know, with one emphasis: keep the spotlight on the players.
-
-That's all of it. A standard fight should take three or four rounds; if yours are going longer, tell your MM about Chapter 09.
+The person running the game is the **Mirror Master (MM)**. A standard fight should last three or four rounds; if yours run long, the MM's guide is Chapter 09.
 
 ---
 

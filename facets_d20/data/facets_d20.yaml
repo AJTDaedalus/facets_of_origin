@@ -1187,8 +1187,6 @@ encounter_baseline: {party_size: 4, level: 4, party: reference_party}
 # each long-rest pool. Four Clashes with two short rests is a hard day (DESIGN §7).
 adventuring_day: {clashes: 3, short_rests_after: [1, 2]}
 # Threat budget per character (party of four), fitted by software/tools/d20_sim.py
-# Threat budget per character (party of four), fitted by software/tools/d20_sim.py
-# Threat budget per character (party of four), fitted by software/tools/d20_sim.py
 encounter_table:
   1:
     skirmish: 10

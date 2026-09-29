@@ -243,3 +243,38 @@ use at 1st).
   spells, most utility spells, knacks other than *Field Medic*, Sparks from roleplay.
 - Clash at 5th level is 2.97 ± 0.05 rounds — at the lower edge of 3–4.
 - Noise: swap scores ±2 points (CRN), which is why item 7 allows +3 points.
+
+## Book simplicity count
+
+*Player-book writer, 2026-09-28. Recounted from the chapters as written (README, 01–08,
+10; 09 is the MM's), by DESIGN §2's method: one pick = one decision, N picks from a list =
+N, a free-text line = 1, accepting a printed value = 0. Where the book and DESIGN §2
+disagree, the book's number is the one that stands.*
+
+| Measure (DESIGN §2 target) | DESIGN §2.1 said | **Book as written** | Where |
+|---|---|---|---|
+| Creation from a preset (≤ 12) | 6 | **7**: card, name, Drives ×2, Specialty, language, keep/swap background | 02 *The Quick Way* |
+| Creation, custom, listed background (≤ 18) | 12 non-caster · 13 caster · 14 Body caster | **12 · 13 · 14**: name/concept 1, Drives 2, Facet 1, background 1, Specialty 1, array 1, skills 2, talent 1, domain 0–1, Body tradition 0–1, kit 1, language 1 | 02 Table 2–1 |
+| Creation, custom, written background (≤ 18) | 16 · 17 · 18 | **16 · 17 · 18** (+ three abilities as one pick, two skills, a knack; no tool) | 02 Table 2–1, 06 *Writing Your Own* |
+| Choices at a level-up (≤ 1) | ≤ 1 | **1 at every level 2–10** (knack, talent or ability-or-knack); a Spell talent that brings a domain names it as part of the pick | 02 Table 2–5 |
+| Choices over levels 2–10 | 9 + 0–2 domain namings | **9** + 0–2 domain namings (*Wider Study*, Deep Magic) | 02 Table 2–5 |
+| Exception rules a player applies (≤ 5) | 3 | **3**: E1 one rider a turn (08), E2 one controlled creature (08), E3 Body names a tradition and counts +2 Steel (02, 03, 07). 01 item 13 names them as the only three | 01, 02, 03, 08 |
+| MM rules described in the player book (not counted, DESIGN §2.4) | — | 4, all on §2.4's MM list, printed in 08 so the table knows what bosses and minions do: boss top-of-round turn; boss loses at most one turn a round to a disabling effect; minions die to any damage; mindless and bound foes never break | 08 *Kinds of Foe*, *Bloodied and Morale* |
+| Mechanics per job | 1 / 1 / 1 / 1 | **1 / 1 / 1 / 1**: add a die = the Spark die (*Turn the Odds* spends it); roll twice = SRD advantage only (06 says a Spark never grants it); reroll = *Indomitable* only; resource-paid weapon damage = *Sworn Strike* only (05, 07 "No smite spells") | 03, 05, 06, 07 |
+| Gates ("you can't take X") | 0 | **0**. Caps only: two cross-Facet talents, one tradition, d12 largest hit die | 02 |
+| Chassis reading | 3-column Facet table, 7-rank table, main-track and upgrade sentences | Table 2–2, Table 2–3 (the seven ranks), one main-track paragraph, one upgrade paragraph, one lapse paragraph, the Soul worked example (Table 2–4) | 02 *Steel and Spell* |
+| Talent entries a player reads | 26 + 13 knacks | **26 talents** (6 shared in 02, 6 Body in 03, 7 Mind in 04, 7 Soul in 05) + **13 knacks** (06) + 6 Facet features; menus 10 / 13 / 12. Each printed once (tested) | 02–06 |
+| Spells a caster tracks | Common 14 + ~12 | Common list **15** (with *Mage Armor*, V36) + one domain (8–15 spells); +1 per *Wider Study*; +1 at Spell 3; no preparation | 07 |
+
+**Reading 01 + 02 alone.** A preset player needs only 01 and 02: the card is the whole
+sheet, and 02 explains Drives, Specialty and languages in the steps (06 has the longer
+treatment). A custom build needs 02 plus its Facet's chapter for the talent text (the six
+shared talents are in 02), 06 for the background list, and 07 if its first talent is a
+Spell talent.
+
+**Differences from DESIGN §2.** (1) The preset count is 7, not 6: DESIGN folded the name
+into choosing the card; the book lists it as its own line. (2) The custom count matches.
+(3) The chapter test (`software/tests/test_facets_d20_chapters.py`, 34 tests) holds the
+counted material to the data: every talent, feature, knack, background and preset printed
+once with the yaml's numbers, the preset cards' 1st-level HP/AC/attack/DC from the engine,
+Chapter 07's slot tables, Common list and all 21 domain lists.

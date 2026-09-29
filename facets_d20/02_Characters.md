@@ -1,196 +1,435 @@
 # Characters
 
-You build a Facets d20 character the way you'd build any SRD character, with one difference in the middle. Instead of a class you pick a **Facet** (Body, Mind or Soul), and instead of a class's fixed features you pick **talents** from that Facet's menu. The Facet sets your numbers. The talents make you who you are.
+A Facets d20 character is an SRD 5.2.1 character with no class. In its place you have a **Facet** (Body, Mind or Soul), which sets your hit die, saves and training, and five **talents** taken over ten levels, which make you who you are.
 
-A Soul character can be a priest, a druid or an oracle. Which one depends on the talents you pick, and nobody has to agree it's a class first.
+There are two ways to make one. The quick way is a preset card: twelve complete characters, printed at the end of this chapter, that leave you seven decisions. The full way is to build your own, which takes about thirteen.
 
 ---
 
-## Making a Character
+## The Quick Way: a Preset
 
-**Table 2–1: The Steps**
+Pick a card from *Presets*, later in this chapter. It gives you your Facet, ability scores, background, skills, talents by level, domains if you cast, knacks, kit, and your numbers at 1st level. Then:
 
-| Step | You decide | Where |
+1. **Choose the card.**
+2. **Name your character.**
+3. **Write two Drives**: something your character wants, and a line they won't cross (Chapter 06).
+4. **Write your Specialty**: one narrow thing your character knows better than almost anyone (Chapter 06).
+5. **Pick one language** besides Common.
+6. **Keep the card's background, or swap it** for another from Chapter 06. If you swap, take away the old background's three +1s and add the new one's.
+
+That's seven decisions (the Drives count as two), and you're ready. Leveling up a preset is reading the next line of its card.
+
+### Example: Mordai Takes a Card
+
+Mordai's player looks over the Body cards and stops at the Fighter.
+
+**MM:** Taking it as printed?
+
+**Mordai:** It has a sword, a shield, and a talent for standing in front of people. Yes.
+
+**MM:** (*Guardian* at 3rd. He's going to take every hit in this campaign on purpose.)
+
+→ Card: **Fighter**. Background: **City Watch Veteran**, kept. Drives: *protect people who can't protect themselves*; *never leave a fight while someone weaker is still in it*. Specialty: the district he patrolled for years, its layout, its regulars and its unofficial rules. One language from the MM's list. His sheet at 1st level is the card's: **HP 20, AC 19, longsword +6 (1d8 + 3)**, and 1 Spark.
+
+---
+
+## The Full Way: Your Own Build
+
+**Table 2–1: Building a Character**
+
+| Step | You decide | Decisions |
 |---|---|---|
-| 1 | Concept and two Drives | This chapter, Chapter 06 |
-| 2 | Ability scores | This chapter |
-| 3 | Facet | This chapter, Chapters 03–05 |
-| 4 | Background and Specialty | Chapter 06 |
-| 5 | Talents | Chapters 03–05 |
-| 6 | Gear | This chapter |
-| 7 | Hit points, AC and the rest of the sheet | This chapter |
+| 1 | Name and concept | 1 |
+| 2 | Two Drives (Chapter 06) | 2 |
+| 3 | Your Facet (*The Facets*, below) | 1 |
+| 4 | A background from Chapter 06, and your Specialty | 2 |
+| 5 | Ability scores | 1 |
+| 6 | Two skills from your Facet's list | 2 |
+| 7 | Your 1st-level talent (Chapters 02–05); if it's a Spell talent, your domain (Chapter 07) | 1, or 2 |
+| 8 | Your kit | 1 |
+| 9 | One language besides Common | 1 |
+| | **Total** | **12 or 13** |
 
-If you want to start playing tonight, take a **preset** at step 3. Each Facet chapter opens with four build cards (twelve in all) that fill in steps 3 and 5 for you and recommend a background: Fighter, Rogue, Barbarian and Monk for Body; Wizard, Investigator, Loremaster and Tinker for Mind; Priest, Druid, Oracle and Oathsworn for Soul. They are good builds. There is nothing a preset can do that a build of your own cannot.
+A Body character whose first talent is a Spell talent also names a tradition in step 7 (14). If you write your own background instead of taking a listed one, you choose its three abilities, two skills and knack yourself (four more).
 
-### Step 1: Concept and Drives
+### Step 1: Name and Concept
 
 Say who your character is in one sentence: *I am a ___ who ___.* A retired sailor who can't stay away from the sea. A temple foundling who hears the gods better than the priests do.
 
-Then write two **Drives**: something your character wants, and a line they will not cross. Drives earn you Sparks when they cost you something (Chapter 06).
+### Step 2: Drives
 
-### Step 2: Ability Scores
+Write two **Drives**, one short sentence each: something your character **wants**, and a **line** they won't cross. When a Drive makes things harder for you, you can say so and earn a Spark (Chapter 06).
 
-Assign the **standard array** to your six abilities: **15, 14, 13, 12, 10, 8.** If your table prefers, use the SRD 5.2.1 point-buy instead.
+### Step 3: Facet
 
-Your background (step 4) will raise three of these by a total of 3, so it helps to know roughly which background you want. Put your best scores where your Facet wants them:
+Choose Body, Mind or Soul from Table 2–2. The Facet is the one thing you can never retrain.
 
-- **Body** wants Strength or Dexterity, then Constitution.
-- **Mind** wants Intelligence, then Dexterity or Constitution.
-- **Soul** wants Wisdom or Charisma, then Constitution. If you plan to cast, you'll choose which of the two powers your spells when you take Invocation.
+### Step 4: Background and Specialty
 
-### Step 3: Choose a Facet
+Take a background from Chapter 06. It raises three abilities by 1 each, and gives you two skills, a tool and a knack. Then write your **Specialty**, one narrow area of expertise. When it applies to a check you have advantage, and routine things inside it need no roll at all.
 
-Your Facet owns every number that matters for balance. Your talents never change these.
+### Step 5: Ability Scores
+
+Assign the **standard array**, **15, 14, 13, 12, 10, 8**, to your six abilities, then add your background's three +1s. (If your table prefers, use the SRD 5.2.1 point buy instead of the array.) Put your best score where your first talent wants it:
+
+- **Steel** talents want Strength or Dexterity, then Constitution.
+- **Spell** talents want your casting ability: Intelligence for Mind; for Soul, the higher of Wisdom and Charisma, whichever it is. A Body character casts with the ability of the tradition it names.
+
+### Step 6: Skills
+
+Pick two skills from your Facet's list (Table 2–2). If your background already gave you one of them, pick another.
+
+### Step 7: Your First Talent
+
+Pick one talent from your Facet's menu (Chapters 03–05), or up to two from another Facet's menu over your career (*Talents from Other Facets*, below). If it is a **Spell** talent, you are now a caster: choose one domain of your tradition (Chapter 07).
+
+### Step 8: Kit
+
+Take the kit printed on any preset card of your Facet, as long as you can wear its armor at 1st level. If you cast and the kit has no spellcasting focus, add one. Or take 100 gp instead and buy from the SRD 5.2.1 equipment lists.
+
+### Step 9: The Rest of the Sheet
+
+- **Hit points:** your hit die's maximum + 8 + your Constitution modifier (Table 2–6).
+- **Armor Class:** from your armor and shield, as the SRD says; 10 + your Dexterity modifier with none.
+- **Proficiency bonus:** +2.
+- **Saving throws:** your Facet's two.
+- **Languages:** Common and the one you picked.
+- **Lineage:** every character is human unless the MM's setting says otherwise. Humans get nothing extra here, because the Facet and the background do that job. If the MM uses other peoples, the SRD 5.2.1 species work as written.
+- **Sparks:** 1, at the start of every session.
+
+---
+
+## The Facets
 
 **Table 2–2: The Three Facets**
 
 | | Body | Mind | Soul |
 |---|---|---|---|
 | Hit die | d10 | d6 | d8 |
-| HP at 1st level | 10 + Con modifier | 6 + Con modifier | 8 + Con modifier |
-| HP each level after | 6 + Con modifier | 4 + Con modifier | 5 + Con modifier |
 | Saving throws | Strength, Constitution | Intelligence, Wisdom | Wisdom, Charisma |
-| Armor training | All armor, shields | Light armor | Light and medium armor, shields |
+| Armor | All armor, shields | Light armor | Light and medium armor, shields |
 | Weapons | Simple and martial | Simple | Simple |
-| Skills (from the Facet's list) | 3 | 4 | 3 |
-| Talents at 1st level | 3 | 2 | 2 |
-| Facet feature at 1st level | Second Wind | Studied Eye | Inspiring Word |
-| Extra Attack | Automatic at 5th level | Only through a talent | Only through a talent |
-| Magic tradition | None | Thaumaturgy (Intelligence) | Invocation (Wisdom or Charisma) |
+| Skills (pick two) | Acrobatics, Animal Handling, Athletics, Intimidation, Perception, Sleight of Hand, Stealth, Survival | Arcana, History, Insight, Investigation, Medicine, Nature, Perception, Religion | Animal Handling, Deception, Insight, Intimidation, Medicine, Nature, Performance, Persuasion, Religion, Survival |
+| Magic tradition | None of its own | Thaumaturgy (Intelligence) | Invocation (the higher of Wisdom and Charisma) |
+| Features | *Second Wind* (1st), *Action Surge* (2nd), *Indomitable* (9th) | *Study* (1st), *Studied Recovery* (2nd) | *Kindle* (1st) |
+| Talents on its menu | 10 | 13 | 12 |
 | Chapter | 03 | 04 | 05 |
 
-**Body** is for fighters, rogues, barbarians and monks: people who solve problems with their physical presence. Body has no magic tradition of its own, and gets the biggest hit die, the widest weapon and armor training, a third talent at 1st level and Extra Attack for free instead. Its feature, *Second Wind*, gets you back on your feet mid-fight.
+**Body** is for people who solve problems with their hands and their nerve. It has the biggest hit die and every weapon and armor, and it has no magic tradition of its own.
 
-**Mind** is for wizards, investigators and loremasters: people who solve problems by understanding them. Its tradition is **Thaumaturgy**, the scholarly magic, cast with Intelligence. Its feature, *Studied Eye*, lets you size up a foe as a bonus action.
+**Mind** is for people who solve problems by understanding them first. Its tradition is **Thaumaturgy**, the scholarly magic, cast with Intelligence.
 
-**Soul** is for priests, druids, oracles and the oathsworn: people who move the world by moving the people and powers in it. Its tradition is **Invocation**, the intuitive magic, cast with Wisdom or Charisma. Its feature, *Inspiring Word*, hands an ally a die to add to a roll.
+**Soul** is for people who move the world by moving the people and powers in it. Its tradition is **Invocation**, the intuitive magic, cast with whichever of Wisdom and Charisma is higher.
 
-You are not a caster just because you are Mind or Soul. Casting comes from a talent (step 5).
+A Mind or Soul character casts only once it takes a Spell talent.
 
-### Step 4: Background and Specialty
+---
 
-Pick a background from Chapter 06 or write your own. It gives you ability score increases, two skills, a tool, an origin talent (a free tier 1 talent marked *origin*, from any Facet), a Specialty and a little money.
+## Steel and Spell
 
-Your **Specialty** is one narrow thing you know better than almost anyone. When it applies, you roll with advantage.
+Every talent is tagged **Steel** (fighting with weapons and armor), **Spell** (magic) or neither (a **general** talent). Your **depth** in a track is how many of your talents carry its tag, from any menu.
 
-### Step 5: Talents
+Your **main track** is the one you hold more talents in. Steel wins a tie. A Body character counts two extra Steel talents, so its main track is always Steel (Body's own menu has no Spell talents, and only two picks can come from elsewhere). A character with no Steel or Spell talents has no main track and no ranks.
 
-Take your Facet's starting talents from its menu: **three** for Body, **two** for Mind or Soul. At 1st level you can only take tier 1 talents, and only from your own Facet. (Your origin talent from step 4 is the exception; it can come from any Facet.)
+Depth buys **ranks**. Each rank needs a depth, and all but the first rank of each track also need the track to be your main one.
 
-Talents are the only thing you pick as you level up. There are no feats and no separate ability score increases. **Ability Score Improvement** is a tier 1 talent on all three menus, and you can take it as often as you like: +2 to one ability or +1 to two, to a maximum of 20.
+**Table 2–3: What Depth Gives You**
 
-**Spellcasting is a talent.** Mind's is called **Thaumaturgy** and Soul's is called **Invocation**. Take your own Facet's and you are a full caster; your spell slots, cantrips, domains and prepared spells are all in Chapter 07. Neither can be taken as an origin talent.
+| Depth | Steel | Spell |
+|---|---|---|
+| 1, whatever your main track | **Martial Weapons**: proficiency with martial weapons | **Spellcasting**: you cast your tradition's spells; one domain plus the Common list; slots on the Half table |
+| 1, Steel main | **Martial Training**: one more armor step (Mind: medium armor and shields; Soul: heavy armor) and, for Mind and Soul, a hit die one size larger | — |
+| 2, this track main | **Extra Attack** (from 5th level): when you take the Attack action, you attack twice | **Full Casting**: your slots use the Full table instead |
+| 3, this track main | **Veteran**: +1 hit point per level, and +2 damage on your weapon hits | **Deep Magic**: one more domain of your tradition, which may be a prismatic domain |
 
-### Step 6: Gear
+**Upgrades.** Talents grow at 5th and 9th level, and each entry prints its lines. A Steel or Spell talent's 5th-level line also needs depth 2 in its track, and its 9th-level line depth 3; the entries mark them *(Steel 2)*, *(Spell 3)* and so on. General talents grow with level alone.
 
-Take your Facet's starting kit, or take 100 gp instead and buy from the SRD 5.2.1 equipment lists. Your background adds its tool and 25 gp either way.
+**Ranks can lapse.** Your main track is worked out again whenever your talents change. If a new talent makes the other track your main one, the ranks that needed the old main track stop applying and the new one's start. Before you confirm a pick, check what it brings and what it costs. A Soul character with two Steel talents and two Spell talents (a tie, so Steel main) who takes a third Spell talent at 9th gains the Full table and Deep Magic, and loses Extra Attack, heavy armor training and the bigger hit die. The presets never change their main track in a way that costs them a rank.
 
-**Table 2–3: Starting Kits**
+No talent is forbidden to anyone.
 
-| Facet | Kit |
-|---|---|
-| Body | Chain mail, *or* leather armor and a longbow with 20 arrows; a martial weapon and a shield, *or* two martial weapons; an explorer's pack |
-| Mind | Leather armor; a quarterstaff *or* a light crossbow with 20 bolts; a dagger; a scholar's pack; a spellcasting focus *or* one set of artisan's tools |
-| Soul | Scale mail *or* leather armor; a shield; a mace *or* a spear; a priest's pack *or* an explorer's pack; a spellcasting focus fitting your tradition |
+### Three Soul Characters at 9th Level
 
-A caster's focus can be any object that suits the tradition: a staff, a holy symbol, a sprig of mistletoe, a notebook of formulae. You don't need a component pouch; the only components you track are ones with a gold cost.
+The Soul menu holds all three shapes, so it shows the trade most plainly. The Priest is a preset. The warrior is a Soul character who put three picks into Steel: *Sworn Strike*, *Weapon Expert* and *Guardian* (a cross-Facet pick from the Body menu), then *Warden* and *Hardy*. The Oathsworn is the preset hybrid: two Steel talents and one Spell talent.
 
-### Step 7: The Rest of the Sheet
+**Table 2–4: Pure Caster, Pure Warrior, Hybrid (Soul, 9th Level)**
 
-- **Hit points** at 1st level: your Facet's number from Table 2–2.
-- **Armor Class**: from your armor, as the SRD says. With no armor, it's 10 + your Dexterity modifier.
-- **Proficiency bonus**: +2.
-- **Saving throws, skills, tools**: from your Facet and background. If both give you the same skill, pick any other.
-- **Languages**: Common and two others, from what your MM's setting offers.
-- **Lineage**: every character is human unless your MM's setting says otherwise. Humans get nothing extra here, because the Facet and the background do that job. If your MM uses other peoples, the SRD 5.2.1 species can be used as written (the human included), or the MM will give you the setting's own.
-- **Sparks**: 1, at the start of every session.
+| | Priest | Soul warrior | Oathsworn |
+|---|---|---|---|
+| Steel · Spell | 0 · 3 | 3 · 0 | 2 · 1 |
+| Main track | Spell | Steel | Steel |
+| Hit points | 84 | 103 | 84 |
+| Armor Class | 16 | 19 | 19 |
+| Weapon attack | mace +5 | longsword +10, 1d8 + 7, twice | longsword +10, 1d8 + 5, twice |
+| Spell slots | 14, up to 5th level | none | 9, up to 3rd level |
+| Domains | 3, one prismatic | none | 1 |
+| Spell save DC | 17 | — | 14 |
+| Talent lines still locked | none | none | *Sworn Strike* stays at 3d8; *Weapon Expert*'s 9th-level line |
+
+**What the hybrid gives up.** Against the Priest, the Oathsworn has five fewer slots, none of 4th or 5th level, two fewer domains, no prismatic magic and a spell DC three lower (its best scores went to Strength). Against the warrior it has 19 fewer hit points, 2 less damage on every hit (no Veteran), and *Sworn Strike* at 3d8 instead of 4d8. In exchange it has Extra Attack, heavy armor and a real spell list at the same time, which neither of the others has.
 
 ---
 
 ## Levels
 
-Characters go from 1st level to 10th. There is no 11th.
+Characters go from 1st level to 10th. Levels come when the MM says so.
 
-**Table 2–4: Advancement**
+**Table 2–5: Advancement**
 
-| Level | Proficiency bonus | Talents (Body) | Talents (Mind, Soul) | Talent tiers open | Also at this level |
-|---|---|---|---|---|---|
-| 1 | +2 | 3 | 2 | T1 | Facet feature; background and origin talent |
-| 2 | +2 | 4 | 3 | T1 | Cross-Facet talents open |
-| 3 | +2 | 5 | 4 | T1, T2 | **Signature** |
-| 4 | +2 | 6 | 5 | T1, T2 | |
-| 5 | +3 | 7 | 6 | T1, T2 | Body: **Extra Attack** |
-| 6 | +3 | 8 | 7 | T1–T3 | |
-| 7 | +3 | 9 | 8 | T1–T3 | |
-| 8 | +3 | 10 | 9 | T1–T3 | |
-| 9 | +4 | 11 | 10 | T1–T3 | |
-| 10 | +4 | 12 | 11 | T1–T3 | |
+| Level | Proficiency | You choose | You also get |
+|---|---|---|---|
+| 1 | +2 | A talent (and a domain, if it is your first Spell talent) | Your Facet's 1st-level feature; your background's knack; the ranks your depth reaches |
+| 2 | +2 | A knack | Body: *Action Surge*. Mind: *Studied Recovery* |
+| 3 | +2 | A talent | Any new ranks |
+| 4 | +2 | +2 to one ability, +1 to two, or one extra knack | |
+| 5 | +3 | A talent | *Extra Attack* at Steel 2; talents' 5th-level lines |
+| 6 | +3 | A knack | |
+| 7 | +3 | A talent | |
+| 8 | +3 | +2 to one ability, +1 to two, or one extra knack | |
+| 9 | +4 | A talent | Body: *Indomitable*. Talents' 9th-level lines |
+| 10 | +4 | A knack | |
 
-The talent columns are totals, not counting your origin talent. You gain **one talent at every level from 2nd to 10th**.
+That is one choice at every level. No ability goes above 20. The presets always put the +2 into the ability their main track uses, which is usually the right call.
 
-**Hit points.** Each level after the first, add your Facet's fixed number: 6 + Con for Body, 4 + Con for Mind, 5 + Con for Soul. You don't roll. Your hit dice (d10, d6 or d8, one per level) are for spending on a short rest.
+**Hit points.** At 1st level, your hit die's maximum + 8 + your Constitution modifier. Each level after, half the die + 1 + your Constitution modifier. You never roll. If your hit die gets bigger (*Martial Training*, *Hardy*), work your hit points out again as if you'd always had the bigger die. The largest hit die is a d12. Your Hit Dice (one per level) are still spent on short rests as the SRD says.
 
-**Table 2–5: Hit Points Before Constitution**
+**Table 2–6: Hit Points Before Constitution**
 
-| Level | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Body | 10 | 16 | 22 | 28 | 34 | 40 | 46 | 52 | 58 | 64 |
-| Mind | 6 | 10 | 14 | 18 | 22 | 26 | 30 | 34 | 38 | 42 |
-| Soul | 8 | 13 | 18 | 23 | 28 | 33 | 38 | 43 | 48 | 53 |
+| Hit die | 1st level | Each level after | 5th level | 10th level |
+|---|---|---|---|---|
+| d6 | 14 | 4 | 30 | 50 |
+| d8 | 16 | 5 | 36 | 61 |
+| d10 | 18 | 6 | 42 | 72 |
+| d12 | 20 | 7 | 48 | 83 |
 
-Add your Constitution modifier once for each level.
+Add your Constitution modifier once per level.
 
-**Tiers.** Each Facet's talent menu has three tiers. Tier 1 talents are open from 1st level, tier 2 from 3rd, tier 3 from 6th. A talent can have one prerequisite (usually an earlier talent), never more.
+**Spell slots** come from the Full or Half table in Chapter 07, read by your character level.
 
-**Signature.** At 3rd level you choose a **signature** from your Facet's list of six. It is the big thing your character is known for. It doesn't cost a talent pick, you only ever get one, and it always comes from your own Facet.
+### Talents from Other Facets
 
-**Spell slots.** If you have a spellcasting talent, your slots grow with your level. The tables are in Chapter 07.
+There is no multiclassing. Instead, up to **two** of your five talents can come from another Facet's menu. A talent printed on your own menu is never a cross-Facet pick, even if it's on other menus too. Cross-Facet talents count toward your depth like any other.
 
-### Cross-Facet Talents
+A character casts from **one tradition**: Mind's is Thaumaturgy, Soul's is Invocation, and a Body character names one of the two with its first Spell talent. A Mind character who takes a Soul Spell talent still casts Thaumaturgy.
 
-There is no multiclassing. Instead, from **2nd level**, you can spend a talent pick on another Facet's menu:
+### Retraining
 
-- Any **tier 1** talent of another Facet costs one talent pick, the same as one of your own. There is no other price.
-- A **tier 2 or tier 3** talent of another Facet needs you to already have **two talents from that Facet**, on top of its usual level and prerequisite.
-
-An origin talent from another Facet counts toward those two. Ability Score Improvement is on every menu, so it always counts as your own.
-
-Taking the other tradition's spellcasting talent (a Soul character taking Thaumaturgy, say), or a Body character taking either one, makes you a **half caster**. That is how a Body character becomes a holy warrior or a woodland hunter with a few spells. The half-caster rules are in Chapter 07.
+Once each level, after a long rest, you can swap one talent, knack or domain for another you could have taken. You can never change your Facet.
 
 ---
 
-## Building a Character: Mordai
+## Presets
 
-The table is making characters, and Mordai's player already knows who he is.
+Each card is a complete character. **[St]** marks a Steel talent and **[Sp]** a Spell talent. The shape line gives the card's depth in each track once all five talents are in, and its main track. Ability scores already include the background's +1s. The *At 1st* line is the character's sheet at 1st level.
 
-**Concept and Drives.** *I am a watchman who stands between trouble and the people it's aimed at.* His want: to protect people who can't protect themselves. His line: he will not leave a fight while someone weaker is still in it.
+### Fighter
+*Preset · Body · Steel 3, Spell 0 at 10th · Steel main*
 
-**Ability scores.** The standard array, with an eye on the background he wants: Strength 15, Constitution 14, Charisma 13, Wisdom 12, Intelligence 10, Dexterity 8.
+Stand at the front, take the hit meant for a friend, and make the foe beside your target regret standing there.
 
-**MM:** Dexterity 8?
+**Abilities:** Str 16, Dex 13, Con 15, Int 8, Wis 13, Cha 10 (background included)  
+**Background:** City Watch Veteran · **Skills:** Perception, Intimidation, plus Athletics, Insight from the background  
+**Talents:** 1st *Weapon Expert* [St] · 3rd *Guardian* [St] · 5th *Cleave* [St] · 7th *Hardy* · 9th *Alert*  
+**Knacks:** Streetwise (background) · 2nd Skilled · 6th Pathfinder · 10th Well-Travelled  
+**4th and 8th:** +2 Strength each time  
+**Kit:** chain mail, shield, longsword, javelin  
+**At 1st:** HP 20 · AC 19 · longsword +6 (1d8 + 3)
 
-**Mordai:** I don't dodge. I stand there.
+### Rogue
+*Preset · Body · Steel 3, Spell 0 at 10th · Steel main*
 
-**MM:** (That is going to be true in every fight this character is ever in.)
+Get an ally next to the target, or a reason for advantage, then strike and slip out of reach.
 
-**Facet.** Body. Saving throws in Strength and Constitution, every armor and weapon, a d10 hit die, and three talents to pick.
+**Abilities:** Str 8, Dex 16, Con 15, Int 10, Wis 12, Cha 14 (background included)  
+**Background:** Street Performer · **Skills:** Stealth, Sleight of Hand, plus Performance, Acrobatics from the background  
+**Talents:** 1st *Precision* [St] · 3rd *Cunning* · 5th *Marksman* [St] · 7th *Weapon Expert* [St] · 9th *Alert*  
+**Knacks:** Performer (background) · 2nd Expertise · 6th Many Faces · 10th Streetwise  
+**4th and 8th:** +2 Dexterity each time  
+**Kit:** leather, rapier, shortbow  
+**At 1st:** HP 20 · AC 14 · rapier +5 (1d8 + 3)
 
-**Background.** City Watch Veteran. He puts +2 in Strength (now 17) and +1 in Constitution (now 15). He gets Athletics and Insight, a set of dice, 25 gp, and an origin talent. His Specialty is the district he patrolled for eleven years: its layout, its regulars and its unofficial rules.
+### Barbarian
+*Preset · Body · Steel 3, Spell 0 at 10th · Steel main*
 
-**Skills.** Three from the Body list: Intimidation, Perception and Survival. (Athletics would have been his first choice, but the background already gave it.)
+Rage on the first turn and swing the big axe. Planning can happen afterwards.
 
-**Talents.** The Fighter card in Chapter 03 is the nearest preset, and Mordai's player takes it as written: *Fighting Style* (Defense), *Weapon Mastery* (longswords among his three) and *Tough*, with *Alert* as the origin talent. His Facet feature is *Second Wind*.
+**Abilities:** Str 16, Dex 14, Con 15, Int 8, Wis 12, Cha 10 (background included)  
+**Background:** Dockworker · **Skills:** Perception, Survival, plus Athletics, Investigation from the background  
+**Talents:** 1st *Rage* [St] · 3rd *Hardy* · 5th *Cleave* [St] · 7th *Guardian* [St] · 9th *Alert*  
+**Knacks:** Skilled (background) · 2nd Pathfinder · 6th Wild Kin · 10th Artisan  
+**4th and 8th:** +2 Strength each time  
+**Kit:** no armor, greataxe, handaxe  
+**At 1st:** HP 20 · AC 14 · greataxe +5 (1d12 + 3)
 
-**Gear.** The Body kit: chain mail, a longsword and a shield, an explorer's pack.
+### Monk
+*Preset · Body · Steel 2, Spell 0 at 10th · Steel main*
 
-**The numbers.**
+Punch twice a turn and be elsewhere when they swing back. From 5th, stun the one that matters.
 
-- Hit points: 10 + 2 (Con) + 2 (*Tough*) = **14**.
-- Armor Class: 16 (chain mail) + 2 (shield) + 1 (Defense) = **19**.
-- Longsword: **+5** to hit (Strength +3, proficiency +2), **1d8 + 3** slashing.
-- Sparks: 1.
+**Abilities:** Str 12, Dex 16, Con 14, Int 10, Wis 15, Cha 8 (background included)  
+**Background:** Wilderness Scout · **Skills:** Acrobatics, Athletics, plus Survival, Stealth from the background  
+**Talents:** 1st *Martial Arts* [St] · 3rd *Cunning* · 5th *Weapon Expert* [St] · 7th *Hardy* · 9th *Alert*  
+**Knacks:** Pathfinder (background) · 2nd Expertise · 6th Wild Kin · 10th Well-Travelled  
+**4th and 8th:** +2 Dexterity each time  
+**Kit:** no armor, quarterstaff, dart  
+**At 1st:** HP 20 · AC 15 · quarterstaff +5 (1d8 + 3)
 
-Zulnut's player went next, and asked whether "Lineage: human" meant he had to write anything. It didn't.
+### Wizard
+*Preset · Mind · Steel 0, Spell 3 at 10th · Spell main*
+
+Stay at the back and drop area spells that leave your friends standing. Save a Spark for the roll that decides things.
+
+**Abilities:** Str 8, Dex 14, Con 14, Int 16, Wis 13, Cha 10 (background included)  
+**Background:** Guild Apprentice · **Skills:** History, Religion, plus Arcana, Investigation from the background  
+**Talents:** 1st *Evoker* [Sp] · 3rd *Wider Study* [Sp] · 5th *Turn the Odds* [Sp] · 7th *Iron Mind* · 9th *Hardy*  
+**Domains:** Constructed Force (1st), Illusion (3rd, *Wider Study*), The Arcane (5th, Deep Magic)  
+**Knacks:** Gadgeteer (background) · 2nd Encyclopedic · 6th Well-Travelled · 10th Artisan  
+**4th and 8th:** +2 Intelligence each time  
+**Kit:** no armor, quarterstaff, arcane focus  
+**At 1st:** HP 16 · AC 12 · quarterstaff +1 (1d8 − 1) · spell save DC 13, spell attack +5
+
+### Investigator
+*Preset · Mind · Steel 3, Spell 0 at 10th · Steel main*
+
+Study the target, then take it apart with a rapier while it swings at nothing.
+
+**Abilities:** Str 8, Dex 16, Con 13, Int 15, Wis 13, Cha 10 (background included)  
+**Background:** Physician's Assistant · **Skills:** Investigation, Perception, plus Medicine, Insight from the background  
+**Talents:** 1st *Precision* [St] · 3rd *Anatomist* [St] · 5th *Anticipate* · 7th *Weapon Expert* [St] · 9th *Hardy*  
+**Knacks:** Field Medic (background) · 2nd Expertise · 6th Streetwise · 10th Encyclopedic  
+**4th and 8th:** +2 Dexterity each time  
+**Kit:** chain shirt, shield, rapier, light crossbow  
+**At 1st:** HP 17 · AC 17 · rapier +5 (1d8 + 3)
+
+### Loremaster
+*Preset · Mind · Steel 0, Spell 3 at 10th · Spell main*
+
+Win the fight in the planning scene, then spend it handing out luck and illusions.
+
+**Abilities:** Str 8, Dex 13, Con 14, Int 16, Wis 11, Cha 13 (background included)  
+**Background:** Traveling Merchant · **Skills:** History, Arcana, plus Persuasion, Insight from the background  
+**Talents:** 1st *Turn the Odds* [Sp] · 3rd *Wider Study* [Sp] · 5th *Master Plan* · 7th *Hardy* · 9th *Evoker* [Sp]  
+**Domains:** Illusion (1st), Divination (3rd, *Wider Study*), Chronomancy (9th, Deep Magic)  
+**Knacks:** Silver Tongue (background) · 2nd Encyclopedic · 6th Well-Travelled · 10th Performer  
+**4th and 8th:** +2 Intelligence each time  
+**Kit:** no armor, dagger, arcane focus  
+**At 1st:** HP 16 · AC 11 · dagger +3 (1d4 + 1) · spell save DC 13, spell attack +5
+
+### Tinker
+*Preset · Mind · Steel 1, Spell 1 at 10th · Steel main*
+
+Send the clockwork guardian in first and shoot from behind it. Everyone you travel with starts each fight a little harder to hurt.
+
+**Abilities:** Str 10, Dex 15, Con 13, Int 16, Wis 13, Cha 8 (background included)  
+**Background:** Guild Apprentice · **Skills:** Nature, Perception, plus Arcana, Investigation from the background  
+**Talents:** 1st *Clockwork Guardian* [Sp] · 3rd *Weapon Expert* [St] · 5th *Field Kit* · 7th *Hardy* · 9th *Anticipate*  
+**Domains:** Transmutation (1st)  
+**Knacks:** Gadgeteer (background) · 2nd Artisan · 6th Skilled · 10th Expertise  
+**4th and 8th:** +2 Dexterity each time  
+**Kit:** leather, light crossbow, dagger, arcane focus; at 3rd, when Steel becomes its main track, it trades up to a breastplate, a shield and a rapier  
+**At 1st:** HP 15 · AC 13 · light crossbow +4 (1d8 + 2) · spell save DC 13, spell attack +5
+
+### Priest
+*Preset · Soul · Steel 0, Spell 3 at 10th · Spell main*
+
+Heal with slots first and with Channel when the slots run low. From 7th, friends standing near you shrug off more.
+
+**Abilities:** Str 13, Dex 10, Con 14, Int 9, Wis 16, Cha 13 (background included)  
+**Background:** Temple Acolyte · **Skills:** Medicine, Persuasion, plus Religion, Insight from the background  
+**Talents:** 1st *Channel* [Sp] · 3rd *Wider Study* [Sp] · 5th *Mending Hands* [Sp] · 7th *Warden* · 9th *Hardy*  
+**Domains:** The Tide (1st), Presence (3rd, *Wider Study*), The Living World (5th, Deep Magic)  
+**Knacks:** Encyclopedic (background) · 2nd Field Medic · 6th Well-Travelled · 10th Silver Tongue  
+**4th and 8th:** +2 Wisdom each time  
+**Kit:** scale mail, shield, mace, holy symbol  
+**At 1st:** HP 18 · AC 16 · mace +3 (1d6 + 1) · spell save DC 13, spell attack +5
+
+### Druid
+*Preset · Soul · Steel 0, Spell 3 at 10th · Spell main*
+
+Be a wolf when the fight is close and a caster when it isn't, with a heal in your pocket either way.
+
+**Abilities:** Str 8, Dex 14, Con 15, Int 12, Wis 16, Cha 10 (background included)  
+**Background:** Wilderness Scout · **Skills:** Nature, Animal Handling, plus Survival, Stealth from the background  
+**Talents:** 1st *Wild Shape* [Sp] · 3rd *Wider Study* [Sp] · 5th *Channel* [Sp] · 7th *Hardy* · 9th *Warden*  
+**Domains:** Verdance (1st), The Tide (3rd, *Wider Study*), The Living World (5th, Deep Magic)  
+**Knacks:** Pathfinder (background) · 2nd Wild Kin · 6th Field Medic · 10th Well-Travelled  
+**4th and 8th:** +2 Wisdom each time  
+**Kit:** leather, shield, quarterstaff, druidic focus  
+**At 1st:** HP 18 · AC 15 · quarterstaff +1 (1d6 − 1) · spell save DC 13, spell attack +5
+
+### Oracle
+*Preset · Soul · Steel 0, Spell 3 at 10th · Spell main*
+
+Spend luck freely, on your friends' rolls and against your enemies'.
+
+**Abilities:** Str 8, Dex 12, Con 13, Int 11, Wis 15, Cha 16 (background included)  
+**Background:** Traveling Merchant · **Skills:** Religion, Deception, plus Persuasion, Insight from the background  
+**Talents:** 1st *Turn the Odds* [Sp] · 3rd *Wider Study* [Sp] · 5th *Prophecy* [Sp] · 7th *Warden* · 9th *Alert*  
+**Domains:** Presence (1st), Binding (3rd, *Wider Study*), Fate (5th, Deep Magic)  
+**Knacks:** Silver Tongue (background) · 2nd Encyclopedic · 6th Many Faces · 10th Performer  
+**4th and 8th:** +2 Charisma each time  
+**Kit:** chain shirt, shield, spear, holy symbol  
+**At 1st:** HP 17 · AC 16 · spear +1 (1d6 − 1) · spell save DC 13, spell attack +5
+
+### Oathsworn
+*Preset · Soul · Steel 2, Spell 1 at 10th · Steel main*
+
+Keep your oath, stand in the front rank in heavy armor, and put radiant light behind one blow a turn when it counts.
+
+**Abilities:** Str 16, Dex 10, Con 14, Int 8, Wis 15, Cha 12 (background included)  
+**Background:** City Watch Veteran · **Skills:** Intimidation, Religion, plus Athletics, Insight from the background  
+**Talents:** 1st *Sworn Strike* [St] · 3rd *Mending Hands* [Sp] · 5th *Weapon Expert* [St] · 7th *Warden* · 9th *Oath Unbroken*  
+**Domains:** Presence (3rd)  
+**Knacks:** Streetwise (background) · 2nd Silver Tongue · 6th Field Medic · 10th Well-Travelled  
+**4th and 8th:** +2 Strength each time  
+**Kit:** chain mail, shield, longsword, javelin, holy symbol  
+**At 1st:** HP 20 · AC 18 · longsword +5 (1d8 + 3)
+
+---
+
+## Shared Talents
+
+Six talents appear on more than one Facet's menu. Each is printed once, here, and the menus in Chapters 03–05 point back to it.
+
+> **Reading a talent entry**
+>
+> The line under the name gives the talent's track (Steel, Spell or general) and the menus it appears on. The first paragraph is what the talent does from the level you take it. A **5th** or **9th** line is what changes at that character level; on a Steel or Spell talent the line also needs the depth shown, such as *(Steel 2)*. An entry with no such lines doesn't change as you level. A **rider** is extra damage dice added to a hit; only one rider applies on your turn (Chapter 08).
+
+### Alert
+*General talent · Body, Mind, Soul*
+
+While you are conscious, your side's initiative roll has advantage.
+
+### Hardy
+*General talent · Body, Mind, Soul*
+
+Your hit die is one size larger (d6 to d8 to d10 to d12). Work out your hit points again.
+
+### Weapon Expert
+*Steel talent · Body, Mind, Soul*
+
++1 to weapon attack rolls, and +1 AC while you wear armor.
+
+**5th (Steel 2):** your weapon attacks score a critical hit on a 19 or 20.
+**9th (Steel 3):** when you score a critical hit with a weapon, you regain hit points equal to half your level.
+
+### Precision
+*Steel talent · Body, Mind*
+
+Once per turn, when you hit with a finesse or ranged weapon and you had advantage on the attack, an ally was next to the target, or the target is your studied target (*Study*, Chapter 04), the hit deals +1d6 damage. This is a rider.
+
+**5th (Steel 2):** +2d6 instead.
+**9th (Steel 3):** +3d6 instead.
+
+### Turn the Odds
+*Spell talent · Mind, Soul*
+
+You bend chance with magic. You can spend a Spark on the d20 test of any creature you can see within 60 feet, adding the Spark die or subtracting it, once per round. You start every fight with at least one Spark.
+
+### Wider Study
+*Spell talent · Mind, Soul*
+
+Take one more domain of your tradition. Its spells join your lists.
 
 ---
 

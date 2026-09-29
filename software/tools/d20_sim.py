@@ -601,6 +601,37 @@ def adjustments(results):
     results["adjustments"] = out
 
 
+def splice_blocks(text: str, blocks: dict) -> str:
+    """Replace each top-level `key:` block in text with blocks[key], appending any not found.
+
+    A block may start with its own comment lines; the same comment lines directly above the
+    old key are dropped, so writing twice gives the same file (the old version repeated the
+    comment on every --write).
+    """
+    blocks = dict(blocks)
+    lines = text.split("\n")
+    out, i = [], 0
+    while i < len(lines):
+        line = lines[i]
+        key = line.split(":", 1)[0] if line and not line.startswith((" ", "#")) else None
+        if key in blocks:
+            new = blocks.pop(key).rstrip("\n")
+            lead = [l for l in new.split("\n") if l.startswith("#")]
+            while lead and out and out[-1] in lead:
+                lead.remove(out[-1])
+                out.pop()
+            out.append(new)
+            i += 1
+            while i < len(lines) and (lines[i].startswith(" ") or lines[i].startswith("#  ")):
+                i += 1
+            continue
+        out.append(line)
+        i += 1
+    for rest in blocks.values():
+        out.append(rest.rstrip("\n"))
+    return "\n".join(out)
+
+
 def write_yaml(results):
     """Replace the three simulator-owned top-level fields (S-7) in facets_d20.yaml."""
     import yaml as _y
@@ -623,22 +654,7 @@ def write_yaml(results):
         "encounter_adjustments": _y.safe_dump({"encounter_adjustments": adj}, sort_keys=False, width=100),
         "monster_threat": _y.safe_dump({"monster_threat": mt}, sort_keys=False, width=100),
     }
-    lines = text.split("\n")
-    out, i = [], 0
-    while i < len(lines):
-        line = lines[i]
-        key = line.split(":", 1)[0] if line and not line.startswith((" ", "#")) else None
-        if key in blocks:
-            out.append(blocks.pop(key).rstrip("\n"))
-            i += 1
-            while i < len(lines) and (lines[i].startswith(" ") or lines[i].startswith("#  ")):
-                i += 1
-            continue
-        out.append(line)
-        i += 1
-    for rest in blocks.values():
-        out.append(rest.rstrip("\n"))
-    YAML.write_text("\n".join(out), encoding="utf-8")
+    YAML.write_text(splice_blocks(text, blocks), encoding="utf-8")
 
 
 def findings(results):

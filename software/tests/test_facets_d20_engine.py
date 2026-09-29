@@ -2126,3 +2126,33 @@ class TestRanksLapseAmendment3:
         p.domains.append("the_living_world")        # Spell 3 · main again: Deep Magic
         ch = B.build(rs, p)
         assert ch.progression == "full" and ch.slots == [4, 3, 3, 1]
+
+
+# --- d20_sim write-back is idempotent (a second --write must not grow the file) ---
+
+def _splice():
+    import importlib.util, sys
+    from pathlib import Path
+    spec = importlib.util.spec_from_file_location(
+        "d20_sim_tool", Path(__file__).resolve().parents[1] / "tools" / "d20_sim.py")
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules.setdefault("d20_sim_tool", mod)
+    spec.loader.exec_module(mod)
+    return mod.splice_blocks
+
+
+def test_splice_blocks_replaces_block_and_its_leading_comment_once():
+    text = "a: 1\n# note\nkey:\n  x: 1\nb: 2"
+    out = _splice()(text, {"key": "# note\nkey:\n  x: 2\n"})
+    assert out == "a: 1\n# note\nkey:\n  x: 2\nb: 2"
+
+
+def test_splice_blocks_is_idempotent():
+    splice = _splice()
+    block = {"key": "# note\nkey:\n  x: 2\n"}
+    once = splice("a: 1\nkey:\n  x: 1\nb: 2", dict(block))
+    assert splice(once, dict(block)) == once
+
+
+def test_splice_blocks_appends_missing_block():
+    assert _splice()("a: 1", {"key": "key: 3\n"}) == "a: 1\nkey: 3"

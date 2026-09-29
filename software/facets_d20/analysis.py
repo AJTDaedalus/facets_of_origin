@@ -649,3 +649,90 @@ def task_dummy_dpr(build_id, source, level, n, seed) -> dict:
     return {"build": build_id, "source": source, "level": level, "ac": ac,
             "dpr_1": S.damage_per_round(me, ac=ac, n=n, seed=seed, foes=1, rounds=4),
             "dpr_3": S.damage_per_round(me, ac=ac, n=n, seed=seed, foes=3, rounds=4)}
+
+
+# ================================================================ Table 9–2: Threat per monster
+#
+# BRIEF Amendment 4, ruling 2: every SRD 5.2.1 monster priced from its own stat block.
+# The model's constants are the ones the simulator wrote into the yaml (`monster_threat`)
+# and the book prints, so an MM with a calculator gets the same number as the table.
+# The three presentation cut-offs below are not rules; they only say which party levels
+# a monster suits and which ones the interim hard-hitters rule (09) applies to.
+
+HARD_HITTER_FACTOR = 1.25   # damage per turn ≥ 1.25 × the SRD ladder's line for its CR
+STANDARD_COUNT = (3, 10)    # a standard "fits" a level when 3–10 of them make a Clash for four
+BOSS_SHARE = (0.5, 1.0)     # a boss fits when it is half to all of a Clash for four (§7)
+
+_NUM = r"(\d+(?:\.\d+)?)"
+
+
+def _rules_raw(raw=None) -> dict:
+    if raw is None:
+        from . import data as D
+        raw = D.load().raw
+    return raw
+
+
+def _model_number(model: dict, key: str, pattern: str) -> float:
+    import re
+    m = re.search(pattern, str(model.get(key, "")))
+    if not m:
+        raise ValueError(f"monster_threat.model.{key}: no constant in {model.get(key)!r}")
+    return float(m.group(1))
+
+
+def threat_model_from_data(raw=None) -> ThreatModel:
+    """The ThreatModel the yaml prints (``monster_threat.model``), at the printed precision."""
+    model = (_rules_raw(raw).get("monster_threat") or {}).get("model") or {}
+    return ThreatModel(minion_hp=_model_number(model, "minion", r"sqrt\(\s*" + _NUM),
+                       boss=_model_number(model, "boss", r"x\s*" + _NUM),
+                       never=_model_number(model, "never_breaks", r"x\s*" + _NUM))
+
+
+def lone_boss_factor(raw=None) -> float:
+    """V42: a lone boss counts × this (``monster_threat.model.lone_boss``)."""
+    model = (_rules_raw(raw).get("monster_threat") or {}).get("model") or {}
+    return _model_number(model, "lone_boss", r"x\s*" + _NUM)
+
+
+def clash_totals(raw=None, *, party_size: int = 4, tier: str = "clash") -> dict:
+    """{level: the tier's Threat budget for the whole party} from ``encounter_table``."""
+    if tier not in TIERS:
+        raise KeyError(tier)
+    table = _rules_raw(raw)["encounter_table"]
+    return {int(L): party_size * row[tier] for L, row in sorted(table.items(), key=lambda kv: int(kv[0]))}
+
+
+def level_range(levels) -> str:
+    """[3, 4, 5] → "3–5"; [1] → "1"; [] → "—". Levels must be contiguous."""
+    levels = sorted(levels)
+    if not levels:
+        return "—"
+    if levels != list(range(levels[0], levels[-1] + 1)):
+        raise ValueError(f"levels not contiguous: {levels}")
+    return str(levels[0]) if len(levels) == 1 else f"{levels[0]}–{levels[-1]}"
+
+
+def monster_threat_row(block: MonsterBlock, model: ThreatModel, totals: dict) -> dict:
+    """One Table 9–2 row: the block's Threat in each role, the party levels it fits as a
+    standard and as a boss (against ``totals``, the Clash budget for four), and its flags."""
+    if not totals:
+        raise ValueError("need the Clash budget totals by level")
+    std, mn, bs = (round(model.of(block, r)) for r in ("standard", "minion", "boss"))
+    lo, hi = STANDARD_COUNT
+    blo, bhi = BOSS_SHARE
+    line = generic(float(block.cr)).damage_per_turn
+    return {"id": block.id, "name": block.name, "cr": block.cr,
+            "standard": std, "minion": mn, "boss": bs,
+            "standard_levels": [L for L, t in totals.items() if lo <= t / std <= hi],
+            "boss_levels": [L for L, t in totals.items() if blo <= bs / t <= bhi],
+            "never": block.morale == "never",
+            "hits_hard": block.damage_per_turn >= HARD_HITTER_FACTOR * line}
+
+
+def threat_appendix(raw=None) -> list:
+    """Table 9–2: every SRD monster in ``srd_monsters.yaml``, by CR then name."""
+    raw = _rules_raw(raw)
+    model = threat_model_from_data(raw)
+    totals = clash_totals(raw)
+    return [monster_threat_row(b, model, totals) for b in M.ladder()]
