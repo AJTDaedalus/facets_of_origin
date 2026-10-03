@@ -373,23 +373,23 @@ These rules are mechanical, but a worker makes every edit with the linter's hit 
 - **Time:** 3 × 30 min. **Then STOP for owner review of tone** (checkpoint G1). Tasks T7.2–T7.9 don't start until the owner approves or adjusts the approach.
 - **Done 2026-10-03.** Metrics and three before/after samples are in LOG, "Phase 7 — T7.1 pilot (chapter 04)". Waiting on G1.
 
-### ☐ T7.2 Chapter 05 (NIGHT-13, -14; FRONT-7 05 sites, including the "*(New in this edition.)*" tags)
+### ☑ T7.2 Chapter 05 (NIGHT-13, -14; FRONT-7 05 sites, including the "*(New in this edition.)*" tags)
 - **Time:** 3 × 30 min.
 
-### ☐ T7.3 Chapter 09 (SNAKES-10, -11; FRONT-7 09 sites)
+### ☑ T7.3 Chapter 09 (SNAKES-10, -11; FRONT-7 09 sites)
 - **Note:** SNAKES-10 option (b) was chosen: convert the imperative *Walk into it* blocks to the official voice.
 - **Time:** 2 × 30 min.
 
-### ☐ T7.4 Chapter 07 (CAST-5, -6, -7; FRONT-7 07 site)
+### ☑ T7.4 Chapter 07 (CAST-5, -6, -7; FRONT-7 07 site)
 - **Time:** 30 min.
 
-### ☐ T7.5 Chapter 10 (BESTIARY-10, -15; FRONT-7 10 site)
+### ☑ T7.5 Chapter 10 (BESTIARY-10, -15; FRONT-7 10 site)
 - **Time:** 30 min.
 
-### ☐ T7.6 Chapters 01, 02, 03, 06 (FRONT-7, -21)
+### ☑ T7.6 Chapters 01, 02, 03, 06 (FRONT-7, -21)
 - **Time:** 2 × 25 min.
 
-### ☐ T7.7 Chapters 08 and 11 and the README
+### ☑ T7.7 Chapters 08 and 11 and the README
 - **Scope:** "player" → "character" on the sheets where it means the character. Pregen personality prose is light-touch only.
 - **Time:** 25 min.
 

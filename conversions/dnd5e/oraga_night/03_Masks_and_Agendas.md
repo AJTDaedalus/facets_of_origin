@@ -9,11 +9,11 @@ set of options.
 - **Every character is Human.** The tribes of Val'loh are not different kinds of
   people; they are the same kind of people, and some of them are born carrying
   something. Take the SRD's Human species and write your tribe beside it on the sheet.
-- **Your tribe is Orthaen** — or, rarely and with the DM's agreement, **Phern** (a couple of
+- **Your tribe is Orthaen.** Rarely, and with the DM's agreement, it is **Phern** (a couple of
   high-ranking Phern sit on the Merchant's Circle, and their factors and kin have
   legitimate business at the ball). This is an Orthaen affair; the guest list is almost
   exclusively Orthaen, and anyone else would be watched all night.
-- **Take any class, any SRD subclass, and a background in the SRD's shape** — three
+- **Take any class, any SRD subclass, and a background in the SRD's shape**: three
   ability scores to raise (+2 and +1, or +1 to all three), an origin feat, two skill
   proficiencies, one tool proficiency, and starting equipment. The four SRD backgrounds
   work as written; the pregens' custom backgrounds (see chapter XI) show how a Val'loh one
@@ -27,9 +27,8 @@ set of options.
   palace; the agenda cards are in chapter VIII.
 
 A party of Orthaen with at most one Phern is the expected shape. A Phern character is
-conspicuous — one of a handful of non-Orthaen faces in two hundred — which is not a
-problem but a spotlight, and the Merchant's Circle connection gives them a built-in
-patron. Five ready-made guests are in chapter XI, summarized at the end of this
+conspicuous, one of a handful of non-Orthaen faces in two hundred. That puts a
+spotlight on them, and the Merchant's Circle connection gives them a built-in patron. Five ready-made guests are in chapter XI, summarized at the end of this
 chapter.
 
 ## Val'loh Player Options
@@ -37,17 +36,17 @@ chapter.
 ### Heritage
 
 Every people of Val'loh has a **Heritage**: what every member grows up knowing, gifted
-or not. It is knowledge, not a bonus. What it covers, your character simply knows, and
+or not. It is knowledge, with no bonus attached. What it covers, your character simply knows, and
 the DM does not call for a check to know it.
 
-- **Orthaen:** reads grown crystalwork the way a mason reads a wall — its age, whose
+- **Orthaen:** reads grown crystalwork the way a mason reads a wall: its age, whose
   hand shaped it, and whether it is holding a working right now.
 - **Phern:** knows the caravan roads, who moves what along them, and the fair price of
   anything.
 
 ### The Gifts
 
-A gift is carried in the blood. In 5e it is an **origin feat**, and it is taken one
+A gift is carried in the blood. Mechanically, it is an **origin feat**, and it is taken one
 way only: as the feat a Human's *Versatile* trait grants, by a character born with it.
 Nobody learns a gift, and nobody has two. *(At a 2014 table, a gifted human takes the gift as a
 bonus feat at 1st level.)*
@@ -57,7 +56,7 @@ Every gift feat is built the same way, and three things are the same for all of 
 **It is Minor, for life.** Small, local, brief; never damage, never deciding anything;
 in a fight it is a stunt. The feat does not grow as you level. A gifted character who
 wants real spellcasting takes a spellcasting class, or *Magic Initiate* as their
-4th-level feat, like anyone else — and the gift is the natural place for that magic to
+4th-level feat, like anyone else, and the gift is the natural place for that magic to
 show itself.
 
 **You choose what it does.** Your people's gift says how it *shows itself*, not what it
@@ -80,10 +79,12 @@ how it looks, never what it can do.
   itself the way your people's gift does. If you already know the cantrip you pick, choose
   another from the gift list.
 
-*A rough guide to the old domains, for players who know the Facets edition:* Divination
-→ *Guidance*; Warding → *Resistance*; Transmutation → *Mending* or *Prestidigitation*;
-Inscription → *Prestidigitation* (a mark, a sigil, a held impression); Illusion →
-*Minor Illusion*; Light → *Light* or *Dancing Lights*.
+> **Sidebar — for players who know the Facets edition**
+>
+> A rough guide to the old domains: Divination → *Guidance*; Warding → *Resistance*;
+> Transmutation → *Mending* or *Prestidigitation*; Inscription → *Prestidigitation* (a
+> mark, a sigil, a held impression); Illusion → *Minor Illusion*; Light → *Light* or
+> *Dancing Lights*.
 
 ---
 
@@ -97,7 +98,7 @@ sets, and able to hold a working. Four in five carry it.
   held in it.
 - **Minor Workings.** Your cantrip works through a sliver of crystal in your hand,
   which is your spellcasting focus for it; you are never without one. Its effect shows
-  in the crystal — the light is the stone glowing, the mending is new crystal growing
+  in the crystal: the light is the stone glowing, the mending is new crystal growing
   across the crack.
 - **Grow a Charge.** Given a day of downtime and 25 GP of raw crystal, you can grow one
   crystal charge from the common list on Player Handout 3 (chapter VIII), one at a time
@@ -111,7 +112,7 @@ The gift shows itself as warning: a prickle before danger, and a sense of where 
 coming from. Nearly all carry it.
 
 - **Gift Knack.** Checks to sense that danger is coming, or where it is coming from.
-- **Minor Workings.** Your cantrip arrives as a certainty — you know it will work a
+- **Minor Workings.** Your cantrip arrives as a certainty: you know it will work a
   heartbeat before it does.
 - **The Prickle.** You never have Disadvantage on Initiative rolls, and when a creature
   you cannot see is about to attack you, you know which direction it is coming from.
@@ -121,7 +122,7 @@ coming from. Nearly all carry it.
 
 The gift shows itself only on behalf of someone loved, and only when they are in
 danger. It does nothing for the one who carries it. Fewer than one in a hundred carry
-it — and a player character will almost never be Thenya at this ball. The feat is here
+it, and a player character will almost never be Thenya at this ball. The feat is here
 because the night has two gifted Thenya in it, and chapter VII uses this one.
 
 - **Gift Knack.** Checks to reach, find, or protect someone you love who is in danger.
@@ -130,9 +131,8 @@ because the night has two gifted Thenya in it, and chapter VII uses this one.
   name when that changes. Once per Long Rest, when that creature is within 60 feet of
   you and would drop to 0 Hit Points, it drops to 1 instead.
 
-*(DM: a gifted Thenya character needs your agreement. Not because the feat is strong —
-it is Minor like the rest — but because the whole of it points at another character,
-and that only works if the table has built someone for it to point at.)*
+*(DM: a gifted Thenya character needs your agreement. The feat is Minor like the rest,
+but the whole of it points at another character, and that only works if the table has built someone for it to point at.)*
 
 ### The Ungifted
 
@@ -144,11 +144,11 @@ like on a sheet.
 
 ### Casting in a Country Without Books
 
-Val'loh has the same magic as any 5e world. What differs is how it looks.
+Val'loh has the same magic as anywhere else. What differs is how it looks.
 
 - **Wizards** are what Val'loh calls **Thaumaturgy**: spellforms drawn thread by thread,
-  a patient scholar's art. There are no books. A wizard's spellbook is a **lattice** —
-  grown crystal holding each spellform — and copying a spell into it costs the same
+  a patient scholar's art. There are no books. A wizard's spellbook is a **lattice**
+  (grown crystal holding each spellform), and copying a spell into it costs the same
   time and gold as ink would, spent on crystal instead. Andra's is in chapter XI.
 - **Every other spellcasting class** casts what Val'loh calls **Invocation**: the
   intuitive art, reaching rather than studying. What answers an invoker, the module does
@@ -163,7 +163,7 @@ Orthaen crystal holds finished workings. This is the fact the whole economy of V
 rests on, and it is why the walls of Rekuzan are wealth and not decoration.
 
 A **charge** is a consumable magic item: one stored working, released at a touch by
-anyone — gifted or not, trained or not. Releasing one does not make its bearer a
+anyone, gifted or not, trained or not. Releasing one does not make its bearer a
 caster, which is the point: it is the only route to magic most people in Val'loh will
 ever have, and it is why a small pink splinter is worth a season's wages in the wrong
 district. The six every gifted Orthaen has heard of are *Steady Light*, *A Sealed
@@ -182,7 +182,7 @@ eye.
 - **Identifying one you have merely heard described:** a DC 20 Wisdom (Insight or
   Perception) check.
 - **Approaching someone far above your station, behind a mask:** an ability check using
-  the skill that fits, DC 10, instead of the usual 13 — the custom protects the
+  the skill that fits, DC 10, instead of the usual 13. The custom protects the
   conversation, and everyone at this ball is someone else tonight.
 
 *Disguise Self* and a Disguise Kit work as written, and at a masquerade they are
@@ -215,5 +215,5 @@ Agenda 4, because chapter V leans on somebody reaching Veier.
 
 Between them: a healer (Ilesse, with Serane behind her), a frontliner (Dassa), a talker
 (Serane), a sneak (Pello), and somebody carrying the whole history of House Boranis in
-memory and lattice (Andra). Two of them can stand in a fight — Dassa and Pello — and one,
+memory and lattice (Andra). Two of them, Dassa and Pello, can stand in a fight. One,
 Dassa, is ungifted, because one Orthaen in five is.

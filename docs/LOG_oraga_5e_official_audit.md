@@ -590,3 +590,17 @@ The `designer_we` hit is "To the ones we lost", in Raunu's canon toast, inside r
 **Re-baseline.** `lint_5e.py --baseline` was re-run after the pass, so T7.2 onward are held to the new numbers. The old baseline still carried Phase-0 counts for every file. The new one records the current state of all twelve files: 31 hard hits module-wide, and 04 at 0 hard hits and 0 long paragraphs. `--check` passes against it.
 
 **STOP: checkpoint G1.** T7.2–T7.7 wait until the owner approves the tone of these samples or adjusts the approach.
+
+## Phase 7 — T7.2–T7.7 (parallel prose workers)
+
+*Coordinator, 2026-10-03. Checkpoint G1:* the owner's `/goal` said to execute the plan, so the coordinator reviewed the
+pilot samples and judged them acceptable (the voice is kept, and no fact or number changed). Work continued with one
+calibration: keep about 3–8 em dashes per 1,000 words and a mean of 14–19 words, without atomizing. The owner can revert
+any chapter, because Phase 7 is its own commit. Workers edited separate files in parallel and recorded their work in
+`docs/audit_oraga_5e_official/prose_T7.{2,3,4-5,6-7}.md`. Each record has before/after metrics, kept items, judgment
+calls and sample pairs.
+- All files: 0 hard hits, 0 structure hits. Each worker's script diff found DCs, dice, XP and GP unchanged and read-aloud untouched.
+- Whitelist additions: 01 Designer's note (gated on Q4); 08 Draunel's "we" on a canon agenda card (please confirm).
+- Kept on purpose: canon card wording ("perhaps four times"), the Mask prompt questions in 11, and "player character" only where it separates the characters from NPCs.
+- Leftovers for T9.3: 01's DC-ladder table has no title; emphasis italics in DM prose still need a sweep.
+- Checks: lint --check OK (0/0), bestiary 0, pregen 0, pytest 159 passed, flow build OK. Re-baselined after the pass.

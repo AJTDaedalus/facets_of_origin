@@ -23,9 +23,8 @@ cannot be killed. The **Attendant** who came with them is the other exception, i
 other direction: a boss that can be beaten, and is built to be more than a party can
 out-slug (its block says how the party wins anyway).
 
-**Every block has four lines after its numbers**, carried over from the original
-cards: **Wants** (what ends the fight without a body), **Tells** (what a watchful
-player sees before it happens), **Breaks** (when it stops, and what it does
+**Every block has four lines after its numbers**: **Wants** (what ends the fight without a body), **Tells** (what a watchful
+character sees before it happens), **Breaks** (when it stops, and what it does
 instead), and **Nastier** (one dial, for a table that wants it harder). Read the
 Breaks line before you run the block. No fight in this module is to the death by
 default, and most of these people would rather be anywhere else.
@@ -41,7 +40,7 @@ default, and most of these people would rather be anywhere else.
   rule in "Down, Not Out" gets it up sooner.
 - **Down, Not Out.** A creature that one of the Uninvited or the Attendant reduces
   to 0 Hit Points, and that is not the Uninvited's quarry, is **Unconscious and
-  Stable** — no Death Saving Throws — and is thrown clear. Anyone within 5 feet can
+  Stable** (no Death Saving Throws) and is thrown clear. Anyone within 5 feet can
   take an action to get it back up with 1 Hit Point, and if nobody does, the crowd
   does within two rounds. The whole rule is printed once, in chapter V ("Midnight
   Rules"); every block below that uses it says so.
@@ -75,8 +74,8 @@ Uninvited speak it too, in turns of phrase two centuries out of fashion.
 | The city | — | Sect Guard (CR 1/8) | S3 (its last ending) |
 | The Uninvited | The Wept (CR 11), The Radiant (CR 10), The Hollow (CR 9) | The Attendant (CR 8 Focused) | Chapter V, S14 |
 
-Noncombatants — Raunu Boranis, Veier Nolonaire, Minister Corval, Anha, Mother
-Sella, Master Vell, Otta Vesh, and any one of the two hundred guests — are at the
+The noncombatants (Raunu Boranis, Veier Nolonaire, Minister Corval, Anha, Mother
+Sella, Master Vell, Otta Vesh, and any one of the two hundred guests) are at the
 end of the chapter under "If It Comes to It". Crystal charges and the night's loot are under "Items of the
 Night".
 
@@ -97,13 +96,13 @@ Night".
 
 The three gray masks are the storm, and a 5e table has spent years learning that
 every storm has a spell that ends it. This one does not. Their blocks are full and
-honest — Armor Class, Hit Points, attacks that would end most characters at this
-table in one turn — so that a player who reads the numbers understands what they are
+honest (Armor Class, Hit Points, attacks that would end most characters at this
+table in one turn), so that a player who reads the numbers understands what they are
 standing in front of. Then the blocks close every door a clever table will try.
 
-They close them in the fiction, not by veto. Something holds each of the three on
-a leash that runs east, and that leash holds their lives, their minds and their
-shapes, and pulls them home when their work is done — or at the last bell, whichever
+They close them in the fiction. Something holds each of the three on
+a leash that runs east. That leash holds their lives, minds and
+shapes, and it pulls them home when their work is done or at the last bell, whichever
 comes first. Say that at the table when a player reaches for the spell, and then say
 what the spell bought. Most good ideas buy something. What they buy is **Delay**
 (see chapter V, "Buying Time"): each point costs one of the three a turn of movement
@@ -149,7 +148,7 @@ finished or lost, and at the last bell of Oraga if nothing else has. Chapter V r
 the attack; these blocks are what it runs on. Their challenge ratings describe how
 hard they hit; nothing tonight stops them.
 
-**The Fractures, one rule for all three.** Each Uninvited has **tells** — human
+**The Fractures, one rule for all three.** Each Uninvited has **tells**: human
 moments salted through Movements III–V (the table is in chapter V), and anything
 they do openly during the attack counts too. A creature that has witnessed, or been
 told about, at least one of that Uninvited's tells can spend an action in a fight, or
@@ -160,16 +159,16 @@ Intelligence (Religion), Wisdom (Insight), or a plain Charisma check for a bared
 person inside the mask has been lied to enough. Heroic Inspiration may be spent on it,
 and should be.
 
-- **The DC is 18** with one tell, and **15** with two or more — and the Wept's is 15
+- **The DC is 18** with one tell, and **15** with two or more. The Wept's is 15
   whenever she has 2 or more Delay, whatever tells have been seen.
 - **Success:** the Fracture lands in full, as the block says, and that Uninvited
   gains **2 Delay**.
 - **Failure by 4 or less:** it lands in full, and that Uninvited gains **2 Delay**, at a
-  cost — the Uninvited answers first, with
+  cost: the Uninvited answers first, with
   one attack against the speaker (rolled in the open; "Down, Not Out" holds) or one
   word the speaker will carry for the rest of their life. The DM chooses which.
 - **Failure by 5 or more:** it doesn't land and isn't spent. The Uninvited acts
-  against the speaker, or the scene around them gets worse — the DM chooses. It can be
+  against the speaker, or the scene around them gets worse; the DM chooses. It can be
   tried again once the party has witnessed a new tell.
 - **Each Fracture works once.** The full rule is in chapter V (see chapter V, "The
   Fractures").
@@ -280,7 +279,7 @@ shadow and is gone for the rest of that Movement, and steel drawn on it is still
 ball (see chapter IV, "The Palace on Alert"). Asked whom it serves, it names nobody, and
 looks round, briefly, for the master it is supposed to have.
 
-> **Wants.** Nothing. It has an order — keep the three from being interrupted — and
+> **Wants.** Nothing. It has an order, to keep the three from being interrupted, and
 > if asked what the order is, it repeats it word for word.
 > **Tells.** *Before midnight:* holds a cup for someone who never takes it; stops
 > in front of a crystal wall and watches the light for a full minute;
@@ -337,8 +336,8 @@ blade uses this before it uses steel, and only somewhere a guard can't see.
 > **Wants.** Vorlain safe, sober and unrecorded; the missing year left buried; the
 > house's name out of anybody's mouth.
 > **Tells.** Stands a few paces off Vorlain, never quite with him, and closes a step
-> whenever a Draunel laughs. Admires your mask from the side of you nearest Vorlain.
-> Invites you, very warmly, to take the air on the terraces.
+> whenever a Draunel laughs. Admires a character's mask from the side nearest Vorlain,
+> then invites them, very warmly, to take the air on the terraces.
 > **Breaks.** On Essin's word, at once. Without Essin, when half the cousins are down
 > or the fight has drawn a crowd; a Boranis seen brawling at his own chief's ball is
 > the thing they are here to prevent.
@@ -408,7 +407,7 @@ up to half its Speed toward the nearest ward-point without provoking Opportunity
 Attacks and calls out. Four more Boranis Honor Guards arrive at the start of the
 second round after this one, and this guard holds its ground until they come.
 
-> **Wants.** The room held and the offender out of it — detained and expelled, never
+> **Wants.** The room held and the offender out of it: detained and expelled, never
 > killed.
 > **Tells.** Glances at the nearest ward-point before moving; touches the crystal at
 > the belt before releasing it. A guard who turns his back to the palace doors has
@@ -531,8 +530,8 @@ miss.
 > protects. The contract case is chained to its belt.
 > **Breaks.** Calls the withdrawal and means it. A captain who has called a
 > withdrawal will not resume the fight tonight for any inducement, including a
-> better offer. It also shifts for the fires — it contracted for diversions, not
-> for this — and for money honestly offered in front of witnesses.
+> better offer. It also shifts for the fires (it contracted for diversions, not
+> for this) and for money honestly offered in front of witnesses.
 > **Nastier.** *Reform the Line* (1/Day): if the company still has somewhere to
 > withdraw to, every Blade that disengaged this scene returns to the field in good
 > order.
@@ -588,8 +587,8 @@ miss.
 > is how the company works.
 > **Breaks.** When Bloodied it calls the Blades back to the boundary and starts
 > offering terms out loud, still fighting. It surrenders the field the moment the
-> contract is void — payment withdrawn, terms broken by the employer, or the named
-> target gone — says so, and expects to be believed.
+> contract is void (payment withdrawn, terms broken by the employer, or the named
+> target gone), says so, and expects to be believed.
 > **Nastier.** A veteran sergeant: CR 4 (XP 1,100), 78 HP (12d8 + 24), Strength 17
 > (+5 to hit, 7 (1d8 + 3) Slashing damage), three Company Blade attacks, and Hold the Terms recharges each time a Blade falls.
 > *One per four Blades; four in Rekuzan. Card: S3.*
@@ -698,7 +697,7 @@ Advantage against.
 > **Tells.** Lips moving at every name Corval calls. The same good coat
 > wherever Corval goes. The one man in the Audience Hall line not rehearsing a
 > question. The Circle's man, where no guest has any reason to be.
-> **Breaks.** On Callun's word. Without it, when the first knife is Bloodied — they
+> **Breaks.** On Callun's word. Without it, when the first knife is Bloodied; they
 > were hired for pressure, not for this. A knife that breaks drops whatever it has
 > taken and walks back into the crowd like a guest.
 > **Nastier.** The Circle paid for a fourth, and he has been in the service run
@@ -809,7 +808,7 @@ attack roll. *Response:* The duelist makes one Rapier attack against it.
 > anyone seeing him want it.
 > **Tells.** Young men laughing a little too near the wrong people. A cup going over
 > at the wine court, and a sentence about *the missing year* said a little too
-> loudly — the second jostle tonight, and the same duelist.
+> loudly: the second jostle tonight, and the same duelist.
 > **Breaks.** When the challenge is refused in front of witnesses (which is a loss
 > they can't fight past), when Lord Draunel withdraws them, or the first time one of
 > them takes damage; duelists fight for honor, and honor bleeds first.
@@ -864,7 +863,7 @@ damage.
 Rapier. *Response:* He adds 2 to his AC against that attack, possibly causing it to
 miss.
 
-> **Wants.** House Draunel one seat closer to the chieftaincy — tonight if possible,
+> **Wants.** House Draunel one seat closer to the chieftaincy, tonight if possible,
 > patiently if not. By dawn, Vorlain blamed.
 > **Tells.** Polished, obvious, ambitious in the standard noble key. Courting in the
 > Audience Hall line. His young men hearing a succession decree in his silence after
@@ -933,8 +932,8 @@ attack's target instead.
 > **Breaks.** He does not fight to win; he fights to end it quietly. He stops the
 > moment Vorlain is out of reach of whatever he was protecting him from, and he will
 > trade almost anything — a favor, a name, where a body is — for that.
-> **Nastier.** Essin already knows what you said to Vorlain, because a cousin was
-> standing at your elbow when you said it.
+> **Nastier.** Essin already knows what the character said to Vorlain; a cousin was
+> standing at their elbow.
 > *Cast: chapter VII. Cards: S9, S13.*
 
 ---
@@ -1031,7 +1030,7 @@ passages, if they are in reach.
 
 > **Wants.** Out, with the sack. Paid for a burglary, not a war, and entirely clear
 > on the difference.
-> **Tells.** Eyes on the service doors, not on you. A knife that stops watching the
+> **Tells.** Eyes on the service doors, not on the characters. A knife that stops watching the
 > exits is about to bolt. Livery that fits like a borrowed coat.
 > **Breaks.** Drops the sack and runs for the service passages. Will not kill a
 > downed opponent, and will not stand with Tavva past the point she would leave
@@ -1128,7 +1127,7 @@ The target is pushed 5 feet away.
 see. Any grapple or restraint on him ends. He arrives rather than runs; ordinary
 doors, walls and barricades do not reliably hold him. Deep Boranis ward-crystal does.
 
-**Fracture — Despair (once).** Ferocity is useless; you cannot frighten a man who
+**Fracture — Despair (once).** Ferocity is useless; nobody can frighten a man who
 would not much mind ending. *Sincerity* works. See him; name the emptiness truly;
 offer one honest moment of the belonging he was promised; or simply tell him, one
 person to another, that he can stop. On a success he opens his hands and quits the
@@ -1139,9 +1138,9 @@ he goes home before he is called. *(Check and DCs: The Fractures, above.)*
 > **Wants.** To stop. Tonight, only that nobody leaves: he holds the main doors and
 > herds the crowd.
 > **Tells.** *Before midnight:* stands always beside a different exit; answers small
-> talk with devastating flatness — asked if he is enjoying the festival, *"It ends
-> the same whether I do"*; watches the servants who belong to each other — Anha and
-> her kitchen family — with something like hunger. *During the attack:* holds but
+> talk with devastating flatness (asked if he is enjoying the festival: *"It ends
+> the same whether I do"*); watches the servants who belong to each other, Anha and
+> her kitchen family, with something like hunger. *During the attack:* holds but
 > never advances; flinches from ward-fire the way a tired man flinches from being
 > asked to try.
 > **Breaks.** Never. Only the Fracture, the leash, or deep ward-crystal.
@@ -1193,7 +1192,7 @@ damage.
 Bludgeoning damage. Once per turn, when she hits a creature holding a weapon, it
 must succeed on a DC 13 Dexterity saving throw or drop it.
 
-> **Wants.** Proof of Veier — alive, well, *unforced* — carried home in Thenya hands.
+> **Wants.** Proof of Veier (alive, well, *unforced*) carried home in Thenya hands.
 > And if she is a prisoner, Veier out: that was the chief's actual instruction.
 > **Tells.** Asks, with thinning patience, when the delegation will be received. The
 > toast lands on her like a slap. She says nothing to Corval at all, which is worse
@@ -1204,8 +1203,8 @@ must succeed on a DC 13 Dexterity saving throw or drop it.
 > **Nastier.** She is already over the wall, and the slingers are covering her from
 > the garden.
 > *The armor is worn under border wool. Not a snake: a wary ally who can become a fight if the party stands between her and
-> her kinswoman. At the Unmasking she goes toward the east wing, immediately — see
-> chapter V. Cast: chapter VII. Card: S10.*
+> her kinswoman. At the Unmasking she goes toward the east wing, immediately (see
+> chapter V). Cast: chapter VII. Card: S10.*
 
 ---
 
@@ -1426,10 +1425,10 @@ On a success, guilt gets into the errand like grit into a joint. For the rest of
 night he falters at thresholds and looks back: he moves at 20 feet whether or not he
 is Witnessed, he can't use Shadow-Step more than once each minute, and at the
 Crossing he does not break past Master Vell. At a cost, the same, but he answers
-first with one parting blow or word. He does not stop, does not answer, does not
-turn. *(Check and DCs: The Fractures, above.)*
+first with one parting blow or word. He keeps going, never answers, and never
+turns. *(Check and DCs: The Fractures, above.)*
 
-> **Wants.** Veier Nolonaire — and to be seen doing it, because worship must be
+> **Wants.** Veier Nolonaire, and to be seen doing it, because worship must be
 > witnessed to count. He re-stages the kill if nobody saw.
 > **Tells.** *Before midnight:* an antique sign of blessing over the food, in a form
 > Prelate Kovaun recognizes and nobody living uses; lights up when conversation
@@ -1495,7 +1494,7 @@ instead.
 > **Breaks.** She would be horrified to be called a conspirator. She is merely
 > *prepared*. The moment her people's work would be seen as hers, or would draw
 > blood she did not price in, she calls them off and pays whoever makes it go away.
-> **Nastier.** She has already bought what you are trying to sell her.
+> **Nastier.** She has already bought whatever the party is trying to sell her.
 > *Cast: chapter VII. Cards: S7, S12.*
 
 ---
@@ -1525,14 +1524,14 @@ instead.
 guests are killing.
 
 ***Numbers.*** A guard who sees brandished steel whistles, and four more Sect Guards
-arrive within two rounds. The first answer is volume and numbers, not blades.
+arrive within two rounds. They shout and whistle long before they draw.
 
 **Actions**
 
 ***Cudgel.*** *Melee Attack Roll:* +3, reach 5 ft. *Hit:* 4 (1d6 + 1) Bludgeoning
 damage.
 
-> **Wants.** Trouble ended, not a fight won.
+> **Wants.** The trouble ended.
 > **Tells.** Shouting before drawing; closing in pairs; a whistle going up means
 > four more are coming.
 > **Breaks.** Never fights past compliance. A dropped weapon ends it on the spot, and
@@ -1613,8 +1612,8 @@ roll. *Response:* She halves the attack's damage against her.
 > sleeve means a charge is about to fire.
 > **Breaks.** Cornered with no way out, she bargains fast and honestly: names (not
 > her buyers'; she does not know them), the crew's routes, what she saw in the dark.
-> All of it is true. With a way out, she takes it and abandons any prize — including
-> crew — that starts costing blood.
+> All of it is true. With a way out, she takes it and abandons any prize, crew
+> included, that starts costing blood.
 > **Nastier.** She has done this before, in better houses: a third charge (a second
 > *Dark-Burst*), and one more Gallery Knife than the card says.
 > *The armor is worn under Boranis livery. Entirely winnable. At 0 HP she is down, and caught; give the table this one clean
@@ -1655,7 +1654,7 @@ Bludgeoning damage.
 ***Long Knife.*** *Melee Attack Roll:* +5, reach 5 ft. *Hit:* 6 (1d6 + 3) Piercing
 damage.
 
-> **Wants.** Their chief's kinswoman seen with their own eyes — and, since the toast,
+> **Wants.** Their chief's kinswoman seen with their own eyes and, since the toast,
 > brought out.
 > **Tells.** Count the guards on the east side of the court, not the gate. Walk the
 > gallery to the east wing corridor, look at the doors a long moment, walk back; the
@@ -1825,15 +1824,14 @@ cost, she stops, but answers first with one terrible parting blow (rolled in the
 open) or one word. *(Check and DCs: The Fractures, above. A table that lands this
 before Raunu falls has earned ⟨They save Raunu⟩, chapter V.)*
 
-> **Wants.** Raunu Boranis, on the dais, and nothing else until that is done. She has
-> a task, not a body count.
+> **Wants.** Raunu Boranis, on the dais, and nothing else until that is done.
 > **Tells.** *Before midnight:* watches the young pages at the feast a beat too long;
-> leaves a mourner's offering in Elanna's niche in a rite centuries out of date —
-> Mother Sella can say exactly how out of date; lingers at the east wing doors
+> leaves a mourner's offering in Elanna's niche in a rite centuries out of date
+> (Mother Sella can say exactly how out of date); lingers at the east wing doors
 > humming a cradle-song no one living knows; tells a dance partner, kindly, *"You
 > dance like my daughter would have."* *During the attack:* goes still at the sound
 > of a child crying; under the carved tears, the mask is a woman's face. In a fight
-> she does not wind up — she arrives, and whoever is between her and the dais is the
+> she arrives without winding up, and whoever is between her and the dais is the
 > target.
 > **Breaks.** Morale never breaks her. What morale cannot do, her Fracture does.
 > **Nastier.** Late in the attack she grows faster, sloppier, and more human: after
@@ -1848,7 +1846,7 @@ before Raunu falls has earned ⟨They save Raunu⟩, chapter V.)*
 
 *Seven people the night turns on, none of whom a fight card will ever use, and one
 line for the crowd. If a table somehow ends up in a fight with one of them, these
-lines are enough to run it — and each one says why it very probably should not
+lines are enough to run it, and each one says why it should not
 happen. None of them earns XP.*
 
 **Raunu Boranis** — *Medium Humanoid (Human).* AC 12 · HP 40 · Speed 30 ft. He will
@@ -1868,7 +1866,7 @@ on harm to her; cut away.
 
 **Minister Corval** — *Medium Humanoid (Human).* AC 10 · HP 9 · Speed 25 ft. Thin,
 upright, old, magnificent under pressure, and no use at all in a fight. Bribing him
-is **impossible** — no check; tell the players so. Deceiving him about household
+is **impossible**. There is no check; tell the players so. Deceiving him about household
 matters takes a DC 20 Charisma (Deception) check; about anything else he is too tired to check.
 
 **Anha** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. The under-cook. She
@@ -1888,7 +1886,7 @@ reaches her workshop, the table has gone badly wrong somewhere.
 the SRD 5.2.1 **commoner** stat block without its attack. Any
 one of the two hundred: a merchant, a minister's cousin, a festival hire in borrowed
 livery. After midnight, count one in every 5-foot square where the crowd is (see chapter
-V, "Two Hundred People"). A guest a player character kills was seen doing it by
+V, "Two Hundred People"). A guest a character kills was seen doing it by
 somebody, and the inquest hears of it.
 
 ### Master Vell
@@ -1947,7 +1945,7 @@ not do is fail.
 > a while at the river gate in Movement V. Treats the three gray masks with the
 > respect of a man who knows exactly what they cost.
 > **Breaks.** He does not. He leaves.
-> *At the Crossing he holds the Radiant, alone, barely, long enough — with the sword
+> *At the Crossing he holds the Radiant, alone, barely, long enough, with the sword
 > still bound. That is not a fight the dice resolve; chapter V runs it. Cast: chapter
 > VII.*
 
@@ -1958,7 +1956,7 @@ not do is fail.
 ### Crystal Charges
 
 Orthaen crystal holds finished workings, and a **charge** is one of them: a
-consumable magic item, one stored working, released at a touch by anyone — gifted or
+consumable magic item, one stored working, released at a touch by anyone, gifted or
 not, trained or not. Releasing one does not make its bearer a caster.
 
 - **Releasing a charge** takes the Magic action (an action, at a 2014 table), and no
@@ -1970,13 +1968,13 @@ not, trained or not. Releasing one does not make its bearer a caster.
 - **The house and the trade grow larger ones.** The four below the common list are
   *uncommon*, and nobody at the ball grew them with a gift alone. Price: 200 GP, when
   they can be bought at all.
-- **Chancy releases.** When the fiction makes a release uncertain — fumbled in the
-  dark, jostled in a crowd — the bearer makes a DC 13 Charisma check; on a failure,
+- **Chancy releases.** When the fiction makes a release uncertain (fumbled in the
+  dark, jostled in a crowd), the bearer makes a DC 13 Charisma check; on a failure,
   the action is spent and the charge is not.
 - **Near the Uninvited** (within 30 feet of any of the three), every release needs
   that DC 13 Charisma check, and a failure means the light goes out of the crystal and
-  the charge is spent. A charge that is already running — a *Steady Light* carried in,
-  a door already sealed — keeps running; only the release is at risk. Foreshadow this
+  the charge is spent. A charge that is already running (a *Steady Light* carried in,
+  a door already sealed) keeps running; only the release is at risk. Foreshadow this
   the moment a player's clever crystal plan meets it.
 
 **Table X–3: Crystal Charges**
@@ -2004,8 +2002,8 @@ congregation (his Fracture). A player who thinks of that has earned the check.*
 *There is not much, and most of it is somebody else's. Every item below is a choice
 before it is a reward.*
 
-- **Tavva's sack** *(S2, S5).* Rings, a few trophies from B7, and — if she got that
-  far — one or two old soul-crystals from the gallery's case, the kind her buyers
+- **Tavva's sack** *(S2, S5).* Rings, a few trophies from B7, and, if she got that
+  far, one or two old soul-crystals from the gallery's case, the kind her buyers
   have a standing interest in. Worth 2d6 × 25 GP in Rekuzan to a fence, and nothing
   to the table that gives the rings back. In S5, where they came off the fallen,
   giving them back *is* the reward.

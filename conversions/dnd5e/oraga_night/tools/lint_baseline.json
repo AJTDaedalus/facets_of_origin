@@ -1,109 +1,46 @@
 {
- "hard": {
-  "01_Overture.md": {
-   "conversion_talk": {
-    "The source": 1,
-    "the original": 4,
-    "the source": 1,
-    "this edition": 2
-   },
-   "designers_note": {
-    "Designer's note": 1
-   }
-  },
-  "05_The_Longest_Night.md": {
-   "conversion_talk": {
-    "New in this edition": 2,
-    "this edition": 1
-   },
-   "narrator_voice": {
-    "The module would": 1,
-    "the module notes": 1
-   }
-  },
-  "07_Cast_of_the_Ball.md": {
-   "conversion_talk": {
-    "The source": 1,
-    "this edition": 1
-   },
-   "narrator_voice": {
-    "the module has spent": 1,
-    "the module notes": 2,
-    "the module suggests": 1
-   }
-  },
-  "08_Handouts.md": {
-   "designer_we": {
-    "we": 1
-   }
-  },
-  "09_The_Snakes.md": {
-   "conversion_talk": {
-    "This edition": 1,
-    "the source": 2
-   },
-   "narrator_voice": {
-    "Honest note": 1,
-    "Honest warning": 1,
-    "The module would": 1,
-    "the module notes": 1
-   },
-   "pcs": {
-    "PCs": 1
-   }
-  },
-  "10_Bestiary.md": {
-   "conversion_talk": {
-    "the original": 1
-   }
-  },
-  "README.md": {
-   "conversion_talk": {
-    "this edition": 1
-   }
-  }
- },
+ "hard": {},
  "soft": {
   "01_Overture.md": {
-   "emdash_per_k": 5.95,
-   "long_paras": 1,
-   "long_sentence_pct": 6.1,
-   "mean_wps": 14.57,
-   "not_but": 10,
-   "perhaps": 0,
-   "player_character": 4,
-   "rhetorical": 0,
-   "sentences": 323,
-   "the_players": 11,
-   "words": 4707,
-   "you": 41
-  },
-  "02_The_World_and_the_Night.md": {
-   "emdash_per_k": 16.78,
-   "long_paras": 8,
-   "long_sentence_pct": 8.56,
-   "mean_wps": 14.9,
-   "not_but": 7,
-   "perhaps": 1,
-   "player_character": 7,
-   "rhetorical": 2,
-   "sentences": 280,
-   "the_players": 2,
-   "words": 4172,
-   "you": 58
-  },
-  "03_Masks_and_Agendas.md": {
-   "emdash_per_k": 8.79,
+   "emdash_per_k": 1.93,
    "long_paras": 0,
-   "long_sentence_pct": 7.09,
-   "mean_wps": 14.8,
-   "not_but": 3,
+   "long_sentence_pct": 4.61,
+   "mean_wps": 14.24,
+   "not_but": 9,
    "perhaps": 0,
    "player_character": 1,
    "rhetorical": 0,
-   "sentences": 123,
+   "sentences": 327,
    "the_players": 0,
-   "words": 1820,
+   "words": 4655,
+   "you": 40
+  },
+  "02_The_World_and_the_Night.md": {
+   "emdash_per_k": 1.69,
+   "long_paras": 0,
+   "long_sentence_pct": 6.62,
+   "mean_wps": 14.22,
+   "not_but": 5,
+   "perhaps": 1,
+   "player_character": 0,
+   "rhetorical": 2,
+   "sentences": 291,
+   "the_players": 0,
+   "words": 4137,
+   "you": 58
+  },
+  "03_Masks_and_Agendas.md": {
+   "emdash_per_k": 0.55,
+   "long_paras": 0,
+   "long_sentence_pct": 5.52,
+   "mean_wps": 14.25,
+   "not_but": 1,
+   "perhaps": 0,
+   "player_character": 1,
+   "rhetorical": 0,
+   "sentences": 127,
+   "the_players": 0,
+   "words": 1810,
    "you": 44
   },
   "04_The_Ball.md": {
@@ -121,116 +58,116 @@
    "you": 21
   },
   "05_The_Longest_Night.md": {
-   "emdash_per_k": 15.02,
-   "long_paras": 16,
-   "long_sentence_pct": 11.17,
-   "mean_wps": 16.86,
-   "not_but": 17,
+   "emdash_per_k": 3.43,
+   "long_paras": 0,
+   "long_sentence_pct": 6.5,
+   "mean_wps": 14.78,
+   "not_but": 15,
    "perhaps": 0,
-   "player_character": 33,
-   "rhetorical": 2,
-   "sentences": 683,
-   "the_players": 16,
-   "words": 11515,
-   "you": 29
+   "player_character": 7,
+   "rhetorical": 0,
+   "sentences": 769,
+   "the_players": 0,
+   "words": 11364,
+   "you": 24
   },
   "06_Aftermath.md": {
-   "emdash_per_k": 6.89,
+   "emdash_per_k": 0.99,
    "long_paras": 0,
-   "long_sentence_pct": 4.05,
-   "mean_wps": 14.31,
+   "long_sentence_pct": 3.95,
+   "mean_wps": 13.9,
    "not_but": 2,
    "perhaps": 0,
    "player_character": 0,
-   "rhetorical": 2,
-   "sentences": 71,
-   "the_players": 1,
-   "words": 1016,
-   "you": 9
+   "rhetorical": 0,
+   "sentences": 73,
+   "the_players": 0,
+   "words": 1015,
+   "you": 6
   },
   "07_Cast_of_the_Ball.md": {
-   "emdash_per_k": 13.4,
-   "long_paras": 7,
-   "long_sentence_pct": 6.01,
-   "mean_wps": 14.78,
+   "emdash_per_k": 3.67,
+   "long_paras": 0,
+   "long_sentence_pct": 4.46,
+   "mean_wps": 14.21,
    "not_but": 8,
    "perhaps": 0,
-   "player_character": 2,
+   "player_character": 0,
    "rhetorical": 0,
-   "sentences": 500,
+   "sentences": 518,
    "the_players": 1,
-   "words": 7390,
-   "you": 5
+   "words": 7360,
+   "you": 3
   },
   "08_Handouts.md": {
-   "emdash_per_k": 14.97,
+   "emdash_per_k": 7.81,
    "long_paras": 0,
-   "long_sentence_pct": 3.21,
-   "mean_wps": 10.8,
+   "long_sentence_pct": 3.12,
+   "mean_wps": 10.36,
    "not_but": 1,
    "perhaps": 1,
    "player_character": 1,
-   "rhetorical": 2,
-   "sentences": 167,
-   "the_players": 1,
-   "words": 1804,
-   "you": 12
+   "rhetorical": 1,
+   "sentences": 173,
+   "the_players": 0,
+   "words": 1792,
+   "you": 13
   },
   "09_The_Snakes.md": {
-   "emdash_per_k": 9.34,
-   "long_paras": 11,
-   "long_sentence_pct": 5.81,
-   "mean_wps": 13.82,
-   "not_but": 16,
-   "perhaps": 1,
-   "player_character": 66,
+   "emdash_per_k": 7.2,
+   "long_paras": 0,
+   "long_sentence_pct": 5.76,
+   "mean_wps": 13.71,
+   "not_but": 15,
+   "perhaps": 0,
+   "player_character": 3,
    "rhetorical": 1,
-   "sentences": 1224,
-   "the_players": 4,
-   "words": 16910,
-   "you": 43
+   "sentences": 1226,
+   "the_players": 2,
+   "words": 16805,
+   "you": 16
   },
   "10_Bestiary.md": {
-   "emdash_per_k": 11.09,
+   "emdash_per_k": 3.18,
    "long_paras": 1,
-   "long_sentence_pct": 8.33,
-   "mean_wps": 16.18,
-   "not_but": 4,
+   "long_sentence_pct": 7.07,
+   "mean_wps": 15.8,
+   "not_but": 3,
    "perhaps": 0,
-   "player_character": 1,
+   "player_character": 0,
    "rhetorical": 0,
-   "sentences": 156,
+   "sentences": 159,
    "the_players": 1,
-   "words": 2524,
+   "words": 2512,
    "you": 2
   },
   "11_Pregenerated_Characters.md": {
-   "emdash_per_k": 11.16,
+   "emdash_per_k": 1.56,
    "long_paras": 0,
-   "long_sentence_pct": 3.72,
-   "mean_wps": 11.48,
+   "long_sentence_pct": 2.43,
+   "mean_wps": 11.23,
    "not_but": 2,
    "perhaps": 0,
-   "player_character": 2,
-   "rhetorical": 6,
-   "sentences": 281,
+   "player_character": 1,
+   "rhetorical": 5,
+   "sentences": 286,
    "the_players": 0,
-   "words": 3226,
+   "words": 3213,
    "you": 1
   },
   "README.md": {
-   "emdash_per_k": 10.63,
-   "long_paras": 2,
-   "long_sentence_pct": 6.0,
-   "mean_wps": 18.41,
-   "not_but": 1,
+   "emdash_per_k": 1.19,
+   "long_paras": 0,
+   "long_sentence_pct": 3.85,
+   "mean_wps": 17.46,
+   "not_but": 0,
    "perhaps": 0,
-   "player_character": 1,
+   "player_character": 0,
    "rhetorical": 0,
-   "sentences": 46,
+   "sentences": 48,
    "the_players": 0,
-   "words": 847,
-   "you": 5
+   "words": 838,
+   "you": 3
   }
  },
  "structure": {},

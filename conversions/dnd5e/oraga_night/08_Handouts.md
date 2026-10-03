@@ -2,7 +2,7 @@
 
 *The first two pages are yours: the whole night on two sheets. The third is the palace.
 After those come the Snake Tracker, where everyone stands and the rumor table, then the
-handouts for the players. Print the first three pages and run the night from them.*
+handouts for the table. Print the first three pages and run the night from them.*
 
 ---
 
@@ -25,8 +25,8 @@ handouts for the players. Print the first three pages and run the night from the
 | 4:00 | **VII. Longest Night** (40) | Fire, rescue, the gate; **then** the last bell (at the latest, S3's bell clock); word of other attacks with the sect guard | — | — | **S3** · S12 · S13 · S5 · S14 |
 | 4:40 | **Epilogue** (10) | Ch. V read-aloud; *what do you carry out?*; **5th level** | | | |
 
-**Checkpoints:** the toast by **2:15**; midnight by **3:15**. Behind? Cut B13, spare
-Undercurrents, a second card per Movement, S1 — and the east wing only if nobody
+**Checkpoints:** the toast by **2:15**; midnight by **3:15**. If you are behind, cut B13,
+spare Undercurrents, a second card per Movement, S1, and the east wing only if nobody
 carries Agenda 4. Never the gate.
 
 **Table VIII–2: Midnight — Who Goes Where**
@@ -53,7 +53,7 @@ carries Agenda 4. Never the gate.
 
 **The pillars.** Raunu falls, by his own choice · Veier and Vell go out through the
 river gate · the Uninvited leave no trace · no one is ever charged · **the heir stays
-secret** — no faction learns of the child unless a player character tells them.
+secret**: no faction learns of the child unless a player character tells them.
 
 ### Page Two: Rules, DCs and Costs
 
@@ -115,7 +115,7 @@ secret** — no faction learns of the child unless a player character tells them
 | Deceive Corval about the household · bribe him | 20 Charisma (Deception) · impossible |
 | Deceive Raunu · move Vell | 25 Charisma (Deception) · 25 Charisma (Deception, Intimidation, or Persuasion) |
 
-**Table VIII–4: Costs to Hand** *(a near miss — name the cost first; the thing still
+**Table VIII–4: Costs to Hand** *(a near miss: name the cost first, and the thing still
 arrives)*
 
 | d6 | The cost |
@@ -170,15 +170,15 @@ lines are the service passages, which thread the whole palace.*
 
 **Rooms the text does not place:**
 
-- **B6. The Chapel** — a public room; Mother Sella's, all night.
-- **B7. The Trophy Gallery** — the private palace, off the gallery corridor.
-- **B8. Raunu's Study** — the second floor, in the dark wing.
-- **B10. Kitchens & Service Passages** — the passages reach every part of the palace,
+- **B6. The Chapel.** A public room; Mother Sella's, all night.
+- **B7. The Trophy Gallery.** The private palace, off the gallery corridor.
+- **B8. Raunu's Study.** The second floor, in the dark wing.
+- **B10. Kitchens & Service Passages.** The passages reach every part of the palace,
   the east wing and the garden stair included. The one open door off B2 at midnight
   (S11) leads into them.
-- **B11. The Root of the House** — kitchens → wine cellar → the lower cellar stair →
+- **B11. The Root of the House.** Kitchens → wine cellar → the lower cellar stair →
   a sealed seam in the far wall (Undercurrent A).
-- **B13. The Room You Put Here** — off the lower gallery; reachable from B7 and from
+- **B13. The Room You Put Here.** Off the lower gallery; reachable from B7 and from
   the service run.
 
 ---
@@ -235,7 +235,7 @@ the half-bell in Movement V (S10). So the only card live in the dark by default 
 
 ## Rumors at the Ball *(DM table)*
 
-*Roll 2d6 in any social scene, or choose — the 2d6 is deliberate: the common rumor
+*Roll 2d6 in any social scene, or choose. The 2d6 is deliberate: the common rumor
 comes up most. Every rumor is delivered with total confidence. None is confirmed.
 Several cannot all be true, which bothers nobody telling them.*
 
@@ -343,7 +343,7 @@ sister.
 *Give this page to every player whose character carries a crystal charge.*
 
 Orthaen crystal holds finished workings, and a **charge** is one of them: a
-consumable magic item, one stored working, released at a touch by anyone — gifted or
+consumable magic item, one stored working, released at a touch by anyone, gifted or
 not, trained or not. Releasing one does not make its bearer a caster.
 
 - **Releasing a charge** takes the Magic action (an action, at a 2014 table), and no
@@ -352,8 +352,8 @@ not, trained or not. Releasing one does not make its bearer a caster.
   with the Orthaen Gift can grow one in a day of downtime from 25 GP of raw crystal,
   one at a time, and no more than one a week: a gift is not a mint (see chapter III).
   Price: 50 GP, which is a season's wages in the wrong district.
-- **Chancy releases.** When the fiction makes a release uncertain — fumbled in the
-  dark, jostled in a crowd — the bearer makes a DC 13 Charisma check; on a failure,
+- **Chancy releases.** When the fiction makes a release uncertain (fumbled in the
+  dark, jostled in a crowd), the bearer makes a DC 13 Charisma check; on a failure,
   the action is spent and the charge is not.
 - Some things at this ball smother a charge; the DM will tell you.
 

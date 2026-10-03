@@ -12,22 +12,22 @@ Tell the table as much of this as their characters would live to see. It is the
 record, and it is what history keeps.
 
 - **The fires are out by dawn.** The sect guard seals the palace with the guests inside
-  it until midday and takes testimony. The inquest is run jointly — a Draunel captain,
-  a Church notary, a Circle observer — which makes it three inquests wearing one coat.
+  it until midday and takes testimony. The inquest is run jointly by a Draunel captain,
+  a Church notary and a Circle observer, which makes it three inquests wearing one coat.
   The notary holds the only pen in the room, and the testimony is *edited in real
-  time*: a player who asks to have their statement read back will hear it subtly
+  time*: a character who asks to have their statement read back will hear it subtly
   improved.
 - **Everyone blames a rival.** Draunel wants Vorlain guilty. The Circle wants a foreign
   trade rival, and the Phern guests spend an ugly morning under suspicion. The Church
-  wants the file closed and the mists unmentioned. Vorlain — chief now in everything
-  but ceremony, visibly afraid, and the prime suspect — wants a culprit, any culprit,
+  wants the file closed and the mists unmentioned. Vorlain is chief now in everything
+  but ceremony, visibly afraid, and the prime suspect. He wants a culprit, any culprit,
   convicted fast.
 - **The file closes the way history does.** The inquest names "agents unknown, likely
   Mazaaian," which everyone knows is false and everyone swears to. **No one is ever
   charged.**
 - **The pregnancy never gets out.** The midwife is simply gone by dawn, never found.
   The skeleton staff hold the silence they were paid for. The record says a vanished
-  *bride*, never a vanished *heir*. Players who reached the east wing hold a truth that
+  *bride*, never a vanished *heir*. Characters who reached the east wing hold a truth that
   exists nowhere else in the world: priceless, unprovable, and dangerous in exact
   proportion to who they tell.
 - **The trail goes tidy.** The river gate is unlocked, oiled, recently used. A boat is
@@ -35,7 +35,7 @@ record, and it is what history keeps.
   worth. A night-carter on the west road carried "a factor and his sick daughter" as
   far as the crossroads and remembers the man's cold hands. Then nothing, whatever the
   dice do. Anyone who follows it ends certain of two things: the lady left the palace
-  alive, and whoever took her wanted her safe. Only players who learned the east
+  alive, and whoever took her wanted her safe. Only characters who learned the east
   wing's secret know to count a third passenger.
 - **The house counts itself.** Corval, ruined and dignified, executes the testament
   Raunu swore aloud in the chapel, providing for every servant by name. Anha and the
@@ -61,8 +61,8 @@ gift always has.
 - **Agenda pay:** each agenda's **Pays** line (see chapter II, "The Eight Agendas"):
   Callun's 100 GP, the 30 GP gate fee, the Church's favor, the grandmother's crystal.
 - **Loot:** see chapter X, "The Night's Loot".
-- **The story award:** the answer each player gave to *what does your character carry
-  out of Oraga Night?*
+- **The story award:** the answer each player gave to "What does your character carry
+  out of Oraga Night?"
 
 ## If Your Table Wants More
 
@@ -75,7 +75,7 @@ the play.
   his coin, reporting only to him. He is the only patron in Rekuzan who genuinely
   wants the truth.
 - **The inquest.** Whatever the party did to the snakes in the dark comes to it with
-  them — a captive, a body in a faction's colors, a knife somebody recognizes. Each
+  them: a captive, a body in a faction's colors, a knife somebody recognizes. Each
   faction wants it written down one way. A captured sergeant of the Bought, contract
   case and all, is the best evidence in the city; a bought-out captain who wants to
   know who hired him will help.
@@ -86,15 +86,15 @@ the play.
   the trail.
 - **Otta Vesh,** the finest mask-maker in Rekuzan, keeps a casting-blank of every face
   she has ever fitted. Ask her about the three gray masks: *nobody made them*, nobody
-  in the city would know how, and the material is wrong. That is not a clue that leads
-  anywhere. It is the moment the investigation stops having a suspect and starts
+  in the city would know how, and the material is wrong. It leads nowhere.
+  It is the moment the investigation stops having a suspect and starts
   having a hole in it.
-- **The choice.** Then put the question in front of the players that the whole night
-  has been building: *you know more than the record. What do you do with it?* Sell it,
-  bury it, swear it to Vorlain, carry it east toward the rising mists — that answer is
+- **The choice.** Then put the question in front of the table that the whole night
+  has been building: "You know more than the record. What do you do with it?" Sell it,
+  bury it, swear it to Vorlain, carry it east toward the rising mists. That answer is
   the next act, and it is theirs.
 
-> **Sidebar — Going east.** Sooner or later a good table looks at the mists. The module
+> **Sidebar — Going east.** Sooner or later a good table looks at the mists. The adventure
 > ends at the mist-line on purpose: what waits past the Blackwatch belongs to the deep
 > future of this setting. If your table sails anyway, you are off the map with the
 > module's blessing. The fishermen say the mists are rising again. A campaign that

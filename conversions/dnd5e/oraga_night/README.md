@@ -3,34 +3,38 @@
 *A masquerade adventure compatible with fifth-edition rules (SRD 5.2.1). One night, one
 palace, two hundred masks, every enemy the host has — and three guests nobody invited.*
 
-**Setting:** Rekuzan, capital of the Orthaen, continent of Val'loh — 3164 PG
+**Setting:** Rekuzan, capital of the Orthaen, continent of Val'loh, 3164 PG
+
 **Players:** four characters of **4th level**, fresh or chosen from the five
 pregenerated guests in chapter XI. Every fight is balanced for four; each card has
 lines for three or five characters and for 3rd or 5th level. The night ends at 5th
 level.
+
 **Length:** one session, **4½–5 hours**. Play starts in the street outside the palace
 and ends at dawn (the runtime table is in chapter I)
+
 **Rules:** any fifth-edition core rules; written against the **SRD 5.2.1** and playable
 at a 2014 table. You do not need the Facets of Origin books.
-**Tone:** glamour over a blade — festival splendor and social fencing, with something
+
+**Tone:** glamour over a blade: festival splendor and social fencing, with something
 wrong accumulating underneath, and knives under every table
 
 ---
 
 ## What This Is
 
-House Boranis has been silent for two years. Its chief, Raunu — genius, maniac, or
-both — vanished for a year, returned without explanation, married across tribal lines,
+House Boranis has been silent for two years. Its chief, Raunu (genius, maniac, or
+both), vanished for a year, returned without explanation, married across tribal lines,
 and shut his palace to the world. Now, on the final night of the Oraga harvest
 festival, invitations have gone out for a masquerade ball.
 
 Everyone of importance loathes Raunu Boranis. Nearly all of them will come anyway.
 The Merchant's Circle, the Church, the rival sects, his own brother's house, the Phern
-money, the Thenya who want their kinswoman back — he has invited every enemy he has
+money, the Thenya who want their kinswoman back: he has invited every enemy he has
 into his own house, and every one of them has brought hired steel. The snakes are in
 the chicken pen, and they know it.
 
-The player characters come too — invited, hired, smuggled, or holding an invitation
+The characters come too: invited, hired, smuggled, or holding an invitation
 that was never meant for them. Each carries an agenda into the Crystal Court. None of
 them carries the right one, because the night has an agenda of its own, and at
 midnight three guests keep their masks on.
@@ -38,7 +42,7 @@ midnight three guests keep their masks on.
 This is the fifth-edition conversion of the Facets of Origin module of the same name.
 Same night, same canon, same seven Movements, same spine: the Uninvited cannot be
 beaten, only delayed, and history bends toward the recorded outcome through play. What
-changes is the rules layer, and the snakes — the host's enemies, each with a visible,
+changes is the rules layer, and the snakes: the host's enemies, each with a visible,
 optional, escalating threat line a party can walk into.
 
 ## Contents
@@ -80,7 +84,7 @@ Chapters VII to XI are the book's appendices.
 |---|---|
 | `README.md` | This page — contents, what to read first, license |
 | `STYLE_5e.md` | The house style sheet for the 5e text; the linter in `tools/` checks most of it |
-| `INVENTIONS_5e.md` | Every new fact this edition had to invent, for the setting author's review |
+| `INVENTIONS_5e.md` | Every new fact the 5e text had to invent, for the setting author's review |
 | `flow/` | The visual workflow: `flow.json` (every Movement, scene, fight, branch and ending as nodes and edges), `build_flow_page.py`, its template, and the generated `oraga_night_flow.html` — rebuild with `python3 build_flow_page.py`, never edit the HTML by hand |
 
 ## What to Read First
@@ -96,9 +100,9 @@ Read it when a player goes looking for it.
 
 ## A Note on Secrets
 
-This night is the opening move of a much larger story. The module deliberately does not
-tell you all of it — not to tease you, but because those answers belong to the
-setting's future, and no table needs them to run an unforgettable night. Everything
+This night is the opening move of a much larger story. The module leaves some of it out
+on purpose: those answers belong to the setting's future, and no table needs them to
+run the night. Everything
 required to play every scene is in these pages. No spell on any list opens what the
 module keeps shut.
 
@@ -116,7 +120,9 @@ gifts), the crystal charges, the encounter rules (clocks, "Down, Not Out", "Buyi
 Time" and Delay), how Heroic Inspiration is awarded, and four table rules: one DC
 ladder for the whole night (chapter I), success at a cost on a near miss (chapter I),
 NPCs who make no checks outside a fight (chapter I), and nonlethal blows from any attack,
-ranged and spell attacks included (chapter IX). Every stat block is an
+ranged and spell attacks included (chapter IX).
+
+Every stat block is an
 original creature written in the SRD's format, and none is copied from the SRD. The
 pregenerated characters are built from SRD options; their class-feature text is
 adapted from the SRD. At a 2014 table, a gifted human takes the gift as a bonus feat
