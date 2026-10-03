@@ -251,7 +251,7 @@ ladder. Learn it once here; every chapter prints its DCs against it.
 
 Checks are written the SRD way: `DC 15 Wisdom (Insight)`. Where the source said a
 "knack applies", this edition means the character's proficiency in the fitting skill
-or tool, and a gifted character's gift (Chapter III) gives advantage when the check is
+or tool, and a gifted character's gift (Chapter III) gives Advantage when the check is
 about the thing the gift does.
 
 **Success at a cost.** This night runs on partial wins, and it teaches them early.
@@ -268,9 +268,9 @@ the SRD says: a character either has it or does not, and spends it to reroll one
 immediately after rolling it, keeping the new roll. A character who already has it
 when they earn it again **may give it to another player character who lacks it**.
 Human characters (and every character here is human) begin with it and regain it on a
-long rest — which tonight they will not get. The chapel (B6) is the one place to take
+Long Rest — which tonight they will not get. The chapel (B6) is the one place to take
 a Short Rest, and the only one the ball offers. *At a 2014 table, this is plain
-Inspiration, and it grants advantage instead of a reroll.*
+Inspiration, and it grants Advantage instead of a reroll.*
 
 ## What the Night Pays
 
@@ -347,7 +347,7 @@ wary ally who can become a fight if somebody provokes her.
 ### The Fights, and How to Offer Them
 
 Every fight in this module is visible before it starts and optional once it has.
-But a table that came to play a game with damage dice and initiative should not have
+But a table that came to play a game with damage dice and Initiative should not have
 to go home without touching them, so here is how to put each in front of them without
 pushing.
 
@@ -453,7 +453,7 @@ answers at the table; the honest version of this night is the one where even the
 survivors die not knowing.
 
 That goes for spells, too. A fifth-edition party arrives with tools the original never
-had to answer — *detect thoughts*, *speak with dead*, *zone of truth*, *identify*.
+had to answer — *Detect Thoughts*, *Speak with Dead*, *Zone of Truth*, *Identify*.
 Chapter X says what the obvious ones do against the Uninvited. Nothing on a spell list
 opens anything in *What the Module Never Says* (Chapter II). A spell that would reach
 one of those answers gets rumor, contradiction, and the cold satisfaction of standing
@@ -469,7 +469,7 @@ correcting a player mid-scene costs more than the error did.*
 >
 > They have found a monster and they are going to solve it, because that is what
 > monsters are for in every other game they have played. They will also try the spell
-> list: *banishment*, *hold person*, a lucky crit. Chapter X answers each one.
+> list: *Banishment*, *Hold Person*, a lucky crit. Chapter X answers each one.
 >
 > **Answer one: put the Delay die on the table.** Every Uninvited has a Delay count,
 > and the players can see it (*Buying Time*, Chapter V). Damage buys Delay only in
@@ -504,7 +504,7 @@ correcting a player mid-scene costs more than the error did.*
 > arrives*. A miss by 4 or less is where this lives, and the DM sheet has a table of
 > costs.
 
-> **Troubleshooting — the table rolls initiative on everything**
+> **Troubleshooting — the table rolls Initiative on everything**
 >
 > Somebody frowns at a Circle knife and three players reach for their dice. Initiative
 > is for fights, and in this module a fight starts only when somebody chooses to bare
@@ -513,7 +513,7 @@ correcting a player mid-scene costs more than the error did.*
 > **Answer one: steel is the line.** Until someone draws, it is a conversation, and the
 > conversation runs on checks. Say so: "Nobody has drawn yet. What do you do?"
 >
-> **Answer two: the fight ends on its objective, not on hit points.** Every card has a
+> **Answer two: the fight ends on its objective, not on Hit Points.** Every card has a
 > clock and outs. Read the outs aloud once, at the start, and the table will start
 > reaching for them instead of their dice.
 

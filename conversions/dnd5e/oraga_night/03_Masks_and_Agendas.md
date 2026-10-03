@@ -71,19 +71,19 @@ how it looks, never what it can do.
 
 **Every gift feat gives these two benefits:**
 
-- **Gift Knack.** You have advantage on ability checks about exactly what your gift
+- **Gift Knack.** You have Advantage on ability checks about exactly what your gift
   describes (each gift below says what that is), whether or not you cast anything.
-- **Minor Workings.** You learn one cantrip from the **gift list**: *dancing lights,
-  druidcraft, guidance, light, mage hand, mending, message, minor illusion,
-  prestidigitation, resistance,* or *spare the dying.* Choose Intelligence, Wisdom, or
+- **Minor Workings.** You learn one cantrip from the **gift list**: *Dancing Lights*,
+  *Druidcraft*, *Guidance*, *Light*, *Mage Hand*, *Mending*, *Message*, *Minor Illusion*,
+  *Prestidigitation*, *Resistance*, or *Spare the Dying*. Choose Intelligence, Wisdom, or
   Charisma as its spellcasting ability when you take the feat. The cantrip always shows
   itself the way your people's gift does. If you already know the cantrip you pick, choose
   another from the gift list.
 
 *A rough guide to the old domains, for players who know the Facets edition:* Divination
-→ *guidance*; Warding → *resistance*; Transmutation → *mending* or *prestidigitation*;
-Inscription → *prestidigitation* (a mark, a sigil, a held impression); Illusion →
-*minor illusion*; Light → *light* or *dancing lights*.
+→ *Guidance*; Warding → *Resistance*; Transmutation → *Mending* or *Prestidigitation*;
+Inscription → *Prestidigitation* (a mark, a sigil, a held impression); Illusion →
+*Minor Illusion*; Light → *Light* or *Dancing Lights*.
 
 ---
 
@@ -99,7 +99,7 @@ sets, and able to hold a working. Four in five carry it.
   which is your spellcasting focus for it; you are never without one. Its effect shows
   in the crystal — the light is the stone glowing, the mending is new crystal growing
   across the crack.
-- **Grow a Charge.** Given a day of downtime and 25 gp of raw crystal, you can grow one
+- **Grow a Charge.** Given a day of downtime and 25 GP of raw crystal, you can grow one
   crystal charge from the common list on Player Handout 3 (chapter VIII), one at a time
   and no more than one a week. Your gift alone grows only those; anything larger needs
   a spellcaster's training. There is no downtime during the ball.
@@ -113,7 +113,7 @@ coming from. Nearly all carry it.
 - **Gift Knack.** Checks to sense that danger is coming, or where it is coming from.
 - **Minor Workings.** Your cantrip arrives as a certainty — you know it will work a
   heartbeat before it does.
-- **The Prickle.** You never have disadvantage on Initiative rolls, and when a creature
+- **The Prickle.** You never have Disadvantage on Initiative rolls, and when a creature
   you cannot see is about to attack you, you know which direction it is coming from.
 
 #### Thenya Gift
@@ -127,8 +127,8 @@ because the night has two gifted Thenya in it, and Chapter VII uses this one.
 - **Gift Knack.** Checks to reach, find, or protect someone you love who is in danger.
 - **Minor Workings.** Your cantrip cannot target you or benefit you.
 - **For Them.** When you take this feat, name a creature you love; you may change the
-  name when that changes. Once per long rest, when that creature is within 60 feet of
-  you and would drop to 0 hit points, it drops to 1 instead.
+  name when that changes. Once per Long Rest, when that creature is within 60 feet of
+  you and would drop to 0 Hit Points, it drops to 1 instead.
 
 *(DM: a gifted Thenya character needs your agreement. Not because the feat is strong —
 it is Minor like the rest — but because the whole of it points at another character,
@@ -184,7 +184,7 @@ eye.
   usual 13–15 — the custom protects the conversation, and everyone at this ball is
   someone else tonight.
 
-*Disguise self* and a disguise kit work as written, and at a masquerade they are
+*Disguise Self* and a disguise kit work as written, and at a masquerade they are
 barely necessary.
 
 Let players describe their masks. It matters to nobody and everybody, which is the
@@ -206,11 +206,11 @@ Agenda 4, because Chapter V leans on somebody reaching Veier.
 
 | Guest | People | Class | Gift | Suggested agenda |
 |---|---|---|---|---|
-| **Serane Vaskarin**, the Minor Scion | Orthaen | Bard (College of Lore) | Orthaen — *prestidigitation* | A House's Long Game, or The Prelate's Question |
-| **Pello**, the Factor's Nephew | Phern | Rogue (Thief) | Phern — *guidance* | The Circle's Reckoning, or The Gate at Midnight |
-| **Andra Tessarin**, the Pattern-Keeper | Orthaen | Wizard (Evoker) | Orthaen — *prestidigitation* | The Story of a Lifetime |
+| **Serane Vaskarin**, the Minor Scion | Orthaen | Bard (College of Lore) | Orthaen — *Prestidigitation* | A House's Long Game, or The Prelate's Question |
+| **Pello**, the Factor's Nephew | Phern | Rogue (Thief) | Phern — *Guidance* | The Circle's Reckoning, or The Gate at Midnight |
+| **Andra Tessarin**, the Pattern-Keeper | Orthaen | Wizard (Evoker) | Orthaen — *Prestidigitation* | The Story of a Lifetime |
 | **Dassa**, the House-Blade | Orthaen | Fighter (Champion) | ungifted | The Vanished Servant, or bodyguard to another player character |
-| **Ilesse Kethaun**, the Border Cousin | Orthaen | Cleric (Life Domain) | Orthaen — *resistance* | The Cousin's Errand |
+| **Ilesse Kethaun**, the Border Cousin | Orthaen | Cleric (Life Domain) | Orthaen — *Resistance* | The Cousin's Errand |
 
 Between them: a healer (Ilesse, with Serane behind her), a frontliner (Dassa), a talker
 (Serane), a sneak (Pello), and somebody carrying the whole history of House Boranis in

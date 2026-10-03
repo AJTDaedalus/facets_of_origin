@@ -60,20 +60,20 @@ secret** — no faction learns of the child unless a player character tells them
 **Midnight rules, one line each** *(Chapter V has them in full)*
 
 - **Down, Not Out.** Dropped by an Uninvited or the Attendant, and not their quarry:
-  Unconscious and Stable, no death saves. Anyone within 5 ft. spends an action → up
+  Unconscious and Stable, no Death Saving Throws. Anyone within 5 ft. spends an action → up
   with 1 HP. Still down at the end of the next round → the crowd drags them clear and
   rouses them. First haul-up of the night → Heroic Inspiration. *The last blow on an
   Uninvited:* DC 15 Str or Dex save at the start of its next turn, or pushed 15 ft.
-  (the DM's direction) and Prone.
+  (the DM's direction) and has the Prone condition.
 - **Buying Time.** A Delay die per Uninvited, on the table. Each point = one turn of
   movement lost. A clever trick with the room, the crowd, a door, a lie: DC 13 → 1
   Delay (DC 15 the second time; never a third). A Fracture → 2 Delay. 30+ damage to
   one in a round → 1 Delay. The Attendant's *Clears the Way*: −1 Delay a round.
-- **The Attendant (S14).** *Idle:* rusty, one attack with disadvantage. *Focused*
+- **The Attendant (S14).** *Idle:* rusty, one attack with Disadvantage. *Focused*
   (at the start of its turn, if one of the three in the scene has no Delay): two turns
   a round, and *Put Aside*. **Distract** (action; **one try a round**, no Help): d20 +
   the skill that fits vs **DC 13 Idle / 19 Focused**; +2 for playing it out, +2 for a
-  habit the party has seen (max +4); a repeat has disadvantage and no bonus, never a
+  habit the party has seen (max +4); a repeat has Disadvantage and no bonus, never a
   third time. A success while Focused **breaks its focus** until its next turn (beat
   by 5: it loses that turn too). **Fourth broken focus:** it wanders off. 0 HP: gone
   into the shadow. Say its state aloud: *"It's locked on you" / "It's drifting."*
@@ -88,11 +88,11 @@ secret** — no faction learns of the child unless a player character tells them
 - **Crystal charges** within 30 ft. of an Uninvited: DC 13 Charisma to release, or it
   goes dark and is spent.
 - **Two hundred people.** One guest per 5-ft. square of crowd (AC 10, 4 HP); a
-  damaging area spell hits one guest per square it covers. The crowd is difficult
-  terrain. Each retinue the party talks round at the gate (DC 13 Persuasion) takes one
+  damaging area spell hits one guest per square it covers. The crowd is Difficult
+  Terrain. Each retinue the party talks round at the gate (DC 13 Persuasion) takes one
   Blade off them (Chapter V, *Two Hundred People*).
 - **The gate (S3).** Through the wicket: DC 15 Str (Athletics) to force the bar, DC 13
-  with thieves' tools, a key from a fallen Bought, or climb to the gate-walk (DC 13
+  with Thieves' Tools, a key from a fallen Bought, or climb to the gate-walk (DC 13
   Athletics); the sergeant parleys at the grille. The Blades quit when the sergeant
   falls **or** half are down. The fire clock ticks only on rounds nobody fights or
   talks. Void the contract (DC 13 to the sergeant; with proof, the captain needs no
@@ -108,7 +108,7 @@ secret** — no faction learns of the child unless a player character tells them
 | Identify a masked guest you know / have only heard described | 15 / 20 Wisdom (Insight) |
 | A borrowed invitation at the gate / one with the wrong name on it | 13 / 18 Deception |
 | Slip past a posted guard · a hire's livery and a confident walk · an honest story | 15 Stealth · 10 Deception · 13 Persuasion |
-| A locked door in the private palace · the study's crystal lock | 15 / 18 Dexterity (thieves' tools) |
+| A locked door in the private palace · the study's crystal lock | 15 / 18 Dexterity (Thieves' Tools) |
 | The service passages without a guide (first time only) | 15 Survival |
 | Deceive Corval about the household · bribe him | 20 · impossible |
 | Deceive Raunu · move Vell | 25 · 25 Charisma |
@@ -293,7 +293,7 @@ Agendas"); these cards carry only what the character knows.*
 chief's new decree does before it is proclaimed. The Circle pays for foresight.
 — R.C.*
 *Nothing is written down; the decree lives in Minister Corval's head and two others'.
-Corval cannot be bought.* **Pays:** 100 gp in Circle silver, on delivery.
+Corval cannot be bought.* **Pays:** 100 GP in Circle silver, on delivery.
 
 **2. THE PRELATE'S QUESTION** — *One question, answered honestly, and the Church
 owes you a favor you may spend anywhere: is the man who came back the man who
@@ -320,7 +320,7 @@ crystal, home.
 **6. THE GATE AT MIDNIGHT** — *Triple rates, in old coin, for one small thing: the
 river gate at the bottom of the garden, unlocked at midnight. Not before. No
 questions.*
-*You do not know who paid you.* **Pays:** 30 gp in old coin, already in your purse.
+*You do not know who paid you.* **Pays:** 30 GP in old coin, already in your purse.
 
 **7. THE STORY OF A LIFETIME** — *The mists fall, the silent house opens, the
 vanished chief throws a ball. Every thread knots in that palace tonight. Witness

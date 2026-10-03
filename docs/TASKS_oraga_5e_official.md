@@ -270,7 +270,7 @@ These rules are mechanical, but a worker makes every edit with the linter's hit 
 - **Accept:** lint's role-name rule = 0 hits. The flow page rebuilds. The Facets edition is untouched (`git diff --stat adventures/` is empty).
 - **Time:** 2 × 30 min.
 
-### ☐ T4.2 5.2.1 capitals, spells, items, coin (O1; FRONT-10, BALL-15, NIGHT-12, SNAKES-17, BESTIARY-16, CAST-13)
+### ☑ T4.2 5.2.1 capitals, spells, items, coin (O1; FRONT-10, BALL-15, NIGHT-12, SNAKES-17, BESTIARY-16, CAST-13)
 - **Scope:** every `M/*.md` file.
 - **Rules:** DESIGN §3 rows: *Rules-term capitals*, *Spells*, *Magic items*, *Coin*. Keep "Utilize" (it is 5.2.1). Condition phrasing becomes "has the Prone condition" / "is Unconscious and Stable".
 - **Accept:** lint's lowercase-term and coin rules = 0 hits.

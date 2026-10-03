@@ -41,7 +41,7 @@ default, and most of these people would rather be anywhere else.
   rule in *Down, Not Out* gets it up sooner.
 - **Down, Not Out.** A creature that one of the Uninvited or the Attendant reduces
   to 0 Hit Points, and that is not the Uninvited's quarry, is **Unconscious and
-  Stable** — no death saving throws — and is thrown clear. Anyone within 5 feet can
+  Stable** — no Death Saving Throws — and is thrown clear. Anyone within 5 feet can
   take an action to get it back up with 1 Hit Point, and if nobody does, the crowd
   does within two rounds. The whole rule is printed once, in Chapter V (*Midnight
   Rules*); every block below that uses it says so.
@@ -113,20 +113,20 @@ V, ⟨They trap one of the Uninvited⟩).
 | The table tries | What happens | Where it lives |
 |---|---|---|
 | Damage, a lot of it | Every round the party deals 30 or more damage to one of them, that one gains 1 Delay (never more than 1 a round). At 0 HP they step into the world's shadow and are back at full HP on their next turn; whoever dealt the last blow makes a save or is thrown | *Leashed*; Chapter V, *Buying Time* |
-| *Power word* anything, *disintegrate*, a long fall, drowning, "they're dead now" | They are not. The leash holds their lives | *Leashed* |
-| *Banishment*, *plane shift*, any teleport they didn't choose | The leash pulls them back to where they stood, at once. It landed, so it is 1 Delay | *Leashed* |
-| *Hold person*, *hold monster*, *sleep*, a stunning blow, *hideous laughter* | Their bodies are not their own to lose. Condition immunities; nothing bought | *Held by Something Else* |
-| *Charm person*, *suggestion*, *command*, *dominate*, *calm emotions*, fear of any kind | Their wills are not their own to give. Condition immunities, and compulsion fails; nothing bought | *Held by Something Else* |
-| *Polymorph*, *flesh to stone*, any shape-change | Their shapes are held too; nothing bought | *Held by Something Else* |
-| *Counterspell*, *dispel magic* | They cast no spells. Nothing on them is a spell. The leash is older than the word | — |
-| Grapple, *web*, a net, a pin | The Wept and the Hollow step into the world's shadow and out of the grip: nothing bought. The Radiant can't while he is *Witnessed*: 1 Delay, and he spends his action tearing free | *Shadow-Step*; *Witnessed* |
-| A door, a wall, *arcane lock*, a barricade | Ordinary barriers don't reliably hold them. A new one put in the way at the right moment is a trick like any other: 1 Delay | *Shadow-Step*; Chapter V |
+| *Power Word* anything, *Disintegrate*, a long fall, drowning, "they're dead now" | They are not. The leash holds their lives | *Leashed* |
+| *Banishment*, *Plane Shift*, any teleport they didn't choose | The leash pulls them back to where they stood, at once. It landed, so it is 1 Delay | *Leashed* |
+| *Hold Person*, *Hold Monster*, *Sleep*, a stunning blow, *Hideous Laughter* | Their bodies are not their own to lose. Condition immunities; nothing bought | *Held by Something Else* |
+| *Charm Person*, *Suggestion*, *Command*, *Dominate*, *Calm Emotions*, fear of any kind | Their wills are not their own to give. Condition immunities, and compulsion fails; nothing bought | *Held by Something Else* |
+| *Polymorph*, *Flesh to Stone*, any shape-change | Their shapes are held too; nothing bought | *Held by Something Else* |
+| *Counterspell*, *Dispel Magic* | They cast no spells. Nothing on them is a spell. The leash is older than the word | — |
+| Grapple, *Web*, a net, a pin | The Wept and the Hollow step into the world's shadow and out of the grip: nothing bought. The Radiant can't while he is *Witnessed*: 1 Delay, and he spends his action tearing free | *Shadow-Step*; *Witnessed* |
+| A door, a wall, *Arcane Lock*, a barricade | Ordinary barriers don't reliably hold them. A new one put in the way at the right moment is a trick like any other: 1 Delay | *Shadow-Step*; Chapter V |
 | *Tiny Hut* | Force is not ward-crystal. The dome buys 1 Delay, once tonight. On their next turn the Uninvited it was set against opens it, as they open anything set against them, and the spell ends | Chapter V, *Buying Time* |
-| *Blindness/deafness* | It works until they save at the end of a turn, and *Centuries of Practice* can refuse it outright. While Blinded they can't Shadow-Step, because they must see where they arrive. 1 Delay, the first time on each of them | *Shadow-Step* |
+| *Blindness/Deafness* | It works until they save at the end of a turn, and *Centuries of Practice* can refuse it outright. While they have the Blinded condition, they can't Shadow-Step, because they must see where they arrive. 1 Delay, the first time on each of them | *Shadow-Step* |
 | *Sanctuary* on Raunu or Veier | A ward, not a compulsion, and it holds once: 1 Delay, and then they walk through it and the spell ends | *Held by Something Else* |
 | *Invisibility* on Veier | It works once: **2 Delay** on the Radiant while he casts about for her. Then he finds her anyway | *Witnessed* |
 | *Slow* | 1 Delay, once on each of them. Its half Speed doesn't stack with *Witnessed* or with the Radiant's guilt | Chapter V, *Buying Time* |
-| *Darkness*, a Dark-Burst, doused lanterns | Magical darkness blinds even their darkvision, so they can't Shadow-Step inside it. On the Radiant it also takes away his witnesses: he is faster, not slower. A table that means to deny him his congregation has earned his Fracture check instead | *Witnessed*; his Fracture |
+| *Darkness*, a *Dark-Burst*, doused lanterns | Magical Darkness blinds even their Darkvision, so they can't Shadow-Step inside it. On the Radiant it also takes away his witnesses: he is faster, not slower. A table that means to deny him his congregation has earned his Fracture check instead | *Witnessed*; his Fracture |
 | Steering a palace ward at them | Each ward-point in the palace steers once tonight. Against one of the Uninvited a steered ward holds 1 round: 1 Delay | Chapter V, principle 2 |
 | Turn them, frighten them, make them flee | They are not undead and they are not afraid. The Radiant above all cannot be turned | *Cannot Be Turned* |
 | Just save the saving throw | Three times tonight each of them simply succeeds | *Centuries of Practice* |
@@ -370,7 +370,7 @@ Hit Points is Unconscious and Stable, and wakes in the gatehouse cell without it
 mask or its invitation.
 
 ***Ward-Points.*** The guard knows every ward-point in the palace by heart. Within
-30 feet of one, it can't be surprised and has advantage on Wisdom (Perception)
+30 feet of one, it can't be surprised and has Advantage on Wisdom (Perception)
 checks.
 
 **Actions**
@@ -482,7 +482,7 @@ Slashing damage.
 ***The Read.*** On its first turn on the field the captain makes no attacks. It
 places its Blades (each Blade within 60 feet can use its Reaction to move up to its
 Speed without provoking Opportunity Attacks) and watches who the party protects. For
-the rest of the scene it has advantage on attack rolls against any creature that
+the rest of the scene it has Advantage on attack rolls against any creature that
 shielded, healed or stood in front of someone during that first turn.
 
 ***The Second Clause (1/Day).*** At the start of the round after the party looks
@@ -557,7 +557,7 @@ Slashing damage. Drawn second; the contract case is drawn first.
 ***Hold the Terms (1/Scene).*** The sergeant states the contract's boundary aloud —
 a line on the ground it can see within 60 feet. Every Blade that can hear it can use
 its Reaction to move up to half its Speed toward its own side of that line without
-provoking Opportunity Attacks. Until the scene ends, those Blades have advantage on
+provoking Opportunity Attacks. Until the scene ends, those Blades have Advantage on
 attack rolls against any creature standing on the far side of the line, and none of
 them will cross it.
 
@@ -604,7 +604,7 @@ miss.
 ask things of, and a dead guest answers nothing.
 
 ***Keepers of the Word.*** The written word belongs to the Church. A warden has
-advantage on checks to find anything written, grown or held that a law-abiding house
+Advantage on checks to find anything written, grown or held that a law-abiding house
 should not be keeping, and it takes what it finds.
 
 **Actions**
@@ -622,7 +622,7 @@ DC 12).
 **Reactions**
 
 ***Interpose.*** *Trigger:* A creature the warden can see attacks the Prelate or
-another warden within 5 feet of it. *Response:* The attack roll has disadvantage.
+another warden within 5 feet of it. *Response:* The attack roll has Disadvantage.
 
 > **Wants.** The room filed. Whatever is in it, the Church's, and the Prelate's
 > question answered by what they carry out.
@@ -662,7 +662,7 @@ the moment Rhaza Callun — or anyone who can prove they speak for her — calls
 and it will not fight on for a patron who has plainly stopped paying.
 
 ***Paid Extra.*** The knife deals an extra 3 (1d6) damage to a creature it has
-advantage against.
+Advantage against.
 
 **Actions**
 
@@ -777,7 +777,7 @@ cheerfully.
 damage.
 
 ***Provocation.*** *Wisdom Saving Throw:* DC 12, one creature within 30 feet that can
-hear the duelist. *Failure:* The target has disadvantage on attack rolls against
+hear the duelist. *Failure:* The target has Disadvantage on attack rolls against
 anyone but the duelist until the end of its next turn. A Boranis Cousin's Blade that
 fails this save draws steel, wherever it is standing.
 
@@ -875,11 +875,11 @@ miss.
 
 **Traits**
 
-***Forgettable on Purpose.*** Essin has advantage on Dexterity (Stealth) checks to go
+***Forgettable on Purpose.*** Essin has Advantage on Dexterity (Stealth) checks to go
 unnoticed in a crowd. Deceiving him is DC 20, and he deceives back.
 
 ***Sneak Attack (1/Turn).*** Essin deals an extra 7 (2d6) damage when he hits with a
-Knife and has advantage on the attack roll, or when an ally is within 5 feet of the
+Knife and has Advantage on the attack roll, or when an ally is within 5 feet of the
 target.
 
 **Actions**
@@ -935,12 +935,12 @@ attack's target instead.
 
 ***Numbers First.*** Fewer than four kinsmen will not start a fight: they posture,
 shout and wait for more to arrive. From four up they fight as one mob, and a kinsman
-has advantage on attack rolls against a creature if at least two other kinsmen are
+has Advantage on attack rolls against a creature if at least two other kinsmen are
 within 5 feet of it.
 
 ***An Honest Brawl.*** Nobody here has a weapon worth the name. All damage in the
 brawl is nonlethal: a creature reduced to 0 Hit Points is out of it, bruised,
-Unconscious and Stable, and no one makes death saving throws.
+Unconscious and Stable, and no one makes Death Saving Throws.
 
 **Actions**
 
@@ -950,7 +950,7 @@ kinsman's choice).
 
 ***Harvest Fruit.*** *Ranged Attack Roll:* +3, range 20/60 ft. *Hit:* 1 Bludgeoning
 damage, and the next attack roll against the target before the start of the
-kinsman's next turn has advantage.
+kinsman's next turn has Advantage.
 
 > **Wants.** The seat. The other branch put in its place. Home, eventually, with a
 > story.
@@ -1047,7 +1047,7 @@ When the three's work is finished or lost, or at the last bell of Oraga, he leav
 and nothing holds him.
 
 ***Held by Something Else.*** His will and his shape are not his own to lose. He
-can't be charmed, frightened, put to sleep, compelled, commanded or transformed, and
+can't be Charmed, Frightened, put to sleep, compelled, commanded or transformed, and
 spells and effects that would do any of those simply fail.
 
 ***Centuries of Practice (3/Night).*** If the Hollow fails a saving throw, he can
@@ -1140,7 +1140,7 @@ he goes home before he is called. *(Check and DCs: The Fractures, above.)*
 
 **Traits**
 
-***Border Heritage.*** Maiven has advantage on Wisdom (Insight) checks against
+***Border Heritage.*** Maiven has Advantage on Wisdom (Insight) checks against
 anyone trying to hide their intentions.
 
 ***Thirty Degrees Hotter.*** Once provoked — thwarted to her face, lied to about
@@ -1179,7 +1179,7 @@ must succeed on a DC 13 Dexterity saving throw or drop it.
 ### Pellin Corro
 *The Phern Magnate. Medium Humanoid (Human), Neutral Good*
 
-**AC** 11 · **Initiative** +1 (11), with advantage
+**AC** 11 · **Initiative** +1 (11), with Advantage
 **HP** 13 (3d8)
 **Speed** 30 ft.
 
@@ -1196,7 +1196,7 @@ must succeed on a DC 13 Dexterity saving throw or drop it.
 
 **Traits**
 
-***The Phern Gift.*** Corro can't be surprised, and he has advantage on Initiative
+***The Phern Gift.*** Corro can't be surprised, and he has Advantage on Initiative
 rolls. Tonight the gift is ringing like a struck glass and pointing nowhere.
 
 ***Three Seconds Early.*** When the lights die at midnight, Corro and his Phern
@@ -1225,7 +1225,7 @@ up to its Speed toward him, or toward the way out he is pointing at.
 ### Phern Bodyguard
 *Medium Humanoid (Human), Neutral*
 
-**AC** 15 (chain shirt) · **Initiative** +4 (14), with advantage
+**AC** 15 (chain shirt) · **Initiative** +4 (14), with Advantage
 **HP** 33 (6d8 + 6)
 **Speed** 30 ft.
 
@@ -1243,7 +1243,7 @@ up to its Speed toward him, or toward the way out he is pointing at.
 **Traits**
 
 ***A Prickle Before Danger.*** The bodyguard carries the Phern gift. It can't be
-surprised and has advantage on Initiative rolls.
+surprised and has Advantage on Initiative rolls.
 
 ***Road Guard.*** A crowd is not Difficult Terrain for the bodyguard, and it can move
 through a Medium creature's space by shoving it aside.
@@ -1315,12 +1315,12 @@ stood, at once. When the boat is out of reach — or at the last bell, if it com
 first — he leaves, and nothing holds him.
 
 ***Held by Something Else.*** His will and his shape are not his own to lose. He
-can't be charmed, frightened, put to sleep, compelled, commanded or transformed, and
+can't be Charmed, Frightened, put to sleep, compelled, commanded or transformed, and
 spells and effects that would do any of those simply fail.
 
 ***Cannot Be Turned.*** Nothing turns the Radiant from the hunt. He is not undead and
 he is not afraid. No spell, effect, argument or wound can change his quarry, make him
-retreat, or make him stop: *command*, *suggestion*, *compulsion*, *calm emotions* and
+retreat, or make him stop: *Command*, *Suggestion*, *Compulsion*, *Calm Emotions* and
 every effect like them simply fail. He can only be made to feel. See his Fracture.
 
 ***Centuries of Practice (3/Night).*** If the Radiant fails a saving throw, he can
@@ -1345,7 +1345,7 @@ gutter at this range but hold.
 aren't his allies can see the Radiant and he knows they can, his Speed is halved and
 he can't use Shadow-Step: he slows, he poses, he savors. Nobody sees him in the dark:
 in the unlit corridors after midnight, a pursuer needs a light (a lantern, a candle, a
-Steady Light) for him to be Witnessed. *Witnessed* and his guilt (see his Fracture)
+*Steady Light*) for him to be Witnessed. *Witnessed* and his guilt (see his Fracture)
 don't stack: at their worst he moves at 20 feet, never slower.
 
 **Actions**
@@ -1378,7 +1378,7 @@ from the errand, not by darkness or doubt. What he can be made to do is *feel*. 
 roads, either one:
 - **Deny the congregation.** Douse the lights, empty the room, turn every back, or
   give a performance that makes a player character the better spectacle. A table
-  that does this with a *dark-burst*, a *darkness* spell or a doused lantern has
+  that does this with a *Dark-Burst*, a *Darkness* spell or a doused lantern has
   earned the check; the check itself is Charisma (Performance) or whatever the doing
   of it fits.
 - **Plant the doubt.** A priest, a believer, or anyone armed with his tells,
@@ -1527,11 +1527,11 @@ damage.
 leave, not to win.
 
 ***Sneak Attack (1/Turn).*** Tavva deals an extra 7 (2d6) damage when she hits with a
-Knife and has advantage on the attack roll, or when an ally is within 5 feet of the
+Knife and has Advantage on the attack roll, or when an ally is within 5 feet of the
 target.
 
-***Vanisher.*** Tavva carries two bought crystal charges, a *dark-burst* and a
-*door-seal* (Items of the Night), and spends them only to break contact. Immediately
+***Vanisher.*** Tavva carries two bought crystal charges, a *Dark-Burst* and a
+*Door-Seal* (Items of the Night), and spends them only to break contact. Immediately
 after one fires, she and every Gallery Knife within 10 feet of her can move up to
 their Speed without provoking Opportunity Attacks, and are simply elsewhere. A
 creature that can see Tavva when the charge fires can use its Reaction to move with
@@ -1574,7 +1574,7 @@ between blows.
 > All of it is true. With a way out, she takes it and abandons any prize — including
 > crew — that starts costing blood.
 > **Nastier.** She has done this before, in better houses: a third charge (a second
-> *dark-burst*), and one more Gallery Knife than the card says.
+> *Dark-Burst*), and one more Gallery Knife than the card says.
 > *Entirely winnable. At 0 HP she is down, and caught; give the table this one clean
 > victory with both hands. The midnight attack is nothing to do with her. Cast:
 > Chapter VII. Cards: S2, S5.*
@@ -1601,8 +1601,8 @@ between blows.
 
 **Traits**
 
-***Holding Ground.*** The slinger has advantage on saving throws against being pushed
-or knocked Prone.
+***Holding Ground.*** The slinger has Advantage on saving throws against being pushed
+or given the Prone condition.
 
 ***Stones Before Steel.*** In a hall full of knives worn as dress, a sling is the one
 weapon nobody at this ball wears for show. The slinger uses it first, and aims at
@@ -1651,14 +1651,14 @@ damage.
 
 ***Brief and Efficient.*** Once per turn, Vorlain deals an extra 7 (2d6) damage with
 a Blade attack against a creature that hasn't yet taken a turn in this combat, or
-that is Grappled or Prone. It is how two cousins died in 3160, and nobody who was
+that has the Grappled or Prone condition. It is how two cousins died in 3160, and nobody who was
 there has forgotten it.
 
 ***Collects Weakness.*** After a minute of conversation with a creature, Vorlain
 knows one thing it would rather he did not.
 
 ***In His Cups.*** Drunk — which takes real work, and Essin will try to stop it —
-Vorlain has disadvantage on Wisdom saving throws and Wisdom (Insight) checks, and
+Vorlain has Disadvantage on Wisdom saving throws and Wisdom (Insight) checks, and
 says one true thing (Chapter VII).
 
 **Actions**
@@ -1725,7 +1725,7 @@ where she stood, at once. When the three's work is finished or lost, or at the l
 bell of Oraga, she leaves, and nothing holds her.
 
 ***Held by Something Else.*** Her will and her shape are not her own to lose. She
-can't be charmed, frightened, put to sleep, compelled, commanded or transformed, and
+can't be Charmed, Frightened, put to sleep, compelled, commanded or transformed, and
 spells and effects that would do any of those simply fail.
 
 ***Centuries of Practice (3/Night).*** If the Wept fails a saving throw, she can
@@ -1875,7 +1875,7 @@ back. *"An inheritance."* He never touches it and never unwraps it, and this blo
 does not give it numbers. What it would do unwrapped is in Chapter VII, for the DM
 alone.
 
-***Beyond Reach.*** Vell can't be grappled, restrained, charmed, frightened or held
+***Beyond Reach.*** Vell can't be Grappled, Restrained, Charmed, Frightened or held
 against his will, and no door, lock or ward in the palace keeps him on one side of
 it.
 
@@ -1926,7 +1926,7 @@ not, trained or not. Releasing one does not make its bearer a caster.
   the action is spent and the charge is not.
 - **Near the Uninvited** (within 30 feet of any of the three), every release needs
   that DC 13 Charisma check, and a failure means the light goes out of the crystal and
-  the charge is spent. A charge that is already running — a Steady Light carried in,
+  the charge is spent. A charge that is already running — a *Steady Light* carried in,
   a door already sealed — keeps running; only the release is at risk. Foreshadow this
   the moment a player's clever crystal plan meets it.
 
@@ -1936,16 +1936,16 @@ not, trained or not. Releasing one does not make its bearer a caster.
 
 | Charge | Rarity | When released |
 |---|---|---|
-| **Steady Light** | Common | The crystal sheds Bright Light in a 20-foot radius and Dim Light for a further 20 feet for 1 hour. |
-| **A Sealed Door** | Common | One door, lid or window you touch, no more than 10 feet across, grows shut for 1 hour. Forcing it is a DC 15 Strength (Athletics) check; your touch opens it. |
-| **A Veil of Quiet** | Common | For 10 minutes, no sound made within 10 feet of the crystal can be heard beyond that distance. Sound from outside still comes in. |
-| **A Chime at a Threshold** | Common | Set on a doorway or gap up to 20 feet wide. For 8 hours, when a Tiny or larger creature crosses it, the crystal chimes, audibly, within 60 feet. |
-| **Warmth** | Common | For 8 hours the bearer is comfortable in cold down to a hard frost, and has Advantage on saving throws against extreme cold. |
-| **A Held Image** | Common | The crystal shows the still, silent image its grower set in it — up to a 5-foot cube — for 1 minute. |
-| **House Flare** | Uncommon | Bright Light fills a 30-foot Emanation from the crystal until the end of your next turn. Nothing in it can benefit from the Invisible condition or take the Hide action. *(The honor guard's.)* |
-| **House Seal** | Uncommon | One door within 30 feet swings shut and grows closed until the scene ends. Forcing it is a DC 20 Strength (Athletics) check. *(The honor guard's.)* |
-| **Dark-Burst** | Uncommon | Magical Darkness fills a 15-foot-radius Sphere centered on the crystal for 1 minute. Darkvision can't see through it, and nonmagical light can't illuminate it. *(Tavva's.)* |
-| **Door-Seal** | Uncommon | One door within 30 feet slams and grows shut for 1 minute. Forcing it is a DC 18 Strength (Athletics) check. *(Tavva's.)* |
+| *Steady Light* | Common | The crystal sheds Bright Light in a 20-foot radius and Dim Light for a further 20 feet for 1 hour. |
+| *A Sealed Door* | Common | One door, lid or window you touch, no more than 10 feet across, grows shut for 1 hour. Forcing it is a DC 15 Strength (Athletics) check; your touch opens it. |
+| *A Veil of Quiet* | Common | For 10 minutes, no sound made within 10 feet of the crystal can be heard beyond that distance. Sound from outside still comes in. |
+| *A Chime at a Threshold* | Common | Set on a doorway or gap up to 20 feet wide. For 8 hours, when a Tiny or larger creature crosses it, the crystal chimes, audibly, within 60 feet. |
+| *Warmth* | Common | For 8 hours the bearer is comfortable in cold down to a hard frost, and has Advantage on saving throws against extreme cold. |
+| *A Held Image* | Common | The crystal shows the still, silent image its grower set in it — up to a 5-foot cube — for 1 minute. |
+| *House Flare* | Uncommon | Bright Light fills a 30-foot Emanation from the crystal until the end of your next turn. Nothing in it can benefit from the Invisible condition or take the Hide action. *(The honor guard's.)* |
+| *House Seal* | Uncommon | One door within 30 feet swings shut and grows closed until the scene ends. Forcing it is a DC 20 Strength (Athletics) check. *(The honor guard's.)* |
+| *Dark-Burst* | Uncommon | Magical Darkness fills a 15-foot-radius Sphere centered on the crystal for 1 minute. Darkvision can't see through it, and nonmagical light can't illuminate it. *(Tavva's.)* |
+| *Door-Seal* | Uncommon | One door within 30 feet slams and grows shut for 1 minute. Forcing it is a DC 18 Strength (Athletics) check. *(Tavva's.)* |
 
 *A Dark-Burst released where the Radiant is working counts as denying him the
 congregation (his Fracture). A player who thinks of that has earned the check.*
@@ -1960,7 +1960,7 @@ before it is a reward.*
   have a standing interest in. Worth 2d6 × 25 GP in Rekuzan to a fence, and nothing
   to the table that gives the rings back. In S5, where they came off the fallen,
   giving them back *is* the reward.
-- **Tavva's charges.** Whichever of her *dark-burst* and *door-seal* she has not
+- **Tavva's charges.** Whichever of her *Dark-Burst* and *Door-Seal* she has not
   spent (Table X–3).
 - **The grandmother's soul-crystal** *(Agenda 5).* A lifetime of light in a lattice
   the size of a heart. It is not a magic item in any sense the rules track; it glows

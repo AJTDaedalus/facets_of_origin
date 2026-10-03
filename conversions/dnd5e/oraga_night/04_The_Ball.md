@@ -62,7 +62,7 @@ cast at a guest — two **Boranis Honor Guards** arrive at once, and four more c
 the start of the second round after the first guard is Bloodied (*Call the House*;
 card S4, Chapter IX). They do not fight to hurt.
 They detain and expel, and every blow they land is a knockout blow: a creature they
-reduce to 0 hit points falls unconscious and is Stable, never dying. The offender's
+reduce to 0 Hit Points is Unconscious and Stable, never dying. The offender's
 invitation is void for the rest of the night, and the room remembers their face after
 the Unmasking.
 
@@ -261,7 +261,7 @@ and everyone rehearsing their one question.)*
 the water, ending at a modest iron gate to the river walk — locked, always. Couples,
 conspirators, and anyone needing air. *(Agenda 6 lives here. So does the escape route.
 Know this geography cold — Court → terraces → lower garden → river gate. The
-gate's lock takes a DC 15 Dexterity check using thieves' tools; Agenda 6's player needs no check, having
+gate's lock takes a DC 15 Dexterity check using Thieves' Tools; Agenda 6's player needs no check, having
 been given what they need.)*
 
 **When the party enters the Chapel, read:**
@@ -280,7 +280,7 @@ honor (DC 10 Wisdom (Perception) to notice; DC 13 Intelligence (Religion) to kno
 tending Elanna's niche in a chief's chapel means). Someone in this house has been
 sitting with mortality. *(Quiet scenes, confessions, and Mother Sella. A good place
 for players to catch their breath — and one deniable omen. A character who spends a
-Movement here may take a short rest, which is the only one the ball offers.)*
+Movement here may take a Short Rest, which is the only one the ball offers.)*
 
 ---
 
@@ -295,7 +295,7 @@ nothing in it is guarded the way the east wing is.*
 festival hire's livery and a confident walk make it DC 10 Charisma (Deception); an
 honest story to a guard who has no reason to disbelieve it, DC 13 Charisma
 (Persuasion). Opening a locked door in the private palace takes a DC 15 Dexterity check using
-thieves' tools, unless its entry says otherwise. None of these is ever the only way in.
+Thieves' Tools, unless its entry says otherwise. None of these is ever the only way in.
 
 **B7. The Trophy Gallery.** The house's pride and plunder: banners, weapons, and grown
 crystals taken in old settlements — including a heart-sized soul-crystal of uncommon
@@ -308,7 +308,7 @@ grandmother's crystal off its ward without waking it is DC 18 Dexterity (Sleight
 Hand), DC 13 for anyone who studied the wards first.)*
 
 **B8. Raunu's Study.** Locked, dark wing, second floor (opening it takes a DC 18 Dexterity
-check using thieves' tools; the lock is crystal, not iron). Two years of a genius's solitude, and — players will look
+check using Thieves' Tools; the lock is crystal, not iron). Two years of a genius's solitude, and — players will look
 for papers and find none, because there are none anywhere — the room thinks in
 crystal: instruments nobody can name, a grown relief of the eastern coast on the
 great table with its mist-lines remembered in colored lattice, the recent lines
@@ -487,8 +487,8 @@ This is an honest brawl, and anyone can join it: fists, elbows, harvest fruit,
 someone's ceremonial staff — run it as ordinary 5e combat with one mercy: nobody here
 has a weapon worth the name, so player characters fight with unarmed strikes and
 improvised weapons, and **all damage in the brawl is nonlethal** — anyone dropped to
-0 hit points is simply out of it, bruised, unconscious and stable, and no one makes a
-death saving throw. The one line is the ball's own: **bare steel** turns a scuffle
+0 Hit Points is simply out of it, bruised, Unconscious and Stable, and no one makes a
+Death Saving Throw. The one line is the ball's own: **bare steel** turns a scuffle
 into a scandal and brings guards at a run (see the sidebar "Guards are a scene, not a
 sentence", below). Player characters
 can pick a side, shield the innocent, or end it — hauling the principals apart, a
@@ -596,7 +596,7 @@ diagram).
   Intelligence (Arcana) check to improvise it from ward-study, e.g. Agenda 5's gallery
   work). A failed attempt can be tried again after 10 more minutes at the seam. The
   slate from the study (B8) always works. Brute force is worse than useless: the Root's wards answer — the seam does not
-  so much as scratch, *knock* and similar magic simply fail against it, and the
+  so much as scratch, *Knock* and similar magic simply fail against it, and the
   house's few guards arrive with real fear on their faces — nobody but the master goes
   down there.
 
@@ -635,7 +635,7 @@ gifts.** What an hour in the laboratory yields, in rising order:
   of the gift survive death?* Whether the crystals found an answer, the lattices do
   not legibly say — a few threads in the ribcage glow, very faintly, if no one is
   speaking. Whose bones these are, the module does not know, and the room does not
-  tell; *speak with dead* and every other magic that would ask the bones finds
+  tell; *Speak with Dead* and every other magic that would ask the bones finds
   nothing to answer it. It is the exhibit that shows, more plainly than anything else
   in the laboratory, how far down this road Raunu Boranis was willing to walk. *(Let
   the table sit with it. Then let them notice the observation lattices beside it, and
@@ -666,7 +666,7 @@ that his marriage carried both halves — and that he has spent eight months
 *watching the proof grow.* What the module still does not give: the lattices'
 deeper contents, the name burned from the junction, what the restored gift is or
 does, or what the mists have to do with any of it. No check, spell, or divination
-reaches past that line tonight — *legend lore*, *commune* and their kin return
+reaches past that line tonight — *Legend Lore*, *Commune* and their kin return
 rumor and contradiction, the way the world answers everything else about this
 house. The find is a door left ajar on something vast — and it is also, quietly, why
 rumors 2 through 12 all exist: everyone senses he was *doing something*. Nobody
@@ -778,7 +778,7 @@ and any Orthaen who stands near one feels their own carried crystals go faint an
 quiet. Each clue is deniable. Three together are not. *(These same encounters are
 where Fracture ammunition comes from — the tells are listed with the Fractures in
 Chapter V, and every one of them can be met before midnight. Magic that would read
-them — *detect evil and good*, *detect thoughts*, *zone of truth* — finds three people,
+them — *Detect Evil and Good*, *Detect Thoughts*, *Zone of Truth* — finds three people,
 and nothing that answers the question. See the Uninvited's traits in Chapter X.)*
 
 **The find:** certainty, before midnight, that three guests are impossible — on
@@ -1010,7 +1010,7 @@ with the closing line.
 it failed even when he lets it pass. Impressing him takes no check at all: tell him a
 true thing he did not already know. He turns friendly when the guest tells him a true
 thing he did not know, or sits through the silence without filling it. By default, he
-is friendly with the second summoned character. *Detect thoughts* and every other magic that
+is friendly with the second summoned character. *Detect Thoughts* and every other magic that
 would read him finds a man thinking about a staircase, and nothing else; he has
 prepared for that, too.
 

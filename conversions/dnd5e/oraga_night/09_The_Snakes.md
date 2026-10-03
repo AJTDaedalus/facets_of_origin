@@ -115,14 +115,14 @@ development.*
   the leader drops, and when one is left alone and hurt.
 - **Outs** are the section to read twice. Ending a fight by an out pays the card's
   XP, the same as if every foe had fallen, split evenly across the party (Table I–4).
-  A charm or a *suggestion* that lands is an out too, and the target knows by morning
+  A charm or a *Suggestion* that lands is an out too, and the target knows by morning
   what was done to it.
   <!-- TODO-Q14: XP for walk-away outs (let her go, walk away, go back the way they came, stop interfering) waits on owner ruling Q14 (SNAKES-5). -->
 - **Steel at the ball.** Before midnight, a spell with a visible effect cast at a guest
   counts as bare steel (Chapter IV, *The Palace on Alert*). And at this ball any
   attacker, with a spell or a sling as much as a fist, may say a blow is meant to
   knock out rather than kill. The rules only allow this for melee attacks; here it is
-  a house rule, because nobody wants a guest killed by a *fire bolt* over a seating
+  a house rule, because nobody wants a guest killed by a *Fire Bolt* over a seating
   plan.
 - **Heroic Inspiration** stays the plain 5e rule: you have it or you don't. Each card
   names **one** award at most, and the Table I–3 row it reminds you of (on S14, a
@@ -551,9 +551,9 @@ three, crystal charges gutter (Chapter X, *Items of the Night*).
 **Death before midnight.** The snakes' people fight to pressure, detain, or leave.
 None of them attacks a creature at 0 Hit Points, and a player character who drops in
 a snake fight before the bells is **Stable at once**, and wakes with 1 Hit Point when
-the scene ends. No death saving throws.
+the scene ends. No Death Saving Throws.
 
-**After midnight** damage is lethal as written, and death saving throws apply, but no
+**After midnight** damage is lethal as written, and Death Saving Throws apply, but no
 snake finishes a downed character: they all have somewhere else to be. And the palace
 is full of people (Chapter V, *Down, Not Out*): a character still down at the end of
 the round after they fell, with nobody helping, is dragged clear by a guest or a
@@ -591,7 +591,7 @@ matter. The kinsmen are not the threat; the clock is.
 **The brawl's one mercy.** Nobody here has a weapon worth the name. Player characters
 fight with unarmed strikes and improvised weapons (1d4), all damage is nonlethal, and
 anyone dropped to 0 Hit Points is out of the brawl, bruised, Unconscious and Stable.
-No one makes a death saving throw. **Bare steel voids the whole scene** and brings the
+No one makes a Death Saving Throw. **Bare steel voids the whole scene** and brings the
 honor guard instead: the Palace on Alert, and card S4. A spell with a visible effect,
 cast at a guest, counts as bare steel.
 
@@ -600,10 +600,10 @@ cast at a guest, counts as bare steel.
   creature shoved into one has the Restrained condition until the end of its next
   turn.
 - *The gallery rail* is waist-high over a twelve-foot drop into the Crystal Court. A
-  creature pushed over it takes 1d6 Bludgeoning damage, lands Prone among two hundred
-  guests, and stops being in this scene and starts being in a much worse one.
+  creature pushed over it takes 1d6 Bludgeoning damage, lands among two hundred
+  guests with the Prone condition, and stops being in this scene and starts being in a much worse one.
 - *The noise of two hundred guests* covers almost anything: Dexterity (Stealth) checks
-  here have advantage, and being heard shouting a warning across the gallery is a
+  here have Advantage, and being heard shouting a warning across the gallery is a
   DC 18 Charisma check.
 
 **Tactics.** They open by shoving, not swinging; nobody wants to be the one who drew.
@@ -685,7 +685,7 @@ not a little.
 
 **Terrain as rules.**
 - *The lowered service lamps.* The corridor is Dim Light: everyone in it is Lightly
-  Obscured, and Wisdom (Insight) checks to read a face have disadvantage. Dim light
+  Obscured, and Wisdom (Insight) checks to read a face have Disadvantage. Dim Light
   alone is not enough to Hide; the doorways and the linen crates are.
 - *A Veil of Quiet* released here swallows the sound of blades as well as voices:
   while it lasts, blows struck within 10 feet of the crystal do not tick the noise
@@ -758,7 +758,7 @@ Gatehouse Court, Held", points here.)*
 - *The wicket.* A person-sized door in the left leaf, with its own small grille,
   locked and barred on the street side. It is the way through for a party that means
   to fight: one creature at a time, five feet wide. It opens to a DC 15 Strength
-  (Athletics) check to burst the bar, a DC 13 Dexterity check with thieves' tools
+  (Athletics) check to burst the bar, a DC 13 Dexterity check with Thieves' Tools
   worked through the grille, or a Bought key — every Blade carries one, and a Blade
   who drops against the gate can be searched through the grille with a Utilize
   action. And it opens on a parley (below).
@@ -767,7 +767,7 @@ Gatehouse Court, Held", points here.)*
   runs down from the gate-walk to the street. One Blade holds the top. Climbing the
   court-side face of the gatehouse instead is a DC 13 Strength (Athletics) check, and
   puts a climber on the walk away from him. From the walk it is the outer stair, or a
-  fifteen-foot drop to the street (1d6 Bludgeoning damage, and Prone unless the faller
+  fifteen-foot drop to the street (1d6 Bludgeoning damage and the Prone condition, unless the faller
   makes a DC 13 Dexterity (Acrobatics) check).
 - *Where the Bought stand.* The sergeant at the wicket, where he can read through its
   grille. Three Blades in a loose line across Gate Street, ten feet out from the gate.
@@ -809,8 +809,8 @@ is the most reliable way to kill a table by accident.
   through it does not.
 - *The court's crystal wall, lit.* Bright Light: nobody on the party's side can Hide,
   and the Bought are silhouetted too.
-- *The gatehouse stair.* A creature shoved from the top falls 10 feet (1d6 Bludgeoning,
-  Prone). Attacks from the stair against whoever holds the top have disadvantage.
+- *The gatehouse stair.* A creature shoved from the top falls 10 feet (1d6 Bludgeoning damage
+  and the Prone condition). Attacks from the stair against whoever holds the top have Disadvantage.
 - *The crowd in the court* is Difficult Terrain, and an area spell cast into it
   catches guests (Chapter V, *Two Hundred People*). Other retinues are in that crowd
   too; the same sidebar says what they will do at the gate.
@@ -1024,7 +1024,7 @@ the ground. A quiet word is not supposed to be a fight. What it can cost is a sc
 balustrade is not somewhere else.
 
 **Terrain as rules.** *The balustrade* is waist-high over a ten-foot drop to the next
-terrace (1d6 Bludgeoning, Prone, and out of the scene). *The lanterns* leave pools of
+terrace (1d6 Bludgeoning damage, the Prone condition, and out of the scene). *The lanterns* leave pools of
 Dim Light between them.
 
 **Tactics.** The cousins use *A Quiet Word* and their fists, and they want it quiet.
@@ -1224,7 +1224,7 @@ and the fight plays well under Low. The clock is what the party is racing.
 - *The dark corridor.* Darkness, except the lamplight at the door. Anyone out of the
   light is Heavily Obscured to the wardens; the wardens at the door are in plain view.
 - *The crystal lock* is Boranis work. Reading what the wardens are doing to it, or
-  sealing it against them, is a DC 15 Intelligence (Arcana) check — advantage for the
+  sealing it against them, is a DC 15 Intelligence (Arcana) check — Advantage for the
   Orthaen Gift, and for Agenda 5's ward-student.
 - *Inside the study.* The great table and its relief give Half Cover. A creature shoved
   into the instruments breaks something the module does not explain, and you
@@ -1332,9 +1332,9 @@ down. He will be back; he always has a second way.
 
 **Terrain as rules.**
 - *The balustrade* is waist-high over a ten-foot drop to the next terrace: 1d6
-  Bludgeoning, Prone, and out of the scene.
+  Bludgeoning damage, the Prone condition, and out of the scene.
 - *Lanterns* leave pools of Dim Light between them.
-- *Gravel paths.* Dexterity (Stealth) checks on them have disadvantage.
+- *Gravel paths.* Dexterity (Stealth) checks on them have Disadvantage.
 - *The rail crowd.* Everything that happens here is seen, and a spell with a visible
   effect cast at anyone on the grass counts as bare steel. Draunel himself will not set
   foot on the grass (*Never Seen Wanting It*), and anyone who shames either side does
@@ -1806,7 +1806,7 @@ next round, and the Help action doesn't apply. The table chooses whose trick it 
   midnight: *it stares at worked crystal and light; it keeps a cup and a cloak ready
   for a master who is not there; it follows music that changes.*
 - **Repeats.** A trick already tried on it tonight gets no bonus and has
-  **disadvantage** — it learns. The same trick never works a third time.
+  **Disadvantage** — it learns. The same trick never works a third time.
 
 *Results.*
 - **Success while it is Focused:** its **focus breaks** — it is Idle until the start of

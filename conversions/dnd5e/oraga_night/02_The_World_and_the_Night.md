@@ -141,8 +141,8 @@ terrible enough.
 
 *At the table:* Chapter X gives each of the three a full stat block, and every one of
 them carries the **Leashed** trait — the 5e shape of everything in this section. They
-cast no spells tonight. Their shadow-step is a movement, not a magic a counterspell
-can reach. A 0 on their hit-point track does not end them, but they can be delayed,
+cast no spells tonight. Their shadow-step is a movement, not a magic *Counterspell*
+can reach. A 0 on their Hit Point track does not end them, but they can be delayed,
 and delay is what saves people (*Buying Time*, Chapter V). Read their blocks before
 you run Chapter V.
 
@@ -243,8 +243,8 @@ If a player asks a question that lands on one of these, the world answers the wa
 the world would: with rumor, contradiction, and the cold satisfaction of standing
 at the edge of something vast.
 
-**This holds against spells.** *Detect thoughts* on Vell, *speak with dead* on
-Raunu, *commune*, *legend lore*, a *zone of truth* around a captured Bought captain:
+**This holds against spells.** *Detect Thoughts* on Vell, *Speak with Dead* on
+Raunu, *Commune*, *Legend Lore*, a *Zone of Truth* around a captured Bought captain:
 each returns something true and small, and none of them returns an answer to this
 list. The dead chief keeps the silence he kept alive; the captain truly does not
 know; the pale factor's mind is not a room any caster at this table gets into. Say it the
@@ -296,7 +296,7 @@ festival laborers year-round — one more Raunu policy the great houses will hat
 module invents it here; it dies with its rememberers unless your table saves them.)*
 
 **Pays:** Heroic Inspiration on the spot, and XP by Table I–4. Mistress Callun pays on
-delivery — **100 gp** in Circle silver — and she pays whether or not she likes the
+delivery — **100 GP** in Circle silver — and she pays whether or not she likes the
 answer. *Your patron is a snake: the Merchant's Circle line, Chapter IX.*
 
 ### 2. The Prelate's Question
@@ -382,7 +382,7 @@ rule the payer was scouting for the Uninvited instead; if so, Vell has a second 
 prepared, because he always does.)*
 
 **Pays:** Heroic Inspiration when the gate stands unlocked at midnight, and XP by
-Table I–4. The fee is already in your purse: **30 gp** in coin of an old striking,
+Table I–4. The fee is already in your purse: **30 GP** in coin of an old striking,
 triple a hireling's rate, and nobody at the ball can say whose.
 
 ### 7. The Story of a Lifetime

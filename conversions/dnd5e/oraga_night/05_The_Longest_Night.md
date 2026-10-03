@@ -13,7 +13,7 @@ of the host's enemies with steel out, and a handful of people — the players �
 of choosing anything at all.
 
 > **Beats and rounds.** A beat is a scene-cut, not a unit of time: one player
-> character's moment, then the next. When a beat turns into a fight, roll initiative
+> character's moment, then the next. When a beat turns into a fight, roll Initiative
 > for that fight only and run it in rounds until it ends or the beat cuts away. A
 > fight in one corner of the palace does not stop the clock in another. A beat and a
 > round cost an Uninvited the same thing: one turn. "The Midnight Clock", below, gives
@@ -27,7 +27,7 @@ Three principles:
    character is only ever in mortal danger by choice — which is exactly as it should
    be, because they will choose it. *(In the rules: an Uninvited never targets a
    creature that is not between them and their errand, and a player character one of
-   them drops to 0 hit points does not die — see* Down, Not Out*, below. What they do
+   them drops to 0 Hit Points does not die — see* Down, Not Out*, below. What they do
    to people who get in the way is the Attendant's business, and that is below too.)*
 2. **The palace fights back.** Raunu's two silent years fire tonight: crystal barriers
    sealing corridors, light flooding stairwells, wards flaring over huddled guests.
@@ -40,7 +40,7 @@ Three principles:
    tricks below say how many a room has. On a success, pick one: seal a doorway or
    corridor (it holds until the scene ends against anything but an Uninvited, and against
    an Uninvited for 1 round — **1 Delay**, and a whole round is a hallway); flood a
-   stair or hall with bright light until the scene ends; or raise a ward over up to a dozen
+   stair or hall with Bright Light until the scene ends; or raise a ward over up to a dozen
    huddled guests (they cannot be targeted by the snakes' weapons while they stay under
    it, until the last bell). Tables that found **the Root of the House** (Undercurrent
    A) hold the master valve: from the Root, any ward-point in the palace can be
@@ -71,7 +71,7 @@ And a fourth, for this edition:
 After the lights die, the night runs in this order. This is the one place the order
 is stated; everything else in this chapter points here.
 
-1. **The lights die.** Nobody rolls initiative yet (Movement VI, below).
+1. **The lights die.** Nobody rolls Initiative yet (Movement VI, below).
 2. **The beats begin.** Master Pellin Corro moves first ("Who moves first", below).
 3. **The Wept reaches Raunu** on her third turn of moving toward him, plus one turn
    for each point of Delay spent on her (Table V–1).
@@ -123,12 +123,12 @@ exactly where the text stops:
 
 **He never gets to make the announcement.** That is the sentence the whole ball
 existed for, and it dies in the dark with everything else. Run the opening in
-fixed order, fast. *Nobody rolls initiative yet.* This is the part of the night that
+fixed order, fast. *Nobody rolls Initiative yet.* This is the part of the night that
 happens before anyone can act, and it should feel that way:
 
 1. **The lights die.** Mid-word. Not blown out — *drunk.* Every crystal in the
-   Crystal Court dims at once, as if the walls forgot sunlight. The hall is **dim
-   light** from here on, lit by candles and fire; the corridors are darkness except
+   Crystal Court dims at once, as if the walls forgot sunlight. The hall is **Dim
+   Light** from here on, lit by candles and fire; the corridors are Darkness except
    where a ward flares. (The Uninvited's presence unravels stored spellwork. Any
    player character holding a charged Orthaen crystal feels it go cold and quiet in
    their hand — see sidebar.)
@@ -195,23 +195,23 @@ cards in Chapter IX and the night-tracker in Chapter VIII all point here.*
 #### Down, Not Out
 
 The Uninvited are not here for the party. When one of them reduces anyone but their
-quarry — Raunu for the Wept, Veier for the Radiant — to 0 hit points, that creature
-falls **unconscious and Stable**: no death saving throws, and no death from massive
+quarry — Raunu for the Wept, Veier for the Radiant — to 0 Hit Points, that creature
+is **Unconscious and Stable**: no Death Saving Throws, and no death from massive
 damage. It is thrown clear, through a broken wall or down a stair or into the crowd.
 They are moving it out of the way.
 
 - **Help them up.** Any creature within 5 feet can take an action to rouse a Stable
-  creature. It regains 1 hit point and can stand. No check. A healing spell or a
+  creature. It regains 1 Hit Point and can stand. No check. A healing spell or a
   potion does the same and more, as normal.
 - **The crowd.** The palace is full of people. If a Stable character is still down at
   the end of the next round and nobody has helped, a guest or a servant drags them
-  clear, and they come round with 1 hit point at the start of the round after. Say
+  clear, and they come round with 1 Hit Point at the start of the round after. Say
   who it was. That person is now owed something. Nobody is out for longer than two
   rounds. (Between fights, when the night runs in beats, they are up by the next beat.)
 - **Hauling each other up.** The first time tonight a character hauls an ally to their
   feet after midnight, that character gains Heroic Inspiration, or gives it to a
   companion who has none.
-- **The last blow.** When an Uninvited drops to 0 hit points they step into the
+- **The last blow.** When an Uninvited drops to 0 Hit Points they step into the
   world's shadow and return at the start of their next turn, at full Hit Points, in
   the space where they dropped (or the nearest unoccupied space); the Hollow returns
   within 60 feet of the doors he holds (*Leashed*, Chapter X). At
@@ -297,7 +297,7 @@ in the room is not.
 | d8 | Trick | Check (DC 13; DC 15 the second time) |
 |---|---|---|
 | 1 | **Turn a sconce.** One of the dais's four ward-points, at Raunu's word — he tells you exactly what to touch. Each turns once tonight | Intelligence (Arcana), DC 10 at his side, whatever you studied |
-| 2 | **A charge in her way.** Yours, or a House Seal or House Flare off one of the honor guard where they fell | The DC 13 Charisma check her *Unraveling Presence* already asks for |
+| 2 | **A charge in her way.** Yours, or a *House Seal* or *House Flare* off one of the honor guard where they fell | The DC 13 Charisma check her *Unraveling Presence* already asks for |
 | 3 | **Bring the canopy down** off the high table, on top of her. She is out of it in a moment. The moment is the point | Strength (Athletics) |
 | 4 | **Tip the high table** off the dais and into her line. She goes round | Strength (Athletics) |
 | 5 | **Guests in her path.** Drive a knot of guests across her line. She steps round everyone who is not in her way without looking, and the long way costs her | Charisma (Persuasion or Intimidation), shouted |
@@ -315,7 +315,7 @@ in the room is not.
 | 4 | **Two who belong together.** Walk them past him — Anha's people through the service door, or any two guests holding on to each other. He watches them go, the way he watched them all night | Charisma (Persuasion), to get them moving |
 | 5 | **Another door.** Make the crowd surge at the gallery-side service door. He steps through the shadow to hold it, and for a moment the main doors are nobody's. The people at that door are in his way now; say so first | Charisma (Intimidation or Performance) |
 | 6 | **Hand him something.** He is polite. Give him a cup, a mask, a coat to hold, as one guest to another, and he holds it | Charisma (Persuasion or Deception) |
-| 7 | **House light.** A House Flare released in his face. It is not ward-fire, but it is the house's own light, and he flinches from it the same way | The DC 13 Charisma check his *Unraveling Presence* asks for |
+| 7 | **House light.** A *House Flare* released in his face. It is not ward-fire, but it is the house's own light, and he flinches from it the same way | The DC 13 Charisma check his *Unraveling Presence* asks for |
 | 8 | **The others are going.** Tell him the Wept is finished and they are leaving. He half believes it, and looks east | Charisma (Deception) |
 
 **Table V–4: Room Tricks — the East Wing and the Service Run** *(the Radiant; every
@@ -345,7 +345,7 @@ Crossing; Delay earned here is spent at the gate)*
 | 1 | **Light the stair.** Relight the lanterns down the garden stair, or carry light down it, so he is seen coming | Dexterity, or a charge and the Charisma check |
 | 2 | **The balustrade.** The duel has already smashed the terrace balustrade; push what is left down onto the stair behind you | Strength (Athletics) |
 | 3 | **Through the beds.** Take Veier off the gravel and through the flower beds in the dark. Slower for you, and slower for him | Wisdom (Survival) |
-| 4 | **Shut the river gate** behind the boat and hold it, or lock it | Strength (Athletics); or thieves' tools, DC 15; no roll for Agenda 6's player |
+| 4 | **Shut the river gate** behind the boat and hold it, or lock it | Strength (Athletics); or Thieves' Tools, DC 15; no roll for Agenda 6's player |
 | 5 | **Push the boat off.** Wade in and put your shoulder to it | Strength (Athletics) |
 | 6 | **Hold him in the shallows.** Grapple him at the water's edge. While he is Witnessed he can't step out of it | An Unarmed Strike (Grapple) |
 | 7 | **The front gate.** Tell him the woman in Thenya wool went out by the front | Charisma (Deception) |
@@ -358,15 +358,15 @@ The attack happens in a crowd, and the crowd has rules too.
 - **Count them.** After midnight the guests are in the Crystal Court, the banquet
   galleries and the service passages, and — once the doors open — the Gatehouse Court.
   Wherever the crowd is, count **one guest in every 5-foot square** (Chapter X, *A
-  guest*: AC 10, 4 hit points).
+  guest*: AC 10, 4 Hit Points).
 - **Area spells hit guests.** A damaging area effect in the crowd hits one guest for
-  each square it covers, and at 4 hit points almost anything kills them: a
-  *thunderwave* at the dais is up to nine people. A guest a player character kills is
+  each square it covers, and at 4 Hit Points almost anything kills them: a
+  *Thunderwave* at the dais is up to nine people. A guest a player character kills is
   seen by somebody, and the inquest hears of it. A spell that drops people without
-  harming them (*sleep*, say) drops them into a crush: anyone still on the floor at the
+  harming them (*Sleep*, say) drops them into a crush: anyone still on the floor at the
   end of the round is trampled, unless somebody gets them up: a guest dies, and a
   character takes 5 (2d4) Bludgeoning damage.
-- **The crowd as ground.** Moving through it is difficult terrain; card S11 has the
+- **The crowd as ground.** Moving through it is Difficult Terrain; card S11 has the
   rule for a crush at a door.
 - **The Post.** Guests don't roll against the Hollow's *Post* or *Turn Them Back*. The
   crowd breaks round him like water and does not pass. It leaves by the service doors
@@ -411,7 +411,7 @@ player who came to this ball wanting a real fight.
   is Idle and DC 19 while it is Focused, with +2s for leaning in. Break its focus four
   times in a night and it wanders off to a window to watch the fires. That is a win.
   It is meant to be hard: one character or more will usually go down on the way.
-- **Down, Not Out** holds for everyone it drops. At 0 hit points it loses interest in
+- **Down, Not Out** holds for everyone it drops. At 0 Hit Points it loses interest in
   being here and steps into the shadow. There is no body.
 
 Run it from **card S14** (Chapter IX), which has the full distraction rule and the
@@ -459,7 +459,7 @@ What history records, told in scenes. Bend everything except what the players be
   between Veier's rooms and the river seals itself behind her, one by one, all the way
   down. What the Wept does then is quick.
   *(If a player character is about to die shielding Raunu, the Wept takes them out
-  of the fight instead of out of the world — through a broken wall, at 0 hit points,
+  of the fight instead of out of the world — through a broken wall, at 0 Hit Points,
   Stable. She has no orders about them, and no appetite either. They are up again
   within two rounds:* Down, Not Out*, above.)*
 - **The east wing.** The Radiant hunts Veier through corridors that lock themselves
@@ -519,8 +519,8 @@ Vell stops being unmemorable.
 This is the crescendo, and its rule is simple: the players are caught between two
 people the mortal world has no answer for, and they cannot beat either one. What
 they can do is everything else, and everything else is what decides it. **Do not roll
-initiative for Vell or the Radiant.** Their duel is scenery with a will of its own.
-Roll initiative only for the player characters, and anything else in the garden that
+Initiative for Vell or the Radiant.** Their duel is scenery with a will of its own.
+Roll Initiative only for the player characters, and anything else in the garden that
 the players choose to fight. Run it in three beats down the garden's three levels:
 
 1. **The terrace.** Vell turns to face the Radiant, and moves — *the way the
@@ -540,7 +540,7 @@ the players choose to fight. Run it in three beats down the garden's three level
    faces it (see sidebar). Vell is holding the Radiant, barely; he cannot both
    fight him and move Veier, and he says so, once, without turning: *"Take her.
    The gate. Don't stop."* The players carry history in their arms down a garden
-   being demolished behind them. *(Veier can walk, slowly: her speed is 15 feet. A
+   being demolished behind them. *(Veier can walk, slowly: her Speed is 15 feet. A
    character can carry her (Strength 13 or better) or support her (the Help action);
    either way the pair moves at half the helper's Speed, which is still faster than
    she can go alone.)* The Radiant, meanwhile, is losing the thing he cannot bear to
@@ -585,7 +585,7 @@ otherwise, never for a table that was busy saving someone else.
 > someone): on a success they ride it; on a failure they take **7 (2d6) bludgeoning
 > damage** or lose their next action shielding someone, their choice; if they fail by
 > 5 or more, they take **14 (4d6) bludgeoning damage**, or the ground between them and
-> the gate gets worse (difficult terrain, a gap to jump, a stair gone), the DM's
+> the gate gets worse (Difficult Terrain, a gap to jump, a stair gone), the DM's
 > choice. Cover doesn't help against a garden coming apart, and Evasion changes
 > nothing: a success already takes no damage. Never aim the duel *at* a player character — the
 > terror of the Crossing is precisely that neither combatant cares that they are
@@ -616,20 +616,20 @@ matters is **Leashed**, and the rules that make it playable are *Down, Not Out* 
 **How *Leashed* plays at the table.** Read the trait in Chapter X before the session;
 in practice it means this:
 
-- **Reducing one to 0 hit points is not a kill.** It means the killer *stops
+- **Reducing one to 0 Hit Points is not a kill.** It means the killer *stops
   indulging the interference.* They step into the world's shadow, return at the start
   of their next turn at full Hit Points in the space where they dropped, and walk on
   toward the task, and whoever struck the last
   blow makes a saving throw or is thrown (*Down, Not Out*). Fighting the Uninvited
   never ends in victory. It does buy time: every round the party lands 30 damage on
   one of them is a point of Delay.
-- **A player character one of them drops to 0 hit points does not die.** They are
+- **A player character one of them drops to 0 Hit Points does not die.** They are
   Stable, and back on their feet within two rounds, by a friend's hand or a
   stranger's (*Down, Not Out*). The Uninvited have no orders about them and no
   appetite. *(This mercy covers only the Uninvited and the Attendant. A snake's knife
   in the dark is an ordinary knife.)*
-- **Magic buys time at most.** A 5e table will reach for the spell list — *banishment*,
-  *hold person*, *command*, *sleep*, a *wall of force* if somebody has one. Chapter X
+- **Magic buys time at most.** A 5e table will reach for the spell list — *Banishment*,
+  *Hold Person*, *Command*, *Sleep*, a *Wall of Force* if somebody has one. Chapter X
   says what each obvious answer does to each of the three, and every one of those
   answers follows the same principle as steel: **at best, it buys Delay.** A spell
   that would remove, hold, or end one of them holds for a round at most, and the leash
@@ -647,7 +647,7 @@ leash, which ends their night. That is the complete list.
 > **DM Note — the table that will not stop trying to kill them**
 >
 > **Default:** let them try, run it honestly, and pay every 30-damage round in Delay.
-> When the Wept reaches 0 hit points, say out loud what just happened: "She stops.
+> When the Wept reaches 0 Hit Points, say out loud what just happened: "She stops.
 > She looks at you — not angry; almost patient. And then you are through the wall,
 > and she is walking back toward the dais, whole. You bought Raunu a round. You
 > bought the crowd a round." Then ask the next player what they do.
@@ -716,7 +716,7 @@ the Uninvited's blocks.)*
 - **The Wept** *(sorrow)*. Truth: she was a mother once, and disease took her
   family while she stood by helpless — and tonight she has been sent to do to a
   family, with her own hands, what the world once did to hers. Invoked: she stops.
-  Mid-motion, mid-kill. **For one full round she takes no actions, no reactions, and
+  Mid-motion, mid-kill. **For one full round she takes no actions, no Reactions, and
   does not move** — a woman standing in a burning ballroom, long enough to pull a
   victim clear, seal a ward, finish an escape. *(While she has 2 or more Delay, this
   Fracture is DC 15 whatever tells have been seen: a table that has turned the dais
@@ -753,11 +753,11 @@ the Uninvited's blocks.)*
   hands, the doors open, and he leaves the field early — the only one of the three who
   goes home before he is called. Two hundred people stop being hostages.
 
-> **Sidebar — Fractures and magic.** *Calm emotions*, *charm person*, *suggestion* and
+> **Sidebar — Fractures and magic.** *Calm Emotions*, *Charm Person*, *Suggestion* and
 > their kin do not reach the person inside a mask; the Uninvited are not moved by
 > magic that would move them (Chapter X). What reaches them is what reached them all
 > night — a person, paying attention, saying something true. A spell can *carry* the
-> words (a *message*, a *thaumaturgy* voice booming over the hall so the Radiant's
+> words (a *Message*, a *Thaumaturgy* voice booming over the hall so the Radiant's
 > congregation hears the doubt too) and you should welcome that. It never replaces
 > the words or the check.
 
