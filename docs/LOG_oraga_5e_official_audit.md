@@ -492,3 +492,30 @@ Hard-rule detail: role_name is 75 "MM" + 1 "Mirror Master". bare_dc 146 = bare "
 - NIGHT-23: "his Duelists" (old 05:792) and the Bodyguards/bodyguards and Duelists/duelists capitalization pairs other than the two lowercased: the quoted "his Duelists" was not found (05's remaining mentions are "Draunel's duelists", already lowercase, in the crowd list); "gray/grey", "its sight", "the pale factor" and "the others" were done in T4.6.
 - BALL-24's parenthetical about cutting *The Snakes in the Pen*: owner's call, not done.
 - CAST-15's Corro apposition repeats his header epithet; kept as the audit wrote it (no other existing label for him).
+
+
+## Phase 6
+
+### T6.1 — "What [Name] Knows" lists (Worker, 2026-10-03)
+
+*CAST-2, CAST-23, BALL-11. Every site was located by quoted text (DESIGN §2).*
+
+**Commands:** `python conversions/dnd5e/oraga_night/tools/lint_5e.py --check` → OK (0 problems; 35 hard and 0 structure hits remain; no regression, no re-baseline). `bestiary_check.py` → 25 blocks + 3 Nastier, 0 mismatches. `pregen_check.py` → 5 pregens, 0 issues. `python -m pytest conversions/dnd5e/oraga_night/tools -q` → 159 passed.
+
+**07.** Each of the eleven entries gets a run-in label, **What [Name] Knows:**, a trigger sentence and bullets. It is set as plain text, not a box, so the 01 legend needs no new species. Placement: after *Roleplaying* (or the *Quote* where one follows it), before *At the Unmasking* / *If it comes to steel*. Bullet counts: Raunu 6 + a paragraph of refusals (the five Never-Says items; he refuses or deflects; *Detect Thoughts* and *Speak with Dead* lines from 04 and 02); Veier 5 + TODO-Q7; Anha 8 (CAST-2's model, plus "paid triple and forbidden to send word home" from 02 Agenda 8 and the pack confirmation from 04 B9); Kovaun 3; Sella 5; Callun 4 (one marked "(untrue)": the Tithe as the midnight pronouncement); Corro 4; Draunel 3; Essin 2 + TODO-Q11; Maiven 4 (one marked "(untrue)": Veier as a prisoner); Tavva 6. Sources for every bullet are in INVENTIONS #68.
+
+**Gated (HTML comment, no answer):** Veier on the pregnancy, `TODO-Q7` (R6 holds); Essin's "two bodies", `TODO-Q11`.
+
+**08 Table VIII–7.** The rumor numbering was rechecked against CAST-23 (6 = the bride dead, 8 = Vorlain never stopped ruling, 11 = the staff still inside). Italic truth notes went on those three only: 6 → chapter VII; 8 → chapter VII; 11 → chapter IV, "Undercurrent B — The Household That Wasn't". Rumors 1–5, 7, 9, 10 and 12 are unmarked.
+
+**04 (BALL-11).** Both "tall, pale factor" sites were still present. B0 bullet: "*(This is Master Vell; see chapter VII.)*" added after "unremarkably". Movement V, House Draunel: "a tall pale factor is standing" → "Master Vell is standing". Line 1322's "the tall one" is the Wept, so it was not touched. 09 S2's "a tall pale factor who walked to the river gate" is Tavva's own words and stays (it is quoted in her 07 list).
+
+**Omitted for lack of a printed source (not written):**
+- Corro and the Phern intermediaries who sold Raunu relics (04 Undercurrent A never says Corro knows).
+- Whether Essin knows Vorlain has no plot.
+- The contents of Kovaun's memo from the east.
+- Draunel's other three irons as something he would tell (INVENTIONS #11; they are inventions, not knowledge to share).
+- Callun's prices (TODO-Q15, unchanged).
+- Callun's own Secret (the Vorlain-chieftaincy arithmetic): nothing printed shows her telling it, so it stays in her Secret line. Maiven's instruction is listed, because it is the errand she hands Agenda 4.
+
+**Skipped sites:** none.

@@ -163,7 +163,7 @@ whether the party engages or not:
   colors, waiting for masters who will be inside for six hours. There are a great
   many of them this season. *House Boranis hired none.*
 - **A tall, pale factor is already inside**, having arrived early and entirely
-  unremarkably. Nobody in the line saw him arrive. Nobody in the line is thinking
+  unremarkably. *(This is Master Vell; see chapter VII.)* Nobody in the line saw him arrive. Nobody in the line is thinking
   about him.
 
 **The omen** *(the one thing in this scene that is not gossip)*: nine
@@ -1351,7 +1351,7 @@ waits.
   Dance and the guards, a Draunel Duelist and a Cousin's Blade face each other with
   a few witnesses, and steel is finally about to come out where no honor guard can
   see it. Whoever wins, Draunel wins: a Boranis who kills a guest at Oraga, or a
-  Boranis blade who ran. Two terraces below, a tall pale factor is standing at the
+  Boranis blade who ran. Two terraces below, Master Vell is standing at the
   river gate, and a crowd drawn by a duel is the last thing he wants. **Tell:** a knot
   of masks at the terrace rail, looking down instead of dancing. → Card S9, chapter IX (both houses' blades are on it).
 - **House Boranis.** Vorlain is in B3, drinking harder. Essin has a problem on the

@@ -341,7 +341,7 @@ These rules are mechanical, but a worker makes every edit with the linter's hit 
 
 ## Phase 6: NPC knowledge
 
-### ☐ T6.1 "What they know" lists (CAST-2, -23; BALL-11)
+### ☑ T6.1 "What they know" lists (CAST-2, -23; BALL-11)
 - **Files:** 07 (11 entries: Raunu, Veier, Anha, Kovaun, Sella, Callun, Corro, Draunel, Essin, Maiven, Tavva); 08 Table VIII–7 (truth notes); 04 (name Vell at the two "tall pale factor" sites, BALL-11).
 - **Do:**
   - For each entry: a trigger sentence plus bullets, **assembled only from facts already printed**. Cite the source line for each bullet in the ledger row. Use CAST-2's Anha list as the model.

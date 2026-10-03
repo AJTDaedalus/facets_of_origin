@@ -247,12 +247,12 @@ Several cannot all be true, which bothers nobody telling them.*
 | 3 | He walked into the eastern mists and the mists gave him back. That's why they've fallen — they're *empty* now. He brought back what was in them. |
 | 4 | The Church took him for a year of questioning and returned him hollowed. Why else would the Prelate herself attend a house the Church despises? |
 | 5 | He went beneath the palace, where the first Boranis crystal was grown, and slept a year in the root of the house. The walls feed him now. That's why the staff was cut — fewer eyes. |
-| 6 | The Thenya bride is already dead, and tonight's "announcement" will be a changeling got on some serving girl. The Thenya delegation knows — watch how they don't drink. |
+| 6 | The Thenya bride is already dead, and tonight's "announcement" will be a changeling got on some serving girl. The Thenya delegation knows — watch how they don't drink. *(Untrue. Veier is alive; see chapter VII.)* |
 | 7 | *(The common one.)* The marriage is coin, plain and simple: the Thenya paid their last treasure for their border, and the recluse wanted an heir nobody could refuse. Everything else is theater. |
-| 8 | Vorlain has never stopped ruling. Raunu is a mask his brother wears when the seat needs a beloved face. Two chiefs, one house — count who the ministers *actually* bow to. |
+| 8 | Vorlain has never stopped ruling. Raunu is a mask his brother wears when the seat needs a beloved face. Two chiefs, one house — count who the ministers *actually* bow to. *(Untrue. Vorlain gave the seat back and has no plot; see chapter VII.)* |
 | 9 | A Kshalo dreamed him away, and he bargained his way back with something he'll spend the rest of his life paying. The offerings in Elanna's niche? That's the interest. |
 | 10 | He crossed the mountains and saw Mazaa — walked among the godless machines — and came home to make the Orthaen ready for what's coming west. The new decrees are war logistics wearing worker's clothes. |
-| 11 | The staff weren't dismissed. They're still *in* there. Ask yourself why the east wing needs guards on the inside of the doors. |
+| 11 | The staff weren't dismissed. They're still *in* there. Ask yourself why the east wing needs guards on the inside of the doors. *(Untrue. The staff were paid off and relocated; see chapter IV, "Undercurrent B — The Household That Wasn't".)* |
 | 12 | He found something in his year away that told him the day he'll die. Everything since — the pact, the bride, the silence, this ball — is a man setting his affairs in order. *(Deliver this one straight. Let the table sit with it at dawn.)* |
 
 ---

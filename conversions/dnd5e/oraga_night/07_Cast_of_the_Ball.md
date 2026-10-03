@@ -43,6 +43,28 @@ abruptly, on something that is nearly a kindness. Deceiving Raunu takes a
 **DC 25 Charisma (Deception) check**. Impressing him is easier than anyone expects: tell
 him a true thing he did not already know.
 
+**What Raunu Knows:** far more than he says. In a summons (see chapter IV, "Raunu's
+Summons: the Questions, and What He Says") he gives the following, and no more:
+
+- Something about each summoned guest he has no business knowing: their agenda's
+  patron, their grandmother's crystal, their sister in his kitchens. He says so
+  without threat, almost absently.
+- The Tithe of Hands, to anyone who simply asks: "It taxes palaces to pay laborers.
+  The palaces can afford it. That is the whole secret. You may tell the Circle I said so."
+- Veier: "She chooses her guests herself these days. If she chooses you, you will know."
+- The Unmasking: "Something true." He does not say what, at the summons or at dinner.
+- Whether he is in danger, if friendly: he has spent two years arranging for the
+  answer to be no, and tonight he is not certain the arranging was sufficient.
+- The three gray masks, if a character warns him: "I know." He thanks them and does
+  not act (see chapter IV, "Undercurrent D").
+
+He will not answer anything on chapter II's list, "What the Module Never Says": where
+he went in his missing year and what he brought back; why this child is worth breaking
+a seal for; the name of the power in the east, or of the power Vell serves; what the
+mists are, or why they recede; who the Uninvited were when they were people. Asked,
+he refuses or deflects. Spells fare no better. *Detect Thoughts* finds a man thinking
+about a staircase, and *Speak with Dead* finds the silence he kept alive.
+
 **At the Unmasking:** see chapter V. Custom compels his return to the dais — the
 one predictable moment of his night, which is exactly why it is the moment. He
 never gets to make the announcement. He understands first, spends everything on
@@ -77,6 +99,19 @@ prisoner or a madwoman get a brisk education.
 
 **Quote:** "I am well. I am watched over. Tell my uncle his message took two years to
 reach me, so his worry can wait two more."
+
+**What Veier Knows:** a character Veier chooses (Agenda 4's ring at the east wing
+doors, or anyone who reaches her there) learns the following (see chapter IV,
+"Dinner for Two (B9)"):
+
+- She is well, and watched over. Her answer for Maiven is her quote, above.
+- She is free. For her first year the traveling pack by her door stood packed, her
+  plain statement that she could leave whenever she chose. It is empty now.
+- She is happy, and she wants her cousins to know she chose this.
+- She fears what her husband fears: something is coming for their family, and
+  neither of them knows what, or when.
+- The two plates were for the two of them.
+<!-- TODO-Q7: whether Veier may confirm the pregnancy to a character she trusts waits on owner ruling Q7 (CAST N2). Until ruled, R6 holds: the heir stays secret unless a character discovers it. -->
 
 **At the Unmasking:** in the east wing when the lights die, the corridors sealing
 themselves behind her — her husband's two crystals working. Wounded once, cleanly,
@@ -225,6 +260,21 @@ in the palace: she deals only in facts. **At the Unmasking:** she knows the serv
 passages, and becomes one of the night's quiet heroes if any player thought to
 befriend her.
 
+**What Anha Knows:** a character who wins her trust (family or kindness; pressure
+gets nothing) learns the following:
+
+- The east wing's lights burn all night.
+- Meals for two go up. These last months, plates for three come back down.
+- She has heard the master's voice in empty rooms.
+- There are corridors she is forbidden to sweep. One is the lower cellar stair,
+  which makes no sense, because nothing is down there but wine.
+- For two years, supplies have gone down the lower stair and never come back up:
+  candles by the crate, lamp-oil, and once a crate from the eastern coast, packed in
+  salt, that hissed when it shifted. Once befriended, she offers this unprompted.
+- The skeleton staff are paid triple and forbidden to send word home.
+- For Veier's first year, the traveling pack by Veier's door stood packed (area B9).
+- She knows the service passages. With her, finding the way takes no check (area B10).
+
 **If it comes to steel:** noncombatant (see chapter X, "If It Comes to It"). When the
 lights die she goes for the service passages, because she knows them.
 
@@ -245,6 +295,16 @@ she has not been told why the question is phrased that way.
 a census-taker of souls. Runs Agenda 2 with scrupulous courtesy and pays her debts.
 Lying to Kovaun about matters of faith takes a **DC 20 Charisma (Deception) check**;
 she has heard everything.
+
+**What Kovaun Knows:** a character who works Agenda 2 for her, or who asks her
+about a gray mask's blessing over the food after Movement IV, can learn the following:
+
+- The Church wants to know whether the man who came back is the man who left. She
+  has not been told why the question is phrased that way.
+- One memo from the east reached her desk, and it was above her seal to read.
+- After Movement IV: the antique sign of blessing the Radiant made over the food is
+  a form she recognizes, and it has not been used in living memory. Hearing this from
+  her counts as witnessing the tell (see chapter V, "The Fractures").
 
 **If it comes to steel:** stat block **Damaris Kovaun**, with **Church Warden** for her
 retinue. The Church is a snake; its line is in chapter IX (card S8).
@@ -267,6 +327,20 @@ quote, below.
 **Quote:** "The dead were sent home tonight. All but three. Those, child, were
 somebody else's dead — sent out."
 
+**What Sella Knows:** a character who comes to her in the chapel (B6) can learn the
+following:
+
+- Raunu invited her by name, in his own hand.
+- At the wedding two years ago, Raunu asked her what her order teaches about dying
+  well. She has wondered since why a man that age wanted the answer that badly.
+- The fresh offerings in Elanna's niche are hers.
+- Three days before the ball she stood witness in this chapel, with Corval, as the
+  law requires, while Raunu swore aloud a testament providing for every current
+  servant by name.
+- After the gray-masked woman leaves her offering in Elanna's niche (Movement IV),
+  Sella can say exactly how out of date its rite is. Hearing this from her counts as
+  witnessing the tell (see chapter V, "The Fractures").
+
 **If it comes to steel:** noncombatant (see chapter X, "If It Comes to It").
 
 ### Mistress Rhaza Callun — the Circle's Reckoning
@@ -282,6 +356,16 @@ not to act on it. (She would be horrified to be called a conspirator. She is mer
 **Roleplaying Callun:** iron-gray, cordial, terrifyingly numerate. Runs Agenda 1 and pays on
 delivery. Deceiving her about money takes a DC 20 Charisma (Deception) check; about anything
 human, a **DC 10 Charisma (Deception) check**.
+
+**What Callun Knows:** a character who works Agenda 1 for her learns the following:
+
+- The Circle knows only that Raunu's ministers call his new decree "the Tithe of
+  Hands". Nothing is written down.
+- The decree lives whole in exactly three heads: Minister Corval's and two ministers'.
+- After the toast, she is certain the midnight pronouncement is the Tithe, announced
+  to a captive audience of everyone it will fleece. (untrue)
+- She does not know who eats off the second plate. The Circle learns what is in the
+  east wing only if a character sells her the nursery (see chapter IV, "Undercurrent C").
 
 **If it comes to steel:** stat block **Rhaza Callun** — she is no fighter, and her
 block says so — with **Circle Hired Knife** for the people she pays. The Merchant's
@@ -303,6 +387,15 @@ detective work, at the right altitude. **At the Unmasking:** his gift finally
 finds its bearing — three seconds before the lights die, Corro is already moving,
 and following him saves lives.
 
+**What Corro Knows:** a character who takes him seriously and walks the room with
+him (see chapter IV, "Undercurrent D") learns the following:
+
+- Asked about his nerves, he laughs: "Old instincts. Crowds." His hands say otherwise.
+- His gift is ringing like a struck glass, all night, and pointing nowhere.
+- Walked around the room, he is worst near the three gray masks. He refuses to say
+  what that means.
+- That is all. He has no secret and no scheme.
+
 **If it comes to steel:** stat block **Pellin Corro**, with **Phern Bodyguard** for the
 people his money keeps near him. The Phern line is in chapter IX (card S11). Corro
 himself has no secret and no scheme; his bodyguards are what a frightened rich man
@@ -320,6 +413,15 @@ Boranis party. The source left them to the DM; this edition names them in chapte
 noble key. Useful to the table as a patron, a foil, and by dawn the loudest voice
 insisting Vorlain hang for this.
 
+**What Draunel Knows:** a character who carries Agenda 3 for him learns the following:
+
+- Vorlain ruled for a year and gave it back. Draunel wants to know if he liked the
+  taste, and wants him to say something House Draunel could later call an understanding.
+- He believes Vorlain can be brought to say it. Vorlain is smarter than Draunel
+  believes, is afraid of his brother in a way Draunel cannot imagine, and says nothing
+  incriminating sober.
+- After the toast, Draunel fears a succession decree.
+
 **If it comes to steel:** stat block **Essar Draunel**, with **Draunel Duelist** for his
 retinue. House Draunel is a snake; its line is in chapter IX (cards S9 and S13).
 
@@ -336,6 +438,16 @@ mattering quietly.
 whoever is working him. The Agenda 3 player's true opponent, and a fine sparring
 partner: deceiving Essin takes a **DC 20 Charisma (Deception) check**, and he deceives back —
 catching him at it takes a DC 18 Wisdom (Insight) check.
+
+**What Essin Knows:** a character who helps him keep Vorlain sober and unbaited, or
+who goes to him on the terrace in Movement V, the one time he asks anyone for help,
+can learn the following:
+
+- He served the year of Vorlain's rule as fixer.
+- The Draunel duelist's appointment on the terraces was accepted, and Essin did not
+  accept it. At the first quarter-bell he must choose between his cousin's reputation
+  and his blade's life (see chapter IV, Movements IV and V).
+<!-- TODO-Q11: Essin's "two bodies" (what he knows of where they are buried, and whether he will trade it) waits on owner ruling Q11 (INVENTIONS #13). No answer until ruled. -->
 
 **If it comes to steel:** stat block **Essin Boranis**, with **Boranis Cousin's Blade**
 — his people, placed where he wants them. House Boranis's line is in chapter IX (cards
@@ -359,6 +471,18 @@ the east wing wall herself, which makes her the Agenda 4 player's natural ally o
 runaway problem. **At the Unmasking:** she goes *toward* the east wing,
 immediately, and dies there unless somebody competent goes with her. The module
 would prefer somebody competent went with her.
+
+**What Maiven Knows:** a character who carries Agenda 4, or who wins her trust,
+learns the following:
+
+- Her message for Veier is learned by heart, and the grandmother's ring proves whose
+  mouth it comes from. Both are for Veier alone: no minister, no husband, no exceptions.
+- Veier is the Thenyan chief's cousin, married to Raunu under a pact that traded
+  protection for the marriage. She was last seen through a palace window
+  three months after the wedding.
+- The delegation's diplomatic brief is thin cover. The chief's actual instruction
+  was "if she is a prisoner, bring her out."
+- She fears the pact was a purchase and Veier the price, a prisoner in the east wing. (untrue)
 
 **If it comes to steel:** stat block **Maiven Nolonaire**, with **Thenya Border Slinger**
 for the delegation. The Thenya are **not a snake** — chapter IX runs them as a wary
@@ -536,6 +660,22 @@ information: she can prove she planned the gallery job for a season, which makes
 her the inquest's most convenient scapegoat, and she knows it before her
 questioners do. *(Stat blocks: **Tavva**, **Gallery Knife**, chapter X. Fight cards S2 and S5, chapter
 IX.)*
+
+**What Tavva Knows:** caught and held, she bargains fast and honestly, and can tell
+her captors the following:
+
+- She has planned the gallery job for a season, and she can prove it.
+- Her crew of four came in as festival hires across two nights, on a timetable keyed
+  to the Dead Dance's lowered lamps.
+- Her buyers have a standing interest in old soul-crystals. She has never asked whose
+  coin it is; that is what intermediaries are for.
+- The midnight attack is nothing to do with her. She is as blindsided as the ministers.
+- This house feels aimed. She has robbed enough palaces to know what a prepared one
+  feels like.
+- From the service run she has watched the other snakes work. Pick two: the Circle's
+  knife working toward the east wing's service door; two gray robes on the dark-wing
+  stair; a rope uncoiling under the east wing; a tall pale factor who walked to the
+  river gate and stood there a while (card S2, "Outs").
 
 **If it comes to steel:** stat block **Tavva**, with **Gallery Knife** for her crew of
 four. Hers is the fight aimed at the noble-minded: nothing at stake in it but property
