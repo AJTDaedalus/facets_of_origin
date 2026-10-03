@@ -59,7 +59,7 @@ Uninvited speak it too, in turns of phrase two centuries out of fashion.
 | Faction | Leader | Retinue | Cards |
 |---|---|---|---|
 | The Merchant's Circle | Rhaza Callun (CR 1/4) | Circle Hired Knife (CR 1) | S7, S12 |
-| The Church | Damaris Kovaun (CR 1) | Church Warden (CR 1) | S8 |
+| The Church | Damaris Kovaun (CR 1/2) | Church Warden (CR 1) | S8 |
 | House Draunel | Essar Draunel (CR 3) | Draunel Duelist (CR 1) | S9, S13 |
 | House Boranis | Vorlain Boranis (CR 3), Essin Boranis (CR 2) | Boranis Cousin's Blade (CR 1/2) | S6, S9, S13 |
 | Phern | Pellin Corro (CR 1/8) | Phern Bodyguard (CR 1) | S11 |
@@ -131,9 +131,9 @@ V, ⟨They trap one of the Uninvited⟩).
 | Turn them, frighten them, make them flee | They are not undead and they are not afraid. The Radiant above all cannot be turned | *Cannot Be Turned* |
 | Just save the saving throw | Three times tonight each of them simply succeeds | *Centuries of Practice* |
 
-The same trick earns Delay twice at most on the same Uninvited (the second time at
-DC 15), and never a third time; a spell is a trick like any other. Treat a good idea
-that fails the way you treat a hard blow: say what the moment cost them, and what it
+A trick earns Delay when its check succeeds (the DC is 13, or 15 if it has already
+worked on that Uninvited tonight), and never a third time (see chapter V, "Buying
+Time"); a spell is a trick like any other. Treat a good idea that fails the way you treat a hard blow: say what the moment cost them, and what it
 bought.
 
 **What changes the night**, and it is the complete list: **Delay**, bought with the
@@ -142,7 +142,8 @@ inside, reachable by someone who paid attention; **deep ward-crystal**, the one 
 that can hold one of them (and the Root of the House, the one threshold they will not
 cross); and the **leash**, which takes all three east the moment their work is
 finished or lost, and at the last bell of Oraga if nothing else has. Chapter V runs
-the attack; these blocks are what it runs on.
+the attack; these blocks are what it runs on. Their challenge ratings describe how
+hard they hit; nothing tonight stops them.
 
 **The Fractures, one rule for all three.** Each Uninvited has **tells** — human
 moments salted through Movements III–V (the table is in Chapter V), and anything
@@ -249,8 +250,9 @@ It removes interruptions. It doesn't hunt.
 here, steps into the world's shadow, and is gone for the night. There is no body.
 
 ***Two Turns (Focused Only).*** While Focused, the Attendant takes two turns each
-round: one on its Initiative and one at Initiative count 10 lower. It still has only
-one Reaction a round.
+round: one on its Initiative and one at Initiative count 10 lower (last in the round,
+if that count is below 1). It still has only one Reaction a round, and it rolls Put
+Aside's recharge only at the start of its first turn each round.
 
 **Actions**
 
@@ -263,13 +265,13 @@ Bludgeoning damage, and a Medium or smaller target is pushed 5 feet away.
 ***Put Aside (Recharge 5–6 While Focused; Recharge 6 While Idle).*** *Strength Saving
 Throw:* DC 14, each creature of its choice in a 20-foot Emanation originating from it.
 *Failure:* 9 (2d8) Force damage, and the target is pushed 15 feet straight away and has the Prone
-condition. *Success:* Half damage only. The magic is real. It rarely cares to use it.
+condition. *Success:* Half damage.
 
 **Before Midnight**
 
 A quiet guest dressed as a great house's attendant, carrying a cloak and a cup for a
 master who never appears. It was sent to watch ahead of midnight and it is bad at
-it. It will not fight before the Unmasking: confronted or attacked, it walks into a
+it. Its magic is real; it rarely cares to use it. It will not fight before the Unmasking: confronted or attacked, it walks into a
 shadow and is gone for the rest of that Movement, and steel drawn on it is still steel drawn at the
 ball (Chapter IV, *The Palace on Alert*). Asked whom it serves, it names nobody, and
 looks round, briefly, for the master it is supposed to have.
@@ -392,7 +394,8 @@ releases one in place of one House Blade attack:
 
 **Reactions**
 
-***Call the House.*** *Trigger:* The guard is first Bloodied. *Response:* It moves
+***Call the House.*** *Trigger:* The guard is Bloodied, and no guard has called the
+house this scene. *Response:* It moves
 up to half its Speed toward the nearest ward-point without provoking Opportunity
 Attacks and calls out. Four more Boranis Honor Guards arrive at the start of the
 second round after this one, and this guard holds its ground until they come.
@@ -701,7 +704,7 @@ advantage against.
 **Skills** History +5, Insight +8, Persuasion +5, Religion +5
 **Senses** Passive Perception 14
 **Languages** Common
-**CR** 1 (XP 200; PB +2)
+**CR** 1/2 (XP 100; PB +2)
 
 **Traits**
 
@@ -720,8 +723,7 @@ Bludgeoning damage. She would much rather not.
 ***In the Church's Name (Recharge 5–6).*** *Wisdom Saving Throw:* DC 14, each
 creature of the Prelate's choice within 30 feet that can hear and understand her.
 *Failure:* Until the end of its next turn, the target can't take a hostile action
-against her or against anyone she names. *Success:* The target knows exactly what
-it is doing, and so does the room.
+against her or against anyone she names.
 
 **Bonus Actions**
 
@@ -789,8 +791,8 @@ attack roll. *Response:* The duelist makes one Rapier attack against it.
 > at the wine court, and a sentence about *the missing year* said a little too
 > loudly — the second jostle tonight, and the same duelist.
 > **Breaks.** When the challenge is refused in front of witnesses (which is a loss
-> they can't fight past), when Lord Draunel withdraws them, or at the first real
-> wound; duelists fight for honour, and honour bleeds first.
+> they can't fight past), when Lord Draunel withdraws them, or the first time one of
+> them takes damage; duelists fight for honour, and honour bleeds first.
 > **Nastier.** The duelist has fought three of these this season and won them all:
 > CR 2 (XP 450), 44 HP (8d8 + 8), two Rapier attacks and Provocation.
 > *Cards: S9, S13.*
@@ -846,8 +848,8 @@ miss.
 > the toast.
 > **Breaks.** The moment the fight would be seen as *his*. He calls his duelists off,
 > offers his hand, and is the first to say it was a misunderstanding among friends.
-> **Nastier.** Iron 3 is in the room: two duelists who have watched Vorlain all night
-> and will swear to anything.
+> **Nastier.** Iron 3 is in the room: a third duelist, who has watched Vorlain all
+> night and will swear to anything.
 > *Cast: Chapter VII. Cards: S9 (at the rail), S13.*
 
 ---
@@ -1011,6 +1013,7 @@ passages, if they are in reach.
 
 ### The Hollow
 *The blank gray mask. Medium Humanoid (Human)*
+<!-- TODO-Q18: alignment left blank pending owner ruling Q18 (BESTIARY-21). -->
 
 **AC** 16 · **Initiative** +3 (13)
 **HP** 157 (21d8 + 63)
@@ -1064,8 +1067,9 @@ gutter at this range but hold.
 
 ***The Post.*** While the Hollow is within 10 feet of the doors he holds, no creature
 passes through them without his leave. A creature that tries must succeed on a DC 17
-Strength saving throw or be pushed 10 feet away and have the Prone condition. The
-crowd does not roll: it breaks around him like water (Chapter V, *Two Hundred
+Strength saving throw or be pushed 10 feet away and have the Prone condition. On a
+success, the creature holds its ground but still doesn't get past him. The crowd
+does not roll: it breaks around him like water (Chapter V, *Two Hundred
 People*).
 
 ***Only the Doors.*** The Hollow attacks only creatures that come for the doors or
@@ -1269,14 +1273,15 @@ instead.
 > **Breaks.** The moment Corro is through the door, they are through it behind him
 > and gone; they have no quarrel with anyone who is not in their way. Corro's word
 > stops them at once.
-> **Nastier.** A third bodyguard, and the door they have picked is narrower than it
-> looked.
+> **Nastier.** The door they have picked is narrower than it looks: the crowd check's
+> DC rises to 15.
 > *Corro brought two or three. Card: S11.*
 
 ---
 
 ### The Radiant
 *The mirror-bright mask. Medium Humanoid (Human)*
+<!-- TODO-Q18: alignment left blank pending owner ruling Q18 (BESTIARY-21). -->
 
 **AC** 17 · **Initiative** +9 (19)
 **HP** 162 (25d8 + 50)
@@ -1493,7 +1498,7 @@ damage.
 > a broken patrol falls back to hold the doors and wait for the next four.
 > **Nastier.** The whistle brings a sergeant who would rather talk than fight: use
 > the Bought Sergeant's numbers without Hold the Terms.
-> *Patrols in fours. Movement VII, when the districts' guards come up Gate Street
+> *Built on the SRD guard. Patrols in fours. Movement VII, when the districts' guards come up Gate Street
 > behind the Bought (card S3).*
 
 ---
@@ -1684,6 +1689,7 @@ miss.
 
 ### The Wept
 *The gray mask with carved tears. Medium Humanoid (Human)*
+<!-- TODO-Q18: alignment left blank pending owner ruling Q18 (BESTIARY-21). -->
 
 **AC** 18 · **Initiative** +7 (17)
 **HP** 187 (22d8 + 88)
@@ -1742,9 +1748,10 @@ anyone works only if its bearer succeeds on a DC 13 Charisma check; on a failure
 light goes out of the crystal and the charge is spent. The palace's great wards
 gutter at this range but hold.
 
-***She Arrives.*** The Wept does not wind up. Whenever she uses Shadow-Step, she can
-make one Strength Like a Fact attack immediately after she arrives, against whoever
-stands between her and the dais.
+***She Arrives.*** The Wept does not wind up. When she uses Shadow-Step, she can
+make one of her Multiattack's two attacks at once on arrival, against whoever stands
+between her and the dais. That attack counts toward her Multiattack that turn; it is
+never a third attack, and she can't make it if she has already made both.
 
 **Actions**
 
@@ -1806,9 +1813,10 @@ of crystal answers him. Deceiving him is DC 25. Impressing him is easier than an
 expects: tell him a true thing he did not already know. *The two crystals at his
 wrist are his, and Chapter V says what they are for.*
 
-**Veier Nolonaire** — *Medium Humanoid (Human).* AC 12 · HP 27 · Speed 30 ft
-(15 ft tonight). Near her time, and not fighting anyone. If cornered: *Border
-Sling.* +4, range 30/120 ft, 4 (1d4 + 2) Bludgeoning. Her gift flares once, on behalf
+**Veier Nolonaire** — *Medium Humanoid (Human).* AC 12 · HP 27 · Speed 30 ft.
+(15 ft. tonight). Near her time, and not fighting anyone. If cornered: *Border
+Sling.* *Ranged Attack Roll:* +4, range 30/120 ft. *Hit:* 4 (1d4 + 2) Bludgeoning
+damage. Her gift flares once, on behalf
 of someone she loves who is in mortal danger (Chapter V). The camera never lingers
 on harm to her; cut away.
 
@@ -1830,7 +1838,8 @@ not raise a hand, and she will not leave anyone who is dying alone.
 mask-maker, susceptible to nothing but genuine appreciation of the craft. If a fight
 reaches her workshop, the table has gone badly wrong somewhere.
 
-**A guest** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. No attacks. Any
+**A guest** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. No attacks; use
+the SRD 5.2.1 **commoner** stat block without its attack. Any
 one of the two hundred: a merchant, a minister's cousin, a festival hire in borrowed
 livery. After midnight, count one in every 5-foot square where the crowd is (Chapter
 V, *Two Hundred People*). A guest a player character kills was seen doing it by
@@ -1838,12 +1847,14 @@ somebody, and the inquest hears of it.
 
 ### Master Vell
 *The Pale Factor. Medium Humanoid (Human)*
+<!-- TODO-Q18: alignment left blank pending owner ruling Q18 (BESTIARY-21). -->
 
 **AC** — · **HP** — · **Speed** 30 ft., and some other way
 **CR** — *(not a combatant; no XP)*
 
 The block exists to tell you one thing: **Master Vell does not fight, and cannot be
 fought.** He has no attacks. He escapes. Nothing below uses a die.
+<!-- TODO-Q8: what happens when a character attacks Vell waits on owner ruling Q8 (BESTIARY-11). -->
 
 **Traits**
 
@@ -1920,6 +1931,8 @@ not, trained or not. Releasing one does not make its bearer a caster.
 
 **Table X–3: Crystal Charges**
 
+*All are consumable Wondrous Items; none requires attunement.*
+
 | Charge | Rarity | When released |
 |---|---|---|
 | **Steady Light** | Common | The crystal sheds Bright Light in a 20-foot radius and Dim Light for a further 20 feet for 1 hour. |
@@ -1961,5 +1974,6 @@ before it is a reward.*
 - **The company's purse** *(S3).* The half-fee, paid in old coin — 3d6 × 10 GP by
   weight. Chapter V says what the coin means, and what it does not.
 - **A Circle knife's advance** *(S7, S12).* 2d6 GP each, and a coat worth more than the advance.
+  <!-- TODO-Q15: the coat's GP value waits on owner ruling Q15 (BESTIARY-23). -->
 - **Whatever the wardens were carrying** *(S8).* Chapter IX says what it is. It is
   evidence, and it is heavy.

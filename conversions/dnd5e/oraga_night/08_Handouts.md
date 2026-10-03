@@ -182,7 +182,7 @@ lines are the service passages, which thread the whole palace.*
 *Heat 0–4 per faction (Chapter IX, Table IX–2, is the full rule). Tick a box when a line
 goes unanswered; clear one when the party steps on it. Read every row at the first
 scream: **0–2**, they get their principal out; **3**, the midnight card is live;
-**4**, it starts with steel already out. A line the table was never shown does not
+**4**, it starts with steel already out (each card's *At heat 4* line says how). A line the table was never shown does not
 heat up. The Thenya are here because they can become a fight, not because they are a
 snake.*
 
@@ -191,9 +191,9 @@ snake.*
 | Faction | Heat | Starts | Rises (+1) — ✱ automatic | Falls | At heat 3–4 |
 |---|---|---|---|---|---|
 | **The Circle** | ☐☐☐☐ | 1 | ✱ the toast · Callun's coin refused (Mv III) · **to 4:** S7's clock filled, or the nursery sold to her | −1 per knife turned or caught quietly · **to 0:** Agenda 1 delivered, the Tithe told to Callun, or Callun told what her knife did to an under-cook | **S12** |
-| **The Church** | ☐☐☐☐ | 1 | ✱ the Radiant's blessing · a warden refused or humiliated before guests · S8's tell shown and not stepped on by midnight | −1 if Kovaun is given something true to file about the gray masks · **to 0:** Agenda 2 delivered | **S8**, in the dark |
-| **House Draunel** | ☐☐☐☐ | 1 | ✱ the toast · Agenda 3 refused or failed · Iron 2 stopped without Draunel losing face | −1 if Draunel is embarrassed before guests · **to 0:** Agenda 3 delivered | **S13** |
-| **House Boranis** | ☐☐☐☐ | 0 | ✱ the appointment accepted (Mv IV) · Vorlain baited or drunk in public · Draunel's heat reaches 3 | −1 each time the party helps Essin keep Vorlain sober · −1 if S6 ends quietly · **to 0:** Essin warned of the appointment before Mv IV | **S13**, if Draunel is also 3–4 |
+| **The Church** | ☐☐☐☐ | 1 | ✱ the Radiant's blessing · a warden refused or humiliated before guests · S8's tell shown and not stepped on by midnight | −1 if Kovaun is given something true to file about the gray masks · −1 if the wardens are turned back at the study door (S8) · **to 0:** Agenda 2 delivered | **S8**, in the dark |
+| **House Draunel** | ☐☐☐☐ | 1 | ✱ the toast · Agenda 3, if one of the characters carries it, refused or failed · Iron 2 stopped without Draunel losing face · S9's clock filled | −1 if Draunel is embarrassed before guests · **to 0:** Agenda 3 delivered | **S13** |
+| **House Boranis** | ☐☐☐☐ | 0 | ✱ the appointment accepted (Mv IV) · Vorlain baited, or drunk, by one of the characters · Draunel's heat reaches 3 · a cousin beaten in public (S6) · S9's clock filled | −1 each time the party helps Essin keep Vorlain sober · −1 if S6 ends quietly · **to 0:** Essin warned of the appointment before Mv IV | **S13**, if Draunel is also 3–4 |
 | **Phern** | ☐☐☐☐ | 0 | ✱ once each in Mv II, III and IV (the omens) | −1 if a player character walked the room with Corro · −1 if Corro trusts one enough to take an instruction at midnight | **S11** |
 | **The Thenya** | ☐☐☐☐ | 1 | ✱ the toast · ✱ the audience refused · a player character lies to Maiven, or refuses her and says so | −1 if a player character promises to go with her and means it · **to 0:** proof of Veier | **S10** in Mv V *(at midnight she goes east whatever her heat)* |
 

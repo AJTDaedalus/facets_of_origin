@@ -85,23 +85,27 @@ the dark. The night-tracker in Chapter VIII has a column for it.
 
 **Fight cards** run in one field order, so your eye lands in the same place every
 time: *where and when · trigger (read-aloud) · objective · clock · enemies and budget ·
-terrain as rules · tactics · morale · outs · rewards · scaling · development.*
+terrain as rules · tactics · morale · outs · treasure · rewards · adjusting the encounter ·
+development.*
 
 - **The objective is never a body count.** The clock is what actually ends the scene.
 - **Every card is built for four 4th-level characters.** That is the table this module
-  expects. Each card's *Scaling* then gives four lines: three player characters, five,
-  and a party of four at 3rd level or at 5th.
+  expects. Each card's *Adjusting the Encounter* then gives four lines: three
+  characters, five, and a party of four at 3rd level or at 5th.
+- **Use one line only; the lines are not cumulative.** For five characters at 5th
+  level, use the 5th-level line and add one of the weakest foes.
 - **Budgets use the SRD 5.2.1 table**: XP per character, summed for the party, with no
   multiplier. For four 4th-level characters: **Low 1,000 · Moderate 1,500 · High
   2,000.** Several snake fights sit at or below Low on purpose. Before midnight, nobody
   here is trying to kill anyone, and the difficulty is the clock, the noise and the
-  guards.
-- **The label is what the fight plays at.** Foes with three attacks, or with Sneak
-  Attack, hit harder than their XP says, so every budget line below was checked
-  against the pregenerated characters by simulation, and the label gives how the fight
-  actually goes, not just the sum. As a rough guide, a Low fight drops a player
-  character in about one run in ten to one in four, a Moderate fight in one in four to
-  one in two, and a High fight more often than not.
+  guards. A label says where the sum sits: *under Low*, *Low*, *between Low and
+  Moderate*, *Moderate*, *High* or *beyond High*.
+- **The label is the sum; the line after it is the play.** Foes with three attacks,
+  or with Sneak Attack, hit harder than their XP says, so every budget line below was
+  also checked against the pregenerated characters by simulation, and says how the
+  fight actually plays. As a rough guide, a fight that plays Low drops a character in
+  about one run in ten to one in four, one that plays Moderate in one in four to one in
+  two, and one that plays High more often than not.
 - **Clocks** have four segments. Each card says what advances its clock and what
   happens when it fills. Say the clock out loud at the top of the scene. "A 1 on a
   d20" in a clock means an attack roll or an ability check, never Initiative or a
@@ -113,6 +117,7 @@ terrain as rules · tactics · morale · outs · rewards · scaling · developme
   XP, the same as if every foe had fallen, split evenly across the party (Table I–4).
   A charm or a *suggestion* that lands is an out too, and the target knows by morning
   what was done to it.
+  <!-- TODO-Q14: XP for walk-away outs (let her go, walk away, go back the way they came, stop interfering) waits on owner ruling Q14 (SNAKES-5). -->
 - **Steel at the ball.** Before midnight, a spell with a visible effect cast at a guest
   counts as bare steel (Chapter IV, *The Palace on Alert*). And at this ball any
   attacker, with a spell or a sling as much as a fist, may say a blow is meant to
@@ -120,9 +125,20 @@ terrain as rules · tactics · morale · outs · rewards · scaling · developme
   a house rule, because nobody wants a guest killed by a *fire bolt* over a seating
   plan.
 - **Heroic Inspiration** stays the plain 5e rule: you have it or you don't. Each card
-  names **one** award at most (on S14, a natural 20 pays its own as well). A character
+  names **one** award at most, and the Table I–3 row it reminds you of (on S14, a
+  natural 20 pays its own as well). A character
   who already has Inspiration can give the award to another player character who
   doesn't.
+- **Surprise.** Unless a card says otherwise, nobody is surprised: every fight in this
+  chapter starts in plain view. The cards a careful party can creep up on (S2, S7, S8
+  and S10) each say what a quiet approach buys.
+
+> **DM Note — at a 2014 table**
+>
+> The 2014 guide's group multiplier rates most of these cards one or two bands harder
+> than printed. It counts heads, and these heads break early, fight to detain and quit
+> on a clock. Keep the rosters as printed. Each budget line also says how the fight
+> played in simulation, and that is the better guide.
 
 **Table IX–1: Scaling at a Glance** *(SRD 5.2.1 XP budget for the whole party)*
 
@@ -201,7 +217,7 @@ memo from the east that reached her desk and was above her seal to read. The Chu
 finds Raunu illegible, and a chief it cannot predict is a chief it cannot steer (Ch.
 II). And the written word belongs to the Church and to nobody else (Val'loh, V3).
 
-**Who they brought.** Kovaun (CR 1) and three **Church Wardens** (CR 1), her escort.
+**Who they brought.** Kovaun (CR 1/2) and three **Church Wardens** (CR 1), her escort.
 
 **The line.**
 
@@ -454,12 +470,12 @@ out of wanting it, and stays at 0 unless something new happens to it.
 
 **Table IX–2: The Snake Tracker**
 
-| Faction | Starts | Rises (+1 each) | Falls | At midnight, heat 3–4 |
+| Faction | Starts | Rises (+1 each) | Falls | What heat 3–4 sets off |
 |---|---|---|---|---|
 | **The Circle** ☐☐☐☐ | 1 | The toast *(automatic, Mv IV)* · Callun's coin refused in Mv III · **to 4:** S7's clock filled, or the nursery sold to her | −1 for each knife turned or caught quietly · **to 0:** Agenda 1 delivered, or the Tithe told to Callun, or Callun told to her face what her knife did to an under-cook | **S12** — the knives take a minister through the smoke |
-| **The Church** ☐☐☐☐ | 1 | The Radiant's blessing *(automatic, Mv IV)* · a warden refused or humiliated in front of guests · S8's tell shown to the table and not stepped on by midnight | −1 if Kovaun is given something true about the three gray masks to file · **to 0:** Agenda 2's honest judgment delivered | **S8, in the dark** — the wardens carry the study out |
-| **House Draunel** ☐☐☐☐ | 1 | The toast *(automatic)* · Agenda 3 refused or failed · Iron 2 stopped without Draunel losing face (he reaches for the next iron) | −1 if Draunel is embarrassed in front of guests · **to 0:** Agenda 3's "understanding" delivered | **S13** — the arrest in the fire |
-| **House Boranis** ☐☐☐☐ | 0 | Vorlain baited or got drunk in public · the appointment accepted *(automatic, Mv IV)* · Draunel's heat reaches 3 | −1 each time the party helps Essin keep Vorlain sober and unbaited · −1 if S6 ends quietly · **to 0:** Essin warned of the appointment before Mv IV | **S13** — the cousins fight for Vorlain *(only if Draunel's heat is 3–4 too; otherwise they simply go into the fire with him)* |
+| **The Church** ☐☐☐☐ | 1 | The Radiant's blessing *(automatic, Mv IV)* · a warden refused or humiliated in front of guests · S8's tell shown to the table and not stepped on by midnight | −1 if Kovaun is given something true about the three gray masks to file · −1 if the wardens are turned back at the study door (S8) · **to 0:** Agenda 2's honest judgment delivered | **S8, in the dark** — the wardens carry the study out |
+| **House Draunel** ☐☐☐☐ | 1 | The toast *(automatic)* · Agenda 3, if one of the characters carries it, refused or failed · Iron 2 stopped without Draunel losing face (he reaches for the next iron) · S9's clock filled | −1 if Draunel is embarrassed in front of guests · **to 0:** Agenda 3's "understanding" delivered | **S13** — the arrest in the fire |
+| **House Boranis** ☐☐☐☐ | 0 | Vorlain baited, or got drunk, by one of the characters · the appointment accepted *(automatic, Mv IV)* · Draunel's heat reaches 3 · a cousin beaten in public (S6) · S9's clock filled | −1 each time the party helps Essin keep Vorlain sober and unbaited · −1 if S6 ends quietly · **to 0:** Essin warned of the appointment before Mv IV | **S13** — the cousins fight for Vorlain *(only if Draunel's heat is 3–4 too; otherwise they simply go into the fire with him)* |
 | **Phern** ☐☐☐☐ | 0 | Once each in Mv II, III and IV *(automatic — the omens)* | −1 if a player character walked the room with Corro and took him seriously · −1 if Corro trusts a player character enough to take an instruction at midnight | **S11** — the door held for Corro alone |
 | **The Thenya** ☐☐☐☐ | 1 | The toast *(automatic)* · the audience refused *(automatic, Mv IV)* · a player character lies to Maiven, or refuses her and says so | −1 if a player character promises to go with her at midnight and means it · **to 0:** proof of Veier — the ring delivered and an answer brought back, or anyone who has been in B9 telling her what the empty traveling pack means | **S10** in Mv V — the wall. *(At midnight she goes toward the east wing whatever her heat.)* |
 
@@ -478,9 +494,8 @@ than two factions are hot at midnight unless the table has made it so.
   table may see them go, and should.
 - **3: the lights-out beat happens.** The card in the right-hand column is live and
   visible, as written.
-- **4: it happens with steel already out.** The card starts with its clock one
-  segment filled, or with the foes' **Nastier** line in play (MM's choice, said out
-  loud).
+- **4: it happens with steel already out.** Each card says what heat 4 changes (the
+  line *At heat 4* under its Enemies).
 
 > **MM Note — heat is not a debt the table owes**
 >
@@ -511,19 +526,19 @@ than two factions are hot at midnight unless the table has made it so.
 
 | ID | Fight | When | Where | Who | Budget *(four 4th-level PCs)* |
 |---|---|---|---|---|---|
-| **S1** | The Seating Feud | Mv II–IV | B3 | Feuding Kinsmen | 200 XP — trivial on paper; the clock is the fight |
+| **S1** | The Seating Feud | Mv II–IV | B3 | Feuding Kinsmen | 200 XP — under Low; the clock is the fight |
 | **S6** | The Quiet Word | Mv II–III | B5, the terraces | House Boranis | 600 XP — under Low; a warning with fists |
 | **S2** | The Service Corridor Job | Mv V | B10, service run | Tavva's crew | 600 XP — under Low; the clock is the fight |
-| S4 *(half)* | The East Wing Doors | Mv II–V | B9 | Boranis Honor Guard | 1,350 XP — Moderate, and four more are coming |
-| **S7** | The Second Plate | Mv IV–V | B10 → the east wing's service door | The Circle | 800 XP — Low |
-| **S8** | The Study Door | Mv V, into VI | B8 | The Church | 800 XP — Low, and nobody dies |
-| **S9** | The Appointment | Mv V | B5, upper terrace | House Draunel and House Boranis | 1,150 XP — Low; Moderate if both sides fight to the last |
+| S4 *(half)* | The East Wing Doors | Mv I–V | B9 | Boranis Honor Guard | 900 XP — under Low, and four more are coming |
+| **S7** | The Second Plate | Mv IV–V | B10 → the east wing's service door | The Circle | 800 XP — under Low |
+| **S8** | The Study Door | Mv V, into VI | B8 | The Church | 800 XP — under Low, and nobody dies |
+| **S9** | The Appointment | Mv V | B5, upper terrace | House Draunel and House Boranis | 1,150 XP — between Low and Moderate; plays Low, or Moderate if both sides fight to the last |
 | **S10** | Over the Wall | Mv V | The garden under the east wing | The Thenya *(only if provoked)* | 1,000 XP — Low |
 | **S11** | The Phern Door | Mv VI | B2 → the service passages | Phern | 625 XP — under Low; the crush is the fight |
-| **S14** | The Attendant | Mv VI–VII | Wherever the party gets in an Uninvited's way | The Uninvited's servant | 3,900 XP — Deadly while Focused; High while Idle |
+| **S14** | The Attendant | Mv VI–VII | Wherever the party gets in an Uninvited's way | The Uninvited's servant | 3,900 XP — nearly twice High while Focused; plays High while Idle |
 | S5 *(half)* | The Looters | Mv VI–VII | B7 / B3 | Tavva's crew | 600 XP — under Low |
-| S12 *(half)* | The Minister in the Smoke | Mv VII | B3 / B10 | The Circle | 600–800 XP — Low |
-| **S13** | The Arrest in the Fire | Mv VII | B3, burning | House Draunel and House Boranis | 1,350 XP — Moderate |
+| S12 *(half)* | The Minister in the Smoke | Mv VII | B3 / B10 | The Circle | 600–800 XP — under Low |
+| **S13** | The Arrest in the Fire | Mv VII | B3, burning | House Draunel and House Boranis | 1,350 XP — between Low and Moderate; plays Moderate |
 | **S3** | The Gate at Midnight | Mv VII | B12 | The Bought | 1,500 XP — Moderate; 2,600 if the captain fights, and he would rather talk |
 
 **Before midnight:** S1 and S6 (Movements II–III), S4, S2, S7, S8, S9, S10. **In the
@@ -605,11 +620,14 @@ Intimidation) check.
 - Be visibly more important than the argument — a Minor Scion, an honor guard,
   anybody with a name they recognise. No check.
 
-**Rewards.** 200 XP. *Heroic Inspiration:* to whoever ends it without anyone
-drawing. Ending it well earns Corval's open gratitude, which is worth more than either
-house's: he is the man who opens doors.
+**Treasure.** None.
 
-**Scaling.** The clock never changes; it is still the fight.
+**Rewards.** 200 XP, divided equally among the characters. *Heroic Inspiration*
+(Table I–3, *a fight ended by an out*): to whoever ends it without anyone drawing.
+Ending it well earns Corval's open gratitude, which is worth more than either house's:
+he is the man who opens doors.
+
+**Adjusting the Encounter.** The clock never changes; it is still the fight.
 - *Three player characters:* six kinsmen and the principal.
 - *Five player characters:* ten kinsmen and the principal.
 - *Four at 3rd level:* six kinsmen, no principal.
@@ -638,6 +656,11 @@ the Dead Dance. *(Chapter IV, "The Other Thieves", points here.)*
 > has stopped and is looking back down the corridor at you. She has not raised the
 > alarm.*
 
+**Detection.** The box assumes the characters come down the corridor openly. If they
+come quietly, they make a group Dexterity (Stealth) check against Tavva's Passive
+Perception of 16. On a success, skip the box's last two sentences: the crew is
+surprised, and the noise clock does not advance in the first round.
+
 **Objective:** stop the staging before it reaches the gallery. *Not:* defeat Tavva.
 
 **The noise clock — four segments, and it is shared.** Advances whenever anyone on
@@ -650,8 +673,8 @@ the scene.** It is the whole scene.
 
 **Enemies.** **Tavva** (Chapter X) and three **Gallery Knives** — her whole crew of
 four.
-*Budget:* 450 + (3 × 50) = **600 XP**, under Low (1,000). Tavva's two knives and her
-Sneak Attack hit harder than her XP says, and it still plays Low: a player character
+*Budget:* 450 + (3 × 50) = **600 XP**, under Low (1,000). Tavva's two Knife attacks and
+her Sneak Attack hit harder than her XP says, and it still plays Low: a player character
 drops in about one fight in twenty before she is Bloodied, and in fewer than one in
 ten if it goes to the last knife.
 *Honest note:* the party will very likely win the fight. The difficulty of this scene
@@ -688,12 +711,15 @@ charge when Bloodied; with none left, she starts bargaining out loud, between bl
 - Take the job's proceeds and let her keep her life.
 - Make enough noise to lose. That is an out too, just a bad one.
 
-**Rewards.** 600 XP. *Heroic Inspiration:* to whoever gets something out of Tavva that
-was not violence. *Loot:* the
-crew's rope, sacking and shuttered lantern; Tavva's sack and charges if she is caught
-(Chapter X, *The Night's Loot*).
+**Treasure.** The crew's rope, sacking and shuttered lantern. If Tavva is caught, her
+sack (worth 2d6 × 25 GP to a fence) and any charges she has not spent (see chapter X,
+"The Night's Loot").
 
-**Scaling.**
+**Rewards.** 600 XP, divided equally among the characters. *Heroic Inspiration*
+(Table I–3, *a fight ended by an out*): to whoever gets something out of Tavva that
+was not violence.
+
+**Adjusting the Encounter.**
 - *Three player characters:* Tavva and two knives (550 XP).
 - *Five player characters:* Tavva's **Nastier** line (a third charge, and a fourth
   knife already behind the party in the passage), and S7's knife in the same corridor
@@ -834,12 +860,14 @@ if anyone can climb it away from the gatehouse (DC 13 Strength (Athletics)) — 
 they do, they meet four more Blades, because the other twelve are holding the
 perimeter*. The captain's price, if anyone asks what it is.
 
-**Rewards.** 1,500 XP, or 2,600 once the captain is on the field; an out pays the same.
-*Heroic Inspiration:* to whoever voided the contract, or to whoever held the wicket
-when it counted if nobody did. *Loot:* the contract case, and the company's purse
-(Chapter X).
+**Treasure.** The contract case, and the company's purse (3d6 × 10 GP in old coin)
+(see chapter X, "The Night's Loot").
 
-**Scaling.** Never a second sergeant.
+**Rewards.** 1,500 XP, or 2,600 once the captain is on the field, divided equally among
+the characters; an out pays the same. *Heroic Inspiration* (Table I–3, *a fight ended
+by an out*): to whoever voided the contract.
+
+**Adjusting the Encounter.** Never a second sergeant.
 - *Three player characters:* the ordinary sergeant (no Nastier line) and four Blades
   (850 XP).
 - *Five player characters:* add **two more Blades** from the perimeter, both in the
@@ -860,16 +888,23 @@ VII, and see ⟨If History Breaks⟩ in Chapter V.**
 
 ***Where and when:*** B9's cleared corridor, any time the party crosses the house —
 forcing the east wing, robbing the gallery loudly, refusing the gatehouse cell. Most
-often Movement V. Also S10, with the Thenya as the offenders.
+often Movement V. Also the Gatehouse Court in Movement I, if steel is drawn at the gate
+(Chapter IV), and S10, with the Thenya as the offenders.
 
-**Enemies.** Three **Boranis Honor Guards**, detaining and expelling. *Call the House*
+**Enemies.** Two **Boranis Honor Guards**, detaining and expelling. *Call the House*
 brings four more at the start of the second round after the first guard is Bloodied.
-*Budget:* 3 × 450 = **1,350 XP — Moderate**; with the four who are coming, 3,150 XP.
-That is the point. This is not a fight the party is meant to win, and not one they can
-lose anything permanent to: a character the guards drop to 0 Hit Points is Unconscious
+*Budget:* 2 × 450 = **900 XP**, under Low (1,000); with the four who are coming,
+2,700 XP, beyond High. That is the point. This is not a fight the party is meant to
+win, and not one they can lose anything permanent to: a character the guards drop to 0 Hit Points is Unconscious
 and Stable and wakes in the gatehouse cell.
 
 **Objective:** get through, or get out, before four more arrive.
+
+**Tactics.** The guards detain and expel: Seize first, and blows that *detain* (the
+block's *Detain and Expel*). The first guard Bloodied calls the house.
+
+**Morale.** They never flee the house. A broken guard steps back and offers terms (the
+block's **Breaks** line).
 
 **Outs, and they are visible from the first round:**
 - An invitation and a good story: DC 15 Charisma (Deception or Persuasion).
@@ -879,20 +914,27 @@ and Stable and wakes in the gatehouse cell.
 - The service passages, if someone reaches them: a chase, three successes before three
   failures on DC 13 Dexterity (Acrobatics) or Strength (Athletics) checks.
 
+<!-- TODO-Q14: whether "Going back the way you came" pays XP waits on owner ruling Q14 (SNAKES-5). -->
+
 Losing costs the east wing for the evening and your invitation's good standing. It
 does not cost a character. **Say that out loud if the table looks worried.**
 
-**Rewards.** 1,350 XP for any out; nothing for losing. *Heroic Inspiration:* to whoever
-talks the guards down.
+**Treasure.** None the house lets go. A guard's unspent *House Flare* and *House Seal*
+are House Boranis property, and taking them is theft (see chapter X, "The Night's
+Loot").
 
-**Scaling.** The reinforcements never change; they are the point.
-- *Three player characters:* two guards at the door.
+**Rewards.** 900 XP for any out, divided equally among the characters; nothing for
+losing. *Heroic Inspiration* (Table I–3, *a fight ended by an out*): to whoever talks
+the guards down.
+
+**Adjusting the Encounter.** The reinforcements never change; they are the point.
+- *Three player characters:* two guards at the door, as printed.
 - *Five player characters:* three guards, and the fourth a round behind.
-- *Four at 3rd level:* two guards.
+- *Four at 3rd level:* two guards, as printed.
 - *Four at 5th level:* four guards.
 
 **Development.** If expelled, the offender's invitation is void and Corval is informed.
-**Return to Movement V.**
+If an out ended it, no invitation is void. **Return to the current Movement.**
 
 ---
 
@@ -915,20 +957,32 @@ blade and the willingness.
 but property and the party's opinion of themselves — which, at this hour of this night,
 is not nothing.
 
+**Tactics.** As S2: Tavva fights to leave, not to win, and spends her charges only to
+break contact. The knives fight to cover her, and stop the moment she is out.
+
+**Morale.** As S2: the knives break the moment a charge fires or Tavva is gone.
+
 **Outs.** Let them go. Take it back. Point out the fire.
 
-**Rewards.** 600 XP. *Heroic Inspiration:* to whoever gives back what was taken off the
+**Treasure.** Tavva's sack, if she is caught (worth 2d6 × 25 GP to a fence), and any
+charges she has not spent (see chapter X, "The Night's Loot"). Here the rings came off
+the fallen, and giving them back is the reward.
+
+**Rewards.** 600 XP, divided equally among the characters. *Heroic Inspiration*
+(Table I–3, *a fight ended by an out*): to whoever gives back what was taken off the
 fallen. A looter caught and held is worth more than the goods: by dawn, the
 inquest's favourite scapegoat and the players' proof of what they saw.
 
-**Scaling.**
+**Adjusting the Encounter.**
 - *Three player characters:* Tavva and two knives (550 XP).
 - *Five player characters:* Tavva's **Nastier** line (a third charge, and a fourth
   knife) (650 XP).
-- *Four at 3rd level:* Tavva and two knives (550 XP).
+- *Four at 3rd level:* Tavva and two knives (550 XP). S2 keeps all three knives at this
+  level because its clock carries that fight; S5 has no clock.
 - *Four at 5th level:* Tavva's **Nastier** line, four knives in all (650 XP).
 
-**Development.** If nobody interferes, the crew gets away clean — and the module notes,
+**Development.** If the party stops them, what was taken goes back to the people it
+came off. If nobody interferes, the crew gets away clean — and the module notes,
 without comment, which kind of night the table chose to have. **Return to Movement VII,
 and S3.**
 
@@ -972,6 +1026,12 @@ balustrade is not somewhere else.
 terrace (1d6 Bludgeoning, Prone, and out of the scene). *The lanterns* leave pools of
 Dim Light between them.
 
+**Tactics.** The cousins use *A Quiet Word* and their fists, and they want it quiet.
+Steel comes out only if a character draws first.
+
+**Morale.** On Essin's word, at once. Without him, when half the cousins are down or
+the fight has drawn a crowd (the block's **Breaks** line).
+
 **Outs.**
 - Tell them what they want to hear: that you will say nothing. No check if it is true;
   DC 15 Charisma (Deception) if it is not — they are family, and they have heard every
@@ -981,11 +1041,14 @@ Dim Light between them.
 - Shout. It ends the scene, and everyone in B2 turns to look at the terrace doors.
 - Walk away. They do not follow past the doors.
 
-**Rewards.** 600 XP. *Heroic Inspiration:* to whoever walks back inside without a blow
+**Treasure.** None.
+
+**Rewards.** 600 XP, divided equally among the characters. *Heroic Inspiration*
+(Table I–3, *a fight ended by an out*): to whoever walks back inside without a blow
 struck. If it ended quietly, House Boranis's heat falls by one, and Essin knows by the
 next Movement that you kept your head. He will remember it.
 
-**Scaling.**
+**Adjusting the Encounter.**
 - *Three player characters:* two cousins; the third stays inside (400 XP).
 - *Five player characters:* all three. A quiet word does not get louder for a bigger
   audience.
@@ -994,8 +1057,9 @@ next Movement that you kept your head. He will remember it.
   steps in only to stop it.
 
 **Development.** A cousin beaten in public is a House Boranis heat box ticked, and a
-Draunel duelist who saw it laughing about it at the wine court. **Return to the
-Movement.**
+Draunel duelist who saw it laughing about it at the wine court. If the cousins win, the
+character is walked back to the garden doors, and Essin hears of it; House Boranis's
+heat does not change. **Return to the Movement.**
 
 ---
 
@@ -1027,6 +1091,10 @@ the service run, or meets one there:***
 > that has a guard's lantern burning on the other side of it. Two more coats are
 > standing where the passage branches, doing nothing, and not talking.*
 
+**Detection.** If the characters follow quietly, they make a group Dexterity (Stealth)
+check against the knives' Passive Perception of 13. On a success, the knives are
+surprised.
+
 **Objective:** the Circle's knives do not reach the east wing's service door by the
 half-bell — and the under-cook is out of it.
 
@@ -1044,9 +1112,10 @@ tells them — Chapter II.)*
 **Enemies.** Four **Circle Hired Knives**: the three in the read-aloud, and the fourth
 the Circle paid for, who has been in the service run all night (the block's
 **Nastier** line).
-*Budget:* 4 × 200 = **800 XP — Low** for four 4th-level characters. As a fight it is
-over in a round, because the knives break at the first real wound; fought to the last
-knife it is still Low (about one fight in eight drops a player character). The clock
+*Budget:* 4 × 200 = **800 XP**, under Low (1,000) for four 4th-level characters. As a
+fight it is over in a round, because the knives break when the first of them is
+Bloodied; fought to the last knife it plays Low (about one fight in eight drops a
+character). The clock
 and the narrow run are the card.
 
 **Terrain as rules.**
@@ -1063,7 +1132,9 @@ and the narrow run are the card.
   everyone in the passage.
 
 **Tactics.** The knives do not want a fight; they want the door. One steps in to hold a
-player character in the narrow run while the other two slip past or wait for a gap.
+character in the narrow run while the others slip past or wait for a gap. The fourth
+has been in the run all night; the DM places him out of sight, ahead of the party or
+behind it.
 They draw only if a player character does, and they aim for hands and legs; nobody paid
 them for a death.
 
@@ -1083,10 +1154,13 @@ walks back into the Dance like a guest.
   are professionals — and on a success the Circle spends the rest of the night chasing
   the rumour the whole ballroom already believes, that he feeds the mad wife.
 
-**Rewards.** 800 XP. *Heroic Inspiration:* to whoever gets the under-cook out of the
-doorway without a blow. *Loot:* each knife's advance (Chapter X).
+**Treasure.** Each knife's advance (2d6 GP) (see chapter X, "The Night's Loot").
 
-**Scaling.**
+**Rewards.** 800 XP, divided equally among the characters. *Heroic Inspiration*
+(Table I–3, *a fight ended by an out*): to whoever gets the under-cook out of the
+doorway without a blow.
+
+**Adjusting the Encounter.**
 - *Three player characters:* three knives (600 XP).
 - *Five player characters:* four knives, and the clock also advances on any round two
   of them are past the party at once.
@@ -1115,6 +1189,11 @@ S12 is live in the dark. **Return to Movement V.**
 > waiting, the way you wait for a kettle. The other has turned his head toward you, and
 > he does not stand up.*
 
+**Detection.** The box assumes the characters come up the corridor openly. If they come
+quietly, they make a group Dexterity (Stealth) check against the wardens' Passive
+Perception of 13, with Advantage, because the corridor is dark. On a success, skip the
+box's last sentence: the wardens are surprised.
+
 **What is behind the door** (Chapter IV, B8): no papers, because there are none
 anywhere. Instruments nobody can name. A grown relief of the eastern coast on the great
 table, its mist-lines reworked many times. A **work-slate** with a half-erased lattice
@@ -1135,7 +1214,8 @@ One round later the slate is wiped, and the drawer is in a warden's arms.
 **Enemies.** Two **Church Wardens** at the door; the third arrives up the stair on the
 clock's second segment; and a fourth is already inside the room (the block's
 **Nastier** line), and has already found something. The Prelate is in the chapel.
-*Budget:* 4 × 200 = **800 XP — Low** for four 4th-level characters. The wardens
+*Budget:* 4 × 200 = **800 XP**, under Low (1,000) for four 4th-level characters. The
+Prelate is not in the fight, so her rating adds nothing. The wardens
 *detain*, and they break when two are down: nobody in this corridor is going to die,
 and the fight plays well under Low. The clock is what the party is racing.
 
@@ -1179,11 +1259,16 @@ The clock is gone; the objective is what they are carrying. Same outs, except th
 Kovaun is no longer in the chapel — she is in the Court, in the dark, with everyone
 else.
 
-**Rewards.** 800 XP. *Heroic Inspiration:* to whoever keeps the slate readable.
-*Loot:* the drawer, if it stays with the party — evidence of *something*; what the
-scorch marks mean, the module does not say.
+*At heat 4:* the wardens are already on the stair when the party arrives, and the
+drawer is halfway down it.
 
-**Scaling.**
+**Treasure.** The drawer, if it stays with the party — evidence of *something*; what
+the scorch marks mean, the module does not say (see chapter X, "The Night's Loot").
+
+**Rewards.** 800 XP, divided equally among the characters. *Heroic Inspiration*
+(Table I–3, *a fight ended by an out*): to whoever keeps the slate readable by an out.
+
+**Adjusting the Encounter.**
 - *Three player characters:* the two at the door and the one on the stair; nobody
   inside (600 XP).
 - *Five player characters:* as printed, and the lock clock starts with one segment
@@ -1215,6 +1300,8 @@ the rail:***
 > seconds stand, and a few paces off a man in a good coat is walking slowly between the
 > two sides, speaking to each in turn. Nobody has drawn yet.*
 
+<!-- TODO-Q12: who the man in the good coat is (name him, or cut the line) waits on owner ruling Q12 (SNAKES-22). -->
+
 **Objective:** nobody draws — or if they do, nobody dies, and no Boranis is seen to
 have started it. Which side the party is on decides the rest.
 
@@ -1235,8 +1322,8 @@ down. He will be back; he always has a second way.
   block's **Nastier** line — 450 + (2 × 200) = 850 XP, under Low.
 - *Against the Boranis side:* three **Boranis Cousin's Blades** — 300 XP, far under
   Low.
-- *Against both:* 1,150 XP — **Low** for four 4th-level characters, and it plays Low as
-  long as the morale lines hold. Fought to the last against both sides at once, it
+- *Against both:* **1,150 XP**, between Low (1,000) and Moderate (1,500) for four
+  4th-level characters, and it plays Low as long as the morale lines hold. Fought to the last against both sides at once, it
   plays Moderate: about half of those fights drop a player character.
 - **Essin Boranis** arrives on the clock's first segment if a player character went to
   him when he stood alone (Chapter IV), as the Boranis side's leader — or as the
@@ -1258,8 +1345,8 @@ cousin draw: *Provocation*, and a smile. Once a blade is out and the challenge s
 man off the grass. Essin, if he comes, uses *Always Between* on whichever cousin is
 nearest to drawing.
 
-**Morale.** The duelists break at the first real wound, or when the challenge is
-refused in front of witnesses in a way they cannot fight past. The cousins break on
+**Morale.** The duelists break the first time one of them takes damage, or when the
+challenge is refused in front of witnesses in a way they cannot fight past. The cousins break on
 Essin's word, or when their man is off the grass.
 
 **Outs.**
@@ -1274,11 +1361,13 @@ Essin's word, or when their man is off the grass.
   you.
 - Essin's word ends the Boranis side at once.
 
-**Rewards.** 1,150 XP; an out pays the same. *Heroic Inspiration:* to whoever answered
-Essin when he asked for help — or, if nobody did, to whoever ended it with no blade
-drawn.
+**Treasure.** None.
 
-**Scaling.**
+**Rewards.** 1,150 XP, divided equally among the characters; an out pays the same.
+*Heroic Inspiration* (Table I–3, *a fight ended by an out*): to whoever ended it with no
+blade drawn.
+
+**Adjusting the Encounter.**
 - *Three player characters:* two duelists (no Nastier line) and two cousins (600 XP).
 - *Five player characters:* as printed, and Essin on the Boranis side from the start.
 - *Four at 3rd level:* two duelists and two cousins (600 XP).
@@ -1295,8 +1384,9 @@ heat rises by one, and the honor guard is on the terraces for the rest of the Mo
 ## S10. Over the Wall
 
 ***Where and when:*** the garden below the east wing, Movement V, at the half-bell. The
-Thenya — **a fight only if the party provokes it.** *(Chapter IV, "The Snakes This
-Movement — V", points here.)*
+Thenya — **a fight only if the party provokes it.** Only if the Thenya's heat is 3 or
+more at the half-bell; at 0–2 the slingers coil the rope and do not climb, and this card
+does not fire. *(Chapter IV, "The Snakes This Movement — V", points here.)*
 
 ***Trigger — read when a player character comes round into the garden below the east
 wing:***
@@ -1306,6 +1396,11 @@ wing:***
 > it. One is paying out a rope from a coil at her feet, weighted at the end with
 > something that is not quite a stone. The other is not watching the window at all.
 > She is watching the corner of the building, and now she is watching you.*
+
+**Detection.** The box assumes the characters come round the corner openly. If they
+come quietly, they make a group Dexterity (Stealth) check against the slinger at the
+corner, whose Passive Perception is 13 (see chapter X). On a success, end the box at
+"watching the corner of the building": the slingers are surprised.
 
 **Objective:** the Thenya get what they came for — proof of Veier, or a way in — without
 the honor guard answering. Or the party stops them without a fight. Either is a win.
@@ -1322,9 +1417,10 @@ stands between them and that window, lays hands on them, or calls the guard.
   Slingers** — the two under the window and the one at the corner. 700 + (3 × 100) =
   **1,000 XP — Low**, and it plays Low: Maiven's three attacks are the danger, and
   she stops the moment the party does.
-- *With the Thenya, when the guard answers:* three **Boranis Honor Guards**, with
-  their reinforcements — S4's budget, **1,350 XP**, and a fight nobody is meant to
-  win.
+- *With the Thenya, when the guard answers:* two **Boranis Honor Guards**, with
+  their reinforcements — S4's budget, **900 XP** before the four arrive, and a fight
+  nobody is meant to win.
+- *At heat 4:* the half-bell clock starts with one segment filled.
 
 **Terrain as rules.**
 - *The wall* is twenty feet of grown crystal to the window. Climbing it is DC 13
@@ -1352,10 +1448,13 @@ goes. The fight ends the instant the party stops standing between them and the w
 - Warn them about the guard on the other side of that window. DC 13 Wisdom (Insight) to
   know how to say it to border people so that it lands as help.
 
-**Rewards.** 1,000 XP; an out pays the same. *Heroic Inspiration:* to whoever brings
-Maiven proof of her kinswoman.
+**Treasure.** None.
 
-**Scaling.**
+**Rewards.** 1,000 XP, divided equally among the characters; an out pays the same.
+*Heroic Inspiration* (Table I–3, *a fight ended by an out*): to whoever brings Maiven
+proof of her kinswoman.
+
+**Adjusting the Encounter.**
 - *Three player characters:* Maiven and two slingers (900 XP).
 - *Five player characters:* Maiven, three slingers, and the slingers' **Nastier** line.
 - *Four at 3rd level:* Maiven and two slingers (900 XP), and she pulls her blows.
@@ -1396,6 +1495,8 @@ anyone who is not trying to get past them to Corro or through the door ahead of 
 *Budget:* (3 × 200) + 25 = **625 XP**, under Low (1,000). The bodyguards shove before
 they cut, and as a fight it is light. The crush is what this card is about.
 
+*At heat 4:* the crush clock starts with one segment filled.
+
 **Terrain as rules.**
 - *The crowd* is Difficult Terrain. A creature (other than a bodyguard) that starts its
   turn in it must succeed on a DC 13 Strength (Athletics) or Dexterity (Acrobatics)
@@ -1425,10 +1526,13 @@ once.
 - Open another door. Anha, and Agenda 8's player, know the service passages from the
   kitchen side.
 
-**Rewards.** 625 XP; an out pays the same. *Heroic Inspiration:* to whoever turned the
-door for everyone.
+**Treasure.** None.
 
-**Scaling.**
+**Rewards.** 625 XP, divided equally among the characters; an out pays the same.
+*Heroic Inspiration* (Table I–3, *a fight ended by an out*): to whoever turned the door
+for everyone.
+
+**Adjusting the Encounter.**
 - *Three player characters:* two bodyguards (425 XP).
 - *Five player characters:* three bodyguards, and the door they picked is narrower
   than it looks: the crowd check is DC 15.
@@ -1439,7 +1543,8 @@ door for everyone.
 **Development.** The service passages are the only unwarded way through the palace
 after midnight (Chapter IV, *The Palace on Alert*). A door held for everyone here is
 the difference between a tragedy and a massacre, and a party that held it has already
-done the thing Movement VII is about. **Return to Chapter V, and the beats.**
+done the thing Movement VII is about. If the crush clock filled, that doorway stays
+jammed for the rest of the night. **Return to Chapter V, and the beats.**
 
 ---
 
@@ -1468,8 +1573,15 @@ and a creature that starts its turn in the thick of it must succeed on a DC 10
 Constitution saving throw or lose its action coughing.
 
 **Enemies.** Three **Circle Hired Knives** — two carrying the minister, one a few
-paces ahead in the smoke, finding the way (600 XP, under Low). At heat 4 there is a
-fourth, the block's **Nastier** line (800 XP, Low).
+paces ahead in the smoke, finding the way (600 XP, under Low).
+
+*At heat 4:* a fourth knife, the block's **Nastier** line (800 XP, still under Low).
+
+**Tactics.** As S7: they draw only if a character does, and they aim for hands and
+legs. They mean the minister no harm; he is the fee.
+
+**Morale.** As S7: the knives break when the first of them is Bloodied, or on Callun's
+word.
 
 **Outs.**
 - Tell them Callun would be horrified. She would; *Paid on Delivery* — and anybody
@@ -1481,10 +1593,13 @@ fourth, the block's **Nastier** line (800 XP, Low).
   prefer.
 - Outbid them, as in S7.
 
-**Rewards.** 600–800 XP. *Heroic Inspiration:* to whoever gets the minister out on his
-own feet, going where he chooses.
+**Treasure.** Each knife's advance (2d6 GP) (see chapter X, "The Night's Loot").
 
-**Scaling.**
+**Rewards.** 600–800 XP, divided equally among the characters. *Heroic Inspiration*
+(Table I–3, *a fight ended by an out*): to whoever gets the minister out on his own
+feet, going where he chooses.
+
+**Adjusting the Encounter.**
 - *Three player characters:* two knives, both carrying (400 XP).
 - *Five player characters:* four knives.
 - *Four at 3rd level:* two knives (400 XP); three at heat 4.
@@ -1508,6 +1623,8 @@ House Boranis, when Draunel's heat is 3–4.
 > back in when three men in good coats close round him, and one of them takes his arm.
 > Behind them, a few paces off, another man is reaching for his knife.*
 
+The man reaching for his knife is Essin Boranis.
+
 **What is happening.** Vorlain Boranis has been hauling guests out of this gallery since
 the lights died, to everyone's permanent confusion including his own (canon). Draunel's
 fourth iron has found him: two duelists and their lord, taking the man who profits
@@ -1525,16 +1642,18 @@ comes down, and whoever is still inside is still inside.
 
 **Enemies.** It depends on the party.
 - *The Draunel side:* **Essar Draunel** and two **Draunel Duelists**, one of them with
-  the block's **Nastier** line. 700 + 200 + 450 = **1,350 XP — Moderate** for four
-  4th-level characters. Draunel's three rapier attacks run hotter than his XP; in play
-  this drops a player character in about one fight in three, which is Moderate.
+  the block's **Nastier** line. 700 + 200 + 450 = **1,350 XP**, between Low (1,000) and
+  Moderate (1,500) for four 4th-level characters. Draunel's three rapier attacks run
+  hotter than his XP; in play this drops a character in about one fight in three,
+  which plays Moderate.
 - *The Boranis side:* **Essin Boranis** and three **Boranis Cousin's Blades**. 450 +
   (3 × 100) = **750 XP**, under Low. They are the party's natural allies here if the
   party wants them; with the cousins fighting beside it, the Draunel side is a Low
   fight.
 - **Vorlain Boranis** fights only to free his arm, fast (*Brief and Efficient*), and
   then goes back into the fire.
-- *Do not* run both sides against the party (2,100 XP, over High). If the party sides
+- *Do not* run both sides against the party (2,100 XP, over High).
+- *At heat 4:* the gallery clock starts with one segment filled. If the party sides
   with Draunel, Essin's side breaks as soon as Vorlain is out of reach — *Always
   Between*, then gone.
 
@@ -1558,7 +1677,7 @@ and try to walk him out. Essin puts himself between (*Always Between*); his cous
 draw, because it is after midnight and nobody is enforcing anything.
 
 **Morale.** Draunel breaks the moment the fight is seen as *his*. The duelists break with
-him, or at the first real wound. Essin's side breaks the moment Vorlain is safe or gone.
+him, or the first time one of them takes damage. Essin's side breaks the moment Vorlain is safe or gone.
 
 **Outs.**
 - Shame Draunel in front of the people Vorlain just carried out. Ask them — no check —
@@ -1573,11 +1692,15 @@ him, or at the first real wound. Essin's side breaks the moment Vorlain is safe 
   would give a great deal to know it. A player character who carries the offer
   between them (DC 15 Charisma (Persuasion)) ends this and starts something much worse,
   later, somewhere else.
+  <!-- TODO-Q11: "Broker a trade" (whether the missing year's two bodies are literal) waits on owner ruling Q11. -->
 
-**Rewards.** 1,350 XP; an out pays the same. *Heroic Inspiration:* to whoever got
-Vorlain back into the gallery or kept him out of Draunel's hands.
+**Treasure.** None.
 
-**Scaling.**
+**Rewards.** 1,350 XP, divided equally among the characters; an out pays the same.
+*Heroic Inspiration* (Table I–3, *a fight ended by an out*): to whoever got Vorlain back
+into the gallery without a fight.
+
+**Adjusting the Encounter.**
 - *Three player characters:* Draunel and one duelist, without the Nastier line
   (900 XP).
 - *Five player characters:* Draunel and two duelists, both with the Nastier line
@@ -1633,13 +1756,13 @@ on, at the start of each of its turns, it is **Focused** if any one of the three
 the scene has no Delay: one of them glances at it, then at the party, and that is
 enough. A broken focus lasts only until its next turn. Delay on every Uninvited in the
 scene keeps it Idle, and that is how Buying Time and this card feed each other.
-*Budget:* **Deadly while Focused; High while Idle.** The block is CR 8 (3,900 XP), and
+*Budget:* **beyond High while Focused; plays High while Idle.** The block is CR 8 (3,900 XP), and
 that CR is its Focused self: by the usual yardstick its offence rates about CR 5 (two
 turns a round, two blows a turn, *Put Aside* on a recharge) and its defence about
 CR 11 (229 Hit Points, AC 17). 3,900 XP is nearly twice High for four 4th-level
-characters (2,000), which is what "Deadly" means here. Idle, its offence drops to one
-blow at Disadvantage, but its defence does not move, so by the yardstick it is about
-CR 5 (1,800 XP), just under High. It is "High" all the same because of the clock:
+characters (2,000). Idle, its offence drops to one blow at Disadvantage, but its
+defence does not move, so by the yardstick it is about CR 5 (1,800 XP), between
+Moderate and High. It is "High" all the same because of the clock:
 nobody gets through 229 Hit Points in the rounds an errand takes, and every one of
 those rounds it is clearing the way. Award the full 3,900 XP however it is got out of
 the way.
@@ -1663,8 +1786,8 @@ characters are built to hit hard out-slugs it (the optimised party above); give 
 table the *hard-hitting* line under Scaling.
 
 **Distracting the Attendant — the full rule.** It takes **an action**. The player
-describes what their character does, then rolls **d20 + the ability and skill that fit
-the trick** — Charisma (Performance) for music, Charisma (Deception) for a false order,
+describes what their character does, then makes **an ability check with the skill that
+fits the trick** — Charisma (Performance) for music, Charisma (Deception) for a false order,
 Intelligence (Arcana) to show it a working crystal, Charisma (Persuasion) to ask it a
 question it must answer, Dexterity (Sleight of Hand) to take its cup, and so on — against
 **DC 13 while it is Idle, DC 19 while it is Focused.**
@@ -1738,16 +1861,21 @@ badly, and looks at things.
   it was going.
 - Argue its orders. Keeping the three from being interrupted is a narrow order, and a
   character who can show it that what they are doing is not, strictly, an interruption
-  — carrying guests out, fighting a fire, holding a door for the crowd — makes a
-  distraction check of Intelligence or Charisma (Persuasion).
+  — carrying guests out, fighting a fire, holding a door for the crowd — makes an
+  Intelligence (Investigation) or Charisma (Persuasion) check against the distraction
+  DC.
 - Take it apart. 229 Hit Points and AC 17, while it hits back twice a round. Possible,
   and printed above so nobody chooses it by accident.
 
-**Rewards.** 3,900 XP, however it is got out of the way. *Heroic Inspiration:* to the
-first player who tries to distract it (hint 4); a natural 20 on a distraction pays its
-own.
+<!-- TODO-Q14: whether "Stop interfering" pays the card's XP waits on owner ruling Q14 (SNAKES-5). -->
 
-**Scaling.** *(Each line simulated the same way; pregens unless it says otherwise.)*
+**Treasure.** None. It leaves no body (*Not Here*).
+
+**Rewards.** 3,900 XP, divided equally among the characters, however it is got out of
+the way. *Heroic Inspiration* (Table I–3, *the Attendant distracted*): to the first
+player who tries to distract it (hint 4); a natural 20 on a distraction pays its own.
+
+**Adjusting the Encounter.** *(Each line simulated the same way; pregens unless it says otherwise.)*
 - *Three player characters:* 180 Hit Points, and while Focused its second turn is a
   single Joined Hands. (Dassa, Pello and Ilesse: trading blows wins 18% and flattens
   the party 20%; bare distraction 26%; leaning in 72%.)
@@ -1763,4 +1891,6 @@ own.
 
 **Development.** Gone, the Attendant is not seen again tonight, and Chapter VI has no
 body and no witness who can say what it was. A party that sent it to the window has a
-story nobody at the inquest will believe. **Return to Chapter V.**
+story nobody at the inquest will believe. If the whole party is down, the Attendant
+finishes clearing the way and goes back to the edge of the light; Chapter V's history
+runs as written. **Return to Chapter V.**

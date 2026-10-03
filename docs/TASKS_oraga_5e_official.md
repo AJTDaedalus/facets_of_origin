@@ -202,7 +202,8 @@ Each task: rerun both math scripts and the linter's structure rules. Mirror site
 - **Accept:** the clock is stated in exactly one place and other sites point to it. No "perhaps" in 05's rules text. SA.
 - **Time:** 3 × 30 min.
 
-### ☐ T3.3 Chapter 09 mechanics
+### ☑ T3.3 Chapter 09 mechanics
+*Done 2026-10-03 (Phase 3a). TODO-gated and left in place: SNAKES-5 (TODO-Q14, three sites), the S9 figure (TODO-Q12), S13 *Broker a trade* (TODO-Q11). S8 stays 800 XP (under Low): Kovaun is not in its roster (O20). See LOG "Phase 3".*
 - **Findings:**
   - SNAKES-1: per-card *At heat 4* lines.
   - SNAKES-2: tracker rows (mirror in 08 Table VIII–7).
@@ -223,7 +224,8 @@ Each task: rerun both math scripts and the linter's structure rules. Mirror site
 - **Accept:** every card has Tactics, Morale, Development (win and lose), Treasure, Rewards and Adjusting lines. Every budget label is arithmetically true against the SRD 5.2.1 budget for four 4th-level characters. SA.
 - **Time:** 4 × 30 min.
 
-### ☐ T3.4 Chapter 10 mechanics
+### ☑ T3.4 Chapter 10 mechanics
+*Done 2026-10-03 (Phase 3a). TODO-gated and left in place: Vell (TODO-Q8), the alignment dash on the three Uninvited and Vell (TODO-Q18), the coat's value (TODO-Q15). See LOG "Phase 3".*
 - **Findings:**
   - BESTIARY-2: the Wept's *She Arrives*.
   - BESTIARY-3: the *Call the House* cap.

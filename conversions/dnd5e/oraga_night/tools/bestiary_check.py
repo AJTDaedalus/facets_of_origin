@@ -77,7 +77,7 @@ B = {
  "Circle Hired Knife": dict(cr="1", hd=5, hp=32, ac=15, ab=[12,16,14,11,12,10], sv=[1],
    sk={"Intimidation":(5,2),"Perception":(4,3),"Stealth":(1,5)}, pp=13,
    atk=[(5,1,(1,4,3),5)], dc=[], dpr=12, atkb=5),
- "Damaris Kovaun": dict(cr="1", hd=6, hp=33, ac=11, ab=[10,12,12,16,18,16], sv=[4,5],
+ "Damaris Kovaun": dict(cr="1/2", hd=6, hp=33, ac=11, ab=[10,12,12,16,18,16], sv=[4,5],
    sk={"History":(3,5),"Insight":(4,8),"Persuasion":(5,5),"Religion":(3,5)}, pp=14,
    atk=[(2,0,(1,6,0),3)], dc=[(14,4)], dpr=3, atkb=2),
  "Draunel Duelist": dict(cr="1", hd=5, hp=27, ac=15, ab=[11,16,12,10,11,14], sv=[1],
@@ -130,7 +130,7 @@ B = {
    atk=[(5,1,(1,8,3),7)], dc=[], dpr=17, atkb=5),
  "The Wept": dict(cr="11", hd=22, hp=187, ac=18, ab=[22,16,18,13,16,18], sv=[0,2,4],
    sk={"Athletics":(0,10),"Insight":(4,7),"Perception":(4,7)}, pp=17,
-   atk=[(10,0,(4,10,6),28)], dc=[(15,None)], dpr=84, atkb=10, mult=1.5, lr=3),
+   atk=[(10,0,(4,10,6),28)], dc=[(15,None)], dpr=56, atkb=10, mult=1.5, lr=3),
 }
 
 # Base block name in the text, when it differs from the key above.
@@ -155,9 +155,61 @@ def split_blocks(text):
     return out
 
 
+# Values set by the official-module fix pass (T3.4). The data above and the text must
+# both carry them, so a later edit cannot quietly undo the fix.
+EXPECT_CR = {"Damaris Kovaun": ("1/2", 100, 2)}   # BESTIARY-4: CR 1/2 (XP 100; PB +2)
+MAX_ATTACKS_PER_TURN = {"The Wept": 2}            # BESTIARY-2: base block, Nastier aside
+WORDNUM = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5}
+_CR_LINE = re.compile(r"\*\*CR\*\* ([\d/]+) \(XP ([\d,]+); PB \+(\d+)\)")
+
+
+def attacks_per_turn(blk):
+    """Most attacks the base block can make in one turn: the Multiattack count, plus one
+    for each trait that grants an attack on top of it (a trait whose attack 'counts
+    toward' the Multiattack adds nothing)."""
+    m = re.search(r"\*\*\*Multiattack\.\*\*\*[^\n]*?\bmakes (\w+)\b", blk)
+    n = WORDNUM.get(m.group(1), 1) if m else 1
+    traits = blk.split("**Traits**", 1)[-1].split("**Actions**", 1)[0]
+    for para in re.split(r"\n\s*\n", traits):
+        flat = " ".join(para.split())
+        if re.search(r"\bcan make (?:one|an?)\b[^.]*\battacks?\b", flat) and \
+                "counts toward" not in flat:
+            n += 1
+    return n
+
+
+def fixed_value_problems(blocks):
+    probs = []
+    for n, b in B.items():
+        if n in NASTIER_OF:
+            continue
+        blk = blocks.get(TEXT_NAME.get(n, n))
+        m = blk and _CR_LINE.search(blk)
+        if not m:
+            continue  # reported by text_problems, or a CR line with no XP (Vell)
+        cr, xp, p = m.group(1), int(m.group(2).replace(",", "")), int(m.group(3))
+        if cr in XP and (xp, p) != (XP[cr], pb(cr)):
+            probs.append(f"{n}: CR {cr} prints XP {xp}, PB +{p}; SRD says XP {XP[cr]}, PB +{pb(cr)}")
+    for n, (cr, xp, p) in EXPECT_CR.items():
+        if B[n]["cr"] != cr:
+            probs.append(f"{n}: data CR {B[n]['cr']}, expected {cr} (T3.4)")
+        m = _CR_LINE.search(blocks.get(n, ""))
+        got = (m.group(1), int(m.group(2).replace(",", "")), int(m.group(3))) if m else None
+        if got != (cr, xp, p):
+            probs.append(f"{n}: text CR line {got}, expected {(cr, xp, p)} (T3.4)")
+    for n, cap in MAX_ATTACKS_PER_TURN.items():
+        blk = blocks.get(n)
+        if blk is None:
+            probs.append(f"{n}: block not found for the attacks-per-turn check"); continue
+        k = attacks_per_turn(blk)
+        if k > cap:
+            probs.append(f"{n}: {k} attacks per turn in the base block, cap {cap} (T3.4)")
+    return probs
+
+
 def text_problems(text):
     blocks = split_blocks(text)
-    probs = []
+    probs = fixed_value_problems(blocks)
     for n, b in B.items():
         if n in NASTIER_OF:
             blk = blocks.get(NASTIER_OF[n])
@@ -188,52 +240,58 @@ def text_problems(text):
     return probs
 
 
-ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-ap.add_argument("--quiet", action="store_true", help="print only the summary line and any problems")
-args = ap.parse_args()
-out = (lambda *a, **k: None) if args.quiet else print
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--quiet", action="store_true", help="print only the summary line and any problems")
+    ap.add_argument("--file", type=Path, default=BESTIARY, help="bestiary text to check (default: 10_Bestiary.md)")
+    args = ap.parse_args(argv)
+    out = (lambda *a, **k: None) if args.quiet else print
 
-# Stated saves in the Save row (for the proficient abilities): check = mod + PB
-problems = []
-for n, b in B.items():
-    p = pb(b["cr"]); m = [mod(s) for s in b["ab"]]; con = m[2]
-    exp_hp = avg(b["hd"], 8, b["hd"] * con)
-    if exp_hp != b["hp"]:
-        problems.append(f"{n}: HP stated {b['hp']} vs {b['hd']}d8+{b['hd']*con} = {exp_hp}")
-    for sk, (a, v) in b["sk"].items():
-        if v == m[a] + p: continue
-        if v == m[a] + 2 * p: problems.append(f"{n}: {sk} +{v} = expertise (OK, note)")
-        else: problems.append(f"{n}: {sk} +{v} vs mod {m[a]} + PB {p}")
-    per = b["sk"].get("Perception")
-    exp_pp = 10 + (per[1] if per else m[4])
-    if exp_pp != b["pp"]:
-        problems.append(f"{n}: passive Perception {b['pp']} vs {exp_pp}")
-    for bonus, a, (dn, dd, db), st in b["atk"]:
-        if bonus != m[a] + p: problems.append(f"{n}: attack +{bonus} vs {m[a]}+{p}")
-        if avg(dn, dd, db) != st: problems.append(f"{n}: dmg {st} vs {dn}d{dd}+{db}={avg(dn,dd,db)}")
-        if db != m[a]: problems.append(f"{n}: dmg mod {db} vs ability {m[a]}")
-    for dc, a in b["dc"]:
-        if a is None: continue
-        if dc != 8 + p + m[a]: problems.append(f"{n}: DC {dc} vs 8+{p}+{m[a]}")
-    if b["cr"] in XP: pass
-    mult = b.get("mult", 1.0)
-    lr_hp = b.get("lr", 0) * (20 if 5 <= eval(b["cr"]) <= 10 else 30 if eval(b["cr"]) > 10 else 10)
-    d = defensive(b["hp"], b["ac"], mult, lr_hp, b.get("acb", 0))
-    o = offensive(b["dpr"], b["atkb"])
-    fin = (d + o) / 2
-    stated = CRS.index(b["cr"])
-    flag = "  <-- >1 step off" if abs(fin - stated) > 1.01 else ""
-    out(f"{n:28s} stated CR {b['cr']:>4s}  def {crname(d):>4s}  off {crname(o):>4s}  "
-          f"=> ~CR {crname(fin):>4s} (steps {fin - stated:+.1f}){flag}")
-notes = [x for x in problems if "(OK, note)" in x]
-errors = [x for x in problems if "(OK, note)" not in x]
-errors += text_problems(BESTIARY.read_text(encoding="utf-8"))
-out("\nNotes:")
-for x in notes: out(" -", x)
-if errors:
-    print("MISMATCHES:")
-    for x in errors: print(" -", x)
-n_nastier = sum(1 for k in B if "(Nastier)" in k)
-print(f"bestiary_check: {len(B) - n_nastier} blocks + {n_nastier} Nastier checked; "
-      f"{len(errors)} mismatch(es)")
-sys.exit(1 if errors else 0)
+    # Stated saves in the Save row (for the proficient abilities): check = mod + PB
+    problems = []
+    for n, b in B.items():
+        p = pb(b["cr"]); m = [mod(s) for s in b["ab"]]; con = m[2]
+        exp_hp = avg(b["hd"], 8, b["hd"] * con)
+        if exp_hp != b["hp"]:
+            problems.append(f"{n}: HP stated {b['hp']} vs {b['hd']}d8+{b['hd']*con} = {exp_hp}")
+        for sk, (a, v) in b["sk"].items():
+            if v == m[a] + p: continue
+            if v == m[a] + 2 * p: problems.append(f"{n}: {sk} +{v} = expertise (OK, note)")
+            else: problems.append(f"{n}: {sk} +{v} vs mod {m[a]} + PB {p}")
+        per = b["sk"].get("Perception")
+        exp_pp = 10 + (per[1] if per else m[4])
+        if exp_pp != b["pp"]:
+            problems.append(f"{n}: passive Perception {b['pp']} vs {exp_pp}")
+        for bonus, a, (dn, dd, db), st in b["atk"]:
+            if bonus != m[a] + p: problems.append(f"{n}: attack +{bonus} vs {m[a]}+{p}")
+            if avg(dn, dd, db) != st: problems.append(f"{n}: dmg {st} vs {dn}d{dd}+{db}={avg(dn,dd,db)}")
+            if db != m[a]: problems.append(f"{n}: dmg mod {db} vs ability {m[a]}")
+        for dc, a in b["dc"]:
+            if a is None: continue
+            if dc != 8 + p + m[a]: problems.append(f"{n}: DC {dc} vs 8+{p}+{m[a]}")
+        if b["cr"] in XP: pass
+        mult = b.get("mult", 1.0)
+        lr_hp = b.get("lr", 0) * (20 if 5 <= eval(b["cr"]) <= 10 else 30 if eval(b["cr"]) > 10 else 10)
+        d = defensive(b["hp"], b["ac"], mult, lr_hp, b.get("acb", 0))
+        o = offensive(b["dpr"], b["atkb"])
+        fin = (d + o) / 2
+        stated = CRS.index(b["cr"])
+        flag = "  <-- >1 step off" if abs(fin - stated) > 1.01 else ""
+        out(f"{n:28s} stated CR {b['cr']:>4s}  def {crname(d):>4s}  off {crname(o):>4s}  "
+              f"=> ~CR {crname(fin):>4s} (steps {fin - stated:+.1f}){flag}")
+    notes = [x for x in problems if "(OK, note)" in x]
+    errors = [x for x in problems if "(OK, note)" not in x]
+    errors += text_problems(args.file.read_text(encoding="utf-8"))
+    out("\nNotes:")
+    for x in notes: out(" -", x)
+    if errors:
+        print("MISMATCHES:")
+        for x in errors: print(" -", x)
+    n_nastier = sum(1 for k in B if "(Nastier)" in k)
+    print(f"bestiary_check: {len(B) - n_nastier} blocks + {n_nastier} Nastier checked; "
+          f"{len(errors)} mismatch(es)")
+    sys.exit(1 if errors else 0)
+
+
+if __name__ == "__main__":
+    main()

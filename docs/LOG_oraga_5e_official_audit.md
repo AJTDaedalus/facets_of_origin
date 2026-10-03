@@ -237,3 +237,53 @@ Hard-rule detail: role_name is 75 "MM" + 1 "Mirror Master". bare_dc 146 = bare "
 **T2.6 (FRONT-15, -23).** 06 *Ending the Session*: steps 2–3 cut to "2. If you ran the epilogue in chapter V, you have already asked the question and called 5th level. If you skipped it, do both now." The 5th-level paragraph is kept as its own paragraph. The trail's carter check → "a DC 15 Charisma (Persuasion) or DC 15 Intelligence (Investigation) check". New `## Rewards`: Table I–4 / 5th level by milestone; agenda **Pays** lines (100 GP, 30 GP, the Church's favor as a pointer only pending Q15, the grandmother's crystal); chapter X "The Night's Loot"; the carried-out answer as the story award.
 
 **Skipped sites:** none. Every quoted phrase was found. **TODOs:** none new. Open, for the owner: the narrative lines lost in the 05 cut (listed under T2.4) — say if any should be restored to a card.
+
+## Phase 3
+
+### Phase 3a — T3.4 (chapter X), then T3.3 (chapter IX)
+
+*2026-10-03, Worker. Every edit was located by quoted text (DESIGN §2). New sentences say "the DM"; existing "MM" is left for T4.1. SNAKES-17's "drop Utilize" is overruled by DESIGN §3, so Utilize stays.*
+
+**Commands, after each task:** `python conversions/dnd5e/oraga_night/tools/lint_5e.py --check`; `python conversions/dnd5e/oraga_night/tools/bestiary_check.py`; `python conversions/dnd5e/oraga_night/tools/pregen_check.py`; `python -m pytest conversions/dnd5e/oraga_night/tools -q`. flow.json was not touched, so the flow page was not rebuilt. Final results: lint `--check` OK, exit 0. bestiary_check: 25 blocks + 3 Nastier, 0 mismatches. pregen_check: 5 pregens, 0 issues. pytest: 135 passed (124 + 11 new). No re-baseline.
+
+**Hard hits: 436 → 432** (T3.4 436 → 435; T3.3 → 432, with deadly_budget 2 → 0). Structure hits stay at 1 (the untriggered 05 gate box, for Phase 5). Soft metrics did not regress. 09: "player character" 71 → 66, em dashes 10.22 → 9.18/1k. One near-regression was fixed during the work: a TODO comment phrased as a question tripped 09's rhetorical-question count.
+
+**T3.4 — test first.** `bestiary_check.py` gained `fixed_value_problems()`. It checks that every CR line's XP and PB match the SRD table, that Kovaun's data and text carry CR 1/2 (XP 100; PB +2), and that the Wept's base block makes no more than 2 attacks a turn (`attacks_per_turn()`: Multiattack count plus any trait attack that does not "count toward" it). It also gained a `--file` option, and the run code moved into `main()` so pytest can import it. Red first: against the Phase 2 text (`git show HEAD:…/10_Bestiary.md`) it reported 3 mismatches (Kovaun data, Kovaun text, the Wept at 3 attacks). Green after the edits. The data was updated: Kovaun `cr="1/2"`, and the Wept's DPR is 56 (2 × 28), not 84. New `tools/test_bestiary_check.py` has 11 tests (hit, miss and edge for both helpers, plus `main()` exit codes).
+
+**T3.4 edits (10):**
+- BESTIARY-2: *She Arrives*. One of her Multiattack's two attacks on arrival, which counts toward it and is never a third (O24).
+- BESTIARY-3: the *Call the House* trigger is "Bloodied, and no guard has called the house this scene".
+- BESTIARY-4: Kovaun is CR 1/2 (XP 100; PB +2), in the block and in Table X–1 (O20). Mirror: the 09 *Who they brought* line reads "(CR 1/2)".
+- BESTIARY-6: *The Post* now gives the success clause.
+- BESTIARY-9: "A trick earns Delay when its check succeeds (the DC is 13, or 15 if it has already worked on that Uninvited tonight), and never a third time (see chapter V, "Buying Time")". *Note:* the check is "whatever skill fits", so it has no fixed ability. It is phrased "the DC is 13" so as not to add a bare-DC lint hit; T4.3 settles the generic-check form module-wide.
+- BESTIARY-17: the Attendant's *Put Aside* reads "*Success:* Half damage." "Its magic is real; it rarely cares to use it" moved to *Before Midnight*. Kovaun's flavor Success clause is dropped (2024 omits it).
+- BESTIARY-18: *Two Turns*. The second turn falls last in the round if its count is below 1, and *Put Aside* recharges only at the start of its first turn.
+- BESTIARY-20: "*Built on the SRD guard.*" on the Sect Guard. "A guest" uses the SRD 5.2.1 **commoner** without its attack.
+- BESTIARY-22: Veier's line is now on format (Speed 30 ft. (15 ft. tonight); *Ranged Attack Roll* … *Hit:* … damage).
+- BESTIARY-23: Table X–3 caption "All are consumable Wondrous Items; none requires attunement." **TODO-Q15** comment on the coat.
+- BESTIARY-24: the optional one-liner ("Their challenge ratings describe how hard they hit; nothing tonight stops them.").
+- SNAKES-1/-23 mirrors: the Phern Bodyguard *Nastier* is S-3's wording ("the crowd check's DC rises to 15"). Draunel's *Nastier* now has a third duelist, which matches S13's 5th-level line (1,800 XP). Was "two duelists".
+- **Gated, left as is:** BESTIARY-11 Vell (**TODO-Q8** comment under the "cannot be fought" line); BESTIARY-21 (**TODO-Q18** comment under the type lines of the Hollow, the Radiant, the Wept and Vell).
+- *Not done here, by design:* the stat-block layout (BESTIARY-5/12/13/14, T4.4), capitals and item italics (BESTIARY-7/16, T4.2), bare DCs (BESTIARY-8, T4.3), "you" (BESTIARY-10, T7.5).
+
+**Kovaun → S8.** S8's total **does not change: 800 XP, now labelled under Low.** Kovaun is in the chapel, not in the fight; the roster is four wardens. BESTIARY-4's "700" assumed she was one of the four. Logged as O20.
+
+**T3.3 edits (09; mirror in 08 Table VIII–5, which is the tracker; the task's "VIII–7" is the rumor table since T2.5):**
+- SNAKES-1: the heat-4 bullet points to each card. *At heat 4* lines on S8 (dark), S10 (new, O23), S11, S12 and S13. 08's tracker note says "each card's *At heat 4* line says how".
+- SNAKES-2: the tracker rows (Boranis: a cousin beaten in public (S6), S9's clock filled, "Vorlain baited, or got drunk, by one of the characters"; Church: −1 if the wardens are turned back (S8); Draunel: "Agenda 3, if one of the characters carries it", S9's clock filled). Mirrored in 08.
+- SNAKES-3: the duelists (S9, S13, and 10's *Breaks*) break "the first time one of them takes damage". S7's budget line now says "when the first of them is Bloodied", which matches its Morale. grep "real wound" = 0.
+- SNAKES-4: *Detection* lines on S2 (Tavva, Passive Perception 16), S7 Movement V (knives, 13), S8 (wardens, 13, with Advantage in the dark) and S10 (the corner slinger, 13). A *Surprise* bullet in *Running the Snakes*.
+- SNAKES-6: every Inspiration award names its Table I–3 row. The S3 wicket fallback and the S9 "answered Essin" award are cut. S8 reads "by an out". S13 reads "without a fight".
+- SNAKES-7: **DM Note — at a 2014 table**. SNAKES-8: "Deadly" is gone (Table IX–3, the S14 budget).
+- SNAKES-9: the S10 heat gate in *Where and when*. The Table IX–2 header is "What heat 3–4 sets off".
+- SNAKES-12/-21/-26: a **Treasure** line on every card, with values inlined from chapter X (Tavva's sack 2d6 × 25 GP, the purse 3d6 × 10 GP, a knife's advance 2d6 GP). Missing Tactics and Morale added on S4, S5, S6 and S12. The losing-side Development added on S4, S5, S6, S11 and S14. Every Rewards line reads "divided equally among the characters". The field-order line is updated.
+- SNAKES-20: "Use one line only; the lines are not cumulative", plus the 5th-level-and-five-characters rule. All 14 *Scaling* blocks are renamed **Adjusting the Encounter** (Table IX–1's title is kept).
+- SNAKES-22 (S13 half): "The man reaching for his knife is Essin Boranis."
+- SNAKES-23: S7's fourth knife (the DM places him out of sight; the audit's "at the far door" was not used, because it is a new detail); S5's 3rd-level line says why it differs from S2; "Tavva's two Knife attacks"; S14's "ability check with the skill that fits the trick" and the "Argue its orders" check form.
+- BALL-16 (09 side): S4's base is **two** guards, matching 04 (O21). Movement I gate added to *Where and when*; Development reads "Return to the current Movement"; Table IX–3 reads "Mv I–V". S10's guard bullet follows.
+- **Budget labels (O22)** against Low 1,000 / Moderate 1,500 / High 2,000: S1 200 under Low; S2 600 under Low; S3 1,500 Moderate, 2,600 over High; S4 900 under Low (2,700 with the four); S5 600 under Low; S6 600 under Low; S7 800 under Low; S8 800 under Low; S9 850 under Low / 300 far under / 1,150 between Low and Moderate; S10 1,000 Low; S11 625 under Low; S12 600 / 800 under Low; S13 1,350 between Low and Moderate (plays Moderate), 750 under Low, 2,100 over High; S14 3,900 beyond High, nearly twice High. A *Running the Snakes* sentence gives the vocabulary, and the "label" bullet now says the label is the sum and the following line is the play.
+- STYLE_5e.md: the difficulty example "800 XP — Low" was arithmetically false and now reads "1,000 XP — Low" / "800 XP, under Low".
+- **Gated, left as is:** SNAKES-5 (**TODO-Q14** comments in *Running the Snakes* (Outs), S4 and S14); the S9 figure (**TODO-Q12** under the S9 box); S13 *Broker a trade* (**TODO-Q11**).
+- Ledger: INVENTIONS **#62**. Decisions: DECISIONS **O20–O24**, numbered from O20 to leave O9–O19 for the other Phase 3 tasks.
+
+**Skipped sites:** none. Every quoted phrase was found. *Left for later phases:* SNAKES-10/-11 (voice, T7.3), -13/-16 (T5.4), -14/-18/-19 (T4.3), -15/-24 (T4.5), -17 capitals (T4.2), -25 (done in T2.4), -27 (a house choice), -28 (T2.4).
