@@ -868,7 +868,7 @@ miss.
 > **Tells.** Polished, obvious, ambitious in the standard noble key. Courting in the
 > Audience Hall line. His young men hearing a succession decree in his silence after
 > the toast.
-> **Breaks.** The moment the fight would be seen as *his*. He calls his duelists off,
+> **Breaks.** The moment the fight would be seen as his. He calls his duelists off,
 > offers his hand, and is the first to say it was a misunderstanding among friends.
 > **Nastier.** Iron 3 is in the room: a third duelist, who has watched Vorlain all
 > night and will swear to anything.
@@ -985,7 +985,7 @@ kinsman's next turn has Advantage.
 > the principal he came in behind.
 > **Breaks.** Any kinsman hit steps back out of the brawl and shouts instead of
 > swinging. The whole thing stops the instant an adult of either house arrives and is
-> obeyed — which a player character can *be*.
+> obeyed — which a player character can be.
 > **Nastier.** A principal is still swinging: a kinsman with 22 HP (4d8 + 4), and
 > while he stands, the others don't step back when hit.
 > *Card: S1.*
@@ -1128,7 +1128,7 @@ see. Any grapple or restraint on him ends. He arrives rather than runs; ordinary
 doors, walls and barricades do not reliably hold him. Deep Boranis ward-crystal does.
 
 **Fracture — Despair (once).** Ferocity is useless; nobody can frighten a man who
-would not much mind ending. *Sincerity* works. See him; name the emptiness truly;
+would not much mind ending. Sincerity works. See him; name the emptiness truly;
 offer one honest moment of the belonging he was promised; or simply tell him, one
 person to another, that he can stop. On a success he opens his hands and quits the
 field: the doors open, and two hundred hostages stop being hostages. At a cost, the
@@ -1192,13 +1192,13 @@ damage.
 Bludgeoning damage. Once per turn, when she hits a creature holding a weapon, it
 must succeed on a DC 13 Dexterity saving throw or drop it.
 
-> **Wants.** Proof of Veier (alive, well, *unforced*) carried home in Thenya hands.
+> **Wants.** Proof of Veier (alive, well, unforced) carried home in Thenya hands.
 > And if she is a prisoner, Veier out: that was the chief's actual instruction.
 > **Tells.** Asks, with thinning patience, when the delegation will be received. The
 > toast lands on her like a slap. She says nothing to Corval at all, which is worse
 > than anything she might have said.
 > **Breaks.** She does not break. She stops when she has proof of Veier, or when
-> someone competent is going the same way she is. Standing *with* her ends the fight
+> someone competent is going the same way she is. Standing with her ends the fight
 > before it starts.
 > **Nastier.** She is already over the wall, and the slingers are covering her from
 > the garden.
@@ -1301,7 +1301,7 @@ choice).
 within 5 feet of it. *Response:* The bodyguard becomes the target of the attack
 instead.
 
-> **Wants.** Corro alive and out. By Movement IV, out *now*.
+> **Wants.** Corro alive and out. By Movement IV, out now.
 > **Tells.** Big, relaxed, laughing at their master's jokes — remember them like
 > this. Then no longer laughing, a hilt moved to where it can be reached sitting
 > down, eyes going to the same doors Corro's do. By Movement V they stand around him
@@ -1410,7 +1410,7 @@ doors, walls and barricades do not reliably hold him. Deep Boranis ward-crystal 
 He can't do this while Witnessed.
 
 **Fracture — Devotion (once).** The Radiant can't be turned — not from the hunt, not
-from the errand, not by darkness or doubt. What he can be made to do is *feel*. Two
+from the errand, not by darkness or doubt. What he can be made to do is feel. Two
 roads, either one:
 - **Deny the congregation.** Douse the lights, empty the room, turn every back, or
   give a performance that makes a player character the better spectacle. A table
@@ -1488,11 +1488,11 @@ Hired Knife is within 5 feet of her. *Response:* The knife becomes the target
 instead.
 
 > **Wants.** Raunu's next decree, before it lands on her margins. After the two
-> plates: to know whether there is an heir, because an heir is a *dynasty* of Raunus.
+> plates: to know whether there is an heir, because an heir is a dynasty of Raunus.
 > **Tells.** Iron-gray, cordial, comparing margins with Corro in the B3 alcove.
 > Compliments, a quiet question — *what did he say?* — and coin behind it.
 > **Breaks.** She would be horrified to be called a conspirator. She is merely
-> *prepared*. The moment her people's work would be seen as hers, or would draw
+> prepared. The moment her people's work would be seen as hers, or would draw
 > blood she did not price in, she calls them off and pays whoever makes it go away.
 > **Nastier.** She has already bought whatever the party is trying to sell her.
 > *Cast: chapter VII. Cards: S7, S12.*
@@ -1715,7 +1715,7 @@ says one true thing (see chapter VII).
 blade. *Response:* He adds 2 to his AC against that attack, possibly causing it to
 miss.
 
-> **Wants.** The seat, forever, aching — and *not like this*. He has no plot tonight.
+> **Wants.** The seat, forever, aching — and not like this. He has no plot tonight.
 > He came because not coming was more dangerous.
 > **Tells.** Silk over springs. Charming, funny at others' expense. Goes quiet after
 > the toast, and drinks harder.
@@ -2006,7 +2006,7 @@ before it is a reward.*
   far, one or two old soul-crystals from the gallery's case, the kind her buyers
   have a standing interest in. Worth 2d6 × 25 GP in Rekuzan to a fence, and nothing
   to the table that gives the rings back. In S5, where they came off the fallen,
-  giving them back *is* the reward.
+  giving them back is the reward.
 - **Tavva's charges.** Whichever of her *Dark-Burst* and *Door-Seal* she has not
   spent (Table X–3).
 - **The grandmother's soul-crystal** *(Agenda 5).* A lifetime of light in a lattice
@@ -2016,7 +2016,7 @@ before it is a reward.*
   spent them and somebody takes them off him. On a living guard they are the house's
   property; taking them is theft from House Boranis, and the room remembers faces.
 - **The contract case** *(S3).* Chained to a sergeant's hip or the captain's belt: a
-  chained case of *writing*, in a country where the Church owns the written word. It
+  chained case of writing, in a country where the Church owns the written word. It
   holds the Bought's three tasks. The inquest's best evidence, and the only mortal
   thread that leads east. Not magic, and worth more than anything magic at the ball.
 - **The company's purse** *(S3).* The half-fee, paid in old coin — 3d6 × 10 GP by

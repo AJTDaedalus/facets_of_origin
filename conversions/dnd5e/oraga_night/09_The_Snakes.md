@@ -160,11 +160,11 @@ how a party walks into it, turns it, or sets one snake on another.*
 
 **What they came for.** *Raunu's next decree, before it lands on her margins* (see chapter VII). His ministers call it the Tithe of Hands, and it
 lives whole in exactly three heads: Minister Corval's and two ministers' (see chapter III,
-Agenda 1). Callun's **fear** is an heir — a *dynasty* of Raunus — which is why the
+Agenda 1). Callun's **fear** is an heir — a dynasty of Raunus — which is why the
 toast turns her polite loathing into something with a horizon (see chapter VII; chapter IV,
 Movement IV). Her **secret**: the Circle has already gamed a Vorlain chieftaincy and
 priced it attractive; she is here to check the arithmetic, not to act on it. She
-would be horrified to be called a conspirator. She is merely *prepared*.
+would be horrified to be called a conspirator. She is merely prepared.
 
 **Who they brought.** **Rhaza Callun** and three **Circle Hired Knives** (see chapter X), from
 the season's hired swords, paid half up front and half on delivery. A prepared patron
@@ -209,7 +209,7 @@ knives all night has testimony that cuts the other way.
 ### The Church — Prelate Damaris Kovaun
 
 **What they came for.** *To file Raunu Boranis under something. Anything* (see chapter VII). Her superiors want to know whether the man who
-returned is *the man who returned*, and she has not been told why the question is
+returned is the man who left, and she has not been told why the question is
 phrased that way (see chapter VII; chapter III, Agenda 2). Her **fear** is the mists — the one
 memo from the east that reached her desk and was above her seal to read. The Church
 finds Raunu illegible, and a chief it cannot predict is a chief it cannot steer (see chapter II). And the written word belongs to the Church and to nobody else.
@@ -224,7 +224,7 @@ finds Raunu illegible, and a chief it cannot predict is a chief it cannot steer 
 | II | The wardens ask the festival hires which rooms the master uses: the Audience Hall, and the dark wing on the second floor | A footman looking back after a gray robe moves on | — |
 | III | Kovaun waits in the Audience Hall antechamber; a warden meets any summoned character with an invitation to attend her in the chapel | The warden knows their name without being told it | — |
 | IV | The Radiant blesses the food in a form Kovaun recognizes (a Fracture tell, chapter V). Her question acquires teeth. Two wardens leave by different doors | Two empty places, and the Prelate not looking at them | — |
-| V | The two wardens are at the door of Raunu's study (B8), working its crystal lock with the patience of men who have done this in other houses. They want the room *filed* | Lamplight under a study door that is supposed to be dark | **S8** |
+| V | The two wardens are at the door of Raunu's study (B8), working its crystal lock with the patience of men who have done this in other houses. They want the room filed | Lamplight under a study door that is supposed to be dark | **S8** |
 | VI–VII | *Lights out.* Heat 0–2: the wardens come down for the Prelate and get her out. Heat 3–4: they are inside the study when the lights die, and they finish the job: the drawer of invitation cards goes into a warden's arms, and the work-slate is wiped | Wardens coming down the dark-wing stair with their arms full | **S8** (dark) |
 
 **What is in the study that the Church wants** (area B8): no papers (there are
@@ -316,8 +316,8 @@ life.
 
 **What they came for.** Vorlain came because not coming was more dangerous; **he has
 no plot tonight** (see chapter VII). He wants the seat, forever,
-aching, and *not like this*; he fears his brother comprehensively. Essin wants
-Vorlain *sober, unrecorded, and unbaited*; he fears House Draunel's patience; and his
+aching, and not like this; he fears his brother comprehensively. Essin wants
+Vorlain sober, unrecorded, and unbaited; he fears House Draunel's patience; and his
 **secret** is that he served the year of Vorlain's rule as fixer and knows exactly
 where its two bodies are buried (see chapter VII, "Essin Boranis"). Behind them both is a
 plain fact: Vorlain's one year of rule taught several cousins how quickly the
@@ -340,7 +340,7 @@ draw.
 | I | Essin and the cousins stand in a loose ring a few paces off Vorlain. Anyone who approaches Vorlain is looked at by one of them first | The ring closes a step whenever a Draunel laughs | — |
 | II | Whoever spends more than one drink on Vorlain (Agenda 3 above all), or asks anyone about the missing year, finds a cousin at their elbow, pleasant, admiring their mask, on the side nearest Vorlain | Every time the character turns toward Vorlain, somebody is already there | **S6** |
 | III | Anyone who pressed Vorlain and has not yet been warned off is invited, very warmly, to take the air on the terraces — just the two of you, and a friend already out there | The same cousin who admired their mask | **S6** |
-| IV | Vorlain goes quiet and drinks. The cousins steer anyone still baiting him toward the garden doors. The duelist's appointment has been *accepted*, and Essin did not accept it | Essin, for the first time tonight, not smiling | **S9** |
+| IV | Vorlain goes quiet and drinks. The cousins steer anyone still baiting him toward the garden doors. The duelist's appointment has been accepted, and Essin did not accept it | Essin, for the first time tonight, not smiling | **S9** |
 | V | Essin has a problem on the terrace he did not make, and chooses between his cousin's reputation and his blade's life. A character who goes to him now finds the one moment all night Essin asks anyone for help | Essin, alone, which he never is | **S9** |
 | VI–VII | *Lights out.* Vorlain hauls guests out of the burning banquet gallery, to everyone's permanent confusion including his own. Essin and the cousins go with him. Heat 3–4: if Draunel's Iron 4 comes for Vorlain, the cousins fight for him, and the man they are fighting over is carrying a stranger out of a fire | Cousins with blades out in the smoke, standing between Vorlain and three Draunel men | **S13** |
 
@@ -350,7 +350,7 @@ terrace (S9), or be in the burning gallery (S13).
 
 **Turn it.** A party that helps Essin keep Vorlain sober and unbaited has Essin in
 its debt, and his debts are worth having: he knows where the bodies are buried. A
-character who tells Essin *before*
+character who tells Essin before
 Movement IV that the appointment is a trap lets him refuse it cleanly: heat to 0.
 
 **Snake on snake.** Essin's cousins and Draunel's duelists are the only two snakes at
@@ -400,7 +400,7 @@ moves early. Or they can be in the crush at the service door when the Phern blad
 are keeping it for their master (S11).
 
 **Turn it.** A character Corro trusts can tell him, in that first moment, to have
-his people hold the door *for everyone*, and they do: it
+his people hold the door for everyone, and they do: it
 becomes the best-run exit in the palace.
 
 **Snake on snake.** None, before midnight;
@@ -426,7 +426,7 @@ how that is being read (see chapter IV, area B0).
 
 **Not a snake, and never the party's enemy unless the party makes her one.** The
 Thenya are the one faction that wishes Raunu no harm. They become a fight only if the
-party stands between Maiven and her kinswoman — and by Movement V, standing *with*
+party stands between Maiven and her kinswoman — and by Movement V, standing with
 her is the better bet.
 
 **The line.**
@@ -622,7 +622,7 @@ A kinsman who takes any damage steps back out of the brawl and shouts instead, w
 one fewer in the mob without anybody being hurt.
 
 **Morale.** The whole thing stops the instant an adult of either house arrives and is
-obeyed — which a character can *be*, with a DC 15 Charisma (Persuasion or
+obeyed — which a character can be, with a DC 15 Charisma (Persuasion or
 Intimidation) check.
 
 **Outs.**
@@ -679,8 +679,8 @@ surprised, and the noise clock does not advance in the first round.
 **The noise clock — four segments, and it is shared.** Advances whenever anyone on
 either side rolls a 1 on a d20 (once a round at most), at the end of each round in
 which anyone attacked with a drawn blade, and on anything loud: a shout, a thrown body, a spell anyone past the
-wall could hear (your call). **Full:** the honor guard arrives, and *both sides
-lose*. The party is detained alongside the crew (card S4's terms), and the crew's job
+wall could hear (your call). **Full:** the honor guard arrives, and both sides
+lose. The party is detained alongside the crew (card S4's terms), and the crew's job
 and the party's evening end together. **Say this to the table out loud at the top of
 the scene.**
 
@@ -865,7 +865,7 @@ endings. When it starts to go that way, reach for an out.
 not meant to spread; the palace is burning): a DC 13 Charisma (Persuasion) check to
 the sergeant through the grille, no check to the captain, who already half knows. Or the
 named target already gone — Veier is out by the river gate, and a party that knows it
-can simply *say so*.
+can simply say so.
 
 Or a better offer, made in front of the sergeants: a Circle
 magnate, a Draunel, a Boranis cousin all have coin and reasons, and the snakes' coin
@@ -901,7 +901,7 @@ by an out*): to whoever voided the contract.
 **Development.** A captured sergeant, contract case and all, is the inquest's best
 evidence and the only mortal thread that leads east. A bought-out captain honors the
 deal absolutely and **will not resume the fight tonight for any inducement** — which a
-clever table can turn into sixteen Blades holding the gate *open*. **Return to Movement
+clever table can turn into sixteen Blades holding the gate open. **Return to Movement
 VII, and see ⟨If History Breaks⟩ in chapter V.**
 
 ---
@@ -1149,7 +1149,7 @@ the card.
 
 **Terrain as rules.**
 - *The service run* is 5 feet wide: one creature abreast, and a creature can't move
-  through an enemy's space. Getting *past* someone is a DC 13 Dexterity (Acrobatics)
+  through an enemy's space. Getting past someone is a DC 13 Dexterity (Acrobatics)
   check, or a Shove.
 - *One lamp in three.* Dim Light; Lightly Obscured. The service run's doorways and
   stacked trays give Three-Quarters Cover, and there the knives' *Step Aside* (Hide)
@@ -1291,7 +1291,7 @@ else.
 *At heat 4:* the wardens are already on the stair when the party arrives, and the
 drawer is halfway down it.
 
-**Treasure.** The drawer, if it stays with the party: evidence of *something*. What
+**Treasure.** The drawer, if it stays with the party: evidence of something. What
 the scorch marks mean is left open (see chapter X, "The Night's Loot").
 
 **Rewards.** 800 XP, divided equally among the characters. *Heroic Inspiration*
@@ -1548,7 +1548,7 @@ once.
 
 **Outs.**
 - Corro's word. A character who walked the room with him and took him seriously
-  can tell him to have his people hold the door *for everyone*, and he does: no check.
+  can tell him to have his people hold the door for everyone, and he does: no check.
   Anyone else needs a DC 15 Charisma (Persuasion) check, shouted over a crowd.
 - Hold it with them. A character who helps hold the doorway makes a DC 13
   Strength (Athletics) check each round; on a success the door is held for everyone that
@@ -1683,7 +1683,7 @@ comes down, and whoever is still inside is still inside.
   fight.
 - **Vorlain Boranis** fights only to free his arm, fast (*Brief and Efficient*), and
   then goes back into the fire.
-- *Do not* run both sides against the party (2,100 XP, over High).
+- Do not run both sides against the party (2,100 XP, over High).
 - *At heat 4:* the gallery clock starts with one segment filled. If the party sides
   with Draunel, Essin's side breaks as soon as Vorlain is out of reach — *Always
   Between*, then gone.
@@ -1711,7 +1711,7 @@ story instead: he is arresting a murderer, before witnesses. His duelists seize 
 and try to walk him out. Essin puts himself between (*Always Between*); his cousins
 draw, because it is after midnight and nobody is enforcing anything.
 
-**Morale.** Draunel breaks the moment the fight is seen as *his*. The duelists break with
+**Morale.** Draunel breaks the moment the fight is seen as his. The duelists break with
 him, or the first time one of them takes damage. Essin's side breaks the moment Vorlain is safe or gone.
 
 **Outs.**
@@ -1808,17 +1808,17 @@ the way.
 It is meant to be the hardest fight of the night, won by the table that plays the
 game: hard, close, and never a death sentence. Say so with your whole table manner,
 not in those words: the hints below are how. A table whose characters are built to
-hit hard out-slugs it (the optimised party in the DM Note below); give such a table
-the *hard-hitting* line under Scaling.
+hit hard out-slugs it (the optimized party in the DM Note below); give such a table
+the "A table built to hit hard" line under Adjusting the Encounter.
 
 > **DM Note — how it plays**
 >
 > Simulated, 5,000 fights a row: four 4th-level pregens (Dassa, Pello, Andra, Ilesse)
-> and a typical optimised 4th-level party of paladin, rogue, sorcerer and cleric; the
+> and a typical optimized 4th-level party of paladin, rogue, sorcerer and cleric; the
 > card fires with it Idle; six rounds, about as long as an errand lasts at midnight;
 > chapter V's "Down, Not Out" applied, so nobody dies.
 >
-> | The party… | Pregens: out of the way | Pregens: whole party down at once | Optimised: out of the way | Optimised: whole party down |
+> | The party… | Pregens: out of the way | Pregens: whole party down at once | Optimized: out of the way | Optimized: whole party down |
 > |---|---|---|---|---|
 > | Only trades blows | 16% | 24% | 80% | 15% |
 > | Plays the distraction game, bare rolls | 43% | 10% | 58% | 12% |
@@ -1887,7 +1887,7 @@ next round, and the Help action doesn't apply. The table chooses whose trick it 
    gets Heroic Inspiration whether it works or not.
 5. **If nobody has tried by the third round,** one of the Uninvited says something to
    it — a curt word, the way you would call a dog back to heel — and it snaps out of
-   whatever it was looking at and back to Focused. Let the players see that it *needed*
+   whatever it was looking at and back to Focused. Let the players see that it needed
    calling back.
 
 **Terrain as rules.** Whatever room the party is in. Every chapter V room-trick table
@@ -1932,7 +1932,7 @@ player who tries to distract it (hint 4); a natural 20 on a distraction pays its
   is a single Joined Hands.
 - *Four at 5th level:* use the five-character line, or the block's **Nastier** line
   for a table that wants it harder.
-- *A table built to hit hard* (the optimised party in the DM Note above, or anything
+- *A table built to hit hard* (the optimized party in the DM Note above, or anything
   like it): 300 Hit Points.
 
 **Development.** Gone, the Attendant is not seen again tonight, and chapter VI has no

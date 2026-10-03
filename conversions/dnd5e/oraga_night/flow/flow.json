@@ -41,7 +41,7 @@
    "id": "m6",
    "label": "VI. The Unmasking",
    "time": "Midnight · 3:10 · 50 min",
-   "summary": "The lights die mid-sentence. The Uninvited go to work and the Attendant stands by them; the snakes draw in the dark; the Crossing. Delay is what saves people."
+   "summary": "The lights die mid-sentence. The Uninvited go to work and the Attendant stands by them; the snakes draw in the dark; the Crossing. Delay is what saves people. \"The Midnight Clock\" (chapter V) gives the order."
   },
   {
    "id": "m7",
@@ -83,7 +83,7 @@
    "phase": "m1",
    "kind": "omen",
    "summary": "Forty blades expected; nine present, all facing the palace doors, not the gates. House Boranis hired no swords.",
-   "ref": "04_The_Ball.md#movement-i--the-receiving-line",
+   "ref": "04_The_Ball.md#movement-i--the-receiving-line-dusk",
    "optional": false,
    "faction": null
   },
@@ -113,7 +113,7 @@
    "phase": "m2",
    "kind": "event",
    "summary": "Vorlain holds court by the wine; Kovaun takes a census of souls; Callun and Corro compare margins; Maiven presses Corval.",
-   "ref": "04_The_Ball.md#movement-ii--the-empty-rooms",
+   "ref": "04_The_Ball.md#movement-ii--the-empty-rooms-early-night",
    "optional": false,
    "faction": null
   },
@@ -123,7 +123,7 @@
    "phase": "m2",
    "kind": "omen",
    "summary": "The Phern magnate loses his sentences and watches doors. His gift points nowhere.",
-   "ref": "04_The_Ball.md#movement-ii--the-empty-rooms",
+   "ref": "04_The_Ball.md#movement-ii--the-empty-rooms-early-night",
    "optional": false,
    "faction": null
   },
@@ -142,7 +142,7 @@
    "label": "B6. The Chapel",
    "phase": "m2",
    "kind": "room",
-   "summary": "Fresh offerings in Elanna's niche. Mother Sella's room; the ball's only short rest.",
+   "summary": "Fresh offerings in Elanna's niche. Mother Sella's room; the ball's only Short Rest.",
    "ref": "04_The_Ball.md#the-public-rooms (B6)",
    "optional": false,
    "faction": null
@@ -193,7 +193,7 @@
    "phase": "m2",
    "kind": "room",
    "summary": "Hidden laboratory beneath the cellars: recall-lattices, the skeleton, the orrery. The Uninvited will not enter.",
-   "ref": "04_The_Ball.md#undercurrent-a--the-root-of-the-house",
+   "ref": "04_The_Ball.md#undercurrent-a--the-root-of-the-house-if-you-have-time",
    "optional": true,
    "faction": null
   },
@@ -293,7 +293,7 @@
    "phase": "m2",
    "kind": "scene",
    "summary": "Barred stair, tally-cords, the wall seam, the slate key. Find: the gift-source laboratory. 'Both rivers, one spring.'",
-   "ref": "04_The_Ball.md#undercurrent-a--the-root-of-the-house",
+   "ref": "04_The_Ball.md#undercurrent-a--the-root-of-the-house-if-you-have-time",
    "optional": true,
    "faction": null
   },
@@ -303,7 +303,7 @@
    "phase": "m2",
    "kind": "scene",
    "summary": "A returned footman, Corval's recitation, the sworn testament. Find: the staff were evacuated with love; the remainers volunteered.",
-   "ref": "04_The_Ball.md#undercurrent-b--the-household-that-wasnt",
+   "ref": "04_The_Ball.md#undercurrent-b--the-household-that-wasnt-if-you-have-time",
    "optional": true,
    "faction": null
   },
@@ -313,7 +313,7 @@
    "phase": "m2",
    "kind": "scene",
    "summary": "The midwife, small linens, protective guards. Find: the pregnancy, and the nursery, before the announcement that never comes.",
-   "ref": "04_The_Ball.md#undercurrent-c--the-third-plate",
+   "ref": "04_The_Ball.md#undercurrent-c--the-third-plate-needed-if-anyone-carries-agenda-4",
    "optional": true,
    "faction": null
   },
@@ -323,7 +323,7 @@
    "phase": "m2",
    "kind": "scene",
    "summary": "Corval's slipping mind, Corro's compass, maskless craft. Find: three impossible guests, Fracture ammunition, Raunu's 'I know.'",
-   "ref": "04_The_Ball.md#undercurrent-d--the-guests-who-cast-no-gossip",
+   "ref": "04_The_Ball.md#undercurrent-d--the-guests-who-cast-no-gossip-if-you-have-time",
    "optional": true,
    "faction": null
   },
@@ -343,7 +343,7 @@
    "phase": "m2",
    "kind": "snake",
    "summary": "Callun's Hired Knives count arrivals, shadow Corval, question the summoned, lean on Anha after the toast.",
-   "ref": "04_The_Ball.md#the-snakes-in-the-pen; 09_The_Snakes.md",
+   "ref": "09_The_Snakes.md#the-merchants-circle--mistress-rhaza-callun; 04_The_Ball.md (The Snakes This Movement — I to V)",
    "optional": true,
    "faction": "circle"
   },
@@ -353,7 +353,7 @@
    "phase": "m2",
    "kind": "snake",
    "summary": "Kovaun's Wardens watch the dais and east doors, ask which rooms the master uses, then pick the study lock.",
-   "ref": "04_The_Ball.md#the-snakes-in-the-pen; 09_The_Snakes.md",
+   "ref": "09_The_Snakes.md#the-church--prelate-damaris-kovaun; 04_The_Ball.md (The Snakes This Movement — I to V)",
    "optional": true,
    "faction": "church"
   },
@@ -363,7 +363,7 @@
    "phase": "m2",
    "kind": "snake",
    "summary": "Duelists bait Essin's blades to draw first, then make a public appointment on the terraces at the first quarter-bell.",
-   "ref": "04_The_Ball.md#the-snakes-in-the-pen; 09_The_Snakes.md",
+   "ref": "09_The_Snakes.md#house-draunel--lord-essar-draunel; 04_The_Ball.md (The Snakes This Movement — I to V)",
    "optional": true,
    "faction": "draunel"
   },
@@ -373,7 +373,7 @@
    "phase": "m2",
    "kind": "snake",
    "summary": "Essin's Cousin's Blades ring Vorlain and quietly steer anyone working him toward the garden doors.",
-   "ref": "04_The_Ball.md#the-snakes-in-the-pen; 09_The_Snakes.md",
+   "ref": "09_The_Snakes.md#house-boranis--vorlain-and-essin-boranis; 04_The_Ball.md (The Snakes This Movement — I to V)",
    "optional": true,
    "faction": "boranis"
   },
@@ -383,7 +383,7 @@
    "phase": "m2",
    "kind": "snake",
    "summary": "Corro's Bodyguards catch his fear: hands to hilts, backs to walls, exits marked, facing the way the guards face.",
-   "ref": "04_The_Ball.md#the-snakes-in-the-pen; 09_The_Snakes.md",
+   "ref": "09_The_Snakes.md#phern--master-pellin-corro; 04_The_Ball.md (The Snakes This Movement — I to V)",
    "optional": true,
    "faction": "phern"
   },
@@ -393,7 +393,7 @@
    "phase": "m2",
    "kind": "snake",
    "summary": "Maiven's slingers scout and time the east wing guard; after the refused audience, a rope below the wall.",
-   "ref": "04_The_Ball.md#the-snakes-in-the-pen; 09_The_Snakes.md",
+   "ref": "09_The_Snakes.md#the-thenya--maiven-nolonaire-not-a-snake; 04_The_Ball.md (The Snakes This Movement — I to V)",
    "optional": true,
    "faction": "thenya"
   },
@@ -403,7 +403,7 @@
    "phase": "m3",
    "kind": "event",
    "summary": "Raunu glimpsed once above the Crystal Court, watching like weather, gone when looked for.",
-   "ref": "04_The_Ball.md#movement-iii--the-summons",
+   "ref": "04_The_Ball.md#movement-iii--the-summons-mid-night",
    "optional": false,
    "faction": null
   },
@@ -412,8 +412,8 @@
    "label": "B4. The Audience Hall — the summons",
    "phase": "m3",
    "kind": "scene",
-   "summary": "Corval: 'The master will see you.' At least one PC walks the long room. Deceiving Raunu: DC 25.",
-   "ref": "04_The_Ball.md#movement-iii--the-summons",
+   "summary": "Corval: 'The master will see you.' At least one character walks the long room. Deceiving Raunu takes a DC 25 Charisma (Deception) check.",
+   "ref": "04_The_Ball.md#movement-iii--the-summons-mid-night",
    "optional": false,
    "faction": null
   },
@@ -423,7 +423,7 @@
    "phase": "m3",
    "kind": "omen",
    "summary": "Gracious, antique, on no list. Corval cannot account for them, and cannot hold the question.",
-   "ref": "04_The_Ball.md#movement-iii--the-summons",
+   "ref": "04_The_Ball.md#movement-iii--the-summons-mid-night",
    "optional": false,
    "faction": null
   },
@@ -443,7 +443,7 @@
    "phase": "m4",
    "kind": "event",
    "summary": "Raunu appears unmasked: 'At the Unmasking I will have something to say.' Fills two plates; leaves by the east doors.",
-   "ref": "04_The_Ball.md#movement-iv--the-toast",
+   "ref": "04_The_Ball.md#movement-iv--the-toast-later--dinner",
    "optional": false,
    "faction": null
   },
@@ -453,7 +453,7 @@
    "phase": "m4",
    "kind": "event",
    "summary": "Still no Veier. Corval, miserable, declines. The Thenya stop drinking.",
-   "ref": "04_The_Ball.md#movement-iv--the-toast",
+   "ref": "04_The_Ball.md#movement-iv--the-toast-later--dinner",
    "optional": false,
    "faction": "thenya"
   },
@@ -473,7 +473,7 @@
    "phase": "m4",
    "kind": "omen",
    "summary": "Every falcon screams, then all fall silent. The gardens go quiet. Corro does not laugh.",
-   "ref": "04_The_Ball.md#movement-iv--the-toast",
+   "ref": "04_The_Ball.md#movement-iv--the-toast-later--dinner",
    "optional": false,
    "faction": null
   },
@@ -483,7 +483,7 @@
    "phase": "m4",
    "kind": "snake",
    "summary": "The toast turns every line: Circle fears an heir, Draunel fears succession, Essin stops smiling, Phern mark exits.",
-   "ref": "04_The_Ball.md#movement-iv--the-toast",
+   "ref": "04_The_Ball.md#movement-iv--the-toast-later--dinner",
    "optional": true,
    "faction": null
   },
@@ -493,7 +493,7 @@
    "phase": "m5",
    "kind": "event",
    "summary": "Lamps lowered, slow strange music, quarter-bells. Stealth has Advantage. Custom compels the host back at midnight.",
-   "ref": "04_The_Ball.md#movement-v--the-hour-of-spirits",
+   "ref": "04_The_Ball.md#movement-v--the-hour-of-spirits-approaching-midnight",
    "optional": false,
    "faction": null
   },
@@ -503,7 +503,7 @@
    "phase": "m5",
    "kind": "event",
    "summary": "The pale factor walks the terraces once and confirms the gate — or unlocks it himself.",
-   "ref": "04_The_Ball.md#movement-v--the-hour-of-spirits",
+   "ref": "04_The_Ball.md#movement-v--the-hour-of-spirits-approaching-midnight",
    "optional": false,
    "faction": null
   },
@@ -513,7 +513,7 @@
    "phase": "m5",
    "kind": "event",
    "summary": "Corval quietly doubles the east wing doors. Noticed only by those watching.",
-   "ref": "04_The_Ball.md#movement-v--the-hour-of-spirits",
+   "ref": "04_The_Ball.md#movement-v--the-hour-of-spirits-approaching-midnight",
    "optional": false,
    "faction": null
   },
@@ -523,7 +523,7 @@
    "phase": "m5",
    "kind": "omen",
    "summary": "The Wept, as a dance partner. Sorrow ammunition for her Fracture; needs no check.",
-   "ref": "04_The_Ball.md#movement-v--the-hour-of-spirits",
+   "ref": "04_The_Ball.md#movement-v--the-hour-of-spirits-approaching-midnight",
    "optional": false,
    "faction": "uninvited"
   },
@@ -582,7 +582,7 @@
    "label": "The dais",
    "phase": "m6",
    "kind": "scene",
-   "summary": "Raunu spends his house's wards like coin. The nine fall. A PC beside him can steer wards; each ward-point once, and each steered ward against the Wept is 1 Delay.",
+   "summary": "Raunu spends his house's wards like coin. The nine fall. A character beside him can steer wards; each ward-point once, and each steered ward against the Wept is 1 Delay.",
    "ref": "05_The_Longest_Night.md#the-default-beats",
    "optional": false,
    "faction": "uninvited"
@@ -593,7 +593,7 @@
    "phase": "m6",
    "kind": "event",
    "summary": "He spends his last charge sealing every door between Veier and the river, instead of saving himself.",
-   "ref": "05_The_Longest_Night.md#the-default-beats",
+   "ref": "05_The_Longest_Night.md#the-midnight-clock; 05_The_Longest_Night.md#the-default-beats",
    "optional": false,
    "faction": null
   },
@@ -602,8 +602,8 @@
    "label": "The east wing hunt",
    "phase": "m6",
    "kind": "scene",
-   "summary": "The Radiant hunts Veier through self-sealing corridors. Every watching witness buys her a hallway.",
-   "ref": "05_The_Longest_Night.md#the-default-beats",
+   "summary": "The Radiant hunts Veier through self-sealing corridors. Every watching witness buys her a hallway. By default he reaches the garden stair three beats after Raunu falls (the Midnight Clock).",
+   "ref": "05_The_Longest_Night.md#the-default-beats; 05_The_Longest_Night.md#the-midnight-clock",
    "optional": false,
    "faction": "uninvited"
   },
@@ -622,8 +622,8 @@
    "label": "Buying Time: delaying an Uninvited",
    "phase": "m6",
    "kind": "fight",
-   "summary": "They cannot be beaten, only delayed. A Delay die per Uninvited, on the table; each point is a turn of movement lost. A clever trick with the room, the crowd, a door or a lie: DC 13 → 1 Delay. A Fracture → 2. 30+ damage in a round → 1. Down, Not Out: whoever they drop is Stable, and the crowd hauls them up.",
-   "ref": "05_The_Longest_Night.md#you-cannot-beat-them; 10_Bestiary.md",
+   "summary": "They cannot be beaten, only delayed. A Delay die per Uninvited, on the table; each point is a turn of movement lost. A clever trick with the room, the crowd, a door or a lie: DC 13 (15 the second time, never a third) → 1 Delay. A Fracture → 2. 30+ damage in a round → 1. Down, Not Out: whoever they drop is Stable, and the crowd hauls them up.",
+   "ref": "05_The_Longest_Night.md#buying-time; 05_The_Longest_Night.md#down-not-out; 10_Bestiary.md",
    "optional": true,
    "faction": "uninvited"
   },
@@ -632,7 +632,7 @@
    "label": "Steering the wards",
    "phase": "m6",
    "kind": "scene",
-   "summary": "Ward-literate PCs seal corridors, flood stairs, shelter guests; each ward-point steers once tonight, and against an Uninvited a seal is 1 Delay. From the Root, palace-wide at DC 13.",
+   "summary": "Ward-literate characters seal corridors, flood stairs, shelter guests; each ward-point steers once tonight, and against an Uninvited a seal is 1 Delay. From the Root, palace-wide with a DC 13 Intelligence (Arcana) check.",
    "ref": "05_The_Longest_Night.md#how-to-run-the-attack",
    "optional": true,
    "faction": null
@@ -642,7 +642,7 @@
    "label": "Fracture: the Wept (sorrow)",
    "phase": "m6",
    "kind": "branch",
-   "summary": "DC 18 with one tell, DC 15 with two or more, or once she has 2 Delay. She stops for one full round — mid-kill — and gains 2 Delay.",
+   "summary": "DC 18 with one tell, DC 15 with two or more, or DC 15 whatever the tells once she has 2 or more Delay. She stops for one full round — mid-kill — and gains 2 Delay.",
    "ref": "05_The_Longest_Night.md#the-fractures",
    "optional": true,
    "faction": "uninvited"
@@ -679,51 +679,51 @@
   },
   {
    "id": "kd-circle",
-   "label": "Knives: the Circle's delivery",
+   "label": "Snakes in the dark: the Circle's delivery",
    "phase": "m6",
    "kind": "snake",
-   "summary": "Heat 3–4: Hired Knives walk one of the two Tithe ministers out through the smoke to Callun. Corval is on the stairs, untouched. Heat 0–2: they just get Callun out.",
-   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark",
+   "summary": "Heat 3–4: Hired Knives walk a Tithe-carrying minister out through the smoke to Callun. Heat 0–2: they just get Callun out.",
+   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark; 09_The_Snakes.md (S12)",
    "optional": true,
    "faction": "circle"
   },
   {
    "id": "kd-church",
-   "label": "Knives: the Church's filing",
+   "label": "Snakes in the dark: the Church's filing",
    "phase": "m6",
    "kind": "snake",
    "summary": "Heat 3–4: Wardens come down the dark-wing stair with the drawer of scorched invitations, the slate wiped behind them. Heat 0–2: they get the Prelate out.",
-   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark",
+   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark; 09_The_Snakes.md (S8)",
    "optional": true,
    "faction": "church"
   },
   {
    "id": "kd-draunel",
-   "label": "Knives: Draunel's fourth iron",
+   "label": "Snakes in the dark: Draunel's fourth iron",
    "phase": "m6",
    "kind": "snake",
    "summary": "Heat 3–4: Draunel and his duelists take Vorlain by the arms in the burning gallery (B3), to hand him to the sect guard. Default: Essin's cousins fight for him and he is not taken.",
-   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark",
+   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark; 09_The_Snakes.md (S13)",
    "optional": true,
    "faction": "draunel"
   },
   {
    "id": "kd-boranis",
-   "label": "Knives: the cousins in the fire",
+   "label": "Snakes in the dark: the cousins in the fire",
    "phase": "m6",
    "kind": "snake",
    "summary": "Essin and the cousins go into the burning gallery with Vorlain. If Draunel's heat is 3–4, they stand between him and Draunel's men.",
-   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark",
+   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark; 09_The_Snakes.md (S13)",
    "optional": true,
    "faction": "boranis"
   },
   {
    "id": "kd-phern",
-   "label": "Knives: the Phern door",
+   "label": "Snakes in the dark: the Phern door",
    "phase": "m6",
    "kind": "snake",
-   "summary": "Heat 3–4: Bodyguards hold a gallery-side service door off B2 for Corro alone, and the crowd crushes. Turn it: no check if Corro trusts you, else DC 15 Persuasion.",
-   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark",
+   "summary": "Heat 3–4: Bodyguards hold a gallery-side service door off B2 for Corro alone, and the crowd crushes. Turn it: no check if Corro trusts you, anyone else needs a DC 15 Charisma (Persuasion) check.",
+   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark; 09_The_Snakes.md (S11)",
    "optional": true,
    "faction": "phern"
   },
@@ -733,7 +733,7 @@
    "phase": "m6",
    "kind": "snake",
    "summary": "Maiven goes toward the east wing. She dies there unless somebody competent goes with her.",
-   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark",
+   "ref": "05_The_Longest_Night.md#the-thenya--toward-the-fire",
    "optional": true,
    "faction": "thenya"
   },
@@ -752,7 +752,7 @@
    "label": "The Crossing: the lower garden",
    "phase": "m6",
    "kind": "scene",
-   "summary": "'Take her. The gate. Don't stop.' The crossfire: DC 13 Dexterity save each beat.",
+   "summary": "'Take her. The gate. Don't stop.' The crossfire: DC 13 Dexterity saving throw each beat.",
    "ref": "05_The_Longest_Night.md#the-crossing--vell-and-the-radiant",
    "optional": false,
    "faction": null
@@ -773,7 +773,7 @@
    "phase": "m6",
    "kind": "event",
    "summary": "Their work finished or lost, the leash pulls all three east. The Wept looks back at whoever earned it. The Uninvited are gone before the gate.",
-   "ref": "05_The_Longest_Night.md#the-default-beats",
+   "ref": "05_The_Longest_Night.md#the-midnight-clock; 05_The_Longest_Night.md#the-default-beats",
    "optional": false,
    "faction": "uninvited"
   },
@@ -782,7 +782,7 @@
    "label": "The Longest Night",
    "phase": "m7",
    "kind": "scene",
-   "summary": "Fire and smoke; the PCs are the only order until the sect guard gets in. Heroic Inspiration for the first person each character carries out. Vorlain, a hero.",
+   "summary": "Fire and smoke; the characters are the only order until the sect guard gets in. Heroic Inspiration for the first person each character carries out, and 100 XP for each. Vorlain, a hero.",
    "ref": "05_The_Longest_Night.md#movement-vii--the-longest-night",
    "optional": false,
    "faction": null
@@ -842,7 +842,7 @@
    "label": "Void the contract",
    "phase": "m7",
    "kind": "branch",
-   "summary": "Employer broke terms (DC 13 Persuasion to the sergeant; the captain needs no check), target already gone, or a better offer in front of the sergeants — snake coin included.",
+   "summary": "Employer broke terms (a DC 13 Charisma (Persuasion) check to the sergeant; the captain needs no check), target already gone, or a better offer in front of the sergeants — snake coin included.",
    "ref": "05_The_Longest_Night.md#b12-the-gatehouse-court-held",
    "optional": false,
    "faction": "bought"
@@ -862,7 +862,7 @@
    "label": "History as recorded",
    "phase": "end",
    "kind": "ending",
-   "summary": "Raunu dead mid-sentence; Veier gone into the river dark on Vell's arm (by default, even with no PC at the gate); the Uninvited without trace; no one ever charged; the heir secret.",
+   "summary": "Raunu dead mid-sentence; Veier gone into the river dark on Vell's arm (by default, even with no character at the gate); the Uninvited without trace; no one ever charged; the heir secret.",
    "ref": "05_The_Longest_Night.md#epilogue-one-shot-ending",
    "optional": false,
    "faction": null
@@ -1152,7 +1152,7 @@
    "label": "The wicket and the gate-walk",
    "phase": "m7",
    "kind": "scene",
-   "summary": "How to reach them: DC 15 Strength (Athletics) to force the wicket bar, DC 13 with thieves' tools, a Blade's key, or climb to the gate-walk (DC 13 Athletics). Or parley at the wicket grille, and the sergeant opens it.",
+   "summary": "How to reach them: DC 15 Strength (Athletics) to force the wicket bar, a DC 13 Dexterity check with Thieves' Tools, a Blade's key, or climb to the gate-walk (a DC 13 Strength (Athletics) check). Or parley at the wicket grille, and the sergeant opens it.",
    "ref": "09_The_Snakes.md (S3)",
    "optional": true,
    "faction": "bought"
@@ -2451,8 +2451,8 @@
    "id": "clk-leash",
    "label": "The leash",
    "segments": 4,
-   "advances": "Story-time from the first scream (about half an hour in all); late, the Uninvited grow faster, sloppier, more human",
-   "fills": "Their work finished or lost, the leash takes all three east — at the latest at the last bell, which rings after the gate is decided"
+   "advances": "Story-time from the first scream (half an hour at most); late, the Uninvited grow faster, sloppier, more human",
+   "fills": "Their work finished or lost (by default, when the boat is out of reach of the river gate), the leash takes all three east; the last bell, rung once the gate is decided, is the latest it can come (see chapter V, \"The Midnight Clock\")"
   },
   {
    "id": "clk-delay",

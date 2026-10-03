@@ -242,6 +242,8 @@ Do not tell them how it goes wrong.
 This module is mostly talk, and talk runs on ability checks. The whole book uses one
 ladder. Learn it once here; every chapter prints its DCs against it.
 
+**The DC Ladder**
+
 | Tier | DC | When |
 |---|---|---|
 | **Easy** | **10** | The custom, the approach, or the moment is on your side |
@@ -356,7 +358,7 @@ without pushing.
 
 **The seating feud (S1)** offers itself: it is loud, it is nearby, and it is two drunk
 men about to embarrass their houses. A character with any standing at all will
-be *looked at* by the people around the benches. That look is the invitation.
+be looked at by the people around the benches. That look is the invitation.
 
 **The quiet word (S6)** is the early steel for a table that cannot wait. Anyone who
 presses Vorlain, or asks around about the missing year, gets invited by one of Essin's
@@ -414,7 +416,7 @@ who keeps glancing at doors. A falconry mews screaming at nothing. A charming gu
 whose turns of phrase are centuries out of fashion. Never underline an omen. Say it
 once, plainly, and move on. Players who notice will assemble the pattern themselves,
 and players who assemble the pattern earn the best reward this night has: the chance to
-act *before* midnight. The snakes follow the same rule. A tell is shown once, and it is
+act before midnight. The snakes follow the same rule. A tell is shown once, and it is
 always deniable.
 
 When the Unmasking comes, change your voice. Shorter sentences. Fewer adjectives. The
@@ -487,7 +489,7 @@ correcting a player mid-scene costs more than the error did.*
 > **Troubleshooting — you keep setting every DC at 20**
 >
 > This is the single most common way to make this night unfun, and it happens because
-> Hard *feels* like taking the fiction seriously.
+> Hard feels like taking the fiction seriously.
 >
 > **Answer one: the line's first check is a DC 13 Charisma (Persuasion) or DC 13
 > Wisdom (Insight) check**, and chapter IV says so at B0 for exactly this reason. Set the tier there and let the rest of the night calibrate off
@@ -495,7 +497,7 @@ correcting a player mid-scene costs more than the error did.*
 >
 > **Answer two: an approach across station, behind a mask, is Easy: an ability check
 > using the skill that fits, DC 10.** The custom protects the conversation. That is
-> what the masquerade is *for*, mechanically.
+> what the masquerade is for, mechanically.
 
 > **Troubleshooting — a near miss is not a failure**
 >
@@ -503,8 +505,8 @@ correcting a player mid-scene costs more than the error did.*
 > missing a DC means nothing happens, and they learned it from how it was narrated.
 >
 > **Name the cost before the success.** "You get the answer, and Corval will remember
-> you asked." Cost first, then the thing they wanted, and the thing they wanted *always
-> arrives*. A miss by 4 or less is where this lives, and the DM sheet has a table of
+> you asked." Cost first, then the thing they wanted, and the thing they wanted always
+> arrives. A miss by 4 or less is where this lives, and the DM sheet has a table of
 > costs.
 
 > **Troubleshooting — the table rolls Initiative on everything**

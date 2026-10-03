@@ -15,7 +15,7 @@ handouts for the table. Print the first three pages and run the night from them.
 | Start | Movement | Scheduled | The omen | The quiet guest | Fights to show *(Ch. IX)* |
 |---|---|---|---|---|---|
 | 0:00 | **The street** (10) | Pick character, agenda, hook (Ch. I); read B0; *"what does your mask look like?"* | — | — | — |
-| 0:10 | **I. Receiving Line** (25) | Corval receives by name, from memory; nobody is disarmed; the hosts are absent | Nine honor guards, facing *inward* | Holds a cup out for nobody | S4 if anyone draws |
+| 0:10 | **I. Receiving Line** (25) | Corval receives by name, from memory; nobody is disarmed; the hosts are absent | Nine honor guards, facing inward | Holds a cup out for nobody | S4 if anyone draws |
 | 0:35 | **II. Empty Rooms** (45) | Vorlain holds court; the factions circulate; still no host | Corro's gift rings, pointing nowhere | Stares at a crystal wall for a full minute | S1 · S6 |
 | 1:20 | **III. Summons** (35) | A glimpse on the high gallery; Corval fetches guests to B4 (≥1 player character; two together once) | Three gray masks Corval cannot account for | — | S6 · Tavva's scout · S1 if held from II |
 | 1:55 | **IV. Toast** (25) | Raunu at the high table: *"At the Unmasking I will have something to say"*; **two plates**; gone | The mews scream, then silence | Turns to follow the music | S7 begins |
@@ -222,7 +222,7 @@ the half-bell in Movement V (S10). So the only card live in the dark by default 
 | Kovaun | B1 line | B2, census | B4 antechamber | B2 | B6 chapel, briefly |
 | Sella | B6 | B6 | B6 | B2 for the toast | B6 — the masks rite |
 | Callun | B1 line | B3 alcove with Corro | B3 | B2 — recalculating | B3 |
-| Corro | B2 | B3 alcove — *uneasy* | B2 — *worse* | B2 — *bad* | B2, back to a wall |
+| Corro | B2 | B3 alcove — uneasy | B2 — worse | B2 — bad | B2, back to a wall |
 | Draunel | B2 | B3 | B4 line, courting | B2 | B3 |
 | Maiven | B1 — impatient | B3, pressing Corval | B3, petitioning | B3 — audience refused | B9 doors — one bad hour from the wall |
 | Anha | B10 | B10 | B10 | B10, at the service door | B10 |

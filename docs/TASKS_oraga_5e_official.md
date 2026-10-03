@@ -424,11 +424,11 @@ Each T8 task: SA, a ledger row citing the ruling, and a DECISIONS entry.
 
 ## Phase 9: Closeout
 
-### ☐ T9.1 Ledger sync
+### ☑ T9.1 Ledger sync
 - **Do:** every block added from printed facts (Background, Overview, the dinner scene, the charge handout, knowledge lists, new boxes, detection DCs, Adjusting values, Midnight Clock default, trample damage) has an `INVENTIONS_5e.md` row with its sources. Mark #55 amended per Q5.
 - **Accept:** the ledger reviewer's check: every new H3/H4 or boxed block since the baseline commit (`git diff pre-official-5e..HEAD`) either maps to a row or is pure relocation.
 
-### ☐ T9.2 Flow page
+### ☑ T9.2 Flow page
 - **Do:** update `flow.json` for the renames, the moved agendas, DM wording and the Midnight Clock. Run `python M/flow/build_flow_page.py`. Republish the published artifact only if the owner asks.
 - **Accept:** the build succeeds, and no node references a removed section.
 

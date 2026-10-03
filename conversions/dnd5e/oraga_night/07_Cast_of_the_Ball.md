@@ -33,7 +33,7 @@ entire public Raunu. The guests came to see a recluse and are seeing one.
 
 **Roleplaying Raunu (the summons):** awkward, unhurried, unmistakably out of practice:
 long pauses, no pleasantries, the true thing said where the polite thing was
-expected, and no apparent awareness that this is strange. He listens *completely*,
+expected, and no apparent awareness that this is strange. He listens completely,
 which unnerves people more than the silence.
 
 He knows things about each summoned
@@ -135,7 +135,7 @@ is never a fight.
 *Ruled for the missing year; killed two cousins doing it; gave it back without a word.*
 
 **Wants:** the seat, forever, aching, and — this is the part House Draunel cannot
-imagine — *not like this*. **Fears:** Raunu. Comprehensively. Fear of his brother is
+imagine — not like this. **Fears:** Raunu. Comprehensively. Fear of his brother is
 the load-bearing wall of his personality. **Secret:** he has no plot tonight. He came
 because not coming was more dangerous.
 
@@ -251,7 +251,7 @@ is too tired to check.
 **Wants:** to keep her head down and her triple wages flowing home. **Fears:**
 naming the wrongness out loud, in case naming is what makes it real. **Secret:** two
 years of eerie domestic detail (east wing lights burning all night, meals for two
-sent up and meals for *three* coming back down these last months, the master's voice
+sent up and meals for three coming back down these last months, the master's voice
 in empty rooms, corridors she is forbidden to sweep) and no frame to put around any
 of it.
 
@@ -290,7 +290,7 @@ lights die she goes for the service passages, because she knows them.
 **Wants:** to file Raunu Boranis under something. Anything. **Fears:** the mists,
 which is to say, the one memo from the east that reached her desk and was above her
 seal to read. **Secret:** the Church's interest tonight is not doctrinal; her
-superiors want to know whether the man who returned is *the man who returned*, and
+superiors want to know whether the man who returned is the man who left, and
 she has not been told why the question is phrased that way.
 
 **Roleplaying Kovaun:** urbane, watchful, a career diplomat in vestments; works the room like
@@ -317,7 +317,7 @@ retinue. The Church is a snake; its line is in chapter IX (card S8).
 **Wants:** to tend the Oraga rite properly: the masks, the year's dead, the sending-
 home. **Fears:** nothing; she is an Elanna follower of the old northern school, and
 acceptance is the whole doctrine. **Secret:** Raunu asked her, at the wedding two
-years ago, what her order teaches about *dying well*, and she has wondered since why
+years ago, what her order teaches about dying well, and she has wondered since why
 a man that age wanted the answer that badly. It is she who keeps the fresh offerings
 in Elanna's chapel niche.
 
@@ -349,7 +349,7 @@ following:
 *Mistress of the Merchant's Circle; Agenda 1's patron.*
 
 **Wants:** Raunu's next decree, before it lands on her margins. **Fears:** an heir,
-a *dynasty* of Raunus, which is why Movement IV turns her polite loathing into
+a dynasty of Raunus, which is why Movement IV turns her polite loathing into
 something with a horizon. **Secret:** the Circle has already gamed a Vorlain
 chieftaincy and priced it attractive; she is here tonight to check the arithmetic,
 not to act on it. (She would be horrified to be called a conspirator. She is merely
@@ -382,7 +382,7 @@ Circle is a snake; its line is in chapter IX (cards S7 and S12).
 is why his mounting, unexplained dread (the Movement II omen) is worth a dozen
 warnings from anyone else.
 
-**Roleplaying Corro:** small, merry, expansive — and increasingly, visibly *wrong* as the
+**Roleplaying Corro:** small, merry, expansive — and increasingly, visibly wrong as the
 night goes on: losing sentences, glancing at doors, standing with his back to walls.
 A character who takes him seriously and walks the room with him is doing real
 detective work, at the right altitude. **At the Unmasking:** his gift finally
@@ -458,7 +458,7 @@ S6, S9 and S13).
 ### Maiven Nolonaire — the Cousin from the Border
 *Veier's cousin; Agenda 4's patron.*
 
-**Wants:** proof of Veier (alive, well, *unforced*) carried home in Thenya hands.
+**Wants:** proof of Veier (alive, well, unforced) carried home in Thenya hands.
 **Fears:** that the pact was a purchase and her kinswoman the price. **Secret:** the
 delegation's diplomatic brief is thin cover; the Thenyan chief's actual instruction
 was *"if she is a prisoner, bring her out,"* and Maiven, border-raised and direct,
@@ -470,7 +470,7 @@ plates, a promised midnight pronouncement, and still no kinswoman.* Her
 formal request for an audience, declined by a miserable Corval, is the last
 diplomatic thing she does tonight. From there she is one bad hour from going over
 the east wing wall herself, which makes her the Agenda 4 character's natural ally or
-runaway problem. **At the Unmasking:** she goes *toward* the east wing,
+runaway problem. **At the Unmasking:** she goes toward the east wing,
 immediately, and dies there unless somebody competent goes with her.
 
 **What Maiven Knows:** a character who carries Agenda 4, or who wins her trust,
@@ -515,7 +515,7 @@ and the white cloth stays on all night, including at the Crossing, where he
 fights the Radiant with it still bound. If the characters notice that (a man dueling
 something unbeatable while deliberately not using his weapon), let them notice.)*
 
-**Roleplaying Vell:** courteous, brief, and *finished*. Every conversation with Vell ends
+**Roleplaying Vell:** courteous, brief, and finished. Every conversation with Vell ends
 when he decides, somehow without rudeness. He answers questions with smaller
 questions. He is immune to every lever: bribery, flattery, threat, charm. Make
 every check to move Vell a **DC 25 Charisma (Deception, Intimidation, or Persuasion)
@@ -599,7 +599,7 @@ and never says more about what that is.* It is a made thing, not a born one, and
 serves the same master as the three gray masks. It came through with them. Players
 need never hear the name; "the Attendant" is enough.
 
-**Wants:** nothing. It has orders. Before midnight the order is to *watch*. After
+**Wants:** nothing. It has orders. Before midnight the order is to watch. After
 midnight it is *keep the three from being interrupted*. **Fears:** nothing; it has no
 feelings to fear with. **Secret:** it has spent centuries doing nothing, and it is
 rusty.
@@ -653,7 +653,7 @@ and there are buyers (she has never asked whose coin; that is what intermediarie
 are for) with a standing interest in old soul-crystals. **Fears:** wards, which
 she respects the way sailors respect weather. As the evening goes on, she fears this
 house itself more and more: she has robbed enough palaces to know what a prepared one feels
-like, and this one feels *aimed*. **Secret:** her crew of four came in as festival
+like, and this one feels aimed. **Secret:** her crew of four came in as festival
 hires across two nights, her timetable keyed to the Dead Dance's lowered lamps.
 
 The midnight attack is nothing to do with her. She is as blindsided as the

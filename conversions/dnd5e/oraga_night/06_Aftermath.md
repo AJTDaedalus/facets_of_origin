@@ -14,8 +14,8 @@ record, and it is what history keeps.
 - **The fires are out by dawn.** The sect guard seals the palace with the guests inside
   it until midday and takes testimony. The inquest is run jointly by a Draunel captain,
   a Church notary and a Circle observer, which makes it three inquests wearing one coat.
-  The notary holds the only pen in the room, and the testimony is *edited in real
-  time*: a character who asks to have their statement read back will hear it subtly
+  The notary holds the only pen in the room, and the testimony is edited in real
+  time: a character who asks to have their statement read back will hear it subtly
   improved.
 - **Everyone blames a rival.** Draunel wants Vorlain guilty. The Circle wants a foreign
   trade rival, and the Phern guests spend an ugly morning under suspicion. The Church
@@ -27,7 +27,7 @@ record, and it is what history keeps.
   charged.**
 - **The pregnancy never gets out.** The midwife is simply gone by dawn, never found.
   The skeleton staff hold the silence they were paid for. The record says a vanished
-  *bride*, never a vanished *heir*. Characters who reached the east wing hold a truth that
+  bride, never a vanished heir. Characters who reached the east wing hold a truth that
   exists nowhere else in the world: priceless, unprovable, and dangerous in exact
   proportion to who they tell.
 - **The trail goes tidy.** The river gate is unlocked, oiled, recently used. A boat is

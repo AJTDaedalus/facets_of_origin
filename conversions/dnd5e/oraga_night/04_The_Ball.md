@@ -35,7 +35,7 @@ of a shell.
 
 Guests notice two things within minutes. First, the splendor is real. House Boranis
 has spent lavishly, and the food, wine, and musicians are the finest of the festival.
-Second, the house is *empty*. A palace this size should hold a hundred servants;
+Second, the house is empty. A palace this size should hold a hundred servants;
 tonight, familiar liveried staff number about two dozen, stretched thin and
 supplemented by festival hires who don't know where anything is. Whole wings are dark.
 The famous Boranis honor guard is present in bare ceremonial numbers.
@@ -473,7 +473,7 @@ lines from that Movement's "The Snakes This Movement" section.
 
 ## Trouble You Can Walk Into
 
-No fight at this ball is mandatory, and every one is *visible*. Two troubles circulate
+No fight at this ball is mandatory, and every one is visible. Two troubles circulate
 below, alongside the snakes. Show them plainly, once each, and let them be walked into,
 or past.
 
@@ -501,7 +501,7 @@ sentence", below).
 
 The characters can pick a side, shield the innocent, or end it: hauling the principals
 apart, a voice that expects to be obeyed, a well-timed joke at both houses' expense.
-Ending it *well* earns Corval's open gratitude, which is worth more than either
+Ending it well earns Corval's open gratitude, which is worth more than either
 house's: he is the man who opens doors. Letting it run costs nothing but bruises and
 reputations. It also fills the galleries with guards for a Movement, which some agendas
 will find inconvenient and one crew (below) finds very interesting indeed.
@@ -532,7 +532,7 @@ noble-minded, with nothing at stake in it but property and decency.
   wondering who else is working her gallery tonight.
 - **The staging** *(Movement V)*: during the Dead Dance, in the lowered lamps,
   figures moving through the dark service corridors with rope, sacking, and a
-  shuttered lantern. They are visibly *not* dancing, and visibly not staff. This is the last
+  shuttered lantern. They are visibly not dancing, and visibly not staff. This is the last
   quiet chance to stop what is coming, and the only one where the whole crew is
   in one place. A fight here is knives in the dark, hushed on both sides,
   because whoever makes noise answers to the guards, and both sides know it.
@@ -547,7 +547,7 @@ and their grandmother's crystal hang in the same gallery.)*
 
 > **Sidebar — Guards are a scene, not a sentence:** when the characters cross the
 > house (a heist gone loud, the east wing forced, steel bared in the feud), the guards
-> who answer are a *playable fight* (card S4), not a fail state. The win condition is
+> who answer are a playable fight (card S4), not a fail state. The win condition is
 > the getaway: the service passages swallow anyone quick enough to reach them (each
 > round, a DC 13 Dexterity (Acrobatics) or DC 13 Strength (Athletics) check; 3 successes
 > before 3 failures), and a good name dropped ends it in an escort and a warning. The
@@ -561,15 +561,15 @@ and their grandmother's crystal hang in the same gallery.)*
 > on and lets the rest surface as rumor. The exception is **C**: if anyone carries
 > Agenda 4, it is the way to Veier, and chapter V leans on it.
 
-Four investigations run beneath the ball. They are mysteries a curious table can *solve*, or
+Four investigations run beneath the ball. They are mysteries a curious table can solve, or
 at least reach the bottom of, before midnight solves everything its own way. Each
 Undercurrent has a **spark** (how the characters catch the scent), a **trail** (redundant
 clues: a table that misses one finds another, so never let a single failed check close
 a thread), a **find** (what's at the bottom), and **at midnight** (how the discovery
 pays off when the lights die).
 
-Agendas are what the characters were *sent* to do. Undercurrents are what they
-*choose* to chase. The best nights are the ones where a character abandons
+Agendas are what the characters were sent to do. Undercurrents are what they
+choose to chase. The best nights are the ones where a character abandons
 their patron halfway down a wine-cellar stair.
 
 **Reaching the bottom of an Undercurrent earns Heroic Inspiration** for the character
@@ -579,7 +579,7 @@ who says the find out loud at the table (Table I–3; once per Movement).
 *There is a sealed place beneath the palace, and the master keeps it himself.*
 
 **The spark:** rumor 5 ("he slept a year in the root of the house"); or Anha's
-forbidden corridors: she is barred from sweeping the *lower* cellar stair, which
+forbidden corridors: she is barred from sweeping the lower cellar stair, which
 makes no sense, because nothing is down there but wine; or a sharp eye in the study
 (B8): the half-erased lattice diagram on Raunu's slate matches no door anyone has
 seen upstairs (a DC 13 Intelligence (Investigation) check to notice it is a door and
@@ -609,7 +609,7 @@ not a diagram).
   house's few guards arrive with real fear on their faces. Nobody but the master goes
   down there.
 
-**The find:** Raunu's true workshop, and it is *beautiful*: no torture-vault, no
+**The find:** Raunu's true workshop, and it is beautiful: no torture-vault, no
 horror. A grown-crystal chamber lit from within,
 and everywhere the evidence of one sustained, forbidden inquiry: **the origin of the
 gifts.** What an hour in the laboratory yields, in rising order:
@@ -618,7 +618,7 @@ gifts.** What an hour in the laboratory yields, in rising order:
   this room is a hoard of knowledge with no equal outside its vaults, and it is
   made entirely of crystal: racks of grown lattices, decades of research held in
   light. Touch one
-  and it *shows* rather than tells: structured sequences of image and remembered
+  and it shows rather than tells: structured sequences of image and remembered
   gesture, gift-workings demonstrated by hands long dead, tribal lineages branching
   like rivers. Many of the oldest lattices are not his work: relics, acquired
   quietly through Phern intermediaries over fifteen years, at prices that would
@@ -629,7 +629,7 @@ gifts.** What an hour in the laboratory yields, in rising order:
   left him nowhere else to put it: *"The Church says the gifts are given. Wrong
   verb. The gift is not given. It is remembered."*
 - **Instruments** of glass and lattice nobody can name. Yet an Orthaen or any
-  character who can cast spells can *feel* what they do: they read the gift itself,
+  character who can cast spells can feel what they do: they read the gift itself,
   the way a jeweler's glass reads a stone. Reading the gift in what, the room answers
   quietly: a chair with a wide armrest, a stool beside it, a lap-blanket of Thenya
   wool folded over its back.
@@ -663,7 +663,7 @@ gifts.** What an hour in the laboratory yields, in rising order:
   trees.** The Boranis line and the Nolonaire line are rendered in light, descending
   generations deep and intertwining as they descend. Both converge toward a single
   darkened junction older than either house, where one name has been deliberately,
-  physically *burned out* of the lattice.
+  physically burned out of the lattice.
 
   Woven into the
   orrery's base, in the private pattern-language the rest of the room refuses to
@@ -676,21 +676,21 @@ gifts.** What an hour in the laboratory yields, in rising order:
 
 The shape of it is discoverable. The chief of the Orthaen believed the gifts of two
 tribes were one gift, long ago. He believed his marriage carried both halves, and he
-has spent eight months *watching the proof grow.*
+has spent eight months watching the proof grow.
 
 What the room still does not give: the lattices' deeper contents, the name burned
 from the junction, what the restored gift is or does, or what the mists have to do
 with any of it. No check, spell, or divination reaches past that line tonight.
 *Legend Lore*, *Commune* and their kin return rumor and contradiction, the way the
 world answers everything else about this house. The find is also, quietly, why
-rumors 2 through 12 all exist: everyone senses he was *doing something*. Nobody
+rumors 2 through 12 all exist: everyone senses he was doing something. Nobody
 guessed this.
 
 **At midnight:** three payoffs. The Root is the strongest-warded place in the
 palace: a safe room that can shelter a dozen guests through the whole attack. A
 ward-literate character can steer palace defenses from here (seal a corridor ahead
-of the Radiant; light a stairwell for the fleeing). And the Uninvited *will not
-enter it*. Whatever the deep crystal is to them, they will not cross its
+of the Radiant; light a stairwell for the fleeing). And the Uninvited will not
+enter it. Whatever the deep crystal is to them, they will not cross its
 threshold, and nothing in this adventure explains why. *(The snakes do not know
 it is there. But its key is the slate in B8, and the Church's Wardens mean to wipe that
 slate tonight. See card S8.)*
@@ -699,13 +699,13 @@ slate tonight. See card S8.)*
 *Eighty servants left this palace two years ago, and eighty of anything has to go somewhere.*
 
 **The spark:** Agenda 8; or the festival hires: one of tonight's borrowed footmen
-*used to work here*, recognized by his ease in the corridors (a DC 13 Wisdom (Insight)
+used to work here, recognized by his ease in the corridors (a DC 13 Wisdom (Insight)
 check to see a hired man who does not need directions); or simple arithmetic by any guest
 who has run a household.
 
 **The trail:** the returned footman, cornered kindly, tells his strange story: paid
 off two years ago at triple severance, sworn to silence on the house's affairs, and
-*relocated*, with passage and placement found for every one of them, most to holdings
+relocated, with passage and placement found for every one of them, most to holdings
 far from Rekuzan. He came back tonight on a festival hire because he missed the
 place, and he is frightened to be recognized. (Kindly is the operative word: a DC 10
 Charisma (Persuasion) check if the approach is gentle, a DC 18 Charisma (Intimidation)
@@ -719,11 +719,11 @@ place him somewhere dry.* He also knows the testament Raunu swore aloud in the c
 three days before the ball, with Corval and Mother Sella standing witness as the law
 requires. It provides for every current servant by name.
 
-**The find:** nothing sinister. The staff weren't victims. They were *evacuated*, with a thoroughness that reads as
+**The find:** nothing sinister. The staff weren't victims. They were evacuated, with a thoroughness that reads as
 love expressed as logistics. The silent palace was never hiding a crime. It was
 clearing the decks. For what, neither Corval's memory nor the testament says.
 
-**At midnight:** the characters who solved this one understood the night *before* it
+**At midnight:** the characters who solved this one understood the night before it
 happened. They know the skeleton staff who remain are the ones Raunu judged he
 could not make leave. Corval, Anha, the nine inward-facing guards: the volunteers.
 Every one of them saved is a coda this thread earns. *(And it tells them what the
@@ -737,7 +737,7 @@ trays come back down — three plates used.*
 **The spark:** Anha mentions it as one of her unframed facts; or laundry: a guest
 near the service passages sees linens going up that no ball needs: small, soft,
 new-hemmed (a DC 13 Wisdom (Perception) check); or rumor 11's "guards on the inside of the
-doors" invites a test that finds the guards courteous, immovable, and *protective*
+doors" invites a test that finds the guards courteous, immovable, and protective
 rather than jailerly.
 
 **The trail:** the midwife, the third plate herself, glimpsed once crossing the gallery at
@@ -752,18 +752,18 @@ family.
 
 **The find:** the pregnancy, the secret the whole ball is guessing at, and the
 sentence Raunu will die without finishing. He means to announce it at midnight,
-and he never gets to. The characters who bottom this thread may be the *only guests
-in the palace* who ever know what the night was for. What they *do* with
+and he never gets to. The characters who bottom this thread may be the only guests
+in the palace who ever know what the night was for. What they do with
 that is the thread's real payload: sell it (the Circle would reprice the room),
 guard it, warn the Thenya, or carry it silently into the Unmasking knowing what
 the recluse is about to say. Characters who found the nursery tend to appoint
 themselves its protectors, which is exactly where chapter V wants them standing.
 
 *(Selling it is a real choice with a real buyer. Rhaza Callun fears exactly one thing
-from this house: an heir, a* dynasty *of Raunus. A character who brings her the
+from this house: an heir, a dynasty of Raunus. A character who brings her the
 nursery has handed the Circle's line in this chapter its reason to move. She pays on
-delivery, as she always does. What her people do with it is in* The Snakes This
-Movement *from then on.)*
+delivery, as she always does. What her people do with it is in "The Snakes This
+Movement" from then on.)*
 <!-- TODO-Q15: Callun's price for the nursery waits on owner ruling Q15 (BALL-12). -->
 
 **At midnight:** knowing the east wing's layout, its inner guards by name, and its
@@ -775,15 +775,15 @@ moment the Radiant starts up the gallery.
 
 **The spark:** Corval's failing count (Movement III omen: his memory has never
 once lost a guest, until tonight); or Corro's misfiring gift; or the simple social
-fact that nobody is talking *about* the three gray masks, which at this ball is
+fact that nobody is talking about the three gray masks, which at this ball is
 against nature (a DC 13 Wisdom (Insight) check for anyone working the gossip to notice
 the hole in it).
 
 **The trail:** built from the cast's planted tells, and best walked with allies.
 
 - **Corval**, pressed, discovers he cannot keep the question in his head and becomes
-  frightened of his own mind. The unflappable majordomo asks a guest to *hold the
-  thought for him*.
+  frightened of his own mind. The unflappable majordomo asks a guest to hold the
+  thought for him.
 - **Corro**, walked deliberately around the room, is worst near the three: a living
   compass reading he refuses to interpret.
 - **A craft-eye.** Any guest's craft-eye (a DC 13 Intelligence check, adding the
@@ -807,7 +807,7 @@ It is the only Undercurrent whose bottom is a warning instead of an answer. If t
 characters act on it:
 
 - **Warning Corval** gets the east wing guard doubled (it already will be; now the
-  characters know *why*).
+  characters know why).
 - **Warning Raunu** is the thread's crown. He listens, completely, the way he listens
   to everything, thanks them with terrible gentleness, and does not act. *"I know,"
   he says. "You noticed. That matters more than you yet understand. Enjoy the ball
@@ -823,7 +823,7 @@ fight, never take damage, and never stay in a scene that would make them.)*
 
 **At midnight:** everything. Fracture ammunition (see chapter V) is this thread's
 currency; characters who walked it enter the Longest Night armed, positioned, and,
-rarest of all at Oraga, *unsurprised*.
+rarest of all at Oraga, unsurprised.
 
 > **Sidebar — Threading the clock:** Undercurrents are paced for Movements II–V.
 > If a table locks onto one early and bottoms it by Movement III, let it ripple:
@@ -872,7 +872,7 @@ kitchens (B10); patrons make contact and confirm asks; first reconnaissance.
 **The omen:** the honor guard. A house this rich should field forty blades in
 ceremony. There are nine. A soldier or bodyguard (Dassa, among the pregens) counts
 them without trying; anyone else who is looking notices on a DC 10 Wisdom
-(Perception) check, and notes that the nine are placed *inward*, facing the palace
+(Perception) check, and notes that the nine are placed inward, facing the palace
 doors, not the gates.
 
 **The quiet guest** *(the Attendant, chapter VII)*. One sighting in Movements I, II, IV
@@ -1029,7 +1029,7 @@ said where the polite thing was expected.
 
 And he knows things he should not know
 (the guest's agenda patron, their grandmother's crystal, their sister in his
-kitchens), and shows it without threat, almost absently. He is *sounding* people,
+kitchens), and shows it without threat, almost absently. He is sounding people,
 though for what, he does not say. Each summons ends the same way: abruptly, with
 something that is nearly a kindness, and the long walk back.
 
@@ -1045,14 +1045,14 @@ would read him finds a man thinking about a staircase, and nothing else. He has
 prepared for that, too.
 
 **Agenda beats:** a summons is the only route to the host. It is Agenda 2's one close
-study and Agenda 1's one chance to simply *ask* (which gets a long look, and then,
+study and Agenda 1's one chance to simply ask (which gets a long look, and then,
 flatly: *"It taxes palaces to pay laborers. The palaces can afford it. That is the
 whole secret. You may tell the Circle I said so."*). Agenda 4 may ask after Veier.
 He goes still for a moment, then: *"She chooses her guests herself these days. If
 she chooses you, you will know."*
 
 Characters not summoned work the room. Angling
-to *get* summoned is a fine scene in itself (a DC 13 Charisma (Persuasion) or DC 13
+to get summoned is a fine scene in itself (a DC 13 Charisma (Persuasion) or DC 13
 Intelligence (Investigation) check, or another skill if the angle calls for one; Corval
 notices the ones who help him before the ones who flatter him). On a success, Corval
 fetches that character at the next summons.
@@ -1180,7 +1180,7 @@ The toast should be delivered word-for-word, pauses included:
 > dead silent — and walks out through the east doors, and does not come back.*
 
 The doors close. One heartbeat. Then the room boils with the
-*promise* of news. Two years of silence, and the recluse has just scheduled its
+promise of news. Two years of silence, and the recluse has just scheduled its
 ending to the hour. Nobody in the ballroom will ever learn what he meant to say.
 The ball spends its last hours guessing at a sentence that will never be finished.
 

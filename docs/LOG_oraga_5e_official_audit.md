@@ -604,3 +604,60 @@ calls and sample pairs.
 - Kept on purpose: canon card wording ("perhaps four times"), the Mask prompt questions in 11, and "player character" only where it separates the characters from NPCs.
 - Leftovers for T9.3: 01's DC-ladder table has no title; emphasis italics in DM prose still need a sweep.
 - Checks: lint --check OK (0/0), bestiary 0, pregen 0, pytest 159 passed, flow build OK. Re-baselined after the pass.
+
+## Phase 9
+
+### T9.1, T9.2 and the two Phase 7 leftovers (Worker, 2026-10-03)
+
+**Commands:** `python conversions/dnd5e/oraga_night/tools/lint_5e.py --check` → OK (0 problems; 0 hard and 0 structure hits). `bestiary_check.py` → 25 blocks + 3 Nastier, 0 mismatches. `pregen_check.py` → 5 pregens, 0 issues. `python -m pytest conversions/dnd5e/oraga_night/tools -q` → 159 passed. `python conversions/dnd5e/oraga_night/flow/build_flow_page.py` → built without errors. No re-baseline, no whitelist entries. Nothing republished.
+
+**T9.1 — ledger sync.** Method: `git diff pre-official-5e..HEAD -U0 -- 'conversions/dnd5e/oraga_night/*.md'` (INVENTIONS and STYLE excluded), every added H1–H4 heading, every boxed species line (Sidebar, DM Note, Troubleshooting, What [Name] Says) and every new card run-in (Detection, Treasure, Rewards, Tactics, Morale, Development, Adjusting, At heat 4, Topics, Overview, Quote, What [Name] Knows), each checked against the baseline text for a renamed original. #55 already carries the Q5 amendment (Phase 1); unchanged. **Rows added: #69** (chapter IX rulings: heat-4 lines incl. the new S10 one, tracker rows, S10 heat gate, S4 two guards, budget labels, the 2014 DM Note, Inspiration rows, the how-it-plays notes as relocation), **#70** (chapter X rulings: Kovaun CR 1/2, *She Arrives*, *Call the House* trigger, *Two Turns*, the "until the scene ends" definition, the CR line, *Stones Before Steel* as a Tell), **#71** (front matter and 06: the level-range line, the chapel Short Rest line, the 2014 claim and gift rule, *Reading This Book*, 06 *Rewards*).
+
+| New block since `pre-official-5e` | Ledger / status |
+|---|---|
+| 01 Adventure Background | #60 |
+| 01 Overview (seven Movements) | #61 |
+| 01 Reading This Book (legend) | relocation of *How This Module Is Written*; #71 |
+| 01 range line, chapel Short Rest line, 2014 claim; README 2014 gift rule | #71 (#47 for the Short Rest fact) |
+| 01 Troubleshooting ×2, retitled ("you keep setting every DC at 20", "the table rolls Initiative") | rename (T4.1/T4.2) |
+| 01 **The DC Ladder** caption (this phase) | title only, no fact |
+| 02 The Eight Agendas + 8 agenda H3s | relocation from 03 (T2.1) |
+| 02 DM Note, 03 Sidebar, 04 DM Note/Sidebar, 05 Crossfire/Gutter/Fractures-and-magic Sidebars, 05 three DM Notes, 06 Going east, 07 What Vorlain/Corval Says, 07 DM Note — the factor, 09 heat / Movement V / hint DM Notes | renames of baseline boxes (MM → DM, T4.1; species, T5.2) |
+| 04 The Snakes This Movement — I–V (H4) | relocation (unboxed, T5.4) |
+| 04 Raunu's Summons: the Questions (H4) | relocation of the summons box (T5.1) |
+| 04 Dinner for Two (B9), Topics | #58 |
+| 04 Seating Feud timing; gate-failure, B0/B3/summons results | #64 |
+| 05 The Midnight Clock (O9 default) | #63 |
+| 05 General Features; Sidebar — Adjusting the Attack (O11); trample 5 (2d4) (O10); B12 Treasure; carry award | #63 |
+| 05 Sidebar — Characters who attack Vell | rename of "Players who attack Vell" |
+| 05 The Snakes in the Dark (rename), card pointer list | rename + cut (T2.4); cards hold the substance |
+| 05 The Crossing box; Movement VII box | #66, #67 |
+| 06 Rewards | #71 (recap only) |
+| 07 What [Name] Knows ×11; 08 rumor truth notes | #68 |
+| 07 Quote lines ×3 | relocation from existing quotes (T5.4) |
+| 07 default DC, Voiding the contract, Vell's checks, Callun DC 20 | #65 |
+| 08 Page One / Page Two; Player Handouts group; Rumors at the Ball *(DM table)* | relocation / rename (T2.5) |
+| 08 Player Handout 3 + Table VIII–8 | #59 |
+| 09 S2 rename | rename (T2.4) |
+| 09 Detection ×4, Treasure, Tactics, Morale, Development lines | #62 |
+| 09 At heat 4 ×5, tracker rows, S10 gate, S4 two guards, budget labels, DM Note — at a 2014 table | **#69 (new)** |
+| 09 DM Note — how it plays ×5 | relocation (T5.4); noted in #69 |
+| 09 DM Note — how many snakes to show | relocation from 04 (T2.4) |
+| 10 Kovaun CR 1/2 (O20); She Arrives (O24); Call the House; Two Turns; scene-end definition; CR line; Stones Before Steel Tell | **#70 (new)** |
+| 10 Gear lines, costume notes, *Blood, Not Hire*, *Pays Her Debts* to lore tails | relocation (T4.4) |
+| README For Contributors / Before the Night / The Night / Appendices | regroup (T2.3) |
+
+**T9.2 — flow page.** `flow.json`, 61 edits, each asserted against its old text (script in the session scratchpad). No node referenced a removed section; qg-3 stays removed and its edge stays rejoined (qg-2 → qg-4); the S2 label already read "The Service Corridor Job"; the eight agenda nodes already pointed to chapter II; no "MM" left.
+- *Anchors:* 19 refs to the Movement I–V and Undercurrent A–D headings carried slugs without the heading's italic parenthetical (e.g. `#movement-iv--the-toast`); now the full slugs (`#movement-iv--the-toast-later--dinner`, `#undercurrent-a--the-root-of-the-house-if-you-have-time`, …).
+- *Snake lines:* the six `snk-*` nodes pointed to 04 "The Snakes in the Pen", now one pointer sentence (Q21). They now point to their 09 *Six Lines* entry plus "04_The_Ball.md (The Snakes This Movement — I to V)".
+- *The Snakes in the Dark:* the five `kd-*` labels "Knives: …" → "Snakes in the dark: …"; each ref adds its card (S12, S8, S13, S13, S11); kd-thenya → `#the-thenya--toward-the-fire`. kd-circle lost "Corval is on the stairs, untouched" (cut from 05 in T2.4) and now says "a Tithe-carrying minister" (S12). kd-phern's check is spelled out.
+- *Midnight Clock:* ev-raunu and ev-bell refs lead with `#the-midnight-clock`; beat-east adds the O9 default ("he reaches the garden stair three beats after Raunu falls") and the clock ref; the leash clock reads "half an hour at most" and names the default leash moment and the last bell as the latest, pointing to "The Midnight Clock"; the m6 phase summary points to it.
+- *Buying Time:* fight-uninvited's ref → `#buying-time` and `#down-not-out` (it pointed to "You Cannot Beat Them"); the trick DC adds "15 the second time, never a third". fr-wept: "DC 15 whatever the tells once she has 2 or more Delay".
+- *DM wording and house style:* "PC(s)" → "character(s)" (b4, beat-dais, sc-wards, sc-rescue, end-default); full check forms (b4 DC 25 Charisma (Deception), sc-wards DC 13 Intelligence (Arcana), gate-void DC 13 Charisma (Persuasion), gate-wicket Thieves' Tools and Strength (Athletics), cross-2 "saving throw"); b6 "Short Rest"; sc-rescue adds "100 XP for each" (05 *Carrying somebody out*).
+- *Left alone:* "Hired Knives" (a creature name); "⟨A player character dies⟩" (a section title).
+
+**Leftover 1 — 01's DC ladder.** A bold caption line **The DC Ladder** above the table, in the module's bold-caption form, unnumbered so Tables I–1 to I–4 keep their numbers.
+
+**Leftover 2 — emphasis italics.** 129 emphasis spans set roman across 9 files: 01 ×5, 02 ×10, 04 ×33, 05 ×30, 06 ×3, 07 ×12, 08 ×4, 09 ×20, 10 ×12 (plus the two italic fixes below, not counted). Each replacement was asserted unique before writing, and a paragraph-level asterisk-parity check shows no broken italics. Two meaning-carrying cases were reworded rather than just set roman: "whether the man who returned is *the man who returned*" → "…is the man who left" (07 Kovaun, 09 Church line), Agenda 2's own wording. Also fixed in the same pass: 04's Callun aside had its roman-toggled section name, now '"The Snakes This Movement"' in quotation marks (the italic aside stays italic, and its inverted "dynasty" toggle is gone); 09 S14's stale "the *hard-hitting* line under Scaling" → 'the "A table built to hit hard" line under Adjusting the Encounter' (Scaling was renamed in T3.3); "optimised/Optimised" → "optimized/Optimized" ×4 in 09 (spelling missed by the lint list).
+- *Kept, by rule:* spells, items and charges; read-aloud; whole italic DM-note paragraphs; card and run-in labels (*Lanterns*, *At heat 4:*, *Failure:*); invented or game terms (*detain* ×8, *brandishing*, *steer*, *Impossible*, *common*/*uncommon* rarity, *under Low*/*beyond High*, *to 4*, *plant the doubt*, *the missing year*); words to say aloud or speech (*locked on you* / *drifting*, *what did he say?*, *nobody made them*, *someone is editing you.*, the rumor text in Table VIII–7); "success at a cost" vocabulary (*with a cost attached*, *at a cost*, which 04 defines as a term); *if you have time* (a heading tag); table-row labels (*the Attendant distracted*); and chapter references (*A guest*).
+- *Skipped:* 01's Designer's note (*works*, *the designers*), gated on Q4 (T8.2); 03 and 11, which are player-facing, not DM prose (*shows itself*, Andra *is*).

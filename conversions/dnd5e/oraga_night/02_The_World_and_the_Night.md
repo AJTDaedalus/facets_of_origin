@@ -37,7 +37,7 @@ On the final night, Rekuzan wears masks. By old custom, the masks are **spirit-f
 the dead of the year, the spirits of the harvest, the luck and grief of the season made
 wearable. To wear a mask on the last night of Oraga is to lend your body to something
 that no longer has one: a courtesy to the departed, and a license for the living, since
-nothing said or done behind a spirit's face is entirely *yours*. At midnight the bells
+nothing said or done behind a spirit's face is entirely yours. At midnight the bells
 ring the **Unmasking**: the masks come off, the spirits are thanked and sent home, and
 the living toast the year to come with their own faces.
 
@@ -102,7 +102,7 @@ deal to the right wrong person, which is one of the ways the characters get in.
 >
 > Every faction on it accepted, and every one of them brought hired steel. That is the
 > snakes in the chicken pen (see chapter I), and chapter IX runs each of them as a threat
-> line the party can walk into. None of it changes what the factions *want*, which is
+> line the party can walk into. None of it changes what the factions want, which is
 > exactly what this section says. It changes what they are ready to do about it when
 > the lights go out.
 
@@ -129,7 +129,7 @@ scene with a person, and the horror takes care of itself.
 Their master cannot act. They can, barely, briefly: the receding mists are the outward sign of a door standing
 ajar, and the Uninvited have slipped through it on a leash. The leash is real. As the
 night wears on, something pulls them east, harder every hour. By the last bell of
-Oraga they *must* go, whatever is finished and whatever is not. This is why they do
+Oraga they must go, whatever is finished and whatever is not. This is why they do
 not simply slaughter the palace: they have one night, one task, and no time.
 
 Two more operational facts. They are fast in a way that has nothing to do with
@@ -167,12 +167,12 @@ the hour, all chosen.
 **He never gets to make it.** The attack comes in the middle of the sentence, and
 the announcement dies with the man. Nor does it ever surface afterward: the midwife
 vanishes by dawn, the skeleton staff keep the silence they were paid for, and the
-inquest records a vanished *bride*, never a vanished *heir*. The world never
+inquest records a vanished bride, never a vanished heir. The world never
 learns what the ball was for. The only people who may ever know are characters who
 earned the east wing, and what they do with a truth that exists nowhere else is
 theirs to carry out of the palace (see chapter VI).
 
-Meanwhile, the ballroom guesses all night. The Merchant's Circle is *certain* the
+Meanwhile, the ballroom guesses all night. The Merchant's Circle is certain the
 midnight pronouncement is a trade decree (the Tithe of Hands; see Agenda 1). They
 are wrong, but usefully wrong: the theory is plausible, the evidence for it is
 real, and the factions should argue it well. The truth is upstairs, eating dinner
@@ -202,7 +202,7 @@ this attack does not become a massacre. The palace walls hold generations of sto
 crystal-work, and when the lights go out, those preparations fire: barriers seal
 corridors, light floods stairwells, wards flare over huddled guests. Two hundred
 people survive the Uninvited because a paranoid genius spent two silent years making
-his house ready for *something*.
+his house ready for something.
 
 But he prepared for armies, poisons, rivals, and the Church. Not for this. When the
 moment comes, the last and best of his preparations has one charge in it. Raunu has
@@ -236,7 +236,7 @@ out of understanding.
 - Why this child, of all children ever born, is worth breaking a seal for.
 - The name of the power in the east, or of the power Vell serves.
 - What the mists are, or why they recede.
-- Who, precisely, the Uninvited were when they were people. (Their *grief* is
+- Who, precisely, the Uninvited were when they were people. (Their grief is
   discoverable. Their names are not.)
 
 If a player asks a question that lands on one of these, the world answers the way
@@ -270,7 +270,7 @@ ways). Every agenda card has:
   wrong. Do not read this line to the player until the Unmasking.
 - **Pays:** what finishing it is worth, at the table and in the fiction.
 
-Agendas are written to be *completable before midnight* by fast, clever play, and the
+Agendas are written to be completable before midnight by fast, clever play, and the
 adventure rewards that. A character who finishes their agenda early has stopped being an
 errand-runner and started being a person who notices things. That is when the omens
 find them. **Completing an agenda earns Heroic Inspiration** on the spot (Table I–3),
@@ -342,7 +342,7 @@ Draunel line, chapter IX.*
 **The ask:** A message learned by heart (the law leaves no other kind) and her
 grandmother's ring to prove whose mouth it comes from, both for Veier Nolonaire
 alone: no minister, no husband, no exceptions. Bring back her answer, word for word,
-and bring back the truth: is she well, is she free, is she *herself*?
+and bring back the truth: is she well, is she free, is she herself?
 
 **The catch:** Veier has not appeared in public for two years, and the ball is not
 going to show her at all. She never comes down. The east wing is closed, guarded,
