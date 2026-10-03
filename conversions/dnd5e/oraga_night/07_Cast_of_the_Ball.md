@@ -2,13 +2,14 @@
 
 *Every named guest, and one thing that is not a guest. Each entry: who they are, what they want, what they fear,
 their secret, how to play them, and — last — what happens if it comes to steel.
-Outside a fight NPCs never roll dice — their entries note the DCs they impose
-instead, on the ladder in Chapter I. The MM sheet (Chapter VIII) maps where each
-stands in every Movement.*
+Outside a fight NPCs never roll dice. Where an entry gives no DC, the DC to move
+that guest is 13 behind a mask (the ladder in chapter I); the entries below note only
+the exceptions. The DM sheet (chapter VIII) maps where each stands in every Movement.*
 
-*Every stat block named here is in Chapter X under exactly that name. The six
-factions who came as Raunu's enemies — the snakes — each have a threat line and fight
-cards in Chapter IX; their entries below say which. The house's own guards (**Boranis
+*Every stat block named here is in Chapter X under exactly that name. Five
+factions came as Raunu's enemies (the snakes), and a sixth, the Thenya, came as his
+wife's kin; each has a threat line and fight cards in chapter IX, and their entries
+below say which. The house's own guards (**Boranis
 Honor Guard**), the city's (**Sect Guard**), and the brawlers of the seating feud
 (**Feuding Kinsman**) are not cast, and live only in Chapter X.*
 
@@ -81,9 +82,11 @@ by the Radiant; upright anyway; down the private stair and out through the garde
 on Vell's arm (the Crossing, Chapter V). If her gift matters at your table — a
 bonded loved one in mortal peril — it flares exactly once, without training or
 explanation, and the module suggests spending it on a player character who bled
-for her. *At the table:* it is the Thenya Gift's **For Them** (Chapter III), used
-once, on that character: the next time they would drop to 0 hit points tonight, they
-drop to 1 instead.
+for her.
+
+*At the table:* it is the Thenya Gift's **For Them** (Chapter III), used once, on
+that character: the next time they would drop to 0 Hit Points tonight while within
+60 feet of her, they drop to 1 instead.
 
 **If it comes to steel:** she is a noncombatant, near her time, and her line in Chapter
 X (*If It Comes to It*) is there only so the MM knows what she does when cornered. She
@@ -270,8 +273,8 @@ not to act on it. (She would be horrified to be called a conspirator. She is mer
 *prepared* — the module notes the resemblance to her host without comment.)
 
 **Play her:** iron-grey, cordial, terrifyingly numerate. Runs Agenda 1 and pays on
-delivery. Deceiving her about money is **DC 25** Charisma (Deception); about anything human,
-**DC 10**.
+delivery. Deceiving her about money takes a DC 20 Charisma (Deception) check; about anything
+human, **DC 10**.
 
 **If it comes to steel:** stat block **Rhaza Callun** — she is no fighter, and her
 block says so — with **Circle Hired Knife** for the people she pays. The Merchant's
@@ -374,17 +377,17 @@ something unbeatable while deliberately not using his weapon — let them notice
 **Play him:** courteous, brief, and *finished* — every conversation with Vell ends
 when he decides, somehow without rudeness. He answers questions with smaller
 questions. He is immune to every lever: bribery, flattery, threat, charm — make
-all social pressure on Vell **DC 25**, and let even full successes buy honesty
-rather than compliance ("You are observant. Enjoy the ball."). Players who shadow
+every Charisma check to move Vell (Deception, Intimidation or Persuasion) **DC 25**, and
+let even a success buy honesty rather than compliance ("You are observant. Enjoy the ball."). Players who shadow
 him find only preparations: a walked garden, a tested gate, a purchased boat. All
 night he does not fight, does not hurry, and is never once interesting to look
 at — and that last is not luck. *(MM truth: his unmemorability is a gentle,
 constant pressure on the minds around him; he reads most guests as easily as
 faces, and can steer a weak mind outright. Corval's inability to hold the
-gray-mask question has a cousin: nobody can quite hold Vell either. A player
-with an exceptional will who studies him directly may feel it — a DC 25 Wisdom (Insight)
-check to notice the nudge — and earns, on a success, the most dangerous
-piece of information at the ball: someone is editing you.)*
+gray-mask question has a cousin: nobody can quite hold Vell either. A character
+who studies him directly can make a DC 25 Wisdom (Insight) check to notice the nudge;
+on a success, they learn the most dangerous piece of information at the ball: someone
+is editing you.)*
 
 **One line he does not cross, and one he does:** he will take the path that
 spills the least blood if one exists — and if none exists, he will be ruthless,
@@ -559,6 +562,7 @@ arguments than the sword does.
   loud, because a company that hides its dealings from its own people does not last.
 - **What deal he honours:** any of them, absolutely, and he will say so before he
   takes it. **He surrenders the field the moment the contract is void.**
+- **Voiding the contract:** a DC 13 Charisma (Persuasion) check; see card S3.
 
 ### Captain-under-Contract — the One Who Read It All
 *Older than the sergeants and quieter than the Blades. The coat is very good. The

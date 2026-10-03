@@ -5,7 +5,7 @@ Data hand-entered from the chapter (read 2026-09-30). The printed AC, Hit Points
 Initiative and Passive Perception are also cross-checked against the text of chapter XI,
 so an edit there that is not mirrored here fails loudly.
 
-Usage: python pregen_check.py [--quiet]
+Usage: python pregen_check.py [--quiet] [--file PATH]
 Exit 0 = every pregen is legal and matches the text; 1 = mismatch.
 """
 import argparse, re, sys
@@ -13,10 +13,6 @@ from pathlib import Path
 
 MODULE = Path(__file__).resolve().parent.parent
 PREGENS = MODULE / "11_Pregenerated_Characters.md"
-ap = argparse.ArgumentParser(description="Pregen legality check for chapter XI.")
-ap.add_argument("--quiet", action="store_true", help="print only the summary line and any problems")
-args = ap.parse_args()
-out = (lambda *a, **k: None) if args.quiet else print
 
 PB=2; LV=4
 ARRAY=sorted([15,14,13,12,10,8])
@@ -56,46 +52,55 @@ PCs={
 }
 SK={'Athletics':'STR','Acrobatics':'DEX','Sleight of Hand':'DEX','Stealth':'DEX','Arcana':'INT','History':'INT','Investigation':'INT','Nature':'INT','Religion':'INT',
  'Animal Handling':'WIS','Insight':'WIS','Medicine':'WIS','Perception':'WIS','Survival':'WIS','Deception':'CHA','Intimidation':'CHA','Performance':'CHA','Persuasion':'CHA'}
-issues=[]
-for n,p in PCs.items():
-    f=p['final']; base=dict(f)
-    for d in (p['bg'],p['asi']):
-        for k,v in d.items(): base[k]-=v
-    ok_arr=sorted(base.values())==ARRAY
-    ok_bg=set(p['bg'])<=p['bg_opts'] and sorted(p['bg'].values())==[1,2]
-    ok_cap=max(f.values())<=20
-    hd=HD[p['cls']]; con=m(f['CON'])
-    hp=hd+con+(LV-1)*(hd//2+1+con)
-    name,base_ac,cap=p['armor']
-    dex=m(f['DEX']); ac=base_ac+(dex if cap is None else min(dex,cap))+(1 if p.get('defense') else 0)
-    init=dex+(PB if p['alert'] else 0)
-    pp=10+m(f['WIS'])+(PB if 'Perception' in p['prof'] else 0)
-    src=p['skillsrc']; nprof=sum(src.values())
-    out(f"{n}: base {base} array={ok_arr} bg={ok_bg} cap={ok_cap} | HP {hp}/{p['printed']['HP']} AC {ac}/{p['printed']['AC']} init {init}/{p['printed']['init']} PP {pp}/{p['printed']['pp']} | skills {len(p['prof'])} vs sources {nprof}")
-    for chk,a,b in [('HP',hp,p['printed']['HP']),('AC',ac,p['printed']['AC']),('init',init,p['printed']['init']),('PP',pp,p['printed']['pp']),('skillcount',len(p['prof']),nprof)]:
-        if a!=b: issues.append((n,chk,a,b))
-    if not(ok_arr and ok_bg and ok_cap): issues.append((n,'abilities',base,None))
-    # skills
-    for sk,val in p['printed_sk'].items():
-        key={'SleightofHand':'Sleight of Hand','AnimalHandling':'Animal Handling'}.get(sk,sk)
-        mod=m(f[SK[key]])
-        if key in p['prof']: mod+=PB*(2 if key in p['exp'] else 1)
-        elif p.get('joat'): mod+=PB//2
-        if p.get('thaumaturge') and key in ('Arcana','Religion') and key not in p['prof']: mod+=max(1,m(f['WIS']))
-        if mod!=val: issues.append((n,'skill '+key,mod,val))
-    if 'dc' in p['printed']:
-        abil={'bard':'CHA','wizard':'INT','cleric':'WIS'}[p['cls']]
-        dc=8+PB+m(f[abil]); atk=PB+m(f[abil])
-        if (dc,atk)!=(p['printed']['dc'],p['printed']['atk']): issues.append((n,'spell dc/atk',(dc,atk),(p['printed']['dc'],p['printed']['atk'])))
-        nc=len(p['cantrips']); expc=CANTRIPS[p['cls']]+(1 if p.get('thaumaturge') else 0)
-        np_=len(p['prep'])
-        out(f"   cantrips {nc}/{expc} prepared {np_}/{PREP[p['cls']]} (+ gift cantrip; Life domain spells always prepared)")
-        if nc!=expc: issues.append((n,'cantrips',nc,expc))
-        if np_!=PREP[p['cls']]: issues.append((n,'prepared',np_,PREP[p['cls']]))
-    if n=='Andra':
-        book=len(p['book1'])+len(p['book2']); exp=6+2*(LV-1)+2
-        out(f"   spellbook {book}/{exp} (6 + 2/level + Evocation Savant 2); prepared all in book: {set(p['prep'])<=set(p['book1']+p['book2'])}")
-        if book!=exp: issues.append((n,'spellbook',book,exp))
+
+# CAST-11 (T3.5): a pregen whose spells need a focus must carry one. The printed
+# Spellcasting line names it, and the same item is on the Carrying line.
+FOCUS={'Andra':dict(spell='a crystal as arcane focus', carry='crystal (arcane focus)')}
+
+
+def legality_issues(out=print):
+    issues=[]
+    for n,p in PCs.items():
+        f=p['final']; base=dict(f)
+        for d in (p['bg'],p['asi']):
+            for k,v in d.items(): base[k]-=v
+        ok_arr=sorted(base.values())==ARRAY
+        ok_bg=set(p['bg'])<=p['bg_opts'] and sorted(p['bg'].values())==[1,2]
+        ok_cap=max(f.values())<=20
+        hd=HD[p['cls']]; con=m(f['CON'])
+        hp=hd+con+(LV-1)*(hd//2+1+con)
+        name,base_ac,cap=p['armor']
+        dex=m(f['DEX']); ac=base_ac+(dex if cap is None else min(dex,cap))+(1 if p.get('defense') else 0)
+        init=dex+(PB if p['alert'] else 0)
+        pp=10+m(f['WIS'])+(PB if 'Perception' in p['prof'] else 0)
+        src=p['skillsrc']; nprof=sum(src.values())
+        out(f"{n}: base {base} array={ok_arr} bg={ok_bg} cap={ok_cap} | HP {hp}/{p['printed']['HP']} AC {ac}/{p['printed']['AC']} init {init}/{p['printed']['init']} PP {pp}/{p['printed']['pp']} | skills {len(p['prof'])} vs sources {nprof}")
+        for chk,a,b in [('HP',hp,p['printed']['HP']),('AC',ac,p['printed']['AC']),('init',init,p['printed']['init']),('PP',pp,p['printed']['pp']),('skillcount',len(p['prof']),nprof)]:
+            if a!=b: issues.append((n,chk,a,b))
+        if not(ok_arr and ok_bg and ok_cap): issues.append((n,'abilities',base,None))
+        # skills
+        for sk,val in p['printed_sk'].items():
+            key={'SleightofHand':'Sleight of Hand','AnimalHandling':'Animal Handling'}.get(sk,sk)
+            mod=m(f[SK[key]])
+            if key in p['prof']: mod+=PB*(2 if key in p['exp'] else 1)
+            elif p.get('joat'): mod+=PB//2
+            if p.get('thaumaturge') and key in ('Arcana','Religion') and key not in p['prof']: mod+=max(1,m(f['WIS']))
+            if mod!=val: issues.append((n,'skill '+key,mod,val))
+        if 'dc' in p['printed']:
+            abil={'bard':'CHA','wizard':'INT','cleric':'WIS'}[p['cls']]
+            dc=8+PB+m(f[abil]); atk=PB+m(f[abil])
+            if (dc,atk)!=(p['printed']['dc'],p['printed']['atk']): issues.append((n,'spell dc/atk',(dc,atk),(p['printed']['dc'],p['printed']['atk'])))
+            nc=len(p['cantrips']); expc=CANTRIPS[p['cls']]+(1 if p.get('thaumaturge') else 0)
+            np_=len(p['prep'])
+            out(f"   cantrips {nc}/{expc} prepared {np_}/{PREP[p['cls']]} (+ gift cantrip; Life domain spells always prepared)")
+            if nc!=expc: issues.append((n,'cantrips',nc,expc))
+            if np_!=PREP[p['cls']]: issues.append((n,'prepared',np_,PREP[p['cls']]))
+        if n=='Andra':
+            book=len(p['book1'])+len(p['book2']); exp=6+2*(LV-1)+2
+            out(f"   spellbook {book}/{exp} (6 + 2/level + Evocation Savant 2); prepared all in book: {set(p['prep'])<=set(p['book1']+p['book2'])}")
+            if book!=exp: issues.append((n,'spellbook',book,exp))
+    return issues
+
 
 def text_issues(text):
     found = []
@@ -113,8 +118,42 @@ def text_issues(text):
                 found.append((n, 'text ' + k, m_.group(1) if m_ else None, p['printed'][k]))
     return found
 
-issues += text_issues(PREGENS.read_text(encoding="utf-8"))
-if issues:
-    print('ISSUES:', issues)
-print(f"pregen_check: {len(PCs)} pregens checked; {len(issues)} issue(s)")
-sys.exit(1 if issues else 0)
+
+def _section(text, name):
+    secs = re.split(r"^## ", text, flags=re.M)[1:]
+    sec = next((x for x in secs if x.startswith(name)), None)
+    return None if sec is None else re.sub(r"\s+", " ", sec)
+
+
+def focus_issues(text):
+    found = []
+    for n, f in FOCUS.items():
+        sec = _section(text, n)
+        if sec is None:
+            found.append((n, 'section missing in text', None, None)); continue
+        sp = re.search(r"\*\*Spellcasting\*\* \(([^)]*)\)", sec)
+        sp_text = sp.group(1) if sp else None
+        if not sp_text or f['spell'] not in sp_text:
+            found.append((n, 'spellcasting focus', sp_text, f['spell']))
+        carry = re.search(r"\*\*Carrying\.\*\* (.*?)(?= \*\*| ---|$)", sec)
+        if not carry or f['carry'] not in carry.group(1):
+            found.append((n, 'focus not carried', None, f['carry']))
+    return found
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description="Pregen legality check for chapter XI.")
+    ap.add_argument("--quiet", action="store_true", help="print only the summary line and any problems")
+    ap.add_argument("--file", type=Path, default=PREGENS, help="pregen text to check (default: 11_Pregenerated_Characters.md)")
+    args = ap.parse_args(argv)
+    out = (lambda *a, **k: None) if args.quiet else print
+    text = args.file.read_text(encoding="utf-8")
+    issues = legality_issues(out) + text_issues(text) + focus_issues(text)
+    if issues:
+        print('ISSUES:', issues)
+    print(f"pregen_check: {len(PCs)} pregens checked; {len(issues)} issue(s)")
+    sys.exit(1 if issues else 0)
+
+
+if __name__ == "__main__":
+    main()

@@ -326,3 +326,27 @@ Hard-rule detail: role_name is 75 "MM" + 1 "Mirror Master". bare_dc 146 = bare "
 - Ledger: INVENTIONS **#63** (T3.2) and **#64** (T3.1). Decisions: **O9–O12**.
 
 **Skipped sites:** listed above (BALL-6's two new details; NIGHT-19's two pointers no longer present; NIGHT-6's 2014 line, already in 09). **TODOs added:** Q9, Q10, Q13 (05); Q15 ×2 (04).
+
+### Phase 3c — T3.5 (chapters VII, VIII and XI)
+
+*2026-10-03, Worker. Every edit was located by quoted text (DESIGN §2). New sentences say "the DM"; existing "MM" is left for T4.1.*
+
+**Commands:** `python conversions/dnd5e/oraga_night/tools/lint_5e.py --check`; `python conversions/dnd5e/oraga_night/tools/bestiary_check.py`; `python conversions/dnd5e/oraga_night/tools/pregen_check.py`; `python -m pytest conversions/dnd5e/oraga_night/tools -q`. flow.json was not touched. Final results: lint `--check` OK, exit 0. bestiary_check: 25 blocks + 3 Nastier, 0 mismatches. pregen_check: 5 pregens, 0 issues. pytest: 144 passed (135 + 9 new). No re-baseline.
+
+**Hard hits: 424 → 418.** Structure hits stay at 1 (the 05 gate box, for Phase 5). Soft metrics did not regress. Near-regressions fixed during the work: Callun's line moved a bare "**DC 25**" to a bare "**DC 20**", which the per-key comparison counts as a new hit, so it now reads "takes a DC 20 Charisma (Deception) check". Veier's *At the Unmasking* paragraph went over 120 words with the 60-foot clause, so *At the table* became its own paragraph. The 2014 note's "18, not 19" tripped the not…but count in 11 and was rephrased.
+
+**Test first.** `pregen_check.py` was refactored so pytest can import it (argparse moved into `main(argv)`, a `--file` option, the legality loop into `legality_issues()`), and gained `focus_issues()`: the pregens in `FOCUS` (Andra) must print "a crystal as arcane focus" in the Spellcasting line and "crystal (arcane focus)" on the Carrying line. New `tools/test_pregen_check.py` has 9 tests (clean module, clean minimal sheet, missing from Carrying, lattice as focus, wrapped lines, missing section, another pregen's Carrying doesn't count, `main()` exit 0 and exit 1). Red first: the two module-dependent tests failed on the Phase 3b text ("the lattice as focus"; no focus carried). Green after the 11 edits.
+
+**T3.5 edits:**
+- CAST-3: 07's intro gives the default ("Where an entry gives no DC, the DC to move that guest is 13 behind a mask (the ladder in chapter I); the entries below note only the exceptions"); "The MM sheet (Chapter VIII)" → "The DM sheet (chapter VIII)". The Sergeant's negotiation surface gains "**Voiding the contract:** a DC 13 Charisma (Persuasion) check; see card S3" (from 09 S3, out 2). O14.
+- CAST-4: Vell: "every Charisma check to move Vell (Deception, Intimidation or Persuasion) **DC 25**, and let even a success buy honesty"; the nudge: "A character who studies him directly can make a DC 25 Wisdom (Insight) check to notice the nudge; on a success, they learn…". "An exceptional will" is gone. 08 Table VIII–3: "25 · 25 Charisma".
+- CAST-11: Andra's Spellcasting line reads "a crystal as arcane focus"; "crystal (arcane focus)" added to Carrying. O15. **Ilesse gated:** `<!-- TODO-Q16 … -->` under her Spellcasting paragraph.
+- CAST-12: the 2014 note rebuilds ability scores too ("a 2014 standard-array human cannot reach the 19s on these sheets") and says "The gift is the variant human's feat (chapter III)", matching 03 and README.
+- CAST-14: Table VIII–3 rows: B0 "13 Charisma (Persuasion) or Wisdom (Insight)" (04 B0 DM Note); "10, the check that fits the approach" (04 *Social checks*); "15 / 20 Wisdom (Insight)" (03). The thieves' tools row was already done in T3.1.
+- CAST-19: Callun's money DC 25 → 20 (O13). 04's "Hard DC 18–20" was already done in T3.1.
+- CAST-20: "Five factions came as Raunu's enemies (the snakes), and a sixth, the Thenya, came as his wife's kin; each has a threat line and fight cards in chapter IX".
+- CAST-21: "**Dassa (AC 16, 40 Hit Points) and Pello (AC 16, 31)**".
+- CAST-22: Arcane Recovery "Once per Long Rest, when she finishes a Short Rest, recovers spell slots totalling 2 levels". Fast Hands in the verified SRD 5.2.1 wording: "Bonus Action: a Dexterity (Sleight of Hand) check to pick a lock, disarm a trap with Thieves' Tools or pick a pocket; or the Utilize action; or the Magic action to use a magic item, a crystal charge included". Veier's *For Them*: "while within 60 feet of her" (03).
+- Ledger: INVENTIONS **#65**. Decisions: **O13–O15**.
+
+**Skipped sites:** none. Every quoted phrase was found. **TODOs added:** Q16 (11, Ilesse). *Note:* "Thieves' Tools" is capitalized in Fast Hands as the SRD prints it; the rest of the module still has "thieves' tools" lowercase (for T4.2 to settle).

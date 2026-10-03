@@ -103,15 +103,15 @@ secret** — no faction learns of the child unless a player character tells them
 
 | Check | DC |
 |---|---|
-| The line's first check (B0) | 13 |
-| An approach across station, behind a mask | 10 |
-| Identify a masked guest you know / have only heard described | 15 / 20 |
+| The line's first check (B0) | 13 Charisma (Persuasion) or Wisdom (Insight) |
+| An approach across station, behind a mask | 10, the check that fits the approach |
+| Identify a masked guest you know / have only heard described | 15 / 20 Wisdom (Insight) |
 | A borrowed invitation at the gate / one with the wrong name on it | 13 / 18 Deception |
 | Slip past a posted guard · a hire's livery and a confident walk · an honest story | 15 Stealth · 10 Deception · 13 Persuasion |
 | A locked door in the private palace · the study's crystal lock | 15 / 18 Dexterity (thieves' tools) |
 | The service passages without a guide (first time only) | 15 Survival |
 | Deceive Corval about the household · bribe him | 20 · impossible |
-| Deceive Raunu · move Vell | 25 · 25 |
+| Deceive Raunu · move Vell | 25 · 25 Charisma |
 
 **Table VIII–4: Costs to Hand** *(a near miss — name the cost first; the thing still
 arrives)*

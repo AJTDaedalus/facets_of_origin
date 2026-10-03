@@ -21,7 +21,7 @@ Between them the five cover what the night asks for:
 | **Dassa** | Fighter (Champion) 4 | The frontliner | The Vanished Servant, or bodyguard to another player character | The Entourage |
 | **Ilesse Kethaun** | Cleric (Life Domain) 4 | The healer | The Cousin's Errand | The Patron's Errand |
 
-Two of the five can stand in a fight — **Dassa at 40 hit points and Pello at 31** — and
+Two of the five can stand in a fight — **Dassa (AC 16, 40 Hit Points) and Pello (AC 16, 31)** — and
 one of them, **Dassa, is ungifted**, because one Orthaen in five is and the table should
 see what that looks like on a sheet. Each wears the armor they can dance in, under
 their festival clothes, as Chapter IV allows.
@@ -42,8 +42,9 @@ Player Handout 3, "Crystal Charges" (chapter VIII), for what each does.
 Each sheet ends with one question about it, for the player to answer in the street on
 the way to the gate (Chapter IV, B0), when the MM asks what everyone's mask looks like.
 
-*At a 2014 table:* keep the concept, the ability scores and the equipment, and rebuild
-the class features from your own rules. The gifts work at either table.
+*At a 2014 table:* keep the concept and the equipment, and rebuild the ability scores
+and class features from your own rules (a 2014 standard-array human cannot reach the
+19s on these sheets). The gift is the variant human's feat (chapter III).
 
 ---
 
@@ -174,9 +175,9 @@ anything.
 - **Cunning Action.** Bonus action: Dash, Disengage, or Hide.
 - **Steady Aim.** Bonus action, if he hasn't moved this turn: advantage on his next
   attack roll this turn; his speed is 0 until the turn ends.
-- **Fast Hands** (Thief). Cunning Action can also make a Sleight of Hand check, use
-  thieves' tools on a lock or trap, take the Utilize action, or take the Magic action to
-  use a magic item — a crystal charge included.
+- **Fast Hands** (Thief). Bonus Action: a Dexterity (Sleight of Hand) check to pick a
+  lock, disarm a trap with Thieves' Tools or pick a pocket; or the Utilize action; or the
+  Magic action to use a magic item, a crystal charge included.
 - **Second-Story Work** (Thief). Climb speed equal to his speed; jumps use Dexterity.
 
 **Carrying.** Two daggers (one in plain sight, one not) · studded leather · thieves'
@@ -240,15 +241,15 @@ shaped it, and whether it is holding a working right now.
 **Class Features**
 - **Ritual Adept.** Casts any ritual spell in her lattice as a ritual without preparing
   it, with the lattice in hand.
-- **Arcane Recovery.** Once a day, on a short rest, recovers spell slots totalling 2
-  levels.
+- **Arcane Recovery.** Once per Long Rest, when she finishes a Short Rest, recovers spell
+  slots totalling 2 levels.
 - **Scholar.** Expertise in History.
 - **Evocation Savant** (Evoker). *Magic missile* and *darkness* added to her lattice
   free.
 - **Potent Cantrip** (Evoker). A damaging cantrip that misses, or that the target saves
   against, still deals half its damage.
 
-**Spellcasting** (Intelligence; save DC 14, attack +6; the lattice as focus)
+**Spellcasting** (Intelligence; save DC 14, attack +6; a crystal as arcane focus)
 - *Slots:* 1st ×4 (one spent on *mage armor* before the ball), 2nd ×3
 - *Cantrips:* fire bolt, mage hand, minor illusion, ray of frost; *prestidigitation*
   (gift)
@@ -259,8 +260,8 @@ shaped it, and whether it is holding a working right now.
   fall, identify (ritual), mage armor, magic missile, shield, silent image, sleep;
   *2nd:* darkness, hold person, misty step, web
 
-**Carrying.** Dagger · the lattice · chalk and a wiping slate · jeweler's tools · crystal
-charges: *a held image* ×2, *a chime at a threshold* · 40 gp · Heroic Inspiration
+**Carrying.** Dagger · the lattice · crystal (arcane focus) · chalk and a wiping slate ·
+jeweler's tools · crystal charges: *a held image* ×2, *a chime at a threshold* · 40 gp · Heroic Inspiration
 
 **Personality.** Three years into a record nobody else believes in, and tired of being
 the only one who can see the shape of it. Tonight every thread she has followed knots
@@ -416,6 +417,7 @@ shaped it, and whether it is holding a working right now.
 **Spellcasting** (Wisdom; save DC 14, attack +6; a sliver of her own warding crystal as
 focus). Ilesse's spells are what Val'loh calls **Invocation**. What answers her, the
 module does not say, and neither should the sheet.
+<!-- TODO-Q16: whether Ilesse's warding crystal counts as her Holy Symbol (for her spells and Channel Divinity), or she carries a component pouch instead, waits on owner ruling Q16 (CAST-11 / CAST N4). -->
 - *Slots:* 1st ×4, 2nd ×3
 - *Cantrips:* guidance, light, mending, sacred flame, spare the dying; *resistance*
   (gift)

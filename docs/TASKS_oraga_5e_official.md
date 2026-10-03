@@ -243,7 +243,8 @@ Each task: rerun both math scripts and the linter's structure rules. Mirror site
 - **Accept:** `bestiary_check.py` exits 0. Extend the script to assert Kovaun's new XP and PB, and the Wept's attack count per turn. SA.
 - **Time:** 2 × 30 min.
 
-### ☐ T3.5 Chapters 07, 08 and 11 mechanics
+### ☑ T3.5 Chapters 07, 08 and 11 mechanics
+*Done 2026-10-03 (Phase 3c). TODO-gated and left in place: Ilesse's focus (TODO-Q16). See LOG "Phase 3c".*
 - **Findings:**
   - CAST-3: the default-DC sentence in the 07 intro, and the Sergeant's DC.
   - CAST-4: Vell's DCs with abilities (mirror in 08 Table VIII–3).
