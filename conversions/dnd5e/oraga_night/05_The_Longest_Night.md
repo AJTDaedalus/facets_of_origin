@@ -152,14 +152,14 @@ happens before anyone can act, and it should feel that way:
    > facing the room. It does not look at anyone. It looks at the spaces between the
    > room and the three.*
 
-   (*The Attendant*, below. Card S14 has the hints that tell players it can be
+   ("The Attendant", below. Card S14 has the hints that tell players it can be
    distracted; start dropping them now.)
 
 When the first beat turns into a fight, nobody is surprised: everyone saw the lights
 die.
 
 Then release the beats. From here the module cannot script — it can only tell you
-where everything is and what everything wants. The DM sheet (Chapter VIII, Table
+where everything is and what everything wants. The DM sheet (chapter VIII, Table
 VIII–2) holds the map: **the Wept → Raunu. The Radiant → Veier. The Hollow →
 the doors, herding, keeping the herd from mattering. The Attendant → whoever gets
 in their way.** Master Vell is already moving
@@ -175,9 +175,9 @@ may act in the first beat before anyone else. Following him saves lives (*Knives
 Dark*, Phern).
 
 > **Sidebar — Crystals gutter:** within a stone's throw — **30 feet** — of an
-> Uninvited, releasing a crystal charge (Chapter X, *Items of the Night*) takes a
+> Uninvited, releasing a crystal charge (see chapter X, "Items of the Night") takes a
 > **DC 13 Charisma check** by whoever releases it (their *Unraveling Presence*,
-> Chapter X). On a success it works. On a failure
+> chapter X). On a success it works. On a failure
 > the light simply goes out of it, and the charge is spent. A charge already running
 > — a light carried in, a door already sealed — keeps running. Heroic Inspiration can
 > reroll this, and it is a fine thing to spend it on. The palace's great wards are
@@ -185,13 +185,13 @@ Dark*, Phern).
 > close: a ward steered within 30 feet of an Uninvited holds for 1 round, never
 > longer. This is worth foreshadowing the exact moment a player's clever crystal plan
 > meets it. *(What the Uninvited do to player characters' own spells is in the table
-> at the head of their blocks, Chapter X. It is less than this, and it is never
+> at the head of their blocks, chapter X. It is less than this, and it is never
 > nothing: most spells used well buy Delay.)*
 
 ### Midnight Rules
 
-*Five short rules for the attack, printed once. The stat blocks in Chapter X, the fight
-cards in Chapter IX and the night-tracker in Chapter VIII all point here.*
+*Five short rules for the attack, printed once. The stat blocks in chapter X, the fight
+cards in chapter IX and the night-tracker in chapter VIII all point here.*
 
 #### Down, Not Out
 
@@ -215,7 +215,7 @@ They are moving it out of the way.
 - **The last blow.** When an Uninvited drops to 0 Hit Points they step into the
   world's shadow and return at the start of their next turn, at full Hit Points, in
   the space where they dropped (or the nearest unoccupied space); the Hollow returns
-  within 60 feet of the doors he holds (*Leashed*, Chapter X). At
+  within 60 feet of the doors he holds (see chapter X, "Leashed"). At
   the start of that turn, whoever dealt the last blow makes a **DC 15 Strength or
   Dexterity saving throw** (their choice). On a failure they are pushed 15 feet in a
   direction the DM chooses and have the Prone condition. No damage. If no creature dealt it — fire, falling stone — nobody
@@ -244,7 +244,7 @@ room, the crowd, the wards, a lie, a mask, a door, fire, water or light earns **
 Delay** on a success. The check is an ability check using the skill that fits,
 DC 13, or DC 15 if the same trick has already worked on that Uninvited tonight, and it
 never works a third time. A spell is a trick like any other: if it lands, that is the success
-(Chapter X lists what the obvious ones do). A **Fracture** that lands earns **2
+(chapter X lists what the obvious ones do). A **Fracture** that lands earns **2
 Delay** as well as its own effect. The room-trick tables below give eight ideas for
 each place the attack reaches. They are prompts, not a menu; a trick the players
 invent is worth exactly as much.
@@ -272,7 +272,7 @@ says what happens when a table stacks enough of it to change an outcome.
 
 **The Attendant takes Delay away.** Once a round, if a distraction hasn't cost it the
 turn and nobody is in its reach, it clears the way for one of the three and removes 1 Delay.
-That is why the party cannot ignore it. See *The Attendant*, below.
+That is why the party cannot ignore it. See "The Attendant", below.
 
 > **Sidebar — Adjusting the Attack.** The numbers above are built for four 4th-level
 > characters. Use one line only; the lines are not cumulative. For five characters at
@@ -350,7 +350,7 @@ Crossing; Delay earned here is spent at the gate)*
 | 5 | **Push the boat off.** Wade in and put your shoulder to it | Strength (Athletics) |
 | 6 | **Hold him in the shallows.** Grapple him at the water's edge. While he is Witnessed he can't step out of it | An Unarmed Strike (Grapple) |
 | 7 | **The front gate.** Tell him the woman in Thenya wool went out by the front | Charisma (Deception) |
-| 8 | **A body in the way.** Stand between him and the boat. He spends his turn at the gate on you (*Down, Not Out*) instead of on the boat. Always available | No check, no Delay; it does the same job |
+| 8 | **A body in the way.** Stand between him and the boat. He spends his turn at the gate on you ("Down, Not Out") instead of on the boat. Always available | No check, no Delay; it does the same job |
 
 #### Two Hundred People
 
@@ -358,7 +358,7 @@ The attack happens in a crowd, and the crowd has rules too.
 
 - **Count them.** After midnight the guests are in the Crystal Court, the banquet
   galleries and the service passages, and — once the doors open — the Gatehouse Court.
-  Wherever the crowd is, count **one guest in every 5-foot square** (Chapter X, *A
+  Wherever the crowd is, count **one guest in every 5-foot square** (chapter X, *A
   guest*: AC 10, 4 Hit Points).
 - **Area spells hit guests.** A damaging area effect in the crowd hits one guest for
   each square it covers, and at 4 Hit Points almost anything kills them: a
@@ -372,7 +372,7 @@ The attack happens in a crowd, and the crowd has rules too.
 - **The Post.** Guests make no saving throws against the Hollow's *Post* or *Turn Them Back*. The
   crowd breaks round him like water and does not pass. It leaves by the service doors
   and the gallery-side door until he turns east, and then by the main doors too.
-- **Someone always comes.** The crowd rule in *Down, Not Out* holds anywhere in the
+- **Someone always comes.** The crowd rule in "Down, Not Out" holds anywhere in the
   palace after midnight.
 - **Other people's steel.** Every retinue at the ball is somewhere in this crowd. At
   the front gate (B12), each one the party talks into standing with them — Essin's
@@ -385,7 +385,7 @@ The attack happens in a crowd, and the crowd has rules too.
 #### The Attendant
 
 It has been at the ball all night as a quiet guest, dressed as some great house's
-attendant, holding a cloak and a cup for a master nobody saw (Chapter IV). At the
+attendant, holding a cloak and a cup for a master nobody saw (see chapter IV). At the
 Unmasking it stops pretending. It has one order: **keep the three from being
 interrupted.** It is not Leashed. It can be beaten, and it is the answer to the
 player who came to this ball wanting a real fight.
@@ -416,8 +416,8 @@ player who came to this ball wanting a real fight.
 - **Down, Not Out** holds for everyone it drops. At 0 Hit Points it loses interest in
   being here and steps into the shadow. There is no body.
 
-Run it from **card S14** (Chapter IX), which has the full distraction rule and the
-hints; its block is in Chapter X.
+Run it from **card S14** (see chapter IX), which has the full distraction rule and the
+hints; its block is in chapter X.
 
 ### The Palace After Midnight: General Features
 
@@ -481,7 +481,7 @@ What history records, told in scenes. Bend everything except what the players be
   way. Let it be the players.
 - **The gardens — the Crossing.** Veier's flight meets its hunter in the open, and
   the night's two hidden powers finally collide. Run it as its own set-piece; see
-  *The Crossing — Vell and the Radiant*, below.
+  "The Crossing — Vell and the Radiant", below.
 - **The hall.** The Hollow holds the doors until the Wept's work is done — then both
   turn east, and the doors are open: the crowd pours out toward the Gatehouse Court
   and the front gate (B12). When the boat is out of reach, the leash takes all three,
@@ -489,8 +489,8 @@ What history records, told in scenes. Bend everything except what the players be
   moving like people called home. They do not look back. One of them — the Wept, if
   any player earned it — looks back.
 - **The looters.** Not everyone in the palace is running *from* something. The
-  moment the screaming starts, Tavva's crew (Chapters IV and VII; **Tavva** and her
-  **Gallery Knives**, Chapter X) goes to work — the gallery's wards are guttering, its
+  moment the screaming starts, Tavva's crew (chapters IV and VII; **Tavva** and her
+  **Gallery Knives**, chapter X) goes to work — the gallery's wards are guttering, its
   guards are dying on the dais, and a season of planning meets the best cover Rekuzan
   will ever offer. Two of her knives hit the trophy gallery (B7); she and the third work the
   smoke-filled galleries and corridors, cutting purses, rings, and masks from
@@ -502,7 +502,7 @@ What history records, told in scenes. Bend everything except what the players be
   any of them caught and held is worth more than the goods: by dawn, a captured looter
   is the inquest's favorite scapegoat and the players' proof of what they saw. If
   nobody interferes, the crew gets away clean — and the module notes, without
-  comment, which kind of night the table chose to have. ***Card S5, Chapter IX.*** What
+  comment, which kind of night the table chose to have. ***Card S5, chapter IX.*** What
   the crew carries is Tavva's sack (see chapter X, "The Night's Loot").
   *(The snakes are in the dark too, and some of what they do looks like looting from
   across a smoky room. It is not the same fight, and it is not the same kind of
@@ -601,7 +601,7 @@ otherwise, never for a table that was busy saving someone else.
 > Crossing are fighting an Uninvited (below): he is *Leashed*, he ignores them unless
 > they stand between him and the boat, and every round they spend on him is a round
 > Vell did not have to — which is a real gift, and should be narrated as one. Damage
-> in lumps earns Delay here like anywhere else (*Buying Time*).
+> in lumps earns Delay here like anywhere else ("Buying Time").
 
 ---
 
@@ -610,24 +610,24 @@ otherwise, never for a table that was busy saving someone else.
 Say it plainly at the table when the fiction earns it: **the Uninvited cannot be
 defeated by force tonight — not by the players, not by fifty guards, not by the
 palace, and not by a spell.** Weapons land and matter less than they should. This
-edition gives them full stat blocks (Chapter X), and those blocks are lethal on
+edition gives them full stat blocks (see chapter X), and those blocks are lethal on
 purpose — no party that walks into this ballroom is their match — but the trait that
-matters is **Leashed**, and the rules that make it playable are *Down, Not Out* and
-*Buying Time*, above.
+matters is **Leashed**, and the rules that make it playable are "Down, Not Out" and
+"Buying Time", above.
 
-**How *Leashed* plays at the table.** Read the trait in Chapter X before the session;
+**How *Leashed* plays at the table.** Read the trait in chapter X before the session;
 in practice it means this:
 
 - **Reducing one to 0 Hit Points is not a kill.** It means the killer *stops
   indulging the interference.* They step into the world's shadow, return at the start
   of their next turn at full Hit Points in the space where they dropped, and walk on
   toward the task, and whoever struck the last
-  blow makes a saving throw or is thrown (*Down, Not Out*). Fighting the Uninvited
+  blow makes a saving throw or is thrown ("Down, Not Out"). Fighting the Uninvited
   never ends in victory. It does buy time: every round the party lands 30 damage on
   one of them is a point of Delay.
 - **A player character one of them drops to 0 Hit Points does not die.** They are
   Stable, and back on their feet within two rounds, by a friend's hand or a
-  stranger's (*Down, Not Out*). The Uninvited have no orders about them and no
+  stranger's ("Down, Not Out"). The Uninvited have no orders about them and no
   appetite. *(This mercy covers only the Uninvited and the Attendant. A snake's knife
   in the dark is an ordinary knife.)*
 - **Magic buys time at most.** A 5e table will reach for the spell list — *Banishment*,
@@ -692,13 +692,13 @@ Charisma check for a bared truth.
 
 **Intimidation never works**, and neither does
 Deception: the person inside the mask has been lied to enough. Heroic Inspiration may
-be spent on it, and should be. *(The same rule is printed once in Chapter X, above
+be spent on it, and should be. *(The same rule is printed once in chapter X, above
 the Uninvited's blocks.)*
 
 - **Success:** the effect lands in full, and that Uninvited gains **2 Delay**
-  (*Buying Time*).
+  ("Buying Time").
 - **Failure by 4 or less:** it lands in full, and that Uninvited gains 2 Delay, but it
-  answers first with one terrible parting blow — one attack against the speaker, rolled in the open (*Down, Not Out*
+  answers first with one terrible parting blow — one attack against the speaker, rolled in the open ("Down, Not Out"
   holds) — or one word that the speaker will carry for the rest of their life. You
   choose which.
 - **Failure by 5 or more:** it does not land. The Uninvited acts against the speaker,
@@ -743,7 +743,7 @@ the Uninvited's blocks.)*
   re-stages kills that were already staged. **In the rules: for the rest of the
   night he moves at 20 feet whether or not anyone is watching (being watched does not
   slow him further), he can step through the world's shadow no more than once a
-  minute, and at the Crossing he does not break past Vell** (his block, Chapter X). Guilt is slow, and slow is hallways —
+  minute, and at the Crossing he does not break past Vell** (his block, chapter X). Guilt is slow, and slow is hallways —
   the module expects the margin at the river gate to be made of exactly this.
 - **The Hollow** *(despair)*. Truth: he was promised family once — belonging,
   after a life of nothing — and what he got instead was the leash. He has not
@@ -757,7 +757,7 @@ the Uninvited's blocks.)*
 
 > **Sidebar — Fractures and magic.** *Calm Emotions*, *Charm Person*, *Suggestion* and
 > their kin do not reach the person inside a mask; the Uninvited are not moved by
-> magic that would move them (Chapter X). What reaches them is what reached them all
+> magic that would move them (see chapter X). What reaches them is what reached them all
 > night — a person, paying attention, saying something true. A spell can *carry* the
 > words (a *Message*, a *Thaumaturgy* voice booming over the hall so the Radiant's
 > congregation hears the doubt too) and you should welcome that. It never replaces
@@ -775,12 +775,12 @@ guards left are dying on the dais.*
 
 *None of it is ambush.* Every line below is something a player character crossing the
 palace **sees happening** — to a guest, to a servant, to another snake — before they
-decide whether it is their business. Each has a card in Chapter IX for the moment they
+decide whether it is their business. Each has a card in chapter IX for the moment they
 decide it is, and a **default** for the moment they decide it is not. The defaults keep
 history where it was; the cards are where a table changes it.
 
 **Heat decides which knife comes out.** Each faction's box on the **Snake Tracker**
-(Chapter IX; the night-tracker in Chapter VIII) has been rising all evening when its
+(chapter IX; the night-tracker in chapter VIII) has been rising all evening when its
 line went unanswered, and falling when the party stepped on it, turned it, or gave the
 faction what it came for. Read each faction's heat at the first scream. **Heat 0–2:**
 the faction does the frightened, sensible thing and gets its principal out. **Heat
@@ -931,7 +931,7 @@ court (card S3 counts them).
 **Treasure.** The contract case, and the company's purse (3d6 × 10 GP in old coin)
 (see chapter X, "The Night's Loot").
 
-***Card S3, Chapter IX*** — the gate, the wicket and the gate-walk, the fire clock and
+***Card S3, chapter IX*** — the gate, the wicket and the gate-walk, the fire clock and
 the bell clock, the **Bought Sergeant**, the **Bought Blades** and the **Bought
 Captain**, the tactics, and the three endings written out. Everything below is what
 the scene *means*; the card is what you run it from.
@@ -981,7 +981,7 @@ And then the counting: Raunu Boranis is dead. Veier Nolonaire is gone. Whatever
 each player character saw, they are now the most important witnesses in Val'loh —
 which by morning will make them assets, threats, or scapegoats to every faction in
 the city, and every faction was in the room. End the session on the epilogue below.
-If your campaign goes on, Chapter VI is what dawn looks like.
+If your campaign goes on, chapter VI is what dawn looks like.
 
 ### Epilogue (one-shot ending)
 
@@ -1005,7 +1005,7 @@ Night?** An object, a debt, a truth, a name. Write the answers down. If you ever
 play in Val'loh again, they are canon at your table.
 
 **Advancement.** Call **5th level** here, standing outside with whatever and whoever
-they carried out (Chapter I).
+they carried out (see chapter I).
 
 ---
 
@@ -1035,8 +1035,8 @@ going to find out.)*
 **⟨The child is taken.⟩** The darkest branch, and it never happens by default: only
 a player character's choice opens it — someone stops the boat, holds Veier back from
 it, drags her to the front gate instead, or otherwise stands between her and the water
-until the Radiant is past. A table that was simply elsewhere gets the record (*The
-Crossing*, above). If a table does open it, the module refuses to leave it there, and
+until the Radiant is past. A table that was simply elsewhere gets the record ("The
+Crossing", above). If a table does open it, the module refuses to leave it there, and
 so should you — the leash east is long, the boat is slow, and Master Vell does not
 accept endings. What comes next is a pursuit: down the river, along
 the coast, toward mists that are rising again — with Vell, suddenly and terrifyingly
@@ -1076,7 +1076,7 @@ closed and the mists unmentioned; Vorlain wants anything that is not himself. Th
 without a patron is not power — it is exposure, and it makes the players the most
 interesting people in Rekuzan to several organizations at once — every one of which was
 in the palace last night, and knows exactly who the players are. That is not a dead
-end. It is a campaign frame, and Chapter VI leans into it.
+end. It is a campaign frame, and chapter VI leans into it.
 
 **⟨A player character dies.⟩** Let it mean something and cost the enemy tempo —
 a death that holds a corridor or a gate is written into the night forever. *(Neither

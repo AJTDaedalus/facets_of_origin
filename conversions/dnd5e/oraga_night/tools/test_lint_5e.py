@@ -58,6 +58,14 @@ class TestClassify:
         assert all(k in ("statblock", "blank") for k in kinds[1:7])
         assert kinds[-1] == "prose"
 
+    def test_statblock_with_epithet_line_and_comment(self):
+        # T4.4: the epithet sits on its own line above the type line, and a TODO comment
+        # can follow the type line; the AC line is then seven lines below the heading.
+        text = ("### The Hollow\n*The blank gray mask.*\n\n*Medium Humanoid (Human)*\n"
+                "<!-- TODO-Q18: alignment pending. -->\n\n**AC** 16\n**HP** 157 (21d8 + 63)\n")
+        kinds = L.classify(text, "10_Bestiary.md")
+        assert kinds[1] == "statblock" and kinds[6] == "statblock"
+
     def test_h3_without_ac_is_not_statblock(self):
         kinds = L.classify("### The Palace on Alert\n\nPlain prose here.\n", "10_Bestiary.md")
         assert kinds[2] == "prose"

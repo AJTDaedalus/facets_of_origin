@@ -57,7 +57,7 @@ What every guest at the ball knows, in order:
 2. **3161 — The Return.** Raunu walks back into his hall one day and takes his seat,
    receiving ministers as if nothing had happened. Vorlain — a conniving man who has
    feared exactly one person in his life — yields without a word. Where Raunu went, and
-   why, he has never said. *(See the rumor table in Chapter VIII. The module does not
+   why, he has never said. *(See the rumor table in chapter VIII. The module does not
    answer this question, and neither should you.)*
 3. **3162 — The Pact and the Marriage.** Raunu announces a pact with the Thenya — a
    diminished tribe under heavy Orthaen border pressure — trading protection for a
@@ -101,7 +101,7 @@ deal to the right wrong person, which is one of the ways player characters get i
 > **DM Note — the list above is the guest list**
 >
 > Every faction on it accepted, and every one of them brought hired steel. That is the
-> snakes in the chicken pen (Chapter I), and Chapter IX runs each of them as a threat
+> snakes in the chicken pen (see chapter I), and chapter IX runs each of them as a threat
 > line the party can walk into. None of it changes what the factions *want*, which is
 > exactly what this section says. It changes what they are ready to do about it when
 > the lights go out.
@@ -139,12 +139,12 @@ does. And whatever greater powers they once wielded are sealed away with their
 master: tonight they are speed, craft, and centuries of practice. That is
 terrible enough.
 
-*At the table:* Chapter X gives each of the three a full stat block, and every one of
+*At the table:* chapter X gives each of the three a full stat block, and every one of
 them carries the **Leashed** trait — the 5e shape of everything in this section. They
 cast no spells tonight. Their shadow-step is a movement, not a magic *Counterspell*
 can reach. A 0 on their Hit Point track does not end them, but they can be delayed,
-and delay is what saves people (*Buying Time*, Chapter V). Read their blocks before
-you run Chapter V.
+and delay is what saves people (see chapter V, "Buying Time"). Read their blocks before
+you run chapter V.
 
 One more came through the door with them, and it is not a person: **the Attendant**,
 their master's servant, at the ball all night in the clothes of a noble's attendant
@@ -170,7 +170,7 @@ vanishes by dawn, the skeleton staff keep the silence they were paid for, and th
 inquest records a vanished *bride* — never a vanished *heir*. The world never
 learns what the ball was for. The only people who may ever know are players who
 earned the east wing, and what they do with a truth that exists nowhere else is
-theirs to carry out of the palace (Chapter VI).
+theirs to carry out of the palace (see chapter VI).
 
 Meanwhile, the ballroom guesses all night. The Merchant's Circle is *certain* the
 midnight pronouncement is a trade decree (the Tithe of Hands — see Agenda 1). They
@@ -222,7 +222,7 @@ house prefers a version of events that blames a rival, the Church prefers no ver
 at all, and the crime of the age begins its long life as an unsolved wound. Chapter V
 runs the attack in detail. Chapter VI says what happens after dawn.
 
-The snakes change none of this. Whatever the factions do in the dark — and Chapter IX
+The snakes change none of this. Whatever the factions do in the dark — and chapter IX
 lets them do a great deal — the pillars stand: Raunu falls by his own choice, Veier
 goes out through the river gate on Vell's arm, the Uninvited leave no trace, and no
 one is ever charged.
@@ -260,7 +260,7 @@ Movements: while the night's events unfold on schedule, agendas give every chara
 reason to work the room, cross paths, and end up in the wrong corridor at the right
 moment.
 
-Deal agendas in the first five minutes (Chapter I). Match them to characters, or hand
+Deal agendas in the first five minutes (see chapter I). Match them to characters, or hand
 them out face-down and let fate deal. Two players may share an agenda (rivals or partners — deal both
 ways). Every agenda card has:
 
@@ -297,7 +297,7 @@ module invents it here; it dies with its rememberers unless your table saves the
 
 **Pays:** Heroic Inspiration on the spot, and XP by Table I–4. Mistress Callun pays on
 delivery — **100 GP** in Circle silver — and she pays whether or not she likes the
-answer. *Your patron is a snake: the Merchant's Circle line, Chapter IX.*
+answer. *Your patron is a snake: the Merchant's Circle line, chapter IX.*
 
 ### 2. The Prelate's Question
 *Patron: the Church, through Prelate Damaris Kovaun.*
@@ -314,7 +314,7 @@ screamed, before the lights failed. He knew what they were. Remember that.
 **Pays:** Heroic Inspiration, and XP by Table I–4. The Church's favor: one request of
 Prelate Kovaun, spendable after tonight, and as large as the DM
 decides "frightening" means at your table. *Your patron is a snake: the Church line,
-Chapter IX.*
+chapter IX.*
 
 ### 3. A House's Long Game
 *Patron: House Draunel, through Lord Essar Draunel.*
@@ -329,7 +329,7 @@ only witness to it.
 
 **Pays:** Heroic Inspiration, and XP by Table I–4. Lord Draunel's gratitude, which is
 worth exactly what a Draunel's gratitude is worth. *Your patron is a snake: the House
-Draunel line, Chapter IX.*
+Draunel line, chapter IX.*
 
 ### 4. The Cousin's Errand
 *Patron: the Thenya delegation, through Maiven Nolonaire.*
@@ -346,7 +346,7 @@ a player character beside Veier at the Unmasking. Chapter V leans on it.)*
 
 **Pays:** Heroic Inspiration, and XP by Table I–4. Maiven Nolonaire's trust, which
 after midnight is worth more than any coin at this ball. *Your patron is not a snake —
-the Thenya line in Chapter IX is the one that turns into a fight only if somebody
+the Thenya line in chapter IX is the one that turns into a fight only if somebody
 provokes it.*
 
 ### 5. The Unpaid Debt
@@ -365,7 +365,7 @@ where they are weakest. People will live or die by whether you share that.
 
 **Pays:** Heroic Inspiration, and XP by Table I–4. The crystal itself, home. It is an
 heirloom, not treasure, and nobody at your table should be selling it. *Tavva's crew
-wants the same gallery (Chapter VII).*
+wants the same gallery (see chapter VII).*
 
 ### 6. The Gate at Midnight
 *Patron: unknown.*

@@ -57,7 +57,7 @@ secret** — no faction learns of the child unless a player character tells them
 
 ### Page Two: Rules, DCs and Costs
 
-**Midnight rules, one line each** *(Chapter V has them in full)*
+**Midnight rules, one line each** *(chapter V has them in full)*
 
 - **Down, Not Out.** Dropped by an Uninvited or the Attendant, and not their quarry:
   Unconscious and Stable, no Death Saving Throws. Anyone within 5 ft. spends an action →
@@ -92,7 +92,7 @@ secret** — no faction learns of the child unless a player character tells them
 - **Two hundred people.** One guest per 5-ft. square of crowd (AC 10, 4 HP); a
   damaging area spell hits one guest per square it covers. The crowd is Difficult
   Terrain. Each retinue the party talks round at the gate (a DC 13 Charisma (Persuasion) check) takes one
-  Blade off them (Chapter V, *Two Hundred People*).
+  Blade off them (see chapter V, "Two Hundred People").
 - **The gate (S3).** Through the wicket: a DC 15 Strength (Athletics) check to force the
   bar, a DC 13 Dexterity check with Thieves' Tools, a key from a fallen Bought, or a climb
   to the gate-walk (a DC 13 Strength (Athletics) check); the sergeant parleys at the grille. The Blades quit when the sergeant
@@ -185,7 +185,7 @@ lines are the service passages, which thread the whole palace.*
 
 ## The Snake Tracker
 
-*Heat 0–4 per faction (Chapter IX, Table IX–2, is the full rule). Tick a box when a line
+*Heat 0–4 per faction (chapter IX, Table IX–2, is the full rule). Tick a box when a line
 goes unanswered; clear one when the party steps on it. Read every row at the first
 scream: **0–2**, they get their principal out; **3**, the midnight card is live;
 **4**, it starts with steel already out (each card's *At heat 4* line says how). A line the table was never shown does not
@@ -350,7 +350,7 @@ not, trained or not. Releasing one does not make its bearer a caster.
   check. The charge is spent. Charges need no attunement.
 - **The six every Orthaen knows** are *common*: minor, local, brief. A gifted Orthaen
   with the Orthaen Gift can grow one in a day of downtime from 25 GP of raw crystal,
-  one at a time, and no more than one a week: a gift is not a mint (Chapter III).
+  one at a time, and no more than one a week: a gift is not a mint (see chapter III).
   Price: 50 GP, which is a season's wages in the wrong district.
 - **Chancy releases.** When the fiction makes a release uncertain — fumbled in the
   dark, jostled in a crowd — the bearer makes a DC 13 Charisma check; on a failure,

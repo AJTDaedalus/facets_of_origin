@@ -6,12 +6,12 @@ Outside a fight NPCs never roll dice. Where an entry gives no DC, the DC to move
 that guest is 13 behind a mask (the ladder in chapter I); the entries below note only
 the exceptions. The DM sheet (chapter VIII) maps where each stands in every Movement.*
 
-*Every stat block named here is in Chapter X under exactly that name. Five
+*Every stat block named here is in chapter X under exactly that name. Five
 factions came as Raunu's enemies (the snakes), and a sixth, the Thenya, came as his
 wife's kin; each has a threat line and fight cards in chapter IX, and their entries
 below say which. The house's own guards (**Boranis
 Honor Guard**), the city's (**Sect Guard**), and the brawlers of the seating feud
-(**Feuding Kinsman**) are not cast, and live only in Chapter X.*
+(**Feuding Kinsman**) are not cast, and live only in chapter X.*
 
 ---
 
@@ -43,7 +43,7 @@ abruptly, on something that is nearly a kindness. Deceiving Raunu takes a
 **DC 25 Charisma (Deception) check**. Impressing him is easier than anyone expects: tell
 him a true thing he did not already know.
 
-**At the Unmasking:** see Chapter V. Custom compels his return to the dais — the
+**At the Unmasking:** see chapter V. Custom compels his return to the dais — the
 one predictable moment of his night, which is exactly why it is the moment. He
 never gets to make the announcement. He understands first, spends everything on
 the escape, and dies a host: the recluse nobody saw all evening ends it
@@ -51,8 +51,8 @@ commanding a burning room, putting his body and his house between his guests and
 the Wept.
 
 **If it comes to steel:** it never should. Raunu is a noncombatant; his line is in
-Chapter X under *If It Comes to It*, and he never gets a fight card. His death is his
-own choice (Chapter V), not a hit-point total.
+chapter X under "If It Comes to It", and he never gets a fight card. His death is his
+own choice (see chapter V), not a hit-point total.
 
 ### Veier Nolonaire — the Bride
 *Of the Thenya; one of five gifted Thenya alive, though almost no one knows it. Two
@@ -79,17 +79,17 @@ reach her expecting a prisoner or a madwoman get a brisk education.
 **At the Unmasking:** in the east wing when the lights die, the corridors sealing
 themselves behind her — her husband's two crystals working. Wounded once, cleanly,
 by the Radiant; upright anyway; down the private stair and out through the gardens
-on Vell's arm (the Crossing, Chapter V). If her gift matters at your table — a
+on Vell's arm (the Crossing, chapter V). If her gift matters at your table — a
 bonded loved one in mortal peril — it flares exactly once, without training or
 explanation, and the module suggests spending it on a player character who bled
 for her.
 
-*At the table:* it is the Thenya Gift's **For Them** (Chapter III), used once, on
+*At the table:* it is the Thenya Gift's **For Them** (see chapter III), used once, on
 that character: the next time they would drop to 0 Hit Points tonight while within
 60 feet of her, they drop to 1 instead.
 
-**If it comes to steel:** she is a noncombatant, near her time, and her line in Chapter
-X (*If It Comes to It*) is there only so you know what she does when cornered. She
+**If it comes to steel:** she is a noncombatant, near her time, and her line in chapter
+X ("If It Comes to It") is there only so you know what she does when cornered. She
 is never a fight.
 
 ### Vorlain Boranis — the Brother
@@ -108,7 +108,7 @@ want him to LOOK at me the way he looks at his ministers. Gods help whoever actu
 touches him — I've seen what he does to surprises."* **At the Unmasking:** he is the
 night's strangest hero — hauling guests from the burning banquet gallery (B3), to
 everyone's permanent confusion including his own — and by dawn, the prime suspect.
-Both facts are true (Chapter VI).
+Both facts are true (see chapter VI).
 
 > **Vorlain by the wine — the overtures, and the non-answers**
 >
@@ -145,7 +145,7 @@ Both facts are true (Chapter VI).
 
 **If it comes to steel:** stat block **Vorlain Boranis**, with **Boranis Cousin's
 Blade** for the people around him; House Boranis is a snake, and its line is in
-Chapter IX (cards S6, S9 and S13). Whatever his house's blades do tonight, they are
+chapter IX (cards S6, S9 and S13). Whatever his house's blades do tonight, they are
 Essin's people doing Essin's work. Vorlain himself has no plot. That is his secret,
 and it holds.
 
@@ -205,7 +205,7 @@ is too tired to check.
 > — **if friendly, and if pressed a second time:** "I—" *(A long silence.)* "Ask me
 > again tomorrow. Please ask me again tomorrow."
 
-**If it comes to steel:** noncombatant — *If It Comes to It*, Chapter X.
+**If it comes to steel:** noncombatant (see chapter X, "If It Comes to It").
 
 ### Anha — the Under-Cook
 *Agenda 8's sister. Four years in the kitchens; two years in the silence.*
@@ -224,7 +224,7 @@ in the palace: she deals only in facts. **At the Unmasking:** she knows the serv
 passages, and becomes one of the night's quiet heroes if any player thought to
 befriend her.
 
-**If it comes to steel:** noncombatant — *If It Comes to It*, Chapter X. When the
+**If it comes to steel:** noncombatant (see chapter X, "If It Comes to It"). When the
 lights die she goes for the service passages, because she knows them.
 
 ---
@@ -244,7 +244,7 @@ Lying to Kovaun about matters of faith takes a **DC 20 Charisma (Deception) chec
 she has heard everything.
 
 **If it comes to steel:** stat block **Damaris Kovaun**, with **Church Warden** for her
-retinue. The Church is a snake; its line is in Chapter IX (card S8).
+retinue. The Church is a snake; its line is in chapter IX (card S8).
 
 ### Mother Sella — the Death-Sister
 *A lay sister of Elanna, invited by name, in Raunu's hand, to everyone's surprise.*
@@ -262,7 +262,7 @@ what it meant, that someone is Sella, and she gets one line at the epilogue: *"T
 dead were sent home tonight. All but three. Those, child, were somebody else's
 dead — sent out."*
 
-**If it comes to steel:** noncombatant — *If It Comes to It*, Chapter X.
+**If it comes to steel:** noncombatant (see chapter X, "If It Comes to It").
 
 ### Mistress Rhaza Callun — the Circle's Reckoning
 **Wants:** Raunu's next decree, before it lands on her margins. **Fears:** an heir —
@@ -278,7 +278,7 @@ human, a **DC 10 Charisma (Deception) check**.
 
 **If it comes to steel:** stat block **Rhaza Callun** — she is no fighter, and her
 block says so — with **Circle Hired Knife** for the people she pays. The Merchant's
-Circle is a snake; its line is in Chapter IX (cards S7 and S12).
+Circle is a snake; its line is in chapter IX (cards S7 and S12).
 
 ### Master Pellin Corro — the Phern Magnate
 **Wants:** a pleasant evening among people who finally treat Phern money as money.
@@ -295,7 +295,7 @@ finds its bearing — three seconds before the lights die, Corro is already movi
 and following him saves lives.
 
 **If it comes to steel:** stat block **Pellin Corro**, with **Phern Bodyguard** for the
-people his money keeps near him. The Phern line is in Chapter IX (card S11). Corro
+people his money keeps near him. The Phern line is in chapter IX (card S11). Corro
 himself has no secret and no scheme; his bodyguards are what a frightened rich man
 keeps close.
 
@@ -303,14 +303,14 @@ keeps close.
 **Wants:** House Draunel one seat closer to the chieftaincy, tonight if possible,
 patiently if not. **Fears:** being seen wanting it. **Secret:** Agenda 3 is his, and
 he has three other irons in tonight's fire — a Draunel never brings one plan to a
-Boranis party. The source left them to the DM; this edition names them in Chapter IX.
+Boranis party. The source left them to the DM; this edition names them in chapter IX.
 
 **Play him:** the anti-Raunu — polished, obvious, ambitious in the standard
 noble key. Useful to the table as a patron, a foil, and by dawn the loudest voice
 insisting Vorlain hang for this.
 
 **If it comes to steel:** stat block **Essar Draunel**, with **Draunel Duelist** for his
-retinue. House Draunel is a snake; its line is in Chapter IX (cards S9 and S13).
+retinue. House Draunel is a snake; its line is in chapter IX (cards S9 and S13).
 
 ### Essin Boranis — the Cousin
 **Wants:** Vorlain sober, unrecorded, and unbaited — Essin is the keeper his cousin
@@ -325,7 +325,7 @@ partner: deceiving Essin takes a **DC 20 Charisma (Deception) check**, and he de
 catching him at it takes a DC 18 Wisdom (Insight) check.
 
 **If it comes to steel:** stat block **Essin Boranis**, with **Boranis Cousin's Blade**
-— his people, placed where he wants them. House Boranis's line is in Chapter IX (cards
+— his people, placed where he wants them. House Boranis's line is in chapter IX (cards
 S6, S9 and S13).
 
 ### Maiven Nolonaire — the Cousin from the Border
@@ -346,7 +346,7 @@ immediately, and dies there unless somebody competent goes with her. The module
 would prefer somebody competent went with her.
 
 **If it comes to steel:** stat block **Maiven Nolonaire**, with **Thenya Border Slinger**
-for the delegation. The Thenya are **not a snake** — Chapter IX runs them as a wary
+for the delegation. The Thenya are **not a snake** — chapter IX runs them as a wary
 ally who becomes a fight only if somebody provokes one (card S10). Keep her that way
 unless the table works hard to change it.
 
@@ -357,7 +357,7 @@ unless the table works hard to change it.
 ### Master Vell — the Pale Factor
 *Tall, pale, soft-spoken; a trade factor no one remembers inviting — carrying,
 of all things, an enormous broadsword wrapped in white cloth across his back.
-See Chapter II: he is the second hidden power's whole presence at the ball.*
+See chapter II: he is the second hidden power's whole presence at the ball.*
 
 **Wants:** the river gate open at midnight and no one ever remembering his face.
 **Fears:** nothing in this palace — but he treats the three gray masks with the
@@ -395,7 +395,7 @@ because the one thing he will not do is fail. Players standing between him and
 the river gate at the wrong moment should understand, from his face alone, that
 the courteous factor has already done the arithmetic and they should move.
 
-Then the Crossing (Chapter V), and the pale factor is unveiled in the only
+Then the Crossing (see chapter V), and the pale factor is unveiled in the only
 language the night speaks: he moves *the way the Uninvited move* — arriving,
 not running — and he holds the Radiant, a killer the module has spent two
 chapters establishing as unbeatable, alone, barely, long enough. Any player who
@@ -410,15 +410,15 @@ now, when you hear this night has finally mattered — that was you."* Then the
 water takes him.
 
 **If it comes to steel:** he will not fight if he can avoid it, and he can almost always
-avoid it. His line in Chapter X (*If It Comes to It*) is an exit, not a weapon: he
+avoid it. His line in chapter X ("If It Comes to It") is an exit, not a weapon: he
 leaves, and nobody quite remembers which way. The one exception is the Crossing, where
-he holds the Radiant with the sword still wrapped. That is Chapter V's to run, and it
+he holds the Radiant with the sword still wrapped. That is chapter V's to run, and it
 is never the party's fight.
 
 ### The Uninvited — the Three Gray Masks
-*Stat blocks: **The Wept**, **The Radiant**, **The Hollow** (Chapter X — read *The
-Uninvited, Before You Read Their Blocks* first). Their truth is Chapter II; their
-Fractures and full tell-tables are Chapter V; their conduct before midnight is here.*
+*Stat blocks: **The Wept**, **The Radiant**, **The Hollow** (chapter X — read "The
+Uninvited, Before You Read Their Blocks" first). Their truth is chapter II; their
+Fractures and full tell-tables are chapter V; their conduct before midnight is here.*
 
 They arrive with the Movement III crush, and until midnight they do nothing but
 attend the ball — and this is the thing to play correctly: **they are people, and
@@ -434,14 +434,14 @@ Their human moments — the Wept watching the young pages too long, her mourning
 rite in the chapel, the cradle-song at the east wing doors; the Radiant's
 antique blessing over the food, his warmth on the subject of service; the
 Hollow's flat answers and his hunger, watching the kitchen family belong to each
-other — are the **tells** that arm the Fractures, and Chapter V lays them out as
+other — are the **tells** that arm the Fractures, and chapter V lays them out as
 a table with places and times. Salt them generously. Every tell a player
 witnesses is a person glimpsed through a mask, and at midnight each one becomes
 a key.
 
-**If it comes to steel:** they cannot be beaten tonight, and their blocks in Chapter X
+**If it comes to steel:** they cannot be beaten tonight, and their blocks in chapter X
 say exactly why. They can be delayed — cleverness buys Delay far faster than damage
-does (*Buying Time*, Chapter V) — and ward-fire, the leash and the Fractures change
+does (see chapter V, "Buying Time") — and ward-fire, the leash and the Fractures change
 outcomes. That is the complete list. Their Attendant, below, is another matter.
 
 ### The Attendant — the Quiet Guest
@@ -471,7 +471,7 @@ It **never fights before midnight.** Followed, confronted or attacked, it walks 
 shadow — an alcove, the far side of a pillar, a dark doorway — and it is not there
 when anyone looks. It is gone for the rest of that Movement and turns up in the next
 one as printed (see chapter IV). Drawing steel on it is still
-drawing steel at the ball (*The Palace on Alert*, Chapter IV), and the guards arrive
+drawing steel at the ball (see chapter IV, "The Palace on Alert"), and the guards arrive
 to find a player character with a blade out and nobody in front of them.
 
 **At the Unmasking** it drops the pretense, sets the cloak and the cup down on the
@@ -486,7 +486,7 @@ nearest table, and takes its place by the Uninvited. Read this when the lights d
 has no manners and no malice. Everyone who is not interrupting the three is furniture
 to it, and a creature that stops interrupting stops being its business.
 
-**If it comes to steel:** stat block **The Attendant**, Chapter X; card **S14**, Chapter
+**If it comes to steel:** stat block **The Attendant**, chapter X; card **S14**, chapter
 IX, the night's boss. It has two states. **Idle** — its default — it is rusty, easily
 distracted, and cannot be bothered with its own magic. **Focused** — at the start of
 any of its turns, once the party has become a real interruption, if one of the three
@@ -494,8 +494,8 @@ in the scene has no Delay and glances at it and at the party — it is devastati
 until one of the three glances at it again; the fourth broken focus of the night sends
 it off to stand at a window and watch the fires;
 driven to 0 Hit Points, it loses interest in being here and steps back into the
-shadow. It leaves no body. Anyone it drops is only knocked down (*Down, Not Out*,
-Chapter V): it removes interruptions, and it does not hunt.
+shadow. It leaves no body. Anyone it drops is only knocked down (see chapter V,
+"Down, Not Out"): it removes interruptions, and it does not hunt.
 
 ### Tavva — the Other Thief
 *Somewhere in her forties, somewhere from the coast, somewhere on every festival
@@ -518,11 +518,11 @@ on her carefully planned burglary, she takes the chaos as a gift and works it.
 unmemorable performance in the palace, and the module notes she would be
 genuinely offended to learn it. She fights only to leave, bargains fast and
 honestly when cornered, and abandons any prize that starts costing blood. Her
-crew's three sightings are in Chapter IV; the raid itself is in Chapter V. Caught
+crew's three sightings are in chapter IV; the raid itself is in chapter V. Caught
 and held — tonight or by the inquest — she is a gold mine of exactly the wrong
 information: she can prove she planned the gallery job for a season, which makes
 her the inquest's most convenient scapegoat, and she knows it before her
-questioners do. *(Stat blocks: **Tavva**, **Gallery Knife**, Chapter X. Fight cards S2 and S5, Chapter
+questioners do. *(Stat blocks: **Tavva**, **Gallery Knife**, chapter X. Fight cards S2 and S5, chapter
 IX.)*
 
 **If it comes to steel:** stat block **Tavva**, with **Gallery Knife** for her crew of
@@ -537,8 +537,8 @@ and decency.
 the Boranis gatehouse from the first bell of midnight to the last bell of Oraga.
 They are the one foe at the gate who can be beaten or bought — and, more usefully,
 they can be talked to, by anyone who understands that the contract settles more
-arguments than the sword does. Full fight on **card S3**, Chapter IX;
-stat blocks **Bought Sergeant**, **Bought Captain** and **Bought Blade**, Chapter X.*
+arguments than the sword does. Full fight on **card S3**, chapter IX;
+stat blocks **Bought Sergeant**, **Bought Captain** and **Bought Blade**, chapter X.*
 
 ### Sergeant of the Bought — the One Reading the Room
 *Gray wool, cut plainly, the company's mark at the shoulder. A case chained at the
@@ -594,7 +594,7 @@ his second he starts talking while the attacks continue.
 > **DM Note — the factor.** The captain never learns who hired him, and neither does the
 > module. If a table asks him directly he will tell them the truth, which is that he
 > does not know, and that this has begun to bother him a great deal. That is not a
-> dead end; for a table that plays on (Chapter VI) it is the best lead there is,
+> dead end; for a table that plays on (see chapter VI) it is the best lead there is,
 > because a captain who wants to know is a captain who will help you find out.
 
 **If it comes to steel:** the Bought *are* the steel at the gate. Every round of that

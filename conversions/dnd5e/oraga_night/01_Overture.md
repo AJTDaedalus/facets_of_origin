@@ -2,11 +2,11 @@
 
 > **How to prep in 90 minutes**
 >
-> You run this night from three things: **the two-page DM sheet** (Chapter VIII),
-> **the fight cards** (Chapter IX) and **the stat blocks** (Chapter X). Chapters IV
+> You run this night from three things: **the two-page DM sheet** (see chapter VIII),
+> **the fight cards** (see chapter IX) and **the stat blocks** (see chapter X). Chapters IV
 > and V are the reference behind them. Read in this order:
 >
-> 1. **This chapter, to the end of *The Snakes in the Chicken Pen*** (15 minutes).
+> 1. **This chapter, to the end of "The Snakes in the Chicken Pen"** (15 minutes).
 >    The shape of the night, the first five minutes, what pays, and the rules for
 >    steel.
 > 2. **Chapter II, "What the Module Never Says" and "The Eight Agendas"** (5
@@ -14,23 +14,23 @@
 >    are the lines you hold and the cards you deal.
 > 3. **Chapter VIII, the DM sheet and the palace diagram** (10 minutes). Print both.
 >    From here on, everything you read is behind a line on that sheet.
-> 4. **Chapter V: *How to Run the Attack*, Movement VI's opening, *Midnight Rules*
->    (read *Down, Not Out*, *Buying Time* and *The Attendant*; skim the Room Tricks and
->    *Two Hundred People* — they are tables to use live), *The Crossing*, and Movement
+> 4. **Chapter V: "How to Run the Attack", Movement VI's opening, "Midnight Rules"
+>    (read "Down, Not Out", "Buying Time" and "The Attendant"; skim the Room Tricks and
+>    "Two Hundred People" — they are tables to use live), "The Crossing", and Movement
 >    VII's opening and Epilogue** (30 minutes).
-> 5. **Chapter IX: *Running the Snakes*, then S14 and S3 in full** — the Attendant and
+> 5. **Chapter IX: "Running the Snakes", then S14 and S3 in full** — the Attendant and
 >    the gate come up at almost every table — **then skim the cards your players'
 >    agendas point at** (20 minutes).
-> 6. **Chapter IV: *The Palace on Alert*, *When Somebody Draws Early*, *Running the
->    Room*, and the box at the head of each Movement** (10 minutes). Each box says
+> 6. **Chapter IV: "The Palace on Alert", "When Somebody Draws Early", "Running the
+>    Room", and the box at the head of each Movement** (10 minutes). Each box says
 >    what to run and what to skip. Read Undercurrent C only if someone carries
 >    Agenda 4.
 >
-> **Skim or skip:** Chapter VII (look a guest up when the players meet them), Chapter
+> **Skim or skip:** chapter VII (look a guest up when the players meet them), chapter
 > III (only if players build their own characters; hand out the agenda cards from
-> Chapter VIII either way; the full agendas are in chapter II), Chapter X beyond the Uninvited, the Attendant and the
-> Bought (open a block when its card comes up), Chapter VI (read it when the session
-> ends), Chapter XI (hand it out), and *Inventions*. The rest of Chapters IV and V is
+> chapter VIII either way; the full agendas are in chapter II), chapter X beyond the Uninvited, the Attendant and the
+> Bought (open a block when its card comes up), chapter VI (read it when the session
+> ends), chapter XI (hand it out), and *Inventions*. The rest of chapters IV and V is
 > depth: read it when a player goes looking for it.
 
 ---
@@ -39,16 +39,16 @@
 
 Oraga Night is a masquerade designed for three to five characters of 3rd to 5th level,
 and built for **four characters of 4th level**, freshly made or taken from the
-pregenerated guests in Chapter XI. Every fight in it is balanced for four, and every
+pregenerated guests in chapter XI. Every fight in it is balanced for four, and every
 fight card carries lines for three or five characters and for 3rd or 5th level. Use
 the one line nearest your table; the lines are not cumulative.
 Every problem in it can be solved by people with a good idea and the nerve to act on
 it, and most of them are better solved that way.
 
 **It is one session: four and a half to five hours.** Play starts in the street, with
-the party walking up the hill toward the palace (B0, Chapter IV), and ends at dawn
+the party walking up the hill toward the palace (see chapter IV, area B0), and ends at dawn
 outside the gate. Nothing is played before the street. Hooks and agendas are a
-five-minute pick at the start (*The First Five Minutes*, below), not a scene.
+five-minute pick at the start ("The First Five Minutes", below), not a scene.
 
 **Characters grow.** By milestone, the DM calls **5th level** at the
 epilogue, when the party is standing outside with whatever and whoever they carried
@@ -85,10 +85,10 @@ Document 5.2.1** (the 2024 rules) and runs at a 2014 table with the notes marked
 
 You do **not** need the Facets of Origin books or the Val'loh Facet. Chapter III
 carries everything a player needs about the tribes: their gifts as origin feats and
-the crystal charges they carry. Chapter VII holds every named guest, Chapter IX every
-fight, and Chapter X every stat block and every crystal charge (*Items of the Night*).
+the crystal charges they carry. Chapter VII holds every named guest, chapter IX every
+fight, and chapter X every stat block and every crystal charge ("Items of the Night").
 
-Print from Chapter VIII before you sit down: the **two-page DM sheet** and the **palace
+Print from chapter VIII before you sit down: the **two-page DM sheet** and the **palace
 diagram** for yourself, and the agenda cards and the invitation for the players.
 
 ## Reading This Book
@@ -103,12 +103,12 @@ themselves. Italic paragraphs that are not indented are notes to you.
 codes run from B0 to B13 and are the same in the text, the DM sheet, the palace
 diagram, the fight cards and every cross-reference.
 
-**Fight cards** live in Chapter IX, S1–S14, one card each. A room that has a fight
+**Fight cards** live in chapter IX, S1–S14, one card each. A room that has a fight
 points at its card by ID, and the card points back. Every card carries its encounter
 budget for four 4th-level characters, terrain, objective, clock, outs, morale, and
 scaling lines for three or five characters and for 3rd or 5th level.
 
-**Stat blocks** live in Chapter X, alphabetically, in SRD format. A creature name in
+**Stat blocks** live in chapter X, alphabetically, in SRD format. A creature name in
 **bold** has a stat block there. Nothing else in the module carries an enemy's numbers.
 
 **Clocks** are named, and most have four segments. Each card says how many, what
@@ -195,7 +195,7 @@ If the bells have not rung midnight by **3:15**, they ring now. The payoff the w
 night builds toward is Movements VI and VII. Protect them.
 
 **What to leave out, in order, when you are behind:** B13; the Undercurrents nobody is
-already on (Chapter IV marks them *if you have time*); a second fight card in any one
+already on (chapter IV marks them *if you have time*); a second fight card in any one
 Movement; S1; the east-wing scene, **unless somebody carries Agenda 4**. Do not cut the
 gate. It is the only scene the ending needs, and the fight in it is still optional.
 
@@ -204,16 +204,16 @@ gate. It is the only scene the ending needs, and the fight in it is still option
 Nothing before the street is played. It is picked, in about five minutes, with the
 cards on the table.
 
-**Before anyone sits down,** agree on lines and veils (*Safety and the Table*, below),
+**Before anyone sits down,** agree on lines and veils ("Safety and the Table", below),
 and put out the pregen sheets, the agenda cards and the invitation.
 
 **Then, around the table, once:**
 
-1. **A character.** A pregen from Chapter XI, or the player's own 4th-level character
-   built with Chapter III. With four players and the pregens, leave out Andra or Pello.
+1. **A character.** A pregen from chapter XI, or the player's own 4th-level character
+   built with chapter III. With four players and the pregens, leave out Andra or Pello.
    Leave out Ilesse only if another player takes Agenda 4.
-2. **An agenda.** Deal the cards from Chapter VIII. Match them to characters with the
-   table at the end of Chapter III, or deal face-down and let fate choose. Two players
+2. **An agenda.** Deal the cards from chapter VIII. Match them to characters with the
+   table at the end of chapter III, or deal face-down and let fate choose. Two players
    may share one, as rivals or partners.
 3. **A hook,** said aloud in one sentence: how this character got through the gate
    tonight. Pick one from the table below.
@@ -227,15 +227,15 @@ and put out the pregen sheets, the agenda cards and the invitation.
 | **The Entourage** | Somebody invited needed a companion, a bodyguard, a translator or a witness, and chose you. The best vantage point in the palace and the worst position to act from | The Vanished Servant · bodyguard to another player character |
 | **The Discarded Invitation** | A genuine card with someone else's name on it — bought, found, taken, or handed over by someone who wanted you to have exactly this problem. The custom protects you until midnight | The Unpaid Debt · The Story of a Lifetime |
 | **Hired for the Night** | Paid staff: musician, cook, footman, cellar hand. A servant's freedom of the halls and a servant's invisibility. You walk up the street with the others and go in through the kitchens (B10) | The Vanished Servant · The Circle's Reckoning |
-| **The Patron's Errand** | A faction needed hands it could not be traced to. Your agenda is pre-loaded and your fee half-paid — and your patron is also a snake (Chapter IX) | The Circle's Reckoning · The Prelate's Question · The Cousin's Errand |
-| **The Wrong Place, Deliberately** | Your own reason to be inside; the ball is your cover. Pick what you came for from something the palace already holds (Chapter IV) | The Unpaid Debt |
+| **The Patron's Errand** | A faction needed hands it could not be traced to. Your agenda is pre-loaded and your fee half-paid — and your patron is also a snake (see chapter IX) | The Circle's Reckoning · The Prelate's Question · The Cousin's Errand |
+| **The Wrong Place, Deliberately** | Your own reason to be inside; the ball is your cover. Pick what you came for from something the palace already holds (see chapter IV) | The Unpaid Debt |
 
 **Then tell the players two things,** and only these two. *This is a glittering party
 that goes terribly wrong.* And: *some of what happens tonight answers to a sword, and
 some of it does not. When it does not, the game will show you what your time bought.*
 Do not tell them how it goes wrong.
 
-**Then read the street** (B0, Chapter IV). The night has started.
+**Then read the street** (see chapter IV, area B0). The night has started.
 
 ## Checks, Inspiration, and the Ladder
 
@@ -251,16 +251,16 @@ ladder. Learn it once here; every chapter prints its DCs against it.
 
 Checks are written the SRD way: `a DC 15 Wisdom (Insight) check`. Where the source said a
 "knack applies", this edition means the character's proficiency in the fitting skill
-or tool, and a gifted character's gift (Chapter III) gives Advantage when the check is
+or tool, and a gifted character's gift (see chapter III) gives Advantage when the check is
 about the thing the gift does.
 
 **Success at a cost.** This night runs on partial wins, and it teaches them early.
 When a check fails by **4 or less**, you may offer the player what they wanted
 *with a cost attached*: name the cost first, then let them take it or leave it. The
-DM sheet in Chapter VIII has a short table of costs, so you can read one off the page
+DM sheet in chapter VIII has a short table of costs, so you can read one off the page
 instead of inventing one while four people watch you.
 
-**NPCs don't make checks outside a fight.** Every entry in Chapter VII gives the DC a guest
+**NPCs don't make checks outside a fight.** Every entry in chapter VII gives the DC a guest
 imposes instead. Inside a fight, they roll like anybody else.
 
 **Heroic Inspiration** replaces the Sparks of the original edition, and it works as
@@ -286,12 +286,12 @@ Inspiration is have-it-or-not, the list is short. Each award goes to one charact
 | **An agenda completed** | That character, on the spot |
 | **The pattern said out loud** — an omen read before anything explains it (the quiet guest's habits count), or an Undercurrent's find | The character whose player says it; once per Movement |
 | **A fight ended by an out** — the guards talked down, the toll paid, the thieves let go with something they can afford to lose, one snake turned on another | The character who took the out |
-| **A companion hauled up** at midnight (*Down, Not Out*, Chapter V) | The one who hauled, the first time in the night |
+| **A companion hauled up** at midnight (see chapter V, "Down, Not Out") | The one who hauled, the first time in the night |
 | **The Attendant distracted** — the first attempt of the night, whether or not it works, and any natural 20 (card S14) | The one who tried |
 | **Somebody carried out** in Movement VII | The one who carried them, for the first person they bring out |
 
 The best moment of the evening still earns Heroic Inspiration whether or not it is on
-this list. A fight card in Chapter IX that prints Inspiration is a reminder of one of
+this list. A fight card in chapter IX that prints Inspiration is a reminder of one of
 these rows, not an extra award.
 
 **Table I–4: Experience** *(if you track it)*
@@ -323,7 +323,7 @@ Everyone at this ball wears a knife; drawing it is the crime. So for five Moveme
 snakes coil. Each faction has a **threat line** — a scheme that starts politely, shows
 a **tell** a watchful table can catch, escalates if nobody steps on it, and comes out
 in the dark after the lights die. Chapter IX holds each line, its fight cards and the
-**Snake Tracker**; the DM sheet in Chapter VIII has the boxes you tick.
+**Snake Tracker**; the DM sheet in chapter VIII has the boxes you tick.
 
 Chapter IX runs them by three rules (see chapter IX, "The Snakes in the Pen"), and one
 more thing holds tonight:
@@ -339,7 +339,7 @@ more thing holds tonight:
   is **Focused**, and Focused it is devastating. The party's best weapon is the same
   one that works on the Uninvited: a clever distraction breaks its focus for a moment,
   and the fourth one sends it off to watch the fires. It can also be driven off by force (card
-  S14, Chapter IX; stat block, Chapter X; who it is, Chapter VII).
+  S14, chapter IX; stat block, chapter X; who it is, chapter VII).
 
 The Thenya are the exception to the name. Maiven Nolonaire is not a snake; she is a
 wary ally who can become a fight if somebody provokes her.
@@ -429,7 +429,7 @@ way: **Raunu Boranis died at his own ball. His wife and newborn child vanished t
 night. No one was ever charged, and no one ever learned the truth.**
 
 The module presents that outcome as the default, and it is built so the default lands
-through play, not against it — Chapter V explains how the night bends toward history
+through play, not against it — chapter V explains how the night bends toward history
 without ever taking the dice out of the players' hands.
 
 But it is your table. Sidebars marked **⟨If History Breaks⟩** appear wherever the
@@ -455,7 +455,7 @@ survivors die not knowing.
 That goes for spells, too. A fifth-edition party arrives with tools the original never
 had to answer — *Detect Thoughts*, *Speak with Dead*, *Zone of Truth*, *Identify*.
 Chapter X says what the obvious ones do against the Uninvited. Nothing on a spell list
-opens anything in *What the Module Never Says* (Chapter II). A spell that would reach
+opens anything in chapter II, "What the Module Never Says". A spell that would reach
 one of those answers gets rumor, contradiction, and the cold satisfaction of standing
 at the edge of something vast — which is what the world gives everybody else.
 
@@ -472,7 +472,7 @@ correcting a player mid-scene costs more than the error did.*
 > list: *Banishment*, *Hold Person*, a lucky crit. Chapter X answers each one.
 >
 > **Answer one: put the Delay die on the table.** Every Uninvited has a Delay count,
-> and the players can see it (*Buying Time*, Chapter V). Damage buys Delay only in
+> and the players can see it (see chapter V, "Buying Time"). Damage buys Delay only in
 > lumps; a door, a chandelier, a lie or the crowd buys it faster. Every point spent is a
 > hallway for Veier or a room of guests out. Say what it bought.
 >
@@ -487,7 +487,7 @@ correcting a player mid-scene costs more than the error did.*
 > Hard *feels* like taking the fiction seriously.
 >
 > **Answer one: the line's first check is a DC 13 Charisma (Persuasion) or DC 13
-> Wisdom (Insight) check**, and Chapter IV says so at B0 for exactly this reason. Set the tier there and let the rest of the night calibrate off
+> Wisdom (Insight) check**, and chapter IV says so at B0 for exactly this reason. Set the tier there and let the rest of the night calibrate off
 > it.
 >
 > **Answer two: an approach across station, behind a mask, is Easy: an ability check
@@ -519,8 +519,8 @@ correcting a player mid-scene costs more than the error did.*
 
 > **Troubleshooting — somebody draws in Movement I, or the party splits four ways**
 >
-> Both are handled in Chapter IV: *When Somebody Draws Early* (after *The Palace on
-> Alert*) and *Running a Scattered Party* (in *Running the Room*). The short version:
+> Both are handled in chapter IV: "When Somebody Draws Early" (after "The Palace on
+> Alert") and "Running a Scattered Party" (in "Running the Room"). The short version:
 > nobody is benched for longer than one Movement, and nobody sits unaddressed for more
 > than two cuts.
 
@@ -539,4 +539,4 @@ described closer than the table has agreed to.
 
 One tip above all others: **know the cast, not the script.** The night survives any
 player plan if you know what each named guest wants, fears, and will do when the lights
-go out. That is Chapter VII, and it is the chapter to skim again before you sit down.
+go out. That is chapter VII, and it is the chapter to skim again before you sit down.

@@ -1,8 +1,8 @@
 # X. The Bestiary
 
 *Every stat block the night needs, alphabetically, in the SRD 5.2.1 format. The
-fights that use them are in Chapter IX, The Snakes. The people behind them are in
-Chapter VII.*
+fights that use them are in chapter IX, The Snakes. The people behind them are in
+chapter VII.*
 
 > This work includes material from the System Reference Document 5.2.1 ("SRD 5.2.1")
 > by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD
@@ -14,7 +14,7 @@ Chapter VII.*
 ## How to Read This Chapter
 
 **The blocks are built for four 4th-level characters.** Challenge ratings and XP
-are the SRD's; the encounter math on every fight card in Chapter IX uses the SRD
+are the SRD's; the encounter math on every fight card in chapter IX uses the SRD
 5.2.1 budget per character (4th level: **Low 250 · Moderate 375 · High 500**; for four,
 **1,000 · 1,500 · 2,000**). The
 three Uninvited are the deliberate exception: they are CR 9 to 11, and they carry a
@@ -37,19 +37,23 @@ default, and most of these people would rather be anywhere else.
   leave a creature at 1 Hit Point and the Grappled condition instead, see *To the
   Terms*) is **Unconscious and Stable** instead of dying. Before
   midnight it wakes in the gatehouse cell at the start of the next Movement, and
-  somebody comes for it (Chapter IV, *The Palace on Alert*); after midnight the crowd
-  rule in *Down, Not Out* gets it up sooner.
+  somebody comes for it (see chapter IV, "The Palace on Alert"); after midnight the crowd
+  rule in "Down, Not Out" gets it up sooner.
 - **Down, Not Out.** A creature that one of the Uninvited or the Attendant reduces
   to 0 Hit Points, and that is not the Uninvited's quarry, is **Unconscious and
   Stable** — no Death Saving Throws — and is thrown clear. Anyone within 5 feet can
   take an action to get it back up with 1 Hit Point, and if nobody does, the crowd
-  does within two rounds. The whole rule is printed once, in Chapter V (*Midnight
-  Rules*); every block below that uses it says so.
+  does within two rounds. The whole rule is printed once, in chapter V ("Midnight
+  Rules"); every block below that uses it says so.
 
-**Standard numbers in the text.** DCs follow the ladder in Chapter I: **Easy 10 ·
+**Standard numbers in the text.** DCs follow the ladder in chapter I: **Easy 10 ·
 Standard 13–15 · Hard 18–20 · Very Hard 25.** "Bloodied" means at or below half
 Hit Points. "Heroic Inspiration" is plain Inspiration at a 2014 table. A 2014 table
-can ignore the Initiative score in parentheses; everything else reads the same.
+can ignore the Initiative score in parentheses; everything else reads the same. A
+creature with Advantage on Initiative has it folded into that score already. The
+**Gear** line names a creature's armor; its weapons are named in its Actions. "Until
+the scene ends" means until the fight ends or the Movement changes, whichever comes
+first.
 
 **Languages.** Every block lists Common. Read it as the speech of Rekuzan. The
 Uninvited speak it too, in turns of phrase two centuries out of fashion.
@@ -73,8 +77,8 @@ Uninvited speak it too, in turns of phrase two centuries out of fashion.
 
 Noncombatants — Raunu Boranis, Veier Nolonaire, Minister Corval, Anha, Mother
 Sella, Master Vell, Otta Vesh, and any one of the two hundred guests — are at the
-end of the chapter under **If It Comes to It**. Crystal charges and the night's loot are under **Items of the
-Night**.
+end of the chapter under "If It Comes to It". Crystal charges and the night's loot are under "Items of the
+Night".
 
 **Table X–2: Challenge Rating, XP and Proficiency Bonus** *(SRD 5.2.1)*
 
@@ -102,17 +106,17 @@ a leash that runs east, and that leash holds their lives, their minds and their
 shapes, and pulls them home when their work is done — or at the last bell, whichever
 comes first. Say that at the table when a player reaches for the spell, and then say
 what the spell bought. Most good ideas buy something. What they buy is **Delay**
-(Chapter V, *Buying Time*): each point costs one of the three a turn of movement
+(see chapter V, "Buying Time"): each point costs one of the three a turn of movement
 toward their errand, and every point is spent on somebody's life.
 
 **One rule covers most of the list.** Anything that would hold, block, hide from or
 wall off one of the Uninvited works for one round at most, and that round is **1
-Delay**. Deep Boranis ward-crystal is the only thing that holds them longer (Chapter
+Delay**. Deep Boranis ward-crystal is the only thing that holds them longer (chapter
 V, ⟨They trap one of the Uninvited⟩).
 
 | The table tries | What happens | Where it lives |
 |---|---|---|
-| Damage, a lot of it | Every round the party deals 30 or more damage to one of them, that one gains 1 Delay (never more than 1 a round). At 0 HP they step into the world's shadow and are back at full HP on their next turn; whoever dealt the last blow makes a save or is thrown | *Leashed*; Chapter V, *Buying Time* |
+| Damage, a lot of it | Every round the party deals 30 or more damage to one of them, that one gains 1 Delay (never more than 1 a round). At 0 HP they step into the world's shadow and are back at full HP on their next turn; whoever dealt the last blow makes a save or is thrown | *Leashed*; chapter V, "Buying Time" |
 | *Power Word* anything, *Disintegrate*, a long fall, drowning, "they're dead now" | They are not. The leash holds their lives | *Leashed* |
 | *Banishment*, *Plane Shift*, any teleport they didn't choose | The leash pulls them back to where they stood, at once. It landed, so it is 1 Delay | *Leashed* |
 | *Hold Person*, *Hold Monster*, *Sleep*, a stunning blow, *Hideous Laughter* | Their bodies are not their own to lose. Condition immunities; nothing bought | *Held by Something Else* |
@@ -120,12 +124,12 @@ V, ⟨They trap one of the Uninvited⟩).
 | *Polymorph*, *Flesh to Stone*, any shape-change | Their shapes are held too; nothing bought | *Held by Something Else* |
 | *Counterspell*, *Dispel Magic* | They cast no spells. Nothing on them is a spell. The leash is older than the word | — |
 | Grapple, *Web*, a net, a pin | The Wept and the Hollow step into the world's shadow and out of the grip: nothing bought. The Radiant can't while he is *Witnessed*: 1 Delay, and he spends his action tearing free | *Shadow-Step*; *Witnessed* |
-| A door, a wall, *Arcane Lock*, a barricade | Ordinary barriers don't reliably hold them. A new one put in the way at the right moment is a trick like any other: 1 Delay | *Shadow-Step*; Chapter V |
-| *Tiny Hut* | Force is not ward-crystal. The dome buys 1 Delay, once tonight. On their next turn the Uninvited it was set against opens it, as they open anything set against them, and the spell ends | Chapter V, *Buying Time* |
+| A door, a wall, *Arcane Lock*, a barricade | Ordinary barriers don't reliably hold them. A new one put in the way at the right moment is a trick like any other: 1 Delay | *Shadow-Step*; chapter V |
+| *Tiny Hut* | Force is not ward-crystal. The dome buys 1 Delay, once tonight. On their next turn the Uninvited it was set against opens it, as they open anything set against them, and the spell ends | Chapter V, "Buying Time" |
 | *Blindness/Deafness* | It works until they save at the end of a turn, and *Centuries of Practice* can refuse it outright. While they have the Blinded condition, they can't Shadow-Step, because they must see where they arrive. 1 Delay, the first time on each of them | *Shadow-Step* |
 | *Sanctuary* on Raunu or Veier | A ward, not a compulsion, and it holds once: 1 Delay, and then they walk through it and the spell ends | *Held by Something Else* |
 | *Invisibility* on Veier | It works once: **2 Delay** on the Radiant while he casts about for her. Then he finds her anyway | *Witnessed* |
-| *Slow* | 1 Delay, once on each of them. Its half Speed doesn't stack with *Witnessed* or with the Radiant's guilt | Chapter V, *Buying Time* |
+| *Slow* | 1 Delay, once on each of them. Its half Speed doesn't stack with *Witnessed* or with the Radiant's guilt | Chapter V, "Buying Time" |
 | *Darkness*, a *Dark-Burst*, doused lanterns | Magical Darkness blinds even their Darkvision, so they can't Shadow-Step inside it. On the Radiant it also takes away his witnesses: he is faster, not slower. A table that means to deny him his congregation has earned his Fracture check instead | *Witnessed*; his Fracture |
 | Steering a palace ward at them | Each ward-point in the palace steers once tonight. Against one of the Uninvited a steered ward holds 1 round: 1 Delay | Chapter V, principle 2 |
 | Turn them, frighten them, make them flee | They are not undead and they are not afraid. The Radiant above all cannot be turned | *Cannot Be Turned* |
@@ -146,7 +150,7 @@ the attack; these blocks are what it runs on. Their challenge ratings describe h
 hard they hit; nothing tonight stops them.
 
 **The Fractures, one rule for all three.** Each Uninvited has **tells** — human
-moments salted through Movements III–V (the table is in Chapter V), and anything
+moments salted through Movements III–V (the table is in chapter V), and anything
 they do openly during the attack counts too. A creature that has witnessed, or been
 told about, at least one of that Uninvited's tells can spend an action in a fight, or
 one beat out of one, within 30 feet of them, where they can hear, to reach the person
@@ -162,7 +166,7 @@ and should be.
   gains **2 Delay**.
 - **Failure by 4 or less:** it lands in full, and that Uninvited gains **2 Delay**, at a
   cost — the Uninvited answers first, with
-  one attack against the speaker (rolled in the open; *Down, Not Out* holds) or one
+  one attack against the speaker (rolled in the open; "Down, Not Out" holds) or one
   word the speaker will carry for the rest of their life. The DM chooses which.
 - **Failure by 5 or more:** it doesn't land and isn't spent. The Uninvited acts
   against the speaker, or the scene around them gets worse — the DM chooses. It can be
@@ -180,7 +184,9 @@ list below.
 ## The Blocks, A to Z
 
 ### The Attendant
-*A quiet guest with no master. Medium Construct, Unaligned*
+*A quiet guest with no master.*
+
+*Medium Construct, Unaligned*
 
 **AC** 17 · **Initiative** +3 (13)
 **HP** 229 (27d8 + 108)
@@ -193,13 +199,10 @@ list below.
 | Save | +4 | +3 | +7 | +9 | +1 | −2 |
 
 **Skills** Arcana +9, Perception +4
-**Damage Immunities** Poison, Psychic
-**Condition Immunities** Charmed, Exhaustion, Frightened, Poisoned
-**Senses** Darkvision 120 ft., Passive Perception 14
+**Immunities** Poison, Psychic; Charmed, Exhaustion, Frightened, Poisoned
+**Senses** Darkvision 120 ft.; Passive Perception 14
 **Languages** Common; speaks only when spoken to
-**CR** 8 (XP 3,900; PB +3) while Focused — nearly twice High for four 4th-level
-characters, on purpose (card S14). Idle, about CR 5 by the yardstick, and High by the
-clock. Award the full XP however the party gets it out of the way.
+**CR** 8 (XP 3,900; PB +3)
 
 **Traits**
 
@@ -240,11 +243,11 @@ S14.)*
 
 ***Clears the Way.*** Once each round, if it hasn't lost its turn to a distraction and
 no enemy is within 5 feet of it, the Attendant removes 1 Delay from one Uninvited in
-the same scene (Chapter V, *Buying Time*). It moves the obstacle: the barricade, the guest in the
+the same scene (see chapter V, "Buying Time"). It moves the obstacle: the barricade, the guest in the
 way, the door somebody was made to go round.
 
 ***Down, Not Out.*** A creature the Attendant reduces to 0 Hit Points is Unconscious
-and Stable, and is set aside somewhere out of the way (Chapter V, *Midnight Rules*).
+and Stable, and is set aside somewhere out of the way (see chapter V, "Midnight Rules").
 It removes interruptions. It doesn't hunt.
 
 ***Not Here.*** At 0 Hit Points the Attendant doesn't fall. It loses interest in being
@@ -274,7 +277,7 @@ A quiet guest dressed as a great house's attendant, carrying a cloak and a cup f
 master who never appears. It was sent to watch ahead of midnight and it is bad at
 it. Its magic is real; it rarely cares to use it. It will not fight before the Unmasking: confronted or attacked, it walks into a
 shadow and is gone for the rest of that Movement, and steel drawn on it is still steel drawn at the
-ball (Chapter IV, *The Palace on Alert*). Asked whom it serves, it names nobody, and
+ball (see chapter IV, "The Palace on Alert"). Asked whom it serves, it names nobody, and
 looks round, briefly, for the master it is supposed to have.
 
 > **Wants.** Nothing. It has an order — keep the three from being interrupted — and
@@ -291,14 +294,17 @@ looks round, briefly, for the master it is supposed to have.
 > **Nastier.** It is already Focused when the party first draws its attention at
 > midnight.
 > *Made, not born, and in the service of the Uninvited's master; it came through with
-> them tonight. What it is, for the DM alone: Chapter VII. Card: S14. Chapter V.*
+> them tonight. What it is, for the DM alone: chapter VII. Card: S14. Chapter V.*
+> *Its CR 8 is for the Focused Attendant: nearly twice High for four 4th-level
+> characters, on purpose (card S14). Idle, it is about CR 5 by the yardstick. Award
+> the full XP however the party gets it out of the way.*
 
 ---
 
 ### Boranis Cousin's Blade
 *Medium Humanoid (Human), Neutral*
 
-**AC** 14 (Chain Shirt under a festival coat) · **Initiative** +1 (11)
+**AC** 14 · **Initiative** +1 (11)
 **HP** 22 (4d8 + 4)
 **Speed** 30 ft.
 
@@ -309,15 +315,12 @@ looks round, briefly, for the master it is supposed to have.
 | Save | +2 | +1 | +1 | +0 | +0 | +1 |
 
 **Skills** Athletics +4, Intimidation +3
+**Gear** Chain Shirt
 **Senses** Passive Perception 10
 **Languages** Common
 **CR** 1/2 (XP 100; PB +2)
 
 **Traits**
-
-***Blood, Not Hire.*** A Cousin's Blade is a Boranis by blood, one of the kin who
-stood with Vorlain in the missing year, not a sword bought for the season. *House
-Boranis hired none*, and that stays true.
 
 ***Essin's Word.*** While Essin Boranis is within 60 feet and can be heard, the
 blade doesn't break, and it stops fighting the moment Essin tells it to.
@@ -341,14 +344,17 @@ blade uses this before it uses steel, and only somewhere a guard can't see.
 > the thing they are here to prevent.
 > **Nastier.** These are the cousins who were there in 3160: CR 1 (XP 200), 33 HP
 > (6d8 + 6), and a Multiattack of two Longsword attacks.
-> *Cast: Chapter VII, Vorlain and Essin. Cards: S6, S9, S13.*
+> *A Cousin's Blade is a Boranis by blood, one of the kin who stood with Vorlain in
+> the missing year, not a sword bought for the season. House Boranis hired none, and
+> that stays true. The chain shirt is worn under a festival coat. Cast: chapter VII,
+> Vorlain and Essin. Cards: S6, S9, S13.*
 
 ---
 
 ### Boranis Honor Guard
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 18 (Chain Mail, Shield) · **Initiative** +1 (11)
+**AC** 18 · **Initiative** +1 (11)
 **HP** 52 (8d8 + 16)
 **Speed** 30 ft.
 
@@ -359,6 +365,7 @@ blade uses this before it uses steel, and only somewhere a guard can't see.
 | Save | +5 | +1 | +4 | +0 | +1 | +0 |
 
 **Skills** Athletics +5, Perception +3
+**Gear** Chain Mail, Shield
 **Senses** Passive Perception 13
 **Languages** Common
 **CR** 2 (XP 450; PB +2)
@@ -384,7 +391,7 @@ damage.
 ***Seize.*** *Strength Saving Throw:* DC 13, one Medium or smaller creature within
 5 feet. *Failure:* The target has the Grappled condition (escape DC 13).
 
-***Warder (Each 1/Scene).*** The guard carries two charged house crystals, and
+***Warder (1/Day Each).*** The guard carries two charged house crystals, and
 releases one in place of one House Blade attack:
 - *Seal.* One door within 30 feet swings shut and grows closed. Until the scene
   ends it is locked; forcing it takes a DC 20 Strength (Athletics) check or a key
@@ -410,15 +417,17 @@ second round after this one, and this guard holds its ground until they come.
 > offers terms: surrender, and the evening ends in the gatehouse cell.
 > **Nastier.** A second guard arrives from the far end, and the way back is shut.
 > *There are nine. At midnight they die or fall on the dais protecting their chief,
-> quickly, at the edge of the frame (Chapter V); these numbers are for the hours
+> quickly, at the edge of the frame (see chapter V); these numbers are for the hours
 > before the bells. Cards: S4, S10.*
 
 ---
 
 ### Bought Blade
-*The Blade of the Bought. Medium Humanoid (Human), Lawful Neutral*
+*The Blade of the Bought.*
 
-**AC** 16 (Chain Shirt, Shield) · **Initiative** +1 (11)
+*Medium Humanoid (Human), Lawful Neutral*
+
+**AC** 16 · **Initiative** +1 (11)
 **HP** 22 (4d8 + 4)
 **Speed** 30 ft.
 
@@ -429,6 +438,7 @@ second round after this one, and this guard holds its ground until they come.
 | Save | +2 | +1 | +1 | +0 | +0 | +0 |
 
 **Skills** Athletics +4
+**Gear** Chain Shirt, Shield
 **Senses** Passive Perception 10
 **Languages** Common
 **CR** 1/2 (XP 100; PB +2)
@@ -460,9 +470,11 @@ Slashing damage.
 ---
 
 ### Bought Captain
-*The Captain-under-Contract. Medium Humanoid (Human), Lawful Neutral*
+*The Captain-under-Contract.*
 
-**AC** 17 (Half Plate Armor) · **Initiative** +2 (12)
+*Medium Humanoid (Human), Lawful Neutral*
+
+**AC** 17 · **Initiative** +2 (12)
 **HP** 97 (13d8 + 39)
 **Speed** 30 ft.
 
@@ -473,6 +485,7 @@ Slashing damage.
 | Save | +5 | +2 | +5 | +2 | +4 | +2 |
 
 **Skills** Insight +6, Perception +4, Persuasion +4
+**Gear** Half Plate Armor
 **Senses** Passive Perception 14
 **Languages** Common
 **CR** 4 (XP 1,100; PB +2)
@@ -489,7 +502,7 @@ shielded, healed or stood in front of someone during that first turn.
 like winning — the sergeant down, or half the Blades — the captain reads the clause
 only it has read, aloud, and the company's objective changes mid-scene. The Blades
 stop holding the gate and start looking for a woman in Thenya wool. *(What that
-tells the party, and what it must never achieve, is in Chapter V.)*
+tells the party, and what it must never achieve, is in chapter V.)*
 
 ***Talks While It Fights.*** Once Bloodied, or from its second round on the field if
 the fight is running long, the captain negotiates out loud every turn while it keeps
@@ -520,7 +533,7 @@ miss.
 > withdrawal will not resume the fight tonight for any inducement, including a
 > better offer. It also shifts for the fires — it contracted for diversions, not
 > for this — and for money honestly offered in front of witnesses.
-> **Nastier.** *Reform the Line* (1/Scene): if the company still has somewhere to
+> **Nastier.** *Reform the Line* (1/Day): if the company still has somewhere to
 > withdraw to, every Blade that disengaged this scene returns to the field in good
 > order.
 > *Arrives on S3's clock's second segment, or the round the sergeant falls. Card: S3.*
@@ -528,9 +541,11 @@ miss.
 ---
 
 ### Bought Sergeant
-*The Sergeant-at-Arms. Medium Humanoid (Human), Lawful Neutral*
+*The Sergeant-at-Arms.*
 
-**AC** 17 (Chain Shirt, Shield) · **Initiative** +2 (12)
+*Medium Humanoid (Human), Lawful Neutral*
+
+**AC** 17 · **Initiative** +2 (12)
 **HP** 52 (8d8 + 16)
 **Speed** 30 ft.
 
@@ -541,6 +556,7 @@ miss.
 | Save | +4 | +2 | +4 | +1 | +1 | +1 |
 
 **Skills** Insight +3, Perception +3, Persuasion +3
+**Gear** Chain Shirt, Shield
 **Senses** Passive Perception 13
 **Languages** Common
 **CR** 2 (XP 450; PB +2)
@@ -554,7 +570,7 @@ Slashing damage. Drawn second; the contract case is drawn first.
 
 **Bonus Actions**
 
-***Hold the Terms (1/Scene).*** The sergeant states the contract's boundary aloud —
+***Hold the Terms (1/Day).*** The sergeant states the contract's boundary aloud —
 a line on the ground it can see within 60 feet. Every Blade that can hear it can use
 its Reaction to move up to half its Speed toward its own side of that line without
 provoking Opportunity Attacks. Until the scene ends, those Blades have Advantage on
@@ -583,7 +599,7 @@ miss.
 ### Church Warden
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 16 (Chain Shirt, Shield) · **Initiative** +1 (11)
+**AC** 16 · **Initiative** +1 (11)
 **HP** 33 (6d8 + 6)
 **Speed** 30 ft.
 
@@ -594,6 +610,7 @@ miss.
 | Save | +2 | +1 | +1 | +0 | +3 | +0 |
 
 **Skills** Insight +3, Perception +3, Religion +2
+**Gear** Chain Shirt, Shield
 **Senses** Passive Perception 13
 **Languages** Common
 **CR** 1 (XP 200; PB +2)
@@ -640,7 +657,7 @@ another warden within 5 feet of it. *Response:* The attack roll has Disadvantage
 ### Circle Hired Knife
 *Medium Humanoid (Human), Neutral*
 
-**AC** 15 (Studded Leather Armor under a plain good coat) · **Initiative** +3 (13)
+**AC** 15 · **Initiative** +3 (13)
 **HP** 32 (5d8 + 10)
 **Speed** 30 ft.
 
@@ -651,6 +668,7 @@ another warden within 5 feet of it. *Response:* The attack roll has Disadvantage
 | Save | +1 | +5 | +2 | +0 | +1 | +0 |
 
 **Skills** Intimidation +2, Perception +3, Stealth +5
+**Gear** Studded Leather Armor
 **Senses** Passive Perception 13
 **Languages** Common
 **CR** 1 (XP 200; PB +2)
@@ -685,14 +703,16 @@ Advantage against.
 > taken and walks back into the crowd like a guest.
 > **Nastier.** The Circle paid for a fourth, and he has been in the service run
 > all night.
-> *Every great house hired extra swords this season; these are the Circle's share.
+> *The armor is worn under a plain good coat. Every great house hired extra swords this season; these are the Circle's share.
 > Cards: S7, S12.*
 
 ---
 ### Damaris Kovaun
-*Prelate of the Church. Medium Humanoid (Human), Lawful Neutral*
+*Prelate of the Church.*
 
-**AC** 11 (vestments) · **Initiative** +1 (11)
+*Medium Humanoid (Human), Lawful Neutral*
+
+**AC** 11 · **Initiative** +1 (11)
 **HP** 33 (6d8 + 6)
 **Speed** 30 ft.
 
@@ -713,8 +733,6 @@ Advantage against.
 faith must succeed on a DC 20 Charisma (Deception) check; she has heard everything. She recognizes a blessing, a rite or a form of prayer, however
 old, if anyone living has ever used it; an older form she knows only as one that
 nobody living uses.
-
-***Pays Her Debts.*** A promise the Prelate makes in the Church's name is kept.
 
 **Actions**
 
@@ -741,14 +759,14 @@ to move up to half its Speed and make one Mace attack or use Seize for Questioni
 > would be seen, the moment she has what she came for, or the moment someone gives
 > her an honest judgment she can file. She pays for it.
 > **Nastier.** She has already sent word, and a fourth warden is on the way.
-> *Cast: Chapter VII. Card: S8.*
+> *A promise the Prelate makes in the Church's name is kept. Cast: chapter VII. Card: S8.*
 
 ---
 
 ### Draunel Duelist
 *Medium Humanoid (Human), Neutral*
 
-**AC** 15 (Studded Leather Armor) · **Initiative** +3 (13)
+**AC** 15 · **Initiative** +3 (13)
 **HP** 27 (5d8 + 5)
 **Speed** 30 ft.
 
@@ -759,6 +777,7 @@ to move up to half its Speed and make one Mace attack or use Seize for Questioni
 | Save | +0 | +5 | +1 | +0 | +0 | +2 |
 
 **Skills** Acrobatics +5, Intimidation +4, Performance +4
+**Gear** Studded Leather Armor
 **Senses** Passive Perception 10
 **Languages** Common
 **CR** 1 (XP 200; PB +2)
@@ -801,9 +820,11 @@ attack roll. *Response:* The duelist makes one Rapier attack against it.
 ---
 
 ### Essar Draunel
-*Lord of House Draunel. Medium Humanoid (Human), Neutral*
+*Lord of House Draunel.*
 
-**AC** 16 (Breastplate under silk) · **Initiative** +3 (13)
+*Medium Humanoid (Human), Neutral*
+
+**AC** 16 · **Initiative** +3 (13)
 **HP** 58 (9d8 + 18)
 **Speed** 30 ft.
 
@@ -814,6 +835,7 @@ attack roll. *Response:* The duelist makes one Rapier attack against it.
 | Save | +1 | +5 | +2 | +2 | +3 | +5 |
 
 **Skills** Deception +5, Insight +3, Intimidation +5, Persuasion +7
+**Gear** Breastplate
 **Senses** Passive Perception 11
 **Languages** Common
 **CR** 3 (XP 700; PB +2)
@@ -851,14 +873,16 @@ miss.
 > offers his hand, and is the first to say it was a misunderstanding among friends.
 > **Nastier.** Iron 3 is in the room: a third duelist, who has watched Vorlain all
 > night and will swear to anything.
-> *Cast: Chapter VII. Cards: S9 (at the rail), S13.*
+> *The breastplate is worn under silk. Cast: chapter VII. Cards: S9 (at the rail), S13.*
 
 ---
 
 ### Essin Boranis
-*Vorlain's Cousin. Medium Humanoid (Human), Neutral*
+*Vorlain's Cousin.*
 
-**AC** 14 (leather) · **Initiative** +3 (13)
+*Medium Humanoid (Human), Neutral*
+
+**AC** 14 · **Initiative** +3 (13)
 **HP** 45 (10d8)
 **Speed** 30 ft.
 
@@ -869,6 +893,7 @@ miss.
 | Save | +0 | +5 | +0 | +4 | +2 | +2 |
 
 **Skills** Deception +6, Insight +6, Perception +4, Sleight of Hand +5, Stealth +5
+**Gear** Leather Armor
 **Senses** Passive Perception 14
 **Languages** Common
 **CR** 2 (XP 450; PB +2)
@@ -910,14 +935,16 @@ attack's target instead.
 > trade almost anything — a favor, a name, where a body is — for that.
 > **Nastier.** Essin already knows what you said to Vorlain, because a cousin was
 > standing at your elbow when you said it.
-> *Cast: Chapter VII. Cards: S9, S13.*
+> *Cast: chapter VII. Cards: S9, S13.*
 
 ---
 
 ### Feuding Kinsman
-*A Vaskarin cousin, a Tessarin uncle, and everyone who came with them. Medium Humanoid (Human), Neutral*
+*A Vaskarin cousin, a Tessarin uncle, and everyone who came with them.*
 
-**AC** 11 (festival finery) · **Initiative** +1 (11)
+*Medium Humanoid (Human), Neutral*
+
+**AC** 11 · **Initiative** +1 (11)
 **HP** 9 (2d8)
 **Speed** 30 ft.
 
@@ -969,7 +996,7 @@ kinsman's next turn has Advantage.
 ### Gallery Knife
 *Medium Humanoid (Human), Neutral*
 
-**AC** 13 (leather) · **Initiative** +2 (12)
+**AC** 13 · **Initiative** +2 (12)
 **HP** 13 (3d8)
 **Speed** 30 ft.
 
@@ -980,6 +1007,7 @@ kinsman's next turn has Advantage.
 | Save | +0 | +2 | +0 | +0 | +0 | +0 |
 
 **Skills** Sleight of Hand +4, Stealth +4
+**Gear** Leather Armor
 **Senses** Passive Perception 10
 **Languages** Common
 **CR** 1/4 (XP 50; PB +2)
@@ -1014,7 +1042,9 @@ passages, if they are in reach.
 ---
 
 ### The Hollow
-*The blank gray mask. Medium Humanoid (Human)*
+*The blank gray mask.*
+
+*Medium Humanoid (Human)*
 <!-- TODO-Q18: alignment left blank pending owner ruling Q18 (BESTIARY-21). -->
 
 **AC** 16 · **Initiative** +3 (13)
@@ -1029,11 +1059,11 @@ passages, if they are in reach.
 
 **Skills** Athletics +9, Perception +6
 **Resistances** Bludgeoning, Piercing, Slashing
-**Condition Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed,
+**Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed,
 Petrified, Stunned, Unconscious
-**Senses** Darkvision 120 ft., Passive Perception 16
+**Senses** Darkvision 120 ft.; Passive Perception 16
 **Languages** Common, two centuries out of fashion
-**CR** 9 (XP 5,000; PB +4) — *but see Leashed*
+**CR** 9 (XP 5,000; PB +4)
 
 **Traits**
 
@@ -1051,15 +1081,15 @@ and nothing holds him.
 can't be Charmed, Frightened, put to sleep, compelled, commanded or transformed, and
 spells and effects that would do any of those simply fail.
 
-***Centuries of Practice (3/Night).*** If the Hollow fails a saving throw, he can
+***Centuries of Practice (3/Day).*** If the Hollow fails a saving throw, he can
 choose to succeed instead.
 
-***Delay.*** The Hollow has a Delay count (Chapter V, *Buying Time*). At the start of
+***Delay.*** The Hollow has a Delay count (see chapter V, "Buying Time"). At the start of
 his turn, if he has any, spend 1: for that turn he is off his post — *The Post*
 doesn't apply, and a dozen guests go through the doors behind him.
 
 ***Down, Not Out.*** A creature the Hollow reduces to 0 Hit Points is Unconscious and
-Stable, and is thrown up to 30 feet clear (Chapter V, *Midnight Rules*). He never
+Stable, and is thrown up to 30 feet clear (see chapter V, "Midnight Rules"). He never
 attacks a creature at 0 Hit Points.
 
 ***Unraveling Presence.*** Within 30 feet of the Hollow, a crystal charge released by
@@ -1071,12 +1101,15 @@ gutter at this range but hold.
 passes through them without his leave. A creature that tries must succeed on a DC 17
 Strength saving throw or be pushed 10 feet away and have the Prone condition. On a
 success, the creature holds its ground but still doesn't get past him. The crowd
-makes no saving throw: it breaks around him like water (Chapter V, *Two Hundred
-People*).
+makes no saving throw: it breaks around him like water (see chapter V, "Two Hundred
+People").
 
 ***Only the Doors.*** The Hollow attacks only creatures that come for the doors or
 attack him. He never advances if holding will do, and he never follows anyone who
 backs away.
+
+***Bloodied.*** While Bloodied, the Hollow gives ground to the doors and holds there.
+He follows no one.
 
 **Actions**
 
@@ -1094,10 +1127,6 @@ The target is pushed 5 feet away.
 ***Shadow-Step.*** The Hollow teleports up to 60 feet to an unoccupied space he can
 see. Any grapple or restraint on him ends. He arrives rather than runs; ordinary
 doors, walls and barricades do not reliably hold him. Deep Boranis ward-crystal does.
-
-**When Bloodied**
-
-He gives ground to the doors and holds there. He follows no one.
 
 **Fracture — Despair (once).** Ferocity is useless; you cannot frighten a man who
 would not much mind ending. *Sincerity* works. See him; name the emptiness truly;
@@ -1122,9 +1151,11 @@ he goes home before he is called. *(Check and DCs: The Fractures, above.)*
 
 ---
 ### Maiven Nolonaire
-*The Cousin from the Border. Medium Humanoid (Human), Neutral Good*
+*The Cousin from the Border.*
 
-**AC** 15 (Studded Leather Armor under border wool) · **Initiative** +3 (13)
+*Medium Humanoid (Human), Neutral Good*
+
+**AC** 15 · **Initiative** +3 (13)
 **HP** 58 (9d8 + 18)
 **Speed** 30 ft.
 
@@ -1135,6 +1166,7 @@ he goes home before he is called. *(Check and DCs: The Fractures, above.)*
 | Save | +2 | +5 | +2 | +0 | +4 | +1 |
 
 **Skills** Athletics +4, Insight +6, Perception +4, Survival +4
+**Gear** Studded Leather Armor
 **Senses** Passive Perception 14
 **Languages** Common
 **CR** 3 (XP 700; PB +2)
@@ -1171,16 +1203,18 @@ must succeed on a DC 13 Dexterity saving throw or drop it.
 > before it starts.
 > **Nastier.** She is already over the wall, and the slingers are covering her from
 > the garden.
-> *Not a snake: a wary ally who can become a fight if the party stands between her and
+> *The armor is worn under border wool. Not a snake: a wary ally who can become a fight if the party stands between her and
 > her kinswoman. At the Unmasking she goes toward the east wing, immediately — see
-> Chapter V. Cast: Chapter VII. Card: S10.*
+> chapter V. Cast: chapter VII. Card: S10.*
 
 ---
 
 ### Pellin Corro
-*The Phern Magnate. Medium Humanoid (Human), Neutral Good*
+*The Phern Magnate.*
 
-**AC** 11 · **Initiative** +1 (11), with Advantage
+*Medium Humanoid (Human), Neutral Good*
+
+**AC** 11 · **Initiative** +1 (16)
 **HP** 13 (3d8)
 **Speed** 30 ft.
 
@@ -1219,14 +1253,14 @@ up to its Speed toward him, or toward the way out he is pointing at.
 > **Breaks.** Corro never fights. If a fight comes near him he leaves it, and his
 > bodyguards go with him.
 > **Nastier.** None. Corro has no secret; that is the point of him.
-> *Cast: Chapter VII. Card: S11.*
+> *Cast: chapter VII. Card: S11.*
 
 ---
 
 ### Phern Bodyguard
 *Medium Humanoid (Human), Neutral*
 
-**AC** 15 (Chain Shirt) · **Initiative** +4 (14), with Advantage
+**AC** 15 · **Initiative** +4 (19)
 **HP** 33 (6d8 + 6)
 **Speed** 30 ft.
 
@@ -1237,6 +1271,7 @@ up to its Speed toward him, or toward the way out he is pointing at.
 | Save | +4 | +2 | +1 | +0 | +4 | +0 |
 
 **Skills** Athletics +4, Insight +4, Perception +4
+**Gear** Chain Shirt
 **Senses** Passive Perception 14
 **Languages** Common
 **CR** 1 (XP 200; PB +2)
@@ -1282,7 +1317,9 @@ instead.
 ---
 
 ### The Radiant
-*The mirror-bright mask. Medium Humanoid (Human)*
+*The mirror-bright mask.*
+
+*Medium Humanoid (Human)*
 <!-- TODO-Q18: alignment left blank pending owner ruling Q18 (BESTIARY-21). -->
 
 **AC** 17 · **Initiative** +9 (19)
@@ -1297,11 +1334,11 @@ instead.
 
 **Skills** Acrobatics +9, Performance +13, Perception +7, Religion +6
 **Resistances** Bludgeoning, Piercing, Slashing
-**Condition Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed,
+**Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed,
 Petrified, Stunned, Unconscious
-**Senses** Darkvision 120 ft., Passive Perception 17
+**Senses** Darkvision 120 ft.; Passive Perception 17
 **Languages** Common, two centuries out of fashion
-**CR** 10 (XP 5,900; PB +4) — *but see Leashed*
+**CR** 10 (XP 5,900; PB +4)
 
 **Traits**
 
@@ -1324,18 +1361,18 @@ he is not afraid. No spell, effect, argument or wound can change his quarry, mak
 retreat, or make him stop: *Command*, *Suggestion*, *Compulsion*, *Calm Emotions* and
 every effect like them simply fail. He can only be made to feel. See his Fracture.
 
-***Centuries of Practice (3/Night).*** If the Radiant fails a saving throw, he can
+***Centuries of Practice (3/Day).*** If the Radiant fails a saving throw, he can
 choose to succeed instead.
 
-***Delay.*** The Radiant has a Delay count (Chapter V, *Buying Time*). At the start of
+***Delay.*** The Radiant has a Delay count (see chapter V, "Buying Time"). At the start of
 his turn, if he has any, spend 1: he doesn't move toward Veier that turn. In the east
 wing, each point spent lets one more person in his way get clear. Delay he still has
 when he breaks past Master Vell at the Crossing is spent at the river gate, and one
 point is enough.
 
 ***Down, Not Out.*** A creature other than Veier Nolonaire that the Radiant reduces
-to 0 Hit Points is Unconscious and Stable, and is thrown clear (Chapter V, *Midnight
-Rules*). He never attacks a creature at 0 Hit Points.
+to 0 Hit Points is Unconscious and Stable, and is thrown clear (see chapter V, "Midnight
+Rules"). He never attacks a creature at 0 Hit Points.
 
 ***Unraveling Presence.*** Within 30 feet of the Radiant, a crystal charge released by
 anyone works only if its bearer succeeds on a DC 13 Charisma check; on a failure the
@@ -1348,6 +1385,10 @@ he can't use Shadow-Step: he slows, he poses, he savors. Nobody sees him in the 
 in the unlit corridors after midnight, a pursuer needs a light (a lantern, a candle, a
 *Steady Light*) for him to be Witnessed. *Witnessed* and his guilt (see his Fracture)
 don't stack: at their worst he moves at 20 feet, never slower.
+
+***Bloodied.*** When the Radiant is first Bloodied, he re-stages. On his next turn he
+makes no attacks: he steps back to wherever the most eyes are, and poses. Then he
+resumes.
 
 **Actions**
 
@@ -1368,11 +1409,6 @@ offers the blow upward.
 see. Any grapple or restraint on him ends. He arrives rather than runs; ordinary
 doors, walls and barricades do not reliably hold him. Deep Boranis ward-crystal does.
 He can't do this while Witnessed.
-
-**When Bloodied**
-
-He re-stages. On his next turn he makes no attacks: he steps back to wherever the
-most eyes are, and poses. Then he resumes.
 
 **Fracture — Devotion (once).** The Radiant can't be turned — not from the hunt, not
 from the errand, not by darkness or doubt. What he can be made to do is *feel*. Two
@@ -1410,7 +1446,9 @@ turn. *(Check and DCs: The Fractures, above.)*
 ---
 
 ### Rhaza Callun
-*Mistress of the Merchant's Circle. Medium Humanoid (Human), Lawful Neutral*
+*Mistress of the Merchant's Circle.*
+
+*Medium Humanoid (Human), Lawful Neutral*
 
 **AC** 11 · **Initiative** +1 (11)
 **HP** 22 (5d8)
@@ -1433,7 +1471,7 @@ turn. *(Check and DCs: The Fractures, above.)*
 (Deception) check. About anything human, it takes a DC 10 Charisma (Deception) check.
 
 ***Paid on Delivery.*** Every Circle Hired Knife obeys Callun's word the moment it
-reaches them. She can call them off as a free action, once each turn, even on
+reaches them. She can call them off at any time, no action required, once each turn, even on
 someone else's turn.
 
 **Actions**
@@ -1458,14 +1496,14 @@ instead.
 > *prepared*. The moment her people's work would be seen as hers, or would draw
 > blood she did not price in, she calls them off and pays whoever makes it go away.
 > **Nastier.** She has already bought what you are trying to sell her.
-> *Cast: Chapter VII. Cards: S7, S12.*
+> *Cast: chapter VII. Cards: S7, S12.*
 
 ---
 
 ### Sect Guard
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 16 (Chain Shirt, Shield) · **Initiative** +1 (11)
+**AC** 16 · **Initiative** +1 (11)
 **HP** 11 (2d8 + 2)
 **Speed** 30 ft.
 
@@ -1476,6 +1514,7 @@ instead.
 | Save | +1 | +1 | +1 | +0 | +0 | +0 |
 
 **Skills** Perception +2
+**Gear** Chain Shirt, Shield
 **Senses** Passive Perception 12
 **Languages** Common
 **CR** 1/8 (XP 25; PB +2)
@@ -1505,9 +1544,11 @@ damage.
 
 ---
 ### Tavva
-*The Other Thief. Medium Humanoid (Human), Neutral*
+*The Other Thief.*
 
-**AC** 15 (Studded Leather Armor under Boranis livery) · **Initiative** +5 (15)
+*Medium Humanoid (Human), Neutral*
+
+**AC** 15 · **Initiative** +5 (15)
 **HP** 44 (8d8 + 8)
 **Speed** 30 ft.
 
@@ -1518,6 +1559,7 @@ damage.
 | Save | +0 | +5 | +1 | +4 | +2 | +2 |
 
 **Skills** Deception +6, Insight +4, Perception +6, Sleight of Hand +7, Stealth +7
+**Gear** Studded Leather Armor
 **Senses** Passive Perception 16
 **Languages** Common
 **CR** 2 (XP 450; PB +2)
@@ -1537,6 +1579,10 @@ after one fires, she and every Gallery Knife within 10 feet of her can move up t
 their Speed without provoking Opportunity Attacks, and are simply elsewhere. A
 creature that can see Tavva when the charge fires can use its Reaction to move with
 her, up to its own Speed, and keep her in sight. If nobody does, she is gone.
+
+***Bloodied.*** When Tavva is first Bloodied, she uses Release a Charge on her next
+turn (a Bonus Action). If she has none left, she starts bargaining, out loud, between
+blows.
 
 **Actions**
 
@@ -1561,11 +1607,6 @@ Terrain until someone spends an action clearing it.
 ***Uncanny Dodge.*** *Trigger:* An attacker Tavva can see hits her with an attack
 roll. *Response:* She halves the attack's damage against her.
 
-**When Bloodied**
-
-She releases a charge. If she has none left, she starts bargaining, out loud,
-between blows.
-
 > **Wants.** Out with something. Shifts for a clear exit or a better payer, and
 > honors any deal that ends with her walking and somebody else holding the bag.
 > **Tells.** Opens with feints and furniture, not the knife. A hand going to her
@@ -1576,16 +1617,16 @@ between blows.
 > crew — that starts costing blood.
 > **Nastier.** She has done this before, in better houses: a third charge (a second
 > *Dark-Burst*), and one more Gallery Knife than the card says.
-> *Entirely winnable. At 0 HP she is down, and caught; give the table this one clean
+> *The armor is worn under Boranis livery. Entirely winnable. At 0 HP she is down, and caught; give the table this one clean
 > victory with both hands. The midnight attack is nothing to do with her. Cast:
-> Chapter VII. Cards: S2, S5.*
+> chapter VII. Cards: S2, S5.*
 
 ---
 
 ### Thenya Border Slinger
 *Medium Humanoid (Human), Neutral*
 
-**AC** 14 (leather) · **Initiative** +3 (13)
+**AC** 14 · **Initiative** +3 (13)
 **HP** 19 (3d8 + 6)
 **Speed** 30 ft.
 
@@ -1596,6 +1637,7 @@ between blows.
 | Save | +0 | +3 | +2 | +0 | +1 | +0 |
 
 **Skills** Perception +3, Stealth +5, Survival +3
+**Gear** Leather Armor
 **Senses** Passive Perception 13
 **Languages** Common
 **CR** 1/2 (XP 100; PB +2)
@@ -1604,10 +1646,6 @@ between blows.
 
 ***Holding Ground.*** The slinger has Advantage on saving throws against being pushed
 or given the Prone condition.
-
-***Stones Before Steel.*** In a hall full of knives worn as dress, a sling is the one
-weapon nobody at this ball wears for show. The slinger uses it first, and aims at
-hands.
 
 **Actions**
 
@@ -1622,18 +1660,21 @@ damage.
 > **Tells.** Count the guards on the east side of the court, not the gate. Walk the
 > gallery to the east wing corridor, look at the doors a long moment, walk back; the
 > second time, they time it. Stop drinking. Uncoil a rope in the garden below a lit
-> window.
+> window. In a fight, uses the sling first, and aims at hands.
 > **Breaks.** On Maiven's word, or when she is down or safe. They will not leave her.
 > **Nastier.** One of them has been over that wall already tonight, and knows which
 > window.
-> *Two or three came with the delegation. Card: S10.*
+> *In a hall full of knives worn as dress, a sling is the one weapon nobody at this
+> ball wears for show. Two or three came with the delegation. Card: S10.*
 
 ---
 
 ### Vorlain Boranis
-*The Brother. Medium Humanoid (Human), Neutral*
+*The Brother.*
 
-**AC** 15 (Studded Leather Armor under silk) · **Initiative** +3 (13)
+*Medium Humanoid (Human), Neutral*
+
+**AC** 15 · **Initiative** +3 (13)
 **HP** 60 (11d8 + 11)
 **Speed** 30 ft.
 
@@ -1644,6 +1685,7 @@ damage.
 | Save | +2 | +5 | +1 | +2 | +3 | +5 |
 
 **Skills** Deception +7, Insight +5, Perception +3, Persuasion +5
+**Gear** Studded Leather Armor
 **Senses** Passive Perception 13
 **Languages** Common
 **CR** 3 (XP 700; PB +2)
@@ -1660,7 +1702,7 @@ knows one thing it would rather he did not.
 
 ***In His Cups.*** Drunk — which takes real work, and Essin will try to stop it —
 Vorlain has Disadvantage on Wisdom saving throws and Wisdom (Insight) checks, and
-says one true thing (Chapter VII).
+says one true thing (see chapter VII).
 
 **Actions**
 
@@ -1685,12 +1727,14 @@ miss.
 > **Nastier.** Sober and cornered, he remembers exactly how the missing year began:
 > he starts the fight with Brief and Efficient already paid for, and Essin at his
 > side.
-> *By dawn, the prime suspect. Cast: Chapter VII. Card: S13.*
+> *The armor is worn under silk. By dawn, the prime suspect. Cast: chapter VII. Card: S13.*
 
 ---
 
 ### The Wept
-*The gray mask with carved tears. Medium Humanoid (Human)*
+*The gray mask with carved tears.*
+
+*Medium Humanoid (Human)*
 <!-- TODO-Q18: alignment left blank pending owner ruling Q18 (BESTIARY-21). -->
 
 **AC** 18 · **Initiative** +7 (17)
@@ -1704,13 +1748,12 @@ miss.
 | Save | +10 | +3 | +8 | +1 | +7 | +4 |
 
 **Skills** Athletics +10, Insight +7, Perception +7
-**Resistances** Bludgeoning, Piercing, Slashing — *not armor: wrongness; blades land
-and matter less than they should*
-**Condition Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed,
+**Resistances** Bludgeoning, Piercing, Slashing
+**Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed,
 Petrified, Stunned, Unconscious
-**Senses** Darkvision 120 ft., Passive Perception 17
+**Senses** Darkvision 120 ft.; Passive Perception 17
 **Languages** Common, two centuries out of fashion
-**CR** 11 (XP 7,200; PB +4) — *but see Leashed*
+**CR** 11 (XP 7,200; PB +4)
 
 **Traits**
 
@@ -1729,18 +1772,23 @@ bell of Oraga, she leaves, and nothing holds her.
 can't be Charmed, Frightened, put to sleep, compelled, commanded or transformed, and
 spells and effects that would do any of those simply fail.
 
-***Centuries of Practice (3/Night).*** If the Wept fails a saving throw, she can
+***Centuries of Practice (3/Day).*** If the Wept fails a saving throw, she can
 choose to succeed instead.
 
-***Delay.*** The Wept has a Delay count (Chapter V, *Buying Time*). At the start of
+***Delay.*** The Wept has a Delay count (see chapter V, "Buying Time"). At the start of
 her turn, if she has any, spend 1: she doesn't move toward Raunu that turn, and he
 gets a round of work out of it (a dozen guests out of the Court, or Veier one sealed
 door further down). She reaches Raunu on her third turn of moving toward him,
 through the wards he throws up himself. While
 she has 2 or more Delay, her Fracture's DC is 15.
 
+***Bloodied: The Sorrow Slips.*** While the Wept is Bloodied, the mask's carved tears
+begin to run — actually run. Her attacks can't score Critical Hits, and she hums a
+cradle-song mid-attack without knowing it. She is losing the argument with what she
+used to be.
+
 ***Down, Not Out.*** A creature other than Raunu Boranis that the Wept reduces to 0
-Hit Points is Unconscious and Stable (Chapter V, *Midnight Rules*). If a creature is
+Hit Points is Unconscious and Stable (see chapter V, "Midnight Rules"). If a creature is
 about to die shielding him, she takes it out of the fight instead of out of the
 world — through a broken wall, at 0 Hit Points, Stable. She never attacks a creature
 at 0 Hit Points.
@@ -1768,12 +1816,6 @@ never a third attack, and she can't make it if she has already made both.
 see. Any grapple or restraint on her ends. She arrives rather than runs; ordinary
 doors, walls and barricades do not reliably hold her. Deep Boranis ward-crystal does.
 
-**When Bloodied — The Sorrow Slips**
-
-The mask's carved tears begin to run — actually run. Her attacks can't score
-Critical Hits, and she hums a cradle-song mid-attack without knowing it. She is
-losing the argument with what she used to be.
-
 **Fracture — Sorrow (once).** It needs ammunition gathered in play, or 2 Delay
 banked against her (then its DC is 15). On a success she
 stops — mid-motion, mid-kill — and for one full round she takes no actions, no
@@ -1781,7 +1823,7 @@ Bonus Actions, no Reactions and does not move: a woman standing in a burning
 ballroom, long enough to pull a victim clear, seal a ward, finish an escape. At a
 cost, she stops, but answers first with one terrible parting blow (rolled in the
 open) or one word. *(Check and DCs: The Fractures, above. A table that lands this
-before Raunu falls has earned ⟨They save Raunu⟩, Chapter V.)*
+before Raunu falls has earned ⟨They save Raunu⟩, chapter V.)*
 
 > **Wants.** Raunu Boranis, on the dais, and nothing else until that is done. She has
 > a task, not a body count.
@@ -1797,7 +1839,8 @@ before Raunu falls has earned ⟨They save Raunu⟩, Chapter V.)*
 > **Nastier.** Late in the attack she grows faster, sloppier, and more human: after
 > the party's third round against her, she makes three Strength Like a Fact attacks
 > a turn, and every hit is loud with grief.
-> *A person — gracious and quietly sad, who praised the wine and danced beautifully.
+> *Her resistances are not armor but wrongness: blades land and matter less than they
+> should. A person — gracious and quietly sad, who praised the wine and danced beautifully.
 > She leads. One of three. Chapter V.*
 
 ---
@@ -1810,17 +1853,17 @@ happen. None of them earns XP.*
 
 **Raunu Boranis** — *Medium Humanoid (Human).* AC 12 · HP 40 · Speed 30 ft. He will
 not fight a guest, and nothing in this module makes him. If it comes to it, on his
-turn he never attacks: he releases a ward (Chapter V), and a door, a light or a wall
+turn he never attacks: he releases a ward (see chapter V), and a door, a light or a wall
 of crystal answers him. Deceiving him takes a DC 25 Charisma (Deception) check.
 Impressing him is easier than anyone
 expects: tell him a true thing he did not already know. *The two crystals at his
-wrist are his, and Chapter V says what they are for.*
+wrist are his, and chapter V says what they are for.*
 
 **Veier Nolonaire** — *Medium Humanoid (Human).* AC 12 · HP 27 · Speed 30 ft.
 (15 ft. tonight). Near her time, and not fighting anyone. If cornered: *Border
 Sling.* *Ranged Attack Roll:* +4, range 30/120 ft. *Hit:* 4 (1d4 + 2) Bludgeoning
 damage. Her gift flares once, on behalf
-of someone she loves who is in mortal danger (Chapter V). The camera never lingers
+of someone she loves who is in mortal danger (see chapter V). The camera never lingers
 on harm to her; cut away.
 
 **Minister Corval** — *Medium Humanoid (Human).* AC 10 · HP 9 · Speed 25 ft. Thin,
@@ -1844,19 +1887,22 @@ reaches her workshop, the table has gone badly wrong somewhere.
 **A guest** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. No attacks; use
 the SRD 5.2.1 **commoner** stat block without its attack. Any
 one of the two hundred: a merchant, a minister's cousin, a festival hire in borrowed
-livery. After midnight, count one in every 5-foot square where the crowd is (Chapter
-V, *Two Hundred People*). A guest a player character kills was seen doing it by
+livery. After midnight, count one in every 5-foot square where the crowd is (see chapter
+V, "Two Hundred People"). A guest a player character kills was seen doing it by
 somebody, and the inquest hears of it.
 
 ### Master Vell
-*The Pale Factor. Medium Humanoid (Human)*
+*The Pale Factor.*
+
+*Medium Humanoid (Human)*
 <!-- TODO-Q18: alignment left blank pending owner ruling Q18 (BESTIARY-21). -->
 
 **AC** — · **HP** — · **Speed** 30 ft., and some other way
-**CR** — *(not a combatant; no XP)*
+**CR** —
 
 The block exists to tell you one thing: **Master Vell does not fight, and cannot be
-fought.** He has no attacks. He escapes. Nothing below uses a die.
+fought.** He has no attacks. He escapes. Nothing below uses a die. He is not a
+combatant, and he is worth no XP.
 <!-- TODO-Q8: what happens when a character attacks Vell waits on owner ruling Q8 (BESTIARY-11). -->
 
 **Traits**
@@ -1875,7 +1921,7 @@ observant. Enjoy the ball."*
 
 ***The Wrapped Sword.*** An enormous broadsword, wrapped in white cloth, across his
 back. *"An inheritance."* He never touches it and never unwraps it, and this block
-does not give it numbers. What it would do unwrapped is in Chapter VII, for the DM
+does not give it numbers. What it would do unwrapped is in chapter VII, for the DM
 alone.
 
 ***Beyond Reach.*** Vell can't be Grappled, Restrained, Charmed, Frightened or held
@@ -1902,7 +1948,7 @@ not do is fail.
 > respect of a man who knows exactly what they cost.
 > **Breaks.** He does not. He leaves.
 > *At the Crossing he holds the Radiant, alone, barely, long enough — with the sword
-> still bound. That is not a fight the dice resolve; Chapter V runs it. Cast: Chapter
+> still bound. That is not a fight the dice resolve; chapter V runs it. Cast: chapter
 > VII.*
 
 ---
@@ -1919,7 +1965,7 @@ not, trained or not. Releasing one does not make its bearer a caster.
   check. The charge is spent. Charges need no attunement.
 - **The six every Orthaen knows** are *common*: minor, local, brief. A gifted Orthaen
   with the Orthaen Gift can grow one in a day of downtime from 25 GP of raw crystal,
-  one at a time, and no more than one a week: a gift is not a mint (Chapter III).
+  one at a time, and no more than one a week: a gift is not a mint (see chapter III).
   Price: 50 GP, which is a season's wages in the wrong district.
 - **The house and the trade grow larger ones.** The four below the common list are
   *uncommon*, and nobody at the ball grew them with a gift alone. Price: 200 GP, when

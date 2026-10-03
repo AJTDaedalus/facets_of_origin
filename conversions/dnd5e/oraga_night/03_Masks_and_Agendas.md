@@ -16,20 +16,20 @@ set of options.
 - **Take any class, any SRD subclass, and a background in the SRD's shape** — three
   ability scores to raise (+2 and +1, or +1 to all three), an origin feat, two skill
   proficiencies, one tool proficiency, and starting equipment. The four SRD backgrounds
-  work as written; the pregens' custom backgrounds (Chapter XI) show how a Val'loh one
+  work as written; the pregens' custom backgrounds (see chapter XI) show how a Val'loh one
   is built. Calligrapher's Supplies are a strange thing to own in a country where the
   Church owns the written word; swap them for any other tool.
 - **A gifted character takes their tribe's gift** as the origin feat the Human's
   *Versatile* trait grants. The gifts are below. Four Orthaen in five are gifted, and
   nearly every Phern.
-- **Everyone picks a hook and an agenda** in the first five minutes (Chapter I). The
+- **Everyone picks a hook and an agenda** in the first five minutes (see chapter I). The
   six hooks are there, and every one of them starts you in the street outside the
   palace; the agenda cards are in chapter VIII.
 
 A party of Orthaen with at most one Phern is the expected shape. A Phern character is
 conspicuous — one of a handful of non-Orthaen faces in two hundred — which is not a
 problem but a spotlight, and the Merchant's Circle connection gives them a built-in
-patron. Five ready-made guests are in Chapter XI, summarized at the end of this
+patron. Five ready-made guests are in chapter XI, summarized at the end of this
 chapter.
 
 ## Val'loh Player Options
@@ -122,7 +122,7 @@ coming from. Nearly all carry it.
 The gift shows itself only on behalf of someone loved, and only when they are in
 danger. It does nothing for the one who carries it. Fewer than one in a hundred carry
 it — and a player character will almost never be Thenya at this ball. The feat is here
-because the night has two gifted Thenya in it, and Chapter VII uses this one.
+because the night has two gifted Thenya in it, and chapter VII uses this one.
 
 - **Gift Knack.** Checks to reach, find, or protect someone you love who is in danger.
 - **Minor Workings.** Your cantrip cannot target you or benefit you.
@@ -139,7 +139,7 @@ and that only works if the table has built someone for it to point at.)*
 One Orthaen in five is born without the gift. An ungifted character keeps their
 people's Heritage and takes any origin feat through *Versatile*. Among the Orthaen,
 where four in five have it, the fifth is a private disappointment nobody mentions
-twice. Dassa (Chapter XI) is ungifted, because the table should see what that looks
+twice. Dassa (see chapter XI) is ungifted, because the table should see what that looks
 like on a sheet.
 
 ### Casting in a Country Without Books
@@ -149,7 +149,7 @@ Val'loh has the same magic as any 5e world. What differs is how it looks.
 - **Wizards** are what Val'loh calls **Thaumaturgy**: spellforms drawn thread by thread,
   a patient scholar's art. There are no books. A wizard's spellbook is a **lattice** —
   grown crystal holding each spellform — and copying a spell into it costs the same
-  time and gold as ink would, spent on crystal instead. Andra's is in Chapter XI.
+  time and gold as ink would, spent on crystal instead. Andra's is in chapter XI.
 - **Every other spellcasting class** casts what Val'loh calls **Invocation**: the
   intuitive art, reaching rather than studying. What answers an invoker, the module does
   not say, and the sheet should not either.
@@ -201,9 +201,9 @@ chapter VIII). Your card is all your character knows about it.
 ## The Ready-Made Guests
 
 Five pregenerated characters at 4th level, one per agenda archetype. Their full sheets
-are in **Chapter XI**; this is the table to deal from. The module is built for four
+are in **chapter XI**; this is the table to deal from. The module is built for four
 players: leave out Andra or Pello, and leave out Ilesse only if another player takes
-Agenda 4, because Chapter V leans on somebody reaching Veier.
+Agenda 4, because chapter V leans on somebody reaching Veier.
 
 | Guest | People | Class | Gift | Suggested agenda |
 |---|---|---|---|---|

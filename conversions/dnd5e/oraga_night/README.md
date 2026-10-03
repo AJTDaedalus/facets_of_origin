@@ -5,11 +5,11 @@ palace, two hundred masks, every enemy the host has — and three guests nobody 
 
 **Setting:** Rekuzan, capital of the Orthaen, continent of Val'loh — 3164 PG
 **Players:** four characters of **4th level**, fresh or chosen from the five
-pregenerated guests in Chapter XI. Every fight is balanced for four; each card has
+pregenerated guests in chapter XI. Every fight is balanced for four; each card has
 lines for three or five characters and for 3rd or 5th level. The night ends at 5th
 level.
 **Length:** one session, **4½–5 hours**. Play starts in the street outside the palace
-and ends at dawn (the runtime table is in Chapter I)
+and ends at dawn (the runtime table is in chapter I)
 **Rules:** any fifth-edition core rules; written against the **SRD 5.2.1** and playable
 at a 2014 table. You do not need the Facets of Origin books.
 **Tone:** glamour over a blade — festival splendor and social fencing, with something
@@ -71,7 +71,7 @@ Chapters VII to XI are the book's appendices.
 | `07_Cast_of_the_Ball.md` | Every named guest — wants, fears, secrets, how to play them, and which stat block is theirs | the characters meet a named guest |
 | `08_Handouts.md` | **The DM sheet**, the keyed palace diagram, the Snake Tracker, the rumor table, and the player handouts: the invitation, the agenda cards and the crystal charges | you print before the session, and all through it |
 | `09_The_Snakes.md` | The snakes chapter: each faction's threat line, the Snake Tracker, and every fight card, S1–S14 | a fight card comes up, or a snake shows its tell |
-| `10_Bestiary.md` | Every stat block, A to Z, in SRD format; *If It Comes to It*; *Items of the Night* | a card names a creature, or a charge is released |
+| `10_Bestiary.md` | Every stat block, A to Z, in SRD format; "If It Comes to It"; "Items of the Night" | a card names a creature, or a charge is released |
 | `11_Pregenerated_Characters.md` | Five 4th-level guests, full sheets | players pick their characters in the first five minutes |
 
 ### For Contributors
@@ -86,12 +86,12 @@ Chapters VII to XI are the book's appendices.
 ## What to Read First
 
 **Ninety minutes of prep.** Chapter I opens with a box, *How to prep in 90 minutes*:
-what to read, in what order, and what to skim. In short: the DM sheet in Chapter VIII,
-the fight cards in Chapter IX and the blocks in Chapter X are what you run from;
-Chapters IV and V are the reference behind them.
+what to read, in what order, and what to skim. In short: the DM sheet in chapter VIII,
+the fight cards in chapter IX and the blocks in chapter X are what you run from;
+chapters IV and V are the reference behind them.
 
-**At the table,** run the night from the sheet in Chapter VIII, with Chapter VII open
-for the cast and Chapters IX and X to hand for the fights. Everything else is depth.
+**At the table,** run the night from the sheet in chapter VIII, with chapter VII open
+for the cast and chapters IX and X to hand for the fights. Everything else is depth.
 Read it when a player goes looking for it.
 
 ## A Note on Secrets
@@ -112,8 +112,8 @@ at https://creativecommons.org/licenses/by/4.0/legalcode.
 **Changes from the SRD.** SRD rules, classes, subclasses, feats, spells, conditions and
 equipment are referenced by name and used as the SRD writes them, except where this
 module says otherwise. These are the module's own: the origin feats (the Val'loh
-gifts), the crystal charges, the encounter rules (clocks, *Down, Not Out*, *Buying
-Time* and Delay), how Heroic Inspiration is awarded, and four table rules: one DC
+gifts), the crystal charges, the encounter rules (clocks, "Down, Not Out", "Buying
+Time" and Delay), how Heroic Inspiration is awarded, and four table rules: one DC
 ladder for the whole night (chapter I), success at a cost on a near miss (chapter I),
 NPCs who make no checks outside a fight (chapter I), and nonlethal blows from any attack,
 ranged and spell attacks included (chapter IX). Every stat block is an

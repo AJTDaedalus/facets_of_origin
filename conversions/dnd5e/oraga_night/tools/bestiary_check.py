@@ -207,9 +207,68 @@ def fixed_value_problems(blocks):
     return probs
 
 
+# T4.4: SRD 5.2.1 layout. Armor sits on a Gear line, and the AC line is bare.
+# Armor: name -> (base AC, Dex cap or None for no cap).
+ARMOR = {"Padded Armor": (11, None), "Leather Armor": (11, None),
+         "Studded Leather Armor": (12, None), "Hide Armor": (12, 2), "Chain Shirt": (13, 2),
+         "Scale Mail": (14, 2), "Breastplate": (14, 2), "Half Plate Armor": (15, 2),
+         "Ring Mail": (14, 0), "Chain Mail": (16, 0), "Splint Armor": (17, 0),
+         "Plate Armor": (18, 0)}
+# Creatures with Advantage on Initiative: the score folds it in (+5).
+INIT_ADVANTAGE = {"Pellin Corro", "Phern Bodyguard"}
+_INIT = re.compile(r"\*\*Initiative\*\* ([+−-]\d+) \((\d+)\)(,? with Advantage)?")
+
+
+def parse_gear(blk):
+    """The items on a block's **Gear** line, or [] if it has none."""
+    m = re.search(r"^\*\*Gear\*\* (.+)$", blk, re.M)
+    return [g.strip() for g in m.group(1).split(",")] if m else []
+
+
+def parse_initiative(blk):
+    """(bonus, score, has the 2014 'with Advantage' suffix) or None."""
+    m = _INIT.search(blk)
+    if not m:
+        return None
+    return int(m.group(1).replace("−", "-")), int(m.group(2)), bool(m.group(3))
+
+
+def layout_problems(blocks):
+    probs = []
+    by_text = {TEXT_NAME.get(n, n): n for n in B if n not in NASTIER_OF}
+    for name, blk in blocks.items():
+        n = by_text.get(name)
+        if n is None:
+            continue
+        b = B[n]
+        dex, p = mod(b["ab"][1]), pb(b["cr"])
+        acm = re.search(r"\*\*AC\*\* (\d+)( \([^)]*\))?", blk)
+        if acm and acm.group(2):
+            probs.append(f"{n}: AC line carries a parenthetical{acm.group(2)}; armor goes on a Gear line")
+        gear = parse_gear(blk)
+        armor = [g for g in gear if g in ARMOR]
+        if acm and armor:
+            base, cap = ARMOR[armor[0]]
+            got = base + (dex if cap is None else min(dex, cap)) + (2 if "Shield" in gear else 0)
+            if got != int(acm.group(1)):
+                probs.append(f"{n}: Gear gives AC {got}, block prints AC {acm.group(1)}")
+        ini = parse_initiative(blk)
+        if ini is None:
+            probs.append(f"{n}: no Initiative bonus and score found"); continue
+        bonus, score, suffix = ini
+        if suffix:
+            probs.append(f"{n}: Initiative written 'with Advantage'; fold it into the score (+5)")
+        if bonus not in (dex, dex + p, dex + 2 * p):
+            probs.append(f"{n}: Initiative bonus {bonus:+d} is not Dex {dex:+d} (+ PB {p})")
+        want = 10 + bonus + (5 if n in INIT_ADVANTAGE else 0)
+        if score != want:
+            probs.append(f"{n}: Initiative score {score}, expected {want}")
+    return probs
+
+
 def text_problems(text):
     blocks = split_blocks(text)
-    probs = fixed_value_problems(blocks)
+    probs = fixed_value_problems(blocks) + layout_problems(blocks)
     for n, b in B.items():
         if n in NASTIER_OF:
             blk = blocks.get(NASTIER_OF[n])

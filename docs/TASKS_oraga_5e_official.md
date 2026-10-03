@@ -282,13 +282,13 @@ These rules are mechanical, but a worker makes every edit with the linter's hit 
 - **Accept:** lint smells S3–S13 and S37 = 0 hits outside the whitelist.
 - **Time:** 2 × 30 min.
 
-### ☐ T4.4 Stat-block layout to 5.2.1 (BESTIARY-5, -12, -13, -14)
+### ☑ T4.4 Stat-block layout to 5.2.1 (BESTIARY-5, -12, -13, -14)
 - **Files:** 10.
 - **Do:** DESIGN §3 *Stat blocks* row. Armor goes on a **Gear** line; one **Immunities** line; the Senses semicolon; Initiative folded; commentary moved out of the numeric fields; usage tags; ***Bloodied.*** traits; the epithet line; traits with no rule moved to lore or Tells (BESTIARY-14; keep *The Wrapped Sword*).
 - **Accept:** `bestiary_check.py` still exits 0. Update its parser for the Gear line and the folded Initiative, test-first, adding a case for each. A spot check of 3 blocks matches the SRD 5.2.1 layout.
 - **Time:** 2 × 30 min.
 
-### ☐ T4.5 Cross-references and provenance (SNAKES-15, -24; CAST-24; FRONT-22; NIGHT-19; BALL-25)
+### ☑ T4.5 Cross-references and provenance (SNAKES-15, -24; CAST-24; FRONT-22; NIGHT-19; BALL-25)
 - **Scope:** every `M/*.md` file and flow.json.
 - **Rules:** DESIGN §3 *Cross-references* row. Remove "(source Ch. …)" and "(Val'loh, V3)". Fix FRONT-22's broken targets and INVENTIONS #25.
 - **Accept:** the lint structure rule "all references resolve" passes. Zero `\(source Ch`.

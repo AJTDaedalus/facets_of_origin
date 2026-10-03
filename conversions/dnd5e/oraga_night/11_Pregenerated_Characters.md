@@ -2,7 +2,7 @@
 
 *Five ready-made guests at **4th level**, built by the SRD 5.2.1 rules: Human species,
 a background in the SRD's shape, the standard array, an SRD class and subclass, and the
-4th-level Ability Score Improvement. Every one of them is Orthaen or Phern, as Chapter
+4th-level Ability Score Improvement. Every one of them is Orthaen or Phern, as chapter
 III requires, and four of the five carry a gift. Hand them out as they are, or let
 players reskin freely.*
 
@@ -24,13 +24,13 @@ Between them the five cover what the night asks for:
 Two of the five can stand in a fight — **Dassa (AC 16, 40 Hit Points) and Pello (AC 16, 31)** — and
 one of them, **Dassa, is ungifted**, because one Orthaen in five is and the table should
 see what that looks like on a sheet. Each wears the armor they can dance in, under
-their festival clothes, as Chapter IV allows.
+their festival clothes, as chapter IV allows.
 
 **Four players?** The module is built for four. Leave out **Andra or Pello**. Leave out
 Ilesse only if another player takes Agenda 4, *The Cousin's Errand*: it is the one
-agenda that reaches the east wing, and Chapter V leans on it.
+agenda that reaches the east wing, and chapter V leans on it.
 
-**Common to all five.** *Human* (Chapter III): **Resourceful** — each begins the night
+**Common to all five.** *Human* (see chapter III): **Resourceful** — each begins the night
 with Heroic Inspiration and regains it on a Long Rest; **Skillful** — one extra skill,
 listed; **Versatile** — one origin feat, listed (the gifted take their gift). Size
 Medium, Speed 30 ft., Proficiency Bonus +2. Languages: Common and two
@@ -40,7 +40,7 @@ Player Handout 3, "Crystal Charges" (chapter VIII), for what each does.
 
 **Masks.** No guest's mask is written down, because a mask is the player's to describe.
 Each sheet ends with one question about it, for the player to answer in the street on
-the way to the gate (Chapter IV, B0), when the DM asks what everyone's mask looks like.
+the way to the gate (see chapter IV, area B0), when the DM asks what everyone's mask looks like.
 
 *At a 2014 table:* keep the concept and the equipment, and rebuild the ability scores
 and class features from your own rules (a 2014 standard-array human cannot reach the
@@ -116,7 +116,7 @@ keeps its grudges.
 
 **Agenda hook.** *A House's Long Game* puts Serane beside Vorlain with a Draunel errand
 and a Draunel's promises; *The Prelate's Question* puts her in front of Raunu with the
-Church's one question. Either way she is working a snake's errand (Chapter IX), from
+Church's one question. Either way she is working a snake's errand (see chapter IX), from
 inside.
 
 **Mask.** *Whose spirit-face does Serane wear tonight — and who in her own house will
@@ -188,7 +188,7 @@ never yet lost a parcel. A Phern at an Orthaen ball is conspicuous, and Pello ha
 decided to enjoy it.
 
 **Agenda hook.** *The Circle's Reckoning* gives him a Circle patron and a Phern's
-standing to use it — and the Circle is a snake (Chapter IX). *The Gate at Midnight*
+standing to use it — and the Circle is a snake (see chapter IX). *The Gate at Midnight*
 gives him triple rates in old coin, and the river gate is exactly the kind of lock he
 is good at.
 
@@ -255,8 +255,8 @@ shaped it, and whether it is holding a working right now.
   (gift)
 - *Prepared:* *Mage Armor*, *Magic Missile*, *Shield*, *Silent Image*, *Sleep*; *2nd:* *Darkness*,
   *Misty Step*
-- **The lattice** (her spellbook — see *Casting in a Country Without Books*, Chapter
-  III): *Alarm* (ritual), *Comprehend Languages* (ritual), *Detect Magic* (ritual), *Feather
+- **The lattice** (her spellbook — see chapter
+  III, "Casting in a Country Without Books"): *Alarm* (ritual), *Comprehend Languages* (ritual), *Detect Magic* (ritual), *Feather
   Fall*, *Identify* (ritual), *Mage Armor*, *Magic Missile*, *Shield*, *Silent Image*, *Sleep*;
   *2nd:* *Darkness*, *Hold Person*, *Misty Step*, *Web*
 
@@ -404,7 +404,7 @@ shaped it, and whether it is holding a working right now.
 **Class Features**
 - **Divine Order: Thaumaturge.** One extra cantrip, and +4 (her Wisdom modifier) to
   Intelligence (Arcana or Religion) checks (included). *The SRD's word, not Val'loh's — it has nothing to do
-  with the Thaumaturgy of Chapter III.*
+  with the Thaumaturgy of chapter III.*
 - **Channel Divinity** (2 uses; one back on a Short Rest, all on a Long Rest).
   *Divine Spark:* a creature within 30 ft. regains 1d8 + 4 Hit Points, or makes a
   Constitution saving throw, taking Radiant damage equal to 1d8 + 4 on a failed save, or

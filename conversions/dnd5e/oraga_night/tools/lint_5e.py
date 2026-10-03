@@ -91,7 +91,7 @@ def classify(text: str, fname: str = "") -> list[str]:
             if ln.startswith("## ") or ln.startswith("# "):
                 in_stat = False
             if re.match(r"^#{2,3} ", ln):
-                ahead = "\n".join(lines[i + 1:i + 6])
+                ahead = "\n".join(lines[i + 1:i + 8])
                 if "**AC**" in ahead:
                     in_stat = True
             i += 1

@@ -44,14 +44,14 @@ record, and it is what history keeps.
 
 ## Ending the Session
 
-1. **Read the epilogue** in Chapter V, adjusting it for what the table did.
+1. **Read the epilogue** in chapter V, adjusting it for what the table did.
 2. **If you ran the epilogue in chapter V,** you have already asked the question and
    called 5th level. If you skipped it, do both now.
 
 5th level is the line where a fighter swings twice, a caster reaches level 3 spells,
 and a character stops being somebody who survived one bad night and becomes somebody
 the city has to reckon with. Do not skip it because this is a one-shot. A gifted
-character's gift does not grow (Chapter III); any new magic shows itself the way the
+character's gift does not grow (see chapter III); any new magic shows itself the way the
 gift always has.
 
 ## Rewards

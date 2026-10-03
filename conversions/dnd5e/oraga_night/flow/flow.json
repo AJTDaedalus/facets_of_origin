@@ -202,7 +202,7 @@
    "label": "B13. The Room You Put Here",
    "phase": "m2",
    "kind": "room",
-   "summary": "Deliberately empty; the DM fills it from what the table has chased. No Fracture, no contradiction of Chapter II.",
+   "summary": "Deliberately empty; the DM fills it from what the table has chased. No Fracture, no contradiction of chapter II.",
    "ref": "04_The_Ball.md#the-private-palace (B13)",
    "optional": true,
    "faction": null
@@ -1159,7 +1159,7 @@
   },
   {
    "id": "af-more",
-   "label": "After dawn (Chapter VI)",
+   "label": "After dawn (see chapter VI)",
    "phase": "end",
    "kind": "ending",
    "summary": "No one is ever charged; the pregnancy never gets out; the trail goes tidy. For a table that wants more: Vorlain's offer, the inquest, the trail, Otta Vesh.",
@@ -2444,7 +2444,7 @@
    "id": "clk-heat",
    "label": "Snake Tracker heat (per faction)",
    "segments": 4,
-   "advances": "A faction's line going unanswered; automatic boxes at the toast, the Radiant's blessing and the omens (Ch. IX, Table IX-2)",
+   "advances": "A faction's line going unanswered; automatic boxes at the toast, the Radiant's blessing and the omens (see chapter IX, Table IX–2)",
    "fills": "Read at the first scream: 0-2 they get out; 3 the faction's midnight card is live; 4 it starts with steel already out"
   },
   {

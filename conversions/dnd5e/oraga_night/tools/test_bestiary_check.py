@@ -103,3 +103,80 @@ def test_main_exits_one_on_a_reverted_text(tmp_path):
     with pytest.raises(SystemExit) as e:
         BC.main(["--quiet", "--file", str(bad)])
     assert e.value.code == 1
+
+
+# T4.4: SRD 5.2.1 layout (Gear line, folded Initiative) ----------------------------
+
+def _blk(ac_line, gear=None):
+    g = f"**Gear** {gear}\n" if gear else ""
+    return f"{ac_line}\n**HP** 22 (4d8 + 4)\n\n**Skills** Athletics +4\n{g}**Senses** Passive Perception 10\n"
+
+
+def test_parse_gear_reads_the_items():
+    assert BC.parse_gear(_blk("**AC** 16 · **Initiative** +1 (11)", "Chain Shirt, Shield, Longsword")) == \
+        ["Chain Shirt", "Shield", "Longsword"]
+
+
+def test_parse_gear_none_when_absent():
+    assert BC.parse_gear(_blk("**AC** 11 · **Initiative** +1 (11)")) == []
+
+
+def test_gear_armor_gives_the_printed_ac():
+    # Bought Blade: Dex 13 (+1); Chain Shirt 13 + 1 + Shield 2 = 16
+    blk = _blk("**AC** 16 · **Initiative** +1 (11)", "Chain Shirt, Shield, Longsword")
+    assert BC.layout_problems({"Bought Blade": blk}) == []
+
+
+def test_gear_armor_ac_mismatch_is_reported():
+    blk = _blk("**AC** 16 · **Initiative** +1 (11)", "Chain Shirt, Longsword")
+    probs = BC.layout_problems({"Bought Blade": blk})
+    assert any("Bought Blade: Gear gives AC 14" in p for p in probs)
+
+
+def test_ac_with_armor_in_parentheses_is_reported():
+    blk = _blk("**AC** 16 (Chain Shirt, Shield) · **Initiative** +1 (11)")
+    probs = BC.layout_problems({"Bought Blade": blk})
+    assert any("Bought Blade: AC line carries a parenthetical" in p for p in probs)
+
+
+def test_parse_initiative_reads_bonus_and_score():
+    assert BC.parse_initiative("**AC** 11 · **Initiative** +1 (16)") == (1, 16, False)
+
+
+def test_parse_initiative_flags_the_2014_suffix():
+    assert BC.parse_initiative("**AC** 11 · **Initiative** +1 (11), with Advantage") == (1, 11, True)
+
+
+def test_initiative_advantage_folded_is_clean():
+    # Pellin Corro has Advantage on Initiative: score = 10 + 1 + 5
+    blk = _blk("**AC** 11 · **Initiative** +1 (16)")
+    assert BC.layout_problems({"Pellin Corro": blk}) == []
+
+
+def test_initiative_advantage_suffix_is_reported():
+    blk = _blk("**AC** 11 · **Initiative** +1 (11), with Advantage")
+    probs = BC.layout_problems({"Pellin Corro": blk})
+    assert any("Pellin Corro: Initiative" in p and "fold" in p for p in probs)
+
+
+def test_initiative_advantage_not_folded_is_reported():
+    blk = _blk("**AC** 11 · **Initiative** +1 (11)")
+    probs = BC.layout_problems({"Pellin Corro": blk})
+    assert any("Pellin Corro: Initiative score 11, expected 16" in p for p in probs)
+
+
+def test_initiative_score_without_advantage_is_ten_plus_bonus():
+    blk = _blk("**AC** 16 · **Initiative** +1 (12)", "Chain Shirt, Shield")
+    probs = BC.layout_problems({"Bought Blade": blk})
+    assert any("Bought Blade: Initiative score 12, expected 11" in p for p in probs)
+
+
+def test_initiative_bonus_must_come_from_dex_and_pb():
+    # Dex +1, PB +2: +1, +3 or +5 are possible; +2 is not
+    blk = _blk("**AC** 16 · **Initiative** +2 (12)", "Chain Shirt, Shield")
+    probs = BC.layout_problems({"Bought Blade": blk})
+    assert any("Bought Blade: Initiative bonus +2" in p for p in probs)
+
+
+def test_layout_clean_on_the_module():
+    assert BC.layout_problems(_blocks()) == []
