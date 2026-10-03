@@ -100,7 +100,7 @@ sets, and able to hold a working. Four in five carry it.
   in the crystal — the light is the stone glowing, the mending is new crystal growing
   across the crack.
 - **Grow a Charge.** Given a day of downtime and 25 gp of raw crystal, you can grow one
-  crystal charge from the common list in *Items of the Night* (Chapter X), one at a time
+  crystal charge from the common list on Player Handout 3 (chapter VIII), one at a time
   and no more than one a week. Your gift alone grows only those; anything larger needs
   a spellcaster's training. There is no downtime during the ball.
 
@@ -166,10 +166,10 @@ A **charge** is a consumable magic item: one stored working, released at a touch
 anyone — gifted or not, trained or not. Releasing one does not make its bearer a
 caster, which is the point: it is the only route to magic most people in Val'loh will
 ever have, and it is why a small pink splinter is worth a season's wages in the wrong
-district. The six every gifted Orthaen has heard of are **steady light**, **a sealed
-door**, **a veil of quiet**, **a chime at a threshold**, **warmth**, and **a held
-image**. Their rules, their prices, and what happens when one is released near
-something that eats magic are in **Items of the Night**, Chapter X.
+district. The six every gifted Orthaen has heard of are *Steady Light*, *A Sealed
+Door*, *A Veil of Quiet*, *A Chime at a Threshold*, *Warmth*, and *A Held Image*.
+Their rules and their prices are on Player Handout 3, "Crystal Charges" (chapter
+VIII).
 
 ## Masks
 

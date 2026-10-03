@@ -462,8 +462,8 @@
    "label": "Dinner for two",
    "phase": "m4",
    "kind": "scene",
-   "summary": "Players who reach the east wing find Raunu and Veier at ease together — the night's one warm glimpse.",
-   "ref": "04_The_Ball.md#movement-iv--the-toast",
+   "summary": "Run it if anyone carries Agenda 4: the grandmother's ring at the east wing doors, and by default Veier sends for them. Raunu and Veier at ease together, the night's one warm glimpse; he will not name the midnight announcement. About 10 minutes; Corval shows the guest out as the lamps lower.",
+   "ref": "04_The_Ball.md#dinner-for-two-b9",
    "optional": true,
    "faction": null
   },
@@ -1082,7 +1082,7 @@
    "label": "The quiet guest: the cup",
    "phase": "m1",
    "kind": "omen",
-   "summary": "An attendant in the line holds a cup out for a master who is not there. Its first habit. Say it aloud: an omen. Followed or confronted, it walks into a shadow and is gone until midnight; it never fights before the bells.",
+   "summary": "An attendant in the line holds a cup out for a master who is not there. Its first habit. Say it aloud: an omen. Followed or confronted, it walks into a shadow and is gone for the rest of that Movement; it never fights before the bells.",
    "ref": "04_The_Ball.md#the-program-of-the-night; 07_Cast_of_the_Ball.md#the-attendant--the-quiet-guest",
    "optional": true,
    "faction": "uninvited"
@@ -1092,17 +1092,7 @@
    "label": "The quiet guest: the crystal",
    "phase": "m2",
    "kind": "omen",
-   "summary": "It stops dead before a crystal wall and watches the light for a full minute. Followed or confronted, it walks into a shadow and is gone until midnight; it never fights before the bells.",
-   "ref": "04_The_Ball.md#the-program-of-the-night; 07_Cast_of_the_Ball.md#the-attendant--the-quiet-guest",
-   "optional": true,
-   "faction": "uninvited"
-  },
-  {
-   "id": "qg-3",
-   "label": "The quiet guest: the literal answer",
-   "phase": "m3",
-   "kind": "omen",
-   "summary": "Asked the time in the Audience Hall line, it answers exactly — and every question after, until the guest gives up. Followed or confronted, it walks into a shadow and is gone until midnight; it never fights before the bells.",
+   "summary": "It stops dead before a crystal wall and watches the light for a full minute. Followed or confronted, it walks into a shadow and is gone for the rest of that Movement; it never fights before the bells.",
    "ref": "04_The_Ball.md#the-program-of-the-night; 07_Cast_of_the_Ball.md#the-attendant--the-quiet-guest",
    "optional": true,
    "faction": "uninvited"
@@ -1112,7 +1102,7 @@
    "label": "The quiet guest: the music",
    "phase": "m4",
    "kind": "omen",
-   "summary": "The band changes tune and it turns, all at once, to follow the sound. Followed or confronted, it walks into a shadow and is gone until midnight; it never fights before the bells.",
+   "summary": "The band changes tune and it turns, all at once, to follow the sound. Followed or confronted, it walks into a shadow and is gone for the rest of that Movement; it never fights before the bells.",
    "ref": "04_The_Ball.md#the-program-of-the-night; 07_Cast_of_the_Ball.md#the-attendant--the-quiet-guest",
    "optional": true,
    "faction": "uninvited"
@@ -1122,7 +1112,7 @@
    "label": "The quiet guest: something shiny",
    "phase": "m5",
    "kind": "omen",
-   "summary": "It tries to watch the party in the Dead Dance and keeps losing them to a glint. Followed or confronted, it walks into a shadow and is gone until midnight; it never fights before the bells.",
+   "summary": "It tries to watch the party in the Dead Dance and keeps losing them to a glint. Followed or confronted, it walks into a shadow and is gone for the rest of that Movement; it never fights before the bells.",
    "ref": "04_The_Ball.md#the-program-of-the-night; 07_Cast_of_the_Ball.md#the-attendant--the-quiet-guest",
    "optional": true,
    "faction": "uninvited"
@@ -2267,12 +2257,6 @@
   },
   {
    "from": "qg-2",
-   "to": "qg-3",
-   "label": "a habit, shown once",
-   "kind": "optional"
-  },
-  {
-   "from": "qg-3",
    "to": "qg-4",
    "label": "a habit, shown once",
    "kind": "optional"
@@ -2304,7 +2288,7 @@
   {
    "from": "qg-5",
    "to": "S14",
-   "label": "the four habits",
+   "label": "the three habits",
    "kind": "optional"
   },
   {

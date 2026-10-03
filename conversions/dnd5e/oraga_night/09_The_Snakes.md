@@ -778,7 +778,8 @@ is the most reliable way to kill a table by accident.
 
 **Tactics.** The sergeant opens by naming the terms aloud: this is not a bluff, it is
 how the company works. The Blades fight to *detain*, not to kill: cudgels, and *To the
-Terms* — a creature they would drop to 0 Hit Points is left at 1 and held. They hold
+Terms* — a creature they would drop to 0 Hit Points is left at 1 Hit Point and the Grappled
+condition. They hold
 the line in the street and do not come through the wicket after anyone. Nobody in the
 Bought ever commits recklessly, including the captain. The captain spends his first
 round placing Blades and watching who the party protects (*The Read*). A party that
@@ -1665,10 +1666,9 @@ next round, and the Help action doesn't apply. The table chooses whose trick it 
   rather than naming it (*"I hold the lamp crystal up to the fire so it throws colours
   across its mask, and say, 'Your master asked me to show you this'"*): **+2.**
 - **A habit the party has seen:** **+2.** This is the payoff for noticing it before
-  midnight. Its four habits, each shown once before midnight: *it stares at worked
-  crystal and light; it answers any direct question literally, and cannot leave one
-  unanswered; it keeps a cup and a cloak ready for a master who is not there; it
-  follows music that changes.*
+  midnight. Only habits the table actually saw count. Its three habits, shown before
+  midnight: *it stares at worked crystal and light; it keeps a cup and a cloak ready
+  for a master who is not there; it follows music that changes.*
 - **Repeats.** A trick already tried on it tonight gets no bonus and has
   **disadvantage** — it learns. The same trick never works a third time.
 
@@ -1686,11 +1686,10 @@ next round, and the Help action doesn't apply. The table chooses whose trick it 
   at a window, watching the fires. That is a win.
 
 **MM — how to hint that it can be distracted.**
-1. **Show every habit before midnight, once each, plainly** (Chapter IV's sightings,
-   one a Movement): in Movement I it holds a cup for someone who never takes it; in II
-   it stops dead in front of a crystal wall and watches the light for a full minute; in
-   III a guest asks it the time and it answers precisely, then answers the follow-up,
-   then the next, until the guest walks away; in IV the band changes tune and it turns
+1. **Show every habit before midnight, plainly** (Chapter IV's sightings, in
+   Movements I, II, IV and V): in Movement I it holds a cup for someone who never takes
+   it; in II it stops dead in front of a crystal wall and watches the light for a full
+   minute; in IV the band changes tune and it turns
    to follow the sound; in V it is trying to watch the party and keeps losing them
    because something shiny goes past. A player who says any of these out loud earns
    the omen reward.
@@ -1728,8 +1727,7 @@ badly, and looks at things.
 - Argue its orders. Keeping the three from being interrupted is a narrow order, and a
   character who can show it that what they are doing is not, strictly, an interruption
   — carrying guests out, fighting a fire, holding a door for the crowd — makes a
-  distraction check of Intelligence or Charisma (Persuasion). A direct question it must
-  answer is a habit.
+  distraction check of Intelligence or Charisma (Persuasion).
 - Take it apart. 229 Hit Points and AC 17, while it hits back twice a round. Possible,
   and printed above so nobody chooses it by accident.
 

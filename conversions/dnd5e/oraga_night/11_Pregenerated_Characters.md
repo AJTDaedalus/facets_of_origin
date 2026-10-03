@@ -36,7 +36,7 @@ listed; **Versatile** — one origin feat, listed (the gifted take their gift). 
 Medium, speed 30 ft., proficiency bonus +2. Languages: Common and two
 others the player and MM agree on. Every guest carries a knife, because everyone at this
 ball does; drawing it is the crime. Crystal charges are consumable magic items — see
-*Items of the Night* in Chapter X for what each does.
+Player Handout 3, "Crystal Charges" (chapter VIII), for what each does.
 
 **Masks.** No guest's mask is written down, because a mask is the player's to describe.
 Each sheet ends with one question about it, for the player to answer in the street on

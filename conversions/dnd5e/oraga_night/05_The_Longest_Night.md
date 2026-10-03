@@ -186,7 +186,9 @@ They are moving it out of the way.
   feet after midnight, that character gains Heroic Inspiration, or gives it to a
   companion who has none.
 - **The last blow.** When an Uninvited drops to 0 hit points they step into the
-  world's shadow and come back on their next turn, whole (*Leashed*, Chapter X). At
+  world's shadow and return at the start of their next turn, at full Hit Points, in
+  the space where they dropped (or the nearest unoccupied space); the Hollow returns
+  within 60 feet of the doors he holds (*Leashed*, Chapter X). At
   the start of that turn, whoever dealt the last blow makes a **DC 15 Strength or
   Dexterity saving throw** (their choice). On a failure they are pushed 15 feet and
   knocked prone. No damage. If no creature dealt it — fire, falling stone — nobody
@@ -348,10 +350,12 @@ player who came to this ball wanting a real fight.
 - **It only cares about interruptions.** Anyone who isn't getting in the way of the
   three is furniture to it. A party that lets the three work can walk past it all
   night.
-- **Idle and Focused.** It starts Idle: rusty, slow, easy to distract. When the party
-  becomes a real interruption — earns Delay against one of the three, strikes one, or
-  stands between one and their errand — one of the three looks at the Attendant and
-  then at the party, and it is **Focused**. Focused, it is the most dangerous thing in
+- **Idle and Focused.** It starts Idle: rusty, slow, easy to distract. Card S14 fires
+  the first time the party becomes a real interruption: they earn Delay against one
+  of the three, strike one, or stand between one and their errand. The card fires with
+  the Attendant Idle. From then on it is **Focused** at the start of any of its turns
+  when one of the three in the scene has no Delay: that one glances at it, then at the
+  party. Focused, it is the most dangerous thing in
   the palace that can be fought. Say its state out loud every round: *locked on you*,
   or *drifting*.
 - **It and Delay feed each other.** Once a round it clears the way and removes 1
@@ -359,8 +363,8 @@ player who came to this ball wanting a real fight.
   back to Focused at the start of its turn only if one of the three in the scene has
   no Delay. Keep Delay on the three and the Attendant stays Idle; keep the Attendant
   busy and the Delay stays put.
-- **It can be distracted.** Its four habits — worked crystal and light, a direct
-  question, the cup and cloak for a missing master, music that changes — are shown
+- **It can be distracted.** Its three habits — worked crystal and light, the cup
+  and cloak for a missing master, music that changes — are shown
   before midnight. One trick a round, played out at the table, against DC 13 while it
   is Idle and DC 19 while it is Focused, with +2s for leaning in. Break its focus four
   times in a night and it wanders off to a window to watch the fires. That is a win.
@@ -549,8 +553,9 @@ matters is **Leashed**, and the rules that make it playable are *Down, Not Out* 
 in practice it means this:
 
 - **Reducing one to 0 hit points is not a kill.** It means the killer *stops
-  indulging the interference.* They step into the world's shadow and walk back on
-  toward the task at full hit points on their next turn, and whoever struck the last
+  indulging the interference.* They step into the world's shadow, return at the start
+  of their next turn at full Hit Points in the space where they dropped, and walk on
+  toward the task, and whoever struck the last
   blow makes a saving throw or is thrown (*Down, Not Out*). Fighting the Uninvited
   never ends in victory. It does buy time: every round the party lands 30 damage on
   one of them is a point of Delay.

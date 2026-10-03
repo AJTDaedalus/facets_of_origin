@@ -15,7 +15,7 @@ players. Print the first two pages and run the night from them.*
 | 0:00 | **The street** (10) | Pick character, agenda, hook (Ch. I); read B0; *"what does your mask look like?"* | — | — | — |
 | 0:10 | **I. Receiving Line** (25) | Corval receives by name, from memory; nobody is disarmed; the hosts are absent | Nine honor guards, facing *inward* | Holds a cup out for nobody | S4 if anyone draws |
 | 0:35 | **II. Empty Rooms** (45) | Vorlain holds court; the factions circulate; still no host | Corro's gift rings, pointing nowhere | Stares at a crystal wall for a full minute | S1 · S6 |
-| 1:20 | **III. Summons** (35) | A glimpse on the high gallery; Corval fetches guests to B4 (≥1 player character; two together once) | Three gray masks Corval cannot account for | Answers a guest's every question, exactly | S6 · Tavva's scout |
+| 1:20 | **III. Summons** (35) | A glimpse on the high gallery; Corval fetches guests to B4 (≥1 player character; two together once) | Three gray masks Corval cannot account for | — | S6 · Tavva's scout |
 | 1:55 | **IV. Toast** (25) | Raunu at the high table: *"At the Unmasking I will have something to say"*; **two plates**; gone | The mews scream, then silence | Turns to follow the music | S7 begins |
 | 2:20 | **V. Hour of Spirits** (40) | Dead Dance; quarter-bells; the S9 appointment at the first; Vell to the river gate; east wing doubled | *"You dance like my daughter would have."* | Watches the party, loses them to a glint | **One per group:** S2 · S7 · S8 · S9 · S10 |
 | 3:00 | *Break* (10) | As the bells ring midnight | | | |
@@ -314,3 +314,35 @@ Several cannot all be true, which bothers nobody telling them.*
 | 10 | He crossed the mountains and saw Mazaa — walked among the godless machines — and came home to make the Orthaen ready for what's coming west. The new decrees are war logistics wearing worker's clothes. |
 | 11 | The staff weren't dismissed. They're still *in* there. Ask yourself why the east wing needs guards on the inside of the doors. |
 | 12 | He found something in his year away that told him the day he'll die. Everything since — the pact, the bride, the silence, this ball — is a man setting his affairs in order. *(Deliver this one straight. Let the table sit with it at dawn.)* |
+
+---
+
+## Player Handout 3 — Crystal Charges
+
+*Give this page to every player whose character carries a crystal charge.*
+
+Orthaen crystal holds finished workings, and a **charge** is one of them: a
+consumable magic item, one stored working, released at a touch by anyone — gifted or
+not, trained or not. Releasing one does not make its bearer a caster.
+
+- **Releasing a charge** takes the Magic action (an action, at a 2014 table), and no
+  roll. The charge is spent. Charges need no attunement.
+- **The six every Orthaen knows** are *common*: minor, local, brief. A gifted Orthaen
+  with the Orthaen Gift can grow one in a day of downtime from 25 GP of raw crystal,
+  one at a time, and no more than one a week: a gift is not a mint (Chapter III).
+  Price: 50 GP, which is a season's wages in the wrong district.
+- **Chancy releases.** When the fiction makes a release uncertain — fumbled in the
+  dark, jostled in a crowd — the bearer makes a DC 13 Charisma check; on a failure,
+  the action is spent and the charge is not.
+- Some things at this ball smother a charge; the DM will tell you.
+
+**Table VIII–8: Crystal Charges**
+
+| Charge | Rarity | When released |
+|---|---|---|
+| *Steady Light* | Common | The crystal sheds Bright Light in a 20-foot radius and Dim Light for a further 20 feet for 1 hour. |
+| *A Sealed Door* | Common | One door, lid or window you touch, no more than 10 feet across, grows shut for 1 hour. Forcing it is a DC 15 Strength (Athletics) check; your touch opens it. |
+| *A Veil of Quiet* | Common | For 10 minutes, no sound made within 10 feet of the crystal can be heard beyond that distance. Sound from outside still comes in. |
+| *A Chime at a Threshold* | Common | Set on a doorway or gap up to 20 feet wide. For 8 hours, when a Tiny or larger creature crosses it, the crystal chimes, audibly, within 60 feet. |
+| *Warmth* | Common | For 8 hours the bearer is comfortable in cold down to a hard frost, and has Advantage on saving throws against extreme cold. |
+| *A Held Image* | Common | The crystal shows the still, silent image its grower set in it — up to a 5-foot cube — for 1 minute. |

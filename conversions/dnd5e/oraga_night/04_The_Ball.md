@@ -329,7 +329,8 @@ chasing the Root has a very good reason to reach that slate first.*
 **B9. The East Wing — the Living Quarters.** Sealed, guarded, forbidden — and behind
 its doors, the warmest rooms in the palace, or the saddest, depending on when you
 learn what you learn. *(Forcing the doors is card S4. Nobody gets through them on a
-single check; the ways in are Agenda 4's errand, Anha's passages, and Undercurrent C.)*
+single check; the ways in are Agenda 4's errand (the grandmother's ring, shown at the
+doors; see "Dinner for Two (B9)", Movement IV), Anha's passages, and Undercurrent C.)*
 Warm light, a midwife's quiet traffic, and three finds:
 
 - **Veier's rooms.** Thenya through and through: border-country wool over Orthaen
@@ -740,7 +741,7 @@ rather than jailerly.
 **The trail:** the midwife, the third plate herself, glimpsed once crossing the gallery at
 the end of Movement II, moving like a woman who counts hours. Following her to the
 east wing doors is easy (DC 10 Dexterity (Stealth)); through them needs Agenda 4's
-errand, Anha's passages, or real ingenuity. Inside: warm light, the guarded calm of a
+ring, Anha's passages, or real ingenuity. Inside: warm light, the guarded calm of a
 household holding its breath, and the living quarters' three finds (B9) — the unpacked
 traveling pack, the two slings, and the nursery with its slow-turning crystal mobile.
 The pregnancy is the thread's answer; the pack and the slings are its heart, and a
@@ -857,13 +858,15 @@ them without trying; anyone else who is looking notices on a DC 10 Wisdom
 (Perception) check — and notes that the nine are placed *inward*, facing the palace
 doors, not the gates.
 
-**The quiet guest** *(the Attendant, Chapter VII)*. One sighting per Movement, each
-visible and deniable, and each shows one of its habits. At midnight those habits are
-how the party beats it (card S14), so show every one of them once, plainly. A player
+**The quiet guest** *(the Attendant, Chapter VII)*. One sighting in Movements I, II, IV
+and V, each visible and deniable, and each shows one of its three habits. At midnight
+those habits are how the party beats it (card S14), so show every one of them plainly. A player
 who says one out loud before anything explains it has read an omen (Table I–3).
+
 *If anyone follows or confronts it, now or in any Movement:* it walks into a shadow — an
 alcove, the far side of a pillar, a dark doorway — and is not there when they look. It
-never fights before midnight, and it is gone until the Unmasking.
+never fights before midnight. It is gone for the rest of that Movement and turns up in
+the next one as printed.
 
 *Movement I — the cup. When the party is halfway up the line, read:*
 
@@ -1083,12 +1086,8 @@ guarantees the recluse must appear. Players may approach them; see Chapter VII.
 Conversation with them is genuinely pleasant, which is, afterward, the part
 nobody can stop thinking about.)*
 
-**The quiet guest — the literal answer.** A guest in the Audience Hall line asks the
-attendant the time, the way you ask a servant. It answers precisely, to the quarter.
-The guest, amused, asks something else, and it answers that exactly too, and the next,
-and the next, at the same pace, until the guest gives up and walks away. It does not
-seem to notice the guest has gone. *(When the three gray masks come in with the crush,
-it is standing a few paces from where they stop. It does not look at them.)*
+*(When the three gray masks come in with the crush, the quiet guest is standing a
+few paces from where they stop. It does not look at them.)*
 
 > **The Snakes This Movement — III** *(optional; show one or two, then let them be)*
 >
@@ -1125,8 +1124,7 @@ it is standing a few paces from where they stop. It does not look at them.)*
 
 > **About 25 minutes** (starts 1:55). *Run:* the toast word for word, the two plates,
 > the omen, the quiet guest turning after the music, the one snake line that turned
-> hardest. *If you have time:* dinner for two
-> in the east wing — **not optional if anyone carries Agenda 4**.
+> hardest, and, if anyone carries Agenda 4, dinner for two in the east wing (B9).
 
 The banquet is called, and the galleries fill. And then, between the first course
 and the second, with no trumpet and no announcement, Raunu Boranis is simply
@@ -1170,9 +1168,8 @@ and only players who have run Undercurrent C know the tender truth of it. For
 Agenda 4 and the Thenya, the night sharpens: still no Veier, and now a midnight
 pronouncement coming. Maiven formally requests an audience; Corval, with genuine
 misery, declines. The east wing (B9) is the only way to her, and Undercurrent C
-is the map. *(Players who reach Veier after the toast find her eating dinner with
-her husband. It is the only time anyone sees the two of them together; stage it
-with all the warmth the ballroom's rumors deny them.)*
+is the map. *(Characters who reach Veier after the toast find her at dinner with her
+husband; see "Dinner for Two (B9)", below.)*
 
 **The omen:** the falconry mews behind the garden wing erupt — every bird screaming
 at once, then, worse, all at once silent. The gardens go quiet the way a forest does
@@ -1218,6 +1215,56 @@ everyone else's.
 >   She says nothing to Corval at all, which is worse than anything she might have
 >   said, and goes to sit with her people. The slingers are no longer counting.
 >   *Tell:* they have stopped drinking. → *the Thenya's line, Chapter IX (only if provoked).*
+
+#### Dinner for Two (B9)
+
+Run this after the toast if anyone carries Agenda 4. It is the only time anyone sees
+Raunu and Veier together, and the only place all night anyone sees Raunu Boranis at
+ease. Stage it with all the warmth the ballroom's rumors deny them.
+
+**Getting in.** A character who shows the door guards the grandmother's ring and asks
+for Veier by name is asked to wait. The ring goes in. If Veier chooses them, and by
+default she does, a guard walks them up. This is Raunu's line from the summons, kept:
+*"If she chooses you, you will know."*
+
+**When a character is let into the east wing after the toast, read:**
+
+> *The guard leaves you at an open door. The light in here is warm after the rose
+> glow of the halls. A small table is set with two plates, and Raunu Boranis and
+> Veier Nolonaire are eating off them side by side, the chief of the Orthaen easy in
+> his chair in a way the ballroom would never believe. A midwife comes and goes
+> quietly. By the door stands a border woman's traveling pack, and it is empty.*
+
+**Veier.** Blunt to the point of comedy, dry in the border-country way, homesick and
+unashamed of it. She meets careful diplomacy with take-it-or-leave-it directness, and
+a guest who came expecting a prisoner or a madwoman gets a brisk education (see
+chapter VII, "Veier Nolonaire — the Bride").
+
+**Raunu.** Awkward, unhurried and out of practice: long pauses, no pleasantries, the
+true thing said where the polite thing was expected. He listens completely. Raunu
+does not say what he will announce at the Unmasking.
+
+**Topics.** What the character can ask, and the answer the book already gives:
+- *Whether she is well.* Yes. Her answer for Maiven is the one chapter VII prints: *"I am
+  well. I am watched over. Tell my uncle his message took two years to reach me, so
+  his worry can wait two more."*
+- *Whether she is free.* The room answers. For her first year the pack by the door stood
+  packed, her plain statement that she could leave whenever she chose. It is empty
+  now, and its contents have become the room (area B9).
+- *Whether she is herself.* Entirely. Her secret is that she is happy, genuinely and
+  unfashionably, and rumor has no shelf for it.
+- *What she wants.* Her cousins to know she chose this.
+- *What she fears.* The same thing her husband fears, learned from watching him
+  prepare: something is coming for their family, and neither knows what or when.
+- *The two plates.* Explained at last: they were for the two of them.
+- *The midwife, or a child.* She does not speak of it (see chapter II, "Why the
+  Ball").
+  <!-- TODO-Q7: owner ruling pending on whether Veier may confirm the pregnancy to a character she trusts (AUDIT Q7 / CAST N2). Until ruled, the default follows INVENTIONS_5e.md R6 (the heir stays secret). -->
+- *The midnight announcement.* He gives no more than the toast gave.
+
+**Length and exit.** About 10 minutes of table time. When the lamps begin to lower
+for the Dead Dance, Corval comes to the door and the guest is shown out. Go to
+Movement V.
 
 ### Movement V — The Hour of Spirits *(approaching midnight)*
 

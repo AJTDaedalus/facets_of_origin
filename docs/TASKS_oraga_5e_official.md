@@ -53,19 +53,19 @@ text and the proposed wording for each finding.*
 
 ## Phase 1: Rules contradictions and the owner rulings already given
 
-### ☐ T1.1 One Focus trigger for the Attendant (NIGHT-1, O2)
+### ☑ T1.1 One Focus trigger for the Attendant (NIGHT-1, O2)
 - **Files:** 05 (*How to Run the Attack* bullet 2, "When the party becomes…"), 09 S14 *Enemy*, 08 Table VIII–1/VIII–2 Attendant line, 10 Attendant block (Focused/Idle text).
 - **Do:** use the NIGHT-1 replacement text in 05. Check that 09, 08 and 10 say the same thing: the card fires Idle, and the Attendant is Focused at the start of any turn when one of the three in the scene has no Delay.
 - **Accept:** only one trigger wording exists module-wide (grep "Focused"; every hit agrees). SA.
 - **Time:** 20 min.
 
-### ☐ T1.2 The Attendant vanishes for one Movement only (BALL-2, O2)
+### ☑ T1.2 The Attendant vanishes for one Movement only (BALL-2, O2)
 - **Files:** 04 ("The quiet guest" rule paragraph); 07 ("It is gone until the Unmasking"); 09 S14 "A habit the party has seen: +2".
 - **Do:** 04 before→after as in BALL-2. Make 07 say the same. In S14, add "Only habits the table actually saw count."
 - **Accept:** grep "gone until the Unmasking" = 0. SA.
 - **Time:** 15 min.
 
-### ☐ T1.3 Remove the Attendant's truthful-answer habit (owner Q5, O3)
+### ☑ T1.3 Remove the Attendant's truthful-answer habit (owner Q5, O3)
 - **Files and sites (locate by quote):**
   - 07: the four-habits sentence ("*it answers any direct question literally, and cannot leave one unanswered*"); the *Play it* line "answers exactly the question asked".
   - 04: the Movement III sighting "**The quiet guest — the literal answer.**" (cut the whole paragraph; keep the italic line about the three gray masks by moving it to the Movement III Uninvited note if it isn't already there); the rule paragraph ("one sighting per Movement" → "one sighting in Movements I, II, IV and V").
@@ -78,19 +78,19 @@ text and the proposed wording for each finding.*
 - **Accept:** grep -i "direct question|literally and truthfully|literal answer" in `M/*.md` = 0 (INVENTIONS history excepted). Every habit count says three. Every "one habit per Movement" line matches O3. SA.
 - **Time:** 30 min.
 
-### ☐ T1.4 Leashed return point (NIGHT-2, O4)
+### ☑ T1.4 Leashed return point (NIGHT-2, O4)
 - **Files:** 05 (*The last blow*; the second "come back on their next turn" site); 10 the Radiant and the Wept *Leashed* traits.
 - **Do:** apply the NIGHT-2 wording. Leave the Hollow's "within 60 feet of the doors he holds" as it is.
 - **Accept:** grep "within 60 feet of (his|her|its) quarry" = 0. SA.
 - **Time:** 15 min.
 
-### ☐ T1.5 The detain mercy defers to *To the Terms* (BESTIARY-1, O5)
+### ☑ T1.5 The detain mercy defers to *To the Terms* (BESTIARY-1, O5)
 - **Files:** 10 *How to Read*, "Knocked out, not killed"; also 05 *Midnight Rules* and 08's midnight-rules bullet, if either lists the Bought.
 - **Do:** apply the BESTIARY-1 before→after.
 - **Accept:** every mention of what the Bought do on a detain contract reads "1 Hit Point and the Grappled condition". SA.
 - **Time:** 10 min.
 
-### ☐ T1.6 Agenda 4: the east-wing doors and "Dinner for Two" (BALL-1, owner Q6)
+### ☑ T1.6 Agenda 4: the east-wing doors and "Dinner for Two" (BALL-1, owner Q6)
 - **Files:** 04 (Movement IV time box; new subsection **Dinner for Two (B9)** under Movement IV; B9's "ways in" line; Undercurrent C's door line); 07 (Veier and Raunu entries, for consistency); 03/Handout 2 card 4 (check only).
 - **Permitted sources (no other facts):** the grandmother's ring (03, Handout 2); Raunu's line "If she chooses you, you will know"; 07's Veier *Wants/Fears/Secret/Play her* and quote; 07's Raunu entry; Agenda 4's three questions and the answers 07 already gives; the B9 room description (the two plates, the midwife, the traveling pack); Corval's door duties.
 - **Do:**
@@ -101,7 +101,7 @@ text and the proposed wording for each finding.*
 - **Accept:** the scene can be run from the page (checklist C-S16: arrival box, envelope, topics, interruption or exit). Ledger rows are added for the box and the topics list. SA.
 - **Time:** 30 min.
 
-### ☐ T1.7 Player-safe crystal-charge handout (FRONT-2)
+### ☑ T1.7 Player-safe crystal-charge handout (FRONT-2)
 - **Files:** 08 (new **Player Handout 3 — Crystal Charges**; the old Handout 3 becomes a DM table in T2.5); 03 (*Crystal Charges* pointers); 11 (the "read *Items of the Night*, chapter X" pointer).
 - **Do:** copy the six common charges' rules text exactly from 10 *Items of the Night* (relocation, not new text). Leave out the "something that eats magic" line, or replace it with "Some things at this ball smother a charge; the DM will tell you." Use item names in the §3 style. Point 03 and 11 at the handout.
 - **Accept:** no player-facing chapter (03, 11, handouts) points into chapter X. SA.

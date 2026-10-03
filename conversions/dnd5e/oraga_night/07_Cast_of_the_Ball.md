@@ -63,10 +63,10 @@ happy, genuinely and unfashionably, and rumor has no shelf for it.
 
 **Where she is:** the east wing (B9), all night, near her time, the midwife in
 attendance. She is reachable only by players who earn the east wing — Agenda 4's
-errand, Anha's passages, Undercurrent C — so a scene with her is a prize, not a
-schedule item. Players who reach her after the toast find her at dinner with
+errand (the grandmother's ring at the doors), Anha's passages, Undercurrent C — so
+a scene with her is a prize, not a schedule item. Players who reach her after the toast find her at dinner with
 Raunu, the two plates explained at last — the only place all night anyone sees
-Raunu Boranis at ease.
+Raunu Boranis at ease (see chapter IV, "Dinner for Two (B9)").
 
 **Play her:** blunt to the point of comedy, funny in a dry border-country way,
 homesick and unashamed of it. She answers the delegation's careful diplomacy
@@ -458,16 +458,16 @@ rusty.
 **Before midnight — the quiet guest.** It is sent to spy ahead of the Uninvited, and it
 is bad at it. It watches the wrong people and loses interest halfway through a task.
 Asked whom it serves, it names no one, and looks around, briefly, for the master it is
-supposed to have. It has **four habits**, and they are how the party beats it at
-midnight: *it stares at worked crystal and light*; *it answers any direct question
-literally, and cannot leave one unanswered*; *it keeps a cup and cloak ready for a
-master who is not there*; *it follows music that changes*. Chapter IV shows one habit
-per Movement, visible and deniable, and a player who says one out loud before anything
+supposed to have. It has **three habits**, and they are how the party beats it at
+midnight: *it stares at worked crystal and light*; *it keeps a cup and cloak ready for
+a master who is not there*; *it follows music that changes*. Chapter IV shows one habit
+in each of Movements I, II, IV and V, visible and deniable, and a player who says one out loud before anything
 explains it has read an omen (Table I–3).
 
 It **never fights before midnight.** Followed, confronted or attacked, it walks into a
 shadow — an alcove, the far side of a pillar, a dark doorway — and it is not there
-when anyone looks. It is gone until the Unmasking. Drawing steel on it is still
+when anyone looks. It is gone for the rest of that Movement and turns up in the next
+one as printed (see chapter IV). Drawing steel on it is still
 drawing steel at the ball (*The Palace on Alert*, Chapter IV), and the guards arrive
 to find a player character with a blade out and nobody in front of them.
 
@@ -479,15 +479,15 @@ nearest table, and takes its place by the Uninvited. Read this when the lights d
 > facing the room. It does not look at anyone. It looks at the spaces between the
 > room and the three.*
 
-**Play it:** it speaks only when asked, and it answers exactly the question asked. It
+**Play it:** it speaks only when spoken to. It
 has no manners and no malice. Everyone who is not interrupting the three is furniture
 to it, and a creature that stops interrupting stops being its business.
 
 **If it comes to steel:** stat block **The Attendant**, Chapter X; card **S14**, Chapter
 IX, the night's boss. It has two states. **Idle** — its default — it is rusty, easily
-distracted, and cannot be bothered with its own magic. **Focused** — when one of the
-three glances at it and at the party, because the party has become a real
-interruption — it is devastating. A clever distraction breaks its focus, but only
+distracted, and cannot be bothered with its own magic. **Focused** — at the start of
+any of its turns, once the party has become a real interruption, if one of the three
+in the scene has no Delay and glances at it and at the party — it is devastating. A clever distraction breaks its focus, but only
 until one of the three glances at it again; the fourth broken focus of the night sends
 it off to stand at a window and watch the fires;
 driven to 0 hit points, it loses interest in being here and steps back into the

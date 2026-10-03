@@ -33,8 +33,9 @@ default, and most of these people would rather be anywhere else.
 **The palace's two mercies**, which several blocks refer to:
 
 - **Knocked out, not killed.** A creature reduced to 0 Hit Points by an attack
-  marked *detain* (the honor guard, the sect guard, the Bought on a contract to
-  detain, the Church Wardens) is **Unconscious and Stable** instead of dying. Before
+  marked *detain* (the honor guard, the sect guard, the Church Wardens; the Bought
+  leave a creature at 1 Hit Point and the Grappled condition instead, see *To the
+  Terms*) is **Unconscious and Stable** instead of dying. Before
   midnight it wakes in the gatehouse cell at the start of the next Movement, and
   somebody comes for it (Chapter IV, *The Palace on Alert*); after midnight the crowd
   rule in *Down, Not Out* gets it up sooner.
@@ -191,7 +192,7 @@ list below.
 **Damage Immunities** Poison, Psychic
 **Condition Immunities** Charmed, Exhaustion, Frightened, Poisoned
 **Senses** Darkvision 120 ft., Passive Perception 14
-**Languages** Common; speaks only when asked, and answers literally and truthfully
+**Languages** Common; speaks only when spoken to
 **CR** 8 (XP 3,900; PB +3) while Focused — nearly twice High for four 4th-level
 characters, on purpose (card S14). Idle, about CR 5 by the yardstick, and High by the
 clock. Award the full XP however the party gets it out of the way.
@@ -221,11 +222,10 @@ to distract it: describe the trick, then roll the ability and skill that fit it
 against **DC 13 while it is Idle, DC 19 while it is Focused**. It falls for **one
 trick a round**: once anyone has tried, nobody else can until the next round, and
 Help doesn't apply. Playing the trick out in character adds +2, and using one of its
-four habits the party has seen adds +2 (+4 at most). A trick already tried on it
+three habits the party has seen adds +2 (+4 at most). A trick already tried on it
 tonight gets no bonus and has Disadvantage; the same trick never works a third time.
-Its habits: *it stares at worked crystal and light; it answers any direct question
-literally, and can't leave one unanswered; it keeps a cup and a cloak ready for a
-master who isn't there; it follows music that changes.* A success against it while
+Its habits: *it stares at worked crystal and light; it keeps a cup and a cloak ready
+for a master who isn't there; it follows music that changes.* A success against it while
 it is Focused **breaks its focus** until the start of its next turn; beat the DC by 5
 and it loses that turn as well. A success while it is Idle means it does nothing on
 its next turn, but doesn't count. On a failure the trick is spent, and a Focused
@@ -268,23 +268,21 @@ condition. *Success:* Half damage only. The magic is real. It rarely cares to us
 A quiet guest dressed as a great house's attendant, carrying a cloak and a cup for a
 master who never appears. It was sent to watch ahead of midnight and it is bad at
 it. It will not fight before the Unmasking: confronted or attacked, it walks into a
-shadow and is gone until midnight, and steel drawn on it is still steel drawn at the
+shadow and is gone for the rest of that Movement, and steel drawn on it is still steel drawn at the
 ball (Chapter IV, *The Palace on Alert*). Asked whom it serves, it names nobody, and
 looks round, briefly, for the master it is supposed to have.
 
 > **Wants.** Nothing. It has an order — keep the three from being interrupted — and
 > if asked what the order is, it repeats it word for word.
 > **Tells.** *Before midnight:* holds a cup for someone who never takes it; stops
-> in front of a crystal wall and watches the light for a full minute; answers a
-> guest's question precisely, then the next, then the next, until the guest gives up;
+> in front of a crystal wall and watches the light for a full minute;
 > turns to follow the band when the tune changes; loses the people it is watching
 > whenever something bright goes past. *At midnight:* sets the cloak and
 > the cup down on the nearest table. In a fight, it goes still when one of the three
 > looks at it, and then it comes for whoever that one was looking at.
 > **Breaks.** Not from fear or pain. Its focus broken four times, or 0 Hit Points,
 > and it is gone. An argument that what the party is doing is not, strictly, interrupting the
-> three is a distraction like any other (Intelligence or Charisma, and a direct
-> question it must answer is a habit).
+> three is a distraction like any other (Intelligence or Charisma).
 > **Nastier.** It is already Focused when the party first draws its attention at
 > midnight.
 > *Made, not born, and in the service of the Uninvited's master; it came through with
@@ -1300,8 +1298,8 @@ Petrified, Stunned, Unconscious
 
 ***Leashed.*** The Radiant can't die tonight. If he would drop to 0 Hit Points, or be
 killed outright by any means, he steps into the world's shadow instead and returns at
-the start of his next turn, at full Hit Points, within 60 feet of his quarry, resuming
-the hunt. At the start of that turn, whoever dealt the last blow makes a DC 15
+the start of his next turn, at full Hit Points, in the space where he dropped (or the
+nearest unoccupied space), resuming the hunt. At the start of that turn, whoever dealt the last blow makes a DC 15
 Strength or Dexterity saving throw (their choice); on a failure they are pushed 15
 feet and have the Prone condition. No damage. If any effect would send him to another
 plane or move him against his will by magic, the leash pulls him back to where he
@@ -1708,8 +1706,8 @@ Petrified, Stunned, Unconscious
 
 ***Leashed.*** The Wept can't die tonight. If she would drop to 0 Hit Points, or be
 killed outright by any means, she steps into the world's shadow instead and returns at
-the start of her next turn, at full Hit Points, within 60 feet of her quarry,
-resuming her task. At the start of that turn, whoever dealt the last blow makes a
+the start of her next turn, at full Hit Points, in the space where she dropped (or
+the nearest unoccupied space), resuming her task. At the start of that turn, whoever dealt the last blow makes a
 DC 15 Strength or Dexterity saving throw (their choice); on a failure they are pushed
 15 feet and have the Prone condition. No damage. She stops indulging the
 interference; she does not take it personally. If any effect would send her to
@@ -1926,7 +1924,7 @@ not, trained or not. Releasing one does not make its bearer a caster.
 | **A Sealed Door** | Common | One door, lid or window you touch, no more than 10 feet across, grows shut for 1 hour. Forcing it is a DC 15 Strength (Athletics) check; your touch opens it. |
 | **A Veil of Quiet** | Common | For 10 minutes, no sound made within 10 feet of the crystal can be heard beyond that distance. Sound from outside still comes in. |
 | **A Chime at a Threshold** | Common | Set on a doorway or gap up to 20 feet wide. For 8 hours, when a Tiny or larger creature crosses it, the crystal chimes, audibly, within 60 feet. |
-| **Warmth** | Common | For 8 hours the bearer is comfortable in cold down to a hard frost, and has advantage on saving throws against extreme cold. |
+| **Warmth** | Common | For 8 hours the bearer is comfortable in cold down to a hard frost, and has Advantage on saving throws against extreme cold. |
 | **A Held Image** | Common | The crystal shows the still, silent image its grower set in it — up to a 5-foot cube — for 1 minute. |
 | **House Flare** | Uncommon | Bright Light fills a 30-foot Emanation from the crystal until the end of your next turn. Nothing in it can benefit from the Invisible condition or take the Hide action. *(The honor guard's.)* |
 | **House Seal** | Uncommon | One door within 30 feet swings shut and grows closed until the scene ends. Forcing it is a DC 20 Strength (Athletics) check. *(The honor guard's.)* |
