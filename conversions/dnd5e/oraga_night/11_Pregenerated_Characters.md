@@ -34,13 +34,13 @@ agenda that reaches the east wing, and Chapter V leans on it.
 with Heroic Inspiration and regains it on a long rest; **Skillful** — one extra skill,
 listed; **Versatile** — one origin feat, listed (the gifted take their gift). Size
 Medium, speed 30 ft., proficiency bonus +2. Languages: Common and two
-others the player and MM agree on. Every guest carries a knife, because everyone at this
+others the player and the DM agree on. Every guest carries a knife, because everyone at this
 ball does; drawing it is the crime. Crystal charges are consumable magic items — see
 Player Handout 3, "Crystal Charges" (chapter VIII), for what each does.
 
 **Masks.** No guest's mask is written down, because a mask is the player's to describe.
 Each sheet ends with one question about it, for the player to answer in the street on
-the way to the gate (Chapter IV, B0), when the MM asks what everyone's mask looks like.
+the way to the gate (Chapter IV, B0), when the DM asks what everyone's mask looks like.
 
 *At a 2014 table:* keep the concept and the equipment, and rebuild the ability scores
 and class features from your own rules (a 2014 standard-array human cannot reach the
@@ -75,7 +75,7 @@ Survival +2, Arcana +1, Nature +1, Athletics +0
 **Background — Minor Scion.** *Abilities:* Intelligence, Wisdom, Charisma (+2 Cha, +1
 Wis). *Origin feat:* Alert. *Skills:* History, Persuasion. *Tool:* gaming set.
 **Specialty, in 5e terms:** sect heraldry and old grudges — knows who hates whom, and
-why, and since when. When it bears, the MM gives the answer without a check.
+why, and since when. When it bears, the DM gives the answer without a check.
 
 **Feats.** *Alert* (initiative bonus included; may swap initiative with a willing ally).
 *Orthaen Gift* (Versatile): advantage on checks about grown crystal; knows
@@ -120,7 +120,7 @@ Church's one question. Either way she is working a snake's errand (Chapter IX), 
 inside.
 
 **Mask.** *Whose spirit-face does Serane wear tonight — and who in her own house will
-recognise it?*
+recognize it?*
 
 ---
 
@@ -150,7 +150,7 @@ Investigation +3, Deception +2, Persuasion +2, Athletics +1
 +1 Wis). *Origin feat:* Skilled (Deception, Investigation, disguise kit). *Skills:*
 Insight, Persuasion. *Tool:* vehicles (land).
 **Specialty, in 5e terms:** contracts, caravans, and smugglers' roads — who moves goods,
-and around which laws. When it bears, the MM gives the answer without a check.
+and around which laws. When it bears, the DM gives the answer without a check.
 
 **Feats.** *Skilled.* *Phern Gift* (Versatile): advantage on checks to sense danger
 coming or where it comes from; knows *guidance* (Wisdom); **The Prickle** — never has
@@ -224,7 +224,7 @@ Medicine +3, Perception +3
 Int, +1 Con). *Origin feat:* Skilled (Insight, Medicine, Nature). *Skills:* History,
 Investigation. *Tool:* jeweler's tools.
 **Specialty, in 5e terms:** the collected history of House Boranis — every public fact
-and most of the private ones, held in memory and lattice. When it bears, the MM gives
+and most of the private ones, held in memory and lattice. When it bears, the DM gives
 the answer without a check.
 
 **Feats.** *Skilled.* *Orthaen Gift* (Versatile): advantage on checks about grown
@@ -242,7 +242,7 @@ shaped it, and whether it is holding a working right now.
 - **Ritual Adept.** Casts any ritual spell in her lattice as a ritual without preparing
   it, with the lattice in hand.
 - **Arcane Recovery.** Once per Long Rest, when she finishes a Short Rest, recovers spell
-  slots totalling 2 levels.
+  slots totaling 2 levels.
 - **Scholar.** Expertise in History.
 - **Evocation Savant** (Evoker). *Magic missile* and *darkness* added to her lattice
   free.
@@ -305,7 +305,7 @@ Str, +1 Con). *Origin feat:* Savage Attacker. *Skills:* Athletics, Insight. *Too
 gaming set.
 **Specialty, in 5e terms:** knows the layout, regular occupants, and unofficial rules
 of one district of Rekuzan from her service years — the player names which. When it
-bears, the MM gives the answer without a check.
+bears, the DM gives the answer without a check.
 
 **Feats.** *Savage Attacker* — once per turn, roll a weapon's damage dice twice and use
 either. *Alert* (Versatile) — initiative bonus included; may swap initiative with a
@@ -382,7 +382,7 @@ History +2
 **Background — Border Courtier.** *Abilities:* Constitution, Wisdom, Charisma (+2 Wis,
 +1 Cha). *Origin feat:* Alert. *Skills:* Insight, Persuasion. *Tool:* disguise kit.
 **Specialty, in 5e terms:** the Thenya border and the Nolonaire family — its history,
-its debts, and everything Veier was before Rekuzan. When it bears, the MM gives the
+its debts, and everything Veier was before Rekuzan. When it bears, the DM gives the
 answer without a check.
 
 **Feats.** *Alert* (initiative bonus included; may swap initiative with a willing ally).

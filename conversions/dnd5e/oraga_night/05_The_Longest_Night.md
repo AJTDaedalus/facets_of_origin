@@ -158,7 +158,7 @@ When the first beat turns into a fight, nobody is surprised: everyone saw the li
 die.
 
 Then release the beats. From here the module cannot script — it can only tell you
-where everything is and what everything wants. The MM sheet (Chapter VIII, Table
+where everything is and what everything wants. The DM sheet (Chapter VIII, Table
 VIII–2) holds the map: **the Wept → Raunu. The Radiant → Veier. The Hollow →
 the doors, herding, keeping the herd from mattering. The Attendant → whoever gets
 in their way.** Master Vell is already moving
@@ -218,7 +218,7 @@ They are moving it out of the way.
   the start of that turn, whoever dealt the last blow makes a **DC 15 Strength or
   Dexterity saving throw** (their choice). On a failure they are pushed 15 feet in a
   direction the DM chooses and have the Prone condition. No damage. If no creature dealt it — fire, falling stone — nobody
-  saves; if two blows landed at once, the MM picks.
+  saves; if two blows landed at once, you pick.
 
 The **Attendant** (below) works the same way: whoever it drops is Stable, and gets up
 the same way. Everything else tonight — the snakes, the Bought, the fire — uses the
@@ -234,7 +234,7 @@ people.
 where the players can see it: a die beside each of the three. At the start of an
 Uninvited's turn, if they have any Delay, spend one point. That turn they make no
 progress toward their errand — they recover, find another way round, or deal with the
-problem the party made, and the MM says which. They can still strike whoever is in
+problem the party made, and you say which. They can still strike whoever is in
 reach. When the night is running in beats instead of rounds, a point is a beat (see "The
 Midnight Clock").
 
@@ -490,7 +490,7 @@ What history records, told in scenes. Bend everything except what the players be
   moment the screaming starts, Tavva's crew (Chapters IV and VII; **Tavva** and her
   **Gallery Knives**, Chapter X) goes to work — the gallery's wards are guttering, its
   guards are dying on the dais, and a season of planning meets the best cover Rekuzan
-  will ever offer. Two of her knives hit the trophy gallery (B7); the others work the
+  will ever offer. Two of her knives hit the trophy gallery (B7); she and the third work the
   smoke-filled galleries and corridors, cutting purses, rings, and masks from
   the fallen and the fleeing. **This is the fight aimed at the noble-minded — no
   faction, no clock, nothing at stake but property and decency**: guests being robbed
@@ -513,8 +513,8 @@ upright anyway, moving with Thenya bluntness toward the water — meets Master V
 at the garden stair as if by appointment. Any player character with her (Agenda 4
 above all) is welcome company: Vell does not explain, does not slow, and does not
 refuse help. Then the lanterns die along the terrace behind them, and the Radiant
-steps out of the smoke — and for the first and only time all night, the pale
-factor stops being unmemorable.
+steps out of the smoke — and for the first and only time all night, Master
+Vell stops being unmemorable.
 
 This is the crescendo, and its rule is simple: the players are caught between two
 people the mortal world has no answer for, and they cannot beat either one. What
@@ -585,7 +585,7 @@ otherwise, never for a table that was busy saving someone else.
 > someone): on a success they ride it; on a failure they take **7 (2d6) bludgeoning
 > damage** or lose their next action shielding someone, their choice; if they fail by
 > 5 or more, they take **14 (4d6) bludgeoning damage**, or the ground between them and
-> the gate gets worse (difficult terrain, a gap to jump, a stair gone), the MM's
+> the gate gets worse (difficult terrain, a gap to jump, a stair gone), the DM's
 > choice. Cover doesn't help against a garden coming apart, and Evasion changes
 > nothing: a success already takes no damage. Never aim the duel *at* a player character — the
 > terror of the Crossing is precisely that neither combatant cares that they are
@@ -644,7 +644,7 @@ in practice it means this:
 palace's ward-fire; the Fractures, which reach the person inside each of them; and the
 leash, which ends their night. That is the complete list.
 
-> **MM Note — the table that will not stop trying to kill them**
+> **DM Note — the table that will not stop trying to kill them**
 >
 > **Default:** let them try, run it honestly, and pay every 30-damage round in Delay.
 > When the Wept reaches 0 hit points, say out loud what just happened: "She stops.
@@ -697,10 +697,10 @@ the Uninvited's blocks.)*
   (*Buying Time*).
 - **Miss by 4 or less:** it lands in full, and that Uninvited gains 2 Delay, but it
   answers first with one terrible parting blow — one attack against the speaker, rolled in the open (*Down, Not Out*
-  holds) — or one word that the speaker will carry for the rest of their life. The MM
-  chooses which.
+  holds) — or one word that the speaker will carry for the rest of their life. You
+  choose which.
 - **Miss by 5 or more:** it does not land. The Uninvited acts against the speaker,
-  or the scene around them gets worse; the MM chooses. The Fracture is not spent; it
+  or the scene around them gets worse; you choose. The Fracture is not spent; it
   can be tried again once the party has witnessed a new tell.
 
 **Each Fracture works once.** When it has landed, it is spent for the night.
@@ -758,7 +758,7 @@ the Uninvited's blocks.)*
 > magic that would move them (Chapter X). What reaches them is what reached them all
 > night — a person, paying attention, saying something true. A spell can *carry* the
 > words (a *message*, a *thaumaturgy* voice booming over the hall so the Radiant's
-> congregation hears the doubt too) and the MM should welcome that. It never replaces
+> congregation hears the doubt too) and you should welcome that. It never replaces
 > the words or the check.
 
 ---
@@ -813,12 +813,12 @@ her. The module would prefer somebody competent went with her.
 takes her home in the morning instead of her kinswoman. **If the party goes with
 her:** she is the best ally in the palace for the next ten minutes — a border fighter
 who knows exactly what she came for — and the Radiant is ahead of both of them. Her
-slingers standing in its sight are witnesses, and witnesses are hallways. *(There is no
+slingers standing in his sight are witnesses, and witnesses are hallways. *(There is no
 card for this. At this hour, fighting Maiven means fighting a woman trying to save her
 family.)* **What it changes:** a living Maiven is the aftermath's fiercest ally,
 refusing to leave the city without her cousin or a body.
 
-> **MM Note — which knives to show**
+> **DM Note — which knives to show**
 >
 > **Default:** show the line nearest wherever each player character is, one per beat
 > at most, and never two in the same beat. The attack stays in the foreground; a snake
@@ -895,7 +895,7 @@ at the gate. **The Bought are not snakes.** Nobody at the ball invited them, nob
 the ball hired them, and they are not interested in anybody's feud. They are the
 night's one mortal antagonist with a contract instead of a grudge.
 
-> **MM — what you must not say.** The factor has no face and no name. He is the same
+> **DM Note — what you must not say.** The factor has no face and no name. He is the same
 > answer as everything else tonight, and the module never gives it. Vell knows the
 > company is there and planned around it, which is why the escape is the river gate
 > and the front was never anything but a decoy.
@@ -919,7 +919,7 @@ bells of Oraga begin to toll the end of the night as the first guests reach the
 court (card S3 counts them).
 
 > *The outer gate is shut, and it was shut from the far side. Through the grille:
-> matched grey coats, more of them than there are of you, arranged with the
+> matched gray coats, more of them than there are of you, arranged with the
 > unhurried spacing of people who have done this before. One of them is holding a
 > chained case up where you can see it, the way you would hold a lantern, and he is
 > reading aloud from it in a voice pitched to carry over a crowd.*
@@ -969,7 +969,7 @@ Uninvited⟩), this is the moment the leash tears them out. The Bought's hours a
 The night is.
 
 **Development.** A captured sergeant, contract case and all, is the inquest's best
-evidence and the only mortal thread that leads east. A bought-out captain honours the
+evidence and the only mortal thread that leads east. A bought-out captain honors the
 deal absolutely and **will not resume the fight tonight for any inducement** — which
 a clever table can turn into sixteen blades holding the gate *open*.
 
@@ -1106,7 +1106,7 @@ much to know who used his company's name to burn a city.
 **⟨The Second Clause succeeds.⟩** It must not — Veier leaves by the river, and the
 front gate was always a decoy. If a table somehow brings her to the front anyway,
 two outs are already on the board and you should reach for whichever is closer. The
-captain's honour clause: a bought-out or contract-voided company does not resume for
+captain's honor clause: a bought-out or contract-voided company does not resume for
 any inducement, including the one it was originally hired for. And the sect guard:
 on the clock's last segment they are at the outer wall, and no company of the Bought
 has ever held a gate against a sect banner for a fee.

@@ -350,3 +350,26 @@ Hard-rule detail: role_name is 75 "MM" + 1 "Mirror Master". bare_dc 146 = bare "
 - Ledger: INVENTIONS **#65**. Decisions: **O13–O15**.
 
 **Skipped sites:** none. Every quoted phrase was found. **TODOs added:** Q16 (11, Ilesse). *Note:* "Thieves' Tools" is capitalized in Fast Hands as the SRD prints it; the rest of the module still has "thieves' tools" lowercase (for T4.2 to settle).
+
+## Phase 4
+
+### Phase 4a — T4.1 MM → DM (owner Q1) and T4.6 spelling (Worker, 2026-10-03)
+
+**Commands, after each task:** `python conversions/dnd5e/oraga_night/tools/lint_5e.py --check`; `python conversions/dnd5e/oraga_night/tools/bestiary_check.py`; `python conversions/dnd5e/oraga_night/tools/pregen_check.py`; `python -m pytest conversions/dnd5e/oraga_night/tools -q`; `python conversions/dnd5e/oraga_night/flow/build_flow_page.py` (flow.json changed in both tasks). Final results: lint `--check` OK, exit 0. bestiary_check: 25 blocks + 3 Nastier, 0 mismatches. pregen_check: 5 pregens, 0 issues. pytest: 144 passed. Flow page rebuilt without errors. `git diff --stat adventures/` empty. No re-baseline.
+
+**Hard hits: 418 → 355 (T4.1) → 304 (T4.6).** role_name 63 → 0; british_spelling 36 → 0; grey 15 → 0. Structure hits stay at 1 (05 gate box, Phase 5). Soft metrics did not regress. No whitelist entries added.
+
+**T4.1 edits** (62 lines, each edited by quoted phrase from the lint hit list, no global sed):
+- "MM Note" → "DM Note" (02, 04, 05 ×2, 09 ×3); "MM sheet" → "DM sheet" (01 ×4, 04 ×2, 05, README); "MM ONLY" → "DM ONLY" (02 *The Truth of the Night* heading); "MM only" → "DM only" (07 Attendant); "(MM: …" / "(MM truth: …" → "(DM: …" / "(DM truth: …" (02 agenda 8, 03 Thenya Gift, 07 Vell ×2).
+- Third person kept as "the DM" in player-facing text (03 ×4, 11 ×7, 02 agenda cards) and in Chapter X traits (10 ×4), in 01's heading (now "What the DM Knows (And What the DM Doesn't)", with its pointer "*What the DM Knows*"), 05's "the DM's choice" (after "their choice" for the characters), 07 "left them to the DM", 09 "the DM's invention" and 09 Tavva's trade ("the DM picks two", where "you" already meant the characters), and flow.json node 205.
+- "You" where the sentence instructs the DM: 01 Troubleshooting head ("you keep defaulting to DC 20"); 04 B11 parenthetical ("Know this geography cold"); 05 ("you pick", "you say which", "You choose which", "you choose", "you should welcome that"); 07 ("so you know what she does"); 09 ("You name who did it", "you pick which, and say which, out loud", "(your call)", "you do not have to be subtle", "you say who did not get out", "you describe the sound", "(you roll who, in the open)", "you narrate who").
+- Undeclared "**MM —**" leads became the declared species "**DM Note —**" (05 B12 "what you must not say", 07 factor box, 09 Attendant "how to hint that it can be distracted"). 01 "One MM tip above all others" → "One tip above all others".
+- INVENTIONS #55: "MM-only" → "DM-only" (describes current text). Historical mentions (R1 "MM background", #10, #23) left as ledger history.
+- No "Mirror Master" occurred in M/. flow_page.template.html had no hits.
+
+**T4.6 edits** (63 word changes across 01, 04–07, 09–11, README, flow.json):
+- Lint list: colour(s) → color(s), rumour → rumor, centre/centred → center/centered, labelled → labeled, recognise(s) → recognize(s), organised → organized, honour(s) → honor(s), favour/favourite → favor/favorite, defence/self-defence/offence → defense/self-defense/offense. Also beyond the lint list: totalling → totaling (11), fulfil → fulfill (07), licence/Licence → license/License (README, incl. the heading; no anchor points to it), pretence → pretense (01, 07, flow.json), savours → savors (10), memorise → memorize (09 ×2). Read-aloud was included: the spelling rule says "everywhere" and the lint grey/spelling rules scope ALL. No hit was in canon NPC speech (09's "throws colours" is a player example line). Handout 1's canonical text had no hits.
+- **Gray, and INVENTIONS #43:** #43 is an edition invention awaiting owner review ("Nothing here is settled until the owner approves"); its Canon column cites the written-word law and Kovaun's role, not the robes. The Facets edition (`adventures/oraga_night/`) never says "grey robes" and itself mixes "gray masks" and "grey coats". So "grey robes" is not fixed canon wording: "gray" everywhere (robes, coats, Callun's iron-gray, the Bought's Gray wool), no whitelist entry. INVENTIONS itself was not swept (STYLE "Do not touch" #3).
+- NIGHT-23 slips (05, located by quote): "slingers standing in its sight" → "his sight" (Maiven/Radiant); "the pale factor stops being unmemorable" → "Master Vell stops being unmemorable"; "Two of her knives hit the trophy gallery (B7); the others work the" → "…; she and the third work the" (S5 and 09 give Tavva three Gallery Knives). 09's "within its sight" is the Attendant and stays.
+
+**Skipped sites:** none. Every quoted phrase was found.

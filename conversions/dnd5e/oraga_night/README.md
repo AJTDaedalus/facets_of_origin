@@ -78,7 +78,7 @@ Chapters VII to XI are the book's appendices.
 
 | File | What it is |
 |---|---|
-| `README.md` | This page — contents, what to read first, licence |
+| `README.md` | This page — contents, what to read first, license |
 | `STYLE_5e.md` | The house style sheet for the 5e text; the linter in `tools/` checks most of it |
 | `INVENTIONS_5e.md` | Every new fact this edition had to invent, for the setting author's review |
 | `flow/` | The visual workflow: `flow.json` (every Movement, scene, fight, branch and ending as nodes and edges), `build_flow_page.py`, its template, and the generated `oraga_night_flow.html` — rebuild with `python3 build_flow_page.py`, never edit the HTML by hand |
@@ -86,7 +86,7 @@ Chapters VII to XI are the book's appendices.
 ## What to Read First
 
 **Ninety minutes of prep.** Chapter I opens with a box, *How to prep in 90 minutes*:
-what to read, in what order, and what to skim. In short: the MM sheet in Chapter VIII,
+what to read, in what order, and what to skim. In short: the DM sheet in Chapter VIII,
 the fight cards in Chapter IX and the blocks in Chapter X are what you run from;
 Chapters IV and V are the reference behind them.
 
@@ -102,7 +102,7 @@ setting's future, and no table needs them to run an unforgettable night. Everyth
 required to play every scene is in these pages. No spell on any list opens what the
 module keeps shut.
 
-## Licence and Attribution
+## License and Attribution
 
 This work includes material from the System Reference Document 5.2.1 ("SRD 5.2.1") by
 Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd. The SRD 5.2.1 is

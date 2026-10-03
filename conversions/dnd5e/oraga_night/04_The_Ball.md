@@ -88,7 +88,7 @@ alert rule above is suspended, because there is no longer anybody enforcing it. 
 honor guard is doing one thing now. So, in the dark, are the snakes (see chapter V,
 "The Snakes in the Dark").
 
-**What the Bought do, at each bell:** see the MM sheet in Chapter VIII. In short —
+**What the Bought do, at each bell:** see the DM sheet in Chapter VIII. In short —
 nothing at all until the quarter-bells, and then the gate.
 
 ### When Somebody Draws Early
@@ -161,7 +161,7 @@ whether the party engages or not:
   Discarded Invitation hook, made visible. A character who took that hook is
   watching their own arrival happen to a stranger.)*
 - **Every great house's hired swords idle at the edge of the court** in unmatched
-  colours, waiting for masters who will be inside for six hours. There are a great
+  colors, waiting for masters who will be inside for six hours. There are a great
   many of them this season. *House Boranis hired none.*
 - **A tall, pale factor is already inside**, having arrived early and entirely
   unremarkably. Nobody in the line saw him arrive. Nobody in the line is thinking
@@ -174,7 +174,7 @@ honor guards on the gate, and every one of them is facing **inward**.
 line or is sought by them — that is the module's engine and it should turn over once
 before anyone reaches the door. Rumor Table rolls are legal from the first minute.
 
-> **MM Note — the first check of the night**
+> **DM Note — the first check of the night**
 >
 > **Default:** make it a **social** check at **DC 13** — Charisma (Persuasion) to
 > talk a place up the line, Wisdom (Insight) to read who is selling what — and if it
@@ -189,7 +189,7 @@ before anyone reaches the door. Rumor Table rolls are legal from the first minut
 > and the table learns that checks are things you pass; open on a DC 13 and let a
 > near-miss land honestly — *you get what you asked for, and here is what it costs* —
 > and they have learned the actual night in thirty seconds. This module is full of
-> near-misses. Teach it here, where the cost is a rumour and somebody's dignity.
+> near-misses. Teach it here, where the cost is a rumor and somebody's dignity.
 
 **B1. The Gatehouse Court.** Where invitations are presented — by name, against
 Minister Corval's memory, personally; there is no written list, and with Corval
@@ -246,7 +246,7 @@ rumor (Table VIII–7) or one fact from the speaker's entry in Chapter VII.)*
 
 > *A smaller crystal chamber off the Court, lit for the first time in two years —
 > you can tell, because the light finds dust in the air that nobody has had reason
-> to disturb. A dais, worn down its centre. One chair. The room is quiet in the
+> to disturb. A dais, worn down its center. One chair. The room is quiet in the
 > particular way of a room that a great many people are deliberately not entering.*
 
 **B4. The Audience Hall.** A smaller crystal chamber off the Court, its dais worn
@@ -260,7 +260,7 @@ and everyone rehearsing their one question.)*
 **B5. The Garden Terraces & the River Gate.** Lantern-strung gardens stepping down to
 the water, ending at a modest iron gate to the river walk — locked, always. Couples,
 conspirators, and anyone needing air. *(Agenda 6 lives here. So does the escape route.
-MM: know this geography cold — Court → terraces → lower garden → river gate. The
+Know this geography cold — Court → terraces → lower garden → river gate. The
 gate's lock takes a DC 15 Dexterity check using thieves' tools; Agenda 6's player needs no check, having
 been given what they need.)*
 
@@ -391,7 +391,7 @@ yours.
 
 What it should be depends on what your table has done by Movement IV. If they have
 been chasing the household question, make it the room where twenty-two people's
-effects are stacked and labelled in a hand nobody recognises. If they have been
+effects are stacked and labeled in a hand nobody recognizes. If they have been
 chasing Veier, make it a nursery that was prepared and then unprepared. If they have
 been chasing nothing in particular, make it the one room in the palace that is warm,
 with a fire lit and two chairs, and let them find out later who was sitting in them.
@@ -410,7 +410,7 @@ Chapter V.)*
 Two hundred guests, the named ones in Chapter VII. Between scheduled events, run the
 ball as a loop of **approaches**: a player character seeks someone out, or is sought
 out — patrons checking on agendas, rivals testing masks, strangers flirting, Vorlain's
-cousin Essin recruiting drinking companions who might talk. The MM sheet in Chapter VIII
+cousin Essin recruiting drinking companions who might talk. The DM sheet in Chapter VIII
 says where everyone stands in each Movement.
 
 **Rumors** circulate all night: any social scene can yield one (roll on the table in
@@ -866,7 +866,7 @@ the next one as printed.
 
 > **The Snakes This Movement — I** *(optional; show one or two, then let them be)*
 >
-> - **The Circle.** Mistress Callun waits in the line like everyone else, iron-grey and
+> - **The Circle.** Mistress Callun waits in the line like everyone else, iron-gray and
 >   cordial. The **Circle Hired Knives** with her do not talk and do not look at
 >   the crystal. As Corval names each arriving guest, they repeat the name under their
 >   breath. The Circle keeps its accounts in trained heads, the only way the law
@@ -875,7 +875,7 @@ the next one as printed.
 > - **The Church.** Prelate Kovaun passes the gate with a word for everyone. Once
 >   inside, the **Church Wardens** with her go and stand where they can see the empty
 >   high table and the east doors at the same time. Raunu can appear in only two
->   places, and they are watching both. *Tell:* grey-robed men who never look at the
+>   places, and they are watching both. *Tell:* gray-robed men who never look at the
 >   dancing. → *the Church's line, Chapter IX.*
 > - **House Draunel.** Lord Draunel is already in the Crystal Court, polished and
 >   obvious. His **Draunel Duelists** have found the wine and have drifted, very
@@ -940,7 +940,7 @@ serves, it names no one, and looks around, briefly, for somebody who is not ther
 > - **The Church.** The Wardens are asking the festival hires which rooms the master
 >   uses. They are polite about it, and they are asking about the Audience Hall and
 >   the dark wing on the second floor. *Tell:* a footman looking back over his shoulder
->   after a grey robe moves on (DC 13 Wisdom (Insight)). → *the Church's line, Chapter IX.*
+>   after a gray robe moves on (DC 13 Wisdom (Insight)). → *the Church's line, Chapter IX.*
 > - **House Draunel.** At the wine court a Duelist jostles one of Essin's blades, and
 >   a cup goes over, and a sentence about *the missing year* is said a little too
 >   loudly. Nobody draws. That is the point: Draunel fears being seen wanting the
@@ -1286,7 +1286,7 @@ public rooms is made with Advantage until the bells).
 Court. For anyone elsewhere, read only the first two sentences:**
 
 > *The lamps come down until the only real light is the walls, and the walls are
-> the colour of the inside of a shell. The music slows into something with a much
+> the color of the inside of a shell. The music slows into something with a much
 > older shape to it. All around you the spirit-faces turn — you cannot tell who
 > anyone is, and neither can they, and that is the point of the hour. Somewhere
 > above, a bell strikes a quarter.*

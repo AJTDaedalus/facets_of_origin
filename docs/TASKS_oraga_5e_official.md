@@ -264,7 +264,7 @@ Each task: rerun both math scripts and the linter's structure rules. Mirror site
 
 These rules are mechanical, but a worker makes every edit with the linter's hit list in hand. No blind global `sed`. Read-aloud and quoted speech are skipped unless a rule says otherwise.
 
-### ☐ T4.1 MM → DM (owner Q1)
+### ☑ T4.1 MM → DM (owner Q1)
 - **Scope:** every `M/*.md` file, `flow.json` and `flow_page.template.html`.
 - **Rules:** "the MM" in instructions → "you" where the sentence is addressed to the DM, otherwise "the DM". "MM Note" → "DM Note". "MM sheet" → "DM sheet". "MM-only" → "DM-only". "Mirror Master (MM)" → delete, and the README defines nothing (DM needs no definition). The pregen sheets say "the DM".
 - **Accept:** lint's role-name rule = 0 hits. The flow page rebuilds. The Facets edition is untouched (`git diff --stat adventures/` is empty).
@@ -294,7 +294,7 @@ These rules are mechanical, but a worker makes every edit with the linter's hit 
 - **Accept:** the lint structure rule "all references resolve" passes. Zero `\(source Ch`.
 - **Time:** 30 min.
 
-### ☐ T4.6 Spelling and small consistency (BALL-22, NIGHT-23 part)
+### ☑ T4.6 Spelling and small consistency (BALL-22, NIGHT-23 part)
 - **Do:** American spelling. "Gray", with the INVENTIONS #43 "grey robes" exception checked first and whitelisted if it is canon. "Its sight" → "his sight"; the Vell sentence at the Crossing; Tavva's knife count (NIGHT-23).
 - **Accept:** the lint spelling rule = 0 hits.
 - **Time:** 15 min.

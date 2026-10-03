@@ -165,7 +165,7 @@ and should be.
   one attack against the speaker (rolled in the open; *Down, Not Out* holds) or one
   word the speaker will carry for the rest of their life. The DM chooses which.
 - **Failure by 5 or more:** it doesn't land and isn't spent. The Uninvited acts
-  against the speaker, or the scene around them gets worse — the MM chooses. It can be
+  against the speaker, or the scene around them gets worse — the DM chooses. It can be
   tried again once the party has witnessed a new tell.
 - **Each Fracture works once.** The full rule is in chapter V (see chapter V, "The
   Fractures").
@@ -291,7 +291,7 @@ looks round, briefly, for the master it is supposed to have.
 > **Nastier.** It is already Focused when the party first draws its attention at
 > midnight.
 > *Made, not born, and in the service of the Uninvited's master; it came through with
-> them tonight. What it is, for the MM alone: Chapter VII. Card: S14. Chapter V.*
+> them tonight. What it is, for the DM alone: Chapter VII. Card: S14. Chapter V.*
 
 ---
 
@@ -449,7 +449,7 @@ Slashing damage.
 (1d6 + 2) Bludgeoning damage. The Blades at the gate carry these tonight.
 
 > **Wants.** The contract's terms met and the fee paid.
-> **Tells.** Matched grey coats, positions taken rather than a room walked into, and
+> **Tells.** Matched gray coats, positions taken rather than a room walked into, and
 > someone at the back opening a document case.
 > **Breaks.** Disengages in good order and walks back to the boundary. Nobody in the
 > Bought has ever been paid enough to die for a clause.
@@ -626,7 +626,7 @@ another warden within 5 feet of it. *Response:* The attack roll has disadvantage
 
 > **Wants.** The room filed. Whatever is in it, the Church's, and the Prelate's
 > question answered by what they carry out.
-> **Tells.** Grey-robed men who never look at the dancing. Asking the festival hires,
+> **Tells.** Gray-robed men who never look at the dancing. Asking the festival hires,
 > politely, which rooms the master uses. Knowing a guest's name without having been
 > told it. Lamplight under a study door that is supposed to be dark.
 > **Breaks.** When the Prelate calls them off, or when two are down. A warden who
@@ -710,7 +710,7 @@ advantage against.
 **Traits**
 
 ***A Census of Souls.*** Lying to the Prelate about matters of faith is DC 20; she has
-heard everything. She recognises a blessing, a rite or a form of prayer, however
+heard everything. She recognizes a blessing, a rite or a form of prayer, however
 old, if anyone living has ever used it; an older form she knows only as one that
 nobody living uses.
 
@@ -793,7 +793,7 @@ attack roll. *Response:* The duelist makes one Rapier attack against it.
 > loudly — the second jostle tonight, and the same duelist.
 > **Breaks.** When the challenge is refused in front of witnesses (which is a loss
 > they can't fight past), when Lord Draunel withdraws them, or the first time one of
-> them takes damage; duelists fight for honour, and honour bleeds first.
+> them takes damage; duelists fight for honor, and honor bleeds first.
 > **Nastier.** The duelist has fought three of these this season and won them all:
 > CR 2 (XP 450), 44 HP (8d8 + 8), two Rapier attacks and Provocation.
 > *Cards: S9, S13.*
@@ -822,7 +822,7 @@ attack roll. *Response:* The duelist makes one Rapier attack against it.
 
 ***Never Seen Wanting It.*** While Draunel believes guests other than his own people
 can see him, he will not make the first attack. He fights only once it can be called
-honour, or self-defence, or the law.
+honor, or self-defense, or the law.
 
 ***Another Iron in the Fire.*** A Draunel never brings one plan to a Boranis party.
 The first time in a scene that one of his plans visibly fails, one Draunel Duelist
@@ -906,7 +906,7 @@ attack's target instead.
 > working him. For the first time tonight, not smiling. Alone, which he never is.
 > **Breaks.** He does not fight to win; he fights to end it quietly. He stops the
 > moment Vorlain is out of reach of whatever he was protecting him from, and he will
-> trade almost anything — a favour, a name, where a body is — for that.
+> trade almost anything — a favor, a name, where a body is — for that.
 > **Nastier.** Essin already knows what you said to Vorlain, because a cousin was
 > standing at your elbow when you said it.
 > *Cast: Chapter VII. Cards: S9, S13.*
@@ -1343,7 +1343,7 @@ gutter at this range but hold.
 
 ***Witnessed.*** Worship must be witnessed to count. While one or more creatures that
 aren't his allies can see the Radiant and he knows they can, his Speed is halved and
-he can't use Shadow-Step: he slows, he poses, he savours. Nobody sees him in the dark:
+he can't use Shadow-Step: he slows, he poses, he savors. Nobody sees him in the dark:
 in the unlit corridors after midnight, a pursuer needs a light (a lantern, a candle, a
 Steady Light) for him to be Witnessed. *Witnessed* and his guilt (see his Fracture)
 don't stack: at their worst he moves at 20 feet, never slower.
@@ -1395,7 +1395,7 @@ turn. *(Check and DCs: The Fractures, above.)*
 > **Wants.** Veier Nolonaire — and to be seen doing it, because worship must be
 > witnessed to count. He re-stages the kill if nobody saw.
 > **Tells.** *Before midnight:* an antique sign of blessing over the food, in a form
-> Prelate Kovaun recognises and nobody living uses; lights up when conversation
+> Prelate Kovaun recognizes and nobody living uses; lights up when conversation
 > turns to duty, and asks a guest, warmly, *"Whom do you serve?"*; joins the Dead
 > Dance and cannot resist dancing beautifully, where the light falls. *During the
 > attack:* kills are staged, offered upward, like rites; he visibly slows and poses
@@ -1451,7 +1451,7 @@ instead.
 
 > **Wants.** Raunu's next decree, before it lands on her margins. After the two
 > plates: to know whether there is an heir, because an heir is a *dynasty* of Raunus.
-> **Tells.** Iron-grey, cordial, comparing margins with Corro in the B3 alcove.
+> **Tells.** Iron-gray, cordial, comparing margins with Corro in the B3 alcove.
 > Compliments, a quiet question — *what did he say?* — and coin behind it.
 > **Breaks.** She would be horrified to be called a conspirator. She is merely
 > *prepared*. The moment her people's work would be seen as hers, or would draw
@@ -1566,7 +1566,7 @@ She releases a charge. If she has none left, she starts bargaining, out loud,
 between blows.
 
 > **Wants.** Out with something. Shifts for a clear exit or a better payer, and
-> honours any deal that ends with her walking and somebody else holding the bag.
+> honors any deal that ends with her walking and somebody else holding the bag.
 > **Tells.** Opens with feints and furniture, not the knife. A hand going to her
 > sleeve means a charge is about to fire.
 > **Breaks.** Cornered with no way out, she bargains fast and honestly: names (not
@@ -1872,7 +1872,7 @@ observant. Enjoy the ball."*
 
 ***The Wrapped Sword.*** An enormous broadsword, wrapped in white cloth, across his
 back. *"An inheritance."* He never touches it and never unwraps it, and this block
-does not give it numbers. What it would do unwrapped is in Chapter VII, for the MM
+does not give it numbers. What it would do unwrapped is in Chapter VII, for the DM
 alone.
 
 ***Beyond Reach.*** Vell can't be grappled, restrained, charmed, frightened or held
@@ -1887,7 +1887,7 @@ the Uninvited move — arriving, not running — and that is the only time all n
 anyone sees it.
 
 ***Move Aside.*** When the only way to the river gate runs through a creature, Vell
-does not roll. The MM tells that player what the factor's face says: he has already
+does not roll. The DM tells that player what the factor's face says: he has already
 done the arithmetic, and they should move. If they do not, they are moved — set
 aside, unhurt, and they did not see how. He takes the path that spills the least
 blood if one exists. If none exists, he is ruthless, because the one thing he will
@@ -1944,7 +1944,7 @@ not, trained or not. Releasing one does not make its bearer a caster.
 | **A Held Image** | Common | The crystal shows the still, silent image its grower set in it — up to a 5-foot cube — for 1 minute. |
 | **House Flare** | Uncommon | Bright Light fills a 30-foot Emanation from the crystal until the end of your next turn. Nothing in it can benefit from the Invisible condition or take the Hide action. *(The honor guard's.)* |
 | **House Seal** | Uncommon | One door within 30 feet swings shut and grows closed until the scene ends. Forcing it is a DC 20 Strength (Athletics) check. *(The honor guard's.)* |
-| **Dark-Burst** | Uncommon | Magical Darkness fills a 15-foot-radius Sphere centred on the crystal for 1 minute. Darkvision can't see through it, and nonmagical light can't illuminate it. *(Tavva's.)* |
+| **Dark-Burst** | Uncommon | Magical Darkness fills a 15-foot-radius Sphere centered on the crystal for 1 minute. Darkvision can't see through it, and nonmagical light can't illuminate it. *(Tavva's.)* |
 | **Door-Seal** | Uncommon | One door within 30 feet slams and grows shut for 1 minute. Forcing it is a DC 18 Strength (Athletics) check. *(Tavva's.)* |
 
 *A Dark-Burst released where the Radiant is working counts as denying him the

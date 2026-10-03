@@ -202,7 +202,7 @@
    "label": "B13. The Room You Put Here",
    "phase": "m2",
    "kind": "room",
-   "summary": "Deliberately empty; the MM fills it from what the table has chased. No Fracture, no contradiction of Chapter II.",
+   "summary": "Deliberately empty; the DM fills it from what the table has chased. No Fracture, no contradiction of Chapter II.",
    "ref": "04_The_Ball.md#the-private-palace (B13)",
    "optional": true,
    "faction": null
@@ -802,7 +802,7 @@
    "label": "B12. The Gatehouse Court, Held",
    "phase": "m7",
    "kind": "room",
-   "summary": "The outer gate barred from the far side; grey coats; a sergeant reading terms from a chained case. A wicket in the gate and a stair to the gate-walk.",
+   "summary": "The outer gate barred from the far side; gray coats; a sergeant reading terms from a chained case. A wicket in the gate and a stair to the gate-walk.",
    "ref": "05_The_Longest_Night.md#b12-the-gatehouse-court-held",
    "optional": false,
    "faction": "bought"
@@ -942,7 +942,7 @@
    "label": "⟨The Second Clause succeeds⟩",
    "phase": "end",
    "kind": "ending",
-   "summary": "It must not. Reach for the honour clause or the sect guard; otherwise be generous.",
+   "summary": "It must not. Reach for the honor clause or the sect guard; otherwise be generous.",
    "ref": "05_The_Longest_Night.md#if-history-breaks",
    "optional": true,
    "faction": null
@@ -1119,7 +1119,7 @@
   },
   {
    "id": "ev-attendant",
-   "label": "The Attendant drops the pretence",
+   "label": "The Attendant drops the pretense",
    "phase": "m6",
    "kind": "event",
    "summary": "Cloak and cup set down on the nearest table; it stands beside the three gray masks, facing the room. Idle until one of them turns it on the party.",

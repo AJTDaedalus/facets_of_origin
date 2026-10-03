@@ -98,7 +98,7 @@ Most invitations will be accepted out of burning curiosity. Some will be burned.
 will be discarded — and a discarded invitation to the Boranis ball is worth a great
 deal to the right wrong person, which is one of the ways player characters get in.
 
-> **MM Note — the list above is the guest list**
+> **DM Note — the list above is the guest list**
 >
 > Every faction on it accepted, and every one of them brought hired steel. That is the
 > snakes in the chicken pen (Chapter I), and Chapter IX runs each of them as a threat
@@ -108,7 +108,7 @@ deal to the right wrong person, which is one of the ways player characters get i
 
 ---
 
-# The Truth of the Night — MM ONLY
+# The Truth of the Night — DM ONLY
 
 *Operational truth: everything you need, nothing you don't.*
 
@@ -312,7 +312,7 @@ Raunu's face all night. You saw the exact moment he understood — before anyone
 screamed, before the lights failed. He knew what they were. Remember that.
 
 **Pays:** Heroic Inspiration, and XP by Table I–4. The Church's favor: one request of
-Prelate Kovaun, spendable after tonight, and as large as the MM
+Prelate Kovaun, spendable after tonight, and as large as the DM
 decides "frightening" means at your table. *Your patron is a snake: the Church line,
 Chapter IX.*
 
@@ -374,7 +374,7 @@ river gate at the bottom of the garden is to be unlocked at midnight. Not before
 questions.
 **The catch:** You have no idea who paid you, why, or what comes through a gate — in
 which direction — at midnight on Oraga.
-**At midnight:** You find out. *(MM: the stranger was Master Vell, securing Veier's
+**At midnight:** You find out. *(DM: the stranger was Master Vell, securing Veier's
 escape route. The player character who felt like a hired traitor all night was, in
 fact, the reason mother and child got out. Reveal this with care and full weight;
 few tables forget it. A table wanting a darker seam may

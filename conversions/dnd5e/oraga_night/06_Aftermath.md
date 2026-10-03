@@ -75,7 +75,7 @@ the play.
   his coin, reporting only to him. He is the only patron in Rekuzan who genuinely
   wants the truth.
 - **The inquest.** Whatever the party did to the snakes in the dark comes to it with
-  them — a captive, a body in a faction's colours, a knife somebody recognises. Each
+  them — a captive, a body in a faction's colors, a knife somebody recognizes. Each
   faction wants it written down one way. A captured sergeant of the Bought, contract
   case and all, is the best evidence in the city; a bought-out captain who wants to
   know who hired him will help.

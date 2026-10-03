@@ -89,7 +89,7 @@ that character: the next time they would drop to 0 Hit Points tonight while with
 60 feet of her, they drop to 1 instead.
 
 **If it comes to steel:** she is a noncombatant, near her time, and her line in Chapter
-X (*If It Comes to It*) is there only so the MM knows what she does when cornered. She
+X (*If It Comes to It*) is there only so you know what she does when cornered. She
 is never a fight.
 
 ### Vorlain Boranis — the Brother
@@ -272,7 +272,7 @@ chieftaincy and priced it attractive; she is here tonight to check the arithmeti
 not to act on it. (She would be horrified to be called a conspirator. She is merely
 *prepared* — the module notes the resemblance to her host without comment.)
 
-**Play her:** iron-grey, cordial, terrifyingly numerate. Runs Agenda 1 and pays on
+**Play her:** iron-gray, cordial, terrifyingly numerate. Runs Agenda 1 and pays on
 delivery. Deceiving her about money takes a DC 20 Charisma (Deception) check; about anything
 human, **DC 10**.
 
@@ -303,7 +303,7 @@ keeps close.
 **Wants:** House Draunel one seat closer to the chieftaincy, tonight if possible,
 patiently if not. **Fears:** being seen wanting it. **Secret:** Agenda 3 is his, and
 he has three other irons in tonight's fire — a Draunel never brings one plan to a
-Boranis party. The source left them to the MM; this edition names them in Chapter IX.
+Boranis party. The source left them to the DM; this edition names them in Chapter IX.
 
 **Play him:** the anti-Raunu — polished, obvious, ambitious in the standard
 noble key. Useful to the table as a patron, a foil, and by dawn the loudest voice
@@ -366,7 +366,7 @@ respect of a man who knows exactly what they cost. **Secret:** all of them.
 **The sword:** in a culture where strong personalities wear big steel, a wrapped
 greatsword on a factor's back earns an eyeroll and nothing more — which is
 precisely why he can carry it. He never touches it. He never unwraps it. If a
-player asks about it, he says only, *"An inheritance,"* and means it. *(MM
+player asks about it, he says only, *"An inheritance,"* and means it. *(DM
 truth: unwrapped, the blade would release the screams of every soul it has
 taken — enough to drop most of a ballroom where they stand. He refuses to
 unwrap it. What it cost him to be given such a gift, the module does not say,
@@ -381,7 +381,7 @@ every Charisma check to move Vell (Deception, Intimidation or Persuasion) **DC 2
 let even a success buy honesty rather than compliance ("You are observant. Enjoy the ball."). Players who shadow
 him find only preparations: a walked garden, a tested gate, a purchased boat. All
 night he does not fight, does not hurry, and is never once interesting to look
-at — and that last is not luck. *(MM truth: his unmemorability is a gentle,
+at — and that last is not luck. *(DM truth: his unmemorability is a gentle,
 constant pressure on the minds around him; he reads most guests as easily as
 faces, and can steer a weak mind outright. Corval's inability to hold the
 gray-mask question has a cousin: nobody can quite hold Vell either. A character
@@ -448,7 +448,7 @@ outcomes. That is the complete list. Their Attendant, below, is another matter.
 *A great house's attendant, by its clothes: a cloak folded over one arm and a cup held
 ready for a master nobody at the ball can find. It came in with the early guests.*
 
-*MM only: the Attendant is a Namak-Zai. The module never uses the word at the table
+*DM only: the Attendant is a Namak-Zai. The module never uses the word at the table
 and never says more about what that is.* It is a made thing, not a born one, and it
 serves the same master as the three gray masks. It came through with them. Players
 need never hear the name; "the Attendant" is enough.
@@ -474,7 +474,7 @@ one as printed (see chapter IV). Drawing steel on it is still
 drawing steel at the ball (*The Palace on Alert*, Chapter IV), and the guards arrive
 to find a player character with a blade out and nobody in front of them.
 
-**At the Unmasking** it drops the pretence, sets the cloak and the cup down on the
+**At the Unmasking** it drops the pretense, sets the cloak and the cup down on the
 nearest table, and takes its place by the Uninvited. Read this when the lights die:
 
 > *On the nearest table, a folded cloak and a full cup, set down neatly. The
@@ -541,7 +541,7 @@ arguments than the sword does. Full fight on **card S3**, Chapter IX;
 stat blocks **Bought Sergeant**, **Bought Captain** and **Bought Blade**, Chapter X.*
 
 ### Sergeant of the Bought — the One Reading the Room
-*Grey wool, cut plainly, the company's mark at the shoulder. A case chained at the
+*Gray wool, cut plainly, the company's mark at the shoulder. A case chained at the
 hip, produced more readily than steel.*
 
 **Wants:** the contract satisfied, or voided. Either ends the fight and he does not
@@ -556,11 +556,11 @@ arguments than the sword does.
 
 **The negotiation surface, printed:**
 
-- **What he wants:** to fulfil the contract and go home.
+- **What he wants:** to fulfill the contract and go home.
 - **What shifts him:** proof the employer has broken terms. The named target already
   gone. A better-paying offer made *in front of his Blades*, which he will take, out
   loud, because a company that hides its dealings from its own people does not last.
-- **What deal he honours:** any of them, absolutely, and he will say so before he
+- **What deal he honors:** any of them, absolutely, and he will say so before he
   takes it. **He surrenders the field the moment the contract is void.**
 - **Voiding the contract:** a DC 13 Charisma (Persuasion) check; see card S3.
 
@@ -588,10 +588,10 @@ his second he starts talking while the attacks continue.
 - **What shifts him:** the fires. He contracted for diversions, not for this, and
   a party who says so plainly is telling him something he already half knows. Also:
   money, honestly offered, in front of witnesses.
-- **What deal he honours:** all of them, permanently. A bought-out captain **will not
+- **What deal he honors:** all of them, permanently. A bought-out captain **will not
   resume the fight tonight for any inducement.**
 
-> **MM — the factor.** The captain never learns who hired him, and neither does the
+> **DM Note — the factor.** The captain never learns who hired him, and neither does the
 > module. If a table asks him directly he will tell them the truth, which is that he
 > does not know, and that this has begun to bother him a great deal. That is not a
 > dead end; for a table that plays on (Chapter VI) it is the best lead there is,

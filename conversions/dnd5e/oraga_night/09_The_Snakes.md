@@ -22,7 +22,7 @@ not hate him at all and need him, which is worse. He sent every one of them an
 invitation under his own hand. Every one of them came.
 
 And they did not come alone. Every great house hired extra swords this season, and
-they idle at the edge of the Gatehouse Court in unmatched colours, waiting for masters
+they idle at the edge of the Gatehouse Court in unmatched colors, waiting for masters
 who will be inside for six hours. The factions brought their own people through the
 gate as guests, and nobody took so much as a knife off any of them, because nobody at
 this ball is ever disarmed. *House Boranis hired none.* Its nine honor guards stand
@@ -66,7 +66,7 @@ or two lines. This chapter is what stands behind each line: the faction's whole
 threat, from the polite scheme to the knife in the dark, so that when a player pulls
 a thread you know where it goes.
 
-> **MM Note — how many snakes to show**
+> **DM Note — how many snakes to show**
 >
 > **Default:** one line per Movement, chosen by where the players are standing.
 >
@@ -179,7 +179,7 @@ Agenda 1, if anyone took it, and the other is these.
 
 | Movement | The scheme | What the party can see | Card |
 |---|---|---|---|
-| I | The knives memorise who came, the only way the law allows | Lips moving at every name Corval calls | — |
+| I | The knives memorize who came, the only way the law allows | Lips moving at every name Corval calls | — |
 | II | One knife shadows Corval, the man the Tithe lives in — or watches the Agenda 1 player work him | The same plain good coat wherever Corval goes | — |
 | III | A knife waits in the Audience Hall line to see who is summoned; Callun buys what they heard | Compliments, a quiet question, coin, and a knife standing close | — |
 | IV | After the two plates, Callun's question: a knife leans on Anha in the service doorway — *who eats off the second plate?* | Anha's hands going still on the tray | **S7** |
@@ -223,10 +223,10 @@ II). And the written word belongs to the Church and to nobody else (Val'loh, V3)
 
 | Movement | The scheme | What the party can see | Card |
 |---|---|---|---|
-| I | The wardens take a post where they can see the empty high table and the east doors at once | Grey-robed men who never look at the dancing | — |
-| II | The wardens ask the festival hires which rooms the master uses: the Audience Hall, and the dark wing on the second floor | A footman looking back after a grey robe moves on | — |
+| I | The wardens take a post where they can see the empty high table and the east doors at once | Gray-robed men who never look at the dancing | — |
+| II | The wardens ask the festival hires which rooms the master uses: the Audience Hall, and the dark wing on the second floor | A footman looking back after a gray robe moves on | — |
 | III | Kovaun waits in the Audience Hall antechamber; a warden meets any summoned player character with an invitation to attend her in the chapel | The warden knows their name without being told it | — |
-| IV | The Radiant blesses the food in a form Kovaun recognises (a Fracture tell, Chapter V). Her question acquires teeth. Two wardens leave by different doors | Two empty places, and the Prelate not looking at them | — |
+| IV | The Radiant blesses the food in a form Kovaun recognizes (a Fracture tell, Chapter V). Her question acquires teeth. Two wardens leave by different doors | Two empty places, and the Prelate not looking at them | — |
 | V | The two wardens are at the door of Raunu's study (B8), working its crystal lock with the patience of men who have done this in other houses. They want the room *filed* | Lamplight under a study door that is supposed to be dark | **S8** |
 | VI–VII | *Lights out.* Heat 0–2: the wardens come down for the Prelate and get her out. Heat 3–4: they are inside the study when the lights die, and they finish the job: the drawer of invitation cards goes into a warden's arms, and the work-slate is wiped | Wardens coming down the dark-wing stair with their arms full | **S8** (dark) |
 
@@ -248,7 +248,7 @@ seen ignoring it; she calls them off. **Snake on snake.** The wardens are the on
 people at the ball who can take the drawer of scorched invitations out of the
 palace, and the scorch marks are a list somebody might want read: Draunel, who wants
 Vorlain blamed, and Essin, who wants nothing read at all, would each pay to know what
-is in a warden's arms. Kovaun also recognises the Radiant's blessing: a party that
+is in a warden's arms. Kovaun also recognizes the Radiant's blessing: a party that
 asks her about it has a priest who can *plant the doubt* (Chapter V), if they can
 get her near it.
 
@@ -263,7 +263,7 @@ holds the only pen in the room (source Ch. VI).
 **What they came for.** *House Draunel one seat closer to the chieftaincy, tonight if
 possible, patiently if not* (source Ch. VII, *Lord Essar Draunel*). His **fear** is
 being seen wanting it. His **secret**: Agenda 3 is his, and he has three other irons
-in tonight's fire, which the source leaves to the MM's invention — a Draunel never
+in tonight's fire, which the source leaves to the DM's invention — a Draunel never
 brings one plan to a Boranis party. This edition names the three below, as inventions
 for the owner's review.
 
@@ -497,7 +497,7 @@ than two factions are hot at midnight unless the table has made it so.
 - **4: it happens with steel already out.** Each card says what heat 4 changes (the
   line *At heat 4* under its Enemies).
 
-> **MM Note — heat is not a debt the table owes**
+> **DM Note — heat is not a debt the table owes**
 >
 > **Default:** tick the automatic boxes as the Movements pass, and the rest only when
 > the table visibly let something go by.
@@ -510,7 +510,7 @@ than two factions are hot at midnight unless the table has made it so.
 > once, show both, let the table choose, and let the other happen offstage — and tell
 > them afterward what it cost somebody.
 
-> **MM Note — Movement V has five cards and one hour**
+> **DM Note — Movement V has five cards and one hour**
 >
 > S2, S7, S8, S9 and S10 can all be live during the Dead Dance. Run **one card per
 > group of player characters**. If the party is together, that is one card; if it has
@@ -557,8 +557,8 @@ the scene ends. No death saving throws.
 snake finishes a downed character: they all have somewhere else to be. And the palace
 is full of people (Chapter V, *Down, Not Out*): a character still down at the end of
 the round after they fell, with nobody helping, is dragged clear by a guest or a
-servant and roused with 1 Hit Point at the start of the round after that. The MM
-names who did it, and that person is now owed something.
+servant and roused with 1 Hit Point at the start of the round after that. You
+name who did it, and that person is now owed something.
 
 ---
 ## S1. The Seating Feud
@@ -580,7 +580,7 @@ Feud", points here.)*
 principals are still swinging, and whenever anyone in the brawl rolls a 1 on a d20
 (an attack roll or ability check; once a round at most).
 **Full:** the honor guard floods the galleries for a full Movement, and one agenda
-door closes — the MM picks which, and says which, out loud.
+door closes — you pick which, and say which, out loud.
 
 **Enemies.** Eight **Feuding Kinsmen** (Chapter X), a Vaskarin cousin and a Tessarin
 uncle among them, each certain their branch outranks the other — and one principal
@@ -619,7 +619,7 @@ Intimidation) check.
 - Get physically between them: DC 13 Strength (Athletics). The swings meant for each
   other land on you — both principals' next attacks target you.
 - Be visibly more important than the argument — a Minor Scion, an honor guard,
-  anybody with a name they recognise. No check.
+  anybody with a name they recognize. No check.
 
 **Treasure.** None.
 
@@ -653,7 +653,7 @@ the Dead Dance. *(Chapter IV, "The Other Thieves", points here.)*
 
 > *The service corridor runs behind the Dance, and the music comes through the wall as
 > a pulse without a tune. Four people are crouched at the far end where the light does
-> not reach, doing something quiet and organised to the hinges of a door. One of them
+> not reach, doing something quiet and organized to the hinges of a door. One of them
 > has stopped and is looking back down the corridor at you. She has not raised the
 > alarm.*
 
@@ -667,7 +667,7 @@ surprised, and the noise clock does not advance in the first round.
 **The noise clock — four segments, and it is shared.** Advances whenever anyone on
 either side rolls a 1 on a d20 (once a round at most), at the end of each round in
 which anyone attacked with a drawn blade, and on anything loud — a shout, a thrown body, a spell anyone past the
-wall could hear (the MM's call). **Full:** the honor guard arrives, and *both sides
+wall could hear (your call). **Full:** the honor guard arrives, and *both sides
 lose*. The party is detained alongside the crew (card S4's terms), and the crew's job
 and the party's evening end together. **Say this to the table out loud at the top of
 the scene.** It is the whole scene.
@@ -691,7 +691,7 @@ not a little.
   while it lasts, blows struck within 10 feet of the crystal do not tick the noise
   clock.
 - *The wall to the Dance is one plank thick.* Anything loud advances the clock, and
-  the MM does not have to be subtle about reminding them.
+  you do not have to be subtle about reminding them.
 - *Crates of table linen.* Half Cover for anyone behind them; a creature shoved into
   them has the Restrained condition until the end of its next turn.
 
@@ -705,9 +705,9 @@ charge when Bloodied; with none left, she starts bargaining out loud, between bl
 **Outs.**
 - Let her go.
 - Trade. She knows two things about tonight that nobody else in the palace will tell
-  you, because from the service run she has watched the other snakes work: the MM
+  you, because from the service run she has watched the other snakes work: the DM
   picks two of *the Circle's knife working toward the east wing's service door*, *two
-  grey robes on the dark-wing stair*, *a rope uncoiling under the east wing*, and *a
+  gray robes on the dark-wing stair*, *a rope uncoiling under the east wing*, and *a
   tall pale factor who walked to the river gate and stood there a while*.
 - Take the job's proceeds and let her keep her life.
 - Make enough noise to lose. That is an out too, just a bad one.
@@ -742,7 +742,7 @@ Gatehouse Court, Held", points here.)*
 ***Trigger — read when the first fleeing guests reach the court:***
 
 > *The outer gate is shut, and it was shut from the far side. Through the grille:
-> matched grey coats, more of them than there are of you, arranged with the unhurried
+> matched gray coats, more of them than there are of you, arranged with the unhurried
 > spacing of people who have done this before. One of them is holding a chained case up
 > where you can see it, the way you would hold a lantern, and he is reading aloud from
 > it in a voice pitched to carry over a crowd.*
@@ -780,7 +780,7 @@ Gatehouse Court, Held", points here.)*
 party neither fights nor negotiates: nobody attacked or cast at the Bought, worked the
 wicket, the bar or the wall, or spoke to the sergeant or the captain. **Full:** the
 gallery fire reaches the Crystal Court's doors, and from then on every round costs the
-crowd, and the MM says who did not get out. Standing still is the worst thing a party
+crowd, and you say who did not get out. Standing still is the worst thing a party
 can do here.
 
 **The last bell — six segments.** Advances at the end of every round, whatever anyone
@@ -878,7 +878,7 @@ by an out*): to whoever voided the contract.
   the second round (1,700 XP; 2,800 with the captain).
 
 **Development.** A captured sergeant, contract case and all, is the inquest's best
-evidence and the only mortal thread that leads east. A bought-out captain honours the
+evidence and the only mortal thread that leads east. A bought-out captain honors the
 deal absolutely and **will not resume the fight tonight for any inducement** — which a
 clever table can turn into sixteen Blades holding the gate *open*. **Return to Movement
 VII, and see ⟨If History Breaks⟩ in Chapter V.**
@@ -972,7 +972,7 @@ the fallen, and giving them back is the reward.
 **Rewards.** 600 XP, divided equally among the characters. *Heroic Inspiration*
 (Table I–3, *a fight ended by an out*): to whoever gives back what was taken off the
 fallen. A looter caught and held is worth more than the goods: by dawn, the
-inquest's favourite scapegoat and the players' proof of what they saw.
+inquest's favorite scapegoat and the players' proof of what they saw.
 
 **Adjusting the Encounter.**
 - *Three player characters:* Tavva and two knives (550 XP).
@@ -1104,7 +1104,7 @@ is still moving toward the door unhindered, and whenever a knife gets past a par
 member in the run. **Full:** a knife reaches the door, finds the honor guard doubled on the far side of
 it, and is turned back at the threshold without seeing past it. He walks back out and
 tells Callun the only thing he learned: *the house is hiding someone upstairs, and
-guarding them like a treasury.* It is the rumour the whole ballroom already has — the
+guarding them like a treasury.* It is the rumor the whole ballroom already has — the
 mad wife — and it is not enough for her. The Circle's heat rises to 4: a prepared
 woman prices in what she cannot see. *(The knife never learns what is upstairs, and
 neither does Callun. Nobody in the Circle learns of the child unless a player character
@@ -1153,7 +1153,7 @@ walks back into the Dance like a guest.
   DC 13 Charisma (Intimidation).
 - Give them a wrong answer about the second plate. DC 18 Charisma (Deception) — they
   are professionals — and on a success the Circle spends the rest of the night chasing
-  the rumour the whole ballroom already believes, that he feeds the mad wife.
+  the rumor the whole ballroom already believes, that he feeds the mad wife.
 
 **Treasure.** Each knife's advance (2d6 GP) (see chapter X, "The Night's Loot").
 
@@ -1185,7 +1185,7 @@ S12 is live in the dark. **Return to Movement V.**
 ***Trigger — Movement V, read when a player character comes up the dark-wing corridor:***
 
 > *The dark wing's corridor is cold after the Court, and the only light in it is at the
-> far end, a thin line of it under a door that ought to be dark. Two figures in grey
+> far end, a thin line of it under a door that ought to be dark. Two figures in gray
 > robes are kneeling at that door. One is holding a small crystal against the lock and
 > waiting, the way you wait for a kettle. The other has turned his head toward you, and
 > he does not stand up.*
@@ -1227,10 +1227,10 @@ and the fight plays well under Low. The clock is what the party is racing.
   sealing it against them, is a DC 15 Intelligence (Arcana) check — advantage for the
   Orthaen Gift, and for Agenda 5's ward-student.
 - *Inside the study.* The great table and its relief give Half Cover. A creature shoved
-  into the instruments breaks something the module does not explain, and the MM
-  describes the sound it makes.
+  into the instruments breaks something the module does not explain, and you
+  describe the sound it makes.
 - *The dark wing is not guarded casually.* Anything loud enough to be heard in the
-  Court brings honor guards, and then it is S4 for everyone in the corridor, grey robes
+  Court brings honor guards, and then it is S4 for everyone in the corridor, gray robes
   included.
 
 **Tactics.** The wardens *detain*: they seize for questioning, name the Church's
@@ -1250,7 +1250,7 @@ breaks keeps whatever he is carrying if he can.
 - Fetch Kovaun from the chapel. She calls them off rather than be seen standing at a
   chief's study door on the night of his ball.
 - Trade. Let them have the drawer; keep the slate. Or copy the diagram before they wipe
-  it: a DC 13 Intelligence check to memorise it, and the Root opens to that character
+  it: a DC 13 Intelligence check to memorize it, and the Root opens to that character
   exactly as Chapter IV says it opens to anyone who copied the slate.
 
 **In the dark** *(the Church's heat 3–4 at midnight, and the clock filled or never
@@ -1312,7 +1312,7 @@ save against a duelist's *Provocation* and draws — each cousin can be provoked
 drawing only once. **The duelists hold Provocation until a player character has taken
 a turn on the terrace** — until the party is in the scene, nobody is performing for
 anyone — so the clock can never fill before the party has acted. **Full:** steel meets
-steel. One of the two principals goes down bleeding (the MM rolls who, in the open),
+steel. One of the two principals goes down bleeding (you roll who, in the open),
 the rail crowd runs for the guards, and Draunel's second iron is done either way: a
 Boranis who cut a guest at Oraga, or a Boranis who ran from a challenge. Two terraces
 below, a tall pale factor at the river gate turns and walks away before anybody looks
@@ -1488,7 +1488,7 @@ the lights die:***
 whoever you are carrying through it. The party chooses.)
 
 **The crush clock — four segments.** Advances at the end of each round the door is held
-for Corro alone. **Full:** people go down at the door, and the MM narrates who; the
+for Corro alone. **Full:** people go down at the door, and you narrate who; the
 doorway jams, and nobody else gets through it tonight.
 
 **Enemies.** Three **Phern Bodyguards** and **Pellin Corro**. They are not hostile to
@@ -1758,11 +1758,11 @@ the scene has no Delay: one of them glances at it, then at the party, and that i
 enough. A broken focus lasts only until its next turn. Delay on every Uninvited in the
 scene keeps it Idle, and that is how Buying Time and this card feed each other.
 *Budget:* **beyond High while Focused; plays High while Idle.** The block is CR 8 (3,900 XP), and
-that CR is its Focused self: by the usual yardstick its offence rates about CR 5 (two
-turns a round, two blows a turn, *Put Aside* on a recharge) and its defence about
+that CR is its Focused self: by the usual yardstick its offense rates about CR 5 (two
+turns a round, two blows a turn, *Put Aside* on a recharge) and its defense about
 CR 11 (229 Hit Points, AC 17). 3,900 XP is nearly twice High for four 4th-level
-characters (2,000). Idle, its offence drops to one blow at Disadvantage, but its
-defence does not move, so by the yardstick it is about CR 5 (1,800 XP), between
+characters (2,000). Idle, its offense drops to one blow at Disadvantage, but its
+defense does not move, so by the yardstick it is about CR 5 (1,800 XP), between
 Moderate and High. It is "High" all the same because of the clock:
 nobody gets through 229 Hit Points in the rounds an errand takes, and every one of
 those rounds it is clearing the way. Award the full 3,900 XP however it is got out of
@@ -1799,7 +1799,7 @@ next round, and the Help action doesn't apply. The table chooses whose trick it 
 
 *Leaning in* — **+4 at most**:
 - **In character, specific, vivid.** The player performs or plays out the distraction
-  rather than naming it (*"I hold the lamp crystal up to the fire so it throws colours
+  rather than naming it (*"I hold the lamp crystal up to the fire so it throws colors
   across its mask, and say, 'Your master asked me to show you this'"*): **+2.**
 - **A habit the party has seen:** **+2.** This is the payoff for noticing it before
   midnight. Only habits the table actually saw count. Its three habits, shown before
@@ -1821,7 +1821,7 @@ next round, and the Help action doesn't apply. The table chooses whose trick it 
 - **The fourth broken focus of the night:** it wanders off — out of the fight, standing
   at a window, watching the fires. That is a win.
 
-**MM — how to hint that it can be distracted.**
+**DM Note — how to hint that it can be distracted.**
 1. **Show every habit before midnight, plainly** (Chapter IV's sightings, in
    Movements I, II, IV and V): in Movement I it holds a cup for someone who never takes
    it; in II it stops dead in front of a crystal wall and watches the light for a full

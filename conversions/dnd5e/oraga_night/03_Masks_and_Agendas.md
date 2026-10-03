@@ -9,7 +9,7 @@ set of options.
 - **Every character is Human.** The tribes of Val'loh are not different kinds of
   people; they are the same kind of people, and some of them are born carrying
   something. Take the SRD's Human species and write your tribe beside it on the sheet.
-- **Your tribe is Orthaen** — or, rarely and with MM agreement, **Phern** (a couple of
+- **Your tribe is Orthaen** — or, rarely and with the DM's agreement, **Phern** (a couple of
   high-ranking Phern sit on the Merchant's Circle, and their factors and kin have
   legitimate business at the ball). This is an Orthaen affair; the guest list is almost
   exclusively Orthaen, and anyone else would be watched all night.
@@ -38,7 +38,7 @@ chapter.
 
 Every people of Val'loh has a **Heritage**: what every member grows up knowing, gifted
 or not. It is knowledge, not a bonus. What it covers, your character simply knows, and
-the MM does not call for a check to know it.
+the DM does not call for a check to know it.
 
 - **Orthaen:** reads grown crystalwork the way a mason reads a wall — its age, whose
   hand shaped it, and whether it is holding a working right now.
@@ -117,7 +117,7 @@ coming from. Nearly all carry it.
   you cannot see is about to attack you, you know which direction it is coming from.
 
 #### Thenya Gift
-*Origin feat. Prerequisite: Thenya, gifted, and the MM's agreement.*
+*Origin feat. Prerequisite: Thenya, gifted, and the DM's agreement.*
 
 The gift shows itself only on behalf of someone loved, and only when they are in
 danger. It does nothing for the one who carries it. Fewer than one in a hundred carry
@@ -130,7 +130,7 @@ because the night has two gifted Thenya in it, and Chapter VII uses this one.
   name when that changes. Once per long rest, when that creature is within 60 feet of
   you and would drop to 0 hit points, it drops to 1 instead.
 
-*(MM: a gifted Thenya character needs your agreement. Not because the feat is strong —
+*(DM: a gifted Thenya character needs your agreement. Not because the feat is strong —
 it is Minor like the rest — but because the whole of it points at another character,
 and that only works if the table has built someone for it to point at.)*
 

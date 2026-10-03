@@ -12,7 +12,7 @@
 > 2. **Chapter II, "What the Module Never Says" and "The Eight Agendas"** (5
 >    minutes). The truth you are hiding is in "Adventure Background", below; these
 >    are the lines you hold and the cards you deal.
-> 3. **Chapter VIII, the MM sheet and the palace diagram** (10 minutes). Print both.
+> 3. **Chapter VIII, the DM sheet and the palace diagram** (10 minutes). Print both.
 >    From here on, everything you read is behind a line on that sheet.
 > 4. **Chapter V: *How to Run the Attack*, Movement VI's opening, *Midnight Rules*
 >    (read *Down, Not Out*, *Buying Time* and *The Attendant*; skim the Room Tricks and
@@ -141,7 +141,7 @@ helps: (see chapter V, "Down, Not Out"), (card S2), (area B9), (Table I–3).
 its numbers. No fight in this module is to the death by default.
 
 **Where the module says *the module does not say*,** that is load-bearing. See *What
-the MM Knows*, below.
+the DM Knows*, below.
 
 ## The Night in Seven Movements
 
@@ -257,7 +257,7 @@ about the thing the gift does.
 **Success at a cost.** This night runs on partial wins, and it teaches them early.
 When a check misses its DC by **4 or less**, you may offer the player what they wanted
 *with a cost attached*: name the cost first, then let them take it or leave it. The
-MM sheet in Chapter VIII has a short table of costs, so you can read one off the page
+DM sheet in Chapter VIII has a short table of costs, so you can read one off the page
 instead of inventing one while four people watch you.
 
 **NPCs don't roll outside a fight.** Every entry in Chapter VII gives the DC a guest
@@ -323,7 +323,7 @@ Everyone at this ball wears a knife; drawing it is the crime. So for five Moveme
 snakes coil. Each faction has a **threat line** — a scheme that starts politely, shows
 a **tell** a watchful table can catch, escalates if nobody steps on it, and comes out
 in the dark after the lights die. Chapter IX holds each line, its fight cards and the
-**Snake Tracker**; the MM sheet in Chapter VIII has the boxes you tick.
+**Snake Tracker**; the DM sheet in Chapter VIII has the boxes you tick.
 
 Chapter IX runs them by three rules (see chapter IX, "The Snakes in the Pen"), and one
 more thing holds tonight:
@@ -332,7 +332,7 @@ more thing holds tonight:
   guest has been at the ball dressed as a great house's attendant, carrying a cloak and
   a cup for a master nobody can find. It is **the Attendant**: a made thing, not a born
   one, serving the same master as the three, sent to watch ahead of midnight and bad at
-  it. At the Unmasking it drops the pretence and takes up its one narrow order — keep
+  it. At the Unmasking it drops the pretense and takes up its one narrow order — keep
   the three from being interrupted — and it ignores anyone who is not interrupting
   them. It is the night's boss, and it only fights a party that gets in the way. Idle,
   it is rusty and easily distracted. When one of the three turns it on the party, it
@@ -438,7 +438,7 @@ the Uninvited, stopping the escape at the river gate — and each one tells you 
 changes and how to run forward. A table that saves Raunu Boranis has not played the
 module wrong. It has written its own Val'loh.
 
-## What the MM Knows (And What the MM Doesn't)
+## What the DM Knows (And What the DM Doesn't)
 
 Chapter II gives you the operational truth of the night: who the Uninvited are in
 practice, what they came for, what constrains them, who the pale factor is working
@@ -481,7 +481,7 @@ correcting a player mid-scene costs more than the error did.*
 > the room need them more: a guest under a fallen beam, twenty feet away, calling. The
 > Wept is not going anywhere. The guest is.
 
-> **Troubleshooting — the MM keeps defaulting to DC 20**
+> **Troubleshooting — you keep defaulting to DC 20**
 >
 > This is the single most common way to make this night unfun, and it happens because
 > Hard *feels* like taking the fiction seriously.
@@ -501,7 +501,7 @@ correcting a player mid-scene costs more than the error did.*
 >
 > **Name the cost before the success.** "You get the answer, and Corval will remember
 > you asked." Cost first, then the thing they wanted, and the thing they wanted *always
-> arrives*. A miss by 4 or less is where this lives, and the MM sheet has a table of
+> arrives*. A miss by 4 or less is where this lives, and the DM sheet has a table of
 > costs.
 
 > **Troubleshooting — the table rolls initiative on everything**
@@ -537,6 +537,6 @@ The snakes add more steel to the night than the original had, and more of it in 
 dark. The same camera rule applies to them. Nobody's death in a snake fight is
 described closer than the table has agreed to.
 
-One MM tip above all others: **know the cast, not the script.** The night survives any
+One tip above all others: **know the cast, not the script.** The night survives any
 player plan if you know what each named guest wants, fears, and will do when the lights
 go out. That is Chapter VII, and it is the chapter to skim again before you sit down.
