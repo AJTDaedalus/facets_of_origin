@@ -519,3 +519,74 @@ Hard-rule detail: role_name is 75 "MM" + 1 "Mirror Master". bare_dc 146 = bare "
 - Callun's own Secret (the Vorlain-chieftaincy arithmetic): nothing printed shows her telling it, so it stays in her Secret line. Maiven's instruction is listed, because it is the errand she hands Agenda 4.
 
 **Skipped sites:** none.
+
+
+## Phase 7 — T7.1 pilot (chapter 04)
+
+*Worker, 2026-10-03. BALL-13, -14, -20, -21; FRONT-7 (04 L17, L393). Every site was located by quoted text. Wording only: no fact, number, DC or rule changed. A script diff of every `DC n`, dice expression and numeral before and after shows one added numeral, the "(Table VIII–7)" that BALL-21's own fix supplies.*
+
+**Metrics** (`lint_5e.py --report --file 04_The_Ball.md`, DM prose):
+
+| metric | target | before | after |
+|---|---|---|---|
+| words | — | 13,690 | 13,613 |
+| mean words per sentence | ≤ 19 | 15.42 | 13.46 |
+| sentences over 30 words | ≤ 12% | 9.01% | 5.28% |
+| em dashes per 1,000 words | ≤ 8 | 13.66 | 1.54 |
+| paragraphs over 120 words | ≤ 3 | 16 | 0 |
+| "the players" (S2) | 0 | 6 | 0 |
+| "perhaps" (S25) | 0 | 1 | 0 |
+| rhetorical questions (S27) | 0 | 6 | 0 |
+| S26, S28, S29, S30 | 0 | 0 | 0 |
+| "player character" | — | 16 | 2 |
+| "not X but Y" / ", not" | — | 12 | 11 |
+| hard hits (conversion talk 3, narrator 1) | — | 4 | 0 |
+
+The `designer_we` hit is "To the ones we lost", in Raunu's canon toast, inside read-aloud. The only `!` lines are the `<!-- TODO-Q… -->` comments.
+
+**What was done.**
+- **Em-dash and semicolon chains** split into sentences, colons or parentheses throughout. The 23 em dashes left in DM prose are in section titles cited by name ("The Snakes This Movement — V", "Undercurrent A — The Root of the House"), the declared box labels (**Sidebar —**, **DM Note —**), the ***Card Sn, chapter IX*** — pointers, run-in labels such as **The quiet guest — the music.**, and canon speech. Read-aloud and table cells were not touched. 1.54 per 1,000 is well under target. If the owner finds the result too clipped, the easiest place to put dashes back is the description (Palace Boranis, B9's rooms, the Dead Dance).
+- **Long paragraphs**: B8 now has a bold run-in for each find (BALL-13's model). Undercurrent D's trail and find are bullets. The rest were split at a natural turn (the seating brawl, Undercurrent A's skeleton, orrery and "shape of it", Undercurrent B's trail, the summons, Movement IV's agenda beats, Movement V's scheduled beats, the Steel sidebar, the Raunu-attacked case).
+- **BALL-14 fixes as written:** "The gatehouse cell is a scene." (68). "This is the first scene of the adventure, not a transition into it." (134). "In hindsight… devastating" cut. "…no torture-vault, no horror." "(a superb scene: …)" cut, and the image kept as plain instruction. "(They are wrong.)" "Then the room boils with the *promise* of news." Undercurrents sidebar: "If a table chases none of them, the night still works. The Undercurrents are depth, not the floor." Also cut: "a door left ajar on something vast", "let the table feel the floor tilt", "which is, afterward, the part nobody can stop thinking about". The second "holding its breath" (Undercurrent C) became "a household on watch". The Movement V one stays.
+- **BALL-21:** "perhaps two dozen" → "about two dozen". "What then?" → "If the characters act on it:". "Sit with what that implies" cut. "Not even you." → "…and every rumor is told with total confidence (Table VIII–7)." "the module intends tables to discover it" → "The shape of it is discoverable." "Let the table sit with it." cut. Two street prompts went into quotation marks, "What does your mask look like?" and "What do you do?" (DM-to-player speech). The Undercurrent B epigraph became a statement.
+- **BALL-20 / party:** every "the players" that meant the characters → "the characters" or "a character". "Agenda N's player" → "the character with Agenda N". "Player character" → "character" except where it separates PCs from NPC guests: "should be player characters" (the summons) and "Any player character who comes back out of B4". "the players should be told" (custom demands the host lead the Unmasking) → "the table should be told", because it means the people. "Four players will be in four rooms" stays (people, not caught by S2).
+- **Conversion and narrator talk (FRONT-7):** "replaces the original's Sparks" → "**Heroic Inspiration.** Table I–3…"; "A third rule for this edition" → "Three rules… *(And the third: …)*"; "**the source of the gifts**" (in-world, but a lint hit) → "**the origin of the gifts**"; "The module does not explain the instruments" → "Nothing here explains…"; "Whose bones these are, the module does not know" → "…is left open"; "a fact the module states and does not explain" → "nothing in this adventure explains why"; "What the module still does not give" → "What the room still does not give"; "The module's best nights" → "The best nights"; "ordinary 5e combat" → "ordinary combat"; "the module's scheduled events" → "the scheduled events".
+- **Italics fix found on the way:** Undercurrent D's spell list sat inside an italic aside, which flipped the spells to roman. That sentence now sits outside the aside, as plain DM text.
+
+**Kept on purpose.** Canon speech (the toast, the summons answers, Raunu's "Enjoy the ball — and stay near the walls", Veier's lines, the lattice's "Wrong verb"). Every read-aloud box, unchanged. Jokes that earn their place: "which is a fine way to spend a masquerade", the chicken pen, "Remember them like this", "rarest of all at Oraga, *unsurprised*", "the terror of the Orthaen learning his wife's weapon, badly, in private, presumably to laughter", the wine-cellar stair. Functional contrasts that carry a rule or a fact: "grown, not built", "crystal, not iron", "End a scene on a choice, not on its resolution", "they fight to leave, not to kill", "a *playable fight* (card S4), not a fail state", "the palace doors, not the gates", "not by rank", "depth, not the floor", and the sidebar slogan "Guards are a scene, not a sentence" (kept at that one site, per BALL-14). One judgment call: B7's Orthaen ward-reading still says "automatically" and still leaves open whether the 10 minutes apply. The original was ambiguous, and the rewrite does not settle it.
+
+**Before → after samples (for owner review, checkpoint G1).**
+
+*1. B8, Raunu's Study (BALL-13's model).*
+
+> **Before:** Locked, dark wing, second floor (opening it takes a DC 18 Dexterity check using Thieves' Tools; the lock is crystal, not iron). Two years of a genius's solitude, and — players will look for papers and find none, because there are none anywhere — the room thinks in crystal: instruments nobody can name, a grown relief of the eastern coast on the great table with its mist-lines remembered in colored lattice, the recent lines reworked many times; a work-slate bearing a half-erased lattice diagram (temporary scratch-work, the one grudging medium even the law cannot police); and, the detail that should follow players home, a drawer of duplicate invitation cards, one for every guest, a certain few with a corner deliberately scorched, as if he had been deciding something about each one. *(Copying or memorizing the slate's diagram takes a minute and a DC 13 Intelligence check, or none at all for anyone who draws it straight onto their own slate. The module does not explain the instruments or the scorch-marks. …)*
+>
+> **After:** Locked, dark wing, second floor. Opening it takes a DC 18 Dexterity check using Thieves' Tools; the lock is crystal, not iron. Two years of a genius's solitude. The characters will look for papers and find none, because there are none anywhere. The room thinks in crystal.
+> - **The instruments.** Nobody can name them.
+> - **The great table.** A grown relief of the eastern coast, its mist-lines remembered in colored lattice. The recent lines have been reworked many times.
+> - **The work-slate.** A half-erased lattice diagram: temporary scratch-work, the one grudging medium even the law cannot police. Copying or memorizing the diagram takes a minute and a DC 13 Intelligence check, or none at all for anyone who draws it straight onto their own slate.
+> - **The drawer.** The detail that should follow the characters home: duplicate invitation cards, one for every guest, a certain few with a corner deliberately scorched, as if he had been deciding something about each one.
+>
+> *(Nothing here explains the instruments or the scorch-marks. …)*
+
+*2. The Seating Feud, the brawl.*
+
+> **Before:** This is an honest brawl, and anyone can join it: fists, elbows, harvest fruit, someone's ceremonial staff — run it as ordinary 5e combat with one mercy: nobody here has a weapon worth the name, so player characters fight with unarmed strikes and improvised weapons, and **all damage in the brawl is nonlethal** — anyone dropped to 0 Hit Points is simply out of it, bruised, Unconscious and Stable, and no one makes a Death Saving Throw. The one line is the ball's own: **bare steel** turns a scuffle into a scandal and brings guards at a run (see the sidebar "Guards are a scene, not a sentence", below). Player characters can pick a side, shield the innocent, or end it — hauling the principals apart, a voice that expects to be obeyed, a well-timed joke at both houses' expense. Ending it *well* earns Corval's open gratitude, which is worth more than either house's: he is the man who opens doors. Letting it run costs nothing but bruises and reputations — and fills the galleries with guards for a Movement, which some agendas will find inconvenient and one crew (below) finds very interesting indeed.
+>
+> **After:** This is an honest brawl, and anyone can join it: fists, elbows, harvest fruit, someone's ceremonial staff. Run it as ordinary combat with one mercy. Nobody here has a weapon worth the name, so the characters fight with unarmed strikes and improvised weapons, and **all damage in the brawl is nonlethal**. Anyone dropped to 0 Hit Points is simply out of it, bruised, Unconscious and Stable, and no one makes a Death Saving Throw. The one line is the ball's own: **bare steel** turns a scuffle into a scandal and brings guards at a run (see the sidebar "Guards are a scene, not a sentence", below).
+>
+> The characters can pick a side, shield the innocent, or end it: hauling the principals apart, a voice that expects to be obeyed, a well-timed joke at both houses' expense. Ending it *well* earns Corval's open gratitude, which is worth more than either house's: he is the man who opens doors. Letting it run costs nothing but bruises and reputations. It also fills the galleries with guards for a Movement, which some agendas will find inconvenient and one crew (below) finds very interesting indeed.
+
+*3. Undercurrent A, after "Both rivers, one spring."*
+
+> **Before:** The shape of it is discoverable, and the module intends tables to discover it: the chief of the Orthaen believed the gifts of two tribes were one gift, long ago — that his marriage carried both halves — and that he has spent eight months *watching the proof grow.* What the module still does not give: the lattices' deeper contents, the name burned from the junction, what the restored gift is or does, or what the mists have to do with any of it. No check, spell, or divination reaches past that line tonight — *Legend Lore*, *Commune* and their kin return rumor and contradiction, the way the world answers everything else about this house. The find is a door left ajar on something vast — and it is also, quietly, why rumors 2 through 12 all exist: everyone senses he was *doing something*. Nobody guessed this.
+>
+> **After:** The shape of it is discoverable. The chief of the Orthaen believed the gifts of two tribes were one gift, long ago. He believed his marriage carried both halves, and he has spent eight months *watching the proof grow.*
+>
+> What the room still does not give: the lattices' deeper contents, the name burned from the junction, what the restored gift is or does, or what the mists have to do with any of it. No check, spell, or divination reaches past that line tonight. *Legend Lore*, *Commune* and their kin return rumor and contradiction, the way the world answers everything else about this house. The find is also, quietly, why rumors 2 through 12 all exist: everyone senses he was *doing something*. Nobody guessed this.
+
+**Commands.** `lint_5e.py --check` → OK (0 problems; 31 hard and 0 structure hits remain). `bestiary_check.py` → 25 blocks + 3 Nastier, 0 mismatches. `pregen_check.py` → 5 pregens, 0 issues. `python -m pytest conversions/dnd5e/oraga_night/tools -q` → 159 passed.
+
+**Re-baseline.** `lint_5e.py --baseline` was re-run after the pass, so T7.2 onward are held to the new numbers. The old baseline still carried Phase-0 counts for every file. The new one records the current state of all twelve files: 31 hard hits module-wide, and 04 at 0 hard hits and 0 long paragraphs. `--check` passes against it.
+
+**STOP: checkpoint G1.** T7.2–T7.7 wait until the owner approves the tone of these samples or adjusts the approach.

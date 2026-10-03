@@ -1,12 +1,6 @@
 {
  "hard": {
   "01_Overture.md": {
-   "bare_dc": {
-    "DC 10": 1,
-    "DC 13": 1,
-    "DC 15 Wisdom (Insight)": 1,
-    "DC 20": 1
-   },
    "conversion_talk": {
     "The source": 1,
     "the original": 4,
@@ -15,267 +9,38 @@
    },
    "designers_note": {
     "Designer's note": 1
-   },
-   "lowercase_terms": {
-    "advantage": 2,
-    "hit points": 1,
-    "long rest": 1
-   },
-   "role_name": {
-    "MM": 11
-   },
-   "roll_check": {
-    "misses its DC": 1
-   },
-   "spelled_distance": {
-    "twenty feet": 1
-   }
-  },
-  "02_The_World_and_the_Night.md": {
-   "gp": {
-    "gp": 2
-   },
-   "role_name": {
-    "MM": 4
-   }
-  },
-  "03_Masks_and_Agendas.md": {
-   "bare_dc": {
-    "DC 10": 1,
-    "DC 15 Wisdom (Insight)": 1,
-    "DC 20": 1
-   },
-   "gp": {
-    "gp": 1
-   },
-   "lowercase_terms": {
-    "advantage": 1,
-    "disadvantage": 1,
-    "hit points": 1,
-    "long rest": 1
-   },
-   "role_name": {
-    "MM": 4
-   }
-  },
-  "04_The_Ball.md": {
-   "bare_dc": {
-    "DC 10": 7,
-    "DC 10 Charisma (Deception)": 1,
-    "DC 10 Dexterity (Stealth)": 1,
-    "DC 10 Intelligence": 1,
-    "DC 10 Wisdom (Perception)": 1,
-    "DC 13": 10,
-    "DC 13 Charisma": 1,
-    "DC 13 Dexterity": 1,
-    "DC 13 Dexterity (Acrobatics)": 1,
-    "DC 13 Dexterity (Stealth)": 1,
-    "DC 13 Intelligence": 1,
-    "DC 13 Intelligence (Arcana)": 1,
-    "DC 13 Intelligence (History)": 1,
-    "DC 13 Intelligence (Investigation)": 1,
-    "DC 13 Intelligence (Religion)": 1,
-    "DC 13 Wisdom (Insight)": 3,
-    "DC 13 Wisdom (Perception)": 3,
-    "DC 13–15": 1,
-    "DC 15": 2,
-    "DC 15 Dexterity (Stealth)": 1,
-    "DC 15 Wisdom (Insight)": 1,
-    "DC 15 Wisdom (Survival)": 1,
-    "DC 18": 3,
-    "DC 18 Charisma (Intimidation)": 1,
-    "DC 18 Dexterity (Sleight of": 1,
-    "DC 18–20": 1,
-    "DC 25": 2,
-    "DC 25 Charisma (Deception)": 1
-   },
-   "british_spelling": {
-    "centre": 1,
-    "colour": 1,
-    "colours": 1,
-    "labelled": 1,
-    "recognises": 1,
-    "rumour": 1
-   },
-   "conversion_talk": {
-    "the original": 1,
-    "the source": 1,
-    "this edition": 1
-   },
-   "designer_we": {
-    "we": 1
-   },
-   "grey": {
-    "grey": 3
-   },
-   "lowercase_terms": {
-    "and stable": 1,
-    "falls unconscious": 1,
-    "hit points": 2,
-    "short rest": 1
-   },
-   "narrator_voice": {
-    "the module intends": 1
-   },
-   "role_name": {
-    "MM": 4
-   },
-   "roll_check": {
-    "misses its DC": 1
    }
   },
   "05_The_Longest_Night.md": {
-   "bare_dc": {
-    "DC 10": 1,
-    "DC 13": 4,
-    "DC 13 Intelligence (Arcana)": 1,
-    "DC 15": 2,
-    "DC 18": 1,
-    "DC 19": 1
-   },
-   "british_spelling": {
-    "honour": 1,
-    "honours": 1
-   },
    "conversion_talk": {
     "New in this edition": 2,
     "this edition": 1
    },
-   "grey": {
-    "grey": 1
-   },
-   "lowercase_terms": {
-    "bright light": 1,
-    "difficult terrain": 2,
-    "her speed": 1,
-    "hit point": 2,
-    "hit points": 10,
-    "knocked prone": 1
-   },
    "narrator_voice": {
     "The module would": 1,
     "the module notes": 1
-   },
-   "role_name": {
-    "MM": 10
-   },
-   "save_damage": {
-    "14 (4d6) bludgeoning damage": 1
-   },
-   "spelled_distance": {
-    "five feet": 1,
-    "twenty feet": 1
-   }
-  },
-  "06_Aftermath.md": {
-   "bare_dc": {
-    "DC 13 Charisma (Persuasion)": 1,
-    "DC 13 Intelligence (Investigation)": 1,
-    "DC 15 Wisdom (Insight)": 1
-   },
-   "british_spelling": {
-    "colours": 1,
-    "recognises": 1
    }
   },
   "07_Cast_of_the_Ball.md": {
-   "bare_dc": {
-    "DC 10": 1,
-    "DC 18 Wisdom (Insight)": 1,
-    "DC 20": 4,
-    "DC 25": 3
-   },
-   "british_spelling": {
-    "honours": 2
-   },
    "conversion_talk": {
     "The source": 1,
     "this edition": 1
-   },
-   "grey": {
-    "Grey": 1,
-    "grey": 1
-   },
-   "lowercase_terms": {
-    "hit points": 2
    },
    "narrator_voice": {
     "the module has spent": 1,
     "the module notes": 2,
     "the module suggests": 1
-   },
-   "role_name": {
-    "MM": 7
    }
   },
   "08_Handouts.md": {
-   "bare_dc": {
-    "DC 13": 7,
-    "DC 13 Charisma": 1,
-    "DC 13 Intelligence (Arcana)": 1,
-    "DC 15": 3,
-    "DC 18": 1
-   },
    "designer_we": {
     "we": 1
-   },
-   "gp": {
-    "gp": 2
-   },
-   "lowercase_terms": {
-    "disadvantage": 2
-   },
-   "role_name": {
-    "MM": 1
    }
   },
   "09_The_Snakes.md": {
-   "bare_dc": {
-    "DC 13": 4,
-    "DC 13 Charisma (Intimidation)": 1,
-    "DC 13 Charisma (Persuasion)": 6,
-    "DC 13 Strength (Athletics)": 3,
-    "DC 13 Wisdom": 1,
-    "DC 13 Wisdom (Insight)": 1,
-    "DC 15": 2,
-    "DC 15 Charisma (Deception or Persuasion)": 1,
-    "DC 15 Charisma (Deception)": 1,
-    "DC 15 Charisma (Intimidation or Performance)": 1,
-    "DC 15 Charisma (Persuasion)": 3,
-    "DC 15 Intelligence": 1,
-    "DC 18": 2,
-    "DC 18 Charisma (Deception)": 1,
-    "DC 19": 1,
-    "DC 20": 1
-   },
-   "british_spelling": {
-    "colours": 2,
-    "defence": 2,
-    "favourite": 1,
-    "honours": 1,
-    "offence": 2,
-    "organised": 1,
-    "recognise": 1,
-    "recognises": 2,
-    "rumour": 2
-   },
    "conversion_talk": {
-    "(source Ch": 8,
     "This edition": 1,
-    "the original": 1,
-    "the source": 4,
-    "this edition": 1
-   },
-   "deadly_budget": {
-    "Deadly": 2
-   },
-   "grey": {
-    "Grey": 1,
-    "grey": 5
-   },
-   "lowercase_terms": {
-    "advantage": 2,
-    "disadvantage": 4
+    "the source": 2
    },
    "narrator_voice": {
     "Honest note": 1,
@@ -285,261 +50,172 @@
    },
    "pcs": {
     "PCs": 1
-   },
-   "role_name": {
-    "MM": 15
-   },
-   "roll_check": {
-    "beating the DC": 1
-   },
-   "save_damage": {
-    "take 1d6": 1
-   },
-   "spelled_distance": {
-    "fifteen feet": 1,
-    "fifteen-foot": 1,
-    "five feet": 3,
-    "ten feet": 1,
-    "ten-foot": 2,
-    "twelve-foot": 1,
-    "twenty feet": 1
    }
   },
   "10_Bestiary.md": {
-   "bare_dc": {
-    "DC 10": 1,
-    "DC 12": 3,
-    "DC 13": 3,
-    "DC 14": 1,
-    "DC 15": 5,
-    "DC 18": 1,
-    "DC 19": 1,
-    "DC 20": 3,
-    "DC 25": 3
-   },
-   "british_spelling": {
-    "centred": 1,
-    "defence": 1,
-    "favour": 1,
-    "honour": 3,
-    "honours": 1,
-    "recognises": 2
-   },
    "conversion_talk": {
     "the original": 1
-   },
-   "grey": {
-    "Grey": 1,
-    "grey": 2
-   },
-   "lowercase_terms": {
-    "advantage": 16,
-    "disadvantage": 3
-   },
-   "role_name": {
-    "MM": 4
-   },
-   "roll_check": {
-    "beat the DC": 1,
-    "roll the ability": 1
-   },
-   "save_damage": {
-    "3 (1d6) damage": 1,
-    "7 (1d8 + 3) damage": 1,
-    "7 (2d6) damage": 3
-   }
-  },
-  "11_Pregenerated_Characters.md": {
-   "bare_dc": {
-    "a Sleight of Hand check": 1
-   },
-   "british_spelling": {
-    "recognise": 1
-   },
-   "gp": {
-    "gp": 5
-   },
-   "lowercase_terms": {
-    "advantage": 9,
-    "disadvantage": 4,
-    "her speed": 1,
-    "his speed": 2,
-    "hit points": 4,
-    "long rest": 4,
-    "opportunity attacks": 1,
-    "short rest": 4
-   },
-   "role_name": {
-    "MM": 7
-   },
-   "save_damage": {
-    "deals 1d4": 1,
-    "half on a success": 1,
-    "takes 1d8": 1
    }
   },
   "README.md": {
    "conversion_talk": {
     "this edition": 1
-   },
-   "role_name": {
-    "MM": 1
    }
   }
  },
  "soft": {
   "01_Overture.md": {
-   "emdash_per_k": 5.65,
+   "emdash_per_k": 5.95,
    "long_paras": 1,
-   "long_sentence_pct": 5.88,
-   "mean_wps": 14.42,
+   "long_sentence_pct": 6.1,
+   "mean_wps": 14.57,
    "not_but": 10,
    "perhaps": 0,
    "player_character": 4,
    "rhetorical": 0,
-   "sentences": 319,
+   "sentences": 323,
    "the_players": 11,
-   "words": 4600,
-   "you": 39
+   "words": 4707,
+   "you": 41
   },
   "02_The_World_and_the_Night.md": {
-   "emdash_per_k": 16.8,
+   "emdash_per_k": 16.78,
    "long_paras": 8,
    "long_sentence_pct": 8.56,
-   "mean_wps": 14.88,
+   "mean_wps": 14.9,
    "not_but": 7,
    "perhaps": 1,
    "player_character": 7,
    "rhetorical": 2,
    "sentences": 280,
    "the_players": 2,
-   "words": 4167,
+   "words": 4172,
    "you": 58
   },
   "03_Masks_and_Agendas.md": {
-   "emdash_per_k": 9.37,
+   "emdash_per_k": 8.79,
    "long_paras": 0,
-   "long_sentence_pct": 7.86,
-   "mean_wps": 14.87,
+   "long_sentence_pct": 7.09,
+   "mean_wps": 14.8,
    "not_but": 3,
    "perhaps": 0,
    "player_character": 1,
    "rhetorical": 0,
-   "sentences": 122,
+   "sentences": 123,
    "the_players": 0,
-   "words": 1814,
+   "words": 1820,
    "you": 44
   },
   "04_The_Ball.md": {
-   "emdash_per_k": 15.85,
-   "long_paras": 16,
-   "long_sentence_pct": 10.01,
-   "mean_wps": 16.32,
-   "not_but": 12,
-   "perhaps": 2,
-   "player_character": 17,
-   "rhetorical": 7,
-   "sentences": 742,
-   "the_players": 6,
-   "words": 12111,
-   "you": 28
+   "emdash_per_k": 1.54,
+   "long_paras": 0,
+   "long_sentence_pct": 5.28,
+   "mean_wps": 13.46,
+   "not_but": 11,
+   "perhaps": 0,
+   "player_character": 2,
+   "rhetorical": 0,
+   "sentences": 1011,
+   "the_players": 0,
+   "words": 13613,
+   "you": 21
   },
   "05_The_Longest_Night.md": {
-   "emdash_per_k": 17.29,
-   "long_paras": 19,
-   "long_sentence_pct": 12.16,
-   "mean_wps": 17.11,
+   "emdash_per_k": 15.02,
+   "long_paras": 16,
+   "long_sentence_pct": 11.17,
+   "mean_wps": 16.86,
    "not_but": 17,
-   "perhaps": 1,
+   "perhaps": 0,
    "player_character": 33,
    "rhetorical": 2,
-   "sentences": 639,
+   "sentences": 683,
    "the_players": 16,
-   "words": 10932,
+   "words": 11515,
    "you": 29
   },
   "06_Aftermath.md": {
-   "emdash_per_k": 7.35,
+   "emdash_per_k": 6.89,
    "long_paras": 0,
-   "long_sentence_pct": 4.17,
-   "mean_wps": 13.8,
+   "long_sentence_pct": 4.05,
+   "mean_wps": 14.31,
    "not_but": 2,
    "perhaps": 0,
    "player_character": 0,
    "rhetorical": 2,
-   "sentences": 69,
+   "sentences": 71,
    "the_players": 1,
-   "words": 952,
-   "you": 8
+   "words": 1016,
+   "you": 9
   },
   "07_Cast_of_the_Ball.md": {
-   "emdash_per_k": 19.04,
-   "long_paras": 8,
-   "long_sentence_pct": 9.19,
-   "mean_wps": 16.89,
+   "emdash_per_k": 13.4,
+   "long_paras": 7,
+   "long_sentence_pct": 6.01,
+   "mean_wps": 14.78,
    "not_but": 8,
    "perhaps": 0,
    "player_character": 2,
    "rhetorical": 0,
-   "sentences": 311,
+   "sentences": 500,
    "the_players": 1,
-   "words": 5253,
-   "you": 4
+   "words": 7390,
+   "you": 5
   },
   "08_Handouts.md": {
-   "emdash_per_k": 16.8,
+   "emdash_per_k": 14.97,
    "long_paras": 0,
-   "long_sentence_pct": 1.65,
-   "mean_wps": 10.42,
+   "long_sentence_pct": 3.21,
+   "mean_wps": 10.8,
    "not_but": 1,
    "perhaps": 1,
    "player_character": 1,
    "rhetorical": 2,
-   "sentences": 160,
+   "sentences": 167,
    "the_players": 1,
-   "words": 1667,
-   "you": 11
+   "words": 1804,
+   "you": 12
   },
   "09_The_Snakes.md": {
-   "emdash_per_k": 10.22,
-   "long_paras": 15,
-   "long_sentence_pct": 5.62,
-   "mean_wps": 13.85,
+   "emdash_per_k": 9.34,
+   "long_paras": 11,
+   "long_sentence_pct": 5.81,
+   "mean_wps": 13.82,
    "not_but": 16,
    "perhaps": 1,
-   "player_character": 71,
+   "player_character": 66,
    "rhetorical": 1,
-   "sentences": 1123,
+   "sentences": 1224,
    "the_players": 4,
-   "words": 15551,
-   "you": 34
+   "words": 16910,
+   "you": 43
   },
   "10_Bestiary.md": {
-   "emdash_per_k": 12.1,
+   "emdash_per_k": 11.09,
    "long_paras": 1,
-   "long_sentence_pct": 7.6,
-   "mean_wps": 15.87,
+   "long_sentence_pct": 8.33,
+   "mean_wps": 16.18,
    "not_but": 4,
    "perhaps": 0,
    "player_character": 1,
    "rhetorical": 0,
-   "sentences": 151,
+   "sentences": 156,
    "the_players": 1,
-   "words": 2396,
+   "words": 2524,
    "you": 2
   },
   "11_Pregenerated_Characters.md": {
-   "emdash_per_k": 11.76,
+   "emdash_per_k": 11.16,
    "long_paras": 0,
-   "long_sentence_pct": 3.12,
-   "mean_wps": 11.23,
+   "long_sentence_pct": 3.72,
+   "mean_wps": 11.48,
    "not_but": 2,
    "perhaps": 0,
    "player_character": 2,
    "rhetorical": 6,
-   "sentences": 280,
+   "sentences": 281,
    "the_players": 0,
-   "words": 3145,
+   "words": 3226,
    "you": 1
   },
   "README.md": {
@@ -557,12 +233,6 @@
    "you": 5
   }
  },
- "structure": {
-  "05_The_Longest_Night.md": {
-   "readaloud_trigger": {
-    "untriggered read-aloud: *The outer gate is shut, and": 1
-   }
-  }
- },
+ "structure": {},
  "version": 1
 }

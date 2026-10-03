@@ -369,8 +369,9 @@ These rules are mechanical, but a worker makes every edit with the linter's hit 
 - **Metric targets (lint soft rules, DM prose):** mean ≤ 19 words per sentence; ≤ 12% of sentences over 30 words; ≤ 8 em dashes per 1,000 words; ≤ 3 paragraphs over 120 words; S2, S25–S30 = 0.
 - **Accept (each):** targets met or the variance explained in LOG, SA, and a before/after sample of 3 paragraphs pasted into LOG for the owner.
 
-### ☐ T7.1 PILOT: Chapter 04 (BALL-13, -14, -20, -21; FRONT-7 04 sites)
+### ☑ T7.1 PILOT: Chapter 04 (BALL-13, -14, -20, -21; FRONT-7 04 sites)
 - **Time:** 3 × 30 min. **Then STOP for owner review of tone** (checkpoint G1). Tasks T7.2–T7.9 don't start until the owner approves or adjusts the approach.
+- **Done 2026-10-03.** Metrics and three before/after samples are in LOG, "Phase 7 — T7.1 pilot (chapter 04)". Waiting on G1.
 
 ### ☐ T7.2 Chapter 05 (NIGHT-13, -14; FRONT-7 05 sites, including the "*(New in this edition.)*" tags)
 - **Time:** 3 × 30 min.
