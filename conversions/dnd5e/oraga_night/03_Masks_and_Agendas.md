@@ -178,13 +178,14 @@ worth exactly what the fiction says it is worth: faces are hidden, voices are
 recognizable to those who know them, builds and manners give people away to a careful
 eye.
 
-- **Identifying a masked guest you know:** DC 15 Wisdom (Insight).
-- **Identifying one you have merely heard described:** DC 20.
-- **Approaching someone far above your station, behind a mask:** DC 10 instead of the
-  usual 13–15 — the custom protects the conversation, and everyone at this ball is
-  someone else tonight.
+- **Identifying a masked guest you know:** a DC 15 Wisdom (Insight or Perception) check.
+- **Identifying one you have merely heard described:** a DC 20 Wisdom (Insight or
+  Perception) check.
+- **Approaching someone far above your station, behind a mask:** an ability check using
+  the skill that fits, DC 10, instead of the usual 13 — the custom protects the
+  conversation, and everyone at this ball is someone else tonight.
 
-*Disguise Self* and a disguise kit work as written, and at a masquerade they are
+*Disguise Self* and a Disguise Kit work as written, and at a masquerade they are
 barely necessary.
 
 Let players describe their masks. It matters to nobody and everybody, which is the

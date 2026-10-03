@@ -39,9 +39,9 @@ guest he has no business knowing (pick from the player's own backstory; one deta
 per summons, delivered almost absently), because a man who leaves no eventuality
 unprepared for did not neglect to learn his guests. He never threatens; a
 reputation for total preparedness means never having to. Each summons ends
-abruptly, on something that is nearly a kindness. Deceiving Raunu is **DC 25**
-Charisma (Deception). Impressing him is easier than anyone expects: tell him a true thing he
-did not already know.
+abruptly, on something that is nearly a kindness. Deceiving Raunu takes a
+**DC 25 Charisma (Deception) check**. Impressing him is easier than anyone expects: tell
+him a true thing he did not already know.
 
 **At the Unmasking:** see Chapter V. Custom compels his return to the dais — the
 one predictable moment of his night, which is exactly why it is the moment. He
@@ -161,11 +161,11 @@ Loyalty has kept him from assembling the pieces. He is the faithful servant's
 tragedy, one honest conversation away from understanding.
 
 **Play him:** thin, upright, old, magnificent under pressure, doing the work of six
-chamberlains. Bribing Corval is impossible — not DC 20, *impossible*, tell the
-players so. Helping him — genuinely, with the wine crisis or the escalating seating
+chamberlains. Bribing Corval is impossible — there is no check for it at
+all, and you tell the players so. Helping him — genuinely, with the wine crisis or the escalating seating
 feud — earns more than gold buys: gratitude, gossip, and doors. Deceiving him about
-household matters is **DC 20** Charisma (Deception); about anything else he is too
-tired to check.
+household matters takes a **DC 20 Charisma (Deception) check**; about anything else he
+is too tired to check.
 
 > **Corval at the gate — what the line asks him**
 >
@@ -240,8 +240,8 @@ she has not been told why the question is phrased that way.
 
 **Play her:** urbane, watchful, a career diplomat in vestments; works the room like
 a census-taker of souls. Runs Agenda 2 with scrupulous courtesy and pays her debts.
-Lying to Kovaun about matters of faith is **DC 20** Charisma (Deception); she has
-heard everything.
+Lying to Kovaun about matters of faith takes a **DC 20 Charisma (Deception) check**;
+she has heard everything.
 
 **If it comes to steel:** stat block **Damaris Kovaun**, with **Church Warden** for her
 retinue. The Church is a snake; its line is in Chapter IX (card S8).
@@ -274,7 +274,7 @@ not to act on it. (She would be horrified to be called a conspirator. She is mer
 
 **Play her:** iron-gray, cordial, terrifyingly numerate. Runs Agenda 1 and pays on
 delivery. Deceiving her about money takes a DC 20 Charisma (Deception) check; about anything
-human, **DC 10**.
+human, a **DC 10 Charisma (Deception) check**.
 
 **If it comes to steel:** stat block **Rhaza Callun** — she is no fighter, and her
 block says so — with **Circle Hired Knife** for the people she pays. The Merchant's
@@ -321,8 +321,8 @@ mattering quietly.
 
 **Play him:** affable, forgettable on purpose, always somehow between Vorlain and
 whoever is working him. The Agenda 3 player's true opponent, and a fine sparring
-partner: deceiving Essin is **DC 20** Charisma (Deception), and he deceives back — catching
-him at it is DC 18 Wisdom (Insight).
+partner: deceiving Essin takes a **DC 20 Charisma (Deception) check**, and he deceives back —
+catching him at it takes a DC 18 Wisdom (Insight) check.
 
 **If it comes to steel:** stat block **Essin Boranis**, with **Boranis Cousin's Blade**
 — his people, placed where he wants them. House Boranis's line is in Chapter IX (cards
@@ -377,8 +377,8 @@ something unbeatable while deliberately not using his weapon — let them notice
 **Play him:** courteous, brief, and *finished* — every conversation with Vell ends
 when he decides, somehow without rudeness. He answers questions with smaller
 questions. He is immune to every lever: bribery, flattery, threat, charm — make
-every Charisma check to move Vell (Deception, Intimidation or Persuasion) **DC 25**, and
-let even a success buy honesty rather than compliance ("You are observant. Enjoy the ball."). Players who shadow
+every check to move Vell a **DC 25 Charisma (Deception, Intimidation, or Persuasion)
+check**, and let even a success buy honesty rather than compliance ("You are observant. Enjoy the ball."). Players who shadow
 him find only preparations: a walked garden, a tested gate, a purchased boat. All
 night he does not fight, does not hurry, and is never once interesting to look
 at — and that last is not luck. *(DM truth: his unmemorability is a gentle,

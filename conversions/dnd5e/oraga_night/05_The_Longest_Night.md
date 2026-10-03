@@ -34,8 +34,9 @@ Three principles:
    Use the palace's defenses as pacing valves — sealing a killer out of a scene,
    sealing players into one — and let anyone who studied the wards (Agenda 5, the
    gallery) *steer* them. Steering a Boranis ward takes an action at a ward-point and
-   a **DC 13 Intelligence (Arcana)** check for anyone who studied the wards or is an
-   Orthaen who has read them by hand tonight, and **DC 18** for anyone else (the
+   a **DC 13 Intelligence (Arcana) check** for anyone who studied the wards or is an
+   Orthaen who has read them by hand tonight, and a **DC 18 Intelligence (Arcana)
+   check** for anyone else (the
    Orthaen Gift's knack applies). **Each ward-point steers once tonight;** the room
    tricks below say how many a room has. On a success, pick one: seal a doorway or
    corridor (it holds until the scene ends against anything but an Uninvited, and against
@@ -44,7 +45,7 @@ Three principles:
    huddled guests (they cannot be targeted by the snakes' weapons while they stay under
    it, until the last bell). Tables that found **the Root of the House** (Undercurrent
    A) hold the master valve: from the Root, any ward-point in the palace can be
-   steered at DC 13 for anyone ward-literate, a dozen guests can shelter behind the
+   steered with a DC 13 Intelligence (Arcana) check by anyone ward-literate, a dozen guests can shelter behind the
    deepest crystal in Rekuzan — and the Uninvited will not go down there — whatever
    the deep crystal is to them, they will not cross its threshold. The module states
    this and does not explain it.
@@ -240,9 +241,9 @@ Midnight Clock").
 
 **Earn it by being clever, not by hitting harder.** A creative action that uses the
 room, the crowd, the wards, a lie, a mask, a door, fire, water or light earns **1
-Delay** on a success. The check is whatever the trick needs, at **DC 13** — **DC 15**
-if the same trick has already worked on that Uninvited tonight, and it never works a
-third time. A spell is a trick like any other: if it lands, that is the success
+Delay** on a success. The check is an ability check using the skill that fits,
+DC 13, or DC 15 if the same trick has already worked on that Uninvited tonight, and it
+never works a third time. A spell is a trick like any other: if it lands, that is the success
 (Chapter X lists what the obvious ones do). A **Fracture** that lands earns **2
 Delay** as well as its own effect. The room-trick tables below give eight ideas for
 each place the attack reaches. They are prompts, not a menu; a trick the players
@@ -303,7 +304,7 @@ in the room is not.
 | 5 | **Guests in her path.** Drive a knot of guests across her line. She steps round everyone who is not in her way without looking, and the long way costs her | Charisma (Persuasion or Intimidation), shouted |
 | 6 | **Over the rail.** Drop from the gallery rail onto her, or drop something heavy | Strength (Athletics) or Dexterity (Acrobatics) |
 | 7 | **A child crying,** somewhere she can hear it. She goes still at the sound, as she has all night | Charisma (Performance or Deception) |
-| 8 | **Fire in the linen.** Candles from the high table into the fallen canopy or the table linen, between her and Raunu. She goes round it; the guests go the other way, which is where you want them | Dexterity, or no roll once the canopy is down |
+| 8 | **Fire in the linen.** Candles from the high table into the fallen canopy or the table linen, between her and Raunu. She goes round it; the guests go the other way, which is where you want them | Dexterity, or no check once the canopy is down |
 
 **Table V–3: Room Tricks — the Doors** *(the Hollow; two ward-points by the doors)*
 
@@ -311,7 +312,7 @@ in the room is not.
 |---|---|---|
 | 1 | **Flare a ward** by the doors. He flinches from ward-fire, and for a moment the doors behind him are unwatched. Each ward-point once | Ward-steering (see "How to Run the Attack", principle 2) |
 | 2 | **Answer him.** Sooner or later he asks, flatly, whether this is worth it to you. Give him a real answer. He waits for it as if it mattered | Wisdom (Insight) or Charisma (Persuasion) |
-| 3 | **Call a name.** Get Anha, or any of the kitchen household, to call a name across the hall, or call one yourself. He turns his head toward the sound | Charisma (Performance), or Persuasion to get a servant to do it |
+| 3 | **Call a name.** Get Anha, or any of the kitchen household, to call a name across the hall, or call one yourself. He turns his head toward the sound | Charisma (Performance), or Charisma (Persuasion) to get a servant to do it |
 | 4 | **Two who belong together.** Walk them past him — Anha's people through the service door, or any two guests holding on to each other. He watches them go, the way he watched them all night | Charisma (Persuasion), to get them moving |
 | 5 | **Another door.** Make the crowd surge at the gallery-side service door. He steps through the shadow to hold it, and for a moment the main doors are nobody's. The people at that door are in his way now; say so first | Charisma (Intimidation or Performance) |
 | 6 | **Hand him something.** He is polite. Give him a cup, a mask, a coat to hold, as one guest to another, and he holds it | Charisma (Persuasion or Deception) |
@@ -327,7 +328,7 @@ door Raunu sealed is a ward-point)*
 | 2 | **Answer him.** He asks, warmly, whom you serve, and waits for the answer. Give him one worth waiting for | Charisma (Performance or Persuasion) or Intelligence (Religion) |
 | 3 | **A kill that isn't there.** Lie still in a corridor he has already passed, like somebody he missed. He stops to stage it | Charisma (Deception) |
 | 4 | **Put the furniture back.** The corridor outside the east wing doors was cleared for tonight. Drag something into it. It only works while he is Witnessed; otherwise he steps round it through the shadow | Strength (Athletics) |
-| 5 | **The service door.** Take Veier out through the east wing's service door into the run: five feet wide, one lamp in three, and he has to find his way in it like anybody else | Wisdom (Survival), DC 15 the first time; no roll with Anha or any of the household |
+| 5 | **The service door.** Take Veier out through the east wing's service door into the run: 5 feet wide, one lamp in three, and he has to find his way in it like anybody else | Wisdom (Survival), DC 15 the first time; no check with Anha or any of the household |
 | 6 | **Through the plank.** In the service run the wall to the Court is one plank thick. Kick it through, and he is standing in front of everyone on the other side | Strength (Athletics); he is Witnessed while they can see him |
 | 7 | **An audience.** Bring the guards off the east wing doors, Maiven's slingers, anyone, to where he can see them watching. He turns to them and poses | Charisma (Persuasion) |
 | 8 | **The wrong stair.** Tell him she went down the other way | Charisma (Deception) |
@@ -349,7 +350,7 @@ Crossing; Delay earned here is spent at the gate)*
 | 5 | **Push the boat off.** Wade in and put your shoulder to it | Strength (Athletics) |
 | 6 | **Hold him in the shallows.** Grapple him at the water's edge. While he is Witnessed he can't step out of it | An Unarmed Strike (Grapple) |
 | 7 | **The front gate.** Tell him the woman in Thenya wool went out by the front | Charisma (Deception) |
-| 8 | **A body in the way.** Stand between him and the boat. He spends his turn at the gate on you (*Down, Not Out*) instead of on the boat. Always available | No roll, no Delay; it does the same job |
+| 8 | **A body in the way.** Stand between him and the boat. He spends his turn at the gate on you (*Down, Not Out*) instead of on the boat. Always available | No check, no Delay; it does the same job |
 
 #### Two Hundred People
 
@@ -368,7 +369,7 @@ The attack happens in a crowd, and the crowd has rules too.
   character takes 5 (2d4) Bludgeoning damage.
 - **The crowd as ground.** Moving through it is Difficult Terrain; card S11 has the
   rule for a crush at a door.
-- **The Post.** Guests don't roll against the Hollow's *Post* or *Turn Them Back*. The
+- **The Post.** Guests make no saving throws against the Hollow's *Post* or *Turn Them Back*. The
   crowd breaks round him like water and does not pass. It leaves by the service doors
   and the gallery-side door until he turns east, and then by the main doors too.
 - **Someone always comes.** The crowd rule in *Down, Not Out* holds anywhere in the
@@ -407,8 +408,9 @@ player who came to this ball wanting a real fight.
   busy and the Delay stays put.
 - **It can be distracted.** Its three habits — worked crystal and light, the cup
   and cloak for a missing master, music that changes — are shown
-  before midnight. One trick a round, played out at the table, against DC 13 while it
-  is Idle and DC 19 while it is Focused, with +2s for leaning in. Break its focus four
+  before midnight. One trick a round, played out at the table: an ability check using
+  the skill that fits, DC 13 while it is Idle and DC 19 while it is Focused, with +2s
+  for leaning in. Break its focus four
   times in a night and it wanders off to a window to watch the fires. That is a win.
   It is meant to be hard: one character or more will usually go down on the way.
 - **Down, Not Out** holds for everyone it drops. At 0 Hit Points it loses interest in
@@ -447,8 +449,8 @@ What history records, told in scenes. Bend everything except what the players be
   house's stored centuries like coin — the recluse nobody saw all night suddenly
   commanding the whole burning room, and magnificent at it. Any player at his
   side becomes his hands — *"the third sconce — turn it — NOW"* — and buys the room
-  minutes. *(At his side, a player character steers wards at DC 10, whatever they
-  studied: he tells them exactly what to touch. The dais has four ward-points, each
+  minutes. *(At his side, a player character steers wards with a DC 10 Intelligence
+  (Arcana) check, whatever they studied: he tells them exactly what to touch. The dais has four ward-points, each
   good once tonight, and each one turned is a ward between the Wept and the crowd: 1
   Delay. Table V–2 has the rest of what the dais offers. When she reaches him is step 3
   of "The Midnight Clock".)*
@@ -471,7 +473,7 @@ What history records, told in scenes. Bend everything except what the players be
   anyone who is not his ally can see him and he knows they can, his Speed is halved
   and he cannot step through the world's shadow. In the unlit corridors, nobody sees
   him without a light. Chasing him through the corridors is a DC 13 Strength
-  (Athletics) or Dexterity (Acrobatics) check per beat to keep him in sight; a failure
+  (Athletics) or DC 13 Dexterity (Acrobatics) check per beat to keep him in sight; a failure
   costs the pursuer, never the escape — they fall behind, take a bad fall, lose the
   corridor — and Veier still gains the hallway. Delay spent on him here lets the
   people in his way get clear; Table V–4 has the corridor's tricks.)* This is where
@@ -582,9 +584,9 @@ otherwise, never for a table that was busy saving someone else.
 > character in the duel's path faces one hazard per beat — flying crystal,
 > collapsing stonework, a shear of force that was aimed at no one. Call for a
 > **DC 13 Dexterity saving throw** (or Strength, if the fiction has them bracing
-> someone): on a success they ride it; on a failure they take **7 (2d6) bludgeoning
+> someone): on a success they ride it; on a failure they take **7 (2d6) Bludgeoning
 > damage** or lose their next action shielding someone, their choice; if they fail by
-> 5 or more, they take **14 (4d6) bludgeoning damage**, or the ground between them and
+> 5 or more, they take **14 (4d6) Bludgeoning damage**, or the ground between them and
 > the gate gets worse (Difficult Terrain, a gap to jump, a stair gone), the DM's
 > choice. Cover doesn't help against a garden coming apart, and Evasion changes
 > nothing: a success already takes no damage. Never aim the duel *at* a player character — the
@@ -653,7 +655,7 @@ leash, which ends their night. That is the complete list.
 > bought the crowd a round." Then ask the next player what they do.
 >
 > **The dial:** if a table has spent three beats on her and is not enjoying the
-> lesson, put a guest under a fallen beam twenty feet away, calling — or a snake
+> lesson, put a guest under a fallen beam 20 feet away, calling — or a snake
 > working the fallen in the dark gallery, or the Attendant, turning toward them. The
 > Wept is not going anywhere. The guest is.
 >
@@ -693,13 +695,13 @@ Deception: the person inside the mask has been lied to enough. Heroic Inspiratio
 be spent on it, and should be. *(The same rule is printed once in Chapter X, above
 the Uninvited's blocks.)*
 
-- **Meet the DC:** the effect lands in full, and that Uninvited gains **2 Delay**
+- **Success:** the effect lands in full, and that Uninvited gains **2 Delay**
   (*Buying Time*).
-- **Miss by 4 or less:** it lands in full, and that Uninvited gains 2 Delay, but it
+- **Failure by 4 or less:** it lands in full, and that Uninvited gains 2 Delay, but it
   answers first with one terrible parting blow — one attack against the speaker, rolled in the open (*Down, Not Out*
   holds) — or one word that the speaker will carry for the rest of their life. You
   choose which.
-- **Miss by 5 or more:** it does not land. The Uninvited acts against the speaker,
+- **Failure by 5 or more:** it does not land. The Uninvited acts against the speaker,
   or the scene around them gets worse; you choose. The Fracture is not spent; it
   can be tried again once the party has witnessed a new tell.
 
@@ -719,7 +721,7 @@ the Uninvited's blocks.)*
   Mid-motion, mid-kill. **For one full round she takes no actions, no Reactions, and
   does not move** — a woman standing in a burning ballroom, long enough to pull a
   victim clear, seal a ward, finish an escape. *(While she has 2 or more Delay, this
-  Fracture is DC 15 whatever tells have been seen: a table that has turned the dais
+  Fracture's DC is 15, whatever tells have been seen: a table that has turned the dais
   wards and thrown the room at her has earned the easier road. A table that lands it
   before she reaches Raunu has earned the ⟨They save Raunu⟩ sidebar below.)*
 - **The Radiant** *(devotion)*. Truth: he believes, and has believed for a very
@@ -859,9 +861,9 @@ rest of the palace is doing, which is trying to get out.)*
 the carrier for the first person they bring out (a carrier who already has it gives it
 to a companion who has none), and 100 XP to the carrier for each person they bring out
 (Table I–4). Not per attempt; per person.
-Getting a guest through smoke and fire is a DC 13 Strength (Athletics) or Constitution
-check for the carrier per beat, or no check at all through the service passages with
-someone who knows them; a failure costs the carrier 5 (2d4) fire or bludgeoning damage
+Getting a guest through smoke and fire is a DC 13 Strength (Athletics) or DC 13
+Constitution check for the carrier per beat, or no check at all through the service passages with
+someone who knows them; a failure costs the carrier 5 (2d4) Fire or Bludgeoning damage
 and a beat, never the guest.
 
 Word will come in with the sect guard, later: **there were other attacks tonight.** Fires in two
@@ -1051,9 +1053,9 @@ unravel, and a table that lures one into the Root's threshold, a resealed ward-
 corridor, or a gallery ring of Raunu's own work has caught something no one has
 ever caught. *(In the rules: no spell does this. Only the house's own crystal does,
 steered by someone ward-literate at the moment an Uninvited crosses it — a DC 18
-Intelligence (Arcana) check, DC 13 from the Root, and the Orthaen Gift's knack does
-not help, because nobody has ever done this — and it holds until the last bell and not
-one moment past it. One trap a night.)* The one caught
+Intelligence (Arcana) check, or a DC 13 Intelligence (Arcana) check from the Root, and
+the Orthaen Gift's knack does not help, because nobody has ever done this — and it
+holds until the last bell and not one moment past it. One trap a night.)* The one caught
 answers no question about their master or their task. They will, once, in the quiet
 before the last bell — to the player who treats them as a person and not a prize —
 answer a question about *themselves*. If the mask comes off in that hour: a face. A

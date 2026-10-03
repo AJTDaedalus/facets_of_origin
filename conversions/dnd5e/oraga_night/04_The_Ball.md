@@ -5,11 +5,11 @@ I–V are this chapter; the Unmasking and everything after it are Chapter V.*
 
 > **Reading this chapter at a 5e table**
 >
-> **Checks** are written `DC 15 Wisdom (Insight)`, against the ladder in Chapter I:
-> **Easy DC 10 · Standard DC 13–15 · Hard DC 18–20 · Very Hard DC 25.** Behind a mask,
-> a Standard check is DC 13 unless the stakes say otherwise.
+> **Checks** are written `a DC 15 Wisdom (Insight) check`, against the DC ladder in
+> Chapter I: **Easy 10 · Standard 13 or 15 · Hard 18 or 20 · Very Hard 25.** Behind a
+> mask, the DC of a Standard check is 13 unless the stakes say otherwise.
 >
-> **Success at a cost** (Chapter I). When a check misses its DC by **4 or less**, you
+> **Success at a cost** (Chapter I). When a check fails by **4 or less**, you
 > may offer the player the thing they wanted *with a cost attached* — name the cost
 > first, then let them take it or leave it. This chapter says "at a cost" wherever
 > that habit matters most.
@@ -176,17 +176,17 @@ before anyone reaches the door. Rumor Table rolls are legal from the first minut
 
 > **DM Note — the first check of the night**
 >
-> **Default:** make it a **social** check at **DC 13** — Charisma (Persuasion) to
-> talk a place up the line, Wisdom (Insight) to read who is selling what — and if it
-> misses by 4 or less, offer it *at a cost*, naming the cost out loud before you
+> **Default:** make it a **social** check — a DC 13 Charisma (Persuasion) check to
+> talk a place up the line, or a DC 13 Wisdom (Insight) check to read who is selling
+> what — and if it fails by 4 or less, offer it *at a cost*, naming the cost out loud before you
 > resolve it. On a success, the character gets one rumor (Table VIII–7) or a place in
 > the line next to anyone named in the bullets above. At a cost, they get the same,
 > and Table VIII–4 supplies the cost.
 >
 > **The dial:** you could open on something easier, to give the table a win.
 >
-> **The cost:** the first check teaches the tier the game lives in. Open on a DC 10
-> and the table learns that checks are things you pass; open on a DC 13 and let a
+> **The cost:** the first check teaches the tier the game lives in. Set the DC at 10
+> and the table learns that checks are things you pass; set it at 13 and let a
 > near-miss land honestly — *you get what you asked for, and here is what it costs* —
 > and they have learned the actual night in thirty seconds. This module is full of
 > near-misses. Teach it here, where the cost is a rumor and somebody's dignity.
@@ -197,8 +197,8 @@ there has never needed to be. Nobody is disarmed at the door, because nobody is
 ever disarmed anywhere — see the sidebar below. *(Agenda relevance: forged and
 borrowed invitations are tested here. Corval is sharp, but it is dark, the line is
 long, and the custom of masks was made for this. Passing on a borrowed card is a
-DC 13 Charisma (Deception) check; a card with the bearer's own name wrongly on it,
-DC 18. A miss by 4 or less gets them in — and Corval will remember the face.)*
+DC 13 Charisma (Deception) check; a card with the bearer's own name wrongly on it
+needs a DC 18 Charisma (Deception) check. A miss by 4 or less gets them in — and Corval will remember the face.)*
 
 If the check fails by 5 or more, Corval hands the card back with perfect courtesy and
 does not let its bearer through. The character can still slip in with the staff hires
@@ -238,8 +238,9 @@ remembering sunlight. *(Nearly every scheduled event happens here.)*
 **B3. The Banquet Galleries.** Long feast halls flanking the Court, tables groaning
 with harvest excess. Where the real conversations happen, in alcoves built for
 exactly that. *(Best room for agenda work: everyone passes through, and the alcoves
-are half-private. Overhearing an alcove without being noticed is DC 13 Dexterity
-(Stealth) or Wisdom (Perception), whichever the player is doing. A success hears one
+are half-private. Overhearing an alcove without being noticed takes a DC 13
+Dexterity (Stealth) or DC 13 Wisdom (Perception) check, whichever the character is
+doing. A success hears one
 rumor (Table VIII–7) or one fact from the speaker's entry in Chapter VII.)*
 
 **When the party first sees into the Audience Hall, read:**
@@ -276,8 +277,8 @@ been given what they need.)*
 **B6. The Chapel.** Where Raunu and Veier were married: an eight-niched chapel of the
 gods, Fraden's niche grandest as everywhere. But guests with sharp eyes notice
 that freshly tended offerings sit in *Elanna's* niche, the death-goddess northern tribes
-honor (DC 10 Wisdom (Perception) to notice; DC 13 Intelligence (Religion) to know what
-tending Elanna's niche in a chief's chapel means). Someone in this house has been
+honor (a DC 10 Wisdom (Perception) check to notice; a DC 13 Intelligence (Religion)
+check to know what tending Elanna's niche in a chief's chapel means). Someone in this house has been
 sitting with mortality. *(Quiet scenes, confessions, and Mother Sella. A good place
 for players to catch their breath — and one deniable omen. A character who spends a
 Movement here may take a Short Rest, which is the only one the ball offers.)*
@@ -291,21 +292,22 @@ an audience-earned pass, a festival hire's livery, or plain trespass with the
 consequences it deserves. Nothing in the private palace is guarded casually — and
 nothing in it is guarded the way the east wing is.*
 
-*Trespass, in numbers:* slipping past a posted guard is DC 15 Dexterity (Stealth); a
-festival hire's livery and a confident walk make it DC 10 Charisma (Deception); an
-honest story to a guard who has no reason to disbelieve it, DC 13 Charisma
-(Persuasion). Opening a locked door in the private palace takes a DC 15 Dexterity check using
-Thieves' Tools, unless its entry says otherwise. None of these is ever the only way in.
+*Trespass, in numbers:* slipping past a posted guard takes a DC 15 Dexterity (Stealth)
+check; a festival hire's livery and a confident walk make it a DC 10 Charisma
+(Deception) check; an honest story to a guard who has no reason to disbelieve it, a
+DC 13 Charisma (Persuasion) check. Opening a locked door in the private palace takes
+a DC 15 Dexterity check using Thieves' Tools, unless its entry says otherwise. None of these is ever the only way in.
 
 **B7. The Trophy Gallery.** The house's pride and plunder: banners, weapons, and grown
 crystals taken in old settlements — including a heart-sized soul-crystal of uncommon
 beauty (Agenda 5). Warded by old crystalwork; the few real guards concentrate here.
-*(Wards here are teachable: a character who spends ten minutes studying them and
+*(Wards here are teachable: a character who spends 10 minutes studying them and
 succeeds on a DC 13 Intelligence (Arcana) check — or an Orthaen, who can read grown
 crystalwork by heritage, automatically — learns how Boranis defenses behave: light,
 seals, alarms. That knowledge pays off desperately at midnight. Lifting the
-grandmother's crystal off its ward without waking it is DC 18 Dexterity (Sleight of
-Hand), DC 13 for anyone who studied the wards first.)*
+grandmother's crystal off its ward without waking it takes a DC 18 Dexterity (Sleight
+of Hand) check, or a DC 13 Dexterity (Sleight of Hand) check for anyone who studied the
+wards first.)*
 
 **B8. Raunu's Study.** Locked, dark wing, second floor (opening it takes a DC 18 Dexterity
 check using Thieves' Tools; the lock is crystal, not iron). Two years of a genius's solitude, and — players will look
@@ -371,8 +373,8 @@ Warm light, a midwife's quiet traffic, and three finds:
 skeleton staff of two silent years — including Anha (Agenda 8). The service passages
 thread the whole palace, including the east wing and the garden stair. *(The other way
 through everything. At midnight, the difference between a tragedy and a massacre.
-Finding one's way through them without a guide is DC 15 Wisdom (Survival) the first
-time and automatic after; with Anha or any of the skeleton staff, no check.)*
+Finding one's way through them without a guide takes a DC 15 Wisdom (Survival) check
+the first time and is automatic after; with Anha or any of the skeleton staff, no check.)*
 
 **B11. The Root of the House.** *(If you have time. Hidden. Found only through
 Undercurrent A — The Root of the House, this chapter.)* Beneath the wine cellars, behind a seal of living
@@ -417,11 +419,11 @@ says where everyone stands in each Movement.
 Chapter VIII, or choose). They are contradictory by design. Nobody at this ball knows
 the truth. Not even you.
 
-**Social checks at the ball.** NPCs never roll against the party outside a fight; their
+**Social checks at the ball.** NPCs never make checks against the party outside a fight; their
 entries in Chapter VII say how hard they are to move instead, and those words map onto
-the ladder (see chapter I, "Checks, Inspiration, and the Ladder"). *Impossible* means no check at all. A mask makes approaching someone far above your
-station **DC 10** where it would otherwise be DC 13: the custom protects the
-conversation, and everyone at this ball is someone else tonight.
+the ladder (see chapter I, "Checks, Inspiration, and the Ladder"). *Impossible* means no check at all. Behind a mask, approaching someone far above your
+station takes an ability check using the skill that fits, DC 10, where it would
+otherwise be 13: the custom protects the conversation, and everyone at this ball is someone else tonight.
 
 ### Running a Scattered Party
 
@@ -516,9 +518,9 @@ noble-minded — nothing at stake in it but property and decency.
 
 - **The scout** *(Movement III)*: a footman crosses the gallery corridor carrying
   an empty tray in livery that fits him like a borrowed coat — and he is counting
-  the trophy gallery's guards on his fingers, which no footman needs to do (DC 13
-  Wisdom (Perception) to catch the fingers; automatic for anyone watching the
-  gallery). Followed (DC 13 Dexterity (Stealth)), he leads to two more of the crew
+  the trophy gallery's guards on his fingers, which no footman needs to do (a DC 13
+  Wisdom (Perception) check to catch the fingers; automatic for anyone watching the
+  gallery). Followed (a DC 13 Dexterity (Stealth) check), he leads to two more of the crew
   idling near the service doors. Braced quietly, he bluffs badly, then bolts;
   braced loudly, the crew scatters into the crowd and Tavva changes her timetable,
   wondering who else is working her gallery tonight.
@@ -541,8 +543,8 @@ and their grandmother's crystal hang in the same gallery.)*
 > house — a heist gone loud, the east wing forced, steel bared in the feud — the guards
 > who answer are a *playable fight* (card S4), not a fail state. The win condition is
 > the getaway: the service passages swallow anyone quick enough to reach them (each
-> round, DC 13 Dexterity (Acrobatics) or Strength (Athletics); three successes before
-> three failures), and a good name dropped ends it in an escort and a warning. The
+> round, a DC 13 Dexterity (Acrobatics) or DC 13 Strength (Athletics) check; 3 successes
+> before 3 failures), and a good name dropped ends it in an escort and a warning. The
 > worst it costs is a Movement in the cell.
 
 ---
@@ -574,22 +576,23 @@ who says the find out loud at the table (Table I–3; once per Movement).
 forbidden corridors — she is barred from sweeping the *lower* cellar stair, which
 makes no sense, because nothing is down there but wine; or a sharp eye in the study
 (B8): the half-erased lattice diagram on Raunu's slate matches no door anyone has
-seen upstairs (DC 13 Intelligence (Investigation) to notice it is a door and not a
-diagram).
+seen upstairs (a DC 13 Intelligence (Investigation) check to notice it is a door and
+not a diagram).
 
 **The trail:**
 - *The kitchens (B10):* the cellar tally-cords don't add up — for two years, supplies
   have gone down the lower stair that never came back up as anything. Candles by the
   crate. Lamp-oil. And once, memorably, a crate from the eastern coast that hissed
   when it shifted, packed in salt. (Anha, befriended, offers this unprompted; a
-  festival-hire cellar hand can be charmed into showing the knots instead — DC 13
-  Charisma (Persuasion) — and reading them is DC 10 Intelligence for anyone who has
-  kept a household's cords.)
+  festival-hire cellar hand can be charmed into showing the knots instead — a DC 13
+  Charisma (Persuasion) check — and reading them takes a DC 10 Intelligence check for
+  anyone who has kept a household's cords.)
 - *The wine cellar:* the far wall is older than the rest — living crystal, faintly
   warm, with a seam in it that is not a crack. Finding the seam is a DC 13 Wisdom
-  (Perception) check (DC 10 for anyone who saw the study's lattice diagram; automatic
+  (Perception) check (a DC 10 Wisdom (Perception) check for anyone who saw the study's
+  lattice diagram; automatic
   for an Orthaen who puts a hand on the wall). The seam is a **door**, and it is
-  sealed the way Boranis things are sealed: grown, not locked. Thieves' tools find
+  sealed the way Boranis things are sealed: grown, not locked. Thieves' Tools find
   nothing to work on.
 - *Opening it:* the lattice diagram from the study is the key — literally; traced on
   the seam it opens (automatic if a player copied or memorized the slate; a DC 18
@@ -630,7 +633,8 @@ gifts.** What an hour in the laboratory yields, in rising order:
   **fine-grained crystals**, seeded and cultivated through the marrow itself. It is
   not violence; the bones are old, unbroken, and arranged with something like
   respect, and the crystal-work is years of patient tending. An Orthaen or a
-  scholar who studies it (DC 13 Intelligence (Arcana) or Wisdom (Medicine)) grasps the
+  scholar who studies it (a DC 13 Intelligence (Arcana) or DC 13 Wisdom (Medicine)
+  check) grasps the
   experiment's question, because the whole room has been asking it: *does any remnant
   of the gift survive death?* Whether the crystals found an answer, the lattices do
   not legibly say — a few threads in the ribcage glow, very faintly, if no one is
@@ -685,17 +689,17 @@ slate tonight — card S8.)*
 *Eighty servants left this palace two years ago. Where does eighty of anything go?*
 
 **The spark:** Agenda 8; or the festival hires — one of tonight's borrowed footmen
-*used to work here*, recognized by his ease in the corridors (DC 13 Wisdom (Insight)
-to see a hired man who does not need directions); or simple arithmetic by any guest
+*used to work here*, recognized by his ease in the corridors (a DC 13 Wisdom (Insight)
+check to see a hired man who does not need directions); or simple arithmetic by any guest
 who has run a household.
 
 **The trail:** the returned footman, cornered kindly, tells his strange story: paid
 off two years ago at triple severance, sworn to silence on the house's affairs, and
 *relocated* — passage and placement found for every one of them, most to holdings
 far from Rekuzan. He came back tonight on a festival hire because he missed the
-place, and he is frightened to be recognized. (Kindly is the operative word: DC 10
-Charisma (Persuasion) if the approach is gentle, DC 18 Charisma (Intimidation) if it
-is not, and a frightened man who has been leaned on tells the story badly.) Corval
+place, and he is frightened to be recognized. (Kindly is the operative word: a DC 10
+Charisma (Persuasion) check if the approach is gentle, a DC 18 Charisma (Intimidation)
+check if it is not, and a frightened man who has been leaned on tells the story badly.) Corval
 (via Agenda 1's kindness route, or a well-aimed question once his guard is down)
 confirms it — and here the majordomo's famous memory becomes the scene: he can recite
 all eighty placements, each with the master's spoken instruction verbatim: *this one
@@ -722,13 +726,13 @@ trays come back down — three plates used.*
 
 **The spark:** Anha mentions it as one of her unframed facts; or laundry — a guest
 near the service passages sees linens going up that no ball needs: small, soft,
-new-hemmed (DC 13 Wisdom (Perception)); or rumor 11's "guards on the inside of the
+new-hemmed (a DC 13 Wisdom (Perception) check); or rumor 11's "guards on the inside of the
 doors" invites a test that finds the guards courteous, immovable, and *protective*
 rather than jailerly.
 
 **The trail:** the midwife, the third plate herself, glimpsed once crossing the gallery at
 the end of Movement II, moving like a woman who counts hours. Following her to the
-east wing doors is easy (DC 10 Dexterity (Stealth)); through them needs Agenda 4's
+east wing doors is easy (a DC 10 Dexterity (Stealth) check); through them needs Agenda 4's
 ring, Anha's passages, or real ingenuity. Inside: warm light, the guarded calm of a
 household holding its breath, and the living quarters' three finds (B9) — the unpacked
 traveling pack, the two slings, and the nursery with its slow-turning crystal mobile.
@@ -762,18 +766,19 @@ moment the Radiant starts up the gallery.
 **The spark:** Corval's failing count (Movement III omen — his memory has never
 once lost a guest, until tonight); or Corro's misfiring gift; or the simple social
 fact — nobody is talking *about* the three gray masks, which at this ball is
-against nature (DC 13 Wisdom (Insight) for anyone working the gossip to notice the
-hole in it).
+against nature (a DC 13 Wisdom (Insight) check for anyone working the gossip to notice
+the hole in it).
 
 **The trail:** built from the cast's planted tells, and best walked with allies —
 Corval, pressed, discovers he cannot keep the question in his head and becomes
 frightened of his own mind (a superb scene: the unflappable majordomo asking a
 guest to *hold the thought for him*); Corro, walked deliberately around the room,
 is worst near the three — a living compass reading he refuses to interpret; any
-guest's craft-eye (DC 13 Intelligence, with proficiency if they know any artisan's
-tools) confirms the gray masks match no maker's style in Rekuzan, and the material is
+guest's craft-eye (a DC 13 Intelligence check, adding the Proficiency Bonus for anyone
+proficient with any Artisan's Tools) confirms the gray masks match no maker's style in Rekuzan, and the material is
 wrong; conversation with them turns up speech and manners centuries dead, delivered by warm,
-living, charming people (DC 13 Intelligence (History) to date the turns of phrase);
+living, charming people (a DC 13 Intelligence (History) check to date the turns of
+phrase);
 and any Orthaen who stands near one feels their own carried crystals go faint and
 quiet. Each clue is deniable. Three together are not. *(These same encounters are
 where Fracture ammunition comes from — the tells are listed with the Fractures in
@@ -911,15 +916,16 @@ with thinning patience, when the delegation will be received.
 
 **Agenda beats:** Corval can be befriended (Agenda 1) by anyone who actually helps
 him — he is drowning in understaffed logistics and has forgotten what kindness costs
-(no check to help him; to help him well takes a DC 13 check, usually Charisma
-(Persuasion) or Intelligence (Investigation), or whatever the help needs). Helping him
-well earns Corval's open gratitude, as ending the Seating Feud well does. Anha found in the kitchens (Agenda 8). The gallery wards studied (Agenda 5).
-The east wing's guarded doors scouted (Agenda 4).
+(no check to help him; to help him well takes a DC 13 Charisma (Persuasion) or DC 13
+Intelligence (Investigation) check, or another skill if the help calls for one).
+Helping him well earns Corval's open gratitude, as ending the Seating Feud well does.
+Anha found in the kitchens (Agenda 8). The gallery wards studied (Agenda 5). The east
+wing's guarded doors scouted (Agenda 4).
 
 **The omen:** Master Corro — the Phern magnate, whose tribe's danger-sense is
 proverbial — keeps losing the thread of his own sentences and glancing at doors. Asked
-about it, he laughs it off: *"Old instincts. Crowds."* His hands say otherwise (DC 10
-Wisdom (Insight); automatic for a Phern). His gift is ringing like a struck glass and
+about it, he laughs it off: *"Old instincts. Crowds."* His hands say otherwise (a DC 10
+Wisdom (Insight) check; automatic for a Phern). His gift is ringing like a struck glass and
 pointing nowhere.
 
 **The quiet guest — the crystal.** The attendant with the cloak and the cup is in the
@@ -935,12 +941,12 @@ serves, it names no one, and looks around, briefly, for somebody who is not ther
 >   galleries and back. Agenda 1 says the Tithe of Hands lives in Corval's head. The
 >   Circle is *prepared*, and a prepared patron sends two hands for one job. If a
 >   player character is carrying Agenda 1, the knife is watching *them* work. *Tell:*
->   the same plain good coat wherever Corval goes (DC 13 Wisdom (Perception) to notice
->   by the second sighting; automatic by the third). → *the Circle's line, Chapter IX.*
+>   the same plain good coat wherever Corval goes (a DC 13 Wisdom (Perception) check to
+>   notice by the second sighting; automatic by the third). → *the Circle's line, Chapter IX.*
 > - **The Church.** The Wardens are asking the festival hires which rooms the master
 >   uses. They are polite about it, and they are asking about the Audience Hall and
 >   the dark wing on the second floor. *Tell:* a footman looking back over his shoulder
->   after a gray robe moves on (DC 13 Wisdom (Insight)). → *the Church's line, Chapter IX.*
+>   after a gray robe moves on (a DC 13 Wisdom (Insight) check). → *the Church's line, Chapter IX.*
 > - **House Draunel.** At the wine court a Duelist jostles one of Essin's blades, and
 >   a cup goes over, and a sentence about *the missing year* is said a little too
 >   loudly. Nobody draws. That is the point: Draunel fears being seen wanting the
@@ -1006,7 +1012,7 @@ something that is nearly a kindness, and the long walk back.
 An audience lasts about five questions or five minutes of table time. Then he ends it
 with the closing line.
 
-*Checks in the summons:* deceiving Raunu is DC 25 Charisma (Deception), and he knows
+*Checks in the summons:* deceiving Raunu takes a DC 25 Charisma (Deception) check, and he knows
 it failed even when he lets it pass. Impressing him takes no check at all: tell him a
 true thing he did not already know. He turns friendly when the guest tells him a true
 thing he did not know, or sits through the silence without filling it. By default, he
@@ -1062,8 +1068,8 @@ flatly: *"It taxes palaces to pay laborers. The palaces can afford it. That is t
 whole secret. You may tell the Circle I said so."*). Agenda 4 may ask after Veier —
 he goes still for a moment, then: *"She chooses her guests herself these days. If
 she chooses you, you will know."* Characters not summoned work the room — angling
-to *get* summoned is a fine scene in itself (a DC 13 check, usually Charisma
-(Persuasion) or Intelligence (Investigation), or whatever the angle needs; Corval
+to *get* summoned is a fine scene in itself (a DC 13 Charisma (Persuasion) or DC 13
+Intelligence (Investigation) check, or another skill if the angle calls for one; Corval
 notices the ones who help him before the ones who flatter him). On a success, Corval
 fetches that character at the next summons.
 
@@ -1303,8 +1309,8 @@ Boranis has dodged tonight, at midnight he must stand on that dais, send the
 spirits home, and toast the living year with his own face. It is the one appearance
 the recluse cannot refuse — the one moment of this entire night anyone could have
 predicted him. Guests are already drifting toward the Crystal Court to watch.
-Corval quietly doubles the guards on the east wing — noticed only by players watching
-for it (DC 13 Wisdom (Perception)). Master Vell, who has spent the whole ball being
+Corval quietly doubles the guards on the east wing — noticed only by characters watching
+for it (a DC 13 Wisdom (Perception) check). Master Vell, who has spent the whole ball being
 unmemorable, walks the garden terraces once, alone, and stands a while at the river
 gate. *(If Agenda 6's gate is unlocked, he confirms it and leaves it so. If a player
 refused or reported the strange commission, he unlocks it himself — he always has a

@@ -276,7 +276,7 @@ These rules are mechanical, but a worker makes every edit with the linter's hit 
 - **Accept:** lint's lowercase-term and coin rules = 0 hits.
 - **Time:** 2 × 30 min.
 
-### ☐ T4.3 Check, save and damage grammar; numerals (C-V15–19; SNAKES-14/18/19, BESTIARY-8, FRONT-14, BALL-18, NIGHT-4/22, CAST-14)
+### ☑ T4.3 Check, save and damage grammar; numerals (C-V15–19; SNAKES-14/18/19, BESTIARY-8, FRONT-14, BALL-18, NIGHT-4/22, CAST-14)
 - **Scope:** every `M/*.md` file.
 - **Rules:** DESIGN §3 rows: *Checks*, *Saves and damage*, *Numbers*. Use the slice audits' before→after wording where it is given (BESTIARY-8 has 9 sites; SNAKES-14 has 25).
 - **Accept:** lint smells S3–S13 and S37 = 0 hits outside the whitelist.

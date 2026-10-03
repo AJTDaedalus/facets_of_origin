@@ -25,8 +25,9 @@ ANDRA = """## Andra Tessarin
 **Carrying.** Longsword
 """
 
-GOOD_SPELL = "a crystal as arcane focus"
-GOOD_CARRY = "crystal (arcane focus)"
+# O16: SRD 5.2.1 Title-Cases equipment and focus names ("Arcane Focus").
+GOOD_SPELL = "a crystal as Arcane Focus"
+GOOD_CARRY = "crystal (Arcane Focus)"
 
 
 def _text():
@@ -54,8 +55,16 @@ def test_focus_lattice_as_focus_is_reported():
 
 
 def test_focus_line_wrapped_across_lines_is_read():
-    text = ANDRA.format(spell="a crystal as\narcane focus", carry="crystal\n(arcane focus)")
+    text = ANDRA.format(spell="a crystal as\nArcane Focus", carry="crystal\n(Arcane Focus)")
     assert PC.focus_issues(text) == []
+
+
+def test_focus_lowercase_name_is_reported():
+    # O16: the 2014-style lowercase "arcane focus" no longer passes.
+    probs = PC.focus_issues(ANDRA.format(spell="a crystal as arcane focus",
+                                         carry="crystal (arcane focus)"))
+    assert any(p[1] == "spellcasting focus" for p in probs)
+    assert any(p[1] == "focus not carried" for p in probs)
 
 
 def test_focus_missing_section_is_reported():
@@ -64,7 +73,7 @@ def test_focus_missing_section_is_reported():
 
 def test_focus_carrying_of_another_pregen_does_not_count():
     text = ANDRA.format(spell=GOOD_SPELL, carry="jeweler's tools").replace(
-        "**Carrying.** Longsword", "**Carrying.** Longsword · crystal (arcane focus)")
+        "**Carrying.** Longsword", "**Carrying.** Longsword · crystal (Arcane Focus)")
     assert any(p[1] == "focus not carried" for p in PC.focus_issues(text))
 
 
@@ -78,7 +87,7 @@ def test_main_exits_zero_on_the_module():
 
 def test_main_exits_one_when_the_focus_is_dropped(tmp_path):
     bad = tmp_path / "11.md"
-    bad.write_text(_text().replace("crystal (arcane focus)", "crystal"), encoding="utf-8")
+    bad.write_text(_text().replace("crystal (Arcane Focus)", "crystal"), encoding="utf-8")
     with pytest.raises(SystemExit) as e:
         PC.main(["--quiet", "--file", str(bad)])
     assert e.value.code == 1

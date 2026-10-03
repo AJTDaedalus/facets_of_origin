@@ -156,7 +156,7 @@ Intelligence (Religion), Wisdom (Insight), or a plain Charisma check for a bared
 person inside the mask has been lied to enough. Heroic Inspiration may be spent on it,
 and should be.
 
-- **DC 18** with one tell. **DC 15** with two or more — and the Wept's is DC 15
+- **The DC is 18** with one tell, and **15** with two or more — and the Wept's is 15
   whenever she has 2 or more Delay, whatever tells have been seen.
 - **Success:** the Fracture lands in full, as the block says, and that Uninvited
   gains **2 Delay**.
@@ -222,16 +222,16 @@ is one Joined Hands attack, with Disadvantage, instead of its Multiattack. It ca
 Put Aside instead only if it is Bloodied or its focus has been broken twice tonight.
 
 ***Can Be Distracted.*** A creature the Attendant can see or hear can take an action
-to distract it: describe the trick, then roll the ability and skill that fit it
-against **DC 13 while it is Idle, DC 19 while it is Focused**. It falls for **one
+to distract it: describe the trick, then make an ability check with whatever skill
+fits it: **DC 13 while it is Idle, DC 19 while it is Focused**. It falls for **one
 trick a round**: once anyone has tried, nobody else can until the next round, and
 Help doesn't apply. Playing the trick out in character adds +2, and using one of its
 three habits the party has seen adds +2 (+4 at most). A trick already tried on it
 tonight gets no bonus and has Disadvantage; the same trick never works a third time.
 Its habits: *it stares at worked crystal and light; it keeps a cup and a cloak ready
 for a master who isn't there; it follows music that changes.* A success against it while
-it is Focused **breaks its focus** until the start of its next turn; beat the DC by 5
-and it loses that turn as well. A success while it is Idle means it does nothing on
+it is Focused **breaks its focus** until the start of its next turn; on a success by 5 or
+more it loses that turn as well. A success while it is Idle means it does nothing on
 its next turn, but doesn't count. On a failure the trick is spent, and a Focused
 Attendant attacks the distractor next. The **fourth** time its focus is broken
 tonight, it wanders off: out of the fight, standing at a window, watching the fires.
@@ -263,8 +263,8 @@ of them with Put Aside, if Put Aside is available.
 ***Joined Hands.*** *Melee Attack Roll:* +7, reach 5 ft. *Hit:* 9 (1d10 + 4)
 Bludgeoning damage, and a Medium or smaller target is pushed 5 feet away.
 
-***Put Aside (Recharge 5–6 While Focused; Recharge 6 While Idle).*** *Strength Saving
-Throw:* DC 14, each creature of its choice in a 20-foot Emanation originating from it.
+***Put Aside (Recharge 5–6 While Focused; Recharge 6 While Idle).***
+*Strength Saving Throw:* DC 14, each creature of its choice in a 20-foot Emanation originating from it.
 *Failure:* 9 (2d8) Force damage, and the target is pushed 15 feet straight away and has the Prone
 condition. *Success:* Half damage.
 
@@ -298,7 +298,7 @@ looks round, briefly, for the master it is supposed to have.
 ### Boranis Cousin's Blade
 *Medium Humanoid (Human), Neutral*
 
-**AC** 14 (chain shirt under a festival coat) · **Initiative** +1 (11)
+**AC** 14 (Chain Shirt under a festival coat) · **Initiative** +1 (11)
 **HP** 22 (4d8 + 4)
 **Speed** 30 ft.
 
@@ -348,7 +348,7 @@ blade uses this before it uses steel, and only somewhere a guard can't see.
 ### Boranis Honor Guard
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 18 (chain mail, shield) · **Initiative** +1 (11)
+**AC** 18 (Chain Mail, Shield) · **Initiative** +1 (11)
 **HP** 52 (8d8 + 16)
 **Speed** 30 ft.
 
@@ -418,7 +418,7 @@ second round after this one, and this guard holds its ground until they come.
 ### Bought Blade
 *The Blade of the Bought. Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 16 (chain shirt, shield) · **Initiative** +1 (11)
+**AC** 16 (Chain Shirt, Shield) · **Initiative** +1 (11)
 **HP** 22 (4d8 + 4)
 **Speed** 30 ft.
 
@@ -462,7 +462,7 @@ Slashing damage.
 ### Bought Captain
 *The Captain-under-Contract. Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 17 (half plate) · **Initiative** +2 (12)
+**AC** 17 (Half Plate Armor) · **Initiative** +2 (12)
 **HP** 97 (13d8 + 39)
 **Speed** 30 ft.
 
@@ -530,7 +530,7 @@ miss.
 ### Bought Sergeant
 *The Sergeant-at-Arms. Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 17 (chain shirt, shield) · **Initiative** +2 (12)
+**AC** 17 (Chain Shirt, Shield) · **Initiative** +2 (12)
 **HP** 52 (8d8 + 16)
 **Speed** 30 ft.
 
@@ -575,7 +575,7 @@ miss.
 > contract is void — payment withdrawn, terms broken by the employer, or the named
 > target gone — says so, and expects to be believed.
 > **Nastier.** A veteran sergeant: CR 4 (XP 1,100), 78 HP (12d8 + 24), Strength 17
-> (+5 to hit, 7 (1d8 + 3) damage), three Company Blade attacks, and Hold the Terms recharges each time a Blade falls.
+> (+5 to hit, 7 (1d8 + 3) Slashing damage), three Company Blade attacks, and Hold the Terms recharges each time a Blade falls.
 > *One per four Blades; four in Rekuzan. Card: S3.*
 
 ---
@@ -583,7 +583,7 @@ miss.
 ### Church Warden
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 16 (chain shirt, shield) · **Initiative** +1 (11)
+**AC** 16 (Chain Shirt, Shield) · **Initiative** +1 (11)
 **HP** 33 (6d8 + 6)
 **Speed** 30 ft.
 
@@ -616,8 +616,8 @@ Seize for Questioning.
 damage.
 
 ***Seize for Questioning.*** *Strength Saving Throw:* DC 12, one Medium or smaller
-creature within 5 feet. *Failure:* The target has the Grappled condition (escape
-DC 12).
+creature within 5 feet. *Failure:* The target has the
+Grappled condition (escape DC 12).
 
 **Reactions**
 
@@ -640,7 +640,7 @@ another warden within 5 feet of it. *Response:* The attack roll has Disadvantage
 ### Circle Hired Knife
 *Medium Humanoid (Human), Neutral*
 
-**AC** 15 (studded leather under a plain good coat) · **Initiative** +3 (13)
+**AC** 15 (Studded Leather Armor under a plain good coat) · **Initiative** +3 (13)
 **HP** 32 (5d8 + 10)
 **Speed** 30 ft.
 
@@ -661,7 +661,7 @@ another warden within 5 feet of it. *Response:* The attack roll has Disadvantage
 the moment Rhaza Callun — or anyone who can prove they speak for her — calls it off,
 and it will not fight on for a patron who has plainly stopped paying.
 
-***Paid Extra.*** The knife deals an extra 3 (1d6) damage to a creature it has
+***Paid Extra.*** The knife deals an extra 3 (1d6) Piercing damage to a creature it has
 Advantage against.
 
 **Actions**
@@ -709,8 +709,8 @@ Advantage against.
 
 **Traits**
 
-***A Census of Souls.*** Lying to the Prelate about matters of faith is DC 20; she has
-heard everything. She recognizes a blessing, a rite or a form of prayer, however
+***A Census of Souls.*** A creature that tries to deceive the Prelate about matters of
+faith must succeed on a DC 20 Charisma (Deception) check; she has heard everything. She recognizes a blessing, a rite or a form of prayer, however
 old, if anyone living has ever used it; an older form she knows only as one that
 nobody living uses.
 
@@ -748,7 +748,7 @@ to move up to half its Speed and make one Mace attack or use Seize for Questioni
 ### Draunel Duelist
 *Medium Humanoid (Human), Neutral*
 
-**AC** 15 (studded leather) · **Initiative** +3 (13)
+**AC** 15 (Studded Leather Armor) · **Initiative** +3 (13)
 **HP** 27 (5d8 + 5)
 **Speed** 30 ft.
 
@@ -803,7 +803,7 @@ attack roll. *Response:* The duelist makes one Rapier attack against it.
 ### Essar Draunel
 *Lord of House Draunel. Medium Humanoid (Human), Neutral*
 
-**AC** 16 (breastplate under silk) · **Initiative** +3 (13)
+**AC** 16 (Breastplate under silk) · **Initiative** +3 (13)
 **HP** 58 (9d8 + 18)
 **Speed** 30 ft.
 
@@ -839,7 +839,7 @@ damage.
 **Reactions**
 
 ***Parry.*** *Trigger:* Draunel is hit by a melee attack roll while holding his
-rapier. *Response:* He adds 2 to his AC against that attack, possibly causing it to
+Rapier. *Response:* He adds 2 to his AC against that attack, possibly causing it to
 miss.
 
 > **Wants.** House Draunel one seat closer to the chieftaincy — tonight if possible,
@@ -876,10 +876,11 @@ miss.
 **Traits**
 
 ***Forgettable on Purpose.*** Essin has Advantage on Dexterity (Stealth) checks to go
-unnoticed in a crowd. Deceiving him is DC 20, and he deceives back.
+unnoticed in a crowd. Deceiving him takes a DC 20 Charisma (Deception) check, and he
+deceives back.
 
-***Sneak Attack (1/Turn).*** Essin deals an extra 7 (2d6) damage when he hits with a
-Knife and has Advantage on the attack roll, or when an ally is within 5 feet of the
+***Sneak Attack (1/Turn).*** Essin deals an extra 7 (2d6) Piercing damage when he hits
+with a Knife and has Advantage on the attack roll, or when an ally is within 5 feet of the
 target.
 
 **Actions**
@@ -1070,7 +1071,7 @@ gutter at this range but hold.
 passes through them without his leave. A creature that tries must succeed on a DC 17
 Strength saving throw or be pushed 10 feet away and have the Prone condition. On a
 success, the creature holds its ground but still doesn't get past him. The crowd
-does not roll: it breaks around him like water (Chapter V, *Two Hundred
+makes no saving throw: it breaks around him like water (Chapter V, *Two Hundred
 People*).
 
 ***Only the Doors.*** The Hollow attacks only creatures that come for the doors or
@@ -1123,7 +1124,7 @@ he goes home before he is called. *(Check and DCs: The Fractures, above.)*
 ### Maiven Nolonaire
 *The Cousin from the Border. Medium Humanoid (Human), Neutral Good*
 
-**AC** 15 (studded leather under border wool) · **Initiative** +3 (13)
+**AC** 15 (Studded Leather Armor under border wool) · **Initiative** +3 (13)
 **HP** 58 (9d8 + 18)
 **Speed** 30 ft.
 
@@ -1145,8 +1146,8 @@ anyone trying to hide their intentions.
 
 ***Thirty Degrees Hotter.*** Once provoked — thwarted to her face, lied to about
 Veier, or laid hands on — Maiven will not be the one who stops first. She can still
-be talked down, but only by someone she already trusts (DC 13) or by proof of her
-kinswoman (no check).
+be talked down, but only by someone she already trusts, with a DC 13 Charisma
+(Persuasion) check, or by proof of her kinswoman (no check).
 
 **Actions**
 
@@ -1225,7 +1226,7 @@ up to its Speed toward him, or toward the way out he is pointing at.
 ### Phern Bodyguard
 *Medium Humanoid (Human), Neutral*
 
-**AC** 15 (chain shirt) · **Initiative** +4 (14), with Advantage
+**AC** 15 (Chain Shirt) · **Initiative** +4 (14), with Advantage
 **HP** 33 (6d8 + 6)
 **Speed** 30 ft.
 
@@ -1428,8 +1429,8 @@ turn. *(Check and DCs: The Fractures, above.)*
 
 **Traits**
 
-***Terrifyingly Numerate.*** Deceiving Callun about money is DC 25. About anything
-human, DC 10.
+***Terrifyingly Numerate.*** Deceiving Callun about money takes a DC 20 Charisma
+(Deception) check. About anything human, it takes a DC 10 Charisma (Deception) check.
 
 ***Paid on Delivery.*** Every Circle Hired Knife obeys Callun's word the moment it
 reaches them. She can call them off as a free action, once each turn, even on
@@ -1440,8 +1441,8 @@ someone else's turn.
 ***Knife.*** *Melee Attack Roll:* +3, reach 5 ft. *Hit:* 3 (1d4 + 1) Piercing damage.
 
 ***Name the Price.*** Callun names, out loud, what it would cost to end this. It is
-a real price and she will pay it or accept it. No creature that heard her needs to
-roll to believe it.
+a real price and she will pay it or accept it. No creature that heard her needs a
+check to believe it.
 
 **Reactions**
 
@@ -1464,7 +1465,7 @@ instead.
 ### Sect Guard
 *Medium Humanoid (Human), Lawful Neutral*
 
-**AC** 16 (chain shirt, shield) · **Initiative** +1 (11)
+**AC** 16 (Chain Shirt, Shield) · **Initiative** +1 (11)
 **HP** 11 (2d8 + 2)
 **Speed** 30 ft.
 
@@ -1506,7 +1507,7 @@ damage.
 ### Tavva
 *The Other Thief. Medium Humanoid (Human), Neutral*
 
-**AC** 15 (studded leather under Boranis livery) · **Initiative** +5 (15)
+**AC** 15 (Studded Leather Armor under Boranis livery) · **Initiative** +5 (15)
 **HP** 44 (8d8 + 8)
 **Speed** 30 ft.
 
@@ -1526,8 +1527,8 @@ damage.
 ***A Professional.*** Tavva never attacks a creature at 0 Hit Points. She fights to
 leave, not to win.
 
-***Sneak Attack (1/Turn).*** Tavva deals an extra 7 (2d6) damage when she hits with a
-Knife and has Advantage on the attack roll, or when an ally is within 5 feet of the
+***Sneak Attack (1/Turn).*** Tavva deals an extra 7 (2d6) Piercing damage when she hits
+with a Knife and has Advantage on the attack roll, or when an ally is within 5 feet of the
 target.
 
 ***Vanisher.*** Tavva carries two bought crystal charges, a *Dark-Burst* and a
@@ -1632,7 +1633,7 @@ damage.
 ### Vorlain Boranis
 *The Brother. Medium Humanoid (Human), Neutral*
 
-**AC** 15 (studded leather under silk) · **Initiative** +3 (13)
+**AC** 15 (Studded Leather Armor under silk) · **Initiative** +3 (13)
 **HP** 60 (11d8 + 11)
 **Speed** 30 ft.
 
@@ -1649,8 +1650,8 @@ damage.
 
 **Traits**
 
-***Brief and Efficient.*** Once per turn, Vorlain deals an extra 7 (2d6) damage with
-a Blade attack against a creature that hasn't yet taken a turn in this combat, or
+***Brief and Efficient.*** Once per turn, Vorlain deals an extra 7 (2d6) Piercing damage
+with a Blade attack against a creature that hasn't yet taken a turn in this combat, or
 that has the Grappled or Prone condition. It is how two cousins died in 3160, and nobody who was
 there has forgotten it.
 
@@ -1736,7 +1737,7 @@ her turn, if she has any, spend 1: she doesn't move toward Raunu that turn, and 
 gets a round of work out of it (a dozen guests out of the Court, or Veier one sealed
 door further down). She reaches Raunu on her third turn of moving toward him,
 through the wards he throws up himself. While
-she has 2 or more Delay, her Fracture is DC 15.
+she has 2 or more Delay, her Fracture's DC is 15.
 
 ***Down, Not Out.*** A creature other than Raunu Boranis that the Wept reduces to 0
 Hit Points is Unconscious and Stable (Chapter V, *Midnight Rules*). If a creature is
@@ -1774,7 +1775,7 @@ Critical Hits, and she hums a cradle-song mid-attack without knowing it. She is
 losing the argument with what she used to be.
 
 **Fracture — Sorrow (once).** It needs ammunition gathered in play, or 2 Delay
-banked against her (then it is DC 15). On a success she
+banked against her (then its DC is 15). On a success she
 stops — mid-motion, mid-kill — and for one full round she takes no actions, no
 Bonus Actions, no Reactions and does not move: a woman standing in a burning
 ballroom, long enough to pull a victim clear, seal a ward, finish an escape. At a
@@ -1810,7 +1811,8 @@ happen. None of them earns XP.*
 **Raunu Boranis** — *Medium Humanoid (Human).* AC 12 · HP 40 · Speed 30 ft. He will
 not fight a guest, and nothing in this module makes him. If it comes to it, on his
 turn he never attacks: he releases a ward (Chapter V), and a door, a light or a wall
-of crystal answers him. Deceiving him is DC 25. Impressing him is easier than anyone
+of crystal answers him. Deceiving him takes a DC 25 Charisma (Deception) check.
+Impressing him is easier than anyone
 expects: tell him a true thing he did not already know. *The two crystals at his
 wrist are his, and Chapter V says what they are for.*
 
@@ -1824,7 +1826,7 @@ on harm to her; cut away.
 **Minister Corval** — *Medium Humanoid (Human).* AC 10 · HP 9 · Speed 25 ft. Thin,
 upright, old, magnificent under pressure, and no use at all in a fight. Bribing him
 is **impossible** — no check; tell the players so. Deceiving him about household
-matters is DC 20; about anything else he is too tired to check.
+matters takes a DC 20 Charisma (Deception) check; about anything else he is too tired to check.
 
 **Anha** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. The under-cook. She
 talks to family or kindness, not to pressure. *The Other Way:* in the service
@@ -1867,7 +1869,8 @@ the nudge, and learns the most dangerous thing at the ball: *someone is editing 
 
 ***Courteous and Finished.*** Every conversation with Vell ends when he decides,
 somehow without rudeness. Every check to move him — bribery, flattery, threat,
-charm — is DC 25, and even a success buys honesty rather than compliance: *"You are
+charm — is a DC 25 Charisma (Deception, Intimidation, or Persuasion) check, and
+even a success buys honesty rather than compliance: *"You are
 observant. Enjoy the ball."*
 
 ***The Wrapped Sword.*** An enormous broadsword, wrapped in white cloth, across his
@@ -1887,7 +1890,7 @@ the Uninvited move — arriving, not running — and that is the only time all n
 anyone sees it.
 
 ***Move Aside.*** When the only way to the river gate runs through a creature, Vell
-does not roll. The DM tells that player what the factor's face says: he has already
+makes no check. The DM tells that player what the factor's face says: he has already
 done the arithmetic, and they should move. If they do not, they are moved — set
 aside, unhurt, and they did not see how. He takes the path that spills the least
 blood if one exists. If none exists, he is ruthless, because the one thing he will
@@ -1913,7 +1916,7 @@ consumable magic item, one stored working, released at a touch by anyone — gif
 not, trained or not. Releasing one does not make its bearer a caster.
 
 - **Releasing a charge** takes the Magic action (an action, at a 2014 table), and no
-  roll. The charge is spent. Charges need no attunement.
+  check. The charge is spent. Charges need no attunement.
 - **The six every Orthaen knows** are *common*: minor, local, brief. A gifted Orthaen
   with the Orthaen Gift can grow one in a day of downtime from 25 GP of raw crystal,
   one at a time, and no more than one a week: a gift is not a mint (Chapter III).

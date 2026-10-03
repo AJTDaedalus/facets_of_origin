@@ -79,11 +79,10 @@ the play.
   faction wants it written down one way. A captured sergeant of the Bought, contract
   case and all, is the best evidence in the city; a bought-out captain who wants to
   know who hired him will help.
-- **The trail**, step by step: the river gate (DC 13 Intelligence (Investigation) to
-  see it was oiled, not forced), the boat (DC 13 Charisma (Persuasion) with the fishers
-  downstream), the carter (a DC 15 Charisma (Persuasion) or DC 15 Intelligence (Investigation)
-  check to find the one who will talk), then
-  nothing. A failed check costs time and draws a faction's attention; it never loses
+- **The trail**, step by step: the river gate (a DC 13 Intelligence (Investigation)
+  check to see it was oiled, not forced), the boat (a DC 13 Charisma (Persuasion) check
+  with the fishers downstream), the carter (a DC 15 Charisma (Persuasion) or DC 15
+  Intelligence (Investigation) check to find the one who will talk), then nothing. A failed check costs time and draws a faction's attention; it never loses
   the trail.
 - **Otta Vesh,** the finest mask-maker in Rekuzan, keeps a casting-blank of every face
   she has ever fitted. Ask her about the three gray masks: *nobody made them*, nobody

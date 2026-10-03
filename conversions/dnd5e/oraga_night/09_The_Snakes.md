@@ -599,7 +599,7 @@ cast at a guest, counts as bare steel.
 - *The benches* are fixed and crowded. Moving through them is Difficult Terrain; a
   creature shoved into one has the Restrained condition until the end of its next
   turn.
-- *The gallery rail* is waist-high over a twelve-foot drop into the Crystal Court. A
+- *The gallery rail* is waist-high over a 12-foot drop into the Crystal Court. A
   creature pushed over it takes 1d6 Bludgeoning damage, lands among two hundred
   guests with the Prone condition, and stops being in this scene and starts being in a much worse one.
 - *The noise of two hundred guests* covers almost anything: Dexterity (Stealth) checks
@@ -615,8 +615,8 @@ obeyed — which a player character can *be*, with a DC 15 Charisma (Persuasion 
 Intimidation) check.
 
 **Outs.**
-- Name either principal's house obligation out loud: DC 13 Charisma (Persuasion).
-- Get physically between them: DC 13 Strength (Athletics). The swings meant for each
+- Name either principal's house obligation out loud: a DC 13 Charisma (Persuasion) check.
+- Get physically between them: a DC 13 Strength (Athletics) check. The swings meant for each
   other land on you — both principals' next attacks target you.
 - Be visibly more important than the argument — a Minor Scion, an honor guard,
   anybody with a name they recognize. No check.
@@ -757,20 +757,20 @@ Gatehouse Court, Held", points here.)*
   and the objective is met.
 - *The wicket.* A person-sized door in the left leaf, with its own small grille,
   locked and barred on the street side. It is the way through for a party that means
-  to fight: one creature at a time, five feet wide. It opens to a DC 15 Strength
+  to fight: one creature at a time, 5 feet wide. It opens to a DC 15 Strength
   (Athletics) check to burst the bar, a DC 13 Dexterity check with Thieves' Tools
   worked through the grille, or a Bought key — every Blade carries one, and a Blade
   who drops against the gate can be searched through the grille with a Utilize
   action. And it opens on a parley (below).
 - *The gatehouse stair and the gate-walk.* A door in the court side of the gatehouse
-  opens on a stair up to the gate-walk, fifteen feet above the arch; a second stair
+  opens on a stair up to the gate-walk, 15 feet above the arch; a second stair
   runs down from the gate-walk to the street. One Blade holds the top. Climbing the
   court-side face of the gatehouse instead is a DC 13 Strength (Athletics) check, and
   puts a climber on the walk away from him. From the walk it is the outer stair, or a
-  fifteen-foot drop to the street (1d6 Bludgeoning damage and the Prone condition, unless the faller
+  15-foot drop to the street (1d6 Bludgeoning damage and the Prone condition, unless the faller
   makes a DC 13 Dexterity (Acrobatics) check).
 - *Where the Bought stand.* The sergeant at the wicket, where he can read through its
-  grille. Three Blades in a loose line across Gate Street, ten feet out from the gate.
+  grille. Three Blades in a loose line across Gate Street, 10 feet out from the gate.
   The fourth on the gate-walk.
 - *The parley at the grille.* The sergeant will speak through the wicket grille to
   anyone, at any time, and answers what he is asked. If the contract is voided or
@@ -843,8 +843,8 @@ of the ending the module least expects a table to choose, printed here so you ca
 it coming and reach for an out.
 
 **2 — Void the contract, or buy it.** Proof the employer broke terms (the fires were
-not meant to spread; the palace is burning): DC 13 Charisma (Persuasion) to the
-sergeant through the grille, no check to the captain, who already half knows. Or the
+not meant to spread; the palace is burning): a DC 13 Charisma (Persuasion) check to
+the sergeant through the grille, no check to the captain, who already half knows. Or the
 named target already gone — Veier is out by the river gate, and a party that knows it
 can simply *say so*. Or a better offer, made in front of the sergeants: a Circle
 magnate, a Draunel, a Boranis cousin all have coin and reasons, and the snakes' coin
@@ -857,7 +857,7 @@ withdrawal at the first sight of a sect banner, if the party has held even one r
 **A party that only held has won.**
 
 **Outs,** beyond the three endings: the river gate, if anyone thinks of it. The wall,
-if anyone can climb it away from the gatehouse (DC 13 Strength (Athletics)) — *and if
+if anyone can climb it away from the gatehouse (a DC 13 Strength (Athletics) check) — *and if
 they do, they meet four more Blades, because the other twelve are holding the
 perimeter*. The captain's price, if anyone asks what it is.
 
@@ -908,12 +908,12 @@ block's *Detain and Expel*). The first guard Bloodied calls the house.
 block's **Breaks** line).
 
 **Outs, and they are visible from the first round:**
-- An invitation and a good story: DC 15 Charisma (Deception or Persuasion).
+- An invitation and a good story: a DC 15 Charisma (Deception or Persuasion) check.
 - A name that outranks a guard — a patron, a kindness done to Corval. No check; an
   escort back to the party and a warning.
 - Going back the way you came. The guards do not follow past the corridor.
-- The service passages, if someone reaches them: a chase, three successes before three
-  failures on DC 13 Dexterity (Acrobatics) or Strength (Athletics) checks.
+- The service passages, if someone reaches them: a chase, 3 successes before 3
+  failures on DC 13 Dexterity (Acrobatics) or DC 13 Strength (Athletics) checks.
 
 <!-- TODO-Q14: whether "Going back the way you came" pays XP waits on owner ruling Q14 (SNAKES-5). -->
 
@@ -1023,7 +1023,7 @@ does 3 damage and a grapple does none, and the cousins break long before anyone 
 the ground. A quiet word is not supposed to be a fight. What it can cost is a scene: a character held by two cousins at the
 balustrade is not somewhere else.
 
-**Terrain as rules.** *The balustrade* is waist-high over a ten-foot drop to the next
+**Terrain as rules.** *The balustrade* is waist-high over a 10-foot drop to the next
 terrace (1d6 Bludgeoning damage, the Prone condition, and out of the scene). *The lanterns* leave pools of
 Dim Light between them.
 
@@ -1035,7 +1035,7 @@ the fight has drawn a crowd (the block's **Breaks** line).
 
 **Outs.**
 - Tell them what they want to hear: that you will say nothing. No check if it is true;
-  DC 15 Charisma (Deception) if it is not — they are family, and they have heard every
+  a DC 15 Charisma (Deception) check if it is not — they are family, and they have heard every
   lie there is about Vorlain.
 - Name Essin. *Essin's Word:* they stop, and ask you, embarrassed, not to mention this
   to him.
@@ -1120,7 +1120,7 @@ character). The clock
 and the narrow run are the card.
 
 **Terrain as rules.**
-- *The service run* is five feet wide: one creature abreast, and a creature can't move
+- *The service run* is 5 feet wide: one creature abreast, and a creature can't move
   through an enemy's space. Getting *past* someone is a DC 13 Dexterity (Acrobatics)
   check, or a Shove.
 - *One lamp in three.* Dim Light; Lightly Obscured. The service run's doorways and
@@ -1150,8 +1150,8 @@ walks back into the Dance like a guest.
 - Outbid them. *The Circle pays on delivery; you pay now.* 20 GP and a DC 13 Charisma
   (Persuasion) check.
 - Tell them what is behind that door: the honor guard, doubled, and Corval's orders.
-  DC 13 Charisma (Intimidation).
-- Give them a wrong answer about the second plate. DC 18 Charisma (Deception) — they
+  A DC 13 Charisma (Intimidation) check.
+- Give them a wrong answer about the second plate: a DC 18 Charisma (Deception) check — they
   are professionals — and on a success the Circle spends the rest of the night chasing
   the rumor the whole ballroom already believes, that he feeds the mad wife.
 
@@ -1242,10 +1242,10 @@ breaks keeps whatever he is carrying if he can.
 
 **Outs.**
 - Turn the law on them. A great house's invitation is one of the two writings the
-  Church suffers outside its walls, and these are invitations: DC 15 Intelligence
-  (Religion) or Charisma (Persuasion).
+  Church suffers outside its walls, and these are invitations: a DC 15 Intelligence
+  (Religion) or DC 15 Charisma (Persuasion) check.
 - The Prelate's Question. A player character carrying Agenda 2 can promise Kovaun an
-  honest judgment in exchange for the room: DC 13 Charisma (Persuasion), or no check if
+  honest judgment in exchange for the room: a DC 13 Charisma (Persuasion) check, or no check if
   they have already given it.
 - Fetch Kovaun from the chapel. She calls them off rather than be seen standing at a
   chief's study door on the night of his ball.
@@ -1331,7 +1331,7 @@ down. He will be back; he always has a second way.
   party's ally, which is what he came to ask for.
 
 **Terrain as rules.**
-- *The balustrade* is waist-high over a ten-foot drop to the next terrace: 1d6
+- *The balustrade* is waist-high over a 10-foot drop to the next terrace: 1d6
   Bludgeoning damage, the Prone condition, and out of the scene.
 - *Lanterns* leave pools of Dim Light between them.
 - *Gravel paths.* Dexterity (Stealth) checks on them have Disadvantage.
@@ -1352,13 +1352,13 @@ Essin's word, or when their man is off the grass.
 
 **Outs.**
 - Refuse the challenge on the Boranis side, in front of the rail, with a reason nobody
-  can call cowardice: DC 15 Charisma (Persuasion). Iron 2 is spent.
-- Make it first blood only, formally, as a second: DC 13 Charisma (Persuasion) to both
-  seconds. Then it is one duelist against one cousin, one hit, and done — nobody dies.
+  can call cowardice: a DC 15 Charisma (Persuasion) check. Iron 2 is spent.
+- Make it first blood only, formally, as a second: a DC 13 Charisma (Persuasion) check
+  to both seconds. Then it is one duelist against one cousin, one hit, and done — nobody dies.
 - Shame it. Tell the rail that Lord Draunel's young men are baiting a guest at his
-  host's ball: DC 15 Charisma (Intimidation or Performance). Draunel withdraws them,
+  host's ball: a DC 15 Charisma (Intimidation or Performance) check. Draunel withdraws them,
   and is first to call it a misunderstanding among friends.
-- Stand between them: DC 13 Strength (Athletics). Both principals' next attacks target
+- Stand between them: a DC 13 Strength (Athletics) check. Both principals' next attacks target
   you.
 - Essin's word ends the Boranis side at once.
 
@@ -1424,8 +1424,8 @@ stands between them and that window, lays hands on them, or calls the guard.
 - *At heat 4:* the half-bell clock starts with one segment filled.
 
 **Terrain as rules.**
-- *The wall* is twenty feet of grown crystal to the window. Climbing it is DC 13
-  Strength (Athletics) with the rope, DC 18 without.
+- *The wall* is 20 feet of grown crystal to the window. Climbing it takes a DC 13
+  Strength (Athletics) check with the rope, or a DC 18 Strength (Athletics) check without.
 - *The dark garden.* Darkness beyond the last lantern; the flower beds are Difficult
   Terrain.
 - *The lit window* is somebody's room. Anyone who reaches it sees warm light, a quiet
@@ -1444,10 +1444,10 @@ goes. The fight ends the instant the party stops standing between them and the w
   passages are another. Either turns a wall-climb into an escort.
 - Proof of Veier. Anyone who has been inside B9 tells Maiven what the unpacked
   traveling pack means, or what the two slings say. No check. The rope comes down.
-- Promise to go with her at midnight, and mean it: DC 13 Charisma (Persuasion), or no
+- Promise to go with her at midnight, and mean it: a DC 13 Charisma (Persuasion) check, or no
   check for a player character she already trusts.
-- Warn them about the guard on the other side of that window. DC 13 Wisdom (Insight) to
-  know how to say it to border people so that it lands as help.
+- Warn them about the guard on the other side of that window. A DC 13 Wisdom (Insight)
+  check tells a character how to say it to border people so that it lands as help.
 
 **Treasure.** None.
 
@@ -1500,10 +1500,10 @@ they cut, and as a fight it is light. The crush is what this card is about.
 
 **Terrain as rules.**
 - *The crowd* is Difficult Terrain. A creature (other than a bodyguard) that starts its
-  turn in it must succeed on a DC 13 Strength (Athletics) or Dexterity (Acrobatics)
-  check or have the Prone condition and take 1d6 Bludgeoning damage from the feet
+  turn in it must succeed on a DC 13 Strength (Athletics) or DC 13 Dexterity
+  (Acrobatics) check or have the Prone condition and take 3 (1d6) Bludgeoning damage from the feet
   around it.
-- *The door* is five feet wide. One at a time.
+- *The door* is 5 feet wide. One at a time.
 - *The dark court.* Darkness, except where a ward flares or a candle survives; the
   lamplit passage beyond the door is Bright Light, and everyone in the doorway is
   silhouetted.
@@ -1519,7 +1519,7 @@ once.
 **Outs.**
 - Corro's word. A player character who walked the room with him and took him seriously
   can tell him to have his people hold the door *for everyone*, and he does: no check.
-  Anyone else, DC 15 Charisma (Persuasion), shouted over a crowd.
+  Anyone else needs a DC 15 Charisma (Persuasion) check, shouted over a crowd.
 - Hold it with them. A player character who helps hold the doorway makes a DC 13
   Strength (Athletics) check each round; on a success the door is held for everyone that
   round, a dozen guests get through, and the clock does not advance.
@@ -1536,7 +1536,8 @@ for everyone.
 **Adjusting the Encounter.**
 - *Three player characters:* two bodyguards (425 XP).
 - *Five player characters:* three bodyguards, and the door they picked is narrower
-  than it looks: the crowd check is DC 15.
+  than it looks: the crowd check is a DC 15 Strength (Athletics) or DC 15 Dexterity
+  (Acrobatics) check.
 - *Four at 3rd level:* three bodyguards (625 XP).
 - *Four at 5th level:* as for five, and the crush clock starts with one segment
   filled.
@@ -1588,7 +1589,7 @@ word.
 - Tell them Callun would be horrified. She would; *Paid on Delivery* — and anybody
   close enough to her in the Court to prove it.
 - Take him off their hands the helpful way: point them at the real way out and offer to
-  carry him. DC 13 Charisma (Persuasion).
+  carry him. A DC 13 Charisma (Persuasion) check.
 - Let them. They are getting a man out of a fire, after all. By dawn the Circle owns
   the Tithe — and the Tithe survives the night, which Agenda 1's player may find they
   prefer.
@@ -1604,7 +1605,7 @@ feet, going where he chooses.
 - *Three player characters:* two knives, both carrying (400 XP).
 - *Five player characters:* four knives.
 - *Four at 3rd level:* two knives (400 XP); three at heat 4.
-- *Four at 5th level:* four knives, and the smoke's Constitution save is DC 13.
+- *Four at 5th level:* four knives, and the smoke calls for a DC 13 Constitution saving throw.
 
 **Development.** However it ends, the Tithe survives if the minister does. Agenda 1's
 midnight note (see chapter II, "The Eight Agendas") applies. **Return to Movement VII.**
@@ -1637,14 +1638,14 @@ still inside; Vorlain in Draunel's hands; both sides stopped. The guests are the
 part of this that cannot wait.
 
 **The gallery clock — four segments.** Advances at the end of each round. Each segment
-is one guest still inside who does not come out unless somebody goes in for them (DC 13
-Strength (Athletics) to carry one out through the smoke). **Full:** the gallery's roof
+is one guest still inside who does not come out unless somebody goes in for them (a DC 13
+Strength (Athletics) check to carry one out through the smoke). **Full:** the gallery's roof
 comes down, and whoever is still inside is still inside.
 
 **Enemies.** It depends on the party.
 - *The Draunel side:* **Essar Draunel** and two **Draunel Duelists**, one of them with
   the block's **Nastier** line. 700 + 200 + 450 = **1,350 XP**, between Low (1,000) and
-  Moderate (1,500) for four 4th-level characters. Draunel's three rapier attacks run
+  Moderate (1,500) for four 4th-level characters. Draunel's three Rapier attacks run
   hotter than his XP; in play this drops a character in about one fight in three,
   which plays Moderate.
 - *The Boranis side:* **Essin Boranis** and three **Boranis Cousin's Blades**. 450 +
@@ -1659,9 +1660,10 @@ comes down, and whoever is still inside is still inside.
   Between*, then gone.
 
 **Terrain as rules.**
-- *The fire* at the far end. A creature that enters it or starts its turn in it takes
-  2d6 Fire damage (DC 13 Dexterity saving throw for half). **The fire never finishes
-  anyone.** A creature that drops in the gallery takes no more fire damage while it is
+- *The fire* at the far end. A creature that enters it or starts its turn there must
+  make a DC 13 Dexterity saving throw, taking 7 (2d6) Fire damage on a failed save, or
+  half as much damage on a successful one. **The fire never finishes
+  anyone.** A creature that drops in the gallery takes no more Fire damage while it is
   down: at the end of that round a guest or a servant drags it clear to the doors, where
   it is Stable, and the crowd rule (Chapter V, *Down, Not Out*) rouses it with 1 Hit Point at the start
   of the round after next if nobody has helped it sooner.
@@ -1684,14 +1686,14 @@ him, or the first time one of them takes damage. Essin's side breaks the moment 
 - Shame Draunel in front of the people Vorlain just carried out. Ask them — no check —
   and three soot-black guests say who pulled them out. Draunel withdraws, and is the
   first to call it a misunderstanding.
-- Hand it to the law. Offer to hold Vorlain for the sect guard yourselves: DC 15
-  Charisma (Persuasion), and both sides accept, Draunel because it is still an arrest
+- Hand it to the law. Offer to hold Vorlain for the sect guard yourselves: a DC 15
+  Charisma (Persuasion) check, and both sides accept, Draunel because it is still an arrest
   and Essin because it is not Draunel's.
-- Let Vorlain go back in. Nobody arrests a man walking into a fire: DC 13 Wisdom
-  (Insight) to see that he will, and to say so in time.
+- Let Vorlain go back in. Nobody arrests a man walking into a fire: a DC 13 Wisdom
+  (Insight) check to see that he will, and to say so in time.
 - Broker a trade. Essin knows where the missing year's bodies are buried, and Draunel
   would give a great deal to know it. A player character who carries the offer
-  between them (DC 15 Charisma (Persuasion)) ends this and starts something much worse,
+  between them (a DC 15 Charisma (Persuasion) check) ends this and starts something much worse,
   later, somewhere else.
   <!-- TODO-Q11: "Broker a trade" (whether the missing year's two bodies are literal) waits on owner ruling Q11. -->
 
@@ -1789,9 +1791,8 @@ table the *hard-hitting* line under Scaling.
 **Distracting the Attendant — the full rule.** It takes **an action**. The player
 describes what their character does, then makes **an ability check with the skill that
 fits the trick** — Charisma (Performance) for music, Charisma (Deception) for a false order,
-Intelligence (Arcana) to show it a working crystal, Charisma (Persuasion) to ask it a
-question it must answer, Dexterity (Sleight of Hand) to take its cup, and so on — against
-**DC 13 while it is Idle, DC 19 while it is Focused.**
+Intelligence (Arcana) to show it a working crystal, Dexterity (Sleight of Hand) to take
+its cup, and so on — against **DC 13 while it is Idle, DC 19 while it is Focused.**
 
 *One trick a round.* It watches one thing at a time. Once anyone has tried a trick on
 it in a round, win or lose, it is watching for the next: nobody else can try until the
@@ -1811,13 +1812,13 @@ next round, and the Help action doesn't apply. The table chooses whose trick it 
 *Results.*
 - **Success while it is Focused:** its **focus breaks** — it is Idle until the start of
   its next turn. That counts.
-- **Beat the DC by 5 or more while it is Focused:** its focus breaks **and** it loses
+- **Succeed by 5 or more while it is Focused:** its focus breaks **and** it loses
   its next turn, doing nothing at all. That counts.
 - **Success while it is Idle:** it does nothing on its next turn (no blow, no clearing
   the way). That does **not** count: only a broken focus does.
 - **Failure:** the trick is spent (it is now "used"). If it was Focused, its next
   attack is at the distractor.
-- **Natural 20:** as beating the DC by 5, and the distractor gains Heroic Inspiration.
+- **Natural 20:** as succeeding by 5 or more, and the distractor gains Heroic Inspiration.
 - **The fourth broken focus of the night:** it wanders off — out of the fight, standing
   at a window, watching the fires. That is a win.
 
@@ -1880,9 +1881,9 @@ player who tries to distract it (hint 4); a natural 20 on a distraction pays its
 - *Three player characters:* 180 Hit Points, and while Focused its second turn is a
   single Joined Hands. (Dassa, Pello and Ilesse: trading blows wins 18% and flattens
   the party 20%; bare distraction 26%; leaning in 72%.)
-- *Five player characters:* 260 Hit Points, and DC 20 while it is Focused. (With
+- *Five player characters:* 260 Hit Points, and a distraction DC of 20 while it is Focused. (With
   Serane added: 10% and 10%; 45%; 72%.)
-- *Four at 3rd level:* 210 Hit Points, DC 18 while it is Focused, and its second turn
+- *Four at 3rd level:* 210 Hit Points, a distraction DC of 18 while it is Focused, and its second turn
   is a single Joined Hands. (17% and 16%; 47%; 72%.)
 - *Four at 5th level:* use the five-character line, or the block's **Nastier** line
   for a table that wants it harder. Not simulated at 5th; Extra Attack and

@@ -249,18 +249,18 @@ ladder. Learn it once here; every chapter prints its DCs against it.
 | **Hard** | **18–20** | Against somebody's expertise or somebody's fear. **18** when the character has earned an edge; **20** when they have not |
 | **Very Hard** | **25** | Deceiving Raunu Boranis. Moving Master Vell. Very little else |
 
-Checks are written the SRD way: `DC 15 Wisdom (Insight)`. Where the source said a
+Checks are written the SRD way: `a DC 15 Wisdom (Insight) check`. Where the source said a
 "knack applies", this edition means the character's proficiency in the fitting skill
 or tool, and a gifted character's gift (Chapter III) gives Advantage when the check is
 about the thing the gift does.
 
 **Success at a cost.** This night runs on partial wins, and it teaches them early.
-When a check misses its DC by **4 or less**, you may offer the player what they wanted
+When a check fails by **4 or less**, you may offer the player what they wanted
 *with a cost attached*: name the cost first, then let them take it or leave it. The
 DM sheet in Chapter VIII has a short table of costs, so you can read one off the page
 instead of inventing one while four people watch you.
 
-**NPCs don't roll outside a fight.** Every entry in Chapter VII gives the DC a guest
+**NPCs don't make checks outside a fight.** Every entry in Chapter VII gives the DC a guest
 imposes instead. Inside a fight, they roll like anybody else.
 
 **Heroic Inspiration** replaces the Sparks of the original edition, and it works as
@@ -478,21 +478,21 @@ correcting a player mid-scene costs more than the error did.*
 >
 > **Answer two: point at the Attendant.** The thing standing between them and the Wept
 > can be beaten, and it is the hardest fight of the night. And let something else in
-> the room need them more: a guest under a fallen beam, twenty feet away, calling. The
+> the room need them more: a guest under a fallen beam, 20 feet away, calling. The
 > Wept is not going anywhere. The guest is.
 
-> **Troubleshooting — you keep defaulting to DC 20**
+> **Troubleshooting — you keep setting every DC at 20**
 >
 > This is the single most common way to make this night unfun, and it happens because
 > Hard *feels* like taking the fiction seriously.
 >
-> **Answer one: the line's first check is DC 13**, and Chapter IV says so at B0 for
-> exactly this reason. Set the tier there and let the rest of the night calibrate off
+> **Answer one: the line's first check is a DC 13 Charisma (Persuasion) or DC 13
+> Wisdom (Insight) check**, and Chapter IV says so at B0 for exactly this reason. Set the tier there and let the rest of the night calibrate off
 > it.
 >
-> **Answer two: an approach across station, behind a mask, is Easy (DC 10).** The
-> custom protects the conversation — that is what the masquerade is *for*,
-> mechanically.
+> **Answer two: an approach across station, behind a mask, is Easy: an ability check
+> using the skill that fits, DC 10.** The custom protects the conversation — that is
+> what the masquerade is *for*, mechanically.
 
 > **Troubleshooting — a near miss is not a failure**
 >
