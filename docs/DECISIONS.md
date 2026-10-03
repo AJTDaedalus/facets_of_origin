@@ -1251,3 +1251,20 @@ same menus; off-Facet talents need a teacher found in play.
 
 **Status (all L-rulings):** ✅ Adopted for the first pass; revisit after the first
 human session (gate G0).
+
+---
+
+## Oraga Night 5e — official-module pass (Planner, 2026-09-30)
+
+*Scope: `conversions/dnd5e/oraga_night/` only. Full rationale in `docs/DESIGN_oraga_5e_official.md` §3 and §6.*
+
+- **O1 — SRD 5.2.1 casing module-wide.** Game terms in Title Case (Advantage, Hit Points, Short Rest, conditions, light and cover terms, action names including Utilize). Spells and items in italic Title Case. Coin as "GP". Evidence: SRD 5.2.1 term counts (e.g. Advantage 209:9, Hit Points 345:0, GP 396:1). Rejected: 2014 lowercase (FRONT-10), because the module declares 5.2.1 and its stat blocks are already 5.2.1.
+- **O2 — The Attendant.** It becomes Focused on the FIXPLAN §5b trigger, and the card fires Idle. It vanishes for the rest of the Movement only, not until the Unmasking. S14's +2 counts only habits the table saw.
+- **O3 — The Attendant after owner Q5.** It has three habits, shown in Movements I, II, IV and V. The Movement III "literal answer" sighting is cut, not replaced, because a replacement would be new canon. Owner confirmed on 2026-10-03 (Q22): no replacement.
+- **O4 — Leashed return.** A dropped Uninvited returns where it dropped. The Hollow keeps "within 60 feet of the doors he holds".
+- **O5 — Detain mercy.** The general rule defers to the Bought Blade's *To the Terms* (1 HP and Grappled).
+- **O6 — The agendas move to Chapter II's DM-only half** (owner Q2 said to move them; the Planner chose the destination). Chapter III keeps a player-safe pointer to Handout 2.
+- **O7 — The Seating Feud** defaults to Movement II, with Movement III as a fallback, and is over before the toast.
+- **O8 — Book organization.** Regroup the README (Before the Night / The Night / Appendices) and don't renumber, pending owner Q3.
+- **Owner rulings recorded the same day:** Q1 DM in the 5e edition only; Q2 move the agendas; Q5 remove the Attendant's truthful-answer habit; Q6 Agenda 4 ring-at-doors and a dinner built from Chapter VII only.
+- **Owner rulings 2026-10-03:** Q21 approved (the redundancy cuts, done in T2.4); Q22 no replacement Attendant habit.

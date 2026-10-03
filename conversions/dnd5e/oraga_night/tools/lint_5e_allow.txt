@@ -1,0 +1,11 @@
+# Whitelist for lint_5e.py: one entry per line, `file|quoted text|reason`.
+# `file` is a module file's basename, or * for any file. A line that contains the quoted
+# text is exempt from every lint rule. Add a reason a reviewer can check.
+
+# Handout 1: the invitation text is canonical (08 says "The text is canonical"). Never edit.
+08_Handouts.md|It is my great honor to invite you to the seat of our people, the Palace Boranis,|Handout 1 canonical invitation text
+08_Handouts.md|for a night of revelry in the bounty bestowed upon our lands on the last night of|Handout 1 canonical invitation text
+08_Handouts.md|Oraga. I look forward to seeing you all and sharing food, drink, and revelry with|Handout 1 canonical invitation text
+08_Handouts.md|you among the spirits as we look forward to a bright future.|Handout 1 canonical invitation text
+08_Handouts.md|*To My Esteemed Guest,*|Handout 1 canonical invitation text
+08_Handouts.md|*Given Under My Hand,*|Handout 1 canonical invitation text
