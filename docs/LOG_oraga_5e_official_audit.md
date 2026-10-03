@@ -287,3 +287,42 @@ Hard-rule detail: role_name is 75 "MM" + 1 "Mirror Master". bare_dc 146 = bare "
 - Ledger: INVENTIONS **#62**. Decisions: DECISIONS **O20–O24**, numbered from O20 to leave O9–O19 for the other Phase 3 tasks.
 
 **Skipped sites:** none. Every quoted phrase was found. *Left for later phases:* SNAKES-10/-11 (voice, T7.3), -13/-16 (T5.4), -14/-18/-19 (T4.3), -15/-24 (T4.5), -17 capitals (T4.2), -25 (done in T2.4), -27 (a house choice), -28 (T2.4).
+
+### Phase 3b — T3.2 (chapter V), then T3.1 (chapter IV)
+
+*2026-10-03, Worker. Every edit was located by quoted text (DESIGN §2). New sentences say "the DM"; existing "MM" is left for T4.1.*
+
+**Commands, after each task:** `python conversions/dnd5e/oraga_night/tools/lint_5e.py --check`; `python conversions/dnd5e/oraga_night/tools/bestiary_check.py`; `python conversions/dnd5e/oraga_night/tools/pregen_check.py`; `python -m pytest conversions/dnd5e/oraga_night/tools -q`. flow.json was not touched (no heading was renamed, and S1's flow node is already phase m2), so the flow page was not rebuilt. Final results: lint `--check` OK, exit 0. bestiary_check: 25 blocks + 3 Nastier, 0 mismatches. pregen_check: 5 pregens, 0 issues. pytest: 135 passed. No re-baseline.
+
+**Hard hits: 432 → 424** (T3.2 432 → 431; T3.1 → 424, mostly bare DCs gone with the 04 ladder pointer and the thieves' tools checks). Structure hits stay at 1 (the untriggered 05 gate box, for Phase 5; not touched). Soft metrics did not regress. Near-regressions fixed during the work: 05's *Invoking a Fracture* went over 120 words (split at "Intimidation never works"). In 04, B1, the feud, and the summons paragraph went over 120 words (the gate failure, the feud timing and the audience length each became their own paragraph). The ladder ranges "DC 13–15 / DC 18–20" tripped bare_dc, so the line now points to chapter I (BALL-19's second option).
+
+**T3.2 edits (05):**
+- NIGHT-3: the beats box now says "A beat and a round cost an Uninvited the same thing: one turn" (the minute and thirty-beat scale is cut). Ward seals and floods last "until the scene ends". "perhaps" cut ("half an hour of story-time at most"; 05 *perhaps* count is now 0). New `### The Midnight Clock` after principle 4, eight steps built only from 05 and 08, plus the O9 default. Pointers to it from the beats box, principle 3, *Buying Time* ("a point is a beat"), the dais parenthetical (it no longer repeats the third-turn rule), *The last bell* and ⟨They save Raunu⟩. Table V–1 keeps the Wept's third-turn rule, because it is the Delay mechanic and not the clock. 08 page one has a one-line pointer to the clock above the pillars.
+- NIGHT-4: the miss-by-4 line gives 2 Delay. A Fracture needs at least one witnessed tell. Skills carry their abilities. *Mirrored* in 10's Fracture rule and in 08's *Fractures* line.
+- NIGHT-5: **Sidebar — Adjusting the Attack** at the end of *Buying Time* (O11). The crossfire sidebar's "halve / add half again" is replaced by the dice. **The values are unsimulated**; run them through the pass-2 sim before print.
+- NIGHT-6: "fights the party can end on its own terms". The 2014 line was not added, because 09 already has **DM Note — at a 2014 table** (SNAKES-7).
+- NIGHT-7: the lanterns note is plain text. Darkness speeds the Radiant up, except as a Fracture attempt.
+- NIGHT-16: the trap-mask evidence is cut.
+- NIGHT-19: the carry award reads "100 XP to the carrier for each person they bring out (Table I–4)". "as Table I–4 pays a fight ended by an out". Table V–3's "(principle 2)" → '(see "How to Run the Attack", principle 2)'. *Mirror:* 01 Table I–4 "100 to the carrier, for each person they bring out". *Not found:* the old "(*Carrying somebody out*, Chapter I)" pointers (already rewritten before this pass) and a second "principle 2" pointer at the audit's 05:1076.
+- NIGHT-20: the Evasion sentence.
+- NIGHT-21: the push goes "in a direction the DM chooses", with the Prone condition (mirrored in 08). The Radiant's gate turn comes at the end of the round, after every character. "nobody is surprised: everyone saw the lights die". Trampling (O10).
+- NIGHT-22: the room-trick tables' column is **Check (DC 13; DC 15 the second time)**; per-row exceptions kept.
+- NIGHT-24: *About 50 / 40 minutes* boxes on Movements VI and VII in 04's time-box form (from Table I–1), not the audit's italic "Expected duration" line, so both chapters match. B12 **Treasure** line (from 09 S3 and 10). The looters bullet points to '(see chapter X, "The Night's Loot")'.
+- NIGHT-18: `### The Palace After Midnight: General Features` (light, crowd, smoke, fire), after *The Attendant* and before *The default beats*. It is not inside *Midnight Rules*, whose lead says "Five short rules". Sources: the lights list, *Two Hundred People*, S12, S13. **TODO-Q13** comment in place of dimensions.
+- **Gated, left as is:** NIGHT-15 (**TODO-Q10** under the contract paragraph in B12); NIGHT-17 (**TODO-Q9** at the end of ⟨They trap one of the Uninvited⟩).
+- *Left for later phases:* NIGHT-9/-10/-11 (T5.2, T5.3), -12 (T4.2), -13/-14 (T7), -23 (T4.6/T5.4). 10's mirror for the Fracture text was needed (T2.4c had not covered the partial-success Delay).
+
+**T3.1 edits (04):**
+- BALL-6: a failure by 5 or more at the gate, as its own paragraph. **Skipped part:** the audit's "on another guest's arm" and "he sends for a guard" are new detail. Only the printed route is used (Movement I: "staff hires slip in through the kitchens (B10)").
+- BALL-7: results for the B0 first check, the B3 alcove, helping Corval well (his open gratitude, as for the feud; the audit's "see Agenda 1" was not used, because Agenda 1 doesn't say what helping *well* buys) and angling for a summons.
+- BALL-8: the feud heading is "(Movement II, or III; the Banquet Galleries)", with timing per O7. "see the sidebar below" → 'see the sidebar "Guards are a scene, not a sentence", below'. *Mirrors:* 09 S1 *Where and when*, Table IX–3 "Mv II (or III)", 08 Table VIII–1 Movement III "S1 if held from II".
+- BALL-9, -10, -26: O12.
+- BALL-16: "four more come at the start of the second round after the first guard is Bloodied". 09 S4 already matched (T3.3).
+- BALL-17: the toast can be held, and the two plates' news travels. The Dead Dance trigger line says who hears the whole box.
+- BALL-18: thieves' tools as "a DC 15/18 Dexterity check using thieves' tools" (B5, *Trespass*, B8). 08 Table VIII–3 "15 / 18 Dexterity (thieves' tools)". The open-skill checks get a default ("usually Charisma (Persuasion) or Intelligence (Investigation)").
+- BALL-19 / CAST-19: see the ladder note above. 04's header box already reads "Hard DC 18–20".
+- **Gated:** BALL-12 (**TODO-Q15** comments at Callun's Movement III coin and the nursery sale; there were none in 04 before).
+- **Phase 1 leftover fixed:** the Movement III time box still listed "the quiet guest answering the time", the habit cut by Q5/O3. It now ends "and the gray masks".
+- Ledger: INVENTIONS **#63** (T3.2) and **#64** (T3.1). Decisions: **O9–O12**.
+
+**Skipped sites:** listed above (BALL-6's two new details; NIGHT-19's two pointers no longer present; NIGHT-6's 2014 line, already in 09). **TODOs added:** Q9, Q10, Q13 (05); Q15 ×2 (04).

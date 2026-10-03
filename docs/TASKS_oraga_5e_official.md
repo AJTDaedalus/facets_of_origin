@@ -177,14 +177,14 @@ text and the proposed wording for each finding.*
 
 Each task: rerun both math scripts and the linter's structure rules. Mirror sites are listed, and must be changed in the same task.
 
-### ☐ T3.1 Chapter 04 mechanics
+### ☑ T3.1 Chapter 04 mechanics
 - **Findings:** BALL-6 (gate fail by 5+), BALL-7 (4 checks with no result), BALL-8 (the Seating Feud, O7; also fix "see the sidebar below"), BALL-9 (summons: four guests, audience length, *friendly* trigger), BALL-10 (the orrery), BALL-16 (04 side: the guard trigger → Bloodied, card S4), BALL-17 (the toast and the Dead Dance for absent characters), BALL-18 (thieves' tools grammar, open-skill defaults), BALL-19 (one DC ladder), BALL-26 (the Undercurrent A retry).
 - **Gated item:** BALL-12 (Callun's prices) ⛔ Q15. Leave "TODO-Q15" in place.
 - **Mirrors:** 09 S1 (feud timing), 09 S4 (see T3.3), 08 Table VIII–1 (the toast and feud rows).
 - **Accept:** every check in 04 has a stated result where failure matters (spot-check the list of 14 checks in BALL-7/18). SA.
 - **Time:** 2 × 30 min.
 
-### ☐ T3.2 Chapter 05 mechanics
+### ☑ T3.2 Chapter 05 mechanics
 - **Findings:**
   - NIGHT-3: the beat/round unit, "until the scene ends", and a new **The Midnight Clock** block. Set the Radiant's default and log it in DECISIONS as O9 after checking it against the 05 and 08 sequence.
   - NIGHT-4: Fracture partial success, and skills with their abilities.

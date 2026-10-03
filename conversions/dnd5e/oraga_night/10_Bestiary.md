@@ -151,8 +151,8 @@ they do openly during the attack counts too. A creature that has witnessed, or b
 told about, at least one of that Uninvited's tells can spend an action in a fight, or
 one beat out of one, within 30 feet of them, where they can hear, to reach the person
 inside: an ability check with
-whatever skill the words fit — Persuasion, Performance, Religion, Insight, or plain
-Charisma for a bared truth. **Intimidation never works, and neither does Deception**: the
+whatever skill the words fit: Charisma (Persuasion), Charisma (Performance),
+Intelligence (Religion), Wisdom (Insight), or a plain Charisma check for a bared truth. **Intimidation never works, and neither does Deception**: the
 person inside the mask has been lied to enough. Heroic Inspiration may be spent on it,
 and should be.
 
@@ -160,7 +160,8 @@ and should be.
   whenever she has 2 or more Delay, whatever tells have been seen.
 - **Success:** the Fracture lands in full, as the block says, and that Uninvited
   gains **2 Delay**.
-- **Failure by 4 or less:** it lands, at a cost — the Uninvited answers first, with
+- **Failure by 4 or less:** it lands in full, and that Uninvited gains **2 Delay**, at a
+  cost — the Uninvited answers first, with
   one attack against the speaker (rolled in the open; *Down, Not Out* holds) or one
   word the speaker will carry for the rest of their life. The DM chooses which.
 - **Failure by 5 or more:** it doesn't land and isn't spent. The Uninvited acts

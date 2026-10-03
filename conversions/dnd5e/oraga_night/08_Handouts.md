@@ -17,7 +17,7 @@ handouts for the players. Print the first three pages and run the night from the
 | 0:00 | **The street** (10) | Pick character, agenda, hook (Ch. I); read B0; *"what does your mask look like?"* | — | — | — |
 | 0:10 | **I. Receiving Line** (25) | Corval receives by name, from memory; nobody is disarmed; the hosts are absent | Nine honor guards, facing *inward* | Holds a cup out for nobody | S4 if anyone draws |
 | 0:35 | **II. Empty Rooms** (45) | Vorlain holds court; the factions circulate; still no host | Corro's gift rings, pointing nowhere | Stares at a crystal wall for a full minute | S1 · S6 |
-| 1:20 | **III. Summons** (35) | A glimpse on the high gallery; Corval fetches guests to B4 (≥1 player character; two together once) | Three gray masks Corval cannot account for | — | S6 · Tavva's scout |
+| 1:20 | **III. Summons** (35) | A glimpse on the high gallery; Corval fetches guests to B4 (≥1 player character; two together once) | Three gray masks Corval cannot account for | — | S6 · Tavva's scout · S1 if held from II |
 | 1:55 | **IV. Toast** (25) | Raunu at the high table: *"At the Unmasking I will have something to say"*; **two plates**; gone | The mews scream, then silence | Turns to follow the music | S7 begins |
 | 2:20 | **V. Hour of Spirits** (40) | Dead Dance; quarter-bells; the S9 appointment at the first; Vell to the river gate; east wing doubled | *"You dance like my daughter would have."* | Watches the party, loses them to a glint | **One per group:** S2 · S7 · S8 · S9 · S10 |
 | 3:00 | *Break* (10) | As the bells ring midnight | | | |
@@ -48,6 +48,9 @@ carries Agenda 4. Never the gate.
 | **Anha** | The service passages | The other way out, if anyone befriended her |
 | **The snakes** | Heat 0–2: get their principal out | Heat 3–4: their card is live (Snake Tracker, below) |
 
+*The order of the night after the lights is printed once, in chapter V (see chapter V,
+"The Midnight Clock").*
+
 **The pillars.** Raunu falls, by his own choice · Veier and Vell go out through the
 river gate · the Uninvited leave no trace · no one is ever charged · **the heir stays
 secret** — no faction learns of the child unless a player character tells them.
@@ -61,7 +64,7 @@ secret** — no faction learns of the child unless a player character tells them
   with 1 HP. Still down at the end of the next round → the crowd drags them clear and
   rouses them. First haul-up of the night → Heroic Inspiration. *The last blow on an
   Uninvited:* DC 15 Str or Dex save at the start of its next turn, or pushed 15 ft.
-  and Prone.
+  (the DM's direction) and Prone.
 - **Buying Time.** A Delay die per Uninvited, on the table. Each point = one turn of
   movement lost. A clever trick with the room, the crowd, a door, a lie: DC 13 → 1
   Delay (DC 15 the second time; never a third). A Fracture → 2 Delay. 30+ damage to
@@ -74,9 +77,10 @@ secret** — no faction learns of the child unless a player character tells them
   third time. A success while Focused **breaks its focus** until its next turn (beat
   by 5: it loses that turn too). **Fourth broken focus:** it wanders off. 0 HP: gone
   into the shadow. Say its state aloud: *"It's locked on you" / "It's drifting."*
-- **Fractures.** Action within 30 ft., the skill the words fit. **DC 18** with one
-  tell, **15** with two or more (the Wept: 15 once she has 2+ Delay). Never
-  Intimidation or Deception. Once each.
+- **Fractures.** Needs one witnessed tell. Action within 30 ft., the skill the words fit. **DC 18** with one
+  tell, **15** with two or more (the Wept: 15 once she has 2+ Delay). A miss by 4 or
+  less still lands and gives 2 Delay, after one blow or word. Never Intimidation or
+  Deception. Once each.
 - **Wards.** Steer: action, DC 13 Intelligence (Arcana) for anyone who studied them,
   18 otherwise; each ward-point once tonight; against an Uninvited, 1 round = 1 Delay.
   From the Root (B11): palace-wide at DC 13, shelter for a dozen, and the Uninvited
@@ -104,7 +108,7 @@ secret** — no faction learns of the child unless a player character tells them
 | Identify a masked guest you know / have only heard described | 15 / 20 |
 | A borrowed invitation at the gate / one with the wrong name on it | 13 / 18 Deception |
 | Slip past a posted guard · a hire's livery and a confident walk · an honest story | 15 Stealth · 10 Deception · 13 Persuasion |
-| A locked door in the private palace · the study's crystal lock | 15 / 18 thieves' tools |
+| A locked door in the private palace · the study's crystal lock | 15 / 18 Dexterity (thieves' tools) |
 | The service passages without a guide (first time only) | 15 Survival |
 | Deceive Corval about the household · bribe him | 20 · impossible |
 | Deceive Raunu · move Vell | 25 · 25 |

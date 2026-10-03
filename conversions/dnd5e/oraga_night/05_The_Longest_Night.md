@@ -15,11 +15,10 @@ of choosing anything at all.
 > **Beats and rounds.** A beat is a scene-cut, not a unit of time: one player
 > character's moment, then the next. When a beat turns into a fight, roll initiative
 > for that fight only and run it in rounds until it ends or the beat cuts away. A
-> fight in one corner of the palace does not stop the clock in another. As a rough
-> scale, **one beat is about a minute** — ten rounds, if anyone asks — and the whole
-> attack, from the first scream to the boat clearing the river gate, is about thirty
-> beats. You will not need thirty. When the table needs the attack to end, bring the
-> Crossing to the table.
+> fight in one corner of the palace does not stop the clock in another. A beat and a
+> round cost an Uninvited the same thing: one turn. "The Midnight Clock", below, gives
+> the order of the night. When the table needs the attack to end, bring the Crossing to
+> the table.
 
 Three principles:
 
@@ -39,9 +38,9 @@ Three principles:
    Orthaen who has read them by hand tonight, and **DC 18** for anyone else (the
    Orthaen Gift's knack applies). **Each ward-point steers once tonight;** the room
    tricks below say how many a room has. On a success, pick one: seal a doorway or
-   corridor (it holds for 10 minutes against anything but an Uninvited, and against
+   corridor (it holds until the scene ends against anything but an Uninvited, and against
    an Uninvited for 1 round — **1 Delay**, and a whole round is a hallway); flood a
-   stair or hall with bright light for 10 minutes; or raise a ward over up to a dozen
+   stair or hall with bright light until the scene ends; or raise a ward over up to a dozen
    huddled guests (they cannot be targeted by the snakes' weapons while they stay under
    it, until the last bell). Tables that found **the Root of the House** (Undercurrent
    A) hold the master valve: from the Root, any ward-point in the palace can be
@@ -50,13 +49,13 @@ Three principles:
    the deep crystal is to them, they will not cross its threshold. The module states
    this and does not explain it.
 3. **The clock still runs.** The leash pulls east. From the first scream, the
-   Uninvited have perhaps half an hour of story-time. They feel it; late in the
+   Uninvited have half an hour of story-time at most. They feel it; late in the
    attack they get faster, sloppier, more terrible and more *human*. The leash takes
    all three the moment their work is finished or lost — in the history this module
    keeps, when the boat is out of reach of the river gate — and the last bell of
    Oraga is the latest it can come. The bell itself belongs to the rest of the night:
    **ring it once the front gate is decided** (B12, below). It ends the Bought's
-   contract, and it ends the night.
+   contract, and it ends the night. "The Midnight Clock", below, puts it in order.
 
 And a fourth, for this edition:
 
@@ -67,7 +66,31 @@ And a fourth, for this edition:
    what they do. "The Snakes in the Dark", below, says what each of them does. The party
    will walk past some of it. Walking past is always an option; say so.
 
+### The Midnight Clock
+
+After the lights die, the night runs in this order. This is the one place the order
+is stated; everything else in this chapter points here.
+
+1. **The lights die.** Nobody rolls initiative yet (Movement VI, below).
+2. **The beats begin.** Master Pellin Corro moves first ("Who moves first", below).
+3. **The Wept reaches Raunu** on her third turn of moving toward him, plus one turn
+   for each point of Delay spent on her (Table V–1).
+4. **Raunu falls.** The Hollow turns east (sooner, if his Fracture lands), the main
+   doors open, and the crowd pours out toward the Gatehouse Court (B12). The bells of
+   Oraga begin to toll as the first guests reach it.
+5. **The Radiant reaches the garden stair** three beats after Raunu falls, by
+   default. You can hold him back while the party is still in the east wing. If the
+   table saves Raunu, count from the beat he would have fallen.
+6. **The Crossing** runs three beats, down the garden's three levels (below).
+7. **The leash.** When the boat is out of reach of the river gate, the leash takes all
+   three, finished or not.
+8. **The gate is decided** (card S3), by any of its three endings. Then the last bell
+   rings, no later than the bell clock on card S3.
+
 ## Movement VI — The Unmasking
+
+> **About 50 minutes** (starts 3:10). If you are behind, run only the dais, the
+> Crossing and one snake in the dark.
 
 Midnight. Bells. The east doors open and Raunu Boranis mounts the dais to lead the
 Unmasking, as every host of every Oraga has, and the rite begins: the lamps
@@ -131,6 +154,9 @@ happens before anyone can act, and it should feel that way:
    (*The Attendant*, below. Card S14 has the hints that tell players it can be
    distracted; start dropping them now.)
 
+When the first beat turns into a fight, nobody is surprised: everyone saw the lights
+die.
+
 Then release the beats. From here the module cannot script — it can only tell you
 where everything is and what everything wants. The MM sheet (Chapter VIII, Table
 VIII–2) holds the map: **the Wept → Raunu. The Radiant → Veier. The Hollow →
@@ -190,8 +216,8 @@ They are moving it out of the way.
   the space where they dropped (or the nearest unoccupied space); the Hollow returns
   within 60 feet of the doors he holds (*Leashed*, Chapter X). At
   the start of that turn, whoever dealt the last blow makes a **DC 15 Strength or
-  Dexterity saving throw** (their choice). On a failure they are pushed 15 feet and
-  knocked prone. No damage. If no creature dealt it — fire, falling stone — nobody
+  Dexterity saving throw** (their choice). On a failure they are pushed 15 feet in a
+  direction the DM chooses and have the Prone condition. No damage. If no creature dealt it — fire, falling stone — nobody
   saves; if two blows landed at once, the MM picks.
 
 The **Attendant** (below) works the same way: whoever it drops is Stable, and gets up
@@ -209,7 +235,8 @@ where the players can see it: a die beside each of the three. At the start of an
 Uninvited's turn, if they have any Delay, spend one point. That turn they make no
 progress toward their errand — they recover, find another way round, or deal with the
 problem the party made, and the MM says which. They can still strike whoever is in
-reach. When the night is running in beats instead of rounds, a point is a beat.
+reach. When the night is running in beats instead of rounds, a point is a beat (see "The
+Midnight Clock").
 
 **Earn it by being clever, not by hitting harder.** A creative action that uses the
 room, the crowd, the wards, a lie, a mask, a door, fire, water or light earns **1
@@ -246,6 +273,18 @@ says what happens when a table stacks enough of it to change an outcome.
 turn and nobody is in its reach, it clears the way for one of the three and removes 1 Delay.
 That is why the party cannot ignore it. See *The Attendant*, below.
 
+> **Sidebar — Adjusting the Attack.** The numbers above are built for four 4th-level
+> characters. Use one line only; the lines are not cumulative. For five characters at
+> 5th level, use the 5th-level line.
+>
+> - *Three characters:* the Wept reaches Raunu on her fourth turn of moving toward
+>   him, and 20 damage in a round makes a lump.
+> - *Five characters:* 40 damage in a round makes a lump.
+> - *Four at 3rd level:* the crossfire deals 3 (1d6) Bludgeoning damage, or 7 (2d6) on a failure
+>   by 5 or more.
+> - *Four at 5th level:* 40 damage in a round makes a lump, and the crossfire deals
+>   10 (3d6) Bludgeoning damage, or 21 (6d6) on a failure by 5 or more.
+
 #### Room Tricks
 
 Roll or choose when the players ask what is in the room, or when you want to show them
@@ -255,7 +294,7 @@ in the room is not.
 
 **Table V–2: Room Tricks — the Dais** *(the Wept; four ward-points on the dais)*
 
-| d8 | Trick | Roll |
+| d8 | Trick | Check (DC 13; DC 15 the second time) |
 |---|---|---|
 | 1 | **Turn a sconce.** One of the dais's four ward-points, at Raunu's word — he tells you exactly what to touch. Each turns once tonight | Intelligence (Arcana), DC 10 at his side, whatever you studied |
 | 2 | **A charge in her way.** Yours, or a House Seal or House Flare off one of the honor guard where they fell | The DC 13 Charisma check her *Unraveling Presence* already asks for |
@@ -268,9 +307,9 @@ in the room is not.
 
 **Table V–3: Room Tricks — the Doors** *(the Hollow; two ward-points by the doors)*
 
-| d8 | Trick | Roll |
+| d8 | Trick | Check (DC 13; DC 15 the second time) |
 |---|---|---|
-| 1 | **Flare a ward** by the doors. He flinches from ward-fire, and for a moment the doors behind him are unwatched. Each ward-point once | Ward-steering (principle 2) |
+| 1 | **Flare a ward** by the doors. He flinches from ward-fire, and for a moment the doors behind him are unwatched. Each ward-point once | Ward-steering (see "How to Run the Attack", principle 2) |
 | 2 | **Answer him.** Sooner or later he asks, flatly, whether this is worth it to you. Give him a real answer. He waits for it as if it mattered | Wisdom (Insight) or Charisma (Persuasion) |
 | 3 | **Call a name.** Get Anha, or any of the kitchen household, to call a name across the hall, or call one yourself. He turns his head toward the sound | Charisma (Performance), or Persuasion to get a servant to do it |
 | 4 | **Two who belong together.** Walk them past him — Anha's people through the service door, or any two guests holding on to each other. He watches them go, the way he watched them all night | Charisma (Persuasion), to get them moving |
@@ -282,7 +321,7 @@ in the room is not.
 **Table V–4: Room Tricks — the East Wing and the Service Run** *(the Radiant; every
 door Raunu sealed is a ward-point)*
 
-| d8 | Trick | Roll |
+| d8 | Trick | Check (DC 13; DC 15 the second time) |
 |---|---|---|
 | 1 | **Hold a sealed door.** Hands on one of the doors that sealed behind Veier, holding the seal. It holds a turn longer than it should. Each door once | Intelligence (Arcana): DC 13 if you studied the wards, DC 18 if not |
 | 2 | **Answer him.** He asks, warmly, whom you serve, and waits for the answer. Give him one worth waiting for | Charisma (Performance or Persuasion) or Intelligence (Religion) |
@@ -293,13 +332,15 @@ door Raunu sealed is a ward-point)*
 | 7 | **An audience.** Bring the guards off the east wing doors, Maiven's slingers, anyone, to where he can see them watching. He turns to them and poses | Charisma (Persuasion) |
 | 8 | **The wrong stair.** Tell him she went down the other way | Charisma (Deception) |
 
-*Never burst the lanterns on him. A dark corridor is one where nobody is watching, and
-he hurries. In the unlit corridors a pursuer needs a light for him to be Witnessed.*
+Darkness speeds him up: in an unlit corridor nobody is watching, so he isn't
+Witnessed, and he hurries. A pursuer needs a light for him to be Witnessed. The
+exception is his Fracture. A character who puts out the lights as a Fracture attempt,
+denying him his congregation, makes the Fracture check instead (see "The Fractures").
 
 **Table V–5: Room Tricks — the Gardens and the River Gate** *(the Radiant at the
 Crossing; Delay earned here is spent at the gate)*
 
-| d8 | Trick | Roll |
+| d8 | Trick | Check (DC 13; DC 15 the second time) |
 |---|---|---|
 | 1 | **Light the stair.** Relight the lanterns down the garden stair, or carry light down it, so he is seen coming | Dexterity, or a charge and the Charisma check |
 | 2 | **The balustrade.** The duel has already smashed the terrace balustrade; push what is left down onto the stair behind you | Strength (Athletics) |
@@ -323,7 +364,8 @@ The attack happens in a crowd, and the crowd has rules too.
   *thunderwave* at the dais is up to nine people. A guest a player character kills is
   seen by somebody, and the inquest hears of it. A spell that drops people without
   harming them (*sleep*, say) drops them into a crush: anyone still on the floor at the
-  end of the round is trampled, unless somebody gets them up.
+  end of the round is trampled, unless somebody gets them up: a guest dies, and a
+  character takes 5 (2d4) Bludgeoning damage.
 - **The crowd as ground.** Moving through it is difficult terrain; card S11 has the
   rule for a crush at a door.
 - **The Post.** Guests don't roll against the Hollow's *Post* or *Turn Them Back*. The
@@ -375,6 +417,26 @@ player who came to this ball wanting a real fight.
 Run it from **card S14** (Chapter IX), which has the full distraction rule and the
 hints; its block is in Chapter X.
 
+### The Palace After Midnight: General Features
+
+These features hold everywhere in the palace from the lights to the last bell, unless
+a card says otherwise.
+
+<!-- TODO-Q13: room sizes and fight-space distances (the Crystal Court, the dais, the main doors, the east wing corridors, the garden levels, the river gate) wait on owner ruling Q13 (NIGHT-18). Add no dimensions until then. -->
+
+- **Light.** The Crystal Court is Dim Light, lit by candles and fire. The corridors
+  and service passages are Darkness except where a ward flares. In an unlit corridor
+  nobody sees the Radiant without a light.
+- **The crowd.** Wherever the crowd is, count one guest in every 5-foot square. The
+  crowd is Difficult Terrain ("Two Hundred People", above).
+- **Smoke.** The banquet galleries (B3) are Heavily Obscured beyond 10 feet. A creature
+  that starts its turn in the thick of the smoke must succeed on a DC 10 Constitution
+  saving throw or lose its action coughing (cards S12 and S13).
+- **Fire.** A creature that enters the fire in B3 or starts its turn in it makes a
+  DC 13 Dexterity saving throw, taking 7 (2d6) Fire damage on a failed save, or half
+  as much damage on a successful one. The fire never finishes anyone: a creature that
+  drops in it takes no more Fire damage and is dragged clear (card S13).
+
 ### The default beats
 
 What history records, told in scenes. Bend everything except what the players bend:
@@ -388,8 +450,8 @@ What history records, told in scenes. Bend everything except what the players be
   minutes. *(At his side, a player character steers wards at DC 10, whatever they
   studied: he tells them exactly what to touch. The dais has four ward-points, each
   good once tonight, and each one turned is a ward between the Wept and the crowd: 1
-  Delay. Table V–2 has the rest of what the dais offers. She reaches him on her third
-  turn of moving toward him, and every point of Delay spent pushes that back a turn.)*
+  Delay. Table V–2 has the rest of what the dais offers. When she reaches him is step 3
+  of "The Midnight Clock".)*
   Then the Wept is through the last barrier, and Raunu Boranis, who has visibly been holding one crystal back — a
   second small thing, worn at his wrist, twin to the one already spent sealing the
   corridor — looks at it, looks once more toward the east wing, and *crushes it in
@@ -438,7 +500,8 @@ What history records, told in scenes. Bend everything except what the players be
   any of them caught and held is worth more than the goods: by dawn, a captured looter
   is the inquest's favorite scapegoat and the players' proof of what they saw. If
   nobody interferes, the crew gets away clean — and the module notes, without
-  comment, which kind of night the table chose to have. ***Card S5, Chapter IX.***
+  comment, which kind of night the table chose to have. ***Card S5, Chapter IX.*** What
+  the crew carries is Tavva's sack (see chapter X, "The Night's Loot").
   *(The snakes are in the dark too, and some of what they do looks like looting from
   across a smoky room. It is not the same fight, and it is not the same kind of
   people. See* "The Snakes in the Dark".*)*
@@ -492,7 +555,8 @@ the players choose to fight. Run it in three beats down the garden's three level
    gate is what he has to go through.** A held gate, a doused lantern, a body in
    the way, a Fracture finally invoked — any of it is enough; the module asks only
    that the margin be *the players*, not luck. *(In the rules: when the Radiant breaks
-   past, he has one turn at the gate. If he has any Delay left, he spends it there,
+   past, he takes one turn at the gate, at the end of the round, after every character
+   has acted. If he has any Delay left, he spends it there,
    and the boat is out of reach before he acts. If he has none, he spends the turn on
    whoever stands between him and the boat —* Down, Not Out *— and the boat is out of
    reach all the same. Either way, the escape holds. It fails only if a player
@@ -522,11 +586,11 @@ otherwise, never for a table that was busy saving someone else.
 > damage** or lose their next action shielding someone, their choice; if they fail by
 > 5 or more, they take **14 (4d6) bludgeoning damage**, or the ground between them and
 > the gate gets worse (difficult terrain, a gap to jump, a stair gone), the MM's
-> choice. Cover does not help against a garden coming apart, and neither does
-> Evasion's half-damage — a character with Evasion takes no damage on a success and
-> the full result on a failure. Never aim the duel *at* a player character — the
+> choice. Cover doesn't help against a garden coming apart, and Evasion changes
+> nothing: a success already takes no damage. Never aim the duel *at* a player character — the
 > terror of the Crossing is precisely that neither combatant cares that they are
-> there. *(Scale it: at 3rd level, halve the damage; at 5th, add half again.)*
+> there. At 3rd level the damage is 3 (1d6) and 7 (2d6); at 5th level it is 10 (3d6)
+> and 21 (6d6) ("Adjusting the Attack", above).
 
 > **Sidebar — Players who attack Vell, or join the duel.** They can try. Vell does not
 > take the bait and does not fight them; he moves out of reach, the way the Uninvited
@@ -617,19 +681,22 @@ Sella, Kovaun, or another player) **one tell** sets that Fracture's DC at **18**
 do openly (below) counts as tells too — a table that arrives at midnight with nothing
 can still earn a Fracture in the fire.
 
-**Invoking a Fracture** takes an action in a fight, or one beat out of one, within
-30 feet of the Uninvited and where they can hear. It is an ability check with whatever
-skill the words fit — Persuasion for a plea, Performance for a spectacle, Religion
-for a rite or a believer's rebuke, Insight for naming what you have seen in it, or
-plain Charisma for a bared truth. **Intimidation never works**, and neither does
+**Invoking a Fracture** takes at least one witnessed tell, and an action in a fight,
+or one beat out of one, within 30 feet of the Uninvited and where they can hear. It is
+an ability check with whatever skill the words fit: a Charisma (Persuasion) check for
+a plea, Charisma (Performance) for a spectacle, Intelligence (Religion) for a rite or
+a believer's rebuke, Wisdom (Insight) for naming what you have seen in it, or a plain
+Charisma check for a bared truth.
+
+**Intimidation never works**, and neither does
 Deception: the person inside the mask has been lied to enough. Heroic Inspiration may
 be spent on it, and should be. *(The same rule is printed once in Chapter X, above
 the Uninvited's blocks.)*
 
 - **Meet the DC:** the effect lands in full, and that Uninvited gains **2 Delay**
   (*Buying Time*).
-- **Miss by 4 or less:** it lands, but the Uninvited answers first with one terrible
-  parting blow — one attack against the speaker, rolled in the open (*Down, Not Out*
+- **Miss by 4 or less:** it lands in full, and that Uninvited gains 2 Delay, but it
+  answers first with one terrible parting blow — one attack against the speaker, rolled in the open (*Down, Not Out*
   holds) — or one word that the speaker will carry for the rest of their life. The MM
   chooses which.
 - **Miss by 5 or more:** it does not land. The Uninvited acts against the speaker,
@@ -759,7 +826,7 @@ refusing to leave the city without her cousin or a body.
 >
 > **The dial:** a table that came for combat, and has learned it cannot touch the gray
 > masks, should be shown the Circle's delivery and the fourth iron early — both are
-> fights a 4th-level party can win outright, and both are *about* someone the table has
+> fights the party can end on its own terms, and both are *about* someone the table has
 > met.
 >
 > **The cost:** every snake fight a party takes is beats they are not spending on the
@@ -770,6 +837,8 @@ refusing to leave the city without her cousin or a body.
 ---
 
 ## Movement VII — The Longest Night
+
+> **About 40 minutes** (starts 4:00). If you are behind, run only the gate (card S3).
 
 The Uninvited are gone. The palace is fire, smoke, ward-light, and screaming — and
 until the sect guard gets in through the front gate (B12, below), the player
@@ -786,10 +855,10 @@ is still running — the Circle's coats in the smoke, the Church on the dark-win
 finishes it now or loses it; see* "The Snakes in the Dark". *Everyone else is doing what the
 rest of the palace is doing, which is trying to get out.)*
 
-**Carrying somebody out** pays as Chapter I prints it: Heroic Inspiration to the
-carrier for the first person they bring out (a carrier who already has it gives it to
-a companion who has none), and XP for every person standing outside at the end. Not
-per attempt — per person.
+**Carrying somebody out** pays as Tables I–3 and I–4 print it: Heroic Inspiration to
+the carrier for the first person they bring out (a carrier who already has it gives it
+to a companion who has none), and 100 XP to the carrier for each person they bring out
+(Table I–4). Not per attempt; per person.
 Getting a guest through smoke and fire is a DC 13 Strength (Athletics) or Constitution
 check for the carrier per beat, or no check at all through the service passages with
 someone who knows them; a failure costs the carrier 5 (2d4) fire or bludgeoning damage
@@ -811,6 +880,7 @@ and they are standing at the front gate right now.
 **The contract.** Two nights ago a factor nobody can describe hired a company of
 the Bought — sixteen blades, four sergeants, a captain — and paid half in old coin,
 for three tasks written in a case chained to the captain's belt:
+<!-- TODO-Q10: who carries the contract case (the captain's belt, or the sergeant who reads from it at the gate) waits on owner ruling Q10 (NIGHT-15). -->
 
 1. At the quarter-bells, fire in two named sect districts and the Blackwatch
    courier post.
@@ -856,6 +926,9 @@ court (card S3 counts them).
 
 **Objective: open the way out.** Two hundred people are behind the party.
 
+**Treasure.** The contract case, and the company's purse (3d6 × 10 GP in old coin)
+(see chapter X, "The Night's Loot").
+
 ***Card S3, Chapter IX*** — the gate, the wicket and the gate-walk, the fire clock and
 the bell clock, the **Bought Sergeant**, the **Bought Blades** and the **Bought
 Captain**, the tactics, and the three endings written out. Everything below is what
@@ -890,7 +963,7 @@ that nothing else in the module will give them.
    round. **A party that only held has won.**
 
 **The last bell.** It rings once the gate is decided — by any of the three — and no
-later than the bell clock on card S3. Whatever the Uninvited left unfinished, it is
+later than the bell clock on card S3 (see "The Midnight Clock"). Whatever the Uninvited left unfinished, it is
 finished now; if one of them is caught in deep ward-crystal (⟨They trap one of the
 Uninvited⟩), this is the moment the leash tears them out. The Bought's hours are over.
 The night is.
@@ -943,8 +1016,7 @@ it back.
 
 **⟨They save Raunu.⟩** Possible — it takes the Wept's Fracture found early, plus
 real sacrifice at the dais. *(In the rules: the Wept's Fracture landing on the dais
-before she reaches Raunu — her third turn of moving toward him, pushed back a turn for
-every point of Delay spent — while he still has his twin crystal, and with at least
+before she reaches Raunu (see "The Midnight Clock", step 3) while he still has his twin crystal, and with at least
 one player character between them when it lands. That round is the one Raunu needs to choose differently, and a table
 that has bought it should be allowed to see him choose.)* If they do it: Raunu
 survives his own assassination, which makes him the most dangerous man alive and the
@@ -991,10 +1063,11 @@ the leash tears them out through ward, wall, and witness alike, and by morning t
 is nothing to show the inquest but damage. The public record holds: no bodies, no
 names, no charges. *(Their name is not one of the questions they answer. Nor is who
 they served.)*
+<!-- TODO-Q9: what a trap does to the trapped one's errand (Raunu's fate if the Wept is caught; the escape if the Radiant is; the doors if the Hollow is) waits on owner ruling Q9 (NIGHT-17). -->
 
 **⟨They expose the truth.⟩** Suppose the players stand in the ashes with real
 evidence — the study's crystal reliefs, the drawer of scorched invitations (if the Church's
-Wardens did not get there first), a Fracture's confession, the mask of an Uninvited left behind in a trap. They
+Wardens did not get there first), and a Fracture's confession. They
 discover the coldest fact of the aftermath: *nobody powerful wants it.* Draunel wants
 Vorlain implicated; the Circle wants a trade rival implicated; the Church wants the file
 closed and the mists unmentioned; Vorlain wants anything that is not himself. The truth
@@ -1053,7 +1126,6 @@ ones that fed will be the ones who want to talk to the party first.
 Duelists and Essin's cousins are three paces apart in B3; Draunel and Essin would each
 pay to know what is in a Warden's arms; everybody has coin for the Bought. A table that
 sets the snakes on each other instead of fighting them has played the night exactly as
-a Val'loh noble would, and should be paid as Chapter I pays *ending a fight without
-finishing it*. The only rule: whatever the snakes do to each other in the dark is
+a Val'loh noble would, and should be paid as Table I–4 pays a fight ended by an out. The only rule: whatever the snakes do to each other in the dark is
 still *their* doing. The party's hands are clean, and every faction will spend the
 aftermath wondering whose were not.

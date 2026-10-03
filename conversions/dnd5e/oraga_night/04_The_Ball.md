@@ -58,8 +58,9 @@ live. **The palace diagram** in Chapter VIII shows how the rooms connect; print 
 alerted" and stops.*
 
 **When steel is bared** anywhere a guest can see — or a spell with a visible effect is
-cast at a guest — two **Boranis Honor Guards** arrive at once, and four more come if
-the fight goes on (*Call the House*; card S4, Chapter IX). They do not fight to hurt.
+cast at a guest — two **Boranis Honor Guards** arrive at once, and four more come at
+the start of the second round after the first guard is Bloodied (*Call the House*;
+card S4, Chapter IX). They do not fight to hurt.
 They detain and expel, and every blow they land is a knockout blow: a creature they
 reduce to 0 hit points falls unconscious and is Stable, never dying. The offender's
 invitation is void for the rest of the night, and the room remembers their face after
@@ -178,7 +179,9 @@ before anyone reaches the door. Rumor Table rolls are legal from the first minut
 > **Default:** make it a **social** check at **DC 13** — Charisma (Persuasion) to
 > talk a place up the line, Wisdom (Insight) to read who is selling what — and if it
 > misses by 4 or less, offer it *at a cost*, naming the cost out loud before you
-> resolve it.
+> resolve it. On a success, the character gets one rumor (Table VIII–7) or a place in
+> the line next to anyone named in the bullets above. At a cost, they get the same,
+> and Table VIII–4 supplies the cost.
 >
 > **The dial:** you could open on something easier, to give the table a win.
 >
@@ -196,6 +199,10 @@ borrowed invitations are tested here. Corval is sharp, but it is dark, the line 
 long, and the custom of masks was made for this. Passing on a borrowed card is a
 DC 13 Charisma (Deception) check; a card with the bearer's own name wrongly on it,
 DC 18. A miss by 4 or less gets them in — and Corval will remember the face.)*
+
+If the check fails by 5 or more, Corval hands the card back with perfect courtesy and
+does not let its bearer through. The character can still slip in with the staff hires
+through the kitchens (B10), and Corval will remember the face.
 
 > **Sidebar — Steel at the ball:** the Orthaen carry weapons the way other
 > peoples carry coin purses, and a festival ball is no exception. The custom is
@@ -232,7 +239,8 @@ remembering sunlight. *(Nearly every scheduled event happens here.)*
 with harvest excess. Where the real conversations happen, in alcoves built for
 exactly that. *(Best room for agenda work: everyone passes through, and the alcoves
 are half-private. Overhearing an alcove without being noticed is DC 13 Dexterity
-(Stealth) or Wisdom (Perception), whichever the player is doing.)*
+(Stealth) or Wisdom (Perception), whichever the player is doing. A success hears one
+rumor (Table VIII–7) or one fact from the speaker's entry in Chapter VII.)*
 
 **When the party first sees into the Audience Hall, read:**
 
@@ -253,7 +261,7 @@ and everyone rehearsing their one question.)*
 the water, ending at a modest iron gate to the river walk — locked, always. Couples,
 conspirators, and anyone needing air. *(Agenda 6 lives here. So does the escape route.
 MM: know this geography cold — Court → terraces → lower garden → river gate. The
-gate's lock is DC 15 with thieves' tools; Agenda 6's player needs no check, having
+gate's lock takes a DC 15 Dexterity check using thieves' tools; Agenda 6's player needs no check, having
 been given what they need.)*
 
 **When the party enters the Chapel, read:**
@@ -286,8 +294,8 @@ nothing in it is guarded the way the east wing is.*
 *Trespass, in numbers:* slipping past a posted guard is DC 15 Dexterity (Stealth); a
 festival hire's livery and a confident walk make it DC 10 Charisma (Deception); an
 honest story to a guard who has no reason to disbelieve it, DC 13 Charisma
-(Persuasion). A locked door in the private palace is DC 15 with thieves' tools unless
-its entry says otherwise. None of these is ever the only way in.
+(Persuasion). Opening a locked door in the private palace takes a DC 15 Dexterity check using
+thieves' tools, unless its entry says otherwise. None of these is ever the only way in.
 
 **B7. The Trophy Gallery.** The house's pride and plunder: banners, weapons, and grown
 crystals taken in old settlements — including a heart-sized soul-crystal of uncommon
@@ -299,8 +307,8 @@ seals, alarms. That knowledge pays off desperately at midnight. Lifting the
 grandmother's crystal off its ward without waking it is DC 18 Dexterity (Sleight of
 Hand), DC 13 for anyone who studied the wards first.)*
 
-**B8. Raunu's Study.** Locked, dark wing, second floor (DC 18 with thieves' tools; the
-lock is crystal, not iron). Two years of a genius's solitude, and — players will look
+**B8. Raunu's Study.** Locked, dark wing, second floor (opening it takes a DC 18 Dexterity
+check using thieves' tools; the lock is crystal, not iron). Two years of a genius's solitude, and — players will look
 for papers and find none, because there are none anywhere — the room thinks in
 crystal: instruments nobody can name, a grown relief of the eastern coast on the
 great table with its mist-lines remembered in colored lattice, the recent lines
@@ -411,8 +419,7 @@ the truth. Not even you.
 
 **Social checks at the ball.** NPCs never roll against the party outside a fight; their
 entries in Chapter VII say how hard they are to move instead, and those words map onto
-the ladder — *Easy* DC 10, *Standard* DC 13, *Hard* DC 18, *Very Hard* DC 25, and
-*impossible* means no check at all. A mask makes approaching someone far above your
+the ladder (see chapter I, "Checks, Inspiration, and the Ladder"). *Impossible* means no check at all. A mask makes approaching someone far above your
 station **DC 10** where it would otherwise be DC 13: the custom protects the
 conversation, and everyone at this ball is someone else tonight.
 
@@ -462,15 +469,19 @@ No fight at this ball is mandatory, and every one is *visible*. Two troubles cir
 below, alongside the snakes. Show them plainly, once each, and let them be walked into,
 or past.
 
-### The Seating Feud *(Movements II–IV, the Banquet Galleries)*
+### The Seating Feud *(Movement II, or III; the Banquet Galleries)*
 
 Corval's escalating seating feud — the one a kind player character may already have
-helped him with — loses its manners at dinner. A Vaskarin cousin and a Tessarin
+helped him with — loses its manners in the banquet galleries. A Vaskarin cousin and a Tessarin
 uncle, each certain their branch outranks the other, have been moved twice apiece
-by the exhausted staff, and somewhere between the first course and the second the
-argument stops being about chairs. Raised voices. A circle forming. A cup thrown,
-then a bench going over — and two knots of kinsmen and hangers-on wading in behind
-their principals, masked, drunk, and delighted for an excuse.
+by the exhausted staff, and the argument stops being about chairs. Raised voices. A
+circle forming. A cup thrown, then a bench going over — and two knots of kinsmen and
+hangers-on wading in behind their principals, masked, drunk, and delighted for an
+excuse.
+
+By default it boils over in Movement II, the first time a character is within earshot
+of the third bench (card S1). You can hold it until Movement III if the galleries are
+empty of the party. It is over, one way or the other, before the toast.
 
 This is an honest brawl, and anyone can join it: fists, elbows, harvest fruit,
 someone's ceremonial staff — run it as ordinary 5e combat with one mercy: nobody here
@@ -478,7 +489,8 @@ has a weapon worth the name, so player characters fight with unarmed strikes and
 improvised weapons, and **all damage in the brawl is nonlethal** — anyone dropped to
 0 hit points is simply out of it, bruised, unconscious and stable, and no one makes a
 death saving throw. The one line is the ball's own: **bare steel** turns a scuffle
-into a scandal and brings guards at a run (see the sidebar below). Player characters
+into a scandal and brings guards at a run (see the sidebar "Guards are a scene, not a
+sentence", below). Player characters
 can pick a side, shield the innocent, or end it — hauling the principals apart, a
 voice that expects to be obeyed, a well-timed joke at both houses' expense. Ending it
 *well* earns Corval's open gratitude, which is worth more than either house's: he is
@@ -582,7 +594,8 @@ diagram).
 - *Opening it:* the lattice diagram from the study is the key — literally; traced on
   the seam it opens (automatic if a player copied or memorized the slate; a DC 18
   Intelligence (Arcana) check to improvise it from ward-study, e.g. Agenda 5's gallery
-  work). Brute force is worse than useless: the Root's wards answer — the seam does not
+  work). A failed attempt can be tried again after 10 more minutes at the seam. The
+  slate from the study (B8) always works. Brute force is worse than useless: the Root's wards answer — the seam does not
   so much as scratch, *knock* and similar magic simply fail against it, and the
   house's few guards arrive with real fear on their faces — nobody but the master goes
   down there.
@@ -641,9 +654,9 @@ gifts.** What an hour in the laboratory yields, in rising order:
   been deliberately, physically *burned out* of the lattice. And woven into the
   orrery's base, in the private pattern-language the rest of the room refuses to
   yield, one figure repeats over and over — two streams of light falling into a
-  single pool. A Scora, or anyone who takes an hour with it (and succeeds on a DC 15
-  Intelligence check, or needs none after the hour if they are content to take the
-  whole hour), can read the figure the only way it can be read:
+  single pool. A Scora reads the figure without a check. Anyone else can make a DC 15
+  Intelligence check after 10 minutes with it, or reads it with no check after a full
+  hour. It can be read only one way:
 
 > *Both rivers, one spring.*
 
@@ -737,6 +750,7 @@ from this house — an heir, a* dynasty *of Raunus — and a player who brings h
 nursery has handed the Circle's line in this chapter its reason to move. She pays on
 delivery, as she always does. What her people do with it is in* The Snakes This
 Movement *from then on.)*
+<!-- TODO-Q15: Callun's price for the nursery waits on owner ruling Q15 (BALL-12). -->
 
 **At midnight:** knowing the east wing's layout, its inner guards by name, and its
 service-passage doors makes a character the most useful person in the palace the
@@ -897,8 +911,9 @@ with thinning patience, when the delegation will be received.
 
 **Agenda beats:** Corval can be befriended (Agenda 1) by anyone who actually helps
 him — he is drowning in understaffed logistics and has forgotten what kindness costs
-(no check to help him; a DC 13 check in whatever skill the help needs to help him
-*well*). Anha found in the kitchens (Agenda 8). The gallery wards studied (Agenda 5).
+(no check to help him; to help him well takes a DC 13 check, usually Charisma
+(Persuasion) or Intelligence (Investigation), or whatever the help needs). Helping him
+well earns Corval's open gratitude, as ending the Seating Feud well does. Anha found in the kitchens (Agenda 8). The gallery wards studied (Agenda 5).
 The east wing's guarded doors scouted (Agenda 4).
 
 **The omen:** Master Corro — the Phern magnate, whose tribe's danger-sense is
@@ -949,8 +964,7 @@ serves, it names no one, and looks around, briefly, for somebody who is not ther
 ### Movement III — The Summons *(mid-night)*
 
 > **About 35 minutes** (starts 1:20). *Run:* the glimpse on the gallery, one summons
-> (two player characters walked in together), the gray masks, the quiet guest
-> answering the time. *If you have time:* a
+> (two player characters walked in together), and the gray masks. *If you have time:* a
 > second summons, the Tavva scout.
 
 The host does not appear. This is the Movement where the ball fully absorbs that he
@@ -974,8 +988,8 @@ Then Corval begins fetching people.
 stands empty, which is its own kind of omen. One at a time, at long intervals,
 Minister Corval quietly approaches a guest and says the sentence nobody expected:
 *"The master will see you."* Inside the vast, bare hall: one chair on the dais,
-occupied, and a long walk toward it. Raunu summons perhaps four guests all night.
-**At least one, preferably two, should be player characters** — chosen not by rank
+occupied, and a long walk toward it. Raunu summons four guests all night.
+**At least one, and by default two, should be player characters** — chosen not by rank
 but by whatever drew his attention: an agenda that brushed his interests, a kindness
 done to his majordomo, a question asked too well. Being summoned is an honor, a
 threat, and a mystery, and the rest of the ball watches who goes in.
@@ -989,18 +1003,23 @@ kitchens), and shows it without threat, almost absently. He is *sounding* people
 though for what, he does not say. Each summons ends the same way: abruptly, with
 something that is nearly a kindness, and the long walk back.
 
+An audience lasts about five questions or five minutes of table time. Then he ends it
+with the closing line.
+
 *Checks in the summons:* deceiving Raunu is DC 25 Charisma (Deception), and he knows
 it failed even when he lets it pass. Impressing him takes no check at all: tell him a
-true thing he did not already know. *Detect thoughts* and every other magic that
+true thing he did not already know. He turns friendly when the guest tells him a true
+thing he did not know, or sits through the silence without filling it. By default, he
+is friendly with the second summoned character. *Detect thoughts* and every other magic that
 would read him finds a man thinking about a staircase, and nothing else; he has
 prepared for that, too.
 
 > **Raunu's summons — the questions, and what he says**
 >
 > *He is not the warm charmer anyone expected. Long pauses, no pleasantries, the true
-> thing said where the polite thing was expected. "If friendly" here means he has
-> decided, in the first thirty seconds, that this one is worth the effort — and he
-> decides that far more readily than his reputation suggests.*
+> thing said where the polite thing was expected. "If friendly" here means the guest
+> has earned it, as Checks in the summons, above, says — and he is won far more
+> readily than his reputation suggests.*
 >
 > *(Silence. He lets it run. He is waiting to see what the guest does with it, and
 > what they do with it is the whole audience.)*
@@ -1043,8 +1062,10 @@ flatly: *"It taxes palaces to pay laborers. The palaces can afford it. That is t
 whole secret. You may tell the Circle I said so."*). Agenda 4 may ask after Veier —
 he goes still for a moment, then: *"She chooses her guests herself these days. If
 she chooses you, you will know."* Characters not summoned work the room — angling
-to *get* summoned is a fine scene in itself (a DC 13 check of whatever kind the
-angle is, and Corval notices the ones who help him before the ones who flatter him).
+to *get* summoned is a fine scene in itself (a DC 13 check, usually Charisma
+(Persuasion) or Intelligence (Investigation), or whatever the angle needs; Corval
+notices the ones who help him before the ones who flatter him). On a success, Corval
+fetches that character at the next summons.
 
 *He does not ask anyone why they hate him. He did, after all, invite them.*
 
@@ -1072,6 +1093,7 @@ few paces from where they stop. It does not look at them.)*
 >   compliments and a quiet question — *what did he say?* — with coin behind it, and
 >   a Hired Knife standing close enough to make the coin feel like the polite option.
 >   *Tell:* the one man in the line not rehearsing a question. → *the Circle's line, Chapter IX.*
+>   <!-- TODO-Q15: the amount of Callun's coin for "what did he say?" waits on owner ruling Q15 (BALL-12). -->
 > - **The Church.** Kovaun is in the B4 antechamber. When a summoned player character
 >   comes out, a Warden is waiting with the Prelate's compliments and a request to
 >   attend her in the chapel. It is a request. It is the kind a Warden stands beside
@@ -1106,6 +1128,9 @@ and the second, with no trumpet and no announcement, Raunu Boranis is simply
 *standing at the high table* — unmasked, plainly dressed for a chief, holding a cup
 as if someone had handed it to him and left. The room takes a full three seconds to
 notice. Then it takes a breath, all at once.
+
+You can hold the toast until at least one character is in the galleries. Characters
+elsewhere hear of the two plates within minutes.
 
 The toast should be delivered word-for-word, pauses included:
 
@@ -1257,7 +1282,8 @@ faintly rose and two hundred spirit-faces turning in the gloom, it is also the
 easiest hour in the world to move unseen (every Dexterity (Stealth) check in the
 public rooms is made with Advantage until the bells).
 
-**When the lamps go down for the Dead Dance, read:**
+**When the lamps go down for the Dead Dance, read this to the characters in the Crystal
+Court. For anyone elsewhere, read only the first two sentences:**
 
 > *The lamps come down until the only real light is the walls, and the walls are
 > the colour of the inside of a shell. The music slows into something with a much

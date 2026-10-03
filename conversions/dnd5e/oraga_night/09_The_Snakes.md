@@ -526,7 +526,7 @@ than two factions are hot at midnight unless the table has made it so.
 
 | ID | Fight | When | Where | Who | Budget *(four 4th-level PCs)* |
 |---|---|---|---|---|---|
-| **S1** | The Seating Feud | Mv II–IV | B3 | Feuding Kinsmen | 200 XP — under Low; the clock is the fight |
+| **S1** | The Seating Feud | Mv II (or III) | B3 | Feuding Kinsmen | 200 XP — under Low; the clock is the fight |
 | **S6** | The Quiet Word | Mv II–III | B5, the terraces | House Boranis | 600 XP — under Low; a warning with fists |
 | **S2** | The Service Corridor Job | Mv V | B10, service run | Tavva's crew | 600 XP — under Low; the clock is the fight |
 | S4 *(half)* | The East Wing Doors | Mv I–V | B9 | Boranis Honor Guard | 900 XP — under Low, and four more are coming |
@@ -563,8 +563,9 @@ names who did it, and that person is now owed something.
 ---
 ## S1. The Seating Feud
 
-***Where and when:*** B3, the banquet galleries. Any time in Movements II–IV. *(Chapter
-IV, "The Seating Feud", points here.)*
+***Where and when:*** B3, the banquet galleries. Movement II by default; the DM can
+hold it until Movement III. It is over before the toast. *(Chapter IV, "The Seating
+Feud", points here.)*
 
 ***Trigger — read when a player character is within earshot of the third bench:***
 

@@ -302,7 +302,7 @@ these rows, not an extra award.
 | An omen read before it is explained (the quiet guest's habits count) | 100 to that character |
 | A closed room entered without a fight — Corval's gratitude, Anha's passages, an audience-earned pass, a festival hire's livery | 100 to each character who went in |
 | A fight finished, or ended by an out | The card's XP for the party, split evenly, as if every foe had fallen |
-| A person carried out in Movement VII | 100 to the carrier |
+| A person carried out in Movement VII | 100 to the carrier, for each person they bring out |
 | Standing outside at dawn | 1,000 to each character |
 
 **Milestone is how this module is built.** The party starts at 2,700 XP (4th level). If
