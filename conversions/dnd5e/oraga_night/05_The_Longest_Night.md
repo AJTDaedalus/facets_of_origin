@@ -168,7 +168,7 @@ gate runs through the garden stair.
 
 **Who moves first.** Master Pellin Corro. His gift finally finds its bearing three
 seconds before the lights die, and by the time the rose has drained out of the walls
-he is already moving toward the gallery-side service door with his Bodyguards around
+he is already moving toward the gallery-side service door with his **Phern Bodyguards** (see chapter X) around
 him. A player
 character who has been watching Corro all night, or who is Phern, moves with him and
 may act in the first beat before anyone else. Following him saves lives (*Knives in the
@@ -190,8 +190,8 @@ Dark*, Phern).
 
 ### Midnight Rules
 
-*Five short rules for the attack, printed once. The stat blocks in chapter X, the fight
-cards in chapter IX and the night-tracker in chapter VIII all point here.*
+Five short rules for the attack, printed once. The stat blocks in chapter X, the fight
+cards in chapter IX and the night-tracker in chapter VIII all point here.
 
 #### Down, Not Out
 
@@ -443,7 +443,7 @@ a card says otherwise.
 
 What history records, told in scenes. Bend everything except what the players bend:
 
-- **The dais.** The nine honor guards die or fall protecting their chief —
+- **The dais.** The nine **Boranis Honor Guards** (see chapter X) die or fall protecting their chief —
   quickly, around the edges of the frame. Raunu does not run. He works: snapping
   ward after ward alight between the Wept and the fleeing crowd, spending his
   house's stored centuries like coin — the recluse nobody saw all night suddenly
@@ -514,9 +514,16 @@ Veier — wounded across the ribs by the Radiant's one clean pass in the east wi
 upright anyway, moving with Thenya bluntness toward the water — meets Master Vell
 at the garden stair as if by appointment. Any player character with her (Agenda 4
 above all) is welcome company: Vell does not explain, does not slow, and does not
-refuse help. Then the lanterns die along the terrace behind them, and the Radiant
-steps out of the smoke — and for the first and only time all night, Master
-Vell stops being unmemorable.
+refuse help. Then the Radiant catches them on the terrace, and for the first and only
+time all night, Master Vell stops being unmemorable.
+
+**When the Radiant steps out of the smoke onto the terrace, read:**
+
+> *Behind you, the lanterns along the terrace go out, one after another. A gray mask
+> comes out of the smoke. The pale man walking with Veier turns to face it, and moves
+> the way the gray masks move, arriving instead of running. The wrapped sword stays
+> on his back. The two meet with no preamble. Crystal lanterns burst in a line. The
+> terrace balustrade goes to gravel. The masked one says a single word: "...You."*
 
 This is the crescendo, and its rule is simple: the players are caught between two
 people the mortal world has no answer for, and they cannot beat either one. What
@@ -525,18 +532,14 @@ Initiative for Vell or the Radiant.** Their duel is scenery with a will of its o
 Roll Initiative only for the player characters, and anything else in the garden that
 the players choose to fight. Run it in three beats down the garden's three levels:
 
-1. **The terrace.** Vell turns to face the Radiant, and moves — *the way the
-   Uninvited move*, arriving instead of running, distance negotiating with him —
-   and any player who has watched the three all night understands, wordlessly,
-   that whatever they are, he is the same order of thing, and more of it. The
-   wrapped sword stays on his back. It stays there through everything that
-   follows, and the module trusts the table to notice. The two meet without
-   preamble. The collision
-   is not fencing — it is pressure and shear, crystal lanterns bursting in a line,
-   the terrace balustrade exploding into gravel, forces the module deliberately
-   does not name. The Radiant recognizes him. He says one word — wary for the
-   first time tonight, and underneath the wariness, something older and uglier,
-   the special hatred the devout reserve for an apostate: *"...You."*
+1. **The terrace.** The box is the first exchange. Any player who has watched the
+   three all night understands, wordlessly, that whatever they are, Vell is the
+   same order of thing, and more of it. The wrapped sword stays on his back through
+   everything that follows, and the module trusts the table to notice. Nothing in
+   the collision is fencing, and the module deliberately does not name the forces
+   in it. The Radiant recognizes him. His one word is wary, for the first time
+   tonight, and underneath the wariness is something older and uglier: the special
+   hatred the devout reserve for an apostate.
 2. **The lower garden.** The duel comes down the stairs *through* the party's
    position — this is the crossfire, and every beat a nearby player character
    faces it (see sidebar). Vell is holding the Radiant, barely; he cannot both
@@ -649,10 +652,11 @@ leash, which ends their night. That is the complete list.
 > **DM Note — the table that will not stop trying to kill them**
 >
 > **Default:** let them try, run it honestly, and pay every 30-damage round in Delay.
-> When the Wept reaches 0 Hit Points, say out loud what just happened: "She stops.
-> She looks at you — not angry; almost patient. And then you are through the wall,
-> and she is walking back toward the dais, whole. You bought Raunu a round. You
-> bought the crowd a round." Then ask the next player what they do.
+> When the Wept reaches 0 Hit Points, say plainly what just happened: she stopped,
+> looked at the character almost patiently, without anger, and the character went
+> through the wall; she is walking back toward the dais, whole. Then say what the
+> round bought: Raunu a round, the crowd a round. Then ask the next player what they
+> do.
 >
 > **The dial:** if a table has spent three beats on her and is not enjoying the
 > lesson, put a guest under a fallen beam 20 feet away, calling — or a snake
@@ -767,13 +771,13 @@ the Uninvited's blocks.)*
 
 ## The Snakes in the Dark
 
-*Not the midnight attack. The midnight attack belongs to the Uninvited alone, and it
+Not the midnight attack. The midnight attack belongs to the Uninvited alone, and it
 blindsides every faction in the palace as completely as it blindsides the ministers.
 This is what the host's enemies do in the hour after — opportunism, fear, and old
 arithmetic — while the lights are out, the alert rules are suspended, and the only
-guards left are dying on the dais.*
+guards left are dying on the dais.
 
-*None of it is ambush.* Every line below is something a player character crossing the
+None of it is ambush. Every line below is something a player character crossing the
 palace **sees happening** — to a guest, to a servant, to another snake — before they
 decide whether it is their business. Each has a card in chapter IX for the moment they
 decide it is, and a **default** for the moment they decide it is not. The defaults keep
@@ -791,7 +795,7 @@ the faction does the frightened, sensible thing and gets its principal out. **He
 | Faction | Heat 0–2 | Heat 3–4 — where, and what the party sees | If nobody stops it | Card |
 |---|---|---|---|---|
 | **The Circle** | The knives get Callun out through the service passages | B2 → B10: two plain good coats half-carrying an old man the wrong way through the smoke | A Tithe-carrier leaves the palace in Circle hands | **S12** |
-| **The Church** | The wardens come down for the Prelate and get her out | B8: wardens coming down the dark-wing stair with their arms full | The scorched invitations are gone and the slate is wiped by dawn | **S8** |
+| **The Church** | The **Church Wardens** come down for the Prelate and get her out | B8: wardens coming down the dark-wing stair with their arms full | The scorched invitations are gone and the slate is wiped by dawn | **S8** |
 | **House Draunel** | Draunel gets out, and remembers what he saw | B3: three blades pulling a man out of a burning room while he shouts for the people still inside | Essin's cousins fight for him; Vorlain is not taken | **S13** |
 | **House Boranis** | Essin and the cousins go with Vorlain into the fire | B3, only if Draunel's heat is 3–4 too: cousins, blades out, between Vorlain and Draunel's men | As Draunel | **S13** |
 | **Phern** | The bodyguards take Corro out through the gallery-side service door, and whoever follows them gets out too | B2: blades out at a door that is suddenly the only one open, and people going down in front of it | Corro gets out, and the crush at the door costs lives | **S11** |
@@ -842,20 +846,27 @@ refusing to leave the city without her cousin or a body.
 
 > **About 40 minutes** (starts 4:00). If you are behind, run only the gate (card S3).
 
-The Uninvited are gone. The palace is fire, smoke, ward-light, and screaming — and
-until the sect guard gets in through the front gate (B12, below), the player
-characters are the only order in it. This Movement is where the module keeps its tone promise:
-**people are brave.** Guests shield strangers. Corval, bleeding, counts his staff
-like a man counting his own fingers. Anha knows the other way out, and if Agenda 8
+**When the Uninvited have gone, read:**
+
+> *The three gray masks are gone. The palace is fire, smoke, flaring ward-light and
+> screaming. The banquet gallery is burning, and smoke fills the galleries under walls
+> gone dark. Guests are shielding strangers. The thin old man who greeted you by name
+> at the gate is bleeding, and he is counting his staff like a man counting his own
+> fingers.*
+
+Until the sect guard gets in through the front gate (B12, below), the player
+characters are the only order in the palace. This Movement is where the module keeps
+its tone promise: **people are brave.** The box shows it, and the table should see
+more of it. Anha knows the other way out, and if Agenda 8
 is in play, she and her sibling empty the smoke-filled galleries through the service
 passages. Give every player character a scene of what they are best at, and give
 the room to whoever earned it least an hour ago — Vorlain, say, hauling guests out
 of the burning banquet gallery, to everyone's permanent confusion including his own.
 
-*(The snakes' knives mostly go back in their sheaths in this hour. A faction whose line
+The snakes' knives mostly go back in their sheaths in this hour. A faction whose line
 is still running — the Circle's coats in the smoke, the Church on the dark-wing stair —
-finishes it now or loses it; see* "The Snakes in the Dark". *Everyone else is doing what the
-rest of the palace is doing, which is trying to get out.)*
+finishes it now or loses it (see "The Snakes in the Dark"). Everyone else is doing what
+the rest of the palace is doing, which is trying to get out.
 
 **Carrying somebody out** pays as Tables I–3 and I–4 print it: Heroic Inspiration to
 the carrier for the first person they bring out (a carrier who already has it gives it
@@ -880,7 +891,7 @@ and they are standing at the front gate right now.
 ### B12. The Gatehouse Court, Held
 
 **The contract.** Two nights ago a factor nobody can describe hired a company of
-the Bought — sixteen blades, four sergeants, a captain — and paid half in old coin,
+the Bought — sixteen **Bought Blades**, four sergeants and a captain (see chapter X) — and paid half in old coin,
 for three tasks written in a case chained to the captain's belt:
 <!-- TODO-Q10: who carries the contract case (the captain's belt, or the sergeant who reads from it at the gate) waits on owner ruling Q10 (NIGHT-15). -->
 
@@ -919,6 +930,8 @@ side of it, reading the terms aloud. Guests start arriving the moment the Hollow
 leaves the doors; the party usually gets there once the Uninvited are gone. The
 bells of Oraga begin to toll the end of the night as the first guests reach the
 court (card S3 counts them).
+
+**When the party reaches the Gatehouse Court and can see through the grille, read:**
 
 > *The outer gate is shut, and it was shut from the far side. Through the grille:
 > matched gray coats, more of them than there are of you, arranged with the
@@ -987,18 +1000,18 @@ If your campaign goes on, chapter VI is what dawn looks like.
 
 Read or paraphrase, adjusting for what the table did:
 
-> The fires are out by dawn. The story is already wrong by noon — three stories, in
+> *The fires are out by dawn. The story is already wrong by noon — three stories, in
 > fact, one for each faction that needs it, and none of them yours. No one is ever
 > charged. In the years to come, "Oraga Night" will mean this night: the chief who
 > knew everything, dead in his shining hall, mid-sentence; his bride gone into the
 > river dark; three gray masks that no one ever invited; and a something-to-say,
 > two years in the keeping, that no one will ever hear. The mists off the
-> eastern coast, the fishermen say, are rising again.
+> eastern coast, the fishermen say, are rising again.*
 >
-> You know what you saw. You are nearly the only ones who do. And on quiet nights,
+> *You know what you saw. You are nearly the only ones who do. And on quiet nights,
 > from time to time, each of you dreams of dancing — a warm hand in yours, and a
-> voice, kind and centuries out of fashion, saying: *you dance like my daughter
-> would have.*
+> voice, kind and centuries out of fashion, saying: "You dance like my daughter
+> would have."*
 
 Then go around the table once: **what does your character carry out of Oraga
 Night?** An object, a debt, a truth, a name. Write the answers down. If you ever
@@ -1047,7 +1060,7 @@ Module Never Says still holds.)*
 
 **⟨They trap one of the Uninvited.⟩** Killing one is off the table — see "You
 Cannot Beat Them" — and the module holds that line even against brilliance. But
-*trapping* one, briefly, is the outer edge of the possible: deep Boranis
+trapping one, briefly, is the outer edge of the possible: deep Boranis
 ward-crystal is the one thing tonight that their wrongness does not simply
 unravel, and a table that lures one into the Root's threshold, a resealed ward-
 corridor, or a gallery ring of Raunu's own work has caught something no one has
@@ -1125,8 +1138,8 @@ already wrong by noon. Let the table find out in the aftermath which snakes fed.
 ones that fed will be the ones who want to talk to the party first.
 
 **⟨The party turns one snake on another.⟩** *(New in this edition.)* The Draunel
-Duelists and Essin's cousins are three paces apart in B3; Draunel and Essin would each
-pay to know what is in a Warden's arms; everybody has coin for the Bought. A table that
+duelists and Essin's cousins are three paces apart in B3; Draunel and Essin would each
+pay to know what is in a warden's arms; everybody has coin for the Bought. A table that
 sets the snakes on each other instead of fighting them has played the night exactly as
 a Val'loh noble would, and should be paid as Table I–4 pays a fight ended by an out. The only rule: whatever the snakes do to each other in the dark is
 still *their* doing. The party's hands are clean, and every faction will spend the

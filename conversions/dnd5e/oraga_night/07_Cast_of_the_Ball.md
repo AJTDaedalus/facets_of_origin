@@ -31,7 +31,7 @@ for; the summonses in the empty Audience Hall (Movement III); the awkward toast
 and the two plates (Movement IV); and the Unmasking rite at midnight. That is the
 entire public Raunu. The guests came to see a recluse and are seeing one.
 
-**Play him (the summons):** awkward, unhurried, unmistakably out of practice —
+**Roleplaying Raunu (the summons):** awkward, unhurried, unmistakably out of practice —
 long pauses, no pleasantries, the true thing said where the polite thing was
 expected, and no apparent awareness that this is strange. He listens *completely*,
 which unnerves people more than the silence. He knows things about each summoned
@@ -69,12 +69,14 @@ a scene with her is a prize, not a schedule item. Players who reach her after th
 Raunu, the two plates explained at last — the only place all night anyone sees
 Raunu Boranis at ease (see chapter IV, "Dinner for Two (B9)").
 
-**Play her:** blunt to the point of comedy, funny in a dry border-country way,
+**Roleplaying Veier:** blunt to the point of comedy, funny in a dry border-country way,
 homesick and unashamed of it. She answers the delegation's careful diplomacy
-(Agenda 4) with take-it-or-leave-it directness: *"I am well. I am watched over. Tell
-my uncle his message took two years to reach me, so his worry can wait two more."* She reads
-people nearly as well as Raunu and is far less polite about showing it. Guests who
-reach her expecting a prisoner or a madwoman get a brisk education.
+(Agenda 4) with take-it-or-leave-it directness. She reads people nearly as well as
+Raunu and is far less polite about showing it. Guests who reach her expecting a
+prisoner or a madwoman get a brisk education.
+
+**Quote:** "I am well. I am watched over. Tell my uncle his message took two years to
+reach me, so his worry can wait two more."
 
 **At the Unmasking:** in the east wing when the lights die, the corridors sealing
 themselves behind her — her husband's two crystals working. Wounded once, cleanly,
@@ -100,44 +102,43 @@ imagine — *not like this*. **Fears:** Raunu. Comprehensively. Fear of his brot
 the load-bearing wall of his personality. **Secret:** he has no plot tonight. He came
 because not coming was more dangerous.
 
-**Play him:** silk over springs. Charming, funny at others' expense, collects
+**Roleplaying Vorlain:** silk over springs. Charming, funny at others' expense, collects
 weakness reflexively the way other men pocket coins. With Agenda 3's overtures he is
-delighted, encouraging, and says *nothing* — sober. Drunk (it takes real work — an hour of pouring, and a DC 15 Charisma (Persuasion)
-check to keep him at it — and Essin will try to stop it), he says one true thing: *"You think I want him dead. I
-want him to LOOK at me the way he looks at his ministers. Gods help whoever actually
-touches him — I've seen what he does to surprises."* **At the Unmasking:** he is the
+delighted, encouraging, and says nothing, sober. Getting him drunk takes an hour of
+pouring and a DC 15 Charisma (Persuasion) check to keep him at it, and Essin will try
+to stop it. Drunk, he says one true thing (see "What Vorlain Says", below). **At the Unmasking:** he is the
 night's strangest hero — hauling guests from the burning banquet gallery (B3), to
 everyone's permanent confusion including his own — and by dawn, the prime suspect.
 Both facts are true (see chapter VI).
 
-> **Vorlain by the wine — the overtures, and the non-answers**
+> **What Vorlain Says — the overtures, and the non-answers**
 >
-> *For Agenda 3's player especially. Vorlain is delighted to be approached and will
+> For Agenda 3's player especially. Vorlain is delighted to be approached and will
 > agree with everything while committing to nothing. "If friendly" here means
-> "drunk", which takes real work and Essin will try to stop it.*
+> "drunk", which takes real work and Essin will try to stop it.
 >
-> *If it came to it, would the house follow you?*
-> "It followed me for a year. It was very comfortable about it." *(A smile. Nothing
-> else. He has not said yes.)*
+> **"If it came to it, would the house follow you?"**
+> "It followed me for a year. It was very comfortable about it." (A smile. Nothing
+> else. He has not said yes.)
 >
-> *Do you want the seat?*
+> **"Do you want the seat?"**
 > "Everybody wants something they can see from where they're standing. I have
-> excellent eyesight." *(Still not a yes. He is enjoying this.)*
+> excellent eyesight." (Still not a yes. He is enjoying this.)
 >
-> *What happened during the missing year?*
-> "I ran a house. Rather well, since you ask. Then he came back." *(Beat.)* "And I
+> **"What happened during the missing year?"**
+> "I ran a house. Rather well, since you ask. Then he came back." (Beat.) "And I
 > gave it back. That's the part nobody finds interesting, and it's the only part
 > that's remarkable."
 >
-> *Two cousins died.*
-> "Yes." *(No deflection at all, which is worse. He does not look away.)*
+> **"Two cousins died."**
+> "Yes." (No deflection at all, which is worse. He does not look away.)
 >
-> *What is your brother like?*
+> **"What is your brother like?"**
 > — **drunk, and only drunk:** "You think I want him dead. I want him to LOOK at me
-> the way he looks at his ministers." *(And then, quieter, into the glass:)* "Gods
+> the way he looks at his ministers." (And then, quieter, into the glass:) "Gods
 > help whoever actually touches him — I've seen what he does to surprises."
 >
-> *Are you doing anything tonight?*
+> **"Are you doing anything tonight?"**
 > "I am drinking my brother's wine in my brother's house and being pleasant to people
 > who despise me. I have a very full evening."
 > — **drunk:** "Nothing. I'm doing nothing. Do you know how much work it is, doing
@@ -160,49 +161,49 @@ the meaning of none of it.
 Loyalty has kept him from assembling the pieces. He is the faithful servant's
 tragedy, one honest conversation away from understanding.
 
-**Play him:** thin, upright, old, magnificent under pressure, doing the work of six
+**Roleplaying Corval:** thin, upright, old, magnificent under pressure, doing the work of six
 chamberlains. Bribing Corval is impossible — there is no check for it at
 all, and you tell the players so. Helping him — genuinely, with the wine crisis or the escalating seating
 feud — earns more than gold buys: gratitude, gossip, and doors. Deceiving him about
 household matters takes a **DC 20 Charisma (Deception) check**; about anything else he
 is too tired to check.
 
-> **Corval at the gate — what the line asks him**
+> **What Corval Says — what the line asks him**
 >
-> *The questions every party asks in Movement I, and what he says. "If friendly"
-> lines are for anyone who has done him a kindness or is simply not being difficult.*
+> The questions every party asks in Movement I, and what he says. "If friendly"
+> lines are for anyone who has done him a kindness or is simply not being difficult.
 >
-> *Is the master receiving tonight?*
-> "The master will be present." *(A pause exactly one beat too long.)* "As is
+> **"Is the master receiving tonight?"**
+> "The master will be present." (A pause exactly one beat too long.) "As is
 > customary."
 > — **if friendly:** "He will be present, and I have not seen him since the second
 > bell. Both of those things are true, and I would rather you had asked me something
 > else."
 >
-> *Where is the household? There used to be sixty of you.*
-> "There are enough of us." *(Flat, and final. This is the one place he will not be
-> drawn, tonight or ever.)*
+> **"Where is the household? There used to be sixty of you."**
+> "There are enough of us." (Flat, and final. This is the one place he will not be
+> drawn, tonight or ever.)
 > — **if friendly:** "Twenty-two. And every one of them chose to stay, which is the
 > part nobody asks about."
 >
-> *Why is the honor guard facing inward?*
-> "The honor guard is placed where the house requires." *(He has noticed. He has not
-> let himself finish the thought.)*
+> **"Why is the honor guard facing inward?"**
+> "The honor guard is placed where the house requires." (He has noticed. He has not
+> let himself finish the thought.)
 > — **if friendly:** "I did not place them. I asked. I was told it was the master's
 > instruction, and I have been carrying that answer around all evening like a stone
 > in my shoe."
 >
-> *Have you a written list?*
-> "I have never needed one." *(Genuine, unforced pride — the one place where Corval
-> is entirely himself.)*
+> **"Have you a written list?"**
+> "I have never needed one." (Genuine, unforced pride — the one place where Corval
+> is entirely himself.)
 >
-> *There are three guests in gray masks. Who are they?*
-> — *This is the question that makes him slide.* "Three—" *(He stops. He starts
-> again, and something behind his eyes does not connect.)* "They are accounted for."
-> *(He believes this while he says it. He will not remember being asked. A character
-> watching closely may make a **DC 18 Wisdom (Insight)** check to see that something
-> in the answer arrived from somewhere other than his memory.)*
-> — **if friendly, and if pressed a second time:** "I—" *(A long silence.)* "Ask me
+> **"There are three guests in gray masks. Who are they?"**
+> — This is the question that makes him slide. "Three—" (He stops. He starts
+> again, and something behind his eyes does not connect.) "They are accounted for."
+> (He believes this while he says it. He will not remember being asked. A character
+> watching closely may make a DC 18 Wisdom (Insight) check to see that something
+> in the answer arrived from somewhere other than his memory.)
+> — **if friendly, and if pressed a second time:** "I—" (A long silence.) "Ask me
 > again tomorrow. Please ask me again tomorrow."
 
 **If it comes to steel:** noncombatant (see chapter X, "If It Comes to It").
@@ -217,7 +218,7 @@ sent up and meals for *three* coming back down these last months, the master's v
 in empty rooms, corridors she is forbidden to sweep — and no frame to put around any
 of it.
 
-**Play her:** quick, practical, frightened in a low-grade chronic way she has
+**Roleplaying Anha:** quick, practical, frightened in a low-grade chronic way she has
 stopped noticing. She talks to family or kindness, not to pressure. Everything she
 knows is true and none of it is the answer, which makes her the best rumor engine
 in the palace: she deals only in facts. **At the Unmasking:** she knows the service
@@ -232,13 +233,15 @@ lights die she goes for the service passages, because she knows them.
 ## The Factions
 
 ### Prelate Damaris Kovaun — the Church's Eye
+*Prelate of the Church; Agenda 2's patron.*
+
 **Wants:** to file Raunu Boranis under something. Anything. **Fears:** the mists —
 which is to say, the one memo from the east that reached her desk and was above her
 seal to read. **Secret:** the Church's interest tonight is not doctrinal; her
 superiors want to know whether the man who returned is *the man who returned*, and
 she has not been told why the question is phrased that way.
 
-**Play her:** urbane, watchful, a career diplomat in vestments; works the room like
+**Roleplaying Kovaun:** urbane, watchful, a career diplomat in vestments; works the room like
 a census-taker of souls. Runs Agenda 2 with scrupulous courtesy and pays her debts.
 Lying to Kovaun about matters of faith takes a **DC 20 Charisma (Deception) check**;
 she has heard everything.
@@ -256,15 +259,19 @@ years ago, what her order teaches about *dying well*, and she has wondered since
 a man that age wanted the answer that badly. It is she who keeps the fresh offerings
 in Elanna's chapel niche.
 
-**Play her:** calm as deep water, kind without softness. The chapel (B6) is hers all
+**Roleplaying Sella:** calm as deep water, kind without softness. The chapel (B6) is hers all
 night, and it is where shaken players wash up. If the night needs someone to say
-what it meant, that someone is Sella, and she gets one line at the epilogue: *"The
-dead were sent home tonight. All but three. Those, child, were somebody else's
-dead — sent out."*
+what it meant, that someone is Sella, and she gets one line at the epilogue: her
+quote, below.
+
+**Quote:** "The dead were sent home tonight. All but three. Those, child, were
+somebody else's dead — sent out."
 
 **If it comes to steel:** noncombatant (see chapter X, "If It Comes to It").
 
 ### Mistress Rhaza Callun — the Circle's Reckoning
+*Mistress of the Merchant's Circle; Agenda 1's patron.*
+
 **Wants:** Raunu's next decree, before it lands on her margins. **Fears:** an heir —
 a *dynasty* of Raunus — which is why Movement IV turns her polite loathing into
 something with a horizon. **Secret:** the Circle has already gamed a Vorlain
@@ -272,7 +279,7 @@ chieftaincy and priced it attractive; she is here tonight to check the arithmeti
 not to act on it. (She would be horrified to be called a conspirator. She is merely
 *prepared* — the module notes the resemblance to her host without comment.)
 
-**Play her:** iron-gray, cordial, terrifyingly numerate. Runs Agenda 1 and pays on
+**Roleplaying Callun:** iron-gray, cordial, terrifyingly numerate. Runs Agenda 1 and pays on
 delivery. Deceiving her about money takes a DC 20 Charisma (Deception) check; about anything
 human, a **DC 10 Charisma (Deception) check**.
 
@@ -281,13 +288,15 @@ block says so — with **Circle Hired Knife** for the people she pays. The Merch
 Circle is a snake; its line is in chapter IX (cards S7 and S12).
 
 ### Master Pellin Corro — the Phern Magnate
+*The Phern magnate.*
+
 **Wants:** a pleasant evening among people who finally treat Phern money as money.
 **Fears:** the thing his gift keeps ringing about, all night, pointing nowhere.
 **Secret:** none. Corro is that rarest ball guest, exactly what he appears — which
 is why his mounting, unexplained dread (the Movement II omen) is worth a dozen
 warnings from anyone else.
 
-**Play him:** small, merry, expansive — and increasingly, visibly *wrong* as the
+**Roleplaying Corro:** small, merry, expansive — and increasingly, visibly *wrong* as the
 night goes on: losing sentences, glancing at doors, standing with his back to walls.
 A player who takes him seriously and walks the room with him is doing real
 detective work, at the right altitude. **At the Unmasking:** his gift finally
@@ -300,12 +309,14 @@ himself has no secret and no scheme; his bodyguards are what a frightened rich m
 keeps close.
 
 ### Lord Essar Draunel — the Rival
+*Lord of House Draunel; Agenda 3's patron.*
+
 **Wants:** House Draunel one seat closer to the chieftaincy, tonight if possible,
 patiently if not. **Fears:** being seen wanting it. **Secret:** Agenda 3 is his, and
 he has three other irons in tonight's fire — a Draunel never brings one plan to a
 Boranis party. The source left them to the DM; this edition names them in chapter IX.
 
-**Play him:** the anti-Raunu — polished, obvious, ambitious in the standard
+**Roleplaying Draunel:** the anti-Raunu — polished, obvious, ambitious in the standard
 noble key. Useful to the table as a patron, a foil, and by dawn the loudest voice
 insisting Vorlain hang for this.
 
@@ -313,13 +324,15 @@ insisting Vorlain hang for this.
 retinue. House Draunel is a snake; its line is in chapter IX (cards S9 and S13).
 
 ### Essin Boranis — the Cousin
+*Vorlain's cousin.*
+
 **Wants:** Vorlain sober, unrecorded, and unbaited — Essin is the keeper his cousin
 does not know he needs. **Fears:** House Draunel's patience. **Secret:** he served
 the year of Vorlain's rule as fixer, and knows exactly where its two bodies are
 buried; he has spent three years being pleasant to everyone in case it stops
 mattering quietly.
 
-**Play him:** affable, forgettable on purpose, always somehow between Vorlain and
+**Roleplaying Essin:** affable, forgettable on purpose, always somehow between Vorlain and
 whoever is working him. The Agenda 3 player's true opponent, and a fine sparring
 partner: deceiving Essin takes a **DC 20 Charisma (Deception) check**, and he deceives back —
 catching him at it takes a DC 18 Wisdom (Insight) check.
@@ -329,13 +342,15 @@ catching him at it takes a DC 18 Wisdom (Insight) check.
 S6, S9 and S13).
 
 ### Maiven Nolonaire — the Cousin from the Border
+*Veier's cousin; Agenda 4's patron.*
+
 **Wants:** proof of Veier — alive, well, *unforced* — carried home in Thenya hands.
 **Fears:** that the pact was a purchase and her kinswoman the price. **Secret:** the
 delegation's diplomatic brief is thin cover; the Thenyan chief's actual instruction
 was *"if she is a prisoner, bring her out,"* and Maiven, border-raised and direct,
 intends to.
 
-**Play her:** Veier ten years younger and thirty degrees hotter-tempered. Runs
+**Roleplaying Maiven:** Veier ten years younger and thirty degrees hotter-tempered. Runs
 Agenda 4. The toast (Movement IV) lands on her like a slap — *two years, two
 plates, a promised midnight pronouncement, and still no kinswoman* — and her
 formal request for an audience, declined by a miserable Corval, is the last
@@ -374,11 +389,11 @@ and the white cloth stays on all night — including at the Crossing, where he
 fights the Radiant with it still bound. If players notice that — a man dueling
 something unbeatable while deliberately not using his weapon — let them notice.)*
 
-**Play him:** courteous, brief, and *finished* — every conversation with Vell ends
+**Roleplaying Vell:** courteous, brief, and *finished* — every conversation with Vell ends
 when he decides, somehow without rudeness. He answers questions with smaller
 questions. He is immune to every lever: bribery, flattery, threat, charm — make
 every check to move Vell a **DC 25 Charisma (Deception, Intimidation, or Persuasion)
-check**, and let even a success buy honesty rather than compliance ("You are observant. Enjoy the ball."). Players who shadow
+check**, and let even a success buy honesty rather than compliance (his quote, below). Players who shadow
 him find only preparations: a walked garden, a tested gate, a purchased boat. All
 night he does not fight, does not hurry, and is never once interesting to look
 at — and that last is not luck. *(DM truth: his unmemorability is a gentle,
@@ -388,6 +403,8 @@ gray-mask question has a cousin: nobody can quite hold Vell either. A character
 who studies him directly can make a DC 25 Wisdom (Insight) check to notice the nudge;
 on a success, they learn the most dangerous piece of information at the ball: someone
 is editing you.)*
+
+**Quote:** "You are observant. Enjoy the ball."
 
 **One line he does not cross, and one he does:** he will take the path that
 spills the least blood if one exists — and if none exists, he will be ruthless,
@@ -475,14 +492,9 @@ drawing steel at the ball (see chapter IV, "The Palace on Alert"), and the guard
 to find a player character with a blade out and nobody in front of them.
 
 **At the Unmasking** it drops the pretense, sets the cloak and the cup down on the
-nearest table, and takes its place by the Uninvited. Read this when the lights die:
+nearest table, and takes its place by the Uninvited (chapter V has the read-aloud).
 
-> *On the nearest table, a folded cloak and a full cup, set down neatly. The
-> attendant who carried them all evening is standing beside the three gray masks,
-> facing the room. It does not look at anyone. It looks at the spaces between the
-> room and the three.*
-
-**Play it:** it speaks only when spoken to. It
+**Roleplaying the Attendant:** it speaks only when spoken to. It
 has no manners and no malice. Everyone who is not interrupting the three is furniture
 to it, and a creature that stops interrupting stops being its business.
 
@@ -514,7 +526,7 @@ The midnight attack is nothing to do with her — she is as blindsided as the
 ministers — but she is a professional, and when the ceiling of the world falls in
 on her carefully planned burglary, she takes the chaos as a gift and works it.
 
-**Play her:** unhurried, courteous, forgettable on purpose — the second-best
+**Roleplaying Tavva:** unhurried, courteous, forgettable on purpose — the second-best
 unmemorable performance in the palace, and the module notes she would be
 genuinely offended to learn it. She fights only to leave, bargains fast and
 honestly when cornered, and abandons any prize that starts costing blood. Her
@@ -549,7 +561,7 @@ much mind which. **Fears:** nothing about tonight. He fears a company that break
 terms, because that is a company nobody hires again. **Secret:** he has not read the
 Second Clause. Only the captain has.
 
-**Play him:** as someone doing a job he has done a hundred times, in a city that is
+**Roleplaying the Sergeant:** as someone doing a job he has done a hundred times, in a city that is
 on fire for reasons that are not his business. He opens by naming the terms aloud
 and expects to be believed, because in his experience the contract settles more
 arguments than the sword does.
@@ -564,6 +576,8 @@ arguments than the sword does.
   takes it. **He surrenders the field the moment the contract is void.**
 - **Voiding the contract:** a DC 13 Charisma (Persuasion) check; see card S3.
 
+**If it comes to steel:** stat block **Bought Sergeant** (see chapter X); card S3.
+
 ### Captain-under-Contract — the One Who Read It All
 *Older than the sergeants and quieter than the Blades. The coat is very good. The
 scar is older than the coat. The chain on the case has been replaced more recently
@@ -576,7 +590,7 @@ to suspect around the time the second district caught. **Secret:** the Second Cl
 *If a woman in Thenya wool comes out the front, hold her, and send word to the river.*
 He does not know who she is or why, and he has been thinking about it all night.
 
-**Play him:** a businessperson who has been shot at, and it shows in both directions.
+**Roleplaying the Captain:** a businessperson who has been shot at, and it shows in both directions.
 No heroics, no waste, and no cruelty — he never commits recklessly, tonight or ever. He
 spends his first round placing Blades and watching who the party protects, and on
 his second he starts talking while the attacks continue.
@@ -597,7 +611,7 @@ his second he starts talking while the attacks continue.
 > dead end; for a table that plays on (see chapter VI) it is the best lead there is,
 > because a captain who wants to know is a captain who will help you find out.
 
-**If it comes to steel:** the Bought *are* the steel at the gate. Every round of that
+**If it comes to steel:** stat block **Bought Captain** (see chapter X); card S3. The Bought are the steel at the gate. Every round of that
 fight is on card S3, and the captain's and sergeant's negotiation surfaces above are
 the two outs the card leans on. A bought-out captain does not resume the fight tonight
 for any inducement.

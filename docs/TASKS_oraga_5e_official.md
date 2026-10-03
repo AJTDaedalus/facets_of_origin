@@ -303,7 +303,7 @@ These rules are mechanical, but a worker makes every edit with the linter's hit 
 
 ## Phase 5: Read-aloud and styling
 
-### ☐ T5.1 Box placement and the italics legend in 04 (BALL-3, -4, -5, -23)
+### ☑ T5.1 Box placement and the italics legend in 04 (BALL-3, -4, -5, -23)
 - **Do:**
   - Move the B2, B4, B6 and B9 headers above their triggers and cut the re-descriptions (BALL-3).
   - Chapel box: move the offerings sentence to DM text with its checks (BALL-4).
@@ -312,7 +312,7 @@ These rules are mechanical, but a worker makes every edit with the linter's hit 
 - **Accept:** every indented italic block in 04 is read-aloud and has a trigger line (lint structure rule). SA.
 - **Time:** 30 min.
 
-### ☐ T5.2 Italics and boxes in 05 and 07 (NIGHT-10, -11; CAST-17, -18)
+### ☑ T5.2 Italics and boxes in 05 and 07 (NIGHT-10, -11; CAST-17, -18)
 - **Do:**
   - NIGHT-10: MM Note narration → instruction.
   - NIGHT-11: italicize the epilogue box, and set the five italic DM paragraphs in roman.
@@ -321,13 +321,13 @@ These rules are mechanical, but a worker makes every edit with the linter's hit 
 - **Accept:** the lint structure rule passes for 05 and 07. SA.
 - **Time:** 25 min.
 
-### ☐ T5.3 New read-aloud: the Crossing and the opening of Movement VII (NIGHT-9)
+### ☑ T5.3 New read-aloud: the Crossing and the opening of Movement VII (NIGHT-9)
 - **Do:** use NIGHT-9's two drafted boxes. Before using the Movement VII box, verify "the minister who greeted you at the gate" against 04's receiving line. Cut the matching imagery from the DM text so it keeps only function.
 - **Permitted sources:** 05's own text at the Crossing and at Movement VII's opening, and 04's receiving line.
 - **Accept:** each box is 50–110 words, has a trigger, and contains only facts from its sources. Ledger rows are added. SA.
 - **Time:** 20 min.
 
-### ☐ T5.4 Scannability: sidebars, paragraphs, first mentions (BALL-24, SNAKES-13, -16, NIGHT-23, CAST-15, -16)
+### ☑ T5.4 Scannability: sidebars, paragraphs, first mentions (BALL-24, SNAKES-13, -16, NIGHT-23, CAST-15, -16)
 - **Do:**
   - Each *Snakes This Movement* box becomes an H4 subsection (BALL-24).
   - Start the *Walk into it / Turn it / Snake on snake* labels on new paragraphs (SNAKES-13).

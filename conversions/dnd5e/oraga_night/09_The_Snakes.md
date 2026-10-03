@@ -61,7 +61,7 @@ the honor guard is doing one thing now and nobody is enforcing anything else.
 
 ## Running the Snakes
 
-**Once per Movement**, chapter IV's box *The Snakes This Movement* shows the table one
+**Once per Movement**, chapter IV's section "The Snakes This Movement" shows the table one
 or two lines. This chapter is what stands behind each line: the faction's whole
 threat, from the polite scheme to the knife in the dark, so that when a player pulls
 a thread you know where it goes.
@@ -103,7 +103,7 @@ development.*
 - **The label is the sum; the line after it is the play.** Foes with three attacks,
   or with Sneak Attack, hit harder than their XP says, so every budget line below was
   also checked against the pregenerated characters by simulation, and says how the
-  fight actually plays. As a rough guide, a fight that plays Low drops a character in
+  fight actually plays. The card's **DM Note — how it plays** gives the numbers. As a rough guide, a fight that plays Low drops a character in
   about one run in ten to one in four, one that plays Moderate in one in four to one in
   two, and one that plays High more often than not.
 - **Clocks** have four segments. Each card says what advances its clock and what
@@ -138,7 +138,7 @@ development.*
 > The 2014 guide's group multiplier rates most of these cards one or two bands harder
 > than printed. It counts heads, and these heads break early, fight to detain and quit
 > on a clock. Keep the rosters as printed. Each budget line also says how the fight
-> played in simulation, and that is the better guide.
+> played in simulation (the card's "how it plays" DM Note), and that is the better guide.
 
 **Table IX–1: Scaling at a Glance** *(SRD 5.2.1 XP budget for the whole party)*
 
@@ -167,7 +167,7 @@ Movement IV). Her **secret**: the Circle has already gamed a Vorlain chieftaincy
 priced it attractive; she is here to check the arithmetic, not to act on it. She
 would be horrified to be called a conspirator. She is merely *prepared*.
 
-**Who they brought.** Callun (CR 1/4) and three **Circle Hired Knives** (CR 1), from
+**Who they brought.** **Rhaza Callun** and three **Circle Hired Knives** (see chapter X), from
 the season's hired swords, paid half up front and half on delivery. A prepared patron
 sends two hands for one job: one of them is the player character she hired for
 Agenda 1, if anyone took it, and the other is these.
@@ -185,6 +185,7 @@ Agenda 1, if anyone took it, and the other is these.
 
 **Walk into it.** Follow the coat. Be in the service doorway when the knife leans on
 Anha (S7). Refuse Callun's coin in Movement III and watch who she sends next.
+
 **Turn it.** Give Callun what she wants and the line goes quiet: Agenda 1 completed,
 or the Tithe told to her by anyone who learned it, sets the Circle's heat to 0. So
 does telling Callun, to her face, what her knives are doing to an under-cook; she did
@@ -193,6 +194,7 @@ nursery** does the opposite: heat to 4 at once (chapter IV, Undercurrent C). Tha
 is the only way the Circle ever learns what is in the east wing, and only a player
 character can make it. Nothing else in this chapter tells Callun, or anyone, about
 the child (see chapter II).
+
 **Snake on snake.** A knife in the service run in Movement V is working the same
 corridors as Tavva's crew; the two jobs can meet in the dark (S2), and neither wants
 the noise. At the gate, Callun has coin and reasons: she can front a better offer to
@@ -212,7 +214,7 @@ phrased that way (see chapter VII; chapter III, Agenda 2). Her **fear** is the m
 memo from the east that reached her desk and was above her seal to read. The Church
 finds Raunu illegible, and a chief it cannot predict is a chief it cannot steer (see chapter II). And the written word belongs to the Church and to nobody else.
 
-**Who they brought.** Kovaun (CR 1/2) and three **Church Wardens** (CR 1), her escort.
+**Who they brought.** **Damaris Kovaun** and three **Church Wardens** (see chapter X), her escort.
 
 **The line.**
 
@@ -236,10 +238,14 @@ of the House (Undercurrent A). A table chasing the Root has a very good reason t
 at that door.
 
 **Walk into it.** Follow the wardens up the dark-wing stair; be in B8 when they arrive,
-or arrive while they are working the lock (S8). **Turn it.** Give Kovaun an honest
+or arrive while they are working the lock (S8).
+
+**Turn it.** Give Kovaun an honest
 judgment she can file — Agenda 2 completed sets the Church's heat to 0, and she pays
 her debts. Or tell her what her wardens are doing, somewhere she would have to be
-seen ignoring it; she calls them off. **Snake on snake.** The wardens are the only
+seen ignoring it; she calls them off.
+
+**Snake on snake.** The wardens are the only
 people at the ball who can take the drawer of scorched invitations out of the
 palace, and the scorch marks are a list somebody might want read: Draunel, who wants
 Vorlain blamed, and Essin, who wants nothing read at all, would each pay to know what
@@ -262,7 +268,7 @@ in tonight's fire, which the source leaves to the DM's invention — a Draunel n
 brings one plan to a Boranis party. This edition names the three below, as inventions
 for the owner's review.
 
-**Who they brought.** Draunel (CR 3) and three **Draunel Duelists** (CR 1), young men
+**Who they brought.** **Essar Draunel** and three **Draunel Duelists** (see chapter X), young men
 of his house with good blades and a great deal to prove.
 
 **The four irons.**
@@ -292,7 +298,9 @@ of his house with good blades and a great deal to prove.
 
 **Walk into it.** Stand second to either side of the appointment; stop it; be on the
 terrace when steel comes out (S9). Be in the burning gallery when the duelists come
-for Vorlain (S13). **Turn it.** Deliver Agenda 3's "understanding" and Draunel waits,
+for Vorlain (S13).
+
+**Turn it.** Deliver Agenda 3's "understanding" and Draunel waits,
 patiently: heat to 0 until dawn. Refuse the challenge on the Boranis side in front of
 witnesses, with a reason nobody can call cowardice, and Iron 2 is spent. **Snake on
 snake.** Iron 2 exists to set Draunel's duelists on Essin's cousins, and a party can
@@ -316,8 +324,8 @@ where its two bodies are buried (see chapter VII, "Essin Boranis"). Behind them 
 source's plain fact: Vorlain's one year of rule taught several cousins how quickly the
 seat can change (see chapter II).
 
-**Who they brought.** Vorlain (CR 3), Essin (CR 2), and three **Boranis Cousin's
-Blades** (CR 1/2) — blood kin, not hires, the cousins who stood with Vorlain in the
+**Who they brought.** **Vorlain Boranis**, **Essin Boranis**, and three **Boranis Cousin's
+Blades** (see chapter X) — blood kin, not hires, the cousins who stood with Vorlain in the
 missing year and have stood near him ever since. *House Boranis hired none*, and that
 stays true.
 
@@ -339,10 +347,13 @@ draw.
 
 **Walk into it.** Accept the invitation to the terraces (S6), in Movement II or III,
 or follow a friend who did. Stand with Essin on the
-terrace (S9). Be in the burning gallery (S13). **Turn it.** Help Essin keep Vorlain
+terrace (S9). Be in the burning gallery (S13).
+
+**Turn it.** Help Essin keep Vorlain
 sober and unbaited, and he owes you, which is a debt of a very particular kind: he
 knows where the bodies are buried. A player character who tells Essin *before*
 Movement IV that the appointment is a trap lets him refuse it cleanly: heat to 0.
+
 **Snake on snake.** Essin's cousins and Draunel's duelists are the only two snakes at
 the ball built to fight each other. Everything in S9 and S13 is about which way the
 party leans. And Vorlain drunk says one true thing (see chapter VII); a party that hears
@@ -363,7 +374,7 @@ exactly what he appears, which is why his mounting dread is worth a dozen warnin
 from anyone else. At the Unmasking his gift finally finds its bearing: three seconds
 before the lights die he is already moving, and following him saves lives.
 
-**Who they brought.** Corro (CR 1/8) and two or three **Phern Bodyguards** (CR 1), his
+**Who they brought.** **Pellin Corro** and two or three **Phern Bodyguards** (see chapter X), his
 own caravan hands, gifted like nearly all Phern.
 
 **Not a scheme — a panic with knives.** The Phern line is the only one with no plan
@@ -387,9 +398,13 @@ people in the palace, and the only ones facing the right way.
 **Walk into it.** Take Corro seriously and walk the room with him (chapter IV,
 Undercurrent D): at midnight you are standing next to the one man who moves early.
 Or be in the crush at the service door when the Phern blades are keeping it for their
-master (S11). **Turn it.** A player character Corro trusts can tell him, in that
+master (S11).
+
+**Turn it.** A player character Corro trusts can tell him, in that
 first moment, to have his people hold the door *for everyone* — and they do: it
-becomes the best-run exit in the palace. **Snake on snake.** None, before midnight;
+becomes the best-run exit in the palace.
+
+**Snake on snake.** None, before midnight;
 the Phern are nobody's snake. At dawn, the Circle turns the inquest on them (see chapter VI), and a party that saw what Corro's bodyguards actually did at that door can
 make the Circle's story very hard to tell.
 
@@ -406,8 +421,8 @@ she is one bad hour from going over the east wing wall herself. At the Unmasking
 goes toward the east wing, immediately, and dies there unless somebody competent goes
 with her. The module would prefer somebody competent went with her.
 
-**Who they brought.** Maiven (CR 3) and two or three **Thenya Border Slingers** (CR
-1/2) of the delegation — the only non-Orthaen faces in fifty, and they know exactly
+**Who they brought.** **Maiven Nolonaire** and two or three **Thenya Border Slingers**
+(see chapter X) of the delegation — the only non-Orthaen faces in fifty, and they know exactly
 how that is being read (see chapter IV, area B0).
 
 **Not a snake, and never the party's enemy unless the party makes her one.** The
@@ -428,10 +443,14 @@ her is the better bet.
 
 **Walk into it.** Go with them. Agenda 4 is a way through the east wing doors; Anha's
 passages are another; either one turns a wall-climb into an escort (S10). Or stand in
-their way, and it is a fight nobody wants. **Turn it.** Proof of Veier ends the line:
+their way, and it is a fight nobody wants.
+
+**Turn it.** Proof of Veier ends the line:
 the ring delivered and an answer brought back (Agenda 4), or any player character who
 has been inside B9 telling Maiven what the empty traveling pack means. Heat to 0; she
-stays at the doors and does not climb. **Snake on snake.** None; nobody at this ball
+stays at the doors and does not climb.
+
+**Snake on snake.** None; nobody at this ball
 uses the Thenya, and anyone who tries learns what border people do about it.
 
 ---
@@ -668,9 +687,11 @@ the scene.** It is the whole scene.
 **Enemies.** **Tavva** (see chapter X) and three **Gallery Knives** — her whole crew of
 four.
 *Budget:* 450 + (3 × 50) = **600 XP**, under Low (1,000). Tavva's two Knife attacks and
-her Sneak Attack hit harder than her XP says, and it still plays Low: a player character
-drops in about one fight in twenty before she is Bloodied, and in fewer than one in
-ten if it goes to the last knife.
+her Sneak Attack hit harder than her XP says, and it still plays Low.
+
+> **DM Note — how it plays.** A player character drops in about one fight in twenty
+> before Tavva is Bloodied, and in fewer than one in ten if it goes to the last knife.
+
 *Honest note:* the party will very likely win the fight. The difficulty of this scene
 is the clock, not the roster, and the card is written that way rather than pretending
 otherwise. Do not add a second leader to "fix" it; that makes the fight much harder,
@@ -789,13 +810,15 @@ third round (the bell clock has two segments filled), or the round the sergeant 
 whichever comes first.
 *Budget:* 1,100 + (4 × 100) = **1,500 XP — Moderate** for four 4th-level characters.
 The wicket is what makes it Moderate: once the party is through and fighting in the
-street, the sergeant and four Blades play well under that (a player character drops
-in perhaps one fight in fifty), because the Blades fight to hold and the company
-quits early. With the captain drawn in and fought to the last, 1,500 + 1,100 =
+street, the sergeant and four Blades play well under that, because the Blades fight
+to hold and the company quits early (see the DM Note below). With the captain drawn in and fought to the last, 1,500 + 1,100 =
 **2,600 XP**, over High (2,000). That is deliberate: the captain arrives late and
 starts talking early, and the three endings below exist so that nobody has to fight
 him. **Do not add a second sergeant.** A second leader is a cliff, not a step, and it
 is the most reliable way to kill a table by accident.
+
+> **DM Note — how it plays.** Once the party is through the wicket, a player character
+> drops in perhaps one fight in fifty.
 
 **Terrain as rules.**
 - *The gate grille.* Anything through it has Three-Quarters Cover (+5 AC). Conversation
@@ -1061,7 +1084,7 @@ heat does not change. **Return to the Movement.**
 
 ***Where and when:*** Movement IV, the kitchens' service doorway (B10); then Movement V,
 the dark service run behind the Dance, as far as the east wing's service door. The
-Merchant's Circle. *(Chapter IV, "The Snakes This Movement — IV", points here, and so does the Movement V box.)*
+Merchant's Circle. *(Chapter IV, "The Snakes This Movement — IV", points here, and so does the Movement V section.)*
 
 ***Trigger — Movement IV, read when a player character passes the kitchens' service
 door after the toast:***
@@ -1108,9 +1131,11 @@ the Circle paid for, who has been in the service run all night (the block's
 **Nastier** line).
 *Budget:* 4 × 200 = **800 XP**, under Low (1,000) for four 4th-level characters. As a
 fight it is over in a round, because the knives break when the first of them is
-Bloodied; fought to the last knife it plays Low (about one fight in eight drops a
-character). The clock
-and the narrow run are the card.
+Bloodied; fought to the last knife it plays Low. The clock and the narrow run are
+the card.
+
+> **DM Note — how it plays.** Fought to the last knife, about one fight in eight drops
+> a character.
 
 **Terrain as rules.**
 - *The service run* is 5 feet wide: one creature abreast, and a creature can't move
@@ -1639,8 +1664,7 @@ comes down, and whoever is still inside is still inside.
 - *The Draunel side:* **Essar Draunel** and two **Draunel Duelists**, one of them with
   the block's **Nastier** line. 700 + 200 + 450 = **1,350 XP**, between Low (1,000) and
   Moderate (1,500) for four 4th-level characters. Draunel's three Rapier attacks run
-  hotter than his XP; in play this drops a character in about one fight in three,
-  which plays Moderate.
+  hotter than his XP, and it plays Moderate (see the DM Note below).
 - *The Boranis side:* **Essin Boranis** and three **Boranis Cousin's Blades**. 450 +
   (3 × 100) = **750 XP**, under Low. They are the party's natural allies here if the
   party wants them; with the cousins fighting beside it, the Draunel side is a Low
@@ -1651,6 +1675,9 @@ comes down, and whoever is still inside is still inside.
 - *At heat 4:* the gallery clock starts with one segment filled. If the party sides
   with Draunel, Essin's side breaks as soon as Vorlain is out of reach — *Always
   Between*, then gone.
+
+> **DM Note — how it plays.** Against the Draunel side, a character drops in about one
+> fight in three.
 
 **Terrain as rules.**
 - *The fire* at the far end. A creature that enters it or starts its turn there must
@@ -1763,23 +1790,35 @@ nobody gets through 229 Hit Points in the rounds an errand takes, and every one 
 those rounds it is clearing the way. Award the full 3,900 XP however it is got out of
 the way.
 
-**How it plays** *(simulated, 5,000 fights a row: four 4th-level pregens — Dassa, Pello,
-Andra, Ilesse — and a typical optimised 4th-level party of paladin, rogue, sorcerer
-and cleric; the card fires with it Idle; six rounds, about as long as an errand lasts
-at midnight; chapter V's "Down, Not Out" applied, so nobody dies)*:
+It is meant to be the hardest fight of the night, won by the table that plays the
+game: hard, close, and never a death sentence. Say so with your whole table manner,
+not in those words: the hints below are how. A table whose characters are built to
+hit hard out-slugs it (the optimised party in the DM Note below); give such a table
+the *hard-hitting* line under Scaling.
 
-| The party… | Pregens: out of the way | Pregens: whole party down at once | Optimised: out of the way | Optimised: whole party down |
-|---|---|---|---|---|
-| Only trades blows | 16% | 24% | 80% | 15% |
-| Plays the distraction game, bare rolls | 43% | 10% | 58% | 12% |
-| Plays it and leans in (see below) | 72% | 5% | 81% | 5% |
-
-With the pregens, at least one character hits 0 Hit Points in four fights out of five
-even when the table leans in. It is meant to be the hardest fight of the night, won
-by the table that plays the game: hard, close, and never a death sentence. Say so with
-your whole table manner, not in those words: the hints below are how. A table whose
-characters are built to hit hard out-slugs it (the optimised party above); give such a
-table the *hard-hitting* line under Scaling.
+> **DM Note — how it plays**
+>
+> Simulated, 5,000 fights a row: four 4th-level pregens (Dassa, Pello, Andra, Ilesse)
+> and a typical optimised 4th-level party of paladin, rogue, sorcerer and cleric; the
+> card fires with it Idle; six rounds, about as long as an errand lasts at midnight;
+> chapter V's "Down, Not Out" applied, so nobody dies.
+>
+> | The party… | Pregens: out of the way | Pregens: whole party down at once | Optimised: out of the way | Optimised: whole party down |
+> |---|---|---|---|---|
+> | Only trades blows | 16% | 24% | 80% | 15% |
+> | Plays the distraction game, bare rolls | 43% | 10% | 58% | 12% |
+> | Plays it and leans in (see below) | 72% | 5% | 81% | 5% |
+>
+> With the pregens, at least one character hits 0 Hit Points in four fights out of five
+> even when the table leans in.
+>
+> The Adjusting lines, simulated the same way (pregens unless it says otherwise).
+> *Three player characters* (Dassa, Pello and Ilesse): trading blows wins 18% and
+> flattens the party 20%; bare distraction 26%; leaning in 72%. *Five player
+> characters* (with Serane added): 10% and 10%; 45%; 72%. *Four at 3rd level:* 17% and
+> 16%; 47%; 72%. *Four at 5th level:* not simulated; Extra Attack and 3rd-level spells
+> make the blows-only route likelier to work. *A table built to hit hard:* trading
+> blows 29% and 33%; bare distraction 31%; leaning in 66%.
 
 **Distracting the Attendant — the full rule.** It takes **an action**. The player
 describes what their character does, then makes **an ability check with the skill that
@@ -1870,19 +1909,16 @@ badly, and looks at things.
 the way. *Heroic Inspiration* (Table I–3, *the Attendant distracted*): to the first
 player who tries to distract it (hint 4); a natural 20 on a distraction pays its own.
 
-**Adjusting the Encounter.** *(Each line simulated the same way; pregens unless it says otherwise.)*
+**Adjusting the Encounter.** *(How each line plays is in the DM Note — how it plays, above.)*
 - *Three player characters:* 180 Hit Points, and while Focused its second turn is a
-  single Joined Hands. (Dassa, Pello and Ilesse: trading blows wins 18% and flattens
-  the party 20%; bare distraction 26%; leaning in 72%.)
-- *Five player characters:* 260 Hit Points, and a distraction DC of 20 while it is Focused. (With
-  Serane added: 10% and 10%; 45%; 72%.)
+  single Joined Hands.
+- *Five player characters:* 260 Hit Points, and a distraction DC of 20 while it is Focused.
 - *Four at 3rd level:* 210 Hit Points, a distraction DC of 18 while it is Focused, and its second turn
-  is a single Joined Hands. (17% and 16%; 47%; 72%.)
+  is a single Joined Hands.
 - *Four at 5th level:* use the five-character line, or the block's **Nastier** line
-  for a table that wants it harder. Not simulated at 5th; Extra Attack and
-  3rd-level spells make the blows-only route likelier to work.
-- *A table built to hit hard* (the optimised party above, or anything like it): 300 Hit
-  Points. (Trading blows 29% and 33%; bare distraction 31%; leaning in 66%.)
+  for a table that wants it harder.
+- *A table built to hit hard* (the optimised party in the DM Note above, or anything
+  like it): 300 Hit Points.
 
 **Development.** Gone, the Attendant is not seen again tonight, and chapter VI has no
 body and no witness who can say what it was. A party that sent it to the window has a
