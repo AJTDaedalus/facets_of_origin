@@ -46,7 +46,7 @@ them worse.
 These stay exactly as they are, whatever a sweep or a lint rule says. The linter
 whitelist (`tools/lint_5e_allow.txt`) exempts the first item.
 
-1. **Handout 1's invitation text** (chapter VIII, "Handout 1 — The Invitation"). The page
+1. **Handout 1's invitation text** (chapter VIII, "Player Handout 1: The Invitation"). The page
    marks it canonical. Its wording, spelling and punctuation are fixed, from "To My
    Esteemed Guest" to "Raunu Boranis". The italic instruction line above it is DM text,
    and the normal rules apply to it.

@@ -1,12 +1,14 @@
-# VIII. The MM Sheet and the Handouts
+# VIII. The DM Sheet, the Palace and the Handouts
 
-*The first page is yours: the whole night on one sheet. The second is the palace. After
-those come the Snake Tracker and where everyone stands, then the handouts for the
-players. Print the first two pages and run the night from them.*
+*The first two pages are yours: the whole night on two sheets. The third is the palace.
+After those come the Snake Tracker, where everyone stands and the rumor table, then the
+handouts for the players. Print the first three pages and run the night from them.*
 
 ---
 
-## The MM Sheet — the Night on One Page *(the night-tracker)*
+## The DM Sheet — the Night on Two Pages *(the night-tracker)*
+
+### Page One: The Night and Midnight
 
 **Table VIII–1: The Night** *(four players; minutes from Table I–1)*
 
@@ -45,6 +47,12 @@ carries Agenda 4. Never the gate.
 | **Vorlain** | B3 | Hauls guests out of the burning banquet gallery. S13 if Draunel heat is 3–4 |
 | **Anha** | The service passages | The other way out, if anyone befriended her |
 | **The snakes** | Heat 0–2: get their principal out | Heat 3–4: their card is live (Snake Tracker, below) |
+
+**The pillars.** Raunu falls, by his own choice · Veier and Vell go out through the
+river gate · the Uninvited leave no trace · no one is ever charged · **the heir stays
+secret** — no faction learns of the child unless a player character tells them.
+
+### Page Two: Rules, DCs and Costs
 
 **Midnight rules, one line each** *(Chapter V has them in full)*
 
@@ -87,10 +95,6 @@ carries Agenda 4. Never the gate.
   check), buy them out, or outlast them. **The last bell rings after the gate is
   decided.**
 
-**The pillars.** Raunu falls, by his own choice · Veier and Vell go out through the
-river gate · the Uninvited leave no trace · no one is ever charged · **the heir stays
-secret** — no faction learns of the child unless a player character tells them.
-
 **Table VIII–3: Key DCs**
 
 | Check | DC |
@@ -128,14 +132,15 @@ lines are the service passages, which thread the whole palace.*
 ```
                                  THE RIVER
                                      |
-                         +-----------+-----------+
-                         |  B5  the river gate   |  locked; Agenda 6; the Crossing
-                         +-----------+-----------+  ends here (Movement VI)
-                                     |
-                         B5  the lower garden  - - - - - garden stair - - - +
-                                     |                                      :
-                         B5  the garden terraces                            :
-                             (the upper terrace: S6, S9)                    :
+                         +-----------+----------------------+
+                         |  B5  THE GARDENS                 |
+                         |    the river gate (locked;       |
+                         |      Agenda 6; the Crossing      |
+                         |      ends here, Movement VI)     |
+                         |    the lower garden              | garden stair -+
+                         |    the garden terraces           |               :
+                         |      (the upper terrace: S6, S9) |               :
+                         +-----------+----------------------+               :
                                      |                                      :
 +---------------+    +---------------+---------------+   east doors   +-----+------------+
 |  B4 Audience  |----|  B2  THE CRYSTAL COURT        |----------------| cleared corridor |
@@ -222,7 +227,41 @@ the half-bell in Movement V (S10). So the only card live in the dark by default 
 
 ---
 
-## Handout 1 — The Invitation
+## Rumors at the Ball *(DM table)*
+
+*Roll 2d6 in any social scene, or choose — the 2d6 is deliberate: the common rumor
+comes up most. Every rumor is delivered with total confidence. None is confirmed.
+Several cannot all be true, which bothers nobody telling them.*
+
+**Table VIII–7: Rumors at the Ball**
+
+| 2d6 | What they're saying behind the masks |
+|---|---|
+| 2 | He never left. The man who "returned" is the man who never went anywhere — test him on the old days and watch his eyes. |
+| 3 | He walked into the eastern mists and the mists gave him back. That's why they've fallen — they're *empty* now. He brought back what was in them. |
+| 4 | The Church took him for a year of questioning and returned him hollowed. Why else would the Prelate herself attend a house the Church despises? |
+| 5 | He went beneath the palace, where the first Boranis crystal was grown, and slept a year in the root of the house. The walls feed him now. That's why the staff was cut — fewer eyes. |
+| 6 | The Thenya bride is already dead, and tonight's "announcement" will be a changeling got on some serving girl. The Thenya delegation knows — watch how they don't drink. |
+| 7 | *(The common one.)* The marriage is coin, plain and simple: the Thenya paid their last treasure for their border, and the recluse wanted an heir nobody could refuse. Everything else is theater. |
+| 8 | Vorlain has never stopped ruling. Raunu is a mask his brother wears when the seat needs a beloved face. Two chiefs, one house — count who the ministers *actually* bow to. |
+| 9 | A Kshalo dreamed him away, and he bargained his way back with something he'll spend the rest of his life paying. The offerings in Elanna's niche? That's the interest. |
+| 10 | He crossed the mountains and saw Mazaa — walked among the godless machines — and came home to make the Orthaen ready for what's coming west. The new decrees are war logistics wearing worker's clothes. |
+| 11 | The staff weren't dismissed. They're still *in* there. Ask yourself why the east wing needs guards on the inside of the doors. |
+| 12 | He found something in his year away that told him the day he'll die. Everything since — the pact, the bride, the silence, this ball — is a man setting his affairs in order. *(Deliver this one straight. Let the table sit with it at dawn.)* |
+
+---
+
+## Player Handouts
+
+*Everything from here to the end of the chapter goes across the table, except the
+italic line at the head of each handout, which tells you when to hand it over.*
+
+### Player Handout 1: The Invitation
+
+*Put it on the table in the first five minutes (chapter I). In the fiction it is the
+card a character with **The Invited** hook carries to the gate (chapter IV, area B1). A
+character with **The Discarded Invitation** hook carries one with someone else's name on
+it.*
 
 *Reproduce on good paper if you can. The text is canonical:*
 
@@ -240,11 +279,11 @@ the half-bell in Movement V (S10). So the only card live in the dark by default 
 
 ---
 
-## Handout 2 — Agenda Cards
+### Player Handout 2: Agenda Cards
 
-*Cut apart; deal one per player in the first five minutes. Full text and the private
-"At midnight" notes are in Chapter III — these cards carry only what the character
-knows.*
+*Deal these in the first five minutes (chapter I), cut apart, one card to each player.
+The full agendas and their private "At midnight" notes are in chapter II ("The Eight
+Agendas"); these cards carry only what the character knows.*
 
 **1. THE CIRCLE'S RECKONING** — *They call it "the Tithe of Hands." Learn what the
 chief's new decree does before it is proclaimed. The Circle pays for foresight.
@@ -293,31 +332,7 @@ sister.
 
 ---
 
-## Handout 3 — The Rumor Table
-
-*Roll 2d6 in any social scene, or choose — the 2d6 is deliberate: the common rumor
-comes up most. Every rumor is delivered with total confidence. None is confirmed.
-Several cannot all be true, which bothers nobody telling them.*
-
-**Table VIII–7: Rumors at the Ball**
-
-| 2d6 | What they're saying behind the masks |
-|---|---|
-| 2 | He never left. The man who "returned" is the man who never went anywhere — test him on the old days and watch his eyes. |
-| 3 | He walked into the eastern mists and the mists gave him back. That's why they've fallen — they're *empty* now. He brought back what was in them. |
-| 4 | The Church took him for a year of questioning and returned him hollowed. Why else would the Prelate herself attend a house the Church despises? |
-| 5 | He went beneath the palace, where the first Boranis crystal was grown, and slept a year in the root of the house. The walls feed him now. That's why the staff was cut — fewer eyes. |
-| 6 | The Thenya bride is already dead, and tonight's "announcement" will be a changeling got on some serving girl. The Thenya delegation knows — watch how they don't drink. |
-| 7 | *(The common one.)* The marriage is coin, plain and simple: the Thenya paid their last treasure for their border, and the recluse wanted an heir nobody could refuse. Everything else is theater. |
-| 8 | Vorlain has never stopped ruling. Raunu is a mask his brother wears when the seat needs a beloved face. Two chiefs, one house — count who the ministers *actually* bow to. |
-| 9 | A Kshalo dreamed him away, and he bargained his way back with something he'll spend the rest of his life paying. The offerings in Elanna's niche? That's the interest. |
-| 10 | He crossed the mountains and saw Mazaa — walked among the godless machines — and came home to make the Orthaen ready for what's coming west. The new decrees are war logistics wearing worker's clothes. |
-| 11 | The staff weren't dismissed. They're still *in* there. Ask yourself why the east wing needs guards on the inside of the doors. |
-| 12 | He found something in his year away that told him the day he'll die. Everything since — the pact, the bride, the silence, this ball — is a man setting his affairs in order. *(Deliver this one straight. Let the table sit with it at dawn.)* |
-
----
-
-## Player Handout 3 — Crystal Charges
+### Player Handout 3: Crystal Charges
 
 *Give this page to every player whose character carries a crystal charge.*
 

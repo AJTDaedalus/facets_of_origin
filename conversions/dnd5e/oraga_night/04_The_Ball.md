@@ -84,8 +84,8 @@ in the act. The east wing stays doubled for the rest of the night.
 there. The corridor wards fire — every warded route is lit, loud, and watched — and
 the **service passages become the only unwarded way through the palace**. Every
 alert rule above is suspended, because there is no longer anybody enforcing it. The
-honor guard is doing one thing now. So, in the dark, are the snakes (Chapter V,
-*Knives in the Dark*).
+honor guard is doing one thing now. So, in the dark, are the snakes (see chapter V,
+"The Snakes in the Dark").
 
 **What the Bought do, at each bell:** see the MM sheet in Chapter VIII. In short —
 nothing at all until the quarter-bells, and then the gate.
@@ -317,7 +317,7 @@ exists only in Corval's memory and two ministers'.)*
 
 *The drawer and the slate matter to someone else, too: the written word belongs to the
 Church, and its Wardens want this room* filed *— see the Church's line in* The Snakes
-This Movement *(Movement V), card S8, and Chapter V's* Knives in the Dark. *A table
+This Movement *(Movement V), card S8, and chapter V, "The Snakes in the Dark". *A table
 chasing the Root has a very good reason to reach that slate first.*
 
 **When the party first comes within sight of the east wing doors, read:**
@@ -439,9 +439,9 @@ works if nobody sits idle.
 
 ## The Snakes in the Pen
 
-Six parties came armed, and five of them wish the host harm. None of them is planning
-the midnight attack — it blindsides every one of them — but each has a **line** the
-table can watch tighten through the night (Chapter IX).
+Six parties came armed, and chapter IX runs each one's line, its heat and its fight cards
+(see chapter IX, "Running the Snakes"): once per Movement, show the table one or two
+lines from that Movement's box, **The Snakes This Movement**.
 
 **Table IV–1: Who Came Armed**
 
@@ -449,35 +449,10 @@ table can watch tighten through the night (Chapter IX).
 |---|---|---|---|---|---|
 | **The Merchant's Circle** | Mistress Rhaza Callun | **Circle Hired Knives** | Raunu's next decree, before it lands on her margins | B3, recalculating | S7 · S12 |
 | **The Church** | Prelate Damaris Kovaun | **Church Wardens** | To file Raunu Boranis under something. Anything | B6, briefly — then elsewhere | S8 |
-| **House Draunel** | Lord Essar Draunel | **Draunel Duelists** | House Draunel one seat closer to the chieftaincy — without being seen wanting it | B3 | S9 · S13 |
-| **House Boranis** | Vorlain Boranis; Essin Boranis | **Boranis Cousin's Blades** (Essin's people) | Vorlain: nothing, loudly. Essin: Vorlain sober, unrecorded, unbaited | B3, drinking harder | S6 · S9 · S13 |
+| **House Draunel** | Lord Essar Draunel | **Draunel Duelists** | House Draunel one seat closer to the chieftaincy — without being seen wanting it | Draunel in B3; his duelists on the upper terrace (B5) for the appointment | S9 · S13 |
+| **House Boranis** | Vorlain Boranis; Essin Boranis | **Boranis Cousin's Blades** (Essin's people) | Vorlain: nothing, loudly. Essin: Vorlain sober, unrecorded, unbaited | Vorlain in B3, drinking harder; the cousins' blades on the upper terrace (B5) | S6 · S9 · S13 |
 | **Phern** | Master Pellin Corro | **Phern Bodyguards** | A pleasant evening — and, increasingly, the nearest wall | B2, back to a wall | S11 |
 | **The Thenya** *(not a snake)* | Maiven Nolonaire | **Thenya Border Slingers** | Proof of Veier, alive and unforced — or, if not, Veier out | B2 / the east wing doors | S10 |
-
-**How to run the snakes.** Keep the **Snake Tracker** on the MM sheet (Chapter VIII;
-the full rule is Chapter IX): each faction's heat rises when its line goes unanswered
-and falls when the party steps on it, and at midnight the heat says what its people do
-in the dark (Chapter V, *Knives in the Dark*). Once per Movement, read that Movement's
-box, **The Snakes This Movement**, and show the table *one or two* lines of it —
-whatever is nearest the players, or whatever touches an agenda somebody is carrying.
-Say it plainly, once, the way you say an omen. Then let it be walked into or walked
-past. Every line is something the party *sees happening to someone else*, with a
-pointer to its card in Chapter IX. **Nobody draws first** before midnight: a snake fight
-happens where a guard cannot see, or it is a scandal and the snake who started it has
-lost. **The Thenya are not snakes**; Maiven's people become a fight only if the party
-stands between Maiven and her kinswoman.
-
-> **MM Note — how many snakes to show**
->
-> **Default:** one line per Movement, chosen by where the players are standing.
->
-> **The dial:** a table that came for combat can be shown two or three, so that there
-> is always trouble in sight.
->
-> **The cost:** every snake line you show is a thread the table may pull, and six
-> threads plus eight agendas plus four Undercurrents is more than one evening holds.
-> Show the snake whose line crosses a player's agenda first. The rest can go on
-> happening quietly, offstage, and surface as rumor.
 
 ---
 

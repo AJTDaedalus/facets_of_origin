@@ -43,7 +43,7 @@ midnight he is unseen, and after it the Wept has him. What they do is take their
 chances when the lights die and every alert rule in the palace is suspended, because
 the honor guard is doing one thing now and nobody is enforcing anything else.
 
-**Three rules keep them honest** (the same three Chapter IV runs them by):
+**Three rules keep them honest:**
 
 1. **Nobody draws first.** Before midnight, bare steel is the Palace on Alert, and
    every snake knows it. Their threats are shoulders, spilled cups, invitations to
@@ -65,6 +65,18 @@ the honor guard is doing one thing now and nobody is enforcing anything else.
 or two lines. This chapter is what stands behind each line: the faction's whole
 threat, from the polite scheme to the knife in the dark, so that when a player pulls
 a thread you know where it goes.
+
+> **MM Note — how many snakes to show**
+>
+> **Default:** one line per Movement, chosen by where the players are standing.
+>
+> **The dial:** a table that came for combat can be shown two or three, so that there
+> is always trouble in sight.
+>
+> **The cost:** every snake line you show is a thread the table may pull, and six
+> threads plus eight agendas plus four Undercurrents is more than one evening holds.
+> Show the snake whose line crosses a player's agenda first. The rest can go on
+> happening quietly, offstage, and surface as rumor.
 
 **The Snake Tracker** (below) is a four-box heat clock per faction. It rises when a
 line goes unanswered and falls when the party steps on it, turns it, or gives the
@@ -501,7 +513,7 @@ than two factions are hot at midnight unless the table has made it so.
 |---|---|---|---|---|---|
 | **S1** | The Seating Feud | Mv II–IV | B3 | Feuding Kinsmen | 200 XP — trivial on paper; the clock is the fight |
 | **S6** | The Quiet Word | Mv II–III | B5, the terraces | House Boranis | 600 XP — under Low; a warning with fists |
-| **S2** | Knives in the Dark | Mv V | B10, service run | Tavva's crew | 600 XP — under Low; the clock is the fight |
+| **S2** | The Service Corridor Job | Mv V | B10, service run | Tavva's crew | 600 XP — under Low; the clock is the fight |
 | S4 *(half)* | The East Wing Doors | Mv II–V | B9 | Boranis Honor Guard | 1,350 XP — Moderate, and four more are coming |
 | **S7** | The Second Plate | Mv IV–V | B10 → the east wing's service door | The Circle | 800 XP — Low |
 | **S8** | The Study Door | Mv V, into VI | B8 | The Church | 800 XP — Low, and nobody dies |
@@ -613,7 +625,7 @@ not, the two houses now both owe the party a small, grudging, entirely real debt
 
 ---
 
-## S2. Knives in the Dark
+## S2. The Service Corridor Job
 
 ***Where and when:*** the service corridors behind the Dance (B10), Movement V, during
 the Dead Dance. *(Chapter IV, "The Other Thieves", points here.)*
@@ -991,7 +1003,7 @@ Movement.**
 
 ***Where and when:*** Movement IV, the kitchens' service doorway (B10); then Movement V,
 the dark service run behind the Dance, as far as the east wing's service door. The
-Merchant's Circle. *(Chapter IV, "The Snakes This Movement — IV and V", points here.)*
+Merchant's Circle. *(Chapter IV, "The Snakes This Movement — IV", points here, and so does the Movement V box.)*
 
 ***Trigger — Movement IV, read when a player character passes the kitchens' service
 door after the toast:***
@@ -1444,7 +1456,7 @@ passages beyond them. The Merchant's Circle, at heat 3–4 only.
 > like a list.*
 
 **What is happening.** The Tithe of Hands lives in three heads, and one of them belongs
-to a minister (Chapter III, Agenda 1). The knives were hired for the decree, paid on
+to a minister (see chapter II, "The Eight Agendas", Agenda 1). The knives were hired for the decree, paid on
 delivery. In the dark they have decided the simplest delivery is the man himself. They
 are walking him out through the smoke to Callun, and they mean him no harm; he is the
 fee.
@@ -1479,7 +1491,7 @@ own feet, going where he chooses.
 - *Four at 5th level:* four knives, and the smoke's Constitution save is DC 13.
 
 **Development.** However it ends, the Tithe survives if the minister does. Agenda 1's
-midnight note (Chapter III) applies. **Return to Movement VII.**
+midnight note (see chapter II, "The Eight Agendas") applies. **Return to Movement VII.**
 
 ---
 

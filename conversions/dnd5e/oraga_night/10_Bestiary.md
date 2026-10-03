@@ -147,8 +147,9 @@ the attack; these blocks are what it runs on.
 **The Fractures, one rule for all three.** Each Uninvited has **tells** — human
 moments salted through Movements III–V (the table is in Chapter V), and anything
 they do openly during the attack counts too. A creature that has witnessed, or been
-told about, at least one of that Uninvited's tells can spend its action within 30
-feet of them, where they can hear, to reach the person inside: an ability check with
+told about, at least one of that Uninvited's tells can spend an action in a fight, or
+one beat out of one, within 30 feet of them, where they can hear, to reach the person
+inside: an ability check with
 whatever skill the words fit — Persuasion, Performance, Religion, Insight, or plain
 Charisma for a bared truth. **Intimidation never works, and neither does Deception**: the
 person inside the mask has been lied to enough. Heroic Inspiration may be spent on it,
@@ -160,11 +161,12 @@ and should be.
   gains **2 Delay**.
 - **Failure by 4 or less:** it lands, at a cost — the Uninvited answers first, with
   one attack against the speaker (rolled in the open; *Down, Not Out* holds) or one
-  word the speaker will carry home.
+  word the speaker will carry for the rest of their life. The DM chooses which.
 - **Failure by 5 or more:** it doesn't land and isn't spent. The Uninvited acts
-  against the speaker, or the scene around them gets worse — the MM chooses. The
-  speaker may try again with a new tell.
-- **Each Fracture works once.**
+  against the speaker, or the scene around them gets worse — the MM chooses. It can be
+  tried again once the party has witnessed a new tell.
+- **Each Fracture works once.** The full rule is in chapter V (see chapter V, "The
+  Fractures").
 
 **And one more came with them.** The **Attendant** has been at the ball all night,
 carrying a cloak and a cup for a master nobody ever sees. At midnight it stops

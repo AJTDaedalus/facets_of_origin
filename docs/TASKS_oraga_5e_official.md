@@ -111,7 +111,7 @@ text and the proposed wording for each finding.*
 
 ## Phase 2: Architecture
 
-### ☐ T2.1 Move the agendas out of the player chapter (owner Q2, O6; FRONT-1)
+### ☑ T2.1 Move the agendas out of the player chapter (owner Q2, O6; FRONT-1)
 - **Files:** 03 (*The Agenda System*, *The Eight Agendas*: cut); 02 (paste as `## The Eight Agendas` inside the DM-only half, after *The Truth of the Night*); 01 (the routing line "Chapter III (only if players build their own characters…)"); 11 intro ("as Chapter III requires"); every pointer to "Chapter III" that means the agendas (grep `Chapter III|chapter III`); `M/flow/flow.json` (node text and refs).
 - **Do:**
   1. Move the text unchanged.
@@ -121,7 +121,7 @@ text and the proposed wording for each finding.*
 - **Accept:** 03 contains no "At midnight" line and no agenda body text. grep "The Eight Agendas" points only to 02. `python M/flow/build_flow_page.py` succeeds. SA.
 - **Time:** 30 min.
 
-### ☐ T2.2 Front matter: Background, Overview, legend, range, rests, 2014 claim (FRONT-3, -4, -5, -16, -17, -18, -19)
+### ☑ T2.2 Front matter: Background, Overview, legend, range, rests, 2014 claim (FRONT-3, -4, -5, -16, -17, -18, -19)
 - **Files:** 01, README.
 - **Do:**
   1. Add `## Adventure Background` after *What This Adventure Is*, using the FRONT-3 draft (sources: chapter II only). Shorten prep-box step 2 as FRONT-3 says.
@@ -134,7 +134,7 @@ text and the proposed wording for each finding.*
 - **Accept:** 01's first four H2s are, in order: What This Adventure Is, Adventure Background, (Overview inside or next to the Movements section), Reading This Book, What You Need. The legend matches STYLE_5e.md. Ledger rows exist for the Background and the Overview. SA.
 - **Time:** 2 × 25 min.
 
-### ☐ T2.3 Regroup the README and split out contributor text (FRONT-11, -20; O8)
+### ☑ T2.3 Regroup the README and split out contributor text (FRONT-11, -20; O8)
 - **Files:** README; 08 H1.
 - **Do:**
   1. Group the contents table under **Before the Night** (I–III), **The Night** (IV–VI) and **Appendices** (VII–XI, each with a line saying when to open it).
@@ -144,7 +144,7 @@ text and the proposed wording for each finding.*
 - **Accept:** README reads as product front matter first. SA. (If Q3 rules "renumber", T8.1 supersedes step 1.)
 - **Time:** 20 min.
 
-### ☐ T2.4 Remove duplicated rule text (FRONT-9, SNAKES-28, NIGHT-8, SNAKES-25, BESTIARY-19). Q21 approved 2026-10-03
+### ☑ T2.4 Remove duplicated rule text (FRONT-9, SNAKES-28, NIGHT-8, SNAKES-25, BESTIARY-19). Q21 approved 2026-10-03
 - **Files:** 01, 04, 05, 08, 09, 10, `flow.json`, INVENTIONS #5/#7/#11/#15.
 - **Do now (not gated):**
   - (a) Rename 05's section "Knives in the Dark" → **The Snakes in the Dark**, and rename card S2 → **S2. The Service Corridor Job**. Update every pointer: 04 ×3, 05 ×3, 08, 09 Table IX–3, INVENTIONS and flow.json.
@@ -154,7 +154,7 @@ text and the proposed wording for each finding.*
 - **Accept:** "Knives in the Dark" occurs 0 times. There is one rules list for the snakes. The Fracture text in 10 is a subset of 05's. The flow page rebuilds. SA.
 - **Time:** 30 min (now) + 20 min (after Q21).
 
-### ☐ T2.5 Handouts: the DM table, triggers and placement (CAST-8, -9, -25, -26, -27)
+### ☑ T2.5 Handouts: the DM table, triggers and placement (CAST-8, -9, -25, -26, -27)
 - **Files:** 08.
 - **Do:**
   - Old Handout 3 → "**Rumors at the Ball** *(DM table)*" (Table VIII–7 unchanged).
@@ -165,7 +165,7 @@ text and the proposed wording for each finding.*
 - **Accept:** no DM-only text (parentheticals, "Roll", instructions) inside any player handout. Each handout has a trigger line. SA.
 - **Time:** 25 min.
 
-### ☐ T2.6 Chapter 06: dedupe and add a rewards recap (FRONT-15, -23)
+### ☑ T2.6 Chapter 06: dedupe and add a rewards recap (FRONT-15, -23)
 - **Files:** 06.
 - **Do:** cut steps 2–3 to the FRONT-15 pointer, fix the trail check skill, and add `## Rewards` with the four pointer lines. The Church's favor stays a pointer until Q15 is ruled.
 - **Accept:** SA.

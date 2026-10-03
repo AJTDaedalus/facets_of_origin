@@ -129,6 +129,7 @@ the Leashed return point, the midnight clock count) are decided in §2/§3 and a
   - **Q21:** approve pass 2's pending redundancy cuts, trimming 04 *The Snakes in the Pen* and the 05 snakes section.
   - **Q22:** removing the habit leaves the Attendant with three habits, and Movement III has no sighting. Do you want to supply a replacement (new canon)? The default is no replacement.
 - **2026-10-03:** Q21 → approved (make the redundancy cuts). Q22 → no replacement habit.
+- **Q23 (found in Phase 1):** Agenda 4 and Handout 2 say the message is for Veier alone ("no husband"), but the Dinner for Two puts Raunu at the table. Can the character get a moment with her alone, and how? (Answering this is new canon.)
 - Fix plan: `docs/DESIGN_oraga_5e_official.md` + `docs/TASKS_oraga_5e_official.md`.
 
 ## 6. Already at official standard (don't break)

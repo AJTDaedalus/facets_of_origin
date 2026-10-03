@@ -7,6 +7,7 @@ palace, two hundred masks, every enemy the host has — and three guests nobody 
 **Players:** four characters of **4th level**, fresh or chosen from the five
 pregenerated guests in Chapter XI. Every fight is balanced for four; each card has
 lines for three or five characters and for 3rd or 5th level. The night ends at 5th
+level.
 **Length:** one session, **4½–5 hours**. Play starts in the street outside the palace
 and ends at dawn (the runtime table is in Chapter I)
 **Rules:** any fifth-edition core rules; written against the **SRD 5.2.1** and playable
@@ -42,20 +43,43 @@ optional, escalating threat line a party can walk into.
 
 ## Contents
 
+The book runs in three parts: what to know before the night, the night itself, and the
+appendices you open at the table.
+
+### Before the Night
+
 | File | What it is |
 |---|---|
-| `README.md` | This page — contents, what to read first, licence |
-| `01_Overture.md` | How to run it: the runtime table, the first five minutes, the DC ladder, Heroic Inspiration, the snakes, tone, canon, safety |
-| `02_The_World_and_the_Night.md` | Val'loh, Rekuzan, House Boranis, and what is really happening |
-| `03_Masks_and_Agendas.md` | Characters, the Val'loh gifts as origin feats, crystal charges, masks, and the eight agendas |
+| `01_Overture.md` | How to run it: the background, the runtime table, the first five minutes, the DC ladder, Heroic Inspiration, the snakes, tone, canon, safety |
+| `02_The_World_and_the_Night.md` | Val'loh, Rekuzan, House Boranis, what is really happening, and the eight agendas (DM only) |
+| `03_Masks_and_Agendas.md` | Characters, the Val'loh gifts as origin feats, crystal charges, and masks |
+
+### The Night
+
+| File | What it is |
+|---|---|
 | `04_The_Ball.md` | The street, the palace, the guests, and Movements I–V, every check as a DC; each snake's scheme placed as visible trouble |
 | `05_The_Longest_Night.md` | The Unmasking — the Uninvited, the Fractures, Delay, the snakes in the dark, every ending |
 | `06_Aftermath.md` | One page: what happens after dawn, how to end the session, and where a table that wants more goes next |
-| `07_Cast_of_the_Ball.md` | Every named guest — wants, fears, secrets, how to play them, and which stat block is theirs |
-| `08_Handouts.md` | **The one-page MM sheet**, the keyed palace diagram, the Snake Tracker, the invitation, agenda cards and the rumor table |
-| `09_The_Snakes.md` | The snakes chapter: each faction's threat line, the Snake Tracker, and every fight card, S1–S14 |
-| `10_Bestiary.md` | Every stat block, A to Z, in SRD format; *If It Comes to It*; *Items of the Night* |
-| `11_Pregenerated_Characters.md` | Five 4th-level guests, full sheets |
+
+### Appendices
+
+Chapters VII to XI are the book's appendices.
+
+| File | What it is | Open it when… |
+|---|---|---|
+| `07_Cast_of_the_Ball.md` | Every named guest — wants, fears, secrets, how to play them, and which stat block is theirs | the characters meet a named guest |
+| `08_Handouts.md` | **The DM sheet**, the keyed palace diagram, the Snake Tracker, the rumor table, and the player handouts: the invitation, the agenda cards and the crystal charges | you print before the session, and all through it |
+| `09_The_Snakes.md` | The snakes chapter: each faction's threat line, the Snake Tracker, and every fight card, S1–S14 | a fight card comes up, or a snake shows its tell |
+| `10_Bestiary.md` | Every stat block, A to Z, in SRD format; *If It Comes to It*; *Items of the Night* | a card names a creature, or a charge is released |
+| `11_Pregenerated_Characters.md` | Five 4th-level guests, full sheets | players pick their characters in the first five minutes |
+
+### For Contributors
+
+| File | What it is |
+|---|---|
+| `README.md` | This page — contents, what to read first, licence |
+| `STYLE_5e.md` | The house style sheet for the 5e text; the linter in `tools/` checks most of it |
 | `INVENTIONS_5e.md` | Every new fact this edition had to invent, for the setting author's review |
 | `flow/` | The visual workflow: `flow.json` (every Movement, scene, fight, branch and ending as nodes and edges), `build_flow_page.py`, its template, and the generated `oraga_night_flow.html` — rebuild with `python3 build_flow_page.py`, never edit the HTML by hand |
 
@@ -89,10 +113,14 @@ at https://creativecommons.org/licenses/by/4.0/legalcode.
 equipment are referenced by name and used as the SRD writes them, except where this
 module says otherwise. These are the module's own: the origin feats (the Val'loh
 gifts), the crystal charges, the encounter rules (clocks, *Down, Not Out*, *Buying
-Time* and Delay), and how Heroic Inspiration is awarded. Every stat block is an
+Time* and Delay), how Heroic Inspiration is awarded, and four table rules: one DC
+ladder for the whole night (chapter I), success at a cost on a near miss (chapter I),
+NPCs who do not roll outside a fight (chapter I), and nonlethal blows from any attack,
+ranged and spell attacks included (chapter IX). Every stat block is an
 original creature written in the SRD's format, and none is copied from the SRD. The
 pregenerated characters are built from SRD options; their class-feature text is
-adapted from the SRD.
+adapted from the SRD. At a 2014 table, a gifted human takes the gift as a bonus feat
+at 1st level.
 
 No other Wizards of the Coast material is used. This module is not affiliated with,
 endorsed, sponsored or approved by Wizards of the Coast.

@@ -2,15 +2,16 @@
 
 > **How to prep in 90 minutes**
 >
-> You run this night from three things: **the one-page MM sheet** (Chapter VIII),
+> You run this night from three things: **the two-page DM sheet** (Chapter VIII),
 > **the fight cards** (Chapter IX) and **the stat blocks** (Chapter X). Chapters IV
 > and V are the reference behind them. Read in this order:
 >
 > 1. **This chapter, to the end of *The Snakes in the Chicken Pen*** (15 minutes).
->    The shape of the night, the first five minutes, what pays, the four rules for
+>    The shape of the night, the first five minutes, what pays, and the rules for
 >    steel.
-> 2. **Chapter II, *What Is Coming* and *How the Night Ends (By Default)*** (5
->    minutes). The truth you are hiding, and where history goes if nobody bends it.
+> 2. **Chapter II, "What the Module Never Says" and "The Eight Agendas"** (5
+>    minutes). The truth you are hiding is in "Adventure Background", below; these
+>    are the lines you hold and the cards you deal.
 > 3. **Chapter VIII, the MM sheet and the palace diagram** (10 minutes). Print both.
 >    From here on, everything you read is behind a line on that sheet.
 > 4. **Chapter V: *How to Run the Attack*, Movement VI's opening, *Midnight Rules*
@@ -27,7 +28,7 @@
 >
 > **Skim or skip:** Chapter VII (look a guest up when the players meet them), Chapter
 > III (only if players build their own characters; hand out the agenda cards from
-> Chapter VIII either way), Chapter X beyond the Uninvited, the Attendant and the
+> Chapter VIII either way; the full agendas are in chapter II), Chapter X beyond the Uninvited, the Attendant and the
 > Bought (open a block when its card comes up), Chapter VI (read it when the session
 > ends), Chapter XI (hand it out), and *Inventions*. The rest of Chapters IV and V is
 > depth: read it when a player goes looking for it.
@@ -36,10 +37,11 @@
 
 ## What This Adventure Is
 
-Oraga Night is a masquerade for **four characters of 4th level**, freshly made or taken
-from the pregenerated guests in Chapter XI. Every fight in it is balanced for four,
-and every fight card carries lines for three or five characters and for 3rd or 5th
-level.
+Oraga Night is a masquerade designed for three to five characters of 3rd to 5th level,
+and built for **four characters of 4th level**, freshly made or taken from the
+pregenerated guests in Chapter XI. Every fight in it is balanced for four, and every
+fight card carries lines for three or five characters and for 3rd or 5th level. Use
+the one line nearest your table; the lines are not cumulative.
 Every problem in it can be solved by people with a good idea and the nerve to act on
 it, and most of them are better solved that way.
 
@@ -48,7 +50,7 @@ the party walking up the hill toward the palace (B0, Chapter IV), and ends at da
 outside the gate. Nothing is played before the street. Hooks and agendas are a
 five-minute pick at the start (*The First Five Minutes*, below), not a scene.
 
-**Characters grow.** By milestone, the Mirror Master (MM) calls **5th level** at the
+**Characters grow.** By milestone, the DM calls **5th level** at the
 epilogue, when the party is standing outside with whatever and whoever they carried
 out. What they also leave with is obligations, three or four people who now know their
 names, and the only first-hand account of something the city will spend a generation
@@ -60,19 +62,86 @@ that is built to be the hardest fight of the night. A 4th-level party, with its
 subclass and its first ability increase in hand, can stand in those fights, and it can
 still lose them.
 
+## Adventure Background
+
+Raunu Boranis, chief of the Orthaen, vanished in 3160 and walked back into his hall a
+year later without a word about where he had been. He married Veier Nolonaire, cousin
+of the Thenyan chief, to seal a pact, then shut his palace for two years. Veier is now
+close to giving birth. Raunu has thrown an Oraga masquerade to announce the child at
+the midnight Unmasking, and he has invited every enemy he has.
+
+He never gets to say it. Three servants of a power sealed beyond the eastern mists,
+the Uninvited, come masked as spirits to kill Raunu and Veier and carry off the child.
+A second hidden power has sent Master Vell to make sure the child is not taken. By
+default Raunu dies on his ballroom floor after spending the one charge left in his
+last and best preparation on his wife's escape. Veier leaves through the river gate on
+Vell's arm, and no one is ever charged (see chapter II, "The Truth of the Night").
+
 ## What You Need
 
 Any fifth-edition core rules. The module is written against the **System Reference
-Document 5.2.1** (the 2024 rules) and runs unchanged at a 2014 table; where the two
-differ, the text says so.
+Document 5.2.1** (the 2024 rules) and runs at a 2014 table with the notes marked
+*At a 2014 table*; only the pregenerated characters need rebuilding.
 
 You do **not** need the Facets of Origin books or the Val'loh Facet. Chapter III
 carries everything a player needs about the tribes: their gifts as origin feats and
 the crystal charges they carry. Chapter VII holds every named guest, Chapter IX every
 fight, and Chapter X every stat block and every crystal charge (*Items of the Night*).
 
-Print from Chapter VIII before you sit down: the **one-page MM sheet** and the **palace
+Print from Chapter VIII before you sit down: the **two-page DM sheet** and the **palace
 diagram** for yourself, and the agenda cards and the invitation for the players.
+
+## Reading This Book
+
+**Read-aloud text** is an indented block in italics, always introduced by a plain line
+such as "Read this when the first guests reach the court:". Read it or paraphrase it.
+It describes only what the characters can perceive, it never says what anyone feels or
+does inside, and it never names a thing the players have not identified for
+themselves. Italic paragraphs that are not indented are notes to you.
+
+**Keyed rooms** are **B1. The Room Name.** — a code, a name, then what is there. The
+codes run from B0 to B13 and are the same in the text, the DM sheet, the palace
+diagram, the fight cards and every cross-reference.
+
+**Fight cards** live in Chapter IX, S1–S14, one card each. A room that has a fight
+points at its card by ID, and the card points back. Every card carries its encounter
+budget for four 4th-level characters, terrain, objective, clock, outs, morale, and
+scaling lines for three or five characters and for 3rd or 5th level.
+
+**Stat blocks** live in Chapter X, alphabetically, in SRD format. A creature name in
+**bold** has a stat block there. Nothing else in the module carries an enemy's numbers.
+
+**Clocks** are named, and most have four segments. Each card says how many, what
+advances its clock, and what happens when it fills.
+
+**Italics** mark spells and magic items, in Title Case: *Detect Thoughts*, *Steady
+Light*. Rules terms take the SRD 5.2.1 capitals (Advantage, Hit Points, Short Rest, the
+Prone condition), and a check is written in full: "a DC 15 Wisdom (Insight) check".
+
+**Cross-references** name the chapter, and the section in quotation marks where it
+helps: (see chapter V, "Down, Not Out"), (card S2), (area B9), (Table I–3).
+
+**Boxes** come in these kinds, and only these:
+
+- **Sidebar —** a piece of the world that would otherwise derail the paragraph it sits
+  in. A sidebar never holds read-aloud text.
+- **DM Note —** table craft.
+- **Troubleshooting —** a problem that comes up at the table, and what to do about it.
+- **⟨If History Breaks⟩** the places where the players can genuinely overturn the
+  recorded outcome.
+- **What [Name] Says** the questions a guest is likely to be asked, with the answers.
+- **Wants, Tells, Breaks** and **Nastier** the lines on a fight card that say what a
+  foe is after, how to read it, when it quits, and how to make it harder.
+- **The run box** at the head of each Movement says how long it takes and what to run
+  or skip.
+
+**If you have time** marks depth a four-hour table can leave out.
+
+**Every enemy** carries what it wants and what it does when its morale breaks, not just
+its numbers. No fight in this module is to the death by default.
+
+**Where the module says *the module does not say*,** that is load-bearing. See *What
+the MM Knows*, below.
 
 ## The Night in Seven Movements
 
@@ -86,6 +155,23 @@ terror, and choices about who to save.
 
 The minutes below are for four players. They are a budget, not a stopwatch. Move on
 when the table's energy says so. The budget tells you when you have spent too long.
+
+**Overview.** What happens in each Movement, flatly:
+
+- **I. The Receiving Line.** Corval receives every guest by name. Nobody is disarmed,
+  the hosts don't appear, and the honor guard faces inward.
+- **II. The Empty Rooms.** Vorlain holds court. The factions circulate, and the host
+  still has not come down.
+- **III. The Summons.** Raunu is glimpsed on the high gallery, and Corval brings guests
+  to him in the Audience Hall (B4), at least one of the characters among them.
+- **IV. The Toast.** Raunu toasts at the high table, promises something to say at the
+  Unmasking, gathers two plates, and leaves.
+- **V. The Hour of Spirits.** The Dead Dance and the quarter-bells. Vell goes down to
+  the river gate, and the guard on the east wing is doubled.
+- **VI. The Unmasking.** The lights die mid-sentence. The Uninvited kill Raunu, and
+  Veier escapes through the gardens on Vell's arm (the Crossing).
+- **VII. The Longest Night.** Fire and rescue. The Bought hold the outer gate (S3)
+  until it is decided, and then the last bell rings.
 
 **Table I–1: The Runtime**
 
@@ -182,7 +268,8 @@ the SRD says: a character either has it or does not, and spends it to reroll one
 immediately after rolling it, keeping the new roll. A character who already has it
 when they earn it again **may give it to another player character who lacks it**.
 Human characters (and every character here is human) begin with it and regain it on a
-long rest — which tonight they will not get. *At a 2014 table, this is plain
+long rest — which tonight they will not get. The chapel (B6) is the one place to take
+a Short Rest, and the only one the ball offers. *At a 2014 table, this is plain
 Inspiration, and it grants advantage instead of a reroll.*
 
 ## What the Night Pays
@@ -238,13 +325,9 @@ a **tell** a watchful table can catch, escalates if nobody steps on it, and come
 in the dark after the lights die. Chapter IX holds each line, its fight cards and the
 **Snake Tracker**; the MM sheet in Chapter VIII has the boxes you tick.
 
-Four rules hold for everything with a weapon tonight:
+Chapter IX runs them by three rules (see chapter IX, "The Snakes in the Pen"), and one
+more thing holds tonight:
 
-- **Every snake fight is visible and optional.** The players see the trouble and
-  choose to walk into it. Nobody is ambushed and nobody is forced to draw.
-- **The Uninvited are the storm; the snakes are what a sword can answer.** The three
-  gray masks cannot be beaten tonight, only delayed (*Buying Time*, Chapter V). The
-  snakes can be beaten, bargained with, outlasted, or turned on each other.
 - **Something came with the Uninvited, and it can be beaten.** All evening a quiet
   guest has been at the ball dressed as a great house's attendant, carrying a cloak and
   a cup for a master nobody can find. It is **the Attendant**: a made thing, not a born
@@ -257,8 +340,6 @@ Four rules hold for everything with a weapon tonight:
   one that works on the Uninvited: a clever distraction breaks its focus for a moment,
   and the fourth one sends it off to watch the fires. It can also be driven off by force (card
   S14, Chapter IX; stat block, Chapter X; who it is, Chapter VII).
-- **Nobody in the snakes' lines is the Uninvited's ally.** Every faction at the ball is
-  as blindsided at midnight as the ministers are.
 
 The Thenya are the exception to the name. Maiven Nolonaire is not a snake; she is a
 wary ally who can become a fight if somebody provokes her.
@@ -279,7 +360,7 @@ presses Vorlain, or asks around about the missing year, gets invited by one of E
 cousins to take the air on the terraces in Movement II or III. It is a warning with
 fists, and it is a fight.
 
-**Knives in the dark (S2)** needs the party in the service corridors, which any of
+**The service corridor job (S2)** needs the party in the service corridors, which any of
 three agendas will do on its own. If none of them has, Corval mentions that a door in
 the east service run has been sticking, and would somebody who is not busy take a look,
 because he certainly is.
@@ -316,40 +397,6 @@ The Bought hold it. The fight is optional; the gate is not.
 > ball, and that is the trick.
 >
 > — *the designers*
-
-## How This Module Is Written
-
-**Keyed rooms** are `**B1. The Room Name.**` — a code, a name, then what is there. The
-codes are the same in the text, the MM sheet, the palace diagram, the fight cards and
-every cross-reference.
-
-**Fight cards** live in Chapter IX: the original five (`S1`–`S5`) and the rest, one
-card each. A room that has a fight points at its card by ID, and the card points back.
-Every card carries its encounter budget for four 4th-level characters, terrain,
-objective, clock, outs, morale, and scaling lines for three or five characters and for
-3rd or 5th level.
-
-**Stat blocks** live in Chapter X, alphabetically, in SRD format. Nothing else in the
-module carries an enemy's numbers.
-
-**Clocks** are four-segment and named. Each says what advances it and what happens
-when it fills.
-
-***Italic blocks*** are read-aloud. Every one has a trigger line above it saying when
-to read it. They describe only what the characters can perceive, they never say what
-anyone feels or does inside, and they never name a thing the players have not
-identified for themselves.
-
-**Boxed sidebars** come in three kinds: **Sidebar —** for a piece of the world that
-would otherwise derail the paragraph it sits in; **⟨If History Breaks⟩** for the
-places where the players can genuinely overturn the recorded outcome; and **MM Note**
-for table craft. **If you have time** marks depth a four-hour table can leave out.
-
-**Every enemy** carries what it wants and what it does when its morale breaks, not just
-its numbers. No fight in this module is to the death by default.
-
-**Where the module says *the module does not say*,** that is load-bearing. See *What
-the MM Knows*, below.
 
 ## Tone: Glamour Over a Blade
 

@@ -213,7 +213,7 @@
    "phase": "m2",
    "kind": "agenda",
    "summary": "Learn the Tithe of Hands before it is proclaimed. It lives in Corval's head; kindness opens him.",
-   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "ref": "02_The_World_and_the_Night.md#the-eight-agendas",
    "optional": true,
    "faction": "circle"
   },
@@ -223,7 +223,7 @@
    "phase": "m2",
    "kind": "agenda",
    "summary": "Is the man who came back the man who left? Four windows to study Raunu.",
-   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "ref": "02_The_World_and_the_Night.md#the-eight-agendas",
    "optional": true,
    "faction": "church"
   },
@@ -233,7 +233,7 @@
    "phase": "m2",
    "kind": "agenda",
    "summary": "Get Vorlain to say anything Draunel could call an understanding. Essin stands in the way.",
-   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "ref": "02_The_World_and_the_Night.md#the-eight-agendas",
    "optional": true,
    "faction": "draunel"
   },
@@ -243,7 +243,7 @@
    "phase": "m2",
    "kind": "agenda",
    "summary": "A memorized message and a ring, into Veier's own hands. The east wing is the only way.",
-   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "ref": "02_The_World_and_the_Night.md#the-eight-agendas",
    "optional": true,
    "faction": "thenya"
   },
@@ -253,7 +253,7 @@
    "phase": "m2",
    "kind": "agenda",
    "summary": "Take grandmother's soul-crystal home from the trophy gallery. Another crew is working the same room.",
-   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "ref": "02_The_World_and_the_Night.md#the-eight-agendas",
    "optional": true,
    "faction": null
   },
@@ -263,7 +263,7 @@
    "phase": "m2",
    "kind": "agenda",
    "summary": "Triple rates in old coin to unlock the river gate at midnight. The payer was Vell.",
-   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "ref": "02_The_World_and_the_Night.md#the-eight-agendas",
    "optional": true,
    "faction": null
   },
@@ -273,7 +273,7 @@
    "phase": "m2",
    "kind": "agenda",
    "summary": "Witness truly and carry the testimony out alive, in a land with no books.",
-   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "ref": "02_The_World_and_the_Night.md#the-eight-agendas",
    "optional": true,
    "faction": null
   },
@@ -283,7 +283,7 @@
    "phase": "m2",
    "kind": "agenda",
    "summary": "Find Anha in the kitchens; decide what to do with what she half-knows.",
-   "ref": "03_Masks_and_Agendas.md#the-eight-agendas",
+   "ref": "02_The_World_and_the_Night.md#the-eight-agendas",
    "optional": true,
    "faction": null
   },
@@ -529,7 +529,7 @@
   },
   {
    "id": "S2",
-   "label": "S2. Knives in the Dark (the staging)",
+   "label": "S2. The Service Corridor Job (the staging)",
    "phase": "m5",
    "kind": "fight",
    "summary": "Tavva's crew with rope and sacking in the dark service run. A shared noise clock: if it fills, both sides lose.",
@@ -683,7 +683,7 @@
    "phase": "m6",
    "kind": "snake",
    "summary": "Heat 3–4: Hired Knives walk one of the two Tithe ministers out through the smoke to Callun. Corval is on the stairs, untouched. Heat 0–2: they just get Callun out.",
-   "ref": "05_The_Longest_Night.md#knives-in-the-dark",
+   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark",
    "optional": true,
    "faction": "circle"
   },
@@ -693,7 +693,7 @@
    "phase": "m6",
    "kind": "snake",
    "summary": "Heat 3–4: Wardens come down the dark-wing stair with the drawer of scorched invitations, the slate wiped behind them. Heat 0–2: they get the Prelate out.",
-   "ref": "05_The_Longest_Night.md#knives-in-the-dark",
+   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark",
    "optional": true,
    "faction": "church"
   },
@@ -703,7 +703,7 @@
    "phase": "m6",
    "kind": "snake",
    "summary": "Heat 3–4: Draunel and his duelists take Vorlain by the arms in the burning gallery (B3), to hand him to the sect guard. Default: Essin's cousins fight for him and he is not taken.",
-   "ref": "05_The_Longest_Night.md#knives-in-the-dark",
+   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark",
    "optional": true,
    "faction": "draunel"
   },
@@ -713,7 +713,7 @@
    "phase": "m6",
    "kind": "snake",
    "summary": "Essin and the cousins go into the burning gallery with Vorlain. If Draunel's heat is 3–4, they stand between him and Draunel's men.",
-   "ref": "05_The_Longest_Night.md#knives-in-the-dark",
+   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark",
    "optional": true,
    "faction": "boranis"
   },
@@ -723,7 +723,7 @@
    "phase": "m6",
    "kind": "snake",
    "summary": "Heat 3–4: Bodyguards hold a gallery-side service door off B2 for Corro alone, and the crowd crushes. Turn it: no check if Corro trusts you, else DC 15 Persuasion.",
-   "ref": "05_The_Longest_Night.md#knives-in-the-dark",
+   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark",
    "optional": true,
    "faction": "phern"
   },
@@ -733,7 +733,7 @@
    "phase": "m6",
    "kind": "snake",
    "summary": "Maiven goes toward the east wing. She dies there unless somebody competent goes with her.",
-   "ref": "05_The_Longest_Night.md#knives-in-the-dark",
+   "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark",
    "optional": true,
    "faction": "thenya"
   },

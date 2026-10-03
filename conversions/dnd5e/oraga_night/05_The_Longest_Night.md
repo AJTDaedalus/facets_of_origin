@@ -1,6 +1,6 @@
 # V. The Longest Night
 
-*Movements VI and VII: the Unmasking, the attack, the knives in the dark, and every
+*Movements VI and VII: the Unmasking, the attack, the snakes in the dark, and every
 way it ends.*
 
 ## How to Run the Attack
@@ -64,7 +64,7 @@ And a fourth, for this edition:
    still in the palace, and every alert rule is suspended. None of them is part of the
    attack. All of them are afraid, and several of them are ambitious, and when the
    lights go out in an enemy's house, frightened ambitious people with hired steel do
-   what they do. *Knives in the Dark*, below, says what each of them does. The party
+   what they do. "The Snakes in the Dark", below, says what each of them does. The party
    will walk past some of it. Walking past is always an option; say so.
 
 ## Movement VI — The Unmasking
@@ -441,7 +441,7 @@ What history records, told in scenes. Bend everything except what the players be
   comment, which kind of night the table chose to have. ***Card S5, Chapter IX.***
   *(The snakes are in the dark too, and some of what they do looks like looting from
   across a smoky room. It is not the same fight, and it is not the same kind of
-  people. See* Knives in the Dark.*)*
+  people. See* "The Snakes in the Dark".*)*
 
 ### The Crossing — Vell and the Radiant
 
@@ -696,7 +696,7 @@ the Uninvited's blocks.)*
 
 ---
 
-## Knives in the Dark
+## The Snakes in the Dark
 
 *Not the midnight attack. The midnight attack belongs to the Uninvited alone, and it
 blindsides every faction in the palace as completely as it blindsides the ministers.
@@ -728,112 +728,13 @@ the faction does the frightened, sensible thing and gets its principal out. **He
 | **Phern** | The bodyguards take Corro out through the gallery-side service door, and whoever follows them gets out too | B2: blades out at a door that is suddenly the only one open, and people going down in front of it | Corro gets out, and the crush at the door costs lives | **S11** |
 | **The Thenya** | *(not a snake)* Maiven goes toward the east wing | B9: the corridor the Radiant is already in | She dies there, unless somebody competent went with her | — |
 
-### The Circle — the delivery
+**The cards.** Every line with a card runs from that card in chapter IX, from its
+read-aloud to its outs:
 
-Rhaza Callun is not a conspirator, and she would be horrified to be called one. She is
-*prepared*. When the lights die she has understood two things before most of the room
-has understood one: whatever Raunu was about to say will not now be said, and the only
-place the Tithe of Hands still exists is inside three men's heads in a burning palace —
-Corval's, and two ministers'.
-
-At low heat, her knives do what a prepared woman pays them for and get her out. At
-high heat — a secret sold to her, a line nobody stepped on all night — they are paid
-on delivery, and they deliver. In the smoke a player character
-sees two plain good coats with an old man between them, moving him toward the service
-doors with their hands under his arms. He is not hurt. He is trying to go *back*, and
-they are not letting go. To a guest running past, it looks like two men carrying an
-injured minister to safety. To anyone who knows what the Tithe is (Agenda 1,
-Undercurrent B, a kindness done to Corval) it looks like exactly what it is.
-
-**If nobody stops them:** one of the men who carries the Tithe leaves the palace in
-Circle hands, and the decree the Circle came to learn belongs to the Circle by dawn.
-Corval himself is not the one they take — he is on the stairs his master sent him to,
-and by the end of the hour he is bleeding, upright, and counting his staff, as Movement
-VII says. **If the party steps in:** ***Card S12, Chapter IX.*** The knives break long
-before they die for a minister: they were paid to fetch a memory, not to fight for one,
-and Callun calls them off the moment their work would be seen as hers. **What it
-changes:** keep the rememberers out of Circle hands and the Tithe survives the night
-(Agenda 1, *At midnight*); the Circle, to its own surprise, may end up owing the party
-for saving the policy it hired them to undermine.
-
-### The Church — the filing
-
-Prelate Kovaun came to file Raunu Boranis under something. The written word belongs to
-the Church and to nobody else, and there is a room on the second floor of this palace
-with two things in it that a Warden can carry out and call the law: a **drawer of
-duplicate invitation cards**, one for every guest, a certain few with a corner
-deliberately scorched; and a **work-slate** bearing a half-erased lattice diagram —
-scratch-work, which the law expects wiped.
-
-At low heat, the Wardens come down for the Prelate and get her out. At high heat they
-are already inside the study when the lights die (they were at its lock in Movement
-V), and they finish the job. A player character on the dark-wing stair meets two grey
-robes coming down it with their arms full, and a slate behind them wiped clean.
-
-**If nobody stops them:** the scorched invitations leave the palace under a vestment,
-and the slate is blank. If nobody copied the lattice diagram before midnight, **the key
-to the Root of the House is gone** (Undercurrent A still has its other road — a DC 18
-improvisation from ward-study). When a player later tells the inquest about a drawer of
-marked invitations in the master's study, the study has an empty drawer in it. **If the
-party steps in:** ***Card S8, Chapter IX*** (its after-midnight half). Wardens detain;
-they do not kill, and they will not stay to be recognised. **What it changes:** the
-scorched invitations are a list somebody might want read — Draunel, who wants Vorlain
-blamed, and Essin, who wants nothing read at all, would each pay to know what is in a
-Warden's arms. And a party that keeps them holds something the Church very much wanted
-filed, which is its own kind of danger by morning (⟨They expose the truth⟩).
-
-### House Draunel and House Boranis — the fourth iron
-
-Lord Draunel wants House Draunel one seat closer, and by dawn he will be the loudest
-voice in Rekuzan insisting Vorlain hang for this. He brought four irons to the fire
-tonight (Chapter IX), and the fourth is the one that turns suspicion into a rope: if the
-night breaks, take Vorlain in the chaos and hand him to the first sect guard through the
-gate as the culprit.
-
-And the night breaks. Vorlain, who has no plot tonight, is in the burning banquet
-gallery (B3) hauling guests out — the night's strangest hero, to everyone's permanent
-confusion including his own — and Essin and the cousins have gone in with him. At low
-heat, Draunel simply gets out, and remembers everything he saw for the inquest. At high
-heat his Duelists come into the smoke against the crowd, find Vorlain with a stranger
-over his shoulder, and take him by the arms while he shouts for the people still inside.
-Essin's cousins are three paces away, blades out.
-
-**If nobody stops them:** the cousins fight for him, and they are enough — Vorlain is
-not taken, and history keeps him: a hero at midnight and the prime suspect by dawn.
-What the gallery costs is the guests Vorlain was carrying, and a Boranis–Draunel
-grudge with blood on it. **If the party steps in:** ***Card S13, Chapter IX.*** A party
-that stands with the cousins — or simply shouts, in the smoke, that Draunel's men are
-dragging a man out of a rescue — turns the fourth iron into the worst look of
-Draunel's life. **What it changes:** a party that stood with Vorlain in the fire has
-seen the thing the inquest will refuse to believe, and he knows it. That is how his
-offer in the aftermath starts.
-
-### Phern — the door
-
-Master Corro's gift finds its bearing three seconds before the lights die, and he is
-already moving. There is no scheme here: this line is a panic with knives, and its
-heat is only how frightened his people have become (the omens raise it on their own;
-a player character who walked the room with Corro lowers it). At low heat his
-Bodyguards take him out through the gallery-side service door off the Crystal Court,
-and whoever follows gets out too. At high heat they open that door and hold it *for
-their master alone*, and then the crowd hits them from behind in the dark — frightened men
-with a frightened master, doing the one thing they are sure of, at the one door that
-is suddenly open.
-
-**If nobody steps in:** Corro gets out, and so do the people nearest him — following
-him saves lives, and that promise stands — but the crush at that door, in the dark,
-with steel out, costs lives too. **If the party steps in:** it need not be a fight at
-all. A player character Corro trusts (or any Phern) who gets to him in that first
-moment and tells him to have his people hold the door *for everyone* makes it the
-best-run exit in the palace — no check for a Phern or anyone who walked the room with
-him during the ball; anyone else needs a DC 15 Charisma (Persuasion) check, shouted over
-the crowd (card S11's first out). A party that tries to force the
-door instead meets ***card S11, Chapter IX*** — frightened men are the most dangerous
-kind. **What it changes:** every guest brought through that door counts (*Carrying
-somebody out*, Chapter I). And by morning the Circle wants a foreign trade rival
-implicated: the Phern guests spend an ugly morning under suspicion, and a party that
-saw what Corro's bodyguards actually did at that door can make the Circle's story very
-hard to tell.
+- **The Circle, the delivery:** card S12.
+- **The Church, the filing:** card S8, its after-midnight half.
+- **House Draunel and House Boranis, the fourth iron:** card S13.
+- **Phern, the door:** card S11. Its first out turns the door without a fight.
 
 ### The Thenya — toward the fire
 
@@ -882,7 +783,7 @@ of the burning banquet gallery, to everyone's permanent confusion including his 
 
 *(The snakes' knives mostly go back in their sheaths in this hour. A faction whose line
 is still running — the Circle's coats in the smoke, the Church on the dark-wing stair —
-finishes it now or loses it; see* Knives in the Dark. *Everyone else is doing what the
+finishes it now or loses it; see* "The Snakes in the Dark". *Everyone else is doing what the
 rest of the palace is doing, which is trying to get out.)*
 
 **Carrying somebody out** pays as Chapter I prints it: Heroic Inspiration to the

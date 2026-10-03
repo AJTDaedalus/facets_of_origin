@@ -9,7 +9,7 @@
    },
    "conversion_talk": {
     "The source": 1,
-    "the original": 5,
+    "the original": 4,
     "the source": 1,
     "this edition": 2
    },
@@ -22,8 +22,7 @@
     "long rest": 1
    },
    "role_name": {
-    "MM": 14,
-    "Mirror Master": 1
+    "MM": 11
    },
    "roll_check": {
     "misses its DC": 1
@@ -33,8 +32,11 @@
    }
   },
   "02_The_World_and_the_Night.md": {
+   "gp": {
+    "gp": 2
+   },
    "role_name": {
-    "MM": 2
+    "MM": 4
    }
   },
   "03_Masks_and_Agendas.md": {
@@ -44,7 +46,7 @@
     "DC 20": 1
    },
    "gp": {
-    "gp": 3
+    "gp": 1
    },
    "lowercase_terms": {
     "advantage": 1,
@@ -53,7 +55,7 @@
     "long rest": 1
    },
    "role_name": {
-    "MM": 7
+    "MM": 4
    }
   },
   "04_The_Ball.md": {
@@ -116,7 +118,7 @@
     "the module intends": 1
    },
    "role_name": {
-    "MM": 6
+    "MM": 4
    },
    "roll_check": {
     "misses its DC": 1
@@ -128,27 +130,26 @@
     "DC 13": 4,
     "DC 13 Intelligence (Arcana)": 1,
     "DC 15": 2,
-    "DC 18": 2,
+    "DC 18": 1,
     "DC 19": 1
    },
    "british_spelling": {
     "honour": 1,
-    "honours": 1,
-    "recognised": 1
+    "honours": 1
    },
    "conversion_talk": {
     "New in this edition": 2,
     "this edition": 1
    },
    "grey": {
-    "grey": 2
+    "grey": 1
    },
    "lowercase_terms": {
     "bright light": 1,
     "difficult terrain": 2,
     "her speed": 1,
     "hit point": 2,
-    "hit points": 11,
+    "hit points": 10,
     "knocked prone": 1
    },
    "narrator_voice": {
@@ -178,9 +179,6 @@
    }
   },
   "07_Cast_of_the_Ball.md": {
-   "attendant_habit": {
-    "direct question": 1
-   },
    "bare_dc": {
     "DC 10": 1,
     "DC 18 Wisdom (Insight)": 1,
@@ -228,13 +226,10 @@
     "disadvantage": 2
    },
    "role_name": {
-    "MM": 2
+    "MM": 1
    }
   },
   "09_The_Snakes.md": {
-   "attendant_habit": {
-    "direct question": 2
-   },
    "bare_dc": {
     "DC 13": 4,
     "DC 13 Charisma (Intimidation)": 1,
@@ -292,7 +287,7 @@
     "PCs": 1
    },
    "role_name": {
-    "MM": 14
+    "MM": 15
    },
    "roll_check": {
     "beating the DC": 1
@@ -311,10 +306,6 @@
    }
   },
   "10_Bestiary.md": {
-   "attendant_habit": {
-    "direct question": 1,
-    "literally and truthfully": 1
-   },
    "bare_dc": {
     "DC 10": 1,
     "DC 12": 3,
@@ -342,7 +333,7 @@
     "grey": 2
    },
    "lowercase_terms": {
-    "advantage": 17,
+    "advantage": 16,
     "disadvantage": 3
    },
    "role_name": {
@@ -392,79 +383,79 @@
     "this edition": 1
    },
    "role_name": {
-    "MM": 2
+    "MM": 1
    }
   }
  },
  "soft": {
   "01_Overture.md": {
-   "emdash_per_k": 5.88,
+   "emdash_per_k": 5.65,
    "long_paras": 1,
-   "long_sentence_pct": 6.1,
-   "mean_wps": 14.91,
+   "long_sentence_pct": 5.88,
+   "mean_wps": 14.42,
    "not_but": 10,
    "perhaps": 0,
    "player_character": 4,
    "rhetorical": 0,
-   "sentences": 274,
-   "the_players": 12,
-   "words": 4084,
-   "you": 35
+   "sentences": 319,
+   "the_players": 11,
+   "words": 4600,
+   "you": 39
   },
   "02_The_World_and_the_Night.md": {
-   "emdash_per_k": 14.62,
-   "long_paras": 1,
-   "long_sentence_pct": 10.37,
-   "mean_wps": 15.68,
-   "not_but": 6,
-   "perhaps": 0,
-   "player_character": 4,
-   "rhetorical": 0,
-   "sentences": 157,
+   "emdash_per_k": 16.8,
+   "long_paras": 8,
+   "long_sentence_pct": 8.56,
+   "mean_wps": 14.88,
+   "not_but": 7,
+   "perhaps": 1,
+   "player_character": 7,
+   "rhetorical": 2,
+   "sentences": 280,
    "the_players": 2,
-   "words": 2462,
-   "you": 7
+   "words": 4167,
+   "you": 58
   },
   "03_Masks_and_Agendas.md": {
-   "emdash_per_k": 14.58,
-   "long_paras": 7,
-   "long_sentence_pct": 7.12,
-   "mean_wps": 14.39,
-   "not_but": 4,
-   "perhaps": 1,
-   "player_character": 4,
-   "rhetorical": 2,
-   "sentences": 243,
+   "emdash_per_k": 9.37,
+   "long_paras": 0,
+   "long_sentence_pct": 7.86,
+   "mean_wps": 14.87,
+   "not_but": 3,
+   "perhaps": 0,
+   "player_character": 1,
+   "rhetorical": 0,
+   "sentences": 122,
    "the_players": 0,
-   "words": 3497,
-   "you": 93
+   "words": 1814,
+   "you": 44
   },
   "04_The_Ball.md": {
-   "emdash_per_k": 16.44,
-   "long_paras": 17,
-   "long_sentence_pct": 10.31,
-   "mean_wps": 16.71,
+   "emdash_per_k": 15.85,
+   "long_paras": 16,
+   "long_sentence_pct": 10.01,
+   "mean_wps": 16.32,
    "not_but": 12,
    "perhaps": 2,
    "player_character": 17,
    "rhetorical": 7,
-   "sentences": 717,
-   "the_players": 8,
-   "words": 11984,
-   "you": 32
+   "sentences": 742,
+   "the_players": 6,
+   "words": 12111,
+   "you": 28
   },
   "05_The_Longest_Night.md": {
-   "emdash_per_k": 17.21,
-   "long_paras": 25,
-   "long_sentence_pct": 13.43,
-   "mean_wps": 17.77,
-   "not_but": 18,
+   "emdash_per_k": 17.29,
+   "long_paras": 19,
+   "long_sentence_pct": 12.16,
+   "mean_wps": 17.11,
+   "not_but": 17,
    "perhaps": 1,
-   "player_character": 37,
+   "player_character": 33,
    "rhetorical": 2,
-   "sentences": 680,
+   "sentences": 639,
    "the_players": 16,
-   "words": 12085,
+   "words": 10932,
    "you": 29
   },
   "06_Aftermath.md": {
@@ -482,59 +473,59 @@
    "you": 8
   },
   "07_Cast_of_the_Ball.md": {
-   "emdash_per_k": 19.16,
+   "emdash_per_k": 19.04,
    "long_paras": 8,
-   "long_sentence_pct": 8.06,
-   "mean_wps": 16.78,
+   "long_sentence_pct": 9.19,
+   "mean_wps": 16.89,
    "not_but": 8,
    "perhaps": 0,
    "player_character": 2,
    "rhetorical": 0,
    "sentences": 311,
    "the_players": 1,
-   "words": 5220,
+   "words": 5253,
    "you": 4
   },
   "08_Handouts.md": {
-   "emdash_per_k": 17.0,
+   "emdash_per_k": 16.8,
    "long_paras": 0,
-   "long_sentence_pct": 0.6,
-   "mean_wps": 10.01,
+   "long_sentence_pct": 1.65,
+   "mean_wps": 10.42,
    "not_but": 1,
    "perhaps": 1,
    "player_character": 1,
    "rhetorical": 2,
-   "sentences": 147,
+   "sentences": 160,
    "the_players": 1,
-   "words": 1471,
-   "you": 10
+   "words": 1667,
+   "you": 11
   },
   "09_The_Snakes.md": {
-   "emdash_per_k": 10.2,
+   "emdash_per_k": 10.22,
    "long_paras": 15,
-   "long_sentence_pct": 5.56,
-   "mean_wps": 13.86,
+   "long_sentence_pct": 5.62,
+   "mean_wps": 13.85,
    "not_but": 16,
    "perhaps": 1,
    "player_character": 71,
    "rhetorical": 1,
-   "sentences": 1117,
-   "the_players": 3,
-   "words": 15487,
-   "you": 33
+   "sentences": 1123,
+   "the_players": 4,
+   "words": 15551,
+   "you": 34
   },
   "10_Bestiary.md": {
-   "emdash_per_k": 12.34,
-   "long_paras": 0,
-   "long_sentence_pct": 8.33,
-   "mean_wps": 15.78,
+   "emdash_per_k": 12.1,
+   "long_paras": 1,
+   "long_sentence_pct": 7.6,
+   "mean_wps": 15.87,
    "not_but": 4,
    "perhaps": 0,
    "player_character": 1,
    "rhetorical": 0,
-   "sentences": 149,
+   "sentences": 151,
    "the_players": 1,
-   "words": 2351,
+   "words": 2396,
    "you": 2
   },
   "11_Pregenerated_Characters.md": {
@@ -552,29 +543,24 @@
    "you": 1
   },
   "README.md": {
-   "emdash_per_k": 11.95,
-   "long_paras": 1,
-   "long_sentence_pct": 6.52,
-   "mean_wps": 17.93,
+   "emdash_per_k": 10.63,
+   "long_paras": 2,
+   "long_sentence_pct": 6.0,
+   "mean_wps": 18.41,
    "not_but": 1,
    "perhaps": 0,
    "player_character": 1,
    "rhetorical": 0,
-   "sentences": 42,
+   "sentences": 46,
    "the_players": 0,
-   "words": 753,
-   "you": 4
+   "words": 847,
+   "you": 5
   }
  },
  "structure": {
   "05_The_Longest_Night.md": {
    "readaloud_trigger": {
     "untriggered read-aloud: *The outer gate is shut, and": 1
-   }
-  },
-  "09_The_Snakes.md": {
-   "xref": {
-    "Chapter IV, \"The Snakes This Movement — IV and V\"": 1
    }
   }
  },

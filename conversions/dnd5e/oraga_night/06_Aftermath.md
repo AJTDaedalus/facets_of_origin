@@ -45,14 +45,24 @@ record, and it is what history keeps.
 ## Ending the Session
 
 1. **Read the epilogue** in Chapter V, adjusting it for what the table did.
-2. **Go around the table once:** *what does your character carry out of Oraga Night?*
-   An object, a debt, a truth, a name. Write the answers down. If you ever play in
-   Val'loh again, they are canon at your table.
-3. **Call 5th level.** It is the line where a fighter swings twice, a caster reaches
-   level 3 spells, and a character stops being somebody who survived one bad night
-   and becomes somebody the city has to reckon with. Do not skip it because this is a
-   one-shot. A gifted character's gift does not grow (Chapter III); any new magic
-   shows itself the way the gift always has.
+2. **If you ran the epilogue in chapter V,** you have already asked the question and
+   called 5th level. If you skipped it, do both now.
+
+5th level is the line where a fighter swings twice, a caster reaches level 3 spells,
+and a character stops being somebody who survived one bad night and becomes somebody
+the city has to reckon with. Do not skip it because this is a one-shot. A gifted
+character's gift does not grow (Chapter III); any new magic shows itself the way the
+gift always has.
+
+## Rewards
+
+- **Experience:** Table I–4 in chapter I. The party reaches 5th level by milestone at
+  the epilogue.
+- **Agenda pay:** each agenda's **Pays** line (see chapter II, "The Eight Agendas"):
+  Callun's 100 GP, the 30 GP gate fee, the Church's favor, the grandmother's crystal.
+- **Loot:** see chapter X, "The Night's Loot".
+- **The story award:** the answer each player gave to *what does your character carry
+  out of Oraga Night?*
 
 ## If Your Table Wants More
 
@@ -71,7 +81,8 @@ the play.
   know who hired him will help.
 - **The trail**, step by step: the river gate (DC 13 Intelligence (Investigation) to
   see it was oiled, not forced), the boat (DC 13 Charisma (Persuasion) with the fishers
-  downstream), the carter (DC 15 Wisdom (Insight) to find the one who will talk), then
+  downstream), the carter (a DC 15 Charisma (Persuasion) or DC 15 Intelligence (Investigation)
+  check to find the one who will talk), then
   nothing. A failed check costs time and draws a faction's attention; it never loses
   the trail.
 - **Otta Vesh,** the finest mask-maker in Rekuzan, keeps a casting-blank of every face
