@@ -432,7 +432,7 @@ Each T8 task: SA, a ledger row citing the ruling, and a DECISIONS entry.
 - **Do:** update `flow.json` for the renames, the moved agendas, DM wording and the Midnight Clock. Run `python M/flow/build_flow_page.py`. Republish the published artifact only if the owner asks.
 - **Accept:** the build succeeds, and no node references a removed section.
 
-### ☐ T9.3 Final verification
+### ☑ T9.3 Final verification
 - **Do:**
   1. Run `lint_5e.py --check`, `pytest T/`, and both math scripts.
   2. Run one fresh-eyes read-through agent per slice against the C-S/C-V checklists, reporting only regressions or misses.
@@ -440,12 +440,12 @@ Each T8 task: SA, a ledger row citing the ruling, and a DECISIONS entry.
   4. Post the before/after lint table in LOG.
 - **Accept:** there are no P1s open. Every P2 is fixed or gated. The P3s are fixed, gated, or skipped with a reason.
 
-### ☐ T9.4 d20 carryover record
+### ☑ T9.4 d20 carryover record
 - **Files:** new `docs/CARRYOVER_d20_oraga_official.md`.
 - **Do:** list the 67 `[d20-portable]` findings with how each was solved in 5e, plus the Facets-affecting rulings (Q10, the FRONT-21 aphorisms, Q5's analog if the Facets edition has the habit). This is not applied now; the d20 edition is out of scope.
 - **Accept:** the file exists and is linked from LOG.
 
-### ☐ T9.5 Commits
+### ☑ T9.5 Commits
 - **Do:** one commit per phase, with specific `git add` paths. Messages like "Oraga 5e official pass: Phase 1 rules contradictions". No push without the owner's say-so. Before any push, scan main..branch for private canon (memory rule).
 - **Accept:** `git status` is clean, and the LOG lists the commit hashes.
 

@@ -13,7 +13,27 @@ record: `docs/LOG_oraga_5e_official_audit.md`.*
 **Basis.** Four 4th-level characters, ending the night at 5th (FIXPLAN §6). SRD 5.2.1 terms,
 with 2014 compatibility claimed.
 
-## 1. Verdict
+## 0. Status after the fix pass (2026-10-03)
+
+The fix pass ran Phases 0–7 and 9 of `docs/TASKS_oraga_5e_official.md`. It is commits `10acb0f`…`186fcc1` on `feat/lean-facets`, starting from tag `pre-official-5e`. Nothing was pushed.
+
+| Slice | Findings | Fixed | Partly (rest gated) | Gated | Void |
+|---|---|---|---|---|---|
+| FRONT | 23 | 20 | 0 | 3 (Q4, Q15, Q17) | 0 |
+| BALL | 26 | 25 | 0 | 1 (Q15) | 0 |
+| NIGHT | 24 | 21 | 1 (NIGHT-18, Q13) | 2 (Q9, Q10) | 0 |
+| SNAKES | 28 | 26 | 0 | 2 (Q12, Q14) | 0 |
+| BESTIARY | 24 | 21 | 1 (BESTIARY-23, Q15) | 2 (Q8, Q18) | 0 |
+| CAST | 27 | 24 | 1 (CAST-11, Q16) | 1 (Q16) | 1 (CAST-1, owner Q5) |
+| **Total** | **152** | **137** | **3** | **11** | **1** |
+
+- **P1s:** all 8 are resolved. BALL-1 has two open owner lines (Q7, Q23).
+- **Final review:** six fresh-eyes reviewers found no regressions and 53 new issues. 51 are fixed (3 by Planner decisions O25–O27) and 2 are gated (Q20, Q24).
+- **Lint:** 0 hard and 0 structure hits, down from 459 hard and 2 structure. Both math checkers are clean. 164 tests.
+- **Open owner rulings:** Q3, Q4, Q7–Q20, Q23, Q24. Each has a TODO-Qn comment in the module, and the Phase 8 tasks in TASKS are waiting on them.
+- **d20 carryover:** `docs/CARRYOVER_d20_oraga_official.md`.
+
+## 1. Verdict (pre-fix audit, 2026-09-30)
 
 | Dimension | Verdict |
 |---|---|

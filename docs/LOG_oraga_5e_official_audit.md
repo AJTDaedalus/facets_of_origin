@@ -698,3 +698,10 @@ Scope: every NEW-* issue in the six slice files' §6, plus the "partly" leftover
 - `python -m pytest conversions/dnd5e/oraga_night/tools -q` → 164 passed.
 - `build_flow_page.py` → built.
 - Joined-lines grep over M/*.md: "Knives in the Dark" 0, "chapter III, Agenda" 0, "Chapter III, Agenda" 0, "Snakes in the Pen" 0. "MM" is 0 in the module text, but INVENTIONS_5e.md has 4 (history rows) and STYLE_5e.md has 3 (the rule that bans it). "direct question" is 0, except 1 in INVENTIONS #55's history. Both files are outside the linter's scope by design (STYLE "Do not touch" #3).
+
+## Phase 9 — closeout (coordinator, 2026-10-03)
+- T9.3: six final reviewers appended a status table (§5) and new issues (§6) to each slice file. The final-review fixes are commit 186fcc1. Totals are in AUDIT §0: 137 fixed, 3 partly (the remainder gated), 11 gated, 1 void, out of 152.
+- T9.4: `docs/CARRYOVER_d20_oraga_official.md` (71 rows). There is no d20 Oraga adventure yet, so it covers both starting points.
+- T9.5: one commit per phase, 10acb0f…186fcc1, plus this closeout commit. Nothing pushed. Before any push, scan main..branch for private canon (memory rule).
+- Side task (the owner's /goal): `docs/RESEARCH_coc_for_facets.md`, the Call of Cthulhu open-content review, is committed separately.
+- Remaining work is all owner-gated: Phase 8 (T8.1–T8.16) on Q3, Q4, Q7–Q20, Q23, Q24.
