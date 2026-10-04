@@ -661,3 +661,40 @@ calls and sample pairs.
 **Leftover 2 — emphasis italics.** 129 emphasis spans set roman across 9 files: 01 ×5, 02 ×10, 04 ×33, 05 ×30, 06 ×3, 07 ×12, 08 ×4, 09 ×20, 10 ×12 (plus the two italic fixes below, not counted). Each replacement was asserted unique before writing, and a paragraph-level asterisk-parity check shows no broken italics. Two meaning-carrying cases were reworded rather than just set roman: "whether the man who returned is *the man who returned*" → "…is the man who left" (07 Kovaun, 09 Church line), Agenda 2's own wording. Also fixed in the same pass: 04's Callun aside had its roman-toggled section name, now '"The Snakes This Movement"' in quotation marks (the italic aside stays italic, and its inverted "dynasty" toggle is gone); 09 S14's stale "the *hard-hitting* line under Scaling" → 'the "A table built to hit hard" line under Adjusting the Encounter' (Scaling was renamed in T3.3); "optimised/Optimised" → "optimized/Optimized" ×4 in 09 (spelling missed by the lint list).
 - *Kept, by rule:* spells, items and charges; read-aloud; whole italic DM-note paragraphs; card and run-in labels (*Lanterns*, *At heat 4:*, *Failure:*); invented or game terms (*detain* ×8, *brandishing*, *steer*, *Impossible*, *common*/*uncommon* rarity, *under Low*/*beyond High*, *to 4*, *plant the doubt*, *the missing year*); words to say aloud or speech (*locked on you* / *drifting*, *what did he say?*, *nobody made them*, *someone is editing you.*, the rumor text in Table VIII–7); "success at a cost" vocabulary (*with a cost attached*, *at a cost*, which 04 defines as a term); *if you have time* (a heading tag); table-row labels (*the Attendant distracted*); and chapter references (*A guest*).
 - *Skipped:* 01's Designer's note (*works*, *the designers*), gated on Q4 (T8.2); 03 and 11, which are player-facing, not DM prose (*shows itself*, Andra *is*).
+
+## Phase 9 — final-review fixes
+
+### T9.3 follow-up (Worker, 2026-10-03)
+
+Scope: every NEW-* issue in the six slice files' §6, plus the "partly" leftovers in their §5 tables. Every site was found by its quoted text and changed through a script that asserts exactly one match before writing. No site was missing. Each slice file now has a **§6a Resolved** table.
+
+**Counts.** 53 NEW-* issues: **51 fixed** (3 of them by Planner decisions O25–O27), **2 gated** (NEW-CAST-2 → Q20, NEW-CAST-3 → new Q24), **0 skipped**. The 9 partly-fixed leftovers are all fixed: FRONT-5 (the code span and the box-list claim), FRONT-19 (the rest cost), NIGHT-8, NIGHT-13, NIGHT-14, SNAKES-15 (the five pointers), SNAKES-25 (the rename), BESTIARY-15 (two lines), CAST-24 (Table VIII–1 and 07's italics).
+
+**Planner decisions** (DECISIONS.md, *Phase 9 final-review decisions*):
+- **O25:** S3's bell clock counts only rounds at the gate (05 step 8, S3).
+- **O26:** S9 fills offstage only if the table saw the appointment made. This keeps the default arithmetic (Draunel 2, Boranis 1). Sites: S9, the Mv V DM Note, Tables IX–2 and VIII–5, flow `clk-circle`.
+- **O27:** the ring's answer comes after the toast. Q23 stays open.
+
+**Notable edits.**
+- **Restoration (NEW-NIGHT-7).** Text restored from `git show ef02a28:…/05_The_Longest_Night.md`, the old "Knives in the Dark" Phern and Draunel subsections:
+  - "every guest brought through that door counts" → S11 Development (with Table I–4);
+  - "no check for a Phern" → S11 Corro's word;
+  - the fourth iron → 05's card list, in the old words ("take Vorlain in the chaos and hand him to the first sect guard through the gate as the culprit").
+- **Prep box (NEW-FRONT-3/4).** Step 2 is now chapter II "The Truth of the Night" plus "The Eight Agendas" (15 min), step 4 is 25 and step 5 is 15. The total is unchanged at 90. Step 5 now names "The Snakes at the Ball".
+- **Rename (SNAKES-25).** 09 "The Snakes in the Pen" → **"The Snakes at the Ball"**. 04's heading, now a table plus a pointer, → **"The Snakes at a Glance"**, so that no heading keeps the old name (the joined-line zero check covers both). Pointers updated: 01 ×2 and INVENTIONS #1. flow.json had none. The 04 Undercurrent C tag changed, so its flow.json anchor was updated.
+- **Pregens (NEW-CAST-1).** "snake", "chapter IX", "the Uninvited", "when the lights die" and the undead spoiler are off the player sheets. *Turn Undead* now prints the SRD effect. Handouts 1–3 were checked and are clean.
+- **Bestiary (NEW-BESTIARY-1).**
+  - Five tests went into `test_bestiary_check.py` first and failed red: 5 failed / 24 passed.
+  - Then `trait_dc_problems` (a TRAIT_DC table tying *Put Aside* to Strength) and the data row `dc=[(15,0)]`. The checker reported "Attendant: Put Aside DC 14 vs 8+3+4 = 15".
+  - Then the text went to DC 15, and the suite was green. INVENTIONS #55 is amended.
+- **Kept on purpose.** "*House Boranis hired none.*" stays italic in 01 (canon emphasis, Facets 04:90, and italic in 04 and 09 too). The two lint regressions this pass caused along the way (07's default-DC sentence read as a bare DC; the epilogue question counted as rhetorical in 06) were reworded rather than whitelisted. Two "not the count" contrasts became "only the warning".
+
+**New owner question.** **Q24:** Veier's canon "Tell my uncle…" against her being the chief's cousin. It is in AUDIT §5a with background, with a `TODO-Q24` in 07. The quote is not edited. Open: Q3, Q4, Q7–Q20, Q23, Q24.
+
+**Commands.**
+- `python conversions/dnd5e/oraga_night/tools/lint_5e.py --check` → OK (0 problems; 0 hard, 0 structure). No re-baseline, and no new whitelist entries.
+- `bestiary_check.py` → 25 blocks + 3 Nastier, 0 mismatches.
+- `pregen_check.py` → 5 pregens, 0 issues.
+- `python -m pytest conversions/dnd5e/oraga_night/tools -q` → 164 passed.
+- `build_flow_page.py` → built.
+- Joined-lines grep over M/*.md: "Knives in the Dark" 0, "chapter III, Agenda" 0, "Chapter III, Agenda" 0, "Snakes in the Pen" 0. "MM" is 0 in the module text, but INVENTIONS_5e.md has 4 (history rows) and STYLE_5e.md has 3 (the rule that bans it). "direct question" is 0, except 1 in INVENTIONS #55's history. Both files are outside the linter's scope by design (STYLE "Do not touch" #3).

@@ -272,3 +272,105 @@ and Andra's spellbook. Result: **no arithmetic errors.**
 - **N7. Initials on the agenda cards.** *Background:* Cards 1-4 sign off "— R.C.", "— D.K.", "— E.D." and "— M.N.", as if they were written notes. The world's law is that only the Church writes (02:18-20). *Question:* Are the initials a table convenience (fine as is), or should the cards say how the ask was delivered ("in person", "by a go-between")? This is carried over unchanged from the Facets handouts.
 - **N8. "MM" on the player-facing pregen sheets.** This is already being raised with you. Chapter XI's sheets say "the MM gives the answer without a check" five times, and a 5e player holding only the sheet won't know the term. Whatever you rule, one clause in 11's intro defining it would help.
 - **N9. Still open from pass 2:** sixty or eighty servants (07:179), the testament's witnesses (07:155), and Essin's "two bodies" (07:315-317).
+
+---
+
+## 5. Status after fix pass (2026-10-03)
+
+*Final review T9.3, against HEAD (`git diff pre-official-5e..HEAD`). Line numbers are current.
+`tools/pregen_check.py`: 5 pregens checked, 0 issues.*
+
+| ID | Status | Evidence |
+|---|---|---|
+| CAST-1 | void | Owner Q5 removed the habit. 07:607-610 keeps only "Asked whom it serves, it names no one"; 07:612-616 lists three habits (crystal and light, cup and cloak, music), matching 09 S14 and 08 Table VIII-1 (no Movement III sighting, per O3/Q22). |
+| CAST-2 | fixed (Q7 and Q11 residue gated) | "What [Name] Knows" lists for Raunu 48-68, Veier 105-116, Anha 265-278, Kovaun 301-309, Sella 332-344, Callun 362-370, Corro 392-399, Draunel 418-425, Essin 444-452, Maiven 476-486, Tavva 674-688. Spot-checked nine bullets against their sources, all printed elsewhere: Anha's cellar stair (04:581-583), Callun's "three heads" (02:290), Essin's appointment (04:1236), Maiven's palace window (02:69), Raunu's *Speak with Dead* (02:246-249), Corro "worst near the three" (04:787), Kovaun's blessing (05:736), Tavva's pick-two (09:723), Sella's testament (04:718-720). "(untrue)" flags at 368 and 486. Veier's pregnancy is a TODO-Q7 at 116; Essin's bodies are a TODO-Q11 at 452. |
+| CAST-3 | fixed | Default-DC sentence at 07:5-7. Sergeant: 07:727. |
+| CAST-4 | fixed | 07:520-522 "DC 25 Charisma (Deception, Intimidation, or Persuasion) check"; 07:530-533 Insight with no gate; 08:116. |
+| CAST-5 | fixed | All five winks are gone (83, 270, 342, 397, 515 rewritten). The kept "the module does not say / never explains him" lines are at 513 and 547. |
+| CAST-6 | fixed | The "player" lines left (40, 203, 615) mean the real people. |
+| CAST-7 | fixed | Em dashes are down from 129 to 45 (about 6 per 1,000 words). 144-146, 201-203, 524-525, 576-577 and 638-643 are rewritten as proposed. |
+| CAST-8 | fixed | 08:236 "Rumors at the Ball *(DM table)*" now sits outside "Player Handouts". |
+| CAST-9 | fixed | 08:267-270 has the trigger and recipient. Invitation text untouched. |
+| CAST-10 | gated (Q16) | T8.12. Sheets still have Personality / Agenda hook, with no Ideal/Bond/Flaw labels. |
+| CAST-11 | partly; rest gated (Q16) | Andra: 11:252 "a crystal as Arcane Focus", 11:263 Carrying. Ilesse: TODO-Q16 at 11:421. |
+| CAST-12 | fixed | 11:45-47. |
+| CAST-13 | fixed | 11 and 08 use 5.2.1 capitals. Charges are italic Title Case (11:110, 264, 429-430), matching 10 and Handout 3. |
+| CAST-14 | fixed | 08:108-113: every row names its ability and skill. |
+| CAST-15 | fixed | Appositions at 07:288, 349, 377, 407, 431, 459. Sergeant 729 and Captain 764 have pointers. (377 is redundant: see NEW-CAST-4.) |
+| CAST-16 | fixed (optional polish done) | "Roleplaying [Name]" throughout. **Quote:** lines at 102, 329, 535, each an existing line. |
+| CAST-17 | fixed | "What Vorlain Says" 151, "What Corval Says" 208, "DM Note — the factor" 758. |
+| CAST-18 | fixed | The Attendant box is now a pointer (07:625-626). Vorlain's line is printed once (box, 173-176). |
+| CAST-19 | fixed | Callun is DC 20 (07:359). 04 no longer says "Hard DC 18"; 01:251's ladder reads Hard 18-20. |
+| CAST-20 | fixed | 07:9-11. |
+| CAST-21 | fixed | 11:24. |
+| CAST-22 | fixed | Arcane Recovery 11:244-245; Fast Hands 11:178-180 matches the 5.2.1 text; *For Them* range at 07:127-128. |
+| CAST-23 | fixed | Truth notes on rumors 6, 8 and 11 only (08:250, 252, 255). Never-Says rumors are left bare. The rumor 11 pointer resolves (04:698). |
+| CAST-24 | partly | Prose cross-references follow the style sheet. Left: "(Ch. IX)", "(Ch. I)" and "Ch. V read-aloud" in Table VIII-1 (08:15, 17, 26), and emphasis italics at 07:545 ("*the way the Uninvited move*"). |
+| CAST-25 | partly (by design) | T2.5 grouped the handouts as a closing "Player Handouts" section of 08 (08:260), renamed "Player Handout N: ...", instead of moving them after XI (O8: no renumbering). |
+| CAST-26 | fixed | 08:9-58: "the Night on Two Pages", split at *The pillars*. |
+| CAST-27 | fixed | 08:141-149: one B5 box. |
+| Still-open: sixty/eighty | gated (Q20) | 07:220 still says "sixty"; 04:699 and 04:716 say eighty. |
+| Still-open: testament witnesses | gated (Q20) | 04:718-720 and 07:196 as before, now also in Sella's new list (07:339-341). See NEW-CAST-2. |
+| Still-open: Essin's two bodies | gated (Q11) | 07:435 unchanged; TODO-Q11 at 452. |
+| N1 | void | Q5. |
+| N2 | gated (Q7) | TODO-Q7 at 07:116. |
+| N3, N4 | gated (Q16) | T8.12. |
+| N5 / N6 / N7 | gated (Q17 / Q18 / Q19) | No pronunciations and no cast alignment tags. Cards still sign "— R.C." etc. (08:296-313). |
+| N8 | fixed (Q1) | The sheets say "the DM". |
+| N9 | gated (Q11, Q20) | As above. |
+
+**Counts:** fixed 22 (CAST-2 to -9, -12 to -23, -26, -27), partly 3 (CAST-11, -24, -25), gated 1 (CAST-10), void 1 (CAST-1), skipped 0, regressed 0.
+
+---
+
+## 6. New issues found in final review
+
+*Pregen rules were rechecked against SRD 5.2.1 by hand: ability scores, HP, AC, saves, skill counts, cantrip and prepared counts, Bardic Inspiration, Cutting Words, Nick, Steady Aim, Fast Hands, Second-Story Work, Arcane Recovery, Scholar, Evocation Savant, Potent Cantrip, Second Wind, Tactical Mind, Remarkable Athlete, Thaumaturge, Divine Spark, Preserve Life and Spiritual Weapon (Concentration). No P1 rules errors. Handout 3 (Crystal Charges) matches 10:1960-1990 and keeps the Uninvited's smothering hidden ("the DM will tell you"). Handouts 1-2 carry no DM notes. The 08 contract line now matches 09:864-866 and 05:989-998.*
+
+### NEW-CAST-1 [P2] The player-facing pregen sheets send players to the DM-only chapter IX and use the DM's word "snake" (pre-existing, missed by the audit)
+- **Where:** 11:119 "she is working a snake's errand (see chapter IX), from inside"; 11:190-191 "the Circle is a snake (see chapter IX)"; 11:350 "when a snake comes through it"; 11:271-272 "a tell: the Uninvited's, or a snake's". Also on the sheet: 11:414 "*Turn Undead:* nothing at this ball is undead" (a fact about the gray masks that 10:134 keeps in a DM table), and 11:437-439 "the one that puts a character beside Veier when the lights die".
+- **Problem:** Chapter XI is handed out ("Hand them out as they are", 11:6). Chapter IX is the DM's faction chapter, and "snake" and "the Uninvited" are DM vocabulary. "When the lights die" tells a player in advance that midnight goes dark.
+- **Fix:** 119 → "Either way she is working a faction's errand, from inside."; 190-191 → "…a Phern's standing to use it."; 350 → "when trouble comes through it"; 271-272 → "the guest likeliest to catch a tell."; 414 → "*Turn Undead:* as the SRD." (or cut the sentence); 438-439 → "…and the one that puts a character beside Veier." Leave the chapter-IX pointers in the DM-facing table and intro.
+
+### NEW-CAST-2 [P3] Sella's new knowledge list repeats the gated testament-witness fact
+- **Where:** 07:339-341 "Three days before the ball she stood witness in this chapel, with Corval, as the law requires…"
+- **Problem:** The fact is not invented: 04:718-720 prints it. But it is the still-open Q20 item (the cut Facets vignette had a notary and two paid witnesses). It now stands in three places, and T8.16's site list (07, 04) won't catch the new bullet.
+- **Fix:** Add `<!-- TODO-Q20 -->` after the bullet, as with Q7 and Q11, and add 07:339-341 to T8.16.
+
+### NEW-CAST-3 [P3] Veier's "uncle" sits next to a list that makes her a cousin
+- **Where:** 07:102-103 and 109 ("Her answer for Maiven is her quote": "Tell my uncle his message…"); 07:481 "Veier is the Thenyan chief's cousin"; 02:64 likewise. 04:1275-1277 repeats the quote.
+- **Problem:** The quote is Facets canon (adventures/oraga_night/07:63). The new lists now set it beside "the chief's cousin" and Maiven, another cousin. A DM reads it as a slip: whose message is it?
+- **Fix:** Don't edit the quote. Raise it with the owner as a one-line question: is "uncle" a third relative, or should it be "cousin"? Until then, change 07:109 to "Her answer for the delegation is her quote, above."
+
+### NEW-CAST-4 [P3] Redundancy left by the CAST-15 fixes
+- **Where:** 07:376-377 header "Master Pellin Corro — the Phern Magnate", then apposition "*The Phern magnate.*". 07:764-767: the Captain's "If it comes to steel" repeats 755-756 ("A bought-out captain does not resume the fight tonight for any inducement") and points to S3 twice.
+- **Fix:** 377 → "*A Phern magnate, and exactly what he appears.*" (from 381), or drop it. 764-767 → "**If it comes to steel:** stat block **Bought Captain** (see chapter X); card S3. The captain's and sergeant's negotiation surfaces above are the two outs the card leans on."
+
+### NEW-CAST-5 [P3] Pello's Weapon Mastery line misreads after the dash was removed (regression)
+- **Where:** 11:173-174 "Dagger (Nick), Shortsword (Vex), for the first blade he picks up after midnight; he carries none."
+- **Problem:** With the em dash now a comma, it reads as if both masteries wait on a found blade, though he carries two daggers.
+- **Fix:** "Dagger (Nick); Shortsword (Vex), for the first shortsword he picks up after midnight (he carries none)."
+
+### NEW-CAST-6 [P3] 07's default social DC is muddled with 04's "behind a mask" rule
+- **Where:** 07:5-6 "the DC to move that guest is 13 behind a mask"; 04:430-431 "Behind a mask, a character approaching someone far above their station… DC 10, where it would otherwise be 13"; 08:109.
+- **Problem:** In 04, the mask is what lowers 13 to 10 across station. In 07, 13 is the masked default. Both can be read as true, but a DM comparing them will stall.
+- **Fix:** 07:5-7 → "Where an entry gives no DC, moving that guest is DC 13 (DC 10 for a character approaching far above their station behind a mask; see chapter IV, "Social checks at the ball"); the entries below note only the exceptions."
+
+### NEW-CAST-7 [P3] Small wording and consistency nits
+- 07:153-155 (box intro): '"If friendly" here means "drunk"', but no line in the box is labeled "if friendly"; they say "drunk". Fix: 'The "drunk" lines take real work, and Essin will try to stop it.'
+- 07:359-360: Callun's money DC is plain and her "human" DC is bold. Bolding varies across 07 (bold at 45, 205, 298, 441, 521; plain at 144, 242, 442, 531, 727). Pick one; official books don't bold DCs.
+- 08:3-5: "the Snake Tracker, where everyone stands and the rumor table" reads as a relative clause. Fix: "the Snake Tracker, Where Everyone Stands, and the rumor table".
+- 11:168 Sneak Attack leaves out 5.2.1's "and you don't have Disadvantage" (pre-existing), and Pello's Thieves' Cant extra language isn't on the sheet. Fix: "…with Advantage, or with an ally within 5 ft. of the target and no Disadvantage."
+
+### 6a. Resolved (Phase 9 final-review fixes, 2026-10-03)
+
+| ID | Resolved | Note |
+|---|---|---|
+| NEW-CAST-1 | fixed | 11: "a faction's errand"; the Circle-is-a-snake clause cut; "the guest likeliest to catch a tell."; "when trouble comes through it"; *Turn Undead* now gives the SRD effect instead of the gray-mask spoiler; "puts a character beside Veier." (no "when the lights die"). The DM-facing intro's chapter V pointer stays. Handouts 1–3 checked: their only DM text is the italic trigger lines, and Handout 3 points only at chapter III. |
+| NEW-CAST-2 | gated (Q20) | `<!-- TODO-Q20 -->` under Sella's witness bullet; the bullet added to T8.16's row in TASKS. |
+| NEW-CAST-3 | gated (Q24, new) | Quote untouched. 07 "Her answer for the delegation is her quote, above." `<!-- TODO-Q24 -->` beside it. Q24 added to AUDIT §5a with background. |
+| NEW-CAST-4 | fixed | Corro's apposition dropped (it echoed the header and line 383). The Captain's steel line cut to the stat block, card S3 and the two outs. |
+| NEW-CAST-5 | fixed | "Dagger (Nick); Shortsword (Vex), for the first shortsword he picks up after midnight (he carries none)." |
+| NEW-CAST-6 | fixed | 07 dek: "the DC to move that guest is 13, or 10 for a character approaching far above their station behind a mask (see chapter IV, "Social checks at the ball")". |
+| NEW-CAST-7 | fixed | Vorlain box intro "The "drunk" lines take real work…"; all six bold DCs in 07 unbolded; 08 dek "the Snake Tracker, Where Everyone Stands, and the rumor table"; Sneak Attack adds "and no Disadvantage"; Thieves' Cant adds "one more language of his choice" (SRD 5.2.1). pregen_check 0. |
+| CAST-24 leftovers | fixed | Table VIII–1 "(chapter IX)", "(chapter I)", "Chapter V read-aloud"; 07 "the way the Uninvited move" roman. |

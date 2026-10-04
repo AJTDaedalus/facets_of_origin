@@ -2,9 +2,9 @@
 
 *Every named guest, and one thing that is not a guest. Each entry: who they are, what they want, what they fear,
 their secret, how to play them, and, last, what happens if it comes to steel.
-Outside a fight NPCs never roll dice. Where an entry gives no DC, the DC to move
-that guest is 13 behind a mask (the ladder in chapter I); the entries below note only
-the exceptions. The DM sheet (chapter VIII) maps where each stands in every Movement.*
+Outside a fight NPCs never roll dice. Where an entry gives no DC, the DC to move that
+guest is 13, or 10 for a character approaching far above their station behind a mask
+(see chapter IV, "Social checks at the ball"); the entries below note only the exceptions. The DM sheet (chapter VIII) maps where each stands in every Movement.*
 
 *Every stat block named here is in chapter X under exactly that name. Five
 factions came as Raunu's enemies (the snakes), and a sixth, the Thenya, came as his
@@ -42,7 +42,7 @@ per summons, delivered almost absently), because a man who leaves no eventuality
 unprepared for did not neglect to learn his guests. He never threatens; a
 reputation for total preparedness means never having to. Each summons ends
 abruptly, on something that is nearly a kindness. Deceiving Raunu takes a
-**DC 25 Charisma (Deception) check**. Impressing him is easier than anyone expects: tell
+DC 25 Charisma (Deception) check. Impressing him is easier than anyone expects: tell
 him a true thing he did not already know.
 
 **What Raunu Knows:** far more than he says. In a summons (see chapter IV, "Raunu's
@@ -106,7 +106,8 @@ reach me, so his worry can wait two more."
 doors, or anyone who reaches her there) learns the following (see chapter IV,
 "Dinner for Two (B9)"):
 
-- She is well, and watched over. Her answer for Maiven is her quote, above.
+- She is well, and watched over. Her answer for the delegation is her quote, above.
+  <!-- TODO-Q24: Veier's quote says "Tell my uncle", but she is the Thenyan chief's cousin and Maiven is her cousin. Whether "uncle" is a third relative or should read "cousin" waits on owner ruling Q24 (NEW-CAST-3). The quote is canon; do not edit it. -->
 - She is free. For her first year the traveling pack by her door stood packed, her
   plain statement that she could leave whenever she chose. It is empty now.
 - She is happy, and she wants her cousins to know she chose this.
@@ -151,8 +152,8 @@ Both facts are true (see chapter VI).
 > **What Vorlain Says — the overtures, and the non-answers**
 >
 > For the character with Agenda 3 especially. Vorlain is delighted to be approached and will
-> agree with everything while committing to nothing. "If friendly" here means
-> "drunk", which takes real work and Essin will try to stop it.
+> agree with everything while committing to nothing. The "drunk" lines take real
+> work, and Essin will try to stop it.
 >
 > **"If it came to it, would the house follow you?"**
 > "It followed me for a year. It was very comfortable about it." (A smile. Nothing
@@ -202,7 +203,7 @@ tragedy, one honest conversation away from understanding.
 chamberlains. Bribing Corval is impossible. There is no check for it at
 all; tell the players so. Helping him genuinely, with the wine crisis or the escalating seating
 feud, earns more than gold buys: gratitude, gossip, and doors. Deceiving him about
-household matters takes a **DC 20 Charisma (Deception) check**; about anything else he
+household matters takes a DC 20 Charisma (Deception) check; about anything else he
 is too tired to check.
 
 > **What Corval Says — what the line asks him**
@@ -295,7 +296,7 @@ she has not been told why the question is phrased that way.
 
 **Roleplaying Kovaun:** urbane, watchful, a career diplomat in vestments; works the room like
 a census-taker of souls. Runs Agenda 2 with scrupulous courtesy and pays her debts.
-Lying to Kovaun about matters of faith takes a **DC 20 Charisma (Deception) check**;
+Lying to Kovaun about matters of faith takes a DC 20 Charisma (Deception) check;
 she has heard everything.
 
 **What Kovaun Knows:** a character who works Agenda 2 for her, or who asks her
@@ -339,6 +340,7 @@ following:
 - Three days before the ball she stood witness in this chapel, with Corval, as the
   law requires, while Raunu swore aloud a testament providing for every current
   servant by name.
+  <!-- TODO-Q20: the testament's witnesses (Sella and Corval here, as 04 prints them; the cut Facets vignette had a notary and two paid witnesses) wait on owner ruling Q20 (CAST N9, NEW-CAST-2). -->
 - After the gray-masked woman leaves her offering in Elanna's niche (Movement IV),
   Sella can say exactly how out of date its rite is. Hearing this from her counts as
   witnessing the tell (see chapter V, "The Fractures").
@@ -357,7 +359,7 @@ prepared, like her host.)
 
 **Roleplaying Callun:** iron-gray, cordial, terrifyingly numerate. Runs Agenda 1 and pays on
 delivery. Deceiving her about money takes a DC 20 Charisma (Deception) check; about anything
-human, a **DC 10 Charisma (Deception) check**.
+human, a DC 10 Charisma (Deception) check.
 
 **What Callun Knows:** a character who works Agenda 1 for her learns the following:
 
@@ -374,7 +376,6 @@ block says so), with **Circle Hired Knife** for the people she pays. The Merchan
 Circle is a snake; its line is in chapter IX (cards S7 and S12).
 
 ### Master Pellin Corro — the Phern Magnate
-*The Phern magnate.*
 
 **Wants:** a pleasant evening among people who finally treat Phern money as money.
 **Fears:** the thing his gift keeps ringing about, all night, pointing nowhere.
@@ -438,7 +439,7 @@ mattering quietly.
 
 **Roleplaying Essin:** affable, forgettable on purpose, always somehow between Vorlain and
 whoever is working him. The Agenda 3 character's true opponent, and a fine sparring
-partner: deceiving Essin takes a **DC 20 Charisma (Deception) check**, and he deceives back.
+partner: deceiving Essin takes a DC 20 Charisma (Deception) check, and he deceives back.
 Catching him at it takes a DC 18 Wisdom (Insight) check.
 
 **What Essin Knows:** a character who helps him keep Vorlain sober and unbaited, or
@@ -518,8 +519,8 @@ something unbeatable while deliberately not using his weapon), let them notice.)
 **Roleplaying Vell:** courteous, brief, and finished. Every conversation with Vell ends
 when he decides, somehow without rudeness. He answers questions with smaller
 questions. He is immune to every lever: bribery, flattery, threat, charm. Make
-every check to move Vell a **DC 25 Charisma (Deception, Intimidation, or Persuasion)
-check**, and let even a success buy honesty rather than compliance (his quote, below). Characters who shadow
+every check to move Vell a DC 25 Charisma (Deception, Intimidation, or Persuasion)
+check, and let even a success buy honesty rather than compliance (his quote, below). Characters who shadow
 him find only preparations: a walked garden, a tested gate, a purchased boat. All
 night he does not fight, does not hurry, and is never once interesting to look
 at. That is not luck.
@@ -541,7 +542,7 @@ the river gate at the wrong moment should understand, from his face alone, that
 the courteous factor has already done the arithmetic and they should move.
 
 Then the Crossing (see chapter V), and the pale factor is unveiled in the only
-language the night speaks: he moves *the way the Uninvited move*, arriving,
+language the night speaks: he moves the way the Uninvited move, arriving,
 not running, and he holds the Radiant, a killer nothing else tonight can stop, alone, barely, long enough. Any character who
 has watched the three all night understands without being told: whatever they
 are, he is the same order of thing, and more of it. The module never explains
@@ -761,7 +762,5 @@ his second he starts talking while the attacks continue.
 > dead end; for a table that plays on (see chapter VI) it is the best lead there is,
 > because a captain who wants to know is a captain who will help them find out.
 
-**If it comes to steel:** stat block **Bought Captain** (see chapter X); card S3. The Bought are the steel at the gate. Every round of that
-fight is on card S3, and the captain's and sergeant's negotiation surfaces above are
-the two outs the card leans on. A bought-out captain does not resume the fight tonight
-for any inducement.
+**If it comes to steel:** stat block **Bought Captain** (see chapter X); card S3. The
+captain's and sergeant's negotiation surfaces above are the two outs the card leans on.

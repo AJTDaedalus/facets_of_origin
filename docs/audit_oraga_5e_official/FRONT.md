@@ -261,3 +261,140 @@ ruling). DC sanity was judged against that level, not the 3rd level in the share
 - **R4. The Church's favor (Agenda 2, FRONT-13).** Official books never leave a reward's size blank. *Question:* what is the default favor Prelate Kovaun grants: a generic "one favor she can grant without scandal", or something specific?
 - **R5. A full reorder into Parts + Appendices (FRONT-11).** The recommended fix only regroups the README, because renumbering touches about 420 references. *Question:* is the regrouping enough, or do you want the book renumbered (for example: Introduction, Parts 1–3, Appendices A–E)?
 - **R6. Where the agendas live (FRONT-1).** The minimal fix is an "MM Only" banner in Chapter III. The cleaner fix moves the eight agendas out of the player chapter. *Question:* banner, or move?
+
+---
+
+## 5. Status after fix pass (2026-10-03)
+
+*Final review (T9.3), against the text at HEAD (`cd174bf`). Line numbers are current.
+Counts: **18 fixed, 2 partly fixed, 3 gated, 0 skipped, 0 regressed.***
+
+| ID | Status | Evidence |
+|---|---|---|
+| FRONT-1 | fixed | Agendas moved (Q2, O6): 02 L255 "## The Eight Agendas" sits under 02 L111 "# The Truth of the Night — DM ONLY". 03 L194–197 keeps only "the DM deals each player one agenda card (Player Handout 2, chapter VIII)". There are no "At midnight" lines or Vell lines left in 03 or 11. |
+| FRONT-2 | fixed | 08 L341 "Player Handout 3: Crystal Charges" (rules copied from 10 L1956ff, with the "smother" line reduced to "Some things at this ball smother a charge; the DM will tell you"). 03 L171–172, 03 L103–104 and 11 L39 now point at Handout 3. |
+| FRONT-3 | fixed | 01 L65–78 "## Adventure Background", built from chapter II facts. Prep step 2 was reworked (but see NEW-FRONT-3). |
+| FRONT-4 | fixed | 01 L159–174 "**Overview.** What happens in each Movement, flatly:". IV reads "gathers two plates" (matches 04 L1178) and VII "until it is decided, and then the last bell rings" (matches 05 L1006). |
+| FRONT-5 | partly fixed | 01 L94–144 "## Reading This Book" now sits after "What You Need", with the read-aloud rule, bold = stat block, Title Case italics, B0–B13, the cross-reference form, box kinds and "most have four segments". Still open: a code span at 01 L254 ("`a DC 15 Wisdom (Insight) check`"), and the "only these" box list is contradicted (NEW-FRONT-6). |
+| FRONT-6 | gated (Q4) | 01 L386–404 still reads "> **Designer's note — what the fights are for** … — *the designers*". It is whitelisted in `tools/lint_5e_allow.txt` L32 "gated on owner Q4". |
+| FRONT-7 | fixed | The lint family `conversion_talk` has 0 hits. 01 L247 "Tier"; L254–257 rewritten; L268 "works as the SRD says"; L316 "It starts from one fact"; L460 "A party arrives with spells that pry"; L541 "The snakes put more steel in the night". 03 L82 is now "> **Sidebar — for players who know the Facets edition**". 02 L9–12 is now a plain product reference. README L42 is kept as the front-matter statement. |
+| FRONT-8 | fixed | 02 L279–282 "Three of the eight agendas have a patron who is also one of the night's snakes, and a fourth, the Thenya's, … That overlap gives the player a vantage point." |
+| FRONT-9 | fixed | 01 L329–347 "Chapter IX runs them by three rules (see chapter IX, "The Snakes in the Pen"), and one more thing holds tonight:" plus only the Attendant bullet. 09 L41–56 is the one rule list. 04 L455–460 was trimmed to a pointer plus Table IV–1 (Q21). |
+| FRONT-10 | fixed (scheme per O1) | O1 overruled the lowercase recommendation, and SRD 5.2.1 capitals now apply module-wide (lint `lowercase_terms` 0). The 01 "initiative"/"Initiative" split is resolved: L355 and L512–514 both read "Initiative". |
+| FRONT-11 | fixed (regroup, O8); renumber gated (Q3) | README L50–88: "Before the Night" / "The Night" / "Appendices" ("Chapters VII to XI are the book's appendices", with an "Open it when…" column) / "For Contributors". The 08 H1 now reads "VIII. The DM Sheet, the Palace and the Handouts". |
+| FRONT-12 | gated (Q17) | All three are unchanged: README L6 "3164 PG", 06 L26 "likely Mazaaian", 02 L25 and 06 L98 "the Blackwatch". There are no pronunciations. |
+| FRONT-13 | gated (Q15) | 02 L319–320 still reads "as large as the DM decides "frightening" means at your table". |
+| FRONT-14 | fixed | 03 L181–186: "a DC 15 Wisdom (Insight or Perception) check", "a DC 20 Wisdom (Insight or Perception) check", and "an ability check using the skill that fits, DC 10, instead of the usual 13". |
+| FRONT-15 | fixed | 06 L48–49 "If you ran the epilogue in chapter V, you have already asked the question and called 5th level. If you skipped it, do both now." 06 L84–85 "a DC 15 Charisma (Persuasion) or DC 15 Intelligence (Investigation) check". The new step order is circular (NEW-FRONT-5). |
+| FRONT-16 | fixed | 01 L40–44 "designed for three to five characters of 3rd to 5th level … Use the one line nearest your table; the lines are not cumulative." README L10–11 "The night ends at 5th level." |
+| FRONT-17 | fixed (via Q1) | "MM" is gone from the 5e edition (lint `role_name` 0), so there is no undefined abbreviation left. |
+| FRONT-18 | fixed | 01 L82–84 "runs at a 2014 table with the notes marked *At a 2014 table*; only the pregenerated characters need rebuilding". 03 L51–52 has the bonus-feat rule, and README L128–129 lists it. |
+| FRONT-19 | partly fixed | 01 L272–273 "The chapel (B6) is the one place to take a Short Rest, and the only one the ball offers." It drops the cost that 04 L281–282 states ("A character who spends a Movement here"). See NEW-FRONT-9. |
+| FRONT-20 | fixed | README L81–88 "### For Contributors" (STYLE, INVENTIONS, flow). README L119–123 adds the four table rules. |
+| FRONT-21 | fixed | README L103–105; 02 L125–127 and L232–233; 03 L29–31 "That puts a spotlight on them" and L39 "with no bonus attached". "load-bearing" now appears once (01 L453). 03 em dashes went from 49 to 5. |
+| FRONT-22 | fixed | 05 L1184 "as Table I–4 pays a fight ended by an out". INVENTIONS #25 is re-pointed to 04 Undercurrent A. Cross-references were converted to the STYLE form ("(see chapter V, "Down, Not Out")"), and every target in the slice resolves (checked). |
+| FRONT-23 | fixed | 06 L57–65 "## Rewards" (Table I–4, the Pays lines, "The Night's Loot", the story award). |
+
+---
+
+## 6. New issues found in final review
+
+*Only problems introduced or exposed by the fix pass. The linter reports 0 hard and 0
+structure hits on these files, so none of these is a lint failure.*
+
+**NEW-FRONT-1 [P2] Two stale pointers to the agendas' old home (whole-module architecture).**
+- `09_The_Snakes.md` L161–162: "lives whole in exactly three heads: Minister Corval's and two ministers' (see chapter III, Agenda 1)".
+- `09_The_Snakes.md` L213: "(see chapter VII; chapter III, Agenda 2)".
+
+The agendas moved to chapter II in T2.1, and 09 L1596 already uses the new form. The linter's xref check passes these because "chapter III" exists. It does not check the agenda suffix.
+*Fix:* "(see chapter II, "The Eight Agendas", Agenda 1)" and "(see chapter VII; chapter II, "The Eight Agendas", Agenda 2)". Optionally, teach `lint_5e.py` that "Agenda N" targets live only in chapter II.
+
+**NEW-FRONT-2 [P2] Chapter II says the cards carry the "At midnight" line; the cards don't.**
+- `02` L265–271: "Every agenda card has: … **At midnight:** a private note on how this agenda changes … Do not read this line to the player until the Unmasking."
+- `08` L289–291 (Handout 2): "these cards carry only what the character knows". No card has an At midnight line, and the asks are worded differently.
+
+This text was carried over from the old player chapter, where it described the cards. In 02 it now describes something that doesn't exist. The full agendas also still speak in card voice, including "*Your patron is a snake: the Merchant's Circle line, chapter IX.*" (02 L302, L320, L337), so a DM who reads a Pays line aloud spoils the patron.
+*Fix:* 02 L265 "Each agenda below has:". L267 "**The ask** and **The catch:** what the player's card (Player Handout 2) says, at fuller length." L269–270 "**At midnight:** your private note on how this agenda changes when everything goes wrong. It is not on the card." Turn the snake tags into DM notes: "*(DM: the patron is a snake: the Merchant's Circle line, chapter IX.)*"
+
+**NEW-FRONT-3 [P2] The 90-minute prep path lost the night's core truth.**
+- `01` L12–14, step 2: "**Chapter II, "What the Module Never Says" and "The Eight Agendas"** (5 minutes). The truth you are hiding is in "Adventure Background", below".
+
+The old step 2 sent the DM to "What Is Coming" and "How the Night Ends (By Default)". The 150-word Background (01 L65–78) doesn't carry several facts the DM needs:
+- Veier dies that night and the child survives (02 L215);
+- the Leash, which forces the Uninvited out by the last bell (02 L129–133);
+- Raunu's preparations, which are why 200 people live (02 L200–205);
+- Vell's refusal to fight and his immunity to pressure (02 L191–195).
+
+Nothing on the prep path now reads them. Separately, the eight full agendas (about 1,800 words) plus "What the Module Never Says" do not fit in 5 minutes.
+*Fix:* step 2 "**Chapter II, "The Truth of the Night"** (from "What Is Coming" to "What the Module Never Says") **and "The Eight Agendas"** (15 minutes). The Background below is the short version." Take the 10 minutes from step 4 (30 → 25) and step 5 (20 → 15), so the box still totals 90.
+
+**NEW-FRONT-4 [P2] The binding snake rules are now off the prep path.**
+- `01` L329: "Chapter IX runs them by three rules (see chapter IX, "The Snakes in the Pen")".
+- `01` L21: step 5 reads only "Chapter IX: "Running the Snakes", then S14 and S3".
+
+The three rules ("Nobody draws first" and the others) now live only in 09 L41–56, under "The Snakes in the Pen", which is before "Running the Snakes" and is not in the box. Step 1's "the rules for steel" now points at a pointer.
+*Fix:* step 5 "**Chapter IX: "The Snakes in the Pen" (the three rules) and "Running the Snakes", then S14 and S3 in full**".
+
+**NEW-FRONT-5 [P3] The steps in "Ending the Session" are circular.**
+- `06` L47–49: "1. **Read the epilogue** in chapter V … 2. **If you ran the epilogue in chapter V,** you have already asked the question … If you skipped it, do both now."
+
+Step 1 tells the DM to read the epilogue, then step 2 asks whether they skipped it. "The question" is also undefined until 06 L64.
+*Fix:* "1. **Read the epilogue** in chapter V, adjusting it for what the table did. It ends with the question (*What does your character carry out of Oraga Night?*) and calls 5th level. 2. **If you cut the epilogue for time,** still ask the question and call 5th level before anyone leaves."
+
+**NEW-FRONT-6 [P3] Two of the new legend's claims are broken in the same book.**
+- `01` L124: "**Boxes** come in these kinds, and only these". 01 L3 opens with an undeclared box ("> **How to prep in 90 minutes**"), 01 L386 has the Designer's note box (gated Q4), and 04 L6 has "> **Reading this chapter at a 5e table**".
+- `01` L111: "A creature name in **bold** has a stat block there". 02 L64 bolds **Veier Nolonaire**, who has no stat block (chapter X has none for her). 02 L55 **Vorlain** is fine, since he has a block.
+
+*Fix:* add "**The prep box** at the head of chapter I and the chapter-opening reading notes" to the list, and drop "and only these" until Q4 is ruled. Unbold Veier at 02 L64, or limit the rule to "in chapters IV, V and IX", which is what the linter checks.
+
+**NEW-FRONT-7 [P3] "The minutes below" no longer sits next to the table it means.**
+- `01` L156: "The minutes below are for four players. They are a budget, not a stopwatch." The new Overview list (L159–174) now comes between this sentence and Table I–1 (L176).
+
+*Fix:* move the **Overview** block above L156, directly after the section's first paragraph, so the budget sentences lead straight into Table I–1.
+
+**NEW-FRONT-8 [P3] Pronoun antecedent broken by an inserted sentence.**
+- `01` L43–46: "Use the one line nearest your table; the lines are not cumulative. Every problem in it can be solved by people with a good idea …"
+
+"it" now follows "your table" and "the lines".
+*Fix:* start a new paragraph: "Every problem in the night can be solved by people with a good idea and the nerve to act on it, and most of them are better solved that way."
+
+**NEW-FRONT-9 [P3] The rest sentence is tautological, misplaced, and missing its cost.**
+- `01` L271–273: "…regain it on a Long Rest, which tonight they will not get. The chapel (B6) is the one place to take a Short Rest, and the only one the ball offers."
+
+"The one place … and the only one" says the same thing twice. Sitting inside the Heroic Inspiration paragraph, it implies a Short Rest matters to Inspiration, which it doesn't. It also drops the cost in 04 L281–282 ("spends a Movement here").
+*Fix:* end the paragraph at "will not get." and add a separate line: "**Rests.** There is no Long Rest tonight. A character who spends a Movement in the chapel (B6) may take a Short Rest, the only one the ball offers."
+
+**NEW-FRONT-10 [P3] "What You Need" was not updated for Handout 3.**
+- `01` L86–89: "Chapter III carries everything a player needs about the tribes: their gifts as origin feats and the crystal charges they carry."
+- `01` L91–92: the print list names "the agenda cards and the invitation for the table".
+
+Chapter III now only names the charges. Their rules are on Handout 3, which isn't on the print list.
+*Fix:* "Chapter III and Player Handout 3 (chapter VIII) carry everything a player needs …", and print "the agenda cards, the invitation and the crystal-charge page (Player Handout 3) for the table".
+
+**NEW-FRONT-11 [P3] Chapter II's header undercounts its secret half.**
+- `02` L3–5: "The final section is yours alone."
+
+The DM-only part is now "The Truth of the Night" plus "The Eight Agendas", about 60% of the chapter.
+*Fix:* "Everything from "The Truth of the Night" to the end of the chapter, the eight agendas included, is yours alone."
+
+**NEW-FRONT-12 [P3] Style residue the sweeps missed.** These are not regressions, but the fix pass declared these rules and left these cases.
+- 01 L254: a code span, "`a DC 15 Wisdom (Insight) check`". Plain text is enough, and L119 already states the form.
+- README L92: an italic section name, "*How to prep in 90 minutes*". Use "How to prep in 90 minutes" in quotation marks, per STYLE cross-references.
+- Italic emphasis in DM prose (STYLE "Emphasis") at 01 L261 "*with a cost attached*", 01 L321 "*House Boranis hired none.*" and 06 L88 "*nobody made them*". Make them roman. If the 01 L321 line is canon emphasis shared with 09 L28, whitelist both together.
+
+### 6a. Resolved (Phase 9 final-review fixes, 2026-10-03)
+
+| ID | Resolved | Note |
+|---|---|---|
+| NEW-FRONT-1 | fixed | 09's two pointers now read '(see chapter II, "The Eight Agendas", Agenda 1)' and '…Agenda 2)' (same fix as NEW-SNAKES-1). |
+| NEW-FRONT-2 | fixed | 02 "Each agenda below has:"; The ask / The catch = the card's text at fuller length; At midnight "is not on the card". The three snake tags are now "*(For the DM: this patron is a snake. See chapter IX, … line.)*". |
+| NEW-FRONT-3 | fixed | Prep step 2 = chapter II "The Truth of the Night" (What Is Coming → What the Module Never Says) and "The Eight Agendas", 15 min; step 4 30→25, step 5 20→15. Total still 90. |
+| NEW-FRONT-4 | fixed | Step 5 names 09 "The Snakes at the Ball" (the three rules) before "Running the Snakes". |
+| NEW-FRONT-5 | fixed | 06 steps: step 1 ends by asking the question and calling 5th level; step 2 "If you cut the epilogue for time…". |
+| NEW-FRONT-6 | fixed | Legend: "and only these" dropped; the prep box and chapter-opening reading notes added. Bold rule limited to chapters IV, V and IX; Veier unbolded in 02. |
+| NEW-FRONT-7 | fixed | Overview moved up; the two budget sentences now lead into Table I–1. |
+| NEW-FRONT-8 | fixed | New paragraph, "Every problem in the night…". |
+| NEW-FRONT-9 | fixed (also FRONT-19) | Separate **Rests.** line: no Long Rest; a character who spends a Movement in the chapel (B6) may take the ball's one Short Rest. |
+| NEW-FRONT-10 | fixed | What You Need names Player Handout 3 and puts it on the print list. |
+| NEW-FRONT-11 | fixed | 02 dek: everything from "The Truth of the Night" to the end, agendas included, is the DM's. |
+| NEW-FRONT-12 | fixed, one kept | Code span gone (also FRONT-5); README section name in quotation marks; "with a cost attached" and "nobody made them" set roman. *Kept:* "*House Boranis hired none.*" stays italic: it is canon emphasis (Facets 04:90) and is italic at every 5e site (01, 04, 09). |

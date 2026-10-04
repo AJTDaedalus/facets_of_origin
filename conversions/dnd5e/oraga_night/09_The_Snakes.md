@@ -12,7 +12,7 @@ X.*
 
 ---
 
-## The Snakes in the Pen
+## The Snakes at the Ball
 
 Everyone of importance at this ball despises its host. Chapter II says so plainly and
 lists them: the Merchant's Circle, bleeding margin under his wage floors; the Church,
@@ -101,10 +101,10 @@ development.*
   guards. A label says where the sum sits: *under Low*, *Low*, *between Low and
   Moderate*, *Moderate*, *High* or *beyond High*.
 - **The label is the sum; the line after it is the play.** Foes with three attacks,
-  or with Sneak Attack, hit harder than their XP says, so every budget line below was
-  also checked against the pregenerated characters by simulation, and says how the
-  fight actually plays. The card's **DM Note — how it plays** gives the numbers. As a rough guide, a fight that plays Low drops a character in
-  about one run in ten to one in four, one that plays Moderate in one in four to one in
+  or with Sneak Attack, hit harder than their XP says, so the cards that play
+  differently from their sum say how. Where a card has numbers, its **DM Note — how it
+  plays** gives them. As a rough guide, a fight that plays Low drops a character in
+  about one run in twenty to one in four, one that plays Moderate in one in four to one in
   two, and one that plays High more often than not.
 - **Clocks** have four segments. Each card says what advances its clock and what
   happens when it fills. Say the clock out loud at the top of the scene. "A 1 on a
@@ -136,8 +136,8 @@ development.*
 >
 > The 2014 guide's group multiplier rates most of these cards one or two bands harder
 > than printed. It counts heads, and these heads break early, fight to detain and quit
-> on a clock. Keep the rosters as printed. Each budget line also says how the fight
-> played in simulation (the card's "how it plays" DM Note), and that is the better guide.
+> on a clock. Keep the rosters as printed. Where a budget line says how the fight
+> played in simulation, that is the better guide.
 
 **Table IX–1: Scaling at a Glance** *(SRD 5.2.1 XP budget for the whole party)*
 
@@ -159,8 +159,8 @@ how a party walks into it, turns it, or sets one snake on another.*
 ### The Merchant's Circle — Mistress Rhaza Callun
 
 **What they came for.** *Raunu's next decree, before it lands on her margins* (see chapter VII). His ministers call it the Tithe of Hands, and it
-lives whole in exactly three heads: Minister Corval's and two ministers' (see chapter III,
-Agenda 1). Callun's **fear** is an heir — a dynasty of Raunus — which is why the
+lives whole in exactly three heads: Minister Corval's and two ministers' (see chapter II,
+"The Eight Agendas", Agenda 1). Callun's **fear** is an heir — a dynasty of Raunus — which is why the
 toast turns her polite loathing into something with a horizon (see chapter VII; chapter IV,
 Movement IV). Her **secret**: the Circle has already gamed a Vorlain chieftaincy and
 priced it attractive; she is here to check the arithmetic, not to act on it. She
@@ -190,7 +190,7 @@ III can watch who she sends next.
 or the Tithe told to her by anyone who learned it, sets the Circle's heat to 0. So
 does telling Callun, to her face, what her knives are doing to an under-cook; she did
 not price that in, and she calls them off (*Paid on Delivery*). **Selling her the
-nursery** does the opposite: heat to 4 at once (chapter IV, Undercurrent C). That sale
+nursery** does the opposite: heat to 4 at once (see chapter IV, "Undercurrent C — The Third Plate"). That sale
 is the only way the Circle ever learns what is in the east wing, and only a player
 character can make it. Nothing else in this chapter tells Callun, or anyone, about
 the child (see chapter II).
@@ -210,7 +210,7 @@ knives all night has testimony that cuts the other way.
 
 **What they came for.** *To file Raunu Boranis under something. Anything* (see chapter VII). Her superiors want to know whether the man who
 returned is the man who left, and she has not been told why the question is
-phrased that way (see chapter VII; chapter III, Agenda 2). Her **fear** is the mists — the one
+phrased that way (see chapter VII; chapter II, "The Eight Agendas", Agenda 2). Her **fear** is the mists — the one
 memo from the east that reached her desk and was above her seal to read. The Church
 finds Raunu illegible, and a chief it cannot predict is a chief it cannot steer (see chapter II). And the written word belongs to the Church and to nobody else.
 
@@ -223,7 +223,7 @@ finds Raunu illegible, and a chief it cannot predict is a chief it cannot steer 
 | I | The wardens take a post where they can see the empty high table and the east doors at once | Gray-robed men who never look at the dancing | — |
 | II | The wardens ask the festival hires which rooms the master uses: the Audience Hall, and the dark wing on the second floor | A footman looking back after a gray robe moves on | — |
 | III | Kovaun waits in the Audience Hall antechamber; a warden meets any summoned character with an invitation to attend her in the chapel | The warden knows their name without being told it | — |
-| IV | The Radiant blesses the food in a form Kovaun recognizes (a Fracture tell, chapter V). Her question acquires teeth. Two wardens leave by different doors | Two empty places, and the Prelate not looking at them | — |
+| IV | The Radiant blesses the food in a form Kovaun recognizes (a Fracture tell; see chapter V). Her question acquires teeth. Two wardens leave by different doors | Two empty places, and the Prelate not looking at them | — |
 | V | The two wardens are at the door of Raunu's study (B8), working its crystal lock with the patience of men who have done this in other houses. They want the room filed | Lamplight under a study door that is supposed to be dark | **S8** |
 | VI–VII | *Lights out.* Heat 0–2: the wardens come down for the Prelate and get her out. Heat 3–4: they are inside the study when the lights die, and they finish the job: the drawer of invitation cards goes into a warden's arms, and the work-slate is wiped | Wardens coming down the dark-wing stair with their arms full | **S8** (dark) |
 
@@ -395,7 +395,7 @@ they are the only guests facing the right way.
 | VII | Corro out, and his people with him | — | — |
 
 **Walk into it.** The characters can take Corro seriously and walk the room with him
-(chapter IV, Undercurrent D). At midnight they are standing next to the one man who
+(see chapter IV, "Undercurrent D — The Guests Who Cast No Gossip"). At midnight they are standing next to the one man who
 moves early. Or they can be in the crush at the service door when the Phern blades
 are keeping it for their master (S11).
 
@@ -485,8 +485,8 @@ out of wanting it, and stays at 0 unless something new happens to it.
 |---|---|---|---|---|
 | **The Circle** ☐☐☐☐ | 1 | The toast *(automatic, Mv IV)* · Callun's coin refused in Mv III · **to 4:** S7's clock filled, or the nursery sold to her | −1 for each knife turned or caught quietly · **to 0:** Agenda 1 delivered, or the Tithe told to Callun, or Callun told to her face what her knife did to an under-cook | **S12** — the knives take a minister through the smoke |
 | **The Church** ☐☐☐☐ | 1 | The Radiant's blessing *(automatic, Mv IV)* · a warden refused or humiliated in front of guests · S8's tell shown to the table and not stepped on by midnight | −1 if Kovaun is given something true about the three gray masks to file · −1 if the wardens are turned back at the study door (S8) · **to 0:** Agenda 2's honest judgment delivered | **S8, in the dark** — the wardens carry the study out |
-| **House Draunel** ☐☐☐☐ | 1 | The toast *(automatic)* · Agenda 3, if one of the characters carries it, refused or failed · Iron 2 stopped without Draunel losing face (he reaches for the next iron) · S9's clock filled | −1 if Draunel is embarrassed in front of guests · **to 0:** Agenda 3's "understanding" delivered | **S13** — the arrest in the fire |
-| **House Boranis** ☐☐☐☐ | 0 | Vorlain baited, or got drunk, by one of the characters · the appointment accepted *(automatic, Mv IV)* · Draunel's heat reaches 3 · a cousin beaten in public (S6) · S9's clock filled | −1 each time the party helps Essin keep Vorlain sober and unbaited · −1 if S6 ends quietly · **to 0:** Essin warned of the appointment before Mv IV | **S13** — the cousins fight for Vorlain *(only if Draunel's heat is 3–4 too; otherwise they simply go into the fire with him)* |
+| **House Draunel** ☐☐☐☐ | 1 | The toast *(automatic)* · Agenda 3, if one of the characters carries it, refused or failed · Iron 2 stopped without Draunel losing face (he reaches for the next iron) · S9's clock filled, on the terrace or offstage (card S9) | −1 if Draunel is embarrassed in front of guests · **to 0:** Agenda 3's "understanding" delivered | **S13** — the arrest in the fire |
+| **House Boranis** ☐☐☐☐ | 0 | Vorlain baited, or got drunk, by one of the characters · the appointment accepted *(automatic, Mv IV)* · Draunel's heat reaches 3 · a cousin beaten in public (S6) · S9's clock filled, on the terrace or offstage (card S9) | −1 each time the party helps Essin keep Vorlain sober and unbaited · −1 if S6 ends quietly · −1 if S9 ends with nobody drawing · **to 0:** Essin warned of the appointment before Mv IV | **S13** — the cousins fight for Vorlain *(only if Draunel's heat is 3–4 too; otherwise they simply go into the fire with him)* |
 | **Phern** ☐☐☐☐ | 0 | Once each in Mv II, III and IV *(automatic — the omens)* | −1 if a character walked the room with Corro and took him seriously · −1 if Corro trusts a character enough to take an instruction at midnight | **S11** — the door held for Corro alone |
 | **The Thenya** ☐☐☐☐ | 1 | The toast *(automatic)* · the audience refused *(automatic, Mv IV)* · a character lies to Maiven, or refuses her and says so | −1 if a character promises to go with her at midnight and means it · **to 0:** proof of Veier — the ring delivered and an answer brought back, or anyone who has been in B9 telling her what the empty traveling pack means | **S10** in Mv V — the wall. *(At midnight she goes toward the east wing whatever her heat.)* |
 
@@ -528,6 +528,7 @@ than two factions are hot at midnight unless the table has made it so.
 > split three ways, it is three, one each. Every card the table did not walk into
 > resolves by its default (its clock fills offstage, or the snake simply does what it
 > came to do), and a faction's heat never rises for a line the table was never shown.
+> S9 fills offstage only if the table saw the appointment made (see its card).
 
 ---
 
@@ -752,7 +753,7 @@ VII. **Return to Movement V, B10.**
 ***Where and when:*** B12, the Gatehouse Court, Movement VII. *(Chapter V, "The
 Gatehouse Court, Held", points here.)*
 
-***Trigger — read when the first fleeing guests reach the court:***
+***Trigger — read when the characters reach the court and can see through the grille:***
 
 > *The outer gate is shut, and it was shut from the far side. Through the grille:
 > matched gray coats, more of them than there are of you, arranged with the unhurried
@@ -796,9 +797,10 @@ gallery fire reaches the Crystal Court's doors, and from then on every round cos
 crowd, and you say who did not get out. Standing still is the worst thing a party
 can do here.
 
-**The last bell — six segments.** Advances at the end of every round, whatever anyone
-does; the bells of Oraga began tolling the end of the night as the first guests
-reached the court. The **last bell of Oraga** rings the moment the gate is decided, and
+**The last bell — six segments.** Advances at the end of every round the characters
+spend at the gate, whatever anyone does there. The bells of Oraga began tolling the end
+of the night as the first guests reached the court, but that tolling is only the
+warning; the count starts at the gate (see chapter V, "The Midnight Clock"). The **last bell of Oraga** rings the moment the gate is decided, and
 on the sixth segment at the latest. If nothing else has decided it by then, the bell
 does: the contract's hours are over, the first sect banners come up Gate Street
 behind the Bought, and the captain calls the withdrawal. That is ending 3.
@@ -916,7 +918,7 @@ often Movement V. Also the Gatehouse Court in Movement I, if steel is drawn at t
 **Enemies.** Two **Boranis Honor Guards**, detaining and expelling. *Call the House*
 brings four more at the start of the second round after the first guard is Bloodied.
 *Budget:* 2 × 450 = **900 XP**, under Low (1,000); with the four who are coming,
-2,700 XP, beyond High. This is not a fight the party is meant to
+2,700 XP, beyond High. *Unsimulated.* This is not a fight the party is meant to
 win, and not one they can lose anything permanent to: a character the guards drop to 0 Hit Points is Unconscious
 and Stable and wakes in the gatehouse cell.
 
@@ -957,7 +959,9 @@ the guards down.
 - *Four at 5th level:* four guards.
 
 **Development.** If expelled, the offender's invitation is void and Corval is informed.
-If an out ended it, no invitation is void. **Return to the current Movement.**
+An out spares the character expulsion, but bared steel or a forced door voids the
+invitation either way (see chapter IV, "The Palace on Alert"). **Return to the current
+Movement.**
 
 ---
 
@@ -1040,8 +1044,8 @@ out through the garden doors behind anyone who followed. These are the cousins w
 were there in 3160 (the block's **Nastier** line). They use *A Quiet Word* and their
 fists; steel only if a character draws first, or casts anything a guest
 could see, and then it is the Palace on Alert and the cousins have lost.
-*Budget:* 3 × 200 = **600 XP**, under Low (1,000), and it plays easier than that: a fist
-does 3 damage and a grapple does none, and the cousins break long before anyone is on
+*Budget:* 3 × 200 = **600 XP**, under Low (1,000), and it plays easier than that: *A Quiet Word*
+does 3 damage and holds the target, and the cousins break long before anyone is on
 the ground.
 
 A quiet word is not supposed to be a fight. What it can cost is a scene: a character held by two cousins at the
@@ -1134,7 +1138,7 @@ woman prices in what she cannot see.
 
 *(The knife never learns what is upstairs, and
 neither does Callun. Nobody in the Circle learns of the child unless a player character
-tells them — chapter II.)*
+tells them; see chapter II.)*
 
 **Enemies.** Four **Circle Hired Knives**: the three in the read-aloud, and the fourth
 the Circle paid for, who has been in the service run all night (the block's
@@ -1199,7 +1203,8 @@ doorway without a blow.
 
 **Development.** If the under-cook was helped, and Agenda 8 is in play, she is somebody's
 sister — and a friend who knows the other way through the palace at midnight. If the
-knives were stopped, the Circle's heat falls by one. If the clock filled, it is 4, and
+knives were stopped, the Circle's heat falls by one for each knife turned or caught
+quietly. If the clock filled, it is 4, and
 S12 is live in the dark. **Return to Movement V.**
 
 ---
@@ -1309,7 +1314,7 @@ the scorch marks mean is left open (see chapter X, "The Night's Loot").
 only by the improvised route in chapter IV. If the drawer leaves with the Church, the
 inquest never sees it, and the Church's file on Raunu Boranis is one drawer thicker. If
 the wardens were turned back, the Church's heat falls by one. **Return to Movement V**,
-or to the dark, chapter V.
+or to the dark (see chapter V).
 
 ---
 
@@ -1337,9 +1342,15 @@ have started it. Which side the party is on decides the rest.
 **The circle clock — four segments.** Advances at the end of each round the two
 principals are still facing each other, and by one whenever a Cousin's Blade fails its
 save against a duelist's *Provocation* and draws. Each cousin can be provoked into
-drawing only once. **The duelists hold Provocation until a player character has taken
-a turn on the terrace.** Until the party is in the scene, nobody is performing for
-anyone, so the clock can never fill before the party has acted.
+drawing only once. **On the terrace, the duelists hold *Provocation* until a character
+has taken a turn there.** Until the party is in the scene, nobody is performing for
+anyone, so the clock never fills on the terrace before the party has acted.
+
+**If no character comes to the terrace,** the appointment runs without them. If the
+table saw the appointment made in Movement IV, the clock fills offstage at the end of
+Movement V: run **Full** (below) as news, and both houses' heat rises by one. If the
+table never saw it, it leaves no mark on the tracker, because a line the table was
+never shown never rises.
 
 **Full:** steel meets
 steel. One of the two principals goes down bleeding (you roll who, in the open),
@@ -1415,9 +1426,9 @@ heat rises by one, and the honor guard is on the terraces for the rest of the Mo
 ## S10. Over the Wall
 
 ***Where and when:*** the garden below the east wing, Movement V, at the half-bell. The
-Thenya — **a fight only if the party provokes it.** Only if the Thenya's heat is 3 or
-more at the half-bell; at 0–2 the slingers coil the rope and do not climb, and this card
-does not fire. *(Chapter IV, "The Snakes This Movement — V", points here.)*
+Thenya, and **a fight only if the party provokes it.** The card fires only if the
+Thenya's heat is 3 or more at the half-bell. At 0–2 the slingers coil the rope and do
+not climb. *(Chapter IV, "The Snakes This Movement — V", points here.)*
 
 ***Trigger — read when a character comes round into the garden below the east
 wing:***
@@ -1547,8 +1558,8 @@ Corro. They hold the door until Corro is through, and then they are through behi
 once.
 
 **Outs.**
-- Corro's word. A character who walked the room with him and took him seriously
-  can tell him to have his people hold the door for everyone, and he does: no check.
+- Corro's word. A Phern character, or a character who walked the room with him and
+  took him seriously, can tell him to have his people hold the door for everyone, and he does: no check.
   Anyone else needs a DC 15 Charisma (Persuasion) check, shouted over a crowd.
 - Hold it with them. A character who helps hold the doorway makes a DC 13
   Strength (Athletics) check each round; on a success the door is held for everyone that
@@ -1575,7 +1586,8 @@ for everyone.
 **Development.** The service passages are the only unwarded way through the palace
 after midnight (see chapter IV, "The Palace on Alert"). A door held for everyone here is
 the difference between a tragedy and a massacre, and a party that held it has already
-done the thing Movement VII is about. If the crush clock filled, that doorway stays
+done the thing Movement VII is about. Every guest brought through that door counts as
+carried out (Table I–4). If the crush clock filled, that doorway stays
 jammed for the rest of the night. **Return to chapter V, and the beats.**
 
 ---
@@ -1683,10 +1695,10 @@ comes down, and whoever is still inside is still inside.
   fight.
 - **Vorlain Boranis** fights only to free his arm, fast (*Brief and Efficient*), and
   then goes back into the fire.
-- Do not run both sides against the party (2,100 XP, over High).
-- *At heat 4:* the gallery clock starts with one segment filled. If the party sides
-  with Draunel, Essin's side breaks as soon as Vorlain is out of reach — *Always
-  Between*, then gone.
+- Do not run both sides against the party (2,100 XP, over High). If the party sides
+  with Draunel, Essin's side breaks as soon as Vorlain is out of reach (*Always
+  Between*, then gone).
+- *At heat 4:* the gallery clock starts with one segment filled.
 
 > **DM Note — how it plays.** Against the Draunel side, a character drops in about one
 > fight in three.
@@ -1869,26 +1881,27 @@ next round, and the Help action doesn't apply. The table chooses whose trick it 
 - **The fourth broken focus of the night:** it wanders off — out of the fight, standing
   at a window, watching the fires. That is a win.
 
-**DM Note — how to hint that it can be distracted.**
-1. **Show every habit before midnight, plainly** (chapter IV's sightings, in
-   Movements I, II, IV and V): in Movement I it holds a cup for someone who never takes
-   it; in II it stops dead in front of a crystal wall and watches the light for a full
-   minute; in IV the band changes tune and it turns
-   to follow the sound; in V it is trying to watch the party and keeps losing them
-   because something shiny goes past. A player who says any of these out loud earns
-   the omen reward.
-2. **The hitch.** The first time anything unexpected happens within its sight in the
-   fight — a thrown light, a shout, a crashing tray — describe a visible half-second
-   hitch: its head turns, its blow stalls, and then it recovers. Do this once, free, in
-   the first round. That is the tell.
-3. **Say its state out loud,** every round: *"It's locked on you"* (Focused) or *"It's
-   drifting"* (Idle). Players can't use a dial they can't see.
-4. **Reward the attempt, not only the success.** The first player to try distracting it
-   gets Heroic Inspiration whether it works or not.
-5. **If nobody has tried by the third round,** one of the Uninvited says something to
-   it — a curt word, the way you would call a dog back to heel — and it snaps out of
-   whatever it was looking at and back to Focused. Let the players see that it needed
-   calling back.
+> **DM Note — how to hint that it can be distracted**
+>
+> 1. **Show every habit before midnight, plainly** (chapter IV's sightings, in
+>    Movements I, II, IV and V): in Movement I it holds a cup for someone who never takes
+>    it; in II it stops dead in front of a crystal wall and watches the light for a full
+>    minute; in IV the band changes tune and it turns
+>    to follow the sound; in V it is trying to watch the party and keeps losing them
+>    because something shiny goes past. A player who says any of these out loud earns
+>    the omen reward.
+> 2. **The hitch.** The first time anything unexpected happens within its sight in the
+>    fight — a thrown light, a shout, a crashing tray — describe a visible half-second
+>    hitch: its head turns, its blow stalls, and then it recovers. Do this once, free, in
+>    the first round. That is the tell.
+> 3. **Say its state out loud,** every round: *"It's locked on you"* (Focused) or *"It's
+>    drifting"* (Idle). Players can't use a dial they can't see.
+> 4. **Reward the attempt, not only the success.** The first player to try distracting it
+>    gets Heroic Inspiration whether it works or not.
+> 5. **If nobody has tried by the third round,** one of the Uninvited says something to
+>    it — a curt word, the way you would call a dog back to heel — and it snaps out of
+>    whatever it was looking at and back to Focused. Let the players see that it needed
+>    calling back.
 
 **Terrain as rules.** Whatever room the party is in. Every chapter V room-trick table
 lists lights, crystal and noise the Attendant will turn toward; any of them is a trick

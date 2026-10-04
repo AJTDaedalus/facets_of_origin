@@ -44,9 +44,11 @@ record, and it is what history keeps.
 
 ## Ending the Session
 
-1. **Read the epilogue** in chapter V, adjusting it for what the table did.
-2. **If you ran the epilogue in chapter V,** you have already asked the question and
-   called 5th level. If you skipped it, do both now.
+1. **Read the epilogue** in chapter V, adjusting it for what the table did. It ends
+   by asking each player what their character carries out of Oraga Night, and it calls
+   5th level.
+2. **If you cut the epilogue for time,** still ask the question and call 5th level
+   before anyone leaves.
 
 5th level is the line where a fighter swings twice, a caster reaches level 3 spells,
 and a character stops being somebody who survived one bad night and becomes somebody
@@ -85,7 +87,7 @@ the play.
   Intelligence (Investigation) check to find the one who will talk), then nothing. A failed check costs time and draws a faction's attention; it never loses
   the trail.
 - **Otta Vesh,** the finest mask-maker in Rekuzan, keeps a casting-blank of every face
-  she has ever fitted. Ask her about the three gray masks: *nobody made them*, nobody
+  she has ever fitted. Ask her about the three gray masks: nobody made them, nobody
   in the city would know how, and the material is wrong. It leads nowhere.
   It is the moment the investigation stops having a suspect and starts
   having a hole in it.

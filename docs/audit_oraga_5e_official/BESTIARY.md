@@ -225,3 +225,92 @@ properties of each creature and don't depend on party level.
 2. **The blank alignment on the Uninvited and Vell (BESTIARY-21).** INVENTIONS #44 says pass 2 chose "Alignment —" over ruling on their morality. The blocks print nothing at all. *Question:* print the dash, or keep it blank with a one-line note in How to Read? This is not asking for an alignment.
 3. **The Circle knife's coat (BESTIARY-23):** give it a GP value, or leave it unvalued as flavour?
 4. **"MM" for "DM"** is not filed here. It appears only a few times in this chapter, and the owner is already being asked about it.
+
+---
+
+## 5. Status after fix pass (2026-10-03)
+
+*Final review T9.3, fresh eyes. Checked against `10_Bestiary.md` at HEAD (2,027 lines),
+`git diff pre-official-5e..HEAD`, and `tools/bestiary_check.py` (25 blocks + 3 Nastier,
+0 mismatches). `lint_5e.py --file 10_Bestiary.md`: every rule at 0. Line numbers below are
+current.*
+
+| ID | Status | Evidence |
+|---|---|---|
+| BESTIARY-1 | fixed | `10:34-37`: the Bought are taken out of the *detain* list and pointed at *To the Terms* (O5). Wording nit in NEW-BESTIARY-5. |
+| BESTIARY-2 | fixed | `10:1800-1803` *She Arrives* now spends one of the Multiattack's two attacks; *Nastier* (`10:1837-1839`) is a real dial again. Edge case with Nastier in NEW-BESTIARY-2. |
+| BESTIARY-3 | fixed | `10:404-405` "*Trigger:* The guard is Bloodied, and no guard has called the house this scene." Matches `04:61` and S4 (`09:916`). |
+| BESTIARY-4 | fixed | `10:727` CR 1/2 (XP 100); Table X–1 `10:65`. S8's budget (`09:1246`) is 4 Wardens × 200 = 800 XP and says the Prelate is not in the fight, so the change needs no 09 edit. |
+| BESTIARY-5 | fixed | Bare AC and a **Gear** line on every armored block (armor only, weapons in Actions, declared at `10:52-53` as the house reading); one **Immunities** line (`10:201`, `1061`, `1336`, `1751`); Senses semicolons; Initiative folded (`10:1216` +1 (16), `1262` +4 (19); note at `10:51-52`); CR-line and Resistances commentary moved to lore tails (`10:297-299`, `1840`). Field order matches SRD 5.2.1 (Skills, Resistances, Immunities, Gear, Senses, Languages, CR). |
+| BESTIARY-6 | fixed | `10:1101-1102` "On a success, the creature holds its ground but still doesn't get past him." |
+| BESTIARY-7 | fixed | Italic Title Case throughout (`10:132`, `1385`, `1417`, `1575-1576`, `1618`, Table X–3 `1986-1995`, `1997`, `2010`, `2015`). |
+| BESTIARY-8 | fixed | All nine sites in "DC N Ability (Skill)" form: `10:731-732`, `902-903`, `1180-1181`, `1469-1470` (DC 25 → 20, deliberate, INVENTIONS #65, matches `07:359`), `1855`, `1870`, `1915-1916`, `226-228`, `156-158`. |
+| BESTIARY-9 | fixed | `10:137-139` gives DC 13, DC 15 on a repeat, never a third time; matches `05:246-247`. |
+| BESTIARY-10 | fixed | All six sites recast to "the character(s)/the party" (`10:27`, `339-340`, `935-936`, `1033`, `1130`, `1497`). |
+| BESTIARY-11 | gated (Q8) | `10:1904` `<!-- TODO-Q8 -->`; no trait added. Correct: needs the owner. |
+| BESTIARY-12 | fixed | "(1/Day Each)" `10:393`, "(1/Day)" `500`, `572`, "(3/Day)" `1083`, `1363`, `1774`; Callun's free action now "no action required" (`10:1473`); "until the scene ends" defined at `10:53-55`. |
+| BESTIARY-13 | fixed | ***Bloodied.*** traits under Traits (`10:1110`, `1388`, `1582`, `1784`); Tavva's names the Bonus Action. Epithets on their own italic line above the type line on every block that has one. |
+| BESTIARY-14 | fixed | *Blood, Not Hire* → lore tail `10:346-348`; *Pays Her Debts* → `10:761`; *Stones Before Steel* → Tells and lore `10:1662`, `1666-1667`; *The Wrapped Sword* kept (`10:1920-1923`). |
+| BESTIARY-15 | partly | Em dashes 104 → 54; `99`, `1386` (tricolon softened), `1482`, `1489`, `1778` (cut), `100`, `1799` fixed. Left: `10:1568-1569` "She fights to leave, not to win." and `10:2014` "It is an heirloom, not treasure." Both small; leaving them is defensible. See also NEW-BESTIARY-3 on the `1386` rewrite. |
+| BESTIARY-16 | fixed | *Tiny Hut* (`10:127`); conditions capitalized ("can't be Charmed, Frightened" `10:1080`); Advantage/Disadvantage in SRD Title Case throughout (O1 chose capitals module-wide, which overrides the audit's lowercase suggestion). |
+| BESTIARY-17 | fixed | `10:271` "*Success:* Half damage."; "Its magic is real" moved to *Before Midnight* (`10:277`); Kovaun's flavor-only Success clause dropped (`10:741-744`). |
+| BESTIARY-18 | fixed | `10:255-258` count-below-1 rule, and the recharge rolls only on the first turn. |
+| BESTIARY-19 | fixed | `10:151-174` is now a compression of `05:690-729` ("or one beat out of one", "for the rest of their life", "The DM chooses which", pointer to chapter V). |
+| BESTIARY-20 | fixed | "*Built on the SRD guard.*" `10:1541`; *A guest* uses the SRD 5.2.1 **commoner** `10:1885-1886`. |
+| BESTIARY-21 | gated (Q18) | `<!-- TODO-Q18 -->` under the type line at `10:1047`, `1322`, `1737`, `1896`. Alignment still blank, correctly not chosen. |
+| BESTIARY-22 | fixed | `10:1860-1863` "Speed 30 ft. (15 ft. tonight)" and full attack grammar. |
+| BESTIARY-23 | partly (coat gated Q15) | Item caption added (`10:1982`); coin is "GP" per the style sheet. The coat is still unvalued, with `<!-- TODO-Q15 -->` at `10:2025`. |
+| BESTIARY-24 | fixed | Optional one-liner added: `10:148-149` "Their challenge ratings describe how hard they hit; nothing tonight stops them." |
+
+**Counts:** 20 fixed, 2 partly (15, 23, the coat part gated Q15), 2 gated (11 Q8, 21 Q18),
+0 skipped, 0 regressed.
+
+---
+
+## 6. New issues found in final review
+
+### NEW-BESTIARY-1 [P2] The Attendant's *Put Aside* save DC matches no ability
+- Where: `10:269` "*Strength Saving Throw:* DC 14, each creature of its choice in a 20-foot Emanation".
+- Problem: PB +3 (CR 8). Str-based is 8 + 3 + 4 = **15**; Int-based is 17. No ability gives 14. The DC predates the pass, and the original audit's "every save DC correct" missed it: `bestiary_check.py` skips DCs it can't tie to an ability, and this is one of them. Chapter IX (S14, `09:1797`, `09:1898`) prints no DC, so only 10 changes.
+- Fix: "*Strength Saving Throw:* DC 15, each creature…" Then add the Attendant's Put Aside to the checker's DC list, tied to Str.
+
+### NEW-BESTIARY-2 [P3] *She Arrives* says "never a third attack", which collides with *Nastier*
+- Where: `10:1800-1803` "make one of her Multiattack's two attacks … it is never a third attack, and she can't make it if she has already made both" against *Nastier* `10:1837-1839` "she makes three Strength Like a Fact attacks a turn".
+- Problem: under *Nastier* the Multiattack has three attacks. The trait hard-codes "two" and "never a third", so a DM can't tell whether the arrival attack can be her third.
+- Fix: "…she can make one of her Multiattack's attacks at once on arrival… That attack counts toward her Multiattack that turn; it is never an extra attack, and she can't make it once her Multiattack is used up."
+
+### NEW-BESTIARY-3 [P3] Radiant's Fracture: "answers first" then "never answers"
+- Where: `10:1427-1429` "At a cost, the same, but he answers first with one parting blow or word. He keeps going, never answers, and never turns."
+- Problem: the fix-pass rewrite of the BESTIARY-15 tricolon kept the old sentence's sense. Read straight after "he answers first", "never answers" now contradicts it. It also stays a tricolon.
+- Fix: "At a cost, the same, but he answers first with one parting blow or word. Either way he keeps going; the hunt does not end (chapter V)."
+
+### NEW-BESTIARY-4 [P3] Callun's call-off line is redundant
+- Where: `10:1473-1474` "She can call them off at any time, no action required, once each turn, even on someone else's turn."
+- Problem: the BESTIARY-12 fix put "at any time" next to "once each turn", so the line limits itself twice and reads choppily.
+- Fix: "She can call them off once each turn, even on someone else's turn; it takes no action."
+
+### NEW-BESTIARY-5 [P3] The *detain* exception's grammar and scope
+- Where: `10:35-37` "the Bought leave a creature at 1 Hit Point and the Grappled condition instead, see *To the Terms*".
+- Problem: "leave … at … the Grappled condition" doesn't parse. "The Bought" also covers the Captain and Sergeant, who have no *To the Terms* trait and no detain rule. Only the Bought Blade does.
+- Fix: "(the honor guard, the sect guard, the Church Wardens; a Bought Blade on a contract to detain leaves a creature at 1 Hit Point with the Grappled condition instead, see its *To the Terms*)".
+
+### NEW-BESTIARY-6 [P3] The Wept's Fracture differs from chapter V on Bonus Actions
+- Where: `10:1820-1821` "she takes no actions, no Bonus Actions, no Reactions and does not move" against `05:647-648` "takes no actions, no Reactions, and does not move".
+- Problem: this predates the pass and was missed in the first audit. In 2024 terms a Bonus Action is not an action, so under chapter V's wording she could still Shadow-Step (a teleport, not a move) during the round. The stricter reading in 10 is clearly the intent. Under the compression rule, the canonical text in 05 must carry it.
+- Fix (in 05, by its slice owner): "**For one full round she takes no actions, no Bonus Actions, no Reactions, and does not move**". 10 stays as it is.
+
+*Checked and clean:* every prose damage average (Paid Extra, Sneak Attack, Brief and Efficient, the Nastier lines) and every other trait DC (Seize 13/12, Provocation 12, Shove 12, Furniture 13, Border Sling 13, The Post and Turn Them Back 17, The Rite 17, In the Church's Name 14, escape DCs). Leashed return points match O4 and `05:218-219`. The *Call the House* timing matches `04:61`. Callun's DC 20 matches `07:359`. The Attendant's three habits match O3/Q22. The "came through with them" lore matches `07:599`. No invented facts found in the diff.
+
+### 6a. Resolved (Phase 9 final-review fixes, 2026-10-03)
+
+| ID | Resolved | Note |
+|---|---|---|
+| NEW-BESTIARY-1 | fixed, test-first | *Put Aside* DC 14 → 15 (8 + PB 3 + Str 4; a shove of force, so Strength). `bestiary_check.py` gained `trait_dc_problems` (TRAIT_DC table) and 5 tests, which failed red on DC 14 before the text changed; the data row is now `dc=[(15,0)]`. INVENTIONS #55 amended. |
+| NEW-BESTIARY-2 | fixed | *She Arrives*: "one of her Multiattack's attacks… it is never an extra attack, and she can't make it once her Multiattack is used up." The attacks-per-turn check still passes. |
+| NEW-BESTIARY-3 | fixed | "Either way he keeps going; the hunt does not end." |
+| NEW-BESTIARY-4 | fixed | "She can call them off once each turn, even on someone else's turn; it takes no action." |
+| NEW-BESTIARY-5 | fixed | "a Bought Blade on a contract to detain leaves a creature at 1 Hit Point with the Grappled condition instead, see its *To the Terms*". |
+| NEW-BESTIARY-6 | fixed (in 05) | 05 now adds "no Bonus Actions"; 10 unchanged. |
+| BESTIARY-15 leftovers | fixed | Tavva "She fights to leave."; the soul-crystal "It is an heirloom, with no value in GP." |
+| NEW-SNAKES-7 (10 side) | fixed | Honor Guard Nastier "third guard"; Attendant Breaks check names. |
+| NEW-NIGHT-6 (10 side) | fixed | Push direction in the three *Leashed* traits. |

@@ -75,8 +75,9 @@ is stated. Everything else in this chapter points here.
 
 1. **The lights die.** Nobody rolls Initiative yet (Movement VI, below).
 2. **The beats begin.** Master Pellin Corro moves first ("Who moves first", below).
-3. **The Wept reaches Raunu** on her third turn of moving toward him, plus one turn
-   for each point of Delay spent on her (Table V–1).
+3. **The Wept reaches Raunu** on her third turn of moving toward him (her fourth with
+   three characters; see "Adjusting the Attack"), plus one turn for each point of
+   Delay spent on her (Table V–1).
 4. **Raunu falls.** The Hollow turns east (sooner, if his Fracture lands), the main
    doors open, and the crowd pours out toward the Gatehouse Court (B12). The bells of
    Oraga begin to toll as the first guests reach it.
@@ -87,7 +88,9 @@ is stated. Everything else in this chapter points here.
 7. **The leash.** When the boat is out of reach of the river gate, the leash takes all
    three, finished or not.
 8. **The gate is decided** (card S3), by any of its three endings. Then the last bell
-   rings, no later than the bell clock on card S3.
+   rings, no later than the bell clock on card S3. That clock counts only the rounds
+   the characters spend at the gate; the bells that begin in step 4 are only the
+   warning, so the last bell never rings during the Crossing.
 
 ## Movement VI — The Unmasking
 
@@ -170,8 +173,7 @@ gate runs through the garden stair.
 seconds before the lights die, and by the time the rose has drained out of the walls
 he is already moving toward the gallery-side service door with his **Phern Bodyguards** (see chapter X) around
 him. A character who has been watching Corro all night, or who is Phern, moves with him and
-may act in the first beat before anyone else. Following him saves lives ("Knives in the
-Dark", Phern).
+may act in the first beat before anyone else. Following him saves lives (card S11).
 
 > **Sidebar — Crystals gutter:** within **30 feet** (a stone's throw) of an
 > Uninvited, releasing a crystal charge (see chapter X, "Items of the Night") takes a
@@ -223,7 +225,7 @@ They are moving it out of the way.
   saves. If two blows landed at once, you pick.
 
 The **Attendant** (below) works the same way: whoever it drops is Stable, and gets up
-the same way. Everything else tonight (the snakes, the Bought, the fire) uses the
+the same way. Everything else tonight (the snakes, the Bought) uses the
 ordinary rules for dying, **except that the crowd rule holds anywhere in the palace
 after midnight.** Someone always comes.
 
@@ -272,7 +274,7 @@ never makes an Uninvited beatable. ⟨If History Breaks⟩, at the end of this c
 says what happens when the characters stack enough of it to change an outcome.
 
 **The Attendant takes Delay away.** Once a round, if a distraction hasn't cost it the
-turn and nobody is in its reach, it clears the way for one of the three and removes 1 Delay.
+turn and no enemy is within 5 feet of it, it clears the way for one of the three and removes 1 Delay.
 That is why the characters cannot ignore it. See "The Attendant", below.
 
 > **Sidebar — Adjusting the Attack.** The numbers above are built for four 4th-level
@@ -313,7 +315,7 @@ in the room is not.
 |---|---|---|
 | 1 | **Flare a ward** by the doors. He flinches from ward-fire, and for a moment the doors behind him are unwatched. Each ward-point once | Ward-steering (see "How to Run the Attack", principle 2) |
 | 2 | **Answer him.** Sooner or later he asks, flatly, whether this is worth it to you. Give him a real answer. He waits for it as if it mattered | Wisdom (Insight) or Charisma (Persuasion) |
-| 3 | **Call a name.** Get Anha, or any of the kitchen household, to call a name across the hall, or call one yourself. He turns his head toward the sound | Charisma (Performance), or Charisma (Persuasion) to get a servant to do it |
+| 3 | **Call a name.** Get Anha, or any of the kitchen household, to call a name across the hall, or a character calls one. He turns his head toward the sound | Charisma (Performance), or Charisma (Persuasion) to get a servant to do it |
 | 4 | **Two who belong together.** Walk them past him: Anha's people through the service door, or any two guests holding on to each other. He watches them go, the way he watched them all night | Charisma (Persuasion), to get them moving |
 | 5 | **Another door.** Make the crowd surge at the gallery-side service door. He steps through the shadow to hold it, and for a moment the main doors are nobody's. The people at that door are in his way now; say so first | Charisma (Intimidation or Performance) |
 | 6 | **Hand him something.** He is polite. Give him a cup, a mask, a coat to hold, as one guest to another, and he holds it | Charisma (Persuasion or Deception) |
@@ -348,10 +350,10 @@ Crossing; Delay earned here is spent at the gate)*
 | 2 | **The balustrade.** The duel has already smashed the terrace balustrade; push what is left down onto the stair behind the party | Strength (Athletics) |
 | 3 | **Through the beds.** Take Veier off the gravel and through the flower beds in the dark. Slower for the characters, and slower for him | Wisdom (Survival) |
 | 4 | **Shut the river gate** behind the boat and hold it, or lock it | Strength (Athletics); or Thieves' Tools, DC 15; no check for the character with Agenda 6 |
-| 5 | **Push the boat off.** Wade in and put your shoulder to it | Strength (Athletics) |
+| 5 | **Push the boat off.** A character wades in and puts a shoulder to it | Strength (Athletics) |
 | 6 | **Hold him in the shallows.** Grapple him at the water's edge. While he is Witnessed he can't step out of it | An Unarmed Strike (Grapple) |
 | 7 | **The front gate.** Tell him the woman in Thenya wool went out by the front | Charisma (Deception) |
-| 8 | **A body in the way.** Stand between him and the boat. He spends his turn at the gate on you ("Down, Not Out") instead of on the boat. Always available | No check, no Delay; it does the same job |
+| 8 | **A body in the way.** Stand between him and the boat. He spends his turn at the gate on that character ("Down, Not Out") instead of on the boat. Always available | No check, no Delay; it does the same job |
 
 #### Two Hundred People
 
@@ -403,7 +405,7 @@ player who came to this ball wanting a real fight.
   the palace that can be fought. Say its state out loud every round: *locked on you*,
   or *drifting*.
 - **It and Delay feed each other.** Once a round it clears the way and removes 1
-  Delay, unless a distraction cost it the turn or someone is in its reach. It comes
+  Delay, unless a distraction cost it the turn or an enemy is within 5 feet of it. It comes
   back to Focused at the start of its turn only if one of the three in the scene has
   no Delay. Keep Delay on the three and the Attendant stays Idle; keep the Attendant
   busy and the Delay stays put.
@@ -524,8 +526,8 @@ What history records, told in scenes. Bend everything except what the characters
 Veier is wounded across the ribs by the Radiant's one clean pass in the east wing.
 She is upright anyway, moving with Thenya bluntness toward the water, and she meets
 Master Vell at the garden stair as if by appointment. Any character with her (Agenda 4
-above all) is welcome company: Vell does not explain, does not slow, and does not
-refuse help. Then the Radiant catches them on the terrace, and for the first and only
+above all) is welcome company: Vell accepts help without slowing down or explaining
+himself. Then the Radiant catches them on the terrace, and for the first and only
 time all night, Master Vell stops being unmemorable.
 
 **When the Radiant steps out of the smoke onto the terrace, read:**
@@ -739,8 +741,8 @@ the Uninvited's blocks.)*
 - **The Wept** *(sorrow)*. Truth: she was a mother once, and disease took her
   family while she stood by helpless. Tonight she has been sent to do to a
   family, with her own hands, what the world once did to hers. Invoked: she stops.
-  Mid-motion, mid-kill. **For one full round she takes no actions, no Reactions, and
-  does not move** — a woman standing in a burning ballroom, long enough to pull a
+  Mid-motion, mid-kill. **For one full round she takes no actions, no Bonus Actions, no
+  Reactions, and does not move** — a woman standing in a burning ballroom, long enough to pull a
   victim clear, seal a ward, finish an escape.
 
   *(While she has 2 or more Delay, this
@@ -762,7 +764,7 @@ the Uninvited's blocks.)*
   **Plant the doubt:** a priest, a believer, or anyone armed with his tells
   declares the truth to his face: *no god worth the name asks for a stolen
   child. Whatever spoke to you, it was not the Just One.* On a hit the words
-  lodge. He does not stop, does not answer, does not turn, but guilt gets into
+  lodge. He keeps going without a word, but guilt gets into
   the errand like grit into a joint: he falters at thresholds, looks back,
   re-stages kills that were already staged.
 
@@ -818,7 +820,7 @@ the faction does the frightened, sensible thing and gets its principal out. **He
 
 | Faction | Heat 0–2 | Heat 3–4 — where, and what the characters see | If nobody stops it | Card |
 |---|---|---|---|---|
-| **The Circle** | The knives get Callun out through the service passages | B2 → B10: two plain good coats half-carrying an old man the wrong way through the smoke | A Tithe-carrier leaves the palace in Circle hands | **S12** |
+| **The Circle** | The knives get Callun out through the service passages | B3 → B10: two plain good coats half-carrying an old man the wrong way through the smoke | A Tithe-carrier leaves the palace in Circle hands | **S12** |
 | **The Church** | The **Church Wardens** come down for the Prelate and get her out | B8: wardens coming down the dark-wing stair with their arms full | The scorched invitations are gone and the slate is wiped by dawn | **S8** |
 | **House Draunel** | Draunel gets out, and remembers what he saw | B3: three blades pulling a man out of a burning room while he shouts for the people still inside | Essin's cousins fight for him; Vorlain is not taken | **S13** |
 | **House Boranis** | Essin and the cousins go with Vorlain into the fire | B3, only if Draunel's heat is 3–4 too: cousins, blades out, between Vorlain and Draunel's men | As Draunel | **S13** |
@@ -830,7 +832,9 @@ read-aloud to its outs:
 
 - **The Circle, the delivery:** card S12.
 - **The Church, the filing:** card S8, its after-midnight half.
-- **House Draunel and House Boranis, the fourth iron:** card S13.
+- **House Draunel and House Boranis, the fourth iron** (if the night breaks, Draunel
+  means to take Vorlain in the chaos and hand him to the first sect guard through the
+  gate as the culprit): card S13.
 - **Phern, the door:** card S11. Its first out turns the door without a fight.
 
 ### The Thenya — toward the fire
@@ -1086,15 +1090,15 @@ What comes next is a pursuit: down the river, along
 the coast, toward mists that are rising again — with Vell, suddenly and terrifyingly
 forthcoming, as patron. The child is recoverable at the water's edge; past the
 mist-line, this adventure draws its curtain and your campaign begins. *(Vell being
-forthcoming means he points and pays. It never means he explains himself; What the
-Module Never Says still holds.)*
+forthcoming means he points and pays. It never means he explains himself (see chapter II,
+"What the Module Never Says").)*
 
 **⟨They trap one of the Uninvited.⟩** Killing one is off the table (see "You
 Cannot Beat Them"), and that line holds even against brilliance. But
 trapping one, briefly, is the outer edge of the possible. Deep Boranis
 ward-crystal is the one thing tonight that their wrongness does not simply
-unravel. A table that lures one into the Root's threshold, a resealed ward-
-corridor, or a gallery ring of Raunu's own work has caught something no one has
+unravel. A table that lures one into the Root's threshold, a resealed
+ward-corridor, or a gallery ring of Raunu's own work has caught something no one has
 ever caught.
 
 *(In the rules: no spell does this. Only the house's own crystal does,
@@ -1126,7 +1130,7 @@ Vorlain implicated; the Circle wants a trade rival implicated; the Church wants 
 closed and the mists unmentioned; Vorlain wants anything that is not himself.
 
 Without a
-patron, the truth only exposes them. It makes the characters the most interesting
+patron, the truth only exposes the characters. It makes them the most interesting
 people in Rekuzan to several organizations at once, every one of which was in the
 palace last night and knows exactly who the characters are. That is a campaign frame,
 not a dead end, and chapter VI leans into it.
@@ -1134,7 +1138,7 @@ not a dead end, and chapter VI leans into it.
 **⟨A player character dies.⟩** Let it mean something and cost the enemy tempo.
 A death that holds a corridor or a gate is written into the night forever. *(Neither
 the Uninvited nor the Attendant ever kills a player character; "Down, Not Out" sees
-to that. A death tonight is a snake's knife, the Bought, the fire, or a player's
+to that. A death tonight is a snake's knife, the Bought, or a player's
 own choice at the gate. Make it count.)* Then, between beats, hand the player Corval, Anha, Maiven, or
 Vorlain to finish the night with. Nobody sits out the Longest Night.
 

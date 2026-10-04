@@ -89,7 +89,7 @@ Chapters VII to XI are the book's appendices.
 
 ## What to Read First
 
-**Ninety minutes of prep.** Chapter I opens with a box, *How to prep in 90 minutes*:
+**Ninety minutes of prep.** Chapter I opens with a box, "How to prep in 90 minutes":
 what to read, in what order, and what to skim. In short: the DM sheet in chapter VIII,
 the fight cards in chapter IX and the blocks in chapter X are what you run from;
 chapters IV and V are the reference behind them.

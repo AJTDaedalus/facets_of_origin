@@ -330,3 +330,138 @@ printed "Four at 3rd level" scaling line.
 4. **XP for walk-away outs (SNAKES-5).** This touches 01 Table I–4, a rule the pass-2 fixers set rather than the owner. *Question:* should an out in which the party simply leaves (let the thieves go, walk away from the cousins, back off from the Attendant) pay the card's full XP? *Recommend:* no. Pay outs that resolve the scene, not ones that leave it.
 
 *Resolved. Audit of 09 complete; findings go to consolidation in `docs/AUDIT_oraga_5e_official_style.md`.*
+
+---
+
+## 5. Status after fix pass (2026-10-03)
+
+*Final review T9.3, fresh eyes. Read against HEAD (`git diff pre-official-5e..HEAD`); line numbers are HEAD's 09 (1,942 lines). `lint_5e.py --file 09_The_Snakes.md` reports 0 on every rule. Counts: **24 fixed · 2 partly · 2 gated (Q14, Q12) · 0 skipped · 0 regressed** (but see NEW-SNAKES-2, a regression the fix pass introduced next to a fix).*
+
+| ID | Status | Evidence |
+|---|---|---|
+| SNAKES-1 | fixed | 09:508–509 now says "Each card says what heat 4 changes". *At heat 4* lines: S8 09:1291–1292, S10 09:1454 (new, O23), S11 09:1529, S12 09:1610, S13 09:1687. 10's Phern Bodyguard Nastier is now the narrower door (10:1312–1313). The S13 insertion broke a neighbouring rule: see NEW-SNAKES-2. |
+| SNAKES-2 | fixed | Table IX–2 09:486–491 adds Boranis "a cousin beaten in public (S6) · S9's clock filled", Church "−1 if the wardens are turned back (S8)", Draunel "S9's clock filled", and both rewordings ("if one of the characters carries it", "by one of the characters"). 08 Table VIII–5 (08:197–204) mirrors it. Two card heat changes are still not in the table: see NEW-SNAKES-4. |
+| SNAKES-3 | fixed | S7 09:1143–1144 and 09:1170 both read "Bloodied". S9 09:1379 and S13 09:1715 read "the first time one of them takes damage". 10 Duelist *Breaks* matches (10:812–814). |
+| SNAKES-4 | fixed | Surprise default at 09:131–133. Detection lines: S2 09:672–675 (Passive Perception 16, which matches 10:1562), S7 09:1119–1121 (13), S8 09:1221–1224 (13, Advantage), S10 09:1431–1434 (13, matches 10:1640). |
+| SNAKES-5 | gated (Q14) | `TODO-Q14` markers at 09:120, 09:939, 09:1919. The pays-for-any-out rule is unchanged, as it should be while the ruling is open. |
+| SNAKES-6 | fixed | Every award names its Table I–3 row (for example 09:638–639, 09:889–890). S3's wicket fallback is cut (09:889–890). S9's "answered Essin" is cut (09:1398–1399). S8 says "by an out" (09:1298). S13 says "without a fight" (09:1735–1736). 01 Table I–3 rows match (01:283–293). |
+| SNAKES-7 | fixed | "DM Note — at a 2014 table" at 09:135–140. Rosters unchanged. The optional 2014 column was not added, as allowed. |
+| SNAKES-8 | fixed | "Deadly" has 0 hits in 09. Table IX–3 09:549 and S14 09:1795–1799 say "beyond High / nearly twice High". 10's block footer matches (10:296–297). |
+| SNAKES-9 | fixed | S10 *Where and when* 09:1418–1420 gates the card on heat 3+. Table IX–2's header is now "What heat 3–4 sets off" (09:484). Agrees with 04:1393–1396. (The wording is choppy: NEW-SNAKES-6.) |
+| SNAKES-10 | fixed | Option (b) taken. "player character" drops from 74 uses to 2 (09:1136 and 09:1340, both disambiguating). The Walk into it blocks read "The characters can…" (09:185, 240, 297, 347, 397, 443). The "you" that remains outside boxes always means the DM (09:594, 682, 707, 796, 1258, 1345, 1521). 09:869's "your invitation's good standing" now reads "its invitations' good standing" (09:941–942). |
+| SNAKES-11 | fixed | All 13 lines cut or reworded as proposed (09:21, 31–33, 321→351–352, 330→362, 350–351→381–383, 386, 637, 645→695, 765→816–818, 800→860–862, 855, 902–903→980, 918–919→1007). The linter's narrator_voice rule reads 0. |
+| SNAKES-12 | fixed | *Treasure* field, with gp values inline and the pointer kept: S2 09:728–730, S3 09:885–886, S5 09:989–991, S7 09:1186, S12 09:1628. The values match 10:2005–2024. Coin is "GP". |
+| SNAKES-13 | fixed | *Walk into it / Turn it / Snake on snake* each start their own paragraph in all six lines. |
+| SNAKES-14 | fixed | Every DC in the prose carries "check" or "saving throw". The only bare one is a table cell (09:393, allowed by §3). 09:1273–1274 reads "a DC 15 Intelligence (Religion) or DC 15 Charisma (Persuasion) check". |
+| SNAKES-15 | partly | "(see chapter X)" is now the norm, and the linter's xref rule reads 0. Five pointers still lack "see": 09:193 "(chapter IV, Undercurrent C)", 09:226 "(a Fracture tell, chapter V)", 09:398 "(chapter IV, Undercurrent D)", 09:1137 "— chapter II.)", 09:1312 "or to the dark, chapter V." Cosmetic. |
+| SNAKES-16 | fixed | The *Who they brought* lines bold the leader and point "(see chapter X)". There is no CR in running prose (09:169, 217, 269, 326, 376, 423). |
+| SNAKES-17 | fixed (as ruled) | Advantage and Disadvantage are capitalized throughout. "Utilize" stays (09:768, 09:776), per DESIGN §3, which overruled the drop. |
+| SNAKES-18 | fixed | S13 fire uses the full SRD save template (09:1695–1697). S11 crowd reads "3 (1d6) Bludgeoning damage" (09:1534). Falls keep bare dice. |
+| SNAKES-19 | fixed | No spelled-out distances in DM text (12-, 5-, 15-, 10-, 20-foot). The linter's spelled_distance rule reads 0. |
+| SNAKES-20 | fixed | 09:95–96 "Use one line only; the lines are not cumulative…". The field is renamed *Adjusting the Encounter* on every card. |
+| SNAKES-21 | fixed | S4 has Tactics and Morale (09:925–929). S5 has them (09:982–985). S12 has them (09:1612–1616). S6 Development covers a loss (09:1085–1087), with the invented "torn sleeve" left out. S14 Development covers a wipe (09:1940–1942). |
+| SNAKES-22 | gated (Q12), S13 part fixed | S13: "The man reaching for his knife is Essin Boranis." (09:1658). S9's coated man is held at `TODO-Q12` (09:1332). |
+| SNAKES-23 | fixed | S7's fourth knife is placed (09:1164–1166). S5's 3rd-level line says why it differs from S2 (09:1002–1003). S13's 5th-level line agrees with Draunel's Nastier (09:1744–1745 = 10:873–874). S2 reads "Tavva's two Knife attacks" (09:689). S14 reads "an ability check with the skill that fits" (09:1839–1840) and "Intelligence (Investigation) or Charisma (Persuasion) check against the distraction DC" (09:1913–1915). 10 still has the loose form: NEW-SNAKES-7. |
+| SNAKES-24 | fixed | 0 hits for "source" or "V3". The gloss is cut. Citations read "(see chapter VII)". |
+| SNAKES-25 | partly | S2 is renamed "The Service Corridor Job" (09:659, Table IX–3), and nothing else in the module still calls S2 "Knives in the Dark". "The Snakes in the Pen" is still the heading at both 09:15 and 04:455. The optional Movement-in-header change was not made. Card order was left alone, as the fix said. |
+| SNAKES-26 | fixed | Every Rewards line reads "divided equally among the characters". |
+| SNAKES-27 | fixed (optional fix taken) | Simulation figures now sit in "DM Note — how it plays" boxes: S2 09:692–693, S3 09:820–821, S7 09:1147–1148, S13 09:1691–1692, S14 09:1814–1836. |
+| SNAKES-28 | fixed (Q21) | 04 "The Snakes in the Pen" is cut to Table IV–1 plus a pointer (04:455–471), and its Movement V posts are reconciled (Draunel and Boranis principals in B3, blades on B5). 05 is now "The Snakes in the Dark", Table V–7 plus card pointers (05:796–840). 01 points to 09's three rules (01:329). 08's tracker stays a compressed copy that names Table IX–2 as the full rule (08:188). |
+| N1 (MM/DM) | resolved (Q1) | 0 "MM" in 09. "DM Note" throughout. |
+| N2 (Essin's two bodies) | gated (Q11) | `TODO-Q11` at 09:1730. The text is unchanged. |
+| N3 (man between the duellists) | gated (Q12) | See SNAKES-22. |
+| N4 (walk-away XP) | gated (Q14) | See SNAKES-5. |
+
+**XP re-verification** (script, SRD 5.2.1, four 4th-level characters: Low 1,000 / Moderate 1,500 / High 2,000). Every printed sum and label checks out:
+- **under Low:** S1 200; S2 and S5 600; S4 900; S6 600; S7 and S8 800; S9 Draunel side 850; S9 Boranis side 300; S11 625; S12 600 / 800; S13 Boranis side 750.
+- **Low:** S10 1,000.
+- **between Low and Moderate:** S9 both sides 1,150; S13 Draunel side 1,350.
+- **Moderate:** S3 1,500.
+- **over or beyond High:** S3 with the captain 2,600; S4 with reinforcements 2,700; S13 both sides 2,100.
+- **S14:** 3,900 = 1.95 × High. Idle, about CR 5 (1,800), between Moderate and High.
+
+Every scaling-line sum also re-derives: S2 550/850; S3 850/1,700/2,800; S5 550/650; S6 400/300; S7, S8 and S9 600; S10 900; S11 425; S12 400; S13 900/1,600/1,800. Table IX–1 is correct in all five rows. Every creature XP and Passive Perception cited in 09 matches 10's block.
+
+---
+
+## 6. New issues found in final review
+
+**NEW-SNAKES-1 [P2] Two pointers send the DM to chapter III for agendas that now live in chapter II.**
+- **Where:** 09:162 "(see chapter III, Agenda 1)"; 09:213 "(see chapter VII; chapter III, Agenda 2)".
+- **Problem:** O6 moved the eight agendas to chapter II, "The Eight Agendas" (02:255). Chapter III's "Agendas" section is now two lines pointing at Handout 2 (03:194–196). The fix pass restyled both pointers but kept the old chapter. S12 was updated correctly (09:1596, 09:1641), so the chapter now disagrees with itself.
+- **Fix:** 09:162 → '(see chapter II, "The Eight Agendas", Agenda 1)'. 09:213 → '(see chapter VII; chapter II, "The Eight Agendas", Agenda 2)'.
+
+**NEW-SNAKES-2 [P2, regression] S13's heat-4 line swallowed a general rule.**
+- **Where:** 09:1686–1689: "- Do not run both sides against the party (2,100 XP, over High). / - *At heat 4:* the gallery clock starts with one segment filled. If the party sides with Draunel, Essin's side breaks as soon as Vorlain is out of reach — *Always Between*, then gone."
+- **Problem:** At the tag, the second sentence belonged to the "Do not run both sides" bullet. The heat-4 text was inserted in front of it, so the rule now reads as if it applies only at heat 4. At heat 3, the default for S13, a DM reading the card has no rule for what Essin's side does when the party sides with Draunel. That makes the "both sides" fight (2,100 XP, over High) likelier.
+- **Fix:** "- Do not run both sides against the party (2,100 XP, over High). If the party sides with Draunel, Essin's side breaks as soon as Vorlain is out of reach (*Always Between*, then gone). / - *At heat 4:* the gallery clock starts with one segment filled."
+
+**NEW-SNAKES-3 [P2] S9 can never fill offstage, but the chapter's default and the new tracker rows assume it can.**
+- **Where:** 09:1340–1342 ("The duelists hold Provocation until a player character has taken a turn on the terrace… so the clock can never fill before the party has acted"). Against: 09:497–498 (a second card goes live if the table let "the appointment left to happen"); 09:528–530 (an unwalked card "resolves by its default (its clock fills offstage…)"); Table IX–2 09:488–489 (the fix pass added "S9's clock filled" as a rise for both houses).
+- **Problem:** A table that saw the appointment in Movement IV and stayed at the Dance has no S9 outcome. The DM cannot tell whether Draunel reaches 3, which decides whether S13 is live at midnight. The SNAKES-2 fix made this seam load-bearing.
+- **Fix:** Add to S9 after 09:1342: "If no character comes to the terrace, the appointment runs without them: at the end of Movement V, treat the clock as filled (Draunel's second iron is done, and both houses' heat rises by one)." Then 09:1340 → "On the terrace, the duelists hold *Provocation* until a character has taken a turn there."
+
+**NEW-SNAKES-4 [P3] Two card heat changes still disagree with the tracker.**
+- **Where:**
+  - S9 Development 09:1408 "If nobody drew, House Boranis's heat falls by one": not in Table IX–2's Boranis *Falls* (09:489) or in 08 Table VIII–5 (08:202).
+  - S7 Development 09:1202 "If the knives were stopped, the Circle's heat falls by one", against Table IX–2 09:486 "−1 for each knife turned or caught quietly" (up to −4 for S7's four knives).
+- **Problem:** The tracker is billed as the row to read at midnight. Both mismatches predate the fix pass. They were not in SNAKES-2's list.
+- **Fix:** Add "−1 if S9 ends with nobody drawing" to Boranis *Falls* in both tables. S7 09:1202 → "If the knives were stopped, the Circle's heat falls by one for each knife turned or caught quietly". Or change the table to "−1 if S7's knives are stopped" (pick one, in both files).
+
+**NEW-SNAKES-5 [P3] The "how it plays" apparatus promises more than the cards deliver.**
+- **Where:** 09:103–106 ("every budget line below was also checked against the pregenerated characters by simulation… The card's **DM Note — how it plays** gives the numbers"); 09:139–140 ("Each budget line also says how the fight played in simulation (the card's "how it plays" DM Note)").
+- **Problem:**
+  - Only S2, S3, S7, S13 and S14 have the DM Note. S9's figure is inline (09:1357–1358), and nine cards have neither.
+  - S4's new two-guard roster is marked *unsimulated* in DECISIONS O21, so "every budget line… checked by simulation" is no longer true.
+  - The rough guide at 09:106–108 says Low "drops a character in about one run in ten to one in four". But S2 "plays Low" with one in twenty (09:690–693).
+- **Fix:**
+  - 09:105–106 → "…and the cards that play differently from their sum say how. Where a card has numbers, its **DM Note — how it plays** gives them."
+  - 09:139–140 → "…Where a budget line says how the fight played in simulation, that is the better guide."
+  - Add "*Unsimulated.*" to S4's budget line (09:918–919), matching O21.
+
+**NEW-SNAKES-6 [P3] S10's new heat gate is a fragment that stacks two "only if"s.**
+- **Where:** 09:1417–1420: "The Thenya — **a fight only if the party provokes it.** Only if the Thenya's heat is 3 or more at the half-bell; at 0–2 the slingers coil the rope and do not climb, and this card does not fire."
+- **Problem:** The sentence has no verb. A fast reader can merge the two conditions.
+- **Fix:** "The Thenya, and **a fight only if the party provokes it.** The card fires only if the Thenya's heat is 3 or more at the half-bell. At 0–2 the slingers coil the rope and do not climb."
+
+**NEW-SNAKES-7 [P3, cross-file, BESTIARY] Two of 10's lines still carry the forms the 09 fixes replaced.**
+- **Where and problem:**
+  - 10:417, Honor Guard **Nastier**: "A second guard arrives from the far end". S4's base roster is now two guards (O21), so a "second" guard adds nothing.
+  - 10:291–292, Attendant **Breaks**: "is a distraction like any other (Intelligence or Charisma)". 09:1913–1915 now reads "an Intelligence (Investigation) or Charisma (Persuasion) check against the distraction DC".
+- **Fix:** 10:417 → "A third guard arrives from the far end, and the way back is shut." 10:292 → "…(an Intelligence (Investigation) or Charisma (Persuasion) check against the distraction DC; card S14)."
+
+**NEW-SNAKES-8 [P3, cross-file, 05] The minister's route differs between 05 and 09.**
+- **Where:** 05:821 Table V–7, the Circle: "B2 → B10: two plain good coats half-carrying an old man". Against 09 S12 *Where and when* (09:1585–1586, "the burning banquet galleries (B3) and the service passages beyond them"), Table IX–3 "B3 / B10" (09:551), and S12's trigger "read when a character is in B3".
+- **Problem:** This predates the fix pass, but the Q21 trim made Table V–7 the only 05 summary, so a DM watching B2 will look for the knives in the wrong room.
+- **Fix:** 05:821 → "B3 → B10: …".
+
+**NEW-SNAKES-9 [P3] S14's hint note is styled as a DM Note but is not boxed.**
+- **Where:** 09:1872 "**DM Note — how to hint that it can be distracted.**", followed by a plain numbered list.
+- **Problem:** Every other "DM Note —" in 09 is a `>` box (STYLE_5e box species). This one reads as body text.
+- **Fix:** Put 09:1872–1891 in a `>` block, headed "> **DM Note — how to hint that it can be distracted**". No wording change.
+
+**NEW-SNAKES-10 [P3] S6's budget gloss misdescribes the cousins' attack.**
+- **Where:** 09:1043–1044 "a fist does 3 damage and a grapple does none".
+- **Problem:** *A Quiet Word* deals 3 Bludgeoning damage *and* grapples (10:331–333). There is no separate damage-free grapple. This predates the fix pass.
+- **Fix:** "…and it plays easier than that: *A Quiet Word* does 3 damage and holds the target, and the cousins break long before anyone is on the ground."
+
+No invented facts were found in the fix-pass additions. The S6 loss Development left out the audit's "torn sleeve". The S7 fourth knife is placed only as "out of sight, ahead of the party or behind it". The S10 heat-gate wording comes from 04:1393. Prose reads as human: the new Detection, Tactics and Morale lines are short and declarative without turning robotic.
+
+*Resolved. Final review of 09 complete. Return to the coordinator (T9.3) for consolidation.*
+
+### 6a. Resolved (Phase 9 final-review fixes, 2026-10-03)
+
+| ID | Resolved | Note |
+|---|---|---|
+| NEW-SNAKES-1 | fixed | Both pointers → chapter II, "The Eight Agendas". Joined-line grep "chapter III, Agenda" = 0. |
+| NEW-SNAKES-2 | fixed | The Essin-breaks sentence is back on the "Do not run both sides" bullet; *At heat 4* is its own bullet. |
+| NEW-SNAKES-3 | Planner O26 | S9: on the terrace, Provocation waits for a character's turn; if nobody comes, the clock fills offstage at the end of Movement V only if the table saw the appointment made (run *Full* as news; both houses +1). Never shown = no tracker mark. The "If the table does nothing" arithmetic stays true. Mv V DM Note, Tables IX–2 and VIII–5 ("on the terrace or offstage") and flow.json `clk-circle` agree. |
+| NEW-SNAKES-4 | fixed | Boranis *Falls* adds "−1 if S9 ends with nobody drawing" (IX–2 and VIII–5). S7 Development: "falls by one for each knife turned or caught quietly". |
+| NEW-SNAKES-5 | fixed | Both apparatus sentences reworded as proposed; the rough guide now reads "one run in twenty to one in four" (so S2's printed figure fits); S4 budget marked *Unsimulated.* |
+| NEW-SNAKES-6 | fixed | "The Thenya, and a fight only if the party provokes it. The card fires only if… At 0–2 the slingers coil the rope and do not climb." |
+| NEW-SNAKES-7 | fixed | 10 Honor Guard Nastier "A third guard"; Attendant Breaks names the two checks and card S14. |
+| NEW-SNAKES-8 | fixed | 05 Table V–7 "B3 → B10". |
+| NEW-SNAKES-9 | fixed | The hint note is a `>` box, "> **DM Note — how to hint that it can be distracted**". No wording change. |
+| NEW-SNAKES-10 | fixed | "*A Quiet Word* does 3 damage and holds the target". |
+| SNAKES-15 | fixed | The five pointers take "see" (Undercurrent C and D by full heading name). |
+| SNAKES-25 | fixed | 09's heading is "The Snakes at the Ball"; 04's is "The Snakes at a Glance". Pointers: 01 ×2 (prep step 5, the rules sentence); INVENTIONS #1. flow.json had no pointer to either heading. Joined-line grep "Snakes in the Pen" = 0. |

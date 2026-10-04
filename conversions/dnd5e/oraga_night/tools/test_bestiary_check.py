@@ -180,3 +180,34 @@ def test_initiative_bonus_must_come_from_dex_and_pb():
 
 def test_layout_clean_on_the_module():
     assert BC.layout_problems(_blocks()) == []
+
+
+# T9 final review: trait save DCs read from the text (NEW-BESTIARY-1) ---------------
+
+def test_trait_dc_clean_on_the_module():
+    assert BC.trait_dc_problems(_blocks()) == []
+
+
+def test_trait_dc_catches_put_aside_at_14():
+    blocks = _blocks()
+    blocks["The Attendant"] = blocks["The Attendant"].replace(
+        "*Strength Saving Throw:* DC 15", "*Strength Saving Throw:* DC 14")
+    probs = BC.trait_dc_problems(blocks)
+    assert any("Attendant: Put Aside DC 14 vs 8+3+4 = 15" in p for p in probs)
+
+
+def test_trait_dc_reads_a_wrapped_trait():
+    blocks = _blocks()
+    blocks["The Attendant"] = blocks["The Attendant"].replace(
+        "*Strength Saving Throw:* DC 15", "*Strength Saving Throw:*\nDC 15")
+    assert BC.trait_dc_problems(blocks) == []
+
+
+def test_trait_dc_missing_trait_is_reported():
+    blocks = _blocks()
+    blocks["The Attendant"] = blocks["The Attendant"].replace("***Put Aside", "***Set Aside")
+    assert any("Put Aside not found" in p for p in BC.trait_dc_problems(blocks))
+
+
+def test_trait_dc_data_agrees():
+    assert (15, 0) in BC.B["Attendant"]["dc"]

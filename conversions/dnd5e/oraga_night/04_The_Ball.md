@@ -253,7 +253,7 @@ rumor (Table VIII–7) or one fact from the speaker's entry in chapter VII.)*
 > particular way of a room that a great many people are deliberately not entering.*
 
 The room where Orthaen chiefs have always received the ruled. Generations of
-petitioners wore the dais down. In Movement III Raunu holds audiences here, ministers screening supplicants through a screen so thin it is
+petitioners wore the dais down. In Movement III Raunu holds audiences here, ministers vetting supplicants through a screen so thin it is
 almost an invitation. *(Every agenda that needs the host runs through this room. The
 waiting line outside it is a scene in itself: rivals comparing masks and nerve,
 and everyone rehearsing their one question.)*
@@ -383,7 +383,7 @@ the first time and is automatic after that. With Anha or any of the skeleton sta
 there is no check.)*
 
 **B11. The Root of the House.** *(If you have time. Hidden. Found only through
-Undercurrent A — The Root of the House, this chapter.)* Beneath the wine cellars, behind a seal of living
+"Undercurrent A — The Root of the House", below.)* Beneath the wine cellars, behind a seal of living
 crystal, lies the oldest place in Rekuzan: the chamber where the first Boranis
 ancestor grew the first crystal of the palace, centuries of house rising from this
 one root. Raunu has made it his true workshop. What waits inside is described in
@@ -452,7 +452,7 @@ works if nobody sits idle.
 
 ---
 
-## The Snakes in the Pen
+## The Snakes at a Glance
 
 Six parties came armed, and chapter IX runs each one's line, its heat and its fight cards
 (see chapter IX, "Running the Snakes"): once per Movement, show the table one or two
@@ -460,7 +460,7 @@ lines from that Movement's "The Snakes This Movement" section.
 
 **Table IV–1: Who Came Armed**
 
-| Faction | Who leads | Who they brought | What they want tonight *(Ch. VII)* | Their Movement V post | Cards *(Ch. IX)* |
+| Faction | Who leads | Who they brought | What they want tonight (chapter VII) | Their Movement V post | Cards (chapter IX) |
 |---|---|---|---|---|---|
 | **The Merchant's Circle** | Mistress Rhaza Callun | **Circle Hired Knives** | Raunu's next decree, before it lands on her margins | B3, recalculating | S7 · S12 |
 | **The Church** | Prelate Damaris Kovaun | **Church Wardens** | To file Raunu Boranis under something. Anything | B6, briefly — then elsewhere | S8 |
@@ -514,7 +514,7 @@ what ending it well is worth.
 > step out of. If the table has already met either, let one of them be at the edge of
 > the circle, watching to see who draws. Neither joins in. Both remember who ended it.
 
-### The Other Thieves *(Movements III–VI — one trouble in three sightings)*
+### The Other Thieves *(Movements III–VII — one trouble in three sightings)*
 
 Tavva's crew (chapter VII; **Tavva** and her **Gallery Knives**, chapter X) is working
 the ball tonight, and a watchful table can catch them at it three times. Each sighting
@@ -559,7 +559,7 @@ and their grandmother's crystal hang in the same gallery.)*
 
 > **If you have time.** A four-hour table runs the Undercurrent a character is already
 > on and lets the rest surface as rumor. The exception is **C**: if anyone carries
-> Agenda 4, it is the way to Veier, and chapter V leans on it.
+> Agenda 4, it is a way to Veier, and chapter V leans on it.
 
 Four investigations run beneath the ball. They are mysteries a curious table can solve, or
 at least reach the bottom of, before midnight solves everything its own way. Each
@@ -630,7 +630,7 @@ gifts.** What an hour in the laboratory yields, in rising order:
   verb. The gift is not given. It is remembered."*
 - **Instruments** of glass and lattice nobody can name. Yet an Orthaen or any
   character who can cast spells can feel what they do: they read the gift itself,
-  the way a jeweler's glass reads a stone. Reading the gift in what, the room answers
+  the way a jeweler's glass reads a stone. What they were reading, the room answers
   quietly: a chair with a wide armrest, a stool beside it, a lap-blanket of Thenya
   wool folded over its back.
 - **The skeleton.** In an alcove the lamplight has to be carried into, a full human
@@ -730,7 +730,7 @@ Every one of them saved is a coda this thread earns. *(And it tells them what th
 Circle's knives are really doing if they are seen half-carrying an old man the wrong way
 through the smoke. See chapter V.)*
 
-### Undercurrent C — The Third Plate *(needed if anyone carries Agenda 4)*
+### Undercurrent C — The Third Plate *(run it if anyone carries Agenda 4)*
 *Two people live in the east wing. The kitchen sends up meals for two. Lately the
 trays come back down — three plates used.*
 
@@ -991,7 +991,7 @@ serves, it names no one, and looks around, briefly, for somebody who is not ther
 
 > **About 35 minutes** (starts 1:20). *Run:* the glimpse on the gallery, one summons
 > (two characters walked in together), and the gray masks. *If you have time:* a
-> second summons, the Tavva scout.
+> second summons, the Tavva scout, and S1, if it was held from Movement II.
 
 The host does not appear. This is the Movement where the ball fully absorbs that he
 may never appear. The guests came to see the recluse, and the recluse is declining
@@ -1037,10 +1037,10 @@ An audience lasts about five questions or five minutes of table time. Then he en
 with the closing line (see "Raunu's Summons: the Questions, and What He Says", below).
 
 *Checks in the summons:* deceiving Raunu takes a DC 25 Charisma (Deception) check, and he knows
-it failed even when he lets it pass. Impressing him takes no check at all: tell him a
-true thing he did not already know. He turns friendly when the guest tells him a true
-thing he did not know, or sits through the silence without filling it. By default, he
-is friendly with the second summoned character. *Detect Thoughts* and every other magic that
+it failed even when he lets it pass. Impressing him takes no check at all. He turns
+friendly when the guest tells him a true thing he did not already know, or sits through
+the silence without filling it. By default, he is friendly with the second character
+summoned; if two come in together, that is whichever of them speaks second. *Detect Thoughts* and every other magic that
 would read him finds a man thinking about a staircase, and nothing else. He has
 prepared for that, too.
 
@@ -1068,7 +1068,7 @@ them (his perfect memory of the invitations simply slides off the question), and
 then, oddly, cannot hold the question in his head long enough to be alarmed by it.
 
 *(These are the Uninvited. They arrived with the evening's thickest crowd. They
-will do nothing at all until midnight. They are waiting for the one moment custom
+will do nothing at all until midnight; they are waiting for the one moment custom
 guarantees the recluse must appear. The characters may approach them; see chapter VII.
 Conversation with them is genuinely pleasant.)*
 
@@ -1152,7 +1152,7 @@ good thing I have left to give anyone."
 
 The banquet is called, and the galleries fill. And then, between the first course
 and the second, with no trumpet and no announcement, Raunu Boranis is simply
-*standing at the high table*: unmasked, plainly dressed for a chief, holding a cup
+standing at the high table: unmasked, plainly dressed for a chief, holding a cup
 as if someone had handed it to him and left. The room takes a full three seconds to
 notice. Then it takes a breath, all at once.
 
@@ -1187,15 +1187,15 @@ The ball spends its last hours guessing at a sentence that will never be finishe
 **Agenda beats:** the guessing is the Movement. Callun and the Circle are certain
 it is the trade decree: the Tithe of Hands, announced at midnight to a captive
 audience of everyone it will fleece. (They are wrong.) Draunel fears a
-succession decree. Kovaun's question acquires teeth. Vorlain goes quiet and drinks.
+succession decree; Kovaun's question acquires teeth; Vorlain goes quiet and drinks.
 And everyone saw the two plates. The gossip about the two plates is feral: he
 feeds the mad wife, he feeds a prisoner, he feeds the thing in the east wing.
 Only the characters who have run Undercurrent C know the tender truth of it.
 
 For Agenda 4 and the Thenya, the night sharpens: still no Veier, and now a midnight
 pronouncement coming. Maiven formally requests an audience; Corval, with genuine
-misery, declines. The east wing (B9) is the only way to her, and Undercurrent C
-is the map. *(Characters who reach Veier after the toast find her at dinner with her
+misery, declines. The east wing (B9) is the only way to her: the ring at its doors,
+or Undercurrent C. *(Characters who reach Veier after the toast find her at dinner with her
 husband; see "Dinner for Two (B9)", below.)*
 
 **The omen:** the falconry mews behind the garden wing erupt — every bird screaming
@@ -1252,13 +1252,14 @@ ease. Stage it with all the warmth the ballroom's rumors deny them.
 **Getting in.** A character who shows the door guards the grandmother's ring and asks
 for Veier by name is asked to wait. The ring goes in. If Veier chooses them, and by
 default she does, a guard walks them up. This is Raunu's line from the summons, kept:
-*"If she chooses you, you will know."*
+*"If she chooses you, you will know."* Whenever the ring is shown, the answer comes
+after the toast: a guard finds the character wherever they are.
 
 **When a character is let into the east wing after the toast, read:**
 
 > *The guard leaves you at an open door. The light in here is warm after the rose
 > glow of the halls. A small table is set with two plates, and Raunu Boranis and
-> Veier Nolonaire are eating off them side by side, the chief of the Orthaen easy in
+> the woman you came to find are eating off them side by side, the chief of the Orthaen easy in
 > his chair in a way the ballroom would never believe. A midwife comes and goes
 > quietly. By the door stands a border woman's traveling pack, and it is empty.*
 
@@ -1268,8 +1269,8 @@ a guest who came expecting a prisoner or a madwoman gets a brisk education (see
 chapter VII, "Veier Nolonaire — the Bride").
 
 **Raunu.** Awkward, unhurried and out of practice: long pauses, no pleasantries, the
-true thing said where the polite thing was expected. He listens completely. Raunu
-does not say what he will announce at the Unmasking.
+true thing said where the polite thing was expected. He listens completely, and
+he does not say what he will announce at the Unmasking.
 
 **Topics.** What the character can ask, and the answer the book already gives:
 - *Whether she is well.* Yes. Her answer for Maiven is the one chapter VII prints: *"I am
@@ -1390,8 +1391,8 @@ waits.
 - **The Thenya.** Maiven is at the east wing doors in B9's corridor, one bad hour from
   going over the wall. Her slingers are not with her. They are in the gardens below
   the east wing, looking up at a lit window, and one of them is uncoiling a rope. If
-  nobody stops them, and the Thenya's heat is 3 or more (chapter IX, the Snake
-  Tracker), they try the wall at the half-bell and the honor guard answers
+  nobody stops them, and the Thenya's heat is 3 or more (see chapter IX, "The Snake
+  Tracker"), they try the wall at the half-bell and the honor guard answers
   (card S4, with the Thenya as the offenders). If the party stands in their way, it
   is a fight nobody wants.
 

@@ -313,7 +313,7 @@
    "phase": "m2",
    "kind": "scene",
    "summary": "The midwife, small linens, protective guards. Find: the pregnancy, and the nursery, before the announcement that never comes.",
-   "ref": "04_The_Ball.md#undercurrent-c--the-third-plate-needed-if-anyone-carries-agenda-4",
+   "ref": "04_The_Ball.md#undercurrent-c--the-third-plate-run-it-if-anyone-carries-agenda-4",
    "optional": true,
    "faction": null
   },
@@ -2416,7 +2416,7 @@
    "id": "clk-circle",
    "label": "Circle clock (S9)",
    "segments": 4,
-   "advances": "Each round the principals face each other; +1 (once per cousin) when a Cousin's Blade is provoked into drawing. No Provocation until a player character has acted on the terrace",
+   "advances": "Each round the principals face each other; +1 (once per cousin) when a Cousin's Blade is provoked into drawing. No Provocation until a character has acted on the terrace. If nobody comes, it fills offstage at the end of Movement V only if the table saw the appointment made",
    "fills": "Steel meets steel; one principal goes down bleeding; Draunel's second iron is done"
   },
   {

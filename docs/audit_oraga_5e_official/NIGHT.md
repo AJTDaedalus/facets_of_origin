@@ -250,3 +250,115 @@ Very Hard by design. No DC finding.
 5. **"MM" in place of "DM".** Not filed per occurrence. The owner is already considering it. In this slice the role name appears only in "the MM chooses" and "MM Note", so the official grammar ("you" for the MM) is otherwise kept.
 
 *Checkpoint: complete.*
+
+---
+
+## 5. Status after fix pass (2026-10-03)
+
+*Final review T9.3, against `05_The_Longest_Night.md` at HEAD (1,186 lines; diff base
+`pre-official-5e`). Line numbers are current 05 unless marked. Lint on 05: 0 hard, 0
+structural; 14.8 words a sentence, 6.5% over 30 words, 3.4 em dashes per 1,000 words, no
+paragraph over 120 words.*
+
+**Counts:** 18 fixed · 4 partly · 2 gated · 0 skipped · 0 regressed.
+
+| ID | Status | Evidence |
+|---|---|---|
+| NIGHT-1 | fixed | 397–404 now carries the §5b trigger word for word ("Card S14 fires the first time… The card fires with the Attendant Idle. From then on it is **Focused**… when one of the three in the scene has no Delay"). Matches 09 S14 *Enemy* and 10 *Idle and Focused* (O2). |
+| NIGHT-2 | fixed | 216–219 and 641–644: "in the space where they dropped (or the nearest unoccupied space); the Hollow returns within 60 feet of the doors he holds". 10 Radiant (1346–1347) and Wept (1761–1762) match; the Hollow keeps the doors (1071). O4. |
+| NIGHT-3 | fixed | Box 15–21 now says "A beat and a round cost an Uninvited the same thing: one turn"; the minute/round scale is gone. Ward seal and light last "until the scene ends" (43–46). "perhaps" cut (57). **The Midnight Clock** (71–90) is the single statement of the order, with O9's default (step 5: three beats after Raunu falls). 08 (l.51–52) and B12 (1007) point to it. See NEW-NIGHT-2 for the bell clock. |
+| NIGHT-4 | fixed | 707–712: needs "at least one witnessed tell"; every skill carries its ability. 721–722: "Failure by 4 or less: it lands in full, and that Uninvited gains 2 Delay". 10:150–171 compressed to match. |
+| NIGHT-5 | fixed | Sidebar *Adjusting the Attack* (278–288) with O11's values, "not cumulative"; the crossfire sidebar gives concrete dice (615–616). Values are *unsimulated* (O11). |
+| NIGHT-6 | fixed | 858–859 "fights the characters can end on their own terms". The 2014 multiplier note is in 09 (l.135, *DM Note — at a 2014 table*). |
+| NIGHT-7 | fixed | 337–340 is roman DM text: darkness speeds him, "The exception is his Fracture… makes the Fracture check instead". Agrees with *Deny the congregation* (757–760). |
+| NIGHT-8 | partly | Section renamed "The Snakes in the Dark" (796) and S2 renamed in 09, with pointers at 3, 68, 520, 892. One pointer survived the rename because it breaks across a line: 173–174 `("Knives in the` / `Dark", Phern)`. It also points at a subsection the Q21 trim removed. See NEW-NIGHT-1. |
+| NIGHT-9 | fixed | Crossing box (531–537) and Movement VII box (873–879) built from printed text. Terrace beat 1 (546–552) now keeps function only. INVENTIONS #67 records the Movement VII box's check against 04's receiving line ("the thin old man who greeted you by name"). |
+| NIGHT-10 | fixed | 669–676 is instruction ("say plainly what just happened: she stopped… Then say what the round bought"), with no scripted narration. |
+| NIGHT-11 | fixed | Epilogue box italic (1029–1040). The italic DM paragraphs are roman now (Midnight Rules lead 194, the room-trick note 337, the snakes lead 798, Movement VII). The 3–4 dek stays italic and unindented, which STYLE_5e allows as a DM note. |
+| NIGHT-12 | fixed | 5.2.1 caps throughout ("Dim Light", "Darkness", "Hit Points", "Unconscious and Stable", "has the Prone condition", "Difficult Terrain", "Speed"). *House Seal* and *House Flare* italic (302, 320). Spells in italic Title Case. The lint `lowercase_terms` count is 0. |
+| NIGHT-13 | partly | "the characters" is now the default, with "player character" only at 543, 596, 1061, 1078, 1134, 1136 (all disambiguation). Lint: 0 "the players". Player-"you" is still in three room-trick rows: 316 "or call one yourself", 351 "Wade in and put your shoulder to it", 354 "He spends his turn at the gate on you". Fix: "or a character calls one"; "A character wades in and puts a shoulder to it"; "on that character". (The quoted questions at 315 and 329 are in-fiction speech and can stay.) |
+| NIGHT-14 | partly | Every listed light-touch edit is made (131, 137–139, 632, 754, 1128–1129, the principle 1 cut). Principle 2 (31–55) and the dais bullet (447–459) are split. All metrics are inside target. Two negative triplets the audit listed survive: 527–528 "does not explain, does not slow, and does not refuse help" and 765 "He does not stop, does not answer, does not turn". Both are voice and can stay at the owner's taste. |
+| NIGHT-15 | gated (Q10) | 919 still reads "chained to the captain's belt", with `<!-- TODO-Q10 -->` at 920. |
+| NIGHT-16 | fixed | 1121–1123: the evidence list no longer holds "the mask of an Uninvited left behind in a trap". |
+| NIGHT-17 | gated (Q9) | `<!-- TODO-Q9 -->` at 1119. The trap sidebar is otherwise unchanged. |
+| NIGHT-18 | partly (rest gated Q13) | *The Palace After Midnight: General Features* (423–441): Light, crowd, smoke, fire, each matched against 09 S12/S13 (DC 10 Constitution; 7 (2d6) Fire, DC 13 Dexterity). Dimensions wait on `<!-- TODO-Q13 -->` (428). See NEW-NIGHT-3 for the fire rule's knock-on. |
+| NIGHT-19 | fixed | 895–898 "Tables I–3 and I–4… 100 XP to the carrier for each person they bring out (Table I–4)", which matches 01:306. 1184 "as Table I–4 pays a fight ended by an out" (01:305). 314 "(see "How to Run the Attack", principle 2)". |
+| NIGHT-20 | fixed | 612–613 "Evasion changes nothing: a success already takes no damage." |
+| NIGHT-21 | fixed | Push direction (221–222); the Radiant's turn "at the end of the round, after every character has acted" (576–578); no surprise (158–159); trampling 5 (2d4) (368–370, O10, *unsimulated*). |
+| NIGHT-22 | fixed | All four room-trick tables are headed "Check (DC 13; DC 15 the second time)", and the per-row exceptions are kept. |
+| NIGHT-23 | fixed | Bold first mentions with pointers: **Boranis Honor Guards** (447), **Phern Bodyguards** (171), **Bought Blades** (918), **Church Wardens** (822). Common nouns are lowercase after that. "grey" 0. "his sight" (846). "Master Vell stops being unmemorable" (528–529). "She and the third" (503). The "his Duelists" and "the Wardens" sites went with the Q21 trim. |
+| NIGHT-24 | fixed | Run boxes give "About 50 minutes" (94) and "About 40 minutes" (871), matching 01 Table I–1. B12 **Treasure.** line (968–969). The looters point to Tavva's sack (516–517). |
+
+---
+
+## 6. New issues found in final review
+
+### NEW-NIGHT-1 [P2] A dead pointer to "Knives in the Dark", Phern
+- **Where:** 05:173–174: "Following him saves lives ("Knives in the / Dark", Phern)."
+- **Problem:** the section is now "The Snakes in the Dark", and its Phern subsection was cut by the Q21 trim, so the pointer goes nowhere. It slipped past T2.4's accept check ("Knives in the Dark" occurs 0 times) because it breaks across a line.
+- **Fix:** "Following him saves lives (card S11)." Re-run the zero-count check with newlines joined, for example `tr '\n' ' ' < 05_The_Longest_Night.md | grep -c 'Knives in the Dark'`, across the whole folder.
+
+### NEW-NIGHT-2 [P2] The Midnight Clock and card S3's bell clock don't agree on when the bell can ring
+- **Where:** 05:81–82 (step 4: the bells begin as the first guests reach B12), 05:86 (step 6, the Crossing, comes *after* step 4), 05:89–90 (step 8: the last bell rings "no later than the bell clock on card S3"), 05:59–61 (principle 3: the last bell is "the latest" the leash can come); 09:799–803 (S3: the bell clock "advances at the end of every round, whatever anyone does; the bells of Oraga began tolling… as the first guests reached the court"; sixth segment at the latest).
+- **Problem:** read together, the S3 clock starts counting at step 4. The Clock then puts three beats plus the three-beat Crossing between step 4 and the gate, and any of those beats can turn into rounds. A literal DM can run the six segments out before the characters ever reach B12. The last bell, and with it the leash, would then fall during the Crossing, against the Clock's own order (7, then 8). The Clock is new, so it now states this order outright when it used to be only implied.
+- **Fix (Planner to confirm; a pacing rule, not canon):** add to step 8: "Card S3's bell clock counts only the rounds the characters spend at the gate. The bells that begin in step 4 are the warning, not the count." Mirror it as one clause in S3's *The last bell* line.
+
+### NEW-NIGHT-3 [P2] "The fire never finishes anyone" against "the fire uses the ordinary rules for dying"
+- **Where:** 05:440–441 (new General Features: "The fire never finishes anyone: a creature that drops in it takes no more Fire damage and is dragged clear (card S13)") against 05:226–227 ("Everything else tonight (the snakes, the Bought, the fire) uses the ordinary rules for dying") and 05:1137 ("A death tonight is a snake's knife, the Bought, the fire, or a player's own choice").
+- **Problem:** the General Features block brought S13's mercy into 05, but the two older lists still name fire as a killer. The DM gets two answers for a character who drops in B3.
+- **Fix:** 226–227 → "Everything else tonight (the snakes, the Bought) uses the ordinary rules for dying…". 1137 → "A death tonight is a snake's knife, the Bought, or a player's own choice at the gate." If fire outside B3 (for example the carrier's 5 (2d4) Fire damage at 901) is meant to be able to kill, say so in the Fire bullet instead: "In B3, the fire never finishes anyone…".
+
+### NEW-NIGHT-4 [P2] When the Attendant clears the way: "nobody in its reach" against "no enemy within 5 feet"
+- **Where:** 05:274–275 ("if a distraction hasn't cost it the turn and nobody is in its reach") and 05:405–406 ("unless… someone is in its reach") against 10:243–244 (*Clears the Way*: "no enemy is within 5 feet of it") and 09 S14 ("has no enemy within 5 feet").
+- **Problem:** 05's own crowd rule puts one guest in every 5-foot square (362–363), so "nobody in its reach" is almost never true. Read as written, *Clears the Way* would almost never fire, and the Attendant–Delay engine stops. The wording is older than this pass, but the NIGHT-1 rewrite edited this bullet and left it, and no slice filed it.
+- **Fix:** both sites → "no enemy is within 5 feet of it" / "an enemy is within 5 feet of it".
+
+### NEW-NIGHT-5 [P3] B12's read-aloud trigger differs from card S3's
+- **Where:** 05:958 "**When the characters reach the Gatehouse Court and can see through the grille, read:**" against 09:755 "***Trigger — read when the first fleeing guests reach the court:***". Same box text.
+- **Problem:** the box speaks to "you" ("more of them than there are of you"), so it needs the characters there. 05's new trigger is the right one. S3's would have the box read before the party arrives, which 05:953–954 says is the usual case.
+- **Fix:** S3's trigger → "read when the characters reach the court and can see through the grille:".
+
+### NEW-NIGHT-6 [P3] The push direction on the last blow is in 05 only
+- **Where:** 05:221–222 "pushed 15 feet in a direction the DM chooses" (NIGHT-21) against 10:1072–1073, 1348–1349 and 1764–1765 ("pushed 15 feet", no direction).
+- **Fix:** add "in a direction the DM chooses" to the three *Leashed* traits in 10.
+
+### NEW-NIGHT-7 [P3] Facts the Q21 snakes trim dropped
+- **Where:** the old 05 Phern and Draunel subsections (pre-official-5e 05:806–831, 780–804), now cut. Checked against 09 S8, S11, S12 and S13 and 06. Everything else survived: the Root key loss (S8 *Development*), the Tithe (S12), Vorlain's offer (06:73), and the Phern suspicion (06:21).
+- **Lost:**
+  - (a) "Every guest brought through that door counts" as carried out. S11 doesn't say it, so the Table I–3/I–4 payout for the Phern door is now unstated.
+  - (b) A **Phern** character needs no check to turn Corro's door. 05:172 still says a Phern character "moves with him", but S11 (l.48–50) grants the no-check only to "a character who walked the room with him".
+  - (c) "The fourth iron" is now an unexplained term in 05 (833, 858).
+- **Fix:**
+  - (a) S11 *Development*: "Every guest brought through a door held for everyone counts as carried out (Table I–4)."
+  - (b) S11 *Corro's word*: "A Phern character, or a character who walked the room with him…". This restores old 05 text and adds nothing new.
+  - (c) 05:833 → "House Draunel and House Boranis, the fourth iron (Draunel's plan to hand Vorlain to the sect guard as the culprit): card S13."
+
+### NEW-NIGHT-8 [P3] The Midnight Clock's step 3 ignores the three-character line
+- **Where:** 05:78–79 ("on her third turn") against 05:282–283 (*Adjusting the Attack*: three characters, her fourth turn).
+- **Problem:** this step is the one place the DM checks the order, so it should carry the one scaling that changes it.
+- **Fix:** "…on her third turn of moving toward him (fourth with three characters; see "Adjusting the Attack"), plus one turn…".
+
+### NEW-NIGHT-9 [P3] Small wording and format slips
+- 05:1128–1129 "Without a patron, the truth only exposes them." "Them" follows a list of factions and Vorlain, so it reads as them. → "the truth only exposes the characters. It makes them the most interesting people…".
+- 05:1089–1090 "What the Module Never Says still holds": the section name is bare. → '(see chapter II, "What the Module Never Says")' per the cross-reference rule.
+- 05:1096–1097 "a resealed ward-" / "corridor": the line-end hyphen renders as "ward- corridor". → join it as "ward-corridor" on one line. This is older than the pass, and the pass left it.
+
+*Final review complete, 2026-10-03. No module file edited.*
+
+### 6a. Resolved (Phase 9 final-review fixes, 2026-10-03)
+
+| ID | Resolved | Note |
+|---|---|---|
+| NEW-NIGHT-1 | fixed (also NIGHT-8) | "Following him saves lives (card S11)." Joined-line grep for "Knives in the Dark" = 0 across M/*.md. |
+| NEW-NIGHT-2 | Planner O25 | Step 8 and S3's *The last bell*: the clock counts only rounds at the gate; the step-4 bells are only the warning. |
+| NEW-NIGHT-3 | fixed | "the fire" dropped from both dying lists (226, 1137). The General Features fire bullet stands. |
+| NEW-NIGHT-4 | fixed | Both sites: "no enemy is within 5 feet of it" / "an enemy is within 5 feet of it". |
+| NEW-NIGHT-5 | fixed | S3 trigger → "read when the characters reach the court and can see through the grille:". |
+| NEW-NIGHT-6 | fixed | "in a direction the DM chooses" in all three *Leashed* traits (10). |
+| NEW-NIGHT-7 | fixed (restored from `ef02a28`) | (a) S11 Development: "Every guest brought through that door counts as carried out (Table I–4)." (old: "every guest brought through that door counts"). (b) S11 Corro's word: "A Phern character, or a character who walked the room with him…" (old: "no check for a Phern or anyone who walked the room with him"). (c) 05's card list explains the fourth iron in the old words: "if the night breaks, Draunel means to take Vorlain in the chaos and hand him to the first sect guard through the gate as the culprit". |
+| NEW-NIGHT-8 | fixed | Step 3 adds "(her fourth with three characters; see "Adjusting the Attack")". |
+| NEW-NIGHT-9 | fixed | "exposes the characters. It makes them…"; '(see chapter II, "What the Module Never Says")'; "ward-corridor" joined. |
+| NIGHT-13 remnants | fixed | "or a character calls one"; "A character wades in and puts a shoulder to it"; "on that character". |
+| NIGHT-14 remnants | fixed | "Vell accepts help without slowing down or explaining himself."; "He keeps going without a word, but guilt gets into…". |
+| NEW-SNAKES-8 (05 side) | fixed | Table V–7 Circle route "B3 → B10". |
+| NEW-BESTIARY-6 (05 side) | fixed | The Wept's Fracture: "no actions, no Bonus Actions, no Reactions, and does not move". |

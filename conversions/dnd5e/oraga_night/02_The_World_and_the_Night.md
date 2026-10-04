@@ -1,8 +1,9 @@
 # II. The World and the Night
 
 *Everything in this chapter up to "The Truth of the Night" is public knowledge or
-common rumor, safe to share with players as their characters would know it. The
-final section is yours alone.*
+common rumor, safe to share with players as their characters would know it.
+Everything from "The Truth of the Night" to the end of the chapter, the eight agendas
+included, is yours alone.*
 
 ## Before You Read This Chapter
 
@@ -61,7 +62,7 @@ What every guest at the ball knows, in order:
    answers this question, and neither should you.)*
 3. **3162 — The Pact and the Marriage.** Raunu announces a pact with the Thenya, a
    diminished tribe under heavy Orthaen border pressure, trading protection for a
-   marriage between himself and **Veier Nolonaire**, cousin of the Thenyan chief. The
+   marriage between himself and Veier Nolonaire, cousin of the Thenyan chief. The
    wedding at the Boranis chapel is small, formal, and by every account bloodless in
    both senses. Cross-tribe marriages are nearly unheard of. Nobody knows what to make
    of it.
@@ -262,12 +263,13 @@ moment.
 
 Deal agendas in the first five minutes (see chapter I). Match them to characters, or hand
 them out face-down and let fate deal. Two players may share an agenda (rivals or partners; deal both
-ways). Every agenda card has:
+ways). Each agenda below has:
 
-- **The ask:** what you were sent to do, in your patron's words.
-- **The catch:** the complication your patron did not mention.
-- **At midnight:** a private note on how this agenda changes when everything goes
-  wrong. Do not read this line to the player until the Unmasking.
+- **The ask** and **The catch:** what the player's card (Player Handout 2) says, at
+  fuller length: the errand in the patron's words, and the complication the patron did
+  not mention.
+- **At midnight:** your private note on how this agenda changes when everything goes
+  wrong. It is not on the card. Do not read it to the player until the Unmasking.
 - **Pays:** what finishing it is worth, at the table and in the fiction.
 
 Agendas are written to be completable before midnight by fast, clever play, and the
@@ -299,7 +301,7 @@ dies with its rememberers unless your table saves them.)*
 
 **Pays:** Heroic Inspiration on the spot, and XP by Table I–4. Mistress Callun pays on
 delivery, **100 GP** in Circle silver, and she pays whether or not she likes the
-answer. *Your patron is a snake: the Merchant's Circle line, chapter IX.*
+answer. *(For the DM: this patron is a snake. See chapter IX, the Merchant's Circle line.)*
 
 ### 2. The Prelate's Question
 *Patron: the Church, through Prelate Damaris Kovaun.*
@@ -317,8 +319,8 @@ screamed, before the lights failed. He knew what they were. Remember that.
 
 **Pays:** Heroic Inspiration, and XP by Table I–4. The Church's favor: one request of
 Prelate Kovaun, spendable after tonight, and as large as the DM
-decides "frightening" means at your table. *Your patron is a snake: the Church line,
-chapter IX.*
+decides "frightening" means at your table. *(For the DM: this patron is a snake. See
+chapter IX, the Church line.)*
 
 ### 3. A House's Long Game
 *Patron: House Draunel, through Lord Essar Draunel.*
@@ -334,8 +336,8 @@ this, and you watched his face when it happened. Whatever you saw there, you are
 only witness to it.
 
 **Pays:** Heroic Inspiration, and XP by Table I–4. Lord Draunel's gratitude, which is
-worth exactly what a Draunel's gratitude is worth. *Your patron is a snake: the House
-Draunel line, chapter IX.*
+worth exactly what a Draunel's gratitude is worth. *(For the DM: this patron is a
+snake. See chapter IX, the House Draunel line.)*
 
 ### 4. The Cousin's Errand
 *Patron: the Thenya delegation, through Maiven Nolonaire.*

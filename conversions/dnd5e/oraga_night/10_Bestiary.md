@@ -32,9 +32,9 @@ default, and most of these people would rather be anywhere else.
 **The palace's two mercies**, which several blocks refer to:
 
 - **Knocked out, not killed.** A creature reduced to 0 Hit Points by an attack
-  marked *detain* (the honor guard, the sect guard, the Church Wardens; the Bought
-  leave a creature at 1 Hit Point and the Grappled condition instead, see *To the
-  Terms*) is **Unconscious and Stable** instead of dying. Before
+  marked *detain* (the honor guard, the sect guard, the Church Wardens; a Bought Blade on a
+  contract to detain leaves a creature at 1 Hit Point with the Grappled condition
+  instead, see its *To the Terms*) is **Unconscious and Stable** instead of dying. Before
   midnight it wakes in the gatehouse cell at the start of the next Movement, and
   somebody comes for it (see chapter IV, "The Palace on Alert"); after midnight the crowd
   rule in "Down, Not Out" gets it up sooner.
@@ -266,7 +266,7 @@ of them with Put Aside, if Put Aside is available.
 Bludgeoning damage, and a Medium or smaller target is pushed 5 feet away.
 
 ***Put Aside (Recharge 5–6 While Focused; Recharge 6 While Idle).***
-*Strength Saving Throw:* DC 14, each creature of its choice in a 20-foot Emanation originating from it.
+*Strength Saving Throw:* DC 15, each creature of its choice in a 20-foot Emanation originating from it.
 *Failure:* 9 (2d8) Force damage, and the target is pushed 15 feet straight away and has the Prone
 condition. *Success:* Half damage.
 
@@ -289,7 +289,8 @@ looks round, briefly, for the master it is supposed to have.
 > looks at it, and then it comes for whoever that one was looking at.
 > **Breaks.** Not from fear or pain. Its focus broken four times, or 0 Hit Points,
 > and it is gone. An argument that what the party is doing is not, strictly, interrupting the
-> three is a distraction like any other (Intelligence or Charisma).
+> three is a distraction like any other (an Intelligence (Investigation) or Charisma
+> (Persuasion) check against the distraction DC; card S14).
 > **Nastier.** It is already Focused when the party first draws its attention at
 > midnight.
 > *Made, not born, and in the service of the Uninvited's master; it came through with
@@ -414,7 +415,7 @@ second round after this one, and this guard holds its ground until they come.
 > stopped detaining and started defending.
 > **Breaks.** Never flees the house. Broken, a guard steps back, lowers the blade and
 > offers terms: surrender, and the evening ends in the gatehouse cell.
-> **Nastier.** A second guard arrives from the far end, and the way back is shut.
+> **Nastier.** A third guard arrives from the far end, and the way back is shut.
 > *There are nine. At midnight they die or fall on the dais protecting their chief,
 > quickly, at the edge of the frame (see chapter V); these numbers are for the hours
 > before the bells. Cards: S4, S10.*
@@ -1070,8 +1071,8 @@ Petrified, Stunned, Unconscious
 killed outright by any means, he steps into the world's shadow instead and returns at
 the start of his next turn, at full Hit Points, within 60 feet of the doors he holds.
 At the start of that turn, whoever dealt the last blow makes a DC 15 Strength or
-Dexterity saving throw (their choice); on a failure they are pushed 15 feet and have
-the Prone condition. No damage. If any effect would send him to another plane or move
+Dexterity saving throw (their choice); on a failure they are pushed 15 feet in a
+direction the DM chooses and have the Prone condition. No damage. If any effect would send him to another plane or move
 him against his will by magic, the leash pulls him back to where he stood, at once.
 When the three's work is finished or lost, or at the last bell of Oraga, he leaves,
 and nothing holds him.
@@ -1346,7 +1347,7 @@ killed outright by any means, he steps into the world's shadow instead and retur
 the start of his next turn, at full Hit Points, in the space where he dropped (or the
 nearest unoccupied space), resuming the hunt. At the start of that turn, whoever dealt the last blow makes a DC 15
 Strength or Dexterity saving throw (their choice); on a failure they are pushed 15
-feet and have the Prone condition. No damage. If any effect would send him to another
+feet in a direction the DM chooses and have the Prone condition. No damage. If any effect would send him to another
 plane or move him against his will by magic, the leash pulls him back to where he
 stood, at once. When the boat is out of reach — or at the last bell, if it comes
 first — he leaves, and nothing holds him.
@@ -1425,8 +1426,8 @@ On a success, guilt gets into the errand like grit into a joint. For the rest of
 night he falters at thresholds and looks back: he moves at 20 feet whether or not he
 is Witnessed, he can't use Shadow-Step more than once each minute, and at the
 Crossing he does not break past Master Vell. At a cost, the same, but he answers
-first with one parting blow or word. He keeps going, never answers, and never
-turns. *(Check and DCs: The Fractures, above.)*
+first with one parting blow or word. Either way he keeps going; the hunt does not
+end. *(Check and DCs: The Fractures, above.)*
 
 > **Wants.** Veier Nolonaire, and to be seen doing it, because worship must be
 > witnessed to count. He re-stages the kill if nobody saw.
@@ -1470,8 +1471,8 @@ turns. *(Check and DCs: The Fractures, above.)*
 (Deception) check. About anything human, it takes a DC 10 Charisma (Deception) check.
 
 ***Paid on Delivery.*** Every Circle Hired Knife obeys Callun's word the moment it
-reaches them. She can call them off at any time, no action required, once each turn, even on
-someone else's turn.
+reaches them. She can call them off once each turn, even on someone else's turn; it takes no
+action.
 
 **Actions**
 
@@ -1566,7 +1567,7 @@ damage.
 **Traits**
 
 ***A Professional.*** Tavva never attacks a creature at 0 Hit Points. She fights to
-leave, not to win.
+leave.
 
 ***Sneak Attack (1/Turn).*** Tavva deals an extra 7 (2d6) Piercing damage when she hits
 with a Knife and has Advantage on the attack roll, or when an ally is within 5 feet of the
@@ -1761,7 +1762,7 @@ killed outright by any means, she steps into the world's shadow instead and retu
 the start of her next turn, at full Hit Points, in the space where she dropped (or
 the nearest unoccupied space), resuming her task. At the start of that turn, whoever dealt the last blow makes a
 DC 15 Strength or Dexterity saving throw (their choice); on a failure they are pushed
-15 feet and have the Prone condition. No damage. She stops indulging the
+15 feet in a direction the DM chooses and have the Prone condition. No damage. She stops indulging the
 interference; she does not take it personally. If any effect would send her to
 another plane or move her against her will by magic, the leash pulls her back to
 where she stood, at once. When the three's work is finished or lost, or at the last
@@ -1798,9 +1799,9 @@ light goes out of the crystal and the charge is spent. The palace's great wards
 gutter at this range but hold.
 
 ***She Arrives.*** The Wept does not wind up. When she uses Shadow-Step, she can
-make one of her Multiattack's two attacks at once on arrival, against whoever stands
+make one of her Multiattack's attacks at once on arrival, against whoever stands
 between her and the dais. That attack counts toward her Multiattack that turn; it is
-never a third attack, and she can't make it if she has already made both.
+never an extra attack, and she can't make it once her Multiattack is used up.
 
 **Actions**
 
@@ -2011,7 +2012,7 @@ before it is a reward.*
   spent (Table X–3).
 - **The grandmother's soul-crystal** *(Agenda 5).* A lifetime of light in a lattice
   the size of a heart. It is not a magic item in any sense the rules track; it glows
-  faintly at dusk, as all old crystal does. It is an heirloom, not treasure.
+  faintly at dusk, as all old crystal does. It is an heirloom, with no value in GP.
 - **An honor guard's pair.** A *House Flare* and a *House Seal*, if the guard never
   spent them and somebody takes them off him. On a living guard they are the house's
   property; taking them is theft from House Boranis, and the room remembers faces.

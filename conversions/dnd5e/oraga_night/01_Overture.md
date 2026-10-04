@@ -9,18 +9,20 @@
 > 1. **This chapter, to the end of "The Snakes in the Chicken Pen"** (15 minutes).
 >    The shape of the night, the first five minutes, what pays, and the rules for
 >    steel.
-> 2. **Chapter II, "What the Module Never Says" and "The Eight Agendas"** (5
->    minutes). The truth you are hiding is in "Adventure Background", below; these
->    are the lines you hold and the cards you deal.
+> 2. **Chapter II, "The Truth of the Night" (from "What Is Coming" to "What the
+>    Module Never Says") and "The Eight Agendas"** (15 minutes). This is the truth you
+>    are hiding, the lines you hold and the cards you deal. "Adventure Background",
+>    below, is the short version.
 > 3. **Chapter VIII, the DM sheet and the palace diagram** (10 minutes). Print both.
 >    From here on, everything you read is behind a line on that sheet.
 > 4. **Chapter V: "How to Run the Attack", Movement VI's opening, "Midnight Rules"
 >    (read "Down, Not Out", "Buying Time" and "The Attendant"; skim the Room Tricks and
 >    "Two Hundred People": they are tables to use live), "The Crossing", and Movement
->    VII's opening and Epilogue** (30 minutes).
-> 5. **Chapter IX: "Running the Snakes", then S14 and S3 in full** (the Attendant and
->    the gate come up at almost every table), **then skim the cards the characters'
->    agendas point at** (20 minutes).
+>    VII's opening and Epilogue** (25 minutes).
+> 5. **Chapter IX: "The Snakes at the Ball" (the three rules) and "Running the
+>    Snakes", then S14 and S3 in full** (the Attendant and the gate come up at almost
+>    every table), **then skim the cards the characters' agendas point at** (15
+>    minutes).
 > 6. **Chapter IV: "The Palace on Alert", "When Somebody Draws Early", "Running the
 >    Room", and the box at the head of each Movement** (10 minutes). Each box says
 >    what to run and what to skip. Read Undercurrent C only if someone carries
@@ -42,8 +44,9 @@ and built for **four characters of 4th level**, freshly made or taken from the
 pregenerated guests in chapter XI. Every fight in it is balanced for four, and every
 fight card carries lines for three or five characters and for 3rd or 5th level. Use
 the one line nearest your table; the lines are not cumulative.
-Every problem in it can be solved by people with a good idea and the nerve to act on
-it, and most of them are better solved that way.
+
+Every problem in the night can be solved by people with a good idea and the nerve to
+act on it, and most of them are better solved that way.
 
 **It is one session: four and a half to five hours.** Play starts in the street, with
 the party walking up the hill toward the palace (see chapter IV, area B0), and ends at dawn
@@ -83,13 +86,14 @@ Any fifth-edition core rules. The module is written against the **System Referen
 Document 5.2.1** (the 2024 rules) and runs at a 2014 table with the notes marked
 *At a 2014 table*; only the pregenerated characters need rebuilding.
 
-You do **not** need the Facets of Origin books or the Val'loh Facet. Chapter III
-carries everything a player needs about the tribes: their gifts as origin feats and
-the crystal charges they carry. Chapter VII holds every named guest, chapter IX every
+You do **not** need the Facets of Origin books or the Val'loh Facet. Chapter III and
+Player Handout 3 (chapter VIII) carry everything a player needs about the tribes:
+their gifts as origin feats and the crystal charges they carry. Chapter VII holds every named guest, chapter IX every
 fight, and chapter X every stat block and every crystal charge ("Items of the Night").
 
 Print from chapter VIII before you sit down: the **two-page DM sheet** and the **palace
-diagram** for yourself, and the agenda cards and the invitation for the table.
+diagram** for yourself, and the agenda cards, the invitation and the crystal-charge
+page (Player Handout 3) for the table.
 
 ## Reading This Book
 
@@ -108,8 +112,8 @@ points at its card by ID, and the card points back. Every card carries its encou
 budget for four 4th-level characters, terrain, objective, clock, outs, morale, and
 scaling lines for three or five characters and for 3rd or 5th level.
 
-**Stat blocks** live in chapter X, alphabetically, in SRD format. A creature name in
-**bold** has a stat block there. Nothing else in the module carries an enemy's numbers.
+**Stat blocks** live in chapter X, alphabetically, in SRD format. In chapters IV, V
+and IX, a creature name in **bold** has a stat block there. Nothing else in the module carries an enemy's numbers.
 
 **Clocks** are named, and most have four segments. Each card says how many, what
 advances its clock, and what happens when it fills.
@@ -121,7 +125,10 @@ Prone condition), and a check is written in full: "a DC 15 Wisdom (Insight) chec
 **Cross-references** name the chapter, and the section in quotation marks where it
 helps: (see chapter V, "Down, Not Out"), (card S2), (area B9), (Table I–3).
 
-**Boxes** come in these kinds, and only these:
+**Boxes** come in these kinds:
+
+- **The prep box** at the head of this chapter, and the **reading notes** that open a
+  chapter where its use needs explaining.
 
 - **Sidebar —** a piece of the world that would otherwise derail the paragraph it sits
   in. A sidebar never holds read-aloud text.
@@ -153,9 +160,6 @@ favors under two hundred masks. Then, at midnight, the masks come off, and three
 guests keep theirs on. The last two Movements are a different game: darkness, fire,
 terror, and choices about who to save.
 
-The minutes below are for four players. They are a budget, not a stopwatch. Move on
-when the table's energy says so. The budget tells you when you have spent too long.
-
 **Overview.** What happens in each Movement, flatly:
 
 - **I. The Receiving Line.** Corval receives every guest by name. Nobody is disarmed,
@@ -172,6 +176,9 @@ when the table's energy says so. The budget tells you when you have spent too lo
   Veier escapes through the gardens on Vell's arm (the Crossing).
 - **VII. The Longest Night.** Fire and rescue. The Bought hold the outer gate (S3)
   until it is decided, and then the last bell rings.
+
+The minutes below are for four players. They are a budget, not a stopwatch. Move on
+when the table's energy says so. The budget tells you when you have spent too long.
 
 **Table I–1: The Runtime**
 
@@ -251,14 +258,14 @@ ladder. Learn it once here; every chapter prints its DCs against it.
 | **Hard** | **18–20** | Against somebody's expertise or somebody's fear. **18** when the character has earned an edge; **20** when they have not |
 | **Very Hard** | **25** | Deceiving Raunu Boranis. Moving Master Vell. Very little else |
 
-Checks are written the SRD way: `a DC 15 Wisdom (Insight) check`. Where a check depends
+Checks are written the SRD way: a DC 15 Wisdom (Insight) check. Where a check depends
 on a character's training, proficiency in the fitting skill or tool applies, and a
 gifted character's gift (see chapter III) gives Advantage when the check is about the
 thing the gift does.
 
 **Success at a cost.** This night runs on partial wins, and it teaches them early.
 When a check fails by **4 or less**, you may offer the player what they wanted
-*with a cost attached*: name the cost first, then let them take it or leave it. The
+with a cost attached: name the cost first, then let them take it or leave it. The
 DM sheet in chapter VIII has a short table of costs, so you can read one off the page
 instead of inventing one while four people watch you.
 
@@ -269,9 +276,11 @@ imposes instead. Inside a fight, they roll like anybody else.
 immediately after rolling it, keeping the new roll. A character who already has it
 when they earn it again **may give it to another player character who lacks it**.
 Human characters (and every character here is human) begin with it and regain it on a
-Long Rest, which tonight they will not get. The chapel (B6) is the one place to take
-a Short Rest, and the only one the ball offers. *At a 2014 table, this is plain
+Long Rest, which tonight they will not get. *At a 2014 table, this is plain
 Inspiration, and it grants Advantage instead of a reroll.*
+
+**Rests.** There is no Long Rest tonight. A character who spends a Movement in the
+chapel (B6) may take a Short Rest, the only one the ball offers.
 
 ## What the Night Pays
 
@@ -326,7 +335,7 @@ a **tell** a watchful table can catch, escalates if nobody steps on it, and come
 in the dark after the lights die. Chapter IX holds each line, its fight cards and the
 **Snake Tracker**; the DM sheet in chapter VIII has the boxes you tick.
 
-Chapter IX runs them by three rules (see chapter IX, "The Snakes in the Pen"), and one
+Chapter IX runs them by three rules (see chapter IX, "The Snakes at the Ball"), and one
 more thing holds tonight:
 
 - **Something came with the Uninvited, and it can be beaten.** All evening a quiet

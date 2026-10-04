@@ -414,7 +414,7 @@ These rules are mechanical, but a worker makes every edit with the linter's hit 
 | ⛔ T8.13 | Q17 | FRONT-12 | README, 02, 06, 07 | Pronunciations at first mention; the "PG" decision; the Blackwatch and Mazaa glosses |
 | ⛔ T8.14 | Q18 | BESTIARY-21, CAST N6 | 10, 07 | The "—" alignment on the Uninvited and Vell; cast tags if chosen |
 | ⛔ T8.15 | Q19 | CAST N7 | 08 | Card initials: keep them, or "delivered in person" |
-| ⛔ T8.16 | Q20 | CAST N9 | 07, 04 | Sixty or eighty servants; the testament's witnesses |
+| ⛔ T8.16 | Q20 | CAST N9, NEW-CAST-2 | 07, 04 | Sixty or eighty servants; the testament's witnesses. Sites: 07 ("sixty"; the testament in Corval's entry), 04 Undercurrent B ("eighty"; the testament), and 07 Sella's *What Sella Knows* witness bullet (TODO-Q20) |
 | ☑ T8.17 | Q21 | FRONT-9, SNAKES-28 | 04, 05 | **Approved 2026-10-03.** Merged into T2.4 |
 | ☑ T8.18 | Q22 | O3 | — | **Closed 2026-10-03:** no replacement habit. O3 stands |
 

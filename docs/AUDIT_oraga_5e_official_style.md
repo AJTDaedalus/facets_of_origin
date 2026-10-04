@@ -130,6 +130,8 @@ the Leashed return point, the midnight clock count) are decided in §2/§3 and a
   - **Q22:** removing the habit leaves the Attendant with three habits, and Movement III has no sighting. Do you want to supply a replacement (new canon)? The default is no replacement.
 - **2026-10-03:** Q21 → approved (make the redundancy cuts). Q22 → no replacement habit.
 - **Q23 (found in Phase 1):** Agenda 4 and Handout 2 say the message is for Veier alone ("no husband"), but the Dinner for Two puts Raunu at the table. Can the character get a moment with her alone, and how? (Answering this is new canon.)
+- **Q24 (found in the final review, NEW-CAST-3): Veier's "uncle".** Background: Veier's canon line (Facets 07, kept word for word in 04 and 07) is "Tell my uncle his message took two years to reach me…". But the 5e text calls her the Thenyan chief's cousin, and Maiven, who carries the message, is her cousin too, so a DM reading the cast entry sees the word as a slip. Question: is the "uncle" a third relative, or should the line read "cousin"? Until you rule, the quote stays as written, 07 says "her answer for the delegation", and a TODO-Q24 marks the spot. (Answering this is canon.)
+- Still open after the final review: Q3, Q4, Q7–Q20, Q23, Q24.
 - Fix plan: `docs/DESIGN_oraga_5e_official.md` + `docs/TASKS_oraga_5e_official.md`.
 
 ## 6. Already at official standard (don't break)

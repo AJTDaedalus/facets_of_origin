@@ -241,3 +241,111 @@ the audit.*
 - **N4 — The Attendant after it is confronted (BALL-2).** *Background:* the page says both "one habit per Movement" and "gone until the Unmasking" once followed. *Question:* should it vanish for the rest of that Movement only (recommended), or until midnight? If until midnight, should S14 still pay its +2 for habits the table never saw?
 - **N5 — Which Movement does the Seating Feud belong to by default (BALL-8)?** Recommended: Movement II, with Movement III as the fallback, over before the toast.
 - **MM terminology:** "MM" works cleanly throughout this chapter. I have nothing to add to the ruling already being raised.
+
+## 5. Status after fix pass (2026-10-03)
+
+*Final review T9.3, fresh eyes. Checked against `04_The_Ball.md` at HEAD (`cd174bf`, 1,406 lines) and
+`git diff pre-official-5e..HEAD`. Line numbers below are HEAD lines. `lint_5e.py --file 04_The_Ball.md`:
+0 hard hits, 0 structure hits; mean 13.46 words per sentence, 5.28% over 30 words, 1.54 em dashes per 1k words,
+0 paragraphs over 120 words.*
+
+**Counts:** 25 fixed · 1 gated (Q15) · 0 partly fixed · 0 skipped · 0 regressed. BALL-1 is fixed, but its two leftovers are gated on Q7 and Q23.
+
+| ID | Status | Evidence |
+|---|---|---|
+| BALL-1 | fixed (leftovers gated Q7, Q23) | Mv IV time box now lists "if anyone carries Agenda 4, dinner for two in the east wing (B9)" under *Run* (1149–1151). `#### Dinner for Two (B9)` (1246–1294) has the Q6 access step with the ring (1252–1255), a trigger, a 78-word box, Veier and Raunu envelopes, "Raunu does not say what he will announce", Topics taken from 07, a 10-minute cap, and an exit to Mv V. B9 (346–348) and Undercurrent C (745–746) name the ring. `TODO-Q7` at 1289. Q23 ("no husband", but Raunu is at the table) is logged and open. |
+| BALL-2 | fixed | 883–886: "It is gone for the rest of that Movement and turns up in the next one as printed." 07:620–621 matches. |
+| BALL-3 | fixed | B2 (226–236), B4 (246–259), B6 (268–282) and B9 (336–349) now run header → trigger → box → DM text. B2/B4/B6 re-descriptions cut. |
+| BALL-4 | fixed | The chapel box ends on the seven niches (272–274). The offerings are now behind the DC 10 Perception check in DM text (276–280). |
+| BALL-5 | fixed | Summons converted to the DM subsection "Raunu's Summons: the Questions, and What He Says" (1078–1111): roman text, bold quoted questions, quoted replies. Toast (1164–1180): speech in quotes, stage cues roman in parentheses. |
+| BALL-6 | fixed | 202–204: failing by 5+ means the bearer is refused, with the kitchens (B10) as the route in. The audit's "another guest's arm" and "sends for a guard" were left out on purpose as new detail (LOG T3.1). |
+| BALL-7 | fixed | B0 result (181–183), B3 (243–244), Mv II "open gratitude" (939), Mv III "Corval fetches that character at the next summons" (1057–1058). |
+| BALL-8 | fixed | Heading "(Movement II, or III; the Banquet Galleries)" (480). Timing per O7 (489–491). Sidebar pointer names "Guards are a scene, not a sentence" (499–500). 09 S1 *Where and when* matches. See NEW-BALL-6 for the Mv III time box. |
+| BALL-9 | fixed | "Raunu summons four guests all night. At least one, and by default two…" (1019–1020); "about five questions or five minutes" (1036); the friendly trigger and its default (1041–1043). See NEW-BALL-3 and -4. |
+| BALL-10 | fixed | 671–673: a Scora needs no check; anyone else makes a DC 15 Intelligence check after 10 minutes, or needs no check after an hour. |
+| BALL-11 | fixed | "(This is Master Vell; see chapter VII.)" (166); "Master Vell is standing at the river gate" (1378–1379). |
+| BALL-12 | gated (Q15) | `TODO-Q15` at 767 (nursery) and 1123 (Mv III coin). No amounts printed. Correct. |
+| BALL-13 | fixed | No paragraph over 120 words. Mean 13.46 words per sentence. B8 has a bold run-in per find (310–324). Undercurrent D's trail is bulleted (782–796). See NEW-BALL-8 on choppiness. |
+| BALL-14 | fixed | "The gatehouse cell is a scene." (68). The slogan survives only at 548. "In hindsight…", "superb scene", "best red herring", "door left ajar", "floor tilt" and "nobody can stop thinking about" are all gone. "(They are wrong.)" (1189). Undercurrents sidebar (831–832) as proposed. Em dashes 1.54/1k. |
+| BALL-15 | fixed | "Unconscious and Stable", "0 Hit Points" (64, 497); "with Advantage" (1310). No lowercase rules terms left (lint 0). |
+| BALL-16 | fixed | 60–62: "four more come at the start of the second round after the first guard is Bloodied (*Call the House*; card S4)". 09 S4 now has two guards, the Mv I gate and "Return to the current Movement". See NEW-BALL-1 for a new S4 line that conflicts with 04. |
+| BALL-17 | fixed | Toast can be held, and the news travels (1159–1160). The Dead Dance trigger says who hears the whole box (1312–1313). |
+| BALL-18 | fixed | "a DC 15/18 Dexterity check using Thieves' Tools" (265, 297, 310–311). Open-skill checks give a default (937–938, 1055–1056). |
+| BALL-19 | fixed | The header ladder matches chapter I (9–10). *Social checks* points to chapter I's section and no longer restates it (428–430). |
+| BALL-20 | fixed | No "the players" meaning characters (lint 0). "Player character" survives at 1020 and 1118–1119, where it separates PCs from NPC guests. |
+| BALL-21 | fixed | "about two dozen" (39); "If the characters act on it:" (806–807); "Sit with what that implies" cut; "every rumor is told with total confidence (Table VIII–7)" (425–426); "The shape of it is discoverable." (677). |
+| BALL-22 | fixed | British spellings 0, "grey" 0. Church robes are "gray" (901, 969), per LOG T4.6's reading of INVENTIONS #43. |
+| BALL-23 | fixed | "Masks are on before the gate" (846); "unchanged" cut (169); the B0 bullet is "Corval receives by name, from memory (see B1)" (154); the cup box now comes before the head-of-the-line box (851–863). |
+| BALL-24 | fixed | Five `#### The Snakes This Movement — I…V` sections, unboxed. *The Snakes in the Pen* was cut to a pointer and Table IV–1 (455–470), per Q21. |
+| BALL-25 | fixed (moot) | S2 is now "The Service Corridor Job". 04 points to chapter V's "The Snakes in the Dark" (87–88, 333). No "Knives in the Dark" collisions. |
+| BALL-26 | fixed | 606–607: "A failed attempt can be tried again after 10 more minutes at the seam. The slate from the study (B8) always works." |
+| N1 | resolved (Q6) | See BALL-1. |
+| N2 | gated (Q15) | See BALL-12. |
+| N3 | resolved (O1) | SRD 5.2.1 capitals module-wide. |
+| N4 | resolved (O2) | Vanishes for one Movement. S14 counts only habits the table saw. |
+| N5 | resolved (O7) | Movement II by default, Movement III as the fallback, over before the toast. |
+
+## 6. New issues found in final review
+
+*Most of these are new problems or regressions from the fix pass. NEW-BALL-7 is a leftover from an earlier sweep, and NEW-BALL-9 lists defects that predate the pass but that BALL.md missed, kept at P3. No module file was edited.*
+
+### NEW-BALL-1 [P2] Card S4's new Development line contradicts chapter IV's invitation rule (cross-file; fix-pass regression)
+- **Where:** 09:960 (new in this pass): "If an out ended it, no invitation is void." Against 04:65 ("When steel is bared… The offender's invitation is void for the rest of the night"), 04:79–81 ("When the east wing is forced… the offender's invitation is void whether or not they were caught in the act"), and 04:101 ("The offender comes back in Movement II with no invitation"). 09 S4's own "Losing costs… its invitations' good standing" (941–942) is fine.
+- **Problem:** A DM who resolves a Movement I gate fight or a forced east wing door by an out (a good story, a name, walking away) gets opposite answers from the two chapters on whether the invitation survives.
+- **Fix (09 owner; 04 needs no edit):** "**Development.** If expelled, the offender is put out and Corval is informed. Bared steel or a forced door voids the invitation either way (chapter IV, "The Palace on Alert"). An out spares the character the cell, not the invitation." Or, if the intent is that an out saves the invitation, change 04:65 and 04:80 to "…void unless an out ends the scene (card S4)". That changes a rule, so it is the owner's pick. The first option keeps 04 as printed.
+
+### NEW-BALL-2 [P2] "Getting in" has no timing, but the dinner is fixed after the toast
+- **Where:** 04:1248 ("Run this after the toast") and 1252–1254 ("A character who shows the door guards the grandmother's ring… is asked to wait. The ring goes in. If Veier chooses them… a guard walks them up"). Against 04:941 (Mv II: "The east wing's guarded doors scouted (Agenda 4)") and 1050–1052 (Mv III: "If she chooses you, you will know").
+- **Problem:** The Agenda 4 character will most likely show the ring in Movement II or III, when they first reach the doors. The page doesn't say whether the guard walks them up then (before the toast, with Raunu still in hiding and the dinner box not yet true) or whether they wait. A DM following "Getting in" literally runs the dinner box in Movement II.
+- **Fix (a timing default, not canon; offer it to the owner with Q23):** add after 1254: "Whenever the ring is shown, the answer comes after the toast. A guard finds the character wherever they are as the galleries empty." The present-tense box then holds.
+
+### NEW-BALL-3 [P3] The summons' "true thing" trigger is stated twice in a row
+- **Where:** 04:1040–1042: "Impressing him takes no check at all: tell him a true thing he did not already know. He turns friendly when the guest tells him a true thing he did not know, or sits through the silence without filling it." (The second sentence is the BALL-9/O12 addition.)
+- **Problem:** The reader can't tell whether "impressing" and "friendly" are two states or one. The prose stutters.
+- **Fix:** "Impressing him takes no check at all. He turns friendly when the guest tells him a true thing he did not already know, or sits through the silence without filling it."
+
+### NEW-BALL-4 [P3] The "friendly by default" rule breaks on the paired summons
+- **Where:** 04:1042–1043 ("By default, he is friendly with the second summoned character"), against 04:446–447 ("At least once in Movement III, Corval fetches two characters at once") and the Mv III time box (992–993: "one summons (two characters walked in together)").
+- **Problem:** On the default run, both characters walk in together in the one summons, so neither is clearly "second".
+- **Fix:** "By default, he is friendly with the second character summoned. If two come in together, that is whichever of them speaks second."
+
+### NEW-BALL-5 [P3] The dinner box names Veier before the characters have identified her
+- **Where:** 04:1260–1261 (box): "Raunu Boranis and Veier Nolonaire are eating off them side by side".
+- **Problem:** By the legend in 01 and C-S21, a box never names someone the players haven't identified. Raunu has been seen unmasked at the toast, but Veier has been seen by nobody.
+- **Fix:** "…and Raunu Boranis and the woman you came to find are eating off them side by side…"
+
+### NEW-BALL-6 [P3] The Movement III time box omits the feud fallback the BALL-8 fix created
+- **Where:** 04:992–994 (Mv III *Run* / *If you have time*), against 04:489–491 ("You can hold it until Movement III") and 08 Table VIII–1 Mv III ("S1 if held from II").
+- **Fix:** Append "and S1, if it was held from Movement II" to the Mv III *If you have time* list.
+
+### NEW-BALL-7 [P3] One emphasis italic missed by the Phase 9 sweep
+- **Where:** 04:1155: "Raunu Boranis is simply *standing at the high table*". This is DM prose, not read-aloud, and it isn't on the LOG's kept-by-rule list.
+- **Fix:** Set it roman.
+
+### NEW-BALL-8 [P3] A few split passages now read as staccato (pilot ran below the later 14–19 calibration)
+- **Where:** 04 averages 13.46 words per sentence, below the 14–19 band the coordinator set after the pilot (LOG Phase 7, T7.2 note). The worst spots: 1070–1073 (four sentences in a row opening "They"); 1189–1190 ("(They are wrong.) Draunel fears a succession decree. Kovaun's question acquires teeth. Vorlain goes quiet and drinks."); 1270–1272 ("He listens completely. Raunu does not say what he will announce at the Unmasking.").
+- **Fix (light touch):** 1071–1072: "They will do nothing at all until midnight; they are waiting for the one moment custom guarantees the recluse must appear." 1189–1190: "Draunel fears a succession decree; Kovaun's question acquires teeth; Vorlain goes quiet and drinks." 1271–1272: "He listens completely, and he does not say what he will announce at the Unmasking."
+
+### NEW-BALL-9 [P3] Defects that predate the pass and that BALL.md missed (fresh-eyes catch)
+- **Undercurrent C still reads as the only road to Veier.** 04:560–562 ("if anyone carries Agenda 4, it is the way to Veier"), 733 ("*(needed if anyone carries Agenda 4)*") and 1197 ("Undercurrent C is the map"). Since BALL-1, the ring gets the Agenda 4 character in without C. **Fix:** 562 "it is a way to Veier"; 733 "*(run it if anyone carries Agenda 4)*". 01:26 can stay as written.
+- **A broken sentence** at 04:633–635: "Reading the gift in what, the room answers quietly: a chair with a wide armrest…". **Fix:** "Reading the gift in whom? The room answers quietly: a chair…" Or, keeping S27 at zero: "What they were reading, the room answers quietly: a chair…"
+- **An echo** at 04:256: "ministers screening supplicants through a screen so thin it is almost an invitation". **Fix:** "ministers vetting supplicants through a screen so thin…"
+- **A heading range that is off.** 04:517 "*(Movements III–VI — one trouble in three sightings)*", but the raid is "Movements VI–VII" (541). **Fix:** "*(Movements III–VII…)*".
+- **Cross-reference form** (style sheet): 04:385–386 "Found only through Undercurrent A — The Root of the House, this chapter" → 'Found only through "Undercurrent A — The Root of the House", below'; 04:1393 "(chapter IX, the Snake Tracker)" → '(see chapter IX, "The Snake Tracker")'; Table IV–1 headers "*(Ch. VII)*", "*(Ch. IX)*" → "(chapter VII)", "(chapter IX)".
+
+**No other new problems.** Every pointer checked resolves: chapter I "Checks, Inspiration, and the Ladder"; chapter II "Why the Ball"; chapter V "The Snakes in the Dark" and ⟨If History Breaks⟩; 07 "Veier Nolonaire — the Bride"; 09 "Running the Snakes" and cards S1–S14; chapter X "If It Comes to It"; Tables I–3, VIII–4 and VIII–7 (rumors 5 and 11). The Dinner Topics match 07's *What Veier Knows* line for line. No invented fact was found in the new Dinner, gate-failure, B0/B3 or summons text. The facts that left with *The Snakes in the Pen* are kept elsewhere: "the attack blindsides every faction" is at 05:798, and the heat rule is in 09.
+
+### 6a. Resolved (Phase 9 final-review fixes, 2026-10-03)
+
+| ID | Resolved | Note |
+|---|---|---|
+| NEW-BALL-1 | fixed | 09 S4 Development: "An out spares the character expulsion, but bared steel or a forced door voids the invitation either way (see chapter IV, "The Palace on Alert")." 04 unchanged. |
+| NEW-BALL-2 | Planner O27 | 04 Getting in: "Whenever the ring is shown, the answer comes after the toast: a guard finds the character wherever they are." Q23 stays open. |
+| NEW-BALL-3 | fixed | One statement of the "true thing" trigger. |
+| NEW-BALL-4 | fixed | "…the second character summoned; if two come in together, that is whichever of them speaks second." |
+| NEW-BALL-5 | fixed | Box: "Raunu Boranis and the woman you came to find…". |
+| NEW-BALL-6 | fixed | Mv III *If you have time* adds "S1, if it was held from Movement II". |
+| NEW-BALL-7 | fixed | "standing at the high table" roman. |
+| NEW-BALL-8 | fixed | The three joins as proposed. |
+| NEW-BALL-9 | fixed | "a way to Veier"; Undercurrent C tag "(run it if anyone carries Agenda 4)" (flow.json anchor updated); 1197 "the ring at its doors, or Undercurrent C"; the broken sentence → "What they were reading, the room answers quietly:"; "vetting supplicants"; "Movements III–VII"; B11 and Snake Tracker pointers in STYLE form; Table IV–1 headers "(chapter VII)", "(chapter IX)". |
+| SNAKES-25 (04 side) | fixed | 04's heading is now "The Snakes at a Glance" so that no heading reads "The Snakes in the Pen" (09's is "The Snakes at the Ball"). No pointer targeted 04's heading; INVENTIONS #1 re-pointed. |

@@ -1,8 +1,8 @@
 # VIII. The DM Sheet, the Palace and the Handouts
 
 *The first two pages are yours: the whole night on two sheets. The third is the palace.
-After those come the Snake Tracker, where everyone stands and the rumor table, then the
-handouts for the table. Print the first three pages and run the night from them.*
+After those come the Snake Tracker, Where Everyone Stands, and the rumor table, then
+the handouts for the table. Print the first three pages and run the night from them.*
 
 ---
 
@@ -12,9 +12,9 @@ handouts for the table. Print the first three pages and run the night from them.
 
 **Table VIII–1: The Night** *(four players; minutes from Table I–1)*
 
-| Start | Movement | Scheduled | The omen | The quiet guest | Fights to show *(Ch. IX)* |
+| Start | Movement | Scheduled | The omen | The quiet guest | Fights to show (chapter IX) |
 |---|---|---|---|---|---|
-| 0:00 | **The street** (10) | Pick character, agenda, hook (Ch. I); read B0; *"what does your mask look like?"* | — | — | — |
+| 0:00 | **The street** (10) | Pick character, agenda, hook (chapter I); read B0; *"what does your mask look like?"* | — | — | — |
 | 0:10 | **I. Receiving Line** (25) | Corval receives by name, from memory; nobody is disarmed; the hosts are absent | Nine honor guards, facing inward | Holds a cup out for nobody | S4 if anyone draws |
 | 0:35 | **II. Empty Rooms** (45) | Vorlain holds court; the factions circulate; still no host | Corro's gift rings, pointing nowhere | Stares at a crystal wall for a full minute | S1 · S6 |
 | 1:20 | **III. Summons** (35) | A glimpse on the high gallery; Corval fetches guests to B4 (≥1 player character; two together once) | Three gray masks Corval cannot account for | — | S6 · Tavva's scout · S1 if held from II |
@@ -23,7 +23,7 @@ handouts for the table. Print the first three pages and run the night from them.
 | 3:00 | *Break* (10) | As the bells ring midnight | | | |
 | 3:10 | **VI. Unmasking** (50) | Lights die **mid-sentence**; the attack; the dais; the Crossing; the leash takes the three once the boat is clear | — | Sets down the cloak and cup; stands by the three | S11 · **S14** if they interfere · S8 · S5 |
 | 4:00 | **VII. Longest Night** (40) | Fire, rescue, the gate; **then** the last bell (at the latest, S3's bell clock); word of other attacks with the sect guard | — | — | **S3** · S12 · S13 · S5 · S14 |
-| 4:40 | **Epilogue** (10) | Ch. V read-aloud; *what do you carry out?*; **5th level** | | | |
+| 4:40 | **Epilogue** (10) | Chapter V read-aloud; *what do you carry out?*; **5th level** | | | |
 
 **Checkpoints:** the toast by **2:15**; midnight by **3:15**. If you are behind, cut B13,
 spare Undercurrents, a second card per Movement, S1, and the east wing only if nobody
@@ -198,8 +198,8 @@ snake.*
 |---|---|---|---|---|---|
 | **The Circle** | ☐☐☐☐ | 1 | ✱ the toast · Callun's coin refused (Mv III) · **to 4:** S7's clock filled, or the nursery sold to her | −1 per knife turned or caught quietly · **to 0:** Agenda 1 delivered, the Tithe told to Callun, or Callun told what her knife did to an under-cook | **S12** |
 | **The Church** | ☐☐☐☐ | 1 | ✱ the Radiant's blessing · a warden refused or humiliated before guests · S8's tell shown and not stepped on by midnight | −1 if Kovaun is given something true to file about the gray masks · −1 if the wardens are turned back at the study door (S8) · **to 0:** Agenda 2 delivered | **S8**, in the dark |
-| **House Draunel** | ☐☐☐☐ | 1 | ✱ the toast · Agenda 3, if one of the characters carries it, refused or failed · Iron 2 stopped without Draunel losing face · S9's clock filled | −1 if Draunel is embarrassed before guests · **to 0:** Agenda 3 delivered | **S13** |
-| **House Boranis** | ☐☐☐☐ | 0 | ✱ the appointment accepted (Mv IV) · Vorlain baited, or drunk, by one of the characters · Draunel's heat reaches 3 · a cousin beaten in public (S6) · S9's clock filled | −1 each time the party helps Essin keep Vorlain sober · −1 if S6 ends quietly · **to 0:** Essin warned of the appointment before Mv IV | **S13**, if Draunel is also 3–4 |
+| **House Draunel** | ☐☐☐☐ | 1 | ✱ the toast · Agenda 3, if one of the characters carries it, refused or failed · Iron 2 stopped without Draunel losing face · S9's clock filled (on the terrace or offstage) | −1 if Draunel is embarrassed before guests · **to 0:** Agenda 3 delivered | **S13** |
+| **House Boranis** | ☐☐☐☐ | 0 | ✱ the appointment accepted (Mv IV) · Vorlain baited, or drunk, by one of the characters · Draunel's heat reaches 3 · a cousin beaten in public (S6) · S9's clock filled (on the terrace or offstage) | −1 each time the party helps Essin keep Vorlain sober · −1 if S6 ends quietly · −1 if S9 ends with nobody drawing · **to 0:** Essin warned of the appointment before Mv IV | **S13**, if Draunel is also 3–4 |
 | **Phern** | ☐☐☐☐ | 0 | ✱ once each in Mv II, III and IV (the omens) | −1 if a player character walked the room with Corro · −1 if Corro trusts one enough to take an instruction at midnight | **S11** |
 | **The Thenya** | ☐☐☐☐ | 1 | ✱ the toast · ✱ the audience refused · a player character lies to Maiven, or refuses her and says so | −1 if a player character promises to go with her and means it · **to 0:** proof of Veier | **S10** in Mv V *(at midnight she goes east whatever her heat)* |
 

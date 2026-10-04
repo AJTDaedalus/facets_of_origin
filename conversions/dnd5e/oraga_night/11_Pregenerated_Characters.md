@@ -116,7 +116,7 @@ keeps its grudges.
 
 **Agenda hook.** *A House's Long Game* puts Serane beside Vorlain with a Draunel errand
 and a Draunel's promises; *The Prelate's Question* puts her in front of Raunu with the
-Church's one question. Either way she is working a snake's errand (see chapter IX), from
+Church's one question. Either way she is working a faction's errand, from
 inside.
 
 **Mask.** *Whose spirit-face does Serane wear tonight, and who in her own house will
@@ -165,13 +165,14 @@ anything.
   the extra attack from his second dagger is part of the Attack action, not a Bonus
   Action, and its damage is 1d4 Piercing (the Light weapon's extra attack adds no
   ability modifier).
-- **Sneak Attack** 2d6, once per turn, with Advantage or with an ally beside the target.
+- **Sneak Attack** 2d6, once per turn, with Advantage, or with an ally within 5 ft. of
+  the target and no Disadvantage.
 
 **Class Features**
-- **Expertise** in Stealth and Sleight of Hand. **Thieves' Cant.** In a country
-  without writing, it is all signs, knots and chalk that gets wiped.
-- **Weapon Mastery:** Dagger (Nick), Shortsword (Vex), for the first blade he picks up
-  after midnight; he carries none.
+- **Expertise** in Stealth and Sleight of Hand. **Thieves' Cant**, and one more
+  language of his choice. In a country without writing, it is all signs, knots and chalk that gets wiped.
+- **Weapon Mastery:** Dagger (Nick); Shortsword (Vex), for the first shortsword he picks
+  up after midnight (he carries none).
 - **Cunning Action.** Bonus Action: Dash, Disengage, or Hide.
 - **Steady Aim.** Bonus Action, if he hasn't moved this turn: Advantage on his next
   attack roll this turn; his Speed is 0 until the turn ends.
@@ -188,7 +189,7 @@ never yet lost a parcel. A Phern at an Orthaen ball is conspicuous, and Pello ha
 decided to enjoy it.
 
 **Agenda hook.** *The Circle's Reckoning* gives him a Circle patron and a Phern's
-standing to use it, and the Circle is a snake (see chapter IX). *The Gate at Midnight*
+standing to use it. *The Gate at Midnight*
 gives him triple rates in old coin, and the river gate is exactly the kind of lock he
 is good at.
 
@@ -269,7 +270,7 @@ in one palace.
 
 **Agenda hook.** *The Story of a Lifetime* is Andra's agenda: be there, witness truly,
 carry it out alive. *Darkness* and a patient eye make her the guest likeliest to catch
-a tell: the Uninvited's, or a snake's.
+a tell.
 
 **Mask.** *Andra will be watching all night. What does she want the mask to hide: her
 face, or where she is looking?*
@@ -347,7 +348,7 @@ was born without.
 
 **Agenda hook.** *The Vanished Servant* sends her looking for someone the house has
 swallowed; as bodyguard to another player character, she is the reason that character
-walks out. Either way she is the one standing in the door when a snake comes through it.
+walks out. Either way she is the one standing in the door when trouble comes through it.
 
 **Mask.** *Dassa is working tonight. Did she choose her own mask, or did whoever hired
 her?*
@@ -411,7 +412,8 @@ shaped it, and whether it is holding a working right now.
   half as much damage on a successful one. *Preserve Life:*
   restore up to 20 Hit Points, divided among Bloodied creatures within 30 ft., none
   above half its maximum.
-  *Turn Undead:* nothing at this ball is undead. It finds nothing to turn.
+  *Turn Undead:* each Undead of her choice within 30 ft. must succeed on a Wisdom
+  saving throw or have the Frightened and Incapacitated conditions for 1 minute (SRD).
 - **Disciple of Life.** Healing from a spell slot restores an extra 2 + the slot's
   level.
 
@@ -435,8 +437,7 @@ safe, and she knows the Nolonaire name better than anyone else at this ball.
 
 **Agenda hook.** *The Cousin's Errand* is Ilesse's: a message learned by heart and a
 grandmother's ring, for Veier Nolonaire's hands alone. It is the one agenda that has to
-reach the east wing, and the one that puts a character beside Veier when the
-lights die.
+reach the east wing, and the one that puts a character beside Veier.
 
 **Mask.** *Ilesse is carrying a Thenya message under an Orthaen mask. What would the
 delegation think of the one she chose?*

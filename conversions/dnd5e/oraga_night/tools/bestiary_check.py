@@ -54,7 +54,7 @@ def crname(x):
 B = {
  "Attendant": dict(cr="8", hd=27, hp=229, ac=17, ab=[18,16,18,22,12,6], sv=[2,3],
    sk={"Arcana":(3,9),"Perception":(4,4)}, pp=14,
-   atk=[(7,0,(1,10,4),9)], dc=[(14,None)], dpr=40, atkb=7),
+   atk=[(7,0,(1,10,4),9)], dc=[(15,0)], dpr=40, atkb=7),
  "Cousin's Blade": dict(cr="1/2", hd=4, hp=22, ac=14, ab=[14,13,12,10,10,12], sv=[],
    sk={"Athletics":(0,4),"Intimidation":(5,3)}, pp=10,
    atk=[(4,0,(1,8,2),6)], dc=[], dpr=6, atkb=4),
@@ -207,6 +207,25 @@ def fixed_value_problems(blocks):
     return probs
 
 
+# T9 (NEW-BESTIARY-1): trait save DCs read from the text, tied to the ability the
+# trait implies. (data key, trait name) -> ability index (0 = Str ... 5 = Cha).
+TRAIT_DC = {("Attendant", "Put Aside"): 0}   # a shove of force: Strength, 8 + PB + Str
+
+
+def trait_dc_problems(blocks):
+    probs = []
+    for (n, trait), a in TRAIT_DC.items():
+        blk = blocks.get(TEXT_NAME.get(n, n), "")
+        m = re.search(r"\*\*\*" + re.escape(trait) + r"\b(.*?)(?:\n\s*\n|$)", blk, re.S)
+        dc = m and re.search(r"\bDC (\d+)", " ".join(m.group(1).split()))
+        if not dc:
+            probs.append(f"{n}: {trait} not found, or it prints no DC"); continue
+        b = B[n]; p = pb(b["cr"]); md = mod(b["ab"][a])
+        if int(dc.group(1)) != 8 + p + md:
+            probs.append(f"{n}: {trait} DC {dc.group(1)} vs 8+{p}+{md} = {8 + p + md}")
+    return probs
+
+
 # T4.4: SRD 5.2.1 layout. Armor sits on a Gear line, and the AC line is bare.
 # Armor: name -> (base AC, Dex cap or None for no cap).
 ARMOR = {"Padded Armor": (11, None), "Leather Armor": (11, None),
@@ -268,7 +287,7 @@ def layout_problems(blocks):
 
 def text_problems(text):
     blocks = split_blocks(text)
-    probs = fixed_value_problems(blocks) + layout_problems(blocks)
+    probs = fixed_value_problems(blocks) + layout_problems(blocks) + trait_dc_problems(blocks)
     for n, b in B.items():
         if n in NASTIER_OF:
             blk = blocks.get(NASTIER_OF[n])
