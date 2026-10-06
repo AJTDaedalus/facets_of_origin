@@ -28,7 +28,5 @@
 # wording (28 uses in the SRD 5.2.1 extract); an escape DC names no ability by design.
 10_Bestiary.md|Grappled condition (escape DC|SRD 5.2.1 "(escape DC N)" grapple form
 
-# T7.6: the designer's note in 01 stays until owner ruling Q4 decides its fate.
-01_Overture.md|Designer's note|gated on owner Q4
 # T7.7: Handout 2 agenda card 3 is canon card text in Lord Draunel's voice; "we" is House Draunel, not a designer.
 08_Handouts.md|out if he misses the taste. Get him to say anything we could later call an|Handout 2 canon agenda card, in-character "we"

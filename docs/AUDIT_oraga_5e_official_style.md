@@ -15,22 +15,26 @@ with 2014 compatibility claimed.
 
 ## 0. Status after the fix pass (2026-10-03)
 
-The fix pass ran Phases 0–7 and 9 of `docs/TASKS_oraga_5e_official.md`. It is commits `10acb0f`…`186fcc1` on `feat/lean-facets`, starting from tag `pre-official-5e`. Nothing was pushed.
+The fix pass ran Phases 0–9 of `docs/TASKS_oraga_5e_official.md`. It is commits `10acb0f`…`186fcc1` on `feat/lean-facets`, starting from tag `pre-official-5e`, plus the Phase 8 commit (owner rulings of 2026-10-05). Nothing was pushed.
 
 | Slice | Findings | Fixed | Partly (rest gated) | Gated | Void |
 |---|---|---|---|---|---|
-| FRONT | 23 | 20 | 0 | 3 (Q4, Q15, Q17) | 0 |
-| BALL | 26 | 25 | 0 | 1 (Q15) | 0 |
-| NIGHT | 24 | 21 | 1 (NIGHT-18, Q13) | 2 (Q9, Q10) | 0 |
-| SNAKES | 28 | 26 | 0 | 2 (Q12, Q14) | 0 |
-| BESTIARY | 24 | 21 | 1 (BESTIARY-23, Q15) | 2 (Q8, Q18) | 0 |
-| CAST | 27 | 24 | 1 (CAST-11, Q16) | 1 (Q16) | 1 (CAST-1, owner Q5) |
-| **Total** | **152** | **137** | **3** | **11** | **1** |
+| FRONT | 23 | 23 | 0 | 0 | 0 |
+| BALL | 26 | 26 | 0 | 0 | 0 |
+| NIGHT | 24 | 24 | 0 | 0 | 0 |
+| SNAKES | 28 | 28 | 0 | 0 | 0 |
+| BESTIARY | 24 | 24 | 0 | 0 | 0 |
+| CAST | 27 | 25 | 0 | 0 | 2 (CAST-1, owner Q5; CAST-10, owner Q16a) |
+| **Total** | **152** | **150** | **0** | **0** | **2** |
 
-- **P1s:** all 8 are resolved. BALL-1 has two open owner lines (Q7, Q23).
-- **Final review:** six fresh-eyes reviewers found no regressions and 53 new issues. 51 are fixed (3 by Planner decisions O25–O27) and 2 are gated (Q20, Q24).
-- **Lint:** 0 hard and 0 structure hits, down from 459 hard and 2 structure. Both math checkers are clean. 164 tests.
-- **Open owner rulings:** Q3, Q4, Q7–Q20, Q23, Q24. Each has a TODO-Qn comment in the module, and the Phase 8 tasks in TASKS are waiting on them.
+*Phase 8 (2026-10-05) applied the owner rulings in §5b: the 11 gated and 3 partly-fixed
+findings above moved to fixed, except CAST-10, which the owner closed without change
+(Q16a). Before Phase 8 the row read 137 fixed · 3 partly · 11 gated · 1 void.*
+
+- **P1s:** all 8 are resolved. BALL-1's two owner lines (Q7, Q23) were applied in Phase 8.
+- **Final review:** six fresh-eyes reviewers found no regressions and 53 new issues. All 53 are fixed (3 by Planner decisions O25–O27; Q20 and Q24 in Phase 8).
+- **Lint:** 0 hard and 0 structure hits, down from 459 hard and 2 structure. Both math checkers are clean. 167 tests after Phase 8.
+- **Open owner rulings:** none. All were answered on 2026-10-05 (§5b) and applied in Phase 8; `grep TODO-Q` in the module chapters is empty. Phase 8 decisions: DECISIONS O28–O31.
 - **d20 carryover:** `docs/CARRYOVER_d20_oraga_official.md`.
 
 ## 1. Verdict (pre-fix audit, 2026-09-30)
@@ -167,3 +171,28 @@ the Leashed return point, the midnight clock count) are decided in §2/§3 and a
 - The canon checks: the heir stays secret, and "House Boranis hired none".
 
 See the "What already meets the official standard" section of each slice file for detail.
+
+## 5b. Owner rulings, 2026-10-05
+
+- **Q23 → Veier makes a moment.** The character shows the ring at the doors but keeps it. Veier sends for them. At dinner she asks Raunu for a minute, he steps out, and the ring goes into her hand with no one else present.
+- **Q7 → She confirms it.** Veier confirms the pregnancy to a character she trusts. That counts as a character discovering it under R6.
+- **Q9 → Raunu lives.** If the Wept is trapped before she reaches Raunu, he lives (the "They save Raunu" branch). If the Radiant is trapped, the escape is easy. If the Hollow is trapped, the doors open early.
+- **Q8 → He can be hit.** Vell gets real AC and HP and shrugs most of it off. A follow-up asks what happens at 0 HP.
+- **Q24 → "cousin".** Change "Tell my uncle" to "Tell my cousin". It means the Thenyan chief, who sent the delegation. This affects both editions.
+- **Q10 → The sergeant carries the case.** The sergeant carries it and reads the first two tasks; only the captain has read the sealed third clause. This affects both editions.
+- **Q11 → Literal.** The two bodies are the two cousins Vorlain killed, and Essin knows where they are buried. "Broker a trade" stays.
+- **Q12 → Cut the line.** Remove the man in the good coat from S9's box.
+- **Q14 → No XP for walk-away outs.** Only outs that resolve the scene pay. Mark the walk-away outs "(no XP)" and add a clause to Table I–4.
+- **Q15 → Use the defaults.** Callun's coin for an audience report is 10 GP; the nursery sells for 250 GP; the Church's favor is one favor the Prelate can grant without scandal (the DM can make it larger); the knife's coat is worth 10 GP.
+- **Q13 → Set rough sizes.** Give approximate dimensions for B2, B5 and B9 as design facts.
+- **Q16a → Leave the pregen sheets as they are.** Add no Ideal, Bond or Flaw.
+- **Q16b → The crystal is Ilesse's Holy Symbol.** This is a rules label only; nothing is said about who answers her.
+- **Q3 → Keep the grouping.** Chapters I–XI stay, with the README grouped. No renumber; T8.1 closed.
+- **Q4 → Unsigned DM Note.** Convert the designer's note to "DM Note — what the fights are for", with no signature.
+- **Q18 → Print a dash.** Show "—" as the alignment on the three Uninvited and Vell. Leave the social cast untagged.
+- **Q8b / Q25 → Vell is nearly undefeatable.** He can be hit and could in principle die. Give him AC and HP high enough that a 4th–5th-level party realistically can't drop him before midnight. Owner: "Don't bother with this, it's unlikely." No new branch is written.
+- **Q17 → Drop "PG", add the glosses, skip pronunciations.** Write "the year 3164". The Blackwatch keep the vigil over the eastern mists; Mazaa is the tribes' enemy in the western mountains (both from the Val'loh setting file).
+- **Q20a → Sixty.** The household was sixty. Change Undercurrent B's ledger from eighty to sixty. This affects both editions.
+- **Q20b → Sella and Corval** are the testament's witnesses, as printed.
+- **Q19 → Remove the sign-offs.** Drop the initials from the agenda cards; the patron line already says who asked. This affects both editions.
+- **All owner questions are now answered.** Next: apply them (Phase 8).

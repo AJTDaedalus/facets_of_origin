@@ -329,3 +329,23 @@ ASIs, HP, AC, Initiative, Passive Perception, prepared and cantrip counts, O16 f
 **Also:** `flow/build_flow_page.py` (the generated flow page; rebuild after any heading or
 section change), and the repo's book invariants in `software/tests/test_docs_consistency.py`
 (INV-9…27), which a d20 module could join instead of keeping a separate linter.
+
+---
+
+## 6. Owner rulings 2026-10-05 that apply to the Facets edition too
+
+Recorded in `docs/AUDIT_oraga_5e_official_style.md` §5b and applied to the 5e edition in
+Phase 8 (`INVENTIONS_5e.md` #72–#82). The Facets edition (`adventures/`) was **not** edited;
+these are the sites to change there. Line numbers are from this doc's earlier sections and
+will have drifted; locate by quote.
+
+| Ruling | What changes | Facets-edition sites |
+|---|---|---|
+| **Q10 — the sergeant carries the case** | The sergeant who holds the gate carries the chained contract case and reads the first two tasks; only the captain has read the sealed third (the Second Clause). | `F:05_The_Longest_Night.md` L327 ("a case chained to the captain's belt"), L333; `F:09_Scene_Cards.md` L174; `F:enemies/bought_captain.fof` L23 (drop the case from the captain); `F:enemies/bought_sergeant.fof` L14/L35 and `F:05` L359, `F:09` L127/L199 already agree (§3.2) |
+| **Q11 — the two bodies are literal** | The two cousins Vorlain killed in his year of rule; Essin knows where they are buried. Canon for every edition. | `F:07_Cast_of_the_Ball.md` L268 ("knows exactly where its two bodies are buried") stands as written; read it literally (§3.4) |
+| **Q19 — no sign-offs on the agenda cards** | Drop the initials ("— R.C." etc.); the patron line already says who asked. | `F:08` L29–41 |
+| **Q20a — the household was sixty** | Change "eighty" to sixty where it counts the household. The 5e text avoids a derived "servants let go" number (O31). Q20b: Sella and Corval are the testament's witnesses, as printed. | `F:04` L491/L503 ("eighty"); `F:07` L155 already says sixty; witnesses: `F:01` L6 ("a Church notary and two witnesses") vs `F:04` L506 / `F:07` L132 (Corval and Sella) |
+| **Q24 — "Tell my cousin"** | Veier's quote: the cousin is the Thenyan chief, who sent the delegation. | `F:07_Cast_of_the_Ball.md` L63 ("Tell / my uncle his message took two years…") |
+
+The other 2026-10-05 rulings (Q7, Q8, Q9, Q13, Q15, Q16, Q17, Q23) are recorded for 5e only;
+§3.5 still lists their Facets sites if the owner wants them carried.

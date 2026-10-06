@@ -269,3 +269,9 @@ Each question has the background needed to answer it without the rest of the mem
 - U.S. Copyright Office, *Circular 33: Works Not Protected by Copyright*, <https://www.copyright.gov/circs/circ33.pdf>; 17 U.S.C. §102(b).
 - Owner's PDFs (local, not redistributed): *Masks of Nyarlathotep* core, America, Peru, Peru handouts, Keeper Reference Booklet, characters booklet; *The Things We Leave Behind*.
 - Facets context: `CLAUDE.md`, `research/dice_system_analysis.md`, `COMPARISON.md`, `player_handbook/III.1`, `III.2`, `mm_manual/MM2`, `MM3`, `MM6`, `facets_d20/06`, `facets_d20/README.md`, `adventures/oraga_night/`.
+
+---
+
+## Owner decision (2026-10-05)
+
+The owner reviewed the recommendations and decided **not to bring any of them into Facets**. This memo stays as a reference only. Its six questions are closed.

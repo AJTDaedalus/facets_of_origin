@@ -705,3 +705,37 @@ Scope: every NEW-* issue in the six slice files' §6, plus the "partly" leftover
 - T9.5: one commit per phase, 10acb0f…186fcc1, plus this closeout commit. Nothing pushed. Before any push, scan main..branch for private canon (memory rule).
 - Side task (the owner's /goal): `docs/RESEARCH_coc_for_facets.md`, the Call of Cthulhu open-content review, is committed separately.
 - Remaining work is all owner-gated: Phase 8 (T8.1–T8.16) on Q3, Q4, Q7–Q20, Q23, Q24.
+- 2026-10-05 OWNER: none of the CoC review's recommendations will be brought into Facets; memo kept as reference, its questions closed.
+- 2026-10-05 OWNER answered all remaining questions (Q3, Q4, Q7–Q20, Q23, Q24, plus the Vell follow-up). Rulings are in AUDIT §5b. Phase 8 can proceed.
+
+## Phase 8 — owner rulings applied (Worker, 2026-10-05)
+
+Rulings from AUDIT §5b, applied to `conversions/dnd5e/oraga_night/` (M/). Every site was
+found by quote; no site was skipped. Ledger rows: INVENTIONS #72–#82 (plus the R6 note and
+an amendment to #58). Decisions left to the Worker: DECISIONS O28–O31.
+
+- **Q23 / Q7 (T8.3, T8.19).** 04 *Dinner for Two*: the ring is shown and kept at the doors, Veier sends for the character after the toast (O27), and a new **A minute alone** paragraph has Raunu step out so the ring and message reach her alone. The child topic now confirms the pregnancy to a character she trusts, and says this counts as discovery. 07 *What Veier Knows* gets two bullets, and *What Raunu Knows* gets one line. INVENTIONS R6 is noted and #58 amended. flow `sc-dinner` updated.
+- **Q24.** "Tell my uncle" → "Tell my cousin" in 04 and 07 (the only two sites). The TODO-Q24 ambiguity note is removed.
+- **Q9 (T8.5).** 05 ⟨They trap one⟩ gets one paragraph covering the three Uninvited (Wept → ⟨They save Raunu⟩; Radiant → easy escape; Hollow → the doors open early). flow `ihb-trap` updated.
+- **Q8 / Q8b / Q25 (T8.4).** 10 Master Vell is now a full SRD 5.2.1 block: AC 20, Initiative +4 (14), HP 285 (30d8 + 150), scores 16/18/20/18/20/18, saves Dex/Con/Wis/Cha at PB +4, Insight +13 and Perception +9, resistance to all thirteen damage types, Immunities Charmed/Frightened/Grappled/Restrained, *Magic Resistance*, and the Reaction ***Not Where It Landed*** (a hit deals no damage). CR — (XP 0; PB +4), and still no attacks. The "cannot be fought" paragraph now explains the numbers (about 15 damage a round from four 5th-level characters against 285 HP). How to Read, the 05 Crossing sidebar and the 07 *If it comes to steel* line are updated. There is no death branch. `bestiary_check.py` needed no change: it skips blocks it has no data for, and Vell has no CR for its estimator (O29).
+- **Q18 (T8.14).** "—" alignment on the Hollow, the Radiant, the Wept and Vell. The cast is left untagged.
+- **Q10 (T8.6).** 05 B12: the case is carried by the sergeant who holds the gate, and the Second Clause is "sealed". 09 S3 *Where the Bought stand* now names the case and the two read-aloud tasks. 10 Captain **Tells** ("It alone has read the contract's sealed third task; the sergeant carries the case") and the loot entry ("Chained to the sergeant's hip") are fixed. 08 had no site.
+- **Q11 (T8.7).** 09 S13 *Broker a trade* is glossed ("the two cousins Vorlain killed in his year of rule"), and 07 *What Essin Knows* gets a bullet. Both TODOs are removed.
+- **Q12 (T8.8).** The good-coat clause is cut from the S9 box. The box still parses and runs about 53 words.
+- **Q14 (T8.10).** **(no XP)** on S2 "Let her go", S4 "Going back the way they came", S5 "Let them go", S6 "Walk away", S12 "Let them" and S14 "Stop interfering" (O30 says which were left unmarked and why). S4 Rewards now reads "any out except going back the way they came". S14 Rewards gives the three paying conditions. 09 *Running the Snakes* gets an Outs clause, and 01 Table I–4 gets the "(no XP)" clause.
+- **Q15 (T8.11).** 04 Mv III Circle beat: "with 10 GP behind it". Undercurrent C: "Her price for the nursery is 250 GP." 02 Agenda 2 **Pays**: one favor the Prelate can grant without scandal (the DM may make it larger). 06 Rewards: the favor default, plus a new **Sales to the Circle** line (10 GP, 250 GP). 10 loot: "a coat worth 10 GP". Handout 2's card keeps its "of frightening size" pitch.
+- **Q13 (T8.9, O28).** 05 *General Features* gets a **Sizes** bullet for B2, B5 and B9. 04 B2/B5/B9 get one-line pointers, and 08's diagram caption is updated. All sizes were checked against every printed distance (O28).
+- **Q16 (T8.12).** Q16a: no sheet change. Q16b was done test-first: `pregen_check.py` FOCUS got an Ilesse row and failed red (2 issues). 11 then reads "a sliver of her own warding crystal as Holy Symbol, for her spells and her Channel Divinity", Carrying reads "warding crystal (Holy Symbol)", and the check went green. `test_pregen_check.py`: two minimal-sheet tests were scoped to Andra, and three Ilesse tests were added.
+- **Q3 (T8.1):** closed, nothing to do. **Q4 (T8.2):** 01's note is now the unsigned **DM Note — what the fights are for** (FRONT-6 wording, "DM"). Its `lint_5e_allow.txt` entry is removed, and STYLE_5e.md's box-species row is updated.
+- **Q17 (T8.13).** README "the year 3164" ("PG" occurs nowhere else in M/). Blackwatch glossed at its first mention (02 *the recent wound*); Mazaa glossed at its first mention (06, "Mazaaian"). No pronunciations.
+- **Q19 (T8.15).** "— R.C.", "— D.K.", "— E.D." and "— M.N." are removed from Handout 2 (08). 02's agendas carried no initials.
+- **Q20 (T8.16, O31).** Undercurrent B now reads "The household was sixty. Two years ago it was cut four-fold, and every servant let go had to go somewhere." and "recite every one of the placements". 07 already said sixty. 08 and flow.json had no "eighty". The TODO-Q20 witness note is removed (Q20b: Sella and Corval).
+- **Carryover.** `docs/CARRYOVER_d20_oraga_official.md` §6 lists Q10, Q11, Q19, Q20 and Q24 with their Facets sites, including `F:07` L63 for "my uncle". `adventures/` was not edited.
+
+**Commands.**
+- `grep -rn "TODO-Q" conversions/dnd5e/oraga_night/*.md` → only INVENTIONS history rows (none in chapters, README or STYLE).
+- `python tools/lint_5e.py --check` → OK (0 problems; 0 hard, 0 structure). No re-baseline. One whitelist line removed (Q4).
+- `bestiary_check.py` → 25 blocks + 3 Nastier, 0 mismatches. `pregen_check.py` → 5 pregens, 0 issues (red first, as above).
+- `python -m pytest conversions/dnd5e/oraga_night/tools -q` → 167 passed (164 + 3 Ilesse tests).
+- `python flow/build_flow_page.py` → built (`sc-dinner` and `ihb-trap` summaries changed).
+- `python -m pytest software/tests/test_docs_consistency.py -q` → 37 passed.

@@ -23,7 +23,7 @@ record, and it is what history keeps.
   but ceremony, visibly afraid, and the prime suspect. He wants a culprit, any culprit,
   convicted fast.
 - **The file closes the way history does.** The inquest names "agents unknown, likely
-  Mazaaian," which everyone knows is false and everyone swears to. **No one is ever
+  Mazaaian" (Mazaa is the tribes' enemy in the western mountains), which everyone knows is false and everyone swears to. **No one is ever
   charged.**
 - **The pregnancy never gets out.** The midwife is simply gone by dawn, never found.
   The skeleton staff hold the silence they were paid for. The record says a vanished
@@ -61,7 +61,11 @@ gift always has.
 - **Experience:** Table I–4 in chapter I. The party reaches 5th level by milestone at
   the epilogue.
 - **Agenda pay:** each agenda's **Pays** line (see chapter II, "The Eight Agendas"):
-  Callun's 100 GP, the 30 GP gate fee, the Church's favor, the grandmother's crystal.
+  Callun's 100 GP, the 30 GP gate fee, the Church's favor (one favor the Prelate can
+  grant without scandal, larger at your discretion), the grandmother's crystal.
+- **Sales to the Circle:** 10 GP from Callun for each report of what Raunu said at a
+  summons (chapter IV, Movement III); 250 GP for the nursery (chapter IV,
+  Undercurrent C).
 - **Loot:** see chapter X, "The Night's Loot".
 - **The story award:** the answer each player gave to "What does your character carry
   out of Oraga Night?"

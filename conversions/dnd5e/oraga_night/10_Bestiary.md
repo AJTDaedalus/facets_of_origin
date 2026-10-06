@@ -21,7 +21,9 @@ three Uninvited are the deliberate exception: they are CR 9 to 11, and they carr
 trait called **Leashed** that means none of that matters, because tonight they
 cannot be killed. The **Attendant** who came with them is the other exception, in the
 other direction: a boss that can be beaten, and is built to be more than a party can
-out-slug (its block says how the party wins anyway).
+out-slug (its block says how the party wins anyway). **Master Vell** is the last
+exception: his numbers are real, set so high that no party of 4th or 5th level drops
+him before midnight, and he is worth no XP.
 
 **Every block has four lines after its numbers**: **Wants** (what ends the fight without a body), **Tells** (what a watchful
 character sees before it happens), **Breaks** (when it stops, and what it does
@@ -528,7 +530,8 @@ miss.
 > **Wants.** The fee, the company intact, and the reputation that gets the next
 > contract.
 > **Tells.** Spends the opening round placing Blades and watching who the party
-> protects. The contract case is chained to its belt.
+> protects. It alone has read the contract's sealed third task; the sergeant carries
+> the case.
 > **Breaks.** Calls the withdrawal and means it. A captain who has called a
 > withdrawal will not resume the fight tonight for any inducement, including a
 > better offer. It also shifts for the fires (it contracted for diversions, not
@@ -1044,8 +1047,7 @@ passages, if they are in reach.
 ### The Hollow
 *The blank gray mask.*
 
-*Medium Humanoid (Human)*
-<!-- TODO-Q18: alignment left blank pending owner ruling Q18 (BESTIARY-21). -->
+*Medium Humanoid (Human), —*
 
 **AC** 16 · **Initiative** +3 (13)
 **HP** 157 (21d8 + 63)
@@ -1319,8 +1321,7 @@ instead.
 ### The Radiant
 *The mirror-bright mask.*
 
-*Medium Humanoid (Human)*
-<!-- TODO-Q18: alignment left blank pending owner ruling Q18 (BESTIARY-21). -->
+*Medium Humanoid (Human), —*
 
 **AC** 17 · **Initiative** +9 (19)
 **HP** 162 (25d8 + 50)
@@ -1734,8 +1735,7 @@ miss.
 ### The Wept
 *The gray mask with carved tears.*
 
-*Medium Humanoid (Human)*
-<!-- TODO-Q18: alignment left blank pending owner ruling Q18 (BESTIARY-21). -->
+*Medium Humanoid (Human), —*
 
 **AC** 18 · **Initiative** +7 (17)
 **HP** 187 (22d8 + 88)
@@ -1893,16 +1893,33 @@ somebody, and the inquest hears of it.
 ### Master Vell
 *The Pale Factor.*
 
-*Medium Humanoid (Human)*
-<!-- TODO-Q18: alignment left blank pending owner ruling Q18 (BESTIARY-21). -->
+*Medium Humanoid (Human), —*
 
-**AC** — · **HP** — · **Speed** 30 ft., and some other way
-**CR** —
+**AC** 20 · **Initiative** +4 (14)
+**HP** 285 (30d8 + 150)
+**Speed** 30 ft., and some other way
 
-The block exists to tell you one thing: **Master Vell does not fight, and cannot be
-fought.** He has no attacks. He escapes. Nothing below uses a die. He is not a
-combatant, and he is worth no XP.
-<!-- TODO-Q8: what happens when a character attacks Vell waits on owner ruling Q8 (BESTIARY-11). -->
+| | STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|---|
+| Score | 16 | 18 | 20 | 18 | 20 | 18 |
+| Mod | +3 | +4 | +5 | +4 | +5 | +4 |
+| Save | +3 | +8 | +9 | +4 | +9 | +8 |
+
+**Skills** Insight +13, Perception +9
+**Resistances** Acid, Bludgeoning, Cold, Fire, Force, Lightning, Necrotic, Piercing,
+Poison, Psychic, Radiant, Slashing, Thunder
+**Immunities** Charmed, Frightened, Grappled, Restrained
+**Senses** Passive Perception 19
+**Languages** Common
+**CR** — (XP 0; PB +4)
+
+The block exists to tell you one thing: **Master Vell does not fight, and no party at
+this ball can beat him.** He has no attacks. He can be hit, and the numbers above are
+real, but they are set so that a party of 4th or 5th level cannot drop him before
+midnight: against AC 20, his Reaction and resistance to every damage type, four
+5th-level characters land roughly 15 damage a round, and he has 285 Hit Points. Long
+before that matters, he takes his action and is elsewhere. He is not a combatant, and
+he is worth no XP.
 
 **Traits**
 
@@ -1923,9 +1940,11 @@ back. *"An inheritance."* He never touches it and never unwraps it, and this blo
 does not give it numbers. What it would do unwrapped is in chapter VII, for the DM
 alone.
 
-***Beyond Reach.*** Vell can't be Grappled, Restrained, Charmed, Frightened or held
-against his will, and no door, lock or ward in the palace keeps him on one side of
-it.
+***Beyond Reach.*** Nothing holds Vell against his will (see his Immunities), and no
+door, lock or ward in the palace keeps him on one side of it.
+
+***Magic Resistance.*** Vell has Advantage on saving throws against spells and other
+magical effects.
 
 **Actions**
 
@@ -1940,6 +1959,12 @@ done the arithmetic, and they should move. If they do not, they are moved — se
 aside, unhurt, and they did not see how. He takes the path that spills the least
 blood if one exists. If none exists, he is ruthless, because the one thing he will
 not do is fail.
+
+**Reactions**
+
+***Not Where It Landed.*** *Trigger:* Vell is hit by an attack roll. *Response:* The
+attack deals no damage to him. He was a half-step to one side all along, and nobody
+saw him hurry.
 
 > **Wants.** The river gate open at midnight, and no one ever remembering his face.
 > **Tells.** Arrived early and entirely unremarkably. Walks the gardens once. Stands
@@ -2016,13 +2041,12 @@ before it is a reward.*
 - **An honor guard's pair.** A *House Flare* and a *House Seal*, if the guard never
   spent them and somebody takes them off him. On a living guard they are the house's
   property; taking them is theft from House Boranis, and the room remembers faces.
-- **The contract case** *(S3).* Chained to a sergeant's hip or the captain's belt: a
+- **The contract case** *(S3).* Chained to the sergeant's hip: a
   chained case of writing, in a country where the Church owns the written word. It
   holds the Bought's three tasks. The inquest's best evidence, and the only mortal
   thread that leads east. Not magic, and worth more than anything magic at the ball.
 - **The company's purse** *(S3).* The half-fee, paid in old coin — 3d6 × 10 GP by
   weight. Chapter V says what the coin means, and what it does not.
-- **A Circle knife's advance** *(S7, S12).* 2d6 GP each, and a coat worth more than the advance.
-  <!-- TODO-Q15: the coat's GP value waits on owner ruling Q15 (BESTIARY-23). -->
+- **A Circle knife's advance** *(S7, S12).* 2d6 GP each, and a coat worth 10 GP.
 - **Whatever the wardens were carrying** *(S8).* Chapter IX says what it is. It is
   evidence, and it is heavy.

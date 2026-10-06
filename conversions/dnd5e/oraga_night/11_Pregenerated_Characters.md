@@ -418,9 +418,8 @@ shaped it, and whether it is holding a working right now.
   level.
 
 **Spellcasting** (Wisdom; save DC 14, attack +6; a sliver of her own warding crystal as
-focus). Ilesse's spells are what Val'loh calls **Invocation**. What answers her, the
+Holy Symbol, for her spells and her Channel Divinity). Ilesse's spells are what Val'loh calls **Invocation**. What answers her, the
 module does not say, and neither should the sheet.
-<!-- TODO-Q16: whether Ilesse's warding crystal counts as her Holy Symbol (for her spells and Channel Divinity), or she carries a Component Pouch instead, waits on owner ruling Q16 (CAST-11 / CAST N4). -->
 - *Slots:* 1st ×4, 2nd ×3
 - *Cantrips:* *Guidance*, *Light*, *Mending*, *Sacred Flame*, *Spare the Dying*; *Resistance*
   (gift)
@@ -428,7 +427,7 @@ module does not say, and neither should the sheet.
 - *Prepared:* *Command*, *Guiding Bolt*, *Healing Word*, *Sanctuary*, *Shield of Faith*; *2nd:*
   *Calm Emotions*, *Spiritual Weapon*
 
-**Carrying.** Dagger · Fine Clothes · Chain Shirt · crystal focus · crystal charges: *A
+**Carrying.** Dagger · Fine Clothes · Chain Shirt · warding crystal (Holy Symbol) · crystal charges: *A
 Veil of Quiet*, *A Sealed Door*, *Steady Light* · 50 GP · Heroic Inspiration
 
 **Personality.** A carrier of words between people who cannot be seen talking to each

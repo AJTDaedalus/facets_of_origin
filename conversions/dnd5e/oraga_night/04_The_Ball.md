@@ -234,6 +234,8 @@ through the kitchens (B10), and Corval will remember the face.
 
 The grand hall, and the room where nearly every scheduled event happens: dance floor,
 musicians' gallery, the high table on its dais. The walls are the palace's oldest work.
+*(About 140 by 80 feet, with the dais at the far end from the main doors; see chapter
+V, "The Palace After Midnight: General Features".)*
 
 **B3. The Banquet Galleries.** Long feast halls flanking the Court, tables groaning
 with harvest excess. Where the real conversations happen, in alcoves built for
@@ -263,7 +265,9 @@ the water, ending at a modest iron gate to the river walk, which is always locke
 conspirators, and anyone needing air. *(Agenda 6 lives here. So does the escape route.
 Know this geography cold: Court → terraces → lower garden → river gate. The
 gate's lock takes a DC 15 Dexterity check using Thieves' Tools. The character with Agenda 6 needs no check, having
-been given what they need.)*
+been given what they need. Three terraces, each about 40 feet deep with a 10-foot drop
+between, then about 150 feet of lower garden to the gate; see chapter V, "The Palace
+After Midnight: General Features".)*
 
 **B6. The Chapel.**
 
@@ -346,6 +350,8 @@ its doors are the warmest rooms in the palace, or the saddest, depending on when
 characters learn what they learn. *(Forcing the doors is card S4. Nobody gets through them on a
 single check. The ways in are Agenda 4's errand (the grandmother's ring, shown at the
 doors; see "Dinner for Two (B9)", Movement IV), Anha's passages, and Undercurrent C.)*
+*(The cleared corridor is about 60 feet long; behind the doors, one 100-foot corridor
+with the rooms off it. See chapter V, "The Palace After Midnight: General Features".)*
 Warm light, a midwife's quiet traffic, and three finds:
 
 - **Veier's rooms.** Thenya through and through: border-country wool over Orthaen
@@ -696,7 +702,7 @@ it is there. But its key is the slate in B8, and the Church's Wardens mean to wi
 slate tonight. See card S8.)*
 
 ### Undercurrent B — The Household That Wasn't *(if you have time)*
-*Eighty servants left this palace two years ago, and eighty of anything has to go somewhere.*
+*The household was sixty. Two years ago it was cut four-fold, and every servant let go had to go somewhere.*
 
 **The spark:** Agenda 8; or the festival hires: one of tonight's borrowed footmen
 used to work here, recognized by his ease in the corridors (a DC 13 Wisdom (Insight)
@@ -713,7 +719,7 @@ check if it is not, and a frightened man who has been leaned on tells the story 
 
 Corval (via Agenda 1's kindness route, or a well-aimed question once his guard is
 down) confirms it, and here the majordomo's famous memory becomes the scene. He can
-recite all eighty placements, each with the master's spoken instruction verbatim:
+recite every one of the placements, each with the master's spoken instruction verbatim:
 *this one has a mother in Kethaun lands; this one wants a smithy; this one drinks,
 place him somewhere dry.* He also knows the testament Raunu swore aloud in the chapel
 three days before the ball, with Corval and Mother Sella standing witness as the law
@@ -763,8 +769,7 @@ themselves its protectors, which is exactly where chapter V wants them standing.
 from this house: an heir, a dynasty of Raunus. A character who brings her the
 nursery has handed the Circle's line in this chapter its reason to move. She pays on
 delivery, as she always does. What her people do with it is in "The Snakes This
-Movement" from then on.)*
-<!-- TODO-Q15: Callun's price for the nursery waits on owner ruling Q15 (BALL-12). -->
+Movement" from then on. Her price for the nursery is 250 GP.)*
 
 **At midnight:** knowing the east wing's layout, its inner guards by name, and its
 service-passage doors makes a character the most useful person in the palace the
@@ -1117,10 +1122,9 @@ good thing I have left to give anyone."
 - **The Circle.** A Hired Knife has joined the line outside the Audience Hall
   without any intention of going in. He is there to see who is summoned. Any player
   character who comes back out of B4 is met within the Movement by Callun's
-  compliments and a quiet question, "What did he say?", with coin behind it, and
+  compliments and a quiet question, "What did he say?", with 10 GP behind it, and
   a Hired Knife standing close enough to make the coin feel like the polite option.
   **Tell:** the one man in the line not rehearsing a question. → the Circle's line, chapter IX.
-  <!-- TODO-Q15: the amount of Callun's coin for "what did he say?" waits on owner ruling Q15 (BALL-12). -->
 - **The Church.** Kovaun is in the B4 antechamber. When a summoned character
   comes out, a Warden is waiting with the Prelate's compliments and a request to
   attend her in the chapel. It is a request. It is the kind a Warden stands beside
@@ -1250,10 +1254,11 @@ Raunu and Veier together, and the only place all night anyone sees Raunu Boranis
 ease. Stage it with all the warmth the ballroom's rumors deny them.
 
 **Getting in.** A character who shows the door guards the grandmother's ring and asks
-for Veier by name is asked to wait. The ring goes in. If Veier chooses them, and by
-default she does, a guard walks them up. This is Raunu's line from the summons, kept:
-*"If she chooses you, you will know."* Whenever the ring is shown, the answer comes
-after the toast: a guard finds the character wherever they are.
+for Veier by name is asked to wait while word goes up. The ring stays with its bearer:
+like the message, it is for Veier's hand alone. If Veier chooses them, and by default
+she does, she sends for them. This is Raunu's line from the summons, kept: *"If she
+chooses you, you will know."* Whenever the ring is shown, the answer comes after the
+toast: a guard finds the character wherever they are and walks them up.
 
 **When a character is let into the east wing after the toast, read:**
 
@@ -1272,9 +1277,15 @@ chapter VII, "Veier Nolonaire — the Bride").
 true thing said where the polite thing was expected. He listens completely, and
 he does not say what he will announce at the Unmasking.
 
+**A minute alone.** Agenda 4's message and ring are for Veier alone, and she knows a
+messenger from home when she sees one. Early in the meal she asks her husband for a
+minute. Raunu steps out without a question, and the midwife with him. With no one else
+in the room, the ring goes into Veier's hand and the message is given. Raunu comes
+back when she calls him.
+
 **Topics.** What the character can ask, and the answer the book already gives:
 - *Whether she is well.* Yes. Her answer for Maiven is the one chapter VII prints: *"I am
-  well. I am watched over. Tell my uncle his message took two years to reach me, so
+  well. I am watched over. Tell my cousin his message took two years to reach me, so
   his worry can wait two more."*
 - *Whether she is free.* The room answers. For her first year the pack by the door stood
   packed, her plain statement that she could leave whenever she chose. It is empty
@@ -1285,9 +1296,10 @@ he does not say what he will announce at the Unmasking.
 - *What she fears.* The same thing her husband fears, learned from watching him
   prepare: something is coming for their family, and neither knows what or when.
 - *The two plates.* Explained at last: they were for the two of them.
-- *The midwife, or a child.* She does not speak of it (see chapter II, "Why the
-  Ball").
-  <!-- TODO-Q7: owner ruling pending on whether Veier may confirm the pregnancy to a character she trusts (AUDIT Q7 / CAST N2). Until ruled, the default follows INVENTIONS_5e.md R6 (the heir stays secret). -->
+- *The midwife, or a child.* To a character she trusts, she confirms it: she is with
+  child and near her time, and she wants the child born safe. To anyone else she does not
+  speak of it (see chapter II, "Why the Ball"). Her confirmation counts as the character
+  discovering the heir; what they do with it is theirs.
 - *The midnight announcement.* He gives no more than the toast gave.
 
 **Length and exit.** About 10 minutes of table time. When the lamps begin to lower

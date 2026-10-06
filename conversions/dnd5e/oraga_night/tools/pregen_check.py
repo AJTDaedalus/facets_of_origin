@@ -56,7 +56,9 @@ SK={'Athletics':'STR','Acrobatics':'DEX','Sleight of Hand':'DEX','Stealth':'DEX'
 # CAST-11 (T3.5): a pregen whose spells need a focus must carry one. The printed
 # Spellcasting line names it, and the same item is on the Carrying line.
 # O16: SRD 5.2.1 Title-Cases equipment and focus names, so the match is "Arcane Focus".
-FOCUS={'Andra':dict(spell='a crystal as Arcane Focus', carry='crystal (Arcane Focus)')}
+# Owner ruling Q16b (2026-10-05): Ilesse's warding crystal counts as her Holy Symbol.
+FOCUS={'Andra':dict(spell='a crystal as Arcane Focus', carry='crystal (Arcane Focus)'),
+       'Ilesse':dict(spell='warding crystal as Holy Symbol', carry='warding crystal (Holy Symbol)')}
 
 
 def legality_issues(out=print):

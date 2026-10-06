@@ -462,7 +462,7 @@
    "label": "Dinner for two",
    "phase": "m4",
    "kind": "scene",
-   "summary": "Run it if anyone carries Agenda 4: the grandmother's ring at the east wing doors, and by default Veier sends for them. Raunu and Veier at ease together, the night's one warm glimpse; he will not name the midnight announcement. About 10 minutes; Corval shows the guest out as the lamps lower.",
+   "summary": "Run it if anyone carries Agenda 4: the grandmother's ring shown (and kept) at the east wing doors, and by default Veier sends for them. Raunu and Veier at ease together, the night's one warm glimpse; she asks him for a minute, he steps out, and the ring reaches her hand alone. She confirms the child to a character she trusts; he will not name the midnight announcement. About 10 minutes; Corval shows the guest out as the lamps lower.",
    "ref": "04_The_Ball.md#dinner-for-two-b9",
    "optional": true,
    "faction": null
@@ -902,7 +902,7 @@
    "label": "⟨They trap one of the Uninvited⟩",
    "phase": "end",
    "kind": "ending",
-   "summary": "Only deep Boranis ward-crystal holds one, until the last bell. It answers one question about itself.",
+   "summary": "Only deep Boranis ward-crystal holds one, until the last bell. It answers one question about itself. Trap the Wept before she reaches Raunu and he lives; trap the Radiant and the escape is easy; trap the Hollow and the doors open early.",
    "ref": "05_The_Longest_Night.md#if-history-breaks",
    "optional": true,
    "faction": null

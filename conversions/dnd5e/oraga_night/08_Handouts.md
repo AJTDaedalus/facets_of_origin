@@ -131,7 +131,10 @@ arrives)*
 
 ## The Palace, Keyed
 
-*Not to scale. The diagram shows only the rooms and the connections the text gives;
+*Not to scale; chapter V ("The Palace After Midnight: General Features") gives rough
+sizes: the Crystal Court about 140 by 80 feet, three 40-foot garden terraces and 150 feet
+of lower garden, and an east wing corridor about 100 feet long. The diagram shows only
+the rooms and the connections the text gives;
 where the text does not place a room, it is listed below the drawing instead. Dashed
 lines are the service passages, which thread the whole palace.*
 
@@ -292,25 +295,24 @@ The full agendas and their private "At midnight" notes are in chapter II ("The E
 Agendas"); these cards carry only what the character knows.*
 
 **1. THE CIRCLE'S RECKONING** — *They call it "the Tithe of Hands." Learn what the
-chief's new decree does before it is proclaimed. The Circle pays for foresight.
-— R.C.*
+chief's new decree does before it is proclaimed. The Circle pays for foresight.*
 *Nothing is written down; the decree lives in Minister Corval's head and two others'.
 Corval cannot be bought.* **Pays:** 100 GP in Circle silver, on delivery.
 
 **2. THE PRELATE'S QUESTION** — *One question, answered honestly, and the Church
 owes you a favor you may spend anywhere: is the man who came back the man who
-left? — D.K.*
+left?*
 *He will be seen perhaps four times tonight. The Prelate will know if you shade the
 answer.* **Pays:** one favor from the Church, of frightening size.
 
 **3. A HOUSE'S LONG GAME** — *Vorlain ruled for a year and handed it back. Find
 out if he misses the taste. Get him to say anything we could later call an
-understanding. — E.D.*
+understanding.*
 *Vorlain is careful when he is sober.* **Pays:** Lord Draunel's gratitude.
 
 **4. THE COUSIN'S ERRAND** — *These words, learned by heart, and her grandmother's
 ring, into Veier's own hands — no minister, no husband, no exceptions. Bring back
-her answer, word for word. Bring back the truth of how she fares. — M.N.*
+her answer, word for word. Bring back the truth of how she fares.*
 *Nobody has seen Veier in public for two years. The east wing is closed and guarded.*
 **Pays:** Maiven Nolonaire's trust.
 

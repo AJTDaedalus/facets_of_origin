@@ -54,6 +54,8 @@ Summons: the Questions, and What He Says") he gives the following, and no more:
 - The Tithe of Hands, to anyone who simply asks: "It taxes palaces to pay laborers.
   The palaces can afford it. That is the whole secret. You may tell the Circle I said so."
 - Veier: "She chooses her guests herself these days. If she chooses you, you will know."
+  At dinner, when she asks him for a minute alone with her guest, he steps out without
+  a question.
 - The Unmasking: "Something true." He does not say what, at the summons or at dinner.
 - Whether he is in danger, if friendly: he has spent two years arranging for the
   answer to be no, and tonight he is not certain the arranging was sufficient.
@@ -99,7 +101,7 @@ homesick and unashamed of it. She answers the delegation's careful diplomacy
 Raunu and is far less polite about showing it. Guests who reach her expecting a
 prisoner or a madwoman get a brisk education.
 
-**Quote:** "I am well. I am watched over. Tell my uncle his message took two years to
+**Quote:** "I am well. I am watched over. Tell my cousin his message took two years to
 reach me, so his worry can wait two more."
 
 **What Veier Knows:** a character Veier chooses (Agenda 4's ring at the east wing
@@ -107,14 +109,16 @@ doors, or anyone who reaches her there) learns the following (see chapter IV,
 "Dinner for Two (B9)"):
 
 - She is well, and watched over. Her answer for the delegation is her quote, above.
-  <!-- TODO-Q24: Veier's quote says "Tell my uncle", but she is the Thenyan chief's cousin and Maiven is her cousin. Whether "uncle" is a third relative or should read "cousin" waits on owner ruling Q24 (NEW-CAST-3). The quote is canon; do not edit it. -->
 - She is free. For her first year the traveling pack by her door stood packed, her
   plain statement that she could leave whenever she chose. It is empty now.
 - She is happy, and she wants her cousins to know she chose this.
 - She fears what her husband fears: something is coming for their family, and
   neither of them knows what, or when.
 - The two plates were for the two of them.
-<!-- TODO-Q7: whether Veier may confirm the pregnancy to a character she trusts waits on owner ruling Q7 (CAST N2). Until ruled, R6 holds: the heir stays secret unless a character discovers it. -->
+- Only to a character she trusts: she is with child and near her time, and
+  she wants the child born safe. Hearing it from her counts as discovering the heir.
+- With an Agenda 4 messenger she makes a moment: she asks Raunu for a minute, he steps
+  out, and the ring and the message reach her with no one else present.
 
 **At the Unmasking:** in the east wing when the lights die, the corridors sealing
 themselves behind her: her husband's two crystals working. Wounded once, cleanly,
@@ -340,7 +344,6 @@ following:
 - Three days before the ball she stood witness in this chapel, with Corval, as the
   law requires, while Raunu swore aloud a testament providing for every current
   servant by name.
-  <!-- TODO-Q20: the testament's witnesses (Sella and Corval here, as 04 prints them; the cut Facets vignette had a notary and two paid witnesses) wait on owner ruling Q20 (CAST N9, NEW-CAST-2). -->
 - After the gray-masked woman leaves her offering in Elanna's niche (Movement IV),
   Sella can say exactly how out of date its rite is. Hearing this from her counts as
   witnessing the tell (see chapter V, "The Fractures").
@@ -450,7 +453,9 @@ can learn the following:
 - The Draunel duelist's appointment on the terraces was accepted, and Essin did not
   accept it. At the first quarter-bell he must choose between his cousin's reputation
   and his blade's life (see chapter IV, Movements IV and V).
-<!-- TODO-Q11: Essin's "two bodies" (what he knows of where they are buried, and whether he will trade it) waits on owner ruling Q11 (INVENTIONS #13). No answer until ruled. -->
+- He knows where the missing year's two bodies are buried: the two cousins Vorlain
+  killed in his year of rule. He does not say where. Carried to House Draunel, it can
+  end the arrest in the fire (chapter IX, card S13, "Broker a trade").
 
 **If it comes to steel:** stat block **Essin Boranis**, with **Boranis Cousin's Blade**
 for his people, placed where he wants them. House Boranis's line is in chapter IX (cards
@@ -555,8 +560,9 @@ now, when you hear this night has finally mattered — that was you."* Then the
 water takes him.
 
 **If it comes to steel:** he will not fight if he can avoid it, and he can almost always
-avoid it. His line in chapter X ("If It Comes to It") is an exit, not a weapon: he
-leaves, and nobody quite remembers which way. The one exception is the Crossing, where
+avoid it. His block in chapter X ("Master Vell") has real numbers, set so high that no
+party at this ball can drop him before midnight, and no attacks. It is an exit, not a
+weapon: he leaves, and nobody quite remembers which way. The one exception is the Crossing, where
 he holds the Radiant with the sword still wrapped. That is chapter V's to run, and it
 is never the party's fight.
 

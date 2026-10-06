@@ -3,7 +3,7 @@
 *A masquerade adventure compatible with fifth-edition rules (SRD 5.2.1). One night, one
 palace, two hundred masks, every enemy the host has — and three guests nobody invited.*
 
-**Setting:** Rekuzan, capital of the Orthaen, continent of Val'loh, 3164 PG
+**Setting:** Rekuzan, capital of the Orthaen, continent of Val'loh, the year 3164
 
 **Players:** four characters of **4th level**, fresh or chosen from the five
 pregenerated guests in chapter XI. Every fight is balanced for four; each card has

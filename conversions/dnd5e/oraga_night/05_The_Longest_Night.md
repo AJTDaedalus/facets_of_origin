@@ -427,8 +427,20 @@ hints; its block is in chapter X.
 These features hold everywhere in the palace from the lights to the last bell, unless
 a card says otherwise.
 
-<!-- TODO-Q13: room sizes and fight-space distances (the Crystal Court, the dais, the main doors, the east wing corridors, the garden levels, the river gate) wait on owner ruling Q13 (NIGHT-18). Add no dimensions until then. -->
-
+- **Sizes.** All approximate; round to the grid you use.
+  - *The Crystal Court (B2)* is about 140 feet long and 80 feet wide under a vault
+    some 50 feet high. The main doors (10 feet wide) are at one end, and the dais
+    (3 feet high, 30 feet across) is at the other, about 120 feet from them. The banquet
+    galleries (B3) run the length of both long sides, their rails 12 feet above the
+    floor (card S1).
+  - *The garden terraces (B5)* are three, each about 40 feet deep and 120 feet wide,
+    stepping down from the Court's garden doors. Each ends at a waist-high balustrade
+    over a 10-foot drop to the next (cards S6 and S9), with a stair at either end. Below
+    them the lower garden runs about 150 feet to the river gate.
+  - *The east wing (B9)* is reached by a cleared corridor, 10 feet wide and about 60
+    feet long, from the Court's east doors to the wing's double doors (card S4). Behind
+    them one corridor, 10 feet wide and about 100 feet long, has the rooms off it (each
+    20 to 30 feet across), with the private stair to the garden at its far end.
 - **Light.** The Crystal Court is Dim Light, lit by candles and fire. The corridors
   and service passages are Darkness except where a ward flares. In an unlit corridor
   nobody sees the Radiant without a light.
@@ -620,7 +632,9 @@ otherwise, never for a table that was busy saving someone else.
 > **Sidebar — Characters who attack Vell, or join the duel.** They can try. Vell does not
 > take the bait and does not fight them. He moves out of reach, the way the Uninvited
 > move, and keeps holding the Radiant. A character who lands a blow on him has
-> cost Veier ground and learned nothing. Characters who attack the Radiant during the
+> cost Veier ground and learned nothing. He can be hit, but his numbers (chapter X,
+> "Master Vell") are set so that no party of this level drops him before the boat
+> clears. Characters who attack the Radiant during the
 > Crossing are fighting an Uninvited (below): he is *Leashed*, he ignores them unless
 > they stand between him and the boat, and every round they spend on him is a round
 > Vell did not have to. That is a real gift; narrate it as one. Damage
@@ -920,14 +934,13 @@ and they are standing at the front gate right now.
 
 **The contract.** Two nights ago a factor nobody can describe hired a company of
 the Bought (sixteen **Bought Blades**, four sergeants and a captain; see chapter X) and paid half in old coin,
-for three tasks written in a case chained to the captain's belt:
-<!-- TODO-Q10: who carries the contract case (the captain's belt, or the sergeant who reads from it at the gate) waits on owner ruling Q10 (NIGHT-15). -->
+for three tasks written in a chained case carried by the sergeant who holds the gate:
 
 1. At the quarter-bells, fire in two named sect districts and the Blackwatch
    courier post.
 2. From the first bell of midnight to the last bell of Oraga, hold the Boranis
    gatehouse. Nobody in, nobody out.
-3. **The Second Clause**, which the captain alone has read: *if a woman in Thenya
+3. **The Second Clause**, sealed, which the captain alone has read: *if a woman in Thenya
    wool comes out the front, hold her, and send word to the river.*
 
 They do not know who paid them. They do not know why. They are not cruel, and they
@@ -1107,6 +1120,12 @@ DC 18 Intelligence (Arcana) check, or a DC 13 Intelligence (Arcana) check from t
 Root. The Orthaen Gift's knack does not help, because nobody has ever done this. The
 trap holds until the last bell and not one moment past it. One trap a night.)*
 
+What the trap buys depends on who is caught. A table that traps the Wept before she
+reaches Raunu has saved him: run ⟨They save Raunu⟩, above. Trap the Radiant, and the
+escape is easy: nobody hunts Veier's flight through the east wing and the gardens. Trap
+the Hollow, and the doors open early: the crowd pours out toward the Gatehouse Court
+while the Wept is still at her work.
+
 The one caught answers no question about their master or their task. Once, in the
 quiet before the last bell, they will answer a question about themselves for the
 character who treats them as a person and not a prize.
@@ -1120,7 +1139,6 @@ The leash tears them out through ward, wall, and witness alike, and by morning t
 is nothing to show the inquest but damage. The public record holds: no bodies, no
 names, no charges. *(Their name is not one of the questions they answer. Nor is who
 they served.)*
-<!-- TODO-Q9: what a trap does to the trapped one's errand (Raunu's fate if the Wept is caught; the escape if the Radiant is; the doors if the Hollow is) waits on owner ruling Q9 (NIGHT-17). -->
 
 **⟨They expose the truth.⟩** Suppose the characters stand in the ashes with real
 evidence: the study's crystal reliefs, the drawer of scorched invitations (if the Church's

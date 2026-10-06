@@ -311,7 +311,7 @@ these rows, not an extra award.
 | An agenda completed | 200 to that character |
 | An omen read before it is explained (the quiet guest's habits count) | 100 to that character |
 | A closed room entered without a fight — Corval's gratitude, Anha's passages, an audience-earned pass, a festival hire's livery | 100 to each character who went in |
-| A fight finished, or ended by an out | The card's XP for the party, split evenly, as if every foe had fallen |
+| A fight finished, or ended by an out | The card's XP for the party, split evenly, as if every foe had fallen. An out marked "(no XP)" on its card (walking away, or letting the foes have their way) pays nothing |
 | A person carried out in Movement VII | 100 to the carrier, for each person they bring out |
 | Standing outside at dawn | 1,000 to each character |
 
@@ -392,25 +392,18 @@ oddity to notice. It will not fight until the bells.
 trying to leave through a gate barred from the far side, and the party is among them.
 The Bought hold it. The fight is optional; the gate is not.
 
-> **Designer's note — what the fights are for**
+> **DM Note — what the fights are for**
 >
-> The Uninvited cannot be beaten. That is not a difficulty setting; it is the module's
-> spine. Cleverness buys Delay, Delay buys hallways and lives, and Fractures change
-> outcomes. A table that spends the night trying to kill a gray mask has spent the
-> night learning the one lesson this adventure is built to teach.
+> The Uninvited cannot be beaten, by design. Cleverness buys Delay, Delay buys hallways
+> and lives, and Fractures change outcomes. The fights give a table's fighting energy
+> somewhere it works. The feud is about dignity, the corridor is a job, and the snakes
+> are the host's enemies acting when the lights go out. The Attendant is the thing in
+> the way. The Bought are the one foe at the gate who can be beaten or bought, and they
+> come in Movement VII because that is when a table most needs a problem a sword can
+> answer.
 >
-> So the fights exist to give the table somewhere for that energy to go where it
-> *works*. The feud is dignity. The corridor is a job. The snakes are the host's enemies
-> doing what enemies do when the lights go out. The Attendant is the thing in the way. The
-> Bought are the one foe at the gate who can be beaten or bought, and they land in
-> Movement VII precisely because that is the hour a table most needs a problem that
-> answers to a sword.
->
-> If your table only wants the ball, cut them all but the gate, and let the gate be
-> talked open. If your table only wants the fights, they will still have been at the
-> ball, and that is the trick.
->
-> — *the designers*
+> If your table only wants the ball, cut every fight but the gate and let the gate be
+> talked open. If it only wants the fights, run them; the ball still happens around them.
 
 ## Tone: Glamour Over a Blade
 

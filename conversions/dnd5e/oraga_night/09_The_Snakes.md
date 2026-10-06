@@ -116,8 +116,9 @@ development.*
 - **Outs** are the section to read twice. Ending a fight by an out pays the card's
   XP, the same as if every foe had fallen, split evenly across the party (Table I–4).
   A charm or a *Suggestion* that lands is an out too, and the target knows by morning
-  what was done to it.
-  <!-- TODO-Q14: XP for walk-away outs (let her go, walk away, go back the way they came, stop interfering) waits on owner ruling Q14 (SNAKES-5). -->
+  what was done to it. Only an out that resolves the scene pays: an out marked
+  **(no XP)**, where the party simply walks away or lets the foes have their way, ends
+  the fight and pays nothing.
 - **Steel at the ball.** Before midnight, a spell with a visible effect cast at a guest
   counts as bare steel (see chapter IV, "The Palace on Alert"). And at this ball any
   attacker, with a spell or a sling as much as a fist, may say a blow is meant to
@@ -717,7 +718,7 @@ contact. The knives fight to cover her, and stop the moment she is out.
 charge when Bloodied; with none left, she starts bargaining out loud, between blows.
 
 **Outs.**
-- Let her go.
+- Let her go. **(no XP)**
 - Trade. She knows two things about tonight that nobody else in the palace will tell
   the characters, because from the service run she has watched the other snakes work: the DM
   picks two of *the Circle's knife working toward the east wing's service door*, *two
@@ -784,7 +785,8 @@ Gatehouse Court, Held", points here.)*
   15-foot drop to the street (1d6 Bludgeoning damage and the Prone condition, unless the faller
   makes a DC 13 Dexterity (Acrobatics) check).
 - *Where the Bought stand.* The sergeant at the wicket, where he can read through its
-  grille. Three Blades in a loose line across Gate Street, 10 feet out from the gate.
+  grille; the contract case is chained to his hip, and he reads its first two tasks
+  aloud (the captain alone has read the sealed third). Three Blades in a loose line across Gate Street, 10 feet out from the gate.
   The fourth on the gate-walk.
 - *The parley at the grille.* The sergeant will speak through the wicket grille to
   anyone, at any time, and answers what he is asked. If the contract is voided or
@@ -934,11 +936,9 @@ block's **Breaks** line).
 - An invitation and a good story: a DC 15 Charisma (Deception or Persuasion) check.
 - A name that outranks a guard — a patron, a kindness done to Corval. No check; an
   escort back to the party and a warning.
-- Going back the way they came. The guards do not follow past the corridor.
+- Going back the way they came. The guards do not follow past the corridor. **(no XP)**
 - The service passages, if someone reaches them: a chase, 3 successes before 3
   failures on DC 13 Dexterity (Acrobatics) or DC 13 Strength (Athletics) checks.
-
-<!-- TODO-Q14: whether "Going back the way they came" pays XP waits on owner ruling Q14 (SNAKES-5). -->
 
 Losing costs the party the east wing for the evening and its invitations' good
 standing. It
@@ -948,8 +948,8 @@ does not cost a character. **Say that out loud if the table looks worried.**
 are House Boranis property, and taking them is theft (see chapter X, "The Night's
 Loot").
 
-**Rewards.** 900 XP for any out, divided equally among the characters; nothing for
-losing. *Heroic Inspiration* (Table I–3, *a fight ended by an out*): to whoever talks
+**Rewards.** 900 XP for any out except going back the way they came, divided equally
+among the characters; nothing for losing. *Heroic Inspiration* (Table I–3, *a fight ended by an out*): to whoever talks
 the guards down.
 
 **Adjusting the Encounter.** The reinforcements never change; they are the point.
@@ -988,7 +988,7 @@ break contact. The knives fight to cover her, and stop the moment she is out.
 
 **Morale.** As S2: the knives break the moment a charge fires or Tavva is gone.
 
-**Outs.** Let them go. Take it back. Point out the fire.
+**Outs.** Let them go **(no XP)**. Take it back. Point out the fire.
 
 **Treasure.** Tavva's sack, if she is caught (worth 2d6 × 25 GP to a fence), and any
 charges she has not spent (see chapter X, "The Night's Loot"). Here the rings came off
@@ -1068,7 +1068,7 @@ the fight has drawn a crowd (the block's **Breaks** line).
 - Name Essin. *Essin's Word:* they stop, and ask the character, embarrassed, not to mention this
   to him.
 - Shout. It ends the scene, and everyone in B2 turns to look at the terrace doors.
-- Walk away. They do not follow past the doors.
+- Walk away. They do not follow past the doors. **(no XP)**
 
 **Treasure.** None.
 
@@ -1331,10 +1331,7 @@ the rail:***
 > *A knot of masks has gathered at the rail of the upper terrace, looking down instead
 > of dancing. On the grass below them two young men have taken off their coats. One is
 > laughing. The other is not. Two more stand a little behind each of them, the way
-> seconds stand, and a few paces off a man in a good coat is walking slowly between the
-> two sides, speaking to each in turn. Nobody has drawn yet.*
-
-<!-- TODO-Q12: who the man in the good coat is (name him, or cut the line) waits on owner ruling Q12 (SNAKES-22). -->
+> seconds stand. Nobody has drawn yet.*
 
 **Objective:** nobody draws — or if they do, nobody dies, and no Boranis is seen to
 have started it. Which side the party is on decides the rest.
@@ -1634,7 +1631,7 @@ word.
   carry him. A DC 13 Charisma (Persuasion) check.
 - Let them. They are getting a man out of a fire, after all. By dawn the Circle owns
   the Tithe, and the Tithe survives the night, which the character with Agenda 1 may
-  prefer.
+  prefer. **(no XP)**
 - Outbid them, as in S7.
 
 **Treasure.** Each knife's advance (2d6 GP) (see chapter X, "The Night's Loot").
@@ -1735,11 +1732,11 @@ him, or the first time one of them takes damage. Essin's side breaks the moment 
   and Essin because it is not Draunel's.
 - Let Vorlain go back in. Nobody arrests a man walking into a fire: a DC 13 Wisdom
   (Insight) check to see that he will, and to say so in time.
-- Broker a trade. Essin knows where the missing year's bodies are buried, and Draunel
+- Broker a trade. Essin knows where the missing year's two bodies are buried (the two
+  cousins Vorlain killed in his year of rule; see chapter VII, "Vorlain Boranis"), and Draunel
   would give a great deal to know it. A character who carries the offer
   between them (a DC 15 Charisma (Persuasion) check) ends this and starts something much worse,
   later, somewhere else.
-  <!-- TODO-Q11: "Broker a trade" (whether the missing year's two bodies are literal) waits on owner ruling Q11. -->
 
 **Treasure.** None.
 
@@ -1920,7 +1917,7 @@ badly, and looks at things.
 - The distraction game, above. Break its focus four times and it wanders off.
 - Stop interfering. Anyone who stops being in the way stops being its business: a party
   that steps back from the three is left alone, and the history in chapter V goes where
-  it was going.
+  it was going. **(no XP)**
 - Argue its orders. Keeping the three from being interrupted is a narrow order, and a
   character who can show it that what they are doing is not, strictly, an interruption
   — carrying guests out, fighting a fire, holding a door for the crowd — makes an
@@ -1929,12 +1926,10 @@ badly, and looks at things.
 - Take it apart. 229 Hit Points and AC 17, while it hits back twice a round. Possible,
   and printed above so nobody chooses it by accident.
 
-<!-- TODO-Q14: whether "Stop interfering" pays the card's XP waits on owner ruling Q14 (SNAKES-5). -->
-
 **Treasure.** None. It leaves no body (*Not Here*).
 
-**Rewards.** 3,900 XP, divided equally among the characters, however it is got out of
-the way. *Heroic Inspiration* (Table I–3, *the Attendant distracted*): to the first
+**Rewards.** 3,900 XP, divided equally among the characters, when its focus is broken
+four times, it is driven to 0 Hit Points, or its orders are argued away. *Heroic Inspiration* (Table I–3, *the Attendant distracted*): to the first
 player who tries to distract it (hint 4); a natural 20 on a distraction pays its own.
 
 **Adjusting the Encounter.** *(How each line plays is in the DM Note — how it plays, above.)*

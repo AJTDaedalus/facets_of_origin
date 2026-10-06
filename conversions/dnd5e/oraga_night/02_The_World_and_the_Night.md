@@ -23,7 +23,8 @@ here. This adventure needs only what follows.*
   before the guards do.
 
 **And the recent wound, which this module is quietly about:** the eastern mists have
-receded to record lows this year. The Blackwatch is frightened and saying so quietly.
+receded to record lows this year. The Blackwatch, who keep the vigil over the eastern mists, are frightened and saying
+so quietly.
 Inland it is a dinner-table curiosity. Keep it in the table's peripheral vision. It
 matters.
 
@@ -317,9 +318,8 @@ another. And then: your honest judgment. The Prelate will know if you shade it.
 Raunu's face all night. You saw the exact moment he understood: before anyone
 screamed, before the lights failed. He knew what they were. Remember that.
 
-**Pays:** Heroic Inspiration, and XP by Table I–4. The Church's favor: one request of
-Prelate Kovaun, spendable after tonight, and as large as the DM
-decides "frightening" means at your table. *(For the DM: this patron is a snake. See
+**Pays:** Heroic Inspiration, and XP by Table I–4. The Church's favor: one favor Prelate
+Kovaun can grant without scandal, spendable after tonight (the DM may make it larger). *(For the DM: this patron is a snake. See
 chapter IX, the Church line.)*
 
 ### 3. A House's Long Game

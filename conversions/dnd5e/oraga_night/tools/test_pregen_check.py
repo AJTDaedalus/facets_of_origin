@@ -40,8 +40,12 @@ def test_focus_clean_on_the_module():
     assert PC.focus_issues(_text()) == []
 
 
+def _andra(probs):
+    return [p for p in probs if p[0] == "Andra"]
+
+
 def test_focus_clean_on_a_minimal_sheet():
-    assert PC.focus_issues(ANDRA.format(spell=GOOD_SPELL, carry=GOOD_CARRY)) == []
+    assert _andra(PC.focus_issues(ANDRA.format(spell=GOOD_SPELL, carry=GOOD_CARRY))) == []
 
 
 def test_focus_missing_from_carrying_is_reported():
@@ -56,7 +60,22 @@ def test_focus_lattice_as_focus_is_reported():
 
 def test_focus_line_wrapped_across_lines_is_read():
     text = ANDRA.format(spell="a crystal as\nArcane Focus", carry="crystal\n(Arcane Focus)")
-    assert PC.focus_issues(text) == []
+    assert _andra(PC.focus_issues(text)) == []
+
+
+# Q16b (2026-10-05): Ilesse's warding crystal is her Holy Symbol.
+def test_focus_ilesse_holy_symbol_on_the_module():
+    assert [p for p in PC.focus_issues(_text()) if p[0] == "Ilesse"] == []
+
+
+def test_focus_ilesse_plain_focus_is_reported():
+    text = _text().replace("warding crystal as\nHoly Symbol", "warding crystal as\nfocus")
+    assert any(p[0] == "Ilesse" and p[1] == "spellcasting focus" for p in PC.focus_issues(text))
+
+
+def test_focus_ilesse_holy_symbol_not_carried_is_reported():
+    text = _text().replace("warding crystal (Holy Symbol)", "crystal focus")
+    assert ("Ilesse", "focus not carried", None, "warding crystal (Holy Symbol)") in PC.focus_issues(text)
 
 
 def test_focus_lowercase_name_is_reported():

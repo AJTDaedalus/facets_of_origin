@@ -399,24 +399,25 @@ These rules are mechanical, but a worker makes every edit with the linter's hit 
 
 | Task | Gate | Findings | Files | What happens once ruled |
 |---|---|---|---|---|
-| ⛔ T8.1 | Q3 | FRONT-11 | all, flow | If "renumber": Introduction, Parts 1–3, Appendices A–E; rewrite about 420 references with a script plus the lint resolver. If "regroup": nothing (T2.3 did it) |
-| ⛔ T8.2 | Q4 | FRONT-6 | 01 | Convert the designer's note to the unsigned **DM Note — what the fights are for** (FRONT-6 draft), or keep it and whitelist it |
-| ⛔ T8.3 | Q7 | CAST-2, BALL-1 | 04, 07 | Veier's pregnancy line in the dinner topics and her knowledge list |
-| ⛔ T8.4 | Q8 | BESTIARY-11 | 10, 05 | Add Vell's ***Not There*** or ***Not Worth It*** trait (or the owner's own) |
-| ⛔ T8.5 | Q9 | NIGHT-17 | 05 | One sentence per Uninvited in the trap sidebar |
-| ⛔ T8.6 | Q10 | NIGHT-15 | 05, 10 | Fix the carrier of the contract case. Log a Facets follow-up in the carryover doc |
-| ⛔ T8.7 | Q11 | SNAKES N2, CAST N9 | 07, 09 | Essin's "two bodies": keep literal, or rewrite S13's out and the Boranis line |
-| ⛔ T8.8 | Q12 | SNAKES-22 | 09 | Name or cut the S9 figure |
-| ⛔ T8.9 | Q13 | NIGHT-18 | 05, 04, 08 | Add dimensions to General Features, or the "no fixed plan" line |
-| ⛔ T8.10 | Q14 | SNAKES-5 | 09, 01 | "(no XP)" on walk-away outs; S14's Rewards line; Table I–4 clause |
-| ⛔ T8.11 | Q15 | BALL-12, FRONT-13, BESTIARY-23 | 04, 03→02, 06, 10 | Print the amounts: Callun Mv III and the nursery, the Church's favor default, the coat |
-| ⛔ T8.12 | Q16 | CAST-10, -11 | 11 | Ideal from the source `.fof`, agenda hook → **Bond**; flaws if written; Ilesse's holy symbol or pouch |
-| ⛔ T8.13 | Q17 | FRONT-12 | README, 02, 06, 07 | Pronunciations at first mention; the "PG" decision; the Blackwatch and Mazaa glosses |
-| ⛔ T8.14 | Q18 | BESTIARY-21, CAST N6 | 10, 07 | The "—" alignment on the Uninvited and Vell; cast tags if chosen |
-| ⛔ T8.15 | Q19 | CAST N7 | 08 | Card initials: keep them, or "delivered in person" |
-| ⛔ T8.16 | Q20 | CAST N9, NEW-CAST-2 | 07, 04 | Sixty or eighty servants; the testament's witnesses. Sites: 07 ("sixty"; the testament in Corval's entry), 04 Undercurrent B ("eighty"; the testament), and 07 Sella's *What Sella Knows* witness bullet (TODO-Q20) |
+| ☑ T8.1 | Q3 | FRONT-11 | all, flow | If "renumber": Introduction, Parts 1–3, Appendices A–E; rewrite about 420 references with a script plus the lint resolver. If "regroup": nothing (T2.3 did it) . **Closed 2026-10-05 (Q3: keep the grouping).** Nothing to do; T2.3 did it. |
+| ☑ T8.2 | Q4 | FRONT-6 | 01 | Convert the designer's note to the unsigned **DM Note — what the fights are for** (FRONT-6 draft), or keep it and whitelist it . **Done 2026-10-05 (Q4).** Unsigned **DM Note — what the fights are for**; whitelist line removed. |
+| ☑ T8.3 | Q7 | CAST-2, BALL-1 | 04, 07 | Veier's pregnancy line in the dinner topics and her knowledge list . **Done 2026-10-05 (Q7).** Dinner Topics and *What Veier Knows*; R6 note in INVENTIONS. |
+| ☑ T8.4 | Q8 | BESTIARY-11 | 10, 05 | Add Vell's ***Not There*** or ***Not Worth It*** trait (or the owner's own) . **Done 2026-10-05 (Q8, Q8b/Q25).** Vell: AC 20, HP 285, all-damage resistance, *Not Where It Landed* (O29). |
+| ☑ T8.5 | Q9 | NIGHT-17 | 05 | One sentence per Uninvited in the trap sidebar . **Done 2026-10-05 (Q9).** Three sentences in the trap sidebar; flow `ihb-trap`. |
+| ☑ T8.6 | Q10 | NIGHT-15 | 05, 10 | Fix the carrier of the contract case. Log a Facets follow-up in the carryover doc . **Done 2026-10-05 (Q10).** Sergeant carries the case (05 B12, 09 S3, 10 Captain Tells and loot). Carryover logged. |
+| ☑ T8.7 | Q11 | SNAKES N2, CAST N9 | 07, 09 | Essin's "two bodies": keep literal, or rewrite S13's out and the Boranis line . **Done 2026-10-05 (Q11 literal).** S13 kept and glossed; Essin bullet added. Carryover logged. |
+| ☑ T8.8 | Q12 | SNAKES-22 | 09 | Name or cut the S9 figure . **Done 2026-10-05 (Q12).** The man in the good coat cut from S9's box. |
+| ☑ T8.9 | Q13 | NIGHT-18 | 05, 04, 08 | Add dimensions to General Features, or the "no fixed plan" line . **Done 2026-10-05 (Q13).** Sizes in 05 General Features, 04 B2/B5/B9, 08 caption (O28). |
+| ☑ T8.10 | Q14 | SNAKES-5 | 09, 01 | "(no XP)" on walk-away outs; S14's Rewards line; Table I–4 clause . **Done 2026-10-05 (Q14).** (no XP) on six outs (O30); S14 Rewards; 09 Outs rule; Table I–4. |
+| ☑ T8.11 | Q15 | BALL-12, FRONT-13, BESTIARY-23 | 04, 03→02, 06, 10 | Print the amounts: Callun Mv III and the nursery, the Church's favor default, the coat . **Done 2026-10-05 (Q15).** 10 GP, 250 GP, the favor default, the 10 GP coat; 02, 04, 06, 10. |
+| ☑ T8.12 | Q16 | CAST-10, -11 | 11 | Ideal from the source `.fof`, agenda hook → **Bond**; flaws if written; Ilesse's holy symbol or pouch . **Done 2026-10-05 (Q16a: no sheet change; Q16b: Holy Symbol).** `pregen_check.py` extended test-first. |
+| ☑ T8.13 | Q17 | FRONT-12 | README, 02, 06, 07 | Pronunciations at first mention; the "PG" decision; the Blackwatch and Mazaa glosses . **Done 2026-10-05 (Q17).** "the year 3164"; Blackwatch (02) and Mazaa (06) glossed; no pronunciations. |
+| ☑ T8.14 | Q18 | BESTIARY-21, CAST N6 | 10, 07 | The "—" alignment on the Uninvited and Vell; cast tags if chosen . **Done 2026-10-05 (Q18).** "—" on the three Uninvited and Vell; cast untagged. |
+| ☑ T8.15 | Q19 | CAST N7 | 08 | Card initials: keep them, or "delivered in person" . **Done 2026-10-05 (Q19).** Initials removed from Handout 2. Carryover logged. |
+| ☑ T8.16 | Q20 | CAST N9, NEW-CAST-2 | 07, 04 | Sixty or eighty servants; the testament's witnesses. Sites: 07 ("sixty"; the testament in Corval's entry), 04 Undercurrent B ("eighty"; the testament), and 07 Sella's *What Sella Knows* witness bullet (TODO-Q20) . **Done 2026-10-05 (Q20a sixty, Q20b Sella and Corval).** Undercurrent B reworded (O31). Carryover logged. |
 | ☑ T8.17 | Q21 | FRONT-9, SNAKES-28 | 04, 05 | **Approved 2026-10-03.** Merged into T2.4 |
 | ☑ T8.18 | Q22 | O3 | — | **Closed 2026-10-03:** no replacement habit. O3 stands |
+| ☑ T8.19 | Q23, Q24 | BALL-1, NEW-CAST-3 | 04, 07 | **Done 2026-10-05.** Q23: the ring is shown and kept at the doors, Veier sends for the character, and at dinner she asks Raunu for a minute so the ring reaches her alone (04, 07, INVENTIONS #58/#72, flow `sc-dinner`). Q24: "Tell my cousin" in 04 and 07. Carryover logged |
 
 Each T8 task: SA, a ledger row citing the ruling, and a DECISIONS entry.
 
