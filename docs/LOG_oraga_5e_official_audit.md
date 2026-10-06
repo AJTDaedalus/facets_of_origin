@@ -739,3 +739,4 @@ an amendment to #58). Decisions left to the Worker: DECISIONS O28–O31.
 - `python -m pytest conversions/dnd5e/oraga_night/tools -q` → 167 passed (164 + 3 Ilesse tests).
 - `python flow/build_flow_page.py` → built (`sc-dinner` and `ihb-trap` summaries changed).
 - `python -m pytest software/tests/test_docs_consistency.py -q` → 37 passed.
+- 2026-10-06 PUSHED feat/lean-facets (439d69e..e95d326) + tag pre-official-5e, after redacting one owner-username path from the unpushed range (guard test caught it); guard 42 + tools 167 passed.
