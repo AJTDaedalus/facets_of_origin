@@ -747,3 +747,4 @@ an amendment to #58). Decisions left to the Worker: DECISIONS O28–O31.
 - Phases: R0 tooling (`facts.yaml` continuity bible, fact checker, linter upgrades), R1 rules, R2 continuity, R3 artefacts, R4 maps,
   R5 layout and voice, R6 copyright check, re-review and push.
 - Planner decisions proposed: O32–O40 (DESIGN §3). Owner questions: QR1–QR7 (DESIGN §4).
+- 2026-10-08 OWNER answered QR1–QR7 (rulings recorded in DESIGN_oraga_5e_review_fixes §4); the plan is fully ungated.

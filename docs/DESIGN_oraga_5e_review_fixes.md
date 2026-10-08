@@ -115,6 +115,15 @@ can't creep back.
 
 Gated tasks are marked ⛔ in TASKS. Everything else can run now.
 
+**Owner rulings, 2026-10-08 (all seven answered, so nothing is gated any more):**
+- **QR1:** sixty, with twenty-two staying. Drop "four-fold" and say "cut by nearly two-thirds".
+- **QR2:** two of the nine guard the east-wing doors, so "seven go to the dais".
+- **QR3:** each faction brought four. Fix the text, and give each card a new Nastier dial.
+- **QR4:** "twenty blades" and "twenty sworn witnesses". This also goes to the Facets carryover list.
+- **QR5:** I draw five original keyed SVG maps (option a). The owner reviews a render before they go in.
+- **QR6:** simulation data becomes table advice, and the numbers move to `research/`.
+- **QR7:** "Shout" (S6) and "Make enough noise to lose" (S2) are marked "(no XP)".
+
 ## 5. Order of work
 
 | Phase | Work | Why here |

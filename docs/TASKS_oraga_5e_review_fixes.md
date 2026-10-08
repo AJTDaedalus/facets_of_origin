@@ -83,7 +83,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
 - **Files:** 05 Table V–5, the B12 and branch text; 09 S3, S4 and the tracker; 08 Table VIII–5.
 - **Accept:** each item resolved as in O40/O37. The decisions are logged.
 
-### ⛔ R1.4 Nastier as baseline (P1-7): GATED(QR3)
+### ☐ R1.4 Nastier as baseline (P1-7) (QR3: four)
 - **Do:**
   - If the retinues become four: change INVENTIONS #1, 09:170, and 10's flavor lines.
   - In both cases, promote the used variants to named blocks (*Veteran Bought Sergeant* CR 4;
@@ -101,12 +101,12 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
 
 ## R2: Continuity
 
-### ⛔ R2.1 Household (P1-1): GATED(QR1)
+### ☐ R2.1 Household (P1-1) (QR1: 60, 22 stayed)
 - **Files:** 02:70 and 02:422; 04:38–39, 04:408 and 04:705–710; 07:196 and 07:225–229; 08
   (rumors and the truth note); `flow.json`; `facts.yaml`.
 - **Accept:** the fact checker finds no household contradiction.
 
-### ⛔ R2.2 Honor-guard deployment (P1-2): GATED(QR2)
+### ☐ R2.2 Honor-guard deployment (P1-2) (QR2: two of the nine)
 - **Do:**
   - Add one deployment table to chapter VIII: where each of the nine stands, Movements I–V and
     midnight, plus the east-wing guard (per QR2).
@@ -140,7 +140,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
   - P3-18: Second Clause gloss.
 - **Accept:** the defined-terms check passes for Scora and Kshalo. Each item is fixed.
 
-### ⛔ R2.6 "Forty blades" (P2-6): GATED(QR4)
+### ☐ R2.6 "Forty blades" (P2-6) (QR4: twenty)
 - **Files:** 05:1173 and 05:1178. Log a Facets-edition follow-up in CARRYOVER §6.
 
 ### ☐ R2.7 Commit R2
@@ -149,7 +149,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
 
 ## R3: Scaffolding and conversion artefacts
 
-### ⛔ R3.1 Simulation data (P2-1): GATED(QR6)
+### ☐ R3.1 Simulation data (P2-1) (QR6: table advice)
 - **Do (if approved):** move S14's table and every "one fight in N" or "in simulation" line to
   `research/oraga_5e_simulation_notes.md`. Replace each with table advice ("Expect one character
   to drop"). Budget lines keep their label, plus a plain-play clause.
@@ -177,7 +177,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
 
 ## R4: Maps
 
-### ⛔ R4.1 Keyed maps (P1-6): GATED(QR5)
+### ☐ R4.1 Keyed maps (P1-6) (QR5: option a)
 - **Option (a), I draw the maps:**
   - Write `M/maps/build_maps.py` to generate original SVG maps from `facts.yaml`. Use the O28
     sizes and the O33/O34 geometry, a 5-foot grid option, room codes, a scale bar, and styling
@@ -271,3 +271,5 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
 
 QR7 (whether "Shout" and "Make noise to lose" pay XP) is folded into R1.3: if the owner says no
 XP, mark those two outs "(no XP)" as well.
+
+**2026-10-08:** all QR rulings are answered (DESIGN §4), so every task is open. QR7 = no XP for "Shout" and "Make enough noise to lose" (do it in R1.3).
