@@ -740,3 +740,10 @@ an amendment to #58). Decisions left to the Worker: DECISIONS O28–O31.
 - `python flow/build_flow_page.py` → built (`sc-dinner` and `ihb-trap` summaries changed).
 - `python -m pytest software/tests/test_docs_consistency.py -q` → 37 passed.
 - 2026-10-06 PUSHED feat/lean-facets (439d69e..e95d326) + tag pre-official-5e, after redacting one owner-username path from the unpushed range (guard test caught it); guard 42 + tools 167 passed.
+
+## Review-fix pass: plan (Planner, 2026-10-08)
+- The critical review (`docs/REVIEW_oraga_5e_official_critical.md`, 6.5/10, P1 ×7) is planned into
+  `docs/DESIGN_oraga_5e_review_fixes.md` and `docs/TASKS_oraga_5e_review_fixes.md`.
+- Phases: R0 tooling (`facts.yaml` continuity bible, fact checker, linter upgrades), R1 rules, R2 continuity, R3 artefacts, R4 maps,
+  R5 layout and voice, R6 copyright check, re-review and push.
+- Planner decisions proposed: O32–O40 (DESIGN §3). Owner questions: QR1–QR7 (DESIGN §4).
