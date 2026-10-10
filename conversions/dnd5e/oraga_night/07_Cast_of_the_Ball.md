@@ -6,7 +6,7 @@ Outside a fight NPCs never roll dice. Where an entry gives no DC, the DC to move
 guest is 13, or 10 for a character approaching far above their station behind a mask
 (see chapter IV, "Social checks at the ball"); the entries below note only the exceptions. The DM sheet (chapter VIII) maps where each stands in every Movement.*
 
-*Every stat block named here is in chapter X under exactly that name. Five
+*Every stat block named here is in chapter X under the same name. Five
 factions came as Raunu's enemies (the snakes), and a sixth, the Thenya, came as his
 wife's kin; each has a threat line and fight cards in chapter IX, and their entries
 below say which. The house's own guards (**Boranis
@@ -20,7 +20,7 @@ Honor Guard**), the city's (**Sect Guard**), and the brawlers of the seating feu
 ### Raunu Boranis — the Host
 *Chief of the Orthaen. Seen exactly four times tonight, and the fourth is midnight.*
 
-**Wants:** one uninterrupted sentence, at midnight, two years in the making. He
+**Wants:** one uninterrupted sentence, at midnight, two years in the making, and he
 does not get it. **Fears:** something is coming for his family; he does not know
 what, or when. His whole silent palace is the shape of that suspicion. **Secret:**
 all of them — see Undercurrents A and B, and the Root.
@@ -29,7 +29,7 @@ all of them — see Undercurrents A and B, and the Root.
 weather): a still figure on the high gallery in Movement III, gone when looked
 for; the summonses in the empty Audience Hall (Movement III); the awkward toast
 and the two plates (Movement IV); and the Unmasking rite at midnight. That is the
-entire public Raunu. The guests came to see a recluse and are seeing one.
+entire public Raunu: the guests came to see a recluse, and they are seeing one.
 
 **Roleplaying Raunu (the summons):** awkward, unhurried, unmistakably out of practice:
 long pauses, no pleasantries, the true thing said where the polite thing was
@@ -66,11 +66,11 @@ He will not answer anything on chapter II's list, "What the Module Never Says": 
 he went in his missing year and what he brought back; why this child is worth breaking
 a seal for; the name of the power in the east, or of the power Vell serves; what the
 mists are, or why they recede; who the Uninvited were when they were people. Asked,
-he refuses or deflects. Spells fare no better. *Detect Thoughts* finds a man thinking
+he refuses or deflects, and spells fare no better: *Detect Thoughts* finds a man thinking
 about a staircase, and *Speak with Dead* finds the silence he kept alive.
 
 **At the Unmasking:** see chapter V. Custom compels his return to the dais — the
-one predictable moment of his night, which is exactly why it is the moment. He
+one predictable moment of his night, which is why it is the moment. He
 never gets to make the announcement. He understands first, spends everything on
 the escape, and dies a host: the recluse nobody saw all evening ends it
 commanding a burning room, putting his body and his house between his guests and
@@ -82,7 +82,7 @@ own choice (see chapter V), not a hit-point total.
 
 ### Veier Nolonaire — the Bride
 *Of the Thenya; one of five gifted Thenya alive, though almost no one knows it. Two
-years unseen, and she is not seen tonight either. She never enters the ball.*
+years unseen, and she is not seen tonight either: she never enters the ball.*
 
 **Wants:** her child born safe; her cousins to know she chose this. **Fears:** the
 same thing her husband fears, learned from watching him prepare. **Secret:** she is
@@ -124,8 +124,8 @@ doors, or anyone who reaches her there) learns the following (see chapter IV,
 themselves behind her: her husband's two crystals working. Wounded once, cleanly,
 by the Radiant, she stays upright anyway and goes down the private stair and out through the gardens
 on Vell's arm (the Crossing, chapter V). If her gift matters at your table (a
-bonded loved one in mortal peril), it flares exactly once, without training or
-explanation. Spend it on a character who bled
+bonded loved one in mortal peril), it flares once, without training or
+explanation; spend it on a character who bled
 for her.
 
 *At the table:* it is the Thenya Gift's **For Them** (see chapter III), used once, on
@@ -141,7 +141,7 @@ is never a fight.
 
 **Wants:** the seat, forever, aching, and — this is the part House Draunel cannot
 imagine — not like this. **Fears:** Raunu. Comprehensively. Fear of his brother is
-the load-bearing wall of his personality. **Secret:** he has no plot tonight. He came
+the load-bearing wall of his personality. **Secret:** he has no plot tonight; he came
 because not coming was more dangerous.
 
 **Roleplaying Vorlain:** silk over springs. Charming, funny at others' expense, collects
@@ -150,8 +150,8 @@ delighted, encouraging, and says nothing, sober. Getting him drunk takes an hour
 pouring and a DC 15 Charisma (Persuasion) check to keep him at it, and Essin will try
 to stop it. Drunk, he says one true thing (see "What Vorlain Says", below). **At the Unmasking:** he is the
 night's strangest hero, hauling guests from the burning banquet gallery (B3) to
-everyone's permanent confusion, including his own. By dawn he is the prime suspect.
-Both facts are true (see chapter VI).
+everyone's permanent confusion, including his own. By dawn he is the prime suspect,
+and both facts are true (see chapter VI).
 
 > **What Vorlain Says — the overtures, and the non-answers**
 >
@@ -189,24 +189,24 @@ Both facts are true (see chapter VI).
 **If it comes to steel:** stat block **Vorlain Boranis**, with **Boranis Cousin's
 Blade** for the people around him; House Boranis is a snake, and its line is in
 chapter IX (cards S6, S9 and S13). Whatever his house's blades do tonight, they are
-Essin's people doing Essin's work. Vorlain himself has no plot. That is his secret,
+Essin's people doing Essin's work. Vorlain himself has no plot: that is his secret,
 and it holds.
 
 ### Minister Corval — the Majordomo
-*The last of the old household's officers; runs the whole ball with the twenty-two who stayed.*
+*The last of the old household's officers; runs the ball with the twenty-two who stayed.*
 
 **Wants:** the night to go perfectly, because it is the house's face and his life's
 work. **Fears:** that he no longer knows the house he serves. **Secret:** he knows
 the shape of everything (the staff cuts, the sealed wing, the midwife, the master's
 locked study, the testament he stood witness to in the chapel three days ago) and
 the meaning of none of it.
-Loyalty has kept him from assembling the pieces. He is the faithful servant's
+Loyalty has kept him from assembling the pieces: he is the faithful servant's
 tragedy, one honest conversation away from understanding.
 
 **Roleplaying Corval:** thin, upright, old, magnificent under pressure, doing the work of six
-chamberlains. Bribing Corval is impossible. There is no check for it at
-all; tell the players so. Helping him genuinely, with the wine crisis or the escalating seating
-feud, earns more than gold buys: gratitude, gossip, and doors. Deceiving him about
+chamberlains. Bribing Corval is impossible, with no check for it at
+all; tell the players so. Real help with the wine crisis or the escalating seating
+feud earns more than gold buys: gratitude, gossip, and doors. Deceiving him about
 household matters takes a DC 20 Charisma (Deception) check; about anything else he
 is too tired to check.
 
@@ -254,7 +254,7 @@ is too tired to check.
 *Agenda 8's sister. Four years in the kitchens; two years in the silence.*
 
 **Wants:** to keep her head down and her triple wages flowing home. **Fears:**
-naming the wrongness out loud, in case naming is what makes it real. **Secret:** two
+giving the wrongness a name, in case naming is what makes it real. **Secret:** two
 years of eerie domestic detail (east wing lights burning all night, meals for two
 sent up and meals for three coming back down these last months, the master's voice
 in empty rooms, corridors she is forbidden to sweep) and no frame to put around any
@@ -321,7 +321,7 @@ retinue. The Church is a snake; its line is in chapter IX (card S8).
 
 **Wants:** to tend the Oraga rite properly: the masks, the year's dead, the sending-
 home. **Fears:** nothing; she is an Elanna follower of the old northern school, and
-acceptance is the whole doctrine. **Secret:** Raunu asked her, at the wedding two
+acceptance is all the doctrine there is. **Secret:** Raunu asked her, at the wedding two
 years ago, what her order teaches about dying well, and she has wondered since why
 a man that age wanted the answer that badly. It is she who keeps the fresh offerings
 in Elanna's chapel niche.
@@ -334,8 +334,8 @@ quote, below.
 **Quote:** "The dead were sent home tonight. All but three. Those, child, were
 somebody else's dead — sent out."
 
-**What Sella Knows:** a character who comes to her in the chapel (B6) can learn the
-following:
+**What Sella Knows:** she will tell a character who comes to her in the chapel (B6)
+all of this:
 
 - Raunu invited her by name, in his own hand.
 - At the wedding two years ago, Raunu asked her what her order teaches about dying
@@ -345,7 +345,7 @@ following:
   law requires, while Raunu swore aloud a testament providing for every current
   servant by name.
 - After the gray-masked woman leaves her offering in Elanna's niche (Movement IV),
-  Sella can say exactly how out of date its rite is. Hearing this from her counts as
+  Sella can say how far out of date its rite is. Hearing this from her counts as
   witnessing the tell (see chapter V, "The Fractures").
 
 **If it comes to steel:** noncombatant (see chapter X, "If It Comes to It").
@@ -357,14 +357,14 @@ following:
 a dynasty of Raunus, which is why Movement IV turns her polite loathing into
 something with a horizon. **Secret:** the Circle has already gamed a Vorlain
 chieftaincy and priced it attractive; she is here tonight to check the arithmetic,
-not to act on it. (She would be horrified to be called a conspirator. She is merely
+not to act on it. (She would be horrified to be called a conspirator; she is merely
 prepared, like her host.)
 
 **Roleplaying Callun:** iron-gray, cordial, terrifyingly numerate. Runs Agenda 1 and pays on
 delivery. Deceiving her about money takes a DC 20 Charisma (Deception) check; about anything
 human, a DC 10 Charisma (Deception) check.
 
-**What Callun Knows:** a character who works Agenda 1 for her learns the following:
+**What Callun Knows:** working Agenda 1 for her earns a character these facts:
 
 - The Circle knows only that Raunu's ministers call his new decree "the Tithe of
   Hands". Nothing is written down.
@@ -382,7 +382,7 @@ Circle is a snake; its line is in chapter IX (cards S7 and S12).
 
 **Wants:** a pleasant evening among people who finally treat Phern money as money.
 **Fears:** the thing his gift keeps ringing about, all night, pointing nowhere.
-**Secret:** none. Corro is that rarest ball guest, exactly what he appears, which
+**Secret:** none. Corro is that rarest ball guest, a man who is what he appears, which
 is why his mounting, unexplained dread (the Movement II omen) is worth a dozen
 warnings from anyone else.
 
@@ -390,7 +390,7 @@ warnings from anyone else.
 night goes on: losing sentences, glancing at doors, standing with his back to walls.
 A character who takes him seriously and walks the room with him is doing real
 detective work, at the right altitude. **At the Unmasking:** his gift finally
-finds its bearing. Three seconds before the lights die, Corro is already moving,
+finds its bearing: three seconds before the lights die, Corro is already moving,
 and following him saves lives.
 
 **What Corro Knows:** a character who takes him seriously and walks the room with
@@ -419,7 +419,7 @@ Boranis party, and chapter IX names all three.
 noble key. Useful to the table as a patron, a foil, and by dawn the loudest voice
 insisting Vorlain hang for this.
 
-**What Draunel Knows:** a character who carries Agenda 3 for him learns the following:
+**What Draunel Knows:** whoever carries Agenda 3 for him hears this much:
 
 - Vorlain ruled for a year and gave it back. Draunel wants to know if he liked the
   taste, and wants him to say something House Draunel could later call an understanding.
@@ -434,16 +434,16 @@ retinue. House Draunel is a snake; its line is in chapter IX (cards S9 and S13).
 ### Essin Boranis — the Cousin
 *Vorlain's cousin.*
 
-**Wants:** Vorlain sober, unrecorded, and unbaited. Essin is the keeper his cousin
+**Wants:** Vorlain sober, unrecorded, and unbaited: Essin is the keeper his cousin
 does not know he needs. **Fears:** House Draunel's patience. **Secret:** he served
-the year of Vorlain's rule as fixer, and knows exactly where its two bodies are
-buried; he has spent three years being pleasant to everyone in case it stops
-mattering quietly.
+the year of Vorlain's rule as fixer, and knows where its two bodies are
+buried; he has spent three years being pleasant to everyone in case that ever
+stops being a quiet matter.
 
 **Roleplaying Essin:** affable, forgettable on purpose, always somehow between Vorlain and
 whoever is working him. The Agenda 3 character's true opponent, and a fine sparring
-partner: deceiving Essin takes a DC 20 Charisma (Deception) check, and he deceives back.
-Catching him at it takes a DC 18 Wisdom (Insight) check.
+partner: deceiving Essin takes a DC 20 Charisma (Deception) check, and he deceives back;
+catching him at it takes a DC 18 Wisdom (Insight) check.
 
 **What Essin Knows:** a character who helps him keep Vorlain sober and unbaited, or
 who goes to him on the terrace in Movement V, the one time he asks anyone for help,
@@ -467,12 +467,12 @@ S6, S9 and S13).
 **Wants:** proof of Veier (alive, well, unforced) carried home in Thenya hands.
 **Fears:** that the pact was a purchase and her kinswoman the price. **Secret:** the
 delegation's diplomatic brief is thin cover; the Thenyan chief's actual instruction
-was *"if she is a prisoner, bring her out,"* and Maiven, border-raised and direct,
+was "if she is a prisoner, bring her out," and Maiven, border-raised and direct,
 intends to.
 
-**Roleplaying Maiven:** Veier ten years younger and thirty degrees hotter-tempered. Runs
-Agenda 4. The toast (Movement IV) lands on her like a slap: *two years, two
-plates, a promised midnight pronouncement, and still no kinswoman.* Her
+**Roleplaying Maiven:** Veier ten years younger and thirty degrees hotter-tempered, and running
+Agenda 4. The toast (Movement IV) lands on her like a slap: two years, two
+plates, a promised midnight pronouncement, and still no kinswoman. Her
 formal request for an audience, declined by a miserable Corval, is the last
 diplomatic thing she does tonight. From there she is one bad hour from going over
 the east wing wall herself, which makes her the Agenda 4 character's natural ally or
@@ -507,12 +507,12 @@ See chapter II: he is the second hidden power's whole presence at the ball.*
 
 **Wants:** the river gate open at midnight and no one ever remembering his face.
 **Fears:** nothing in this palace, but he treats the three gray masks with the
-respect of a man who knows exactly what they cost. **Secret:** all of them.
+respect of a man who knows what they cost. **Secret:** all of them.
 
 **The sword:** in a culture where strong personalities wear big steel, a wrapped
 broadsword on a factor's back earns an eyeroll and nothing more, which is
-precisely why he can carry it. He never touches it. He never unwraps it. If a
-character asks about it, he says only, *"An inheritance,"* and means it.
+precisely why he can carry it. He never touches it and never unwraps it. If a
+character asks about it, he says only, "An inheritance," and means it.
 
 *(DM truth: unwrapped, the blade would release the screams of every soul it has
 taken, enough to drop most of a ballroom where they stand. He refuses to
@@ -523,7 +523,7 @@ something unbeatable while deliberately not using his weapon), let them notice.)
 
 **Roleplaying Vell:** courteous, brief, and finished. Every conversation with Vell ends
 when he decides, somehow without rudeness. He answers questions with smaller
-questions. He is immune to every lever: bribery, flattery, threat, charm. Make
+questions, and he is immune to every lever: bribery, flattery, threat, charm. Make
 every check to move Vell a DC 25 Charisma (Deception, Intimidation, or Persuasion)
 check, and let even a success buy honesty rather than compliance (his quote, below). Characters who shadow
 him find only preparations: a walked garden, a tested gate, a purchased boat. All
@@ -551,12 +551,12 @@ language the night speaks: he moves the way the Uninvited move, arriving,
 not running, and he holds the Radiant, a killer nothing else tonight can stop, alone, barely, long enough. Any character who
 has watched the three all night understands without being told: whatever they
 are, he is the same order of thing, and more of it. The module never explains
-him. The Radiant's one word of hate — *"...You."* — is the entire exposition.
+him. The Radiant's one word of hate — "...You." — is the entire exposition.
 
 **One crack in the ice, if a character earns it** (helps the escape without being
 asked, or shields Veier at real cost): at the river gate, Vell looks back, the
-only time all night, and gives them one sentence. Suggested: *"Twenty years from
-now, when you hear this night has finally mattered — that was you."* Then the
+only time all night, and gives them one sentence. Suggested: "Twenty years from
+now, when you hear this night has finally mattered — that was you." Then the
 water takes him.
 
 **If it comes to steel:** he will not fight if he can avoid it, and he can almost always
@@ -573,7 +573,7 @@ Fractures and full tell-tables are chapter V; their conduct before midnight is h
 
 They arrive with the Movement III crush, and until midnight they do nothing but
 attend the ball. This is the thing to play correctly: **they are people, and
-good company.** They eat. They drink and praise the vintage. They converse with
+good company.** They eat, and drink, and praise the vintage. They converse with
 antique courtesy and dance in a style centuries out of fashion, and a guest
 who spends ten minutes with one walks away charmed, having learned nothing and
 feeling obscurely that they were the one being kind.
@@ -588,26 +588,26 @@ rite in the chapel, the cradle-song at the east wing doors; the Radiant's
 antique blessing over the food, his warmth on the subject of service; the
 Hollow's flat answers and his hunger, watching the kitchen family belong to each
 other — are the **tells** that arm the Fractures, and chapter V lays them out as
-a table with places and times. Salt them generously. Every tell a character
+a table with places and times. Salt them generously: every tell a character
 witnesses is a person glimpsed through a mask, and at midnight each one becomes
 a key.
 
 **If it comes to steel:** they cannot be beaten tonight, and their blocks in chapter X
-say exactly why. They can be delayed (cleverness buys Delay far faster than damage
+say why. They can be delayed (cleverness buys Delay far faster than damage
 does; see chapter V, "Buying Time"), and ward-fire, the leash and the Fractures change
-outcomes. That is the complete list. Their Attendant, below, is another matter.
+outcomes. That is the complete list; their Attendant, below, is another matter.
 
 ### The Attendant — the Quiet Guest
 *A great house's attendant, by its clothes: a cloak folded over one arm and a cup held
 ready for a master nobody at the ball can find. It came in with the early guests.*
 
 *DM only: the Attendant is a Namak-Zai. The module never uses the word at the table
-and never says more about what that is.* It is a made thing, not a born one, and it
-serves the same master as the three gray masks. It came through with them. Players
+and never says more about what that is.* It is a made thing, not a born one, serving
+the same master as the three gray masks, and it came through with them. Players
 need never hear the name; "the Attendant" is enough.
 
-**Wants:** nothing. It has orders. Before midnight the order is to watch. After
-midnight it is *keep the three from being interrupted*. **Fears:** nothing; it has no
+**Wants:** nothing; it has orders. Before midnight the order is to watch, and after
+midnight it is to keep the three from being interrupted. **Fears:** nothing; it has no
 feelings to fear with. **Secret:** it has spent centuries doing nothing, and it is
 rusty.
 
@@ -617,8 +617,8 @@ Asked whom it serves, it names no one, and looks around, briefly, for the master
 supposed to have.
 
 It has **three habits**, and they are how the party beats it at
-midnight: *it stares at worked crystal and light*; *it keeps a cup and cloak ready for
-a master who is not there*; *it follows music that changes*. Chapter IV shows one habit
+midnight: it stares at worked crystal and light; it keeps a cup and cloak ready for
+a master who is not there; it follows music that changes. Chapter IV shows one habit
 in each of Movements I, II, IV and V, visible and deniable, and a player who says one out loud before anything
 explains it has read an omen (Table I–3).
 
@@ -632,12 +632,12 @@ to find a character with a blade out and nobody in front of them.
 **At the Unmasking** it drops the pretense, sets the cloak and the cup down on the
 nearest table, and takes its place by the Uninvited (chapter V has the read-aloud).
 
-**Roleplaying the Attendant:** it speaks only when spoken to. It
+**Roleplaying the Attendant:** it speaks only when spoken to, and it
 has no manners and no malice. Everyone who is not interrupting the three is furniture
 to it, and a creature that stops interrupting stops being its business.
 
 **If it comes to steel:** stat block **The Attendant**, chapter X; card **S14**, chapter
-IX, the night's boss. It has two states. **Idle** is its default: it is rusty, easily
+IX, the night's boss. It has two states, and **Idle** is its default: it is rusty, easily
 distracted, and cannot be bothered with its own magic. It turns **Focused** at the start of
 any of its turns, once the party has become a real interruption, if one of the three
 in the scene has no Delay and glances at it and at the party. Focused, it is devastating.
@@ -647,7 +647,7 @@ until one of the three glances at it again. An argument that the party is not, s
 interrupting is one more distraction, never a way to end the fight by itself. The fourth broken focus of the night sends
 it off to stand at a window and watch the fires.
 Driven to 0 Hit Points, it loses interest in being here and steps back into the
-shadow. It leaves no body. Anyone it drops is only knocked down (see chapter V,
+shadow, leaving no body. Anyone it drops is only knocked down (see chapter V,
 "Down, Not Out"): it removes interruptions, and it does not hunt.
 
 ### Tavva — the Other Thief
@@ -673,7 +673,7 @@ unmemorable performance in the palace, and she would be
 offended to learn it. She fights only to leave, bargains fast and
 honestly when cornered, and abandons any prize that starts costing blood. Her
 crew's three sightings are in chapter IV; the raid itself is in chapter V. Caught
-and held, tonight or by the inquest, she is a gold mine of exactly the wrong
+and held, tonight or by the inquest, she is a gold mine of all the wrong
 information: she can prove she planned the gallery job for a season, which makes
 her the inquest's most convenient scapegoat, and she knows it before her
 questioners do. *(Stat blocks: **Tavva**, **Gallery Knife**, chapter X. Fight cards S2 and S5, chapter
@@ -710,13 +710,13 @@ arguments than the sword does. Full fight on **card S3**, chapter IX;
 stat blocks **Bought Sergeant**, **Bought Captain** and **Bought Blade**, chapter X.*
 
 ### Sergeant of the Bought — the One Reading the Room
-*Gray wool, cut plainly, the company's mark at the shoulder. A case chained at the
-hip, produced more readily than steel.*
+*Gray wool, cut plainly, with the company's mark at the shoulder and a case chained at
+the hip, produced more readily than steel.*
 
-**Wants:** the contract satisfied, or voided. Either ends the fight and he does not
-much mind which. **Fears:** nothing about tonight. He fears a company that breaks
+**Wants:** the contract satisfied, or voided; either ends the fight, and he does not
+much mind which. **Fears:** nothing about tonight; what he fears is a company that breaks
 terms, because that is a company nobody hires again. **Secret:** he has not read the
-Second Clause. Only the captain has.
+Second Clause; only the captain has.
 
 **Roleplaying the Sergeant:** as someone doing a job he has done a hundred times, in a city that is
 on fire for reasons that are not his business. He opens by naming the terms aloud
@@ -726,9 +726,9 @@ arguments than the sword does.
 **The negotiation surface, printed:**
 
 - **What he wants:** to fulfill the contract and go home.
-- **What shifts him:** proof the employer has broken terms. The named target already
-  gone. A better-paying offer made *in front of his Blades*, which he will take, out
-  loud, because a company that hides its dealings from its own people does not last.
+- **What shifts him:** proof the employer has broken terms; the named target already
+  gone; a better-paying offer made in front of his Blades, which he will take openly,
+  because a company that hides its dealings from its own people does not last.
 - **What deal he honors:** any of them, absolutely, and he will say so before he
   takes it. **He surrenders the field the moment the contract is void.**
 - **Voiding the contract:** a DC 13 Charisma (Persuasion) check; see card S3.
@@ -736,15 +736,15 @@ arguments than the sword does.
 **If it comes to steel:** stat block **Bought Sergeant** (see chapter X); card S3.
 
 ### Captain-under-Contract — the One Who Read It All
-*Older than the sergeants and quieter than the Blades. The coat is very good. The
+*Older than the sergeants and quieter than the Blades. The coat is very good, and the
 scar is older than the coat. The chain on the case has been replaced more recently
 than the case.*
 
 **Wants:** the company's reputation intact at dawn. That is the whole of it, and it
 explains everything he does tonight. **Fears:** exactly one thing: that somebody has
 used the Bought's name for something the Bought would not have signed, which he began
-to suspect around the time the second district caught. **Secret:** the Second Clause.
-*If a woman in Thenya wool comes out the front, hold her, and send word to the river.*
+to suspect around the time the second district caught. **Secret:** the Second Clause:
+"If a woman in Thenya wool comes out the front, hold her, and send word to the river."
 He does not know who she is or why, and he has been thinking about it all night.
 
 **Roleplaying the Captain:** a man of business who has been shot at, and it shows in both directions.

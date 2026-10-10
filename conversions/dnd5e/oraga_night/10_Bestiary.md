@@ -34,7 +34,7 @@ default, and most of these people would rather be anywhere else.
 **The palace's two mercies**, which several blocks refer to:
 
 - **Knocked out, not killed.** A creature reduced to 0 Hit Points by an attack
-  marked *detain* (the honor guard, the sect guard, the Church Wardens; a Bought Blade on a
+  that detains (the honor guard, the sect guard, the Church Wardens; a Bought Blade on a
   contract to detain leaves a creature at 1 Hit Point with the Grappled condition
   instead, see its *To the Terms*) is **Unconscious and Stable** instead of dying. Before
   midnight it wakes in the gatehouse cell at the start of the next Movement, and
@@ -127,11 +127,11 @@ honest (Armor Class, Hit Points, attacks that would end most characters at this
 table in one turn), so that a player who reads the numbers understands what they are
 standing in front of. Then the blocks close every door a clever table will try.
 
-They close them in the fiction. Something holds each of the three on
+They close them in the fiction: something holds each of the three on
 a leash that runs east. That leash holds their lives, minds and
 shapes, and it pulls them home when their work is done or at the last bell, whichever
 comes first. Say that at the table when a player reaches for the spell, and then say
-what the spell bought. Most good ideas buy something. What they buy is **Delay**
+what the spell bought. Most good ideas buy something, and what they buy is **Delay**
 (see chapter V, "Buying Time"): each point costs one of the three a turn of movement
 toward their errand, and every point is spent on somebody's life.
 
@@ -239,7 +239,7 @@ between one and their errand. From then on, at the start of each of its turns, i
 it, then at the party, and that is enough. A distraction breaks its focus (*Can Be
 Distracted*), but only until its next turn. Delay on every one of the three in the
 scene keeps it Idle. Say it out loud when it happens, and say its state every round
-after that: *locked on you*, or *drifting*.
+after that: "locked on you," or "drifting."
 
 ***Literal Orders.*** Its order is to keep the three from being interrupted. It acts
 only against a creature that has attacked, hindered or interfered with one of the
@@ -257,8 +257,8 @@ trick a round**: once anyone has tried, nobody else can until the next round, an
 Help doesn't apply. Playing the trick out in character adds +2, and using one of its
 three habits the party has seen adds +2 (+4 at most). A trick already tried on it
 tonight gets no bonus and has Disadvantage; the same trick never works a third time.
-Its habits: *it stares at worked crystal and light; it keeps a cup and a cloak ready
-for a master who isn't there; it follows music that changes.* A success against it while
+Its habits: it stares at worked crystal and light; it keeps a cup and a cloak ready
+for a master who isn't there; it follows music that changes. A success against it while
 it is Focused **breaks its focus** until the start of its next turn; on a success by 5 or
 more it loses that turn as well. A success while it is Idle makes the distractor
 **furniture** to it for the rest of the scene: it ignores that creature, as if it had never
@@ -450,7 +450,7 @@ cousin uses this before it uses steel, and only somewhere a guard can't see.
 
 **Traits**
 
-***Detain and Expel.*** The guard's attacks *detain*: a creature it reduces to 0
+***Detain and Expel.*** The guard's attacks detain: a creature it reduces to 0
 Hit Points is Unconscious and Stable, and wakes in the gatehouse cell without its
 mask or its invitation.
 
@@ -667,7 +667,7 @@ miss.
 > **Tells.** It opens by reading the contract's terms aloud. This is not a bluff; it
 > is how the company works.
 > **Breaks.** When Bloodied it calls the Blades back to the boundary and starts
-> offering terms out loud, still fighting. It surrenders the field the moment the
+> calling out terms, still fighting. It surrenders the field the moment the
 > contract is void (payment withdrawn, terms broken by the employer, or the named
 > target gone), says so, and expects to be believed.
 > **Nastier.** A veteran holds the gate: use the **Veteran Bought Sergeant** block.
@@ -696,7 +696,7 @@ miss.
 
 **Traits**
 
-***For Questioning.*** The warden's attacks *detain*. The Church wants people it can
+***For Questioning.*** The warden's attacks detain. The Church wants people it can
 ask things of, and a dead guest answers nothing.
 
 ***Keepers of the Word.*** The written word belongs to the Church. A warden has
@@ -772,8 +772,8 @@ Advantage against.
 
 ***Step Aside.*** The knife takes the Disengage or Hide action.
 
-> **Wants.** The job done and the fee collected. Tonight the job is *what the chief
-> will say at midnight*, and after the two plates, *who eats off the second one*.
+> **Wants.** The job done and the fee collected. Tonight the job is what the chief
+> will say at midnight, and after the two plates, who eats off the second one.
 > **Tells.** Lips moving at every name Corval calls. The same good coat
 > wherever Corval goes. The one man in the Audience Hall line not rehearsing a
 > question. The Circle's man, where no guest has any reason to be.
@@ -886,7 +886,7 @@ attack roll. *Response:* The duelist makes one Rapier attack against it.
 > **Wants.** A Boranis seen drawing first. Lord Draunel one seat closer, without
 > anyone seeing him want it.
 > **Tells.** Young men laughing a little too near the wrong people. A cup going over
-> at the wine court, and a sentence about *the missing year* said a little too
+> at the wine court, and a sentence about the missing year said a little too
 > loudly: the second jostle tonight, and the same duelist.
 > **Breaks.** When the challenge is refused in front of witnesses (which is a loss
 > they can't fight past), when Lord Draunel withdraws them, or the first time one of
@@ -1060,7 +1060,7 @@ kinsman's next turn has Advantage.
 > **Tells.** They keep counting each other, and the loudest keeps looking back at
 > the principal he came in behind.
 > **Breaks.** Any kinsman hit steps back out of the brawl and shouts instead of
-> swinging. The whole thing stops the instant an adult of either house arrives and is
+> swinging. The brawl stops the instant an adult of either house arrives and is
 > obeyed — which a player character can be.
 > **Nastier.** A principal is still swinging: a kinsman with 22 HP (4d8 + 4), and
 > while he stands, the others don't step back when hit.
@@ -1213,8 +1213,8 @@ doors, walls and barricades do not reliably hold him. Deep Boranis ward-crystal 
 > **Wants.** To stop. Tonight, only that nobody leaves: he holds the main doors and
 > herds the crowd.
 > **Tells.** *Before midnight:* stands always beside a different exit; answers small
-> talk with devastating flatness (asked if he is enjoying the festival: *"It ends
-> the same whether I do"*); watches the servants who belong to each other, Anha and
+> talk with devastating flatness (asked if he is enjoying the festival: "It ends
+> the same whether I do"); watches the servants who belong to each other, Anha and
 > her kitchen family, with something like hunger. *During the attack:* holds but
 > never advances; flinches from ward-fire the way a tired man flinches from being
 > asked to try.
@@ -1321,7 +1321,7 @@ up to its Speed toward him, or toward the way out he is pointing at.
 
 > **Wants.** A pleasant evening, and nothing worth a fight.
 > **Tells.** Losing sentences, glancing at doors, standing with his back to walls.
-> *"Old instincts. Crowds."* His hands say otherwise.
+> "Old instincts. Crowds." His hands say otherwise.
 > **Breaks.** Corro never fights. If a fight comes near him he leaves it, and his
 > bodyguards go with him.
 > **Nastier.** None. Corro has no secret; that is the point of him.
@@ -1504,14 +1504,14 @@ end. *(Check and DCs: The Fractures, above.)*
 > witnessed to count. He re-stages the kill if nobody saw.
 > **Tells.** *Before midnight:* an antique sign of blessing over the food, in a form
 > Prelate Kovaun recognizes and nobody living uses; lights up when conversation
-> turns to duty, and asks a guest, warmly, *"Whom do you serve?"*; joins the Dead
+> turns to duty, and asks a guest, warmly, "Whom do you serve?"; joins the Dead
 > Dance and cannot resist dancing beautifully, where the light falls. *During the
 > attack:* kills are staged, offered upward, like rites; he visibly slows and poses
 > when watched.
 > **Breaks.** Never. Only guilt slows him, and only the leash stops him.
 > **Nastier.** None needed. If the table wants it, give him a fourth Offered Hands
 > attack when no one is watching.
-> *A person — warm, courtly, genuinely delightful on the subject of duty. One of
+> *A person — warm, courtly, delightful on the subject of duty. One of
 > three. Chapter V, and the Crossing.*
 
 ---
@@ -1549,7 +1549,7 @@ action.
 
 ***Knife.*** *Melee Attack Roll:* +3, reach 5 ft. *Hit:* 3 (1d4 + 1) Piercing damage.
 
-***Name the Price.*** Callun names, out loud, what it would cost to end this. It is
+***Name the Price.*** Callun names what it would cost to end this. It is
 a real price and she will pay it or accept it. No creature that heard her needs a
 check to believe it.
 
@@ -1561,7 +1561,7 @@ instead.
 
 > **Wants.** Raunu's next decree; after the two plates, whether there is an heir.
 > **Tells.** Comparing margins with Corro in the B3 alcove. Compliments, a quiet
-> question — *what did he say?* — and coin behind it.
+> question — "what did he say?" — and coin behind it.
 > **Breaks.** The moment her people's work would be seen as hers, or would draw
 > blood she did not price in, she calls them off and pays whoever makes it go away.
 > **Nastier.** She has already bought whatever the party is trying to sell her.
@@ -1590,7 +1590,7 @@ instead.
 
 **Traits**
 
-***Subdue and Eject.*** The guard's attacks *detain*. It does not kill guests unless
+***Subdue and Eject.*** The guard's attacks detain. It does not kill guests unless
 guests are killing.
 
 ***Numbers.*** A guard who sees brandished steel whistles, and four more Sect Guards
@@ -1650,7 +1650,7 @@ creature that can see Tavva when the charge fires can use its Reaction to move w
 her, up to its own Speed, and keep her in sight. If nobody does, she is gone.
 
 ***Bloodied.*** When Tavva is first Bloodied, she uses Release a Charge on her next
-turn (a Bonus Action). If she has none left, she starts bargaining, out loud, between
+turn (a Bonus Action). If she has none left, she starts bargaining between
 blows.
 
 **Actions**
@@ -1785,7 +1785,7 @@ miss.
 > **Tells.** It opens by reading the contract's terms aloud from the case chained to
 > its hip. This is not a bluff; it is how the company works.
 > **Breaks.** When Bloodied it calls the Blades back to the boundary and starts
-> offering terms out loud, still fighting. It surrenders the field the moment the
+> calling out terms, still fighting. It surrenders the field the moment the
 > contract is void (payment withdrawn, terms broken by the employer, or the named
 > target gone), says so, and expects to be believed.
 > **Nastier.** It has spoken Hold the Terms before the party reaches the wicket: the
@@ -1904,7 +1904,7 @@ miss.
 > **Breaks.** Vorlain does not start fights tonight and does not finish them; he
 > ends them, fast, and walks away. He never raises a hand against his brother, and
 > after midnight he is hauling guests out of the burning banquet gallery, to
-> everyone's permanent confusion including his own.
+> the confusion of everyone, himself included.
 > **Nastier.** Sober and cornered, he remembers exactly how the missing year began:
 > he starts the fight with Brief and Efficient already paid for, and Essin at his
 > side.
@@ -2008,9 +2008,9 @@ doors, walls and barricades do not reliably hold her. Deep Boranis ward-crystal 
 > **Wants.** Raunu Boranis, on the dais, and nothing else until that is done.
 > **Tells.** *Before midnight:* watches the young pages at the feast a beat too long;
 > leaves a mourner's offering in Elanna's niche in a rite centuries out of date
-> (Mother Sella can say exactly how out of date); lingers at the east wing doors
-> humming a cradle-song no one living knows; tells a dance partner, kindly, *"You
-> dance like my daughter would have."* *During the attack:* goes still at the sound
+> (Mother Sella can say how far out of date); lingers at the east wing doors
+> humming a cradle-song no one living knows; tells a dance partner, kindly, "You
+> dance like my daughter would have." *During the attack:* goes still at the sound
 > of a child crying; under the carved tears, the mask is a woman's face. In a fight
 > she arrives without winding up, and whoever is between her and the dais is the
 > target.
@@ -2019,7 +2019,7 @@ doors, walls and barricades do not reliably hold her. Deep Boranis ward-crystal 
 > the party's third round against her, she makes three Strength Like a Fact attacks
 > a turn, and every hit is loud with grief.
 > *Her resistances are not armor but wrongness: blades land and matter less than they
-> should. A person — gracious and quietly sad, who praised the wine and danced beautifully.
+> should. A person — gracious, a little sad, who praised the wine and danced beautifully.
 > She leads. One of three. Chapter V.*
 
 ---
@@ -2047,16 +2047,16 @@ on harm to her; cut away.
 
 **Minister Corval** — *Medium Humanoid (Human).* AC 10 · HP 9 · Speed 25 ft. Thin,
 upright, old, magnificent under pressure, and no use at all in a fight. Bribing him
-is **impossible**. There is no check; tell the players so. Deceiving him about household
+is impossible. There is no check; tell the players so. Deceiving him about household
 matters takes a DC 20 Charisma (Deception) check; about anything else he is too tired to check.
 
-**Anha** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. The under-cook. She
+**Anha** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. The under-cook, who
 talks to family or kindness, not to pressure. *The Other Way:* in the service
 passages she is never lost, and a creature following her through them moves at full
 Speed through smoke and dark that slows everyone else.
 
 **Mother Sella** — *Medium Humanoid (Human).* AC 10 · HP 9 · Speed 30 ft. Immune to
-the Frightened condition; acceptance is the whole doctrine of her order. She will
+the Frightened condition; acceptance is all the doctrine her order has. She will
 not raise a hand, and she will not leave anyone who is dying alone.
 
 **Otta Vesh** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. The aftermath's
@@ -2100,17 +2100,17 @@ Poison, Psychic, Radiant, Slashing, Thunder
 His forgettability is a gentle, constant pressure on the minds around him; he reads
 most guests as easily as faces, and can steer a weak mind outright. A creature that
 studies him directly may make a DC 25 Wisdom (Insight) check. On a success it feels
-the nudge, and learns the most dangerous thing at the ball: *someone is editing you.*
+the nudge, and learns the most dangerous thing at the ball: someone is editing you.
 
 ***Courteous and Finished.*** Every conversation with Vell ends when he decides,
 somehow without rudeness. Moving him takes a DC 25 Charisma (Persuasion) check for
 bribery, flattery or charm, a DC 25 Charisma (Intimidation) check for a threat, or a
 DC 25 Charisma (Deception) check for a lie. Even a success buys honesty rather than
-compliance: *"You are
-observant. Enjoy the ball."*
+compliance: "You are
+observant. Enjoy the ball."
 
 ***The Wrapped Sword.*** An enormous broadsword, wrapped in white cloth, across his
-back. *"An inheritance."* He never touches it and never unwraps it, and this block
+back. "An inheritance." He never touches it and never unwraps it, and this block
 does not give it numbers. What it would do unwrapped is in chapter VII, for the DM
 alone.
 
@@ -2143,14 +2143,14 @@ saw him hurry.
 > **Wants.** The river gate open at midnight, and no one ever remembering his face.
 > **Tells.** Arrived early and entirely unremarkably. Walks the gardens once. Stands
 > a while at the river gate in Movement V. Treats the three gray masks with the
-> respect of a man who knows exactly what they cost.
+> respect of a man who knows what they cost.
 > **Breaks.** He does not. He leaves.
 > *At the Crossing he holds the Radiant, alone, barely, long enough, with the sword
 > still bound. That is not a fight the dice resolve; chapter V runs it. Cast: chapter
 > VII.*
 
 The block exists to tell you one thing: **Master Vell does not fight, and no party at
-this ball can beat him.** He has no attacks. He can be hit, and the numbers above are
+this ball can beat him.** He has no attacks; he can be hit, and the numbers above are
 real, but they are set so that a party of 4th or 5th level cannot drop him before
 the boat clears: against AC 20, his Reaction and resistance to every damage type, four
 5th-level characters land roughly 15 damage a round, and he has 285 Hit Points. Long
@@ -2169,12 +2169,12 @@ not, trained or not. Releasing one does not make its bearer a caster.
 
 - **Releasing a charge** takes the Magic action (an action, at a 2014 table), and no
   check. The charge is spent. Charges need no attunement.
-- **The six every Orthaen knows** are *common*: minor, local, brief. A gifted Orthaen
+- **The six every Orthaen knows** are common: minor, local, brief. A gifted Orthaen
   with the Orthaen Gift can grow one in a day of downtime from 25 GP of raw crystal,
   one at a time, and no more than one a week: a gift is not a mint (see chapter III).
   Price: 50 GP, which is a season's wages in the wrong district.
 - **The house and the trade grow larger ones.** The four below the common list are
-  *uncommon*, and nobody at the ball grew them with a gift alone. Price: 200 GP, when
+  uncommon, and nobody at the ball grew them with a gift alone. Price: 200 GP, when
   they can be bought at all.
 - **Chancy releases.** When the fiction makes a release uncertain (fumbled in the
   dark, jostled in a crowd), the bearer makes a DC 13 Charisma check; on a failure,
@@ -2230,7 +2230,7 @@ before it is a reward.*
   property; taking them is theft from House Boranis, and the room remembers faces.
 - **The contract case** *(S3).* A case of writing chained to the sergeant's hip, in a
   country where the Church owns the written word. It
-  holds the Bought's three tasks. The inquest's best evidence, and the only mortal
+  holds the Bought's three tasks: the inquest's best evidence, and the only mortal
   thread that leads east. Not magic, and worth more than anything magic at the ball.
 - **The company's purse** *(S3).* The half-fee, paid in old coin — 3d6 × 10 GP by
   weight. Chapter V says what the coin means, and what it does not.

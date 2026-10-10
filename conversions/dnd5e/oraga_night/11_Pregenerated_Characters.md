@@ -26,7 +26,7 @@ One of them, **Dassa, is ungifted**, because one Orthaen in five is and the tabl
 see what that looks like on a sheet. Each wears the armor they can dance in, under
 their festival clothes, as chapter IV allows.
 
-**With four players.** The module is built for four. Leave out **Andra or Pello**. Leave out
+**With four players.** The module is built for four, so leave out **Andra or Pello**. Leave out
 Ilesse only if another player takes Agenda 4, *The Cousin's Errand*: it is the one
 agenda that reaches the east wing, and chapter V leans on it.
 
@@ -35,7 +35,7 @@ with Heroic Inspiration and regains it on a Long Rest; **Skillful**: one extra s
 listed; **Versatile**: one origin feat, listed (the gifted take their gift). Size
 Medium, Speed 30 ft., Proficiency Bonus +2. Languages: Common and two
 others the player and the DM agree on. Every guest carries a knife, because everyone at this
-ball does; drawing it is the crime. Crystal charges are consumable magic items.
+ball does; drawing it is the crime. Crystal charges are consumable magic items, and
 Player Handout 3, "Crystal Charges" (chapter VIII), says what each does.
 
 **Masks.** No guest's mask is written down, because a mask is the player's to describe.
@@ -202,7 +202,7 @@ or to be seen trying?*
 
 A lattice-scholar of a quiet Tessarin branch, who has spent three years growing a
 private record of a pattern nobody else believes is there: the mist-tides, the silent
-house, the strange marriage. In a world without books, Andra *is* her research.
+house, the strange marriage. In a world without books, Andra and her research are the same thing.
 
 **Wizard (Evoker) 4** · Human (Orthaen, gifted) · Background: Lattice-Scholar
 
@@ -359,9 +359,8 @@ her?*
 
 A courtier of House Kethaun's border branch, whose family has traded, feuded, and
 married across the Thenya frontier for five generations. Ilesse knew the Nolonaire name
-long before the rest of Rekuzan learned to gossip about it. That is exactly why a
-certain delegation, watched everywhere it goes, has quietly asked for an hour of
-Ilesse's evening.
+long before the rest of Rekuzan learned to gossip about it. That is why a certain
+delegation, watched everywhere it goes, has asked for an hour of Ilesse's evening.
 
 **Cleric (Life Domain) 4** · Human (Orthaen, gifted) · Background: Border Courtier
 
@@ -418,7 +417,7 @@ shaped it, and whether it is holding a working right now.
   level.
 
 **Spellcasting** (Wisdom; save DC 14, attack +6; a sliver of her own warding crystal as
-Holy Symbol, for her spells and her Channel Divinity). Ilesse's spells are what Val'loh calls **Invocation**. What answers her, the
+Holy Symbol, for her spells and her Channel Divinity). Ilesse's spells are what Val'loh calls **Invocation**; what answers her, the
 module does not say, and neither should the sheet.
 - *Slots:* 1st ×4, 2nd ×3
 - *Cantrips:* *Guidance*, *Light*, *Mending*, *Sacred Flame*, *Spare the Dying*; *Resistance*

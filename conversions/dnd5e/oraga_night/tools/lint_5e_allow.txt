@@ -43,5 +43,5 @@
 11_Pregenerated_Characters.md|near_duplicate|**Heritage.** Reads grown crystalwork the way a mason reads a wall|a pregen sheet reprints its Orthaen lineage trait (chapter III) so the sheet stands alone at the table
 10_Bestiary.md|near_duplicate|Orthaen crystal holds finished workings, and a **charge**|Player Handout 3 (chapter VIII) reprints the charge rules for players; the DM's copy in chapter X is the rules home
 10_Bestiary.md|near_duplicate|**Releasing a charge** takes the Magic action|Player Handout 3 reprints the charge rules for players (see above)
-10_Bestiary.md|near_duplicate|**The six every Orthaen knows** are *common*|Player Handout 3 reprints the charge rules for players (see above)
+10_Bestiary.md|near_duplicate|**The six every Orthaen knows** are common|Player Handout 3 reprints the charge rules for players (see above)
 10_Bestiary.md|near_duplicate|**Chancy releases.** When the fiction makes a|Player Handout 3 reprints the charge rules for players (see above)

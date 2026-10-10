@@ -134,8 +134,8 @@ helps: (see chapter V, "Down, Not Out"), (card S2), (area B9), (Table I–3).
   in. A sidebar never holds read-aloud text.
 - **DM Note —** table craft.
 - **Troubleshooting —** a problem that comes up at the table, and what to do about it.
-- **⟨If History Breaks⟩** the places where the characters can genuinely overturn the
-  recorded outcome.
+- **⟨If History Breaks⟩** the places where the characters can overturn the recorded
+  outcome.
 - **What [Name] Says** the questions a guest is likely to be asked, with the answers.
 - **Wants, Tells, Breaks** and **Nastier** the lines on a fight card that say what a
   foe is after, how to read it, when it quits, and how to make it harder.
@@ -154,7 +154,7 @@ below).
 
 The evening is divided into seven **Movements**, like a dance program. Each has
 scheduled events that happen whatever the characters do, open time to chase agendas, and
-one **omen**: a detail that is quietly wrong. For most of the evening this is a
+one **omen**: a small detail that is wrong. For most of the evening this is a
 social adventure: the characters scheme, charm, eavesdrop, trespass and trade
 favors under two hundred masks. Then, at midnight, the masks come off, and three
 guests keep theirs on. The last two Movements are a different game: darkness, fire,
@@ -164,7 +164,7 @@ terror, and choices about who to save.
 
 - **I. The Receiving Line.** Corval receives every guest by name. Nobody is disarmed,
   the hosts don't appear, and the honor guard faces inward.
-- **II. The Empty Rooms.** Vorlain holds court. The factions circulate, and the host
+- **II. The Empty Rooms.** Vorlain holds court, the factions circulate, and the host
   still has not come down.
 - **III. The Summons.** Raunu is glimpsed on the high gallery, and Corval brings guests
   to him in the Audience Hall (B4), at least one of the characters among them.
@@ -177,7 +177,7 @@ terror, and choices about who to save.
 - **VII. The Longest Night.** Fire and rescue. The Bought hold the outer gate (S3)
   until it is decided, and then the last bell rings.
 
-The minutes below are for four players. They are a budget, not a stopwatch. Move on
+The minutes below are for four players, and they are a budget, not a stopwatch: move on
 when the table's energy says so. The budget tells you when you have spent too long.
 
 **Table I–1: The Runtime**
@@ -198,17 +198,17 @@ when the table's energy says so. The budget tells you when you have spent too lo
 
 **Two checkpoints.** If the toast has not happened by **2:15**, it happens now: Raunu is
 standing at the high table, and whatever the characters were doing can wait a Movement.
-If the bells have not rung midnight by **3:15**, they ring now. The payoff the whole
-night builds toward is Movements VI and VII. Protect them.
+If the bells have not rung midnight by **3:15**, they ring now. Movements VI and VII are
+what the night builds toward, so protect them.
 
 **What to leave out, in order, when you are behind:** B13; the Undercurrents nobody is
 already on (chapter IV marks them *(if you have time)*); a second fight card in any one
 Movement; S1; the east-wing scene, **unless somebody carries Agenda 4**. Do not cut the
-gate. It is the only scene the ending needs, and the fight in it is still optional.
+gate: it is the only scene the ending needs, and the fight in it is still optional.
 
 ## The First Five Minutes
 
-Nothing before the street is played. It is picked, in about five minutes, with the
+Nothing before the street is played; it is picked, in about five minutes, with the
 cards on the table.
 
 **Before anyone sits down,** agree on lines and veils ("Safety and the Table", below),
@@ -232,21 +232,21 @@ and put out the pregen sheets, the agenda cards and the invitation.
 |---|---|---|
 | **The Invited** | Sent for by name, or serving someone who was. The card came under a chief's own hand — one of perhaps forty pieces of writing in Rekuzan tonight | A House's Long Game · The Prelate's Question |
 | **The Entourage** | Somebody invited needed a companion, a bodyguard, a translator or a witness, and chose you. The best vantage point in the palace and the worst position to act from | The Vanished Servant · bodyguard to another player character |
-| **The Discarded Invitation** | A genuine card with someone else's name on it — bought, found, taken, or handed over by someone who wanted you to have exactly this problem. The custom protects you until midnight | The Unpaid Debt · The Story of a Lifetime |
+| **The Discarded Invitation** | A genuine card with someone else's name on it — bought, found, taken, or handed over by someone who wanted you to have this problem. The custom protects you until midnight | The Unpaid Debt · The Story of a Lifetime |
 | **Hired for the Night** | Paid staff: musician, cook, footman, cellar hand. A servant's freedom of the halls and a servant's invisibility. You walk up the street with the others and go in through the kitchens (B10) | The Vanished Servant · The Circle's Reckoning |
 | **The Patron's Errand** | A faction needed hands it could not be traced to. Your agenda is pre-loaded and your fee half-paid — and your patron is also a snake (see chapter IX) | The Circle's Reckoning · The Prelate's Question · The Cousin's Errand |
 | **The Wrong Place, Deliberately** | Your own reason to be inside; the ball is your cover. Pick what you came for from something the palace already holds (see chapter IV) | The Unpaid Debt |
 
-**Then tell the table two things,** and only these two. *This is a glittering party
-that goes terribly wrong.* And: *some of what happens tonight answers to a sword, and
-some of it does not. When it does not, the game will show you what your time bought.*
+**Then tell the table two things,** and only these two. "This is a glittering party
+that goes terribly wrong." And: "Some of what happens tonight answers to a sword, and
+some of it does not. When it does not, the game will show you what your time bought."
 Do not tell them how it goes wrong.
 
 **Then read the street** (see chapter IV, area B0). The night has started.
 
 ## Checks, Inspiration, and the Ladder
 
-This module is mostly talk, and talk runs on ability checks. The whole book uses one
+This module is mostly talk, and talk runs on ability checks, all of them on one
 ladder. Learn it once here; every chapter prints its DCs against it.
 
 **The DC Ladder**
@@ -282,7 +282,7 @@ Human characters (and every character here is human) begin with it and regain it
 Long Rest, which tonight they will not get. *At a 2014 table, this is plain
 Inspiration, and it grants Advantage instead of a reroll.*
 
-**Rests.** There is no Long Rest tonight. A character who spends a Movement in the
+**Rests.** There is no Long Rest tonight; a character who spends a Movement in the
 chapel (B6) may take a Short Rest, the only one the ball offers.
 
 ## What the Night Pays
@@ -290,14 +290,14 @@ chapel (B6) may take a Short Rest, the only one the ball offers.
 Clever and peaceful play is paid on the page here, rather than left to your
 generosity in the moment. You will be tired by Movement VI, and a reward
 you have to remember to invent is a reward that does not happen. Because Heroic
-Inspiration is have-it-or-not, the list is short. Each award goes to one character.
+Inspiration is have-it-or-not, the list is short, and each award goes to one character.
 
 **Table I–3: Heroic Inspiration, Printed**
 
 | When | To whom |
 |---|---|
 | **An agenda completed** | That character, on the spot |
-| **The pattern said out loud** — an omen read before anything explains it (the quiet guest's habits count), or an Undercurrent's find | The character whose player says it; once per Movement |
+| **The pattern named aloud** — an omen read before anything explains it (the quiet guest's habits count), or an Undercurrent's find | The character whose player says it; once per Movement |
 | **A fight ended by an out** — the guards talked down, the toll paid, the thieves let go with something they can afford to lose, one snake turned on another | The character who took the out |
 | **A companion hauled up** at midnight (see chapter V, "Down, Not Out") | The one who hauled, the first time in the night |
 | **The Attendant distracted** — the first attempt of the night, whether or not it works, and any natural 20 (card S14) | The one who tried |
@@ -329,8 +329,8 @@ It starts from one fact: **Raunu Boranis has invited every enemy he has into his
 house.**
 The Merchant's Circle, the Church, House Draunel, his own brother's people, the Phern
 money. And the Thenya, who do not hate him at all and have come to see whether he has
-made a prisoner of their kinswoman. Every great house hired extra swords this season.
-*House Boranis hired none.*
+made a prisoner of their kinswoman. Every great house hired extra swords this season,
+and House Boranis hired none.
 
 Everyone at this ball wears a knife; drawing it is the crime. So for five Movements the
 snakes coil. Each faction has a **threat line**: a scheme that starts politely, shows
@@ -370,7 +370,7 @@ without pushing.
 
 **The seating feud (S1)** offers itself: it is loud, it is nearby, and it is two drunk
 men about to embarrass their houses. A character with any standing at all will
-be looked at by the people around the benches. That look is the invitation.
+be looked at by the people around the benches, and that look is the invitation.
 
 **The quiet word (S6)** is the early steel for a table that cannot wait. Anyone who
 presses Vorlain, or asks around about the missing year, gets invited by one of Essin's
@@ -385,11 +385,12 @@ because he certainly is.
 **The snakes** offer themselves one tell at a time. Show a tell once, plainly, the way
 you show an omen, and let the table decide whether it is their business. After
 midnight the same factions are in the dark with steel out, and a party crossing the
-palace will walk past them. Walking past is always an option. Say so.
+palace will walk past them. Walking past is always an option, and the table should hear
+that from you.
 
 **The Attendant (S14)** is the climax's boss card, and it fires only if the party gets
 in an Uninvited's way enough to be worth distracting. Before midnight it is only an
-oddity to notice. It will not fight until the bells.
+oddity to notice, and it will not fight until the bells.
 
 **The gate (S3)** cannot be avoided and does not need offering. Two hundred people are
 trying to leave through a gate barred from the far side, and the party is among them.
@@ -413,15 +414,15 @@ The Bought hold it. The fight is optional; the gate is not.
 Play the first five Movements warm. The wine is good, the music is better, the gossip
 is excellent, and the political fencing is genuinely fun. House Boranis, silent for two
 years, has thrown open its doors with strange, sincere generosity. Let the table
-enjoy the party. Their enjoyment is the ballroom floor you will drop out from under
+enjoy the party: their enjoyment is the ballroom floor you will drop out from under
 them.
 
 The wrongness arrives on schedule, one omen per Movement, always deniable. A merchant
 who keeps glancing at doors. A falconry mews screaming at nothing. A charming guest
-whose turns of phrase are centuries out of fashion. Never underline an omen. Say it
+whose turns of phrase are centuries out of fashion. Never underline an omen: say it
 once, plainly, and move on. Players who notice will assemble the pattern themselves,
 and players who assemble the pattern earn the best reward this night has: the chance to
-act before midnight. The snakes follow the same rule. A tell is shown once, and it is
+act before midnight. The snakes follow the same rule: a tell is shown once, and it is
 always deniable.
 
 When the Unmasking comes, change your voice. Shorter sentences. Fewer adjectives. The
@@ -443,7 +444,7 @@ through play, not against it. Chapter V explains how the night bends toward hist
 without ever taking the dice away from the table.
 
 But it is your table. Sidebars marked **⟨If History Breaks⟩** appear wherever the
-characters might genuinely derail the recorded outcome: saving Raunu, capturing one of
+characters might derail the recorded outcome: saving Raunu, capturing one of
 the Uninvited, stopping the escape at the river gate. Each one tells you what changes
 and how to run forward. A table that saves Raunu Boranis has not played the
 module wrong. It has written its own Val'loh.
@@ -455,7 +456,7 @@ practice, what they came for, what constrains them, who the pale factor is worki
 against them, and why none of it will ever be public. That truth is complete enough to
 run every scene and answer every reasonable player action.
 
-It is not the whole truth. Where the module says *the module does not say*, that is a
+It is not the whole truth. Where the module says "the module does not say", that is a
 load-bearing sentence, not a gap. Raunu's missing year, the full nature of the
 Uninvited's distant master and of what serves him, what the child will one day
 become: these are mysteries the adventure keeps on purpose. Resist the urge to invent
@@ -497,11 +498,11 @@ correcting a player mid-scene costs more than the error did.*
 > Hard feels like taking the fiction seriously.
 >
 > **Answer one: the line's first check is a DC 13 Charisma (Persuasion) or DC 13
-> Wisdom (Insight) check**, and chapter IV says so at B0 for exactly this reason. Set the tier there and let the rest of the night calibrate off
-> it.
+> Wisdom (Insight) check**, and chapter IV prints it at B0 for that reason. Set the tier
+> there and let the rest of the night calibrate off it.
 >
 > **Answer two: an approach across station, behind a mask, is Easy: an ability check
-> using the skill that fits, DC 10.** The custom protects the conversation. That is
+> using the skill that fits, DC 10.** The custom protects the conversation, which is
 > what the masquerade is for, mechanically.
 
 > **Troubleshooting — a near miss is not a failure**
@@ -538,12 +539,13 @@ correcting a player mid-scene costs more than the error did.*
 
 This adventure contains violence erupting inside a celebration, the death of a host in
 front of his guests, and mortal danger near (never to, and never on-screen) a woman in
-late pregnancy and a newborn. Say so before you start. Agree on lines and veils before
+late pregnancy and a newborn. Tell the table before you start. Agree on lines and veils before
 play; the pregnancy is central to the plot and cannot be cut, but every moment of harm
 can be handled by cutaway. This adventure's camera never lingers: when the worst
 happens, it happens at the edge of the frame, glimpsed through a crowd.
 
-The snakes put more steel in the night, and more of it in the dark. The same camera rule applies to them. Nobody's death in a snake fight is
+The snakes put more steel in the night, and more of it in the dark, and the same camera
+rule applies to them. Nobody's death in a snake fight is
 described closer than the table has agreed to.
 
 One tip above all others: **know the cast, not the script.** The night survives any

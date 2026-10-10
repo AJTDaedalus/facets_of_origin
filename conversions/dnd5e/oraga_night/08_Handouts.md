@@ -1,6 +1,6 @@
 # VIII. The DM Sheet, the Palace and the Handouts
 
-*The first two pages are yours: the whole night on two sheets. The third is the palace.
+*The first two pages are yours: everything the night needs, on two sheets, and the third is the palace.
 After those come the Snake Tracker, Where Everyone Stands, and the rumor table, then
 the handouts for the table. Print the first three pages and run the night from them.*
 
@@ -14,7 +14,7 @@ the handouts for the table. Print the first three pages and run the night from t
 
 | Start | Movement | Scheduled | The omen | The quiet guest | Fights to show (chapter IX) |
 |---|---|---|---|---|---|
-| 0:00 | **The street** (10) | Pick character, agenda, hook (chapter I); read B0; *"what does your mask look like?"* | — | — | — |
+| 0:00 | **The street** (10) | Pick character, agenda, hook (chapter I); read B0; "what does your mask look like?" | — | — | — |
 | 0:10 | **I. Receiving Line** (25) | Corval receives by name, from memory; nobody is disarmed; the hosts are absent | Nine honor guards, facing inward | Holds a cup out for nobody | S4 if anyone draws |
 | 0:35 | **II. Empty Rooms** (45) | Vorlain holds court; the factions circulate; still no host | Corro's gift rings, pointing nowhere | Stares at a crystal wall for a full minute | S1 · S6 |
 | 1:20 | **III. Summons** (35) | A glimpse on the high gallery; Corval fetches guests to B4 (≥1 player character; two together once) | Three gray masks Corval cannot account for | — | S6 · Tavva's scout · S1 if held from II |
@@ -23,7 +23,7 @@ the handouts for the table. Print the first three pages and run the night from t
 | 3:00 | *Break* (10) | As the bells ring midnight | | | |
 | 3:10 | **VI. Unmasking** (50) | Lights die **mid-sentence**; the attack; the dais; the Crossing; the leash takes the three once the boat is clear | — | Sets down the cloak and cup; stands by the three | S11 · **S14** if they interfere · S8 · S5 |
 | 4:00 | **VII. Longest Night** (40) | Fire, rescue, the gate; **then** the last bell (at the latest, S3's bell clock); word of other attacks with the sect guard | — | — | **S3** · S12 · S13 · S5 · S14 |
-| 4:40 | **Epilogue** (10) | Chapter V read-aloud; *what do you carry out?*; **5th level** | | | |
+| 4:40 | **Epilogue** (10) | Chapter V read-aloud; "what do you carry out?"; **5th level** | | | |
 
 **Checkpoints:** the toast by **2:15**; midnight by **3:15**. If you are behind, cut B13,
 spare Undercurrents, a second card per Movement, S1, and the east wing only if nobody
@@ -77,8 +77,8 @@ secret**: no faction learns of the child unless a player character tells them.
   turn (succeed by 5 or more: it loses that turn too). A success while Idle makes the
   distractor furniture to it for the scene, and doesn't count. Arguing its orders is one
   more trick. **Fourth broken focus:** it
-  wanders off. 0 HP: gone into the shadow. Say its state aloud: *"It's locked on you" /
-  "It's drifting."*
+  wanders off. 0 HP: gone into the shadow. Say its state aloud: "It's locked on you" /
+  "It's drifting."
 - **Fractures.** Needs one witnessed tell. Action within 30 ft.: an ability check using
   the skill the words fit, DC 18 with one tell, 15 with two or more (the Wept: 15 once
   she has 2+ Delay). A miss by 4 or less still lands and gives 2 Delay, after one blow
@@ -224,7 +224,7 @@ snake.*
 
 **If the table does nothing,** midnight arrives with the Circle at 2, the Church at 2,
 Draunel at 2, Boranis at 1, Phern at 3 and the Thenya at 3. The Thenya spend theirs at
-the half-bell in Movement V (S10). So the only card live in the dark by default is
+the half-bell in Movement V (S10), so the only card live in the dark by default is
 **S11**, plus the gate, the looters and the Attendant if the party interferes.
 
 ## Where Everyone Stands (Movements I–V)
@@ -270,7 +270,7 @@ doors.*
 ## Rumors at the Ball *(DM table)*
 
 *Roll 2d6 in any social scene, or choose. The 2d6 is deliberate: the common rumor
-comes up most. Every rumor is delivered with total confidence. None is confirmed.
+comes up most. Every rumor is delivered with total confidence, and none is confirmed.
 Several cannot all be true, which bothers nobody telling them.*
 
 **Table VIII–8: Rumors at the Ball**
@@ -278,15 +278,15 @@ Several cannot all be true, which bothers nobody telling them.*
 | 2d6 | What they're saying behind the masks |
 |---|---|
 | 2 | He never left. The man who "returned" is the man who never went anywhere — test him on the old days and watch his eyes. |
-| 3 | He walked into the eastern mists and the mists gave him back. That's why they've fallen — they're *empty* now. He brought back what was in them. |
+| 3 | He walked into the eastern mists and the mists gave him back. That's why they've fallen — they're empty now. He brought back what was in them. |
 | 4 | The Church took him for a year of questioning and returned him hollowed. Why else would the Prelate herself attend a house the Church despises? |
 | 5 | He went beneath the palace, where the first Boranis crystal was grown, and slept a year in the root of the house. The walls feed him now. That's why the staff was cut — fewer eyes. |
 | 6 | The Thenya bride is already dead, and tonight's "announcement" will be a changeling got on some serving girl. The Thenya delegation knows — watch how they don't drink. *(Untrue. Veier is alive; see chapter VII.)* |
 | 7 | *(The common one.)* The marriage is coin, plain and simple: the Thenya paid their last treasure for their border, and the recluse wanted an heir nobody could refuse. Everything else is theater. |
-| 8 | Vorlain has never stopped ruling. Raunu is a mask his brother wears when the seat needs a beloved face. Two chiefs, one house — count who the ministers *actually* bow to. *(Untrue. Vorlain gave the seat back and has no plot; see chapter VII.)* |
+| 8 | Vorlain has never stopped ruling. Raunu is a mask his brother wears when the seat needs a beloved face. Two chiefs, one house — count who the ministers actually bow to. *(Untrue. Vorlain gave the seat back and has no plot; see chapter VII.)* |
 | 9 | A Kshalo (one of the eastern river country's people of dreams and the herb-lore of sleep) dreamed him away, and he bargained his way back with something he'll spend the rest of his life paying. The offerings in Elanna's niche? That's the interest. |
 | 10 | He crossed the mountains and saw Mazaa — walked among the godless machines — and came home to make the Orthaen ready for what's coming west. The new decrees are war logistics wearing worker's clothes. |
-| 11 | The staff weren't dismissed. They're still *in* there. Ask yourself why the east wing needs guards on the inside of the doors. *(Untrue. The staff were paid off and relocated; see chapter IV, "Undercurrent B — The Household That Wasn't".)* |
+| 11 | The staff weren't dismissed. They're still in there. Ask yourself why the east wing needs guards on the inside of the doors. *(Untrue. The staff were paid off and relocated; see chapter IV, "Undercurrent B — The Household That Wasn't".)* |
 | 12 | He found something in his year away that told him the day he'll die. Everything since — the pact, the bride, the silence, this ball — is a man setting his affairs in order. *(Deliver this one straight. Let the table sit with it at dawn.)* |
 
 ---
@@ -381,7 +381,7 @@ not, trained or not. Releasing one does not make its bearer a caster.
 
 - **Releasing a charge** takes the Magic action (an action, at a 2014 table), and no
   check. The charge is spent. Charges need no attunement.
-- **The six every Orthaen knows** are *common*: minor, local, brief. A gifted Orthaen
+- **The six every Orthaen knows** are common: minor, local, brief. A gifted Orthaen
   with the Orthaen Gift can grow one in a day of downtime from 25 GP of raw crystal,
   one at a time, and no more than one a week: a gift is not a mint (see chapter III).
   Price: 50 GP, which is a season's wages in the wrong district.

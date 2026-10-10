@@ -20,7 +20,7 @@ set of options.
   is built. Calligrapher's Supplies are a strange thing to own in a country where the
   Church owns the written word; swap them for any other tool.
 - **A gifted character takes their tribe's gift** as the origin feat the Human's
-  *Versatile* trait grants. The gifts are below. Four Orthaen in five are gifted, and
+  *Versatile* trait grants. The gifts are below; four Orthaen in five are gifted, and
   nearly every Phern.
 - **Everyone picks a hook and an agenda** in the first five minutes (see chapter I). The
   six hooks are there, and every one of them starts you in the street outside the
@@ -36,8 +36,8 @@ chapter.
 ### Heritage
 
 Every people of Val'loh has a **Heritage**: what every member grows up knowing, gifted
-or not. It is knowledge, with no bonus attached. What it covers, your character simply knows, and
-the DM does not call for a check to know it.
+or not. It is knowledge, with no bonus attached: what it covers, your character simply
+knows, and the DM does not call for a check to know it.
 
 - **Orthaen:** reads grown crystalwork the way a mason reads a wall: its age, whose
   hand shaped it, and whether it is holding a working right now.
@@ -59,18 +59,18 @@ wants real spellcasting takes a spellcasting class, or *Magic Initiate* as their
 4th-level feat, like anyone else, and the gift is the natural place for that magic to
 show itself.
 
-**You choose what it does.** Your people's gift says how it *shows itself*, not what it
+**You choose what it does.** Your people's gift says how it shows itself, not what it
 is. One Orthaen's crystal holds a light, another's mends a crack by growing across it,
 a third's hangs a warding hum in the air. You pick the cantrip; your tribe picks how it
 looks.
 
-**It is the same magic everyone else uses.** The cantrip is an ordinary SRD cantrip.
-The difference between you and a caster from elsewhere is where the magic came from and
+**It is the same magic everyone else uses.** The cantrip is an ordinary SRD cantrip, and
+the difference between you and a caster from elsewhere is where the magic came from and
 how it looks, never what it can do.
 
 **Every gift feat gives these two benefits:**
 
-- **Gift Knack.** You have Advantage on ability checks about exactly what your gift
+- **Gift Knack.** You have Advantage on ability checks about what your gift
   describes (each gift below says what that is), whether or not you cast anything.
 - **Minor Workings.** You learn one cantrip from the **gift list**: *Dancing Lights*,
   *Druidcraft*, *Guidance*, *Light*, *Mage Hand*, *Mending*, *Message*, *Minor Illusion*,
@@ -114,7 +114,7 @@ coming from. Nearly all carry it.
 *Origin feat. Prerequisite: Thenya, gifted, and the DM's agreement.*
 
 The gift shows itself only on behalf of someone loved, and only when they are in
-danger. It does nothing for the one who carries it. Fewer than one in a hundred carry
+danger; it does nothing for the one who carries it. Fewer than one in a hundred carry
 it, and a player character will almost never be Thenya at this ball. The feat is here
 because the night has two gifted Thenya in it, and chapter VII uses this one.
 
@@ -125,7 +125,7 @@ because the night has two gifted Thenya in it, and chapter VII uses this one.
   you and would drop to 0 Hit Points, it drops to 1 instead.
 
 *(DM: a gifted Thenya character needs your agreement. The feat is Minor like the rest,
-but the whole of it points at another character, and that only works if the table has built someone for it to point at.)*
+but all of it points at another character, and that only works if the table has built someone for it to point at.)*
 
 ### The Ungifted
 
@@ -137,23 +137,23 @@ like on a sheet.
 
 ### Casting in a Country Without Books
 
-Val'loh has the same magic as anywhere else. What differs is how it looks.
+Val'loh has the same magic as anywhere else; what differs is how it looks.
 
 - **Wizards** are what Val'loh calls **Thaumaturgy**: spellforms drawn thread by thread,
-  a patient scholar's art. There are no books. A wizard's spellbook is a **lattice**
+  a patient scholar's art. There are no books, so a wizard's spellbook is a **lattice**
   (grown crystal holding each spellform), and copying a spell into it costs the same
   time and gold as ink would, spent on crystal instead. Andra's is in chapter XI.
 - **Every other spellcasting class** casts what Val'loh calls **Invocation**: the
   intuitive art, reaching rather than studying. What answers an invoker, the module does
   not say, and the sheet should not either.
-- **There are no spell scrolls.** Writing belongs to the Church. A crystal charge is
+- **There are no spell scrolls.** Writing belongs to the Church, and a crystal charge is
   Val'loh's answer to a scroll: a finished working, grown on a quiet day and spent on a
   bad one.
 
 ### Crystal Charges
 
-Orthaen crystal holds finished workings. This is the fact the whole economy of Val'loh
-rests on, and it is why the walls of Rekuzan are wealth and not decoration.
+Orthaen crystal holds finished workings. Val'loh's economy rests on that fact, and it is
+why the walls of Rekuzan are wealth and not decoration.
 
 A **charge** is a consumable magic item: one stored working, released at a touch by
 anyone, gifted or not, trained or not. Releasing one does not make its bearer a
@@ -181,7 +181,7 @@ eye.
 *Disguise Self* and a Disguise Kit work as written, and at a masquerade they are
 barely necessary.
 
-Let players describe their masks. It matters to nobody and everybody, which is the
+Let players describe their masks: it matters to nobody and everybody, which is the
 correct proportion for a masquerade.
 
 ## Agendas
@@ -208,5 +208,5 @@ Agenda 4, because chapter V leans on somebody reaching Veier.
 
 Between them: a healer (Ilesse, with Serane behind her), a frontliner (Dassa), a talker
 (Serane), a sneak (Pello), and somebody carrying the whole history of House Boranis in
-memory and lattice (Andra). Two of them, Dassa and Pello, can stand in a fight. One,
+memory and lattice (Andra). Two of them, Dassa and Pello, can stand in a fight, and one,
 Dassa, is ungifted, because one Orthaen in five is.

@@ -8,7 +8,7 @@ unless your table asks for it.*
 
 ## What Happens After Dawn
 
-Tell the table as much of this as their characters would live to see. It is the
+Tell the table as much of this as their characters would live to see: it is the
 record, and it is what history keeps.
 
 - **The fires are out by dawn.** The sect guard seals the palace with the guests inside
@@ -25,8 +25,8 @@ record, and it is what history keeps.
 - **The file closes the way history does.** The inquest names "agents unknown, likely
   Mazaaian", blaming the tribes' enemy in the western mountains. Everyone knows it is
   false, and everyone swears to it. **No one is ever charged.**
-- **The pregnancy never gets out.** The midwife is simply gone by dawn, never found.
-  The skeleton staff hold the silence they were paid for. The record says a vanished
+- **The pregnancy never gets out.** The midwife is simply gone by dawn, never found,
+  and the skeleton staff hold the silence they were paid for. The record says a vanished
   bride, never a vanished heir. Characters who reached the east wing hold a truth that
   exists nowhere else in the world: priceless, unprovable, and dangerous in exact
   proportion to who they tell.
@@ -74,13 +74,13 @@ gift always has.
 ## If Your Table Wants More
 
 The morning after is a good second session, written loose, because it needs frames,
-not rails. *Where it ends* is fixed: no one is charged. The road to the dead file is
+not rails. Where it ends is fixed: no one is charged, and the road to the dead file is
 the play.
 
 - **Vorlain's offer.** He knows he did not do it, and he knows his brother did not
   lose. He hires competent-looking survivors to find out what actually happened, on
-  his coin, reporting only to him. He is the only patron in Rekuzan who genuinely
-  wants the truth.
+  his coin, reporting only to him. He is the only patron in Rekuzan who wants the
+  truth itself.
 - **The inquest.** Whatever the party did to the snakes in the dark comes to it with
   them: a captive, a body in a faction's colors, a knife somebody recognizes. Each
   faction wants it written down one way. A captured sergeant of the Bought, contract
@@ -93,11 +93,10 @@ the play.
   the trail.
 - **Otta Vesh,** the finest mask-maker in Rekuzan, keeps a casting-blank of every face
   she has ever fitted. Ask her about the three gray masks: nobody made them, nobody
-  in the city would know how, and the material is wrong. It leads nowhere.
-  It is the moment the investigation stops having a suspect and starts
-  having a hole in it.
-- **The choice.** Then put the question in front of the table that the whole night
-  has been building: "You know more than the record. What do you do with it?" Sell it,
+  in the city would know how, and the material is wrong. It leads nowhere, and that is
+  the moment the investigation stops having a suspect and starts having a hole in it.
+- **The choice.** Then put the question in front of the table that the night has been
+  building toward: "You know more than the record. What do you do with it?" Sell it,
   bury it, swear it to Vorlain, carry it east toward the rising mists. That answer is
   the next act, and it is theirs.
 

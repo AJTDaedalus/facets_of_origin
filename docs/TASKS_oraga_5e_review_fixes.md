@@ -213,7 +213,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
 - **Accept:** a near-duplicate paragraph check (a new linter soft rule, or a one-off script)
   finds no paragraph pair over 80% similar across chapters.
 
-### ☐ R5.3 Tic line-edit, pilot then calibrate (P2-23, P2-24; O39)
+### ☑ R5.3 Tic line-edit, pilot then calibrate (P2-23, P2-24; O39)
 - **Do:**
   - Add a `tics` soft metric to the linter with targets: "exactly" ≤ 15, "the whole" ≤ 15,
     "quietly" ≤ 10, "out loud" ≤ 8, "genuinely" ≤ 4, "Say so" ≤ 5, the "permanent confusion"
@@ -231,7 +231,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
   - P3-15: the Hide rule and the 15-foot drop.
   - P3-17: the anachronisms.
 
-### ☐ R5.5 Commit R5
+### ☑ R5.5 Commit R5
 
 ---
 

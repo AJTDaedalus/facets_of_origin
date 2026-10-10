@@ -118,7 +118,7 @@ equipment are referenced by name and used as the SRD writes them, except where t
 module says otherwise. These are the module's own: the origin feats (the Val'loh
 gifts), the crystal charges, the encounter rules (clocks, "Down, Not Out", "Buying
 Time" and Delay), how Heroic Inspiration is awarded, and four table rules: one DC
-ladder for the whole night (chapter I), success at a cost on a near miss (chapter I),
+ladder for every check in the night (chapter I), success at a cost on a near miss (chapter I),
 NPCs who make no checks outside a fight (chapter I), and nonlethal blows from any attack,
 ranged and spell attacks included (chapter IX).
 

@@ -1276,3 +1276,12 @@ Swaps between files are fine as long as the module totals hold. One swap is reco
 - `python T/bestiary_check.py --quiet` → 28 blocks + 1 Nastier, 0 mismatches.
 - `python T/pregen_check.py --quiet` → 5 pregens, 0 issues.
 - `python -m pytest T -q` → 394 passed (347 + 47 new).
+
+## Review-fix pass — R5.3 parallel workers (coordinator, 2026-10-10)
+- Workers 05, 09, 07+10 and rest (01, 02, 03, 06, 08, 11, README) each worked to the pilot's per-file budgets. Records: `docs/audit_oraga_5e_official/r53_{05,09,07_10,rest}.md`.
+- Module tics, all at or under target: exactly 15/15, the whole 14/15, quietly 10/10, out loud 8/8, genuinely 4/4, say so 5/5, permanent confusion 1/1 (in Vorlain's dossier, 07), not…but 4/8.
+- The emphasis_italics family went from 49 to 0, and hard hits module-wide are 0.
+- Each worker's script found no change to DCs, dice, numerals, XP or GP, and read-aloud blocks are identical.
+- Table I–3 row renamed "The pattern named aloud"; no other file quotes it.
+- One allowlist line was adjusted ("are common", the Handout 3 near-duplicate exemption).
+- Checks: lint --check 0/0, fact_check 0, bestiary 0, pregen 0, pytest 394, flow OK. Re-baselined.
