@@ -60,8 +60,8 @@ names, and the only first-hand account of something the city will spend a genera
 lying about.
 
 Why 4th level: the night has real fights in it. Chapter IX puts knives in the hands
-of half the guest list, and at midnight something comes through with the Uninvited
-that is built to be the hardest fight of the night. A 4th-level party, with its
+of half the guest list, and at midnight the quiet attendant who has been at the ball
+all evening takes its place beside the Uninvited, built to be the hardest fight of the night. A 4th-level party, with its
 subclass and its first ability increase in hand, can stand in those fights, and it can
 still lose them.
 

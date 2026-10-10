@@ -512,7 +512,7 @@
    "label": "East wing guard doubled",
    "phase": "m5",
    "kind": "event",
-   "summary": "Corval quietly doubles the east wing doors. Noticed only by those watching.",
+   "summary": "Corval quietly doubles the guard on the east wing doors, from two to four. Noticed only by those watching.",
    "ref": "04_The_Ball.md#movement-v--the-hour-of-spirits-approaching-midnight",
    "optional": false,
    "faction": null
@@ -582,7 +582,7 @@
    "label": "The dais",
    "phase": "m6",
    "kind": "scene",
-   "summary": "Raunu spends his house's wards like coin. The nine fall. A character beside him can steer wards; each ward-point once, and each steered ward against the Wept is 1 Delay.",
+   "summary": "Raunu spends his house's wards like coin. Seven of the nine fall; two hold the east-wing doors. A character beside him can steer wards; each ward-point once, and each steered ward against the Wept is 1 Delay.",
    "ref": "05_The_Longest_Night.md#the-default-beats",
    "optional": false,
    "faction": "uninvited"
@@ -932,7 +932,7 @@
    "label": "⟨The Bought change sides⟩",
    "phase": "end",
    "kind": "ending",
-   "summary": "Bought out before midnight (through a sergeant's runner at the Gatehouse Court in Movement V), the company holds the gate open. Forty sworn witnesses instead of two hundred frightened ones.",
+   "summary": "Bought out before midnight (through a sergeant's runner at the Gatehouse Court in Movement V), the company holds the gate open. Twenty sworn witnesses instead of two hundred frightened ones.",
    "ref": "05_The_Longest_Night.md#if-history-breaks",
    "optional": true,
    "faction": null

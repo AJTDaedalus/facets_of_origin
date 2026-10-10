@@ -52,19 +52,23 @@ facts:
   - id: honor_guards
     truth: >-
       House Boranis has nine honor guards. At midnight two of them hold the east-wing doors
-      (B9) and seven go to the dais. Positions in Movements I–V are set by the deployment
-      table R2.2 adds to chapter VIII; until then only the midnight split is fixed. S4's
-      "two guards" are "the two nearest".
-    source: owner QR2 (2026-10-08)
-    phrases: ["nine honor guards", "seven go to the dais", "two of the nine at the east-wing doors"]
+      (B9) and seven go to the dais. Positions in Movements I–V are chapter VIII's
+      Table VIII–7 (R2.2, O48): all nine on the gate while the line comes in; from then
+      on two at the east-wing doors (four in Movement V, when Corval doubles them), three
+      in the trophy gallery (B7), and the rest with the household. S4's "two guards" are
+      "the two nearest".
+    source: owner QR2 (2026-10-08); O48 (the Movement I–V posts)
+    phrases: ["nine honor guards", "seven of the nine go to the dais", "two hold the east-wing doors", "Table VIII–7"]
     positions:
-      midnight: seven on the dais; two at the east-wing doors (B9)
-      movements_I_to_V: open — R2.2 writes the table in chapter VIII
+      movement_I: all nine on the gate (B1), facing inward, while the line comes in; then as Movement II
+      movements_II_to_IV: {east_wing_doors: 2, trophy_gallery: 3, with_the_household: 4}
+      movement_V: {east_wing_doors: 4, trophy_gallery: 3, with_the_household: 2}
+      midnight: {dais: 7, east_wing_doors: 2}
     checks:
       - type: sentence
         scope: block
         all: ['\bnine\b(?!\s+people)', '\bdais\b']
-        unless: '\bseven\b'
+        unless: '(?i)\bseven\b'
         why: QR2 — seven go to the dais; two of the nine stay at the east-wing doors
       - type: forbid
         pattern: '\bonly guards left are dying on the dais\b'

@@ -347,5 +347,15 @@ will have drifted; locate by quote.
 | **Q20a — the household was sixty** | Change "eighty" to sixty where it counts the household. The 5e text avoids a derived "servants let go" number (O31). Q20b: Sella and Corval are the testament's witnesses, as printed. | `F:04` L491/L503 ("eighty"); `F:07` L155 already says sixty; witnesses: `F:01` L6 ("a Church notary and two witnesses") vs `F:04` L506 / `F:07` L132 (Corval and Sella) |
 | **Q24 — "Tell my cousin"** | Veier's quote: the cousin is the Thenyan chief, who sent the delegation. | `F:07_Cast_of_the_Ball.md` L63 ("Tell / my uncle his message took two years…") |
 
+**Review-fix pass rulings (2026-10-08) that apply to the Facets edition too.** Applied to
+the 5e edition in R2 (2026-10-10; `INVENTIONS_5e.md` #84). The Facets edition was not edited.
+Line numbers checked against `adventures/oraga_night/` on 2026-10-10; locate by quote.
+
+| Ruling | What changes | Facets-edition sites |
+|---|---|---|
+| **QR4 — twenty blades** | The Bought company is sixteen Blades, four sergeants and a captain (21), so the gate-opened branch says "twenty blades" and "twenty sworn witnesses", not forty. The honor guard's "should field forty blades in ceremony" is a different claim and stays. | `F:05_The_Longest_Night.md` L474 ("by forty blades who do not"), L479–480 ("the inquest has forty / sworn witnesses"); leave `F:04` L633 ("should field forty blades in ceremony") |
+| **QR1 — sixty, twenty-two stayed** | The household was sixty and twenty-two stayed, so the staff was "cut by nearly two-thirds", never "four-fold"; no "a hundred servants". Supersedes the Q20a row's "eighty" fix: the Facets Undercurrent B should say sixty, not eighty, and Corval recites the placements without a new count (O31). | `F:02_The_World_and_the_Night.md` L68 ("cut four-fold"); `F:03_Masks_and_Agendas.md` L180 ("the staff was cut four-fold"); `F:04_The_Ball.md` L17 ("should hold a hundred servants"), L491 and L503 ("Eighty servants", "all eighty placements"); `F:07_Cast_of_the_Ball.md` L155/L158 (sixty, "Twenty-two") and `F:04` L274 ("twenty-two people's") already agree |
+| **QR2 — two of the nine at the east-wing doors** | At midnight seven of the nine honor guards go to the dais and two hold the east-wing doors. 5e's post table (Table VIII–7, O48) is a 5e scaffold; port it only if the Facets edition gets a DM sheet. | `F:04_The_Ball.md` L45 ("the nine go to the dais and stay"); `F:05_The_Longest_Night.md` L103 ("The nine honor guards die or fall"); `F:enemies/boranis_honor_guard.fof` L55 ("AT MIDNIGHT they die or fall protecting their chief") and L59 ("beside the nine when the lights die") |
+
 The other 2026-10-05 rulings (Q7, Q8, Q9, Q13, Q15, Q16, Q17, Q23) are recorded for 5e only;
 §3.5 still lists their Facets sites if the owner wants them carried.

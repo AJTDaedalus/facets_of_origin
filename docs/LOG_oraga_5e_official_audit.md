@@ -939,3 +939,64 @@ Now 0 hits.
   rest is the R2 worklist. Re-baselined with `--baseline` (24 → 21).
 - `python T/bestiary_check.py --quiet` → 28 blocks + 1 Nastier, 0 mismatches.
 - `python T/pregen_check.py --quiet` → 5 pregens, 0 issues.
+
+## Review-fix pass — R2
+
+*Worker, 2026-10-10. Tasks R2.1–R2.7 of `docs/TASKS_oraga_5e_review_fixes.md`. Decisions
+O48–O51 in DECISIONS.md; INVENTIONS #84; CARRYOVER §6 gains the QR4, QR1 and QR2 rows.
+Every site was located by quote; none was missing.*
+
+**R2.1 — household (QR1).** 02 timeline and Agenda 8, and 04 Undercurrent B: "cut by nearly
+two-thirds". 04's opening: "Two years ago this palace kept a household of sixty; tonight…
+about two dozen". 07 Corval header: "runs the whole ball with the twenty-two who stayed". B13's
+twenty-two, Corval's "sixty"/"Twenty-two" and 08's rumor 11 truth note already agreed.
+Undercurrent B's "simple arithmetic" spark now adds up (60 → 22).
+
+**R2.2 — honor guard (QR2, O48).** New **Table VIII–7: The Honor Guard, Post by Post** in
+chapter VIII's "Where Everyone Stands" (Rumors → VIII–8, Crystal Charges → VIII–9; 04's three
+rumor pointers updated). Posts: the gate (all nine while the line comes in), the east-wing
+doors (two; four in Mv V; two at midnight), B7 (three), with the household (four; two in Mv V),
+the dais (seven at midnight). Sites: 04 Palace on Alert ("seven of the nine… two hold the
+east-wing doors"), Steel in Movement I ("the two nearest guards"), B7, B9's box, Mv V (Corval
+doubles from two to four); 05 Radiant sign (lanterns, no "guards'"), default beats ("Seven of
+the nine"), The Snakes in the Dark; 08 Table VIII–2; 10 honor guard lore line; `flow.json`
+(the dais node, the doubled guard). Table V–1's "a guard at the doors" and V–4's "the guards
+off the east wing doors" now agree as printed. `facts.yaml` records the posts per Movement;
+the `unless` on the guard check is now case-insensitive ("Seven of the nine").
+
+**R2.3 — east wing and terraces (O33, O34, O49).** 05 General Features: the east wing is
+upstairs (12-foot stair from the Court's east doors, corridor at gallery level, the private
+stair is the garden stair) and a new *Elevations* bullet. 04 B2 and B9 notes and 08's caption
+match. S9's box: "at the rail of the Court's garden walk… On the upper terrace below them";
+the Draunel tells in 04 and 09 match; "Two terraces below" (04, 09) → "Down at the river gate".
+S10 unchanged (already agrees); its rope-versus-garden-stair question is logged in O49 for R6.
+
+**R2.4 — arrivals (O35, O50).** 01: the quiet attendant "who has been at the ball all evening
+takes its place beside the Uninvited". Table V–6: the Hollow "(any Movement from III)", "(B10
+edges, Mv III–V)", and both "(any social scene)" cells gain "Mv III–V".
+
+**R2.5 — smaller fixes (O51).** P2-5 Maiven conditional (06). P2-7 Vell "before the boat
+clears" (07, 10 ×2). P2-8 Scora (04 Undercurrent A) and Kshalo (08 rumor 9) glossed from V1/V3;
+`tools/terms.txt` updated; `test_lint_5e.py`'s real-module test now asserts no Scora/Kshalo
+hit. P2-9 "It is not long dark"; B4 "A vast crystal chamber". P3-7 "Intimidation never works on
+this check". P3-8 the Wept's Fracture needs a witnessed tell, DC 15 at 2+ Delay (Table V–1).
+P3-11 broadsword. P3-12 Tavva's three knives. P3-16 the patron's pitch (02 Agenda 2 Pays).
+P3-18 the Second Clause gloss (05 B12).
+
+**R2.6 — twenty blades (QR4).** 05 B12 branch: "twenty blades", "twenty sworn witnesses";
+`flow.json` likewise. CARRYOVER §6: QR4 (F:05 L474, L479–480), QR1 (F:02 L68, F:03 L180, F:04
+L17, L491, L503) and QR2 (F:04 L45, F:05 L103, F:enemies/boranis_honor_guard.fof L55, L59).
+`adventures/` not edited.
+
+**Tests.** `test_fact_check.py`: the first-run test became `test_module_agrees_after_r2` (0 hits)
+plus `test_guard_posts_recorded` (each Movement's posts sum to nine; midnight 7 + 2; Mv V
+doubles the doors).
+
+**Commands.**
+- `python -m pytest conversions/dnd5e/oraga_night/tools -q` → 295 passed.
+- `python T/lint_5e.py --check` → OK (80 hard, 46 structure remain; defined_terms 2 → 0). Lint
+  baseline not rewritten.
+- `python T/fact_check.py` → 0 hits (was 21). Re-baselined with `--baseline` to 0.
+- `python T/bestiary_check.py --quiet` → 28 blocks + 1 Nastier, 0 mismatches.
+- `python T/pregen_check.py --quiet` → 5 pregens, 0 issues.
+- Flow page rebuilt (`flow/build_flow_page.py`). `software/tests/test_no_private_canon.py` → 5 passed.

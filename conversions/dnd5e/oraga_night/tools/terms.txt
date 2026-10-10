@@ -14,8 +14,8 @@
 Orthaen|V1_Lineages.md "Orthaen"; V3 "Rekuzan"|03_Masks_and_Agendas.md|**Your tribe is Orthaen.**
 Phern|V1_Lineages.md "Phern"; V3 tribe table|03_Masks_and_Agendas.md|it is **Phern** (a couple of high-ranking Phern sit on the Merchant's Circle
 Thenya|V1_Lineages.md "Thenya"; V3 tribe table|02_The_World_and_the_Night.md|Raunu announces a pact with the Thenya, a
-Scora|V1_Lineages.md "Scora"; V0 item 5; V3 tribe table|-|-
-Kshalo|V1_Lineages.md "Kshalo"; V3 tribe table|-|-
+Scora|V1_Lineages.md "Scora"; V0 item 5; V3 tribe table|04_The_Ball.md|A Scora (one of the rememberers attached to great houses everywhere, who are the record)
+Kshalo|V1_Lineages.md "Kshalo"; V3 tribe table|08_Handouts.md|A Kshalo (one of the eastern river country's people of dreams and the herb-lore of sleep)
 #
 # The eight sects of the Orthaen (canon: V3 "Rekuzan", the bold sect list)
 Boranis|V3_Rekuzan_and_the_Tribes.md "Rekuzan"|02_The_World_and_the_Night.md|House Boranis holds the

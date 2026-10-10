@@ -40,7 +40,7 @@ carries Agenda 4. Never the gate.
 | **Raunu** | The dais | Spends his last charge sealing doors behind Veier; dies there, by his own choice |
 | **Veier** | B9 | Wounded once; down the private stair on Vell's arm; out the river gate (**by default, even if no player character is there**) |
 | **Vell** | — | Service passages → garden stair → the river gate (B5) |
-| **The nine honor guards** | To the dais, and stay | — |
+| **The nine honor guards** | Seven to the dais, and stay; two hold the east-wing doors (Table VIII–7) | — |
 | **The Bought** | The outer gate shut from outside (B12) | Hold it until the gate is decided (S3) |
 | **Corro** | Moving three seconds before the dark | Follow him and live. S11 if Phern heat is 3–4 |
 | **Maiven** | Toward the east wing, whatever her heat | Dies there unless somebody competent goes with her |
@@ -133,7 +133,10 @@ arrives)*
 
 *Not to scale; chapter V ("The Palace After Midnight: General Features") gives rough
 sizes: the Crystal Court about 140 by 80 feet, three 40-foot garden terraces and 150 feet
-of lower garden, and an east wing corridor about 100 feet long. The diagram shows only
+of lower garden, and an east wing corridor about 100 feet long. The east wing is upstairs:
+the Court's east doors open on a stair that rises 12 feet to gallery level, and the wing's
+private stair is the garden stair, running down its outer wall to the upper terrace. The
+diagram shows only
 the rooms and the connections the text gives;
 where the text does not place a room, it is listed below the drawing instead. Dashed
 lines are the service passages, which thread the whole palace.*
@@ -234,6 +237,21 @@ the half-bell in Movement V (S10). So the only card live in the dark by default 
 | The Uninvited | — | — | B2 edge, arriving | B2 edge, still | Wept: east doors · Radiant: the Dance · Hollow: the exits |
 | The Attendant | B0/B1, in the line | B2, at a crystal wall | B4 line | B2, following the music | B2, edge of the Dance, watching the party |
 
+**Table VIII–7: The Honor Guard, Post by Post** *(the nine; "once the line is in" means
+from the moment the last guest is through the gate)*
+
+| Post | I | II–IV | V | Midnight |
+|---|---|---|---|---|
+| The gate (B1) | All nine, facing inward, while the line comes in | — | — | — |
+| The east-wing doors (B9) | Two, once the line is in | Two | Four (Corval doubles them) | Two, who stay |
+| The trophy gallery (B7) | Three, once the line is in | Three | Three | — |
+| With the household | Four, once the line is in | Four | Two | — |
+| The dais (B2) | — | — | — | Seven, who die or fall there |
+
+*The alert guards (see chapter IV, "The Palace on Alert") come from the nearest post. S4's
+two are the two nearest; at the east-wing doors before Movement V, they are the two on the
+doors.*
+
 ---
 
 ## Rumors at the Ball *(DM table)*
@@ -242,7 +260,7 @@ the half-bell in Movement V (S10). So the only card live in the dark by default 
 comes up most. Every rumor is delivered with total confidence. None is confirmed.
 Several cannot all be true, which bothers nobody telling them.*
 
-**Table VIII–7: Rumors at the Ball**
+**Table VIII–8: Rumors at the Ball**
 
 | 2d6 | What they're saying behind the masks |
 |---|---|
@@ -253,7 +271,7 @@ Several cannot all be true, which bothers nobody telling them.*
 | 6 | The Thenya bride is already dead, and tonight's "announcement" will be a changeling got on some serving girl. The Thenya delegation knows — watch how they don't drink. *(Untrue. Veier is alive; see chapter VII.)* |
 | 7 | *(The common one.)* The marriage is coin, plain and simple: the Thenya paid their last treasure for their border, and the recluse wanted an heir nobody could refuse. Everything else is theater. |
 | 8 | Vorlain has never stopped ruling. Raunu is a mask his brother wears when the seat needs a beloved face. Two chiefs, one house — count who the ministers *actually* bow to. *(Untrue. Vorlain gave the seat back and has no plot; see chapter VII.)* |
-| 9 | A Kshalo dreamed him away, and he bargained his way back with something he'll spend the rest of his life paying. The offerings in Elanna's niche? That's the interest. |
+| 9 | A Kshalo (one of the eastern river country's people of dreams and the herb-lore of sleep) dreamed him away, and he bargained his way back with something he'll spend the rest of his life paying. The offerings in Elanna's niche? That's the interest. |
 | 10 | He crossed the mountains and saw Mazaa — walked among the godless machines — and came home to make the Orthaen ready for what's coming west. The new decrees are war logistics wearing worker's clothes. |
 | 11 | The staff weren't dismissed. They're still *in* there. Ask yourself why the east wing needs guards on the inside of the doors. *(Untrue. The staff were paid off and relocated; see chapter IV, "Undercurrent B — The Household That Wasn't".)* |
 | 12 | He found something in his year away that told him the day he'll die. Everything since — the pact, the bride, the silence, this ball — is a man setting his affairs in order. *(Deliver this one straight. Let the table sit with it at dawn.)* |
@@ -359,7 +377,7 @@ not, trained or not. Releasing one does not make its bearer a caster.
   the action is spent and the charge is not.
 - Some things at this ball smother a charge; the DM will tell you.
 
-**Table VIII–8: Crystal Charges**
+**Table VIII–9: Crystal Charges**
 
 | Charge | Rarity | When released |
 |---|---|---|

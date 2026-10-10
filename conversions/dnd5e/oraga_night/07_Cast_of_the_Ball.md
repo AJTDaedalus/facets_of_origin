@@ -193,7 +193,7 @@ Essin's people doing Essin's work. Vorlain himself has no plot. That is his secr
 and it holds.
 
 ### Minister Corval — the Majordomo
-*The last of the old household's officers; runs the whole ball with two dozen staff.*
+*The last of the old household's officers; runs the whole ball with the twenty-two who stayed.*
 
 **Wants:** the night to go perfectly, because it is the house's face and his life's
 work. **Fears:** that he no longer knows the house he serves. **Secret:** he knows
@@ -510,7 +510,7 @@ See chapter II: he is the second hidden power's whole presence at the ball.*
 respect of a man who knows exactly what they cost. **Secret:** all of them.
 
 **The sword:** in a culture where strong personalities wear big steel, a wrapped
-greatsword on a factor's back earns an eyeroll and nothing more, which is
+broadsword on a factor's back earns an eyeroll and nothing more, which is
 precisely why he can carry it. He never touches it. He never unwraps it. If a
 character asks about it, he says only, *"An inheritance,"* and means it.
 
@@ -561,7 +561,7 @@ water takes him.
 
 **If it comes to steel:** he will not fight if he can avoid it, and he can almost always
 avoid it. His block in chapter X ("Master Vell") has real numbers, set so high that no
-party at this ball can drop him before midnight, and no attacks. It is an exit, not a
+party at this ball can drop him before the boat clears, and no attacks. It is an exit, not a
 weapon: he leaves, and nobody quite remembers which way. The one exception is the Crossing, where
 he holds the Radiant with the sword still wrapped. That is chapter V's to run, and it
 is never the party's fight.
@@ -695,8 +695,8 @@ her captors the following:
   stair; a rope uncoiling under the east wing; a tall pale factor who walked to the
   river gate and stood there a while (card S2, "Outs").
 
-**If it comes to steel:** stat block **Tavva**, with **Gallery Knife** for her crew of
-four. Hers is the fight aimed at the noble-minded: nothing at stake in it but property
+**If it comes to steel:** stat block **Tavva**, with **Gallery Knife** for the three
+knives of her crew. Hers is the fight aimed at the noble-minded: nothing at stake in it but property
 and decency.
 
 ---

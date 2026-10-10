@@ -40,7 +40,8 @@ record, and it is what history keeps.
 - **The house counts itself.** Corval, ruined and dignified, executes the testament
   Raunu swore aloud in the chapel, providing for every servant by name. Anha and the
   staff are free to talk at last, and have two years of eerie domestic detail and no
-  answers. Maiven Nolonaire will not leave the city without her cousin or a body.
+  answers. If Maiven lived, she will not leave the city without her cousin or a body; if
+  not, the Thenya delegation takes her home.
 
 ## Ending the Session
 

@@ -148,7 +148,7 @@ happens before anyone can act, and it should feel that way:
    dais — not running, arriving — and the screaming starts.
 4. **The doors are wrong.** The Hollow is at the main doors, and the crowd that
    surges at them breaks around him like water. The Radiant is nowhere to be seen.
-   He has gone for the east wing, and the first sign is the guards' lanterns going
+   He has gone for the east wing, and the first sign is the lanterns going
    dark along the gallery, one by one, like a fuse burning.
 5. **The attendant with no master.** Read it as the dark comes down:
 
@@ -440,10 +440,17 @@ a card says otherwise.
     stepping down from the Court's garden doors. Each ends at a waist-high balustrade
     over a 10-foot drop to the next (cards S6 and S9), with a stair at either end. Below
     them the lower garden runs about 150 feet to the river gate.
-  - *The east wing (B9)* is reached by a cleared corridor, 10 feet wide and about 60
-    feet long, from the Court's east doors to the wing's double doors (card S4). Behind
-    them one corridor, 10 feet wide and about 100 feet long, has the rooms off it (each
-    20 to 30 feet across), with the private stair to the garden at its far end.
+  - *The east wing (B9)* is upstairs. The Court's east doors open on a stair that rises
+    12 feet to gallery level, and from its head a cleared corridor, 10 feet wide and
+    about 60 feet long, runs to the wing's double doors (card S4). Behind them one
+    corridor, 10 feet wide and about 100 feet long, has the rooms off it (each 20 to 30
+    feet across), with the private stair (the garden stair) at its far end.
+- **Elevations.** The Crystal Court is at ground level, and so are its garden doors,
+  which open on the Court's railed garden walk; the upper terrace lies below that rail.
+  The banquet galleries and the east wing are at gallery level, 12 feet up. Raunu's
+  study (B8) is on the second floor, in the dark wing. The garden stair is the east
+  wing's private stair: it runs down the wing's outer wall to the upper terrace, and
+  the service passages reach it too. Each terrace drops 10 feet to the next.
 - **Light.** The Crystal Court is Dim Light, lit by candles and fire. The corridors
   and service passages are Darkness except where a ward flares. In an unlit corridor
   nobody sees the Radiant without a light.
@@ -461,7 +468,7 @@ a card says otherwise.
 
 What history records, told in scenes. Bend everything except what the characters bend:
 
-- **The dais.** The nine **Boranis Honor Guards** (see chapter X) die or fall protecting their chief,
+- **The dais.** Seven of the nine **Boranis Honor Guards** (see chapter X) die or fall protecting their chief,
   quickly, around the edges of the frame. Raunu does not run. He works, snapping
   ward after ward alight between the Wept and the fleeing crowd and spending his
   house's stored centuries like coin. The recluse nobody saw all night is suddenly
@@ -752,8 +759,8 @@ the Uninvited's blocks.)*
 | Who | Tells before midnight *(where / when)* | Tells during the attack |
 |---|---|---|
 | The Wept | Watches the young pages at the feast a beat too long (B3, Mv III–IV) · leaves a mourner's offering in Elanna's niche, in a rite centuries out of date — Mother Sella can say exactly how out of date (B6, Mv IV) · lingers at the east wing doors humming a cradle-song no one living knows (Mv V) · the Dead Dance: *"You dance like my daughter would have"* (Mv V omen) | Goes still at the sound of a child crying somewhere in the palace · under the carved tears, the mask is a woman's face |
-| The Radiant | Makes an antique sign of blessing over the food — Prelate Kovaun recognizes the form; it has not been used in living memory (B3, Mv IV) · lights up when conversation turns to duty or service; asks a guest, warmly, *"Whom do you serve?"* (any social scene) · joins the Dead Dance and cannot resist dancing beautifully, where the light falls (Mv V) | Kills are staged — offered upward, like rites · visibly slows and poses when watched |
-| The Hollow | Stands always beside a different exit (any Movement) · answers small talk with devastating flatness — asked if he is enjoying the festival: *"It ends the same whether I do."* (any social scene) · watches the servants who belong to each other — Anha and her kitchen family — with something like hunger (B10 edges, Mv II–V) | Holds but never advances · flinches from ward-fire the way a tired man flinches from being asked to try |
+| The Radiant | Makes an antique sign of blessing over the food — Prelate Kovaun recognizes the form; it has not been used in living memory (B3, Mv IV) · lights up when conversation turns to duty or service; asks a guest, warmly, *"Whom do you serve?"* (any social scene, Mv III–V) · joins the Dead Dance and cannot resist dancing beautifully, where the light falls (Mv V) | Kills are staged — offered upward, like rites · visibly slows and poses when watched |
+| The Hollow | Stands always beside a different exit (any Movement from III) · answers small talk with devastating flatness — asked if he is enjoying the festival: *"It ends the same whether I do."* (any social scene, Mv III–V) · watches the servants who belong to each other — Anha and her kitchen family — with something like hunger (B10 edges, Mv III–V) | Holds but never advances · flinches from ward-fire the way a tired man flinches from being asked to try |
 
 - **The Wept** *(sorrow)*. Truth: she was a mother once, and disease took her
   family while she stood by helpless. Tonight she has been sent to do to a
@@ -796,7 +803,7 @@ the Uninvited's blocks.)*
   wanting.
 
   Invoked, what reaches him is **sincerity**, not ferocity. You cannot frighten a
-  man who would not much mind ending, and **Intimidation never adds to this check**.
+  man who would not much mind ending, and **Intimidation never works on this check**.
   See him. Name the emptiness truly. Offer one honest moment of the thing he was promised,
   or simply tell him, one person to another, that he can stop. He stops. He opens his
   hands, the doors open, and he leaves the field early, the only one of the three who
@@ -817,8 +824,8 @@ the Uninvited's blocks.)*
 The midnight attack belongs to the Uninvited alone, and it blindsides every faction
 in the palace as completely as it blindsides the ministers. This section is what the
 host's enemies do in the hour after, out of opportunism, fear, and old arithmetic,
-while the lights are out, the alert rules are suspended, and the only
-guards left are dying on the dais.
+while the lights are out, the alert rules are suspended, and every guard is dying on
+the dais or holding the east-wing doors.
 
 None of it is ambush. Every line below is something a character crossing the
 palace **sees happening** (to a guest, to a servant, to another snake) before they
@@ -943,7 +950,8 @@ for three tasks written in a chained case carried by the sergeant who holds the 
    courier post.
 2. From the first bell of midnight to the last bell of Oraga, hold the Boranis
    gatehouse. Nobody in, nobody out.
-3. **The Second Clause**, sealed, which the captain alone has read: *if a woman in Thenya
+3. **The Second Clause** (the second, sealed clause of the contract's terms, though it
+   is the third task), which the captain alone has read: *if a woman in Thenya
    wool comes out the front, hold her, and send word to the river.*
 
 They do not know who paid them. They do not know why. They are not cruel, and they
@@ -1178,12 +1186,12 @@ want to know why the characters wanted the gate open before anything had happene
 will not like any answer that is true.)*
 
 If they manage it: two hundred guests are out in minutes. The sect guard is inside
-before the Crossing. The Radiant's hunt is watched — by forty blades who do not
+before the Crossing. The Radiant's hunt is watched — by twenty blades who do not
 understand what they are seeing and will spend the rest of their lives not talking
 about it.
 
 Canon still holds. The Radiant is faster than doors, and Raunu still dies on his own
-choice. But the morning is a completely different morning: the inquest has forty
+choice. But the morning is a completely different morning: the inquest has twenty
 sworn witnesses instead of two hundred frightened ones, the Church's editing job is
 far harder, and the characters have a captain of the Bought who owes them and wants very
 much to know who used his company's name to burn a city.

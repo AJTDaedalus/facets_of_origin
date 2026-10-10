@@ -67,7 +67,7 @@ What every guest at the ball knows, in order:
    wedding at the Boranis chapel is small, formal, and by every account bloodless in
    both senses. Cross-tribe marriages are nearly unheard of. Nobody knows what to make
    of it.
-4. **3162–3164 — The Silence.** The palace staff is cut four-fold. A lively seat of
+4. **3162–3164 — The Silence.** The palace staff is cut by nearly two-thirds. A lively seat of
    power goes eerily quiet. Veier is last seen through a palace window three months
    after the wedding. Rumor fills the vacuum: they are prisoners, they are dead, the
    chief is mad at last, the Thenya bride poisoned him, he poisoned her.
@@ -319,7 +319,7 @@ Raunu's face all night. You saw the exact moment he understood: before anyone
 screamed, before the lights failed. He knew what they were. Remember that.
 
 **Pays:** Heroic Inspiration, and XP by Table I–4. The Church's favor: one favor Prelate
-Kovaun can grant without scandal, spendable after tonight (the DM may make it larger). *(For the DM: this patron is a snake. See
+Kovaun can grant without scandal, spendable after tonight (the DM may make it larger; the card's "frightening size" is the patron's pitch). *(For the DM: this patron is a snake. See
 chapter IX, the Church line.)*
 
 ### 3. A House's Long Game
@@ -419,7 +419,7 @@ by Table I–4. Nothing else, which is the point.
 ### 8. The Vanished Servant
 *Personal.*
 **The ask:** Your sister Anha took service in the Boranis kitchens four years ago. When
-the staff was cut four-fold, she was not among the dismissed, and the word she used
+the staff was cut by nearly two-thirds, she was not among the dismissed, and the word she used
 to send home with the festival carters stopped coming. Two years of silence. Tonight the doors are open. Find her.
 
 **The catch:** She is alive, employed, and terrified, of nothing she can name. The

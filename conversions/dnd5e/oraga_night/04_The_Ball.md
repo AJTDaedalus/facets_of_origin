@@ -35,7 +35,7 @@ of a shell.
 
 Guests notice two things within minutes. First, the splendor is real. House Boranis
 has spent lavishly, and the food, wine, and musicians are the finest of the festival.
-Second, the house is empty. A palace this size should hold a hundred servants;
+Second, the house is empty. Two years ago this palace kept a household of sixty;
 tonight, familiar liveried staff number about two dozen, stretched thin and
 supplemented by festival hires who don't know where anything is. Whole wings are dark.
 The famous Boranis honor guard is present in bare ceremonial numbers.
@@ -80,8 +80,8 @@ stay a party: **every faction at this ball wants somebody else to draw first.**
 the Movement, and the offender's invitation is void whether or not they were caught
 in the act. The east wing stays doubled for the rest of the night.
 
-**When the lights die** (Movement VI, midnight): the nine go to the dais and stay
-there. The corridor wards fire, and every warded route is lit, loud, and watched.
+**When the lights die** (Movement VI, midnight): seven of the nine go to the dais and
+stay there, and two hold the east-wing doors (Table VIII–7 has every post). The corridor wards fire, and every warded route is lit, loud, and watched.
 The **service passages become the only unwarded way through the palace**. Every
 alert rule above is suspended, because there is no longer anybody enforcing it. The
 honor guard is doing one thing now. So, in the dark, are the snakes (see chapter V,
@@ -96,7 +96,7 @@ nothing at all until the quarter-bells, and then the gate.
 the game and let the consequence land on the character.*
 
 **Steel in Movement I.** It happens in the line or at the gate, where the most guards
-and the most witnesses are. Run it as card S4 in the Gatehouse Court: two guards, the
+and the most witnesses are. Run it as card S4 in the Gatehouse Court: the two nearest guards, the
 outs read aloud, and the cell if it goes badly. The rest of the party is inside and the
 night goes on. The offender comes back in Movement II with no invitation and a face the
 room remembers, which is a fine way to spend a masquerade.
@@ -178,7 +178,7 @@ before anyone reaches the door. Rumor Table rolls are legal from the first minut
 > **Default:** make it a **social** check: a DC 13 Charisma (Persuasion) check to
 > talk a place up the line, or a DC 13 Wisdom (Insight) check to read who is selling
 > what. If it fails by 4 or less, offer it *at a cost*, naming the cost out loud before you
-> resolve it. On a success, the character gets one rumor (Table VIII–7) or a place in
+> resolve it. On a success, the character gets one rumor (Table VIII–8) or a place in
 > the line next to anyone named in the bullets above. At a cost, they get the same,
 > and Table VIII–4 supplies the cost.
 >
@@ -230,12 +230,13 @@ through the kitchens (B10), and Corval will remember the face.
 > *The room is a vault of rose-lit crystal and it is full of people. Dancers under a
 > gallery of musicians; a high table on a dais at the far end, laid and canopied and
 > empty. The walls give off a faint warmth where you brush them, like stone that has
-> been in sun all day. It has been dark for hours.*
+> been in sun all day. It is not long dark.*
 
 The grand hall, and the room where nearly every scheduled event happens: dance floor,
 musicians' gallery, the high table on its dais. The walls are the palace's oldest work.
-*(About 140 by 80 feet, with the dais at the far end from the main doors; see chapter
-V, "The Palace After Midnight: General Features".)*
+*(About 140 by 80 feet, with the dais at the far end from the main doors. The east doors
+open on a stair that rises 12 feet to the east wing; see chapter V, "The Palace After
+Midnight: General Features".)*
 
 **B3. The Banquet Galleries.** Long feast halls flanking the Court, tables groaning
 with harvest excess. Where the real conversations happen, in alcoves built for
@@ -243,13 +244,13 @@ exactly that. *(Best room for agenda work: everyone passes through, and the alco
 are half-private. Overhearing an alcove without being noticed takes a DC 13
 Dexterity (Stealth) or DC 13 Wisdom (Perception) check, whichever the character is
 doing. A success hears one
-rumor (Table VIII–7) or one fact from the speaker's entry in chapter VII.)*
+rumor (Table VIII–8) or one fact from the speaker's entry in chapter VII.)*
 
 **B4. The Audience Hall.**
 
 **When the party first sees into the Audience Hall, read:**
 
-> *A smaller crystal chamber off the Court, lit for the first time in two years —
+> *A vast crystal chamber off the Court, lit for the first time in two years —
 > you can tell, because the light finds dust in the air that nobody has had reason
 > to disturb. A dais, worn down its center. One chair. The room is quiet in the
 > particular way of a room that a great many people are deliberately not entering.*
@@ -302,7 +303,8 @@ a DC 15 Dexterity check using Thieves' Tools, unless its entry says otherwise. N
 
 **B7. The Trophy Gallery.** The house's pride and plunder: banners, weapons, and grown
 crystals taken in old settlements, including a heart-sized soul-crystal of uncommon
-beauty (Agenda 5). Warded by old crystalwork; the few real guards concentrate here.
+beauty (Agenda 5). Warded by old crystalwork, and three of the nine honor guards stand here from the
+end of Movement I (Table VIII–7).
 *(Wards here are teachable. A character who spends 10 minutes studying them learns
 how Boranis defenses behave (light, seals, alarms) on a successful DC 13 Intelligence
 (Arcana) check. An Orthaen, who reads grown crystalwork by heritage, learns it
@@ -341,8 +343,7 @@ chasing the Root has a very good reason to reach that slate first.*
 
 **When the party first comes within sight of the east wing doors, read:**
 
-> *Double doors, closed, and more guards on them than the rest of the palace is
-> using put together. The corridor in front of them has been cleared of furniture.
+> *Double doors, closed, with guards on them who are plainly not there for show. The corridor in front of them has been cleared of furniture.
 > Nobody is walking down it.*
 
 Sealed, guarded, forbidden. Behind
@@ -350,8 +351,11 @@ its doors are the warmest rooms in the palace, or the saddest, depending on when
 characters learn what they learn. *(Forcing the doors is card S4. Nobody gets through them on a
 single check. The ways in are Agenda 4's errand (the grandmother's ring, shown at the
 doors; see "Dinner for Two (B9)", Movement IV), Anha's passages, and Undercurrent C.)*
-*(The cleared corridor is about 60 feet long; behind the doors, one 100-foot corridor
-with the rooms off it. See chapter V, "The Palace After Midnight: General Features".)*
+*(The wing is upstairs, at gallery level: a stair rises 12 feet from the Court's east
+doors, and the cleared corridor at its head is about 60 feet long. Behind the doors, one
+100-foot corridor has the rooms off it, with the private stair (the garden stair) at its
+far end, running down the wing's outer wall to the upper terrace. See chapter V, "The
+Palace After Midnight: General Features".)*
 Warm light, a midwife's quiet traffic, and three finds:
 
 - **Veier's rooms.** Thenya through and through: border-country wool over Orthaen
@@ -429,7 +433,7 @@ says where everyone stands in each Movement.
 
 **Rumors** circulate all night: any social scene can yield one (roll on the table in
 chapter VIII, or choose). They are contradictory by design. Nobody at the ball knows
-the truth, and every rumor is told with total confidence (Table VIII–7).
+the truth, and every rumor is told with total confidence (Table VIII–8).
 
 **Social checks at the ball.** NPCs never make checks against the party outside a fight. Their
 entries in chapter VII say how hard they are to move instead, and those words map onto
@@ -674,7 +678,8 @@ gifts.** What an hour in the laboratory yields, in rising order:
   Woven into the
   orrery's base, in the private pattern-language the rest of the room refuses to
   yield, one figure repeats over and over: two streams of light falling into a
-  single pool. A Scora reads the figure without a check. Anyone else can make a DC 15
+  single pool. A Scora (one of the rememberers attached to great houses everywhere, who are the record) reads
+  the figure without a check. Anyone else can make a DC 15
   Intelligence check after 10 minutes with it, or reads it with no check after a full
   hour. It can be read only one way:
 
@@ -702,7 +707,7 @@ it is there. But its key is the slate in B8, and the Church's Wardens mean to wi
 slate tonight. See card S8.)*
 
 ### Undercurrent B — The Household That Wasn't *(if you have time)*
-*The household was sixty. Two years ago it was cut four-fold, and every servant let go had to go somewhere.*
+*The household was sixty. Two years ago it was cut by nearly two-thirds, and every servant let go had to go somewhere.*
 
 **The spark:** Agenda 8; or the festival hires: one of tonight's borrowed footmen
 used to work here, recognized by his ease in the corridors (a DC 13 Wisdom (Insight)
@@ -1344,7 +1349,7 @@ spirits home, and toast the living year with his own face. It is the one appeara
 the recluse cannot refuse: the one moment of this entire night anyone could have
 predicted him. Guests are already drifting toward the Crystal Court to watch.
 
-Corval quietly doubles the guards on the east wing. Only characters watching
+Corval quietly doubles the guards on the east wing doors, from two to four (Table VIII–7). Only characters watching
 for it notice (a DC 13 Wisdom (Perception) check). Master Vell, who has spent the whole ball being
 unmemorable, walks the garden terraces once, alone, and stands a while at the river
 gate. *(If Agenda 6's gate is unlocked, he confirms it and leaves it so. If a character
@@ -1388,9 +1393,9 @@ waits.
   Dance and the guards, a Draunel Duelist and a Cousin's Blade face each other with
   a few witnesses, and steel is finally about to come out where no honor guard can
   see it. Whoever wins, Draunel wins: a Boranis who kills a guest at Oraga, or a
-  Boranis blade who ran. Two terraces below, Master Vell is standing at the
-  river gate, and a crowd drawn by a duel is the last thing he wants. **Tell:** a knot
-  of masks at the terrace rail, looking down instead of dancing. → Card S9, chapter IX (both houses' blades are on it).
+  Boranis blade who ran. Down at the river gate, Master Vell is standing
+  alone, and a crowd drawn by a duel is the last thing he wants. **Tell:** a knot
+  of masks at the rail of the Court's garden walk, looking down instead of dancing. → Card S9, chapter IX (both houses' blades are on it).
 - **House Boranis.** Vorlain is in B3, drinking harder. Essin has a problem on the
   terrace he did not make, and he is choosing between his cousin's reputation and his
   blade's life. A character who goes to him now finds the one moment all night

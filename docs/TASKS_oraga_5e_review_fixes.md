@@ -101,12 +101,12 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
 
 ## R2: Continuity
 
-### ☐ R2.1 Household (P1-1) (QR1: 60, 22 stayed)
+### ☑ R2.1 Household (P1-1) (QR1: 60, 22 stayed)
 - **Files:** 02:70 and 02:422; 04:38–39, 04:408 and 04:705–710; 07:196 and 07:225–229; 08
   (rumors and the truth note); `flow.json`; `facts.yaml`.
 - **Accept:** the fact checker finds no household contradiction.
 
-### ☐ R2.2 Honor-guard deployment (P1-2) (QR2: two of the nine)
+### ☑ R2.2 Honor-guard deployment (P1-2) (QR2: two of the nine)
 - **Do:**
   - Add one deployment table to chapter VIII: where each of the nine stands, Movements I–V and
     midnight, plus the east-wing guard (per QR2).
@@ -114,17 +114,17 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
     05:268, 05:336, 05:461 and 05:817; 08:43; 10:421.
 - **Accept:** the fact checker's guard entries agree with the table.
 
-### ☐ R2.3 The east wing's floor, stairs and terraces (P1-5; O33, O34)
+### ☑ R2.3 The east wing's floor, stairs and terraces (P1-5; O33, O34)
 - **Files:** 05 General Features (add an *Elevations* bullet), 05:142–150; 04 B2, B8, B9 and
   04:1391; 09 S9's box, 09:1355, and S10; 08's caption; `facts.yaml`.
 - **Accept:** the fact checker's floor and stair entries agree everywhere. "Two terraces below"
   appears 0 times.
 
-### ☐ R2.4 Arrival timing (P1-4; O35)
+### ☑ R2.4 Arrival timing (P1-4; O35)
 - **Files:** 01:62–64; 05 Table V–6 (the Hollow rows); `facts.yaml`.
 - **Accept:** the fact checker's arrival entries agree.
 
-### ☐ R2.5 Smaller continuity fixes (P2-5, P2-7, P2-8, P2-9; P3-7, P3-8, P3-11, P3-12, P3-16, P3-18)
+### ☑ R2.5 Smaller continuity fixes (P2-5, P2-7, P2-8, P2-9; P3-7, P3-8, P3-11, P3-12, P3-16, P3-18)
 - **Do:**
   - P2-5: Maiven's aftermath line becomes conditional.
   - P2-7: "before the boat clears" replaces "before midnight" for Vell, everywhere.
@@ -140,10 +140,10 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
   - P3-18: Second Clause gloss.
 - **Accept:** the defined-terms check passes for Scora and Kshalo. Each item is fixed.
 
-### ☐ R2.6 "Forty blades" (P2-6) (QR4: twenty)
+### ☑ R2.6 "Forty blades" (P2-6) (QR4: twenty)
 - **Files:** 05:1173 and 05:1178. Log a Facets-edition follow-up in CARRYOVER §6.
 
-### ☐ R2.7 Commit R2
+### ☑ R2.7 Commit R2
 
 ---
 

@@ -296,13 +296,17 @@ class TestRealModule:
     def real():
         return F.check_module(F.MODULE, F.load_facts(F.FACTS))
 
-    def test_expected_first_run_hits(self, real):
-        got = {(h.fact, h.file[:2]) for h in real}
-        for want in [("household", "02"), ("household", "04"), ("honor_guards", "04"),
-                     ("honor_guards", "05"), ("bought_company", "05"), ("arrivals", "01"),
-                     ("east_wing_floor", "05"),
-                     ("maiven_fate", "06"), ("terraces", "04"), ("terraces", "09")]:
-            assert want in got, want
+    def test_module_agrees_after_r2(self, real):
+        # R2 (QR1, QR2, QR4, O33–O35, P2-5) worked the first-run list to zero
+        assert [(h.file, h.line, h.fact) for h in real] == []
+
+    def test_guard_posts_recorded(self):
+        by = {f["id"]: f for f in F.load_facts(F.FACTS)}
+        pos = by["honor_guards"]["positions"]
+        for key in ("movements_II_to_IV", "movement_V", "midnight"):
+            assert sum(pos[key].values()) == 9, key
+        assert pos["midnight"] == {"dais": 7, "east_wing_doors": 2}
+        assert pos["movement_V"]["east_wing_doors"] == 2 * pos["movements_II_to_IV"]["east_wing_doors"]
 
     def test_retinues_agree_after_r1_4(self, real):
         # R1.4 (owner QR3): the Circle and the Church brought four; no hit remains

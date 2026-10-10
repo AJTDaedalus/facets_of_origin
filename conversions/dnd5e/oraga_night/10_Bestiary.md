@@ -23,7 +23,7 @@ cannot be killed. The **Attendant** who came with them is the other exception, i
 other direction: a boss that can be beaten, and its block and card S14 say how.
 **Master Vell** is the last
 exception: his numbers are real, set so high that no party of 4th or 5th level drops
-him before midnight, and he is worth no XP.
+him before the boat clears, and he is worth no XP.
 
 **Every block has four lines after its numbers**: **Wants** (what ends the fight without a body), **Tells** (what a watchful
 character sees before it happens), **Breaks** (when it stops, and what it does
@@ -467,8 +467,9 @@ second round after this one, and this guard holds its ground until they come.
 > **Breaks.** Never flees the house. Broken, a guard steps back, lowers the blade and
 > offers terms: surrender, and the evening ends in the gatehouse cell.
 > **Nastier.** A third guard arrives from the far end, and the way back is shut.
-> *There are nine. At midnight they die or fall on the dais protecting their chief,
-> quickly, at the edge of the frame (see chapter V); these numbers are for the hours
+> *There are nine. At midnight seven die or fall on the dais protecting their chief,
+> quickly, at the edge of the frame (see chapter V), and two hold the east-wing doors
+> (chapter VIII, Table VIII–7, has every post); these numbers are for the hours
 > before the bells. Cards: S4, S10.*
 
 ---
@@ -1979,8 +1980,8 @@ never an extra attack, and she can't make it once her Multiattack is used up.
 see. Any grapple or restraint on her ends. She arrives rather than runs; ordinary
 doors, walls and barricades do not reliably hold her. Deep Boranis ward-crystal does.
 
-**Fracture — Sorrow (once).** It needs ammunition gathered in play, or 2 Delay
-banked against her (then its DC is 15). On a success she
+**Fracture — Sorrow (once).** Like every Fracture, it takes at least one witnessed
+tell; while she has 2 or more Delay, its DC is 15 (Table V–1). On a success she
 stops — mid-motion, mid-kill — and for one full round she takes no actions, no
 Bonus Actions, no Reactions and does not move: a woman standing in a burning
 ballroom, long enough to pull a victim clear, seal a ward, finish an escape. At a
@@ -2079,7 +2080,7 @@ Poison, Psychic, Radiant, Slashing, Thunder
 The block exists to tell you one thing: **Master Vell does not fight, and no party at
 this ball can beat him.** He has no attacks. He can be hit, and the numbers above are
 real, but they are set so that a party of 4th or 5th level cannot drop him before
-midnight: against AC 20, his Reaction and resistance to every damage type, four
+the boat clears: against AC 20, his Reaction and resistance to every damage type, four
 5th-level characters land roughly 15 damage a round, and he has 285 Hit Points. Long
 before that matters, he takes his action and is elsewhere. He is not a combatant, and
 he is worth no XP.

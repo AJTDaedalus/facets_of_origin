@@ -293,7 +293,7 @@ of his house with good blades and a great deal to prove.
 | II | Iron 2 begins: a duelist jostles one of Essin's blades, a cup goes over, and a sentence about *the missing year* is said too loudly | The second jostle tonight, and the same duelist | — |
 | III | Draunel courts in the Audience Hall line. A duelist tries to buy a better place in it from a minor guest, and moves from money to the other thing | The minor guest's mask turned toward the nearest honor guard, hoping | — |
 | IV | Draunel fears a succession decree. A duelist makes the appointment in front of the whole table: *at the first quarter-bell, on the terraces, and bring your cousin's excuses* | The whole table gone quiet except the duelist | **S9** |
-| V | The appointment, on the upper garden terrace at the first quarter-bell, away from the Dance and the guards | A knot of masks at the terrace rail, looking down, not dancing | **S9** |
+| V | The appointment, on the upper garden terrace at the first quarter-bell, away from the Dance and the guards | A knot of masks at the rail of the Court's garden walk, looking down, not dancing | **S9** |
 | VI–VII | *Lights out.* Heat 0–2: Draunel gets out, and remembers what he saw for the inquest. Heat 3–4: Iron 4 — Draunel and two of his duelists find Vorlain hauling guests out of the burning banquet gallery, and take him | Three men in good coats pulling a man out of a burning room by the arms while he shouts for the people still inside | **S13** |
 
 **Walk into it.** The characters can stand second to either side of the appointment,
@@ -1348,9 +1348,9 @@ This Movement — V", points here.)*
 ***Trigger — read when a character reaches the terrace, or looks down at it from
 the rail:***
 
-> *A knot of masks has gathered at the rail of the upper terrace, looking down instead
-> of dancing. On the grass below them two young men have taken off their coats. One is
-> laughing. The other is not. Two more stand a little behind each of them, the way
+> *A knot of masks has gathered at the rail of the Court's garden walk, looking down
+> instead of dancing. On the upper terrace below them two young men have taken off
+> their coats. One is laughing. The other is not. Two more stand a little behind each of them, the way
 > seconds stand. Nobody has drawn yet.*
 
 **Objective:** nobody draws — or if they do, nobody dies, and no Boranis is seen to
@@ -1372,8 +1372,8 @@ never shown never rises.
 **Full:** steel meets
 steel. One of the two principals goes down bleeding (you roll who, in the open),
 the rail crowd runs for the guards, and Draunel's second iron is done either way: a
-Boranis who cut a guest at Oraga, or a Boranis who ran from a challenge. Two terraces
-below, a tall pale factor at the river gate turns and walks away before anybody looks
+Boranis who cut a guest at Oraga, or a Boranis who ran from a challenge. Down at the
+river gate, a tall pale factor turns and walks away before anybody looks
 down. He will be back; he always has a second way.
 
 **Enemies.** It depends on the party.

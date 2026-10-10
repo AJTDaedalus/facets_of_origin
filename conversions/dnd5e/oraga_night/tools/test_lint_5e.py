@@ -884,7 +884,8 @@ class TestDefinedTerms:
         voc = L.canon_vocabulary(L.SETTINGS)
         assert {"Scora", "Kshalo", "Orthaen", "Boranis", "Vaskarin"} <= voc
 
-    def test_real_module_flags_scora_and_kshalo(self):
+    def test_real_module_glosses_scora_and_kshalo(self):
+        # R2.5 (P2-8): both are glossed at first mention, so the check is clean.
         got = {h.match for h in L.lint_terms(L.MODULE, L.TERMS, L.SETTINGS)}
-        assert "undefined term: Scora" in got and "undefined term: Kshalo" in got
+        assert not any("Scora" in m or "Kshalo" in m for m in got)
         assert not any(m.startswith("unlisted canon term") or m.startswith("stale gloss") for m in got)
