@@ -1314,3 +1314,4 @@ Swaps between files are fine as long as the module totals hold. One swap is reco
   - N11: redraw map VIII–1 as a true plan placing B4, B6, B7, B10, B13.
   - N17–N19: the human line-edit (colon and semicolon splices, the CR-yardstick commentary in S14 and Vell, the garbled glosses).
   - The P3s: 13–16, 18, 19, 21–28, 30, and P3-29 for the sergeant, duelist and cousin blocks (the kinsmen's is fixed by O65).
+- 2026-10-10 R6.3 PUSHED feat/lean-facets after the private-canon guard (42 passed) and a path scan of the 13 unpushed commits (clean). Re-review 2 score 8.0/10; its P1s fixed (f3233f8). Open for the owner: N4 geometry gaps, N11 overview-map redraw, N17–N19 human line-edit, remaining P3s.

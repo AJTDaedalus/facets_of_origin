@@ -255,7 +255,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
   human line-edit (N17–N19) and the remaining P3s are open for the owner (the review's
   "Resolution" section and the LOG list them).
 
-### ☐ R6.3 Push
+### ☑ R6.3 Push
 - **Do:** run the private-canon guard and scan the unpushed range (memory rule; no Windows user
   paths), then `git push origin feat/lean-facets`.
 
