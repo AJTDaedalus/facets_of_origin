@@ -32,7 +32,7 @@
 > III (only if players build their own characters; hand out the agenda cards from
 > chapter VIII either way; the full agendas are in chapter II), chapter X beyond the Uninvited, the Attendant and the
 > Bought (open a block when its card comes up), chapter VI (read it when the session
-> ends), chapter XI (hand it out), and *Inventions*. The rest of chapters IV and V is
+> ends), and chapter XI (hand it out). The rest of chapters IV and V is
 > depth: read it when a player goes looking for it.
 
 ---
@@ -84,7 +84,8 @@ Vell's arm, and no one is ever charged (see chapter II, "The Truth of the Night"
 
 Any fifth-edition core rules. The module is written against the **System Reference
 Document 5.2.1** (the 2024 rules) and runs at a 2014 table with the notes marked
-*At a 2014 table*; only the pregenerated characters need rebuilding.
+*At a 2014 table* and the glossary box of that name in chapter X; only the
+pregenerated characters need rebuilding.
 
 You do **not** need the Facets of Origin books or the Val'loh Facet. Chapter III and
 Player Handout 3 (chapter VIII) carry everything a player needs about the tribes:

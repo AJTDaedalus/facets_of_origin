@@ -100,13 +100,13 @@ development.*
   2,000.** Several snake fights sit at or below Low on purpose. Before midnight, nobody
   here is trying to kill anyone, and the difficulty is the clock, the noise and the
   guards. A label says where the sum sits: *under Low*, *Low*, *between Low and
-  Moderate*, *Moderate*, *High* or *beyond High*.
+  Moderate*, *Moderate*, *High* or *beyond High*. At a 2014 table, read chapter X's
+  "At a 2014 table" box first: the 2014 guide rates these fights harder.
 - **The label is the sum; the line after it is the play.** Foes with three attacks,
   or with Sneak Attack, hit harder than their XP says, so the cards that play
-  differently from their sum say how. Where a card has numbers, its **DM Note — how it
-  plays** gives them. As a rough guide, a fight that plays Low drops a character in
-  about one run in twenty to one in four, one that plays Moderate in one in four to one in
-  two, and one that plays High more often than not.
+  differently from their sum say how. As a rough guide, a fight that plays Low drops a
+  character only now and then, one that plays Moderate drops one fairly often, and one
+  that plays High usually drops at least one.
 - **Clocks** have four segments. Each card says what advances its clock and what
   happens when it fills. Say the clock out loud at the top of the scene. "A 1 on a
   d20" in a clock means an attack roll or an ability check, never Initiative or a
@@ -133,13 +133,6 @@ development.*
 - **Surprise.** Unless a card says otherwise, nobody is surprised: every fight in this
   chapter starts in plain view. The cards a careful party can creep up on (S2, S7, S8
   and S10) each say what a quiet approach buys.
-
-> **DM Note — at a 2014 table**
->
-> The 2014 guide's group multiplier rates most of these cards one or two bands harder
-> than printed. It counts heads, and these heads break early, fight to detain and quit
-> on a clock. Keep the rosters as printed. Where a budget line says how the fight
-> played in simulation, that is the better guide.
 
 **Table IX–1: Scaling at a Glance** *(SRD 5.2.1 XP budget for the whole party)*
 
@@ -266,7 +259,6 @@ holds the only pen in the room (see chapter VI).
 possible, patiently if not* (see chapter VII). His **fear** is
 being seen wanting it. His **secret**: Agenda 3 is his, and he has three other irons
 in tonight's fire. A Draunel never brings one plan to a Boranis party.
-<!-- INVENTIONS #11: the three other irons below are inventions, for the owner's review. -->
 
 **Who they brought.** **Essar Draunel** and three **Draunel Duelists** (see chapter X), young men
 of his house with good blades and a great deal to prove.
@@ -688,10 +680,8 @@ the scene.**
 **Enemies.** **Tavva** (see chapter X) and three **Gallery Knives** — her whole crew of
 four.
 *Budget:* 450 + (3 × 50) = **600 XP**, under Low (1,000). Tavva's two Knife attacks and
-her Sneak Attack hit harder than her XP says, and it still plays Low.
-
-> **DM Note — how it plays.** A character drops in about one fight in twenty
-> before Tavva is Bloodied, and in fewer than one in ten if it goes to the last knife.
+her Sneak Attack hit harder than her XP says, and it still plays Low: a character
+rarely drops, even if it goes to the last knife.
 
 The party will very likely win the fight. The difficulty of this scene is the clock,
 not the roster. Do not add a second leader to "fix" it; that makes the fight much harder,
@@ -815,15 +805,12 @@ whichever comes first.
 *Budget:* 1,100 + (4 × 100) = **1,500 XP — Moderate** for four 4th-level characters.
 The wicket is what makes it Moderate: once the party is through and fighting in the
 street, the sergeant and four Blades play well under that, because the Blades fight
-to hold and the company quits early (see the DM Note below).
+to hold and the company quits early. Out there, a character almost never drops.
 
 With the captain drawn in and fought to the last, 1,500 + 1,100 =
 **2,600 XP**, over High (2,000). The captain arrives late and starts talking early, and the three endings below exist so that nobody has to fight
 him. **Do not add a second sergeant.** A second leader makes the fight far harder at once,
 and it is the most reliable way to kill a table by accident.
-
-> **DM Note — how it plays.** Once the party is through the wicket, a character
-> drops in about one fight in fifty.
 
 **Terrain as rules.**
 - *The gate grille.* Anything through it has Three-Quarters Cover (+5 AC). Conversation
@@ -926,7 +913,7 @@ often Movement V. Also the Gatehouse Court in Movement I, if steel is drawn at t
 **Enemies.** Two **Boranis Honor Guards**, detaining and expelling. *Call the House*
 brings four more at the start of the second round after the first guard is Bloodied.
 *Budget:* 2 × 450 = **900 XP**, under Low (1,000); with the four who are coming,
-2,700 XP, beyond High. *Unsimulated.* This is not a fight the party is meant to
+2,700 XP, beyond High. This is not a fight the party is meant to
 win, and not one they can lose anything permanent to: a character the guards drop to 0 Hit Points is Unconscious
 and Stable and wakes in the gatehouse cell.
 
@@ -1158,11 +1145,8 @@ tells them; see chapter II.)*
 read-aloud, and a fourth who has been in the service run all night.
 *Budget:* 4 × 200 = **800 XP**, under Low (1,000) for four 4th-level characters. As a
 fight it is over in a round, because the knives break when the first of them is
-Bloodied; fought to the last knife it plays Low. The clock and the narrow run are
-the card.
-
-> **DM Note — how it plays.** Fought to the last knife, about one fight in eight drops
-> a character.
+Bloodied; fought to the last knife it plays Low, and now and then a character drops.
+The clock and the narrow run are the card.
 
 **Terrain as rules.**
 - *The service run* is 5 feet wide: one creature abreast, and a creature can't move
@@ -1384,7 +1368,7 @@ down. He will be back; he always has a second way.
   Low.
 - *Against both:* **1,150 XP**, between Low (1,000) and Moderate (1,500) for four
   4th-level characters, and it plays Low as long as the morale lines hold. Fought to the last against both sides at once, it
-  plays Moderate: about half of those fights drop a character.
+  plays Moderate: expect a character to drop about half the time.
 - **Essin Boranis** arrives on the clock's first segment if a character went to
   him when he stood alone (see chapter IV), as the Boranis side's leader — or as the
   party's ally, which is what he came to ask for.
@@ -1710,7 +1694,7 @@ comes down, and whoever is still inside is still inside.
 - *The Draunel side:* **Essar Draunel**, a **Veteran Draunel Duelist** and a **Draunel
   Duelist**. 700 + 450 + 200 = **1,350 XP**, between Low (1,000) and
   Moderate (1,500) for four 4th-level characters. Draunel's three Rapier attacks run
-  hotter than his XP, and it plays Moderate (see the DM Note below).
+  hotter than his XP, and it plays Moderate: be ready for a character to drop.
 - *The Boranis side:* **Essin Boranis** and three **Boranis Cousin's Blades**. 450 +
   (3 × 100) = **750 XP**, under Low. They are the party's natural allies here if the
   party wants them; with the cousins fighting beside it, the Draunel side is a Low
@@ -1721,9 +1705,6 @@ comes down, and whoever is still inside is still inside.
   with Draunel, Essin's side breaks as soon as Vorlain is out of reach (*Always
   Between*, then gone).
 - *At heat 4:* the gallery clock starts with one segment filled.
-
-> **DM Note — how it plays.** Against the Draunel side, a character drops in about one
-> fight in three.
 
 **Terrain as rules.**
 - *The fire* at the far end. A creature that enters it or starts its turn there must
@@ -1839,32 +1820,21 @@ the way.
 It is meant to be the hardest fight of the night, won by the table that plays the
 game: hard, close, and never a death sentence. Say so with your whole table manner,
 not in those words: the hints below are how. A table whose characters are built to
-hit hard out-slugs it (the optimized party in the DM Note below); give such a table
-the "A table built to hit hard" line under Adjusting the Encounter.
+hit hard can out-slug it; give such a table the "A table built to hit hard" line under
+Adjusting the Encounter.
 
 > **DM Note — how it plays**
 >
-> Simulated, 5,000 fights a row: four 4th-level pregens (Dassa, Pello, Andra, Ilesse)
-> and a typical optimized 4th-level party of paladin, rogue, sorcerer and cleric; the
-> card fires with it Idle; six rounds, about as long as an errand lasts at midnight;
-> chapter V's "Down, Not Out" applied, so nobody dies.
+> Played as a slugging match, this fight usually goes the Attendant's way: the
+> pregens seldom clear it by blows alone, and a fair share of those fights end with the
+> whole party down. Played as the distraction game, it is close to even on bare rolls,
+> and a table that leans in usually wins. Expect at least one character to drop even
+> then. A party built for damage first can win by blows alone, which is what its
+> Adjusting line is for.
 >
-> | The party… | Pregens: out of the way | Pregens: whole party down at once | Optimized: out of the way | Optimized: whole party down |
-> |---|---|---|---|---|
-> | Only trades blows | 16% | 24% | 80% | 15% |
-> | Plays the distraction game, bare rolls | 43% | 10% | 58% | 12% |
-> | Plays it and leans in (see below) | 72% | 5% | 81% | 5% |
->
-> With the pregens, at least one character hits 0 Hit Points in four fights out of five
-> even when the table leans in.
->
-> The Adjusting lines, simulated the same way (pregens unless it says otherwise).
-> *Three characters* (Dassa, Pello and Ilesse): trading blows wins 18% and
-> flattens the party 20%; bare distraction 26%; leaning in 72%. *Five
-> characters* (with Serane added): 10% and 10%; 45%; 72%. *Four at 3rd level:* 17% and
-> 16%; 47%; 72%. *Four at 5th level:* not simulated; Extra Attack and 3rd-level spells
-> make the blows-only route likelier to work. *A table built to hit hard:* trading
-> blows 29% and 33%; bare distraction 31%; leaning in 66%.
+> The three-character, five-character and 3rd-level lines keep those odds about where
+> they are. At 5th level, Extra Attack and 3rd-level spells make the slugging route
+> likelier to work.
 
 **Distracting the Attendant — the full rule.** It takes **an action**. The player
 describes what their character does, then makes **an ability check with the skill that
@@ -1965,8 +1935,7 @@ player who tries to distract it (hint 4); a natural 20 on a distraction pays its
   is a single Joined Hands.
 - *Four at 5th level:* use the five-character line, or the block's **Nastier** line
   for a table that wants it harder.
-- *A table built to hit hard* (the optimized party in the DM Note above, or anything
-  like it): 300 Hit Points.
+- *A table built to hit hard* (characters built for damage first): 300 Hit Points.
 
 **Development.** Gone, the Attendant is not seen again tonight, and chapter VI has no
 body and no witness who can say what it was. A party that sent it to the window has a

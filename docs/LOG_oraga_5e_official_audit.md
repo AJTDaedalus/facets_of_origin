@@ -1000,3 +1000,70 @@ doubles the doors).
 - `python T/bestiary_check.py --quiet` → 28 blocks + 1 Nastier, 0 mismatches.
 - `python T/pregen_check.py --quiet` → 5 pregens, 0 issues.
 - Flow page rebuilt (`flow/build_flow_page.py`). `software/tests/test_no_private_canon.py` → 5 passed.
+
+## Review-fix pass — R3
+
+*Worker, 2026-10-10. Tasks R3.1–R3.4 of `docs/TASKS_oraga_5e_review_fixes.md`. Decision O52 in
+DECISIONS.md. Every site was located by quote.*
+
+**R3.1 — simulation data out (P2-1, QR6).** New `research/oraga_5e_simulation_notes.md`:
+where the numbers came from (pass-2 Steel fixer and Attendant Monte Carlo runs,
+`docs/LOG_oraga_5e_pass2.md`; SNAKES-27's relocation), what was never simulated (S3's wicket
+approach, S4 with its reinforcements, S14 at 5th), the general guide, a per-card table with
+the exact drop rates and the wording the book printed, and S14's full table and Adjusting
+lines. In 09: the *Running the Snakes* rough guide is now "drops a character only now and
+then / fairly often / usually drops at least one"; the 2014 DM Note's "played in simulation"
+went with the note (see R3.3); S2, S3, S7 and S13's one-line "DM Note — how it plays" boxes
+are folded into each budget paragraph as a plain-play clause ("a character rarely drops",
+"almost never drops", "now and then a character drops", "be ready for a character to drop");
+S9's "about half of those fights" is "expect a character to drop about half the time"; S4's
+"*Unsimulated.*" is cut; S14's DM Note is plain advice (slugging usually loses, the
+distraction game turns it, leaning in usually wins, expect a drop anyway, a damage-first party
+can out-slug it, the Adjusting lines keep the odds level), and its "optimized party"
+references are now "characters built for damage first". Table IX–3's labels and plain-play
+clauses were already table advice and stay.
+
+**R3.2 — artefacts (P2-2, P2-3, P2-4, P2-13, P3-24).** 04's file-name parentheticals cut. 09's
+INVENTIONS #11 HTML comment cut. 03's Facets-edition sidebar cut. 01's prep box no longer lists
+*Inventions*. README: the "fifth-edition conversion" paragraph now describes the night (seven
+Movements, the spine, the snakes); the Rules line drops "You do not need the Facets of Origin
+books"; the license section says "Most stat blocks are original…; the Sect Guard adapts the
+SRD Guard, and a guest uses the SRD commoner" and "the setting's canon belongs to its author;
+inventions are listed in `INVENTIONS_5e.md`", with the one credit line ("adapted from the
+Facets of Origin edition of *Oraga Night*"). INVENTIONS #18 struck through and marked
+superseded by #75 (and removed from *Review These First*); #38 marked superseded in part (the
+4th-level retune; chapter II's "any caster at this table"). No allowlist entry was needed for
+these families; the README's "For Contributors" file names were already exempt.
+
+**R3.3 — "At a 2014 table" (P2-19, O40).** Chapter X, *How to Read This Chapter*: a heading-style
+**DM Note — at a 2014 table** (O41 form) after *Standard numbers in the text*, covering
+Emanation, Utilize, the Magic action, Bloodied, Study and Influence, the condition and save
+lines, the Initiative score, Heroic Inspiration and the 2014 multiplier (S3 1,500 → 3,000,
+past Deadly; S14 nearly twice Deadly; keep the rosters). It is now the one DM Note that
+explains the multiplier (09's note removed, its budget bullet points here). 10's "everything
+else reads the same" is gone; README:16–17 and 01's *What You Need* point to the box. One
+rule-scoped allowlist entry: `10_Bestiary.md|deadly_budget|…` (the box has to name the 2014
+band; it is not a budget line).
+
+**Lint families (`lint_5e.py --report`), before R3 → after.**
+
+| family | before | after |
+|---|---|---|
+| sim_jargon | 8 | 0 |
+| html_comment | 1 | 0 |
+| repo_filename | 2 | 0 |
+| conversion_wide | 4 | 0 |
+| conversion_talk | 0 | 0 |
+| box_label | 16 | 12 (four run-in "how it plays" boxes gone) |
+| deadly_budget | 0 | 0 (one allowlisted hit) |
+
+Totals: hard 80 → 65, structure 46 → 42. Lint baseline rewritten with `--baseline` so the
+families at 0 stay there.
+
+**Commands (after R3.3).**
+- `python -m pytest conversions/dnd5e/oraga_night/tools -q` → 295 passed.
+- `python T/lint_5e.py --check` → OK (65 hard, 42 structure remain).
+- `python T/fact_check.py --check` → OK (0 hits).
+- `python T/bestiary_check.py --quiet` → 28 blocks + 1 Nastier, 0 mismatches.
+- `python T/pregen_check.py --quiet` → 5 pregens, 0 issues.
+- `flow.json` unchanged; no rebuild. `software/tests/test_no_private_canon.py` → 5 passed.

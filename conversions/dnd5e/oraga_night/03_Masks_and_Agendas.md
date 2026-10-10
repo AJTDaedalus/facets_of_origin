@@ -79,13 +79,6 @@ how it looks, never what it can do.
   itself the way your people's gift does. If you already know the cantrip you pick, choose
   another from the gift list.
 
-> **Sidebar — for players who know the Facets edition**
->
-> A rough guide to the old domains: Divination → *Guidance*; Warding → *Resistance*;
-> Transmutation → *Mending* or *Prestidigitation*; Inscription → *Prestidigitation* (a
-> mark, a sigil, a held impression); Illusion → *Minor Illusion*; Light → *Light* or
-> *Dancing Lights*.
-
 ---
 
 #### Orthaen Gift

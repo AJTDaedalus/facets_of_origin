@@ -33,3 +33,7 @@
 
 # T7.7: Handout 2 agenda card 3 is canon card text in Lord Draunel's voice; "we" is House Draunel, not a designer.
 08_Handouts.md|designer_we|out if he misses the taste. Get him to say anything we could later call an|Handout 2 canon agenda card, in-character "we"
+
+# R3.3 (review-fix pass, P2-19): the one DM Note that explains the 2014 multiplier (STYLE,
+# Difficulty vocabulary) has to name the 2014 band. It is not a budget line.
+10_Bestiary.md|deadly_budget|S3's 1,500 XP becomes 3,000, past Deadly, and S14 is nearly twice Deadly|the 2014 glossary box names the 2014 band it is translating; not a budget line

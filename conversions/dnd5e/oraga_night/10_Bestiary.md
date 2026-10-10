@@ -47,12 +47,39 @@ default, and most of these people would rather be anywhere else.
 
 **Standard numbers in the text.** DCs follow the ladder in chapter I: **Easy 10 ·
 Standard 13–15 · Hard 18–20 · Very Hard 25.** "Bloodied" means at or below half
-Hit Points. "Heroic Inspiration" is plain Inspiration at a 2014 table. A 2014 table
-can ignore the Initiative score in parentheses; everything else reads the same. A
-creature with Advantage on Initiative has it folded into that score already. The
-**Gear** line names a creature's armor; its weapons are named in its Actions. "Until
-the scene ends" means until the fight ends or the Movement changes, whichever comes
-first.
+Hit Points. A creature with Advantage on Initiative has it folded into its Initiative
+score already. The **Gear** line names a creature's armor; its weapons are named in
+its Actions. "Until the scene ends" means until the fight ends or the Movement
+changes, whichever comes first. At a 2014 table, read the box below first: the blocks
+use a few words the 2014 books don't.
+
+> **DM Note — at a 2014 table**
+>
+> The blocks and cards use the SRD 5.2.1 words. Read them this way:
+>
+> - **Emanation.** An area that spreads from a creature in every direction and moves
+>   with it: a sphere of that radius centered on the creature. The creature itself is
+>   outside it unless it chooses otherwise.
+> - **Utilize action.** The Use an Object action.
+> - **Magic action.** The Cast a Spell action, or Use an Object for a magic item such
+>   as a crystal charge. Either way, it takes an action.
+> - **Bloodied.** At or below half its Hit Point maximum. The 2014 books have no word
+>   for it, but nothing else changes.
+> - **Study and Influence.** The SRD's actions for recalling lore and for winning a
+>   creature over. Run each as an action spent on the matching ability check.
+> - **Condition lines.** One **Immunities** line lists damage types, then a semicolon,
+>   then conditions: read it as the 2014 Damage Immunities and Condition Immunities
+>   lines. "Has the Prone condition" means "is knocked prone". A save reads *Strength
+>   Saving Throw:* DC 15, who it affects, then *Failure:* and *Success:*, which is the
+>   2014 "must make a DC 15 Strength saving throw" written as a list.
+> - **Initiative.** The number in parentheses is the 2024 Initiative score. Roll
+>   Initiative as usual and ignore it.
+> - **Heroic Inspiration.** Plain Inspiration.
+> - **The encounter multiplier.** The 2014 guide multiplies a group's XP by its head
+>   count, so it rates most of chapter IX's cards one or two bands harder than printed:
+>   S3's 1,500 XP becomes 3,000, past Deadly, and S14 is nearly twice Deadly. These
+>   heads break early, fight to detain and quit on a clock. Keep the rosters as
+>   printed, and trust each card's line on how it plays.
 
 **Languages.** Every block lists Common. Read it as the speech of Rekuzan. The
 Uninvited speak it too, in turns of phrase two centuries out of fashion.

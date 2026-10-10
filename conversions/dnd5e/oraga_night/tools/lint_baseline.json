@@ -1,18 +1,11 @@
 {
  "hard": {
   "01_Overture.md": {
-   "conversion_wide": {
-    "Inventions": 1
-   },
    "emphasis_italics": {
     "*if you have time*": 1
    }
   },
   "03_Masks_and_Agendas.md": {
-   "conversion_wide": {
-    "Facets edition": 1,
-    "old domains": 1
-   },
    "emphasis_italics": {
     "*shows itself*": 1
    },
@@ -26,10 +19,6 @@
     "*brandishing*": 1,
     "*steer*": 1,
     "*with a cost attached*": 1
-   },
-   "repo_filename": {
-    "09_The_Snakes.md": 1,
-    "10_Bestiary.md": 1
    }
   },
   "05_The_Longest_Night.md": {
@@ -78,23 +67,9 @@
     "*to 4*": 1,
     "*under Low*": 1
    },
-   "html_comment": {
-    "<!--": 1
-   },
    "or_skills": {
-    "(Deception or Persuasion)": 1,
     "(Intimidation or Performance)": 1,
     "(Persuasion or Intimidation)": 1
-   },
-   "sim_jargon": {
-    "Simulated": 1,
-    "one fight in eight": 1,
-    "one fight in fifty": 1,
-    "one fight in three": 1,
-    "one fight in twenty": 1,
-    "one run in twenty": 1,
-    "simulated": 1,
-    "simulation": 1
    }
   },
   "10_Bestiary.md": {
@@ -116,152 +91,147 @@
    "or_skills": {
     "(Arcana or Religion)": 1
    }
-  },
-  "README.md": {
-   "conversion_wide": {
-    "fifth-edition conversion": 1
-   }
   }
  },
  "soft": {
   "01_Overture.md": {
-   "emdash_per_k": 1.89,
+   "emdash_per_k": 1.88,
    "long_paras": 0,
-   "long_sentence_pct": 5.1,
-   "mean_wps": 14.26,
+   "long_sentence_pct": 5.38,
+   "mean_wps": 14.32,
    "not_but": 9,
    "perhaps": 0,
    "player_character": 1,
    "rhetorical": 0,
    "sentences": 334,
    "the_players": 0,
-   "words": 4764,
+   "words": 4782,
    "you": 39
   },
   "02_The_World_and_the_Night.md": {
    "emdash_per_k": 1.67,
    "long_paras": 0,
-   "long_sentence_pct": 6.56,
-   "mean_wps": 14.22,
+   "long_sentence_pct": 6.54,
+   "mean_wps": 14.27,
    "not_but": 5,
    "perhaps": 1,
    "player_character": 0,
    "rhetorical": 2,
    "sentences": 294,
    "the_players": 0,
-   "words": 4182,
+   "words": 4194,
    "you": 52
   },
   "03_Masks_and_Agendas.md": {
-   "emdash_per_k": 0.55,
+   "emdash_per_k": 0.0,
    "long_paras": 0,
-   "long_sentence_pct": 5.52,
-   "mean_wps": 14.37,
+   "long_sentence_pct": 5.8,
+   "mean_wps": 14.3,
    "not_but": 1,
    "perhaps": 0,
    "player_character": 1,
    "rhetorical": 0,
-   "sentences": 127,
+   "sentences": 125,
    "the_players": 0,
-   "words": 1825,
+   "words": 1787,
    "you": 44
   },
   "04_The_Ball.md": {
-   "emdash_per_k": 1.52,
-   "long_paras": 0,
-   "long_sentence_pct": 5.31,
-   "mean_wps": 13.61,
+   "emdash_per_k": 1.51,
+   "long_paras": 2,
+   "long_sentence_pct": 5.4,
+   "mean_wps": 13.69,
    "not_but": 11,
    "perhaps": 0,
    "player_character": 2,
    "rhetorical": 0,
-   "sentences": 1016,
+   "sentences": 1018,
    "the_players": 0,
-   "words": 13829,
+   "words": 13936,
    "you": 21
   },
   "05_The_Longest_Night.md": {
-   "emdash_per_k": 3.34,
+   "emdash_per_k": 3.28,
    "long_paras": 2,
-   "long_sentence_pct": 6.78,
-   "mean_wps": 14.96,
+   "long_sentence_pct": 7.28,
+   "mean_wps": 15.03,
    "not_but": 14,
    "perhaps": 0,
    "player_character": 7,
    "rhetorical": 0,
-   "sentences": 780,
+   "sentences": 791,
    "the_players": 0,
-   "words": 11668,
+   "words": 11887,
    "you": 25
   },
   "06_Aftermath.md": {
-   "emdash_per_k": 0.93,
+   "emdash_per_k": 0.92,
    "long_paras": 0,
-   "long_sentence_pct": 5.13,
-   "mean_wps": 14.58,
+   "long_sentence_pct": 5.06,
+   "mean_wps": 14.72,
    "not_but": 2,
    "perhaps": 0,
    "player_character": 0,
    "rhetorical": 0,
    "sentences": 74,
    "the_players": 0,
-   "words": 1079,
+   "words": 1089,
    "you": 5
   },
   "07_Cast_of_the_Ball.md": {
-   "emdash_per_k": 3.64,
+   "emdash_per_k": 3.63,
    "long_paras": 0,
    "long_sentence_pct": 4.79,
-   "mean_wps": 14.29,
+   "mean_wps": 14.32,
    "not_but": 8,
    "perhaps": 0,
    "player_character": 0,
    "rhetorical": 0,
-   "sentences": 519,
+   "sentences": 520,
    "the_players": 1,
-   "words": 7419,
+   "words": 7446,
    "you": 3
   },
   "08_Handouts.md": {
-   "emdash_per_k": 5.28,
+   "emdash_per_k": 5.03,
    "long_paras": 1,
-   "long_sentence_pct": 4.21,
-   "mean_wps": 11.27,
+   "long_sentence_pct": 4.1,
+   "mean_wps": 11.64,
    "not_but": 1,
    "perhaps": 1,
    "player_character": 1,
    "rhetorical": 1,
-   "sentences": 168,
+   "sentences": 171,
    "the_players": 0,
-   "words": 1894,
+   "words": 1990,
    "you": 13
   },
   "09_The_Snakes.md": {
-   "emdash_per_k": 7.12,
-   "long_paras": 0,
-   "long_sentence_pct": 5.86,
-   "mean_wps": 13.76,
+   "emdash_per_k": 6.24,
+   "long_paras": 1,
+   "long_sentence_pct": 6.06,
+   "mean_wps": 13.79,
    "not_but": 15,
    "perhaps": 0,
    "player_character": 2,
    "rhetorical": 1,
-   "sentences": 1235,
+   "sentences": 1243,
    "the_players": 2,
-   "words": 16997,
-   "you": 16
+   "words": 17140,
+   "you": 15
   },
   "10_Bestiary.md": {
-   "emdash_per_k": 3.15,
+   "emdash_per_k": 3.23,
    "long_paras": 2,
-   "long_sentence_pct": 8.15,
-   "mean_wps": 15.95,
+   "long_sentence_pct": 7.58,
+   "mean_wps": 14.9,
    "not_but": 2,
    "perhaps": 0,
    "player_character": 0,
    "rhetorical": 0,
-   "sentences": 159,
+   "sentences": 187,
    "the_players": 1,
-   "words": 2536,
+   "words": 2787,
    "you": 2
   },
   "11_Pregenerated_Characters.md": {
@@ -281,16 +251,16 @@
   "README.md": {
    "emdash_per_k": 1.19,
    "long_paras": 0,
-   "long_sentence_pct": 3.85,
-   "mean_wps": 17.48,
+   "long_sentence_pct": 5.66,
+   "mean_wps": 17.91,
    "not_but": 0,
    "perhaps": 0,
    "player_character": 0,
    "rhetorical": 0,
-   "sentences": 48,
+   "sentences": 47,
    "the_players": 0,
-   "words": 839,
-   "you": 3
+   "words": 842,
+   "you": 2
   }
  },
  "structure": {
@@ -300,9 +270,6 @@
     "**Sidebar — Snakes at the feud.** A seating": 1,
     "**Sidebar — Steel at the ball:** the Orthaen": 1,
     "**Sidebar — Threading the clock:** Undercurrents are paced": 1
-   },
-   "defined_terms": {
-    "undefined term: Scora": 1
    },
    "trigger_format": {
     "**On first entry into the Crystal Court, read:**": 1,
@@ -346,18 +313,7 @@
     "**DM Note — the factor.** The captain never": 1
    }
   },
-  "08_Handouts.md": {
-   "defined_terms": {
-    "undefined term: Kshalo": 1
-   }
-  },
   "09_The_Snakes.md": {
-   "box_label": {
-    "**DM Note — how it plays.** A character": 1,
-    "**DM Note — how it plays.** Against the": 1,
-    "**DM Note — how it plays.** Fought to": 1,
-    "**DM Note — how it plays.** Once the": 1
-   },
    "trigger_format": {
     "***Trigger — Movement IV, read when a character passes the": 1,
     "***Trigger — Movement V, read when a character comes up": 1,

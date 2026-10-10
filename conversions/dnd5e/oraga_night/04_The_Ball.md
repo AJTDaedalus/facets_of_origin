@@ -19,8 +19,8 @@ I–V are this chapter; the Unmasking and everything after it are chapter V.*
 > **Time.** Every Movement below opens with its minutes from Table I–1 and what to run
 > if you are behind. *If you have time* marks depth a four-hour table can leave out.
 >
-> **Fights** live in chapter IX, *The Snakes* (`09_The_Snakes.md`), one card each.
-> Stat blocks are in chapter X, the Bestiary (`10_Bestiary.md`). Nothing in this chapter
+> **Fights** live in chapter IX, *The Snakes*, one card each. Stat blocks are in
+> chapter X, the Bestiary. Nothing in this chapter
 > carries an enemy's numbers. **No fight in this chapter is mandatory, and every one of
 > them is visible before it starts.**
 

@@ -149,13 +149,13 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
 
 ## R3: Scaffolding and conversion artefacts
 
-### ☐ R3.1 Simulation data (P2-1) (QR6: table advice)
+### ☑ R3.1 Simulation data (P2-1) (QR6: table advice)
 - **Do (if approved):** move S14's table and every "one fight in N" or "in simulation" line to
   `research/oraga_5e_simulation_notes.md`. Replace each with table advice ("Expect one character
   to drop"). Budget lines keep their label, plus a plain-play clause.
 - **Accept:** the simulation-jargon rule is at 0.
 
-### ☐ R3.2 File names, the HTML comment, conversion talk, README claims, stale ledger (P2-2, P2-3, P2-4, P2-13, P3-24)
+### ☑ R3.2 File names, the HTML comment, conversion talk, README claims, stale ledger (P2-2, P2-3, P2-4, P2-13, P3-24)
 - **Do:**
   - Delete the file-name parentheticals (04:22–23).
   - Delete the INVENTIONS #11 comment (09:268); the ledger keeps the record.
@@ -166,12 +166,12 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
   - Mark INVENTIONS #18 and #38 superseded.
 - **Accept:** the HTML-comment, file-name and conversion-talk rules are at 0 in body text.
 
-### ☐ R3.3 "At a 2014 table" glossary box (P2-19)
+### ☑ R3.3 "At a 2014 table" glossary box (P2-19)
 - **Do:** add one boxed list in chapter X covering Emanation, Utilize, the Magic action,
   Bloodied, Study, Influence, the condition-line format and the 2014 encounter multiplier. Soften
   README:16–17 and 10:52–54.
 
-### ☐ R3.4 Commit R3
+### ☑ R3.4 Commit R3
 
 ---
 

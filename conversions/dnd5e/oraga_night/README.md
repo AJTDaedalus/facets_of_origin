@@ -13,8 +13,9 @@ level.
 **Length:** one session, **4½–5 hours**. Play starts in the street outside the palace
 and ends at dawn (the runtime table is in chapter I)
 
-**Rules:** any fifth-edition core rules; written against the **SRD 5.2.1** and playable
-at a 2014 table. You do not need the Facets of Origin books.
+**Rules:** any fifth-edition core rules; written against the **SRD 5.2.1**. A 2014
+table can play it with the short glossary in chapter X ("At a 2014 table") and
+rebuilt pregens.
 
 **Tone:** glamour over a blade: festival splendor and social fencing, with something
 wrong accumulating underneath, and knives under every table
@@ -39,11 +40,10 @@ that was never meant for them. Each carries an agenda into the Crystal Court. No
 them carries the right one, because the night has an agenda of its own, and at
 midnight three guests keep their masks on.
 
-This is the fifth-edition conversion of the Facets of Origin module of the same name.
-Same night, same canon, same seven Movements, same spine: the Uninvited cannot be
-beaten, only delayed, and history bends toward the recorded outcome through play. What
-changes is the rules layer, and the snakes: the host's enemies, each with a visible,
-optional, escalating threat line a party can walk into.
+The night runs in seven Movements on one spine: the Uninvited cannot be beaten, only
+delayed, and history bends toward the recorded outcome through play. Around that spine
+move the snakes, the host's enemies, each with a visible, optional, escalating threat
+line a party can walk into.
 
 ## Contents
 
@@ -122,8 +122,8 @@ ladder for the whole night (chapter I), success at a cost on a near miss (chapte
 NPCs who make no checks outside a fight (chapter I), and nonlethal blows from any attack,
 ranged and spell attacks included (chapter IX).
 
-Every stat block is an
-original creature written in the SRD's format, and none is copied from the SRD. The
+Most stat blocks are original creatures written in the SRD's format; the Sect Guard
+adapts the SRD Guard, and a guest uses the SRD commoner. The
 pregenerated characters are built from SRD options; their class-feature text is
 adapted from the SRD. At a 2014 table, a gifted human takes the gift as a bonus feat
 at 1st level.
@@ -132,5 +132,6 @@ No other Wizards of the Coast material is used. This module is not affiliated wi
 endorsed, sponsored or approved by Wizards of the Coast.
 
 The module's own text is part of the Facets of Origin project, released under GPLv3
-(see the repository root). The world of Svara and all its canon belong to the setting's
-author and appear here by that author's hand.
+(see the repository root), and is adapted from the Facets of Origin edition of *Oraga
+Night*. The world of Svara and its canon belong to the setting's author; inventions are
+listed in `INVENTIONS_5e.md`.
