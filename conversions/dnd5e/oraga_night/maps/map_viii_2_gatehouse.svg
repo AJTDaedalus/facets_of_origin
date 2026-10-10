@@ -1,0 +1,270 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="822" height="982" viewBox="0 0 822 982" data-px-per-ft="6">
+<title>Map VIII–2: The Gatehouse Court</title>
+<rect x="0" y="0" width="822" height="982" fill="#ffffff"/>
+<rect x="22" y="480" width="528" height="192" fill="#e7e4de"/>
+<text x="34" y="642" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="12" text-anchor="start" font-weight="bold" fill="#6b655c">B0  GATE STREET</text>
+<text x="34" y="663" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#6b655c">the hill, and the line</text>
+<rect x="106" y="120" width="360" height="270" fill="#f6f1e6"/>
+<rect x="166" y="390" width="240" height="90" fill="#ece6d8"/>
+<rect x="241" y="390" width="90" height="90" fill="#f6f1e6"/>
+<g id="grid" stroke="#b8b0a0" stroke-width="0.5" opacity="0.8">
+<line x1="136" y1="390" x2="136" y2="120"/>
+<line x1="166" y1="390" x2="166" y2="120"/>
+<line x1="196" y1="390" x2="196" y2="120"/>
+<line x1="226" y1="390" x2="226" y2="120"/>
+<line x1="256" y1="390" x2="256" y2="120"/>
+<line x1="286" y1="390" x2="286" y2="120"/>
+<line x1="316" y1="390" x2="316" y2="120"/>
+<line x1="346" y1="390" x2="346" y2="120"/>
+<line x1="376" y1="390" x2="376" y2="120"/>
+<line x1="406" y1="390" x2="406" y2="120"/>
+<line x1="436" y1="390" x2="436" y2="120"/>
+<line x1="106" y1="360" x2="466" y2="360"/>
+<line x1="106" y1="330" x2="466" y2="330"/>
+<line x1="106" y1="300" x2="466" y2="300"/>
+<line x1="106" y1="270" x2="466" y2="270"/>
+<line x1="106" y1="240" x2="466" y2="240"/>
+<line x1="106" y1="210" x2="466" y2="210"/>
+<line x1="106" y1="180" x2="466" y2="180"/>
+<line x1="106" y1="150" x2="466" y2="150"/>
+<line x1="271" y1="480" x2="271" y2="390"/>
+<line x1="301" y1="480" x2="301" y2="390"/>
+<line x1="241" y1="450" x2="331" y2="450"/>
+<line x1="241" y1="420" x2="331" y2="420"/>
+<line x1="52" y1="672" x2="52" y2="480"/>
+<line x1="82" y1="672" x2="82" y2="480"/>
+<line x1="112" y1="672" x2="112" y2="480"/>
+<line x1="142" y1="672" x2="142" y2="480"/>
+<line x1="172" y1="672" x2="172" y2="480"/>
+<line x1="202" y1="672" x2="202" y2="480"/>
+<line x1="232" y1="672" x2="232" y2="480"/>
+<line x1="262" y1="672" x2="262" y2="480"/>
+<line x1="292" y1="672" x2="292" y2="480"/>
+<line x1="322" y1="672" x2="322" y2="480"/>
+<line x1="352" y1="672" x2="352" y2="480"/>
+<line x1="382" y1="672" x2="382" y2="480"/>
+<line x1="412" y1="672" x2="412" y2="480"/>
+<line x1="442" y1="672" x2="442" y2="480"/>
+<line x1="472" y1="672" x2="472" y2="480"/>
+<line x1="502" y1="672" x2="502" y2="480"/>
+<line x1="532" y1="672" x2="532" y2="480"/>
+<line x1="22" y1="642" x2="550" y2="642"/>
+<line x1="22" y1="612" x2="550" y2="612"/>
+<line x1="22" y1="582" x2="550" y2="582"/>
+<line x1="22" y1="552" x2="550" y2="552"/>
+<line x1="22" y1="522" x2="550" y2="522"/>
+<line x1="22" y1="492" x2="550" y2="492"/>
+</g>
+<polyline points="106,390 106,120 466,120 466,390" fill="none" stroke="#2a2723" stroke-width="2.2" stroke-linejoin="miter"/>
+<polyline points="106,390 166,390" fill="none" stroke="#2a2723" stroke-width="2.2" stroke-linejoin="miter"/>
+<polyline points="406,390 466,390" fill="none" stroke="#2a2723" stroke-width="2.2" stroke-linejoin="miter"/>
+<polyline points="166,480 166,390 241,390 241,480 166,480" fill="none" stroke="#2a2723" stroke-width="2.2" stroke-linejoin="miter"/>
+<polyline points="331,480 331,390 406,390 406,480 331,480" fill="none" stroke="#2a2723" stroke-width="2.2" stroke-linejoin="miter"/>
+<g id="gate">
+<line x1="241" y1="476.4" x2="286" y2="476.4" stroke="#2a2723" stroke-width="3"/>
+<line x1="286" y1="476.4" x2="331" y2="476.4" stroke="#2a2723" stroke-width="3"/>
+<line x1="286" y1="483.6" x2="286" y2="469.2" stroke="#ffffff" stroke-width="1"/>
+<line x1="293.5" y1="476.4" x2="323.5" y2="476.4" stroke="#8c2f1f" stroke-width="3"/>
+<line x1="293.5" y1="476.4" x2="323.5" y2="476.4" stroke="none" data-fact-len="gatehouse.wicket_wide"/>
+<line x1="232" y1="487.2" x2="340" y2="487.2" stroke="#22201c" stroke-width="2.2" stroke-linecap="round"/>
+</g>
+<text x="286" y="456" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#6b655c">the arch</text>
+<text x="203.5" y="427.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#22201c">the cell</text>
+<line x1="190" y1="390" x2="214" y2="390" stroke="#ece6d8" stroke-width="5"/>
+<line x1="190" y1="386" x2="190" y2="394" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="214" y1="386" x2="214" y2="394" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="370" y1="390" x2="394" y2="390" stroke="#ece6d8" stroke-width="5"/>
+<line x1="370" y1="386" x2="370" y2="394" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="394" y1="386" x2="394" y2="394" stroke="#2a2723" stroke-width="1.6"/>
+<rect x="373" y="393" width="30" height="60" fill="#d8cfbd" stroke="#2a2723" stroke-width="1"/>
+<line x1="373" y1="443" x2="403" y2="443" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="373" y1="433" x2="403" y2="433" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="373" y1="423" x2="403" y2="423" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="373" y1="413" x2="403" y2="413" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="373" y1="403" x2="403" y2="403" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="388" y1="400.2" x2="388" y2="445.8" stroke="#22201c" stroke-width="1.1"/>
+<polygon points="388,445.8 384.5,439.8 391.5,439.8" fill="#22201c"/>
+<rect x="334" y="453" width="69" height="21" fill="#d8cfbd" stroke="#2a2723" stroke-width="1"/>
+<rect x="337" y="393" width="30" height="60" fill="#d8cfbd" stroke="#2a2723" stroke-width="1"/>
+<line x1="337" y1="443" x2="367" y2="443" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="337" y1="433" x2="367" y2="433" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="337" y1="423" x2="367" y2="423" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="337" y1="413" x2="367" y2="413" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="337" y1="403" x2="367" y2="403" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="352" y1="445.8" x2="352" y2="400.2" stroke="#22201c" stroke-width="1.1"/>
+<polygon points="352,400.2 348.5,406.2 355.5,406.2" fill="#22201c"/>
+<text x="368.5" y="467.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="7.5" text-anchor="middle" font-style="italic" fill="#6b655c">landing, 5 ft</text>
+<rect x="172" y="483" width="66" height="27" fill="#d8cfbd" stroke="#2a2723" stroke-width="1"/>
+<line x1="181.43" y1="510" x2="181.43" y2="483" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="190.86" y1="510" x2="190.86" y2="483" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="200.29" y1="510" x2="200.29" y2="483" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="209.71" y1="510" x2="209.71" y2="483" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="219.14" y1="510" x2="219.14" y2="483" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="228.57" y1="510" x2="228.57" y2="483" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="179.92" y1="496.5" x2="230.08" y2="496.5" stroke="#22201c" stroke-width="1.1"/>
+<polygon points="230.08,496.5 224.08,493 224.08,500" fill="#22201c"/>
+<rect x="166" y="390" width="240" height="90" fill="none" stroke="#22201c" stroke-width="1" stroke-dasharray="5 3"/>
+<line x1="256" y1="120" x2="316" y2="120" stroke="#f6f1e6" stroke-width="5"/>
+<line x1="256" y1="116" x2="256" y2="124" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="316" y1="116" x2="316" y2="124" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="286" y1="117" x2="286" y2="123" stroke="#2a2723" stroke-width="1"/>
+<rect x="136" y="84" width="300" height="33.6" fill="#efede8"/>
+<text x="286" y="103.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#6b655c">B2, the Crystal Court (map VIII–3)</text>
+<text x="286" y="216" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">B1  THE GATEHOUSE COURT</text>
+<text x="286" y="216" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#22201c">B1  THE GATEHOUSE COURT</text>
+<text x="286" y="240" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">B12 after midnight, held</text>
+<text x="286" y="240" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="middle" font-style="italic" fill="#22201c">B12 after midnight, held</text>
+<text x="286" y="273" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">the court's crystal wall, lit (S3)</text>
+<text x="286" y="273" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#6b655c">the court's crystal wall, lit (S3)</text>
+<text x="286" y="139.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">main doors (10 ft)</text>
+<text x="286" y="139.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#22201c">main doors (10 ft)</text>
+<text x="418" y="294" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">gatehouse stair</text>
+<text x="418" y="294" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#22201c">gatehouse stair</text>
+<text x="418" y="309" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">door; up to the walk</text>
+<text x="418" y="309" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#22201c">door; up to the walk</text>
+<line x1="418" y1="318" x2="388" y2="387" stroke="#6b655c" stroke-width="0.7"/>
+<text x="418" y="405" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">gate-walk above,</text>
+<text x="418" y="405" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c">gate-walk above,</text>
+<text x="418" y="418.8" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">15 ft up, over the</text>
+<text x="418" y="418.8" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c" data-fact="gatehouse.gate_walk_height">15 ft up, over the</text>
+<text x="418" y="432.6" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">arch (dashed)</text>
+<text x="418" y="432.6" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c">arch (dashed)</text>
+<text x="286" y="375.6" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">fourth Blade, on the walk above</text>
+<text x="286" y="375.6" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#22201c">fourth Blade, on the walk above</text>
+<line x1="286" y1="380.4" x2="286" y2="420.6" stroke="#6b655c" stroke-width="0.7"/>
+<text x="31" y="504" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">outer stair,</text>
+<text x="31" y="504" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c">outer stair,</text>
+<text x="31" y="517.8" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">walk to street</text>
+<text x="31" y="517.8" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c">walk to street</text>
+<text x="352" y="498" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">the bar (street side)</text>
+<text x="352" y="498" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c">the bar (street side)</text>
+<text x="286" y="570" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">wicket: 5 ft, in the leaf on the court's left</text>
+<text x="286" y="570" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#22201c">wicket: 5 ft, in the leaf on the court's left</text>
+<line x1="308.5" y1="561" x2="308.5" y2="483.6" stroke="#6b655c" stroke-width="0.7"/>
+<g id="bought">
+<circle cx="214" cy="540" r="5" fill="#ffffff" stroke="#8c2f1f" stroke-width="1.8"/>
+<circle cx="286" cy="540" r="5" fill="#ffffff" stroke="#8c2f1f" stroke-width="1.8"/>
+<circle cx="358" cy="540" r="5" fill="#ffffff" stroke="#8c2f1f" stroke-width="1.8"/>
+<circle cx="310" cy="496.8" r="5" fill="#8c2f1f" stroke="#8c2f1f" stroke-width="1.8"/>
+<circle cx="286" cy="426" r="5" fill="#ffffff" stroke="#8c2f1f" stroke-width="1.8" stroke-dasharray="2 1.5"/>
+</g>
+<text x="382" y="544.8" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">three Blades, 10 ft out</text>
+<text x="382" y="544.8" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c">three Blades, 10 ft out</text>
+<text x="382" y="558.6" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">across Gate Street</text>
+<text x="382" y="558.6" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c">across Gate Street</text>
+<text x="322" y="517.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">the sergeant, at the wicket</text>
+<text x="322" y="517.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c">the sergeant, at the wicket</text>
+<line x1="250" y1="480" x2="250" y2="540" stroke="#6b655c" stroke-width="0.8" data-fact-len="gatehouse.blades_out"/>
+<line x1="246" y1="480" x2="254" y2="480" stroke="#6b655c" stroke-width="0.8"/>
+<line x1="246" y1="540" x2="254" y2="540" stroke="#6b655c" stroke-width="0.8"/>
+<text x="256" y="513" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">10 ft</text>
+<text x="256" y="513" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#6b655c">10 ft</text>
+<rect x="274.8" y="328" width="22.4" height="16" rx="3" fill="#8c2f1f"/>
+<text x="286" y="340" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#ffffff">S3</text>
+<g id="section" data-px-per-ft="5">
+<text x="42" y="706" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="11" text-anchor="start" font-weight="bold" fill="#22201c">Section through the gatehouse, looking west (heights from card S3)</text>
+<rect x="52" y="836" width="130" height="15" fill="#e7e4de"/>
+<rect x="257" y="836" width="225" height="15" fill="#f6f1e6"/>
+<line x1="52" y1="836" x2="482" y2="836" stroke="#2a2723" stroke-width="1.6"/>
+<text x="57" y="848" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#6b655c">Gate Street</text>
+<text x="477" y="848" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="end" font-style="italic" fill="#6b655c">the Gatehouse Court</text>
+<rect x="182" y="761" width="75" height="75" fill="#ece6d8" stroke="#2a2723" stroke-width="1.2"/>
+<polyline points="182,761 182,743.5 257,743.5 257,761" fill="none" stroke="#2a2723" stroke-width="0.8" stroke-dasharray="3 2"/>
+<text x="219.5" y="738.5" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#22201c">the gate-walk</text>
+<polyline points="257,836 207,811 189.5,811" fill="none" stroke="#2a2723" stroke-width="1.6"/>
+<polyline points="207,811 257,761" fill="none" stroke="#2a2723" stroke-width="1.6" stroke-dasharray="5 2"/>
+<line x1="147" y1="761" x2="147" y2="836" stroke="#6b655c" stroke-width="0.9" data-fact-len="gatehouse.walk_to_street_drop" data-px-per-ft="5"/>
+<line x1="147" y1="761" x2="182" y2="761" stroke="#6b655c" stroke-width="0.6" stroke-dasharray="2 2"/>
+<text x="142" y="801.5" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="end" font-style="italic" fill="#6b655c">15-ft drop from the walk</text>
+<text x="142" y="813.5" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="end" font-style="italic" fill="#6b655c">to the street</text>
+<line x1="267" y1="761" x2="267" y2="836" stroke="#6b655c" stroke-width="0.9" data-fact-len="gatehouse.gate_walk_height" data-px-per-ft="5"/>
+<text x="272" y="828.5" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#6b655c">walk 15 ft up</text>
+<line x1="287" y1="761" x2="287" y2="811" stroke="#8c2f1f" stroke-width="1.2" data-fact-len="gatehouse.stair_fall" data-px-per-ft="5"/>
+<line x1="257" y1="761" x2="287" y2="761" stroke="#8c2f1f" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="207" y1="811" x2="287" y2="811" stroke="#8c2f1f" stroke-width="0.6" stroke-dasharray="2 2"/>
+<text x="292" y="781" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#8c2f1f">shoved from the top:</text>
+<text x="292" y="794" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#8c2f1f">falls 10 ft to the landing, 5 ft up (O53)</text>
+<line x1="182" y1="836" x2="182" y2="791" stroke="#8c2f1f" stroke-width="2.6"/>
+<text x="186" y="796" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#8c2f1f">gate</text>
+</g>
+<rect x="6" y="6" width="810" height="970" fill="none" stroke="#22201c" stroke-width="1.2"/>
+<rect x="10" y="10" width="802" height="962" fill="none" stroke="#22201c" stroke-width="0.5"/>
+<g id="title">
+<rect x="68" y="18" width="436" height="46" fill="#ffffff" stroke="#22201c" stroke-width="1"/>
+<rect x="71" y="21" width="430" height="40" fill="none" stroke="#22201c" stroke-width="0.4"/>
+<text x="286" y="40" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="17" text-anchor="middle" font-weight="bold" fill="#22201c">Map VIII–2: The Gatehouse Court</text>
+<text x="286" y="56" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="11" text-anchor="middle" font-style="italic" fill="#6b655c">B0 · B1 · B12 — the outer gate, the wicket and the gate-walk</text>
+</g>
+<g id="legend">
+<rect x="572" y="18" width="238" height="946" fill="#ffffff" stroke="#22201c" stroke-width="0.8"/>
+<text x="586" y="40" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="13" text-anchor="start" font-weight="bold" fill="#22201c">Legend</text>
+<line x1="586" y1="64" x2="612" y2="64" stroke="#2a2723" stroke-width="2.2"/>
+<text x="622" y="68" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Wall</text>
+<line x1="586" y1="84" x2="612" y2="84" stroke="#2a2723" stroke-width="2.2"/>
+<line x1="594" y1="84" x2="604" y2="84" stroke="#ffffff" stroke-width="5"/>
+<line x1="594" y1="80" x2="594" y2="88" stroke="#2a2723" stroke-width="1.4"/>
+<line x1="604" y1="80" x2="604" y2="88" stroke="#2a2723" stroke-width="1.4"/>
+<text x="622" y="88" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Door or doorway</text>
+<rect x="586" y="97" width="26" height="13" fill="#d8cfbd" stroke="#2a2723" stroke-width="0.8"/>
+<line x1="590.33" y1="97" x2="590.33" y2="110" stroke="#6b655c" stroke-width="0.5"/>
+<line x1="594.67" y1="97" x2="594.67" y2="110" stroke="#6b655c" stroke-width="0.5"/>
+<line x1="599" y1="97" x2="599" y2="110" stroke="#6b655c" stroke-width="0.5"/>
+<line x1="603.33" y1="97" x2="603.33" y2="110" stroke="#6b655c" stroke-width="0.5"/>
+<line x1="607.67" y1="97" x2="607.67" y2="110" stroke="#6b655c" stroke-width="0.5"/>
+<line x1="590" y1="103.5" x2="606" y2="103.5" stroke="#22201c" stroke-width="1"/>
+<polygon points="609,103.5 604,100.5 604,106.5" fill="#22201c"/>
+<text x="622" y="108" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Stairs (arrow points up)</text>
+<rect x="586" y="117" width="26" height="13" fill="none" stroke="#22201c" stroke-width="1" stroke-dasharray="4 2"/>
+<text x="622" y="128" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Gate-walk, overhead (15 ft)</text>
+<rect x="586" y="137" width="26" height="13" fill="#f6f1e6" stroke="#2a2723" stroke-width="0.6"/>
+<line x1="591.2" y1="137" x2="591.2" y2="150" stroke="#b8b0a0" stroke-width="0.5"/>
+<line x1="596.4" y1="137" x2="596.4" y2="150" stroke="#b8b0a0" stroke-width="0.5"/>
+<line x1="601.6" y1="137" x2="601.6" y2="150" stroke="#b8b0a0" stroke-width="0.5"/>
+<line x1="606.8" y1="137" x2="606.8" y2="150" stroke="#b8b0a0" stroke-width="0.5"/>
+<line x1="586" y1="143.5" x2="612" y2="143.5" stroke="#b8b0a0" stroke-width="0.5"/>
+<text x="622" y="148" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">5-foot grid</text>
+<circle cx="599" cy="163.5" r="4.5" fill="#ffffff" stroke="#8c2f1f" stroke-width="1.6"/>
+<text x="622" y="168" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">A Bought Blade at midnight</text>
+<text x="622" y="181" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">(S3)</text>
+<rect x="586" y="189" width="26" height="15" rx="3" fill="#8c2f1f"/>
+<text x="599" y="200" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-weight="bold" fill="#ffffff">S#</text>
+<text x="622" y="201" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Fight card (chapter IX)</text>
+<line x1="586" y1="217" x2="612" y2="217" stroke="#6b655c" stroke-width="0.8"/>
+<line x1="586" y1="213" x2="586" y2="221" stroke="#6b655c" stroke-width="0.8"/>
+<line x1="612" y1="213" x2="612" y2="221" stroke="#6b655c" stroke-width="0.8"/>
+<text x="622" y="221" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Distance given by the text</text>
+<text x="586" y="251" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="13" text-anchor="start" font-weight="bold" fill="#22201c">Key</text>
+<text x="586" y="272" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B0</text>
+<text x="622" y="272" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Gate Street, the street and</text>
+<text x="622" y="285" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">the line</text>
+<text x="586" y="302" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B1</text>
+<text x="622" y="302" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The Gatehouse Court (chapter</text>
+<text x="622" y="315" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">IV)</text>
+<text x="586" y="332" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B12</text>
+<text x="622" y="332" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The same court after</text>
+<text x="622" y="345" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">midnight, held (chapter V;</text>
+<text x="622" y="358" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">card S3)</text>
+</g>
+<g id="caption">
+<text x="28" y="932" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">Approximate: the court, the gatehouse and the gate's width are not given and are drawn plausibly.</text>
+<text x="28" y="946" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">From the text: the gate-walk 15 ft up, the 15-ft drop, the 10-ft fall from the stair (with O53's</text>
+<text x="28" y="960" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">landing), the 5-ft wicket, the bar on the street side, and where the Bought stand (card S3).</text>
+</g>
+<g id="scalebar">
+<rect x="32" y="900" width="24" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
+<rect x="56" y="900" width="24" height="6" fill="#ffffff" stroke="#22201c" stroke-width="0.6"/>
+<rect x="80" y="900" width="24" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
+<rect x="104" y="900" width="24" height="6" fill="#ffffff" stroke="#22201c" stroke-width="0.6"/>
+<rect x="128" y="900" width="24" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
+<rect x="32" y="900" width="120" height="6" fill="none" stroke="#22201c" stroke-width="0.6" id="scalebar-span" data-fact-w="20"/>
+<text x="32" y="896" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" fill="#22201c">0</text>
+<text x="152" y="896" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" fill="#22201c">20</text>
+<text x="160" y="906" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" fill="#22201c">feet  (one grid square = 5 feet)</text>
+</g>
+<g id="orientation">
+<line x1="502" y1="98" x2="538" y2="98" stroke="#22201c" stroke-width="1.4"/>
+<polygon points="546,98 536,93 536,103" fill="#22201c"/>
+<text x="524" y="89" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="12" text-anchor="middle" font-weight="bold" fill="#22201c">E</text>
+<text x="524" y="115" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="8.5" text-anchor="middle" font-style="italic" fill="#6b655c">east only</text>
+</g>
+</svg>

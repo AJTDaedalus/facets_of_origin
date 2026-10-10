@@ -427,6 +427,9 @@ def _bare_dc_hits(s: str):
         yield m.start(), m.group() + (am.group() if am else "")
 
 
+_LINK_TARGET = re.compile(r"\]\([^)\s]*\)")
+
+
 def lint_hard(text: str, fname: str, allow=()) -> list[Hit]:
     """Hard-rule hits, run on unwrapped paragraphs so a phrase split across lines is seen.
 
@@ -457,6 +460,8 @@ def lint_hard(text: str, fname: str, allow=()) -> list[Hit]:
             else:
                 if family == "deadly_budget" and not _BUDGET_LINE.search(s):
                     continue
+                if family == "repo_filename":    # a Markdown link target is not prose (R4 maps)
+                    s = _LINK_TARGET.sub(lambda m: " " * len(m.group()), s)
                 for m in rx.finditer(s):
                     g = m.group()
                     if family == "lowercase_terms" and g in ("advantage", "disadvantage"):

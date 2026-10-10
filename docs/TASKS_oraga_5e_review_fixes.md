@@ -177,7 +177,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
 
 ## R4: Maps
 
-### ☐ R4.1 Keyed maps (P1-6) (QR5: option a)
+### ☑ R4.1 Keyed maps (P1-6) (QR5: option a)
 - **Option (a), I draw the maps:**
   - Write `M/maps/build_maps.py` to generate original SVG maps from `facts.yaml`. Use the O28
     sizes and the O33/O34 geometry, a 5-foot grid option, room codes, a scale bar, and styling
@@ -195,7 +195,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
   come".
 - **Time:** (a) 4 × 30 min. (b) 10 min.
 
-### ☐ R4.2 Commit R4
+### ☑ R4.2 Commit R4
 
 ---
 

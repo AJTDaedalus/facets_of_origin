@@ -1,0 +1,392 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1022" height="902" viewBox="0 0 1022 902" data-px-per-ft="4">
+<title>Map VIII–3: The Crystal Court</title>
+<rect x="0" y="0" width="1022" height="902" fill="#ffffff"/>
+<rect x="126" y="140" width="480" height="40" fill="#e4ecd9"/>
+<rect x="126" y="84" width="480" height="56" fill="#d9e5cb" opacity="0.6"/>
+<rect x="126" y="180" width="80" height="560" fill="#ebe1cb"/>
+<rect x="526" y="180" width="80" height="560" fill="#ebe1cb"/>
+<rect x="206" y="180" width="320" height="560" fill="#f6f1e6" id="court-floor" data-fact-w="court.width" data-fact-h="court.length"/>
+<rect x="526" y="580" width="80" height="40" fill="#f6f1e6"/>
+<g id="grid" stroke="#b8b0a0" stroke-width="0.5" opacity="0.8">
+<line x1="226" y1="740" x2="226" y2="180"/>
+<line x1="246" y1="740" x2="246" y2="180"/>
+<line x1="266" y1="740" x2="266" y2="180"/>
+<line x1="286" y1="740" x2="286" y2="180"/>
+<line x1="306" y1="740" x2="306" y2="180"/>
+<line x1="326" y1="740" x2="326" y2="180"/>
+<line x1="346" y1="740" x2="346" y2="180"/>
+<line x1="366" y1="740" x2="366" y2="180"/>
+<line x1="386" y1="740" x2="386" y2="180"/>
+<line x1="406" y1="740" x2="406" y2="180"/>
+<line x1="426" y1="740" x2="426" y2="180"/>
+<line x1="446" y1="740" x2="446" y2="180"/>
+<line x1="466" y1="740" x2="466" y2="180"/>
+<line x1="486" y1="740" x2="486" y2="180"/>
+<line x1="506" y1="740" x2="506" y2="180"/>
+<line x1="206" y1="720" x2="526" y2="720"/>
+<line x1="206" y1="700" x2="526" y2="700"/>
+<line x1="206" y1="680" x2="526" y2="680"/>
+<line x1="206" y1="660" x2="526" y2="660"/>
+<line x1="206" y1="640" x2="526" y2="640"/>
+<line x1="206" y1="620" x2="526" y2="620"/>
+<line x1="206" y1="600" x2="526" y2="600"/>
+<line x1="206" y1="580" x2="526" y2="580"/>
+<line x1="206" y1="560" x2="526" y2="560"/>
+<line x1="206" y1="540" x2="526" y2="540"/>
+<line x1="206" y1="520" x2="526" y2="520"/>
+<line x1="206" y1="500" x2="526" y2="500"/>
+<line x1="206" y1="480" x2="526" y2="480"/>
+<line x1="206" y1="460" x2="526" y2="460"/>
+<line x1="206" y1="440" x2="526" y2="440"/>
+<line x1="206" y1="420" x2="526" y2="420"/>
+<line x1="206" y1="400" x2="526" y2="400"/>
+<line x1="206" y1="380" x2="526" y2="380"/>
+<line x1="206" y1="360" x2="526" y2="360"/>
+<line x1="206" y1="340" x2="526" y2="340"/>
+<line x1="206" y1="320" x2="526" y2="320"/>
+<line x1="206" y1="300" x2="526" y2="300"/>
+<line x1="206" y1="280" x2="526" y2="280"/>
+<line x1="206" y1="260" x2="526" y2="260"/>
+<line x1="206" y1="240" x2="526" y2="240"/>
+<line x1="206" y1="220" x2="526" y2="220"/>
+<line x1="206" y1="200" x2="526" y2="200"/>
+<line x1="146" y1="740" x2="146" y2="180"/>
+<line x1="166" y1="740" x2="166" y2="180"/>
+<line x1="186" y1="740" x2="186" y2="180"/>
+<line x1="126" y1="720" x2="206" y2="720"/>
+<line x1="126" y1="700" x2="206" y2="700"/>
+<line x1="126" y1="680" x2="206" y2="680"/>
+<line x1="126" y1="660" x2="206" y2="660"/>
+<line x1="126" y1="640" x2="206" y2="640"/>
+<line x1="126" y1="620" x2="206" y2="620"/>
+<line x1="126" y1="600" x2="206" y2="600"/>
+<line x1="126" y1="580" x2="206" y2="580"/>
+<line x1="126" y1="560" x2="206" y2="560"/>
+<line x1="126" y1="540" x2="206" y2="540"/>
+<line x1="126" y1="520" x2="206" y2="520"/>
+<line x1="126" y1="500" x2="206" y2="500"/>
+<line x1="126" y1="480" x2="206" y2="480"/>
+<line x1="126" y1="460" x2="206" y2="460"/>
+<line x1="126" y1="440" x2="206" y2="440"/>
+<line x1="126" y1="420" x2="206" y2="420"/>
+<line x1="126" y1="400" x2="206" y2="400"/>
+<line x1="126" y1="380" x2="206" y2="380"/>
+<line x1="126" y1="360" x2="206" y2="360"/>
+<line x1="126" y1="340" x2="206" y2="340"/>
+<line x1="126" y1="320" x2="206" y2="320"/>
+<line x1="126" y1="300" x2="206" y2="300"/>
+<line x1="126" y1="280" x2="206" y2="280"/>
+<line x1="126" y1="260" x2="206" y2="260"/>
+<line x1="126" y1="240" x2="206" y2="240"/>
+<line x1="126" y1="220" x2="206" y2="220"/>
+<line x1="126" y1="200" x2="206" y2="200"/>
+<line x1="546" y1="740" x2="546" y2="180"/>
+<line x1="566" y1="740" x2="566" y2="180"/>
+<line x1="586" y1="740" x2="586" y2="180"/>
+<line x1="526" y1="720" x2="606" y2="720"/>
+<line x1="526" y1="700" x2="606" y2="700"/>
+<line x1="526" y1="680" x2="606" y2="680"/>
+<line x1="526" y1="660" x2="606" y2="660"/>
+<line x1="526" y1="640" x2="606" y2="640"/>
+<line x1="526" y1="620" x2="606" y2="620"/>
+<line x1="526" y1="600" x2="606" y2="600"/>
+<line x1="526" y1="580" x2="606" y2="580"/>
+<line x1="526" y1="560" x2="606" y2="560"/>
+<line x1="526" y1="540" x2="606" y2="540"/>
+<line x1="526" y1="520" x2="606" y2="520"/>
+<line x1="526" y1="500" x2="606" y2="500"/>
+<line x1="526" y1="480" x2="606" y2="480"/>
+<line x1="526" y1="460" x2="606" y2="460"/>
+<line x1="526" y1="440" x2="606" y2="440"/>
+<line x1="526" y1="420" x2="606" y2="420"/>
+<line x1="526" y1="400" x2="606" y2="400"/>
+<line x1="526" y1="380" x2="606" y2="380"/>
+<line x1="526" y1="360" x2="606" y2="360"/>
+<line x1="526" y1="340" x2="606" y2="340"/>
+<line x1="526" y1="320" x2="606" y2="320"/>
+<line x1="526" y1="300" x2="606" y2="300"/>
+<line x1="526" y1="280" x2="606" y2="280"/>
+<line x1="526" y1="260" x2="606" y2="260"/>
+<line x1="526" y1="240" x2="606" y2="240"/>
+<line x1="526" y1="220" x2="606" y2="220"/>
+<line x1="526" y1="200" x2="606" y2="200"/>
+<line x1="146" y1="180" x2="146" y2="140"/>
+<line x1="166" y1="180" x2="166" y2="140"/>
+<line x1="186" y1="180" x2="186" y2="140"/>
+<line x1="206" y1="180" x2="206" y2="140"/>
+<line x1="226" y1="180" x2="226" y2="140"/>
+<line x1="246" y1="180" x2="246" y2="140"/>
+<line x1="266" y1="180" x2="266" y2="140"/>
+<line x1="286" y1="180" x2="286" y2="140"/>
+<line x1="306" y1="180" x2="306" y2="140"/>
+<line x1="326" y1="180" x2="326" y2="140"/>
+<line x1="346" y1="180" x2="346" y2="140"/>
+<line x1="366" y1="180" x2="366" y2="140"/>
+<line x1="386" y1="180" x2="386" y2="140"/>
+<line x1="406" y1="180" x2="406" y2="140"/>
+<line x1="426" y1="180" x2="426" y2="140"/>
+<line x1="446" y1="180" x2="446" y2="140"/>
+<line x1="466" y1="180" x2="466" y2="140"/>
+<line x1="486" y1="180" x2="486" y2="140"/>
+<line x1="506" y1="180" x2="506" y2="140"/>
+<line x1="526" y1="180" x2="526" y2="140"/>
+<line x1="546" y1="180" x2="546" y2="140"/>
+<line x1="566" y1="180" x2="566" y2="140"/>
+<line x1="586" y1="180" x2="586" y2="140"/>
+<line x1="126" y1="160" x2="606" y2="160"/>
+</g>
+<rect x="306" y="200" width="120" height="60" fill="#e2d3b4" stroke="#2a2723" stroke-width="1.2" id="dais" data-fact-w="court.dais_across"/>
+<rect x="326" y="214" width="80" height="14" fill="#c9b48c" stroke="#2a2723" stroke-width="0.6"/>
+<text x="366" y="243.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#22201c" data-fact="court.dais_high">the dais, 3 ft high</text>
+<text x="366" y="209.6" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="8.5" text-anchor="middle" font-style="italic" fill="#6b655c">high table</text>
+<polyline points="126,740 126,180 606,180 606,740 126,740" fill="none" stroke="#2a2723" stroke-width="2.2" stroke-linejoin="miter"/>
+<polyline points="606,580 606,740" fill="none" stroke="#2a2723" stroke-width="2.2" stroke-linejoin="miter"/>
+<line x1="206" y1="738" x2="206" y2="182" stroke="#2a2723" stroke-width="3.2"/>
+<line x1="206" y1="738" x2="206" y2="182" stroke="#ffffff" stroke-width="1.4"/>
+<line x1="206" y1="738" x2="206" y2="182" stroke="#2a2723" stroke-width="0.5" stroke-dasharray="1 5"/>
+<line x1="526" y1="738" x2="526" y2="620" stroke="#2a2723" stroke-width="3.2"/>
+<line x1="526" y1="738" x2="526" y2="620" stroke="#ffffff" stroke-width="1.4"/>
+<line x1="526" y1="738" x2="526" y2="620" stroke="#2a2723" stroke-width="0.5" stroke-dasharray="1 5"/>
+<line x1="526" y1="580" x2="526" y2="182" stroke="#2a2723" stroke-width="3.2"/>
+<line x1="526" y1="580" x2="526" y2="182" stroke="#ffffff" stroke-width="1.4"/>
+<line x1="526" y1="580" x2="526" y2="182" stroke="#2a2723" stroke-width="0.5" stroke-dasharray="1 5"/>
+<line x1="526" y1="620" x2="606" y2="620" stroke="#2a2723" stroke-width="1.4"/>
+<line x1="526" y1="580" x2="606" y2="580" stroke="#2a2723" stroke-width="1.4"/>
+<line x1="526" y1="620" x2="526" y2="580" stroke="#f6f1e6" stroke-width="5"/>
+<line x1="522" y1="620" x2="530" y2="620" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="522" y1="580" x2="530" y2="580" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="523" y1="600" x2="529" y2="600" stroke="#2a2723" stroke-width="1"/>
+<polyline points="606,620 646,620 646,452 606,452 606,580" fill="none" stroke="#2a2723" stroke-width="2.2" stroke-linejoin="miter"/>
+<rect x="606" y="452" width="40" height="72" fill="#e3d6ea"/>
+<rect x="606" y="524" width="40" height="96" fill="#d8cfbd" stroke="#2a2723" stroke-width="1"/>
+<line x1="606" y1="614" x2="646" y2="614" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="606" y1="608" x2="646" y2="608" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="606" y1="602" x2="646" y2="602" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="606" y1="596" x2="646" y2="596" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="606" y1="590" x2="646" y2="590" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="606" y1="584" x2="646" y2="584" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="606" y1="578" x2="646" y2="578" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="606" y1="572" x2="646" y2="572" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="606" y1="566" x2="646" y2="566" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="606" y1="560" x2="646" y2="560" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="606" y1="554" x2="646" y2="554" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="606" y1="548" x2="646" y2="548" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="606" y1="542" x2="646" y2="542" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="606" y1="536" x2="646" y2="536" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="606" y1="530" x2="646" y2="530" stroke="#6b655c" stroke-width="0.6"/>
+<line x1="626" y1="608.48" x2="626" y2="535.52" stroke="#22201c" stroke-width="1.1"/>
+<polygon points="626,535.52 622.5,541.52 629.5,541.52" fill="#22201c"/>
+<line x1="606" y1="620" x2="606" y2="580" stroke="#f6f1e6" stroke-width="5"/>
+<line x1="602" y1="620" x2="610" y2="620" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="602" y1="580" x2="610" y2="580" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="346" y1="740" x2="386" y2="740" stroke="#f6f1e6" stroke-width="5"/>
+<line x1="346" y1="736" x2="346" y2="744" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="386" y1="736" x2="386" y2="744" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="366" y1="737" x2="366" y2="743" stroke="#2a2723" stroke-width="1"/>
+<line x1="346" y1="740" x2="386" y2="740" stroke="none" data-fact-len="court.main_doors"/>
+<line x1="238" y1="180" x2="278" y2="180" stroke="#e4ecd9" stroke-width="5"/>
+<line x1="238" y1="176" x2="238" y2="184" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="278" y1="176" x2="278" y2="184" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="258" y1="177" x2="258" y2="183" stroke="#2a2723" stroke-width="1"/>
+<line x1="454" y1="180" x2="494" y2="180" stroke="#e4ecd9" stroke-width="5"/>
+<line x1="454" y1="176" x2="454" y2="184" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="494" y1="176" x2="494" y2="184" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="474" y1="177" x2="474" y2="183" stroke="#2a2723" stroke-width="1"/>
+<line x1="126" y1="356" x2="126" y2="336" stroke="#ebe1cb" stroke-width="5"/>
+<line x1="122" y1="356" x2="130" y2="356" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="122" y1="336" x2="130" y2="336" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="126" y1="356" x2="126" y2="336" stroke="none" data-fact-len="service_run.door"/>
+<line x1="126" y1="516" x2="126" y2="476" stroke="#ebe1cb" stroke-width="5"/>
+<line x1="122" y1="516" x2="130" y2="516" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="122" y1="476" x2="130" y2="476" stroke="#2a2723" stroke-width="1.6"/>
+<line x1="123" y1="496" x2="129" y2="496" stroke="#2a2723" stroke-width="1"/>
+<line x1="126" y1="140" x2="606" y2="140" stroke="#2a2723" stroke-width="3.2"/>
+<line x1="126" y1="140" x2="606" y2="140" stroke="#ffffff" stroke-width="1.4"/>
+<line x1="126" y1="140" x2="606" y2="140" stroke="#2a2723" stroke-width="0.5" stroke-dasharray="1 5"/>
+<text x="366" y="452" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="22" text-anchor="middle" font-weight="bold" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">B2</text>
+<text x="366" y="452" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="22" text-anchor="middle" font-weight="bold" fill="#22201c">B2</text>
+<text x="366" y="476" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">THE CRYSTAL COURT</text>
+<text x="366" y="476" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#22201c">THE CRYSTAL COURT</text>
+<text x="366" y="494" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">ground level · about 140 × 80 ft</text>
+<text x="366" y="494" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#22201c">ground level · about 140 × 80 ft</text>
+<text x="366" y="510" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">vault some 50 ft high</text>
+<text x="366" y="510" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#22201c" data-fact="court.vault">vault some 50 ft high</text>
+<text x="366" y="560" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">the Dance</text>
+<text x="366" y="560" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#6b655c">the Dance</text>
+<text x="166" y="420" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="18" text-anchor="middle" font-weight="bold" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">B3</text>
+<text x="166" y="420" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="18" text-anchor="middle" font-weight="bold" fill="#22201c">B3</text>
+<text x="166" y="440" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-weight="bold" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">banquet</text>
+<text x="166" y="440" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-weight="bold" fill="#22201c">banquet</text>
+<text x="166" y="454.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-weight="bold" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">gallery</text>
+<text x="166" y="454.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-weight="bold" fill="#22201c">gallery</text>
+<text x="166" y="468.8" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-weight="bold" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">(west)</text>
+<text x="166" y="468.8" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-weight="bold" fill="#22201c">(west)</text>
+<text x="166" y="483.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"></text>
+<text x="166" y="483.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" fill="#22201c"></text>
+<text x="166" y="497.6" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">gallery</text>
+<text x="166" y="497.6" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#22201c">gallery</text>
+<text x="166" y="512" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">level,</text>
+<text x="166" y="512" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#22201c">level,</text>
+<text x="166" y="526.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">12 ft up</text>
+<text x="166" y="526.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#22201c">12 ft up</text>
+<text x="566" y="420" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="18" text-anchor="middle" font-weight="bold" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">B3</text>
+<text x="566" y="420" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="18" text-anchor="middle" font-weight="bold" fill="#22201c">B3</text>
+<text x="566" y="440" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-weight="bold" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">banquet</text>
+<text x="566" y="440" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-weight="bold" fill="#22201c">banquet</text>
+<text x="566" y="454.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-weight="bold" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">gallery</text>
+<text x="566" y="454.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-weight="bold" fill="#22201c">gallery</text>
+<text x="566" y="468.8" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-weight="bold" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">(east)</text>
+<text x="566" y="468.8" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-weight="bold" fill="#22201c">(east)</text>
+<text x="566" y="483.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"></text>
+<text x="566" y="483.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" fill="#22201c"></text>
+<text x="566" y="497.6" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">gallery</text>
+<text x="566" y="497.6" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#22201c">gallery</text>
+<text x="566" y="512" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">level,</text>
+<text x="566" y="512" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#22201c">level,</text>
+<text x="566" y="526.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">12 ft up</text>
+<text x="566" y="526.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#22201c">12 ft up</text>
+<text x="210.8" y="308" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">rail 12 ft</text>
+<text x="210.8" y="308" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#22201c" data-fact="court.gallery_rail">rail 12 ft</text>
+<text x="210.8" y="318" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">above the floor</text>
+<text x="210.8" y="318" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#22201c">above the floor</text>
+<text x="366" y="758" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#22201c">main doors (10 ft)</text>
+<text x="366" y="772.8" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#6b655c">to B1, the Gatehouse Court (map VIII–2)</text>
+<text x="518" y="574" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="end" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">east doors</text>
+<text x="518" y="574" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="end" font-style="italic" fill="#22201c">east doors</text>
+<text x="652" y="588" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">stair up</text>
+<text x="652" y="588" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c">stair up</text>
+<text x="652" y="598" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">12 ft to</text>
+<text x="652" y="598" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c" data-fact="court.east_stair_rise">12 ft to</text>
+<text x="652" y="608" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">gallery level</text>
+<text x="652" y="608" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c">gallery level</text>
+<text x="652" y="476" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">cleared</text>
+<text x="652" y="476" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c">cleared</text>
+<text x="652" y="486" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">corridor to</text>
+<text x="652" y="486" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c">corridor to</text>
+<text x="652" y="496" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">B9 (map VIII–5)</text>
+<text x="652" y="496" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" font-style="italic" fill="#22201c">B9 (map VIII–5)</text>
+<text x="366" y="164" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">garden walk (railed)</text>
+<text x="366" y="164" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="middle" font-style="italic" fill="#22201c">garden walk (railed)</text>
+<text x="366" y="116" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">the upper terrace, below the rail (map VIII–4)</text>
+<text x="366" y="116" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-style="italic" fill="#6b655c">the upper terrace, below the rail (map VIII–4)</text>
+<text x="222" y="190.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">garden doors</text>
+<text x="222" y="190.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#22201c">garden doors</text>
+<text x="120" y="334" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="end" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">service door,</text>
+<text x="120" y="334" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="end" font-style="italic" fill="#22201c">service door,</text>
+<text x="120" y="344" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="end" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">5 ft, to B10</text>
+<text x="120" y="344" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="end" font-style="italic" fill="#22201c">5 ft, to B10</text>
+<text x="120" y="490" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="end" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">to B4, the</text>
+<text x="120" y="490" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="end" font-style="italic" fill="#22201c">to B4, the</text>
+<text x="120" y="500" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="end" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">Audience Hall</text>
+<text x="120" y="500" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="end" font-style="italic" fill="#22201c">Audience Hall</text>
+<line x1="506" y1="740" x2="506" y2="260" stroke="#6b655c" stroke-width="0.8" data-fact-len="court.dais_from_doors"/>
+<line x1="502" y1="740" x2="510" y2="740" stroke="#6b655c" stroke-width="0.8"/>
+<line x1="502" y1="260" x2="510" y2="260" stroke="#6b655c" stroke-width="0.8"/>
+<text x="500" y="359" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="end" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">about 120 ft,</text>
+<text x="500" y="359" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="end" font-style="italic" fill="#6b655c">about 120 ft,</text>
+<text x="500" y="371" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="end" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">doors to dais</text>
+<text x="500" y="371" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="end" font-style="italic" fill="#6b655c">doors to dais</text>
+<rect x="554.8" y="660" width="22.4" height="16" rx="3" fill="#8c2f1f"/>
+<text x="566" y="672" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#ffffff">S1</text>
+<rect x="154.8" y="628" width="22.4" height="16" rx="3" fill="#8c2f1f"/>
+<text x="166" y="640" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#ffffff">S1</text>
+<rect x="87.2" y="364" width="29.6" height="16" rx="3" fill="#8c2f1f"/>
+<text x="102" y="376" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#ffffff">S11</text>
+<rect x="151.2" y="252" width="29.6" height="16" rx="3" fill="#8c2f1f"/>
+<text x="166" y="264" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#ffffff">S13</text>
+<rect x="551.2" y="252" width="29.6" height="16" rx="3" fill="#8c2f1f"/>
+<text x="566" y="264" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#ffffff">S12</text>
+<rect x="6" y="6" width="1010" height="890" fill="none" stroke="#22201c" stroke-width="1.2"/>
+<rect x="10" y="10" width="1002" height="882" fill="none" stroke="#22201c" stroke-width="0.5"/>
+<g id="title">
+<rect x="164.7" y="18" width="442.6" height="46" fill="#ffffff" stroke="#22201c" stroke-width="1"/>
+<rect x="167.7" y="21" width="436.6" height="40" fill="none" stroke="#22201c" stroke-width="0.4"/>
+<text x="386" y="40" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="17" text-anchor="middle" font-weight="bold" fill="#22201c">Map VIII–3: The Crystal Court</text>
+<text x="386" y="56" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="11" text-anchor="middle" font-style="italic" fill="#6b655c">B2 · B3 — the Court, the banquet galleries and the east doors</text>
+</g>
+<g id="legend">
+<rect x="772" y="18" width="238" height="866" fill="#ffffff" stroke="#22201c" stroke-width="0.8"/>
+<text x="786" y="40" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="13" text-anchor="start" font-weight="bold" fill="#22201c">Legend</text>
+<line x1="786" y1="64" x2="812" y2="64" stroke="#2a2723" stroke-width="2.2"/>
+<text x="822" y="68" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Wall</text>
+<line x1="786" y1="84" x2="812" y2="84" stroke="#2a2723" stroke-width="2.2"/>
+<line x1="794" y1="84" x2="804" y2="84" stroke="#ffffff" stroke-width="5"/>
+<line x1="794" y1="80" x2="794" y2="88" stroke="#2a2723" stroke-width="1.4"/>
+<line x1="804" y1="80" x2="804" y2="88" stroke="#2a2723" stroke-width="1.4"/>
+<text x="822" y="88" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Door or doorway</text>
+<rect x="786" y="97" width="26" height="13" fill="#d8cfbd" stroke="#2a2723" stroke-width="0.8"/>
+<line x1="790.33" y1="97" x2="790.33" y2="110" stroke="#6b655c" stroke-width="0.5"/>
+<line x1="794.67" y1="97" x2="794.67" y2="110" stroke="#6b655c" stroke-width="0.5"/>
+<line x1="799" y1="97" x2="799" y2="110" stroke="#6b655c" stroke-width="0.5"/>
+<line x1="803.33" y1="97" x2="803.33" y2="110" stroke="#6b655c" stroke-width="0.5"/>
+<line x1="807.67" y1="97" x2="807.67" y2="110" stroke="#6b655c" stroke-width="0.5"/>
+<line x1="790" y1="103.5" x2="806" y2="103.5" stroke="#22201c" stroke-width="1"/>
+<polygon points="809,103.5 804,100.5 804,106.5" fill="#22201c"/>
+<text x="822" y="108" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Stairs (arrow points up)</text>
+<line x1="786" y1="124" x2="812" y2="124" stroke="#2a2723" stroke-width="3.2"/>
+<line x1="786" y1="124" x2="812" y2="124" stroke="#ffffff" stroke-width="1.4"/>
+<line x1="786" y1="124" x2="812" y2="124" stroke="#2a2723" stroke-width="0.5" stroke-dasharray="1 5"/>
+<text x="822" y="128" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Rail, 12 ft above the Court</text>
+<text x="822" y="141" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">floor</text>
+<rect x="786" y="150" width="26" height="13" fill="#f6f1e6" stroke="#2a2723" stroke-width="0.6"/>
+<text x="822" y="161" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Ground level</text>
+<rect x="786" y="170" width="26" height="13" fill="#ebe1cb" stroke="#2a2723" stroke-width="0.6"/>
+<text x="822" y="181" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Gallery level, 12 ft up</text>
+<rect x="786" y="190" width="26" height="13" fill="#e3d6ea" stroke="#2a2723" stroke-width="0.6"/>
+<text x="822" y="201" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Corridor at gallery level</text>
+<rect x="786" y="210" width="26" height="13" fill="#e4ecd9" stroke="#2a2723" stroke-width="0.6"/>
+<text x="822" y="221" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Garden walk (ground level)</text>
+<rect x="786" y="230" width="26" height="13" fill="#f6f1e6" stroke="#2a2723" stroke-width="0.6"/>
+<line x1="791.2" y1="230" x2="791.2" y2="243" stroke="#b8b0a0" stroke-width="0.5"/>
+<line x1="796.4" y1="230" x2="796.4" y2="243" stroke="#b8b0a0" stroke-width="0.5"/>
+<line x1="801.6" y1="230" x2="801.6" y2="243" stroke="#b8b0a0" stroke-width="0.5"/>
+<line x1="806.8" y1="230" x2="806.8" y2="243" stroke="#b8b0a0" stroke-width="0.5"/>
+<line x1="786" y1="236.5" x2="812" y2="236.5" stroke="#b8b0a0" stroke-width="0.5"/>
+<text x="822" y="241" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">5-foot grid</text>
+<rect x="786" y="249" width="26" height="15" rx="3" fill="#8c2f1f"/>
+<text x="799" y="260" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" font-weight="bold" fill="#ffffff">S#</text>
+<text x="822" y="261" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Fight card (chapter IX)</text>
+<line x1="786" y1="277" x2="812" y2="277" stroke="#6b655c" stroke-width="0.8"/>
+<line x1="786" y1="273" x2="786" y2="281" stroke="#6b655c" stroke-width="0.8"/>
+<line x1="812" y1="273" x2="812" y2="281" stroke="#6b655c" stroke-width="0.8"/>
+<text x="822" y="281" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Distance given by the text</text>
+<text x="786" y="311" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="13" text-anchor="start" font-weight="bold" fill="#22201c">Key</text>
+<text x="786" y="332" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B2</text>
+<text x="822" y="332" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The Crystal Court</text>
+<text x="786" y="349" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B3</text>
+<text x="822" y="349" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The banquet galleries, along</text>
+<text x="822" y="362" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">both long sides</text>
+<text x="786" y="379" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">S1</text>
+<text x="822" y="379" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The seating feud, in either</text>
+<text x="822" y="392" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">gallery</text>
+<text x="786" y="409" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">S11</text>
+<text x="822" y="409" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The one open door at</text>
+<text x="822" y="422" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">midnight</text>
+<text x="786" y="439" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">S12</text>
+<text x="822" y="439" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The minister in the smoke</text>
+<text x="786" y="456" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">S13</text>
+<text x="822" y="456" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The arrest in the fire</text>
+</g>
+<g id="caption">
+<text x="28" y="852" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">From the text: 140 × 80 ft under a 50-ft vault; main doors 10 ft; the dais 3 ft high, 30 ft across, 120 ft from the doors; rails 12 ft</text>
+<text x="28" y="866" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">up; the east doors and a stair rising 12 ft. Approximate: the galleries' depth (20 ft), where each door sits, and the garden walk</text>
+<text x="28" y="880" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">(O54). The musicians' gallery and B3's doors are not placed.</text>
+</g>
+<g id="scalebar">
+<rect x="32" y="820" width="40" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
+<rect x="72" y="820" width="40" height="6" fill="#ffffff" stroke="#22201c" stroke-width="0.6"/>
+<rect x="112" y="820" width="40" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
+<rect x="152" y="820" width="40" height="6" fill="#ffffff" stroke="#22201c" stroke-width="0.6"/>
+<rect x="192" y="820" width="40" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
+<rect x="32" y="820" width="200" height="6" fill="none" stroke="#22201c" stroke-width="0.6" id="scalebar-span" data-fact-w="50"/>
+<text x="32" y="816" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" fill="#22201c">0</text>
+<text x="232" y="816" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" fill="#22201c">50</text>
+<text x="240" y="826" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" fill="#22201c">feet  (one grid square = 5 feet)</text>
+</g>
+<g id="orientation">
+<line x1="702" y1="98" x2="738" y2="98" stroke="#22201c" stroke-width="1.4"/>
+<polygon points="746,98 736,93 736,103" fill="#22201c"/>
+<text x="724" y="89" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="12" text-anchor="middle" font-weight="bold" fill="#22201c">E</text>
+<text x="724" y="115" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="8.5" text-anchor="middle" font-style="italic" fill="#6b655c">east only</text>
+</g>
+</svg>

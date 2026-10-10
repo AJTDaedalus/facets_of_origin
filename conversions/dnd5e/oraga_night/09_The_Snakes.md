@@ -599,7 +599,7 @@ No one makes a Death Saving Throw. **Bare steel voids the whole scene** and brin
 honor guard instead: the Palace on Alert, and card S4. A spell with a visible effect,
 cast at a guest, counts as bare steel.
 
-**Terrain as rules.**
+**Terrain as rules.** *(see map VIII–3, chapter VIII)*
 - *The benches* are fixed and crowded. Moving through them is Difficult Terrain; a
   creature shoved into one has the Restrained condition until the end of its next
   turn.
@@ -687,7 +687,7 @@ The party will very likely win the fight. The difficulty of this scene is the cl
 not the roster. Do not add a second leader to "fix" it; that makes the fight much harder,
 not a little.
 
-**Terrain as rules.**
+**Terrain as rules.** *(see map VIII–5, chapter VIII)*
 - *The lowered service lamps.* The corridor is Dim Light: everyone in it is Lightly
   Obscured, and Wisdom (Insight) checks to read a face have Disadvantage. Dim Light
   alone is not enough to Hide; the doorways and the linen crates are.
@@ -812,7 +812,7 @@ With the captain drawn in and fought to the last, 1,500 + 1,100 =
 him. **Do not add a second sergeant.** A second leader makes the fight far harder at once,
 and it is the most reliable way to kill a table by accident.
 
-**Terrain as rules.**
+**Terrain as rules.** *(see map VIII–2, chapter VIII)*
 - *The gate grille.* Anything through it has Three-Quarters Cover (+5 AC). Conversation
   through it does not.
 - *The court's crystal wall, lit.* Bright Light: nobody on the party's side can Hide,
@@ -1049,7 +1049,7 @@ balustrade is not somewhere else.
 
 **Terrain as rules.** *The balustrade* is waist-high over a 10-foot drop to the next
 terrace (1d6 Bludgeoning damage, the Prone condition, and out of the scene). *The lanterns* leave pools of
-Dim Light between them.
+Dim Light between them *(see map VIII–4, chapter VIII)*.
 
 **Tactics.** The cousins use *A Quiet Word* and their fists, and they want it quiet.
 Steel comes out only if a character draws first.
@@ -1148,7 +1148,7 @@ fight it is over in a round, because the knives break when the first of them is
 Bloodied; fought to the last knife it plays Low, and now and then a character drops.
 The clock and the narrow run are the card.
 
-**Terrain as rules.**
+**Terrain as rules.** *(see map VIII–5, chapter VIII)*
 - *The service run* is 5 feet wide: one creature abreast, and a creature can't move
   through an enemy's space. Getting past someone is a DC 13 Dexterity (Acrobatics)
   check, or a Shove.
@@ -1373,7 +1373,7 @@ down. He will be back; he always has a second way.
   him when he stood alone (see chapter IV), as the Boranis side's leader — or as the
   party's ally, which is what he came to ask for.
 
-**Terrain as rules.**
+**Terrain as rules.** *(see map VIII–4, chapter VIII)*
 - *The balustrade* is waist-high over a 10-foot drop to the next terrace: 1d6
   Bludgeoning damage, the Prone condition, and out of the scene.
 - *Lanterns* leave pools of Dim Light between them.
@@ -1470,7 +1470,7 @@ stands between them and that window, lays hands on them, or calls the guard.
   nobody is meant to win.
 - *At heat 4:* the half-bell clock starts with one segment filled.
 
-**Terrain as rules.**
+**Terrain as rules.** *(see map VIII–5, chapter VIII)*
 - *The wall* is 20 feet of grown crystal to the window. Climbing it takes a DC 13
   Strength (Athletics) check with the rope, or a DC 18 Strength (Athletics) check without.
 - *The dark garden.* Darkness beyond the last lantern; the flower beds are Difficult
@@ -1545,7 +1545,7 @@ they cut, and as a fight it is light. The crush is what this card is about.
 
 *At heat 4:* the crush clock starts with one segment filled.
 
-**Terrain as rules.**
+**Terrain as rules.** *(see map VIII–3, chapter VIII)*
 - *The crowd* is Difficult Terrain. A creature (other than a bodyguard) that starts its
   turn in it must succeed on a DC 13 Strength (Athletics) or DC 13 Dexterity
   (Acrobatics) check or have the Prone condition and take 3 (1d6) Bludgeoning damage from the feet
@@ -1706,7 +1706,7 @@ comes down, and whoever is still inside is still inside.
   Between*, then gone).
 - *At heat 4:* the gallery clock starts with one segment filled.
 
-**Terrain as rules.**
+**Terrain as rules.** *(see map VIII–3, chapter VIII)*
 - *The fire* at the far end. A creature that enters it or starts its turn there must
   make a DC 13 Dexterity saving throw, taking 7 (2d6) Fire damage on a failed save, or
   half as much damage on a successful one. **The fire never finishes

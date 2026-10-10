@@ -131,48 +131,61 @@ arrives)*
 
 ## The Palace, Keyed
 
-*Not to scale; chapter V ("The Palace After Midnight: General Features") gives rough
-sizes: the Crystal Court about 140 by 80 feet, three 40-foot garden terraces and 150 feet
-of lower garden, and an east wing corridor about 100 feet long. The east wing is upstairs:
-the Court's east doors open on a stair that rises 12 feet to gallery level, and the wing's
-private stair is the garden stair, running down its outer wall to the upper terrace. The
-diagram shows only
-the rooms and the connections the text gives;
-where the text does not place a room, it is listed below the drawing instead. Dashed
-lines are the service passages, which thread the whole palace.*
+*Five maps, drawn from chapter V ("The Palace After Midnight: General Features"). Map
+VIII–1 is a schematic drawn without a scale: every room, the ways between them the text gives, and
+the floor each is on. Maps VIII–2 to VIII–5 are drawn to scale on a 5-foot grid, at the
+sizes chapter V prints: the Crystal Court about 140 by 80 feet, three 40-foot garden
+terraces and 150 feet of lower garden, and an east wing corridor about 100 feet long. The
+east wing is upstairs: the Court's east doors open on a stair that rises 12 feet to gallery
+level, and the wing's private stair is the garden stair, running down its outer wall to the
+upper terrace. Whatever the text does not fix (a wall's exact line, which way a stair turns,
+the order of the wing's rooms) is drawn plausibly, and each map's caption says so. Dashed
+lines are the service passages, which thread the whole palace; where the text gives no
+route for them, the map marks them schematic. Each map links a PNG copy for printing.*
 
-```
-                                 THE RIVER
-                                     |
-                         +-----------+----------------------+
-                         |  B5  THE GARDENS                 |
-                         |    the river gate (locked;       |
-                         |      Agenda 6; the Crossing      |
-                         |      ends here, Movement VI)     |
-                         |    the lower garden              | garden stair -+
-                         |    the garden terraces           |               :
-                         |      (the upper terrace: S6, S9) |               :
-                         +-----------+----------------------+               :
-                                     |                                      :
-+---------------+    +---------------+---------------+   east doors   +-----+------------+
-|  B4 Audience  |----|  B2  THE CRYSTAL COURT        |----------------| cleared corridor |
-|     Hall      |    |  dais, high table, musicians' |                |  B9 EAST WING    |
-+---------------+    |  gallery; the high gallery    |                |  Veier's rooms,  |
-                     |  above                        |                |  Raunu's rooms,  |
-     B3 Banquet -----|                               |----- B3        |  the nursery;    |
-     Galleries       +---------------+---------------+    Banquet     |  private stair   |
-                                     |  main doors        Galleries   |  to the garden   |
-                     +---------------+---------------+                +------------------+
-                     |  B1  THE GATEHOUSE COURT      |---- the gatehouse: the cell;
-                     |  (B12 after midnight, held)   |     stair to the gate-walk
-                     +---------------+---------------+
-                                     |  the outer gate, and its wicket (S3)
-                     +---------------+---------------+
-                     |  B0  THE STREET (Gate Street) |
-                     |  the hill, the line.          |
-                     |  Play starts here.            |
-                     +-------------------------------+
-```
+**Map VIII–1: The Palace** *(schematic, keyed B0–B13, floor by floor)*
+
+![Map VIII–1: The Palace, keyed B0 to B13 by floor](maps/map_viii_1_palace.svg)
+
+*[PNG](maps/map_viii_1_palace.png). The street (B0) up through the Gatehouse Court (B1, held
+after midnight as B12) to the Crystal Court (B2), with the banquet galleries (B3) along both
+sides and the Audience Hall (B4) off it; the gardens (B5) beyond the garden doors; the east
+wing (B9) up the east-door stair. The rooms the text places only by connection (B6, B7, B8,
+B10, B11, B13) are boxed at the right with those connections.*
+
+**Map VIII–2: The Gatehouse Court** *(B0, B1, B12; card S3)*
+
+![Map VIII–2: The Gatehouse Court, the outer gate, the wicket and the gate-walk](maps/map_viii_2_gatehouse.svg)
+
+*[PNG](maps/map_viii_2_gatehouse.png). The outer gate with its bar on the street side and
+the wicket in its left leaf; the cell and the gatehouse stair, which climbs to a landing
+and then to the gate-walk 15 feet up; the outer stair down to Gate Street; where the Bought
+stand at midnight. The section below the plan gives the heights.*
+
+**Map VIII–3: The Crystal Court** *(B2, B3; cards S1, S11, S12, S13)*
+
+![Map VIII–3: The Crystal Court and the banquet galleries](maps/map_viii_3_court.svg)
+
+*[PNG](maps/map_viii_3_court.png). The floor, the dais at the far end, the main doors, the
+garden doors to the railed garden walk, the galleries and their 12-foot rails, the east doors
+and the stair up, the service door on the gallery side (S11).*
+
+**Map VIII–4: The Terraces and the River Gate** *(B5; cards S6, S9)*
+
+![Map VIII–4: The garden terraces and the river gate](maps/map_viii_4_terraces.svg)
+
+*[PNG](maps/map_viii_4_terraces.png). The garden walk and its rail, the three terraces and
+their balustrades and end stairs, the foot of the garden stair, the lower garden and the river
+gate. A profile gives the drops.*
+
+**Map VIII–5: The East Wing and the Service Run** *(B9, B10; cards S2, S4, S7, S10)*
+
+![Map VIII–5: The east wing and the service run](maps/map_viii_5_east_wing.svg)
+
+*[PNG](maps/map_viii_5_east_wing.png). The stair from the east doors, the cleared corridor and
+the double doors, the wing's corridor and its three finds, the garden stair, the service stair
+beside the doors with the wing's service door, the service run (schematic), and the garden
+below the wing.*
 
 **Rooms the text does not place:**
 

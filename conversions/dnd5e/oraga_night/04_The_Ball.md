@@ -190,7 +190,7 @@ before anyone reaches the door. Rumor Table rolls are legal from the first minut
 > and they have learned the actual night in thirty seconds. This module is full of
 > near-misses. Teach it here, where the cost is a rumor and somebody's dignity.
 
-**B1. The Gatehouse Court.** Where invitations are presented: by name, personally, against
+**B1. The Gatehouse Court.** *(See map VIII–2.)* Where invitations are presented: by name, personally, against
 Minister Corval's memory. There is no written list, and with Corval
 there has never needed to be. Nobody is disarmed at the door, because nobody is
 ever disarmed anywhere (see the sidebar below). *(Agenda relevance: forged and
@@ -236,7 +236,7 @@ The grand hall, and the room where nearly every scheduled event happens: dance f
 musicians' gallery, the high table on its dais. The walls are the palace's oldest work.
 *(About 140 by 80 feet, with the dais at the far end from the main doors. The east doors
 open on a stair that rises 12 feet to the east wing; see chapter V, "The Palace After
-Midnight: General Features".)*
+Midnight: General Features"; see map VIII–3.)*
 
 **B3. The Banquet Galleries.** Long feast halls flanking the Court, tables groaning
 with harvest excess. Where the real conversations happen, in alcoves built for
@@ -244,7 +244,7 @@ exactly that. *(Best room for agenda work: everyone passes through, and the alco
 are half-private. Overhearing an alcove without being noticed takes a DC 13
 Dexterity (Stealth) or DC 13 Wisdom (Perception) check, whichever the character is
 doing. A success hears one
-rumor (Table VIII–8) or one fact from the speaker's entry in chapter VII.)*
+rumor (Table VIII–8) or one fact from the speaker's entry in chapter VII. See map VIII–3.)*
 
 **B4. The Audience Hall.**
 
@@ -268,7 +268,7 @@ Know this geography cold: Court → terraces → lower garden → river gate. Th
 gate's lock takes a DC 15 Dexterity check using Thieves' Tools. The character with Agenda 6 needs no check, having
 been given what they need. Three terraces, each about 40 feet deep with a 10-foot drop
 between, then about 150 feet of lower garden to the gate; see chapter V, "The Palace
-After Midnight: General Features".)*
+After Midnight: General Features"; see map VIII–4.)*
 
 **B6. The Chapel.**
 
@@ -355,7 +355,7 @@ doors; see "Dinner for Two (B9)", Movement IV), Anha's passages, and Undercurren
 doors, and the cleared corridor at its head is about 60 feet long. Behind the doors, one
 100-foot corridor has the rooms off it, with the private stair (the garden stair) at its
 far end, running down the wing's outer wall to the upper terrace. See chapter V, "The
-Palace After Midnight: General Features".)*
+Palace After Midnight: General Features"; see map VIII–5.)*
 Warm light, a midwife's quiet traffic, and three finds:
 
 - **Veier's rooms.** Thenya through and through: border-country wool over Orthaen
@@ -390,7 +390,7 @@ thread the whole palace, including the east wing and the garden stair. *(The oth
 through everything. At midnight, the difference between a tragedy and a massacre.
 Finding one's way through them without a guide takes a DC 15 Wisdom (Survival) check
 the first time and is automatic after that. With Anha or any of the skeleton staff,
-there is no check.)*
+there is no check. See map VIII–5 for the run to the east wing.)*
 
 **B11. The Root of the House.** *(If you have time. Hidden. Found only through
 "Undercurrent A — The Root of the House", below.)* Beneath the wine cellars, behind a seal of living

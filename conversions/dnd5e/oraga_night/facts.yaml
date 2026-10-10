@@ -266,3 +266,39 @@ facts:
       - type: forbid
         pattern: '\bround after next\b'
         why: O36 / P2-18 — chapter V says "the round after"
+
+# --------------------------------------------------------------------------- maps (R4)
+# The dimensions maps/build_maps.py draws, all in feet (O28, O33, O34; S3 for the gate;
+# DECISIONS O53–O56 for what the maps had to choose). tools/test_maps.py checks every
+# measured shape in maps/*.svg against these numbers. fact_check.py ignores this block.
+maps:
+  court:          # B2 (05 General Features, Sizes)
+    length: 140
+    width: 80
+    vault: 50
+    main_doors: 10
+    dais_high: 3
+    dais_across: 30
+    dais_from_doors: 120
+    gallery_rail: 12
+    east_stair_rise: 12
+  terraces:       # B5
+    count: 3
+    deep: 40
+    wide: 120
+    drop: 10
+    lower_garden: 150
+  east_wing:      # B9
+    floor: 12
+    cleared_corridor: {wide: 10, long: 60}
+    inner_corridor: {wide: 10, long: 100}
+    room_across: {min: 20, max: 30}
+  service_run:    # B10 (S7, S11)
+    wide: 5
+    door: 5
+  gatehouse:      # B1 / B12 (S3)
+    gate_walk_height: 15     # "15 feet above the arch"; the drop from the walk to the street is 15
+    walk_to_street_drop: 15
+    stair_fall: 10           # S3 terrain: shoved from the top of the gatehouse stair (O53)
+    wicket_wide: 5
+    blades_out: 10           # three Blades in a line across Gate Street, 10 feet out

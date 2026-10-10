@@ -1067,3 +1067,59 @@ families at 0 stay there.
 - `python T/bestiary_check.py --quiet` → 28 blocks + 1 Nastier, 0 mismatches.
 - `python T/pregen_check.py --quiet` → 5 pregens, 0 issues.
 - `flow.json` unchanged; no rebuild. `software/tests/test_no_private_canon.py` → 5 passed.
+
+## Review-fix pass — R4
+
+*Worker, 2026-10-10. Task R4.1 of `docs/TASKS_oraga_5e_review_fixes.md` (owner QR5, option a:
+I draw the maps). Decisions O53–O56 in DECISIONS.md; INVENTIONS #85.*
+
+**What was built.** `M/maps/build_maps.py` (no network; plain SVG strings, PNG previews through
+ImageMagick's own renderer) draws five original maps from a new `maps` block in `facts.yaml`
+(every dimension in feet, keyed to O28, O33, O34 and card S3):
+
+| Map | File (SVG and PNG) | Shows |
+|---|---|---|
+| VIII–1 The Palace | `maps/map_viii_1_palace.svg` / `.png` | Schematic, B0–B13, each room's floor; rooms placed only by connection boxed at the right |
+| VIII–2 The Gatehouse Court | `maps/map_viii_2_gatehouse.svg` / `.png` | Gate, bar, wicket, cell, dog-leg stair, gate-walk, outer stair, the Bought at midnight; a section with S3's heights |
+| VIII–3 The Crystal Court | `maps/map_viii_3_court.svg` / `.png` | 140 × 80 floor, dais, main and garden doors, galleries and 12-ft rails, east doors and stair, S11's door |
+| VIII–4 The Terraces | `maps/map_viii_4_terraces.svg` / `.png` | Garden walk and rail, three 40 × 120 terraces, end stairs, the garden stair's foot, lower garden, river gate; a drop profile |
+| VIII–5 The East Wing | `maps/map_viii_5_east_wing.svg` / `.png` | Stair, 10 × 60 cleared corridor, double doors, 10 × 100 corridor, three rooms, garden stair, service stair and door, schematic service run, the garden below |
+
+Style: thin dark walls, light floor tints by level, an optional 5-foot grid layer
+(`--no-grid`), room codes in DejaVu Serif (Georgia/Times fallback), dark-red card tags, a scale
+bar, a title cartouche, a legend and key, an east-only arrow (the text gives only east), and a
+caption on every map saying what is approximate or schematic. Every PNG was rendered and read;
+labels were moved until nothing overlapped (rotated text was dropped: the rasterizer ignores it).
+
+**For the owner's review (QR5):** the five PNGs above, in
+`conversions/dnd5e/oraga_night/maps/`.
+
+**Book changes.** 08's ASCII figure is replaced by the five maps (SVG image, PNG link, a short
+keyed caption each; the caption paragraph and *Rooms the text does not place* are kept).
+Pointers "(see map VIII–n)": 09's Terrain lines on S1, S2, S3, S6, S7, S9, S10, S11 and S13;
+04's B1, B2, B3, B5, B9 and B10; 05's *General Features* intro. No canon text was changed to
+fit a map.
+
+**Contradictions and choices.** S3's 15-foot walk against its 10-foot fall from the stair top
+is reconciled by a landing 5 feet up (O53). The Court's galleries, door positions and the
+wing's layout are drawn choices (O54, O55). **For R6:** S10's climb against the garden stair
+(O49's open question) has a geometric answer on the map, the stair being on the watched
+terrace face and the climb on the dark east face, but no text says so (O56); the garden's
+height below the wing and the walk-to-terrace drop stay unpinned.
+
+**Tooling.** `tools/test_maps.py` (written first; 42 tests): the five maps build and parse; title,
+legend, caption, scale bar and grid layer present; every B code in 04 on the overview with a
+floor; every measured shape (`data-fact-w/h/len`) matches `facts.yaml`; labelled numbers match;
+the committed SVGs equal a fresh build; each has a PNG; 08 embeds all five in order with no
+ASCII left; the card, 04 and 05 pointers exist; the `maps` block agrees with 05 and S3.
+`lint_5e.py`'s `repo_filename` rule now ignores Markdown link targets (two new tests); 08's
+", not to scale" became "drawn without a scale" for the `not_but` metric.
+
+**Commands.**
+- `python M/maps/build_maps.py` → five SVGs and PNGs.
+- `python -m pytest conversions/dnd5e/oraga_night/tools -q` → 339 passed.
+- `python T/lint_5e.py --check` → OK (65 hard, 42 structure remain).
+- `python T/fact_check.py --check` → OK (0 hits).
+- `python T/bestiary_check.py` → 28 blocks + 1 Nastier, 0 mismatches.
+- `python T/pregen_check.py` → 5 pregens, 0 issues.
+- `software/tests/test_no_private_canon.py` → 5 passed.

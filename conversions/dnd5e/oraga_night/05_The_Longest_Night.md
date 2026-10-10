@@ -428,7 +428,7 @@ hints; its block is in chapter X.
 ### The Palace After Midnight: General Features
 
 These features hold everywhere in the palace from the lights to the last bell, unless
-a card says otherwise.
+a card says otherwise. Chapter VIII draws the palace (see maps VIII–1 to VIII–5).
 
 - **Sizes.** All approximate; round to the grid you use.
   - *The Crystal Court (B2)* is about 140 feet long and 80 feet wide under a vault

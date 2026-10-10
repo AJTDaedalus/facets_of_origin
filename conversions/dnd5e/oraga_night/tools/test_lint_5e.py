@@ -749,6 +749,14 @@ class TestRepoFilename:
     def test_edge_readme_exempt(self):
         assert fam("| `STYLE_5e.md` | the style sheet |", "repo_filename", "README.md") == []
 
+    def test_edge_image_link_target_is_not_prose(self):
+        # R4: chapter VIII embeds the maps; a link target is not a file name in prose
+        assert fam("![Map VIII–1: The Palace](maps/map_viii_1_palace.svg)", "repo_filename") == []
+        assert fam("*[PNG](maps/map_viii_1_palace.png).*", "repo_filename") == []
+
+    def test_hit_file_name_beside_a_link(self):
+        assert fam("See build_maps.py and [the map](maps/a.svg).", "repo_filename") == ["build_maps.py"]
+
 
 class TestSimJargon:
     def test_hit_simulation(self):
