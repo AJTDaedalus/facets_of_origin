@@ -8,6 +8,8 @@ What they hold the maps to:
 - every room code chapter IV uses (B0–B13) is on the overview, with the floor it is on;
 - every measured shape agrees with the `maps` block of facts.yaml (the O28 sizes);
 - the committed SVGs are what the script builds (no hand edits), each has a PNG;
+- no map label prints development scaffolding (decision IDs, "?", "not given"), and each
+  map has one clean caption line (R6.2);
 - chapter VIII embeds every map, and the cards' Terrain lines point at them.
 """
 import re
@@ -108,10 +110,38 @@ def test_missing_dimension_is_a_clear_error(tmp_path):
         B.load_dims(bad)
 
 
-def test_every_map_says_what_is_approximate(built):
+def caption_of(path):
+    return [e for e in root(path).iter() if e.get("id") == "caption"][0]
+
+
+def test_every_map_has_one_clean_caption_line(built):
+    # R6.2 (review 2, N3): one caption line, in a reader's voice, not an audit note
     for name, p in built.items():
-        cap = [e for e in root(p).iter() if e.get("id") == "caption"][0]
-        assert "pproximate" in " ".join(texts(cap)) or "schematic" in " ".join(texts(cap)), name
+        lines = [t for t in texts(caption_of(p)) if t]
+        assert len(lines) == 1, (name, lines)
+        assert len(lines[0]) <= 110, (name, lines[0])
+
+
+SCAFFOLDING = [r"\bO\d{2}\b", r"\?", r"(?i)not given", r"(?i)plausib", r"(?i)not placed",
+               r"(?i)\bthe text\b", r"(?i)east only", r"(?i)placed by connection"]
+
+
+@pytest.mark.parametrize("pattern", SCAFFOLDING)
+def test_no_map_label_prints_development_scaffolding(built, pattern):
+    # decision IDs, question marks and hedges belong in facts.yaml and DECISIONS, not on a map
+    for name, p in built.items():
+        for t in texts(root(p)):
+            assert not re.search(pattern, t), (name, t)
+
+
+def test_only_the_caption_may_say_approximate(built):
+    for name, p in built.items():
+        r = root(p)
+        cap = [e for e in r.iter() if e.get("id") == "caption"][0]
+        in_cap = {id(e) for e in cap.iter()}
+        for e in r.iter(SVG_NS + "text"):
+            if id(e) not in in_cap:
+                assert "pproximate" not in "".join(e.itertext()), (name, "".join(e.itertext()))
 
 
 # --------------------------------------------------------------------------- the overview
@@ -259,18 +289,22 @@ def test_every_committed_svg_has_a_png():
 
 # --------------------------------------------------------------------------- the book
 
-def test_chapter_viii_embeds_every_map_with_a_png_link():
+def test_chapter_viii_embeds_every_map_without_file_links():
+    # R6.2 (review 2, N3): the book embeds each map; it prints no "[PNG]" file links
     text = (MODULE / "08_Handouts.md").read_text(encoding="utf-8")
     for name in ALL:
         assert f"](maps/{name}.svg)" in text, name
-        assert f"](maps/{name}.png)" in text, name
+        assert f"](maps/{name}.png)" not in text, name
+    assert "[PNG]" not in text
+    assert "plausibl" not in text
+    assert "does not place" not in text
 
 
 def test_chapter_viii_has_no_ascii_palace_figure_left():
     text = (MODULE / "08_Handouts.md").read_text(encoding="utf-8")
     section = text.split("## The Palace, Keyed")[1].split("\n## ")[0]
     assert "```" not in section
-    assert "**Rooms the text does not place:**" in section
+    assert "**Rooms shown by connection:**" in section
 
 
 def test_chapter_viii_numbers_its_maps_in_order():

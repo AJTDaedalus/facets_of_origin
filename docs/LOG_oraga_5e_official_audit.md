@@ -1296,3 +1296,21 @@ Swaps between files are fine as long as the module totals hold. One swap is reco
   - The Wept's Strength Like a Fact Hit line, now in the SRD 5.2.1 "If the target is a Large or smaller creature" form.
 - Final: 28 (a), 18 (b), 0 (c). Report: `docs/audit_oraga_5e_official/r61_copyright.md`.
 - Checks: copyright_scan --check 0 (c); lint --check 0; fact_check --check 0; bestiary 0; pregen 0; pytest 407.
+
+## Review-fix pass — R6.2 fixes
+- Input: `docs/REVIEW_oraga_5e_official_critical_2.md` (8.0/10; P0 0, P1 3, P2 9, P3 17). Fixed every P1 and the mechanical P2s; DECISIONS O60–O66; INVENTIONS #87.
+- **N1 (P1), O60:** the furniture status ends when that creature next attacks the Attendant or interferes with one of the three; furniture doesn't count as an enemy for *Clears the Way*. 10 (*Can Be Distracted*, *Clears the Way*, Breaks), 09 S14 (Idle result, clock paragraph), 05, 08, flow.json agree.
+- **N2 (P1), O61:** S8's fourth warden comes up the stair on the clock's third segment; scaling lines say "the fourth never comes (600 XP)".
+- **N3 + N12 (P1), O62:** map labels stripped of decision IDs, "?", "not given", "plausibly", "not placed", "schematic", "east only"; one caption line per map. Test-first: `test_maps.py` gained `test_every_map_has_one_clean_caption_line`, `test_no_map_label_prints_development_scaffolding` (8 patterns), `test_only_the_caption_may_say_approximate`, and the 08 test now forbids PNG links; 12 red, then green after the build_maps.py edit and the 08 edit. One test bug fixed on the way (it compared element ids across two separate parses). Maps rebuilt; all five PNGs inspected by eye: no scaffolding, nothing overlapping, captions on one line. 08's frame is two sentences, "Rooms shown by connection", no `[PNG]` links; README lists `maps/`.
+- **N5, O66:** 05:1003, 07:710, 07:737 name the Veteran Bought Sergeant, with the ordinary sergeant for 3rd level or three characters.
+- **N6, O63:** the 3160 block is the same cousins at their hardest; one block per card for all three; *Provocation* ×2 and S9's circle clock (and flow.json's) key on "a Boranis cousin (either block)"; S6's inviter is "one of Essin's cousins".
+- **N7, O65:** the principal is a "Variant: the principal" line under Feuding Kinsman (22 HP, CR 1/8, XP 25); S1 225 XP (card table too); new Nastier on the block and on S1 (250 XP). Test-first: six new `test_bestiary_check.py` tests red (6 failed), then `NASTIER_OF` → `VARIANT_OF` in `bestiary_check.py`, green.
+- **N8, O64:** chapter X's Fracture copy cut to a pointer plus its DCs; 05's "printed once in chapter X" sentence gone; `facts.yaml` `fracture_rule` rule_copy (verified: 4 of 8 elements on the old chapter X, 0 now).
+- **N9, O66:** the Radiant's success-and-cost paragraph moved into *Fracture — Devotion*.
+- **N10, O66:** S3's gatehouse stairs are ladder-steep and one body wide (the review's line, minus "drawn it up"). First wording tripped the `not_but` soft metric in 09 (15 vs 14); reworded, back to baseline.
+- Checks: lint --check OK (0 hard, 0 structure, no soft regressions); fact_check --check OK (0); bestiary_check 28 blocks + 1 variant line, 0 mismatches; pregen_check 5, 0 issues; copyright_scan --refs …/r61/refs --srd …/r61/srd --check: 4,965 sentences, (a) 28, (b) 18, (c) 0; pytest tools 422 passed; flow page rebuilt.
+- **Open for the owner** (not touched in this pass, by brief):
+  - N4 geometry gaps: "second floor" vs "gallery level" (S10's window), S10's 20-foot wall against a 12-foot floor, the walk-to-upper-terrace drop (the map now draws it unlabelled), no stair or door to the galleries (S13's "gallery doors", the Thenya tell), and N3's companion ask to decide the room order and the service run's route as design facts.
+  - N11: redraw map VIII–1 as a true plan placing B4, B6, B7, B10, B13.
+  - N17–N19: the human line-edit (colon and semicolon splices, the CR-yardstick commentary in S14 and Vell, the garbled glosses).
+  - The P3s: 13–16, 18, 19, 21–28, 30, and P3-29 for the sergeant, duelist and cousin blocks (the kinsmen's is fixed by O65).

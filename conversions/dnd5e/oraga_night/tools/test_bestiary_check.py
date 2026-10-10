@@ -221,7 +221,7 @@ PROMOTED = ["Veteran Bought Sergeant", "Boranis Cousin of 3160", "Veteran Draune
 def test_promoted_variants_are_full_blocks_in_data():
     for name in PROMOTED:
         assert name in BC.B, name
-        assert name not in BC.NASTIER_OF, name
+        assert name not in BC.VARIANT_OF, name
         assert BC.PROMOTED[name] in BC.TEXT_NAME.values() or BC.PROMOTED[name] in BC.B
 
 
@@ -267,3 +267,42 @@ def test_variant_text_numbers_checked_like_any_block(tmp_path):
         "**HP** 78 (12d8 + 24)", "**HP** 80 (12d8 + 24)"), encoding="utf-8")
     probs = BC.text_problems(bad.read_text(encoding="utf-8"))
     assert any(p.startswith("Veteran Bought Sergeant: text HP") for p in probs)
+
+
+# R6.2 (review 2, N7): S1's principal is a named variant line, not the kinsmen's Nastier --
+
+PRINCIPAL = "Kinsman principal (variant)"
+
+
+def test_principal_is_a_variant_not_a_nastier_line():
+    assert PRINCIPAL in BC.B
+    assert not any("(Nastier)" in k for k in BC.B)
+    assert BC.VARIANT_OF[PRINCIPAL] == ("Feuding Kinsman", "Variant: the principal")
+
+
+def test_kinsman_nastier_line_no_longer_carries_the_principal():
+    line = BC._card_line(_blocks()["Feuding Kinsman"], "Nastier")
+    assert line and "HP (" not in line and "principal" in line
+
+
+def test_variant_line_problems_clean_on_the_module():
+    text = BC.BESTIARY.read_text(encoding="utf-8")
+    assert not [p for p in BC.text_problems(text) if PRINCIPAL in p]
+
+
+def test_variant_line_missing_is_reported():
+    text = BC.BESTIARY.read_text(encoding="utf-8").replace("**Variant: the principal.**", "**A principal.**")
+    assert any(f"{PRINCIPAL}: variant line not found" in p for p in BC.text_problems(text))
+
+
+def test_variant_line_wrong_hp_is_reported():
+    text = BC.BESTIARY.read_text(encoding="utf-8").replace("22 HP (4d8 + 4)", "24 HP (4d8 + 4)")
+    assert any(f"{PRINCIPAL}: text HP/HD" in p for p in BC.text_problems(text))
+
+
+def test_variant_line_wrong_cr_is_reported():
+    text = BC.BESTIARY.read_text(encoding="utf-8")
+    i = text.index("**Variant: the principal.**")
+    j = text.index("CR 1/8", i)
+    text = text[:j] + "CR 1/4" + text[j + 6:]
+    assert any(f"{PRINCIPAL}: text CR 1/4" in p for p in BC.text_problems(text))

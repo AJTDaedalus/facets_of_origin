@@ -1132,7 +1132,7 @@
    "label": "S14. The Attendant — the midnight boss",
    "phase": "m6",
    "kind": "fight",
-   "summary": "Movements VI–VII. Fires only if the party interferes with an Uninvited. Idle: rusty. Focused (at the start of its turn, if one of the three in the scene has no Delay): two turns a round, Put Aside. Distract it — one try a round, no Help: d20 + fitting skill vs DC 13 Idle / 19 Focused, +2 for playing it out, +2 for a habit seen (max +4). A success while Focused breaks its focus until its next turn (while Idle, the distractor becomes furniture to it); arguing its orders is one more trick; the fourth broken focus: it wanders off. 0 HP: it steps into the shadow. Down, Not Out. Hard on purpose: someone usually goes down.",
+   "summary": "Movements VI–VII. Fires only if the party interferes with an Uninvited. Idle: rusty. Focused (at the start of its turn, if one of the three in the scene has no Delay): two turns a round, Put Aside. Distract it — one try a round, no Help: d20 + fitting skill vs DC 13 Idle / 19 Focused, +2 for playing it out, +2 for a habit seen (max +4). A success while Focused breaks its focus until its next turn (while Idle, the distractor becomes furniture to it until they next interfere); arguing its orders is one more trick; the fourth broken focus: it wanders off. 0 HP: it steps into the shadow. Down, Not Out. Hard on purpose: someone usually goes down.",
    "ref": "09_The_Snakes.md (S14); 10_Bestiary.md",
    "optional": true,
    "faction": "uninvited"
@@ -2416,7 +2416,7 @@
    "id": "clk-circle",
    "label": "Circle clock (S9)",
    "segments": 4,
-   "advances": "Each round the principals face each other; +1 (once per cousin) when a Cousin's Blade is provoked into drawing. No Provocation until a character has acted on the terrace. If nobody comes, it fills offstage at the end of Movement V only if the table saw the appointment made",
+   "advances": "Each round the principals face each other; +1 (once per cousin) when a Boranis cousin (either block) is provoked into drawing. No Provocation until a character has acted on the terrace. If nobody comes, it fills offstage at the end of Movement V only if the table saw the appointment made",
    "fills": "Steel meets steel; one principal goes down bleeding; Draunel's second iron is done"
   },
   {
@@ -2465,7 +2465,7 @@
    "id": "clk-distract",
    "label": "Broken focus (S14, the Attendant)",
    "segments": 4,
-   "advances": "Each distraction that succeeds while it is Focused (one try a round, DC 19). A success while Idle makes the distractor furniture to it for the scene but doesn't count",
+   "advances": "Each distraction that succeeds while it is Focused (one try a round, DC 19). A success while Idle makes the distractor furniture to it until they next interfere, but doesn't count",
    "fills": "It wanders off to a window to watch the fires — a win"
   },
   {

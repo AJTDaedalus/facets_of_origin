@@ -7,8 +7,9 @@
 
 Every map is original drawing code: plain SVG strings, no external assets, no network. The
 dimensions come from the `maps` block of ../facts.yaml (the O28 sizes, O33's elevations,
-O34's terraces, card S3's gatehouse heights). Whatever the text does not fix is drawn
-plausibly and the map's caption says it is approximate; the choices are DECISIONS O53–O56.
+O34's terraces, card S3's gatehouse heights). Whatever the text does not fix is a drawing
+choice, recorded in DECISIONS O53–O56 and O62; the maps themselves print no decision IDs and
+no hedges, only one caption line each (R6.2, tools/test_maps.py).
 
 Each measured shape declares the dimension it draws (`data-fact-w`, `data-fact-h`,
 `data-fact-len`, in feet, keyed to facts.yaml), and tools/test_maps.py measures it back.
@@ -417,7 +418,6 @@ def frame(svg: Svg, title: str, subtitle: str, legend: list[tuple], caption: lis
         s.line(ex, ey, ex + 36, ey, stroke=INK, stroke_width=1.4)
         s.poly([(ex + 44, ey), (ex + 34, ey - 5), (ex + 34, ey + 5)], fill=INK)
         s.text(ex + 22, ey - 9, "E", size=12, anchor="middle", weight="bold")
-        s.text(ex + 22, ey + 17, "east only", size=8.5, anchor="middle", style="italic", fill=SOFT)
         s.close()
 
 
@@ -589,7 +589,7 @@ def map_gatehouse(d: dict, grid=True) -> str:
     svg.line(SX(15), SY(hw), SX(21), SY(hw), stroke=ACCENT, stroke_width=0.6, stroke_dasharray="2 2")
     svg.line(SX(5), SY(5), SX(21), SY(5), stroke=ACCENT, stroke_width=0.6, stroke_dasharray="2 2")
     svg.text(SX(22), SY(11), "shoved from the top:", size=9.5, style="italic", fill=ACCENT)
-    svg.text(SX(22), SY(11) + 13, "falls 10 ft to the landing, 5 ft up (O53)", size=9.5, style="italic", fill=ACCENT)
+    svg.text(SX(22), SY(11) + 13, "falls 10 ft to the landing, 5 ft up", size=9.5, style="italic", fill=ACCENT)
     svg.line(SX(0), SY(0), SX(0), SY(9), stroke=ACCENT, stroke_width=2.6)
     svg.text(SX(0.8), SY(8), "gate", size=9, style="italic", fill=ACCENT)
     svg.close()
@@ -597,15 +597,11 @@ def map_gatehouse(d: dict, grid=True) -> str:
     legend = [("wall", "Wall"), ("door", "Door or doorway"), ("stairs", "Stairs (arrow points up)"),
               ("above", "Gate-walk, overhead (15 ft)"), ("grid", "5-foot grid"),
               ("figure", "A Bought Blade at midnight (S3)"), ("tag", "Fight card (chapter IX)"),
-              ("dim", "Distance given by the text")]
+              ("dim", "Measured distance")]
     key = [("B0", "Gate Street, the street and the line"),
            ("B1", "The Gatehouse Court (chapter IV)"),
            ("B12", "The same court after midnight, held (chapter V; card S3)")]
-    caption = [
-        "Approximate: the court, the gatehouse and the gate's width are not given and are drawn plausibly.",
-        "From the text: the gate-walk 15 ft up, the 15-ft drop, the 10-ft fall from the stair (with O53's landing),",
-        "the 5-ft wicket, the bar on the street side, and where the Bought stand (card S3).",
-    ]
+    caption = ["Heights, the wicket and the Bought's posts from card S3; other positions approximate."]
     frame(svg, "Map VIII–2: The Gatehouse Court", "B0 · B1 · B12 — the outer gate, the wicket and the gate-walk",
           legend, caption, mw, scale_ft=20, scale=scale, key=key)
     return svg.render("Map VIII–2: The Gatehouse Court")
@@ -725,16 +721,12 @@ def map_court(d: dict, grid=True) -> str:
               ("rail", "Rail, 12 ft above the Court floor"), ("fill", "Ground level", FLOOR),
               ("fill", "Gallery level, 12 ft up", GALLERY), ("fill", "Corridor at gallery level", UPPER),
               ("fill", "Garden walk (ground level)", GARDEN), ("grid", "5-foot grid"),
-              ("tag", "Fight card (chapter IX)"), ("dim", "Distance given by the text")]
+              ("tag", "Fight card (chapter IX)"), ("dim", "Measured distance")]
     key = [("B2", "The Crystal Court"), ("B3", "The banquet galleries, along both long sides"),
            ("S1", "The seating feud, in either gallery"),
            ("S11", "The one open door at midnight"),
            ("S12", "The minister in the smoke"), ("S13", "The arrest in the fire")]
-    caption = [
-        "From the text: 140 × 80 ft under a 50-ft vault; main doors 10 ft; the dais 3 ft high, 30 ft across, 120 ft",
-        "from the doors; rails 12 ft up; the east doors and a stair rising 12 ft. Approximate: the galleries' depth (20 ft),",
-        "where each door sits, and the garden walk (O54). The musicians' gallery and B3's doors are not placed.",
-    ]
+    caption = ["Distances from chapter V; other positions approximate."]
     frame(svg, "Map VIII–3: The Crystal Court", "B2 · B3 — the Court, the banquet galleries and the east doors",
           legend, caption, mw, scale_ft=50, scale=scale, key=key)
     return svg.render("Map VIII–3: The Crystal Court")
@@ -849,9 +841,6 @@ def map_terraces(d: dict, grid=True) -> str:
             if i > 1:
                 svg.line(px0 + xs[i] + 6, yy, px0 + xs[i] + 6, yy + drop * ps, stroke=ACCENT,
                          stroke_width=0.9, data_fact_len="terraces.drop", data_px_per_ft=n(ps))
-            else:
-                svg.text(px0 + xs[i] - 4, yy + drop * ps / 2 + 4, "?", size=10, weight="bold",
-                         fill=ACCENT, anchor="end")
             pts.append((px0 + xs[i], yy))
             yy += drop * ps
             pts.append((px0 + xs[i], yy))
@@ -860,7 +849,7 @@ def map_terraces(d: dict, grid=True) -> str:
     svg.polyline(pts, stroke=WALL, stroke_width=1.6)
     svg.line(px0 + xs[5], yy, px0 + xs[5], yy - 18, stroke=ACCENT, stroke_width=2.4)
     svg.text(px0 + xs[5] + 6, yy - 6, "river gate", size=9, style="italic", fill=SOFT)
-    svg.text(px0 + 140, yb - 2, "each terrace 10 ft below the last; the walk-to-terrace drop is not given (?)",
+    svg.text(px0 + 140, yb - 2, "each terrace 10 ft below the last",
              size=9, style="italic", fill=SOFT)
     svg.close()
 
@@ -869,15 +858,11 @@ def map_terraces(d: dict, grid=True) -> str:
               ("fill", "Garden walk (ground level)", GARDEN),
               ("fill", "Terraces, each 10 ft lower", GARDEN2), ("fill", "Lower garden", LAWN),
               ("fill", "Context, other maps", CONTEXT), ("grid", "5-foot grid"),
-              ("tag", "Fight card (chapter IX)"), ("dim", "Distance given by the text")]
+              ("tag", "Fight card (chapter IX)"), ("dim", "Measured distance")]
     key = [("B5", "The garden terraces and the river gate"),
            ("S6", "The quiet word, on the upper terrace"),
            ("S9", "The appointment, on the upper terrace, watched from the walk's rail")]
-    caption = [
-        "From the text: three terraces about 40 × 120 ft, 10-ft drops, a stair at either end, then about 150 ft",
-        "of lower garden to the river gate; the garden stair down the wing's wall to the upper terrace (O33).",
-        "Approximate: the walk's depth, its drop and its flights down, the lower garden's width, the gate (O54, O55).",
-    ]
+    caption = ["Distances from chapter V; other positions approximate."]
     frame(svg, "Map VIII–4: The Terraces and the River Gate", "B5 — Court to river, down three terraces",
           legend, caption, mw, scale_ft=50, scale=scale, key=key)
     return svg.render("Map VIII–4: The Terraces and the River Gate")
@@ -1000,22 +985,20 @@ def map_east_wing(d: dict, grid=True) -> str:
     P.text(ex + rw + 2, r0 - 2, "the wing's service door (S7)", size=9, style="italic", halo=True)
     P.line(ex + rw + 1.5, r0 - 1.5, ex + 1, iy + 2, stroke=SOFT, stroke_width=0.7)
     P.text(lx, 26, "service run, 5 ft", size=9, style="italic", fill=SERVICE, halo=True)
-    P.text(lx, 23, "(schematic: its route", size=9, style="italic", fill=SERVICE, halo=True)
-    P.text(lx, 20, "is not given), from the", size=9, style="italic", fill=SERVICE, halo=True)
-    P.text(lx, 17, "kitchens and the passages", size=9, style="italic", fill=SERVICE, halo=True)
-    P.text(lx, 14, "behind the Dance (B10)", size=9, style="italic", fill=SERVICE, halo=True)
+    P.text(lx, 23, "from the kitchens and the", size=9, style="italic", fill=SERVICE, halo=True)
+    P.text(lx, 20, "passages behind the", size=9, style="italic", fill=SERVICE, halo=True)
+    P.text(lx, 17, "Dance (B10)", size=9, style="italic", fill=SERVICE, halo=True)
     # the wing and its garden (right)
     P.text(gxe + 3, top - 6, "B9  THE EAST WING", size=12, weight="bold", halo=True)
     P.text(gxe + 3, top - 10.5, "gallery level, 12 ft up;", size=9.5, style="italic", halo=True,
            data_fact="east_wing.floor")
     P.text(gxe + 3, top - 14, "rooms 20–30 ft across", size=9.5, style="italic", halo=True)
-    P.text(gxe + 3, top - 17.5, "(their order is not given)", size=9.5, style="italic", halo=True)
     P.text(gxe + 3, r0 + 52, "the garden below", size=10, weight="bold", halo=True)
     P.text(gxe + 3, r0 + 48.5, "the east wing", size=10, weight="bold", halo=True)
     P.text(gxe + 3, r0 + 45, "dark past the last lantern;", size=9, style="italic", halo=True)
     P.text(gxe + 3, r0 + 42, "flower beds; 20 ft of", size=9, style="italic", halo=True)
-    P.text(gxe + 3, r0 + 39, "crystal wall up to one lit", size=9, style="italic", halo=True)
-    P.text(gxe + 3, r0 + 36, "window (whose is not given)", size=9, style="italic", halo=True)
+    P.text(gxe + 3, r0 + 39, "crystal wall up to one", size=9, style="italic", halo=True)
+    P.text(gxe + 3, r0 + 36, "lit window", size=9, style="italic", halo=True)
     P.tag(gxe + 10, r0 + 30, "S10")
     P.tag(cx + cw / 2, cy + 14, "S4")
     P.tag(run_x + 2.5, 40, "S7")
@@ -1023,19 +1006,15 @@ def map_east_wing(d: dict, grid=True) -> str:
 
     legend = [("wall", "Wall"), ("door", "Door or double doors"), ("stairs", "Stairs (arrow points up)"),
               ("rail", "Balustrade"), ("fill", "Gallery level, 12 ft up", UPPER),
-              ("service", "Service run, 5 ft (schematic)"), ("fill", "The garden below the wing", LAWN),
+              ("service", "Service run, 5 ft"), ("fill", "The garden below the wing", LAWN),
               ("fill", "Context, other maps", CONTEXT), ("grid", "5-foot grid"),
               ("tag", "Fight card (chapter IX)")]
     key = [("B9", "The east wing: Veier's rooms, Raunu's rooms, the nursery"),
-           ("B10", "The service passages; they reach the garden stair too (route not given)"),
+           ("B10", "The service passages; they reach the garden stair too"),
            ("S2", "The service corridor behind the Dance"), ("S4", "The east wing doors"),
            ("S7", "The dark run to the wing's service door"),
            ("S10", "Over the wall, from the garden below")]
-    caption = [
-        "From the text: a stair rising 12 ft from the east doors, the 10 × 60-ft cleared corridor, a 10 × 100-ft corridor,",
-        "rooms 20–30 ft across, the garden stair down the outer wall, the service stair, the 5-ft service run.",
-        "Approximate: the rooms' order and where the stairs and doors sit (O55). Schematic: the service run's route.",
-    ]
+    caption = ["Distances from chapter V; other positions approximate."]
     frame(svg, "Map VIII–5: The East Wing and the Service Run", "B9 · B10 — upstairs, at gallery level",
           legend, caption, mw, scale_ft=20, scale=scale, key=key)
     return svg.render("Map VIII–5: The East Wing and the Service Run")
@@ -1050,7 +1029,7 @@ FLOOR_STYLE = {
     "gallery": (UPPER, None, "Gallery level, 12 ft up"),
     "second": ("#cdbfe0", None, "Second floor"),
     "cellar": ("#d8d2c8", None, "Beneath the cellars"),
-    "unknown": ("#ffffff", "4 3", "Level not given"),
+    "unknown": ("#ffffff", "4 3", "Shown by connection"),
     "throughout": ("#eef2f6", "6 3", "Throughout the palace"),
 }
 
@@ -1132,7 +1111,7 @@ def map_palace(d: dict, grid=True) -> str:
 
     # rooms placed only by connection
     px = 490
-    svg.text(ox + px, oy + 372, "Placed by connection only", size=11.5, weight="bold")
+    svg.text(ox + px, oy + 372, "Rooms shown by connection", size=11.5, weight="bold")
     box("B6", px, 384, 270, 44, "The Chapel", "unknown", ["a public room; Mother Sella's, all night"])
     box("B7", px, 436, 270, 44, "The Trophy Gallery", "unknown", ["the private palace, off the gallery corridor"])
     box("B8", px, 488, 270, 44, "Raunu's Study", "second", ["the second floor, in the dark wing (S8)"])
@@ -1152,7 +1131,7 @@ def map_palace(d: dict, grid=True) -> str:
     svg.text(ox, oy + fy - 8, "Floors", size=11, weight="bold")
     rows = [("second", "2nd floor: B8"), ("gallery", "12 ft up: B3, B9"),
             ("ground", "Ground: B1, B2"), ("garden", "Below walk: B5"),
-            ("cellar", "Cellars: B11"), ("unknown", "Not given: B4,"),
+            ("cellar", "Cellars: B11"), ("unknown", "By connection: B4,"),
             (None, "B6, B7, B13")]
     for i, (fl, label) in enumerate(rows):
         if fl:
@@ -1163,17 +1142,13 @@ def map_palace(d: dict, grid=True) -> str:
 
     legend = [("fill", FLOOR_STYLE[k][2], FLOOR_STYLE[k][0], FLOOR_STYLE[k][1])
               for k in ("street", "ground", "gallery", "second", "garden", "cellar", "throughout", "unknown")]
-    legend += [("wall", "A way through that the text gives"), ("service", "Service passages")]
+    legend += [("wall", "A way through"), ("service", "Service passages")]
     key = [("B0", "Street, approach, line"), ("B1", "Gatehouse Court"), ("B2", "Crystal Court"),
            ("B3", "Banquet Galleries"), ("B4", "Audience Hall"), ("B5", "Terraces, river gate"),
            ("B6", "Chapel"), ("B7", "Trophy Gallery"), ("B8", "Raunu's Study"), ("B9", "East Wing"),
            ("B10", "Kitchens, service passages"), ("B11", "Root of the House"),
            ("B12", "Gatehouse Court, held"), ("B13", "The Room You Put Here")]
-    caption = [
-        "Not to scale: a schematic of the rooms, the ways between them and the floor each is on. Boxes and positions",
-        "are approximate; chapter V gives the sizes, and maps VIII–2 to VIII–5 draw them. Rooms the text places only",
-        "by connection are listed at the right with the connections it gives.",
-    ]
+    caption = ["Not to scale. Maps VIII–2 to VIII–5 draw the rooms to scale."]
     frame(svg, "Map VIII–1: The Palace", "B0–B13, keyed, floor by floor", legend, caption, mw,
           scale_ft=None, east=True, key=key)
     return svg.render("Map VIII–1: The Palace")

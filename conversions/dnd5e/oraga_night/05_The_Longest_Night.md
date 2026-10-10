@@ -401,8 +401,9 @@ interrupted.** It is not Leashed: it can be beaten, and it is the answer to the
 player who came to this ball wanting a real fight.
 
 - **It only cares about interruptions.** Anyone who isn't getting in the way of the
-  three is furniture to it, and so is a character who distracts it while it is Idle
-  (see chapter X, "The Attendant"). Characters who let the three work can walk past it
+  three is furniture to it, and so is a character who distracts it while it is Idle,
+  until that character next attacks it or interferes with one of the three (see chapter
+  X, "The Attendant"). Characters who let the three work can walk past it
   all night.
 - **Idle and Focused.** It starts Idle: rusty, slow, easy to distract. Card S14 fires
   the first time the characters become a real interruption: they earn Delay against one
@@ -747,8 +748,7 @@ Charisma check for a bared truth.
 
 **Intimidation never works**, and neither does
 Deception: the person inside the mask has been lied to enough. Heroic Inspiration may
-be spent on it, and should be. *(The same rule is printed once in chapter X, above
-the Uninvited's blocks.)*
+be spent on it, and should be.
 
 - **Success:** the effect lands in full, and that Uninvited gains **2 Delay**
   ("Buying Time").
@@ -999,8 +999,8 @@ court (card S3 counts them).
 read-aloud at the grille and the treasure are on the card.
 
 ***Card S3, chapter IX*** — the gate, the wicket and the gate-walk, the fire clock and
-the bell clock, the **Bought Sergeant**, the **Bought Blades** and the **Bought
-Captain**, the tactics, and the three endings written out. Everything below is what
+the bell clock, the **Veteran Bought Sergeant** (the **Bought Sergeant** at 3rd level
+or for three characters), the **Bought Blades** and the **Bought Captain**, the tactics, and the three endings written out. Everything below is what
 the scene means; the card is what you run it from.
 
 **Why this fight, here.** The Bought are the one foe at the gate who can be beaten

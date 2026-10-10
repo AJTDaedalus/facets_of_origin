@@ -519,7 +519,7 @@ than two factions are hot at midnight unless the table has made it so.
 
 | ID | Fight | When | Where | Who | Budget *(four 4th-level characters)* |
 |---|---|---|---|---|---|
-| **S1** | The Seating Feud | Mv II (or III) | B3 | Feuding Kinsmen | 200 XP — under Low; the clock is the fight |
+| **S1** | The Seating Feud | Mv II (or III) | B3 | Feuding Kinsmen | 225 XP — under Low; the clock is the fight |
 | **S6** | The Quiet Word | Mv II–III | B5, the terraces | House Boranis | 600 XP — under Low; a warning with fists |
 | **S2** | The Service Corridor Job | Mv V | B10, service run | Tavva's crew | 600 XP — under Low; the clock is the fight |
 | S4 *(half)* | The East Wing Doors | Mv I–V | B9 | Boranis Honor Guard | 900 XP — under Low, and four more are coming |
@@ -575,8 +575,8 @@ door closes — you pick which, and tell the table.
 
 **Enemies.** Eight **Feuding Kinsmen** (see chapter X), a Vaskarin cousin and a Tessarin
 uncle among them, each certain their branch outranks the other — and one principal
-still swinging (the kinsmen's **Nastier** line).
-*Budget:* 8 × 25 = **200 XP**, a fifth of Low (1,000). That is true and it does not
+still swinging (the kinsmen's **principal** variant, under their block).
+*Budget:* 8 × 25 + 25 = **225 XP**, under a quarter of Low (1,000). That is true and it does not
 matter. The kinsmen are not the threat; the clock is.
 
 **The brawl's one mercy.** Nobody here has a weapon worth the name. The characters
@@ -615,12 +615,14 @@ Charisma (Intimidation) check.
 
 **Treasure.** None.
 
-**Rewards.** 200 XP, divided equally among the characters. Heroic Inspiration
+**Rewards.** 225 XP, divided equally among the characters. Heroic Inspiration
 (Table I–3, "a fight ended by an out"): to whoever ends it without anyone drawing.
 Ending it well earns Corval's open gratitude, which is worth more than either house's:
 he is the man who opens doors.
 
-**Adjusting the Encounter.** The clock never changes; it is still the fight.
+**Adjusting the Encounter.** The clock is still the fight.
+- *Nastier:* the kinsmen's **Nastier** line: the second principal swings at the party
+  too, and a 1 rolled in the brawl advances the bench clock by two segments (250 XP).
 - *Three characters:* six kinsmen and the principal.
 - *Five characters:* ten kinsmen and the principal.
 - *Four at 3rd level:* six kinsmen, no principal.
@@ -756,7 +758,9 @@ Gatehouse Court, Held", points here.)*
   action. And it opens on a parley (below).
 - *The gatehouse stair and the gate-walk.* A door in the court side of the gatehouse
   opens on a stair up to the gate-walk, 15 feet above the arch; a second stair
-  runs down from the gate-walk to the street. One Blade holds the top. Climbing the
+  runs down from the gate-walk to the street. Both are ladder-steep and one body wide,
+  so a fighter can get over the gate by them and a crowd of two hundred cannot. One
+  Blade holds the top. Climbing the
   court-side face of the gatehouse instead is a DC 13 Strength (Athletics) check, and
   puts a climber on the walk away from him. From the walk it is the outer stair, or a
   15-foot drop to the street (1d6 Bludgeoning damage and the Prone condition, unless the faller
@@ -997,8 +1001,8 @@ and S3.**
 
 ***Where and when:*** B5, the upper garden terrace, Movement II or III. House Boranis.
 For any character who has pressed Vorlain (more than one drink on him, Agenda
-3 above all) or asked anyone about the missing year, and has been invited by a
-Cousin's Blade, very warmly, to *take the air on the terraces — just the two of you,
+3 above all) or asked anyone about the missing year, and has been invited by one of
+Essin's cousins, very warmly, to *take the air on the terraces — just the two of you,
 and a friend of mine who is already out there.* If nobody has earned it by the middle
 of Movement II, give the invitation to whoever has stood nearest Vorlain.
 
@@ -1232,8 +1236,7 @@ wing is quiet, and nobody here wants the honor guard). **Full:** the wardens are
 One round later the slate is wiped, and the drawer is in a warden's arms.
 
 **Enemies.** Two **Church Wardens** at the door; the third arrives up the stair on the
-clock's second segment; and the fourth is already inside the room, and has already
-found something. Kovaun brought four. The Prelate is in the chapel.
+clock's second segment, and the fourth on its third. Kovaun brought four. The Prelate is in the chapel.
 *Budget:* 4 × 200 = **800 XP**, under Low (1,000) for four 4th-level characters. The
 Prelate is not in the fight, so her rating adds nothing. The wardens
 detain, and they break when two are down: nobody in this corridor is going to die,
@@ -1292,11 +1295,11 @@ the scorch marks mean is left open (see chapter X, "The Night's Loot").
 - *Nastier:* the wardens' **Nastier** line (they don't break when two are down; only
   the Prelate's word stops them), and the third warden is already at the door. Still
   800 XP, under Low, but nobody breaks until Kovaun is fetched or an out lands.
-- *Three characters:* the two at the door and the one on the stair; nobody
-  inside (600 XP).
+- *Three characters:* the two at the door and the third on the stair; the fourth
+  never comes (600 XP).
 - *Five characters:* as printed, and the lock clock starts with one segment
   filled.
-- *Four at 3rd level:* three wardens, nobody inside (600 XP).
+- *Four at 3rd level:* three wardens; the fourth never comes (600 XP).
 - *Four at 5th level:* as for five, and the third warden is already at the door.
 
 **Development.** If the slate is wiped, the Root of the House can still be opened, but
@@ -1326,8 +1329,8 @@ the rail:**
 have started it. Which side the party is on decides the rest.
 
 **The circle clock — four segments.** Advances at the end of each round the two
-principals are still facing each other, and by one whenever a Cousin's Blade fails its
-save against a duelist's *Provocation* and draws. Each cousin can be provoked into
+principals are still facing each other, and by one whenever a Boranis cousin (either
+block) fails its save against a duelist's *Provocation* and draws. Each cousin can be provoked into
 drawing only once. **On the terrace, the duelists hold *Provocation* until a character
 has taken a turn there.** Until the party is in the scene, nobody is performing for
 anyone, so the clock never fills on the terrace before the party has acted.
@@ -1777,8 +1780,8 @@ only comes for people who are in the way.
 or drive it to 0 Hit Points and it leaves. Either is a win.
 
 **The clock is the errand it guards.** Every round the Attendant hasn't lost its turn
-to a distraction and has no enemy within 5 feet, it removes 1 Delay from one of the
-three in the scene (*Clears the Way*). Tell the table each time: it lifts the
+to a distraction and has no enemy within 5 feet (furniture doesn't count), it removes
+1 Delay from one of the three in the scene (*Clears the Way*). Tell the table each time: it lifts the
 barricade aside, moves the guest who was in the way, opens the door somebody was made
 to go round. When the Uninvited it guards is done with this room, so is it. At the
 table that is about six rounds.
@@ -1847,9 +1850,10 @@ next round, and the Help action doesn't apply. The table chooses whose trick it 
   its next turn. That counts.
 - **Succeed by 5 or more while it is Focused:** its focus breaks **and** it loses
   its next turn, doing nothing at all. That counts.
-- **Success while it is Idle:** the distractor becomes furniture to it for the rest of
-  the scene (see chapter X, "The Attendant", *Can Be Distracted*). It keeps acting. That
-  does **not** count: only a broken focus does.
+- **Success while it is Idle:** the distractor becomes furniture to it until they next
+  attack it or interfere with one of the three (see chapter X, "The Attendant", *Can Be
+  Distracted*). It keeps acting, and furniture standing beside it doesn't stop it clearing
+  the way. That does **not** count: only a broken focus does.
 - **Failure:** the trick is spent (it is now "used"). If it was Focused, its next
   attack is at the distractor.
 - **Natural 20:** as succeeding by 5 or more, and the distractor gains Heroic Inspiration.

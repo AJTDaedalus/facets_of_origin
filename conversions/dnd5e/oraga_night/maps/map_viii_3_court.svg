@@ -349,7 +349,7 @@
 <line x1="786" y1="277" x2="812" y2="277" stroke="#6b655c" stroke-width="0.8"/>
 <line x1="786" y1="273" x2="786" y2="281" stroke="#6b655c" stroke-width="0.8"/>
 <line x1="812" y1="273" x2="812" y2="281" stroke="#6b655c" stroke-width="0.8"/>
-<text x="822" y="281" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Distance given by the text</text>
+<text x="822" y="281" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Measured distance</text>
 <text x="786" y="311" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="13" text-anchor="start" font-weight="bold" fill="#22201c">Key</text>
 <text x="786" y="332" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B2</text>
 <text x="822" y="332" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The Crystal Court</text>
@@ -368,25 +368,22 @@
 <text x="822" y="456" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The arrest in the fire</text>
 </g>
 <g id="caption">
-<text x="28" y="852" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">From the text: 140 × 80 ft under a 50-ft vault; main doors 10 ft; the dais 3 ft high, 30 ft across, 120 ft from the doors; rails 12 ft</text>
-<text x="28" y="866" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">up; the east doors and a stair rising 12 ft. Approximate: the galleries' depth (20 ft), where each door sits, and the garden walk</text>
-<text x="28" y="880" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">(O54). The musicians' gallery and B3's doors are not placed.</text>
+<text x="28" y="880" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">Distances from chapter V; other positions approximate.</text>
 </g>
 <g id="scalebar">
-<rect x="32" y="820" width="40" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
-<rect x="72" y="820" width="40" height="6" fill="#ffffff" stroke="#22201c" stroke-width="0.6"/>
-<rect x="112" y="820" width="40" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
-<rect x="152" y="820" width="40" height="6" fill="#ffffff" stroke="#22201c" stroke-width="0.6"/>
-<rect x="192" y="820" width="40" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
-<rect x="32" y="820" width="200" height="6" fill="none" stroke="#22201c" stroke-width="0.6" id="scalebar-span" data-fact-w="50"/>
-<text x="32" y="816" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" fill="#22201c">0</text>
-<text x="232" y="816" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" fill="#22201c">50</text>
-<text x="240" y="826" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" fill="#22201c">feet  (one grid square = 5 feet)</text>
+<rect x="32" y="848" width="40" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
+<rect x="72" y="848" width="40" height="6" fill="#ffffff" stroke="#22201c" stroke-width="0.6"/>
+<rect x="112" y="848" width="40" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
+<rect x="152" y="848" width="40" height="6" fill="#ffffff" stroke="#22201c" stroke-width="0.6"/>
+<rect x="192" y="848" width="40" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
+<rect x="32" y="848" width="200" height="6" fill="none" stroke="#22201c" stroke-width="0.6" id="scalebar-span" data-fact-w="50"/>
+<text x="32" y="844" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" fill="#22201c">0</text>
+<text x="232" y="844" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" fill="#22201c">50</text>
+<text x="240" y="854" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" fill="#22201c">feet  (one grid square = 5 feet)</text>
 </g>
 <g id="orientation">
 <line x1="702" y1="98" x2="738" y2="98" stroke="#22201c" stroke-width="1.4"/>
 <polygon points="746,98 736,93 736,103" fill="#22201c"/>
 <text x="724" y="89" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="12" text-anchor="middle" font-weight="bold" fill="#22201c">E</text>
-<text x="724" y="115" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="8.5" text-anchor="middle" font-style="italic" fill="#6b655c">east only</text>
 </g>
 </svg>

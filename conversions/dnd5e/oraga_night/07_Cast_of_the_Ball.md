@@ -707,7 +707,8 @@ the Boranis gatehouse from the first bell of midnight to the last bell of Oraga.
 They are the one foe at the gate who can be beaten or bought. More usefully,
 they can be talked to, by anyone who understands that the contract settles more
 arguments than the sword does. Full fight on **card S3**, chapter IX;
-stat blocks **Bought Sergeant**, **Bought Captain** and **Bought Blade**, chapter X.*
+stat blocks **Veteran Bought Sergeant**, **Bought Captain** and **Bought Blade**, chapter X
+(the **Bought Sergeant** at 3rd level or for three characters).*
 
 ### Sergeant of the Bought — the One Reading the Room
 *Gray wool, cut plainly, with the company's mark at the shoulder and a case chained at
@@ -733,7 +734,8 @@ arguments than the sword does.
   takes it. **He surrenders the field the moment the contract is void.**
 - **Voiding the contract:** a DC 13 Charisma (Persuasion) check; see card S3.
 
-**If it comes to steel:** stat block **Bought Sergeant** (see chapter X); card S3.
+**If it comes to steel:** stat block **Veteran Bought Sergeant** (see chapter X; the
+**Bought Sergeant** at 3rd level or for three characters); card S3.
 
 ### Captain-under-Contract — the One Who Read It All
 *Older than the sergeants and quieter than the Blades. The coat is very good, and the

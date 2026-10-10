@@ -303,7 +303,6 @@
 <g id="profile" data-px-per-ft="2.4">
 <text x="38" y="861" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">Profile, Court to river gate (drops to scale; lengths are not)</text>
 <text x="42" y="879" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">walk</text>
-<text x="94" y="894.2" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10" text-anchor="end" font-weight="bold" fill="#8c2f1f">?</text>
 <text x="110" y="893.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">upper terrace</text>
 <line x1="174" y1="897.4" x2="174" y2="921.4" stroke="#8c2f1f" stroke-width="0.9" data-fact-len="terraces.drop" data-px-per-ft="2.4"/>
 <text x="180" y="917.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">second</text>
@@ -314,7 +313,7 @@
 <polyline points="38,883 98,883 98,897.4 168,897.4 168,921.4 238,921.4 238,945.4 308,945.4 308,969.4 438,969.4" fill="none" stroke="#2a2723" stroke-width="1.6"/>
 <line x1="438" y1="969.4" x2="438" y2="951.4" stroke="#8c2f1f" stroke-width="2.4"/>
 <text x="444" y="963.4" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">river gate</text>
-<text x="178" y="881" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">each terrace 10 ft below the last; the walk-to-terrace drop is not given (?)</text>
+<text x="178" y="881" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">each terrace 10 ft below the last</text>
 </g>
 <rect x="6" y="6" width="752" height="1075" fill="none" stroke="#22201c" stroke-width="1.2"/>
 <rect x="10" y="10" width="744" height="1067" fill="none" stroke="#22201c" stroke-width="0.5"/>
@@ -370,7 +369,7 @@
 <line x1="528" y1="290" x2="554" y2="290" stroke="#6b655c" stroke-width="0.8"/>
 <line x1="528" y1="286" x2="528" y2="294" stroke="#6b655c" stroke-width="0.8"/>
 <line x1="554" y1="286" x2="554" y2="294" stroke="#6b655c" stroke-width="0.8"/>
-<text x="564" y="294" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Distance given by the text</text>
+<text x="564" y="294" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Measured distance</text>
 <text x="528" y="324" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="13" text-anchor="start" font-weight="bold" fill="#22201c">Key</text>
 <text x="528" y="345" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B5</text>
 <text x="564" y="345" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The garden terraces and the</text>
@@ -384,26 +383,22 @@
 <text x="564" y="431" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">the walk's rail</text>
 </g>
 <g id="caption">
-<text x="28" y="1023" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">From the text: three terraces about 40 × 120 ft, 10-ft drops, a stair at either end,</text>
-<text x="28" y="1037" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">then about 150 ft of lower garden to the river gate; the garden stair down the wing's</text>
-<text x="28" y="1051" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">wall to the upper terrace (O33). Approximate: the walk's depth, its drop and its flights</text>
-<text x="28" y="1065" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">down, the lower garden's width, the gate (O54, O55).</text>
+<text x="28" y="1065" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">Distances from chapter V; other positions approximate.</text>
 </g>
 <g id="scalebar">
-<rect x="32" y="991" width="24" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
-<rect x="56" y="991" width="24" height="6" fill="#ffffff" stroke="#22201c" stroke-width="0.6"/>
-<rect x="80" y="991" width="24" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
-<rect x="104" y="991" width="24" height="6" fill="#ffffff" stroke="#22201c" stroke-width="0.6"/>
-<rect x="128" y="991" width="24" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
-<rect x="32" y="991" width="120" height="6" fill="none" stroke="#22201c" stroke-width="0.6" id="scalebar-span" data-fact-w="50"/>
-<text x="32" y="987" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" fill="#22201c">0</text>
-<text x="152" y="987" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" fill="#22201c">50</text>
-<text x="160" y="997" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" fill="#22201c">feet  (one grid square = 5 feet)</text>
+<rect x="32" y="1033" width="24" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
+<rect x="56" y="1033" width="24" height="6" fill="#ffffff" stroke="#22201c" stroke-width="0.6"/>
+<rect x="80" y="1033" width="24" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
+<rect x="104" y="1033" width="24" height="6" fill="#ffffff" stroke="#22201c" stroke-width="0.6"/>
+<rect x="128" y="1033" width="24" height="6" fill="#22201c" stroke="#22201c" stroke-width="0.6"/>
+<rect x="32" y="1033" width="120" height="6" fill="none" stroke="#22201c" stroke-width="0.6" id="scalebar-span" data-fact-w="50"/>
+<text x="32" y="1029" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" fill="#22201c">0</text>
+<text x="152" y="1029" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="middle" fill="#22201c">50</text>
+<text x="160" y="1039" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" fill="#22201c">feet  (one grid square = 5 feet)</text>
 </g>
 <g id="orientation">
 <line x1="444" y1="98" x2="480" y2="98" stroke="#22201c" stroke-width="1.4"/>
 <polygon points="488,98 478,93 478,103" fill="#22201c"/>
 <text x="466" y="89" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="12" text-anchor="middle" font-weight="bold" fill="#22201c">E</text>
-<text x="466" y="115" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="8.5" text-anchor="middle" font-style="italic" fill="#6b655c">east only</text>
 </g>
 </svg>

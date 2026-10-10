@@ -75,7 +75,8 @@ secret**: no faction learns of the child unless a player character tells them.
   out, +2 for a habit the party has seen (max +4); a repeat has Disadvantage and no
   bonus, never a third time. A success while Focused **breaks its focus** until its next
   turn (succeed by 5 or more: it loses that turn too). A success while Idle makes the
-  distractor furniture to it for the scene, and doesn't count. Arguing its orders is one
+  distractor furniture to it until they next attack it or interfere with the three (it
+  still clears the way beside them), and doesn't count. Arguing its orders is one
   more trick. **Fourth broken focus:** it
   wanders off. 0 HP: gone into the shadow. Say its state aloud: "It's locked on you" /
   "It's drifting."
@@ -131,33 +132,25 @@ arrives)*
 
 ## The Palace, Keyed
 
-*Five maps, drawn from chapter V ("The Palace After Midnight: General Features"). Map
-VIII–1 is a schematic drawn without a scale: every room, the ways between them the text gives, and
-the floor each is on. Maps VIII–2 to VIII–5 are drawn to scale on a 5-foot grid, at the
-sizes chapter V prints: the Crystal Court about 140 by 80 feet, three 40-foot garden
-terraces and 150 feet of lower garden, and an east wing corridor about 100 feet long. The
-east wing is upstairs: the Court's east doors open on a stair that rises 12 feet to gallery
-level, and the wing's private stair is the garden stair, running down its outer wall to the
-upper terrace. Whatever the text does not fix (a wall's exact line, which way a stair turns,
-the order of the wing's rooms) is drawn plausibly, and each map's caption says so. Dashed
-lines are the service passages, which thread the whole palace; where the text gives no
-route for them, the map marks them schematic. Each map links a PNG copy for printing.*
+*Five maps of the palace. Map VIII–1 shows every room, the ways between them and the
+floor each is on, without a scale; maps VIII–2 to VIII–5 are drawn to scale, and one square
+is 5 feet. Dashed lines are the service passages.*
 
 **Map VIII–1: The Palace** *(schematic, keyed B0–B13, floor by floor)*
 
 ![Map VIII–1: The Palace, keyed B0 to B13 by floor](maps/map_viii_1_palace.svg)
 
-*[PNG](maps/map_viii_1_palace.png). The street (B0) up through the Gatehouse Court (B1, held
+*The street (B0) up through the Gatehouse Court (B1, held
 after midnight as B12) to the Crystal Court (B2), with the banquet galleries (B3) along both
 sides and the Audience Hall (B4) off it; the gardens (B5) beyond the garden doors; the east
-wing (B9) up the east-door stair. The rooms the text places only by connection (B6, B7, B8,
-B10, B11, B13) are boxed at the right with those connections.*
+wing (B9) up the east-door stair. The rooms shown by connection (B6, B7, B8, B10, B11,
+B13) are boxed at the right.*
 
 **Map VIII–2: The Gatehouse Court** *(B0, B1, B12; card S3)*
 
 ![Map VIII–2: The Gatehouse Court, the outer gate, the wicket and the gate-walk](maps/map_viii_2_gatehouse.svg)
 
-*[PNG](maps/map_viii_2_gatehouse.png). The outer gate with its bar on the street side and
+*The outer gate with its bar on the street side and
 the wicket in its left leaf; the cell and the gatehouse stair, which climbs to a landing
 and then to the gate-walk 15 feet up; the outer stair down to Gate Street; where the Bought
 stand at midnight. The section below the plan gives the heights.*
@@ -166,7 +159,7 @@ stand at midnight. The section below the plan gives the heights.*
 
 ![Map VIII–3: The Crystal Court and the banquet galleries](maps/map_viii_3_court.svg)
 
-*[PNG](maps/map_viii_3_court.png). The floor, the dais at the far end, the main doors, the
+*The floor, the dais at the far end, the main doors, the
 garden doors to the railed garden walk, the galleries and their 12-foot rails, the east doors
 and the stair up, the service door on the gallery side (S11).*
 
@@ -174,7 +167,7 @@ and the stair up, the service door on the gallery side (S11).*
 
 ![Map VIII–4: The garden terraces and the river gate](maps/map_viii_4_terraces.svg)
 
-*[PNG](maps/map_viii_4_terraces.png). The garden walk and its rail, the three terraces and
+*The garden walk and its rail, the three terraces and
 their balustrades and end stairs, the foot of the garden stair, the lower garden and the river
 gate. A profile gives the drops.*
 
@@ -182,12 +175,12 @@ gate. A profile gives the drops.*
 
 ![Map VIII–5: The east wing and the service run](maps/map_viii_5_east_wing.svg)
 
-*[PNG](maps/map_viii_5_east_wing.png). The stair from the east doors, the cleared corridor and
+*The stair from the east doors, the cleared corridor and
 the double doors, the wing's corridor and its three finds, the garden stair, the service stair
-beside the doors with the wing's service door, the service run (schematic), and the garden
+beside the doors with the wing's service door, the service run, and the garden
 below the wing.*
 
-**Rooms the text does not place:**
+**Rooms shown by connection:**
 
 - **B6. The Chapel.** A public room; Mother Sella's, all night.
 - **B7. The Trophy Gallery.** The private palace, off the gallery corridor.

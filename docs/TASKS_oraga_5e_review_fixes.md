@@ -245,11 +245,15 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
   - Review every hit, and rewrite any sentence that isn't stock SRD rules grammar.
 - **Accept:** the overlap report is logged, and there are 0 non-SRD hits.
 
-### ☐ R6.2 Fresh critical re-review
+### ☑ R6.2 Fresh critical re-review
 - **Do:** run one adversarial reviewer with the same brief as the 2026-10-06 review. Target:
   ≥ 9/10, 0 P1.
 - **Accept:** the report is in `docs/REVIEW_oraga_5e_official_critical_2.md`. Any new P1 is fixed
   before the push.
+- **Done (2026-10-10):** the review scored 8.0 with 3 P1s. All three P1s and the mechanical P2s
+  (N5–N10) are fixed (DECISIONS O60–O66); the geometry P2s (N4), the overview redraw (N11), the
+  human line-edit (N17–N19) and the remaining P3s are open for the owner (the review's
+  "Resolution" section and the LOG list them).
 
 ### ☐ R6.3 Push
 - **Do:** run the private-canon guard and scan the unpushed range (memory rule; no Windows user

@@ -99,7 +99,7 @@ B = {
  "Feuding Kinsman": dict(cr="1/8", hd=2, hp=9, ac=11, ab=[13,12,11,9,8,12], sv=[],
    sk={"Athletics":(0,3),"Intimidation":(5,3)}, pp=9,
    atk=[(3,0,(1,4,1),3)], dc=[], dpr=3, atkb=3),
- "Kinsman principal (Nastier)": dict(cr="1/8", hd=4, hp=22, ac=11, ab=[13,12,12,9,8,12], sv=[], sk={}, pp=9,
+ "Kinsman principal (variant)": dict(cr="1/8", hd=4, hp=22, ac=11, ab=[13,12,12,9,8,12], sv=[], sk={}, pp=9,
    atk=[], dc=[], dpr=3, atkb=3),
  "Gallery Knife": dict(cr="1/4", hd=3, hp=13, ac=13, ab=[10,15,10,11,10,10], sv=[],
    sk={"Sleight of Hand":(1,4),"Stealth":(1,4)}, pp=10,
@@ -140,8 +140,10 @@ B = {
 
 # Base block name in the text, when it differs from the key above.
 TEXT_NAME = {"Attendant": "The Attendant", "Cousin's Blade": "Boranis Cousin's Blade", "Honor Guard": "Boranis Honor Guard"}
-# Nastier variants whose numbers are printed in the base block's Nastier line.
-NASTIER_OF = {"Kinsman principal (Nastier)": "Feuding Kinsman"}
+# Variants whose numbers are printed in one bold run-in line under the base block
+# (R6.2, review 2 N7: S1's principal moved out of the kinsmen's Nastier line, because the
+# card fields him as its base roster). variant -> (base block, line label).
+VARIANT_OF = {"Kinsman principal (variant)": ("Feuding Kinsman", "Variant: the principal")}
 # R1.4 (review P1-7, owner QR3): Nastier variants the cards field as their base roster
 # are named blocks of their own. variant -> base block (text names). The base block's
 # Nastier line points to the variant and must not reprint its numbers.
@@ -217,7 +219,7 @@ def attacks_per_turn(blk):
 def fixed_value_problems(blocks):
     probs = []
     for n, b in B.items():
-        if n in NASTIER_OF:
+        if n in VARIANT_OF:
             continue
         blk = blocks.get(TEXT_NAME.get(n, n))
         m = blk and _CR_LINE.search(blk)
@@ -290,7 +292,7 @@ def parse_initiative(blk):
 
 def layout_problems(blocks):
     probs = []
-    by_text = {TEXT_NAME.get(n, n): n for n in B if n not in NASTIER_OF}
+    by_text = {TEXT_NAME.get(n, n): n for n in B if n not in VARIANT_OF}
     for name, blk in blocks.items():
         n = by_text.get(name)
         if n is None:
@@ -326,11 +328,12 @@ def text_problems(text):
     probs = (fixed_value_problems(blocks) + layout_problems(blocks) + trait_dc_problems(blocks)
              + variant_problems(blocks))
     for n, b in B.items():
-        if n in NASTIER_OF:
-            blk = blocks.get(NASTIER_OF[n])
-            m = blk and re.search(r"\*\*Nastier\.\*\*(.*?)(?:\n> \*|\n\n)", blk, re.S)
+        if n in VARIANT_OF:
+            base, label = VARIANT_OF[n]
+            blk = blocks.get(base)
+            m = blk and re.search(r"\*\*" + re.escape(label) + r"\.\*\*(.*?)(?:\n> \*|\n\n)", blk, re.S)
             if not m:
-                probs.append(f"{n}: Nastier line not found in text"); continue
+                probs.append(f"{n}: variant line not found in text"); continue
             line = m.group(1).replace("\n> ", " ")
             hp = re.search(r"(\d+) HP \((\d+)d8", line)
             if not hp or (int(hp.group(1)), int(hp.group(2))) != (b["hp"], b["hd"]):
@@ -402,8 +405,8 @@ def main(argv=None):
     if errors:
         print("MISMATCHES:")
         for x in errors: print(" -", x)
-    n_nastier = sum(1 for k in B if "(Nastier)" in k)
-    print(f"bestiary_check: {len(B) - n_nastier} blocks + {n_nastier} Nastier checked; "
+    n_var = sum(1 for k in B if k in VARIANT_OF)
+    print(f"bestiary_check: {len(B) - n_var} blocks + {n_var} variant line(s) checked; "
           f"{len(errors)} mismatch(es)")
     sys.exit(1 if errors else 0)
 

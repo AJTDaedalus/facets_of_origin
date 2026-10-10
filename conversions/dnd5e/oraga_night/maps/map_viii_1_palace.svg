@@ -90,7 +90,7 @@
 <text x="617" y="182" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">the garden stair, down</text>
 <text x="617" y="194" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">to the upper terrace</text>
 <text x="617" y="194" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9" text-anchor="start" font-style="italic" fill="#6b655c">to the upper terrace</text>
-<text x="522" y="466" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="11.5" text-anchor="start" font-weight="bold" fill="#22201c">Placed by connection only</text>
+<text x="522" y="466" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="11.5" text-anchor="start" font-weight="bold" fill="#22201c">Rooms shown by connection</text>
 <rect x="522" y="478" width="270" height="44" fill="#ffffff" stroke="#2a2723" stroke-width="1.6" stroke-dasharray="4 3" data-room="B6" data-floor="unknown"/>
 <text x="530" y="497" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="14" text-anchor="start" font-weight="bold" fill="#22201c">B6</text>
 <text x="554.16" y="497" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="11" text-anchor="start" font-weight="bold" fill="#22201c">The Chapel</text>
@@ -135,7 +135,7 @@
 <rect x="32" y="598" width="16" height="13" fill="#d8d2c8" stroke="#2a2723" stroke-width="0.8"/>
 <text x="54" y="608.5" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" fill="#22201c">Cellars: B11</text>
 <rect x="32" y="619" width="16" height="13" fill="#ffffff" stroke="#2a2723" stroke-width="0.8" stroke-dasharray="4 3"/>
-<text x="54" y="629.5" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" fill="#22201c">Not given: B4,</text>
+<text x="54" y="629.5" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" fill="#22201c">By connection: B4,</text>
 <text x="54" y="650.5" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="9.5" text-anchor="start" fill="#22201c">B6, B7, B13</text>
 <rect x="6" y="6" width="1042" height="918" fill="none" stroke="#22201c" stroke-width="1.2"/>
 <rect x="10" y="10" width="1034" height="910" fill="none" stroke="#22201c" stroke-width="0.5"/>
@@ -164,51 +164,47 @@
 <rect x="818" y="190" width="26" height="13" fill="#eef2f6" stroke="#2a2723" stroke-width="0.6" stroke-dasharray="6 3"/>
 <text x="854" y="201" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Throughout the palace</text>
 <rect x="818" y="210" width="26" height="13" fill="#ffffff" stroke="#2a2723" stroke-width="0.6" stroke-dasharray="4 3"/>
-<text x="854" y="221" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Level not given</text>
+<text x="854" y="221" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Shown by connection</text>
 <line x1="818" y1="237" x2="844" y2="237" stroke="#2a2723" stroke-width="2.2"/>
-<text x="854" y="241" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">A way through that the text</text>
-<text x="854" y="254" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">gives</text>
-<line x1="818" y1="270" x2="844" y2="270" stroke="#5b6f86" stroke-width="2" stroke-dasharray="5 3"/>
-<text x="854" y="274" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Service passages</text>
-<text x="818" y="304" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="13" text-anchor="start" font-weight="bold" fill="#22201c">Key</text>
-<text x="818" y="325" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B0</text>
-<text x="854" y="325" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Street, approach, line</text>
-<text x="818" y="342" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B1</text>
-<text x="854" y="342" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Gatehouse Court</text>
-<text x="818" y="359" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B2</text>
-<text x="854" y="359" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Crystal Court</text>
-<text x="818" y="376" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B3</text>
-<text x="854" y="376" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Banquet Galleries</text>
-<text x="818" y="393" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B4</text>
-<text x="854" y="393" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Audience Hall</text>
-<text x="818" y="410" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B5</text>
-<text x="854" y="410" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Terraces, river gate</text>
-<text x="818" y="427" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B6</text>
-<text x="854" y="427" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Chapel</text>
-<text x="818" y="444" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B7</text>
-<text x="854" y="444" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Trophy Gallery</text>
-<text x="818" y="461" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B8</text>
-<text x="854" y="461" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Raunu's Study</text>
-<text x="818" y="478" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B9</text>
-<text x="854" y="478" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">East Wing</text>
-<text x="818" y="495" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B10</text>
-<text x="854" y="495" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Kitchens, service passages</text>
-<text x="818" y="512" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B11</text>
-<text x="854" y="512" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Root of the House</text>
-<text x="818" y="529" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B12</text>
-<text x="854" y="529" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Gatehouse Court, held</text>
-<text x="818" y="546" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B13</text>
-<text x="854" y="546" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The Room You Put Here</text>
+<text x="854" y="241" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">A way through</text>
+<line x1="818" y1="257" x2="844" y2="257" stroke="#5b6f86" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="854" y="261" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Service passages</text>
+<text x="818" y="291" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="13" text-anchor="start" font-weight="bold" fill="#22201c">Key</text>
+<text x="818" y="312" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B0</text>
+<text x="854" y="312" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Street, approach, line</text>
+<text x="818" y="329" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B1</text>
+<text x="854" y="329" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Gatehouse Court</text>
+<text x="818" y="346" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B2</text>
+<text x="854" y="346" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Crystal Court</text>
+<text x="818" y="363" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B3</text>
+<text x="854" y="363" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Banquet Galleries</text>
+<text x="818" y="380" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B4</text>
+<text x="854" y="380" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Audience Hall</text>
+<text x="818" y="397" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B5</text>
+<text x="854" y="397" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Terraces, river gate</text>
+<text x="818" y="414" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B6</text>
+<text x="854" y="414" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Chapel</text>
+<text x="818" y="431" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B7</text>
+<text x="854" y="431" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Trophy Gallery</text>
+<text x="818" y="448" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B8</text>
+<text x="854" y="448" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Raunu's Study</text>
+<text x="818" y="465" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B9</text>
+<text x="854" y="465" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">East Wing</text>
+<text x="818" y="482" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B10</text>
+<text x="854" y="482" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Kitchens, service passages</text>
+<text x="818" y="499" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B11</text>
+<text x="854" y="499" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Root of the House</text>
+<text x="818" y="516" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B12</text>
+<text x="854" y="516" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">Gatehouse Court, held</text>
+<text x="818" y="533" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-weight="bold" fill="#22201c">B13</text>
+<text x="854" y="533" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" fill="#22201c">The Room You Put Here</text>
 </g>
 <g id="caption">
-<text x="28" y="880" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">Not to scale: a schematic of the rooms, the ways between them and the floor each is on. Boxes and positions are approximate; chapter V gives</text>
-<text x="28" y="894" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">the sizes, and maps VIII–2 to VIII–5 draw them. Rooms the text places only by connection are listed at the right with the connections it</text>
-<text x="28" y="908" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">gives.</text>
+<text x="28" y="908" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="10.5" text-anchor="start" font-style="italic" fill="#6b655c">Not to scale. Maps VIII–2 to VIII–5 draw the rooms to scale.</text>
 </g>
 <g id="orientation">
 <line x1="734" y1="98" x2="770" y2="98" stroke="#22201c" stroke-width="1.4"/>
 <polygon points="778,98 768,93 768,103" fill="#22201c"/>
 <text x="756" y="89" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="12" text-anchor="middle" font-weight="bold" fill="#22201c">E</text>
-<text x="756" y="115" font-family="'DejaVu Serif', Georgia, 'Times New Roman', serif" font-size="8.5" text-anchor="middle" font-style="italic" fill="#6b655c">east only</text>
 </g>
 </svg>

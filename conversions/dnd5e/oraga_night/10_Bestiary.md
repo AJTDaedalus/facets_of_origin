@@ -175,30 +175,12 @@ finished or lost, and at the last bell of Oraga if nothing else has. Chapter V r
 the attack; these blocks are what it runs on. Their challenge ratings describe how
 hard they hit; nothing tonight stops them.
 
-**The Fractures, one rule for all three.** Each Uninvited has **tells**: human
-moments salted through Movements III–V (the table is in chapter V), and anything
-they do openly during the attack counts too. A creature that has witnessed, or been
-told about, at least one of that Uninvited's tells can spend an action in a fight, or
-one beat out of one, within 30 feet of them, where they can hear, to reach the person
-inside: an ability check with
-whatever skill the words fit: Charisma (Persuasion), Charisma (Performance),
-Intelligence (Religion), Wisdom (Insight), or a plain Charisma check for a bared truth. **Intimidation never works, and neither does Deception**: the
-person inside the mask has been lied to enough. Heroic Inspiration may be spent on it,
-and should be.
-
-- **The DC is 18** with one tell, and **15** with two or more. The Wept's is 15
-  whenever she has 2 or more Delay, whatever tells have been seen.
-- **Success:** the Fracture lands in full, as the block says, and that Uninvited
-  gains **2 Delay**.
-- **Failure by 4 or less:** it lands in full, and that Uninvited gains **2 Delay**, at a
-  cost: the Uninvited answers first, with
-  one attack against the speaker (rolled in the open; "Down, Not Out" holds) or one
-  word the speaker will carry for the rest of their life. The DM chooses which.
-- **Failure by 5 or more:** it doesn't land and isn't spent. The Uninvited acts
-  against the speaker, or the scene around them gets worse; the DM chooses. It can be
-  tried again once the party has witnessed a new tell.
-- **Each Fracture works once.** The full rule is in chapter V (see chapter V, "The
-  Fractures").
+**The Fractures.** Each Uninvited has **tells**, human moments salted through Movements
+III–V, and a character who has witnessed one can reach the person inside with the right
+words. The full rule, and the table of tells, is in chapter V (see chapter V, "The
+Fractures"). **The DC is 18** with one tell and **15** with two or more; the Wept's is 15
+whenever she has 2 or more Delay, whatever tells have been seen. Each block's Fracture
+trait says what lands.
 
 **And one more came with them.** The **Attendant** has been at the ball all night,
 carrying a cloak and a cup for a master nobody ever sees. At midnight it stops
@@ -261,8 +243,10 @@ Its habits: it stares at worked crystal and light; it keeps a cup and a cloak re
 for a master who isn't there; it follows music that changes. A success against it while
 it is Focused **breaks its focus** until the start of its next turn; on a success by 5 or
 more it loses that turn as well. A success while it is Idle makes the distractor
-**furniture** to it for the rest of the scene: it ignores that creature, as if it had never
-interfered, and goes on acting as before. That doesn't count. On a failure the trick is spent, and a Focused
+**furniture** to it: it ignores that creature, as if it had never interfered, until that
+creature next attacks it or interferes with one of the three. It goes on acting as before,
+and a creature that is furniture to it doesn't stop *Clears the Way*. That success doesn't
+count toward the four. On a failure the trick is spent, and a Focused
 Attendant attacks the distractor next. The **fourth** time its focus is broken
 tonight, it wanders off: out of the fight, standing at a window, watching the fires.
 That is a win. An argument that what the party is doing is not, strictly, interrupting
@@ -270,7 +254,8 @@ the three is one more trick, under these same rules. *(The full rule, the natura
 how to hint at all of this: card S14.)*
 
 ***Clears the Way.*** Once each round, if it hasn't lost its turn to a distraction and
-no enemy is within 5 feet of it, the Attendant removes 1 Delay from one Uninvited in
+no enemy is within 5 feet of it (a creature that is furniture to it doesn't count), the
+Attendant removes 1 Delay from one Uninvited in
 the same scene (see chapter V, "Buying Time"). It moves the obstacle: the barricade, the guest in the
 way, the door somebody was made to go round.
 
@@ -319,7 +304,7 @@ looks round, briefly, for the master it is supposed to have.
 > **Breaks.** Not from fear or pain. Its focus broken four times, or 0 Hit Points,
 > and it is gone. An argument that what the party is doing is not, strictly, interrupting the
 > three is a distraction like any other (*Can Be Distracted*): it breaks a focus, or makes
-> the arguer furniture, and never ends the fight by itself.
+> the arguer furniture until they next interfere, and never ends the fight by itself.
 > **Nastier.** It is already Focused when the party first draws its attention at
 > midnight.
 > *Made, not born, and in the service of the Uninvited's master; it came through with
@@ -371,8 +356,8 @@ blade uses this before it uses steel, and only somewhere a guard can't see.
 > **Breaks.** On Essin's word, at once. Without Essin, when half the cousins are down
 > or the fight has drawn a crowd; a Boranis seen brawling at his own chief's ball is
 > the thing they are here to prevent.
-> **Nastier.** The cousins who were there in 3160: use the **Boranis Cousin of 3160**
-> block.
+> **Nastier.** The same cousins at their hardest: use the **Boranis Cousin of 3160**
+> block for all three.
 > *A Cousin's Blade is a Boranis by blood, one of the kin who stood with Vorlain in
 > the missing year, not a sword bought for the season. House Boranis hired none, and
 > that stays true. The chain shirt is worn under a festival coat. Cast: chapter VII,
@@ -424,8 +409,10 @@ cousin uses this before it uses steel, and only somewhere a guard can't see.
 > or the fight has drawn a crowd.
 > **Nastier.** Without Essin, they break only when the fight has drawn a crowd, not
 > when half of them are down.
-> *The cousins who were there in 3160, the missing year. Everything in the Boranis
-> Cousin's Blade's note holds for them. Cards: S6, S9.*
+> *The same three cousins as the Boranis Cousin's Blade, the kin who stood with Vorlain
+> in 3160, the missing year, fighting as they fought then. A card fields one block or the
+> other for all three, never a mix. Everything in the Cousin's Blade's note holds for
+> them. Cards: S6; S9's Nastier and 5th-level lines.*
 
 ---
 
@@ -875,8 +862,9 @@ damage.
 
 ***Provocation.*** *Wisdom Saving Throw:* DC 12, one creature within 30 feet that can
 hear the duelist. *Failure:* The target has Disadvantage on attack rolls against
-anyone but the duelist until the end of its next turn. A Boranis Cousin's Blade that
-fails this save draws steel, wherever it is standing.
+anyone but the duelist until the end of its next turn. A Boranis cousin (either block,
+the Cousin's Blade or the Cousin of 3160) that fails this save draws steel, wherever it
+is standing.
 
 **Reactions**
 
@@ -1062,9 +1050,12 @@ kinsman's next turn has Advantage.
 > **Breaks.** Any kinsman hit steps back out of the brawl and shouts instead of
 > swinging. The brawl stops the instant an adult of either house arrives and is
 > obeyed — which a player character can be.
-> **Nastier.** A principal is still swinging: a kinsman with 22 HP (4d8 + 4), and
-> while he stands, the others don't step back when hit.
+> **Nastier.** The second principal swings at the party too (a second principal,
+> below), and a 1 rolled in the brawl advances the bench clock by two segments.
 > *Card: S1.*
+
+**Variant: the principal.** A kinsman with 22 HP (4d8 + 4), CR 1/8 (XP 25); while he
+stands, the other kinsmen don't step back when hit. Card S1 fields one.
 
 ---
 
@@ -1473,6 +1464,13 @@ roads, either one:
   declaring to his face that no god worth the name asks for a stolen child.
   Intelligence (Religion) or Charisma (Persuasion).
 
+On a success, guilt gets into the errand like grit into a joint. For the rest of the
+night he falters at thresholds and looks back: he moves at 20 feet whether or not he
+is Witnessed, he can't use Shadow-Step more than once each minute, and at the
+Crossing he does not break past Master Vell. At a cost, the same, but he answers
+first with one parting blow or word. Either way he keeps going; the hunt does not
+end. *(Check and DCs: The Fractures, above.)*
+
 **Actions**
 
 ***Multiattack.*** The Radiant makes three Offered Hands attacks. He can replace the
@@ -1492,13 +1490,6 @@ offers the blow upward.
 see. Any grapple or restraint on him ends. He arrives rather than runs; ordinary
 doors, walls and barricades do not reliably hold him. Deep Boranis ward-crystal does.
 He can't do this while Witnessed.
-
-On a success, guilt gets into the errand like grit into a joint. For the rest of the
-night he falters at thresholds and looks back: he moves at 20 feet whether or not he
-is Witnessed, he can't use Shadow-Step more than once each minute, and at the
-Crossing he does not break past Master Vell. At a cost, the same, but he answers
-first with one parting blow or word. Either way he keeps going; the hunt does not
-end. *(Check and DCs: The Fractures, above.)*
 
 > **Wants.** Veier Nolonaire, and to be seen doing it, because worship must be
 > witnessed to count. He re-stages the kill if nobody saw.
@@ -1829,8 +1820,9 @@ damage.
 
 ***Provocation.*** *Wisdom Saving Throw:* DC 12, one creature within 30 feet that can
 hear the duelist. *Failure:* The target has Disadvantage on attack rolls against
-anyone but the duelist until the end of its next turn. A Boranis Cousin's Blade that
-fails this save draws steel, wherever it is standing.
+anyone but the duelist until the end of its next turn. A Boranis cousin (either block,
+the Cousin's Blade or the Cousin of 3160) that fails this save draws steel, wherever it
+is standing.
 
 **Reactions**
 

@@ -267,6 +267,30 @@ facts:
         pattern: '\bround after next\b'
         why: O36 / P2-18 — chapter V says "the round after"
 
+  - id: fracture_rule
+    truth: >-
+      The Fracture rule (invoking one, the skills, Intimidation and Deception never working,
+      the three result bands, "works once") is printed in full once, in chapter V ("The
+      Fractures"). Chapter X keeps a pointer plus its local DCs; each block's Fracture trait
+      says only what lands. The DM sheet (08) is a quick reference and may compress it.
+    source: O36 extended (review 2 N8, R6.2, O64)
+    phrases: ['(see chapter V, "The Fractures")']
+    checks:
+      - type: rule_copy
+        home: "05"
+        max: 2
+        files: ["01", "02", "03", "04", "06", "07", "09", "10", "11", "README"]
+        elements:
+          - '\bIntimidation never works\b|\bNever Intimidation\b'
+          - '\bneither does Deception\b|\bor Deception\b'
+          - '\b(?:Failure|miss(?:es)?|fails?) by 4 or less\b'
+          - '\b(?:Failure|miss(?:es)?|fails?) by 5 or more\b'
+          - '\bworks once\b|\bOnce each\b'
+          - '\bwithin 30 (?:feet|ft\.)[^.]{0,60}\bhear'
+          - '\bHeroic Inspiration may be spent\b'
+          - "\\b(?:isn't|is not|not) spent\\b"
+        why: O36 / review 2 N8 — the full Fracture rule lives in chapter V; chapter X points to it
+
 # --------------------------------------------------------------------------- maps (R4)
 # The dimensions maps/build_maps.py draws, all in feet (O28, O33, O34; S3 for the gate;
 # DECISIONS O53–O56 for what the maps had to choose). tools/test_maps.py checks every
