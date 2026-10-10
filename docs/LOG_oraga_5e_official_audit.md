@@ -1123,3 +1123,51 @@ ASCII left; the card, 04 and 05 pointers exist; the `maps` block agrees with 05 
 - `python T/bestiary_check.py` → 28 blocks + 1 Nastier, 0 mismatches.
 - `python T/pregen_check.py` → 5 pregens, 0 issues.
 - `software/tests/test_no_private_canon.py` → 5 passed.
+
+## Review-fix pass — R5a
+
+*Worker, 2026-10-10. Tasks R5.1, R5.2 and R5.4 of `docs/TASKS_oraga_5e_review_fixes.md`
+(review P2-20–P2-22, P3-1–P3-6, P3-9, P3-10, P3-13–P3-15, P3-17, P3-19–P3-23). Decisions
+O57–O59 in DECISIONS.md; INVENTIONS #86. R5.3 (tics, emphasis italics) is not in this part.*
+
+**Lint families, before → after.** trigger_format 30 → 0; box_label 12 → 0; or_skills 11 → 0;
+anachronism 4 → 0; near_duplicate (new) 19 at first run → 0; emphasis_italics 50 → 49 (01's
+"*if you have time*"; the rest is R5.3). Totals: 65 hard and 42 structure → 49 hard and 0
+structure. `lint_baseline.json` re-written with `--baseline` (text moved between 05 and 09, and
+every change was downward).
+
+**R5.1.** 12 triggers in 04 (the orrery and the toast had only a plain sentence), 5 in 05 plus
+Raunu's rite, which had no trigger, and 13 card triggers in 09 now read "**Read this when …:**". Twelve run-in box
+labels (04 ×4, 05 ×6, 06, 07) split to heading style by a one-off script. Raunu's rite box is
+italic (P3-5). "*If you have time*" is italic in 01's legend and in 04's Undercurrents box
+(P3-6); 01's description of the trigger form now shows the bold form. Chapter VII has no
+read-aloud boxes, so nothing changed there.
+
+**R5.2.** Test-first: `TestNearDuplicate` (8 tests) failed, then `lint_near_duplicates()` went
+in (word 3-gram index, difflib ratio over words, > 0.8, 20+ words, different files, reported on
+the later file; structure rule `near_duplicate`). First run: 19 hits. A run at 0.5 showed the
+dossier repeats the review describes sit mostly between 0.55 and 0.8 (paraphrased, not copied),
+so the IX and X edits were made on the task's terms, not just to clear the threshold. Fixed by
+editing: IX's six "What they came for" paragraphs (threat material plus '(see chapter VII,
+"<Name>")'); X's Wants/Tells lines for Callun, Kovaun, Draunel, Essin, Maiven, Corro, Vorlain and
+Tavva's tail; the noble-minded passage (home: 05's looters beat; pointers in 04, 07, 09 ×2 and
+`flow.json`); S3's read-aloud and treasure (home: the card; 05 points), S3's development (home:
+05); 05's smoke bullet (the card has the save). Whitelisted with reasons (`lint_5e_allow.txt`):
+the SRD attribution (4 files), the pregens' reprinted Orthaen trait (4), Handout 3's reprint of
+the charge rules (4 paragraphs).
+
+**R5.4.** All as O59 records. SRD 5.2.1 tools list checked against the PDF downloaded to the
+scratchpad and extracted with PyMuPDF: no vehicle tool, so Pello gets Navigator's Tools (O58);
+`pregen_check` stays green. P3-15's fall needed "falls 10 feet" kept verbatim for
+`test_maps.py`'s S3 agreement test (the first wording broke it; fixed). Two term glosses moved
+with the prose (`terms.txt`: Blackwatch, Mazaa). **Already fixed before R5a, skipped:** P3-7,
+P3-8, P3-11, P3-12, P3-16, P3-18 (R2.5, O51), P3-24 (R3, O52). P3-9 needed a note, not a rename.
+
+**Commands.**
+- `python T/lint_5e.py --check` → OK (49 hard, 0 structure remain).
+- `python T/fact_check.py --check` → OK (0 hits).
+- `python T/bestiary_check.py` → 28 blocks + 1 Nastier, 0 mismatches.
+- `python T/pregen_check.py` → 5 pregens, 0 issues.
+- `python -m pytest conversions/dnd5e/oraga_night/tools -q` → 347 passed (339 + 8 new).
+- `python M/flow/build_flow_page.py` → rebuilt (flow.json's S5 summary changed).
+- `software/tests/test_no_private_canon.py` → 5 passed.

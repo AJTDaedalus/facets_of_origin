@@ -23,8 +23,8 @@ here. This adventure needs only what follows.*
   before the guards do.
 
 **And the recent wound, which this module is quietly about:** the eastern mists have
-receded to record lows this year. The Blackwatch, who keep the vigil over the eastern mists, are frightened and saying
-so quietly.
+receded to record lows this year. The Blackwatch, who keep the vigil over them, are
+frightened and saying so quietly.
 Inland it is a dinner-table curiosity. Keep it in the table's peripheral vision. It
 matters.
 

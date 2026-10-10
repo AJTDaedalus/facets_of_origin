@@ -3,7 +3,7 @@
 *A masquerade adventure compatible with fifth-edition rules (SRD 5.2.1). One night, one
 palace, two hundred masks, every enemy the host has — and three guests nobody invited.*
 
-**Setting:** Rekuzan, capital of the Orthaen, continent of Val'loh, the year 3164
+**Setting:** Rekuzan, capital of the Orthaen, continent of Val'loh, the year 3164.
 
 **Players:** four characters of **4th level**, fresh or chosen from the five
 pregenerated guests in chapter XI. Every fight is balanced for four; each card has
@@ -11,14 +11,14 @@ lines for three or five characters and for 3rd or 5th level. The night ends at 5
 level.
 
 **Length:** one session, **4½–5 hours**. Play starts in the street outside the palace
-and ends at dawn (the runtime table is in chapter I)
+and ends at dawn (the runtime table is in chapter I).
 
 **Rules:** any fifth-edition core rules; written against the **SRD 5.2.1**. A 2014
 table can play it with the short glossary in chapter X ("At a 2014 table") and
 rebuilt pregens.
 
 **Tone:** glamour over a blade: festival splendor and social fencing, with something
-wrong accumulating underneath, and knives under every table
+wrong accumulating underneath, and knives under every table.
 
 ---
 

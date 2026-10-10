@@ -171,9 +171,9 @@ worth exactly what the fiction says it is worth: faces are hidden, voices are
 recognizable to those who know them, builds and manners give people away to a careful
 eye.
 
-- **Identifying a masked guest you know:** a DC 15 Wisdom (Insight or Perception) check.
-- **Identifying one you have merely heard described:** a DC 20 Wisdom (Insight or
-  Perception) check.
+- **Identifying a masked guest you know:** a DC 15 Wisdom (Insight) or DC 15 Wisdom (Perception) check.
+- **Identifying one you have merely heard described:** a DC 20 Wisdom (Insight) or
+  DC 20 Wisdom (Perception) check.
 - **Approaching someone far above your station, behind a mask:** an ability check using
   the skill that fits, DC 10, instead of the usual 13. The custom protects the
   conversation, and everyone at this ball is someone else tonight.

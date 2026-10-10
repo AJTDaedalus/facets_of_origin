@@ -201,13 +201,13 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
 
 ## R5: Layout and voice
 
-### ☐ R5.1 One trigger-line format and one box-label format (P2-20, P2-21; P3-5, P3-6)
+### ☑ R5.1 One trigger-line format and one box-label format (P2-20, P2-21; P3-5, P3-6)
 - **Do:** apply the format STYLE declares across 04, 05 and 09 (the bold-italic card triggers).
   Use heading-style box labels everywhere. Italicize Raunu's rite box. Fix the "*If you have
   time*" styling.
 - **Accept:** the trigger-format and box-label rules are at 0.
 
-### ☐ R5.2 Dossier dedupe (P2-22; O38)
+### ☑ R5.2 Dossier dedupe (P2-22; O38)
 - **Do:** chapter IX's Six Lines keep only the threat line plus "see chapter VII". Chapter X's
   lore tails shrink. Collapse the repeated "fight aimed at the noble-minded" passage to one home.
 - **Accept:** a near-duplicate paragraph check (a new linter soft rule, or a one-off script)
@@ -223,7 +223,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
     Inspiration*" becomes roman).
 - **Accept:** the tic targets and the emphasis rule are at 0, and the sample pairs are logged.
 
-### ☐ R5.4 Remaining P3s (P3-1 to P3-4, P3-9, P3-10, P3-13 to P3-15, P3-17, P3-19 to P3-23)
+### ☑ R5.4 Remaining P3s (P3-1 to P3-4, P3-9, P3-10, P3-13 to P3-15, P3-17, P3-19 to P3-23)
 - **Do:** each fix as the review words it.
   - P3-9: the three seal items. Add one clarifying line distinguishing them; don't rename canon
     items.

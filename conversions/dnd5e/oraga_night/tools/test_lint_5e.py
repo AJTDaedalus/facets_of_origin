@@ -897,3 +897,57 @@ class TestDefinedTerms:
         got = {h.match for h in L.lint_terms(L.MODULE, L.TERMS, L.SETTINGS)}
         assert not any("Scora" in m or "Kshalo" in m for m in got)
         assert not any(m.startswith("unlisted canon term") or m.startswith("stale gloss") for m in got)
+
+
+class TestNearDuplicate:
+    """R5.2 (O38): no paragraph pair across chapters over 80% similar."""
+
+    PARA = ("Callun wants the contract voided before midnight, fears the Circle more than "
+            "the Church, and keeps the ledger of every debt the house owes in a cipher only "
+            "he and his sister can read, which is why the Circle keeps him close.")
+
+    def _mod(self, tmp_path, a, b):
+        (tmp_path / "07_Cast_of_the_Ball.md").write_text("# VII. Cast\n\n" + a + "\n")
+        (tmp_path / "09_The_Snakes.md").write_text("# IX. Snakes\n\n" + b + "\n")
+        return tmp_path
+
+    def test_copy_across_chapters_hits(self, tmp_path):
+        mod = self._mod(tmp_path, self.PARA, self.PARA.replace("before midnight", "by midnight"))
+        got = L.lint_near_duplicates(mod)
+        assert len(got) == 1 and got[0].rule == "near_duplicate"
+        assert got[0].file == "09_The_Snakes.md" and got[0].line == 3
+        assert "07_Cast_of_the_Ball.md" in got[0].match
+
+    def test_pointer_passes(self, tmp_path):
+        mod = self._mod(tmp_path, self.PARA,
+                        "Callun is dangerous with a knife in a crowd and never alone "
+                        "(see chapter VII, \"Callun\") for his want, fear and secret, which "
+                        "this card does not repeat because the dossier holds them.")
+        assert L.lint_near_duplicates(mod) == []
+
+    def test_same_chapter_repeat_ignored(self, tmp_path):
+        mod = self._mod(tmp_path, self.PARA + "\n\n" + self.PARA, "Short.")
+        assert L.lint_near_duplicates(mod) == []
+
+    def test_short_paragraphs_ignored(self, tmp_path):
+        line = "The doors are shut and the guards are watching them closely."
+        assert L.lint_near_duplicates(self._mod(tmp_path, line, line)) == []
+
+    def test_whitelist_exempts(self, tmp_path):
+        mod = self._mod(tmp_path, self.PARA, self.PARA)
+        allow = [L.AllowEntry("09_The_Snakes.md", "near_duplicate", "keeps the ledger",
+                              "test")]
+        assert L.lint_near_duplicates(mod, allow) == []
+
+    def test_wrapped_and_quoted_copy_hits(self, tmp_path):
+        wrapped = "> " + self.PARA[:80] + "\n> " + self.PARA[80:]
+        assert len(L.lint_near_duplicates(self._mod(tmp_path, self.PARA, wrapped))) == 1
+
+    def test_reported_in_run_and_report(self, tmp_path):
+        mod = self._mod(tmp_path, self.PARA, self.PARA)
+        rep = L.run(mod, allow=[], terms=tmp_path / "none.txt", settings=tmp_path)
+        assert any(h.rule == "near_duplicate" for h in rep["structure"])
+        assert "| near_duplicate | 1 |" in L.report_tables(rep)
+
+    def test_real_module_is_clean(self):
+        assert L.lint_near_duplicates(L.MODULE, L.load_allow(L.ALLOW)) == []

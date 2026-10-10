@@ -146,7 +146,7 @@ V, ⟨They trap one of the Uninvited⟩).
 | *Power Word* anything, *Disintegrate*, a long fall, drowning, "they're dead now" | They are not. The leash holds their lives | *Leashed* |
 | *Banishment*, *Plane Shift*, any teleport they didn't choose | The leash pulls them back to where they stood, at once. It landed, so it is 1 Delay | *Leashed* |
 | *Hold Person*, *Hold Monster*, *Sleep*, a stunning blow, *Hideous Laughter* | Their bodies are not their own to lose. Condition immunities; nothing bought | *Held by Something Else* |
-| *Charm Person*, *Suggestion*, *Command*, *Dominate*, *Calm Emotions*, fear of any kind | Their wills are not their own to give. Condition immunities, and compulsion fails; nothing bought | *Held by Something Else* |
+| *Charm Person*, *Suggestion*, *Command*, *Dominate Person*, *Calm Emotions*, fear of any kind | Their wills are not their own to give. Condition immunities, and compulsion fails; nothing bought | *Held by Something Else* |
 | *Polymorph*, *Flesh to Stone*, any shape-change | Their shapes are held too; nothing bought | *Held by Something Else* |
 | *Counterspell*, *Dispel Magic* | They cast no spells. Nothing on them is a spell. The leash is older than the word | — |
 | Grapple, *Web*, a net, a pin | The Wept and the Hollow step into the world's shadow and out of the grip: nothing bought. The Radiant can't while he is *Witnessed*: 1 Delay, and he spends his action tearing free | *Shadow-Step*; *Witnessed* |
@@ -359,8 +359,8 @@ blade doesn't break, and it stops fighting the moment Essin tells it to.
 ***Longsword.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 6 (1d8 + 2) Slashing
 damage.
 
-***A Quiet Word.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 3 (1 + 2)
-Bludgeoning damage, and the target has the Grappled condition (escape DC 12). The
+***A Quiet Word.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 3 Bludgeoning
+damage, and the target has the Grappled condition (escape DC 12). The
 blade uses this before it uses steel, and only somewhere a guard can't see.
 
 > **Wants.** Vorlain safe, sober and unrecorded; the missing year left buried; the
@@ -411,8 +411,8 @@ cousin doesn't break, and it stops fighting the moment Essin tells it to.
 ***Longsword.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 6 (1d8 + 2) Slashing
 damage.
 
-***A Quiet Word.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 3 (1 + 2)
-Bludgeoning damage, and the target has the Grappled condition (escape DC 12). The
+***A Quiet Word.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 3 Bludgeoning
+damage, and the target has the Grappled condition (escape DC 12). The
 cousin uses this before it uses steel, and only somewhere a guard can't see.
 
 > **Wants.** Vorlain safe, sober and unrecorded; the missing year left buried; the
@@ -474,7 +474,7 @@ releases one in place of one House Blade attack:
 - *Seal.* One door within 30 feet swings shut and grows closed. Until the scene
   ends it is locked; forcing it takes a DC 20 Strength (Athletics) check or a key
   from Corval.
-- *Flare.* Bright light fills a 30-foot Emanation from the crystal until the end of
+- *Flare.* Bright Light fills a 30-foot Emanation from the crystal until the end of
   the guard's next turn. Nothing in it can benefit from the Invisible condition or
   take the Hide action, and every face in it is seen and remembered.
 
@@ -828,10 +828,8 @@ against her or against anyone she names.
 ***Direct the Wardens.*** One Church Warden that can hear her can use its Reaction
 to move up to half its Speed and make one Mace attack or use Seize for Questioning.
 
-> **Wants.** To file Raunu Boranis under something. Anything. And the answer to the
-> question her superiors phrased so strangely: *is the man who came back the man who
-> left?*
-> **Tells.** Works the room like a census-taker of souls. Goes very quiet at a
+> **Wants.** To file Raunu Boranis under something.
+> **Tells.** Goes very quiet at a
 > blessing over the food in a form she knows is not used any more. Two of her
 > wardens leave by different doors and she does not look at their empty places.
 > **Breaks.** She never fights to win. She calls her wardens off the moment a fight
@@ -944,10 +942,8 @@ damage.
 Rapier. *Response:* He adds 2 to his AC against that attack, possibly causing it to
 miss.
 
-> **Wants.** House Draunel one seat closer to the chieftaincy, tonight if possible,
-> patiently if not. By dawn, Vorlain blamed.
-> **Tells.** Polished, obvious, ambitious in the standard noble key. Courting in the
-> Audience Hall line. His young men hearing a succession decree in his silence after
+> **Wants.** By dawn, Vorlain blamed, and never to be seen wanting the seat.
+> **Tells.** Courting in the Audience Hall line. His young men hearing a succession decree in his silence after
 > the toast.
 > **Breaks.** The moment the fight would be seen as his. He calls his duelists off,
 > offers his hand, and is the first to say it was a misunderstanding among friends.
@@ -1006,10 +1002,9 @@ Vorlain Boranis with an attack. *Response:* Essin moves up to half his Speed to 
 space within 5 feet of Vorlain without provoking Opportunity Attacks, and becomes the
 attack's target instead.
 
-> **Wants.** Vorlain sober, unrecorded, and unbaited. The two bodies of the missing
-> year left where he buried them.
-> **Tells.** Affable, forgettable, always somehow between Vorlain and whoever is
-> working him. For the first time tonight, not smiling. Alone, which he never is.
+> **Wants.** Vorlain out of this, and the missing year left buried.
+> **Tells.** Always between Vorlain and whoever is working him. For the first time
+> tonight, not smiling. Alone, which he never is.
 > **Breaks.** He does not fight to win; he fights to end it quietly. He stops the
 > moment Vorlain is out of reach of whatever he was protecting him from, and he will
 > trade almost anything — a favor, a name, where a body is — for that.
@@ -1141,7 +1136,7 @@ passages, if they are in reach.
 **Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed,
 Petrified, Stunned, Unconscious
 **Senses** Darkvision 120 ft.; Passive Perception 16
-**Languages** Common, two centuries out of fashion
+**Languages** Common
 **CR** 9 (XP 5,000; PB +4)
 
 **Traits**
@@ -1190,6 +1185,14 @@ backs away.
 ***Bloodied.*** While Bloodied, the Hollow gives ground to the doors and holds there.
 He follows no one.
 
+***Fracture — Despair (Once).*** Ferocity is useless; nobody can frighten a man who
+would not much mind ending. Sincerity works. See him; name the emptiness truly;
+offer one honest moment of the belonging he was promised; or simply tell him, one
+person to another, that he can stop. On a success he opens his hands and quits the
+field: the doors open, and two hundred hostages stop being hostages. At a cost, the
+same, but he lashes out once, hard, on his way through the wall. Alone of the three,
+he goes home before he is called. *(Check and DCs: The Fractures, above.)*
+
 **Actions**
 
 ***Multiattack.*** The Hollow makes two Bare Hands attacks and uses Turn Them Back.
@@ -1206,14 +1209,6 @@ The target is pushed 5 feet away.
 ***Shadow-Step.*** The Hollow teleports up to 60 feet to an unoccupied space he can
 see. Any grapple or restraint on him ends. He arrives rather than runs; ordinary
 doors, walls and barricades do not reliably hold him. Deep Boranis ward-crystal does.
-
-**Fracture — Despair (once).** Ferocity is useless; nobody can frighten a man who
-would not much mind ending. Sincerity works. See him; name the emptiness truly;
-offer one honest moment of the belonging he was promised; or simply tell him, one
-person to another, that he can stop. On a success he opens his hands and quits the
-field: the doors open, and two hundred hostages stop being hostages. At a cost, the
-same, but he lashes out once, hard, on his way through the wall. Alone of the three,
-he goes home before he is called. *(Check and DCs: The Fractures, above.)*
 
 > **Wants.** To stop. Tonight, only that nobody leaves: he holds the main doors and
 > herds the crowd.
@@ -1272,8 +1267,7 @@ damage.
 Bludgeoning damage. Once per turn, when she hits a creature holding a weapon, it
 must succeed on a DC 13 Dexterity saving throw or drop it.
 
-> **Wants.** Proof of Veier (alive, well, unforced) carried home in Thenya hands.
-> And if she is a prisoner, Veier out: that was the chief's actual instruction.
+> **Wants.** Veier proven safe, or brought out.
 > **Tells.** Asks, with thinning patience, when the delegation will be received. The
 > toast lands on her like a slap. She says nothing to Corval at all, which is worse
 > than anything she might have said.
@@ -1282,9 +1276,8 @@ must succeed on a DC 13 Dexterity saving throw or drop it.
 > before it starts.
 > **Nastier.** She is already over the wall, and the slingers are covering her from
 > the garden.
-> *The armor is worn under border wool. Not a snake: a wary ally who can become a fight if the party stands between her and
-> her kinswoman. At the Unmasking she goes toward the east wing, immediately (see
-> chapter V). Cast: chapter VII. Card: S10.*
+> *The armor is worn under border wool. Not a snake: she is a fight only if the party stands between her and
+> her kinswoman. Cast: chapter VII. Card: S10.*
 
 ---
 
@@ -1326,7 +1319,7 @@ follows him in that moment follows him to a way out.
 ***This Way.*** Each Phern Bodyguard that can hear Corro can use its Reaction to move
 up to its Speed toward him, or toward the way out he is pointing at.
 
-> **Wants.** A pleasant evening among people who finally treat Phern money as money.
+> **Wants.** A pleasant evening, and nothing worth a fight.
 > **Tells.** Losing sentences, glancing at doors, standing with his back to walls.
 > *"Old instincts. Crowds."* His hands say otherwise.
 > **Breaks.** Corro never fights. If a fight comes near him he leaves it, and his
@@ -1415,7 +1408,7 @@ instead.
 **Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed,
 Petrified, Stunned, Unconscious
 **Senses** Darkvision 120 ft.; Passive Perception 17
-**Languages** Common, two centuries out of fashion
+**Languages** Common
 **CR** 10 (XP 5,900; PB +4)
 
 **Traits**
@@ -1468,6 +1461,18 @@ don't stack: at their worst he moves at 20 feet, never slower.
 makes no attacks: he steps back to wherever the most eyes are, and poses. Then he
 resumes.
 
+***Fracture — Devotion (Once).*** The Radiant can't be turned — not from the hunt, not
+from the errand, not by darkness or doubt. What he can be made to do is feel. Two
+roads, either one:
+- **Deny the congregation.** Douse the lights, empty the room, turn every back, or
+  give a performance that makes a player character the better spectacle. A table
+  that does this with a *Dark-Burst*, a *Darkness* spell or a doused lantern has
+  earned the check; the check itself is Charisma (Performance) or whatever the doing
+  of it fits.
+- **Plant the doubt.** A priest, a believer, or anyone armed with his tells,
+  declaring to his face that no god worth the name asks for a stolen child.
+  Intelligence (Religion) or Charisma (Persuasion).
+
 **Actions**
 
 ***Multiattack.*** The Radiant makes three Offered Hands attacks. He can replace the
@@ -1487,18 +1492,6 @@ offers the blow upward.
 see. Any grapple or restraint on him ends. He arrives rather than runs; ordinary
 doors, walls and barricades do not reliably hold him. Deep Boranis ward-crystal does.
 He can't do this while Witnessed.
-
-**Fracture — Devotion (once).** The Radiant can't be turned — not from the hunt, not
-from the errand, not by darkness or doubt. What he can be made to do is feel. Two
-roads, either one:
-- **Deny the congregation.** Douse the lights, empty the room, turn every back, or
-  give a performance that makes a player character the better spectacle. A table
-  that does this with a *Dark-Burst*, a *Darkness* spell or a doused lantern has
-  earned the check; the check itself is Charisma (Performance) or whatever the doing
-  of it fits.
-- **Plant the doubt.** A priest, a believer, or anyone armed with his tells,
-  declaring to his face that no god worth the name asks for a stolen child.
-  Intelligence (Religion) or Charisma (Persuasion).
 
 On a success, guilt gets into the errand like grit into a joint. For the rest of the
 night he falters at thresholds and looks back: he moves at 20 feet whether or not he
@@ -1566,12 +1559,10 @@ check to believe it.
 Hired Knife is within 5 feet of her. *Response:* The knife becomes the target
 instead.
 
-> **Wants.** Raunu's next decree, before it lands on her margins. After the two
-> plates: to know whether there is an heir, because an heir is a dynasty of Raunus.
-> **Tells.** Iron-gray, cordial, comparing margins with Corro in the B3 alcove.
-> Compliments, a quiet question — *what did he say?* — and coin behind it.
-> **Breaks.** She would be horrified to be called a conspirator. She is merely
-> prepared. The moment her people's work would be seen as hers, or would draw
+> **Wants.** Raunu's next decree; after the two plates, whether there is an heir.
+> **Tells.** Comparing margins with Corro in the B3 alcove. Compliments, a quiet
+> question — *what did he say?* — and coin behind it.
+> **Breaks.** The moment her people's work would be seen as hers, or would draw
 > blood she did not price in, she calls them off and pays whoever makes it go away.
 > **Nastier.** She has already bought whatever the party is trying to sell her.
 > *Cast: chapter VII. Cards: S7, S12.*
@@ -1696,8 +1687,7 @@ roll. *Response:* She halves the attack's damage against her.
 > **Nastier.** She has done this before, in better houses: a third charge (a second
 > *Dark-Burst*), and one more Gallery Knife than the card says.
 > *The armor is worn under Boranis livery. Entirely winnable. At 0 HP she is down, and caught; give the table this one clean
-> victory with both hands. The midnight attack is nothing to do with her. Cast:
-> chapter VII. Cards: S2, S5.*
+> victory with both hands. Cast: chapter VII. Cards: S2, S5.*
 
 ---
 
@@ -1908,8 +1898,7 @@ says one true thing (see chapter VII).
 blade. *Response:* He adds 2 to his AC against that attack, possibly causing it to
 miss.
 
-> **Wants.** The seat, forever, aching — and not like this. He has no plot tonight.
-> He came because not coming was more dangerous.
+> **Wants.** Nothing from this fight. He has no plot tonight.
 > **Tells.** Silk over springs. Charming, funny at others' expense. Goes quiet after
 > the toast, and drinks harder.
 > **Breaks.** Vorlain does not start fights tonight and does not finish them; he
@@ -1943,7 +1932,7 @@ miss.
 **Immunities** Charmed, Exhaustion, Frightened, Incapacitated, Paralyzed,
 Petrified, Stunned, Unconscious
 **Senses** Darkvision 120 ft.; Passive Perception 17
-**Languages** Common, two centuries out of fashion
+**Languages** Common
 **CR** 11 (XP 7,200; PB +4)
 
 **Traits**
@@ -1994,6 +1983,15 @@ make one of her Multiattack's attacks at once on arrival, against whoever stands
 between her and the dais. That attack counts toward her Multiattack that turn; it is
 never an extra attack, and she can't make it once her Multiattack is used up.
 
+***Fracture — Sorrow (Once).*** Like every Fracture, it takes at least one witnessed
+tell; while she has 2 or more Delay, its DC is 15 (Table V–1). On a success she
+stops — mid-motion, mid-kill — and for one full round she takes no actions, no
+Bonus Actions, no Reactions and does not move: a woman standing in a burning
+ballroom, long enough to pull a victim clear, seal a ward, finish an escape. At a
+cost, she stops, but answers first with one terrible parting blow (rolled in the
+open) or one word. *(Check and DCs: The Fractures, above. A table that lands this
+before Raunu falls has earned ⟨They save Raunu⟩, chapter V.)*
+
 **Actions**
 
 ***Multiattack.*** The Wept makes two Strength Like a Fact attacks.
@@ -2006,15 +2004,6 @@ never an extra attack, and she can't make it once her Multiattack is used up.
 ***Shadow-Step.*** The Wept teleports up to 60 feet to an unoccupied space she can
 see. Any grapple or restraint on her ends. She arrives rather than runs; ordinary
 doors, walls and barricades do not reliably hold her. Deep Boranis ward-crystal does.
-
-**Fracture — Sorrow (once).** Like every Fracture, it takes at least one witnessed
-tell; while she has 2 or more Delay, its DC is 15 (Table V–1). On a success she
-stops — mid-motion, mid-kill — and for one full round she takes no actions, no
-Bonus Actions, no Reactions and does not move: a woman standing in a burning
-ballroom, long enough to pull a victim clear, seal a ward, finish an escape. At a
-cost, she stops, but answers first with one terrible parting blow (rolled in the
-open) or one word. *(Check and DCs: The Fractures, above. A table that lands this
-before Raunu falls has earned ⟨They save Raunu⟩, chapter V.)*
 
 > **Wants.** Raunu Boranis, on the dais, and nothing else until that is done.
 > **Tells.** *Before midnight:* watches the young pages at the feast a beat too long;
@@ -2088,7 +2077,7 @@ somebody, and the inquest hears of it.
 
 **AC** 20 · **Initiative** +4 (14)
 **HP** 285 (30d8 + 150)
-**Speed** 30 ft., and some other way
+**Speed** 30 ft.
 
 | | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|---|
@@ -2104,13 +2093,6 @@ Poison, Psychic, Radiant, Slashing, Thunder
 **Languages** Common
 **CR** — (XP 0; PB +4)
 
-The block exists to tell you one thing: **Master Vell does not fight, and no party at
-this ball can beat him.** He has no attacks. He can be hit, and the numbers above are
-real, but they are set so that a party of 4th or 5th level cannot drop him before
-the boat clears: against AC 20, his Reaction and resistance to every damage type, four
-5th-level characters land roughly 15 damage a round, and he has 285 Hit Points. Long
-before that matters, he takes his action and is elsewhere. He is not a combatant, and
-he is worth no XP.
 
 **Traits**
 
@@ -2121,9 +2103,10 @@ studies him directly may make a DC 25 Wisdom (Insight) check. On a success it fe
 the nudge, and learns the most dangerous thing at the ball: *someone is editing you.*
 
 ***Courteous and Finished.*** Every conversation with Vell ends when he decides,
-somehow without rudeness. Every check to move him — bribery, flattery, threat,
-charm — is a DC 25 Charisma (Deception, Intimidation, or Persuasion) check, and
-even a success buys honesty rather than compliance: *"You are
+somehow without rudeness. Moving him takes a DC 25 Charisma (Persuasion) check for
+bribery, flattery or charm, a DC 25 Charisma (Intimidation) check for a threat, or a
+DC 25 Charisma (Deception) check for a lie. Even a success buys honesty rather than
+compliance: *"You are
 observant. Enjoy the ball."*
 
 ***The Wrapped Sword.*** An enormous broadsword, wrapped in white cloth, across his
@@ -2165,6 +2148,14 @@ saw him hurry.
 > *At the Crossing he holds the Radiant, alone, barely, long enough, with the sword
 > still bound. That is not a fight the dice resolve; chapter V runs it. Cast: chapter
 > VII.*
+
+The block exists to tell you one thing: **Master Vell does not fight, and no party at
+this ball can beat him.** He has no attacks. He can be hit, and the numbers above are
+real, but they are set so that a party of 4th or 5th level cannot drop him before
+the boat clears: against AC 20, his Reaction and resistance to every damage type, four
+5th-level characters land roughly 15 damage a round, and he has 285 Hit Points. Long
+before that matters, he takes his action and is elsewhere. He is not a combatant, and
+he is worth no XP.
 
 ---
 
@@ -2214,6 +2205,11 @@ not, trained or not. Releasing one does not make its bearer a caster.
 *A Dark-Burst released where the Radiant is working counts as denying him the
 congregation (his Fracture). A player who thinks of that has earned the check.*
 
+*Three charges shut a door, and they are not the same charge: A Sealed Door is the common
+one anyone can grow (a touch, 1 hour, opened by its releaser's touch); the House Seal is
+the honor guard's (the "Seal" in their block; 30 feet, the rest of the scene); the
+Door-Seal is Tavva's (30 feet, 1 minute).*
+
 ### The Night's Loot
 
 *There is not much, and most of it is somebody else's. Every item below is a choice
@@ -2232,8 +2228,8 @@ before it is a reward.*
 - **An honor guard's pair.** A *House Flare* and a *House Seal*, if the guard never
   spent them and somebody takes them off him. On a living guard they are the house's
   property; taking them is theft from House Boranis, and the room remembers faces.
-- **The contract case** *(S3).* Chained to the sergeant's hip: a
-  chained case of writing, in a country where the Church owns the written word. It
+- **The contract case** *(S3).* A case of writing chained to the sergeant's hip, in a
+  country where the Church owns the written word. It
   holds the Bought's three tasks. The inquest's best evidence, and the only mortal
   thread that leads east. Not magic, and worth more than anything magic at the ball.
 - **The company's purse** *(S3).* The half-fee, paid in old coin — 3d6 × 10 GP by

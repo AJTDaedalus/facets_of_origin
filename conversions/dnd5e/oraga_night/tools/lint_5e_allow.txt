@@ -37,3 +37,11 @@
 # R3.3 (review-fix pass, P2-19): the one DM Note that explains the 2014 multiplier (STYLE,
 # Difficulty vocabulary) has to name the 2014 band. It is not a budget line.
 10_Bestiary.md|deadly_budget|S3's 1,500 XP becomes 3,000, past Deadly, and S14 is nearly twice Deadly|the 2014 glossary box names the 2014 band it is translating; not a budget line
+
+# R5.2 (review-fix pass, O38): near_duplicate. Only repeats that are meant to be repeats.
+*|near_duplicate|This work includes material from the System Reference Document 5.2.1|the CC BY 4.0 attribution notice is required wherever SRD material is used; it is legal text, repeated on purpose
+11_Pregenerated_Characters.md|near_duplicate|**Heritage.** Reads grown crystalwork the way a mason reads a wall|a pregen sheet reprints its Orthaen lineage trait (chapter III) so the sheet stands alone at the table
+10_Bestiary.md|near_duplicate|Orthaen crystal holds finished workings, and a **charge**|Player Handout 3 (chapter VIII) reprints the charge rules for players; the DM's copy in chapter X is the rules home
+10_Bestiary.md|near_duplicate|**Releasing a charge** takes the Magic action|Player Handout 3 reprints the charge rules for players (see above)
+10_Bestiary.md|near_duplicate|**The six every Orthaen knows** are *common*|Player Handout 3 reprints the charge rules for players (see above)
+10_Bestiary.md|near_duplicate|**Chancy releases.** When the fiction makes a|Player Handout 3 reprints the charge rules for players (see above)

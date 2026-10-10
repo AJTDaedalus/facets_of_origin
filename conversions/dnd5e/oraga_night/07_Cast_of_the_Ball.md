@@ -293,7 +293,7 @@ lights die she goes for the service passages, because she knows them.
 *Prelate of the Church; Agenda 2's patron.*
 
 **Wants:** to file Raunu Boranis under something. Anything. **Fears:** the mists,
-which is to say, the one memo from the east that reached her desk and was above her
+which is to say, the one report from the east that reached her desk and was above her
 seal to read. **Secret:** the Church's interest tonight is not doctrinal; her
 superiors want to know whether the man who returned is the man who left, and
 she has not been told why the question is phrased that way.
@@ -308,7 +308,7 @@ about a gray mask's blessing over the food after Movement IV, can learn the foll
 
 - The Church wants to know whether the man who came back is the man who left. She
   has not been told why the question is phrased that way.
-- One memo from the east reached her desk, and it was above her seal to read.
+- One report from the east reached her desk, and it was above her seal to read.
 - After Movement IV: the antique sign of blessing the Radiant made over the food is
   a form she recognizes, and it has not been used in living memory. Hearing this from
   her counts as witnessing the tell (see chapter V, "The Fractures").
@@ -696,8 +696,7 @@ her captors the following:
   river gate and stood there a while (card S2, "Outs").
 
 **If it comes to steel:** stat block **Tavva**, with **Gallery Knife** for the three
-knives of her crew. Hers is the fight aimed at the noble-minded: nothing at stake in it but property
-and decency.
+knives of her crew. Her looting after midnight is card S5.
 
 ---
 
@@ -748,7 +747,7 @@ to suspect around the time the second district caught. **Secret:** the Second Cl
 *If a woman in Thenya wool comes out the front, hold her, and send word to the river.*
 He does not know who she is or why, and he has been thinking about it all night.
 
-**Roleplaying the Captain:** a businessperson who has been shot at, and it shows in both directions.
+**Roleplaying the Captain:** a man of business who has been shot at, and it shows in both directions.
 No heroics, no waste, and no cruelty; he never commits recklessly, tonight or ever. He
 spends his first round placing Blades and watching who the party protects, and on
 his second he starts talking while the attacks continue.
@@ -763,7 +762,9 @@ his second he starts talking while the attacks continue.
 - **What deal he honors:** all of them, permanently. A bought-out captain **will not
   resume the fight tonight for any inducement.**
 
-> **DM Note — the factor.** The captain never learns who hired him, and neither does the
+> **DM Note — the factor**
+>
+> The captain never learns who hired him, and neither does the
 > module. If a table asks him directly he will tell them the truth, which is that he
 > does not know, and that this has begun to bother him a great deal. That is not a
 > dead end; for a table that plays on (see chapter VI) it is the best lead there is,

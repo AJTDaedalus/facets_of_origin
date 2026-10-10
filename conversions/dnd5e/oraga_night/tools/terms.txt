@@ -28,8 +28,8 @@ Kethaun|V3_Rekuzan_and_the_Tribes.md "Rekuzan"|03_Masks_and_Agendas.md|**Ilesse 
 Rekuzan|V0 item 6; V3 "Rekuzan"|02_The_World_and_the_Night.md|**Rekuzan is nine walled districts grown together**
 Val'loh|V0 "Val'loh"; V3 "Val'loh, 3164 PG"|03_Masks_and_Agendas.md|The tribes of Val'loh are not different kinds of
 Oraga|V3 "The Oraga Nights"|02_The_World_and_the_Night.md|the Val'loh year. Oraga celebrates the yield
-Mazaa|V0 item 9; V3 "Val'loh, 3164 PG"|06_Aftermath.md|(Mazaa is the tribes' enemy in the western mountains)
-Blackwatch|V3 "Val'loh, 3164 PG"; V3 "The recent wound"|02_The_World_and_the_Night.md|The Blackwatch, who keep the vigil over the eastern mists
+Mazaa|V0 item 9; V3 "Val'loh, 3164 PG"|06_Aftermath.md|blaming the tribes' enemy in the western mountains
+Blackwatch|V3 "Val'loh, 3164 PG"; V3 "The recent wound"|02_The_World_and_the_Night.md|The Blackwatch, who keep the vigil over them
 Fraden|V0 item 9; V3 "Val'loh, 3164 PG"|04_The_Ball.md|one for each god, and the grandest of them is Fraden's
 Thaumaturgy|V0 item 3|03_Masks_and_Agendas.md|what Val'loh calls **Thaumaturgy**
 Invocation|V2_Magic_of_Valloh.md (the intuitive tradition)|03_Masks_and_Agendas.md|what Val'loh calls **Invocation**

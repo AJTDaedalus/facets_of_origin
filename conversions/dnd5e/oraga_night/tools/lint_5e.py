@@ -22,6 +22,11 @@ Rule families
                (trigger_format), box labels are heading style (box_label), and every proper
                term used is glossed (defined_terms, against tools/terms.txt and the canon
                vocabulary of settings/valloh V0/V1/V3)
+    near_duplicate  the R5.2 soft rule (O38): no paragraph in one chapter is more than 80%
+               similar (difflib ratio over words) to a paragraph in another chapter. A
+               repeat belongs in one home with pointers elsewhere; a deliberate repeat (a
+               canon line reused on purpose) is whitelisted with its reason. Reported with
+               the structure rules so --check fails on a new one.
 
 The hard rules run on unwrapped paragraphs (unwrap()), so a phrase split across a hard
 line break is seen; a hit is reported at the line where its match starts.
@@ -359,7 +364,7 @@ RULES = [
 HARD_FAMILIES = list(dict.fromkeys(r[0] for r in RULES))
 _COMPILED = [(f, rid, re.compile(p, fl) if p else None, sc) for f, rid, p, sc, fl in RULES]
 STRUCTURE_RULES = ["xref", "creature_bold", "readaloud_trigger", "trigger_format", "box_label",
-                   "defined_terms"]
+                   "defined_terms", "near_duplicate"]
 
 _DC = re.compile(r"\bDC ?(\d+)")
 _DC_OK_AFTER = re.compile(
@@ -855,6 +860,70 @@ def lint_terms(module=MODULE, terms_path=TERMS, settings=SETTINGS, allow=(), onl
 
 
 # ---------------------------------------------------------------------------------------
+# Near-duplicate paragraphs across chapters (R5.2, O38)
+
+NEAR_DUP_RATIO = 0.8
+NEAR_DUP_MIN_WORDS = 20
+_DUP_KINDS = ("prose", "readaloud")
+
+
+def _dup_words(text: str) -> list[str]:
+    return re.findall(r"[a-z0-9]+(?:['’][a-z]+)?", re.sub(r"[*_`]", "", text.lower()))
+
+
+def lint_near_duplicates(module=MODULE, allow=(), only=None, ratio=NEAR_DUP_RATIO,
+                         min_words=NEAR_DUP_MIN_WORDS) -> list[Hit]:
+    """near_duplicate hits: paragraph pairs in different files above `ratio` similar.
+
+    Paragraphs are unwrapped blocks of prose or read-aloud (list items and box paragraphs
+    included) with at least `min_words` words. Candidates share word 3-grams (an inverted
+    index); each candidate pair is scored with difflib's ratio over the word lists. A pair is
+    reported once, on the paragraph in the later file, naming its partner; a whitelist entry
+    quoting text in that paragraph exempts it.
+    """
+    from difflib import SequenceMatcher
+    module = Path(module)
+    paras = []  # (file, line, words, text)
+    for p in module_files(module):
+        for blk in unwrap(p.read_text(encoding="utf-8"), p.name):
+            if blk.kind not in _DUP_KINDS:
+                continue
+            w = _dup_words(blk.text)
+            if len(w) >= min_words:
+                paras.append((p.name, blk.lines[0], w, blk.text))
+    index = {}
+    for i, (_, _, w, _) in enumerate(paras):
+        for g in {tuple(w[k:k + 3]) for k in range(len(w) - 2)}:
+            index.setdefault(g, []).append(i)
+    shared = Counter()
+    for ids in index.values():
+        if len(ids) > 40:  # a stock phrase, not evidence of a copy
+            continue
+        for x in range(len(ids)):
+            for y in range(x + 1, len(ids)):
+                a, b = ids[x], ids[y]
+                if paras[a][0] != paras[b][0]:
+                    shared[(a, b)] += 1
+    hits = []
+    for (a, b), n in shared.items():
+        wa, wb = paras[a][2], paras[b][2]
+        if n < 0.5 * ratio * min(len(wa), len(wb)):
+            continue
+        r = SequenceMatcher(None, wa, wb, autojunk=False).ratio()
+        if r <= ratio:
+            continue
+        (fa, la, _, ta), (fb, lb, _, tb) = sorted((paras[a], paras[b]), key=lambda q: (q[0], q[1]))
+        if only and fb != only:
+            continue
+        if is_allowed(fb, tb, allow, "near_duplicate") or is_allowed(fa, ta, allow, "near_duplicate"):
+            continue
+        hits.append(Hit(fb, lb, "structure", "near_duplicate",
+                        f"~{fa}:{la} ({r:.2f}) " + " ".join(tb.split()[:8])))
+    hits.sort(key=lambda h: (h.file, h.line))
+    return hits
+
+
+# ---------------------------------------------------------------------------------------
 # Running, baseline, check, report
 
 
@@ -872,6 +941,7 @@ def run(module=MODULE, files=None, allow=None, terms=TERMS, settings=SETTINGS) -
     for f in (files or [None]):
         structure += lint_structure(module, allow, only=f)
         structure += lint_terms(module, terms, settings, allow, only=f)
+        structure += lint_near_duplicates(module, allow, only=f)
     return {"hard": hard, "structure": structure, "soft": soft}
 
 

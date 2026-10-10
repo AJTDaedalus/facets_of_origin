@@ -98,8 +98,8 @@ page (Player Handout 3) for the table.
 
 ## Reading This Book
 
-**Read-aloud text** is an indented block in italics, always introduced by a plain line
-such as "Read this when the first guests reach the court:". Read it or paraphrase it.
+**Read-aloud text** is an indented block in italics, always introduced by a bold line
+such as **Read this when the first guests reach the court:** Read it or paraphrase it.
 It describes only what the characters can perceive, it never says what anyone feels or
 does inside, and it never names a thing the characters have not identified for
 themselves. Italic paragraphs that are not indented are notes to you.
@@ -114,7 +114,7 @@ budget for four 4th-level characters, terrain, objective, clock, outs, morale, a
 scaling lines for three or five characters and for 3rd or 5th level.
 
 **Stat blocks** live in chapter X, alphabetically, in SRD format. In chapters IV, V
-and IX, a creature name in **bold** has a stat block there. Nothing else in the module carries an enemy's numbers.
+and IX, a creature name in **bold** has a stat block there. Full blocks live nowhere else; a card or scene repeats a Passive Perception, an AC or a Hit Point total only where you need it at hand.
 
 **Clocks** are named, and most have four segments. Each card says how many, what
 advances its clock, and what happens when it fills.
@@ -130,7 +130,6 @@ helps: (see chapter V, "Down, Not Out"), (card S2), (area B9), (Table I–3).
 
 - **The prep box** at the head of this chapter, and the **reading notes** that open a
   chapter where its use needs explaining.
-
 - **Sidebar —** a piece of the world that would otherwise derail the paragraph it sits
   in. A sidebar never holds read-aloud text.
 - **DM Note —** table craft.
@@ -143,7 +142,7 @@ helps: (see chapter V, "Down, Not Out"), (card S2), (area B9), (Table I–3).
 - **The run box** at the head of each Movement says how long it takes and what to run
   or skip.
 
-**If you have time** marks depth a four-hour table can leave out.
+*If you have time* marks depth a four-hour table can leave out.
 
 **Every enemy** carries what it wants and what it does when its morale breaks, as well as
 its numbers. No fight in this module is to the death by default.
@@ -203,7 +202,7 @@ If the bells have not rung midnight by **3:15**, they ring now. The payoff the w
 night builds toward is Movements VI and VII. Protect them.
 
 **What to leave out, in order, when you are behind:** B13; the Undercurrents nobody is
-already on (chapter IV marks them *if you have time*); a second fight card in any one
+already on (chapter IV marks them *(if you have time)*); a second fight card in any one
 Movement; S1; the east-wing scene, **unless somebody carries Agenda 4**. Do not cut the
 gate. It is the only scene the ending needs, and the fight in it is still optional.
 
@@ -258,6 +257,9 @@ ladder. Learn it once here; every chapter prints its DCs against it.
 | **Standard** | **13–15** | The default. **13** behind a mask, or when the approach is apt; **15** when it is merely competent |
 | **Hard** | **18–20** | Against somebody's expertise or somebody's fear. **18** when the character has earned an edge; **20** when they have not |
 | **Very Hard** | **25** | Deceiving Raunu Boranis. Moving Master Vell. Very little else |
+
+The tier names are this module's own. The SRD's table calls a DC of 15 Medium; this ladder
+splits that middle into 13 and 15, because a mask is worth two points tonight.
 
 Checks are written the SRD way: a DC 15 Wisdom (Insight) check. Where a check depends
 on a character's training, proficiency in the fitting skill or tool applies, and a

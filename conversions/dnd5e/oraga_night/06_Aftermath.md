@@ -23,8 +23,8 @@ record, and it is what history keeps.
   but ceremony, visibly afraid, and the prime suspect. He wants a culprit, any culprit,
   convicted fast.
 - **The file closes the way history does.** The inquest names "agents unknown, likely
-  Mazaaian" (Mazaa is the tribes' enemy in the western mountains), which everyone knows is false and everyone swears to. **No one is ever
-  charged.**
+  Mazaaian", blaming the tribes' enemy in the western mountains. Everyone knows it is
+  false, and everyone swears to it. **No one is ever charged.**
 - **The pregnancy never gets out.** The midwife is simply gone by dawn, never found.
   The skeleton staff hold the silence they were paid for. The record says a vanished
   bride, never a vanished heir. Characters who reached the east wing hold a truth that
@@ -101,7 +101,9 @@ the play.
   bury it, swear it to Vorlain, carry it east toward the rising mists. That answer is
   the next act, and it is theirs.
 
-> **Sidebar — Going east.** Sooner or later a good table looks at the mists. The adventure
+> **Sidebar — Going east**
+>
+> Sooner or later a good table looks at the mists. The adventure
 > ends at the mist-line on purpose: what waits past the Blackwatch belongs to the deep
 > future of this setting. If your table sails anyway, you are off the map with the
 > module's blessing. The fishermen say the mists are rising again. A campaign that

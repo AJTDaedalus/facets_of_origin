@@ -106,20 +106,21 @@ the Crystal Court, three gray masks stay on.
 
 He speaks the rite's fixed words steadily (ritual suits him far better than small
 talk), then sets down the cup. The room, which has waited all night for this, goes
-silent enough to hear the candles. Deliver it word-for-word, and stop
-exactly where the text stops:
+silent enough to hear the candles.
 
-> "The masks are down. The spirits are thanked. The year turns.
->
-> And before it does — I told you I had something to say. Two years in the
-> keeping.
->
-> *(he looks, once, toward the east wing — the only soft thing anyone has seen him
-> do all night)*
->
-> House Boranis has been silent because—"
+**Read this when the room has gone silent, word for word, and stop exactly where the text stops:**
 
-**The instant the sentence breaks off, read this fast, and do not stop for questions:**
+> *"The masks are down. The spirits are thanked. The year turns.*
+>
+> *"And before it does — I told you I had something to say. Two years in the
+> keeping."*
+>
+> (He looks, once, toward the east wing — the only soft thing anyone has seen him
+> do all night.)
+>
+> *"House Boranis has been silent because—"*
+
+**Read this when the sentence breaks off, the instant it does, fast and without stopping for questions:**
 
 > *The light goes out of the walls. Not blown out — drawn out, the rose draining
 > away from the crystal like water out of a cracked basin, from the far end of the
@@ -177,7 +178,9 @@ he is already moving toward the gallery-side service door with his **Phern Bodyg
 him. A character who has been watching Corro all night, or who is Phern, moves with him and
 may act in the first beat before anyone else. Following him saves lives (card S11).
 
-> **Sidebar — Crystals gutter:** within **30 feet** (a stone's throw) of an
+> **Sidebar — Crystals gutter**
+>
+> Within **30 feet** (a stone's throw) of an
 > Uninvited, releasing a crystal charge (see chapter X, "Items of the Night") takes a
 > **DC 13 Charisma check** by whoever releases it (their *Unraveling Presence*,
 > chapter X). On a success it works. On a failure
@@ -279,7 +282,9 @@ says what happens when the characters stack enough of it to change an outcome.
 turn and no enemy is within 5 feet of it, it clears the way for one of the three and removes 1 Delay.
 That is why the characters cannot ignore it. See "The Attendant", below.
 
-> **Sidebar — Adjusting the Attack.** The numbers above are built for four 4th-level
+> **Sidebar — Adjusting the Attack**
+>
+> The numbers above are built for four 4th-level
 > characters. Use one line only; the lines are not cumulative. For five characters at
 > 5th level, use the 5th-level line.
 >
@@ -306,9 +311,9 @@ in the room is not.
 | 2 | **A charge in her way.** The character's own, or a *House Seal* or *House Flare* off one of the honor guard where they fell | The DC 13 Charisma check her *Unraveling Presence* already asks for |
 | 3 | **Bring the canopy down** off the high table, on top of her. She is out of it in a moment. The moment is the point | Strength (Athletics) |
 | 4 | **Tip the high table** off the dais and into her line. She goes round | Strength (Athletics) |
-| 5 | **Guests in her path.** Drive a knot of guests across her line. She steps round everyone who is not in her way without looking, and the long way costs her | Charisma (Persuasion or Intimidation), shouted |
+| 5 | **Guests in her path.** Drive a knot of guests across her line. She steps round everyone who is not in her way without looking, and the long way costs her | Charisma (Persuasion) or Charisma (Intimidation), shouted |
 | 6 | **Over the rail.** Drop from the gallery rail onto her, or drop something heavy | Strength (Athletics) or Dexterity (Acrobatics) |
-| 7 | **A child crying,** somewhere she can hear it. She goes still at the sound, as she has all night | Charisma (Performance or Deception) |
+| 7 | **A child crying,** somewhere she can hear it. She goes still at the sound, as she has all night | Charisma (Performance) or Charisma (Deception) |
 | 8 | **Fire in the linen.** Candles from the high table into the fallen canopy or the table linen, between her and Raunu. She goes round it; the guests go the other way, which is where you want them | Dexterity, or no check once the canopy is down |
 
 **Table V–3: Room Tricks — the Doors** *(the Hollow; two ward-points by the doors)*
@@ -319,8 +324,8 @@ in the room is not.
 | 2 | **Answer him.** Sooner or later he asks, flatly, whether this is worth it to you. Give him a real answer. He waits for it as if it mattered | Wisdom (Insight) or Charisma (Persuasion) |
 | 3 | **Call a name.** Get Anha, or any of the kitchen household, to call a name across the hall, or a character calls one. He turns his head toward the sound | Charisma (Performance), or Charisma (Persuasion) to get a servant to do it |
 | 4 | **Two who belong together.** Walk them past him: Anha's people through the service door, or any two guests holding on to each other. He watches them go, the way he watched them all night | Charisma (Persuasion), to get them moving |
-| 5 | **Another door.** Make the crowd surge at the gallery-side service door. He steps through the shadow to hold it, and for a moment the main doors are nobody's. The people at that door are in his way now; say so first | Charisma (Intimidation or Performance) |
-| 6 | **Hand him something.** He is polite. Give him a cup, a mask, a coat to hold, as one guest to another, and he holds it | Charisma (Persuasion or Deception) |
+| 5 | **Another door.** Make the crowd surge at the gallery-side service door. He steps through the shadow to hold it, and for a moment the main doors are nobody's. The people at that door are in his way now; say so first | Charisma (Intimidation) or Charisma (Performance) |
+| 6 | **Hand him something.** He is polite. Give him a cup, a mask, a coat to hold, as one guest to another, and he holds it | Charisma (Persuasion) or Charisma (Deception) |
 | 7 | **House light.** A *House Flare* released in his face. It is not ward-fire, but it is the house's own light, and he flinches from it the same way | The DC 13 Charisma check his *Unraveling Presence* asks for |
 | 8 | **The others are going.** Tell him the Wept is finished and they are leaving. He half believes it, and looks east | Charisma (Deception) |
 
@@ -330,7 +335,7 @@ door Raunu sealed is a ward-point)*
 | d8 | Trick | Check (DC 13; DC 15 the second time) |
 |---|---|---|
 | 1 | **Hold a sealed door.** Hands on one of the doors that sealed behind Veier, holding the seal. It holds a turn longer than it should. Each door once | Intelligence (Arcana): DC 13 for a character who studied the wards, DC 18 otherwise |
-| 2 | **Answer him.** He asks, warmly, whom you serve, and waits for the answer. Give him one worth waiting for | Charisma (Performance or Persuasion) or Intelligence (Religion) |
+| 2 | **Answer him.** He asks, warmly, whom you serve, and waits for the answer. Give him one worth waiting for | Charisma (Performance), Charisma (Persuasion) or Intelligence (Religion) |
 | 3 | **A kill that isn't there.** Lie still in a corridor he has already passed, like somebody he missed. He stops to stage it | Charisma (Deception) |
 | 4 | **Put the furniture back.** The corridor outside the east wing doors was cleared for tonight. Drag something into it. It only works while he is Witnessed; otherwise he steps round it through the shadow | Strength (Athletics) |
 | 5 | **The service door.** Take Veier out through the east wing's service door into the run: 5 feet wide, one lamp in three, and he has to find his way in it like anybody else | Wisdom (Survival), DC 15 the first time; no check with Anha or any of the household |
@@ -456,9 +461,8 @@ a card says otherwise. Chapter VIII draws the palace (see maps VIII–1 to VIII�
   nobody sees the Radiant without a light.
 - **The crowd.** Wherever the crowd is, count one guest in every 5-foot square. The
   crowd is Difficult Terrain ("Two Hundred People", above).
-- **Smoke.** The banquet galleries (B3) are Heavily Obscured beyond 10 feet. A creature
-  that starts its turn in the thick of the smoke must succeed on a DC 10 Constitution
-  saving throw or lose its action coughing (cards S12 and S13).
+- **Smoke.** The banquet galleries (B3) are Heavily Obscured beyond 10 feet, and the
+  smoke can cost a creature its action (cards S12 and S13 give the saving throw).
 - **Fire.** A creature that enters the fire in B3 or starts its turn in it makes a
   DC 13 Dexterity saving throw, taking 7 (2d6) Fire damage on a failed save, or half
   as much damage on a successful one. The fire never finishes anyone: a creature that
@@ -541,7 +545,7 @@ What history records, told in scenes. Bend everything except what the characters
   the crew carries is Tavva's sack (see chapter X, "The Night's Loot").
   *(The snakes are in the dark too, and some of what they do looks like looting from
   across a smoky room. It is not the same fight, and it is not the same kind of
-  people. See* "The Snakes in the Dark".*)*
+  people. See "The Snakes in the Dark".)*
 
 ### The Crossing — Vell and the Radiant
 
@@ -552,7 +556,7 @@ above all) is welcome company: Vell accepts help without slowing down or explain
 himself. Then the Radiant catches them on the terrace, and for the first and only
 time all night, Master Vell stops being unmemorable.
 
-**When the Radiant steps out of the smoke onto the terrace, read:**
+**Read this when the Radiant steps out of the smoke onto the terrace:**
 
 > *Behind you, the lanterns along the terrace go out, one after another. A gray mask
 > comes out of the smoke. The pale man walking with Veier turns to face it, and moves
@@ -623,7 +627,9 @@ wherever they stand: a pale man rowing hard into the dark, if they are anywhere 
 a view of the river. ⟨The child is taken⟩ is for a table that was there and chose
 otherwise, never for a table that was busy saving someone else.
 
-> **Sidebar — Caught in the crossfire:** while the Crossing runs, any
+> **Sidebar — Caught in the crossfire**
+>
+> While the Crossing runs, any
 > character in the duel's path faces one hazard per beat: flying crystal,
 > collapsing stonework, a shear of force that was aimed at no one. Call for a
 > **DC 13 Dexterity saving throw** (or Strength, if the fiction has them bracing
@@ -639,7 +645,9 @@ otherwise, never for a table that was busy saving someone else.
 > there. At 3rd level the damage is 3 (1d6) and 7 (2d6); at 5th level it is 10 (3d6)
 > and 21 (6d6) ("Adjusting the Attack", above).
 
-> **Sidebar — Characters who attack Vell, or join the duel.** They can try. Vell does not
+> **Sidebar — Characters who attack Vell, or join the duel**
+>
+> They can try. Vell does not
 > take the bait and does not fight them. He moves out of reach, the way the Uninvited
 > move, and keeps holding the Radiant. A character who lands a blow on him has
 > cost Veier ground and learned nothing. He can be hit, but his numbers (chapter X,
@@ -809,7 +817,9 @@ the Uninvited's blocks.)*
   hands, the doors open, and he leaves the field early, the only one of the three who
   goes home before he is called. Two hundred people stop being hostages.
 
-> **Sidebar — Fractures and magic.** *Calm Emotions*, *Charm Person*, *Suggestion* and
+> **Sidebar — Fractures and magic**
+>
+> *Calm Emotions*, *Charm Person*, *Suggestion* and
 > their kin do not reach the person inside a mask. The Uninvited are not moved by
 > magic that would move them (see chapter X). What reaches them is what reached them all
 > night: a person, paying attention, saying something true. A spell can carry the
@@ -898,7 +908,7 @@ refusing to leave the city without her cousin or a body.
 
 > **About 40 minutes** (starts 4:00). If you are behind, run only the gate (card S3).
 
-**When the Uninvited have gone, read:**
+**Read this when the Uninvited have gone:**
 
 > *The three gray masks are gone. The palace is fire, smoke, flaring ward-light and
 > screaming. The banquet gallery is burning, and smoke fills the galleries under walls
@@ -960,7 +970,9 @@ at the gate. **The Bought are not snakes.** Nobody at the ball invited them, nob
 the ball hired them, and they are not interested in anybody's feud. They are the
 night's one mortal antagonist with a contract instead of a grudge.
 
-> **DM Note — what you must not say.** The factor has no face and no name. He is the same
+> **DM Note — what you must not say**
+>
+> The factor has no face and no name. He is the same
 > answer as everything else tonight, and this adventure never gives it. Vell knows the
 > company is there and planned around it, which is why the escape is the river gate
 > and the front was never anything but a decoy.
@@ -983,18 +995,8 @@ leaves the doors; the characters usually get there once the Uninvited are gone. 
 bells of Oraga begin to toll the end of the night as the first guests reach the
 court (card S3 counts them).
 
-**When the characters reach the Gatehouse Court and can see through the grille, read:**
-
-> *The outer gate is shut, and it was shut from the far side. Through the grille:
-> matched gray coats, more of them than there are of you, arranged with the
-> unhurried spacing of people who have done this before. One of them is holding a
-> chained case up where you can see it, the way you would hold a lantern, and he is
-> reading aloud from it in a voice pitched to carry over a crowd.*
-
-**Objective: open the way out.** Two hundred people are behind the characters.
-
-**Treasure.** The contract case, and the company's purse (3d6 × 10 GP in old coin)
-(see chapter X, "The Night's Loot").
+**Objective: open the way out.** Two hundred people are behind the characters. The
+read-aloud at the grille and the treasure are on the card.
 
 ***Card S3, chapter IX*** — the gate, the wicket and the gate-walk, the fire clock and
 the bell clock, the **Bought Sergeant**, the **Bought Blades** and the **Bought
@@ -1054,7 +1056,7 @@ If your campaign goes on, chapter VI is what dawn looks like.
 
 ### Epilogue (one-shot ending)
 
-Read or paraphrase, adjusting for what the table did:
+**Read this when the session ends (or paraphrase it, adjusting for what the table did):**
 
 > *The fires are out by dawn. The story is already wrong by noon — three stories, in
 > fact, one for each faction that needs it, and none of them yours. No one is ever

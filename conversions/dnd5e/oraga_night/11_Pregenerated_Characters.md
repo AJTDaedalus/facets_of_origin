@@ -70,10 +70,10 @@ Perception +3, History +2, Investigation +2, Religion +2; with Jack of All Trade
 Acrobatics +3, Sleight of Hand +3, Stealth +3, Animal Handling +2, Medicine +2,
 Survival +2, Arcana +1, Nature +1, Athletics +0
 
-**Tools** gaming set (playing cards); three musical instruments of the player's choice
+**Tools** Gaming Set (playing cards); three musical instruments of the player's choice
 
 **Background — Minor Scion.** *Abilities:* Intelligence, Wisdom, Charisma (+2 Cha, +1
-Wis). *Origin feat:* Alert. *Skills:* History, Persuasion. *Tool:* gaming set.
+Wis). *Origin feat:* Alert. *Skills:* History, Persuasion. *Tool:* Gaming Set.
 **Specialty:** sect heraldry and old grudges: knows who hates whom, and
 why, and since when. When it bears, the DM gives the answer without a check.
 
@@ -144,11 +144,11 @@ tribes' territory and lost none of them, including himself.
 **Skills** Stealth +8, Sleight of Hand +8, Acrobatics +6, Insight +4, Perception +4,
 Investigation +3, Deception +2, Persuasion +2, Athletics +1
 
-**Tools** Thieves' Tools, Disguise Kit, vehicles (land)
+**Tools** Thieves' Tools, Disguise Kit, Navigator's Tools
 
 **Background — Factor's Nephew.** *Abilities:* Dexterity, Intelligence, Wisdom (+2 Dex,
 +1 Wis). *Origin feat:* Skilled (Deception, Investigation, Disguise Kit). *Skills:*
-Insight, Persuasion. *Tool:* vehicles (land).
+Insight, Persuasion. *Tool:* Navigator's Tools.
 **Specialty:** contracts, caravans, and smugglers' roads: who moves goods,
 and around which laws. When it bears, the DM gives the answer without a check.
 
@@ -170,7 +170,7 @@ anything.
 
 **Class Features**
 - **Expertise** in Stealth and Sleight of Hand. **Thieves' Cant**, and one more
-  language of his choice. In a country without writing, it is all signs, knots and chalk that gets wiped.
+  language of his choice. In a country without writing, the cant is all signs, knots and chalk marks that get wiped.
 - **Weapon Mastery:** Dagger (Nick); Shortsword (Vex), for the first shortsword he picks
   up after midnight (he carries none).
 - **Cunning Action.** Bonus Action: Dash, Disengage, or Hide.
@@ -210,7 +210,7 @@ house, the strange marriage. In a world without books, Andra *is* her research.
 |---|---|---|---|---|---|
 | 8 (−1) | 14 (+2) | 14 (+2) | 19 (+4) | 12 (+1) | 10 (+0) |
 
-**Armor Class** 15 (*Mage Armor*, cast as she dresses for the ball; it lasts the night)
+**Armor Class** 15 (*Mage Armor*, cast at dusk as she dresses for the ball; it lasts past midnight)
 · **Hit Points** 26 · **Hit Dice** 4d6 · **Initiative** +2 · **Speed** 30 ft. ·
 **Passive Perception** 13
 
@@ -269,7 +269,7 @@ the only one who can see the shape of it. Tonight every thread she has followed 
 in one palace.
 
 **Agenda hook.** *The Story of a Lifetime* is Andra's agenda: be there, witness truly,
-carry it out alive. *Darkness* and a patient eye make her the guest likeliest to catch
+carry it out alive. Expertise in History and a patient eye make her the guest likeliest to catch
 a tell.
 
 **Mask.** *Andra will be watching all night. What does she want the mask to hide: her
@@ -299,11 +299,11 @@ speak, impossible to move.
 **Skills** Athletics +6 (with Advantage), Insight +3, Medicine +3, Perception +3,
 Intimidation +2
 
-**Tools** gaming set (dice)
+**Tools** Gaming Set (dice)
 
 **Background — City Watch Veteran.** *Abilities:* Strength, Constitution, Wisdom (+2
 Str, +1 Con). *Origin feat:* Savage Attacker. *Skills:* Athletics, Insight. *Tool:*
-gaming set.
+Gaming Set.
 **Specialty:** knows the layout, regular occupants, and unofficial rules
 of one district of Rekuzan from her service years (the player names which). When it
 bears, the DM gives the answer without a check.
@@ -404,7 +404,7 @@ shaped it, and whether it is holding a working right now.
 
 **Class Features**
 - **Divine Order: Thaumaturge.** One extra cantrip, and +4 (her Wisdom modifier) to
-  Intelligence (Arcana or Religion) checks (included). *The name is the SRD's, not Val'loh's: it has nothing to do
+  Intelligence (Arcana) and Intelligence (Religion) checks (included). *The name is the SRD's, not Val'loh's: it has nothing to do
   with the Thaumaturgy of chapter III.*
 - **Channel Divinity** (2 uses; one back on a Short Rest, all on a Long Rest).
   *Divine Spark:* a creature within 30 ft. regains 1d8 + 4 Hit Points, or makes a

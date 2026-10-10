@@ -153,13 +153,10 @@ how a party walks into it, turns it, or sets one snake on another.*
 
 ### The Merchant's Circle — Mistress Rhaza Callun
 
-**What they came for.** *Raunu's next decree, before it lands on her margins* (see chapter VII). His ministers call it the Tithe of Hands, and it
-lives whole in exactly three heads: Minister Corval's and two ministers' (see chapter II,
-"The Eight Agendas", Agenda 1). Callun's **fear** is an heir — a dynasty of Raunus — which is why the
-toast turns her polite loathing into something with a horizon (see chapter VII; chapter IV,
-Movement IV). Her **secret**: the Circle has already gamed a Vorlain chieftaincy and
-priced it attractive; she is here to check the arithmetic, not to act on it. She
-would be horrified to be called a conspirator. She is merely prepared.
+**What they came for.** Raunu's next decree, which his ministers call the Tithe of Hands.
+It lives whole in exactly three heads, Minister Corval's and two ministers' (see chapter II,
+"The Eight Agendas", Agenda 1), and her knives' line runs through those heads. Her want,
+fear and secret are in her dossier (see chapter VII, "Mistress Rhaza Callun").
 
 **Who they brought.** **Rhaza Callun** and four **Circle Hired Knives** (see chapter X), from
 the season's hired swords, paid half up front and half on delivery. A prepared patron
@@ -203,11 +200,11 @@ knives all night has testimony that cuts the other way.
 
 ### The Church — Prelate Damaris Kovaun
 
-**What they came for.** *To file Raunu Boranis under something. Anything* (see chapter VII). Her superiors want to know whether the man who
-returned is the man who left, and she has not been told why the question is
-phrased that way (see chapter VII; chapter II, "The Eight Agendas", Agenda 2). Her **fear** is the mists — the one
-memo from the east that reached her desk and was above her seal to read. The Church
-finds Raunu illegible, and a chief it cannot predict is a chief it cannot steer (see chapter II). And the written word belongs to the Church and to nobody else.
+**What they came for.** To file Raunu Boranis under something, and to answer her superiors'
+question about him (see chapter II, "The Eight Agendas", Agenda 2). The Church finds Raunu illegible, and a chief it cannot predict is a
+chief it cannot steer (see chapter II). And the written word belongs to the Church and to
+nobody else. Her want, fear and secret are in her dossier (see chapter VII, "Prelate
+Damaris Kovaun").
 
 **Who they brought.** **Damaris Kovaun** and four **Church Wardens** (see chapter X), her escort.
 
@@ -255,10 +252,9 @@ holds the only pen in the room (see chapter VI).
 
 ### House Draunel — Lord Essar Draunel
 
-**What they came for.** *House Draunel one seat closer to the chieftaincy, tonight if
-possible, patiently if not* (see chapter VII). His **fear** is
-being seen wanting it. His **secret**: Agenda 3 is his, and he has three other irons
-in tonight's fire. A Draunel never brings one plan to a Boranis party.
+**What they came for.** House Draunel one seat closer to the chieftaincy, by the four irons
+below. His want, fear and secret are in his dossier (see chapter VII, "Lord Essar
+Draunel").
 
 **Who they brought.** **Essar Draunel** and three **Draunel Duelists** (see chapter X), young men
 of his house with good blades and a great deal to prove.
@@ -309,13 +305,10 @@ life.
 ### House Boranis — Vorlain and Essin Boranis
 
 **What they came for.** Vorlain came because not coming was more dangerous; **he has
-no plot tonight** (see chapter VII). He wants the seat, forever,
-aching, and not like this; he fears his brother comprehensively. Essin wants
-Vorlain sober, unrecorded, and unbaited; he fears House Draunel's patience; and his
-**secret** is that he served the year of Vorlain's rule as fixer and knows exactly
-where its two bodies are buried (see chapter VII, "Essin Boranis"). Behind them both is a
-plain fact: Vorlain's one year of rule taught several cousins how quickly the
-seat can change (see chapter II).
+no plot tonight**. Essin came to keep him sober, unrecorded and unbaited. Behind them both
+is a plain fact: Vorlain's one year of rule taught several cousins how quickly the seat
+can change (see chapter II). Their wants, fears and secrets are in their dossiers (see
+chapter VII, "Vorlain Boranis"; chapter VII, "Essin Boranis").
 
 **Who they brought.** **Vorlain Boranis**, **Essin Boranis**, and three **Boranis Cousin's
 Blades** (see chapter X) — blood kin, not hires, the cousins who stood with Vorlain in the
@@ -360,12 +353,10 @@ wants the truth (see chapter VI).
 
 ### Phern — Master Pellin Corro
 
-**What they came for.** *A pleasant evening among people who finally treat Phern
-money as money* (see chapter VII). He **fears** the thing his
-gift keeps ringing about all night, pointing nowhere. He has **no secret**: he is
-exactly what he appears, which is why his mounting dread is worth a dozen warnings
-from anyone else. At the Unmasking his gift finally finds its bearing: three seconds
-before the lights die he is already moving, and following him saves lives.
+**What they came for.** A pleasant evening, and nothing more: Corro has no scheme. At the
+Unmasking his gift finds its bearing, and three seconds before the lights die he is
+already moving. His want, fear and secret are in his dossier (see chapter VII, "Master
+Pellin Corro").
 
 **Who they brought.** **Pellin Corro** and two or three **Phern Bodyguards** (see chapter X), his
 own caravan hands, gifted like nearly all Phern.
@@ -405,14 +396,11 @@ make the Circle's story very hard to tell.
 
 ### The Thenya — Maiven Nolonaire *(not a snake)*
 
-**What they came for.** *Proof of Veier — alive, well, unforced — carried home in
-Thenya hands* (see chapter VII). She **fears** that the pact was a
-purchase and her kinswoman the price. Her **secret**: the chief's actual instruction
-was *"if she is a prisoner, bring her out,"* and Maiven, border-raised and direct,
-intends to. The toast lands on her like a slap; her audience is refused; from there
-she is one bad hour from going over the east wing wall herself. At the Unmasking she
-goes toward the east wing, immediately, and dies there unless somebody competent goes
-with her.
+**What they came for.** Proof of Veier, carried home in Thenya hands, and Maiven means to
+bring her out if she is a prisoner. Once her audience is refused, she is one bad hour from
+going over the east wing wall herself. At the Unmasking she goes toward the east wing at
+once, and dies there unless somebody competent goes with her. Her want, fear and secret
+are in her dossier (see chapter VII, "Maiven Nolonaire").
 
 **Who they brought.** **Maiven Nolonaire** and two or three **Thenya Border Slingers**
 (see chapter X) of the delegation — the only non-Orthaen faces in fifty, and they know exactly
@@ -453,8 +441,8 @@ uses the Thenya, and anyone who tries learns what border people do about it.
 **Tavva's crew** is not one of Raunu's enemies. She is a professional thief working
 the first open Boranis door in two years, and the midnight attack is nothing to do
 with her; she is as blindsided as the ministers. Her three sightings are in chapter
-IV, and her fights are **S2** and **S5**. **S5** is the fight aimed at the
-noble-minded: no faction, no clock, nothing at stake but property and decency.
+IV, and her fights are **S2** and **S5**, the looting after midnight (see chapter V, "The
+default beats").
 
 **The Bought** are not snakes either. They are a contract company holding the gate
 from the first bell of midnight to the last bell of Oraga, for a factor nobody can
@@ -571,7 +559,7 @@ the bells (see chapter V, "Down, Not Out").
 hold it until Movement III. It is over before the toast. *(Chapter IV, "The Seating
 Feud", points here.)*
 
-***Trigger — read when a character is within earshot of the third bench:***
+**Read this when a character is within earshot of the third bench:**
 
 > *The argument has been going since the fish course, and it has just stopped being
 > about seating. One of them is standing. Two more are standing because he is.
@@ -615,8 +603,8 @@ A kinsman who takes any damage steps back out of the brawl and shouts instead, w
 one fewer in the mob without anybody being hurt.
 
 **Morale.** The whole thing stops the instant an adult of either house arrives and is
-obeyed — which a character can be, with a DC 15 Charisma (Persuasion or
-Intimidation) check.
+obeyed — which a character can be, with a DC 15 Charisma (Persuasion) or DC 15
+Charisma (Intimidation) check.
 
 **Outs.**
 - Name either principal's house obligation out loud: a DC 13 Charisma (Persuasion) check.
@@ -654,7 +642,7 @@ not, the two houses now both owe the party a small, grudging, entirely real debt
 ***Where and when:*** the service corridors behind the Dance (B10), Movement V, during
 the Dead Dance. *(Chapter IV, "The Other Thieves", points here.)*
 
-***Trigger — read on entering the corridor:***
+**Read this when a character enters the corridor:**
 
 > *The service corridor runs behind the Dance, and the music comes through the wall as
 > a pulse without a tune. Four people are crouched at the far end where the light does
@@ -744,7 +732,7 @@ VII. **Return to Movement V, B10.**
 ***Where and when:*** B12, the Gatehouse Court, Movement VII. *(Chapter V, "The
 Gatehouse Court, Held", points here.)*
 
-***Trigger — read when the characters reach the court and can see through the grille:***
+**Read this when the characters reach the court and can see through the grille:**
 
 > *The outer gate is shut, and it was shut from the far side. Through the grille:
 > matched gray coats, more of them than there are of you, arranged with the unhurried
@@ -815,9 +803,11 @@ and it is the most reliable way to kill a table by accident.
 **Terrain as rules.** *(see map VIII–2, chapter VIII)*
 - *The gate grille.* Anything through it has Three-Quarters Cover (+5 AC). Conversation
   through it does not.
-- *The court's crystal wall, lit.* Bright Light: nobody on the party's side can Hide,
-  and the Bought are silhouetted too.
-- *The gatehouse stair.* A creature shoved from the top falls 10 feet (1d6 Bludgeoning damage
+- *The court's crystal wall, lit.* Bright Light, and the Bought are silhouetted too.
+  A creature on either side can Hide only behind Three-Quarters or Total Cover, such as
+  the gate grille.
+- *The gatehouse stair.* It turns at a landing 5 feet up. A creature shoved from the top
+  tumbles down the upper flight and falls 10 feet to the landing (1d6 Bludgeoning damage
   and the Prone condition). Attacks from the stair against whoever holds the top have Disadvantage.
 - *The crowd in the court* is Difficult Terrain, and an area spell cast into it
   catches guests (see chapter V, "Two Hundred People"). Other retinues are in that crowd
@@ -895,11 +885,9 @@ by an out*): to whoever voided the contract.
 - *Four at 5th level:* add two more Blades, and the captain arrives at the start of
   the second round (1,700 XP; 2,800 with the captain).
 
-**Development.** A captured sergeant, contract case and all, is the inquest's best
-evidence and the only mortal thread that leads east. A bought-out captain honors the
-deal absolutely and **will not resume the fight tonight for any inducement** — which a
-clever table can turn into sixteen Blades holding the gate open. **Return to Movement
-VII, and see ⟨If History Breaks⟩ in chapter V.**
+**Development.** A captured sergeant and a bought-out captain both matter after the
+fight (see chapter V, "B12. The Gatehouse Court, Held"). **Return to Movement VII, and
+see ⟨If History Breaks⟩ in chapter V.**
 
 ---
 
@@ -971,10 +959,8 @@ abandoned galleries and the fallen while the palace burns. They fight to leave, 
 S2. *Budget:* 450 + (3 × 50) = **600 XP**, under Low (1,000), and it plays that
 way.
 
-**This is the fight aimed at the noble-minded.** No faction, no clock, no leash:
-guests being robbed as they crawl from the fire is a sight
-no decent character walks past, and no Fracture, leash or ward-lore is needed — just a
-blade and the willingness.
+**Why this fight.** Chapter V says why it is here (see chapter V, "The default beats",
+the looters): it is the night's fight for the noble-minded.
 
 **Objective:** whatever the party decides it is. There is no clock and nothing at stake
 but property and the party's opinion of themselves.
@@ -1022,7 +1008,7 @@ walking in; friends who follow at a distance are walking in too. Declining is an
 before it starts. *(This is the table's first chance at steel-shaped trouble. Offer it
 early.)*
 
-***Trigger — read when the character steps out onto the terrace:***
+**Read this when the character steps out onto the terrace:**
 
 > *The terrace is cold after the Court, and quiet enough to hear the lanterns tick.
 > Your companion walks you to the balustrade, talking about the view. A man in a good
@@ -1099,8 +1085,8 @@ heat does not change. **Return to the Movement.**
 the dark service run behind the Dance, as far as the east wing's service door. The
 Merchant's Circle. *(Chapter IV, "The Snakes This Movement — IV", points here, and so does the Movement V section.)*
 
-***Trigger — Movement IV, read when a character passes the kitchens' service
-door after the toast:***
+**Read this when a character passes the kitchens' service
+door after the toast in Movement IV:**
 
 > *Through the service door the kitchen is roaring — every pot on, every hand busy,
 > the second course going up. In the doorway itself, where the kitchen cannot hear, a
@@ -1112,8 +1098,8 @@ second plate?* — and he is polite about it, and the polite is the threat. A
 character who steps into the doorway ends the first half: he smiles, says something
 kind about the soup, and goes. What happens to the question is the second half.
 
-***Trigger — Movement V, read when a character follows the Circle's man into
-the service run, or meets one there:***
+**Read this when a character follows the Circle's man into
+the service run in Movement V, or meets one there:**
 
 > *Behind the Dance the service run is lit by one lamp in three, and the music through
 > the wall has no tune left in it. Ahead, a man in a good coat is walking the
@@ -1216,7 +1202,7 @@ S12 is live in the dark. **Return to Movement V.**
 if nobody stops it, into the first minutes after the lights die. The Church.
 *(Chapter IV, "The Snakes This Movement — V", points here.)*
 
-***Trigger — Movement V, read when a character comes up the dark-wing corridor:***
+**Read this when a character comes up the dark-wing corridor in Movement V:**
 
 > *The dark wing's corridor is cold after the Court, and the only light in it is at the
 > far end, a thin line of it under a door that ought to be dark. Two figures in gray
@@ -1329,8 +1315,8 @@ Boranis. The appointment was made in front of witnesses in Movement IV: *at the 
 quarter-bell, on the terraces, and bring your cousin's excuses.* *(Chapter IV, "The Snakes
 This Movement — V", points here.)*
 
-***Trigger — read when a character reaches the terrace, or looks down at it from
-the rail:***
+**Read this when a character reaches the terrace, or looks down at it from
+the rail:**
 
 > *A knot of masks has gathered at the rail of the Court's garden walk, looking down
 > instead of dancing. On the upper terrace below them two young men have taken off
@@ -1399,7 +1385,7 @@ Essin's word, or when their man is off the grass.
 - Make it first blood only, formally, as a second: a DC 13 Charisma (Persuasion) check
   to both seconds. Then it is one duelist against one cousin, one hit, and done. Nobody dies.
 - Shame it. Tell the rail that Lord Draunel's young men are baiting a guest at his
-  host's ball: a DC 15 Charisma (Intimidation or Performance) check. Draunel withdraws them,
+  host's ball: a DC 15 Charisma (Intimidation) or DC 15 Charisma (Performance) check. Draunel withdraws them,
   and is first to call it a misunderstanding among friends.
 - Stand between them: a DC 13 Strength (Athletics) check. Both principals' next attacks target
   that character.
@@ -1436,8 +1422,8 @@ Thenya, and **a fight only if the party provokes it.** The card fires only if th
 Thenya's heat is 3 or more at the half-bell. At 0–2 the slingers coil the rope and do
 not climb. *(Chapter IV, "The Snakes This Movement — V", points here.)*
 
-***Trigger — read when a character comes round into the garden below the east
-wing:***
+**Read this when a character comes round into the garden below the east
+wing:**
 
 > *Below the east wing the lanterns stop short, and the garden is dark except for one
 > lit window on the second floor. Two figures in plain border wool are standing under
@@ -1522,8 +1508,8 @@ no card at midnight. A party that stood with her here is standing with her then.
 ***Where and when:*** B2, the Crystal Court, the first seconds of Movement VI; a service
 door on the gallery side, into the service passages (B10). Phern.
 
-***Trigger — read to any character near Corro or near that door, straight after
-the lights die:***
+**Read this when the lights die, straight away, to any character near Corro or
+near that door:**
 
 > *In the last of the rose, before the light went, a small man in a merchant's coat
 > was already crossing the floor, and three big men were closing round him. Now the
@@ -1603,7 +1589,7 @@ jammed for the rest of the night. **Return to chapter V, and the beats.**
 ***Where and when:*** Movement VII, the burning banquet galleries (B3) and the service
 passages beyond them. The Merchant's Circle, at heat 3–4 only.
 
-***Trigger — read when a character is in B3 or its service door:***
+**Read this when a character is in B3 or its service door:**
 
 > *Two men in plain good coats are coming the wrong way through the smoke — toward the
 > service passages, not the gardens — with an older man between them, his feet not
@@ -1665,7 +1651,7 @@ midnight note (see chapter II, "The Eight Agendas") applies. **Return to Movemen
 ***Where and when:*** Movement VII, B3, the burning banquet gallery. House Draunel and
 House Boranis, when Draunel's heat is 3–4.
 
-***Trigger — read when a character reaches the gallery doors:***
+**Read this when a character reaches the gallery doors:**
 
 > *The banquet gallery is burning at its far end. A man with his sleeves pushed up and
 > soot to the elbows comes out of the smoke with a guest over his shoulder, and sets
@@ -1781,7 +1767,7 @@ the light and takes no interest in anyone. A party that never interferes never m
 it. That is what makes it optional: it is in plain sight from the Unmasking on, and it
 only comes for people who are in the way.
 
-***Trigger — read when one of the three turns it on the party:***
+**Read this when one of the three turns it on the characters:**
 
 > *One of the three gray masks turns — not toward you, toward the attendant standing
 > at the edge of the light, its hands empty now. The attendant straightens. It walks

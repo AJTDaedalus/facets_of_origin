@@ -136,7 +136,7 @@ the foot of the hill, with the party walking up toward the palace among everyone
 who was invited, hired or smuggled in. This is the first scene of the adventure, not a
 transition into it. It is where the table learns what a check feels like at this ball.
 
-*Read to open the session:*
+**Read this when the session opens:**
 
 > *The street climbs the hill, and so does everyone in it: carriages, sedan chairs,
 > people on foot in their best, all going the same way, all masked already. At the top
@@ -203,7 +203,9 @@ If the check fails by 5 or more, Corval hands the card back with perfect courtes
 does not let its bearer through. The character can still slip in with the staff hires
 through the kitchens (B10), and Corval will remember the face.
 
-> **Sidebar — Steel at the ball:** the Orthaen carry weapons the way other
+> **Sidebar — Steel at the ball**
+>
+> The Orthaen carry weapons the way other
 > peoples carry coin purses, and a festival ball is no exception. The custom is
 > small and concealed: a knife in the sash, a slim blade along the thigh.
 > Stronger personalities wear larger steel openly, and nobody thinks much of it.
@@ -225,7 +227,7 @@ through the kitchens (B10), and Corval will remember the face.
 
 **B2. The Crystal Court.**
 
-**On first entry into the Crystal Court, read:**
+**Read this when the characters first enter the Crystal Court:**
 
 > *The room is a vault of rose-lit crystal and it is full of people. Dancers under a
 > gallery of musicians; a high table on a dais at the far end, laid and canopied and
@@ -248,7 +250,7 @@ rumor (Table VIII–8) or one fact from the speaker's entry in chapter VII. See 
 
 **B4. The Audience Hall.**
 
-**When the party first sees into the Audience Hall, read:**
+**Read this when the characters first see into the Audience Hall:**
 
 > *A vast crystal chamber off the Court, lit for the first time in two years —
 > you can tell, because the light finds dust in the air that nobody has had reason
@@ -272,7 +274,7 @@ After Midnight: General Features"; see map VIII–4.)*
 
 **B6. The Chapel.**
 
-**When the party enters the Chapel, read:**
+**Read this when the characters enter the Chapel:**
 
 > *Eight niches, one for each god, and the grandest of them is Fraden's as it is
 > everywhere. The room smells of cold wax and old smoke. Seven of the niches hold
@@ -341,7 +343,7 @@ chasing the Root has a very good reason to reach that slate first.*
 
 **B9. The East Wing — the Living Quarters.**
 
-**When the party first comes within sight of the east wing doors, read:**
+**Read this when the characters first come within sight of the east wing doors:**
 
 > *Double doors, closed, with guards on them who are plainly not there for show. The corridor in front of them has been cleared of furniture.
 > Nobody is walking down it.*
@@ -519,7 +521,9 @@ will find inconvenient and one crew (below) finds very interesting indeed.
 ***Card S1, chapter IX*** — the bench clock, the **Feuding Kinsmen**, the outs, and
 what ending it well is worth.
 
-> **Sidebar — Snakes at the feud.** A seating feud between two minor branches is
+> **Sidebar — Snakes at the feud**
+>
+> A seating feud between two minor branches is
 > exactly the kind of thing a Draunel duelist would lean into and an Essin blade would
 > step out of. If the table has already met either, let one of them be at the edge of
 > the circle, watching to see who draws. Neither joins in. Both remember who ended it.
@@ -529,8 +533,8 @@ what ending it well is worth.
 Tavva's crew (chapter VII; **Tavva** and her **Gallery Knives**, chapter X) is working
 the ball tonight, and a watchful table can catch them at it three times. Each sighting
 is shown plainly, once. Each can be followed, braced, or let go. They are
-professionals: they fight to leave, not to kill. Theirs is the fight aimed at the
-noble-minded, with nothing at stake in it but property and decency.
+professionals: they fight to leave, not to kill. After midnight they loot the burning
+palace (card S5).
 
 - **The scout** *(Movement III)*: a footman crosses the gallery corridor carrying
   an empty tray in livery that fits him like a borrowed coat. He is counting
@@ -555,7 +559,9 @@ noble-minded, with nothing at stake in it but property and decency.
 *(The character with Agenda 5 has a private stake in all three sightings: the crew's list
 and their grandmother's crystal hang in the same gallery.)*
 
-> **Sidebar — Guards are a scene, not a sentence:** when the characters cross the
+> **Sidebar — Guards are a scene, not a sentence**
+>
+> When the characters cross the
 > house (a heist gone loud, the east wing forced, steel bared in the feud), the guards
 > who answer are a playable fight (card S4), not a fail state. The win condition is
 > the getaway: the service passages swallow anyone quick enough to reach them (each
@@ -567,7 +573,7 @@ and their grandmother's crystal hang in the same gallery.)*
 
 ## The Undercurrents
 
-> **If you have time.** A four-hour table runs the Undercurrent a character is already
+> Undercurrents A, B and D are marked *(if you have time)*. A four-hour table runs the Undercurrent a character is already
 > on and lets the rest surface as rumor. The exception is **C**: if anyone carries
 > Agenda 4, it is a way to Veier, and chapter V leans on it.
 
@@ -681,7 +687,9 @@ gifts.** What an hour in the laboratory yields, in rising order:
   single pool. A Scora (one of the rememberers attached to great houses everywhere, who are the record) reads
   the figure without a check. Anyone else can make a DC 15
   Intelligence check after 10 minutes with it, or reads it with no check after a full
-  hour. It can be read only one way:
+  hour. It can be read only one way.
+
+**Read this when a character reads the figure:**
 
 > *Both rivers, one spring.*
 
@@ -835,7 +843,9 @@ fight, never take damage, and never stay in a scene that would make them.)*
 currency; characters who walked it enter the Longest Night armed, positioned, and,
 rarest of all at Oraga, unsurprised.
 
-> **Sidebar — Threading the clock:** Undercurrents are paced for Movements II–V.
+> **Sidebar — Threading the clock**
+>
+> Undercurrents are paced for Movements II–V.
 > If a table locks onto one early and bottoms it by Movement III, let it ripple:
 > foreknowledge changes their Movement IV, and the scheduled events keep
 > arriving regardless. If a table chases none of them, the night still works. The
@@ -858,14 +868,14 @@ owners like them. The line is long, and it is the best gossip hour of the year.
 
 *(The approach read-aloud is at B0; the session opens with it.)*
 
-*Movement I — the cup (see "The quiet guest", below). When the party is halfway up the line, read:*
+**Read this when the characters are halfway up the line in Movement I (the cup; see "The quiet guest", below):**
 
 > *A little apart from the carriages stands a great house's attendant, a cloak folded
 > over one arm and a cup held out, ready, at the height of someone's hand. There is
 > nobody in front of it. The line moves; it moves with the line, and the cup stays
 > where it was, held out for someone who does not take it.*
 
-**When they reach the head of the line at the Gatehouse Court, read:**
+**Read this when the characters reach the head of the line at the Gatehouse Court:**
 
 > *A thin old man in Boranis livery takes each guest in turn, greets them by name
 > without looking at anything written down, and passes them through. He has been
@@ -1012,7 +1022,7 @@ insult and dread, and the gossip gets markedly worse.
 
 Then Corval begins fetching people.
 
-**When a character is walked into the Audience Hall, read:**
+**Read this when a character is walked into the Audience Hall:**
 
 > *The hall is bigger than it needs to be and almost entirely empty. Crystal walls,
 > unlit at the edges, throwing back a little of the light from the door behind you.
@@ -1168,7 +1178,7 @@ notice. Then it takes a breath, all at once.
 You can hold the toast until at least one character is in the galleries. Characters
 elsewhere hear of the two plates within minutes.
 
-The toast should be delivered word-for-word, pauses included:
+**Read this when the room has noticed him, word for word, pauses included:**
 
 > *"Thank you for coming. I know why most of you came."*
 >
@@ -1265,7 +1275,7 @@ she does, she sends for them. This is Raunu's line from the summons, kept: *"If 
 chooses you, you will know."* Whenever the ring is shown, the answer comes after the
 toast: a guard finds the character wherever they are and walks them up.
 
-**When a character is let into the east wing after the toast, read:**
+**Read this when a character is let into the east wing after the toast:**
 
 > *The guard leaves you at an open door. The light in here is warm after the rose
 > glow of the halls. A small table is set with two plates, and Raunu Boranis and
@@ -1327,8 +1337,8 @@ faintly rose and two hundred spirit-faces turning in the gloom, it is also the
 easiest hour in the world to move unseen (every Dexterity (Stealth) check in the
 public rooms is made with Advantage until the bells).
 
-**When the lamps go down for the Dead Dance, read this to the characters in the Crystal
-Court. For anyone elsewhere, read only the first two sentences:**
+**Read this when the lamps go down for the Dead Dance, to the characters in the Crystal
+Court (anyone elsewhere hears only the first two sentences):**
 
 > *The lamps come down until the only real light is the walls, and the walls are
 > the color of the inside of a shell. The music slows into something with a much

@@ -107,7 +107,7 @@ secret**: no faction learns of the child unless a player character tells them.
 |---|---|
 | The line's first check (B0) | 13 Charisma (Persuasion) or Wisdom (Insight) |
 | An approach across station, behind a mask | 10, the check that fits the approach |
-| Identify a masked guest you know / have only heard described | 15 / 20 Wisdom (Insight or Perception) |
+| Identify a masked guest you know / have only heard described | 15 / 20 Wisdom (Insight) or Wisdom (Perception) |
 | A borrowed invitation at the gate / one with the wrong name on it | 13 / 18 Charisma (Deception) |
 | Slip past a posted guard · a hire's livery and a confident walk · an honest story | 15 Dexterity (Stealth) · 10 Charisma (Deception) · 13 Charisma (Persuasion) |
 | A locked door in the private palace · the study's crystal lock | 15 / 18 Dexterity (Thieves' Tools) |

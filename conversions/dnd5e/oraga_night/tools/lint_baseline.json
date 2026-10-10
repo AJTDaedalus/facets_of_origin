@@ -1,16 +1,8 @@
 {
  "hard": {
-  "01_Overture.md": {
-   "emphasis_italics": {
-    "*if you have time*": 1
-   }
-  },
   "03_Masks_and_Agendas.md": {
    "emphasis_italics": {
     "*shows itself*": 1
-   },
-   "or_skills": {
-    "(Insight or Perception)": 2
    }
   },
   "04_The_Ball.md": {
@@ -26,19 +18,6 @@
     "*drifting*": 1,
     "*locked on you*": 1,
     "*steer*": 1
-   },
-   "or_skills": {
-    "(Intimidation or Performance)": 1,
-    "(Performance or Deception)": 1,
-    "(Performance or Persuasion)": 1,
-    "(Persuasion or Deception)": 1,
-    "(Persuasion or Intimidation)": 1
-   }
-  },
-  "07_Cast_of_the_Ball.md": {
-   "anachronism": {
-    "businessperson": 1,
-    "memo": 2
    }
   },
   "08_Handouts.md": {
@@ -47,15 +26,9 @@
     "*common*": 1,
     "*empty*": 1,
     "*in*": 1
-   },
-   "or_skills": {
-    "(Insight or Perception)": 1
    }
   },
   "09_The_Snakes.md": {
-   "anachronism": {
-    "memo": 1
-   },
    "emphasis_italics": {
     "*Heroic Inspiration*": 14,
     "*between Low and Moderate*": 1,
@@ -66,10 +39,6 @@
     "*the missing year*": 1,
     "*to 4*": 1,
     "*under Low*": 1
-   },
-   "or_skills": {
-    "(Intimidation or Performance)": 1,
-    "(Persuasion or Intimidation)": 1
    }
   },
   "10_Bestiary.md": {
@@ -87,93 +56,90 @@
   "11_Pregenerated_Characters.md": {
    "emphasis_italics": {
     "*is*": 1
-   },
-   "or_skills": {
-    "(Arcana or Religion)": 1
    }
   }
  },
  "soft": {
   "01_Overture.md": {
-   "emdash_per_k": 1.88,
+   "emdash_per_k": 1.86,
    "long_paras": 0,
-   "long_sentence_pct": 5.38,
-   "mean_wps": 14.32,
+   "long_sentence_pct": 5.34,
+   "mean_wps": 14.43,
    "not_but": 9,
    "perhaps": 0,
    "player_character": 1,
    "rhetorical": 0,
-   "sentences": 334,
+   "sentences": 335,
    "the_players": 0,
-   "words": 4782,
-   "you": 39
+   "words": 4833,
+   "you": 40
   },
   "02_The_World_and_the_Night.md": {
    "emdash_per_k": 1.67,
    "long_paras": 0,
    "long_sentence_pct": 6.54,
-   "mean_wps": 14.27,
+   "mean_wps": 14.26,
    "not_but": 5,
    "perhaps": 1,
    "player_character": 0,
    "rhetorical": 2,
    "sentences": 294,
    "the_players": 0,
-   "words": 4194,
+   "words": 4192,
    "you": 52
   },
   "03_Masks_and_Agendas.md": {
    "emdash_per_k": 0.0,
    "long_paras": 0,
    "long_sentence_pct": 5.8,
-   "mean_wps": 14.3,
+   "mean_wps": 14.34,
    "not_but": 1,
    "perhaps": 0,
    "player_character": 1,
    "rhetorical": 0,
    "sentences": 125,
    "the_players": 0,
-   "words": 1787,
+   "words": 1793,
    "you": 44
   },
   "04_The_Ball.md": {
-   "emdash_per_k": 1.51,
-   "long_paras": 2,
-   "long_sentence_pct": 5.4,
-   "mean_wps": 13.69,
+   "emdash_per_k": 1.43,
+   "long_paras": 3,
+   "long_sentence_pct": 5.36,
+   "mean_wps": 13.67,
    "not_but": 11,
    "perhaps": 0,
    "player_character": 2,
    "rhetorical": 0,
-   "sentences": 1018,
+   "sentences": 1023,
    "the_players": 0,
-   "words": 13936,
+   "words": 13989,
    "you": 21
   },
   "05_The_Longest_Night.md": {
-   "emdash_per_k": 3.28,
+   "emdash_per_k": 3.14,
    "long_paras": 2,
-   "long_sentence_pct": 7.28,
-   "mean_wps": 15.03,
+   "long_sentence_pct": 7.26,
+   "mean_wps": 15.08,
    "not_but": 14,
    "perhaps": 0,
    "player_character": 7,
    "rhetorical": 0,
-   "sentences": 791,
+   "sentences": 780,
    "the_players": 0,
-   "words": 11887,
-   "you": 25
+   "words": 11766,
+   "you": 23
   },
   "06_Aftermath.md": {
    "emdash_per_k": 0.92,
    "long_paras": 0,
-   "long_sentence_pct": 5.06,
-   "mean_wps": 14.72,
+   "long_sentence_pct": 5.0,
+   "mean_wps": 14.52,
    "not_but": 2,
    "perhaps": 0,
    "player_character": 0,
    "rhetorical": 0,
-   "sentences": 74,
+   "sentences": 75,
    "the_players": 0,
    "words": 1089,
    "you": 5
@@ -182,70 +148,70 @@
    "emdash_per_k": 3.63,
    "long_paras": 0,
    "long_sentence_pct": 4.79,
-   "mean_wps": 14.32,
+   "mean_wps": 14.3,
    "not_but": 8,
    "perhaps": 0,
    "player_character": 0,
    "rhetorical": 0,
    "sentences": 520,
    "the_players": 1,
-   "words": 7446,
+   "words": 7438,
    "you": 3
   },
   "08_Handouts.md": {
-   "emdash_per_k": 5.03,
-   "long_paras": 1,
-   "long_sentence_pct": 4.1,
-   "mean_wps": 11.64,
+   "emdash_per_k": 4.03,
+   "long_paras": 2,
+   "long_sentence_pct": 4.8,
+   "mean_wps": 12.59,
    "not_but": 1,
    "perhaps": 1,
    "player_character": 1,
    "rhetorical": 1,
-   "sentences": 171,
+   "sentences": 197,
    "the_players": 0,
-   "words": 1990,
+   "words": 2480,
    "you": 13
   },
   "09_The_Snakes.md": {
-   "emdash_per_k": 6.24,
+   "emdash_per_k": 5.12,
    "long_paras": 1,
-   "long_sentence_pct": 6.06,
-   "mean_wps": 13.79,
-   "not_but": 15,
+   "long_sentence_pct": 6.02,
+   "mean_wps": 13.66,
+   "not_but": 14,
    "perhaps": 0,
    "player_character": 2,
    "rhetorical": 1,
    "sentences": 1243,
    "the_players": 2,
-   "words": 17140,
+   "words": 16977,
    "you": 15
   },
   "10_Bestiary.md": {
-   "emdash_per_k": 3.23,
+   "emdash_per_k": 3.16,
    "long_paras": 2,
-   "long_sentence_pct": 7.58,
-   "mean_wps": 14.9,
+   "long_sentence_pct": 7.91,
+   "mean_wps": 15.13,
    "not_but": 2,
    "perhaps": 0,
    "player_character": 0,
    "rhetorical": 0,
-   "sentences": 187,
+   "sentences": 188,
    "the_players": 1,
-   "words": 2787,
+   "words": 2844,
    "you": 2
   },
   "11_Pregenerated_Characters.md": {
    "emdash_per_k": 1.56,
    "long_paras": 0,
    "long_sentence_pct": 2.14,
-   "mean_wps": 11.26,
+   "mean_wps": 11.29,
    "not_but": 2,
    "perhaps": 0,
    "player_character": 1,
    "rhetorical": 5,
    "sentences": 284,
    "the_players": 0,
-   "words": 3198,
+   "words": 3205,
    "you": 1
   },
   "README.md": {
@@ -263,73 +229,6 @@
    "you": 2
   }
  },
- "structure": {
-  "04_The_Ball.md": {
-   "box_label": {
-    "**Sidebar — Guards are a scene, not a": 1,
-    "**Sidebar — Snakes at the feud.** A seating": 1,
-    "**Sidebar — Steel at the ball:** the Orthaen": 1,
-    "**Sidebar — Threading the clock:** Undercurrents are paced": 1
-   },
-   "trigger_format": {
-    "**On first entry into the Crystal Court, read:**": 1,
-    "**When a character is let into the east wing after": 1,
-    "**When a character is walked into the Audience Hall, read:**": 1,
-    "**When the lamps go down for the Dead Dance, read": 1,
-    "**When the party enters the Chapel, read:**": 1,
-    "**When the party first comes within sight of the east": 1,
-    "**When the party first sees into the Audience Hall, read:**": 1,
-    "**When they reach the head of the line at the": 1,
-    "*Movement I — the cup (see \"The quiet guest\", below).": 1,
-    "*Read to open the session:*": 1,
-    "The toast should be delivered word-for-word, pauses included:": 1,
-    "Woven into the orrery's base, in the private pattern-language the": 1
-   }
-  },
-  "05_The_Longest_Night.md": {
-   "box_label": {
-    "**DM Note — what you must not say.**": 1,
-    "**Sidebar — Adjusting the Attack.** The numbers above": 1,
-    "**Sidebar — Caught in the crossfire:** while the": 1,
-    "**Sidebar — Characters who attack Vell, or join": 1,
-    "**Sidebar — Crystals gutter:** within **30 feet** (a": 1,
-    "**Sidebar — Fractures and magic.** *Calm Emotions*, *Charm": 1
-   },
-   "trigger_format": {
-    "**The instant the sentence breaks off, read this fast, and": 1,
-    "**When the Radiant steps out of the smoke onto the": 1,
-    "**When the Uninvited have gone, read:**": 1,
-    "**When the characters reach the Gatehouse Court and can see": 1,
-    "Read or paraphrase, adjusting for what the table did:": 1
-   }
-  },
-  "06_Aftermath.md": {
-   "box_label": {
-    "**Sidebar — Going east.** Sooner or later a": 1
-   }
-  },
-  "07_Cast_of_the_Ball.md": {
-   "box_label": {
-    "**DM Note — the factor.** The captain never": 1
-   }
-  },
-  "09_The_Snakes.md": {
-   "trigger_format": {
-    "***Trigger — Movement IV, read when a character passes the": 1,
-    "***Trigger — Movement V, read when a character comes up": 1,
-    "***Trigger — Movement V, read when a character follows the": 1,
-    "***Trigger — read on entering the corridor:***": 1,
-    "***Trigger — read to any character near Corro or near": 1,
-    "***Trigger — read when a character comes round into the": 1,
-    "***Trigger — read when a character is in B3 or": 1,
-    "***Trigger — read when a character is within earshot of": 1,
-    "***Trigger — read when a character reaches the gallery doors:***": 1,
-    "***Trigger — read when a character reaches the terrace, or": 1,
-    "***Trigger — read when one of the three turns it": 1,
-    "***Trigger — read when the character steps out onto the": 1,
-    "***Trigger — read when the characters reach the court and": 1
-   }
-  }
- },
+ "structure": {},
  "version": 1
 }
