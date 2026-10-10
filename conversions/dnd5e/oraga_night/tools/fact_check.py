@@ -3,7 +3,7 @@
 It reads the continuity bible (`../facts.yaml`), unwraps every module chapter into the
 paragraphs Markdown renders, and flags each phrasing that contradicts a fact, with
 file:line and the unwrapped context. The check types are documented at the top of
-facts.yaml: forbid, sentence, count, size, movement, require.
+facts.yaml: forbid, sentence, count, size, movement, require, rule_copy.
 
 Usage (from the repo root):
     python conversions/dnd5e/oraga_night/tools/fact_check.py             # every hit; exit 1 if any
@@ -44,6 +44,7 @@ TYPES = {
     "size": ("subject", "window", "allowed"),
     "movement": ("subject", "from"),
     "require": ("file", "pattern"),
+    "rule_copy": ("home", "elements"),
 }
 
 # ---------------------------------------------------------------------------------------
@@ -122,6 +123,8 @@ def validate(data: dict) -> list[dict]:
                         c["_" + key] = re.compile(c[key])
                 if t == "sentence":
                     c["_all"] = [re.compile(p) for p in c["all"]]
+                if t == "rule_copy":
+                    c["_elements"] = [re.compile(p) for p in c["elements"]]
             except re.error as e:
                 raise ValueError(f"{fid}: bad regex in {t} check: {e}") from e
             if t == "movement":
@@ -241,6 +244,21 @@ def _check_block(fact: dict, c: dict, block: L.Block, fname: str):
                     if dim in allowed and int(mm.group(1)) not in allowed[dim]:
                         s = a + sm.end() + mm.start()
                         yield hit(s, s + len(mm.group()))
+        return
+
+    if t == "rule_copy":
+        # A rule printed in one home (O36): a paragraph, list item or table row outside
+        # the home file that matches more than `max` of the rule's elements restates it.
+        if fname.startswith(str(c["home"])):
+            return
+        found = [rx.search(text) for rx in c["_elements"]]
+        got = [m for m in found if m]
+        if len(got) > int(c.get("max", 2)):
+            first = min(got, key=lambda m: m.start())
+            yield Hit(fact["id"], t, fname, L.block_line(block, first.start()),
+                      f"{len(got)} of {len(found)} elements: "
+                      + "; ".join(m.group() for m in sorted(got, key=lambda m: m.start())),
+                      _context(text, first.start(), first.end()), why)
         return
 
     if t == "movement":

@@ -50,14 +50,6 @@
     "Maiven": 1
    }
   },
-  "retinues": {
-   "09_The_Snakes.md": {
-    "brought": 2
-   },
-   "10_Bestiary.md": {
-    "Kovaun brought three": 1
-   }
-  },
   "stairs": {
    "05_The_Longest_Night.md": {
     "missing: (?:private stair[^.\\n]{0,60}garden stair|garden stair[^.\\n]{0,60}private stair)": 1

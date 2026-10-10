@@ -932,7 +932,7 @@
    "label": "⟨The Bought change sides⟩",
    "phase": "end",
    "kind": "ending",
-   "summary": "Bought out before midnight, the company holds the gate open. Forty sworn witnesses instead of two hundred frightened ones.",
+   "summary": "Bought out before midnight (through a sergeant's runner at the Gatehouse Court in Movement V), the company holds the gate open. Forty sworn witnesses instead of two hundred frightened ones.",
    "ref": "05_The_Longest_Night.md#if-history-breaks",
    "optional": true,
    "faction": null
@@ -1132,7 +1132,7 @@
    "label": "S14. The Attendant — the midnight boss",
    "phase": "m6",
    "kind": "fight",
-   "summary": "Movements VI–VII. Fires only if the party interferes with an Uninvited. Idle: rusty. Focused (at the start of its turn, if one of the three in the scene has no Delay): two turns a round, Put Aside. Distract it — one try a round, no Help: d20 + fitting skill vs DC 13 Idle / 19 Focused, +2 for playing it out, +2 for a habit seen (max +4). A success breaks its focus until its next turn; the fourth broken focus: it wanders off. 0 HP: it steps into the shadow. Down, Not Out. Hard on purpose: someone usually goes down.",
+   "summary": "Movements VI–VII. Fires only if the party interferes with an Uninvited. Idle: rusty. Focused (at the start of its turn, if one of the three in the scene has no Delay): two turns a round, Put Aside. Distract it — one try a round, no Help: d20 + fitting skill vs DC 13 Idle / 19 Focused, +2 for playing it out, +2 for a habit seen (max +4). A success while Focused breaks its focus until its next turn (while Idle, the distractor becomes furniture to it); arguing its orders is one more trick; the fourth broken focus: it wanders off. 0 HP: it steps into the shadow. Down, Not Out. Hard on purpose: someone usually goes down.",
    "ref": "09_The_Snakes.md (S14); 10_Bestiary.md",
    "optional": true,
    "faction": "uninvited"
@@ -2465,7 +2465,7 @@
    "id": "clk-distract",
    "label": "Broken focus (S14, the Attendant)",
    "segments": 4,
-   "advances": "Each distraction that succeeds while it is Focused (one try a round, DC 19). A success while Idle costs it a turn but doesn't count",
+   "advances": "Each distraction that succeeds while it is Focused (one try a round, DC 19). A success while Idle makes the distractor furniture to it for the scene but doesn't count",
    "fills": "It wanders off to a window to watch the fires — a win"
   },
   {
@@ -2473,7 +2473,7 @@
    "label": "Last-bell clock (S3)",
    "segments": 6,
    "advances": "Each round at the gate",
-   "fills": "The last bell of Oraga: the contract's hours end and the sect guard arrives. It rings earlier, the moment the gate is decided"
+   "fills": "The last bell of Oraga: the contract's hours end and the sect guard arrives. It rings earlier, the moment the gate is decided. If no character reaches the gate by the end of Movement VII, the sect guard arrives and ending 3 plays out offstage"
   }
  ]
 }

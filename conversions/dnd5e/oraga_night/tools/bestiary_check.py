@@ -58,6 +58,9 @@ B = {
  "Cousin's Blade": dict(cr="1/2", hd=4, hp=22, ac=14, ab=[14,13,12,10,10,12], sv=[],
    sk={"Athletics":(0,4),"Intimidation":(5,3)}, pp=10,
    atk=[(4,0,(1,8,2),6)], dc=[], dpr=6, atkb=4),
+ "Boranis Cousin of 3160": dict(cr="1", hd=6, hp=33, ac=14, ab=[14,13,12,10,10,12], sv=[],
+   sk={"Athletics":(0,4),"Intimidation":(5,3)}, pp=10,
+   atk=[(4,0,(1,8,2),6)], dc=[], dpr=12, atkb=4),
  "Honor Guard": dict(cr="2", hd=8, hp=52, ac=18, ab=[16,12,14,10,13,11], sv=[0,2],
    sk={"Athletics":(0,5),"Perception":(4,3)}, pp=13,
    atk=[(5,0,(1,8,3),7)], dc=[(13,0)], dpr=14, atkb=5),
@@ -69,8 +72,9 @@ B = {
  "Bought Sergeant": dict(cr="2", hd=8, hp=52, ac=17, acb=1, ab=[15,14,14,12,13,13], sv=[0,2],
    sk={"Insight":(4,3),"Perception":(4,3),"Persuasion":(5,3)}, pp=13,
    atk=[(4,0,(1,8,2),6)], dc=[], dpr=12, atkb=4),
- "Sergeant (Nastier)": dict(cr="4", hd=12, hp=78, ac=17, acb=1, ab=[17,14,14,12,13,13], sv=[],
-   sk={"Perception":(4,3)}, pp=13, atk=[(5,0,(1,8,3),7)], dc=[], dpr=21, atkb=5),
+ "Veteran Bought Sergeant": dict(cr="4", hd=12, hp=78, ac=17, acb=1, ab=[17,14,14,12,13,13], sv=[0,2],
+   sk={"Insight":(4,3),"Perception":(4,3),"Persuasion":(5,3)}, pp=13,
+   atk=[(5,0,(1,8,3),7)], dc=[], dpr=21, atkb=5),
  "Church Warden": dict(cr="1", hd=6, hp=33, ac=16, ab=[14,12,13,10,13,11], sv=[4],
    sk={"Insight":(4,3),"Perception":(4,3),"Religion":(3,2)}, pp=13,
    atk=[(4,0,(1,6,2),5)], dc=[(12,0)], dpr=10, atkb=4),
@@ -83,8 +87,9 @@ B = {
  "Draunel Duelist": dict(cr="1", hd=5, hp=27, ac=15, ab=[11,16,12,10,11,14], sv=[1],
    sk={"Acrobatics":(1,5),"Intimidation":(5,4),"Performance":(5,4)}, pp=10,
    atk=[(5,1,(1,8,3),7)], dc=[(12,5)], dpr=10, atkb=5),
- "Duelist (Nastier)": dict(cr="2", hd=8, hp=44, ac=15, ab=[11,16,12,10,11,14], sv=[], sk={}, pp=10,
-   atk=[], dc=[], dpr=17, atkb=5),
+ "Veteran Draunel Duelist": dict(cr="2", hd=8, hp=44, ac=15, ab=[11,16,12,10,11,14], sv=[1],
+   sk={"Acrobatics":(1,5),"Intimidation":(5,4),"Performance":(5,4)}, pp=10,
+   atk=[(5,1,(1,8,3),7)], dc=[(12,5)], dpr=17, atkb=5),
  "Essar Draunel": dict(cr="3", hd=9, hp=58, ac=16, acb=1, ab=[12,16,14,14,12,17], sv=[1,4,5],
    sk={"Deception":(5,5),"Insight":(4,3),"Intimidation":(5,5),"Persuasion":(5,7)}, pp=11,
    atk=[(5,1,(1,8,3),7)], dc=[], dpr=21, atkb=5),
@@ -136,8 +141,39 @@ B = {
 # Base block name in the text, when it differs from the key above.
 TEXT_NAME = {"Attendant": "The Attendant", "Cousin's Blade": "Boranis Cousin's Blade", "Honor Guard": "Boranis Honor Guard"}
 # Nastier variants whose numbers are printed in the base block's Nastier line.
-NASTIER_OF = {"Sergeant (Nastier)": "Bought Sergeant", "Duelist (Nastier)": "Draunel Duelist",
-              "Kinsman principal (Nastier)": "Feuding Kinsman"}
+NASTIER_OF = {"Kinsman principal (Nastier)": "Feuding Kinsman"}
+# R1.4 (review P1-7, owner QR3): Nastier variants the cards field as their base roster
+# are named blocks of their own. variant -> base block (text names). The base block's
+# Nastier line points to the variant and must not reprint its numbers.
+PROMOTED = {"Veteran Bought Sergeant": "Bought Sergeant",
+            "Boranis Cousin of 3160": "Boranis Cousin's Blade",
+            "Veteran Draunel Duelist": "Draunel Duelist"}
+CARD_LINES = ("Wants", "Tells", "Breaks", "Nastier")
+
+
+def _card_line(blk, label):
+    m = re.search(r"\*\*" + label + r"\.\*\*(.*?)(?=\n> \*\*|\n> \*[^*]|\n\n|\Z)", blk or "", re.S)
+    return m and " ".join(m.group(1).replace("\n> ", " ").split())
+
+
+def variant_problems(blocks):
+    probs = []
+    for v, base in PROMOTED.items():
+        blk = blocks.get(v)
+        if blk is None:
+            probs.append(f"{v}: no block in 10_Bestiary.md (R1.4)")
+        else:
+            for label in CARD_LINES:
+                if not _card_line(blk, label):
+                    probs.append(f"{v}: no {label} line")
+        line = _card_line(blocks.get(base), "Nastier")
+        if not line:
+            probs.append(f"{base}: no Nastier line"); continue
+        if v not in line:
+            probs.append(f"{base}: Nastier line does not name {v}")
+        if re.search(r"\d+ HP \(|\bCR \d", line):
+            probs.append(f"{base}: Nastier line reprints numbers; they belong in the {v} block")
+    return probs
 
 
 def split_blocks(text):
@@ -287,7 +323,8 @@ def layout_problems(blocks):
 
 def text_problems(text):
     blocks = split_blocks(text)
-    probs = fixed_value_problems(blocks) + layout_problems(blocks) + trait_dc_problems(blocks)
+    probs = (fixed_value_problems(blocks) + layout_problems(blocks) + trait_dc_problems(blocks)
+             + variant_problems(blocks))
     for n, b in B.items():
         if n in NASTIER_OF:
             blk = blocks.get(NASTIER_OF[n])

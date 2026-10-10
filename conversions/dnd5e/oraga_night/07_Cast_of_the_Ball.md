@@ -643,7 +643,8 @@ any of its turns, once the party has become a real interruption, if one of the t
 in the scene has no Delay and glances at it and at the party. Focused, it is devastating.
 
 A clever distraction breaks its focus, but only
-until one of the three glances at it again. The fourth broken focus of the night sends
+until one of the three glances at it again. An argument that the party is not, strictly,
+interrupting is one more distraction, never a way to end the fight by itself. The fourth broken focus of the night sends
 it off to stand at a window and watch the fires.
 Driven to 0 Hit Points, it loses interest in being here and steps back into the
 shadow. It leaves no body. Anyone it drops is only knocked down (see chapter V,

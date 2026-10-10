@@ -19,6 +19,11 @@
 #   movement  subject, from               a Movement reference in the same sentence (table row)
 #                                         as `subject` must not start before Movement `from`
 #   require   pattern, file, anchor       `pattern` must appear in `file`; reported at `anchor`
+#   rule_copy home, elements, max         a rule printed once (O36): a paragraph, list item or
+#                                         table row outside the `home` file that matches more
+#                                         than `max` (default 2) of the rule's `elements` is a
+#                                         full restatement; outside copies are pointers plus
+#                                         their local rule only
 #
 # Every check takes optional `files` (basename prefixes it applies to), `unless` (a regex
 # that, found in the same sentence/block, cancels the hit) and `why`.
@@ -231,3 +236,29 @@ facts:
         all: ['\bMaiven\b', '\bwill not leave\b']
         unless: '\b(?:[Ii]f (?:Maiven|she) (?:lived|survived|lives))\b'
         why: P2-5 — she dies by default; make the aftermath line conditional
+
+  - id: down_not_out
+    truth: >-
+      "Down, Not Out" is printed in full once, in chapter V ("Midnight Rules"). Every other
+      chapter (the DM sheet, the fight cards, the stat blocks) points to it and adds only its
+      local rule. The crowd rouses a dropped creature at the start of "the round after" the
+      round it was still down, never "the round after next".
+    source: O36; review P2-18
+    phrases: ['(see chapter V, "Down, Not Out")', "the crowd rule"]
+    checks:
+      - type: rule_copy
+        home: "05"
+        max: 2
+        elements:
+          - '\bStable\b'
+          - '\bno Death Saving Throws\b'
+          - '\bwithin 5 (?:feet|ft\.)[^.]{0,80}\baction\b'
+          - '\b1 (?:Hit Point|HP)\b'
+          - '\b(?:drags?|dragged) (?:them |it |him |her )?clear\b|\bthe crowd does\b'
+          - '\bhaul\w*[^.]{0,80}Heroic Inspiration\b'
+          - '\blast blow\b'
+          - '\b(?:within|longer than) two rounds\b'
+        why: O36 — the full rule lives in chapter V; elsewhere print a pointer plus the local rule
+      - type: forbid
+        pattern: '\bround after next\b'
+        why: O36 / P2-18 — chapter V says "the round after"

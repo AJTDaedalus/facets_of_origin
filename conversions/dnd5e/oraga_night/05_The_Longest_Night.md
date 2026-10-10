@@ -90,7 +90,9 @@ is stated. Everything else in this chapter points here.
 8. **The gate is decided** (card S3), by any of its three endings. Then the last bell
    rings, no later than the bell clock on card S3. That clock counts only the rounds
    the characters spend at the gate; the bells that begin in step 4 are only the
-   warning, so the last bell never rings during the Crossing.
+   warning, so the last bell never rings during the Crossing. If no character reaches
+   the gate by the end of Movement VII, the sect guard arrives, ending 3 plays out offstage,
+   and the last bell rings.
 
 ## Movement VI — The Unmasking
 
@@ -351,7 +353,7 @@ Crossing; Delay earned here is spent at the gate)*
 | 3 | **Through the beds.** Take Veier off the gravel and through the flower beds in the dark. Slower for the characters, and slower for him | Wisdom (Survival) |
 | 4 | **Shut the river gate** behind the boat and hold it, or lock it | Strength (Athletics); or Thieves' Tools, DC 15; no check for the character with Agenda 6 |
 | 5 | **Push the boat off.** A character wades in and puts a shoulder to it | Strength (Athletics) |
-| 6 | **Hold him in the shallows.** Grapple him at the water's edge. While he is Witnessed he can't step out of it | An Unarmed Strike (Grapple) |
+| 6 | **Hold him in the shallows.** Grapple him at the water's edge. While he is Witnessed he can't step out of it | An Unarmed Strike (Grapple), not the column's check: it works if he fails his saving throw against the grappler's DC. The grip is the 1 Delay; he spends his action tearing free (see chapter X, "The Uninvited, Before You Read Their Blocks") |
 | 7 | **The front gate.** Tell him the woman in Thenya wool went out by the front | Charisma (Deception) |
 | 8 | **A body in the way.** Stand between him and the boat. He spends his turn at the gate on that character ("Down, Not Out") instead of on the boat. Always available | No check, no Delay; it does the same job |
 
@@ -394,8 +396,9 @@ interrupted.** It is not Leashed. It can be beaten, and it is the answer to the
 player who came to this ball wanting a real fight.
 
 - **It only cares about interruptions.** Anyone who isn't getting in the way of the
-  three is furniture to it. Characters who let the three work can walk past it all
-  night.
+  three is furniture to it, and so is a character who distracts it while it is Idle
+  (see chapter X, "The Attendant"). Characters who let the three work can walk past it
+  all night.
 - **Idle and Focused.** It starts Idle: rusty, slow, easy to distract. Card S14 fires
   the first time the characters become a real interruption: they earn Delay against one
   of the three, strike one, or stand between one and their errand. The card fires with
@@ -1001,8 +1004,9 @@ that nothing else in the adventure will give them.
 
 1. **Fight through.** Get through the wicket or over the gate-walk, drop the sergeant
    **or** half the Blades, and the rest disengage in order. The captain arrives, invokes the Second Clause the round after the characters look
-   like winning, and the company stops holding the gate and starts looking for a woman
-   in Thenya wool. The characters have just been told something enormous.
+   like winning, and the company pulls back from the gate to watch the crowd for a woman
+   in Thenya wool. The gate is open. The characters have just been told something
+   enormous.
 2. **Void the contract.** Proof the employer broke terms (the fires were not meant to
    spread; the palace is burning). Or the named target already gone: Veier is out the
    river gate, and characters who know it can simply say so. Or a better offer, made in
@@ -1021,7 +1025,8 @@ that nothing else in the adventure will give them.
    round. **A party that only held has won.**
 
 **The last bell.** It rings once the gate is decided, by any of the three endings, and no
-later than the bell clock on card S3 (see "The Midnight Clock"). Whatever the Uninvited left unfinished, it is
+later than the bell clock on card S3, or at the end of Movement VII if no character
+reached the gate (see "The Midnight Clock"). Whatever the Uninvited left unfinished, it is
 finished now. If one of them is caught in deep ward-crystal (⟨They trap one of the
 Uninvited⟩), this is the moment the leash tears them out. The Bought's hours are over.
 The night is.
@@ -1161,11 +1166,14 @@ own choice at the gate. Make it count.)* Then, between beats, hand the player Co
 Vorlain to finish the night with. Nobody sits out the Longest Night.
 
 **⟨The Bought change sides.⟩** A table that buys the captain out before midnight
-holds the gate open from the first scream. This is genuinely reachable: the company
-is visible in the trade district at dusk to a gifted Phern, the
+holds the gate open from the first scream. The door to it is inside the palace: in
+Movement V a sergeant's runner comes to the Gatehouse Court (area B1) to look over the
+ground the company takes at midnight. A character watching the gate, or a gifted Phern,
+can pick him out of the festival crowd. He carries word to the sergeants, the
 sergeants will talk to anyone who opens with money, and a Draunel or a Circle patron
-could be talked into fronting the fee by characters who explain what it buys. *(This is
-the snakes' money doing the host's guests a kindness. A Circle that pays for it will
+could be talked into fronting the fee by characters who explain what it buys.
+
+*(This is the snakes' money doing the host's guests a kindness. A Circle that pays for it will
 want to know why the characters wanted the gate open before anything had happened, and
 will not like any answer that is true.)*
 

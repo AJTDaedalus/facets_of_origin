@@ -211,3 +211,59 @@ def test_trait_dc_missing_trait_is_reported():
 
 def test_trait_dc_data_agrees():
     assert (15, 0) in BC.B["Attendant"]["dc"]
+
+
+# R1.4 (review P1-7, owner QR3): the Nastier variants the cards field are named blocks --
+
+PROMOTED = ["Veteran Bought Sergeant", "Boranis Cousin of 3160", "Veteran Draunel Duelist"]
+
+
+def test_promoted_variants_are_full_blocks_in_data():
+    for name in PROMOTED:
+        assert name in BC.B, name
+        assert name not in BC.NASTIER_OF, name
+        assert BC.PROMOTED[name] in BC.TEXT_NAME.values() or BC.PROMOTED[name] in BC.B
+
+
+def test_promoted_variants_have_blocks_in_the_text():
+    blocks = _blocks()
+    for name in PROMOTED:
+        assert name in blocks, name
+
+
+def test_variant_problems_clean_on_the_module():
+    assert BC.variant_problems(_blocks()) == []
+
+
+def test_variant_missing_block_is_reported():
+    blocks = _blocks()
+    del blocks["Veteran Bought Sergeant"]
+    assert any("Veteran Bought Sergeant: no block" in p for p in BC.variant_problems(blocks))
+
+
+def test_variant_missing_card_line_is_reported():
+    blocks = _blocks()
+    blocks["Boranis Cousin of 3160"] = blocks["Boranis Cousin of 3160"].replace("**Nastier.**", "**Meaner.**")
+    assert any("Boranis Cousin of 3160: no Nastier line" in p for p in BC.variant_problems(blocks))
+
+
+def test_base_nastier_must_point_to_the_variant():
+    blocks = _blocks()
+    blocks["Draunel Duelist"] = blocks["Draunel Duelist"].replace("Veteran Draunel Duelist", "a better duelist")
+    assert any("Draunel Duelist: Nastier line does not name Veteran Draunel Duelist" in p
+               for p in BC.variant_problems(blocks))
+
+
+def test_base_nastier_must_not_reprint_the_variant_numbers():
+    blocks = _blocks()
+    blocks["Bought Sergeant"] = blocks["Bought Sergeant"].replace(
+        "**Nastier.**", "**Nastier.** CR 4 (XP 1,100), 78 HP (12d8 + 24).")
+    assert any("Bought Sergeant: Nastier line reprints numbers" in p for p in BC.variant_problems(blocks))
+
+
+def test_variant_text_numbers_checked_like_any_block(tmp_path):
+    bad = tmp_path / "10.md"
+    bad.write_text(BC.BESTIARY.read_text(encoding="utf-8").replace(
+        "**HP** 78 (12d8 + 24)", "**HP** 80 (12d8 + 24)"), encoding="utf-8")
+    probs = BC.text_problems(bad.read_text(encoding="utf-8"))
+    assert any(p.startswith("Veteran Bought Sergeant: text HP") for p in probs)

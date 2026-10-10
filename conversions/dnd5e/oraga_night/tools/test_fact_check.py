@@ -212,6 +212,47 @@ class TestRequire:
         assert got[0].line == 1
 
 
+# --------------------------------------------------------------------------- rule_copy (R1.2, O36)
+
+class TestRuleCopy:
+    CHK = {"type": "rule_copy", "home": "05", "max": 2,
+           "elements": [r"\bStable\b", r"\bno Death Saving Throws\b",
+                        r"\bwithin 5 (?:feet|ft\.)[^.]{0,80}\baction\b", r"\b1 (?:Hit Point|HP)\b",
+                        r"\blast blow\b"]}
+    FULL = ("- **Down, Not Out.** Dropped by an Uninvited: Unconscious and Stable, no Death\n"
+            "  Saving Throws. Anyone within 5 ft. spends an action and they are up with 1 HP.\n")
+
+    def test_hit_full_restatement_outside_home(self):
+        got = F.check_text(self.FULL, "08_Handouts.md", facts(self.CHK))
+        assert len(got) == 1 and got[0].kind == "rule_copy" and got[0].line == 1
+
+    def test_miss_in_the_home_file(self):
+        assert F.check_text(self.FULL, "05_The_Longest_Night.md", facts(self.CHK)) == []
+
+    def test_miss_pointer_with_local_rule(self):
+        text = ("- **Down, Not Out** (see chapter V). Whoever they drop is Stable, and whoever\n"
+                "  deals the last blow makes a saving throw.\n")
+        assert F.check_text(text, "08_Handouts.md", facts(self.CHK)) == []
+
+    def test_elements_counted_once_each(self):
+        text = "Stable, Stable, Stable and Stable again; 1 HP.\n"
+        assert F.check_text(text, "09_The_Snakes.md", facts(self.CHK)) == []
+
+    def test_elements_split_across_paragraphs_are_not_a_copy(self):
+        text = "Unconscious and Stable, no Death Saving Throws.\n\nWithin 5 feet, an action: 1 HP.\n"
+        assert F.check_text(text, "10_Bestiary.md", facts(self.CHK)) == []
+
+    def test_match_names_the_elements_found(self):
+        got = F.check_text(self.FULL, "10_Bestiary.md", facts(self.CHK))
+        assert got[0].match.startswith("4 of 5 elements")
+
+    def test_needs_elements_and_home(self):
+        with pytest.raises(ValueError):
+            facts({"type": "rule_copy", "home": "05"})
+        with pytest.raises(ValueError):
+            facts({"type": "rule_copy", "elements": ["x"]})
+
+
 # --------------------------------------------------------------------------- loading and validation
 
 class TestFacts:
@@ -235,7 +276,8 @@ class TestFacts:
     def test_shipped_facts_load_and_cover_the_bible(self):
         ids = {f["id"] for f in F.load_facts(F.FACTS)}
         assert {"household", "honor_guards", "retinues", "bought_company", "arrivals",
-                "east_wing_floor", "stairs", "terraces", "room_sizes", "maiven_fate"} <= ids
+                "east_wing_floor", "stairs", "terraces", "room_sizes", "maiven_fate",
+                "down_not_out"} <= ids
 
     def test_shipped_truths_follow_the_rulings(self):
         by = {f["id"]: f for f in F.load_facts(F.FACTS)}
@@ -258,12 +300,19 @@ class TestRealModule:
         got = {(h.fact, h.file[:2]) for h in real}
         for want in [("household", "02"), ("household", "04"), ("honor_guards", "04"),
                      ("honor_guards", "05"), ("bought_company", "05"), ("arrivals", "01"),
-                     ("east_wing_floor", "05"), ("retinues", "10"), ("retinues", "09"),
+                     ("east_wing_floor", "05"),
                      ("maiven_fate", "06"), ("terraces", "04"), ("terraces", "09")]:
             assert want in got, want
 
+    def test_retinues_agree_after_r1_4(self, real):
+        # R1.4 (owner QR3): the Circle and the Church brought four; no hit remains
+        assert [h for h in real if h.fact == "retinues"] == []
+
     def test_no_false_positive_on_ceremony_forty(self, real):
         assert not any(h.fact == "bought_company" and h.file.startswith("04") for h in real)
+
+    def test_down_not_out_has_one_home(self, real):
+        assert [h for h in real if h.fact == "down_not_out"] == []
 
     def test_excluded_files_not_scanned(self, real):
         assert not any(h.file in ("INVENTIONS_5e.md", "STYLE_5e.md") for h in real)

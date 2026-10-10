@@ -59,12 +59,10 @@ secret**: no faction learns of the child unless a player character tells them.
 
 **Midnight rules, one line each** *(chapter V has them in full)*
 
-- **Down, Not Out.** Dropped by an Uninvited or the Attendant, and not their quarry:
-  Unconscious and Stable, no Death Saving Throws. Anyone within 5 ft. spends an action →
-  up with 1 HP. Still down at the end of the next round → the crowd drags them clear and
-  rouses them. First haul-up of the night → Heroic Inspiration. *The last blow on an
-  Uninvited:* DC 15 Strength or Dexterity saving throw at the start of its next turn, or
-  pushed 15 ft. (the DM's direction) and has the Prone condition.
+- **Down, Not Out** (see chapter V, "Down, Not Out"). Nobody an Uninvited or the
+  Attendant drops dies tonight, unless it is an Uninvited's quarry: a companion or the
+  crowd gets them up. Whoever lands the last blow on an Uninvited may be thrown when it
+  returns.
 - **Buying Time.** A Delay die per Uninvited, on the table. Each point = one turn of
   movement lost. A clever trick with the room, the crowd, a door, a lie: the skill that
   fits, DC 13 → 1 Delay (DC 15 the second time; never a third). A Fracture → 2 Delay.
@@ -76,7 +74,9 @@ secret**: no faction learns of the child unless a player character tells them.
   ability check using the skill that fits, DC 13 Idle / 19 Focused; +2 for playing it
   out, +2 for a habit the party has seen (max +4); a repeat has Disadvantage and no
   bonus, never a third time. A success while Focused **breaks its focus** until its next
-  turn (succeed by 5 or more: it loses that turn too). **Fourth broken focus:** it
+  turn (succeed by 5 or more: it loses that turn too). A success while Idle makes the
+  distractor furniture to it for the scene, and doesn't count. Arguing its orders is one
+  more trick. **Fourth broken focus:** it
   wanders off. 0 HP: gone into the shadow. Say its state aloud: *"It's locked on you" /
   "It's drifting."*
 - **Fractures.** Needs one witnessed tell. Action within 30 ft.: an ability check using
@@ -99,7 +99,7 @@ secret**: no faction learns of the child unless a player character tells them.
   falls **or** half are down. The fire clock ticks only on rounds nobody fights or
   talks. Void the contract (with proof, a DC 13 Charisma (Persuasion) check to the sergeant;
   the captain needs no check), buy them out, or outlast them. **The last bell rings after the gate is
-  decided.**
+  decided**, or at the end of Movement VII if no character reached it (ending 3, offstage).
 
 **Table VIII–3: Key DCs**
 

@@ -20,8 +20,8 @@ are the SRD's; the encounter math on every fight card in chapter IX uses the SRD
 three Uninvited are the deliberate exception: they are CR 9 to 11, and they carry a
 trait called **Leashed** that means none of that matters, because tonight they
 cannot be killed. The **Attendant** who came with them is the other exception, in the
-other direction: a boss that can be beaten, and is built to be more than a party can
-out-slug (its block says how the party wins anyway). **Master Vell** is the last
+other direction: a boss that can be beaten, and its block and card S14 say how.
+**Master Vell** is the last
 exception: his numbers are real, set so high that no party of 4th or 5th level drops
 him before midnight, and he is worth no XP.
 
@@ -40,12 +40,10 @@ default, and most of these people would rather be anywhere else.
   midnight it wakes in the gatehouse cell at the start of the next Movement, and
   somebody comes for it (see chapter IV, "The Palace on Alert"); after midnight the crowd
   rule in "Down, Not Out" gets it up sooner.
-- **Down, Not Out.** A creature that one of the Uninvited or the Attendant reduces
-  to 0 Hit Points, and that is not the Uninvited's quarry, is **Unconscious and
-  Stable** (no Death Saving Throws) and is thrown clear. Anyone within 5 feet can
-  take an action to get it back up with 1 Hit Point, and if nobody does, the crowd
-  does within two rounds. The whole rule is printed once, in chapter V ("Midnight
-  Rules"); every block below that uses it says so.
+- **Down, Not Out.** A creature that one of the Uninvited or the Attendant drops, and
+  that is not the Uninvited's quarry, doesn't die: it is thrown clear, and a companion
+  or the crowd gets it up. The rule is printed once, in chapter V ("Down, Not Out");
+  every block below that uses it says so, and adds only what is its own.
 
 **Standard numbers in the text.** DCs follow the ladder in chapter I: **Easy 10 ·
 Standard 13–15 · Hard 18–20 · Very Hard 25.** "Bloodied" means at or below half
@@ -65,14 +63,14 @@ Uninvited speak it too, in turns of phrase two centuries out of fashion.
 |---|---|---|---|
 | The Merchant's Circle | Rhaza Callun (CR 1/4) | Circle Hired Knife (CR 1) | S7, S12 |
 | The Church | Damaris Kovaun (CR 1/2) | Church Warden (CR 1) | S8 |
-| House Draunel | Essar Draunel (CR 3) | Draunel Duelist (CR 1) | S9, S13 |
-| House Boranis | Vorlain Boranis (CR 3), Essin Boranis (CR 2) | Boranis Cousin's Blade (CR 1/2) | S6, S9, S13 |
+| House Draunel | Essar Draunel (CR 3) | Draunel Duelist (CR 1); Veteran Draunel Duelist (CR 2) | S9, S13 |
+| House Boranis | Vorlain Boranis (CR 3), Essin Boranis (CR 2) | Boranis Cousin's Blade (CR 1/2); Boranis Cousin of 3160 (CR 1) | S6, S9, S13 |
 | Phern | Pellin Corro (CR 1/8) | Phern Bodyguard (CR 1) | S11 |
 | The Thenya *(not a snake)* | Maiven Nolonaire (CR 3) | Thenya Border Slinger (CR 1/2) | S10 |
 | The palace | — | Boranis Honor Guard (CR 2) | S4, S10 |
 | The feud | — | Feuding Kinsman (CR 1/8) | S1 |
 | Tavva's crew | Tavva (CR 2) | Gallery Knife (CR 1/4) | S2, S5 |
-| The Bought | Bought Captain (CR 4), Bought Sergeant (CR 2) | Bought Blade (CR 1/2) | S3 |
+| The Bought | Bought Captain (CR 4), Veteran Bought Sergeant (CR 4) at the gate, Bought Sergeant (CR 2) | Bought Blade (CR 1/2) | S3 |
 | The city | — | Sect Guard (CR 1/8) | S3 (its last ending) |
 | The Uninvited | The Wept (CR 11), The Radiant (CR 10), The Hollow (CR 9) | The Attendant (CR 8 Focused) | Chapter V, S14 |
 
@@ -235,12 +233,14 @@ tonight gets no bonus and has Disadvantage; the same trick never works a third t
 Its habits: *it stares at worked crystal and light; it keeps a cup and a cloak ready
 for a master who isn't there; it follows music that changes.* A success against it while
 it is Focused **breaks its focus** until the start of its next turn; on a success by 5 or
-more it loses that turn as well. A success while it is Idle means it does nothing on
-its next turn, but doesn't count. On a failure the trick is spent, and a Focused
+more it loses that turn as well. A success while it is Idle makes the distractor
+**furniture** to it for the rest of the scene: it ignores that creature, as if it had never
+interfered, and goes on acting as before. That doesn't count. On a failure the trick is spent, and a Focused
 Attendant attacks the distractor next. The **fourth** time its focus is broken
 tonight, it wanders off: out of the fight, standing at a window, watching the fires.
-That is a win. *(The full rule, the natural 20, and how to hint at all of this: card
-S14.)*
+That is a win. An argument that what the party is doing is not, strictly, interrupting
+the three is one more trick, under these same rules. *(The full rule, the natural 20, and
+how to hint at all of this: card S14.)*
 
 ***Clears the Way.*** Once each round, if it hasn't lost its turn to a distraction and
 no enemy is within 5 feet of it, the Attendant removes 1 Delay from one Uninvited in
@@ -291,8 +291,8 @@ looks round, briefly, for the master it is supposed to have.
 > looks at it, and then it comes for whoever that one was looking at.
 > **Breaks.** Not from fear or pain. Its focus broken four times, or 0 Hit Points,
 > and it is gone. An argument that what the party is doing is not, strictly, interrupting the
-> three is a distraction like any other (an Intelligence (Investigation) or Charisma
-> (Persuasion) check against the distraction DC; card S14).
+> three is a distraction like any other (*Can Be Distracted*): it breaks a focus, or makes
+> the arguer furniture, and never ends the fight by itself.
 > **Nastier.** It is already Focused when the party first draws its attention at
 > midnight.
 > *Made, not born, and in the service of the Uninvited's master; it came through with
@@ -344,12 +344,61 @@ blade uses this before it uses steel, and only somewhere a guard can't see.
 > **Breaks.** On Essin's word, at once. Without Essin, when half the cousins are down
 > or the fight has drawn a crowd; a Boranis seen brawling at his own chief's ball is
 > the thing they are here to prevent.
-> **Nastier.** These are the cousins who were there in 3160: CR 1 (XP 200), 33 HP
-> (6d8 + 6), and a Multiattack of two Longsword attacks.
+> **Nastier.** The cousins who were there in 3160: use the **Boranis Cousin of 3160**
+> block.
 > *A Cousin's Blade is a Boranis by blood, one of the kin who stood with Vorlain in
 > the missing year, not a sword bought for the season. House Boranis hired none, and
 > that stays true. The chain shirt is worn under a festival coat. Cast: chapter VII,
 > Vorlain and Essin. Cards: S6, S9, S13.*
+
+---
+
+### Boranis Cousin of 3160
+*Medium Humanoid (Human), Neutral*
+
+**AC** 14 · **Initiative** +1 (11)
+**HP** 33 (6d8 + 6)
+**Speed** 30 ft.
+
+| | STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|---|
+| Score | 14 | 13 | 12 | 10 | 10 | 12 |
+| Mod | +2 | +1 | +1 | +0 | +0 | +1 |
+| Save | +2 | +1 | +1 | +0 | +0 | +1 |
+
+**Skills** Athletics +4, Intimidation +3
+**Gear** Chain Shirt
+**Senses** Passive Perception 10
+**Languages** Common
+**CR** 1 (XP 200; PB +2)
+
+**Traits**
+
+***Essin's Word.*** While Essin Boranis is within 60 feet and can be heard, the
+cousin doesn't break, and it stops fighting the moment Essin tells it to.
+
+**Actions**
+
+***Multiattack.*** The cousin makes two Longsword attacks.
+
+***Longsword.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 6 (1d8 + 2) Slashing
+damage.
+
+***A Quiet Word.*** *Melee Attack Roll:* +4, reach 5 ft. *Hit:* 3 (1 + 2)
+Bludgeoning damage, and the target has the Grappled condition (escape DC 12). The
+cousin uses this before it uses steel, and only somewhere a guard can't see.
+
+> **Wants.** Vorlain safe, sober and unrecorded; the missing year left buried; the
+> house's name out of anybody's mouth.
+> **Tells.** Stands a few paces off Vorlain, never quite with him, and closes a step
+> whenever a Draunel laughs. Admires a character's mask from the side nearest Vorlain,
+> then invites them, very warmly, to take the air on the terraces.
+> **Breaks.** On Essin's word, at once. Without Essin, when half the cousins are down
+> or the fight has drawn a crowd.
+> **Nastier.** Without Essin, they break only when the fight has drawn a crowd, not
+> when half of them are down.
+> *The cousins who were there in 3160, the missing year. Everything in the Boranis
+> Cousin's Blade's note holds for them. Cards: S6, S9.*
 
 ---
 
@@ -593,8 +642,7 @@ miss.
 > offering terms out loud, still fighting. It surrenders the field the moment the
 > contract is void (payment withdrawn, terms broken by the employer, or the named
 > target gone), says so, and expects to be believed.
-> **Nastier.** A veteran sergeant: CR 4 (XP 1,100), 78 HP (12d8 + 24), Strength 17
-> (+5 to hit, 7 (1d8 + 3) Slashing damage), three Company Blade attacks, and Hold the Terms recharges each time a Blade falls.
+> **Nastier.** A veteran holds the gate: use the **Veteran Bought Sergeant** block.
 > *One per four Blades; four in Rekuzan. Card: S3.*
 
 ---
@@ -651,9 +699,9 @@ another warden within 5 feet of it. *Response:* The attack roll has Disadvantage
 > told it. Lamplight under a study door that is supposed to be dark.
 > **Breaks.** When the Prelate calls them off, or when two are down. A warden who
 > breaks keeps hold of whatever it is carrying if it can.
-> **Nastier.** A fourth warden is already inside the room, and has already found
-> something.
-> *Kovaun brought three. Card: S8.*
+> **Nastier.** They don't break when two are down; only the Prelate's word stops
+> them.
+> *Kovaun brought four. Card: S8.*
 
 ---
 
@@ -704,10 +752,10 @@ Advantage against.
 > **Breaks.** On Callun's word. Without it, when the first knife is Bloodied; they
 > were hired for pressure, not for this. A knife that breaks drops whatever it has
 > taken and walks back into the crowd like a guest.
-> **Nastier.** The Circle paid for a fourth, and he has been in the service run
-> all night.
+> **Nastier.** They don't break when the first knife is Bloodied; they break when
+> half of them are down.
 > *The armor is worn under a plain good coat. Every great house hired extra swords this season; these are the Circle's share.
-> Cards: S7, S12.*
+> The Circle brought four. Cards: S7, S12.*
 
 ---
 ### Damaris Kovaun
@@ -761,7 +809,8 @@ to move up to half its Speed and make one Mace attack or use Seize for Questioni
 > **Breaks.** She never fights to win. She calls her wardens off the moment a fight
 > would be seen, the moment she has what she came for, or the moment someone gives
 > her an honest judgment she can file. She pays for it.
-> **Nastier.** She has already sent word, and a fourth warden is on the way.
+> **Nastier.** She has already sent word: on card S8 the lock clock starts with one
+> segment filled.
 > *A promise the Prelate makes in the Church's name is kept. Cast: chapter VII. Card: S8.*
 
 ---
@@ -817,7 +866,7 @@ attack roll. *Response:* The duelist makes one Rapier attack against it.
 > they can't fight past), when Lord Draunel withdraws them, or the first time one of
 > them takes damage; duelists fight for honor, and honor bleeds first.
 > **Nastier.** The duelist has fought three of these this season and won them all:
-> CR 2 (XP 450), 44 HP (8d8 + 8), two Rapier attacks and Provocation.
+> use the **Veteran Draunel Duelist** block.
 > *Cards: S9, S13.*
 
 ---
@@ -1667,6 +1716,120 @@ damage.
 > window.
 > *In a hall full of knives worn as dress, a sling is the one weapon nobody at this
 > ball wears for show. Two or three came with the delegation. Card: S10.*
+
+---
+
+### Veteran Bought Sergeant
+*The Sergeant-at-Arms who holds the gate.*
+
+*Medium Humanoid (Human), Lawful Neutral*
+
+**AC** 17 · **Initiative** +2 (12)
+**HP** 78 (12d8 + 24)
+**Speed** 30 ft.
+
+| | STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|---|
+| Score | 17 | 14 | 14 | 12 | 13 | 13 |
+| Mod | +3 | +2 | +2 | +1 | +1 | +1 |
+| Save | +5 | +2 | +4 | +1 | +1 | +1 |
+
+**Skills** Insight +3, Perception +3, Persuasion +3
+**Gear** Chain Shirt, Shield
+**Senses** Passive Perception 13
+**Languages** Common
+**CR** 4 (XP 1,100; PB +2)
+
+**Actions**
+
+***Multiattack.*** The sergeant makes three Company Blade attacks.
+
+***Company Blade.*** *Melee Attack Roll:* +5, reach 5 ft. *Hit:* 7 (1d8 + 3)
+Slashing damage. Drawn second; the contract case is drawn first.
+
+**Bonus Actions**
+
+***Hold the Terms.*** The sergeant states the contract's boundary aloud — a line on
+the ground it can see within 60 feet. Every Blade that can hear it can use its
+Reaction to move up to half its Speed toward its own side of that line without
+provoking Opportunity Attacks. Until the scene ends, those Blades have Advantage on
+attack rolls against any creature standing on the far side of the line, and none of
+them will cross it. Once the sergeant uses this, it can't again until a Bought Blade
+it can see drops to 0 Hit Points.
+
+**Reactions**
+
+***Parry.*** *Trigger:* The sergeant is hit by a melee attack roll while holding its
+blade. *Response:* It adds 2 to its AC against that attack, possibly causing it to
+miss.
+
+> **Wants.** The contract satisfied or voided. Either one ends the fight.
+> **Tells.** It opens by reading the contract's terms aloud from the case chained to
+> its hip. This is not a bluff; it is how the company works.
+> **Breaks.** When Bloodied it calls the Blades back to the boundary and starts
+> offering terms out loud, still fighting. It surrenders the field the moment the
+> contract is void (payment withdrawn, terms broken by the employer, or the named
+> target gone), says so, and expects to be believed.
+> **Nastier.** It has spoken Hold the Terms before the party reaches the wicket: the
+> line is the gate, and the Blades start the fight with its Advantage against anyone
+> on the court side.
+> *One of the company's four sergeants, the one the contract puts at the gate. Card: S3.*
+
+---
+
+### Veteran Draunel Duelist
+*Medium Humanoid (Human), Neutral*
+
+**AC** 15 · **Initiative** +3 (13)
+**HP** 44 (8d8 + 8)
+**Speed** 30 ft.
+
+| | STR | DEX | CON | INT | WIS | CHA |
+|---|---|---|---|---|---|---|
+| Score | 11 | 16 | 12 | 10 | 11 | 14 |
+| Mod | +0 | +3 | +1 | +0 | +0 | +2 |
+| Save | +0 | +5 | +1 | +0 | +0 | +2 |
+
+**Skills** Acrobatics +5, Intimidation +4, Performance +4
+**Gear** Studded Leather Armor
+**Senses** Passive Perception 10
+**Languages** Common
+**CR** 2 (XP 450; PB +2)
+
+**Traits**
+
+***Seconds and Circles.*** Once a challenge is given and accepted, other Draunel
+duelists will not interfere in it. Outside a declared duel they fight together, and
+cheerfully.
+
+**Actions**
+
+***Multiattack.*** The duelist makes two Rapier attacks and uses Provocation.
+
+***Rapier.*** *Melee Attack Roll:* +5, reach 5 ft. *Hit:* 7 (1d8 + 3) Piercing
+damage.
+
+***Provocation.*** *Wisdom Saving Throw:* DC 12, one creature within 30 feet that can
+hear the duelist. *Failure:* The target has Disadvantage on attack rolls against
+anyone but the duelist until the end of its next turn. A Boranis Cousin's Blade that
+fails this save draws steel, wherever it is standing.
+
+**Reactions**
+
+***Riposte.*** *Trigger:* A creature within 5 feet misses the duelist with a melee
+attack roll. *Response:* The duelist makes one Rapier attack against it.
+
+> **Wants.** A Boranis seen drawing first. Lord Draunel one seat closer, without
+> anyone seeing him want it.
+> **Tells.** Young men laughing a little too near the wrong people. A cup going over
+> at the wine court, and a sentence about the missing year said a little too
+> loudly: the second jostle tonight, and the same duelist.
+> **Breaks.** When the challenge is refused in front of witnesses (which is a loss
+> it can't fight past), when Lord Draunel withdraws it, or the first time it takes
+> damage.
+> **Nastier.** It doesn't break the first time it takes damage, only when it is
+> Bloodied.
+> *It has fought three of these this season and won them all. Cards: S9, S13.*
 
 ---
 

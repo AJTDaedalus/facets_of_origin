@@ -67,23 +67,23 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
 
 ## R1: Rules and exploits
 
-### ☐ R1.1 S14 argue-out (P1-3, P2-15, P2-16; O32)
+### ☑ R1.1 S14 argue-out (P1-3, P2-15, P2-16; O32)
 - **Files:** 09 S14 (Outs, the hint list, Rewards); 10 Attendant (Tells/Breaks); 05 (the
   Attendant bullets); 07 (the Attendant); 08 (DM sheet lines).
 - **Accept:** arguing is a distraction everywhere. The Idle "furniture" rule is stated once
   (in 10) and pointed to from the rest. The Rewards line lists three triggers. Hint 5 obeys the
   Focus rule. The out-slug claim is gone.
 
-### ☐ R1.2 "Down, Not Out" in one home (P2-18; O36)
+### ☑ R1.2 "Down, Not Out" in one home (P2-18; O36)
 - **Files:** 05 (canonical); 08, 09 (two copies) and 10 become pointers plus local rules only.
 - **Accept:** the fact checker's "rule-copy" entry finds no full restatement outside 05.
   S13 says "the round after".
 
-### ☐ R1.3 Grapple, S3 ending, S4 out, the Bought route, the tracker trigger, the bell default (P2-14, P2-17, P2-10, P2-11, P2-12; O37, O40)
+### ☑ R1.3 Grapple, S3 ending, S4 out, the Bought route, the tracker trigger, the bell default (P2-14, P2-17, P2-10, P2-11, P2-12; O37, O40)
 - **Files:** 05 Table V–5, the B12 and branch text; 09 S3, S4 and the tracker; 08 Table VIII–5.
 - **Accept:** each item resolved as in O40/O37. The decisions are logged.
 
-### ☐ R1.4 Nastier as baseline (P1-7) (QR3: four)
+### ☑ R1.4 Nastier as baseline (P1-7) (QR3: four)
 - **Do:**
   - If the retinues become four: change INVENTIONS #1, 09:170, and 10's flavor lines.
   - In both cases, promote the used variants to named blocks (*Veteran Bought Sergeant* CR 4;
@@ -95,7 +95,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
   - The fact checker agrees on the retinue sizes.
   - Every card's budget re-derives.
 
-### ☐ R1.5 Commit R1
+### ☑ R1.5 Commit R1
 
 ---
 

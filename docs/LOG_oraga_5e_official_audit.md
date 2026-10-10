@@ -870,3 +870,72 @@ hits recorded); `fact_check.py --baseline` wrote `T/fact_baseline.json` (24 hits
 - `python T/fact_check.py --check` → OK (0 problems; 24 hits remain).
 - `python T/bestiary_check.py --quiet` → 25 blocks + 3 Nastier, 0 mismatches.
 - `python T/pregen_check.py --quiet` → 5 pregens, 0 issues.
+
+## Review-fix pass — R1
+
+*Worker, 2026-10-10. Tasks R1.1–R1.5 of `docs/TASKS_oraga_5e_review_fixes.md`. Decisions
+O42–O47 in DECISIONS.md; INVENTIONS #1 amended (QR3) and #83 added.*
+
+**R1.1 — S14's argue-out (O32, P1-3, P2-15, P2-16).** Arguing its orders is a distraction
+everywhere: in chapter X's *Can Be Distracted* and Breaks line, in S14 (folded into the first
+out, the separate "Argue its orders" out deleted), and in 07, 08 and `flow.json`. The Idle
+result is stated once, in chapter X: the distractor becomes *furniture* for the rest of the
+scene and the Attendant keeps acting (the old "does nothing on its next turn" lock is gone).
+S14's Results bullet, 05's first Attendant bullet, 08's Page Two line and `flow.json` point
+to it. S14's Objective names two wins; its Rewards line lists three triggers (two XP, one
+Heroic Inspiration; see O45). Hint 5 shows the Focus glance when one of the three next has no
+Delay. Chapter X's out-slug claim is dropped.
+
+**R1.2 — "Down, Not Out" in one home (O36, P2-18).** Test-first: `test_fact_check.py` gained
+`TestRuleCopy` (7 tests: a hit outside home, a miss in home, a pointer with its local rule,
+each element counted once, elements split across paragraphs, the match text, validation)
+and two real-module tests; red (unknown check type), then green. `fact_check.py` gained the
+`rule_copy` check type; `facts.yaml` gained the `down_not_out` fact (8 elements, max 2, plus a
+`forbid` on "round after next"). First run: 08:63 (7 elements), 10:45 (6), 09 S13 (3) and
+S13's "round after next". Fixed: 08's DM-sheet line, 10's mercy bullet and 09's
+after-midnight paragraph are pointers plus their local rule; S13 says "the round after".
+Now 0 hits.
+
+**R1.3 — the rules fixes (O37, O40, QR7).**
+- P2-14: Table V–5 row 6, the grapple works as the Radiant's saving throw; the grip is the
+  1 Delay and points to chapter X's table.
+- P2-17: S3 ending 1 (09 and 05): the Second Clause pulls the Bought back to watch the crowd,
+  and the gate is open; the captain fights on only if the party blocks the search.
+- P2-10: S4's Objective and first out end the fight, not the door (escort back, no
+  expulsion). The out's "(Deception or Persuasion)" is now spelled out, so or_skills drops
+  from 12 to 11.
+- P2-11: ⟨The Bought change sides⟩ gets an in-palace door, a sergeant's runner at the
+  Gatehouse Court (B1) in Movement V; `flow.json` matches.
+- P2-12: the tracker's "second card" list says "Callun's coin refused".
+- O37: the bell default is in 05's Midnight Clock step 8, pointed to from S3, 05's "The last
+  bell", 08 and `flow.json`.
+- QR7: S2 "Make enough noise to lose" and S6 "Shout" are **(no XP)**, and both Rewards lines
+  say so.
+- The flow page was rebuilt (`flow/build_flow_page.py`).
+
+**R1.4 — Nastier as baseline (P1-7, QR3: four).**
+- Retinues: 09 "Who they brought" says four Circle Hired Knives and four Church Wardens.
+  Chapter X's flavor lines say "Kovaun brought four" and "The Circle brought four". S7, S8
+  and S12 no longer call the fourth a Nastier line. INVENTIONS #1 is amended. The fact
+  checker's retinue hits fell 3 → 0.
+- Promoted, not folded (O42): **Veteran Bought Sergeant** (CR 4), **Boranis Cousin of 3160**
+  (CR 1), **Veteran Draunel Duelist** (CR 2), as full blocks in chapter X. Their base blocks'
+  Nastier lines point to them. Table X–1 lists them, with the veteran at the gate for S3.
+- New Nastier dials on six blocks (O43). A real *Nastier* line on S3, S6, S7, S8 and S9
+  (O44). S13's roster and scaling lines are renamed to the veteran block.
+- Budgets re-derived against SRD 5.2.1 for four 4th-level characters (Low 1,000, Moderate
+  1,500, High 2,000). Every base budget is unchanged (S3 1,500; S6 600; S7 800; S8 800; S9
+  1,150; S13 1,350). New: S9 Nastier 1,450.
+- Test-first: `test_bestiary_check.py` gained 8 tests (data, text blocks, `variant_problems`
+  clean, a missing block, a missing card line, a base line that doesn't name the variant, a
+  base line that reprints numbers, a variant's HP checked like any block). Red (8 failed),
+  then green. `bestiary_check.py` now reads 28 blocks + 1 Nastier (was 25 + 3).
+
+**Commands (after R1.4).**
+- `python -m pytest conversions/dnd5e/oraga_night/tools -q` → 294 passed (was 277).
+- `python T/lint_5e.py --check` → OK (0 problems; 80 hard, 48 structure remain; or_skills
+  12 → 11). The lint baseline was not rewritten.
+- `python T/fact_check.py --check` → OK. 21 hits remain: retinues 0, down_not_out 0, and the
+  rest is the R2 worklist. Re-baselined with `--baseline` (24 → 21).
+- `python T/bestiary_check.py --quiet` → 28 blocks + 1 Nastier, 0 mismatches.
+- `python T/pregen_check.py --quiet` → 5 pregens, 0 issues.
