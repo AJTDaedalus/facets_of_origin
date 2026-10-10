@@ -1285,3 +1285,14 @@ Swaps between files are fine as long as the module totals hold. One swap is reco
 - Table I–3 row renamed "The pattern named aloud"; no other file quotes it.
 - One allowlist line was adjusted ("are common", the Handout 3 near-duplicate exemption).
 - Checks: lint --check 0/0, fact_check 0, bestiary 0, pregen 0, pytest 394, flow OK. Re-baselined.
+
+## Review-fix pass — R6.1
+- Re-extracted 21 official books (LMoP, HotDQ, RoT, PotA, OotA OCR, CoS and its Introductory Adventure, SKT, DMG, PHB, DDEX1-1, DDEX2-01, DDEX3-01, DDEX3-06, DDAL04-01/04/05/12/14, DDEP1 and the 3.5 Red Hand of Doom) and both CC BY SRDs (5.1, 5.2.1) with PyMuPDF. The extracts are in the session scratchpad only; nothing official is in the repo.
+- New tool `tools/copyright_scan.py` builds 8-word shingles per sentence (4,979 sentences, 43,641 shingles) and takes `--refs` and `--srd` directories. The (b) rulings are in `tools/copyright_allow.txt` as SHA-1 hashes, with no text. It has 13 tests in `tools/test_copyright_scan.py`, all on synthetic fixtures.
+- First scan: 52 hits, 27 (a) SRD, 18 (b) and 7 (c). Fixes:
+  - The 04 B9 read-aloud cue (CoS phrasing).
+  - The 04 B1 "fails by 5 or more", now "misses by 5 or more".
+  - Four Bestiary uses of "can use its Reaction to move up to half its Speed" (PHB Maneuvering Attack wording), now "can, as a Reaction, move up to half its Speed". Both copies of the Blades' line stay identical.
+  - The Wept's Strength Like a Fact Hit line, now in the SRD 5.2.1 "If the target is a Large or smaller creature" form.
+- Final: 28 (a), 18 (b), 0 (c). Report: `docs/audit_oraga_5e_official/r61_copyright.md`.
+- Checks: copyright_scan --check 0 (c); lint --check 0; fact_check --check 0; bestiary 0; pregen 0; pytest 407.

@@ -1,0 +1,16 @@
+# Class (b) rulings for copyright_scan.py (review-fix task R6.1).
+# Format: sha1 of the normalized hit run | module file | reason.
+# Hashes only, never the text: no official wording is stored here.
+# Report: docs/audit_oraga_5e_official/r61_copyright.md
+719a63120494c853f8cb94c9ab5bc8a220e3c112 | 05_The_Longest_Night.md | (b) save call: DC plus two ability names
+719a63120494c853f8cb94c9ab5bc8a220e3c112 | 10_Bestiary.md | (b) save call: DC plus two ability names
+62d21cc8835373398caef063296fb84f89a3b9b0 | 09_The_Snakes.md | (b) check call: DC, ability and skill
+638ed625f404163cbe30c7db84feeafe44aed797 | 10_Bestiary.md | (b) save call: DC and ability
+5c19b30985ee511d75774d43e83f2d2442332a85 | 10_Bestiary.md | (b) duration grammar ("until the end of its next turn" is SRD)
+c5e1d10c0be60ec3e3051fdc7920b90e96f795ef | 10_Bestiary.md | (b) Advantage grammar; the SRD has the same phrase ending "that"
+44010d92033e763230aec2ab516b96b7f39ebeb4 | 10_Bestiary.md | (b) SRD Legendary Resistance with "he" for "it"
+b7f9dcd1a51f65deed62ef63d9e16640aa6fff9c | 10_Bestiary.md | (b) SRD Legendary Resistance with "she" for "it"
+70f8cbf4677373adca8d1b9dbd39afecc8400286 | 10_Bestiary.md | (b) SRD Regeneration timing with "his" for "its"
+fa72be8a2f47c27b3a2e73cae37521d0750e2d11 | 10_Bestiary.md | (b) SRD Regeneration timing with "her" for "its"
+f94faf391764e2dd19aeec6b6b9ac08df212b559 | 10_Bestiary.md | (b) save call plus a push; the SRD has "pushed 10 feet away"
+1f72168e91890fd91dc4134b435ab050d143b7d1 | 10_Bestiary.md | (b) SRD teleport grammar with "he" for "it"

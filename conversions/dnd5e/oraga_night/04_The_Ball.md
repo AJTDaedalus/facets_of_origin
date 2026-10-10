@@ -197,7 +197,7 @@ long, and the custom of masks was made for this. Passing on a borrowed card is a
 DC 13 Charisma (Deception) check; a card with the bearer's own name wrongly on it
 needs a DC 18 Charisma (Deception) check. A miss by 4 or less gets them in, and Corval will remember the face.)*
 
-If the check fails by 5 or more, Corval hands the card back with perfect courtesy and
+If the check misses by 5 or more, Corval hands the card back with perfect courtesy and
 does not let its bearer through. The character can still slip in with the staff hires
 through the kitchens (B10), and Corval will remember the face.
 
@@ -341,7 +341,7 @@ chasing the Root has a very good reason to reach that slate first.*
 
 **B9. The East Wing — the Living Quarters.**
 
-**Read this when the characters first come within sight of the east wing doors:**
+**Read this when the east wing doors come into view:**
 
 > *Double doors, closed, with guards on them who are plainly not there for show. The corridor in front of them has been cleared of furniture.
 > Nobody is walking down it.*

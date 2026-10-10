@@ -237,7 +237,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
 
 ## R6: Verification and push
 
-### ☐ R6.1 Copyright phrasing check
+### ☑ R6.1 Copyright phrasing check
 - **Do:**
   - Re-extract the official modules from `/mnt/e/books/DandD 5E/` with PyMuPDF (into the
     scratchpad, never the repo).

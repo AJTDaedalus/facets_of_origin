@@ -595,8 +595,8 @@ the Line.
 ***Very Good Sword.*** *Melee Attack Roll:* +5, reach 5 ft. *Hit:* 8 (1d10 + 3)
 Slashing damage. It would rather not draw it.
 
-***Command the Line.*** One Blade the captain can see within 60 feet can use its
-Reaction to move up to half its Speed and make one attack.
+***Command the Line.*** One Blade the captain can see within 60 feet can, as a
+Reaction, move up to half its Speed and make one attack.
 
 **Reactions**
 
@@ -651,8 +651,8 @@ Slashing damage. Drawn second; the contract case is drawn first.
 **Bonus Actions**
 
 ***Hold the Terms (1/Day).*** The sergeant states the contract's boundary aloud —
-a line on the ground it can see within 60 feet. Every Blade that can hear it can use
-its Reaction to move up to half its Speed toward its own side of that line without
+a line on the ground it can see within 60 feet. Every Blade that can hear it can, as
+a Reaction, move up to half its Speed toward its own side of that line without
 provoking Opportunity Attacks. Until the scene ends, those Blades have Advantage on
 attack rolls against any creature standing on the far side of the line, and none of
 them will cross it.
@@ -825,8 +825,8 @@ against her or against anyone she names.
 
 **Bonus Actions**
 
-***Direct the Wardens.*** One Church Warden that can hear her can use its Reaction
-to move up to half its Speed and make one Mace attack or use Seize for Questioning.
+***Direct the Wardens.*** One Church Warden that can hear her can, as a Reaction,
+move up to half its Speed and make one Mace attack or use Seize for Questioning.
 
 > **Wants.** To file Raunu Boranis under something.
 > **Tells.** Goes very quiet at a
@@ -1768,8 +1768,8 @@ Slashing damage. Drawn second; the contract case is drawn first.
 **Bonus Actions**
 
 ***Hold the Terms.*** The sergeant states the contract's boundary aloud — a line on
-the ground it can see within 60 feet. Every Blade that can hear it can use its
-Reaction to move up to half its Speed toward its own side of that line without
+the ground it can see within 60 feet. Every Blade that can hear it can, as a
+Reaction, move up to half its Speed toward its own side of that line without
 provoking Opportunity Attacks. Until the scene ends, those Blades have Advantage on
 attack rolls against any creature standing on the far side of the line, and none of
 them will cross it. Once the sergeant uses this, it can't again until a Bought Blade
@@ -1997,7 +1997,8 @@ before Raunu falls has earned ⟨They save Raunu⟩, chapter V.)*
 ***Multiattack.*** The Wept makes two Strength Like a Fact attacks.
 
 ***Strength Like a Fact.*** *Melee Attack Roll:* +10, reach 5 ft. *Hit:* 28 (4d10 +
-6) Bludgeoning damage, and a Large or smaller target is pushed up to 10 feet away.
+6) Bludgeoning damage. If the target is a Large or smaller creature, it is pushed up
+to 10 feet away.
 
 **Bonus Actions**
 
