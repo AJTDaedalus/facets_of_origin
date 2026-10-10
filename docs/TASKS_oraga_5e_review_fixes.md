@@ -9,7 +9,7 @@ and proposed fixes. Locate everything by quote, because line numbers drift.*
 
 **SA (standard acceptance) for every task that edits `M/`:**
 1. `python T/lint_5e.py --check`
-2. `python T/fact_check.py` (from R0 onward)
+2. `python T/fact_check.py --check` (from R0 onward; plain `fact_check.py` lists every remaining hit)
 3. `python T/bestiary_check.py` and `python T/pregen_check.py`
 4. `python -m pytest T -q`
 5. Rebuild the flow page if `flow.json` changed.
@@ -25,7 +25,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
 
 ## R0: Tooling that sees continuity (TDD)
 
-### ☐ R0.1 `facts.yaml` and `fact_check.py`
+### ☑ R0.1 `facts.yaml` and `fact_check.py`
 - **Do:**
   - Write `T/test_fact_check.py` first, with fixtures for each kind of contradiction: a count, a
     floor, a Movement and a size.
@@ -43,7 +43,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
   - Paste that list into the LOG. It is the R2 worklist.
 - **Time:** 3 × 30 min.
 
-### ☐ R0.2 Linter upgrades
+### ☑ R0.2 Linter upgrades
 - **Do** (test-first, at least 3 tests per new rule):
   - unwrap paragraphs before the regex rules (fixes the wrapped-DC blind spot);
   - make the allowlist rule-scoped (`file|rule|text|reason`) and migrate the existing entries;
@@ -60,7 +60,7 @@ Commit once per phase, staging specific files. Push only at R6, after the privat
     baseline.
 - **Time:** 3 × 30 min.
 
-### ☐ R0.3 Commit R0
+### ☑ R0.3 Commit R0
 - **Do:** commit "Oraga 5e review-fix pass: R0 continuity bible, fact checker, linter upgrades".
 
 ---

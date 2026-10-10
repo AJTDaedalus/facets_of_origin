@@ -1,0 +1,233 @@
+# Continuity bible for Oraga Night, 5e edition (DESIGN_oraga_5e_review_fixes §2, task R0.1).
+#
+# One entry per load-bearing fact. `truth` is the TARGET truth after the owner rulings of
+# 2026-10-08 (QR1–QR7) and the Planner decisions O28 and O32–O40. It is not a description
+# of the current text: the first run of tools/fact_check.py lists every place the text
+# still disagrees, and that list is the R2 worklist.
+#
+# `phrases` are the forms that express the fact (for a human reader; the checker does not
+# need them). `checks` are what tools/fact_check.py runs:
+#
+#   forbid    pattern                     a phrasing that contradicts the fact
+#   sentence  all: [regex, ...]           every regex in one sentence (scope: block = paragraph
+#                                         or table row) contradicts the fact
+#   count     noun, window, allowed       a number within `window` words before `noun` must be
+#                                         one of `allowed` (noun windows avoid false positives)
+#   size      subject, window, allowed    a measurement "N feet DIM" / "N-foot DIM" within
+#                                         `window` characters after `subject` must be listed
+#                                         for its DIM (dims not listed are ignored)
+#   movement  subject, from               a Movement reference in the same sentence (table row)
+#                                         as `subject` must not start before Movement `from`
+#   require   pattern, file, anchor       `pattern` must appear in `file`; reported at `anchor`
+#
+# Every check takes optional `files` (basename prefixes it applies to), `unless` (a regex
+# that, found in the same sentence/block, cancels the hit) and `why`.
+# Not scanned: INVENTIONS_5e.md and STYLE_5e.md (the same exclusions as the linter).
+
+version: 1
+
+facts:
+
+  - id: household
+    truth: >-
+      The household was sixty. Twenty-two stayed (about two dozen). The staff was cut by
+      nearly two-thirds. Nobody prints "four-fold" or a derived count of servants let go.
+    source: owner QR1 (2026-10-08); O31
+    phrases: ["The household was sixty", "Twenty-two", "two dozen staff", "cut by nearly two-thirds"]
+    checks:
+      - type: forbid
+        pattern: '\bfour-?fold\b'
+        why: QR1 — say "cut by nearly two-thirds"; sixty cut four-fold is 15, not 22
+      - type: count
+        noun: '\b(?:servants(?! of)|household|staff)\b'
+        window: 3
+        allowed: [60, 22, 24]
+        why: QR1 — the household numbers are sixty, twenty-two, about two dozen
+
+  - id: honor_guards
+    truth: >-
+      House Boranis has nine honor guards. At midnight two of them hold the east-wing doors
+      (B9) and seven go to the dais. Positions in Movements I–V are set by the deployment
+      table R2.2 adds to chapter VIII; until then only the midnight split is fixed. S4's
+      "two guards" are "the two nearest".
+    source: owner QR2 (2026-10-08)
+    phrases: ["nine honor guards", "seven go to the dais", "two of the nine at the east-wing doors"]
+    positions:
+      midnight: seven on the dais; two at the east-wing doors (B9)
+      movements_I_to_V: open — R2.2 writes the table in chapter VIII
+    checks:
+      - type: sentence
+        scope: block
+        all: ['\bnine\b(?!\s+people)', '\bdais\b']
+        unless: '\bseven\b'
+        why: QR2 — seven go to the dais; two of the nine stay at the east-wing doors
+      - type: forbid
+        pattern: '\bonly guards left are dying on the dais\b'
+        why: QR2 — two guards are still at the east-wing doors
+      - type: sentence
+        all: ['\bS4\b', '\btwo guards\b']
+        unless: '\bnearest\b'
+        why: QR2 / P1-2 — S4's guards are "the two nearest" of the nine
+
+  - id: retinues
+    truth: >-
+      Each faction brought a retinue inside the ball. The Merchant's Circle brought four
+      Circle Hired Knives and the Church four Church Wardens (QR3). The others keep their
+      INVENTIONS #1 sizes: Draunel three Duelists, Boranis three Cousin's Blades, Phern two
+      or three Bodyguards, the Thenya two or three Border Slingers.
+    source: owner QR3 (2026-10-08); INVENTIONS #1
+    sizes: {circle: 4, church: 4, draunel: 3, boranis: 3, phern: "2–3", thenya: "2–3"}
+    phrases: ["four **Circle Hired Knives**", "four **Church Wardens**", "Kovaun brought four"]
+    checks:
+      - type: sentence
+        all: ['\bbrought\b', '\b(?:two|three|five|2|3|5)\s+(?:\*\*)?(?:Circle Hired Knives|Church Wardens)\b']
+        why: QR3 — the Circle and the Church each brought four
+      - type: forbid
+        pattern: '\b(?:Kovaun|Callun|the Circle|the Church) brought (?:two|three|five)\b'
+        why: QR3 — the Circle and the Church each brought four
+      - type: sentence
+        all: ['\bbrought\b', '\b(?:two|four|five)\s+(?:\*\*)?(?:Draunel Duelists|Boranis Cousin.s Blades)\b']
+        why: INVENTIONS #1 — Draunel and Boranis brought three each
+
+  - id: bought_company
+    truth: >-
+      The Bought company is 16 Bought Blades, 4 sergeants and 1 captain: 21 in all, so
+      "twenty blades" and "twenty sworn witnesses". Four Blades hold the gatehouse and
+      twelve the perimeter.
+    source: owner QR4 (2026-10-08); 05 B12 "The contract"
+    size: {blades: 16, sergeants: 4, captain: 1, total: 21}
+    phrases: ["sixteen **Bought Blades**, four sergeants and a captain", "twenty blades", "twenty sworn witnesses"]
+    checks:
+      - type: sentence
+        all: ['\bforty (?:blades|sworn witnesses)\b']
+        unless: '\bshould field\b'
+        why: QR4 — the company is 21, so "twenty"; (the honor guard's "should field forty blades" is a different claim)
+      - type: count
+        noun: '\b(?:\*\*)?Bought Blades\b'
+        window: 2
+        allowed: [16, 4, 12]
+        why: QR4 — sixteen Blades (four at the gatehouse, twelve on the perimeter)
+
+  - id: arrivals
+    truth: >-
+      The Attendant has been at the ball since Movement I; it came in with the early guests
+      (O35). The Uninvited arrive with the Movement III crush, so no Uninvited tell or
+      sighting comes before Movement III. Master Vell is in the receiving line in Movement I
+      and nobody sees him arrive. The Bought walked into the trade district at dusk and hold
+      the gatehouse from the first bell of midnight.
+    source: O35; 07 "They arrive with the Movement III crush"; 04 Movement I (Vell); 10 Bought Blade
+    movements: {attendant: I, uninvited: III, vell: I, bought: "dusk; the gate from the first bell of midnight"}
+    phrases: ["It came in with the early guests", "They arrive with the Movement III crush"]
+    checks:
+      - type: sentence
+        all: ['\bat midnight\b', '\bcomes? through with the Uninvited\b']
+        why: O35 — the Attendant has been at the ball since Movement I
+      - type: movement
+        subject: '\b(?:the )?(?:Uninvited|Wept|Radiant|Hollow)\b'
+        from: III
+        why: the Uninvited arrive with the Movement III crush; Table V–6's tells start at Movement III
+      - type: sentence
+        all: ['\bVell\b', '\barriv\w* (?:at midnight|with the Uninvited)\b']
+        why: Vell is at the ball from Movement I
+      - type: sentence
+        all: ['\bBought\b', '\barriv\w* (?:in|during) Movement (?:I|II|III|IV|V)\b']
+        why: the Bought are outside the walls until the bells of midnight
+
+  - id: east_wing_floor
+    truth: >-
+      The Crystal Court (B2) is at ground level. The east wing (B9) is upstairs, at gallery
+      level (12 feet up): the Court's east doors open on a stair that rises 12 feet, and
+      O28's cleared corridor (10 × 60 feet) runs at gallery level to the wing's double doors.
+      B8 is in the dark wing on the second floor.
+    source: O33
+    floors: {B2: ground, B3: "gallery, 12 ft", B8: "second floor (dark wing)", B9: "gallery level, 12 ft"}
+    phrases: ["second floor, dark wing", "a stair that rises 12 feet", "at gallery level"]
+    checks:
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: '(?:east doors|east wing)[^\n]{0,300}?(?:rises 12 feet|12 feet up|gallery level)'
+        anchor: '\*The east wing \(B9\)\*'
+        why: O33 — General Features must say the wing is up a 12-foot stair, at gallery level
+      - type: sentence
+        all: ['\beast wing\b', '\b(?:ground floor|ground level|same level as the Court)\b']
+        unless: '\bCourt is at ground level\b'
+        why: O33 — the east wing is upstairs
+
+  - id: stairs
+    truth: >-
+      The east wing's private stair IS the garden stair: it runs down the wing's outer wall
+      to the upper terrace. A separate stair rises 12 feet from the Court's east doors to the
+      gallery-level corridor. Each terrace has a stair at either end.
+    source: O33; O28
+    phrases: ["the private stair (the garden stair)", "down the garden stair"]
+    checks:
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: '(?:private stair[^.\n]{0,60}garden stair|garden stair[^.\n]{0,60}private stair)'
+        anchor: 'private stair to the garden'
+        why: O33 — name the private stair as the garden stair where the wing is described
+
+  - id: terraces
+    truth: >-
+      Three garden terraces (B5), each about 40 feet deep and 120 feet wide, step down from
+      the Court's garden doors with 10-foot balustrade drops; then about 150 feet of lower
+      garden to the river gate. S9's duel is on the upper terrace, watched from the rail of
+      the Court's garden walk above it. Vell at the river gate is "down at the river gate",
+      not "two terraces below".
+    source: O28; O34
+    phrases: ["below the rail of the Court's garden walk", "down at the river gate"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\btwo terraces below\b'
+        why: O34 — the river gate is 150 feet past the lowest terrace; say "down at the river gate"
+      - type: forbid
+        pattern: '\brail of the upper terrace\b'
+        why: O34 — the crowd watches from the rail of the Court's garden walk, above the upper terrace
+
+  - id: room_sizes
+    truth: >-
+      O28: the Crystal Court is about 140 × 80 feet under a 50-foot vault; main doors 10 feet
+      wide; dais 3 feet high and 30 feet across; gallery rails 12 feet up. Terraces 40 feet
+      deep, 120 feet wide, 10-foot drops. East wing: cleared corridor 10 × 60 feet; inside,
+      a 10 × 100-foot corridor, rooms 20–30 feet across. Service run 5 feet wide.
+    source: O28
+    phrases: ["about 140 feet long and 80 feet wide", "rails 12 feet above the floor"]
+    checks:
+      - type: size
+        subject: '\bCrystal Court\b'
+        window: 90
+        allowed: {long: [140], wide: [80], high: [50]}
+        why: O28 Court size
+      - type: size
+        subject: '\b(?:garden )?terraces?\b'
+        window: 70
+        allowed: {deep: [40], wide: [120], drop: [10]}
+        why: O28 terrace size
+      - type: size
+        subject: '\b(?:gallery|galleries)\b'
+        window: 80
+        allowed: {above: [12], drop: [12], up: [12]}
+        why: O28 gallery rails 12 feet up
+      - type: size
+        subject: '\b(?:cleared )?corridor\b'
+        window: 50
+        allowed: {wide: [10], long: [60, 100]}
+        why: O28 east-wing corridors
+      - type: size
+        subject: '\bservice (?:run|passage)s?\b'
+        window: 40
+        allowed: {wide: [5]}
+        why: O28 service run
+
+  - id: maiven_fate
+    truth: >-
+      By default Maiven Nolonaire dies in the east-wing corridor at midnight, unless somebody
+      competent went with her. Any aftermath line about her is conditional on her living.
+    source: 05 Table V–7 / 08 DM sheet ("Dies there unless somebody competent goes with her"); P2-5
+    phrases: ["She dies there, unless somebody competent went with her", "If Maiven lived"]
+    checks:
+      - type: sentence
+        files: ["06"]
+        all: ['\bMaiven\b', '\bwill not leave\b']
+        unless: '\b(?:[Ii]f (?:Maiven|she) (?:lived|survived|lives))\b'
+        why: P2-5 — she dies by default; make the aftermath line conditional

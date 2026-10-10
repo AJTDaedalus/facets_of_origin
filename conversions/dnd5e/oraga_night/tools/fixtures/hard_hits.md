@@ -16,6 +16,13 @@ A rumour runs through the hall.
 Three grey masks remain.
 **Designer's note.** This is why.
 It answers any direct question.
+Bare steel *voids* the scene.
+Make a DC 13 Wisdom (Insight or Perception) check.
+<!-- a leftover review comment -->
+See 09_The_Snakes.md for the cards.
+It played that way in simulation.
+For players who know the Facets edition.
+The memo arrives at dusk.
 
 Read this when the masks come off:
 

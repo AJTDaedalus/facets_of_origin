@@ -1,32 +1,35 @@
-# Whitelist for lint_5e.py: one entry per line, `file|quoted text|reason`.
-# `file` is a module file's basename, or * for any file. A line that contains the quoted
-# text is exempt from every lint rule. Add a reason a reviewer can check.
+# Whitelist for lint_5e.py: one entry per line, `file|rule|quoted text|reason`.
+# `file` is a module file's basename, or * for any file. `rule` is a rule family (bare_dc,
+# designer_we, trigger_format, ...) or a rule id; the entry exempts only hits of that rule,
+# and only where the quoted text overlaps the hit. `*` exempts every rule and is reserved
+# for fixed canonical text (Handout 1). Add a reason a reviewer can check.
+# (R0.2, 2026-10-10: entries migrated from the old all-rules `file|text|reason` form.)
 
 # Handout 1: the invitation text is canonical (08 says "The text is canonical"). Never edit.
-08_Handouts.md|It is my great honor to invite you to the seat of our people, the Palace Boranis,|Handout 1 canonical invitation text
-08_Handouts.md|for a night of revelry in the bounty bestowed upon our lands on the last night of|Handout 1 canonical invitation text
-08_Handouts.md|Oraga. I look forward to seeing you all and sharing food, drink, and revelry with|Handout 1 canonical invitation text
-08_Handouts.md|you among the spirits as we look forward to a bright future.|Handout 1 canonical invitation text
-08_Handouts.md|*To My Esteemed Guest,*|Handout 1 canonical invitation text
-08_Handouts.md|*Given Under My Hand,*|Handout 1 canonical invitation text
+08_Handouts.md|*|It is my great honor to invite you to the seat of our people, the Palace Boranis,|Handout 1 canonical invitation text
+08_Handouts.md|*|for a night of revelry in the bounty bestowed upon our lands on the last night of|Handout 1 canonical invitation text
+08_Handouts.md|*|Oraga. I look forward to seeing you all and sharing food, drink, and revelry with|Handout 1 canonical invitation text
+08_Handouts.md|*|you among the spirits as we look forward to a bright future.|Handout 1 canonical invitation text
+08_Handouts.md|*|*To My Esteemed Guest,*|Handout 1 canonical invitation text
+08_Handouts.md|*|*Given Under My Hand,*|Handout 1 canonical invitation text
 
 # T4.3 (Phase 4c): checks with no fixed ability. The rule is "an ability check using the
 # skill that fits, DC N" (DESIGN §3 Checks; owner brief for T4.3). The DC is stated, the
 # skill is the player's choice by design, so there is no single Ability (Skill) to print.
-01_Overture.md|using the skill that fits, DC 10.**|approach across station: skill fits the approach (03, 04 say the same)
-03_Masks_and_Agendas.md|the skill that fits, DC 10, instead of the usual 13|approach across station: skill fits the approach
-04_The_Ball.md|ability check using the skill that fits, DC 10, where it would|approach across station: skill fits the approach
-05_The_Longest_Night.md|DC 13, or DC 15 if the same trick has already worked on that Uninvited tonight|room trick: the check is whatever the trick needs (Tables V-2 to V-5 give suggestions)
-05_The_Longest_Night.md|the skill that fits, DC 13 while it is Idle and DC 19 while it is Focused|Attendant distraction: skill fits the trick (card S14)
-08_Handouts.md|fits, DC 13 → 1 Delay (DC 15 the second time; never a third)|DM-sheet compression of the room-trick rule (05)
-08_Handouts.md|ability check using the skill that fits, DC 13 Idle / 19 Focused|DM-sheet compression of the Attendant distraction (S14)
-08_Handouts.md|the skill the words fit, DC 18 with one tell, 15 with two or more|DM-sheet compression of the Fracture rule: skill fits the words (05, 10)
-09_The_Snakes.md|its cup, and so on — against **DC 13 while it is Idle, DC 19 while it is Focused.**|Attendant distraction: the sentence opens "an ability check with the skill that fits the trick"
-10_Bestiary.md|fits it: **DC 13 while it is Idle, DC 19 while it is Focused**|Can Be Distracted: "an ability check with whatever skill fits it" (BESTIARY-8 wording)
+01_Overture.md|bare_dc|using the skill that fits, DC 10.**|approach across station: skill fits the approach (03, 04 say the same)
+03_Masks_and_Agendas.md|bare_dc|the skill that fits, DC 10, instead of the usual 13|approach across station: skill fits the approach
+04_The_Ball.md|bare_dc|ability check using the skill that fits, DC 10, where it would|approach across station: skill fits the approach
+05_The_Longest_Night.md|bare_dc|DC 13, or DC 15 if the same trick has already worked on that Uninvited tonight|room trick: the check is whatever the trick needs (Tables V-2 to V-5 give suggestions)
+05_The_Longest_Night.md|bare_dc|the skill that fits, DC 13 while it is Idle and DC 19 while it is Focused|Attendant distraction: skill fits the trick (card S14)
+08_Handouts.md|bare_dc|fits, DC 13 → 1 Delay (DC 15 the second time; never a third)|DM-sheet compression of the room-trick rule (05)
+08_Handouts.md|bare_dc|ability check using the skill that fits, DC 13 Idle / 19 Focused|DM-sheet compression of the Attendant distraction (S14)
+08_Handouts.md|bare_dc|the skill the words fit, DC 18 with one tell, 15 with two or more|DM-sheet compression of the Fracture rule: skill fits the words (05, 10)
+09_The_Snakes.md|bare_dc|its cup, and so on — against **DC 13 while it is Idle, DC 19 while it is Focused.**|Attendant distraction: the sentence opens "an ability check with the skill that fits the trick"
+10_Bestiary.md|bare_dc|fits it: **DC 13 while it is Idle, DC 19 while it is Focused**|Can Be Distracted: "an ability check with whatever skill fits it" (BESTIARY-8 wording)
 
 # T4.3: SRD 5.2.1 grapple form. "has the Grappled condition (escape DC 12)" is the SRD's own
 # wording (28 uses in the SRD 5.2.1 extract); an escape DC names no ability by design.
-10_Bestiary.md|Grappled condition (escape DC|SRD 5.2.1 "(escape DC N)" grapple form
+10_Bestiary.md|bare_dc|Grappled condition (escape DC|SRD 5.2.1 "(escape DC N)" grapple form
 
 # T7.7: Handout 2 agenda card 3 is canon card text in Lord Draunel's voice; "we" is House Draunel, not a designer.
-08_Handouts.md|out if he misses the taste. Get him to say anything we could later call an|Handout 2 canon agenda card, in-character "we"
+08_Handouts.md|designer_we|out if he misses the taste. Get him to say anything we could later call an|Handout 2 canon agenda card, in-character "we"

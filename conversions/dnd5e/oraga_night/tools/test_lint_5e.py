@@ -210,7 +210,7 @@ class TestConversionTalk:
         assert fam("The light has no visible origin.", "conversion_talk") == []
 
     def test_edge_whitelisted(self):
-        allow = [L.AllowEntry("04_The_Ball.md", "the source of the light", "in-world")]
+        allow = [L.AllowEntry("04_The_Ball.md", "conversion_talk", "the source of the light", "in-world")]
         assert fam("He finds the source of the light.", "conversion_talk", allow=allow) == []
 
 
@@ -309,7 +309,7 @@ class TestGrey:
         assert fam("three gray masks; greyhound", "grey") == []
 
     def test_edge_whitelist(self):
-        allow = [L.AllowEntry("10_Bestiary.md", "grey robes", "INVENTIONS #43")]
+        allow = [L.AllowEntry("10_Bestiary.md", "grey", "grey robes", "INVENTIONS #43")]
         assert fam("in grey robes", "grey", fname="10_Bestiary.md", allow=allow) == []
         assert fam("in grey robes", "grey", fname="04_The_Ball.md", allow=allow) == ["grey"]
 
@@ -339,9 +339,9 @@ class TestAttendantHabit:
 class TestWhitelistFile:
     def test_load_format(self, tmp_path):
         p = tmp_path / "allow.txt"
-        p.write_text("# comment\n\n08_Handouts.md|honor to invite you|Handout 1 is canonical\n")
+        p.write_text("# comment\n\n08_Handouts.md|*|honor to invite you|Handout 1 is canonical\n")
         entries = L.load_allow(p)
-        assert entries == [L.AllowEntry("08_Handouts.md", "honor to invite you", "Handout 1 is canonical")]
+        assert entries == [L.AllowEntry("08_Handouts.md", "*", "honor to invite you", "Handout 1 is canonical")]
 
     def test_bad_line_raises(self, tmp_path):
         p = tmp_path / "allow.txt"
@@ -350,7 +350,7 @@ class TestWhitelistFile:
             L.load_allow(p)
 
     def test_star_matches_any_file(self):
-        allow = [L.AllowEntry("*", "the players", "people at the table")]
+        allow = [L.AllowEntry("*", "*", "the players", "people at the table")]
         assert L.is_allowed("05_The_Longest_Night.md", "ask the players first", allow)
         assert not L.is_allowed("05_The_Longest_Night.md", "ask the characters", allow)
 
@@ -437,7 +437,7 @@ class TestSoftCounts:
         assert (m["you"], m["rhetorical"], m["perhaps"], m["the_players"]) == (0, 0, 0, 0)
 
     def test_whitelisted_line_excluded(self):
-        allow = [L.AllowEntry("x.md", "the players at the table", "people")]
+        allow = [L.AllowEntry("x.md", "soft", "the players at the table", "people")]
         m = L.soft_metrics("Ask the players at the table.\n", "x.md", allow)
         assert m["the_players"] == 0
 
@@ -614,3 +614,277 @@ class TestFixtureFiles:
     def test_clean_fixture_meets_soft_targets(self):
         m = L.soft_metrics((FIX / "clean.md").read_text(), "04_The_Ball.md")
         assert m["mean_wps"] <= 19 and m["emdash_per_k"] <= 8 and m["long_paras"] == 0
+
+
+# =========================================================================== R0.2 upgrades
+# (review-fix pass, DESIGN_oraga_5e_review_fixes §2): unwrapping, the rule-scoped
+# allowlist, nine new rule families and the defined-terms check. At least three tests each.
+
+class TestUnwrapBlocks:
+    def test_wrapped_lines_join(self):
+        blocks = L.unwrap("One line\nand its tail.\n\nNext.\n")
+        assert [b.text for b in blocks] == ["One line and its tail.", "Next."]
+
+    def test_line_mapping(self):
+        b = L.unwrap("Alpha beta\ngamma delta\n")[0]
+        assert L.block_line(b, b.text.index("gamma")) == 2 and L.block_line(b, 0) == 1
+
+    def test_list_items_table_rows_and_quotes_split(self):
+        text = "- one\n- two\n\n| a |\n| b |\n\nPlain\n> quoted\n"
+        assert [b.text for b in L.unwrap(text)] == ["- one", "- two", "| a |", "| b |", "Plain", "quoted"]
+
+    def test_bold_field_labels_in_quotes_split(self):
+        text = "> **Wants.** Money.\n> **Breaks.** At half.\n"
+        assert len(L.unwrap(text)) == 2
+
+
+class TestWrappedRules:
+    def test_wrapped_save_demand_now_hits(self):
+        assert fam("Each guest must make a DC 13\nDexterity save or fall.", "save_damage") == ["make a DC 13 Dexterity save"]
+
+    def test_wrapped_bare_dc_now_hits(self):
+        got = fam("The lock is a DC\n18 with thieves' tools, or a DC 15 Strength\n(Athletics).", "bare_dc")
+        assert got == ["DC 18", "DC 15 Strength (Athletics)"]
+
+    def test_wrapped_full_form_is_clean(self):
+        assert fam("Forcing it takes a DC 15 Strength\n(Athletics) check.", "bare_dc") == []
+
+    def test_hit_line_is_where_the_match_starts(self):
+        hits = L.lint_hard("Intro line.\nThe PCs\narrive.\n", "04_The_Ball.md")
+        assert [(h.family, h.line) for h in hits] == [("pcs", 2)]
+
+
+class TestScopedAllow:
+    def test_scoped_entry_exempts_only_its_rule(self):
+        allow = [L.AllowEntry("04_The_Ball.md", "bare_dc", "the skill that fits, DC 10", "choice")]
+        text = "An ability check using the skill that fits, DC 10, and the PCs nod."
+        assert fam(text, "bare_dc", allow=allow) == []
+        assert fam(text, "pcs", allow=allow) == ["PCs"]
+
+    def test_entry_exempts_only_the_matched_span(self):
+        allow = [L.AllowEntry("04_The_Ball.md", "bare_dc", "the skill that fits, DC 10", "choice")]
+        text = "Use the skill that fits, DC 10. The lock is DC 18."
+        assert fam(text, "bare_dc", allow=allow) == ["DC 18"]
+
+    def test_star_rule_exempts_every_rule(self):
+        allow = [L.AllowEntry("08_Handouts.md", "*", "we look forward", "Handout 1")]
+        assert fam("as we look forward to a bright future", "designer_we", "08_Handouts.md", allow) == []
+
+    def test_old_three_field_format_raises(self, tmp_path):
+        p = tmp_path / "allow.txt"
+        p.write_text("08_Handouts.md|honor to invite you|Handout 1 is canonical\n")
+        with pytest.raises(ValueError):
+            L.load_allow(p)
+
+    def test_shipped_entries_are_scoped(self):
+        entries = L.load_allow(TOOLS / "lint_5e_allow.txt")
+        assert all(e.rule for e in entries)
+        assert any(e.rule == "bare_dc" for e in entries) and any(e.rule == "designer_we" for e in entries)
+        assert all(e.rule == "*" for e in entries if "Handout 1" in e.reason)
+
+
+class TestEmphasisItalics:
+    def test_hit_single_word(self):
+        assert fam("Bare steel *voids* the whole scene.", "emphasis_italics") == ["*voids*"]
+
+    def test_hit_phrase(self):
+        assert fam("Success comes *at a cost* here.", "emphasis_italics") == ["*at a cost*"]
+
+    def test_hit_rules_term(self):
+        assert fam("The character gains *Heroic Inspiration*.", "emphasis_italics") == ["*Heroic Inspiration*"]
+
+    def test_miss_spells_labels_bold(self):
+        text = "*Failure:* 9 (2d8) Force damage. She casts *Mage Armor*. They face **inward**."
+        assert fam(text, "emphasis_italics") == []
+
+    def test_miss_whole_italic_note(self):
+        assert fam("*a whole note to the DM in italics, as a paragraph.*", "emphasis_italics") == []
+
+    def test_miss_readaloud_and_speech(self):
+        text = 'He says, "It is *mine*."\n\n' + box("*The wall is *very* high.*")
+        assert fam(text, "emphasis_italics") == []
+
+
+class TestOrSkills:
+    def test_hit(self):
+        assert fam("a DC 13 Wisdom (Insight or Perception) check", "or_skills") == ["(Insight or Perception)"]
+
+    def test_hit_slash(self):
+        assert fam("a DC 13 Charisma (Persuasion/Deception) check", "or_skills") == ["(Persuasion/Deception)"]
+
+    def test_miss_spelled_out(self):
+        text = "a DC 13 Wisdom (Insight) or DC 13 Wisdom (Perception) check"
+        assert fam(text, "or_skills") == []
+
+    def test_edge_table_still_hits(self):
+        assert fam("| Who | Check |\n|---|---|\n| Gate | 13 Wisdom (Insight or Perception) |\n", "or_skills") == ["(Insight or Perception)"]
+
+
+class TestHtmlComment:
+    def test_hit(self):
+        assert fam("<!-- INVENTIONS #11: for review. -->", "html_comment") == ["<!--"]
+
+    def test_hit_inside_statblock(self):
+        text = "### Bought Blade\n*Medium Humanoid*\n<!-- TODO -->\n\n**AC** 16\n"
+        assert fam(text, "html_comment", "10_Bestiary.md") == ["<!--"]
+
+    def test_miss(self):
+        assert fam("The arrow -> points; a <b>bold</b> tag is not a comment.", "html_comment") == []
+
+    def test_edge_scoped_allow(self):
+        allow = [L.AllowEntry("09_The_Snakes.md", "html_comment", "<!-- keep", "anchor")]
+        assert fam("<!-- keep -->", "html_comment", "09_The_Snakes.md", allow) == []
+
+
+class TestRepoFilename:
+    def test_hit_chapter_file(self):
+        assert fam("chapter IX, *The Snakes* (`09_The_Snakes.md`)", "repo_filename") == ["09_The_Snakes.md"]
+
+    def test_hit_data_files(self):
+        assert fam("See facet.yaml and flow.json.", "repo_filename") == ["facet.yaml", "flow.json"]
+
+    def test_miss(self):
+        assert fam("See chapter IX and the Bestiary.", "repo_filename") == []
+
+    def test_edge_readme_exempt(self):
+        assert fam("| `STYLE_5e.md` | the style sheet |", "repo_filename", "README.md") == []
+
+
+class TestSimJargon:
+    def test_hit_simulation(self):
+        assert fam("That is how the fight played in simulation.", "sim_jargon") == ["simulation"]
+
+    def test_hit_one_fight_in(self):
+        assert fam("A character drops in about one fight in twenty.", "sim_jargon") == ["one fight in twenty"]
+
+    def test_hit_runs_and_monte_carlo(self):
+        assert fam("Over 1,000 runs of Monte Carlo it held.", "sim_jargon") == ["1,000 runs", "Monte Carlo"]
+
+    def test_miss_ordinary_runs(self):
+        assert fam("After the lights die, the night runs in this order.", "sim_jargon") == []
+
+
+class TestConversionWide:
+    def test_hit_facets_edition(self):
+        assert fam("**Sidebar — for players who know the Facets edition**", "conversion_wide") == ["Facets edition"]
+
+    def test_hit_old_domains_and_conversion(self):
+        got = fam("A guide to the old domains. This is the fifth-edition conversion.", "conversion_wide")
+        assert got == ["old domains", "fifth-edition conversion"]
+
+    def test_hit_inventions(self):
+        assert fam("chapter XI (hand it out), and *Inventions*.", "conversion_wide") == ["Inventions"]
+
+    def test_miss(self):
+        assert fam("The house inventions; part of the Facets of Origin project (GPLv3).", "conversion_wide") == []
+
+
+class TestAnachronism:
+    def test_hit_memo(self):
+        assert fam("The memo from the east arrives.", "anachronism") == ["memo"]
+
+    def test_hit_businessperson(self):
+        assert fam("A businessperson who has been shot at.", "anachronism") == ["businessperson"]
+
+    def test_miss(self):
+        assert fam("She has a long memory and memorizes every name.", "anachronism") == []
+
+    def test_edge_readaloud_still_hits(self):
+        assert fam(box("*A memo lies on the desk.*"), "anachronism") == ["memo"]
+
+
+class TestTriggerFormat:
+    def _hits(self, tmp_path, text):
+        (tmp_path / "04_The_Ball.md").write_text("# IV. The Ball\n\n" + text)
+        return struct("trigger_format", tmp_path)
+
+    def test_pinned_form_passes(self, tmp_path):
+        assert self._hits(tmp_path, "**Read this when the doors open:**\n\n> *Box.*\n") == []
+
+    def test_wrapped_pinned_form_passes(self, tmp_path):
+        assert self._hits(tmp_path, "**Read this when a character\nsteps out:**\n\n> *Box.*\n") == []
+
+    def test_plain_trigger_hits(self, tmp_path):
+        assert len(self._hits(tmp_path, "Read this when the doors open:\n\n> *Box.*\n")) == 1
+
+    def test_card_trigger_hits(self, tmp_path):
+        got = self._hits(tmp_path, "***Trigger — read on entering the corridor:***\n\n> *Box.*\n")
+        assert len(got) == 1 and "Trigger" in got[0].match
+
+    def test_missing_trigger_is_readaloud_trigger_only(self, tmp_path):
+        (tmp_path / "04_The_Ball.md").write_text("# IV. The Ball\n\n## Area\n\n> *Box.*\n")
+        assert struct("trigger_format", tmp_path) == [] and len(struct("readaloud_trigger", tmp_path)) == 1
+
+
+class TestBoxLabel:
+    def _hits(self, tmp_path, text):
+        (tmp_path / "04_The_Ball.md").write_text("# IV. The Ball\n\n" + text)
+        return [h.match for h in struct("box_label", tmp_path)]
+
+    def test_heading_style_passes(self, tmp_path):
+        assert self._hits(tmp_path, "> **DM Note — the first check of the night**\n>\n> Text.\n") == []
+
+    def test_run_in_colon_hits(self, tmp_path):
+        assert len(self._hits(tmp_path, "> **Sidebar — Steel at the ball:** the Orthaen carry.\n")) == 1
+
+    def test_run_in_period_hits(self, tmp_path):
+        assert len(self._hits(tmp_path, "> **DM Note — the factor.** The captain never learns.\n")) == 1
+
+    def test_empty_title_hits(self, tmp_path):
+        assert len(self._hits(tmp_path, "> **Troubleshooting —** text follows.\n")) == 1
+
+    def test_legend_list_item_ignored(self, tmp_path):
+        assert self._hits(tmp_path, "- **Sidebar —** a piece of the world.\n") == []
+
+
+class TestDefinedTerms:
+    @pytest.fixture
+    def world(self, tmp_path):
+        mod = tmp_path / "m"
+        mod.mkdir()
+        (mod / "02_The_World_and_the_Night.md").write_text(
+            "# II. World\n\nThe **Orthaen**, the city's tribe, rule here.\n")
+        (mod / "04_The_Ball.md").write_text(
+            "# IV. The Ball\n\nA Scora reads the figure. An Orthaen guard nods. A Dekhi waits.\n")
+        st = tmp_path / "s"
+        st.mkdir()
+        (st / "V1_Lineages.md").write_text("# V1\n\n## Orthaen\n\nx\n\n## Scora\n\ny\n\n## Dekhi\n\nz\n")
+        terms = tmp_path / "terms.txt"
+        terms.write_text("# term|canon|gloss file|gloss text\n"
+                         "Orthaen|V1_Lineages.md|02_The_World_and_the_Night.md|the city's tribe\n"
+                         "Scora|V1_Lineages.md|-|-\n")
+        return mod, terms, st
+
+    def _hits(self, world):
+        mod, terms, st = world
+        return L.lint_terms(mod, terms, st)
+
+    def test_unglossed_term_hits(self, world):
+        got = [h for h in self._hits(world) if "Scora" in h.match]
+        assert len(got) == 1 and got[0].file == "04_The_Ball.md" and got[0].line == 3
+
+    def test_glossed_term_passes(self, world):
+        assert not any("Orthaen" in h.match for h in self._hits(world))
+
+    def test_unlisted_canon_term_hits(self, world):
+        assert any(h.match == "unlisted canon term: Dekhi" for h in self._hits(world))
+
+    def test_stale_gloss_hits(self, world):
+        mod, terms, st = world
+        (mod / "02_The_World_and_the_Night.md").write_text("# II. World\n\nThe Orthaen rule.\n")
+        assert any("stale gloss: Orthaen" in h.match for h in L.lint_terms(mod, terms, st))
+
+    def test_bad_terms_line_raises(self, tmp_path):
+        p = tmp_path / "t.txt"
+        p.write_text("Orthaen|V1\n")
+        with pytest.raises(ValueError):
+            L.load_terms(p)
+
+    def test_canon_vocabulary_reads_settings(self):
+        voc = L.canon_vocabulary(L.SETTINGS)
+        assert {"Scora", "Kshalo", "Orthaen", "Boranis", "Vaskarin"} <= voc
+
+    def test_real_module_flags_scora_and_kshalo(self):
+        got = {h.match for h in L.lint_terms(L.MODULE, L.TERMS, L.SETTINGS)}
+        assert "undefined term: Scora" in got and "undefined term: Kshalo" in got
+        assert not any(m.startswith("unlisted canon term") or m.startswith("stale gloss") for m in got)

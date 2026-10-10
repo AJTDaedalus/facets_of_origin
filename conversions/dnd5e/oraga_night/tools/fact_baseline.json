@@ -1,0 +1,77 @@
+{
+ "facts": {
+  "arrivals": {
+   "01_Overture.md": {
+    "at midnight": 1
+   },
+   "05_The_Longest_Night.md": {
+    "Mv II–V": 1,
+    "any Movement": 1
+   }
+  },
+  "bought_company": {
+   "05_The_Longest_Night.md": {
+    "forty blades": 1,
+    "forty sworn witnesses": 1
+   }
+  },
+  "east_wing_floor": {
+   "05_The_Longest_Night.md": {
+    "missing: (?:east doors|east wing)[^\\n]{0,300}?(?:rises 12 feet|12 feet up|gallery level)": 1
+   }
+  },
+  "honor_guards": {
+   "04_The_Ball.md": {
+    "S4": 1,
+    "nine": 1
+   },
+   "05_The_Longest_Night.md": {
+    "nine": 1,
+    "only guards left are dying on the dais": 1
+   },
+   "08_Handouts.md": {
+    "nine": 1
+   },
+   "10_Bestiary.md": {
+    "nine": 1
+   }
+  },
+  "household": {
+   "02_The_World_and_the_Night.md": {
+    "four-fold": 2
+   },
+   "04_The_Ball.md": {
+    "a hundred servants": 1,
+    "four-fold": 1
+   }
+  },
+  "maiven_fate": {
+   "06_Aftermath.md": {
+    "Maiven": 1
+   }
+  },
+  "retinues": {
+   "09_The_Snakes.md": {
+    "brought": 2
+   },
+   "10_Bestiary.md": {
+    "Kovaun brought three": 1
+   }
+  },
+  "stairs": {
+   "05_The_Longest_Night.md": {
+    "missing: (?:private stair[^.\\n]{0,60}garden stair|garden stair[^.\\n]{0,60}private stair)": 1
+   }
+  },
+  "terraces": {
+   "04_The_Ball.md": {
+    "Two terraces below": 1
+   },
+   "09_The_Snakes.md": {
+    "Two terraces below": 1,
+    "rail of the upper terrace": 1
+   }
+  }
+ },
+ "version": 1
+}

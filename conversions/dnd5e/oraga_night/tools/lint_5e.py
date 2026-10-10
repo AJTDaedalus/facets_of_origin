@@ -11,12 +11,20 @@ Rule families
     hard       counts that must reach 0 (role name, rules-term capitals, check/save/damage
                grammar, conversion talk, narrator voice, designer "we", "Deadly" budgets,
                PCs, spelled distances, gp, British spelling, grey, Designer's note, the
-               removed Attendant habit)
+               removed Attendant habit; and from the review-fix pass, R0.2: emphasis
+               italics, "(X or Y)" skills, HTML comments, repo file names, simulation
+               jargon, wider conversion talk, anachronisms)
     soft       per-file metrics with targets (sentence length, em dashes, long paragraphs)
                and counts ("the players", "player character", "you", "perhaps",
                rhetorical questions, "not X but Y")
     structure  cross-references resolve, bold creature names have stat blocks, every
-               read-aloud box has a trigger line
+               read-aloud box has a trigger line in the pinned form "**Read this when …:**"
+               (trigger_format), box labels are heading style (box_label), and every proper
+               term used is glossed (defined_terms, against tools/terms.txt and the canon
+               vocabulary of settings/valloh V0/V1/V3)
+
+The hard rules run on unwrapped paragraphs (unwrap()), so a phrase split across a hard
+line break is seen; a hit is reported at the line where its match starts.
 
 --check fails (exit 1) on any hard or structure hit that is not in the baseline, and on
 any soft regression: a targeted metric that got worse by more than its tolerance while
@@ -24,8 +32,10 @@ above its target, or a count (other than "you") that went up. Hits going down ne
 fail. "you" is reported but never fails, because the DM swap (§3) adds legitimate ones.
 After a task that moves text between files, re-run --baseline and say so in the LOG.
 
-Whitelist: tools/lint_5e_allow.txt, one `file|quoted text|reason` per line (`*` = any
-file). A line containing the quoted text is exempt from every rule.
+Whitelist: tools/lint_5e_allow.txt, one `file|rule|quoted text|reason` per line (`*` file =
+any file). An entry exempts only hits of its rule (family or rule id; `soft` for the soft
+metrics) and only where its quoted text overlaps the hit. Rule `*` exempts every rule and is
+reserved for fixed canonical text.
 """
 from __future__ import annotations
 
@@ -39,11 +49,13 @@ from pathlib import Path
 TOOLS = Path(__file__).resolve().parent
 MODULE = TOOLS.parent
 ALLOW = TOOLS / "lint_5e_allow.txt"
+TERMS = TOOLS / "terms.txt"
+SETTINGS = MODULE.parents[2] / "settings" / "valloh"
 BASELINE = TOOLS / "lint_baseline.json"
 EXCLUDE = {"INVENTIONS_5e.md", "STYLE_5e.md"}
 
 Hit = namedtuple("Hit", "file line family rule match")
-AllowEntry = namedtuple("AllowEntry", "file text reason")
+AllowEntry = namedtuple("AllowEntry", "file rule text reason")
 
 ABIL = r"(?:Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma)"
 SKILL = (r"(?:Perception|Insight|Investigation|Persuasion|Deception|Intimidation|Stealth|"
@@ -151,6 +163,74 @@ def body(line: str) -> str:
 
 
 # ---------------------------------------------------------------------------------------
+# Unwrapping: hard-wrapped lines joined into the paragraphs Markdown renders
+
+
+Block = namedtuple("Block", "text kind lines offsets quoted")
+_LIST_ITEM = re.compile(r"^(?:[-*+]|\d+\.) ")
+
+
+def unwrap(text: str, fname: str = "", kinds=None) -> list[Block]:
+    """Paragraph blocks, each with the source line of every piece joined into it.
+
+    A block is a run of non-blank lines of one kind (classify). Headings and table rows are
+    one block per line. A list item starts a new block; so do a change into or out of a
+    blockquote, a bold field label inside a blockquote or stat block (``**Wants.**``,
+    ``**AC**``), and the line after a Markdown hard break. Blockquote markers and
+    indentation are stripped and the pieces joined with one space, so a phrase split across
+    a line break reads as one string.
+    """
+    lines = text.split("\n")
+    if lines and lines[-1] == "":
+        lines = lines[:-1]
+    kinds = kinds if kinds is not None else classify(text, fname)
+    out, cur = [], None
+    hard_break = False
+
+    def flush():
+        nonlocal cur
+        if cur:
+            out.append(Block(" ".join(cur["pieces"]), cur["kind"], cur["lines"], cur["offsets"],
+                             cur["quoted"]))
+        cur = None
+
+    for i, (ln, kind) in enumerate(zip(lines, kinds)):
+        if kind in ("blank", "code", "rule"):
+            flush()
+            hard_break = False
+            continue
+        quoted = ln.startswith(">")
+        piece = body(ln).strip() if quoted else ln.strip()
+        if not piece:
+            flush()
+            continue
+        new = (cur is None or hard_break or kind != cur["kind"] or kind in ("heading", "table")
+               or quoted != cur["quoted"] or bool(_LIST_ITEM.match(piece))
+               or (kind == "statblock" and piece.startswith("*"))
+               or (quoted and piece.startswith("**")))
+        if new:
+            flush()
+            cur = {"pieces": [], "kind": kind, "lines": [], "offsets": [], "quoted": quoted}
+        off = sum(len(p) + 1 for p in cur["pieces"])
+        cur["pieces"].append(piece)
+        cur["lines"].append(i + 1)
+        cur["offsets"].append(off)
+        hard_break = ln.endswith("  ") or ln.endswith("\\")
+    flush()
+    return out
+
+
+def block_line(block: Block, pos: int) -> int:
+    """Source line of the character at `pos` in an unwrapped block."""
+    line = block.lines[0]
+    for off, ln in zip(block.offsets, block.lines):
+        if off > pos:
+            break
+        line = ln
+    return line
+
+
+# ---------------------------------------------------------------------------------------
 # Whitelist
 
 
@@ -164,14 +244,37 @@ def load_allow(path) -> list[AllowEntry]:
         if not s or s.startswith("#"):
             continue
         parts = s.split("|")
-        if len(parts) < 3 or not parts[0].strip() or not parts[1]:
-            raise ValueError(f"{p}:{n}: expected 'file|quoted text|reason', got {raw!r}")
-        out.append(AllowEntry(parts[0].strip(), parts[1], "|".join(parts[2:]).strip()))
+        if (len(parts) < 4 or not parts[0].strip() or not parts[1].strip() or not parts[2]
+                or not "|".join(parts[3:]).strip()):
+            raise ValueError(f"{p}:{n}: expected 'file|rule|quoted text|reason', got {raw!r}")
+        out.append(AllowEntry(parts[0].strip(), parts[1].strip(), parts[2],
+                              "|".join(parts[3:]).strip()))
     return out
 
 
-def is_allowed(fname: str, line: str, allow) -> bool:
-    return any((e.file == "*" or e.file == fname) and e.text in line for e in allow)
+def _rule_ok(e, rules) -> bool:
+    return e.rule == "*" or e.rule in rules
+
+
+def is_allowed(fname: str, line: str, allow, *rules) -> bool:
+    """True if an entry for this file and one of `rules` (or rule `*`) quotes text in `line`.
+
+    With no rules given, only `*` entries count.
+    """
+    return any((e.file == "*" or e.file == fname) and _rule_ok(e, rules) and e.text in line
+               for e in allow)
+
+
+def _allowed_span(fname: str, text: str, start: int, end: int, allow, *rules) -> bool:
+    """True if an entry for these rules quotes text in `text` overlapping [start, end)."""
+    for e in allow:
+        if (e.file == "*" or e.file == fname) and _rule_ok(e, rules):
+            i = text.find(e.text)
+            while i >= 0:
+                if i < end and start < i + len(e.text):
+                    return True
+                i = text.find(e.text, i + 1)
+    return False
 
 
 # ---------------------------------------------------------------------------------------
@@ -233,9 +336,30 @@ RULES = [
     ("grey", "grey", r"\bgrey\b", "ALL", I),
     ("designers_note", "designer's note", r"\bDesigner['’]s note\b", "ALL", I),
     ("attendant_habit", "Q5", r"\bdirect question\b|\bliterally and truthfully\b", "ALL", I),
+    # --- R0.2 (review-fix pass) families
+    ("emphasis_italics", "STYLE emphasis", None, "SPEECH", 0),   # handled in code
+    ("or_skills", "X or Y skill",
+     r"\(" + SKILL + r"\s*(?:\bor\b|/)\s*" + SKILL + r"\)", "NOBOX", 0),
+    ("html_comment", "comment", r"<!--", "ALL", 0),
+    ("repo_filename", "file name",
+     r"\b\d\d_[A-Za-z_]+\.md\b|\b(?:INVENTIONS|STYLE)_5e(?:\.md)?\b|"
+     r"\b[\w-]+\.(?:md|yaml|yml|json|py|fof|svg)\b|\btools/", "ALL", 0),
+    ("sim_jargon", "simulation",
+     r"\bsimulat\w*|\bMonte Carlo\b|\bone (?:fight|run) in (?:\d+|[a-z]+(?:-[a-z]+)?)\b|"
+     r"\b\d[\d,]* (?:runs|trials|iterations)\b|\bruns? in (?:\d|a hundred\b|a thousand\b)|"
+     r"\bplaytest\w*", "NOBOX", I),
+    ("conversion_wide", "wide",
+     r"\bFacets (?:edition|rules|version)\b|\bfifth[- ]edition conversion\b|"
+     r"\b5e (?:conversion|edition)\b|\bold domains?\b|\bInventions\b|\bconverted (?:from|to)\b",
+     "NOBOX", 0),
+    ("anachronism", "modern word",
+     r"\bmemos?\b|\bbusiness(?:person|people|man|men|woman|women)\b|\bokay\b|\bclipboards?\b",
+     "ALL", I),
 ]
 HARD_FAMILIES = list(dict.fromkeys(r[0] for r in RULES))
 _COMPILED = [(f, rid, re.compile(p, fl) if p else None, sc) for f, rid, p, sc, fl in RULES]
+STRUCTURE_RULES = ["xref", "creature_bold", "readaloud_trigger", "trigger_format", "box_label",
+                   "defined_terms"]
 
 _DC = re.compile(r"\bDC ?(\d+)")
 _DC_OK_AFTER = re.compile(
@@ -246,6 +370,29 @@ _DC_SAVE_FORM = re.compile(r"(?:Saving Throw:\*?|save) $", re.I)
 _BUDGET_LINE = re.compile(r"\bXP\b|budget|\bLow\b|\bModerate\b|\bHigh\b|multiplier|difficulty", re.I)
 _IDIOM_BEFORE = re.compile(r"(?:\btakes? |\btaking |\bto (?:his|her|their|its|your|our|my) |\bat a )$")
 _FALL = re.compile(r"\b(?:fall|falls|falling|fell|drop|drops|plunge|pushed over)\b", re.I)
+_ITALIC = re.compile(r"(?<![*\w])\*(?![\s*])([^*\n]{1,60}?)(?<![\s*])\*(?![*\w])")
+_RULES_TERMS = re.compile(
+    r"^(?:Heroic Inspiration|Advantage|Disadvantage|Hit Points|Short Rest|Long Rest|Bloodied|"
+    r"Difficult Terrain|Dim Light|Bright Light|Stable|Unconscious|Prone)$")  # not Darkness: a spell
+NO_FILENAME_RULE = {"README.md"}  # the README is the one place file names belong
+
+
+def _emphasis_hits(s: str):
+    """Italic spans used for emphasis: lowercase words (up to four), or a rules term.
+
+    Not emphasis: Title Case spans (spells, items, book sections), labels ending in a
+    colon, parenthetical asides, and a span that is the whole paragraph (a DM note).
+    """
+    whole = s.strip()
+    for m in _ITALIC.finditer(s):
+        inner = m.group(1)
+        if m.group() == whole or len(m.group()) > 0.8 * len(whole):
+            continue
+        if inner.rstrip().endswith(":") or inner.startswith("("):
+            continue
+        if _RULES_TERMS.match(inner) or (
+                re.match(r"^[a-z][\w'’-]*(?: [\w'’-]+){0,3}[.,!?]?$", inner)):
+            yield m.start(), m.group()
 
 
 def _scoped(line: str, kind: str, scope: str):
@@ -281,39 +428,48 @@ def _bare_dc_hits(s: str):
 
 
 def lint_hard(text: str, fname: str, allow=()) -> list[Hit]:
-    kinds = classify(text, fname)
-    lines = text.split("\n")
+    """Hard-rule hits, run on unwrapped paragraphs so a phrase split across lines is seen.
+
+    A hit is reported at the source line where its match starts. An allowlist entry exempts
+    a hit only for its own rule (family name or rule id, or `*`) and only where its quoted
+    text overlaps the match.
+    """
     hits = []
-    for n, (line, kind) in enumerate(zip(lines, kinds), 1):
-        if kind in ("blank", "code", "rule") or is_allowed(fname, line, allow):
-            continue
+    for blk in unwrap(text, fname):
+        kind = blk.kind
         for family, rid, rx, scope in _COMPILED:
-            if kind == "heading" and scope != "ALL" and family not in ("pcs", "conversion_talk"):
+            if kind == "heading" and scope != "ALL" and family not in (
+                    "pcs", "conversion_talk", "conversion_wide"):
                 continue
-            s = _scoped(line, kind, scope)
+            if family == "repo_filename" and fname in NO_FILENAME_RULE:
+                continue
+            s = _scoped(blk.text, kind, scope)
             if s is None:
                 continue
-            if rx is None:  # bare DC; read on into the next line so a wrapped
-                # "DC 15 Strength\nsaving throw" is not a false hit
-                nxt = lines[n] if n < len(lines) and n < len(kinds) and kinds[n] == kind else ""
-                joined = s + " " + body(nxt).strip() if nxt.strip() else s
-                for col, mt in _bare_dc_hits(joined):
-                    if col >= len(s):
-                        continue
-                    mt = mt if col + len(mt) <= len(s) else s[col:].rstrip()
-                    r = "no 'check'" if re.search(ABIL, mt) else "bare"
-                    hits.append((n, col, Hit(fname, n, family, r, mt)))
-                continue
-            if family == "deadly_budget" and not _BUDGET_LINE.search(s):
-                continue
-            for m in rx.finditer(s):
-                g = m.group()
-                if family == "lowercase_terms" and g in ("advantage", "disadvantage"):
-                    if _IDIOM_BEFORE.search(s[:m.start()]) or s[m.end():].startswith(" of "):
-                        continue
-                if rid == "S11 bare dice" and _FALL.search(s[max(0, m.start() - 160):m.start()]):
+            found = []
+            if family == "bare_dc" and rx is None:
+                for col, mt in _bare_dc_hits(s):
+                    found.append((col, "no 'check'" if re.search(ABIL, mt) else "bare", mt))
+            elif family == "emphasis_italics":
+                if kind == "heading":
                     continue
-                hits.append((n, m.start(), Hit(fname, n, family, rid, g)))
+                found = [(col, rid, mt) for col, mt in _emphasis_hits(s)]
+            else:
+                if family == "deadly_budget" and not _BUDGET_LINE.search(s):
+                    continue
+                for m in rx.finditer(s):
+                    g = m.group()
+                    if family == "lowercase_terms" and g in ("advantage", "disadvantage"):
+                        if _IDIOM_BEFORE.search(s[:m.start()]) or s[m.end():].startswith(" of "):
+                            continue
+                    if rid == "S11 bare dice" and _FALL.search(s[max(0, m.start() - 160):m.start()]):
+                        continue
+                    found.append((m.start(), rid, g))
+            for col, r, mt in found:
+                if _allowed_span(fname, blk.text, col, col + len(mt), allow, family, rid, r):
+                    continue
+                n = block_line(blk, col)
+                hits.append((n, col, Hit(fname, n, family, r, mt)))
     hits.sort(key=lambda t: (t[0], t[1]))
     return [t[2] for t in hits]
 
@@ -365,7 +521,7 @@ def _paragraphs(text: str, fname: str, allow):
             flush()
             heading = line
             continue
-        if kind != "prose" or is_allowed(fname, line, allow):
+        if kind != "prose" or is_allowed(fname, line, allow, "soft"):
             flush()
             continue
         b = body(line).strip()
@@ -488,8 +644,10 @@ def lint_structure(module: Path, allow=(), only=None) -> list[Hit]:
         lines = raw.split("\n")
         kinds = classify(raw, p.name)
         kinds += ["blank"] * (len(lines) - len(kinds))
-        keep = [("" if is_allowed(p.name, ln, allow) else body(ln)) for ln in lines]
+        keep = [("" if is_allowed(p.name, ln, allow, "xref") else body(ln)) for ln in lines]
         flat = "\n".join(keep)
+        flat_c = "\n".join("" if is_allowed(p.name, ln, allow, "creature_bold") else body(ln)
+                           for ln in lines)
 
         def at(pos):
             return flat.count("\n", 0, pos) + 1
@@ -522,14 +680,20 @@ def lint_structure(module: Path, allow=(), only=None) -> list[Hit]:
         # bold creature names at first mention
         if p.name in CREATURE_FILES:
             seen = set()
-            for para_m in re.finditer(r"(?ms)^\*\*Enem(?:y|ies)\b[^*]*\*\*(.*?)(?:\n\s*\n|\Z)", flat):
+            for para_m in re.finditer(r"(?ms)^\*\*Enem(?:y|ies)\b[^*]*\*\*(.*?)(?:\n\s*\n|\Z)", flat_c):
                 for bm in re.finditer(r"\*\*([^*]+?)\*\*", para_m.group(1)):
                     _creature_check(p.name, at(para_m.start(1) + bm.start()), bm.group(1),
                                     heads10, seen, hits)
-            for bm in re.finditer(r"\*\*([^*]+?)\*\*\s*\((?:see\s+)?[Cc]hapter\s+X\)", flat):
+            for bm in re.finditer(r"\*\*([^*]+?)\*\*\s*\((?:see\s+)?[Cc]hapter\s+X\)", flat_c):
                 _creature_check(p.name, at(bm.start()), bm.group(1), heads10, seen, hits)
 
-        # read-aloud trigger lines
+        # read-aloud trigger lines; the trigger's format (R0.2: STYLE pins
+        # "**Read this when …:**", decision O41)
+        blocks = unwrap(raw, p.name)
+        line_block = {}
+        for blk in blocks:
+            for ln_no in blk.lines:
+                line_block[ln_no] = blk
         i = 0
         while i < len(lines):
             if kinds[i] == "readaloud" and lines[i].startswith(">") and (
@@ -541,13 +705,34 @@ def lint_structure(module: Path, allow=(), only=None) -> list[Hit]:
                     k = prev[-1]
                     t = lines[k].strip().rstrip("*_) ")
                     ok = kinds[k] == "prose" and not lines[k].startswith(">") and t.endswith(":")
-                if not ok and not is_allowed(p.name, lines[i], allow):
+                if not ok and not is_allowed(p.name, lines[i], allow, "readaloud_trigger"):
                     snippet = " ".join(body(lines[i]).split()[:6])
                     hits.append(Hit(p.name, i + 1, "structure", "readaloud_trigger",
                                     f"untriggered read-aloud: {snippet}"))
+                if ok:
+                    trig = line_block.get(prev[-1] + 1)
+                    if trig is not None and not TRIGGER_FORM.match(trig.text) and not is_allowed(
+                            p.name, trig.text, allow, "trigger_format"):
+                        hits.append(Hit(p.name, trig.lines[0], "structure", "trigger_format",
+                                        " ".join(trig.text.split()[:10])))
             i += 1
+
+        # box labels: heading style, "**DM Note — title**" alone on its line (O41)
+        for n, ln in enumerate(lines, 1):
+            if kinds[n - 1] in ("code", "table"):
+                continue
+            b = body(ln).strip()
+            if BOX_START.match(b) and not BOX_FORM.match(b) and not is_allowed(
+                    p.name, ln, allow, "box_label"):
+                hits.append(Hit(p.name, n, "structure", "box_label", " ".join(b.split()[:8])))
     hits.sort(key=lambda h: (h.file, h.line))
     return hits
+
+
+TRIGGER_FORM = re.compile(r"^\*\*Read this when [^*]+:\*\*$")
+BOX_SPECIES = r"(?:DM Note|Sidebar|Troubleshooting)"
+BOX_START = re.compile(r"^\*\*" + BOX_SPECIES + r"\b")
+BOX_FORM = re.compile(r"^\*\*" + BOX_SPECIES + r" — [^*]*[^*\s.:]\*\*$")
 
 
 _CREATURE_SHAPE = re.compile(
@@ -567,10 +752,108 @@ def _creature_check(fname, line, name, heads10, seen, hits):
 
 
 # ---------------------------------------------------------------------------------------
+# Defined terms (R0.2): every setting or module term the text uses must be glossed
+
+
+CANON_FILES = {"V0", "V1", "V3"}  # Ten Things, Lineages, Rekuzan and the Tribes
+TermEntry = namedtuple("TermEntry", "term canon gloss_file gloss_text")
+
+
+def load_terms(path) -> list[TermEntry]:
+    """`term|canon source|gloss file|gloss text` per line; gloss file `-` = not yet glossed."""
+    out = []
+    p = Path(path)
+    if not p.exists():
+        return out
+    for n, raw in enumerate(p.read_text(encoding="utf-8").splitlines(), 1):
+        s = raw.strip()
+        if not s or s.startswith("#"):
+            continue
+        parts = [x.strip() for x in s.split("|", 3)]  # the gloss text may hold a "|"
+        if len(parts) != 4 or not all(parts):
+            raise ValueError(f"{p}:{n}: expected 'term|canon|gloss file|gloss text', got {raw!r}")
+        out.append(TermEntry(*parts))
+    return out
+
+
+def canon_vocabulary(settings) -> set[str]:
+    """Proper terms the setting files define: one-word lineage headings, the first column of
+    a tribe table, and bold comma lists of names (the sects)."""
+    voc = set()
+    d = Path(settings)
+    if not d.is_dir():
+        return voc
+    for p in sorted(x for x in d.glob("V*.md") if x.name.split("_")[0] in CANON_FILES):
+        text = p.read_text(encoding="utf-8")
+        if p.name.startswith("V1"):  # each lineage has a one-word heading
+            voc.update(re.findall(r"^## ([A-Z][\w'’]+)\s*$", text, re.M))
+        in_tribes = False
+        for ln in text.splitlines():
+            if ln.startswith("|"):
+                cells = [c.strip() for c in ln.strip("|").split("|")]
+                if cells and cells[0] in ("Tribe", "Lineage"):
+                    in_tribes = True
+                    continue
+                if in_tribes and re.fullmatch(r"[A-Z][\w'’]+", cells[0]):
+                    voc.add(cells[0])
+            else:
+                in_tribes = False
+        for m in re.finditer(r"\*\*([A-Z][\w'’]+(?:, [A-Z][\w'’]+){2,})\.?\*\*", text):
+            voc.update(m.group(1).split(", "))
+    return voc
+
+
+def _term_rx(term: str):
+    return re.compile(r"(?<![\w'’])" + re.escape(term) + r"(?:['’]s|n|ns|ian|ians)?(?![\w'’])")
+
+
+def lint_terms(module=MODULE, terms_path=TERMS, settings=SETTINGS, allow=(), only=None) -> list[Hit]:
+    """defined_terms hits: a term used but not glossed in the module (each use), a gloss that
+    is no longer in its file, and a canon term the module uses that terms.txt does not list."""
+    module = Path(module)
+    entries = load_terms(terms_path)
+    listed = {e.term for e in entries}
+    texts = {p.name: p.read_text(encoding="utf-8") for p in module_files(module)}
+    flat = {f: [(blk, blk.text) for blk in unwrap(t, f) if blk.kind != "code"] for f, t in texts.items()}
+    hits = []
+
+    def uses(term):
+        rx = _term_rx(term)
+        for f, blocks in flat.items():
+            if only and f != only:
+                continue
+            for blk, t in blocks:
+                for m in rx.finditer(t):
+                    if not _allowed_span(f, t, m.start(), m.end(), allow, "defined_terms"):
+                        yield f, block_line(blk, m.start())
+
+    for e in entries:
+        if e.gloss_file == "-":
+            for f, n in uses(e.term):
+                hits.append(Hit(f, n, "structure", "defined_terms", f"undefined term: {e.term}"))
+        elif e.gloss_file not in texts:
+            hits.append(Hit(e.gloss_file, 0, "structure", "defined_terms", f"stale gloss: {e.term}"))
+        else:
+            g = " ".join(b.text for b, _ in flat[e.gloss_file])
+            if e.gloss_text not in g or not _term_rx(e.term).search(g):
+                hits.append(Hit(e.gloss_file, 0, "structure", "defined_terms", f"stale gloss: {e.term}"))
+    for term in sorted(canon_vocabulary(settings) - listed):
+        first = {}
+        for f, n in uses(term):
+            first.setdefault(f, n)
+        for f, n in sorted(first.items()):
+            hits.append(Hit(f, n, "structure", "defined_terms", f"unlisted canon term: {term}"))
+    if only:
+        hits = [h for h in hits if h.file == only]
+    hits.sort(key=lambda h: (h.file, h.line, h.match))
+    return hits
+
+
+# ---------------------------------------------------------------------------------------
 # Running, baseline, check, report
 
 
-def run(module=MODULE, files=None, allow=None) -> dict:
+def run(module=MODULE, files=None, allow=None, terms=TERMS, settings=SETTINGS) -> dict:
     module = Path(module)
     allow = load_allow(ALLOW) if allow is None else allow
     hard, soft = [], {}
@@ -583,6 +866,7 @@ def run(module=MODULE, files=None, allow=None) -> dict:
     structure = []
     for f in (files or [None]):
         structure += lint_structure(module, allow, only=f)
+        structure += lint_terms(module, terms, settings, allow, only=f)
     return {"hard": hard, "structure": structure, "soft": soft}
 
 
@@ -659,7 +943,7 @@ def report_tables(rep: dict) -> str:
     fam.update(h.rule for h in rep["structure"])
     out.append("| family | hits |")
     out.append("|---|---|")
-    for f in HARD_FAMILIES + ["xref", "creature_bold", "readaloud_trigger"]:
+    for f in HARD_FAMILIES + STRUCTURE_RULES:
         out.append(f"| {f} | {fam[f]} |")
     return "\n".join(out)
 

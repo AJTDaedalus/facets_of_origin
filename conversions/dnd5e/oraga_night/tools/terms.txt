@@ -1,0 +1,42 @@
+# Defined terms for the Oraga Night 5e module (review-fix task R0.2; lint_5e.py `defined_terms`).
+#
+# One line per proper term the book uses: `term|canon source|gloss file|gloss text`.
+#   canon source  where the term is defined in canon (settings/valloh/…), or `module` for a
+#                 term this book defines itself
+#   gloss file    the module file whose text glosses it for a reader who has never seen the
+#                 setting, or `-` if the module does not gloss it yet (every use is a hit)
+#   gloss text    a quote from that file's unwrapped text that carries the gloss (`-` if none)
+# The linter also reads the canon vocabulary from settings/valloh V0, V1 and V3 (lineage
+# headings, the tribe table, the sect list) and flags any of those terms the module uses
+# that are not listed here.
+#
+# Tribes and lineages (canon: settings/valloh/V1_Lineages.md; table in V3 "Where the Tribes Are")
+Orthaen|V1_Lineages.md "Orthaen"; V3 "Rekuzan"|03_Masks_and_Agendas.md|**Your tribe is Orthaen.**
+Phern|V1_Lineages.md "Phern"; V3 tribe table|03_Masks_and_Agendas.md|it is **Phern** (a couple of high-ranking Phern sit on the Merchant's Circle
+Thenya|V1_Lineages.md "Thenya"; V3 tribe table|02_The_World_and_the_Night.md|Raunu announces a pact with the Thenya, a
+Scora|V1_Lineages.md "Scora"; V0 item 5; V3 tribe table|-|-
+Kshalo|V1_Lineages.md "Kshalo"; V3 tribe table|-|-
+#
+# The eight sects of the Orthaen (canon: V3 "Rekuzan", the bold sect list)
+Boranis|V3_Rekuzan_and_the_Tribes.md "Rekuzan"|02_The_World_and_the_Night.md|House Boranis holds the
+Draunel|V3_Rekuzan_and_the_Tribes.md "Rekuzan"|02_The_World_and_the_Night.md|*Patron: House Draunel, through Lord Essar Draunel.*
+Vaskarin|V3_Rekuzan_and_the_Tribes.md "Rekuzan"|04_The_Ball.md|A Vaskarin cousin and a Tessarin uncle, each certain their branch outranks the other
+Tessarin|V3_Rekuzan_and_the_Tribes.md "Rekuzan"|04_The_Ball.md|A Vaskarin cousin and a Tessarin uncle, each certain their branch outranks the other
+Kethaun|V3_Rekuzan_and_the_Tribes.md "Rekuzan"|03_Masks_and_Agendas.md|**Ilesse Kethaun**, the Border Cousin | Orthaen
+#
+# Places, powers and institutions (canon: V0_Ten_Things.md, V3_Rekuzan_and_the_Tribes.md)
+Rekuzan|V0 item 6; V3 "Rekuzan"|02_The_World_and_the_Night.md|**Rekuzan is nine walled districts grown together**
+Val'loh|V0 "Val'loh"; V3 "Val'loh, 3164 PG"|03_Masks_and_Agendas.md|The tribes of Val'loh are not different kinds of
+Oraga|V3 "The Oraga Nights"|02_The_World_and_the_Night.md|the Val'loh year. Oraga celebrates the yield
+Mazaa|V0 item 9; V3 "Val'loh, 3164 PG"|06_Aftermath.md|(Mazaa is the tribes' enemy in the western mountains)
+Blackwatch|V3 "Val'loh, 3164 PG"; V3 "The recent wound"|02_The_World_and_the_Night.md|The Blackwatch, who keep the vigil over the eastern mists
+Fraden|V0 item 9; V3 "Val'loh, 3164 PG"|04_The_Ball.md|one for each god, and the grandest of them is Fraden's
+Thaumaturgy|V0 item 3|03_Masks_and_Agendas.md|what Val'loh calls **Thaumaturgy**
+Invocation|V2_Magic_of_Valloh.md (the intuitive tradition)|03_Masks_and_Agendas.md|what Val'loh calls **Invocation**
+#
+# Terms this module defines itself
+Uninvited|module|02_The_World_and_the_Night.md|Three killers are coming to the ball: **the Uninvited**
+Attendant|module|02_The_World_and_the_Night.md|it is not a person: **the Attendant**, their master's servant
+Bought|module|09_The_Snakes.md|**The Bought** are not snakes either. They are a contract company
+Merchant's Circle|module|02_The_World_and_the_Night.md|**The Merchant's Circle** bleeds margin under his policies
+Tithe of Hands|module|02_The_World_and_the_Night.md|*(The Tithe of Hands is a levy on each sect palace

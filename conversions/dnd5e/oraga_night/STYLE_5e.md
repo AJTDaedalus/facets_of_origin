@@ -25,8 +25,9 @@ canon.
 | **Numbers** | Numerals for game quantities in DM text. Words inside read-aloud boxes. | DM text: "a 12-foot drop", "for 10 minutes", "within 30 feet". Box: "*the wall is twenty feet high*" | DM text: "a twelve-foot drop", "fifteen feet" |
 | **Stat blocks** | SRD 5.2.1 layout throughout chapter X: bare AC plus a **Gear** line; one **Immunities** line ("Poison, Psychic; Charmed, Frightened"); "Darkvision 120 ft.; Passive Perception 14"; Advantage folded into the Initiative score; no commentary in numeric fields; limited uses as "(1/Day)", "(3/Day)", "(1/Day Each)"; "When Bloodied" becomes a ***Bloodied.*** trait; epithets go on their own line above the type line. | `**AC** 17 · **Initiative** +2 (12)` then `**Gear** Chain Shirt, Shield` / `**Immunities** Poison, Psychic; Charmed, Exhaustion, Frightened, Poisoned` / `**Senses** Darkvision 120 ft.; Passive Perception 14` | `**AC** 14 (chain shirt under a festival coat)`, separate Damage and Condition Immunities lines |
 | **Difficulty vocabulary** | SRD 5.2.1 only: Low, Moderate, High, plus "beyond High". "Deadly" never appears in a budget line. One DM Note explains the 2014 multiplier. | "*Budget:* 1,000 XP — Low." / "800 XP, under Low" / "nearly twice High" | "800 XP — Deadly", "a Hard fight" |
-| **Read-aloud** | An indented italic block, always after a plain trigger line ("Read this when…:"). Italic paragraphs that are not indented are notes to the DM. Sidebars never contain read-aloud. Order: area header, then trigger, then box, then DM text. | `Read this when the first guests reach the court:` then a blank line, then `> *The outer gate is shut, and it was shut from the far side.*` | A box straight after a heading; read-aloud inside a **DM Note** |
+| **Read-aloud** | An indented italic block, always after a trigger line in one exact form: a bold paragraph that starts "Read this when" and ends with a colon inside the bold, **Read this when …:** (O41). Movement, card and timing details go inside the sentence ("**Read this when a character comes up the dark-wing corridor in Movement V:**"). Italic paragraphs that are not indented are notes to the DM. Sidebars never contain read-aloud. Order: area header, then trigger, then box, then DM text. | `**Read this when the first guests reach the court:**` then a blank line, then `> *The outer gate is shut, and it was shut from the far side.*` | A box straight after a heading; read-aloud inside a **DM Note**; "When the party enters, read:", "*Read to open the session:*", "***Trigger — read when…:***" |
 | **Box species** | Declared in the legend and used exactly as declared: **Sidebar —**, **DM Note —**, **Troubleshooting —**, ⟨If History Breaks⟩, **What [Name] Says** (Q&A), the fight card's **Wants / Tells / Breaks / Nastier** lines, and the Movement run box. No **Designer's note** (owner ruling Q4, 2026-10-05: converted to an unsigned DM Note). | `> **DM Note — the first check of the night**` / `> **Wants.** The contract satisfied or voided.` | "**Designer's note.**", "**MM Note**", a new unlabelled box |
+| **Box labels** | Heading style only (O41): the label is the whole first line of the box, bold, "Species — title", with no closing period or colon, and the box's text starts on the next line after a `>` blank line. Applies to **Sidebar**, **DM Note** and **Troubleshooting**. | `> **Sidebar — Steel at the ball**` then `>` then `> The Orthaen carry weapons…` | Run-in labels: "**Sidebar — Steel at the ball:** the Orthaen…", "**DM Note — the factor.** The captain…", "**Troubleshooting —** text" |
 | **Cross-references** | "(see chapter V)", '(see chapter V, "Down, Not Out")', "(card S2)", "(area B9)", "(Table I–3)". Lowercase "chapter" with a Roman numeral, in running text and in parentheses. Capitalize it only at the start of a sentence. Put section names in quotation marks, not italics. No "(source Ch. …)". The house Roman numerals stay. | "The fight is card S1 (see chapter IX, "The Seating Feud")." / "Chapter X holds every stat block." | "(Chapter V, *Midnight Rules*)", "(source Ch. III)" |
 | **Spelling** | American: rumor, color, center, honor, recognize, labeled. "Gray" everywhere, except "grey robes" only if INVENTIONS #43 fixes it as canon. Check that entry before changing it. | "a rumor", "three gray masks", "the center of the court" | "rumour", "colours", "centre", "recognises", "defence" |
 | **Emphasis** | No italics for emphasis in DM prose. Italics mark spells, items, section-title book names and non-indented DM notes only. | "Bare steel voids the whole scene." | "Bare steel *voids* the whole scene." |
@@ -64,9 +65,17 @@ python conversions/dnd5e/oraga_night/tools/lint_5e.py --file 04_The_Ball.md
 python conversions/dnd5e/oraga_night/tools/lint_5e.py --check         # vs lint_baseline.json
 python conversions/dnd5e/oraga_night/tools/bestiary_check.py --quiet
 python conversions/dnd5e/oraga_night/tools/pregen_check.py --quiet
+python conversions/dnd5e/oraga_night/tools/fact_check.py --check       # vs fact_baseline.json
 python -m pytest conversions/dnd5e/oraga_night/tools -q
 ```
 
 To add an exception, put a line in `tools/lint_5e_allow.txt` in the form
-`file|quoted text|reason`, for example
-`05_The_Longest_Night.md|ask the players|"the players" means the people at the table here`.
+`file|rule|quoted text|reason`, for example
+`05_The_Longest_Night.md|soft|ask the players|"the players" means the people at the table here`.
+The entry exempts only that rule, and only where the quoted text overlaps the hit; rule `*`
+is reserved for fixed canonical text (Handout 1).
+
+The continuity checker holds the cross-chapter facts (counts, Movements, floors, sizes) in
+`facts.yaml` and runs from `tools/fact_check.py` (`--report`, `--check`). Proper terms the
+book uses are listed with their gloss in `tools/terms.txt`; a term the book uses without a
+gloss is a lint hit.

@@ -748,3 +748,125 @@ an amendment to #58). Decisions left to the Worker: DECISIONS O28–O31.
   R5 layout and voice, R6 copyright check, re-review and push.
 - Planner decisions proposed: O32–O40 (DESIGN §3). Owner questions: QR1–QR7 (DESIGN §4).
 - 2026-10-08 OWNER answered QR1–QR7 (rulings recorded in DESIGN_oraga_5e_review_fixes §4); the plan is fully ungated.
+
+## Review-fix pass — R0
+
+*Worker, 2026-10-10. Tasks R0.1–R0.3 of `docs/TASKS_oraga_5e_review_fixes.md`. Tooling only:
+no module chapter text was edited. `STYLE_5e.md` gained the O41 pins.*
+
+**R0.1 — continuity bible and fact checker (TDD).**
+- `M/facts.yaml`: 10 facts at their TARGET truth (QR1–QR4, O28, O33–O35): household (sixty,
+  twenty-two stayed, "cut by nearly two-thirds", no "four-fold"); honor guards (nine; at
+  midnight two at the east-wing doors, seven to the dais; Movements I–V left to R2.2's table;
+  S4 = "the two nearest"); retinues (Circle 4, Church 4; Draunel 3, Boranis 3, Phern 2–3,
+  Thenya 2–3 per INVENTIONS #1); the Bought (16 + 4 + 1 = 21, "twenty blades", "twenty sworn
+  witnesses"); arrivals (Attendant Mv I, Uninvited Mv III crush, Vell Mv I, the Bought at
+  dusk / the gate from midnight); east-wing floor (gallery level, +12 ft, stair from the
+  Court's east doors); stairs (private stair = the garden stair); terraces (O34); O28 room
+  sizes; Maiven dies by default.
+- `T/fact_check.py`: unwraps paragraphs (shared `lint_5e.unwrap`), six check types (forbid,
+  sentence, count, size, movement, require) with `files`/`unless` filters and noun windows
+  (a count never crosses a table cell; "servants of" and "one" are not counts). Modes: default
+  (every hit, exit 1 if any), `--report` (counts per fact, then hits; exit 1 if any),
+  `--baseline`, `--check` (fails only on hits above `T/fact_baseline.json`).
+- `T/test_fact_check.py`: 50 tests (≥3 per check type, plus unwrapping, validation, the real
+  module's expected hits, the CLI and the baseline). Red first (import error), then green.
+
+**Fact-check first run: 24 hits. This is the R2 worklist.**
+
+| fact | hits |
+|---|---|
+| household | 4 |
+| honor_guards | 6 |
+| retinues | 3 |
+| bought_company | 2 |
+| arrivals | 3 |
+| east_wing_floor | 1 |
+| stairs | 1 |
+| terraces | 3 |
+| room_sizes | 0 |
+| maiven_fate | 1 |
+
+| where | fact/check | match |
+|---|---|---|
+| 01_Overture.md:63 | arrivals/sentence | "at midnight something comes through with the Uninvited" (P1-4) |
+| 02_The_World_and_the_Night.md:70 | household/forbid | four-fold (P1-1) |
+| 02_The_World_and_the_Night.md:422 | household/forbid | four-fold (P1-1) |
+| 04_The_Ball.md:38 | household/count | a hundred servants (P1-1) |
+| 04_The_Ball.md:83 | honor_guards/sentence | "the nine go to the dais" (P1-2) |
+| 04_The_Ball.md:99 | honor_guards/sentence | S4 "two guards", not "the two nearest" (P1-2) |
+| 04_The_Ball.md:705 | household/forbid | four-fold (P1-1) |
+| 04_The_Ball.md:1391 | terraces/forbid | Two terraces below (P1-5, O34) |
+| 05_The_Longest_Night.md:440 | east_wing_floor/require | General Features lacks the 12-foot stair / gallery level (P1-5, O33) |
+| 05_The_Longest_Night.md:443 | stairs/require | private stair not named as the garden stair (P1-5, O33) |
+| 05_The_Longest_Night.md:461 | honor_guards/sentence | "The nine Boranis Honor Guards … die or fall" at the dais (P1-2) |
+| 05_The_Longest_Night.md:753 | arrivals/movement | Hollow "(any Movement)" (P1-4) |
+| 05_The_Longest_Night.md:753 | arrivals/movement | Hollow "Mv II–V" (P1-4) |
+| 05_The_Longest_Night.md:817 | honor_guards/forbid | only guards left are dying on the dais (P1-2) |
+| 05_The_Longest_Night.md:1173 | bought_company/sentence | forty blades (P2-6) |
+| 05_The_Longest_Night.md:1178 | bought_company/sentence | forty sworn witnesses (P2-6) |
+| 06_Aftermath.md:43 | maiven_fate/sentence | "Maiven Nolonaire will not leave the city…" unconditional (P2-5) |
+| 08_Handouts.md:43 | honor_guards/sentence | "The nine honor guards | To the dais" (P1-2) |
+| 09_The_Snakes.md:170 | retinues/sentence | Callun "and three Circle Hired Knives" (P1-7) |
+| 09_The_Snakes.md:218 | retinues/sentence | Kovaun "and three Church Wardens" (P1-7) |
+| 09_The_Snakes.md:1331 | terraces/forbid | rail of the upper terrace (S9 box; O34) |
+| 09_The_Snakes.md:1355 | terraces/forbid | Two terraces below (O34) |
+| 10_Bestiary.md:421 | honor_guards/sentence | "There are nine. At midnight they die or fall on the dais" (P1-2) |
+| 10_Bestiary.md:656 | retinues/forbid | Kovaun brought three (P1-7) |
+
+Every item R0.1's acceptance names is present: household, nine guards, forty blades, the
+Attendant's arrival, the east wing's floor, "Kovaun brought three", Maiven alive in 06. No
+false positive on 04:877 ("should field forty blades in ceremony", the honor guard), on
+05:368 ("up to nine people"), or on the O28 sizes (0 size hits). Not built in R0: a
+"Down, Not Out" rule-copy entry; R1.2 adds it when it fixes the canonical wording in 05.
+
+**R0.2 — linter upgrades (TDD).**
+- Hard rules now run on unwrapped paragraphs (`unwrap()`); hits report the line where the
+  match starts. The wrapped-DC sites the review named (04:243 etc.) were already handled by the
+  old next-line read-ahead, so bare_dc stays at 0; the unwrap closes the general case (save
+  demands, conversion talk, any rule split by a wrap).
+- Allowlist is rule-scoped, `file|rule|text|reason`, and exempts only where the quoted text
+  overlaps the hit. Migrated 18 entries: Handout 1's six → rule `*` (fixed canonical text);
+  eleven generic-check and grapple lines → `bare_dc`; the Handout 2 card → `designer_we`. The
+  old 3-field form now raises.
+- New hard families: emphasis_italics, or_skills, html_comment, repo_filename (README exempt),
+  sim_jargon, conversion_wide, anachronism. New structure rules: trigger_format (the pinned
+  "**Read this when …:**"), box_label (heading style), defined_terms (against `T/terms.txt` and
+  the canon vocabulary read from `settings/valloh` V0/V1/V3).
+- `T/terms.txt` seeded with 23 terms, each with its canon source and module gloss site. Scora
+  and Kshalo are canon (V1, V3) but unglossed in the module, so they are listed with gloss `-`
+  and flagged until R2.5.
+- `STYLE_5e.md` pins the trigger form and heading-style box labels; DECISIONS O41.
+- Tests: `test_lint_5e.py` grew from 125 to 185 tests (≥3 per new rule; unwrap, scoped allowlist, wrapped
+  rules). Fixtures: `hard_hits.md` gained one line per new hard family; `clean.md` uses the
+  pinned trigger and box-label forms.
+
+**New lint hit counts (`lint_5e.py --report`). These are the R3/R5 worklists.**
+
+| family | hits | phase |
+|---|---|---|
+| emphasis_italics | 50 | R5 (incl. 14 italic *Heroic Inspiration* on Rewards lines, P2-24) |
+| or_skills | 12 | R5 |
+| html_comment | 1 | R3 (09:268, P2-3) |
+| repo_filename | 2 | R3 (04:22–23, P2-2) |
+| sim_jargon | 8 | R3 (P2-1, QR6) |
+| conversion_wide | 4 | R3 (01:35 *Inventions*, 03:82, 03:84, README:42; P2-4) |
+| anachronism | 4 | R5 (07:296, 07:311, 09:215 "memo"; 07:750 "businessperson"; P3-17) |
+| trigger_format | 30 | R5 (P2-20) |
+| box_label | 16 | R5 (P2-21) |
+| defined_terms | 2 | R2.5 (04:677 Scora, 08:256 Kshalo; P2-8) |
+| all other families | 0 | — |
+
+Totals: 81 hard, 48 structure. Soft metrics moved slightly (words 70,063 → 70,230) because the
+migrated `bare_dc` lines are no longer excluded from the soft metrics; no soft target regressed.
+
+**Re-baseline.** `lint_5e.py --baseline` rewrote `T/lint_baseline.json` (81 hard + 48 structure
+hits recorded); `fact_check.py --baseline` wrote `T/fact_baseline.json` (24 hits). Both
+`--check` runs pass. Later phases re-baseline after fixing hits and say so here.
+
+**Commands.**
+- `python -m pytest conversions/dnd5e/oraga_night/tools -q` → 277 passed.
+- `python T/lint_5e.py --check` → OK (0 problems; 81 hard, 48 structure remain).
+- `python T/fact_check.py --check` → OK (0 problems; 24 hits remain).
+- `python T/bestiary_check.py --quiet` → 25 blocks + 3 Nastier, 0 mismatches.
+- `python T/pregen_check.py --quiet` → 5 pregens, 0 issues.
