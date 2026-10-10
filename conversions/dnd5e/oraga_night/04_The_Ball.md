@@ -10,17 +10,17 @@ I–V are this chapter; the Unmasking and everything after it are chapter V.*
 > mask, the DC of a Standard check is 13 unless the stakes say otherwise.
 >
 > **Success at a cost** (see chapter I). When a check fails by **4 or less**, you
-> may offer the player the thing they wanted *with a cost attached*. Name the cost
+> may offer the player the thing they wanted with a cost attached. Name the cost
 > first, then let them take it or leave it. This chapter says "at a cost" wherever
 > that habit matters most.
 >
-> **Heroic Inspiration.** Table I–3 in chapter I is the whole list of printed awards.
+> **Heroic Inspiration.** Table I–3 in chapter I lists every printed award.
 >
 > **Time.** Every Movement below opens with its minutes from Table I–1 and what to run
 > if you are behind. *If you have time* marks depth a four-hour table can leave out.
 >
-> **Fights** live in chapter IX, *The Snakes*, one card each. Stat blocks are in
-> chapter X, the Bestiary. Nothing in this chapter
+> **Fights** live in chapter IX, *The Snakes*, one card each, and their stat blocks are in
+> chapter X, the Bestiary, so nothing in this chapter
 > carries an enemy's numbers. **No fight in this chapter is mandatory, and every one of
 > them is visible before it starts.**
 
@@ -33,19 +33,19 @@ tonight it is lit deliberately for the first time in two years: lanterns in the
 gardens, fire in the great hearths, and the walls themselves shining like the inside
 of a shell.
 
-Guests notice two things within minutes. First, the splendor is real. House Boranis
+Guests notice two things within minutes. First, the splendor is real: House Boranis
 has spent lavishly, and the food, wine, and musicians are the finest of the festival.
 Second, the house is empty. Two years ago this palace kept a household of sixty;
 tonight, familiar liveried staff number about two dozen, stretched thin and
-supplemented by festival hires who don't know where anything is. Whole wings are dark.
-The famous Boranis honor guard is present in bare ceremonial numbers.
+supplemented by festival hires who don't know where anything is. Whole wings are dark,
+and the famous Boranis honor guard is present in bare ceremonial numbers.
 
 And the guest list is the other thing: every enemy Raunu Boranis has, armed, because
 in Rekuzan everyone is. **This is the chicken pen, and the host has opened the gate to
 every snake he has.** This chapter shows them to the table one Movement at a time.
 
 **Locations.** The street, eleven keyed areas in two tiers, and one left for you. **The
-Public Rooms** are where the ball happens. Rumors are caught there, and the night's
+Public Rooms** are where the ball happens: rumors are caught there, and the night's
 main events land there on schedule. **The Private Palace** is where the night's truths
 live. **The palace diagram** in chapter VIII shows how the rooms connect; print it.
 
@@ -59,8 +59,8 @@ alerted" and stops.*
 **When steel is bared** anywhere a guest can see, or a spell with a visible effect is
 cast at a guest, two **Boranis Honor Guards** arrive at once, and four more come at
 the start of the second round after the first guard is Bloodied (*Call the House*;
-card S4, chapter IX). They do not fight to hurt.
-They detain and expel, and every blow they land is a knockout blow: a creature they
+card S4, chapter IX). They do not fight to hurt:
+they detain and expel, and every blow they land is a knockout blow: a creature they
 reduce to 0 Hit Points is Unconscious and Stable, never dying. The offender's
 invitation is void for the rest of the night, and the room remembers their face after
 the Unmasking.
@@ -73,7 +73,7 @@ game for longer than one Movement, and whoever opened the door is owed. A charac
 detained in Movement V wakes as the lights die, and the cell door is open: nobody is
 guarding a cell tonight.
 
-This rule binds the snakes too, and that is the whole reason the first five Movements
+This rule binds the snakes too, and it is the reason the first five Movements
 stay a party: **every faction at this ball wants somebody else to draw first.**
 
 **When the east wing is forced:** the doors are doubled, Corval is informed within
@@ -84,10 +84,10 @@ in the act. The east wing stays doubled for the rest of the night.
 stay there, and two hold the east-wing doors (Table VIII–7 has every post). The corridor wards fire, and every warded route is lit, loud, and watched.
 The **service passages become the only unwarded way through the palace**. Every
 alert rule above is suspended, because there is no longer anybody enforcing it. The
-honor guard is doing one thing now. So, in the dark, are the snakes (see chapter V,
+honor guard is doing one thing now, and so, in the dark, are the snakes (see chapter V,
 "The Snakes in the Dark").
 
-**What the Bought do, at each bell:** see the DM sheet in chapter VIII. In short:
+**What the Bought do, at each bell:** see the DM sheet in chapter VIII; in short,
 nothing at all until the quarter-bells, and then the gate.
 
 ### When Somebody Draws Early
@@ -106,10 +106,10 @@ bad round. *Knocked out:* the principal's people carry them to the chapel (B6), 
 line goes quiet for a Movement, and its heat goes to 4 with the party as the reason.
 *Killed:* the retinue takes the body out through the gate within the Movement, the
 faction's line ends there (no more tells, no midnight card), and the killer answers to
-the honor guard (S4). Either way, the whole ball has seen it. The party is the story
+the honor guard (S4). Either way, the ball has seen it, and the party is the story
 of the night until midnight gives it a better one.
 
-**The host attacked at a summons or the toast.** Raunu will not fight a guest. On his
+**The host attacked at a summons or the toast.** Raunu will not fight a guest: on his
 turn he releases a ward (see chapter X, "If It Comes to It"): a wall of crystal between him
 and the blade, the honor guard in the room the round after (S4), and Raunu gone by a
 door the attacker cannot follow. He is back on the dais at midnight, because custom
@@ -134,7 +134,7 @@ to ask for.*
 **B0. The Street, the Approach and the Line.** **Play begins here**, in the street at
 the foot of the hill, with the party walking up toward the palace among everyone else
 who was invited, hired or smuggled in. This is the first scene of the adventure, not a
-transition into it. It is where the table learns what a check feels like at this ball.
+transition into it, and it is where the table learns what a check feels like at this ball.
 
 **Read this when the session opens:**
 
@@ -153,17 +153,17 @@ whether the party engages or not:
 
 - **Corval receives by name**, from memory (see B1).
 - **The Thenya delegation waits**, and has been waiting, with visibly thinning
-  patience. They are the only non-Orthaen faces in fifty and they know exactly how
+  patience. They are the only non-Orthaen faces in fifty, and they know how
   that is being read.
-- **A footman is quietly selling a card** to somebody two places ahead: a genuine
+- **A footman is selling a card** in an undertone to somebody two places ahead: a genuine
   invitation with a scorched corner and somebody else's name on it. *(This is the
   Discarded Invitation hook, made visible. A character who took that hook is
   watching their own arrival happen to a stranger.)*
 - **Every great house's hired swords idle at the edge of the court** in unmatched
   colors, waiting for masters who will be inside for six hours. There are a great
-  many of them this season. *House Boranis hired none.*
+  many of them this season, and House Boranis hired none.
 - **A tall, pale factor is already inside**, having arrived early and entirely
-  unremarkably. *(This is Master Vell; see chapter VII.)* Nobody in the line saw him arrive. Nobody in the line is thinking
+  unremarkably. *(This is Master Vell; see chapter VII.)* Nobody in the line saw him arrive, and nobody in it is thinking
   about him.
 
 **The omen** *(the one thing in this scene that is not gossip)*: nine
@@ -175,20 +175,18 @@ before anyone reaches the door. Rumor Table rolls are legal from the first minut
 
 > **DM Note — the first check of the night**
 >
-> **Default:** make it a **social** check: a DC 13 Charisma (Persuasion) check to
-> talk a place up the line, or a DC 13 Wisdom (Insight) check to read who is selling
-> what. If it fails by 4 or less, offer it *at a cost*, naming the cost out loud before you
-> resolve it. On a success, the character gets one rumor (Table VIII–8) or a place in
-> the line next to anyone named in the bullets above. At a cost, they get the same,
-> and Table VIII–4 supplies the cost.
+> Make it a social check: a DC 13 Charisma (Persuasion) check to talk a place up the
+> line, or a DC 13 Wisdom (Insight) check to read who is selling what. On a success,
+> the character gets one rumor (Table VIII–8) or a place in the line next to anyone
+> named in the bullets above. If the check fails by 4 or less, offer the same at a
+> cost, name the cost before you resolve it, and let Table VIII–4 supply it.
 >
-> **The dial:** you could open on something easier, to give the table a win.
->
-> **The cost:** the first check teaches the tier the game lives in. Set the DC at 10
-> and the table learns that checks are things you pass. Set it at 13 and let a
-> near-miss land honestly (*you get what you asked for, and here is what it costs*),
-> and they have learned the actual night in thirty seconds. This module is full of
-> near-misses. Teach it here, where the cost is a rumor and somebody's dignity.
+> You could open on something easier to give the table a win, but the first check
+> teaches the tier the game lives in. Set the DC at 10 and the table learns that checks
+> are things you pass. Set it at 13 and let a near-miss land honestly ("you get what
+> you asked for, and here is what it costs"), and they have learned the actual night
+> in thirty seconds. This module is full of near-misses, so teach it here, where the
+> cost is a rumor and somebody's dignity.
 
 **B1. The Gatehouse Court.** *(See map VIII–2.)* Where invitations are presented: by name, personally, against
 Minister Corval's memory. There is no written list, and with Corval
@@ -196,7 +194,7 @@ there has never needed to be. Nobody is disarmed at the door, because nobody is
 ever disarmed anywhere (see the sidebar below). *(Agenda relevance: forged and
 borrowed invitations are tested here. Corval is sharp, but it is dark, the line is
 long, and the custom of masks was made for this. Passing on a borrowed card is a
-DC 13 Charisma (Deception) check. A card with the bearer's own name wrongly on it
+DC 13 Charisma (Deception) check; a card with the bearer's own name wrongly on it
 needs a DC 18 Charisma (Deception) check. A miss by 4 or less gets them in, and Corval will remember the face.)*
 
 If the check fails by 5 or more, Corval hands the card back with perfect courtesy and
@@ -213,11 +211,11 @@ through the kitchens (B10), and Corval will remember the face.
 > in it. Anything short of enormous draws no attention at all, and enormous draws an
 > occasional eyeroll.
 >
-> The only real line is *brandishing*, bare steel pointed at a person, which brings
+> The only real line is brandishing, meaning bare steel pointed at a person, which brings
 > guards at a run and ends invitations (**Boranis Honor Guard**, chapter X). That
 > House Boranis does not even try to disarm its guests unsettles the ones who expected
 > the paranoid recluse to insist. The house that prepared for everything apparently
-> does not care about a guest's knife. *(And notice who else it lets in armed. Every faction at this ball
+> does not care about a guest's knife. *(And notice who else it lets in armed: every faction at this ball
 > brought its people, and every one of them is carrying.)*
 >
 > *Spells count as steel.* A spell with a visible effect cast **at a guest** is
@@ -241,8 +239,8 @@ open on a stair that rises 12 feet to the east wing; see chapter V, "The Palace 
 Midnight: General Features"; see map VIII–3.)*
 
 **B3. The Banquet Galleries.** Long feast halls flanking the Court, tables groaning
-with harvest excess. Where the real conversations happen, in alcoves built for
-exactly that. *(Best room for agenda work: everyone passes through, and the alcoves
+with harvest excess, where the real conversations happen in alcoves built for
+the purpose. *(Best room for agenda work: everyone passes through, and the alcoves
 are half-private. Overhearing an alcove without being noticed takes a DC 13
 Dexterity (Stealth) or DC 13 Wisdom (Perception) check, whichever the character is
 doing. A success hears one
@@ -257,15 +255,15 @@ rumor (Table VIII–8) or one fact from the speaker's entry in chapter VII. See 
 > to disturb. A dais, worn down its center. One chair. The room is quiet in the
 > particular way of a room that a great many people are deliberately not entering.*
 
-The room where Orthaen chiefs have always received the ruled. Generations of
-petitioners wore the dais down. In Movement III Raunu holds audiences here, ministers vetting supplicants through a screen so thin it is
+The room where Orthaen chiefs have always received the ruled, on a dais that generations of
+petitioners wore down. In Movement III Raunu holds audiences here, ministers vetting supplicants through a screen so thin it is
 almost an invitation. *(Every agenda that needs the host runs through this room. The
 waiting line outside it is a scene in itself: rivals comparing masks and nerve,
 and everyone rehearsing their one question.)*
 
 **B5. The Garden Terraces & the River Gate.** Lantern-strung gardens stepping down to
 the water, ending at a modest iron gate to the river walk, which is always locked. Couples,
-conspirators, and anyone needing air. *(Agenda 6 lives here. So does the escape route.
+conspirators, and anyone needing air. *(Agenda 6 lives here, and so does the escape route.
 Know this geography cold: Court → terraces → lower garden → river gate. The
 gate's lock takes a DC 15 Dexterity check using Thieves' Tools. The character with Agenda 6 needs no check, having
 been given what they need. Three terraces, each about 40 feet deep with a 10-foot drop
@@ -284,7 +282,7 @@ Where Raunu and Veier were married. A successful DC 10 Wisdom (Perception) check
 notices that the eighth niche, Elanna's, holds fresh offerings, tended recently and
 with care. Elanna is the death-goddess the northern tribes honor. A successful DC 13
 Intelligence (Religion) check knows what it means for a chief's chapel to tend
-Elanna's niche. Someone in this house has been sitting with mortality. *(Quiet scenes, confessions, and Mother Sella. A good place
+Elanna's niche. Someone in this house has been sitting with mortality. *(Quiet scenes, confessions, and Mother Sella: a good place
 for the characters to catch their breath, with one deniable omen. A character who spends a
 Movement here may take a Short Rest, which is the only one the ball offers.)*
 
@@ -318,7 +316,7 @@ wards first.)*
 **B8. Raunu's Study.** Locked, dark wing, second floor. Opening it takes a DC 18
 Dexterity check using Thieves' Tools; the lock is crystal, not iron. Two years of a
 genius's solitude. The characters will look for papers and find none, because there
-are none anywhere. The room thinks in crystal.
+are none anywhere: the room thinks in crystal.
 
 - **The instruments.** Nobody can name them.
 - **The great table.** A grown relief of the eastern coast, its mist-lines remembered
@@ -333,7 +331,7 @@ are none anywhere. The room thinks in crystal.
 
 *(Nothing here explains the instruments or the scorch-marks. Operational hint only:
 Raunu has been studying something far away to the east, and preparing. Nothing of
-Agenda 1's decree is here. The Tithe of Hands exists only in Corval's memory and two
+Agenda 1's decree is here; the Tithe of Hands exists only in Corval's memory and two
 ministers'.)*
 
 *The drawer and the slate matter to someone else, too: the written word belongs to the
@@ -350,7 +348,7 @@ chasing the Root has a very good reason to reach that slate first.*
 
 Sealed, guarded, forbidden. Behind
 its doors are the warmest rooms in the palace, or the saddest, depending on when the
-characters learn what they learn. *(Forcing the doors is card S4. Nobody gets through them on a
+characters learn what they learn. *(Forcing the doors is card S4, and nobody gets through them on a
 single check. The ways in are Agenda 4's errand (the grandmother's ring, shown at the
 doors; see "Dinner for Two (B9)", Movement IV), Anha's passages, and Undercurrent C.)*
 *(The wing is upstairs, at gallery level: a stair rises 12 feet from the Court's east
@@ -365,8 +363,8 @@ Warm light, a midwife's quiet traffic, and three finds:
   And, telling its whole story without a word: her traveling pack. For the first
   year (the servants' silence confirms it, if Anha talks) it stood packed by the
   door, ready, a border woman's plain statement that she could leave whenever she
-  chose. It stands there still, out of habit or humor. But it is empty now, and
-  its contents have quietly become the room: the wool folded onto the marriage
+  chose. It stands there still, out of habit or humor, but it is empty now, and
+  its contents have become the room: the wool folded onto the marriage
   bed, the flint on the mantel, the mountain flowers pressed and kept. She stopped
   being ready to go home.
 
@@ -389,7 +387,7 @@ Warm light, a midwife's quiet traffic, and three finds:
 **B10. Kitchens & Service Passages.** Understaffed chaos, festival hires, and the
 skeleton staff of two silent years, Anha among them (Agenda 8). The service passages
 thread the whole palace, including the east wing and the garden stair. *(The other way
-through everything. At midnight, the difference between a tragedy and a massacre.
+through everything, and at midnight the difference between a tragedy and a massacre.
 Finding one's way through them without a guide takes a DC 15 Wisdom (Survival) check
 the first time and is automatic after that. With Anha or any of the skeleton staff,
 there is no check. See map VIII–5 for the run to the east wing.)*
@@ -398,10 +396,10 @@ there is no check. See map VIII–5 for the run to the east wing.)*
 "Undercurrent A — The Root of the House", below.)* Beneath the wine cellars, behind a seal of living
 crystal, lies the oldest place in Rekuzan: the chamber where the first Boranis
 ancestor grew the first crystal of the palace, centuries of house rising from this
-one root. Raunu has made it his true workshop. What waits inside is described in
+one root. Raunu has made it his true workshop, and what waits inside is described in
 Undercurrent A. At midnight the Root matters again. The palace's defenses are
 deepest here, and a character who understands the wards (Agenda 5, or study in this
-room) can *steer* them from the Root the way Raunu does from memory.
+room) can steer them from the Root the way Raunu does from memory.
 
 **B13. The Room You Put Here.** *(If you have time. Deliberately empty. Fill it.)*
 
@@ -434,19 +432,19 @@ or Vorlain's cousin Essin recruiting drinking companions who might talk. The DM 
 says where everyone stands in each Movement.
 
 **Rumors** circulate all night: any social scene can yield one (roll on the table in
-chapter VIII, or choose). They are contradictory by design. Nobody at the ball knows
+chapter VIII, or choose). They are contradictory by design: nobody at the ball knows
 the truth, and every rumor is told with total confidence (Table VIII–8).
 
 **Social checks at the ball.** NPCs never make checks against the party outside a fight. Their
 entries in chapter VII say how hard they are to move instead, and those words map onto
-the ladder (see chapter I, "Checks, Inspiration, and the Ladder"). *Impossible* means no check at all. Behind a mask, a character approaching someone far above their
+the ladder (see chapter I, "Checks, Inspiration, and the Ladder"). "Impossible" means no check at all. Behind a mask, a character approaching someone far above their
 station makes an ability check using the skill that fits, DC 10, where it would
 otherwise be 13: the custom protects the conversation, and everyone at this ball is someone else tonight.
 
 ### Running a Scattered Party
 
-Four players will be in four rooms by Movement II. That is the design, and it only
-works if nobody sits idle.
+Four players will be in four rooms by Movement II. That is the design, and it
+works only if nobody sits idle.
 
 - **Cut every five to ten minutes,** on a question: "What do you do?" End a scene on a
   choice, not on its resolution, and come back to it.
@@ -459,7 +457,7 @@ works if nobody sits idle.
   characters at once.
 - **Lend idle players a voice.** A player whose character is waiting can play a
   gossiping guest in someone else's scene, or roll the rumor table for them.
-- **Regroup at the toast.** Movement IV happens in the galleries, for everyone. It is
+- **Regroup at the toast.** Movement IV happens in the galleries, for everyone, and it is
   the natural place to bring the party back together before the dark.
 
 ---
@@ -494,8 +492,8 @@ or past.
 Corval's escalating seating feud, which a kind character may already have
 helped him with, loses its manners in the banquet galleries. A Vaskarin cousin and a Tessarin
 uncle, each certain their branch outranks the other, have been moved twice apiece
-by the exhausted staff, and the argument stops being about chairs. Raised voices. A
-circle forming. A cup thrown, then a bench going over. Two knots of kinsmen and
+by the exhausted staff, and the argument stops being about chairs. Raised voices, a
+circle forming, a cup thrown, then a bench going over. Two knots of kinsmen and
 hangers-on wade in behind their principals, drunk and glad of the excuse.
 
 By default it boils over in Movement II, the first time a character is within earshot
@@ -503,7 +501,7 @@ of the third bench (card S1). You can hold it until Movement III if the gallerie
 empty of the party. It is over, one way or the other, before the toast.
 
 This is an honest brawl, and anyone can join it: fists, elbows, harvest fruit,
-someone's ceremonial staff. Run it as ordinary combat with one mercy. Nobody here
+someone's ceremonial staff. Run it as ordinary combat with one mercy: nobody here
 has a weapon worth the name, so the characters fight with unarmed strikes and
 improvised weapons, and **all damage in the brawl is nonlethal**. Anyone dropped to
 0 Hit Points is simply out of it, bruised, Unconscious and Stable, and no one makes a
@@ -524,7 +522,7 @@ what ending it well is worth.
 > **Sidebar — Snakes at the feud**
 >
 > A seating feud between two minor branches is
-> exactly the kind of thing a Draunel duelist would lean into and an Essin blade would
+> the kind of thing a Draunel duelist would lean into and an Essin blade would
 > step out of. If the table has already met either, let one of them be at the edge of
 > the circle, watching to see who draws. Neither joins in. Both remember who ended it.
 
@@ -532,7 +530,7 @@ what ending it well is worth.
 
 Tavva's crew (chapter VII; **Tavva** and her **Gallery Knives**, chapter X) is working
 the ball tonight, and a watchful table can catch them at it three times. Each sighting
-is shown plainly, once. Each can be followed, braced, or let go. They are
+is shown plainly, once, and each can be followed, braced, or let go. They are
 professionals: they fight to leave, not to kill. After midnight they loot the burning
 palace (card S5).
 
@@ -584,7 +582,7 @@ clues: a table that misses one finds another, so never let a single failed check
 a thread), a **find** (what's at the bottom), and **at midnight** (how the discovery
 pays off when the lights die).
 
-Agendas are what the characters were sent to do. Undercurrents are what they
+Agendas are what the characters were sent to do; Undercurrents are what they
 choose to chase. The best nights are the ones where a character abandons
 their patron halfway down a wine-cellar stair.
 
@@ -604,7 +602,7 @@ not a diagram).
 **The trail:**
 - *The kitchens (B10):* the cellar tally-cords don't add up. For two years, supplies
   have gone down the lower stair that never came back up as anything. Candles by the
-  crate. Lamp-oil. And once, memorably, a crate from the eastern coast that hissed
+  crate, lamp-oil, and once, memorably, a crate from the eastern coast that hissed
   when it shifted, packed in salt. (Anha, befriended, offers this unprompted. A
   festival-hire cellar hand can be charmed into showing the knots instead with a DC 13
   Charisma (Persuasion) check. Reading them takes a DC 10 Intelligence check for
@@ -614,7 +612,7 @@ not a diagram).
   (Perception) check (a DC 10 Wisdom (Perception) check for anyone who saw the study's
   lattice diagram; automatic
   for an Orthaen who puts a hand on the wall). The seam is a **door**, and it is
-  sealed the way Boranis things are sealed: grown, not locked. Thieves' Tools find
+  sealed the way Boranis things are sealed: grown, not locked, and Thieves' Tools find
   nothing to work on.
 - *Opening it:* the lattice diagram from the study is the key, literally. Traced on
   the seam, it opens the door (automatic if a character copied or memorized the slate; a DC 18
@@ -640,11 +638,11 @@ gifts.** What an hour in the laboratory yields, in rising order:
   quietly through Phern intermediaries over fifteen years, at prices that would
   frighten the Circle. A character who samples even three or four
   lattices sees that all of it bends toward one question: **where the gifts come from.**
-- **One lattice that speaks.** Among the racks, a crystal holds a voice.
-  It is Raunu's own, dry and private, a man thinking aloud into stone because the law
+- **One lattice that speaks.** Among the racks, a crystal holds a voice:
+  Raunu's own, dry and private, a man thinking aloud into stone because the law
   left him nowhere else to put it: *"The Church says the gifts are given. Wrong
   verb. The gift is not given. It is remembered."*
-- **Instruments** of glass and lattice nobody can name. Yet an Orthaen or any
+- **Instruments** of glass and lattice nobody can name, yet an Orthaen or any
   character who can cast spells can feel what they do: they read the gift itself,
   the way a jeweler's glass reads a stone. What they were reading, the room answers
   quietly: a chair with a wide armrest, a stool beside it, a lap-blanket of Thenya
@@ -652,13 +650,13 @@ gifts.** What an hour in the laboratory yields, in rising order:
 - **The skeleton.** In an alcove the lamplight has to be carried into, a full human
   skeleton lies on a stone bier. Through every bone of it grow **fine-grained
   crystals**, seeded and cultivated through the marrow itself. They thread the ribs,
-  vein the long bones, and cluster like frost in the eye sockets. It is not violence.
-  The bones are old, unbroken, and arranged with something like respect, and the
+  vein the long bones, and cluster like frost in the eye sockets. It is not violence:
+  the bones are old, unbroken, and arranged with something like respect, and the
   crystal-work is years of patient tending.
 
   An Orthaen or a scholar who studies it (a DC 13 Intelligence (Arcana) or DC 13
-  Wisdom (Medicine) check) grasps the experiment's question, because the whole room
-  has been asking it: whether any remnant of the gift survives death. The lattices do
+  Wisdom (Medicine) check) grasps the experiment's question, because the room
+  has been asking it all along: whether any remnant of the gift survives death. The lattices do
   not legibly say whether the crystals found an answer. A few threads in the ribcage
   glow, very faintly, if no one is speaking. Whose bones these are is left open, and
   the room does not tell. *Speak with Dead* and every other magic that would ask the
@@ -701,18 +699,18 @@ What the room still does not give: the lattices' deeper contents, the name burne
 from the junction, what the restored gift is or does, or what the mists have to do
 with any of it. No check, spell, or divination reaches past that line tonight.
 *Legend Lore*, *Commune* and their kin return rumor and contradiction, the way the
-world answers everything else about this house. The find is also, quietly, why
-rumors 2 through 12 all exist: everyone senses he was doing something. Nobody
+world answers everything else about this house. The find is also why
+rumors 2 through 12 all exist: everyone senses he was doing something, and nobody
 guessed this.
 
 **At midnight:** three payoffs. The Root is the strongest-warded place in the
 palace: a safe room that can shelter a dozen guests through the whole attack. A
 ward-literate character can steer palace defenses from here (seal a corridor ahead
 of the Radiant; light a stairwell for the fleeing). And the Uninvited will not
-enter it. Whatever the deep crystal is to them, they will not cross its
+enter it: whatever the deep crystal is to them, they will not cross its
 threshold, and nothing in this adventure explains why. *(The snakes do not know
-it is there. But its key is the slate in B8, and the Church's Wardens mean to wipe that
-slate tonight. See card S8.)*
+it is there. Its key, though, is the slate in B8, and the Church's Wardens mean to wipe that
+slate tonight; see card S8.)*
 
 ### Undercurrent B — The Household That Wasn't *(if you have time)*
 *The household was sixty. Two years ago it was cut by nearly two-thirds, and every servant let go had to go somewhere.*
@@ -738,8 +736,8 @@ place him somewhere dry.* He also knows the testament Raunu swore aloud in the c
 three days before the ball, with Corval and Mother Sella standing witness as the law
 requires. It provides for every current servant by name.
 
-**The find:** nothing sinister. The staff weren't victims. They were evacuated, with a thoroughness that reads as
-love expressed as logistics. The silent palace was never hiding a crime. It was
+**The find:** nothing sinister. The staff weren't victims; they were evacuated, with a thoroughness that reads as
+love expressed as logistics. The silent palace hid no crime: it was
 clearing the decks. For what, neither Corval's memory nor the testament says.
 
 **At midnight:** the characters who solved this one understood the night before it
@@ -765,18 +763,18 @@ east wing doors is easy (a DC 10 Dexterity (Stealth) check). Getting through the
 ring, Anha's passages, or real ingenuity. Inside are warm light, the guarded calm of a
 household on watch, and the living quarters' three finds (B9): the unpacked
 traveling pack, the two slings, and the nursery with its slow-turning crystal mobile.
-The pregnancy is the thread's answer. The pack and the slings are its heart, and a
+The pregnancy is the thread's answer; the pack and the slings are its heart, and a
 table that reads those rooms stops investigating a scandal and starts guarding a
 family.
 
-**The find:** the pregnancy, the secret the whole ball is guessing at, and the
+**The find:** the pregnancy, the secret the ballroom is guessing at, and the
 sentence Raunu will die without finishing. He means to announce it at midnight,
 and he never gets to. The characters who bottom this thread may be the only guests
 in the palace who ever know what the night was for. What they do with
 that is the thread's real payload: sell it (the Circle would reprice the room),
 guard it, warn the Thenya, or carry it silently into the Unmasking knowing what
 the recluse is about to say. Characters who found the nursery tend to appoint
-themselves its protectors, which is exactly where chapter V wants them standing.
+themselves its protectors, which is where chapter V wants them standing.
 
 *(Selling it is a real choice with a real buyer. Rhaza Callun fears exactly one thing
 from this house: an heir, a dynasty of Raunus. A character who brings her the
@@ -835,8 +833,8 @@ characters act on it:
   scene, they simply leave it, through the crowd, unhurried, unfindable for a
   Movement, and the accuser stands in the wreckage of their own credibility.
 
-*(If the confronting is done with steel: they are not there when the steel arrives.
-The guards are. See "The Palace on Alert." Before midnight the Uninvited never
+*(If the confronting is done with steel: they are gone when the steel arrives,
+and the guards have come instead (see "The Palace on Alert"). Before midnight the Uninvited never
 fight, never take damage, and never stay in a scene that would make them.)*
 
 **At midnight:** everything. Fracture ammunition (see chapter V) is this thread's
@@ -862,7 +860,7 @@ rarest of all at Oraga, unsurprised.
 > leans on it). *If you have time:* one snake's tell.
 
 The gates open at last light. Minister Corval receives each guest by name at the
-Gatehouse Court. He is a thin, upright old man doing the work of six chamberlains with
+Gatehouse Court: a thin, upright old man doing the work of six chamberlains with
 visible, dignified exhaustion. Masks are on before the gate; blades stay where their
 owners like them. The line is long, and it is the best gossip hour of the year.
 
@@ -883,7 +881,7 @@ owners like them. The line is long, and it is the best gossip hour of the year.
 > asked to give up a blade.*
 
 **Scheduled:** arrival, first sight of the lit palace, the slow realization that
-nobody is checking anyone for steel. Neither Raunu nor Veier appears. The high
+nobody is checking anyone for steel. Neither Raunu nor Veier appears, and the high
 table stands empty under its canopy.
 
 **Agenda beats:** forged invitations tested (B1); staff hires slip in through the
@@ -898,11 +896,11 @@ doors, not the gates.
 **The quiet guest** *(the Attendant, chapter VII)*. One sighting in Movements I, II, IV
 and V, each visible and deniable, and each shows one of its three habits. At midnight
 those habits are how the party beats it (card S14), so show every one of them plainly. A player
-who says one out loud before anything explains it has read an omen (Table I–3).
+who names one before anything explains it has read an omen (Table I–3).
 
 *If anyone follows or confronts it, now or in any Movement:* it walks into a shadow (an
 alcove, the far side of a pillar, a dark doorway) and is not there when they look. It
-never fights before midnight. It is gone for the rest of that Movement and turns up in
+never fights before midnight; it is gone for the rest of that Movement and turns up in
 the next one as printed.
 
 #### The Snakes This Movement — I
@@ -944,7 +942,7 @@ the next one as printed.
 
 The ball proper: music in the Crystal Court, feasting in the galleries, lanterns on
 the terraces. The host has still not appeared, and his absence becomes the room's
-running joke, then its running unease. This is the longest Movement. Let agendas
+running joke, then its running unease. This is the longest Movement, so let agendas
 breathe here.
 
 **Scheduled:** Vorlain holds court by the wine with practiced charm (Agenda 3's
@@ -957,7 +955,7 @@ him. He is drowning in understaffed logistics and has forgotten what kindness co
 (no check to help him; to help him well takes a DC 13 Charisma (Persuasion) or DC 13
 Intelligence (Investigation) check, or another skill if the help calls for one).
 Helping him well earns Corval's open gratitude, as ending the Seating Feud well does.
-Anha found in the kitchens (Agenda 8). The gallery wards studied (Agenda 5). The east
+Anha found in the kitchens (Agenda 8); the gallery wards studied (Agenda 5); the east
 wing's guarded doors scouted (Agenda 4).
 
 **The omen:** Master Corro, the Phern magnate whose tribe's danger-sense is
@@ -977,7 +975,7 @@ serves, it names no one, and looks around, briefly, for somebody who is not ther
 *Optional; show one or two, then let them be.*
 
 - **The Circle.** Callun is in the B3 alcove with Corro. One of her Hired Knives is
-  not. He is ten paces behind Corval, all Movement, through the kitchens and the
+  not: he is ten paces behind Corval, all Movement, through the kitchens and the
   galleries and back. Agenda 1 says the Tithe of Hands lives in Corval's head. The
   Circle is prepared, and a prepared patron sends two hands for one job. If a
   character is carrying Agenda 1, the knife is watching them work. **Tell:**
@@ -995,7 +993,7 @@ serves, it names no one, and looks around, briefly, for somebody who is not ther
 - **House Boranis.** The character with Agenda 3, or anyone who has spent more than
   one drink on Vorlain or asked anyone about the missing year, finds a Cousin's Blade at
   their elbow, pleasant, admiring their mask, and standing on the side of them nearest
-  Vorlain. Essin does not threaten. He places people, and if that does not work, he
+  Vorlain. Essin does not threaten; he places people, and if that does not work, he
   has them invited to take the air. **Tell:** every time the character turns toward
   Vorlain, somebody is already there. → Card S6, chapter IX (Movement II or III).
 - **Phern.** Corro's omen, above. His Bodyguards have seen their master's hands.
@@ -1013,7 +1011,7 @@ serves, it names no one, and looks around, briefly, for somebody who is not ther
 > (two characters walked in together), and the gray masks. *If you have time:* a
 > second summons, the Tavva scout, and S1, if it was held from Movement II.
 
-The host does not appear. This is the Movement where the ball fully absorbs that he
+The host does not appear, and this is the Movement where the ball fully absorbs that he
 may never appear. The guests came to see the recluse, and the recluse is declining
 to be seen. Some guests glimpse him exactly once: a still figure on the high gallery
 above the Crystal Court, watching the room the way a man watches weather, gone when
@@ -1032,7 +1030,7 @@ Then Corval begins fetching people.
 
 **Scheduled:** the Audience Hall (B4) is lit for the first time in two years, and
 stands empty, which is its own kind of omen. One at a time, at long intervals,
-Minister Corval quietly approaches a guest and says the sentence nobody expected:
+Minister Corval approaches a guest and says the sentence nobody expected:
 *"The master will see you."*
 
 Inside the vast, bare hall: one chair on the dais,
@@ -1053,11 +1051,11 @@ kitchens), and shows it without threat, almost absently. He is sounding people,
 though for what, he does not say. Each summons ends the same way: abruptly, with
 something that is nearly a kindness, and the long walk back.
 
-An audience lasts about five questions or five minutes of table time. Then he ends it
+An audience lasts about five questions or five minutes of table time, and then he ends it
 with the closing line (see "Raunu's Summons: the Questions, and What He Says", below).
 
 *Checks in the summons:* deceiving Raunu takes a DC 25 Charisma (Deception) check, and he knows
-it failed even when he lets it pass. Impressing him takes no check at all. He turns
+it failed even when he lets it pass. Impressing him takes no check at all: he turns
 friendly when the guest tells him a true thing he did not already know, or sits through
 the silence without filling it. By default, he is friendly with the second character
 summoned; if two come in together, that is whichever of them speaks second. *Detect Thoughts* and every other magic that
@@ -1067,8 +1065,8 @@ prepared for that, too.
 **Agenda beats:** a summons is the only route to the host. It is Agenda 2's one close
 study and Agenda 1's one chance to simply ask (which gets a long look, and then,
 flatly: *"It taxes palaces to pay laborers. The palaces can afford it. That is the
-whole secret. You may tell the Circle I said so."*). Agenda 4 may ask after Veier.
-He goes still for a moment, then: *"She chooses her guests herself these days. If
+whole secret. You may tell the Circle I said so."*). Agenda 4 may ask after Veier;
+he goes still for a moment, then: *"She chooses her guests herself these days. If
 she chooses you, you will know."*
 
 Characters not summoned work the room. Angling
@@ -1080,17 +1078,17 @@ fetches that character at the next summons.
 *He does not ask anyone why they hate him. He did, after all, invite them.*
 
 **The omen:** three guests in spirit masks: gray, unornamented, beautiful in a way
-nobody can place. Nothing about them is visibly wrong. They eat. They drink; one
+nobody can place. Nothing about them is visibly wrong: they eat, they drink, and one
 praises the wine in a turn of phrase nobody's grandmother would be old enough to
 use. They are gracious, well-mannered in a slightly antique way, pleasant to talk
 to. Nobody remembers them arriving. Corval, asked, cannot account for
 them (his perfect memory of the invitations simply slides off the question), and
 then, oddly, cannot hold the question in his head long enough to be alarmed by it.
 
-*(These are the Uninvited. They arrived with the evening's thickest crowd. They
+*(These are the Uninvited, and they arrived with the evening's thickest crowd. They
 will do nothing at all until midnight; they are waiting for the one moment custom
 guarantees the recluse must appear. The characters may approach them; see chapter VII.
-Conversation with them is genuinely pleasant.)*
+Conversation with them is a real pleasure.)*
 
 *(When the three gray masks come in with the crush, the quiet guest is standing a
 few paces from where they stop. It does not look at them.)*
@@ -1100,7 +1098,7 @@ few paces from where they stop. It does not look at them.)*
 "If friendly" below means the guest has earned it, as "Checks in the summons" above
 says, and he is won far more readily than his reputation suggests.
 
-**Open with silence.** He lets it run. He is waiting to see what the guest does with
+**Open with silence.** He lets it run, waiting to see what the guest does with
 it, and what they do with it is the whole audience.
 
 **"Why did you send for me?"** "I wanted to see what you would do with a long walk."
@@ -1123,7 +1121,7 @@ was. **If friendly:** "I have spent two years arranging for the answer to be no.
 find, tonight, that I am not certain the arranging was sufficient."
 
 **Something about their own agenda** (a patron, a debt, a sister in his kitchens).
-He already knows. He says so without threat, almost absently, the way a man mentions
+He already knows, and says so without threat, almost absently, the way a man mentions
 the weather to someone standing in it. "Yes, I know about that. It doesn't signify.
 Was there something else?"
 
@@ -1135,14 +1133,14 @@ good thing I have left to give anyone."
 *Optional; show one or two, then let them be.*
 
 - **The Circle.** A Hired Knife has joined the line outside the Audience Hall
-  without any intention of going in. He is there to see who is summoned. Any player
+  without any intention of going in: he is there to see who is summoned. Any player
   character who comes back out of B4 is met within the Movement by Callun's
   compliments and a quiet question, "What did he say?", with 10 GP behind it, and
   a Hired Knife standing close enough to make the coin feel like the polite option.
   **Tell:** the one man in the line not rehearsing a question. → the Circle's line, chapter IX.
 - **The Church.** Kovaun is in the B4 antechamber. When a summoned character
   comes out, a Warden is waiting with the Prelate's compliments and a request to
-  attend her in the chapel. It is a request. It is the kind a Warden stands beside
+  attend her in the chapel. It is a request, of the kind a Warden stands beside
   until it is answered. **Tell:** the Warden knows the character's name without
   having been told it. → the Church's line, chapter IX.
 - **House Draunel.** Draunel is in the B4 line, courting. One of his Duelists is
@@ -1154,12 +1152,12 @@ good thing I have left to give anyone."
   has not been warned off yet is now invited, by a Cousin's Blade, very warmly, to "take the air on the terraces",
   just the two of them and a friend of his who is already out there. **Tell:** it is
   the same blade who admired their mask. → Card S6, chapter IX.
-- **Phern.** Corro is worse. His Bodyguards now stand with their backs to walls,
+- **Phern.** Corro is worse, and his Bodyguards now stand with their backs to walls,
   like their master. One of them catches a character's eye (a Phern above
   all) and asks, low, if they have felt anything tonight. He is not joking. *No
   card: this is a conversation, and an ally if it goes well.*
 - **The Thenya.** Maiven petitions for a summons, and does not get one. The
-  slingers are no longer walking to the east wing corridor. They are watching the
+  slingers are no longer walking to the east wing corridor; they are watching the
   guard change on it from the gallery rail, and one of them is counting under her
   breath. **Tell:** the count restarts every time the guards do. → the Thenya's line, chapter IX (only if provoked).
 
@@ -1173,7 +1171,7 @@ The banquet is called, and the galleries fill. And then, between the first cours
 and the second, with no trumpet and no announcement, Raunu Boranis is simply
 standing at the high table: unmasked, plainly dressed for a chief, holding a cup
 as if someone had handed it to him and left. The room takes a full three seconds to
-notice. Then it takes a breath, all at once.
+notice, and then it takes a breath, all at once.
 
 You can hold the toast until at least one character is in the galleries. Characters
 elsewhere hear of the two plates within minutes.
@@ -1198,16 +1196,16 @@ elsewhere hear of the two plates within minutes.
 > table — filling both himself, carefully, taking his time about it, the whole hall
 > dead silent — and walks out through the east doors, and does not come back.*
 
-The doors close. One heartbeat. Then the room boils with the
-promise of news. Two years of silence, and the recluse has just scheduled its
-ending to the hour. Nobody in the ballroom will ever learn what he meant to say.
-The ball spends its last hours guessing at a sentence that will never be finished.
+The doors close, the hall holds still for one heartbeat, and then the room boils
+with the promise of news. Two years of silence, and the recluse has just scheduled its
+ending to the hour. Nobody in the ballroom will ever learn what he meant to say,
+and the ball spends its last hours guessing at a sentence that will never be finished.
 
 **Agenda beats:** the guessing is the Movement. Callun and the Circle are certain
 it is the trade decree: the Tithe of Hands, announced at midnight to a captive
 audience of everyone it will fleece. (They are wrong.) Draunel fears a
 succession decree; Kovaun's question acquires teeth; Vorlain goes quiet and drinks.
-And everyone saw the two plates. The gossip about the two plates is feral: he
+And everyone saw the two plates, and the gossip about them is feral: he
 feeds the mad wife, he feeds a prisoner, he feeds the thing in the east wing.
 Only the characters who have run Undercurrent C know the tender truth of it.
 
@@ -1219,7 +1217,7 @@ husband; see "Dinner for Two (B9)", below.)*
 
 **The omen:** the falconry mews behind the garden wing erupt — every bird screaming
 at once, then, worse, all at once silent. The gardens go quiet the way a forest does
-when something walks through it. Guests laugh it off. Master Corro, and any Phern
+when something walks through it. Guests laugh it off; Master Corro, and any Phern
 character, does not.
 
 **The quiet guest — the music.** Before the banquet, the musicians change tune in the
@@ -1240,24 +1238,24 @@ everyone else's.
   Agenda 8 is in play, this is somebody's sister. **Tell:** Anha's hands, going still
   on the tray. → Card S7, chapter IX.
 - **The Church.** The Radiant blesses the food in a form Kovaun recognizes (a Fracture
-  tell; see chapter V). She goes very quiet. Her question has acquired teeth: two of her
+  tell; see chapter V). She goes very quiet, and her question has acquired teeth: two of her
   Wardens leave the gallery by different doors, and neither comes back before the
   second course. **Tell:** two empty places, and the Prelate not looking at them. → the Church's line, chapter IX.
 - **House Draunel.** Draunel fears a succession decree, and his young men hear it in
   his silence. At the wine court a Duelist says the thing he has been working toward
   all night to one of Essin's blades, loud enough for the table: "At the first
   quarter-bell, on the terraces, and bring your cousin's excuses." An appointment,
-  in front of witnesses. Nobody has drawn. **Tell:** the whole table has gone quiet except the
-  Duelist. → Card S9, chapter IX.
+  in front of witnesses, and nobody has drawn. **Tell:** every voice at the table has
+  stopped except the Duelist's. → Card S9, chapter IX.
 - **House Boranis.** Vorlain goes quiet and drinks. Essin is working hardest now,
   with the most to lose, and his blades close in: anyone still baiting Vorlain is
   steered, physically if gently, toward the garden doors. The Duelist's appointment
   has been accepted, and Essin did not accept it. **Tell:** Essin, for the first time
   tonight, without a smile. → Card S9, chapter IX.
-- **Phern.** The mews scream. Corro does not laugh. His Bodyguards have stopped
+- **Phern.** The mews scream, and Corro does not laugh. His Bodyguards have stopped
   pretending: they have marked the three nearest ways out of B2 and each of them has
   one. *No card yet. Remember where they are standing.*
-- **The Thenya.** The toast lands on Maiven like a slap. Her audience is refused.
+- **The Thenya.** The toast lands on Maiven like a slap, and her audience is refused.
   She says nothing to Corval at all, which is worse than anything she might have
   said, and goes to sit with her people. The slingers are no longer counting.
   **Tell:** they have stopped drinking. → the Thenya's line, chapter IX (only if provoked).
@@ -1305,7 +1303,7 @@ back when she calls him.
 - *Whether she is free.* The room answers. For her first year the pack by the door stood
   packed, her plain statement that she could leave whenever she chose. It is empty
   now, and its contents have become the room (area B9).
-- *Whether she is herself.* Entirely. Her secret is that she is happy, genuinely and
+- *Whether she is herself.* Entirely. Her secret is that she is happy, plainly and
   unfashionably, and rumor has no shelf for it.
 - *What she wants.* Her cousins to know she chose this.
 - *What she fears.* The same thing her husband fears, learned from watching him
@@ -1348,20 +1346,20 @@ Court (anyone elsewhere hears only the first two sentences):**
 >
 > *A hand is offered to you out of the dark, and the figure is beginning.*
 
-This hour is the night holding its breath. Run it slow. Every character is
+This hour is the night holding its breath, so run it slow: every character is
 somewhere, with someone, in near-darkness.
 
 **Scheduled:** the Dead Dance; the bells begin their quarter-tolls toward midnight.
-And running under everything, the fact the whole ball knows and the table should
+And running under everything, the fact every guest knows and the table should
 be told: **custom demands the host lead the Unmasking.** Whatever else Raunu
 Boranis has dodged tonight, at midnight he must stand on that dais, send the
 spirits home, and toast the living year with his own face. It is the one appearance
 the recluse cannot refuse: the one moment of this entire night anyone could have
 predicted him. Guests are already drifting toward the Crystal Court to watch.
 
-Corval quietly doubles the guards on the east wing doors, from two to four (Table VIII–7). Only characters watching
-for it notice (a DC 13 Wisdom (Perception) check). Master Vell, who has spent the whole ball being
-unmemorable, walks the garden terraces once, alone, and stands a while at the river
+Corval doubles the guards on the east wing doors, from two to four (Table VIII–7). Only characters watching
+for it notice (a DC 13 Wisdom (Perception) check). Master Vell, who has been unmemorable
+all night, walks the garden terraces once, alone, and stands a while at the river
 gate. *(If Agenda 6's gate is unlocked, he confirms it and leaves it so. If a character
 refused or reported the strange commission, he unlocks it himself. He always has a
 second way.)*
@@ -1381,7 +1379,7 @@ check. It is sorrow ammunition, and it will follow them home either way.)*
 **The quiet guest — something shiny.** In the lowered lamps the attendant is doing its
 job at last: it is watching the party. It keeps losing them. A dancer's
 mask catches the wall-light, a crystal pin turns on somebody's collar, and its head goes
-after the glint, and when it looks back the party has moved. It finds them again. It
+after the glint, and when it looks back the party has moved. It finds them again, and
 loses them again. When the quarter-bell strikes it turns toward the dais, early, and
 waits.
 
@@ -1410,13 +1408,13 @@ waits.
   terrace he did not make, and he is choosing between his cousin's reputation and his
   blade's life. A character who goes to him now finds the one moment all night
   that Essin Boranis asks anyone for help. **Tell:** Essin, alone, which he never is. → Card S9, chapter IX.
-- **Phern.** Corro is in B2 with his back to a wall. His Bodyguards stand around him
+- **Phern.** Corro is in B2 with his back to a wall, his Bodyguards around him
   facing out. A character who looks around the dark hall may notice
   (a DC 13 Wisdom (Perception) check) that they are the only guests in the palace facing the
   same way as the honor guard. *No card: this is the last omen nobody printed. At
   midnight, following them saves lives (see chapter V).*
 - **The Thenya.** Maiven is at the east wing doors in B9's corridor, one bad hour from
-  going over the wall. Her slingers are not with her. They are in the gardens below
+  going over the wall. Her slingers are not with her; they are in the gardens below
   the east wing, looking up at a lit window, and one of them is uncoiling a rope. If
   nobody stops them, and the Thenya's heat is 3 or more (see chapter IX, "The Snake
   Tracker"), they try the wall at the half-bell and the honor guard answers
@@ -1426,7 +1424,7 @@ waits.
   If the party goes with them, see chapter V: Maiven is where the night will need
   competent company. **Tell:** the rope. → Card S10, chapter IX.
 
-Then the bells reach midnight. The east doors open. As custom has commanded
+Then the bells reach midnight, and the east doors open. As custom has commanded
 every host of every Oraga since the first, Raunu Boranis walks back into the
 Crystal Court and mounts the dais to lead the Unmasking, before two hundred guests
 and three that no one invited.

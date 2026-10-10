@@ -951,3 +951,143 @@ class TestNearDuplicate:
 
     def test_real_module_is_clean(self):
         assert L.lint_near_duplicates(L.MODULE, L.load_allow(L.ALLOW)) == []
+
+
+# =========================================================================== R5.3 tics
+# (review-fix pass, DESIGN_oraga_5e_review_fixes O39, P2-23): module-wide counts of the
+# verbal tics with targets, per-file counts, and each file's share of the cut. Read-aloud
+# and quoted (canon) speech are never counted. At least three tests per tic family.
+
+TIC_SAMPLES = {
+    "exactly": "The door opens exactly at midnight.",
+    "the_whole": "The whole room turns to look.",
+    "quietly": "Callun quietly leaves the gallery.",
+    "out_loud": "Count the bell strokes out loud.",
+    "genuinely": "She is genuinely afraid of him.",
+    "say_so": "If the clock fills, say so.",
+    "permanent_confusion": "He carries guests out, to everyone's permanent confusion.",
+    "not_but": "The guard is not cruel but tired.",
+}
+
+
+class TestTics:
+    def test_every_family_has_a_target(self):
+        assert set(L.TIC_TARGETS) == set(TIC_SAMPLES)
+        assert L.TIC_TARGETS == {"exactly": 15, "the_whole": 15, "quietly": 10,
+                                 "out_loud": 8, "genuinely": 4, "say_so": 5,
+                                 "permanent_confusion": 1, "not_but": 8}
+
+    @pytest.mark.parametrize("tic", sorted(TIC_SAMPLES))
+    def test_hit_in_dm_prose(self, tic):
+        got = L.tic_counts(TIC_SAMPLES[tic] + "\n", "x.md")
+        assert got[tic] == 1
+        assert sum(got.values()) == 1
+
+    @pytest.mark.parametrize("tic", sorted(TIC_SAMPLES))
+    def test_readaloud_not_counted(self, tic):
+        text = box("*" + TIC_SAMPLES[tic] + "*")
+        assert L.tic_counts(text, "x.md")[tic] == 0
+
+    @pytest.mark.parametrize("tic", sorted(TIC_SAMPLES))
+    def test_quoted_speech_not_counted(self, tic):
+        text = 'Vorlain says, "' + TIC_SAMPLES[tic] + '" and leaves.\n'
+        assert L.tic_counts(text, "x.md")[tic] == 0
+
+    @pytest.mark.parametrize("tic", sorted(TIC_SAMPLES))
+    def test_whitelist_exempts(self, tic):
+        s = TIC_SAMPLES[tic]
+        allow = [L.AllowEntry("x.md", "tics", s[:-1], "test")]
+        assert L.tic_counts(s + "\n", "x.md", allow)[tic] == 0
+        other = [L.AllowEntry("y.md", "tics", s[:-1], "other file")]
+        assert L.tic_counts(s + "\n", "x.md", other)[tic] == 1
+
+    def test_case_insensitive_and_wrapped(self):
+        text = "Exactly so. THE WHOLE night. Say it out\nloud. Say so now.\n"
+        got = L.tic_counts(text, "x.md")
+        assert (got["exactly"], got["the_whole"], got["out_loud"], got["say_so"]) == (1, 1, 1, 1)
+
+    def test_word_boundaries(self):
+        got = L.tic_counts("Inexactly wholesome, the wholeness of loudly saying so.\n", "x.md")
+        assert sum(got.values()) == 0
+
+    def test_tables_and_dm_boxes_count(self):
+        text = ("| a | b |\n|---|---|\n| exactly | the whole |\n\n"
+                "> **DM Note — the clock**\n>\n> Say so quietly.\n")
+        got = L.tic_counts(text, "x.md")
+        assert (got["exactly"], got["the_whole"], got["say_so"], got["quietly"]) == (1, 1, 1, 1)
+
+    def test_not_but_needs_both_halves_in_one_clause(self):
+        assert L.tic_counts("It is not here. But it was.\n", "x.md")["not_but"] == 0
+        assert L.tic_counts("It is not cruel, but kind.\n", "x.md")["not_but"] == 1
+        assert L.tic_counts("It is the palace, not the gate.\n", "x.md")["not_but"] == 0
+
+    def test_permanent_confusion_variants(self):
+        text = ("to everyone's permanent confusion including his own. "
+                "To everyone’s permanent confusion, again.\n")
+        assert L.tic_counts(text, "x.md")["permanent_confusion"] == 2
+
+    def test_soft_metrics_carry_tics(self):
+        m = L.soft_metrics("Exactly the whole thing, quietly.\n", "x.md")
+        assert (m["tic_exactly"], m["tic_the_whole"], m["tic_quietly"]) == (1, 1, 1)
+        assert m["tic_say_so"] == 0
+
+
+class TestTicBudget:
+    def test_share_is_proportional_and_sums_to_excess(self):
+        per_file = {"a.md": {"exactly": 30}, "b.md": {"exactly": 10}, "c.md": {"exactly": 0}}
+        b = L.tic_budget(per_file, {"exactly": 20})
+        cut = {f: per_file[f]["exactly"] - b[f]["exactly"] for f in per_file}
+        assert sum(cut.values()) == 20
+        assert cut == {"a.md": 15, "b.md": 5, "c.md": 0}
+
+    def test_under_target_needs_no_cut(self):
+        per_file = {"a.md": {"quietly": 3}, "b.md": {"quietly": 4}}
+        b = L.tic_budget(per_file, {"quietly": 10})
+        assert b == {"a.md": {"quietly": 3}, "b.md": {"quietly": 4}}
+
+    def test_rounding_hits_target_exactly(self):
+        per_file = {f"{i}.md": {"say_so": 1} for i in range(7)}
+        b = L.tic_budget(per_file, {"say_so": 5})
+        assert sum(v["say_so"] for v in b.values()) == 5
+        assert all(0 <= v["say_so"] <= 1 for v in b.values())
+
+    def test_budget_never_negative(self):
+        per_file = {"a.md": {"permanent_confusion": 4}, "b.md": {"permanent_confusion": 1}}
+        b = L.tic_budget(per_file, {"permanent_confusion": 1})
+        assert sum(v["permanent_confusion"] for v in b.values()) == 1
+        assert all(v["permanent_confusion"] >= 0 for v in b.values())
+
+
+class TestTicCheckAndReport:
+    def test_check_fails_when_a_tic_goes_up(self, mod, capsys):
+        cli(mod, "--baseline")
+        p = mod / "04_The_Ball.md"
+        p.write_text(p.read_text() + "\nThe guards genuinely care.\n")
+        assert cli(mod, "--check") == 1
+        assert "tic_genuinely" in capsys.readouterr().out
+
+    def test_check_passes_when_tics_go_down(self, mod):
+        p = mod / "04_The_Ball.md"
+        p.write_text(p.read_text() + "\nThe guards genuinely care.\n")
+        cli(mod, "--baseline")
+        p.write_text(p.read_text().replace("genuinely ", ""))
+        assert cli(mod, "--check") == 0
+
+    def test_old_baseline_without_tics_does_not_fail(self, mod):
+        cli(mod, "--baseline")
+        bp = mod / "baseline.json"
+        data = json.loads(bp.read_text())
+        for m in data["soft"].values():
+            for k in [k for k in m if k.startswith("tic_")]:
+                del m[k]
+        bp.write_text(json.dumps(data))
+        p = mod / "04_The_Ball.md"
+        p.write_text(p.read_text() + "\nExactly.\n")
+        assert cli(mod, "--check") == 0
+
+    def test_report_has_tic_table_with_targets_and_budget(self, mod, capsys):
+        assert cli(mod, "--report") == 0
+        out = capsys.readouterr().out
+        assert "| tic | target | module |" in out
+        assert "| exactly | 15 |" in out
+        assert "budget" in out.lower()

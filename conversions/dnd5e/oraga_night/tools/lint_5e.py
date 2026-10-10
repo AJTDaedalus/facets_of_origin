@@ -16,7 +16,12 @@ Rule families
                jargon, wider conversion talk, anachronisms)
     soft       per-file metrics with targets (sentence length, em dashes, long paragraphs)
                and counts ("the players", "player character", "you", "perhaps",
-               rhetorical questions, "not X but Y")
+               rhetorical questions, "not X but Y"); and the verbal tics (R5.3, O39): module-wide
+               targets for "exactly", "the whole", "quietly", "out loud", "genuinely",
+               "say so", "to everyone's permanent confusion" and "not X… but Y", counted per
+               file outside read-aloud and quoted speech, with each file's budget (its
+               proportional share of the cut) in the report. A tic count that goes up fails
+               --check; allowlist rule `tics`
     structure  cross-references resolve, bold creature names have stat blocks, every
                read-aloud box has a trigger line in the pinned form "**Read this when …:**"
                (trigger_format), box labels are heading style (box_label), and every proper
@@ -543,6 +548,68 @@ def _paragraphs(text: str, fname: str, allow):
     return out
 
 
+# Verbal tics (R5.3, O39, P2-23): module-wide targets; counted per file in DM text
+# (prose, tables, stat blocks, DM boxes), never in read-aloud or quoted speech.
+TIC_TARGETS = {"exactly": 15, "the_whole": 15, "quietly": 10, "out_loud": 8, "genuinely": 4,
+               "say_so": 5, "permanent_confusion": 1, "not_but": 8}
+TIC_LABELS = {"exactly": "exactly", "the_whole": "the whole", "quietly": "quietly",
+              "out_loud": "out loud", "genuinely": "genuinely", "say_so": "say so",
+              "permanent_confusion": "permanent confusion", "not_but": "not X… but Y"}
+_TICS = {
+    "exactly": re.compile(r"\bexactly\b", re.I),
+    "the_whole": re.compile(r"\bthe whole\b", re.I),
+    "quietly": re.compile(r"\bquietly\b", re.I),
+    "out_loud": re.compile(r"\bout loud\b", re.I),
+    "genuinely": re.compile(r"\bgenuinely\b", re.I),
+    "say_so": re.compile(r"\bsay so\b", re.I),
+    "permanent_confusion": re.compile(r"\bto everyone['’]s permanent confusion\b", re.I),
+    "not_but": re.compile(r"\bnot\b[^.;:!?]{1,60}?\bbut\b", re.I),
+}
+
+
+def tic_counts(text: str, fname: str, allow=()) -> Counter:
+    """Tic hits in one file's DM text. Read-aloud, headings and quoted speech are skipped;
+    an allowlist entry for rule `tics`, `soft` or the tic's own id exempts a hit."""
+    out = Counter({k: 0 for k in _TICS})
+    for blk in unwrap(text, fname):
+        if blk.kind in ("readaloud", "heading"):
+            continue
+        s = strip_quotes(blk.text)
+        for k, rx in _TICS.items():
+            for m in rx.finditer(s):
+                if _allowed_span(fname, blk.text, m.start(), m.end(), allow, "tics", "soft", k):
+                    continue
+                out[k] += 1
+    return out
+
+
+def tic_budget(per_file: dict, targets=None) -> dict:
+    """Each file's allowed count per tic, so the module meets its targets.
+
+    The cut a tic needs (module total minus target) is shared in proportion to each file's
+    count, by largest remainder, so the budgets sum to the target exactly.
+    """
+    targets = TIC_TARGETS if targets is None else targets
+    out = {f: {} for f in per_file}
+    for k, target in targets.items():
+        counts = {f: per_file[f].get(k, 0) for f in per_file}
+        total = sum(counts.values())
+        excess = max(0, total - target)
+        if not excess:
+            for f, c in counts.items():
+                out[f][k] = c
+            continue
+        shares = {f: excess * c / total for f, c in counts.items()}
+        cut = {f: int(v) for f, v in shares.items()}
+        left = excess - sum(cut.values())
+        order = sorted(counts, key=lambda f: (-(shares[f] - cut[f]), -counts[f], f))
+        for f in order[:left]:
+            cut[f] += 1
+        for f, c in counts.items():
+            out[f][k] = c - cut[f]
+    return out
+
+
 def soft_metrics(text: str, fname: str, allow=()) -> dict:
     paras = _paragraphs(text, fname, allow)
     words = sents = long_s = dashes = long_p = 0
@@ -569,6 +636,7 @@ def soft_metrics(text: str, fname: str, allow=()) -> dict:
         "emdash_per_k": round(1000.0 * dashes / words, 2) if words else 0.0,
         "long_paras": long_p,
         **{k: counts[k] for k in COUNTS},
+        **{f"tic_{k}": v for k, v in tic_counts(text, fname, allow).items()},
     }
 
 
@@ -986,7 +1054,31 @@ def compare(rep: dict, base: dict, files=None) -> list[str]:
                 continue
             if m[k] > b.get(k, 0):
                 problems.append(f"SOFT {f} {k}: {m[k]} vs baseline {b.get(k)}")
+        for t in TIC_TARGETS:
+            k = f"tic_{t}"
+            if k in b and m.get(k, 0) > b[k]:     # a baseline from before R5.3 has no tics
+                problems.append(f"SOFT {f} {k}: {m[k]} vs baseline {b[k]}")
     return problems
+
+
+def tic_tables(rep: dict) -> str:
+    """Module totals against the tic targets, then each file's count and budget."""
+    files = sorted(rep["soft"])
+    per_file = {f: {t: rep["soft"][f].get(f"tic_{t}", 0) for t in TIC_TARGETS} for f in files}
+    budget = tic_budget(per_file)
+    out = ["| tic | target | module | cut needed |", "|---|---|---|---|"]
+    for t, target in TIC_TARGETS.items():
+        tot = sum(per_file[f][t] for f in files)
+        out.append(f"| {TIC_LABELS[t]} | {target} | {tot} | {max(0, tot - target)} |")
+    out.append("")
+    out.append("Per file: count / budget (the file's share of the cut, by largest remainder).")
+    out.append("")
+    out.append("| file | " + " | ".join(TIC_LABELS[t] for t in TIC_TARGETS) + " |")
+    out.append("|" + "---|" * (len(TIC_TARGETS) + 1))
+    for f in files:
+        out.append(f"| {f} | " + " | ".join(f"{per_file[f][t]} / {budget[f][t]}"
+                                             for t in TIC_TARGETS) + " |")
+    return "\n".join(out)
 
 
 def report_tables(rep: dict) -> str:
@@ -1020,6 +1112,8 @@ def report_tables(rep: dict) -> str:
     out.append("|---|---|")
     for f in HARD_FAMILIES + STRUCTURE_RULES:
         out.append(f"| {f} | {fam[f]} |")
+    out.append("")
+    out.append(tic_tables(rep))
     return "\n".join(out)
 
 

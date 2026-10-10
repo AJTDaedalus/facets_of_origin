@@ -1171,3 +1171,108 @@ P3-8, P3-11, P3-12, P3-16, P3-18 (R2.5, O51), P3-24 (R3, O52). P3-9 needed a not
 - `python -m pytest conversions/dnd5e/oraga_night/tools -q` → 347 passed (339 + 8 new).
 - `python M/flow/build_flow_page.py` → rebuilt (flow.json's S5 summary changed).
 - `software/tests/test_no_private_canon.py` → 5 passed.
+
+## Review-fix pass — R5.3 pilot (04)
+
+*Worker, 2026-10-10. P2-23, P2-24, O39. M/ = `conversions/dnd5e/oraga_night/`, T/ = `M/tools/`.*
+
+**The tic metric (test-first).** `T/lint_5e.py` gains `TIC_TARGETS`, `tic_counts()`, `tic_budget()` and `tic_tables()`.
+- **What is counted.** Each tic is counted per file over the unwrapped blocks (so "out\nloud" is caught), case-insensitive with word boundaries. The count covers DM prose, tables, stat blocks and DM boxes. Read-aloud, headings and quoted speech (`strip_quotes`) are skipped, so canon lines such as Raunu's "Thank you. Genuinely." and "That is the whole secret" never count.
+- **Allowlist.** Rule `tics`, `soft` or the tic's own id (`exactly`, `the_whole`, `quietly`, `out_loud`, `genuinely`, `say_so`, `permanent_confusion`, `not_but`) exempts a hit.
+- **Report and check.** Each file's counts go into the soft metrics as `tic_<name>`, so the baseline stores them and `--check` fails if one goes up. A baseline written before R5.3 has no tic keys and is skipped, so it does not fail. `--report` adds two tables: module totals against the targets, then each file's `count / budget`.
+- **The "not X… but Y" family.** The regex is `not … but` inside one clause (60 characters, no `.;:!?`). It finds 4 module-wide, already under the target of 8. The review's ×20 also took in ", not" contrasts, which the older soft count `not_but` still tracks separately.
+- **Tests.** 47 new tests in `test_lint_5e.py`, in `TestTics`, `TestTicBudget` and `TestTicCheckAndReport`. Every tic family has 4 parametrized tests (a hit, read-aloud skipped, quoted speech skipped, the allowlist), plus tests for case and wrapping, word boundaries, tables and DM boxes, clause scope, the confusion-phrase variants, soft-metric carriage, the budget arithmetic (×4), and check/report (×4). They went red first (45 failed), then green.
+
+**Module counts before the pilot, and the per-file budget.** The budget gives each file its share of the cut a tic needs (module total minus target), in proportion to its count and rounded by largest remainder. The budgets for each tic therefore add up to the target exactly. **This table is the binding budget for the parallel workers.** The live `--report` recomputes the share from current counts, so once a file has done its share the report re-spreads the remaining cut. Use the numbers below.
+
+| tic | target | module before | cut |
+|---|---|---|---|
+| exactly | 15 | 49 | 34 |
+| the whole | 15 | 43 | 28 |
+| quietly | 10 | 29 | 19 |
+| out loud | 8 | 26 | 18 |
+| genuinely | 4 | 13 | 9 |
+| say so | 5 | 11 | 6 |
+| permanent confusion | 1 | 5 | 4 |
+| not X… but Y | 8 | 4 | 0 |
+
+Per file, before / **budget**:
+
+| file | exactly | the whole | quietly | out loud | genuinely | say so | perm. confusion | not…but |
+|---|---|---|---|---|---|---|---|---|
+| 01_Overture | 2 / **0** | 3 / **1** | 1 / **0** | 1 / **0** | 3 / **1** | 3 / **1** | 0 / 0 | 0 / 0 |
+| 02_The_World_and_the_Night | 5 / **1** | 0 / 0 | 3 / **1** | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 | 1 / 1 |
+| 03_Masks_and_Agendas | 2 / **1** | 3 / **1** | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 |
+| 04_The_Ball | 6 / **2** | 12 / **4** | 8 / **3** | 3 / **1** | 2 / **0** | 0 / 0 | 0 / 0 | 0 / 0 |
+| 05_The_Longest_Night | 12 / **4** | 4 / **2** | 1 / **0** | 3 / **1** | 2 / **1** | 3 / **1** | 1 / **0** | 2 / 2 |
+| 06_Aftermath | 0 / 0 | 1 / **0** | 0 / 0 | 0 / 0 | 1 / **0** | 0 / 0 | 0 / 0 | 0 / 0 |
+| 07_Cast_of_the_Ball | 13 / **4** | 3 / **1** | 2 / **1** | 3 / **1** | 2 / **1** | 1 / 1 | 1 / **0** | 0 / 0 |
+| 08_Handouts | 0 / 0 | 2 / **1** | 2 / **1** | 0 / 0 | 0 / 0 | 1 / 1 | 0 / 0 | 0 / 0 |
+| 09_The_Snakes | 4 / **1** | 12 / **4** | 9 / **3** | 10 / **3** | 1 / **0** | 3 / **1** | 2 / **1** | 0 / 0 |
+| 10_Bestiary | 3 / **1** | 2 / **1** | 2 / **1** | 6 / **2** | 2 / **1** | 0 / 0 | 1 / **0** | 1 / 1 |
+| 11_Pregenerated_Characters | 2 / **1** | 0 / 0 | 1 / **0** | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 |
+| README | 0 / 0 | 1 / **0** | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 |
+
+Swaps between files are fine as long as the module totals hold. One swap is recommended: the arithmetic leaves the single "to everyone's permanent confusion" in 09, but its home is Vorlain's dossier. Keep it in **07** and take 09 to 0.
+
+**The 04 pilot: metrics** (`lint_5e.py --report --file 04_The_Ball.md`, DM prose):
+
+| metric | before | after |
+|---|---|---|
+| words | 13,989 | 13,997 |
+| sentences | ≈1,023 | ≈937 |
+| mean words per sentence (target 14–19) | 13.67 | **14.94** |
+| sentences over 30 words | 5.36% | 6.33% |
+| em dashes per 1,000 | 1.43 | 1.43 |
+| paragraphs over 120 words | 3 | 3 |
+| hard hits (all `emphasis_italics`) | 4 | **0** |
+| emphasis italics, including 2 the rule misses ("*House Boranis hired none.*", "*Impossible*") and the DM Note's italic DM speech | 7 | 0 |
+| tics exactly / the whole / quietly / out loud / genuinely | 6 / 12 / 8 / 3 / 2 | **2 / 4 / 3 / 1 / 0** (= budget) |
+| soft `not_but` (incl. ", not") | 11 | 11 |
+| `you` | 21 | 19 |
+
+**What was done.**
+- **Tics.** Each one was cut by rewording, never by swapping in a synonym tic.
+  - Kept, because they earn their place: "fears exactly one thing" (Callun), "glimpse him exactly once", "thread the whole palace", "the whole crew is in one place", "shelter a dozen guests through the whole attack", "what they do with it is the whole audience", "Braced quietly… Braced loudly" (a functional contrast), "acquired quietly through Phern intermediaries", "the room answers quietly", and "who says the find out loud" (the Table I–3 award trigger).
+  - Untouched, because the counter skips them: the toast's "the whole hall dead silent" and the dinner box's "comes and goes quietly" (read-aloud), and Raunu's "Thank you. Genuinely." and "That is the whole secret" (canon speech).
+- **Over-split sentences rejoined** (about 85 fewer sentences). The review's "The doors close. One heartbeat." became one sentence. Other staccato runs were rejoined too: the feud's "Raised voices. A circle forming. A cup thrown…", the cellar tally's "Candles by the crate. Lamp-oil. And once…", Movement II's three agenda fragments, "Nothing about them is visibly wrong. They eat. They drink…", "It finds them again. It loses them again.", and roughly fifty two-sentence pairs where the second sentence only continued the first ("Essin does not threaten; he places people").
+- **Reframes.** "The silent palace was never hiding a crime. It was clearing the decks." became "The silent palace hid no crime: it was clearing the decks." Punchy pairs that carry the voice stay as they are: "Each clue is deniable. Three together are not.", "There are nine.", "Remember them like this.", "Neither joins in. Both remember who ended it."
+- **DM Note form (O39).** 04 has one triad note, *the first check of the night*, which the review cites. Its "dial" was a single sentence that did not earn a label, so the note is now two plain paragraphs: what to run, then why 13 beats 10. The triad is left for the notes in 05 and 09 that offer a real alternative setting with a real cost. Their workers judge each note.
+- **Emphasis italics.** "*with a cost attached*", "*at a cost*", "*brandishing*" (now "brandishing, meaning bare steel pointed at a person") and "*steer*" are now roman. "*House Boranis hired none.*" is folded into its sentence, "*Impossible*" is a quoted word, and the DM Note's italic DM speech is in quotation marks. 04 has no italic "*Heroic Inspiration*"; the Rewards-line instances are in 09.
+- **Wording only.** A script compared before and after: the `DC n` multiset (54) and the numeral multiset (264) are identical, and there are no dice in 04. All 20 read-aloud blocks are byte-identical after unwrapping. The single-line quotations are unchanged apart from two cross-reference fixes: "The Palace on Alert." lost a period inside its quotation marks, and "Impossible" is newly quoted.
+
+**Before → after samples.**
+
+*1. The toast's aftermath (P2-23's cited split).*
+
+> **Before:** The doors close. One heartbeat. Then the room boils with the promise of news. Two years of silence, and the recluse has just scheduled its ending to the hour. Nobody in the ballroom will ever learn what he meant to say. The ball spends its last hours guessing at a sentence that will never be finished.
+>
+> **After:** The doors close, the hall holds still for one heartbeat, and then the room boils with the promise of news. Two years of silence, and the recluse has just scheduled its ending to the hour. Nobody in the ballroom will ever learn what he meant to say, and the ball spends its last hours guessing at a sentence that will never be finished.
+
+*2. The DM Note, triad to prose (O39; P2-24's "\*at a cost\*").*
+
+> **Before:** **Default:** make it a **social** check: a DC 13 Charisma (Persuasion) check to talk a place up the line, or a DC 13 Wisdom (Insight) check to read who is selling what. If it fails by 4 or less, offer it *at a cost*, naming the cost out loud before you resolve it. On a success, … At a cost, they get the same, and Table VIII–4 supplies the cost. / **The dial:** you could open on something easier, to give the table a win. / **The cost:** the first check teaches the tier the game lives in. … (*you get what you asked for, and here is what it costs*) … This module is full of near-misses. Teach it here, where the cost is a rumor and somebody's dignity.
+>
+> **After:** Make it a social check: a DC 13 Charisma (Persuasion) check to talk a place up the line, or a DC 13 Wisdom (Insight) check to read who is selling what. On a success, … If the check fails by 4 or less, offer the same at a cost, name the cost before you resolve it, and let Table VIII–4 supply it. / You could open on something easier to give the table a win, but the first check teaches the tier the game lives in. … ("you get what you asked for, and here is what it costs") … This module is full of near-misses, so teach it here, where the cost is a rumor and somebody's dignity.
+
+*3. The Seating Feud's opening, and the Undercurrent B find (staccato and reframe).*
+
+> **Before:** …the argument stops being about chairs. Raised voices. A circle forming. A cup thrown, then a bench going over. / **The find:** nothing sinister. The staff weren't victims. They were evacuated, with a thoroughness that reads as love expressed as logistics. The silent palace was never hiding a crime. It was clearing the decks.
+>
+> **After:** …the argument stops being about chairs. Raised voices, a circle forming, a cup thrown, then a bench going over. / **The find:** nothing sinister. The staff weren't victims; they were evacuated, with a thoroughness that reads as love expressed as logistics. The silent palace hid no crime: it was clearing the decks.
+
+**Calibration note for the parallel workers (R5.3 rest-of-book).**
+- **Start from the mean.** The Phase 7 pilot overshot to 13.5 words per sentence, and 04 was still below 14 before this pass. Do the rejoining first, then the tics. Merges come in three forms: a colon where the second sentence explains the first; a semicolon where two short clauses balance; ", and" where the second only continues the first. About 50–90 merges per long chapter moves the mean about 1.2 words. Check `--report` after each section, and stop between 14.5 and 16. Do not chase 19.
+- **Keep the short sentences that work.** Rejoin only fragments that are scaffolding. A one-line punch that carries a fact or a joke ("There are nine.", "Remember them like this.") stays. Never join into a 30+ word sentence: 04's over-30 share rose only from 5.4% to 6.3%.
+- **Cut a tic by rewording.** "the whole ball" becomes "the ball" or "every guest". "exactly that" becomes "the purpose". "quietly doubles" simply loses the adverb when the next sentence already says only watchers notice. "says one out loud" becomes "names one". Never swap one tic for another ("precisely", "truly", "entirely" will become the next review's list). Keep any tic that marks a real contrast or a rules trigger.
+- **Watch the side counts.** Changing "X. It was Y." into "Y, not X" raises the older soft `not_but` count and fails `--check`. Use a colon instead ("hid no crime: it was clearing the decks"). Don't add em dashes to lengthen sentences: 04 stays at 1.43 per 1,000.
+- **DM Notes.** Keep **Default / The dial / The cost** only where the dial is a real alternative setting with a real tradeoff, and write the other notes as plain paragraphs: the instruction first, then the reasoning. Convert italic DM-to-player speech into quotation marks.
+- **Check numbers by script.** Diff the multisets of `DC n`, dice and numerals, plus the unwrapped read-aloud blocks, before and after each chapter. Use `re.findall(r"DC \d+")`, `r"\b\d*d\d+…"` and `r"\d+(?:,\d{3})*"` as Counters, and `[b.text for b in L.unwrap(t) if b.kind == "readaloud"]`.
+
+**Commands.**
+- `python T/lint_5e.py --check` → OK (0 problems; 45 hard and 0 structure hits remain, down from 49; 04 is at 0).
+- **Re-baselined** with `--baseline` after the pass. 04's soft metrics improved, and every file's soft metrics gained the eight `tic_*` keys. `--check` passes against the new baseline.
+- `python T/fact_check.py --check` → OK (0 problems).
+- `python T/bestiary_check.py --quiet` → 28 blocks + 1 Nastier, 0 mismatches.
+- `python T/pregen_check.py --quiet` → 5 pregens, 0 issues.
+- `python -m pytest T -q` → 394 passed (347 + 47 new).
