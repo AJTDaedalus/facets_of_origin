@@ -1112,6 +1112,12 @@ class PreparedIntentsDef(BaseModel):
     free_scopes: list[Literal["minor", "significant", "major"]] = Field(
         default_factory=lambda: ["minor"])
     off_purpose_spark_cost: int = Field(1, ge=0)
+    #: D25: the scopes a magical *Strike* may be declared at. A blow aimed at
+    #: putting someone down is meaningful power, so it is never Minor — free
+    #: magic acts in a fight as a Maneuver or a Support instead. A setting that
+    #: wants the free magical attack back widens this list.
+    strike_scopes: list[Literal["minor", "significant", "major"]] = Field(
+        default_factory=lambda: ["significant", "major"])
     purposes: list[IntentPurposeDef] = Field(min_length=1)
 
     @field_validator("purposes")
