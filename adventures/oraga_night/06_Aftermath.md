@@ -1,71 +1,15 @@
-# VI. The Wings — Prelude and Aftermath
+# VI. The Aftermath
 
-*Optional chapters that turn the one-shot into a 3–4 session short campaign. The
-prelude runs before Chapter IV; the aftermath runs after Chapter V. Both are written
-loose — frames and scenes, not scripts — because their job is to give the table more
-Rekuzan, not more rails.*
+*The optional wing that turns the one-shot into a three-session short campaign. It
+runs after Chapter V, and it is written loose — frames and scenes, not scripts —
+because its job is to give the table more Rekuzan, not more rails.*
 
----
-
-## The Prelude Wing — Nights One and Two of Oraga
-
-### Night One — The City of Lanterns
-
-Rekuzan at festival: the old crystal walls lit rose, the trade district a river of
-lanterns, every tavern roaring, every tribe's traders in town at once. Use Night One
-for three things: arrivals, invitations, and appetites.
-
-**Getting in.** Characters who don't yet hold an invitation earn one tonight. Scenes
-to offer:
-
-- **The burned list.** Lord Essar Draunel's aunt burned hers publicly at a supper —
-  and her footman fished the charred card from the grate and knows a buyer when he
-  sees one. Price negotiable; discretion not included.
-- **The patron's table.** Any of the four patron factions (Circle, Church, Draunel,
-  Thenya) recruits tonight — a private room, a fee, an agenda card, and the pointed
-  observation that the patron's own name must never come up.
-- **The servants' door.** House Boranis is hiring festival staff through a harried
-  under-steward at the Gatehouse Court. The interview is thirty seconds long. The
-  background check is shorter.
-- **The mask-maker.** Every guest needs a spirit-mask, and the finest maker in the
-  city is **Otta Vesh**, whose workshop is booked beyond reason. Getting fitted at
-  Vesh's is a social gauntlet worth playing: half the named cast passes through it
-  tonight, unmasked and off guard — the best soft-introduction scene the module has.
-  *(Plant here: Vesh keeps a casting-blank of every face she has ever fitted — a
-  wall of them, her rite and her pride — and she remembers every mask that ever
-  left her hands. At the ball, a sharp-eyed character may notice the three gray
-  masks match no maker's style in the city — and if they ask Vesh afterward: no
-  one made them. No one would know how. The material is wrong.)*
-
-**Appetites.** Seed each player character one desire that only Rekuzan at festival
-can offer — a rival to shame, a debt to outrun, a person to find. The prelude works
-when the ball is not the players' first want but their second.
-
-### Night Two — The Lantern Course
-
-The festival's middle night: games, races, and the **Lantern Course** — a rooftop-
-and-riverbank race through the trade district that any character may enter (a chain
-of Body-facet rolls, glory and side-bets attached). Meanwhile the city tightens
-around tomorrow's ball, and the undercurrents surface:
-
-- **Rumor harvest.** Every social scene tonight yields a roll on the rumor table
-  (Chapter IX). By midnight the table should hold five or six contradictory Raunus.
-- **The Blackwatch rider.** In a dockside tavern, a courier of the eastern watch
-  drinks with the discipline of a man off duty for the first time in a year and says
-  more than he should: *"Mist's never been so low. You can see the old drowned
-  stones off the point. The old men won't look at the water. Say the sea's holding
-  its breath."* He will not say more; he was not told more. *(This is the campaign's
-  one direct touch of the east before midnight. Let it land and move on.)*
-- **Sect blades in the streets.** Guard patrols double. A quiet word says every
-  great house has hired extra swords for tomorrow — nobody trusts a Boranis party.
-  Characters may notice the opposite fact: House Boranis itself has hired none.
-- **Vell.** Characters who earned Agenda 6 meet their stranger tonight — a tall,
-  pale factor with old coin and no small talk. Characters who didn't may still
-  glimpse him: buying rope and lamp-oil, walking the river wall below the Boranis
-  gardens at dawn, unremarkable to everyone but the one player who rolls well.
-
-End Night Two with the invitations checked, the masks fitted, and the palace gates
-opening at dusk. *Go to Chapter IV.*
+*(There was once a prelude wing here, two nights of festival before the ball. It is
+gone. The module opens on the approach to the palace, at B0, and everything the
+prelude carried that mattered now arrives as one of the six hooks in the Overture or
+as a fact stated in Chapter II — the extra swords every house hired this season, the
+discarded invitations, Vell already inside and unremarkable. The one piece with
+nowhere else to go is below.)*
 
 ---
 
@@ -147,3 +91,46 @@ it is theirs, not the module's.
 > mists are rising again *because the child got away*, and nothing that lives out
 > there knows where he went. A campaign that keeps him safe without ever meeting
 > him is a campaign worthy of this night.
+
+---
+
+## The Mask-Maker
+
+**Otta Vesh** is the finest mask-maker in Rekuzan, and her workshop was booked
+beyond reason this season. She keeps a casting-blank of every face she has ever
+fitted — a wall of them, her rite and her pride — and she remembers every mask that
+ever left her hands.
+
+Any player character who asks her about the three gray masks gets the same answer,
+and it is worth the trip: **nobody made them.** Nobody in the city would know how.
+The material is wrong.
+
+That is not a clue that leads anywhere, and it is not meant to be. It is the moment
+the aftermath stops being an investigation with a suspect and becomes an
+investigation with a hole in it — which is the shape the file will keep forever.
+
+---
+
+## Advancement: What the Party Carries Out
+
+**The one-shot.** The night ends with the standard **four skill points** and a
+reflection scene at the epilogue question, exactly as any session does. Do not skip
+this because the module is a one-shot; a table that plays Oraga Night as their first
+session should leave it having advanced a character, because that is the half of this
+game a single evening otherwise never shows them.
+
+**The wing.** Run the aftermath for two sessions and a starting character reaches
+**Facet level 1** — their first Technique pick, and the first Facet level that
+matters. Place the reflection scene at the **inquest**, and say the line out loud:
+
+> *Your threshold is met. Take it on the dais, where the pen is not yours.*
+
+A character sitting in front of three factions and a Church notary, giving the only
+testimony that will ever exist about what happened, and choosing in that moment what
+they are going to be — that is what a reflection scene is for, and this module hands
+you the best one it will ever have.
+
+**For a gifted character**, that same Facet level is when their **Gift formalizes**:
+Minor scope becomes full, and it costs no Technique pick (Chapter II.5). Serane's
+crystal stops being a party trick in the same session she learns what the city is
+going to say about the night she survived. Say that out loud too.

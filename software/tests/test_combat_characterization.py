@@ -241,10 +241,18 @@ class TestG0FixedSeedEndStates:
         — the fight shortens 3 -> 2 exchanges under Easy-to-Strike pressure
         and the Guardian trades attacks away to clear the tag.
 
+        Re-pinned by R2 (2026-09-08, D20): Open now expires at end of
+        exchange, so the Boss never spends an action clearing it and the
+        party never holds the tag across exchanges. The fight lengthens
+        2 -> 3 exchanges — the change's whole intent — and the Guardian
+        ends the fight *not* Open, because the tag it was carrying expired
+        under it.
+
         Formerly (pre-D1) (True, 20, 9, 0), Mordai Broken; (D1, Resolve 5)
         (True, 2, 5, 0) no phase; (A8/G1, Resolve 8) (True, 4, 8, 0) no
-        phase; (A14, no enemy Parry) (True, 3, 6, 0) with phase; now
-        (T3.1, Open) (True, 2, 6, 0) with phase.
+        phase; (A14, no enemy Parry) (True, 3, 6, 0) with phase;
+        (T3.1, Open) (True, 2, 6, 0) with phase; now (R2) (True, 3, 6, 0)
+        with phase.
         """
         random.seed(2)
         pcs = [make_pc(d) for d in standard_party()]
@@ -252,17 +260,17 @@ class TestG0FixedSeedEndStates:
         result = run_combat(pcs, enemies)
 
         assert (result.party_wins, result.exchanges, result.sparks_spent,
-                result.enemies_remaining) == (True, 2, 6, 0)
+                result.enemies_remaining) == (True, 3, 6, 0)
         assert result.pcs_broken == []
         assert [_pc_state(p) for p in pcs] == [
-            ("Mordai", 3, 5, (), 2, False),
-            ("Zahna", 2, 3, (), 2, False),
+            ("Mordai", 2, 5, (), 3, False),
+            ("Zahna", 2, 3, (), 1, False),
             ("Zulnut", 2, 3, (), 2, False),
         ]
         assert _enemy_state(enemies[0]) == (
             "guardian", 0, 8, (), True, 0,
         )
-        assert enemies[0].open is True
+        assert enemies[0].open is False
 
     def test_seed_3_boss_defeated_after_phase_change(self):
         """Pinned value updated by A8/G1 — same Resolve 5 -> 8 retune as
@@ -279,9 +287,16 @@ class TestG0FixedSeedEndStates:
         it by visibly spending an action to clear — same 2-exchange
         defeat, Sparks 5 -> 5, end state swaps Conditions for Open.
 
+        Re-pinned by R2 (2026-09-08, D20): the fight still ends in 2
+        exchanges at this seed, but the cost moves onto the party — Zahna
+        ends at 0 Endurance (Absorb only) instead of 2, because the
+        Guardian no longer trades its action away to clear the tag and
+        gets to attack in both exchanges. Same length, more pressure: the
+        "expensive win" signal G1 asked for.
+
         Formerly (D1, Resolve 5) (True, 2, 4) no phase; (A8/G1, Resolve 8)
-        (True, 3, 6) with phase; (A14, no enemy Parry) (True, 2, 5); now
-        (T3.1, Open) (True, 2, 5).
+        (True, 3, 6) with phase; (A14, no enemy Parry) (True, 2, 5);
+        (T3.1, Open) (True, 2, 5); now (R2) (True, 2, 5) with Zahna at 0.
         """
         random.seed(3)
         pcs = [make_pc(d) for d in standard_party()]
@@ -293,8 +308,8 @@ class TestG0FixedSeedEndStates:
         )
         assert [_pc_state(p) for p in pcs] == [
             ("Mordai", 3, 5, (), 2, False),
-            ("Zahna", 2, 3, (), 2, False),
-            ("Zulnut", 2, 3, (), 1, False),
+            ("Zahna", 0, 3, (), 1, False),
+            ("Zulnut", 2, 3, (), 2, False),
         ]
         assert _enemy_state(enemies[0]) == (
             "guardian", 0, 8, (), True, 0,

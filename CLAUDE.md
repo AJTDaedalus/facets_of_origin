@@ -90,14 +90,20 @@ The line is `player_handbook/` (the PHB), `mm_manual/` (the MM Manual), and
 
 **Generated files — never edit by hand.** `player_handbook/Index.md`,
 `player_handbook/List_of_Tables.md`, `player_handbook/List_of_Boxes.md`,
-`bestiary/Finding_Aids.md`, and every stat block inside a `bestiary/B*.md`
-marker. Each has a no-diff invariant in `software/tests/test_docs_consistency.py`.
+`bestiary/Finding_Aids.md`, every stat block inside a `bestiary/B*.md` marker,
+and — in adventures — every `<!-- statline: id -->` block on a scene card and
+every `<!-- pregen: slug -->` block in a module's character chapter. Each has a
+no-diff invariant in `software/tests/test_docs_consistency.py`.
+
+Regenerate from `software/`:
+`python tools/build_index.py` · `python tools/build_table_register.py` ·
+`python -m tools.build_bestiary` · `python -m tools.build_scene_cards`
 
 **Style guide.** `style/STYLE_GUIDE.md` (untracked, local) is the house style for
 all three books. `docs/RESEARCH_style_audit.md` is the audit against it and
 `docs/LOG_style_audit.md` the remediation record. The mechanical rules — numbered
 tables, declared box species, resolvable cross-references, invariant entry
-formats — are enforced as invariants INV-9 through INV-15, so a style regression
+formats — are enforced as invariants INV-9 through INV-21, so a style regression
 fails the suite rather than surviving review.
 
 ## Software-PHB Synchronization

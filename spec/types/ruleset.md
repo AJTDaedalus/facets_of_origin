@@ -149,6 +149,37 @@ skills:
 
 **Merge type:** collection, keyed by `id`. Full replacement on collision.
 
+### lineages
+
+```yaml
+lineages:
+  - id: human
+    name: Human
+    variants: [folk, people]
+    description: "..."
+    gift_domains: []                    # domain ids; empty = ungifted
+    gift_rate: null                     # fiction only ("four in five"); never a roll
+    heritage: null                      # one narrow fact, works as a Specialty does
+    playable: true
+    formalizes_on: first_facet_level    # first_facet_level | technique
+```
+
+Who a character was born as (PHB II.5), orthogonal to the Background's
+what-they-did. The core ruleset ships exactly one, `human`, deliberately empty;
+setting modules supply the rest.
+
+A **Gift** is a domain in every respect and *replaces* the Background's
+secondary skill, exactly as a magic-granting Background's domain origin does — a
+character holds one domain at creation, from Lineage or Background, never both.
+Every id in `gift_domains` must resolve in the merged domain catalog (INV-16).
+
+`formalizes_on` is how a Gift reaches full scope. `first_facet_level` is the
+core's rule: at the character's first Facet level, in whichever Facet it lands,
+spending no Technique pick. `technique` is the Background route, kept legal so a
+setting could choose it. The field is ignored when `gift_domains` is empty.
+
+**Merge type:** collection, keyed by `id`. Full replacement on collision.
+
 ### techniques
 
 ```yaml

@@ -46,7 +46,7 @@ These are the people who fight for a living without being soldiers about it: doc
 
 **In play:**
 
-- Opens Measured; shifts to Defensive once left Open — guard low, looking for the moment to spend an action recovering.
+- Opens Measured; shifts to Defensive for the rest of the fight from the first exchange it is left Open — guard low, having learned it can be reached.
 - Goes Aggressive only if the party is clearly losing.
 - Calls for backup if the fight runs more than two exchanges.
 
@@ -161,9 +161,9 @@ They have existed in some form in every settled region for as long as anyone has
 
 <!-- statblock: bought_captain -->
 
-**Captain-under-Contract** · *Boss* · **TR 15**
+**Captain-under-Contract** · *Boss* · **TR 14**
 
-**When they act on it:** Resolve 6 · armor heavy (+2 Resolve)
+**When they act on it:** Resolve 5 · armor heavy (+2 Resolve)
 
 **When it acts:** attack +3 · incoming Tier 2
 
@@ -171,7 +171,7 @@ They have existed in some form in every settled region for as long as anyone has
 
 **Special:** REFORM THE LINE — once per scene, every Blade that disengaged this scene returns to the field in good order.
 
-**At Resolve 3:** The captain stops fighting and starts negotiating, out loud, mid-exchange. Attacks continue; so does the offer. Any party member who answers is talking to someone who is genuinely listening.
+**At Resolve 3:** Starts negotiating mid-exchange — out loud, while the attacks continue. Anyone who answers is talking to someone genuinely listening. TRIGGER, not a threshold: the captain does this on the SECOND exchange he is on the field, or the exchange after the party looks like winning, whichever comes first. The Resolve number below is a fallback for a fight that gets there first, and in a long fight it will not (Series 13). A Boss's second act is keyed to conduct when the fight is long and to Resolve only when it is short.
 
 **Disposition:** Runs the fight the way a foreman runs a site: no heroics, no waste, and a very clear idea of when to stop.
 

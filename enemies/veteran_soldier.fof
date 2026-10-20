@@ -38,7 +38,8 @@ enemy:
 
   tactics: >
     Posture: Measured by default. Goes Aggressive if a party member
-    is Cornered or Staggered. Goes Defensive once left Open.
+    is Cornered or Staggered. Goes Defensive from the exchange it is
+    first left Open onward.
     Defends by meeting force with the blade, not by giving ground —
     while set (Measured or Defensive), lean toward Hard difficulty
     for Strikes against them (Chapter III.3). Targets the fullest-Endurance-Pool

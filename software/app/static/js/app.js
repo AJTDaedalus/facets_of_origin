@@ -509,6 +509,10 @@ function handleServerMessage(msg) {
     case 'enemy_phase_change':
       onEnemyPhaseChange(msg);
       break;
+    // R3: the rider an attacker took on a 10+ (III.3 Table III.3-3).
+    case 'rider_applied':
+      onRiderApplied(msg);
+      break;
     // Threat Clock broadcasts (PHB III.2, D4)
     case 'clock_created':
       onClockCreated(msg);
@@ -574,6 +578,13 @@ function handleServerMessage(msg) {
     // Magic broadcasts
     case 'cast_result':
       onCastResult(msg);
+      break;
+    // D23: readied intents
+    case 'intents_readied':
+      onIntentsReadied(msg);
+      break;
+    case 'intents_refreshed':
+      onIntentsRefreshed(msg);
       break;
     case 'saving_throw_result':
       onSavingThrowResult(msg);
@@ -696,6 +707,7 @@ function populateCharacterCreation() {
 
   // When facet changes, update background list and the Facet blurb
   facetSelect.onchange = () => { populateBackgroundSelect(); renderFacetDescription(); };
+  populateLineageSelect();
   populateBackgroundSelect();
   renderFacetDescription();
 
@@ -732,6 +744,95 @@ function populateCharacterCreation() {
   });
 
   updateAttrPointsDisplay();
+}
+
+/**
+ * PHB II.5 (D18). The Lineage step, rendered from the merged ruleset.
+ *
+ * Hidden entirely when the ruleset holds only `human`: a step with one
+ * possible answer is not a choice, and a Shattered Origin table should not
+ * have to click past it. A setting Facet that adds lineages makes it appear
+ * with no code change here.
+ */
+function populateLineageSelect() {
+  const wrap = document.getElementById('cc-lineage-wrap');
+  const select = document.getElementById('cc-lineage');
+  if (!wrap || !select) return;
+
+  const lineages = (state.ruleset.lineages || []).filter(l => l.playable !== false);
+  wrap.classList.toggle('hidden', lineages.length <= 1);
+  if (lineages.length <= 1) return;
+
+  select.innerHTML = '';
+  lineages.forEach(lin => {
+    const opt = document.createElement('option');
+    opt.value = lin.id;
+    opt.textContent = lin.variants && lin.variants.length
+      ? `${lin.name} (${lin.variants.join(', ')})`
+      : lin.name;
+    select.appendChild(opt);
+  });
+  select.onchange = onLineageChanged;
+  onLineageChanged();
+}
+
+function onLineageChanged() {
+  const lin = (state.ruleset.lineages || [])
+    .find(l => l.id === document.getElementById('cc-lineage').value);
+  const infoEl = document.getElementById('cc-lineage-info');
+  const giftWrap = document.getElementById('cc-gift-wrap');
+  const giftSelect = document.getElementById('cc-gift');
+  if (!lin || !infoEl || !giftWrap || !giftSelect) return;
+
+  const bits = [lin.description];
+  // The rate is fiction and a prompt, never a roll — so it is shown as the
+  // entry prints it rather than turned into a number.
+  if (lin.gift) bits.push(`Gift: ${lin.gift}`);
+  if (lin.gift_rate) bits.push(`(${lin.gift_rate} carry it.)`);
+  if (lin.heritage) bits.push(`Heritage: ${lin.heritage}`);
+  infoEl.textContent = bits.join(' ');
+
+  // D24: the lineage colours the gift; the player chooses the domain. Any
+  // non-Prismatic Soul or Mind domain, unless the setting has narrowed it.
+  const gifted = Boolean(lin.gift);
+  giftWrap.classList.toggle('hidden', !gifted);
+  giftSelect.innerHTML = '<option value="">-- ungifted --</option>';
+  if (gifted) {
+    eligibleGiftDomains(lin).forEach(domain => {
+      const opt = document.createElement('option');
+      opt.value = domain.id;
+      opt.textContent = domain.name;
+      giftSelect.appendChild(opt);
+    });
+  }
+  giftSelect.onchange = onBackgroundChanged;
+  onBackgroundChanged();
+}
+
+/** Every domain a gifted character of this lineage may choose (D24). */
+function eligibleGiftDomains(lin) {
+  const magic = state.ruleset.magic || {};
+  const pool = [...(magic.soul_domains || []), ...(magic.mind_domains || [])]
+    .filter(d => d.type !== 'broad');
+  const narrowed = lin.gift_domains || [];
+  return narrowed.length ? pool.filter(d => narrowed.includes(d.id)) : pool;
+}
+
+function findDomainById(id) {
+  const magic = state.ruleset.magic || {};
+  const pools = [magic.soul_domains, magic.mind_domains, magic.prismatic_domains];
+  for (const pool of pools) {
+    const hit = (pool || []).find(d => d.id === id);
+    if (hit) return hit;
+  }
+  return null;
+}
+
+/** The Gift the player has taken, or null. */
+function selectedGift() {
+  const wrap = document.getElementById('cc-gift-wrap');
+  if (!wrap || wrap.classList.contains('hidden')) return null;
+  return document.getElementById('cc-gift').value || null;
 }
 
 function populateBackgroundSelect() {
@@ -772,7 +873,7 @@ function onBackgroundChanged() {
   };
 
   // A Background's five elements, laid out as rows rather than a run-on line
-  // with a literal newline in it (PHB II.5).
+  // with a literal newline in it (PHB II.6).
   const rows = [];
   if (bg.description) rows.push(`<div class="bg-desc">${escapeHtml(bg.description)}</div>`);
   rows.push(`<div><span class="bg-key">Starting Skill</span> ${escapeHtml(skillName(bg.starting_skill))}
@@ -942,7 +1043,14 @@ async function submitCharacterCreation(ev) {
   }
 
   const backgroundId = document.getElementById('cc-background').value || null;
-  const magicDomain = document.getElementById('cc-magic-domain').value || null;
+  const lineageEl = document.getElementById('cc-lineage');
+  const lineageWrap = document.getElementById('cc-lineage-wrap');
+  const lineage = (lineageWrap && !lineageWrap.classList.contains('hidden')
+    && lineageEl && lineageEl.value) || 'human';
+  const gift = selectedGift();
+  // One domain at creation, from Lineage or Background, never both — so the
+  // Gift, when taken, IS the character's magic_domain.
+  const magicDomain = gift || document.getElementById('cc-magic-domain').value || null;
 
   await withPending(ev && ev.target, 'Creating...', async () => {
     const resp = await apiFetch('/api/characters/', 'POST', {
@@ -952,6 +1060,8 @@ async function submitCharacterCreation(ev) {
       attributes,
       background_id: backgroundId,
       magic_domain: magicDomain,
+      lineage: lineage,
+      gifted: Boolean(gift),
     });
 
     if (resp.ok) {
@@ -1358,13 +1468,20 @@ function notify(message, kind, opts) {
   text.textContent = message;
   toast.appendChild(text);
 
-  if (opts.action && opts.onAction) {
+  // One action (`action`/`onAction`) or several (`actions`). The rider menu
+  // (R3) is the several case: it renders one button per rider the *ruleset*
+  // prints, so a setting that trims or adds one needs no JS change.
+  const actions = opts.actions
+    || ((opts.action && opts.onAction)
+        ? [{ label: opts.action, onAction: opts.onAction }]
+        : []);
+  actions.forEach((a) => {
     const btn = document.createElement('button');
     btn.className = 'btn btn-gold btn-sm';
-    btn.textContent = opts.action;
-    btn.onclick = () => { opts.onAction(); dismiss(); };
+    btn.textContent = a.label;
+    btn.onclick = () => { a.onAction(); dismiss(); };
     toast.appendChild(btn);
-  }
+  });
 
   const close = document.createElement('button');
   close.className = 'toast-close';

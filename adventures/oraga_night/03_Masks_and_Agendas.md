@@ -2,22 +2,34 @@
 
 ## Making Characters for Oraga Night
 
-Any Facets of Origin character works if they can plausibly stand in a ballroom without
-being arrested on sight. Characters are built normally (Chapter II of the Player
-Handbook), with these adjustments:
+Build by the core's **seven steps** (Chapter II.1) with the Val'loh Facet loaded.
+Nothing about this module changes how a character is made; it only narrows step 3.
+
+At **step 3, Lineage**, the answer is Orthaen — or, rarely and with MM agreement,
+Phern. At **step 6, Background**, take any core Background you like, with one rule
+you already know: a character holds **one domain at creation**, from Lineage or
+Background, never both. A gifted character therefore takes a non-magical Background,
+and gets their magic from their blood instead.
+
+That is the whole of it. This section is one page and it does not restate the Facet —
+`settings/valloh/V1_Lineages.md` has the two lineages in full, and
+`V2_Magic_of_Valloh.md` has the magic.
 
 - **Player characters are Orthaen** — or, in rare cases and with MM agreement,
   **Phern** (a couple of high-ranking Phern sit on the Merchant's Circle, and their
   factors and kin have legitimate business at the ball). This is an Orthaen affair;
   the guest list is almost exclusively Orthaen, and anyone else would be watched
-  all night. Chapter VIII provides both tribes as packages that work exactly like
-  Backgrounds — a starting skill, a gift or secondary skill, and a Specialty — plus
-  the other tribes of Val'loh for the MM's use and for other adventures.
-- **Magic is different here.** There are no magic domains in this setting. The tribes
-  carry inherited gifts instead, and formal spellcraft is a slow, scholarly art useless
-  in a crisis. Chapter VIII has the rules; the short version is *gifts are always fast,
-  spells are never fast, and Orthaen crystals are the exception that runs this city.*
-- **Everyone gets an invitation story and an agenda** — see *How You Got In* and *The Agenda System*, this chapter.
+  all night. Both are **Lineages** (Chapter II.5), and the Val'loh Facet
+  (`settings/valloh/`) carries them along with the other eight tribes for the MM's
+  use and for other adventures.
+- **A tribe's gift is a domain.** Not flair and not a special case — magic, in
+  exactly the sense Chapter II.3 means it: intuitive tradition, Focused, Minor scope
+  until it formalizes. **The player chooses which domain** — the lineage says how
+  it looks (an Orthaen's gift always comes through grown crystal; a Phern's is a
+  prickle before danger), not what it is. Formal spellcraft is the scholarly tradition and
+  works exactly as the core writes it. See `settings/valloh/V2_Magic_of_Valloh.md`.
+- **Everyone gets a hook and an agenda.** The six hooks are in the Overture and every
+  one of them starts you at the Gatehouse Court; the agendas are below.
 
 A party of Orthaen with at most one Phern is the expected shape. A Phern character
 is conspicuous — one of a handful of non-Orthaen faces in two hundred — which is not
@@ -26,24 +38,10 @@ built-in patron. Five ready-made guests are at the end of this chapter.
 
 ## How You Got In
 
-Every invitation is a story. Choose or roll (d6) during session zero:
-
-1. **Invited.** You are, or serve, someone prominent enough to be sent for by name.
-   You know what everyone whispers about this house, and you came anyway.
-2. **The entourage.** Someone among the invited needed a companion, a bodyguard, a
-   translator, or a witness. Their reasons for choosing you are their own.
-3. **The discarded invitation.** Many invitations were thrown away with theatrical
-   contempt — and a genuine Boranis invitation, under a mask custom, is as good as a
-   key. However you got yours, it has someone else's name on it.
-4. **Hired for the night.** House Boranis, its staff cut to the bone for two years,
-   quietly took on festival help: musicians, cooks, footmen, cellar hands. You are paid
-   staff with a servant's freedom of the halls — and a servant's invisibility.
-5. **The patron's errand.** One of the ball's factions (the Circle, the Church, a rival
-   sect, the Thenya) needed hands that could not be traced back to them. You come with
-   your agenda pre-loaded and your fee half-paid.
-6. **The wrong place, deliberately.** You have your own reason to be inside the Boranis
-   palace tonight, and the ball is simply the first night in two years the doors have
-   been open. (Work it out with the MM; the Unpaid Debt agenda below fits this well.)
+*Moved.* The six hooks — **The Invited · The Entourage · The Discarded Invitation ·
+Hired for the Night · The Patron's Errand · The Wrong Place, Deliberately** — are in
+the Overture, written out, each naming the agendas that fit it and each ending at the
+same first scene. Pick one there, then pick an agenda here.
 
 ## Masks
 
@@ -193,62 +191,107 @@ through — and two hundred guests are about to need it.
 ## The Ready-Made Guests
 
 Five pregenerated characters, one per agenda archetype, built on standard arrays
-(18 points, three Sparks, Endurance 4 + Constitution modifier). Tribe packages are in
-Chapter VIII. Hand them out as-is or let players reskin freely.
+(18 points, three Sparks, Endurance 4 + Constitution modifier + Endurance rank).
+Lineages and gifts come from the Val'loh Facet. Hand them out as-is or let players
+reskin freely.
+
+Two of the five carry a real Endurance Pool — **Dassa at 5 and Pello at 4** — so the
+party can afford to react in the fights, and one of them, **Dassa, is ungifted**,
+because one Orthaen in five is and the table should see what that looks like on a
+sheet.
+
+*Every block below is generated from `characters/*.fof`. The prose is hand-written;
+the numbers are not, and cannot be edited here.*
 
 ### Serane Vaskarin — The Minor Scion *(Orthaen)*
 Fourth child of a middling branch of House Vaskarin: born close enough to power to
 know all its dances, far enough to be sent on its errands.
-**Attributes:** Str 1 (−1), Dex 2 (+0), Con 1 (−1), Int 3 (+1), Wis 2 (+0), Kno 2 (+0),
-Spi 2 (+0), Luc 2 (+0), Cha 3 (+1) — Endurance 3
-**Skills:** Persuade (Practiced, +1), Deceive (Novice, 1 mark)
-**Gift:** Orthaen soul-crystals — carries a few charged crystals (suggested: *steady
-light*, *seal a door*, *veil of quiet*). See Chapter VIII.
-**Specialty:** Sect heraldry and old grudges — knows who hates whom, and why, and since
-when.
+<!-- pregen: serane -->
+**Lineage:** Orthaen — **gifted**
+
+**Primary Facet:** Soul · **Endurance Pool 3** · **Sparks 3**
+
+**Attributes:** Str 1 (−1), Dex 2 (+0), Con 1 (−1), Int 3 (+1), Wis 2 (+0), Kno 2 (+0), Spi 2 (+0), Luc 2 (+0), Cha 3 (+1)
+
+**Skills:** Persuade (Practiced, +1)
+
+**Gift:** Transmutation — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
+
+**Specialty:** Sect heraldry and old grudges — knows who hates whom, and why, and since when.
+
+**Carrying:** steady light, seal a door, veil of quiet
+
+**At Facet level 1 you would likely take:** *Read The Room*
+
 **Suggested agenda:** A House's Long Game, or The Prelate's Question.
+<!-- /pregen -->
 
 ### Pello — The Factor's Nephew *(Phern)*
 A small, quick, cheerful man who has carried other people's valuables through five
 tribes' territory and lost none of them, including himself.
-**Attributes:** Str 1 (−1), Dex 3 (+1), Con 1 (−1), Int 2 (+0), Wis 3 (+1), Kno 2 (+0),
-Spi 1 (−1), Luc 3 (+1), Cha 2 (+0) — Endurance 3
-**Skills:** Finesse (Practiced, +1), Stealth (Novice, 1 mark)
-**Gift:** Phern danger-sense — see Chapter VIII. His neck has never once prickled for
-nothing.
-**Specialty:** Contracts, caravans, and smugglers' roads — who moves goods, and around
-which laws.
+<!-- pregen: pello -->
+**Lineage:** Phern — **gifted**
+
+**Primary Facet:** Body · **Endurance Pool 4** · **Sparks 3**
+
+**Attributes:** Str 1 (−1), Dex 3 (+1), Con 2 (+0), Int 2 (+0), Wis 3 (+1), Kno 2 (+0), Spi 1 (−1), Luc 2 (+0), Cha 2 (+0)
+
+**Skills:** Finesse (Practiced, +1)
+
+**Gift:** Divination — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
+
+**Specialty:** Contracts, caravans, and smugglers' roads — who moves goods, and around which laws.
+
+**At Facet level 1 you would likely take:** *Fleet Step*
+
 **Suggested agenda:** The Circle's Reckoning, or The Gate at Midnight.
+<!-- /pregen -->
 
 ### Andra Tessarin — The Pattern-Keeper *(Orthaen)*
 A lattice-scholar of a quiet Tessarin branch, who has spent three years growing a
 private record of a pattern nobody else believes is there: the mist-tides, the
 silent house, the strange marriage. In a world without books, Andra *is* her
 research.
-**Attributes:** Str 1 (−1), Dex 2 (+0), Con 1 (−1), Int 3 (+1), Wis 2 (+0), Kno 3 (+1),
-Spi 2 (+0), Luc 2 (+0), Cha 2 (+0) — Endurance 3
+<!-- pregen: andra -->
+**Lineage:** Orthaen — **gifted**
+
+**Primary Facet:** Mind · **Endurance Pool 3** · **Sparks 3**
+
+**Attributes:** Str 1 (−1), Dex 2 (+0), Con 1 (−1), Int 3 (+1), Wis 2 (+0), Kno 3 (+1), Spi 2 (+0), Luc 2 (+0), Cha 2 (+0)
+
 **Skills:** Lore (Practiced, +1)
-**Gift:** Orthaen soul-crystals — a few charges (suggested: *hold an image*, *hold
-an image*, *chime at a threshold*). Her charges are her notebook.
-**Specialty:** The collected history of House Boranis — every public fact and most
-of the private ones, held in memory and lattice.
+
+**Gift:** Inscription — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
+
+**Specialty:** The collected history of House Boranis — every public fact and most of the private ones, held in memory and lattice.
+
+**Carrying:** held image, held image, chime at a threshold
+
+**At Facet level 1 you would likely take:** *Sharp Analysis*
+
 **Suggested agenda:** The Story of a Lifetime.
+<!-- /pregen -->
 
 ### Dassa — The House-Blade *(Orthaen, ungifted)*
 A hired blade of no house, who has guarded richer and softer people for twenty
 years. One Orthaen in five is born without the gift; Dassa has spent a lifetime
 being reminded of it politely, and has outlived several of the people who did the
 reminding. Slow to speak, impossible to move.
-**Attributes:** Str 3 (+1), Dex 2 (+0), Con 3 (+1), Int 1 (−1), Wis 2 (+0), Kno 2 (+0),
-Spi 1 (−1), Luc 2 (+0), Cha 2 (+0) — Endurance 5
+<!-- pregen: dassa -->
+**Lineage:** Orthaen — ungifted
+
+**Primary Facet:** Body · **Endurance Pool 5** · **Sparks 3**
+
+**Attributes:** Str 3 (+1), Dex 2 (+0), Con 3 (+1), Int 1 (−1), Wis 2 (+0), Kno 2 (+0), Spi 1 (−1), Luc 2 (+0), Cha 2 (+0)
+
 **Skills:** Combat (Practiced, +1), Endurance (Novice, 1 mark)
-**Gift:** None — and in a tribe four-fifths gifted, that has shaped every year of
-Dassa's life. The sword on her back is legal, customary, and larger than strictly
-polite.
-**Specialty:** Reading a room for exits, weapons, and the one person actually willing
-to use them.
-**Suggested agenda:** The Vanished Servant, or bodyguard to another player character
-(entourage entry).
+
+**Specialty:** Knows the layout, regular occupants, and unofficial rules of one specific district or settlement from your service years.
+
+**At Facet level 1 you would likely take:** *Weapon Mastery*
+
+**Suggested agenda:** The Vanished Servant, or bodyguard to another player character.
+<!-- /pregen -->
 
 ### Ilesse Kethaun — The Border Cousin *(Orthaen)*
 A courtier of House Kethaun's border branch, whose family has traded, feuded, and
@@ -256,12 +299,22 @@ married across the Thenya frontier for five generations. Ilesse knew the Nolonai
 name long before the rest of Rekuzan learned to gossip about it — which is exactly
 why a certain delegation, watched everywhere it goes, has quietly asked for an hour
 of Ilesse's evening.
-**Attributes:** Str 1 (−1), Dex 2 (+0), Con 1 (−1), Int 2 (+0), Wis 3 (+1), Kno 2 (+0),
-Spi 2 (+0), Luc 2 (+0), Cha 3 (+1) — Endurance 3
+<!-- pregen: ilesse -->
+**Lineage:** Orthaen — **gifted**
+
+**Primary Facet:** Soul · **Endurance Pool 3** · **Sparks 3**
+
+**Attributes:** Str 1 (−1), Dex 2 (+0), Con 1 (−1), Int 2 (+0), Wis 3 (+1), Kno 2 (+0), Spi 2 (+0), Luc 2 (+0), Cha 3 (+1)
+
 **Skills:** Persuade (Practiced, +1)
-**Gift:** Orthaen soul-crystals — a few charges (suggested: *veil of quiet*, *seal a
-door*, *steady light*).
-**Specialty:** The Thenya border and the Nolonaire family — its history, its debts,
-and everything Veier was before Rekuzan.
-**Suggested agenda:** The Cousin's Errand. *(Of the five, this seat carries the
-most weight. Give it to a player who wants that.)*
+
+**Gift:** Warding — a domain, at **Minor scope** until it formalizes at your first Facet level, which costs no Technique pick (Chapter II.5).
+
+**Specialty:** The Thenya border and the Nolonaire family — its history, its debts, and everything Veier was before Rekuzan.
+
+**Carrying:** veil of quiet, seal a door, steady light
+
+**At Facet level 1 you would likely take:** *Lasting Impression*
+
+**Suggested agenda:** The Cousin's Errand.
+<!-- /pregen -->

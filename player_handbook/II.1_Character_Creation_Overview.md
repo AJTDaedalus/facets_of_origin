@@ -28,16 +28,19 @@ At the top, before any of its sections, the sheet records two names: your charac
 
 ---
 
-## The Six Steps
+## The Seven Steps
 
-The rest of Part II works through these in order. The Quick Start carries the same six in short form, if you would rather build first and read afterward.
+The rest of Part II works through these in order. The Quick Start carries the same seven in short form, if you would rather build first and read afterward.
 
 1. **Decide who they are.** One sentence, before any numbers (*Before the Numbers*, below).
 2. **Pick a Primary Facet** — Body, Mind, or Soul (Chapter II.4).
-3. **Spend 18 points** across the nine Minor Attributes, each rated 1 to 3 (Chapter II.2).
-4. **Derive the three Major Attributes** from the Minor Attributes under each (Chapter II.2).
-5. **Pick a Background**, which grants a Title, a Starting Skill at Practiced, a Secondary Skill at Novice with one mark — or a Domain origin in its place — and a Specialty (Chapters II.5, II.3).
-6. **Fill in the rest.** Every other skill sits at Novice; note your Endurance Pool and your three Sparks (Chapters II.6, III.3, III.1).
+3. **Choose a Lineage** — who you were born as. In the core rules that is Human; setting Facets add more, and a gifted lineage grants a domain (Chapter II.5).
+4. **Spend 18 points** across the nine Minor Attributes, each rated 1 to 3 (Chapter II.2).
+5. **Derive the three Major Attributes** from the Minor Attributes under each (Chapter II.2).
+6. **Pick a Background**, which grants a Title, a Starting Skill at Practiced, a Secondary Skill at Novice with one mark — or a Domain origin in its place — and a Specialty (Chapters II.6, II.3). A character holds **one domain at creation**, from Lineage or Background, never both.
+7. **Fill in the rest.** Every other skill sits at Novice; note your Endurance Pool and your three Sparks (Chapters II.7, III.3, III.1).
+
+Lineage sits before attributes because a gift is part of who the character *is* before any number is spent — a table building a party in a gifted setting wants "gifted or not" settled before it starts pricing Constitution. It sits after the Facet because the formalization rule reads off the Facet.
 
 ---
 
@@ -109,7 +112,9 @@ The following sections walk you through creating your character's statistics:
 
 **II.4c — Facet of the Soul:** Skills and Techniques for diplomatic, spiritual, and luck-touched characters
 
-**II.5 — Backgrounds:** Your character's history, relationships, and the narrative origin of any magical domains
+**II.5 — Lineage:** Who your character was born as, and what a setting's peoples carry in the blood
 
-**II.6 — Skills:** The full skill list and how skill advancement works in play
+**II.6 — Backgrounds:** Your character's history, relationships, and the narrative origin of any magical domains
+
+**II.7 — Skills:** The full skill list and how skill advancement works in play
 

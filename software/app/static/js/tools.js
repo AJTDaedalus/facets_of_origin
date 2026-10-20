@@ -261,8 +261,11 @@ function renderToolsRuleSummaries() {
       <p style="margin-top:6px;"><strong>Spark Uses:</strong> Improve Roll (add die, drop lowest, any roll);
          or buy reach in exactly two cases &mdash; one pre-Technique Significant-scope attempt at normal
          difficulty, or ease a Focused domain's Major working one step</p>
+      <p><strong>Readied intents:</strong> Minor is free. Significant and Major spend one readied intent
+         of their purpose (Harm, Ward, Mend, Shape, Reveal) &mdash; three readied at the start of each
+         session, back after a full rest the MM calls. Nothing readied for the purpose costs a Spark.</p>
       <p><strong>Pre-Technique:</strong> Minor scope only. The scope restriction is the whole limitation
-         &mdash; there is no extra difficulty step.</p>
+         &mdash; there is no extra difficulty step, and no readied intents until the Technique.</p>
       <p><strong>Second domain:</strong> one difficulty step harder than normal for that domain
          until the character earns their next Facet level; then the penalty lifts.</p>
     </div>

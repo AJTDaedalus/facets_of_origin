@@ -1,4 +1,4 @@
-# IX. Handouts and the Night-Tracker
+# VIII. Handouts and the Night-Tracker
 
 ## Handout 1 — The Invitation
 
@@ -99,6 +99,28 @@ telling them.*
 | VI | The Unmasking | **Midnight.** Raunu returns to the dais; the rite; the promised words begin — and the lights die **mid-sentence**. He never gets to make the announcement | — |
 | VII | The Longest Night | Fire, rescue, the counting; guards arrive; word of other attacks | — |
 
+### The Night Clock
+
+*The other side of the program: what the two forces in the palace are doing on
+their own schedule, and — the column that matters — **what the players can move**.
+Everything in the last column is a thing a table can actually reach.*
+
+**Table IX–2b: The Night Clock**
+
+| Bell | The Uninvited | The Bought | What the players can move |
+|---|---|---|---|
+| Dusk (Mv I) | Not yet arrived | Sixteen blades in matched grey coats drift into the trade district. The sergeants carry contract cases | — |
+| Mv III crush | Three gray masks arrive with the thickest crowd of the night | — | *Undercurrent D bottomed before midnight → the party enters the Longest Night armed and positioned* |
+| Quarter-bells (Mv V) | The Wept to the east doors · the Radiant to the Dance · the Hollow by an exit | Fires set in two sect districts; a Blackwatch courier post goes dark; the company walks to the Boranis gatehouse | *Any Fracture tell witnessed → that Fracture invokes at Hard. Two tells → Standard* |
+| **Midnight (Mv VI)** | The lights die mid-sentence | The gate closes from outside. Nobody in, nobody out | *The Wept's Fracture found before the dais → ⟨They save Raunu⟩ becomes possible* · *Every witness on the Radiant → one more hallway for Veier* · *The Hollow's Fracture → the doors open, and two hundred hostages stop being hostages* |
+| The Crossing (Mv VII) | The Radiant breaks past Vell, once | The captain reads the Second Clause when the first guests reach the gate | *Guilt landed on the Radiant → it does not break past* · *The gate open, or the contract void → the crowd gets out and the sect guard gets in* |
+| Last bell | The leash takes all three | The contract expires; the company withdraws in order | *Ring it whenever the table needs the night to end* |
+
+> **How to use this.** Read the last column before the session, not during it. Every
+> line in it is a thing the players might do without knowing it changes anything —
+> and the whole difference between a night that happens *to* a party and a night the
+> party is *in* is whether you noticed when they did it.
+
 ### Where Everyone Stands (Movements I–V)
 
 **Table IX–3: Where Everyone Stands**
@@ -136,13 +158,14 @@ telling them.*
 
 **Table IX–5: Optional Steel**
 
-| When | What they see | The fight |
-|---|---|---|
-| Mv II–IV | The seating feud boils over in B3 — a thrown cup, a circle forming | Joinable brawl, Tier 1 bruising; bare steel brings guards |
-| Mv III | A footman in ill-fitting livery counting the gallery guards (B7) | Follow or brace the scout — `gallery_knife.fof` |
-| Mv V | Figures with rope and sacking in the dark service corridors | Knives in the dark, hushed on both sides — the crew, staged |
-| Mv VI–VII | Looters working the gallery (B7) and the fallen (B3) | **The winnable fight** — `tavva.fof` + crew, Ch. V beats |
-| Any | Players cross the house — heist gone loud, east wing forced | Guards detain-and-expel, 2–3 exchanges, outs visible (Ch. IV sidebar) |
+| Card | When | What they see | The clock, and what fills it |
+|---|---|---|---|
+| **S1** | Mv II–IV | The seating feud boils over in B3 — a thrown cup, a circle forming | **Bench**, 4 seg. Advances per exchange still swinging, and on any 6−. Full: honor guard fills the galleries for a Movement; one agenda door shuts |
+| — | Mv III | A footman in ill-fitting livery counting the gallery guards (B7) | No clock. Follow or brace the scout — this is a lead, not a fight |
+| **S2** | Mv V | Figures with rope and sacking in the dark service corridors | **Noise**, 4 seg., *shared*. Advances on any 6− and any bare steel. Full: guards arrive and **both sides lose** |
+| **S3** | Mv VII | The outer gate barred from the far side, and grey coats behind it | **Fire**, 4 seg. Advances on every partial or failure near the gate, and once per exchange the gate stays shut. Full: the fire reaches the Crystal Court and every exchange after costs the crowd |
+| **S5** | Mv VI–VII | Looters working the gallery (B7) and the fallen (B3) | No clock. A branch of S3's night |
+| **S4** | Any | Players cross the house — heist gone loud, east wing forced | No clock. Detain-and-expel, 2–3 exchanges, outs visible from the first |
 
 ### Crisis Panel (Movement VI)
 

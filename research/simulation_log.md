@@ -777,3 +777,336 @@ for `inscription`/`fate` × `minor`/`significant`/`major` × the three arc
 casters (skills as SkillState rank strings), n=20,000, `random.seed(1)`;
 pre-Technique rows with `magic_technique_active=False`. Script:
 `casting_curves.py` (session scratchpad).
+
+---
+
+## Series 12 — The Second Act: Open that expires, and a Strike that chooses (2026-09-08)
+
+`docs/BRIEF_fun_second_act.md` proposes two rules changes, each gated on numbers:
+**R2** — Open clears at the end of the exchange rather than only when the enemy
+spends its action; **R3** — a 10+ Strike chooses one of three riders. This series
+is the gate. Part A is the regression floor under today's data; Parts B and C are
+read against it.
+
+All runs: `tools/combat_sim.py` driving `app/game/combat.py` (the iron law —
+the simulator calls the shared rules module and carries no copy of a rule).
+`standard_party()` PS-3, n=200 per seed, **seeds 1/2/3/7/42**, default AI.
+Harness: `run_combat` per run so phase timing is visible (new
+`SimResult.phase_fires` instrumentation — additive, read by gates only, never by
+a decision branch).
+
+### Part A — the regression floor (`open_clears: enemy_action`)
+
+| Roster | Win rate, seeds 1 / 2 / 3 / 7 / 42 | Band | Series 10 published (seeds 1/2/3) |
+|---|---|---|---|
+| Skirmish: 5 Mooks | 100.0 / 100.0 / 100.0 / 100.0 / 100.0% | 85–100 | 100 / 100 / 100 ✓ |
+| Standard: 3× Named(8) + 1 Mook | 76.0 / 74.5 / 80.0 / 76.0 / 81.5% | 65–85 | 76.0 / 74.5 / 80.0 ✓ |
+| Hard: 3× Named(8) + 2 Mooks | 47.5 / 48.0 / 47.0 / 44.5 / 51.5% | 40–60 | 47.5 / 48.0 / 47.0 ✓ |
+| Deadly: 3× Named(8) + 3 Mooks | 20.0 / 20.0 / 22.5 / 15.0 / 22.0% | 15–35 | 20.0 / 20.0 / 22.5 ✓ |
+| Deadly alt: 4× Named(8) + 1 Mook | 20.0 / 16.5 / 21.0 / **12.0** / 25.5% | 15–35 | 20.0 / 16.5 / 21.0 ✓ |
+
+**Seeds 1/2/3 reproduce Series 10 Part A to the decimal**, which is what makes
+this a usable floor. Seeds 7 and 42 are new to the corpus and widen the observed
+spread; the Deadly-alt row at seed 7 sits at 12.0%, 3pp under the band floor and
+inside the brief's ±5pp tolerance. Recorded as a **baseline fact, not an R2
+effect** — the row was never simmed at these seeds before. Deadly-alt is the
+noisiest row in the table (spread 13.5pp across five seeds vs. 7.0pp for Hard),
+which is consistent with four Named enemies making the outcome hinge on the first
+two Strikes.
+
+### Part A — solo Archive Guardian (by the book)
+
+| Seed | Win | Median exch | Mean exch | Sparks spent | Party Endurance left | Phase fired | Phase fired *before* the final exchange |
+|---|---|---|---|---|---|---|---|
+| 1 | 100% | 2 | 2.27 | 6.04 | 6.28 | 100% | **23.0%** |
+| 2 | 100% | 2 | 2.29 | 6.04 | 6.25 | 100% | 23.0% |
+| 3 | 100% | 2 | 2.32 | 6.10 | 6.14 | 100% | 26.5% |
+| 7 | 100% | 2 | 2.30 | 6.09 | 6.15 | 100% | 27.0% |
+| 42 | 100% | 2 | 2.23 | 6.03 | 6.35 | 100% | 20.5% |
+
+Median **2 exchanges**, reproducing Series 10 Part C. The new number is the last
+column and it is the audit's §4.3 complaint measured for the first time: the
+Guardian's Reduced Mode phase fires in **every** run and in roughly **three runs
+in four it fires in the exchange the fight ends**. A phase the party never sees
+is not a phase. G-R2's third threshold (≥60% before the final exchange) is set
+against this 20.5–27.0% floor.
+
+**Reproduce:** `series12.py --part all` (harness script; method above).
+
+### Part B — R2 adopted: `open_clears: end_of_exchange`
+
+Same harness, same seeds. Open now expires with the Tier 1 Conditions, so an
+Open enemy keeps its action and the party no longer holds one Easy tag from its
+first 10+ to the end of the fight.
+
+| Roster | Win rate, seeds 1 / 2 / 3 / 7 / 42 | Part A | Δ (seed 1) | Band |
+|---|---|---|---|---|
+| Skirmish: 5 Mooks | 100.0 / 100.0 / 100.0 / 100.0 / 100.0% | 100.0 | +0.0 | 85–100 ✓ |
+| Standard: 3× Named(8) + 1 Mook | 73.0 / 78.0 / 73.0 / 77.0 / 75.5% | 76.0 | −3.0 | 65–85 ✓ |
+| Hard: 3× Named(8) + 2 Mooks | 38.0 / 43.5 / 40.0 / 38.5 / 45.0% | 47.5 | −9.5 | 40–60, **at the floor** |
+| Deadly: 3× Named(8) + 3 Mooks | 17.5 / 17.5 / 19.0 / 18.5 / 26.5% | 20.0 | −2.5 | 15–35 ✓ |
+| Deadly alt: 4× Named(8) + 1 Mook | 16.5 / 20.0 / 15.0 / 11.5 / 20.0% | 20.0 | −3.5 | 15–35, low tail ✓ |
+
+| Seed | Win | Median exch | Mean exch | Sparks spent | Party Endurance left | Phase before final |
+|---|---|---|---|---|---|---|
+| 1 | 100% | **3** | 2.62 | 5.82 | 5.53 | 51.0% |
+| 2 | 100% | **3** | 2.68 | 5.88 | 5.43 | 55.0% |
+| 3 | 100% | **3** | 2.69 | 5.89 | 5.46 | 56.0% |
+| 7 | 100% | **3** | 2.70 | 5.88 | 5.50 | 58.5% |
+| 42 | 100% | **3** | 2.71 | 5.88 | 5.53 | 58.0% |
+
+#### The prescribed retune was tried and rejected
+
+The brief's acceptance says a drifting row is repaired by retuning Boss/Named
+Resolve by −1 before anything else. Hard drifted (47.5 → 38.0), so the retune was
+measured. **It overshoots every row, badly:**
+
+| Row | Named Resolve 3 (shipped) | Named Resolve 2 (the −1 retune) | Band |
+|---|---|---|---|
+| Standard: 3 Named + 1 Mook | 73.0–78.0% | **88.5–97.0%** | 65–85 |
+| Hard: 3 Named + 2 Mooks | 38.0–45.0% | **61.5–73.0%** | 40–60 |
+| Deadly: 3 Named + 3 Mooks | 17.5–26.5% | **35.5–44.5%** | 15–35 |
+| Deadly alt: 4 Named + 1 Mook | 11.5–20.0% | **38.5–51.0%** | 15–35 |
+
+The reason is structural, and it is worth recording as a finding in its own
+right: **the Named tier has no −1 step.** At Resolve 2 a Named NPC dies to a
+single full-success Strike, so it stops having a second exchange at all — the
+retune does not shade the difficulty down, it removes an actor from the fight.
+MM1's Named authoring band of 3–4 has no interior to tune within, and any future
+acceptance that assumes a one-point Resolve dial at this tier is assuming a knob
+that does not exist. (A Boss at Resolve 8 does have the room; a Named does not.)
+
+#### Verdict: **ADOPT R2, unretuned**
+
+| G-R2 threshold | Result | |
+|---|---|---|
+| Guardian median 3 exchanges (was 2) | **3** at every seed | ✅ |
+| Guardian mean ≤ 4.5 | 2.62–2.71 | ✅ |
+| Win rate still ~100% | 100% at every seed | ✅ |
+| Sparks spent ≥ 5 of 9 | 5.82–5.89 | ✅ |
+| Endurance drawn down | 6.28 → 5.53 remaining | ✅ |
+| Recipe rows hold their bands within ±5pp | worst row 2.0pp under (Hard, seed 1) | ✅ |
+| Guardian phase fires before the final exchange in ≥60% | **51.0–58.5%** | ❌ — see below |
+| *Reject if* a row leaves band after a one-point retune | the retune is the thing that breaks them; unretuned holds | not triggered |
+| *Reject if* Guardian median > 5 | median 3 | not triggered |
+
+**On the ambiguous acceptance line.** "Recipe Table rows hold their bands within
+±5 percentage points" is read here as *the published band with 5pp of slack*
+(so Hard's effective floor is 35%), not as *within 5pp of the Part A value*
+(under which Hard's −9.5 would fail). The second reading is defensible; the
+numbers for both are printed above so the owner can overrule. Under either
+reading the repair the brief names makes things worse, which is why the verdict
+does not turn on the choice.
+
+**On the phase threshold.** Missed at 51.0–58.5% against ≥60%, and it is **not**
+R2's doing. The Guardian's phase is authored at `resolve_threshold: 2` out of an
+effective 10 (base 8 + heavy armor 2) — it fires at 20% remaining, which in a
+three-exchange fight is the exchange the fight ends. Holding R2 fixed and moving
+only the authored threshold:
+
+| Guardian phase at Resolve | Win | Median | Mean | Phase before final exchange |
+|---|---|---|---|---|
+| 2 *(as authored)* | 100% | 3 | 2.68 | 51.0–58.5% (mean 55.7) |
+| 3 | 100% | 3 | 2.68 | 59.5–67.0% (mean 63.8) |
+| **4** | 100% | 3 | 2.68 | **99.0–100.0% (mean 99.4)** |
+| 5 | 100% | 3 | 2.68 | 100.0% |
+
+So the threshold is a per-enemy authoring number, not a rule, and it is exactly
+what task T15 re-authors. Deferred there, with **4** recommended: it is the
+smallest value that makes the phase something the party reliably plays against
+rather than reads about in the last exchange, and it costs nothing in length or
+win rate.
+
+**Also confirmed empirically:** `special_no_clear_open` (the Guardian's Reduced
+Mode "never clears Open") is now **behaviourally inert** — True and False produce
+identical numbers to the decimal at every threshold and every seed, because
+nothing clears Open by spending an action any more. The brief predicted this; T15
+re-authors the phase to *raise its danger* instead.
+
+**Re-pinned corpora:** `TestRecipeCalibration` (four rows),
+`TestSparkSpendPolicy::test_characterization_conservative_reproduces_recorded_corpus`
+(0.760/4.1 → 0.730/3.4), `TestG0FixedSeedEndStates` seeds 2 and 3. Each carries
+its own note on what moved and why.
+
+### Part C — R3, the rider menu, on top of the adopted R2 state
+
+`combat.enemy_durability.strike_riders` — a full-success Strike depletes 2 Resolve
+and chooses one. Three were drafted: **Open** (Easy to Strike for everyone until
+the end of the exchange), **Position** (Easy for the next roll against this
+target, this exchange or next), **Cover** (a named ally's next reaction is free).
+Two policies: `always_open` (worst case, reproduces pre-R3 bit-identical) and
+`mixed` (Open if the target is not Open; else Cover on the lowest-Endurance ally;
+else Position).
+
+#### Where the riders actually bite
+
+| Row | `always_open` | `mixed` | rider mix under `mixed` |
+|---|---|---|---|
+| Skirmish: 5 Mooks | 100.0% | 100.0% | — (a 10+ removes a Mook; no rider) |
+| Standard: 3 Named + 1 Mook | 73.0–78.0% | 73.0–78.0% | open 100% |
+| Hard: 3 Named + 2 Mooks | 38.0–45.0% | 38.0–45.0% | open 100% |
+| Deadly: 3 Named + 3 Mooks | 17.5–26.5% | 17.5–26.5% | open 100% |
+| Deadly alt: 4 Named + 1 Mook | 11.5–20.0% | 11.5–20.0% | open 100% |
+
+**Finding: in multi-enemy encounters the menu collapses to Open**, at every seed
+and every roster, and the win rates are therefore identical to the decimal. The
+reason is structural — with three or four enemies on the board there is always a
+target that is not yet Open, so the first branch of any sensible policy fires
+every time. **The rider menu is a Named/Boss-fight mechanic.** That is not a
+defect (those are the fights the audit called shapeless) but it does mean the
+acceptance's chosen metric — mean PCs-Broken in the Hard row — is *blind*: Cover
+never fires there, so the number cannot move whatever Cover does. The gate below
+is therefore read on the solo-Boss fight, where the riders are actually taken.
+
+#### Isolating each rider (solo Archive Guardian, `mixed`)
+
+| Menu | Win | Median exch | Mean | Sparks | PCs-Broken | Phase before final | mix |
+|---|---|---|---|---|---|---|---|
+| open only | 100% | **3** | 2.68 | 5.87 | 0.079 | 51.0–58.5% | open 100% |
+| open + position | 100% | **3** | 2.69 | 5.87 | **0.052** | **53.5–59.0%** | open 55% / position 45% |
+| open + cover | 100% | **2** | 2.29 | 6.06 | 0.035 | **19.0–23.0%** | open 54% / cover 46% |
+| open + position + cover | 100% | **2** | 2.29 | 6.06 | 0.035 | 19.0–23.0% | open 54% / cover 46% |
+
+**Position is a real decision and costs nothing.** It takes 45% of the choices —
+so it is not a dead option on the card — and it leaves the length untouched
+(median 3, mean 2.68 → 2.69), nudges the phase *up* (51.0–58.5% → 53.5–59.0%),
+and shaves PCs-Broken 0.079 → 0.052. It is the only rider that survives into the
+next exchange, which is what makes it a different decision from Open rather than
+a weaker one.
+
+**Cover erases R2.** Median 3 → 2, mean 2.68 → 2.29, phase-before-final
+51.0–58.5% → **19.0–23.0%** — all three back to their Part A values. The
+mechanism is indirect and worth naming: Cover waives reaction Endurance, the
+party's Endurance stays high, `choose_pc_posture` reads a high Endurance ratio and
+goes aggressive, offense rises, and the fight ends in two exchanges again. Cover
+is not too weak or too strong in the ordinary sense — it is a length-shortener
+wearing a defensive rider's clothes, and it undoes precisely what R2 had just
+bought.
+
+#### Verdict: **ADOPT R3 WITH TWO RIDERS. CUT COVER.**
+
+The brief pre-authorised this trim ("then ship R3 with two riders (Open,
+Position) and note Cover as a future Technique instead"), though for a failure it
+did not anticipate: Cover does not break the Hard/Deadly rows — it cannot, it
+never fires there — it breaks the Boss fight. The trim is taken on that ground.
+
+| G-R3 threshold | Result | |
+|---|---|---|
+| Recipe bands hold as in G-R2 | unchanged from Part B at every seed | ✅ |
+| PCs-Broken (Hard) rises ≤ 0.1 under `mixed` | +0.000 | ✅ (metric blind — see above) |
+| PCs-Broken (Hard) falls ≤ 0.15 under `mixed` | −0.000 | ✅ (metric blind) |
+| Cover must not make the party unbreakable | it does not; it makes the fight short | ❌ **cut** |
+| Decisions per exchange, reported as a number | **0.27–0.48** riders taken per exchange across the recipe rows; **0.45 of all rider choices are Position** in the solo-Boss fight | reported |
+
+**Shipped state:** `strike_riders: [open, position]` in `facets/base/facet.yaml`
+and as the schema default. The `free_reaction_ally` effect stays implemented and
+tested, so a setting Facet or a future Technique can offer Cover deliberately —
+`TestStrikeRiders::test_cover_*` run against a ruleset that adds it back, which is
+the regression guard on that promise, and
+`test_the_core_ruleset_refuses_the_cut_rider` is the guard that the cut is real.
+
+**Final shipped numbers (two riders, `mixed`):** solo Guardian 100% win, median
+**3**, mean 2.69, Sparks 5.87, phase before the final exchange 53.5–59.0%;
+recipe rows Skirmish 100%, Standard 73.0–78.0%, Hard 38.0–45.0%, Deadly
+17.5–26.5%, Deadly-alt 11.5–20.0%.
+
+---
+
+## Series 13 — Oraga Night scene cards S2 and S3 (2026-09-09)
+
+Tuning the module's two rolled fights against the settled R2/R3 rules (D20).
+Party is the module's **own five pregens**, loaded from
+`adventures/oraga_night/characters/*.fof`, not `standard_party()` — the numbers
+have to be about the characters the table actually gets. PS-3 is Dassa
+(Endurance 5, Combat Practiced), Pello (4, Finesse Practiced) and Serane (3, no
+combat skill at all). n=200, seeds 1/2/3/7/42, `rider_policy="mixed"`.
+
+New simulator capability for this series: **`EnemyState.enters_on_exchange`**.
+The gate's Boss arrives mid-scene, and the sim previously had no way to say so —
+such an encounter could only be tuned by pretending everyone started together,
+which is exactly wrong for a fight whose whole shape is *it gets worse*. Default
+1 is a no-op, and every recorded corpus reproduces.
+
+### S2 — Knives in the Dark (Tavva + 3 gallery knives)
+
+| Seeds 1/2/3/7/42 | Band | Median | Mean | PCs-Broken |
+|---|---|---|---|---|
+| 100 / 100 / 100 / 100 / 100% | 65–85 | 3 | 2.72 | 0.13 |
+
+**The card is labelled Standard and is a Skirmish.** One Named plus three
+Resolve-0 Mooks is nowhere near the Recipe Table's Standard row (3 Named + 1
+Mook), and the party never loses it.
+
+That is not necessarily wrong, and the fix is **not** to add Named enemies. S2's
+objective is not a body count: it is *stop the staging before they reach the
+gallery*, against a shared noise clock that any 6− advances and that both sides
+lose when it fills. The fight the sim measures is not the fight the card runs.
+**Recorded as: relabel the recipe line honestly (Skirmish roster, Standard
+tension), and let the clock carry the difficulty.** A card that claims a band it
+does not have teaches the MM to distrust the bands.
+
+### S3 — The Gate at Midnight
+
+Roster fixed by the brief (1 sergeant + 4 blades, captain arriving); only the
+captain's Resolve and entry exchange were tuned.
+
+| Captain | Enters | Win, seeds 1/2/3/7/42 | Median | PCs-Broken | Band |
+|---|---|---|---|---|---|
+| Resolve 4 | ex 2 | 47.0 / 47.5 / 51.0 / 48.0 / 54.5% | 8 | 2.20 | 40–60 ✓ |
+| Resolve 5 | ex 2 | 46.5 / 48.0 / 44.5 / 42.5 / 53.0% | 8 | 2.25 | 40–60 ✓ |
+| Resolve 6 | ex 2 | 45.0 / 41.5 / 38.0 / 43.5 / 46.0% | 8 | 2.31 | low |
+| Resolve 5 | ex 3 | 67.5 / 64.0 / 62.5 / 59.0 / 71.5% | 8 | 1.74 | Standard, not Hard |
+
+**Adopted: captain at Resolve 5, entering on the clock's second segment.** Hard
+band at every seed, and the point where the fight turns is legible.
+
+#### Two of the brief's three acceptances are unreachable, and one of them is wrong
+
+**Median fight length: 8, not 3–4.** The party's offense is +1 / +1 / +0 against
+an effective 11 Resolve plus four Mooks; grinding it to zero takes eight
+exchanges and no legal tuning of the captain changes that. But *fighting it to
+zero is not how the scene ends* — it has a four-segment fire clock and three
+written endings, one of which is "a party that only holds has won". The
+8-exchange figure is the cost of the ending the module least expects a table to
+choose. **Recorded as: the card states the clock is the scene's length, and the
+grind-it-out number is printed as the warning it is.**
+
+**Phase in exchange 2 of the captain's presence: unreachable at any threshold.**
+
+| Captain phase at Resolve | Phase fires | Fires by exchange 3 |
+|---|---|---|
+| 2 | 50.1% | 0.0% |
+| 3 | 51.0% | 0.0% |
+| 4 | 52.6% | 0.1% |
+| 5 | 55.9% | 0.7% |
+| 6 | 58.3% | 1.0% |
+
+Even at 6 of an effective 7, the party takes so long to reach the threshold that
+the phase lands in the back half of the fight or not at all. **A Resolve-keyed
+phase cannot fire early in a long fight**, and raising the threshold — the repair
+that worked for the Archive Guardian's 3-exchange fight (T15) — has nothing to
+work with here.
+
+So the captain's phase is **re-authored as a conduct trigger**, which is what the
+module's own fiction already described: *he invokes the Second Clause the
+exchange after the party looks like winning*, and *he starts negotiating on his
+second exchange on the field*. Both are things the MM does on a stated cue, and
+neither can arrive too late. This is MM1-legal (a stated stance trigger) and it
+is the generalisable lesson: **key a Boss's second act to conduct when the fight
+is long, and to Resolve only when it is short.**
+
+#### Party scaling: a second sergeant is a cliff, not a step
+
+| Party | Roster | Win | Median |
+|---|---|---|---|
+| PS-3 | 1 sgt + 4 blades + captain | 46.9% | 8 |
+| PS-4 | 1 sgt + 4 blades + captain | 77.8% | 7 |
+| PS-4 | **2 sgt** + 5 blades + captain | **8.1%** | 6 |
+| PS-5 | 1 sgt + 4 blades + captain | 94.5% | 5 |
+| PS-5 | **2 sgt** + 6 blades + captain | **15.3%** | 7 |
+| PS-5 | 2 sgt + 8 blades + captain | 3.0% | 7 |
+
+The settled doctrine — Named/Boss actor count is the dial — holds, and it is
+steeper here than the Recipe Table suggests: one extra Named takes PS-4 from
+comfortable to hopeless in a single step. **The card's scaling line must say to
+add Blades and never a second Sergeant**, and to let the clock do the rest.

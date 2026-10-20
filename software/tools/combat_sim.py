@@ -113,6 +113,13 @@ class SimResult:
     enemies_remaining: int
     uncontested_exchanges: int = 0
     objective_lost: bool = False
+    # Instrumentation only (Series 12): {instance_id: exchange} for every
+    # enemy whose authored phase fired during the run.
+    phase_fires: dict[str, int] = field(default_factory=dict)
+    # Instrumentation only (Series 12 Part C): every rider taken, in order,
+    # so "decisions per exchange" can be reported as a number rather than a
+    # claim.
+    rider_choices: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -159,6 +166,11 @@ class PCState:
     # each exchange in `run_combat`. Feeds `combat.reaction_cost`'s
     # `is_first_reaction` in `_enemy_attack`.
     reactions_this_exchange: int = 0
+    # R3 Cover: this PC's next reaction this exchange costs no Endurance.
+    # Set by an ally's 10+ rider, spent by one reaction, expires with the
+    # Tier 1 Conditions. The reaction is still rolled — Cover buys the
+    # cost, never the outcome.
+    free_reaction: bool = False
 
 
 @dataclass
@@ -201,10 +213,31 @@ class EnemyState:
     phase_index: Optional[int] = None
     special_attack_mod: Optional[int] = None
     special_no_clear_open: bool = False
+    # Instrumentation only (Series 12): the exchange in which this enemy's
+    # authored phase first fired, so a gate can ask *when* a phase lands
+    # rather than only whether it did. Never read by any decision branch.
+    phase_fired_exchange: Optional[int] = None
+    # R3 Position: {"uses", "expires_after_exchange"}, or None. The
+    # Maneuver result arriving on a Strike — Easy for the *next* roll
+    # against this target, this exchange or next.
+    position: Optional[dict] = None
+    # Reinforcement entry: the exchange this enemy joins the fight. 1 means
+    # "on the field from the start", which is every enemy the corpus has
+    # measured so far. A later value models an encounter whose roster
+    # changes mid-scene — a Boss arriving on a clock segment, a second wave
+    # through a door — which MM1 encourages and the simulator could not
+    # previously express, so such an encounter could only be tuned by
+    # pretending everyone started together. That pretence is exactly wrong
+    # for a fight whose whole shape is "it gets worse".
+    enters_on_exchange: int = 1
 
     @property
     def is_out(self) -> bool:
         return self.is_removed
+
+    def on_field(self, exchange: int) -> bool:
+        """Whether this enemy is present and fightable this exchange."""
+        return not self.is_removed and exchange >= self.enters_on_exchange
 
 
 # ---------------------------------------------------------------------------
@@ -451,6 +484,9 @@ def _should_clear_open(enemy: EnemyState) -> bool:
     one for certain to shave one incoming Easy tag is a losing trade.
     Policy, not a rule: the *only* legal clear mechanism is
     `combat.open_clear_mode`'s enemy-action spend, checked by the caller.
+    Under R2's `end_of_exchange` mode the caller never reaches this policy
+    at all — Open expires on its own and the enemy keeps its action, which
+    is the point of the change (BRIEF_fun_second_act §2).
 
     `special_no_clear_open` models an authored Special (Archive Guardian's
     Reduced Mode: it stops registering harm) — after its phase fires, the
@@ -459,6 +495,50 @@ def _should_clear_open(enemy: EnemyState) -> bool:
     if enemy.special_no_clear_open and enemy.phase_index is not None:
         return False
     return enemy.tier == "boss"
+
+
+RIDER_POLICIES = ("always_open", "mixed")
+
+
+def _choose_rider(
+    target: EnemyState,
+    attacker: PCState,
+    allies: list[PCState],
+    ruleset,
+    policy: str = "always_open",
+) -> tuple[str, Optional[PCState]]:
+    """AI policy for R3's post-roll choice: which rider does a 10+ take, and
+    for Cover, whose reaction does it buy?
+
+    `"always_open"` is the worst case and the default, deliberately: it
+    reproduces the pre-R3 behaviour exactly, so the snowball is still
+    measured at its strongest and any recorded corpus can be re-derived.
+
+    `"mixed"` is the table-like policy the acceptance actually gates on:
+    Open if the target is not already Open (tempo first); else Cover on the
+    lowest-Endurance ally, because that is the one an incoming attack is
+    most likely to Break; else Position, which is the only rider that
+    survives into the next exchange.
+
+    Policy, not a rule. The menu itself is data
+    (`combat.enemy_durability.strike_riders`) and the effects are
+    `combat.apply_rider`'s — nothing here decides what a rider does.
+    """
+    available = {r.id for r in combat_module.strike_riders(ruleset)}
+
+    if policy == "always_open" and "open" in available:
+        return "open", None
+
+    if "open" in available and not target.open:
+        return "open", None
+
+    candidates = [p for p in allies if not p.is_broken and not p.free_reaction]
+    if "cover" in available and candidates:
+        return "cover", min(candidates, key=lambda p: p.endurance_current)
+
+    if "position" in available:
+        return "position", None
+    return ("open", None) if "open" in available else (sorted(available)[0], None)
 
 
 def _should_leave_open(target: EnemyState) -> bool:
@@ -478,6 +558,10 @@ def _pc_strike(
     ruleset,
     verbose: bool = False,
     spark_policy: str = "conservative",
+    rider_policy: str = "always_open",
+    allies: Optional[list[PCState]] = None,
+    exchange_no: int = 1,
+    rider_log: Optional[list[str]] = None,
 ) -> None:
     """Resolve a PC's Strike against an enemy target.
 
@@ -509,8 +593,16 @@ def _pc_strike(
     extra_dice = sparks + (ruleset.combat.press.extra_dice if press else 0)
     modifier = pc.strength_mod + pc.combat_mod
 
-    # An Open target (a prior 10+'s option) makes this Strike Easy (K-6/D4).
-    difficulty = combat_module.target_strike_difficulty("Standard", target.open, ruleset)
+    # A prior 10+'s rider makes this Strike Easy — Open, or a Position not
+    # yet spent. They never stack: both feed the one `easy_tag` input, and
+    # `has_easy_tag` is the single place that stays true.
+    easy = combat_module.has_easy_tag(target)
+    difficulty = combat_module.target_strike_difficulty("Standard", easy, ruleset)
+    # A Position is spent by the roll that used it; Open is not (it is a
+    # standing tag for the exchange). combat.consume_position knows the
+    # difference and is a no-op when the Easy came from Open.
+    if easy and not target.open:
+        combat_module.consume_position(target)
 
     strike = combat_module.resolve_strike(
         modifier, pc.posture, pc.conditions, ruleset,
@@ -560,13 +652,23 @@ def _pc_strike(
             print(f"    → {target.instance_id} defeated")
         return
 
-    # A full success may additionally leave the target Open (K-6/D4:
-    # attacker's option, "on a full success only") — the eligible outcome
-    # is read from combat.enemy_durability.open_on, not hardcoded.
-    if combat_module.can_apply_open(effective_outcome, ruleset) and _should_leave_open(target):
-        target.open = True
+    # R3: a full success depletes 2 Resolve and chooses ONE rider. The menu
+    # comes from the ruleset (`rider_menu`), the effect from
+    # `combat.apply_rider`; only *which* option is taken is policy.
+    if combat_module.rider_menu(effective_outcome, False, ruleset):
+        rider_id, ally = _choose_rider(
+            target, pc, allies if allies is not None else [], ruleset, rider_policy,
+        )
+        if rider_id == "open" and not _should_leave_open(target):
+            return
+        combat_module.apply_rider(
+            rider_id, target, ruleset, ally=ally, exchange_no=exchange_no,
+        )
+        if rider_log is not None:
+            rider_log.append(rider_id)
         if verbose:
-            print(f"    → {target.instance_id} is left Open (Easy to Strike)")
+            who = f" ({ally.name})" if ally is not None else ""
+            print(f"    → 10+ rider: {rider_id}{who}")
 
 
 # ---------------------------------------------------------------------------
@@ -630,8 +732,15 @@ def _enemy_attack(enemy: EnemyState, target: PCState, ruleset, verbose: bool = F
             print(f"    → {target.name} takes {condition} (T{final_tier}){broken_str}")
         return
 
-    # Active reaction: Dodge or Parry — pay Endurance cost, then roll
+    # Active reaction: Dodge or Parry — pay Endurance cost, then roll.
+    # R3 Cover: an ally's 10+ rider buys this reaction's cost, once. The
+    # roll below still happens — Cover waives the Endurance, never the
+    # outcome, which is what keeps it from being a free success.
     cost = combat_module.reaction_cost(reaction, target.posture, ruleset, is_first_reaction)
+    if combat_module.consume_free_reaction(target):
+        cost = 0
+        if verbose:
+            print(f"    {target.name}'s reaction is Covered — no Endurance cost")
     target.endurance_current = max(0, target.endurance_current - cost)
 
     mod = target.dexterity_mod if reaction == "dodge" else (target.strength_mod + target.combat_mod)
@@ -684,6 +793,7 @@ def run_combat(
     verbose: bool = False,
     spark_policy: str = "conservative",
     objective_clock: Optional[int] = None,
+    rider_policy: str = "always_open",
 ) -> SimResult:
     """Run a single combat encounter to completion.
 
@@ -692,6 +802,11 @@ def run_combat(
     `spark_policy` (WD10) is forwarded to every PC Strike's
     `should_spend_spark` call; default `"conservative"` reproduces every
     recorded corpus bit-identical.
+
+    `rider_policy` (R3): which rider a 10+ takes — `"always_open"` (default,
+    the worst case, reproducing every pre-R3 corpus bit-identical) or
+    `"mixed"` (the table-like policy the acceptance gates on). See
+    `_choose_rider`.
 
     `objective_clock` (K-2/D5 hook, T3.11): the number of segments on the
     encounter's stake — the clock MM1 says every Mook-only encounter must
@@ -709,17 +824,22 @@ def run_combat(
 
     uncontested_count = 0
     clock_progress = 0
+    rider_log: list[str] = []
 
     for exchange in range(1, MAX_EXCHANGES + 1):
         active_pcs = [p for p in pcs if not p.is_broken]
-        active_enemies = [e for e in enemies if not e.is_out]
+        active_enemies = [e for e in enemies if e.on_field(exchange)]
 
-        if not active_enemies:
+        # A fight is not over while reinforcements are still due to arrive.
+        pending = [e for e in enemies
+                   if not e.is_removed and e.enters_on_exchange > exchange]
+
+        if not active_enemies and not pending:
             return _build_result(True, exchange - 1, pcs, enemies,
-                                 uncontested=uncontested_count)
+                                 uncontested=uncontested_count, riders=rider_log)
         if not active_pcs:
             return _build_result(False, exchange - 1, pcs, enemies,
-                                 uncontested=uncontested_count)
+                                 uncontested=uncontested_count, riders=rider_log)
 
         # K1 (BRIEF D8): reset the per-exchange reaction count.
         for pc in active_pcs:
@@ -752,32 +872,45 @@ def run_combat(
                 if verbose:
                     print(f"  {pc.name} withdraws (recovering)")
                 continue
-            target = choose_pc_target(pc, enemies, ruleset)
+            target = choose_pc_target(
+                pc, [e for e in enemies if e.on_field(exchange)], ruleset)
             if target is None:
                 continue
-            _pc_strike(pc, target, ruleset, verbose, spark_policy)
+            _pc_strike(pc, target, ruleset, verbose, spark_policy,
+                       rider_policy=rider_policy, allies=active_pcs,
+                       exchange_no=exchange, rider_log=rider_log)
             offensive_actions.append(True)
             # Refresh active enemies (a Mook may have been removed)
-            active_enemies = [e for e in enemies if not e.is_out]
+            active_enemies = [e for e in enemies if e.on_field(exchange)]
+
+        # Series 12 instrumentation: stamp the exchange a phase first fired
+        # in. Read by gates, never by a decision branch.
+        for enemy in enemies:
+            if enemy.phase_index is not None and enemy.phase_fired_exchange is None:
+                enemy.phase_fired_exchange = exchange
 
         # Check if all enemies defeated after PC actions
-        active_enemies = [e for e in enemies if not e.is_out]
-        if not active_enemies:
+        active_enemies = [e for e in enemies if e.on_field(exchange)]
+        if not active_enemies and not [
+                e for e in enemies
+                if not e.is_removed and e.enters_on_exchange > exchange]:
             return _build_result(True, exchange, pcs, enemies,
-                                 uncontested=uncontested_count)
+                                 uncontested=uncontested_count, riders=rider_log)
 
         # 3. Enemy actions
         for enemy in active_enemies:
             active_pcs_now = [p for p in pcs if not p.is_broken]
             if not active_pcs_now:
                 break
-            # K-6/D4: an Open enemy clears the tag ONLY by visibly spending
-            # its action (combat.open_clear_mode) — the MM's anti-snowball
-            # move. AI policy here (see _should_clear_open): a Boss spends
-            # the action to recover; a Named fights on while Open.
+            # How Open clears is data (combat.open_clear_mode). Under
+            # `enemy_action` the tag comes off only when the enemy visibly
+            # spends its action — the MM's anti-snowball move — and the AI
+            # policy in _should_clear_open decides who pays it: a Boss does,
+            # a Named fights on. Under R2's `end_of_exchange` the tag expires
+            # on its own and this branch never runs, so an Open enemy acts.
             if (
                 enemy.open
-                and combat_module.open_clear_mode(ruleset) == "enemy_action"
+                and not combat_module.open_clears_at_end_of_exchange(ruleset)
                 and _should_clear_open(enemy)
             ):
                 enemy.open = False
@@ -793,7 +926,7 @@ def run_combat(
         active_pcs = [p for p in pcs if not p.is_broken]
         if not active_pcs:
             return _build_result(False, exchange, pcs, enemies,
-                                 uncontested=uncontested_count)
+                                 uncontested=uncontested_count, riders=rider_log)
 
         # K-2/D5: an exchange no PC contested lets the situation advance
         # for free — the rule itself lives in combat.exchange_uncontested.
@@ -807,7 +940,7 @@ def run_combat(
                 if clock_progress >= objective_clock:
                     return _build_result(
                         False, exchange, pcs, enemies,
-                        uncontested=uncontested_count, objective_lost=True,
+                        uncontested=uncontested_count, riders=rider_log, objective_lost=True,
                     )
 
         # 4. End-of-exchange cleanup
@@ -815,6 +948,8 @@ def run_combat(
             if pc.is_broken:
                 continue
             combat_module.end_exchange(pc.conditions, ruleset)
+            # R3: Cover is a one-shot that expires with the Conditions.
+            combat_module.expire_end_of_exchange(pc, ruleset, exchange_no=exchange)
             if pc.posture == "withdrawn":
                 # Up to the pool (D5) — the clamp is combat.py's rule.
                 pc.endurance_current = combat_module.apply_withdrawn_recovery(
@@ -823,6 +958,11 @@ def run_combat(
         for enemy in enemies:
             if not enemy.is_out:
                 combat_module.end_exchange(enemy.conditions, ruleset)
+                # R2: under `open_clears: end_of_exchange` the Open tag
+                # expires with the Tier 1 Conditions. The lifecycle rule
+                # lives in combat.py; this is the call site, not a copy.
+                combat_module.expire_end_of_exchange(enemy, ruleset,
+                                                     exchange_no=exchange)
                 if enemy.posture == "withdrawn":
                     resolve_max = enemy.resolve + combat_module.enemy_armor_resolve_bonus(
                         enemy.armor, ruleset,
@@ -833,7 +973,7 @@ def run_combat(
 
     # Timeout: draw (counted as loss)
     return _build_result(False, MAX_EXCHANGES, pcs, enemies,
-                         uncontested=uncontested_count)
+                         uncontested=uncontested_count, riders=rider_log)
 
 
 def _build_result(
@@ -843,6 +983,7 @@ def _build_result(
     enemies: list[EnemyState],
     uncontested: int = 0,
     objective_lost: bool = False,
+    riders: Optional[list[str]] = None,
 ) -> SimResult:
     return SimResult(
         party_wins=party_wins,
@@ -850,9 +991,15 @@ def _build_result(
         sparks_spent=sum(p.sparks_spent for p in pcs),
         pcs_broken=[p.name for p in pcs if p.is_broken],
         endurance_remaining={p.name: p.endurance_current for p in pcs},
-        enemies_remaining=sum(1 for e in enemies if not e.is_out),
+        enemies_remaining=sum(1 for e in enemies if not e.is_removed),
         uncontested_exchanges=uncontested,
         objective_lost=objective_lost,
+        rider_choices=list(riders or []),
+        phase_fires={
+            e.instance_id: e.phase_fired_exchange
+            for e in enemies
+            if e.phase_fired_exchange is not None
+        },
     )
 
 
@@ -869,6 +1016,7 @@ def run_simulation(
     seed: Optional[int] = None,
     spark_policy: str = "conservative",
     objective_clock: Optional[int] = None,
+    rider_policy: str = "always_open",
 ) -> AggregateResult:
     """Run N iterations of a combat encounter and aggregate results.
 
@@ -903,7 +1051,8 @@ def run_simulation(
 
         result = run_combat(pcs, enemies, verbose=(verbose and i == 0),
                             spark_policy=spark_policy,
-                            objective_clock=objective_clock)
+                            objective_clock=objective_clock,
+                            rider_policy=rider_policy)
         results.append(result)
 
     return _aggregate(results, label, iterations)
@@ -1234,11 +1383,19 @@ def archive_guardian_def() -> dict:
     retired the tier1_immunity technique with the Open merge — TR 16).
 
     `phases` is the enemy's authored, purely-narrative `resolve_threshold`
-    trigger (matches the .fof's `phases:` block). `special_attack_mod`/
-    `special_no_clear_open` model its authored "Special" text (Reduced
-    Mode: attack_modifier drops to +1, its blows land as Tier 1, and it
-    stops spending actions to clear Open) — boss-specific flavor, not a
-    generic engine mechanic.
+    trigger (matches the .fof's `phases:` block).
+
+    RE-AUTHORED 2026-09-08 (R2/D20, task T15). Reduced Mode used to drop
+    the Guardian's attack to +1, land its blows at Tier 1, and stop it
+    clearing Open. Under R2 nothing clears Open by spending an action, so
+    `special_no_clear_open` became inert — the sim proved it, returning
+    numbers identical to the decimal with the flag on and off at every
+    threshold and seed. The phase is now MM1's *raise its danger* lever:
+    the attack drop is gone (so its blows land at a Boss's Tier 2 again)
+    and the threshold moved 2 -> 4, because at 2 of an effective 10 the
+    phase fired in the exchange the fight ended in three runs out of four.
+    Both `special_*` fields stay on `EnemyState` for other authored bosses;
+    this one no longer uses either.
     """
     return dict(
         name="Archive Guardian",
@@ -1247,9 +1404,7 @@ def archive_guardian_def() -> dict:
         resolve=8,
         attack_modifier=3,
         armor="heavy",
-        phases=[{"resolve_threshold": 2, "description": "Reduced Mode"}],
-        special_attack_mod=1,
-        special_no_clear_open=True,
+        phases=[{"resolve_threshold": 4, "description": "Reduced Mode"}],
     )
 
 
@@ -1528,7 +1683,8 @@ def _g3_pc_strike(pc: PCState, target: EnemyState, ruleset) -> None:
         return
 
     modifier = pc.strength_mod + pc.combat_mod
-    difficulty = combat_module.target_strike_difficulty("Standard", target.open, ruleset)
+    difficulty = combat_module.target_strike_difficulty(
+        "Standard", combat_module.has_easy_tag(target), ruleset)
     strike = combat_module.resolve_strike(
         modifier, pc.posture, pc.conditions, ruleset,
         combat_module.StrikeOptions(difficulty=difficulty),

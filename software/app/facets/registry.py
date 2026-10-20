@@ -9,6 +9,9 @@ from app.facets.loader import FacetLoadError, discover_facet_files, load_facet_f
 from app.facets.schema import (
     AdvancementDef,
     BackgroundDefinition,
+    LineageDefinition,
+    ItemDefinition,
+    MagicDomainDef,
     CharacterFacetDef,
     CombatDef,
     DeathDef,
@@ -44,8 +47,12 @@ class MergedRuleset:
         skills: dict[str, SkillDef] = {}
         techniques: dict[str, FacetTreeDef] = {}
         backgrounds: dict[str, BackgroundDefinition] = {}
+        lineages: dict[str, LineageDefinition] = {}
+        items: dict[str, ItemDefinition] = {}
         distribution = None
         major_derivation: list = []
+        soul_domains: dict[str, MagicDomainDef] = {}
+        mind_domains: dict[str, MagicDomainDef] = {}
         roll_resolution: RollResolutionDef | None = None
         spark: SparkDef | None = None
         advancement: AdvancementDef | None = None
@@ -79,6 +86,15 @@ class MergedRuleset:
             for bg in ff.backgrounds:
                 backgrounds[bg.id] = bg
 
+            # Lineages merge exactly as Backgrounds do — by id, later Facet
+            # wins — so a setting Facet adds its peoples without touching
+            # the core's Human (D18).
+            for lin in ff.lineages:
+                lineages[lin.id] = lin
+
+            for item in ff.items:
+                items[item.id] = item
+
             if ff.roll_resolution:
                 roll_resolution = ff.roll_resolution
             if ff.spark:
@@ -88,7 +104,38 @@ class MergedRuleset:
             if ff.combat:
                 combat = ff.combat
             if ff.magic:
-                magic = ff.magic
+                # `magic` mixes rules with catalogs. The RULES (traditions,
+                # domain types, the pre-Technique cap, the Spark rules) are
+                # singleton — one game, one answer — and the last module to
+                # declare them wins, as with every other singleton section.
+                # The CATALOGS (`soul_domains`, `mind_domains`) are
+                # collections keyed by id, exactly as `skills` is.
+                #
+                # Replacing the whole section instead would mean a setting
+                # Facet that adds one domain silently deletes the core's
+                # twenty-one, both traditions, and every domain type — and
+                # nothing would fail, because the ruleset would simply come
+                # back empty of magic.
+                for dom in ff.magic.soul_domains:
+                    soul_domains[dom.id] = dom
+                for dom in ff.magic.mind_domains:
+                    mind_domains[dom.id] = dom
+                if magic is None:
+                    magic = ff.magic
+                else:
+                    # Only the rule fields this module actually WROTE override
+                    # the ones already in force. A setting that lists domains
+                    # and says nothing about traditions is not asking for
+                    # traditions to be empty — but a bare model_copy of its
+                    # magic block would say exactly that, because every field
+                    # it left alone is sitting at its schema default.
+                    written = {
+                        field: getattr(ff.magic, field)
+                        for field in ff.magic.model_fields_set
+                        if field not in ("soul_domains", "mind_domains")
+                    }
+                    if written:
+                        magic = magic.model_copy(update=written)
             if ff.hazards:
                 hazards = ff.hazards
             if ff.death:
@@ -105,10 +152,19 @@ class MergedRuleset:
         self.skills = list(skills.values())
         self.techniques = techniques
         self.backgrounds = list(backgrounds.values())
+        self.lineages = list(lineages.values())
+        self.items = list(items.values())
         self.roll_resolution = roll_resolution
         self.spark = spark
         self.advancement = advancement
         self.combat = combat
+        # Rebuild the magic section with the accumulated catalogs on the
+        # last-declared rules, so neither half of it can be lost.
+        if magic is not None:
+            magic = magic.model_copy(update={
+                "soul_domains": list(soul_domains.values()),
+                "mind_domains": list(mind_domains.values()),
+            })
         self.magic = magic
         self.hazards = hazards
         self.death = death
@@ -117,6 +173,8 @@ class MergedRuleset:
         # Fast-lookup maps built once at merge time
         self._skill_map: dict[str, SkillDef] = {sk.id: sk for sk in self.skills}
         self._background_map: dict[str, BackgroundDefinition] = {bg.id: bg for bg in self.backgrounds}
+        self._lineage_map: dict[str, LineageDefinition] = {lin.id: lin for lin in self.lineages}
+        self._item_map: dict[str, ItemDefinition] = {it.id: it for it in self.items}
         self._rating_map: dict[int, object] = {r.rating: r for r in self.attribute_ratings}
         self._technique_map: dict[str, TechniqueDef] = {}
         self._technique_facet_map: dict[str, str] = {}
@@ -214,6 +272,12 @@ class MergedRuleset:
     def get_background(self, background_id: str) -> "BackgroundDefinition | None":
         return self._background_map.get(background_id)
 
+    def get_lineage(self, lineage_id: str) -> "LineageDefinition | None":
+        return self._lineage_map.get(lineage_id)
+
+    def get_item(self, item_id: str) -> "ItemDefinition | None":
+        return self._item_map.get(item_id)
+
     def to_client_dict(self) -> dict:
         """Serialise the ruleset to a JSON-safe dict for sending to clients."""
         def _serialize(obj):
@@ -234,6 +298,8 @@ class MergedRuleset:
             "skills": _serialize(self.skills),
             "techniques": _serialize(self.techniques),
             "backgrounds": _serialize(self.backgrounds),
+            "lineages": _serialize(self.lineages),
+            "items": _serialize(self.items),
             "roll_resolution": _serialize(self.roll_resolution),
             "spark": _serialize(self.spark),
             "advancement": _serialize(self.advancement),

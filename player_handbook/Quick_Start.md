@@ -12,7 +12,7 @@ Roll **2d6 + modifier**. **10+ = full success.** **7–9 = success with a cost.*
 
 ## Build a Character in Six Steps
 
-Everything below is the short form of Chapters II.1 through II.6. Work down the list; you will have a playable character before the snacks come out.
+Everything below is the short form of Chapters II.1 through II.7. Work down the list; you will have a playable character before the snacks come out.
 
 ### 1. Decide who they are
 
@@ -29,6 +29,8 @@ Your Facet is the direction your character grows — not a class, and not a lock
 | **Body** | Strength, speed, and endurance | Physical presence in the world |
 | **Mind** | Knowledge, perception, and reasoning | Understanding the problem |
 | **Soul** | Will, presence, and connection | Moving the people around it |
+
+Your **Lineage** is Human unless the setting says otherwise; a setting's lineages may grant a domain — see its Facet (Chapter II.5).
 
 ### 3. Spend 18 points on the nine Minor Attributes
 
@@ -58,7 +60,7 @@ Add up the three Minor Attributes under each Major and read the modifier off the
 
 ### 5. Pick a Background
 
-A Background is your character's history, and it is where most of your starting capability comes from. Chapter II.5 has fifteen pre-built ones and a five-step path for building your own. Each gives you five things:
+A Background is your character's history, and it is where most of your starting capability comes from. Chapter II.6 has fifteen pre-built ones and a five-step path for building your own. Each gives you five things:
 
 - **Title** — what you call yourself, or what others call you
 - **Description** — the history itself, in a few sentences
@@ -66,7 +68,7 @@ A Background is your character's history, and it is where most of your starting 
 - **Secondary Skill** at **Novice** with **1 mark** already on it — same Facet, two marks from Practiced instead of three
 - **Specialty** — one narrow area of fictional expertise. When it directly applies, a Standard roll becomes Easy; when it is merely tangential, the Mirror Master hands over the information without a roll
 
-If your Background grants magic, a **Domain** origin replaces the Secondary Skill. Until you unlock your first Facet Technique, that Domain works at **Minor scope only**.
+If your Background grants magic, a **Domain** origin replaces the Secondary Skill. Until you unlock your first Facet Technique, that Domain works at **Minor scope only**. After it, small magic stays free and larger workings spend one of three **readied intents** you choose at the start of each session (Chapter II.3).
 
 ### 6. Fill in the rest
 
@@ -149,6 +151,6 @@ Zulnut's player leans into it: *"Then I sit down facing the corridor, so whateve
 
 1. Combat runs in **exchanges** — everyone picks their move at once and the whole beat resolves together. No turn order, no waiting.
 2. Each exchange you declare a **Posture** — the stance you are taking for that beat (Aggressive, Measured, Defensive, or Withdrawn).
-3. Attacking is a **Strike** — the same 2d6 roll (see "Hit something," above). A hit wears down an enemy's **Resolve**: 2 on a 10+, 1 on a 7–9. At 0 Resolve it is out of the fight.
+3. Attacking is a **Strike** — the same 2d6 roll (see "Hit something," above). A hit wears down an enemy's **Resolve**: 2 on a 10+, 1 on a 7–9. At 0 Resolve it is out of the fight. A 10+ also lets you **choose one rider**: leave it **Open** (Easy to Strike for everyone, until the end of the exchange) or take **Position** (the next roll against it is Easy). Both run out on their own — the window is now.
 4. When something attacks you, you may **react** — one reaction per incoming attack, paid for from your Endurance Pool. At 0 you can only take the hit, and a hit you take lands as a **Condition**.
 5. Everything else: Chapter III.3 — the same 2d6 roll.

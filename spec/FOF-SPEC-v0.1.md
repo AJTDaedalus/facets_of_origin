@@ -119,6 +119,8 @@ Beyond the envelope: `priority` (int).
 - `attributes.ratings[]` → keyed by `rating` (int)
 - `character_facets[]` → keyed by `id`
 - `skills[]` → keyed by `id`
+- `backgrounds[]` → keyed by `id`
+- `lineages[]` → keyed by `id`
 - `techniques[facet_id][branch_id][tier][technique_id]`
 
 **Denial** — a skill entry with `status: removed` suppresses definitions from lower-priority modules. Warning emitted.

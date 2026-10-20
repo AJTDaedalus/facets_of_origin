@@ -126,3 +126,19 @@ The base rules do not include a detailed economy system. Currency exists in the 
 > **MM Note — Money and wealth**
 >
 > If money matters in your campaign, establish a simple framework at session zero: are the characters poor, comfortable, or wealthy? What can they afford without rolling, and what requires effort? Keep it narrative. The Economy Facet module (planned) provides detailed rules for campaigns where trade, commerce, and resource management are central to the story.
+
+---
+
+## One-Use Items
+
+The core rules ship no consumables. A setting Facet may add them, and when one does, they follow a single shape: **one stored effect, released once, then gone.** No charges counter, no attunement, no permanent bonus. The item is in your inventory or it is not.
+
+The first is Val'loh's **crystal charge** — a working grown into soul-crystal and released at a touch by anyone, gifted or not (see that Facet's *The Magic of Val'loh*). It is the pattern to copy if you are writing your own.
+
+> **MM Note — why one-use, and nothing else**
+>
+> **Default:** a setting's items are consumables.
+>
+> **The dial:** you can hand out a permanent bonus item instead — the sword that always adds +1.
+>
+> **The cost:** more than it looks. This game has no numbers to add to; a permanent +1 is a permanent change to every roll a character makes with it, and it compounds with everything the character earns afterward. Worse, it becomes the thing the character *is* — nobody puts down the sword. A one-use item is a decision the player gets to make once and then talk about; a permanent one is a line on a sheet nobody reads twice.
