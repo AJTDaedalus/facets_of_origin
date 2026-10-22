@@ -104,8 +104,8 @@ after X.
 | T1.1 | WP1 | done | Tells column in Table VIII–1 |
 | T1.2 | WP1 | done | Tell bullets in Movements III–V |
 | T1.3 | WP1 | done | Prep box step 4 |
-| T1.4 | WP1 | waiting (commit on owner's word) | Commit WP1 |
-| T3.1 | WP3 | open | Simulation harness into the repo |
+| T1.4 | WP1 | done | Commit WP1 |
+| T3.1 | WP3 | done | Simulation harness into the repo |
 | T3.2 | WP3 | open | `facts.yaml`: three-player baseline guard |
 | T3.3 | WP3 | open | Party-size rule, once; Table IX–1 |
 | T3.4 | WP3 | open | "Three at the Table" box |
@@ -271,14 +271,14 @@ T4.14).
 - **Accept:** step 4 names the Fractures and the tells column.
 - **Checks:** SA. **Time:** 10 min.
 
-### ☐ T1.4 Commit WP1
+### ☑ T1.4 Commit WP1
 - `Oraga 5e 3p pass: WP1 tells on the run path`.
 
 ---
 
 ## WP3: Three-player baseline (TP10) (`FRI`)
 
-### ☐ T3.1 Simulation harness into the repo *(prerequisite for every `SIM` row)*
+### ☑ T3.1 Simulation harness into the repo *(prerequisite for every `SIM` row)*
 - **Do:** the TUNING_3P harness (`s14.py`, `skirm.py`, `chain.py`) lives only in a session
   scratchpad (`/tmp/claude-0/-root-facets-of-origin/407a720b-0f36-453e-bd9b-cec22a9c9c7f/scratchpad/`),
   which is not durable. Copy the three scripts (scripts only: no `refs*`, `srd` or `scripts/`
