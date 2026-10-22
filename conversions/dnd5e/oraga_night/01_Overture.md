@@ -16,7 +16,8 @@
 > 3. **Chapter VIII, the DM sheet and the palace diagram** (10 minutes). Print both.
 >    From here on, everything you read is behind a line on that sheet.
 > 4. **Chapter V: "How to Run the Attack", Movement VI's opening, "Midnight Rules"
->    (read "Down, Not Out", "Buying Time" and "The Attendant"; skim the Room Tricks and
+>    (read "Down, Not Out", "Buying Time", "The Attendant" and "The Fractures"; the
+>    tells to show are on the DM sheet, under Table VIII–1; skim the Room Tricks and
 >    "Two Hundred People": they are tables to use live), "The Crossing", and Movement
 >    VII's opening and Epilogue** (25 minutes).
 > 5. **Chapter IX: "The Snakes at the Ball" (the three rules) and "Running the

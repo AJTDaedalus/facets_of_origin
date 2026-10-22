@@ -894,7 +894,9 @@ them without trying; anyone else who is looking notices on a DC 10 Wisdom
 doors, not the gates.
 
 **The quiet guest** *(the Attendant, chapter VII)*. One sighting in Movements I, II, IV
-and V, each visible and deniable, and each shows one of its three habits. At midnight
+and V, each visible and deniable. Between them they show its three habits: the cup
+and cloak (I), worked crystal and light (II, and again as the glint in V), and music
+that changes (IV). At midnight
 those habits are how the party beats it (card S14), so show every one of them plainly. A player
 who names one before anything explains it has read an omen (Table I–3).
 
@@ -1008,8 +1010,12 @@ serves, it names no one, and looks around, briefly, for somebody who is not ther
 ### Movement III — The Summons *(mid-night)*
 
 > **About 35 minutes** (starts 1:20). *Run:* the glimpse on the gallery, one summons
-> (two characters walked in together), and the gray masks. *If you have time:* a
-> second summons, the Tavva scout, and S1, if it was held from Movement II.
+> (two characters walked in together), and the gray masks. *Tells to show* (Table
+> V–6): the Radiant asking a guest *"Whom do you serve?"* in any social scene; the Hollow
+> beside an exit, and his flat answer to small talk; the Wept watching the young pages,
+> for anyone in the galleries. By midnight, each of the three should have shown at least
+> one tell to someone at the table. *If you have time:* a second summons, the Tavva
+> scout, and S1, if it was held from Movement II.
 
 The host does not appear, and this is the Movement where the ball fully absorbs that he
 may never appear. The guests came to see the recluse, and the recluse is declining
@@ -1166,6 +1172,9 @@ good thing I have left to give anyone."
 > **About 25 minutes** (starts 1:55). *Run:* the toast word for word, the two plates,
 > the omen, the quiet guest turning after the music, the one snake line that turned
 > hardest, and, if anyone carries Agenda 4, dinner for two in the east wing (B9).
+> *Tells to show:* the Radiant's antique blessing over the food (Kovaun knows the form);
+> the Wept watching the young pages a beat too long; her offering in Elanna's niche,
+> for anyone who passes the shrine (B6).
 
 The banquet is called, and the galleries fill. And then, between the first course
 and the second, with no trumpet and no announcement, Raunu Boranis is simply
@@ -1324,7 +1333,10 @@ Movement V.
 > **About 40 minutes** (starts 2:20). *Run:* the Dead Dance, the omen, the quiet guest
 > losing the party to a glint, and **at most
 > one fight card for each group of characters.** The others resolve offstage by
-> their cards' defaults, and a line the table never saw does not heat up. *If you have
+> their cards' defaults, and a line the table never saw does not heat up. *Tells to
+> show:* the omen is the Wept's; the Radiant dancing beautifully where the light falls;
+> the Hollow watching Anha's household at the edges of the service rooms (B10); the Wept
+> humming at the east-wing doors, for anyone near them. *If you have
 > time:* last Undercurrent beats. Take the break as the bells begin to ring midnight.
 
 The old custom, and the palace keeps it in full: the lamps are lowered, the music

@@ -29,6 +29,19 @@ the handouts for the table. Print the first three pages and run the night from t
 spare Undercurrents, a second card per Movement, S1, and the east wing only if nobody
 carries Agenda 4. Never the gate.
 
+**Tells to show** *(Table V–6 in chapter V has them all. A Fracture needs one tell
+witnessed or heard secondhand; two make it easier. Show each of the three at least
+once before midnight.)*
+
+- **III:** the Radiant's *"Whom do you serve?"* · the Hollow beside an exit; his flat
+  small talk · the Wept watching the young pages (B3)
+- **IV:** the Radiant's antique blessing over the food (B3; Kovaun knows the form) · the
+  Wept's offering in Elanna's niche (B6; Sella can date the rite)
+- **V:** the Wept: *"You dance like my daughter would have"* (the omen); humming at the
+  east-wing doors · the Radiant dancing where the light falls · the Hollow watching
+  Anha's household (B10 edges)
+- **Midnight:** everything they do openly counts (Table V–6, last column)
+
 **Table VIII–2: Midnight — Who Goes Where**
 
 | Who | At the lights | Then |
