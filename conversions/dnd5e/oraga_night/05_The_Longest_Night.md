@@ -978,7 +978,7 @@ night's one mortal antagonist with a contract instead of a grudge.
 > and the front was never anything but a decoy.
 >
 > **And the coin.** "Old coin" is also Vell's signature (Agenda 6, the boat, the
-> carter), and that collision is **deliberate**. A table that notices will suspect
+> horses), and that collision is **deliberate**. A table that notices will suspect
 > the pale factor of hiring the company. Let them. The aftermath is where it comes
 > apart: a bought-out captain, asked, describes a payer who was not tall, not pale,
 > and not soft-spoken, and the coin in the Bought's case is older than Vell's by a

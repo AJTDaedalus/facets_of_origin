@@ -295,6 +295,22 @@ facts:
 # The dimensions maps/build_maps.py draws, all in feet (O28, O33, O34; S3 for the gate;
 # DECISIONS O53–O56 for what the maps had to choose). tools/test_maps.py checks every
 # measured shape in maps/*.svg against these numbers. fact_check.py ignores this block.
+  - id: escape_route
+    truth: >-
+      Raunu meant to keep Veier in the sealed east wing until the child was born; the escape
+      is Vell's, never Raunu's plan. Vell's boat leaves by the river gate and runs north up
+      the tributary to the foothills, where he has horses waiting; from there they ride west
+      toward the mountains. No cart, no carter, no "factor and his sick daughter".
+    source: owner TP11, TP12 (2026-10-20); replaces invention #8 (Vell's escape logistics)
+    checks:
+      - type: forbid
+        pattern: '\bcarter\b|sick daughter|fishers downstream'
+        unless: 'festival carters'
+        why: TP12 — the trail runs up the tributary to a horse-line in the foothills
+      - type: forbid
+        pattern: 'Raunu[^.]{0,80}(sends?|sent) (her|Veier) (away|off)'
+        why: TP11 — Raunu planned to keep her until the birth
+
 maps:
   court:          # B2 (05 General Features, Sizes)
     length: 140

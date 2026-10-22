@@ -187,16 +187,19 @@ corridors, light floods stairwells, wards flare over huddled guests. Two hundred
 people survive the Uninvited because a paranoid genius spent two silent years making
 his house ready for *something*.
 
-But he prepared for armies, poisons, rivals, and the Church. Not for this. When the
-moment comes, the last and best of his preparations has one charge in it, and Raunu —
+He meant to keep Veier behind those walls, in the sealed east wing, until the child
+was born. But he prepared for armies, poisons, rivals, and the Church. Not for this.
+When the moment comes, the last and best of his preparations has one charge in it, and Raunu —
 who has already understood, faster than anyone in the room, what the masked things
 have come for — spends it on his wife's escape instead of his own life. He dies on
 his own ballroom floor. It is a choice, not a failure, and if the players later piece
 that together, let them.
 
 Veier, wounded, goes out through the gardens on Master Vell's arm, through the river
-gate, into the dark. She will not survive the night; her child will. No player
-character learns this last part unless your campaign continues into the aftermath —
+gate, into the dark. Vell's boat takes her north up the tributary to the foothills,
+where he has horses waiting, and from there they ride west toward the mountains. She
+will not survive the night; her child will. No player character learns this last part
+unless your campaign continues into the aftermath —
 what they see, at most, is a pale man carrying a bleeding woman toward the water,
 moving as if he has rehearsed it for years.
 

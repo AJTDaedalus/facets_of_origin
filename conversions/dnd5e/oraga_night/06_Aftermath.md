@@ -31,10 +31,11 @@ record, and it is what history keeps.
   exists nowhere else in the world: priceless, unprovable, and dangerous in exact
   proportion to who they tell.
 - **The trail goes tidy.** The river gate is unlocked, oiled, recently used. A boat is
-  missing from a fisher's mooring downstream, paid for in old coin at three times its
-  worth. A night-carter on the west road carried "a factor and his sick daughter" as
-  far as the crossroads and remembers the man's cold hands. Then nothing, whatever the
-  dice do. Anyone who follows it ends certain of two things: the lady left the palace
+  missing from a fisher's mooring, paid for in old coin at three times its worth, and
+  fishers on the tributary saw it go north in the dark. Where the foothills begin it
+  lies drawn up on the bank, empty, beside the trampled ground of a horse-line that was
+  waiting for it, and the hoofprints go west toward the mountains. Then nothing,
+  whatever the dice do. Anyone who follows it ends certain of two things: the lady left the palace
   alive, and whoever took her wanted her safe. Only characters who learned the east
   wing's secret know to count a third passenger.
 - **The house counts itself.** Corval, ruined and dignified, executes the testament
@@ -88,8 +89,9 @@ the play.
   know who hired him will help.
 - **The trail**, step by step: the river gate (a DC 13 Intelligence (Investigation)
   check to see it was oiled, not forced), the boat (a DC 13 Charisma (Persuasion) check
-  with the fishers downstream), the carter (a DC 15 Charisma (Persuasion) or DC 15
-  Intelligence (Investigation) check to find the one who will talk), then nothing. A failed check costs time and draws a faction's attention; it never loses
+  with the fishers on the tributary), the landing in the foothills (a DC 15 Wisdom
+  (Survival) or DC 15 Intelligence (Investigation) check to read the horse-line and the
+  tracks going west), then nothing. A failed check costs time and draws a faction's attention; it never loses
   the trail.
 - **Otta Vesh,** the finest mask-maker in Rekuzan, keeps a casting-blank of every face
   she has ever fitted. Ask her about the three gray masks: nobody made them, nobody

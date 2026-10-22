@@ -59,10 +59,10 @@ straight face, the only patron in Rekuzan who genuinely wants the truth.
 
 **The trail.** For tables that chase it, the physical evidence runs out in this
 order, each step a good scene: the river gate (unlocked, oiled, recently used); a
-boat missing from a fisher's mooring downstream (paid for in old coin, three times
-its worth, left neatly); a night-carter on the west road who carried "a factor and
-his sick daughter" as far as the crossroads and remembers the man's cold hands; and
-then nothing. The trail does not merely go cold — it goes *tidy*, erased by someone
+boat missing from a fisher's mooring (paid for in old coin, three times its worth,
+left neatly), seen going north up the tributary in the dark; the same boat drawn up
+empty where the foothills begin, beside the trampled ground of a horse-line, with
+hoofprints going west toward the mountains; and then nothing. The trail does not merely go cold — it goes *tidy*, erased by someone
 with centuries of practice. The players should end certain of exactly two things:
 the lady left the palace alive, and whoever took her wanted her safe. (Only players
 who learned the east wing's secret know to count a third passenger.)
