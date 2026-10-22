@@ -489,6 +489,14 @@ S11, the Phern door — plus the gate. A second goes live only if the table saw 
 and let it go (S8's tell, Callun's coin refused, the appointment left to happen). No more
 than two factions are hot at midnight unless the table has made it so.
 
+**When nobody carries the agenda.** Three of the "to 0" exits are agendas: Agenda 1 for
+the Circle, Agenda 2 for the Church, Agenda 3 for Draunel. With three players, most of
+them stay in the deck. A faction whose agenda nobody carries cools on its −1 boxes
+instead: the Circle for each of its knives turned or caught (its two other ways to 0
+still stand), the Church when Kovaun is given something true to file or the wardens are
+turned back at the study door, and Draunel when he is embarrassed in front of guests.
+Make sure the table sees those openings.
+
 **What the heat means at midnight.**
 
 - **0–2: they get out.** The faction's people find their principal and take them out
@@ -800,18 +808,19 @@ gallery fire reaches the Crystal Court's doors, and from then on every round cos
 crowd, and you say who did not get out. Standing still is the worst thing a party
 can do here.
 
-**The last bell — six segments.** Advances at the end of every round the characters
-spend at the gate, whatever anyone does there. The bells of Oraga began tolling the end
-of the night as the first guests reached the court, but that tolling is only the
-warning; the count starts at the gate (see chapter V, "The Midnight Clock"). The **last bell of Oraga** rings the moment the gate is decided, and
-on the sixth segment at the latest. If nothing else has decided it by then, the bell
-does: the contract's hours are over, the first sect banners come up Gate Street
-behind the Bought, and the captain calls the withdrawal. That is ending 3. If no
+**The sect guard's arrival — six segments.** Advances at the end of every round the
+characters spend at the gate, whatever anyone does there. The bells of Oraga began tolling
+the end of the night as the first guests reached the court, but that tolling is only the
+warning; the count starts at the gate (see chapter V, "The Midnight Clock"). On the sixth
+segment the first sect banners come up Gate Street behind the Bought, and the **last bell
+of Oraga** rings as their signal: the contract's hours are over, and the captain calls the
+withdrawal. That is ending 3. If the gate is decided sooner, the last bell rings the moment
+it is. If no
 character reaches the gate by the end of Movement VII, the same thing happens
 offstage (see chapter V, "The Midnight Clock").
 
 **Enemies.** One **Bought Sergeant** and four **Bought Blades** hold the gate. The **Bought Captain** arrives at the start of the
-third round (the bell clock has two segments filled), or the round the sergeant falls,
+third round (the sect guard's clock has two segments filled), or the round the sergeant falls,
 whichever comes first.
 *Budget:* 450 + (4 × 100) = **850 XP — between Low and Moderate** for three 4th-level
 characters. The wicket is what gives it that weight: once the party is through and fighting in the
@@ -879,7 +888,7 @@ is what this out is made of. **The sergeant surrenders the field the moment
 the contract is void, announces it, and opens the wicket and then the gate.**
 
 **3 — Outlast them.** The characters hold the court, keep talking, keep fighting at
-the wicket, and keep the crowd alive until the sixth segment of the last bell. The captain calls the
+the wicket, and keep the crowd alive until the sect guard's clock fills. The captain calls the
 withdrawal at the first sight of a sect banner, if the party has held even one round.
 **A party that only held has won.**
 

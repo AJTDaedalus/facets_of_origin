@@ -2,7 +2,8 @@
 
 *The first two pages are yours: everything the night needs, on two sheets, and the third is the palace.
 After those come the Snake Tracker, Where Everyone Stands, and the rumor table, then
-the handouts for the table. Print the first three pages and run the night from them.*
+the handouts for the table. The Midnight Tracker closes the chapter on a page of its
+own. Print the first three pages and the tracker, and run the night from them.*
 
 ---
 
@@ -10,7 +11,7 @@ the handouts for the table. Print the first three pages and run the night from t
 
 ### Page One: The Night and Midnight
 
-**Table VIII–1: The Night** *(four players; minutes from Table I–1)*
+**Table VIII–1: The Night** *(three players; minutes from Table I–1)*
 
 | Start | Movement | Scheduled | The omen | The quiet guest | Fights to show (chapter IX) |
 |---|---|---|---|---|---|
@@ -22,12 +23,20 @@ the handouts for the table. Print the first three pages and run the night from t
 | 2:20 | **V. Hour of Spirits** (40) | Dead Dance; quarter-bells; the S9 appointment at the first; Vell to the river gate; east wing doubled | *"You dance like my daughter would have."* | Watches the party, loses them to a glint | **One per group,** sized to who walks in (alone: the card's *One character* line): S2 · S7 · S8 · S9 · S10 |
 | 3:00 | *Break* (10) | As the bells ring midnight | | | |
 | 3:10 | **VI. Unmasking** (50) | Lights die **mid-sentence**; the attack; the dais; the Crossing; the leash takes the three once the boat is clear | — | Sets down the cloak and cup; stands by the three | S11 · **S14** if they interfere · S8 · S5 |
-| 4:00 | **VII. Longest Night** (40) | Fire, rescue, the gate; **then** the last bell (at the latest, S3's bell clock); word of other attacks with the sect guard | — | — | **S3** · S12 · S13 · S5 · S14 |
+| 4:00 | **VII. Longest Night** (40) | Fire, rescue, the gate; **then** the last bell (at the latest, when S3's sect-guard clock fills); word of other attacks with the sect guard | — | — | **S3** · S12 · S13 · S5 · S14 |
 | 4:40 | **Epilogue** (10) | Chapter V read-aloud; "what do you carry out?"; **5th level** | | | |
 
 **Checkpoints:** the toast by **2:15**; midnight by **3:15**. If you are behind, cut B13,
 spare Undercurrents, a second card per Movement, S1, and the east wing only if nobody
 carries Agenda 4. Never the gate.
+
+**The bells, in order.** The quarter-bells ring through Movement V: the first is
+Draunel's appointment (S9), and at the half-bell Thenya's slingers try the wall (S10).
+The bells of midnight ring at the break, before the Unmasking. The bells of Oraga start
+tolling when the first guests reach the Gatehouse Court, and they are only a warning.
+The last bell of Oraga rings when the gate is decided, or when S3's sect-guard clock
+fills (at the end of Movement VII if no character gets there). It is the leash's hard
+limit: by then the three are gone, finished or not.
 
 **Tells to show** *(Table V–6 in chapter V has them all. A Fracture needs one tell
 witnessed or heard secondhand; two make it easier. Show each of the three at least
@@ -114,6 +123,17 @@ secret**: no faction learns of the child unless a player character tells them.
   talks. Void the contract (with proof, a DC 13 Charisma (Persuasion) check to the sergeant;
   the captain needs no check), buy them out, or outlast them. **The last bell rings after the gate is
   decided**, or at the end of Movement VII if no character reached it (ending 3, offstage).
+
+**Beats that need an agenda.** With three players, five agendas stay in the deck, and
+their beats go with them; play on without them. Anha and her sibling clear the
+galleries in Movement VII only with Agenda 8, and S11's other door is Anha's or Agenda
+8's. S8's Prelate's Question needs Agenda 2. Steering a ward with a DC 13 Intelligence
+(Arcana) check needs Agenda 5's study, or an Orthaen who has read the wards by hand
+tonight. The truth of the unlocked
+river gate is Agenda 6's alone. A snake whose "to 0" is an agenda nobody carries (the
+Circle, the Church, Draunel) cools on its −1 boxes instead (Table VIII–5). The Root's
+key, the slate in B8, needs no Thieves' Tools: S8's wardens open the study door (and wipe the slate a round later), or a
+DC 18 Intelligence (Arcana) check improvises the key from ward-study.
 
 **Table VIII–3: Key DCs**
 
@@ -253,7 +273,7 @@ the half-bell in Movement V (S10), so the only card live in the dark by default 
 | Anha | B10 | B10 | B10 | B10, at the service door | B10 |
 | Vell | B1, unmemorable | B5 gardens, once | B2 edge | B2 edge | B5 — the river gate |
 | Tavva | B1, hired livery | B10, learning the halls | her scout walks the B7 corridor | B3, unremarkable | dark corridors — staging |
-| The Uninvited | — | — | B2 edge, arriving | B2 edge, still | Wept: east doors · Radiant: the Dance · Hollow: the exits |
+| The Uninvited | — | — | B2 edge, arriving | B2 edge, still | Wept: the east-wing doors · Radiant: the Dance · Hollow: the exits |
 | The Attendant | B0/B1, in the line | B2, at a crystal wall | B4 line | B2, following the music | B2, edge of the Dance, watching the party |
 
 **Table VIII–7: The Honor Guard, Post by Post** *(the nine; "once the line is in" means
@@ -406,3 +426,44 @@ not, trained or not. Releasing one does not make its bearer a caster.
 | *A Chime at a Threshold* | Common | Set on a doorway or gap up to 20 feet wide. For 8 hours, when a Tiny or larger creature crosses it, the crystal chimes, audibly, within 60 feet. |
 | *Warmth* | Common | For 8 hours the bearer is comfortable in cold down to a hard frost, and has Advantage on saving throws against extreme cold. |
 | *A Held Image* | Common | The crystal shows the still, silent image its grower set in it — up to a 5-foot cube — for 1 minute. |
+
+---
+
+## The Midnight Tracker *(DM)*
+
+*Print this page and write on it from the moment the lights die. Every line is a piece
+of the midnight hour that drifts if you carry it in your head. The boxes only count;
+the rules behind them are in chapter V ("Midnight Rules", "The Fractures"), on card S14
+and on card S3. Numbers are for three characters, with four in parentheses.*
+
+**Tonight's setting:** ☐ Gentle · ☐ Sharp · ☐ Merciless
+
+**Table VIII–10: The Midnight Tracker — the Three**
+
+| | The Wept | The Radiant | The Hollow |
+|---|---|---|---|
+| **Errand** | Raunu, on the dais (B2) | Veier, from the east wing (B9) | The main doors (B2) |
+| **Arrives** | At Raunu on her 4th turn of moving (3rd with four): ☐ ☐ ☐ ☐, plus a turn per Delay spent | The garden stair at Raunu's fall + 3 beats: ☐ ☐ ☐. The Crossing: ☐ ☐ ☐ | Holds until Raunu falls, or his Fracture lands: ☐ turned east |
+| **Delay earned** (fill a circle; cross it out when spent) | ○ ○ ○ ○ ○ ○ | ○ ○ ○ ○ ○ ○ | ○ ○ ○ ○ ○ ○ |
+| **Tricks that worked** (DC 15 the second time; never a third) | | | |
+| **Tells seen** (write each witness's initial in the box) | ☐ the pages · ☐ the offering · ☐ the cradle-song · ☐ the omen · during: ☐ a child crying · ☐ the woman's face | ☐ the blessing · ☐ "Whom do you serve?" · ☐ the dance · during: ☐ staged kills · ☐ posing when watched | ☐ beside an exit · ☐ flat small talk · ☐ watching Anha's people · during: ☐ holds, never advances · ☐ flinching from ward-fire |
+| **Fracture** (once each) | ☐ landed (DC 15 while she has 2+ Delay) | ☐ landed | ☐ landed |
+| **Last blow** (thrown when it returns) | | | |
+
+**Table VIII–11: The Midnight Tracker — Everything Else**
+
+| Track | Mark it | Remember |
+|---|---|---|
+| **The Attendant (S14)** | ☐ fired · broken focus ○ ○ ○ ○ | Say its state every round. The fourth break: it wanders off |
+| Its Hit Points | 178 (229 with four): | 0 Hit Points: gone, no body |
+| Habits the table saw | ☐ the cup · ☐ crystal and light · ☐ music that changes | +2 to a distraction |
+| Tricks tried on it | | A repeat has Disadvantage and no bonus; never a third time |
+| Furniture to it | | Until they next attack it or interfere with the three |
+| **Ward-points** | Dais ○ ○ ○ ○ · doors ○ ○ · sealed doors held: | Each steers once tonight (Table V–4 for the doors) |
+| The Root (B11) | ☐ found | Any ward-point in the palace, from below |
+| **Raunu** | ☐ falls · ☐ saved | The main doors open; the bells of Oraga begin |
+| **The leash** | ☐ the boat is out of reach | All three go, finished or not |
+| **Snakes live in the dark** | | Heat 3–4 at midnight (Table VIII–5) |
+| **S3:** the fire clock | ○ ○ ○ ○ | Ticks only on rounds nobody fights or talks |
+| **S3:** the sect guard's arrival | ○ ○ ○ ○ ○ ○ | The captain at the second circle or when the sergeant falls. The last bell on the sixth, or when the gate is decided |
+| **S3:** Blades taken off | | One per retinue talked round at the gate |

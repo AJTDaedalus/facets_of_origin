@@ -240,3 +240,54 @@ T3.10 and T3.11 are marked ⛔. T3.12 and T3.13 are independent and went ahead.
 - Lint: the first draft put the 04 run box back over 120 words; trimmed.
 - Checks: lint OK 0; fact_check OK 0; bestiary_check 0; pregen_check 0; `pytest tools` 422 passed; `pytest research/oraga_5e_sim` 14 passed; Facets docs + private-canon tests 42 passed.
 - T3.14 (commit) still not run, per the brief.
+
+## 2026-10-22 — T2.1 "The east-wing doors" fix
+
+- `08_Handouts.md`, Table VIII–6, the Uninvited's Movement V cell: "Wept: east doors" → "Wept: the east-wing doors" (matches the tell at 05:769, the cradle-song at the east wing doors, and 05:838's "east-wing doors").
+- Noted, not changed (outside the task's file): 05:769 spells it "east wing doors" without the hyphen.
+- Checks: lint OK 0; fact_check OK 0; bestiary_check 0 mismatches; pregen_check 0; `pytest tools` 422 passed.
+
+## 2026-10-22 — T2.2 Bell glossary; S3 clock wording
+
+- `08_Handouts.md`, Page One after the checkpoints: new paragraph **The bells, in order** (quarter-bells through Movement V, the first for S9 and the half-bell for S10; the bells of midnight at the break; the bells of Oraga tolling as a warning once guests reach the Gatehouse Court; the last bell when the gate is decided or S3's clock fills, end of Movement VII if nobody gets there; the leash's hard limit). Table VIII–1 Movement VII: "(at the latest, when S3's sect-guard clock fills)".
+- `09_The_Snakes.md`, S3: "The last bell — six segments" → **The sect guard's arrival — six segments**; on the sixth segment the sect banners come up Gate Street and the last bell rings as their signal; if the gate is decided sooner, the bell rings then. The captain's arrival line and ending 3 now say "the sect guard's clock". Rules unchanged.
+- `05_The_Longest_Night.md` (needed for the acceptance's consistency across 05:62–95): the Midnight Clock step 8 and Movement VII's last-bell paragraph and S3 pointer now name "the sect guard's arrival" instead of "the bell clock".
+- `04_The_Ball.md`: the pointer to a Bought schedule the DM sheet lacked is replaced by the schedule itself (dusk in the trade district; the runner in Movement V, pointing to ⟨The Bought change sides⟩; the fires at the quarter-bells; the gatehouse from the first bell of midnight; done at the last bell), with a pointer to the DM sheet's bell glossary.
+- `flow/flow.json`: S3 summary, `ev-lastbell` summary, `clk-lastbell` label ("Sect guard's arrival (S3)"; id kept). `python build_flow_page.py` rebuilt the page.
+- Bell terms checked against 02:131–133 ("by the last bell of Oraga they must go") and 10:131–132 ("at the last bell"): consistent, no change needed.
+- INVENTIONS #89 (summary and renaming; the derived reading that the Bought's fires go up during Movement V is flagged for owner review).
+- Checks: lint OK 0; fact_check OK 0; bestiary_check 0 mismatches; pregen_check 0; `pytest tools` 422 passed.
+
+## 2026-10-22 — T2.3 Midnight Tracker, first version
+
+- `08_Handouts.md`: new closing section **The Midnight Tracker (DM)**, 38 lines (limit about 45):
+  - an italic DM line (print it, write on it from the lights; the rules live in chapter V, S14 and S3; three-player numbers, four in parentheses);
+  - **Tonight's setting:** ☐ Gentle · ☐ Sharp · ☐ Merciless (the dial word);
+  - **Table VIII–10: The Midnight Tracker — the Three**, one column per Uninvited: errand; arrival line (the Wept at Raunu on her 4th turn, 3rd with four, plus a turn per Delay spent; the Radiant at the garden stair at the fall + 3 beats, then the Crossing's three beats; the Hollow holding until Raunu falls or his Fracture lands); Delay earned (six circles, crossed when spent); tricks that worked (DC 15 the second time); tells seen (every Table V–6 tell as a box, the witness's initial written in it, so the grid is per character); Fracture landed (with the Wept's DC 15 at 2+ Delay); last blow;
+  - **Table VIII–11: The Midnight Tracker — Everything Else**: the Attendant (fired, four broken-focus circles, HP 178 with 229 for four, habits seen, tricks tried, furniture); ward-points (dais four, doors two, sealed doors held, the Root); Raunu falls / saved; the leash; snakes live in the dark; S3's fire clock (4) and the sect guard's arrival (6, captain at the second circle), Blades taken off by retinues.
+  - Chapter opening: the tracker closes the chapter on its own page; print it with the first three pages.
+- **Placement (TPN-3, Worker call for Planner review):** the tracker is Tables VIII–10/11 at the end of the chapter, not a third DM page, to avoid renumbering Tables VIII–5…9, which TP23 and later tasks cite by number.
+- First run: fact_check flagged a bare "229" (party_baseline: a four-player value only on a line saying four); fixed to "178 (229 with four)".
+- Checks: lint OK 0; fact_check OK 0; bestiary_check 0 mismatches; pregen_check 0; `pytest tools` 422 passed.
+- **For T2.6 and WP4/WP5/WP6 (not written here):**
+  - *Fracture (once each)* row → split into **Stop used** (one box per scene, per Uninvited) and **End tried / landed** once WP4 (T4.5–T4.8) settles the terms; drop "DC 15 while she has 2+ Delay" if T4.5 retires the Wept's DC switch (DESIGN §3.7: +2 per tell).
+  - *Last blow* row → **threat marks** (who is marked this scene) once T5.2 lands the threat rule; keep the last-blow throw only if WP5 keeps it.
+  - *Delay earned* row: WP4's cap (three turns lost per scene, DESIGN §3.2) and the threat trigger ("earns Delay three times in one scene") both read off it; add a per-scene reset note then.
+  - *Tells seen* row: the run-path tells are WP1's; if WP4 changes Table V–6, re-sync the box labels.
+  - The Hollow's errand cell says "The main doors (B2)"; T7.3 (TP9) adds the garden doors.
+  - The Radiant's Crossing row needs the Last Rite's "rite kept this round" box (T4.8 / T2.6).
+  - *Snakes live in the dark* row: T6.7's two default live cards go here.
+  - The Attendant row: WP5 changes Focused DC (18) and *Clears the Way*; the tracker prints no DC on purpose, so only HP needs checking after T5.9.
+  - The dial word: T6.1 must keep the names Gentle / Sharp / Merciless.
+
+## 2026-10-22 — T2.4 Beats that vanish at three
+
+- `08_Handouts.md`, Page Two before Table VIII–3: new paragraph **Beats that need an agenda**: Anha and her sibling clearing the galleries in Movement VII (Agenda 8); S11's other door (Anha's or Agenda 8's); S8's Prelate's Question (Agenda 2); DC 13 ward-steering (Agenda 5, or an Orthaen who read the wards by hand tonight, per 05:37–41); the truth of the unlocked river gate (Agenda 6); agenda-only snake exits cool on their −1 boxes (Table VIII–5); the Root's key without Thieves' Tools: S8's wardens open the study door (and wipe the slate a round later), or the DC 18 Intelligence (Arcana) improvisation.
+- `09_The_Snakes.md`, after "If the table does nothing at all": new paragraph **When nobody carries the agenda**. The three agenda exits (Agenda 1 Circle, 2 Church, 3 Draunel) fall back on their printed −1 boxes: the Circle per knife turned or caught (its two non-agenda ways to 0 still stand), the Church for Kovaun's true thing to file or the wardens turned back at the study door, Draunel for being embarrassed in front of guests. No new mechanic.
+- **Not used:** the ledger's "the keys" as a non-Pello route to the Root. No printed key opens B8 (the only keys in the module are the Bought's wicket keys and Corval's key to a guard's *Seal*), so the note names only S8's wardens and the DC 18 check. Planner may confirm.
+- First lint run: a bare "DC 13" (hard `bare_dc`) and a fourth "quietly" (soft tic) in 09; both reworded.
+- Checks: lint OK 0; fact_check OK 0; bestiary_check 0 mismatches; pregen_check 0; `pytest tools` 422 passed; software Facets docs + private-canon tests 42 passed (no `F/` edit; run as a guard).
+- **For WP7 (not done here):** the Thenya's "to 0" (proof of Veier: "the ring delivered and an answer brought back, or anyone who has been in B9") depends on Agenda 4 and B9 access; TP13/TP27 rework it.
+- **T2.5 (commit WP2) not run:** this session's brief says not to commit. T2.6 stays open until WP4–WP6.
+- **Spotted in passing, not changed (outside WP2):** Table VIII–1's caption still reads "*(four players; minutes from Table I–1)*" after WP3; check whether Table I–1's minutes are now three-player and fix the caption (WP9 runtime or a WP3 follow-up).
+- Integrator (2026-10-22): Table VIII–1 caption → three players; 05 'east wing doors' → 'east-wing doors' (3). INVENTIONS #89's 'derived' reading is composed from printed facts (05:959 contract task 1, fires at the quarter-bells; Table VIII–1 puts the quarter-bells in Movement V); left flagged for owner review. TPN-3 (tracker at chapter end) accepted.

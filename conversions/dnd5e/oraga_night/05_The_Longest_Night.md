@@ -88,7 +88,7 @@ is stated, and everything else in this chapter points here.
 7. **The leash.** When the boat is out of reach of the river gate, the leash takes all
    three, finished or not.
 8. **The gate is decided** (card S3), by any of its three endings. Then the last bell
-   rings, no later than the bell clock on card S3. That clock counts only the rounds
+   rings, no later than the sect guard's arrival, the clock on card S3. That clock counts only the rounds
    the characters spend at the gate; the bells that begin in step 4 are only the
    warning, so the last bell never rings during the Crossing. If no character reaches
    the gate by the end of Movement VII, the sect guard arrives, ending 3 plays out offstage,
@@ -337,10 +337,10 @@ door Raunu sealed is a ward-point)*
 | 1 | **Hold a sealed door.** Hands on one of the doors that sealed behind Veier, holding the seal. It holds a turn longer than it should. Each door once | Intelligence (Arcana): DC 13 for a character who studied the wards, DC 18 otherwise |
 | 2 | **Answer him.** He asks, warmly, whom you serve, and waits for the answer. Give him one worth waiting for | Charisma (Performance), Charisma (Persuasion) or Intelligence (Religion) |
 | 3 | **A kill that isn't there.** Lie still in a corridor he has already passed, like somebody he missed. He stops to stage it | Charisma (Deception) |
-| 4 | **Put the furniture back.** The corridor outside the east wing doors was cleared for tonight. Drag something into it. It only works while he is Witnessed; otherwise he steps round it through the shadow | Strength (Athletics) |
+| 4 | **Put the furniture back.** The corridor outside the east-wing doors was cleared for tonight. Drag something into it. It only works while he is Witnessed; otherwise he steps round it through the shadow | Strength (Athletics) |
 | 5 | **The service door.** Take Veier out through the east wing's service door into the run: 5 feet wide, one lamp in three, and he has to find his way in it like anybody else | Wisdom (Survival), DC 15 the first time; no check with Anha or any of the household |
 | 6 | **Through the plank.** In the service run the wall to the Court is one plank thick. Kick it through, and he is standing in front of everyone on the other side | Strength (Athletics); he is Witnessed while they can see him |
-| 7 | **An audience.** Bring the guards off the east wing doors, Maiven's slingers, anyone, to where he can see them watching. He turns to them and poses | Charisma (Persuasion) |
+| 7 | **An audience.** Bring the guards off the east-wing doors, Maiven's slingers, anyone, to where he can see them watching. He turns to them and poses | Charisma (Persuasion) |
 | 8 | **The wrong stair.** Tell him she went down the other way | Charisma (Deception) |
 
 Darkness speeds him up: in an unlit corridor nobody is watching, so he isn't
@@ -766,7 +766,7 @@ be spent on it, and should be.
 
 | Who | Tells before midnight *(where / when)* | Tells during the attack |
 |---|---|---|
-| The Wept | Watches the young pages at the feast a beat too long (B3, Mv III–IV) · leaves a mourner's offering in Elanna's niche, in a rite centuries out of date — Mother Sella can say exactly how out of date (B6, Mv IV) · lingers at the east wing doors humming a cradle-song no one living knows (Mv V) · the Dead Dance: *"You dance like my daughter would have"* (Mv V omen) | Goes still at the sound of a child crying somewhere in the palace · under the carved tears, the mask is a woman's face |
+| The Wept | Watches the young pages at the feast a beat too long (B3, Mv III–IV) · leaves a mourner's offering in Elanna's niche, in a rite centuries out of date — Mother Sella can say exactly how out of date (B6, Mv IV) · lingers at the east-wing doors humming a cradle-song no one living knows (Mv V) · the Dead Dance: *"You dance like my daughter would have"* (Mv V omen) | Goes still at the sound of a child crying somewhere in the palace · under the carved tears, the mask is a woman's face |
 | The Radiant | Makes an antique sign of blessing over the food — Prelate Kovaun recognizes the form; it has not been used in living memory (B3, Mv IV) · lights up when conversation turns to duty or service; asks a guest, warmly, *"Whom do you serve?"* (any social scene, Mv III–V) · joins the Dead Dance and cannot resist dancing beautifully, where the light falls (Mv V) | Kills are staged — offered upward, like rites · visibly slows and poses when watched |
 | The Hollow | Stands always beside a different exit (any Movement from III) · answers small talk with devastating flatness — asked if he is enjoying the festival: *"It ends the same whether I do."* (any social scene, Mv III–V) · watches the servants who belong to each other — Anha and her kitchen family — with something like hunger (B10 edges, Mv III–V) | Holds but never advances · flinches from ward-fire the way a tired man flinches from being asked to try |
 
@@ -999,7 +999,7 @@ court (card S3 counts them).
 read-aloud at the grille and the treasure are on the card.
 
 ***Card S3, chapter IX*** — the gate, the wicket and the gate-walk, the fire clock and
-the bell clock, the **Bought Sergeant** (the **Veteran Bought Sergeant** for four or
+the sect guard's arrival, the **Bought Sergeant** (the **Veteran Bought Sergeant** for four or
 more characters at 4th level or higher), the **Bought Blades** and the **Bought Captain**, the tactics, and the three endings written out. Everything below is what
 the scene means; the card is what you run it from.
 
@@ -1035,7 +1035,7 @@ that nothing else in the adventure will give them.
    round. **A party that only held has won.**
 
 **The last bell.** It rings once the gate is decided, by any of the three endings, and no
-later than the bell clock on card S3, or at the end of Movement VII if no character
+later than the sect guard's arrival on card S3, or at the end of Movement VII if no character
 reached the gate (see "The Midnight Clock"). Whatever the Uninvited left unfinished, it is
 finished now. If one of them is caught in deep ward-crystal (⟨They trap one of the
 Uninvited⟩), this is the moment the leash tears them out. The Bought's hours are over.

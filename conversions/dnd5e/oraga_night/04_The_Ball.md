@@ -87,8 +87,13 @@ alert rule above is suspended, because there is no longer anybody enforcing it. 
 honor guard is doing one thing now, and so, in the dark, are the snakes (see chapter V,
 "The Snakes in the Dark").
 
-**What the Bought do, at each bell:** see the DM sheet in chapter VIII; in short,
-nothing at all until the quarter-bells, and then the gate.
+**What the Bought do, at each bell.** They walk into the trade district at dusk. In
+Movement V a sergeant's runner comes to the Gatehouse Court to look over the ground
+(⟨The Bought change sides⟩, chapter V). At the quarter-bells the company's fires go up
+in two sect districts and at the Blackwatch courier post, out in the city. From the
+first bell of midnight they hold the gatehouse, nobody in and nobody out (card S3). At
+the last bell of Oraga their hours are over (the DM sheet in chapter VIII has the
+bells in order).
 
 ### When Somebody Draws Early
 

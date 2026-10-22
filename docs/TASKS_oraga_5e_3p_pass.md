@@ -119,11 +119,11 @@ after X.
 | T3.12 | WP3 | done | Movement V time budget |
 | T3.13 | WP3 | done | Four-player assumptions in passing |
 | T3.14 | WP3 | done | Commit WP3 |
-| T2.1 | WP2 | open | "The east-wing doors" fix |
-| T2.2 | WP2 | open | Bell glossary; S3 clock wording |
-| T2.3 | WP2 | open | Midnight Tracker, first version |
-| T2.4 | WP2 | open | Beats that vanish at three |
-| T2.5 | WP2 | open | Commit WP2 |
+| T2.1 | WP2 | done | "The east-wing doors" fix |
+| T2.2 | WP2 | done | Bell glossary; S3 clock wording |
+| T2.3 | WP2 | done | Midnight Tracker, first version |
+| T2.4 | WP2 | done | Beats that vanish at three |
+| T2.5 | WP2 | done | Commit WP2 |
 | T2.6 | WP2 | open (after WP4–WP6) | Tracker refresh |
 | T4.1 | WP4 | open | `facts.yaml`: Slow / Stop / End guards |
 | T4.2 | WP4 | open | Buying Time (Slow) rewrite |
@@ -401,11 +401,11 @@ T4.14).
 
 ## WP2: Midnight Tracker and DM-sheet numbers (`FRI`)
 
-### ☐ T2.1 "The east-wing doors" fix *(L-086)*
+### ☑ T2.1 "The east-wing doors" fix *(L-086)*
 - **Do:** Table VIII–6 "Wept: east doors" (08:243) → "Wept: the east-wing doors".
 - **Files:** `M/08_Handouts.md`. **Accept:** the row matches 05:769. **Checks:** SA. **Time:** 5 min.
 
-### ☐ T2.2 Bell glossary; S3 clock wording *(L-057)*
+### ☑ T2.2 Bell glossary; S3 clock wording *(L-057)*
 - **Do:** add a one-line bell glossary to the DM sheet (which bell is which, and the last bell as
   the leash's hard limit). Reword the S3 clock as "the sect guard's arrival", with the last bell as
   its signal (09:783–791). At 04:90–91, print the Bought's schedule (from 05:1180) or cut the
@@ -415,7 +415,7 @@ T4.14).
   across 02:131–133, 05:62–95 and 10:131–132.
 - **Checks:** SA. **Time:** 20 min.
 
-### ☐ T2.3 Midnight Tracker, first version *(L-029)*
+### ☑ T2.3 Midnight Tracker, first version *(L-029)*
 - **Do:** add a one-page Midnight Tracker to chapter VIII (a numbered table or box per the lint's
   INV rules). It holds three Delay tracks with arrival lines (three-player first, from WP3); the
   Attendant's state, breaks and HP 180; a Fracture-tells-seen grid; ward-point boxes (four dais,
@@ -426,7 +426,7 @@ T4.14).
   rows; at most about 45 lines).
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T2.4 Beats that vanish at three *(L-046)*
+### ☑ T2.4 Beats that vanish at three *(L-046)*
 - **Do:** add a one-line note to the DM sheet listing the agenda-dependent beats: Anha empties the
   galleries (Agenda 8), the S11 out, DC 13 ward-steering (Agenda 5), the S8 out (Agenda 2), the
   Agenda 6 reveal. Give each of the three agenda-only snake cooling exits a fallback using its
@@ -437,7 +437,7 @@ T4.14).
   fallback uses a −1 box already printed.
 - **Checks:** SA. **Time:** 25 min.
 
-### ☐ T2.5 Commit WP2 (T2.1–T2.4)
+### ☑ T2.5 Commit WP2 (T2.1–T2.4)
 - `Oraga 5e 3p pass: WP2 Midnight Tracker and DM-sheet numbers`.
 
 ### ☐ T2.6 Tracker refresh *(L-029; open after WP4–WP6)*

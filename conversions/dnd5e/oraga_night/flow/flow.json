@@ -812,7 +812,7 @@
    "label": "S3. The Gate at Midnight",
    "phase": "m7",
    "kind": "fight",
-   "summary": "The Bought hold the gate: the sergeant at the wicket, Blades in Gate Street and on the gate-walk; the captain from round 3. The fire clock ticks only on rounds nobody fights or talks; the last-bell clock rings the moment the gate is decided. Three endings, all wins. The fight is optional; the gate is not.",
+   "summary": "The Bought hold the gate: the sergeant at the wicket, Blades in Gate Street and on the gate-walk; the captain from round 3. The fire clock ticks only on rounds nobody fights or talks; the sect guard's arrival is a six-round clock, and the last bell rings the moment the gate is decided. Three endings, all wins. The fight is optional; the gate is not.",
    "ref": "09_The_Snakes.md (S3)",
    "optional": true,
    "faction": "bought"
@@ -1142,7 +1142,7 @@
    "label": "The last bell of Oraga",
    "phase": "m7",
    "kind": "event",
-   "summary": "Rings the moment the gate is decided — at the latest on S3's last-bell clock. The Bought's hours are over; the night is.",
+   "summary": "Rings the moment the gate is decided — at the latest when S3's sect-guard clock fills. The Bought's hours are over; the night is.",
    "ref": "05_The_Longest_Night.md#movement-vii--the-longest-night",
    "optional": false,
    "faction": null
@@ -2470,7 +2470,7 @@
   },
   {
    "id": "clk-lastbell",
-   "label": "Last-bell clock (S3)",
+   "label": "Sect guard's arrival (S3)",
    "segments": 6,
    "advances": "Each round at the gate",
    "fills": "The last bell of Oraga: the contract's hours end and the sect guard arrives. It rings earlier, the moment the gate is decided. If no character reaches the gate by the end of Movement VII, the sect guard arrives and ending 3 plays out offstage"
