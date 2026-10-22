@@ -32,6 +32,7 @@ python research/oraga_5e_sim/s14.py --party C1 --n 4000 --seed 1 --attrited
 
 python research/oraga_5e_sim/skirm.py --card S8 --party C1 --n 4000 --seed 1
 python research/oraga_5e_sim/skirm.py --card S2 --solo Dassa --n 2000 --seed 1
+python research/oraga_5e_sim/skirm.py --card S2_solo --solo Dassa --n 2000 --seed 1   # T3.10 solo lines
 python research/oraga_5e_sim/skirm.py --all --n 2000 --seed 1          # slow (~3 min)
 
 python research/oraga_5e_sim/chain.py --party C1 --n 4000 --seed 1

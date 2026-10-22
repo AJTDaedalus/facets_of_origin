@@ -13,10 +13,10 @@ chapter VII.*
 
 ## How to Read This Chapter
 
-**The blocks are built for four 4th-level characters.** Challenge ratings and XP
+**The blocks are built for three 4th-level characters.** Challenge ratings and XP
 are the SRD's; the encounter math on every fight card in chapter IX uses the SRD
-5.2.1 budget per character (4th level: **Low 250 · Moderate 375 · High 500**; for four,
-**1,000 · 1,500 · 2,000**). The
+5.2.1 budget per character (4th level: **Low 250 · Moderate 375 · High 500**; for three,
+**750 · 1,125 · 1,500**; other tables, Table IX–1). The
 three Uninvited are the deliberate exception: they are CR 9 to 11, and they carry a
 trait called **Leashed** that means none of that matters, because tonight they
 cannot be killed. The **Attendant** who came with them is the other exception, in the
@@ -97,7 +97,7 @@ Uninvited speak it too, in turns of phrase two centuries out of fashion.
 | The palace | — | Boranis Honor Guard (CR 2) | S4, S10 |
 | The feud | — | Feuding Kinsman (CR 1/8) | S1 |
 | Tavva's crew | Tavva (CR 2) | Gallery Knife (CR 1/4) | S2, S5 |
-| The Bought | Bought Captain (CR 4), Veteran Bought Sergeant (CR 4) at the gate, Bought Sergeant (CR 2) | Bought Blade (CR 1/2) | S3 |
+| The Bought | Bought Captain (CR 4), Bought Sergeant (CR 2) at the gate, Veteran Bought Sergeant (CR 4) at the gate for four or more | Bought Blade (CR 1/2) | S3 |
 | The city | — | Sect Guard (CR 1/8) | S3 (its last ending) |
 | The Uninvited | The Wept (CR 11), The Radiant (CR 10), The Hollow (CR 9) | The Attendant (CR 8 Focused) | Chapter V, S14 |
 
@@ -142,7 +142,7 @@ V, ⟨They trap one of the Uninvited⟩).
 
 | The table tries | What happens | Where it lives |
 |---|---|---|
-| Damage, a lot of it | Every round the party deals 30 or more damage to one of them, that one gains 1 Delay (never more than 1 a round). At 0 HP they step into the world's shadow and are back at full HP on their next turn; whoever dealt the last blow makes a save or is thrown | *Leashed*; chapter V, "Buying Time" |
+| Damage, a lot of it | Every round the party deals 20 or more damage to one of them (with more characters, see chapter V, "Adjusting the Attack"), that one gains 1 Delay (never more than 1 a round). At 0 HP they step into the world's shadow and are back at full HP on their next turn; whoever dealt the last blow makes a save or is thrown | *Leashed*; chapter V, "Buying Time" |
 | *Power Word* anything, *Disintegrate*, a long fall, drowning, "they're dead now" | They are not. The leash holds their lives | *Leashed* |
 | *Banishment*, *Plane Shift*, any teleport they didn't choose | The leash pulls them back to where they stood, at once. It landed, so it is 1 Delay | *Leashed* |
 | *Hold Person*, *Hold Monster*, *Sleep*, a stunning blow, *Hideous Laughter* | Their bodies are not their own to lose. Condition immunities; nothing bought | *Held by Something Else* |
@@ -197,7 +197,7 @@ list below.
 *Medium Construct, Unaligned*
 
 **AC** 17 · **Initiative** +3 (13)
-**HP** 229 (27d8 + 108)
+**HP** 178 (21d8 + 84)
 **Speed** 30 ft.
 
 | | STR | DEX | CON | INT | WIS | CHA |
@@ -268,7 +268,9 @@ here, steps into the world's shadow, and is gone for the night. There is no body
 
 ***Two Turns (Focused Only).*** While Focused, the Attendant takes two turns each
 round: one on its Initiative and one at Initiative count 10 lower (last in the round,
-if that count is below 1). It still has only one Reaction a round, and it rolls Put
+if that count is below 1). On the second turn its action is one Joined Hands attack
+instead of its Multiattack (with four or more characters it is the full Multiattack;
+card S14). It still has only one Reaction a round, and it rolls Put
 Aside's recharge only at the start of its first turn each round.
 
 **Actions**
@@ -309,9 +311,10 @@ looks round, briefly, for the master it is supposed to have.
 > midnight.
 > *Made, not born, and in the service of the Uninvited's master; it came through with
 > them tonight. What it is, for the DM alone: chapter VII. Card: S14. Chapter V.*
-> *Its CR 8 is for the Focused Attendant: nearly twice High for four 4th-level
+> *Its CR 8 is for the Focused Attendant: more than twice High for three 4th-level
 > characters, on purpose (card S14). Idle, it is about CR 5 by the yardstick. Award
-> the full XP however the party gets it out of the way.*
+> the full XP however the party gets it out of the way. With four characters it has
+> 229 Hit Points (card S14).*
 
 ---
 
@@ -1782,7 +1785,8 @@ miss.
 > **Nastier.** It has spoken Hold the Terms before the party reaches the wicket: the
 > line is the gate, and the Blades start the fight with its Advantage against anyone
 > on the court side.
-> *One of the company's four sergeants, the one the contract puts at the gate. Card: S3.*
+> *One of the company's four sergeants, the veteran among them. Card: S3, with four
+> or more characters or on the Bought Sergeant's Nastier line.*
 
 ---
 
@@ -1950,8 +1954,9 @@ choose to succeed instead.
 ***Delay.*** The Wept has a Delay count (see chapter V, "Buying Time"). At the start of
 her turn, if she has any, spend 1: she doesn't move toward Raunu that turn, and he
 gets a round of work out of it (a dozen guests out of the Court, or Veier one sealed
-door further down). She reaches Raunu on her third turn of moving toward him,
-through the wards he throws up himself. While
+door further down). She reaches Raunu on her fourth turn of moving toward him
+(with more characters, see chapter V, "Adjusting the Attack"), through the wards he
+throws up himself. While
 she has 2 or more Delay, her Fracture's DC is 15.
 
 ***Bloodied: The Sorrow Slips.*** While the Wept is Bloodied, the mask's carved tears
@@ -2145,8 +2150,8 @@ saw him hurry.
 The block exists to tell you one thing: **Master Vell does not fight, and no party at
 this ball can beat him.** He has no attacks; he can be hit, and the numbers above are
 real, but they are set so that a party of 4th or 5th level cannot drop him before
-the boat clears: against AC 20, his Reaction and resistance to every damage type, four
-5th-level characters land roughly 15 damage a round, and he has 285 Hit Points. Long
+the boat clears: against AC 20, his Reaction and resistance to every damage type, even
+four 5th-level characters land roughly 15 damage a round, and he has 285 Hit Points. Long
 before that matters, he takes his action and is elsewhere. He is not a combatant, and
 he is worth no XP.
 

@@ -106,19 +106,19 @@ after X.
 | T1.3 | WP1 | done | Prep box step 4 |
 | T1.4 | WP1 | done | Commit WP1 |
 | T3.1 | WP3 | done | Simulation harness into the repo |
-| T3.2 | WP3 | open | `facts.yaml`: three-player baseline guard |
-| T3.3 | WP3 | open | Party-size rule, once; Table IX–1 |
-| T3.4 | WP3 | open | "Three at the Table" box |
-| T3.5 | WP3 | open | Chapter X blocks print three-player numbers |
-| T3.6 | WP3 | open | Chapter V numbers, three first |
-| T3.7 | WP3 | open | DM sheet numbers; Wept turn and Radiant beat |
-| T3.8 | WP3 | open | Card format S1–S7 |
-| T3.9 | WP3 | open | Card format S8–S14; read-aloud head counts; S9 |
-| T3.10 | WP3 | open | Solo-line simulations |
-| T3.11 | WP3 | open | Solo lines in the cards |
-| T3.12 | WP3 | open | Movement V time budget |
-| T3.13 | WP3 | open | Four-player assumptions in passing |
-| T3.14 | WP3 | open | Commit WP3 |
+| T3.2 | WP3 | done | `facts.yaml`: three-player baseline guard |
+| T3.3 | WP3 | done | Party-size rule, once; Table IX–1 |
+| T3.4 | WP3 | done | "Three at the Table" box |
+| T3.5 | WP3 | done | Chapter X blocks print three-player numbers |
+| T3.6 | WP3 | done | Chapter V numbers, three first |
+| T3.7 | WP3 | done | DM sheet numbers; Wept turn and Radiant beat |
+| T3.8 | WP3 | done | Card format S1–S7 |
+| T3.9 | WP3 | done | Card format S8–S14; read-aloud head counts; S9 |
+| T3.10 | WP3 | done | Solo-line simulations |
+| T3.11 | WP3 | done | Solo lines in the cards |
+| T3.12 | WP3 | done | Movement V time budget |
+| T3.13 | WP3 | done | Four-player assumptions in passing |
+| T3.14 | WP3 | done | Commit WP3 |
 | T2.1 | WP2 | open | "The east-wing doors" fix |
 | T2.2 | WP2 | open | Bell glossary; S3 clock wording |
 | T2.3 | WP2 | open | Midnight Tracker, first version |
@@ -289,7 +289,7 @@ T4.14).
   `s14.py` reproduces TUNING_3P's C1 S14 engaged-distraction win (90–96%) within ±3 points.
 - **Checks:** the smoke tests; SA unchanged (no `M/` edit). **Time:** 30 min.
 
-### ☐ T3.2 `facts.yaml`: three-player baseline guard *(L-022, `FACTS`)*
+### ☑ T3.2 `facts.yaml`: three-player baseline guard *(L-022, `FACTS`)*
 - **Do:** add fact `party_baseline`. The Delay lump is 20 at three (30 at four). The Attendant
   prints 180 HP. The Wept reaches Raunu on her 4th turn at three. The Radiant reaches the stair at
   the fall + 3 beats. Add count/forbid checks that flag a four-player value printed as the default
@@ -300,7 +300,7 @@ T4.14).
 - **Checks:** `pytest tools`; fact_check is expected to fail until T3.7 is done (do not
   re-baseline). **Time:** 25 min.
 
-### ☐ T3.3 Party-size rule, once; Table IX–1 *(L-084)*
+### ☑ T3.3 Party-size rule, once; Table IX–1 *(L-084)*
 - **Do:** write the party-size rule once, three-player first, with four and five at 5th as the
   adjustment lines. Put it in chapter IX (09:96–97) and make 05:289 a pointer. Reorder Table IX–1
   so three comes first.
@@ -308,7 +308,7 @@ T4.14).
 - **Accept:** one full statement; the other site is a pointer that names the table.
 - **Checks:** SA. **Time:** 20 min.
 
-### ☐ T3.4 "Three at the Table" box *(L-020)*
+### ☑ T3.4 "Three at the Table" box *(L-020)*
 - **Do:** add the box to chapter I (near 01:219–221). Deal Dassa, Ilesse and Serane, with Agendas
   4 / 8 / 2 dealt openly. For more steel, swap Serane for Pello. Never drop Ilesse unless someone
   else heals. Agenda 4 is always dealt. Repoint 03:196–199, 11:22–31 and README:8–10 to the box.
@@ -318,7 +318,7 @@ T4.14).
 - **Accept:** one box with three pointers. No text promises that a character reaches Veier.
 - **Checks:** SA, plus `pregen_check`. **Time:** 25 min.
 
-### ☐ T3.5 Chapter X blocks print three-player numbers *(L-022)*
+### ☑ T3.5 Chapter X blocks print three-player numbers *(L-022)*
 - **Do:** the Attendant prints 180 HP (10:200), with 229 on the four-player line. Make the Delay
   lump in 10:145 three-first. Change any other block that carries a party-size number.
 - **Files:** `M/10_Bestiary.md`.
@@ -326,14 +326,14 @@ T4.14).
   dice so the average matches. T3.2's guard is clean for 10.
 - **Checks:** SA. **Time:** 20 min.
 
-### ☐ T3.6 Chapter V numbers, three first *(L-022)*
+### ☑ T3.6 Chapter V numbers, three first *(L-022)*
 - **Do:** Table V–1, 05:260, 272, 285–297, 681, 706: three-player values printed first, with four
   and five as adjustment lines.
 - **Files:** `M/05_The_Longest_Night.md`.
 - **Accept:** T3.2's guard is clean for 05.
 - **Checks:** SA. **Time:** 25 min.
 
-### ☐ T3.7 DM sheet numbers; Wept turn and Radiant beat *(L-022)*
+### ☑ T3.7 DM sheet numbers; Wept turn and Radiant beat *(L-022)*
 - **Do:** 08:36–37 and 08:64–70 get the three-player numbers. Add "the Wept: 4th turn" and "the
   Radiant: stair at the fall + 3 beats" to Table VIII–2. Fix 09:1920 if it prints a four-player
   value.
@@ -341,7 +341,7 @@ T4.14).
 - **Accept:** `fact_check --check` is clean (T3.2's guard is satisfied everywhere).
 - **Checks:** SA. **Time:** 20 min.
 
-### ☐ T3.8 Card format S1–S7 *(L-022, L-077)*
+### ☑ T3.8 Card format S1–S7 *(L-022, L-077)*
 - **Do:** in cards S1–S7, the three-character line becomes the printed roster and the four-player
   roster moves to the adjustment line. Read-aloud boxes print three-player head counts (S2's "four
   people" becomes three). Rosters and budgets are re-tuned later in WP6; this task only swaps the
@@ -350,32 +350,36 @@ T4.14).
 - **Accept:** every card S1–S7 leads with three. Box head counts match the printed roster.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T3.9 Card format S8–S14; read-aloud head counts; S9 *(L-022, L-077)*
+### ☑ T3.9 Card format S8–S14; read-aloud head counts; S9 *(L-022, L-077)*
 - **Do:** as T3.8 for S8–S14, including S11's "three big men" and S13's "three men". For S9, write
   the one-side rosters and fix the Nastier line that still uses the dropped veteran (09:1403–1406).
 - **Files:** `M/09_The_Snakes.md`.
 - **Accept:** as T3.8. S9 states who fights when only one side engages.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T3.10 Solo-line simulations *(L-021, `SIM`)*
+### ☑ T3.10 Solo-line simulations *(L-021, `SIM`)*
 - **Do:** with `S/skirm.py`, build a solo line for each card that a lone PC can walk into (S2, S4,
   S7, S8, S9, S10, S13 at least), aiming at *dangerous but fair*: about High for one character, a
   drop chance that is real but not certain. Two PCs use the three-character line. Log a table:
   card, solo roster, drop % for each of the five pregens.
 - **Files:** `S/`, `research/oraga_5e_simulation_notes.md`.
-- **Accept:** each solo roster's drop rate is logged for every pregen. None is a token fight
-  (drop rate under 15%) or a near-certain loss (over 70%).
+- **Accept** *(amended 2026-10-22, escalation resolved, option (a))*: each solo roster's drop rate
+  is logged for all five pregens. For **Dassa, Pello and Andra** none is a token fight (drop rate
+  under 15%) or a near-certain loss (over 70%). Ilesse's and Serane's rates are logged but not
+  held to the band: T3.11 prints a line on each card that a lone talker or healer (Ilesse,
+  Serane, or any character without real weapon damage) is offered the card's printed outs first,
+  and the fight is their last resort (R4).
 - **Checks:** `pytest research/oraga_5e_sim`. **Time:** 30 min.
 
-### ☐ T3.11 Solo lines in the cards *(L-021)*
+### ☑ T3.11 Solo lines in the cards *(L-021)*
 - **Do:** print T3.10's solo line on each card. Rewrite "one card per group" (09:505–512;
   04:1324–1327; 08:22; 04:446) to size each card to who walks in. S14's solo rule ("with one PC,
   the Focused second turn makes no attack") goes in after T5.5.
 - **Files:** `M/09_The_Snakes.md`, `M/04_The_Ball.md`, `M/08_Handouts.md`.
-- **Accept:** every card in T3.10 has a solo line, and the group rule names it.
+- **Accept:** every card in T3.10 has a solo line and the lone-talker/healer outs-first line, and the group rule names it.
 - **Checks:** SA. **Time:** 25 min.
 
-### ☐ T3.12 Movement V time budget *(L-047, `DIAL`)*
+### ☑ T3.12 Movement V time budget *(L-047, `DIAL`)*
 - **Do:** at 09:505–512 and 04:1324–1328 add "Past 2:40, at most one card on screen; the others
   resolve offstage *with their consequence* (clock filled, heat moved)". Add a dial clause: the
   same at every setting, because it cuts table time, not risk.
@@ -383,14 +387,14 @@ T4.14).
 - **Accept:** both sites carry the sentence, and the consequence is named.
 - **Checks:** SA. **Time:** 10 min.
 
-### ☐ T3.13 Four-player assumptions in passing *(L-083)*
+### ☑ T3.13 Four-player assumptions in passing *(L-083)*
 - **Do:** 04:1038 "two [summoned] should be PCs" is restated for three. 01:322's XP total is
   recomputed for three, with four on the adjustment line.
 - **Files:** `M/04_The_Ball.md`, `M/01_Overture.md`.
 - **Accept:** both restated. The XP figure is derived and the arithmetic is shown in the LOG.
 - **Checks:** SA. **Time:** 15 min.
 
-### ☐ T3.14 Commit WP3
+### ☑ T3.14 Commit WP3
 - `Oraga 5e 3p pass: WP3 three-player baseline (TP10)`.
 
 ---

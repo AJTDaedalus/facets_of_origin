@@ -218,14 +218,29 @@ and put out the pregen sheets, the agenda cards and the invitation.
 **Then, around the table, once:**
 
 1. **A character.** A pregen from chapter XI, or the player's own 4th-level character
-   built with chapter III. With four players and the pregens, leave out Andra or Pello.
-   Leave out Ilesse only if another player takes Agenda 4.
+   built with chapter III. Which pregens to deal is in the sidebar below.
 2. **An agenda.** Deal the cards from chapter VIII. Match them to characters with the
    table at the end of chapter III, or deal face-down and let fate choose. Two players
    may share one, as rivals or partners.
 3. **A hook,** said aloud in one sentence: how this character got through the gate
    tonight. Pick one from the table below.
 4. **What the party tells each other.** They do not have to tell each other anything.
+
+> **Sidebar — Three at the Table**
+>
+> The module is built for three players. Deal **Dassa**, **Ilesse** and **Serane**, and
+> deal their agendas face up: *The Vanished Servant* (Agenda 8) to Dassa, *The Cousin's
+> Errand* (Agenda 4) to Ilesse, *The Prelate's Question* (Agenda 2) to Serane. That is a
+> frontliner, a healer and a talker, and one of them is on the route to the east-wing
+> door.
+>
+> - *For more steel,* swap Serane for Pello. The three agendas stay on the table.
+> - *Never leave out Ilesse* unless somebody else at the table heals.
+> - *Agenda 4 is always dealt,* whoever the characters are, and never face down. It is
+>   the route to the east-wing door, and chapter V leans on somebody having walked it.
+>
+> With four players, add Andra or Pello. With characters the table built
+> themselves, check that one of them heals, and deal Agenda 4 face up.
 
 **Table I–2: How You Got In**
 
@@ -320,8 +335,8 @@ these rows, not an extra award.
 | Standing outside at dawn | 1,000 to each character |
 
 **Milestone is how this module is built.** The party starts at 2,700 XP (4th level). If
-you track XP, a party that plays the night fully lands close to **6,500 XP** each (5th
-level) at the epilogue. If they arrive a little short, round up: the night is the
+you track XP, a party of three that plays the night fully lands close to **6,700 XP**
+each (5th level) at the epilogue; a party of four, close to 6,500. If they arrive a little short, round up: the night is the
 milestone.
 
 ## The Snakes in the Chicken Pen

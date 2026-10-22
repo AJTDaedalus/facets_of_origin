@@ -8,7 +8,7 @@ WP5): conversions/dnd5e/oraga_night/10_Bestiary.md "The Attendant",
 Modelled:
 - Idle / Focused (focus checked at the start of each of its turns: Focused if the
   Wept has no Delay); Two Turns while Focused, the second at initiative - 10;
-  the three-character line (180 HP; second Focused turn is a single Joined
+  the three-character line (178 HP; second Focused turn is a single Joined
   Hands); the four-player block (229 HP, full Multiattack on both turns).
 - Rusty (Idle: one Joined Hands at Disadvantage; Put Aside only if Bloodied or its
   focus has been broken twice); Put Aside recharge (5-6 Focused, 6 Idle), rolled at
@@ -69,7 +69,7 @@ class S14:
         self.ctx = Ctx(rng, lethal=False)
         # slugging means everyone hits it, the cleric's slots included
         self.ctx.ilesse_attack = policy == "slug"
-        hp = 229 if four else 180
+        hp = 229 if four else 178
         self.att = Enemy("Attendant", hp, 17, 3, attacks=[(7, 1, 10, 4)],
                          dex_save=3, wis_save=1, con_save=7)
         self.focused = False

@@ -443,7 +443,7 @@ otherwise be 13: the custom protects the conversation, and everyone at this ball
 
 ### Running a Scattered Party
 
-Four players will be in four rooms by Movement II. That is the design, and it
+Three players will be in three rooms by Movement II. That is the design, and it
 works only if nobody sits idle.
 
 - **Cut every five to ten minutes,** on a question: "What do you do?" End a scene on a
@@ -457,6 +457,9 @@ works only if nobody sits idle.
   characters at once.
 - **Lend idle players a voice.** A player whose character is waiting can play a
   gossiping guest in someone else's scene, or roll the rumor table for them.
+- **A character alone gets a smaller fight.** Each card is sized to who walks in: one
+  character uses its *One character* line, and a lone talker or healer is offered the
+  outs first (see chapter IX, "Running the Snakes").
 - **Regroup at the toast.** Movement IV happens in the galleries, for everyone, and it is
   the natural place to bring the party back together before the dark.
 
@@ -1041,7 +1044,8 @@ Minister Corval approaches a guest and says the sentence nobody expected:
 
 Inside the vast, bare hall: one chair on the dais,
 occupied, and a long walk toward it. Raunu summons four guests all night.
-**At least one, and by default two, should be player characters.** He chooses by
+**At least one should be a player character** (with four or more players, by default
+two). He chooses by
 whatever drew his attention, not by rank: an agenda that brushed his interests, a kindness
 done to his majordomo, a question asked too well. Being summoned is an honor, a
 threat, and a mystery, and the rest of the ball watches who goes in.
@@ -1332,12 +1336,17 @@ Movement V.
 
 > **About 40 minutes** (starts 2:20). *Run:* the Dead Dance, the omen, the quiet guest
 > losing the party to a glint, and **at most
-> one fight card for each group of characters.** The others resolve offstage by
+> one fight card for each group of characters,** sized to who walks in. The others
+> resolve offstage by
 > their cards' defaults, and a line the table never saw does not heat up. *Tells to
 > show:* the omen is the Wept's; the Radiant dancing beautifully where the light falls;
 > the Hollow watching Anha's household at the edges of the service rooms (B10); the Wept
 > humming at the east-wing doors, for anyone near them. *If you have
 > time:* last Undercurrent beats. Take the break as the bells begin to ring midnight.
+>
+> *Past 2:40,* at most one card on screen. The others resolve offstage with their
+> consequence (clock filled, heat moved). That holds at Gentle, Sharp and Merciless
+> alike, because it cuts table time and leaves the risk alone.
 
 The old custom, and the palace keeps it in full: the lamps are lowered, the music
 turns slow and strange, and the **Dead Dance** begins. Every guest is masked, dancing

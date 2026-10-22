@@ -84,6 +84,30 @@ def test_skirm_solo_runs():
     assert r["runs"] == N and _is_rate(r["any_drop"])
 
 
+SOLO = ("S2", "S4", "S7", "S8", "S9", "S10", "S13")
+FIGHTERS = ("Dassa", "Pello", "Andra")
+
+
+def test_skirm_solo_lines_exist_and_run():
+    """T3.10: every card a lone PC can walk into has a <card>_solo line."""
+    for c in SOLO:
+        assert c + "_solo" in skirm.CARDS, c
+        for p in skirm.PREGENS:
+            r = skirm.simulate(c + "_solo", n=50, seed=SEED, solo=p)
+            assert _is_rate(r["any_drop"])
+
+
+def test_skirm_regression_solo_line_softer_than_current():
+    """T3.10: for a lone fighter, each solo line drops them no more often than the
+    current rule (the three-character roster), and is never a sure thing."""
+    for c in SOLO:
+        for p in FIGHTERS:
+            cur = skirm.simulate(c, n=N, seed=SEED, solo=p)["any_drop"]
+            new = skirm.simulate(c + "_solo", n=N, seed=SEED, solo=p)["any_drop"]
+            assert new <= cur + 0.08, (c, p, cur, new)
+            assert 0.05 <= new <= 0.85, (c, p, new)
+
+
 def test_skirm_regression_s8_fix_softer():
     # TUNING_3P F7: S8 as written C1 57%; breaking at one down 5-16%.
     base = skirm.simulate(card="S8", party="C1", n=N, seed=SEED)

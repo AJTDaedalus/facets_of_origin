@@ -194,9 +194,8 @@ chapter VIII). Your card is all your character knows about it.
 ## The Ready-Made Guests
 
 Five pregenerated characters at 4th level, one per agenda archetype. Their full sheets
-are in **chapter XI**; this is the table to deal from. The module is built for four
-players: leave out Andra or Pello, and leave out Ilesse only if another player takes
-Agenda 4, because chapter V leans on somebody reaching Veier.
+are in **chapter XI**; this is the table to deal from. The module is built for three
+players, and which three to deal is in chapter I (see chapter I, "Three at the Table").
 
 | Guest | People | Class | Gift | Suggested agenda |
 |---|---|---|---|---|

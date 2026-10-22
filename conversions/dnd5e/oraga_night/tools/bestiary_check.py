@@ -52,7 +52,7 @@ def crname(x):
 # name: cr, hd(n), hp, ac, abilities, save_prof list, skills {name:(abil,val)}, pp, perc_prof,
 # attacks [(bonus, abil, dmg_str, stated_avg)], dcs [(dc, abil)], dpr, eff mods
 B = {
- "Attendant": dict(cr="8", hd=27, hp=229, ac=17, ab=[18,16,18,22,12,6], sv=[2,3],
+ "Attendant": dict(cr="8", hd=21, hp=178, ac=17, ab=[18,16,18,22,12,6], sv=[2,3],
    sk={"Arcana":(3,9),"Perception":(4,4)}, pp=14,
    atk=[(7,0,(1,10,4),9)], dc=[(15,0)], dpr=40, atkb=7),
  "Cousin's Blade": dict(cr="1/2", hd=4, hp=22, ac=14, ab=[14,13,12,10,10,12], sv=[],

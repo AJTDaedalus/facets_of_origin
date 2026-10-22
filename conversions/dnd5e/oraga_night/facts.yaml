@@ -291,6 +291,48 @@ facts:
           - "\\b(?:isn't|is not|not) spent\\b"
         why: O36 / review 2 N8 — the full Fracture rule lives in chapter V; chapter X points to it
 
+  - id: party_baseline
+    truth: >-
+      Three 4th-level characters are the printed baseline (TP10); four, and five at 5th, are
+      adjustment lines. At three: 20 damage to one Uninvited in a round is a lump of Delay
+      (30 at four); the Wept reaches Raunu on her 4th turn of moving toward him (her 3rd at
+      four); the Radiant reaches the garden stair at the fall + 3 beats; the Attendant has
+      178 HP (229 at four). A four-player value may appear only on its adjustment line.
+    source: owner TP10 (2026-10-20); DESIGN_oraga_5e_3p_pass §2.2, §3.2, §4; ledger L-022
+    values: {lump: {three: 20, four: 30}, wept_turn: {three: 4, four: 3}, radiant_stair: "fall + 3 beats", attendant_hp: {three: 178, four: 229}}
+    phrases: ["20 damage in a round", "on her fourth turn", "178 Hit Points", "With four characters"]
+    checks:
+      - type: sentence
+        all: ['\b30(?:\+| or more)? damage\b|\b30-damage\b']
+        unless: '(?i)\bfour\b'
+        why: TP10 — the lump is 20 at three; 30 belongs on the four-player line
+      - type: sentence
+        all: ['\bWept\b|\bShe\b|\bshe\b', '\bthird turn\b']
+        unless: '(?i)\bfour\b'
+        why: TP10 — the Wept reaches Raunu on her 4th turn at three; the 3rd is the four-player line
+      - type: sentence
+        all: ['\b229\b']
+        unless: '(?i)\bfour\b'
+        why: TP10 — the Attendant has 178 HP at three; 229 belongs on the four-player line
+      - type: forbid
+        pattern: '(?i)\b(?:built|written|tuned) for four\b'
+        why: TP10 — the module is built for three 4th-level characters
+      - type: require
+        file: 10_Bestiary.md
+        pattern: '\*\*HP\*\* 178 \('
+        anchor: 'A quiet guest with no master'
+        why: TP10 / DESIGN §4 — the Attendant's block prints 178 HP
+      - type: require
+        file: 08_Handouts.md
+        pattern: '\bWept\b[^\n]{0,200}\b4th turn\b'
+        anchor: 'Table VIII–2'
+        why: L-022 — Table VIII–2 gives the Wept's turn (4th at three)
+      - type: require
+        file: 08_Handouts.md
+        pattern: '\bRadiant\b[^\n]{0,300}\bfall \+ 3 beats\b'
+        anchor: 'Table VIII–2'
+        why: L-022 — Table VIII–2 gives the Radiant's beat (the stair at the fall + 3 beats)
+
 # --------------------------------------------------------------------------- maps (R4)
 # The dimensions maps/build_maps.py draws, all in feet (O28, O33, O34; S3 for the gate;
 # DECISIONS O53–O56 for what the maps had to choose). tools/test_maps.py checks every

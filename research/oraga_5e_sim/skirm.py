@@ -310,6 +310,32 @@ def _r_s13(k):
     return r
 
 
+# --- T3.10 solo lines: one PC walks into the card alone (two PCs use the
+# three-character line). Tuned so that Dassa, Pello and Andra drop 15-70% of the
+# time; Ilesse and Serane are logged, and the cards send them to the outs first.
+
+def _solo_s2(k):
+    return [E("Tavva"), E("Gallery Knife", arrive=2)]
+
+
+def _solo_s4(k):
+    return [E("Boranis Honor Guard")]
+
+
+def _solo_s8(k):
+    return [E("Church Warden"), E("Church Warden", arrive=3)]
+
+
+def _solo_s10(k):
+    m = E("Maiven Nolonaire", arrive=3)
+    m.attacks = m.attacks[:2]                 # she pulls her blows
+    return [m]
+
+
+def _solo_s13(k):
+    return [E("Essar Draunel")]
+
+
 # The Veteran Draunel Duelist block is approximated (58 HP, AC 16, two +6 1d8+4);
 # it appears only in the four-player S9/S13 lines.
 
@@ -338,6 +364,15 @@ CARDS = {
     "S13": dict(roster=_r_s13, lethal=True, end="draunel_bloodied", focus="leader",
                 smoke=True),
     "S13_last": dict(roster=_r_s13, lethal=True, end="last", focus="low", smoke=True),
+    # T3.10 solo lines (see above). S7 and S9 keep their three-character rosters.
+    "S2_solo": dict(roster=_solo_s2, lethal=False, end="first_bloodied", focus="leader"),
+    "S4_solo": dict(roster=_solo_s4, lethal=False, end="last", focus="low"),
+    "S7_solo": dict(roster=lambda k: _r_s7(3), lethal=False, end="first_bloodied", focus="low"),
+    "S8_solo": dict(roster=_solo_s8, lethal=False, end="one_down", focus="low"),
+    "S9_solo": dict(roster=lambda k: _r_s9(3), lethal=False, end="s9", focus="duelist"),
+    "S10_solo": dict(roster=_solo_s10, lethal=False, end="maiven", focus="leader"),
+    "S13_solo": dict(roster=_solo_s13, lethal=True, end="draunel_bloodied", focus="leader",
+                     smoke=True),
 }
 
 

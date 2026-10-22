@@ -19,7 +19,7 @@ the handouts for the table. Print the first three pages and run the night from t
 | 0:35 | **II. Empty Rooms** (45) | Vorlain holds court; the factions circulate; still no host | Corro's gift rings, pointing nowhere | Stares at a crystal wall for a full minute | S1 · S6 |
 | 1:20 | **III. Summons** (35) | A glimpse on the high gallery; Corval fetches guests to B4 (≥1 player character; two together once) | Three gray masks Corval cannot account for | — | S6 · Tavva's scout · S1 if held from II |
 | 1:55 | **IV. Toast** (25) | Raunu at the high table: *"At the Unmasking I will have something to say"*; **two plates**; gone | The mews scream, then silence | Turns to follow the music | S7 begins |
-| 2:20 | **V. Hour of Spirits** (40) | Dead Dance; quarter-bells; the S9 appointment at the first; Vell to the river gate; east wing doubled | *"You dance like my daughter would have."* | Watches the party, loses them to a glint | **One per group:** S2 · S7 · S8 · S9 · S10 |
+| 2:20 | **V. Hour of Spirits** (40) | Dead Dance; quarter-bells; the S9 appointment at the first; Vell to the river gate; east wing doubled | *"You dance like my daughter would have."* | Watches the party, loses them to a glint | **One per group,** sized to who walks in (alone: the card's *One character* line): S2 · S7 · S8 · S9 · S10 |
 | 3:00 | *Break* (10) | As the bells ring midnight | | | |
 | 3:10 | **VI. Unmasking** (50) | Lights die **mid-sentence**; the attack; the dais; the Crossing; the leash takes the three once the boat is clear | — | Sets down the cloak and cup; stands by the three | S11 · **S14** if they interfere · S8 · S5 |
 | 4:00 | **VII. Longest Night** (40) | Fire, rescue, the gate; **then** the last bell (at the latest, S3's bell clock); word of other attacks with the sect guard | — | — | **S3** · S12 · S13 · S5 · S14 |
@@ -46,8 +46,8 @@ once before midnight.)*
 
 | Who | At the lights | Then |
 |---|---|---|
-| **The Wept** | The dais (B2), for Raunu | Through the wards to him. Delay buys him rounds |
-| **The Radiant** | B9, for Veier | Private stair → garden → **the Crossing** (B5), Movement VI. Vell holds him there once |
+| **The Wept** | The dais (B2), for Raunu | Through the wards to him: she reaches him on her **4th turn** (3rd with four characters). Delay buys him rounds |
+| **The Radiant** | B9, for Veier | Private stair, which he reaches at the **fall + 3 beats** → garden → **the Crossing** (B5), Movement VI. Vell holds him there once |
 | **The Hollow** | The main doors (B2) | Herds the crowd back in. His Fracture opens the doors |
 | **The Attendant** | Beside the three | Idle until the party gets in the way; then Focused whenever one of the three has no Delay → **S14** |
 | **Raunu** | The dais | Spends his last charge sealing doors behind Veier; dies there, by his own choice |
@@ -79,7 +79,7 @@ secret**: no faction learns of the child unless a player character tells them.
 - **Buying Time.** A Delay die per Uninvited, on the table. Each point = one turn of
   movement lost. A clever trick with the room, the crowd, a door, a lie: the skill that
   fits, DC 13 → 1 Delay (DC 15 the second time; never a third). A Fracture → 2 Delay.
-  30+ damage to one in a round → 1 Delay. The Attendant's *Clears the Way*: −1 Delay a
+  20+ damage to one in a round → 1 Delay (30+ with four characters, 40+ with five or at 5th level). The Attendant's *Clears the Way*: −1 Delay a
   round.
 - **The Attendant (S14).** *Idle:* rusty, one attack with Disadvantage. *Focused* (at
   the start of its turn, if one of the three in the scene has no Delay): two turns a

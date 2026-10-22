@@ -26,9 +26,8 @@ One of them, **Dassa, is ungifted**, because one Orthaen in five is and the tabl
 see what that looks like on a sheet. Each wears the armor they can dance in, under
 their festival clothes, as chapter IV allows.
 
-**With four players.** The module is built for four, so leave out **Andra or Pello**. Leave out
-Ilesse only if another player takes Agenda 4, *The Cousin's Errand*: it is the one
-agenda that reaches the east wing, and chapter V leans on it.
+**Which to deal.** The module is built for three players: which three, and what to
+change for four, is in chapter I (see chapter I, "Three at the Table").
 
 **Common to all five.** *Human* (see chapter III): **Resourceful**: each begins the night
 with Heroic Inspiration and regains it on a Long Rest; **Skillful**: one extra skill,

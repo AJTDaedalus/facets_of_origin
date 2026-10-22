@@ -95,3 +95,32 @@ The book now says only: a slugging match usually goes the Attendant's way for th
 the distraction game turns it, and a table that leans in usually wins; expect a character to
 drop even then; a party built for damage can out-slug it, hence its Adjusting line; the
 Adjusting lines keep the odds about level.
+
+## Solo lines (three-player pass, T3.10)
+
+Harness: `research/oraga_5e_sim/skirm.py`, cards `<card>_solo`. Seed 1, n = 2,000 per cell.
+Each cell is the current rule (a lone PC walks into the printed three-character roster), then
+the solo line, as a drop % (the PC goes to 0 HP at least once). Following the T3.1 review rule,
+these are deltas inside the rebuilt harness, not absolute claims. Two PCs use the
+three-character line.
+
+| Card | Solo line | Dassa | Pello | Andra | Ilesse | Serane |
+|---|---|---|---|---|---|---|
+| S2 | Tavva, one knife a round behind; she goes when either is Bloodied | 78.8 → 48.4 | 97.8 → 64.5 | 72.2 → 15.0 | 100.0 → 99.8 | 100.0 → 99.7 |
+| S4 | One honor guard | 98.9 → 37.2 | 99.7 → 58.1 | 100.0 → 58.8 | 100.0 → 100.0 | 100.0 → 100.0 |
+| S7 | As printed (three knives) | 16.6 → 17.4 | 23.0 → 23.8 | 15.7 → 16.7 | 99.9 → 99.9 | 99.8 → 99.7 |
+| S8 | One warden, the second up the stair in round 3; they break when one is down | 99.2 → 35.8 | 99.6 → 24.8 | 100.0 → 26.1 | 100.0 → 99.8 | 100.0 → 100.0 |
+| S9 | As printed (two a side; the duelists break when hurt) | 15.3 → 15.4 | 31.0 → 30.2 | 23.9 → 23.3 | 94.2 → 93.0 | 91.8 → 93.0 |
+| S10 | Maiven alone, from round 3, pulling her blows (two attacks) | 88.5 → 19.7 | 94.8 → 37.8 | 100.0 → 68.2 | 100.0 → 100.0 | 100.0 → 100.0 |
+| S13 | Draunel alone; he breaks when Bloodied | 73.4 → 35.4 | 70.2 → 47.2 | 42.2 → 27.4 | 100.0 → 99.9 | 100.0 → 100.0 |
+
+- **Band (resolved escalation, option (a)):** Dassa, Pello and Andra fall between 15% and 70%
+  on every line. The edges are S2 Andra (15.0; 15.8 and 18.0 at seeds 2 and 3, n = 4,000), S9
+  Dassa (15.4; 14.8 and 15.4) and S10 Andra (68.2; 67.4 and 68.0).
+- **Ilesse and Serane** lose nearly every solo fight in this harness. It gives them only
+  cantrip offence and no outs, so they are on record but outside the band. The cards send a
+  lone talker or healer to the outs first.
+- **S7 and S9 need no solo roster.** S7's knives break at the first Bloodied knife and S9's
+  duelists at first damage, so a lone fighter already sits in the band against the printed
+  line.
+- **Not modelled:** the cards' clocks and outs, Tavva's charges, and Help.

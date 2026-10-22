@@ -5,10 +5,10 @@ palace, two hundred masks, every enemy the host has — and three guests nobody 
 
 **Setting:** Rekuzan, capital of the Orthaen, continent of Val'loh, the year 3164.
 
-**Players:** four characters of **4th level**, fresh or chosen from the five
-pregenerated guests in chapter XI. Every fight is balanced for four; each card has
-lines for three or five characters and for 3rd or 5th level. The night ends at 5th
-level.
+**Players:** three characters of **4th level**, fresh or chosen from the five
+pregenerated guests in chapter XI (which three: chapter I, "Three at the Table").
+Every fight is balanced for three; each card has lines for four or five characters
+and for 3rd or 5th level. The night ends at 5th level.
 
 **Length:** one session, **4½–5 hours**. Play starts in the street outside the palace
 and ends at dawn (the runtime table is in chapter I).

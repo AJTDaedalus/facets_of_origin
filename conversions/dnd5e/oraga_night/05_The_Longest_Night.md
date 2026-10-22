@@ -75,8 +75,8 @@ is stated, and everything else in this chapter points here.
 
 1. **The lights die.** Nobody rolls Initiative yet (Movement VI, below).
 2. **The beats begin.** Master Pellin Corro moves first ("Who moves first", below).
-3. **The Wept reaches Raunu** on her third turn of moving toward him (her fourth with
-   three characters; see "Adjusting the Attack"), plus one turn for each point of
+3. **The Wept reaches Raunu** on her fourth turn of moving toward him (her third with
+   four characters; see "Adjusting the Attack"), plus one turn for each point of
    Delay spent on her (Table V–1).
 4. **Raunu falls.** The Hollow turns east (sooner, if his Fracture lands), the main
    doors open, and the crowd pours out toward the Gatehouse Court (B12). The bells of
@@ -257,7 +257,7 @@ Delay** as well as its own effect. The room-trick tables below give eight ideas 
 each place the attack reaches. They are prompts, not a menu, and a trick the characters
 invent is worth the same.
 
-**Damage counts only in lumps.** If the characters deal **30 or more damage to one
+**Damage counts only in lumps.** If the characters deal **20 or more damage to one
 Uninvited in a single round**, that Uninvited gains 1 Delay, never more than 1 a
 round. Damage never takes Delay away, and it never threatens their lives (*Leashed*).
 
@@ -269,7 +269,7 @@ gets that room's people out instead.
 
 | Uninvited | Each point spent | Keep in mind |
 |---|---|---|
-| **The Wept** | A round of Raunu's work: a dozen guests out of the Crystal Court under his wards, or Veier one sealed door further down | She reaches Raunu on her third turn of moving toward him, through the wards he throws up himself; every point spent pushes that back a turn. While she has 2 or more Delay, her Fracture is DC 15 |
+| **The Wept** | A round of Raunu's work: a dozen guests out of the Crystal Court under his wards, or Veier one sealed door further down | She reaches Raunu on her fourth turn of moving toward him, through the wards he throws up himself; every point spent pushes that back a turn. While she has 2 or more Delay, her Fracture is DC 15 |
 | **The Radiant** | In the east wing: one more person in his way gets clear — Maiven, one of her slingers, a guard at the doors | Delay he still has when he breaks past Vell at the Crossing is spent at the river gate, and one point is enough: the boat is out of reach before he gets his turn |
 | **The Hollow** | A beat off his post: *The Post* doesn't apply, and a dozen guests get through the doors behind him | When the Wept's work is done he turns east, and the doors open anyway |
 
@@ -284,17 +284,17 @@ That is why the characters cannot ignore it. See "The Attendant", below.
 
 > **Sidebar — Adjusting the Attack**
 >
-> The numbers above are built for four 4th-level
-> characters. Use one line only; the lines are not cumulative. For five characters at
-> 5th level, use the 5th-level line.
+> The numbers above are for three 4th-level characters. Any other table uses one
+> line below, by the party-size rule in chapter IX (see chapter IX, "Running the
+> Snakes", and Table IX–1).
 >
-> - *Three characters:* the Wept reaches Raunu on her fourth turn of moving toward
->   him, and 20 damage in a round makes a lump.
-> - *Five characters:* 40 damage in a round makes a lump.
-> - *Four at 3rd level:* the crossfire deals 3 (1d6) Bludgeoning damage, or 7 (2d6) on a failure
->   by 5 or more.
-> - *Four at 5th level:* 40 damage in a round makes a lump, and the crossfire deals
->   10 (3d6) Bludgeoning damage, or 21 (6d6) on a failure by 5 or more.
+> - *Four characters:* the Wept reaches Raunu on her third turn of moving toward
+>   him, and 30 damage in a round makes a lump.
+> - *Five characters:* as for four, but 40 damage in a round makes a lump.
+> - *Four at 3rd level:* as for four characters, and the crossfire deals 3 (1d6)
+>   Bludgeoning damage, or 7 (2d6) on a failure by 5 or more.
+> - *Four at 5th level:* as for four, but 40 damage in a round makes a lump, and the
+>   crossfire deals 10 (3d6) Bludgeoning damage, or 21 (6d6) on a failure by 5 or more.
 
 #### Room Tricks
 
@@ -678,7 +678,7 @@ in practice it means this:
   of their next turn at full Hit Points in the space where they dropped, and walk on
   toward the task. Whoever struck the last
   blow makes a saving throw or is thrown ("Down, Not Out"). Fighting the Uninvited
-  never ends in victory, but it does buy time: every round the characters land 30 damage on
+  never ends in victory, but it does buy time: every round the characters land 20 damage on
   one of them is a point of Delay.
 - **A character one of them drops to 0 Hit Points does not die.** They are
   Stable, and back on their feet within two rounds, by a friend's hand or a
@@ -703,7 +703,7 @@ leash, which ends their night. That is the complete list.
 
 > **DM Note — the table that will not stop trying to kill them**
 >
-> Let them try, run it honestly, and pay every 30-damage round in Delay.
+> Let them try, run it honestly, and pay every 20-damage round in Delay.
 > When the Wept reaches 0 Hit Points, say plainly what just happened: she stopped,
 > looked at the character almost patiently, without anger, and the character went
 > through the wall. She is walking back toward the dais, whole. Then say what the
@@ -999,8 +999,8 @@ court (card S3 counts them).
 read-aloud at the grille and the treasure are on the card.
 
 ***Card S3, chapter IX*** — the gate, the wicket and the gate-walk, the fire clock and
-the bell clock, the **Veteran Bought Sergeant** (the **Bought Sergeant** at 3rd level
-or for three characters), the **Bought Blades** and the **Bought Captain**, the tactics, and the three endings written out. Everything below is what
+the bell clock, the **Bought Sergeant** (the **Veteran Bought Sergeant** for four or
+more characters at 4th level or higher), the **Bought Blades** and the **Bought Captain**, the tactics, and the three endings written out. Everything below is what
 the scene means; the card is what you run it from.
 
 **Why this fight, here.** The Bought are the one foe at the gate who can be beaten
