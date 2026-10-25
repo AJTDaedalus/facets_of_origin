@@ -6,7 +6,7 @@ the objects that matter. Drafted 2026-10-25 against the module text and the owne
 rulings TP1–TP55 (`docs/DECISIONS.md`). Not a module file. The owner approved the quiet
 rooms in TP56 and the §7 extrapolations in TP64 (after the architecture review,
 `docs/REVIEW_oraga_palace_architecture.md`); those approvals are for art, not module canon.
-Four questions are still open (end of §7).*
+One question is still open (end of §7).*
 
 ---
 
@@ -36,7 +36,7 @@ extrapolations. The artist may treat the first two as fixed; the third is a prop
 - **[APPROVED TP64]**: a [VX] decision the owner approved in ruling TP64 (the fifteen items
   of §7, as amended by the architecture review). Treat it as fixed for art, like [MAP]. It
   is still architecture, decor and scale only, and it is not module canon. A [VX] tag that
-  remains in the brief is either outside §7's fifteen items or one of the four questions
+  remains in the brief is either outside §7's fifteen items or the one question
   still open (end of §7).
 
 A heading marked [VX] means the whole section under it is extrapolated unless a line inside
@@ -166,9 +166,8 @@ walk. Vell's boat goes from there "north up the tributary to the foothills."
 **[APPROVED TP64] The neighborhood.** Gate Street is steep and cobbled, lined both sides with tall
 half-timbered, gabled townhouses: jettied upper storeys, steep slate roofs, warm amber
 shop windows at street level (the owner's anchor). Rekuzan's own grown-crystal district
-walls glow pink on the skyline behind. [VX, still open] Whether Gate Street lies inside or
-outside the Boranis district's crystal walls is the owner's to confirm; the image's timber
-houses stand either way. The second gate is a squat crystal gate-arch in a district wall a
+walls glow pink on the skyline behind. [APPROVED TP67] Gate Street lies inside the Boranis district's crystal walls; the timber
+houses are the district's own townsfolk, and the district wall shows only in the distance. The second gate is a squat crystal gate-arch in a district wall a
 few hundred feet down the hill. A narrow lane runs along each side of the palace's street
 front: the **West Lane** to the stable yard and the servants' postern (carriages set down
 at the stair foot and go round by it to the stable yard), the **East Lane** to the kitchen
@@ -1099,9 +1098,8 @@ on the floor and ledges: Raunu's working light, because the crystal's own glow i
 
 **Light and mood:** "lit from within," soft rose-white glow from every surface; quiet; warm;
 beautiful and devotional; the stillest room in the palace. At midnight it is "the
-strongest-warded place in the palace" [PRINTED]. [VX, still open] Whether the Root keeps its
-glow after the drain is the owner's to decide; until then, draw it after midnight lit by
-Raunu's candles and lamps.
+strongest-warded place in the palace" [PRINTED]. [APPROVED TP67] The drain does not reach the deep
+crystal: after midnight the Root is the one place in the palace still glowing rose.
 
 **Who:** nobody but Raunu, ever, before tonight; a dozen sheltering guests if a party brings
 them after midnight; the Attendant, unaffected; an Uninvited, if lured across the threshold,
@@ -1506,9 +1504,10 @@ charcoal, deep violet, oxblood and night-blue, with jewel-toned linings and smal
 ornaments that catch the walls' glow (crystal pins, buttons, hair ornaments). Long tailored
 coats for men, high-collared gowns and long coats for women, or either for anyone. Knives worn
 as dress at sash or thigh. **Boranis livery [APPROVED TP64]:** deep violet-charcoal coat,
-rose-pink crystal buttons, a narrow rose piping, no badge with lettering. [VX, still open]
-Whether household staff and honor guards wear Oraga masks is the owner's to decide; until
-then, don't make a point of it either way. The Thenya wear plain undyed or
+rose-pink crystal buttons, a narrow rose piping, no badge with lettering. [APPROVED TP67]
+Household staff, Corval and the honor guards wear one simple matching house half-mask in
+the livery colors (violet-charcoal with rose piping), never plain gray: the gray masks belong
+to the three Uninvited alone. The Thenya wear plain undyed or
 earth-colored border wool, and slings are their mark.
 
 ### Raunu Boranis, the host
@@ -2163,11 +2162,10 @@ drain in §0.2 or Scenes 10 and 11; rain kept to the street plates; the owner's 
 as a rosette-headed pointed window, not a rose window; the Gatehouse Court shown holding about a
 hundred, not two hundred; and the sconce rule limited to the dais's ward-points.
 
-**Still open for the owner** (tagged [VX] where they appear):
+**Settled by TP67:** staff and guards wear a simple matching house half-mask (§4); the Root
+still glows rose after the drain (B11); Gate Street lies inside the Boranis district walls (§1.1).
 
-- Whether household staff and honor guards wear Oraga masks (§4, livery; item 12).
+**Still open for the owner** (tagged [VX] where it appears):
+
 - What the Bought's perimeter does at the servants' postern and the kitchen-yard gate after
   midnight (B10; item 8). No art shows it until then.
-- Whether the Root keeps its glow after midnight (B11; item 10). Until then, draw it lit by
-  Raunu's candles and lamps.
-- Whether Gate Street lies inside or outside the Boranis district walls (§1.1; item 15).
