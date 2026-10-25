@@ -6,7 +6,7 @@ the objects that matter. Drafted 2026-10-25 against the module text and the owne
 rulings TP1–TP55 (`docs/DECISIONS.md`). Not a module file. The owner approved the quiet
 rooms in TP56 and the §7 extrapolations in TP64 (after the architecture review,
 `docs/REVIEW_oraga_palace_architecture.md`); those approvals are for art, not module canon.
-One question is still open (end of §7).*
+No questions remain open (end of §7).*
 
 ---
 
@@ -36,8 +36,7 @@ extrapolations. The artist may treat the first two as fixed; the third is a prop
 - **[APPROVED TP64]**: a [VX] decision the owner approved in ruling TP64 (the fifteen items
   of §7, as amended by the architecture review). Treat it as fixed for art, like [MAP]. It
   is still architecture, decor and scale only, and it is not module canon. A [VX] tag that
-  remains in the brief is either outside §7's fifteen items or the one question
-  still open (end of §7).
+  remains in the brief is outside §7's fifteen items.
 
 A heading marked [VX] means the whole section under it is extrapolated unless a line inside
 is tagged otherwise.
@@ -1032,10 +1031,11 @@ All 5 feet wide, low vaulted (8 feet), plain crystal gone dull with handling, no
 one small crystal lamp in every three niches, worn flagstones, doors with iron latches,
 stacked trays and linen crates in the bays.
 
-**After midnight, outside [PRINTED numbers; VX, still open]:** the Bought hold more than the
-gate: sixteen Blades, four at the gatehouse and twelve on the perimeter. That perimeter lies
-outside the lanes and gates; what it does at the servants' postern and the kitchen-yard gate
-is the owner's to decide, and no art should show it.
+**After midnight, outside [PRINTED numbers; APPROVED TP68]:** the Bought hold more than the
+gate: sixteen Blades, four at the gatehouse and twelve on the perimeter. Nobody stands at the
+servants' postern or the kitchen-yard gate, but four Blades wait outside each. Corval's
+household is held in the kitchen yard, alive and counted; draw them there, with the Bought
+Blades visible beyond the open gate.
 
 **Mood:** "understaffed chaos"; the music through the wall "a pulse without a tune." After
 midnight [PRINTED]: Anha leads people out through them; smoke and dark that slow everyone
@@ -2165,7 +2165,6 @@ hundred, not two hundred; and the sconce rule limited to the dais's ward-points.
 **Settled by TP67:** staff and guards wear a simple matching house half-mask (§4); the Root
 still glows rose after the drain (B11); Gate Street lies inside the Boranis district walls (§1.1).
 
-**Still open for the owner** (tagged [VX] where it appears):
-
-- What the Bought's perimeter does at the servants' postern and the kitchen-yard gate after
-  midnight (B10; item 8). No art shows it until then.
+**Settled by TP68:** nobody stands at the servants' postern or the kitchen-yard gate, but four
+Blades of the Bought's perimeter wait outside each; Corval's household is held in the kitchen
+yard (B10). No questions remain open.
