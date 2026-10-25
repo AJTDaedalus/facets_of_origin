@@ -195,19 +195,19 @@ after X.
 | T7.22 | WP7 | open | Commit WP7 |
 | T7.23 | WP7 | done | TP61: cut the heat-4 finish |
 | T7.24 | WP7 | done | TP65/TP66/TP68: the Tithe in two heads; S12 on Corval in B10 |
-| T7.25 | WP7 | open | TP67: house half-masks; the Root's glow after midnight |
+| T7.25 | WP7 | done | TP67: house half-masks; the Root's glow after midnight |
 | T8.1 | WP8 | done | `facts.yaml`: gallery geometry and residue values |
 | T8.2 | WP8 | done | Redraw VIII–3; sightlines |
 | T8.3 | WP8 | done | Map residue; ward-points; the sealed doors |
 | T8.4 | WP8 | done (TP60) | Garden-stair top door; S10 terrain |
 | T8.5 | WP8 | done | S4 on a gate draw |
 | T8.6 | WP8 | open | Commit WP8 |
-| T10.1 | WP10 | open | NPC saves; casting as steel |
-| T10.2 | WP10 | open | Success at a cost: scope |
-| T10.3 | WP10 | open | Dassa's armour; even charges |
-| T10.4 | WP10 | open | Free-hand grapples |
-| T10.5 | WP10 | open | Serane's SRD wording |
-| T10.6 | WP10 | open | Charge text, moving charges, alignment, Gift Knack |
+| T10.1 | WP10 | done | NPC saves; casting as steel |
+| T10.2 | WP10 | done | Success at a cost: scope |
+| T10.3 | WP10 | done | Dassa's armour; even charges |
+| T10.4 | WP10 | done | Free-hand grapples |
+| T10.5 | WP10 | done | Serane's SRD wording |
+| T10.6 | WP10 | done | Charge text, moving charges, alignment, Gift Knack |
 | T10.7 | WP10 | open | Commit WP10 |
 | T9.1 | WP9 | open | Prep box re-costed; 60-minute path |
 | T9.2 | WP9 | open | Three-player runtime; cut list; S14 cap |
@@ -1221,7 +1221,7 @@ T4.14).
   `midnight_positions`), tests. Apply T7.13's approved midwife positions. Corval never meets Vell.
 - **Checks:** SA + F + sims + software docs. **Time:** 60 min.
 
-### ☐ T7.25 TP67: house half-masks; the Root's glow *(follow-up, added 2026-10-25)*
+### ☑ T7.25 TP67: house half-masks; the Root's glow *(follow-up, added 2026-10-25)*
 - **Do:** one plain line each, in both editions: the household staff, Corval and the honor guards
   wear one simple matching house half-mask in the livery colors, never plain gray (where the
   household's dress or the Unmasking is described: 04 B1/B10, 05 Movement VI); the Root is not
@@ -1287,7 +1287,7 @@ T4.14).
 
 ## WP10: Rules accuracy sweep
 
-### ☐ T10.1 NPC saves; casting as steel *(L-067)*
+### ☑ T10.1 NPC saves; casting as steel *(L-067)*
 - **Do:**
   - add one save line (Wis and Cha) per noncombatant (10:2026–2057), derived from their printed
     abilities;
@@ -1300,32 +1300,32 @@ T4.14).
 - **Accept:** `bestiary_check` passes.
 - **Checks:** SA. **Time:** 25 min.
 
-### ☐ T10.2 Success at a cost: scope *(L-068)*
+### ☑ T10.2 Success at a cost: scope *(L-068)*
 - **Do:** it applies to talk and exploration before midnight. It does not apply to Delay tricks,
   Stop, End, ward-steering, Attendant distractions or Very Hard DCs (01:269–273). 01:515 becomes
   "arrives, if you offer it".
 - **Files:** `M/01_Overture.md`. **Checks:** SA. **Time:** 10 min.
 
-### ☐ T10.3 Dassa's armour; even charges *(L-102)*
+### ☑ T10.3 Dassa's armour; even charges *(L-102)*
 - **Do:** give Dassa chain mail (AC 17, if her Strength meets 13) or scale mail (AC 16, Stealth
   Disadvantage). Pick whichever `pregen_check` validates, and record it as a TPN note. Even the
   common charges to one each (11:293, 342).
 - **Files:** `M/11_Pregenerated_Characters.md`. **Accept:** `pregen_check` reports 0 issues.
 - **Checks:** SA. **Time:** 15 min.
 
-### ☐ T10.4 Free-hand grapples *(L-103)*
+### ☑ T10.4 Free-hand grapples *(L-103)*
 - **Do:** add "it lets go of its weapon to do this", or "it grapples with its shield arm", to the
   Honor Guard's *Seize* (10:456), the Warden's *Seize for Questioning* (10:701) and the Blade's
   *To the Terms* (10:514–517).
 - **Files:** `M/10_Bestiary.md`. **Checks:** SA. **Time:** 10 min.
 
-### ☐ T10.5 Serane's SRD wording *(L-104)*
+### ☑ T10.5 Serane's SRD wording *(L-104)*
 - **Do:** copy SRD 5.2.1 (CC BY 4.0) wording for Bardic Inspiration ("another creature", "see or
   hear") and *Vicious Mockery* ("before the end of its next turn") (11:90–96).
 - **Files:** `M/11_Pregenerated_Characters.md`. **Checks:** SA; `tools/copyright_scan.py` stays
   clean. **Time:** 10 min.
 
-### ☐ T10.6 Charge text, moving charges, alignment, Gift Knack *(L-105, L-106, L-107)*
+### ☑ T10.6 Charge text, moving charges, alignment, Gift Knack *(L-105, L-106, L-107)*
 - **Do:**
   - 05:139–142: add "(it still works; see the sidebar)".
   - *A Veil of Quiet* and *Dark-Burst* (10:2189, 2195): "The effect stays where it was released."

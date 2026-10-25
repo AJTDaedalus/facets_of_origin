@@ -54,6 +54,8 @@ Four principles:
    creatures like these until they stand in it, Raunu included, and the Uninvited don't
    know to avoid it. One that crosses its threshold can be caught (⟨They trap one of
    the Uninvited⟩). The Attendant goes in and out unaffected.
+
+   The Root is not drained at midnight: it still glows rose afterwards.
 3. **The clock still runs.** The leash pulls east. From the first scream, the
    Uninvited have half an hour of story-time at most, and they feel it. Late in the
    attack they get faster, sloppier, more terrible and more human. The leash takes
@@ -108,7 +110,9 @@ is stated, and everything else in this chapter points here.
 Midnight. Bells. The east doors open and Raunu Boranis mounts the dais to lead the
 Unmasking, as every host of every Oraga has, and the rite begins: the lamps
 brighten, the masks come off in a wave of laughter and candle-relight — and across
-the Crystal Court, three gray masks stay on.
+the Crystal Court, three gray masks stay on. (The household staff, Corval and the
+honor guards wear one simple matching house half-mask in the livery colors, never
+plain gray.)
 
 He speaks the rite's fixed words steadily (ritual suits him far better than small
 talk), then sets down the cup. The room, which has waited all night for this, goes
@@ -145,7 +149,7 @@ happens before anyone can act, and it should feel that way:
    Light** from here on, lit by candles and fire. The corridors are Darkness except
    where a ward flares. (The Uninvited's presence unravels stored spellwork. Any
    character holding a charged Orthaen crystal feels it go cold and quiet in
-   their hand. See the sidebar.)
+   their hand (it still works; see the sidebar).)
 2. **Raunu understands first.** In the dark, before the first scream, he does not
    startle, and he does not finish the sentence. (Characters watching the dais,
    Agenda 2, catch it against the last candle-light.) His hand is already at his wrist. The double doors at the head of the east stair boom shut

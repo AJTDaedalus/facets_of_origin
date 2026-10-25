@@ -88,7 +88,7 @@ The gift shows itself through grown soul-crystal: coaxed out of stone, shaped as
 sets, and able to hold a working. Four in five carry it.
 
 - **Gift Knack.** Checks to coax, shape, read, or judge grown crystal and any working
-  held in it.
+  held in it. (Showing the Attendant a crystal is not one; see card S14.)
 - **Minor Workings.** Your cantrip works through a sliver of crystal in your hand,
   which is your spellcasting focus for it; you are never without one. Its effect shows
   in the crystal: the light is the stone glowing, the mending is new crystal growing

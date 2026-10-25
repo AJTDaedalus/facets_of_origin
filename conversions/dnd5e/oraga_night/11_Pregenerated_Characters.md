@@ -35,7 +35,9 @@ listed; **Versatile**: one origin feat, listed (the gifted take their gift). Siz
 Medium, Speed 30 ft., Proficiency Bonus +2. Languages: Common and two
 others the player and the DM agree on. Every guest carries a knife, because everyone at this
 ball does; drawing it is the crime. Crystal charges are consumable magic items, and
-Player Handout 3, "Crystal Charges" (chapter VIII), says what each does.
+Player Handout 3, "Crystal Charges" (chapter VIII), says what each does. Each sheet
+carries one common charge: the one Common magic item the SRD gives a character who
+starts above 1st level.
 
 **Masks.** No guest's mask is written down, because a mask is the player's to describe.
 Each sheet ends with one question about it, for the player to answer in the street on
@@ -86,13 +88,16 @@ shaped it, and whether it is holding a working right now.
 
 **Attacks**
 - *Dagger (her knife).* +4 to hit, reach 5 ft. or thrown 20/60 ft., 1d4 + 2 Piercing.
-- *Vicious Mockery.* Wisdom save DC 14, 1d6 Psychic, and Disadvantage on the target's
-  next attack roll.
+- *Vicious Mockery.* One creature she can see or hear within 60 ft.: it must succeed on
+  a DC 14 Wisdom saving throw or take 1d6 Psychic damage and have Disadvantage on the
+  next attack roll it makes before the end of its next turn.
 
 **Class Features**
-- **Bardic Inspiration** (4 uses, d6; regain on a Long Rest). Bonus Action: a creature
-  within 60 ft. that can hear her gains a d6 to add to one failed d20 test within the
-  next hour.
+- **Bardic Inspiration** (4 uses, d6; regain on a Long Rest). As a Bonus Action, she
+  can inspire another creature within 60 feet of herself who can see or hear her. That
+  creature gains one Bardic Inspiration die, and once within the next hour when it
+  fails a D20 Test, it can roll the die and add the number rolled, potentially turning
+  the failure into a success.
 - **Expertise** in Persuasion and Insight. **Jack of All Trades.**
 - **Cutting Words** (College of Lore). Reaction, when a creature she can see within 60
   ft. makes a damage roll or succeeds on an ability check or attack roll: spend a
@@ -106,7 +111,7 @@ shaped it, and whether it is holding a working right now.
   *2nd:* *Calm Emotions*, *Suggestion*
 
 **Carrying.** Dagger · Fine Clothes · Studded Leather Armor · Component Pouch · crystal
-charges: *Steady Light*, *A Sealed Door*, *A Veil of Quiet* · 60 GP · Heroic
+charge: *A Veil of Quiet* · 60 GP · Heroic
 Inspiration
 
 **Personality.** The voice that ends fights before they start. Serane was raised on the
@@ -181,7 +186,7 @@ anything.
 - **Second-Story Work** (Thief). Climb Speed equal to his Speed; jumps use Dexterity.
 
 **Carrying.** Two Daggers (one in plain sight, one not) · Studded Leather Armor ·
-Thieves' Tools · Disguise Kit · 80 GP · Heroic Inspiration
+Thieves' Tools · Disguise Kit · crystal charge: *Steady Light* · 80 GP · Heroic Inspiration
 
 **Personality.** Small, quick, and cheerful, with the particular calm of a man who has
 never yet lost a parcel. A Phern at an Orthaen ball is conspicuous, and Pello has
@@ -261,7 +266,7 @@ shaped it, and whether it is holding a working right now.
   *2nd:* *Darkness*, *Hold Person*, *Misty Step*, *Web*
 
 **Carrying.** Dagger · the lattice · crystal (Arcane Focus) · chalk and a wiping slate ·
-Jeweler's Tools · crystal charges: *A Held Image* ×2, *A Chime at a Threshold* · 40 GP · Heroic Inspiration
+Jeweler's Tools · crystal charge: *A Held Image* · 40 GP · Heroic Inspiration
 
 **Personality.** Three years into a record nobody else believes in, and tired of being
 the only one who can see the shape of it. Tonight every thread she has followed knots
@@ -289,9 +294,9 @@ speak, impossible to move.
 |---|---|---|---|---|---|
 | 18 (+4) | 13 (+1) | 16 (+3) | 8 (−1) | 12 (+1) | 10 (+0) |
 
-**Armor Class** 16 (Breastplate under a plain coat, Defense) · **Hit Points** 40 ·
-**Hit Dice** 4d10 · **Initiative** +3, with Advantage · **Speed** 30 ft. ·
-**Passive Perception** 13
+**Armor Class** 16 (Scale Mail under a plain coat, Defense; Disadvantage on Stealth
+checks) · **Hit Points** 40 · **Hit Dice** 4d10 · **Initiative** +3, with Advantage ·
+**Speed** 30 ft. · **Passive Perception** 13
 
 **Saving Throws** Str +6, Con +5
 
@@ -338,8 +343,8 @@ knowing is.
   checks; after a Critical Hit she can move half her Speed without provoking
   Opportunity Attacks.
 
-**Carrying.** Longsword · Dagger · Breastplate under a plain coat · 30 GP · Heroic
-Inspiration
+**Carrying.** Longsword · Dagger · Scale Mail under a plain coat · crystal charge: *A Chime at
+a Threshold* · 30 GP · Heroic Inspiration
 
 **Personality.** Slow to speak, impossible to move. Twenty years of standing slightly
 behind richer and softer people, and a lifetime of being politely reminded of what she
@@ -425,8 +430,8 @@ module does not say, and neither should the sheet.
 - *Prepared:* *Command*, *Guiding Bolt*, *Healing Word*, *Sanctuary*, *Shield of Faith*; *2nd:*
   *Calm Emotions*, *Spiritual Weapon*
 
-**Carrying.** Dagger · Fine Clothes · Chain Shirt · warding crystal (Holy Symbol) · crystal charges: *A
-Veil of Quiet*, *A Sealed Door*, *Steady Light* · 50 GP · Heroic Inspiration
+**Carrying.** Dagger · Fine Clothes · Chain Shirt · warding crystal (Holy Symbol) · crystal charge: *A
+Sealed Door* · 50 GP · Heroic Inspiration
 
 **Personality.** A carrier of words between people who cannot be seen talking to each
 other. Five generations of Kethaun border-trading taught Ilesse which silences are

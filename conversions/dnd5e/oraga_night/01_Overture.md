@@ -292,9 +292,14 @@ When a check fails by **4 or less**, you may offer the player what they wanted
 with a cost attached: name the cost first, then let them take it or leave it. The
 DM sheet in chapter VIII has a short table of costs, so you can read one off the page
 instead of inventing one while four people watch you.
+Success at a cost is for talk and exploration before midnight. It does not apply to
+Delay tricks, a Stop or an End (chapter V gives each its own failure rule), steering a
+ward, distracting the Attendant, or a Very Hard DC: those succeed or fail as written.
 
 **NPCs don't make checks outside a fight.** Every entry in chapter VII gives the DC a guest
-imposes instead. Inside a fight, they roll like anybody else.
+imposes instead. Inside a fight, they roll like anybody else. Saving throws are not
+checks: when a spell or effect calls for one, the NPC rolls it, using the save line in
+chapter X.
 
 **Heroic Inspiration** works as the SRD says: a character either has it or does not, and spends it to reroll one die
 immediately after rolling it, keeping the new roll. A character who already has it
@@ -537,8 +542,8 @@ correcting a player mid-scene costs more than the error did.*
 > missing a DC means nothing happens, and they learned it from how it was narrated.
 >
 > **Name the cost before the success.** "You get the answer, and Corval will remember
-> you asked." Cost first, then the thing they wanted, and the thing they wanted always
-> arrives. A miss by 4 or less is where this lives, and the DM sheet has a table of
+> you asked." Cost first, then the thing they wanted, and the thing they wanted
+> arrives, if you offer it. A miss by 4 or less is where this lives, and the DM sheet has a table of
 > costs.
 
 > **Troubleshooting — the table rolls Initiative on everything**

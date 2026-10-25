@@ -47,3 +47,7 @@
 10_Bestiary.md|near_duplicate|**Releasing a charge** takes the Magic action|Player Handout 3 reprints the charge rules for players (see above)
 10_Bestiary.md|near_duplicate|**The six every Orthaen knows** are common|Player Handout 3 reprints the charge rules for players (see above)
 10_Bestiary.md|near_duplicate|**Chancy releases.** When the fiction makes a|Player Handout 3 reprints the charge rules for players (see above)
+
+# T10.5 (L-104): Serane's Vicious Mockery copies the SRD 5.2.1 spell text (CC BY 4.0), whose
+# dice have no average because a cantrip's damage is rolled, not a stat-block hit.
+11_Pregenerated_Characters.md|save_damage|take 1d6 Psychic damage|SRD 5.2.1 Vicious Mockery wording, copied (T10.5)

@@ -243,7 +243,9 @@ closed, courteously and absolutely; through it, she is a voice only. Two finds:
   the night's most devastating.)*
 
 **B10. Kitchens & Service Passages.** Understaffed chaos, festival hires, and the
-skeleton staff of two silent years — including Anha (Agenda 8). The service passages
+skeleton staff of two silent years — including Anha (Agenda 8). The household staff,
+Corval and the honor guards wear one simple matching house half-mask in the livery
+colors, never plain gray. The service passages
 thread the whole palace, including the east wing and the garden stair. *(The other way
 through everything. At midnight, the difference between a tragedy and a massacre.)*
 
@@ -254,7 +256,8 @@ palace, centuries of house rising from this one root. Raunu has made it his true
 workshop. What waits inside is described in Undercurrent A — and at midnight, the Root
 matters again: the palace's defenses are deepest here, and a character who understands
 the wards (Agenda 5, or study in this room) can *steer* them from the Root the way
-Raunu does from memory.
+Raunu does from memory. The Root is not drained at midnight: it still glows rose
+afterwards.
 
 **B13. The Room You Put Here.** *(Deliberately empty. Fill it.)*
 

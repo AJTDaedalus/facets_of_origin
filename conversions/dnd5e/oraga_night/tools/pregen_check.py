@@ -39,7 +39,7 @@ PCs={
    book1=['alarm','comprehend languages','detect magic','feather fall','identify','mage armor','magic missile','shield','silent image','sleep'],book2=['darkness','hold person','misty step','web'],
    printed_sk={'History':8,'Arcana':6,'Investigation':6,'Nature':6,'Religion':6,'Insight':3,'Medicine':3,'Perception':3}),
  'Dassa':dict(cls='fighter',final=dict(STR=18,DEX=13,CON=16,INT=8,WIS=12,CHA=10),bg={'STR':2,'CON':1},asi={'STR':1,'CON':1},bg_opts={'STR','CON','WIS'},
-   armor=('breastplate',14,2),defense=True,alert=True,printed=dict(AC=16,HP=40,init=3,pp=13),
+   armor=('scale mail',14,2),defense=True,alert=True,printed=dict(AC=16,HP=40,init=3,pp=13),
    prof={'Athletics','Insight','Medicine','Perception','Intimidation'},exp=set(),
    skillsrc=dict(bg=2,cls=2,skillful=1,sub=0,feat=0),
    printed_sk={'Athletics':6,'Insight':3,'Medicine':3,'Perception':3,'Intimidation':2}),

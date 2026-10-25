@@ -57,8 +57,8 @@ live. **The palace diagram** in chapter VIII shows how the rooms connect; print 
 alerted" and stops.*
 
 **When steel is bared** anywhere a guest can see, or a spell with a visible effect is
-cast at a guest, two **Boranis Honor Guards** arrive at once, and four more come at
-the start of the second round after the first guard is Bloodied (*Call the House*;
+cast at a guest, or a spell is seen being cast (chapter IX, *Casting in view*), two
+**Boranis Honor Guards** arrive at once, and four more come at the start of the second round after the first guard is Bloodied (*Call the House*;
 card S4, chapter IX). They do not fight to hurt:
 they detain and expel, and every blow they land is a knockout blow: a creature they
 reduce to 0 Hit Points is Unconscious and Stable, never dying. The offender's
@@ -396,7 +396,9 @@ the outer doors. Two finds:
   made. Agenda 8 and Undercurrent C can reach it.)*
 
 **B10. Kitchens & Service Passages.** Understaffed chaos, festival hires, and the
-skeleton staff of two silent years, Anha among them (Agenda 8). The service passages
+skeleton staff of two silent years, Anha among them (Agenda 8). The household staff,
+Corval and the honor guards wear one simple matching house half-mask in the livery
+colors, never plain gray. The service passages
 thread the whole palace, including the east wing and the garden stair. *(The other way
 through everything, and at midnight the difference between a tragedy and a massacre.
 Finding one's way through them without a guide takes a DC 15 Wisdom (Survival) check
@@ -422,7 +424,8 @@ ancestor grew the first crystal of the palace, centuries of house rising from th
 one root. Raunu has made it his true workshop, and what waits inside is described in
 Undercurrent A. At midnight the Root matters again. The palace's defenses are
 deepest here, and a character who understands the wards (Agenda 5, or study in this
-room) can steer them from the Root the way Raunu does from memory.
+room) can steer them from the Root the way Raunu does from memory. The Root is not
+drained at midnight: it still glows rose afterwards.
 
 **B13. The Room You Put Here.** *(If you have time. Deliberately empty. Fill it.)*
 

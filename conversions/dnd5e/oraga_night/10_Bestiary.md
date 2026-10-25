@@ -497,7 +497,8 @@ attack and uses Seize.
 damage.
 
 ***Seize.*** *Strength Saving Throw:* DC 13, one Medium or smaller creature within
-5 feet. *Failure:* The target has the Grappled condition (escape DC 13).
+5 feet. *Failure:* The target has the Grappled condition (escape DC 13). The guard
+grapples with its shield arm, keeping its blade in hand.
 
 ***Warder (1/Day Each).*** The guard carries two charged house crystals, and
 releases one in place of one House Blade attack:
@@ -557,7 +558,7 @@ second round after this one, and this guard holds its ground until they come.
 ***To the Terms.*** The Blade fights only as the contract allows and never crosses
 its boundary. On a contract to detain, a creature the Blade would reduce to 0 Hit
 Points drops to 1 Hit Point instead and has the Grappled condition (escape DC 12):
-held, not hurt worse.
+held, not hurt worse. The Blade grapples with its shield arm, keeping its blade in hand.
 
 **Actions**
 
@@ -743,7 +744,8 @@ damage.
 
 ***Seize for Questioning.*** *Strength Saving Throw:* DC 12, one Medium or smaller
 creature within 5 feet. *Failure:* The target has the
-Grappled condition (escape DC 12).
+Grappled condition (escape DC 12). The warden grapples with its shield arm, keeping its
+mace in hand.
 
 **Reactions**
 
@@ -1153,7 +1155,7 @@ passages, if they are in reach.
 ### The Hollow
 *The blank gray mask.*
 
-*Medium Humanoid (Human), —*
+*Medium Humanoid (Human), Neutral*
 
 **AC** 16 · **Initiative** +3 (13)
 **HP** 157 (21d8 + 63)
@@ -1434,7 +1436,7 @@ instead.
 ### The Radiant
 *The mirror-bright mask.*
 
-*Medium Humanoid (Human), —*
+*Medium Humanoid (Human), Neutral*
 
 **AC** 17 · **Initiative** +9 (19)
 **HP** 162 (25d8 + 50)
@@ -1970,7 +1972,7 @@ miss.
 ### The Wept
 *The gray mask with carved tears.*
 
-*Medium Humanoid (Human), —*
+*Medium Humanoid (Human), Neutral*
 
 **AC** 18 · **Initiative** +7 (17)
 **HP** 187 (22d8 + 88)
@@ -2088,9 +2090,12 @@ doors, walls and barricades do not reliably hold her. Deep Boranis ward-crystal 
 *Seven people the night turns on, none of whom a fight card will ever use, and one
 line for the crowd. If a table somehow ends up in a fight with one of them, these
 lines are enough to run it, and each one says why it should not
-happen. None of them earns XP.*
+happen. None of them earns XP. They make no checks outside a fight, but a spell
+still calls for a saving throw, and they roll it: each line gives the Wisdom and
+Charisma saves a social spell asks for (any other save is +0).*
 
-**Raunu Boranis** — *Medium Humanoid (Human).* AC 12 · HP 40 · Speed 30 ft. He will
+**Raunu Boranis** — *Medium Humanoid (Human).* AC 12 · HP 40 · Speed 30 ft. ·
+Saves Wis +5, Cha +2. He will
 not fight a guest, and nothing in this module makes him. If it comes to it, on his
 turn he never attacks: he releases a ward (see chapter V), and a door, a light or a wall
 of crystal answers him. Deceiving him takes a DC 25 Charisma (Deception) check.
@@ -2099,31 +2104,36 @@ expects: tell him a true thing he did not already know. *The two crystals at his
 wrist are his, and chapter V says what they are for.*
 
 **Veier Nolonaire** — *Medium Humanoid (Human).* AC 12 · HP 27 · Speed 30 ft.
-(15 ft. once she is wounded, at the Crossing). Near her time, and not fighting anyone. If cornered: *Border
+(15 ft. once she is wounded, at the Crossing) · Saves Wis +1, Cha +1. Near her time, and not fighting anyone. If cornered: *Border
 Sling.* *Ranged Attack Roll:* +4, range 30/120 ft. *Hit:* 4 (1d4 + 2) Bludgeoning
 damage. Her gift flares once, on behalf
 of someone she loves who is in mortal danger (see chapter VII, Veier). The camera never lingers
 on harm to her; cut away.
 
-**Minister Corval** — *Medium Humanoid (Human).* AC 10 · HP 9 · Speed 25 ft. Thin,
+**Minister Corval** — *Medium Humanoid (Human).* AC 10 · HP 9 · Speed 25 ft. ·
+Saves Wis +3, Cha +2. Thin,
 upright, old, magnificent under pressure, and no use at all in a fight. Bribing him
 is impossible. There is no check; tell the players so. Deceiving him about household
 matters takes a DC 20 Charisma (Deception) check; about anything else he is too tired to check.
 
-**Anha** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. The under-cook, who
+**Anha** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. ·
+Saves Wis +1, Cha +0. The under-cook, who
 talks to family or kindness, not to pressure. *The Other Way:* in the service
 passages she is never lost, and a creature following her through them moves at full
 Speed through smoke and dark that slows everyone else.
 
-**Mother Sella** — *Medium Humanoid (Human).* AC 10 · HP 9 · Speed 30 ft. Immune to
+**Mother Sella** — *Medium Humanoid (Human).* AC 10 · HP 9 · Speed 30 ft. ·
+Saves Wis +3, Cha +1. Immune to
 the Frightened condition; acceptance is all the doctrine her order has. She will
 not raise a hand, and she will not leave anyone who is dying alone.
 
-**Otta Vesh** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. The aftermath's
+**Otta Vesh** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. ·
+Saves Wis +0, Cha +0. The aftermath's
 mask-maker, susceptible to nothing but genuine appreciation of the craft. If a fight
 reaches her workshop, the table has gone badly wrong somewhere.
 
-**A guest** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. No attacks; use
+**A guest** — *Medium Humanoid (Human).* AC 10 · HP 4 · Speed 30 ft. ·
+Saves Wis +0, Cha +0. No attacks; use
 the SRD 5.2.1 **commoner** stat block without its attack. Any
 one of the two hundred: a merchant, a minister's cousin, a festival hire in borrowed
 livery. After midnight, count one in every 5-foot square where the crowd is (see chapter
@@ -2133,7 +2143,7 @@ somebody, and the inquest hears of it.
 ### Master Vell
 *The Pale Factor.*
 
-*Medium Humanoid (Human), —*
+*Medium Humanoid (Human), Neutral*
 
 **AC** 20 · **Initiative** +4 (14)
 **HP** 285 (30d8 + 150)
@@ -2254,13 +2264,13 @@ not, trained or not. Releasing one does not make its bearer a caster.
 |---|---|---|
 | *Steady Light* | Common | The crystal sheds Bright Light in a 20-foot radius and Dim Light for a further 20 feet for 1 hour. |
 | *A Sealed Door* | Common | One door, lid or window you touch, no more than 10 feet across, grows shut for 1 hour. Forcing it is a DC 15 Strength (Athletics) check; your touch opens it. |
-| *A Veil of Quiet* | Common | For 10 minutes, no sound made within 10 feet of the crystal can be heard beyond that distance. Sound from outside still comes in. |
+| *A Veil of Quiet* | Common | For 10 minutes, no sound made within 10 feet of the crystal can be heard beyond that distance. Sound from outside still comes in. The effect stays where it was released. |
 | *A Chime at a Threshold* | Common | Set on a doorway or gap up to 20 feet wide. For 8 hours, when a Tiny or larger creature crosses it, the crystal chimes, audibly, within 60 feet. |
 | *Warmth* | Common | For 8 hours the bearer is comfortable in cold down to a hard frost, and has Advantage on saving throws against extreme cold. |
 | *A Held Image* | Common | The crystal shows the still, silent image its grower set in it — up to a 5-foot cube — for 1 minute. |
 | *House Flare* | Uncommon | Bright Light fills a 30-foot Emanation from the crystal until the end of your next turn. Nothing in it can benefit from the Invisible condition or take the Hide action. *(The honor guard's.)* |
 | *House Seal* | Uncommon | One door within 30 feet swings shut and grows closed until the scene ends. Forcing it is a DC 20 Strength (Athletics) check. *(The honor guard's.)* |
-| *Dark-Burst* | Uncommon | Magical Darkness fills a 15-foot-radius Sphere centered on the crystal for 1 minute. Darkvision can't see through it, and nonmagical light can't illuminate it. *(Tavva's.)* |
+| *Dark-Burst* | Uncommon | Magical Darkness fills a 15-foot-radius Sphere centered on the crystal for 1 minute. Darkvision can't see through it, and nonmagical light can't illuminate it. The effect stays where it was released. *(Tavva's.)* |
 | *Door-Seal* | Uncommon | One door within 30 feet slams and grows shut for 1 minute. Forcing it is a DC 18 Strength (Athletics) check. *(Tavva's.)* |
 
 *A Dark-Burst released where the Radiant is working counts as denying him the

@@ -22,7 +22,8 @@ Three principles:
    sealing players into one — and let anyone who studied the wards (Agenda 5, the
    gallery) *steer* them: reading a Boranis ward is Standard for them, Hard for
    anyone else. Tables that found **the Root of the House** (Undercurrent A) hold
-   the master valve: from the Root, wards can be steered palace-wide, and a dozen
+   the master valve (the Root is not drained at midnight: it still glows rose
+   afterwards): from the Root, wards can be steered palace-wide, and a dozen
    guests can shelter behind the deepest crystal in Rekuzan, because the Uninvited
    go only where their errands are. One of them who crosses its threshold can be
    caught there (⟨They trap one of the Uninvited⟩). They don't know that, and
@@ -38,7 +39,9 @@ Three principles:
 Midnight. Bells. The east doors open and Raunu Boranis mounts the dais to lead the
 Unmasking, as every host of every Oraga has, and the rite begins: the lamps
 brighten, the masks come off in a wave of laughter and candle-relight — and across
-the Crystal Court, three gray masks stay on.
+the Crystal Court, three gray masks stay on. (The household staff, Corval and the
+honor guards wear one simple matching house half-mask in the livery colors, never
+plain gray.)
 
 He speaks the rite's fixed words steadily — ritual suits him far better than small
 talk — and then sets down the cup, and the room, which has waited all night for

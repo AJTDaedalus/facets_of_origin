@@ -818,3 +818,51 @@ Read first: TASKS WP8, DECISIONS TP1–TP64 and the TPN notes, this LOG's tail, 
 
 ### Checks
 - From M/: lint 0; fact_check 0; bestiary 0 mismatches; pregen 0 issues; `pytest tools` **576 passed, 1 skipped** (563 + 1 at start). Root: `research/oraga_5e_sim` 34 passed. software/: docs consistency + no private canon 42 passed. No commit or staging.
+
+## WP10 run + T7.25 (2026-10-25)
+
+Read first: TASKS WP10 and T7.25, DECISIONS TP1–TP74 and the TPN notes, this LOG's tail. Baseline from `M/`: lint 0, fact_check 0, bestiary 0, pregen 0, `pytest tools` 576 passed + 1 skipped.
+
+### T10.1 NPC saves; casting as steel
+- **10 *If It Comes to It*:** each noncombatant line gains "Saves Wis +X, Cha +Y" (Raunu +5/+2, Veier +1/+1, Corval +3/+2, Anha +1/+0, Sella +3/+1, Otta +0/+0, a guest +0/+0), derived from the printed DCs and descriptions (none has ability scores; the guest is the SRD commoner). The section intro: they make no checks outside a fight, but they roll a spell's saving throw; any other save is +0. Vell has a full block and was not touched.
+- **01 *NPCs don't make checks*:** "Saving throws are not checks: when a spell or effect calls for one, the NPC rolls it, using the save line in chapter X."
+- **09:** new bullet *Casting in view* after *Steel at the ball*: a spell with a Verbal or Somatic component cast in a guest's view is noticed unless the caster succeeds on a DC 13 Dexterity (Sleight of Hand) check, and noticed means bare steel. (Its own bullet: in *Steel at the ball* it pushed 09 to 4 long paragraphs.) **04 *The Palace on Alert*** adds "or a spell is seen being cast (chapter IX, *Casting in view*)" so the two agree.
+- **OWNER question (non-blocking, not applied):** Should Raunu be immune to the Charmed condition? Today a 4th-level bard's *Charm Person* or *Suggestion* can land on him (Wis save +5 against DC 14), which could pull answers out of the one man the book says can't be deceived (DC 25). Yes would add one line to his entry in chapter X; no leaves him charmable, and (as chapter IX says of any charm) he knows by morning what was done to him.
+- INVENTIONS **#122**. Checks: bestiary 0; lint 0.
+
+### T10.2 Success at a cost: scope
+- **01:** after the cost paragraph: success at a cost is for talk and exploration before midnight; not for Delay tricks, a Stop or an End (chapter V gives each its own failure rule), steering a ward, distracting the Attendant, or a Very Hard DC. The troubleshooting box: "arrives, if you offer it". The ledger's "End (which has its own band)" was reworded: in chapter V the Stop has the fail-by-4 band and the End its own failure rule.
+- INVENTIONS **#123**. Checks: lint 0.
+
+### T10.3 Dassa's armour; even charges
+- **11:** Dassa wears Scale Mail (AC 16 with Defense; Disadvantage on Stealth checks) on the AC line and the Carrying line. Scale mail rather than chain mail (TPN-53a): the printed AC 16 stays true in 11's intro, the sims and the fight tables.
+- One common charge each: Serane *A Veil of Quiet*, Pello *Steady Light*, Andra *A Held Image*, Dassa *A Chime at a Threshold*, Ilesse *A Sealed Door*. The common block says why (the SRD's one Common item at 2nd–4th level). The Facets `.fof` kits are unchanged (5e-only equipment rule).
+- `tools/pregen_check.py`: Dassa's armour tuple → `('scale mail',14,2)`.
+- INVENTIONS **#124**; TPN-53a. Checks: `pregen_check` 0 issues.
+
+### T10.4 Free-hand grapples
+- **10:** the Honor Guard's *Seize*, the Warden's *Seize for Questioning* and the Blade's *To the Terms* each say it grapples with its shield arm, keeping its weapon in hand (all three carry a shield).
+- INVENTIONS **#125**. Checks: bestiary 0.
+
+### T10.5 Serane's SRD wording
+- **11:** Bardic Inspiration ("another creature within 60 feet of herself who can see or hear her … fails a D20 Test … potentially turning the failure into a success") and *Vicious Mockery* ("must succeed on a DC 14 Wisdom saving throw or take 1d6 Psychic damage and have Disadvantage on the next attack roll it makes before the end of its next turn"), SRD 5.2.1 wording.
+- Lint flagged the SRD's bare "take 1d6" (save_damage S11); one `lint_5e_allow.txt` entry, with its reason.
+- **copyright_scan:** not run. It needs `--refs` and `--srd` directories, and the r61 copies used before are gone from this machine; the new text is SRD 5.2.1 text only. Its synthetic tests run in `pytest tools`.
+- INVENTIONS **#126**.
+
+### T10.6 Charge text, moving charges, alignment, Gift Knack
+- **05** beat 1: "(it still works; see the sidebar)".
+- **10 Table X–3** *A Veil of Quiet* and *Dark-Burst*, and **08 Handout 3** *A Veil of Quiet* (the copies must match, INVENTIONS #59): "The effect stays where it was released."
+- **10:** the four "—" alignments (the Hollow, the Radiant, the Wept, Master Vell) → Neutral.
+- **Gift Knack (TPN-53b):** no Advantage on a crystal distraction. One sentence in 09 S14's full rule; a pointer in 03 *Orthaen Gift*.
+- INVENTIONS **#127**. Checks: lint 0; fact_check 0.
+
+### T7.25 TP67: house half-masks; the Root's glow
+- **Masks:** 04 and F/04 B10; 05 and F/05 Movement VI (a parenthesis after "three gray masks stay on"): "The household staff, Corval and the honor guards wear one simple matching house half-mask in the livery colors, never plain gray." The colours are not named.
+- **Root:** 04 and F/04 B11; 05 (its own paragraph under principle 2's master-valve paragraph, which otherwise tipped 05's long-paragraph count) and F/05 (a parenthesis at the master valve): "The Root is not drained at midnight: it still glows rose afterwards."
+- No stale line was found in either edition, so no facts guard was added.
+- INVENTIONS **#128**. Checks: lint 0; fact_check 0; software docs + private canon 42.
+
+### Close
+- Done: T10.1–T10.6, T7.25. Open: T10.7 (commit; not done, per brief). OWNER: Raunu and the Charmed condition (above, non-blocking).
+- Final checks from `M/`: lint 0; fact_check 0; bestiary 0 mismatches; pregen 0 issues; `pytest tools` **576 passed, 1 skipped**. Repo root `pytest research/oraga_5e_sim` **34 passed**. `software/` docs-consistency + private-canon **42 passed**. `copyright_scan` not run (no refs/srd directories on this machine). No commit or staging.

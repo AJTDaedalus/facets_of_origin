@@ -140,6 +140,10 @@ development.*
   any attack roll, a spell or a sling as much as a fist; never with an area effect. The
   SRD allows it only for melee attacks; here it is a house rule, because nobody wants a
   guest killed by a *Fire Bolt* over a seating plan.
+- **Casting in view.** Before midnight, any spell seen being cast is steel too. A spell
+  with a Verbal or Somatic component cast in a guest's view is noticed unless the caster
+  succeeds on a DC 13 Dexterity (Sleight of Hand) check to pass the words and gestures
+  off as talk, and noticed means bare steel, whatever the spell does.
 - **Heroic Inspiration** works as the SRD says: a character has it or doesn't. Each
   card names **one** award at most, and the Table I–3 row it reminds you of (on S14, a
   natural 20 pays its own as well). A character who already has Inspiration can give
@@ -1984,6 +1988,8 @@ fits the trick** — Charisma (Performance) for music, Charisma (Deception) for 
 Intelligence (Arcana) to show it a working crystal, Charisma (Deception) or Charisma
 (Performance) to pose as, or announce, the master it awaits ("your master is here",
 pointing at a doorway), and so on — against **DC 13 while it is Idle, DC 18 while it is Focused.**
+The Orthaen *Gift Knack* gives no Advantage on a crystal trick: the check is about the
+Attendant's attention, not the crystal, so the Help action is the way to Advantage.
 
 *One trick a round.* It watches one thing at a time. Once anyone has tried a trick on
 it in a round, win or lose, it is watching for the next: nobody else can try until the
