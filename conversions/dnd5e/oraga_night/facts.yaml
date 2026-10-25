@@ -693,6 +693,36 @@ facts:
         anchor: 'Stop and End — Sorrow'
         why: TPN-31 — the Wept's block says the same
 
+  - id: tp56_quiet_rooms
+    truth: >-
+      TP56: the palace's quiet rooms are printed in both editions as "The Rest of the Palace",
+      at the end of The Private Palace and before Running the Room, unnumbered (no B-areas).
+      Each room carries at most TP56's one detail. The servants' rota is knotted cords and the
+      carters' tokens are plain: neither carries writing (the written-word law). The laundry
+      is a location for Undercurrent C's printed linen spark.
+    source: owner TP56 (2026-10-25)
+    phrases: ["The Rest of the Palace", "or finds them in the East Range laundry"]
+    checks:
+      - type: require
+        file: 04_The_Ball.md
+        pattern: '\bThe Rest of the Palace\b.{0,6000}?\bRunning the Room\b'
+        anchor: 'Running the Room'
+        why: TP56 — the quiet rooms close The Private Palace, before Running the Room
+      - type: require
+        file: ../../../adventures/oraga_night/04_The_Ball.md
+        pattern: '\bThe Rest of the Palace\b.{0,6000}?\bRunning the Room\b'
+        anchor: 'Running the Room'
+        why: TP56 — the Facets edition carries the same section, lore only
+      - type: require
+        file: 04_The_Ball.md
+        pattern: '\bor finds them in the East Range laundry\b'
+        anchor: 'or laundry'
+        why: TP56 — Undercurrent C's linen spark names the laundry as a place to find it
+      - type: sentence
+        files: ["04"]
+        all: ["(?i)\\b(?:knotted cords|duty rota|carters' tokens)\\b", '(?i)\b(?:written|writing|lettered|inscribed|letters|names? on)\b']
+        why: TP56 — the rota cords and the carters' tokens carry no writing (knots and tokens only)
+
 maps:
   court:          # B2 (05 General Features, Sizes)
     length: 140

@@ -580,3 +580,19 @@ Read first: REVIEW_oraga_polish_B (main list) and _A (findings in 05/08/09/10), 
 - First runs: three bare DCs (ward-steering rewritten; one 08 allowlist entry for the spells compression; 09 lock line names the check), the Deadly allowlist anchor updated for the new 2014 numbers, two long paragraphs split (05 Corval, *Everyone else's steel*), one S13 rule-copy hit (rephrased), a YAML double-quote `\b` bug in my own guard (fixed, then confirmed firing on HEAD text).
 - Final: `lint_5e.py --check` OK 0; `fact_check.py --check` OK 0; `bestiary_check.py` 0 mismatches; `pregen_check.py` 0 issues; `pytest tools -q` **481 passed** (450 before; 12 new in `TestPolishReviewB`, the rest the other worker's). Repo root `pytest research/oraga_5e_sim -q` 24 passed. `software/` docs-consistency + private-canon 42 passed. flow.json not touched by this pass.
 - Tasks marked ☑: T2.6, T6.6, T7.11, T7.16. Review files marked per finding. No commit or staging.
+
+## 2026-10-25 — TP56, the quiet rooms ("The Rest of the Palace")
+
+Read first: DECISIONS TP56 (*Palace brief and the quiet rooms*), the visual brief §0.1, §1.2–§1.7, *The rooms the brief adds* and B4–B10 entries; 04 *The Private Palace*, Undercurrent C, Movement IV omen, *What the Bought do*; 05 B12 contract; 02 Agenda 6 and 8. INVENTIONS **#100**. (A first attempt was interrupted before any edit reached disk; this is the full redo.)
+
+### Done
+- **M/04:** new `#### The Rest of the Palace` (04:440) at the end of *The Private Palace*, after B13 and its B12 note, before *Running the Room*. Italic DM-note opener (shut since the cut to 22; where wanderers end up; nothing worth staying for; don't steer; one detail each), then nine run-in entries in TP56's order and one *Everything else* line for the no-detail rooms. Unnumbered: no B-areas added, so the B0–B13 key, maps and flow are untouched. Locations from the brief's §1.4 placements (servants' hall and laundry beside/near B10; state rooms beyond B4 and B6; dark wing on the way to B8; drawing rooms beside B7; bell tower at the Court's north-east corner; stable yard off the West Lane). Cords and tokens carry no writing. The bell tower points to chapter V, area B12 (the contract lives inside B12; there is no "The Contract" heading). The dark-wing door cites the printed Movement V lamplight (card S8).
+- **Undercurrent C spark (04:833):** "or finds them in the East Range laundry".
+- **F/04:** same section (275), lore only, words for numbers, "Chapter V, B12"; the dark-wing entry omits the lamplight (F/ doesn't print it). Same laundry clause in F's Undercurrent C spark.
+- **Visual brief:** §0.1 gains the **[APPROVED TP56]** tag line; *The rooms the brief adds* heading re-tagged, each TP56 room tagged with its **Detail:** line (cords and tokens marked "no writing"); no-detail rooms tagged "no detail"; the gallery corridor stays [VX] (not in TP56); roofscape approved as a place, materials still VX. §1.4 rows for the bell tower, West Range rooms, garden wing, mews, stable yard and East Range re-tagged APPROVED TP56. §7 gets one note that TP56 settled those placements, sizes and decor still proposals. "Never visited in play" (stable yard) became "Rarely".
+- **Guard:** facts.yaml `tp56_quiet_rooms` (section before *Running the Room* in both editions; the laundry clause; a sentence forbid on writing on the rota cords or carters' tokens in 04). `TestTP56QuietRooms`, 8 tests.
+- flow.json: no node added (non-story rooms; the DM is told not to steer there).
+
+### Checks (from `M/` unless noted)
+- `lint_5e.py --check` OK 0; `fact_check.py --check` OK 0; `pregen_check.py` 0 issues; `bestiary_check.py` 0 mismatches; `pytest tools -q` **489 passed** (481 + 8). `software/`: `test_docs_consistency.py` + `test_no_private_canon.py` **42 passed**.
+- No commit or staging. M/art/ and references/house_raunu.jpeg untouched.

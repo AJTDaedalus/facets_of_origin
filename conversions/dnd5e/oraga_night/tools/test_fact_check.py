@@ -714,3 +714,66 @@ class TestPolishRulings:
     def test_two_finds_is_clean(self, facts):
         text = "Nobody gets into her room. Two finds: Raunu's rooms and the nursery.\n"
         assert not self._hits(facts, text, "04_The_Ball.md", "tp53_veier_room")
+
+
+class TestTP56QuietRooms:
+    """TP56 (2026-10-25): "The Rest of the Palace" in both editions; no writing on cords or tokens."""
+
+    @pytest.fixture(scope="class")
+    @staticmethod
+    def facts():
+        return F.load_facts(F.FACTS)
+
+    @staticmethod
+    def _hits(facts, text, fname):
+        return [h for h in F.check_text(text, fname, facts) if h.fact == "tp56_quiet_rooms"]
+
+    @staticmethod
+    def _req(facts, fname, text, tmp_path, file_key=None):
+        (tmp_path / fname).write_text(text, encoding="utf-8")
+        fact = next(f for f in facts if f["id"] == "tp56_quiet_rooms")
+        key = file_key or fname
+        checks = [c for c in fact["checks"] if c["type"] == "require" and c["file"] == key]
+        return [h for c in checks for h in F._require(fact, dict(c, file=fname), tmp_path)]
+
+    def test_written_rota_cords_are_forbidden(self, facts):
+        text = "By the door the duty rota hangs on knotted cords, each with a name written on its tag.\n"
+        assert self._hits(facts, text, "04_The_Ball.md")
+
+    def test_lettered_carters_tokens_are_forbidden(self, facts):
+        text = "A bowl of carters' tokens sits by the door, each one lettered with a village.\n"
+        assert self._hits(facts, text, "04_The_Ball.md")
+
+    def test_knots_only_wording_is_not_a_hit(self, facts):
+        text = ("By the door the duty rota hangs on knotted cords, and Corval's cord alone has an "
+                "extra knot at the hour the east-wing trays go up.\n")
+        assert not self._hits(facts, text, "04_The_Ball.md")
+
+    def test_section_missing_is_a_hit(self, facts, tmp_path):
+        text = "### The Private Palace\n\nB13 text.\n\n## Running the Room\n\nLoop.\n"
+        hits = self._req(facts, "04_The_Ball.md", text, tmp_path)
+        assert any("Rest of the Palace" in h.match for h in hits)
+
+    def test_section_after_running_the_room_is_a_hit(self, facts, tmp_path):
+        text = ("## Running the Room\n\nLoop.\n\n#### The Rest of the Palace\n\n"
+                "or finds them in the East Range laundry\n")
+        hits = self._req(facts, "04_The_Ball.md", text, tmp_path)
+        assert any("Rest of the Palace" in h.match for h in hits)
+
+    def test_section_in_place_passes_both_editions(self, facts, tmp_path):
+        text = ("### The Private Palace\n\n#### The Rest of the Palace\n\nRooms.\n\n"
+                "or finds them in the East Range laundry\n\n## Running the Room\n\nLoop.\n")
+        assert not self._req(facts, "04_The_Ball.md", text, tmp_path)
+        f_key = "../../../adventures/oraga_night/04_The_Ball.md"
+        assert not self._req(facts, "04_The_Ball.md", text, tmp_path, file_key=f_key)
+
+    def test_laundry_spark_missing_is_a_hit(self, facts, tmp_path):
+        text = "#### The Rest of the Palace\n\nRooms.\n\n## Running the Room\n\nor laundry: linens.\n"
+        hits = self._req(facts, "04_The_Ball.md", text, tmp_path)
+        assert any("East Range laundry" in h.match for h in hits)
+
+    def test_real_chapters_carry_the_section(self):
+        for p in (F.MODULE / "04_The_Ball.md",
+                  F.MODULE / "../../../adventures/oraga_night/04_The_Ball.md"):
+            text = p.read_text(encoding="utf-8")
+            assert text.index("#### The Rest of the Palace") < text.index("## Running the Room")

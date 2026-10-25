@@ -437,6 +437,54 @@ in the public rooms, where the table can see it.)*
 *(There is no B12 in this chapter. B12 is the Gatehouse Court after midnight, held —
 chapter V.)*
 
+#### The Rest of the Palace
+
+*Most of the palace is shut tonight. A household of 60 was cut to 22, and the rooms
+nobody can keep are dark, cold and under dust sheets. These are the rooms a wandering
+character ends up in. Nothing in them is worth staying for, so don't steer anyone here.
+Each holds one ordinary detail that points back to where the night is happening.*
+
+**The servants' hall.** In the East Range, beside the kitchens (B10). A long table laid
+for 22, and aprons on pegs. By the door the duty rota hangs on knotted cords, and
+Corval's cord alone has an extra knot at the hour the east-wing trays go up (see
+"Undercurrent C — The Third Plate").
+
+**The servants' dormitories.** Above the servants' hall. Rows of stripped beds for the 38
+who were sent away, and the few slept-in cots huddled by the stair. By the door sits a
+bowl of carters' tokens, full, and unused for two years (Agenda 8).
+
+**The laundry.** In the East Range, near the kitchens (B10). Steam, copper and the ball's
+table linen in heaps. Among it are small, soft, new-hemmed cloths that no ball needs:
+Undercurrent C's laundry spark, found where it would be.
+
+**The shut state rooms.** The West Range ground floor, beyond the Audience Hall (B4) and
+the chapel (B6). Chandeliers under dust sheets and two years of dust on the floor, except
+for one clean path walked straight through toward the dark-wing stair and the study (B8).
+
+**The dark wing's corridor.** The second floor of the West Range, on the way to the
+study (B8). Shut guest apartments, the furniture under sheets, the crystal walls dimmed.
+At the far end one door is kept free of dust: the study's, where the Movement V
+lamplight shows (card S8).
+
+**The garden wing's drawing rooms.** Gallery level, beside the trophy gallery (B7). Dust
+sheets and cold hearths. The tall windows look straight down the terraces (B5) to the
+river gate (Agenda 6).
+
+**The mews.** Behind the garden wing, at terrace level. Hooded falcons, uneasy all night.
+After the Movement IV omen every bird sits silent, facing the garden route.
+
+**The bell tower.** At the Crystal Court's north-east corner. The quarter-bell rope, and
+a view over the city. In Movement V, at the quarter-bell, the first fires show in two
+districts: the Bought at the first task of their contract (see chapter V, area B12).
+
+**The stable yard.** North-west of the West Range, off the West Lane. The guests' grooms
+wait with the carriages, trading the ballroom's own rumors back to it. Nothing new is
+out here, only the way back inside.
+
+**Everything else.** The lower gallery (B13's door and nothing more), the music room and
+dining hall, the empty upper rooms of the towers, the gatehouse chamber, the falconer's
+lodge and the roof: dark, dust, and nothing to find.
+
 ## Running the Room
 
 Two hundred guests, the named ones in chapter VII. Between scheduled events, run the
@@ -782,8 +830,8 @@ three plates come back down together for washing.*
 **The spark:** Anha mentions it as one of her unframed facts (the three plates in the
 washing); or a guest sees Corval carry a tray up toward the east wing himself,
 alone, in Movement II; or laundry: a guest
-near the service passages sees linens going up that no ball needs: small, soft,
-new-hemmed (a DC 13 Wisdom (Perception) check); or rumor 11's "guards on the inside of the
+near the service passages sees linens going up that no ball needs, or finds them in the
+East Range laundry: small, soft, new-hemmed (a DC 13 Wisdom (Perception) check); or rumor 11's "guards on the inside of the
 doors" invites a test that finds the guards courteous, immovable, and protective
 rather than jailerly.
 
