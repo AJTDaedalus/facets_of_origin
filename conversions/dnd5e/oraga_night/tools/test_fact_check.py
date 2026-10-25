@@ -549,3 +549,168 @@ class TestRootAttendant:
         text = ("### The Attendant\n\n***Where the Three Go.*** It follows its three "
                 "anywhere, the Root included: nothing there touches it.\n")
         assert not self._hits(facts, text, tmp_path)
+
+
+class TestPolishReviewB:
+    """Polish pass B (2026-10-25): TP47 Root trap, TP21 clause, T6.6 crowd scope, TPN-31 freeze."""
+
+    @pytest.fixture(scope="class")
+    @staticmethod
+    def facts():
+        return F.load_facts(F.FACTS)
+
+    @staticmethod
+    def _hits(facts, text, fname, fid):
+        return [h for h in F.check_text(text, fname, facts) if h.fact == fid]
+
+    @staticmethod
+    def _req(facts, fid, fname, text, tmp_path):
+        (tmp_path / fname).write_text(text, encoding="utf-8")
+        fact = next(f for f in facts if f["id"] == fid)
+        return [h for c in fact["checks"] if c["type"] == "require" and c["file"] == fname
+                for h in F._require(fact, c, tmp_path)]
+
+    def test_root_refuge_is_forbidden_in_08(self, facts):
+        text = "From the Root (B11): shelter for a dozen, and the Uninvited will not enter.\n"
+        assert self._hits(facts, text, "08_Handouts.md", "root_trap")
+
+    def test_threshold_they_will_not_cross_is_forbidden_in_10(self, facts):
+        text = "and the Root of the House, the one threshold they will not cross.\n"
+        assert self._hits(facts, text, "10_Bestiary.md", "root_trap")
+
+    def test_root_trap_wording_is_not_a_hit(self, facts):
+        text = ("Guests can shelter in the Root: the Uninvited go only where their errands are, "
+                "and they don't know to avoid it.\n")
+        assert not self._hits(facts, text, "05_The_Longest_Night.md", "root_trap")
+
+    def test_root_trap_require_fires_without_the_tp18_line(self, facts, tmp_path):
+        assert self._req(facts, "root_trap", "05_The_Longest_Night.md",
+                         "If the characters found the Root, they hold the master valve.\n", tmp_path)
+
+    def test_send_word_to_the_river_is_forbidden_in_05(self, facts):
+        text = "*if a woman in Thenya wool comes out the front, hold her, and send word to the river.*\n"
+        assert self._hits(facts, text, "05_The_Longest_Night.md", "second_clause")
+
+    def test_clause_ending_at_hold_her_is_not_a_hit(self, facts):
+        text = "*if a woman in Thenya wool comes out the front, hold her.*\n"
+        assert not self._hits(facts, text, "05_The_Longest_Night.md", "second_clause")
+
+    def test_crowd_rule_everywhere_is_forbidden(self, facts):
+        text = "The crowd rule in \"Down, Not Out\" holds in every snake fight after the bells.\n"
+        assert self._hits(facts, text, "09_The_Snakes.md", "crowd_rule_scope")
+
+    def test_rescue_promise_is_forbidden(self, facts):
+        text = "Nobody is out for longer than two rounds.\n"
+        assert self._hits(facts, text, "05_The_Longest_Night.md", "crowd_rule_scope")
+
+    def test_no_snake_finishes_is_forbidden(self, facts):
+        text = "After midnight no snake finishes a downed character.\n"
+        assert self._hits(facts, text, "09_The_Snakes.md", "crowd_rule_scope")
+
+    def test_scoped_crowd_rule_is_not_a_hit(self, facts):
+        text = "This is the crowd rule, and it covers only the set-aside.\n"
+        assert not self._hits(facts, text, "05_The_Longest_Night.md", "crowd_rule_scope")
+
+    def test_wept_freeze_require_fires_on_a_bare_child_crying(self, facts, tmp_path):
+        text = "- **A moment the room gives.** a child crying where the Wept can hear it.\n"
+        assert self._req(facts, "wept_freeze", "05_The_Longest_Night.md", text, tmp_path)
+
+    def test_wept_freeze_require_is_met_by_a_real_child(self, facts, tmp_path):
+        text = "- **A moment the room gives.** a real child crying where the Wept can hear it.\n"
+        assert not self._req(facts, "wept_freeze", "05_The_Longest_Night.md", text, tmp_path)
+
+
+class TestPolishRulings:
+    """Polish review A (three-player pass): guards for TP19, TP21, TP47, TP48, TP52, TP53."""
+
+    @pytest.fixture(scope="class")
+    @staticmethod
+    def facts():
+        return F.load_facts(F.FACTS)
+
+    @staticmethod
+    def _hits(facts, text, fname, fid):
+        return [h for h in F.check_text(text, fname, facts) if h.fact == fid]
+
+    # TP47 — the Root is a trap, not a refuge
+    def test_root_refuge_is_forbidden(self, facts):
+        text = "And the Uninvited will not enter it: they will not cross the Root's threshold.\n"
+        assert self._hits(facts, text, "04_The_Ball.md", "tp47_root_trap")
+
+    def test_root_safe_room_is_forbidden(self, facts):
+        text = "The Root is a safe room that can shelter a dozen guests.\n"
+        assert self._hits(facts, text, "04_The_Ball.md", "tp47_root_trap")
+
+    def test_root_trap_wording_is_clean(self, facts):
+        text = ("A dozen guests can shelter there: the Uninvited go only where their errands "
+                "are. One who crosses its threshold can be caught there.\n")
+        assert not self._hits(facts, text, "04_The_Ball.md", "tp47_root_trap")
+
+    def test_root_guard_skips_other_workers_files(self, facts):
+        text = "The Uninvited will not cross the Root's threshold.\n"
+        assert not self._hits(facts, text, "05_The_Longest_Night.md", "tp47_root_trap")
+
+    # TP21 — the Second Clause ends at "hold her"
+    def test_send_word_to_the_river_is_forbidden(self, facts):
+        text = '"If a woman in Thenya wool comes out the front, hold her, and send word to the river."\n'
+        assert self._hits(facts, text, "07_Cast_of_the_Ball.md", "tp21_second_clause")
+
+    def test_clause_ending_at_hold_her_is_clean(self, facts):
+        text = '"If a woman in Thenya wool comes out the front, hold her."\n'
+        assert not self._hits(facts, text, "07_Cast_of_the_Ball.md", "tp21_second_clause")
+
+    def test_wrapped_send_word_is_caught(self, facts):
+        text = "hold her, and send word\nto the river.\n"
+        assert self._hits(facts, text, "07_Cast_of_the_Ball.md", "tp21_second_clause")
+
+    # TP19 — Vell's sword stays on his back
+    def test_fights_with_it_still_bound_is_forbidden(self, facts):
+        text = "at the Crossing, where he fights the Radiant with it still bound.\n"
+        assert self._hits(facts, text, "07_Cast_of_the_Ball.md", "tp19_vell_sword")
+
+    def test_holds_with_sword_still_wrapped_is_forbidden(self, facts):
+        text = "where he holds the Radiant with the sword still wrapped.\n"
+        assert self._hits(facts, text, "07_Cast_of_the_Ball.md", "tp19_vell_sword")
+
+    def test_sword_on_his_back_is_clean(self, facts):
+        text = "where he holds the Radiant off with the sword still on his back.\n"
+        assert not self._hits(facts, text, "07_Cast_of_the_Ball.md", "tp19_vell_sword")
+
+    # TP52 — Raunu's line is cut everywhere
+    def test_raunu_line_is_forbidden_in_04(self, facts):
+        text = 'then: *"She chooses her guests herself these days."*\n'
+        assert self._hits(facts, text, "04_The_Ball.md", "tp52_raunu_line")
+
+    def test_raunu_line_is_forbidden_in_09(self, facts):
+        text = '*"If she chooses you, you will know."*\n'
+        assert self._hits(facts, text, "09_The_Snakes.md", "tp52_raunu_line")
+
+    def test_veier_choosing_the_messenger_is_clean(self, facts):
+        text = "If Veier chooses them, and by default she does, the door opens a hand's width.\n"
+        assert not self._hits(facts, text, "04_The_Ball.md", "tp52_raunu_line")
+
+    # TP48 — Undercurrent C is not gated on Agenda 4
+    def test_agenda_4_gate_is_forbidden(self, facts):
+        text = "### Undercurrent C — The Third Plate *(run it if anyone carries Agenda 4)*\n"
+        assert self._hits(facts, text, "04_The_Ball.md", "tp48_undercurrent_c")
+
+    def test_prep_box_gate_is_forbidden(self, facts):
+        text = "Read Undercurrent C only if someone carries Agenda 4.\n"
+        assert self._hits(facts, text, "01_Overture.md", "tp48_undercurrent_c")
+
+    def test_if_you_have_time_is_clean(self, facts):
+        text = "### Undercurrent C — The Third Plate *(if you have time)*\n"
+        assert not self._hits(facts, text, "04_The_Ball.md", "tp48_undercurrent_c")
+
+    # TP53 — Veier's room is not a find
+    def test_three_finds_is_forbidden(self, facts):
+        text = "Warm light, a midwife's quiet traffic, and three finds:\n"
+        assert self._hits(facts, text, "04_The_Ball.md", "tp53_veier_room")
+
+    def test_veier_rooms_bullet_is_forbidden(self, facts):
+        text = "- **Veier's rooms.** Thenya through and through.\n"
+        assert self._hits(facts, text, "04_The_Ball.md", "tp53_veier_room")
+
+    def test_two_finds_is_clean(self, facts):
+        text = "Nobody gets into her room. Two finds: Raunu's rooms and the nursery.\n"
+        assert not self._hits(facts, text, "04_The_Ball.md", "tp53_veier_room")

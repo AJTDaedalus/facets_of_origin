@@ -540,3 +540,43 @@ Read first: TASKS (header, SA, SIM, DIAL, T5.3–T5.11), DESIGN §2.1, §3.1, §
 - `lint_5e.py --check` OK 0; `fact_check.py --check` OK 0; `bestiary_check.py` 28 blocks + 1 variant, 0 mismatches; `pregen_check.py` 0 issues; `pytest tools -q` **450 passed** (443 before). Repo root: `pytest research/oraga_5e_sim -q` **24 passed**. `software/`: `test_docs_consistency.py` + `test_no_private_canon.py` **42 passed**.
 - Swept 01–04, 11 and README (the other worker's files) for the Attendant's old DC 19, "no Help", "does not die" and "never kills": no hits.
 - No commit or staging. T5.12 (commit) left open.
+
+## 2026-10-25 — Polish review A (01–04, 06, 07, 11, README, F/) and owner rulings TP47–TP55
+
+Read first: REVIEW_oraga_polish_A (all), REVIEW_oraga_polish_B (P10, the only finding in these files), DECISIONS TP1–TP55 and TPN notes, TASKS SA and T7.2/T7.9/T7.11. Another worker had 05, 08, 09, 10 at the same time. Planner calls: **TPN-40 (a–l)**. INVENTIONS **#98**.
+
+### What changed
+- **Owner rulings applied:** TP47 (Root a trap, not a refuge: 04 Undercurrent A *At midnight*; F/04, F/05, F/08), TP48 (Undercurrent C "(if you have time)": 01 prep box, 04 box and heading), TP49 + TP53 (Veier behind her own shut door, voice only; B9's *Veier's rooms* bullet and the Agenda 4 aside cut; two finds; pack story to a B10 note and 07/F/07 Anha; 04 Undercurrent C and *Inside*; 07/F/07 Veier; flow `b9`), TP50 (Maiven's gift in 07 and F/07; 03:119 stands), TP51 (Agenda 6's darker seam cut, 02 and F/03), TP52 (Raunu's line cut in 04 summons, 04 door scene "kept" seam, 07 *What Raunu Knows*, F/04), TP54 (04 B8: Orthaen Gift in place of Thieves' Tools, same DC; no other pointer in my files names the lock), TP55 (04 B7 and Undercurrent A sparks, Movement II *Agenda beats*, DC 18 → 15 to improvise; 07 Anha and Corval; F/04, F/07 lore only; flow `uc-a`).
+- **Review A:** TP21 Second Clause (07, F/05, F/07), TP19 Vell's sword (07, F/07), safety note (01, F/01), "no fight to the death" (01), TP41 (02, F/02), "on Vell's arm" (01, 02, 07, F/02, F/07), summons at three (04), nursery-sale pointer (04 Undercurrent C and Movement V Circle), Midnight Tracker in 01's prep box and print list, prep-box section list (P2), dinner-era leftovers (P3), dial pointer and one-line dial (S13), "both rivers" DM note (T7.10), duplicated TP32/TP37 sentences (04 second sites point back), "factor" DM note retitled (07, F/07), map pointer form (04, and `test_maps` regex updated to accept "and map VIII–n"), P9 voice items, P10 xrefs (03, 11), P12, P13, P15 (02, 06), S10 (01). Review B P10: Table I–3 gains an End row.
+- **Guards** (appended to `facts.yaml`): `tp47_root_trap`, `tp21_second_clause`, `tp19_vell_sword`, `tp52_raunu_line`, `tp48_undercurrent_c`, `tp53_veier_room`; 19 tests in `TestPolishRulings`.
+- **Tasks:** T7.2, T7.9, T7.10 ☑. T7.11 stays open (the 05/09 captain reword is not in yet); T7.16 stays open (the 05 gate beat).
+
+### Skipped / OWNER
+- P14 (the writing law's second exception): OWNER. P15's 07:493 Maiven "dies there": waits on T7.20. P7 (Table VIII–6): 08, other worker.
+
+### Left for the 05/08/09/10 worker
+- TP53: 08:221 "its three finds"; 09:446 and 09:1543 send Maiven the pack as a B9 find (now Anha's story; the two slings still work). TP54: 09 S8 names the crystal lock (09:1296). TP50: the Maiven block in 10 may note her gift. P6: S7's title. T7.11's captain reword in 05/09; T7.16's 05 gate beat.
+
+### Checks (from `M/` unless noted)
+- `lint_5e.py --check` OK 0 (first run: six new long paragraphs and a not…but tic, split or reworded); `fact_check.py --check` OK 0 (first run caught two 04 edits that an aborted batch had not applied; redone); `pregen_check.py` 0 issues; `bestiary_check.py` 0 mismatches; `pytest tools -q` **481 passed** (first run: three `test_maps` failures from the new map-pointer form; regex updated). Flow page rebuilt. `software/`: `test_docs_consistency.py` + `test_no_private_canon.py` **42 passed**.
+- No commit or staging.
+
+## 2026-10-25 — Polish review B (05, 08, 09, 10), with T2.6, T6.6, T7.11, T7.16 (05/09 halves)
+
+Read first: REVIEW_oraga_polish_B (main list) and _A (findings in 05/08/09/10), DECISIONS TP1–TP55, TPN-1–TPN-20, TASKS SA and T2.6/T6.6/T7.2/T7.11/T7.16, this LOG's tail. Only 05, 08, 09, 10, facts.yaml (append), tools tests, the lint allowlist, INVENTIONS and docs were edited; 01–04, 06, 07, 11 and F/ belong to the concurrent worker. Calls: **TPN-30 – TPN-37**. INVENTIONS **#99**.
+
+### Rules
+- **TP47 Root (B1):** 05 principle 2 (shelter because errands don't go there; TP18 line; the Attendant unaffected; pointer to the trap), 08 Wards line, 10 "What changes the night". Guard `root_trap` (sentence check, 05/08/09/10) fires on HEAD's 05, 08, 10 text; 0 now.
+- **T6.6 (B3):** 05 crowd rule scoped to the set-aside (Uninvited, Idle Attendant); "Nobody is out for longer than two rounds" cut; new *Everyone else's steel* (Sharp / Gentle / Merciless; detains exception; fire the exception) and the say-it line; Two Hundred People bullet and 09 "After midnight" and 10's two mercies are pointers; S13 and 05 General Features "a creature the fire drops". Guard `crowd_rule_scope` (5 hits on HEAD, 0 now). TPN-35.
+- **B4 Radiant beats (TPN-30), B5 faked cry (TPN-31; guard `wept_freeze`), S1 cap (TPN-32), S4 deny the congregation (TPN-33), S18 Attendant second turn clarified to match `s14.py` (TPN-34).**
+- S2, S3 (08 Buying Time line: nature, spells, slowing, cap), S5–S9, S13 (2014 box re-derived), S14, S15, S16, S17, S19, S21; P1–P9, P11–P15.
+- **T2.6 tracker (S11):** Table VIII–10 rows for turns lost to Delay this scene, Delay earned this scene by whom (third = threat), threats this scene, End tries; arrival cells carry the Delay beats. T6.7's live-card row and the void Last Rite box left out.
+- **TP21 / T7.11:** the clause ends at "hold her" (05); captain reword in 05 and 09 S3; guard `second_clause` (05/08/09/10). **T7.16:** 05 gate beat (Vell looks back; pointer to 07). **TP19:** 10 Vell "sword still on his back". **TP50:** 05 Thenya line and 10 Maiven *Thenya Gift* trait (feat wording only; bestiary_check 0). **TP53:** 09 Thenya proof (pack = Anha's story; slings in Raunu's rooms); 08 map caption "its rooms". **TP54:** 08 Table VIII–3 and Page Two, 09 S8 lock bullet. **TP55:** 08 Root key improvised at DC 15. 10:33 "to the death" line cut.
+
+### Skipped / owner
+- S12 (WP6: T6.2, T6.5, T6.7). S20 (OWNER, T8.4). A-P6 S7's title stands (TPN-37c). 07:493 waits on T7.20.
+
+### Checks (from `M/` unless noted)
+- First runs: three bare DCs (ward-steering rewritten; one 08 allowlist entry for the spells compression; 09 lock line names the check), the Deadly allowlist anchor updated for the new 2014 numbers, two long paragraphs split (05 Corval, *Everyone else's steel*), one S13 rule-copy hit (rephrased), a YAML double-quote `\b` bug in my own guard (fixed, then confirmed firing on HEAD text).
+- Final: `lint_5e.py --check` OK 0; `fact_check.py --check` OK 0; `bestiary_check.py` 0 mismatches; `pregen_check.py` 0 issues; `pytest tools -q` **481 passed** (450 before; 12 new in `TestPolishReviewB`, the rest the other worker's). Repo root `pytest research/oraga_5e_sim -q` 24 passed. `software/` docs-consistency + private-canon 42 passed. flow.json not touched by this pass.
+- Tasks marked ☑: T2.6, T6.6, T7.11, T7.16. Review files marked per finding. No commit or staging.

@@ -22,10 +22,12 @@ Three principles:
    sealing players into one — and let anyone who studied the wards (Agenda 5, the
    gallery) *steer* them: reading a Boranis ward is Standard for them, Hard for
    anyone else. Tables that found **the Root of the House** (Undercurrent A) hold
-   the master valve: from the Root, wards can be steered palace-wide, a dozen
-   guests can shelter behind the deepest crystal in Rekuzan — and the Uninvited
-   will not go down there — whatever the deep crystal is to them, they will not
-   cross its threshold. The module states this and does not explain it.
+   the master valve: from the Root, wards can be steered palace-wide, and a dozen
+   guests can shelter behind the deepest crystal in Rekuzan, because the Uninvited
+   go only where their errands are. One of them who crosses its threshold can be
+   caught there (⟨They trap one of the Uninvited⟩). They don't know that, and
+   neither does Raunu: nobody has seen it happen until creatures like these stand
+   in it.
 3. **The clock still runs.** The leash pulls east. From the first scream, the
    Uninvited have perhaps half an hour of story-time. They feel it; late in the
    attack they get faster, sloppier, more terrible and more *human*. The last bell
@@ -352,7 +354,7 @@ ordinary coin, for three tasks written in a case chained to the captain's belt:
 2. From the first bell of midnight to the last bell of Oraga, hold the Boranis
    gatehouse. Nobody in, nobody out.
 3. **The Second Clause**, which the captain alone has read: *if a woman in Thenya
-   wool comes out the front, hold her, and send word to the river.*
+   wool comes out the front, hold her.*
 
 They do not know who paid them. They do not know why. They are not cruel, and they
 are not monsters. They are exactly as dangerous as their terms, and their terms end

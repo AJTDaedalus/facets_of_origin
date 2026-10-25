@@ -195,7 +195,7 @@ chapter VIII). Your card is all your character knows about it.
 
 Five pregenerated characters at 4th level, one per agenda archetype. Their full sheets
 are in **chapter XI**; this is the table to deal from. The module is built for three
-players, and which three to deal is in chapter I (see chapter I, "Three at the Table").
+players, and which three to deal is in chapter I, "Three at the Table".
 
 | Guest | People | Class | Gift | Suggested agenda |
 |---|---|---|---|---|

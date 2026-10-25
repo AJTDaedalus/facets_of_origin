@@ -195,13 +195,13 @@ have come for — spends it on his wife's escape instead of his own life. He die
 his own ballroom floor. It is a choice, not a failure, and if the players later piece
 that together, let them.
 
-Veier, wounded, goes out through the gardens on Master Vell's arm, through the river
+Veier, wounded, goes out through the gardens with Master Vell, through the river
 gate, into the dark. Vell's boat takes her north up the tributary to the foothills,
 where he has horses waiting, and from there they ride west toward the mountains. She
 will not survive the night; her child will. No player character learns this last part
 unless your campaign continues into the aftermath —
-what they see, at most, is a pale man carrying a bleeding woman toward the water,
-moving as if he has rehearsed it for years.
+what they see, at most, is Vell holding off the Radiant on the terraces, and the boat
+pulling away from the river gate with her in it.
 
 By morning, three killers have vanished as if they had never existed, every great
 house prefers a version of events that blames a rival, the Church prefers no version

@@ -17,8 +17,8 @@ here. This adventure needs only what follows.*
 - **Rekuzan is nine walled districts grown together**, and House Boranis holds the
   Orthaen chieftaincy. The walls are grown pink crystal and they glow at dusk.
 - **There are no books.** The Church writes; everyone else remembers. A great
-  house's formal invitation is one of the two exceptions, which is why a discarded
-  one is worth stealing.
+  house's formal invitation is one of the two exceptions (the other is scratch-work
+  on a slate, wiped when done), which is why a discarded one is worth stealing.
 - **Everyone wears a knife.** Drawing it is the crime, and the room enforces that
   before the guards do.
 
@@ -149,7 +149,7 @@ you run chapter V.
 
 One more came through the door with them, and it is not a person: **the Attendant**,
 their master's servant, at the ball all night in the clothes of a noble's attendant
-and at their side from midnight. It can be beaten; chapter VII has it.
+and at their side from midnight. It can be beaten (card S14, chapter IX; who it is, chapter VII).
 
 **The task:** kill Raunu Boranis, kill Veier Nolonaire, and carry away the child she
 is about to deliver. The parents are the errand. **The child is the prize.** Something
@@ -212,12 +212,11 @@ for, and he spends that charge on his wife's escape instead of his own life. He 
 his own ballroom floor. It is a choice, not a failure, and if the characters later piece
 that together, let them.
 
-Veier, wounded, goes out through the gardens on Master Vell's arm, through the river
+Veier, wounded, goes out through the gardens with Master Vell, through the river
 gate, into the dark. Vell's boat takes her north up the tributary to the foothills,
 where he has horses waiting, and from there they ride west toward the mountains. She
-will not survive the night; her child will. No character learns this last part tonight. What they see, at most, is a pale man
-carrying a bleeding woman toward the water, moving as if he has rehearsed it for
-years.
+will not survive the night; her child will. No character learns this last part tonight. At most they see Vell hold off the Radiant
+on the terraces, and the boat pull away from the river gate with her in it.
 
 By morning, three killers have vanished as if they had never existed, every great
 house prefers a version of events that blames a rival, the Church prefers no version
@@ -226,7 +225,7 @@ runs the attack in detail, and chapter VI says what happens after dawn.
 
 The snakes change none of this. Whatever the factions do in the dark (and chapter IX
 lets them do a great deal), the pillars stand: Raunu falls by his own choice, Veier
-goes out through the river gate on Vell's arm, the Uninvited leave no trace, and no
+goes out through the river gate in Vell's boat, the Uninvited leave no trace, and no
 one is ever charged.
 
 ## What the Module Never Says
@@ -389,15 +388,13 @@ river gate at the bottom of the garden is to be unlocked at midnight. Not before
 questions.
 
 **The catch:** You have no idea who paid you, why, or what comes through a gate, in
-which direction, at midnight on Oraga. *(DM: a table that wants Veier out through this gate
-before midnight is refused, in character; see chapter IV, Undercurrent D.)*
+which direction, at midnight on Oraga.
 
 **At midnight:** You find out. *(DM: the stranger was Master Vell, securing Veier's
-escape route. The character who felt like a hired traitor all night was, in
-fact, the reason mother and child got out. Reveal this with care and full weight;
-few tables forget it. A table wanting a darker seam may
-rule the payer was scouting for the Uninvited instead; if so, Vell has a second route
-prepared, because he always does.)*
+escape route. The character who felt like a hired traitor all night was one of the
+reasons mother and child got out, and the one that let Vell spend his second way on
+something else. Give it its moment. A table that wants Veier out through this gate
+before midnight is refused, in character; see chapter IV, Undercurrent D.)*
 
 **Pays:** Heroic Inspiration when the gate stands unlocked at midnight, and XP by
 Table I–4. The fee is already in your purse: **30 GP** in coin of an old striking,

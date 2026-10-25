@@ -199,7 +199,9 @@ nothing in it is guarded the way the east wing is.*
 crystals taken in old settlements — including a heart-sized soul-crystal of uncommon
 beauty (Agenda 5). Warded by old crystalwork; the few real guards concentrate here.
 *(Wards here are teachable: a character who studies them learns how Boranis defenses
-behave — light, seals, alarms — which pays off desperately at midnight.)*
+behave — light, seals, alarms — which pays off desperately at midnight. It also tells
+them that the deepest work is not in the gallery at all but below the palace: a spark
+for Undercurrent A.)*
 
 **B8. Raunu's Study.** Locked, dark wing, second floor. Two years of a genius's
 solitude, and — players will look for papers and find none, because there are none
@@ -221,19 +223,10 @@ two ministers'.)*
 
 **B9. The East Wing — the Living Quarters.** Sealed, guarded, forbidden — and behind
 its doors, the warmest rooms in the palace, or the saddest, depending on when you
-learn what you learn. Warm light, a midwife's quiet traffic, and three finds:
+learn what you learn. Warm light, a midwife's quiet traffic, and one door kept shut:
+Veier's own. She is behind it with the midwife, and the household keeps that one door
+closed, courteously and absolutely; through it, she is a voice only. Two finds:
 
-- **Veier's rooms.** Thenya through and through: border-country wool over Orthaen
-  crystal, pressed mountain flowers, a sling and shot worn smooth with actual use.
-  And, telling its whole story without a word: her traveling pack. For the first
-  year (the servants' silence confirms it, if Anha talks) it stood packed by the
-  door, ready, a border woman's plain statement that she could leave whenever she
-  chose. It stands there still, out of habit or humor — but it is empty now, and
-  its contents have quietly become the room: the wool folded onto the marriage
-  bed, the flint on the mantel, the mountain flowers pressed and kept. She stopped
-  being ready to go home. *(For the Agenda 4 player, reading this room
-  changes everything about the errand — and makes the message they
-  carry feel suddenly heavier.)*
 - **Raunu's rooms.** Nearly bare — a soldier's cot in a palace, which fits nothing
   anyone believes about him. Two personal objects only. A small, flawed, badly-grown
   crystal, decades old, kept on the sill where the light finds it: his first, grown
@@ -391,8 +384,12 @@ their patron halfway down a wine-cellar stair.
 *There is a sealed place beneath the palace, and the master keeps it himself.*
 
 **The spark:** rumor 5 ("he slept a year in the root of the house"); or Anha's
-forbidden corridors — she is barred from sweeping the *lower* cellar stair, which
-makes no sense, because nothing is down there but wine; or a sharp eye in the study
+forbidden corridors — once she trusts someone she volunteers that she is barred from
+sweeping the *lower* cellar stair, which makes no sense, because nothing is down there
+but wine; or ward study (B7, or Agenda 5's gallery work), which shows that the deepest
+work lies below the palace; or Corval, befriended and complaining about his logistics,
+mentioning crates sent down a stair nobody but the master uses — what is down there,
+he does not know; or a sharp eye in the study
 (B8): the half-erased lattice diagram on Raunu's slate matches no door anyone has
 seen upstairs.
 
@@ -479,11 +476,12 @@ something vast — and it is also, quietly, why rumors 2 through 12 all exist:
 everyone senses he was *doing something*. Nobody guessed this.
 
 **At midnight:** three payoffs. The Root is the strongest-warded place in the
-palace — a safe room that can shelter a dozen guests through the whole attack. A
-ward-literate character can steer palace defenses from here (seal a corridor ahead
-of the Radiant; light a stairwell for the fleeing). And the Uninvited *will not
-enter it* — whatever the deep crystal is to them, they will not cross its
-threshold, a fact the module states and does not explain.
+palace, and a dozen guests can shelter there through the whole attack: the Uninvited
+go only where their errands are. A ward-literate character can steer palace defenses
+from here (seal a corridor ahead of the Radiant; light a stairwell for the fleeing).
+And one of the Uninvited who crosses its threshold can be caught there (Chapter V).
+They don't know that, and neither does Raunu: nobody has seen it happen until
+creatures like these stand in it. *(The Attendant walks in and out of it unaffected.)*
 
 ### Undercurrent B — The Household That Wasn't
 *Eighty servants left this palace two years ago. Where does eighty of anything go?*
@@ -529,11 +527,12 @@ finds the guards courteous, immovable, and *protective* rather than jailerly.
 
 **The trail:** the midwife, the third plate herself, glimpsed once crossing the gallery at
 the end of Movement II, moving like a woman who counts hours. Following her to the
-east wing doors is easy; only real ingenuity gets through them (Agenda 4's ring opens
-them a hand's width, no more). Inside: warm light, the guarded calm of a household holding its
-breath, and the living quarters' three finds (B9) — the unpacked traveling pack,
-the two slings, and the nursery with its slow-turning crystal mobile. The pregnancy
-is the thread's answer; the pack and the slings are its heart, and a table that
+east wing doors is easy; only real ingenuity gets through them. Agenda 4's ring gets no
+more than a hand's width of open door and a hand that takes it. A player who does get
+through finds warm light, the guarded calm of a household holding its breath, Veier's own
+door kept shut (she is behind it with the midwife), and the living quarters' two finds
+(B9): the two slings in Raunu's rooms, and the nursery with its slow-turning crystal
+mobile. The pregnancy is the thread's answer; the slings are its heart, and a table that
 reads those rooms stops investigating a scandal and starts guarding a family.
 
 **The find:** the pregnancy — the secret the whole ball is guessing at, and the
@@ -658,6 +657,9 @@ with thinning patience, when the delegation will be received.
 
 **Agenda beats:** Corval can be befriended (Agenda 1) by anyone who actually helps
 him — he is drowning in understaffed logistics and has forgotten what kindness costs.
+A befriended Corval complains about those logistics, and among the complaints are the
+crates he sends down a stair nobody but the master uses; what is down there, he does
+not know (a spark for Undercurrent A).
 Anha found in the kitchens (Agenda 8). The gallery wards studied (Agenda 5). The east
 wing's guarded doors scouted (Agenda 4).
 
@@ -749,9 +751,7 @@ something that is nearly a kindness, and the long walk back.
 **Agenda beats:** a summons is the only route to the host — Agenda 2's one close
 study, Agenda 1's one chance to simply *ask* (which gets a long look, and then,
 flatly: *"It taxes palaces to pay laborers. The palaces can afford it. That is the
-whole secret. You may tell the Circle I said so."*). Agenda 4 may ask after Veier —
-he goes still for a moment, then: *"She chooses her guests herself these days. If
-she chooses you, you will know."* Characters not summoned work the room — angling
+whole secret. You may tell the Circle I said so."*). Characters not summoned work the room — angling
 to *get* summoned is a fine scene in itself.
 
 **The omen:** three guests in spirit masks — gray, unornamented, beautiful in a way
@@ -816,7 +816,8 @@ carries word to her; if she chooses the messenger, and by default she does, the 
 opens a hand's width and her hand takes the ring. Her face stays unseen, and her
 answer comes back through the door. She does not speak of a child: the heir is found
 only through Undercurrent C. Nobody meets her face to face before the Crossing,
-whatever way they find into the wing.)*
+whatever way they find into the wing: inside, she is behind her own bedchamber door
+with the midwife, the household keeps that one door shut, and she is a voice only.)*
 
 **The omen:** the falconry mews behind the garden wing erupt — every bird screaming
 at once, then, worse, all at once silent. The gardens go quiet the way a forest does

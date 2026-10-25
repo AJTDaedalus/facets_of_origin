@@ -124,7 +124,7 @@ after X.
 | T2.3 | WP2 | done | Midnight Tracker, first version |
 | T2.4 | WP2 | done | Beats that vanish at three |
 | T2.5 | WP2 | done | Commit WP2 |
-| T2.6 | WP2 | open (after WP4–WP6) | Tracker refresh |
+| T2.6 | WP2 | done (polish B; T6.7's live-card row left to T6.7) | Tracker refresh |
 | T4.1 | WP4 | done | `facts.yaml`: Slow / Stop / End guards |
 | T4.2 | WP4 | done | Buying Time (Slow) rewrite |
 | T4.3 | WP4 | done | Chapter X "what spells buy" |
@@ -159,7 +159,7 @@ after X.
 | T6.3 | WP6 | open | Heat-4 rows, part 1 (incl. TP24 Circle beat) |
 | T6.4 | WP6 | open | Heat-4 rows, part 2 |
 | T6.5 | WP6 | open | A drop costs something before midnight |
-| T6.6 | WP6 | open | Lethal after midnight |
+| T6.6 | WP6 | done (polish B) | Lethal after midnight |
 | T6.7 | WP6 | open | Two cards live by default |
 | T6.8 | WP6 | open | Resources: chapel rest, Hit Die, potions |
 | T6.9 | WP6 | open | Update `skirm.py` / `chain.py` |
@@ -171,21 +171,21 @@ after X.
 | T6.15 | WP6 | open | S11 door XP, balustrade, non-lethal, *Sleep* |
 | T6.16 | WP6 | open | Commit WP6 |
 | T7.1 | WP7 | open | Propagate TP11 |
-| T7.2 | WP7 | open | The Root (TP8, TP17, TP18) |
+| T7.2 | WP7 | done | The Root (TP8, TP17, TP18) |
 | T7.3 | WP7 | open | The garden doors (TP9) |
 | T7.4 | WP7 | done | `facts.yaml`: midnight wing routes |
 | T7.5 | WP7 | done | Agenda 4's midnight note (TP13) |
 | T7.6 | WP7 | done (option C) | Dinner for Two, Undercurrent C, 07 Veier, S10 escort |
 | T7.7 | WP7 | done | Acting early: refusals and two payoffs (TP14) |
 | T7.8 | WP7 | done (TP39) | Acting early: which door Corval opens |
-| T7.9 | WP7 | open | Vell's sword (TP19) |
-| T7.10 | WP7 | open | "Both rivers, one spring" note (TP20) |
-| T7.11 | WP7 | open | Second Clause cut (TP21); the contract void |
+| T7.9 | WP7 | done | Vell's sword (TP19) |
+| T7.10 | WP7 | done | "Both rivers, one spring" note (TP20) |
+| T7.11 | WP7 | done (polish A + B) | Second Clause cut (TP21); the contract void |
 | T7.12 | WP7 | open | Draft midwife and minister positions (TP23) |
 | T7.13 | WP7 | ⛔ OWNER | Apply approved positions (TP23) |
 | T7.14 | WP7 | ☑ 2026-10-24 (TP46; `pregnancy_secret` guard added) | Aftermath: the Circle knows (TP24) |
 | T7.15 | WP7 | open | Vell's midnight route |
-| T7.16 | WP7 | open | Agenda 6's reveal |
+| T7.16 | WP7 | done (polish A + B) | Agenda 6's reveal |
 | T7.17 | WP7 | open (after WP4) | Endings box; the dream line |
 | T7.18 | WP7 | open | Agenda 3 completion; Agenda 2 mechanism |
 | T7.19 | WP7 | open | Patron's Errand; Corval's doubling; "publicly" |
@@ -440,7 +440,7 @@ T4.14).
 ### ☑ T2.5 Commit WP2 (T2.1–T2.4)
 - `Oraga 5e 3p pass: WP2 Midnight Tracker and DM-sheet numbers`.
 
-### ☐ T2.6 Tracker refresh *(L-029; open after WP4–WP6)*
+### ☑ T2.6 Tracker refresh *(L-029; open after WP4–WP6)*
 - **Do:** fill the tracker's threat-mark, Stop-used and End-attempt rows from WP4/WP5's final
   terms. Add the two live cards (T6.7) and the Last Rite's "rite kept this round" box. Check every
   number against T3.2's guard.
@@ -844,7 +844,7 @@ T4.14).
   existing place or mechanic.
 - **Checks:** SA. **Time:** 20 min.
 
-### ☐ T6.6 Lethal after midnight *(L-012, `DIAL`)*
+### ☑ T6.6 Lethal after midnight *(L-012, `DIAL`)*
 - **Do:** rewrite 09:549–552 and 05:232–235: normal dying rules in every snake and Bought fight.
   The crowd rule covers only creatures an Uninvited set aside. At Sharp, a heat-4 snake finishes a
   downed character who crossed its line. S13 (09:1698–1704) becomes "a creature the *fire* drops".
@@ -952,7 +952,7 @@ T4.14).
 - **Accept:** the guard is clean. Both editions' 07 carry the plan.
 - **Checks:** SA+F. **Time:** 20 min.
 
-### ☐ T7.2 The Root (TP8, TP17, TP18) *(L-025, L-050, L-051, `CANON` `FACTS`)*
+### ☑ T7.2 The Root (TP8, TP17, TP18) *(L-025, L-050, L-051, `CANON` `FACTS`)*
 - **Do:** first add `facts.yaml` fact `root`:
   - the Root is Raunu's gift-research workshop;
   - its effect on the Uninvited is a side effect, and they don't know to avoid it;
@@ -1050,7 +1050,7 @@ T4.14).
   narrative.
 - **Checks:** SA (+F). **Time:** 10 min.
 
-### ☐ T7.9 Vell's sword (TP19) *(L-052, `CANON`)*
+### ☑ T7.9 Vell's sword (TP19) *(L-052, `CANON`)*
 - **Do:** 07:520–522 and 566, and 10:2141–2142, change to: he holds the Radiant off without
   drawing it, and the sword stays on his back. Chapter V and the #66 read-aloud stand. **Facets
   edition:** F/05:170 already agrees. Check F/07:299–307 and `F/enemies/` Vell, and fix any
@@ -1060,12 +1060,12 @@ T4.14).
 - **Accept:** the guard is clean in both editions.
 - **Checks:** SA (+F). **Time:** 15 min.
 
-### ☐ T7.10 "Both rivers, one spring" note (TP20) *(L-055)*
+### ☑ T7.10 "Both rivers, one spring" note (TP20) *(L-055)*
 - **Do:** add a DM note at 04:692–696 that most tables won't see it. No echo elsewhere. 5e only
   (a DM note, not canon).
 - **Files:** `M/04_The_Ball.md`. **Checks:** SA. **Time:** 5 min.
 
-### ☐ T7.11 Second Clause cut (TP21); the contract void *(L-058, `CANON`)*
+### ☑ T7.11 Second Clause cut (TP21); the contract void *(L-058, `CANON`)*
 - **Do:**
   - **Cut "and send word to the river"**, so the clause ends at "hold her": 05:965, 07:749, and
     anywhere else.
@@ -1109,7 +1109,7 @@ T4.14).
   household move her).
 - **Files:** `M/08_Handouts.md`, `M/05_The_Longest_Night.md`. **Checks:** SA. **Time:** 10 min.
 
-### ☐ T7.16 Agenda 6's reveal *(L-054, `CANON`)*
+### ☑ T7.16 Agenda 6's reveal *(L-054, `CANON`)*
 - **Do:** reword 02:391–394 to "one of the reasons, and the one that let Vell spend his second way
   on something else". Add a gate beat in which Vell looks at that character, drawn only from
   07:556–560's printed "crack in the ice". **Facets edition:** apply the same reword if F/02's

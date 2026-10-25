@@ -53,7 +53,6 @@ Summons: the Questions, and What He Says") he gives the following, and no more:
   without threat, almost absently.
 - The Tithe of Hands, to anyone who simply asks: "It taxes palaces to pay laborers.
   The palaces can afford it. That is the whole secret. You may tell the Circle I said so."
-- Veier: "She chooses her guests herself these days. If she chooses you, you will know."
 - The Unmasking: "Something true." He does not say what.
 - Whether he is in danger, if friendly: he has spent two years arranging for the
   answer to be no, and tonight he is not certain the arranging was sufficient.
@@ -90,8 +89,11 @@ happy, genuinely and unfashionably, and rumor has no shelf for it.
 attendance. Nobody meets her face to face before the Crossing. Agenda 4's errand is
 done at the east wing doors: a guard carries word to her, the door opens a hand's
 width, her hand takes the ring, and her answer comes back through the door. Her face
-stays unseen (see chapter IV, "The Ring at the Door (B9)"). A character who gets into
-the wing another way does not meet her either. A voice through a door is a prize, not
+stays unseen (see chapter IV, "The Ring at the Door (B9)").
+
+A character who gets into
+the wing another way does not meet her either: she is behind her own bedchamber door
+with the midwife, the household keeps that one door shut, and it is her voice only. A voice through a door is a prize, not
 a schedule item.
 
 **Roleplaying Veier:** blunt to the point of comedy, funny in a dry border-country way,
@@ -112,13 +114,14 @@ doors) hears the following through the door (see chapter IV, "The Ring at the Do
 - She fears what her husband fears: something is coming for their family, and
   neither of them knows what, or when.
 
-She does not speak of a child. The traveling pack, the two slings and the nursery are
-B9's finds, and the heir is found only through Undercurrent C.
+She does not speak of a child. The two slings and the nursery are B9's two finds, the
+story of her traveling pack is Anha's to tell, and the heir is found only through
+Undercurrent C.
 
 **At the Unmasking:** in the east wing when the lights die, the corridors sealing
 themselves behind her: her husband's two crystals working. Wounded once, cleanly,
 by the Radiant, she stays upright anyway and goes down the private stair and out through the gardens
-on Vell's arm (the Crossing, chapter V). The cut will not close: healing eases her and
+to Vell's boat (the Crossing, chapter V). The cut will not close: healing eases her and
 keeps her on her feet, but the wound does not knit, and nothing says why. If her gift matters at your table (a
 bonded loved one in mortal peril), it flares once, without training or
 explanation; spend it on a character who bled
@@ -213,7 +216,10 @@ payoff (chapter V, "Corval. The stairs.").
 **Roleplaying Corval:** thin, upright, old, magnificent under pressure, doing the work of six
 chamberlains. Bribing Corval is impossible, with no check for it at
 all; tell the players so. Real help with the wine crisis or the escalating seating
-feud earns more than gold buys: gratitude, gossip, and doors. Deceiving him about
+feud earns more than gold buys: gratitude, gossip, and doors. A befriended Corval
+complains about his logistics, and among the complaints are the crates he sends down a
+stair nobody but the master uses; what is down there, he does not know (chapter IV,
+Undercurrent A). Deceiving him about
 household matters takes a DC 20 Charisma (Deception) check; about anything else he
 is too tired to check.
 
@@ -282,12 +288,16 @@ gets nothing) learns the following:
   all together.
 - She has heard the master's voice in empty rooms.
 - There are corridors she is forbidden to sweep. One is the lower cellar stair,
-  which makes no sense, because nothing is down there but wine.
+  which makes no sense, because nothing is down there but wine. Once befriended, she
+  offers this unprompted.
 - For two years, supplies have gone down the lower stair and never come back up:
   candles by the crate, lamp-oil, and once a crate from the eastern coast, packed in
   salt, that hissed when it shifted. Once befriended, she offers this unprompted.
 - The skeleton staff are paid triple and forbidden to send word home.
-- For Veier's first year, the traveling pack by Veier's door stood packed (area B9).
+- For Veier's first year, her traveling pack stood packed by her door, ready, a
+  border woman's plain statement that she could leave whenever she chose. It stands
+  there still, out of habit or humor, but it is empty now. She stopped being ready to
+  go home.
 - She knows the service passages. With her, finding the way takes no check (area B10).
 
 **If it comes to steel:** noncombatant (see chapter X, "If It Comes to It"). When the
@@ -366,9 +376,8 @@ all of this:
 **Wants:** Raunu's next decree, before it lands on her margins. **Fears:** an heir,
 a dynasty of Raunus: Raunu's politics outliving him, and the chieftaincy she has
 priced (below) never coming. That is why Movement IV turns her polite loathing into
-something with a horizon. Her knife who trailed Corval in Movement II saw him carry a
-third tray up himself, and the toast's two plates and "two years in the keeping"
-finish the sum; so she sends a knife to lean on Anha (card S7). **Secret:** the Circle has already gamed a Vorlain
+something with a horizon. In Movement II her knife saw Corval carry a third tray up himself;
+the toast's two plates and "two years in the keeping" finish the sum, and she sends a knife to lean on Anha (card S7). **Secret:** the Circle has already gamed a Vorlain
 chieftaincy and priced it attractive; she is here tonight to check the arithmetic,
 not to act on it. (She would be horrified to be called a conspirator; she is merely
 prepared, like her host.)
@@ -490,8 +499,11 @@ plates, a promised midnight pronouncement, and still no kinswoman. Her
 formal request for an audience, declined by a miserable Corval, is the last
 diplomatic thing she does tonight. From there she is one bad hour from going over
 the east wing wall herself, which makes her the Agenda 4 character's natural ally or
-runaway problem. **At the Unmasking:** she goes toward the east wing,
-immediately, and dies there unless somebody competent goes with her.
+runaway problem. **At the Unmasking:** she goes toward the east wing, immediately.
+
+She carries the Thenya gift too (to reach, find or protect someone she
+loves who is in danger), and that is why she heads straight there when the lights die.
+She dies there unless somebody competent goes with her.
 
 **What Maiven Knows:** a character who carries Agenda 4, or who wins her trust,
 learns the following:
@@ -531,9 +543,9 @@ character asks about it, he says only, "An inheritance," and means it.
 *(DM truth: unwrapped, the blade would release the screams of every soul it has
 taken, enough to drop most of a ballroom where they stand. He refuses to
 unwrap it. What it cost him to be given such a gift, the module does not say,
-and the white cloth stays on all night, including at the Crossing, where he
-fights the Radiant with it still bound. If the characters notice that (a man dueling
-something unbeatable while deliberately not using his weapon), let them notice.)*
+and the white cloth stays on all night. At the Crossing the sword stays on his back
+while he holds the Radiant off. If the characters notice (a man holding off something
+unbeatable without touching his weapon), let them notice.)*
 
 **Roleplaying Vell:** courteous, brief, and finished. Every conversation with Vell ends
 when he decides, somehow without rudeness. He answers questions with smaller
@@ -577,7 +589,7 @@ water takes him.
 avoid it. His block in chapter X ("Master Vell") has real numbers, set so high that no
 party at this ball can drop him before the boat clears, and no attacks. It is an exit, not a
 weapon: he leaves, and nobody quite remembers which way. The one exception is the Crossing, where
-he holds the Radiant with the sword still wrapped. That is chapter V's to run, and it
+he holds the Radiant off with the sword still on his back. That is chapter V's to run, and it
 is never the party's fight.
 
 ### The Uninvited — the Three Gray Masks
@@ -768,7 +780,7 @@ than the case.*
 explains everything he does tonight. **Fears:** exactly one thing: that somebody has
 used the Bought's name for something the Bought would not have signed, which he began
 to suspect around the time the second district caught. **Secret:** the Second Clause:
-"If a woman in Thenya wool comes out the front, hold her, and send word to the river."
+"If a woman in Thenya wool comes out the front, hold her."
 He does not know who she is or why, and he has been thinking about it all night.
 
 **Roleplaying the Captain:** a man of business who has been shot at, and it shows in both directions.
@@ -782,11 +794,13 @@ his second he starts talking while the attacks continue.
   city with his name unspoiled.
 - **What shifts him:** the fires. He contracted for diversions, not for this, and
   a party who says so plainly is telling him something he already half knows. Also:
-  money, honestly offered, in front of witnesses.
+  money, honestly offered, in front of witnesses. And once no woman in Thenya wool is
+  coming out the front, the clause he was really paid for is dead; he won't hold a
+  gate for a fee's leftovers.
 - **What deal he honors:** all of them, permanently. A bought-out captain **will not
   resume the fight tonight for any inducement.**
 
-> **DM Note — the factor**
+> **DM Note — who hired them**
 >
 > The captain never learns who hired him, and neither does the
 > module. If a table asks him directly he will tell them the truth, which is that he

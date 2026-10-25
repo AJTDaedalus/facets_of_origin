@@ -337,4 +337,4 @@ def test_chapter_v_general_features_points_to_the_maps():
 def test_chapter_iv_areas_point_to_their_map(area, mapno):
     text = (MODULE / "04_The_Ball.md").read_text(encoding="utf-8")
     body = text.split(f"\n**{area}. ")[1].split("\n**B")[0]
-    assert re.search(rf"(?i)see map VIII–{mapno}\b", body)
+    assert re.search(rf"(?i)(?:see|, and) map VIII–{mapno}\b", body)

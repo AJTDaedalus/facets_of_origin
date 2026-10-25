@@ -289,8 +289,8 @@ correction, because correcting a player mid-scene costs more than the error did.
 ## Safety and the Table
 
 This adventure contains violence erupting inside a celebration, the death of a host in
-front of his guests, and mortal danger near (never to, and never on-screen) a woman in
-late pregnancy and a newborn. Say so during session zero. Agree on lines and veils
+front of his guests, and a woman in late pregnancy who is wounded during the attack; what
+happens to her and the child afterward is left offscreen. Say so during session zero. Agree on lines and veils
 before play; the pregnancy is central to the plot and cannot be cut, but every moment of
 harm can be handled by cutaway. The module's own camera never lingers: when the worst
 happens, it happens at the edge of the frame, glimpsed through a crowd.

@@ -34,8 +34,8 @@ carries Agenda 4. Never the gate.
 Draunel's appointment (S9), and at the half-bell Thenya's slingers try the wall (S10).
 The bells of midnight ring at the break, before the Unmasking. The bells of Oraga start
 tolling when the first guests reach the Gatehouse Court, and they are only a warning.
-The last bell of Oraga rings when the gate is decided, or when S3's sect-guard clock
-fills (at the end of Movement VII if no character gets there). It is the leash's hard
+The last bell of Oraga rings when the front gate is decided, or when S3's sect-guard
+clock fills (at the end of Movement VII if no character gets there). It is the leash's hard
 limit: by then the three are gone, finished or not.
 
 **Tells to show** *(Table V–6 in chapter V has them all. Each tell witnessed or
@@ -55,16 +55,16 @@ once before midnight.)*
 
 | Who | At the lights | Then |
 |---|---|---|
-| **The Wept** | The dais (B2), for Raunu | Through the wards to him: she reaches him on her **4th turn** (3rd with four characters). Delay buys him rounds |
-| **The Radiant** | B9, for Veier | Private stair, which he reaches at the **fall + 3 beats** → garden → **the Crossing** (B5), Movement VI. Vell holds him there once |
-| **The Hollow** | The main doors (B2) | Herds the crowd back in. His End opens the doors |
+| **The Wept** | The dais (B2), for Raunu | Through the wards to him: she reaches him on her **4th turn** (3rd with four characters). Delay buys him rounds, three at most a scene |
+| **The Radiant** | B9, for Veier | Private stair, which he reaches at the **fall + 3 beats**, plus a beat per Delay spent (three at most) → garden → **the Crossing** (B5), Movement VI. Vell holds him there once |
+| **The Hollow** | The main doors (B2) | Herds the crowd back in. His End opens the doors; so does Raunu's fall (he turns east) |
 | **The Attendant** | Beside the three | Idle until the party gets in the way; then Focused whenever one of the three has no Delay → **S14** |
 | **Raunu** | The dais | Spends his last charge sealing doors behind Veier; dies there, by his own choice |
-| **Veier** | B9 | Wounded once; down the private stair on Vell's arm; out the river gate (**by default, even if no player character is there**) |
+| **Veier** | B9 | Wounded once; the household brings her down the private stair to Vell; out the river gate (**by default, even if no player character is there**) |
 | **Vell** | — | Service passages → garden stair → the river gate (B5) |
-| **Corval** | The Court, sent to the stairs by Raunu's last order | Gathers the characters nearest him (those who helped him first) → service stair or garden stair, in front of the Radiant. A guide, never a fighter; never reaches Veier. Alive, he is Agenda 1's payoff |
+| **Corval** | The Court, sent to the stairs by Raunu's last order | Gathers the characters nearest him (those who helped him first) → service stair, or up the garden stair while the terrace is empty, in front of the Radiant; then back to the head of the service stair, holding the wing's service door for his household. A guide, never a fighter; never reaches Veier or meets Vell. Alive, he is Agenda 1's payoff |
 | **The nine honor guards** | Seven to the dais, and stay; two hold the east-wing doors (Table VIII–7) | — |
-| **The Bought** | The outer gate shut from outside (B12) | Hold it until the gate is decided (S3) |
+| **The Bought** | The outer gate shut from outside (B12) | Hold it until the front gate is decided (S3) |
 | **Corro** | Moving three seconds before the dark | Follow him and live. S11 if Phern heat is 3–4 |
 | **Maiven** | Toward the east wing, whatever her heat | Dies there unless somebody competent goes with her |
 | **Vorlain** | B3 | Hauls guests out of the burning banquet gallery. S13 if Draunel heat is 3–4 |
@@ -91,8 +91,12 @@ secret**: no faction learns of the child unless a player character tells them.
   drops are dying. Whoever deals an Uninvited's last blow may be thrown when it returns.
 - **Buying Time.** A Delay die per Uninvited, on the table. Each point = one turn of
   movement lost. A clever trick with the room, the crowd, a door, a lie: the skill that
-  fits, DC 13 → 1 Delay (DC 15 the second time; never a third). A Stop → 2 Delay.
-  20+ damage to one in a round → 1 Delay (30+ with four characters, 40+ with five or at 5th level). The Attendant's *Clears the Way*: −1 Delay for
+  fits, DC 13 → 1 Delay (DC 15 the second time; never a third); on its nature, 2 Delay.
+  Spells: the spell's own attack or save, else the caster's spellcasting ability vs DC 13;
+  each spell once per Uninvited. A Stop → 2 Delay. 20+ damage to one in a round → 1 Delay
+  (30+ with four characters, 40+ with five or at 5th level). Two turns at half Speed (or
+  20 ft. or less) → 1 Delay. At most 3 turns lost per scene; past that, points still free
+  people. The Attendant's *Clears the Way*: −1 Delay for
   a turn's action (Idle, when nobody attacked it since its last turn; Focused, its second turn).
 - **The Attendant (S14).** *Idle:* rusty, one attack with Disadvantage. *Focused* (at
   the start of its turn, if one of the three in the scene has no Delay): two turns a
@@ -108,7 +112,9 @@ secret**: no faction learns of the child unless a player character tells them.
   "It's drifting."
 - **Stop** (see chapter V, "The Fractures"). No tell needed. Action within 30 ft.: an
   ability check using the skill the words fit, the DC is 15, +2 per tell seen (+4 at
-  most); or three tricks on one's nature in a scene; or a child crying, for the Wept.
+  most); or three tricks on one's nature in a scene; or a real child crying, for the
+  Wept (a faked cry is a trick). For the Radiant, denying him his congregation is a deed
+  that opens the check.
   → 2 Delay, and the one who landed it is a threat. A miss by 4 or less still lands,
   after one blow or word. Never Intimidation on the Hollow. Once per scene each.
 - **End.** Two or more tells, the same check, and the method: Mercy (the Wept),
@@ -118,7 +124,9 @@ secret**: no faction learns of the child unless a player character tells them.
 - **Wards.** Steer: action, a DC 13 Intelligence (Arcana) check for anyone who studied
   them, a DC 18 Intelligence (Arcana) check otherwise; each ward-point once tonight;
   against an Uninvited, 1 round = 1 Delay. From the Root (B11): palace-wide with a DC 13
-  Intelligence (Arcana) check, shelter for a dozen, and the Uninvited will not enter.
+  Intelligence (Arcana) check, and shelter for a dozen (the Uninvited go only where their
+  errands are). They don't know to avoid it: one lured in is caught (see chapter V,
+  ⟨They trap one of the Uninvited⟩).
 - **Crystal charges** within 30 ft. of an Uninvited: a DC 13 Charisma check to release,
   or it goes dark and is spent.
 - **Two hundred people.** One guest per 5-ft. square of crowd (AC 10, 4 HP); a
@@ -130,7 +138,7 @@ secret**: no faction learns of the child unless a player character tells them.
   to the gate-walk (a DC 13 Strength (Athletics) check); the sergeant parleys at the grille. The Blades quit when the sergeant
   falls **or** half are down. The fire clock ticks only on rounds nobody fights or
   talks. Void the contract (with proof, a DC 13 Charisma (Persuasion) check to the sergeant;
-  the captain needs no check), buy them out, or outlast them. **The last bell rings after the gate is
+  the captain needs no check), buy them out, or outlast them. **The last bell rings after the front gate is
   decided**, or at the end of Movement VII if no character reached it (ending 3, offstage).
 
 **Beats that need an agenda.** With three players, five agendas stay in the deck, and
@@ -141,8 +149,8 @@ galleries in Movement VII only with Agenda 8, and S11's other door is Anha's or 
 tonight. The truth of the unlocked
 river gate is Agenda 6's alone. A snake whose "to 0" is an agenda nobody carries (the
 Circle, the Church, Draunel) cools on its −1 boxes instead (Table VIII–5). The Root's
-key, the slate in B8, needs no Thieves' Tools: S8's wardens open the study door (and wipe the slate a round later), or a
-DC 18 Intelligence (Arcana) check improvises the key from ward-study.
+key, the slate in B8, needs no Thieves' Tools: S8's wardens open the study door (and wipe the slate a round later), an Orthaen's gift
+can work its crystal lock (chapter IV, B8), or a DC 15 Intelligence (Arcana) check improvises the key from ward-study (chapter IV).
 
 **Table VIII–3: Key DCs**
 
@@ -153,7 +161,7 @@ DC 18 Intelligence (Arcana) check improvises the key from ward-study.
 | Identify a masked guest you know / have only heard described | 15 / 20 Wisdom (Insight) or Wisdom (Perception) |
 | A borrowed invitation at the gate / one with the wrong name on it | 13 / 18 Charisma (Deception) |
 | Slip past a posted guard · a hire's livery and a confident walk · an honest story | 15 Dexterity (Stealth) · 10 Charisma (Deception) · 13 Charisma (Persuasion) |
-| A locked door in the private palace · the study's crystal lock | 15 / 18 Dexterity (Thieves' Tools) |
+| A locked door in the private palace · the study's crystal lock | 15 / 18 Dexterity (Thieves' Tools); an Orthaen can work the crystal lock with the gift in place of the tools (chapter IV, B8) |
 | The service passages without a guide (first time only) | 15 Wisdom (Survival) |
 | Deceive Corval about the household · bribe him | 20 Charisma (Deception) · impossible |
 | Deceive Raunu · move Vell | 25 Charisma (Deception) · 25 Charisma (Deception, Intimidation, or Persuasion) |
@@ -218,7 +226,7 @@ gate. A profile gives the drops.*
 ![Map VIII–5: The east wing and the service run](maps/map_viii_5_east_wing.svg)
 
 *The stair from the east doors, the cleared corridor and
-the double doors, the wing's corridor and its three finds, the garden stair, the service stair
+the double doors, the wing's corridor and its rooms, the garden stair, the service stair
 beside the doors with the wing's service door, the service run, and the garden
 below the wing.*
 
@@ -282,8 +290,8 @@ the half-bell in Movement V (S10), so the only card live in the dark by default 
 | Anha | B10 | B10 | B10 | B10, at the service door | B10 |
 | Vell | B1, unmemorable | B5 gardens, once | B2 edge | B2 edge | B5 — the river gate |
 | Tavva | B1, hired livery | B10, learning the halls | her scout walks the B7 corridor | B3, unremarkable | dark corridors — staging |
-| The Uninvited | — | — | B2 edge, arriving | B2 edge, still | Wept: the east-wing doors · Radiant: the Dance · Hollow: the exits |
-| The Attendant | B0/B1, in the line | B2, at a crystal wall | B4 line | B2, following the music | B2, edge of the Dance, watching the party |
+| The Uninvited | — | — | B2 edge, arriving | B3 for the blessing; then the Radiant is gone a while (the mews) | Wept: the east-wing doors · Radiant: the Dance · Hollow: the exits |
+| The Attendant | B0/B1, beside the line | B2, at a crystal wall | B4 line | B2, following the music | B2, edge of the Dance, watching the party |
 
 **Table VIII–7: The Honor Guard, Post by Post** *(the nine; "once the line is in" means
 from the moment the last guest is through the gate)*
@@ -452,11 +460,14 @@ and on card S3. Numbers are for three characters, with four in parentheses.*
 | | The Wept | The Radiant | The Hollow |
 |---|---|---|---|
 | **Errand** | Raunu, on the dais (B2) | Veier, from the east wing (B9) | The main doors (B2) |
-| **Arrives** | At Raunu on her 4th turn of moving (3rd with four): ☐ ☐ ☐ ☐, plus a turn per Delay spent | The garden stair at Raunu's fall + 3 beats: ☐ ☐ ☐. The Crossing: ☐ ☐ ☐ | Holds until Raunu falls, or his End lands: ☐ turned east |
+| **Arrives** | At Raunu on her 4th turn of moving (3rd with four): ☐ ☐ ☐ ☐, plus a turn per Delay spent | The garden stair at Raunu's fall + 3 beats: ☐ ☐ ☐, plus a beat per Delay spent in the east wing. The Crossing: ☐ ☐ ☐ | Holds until Raunu falls, or his End lands: ☐ turned east |
 | **Delay earned** (fill a circle; cross it out when spent) | ○ ○ ○ ○ ○ ○ | ○ ○ ○ ○ ○ ○ | ○ ○ ○ ○ ○ ○ |
+| **Turns lost to Delay this scene** (three at most; clear at a new scene) | ☐ ☐ ☐ | ☐ ☐ ☐ | ☐ ☐ ☐ |
+| **Delay earned this scene, by whom** (initials; a third time marks a threat) | | | |
+| **Threats this scene** (initials; the mark lasts the scene) | | | |
 | **Tricks that worked** (DC 15 the second time; never a third) | | | |
 | **Tells seen** (write each witness's initial in the box) | ☐ the pages · ☐ the offering · ☐ the cradle-song · ☐ the omen · during: ☐ a child crying · ☐ the woman's face | ☐ the blessing · ☐ "Whom do you serve?" · ☐ the dance · during: ☐ staged kills · ☐ posing when watched | ☐ beside an exit · ☐ flat small talk · ☐ watching Anha's people · during: ☐ holds, never advances · ☐ flinching from ward-fire |
-| **Stop** (once a scene) · **End** | Stop ☐ ☐ ☐ · Mercy ☐ | Stop ☐ ☐ ☐ · trapped ☐ | Stop ☐ ☐ ☐ · Permission ☐ |
+| **Stop** (once a scene) · **End** (tried again only after a new tell) | Stop ☐ ☐ ☐ · Mercy tried: · landed ☐ | Stop ☐ ☐ ☐ · trapped ☐ | Stop ☐ ☐ ☐ · Permission tried: · landed ☐ |
 | **Last blow** (thrown when it returns) | | | |
 
 **Table VIII–11: The Midnight Tracker — Everything Else**
@@ -468,7 +479,7 @@ and on card S3. Numbers are for three characters, with four in parentheses.*
 | Habits the table saw | ☐ the waiting · ☐ crystal and light · ☐ music that changes | +2 to a distraction |
 | Tricks tried on it | | A repeat has Disadvantage and no bonus; never a third time |
 | Furniture to it | | Until they next attack it or interfere with the three |
-| **Ward-points** | Dais ○ ○ ○ ○ · doors ○ ○ · sealed doors held: | Each steers once tonight (Table V–4 for the doors) |
+| **Ward-points** | Dais ○ ○ ○ ○ · doors ○ ○ · sealed doors held: | Each steers once tonight (Table V–4 for the sealed doors) |
 | The Root (B11) | ☐ found | Any ward-point in the palace, from below |
 | **Raunu** | ☐ falls · ☐ saved | The main doors open; the bells of Oraga begin |
 | **The leash** | ☐ the boat is out of reach | All three go, finished or not |

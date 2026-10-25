@@ -442,8 +442,9 @@ never into Veier's room: the inner guards turn them back (S10). Or they can stan
 their way, and it is a fight nobody wants.
 
 **Turn it.** Proof of Veier ends the line:
-the ring delivered and an answer brought back (Agenda 4), or any character who
-has been inside B9 telling Maiven what the empty traveling pack means. Heat to 0; she
+the ring delivered and an answer brought back (Agenda 4), or a character telling
+Maiven what the empty traveling pack means (Anha's story) or what the two slings in
+Raunu's rooms say. Heat to 0; she
 stays at the doors and does not climb.
 
 **Snake on snake.** None; nobody at this ball
@@ -485,7 +486,7 @@ out of wanting it, and stays at 0 unless something new happens to it.
 | **House Draunel** ☐☐☐☐ | 1 | The toast *(automatic)* · Agenda 3, if one of the characters carries it, refused or failed · Iron 2 stopped without Draunel losing face (he reaches for the next iron) · S9's clock filled, on the terrace or offstage (card S9) | −1 if Draunel is embarrassed in front of guests · **to 0:** Agenda 3's "understanding" delivered | **S13** — the arrest in the fire |
 | **House Boranis** ☐☐☐☐ | 0 | Vorlain baited, or got drunk, by one of the characters · the appointment accepted *(automatic, Mv IV)* · Draunel's heat reaches 3 · a cousin beaten in public (S6) · S9's clock filled, on the terrace or offstage (card S9) | −1 each time the party helps Essin keep Vorlain sober and unbaited · −1 if S6 ends without a shout · −1 if S9 ends with nobody drawing · **to 0:** Essin warned of the appointment before Mv IV | **S13** — the cousins fight for Vorlain *(only if Draunel's heat is 3–4 too; otherwise they simply go into the fire with him)* |
 | **Phern** ☐☐☐☐ | 0 | Once each in Mv II, III and IV *(automatic — the omens)* | −1 if a character walked the room with Corro and took him seriously · −1 if Corro trusts a character enough to take an instruction at midnight | **S11** — the door held for Corro alone |
-| **The Thenya** ☐☐☐☐ | 1 | The toast *(automatic)* · the audience refused *(automatic, Mv IV)* · a character lies to Maiven, or refuses her and says so | −1 if a character promises to go with her at midnight and means it · **to 0:** proof of Veier — the ring delivered and an answer brought back, or anyone who has been in B9 telling her what the empty traveling pack means | **S10** in Mv V — the wall. *(At midnight she goes toward the east wing whatever her heat.)* |
+| **The Thenya** ☐☐☐☐ | 1 | The toast *(automatic)* · the audience refused *(automatic, Mv IV)* · a character lies to Maiven, or refuses her and says so | −1 if a character promises to go with her at midnight and means it · **to 0:** proof of Veier — the ring delivered and an answer brought back, or anyone telling her what the empty traveling pack or the two slings mean | **S10** in Mv V — the wall. *(At midnight she goes toward the east wing whatever her heat.)* |
 
 **If the table does nothing at all**, midnight arrives like this: the Circle at 2, the
 Church at 2, Draunel at 2, House Boranis at 1, Phern at 3 and the Thenya at 3. The
@@ -577,10 +578,9 @@ None of them attacks a creature at 0 Hit Points, and a character who drops in
 a snake fight before the bells is **Stable at once**, and wakes with 1 Hit Point when
 the scene ends. No Death Saving Throws.
 
-**After midnight** damage is lethal as written, and Death Saving Throws apply, but no
-snake finishes a downed character: they all have somewhere else to be. And the palace
-is full of people: the crowd rule in "Down, Not Out" holds in every snake fight after
-the bells (see chapter V, "Down, Not Out").
+**After midnight** the ordinary rules for dying apply in every snake fight, and the
+crowd rule does not reach them. Who finishes a downed character, at each setting of the
+dial, is in chapter V (see chapter V, "Down, Not Out", *Everyone else's steel*).
 
 ---
 ## S1. The Seating Feud
@@ -886,7 +886,8 @@ endings. When it starts to go that way, reach for an out.
 not meant to spread; the palace is burning): a DC 13 Charisma (Persuasion) check to
 the sergeant through the grille, no check to the captain, who already half knows. Or the
 named target already gone — Veier is out by the river gate, and a party that knows it
-can simply say so.
+can simply say so. The clause the captain was really paid for is dead, and he won't
+hold a gate for a fee's leftovers.
 
 Or a better offer, made in front of the sergeants: a Circle
 magnate, a Draunel, a Boranis cousin all have coin and reasons, and the snakes' coin
@@ -1295,7 +1296,8 @@ and the fight plays well under Low. The clock is what the party is racing.
   light is Heavily Obscured to the wardens; the wardens at the door are in plain view.
 - *The crystal lock* is Boranis work. Reading what the wardens are doing to it, or
   sealing it against them, is a DC 15 Intelligence (Arcana) check, with Advantage for
-  the Orthaen Gift, and for Agenda 5's ward-student.
+  the Orthaen Gift, and for Agenda 5's ward-student. An Orthaen can also work it open with
+  the gift in place of Thieves' Tools, with the same DC 18 Dexterity check (chapter IV, B8).
 - *Inside the study.* The great table and its relief give Half Cover. A creature shoved
   into the instruments breaks something nobody can name, and you describe the
   sound it makes.
@@ -1540,8 +1542,8 @@ goes. The fight ends the instant the party stops standing between them and the w
   ledge, never into Veier's room: the inner guards turn them back. The fight is over
   the moment the party stops standing in the way, and the half-bell clock keeps
   running.
-- Proof of Veier. Anyone who has been inside B9 tells Maiven what the unpacked
-  traveling pack means, or what the two slings say. No check. The rope comes down.
+- Proof of Veier. Anyone who tells Maiven what the empty traveling pack means (Anha's
+  story), or what the two slings in Raunu's rooms say. No check. The rope comes down.
 - Promise to go with her at midnight, and mean it: a DC 13 Charisma (Persuasion) check, or no
   check for a character she already trusts.
 - Warn them about the guard on the other side of that window. A DC 13 Wisdom (Insight)
@@ -1767,10 +1769,10 @@ comes down, and whoever is still inside is still inside.
 - *The fire* at the far end. A creature that enters it or starts its turn there must
   make a DC 13 Dexterity saving throw, taking 7 (2d6) Fire damage on a failed save, or
   half as much damage on a successful one. **The fire never finishes
-  anyone.** A creature that drops in the gallery takes no more Fire damage while it is
-  down: at the end of that round a guest or a servant drags it clear to the doors, where
-  it is Stable, and the crowd rule (see chapter V, "Down, Not Out") gets it up at the
-  start of the round after, if nobody has helped it sooner.
+  anyone.** A creature the fire drops takes no more Fire damage while it is down: at the
+  end of that round a guest or a servant drags it clear to the doors, where it is
+  Stable, and it comes round as the crowd rule says (see chapter V, "Down, Not Out"),
+  if nobody has helped it sooner. A blade's drop is dying as usual.
 - *The smoke.* Heavily Obscured beyond 10 feet; a creature that starts its turn in the
   thick of it must succeed on a DC 10 Constitution saving throw or lose its action
   coughing.
@@ -1879,13 +1881,13 @@ characters (1,500).
 Idle, its offense drops to one blow at Disadvantage, but its
 defense does not move, so by the yardstick it is about CR 5 (1,800 XP), just over
 High. The clock is what keeps it there:
-nobody gets through 178 Hit Points in the rounds an errand takes, and every one of
+few tables get through 178 Hit Points in the rounds an errand takes, and every one of
 those rounds it is clearing the way. Award the full 3,900 XP however it is got out of
 the way.
 
 It is meant to be the hardest fight of the night, won by the table that plays the
-game: hard, close, and dangerous, because a Focused Attendant can kill. Let your table manner carry that,
-not those words: the hints below are how. A table whose characters are built to
+game: hard, close, and dangerous, because a Focused Attendant can kill. Play it that way at
+the table; the hints below show how. A table whose characters are built to
 hit hard can out-slug it; give such a table the "A table built to hit hard" line under
 Adjusting the Encounter.
 
@@ -1937,7 +1939,7 @@ trick Advantage. The table chooses whose trick it is.
 
 *Results.*
 - **Success while it is Focused:** its **focus breaks**: it is Idle until the start of
-  its next turn. That counts.
+  its next turn, which may be its second turn this round. That counts toward the four.
 - **Succeed by 5 or more while it is Focused:** its focus breaks **and** it loses
   its next turn, doing nothing at all. That counts.
 - **Success while it is Idle:** the distractor becomes furniture to it until they next

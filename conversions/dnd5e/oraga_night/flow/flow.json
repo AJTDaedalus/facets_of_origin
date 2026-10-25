@@ -172,7 +172,7 @@
    "label": "B9. The East Wing",
    "phase": "m2",
    "kind": "room",
-   "summary": "Sealed and guarded. Veier's emptied pack, two slings, and the nursery. Agenda 4 is done at its doors; the rooms behind are reached only by Undercurrent C or force.",
+   "summary": "Sealed and guarded. Two finds: the two slings in Raunu's rooms, and the nursery; Veier stays behind her own shut door. Agenda 4 is done at its doors; the rooms behind are reached only by Undercurrent C or force.",
    "ref": "04_The_Ball.md#the-private-palace (B9)",
    "optional": true,
    "faction": null
@@ -192,7 +192,7 @@
    "label": "B11. The Root of the House",
    "phase": "m2",
    "kind": "room",
-   "summary": "Hidden laboratory beneath the cellars: recall-lattices, the skeleton, the orrery. The Uninvited will not enter.",
+   "summary": "Hidden laboratory beneath the cellars: recall-lattices, the skeleton, the orrery. Shelter for a dozen; an Uninvited who crosses its threshold can be caught there, though nobody knows it.",
    "ref": "04_The_Ball.md#undercurrent-a--the-root-of-the-house-if-you-have-time",
    "optional": true,
    "faction": null
@@ -292,7 +292,7 @@
    "label": "Undercurrent A: The Root of the House",
    "phase": "m2",
    "kind": "scene",
-   "summary": "Barred stair, tally-cords, the wall seam, the slate key. Find: the gift-source laboratory. 'Both rivers, one spring.'",
+   "summary": "Anha's barred stair, Corval's crates, ward study pointing down, tally-cords, the wall seam, the slate key. Find: the gift-source laboratory. 'Both rivers, one spring.'",
    "ref": "04_The_Ball.md#undercurrent-a--the-root-of-the-house-if-you-have-time",
    "optional": true,
    "faction": null

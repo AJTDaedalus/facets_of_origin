@@ -193,10 +193,12 @@ before anyone reaches the door. Rumor Table rolls are legal from the first minut
 > in thirty seconds. This module is full of near-misses, so teach it here, where the
 > cost is a rumor and somebody's dignity.
 
-**B1. The Gatehouse Court.** *(See map VIII–2.)* Where invitations are presented: by name, personally, against
+**B1. The Gatehouse Court.** *(see map VIII–2)* Where invitations are presented: by name, personally, against
 Minister Corval's memory. There is no written list, and with Corval
 there has never needed to be. Nobody is disarmed at the door, because nobody is
-ever disarmed anywhere (see the sidebar below). *(Agenda relevance: forged and
+ever disarmed anywhere (see the sidebar below).
+
+*(Agenda relevance: forged and
 borrowed invitations are tested here. Corval is sharp, but it is dark, the line is
 long, and the custom of masks was made for this. Passing on a borrowed card is a
 DC 13 Charisma (Deception) check; a card with the bearer's own name wrongly on it
@@ -241,7 +243,7 @@ The grand hall, and the room where nearly every scheduled event happens: dance f
 musicians' gallery, the high table on its dais. The walls are the palace's oldest work.
 *(About 140 by 80 feet, with the dais at the far end from the main doors. The east doors
 open on a stair that rises 12 feet to the east wing; see chapter V, "The Palace After
-Midnight: General Features"; see map VIII–3.)*
+Midnight: General Features", and map VIII–3.)*
 
 **B3. The Banquet Galleries.** Long feast halls flanking the Court, tables groaning
 with harvest excess, where the real conversations happen in alcoves built for
@@ -249,7 +251,7 @@ the purpose. *(Best room for agenda work: everyone passes through, and the alcov
 are half-private. Overhearing an alcove without being noticed takes a DC 13
 Dexterity (Stealth) or DC 13 Wisdom (Perception) check, whichever the character is
 doing. A success hears one
-rumor (Table VIII–8) or one fact from the speaker's entry in chapter VII. See map VIII–3.)*
+rumor (Table VIII–8) or one fact from the speaker's entry in chapter VII; see map VIII–3.)*
 
 **B4. The Audience Hall.**
 
@@ -273,7 +275,7 @@ Know this geography cold: Court → terraces → lower garden → river gate. Th
 gate's lock takes a DC 15 Dexterity check using Thieves' Tools. The character with Agenda 6 needs no check, having
 been given what they need. Three terraces, each about 40 feet deep with a 10-foot drop
 between, then about 150 feet of lower garden to the gate; see chapter V, "The Palace
-After Midnight: General Features"; see map VIII–4.)*
+After Midnight: General Features", and map VIII–4.)*
 
 **B6. The Chapel.**
 
@@ -310,16 +312,21 @@ a DC 15 Dexterity check using Thieves' Tools, unless its entry says otherwise. N
 crystals taken in old settlements, including a heart-sized soul-crystal of uncommon
 beauty (Agenda 5). Warded by old crystalwork, and three of the nine honor guards stand here from the
 end of Movement I (Table VIII–7).
+
 *(Wards here are teachable. A character who spends 10 minutes studying them learns
 how Boranis defenses behave (light, seals, alarms) on a successful DC 13 Intelligence
 (Arcana) check. An Orthaen, who reads grown crystalwork by heritage, learns it
-automatically. That knowledge pays off desperately at midnight. Lifting the
+automatically. That knowledge pays off desperately at midnight. It also tells them
+that the deepest work of all lies below the palace (a spark for
+"Undercurrent A — The Root of the House"). Lifting the
 grandmother's crystal off its ward without waking it takes a DC 18 Dexterity (Sleight
 of Hand) check, or a DC 13 Dexterity (Sleight of Hand) check for anyone who studied the
 wards first.)*
 
 **B8. Raunu's Study.** Locked, dark wing, second floor. Opening it takes a DC 18
-Dexterity check using Thieves' Tools; the lock is crystal, not iron. Two years of a
+Dexterity check using Thieves' Tools; the lock is crystal, not iron, so a character
+with the Orthaen Gift can work it with their gift in place of Thieves' Tools, at the
+same DC (the Gift Knack applies: it is grown crystal to coax). Two years of a
 genius's solitude. The characters will look for papers and find none, because there
 are none anywhere: the room thinks in crystal.
 
@@ -360,25 +367,18 @@ characters learn what they learn. *(Forcing the doors is card S4, and nobody get
 single check. Agenda 4's errand is done at these doors and goes no farther (see "The
 Ring at the Door (B9)", Movement IV); the way to what lies behind them is Undercurrent C. Anha's passages
 reach the wing's service door, and the guard behind it is doubled tonight; card S7.)*
+
 *(The wing is upstairs, at gallery level: a stair rises 12 feet from the Court's east
 doors, and the cleared corridor at its head is about 60 feet long. Behind the doors, one
 100-foot corridor has the rooms off it, with the private stair (the garden stair) at its
-far end, running down the wing's outer wall to the upper terrace. See chapter V, "The
-Palace After Midnight: General Features"; see map VIII–5.)*
-Warm light, a midwife's quiet traffic, and three finds:
+far end, running down the wing's outer wall to the upper terrace; see chapter V, "The
+Palace After Midnight: General Features", and map VIII–5.)*
 
-- **Veier's rooms.** Thenya through and through: border-country wool over Orthaen
-  crystal, pressed mountain flowers, a sling and shot worn smooth with actual use.
-  And, telling its whole story without a word: her traveling pack. For the first
-  year (the servants' silence confirms it, if Anha talks) it stood packed by the
-  door, ready, a border woman's plain statement that she could leave whenever she
-  chose. It stands there still, out of habit or humor, but it is empty now, and
-  its contents have become the room: the wool folded onto the marriage
-  bed, the flint on the mantel, the mountain flowers pressed and kept. She stopped
-  being ready to go home.
+Warm light, a midwife's quiet traffic, and one door kept shut: Veier's own. She is
+behind it with the midwife, and the household keeps that one door closed, courteously
+and absolutely. Nobody gets into her room; through the door it is her voice only, as at
+the outer doors. Two finds:
 
-  *(For the character with Agenda 4, reading this room changes everything about the
-  errand, and the message they carry feels suddenly heavier.)*
 - **Raunu's rooms.** Nearly bare: a soldier's cot in a palace, which fits nothing
   anyone believes about him. Two personal objects only. A small, flawed, badly-grown
   crystal, decades old, kept on the sill where the light finds it: his first, grown
@@ -400,6 +400,11 @@ through everything, and at midnight the difference between a tragedy and a massa
 Finding one's way through them without a guide takes a DC 15 Wisdom (Survival) check
 the first time and is automatic after that. With Anha or any of the skeleton staff,
 there is no check. See map VIII–5 for the run to the east wing.)*
+
+*(Anha, once she trusts a character, can tell them about Veier's traveling pack. For
+the first year it stood packed by her door, ready, a border woman's plain statement
+that she could leave whenever she chose. It stands there still, out of habit or humor,
+but it is empty now. She stopped being ready to go home. See chapter VII, Anha.)*
 
 **B11. The Root of the House.** *(If you have time. Hidden. Found only through
 "Undercurrent A — The Root of the House", below.)* Beneath the wine cellars, behind a seal of living
@@ -583,9 +588,8 @@ and their grandmother's crystal hang in the same gallery.)*
 
 ## The Undercurrents
 
-> Undercurrents A, B and D are marked *(if you have time)*. A four-hour table runs the Undercurrent a character is already
-> on and lets the rest surface as rumor. The exception is **C**: if anyone carries
-> Agenda 4, it is the only way to the heir, and chapter V leans on it.
+> All four Undercurrents are marked *(if you have time)*. A four-hour table runs the
+> Undercurrent a character is already on and lets the rest surface as rumor.
 
 Four investigations run beneath the ball. They are mysteries a curious table can solve, or
 at least reach the bottom of, before midnight solves everything its own way. Each
@@ -605,8 +609,14 @@ who says the find out loud at the table (Table I–3; once per Movement).
 *There is a sealed place beneath the palace, and the master keeps it himself.*
 
 **The spark:** rumor 5 ("he slept a year in the root of the house"); or Anha's
-forbidden corridors: she is barred from sweeping the lower cellar stair, which
-makes no sense, because nothing is down there but wine; or a sharp eye in the study
+forbidden corridors: once she trusts a character she volunteers that she is barred
+from sweeping the lower cellar stair, which makes no sense, because nothing is down
+there but wine.
+
+Three more sparks, each reaching one character: ward study (B7, or Agenda 5's gallery
+work), which shows that the deepest work lies below the palace; Corval, befriended and
+complaining about his logistics, mentioning crates sent down a stair nobody but the
+master uses (he does not know what is down there); and a sharp eye in the study
 (B8): the half-erased lattice diagram on Raunu's slate matches no door anyone has
 seen upstairs (a DC 13 Intelligence (Investigation) check to notice it is a door and
 not a diagram).
@@ -627,7 +637,7 @@ not a diagram).
   sealed the way Boranis things are sealed: grown, not locked, and Thieves' Tools find
   nothing to work on.
 - *Opening it:* the lattice diagram from the study is the key, literally. Traced on
-  the seam, it opens the door (automatic if a character copied or memorized the slate; a DC 18
+  the seam, it opens the door (automatic if a character copied or memorized the slate; a DC 15
   Intelligence (Arcana) check to improvise it from ward-study, e.g. Agenda 5's gallery
   work). A failed attempt can be tried again after 10 more minutes at the seam. The
   slate from the study (B8) always works. Brute force is worse than useless, because the Root's wards answer. The seam does
@@ -703,6 +713,9 @@ gifts.** What an hour in the laboratory yields, in rising order:
 
 > *Both rivers, one spring.*
 
+*Most tables never reach this figure. That is as it should be: it is the deepest find
+in the night, and nothing else in the book echoes it.*
+
 The shape of it is discoverable. The chief of the Orthaen believed the gifts of two
 tribes were one gift, long ago. He believed his marriage carried both halves, and he
 has spent eight months watching the proof grow.
@@ -716,12 +729,14 @@ rumors 2 through 12 all exist: everyone senses he was doing something, and nobod
 guessed this.
 
 **At midnight:** three payoffs. The Root is the strongest-warded place in the
-palace: a safe room that can shelter a dozen guests through the whole attack. A
-ward-literate character can steer palace defenses from here (seal a corridor ahead
-of the Radiant; light a stairwell for the fleeing). And the Uninvited will not
-enter it: whatever the deep crystal is to them, they will not cross its
-threshold, and nothing in this adventure explains why. *(The snakes do not know
-it is there. Its key, though, is the slate in B8, and the Church's Wardens mean to wipe that
+palace, and a dozen guests can shelter there through the whole attack: the
+Uninvited go only where their errands are. A ward-literate character can steer
+palace defenses from here (seal a corridor ahead of the Radiant; light a stairwell
+for the fleeing). And an Uninvited who crosses its threshold can be caught there
+(see chapter V, ⟨They trap one of the Uninvited⟩). They don't know that, and neither
+does Raunu: nobody has seen it happen until creatures like these stand in it.
+
+*(The Attendant walks in and out of it unaffected. The snakes do not know it is there. Its key, though, is the slate in B8, and the Church's Wardens mean to wipe that
 slate tonight; see card S8.)*
 
 ### Undercurrent B — The Household That Wasn't *(if you have time)*
@@ -759,7 +774,7 @@ Every one of them saved is a coda this thread earns. *(And it tells them what th
 Circle's knives are really doing if they are seen half-carrying an old man the wrong way
 through the smoke. See chapter V.)*
 
-### Undercurrent C — The Third Plate *(run it if anyone carries Agenda 4)*
+### Undercurrent C — The Third Plate *(if you have time)*
 *Two people live in the east wing. The kitchen sends up meals for two, and the usual
 staff carry them. Lately Corval carries a third tray up himself, alone, and later all
 three plates come back down together for washing.*
@@ -775,10 +790,14 @@ rather than jailerly.
 **The trail:** the midwife, the third plate herself, glimpsed once crossing the gallery at
 the end of Movement II, moving like a woman who counts hours. Following her to the
 east wing doors is easy (a DC 10 Dexterity (Stealth) check). Only real ingenuity gets
-through them; the ring opens them a hand's width. Inside are warm light, the guarded calm of a
-household on watch, and the living quarters' three finds (B9): the unpacked
-traveling pack, the two slings, and the nursery with its slow-turning crystal mobile.
-The pregnancy is the thread's answer; the pack and the slings are its heart, and a
+through them. The ring gets no more than a hand's width of open door and a hand that
+takes it (see "The Ring at the Door (B9)").
+
+A character who does get through finds warm
+light, the guarded calm of a household on watch, Veier's own door kept shut (she is
+behind it with the midwife), and the living quarters' two finds (B9): the two slings in
+Raunu's rooms, and the nursery with its slow-turning crystal mobile. The pregnancy is
+the thread's answer; the slings are its heart, and a
 table that reads those rooms stops investigating a scandal and starts guarding a
 family.
 
@@ -794,8 +813,8 @@ themselves its protectors, which is where chapter V wants them standing.
 *(Selling it is a real choice with a real buyer. Rhaza Callun fears exactly one thing
 from this house: an heir, a dynasty of Raunus. A character who brings her the
 nursery has handed the Circle's line in this chapter its reason to move. She pays on
-delivery, as she always does. What her people do with it is in "The Snakes This
-Movement" from then on. Her price for the nursery is 250 GP.)*
+delivery, as she always does, and the Circle's heat goes to 4 at once (see chapter IX,
+the Merchant's Circle line). Her price for the nursery is 250 GP.)*
 
 **At midnight:** knowing the east wing's layout, its inner guards by name, and its
 service-passage doors makes a character the most useful person in the palace the
@@ -986,6 +1005,10 @@ him. He is drowning in understaffed logistics and has forgotten what kindness co
 (no check to help him; to help him well takes a DC 13 Charisma (Persuasion) or DC 13
 Intelligence (Investigation) check, or another skill if the help calls for one).
 Helping him well earns Corval's open gratitude, as ending the Seating Feud well does.
+
+A befriended Corval complains about his logistics, and among the complaints are the
+crates he sends down a stair nobody but the master uses; what is down there, he does
+not know (a spark for Undercurrent A).
 Anha found in the kitchens (Agenda 8); the gallery wards studied (Agenda 5); the east
 wing's guarded doors scouted (Agenda 4).
 
@@ -1015,9 +1038,8 @@ serves, it names no one, and looks around, briefly, for somebody who is not ther
   notice by the second sighting; automatic by the third). → the Circle's line, chapter IX.
 - **The Church.** The Wardens are asking the festival hires which rooms the master
   uses. They are polite about it, and they are asking about the Audience Hall and
-  the dark wing on the second floor. The Church cannot read Raunu, so the wardens
-  mean to search his private room for anything that answers the Prelate's question,
-  or for any breach of the writing law to hold over him. **Tell:** a footman looking back over his shoulder
+  the dark wing on the second floor. They want his study, and something in it to
+  hold over him (see B8). **Tell:** a footman looking back over his shoulder
   after a gray robe moves on (a DC 13 Wisdom (Insight) check). → the Church's line, chapter IX.
 - **House Draunel.** At the wine court a Duelist jostles one of Essin's blades, and
   a cup goes over, and a sentence about the missing year is said a little too
@@ -1073,8 +1095,8 @@ Minister Corval approaches a guest and says the sentence nobody expected:
 
 Inside the vast, bare hall: one chair on the dais,
 occupied, and a long walk toward it. Raunu summons four guests all night.
-**At least one should be a player character** (with four or more players, by default
-two). He chooses by
+**At least two should be player characters, walked in together** (see "Running a
+Scattered Party"); with four or more players, a second summons can bring two more. He chooses by
 whatever drew his attention, not by rank: an agenda that brushed his interests, a kindness
 done to his majordomo, a question asked too well. Being summoned is an honor, a
 threat, and a mystery, and the rest of the ball watches who goes in.
@@ -1104,9 +1126,7 @@ prepared for that, too.
 **Agenda beats:** a summons is the only route to the host. It is Agenda 2's one close
 study and Agenda 1's one chance to simply ask (which gets a long look, and then,
 flatly: *"It taxes palaces to pay laborers. The palaces can afford it. That is the
-whole secret. You may tell the Circle I said so."*). Agenda 4 may ask after Veier;
-he goes still for a moment, then: *"She chooses her guests herself these days. If
-she chooses you, you will know."*
+whole secret. You may tell the Circle I said so."*).
 
 Characters not summoned work the room. Angling
 to get summoned is a fine scene in itself (a DC 13 Charisma (Persuasion) or DC 13
@@ -1282,7 +1302,7 @@ everyone else's.
   midnight words are the Tithe, but she saw the two plates, and the one thing she
   fears from this house is an heir. Her knife saw Corval carry a third tray up
   himself; the plates and "two years in the keeping" finish the sum. A Hired Knife goes to the kitchens to find out
-  who eats off the second plate, and he goes to the person who would know: Anha. He
+  who the second plate was for, and he goes to the person who would know: Anha. He
   leans on her, in the service doorway, in a voice the kitchen cannot hear. If
   Agenda 8 is in play, this is somebody's sister. **Tell:** Anha's hands, going still
   on the tray. → Card S7, chapter IX.
@@ -1319,14 +1339,14 @@ Crossing: this errand is a hand and a voice through a door.
 **At the door.** A character who shows the door guards the grandmother's ring and asks
 for Veier by name is asked to wait while a guard carries word to her. If Veier chooses
 them, and by default she does, the door opens a hand's width and her hand comes through
-it and takes the ring. Her face stays unseen. This is Raunu's line from the summons,
-kept: *"If she chooses you, you will know."* The message is given through the door, and
+it and takes the ring. Her face stays unseen. The message is given through the door, and
 her answer comes back the same way (chapter VII, "Veier Nolonaire — the Bride", has what
 she says). She does not speak of a child; the heir is found only through Undercurrent C.
 
 **Inside.** A character who gets into the wing some other way (Undercurrent C, or force)
-finds B9's rooms and their three finds, and does not meet her either: the household keeps
-every stranger from her door.
+finds B9's rooms and their two finds, and does not meet her either. She is behind her
+own bedchamber door with the midwife, and the household keeps that one door shut; it is
+her voice only, as at the outer doors.
 
 ### Movement V — The Hour of Spirits *(approaching midnight)*
 
@@ -1341,8 +1361,8 @@ every stranger from her door.
 > time:* last Undercurrent beats. Take the break as the bells begin to ring midnight.
 >
 > *Past 2:40,* at most one card on screen. The others resolve offstage with their
-> consequence (clock filled, heat moved). That holds at Gentle, Sharp and Merciless
-> alike, because it cuts table time and leaves the risk alone.
+> consequence (clock filled, heat moved). That holds at every setting of the dial (see
+> chapter V, "Down, Not Out"), because it cuts table time and leaves the risk alone.
 
 The old custom, and the palace keeps it in full: the lamps are lowered, the music
 turns slow and strange, and the **Dead Dance** begins. Every guest is masked, dancing
@@ -1381,8 +1401,8 @@ gate. *(If Agenda 6's gate is unlocked, he confirms it and leaves it so. If a ch
 refused or reported the strange commission, he unlocks it himself. He always has a
 second way.)*
 
-**Agenda beats:** last chances: the study (B8), the gallery (B7), the errand's
-answer, Anha's testimony. Any agenda not yet closed should reach its crisis here, in
+**Agenda beats:** last chances: the study (B8), the gallery (B7), the ring at the
+door, if it hasn't been shown, Anha's testimony. Any agenda not yet closed should reach its crisis here, in
 the dark, mid-dance.
 
 **The omen — the last one:** a character dancing in the Dead Dance finds
@@ -1406,7 +1426,7 @@ waits.
 
 - **The Circle.** In the lowered lamps a Hired Knife is in the service run behind
   the Dance, working his way toward the east wing's service door with whatever Anha
-  told him, or did not. The service corridors are Tavva's tonight too (card S2).
+  told him, or did not. If the nursery was sold, he is not guessing. The service corridors are Tavva's tonight too (card S2).
   The two jobs can meet in the dark, and neither side wants the noise. **Tell:** a
   plain good coat where no guest has any reason to be. → Card S7, chapter IX.
 - **The Church.** Kovaun goes briefly to the chapel (B6). Her two absent Wardens are
@@ -1422,9 +1442,8 @@ waits.
   alone, and a crowd drawn by a duel is the last thing he wants. **Tell:** a knot
   of masks at the rail of the Court's garden walk, looking down instead of dancing. → Card S9, chapter IX (both houses' blades are on it).
 - **House Boranis.** Vorlain is in B3, drinking harder. Essin has a problem on the
-  terrace he did not make: his blade accepted the challenge in front of the table, and
-  if Essin calls it off, House Boranis is seen to run. He is choosing between his
-  cousin's reputation and his blade's life, and he cannot choose from inside the house.
+  terrace he did not make (see Movement IV). He is choosing between his cousin's
+  reputation and his blade's life, and he cannot be seen choosing either.
   A character who goes to him now finds the one moment all night that Essin Boranis
   asks an outsider for help. **Tell:** Essin, alone, which he never is. → Card S9, chapter IX.
 - **Phern.** Corro is in B2 with his back to a wall, his Bodyguards around him

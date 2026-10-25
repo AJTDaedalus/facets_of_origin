@@ -197,8 +197,8 @@ Soul roll; 1 witnessed tell = Hard, 2+ = Standard; once each.
 **The leash:** ~half an hour of story. Late = faster, sloppier, more human. Ring
 the last bell when the table needs the end.
 
-**The Root (B11, if found):** master ward-valve; shelter for a dozen; the
-Uninvited will not enter.
+**The Root (B11, if found):** master ward-valve; shelter for a dozen (the
+Uninvited go only where their errands are); one lured inside can be caught (Chapter V).
 
 **The looters:** Tavva's crew hits the gallery (B7) and strips the fallen
 (B3/corridors) — the night's one fully winnable fight, aimed at the players'

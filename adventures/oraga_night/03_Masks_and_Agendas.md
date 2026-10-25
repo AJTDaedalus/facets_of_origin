@@ -157,11 +157,9 @@ questions.
 **The catch:** You have no idea who paid you, why, or what comes through a gate — in
 which direction — at midnight on Oraga.
 **At midnight:** You find out. *(MM: the stranger was Master Vell, securing Veier's
-escape route. The player character who felt like a hired traitor all night was, in
-fact, the reason mother and child got out. Reveal this with care and full weight;
-few tables forget it. A table wanting a darker seam may
-rule the payer was scouting for the Uninvited instead; if so, Vell has a second route
-prepared, because he always does.)*
+escape route. The player character who felt like a hired traitor all night was one
+of the reasons mother and child got out, and the one that let Vell spend his second
+way on something else. Give it its moment.)*
 
 ### 7. The Story of a Lifetime
 *Personal.*

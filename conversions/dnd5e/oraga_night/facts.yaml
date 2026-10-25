@@ -542,6 +542,157 @@ facts:
         anchor: 'Where she is'
         why: TP13 / TP41 — 07 Veier says she is never met before the Crossing
 
+  - id: tp47_root_trap
+    truth: >-
+      The Root is a trap the Uninvited don't know to avoid, not a refuge they refuse. Guests
+      can shelter there because the Uninvited go only where their errands are; one that crosses
+      the threshold can be caught (the trap End). Raunu doesn't know (TP18); the Attendant goes
+      in unaffected (TP17).
+    source: owner TP8, TP17, TP18, TP47 (2026-10-25); polish review A B2
+    phrases: ["the Uninvited go only where their errands are", "can be caught there"]
+    checks:
+      - type: sentence
+        files: ["01", "02", "03", "04", "06", "07", "11", "README"]
+        all: ['(?i)\b(?:Root|deep crystal|threshold)\b', '(?i)\b(?:will not|won''t|never) (?:go down|go there|enter|cross)\b']
+        why: TP47 — the Uninvited don't refuse the Root; they don't know to avoid it
+      - type: forbid
+        files: ["01", "02", "03", "04", "06", "07", "11", "README"]
+        pattern: '(?i)\bsafe room\b'
+        why: TP17 / TP47 — the Root is not a safe room (05/08/10 are the other worker's T7.2 half)
+
+  - id: tp21_second_clause
+    truth: >-
+      The Second Clause ends at "hold her": "If a woman in Thenya wool comes out the front,
+      hold her." Nothing is sent to the river.
+    source: owner TP21 (2026-10-21); T7.11
+    phrases: ["comes out the front, hold her."]
+    checks:
+      - type: forbid
+        files: ["01", "02", "03", "04", "06", "07", "11", "README"]
+        pattern: '(?i)\bsend word to the river\b'
+        why: TP21 — the clause ends at "hold her" (05 and 09 are the other worker's half)
+
+  - id: tp19_vell_sword
+    truth: >-
+      Vell's sword stays wrapped on his back all night. At the Crossing he holds the Radiant
+      off without drawing or using it.
+    source: owner TP19 (2026-10-21); T7.9
+    phrases: ["the sword stays on his back"]
+    checks:
+      - type: forbid
+        files: ["01", "02", "03", "04", "06", "07", "11", "README"]
+        pattern: '(?i)\b(?:fights|holds|duels?) the Radiant with (?:it|the sword|the blade) still (?:bound|wrapped)\b'
+        why: TP19 — he never uses the wrapped sword; it stays on his back
+
+  - id: tp52_raunu_line
+    truth: >-
+      Raunu's line about Veier ("She chooses her guests herself these days. If she chooses
+      you, you will know.") is cut everywhere.
+    source: owner TP52 (2026-10-25)
+    phrases: []
+    checks:
+      - type: forbid
+        pattern: '(?i)\bShe chooses her guests\b|\bIf she chooses you, you will know\b'
+        why: TP52 — the line is cut in every chapter
+
+  - id: tp48_undercurrent_c
+    truth: >-
+      Undercurrent C is "(if you have time)", like the other Undercurrents, and is no longer
+      gated on Agenda 4 (Agenda 4 is done at the door, TP27/TPN-20b).
+    source: owner TP48 (2026-10-25)
+    phrases: ["Undercurrent C — The Third Plate *(if you have time)*"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\brun it if anyone carries Agenda 4\b|\bUndercurrent C only if\b|\bif anyone carries Agenda 4, it is the only way\b'
+        why: TP48 — Undercurrent C is no longer gated on Agenda 4
+
+  - id: tp53_veier_room
+    truth: >-
+      Nobody gets into Veier's room: she is behind her own shut door with the midwife, voice
+      only (TP49, TP53). B9 has two finds, Raunu's rooms (the two slings) and the nursery; the
+      pack story is Anha's to tell.
+    source: owner TP49, TP53 (2026-10-25)
+    phrases: ["Two finds", "the story of her traveling pack is Anha's to tell"]
+    checks:
+      - type: forbid
+        files: ["01", "02", "03", "04", "06", "07", "11", "README"]
+        pattern: '(?i)\bthree finds\b|\*\*Veier''s rooms\.\*\*'
+        why: TP53 — B9 has two finds, and Veier's room is not one (08's Table VIII–4 line is the other worker's)
+
+  - id: root_trap
+    truth: >-
+      TP47 (reaffirming TP8): the Root is a trap the Uninvited don't know to avoid, not a refuge
+      they refuse. Guests can shelter there because the Uninvited go only where their errands
+      are. One that enters or is lured in is caught (the trap End). Raunu doesn't know (TP18):
+      nobody has seen the effect until creatures like these stand in it. The Attendant goes in
+      unaffected (TP17). Extends `root` (T7.2), appended rather than edited.
+    source: owner TP8, TP17, TP18, TP47 (2026-10-20/21/25); T7.2; polish review B1 / A B2
+    phrases: ["the Uninvited don't know to avoid it", "can be caught"]
+    checks:
+      - type: sentence
+        files: ["05", "08", "09", "10"]
+        all: ['(?i)\bRoot\b|\bthreshold\b|\bdeep(?:est)? crystal\b', '(?i)\b(?:will not|won''t|never) (?:go down|go|enter|cross)\b']
+        why: TP8 / TP47 — the Uninvited don't avoid the Root; it is a trap, not a threshold they refuse
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: 'Nobody has seen what the deep crystal does to\s+creatures like these until they stand in it'
+        anchor: 'master valve'
+        why: TP18 — the one DM line; nobody, Raunu included, knows the effect
+
+  - id: second_clause
+    truth: >-
+      The Second Clause ends at "hold her" (TP21): "if a woman in Thenya wool comes out the
+      front, hold her." Nothing sends word to the river.
+    source: owner TP21 (2026-10-21); T7.11; polish review B2 / A B1
+    phrases: ["comes out the front, hold her."]
+    checks:
+      - type: forbid
+        files: ["05", "08", "09", "10"]
+        pattern: '(?i)\bsend word to the river\b'
+        why: TP21 — the clause ends at "hold her" (01–04, 06, 07 and 11 are covered by tp21_second_clause)
+
+  - id: crowd_rule_scope
+    truth: >-
+      T6.6 / DESIGN §2.1-§2.2: after midnight the snakes and the Bought use the ordinary rules
+      for dying; the crowd rule covers only creatures an Uninvited (or the Attendant, while Idle)
+      set aside. At Sharp a heat-4 snake finishes a downed character who crossed it. Gentle: no
+      snake finishes anyone and the crowd rule covers everyone; Merciless: a snake finishes whoever
+      crossed it and the crowd rule reaches nobody while a fight is on. The fire alone never
+      finishes anyone. The rule is printed once, in chapter V; 09 and 10 point to it.
+    source: owner TP2 (2026-10-20); DESIGN_oraga_5e_3p_pass §2.1, §2.2 option 3; T6.6; polish review B3
+    phrases: ["Everyone else's steel", "it covers only the set-aside"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\bcrowd rule\b[^.]{0,80}\bholds (?:anywhere|in every snake fight)\b'
+        why: T6.6 — the crowd rule covers only the set-aside, not every snake fight
+      - type: forbid
+        pattern: '(?i)\bno snake finishes a downed character\b|\bNobody is out for longer than two rounds\b|\bSomeone always comes\b'
+        why: T6.6 — no text half-promises a rescue to the dying
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: '\*\*Everyone else.s steel\.\*\*'
+        anchor: 'Down, Not Out'
+        why: T6.6 — the dial paragraph for snake and Bought fights lives in chapter V
+
+  - id: wept_freeze
+    truth: >-
+      Polish review B5 (TPN-31): a real child crying where the Wept can hear it is the printed
+      freeze, a Stop with no check. A faked cry is Table V–2's trick 7: a nature trick (2 Delay)
+      that counts toward "Their nature, three times", never a free Stop.
+    source: TPN-31 (2026-10-25); polish review B5
+    phrases: ["a real child crying"]
+    checks:
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: '\ba real child crying where the Wept can hear it\b'
+        anchor: 'A moment the room gives'
+        why: TPN-31 — the freeze is a real child; a faked cry is a trick
+      - type: require
+        file: 10_Bestiary.md
+        pattern: '\bA real child crying where she can hear it\b'
+        anchor: 'Stop and End — Sorrow'
+        why: TPN-31 — the Wept's block says the same
+
 maps:
   court:          # B2 (05 General Features, Sizes)
     length: 140

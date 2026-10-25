@@ -28,8 +28,8 @@ him before the boat clears, and he is worth no XP.
 **Every block has four lines after its numbers**: **Wants** (what ends the fight without a body), **Tells** (what a watchful
 character sees before it happens), **Breaks** (when it stops, and what it does
 instead), and **Nastier** (one dial, for a table that wants it harder). Read the
-Breaks line before you run the block. No fight in this module is to the death by
-default, and most of these people would rather be anywhere else.
+Breaks line before you run the block. Most of these people would rather be anywhere
+else, and most of them break long before the end.
 
 **The palace's two mercies**, which several blocks refer to:
 
@@ -38,8 +38,8 @@ default, and most of these people would rather be anywhere else.
   contract to detain leaves a creature at 1 Hit Point with the Grappled condition
   instead, see its *To the Terms*) is **Unconscious and Stable** instead of dying. Before
   midnight it wakes in the gatehouse cell at the start of the next Movement, and
-  somebody comes for it (see chapter IV, "The Palace on Alert"); after midnight the crowd
-  rule in "Down, Not Out" gets it up sooner.
+  somebody comes for it (see chapter IV, "The Palace on Alert"); after midnight, see
+  chapter V, "Down, Not Out".
 - **Down, Not Out.** The Uninvited set most people aside instead of killing them: a
   creature one of them drops is thrown clear, and a companion or the crowd gets it up,
   unless it has made itself a threat to that one. The Attendant sets aside whoever it
@@ -79,7 +79,7 @@ use a few words the 2014 books don't.
 > - **Heroic Inspiration.** Plain Inspiration.
 > - **The encounter multiplier.** The 2014 guide multiplies a group's XP by its head
 >   count, so it rates most of chapter IX's cards one or two bands harder than printed:
->   S3's 1,500 XP becomes 3,000, past Deadly, and S14 is nearly twice Deadly. These
+>   S3's 850 XP becomes 1,700, past Deadly, and S14 is more than twice Deadly. These
 >   heads break early, fight to detain and quit on a clock. Keep the rosters as
 >   printed, and trust each card's line on how it plays.
 
@@ -138,7 +138,7 @@ what the spell bought. Most good ideas buy something, and what they buy is **Del
 (see chapter V, "Buying Time"): each point costs one of the three a turn of movement
 toward their errand, and every point is spent on somebody's life.
 
-**One rule covers most of the list.** Anything that would hold, block, hide from or
+**One rule covers most of the list.** Anything that would block, hide from or
 wall off one of the Uninvited works for one round at most, and that round is **1
 Delay**. Deep Boranis ward-crystal is the only thing that holds them longer (chapter
 V, ⟨They trap one of the Uninvited⟩).
@@ -194,8 +194,9 @@ it bought.
 **What changes the night**, and it is the complete list: **Delay**, bought with the
 room, the crowd, the wards and good ideas; each one's **Stop** and **End**, the person
 still inside, reachable by someone who paid attention; **deep ward-crystal**, the one
-thing that can hold one of them, and the Radiant's only End (and the Root of the House, the one threshold they will not
-cross); and the **leash**, which takes all three east the moment their work is
+thing that can hold one of them, and the Radiant's only End (the Root of the House is
+the deepest of it, and they don't know to avoid it: see chapter V, ⟨They trap one of the
+Uninvited⟩); and the **leash**, which takes all three east the moment their work is
 finished or lost, and at the last bell of Oraga if nothing else has. Chapter V runs
 the attack; these blocks are what it runs on. Their challenge ratings describe how
 hard they hit; nothing tonight stops them.
@@ -306,8 +307,10 @@ round: one on its Initiative and one at Initiative count 10 lower (last in the r
 if that count is below 1). On the second turn its action is to clear the way (*Clears
 the Way*) or one Joined Hands attack instead of its Multiattack (with four or more
 characters it is the full Multiattack, against a lone character no attack at all;
-card S14). It still has only one Reaction a round, and it rolls Put
-Aside's recharge only at the start of its first turn each round.
+card S14). Focus is checked at the start of each of the two turns, so a focus broken
+on its first turn lasts only until its second; if it is Idle when the second turn comes,
+it takes that turn Idle (*Rusty*, or *Clears the Way*). It still has only one Reaction a
+round, and it rolls Put Aside's recharge only at the start of its first turn each round.
 
 **Actions**
 
@@ -1284,6 +1287,10 @@ doors, walls and barricades do not reliably hold him. Deep Boranis ward-crystal 
 ***Border Heritage.*** Maiven has Advantage on Wisdom (Insight) checks against
 anyone trying to hide their intentions.
 
+***Thenya Gift.*** Maiven carries the Thenya gift, which shows itself only on behalf of
+someone she loves who is in danger, and does nothing for her. It is why she goes straight
+for the east wing when the lights die (chapter V).
+
 ***Thirty Degrees Hotter.*** Once provoked — thwarted to her face, lied to about
 Veier, or laid hands on — Maiven will not be the one who stops first. She can still
 be talked down, but only by someone she already trusts, with a DC 13 Charisma
@@ -1454,8 +1461,7 @@ nearest unoccupied space), resuming the hunt. At the start of that turn, whoever
 Strength or Dexterity saving throw (their choice); on a failure they are pushed 15
 feet in a direction the DM chooses and have the Prone condition. No damage. If any effect would send him to another
 plane or move him against his will by magic, the leash pulls him back to where he
-stood, at once. When the boat is out of reach — or at the last bell, if it comes
-first — he leaves, and nothing holds him.
+stood, at once. When the boat is out of reach he leaves, and nothing holds him.
 
 ***Held by Something Else.*** His will and his shape are not his own to lose. He
 can't be Charmed, Frightened, put to sleep, compelled, commanded or transformed, or
@@ -1473,7 +1479,8 @@ choose to succeed instead.
 
 ***Delay.*** The Radiant has a Delay count (see chapter V, "Buying Time"). At the start of
 his turn, if he has any, spend 1: he doesn't move toward Veier that turn. In the east
-wing, each point spent lets one more person in his way get clear. Delay he still has
+wing, each point spent lets one more person in his way get clear, and he reaches the
+garden stair a beat later (three at most; chapter V, "The Midnight Clock"). Delay he still has
 when he breaks past Master Vell at the Crossing is spent at the river gate, and one
 point is enough.
 
@@ -1495,20 +1502,21 @@ in the unlit corridors after midnight, a pursuer needs a light (a lantern, a can
 *Steady Light*) for him to be Witnessed. Nothing slows the Radiant below 20 feet:
 *Witnessed*, his guilt (see his Stop), *Slow*, *Ray of Frost* and every other
 slowing effect don't stack, and at their worst he moves at 20 feet. A whole turn
-slowed is half a turn's progress (see chapter V, "Buying Time").
+slowed is half a turn's progress (see chapter V, "Buying Time"), except in the east
+wing, where being watched is already counted in his three beats.
 
 ***Bloodied.*** When the Radiant is first Bloodied, he re-stages. On his next turn he
 makes no attacks: he steps back to wherever the most eyes are, and poses. Then he
 resumes.
 
-***Stop — Devotion.*** The Radiant can't be turned — not from the hunt, not
-from the errand, not by darkness or doubt. What he can be made to do is feel. Two
+***Stop — Devotion.*** The Radiant can't be turned from the hunt, by darkness or by
+doubt. What he can be made to do is feel. Two
 roads, either one:
 - **Deny the congregation.** Douse the lights, empty the room, turn every back, or
   give a performance that makes a player character the better spectacle. A table
-  that does this with a *Dark-Burst*, a *Darkness* spell or a doused lantern has
-  earned the check; the check itself is Charisma (Performance) or whatever the doing
-  of it fits.
+  that does this with a *Dark-Burst*, a *Darkness* spell or a doused lantern earns its
+  2 Delay and has earned the check as well: whoever did it, within 30 feet of him, makes
+  it with Charisma (Performance) or whatever the doing of it fits.
 - **Plant the doubt.** A priest, a believer, or anyone armed with his tells,
   declaring to his face that no god worth the name asks for a stolen child.
   Intelligence (Religion) or Charisma (Persuasion).
@@ -1550,7 +1558,8 @@ He can't do this while Witnessed.
 > Dance and cannot resist dancing beautifully, where the light falls. *During the
 > attack:* kills are staged, offered upward, like rites; he visibly slows and poses
 > when watched.
-> **Breaks.** Never. Only guilt slows him, and only the leash stops him.
+> **Breaks.** Never. Guilt slows him; the deep crystal can hold him; only the leash
+> stops him.
 > **Nastier.** None needed. If the table wants it, give him a fourth Offered Hands
 > attack when no one is watching.
 > *A person — warm, courtly, delightful on the subject of duty. One of
@@ -2004,9 +2013,9 @@ choose to succeed instead.
 ***Delay.*** The Wept has a Delay count (see chapter V, "Buying Time"). At the start of
 her turn, if she has any, spend 1: she doesn't move toward Raunu that turn, and he
 gets a round of work out of it (a dozen guests out of the Court, or Veier one sealed
-door further down). She reaches Raunu on her fourth turn of moving toward him
-(with more characters, see chapter V, "Adjusting the Attack"), through the wards he
-throws up himself.
+door further down), three turns at most in a scene. She reaches Raunu on her fourth
+turn of moving toward him (with more characters, see chapter V, "Adjusting the
+Attack"), through the wards he throws up himself.
 
 ***Bloodied: The Sorrow Slips.*** While the Wept is Bloodied, the mask's carved tears
 begin to run — actually run. Her attacks can't score Critical Hits, and she hums a
@@ -2032,7 +2041,8 @@ never an extra attack, and she can't make it once her Multiattack is used up.
 ***Stop and End — Sorrow.*** *Stop:* she stops — mid-motion, mid-kill — and for one
 full round she takes no actions, no Bonus Actions, no Reactions and does not move: a
 woman standing in a burning ballroom, long enough to pull a victim clear, seal a
-ward, finish an escape. A child crying where she can hear it does this with no check.
+ward, finish an escape. A real child crying where she can hear it does this with no
+check; a faked cry is a trick (chapter V, Table V–2).
 At a cost, she stops, but answers first with one terrible parting blow (rolled in the
 open) or one word. *End (Mercy, two tells):* a plea that names what was done to her
 family and offers her the chance not to do it to another. She leaves the dais, and her
@@ -2087,10 +2097,10 @@ expects: tell him a true thing he did not already know. *The two crystals at his
 wrist are his, and chapter V says what they are for.*
 
 **Veier Nolonaire** — *Medium Humanoid (Human).* AC 12 · HP 27 · Speed 30 ft.
-(15 ft. tonight). Near her time, and not fighting anyone. If cornered: *Border
+(15 ft. once she is wounded, at the Crossing). Near her time, and not fighting anyone. If cornered: *Border
 Sling.* *Ranged Attack Roll:* +4, range 30/120 ft. *Hit:* 4 (1d4 + 2) Bludgeoning
 damage. Her gift flares once, on behalf
-of someone she loves who is in mortal danger (see chapter V). The camera never lingers
+of someone she loves who is in mortal danger (see chapter VII, Veier). The camera never lingers
 on harm to her; cut away.
 
 **Minister Corval** — *Medium Humanoid (Human).* AC 10 · HP 9 · Speed 25 ft. Thin,
@@ -2195,7 +2205,7 @@ saw him hurry.
 > respect of a man who knows what they cost.
 > **Breaks.** He does not. He leaves.
 > *At the Crossing he holds the Radiant, alone, barely, long enough, with the sword
-> still bound. That is not a fight the dice resolve; chapter V runs it. Cast: chapter
+> still on his back. That is not a fight the dice resolve; chapter V runs it. Cast: chapter
 > VII.*
 
 The block exists to tell you one thing: **Master Vell does not fight, and no party at

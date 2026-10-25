@@ -54,7 +54,10 @@ happy, genuinely and unfashionably, and rumor has no shelf for it.
 attendance. Nobody meets her face to face before the Crossing. Agenda 4's errand is
 done at the east wing doors: a guard carries word, the door opens a hand's width, her
 hand takes the ring, and her answer comes back through the door, her face unseen. A
-voice through a door is a prize, not a schedule item.
+player who gets into the wing another way does not meet her either: she is behind her
+own bedchamber door with the midwife, the household keeps that one door shut, and she
+is a voice only. The two slings and the nursery are the wing's finds; the story of her
+traveling pack is Anha's to tell. A voice through a door is a prize, not a schedule item.
 
 **Play her:** blunt to the point of comedy, funny in a dry border-country way,
 homesick and unashamed of it. She answers the delegation's careful diplomacy
@@ -66,7 +69,7 @@ come to her door expecting a prisoner or a madwoman get a brisk education.
 **At the Unmasking:** in the east wing when the lights die, the corridors sealing
 themselves behind her — her husband's two crystals working. Wounded once, cleanly,
 by the Radiant; upright anyway; down the private stair and out through the gardens
-on Vell's arm (the Crossing, Chapter V). The cut will not close: healing eases her
+to Vell's boat (the Crossing, Chapter V). The cut will not close: healing eases her
 and keeps her on her feet, but the wound does not knit, and nothing says why. If her gift matters at your table — a
 bonded loved one in mortal peril — it flares exactly once, without training or
 explanation, and the module suggests spending it on a player character who bled
@@ -146,7 +149,9 @@ Agenda 1's midnight payoff — the Tithe lives in his head.
 **Play him:** thin, upright, old, magnificent under pressure, doing the work of six
 chamberlains. Bribing Corval is impossible — not Hard, *impossible*, tell the
 players so. Helping him — genuinely, with the wine crisis or the escalating seating
-feud — earns more than gold buys: gratitude, gossip, and doors. Deceiving him about
+feud — earns more than gold buys: gratitude, gossip, and doors. A befriended Corval
+complains about his logistics, and among the complaints are the crates he sends down a
+stair nobody but the master uses; what is down there, he does not know. Deceiving him about
 household matters is **Hard**; about anything else he is too tired to check.
 
 > **Corval at the gate — what the line asks him**
@@ -203,6 +208,13 @@ knows is true and none of it is the answer, which makes her the best rumor engin
 in the palace: she deals only in facts. **At the Unmasking:** she knows the service
 passages, and becomes one of the night's quiet heroes if any player thought to
 befriend her.
+
+Two things she volunteers, unprompted, to anyone who wins her trust. One is the lower
+cellar stair she is forbidden to sweep, which makes no sense, because nothing is down
+there but wine. The other is Veier's traveling pack: for the first year it stood packed
+by her door, ready, a border woman's plain statement that she could leave whenever she
+chose. It stands there still, out of habit or humor, but it is empty now. She stopped
+being ready to go home.
 
 ---
 
@@ -296,7 +308,9 @@ formal request for an audience, declined by a miserable Corval, is the last
 diplomatic thing she does tonight. From there she is one bad hour from going over
 the east wing wall herself, which makes her the Agenda 4 player's natural ally or
 runaway problem. **At the Unmasking:** she goes *toward* the east wing,
-immediately, and dies there unless somebody competent goes with her. The module
+immediately. She carries the Thenya gift too (to reach, find or protect someone she
+loves who is in danger), and that is why she heads straight there when the lights die.
+She dies there unless somebody competent goes with her. The module
 would prefer somebody competent went with her.
 
 ---
@@ -319,9 +333,9 @@ player asks about it, he says only, *"An inheritance,"* and means it. *(MM
 truth: unwrapped, the blade would release the screams of every soul it has
 taken — enough to drop most of a ballroom where they stand. He refuses to
 unwrap it. What it cost him to be given such a gift, the module does not say,
-and the white cloth stays on all night — including at the Crossing, where he
-fights the Radiant with it still bound. If players notice that — a man dueling
-something unbeatable while deliberately not using his weapon — let them notice.)*
+and the white cloth stays on all night. At the Crossing the sword stays on his back
+while he holds the Radiant off. If players notice — a man holding off something
+unbeatable without touching his weapon — let them notice.)*
 
 **Play him:** courteous, brief, and *finished* — every conversation with Vell ends
 when he decides, somehow without rudeness. He answers questions with smaller
@@ -465,7 +479,7 @@ than the case.*
 explains everything he does tonight. **Fears:** exactly one thing — that somebody has
 used the Bought's name for something the Bought would not have signed, which he began
 to suspect around the time the second district caught. **Secret:** the Second Clause.
-*If a woman in Thenya wool comes out the front, hold her, and send word to the river.*
+*If a woman in Thenya wool comes out the front, hold her.*
 He does not know who she is or why, and he has been thinking about it all night.
 
 **Play him:** a businessperson who has been shot at, and it shows in both directions.
@@ -479,11 +493,13 @@ his second he starts talking while the attacks continue.
   city with his name unspoiled.
 - **What shifts him:** the fires. He contracted for two diversions, not for this, and
   a party who says so plainly is telling him something he already half knows. Also:
-  money, honestly offered, in front of witnesses.
+  money, honestly offered, in front of witnesses. And once no woman in Thenya wool is
+  coming out the front, the clause he was really paid for is dead; he won't hold a
+  gate for a fee's leftovers.
 - **What deal he honours:** all of them, permanently. A bought-out captain **will not
   resume the fight tonight for any inducement.**
 
-> **MM — the factor.** The captain never learns who hired him, and neither does the
+> **MM — who hired them.** The captain never learns who hired him, and neither does the
 > module. If a table asks him directly he will tell them the truth, which is that he
 > does not know, and that this has begun to bother him a great deal. That is not a
 > dead end; it is the aftermath's best lead, because a captain who wants to know is

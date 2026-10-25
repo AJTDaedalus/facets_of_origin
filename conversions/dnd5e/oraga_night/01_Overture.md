@@ -13,12 +13,13 @@
 >    Module Never Says") and "The Eight Agendas"** (15 minutes). This is the truth you
 >    are hiding, the lines you hold and the cards you deal. "Adventure Background",
 >    below, is the short version.
-> 3. **Chapter VIII, the DM sheet and the palace diagram** (10 minutes). Print both.
->    From here on, everything you read is behind a line on that sheet.
+> 3. **Chapter VIII, the DM sheet and the palace diagram** (10 minutes). Print both,
+>    and the Midnight Tracker. From here on, everything you read is behind a line on that sheet.
 > 4. **Chapter V: "How to Run the Attack", Movement VI's opening, "Midnight Rules"
->    (read "Down, Not Out", "Buying Time", "The Attendant" and "The Fractures"; the
->    tells to show are on the DM sheet, under Table VIII–1; skim the Room Tricks and
->    "Two Hundred People": they are tables to use live), "The Crossing", and Movement
+>    (read "Down, Not Out", "Buying Time" and "The Attendant"), "The Midnight Clock",
+>    "The Fractures" in "You Cannot Beat Them" (the tells to show are on the DM sheet,
+>    under Table VIII–1; skim the Room Tricks and "Two Hundred People": they are tables
+>    to use live), "The Crossing", and Movement
 >    VII's opening and Epilogue** (25 minutes).
 > 5. **Chapter IX: "The Snakes at the Ball" (the three rules) and "Running the
 >    Snakes", then S14 and S3 in full** (the Attendant and the gate come up at almost
@@ -26,8 +27,8 @@
 >    minutes).
 > 6. **Chapter IV: "The Palace on Alert", "When Somebody Draws Early", "Running the
 >    Room", and the box at the head of each Movement** (10 minutes). Each box says
->    what to run and what to skip. Read Undercurrent C only if someone carries
->    Agenda 4.
+>    what to run and what to skip. The Undercurrents are for when you have
+>    time.
 >
 > **Skim or skip:** chapter VII (look a guest up when the characters meet them), chapter
 > III (only if players build their own characters; hand out the agenda cards from
@@ -63,7 +64,7 @@ lying about.
 
 Why 4th level: the night has real fights in it. Chapter IX puts knives in the hands
 of half the guest list, and at midnight the quiet attendant who has been at the ball
-all evening takes its place beside the Uninvited, built to be the hardest fight of the night. A 4th-level party, with its
+all evening takes its place beside the Uninvited. It is built to be the hardest fight of the night. A 4th-level party, with its
 subclass and its first ability increase in hand, can stand in those fights, and it can
 still lose them.
 
@@ -79,8 +80,8 @@ He never gets to say it. Three servants of a power sealed beyond the eastern mis
 the Uninvited, come masked as spirits to kill Raunu and Veier and carry off the child.
 A second hidden power has sent Master Vell to make sure the child is not taken. By
 default Raunu dies on his ballroom floor after spending the one charge left in his
-last and best preparation on his wife's escape. Veier leaves through the river gate on
-Vell's arm, and no one is ever charged (see chapter II, "The Truth of the Night").
+last and best preparation on his wife's escape. Veier leaves through the river gate in
+Vell's boat, and no one is ever charged (see chapter II, "The Truth of the Night").
 
 ## What You Need
 
@@ -95,7 +96,7 @@ their gifts as origin feats and the crystal charges they carry. Chapter VII hold
 fight, and chapter X every stat block and every crystal charge ("Items of the Night").
 
 Print from chapter VIII before you sit down: the **two-page DM sheet** and the **palace
-diagram** for yourself, and the agenda cards, the invitation and the crystal-charge
+diagram** and the **Midnight Tracker** (Tables VIII–10 and VIII–11) for yourself, and the agenda cards, the invitation and the crystal-charge
 page (Player Handout 3) for the table.
 
 ## Reading This Book
@@ -112,7 +113,7 @@ palace diagram, the fight cards and every cross-reference.
 
 **Fight cards** live in chapter IX, S1–S14, one card each. A room that has a fight
 points at its card by ID, and the card points back. Every card carries its encounter
-budget for three 4th-level characters, terrain, objective, clock, outs, morale, and
+budget for three 4th-level characters, terrain, objective, clock, outs, morale, a line for one character alone, and
 scaling lines for four or five characters and for a party of four at 3rd or 5th level.
 
 **Stat blocks** live in chapter X, alphabetically, in SRD format. In chapters IV, V
@@ -147,7 +148,10 @@ helps: (see chapter V, "Down, Not Out"), (card S2), (area B9), (Table I–3).
 *If you have time* marks depth a four-hour table can leave out.
 
 **Every enemy** carries what it wants and what it does when its morale breaks, as well as
-its numbers. No fight in this module is to the death by default.
+its numbers. No fight in this module has to be fought to the end: every card has outs, and
+most foes break. After midnight, though, some of them can kill. How hard that bites is a
+dial with three settings, Gentle, Sharp (the one the book is written at) and Merciless
+(see chapter V, "Down, Not Out").
 
 **Gaps on purpose.** Some answers are left out deliberately (see "What the DM Knows",
 below).
@@ -175,7 +179,7 @@ terror, and choices about who to save.
 - **V. The Hour of Spirits.** The Dead Dance and the quarter-bells. Vell goes down to
   the river gate, and the guard on the east wing is doubled.
 - **VI. The Unmasking.** The lights die mid-sentence. The Uninvited kill Raunu, and
-  Veier escapes through the gardens on Vell's arm (the Crossing).
+  Veier escapes through the gardens and the river gate to Vell's boat (the Crossing).
 - **VII. The Longest Night.** Fire and rescue. The Bought hold the outer gate (S3)
   until it is decided, and then the last bell rings.
 
@@ -251,7 +255,7 @@ and put out the pregen sheets, the agenda cards and the invitation.
 | **The Entourage** | Somebody invited needed a companion, a bodyguard, a translator or a witness, and chose you. The best vantage point in the palace and the worst position to act from | The Vanished Servant · bodyguard to another player character |
 | **The Discarded Invitation** | A genuine card with someone else's name on it — bought, found, taken, or handed over by someone who wanted you to have this problem. The custom protects you until midnight | The Unpaid Debt · The Story of a Lifetime |
 | **Hired for the Night** | Paid staff: musician, cook, footman, cellar hand. A servant's freedom of the halls and a servant's invisibility. You walk up the street with the others and go in through the kitchens (B10) | The Vanished Servant · The Circle's Reckoning |
-| **The Patron's Errand** | A faction needed hands it could not be traced to. Your agenda is pre-loaded and your fee half-paid — and your patron is also a snake (see chapter IX) | The Circle's Reckoning · The Prelate's Question · The Cousin's Errand |
+| **The Patron's Errand** | A faction needed hands it could not be traced to. Your agenda is pre-loaded and your fee half-paid — and your patron may well be a snake (see chapter IX) | The Circle's Reckoning · The Prelate's Question · The Cousin's Errand |
 | **The Wrong Place, Deliberately** | Your own reason to be inside; the ball is your cover. Pick what you came for from something the palace already holds (see chapter IV) | The Unpaid Debt |
 
 **Then tell the table two things,** and only these two. "This is a glittering party
@@ -317,6 +321,7 @@ Inspiration is have-it-or-not, the list is short, and each award goes to one cha
 | **The pattern named aloud** — an omen read before anything explains it (the quiet guest's habits count), or an Undercurrent's find | The character whose player says it; once per Movement |
 | **A fight ended by an out** — the guards talked down, the toll paid, the thieves let go with something they can afford to lose, one snake turned on another | The character who took the out |
 | **A companion hauled up** at midnight (see chapter V, "Down, Not Out") | The one who hauled, the first time in the night |
+| **An End landed** on one of the Uninvited (see chapter V, "The Fractures") | The one who spoke it |
 | **The Attendant distracted** — the first attempt of the night, whether or not it works, and any natural 20 (card S14) | The one who tried |
 | **Somebody carried out** in Movement VII | The one who carried them, for the first person they bring out |
 
@@ -473,8 +478,8 @@ practice, what they came for, what constrains them, who the pale factor is worki
 against them, and why none of it will ever be public. That truth is complete enough to
 run every scene and answer every reasonable player action.
 
-It is not the whole truth. Where the module says "the module does not say", that is a
-load-bearing sentence, not a gap. Raunu's missing year, the full nature of the
+It is not the whole truth. Where the module says "the module does not say", that is
+deliberate, not a gap. Raunu's missing year, the full nature of the
 Uninvited's distant master and of what serves him, what the child will one day
 become: these are mysteries the adventure keeps on purpose. Resist the urge to invent
 answers at the table. The honest version of this night is the one where even the
@@ -555,8 +560,8 @@ correcting a player mid-scene costs more than the error did.*
 ## Safety and the Table
 
 This adventure contains violence erupting inside a celebration, the death of a host in
-front of his guests, and mortal danger near (never to, and never on-screen) a woman in
-late pregnancy and a newborn. Tell the table before you start. Agree on lines and veils before
+front of his guests, and a woman in late pregnancy who is wounded during the attack; what
+happens to her and the child afterward is left offscreen. Tell the table before you start. Agree on lines and veils before
 play; the pregnancy is central to the plot and cannot be cut, but every moment of harm
 can be handled by cutaway. This adventure's camera never lingers: when the worst
 happens, it happens at the edge of the frame, glimpsed through a crowd.
