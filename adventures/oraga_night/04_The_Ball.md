@@ -503,10 +503,11 @@ gifts.** What an hour in the laboratory yields, in rising order:
 - **The coast in crystal** — a grown relief of the eastern shore and its
   mist-lines going back four centuries, the recent lines reworked many times.
 - And at the center, the piece no one forgets: **a crystal orrery of two family
-  trees** — the Boranis line and the Nolonaire line, rendered in light, ancestry
-  descending generations deep, intertwining as they descend, both converging
-  toward a single darkened junction older than either house, where one name has
-  been deliberately, physically *burned out* of the lattice. And woven into the
+  trees** — the Boranis line and the Nolonaire line, rendered in light, both growing
+  from a single darkened junction older than either house, where one name has
+  been deliberately, physically *burned out* of the lattice. From that shared root
+  the two lines diverge and run apart for generations, never touching, until they
+  cross once, at the newest point of all, where Raunu and Veier meet. And woven into the
   orrery's base, in the private pattern-language the rest of the room refuses to
   yield, one figure repeats over and over — two streams of light falling into a
   single pool. A Scora, or anyone who takes an hour with it, can read the figure

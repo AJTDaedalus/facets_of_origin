@@ -73,23 +73,43 @@ gardens, the Crossing or the boat.
 
 **Reconciling the two [APPROVED TP64]:** one material, pink grown crystal. Where it is
 thick, unlit or seen against the night sky it reads deep violet to charcoal (the owner's
-image); wherever it is thinner or lit from within it glows rose to magenta up close and from
-the street. Before midnight rose leads and the dark mass supports it; up close the light is
-warm and shell-like. After the drain the crystal is colorless, milky, gray-violet dead glass
+image); wherever it is thinner or lit from within it glows deep magenta-violet up close and
+from the street (§0.2, TP74). Before midnight rose leads and the dark mass supports it. After the drain the crystal is colorless, milky, gray-violet dead glass
 everywhere; any rose after midnight is fire seen through or reflected in it, never the
 walls' own glow. Ward-light is a hard white-rose. Nothing glows white or blue except as
-noted for wards. Draw the palace warm, not as a horror castle: it is "the color of the
-inside of a shell" until midnight.
+noted for wards.
+
+**What "pink" means here [TP74; read before every image]:** the crystal's glow is a **deep,
+dusky purple-pink**: magenta shading into violet, saturated and low, the color of light
+coming through amethyst or out of the dark throat of a conch shell (that is the "inside of a
+shell" the module means: deep and glossy, not pale). It glows **out of darkness**: the crystal
+is dark at its heart and the color lives in its depths, so rooms stay dim and shadowed even at
+their brightest, with deep violet-black shadows. The mood is **eerie**: beautiful, but
+uneasy and old, as if the building is quietly alive. It is **never** light pink, baby pink,
+pastel, candy, blush, pearly or white-pink, and never fairy-tale or "magical" in a sweet way.
+No sparkles, glitter, floating motes, fairy dust, bokeh, lens flares, soft-focus haze or
+glowing mist. Not a horror castle either: no green, no gore, no skulls.
+- *Use words like:* deep magenta, violet-magenta, dusky rose, amethyst light, wine-dark
+  pink, ember-pink, glowing from within dark crystal, low-key lighting, deep shadow.
+- *Avoid words like:* pink (alone), pastel, soft pink, blush, rose-gold, fairy, enchanted,
+  whimsical, dreamy, sparkling, ethereal glow.
 
 **Mood by hour:**
 
 | Hour | Palette | Mood |
 |---|---|---|
-| Dusk to Movement IV | rose and magenta crystal, amber candle and hearth light, black and jewel-toned formal dress, gold on the high table | splendor stretched thin: lavish food and music in a house that is plainly too empty |
-| Movement V, the Dead Dance | lamps down; walls alone light the hall in shell-pink; faces are masks in silhouette | the most beautiful hour of the year, and the easiest to move unseen in |
+| Dusk to Movement IV | deep purple-pink crystal glowing out of dark, amber candle and hearth light, black and jewel-toned formal dress, gold on the high table | splendor stretched thin: lavish food and music in a house that is plainly too empty |
+| Movement V, the Dead Dance | lamps down; the walls alone light the hall, a dim, deep purple-pink; faces are masks in silhouette | the most beautiful hour of the year, and the easiest to move unseen in |
+| The drain itself (midnight) [TP71] | the room nearly dark; only a faint, failing dark purple-pink left in the crystal, enough to cut the people into near-silhouettes; no warm candlelight on faces | eerie: dark enough to frighten, never so dark you can't read who is where |
 | Midnight onward | crystal drained to colorless, milky gray-violet glass; candle and fire orange; smoke; sudden ward-flares | the burning building with three killers out of another age in it |
 | The gardens after midnight | dark; lanterns going out one by one; the palace dark above, burning behind (any rose is firelight through dead crystal) | the open, the chase, the one collision |
 | Dawn | fires out; gray light; soot on crystal | the counting |
+
+**Scale in the big scenes [TP71]:** the Crystal Court is about 140 × 80 feet under a vault some
+50 feet high, with two hundred people in it. In the Unmasking and every wide Court scene, frame
+for that size: a low or distant viewpoint, the vault rising out of frame or into darkness, the
+crowd shrinking toward the far end, people small against the piers. The room should feel too big
+for the light left in it.
 
 **Ward-light [APPROVED TP64]:** the module calls it ward-fire, ward-light, light flooding stairwells,
 crystal barriers sealing corridors, wards flaring over huddled guests, but gives no color.
@@ -631,7 +651,7 @@ drifting from the galleries; the floor faintly reflecting the vault's glow.
 - *III:* the summonses; a still figure on the high gallery, gone when looked for [PRINTED].
 - *IV:* the banquet called; Raunu standing at the high table, unmasked, plainly dressed,
   holding a cup; the toast; the two plates; out by the east doors [PRINTED].
-- *V, the Dead Dance:* lamps lowered "until the only real light is the walls," shell-pink;
+- *V, the Dead Dance:* lamps lowered "until the only real light is the walls," a dim, deep purple-pink (§0.2);
   slow, strange music; two hundred spirit-faces turning in the gloom; a bell striking the
   quarter somewhere above [PRINTED]. Corro and his bodyguards against a wall, facing out.
 - *Midnight:* the east doors open; Raunu mounts the dais; masks come off in a wave of
@@ -1096,7 +1116,8 @@ on a long grown table; the observation lattices in a single dated row on a ledge
 the stair, the deep **skeleton alcove**, dark until a lamp is carried in. Candles and oil lamps
 on the floor and ledges: Raunu's working light, because the crystal's own glow is soft.
 
-**Light and mood:** "lit from within," soft rose-white glow from every surface; quiet; warm;
+**Light and mood:** "lit from within," a deep purple-pink glow from every surface, the
+strongest in the palace but still out of dark (§0.2); quiet;
 beautiful and devotional; the stillest room in the palace. At midnight it is "the
 strongest-warded place in the palace" [PRINTED]. [APPROVED TP67] The drain does not reach the deep
 crystal: after midnight the Root is the one place in the palace still glowing rose.
@@ -1246,8 +1267,9 @@ not" items protect canon. Costume and architecture beyond the printed facts foll
   its dais at the far end.
 - **Focal point:** the empty high table under its canopy, small and bright at the vanishing
   point, with the whole ball turning in front of it.
-- **Lighting:** rose-lit crystal everywhere: walls, piers, the ribbed 50-foot vault glowing
-  shell-pink, brightest in the tall upper windows; candle stands and the two great hearths
+- **Lighting:** crystal glowing everywhere: walls, piers, the ribbed 50-foot vault in deep
+  purple-pink out of dark (§0.2), brightest in the tall upper windows, the vault's heights
+  sinking into violet shadow; candle stands and the two great hearths
   adding warm amber in the side aisles.
 - **People:** about two hundred masked guests in dark formal dress; dancers in sets; servants
   in livery threading through with trays (too few of them); musicians in the gallery in the
@@ -1308,7 +1330,8 @@ not" items protect canon. Costume and architecture beyond the printed facts foll
   the partner is the tall gray mask with carved tears (the Wept).
 - **Focal point:** the two joined hands and the Wept's carved-tear mask, half lit.
 - **Lighting:** "The lamps come down until the only real light is the walls, and the walls are
-  the color of the inside of a shell": soft pearly pink from the walls only, faces reduced to
+  the color of the inside of a shell": a dim, deep purple-pink from the walls only (§0.2,
+  never pale or pearly), faces reduced to
   masks in silhouette; a bell striking the quarter somewhere above.
 - **People:** dancers in spirit-masks, all anonymous; the Wept dancing "flawlessly, in a style
   generations out of fashion"; elsewhere, a mirror-bright mask dancing beautifully where a
@@ -1319,30 +1342,38 @@ not" items protect canon. Costume and architecture beyond the printed facts foll
   the Wept gentle.
 - **Must not:** menace; weapons; any figure showing their face.
 
-### Scene 7. The Unmasking: the Moment the Light Drains (Movement VI, midnight)
+### Scene 7. The Unmasking: the Moment the Light Drains (Movement VI, midnight) [TP71]
 
-- **Composition:** from the middle of the Court floor facing the dais, wide. Raunu on the dais
-  mid-sentence, looking once toward the east wing. Around the viewer, a sea of just-unmasked
-  faces, masks in hands. The rose light is draining out of the crystal **from the far end of
-  the hall toward the viewer**: the vault and north wall already dead glass, the near walls
-  still glowing. "In the last of the light, three faces are still masked": the tallest (the
-  Wept) in the crowd toward the dais; the mirror-bright mask (the Radiant) near the east side
-  of the hall; the blank mask (the Hollow) toward the main doors behind the viewer (out of
-  frame in this composition; reverse it to show him). Nobody has moved yet: the Wept's
-  crossing, the Hollow's post at the doors and the Radiant's vanishing (the gallery lanterns
-  going dark one by one toward the east) come a breath later and belong to a follow-on image.
-- **Focal point:** the line where the glow ends, crossing the room like a tide, and the three
-  masks in it.
-- **Lighting:** half the hall pink, half dead gray-violet glass lit by candles; faces lit from
-  below by candles; a fuse of dying lanterns along the east gallery.
-- **People:** Raunu, unmasked, plainly dressed, the cup set down, his hand going to his wrist,
-  not startled; two hundred guests turning; musicians stopping "in pieces"; on the nearest
-  table, a **folded cloak set down neatly**, and beside the three gray masks the Attendant,
-  facing the room, empty-handed, looking "at the spaces between the room and the three."
-- **Mood:** the breath before the scream.
-- **Must:** the drain moving far end → near end; exactly three masks still on; the folded
-  cloak; Raunu's hand at his wrist.
-- **Must not:** blood; anyone already attacked; Veier.
+- **Composition:** wide and low, from the middle of the Court floor facing the dais, so the
+  room's size does the work: the vault climbing out of sight into darkness 50 feet up, the piers
+  marching away down both sides under the galleries, two hundred people made small by the hall.
+  Raunu on the dais at the far end, mid-sentence, looking once toward the east wing. Around the
+  viewer, a sea of just-unmasked faces, masks in hands. "In the last of the light, three faces
+  are still masked": the tallest (the Wept) in the crowd toward the dais; the Radiant near the
+  east side of the hall; the Hollow toward the main doors behind the viewer (out of frame in this
+  composition; reverse it to show him). Nobody has moved yet: the Wept's crossing, the Hollow's
+  post at the doors and the Radiant's vanishing come a breath later and belong to a follow-on
+  image.
+- **Lighting:** **dark.** The rose has drained almost out of the crystal: only a faint, failing
+  dark purple-pink remains, low in the walls and piers, strongest nearest the viewer and dying toward the far
+  end. It is the only real light in the room. Against it the crowd stands as **near-silhouettes**:
+  shoulders, heads, raised hands holding masks, edged with the faintest violet-pink. No warm candlelight
+  on faces (the candles are guttering or out). Eerily dark, but legible: every figure readable as
+  a shape, and the eye can find Raunu, the three masks and the cloak.
+- **Focal point:** the three masks, each catching the last light in its own way (§4, TP70): the
+  Wept's pale porcelain faintly visible; the Radiant's mirror throwing back a hard magenta point of
+  light, the brightest thing in the room; the Hollow (if shown) a flat darker hole that takes no
+  light at all.
+- **People:** Raunu, unmasked, plainly dressed, the cup set down, his hand going to his wrist, not
+  startled, a silhouette at the dais; two
+  hundred guests turning; musicians stopping "in pieces"; on the nearest table, a **folded cloak
+  set down neatly**, and beside the three gray masks the Attendant, facing the room,
+  empty-handed, looking "at the spaces between the room and the three."
+- **Mood:** the breath before the scream: a vast room going dark around too many people.
+- **Must:** dark, with the faint pink as the main light; the room's scale; exactly three masks
+  still on; the folded cloak; Raunu's hand at his wrist.
+- **Must not:** bright or evenly lit; warm candlelit faces; blood; anyone already attacked;
+  Veier; darkness so total the scene can't be read.
 
 ### Scene 8. Raunu's Last Stand on the Dais (Movement VI)
 
@@ -1395,7 +1426,7 @@ not" items protect canon. Costume and architecture beyond the printed facts foll
   the party with Veier below.
 - **Lighting:** dark terraces, lanterns going out one after another behind them; bursts of
   crystal light from the duel; fire glow from the palace windows. No mist.
-- **People:** **Vell**: tall, pale, in a trade factor's plain good clothes, moving "the way the
+- **People:** **Vell**: very tall and built like a tank, old scars, in his working coat (§4), moving "the way the
   gray masks move, arriving instead of running," bare-handed, **the enormous broadsword still
   wrapped in white cloth on his back**, untouched. **The Radiant**: mirror-bright gray mask,
   formal antique dress, bare hands, in wary, hating recognition ("...You."). **Veier**: upright
@@ -1579,8 +1610,21 @@ earth-colored border wool, and slings are their mark.
   hands. They move by "arriving, not running."
 - **[APPROVED TP64] for all three:** formal dress of an antique cut, rich but subdued (high collars, long
   sleeves, fabrics a century or two out of fashion), in grays and faded black; the masks
-  full-face, smooth, of a pale gray material like matte porcelain or ash-glazed stone with no
-  visible ties.
+  full-face, smooth and unornamented, with no visible ties.
+- **Telling the masks apart [TP70]:** all three are gray and unornamented (printed), so they
+  differ by **surface, shape and how they take light**, never by decoration. Each must read in
+  silhouette and at a glance across a ballroom:
+  - **The Wept:** soft dove-gray matte porcelain; an oval face with a gentle, downcast set; the
+    carved tears.
+  - **The Radiant:** **light.** Gray-silver polished to a true mirror; it never looks gray in a
+    lit room, only bright. Its shape is **long and narrow, the face lifted slightly upward** as if
+    to a light above (his kills are "offered upward"). Always throws a hard highlight and the
+    reflection of whoever watches him. Eyeholes long and narrow.
+  - **The Hollow:** **no light.** Dead-matte charcoal-slate, the texture of cold ash or unglazed
+    stone, that drinks light and shows no highlight at all. Its shape is **broad, wide and flat,
+    set level and low**, too large for the face behind it, with no mouth, no nose ridge, and
+    eyeholes so small and deep they read as shadow. Where the Radiant is a light, the Hollow is a
+    hole in the room.
 - **The Wept** — *"the gray mask with carved tears."* The tallest; a woman; leads. Warm, sure
   hands; dances flawlessly. When Bloodied, "the mask's carved tears begin to run — actually
   run," and she hums a cradle-song. During the attack, "under the carved tears, the mask is a
@@ -1591,13 +1635,14 @@ earth-colored border wool, and slings are their mark.
   subject of duty"; asks "Whom do you serve?"; blesses the food with an antique sign; "dances
   beautifully, where the light falls"; poses and savors when watched; stages kills "offered
   upward, like rites." [APPROVED TP64] Tall, elegant; a long coat of pale gray silk; the mask the same
-  unornamented shape as the others but polished to a mirror sheen that throws back the light
-  (gray-silver, not gold), reflecting whoever watches him. *Must not:* sculpted aristocratic
+  unornamented, long and narrow and lifted, polished to a mirror sheen that throws back the
+  light (gray-silver, not gold), reflecting whoever watches him (TP70). *Must not:* sculpted aristocratic
   features on the mask (it is unornamented), a weapon.
 - **The Hollow** — *"the blank gray mask."* A man; stands beside a different exit all night;
   "devastating flatness"; holds the doors, never advances; flinches from ward-fire "the way a
   tired man flinches from being asked to try." [APPROVED TP64] Broad, heavy-shouldered; a plain dark-gray
-  coat of antique cut; the mask a perfectly blank gray oval, no features at all. *Must not:*
+  coat of antique cut; the mask broad, flat and dead-matte charcoal-slate, no features at all,
+  showing no highlight (TP70). *Must not:*
   plate armor or any armor (he passes as a guest at a ball).
 
 ### The Attendant
@@ -1622,12 +1667,34 @@ earth-colored border wool, and slings are their mark.
   touches it and never unwraps it"; at the Crossing **the sword stays on his back** while he
   holds the Radiant (TP19). Unmemorable "and that is not luck." Courteous, brief. At the
   Crossing he "moves the way the gray masks move, arriving instead of running." Rows the boat.
-- **[APPROVED TP64]:** forties; very tall and spare; white-blond or ash hair, close-cut; a plain,
-  well-cut factor's coat of gray-brown, travel boots, nothing that draws the eye; the wrapped
-  sword nearly as long as he is tall, its white wrappings bound with cord, the hilt also
-  wrapped; mask before midnight a plain, forgettable spirit-face, not gray.
+- **[APPROVED TP69, owner's description]:** forties; **very tall and built like a tank**: deep
+  chest, heavy shoulders, big hands, the frame of a man who has carried weight all his life. Old
+  battle scars he doesn't hide: a pale seam through one eyebrow, a nick out of an ear, scarred
+  knuckles (place them; keep them healed and old, never fresh). White-blond or ash hair,
+  close-cut. He **dresses well** and his face is **warm**: an easy, kindly look, the manners of a
+  good host's best guest. And yet it is plain at a glance that crossing him would be a mistake.
+  The warmth and the danger sit in the same face at once. Nothing about him is noble: he is a
+  rich trade factor, not a lord.
+- **The sword [APPROVED TP69]:** large, nearly six feet, but he is big enough that it never looks
+  ridiculous on him; it sits on him the way a walking stick sits on a smaller man.
+- **Two portraits [APPROVED TP69]:**
+  - **The working coat** (what he wears on Oraga night, every scene in this brief): dressed well
+    but for movement. A well-cut coat of gray-brown wool, shorter in the skirt and cut loose
+    through the shoulders and arms; a plain dark waistcoat; trousers tucked into soft, sound
+    travel boots; gloves in a pocket; no jewelry that catches. The broadsword **wrapped in white
+    cloth, slung diagonally across his back**, hilt over the right shoulder, untouched. Mask
+    before midnight: a plain, forgettable spirit-face, not gray.
+  - **The formal coat** (what he wears when he expects no danger; not Oraga night): formal but
+    not a noble's: a long, dark, beautifully tailored merchant's frock coat to the knee, high
+    collar, a good shirt, polished shoes, one modest ring. No sword in sight: it travels in a
+    **large musical instrument case** he carries by its handle or on a shoulder strap, the size of
+    a big bowed instrument's, plain dark leather with brass corners, and he handles it as if it
+    weighs nothing. No mask (outside the festival).
+- **At the table he is never interesting to look at, and that is not luck** (07). The art shows
+  what he really looks like; the people in the scene don't hold it. Never draw other figures
+  staring at him.
 - **Must not:** his hand on the sword; the blade bare; a bone mask; a named people for him (the
-  module never says where he is from).
+  module never says where he is from); fresh wounds or a brutish face; noble regalia.
 
 ### Prelate Damaris Kovaun, the Church
 
@@ -1754,13 +1821,29 @@ earth-colored border wool, and slings are their mark.
   lattice. The recent lines have been reworked many times." Grown, cannot be carried. The
   work-slate: "a half-erased lattice diagram," the door-key of the Root; the wardens wipe it.
   No papers (TP38).
-- **[VX]:** the table a single waist-high slab of grown crystal about 14 × 7 feet; its top a
-  raised coastline in pale crystal (headlands, coves, river mouths) with the sea a lower,
-  darker plane; the mist-lines are threads of colored light (rose, amber, violet, pale green)
-  laid in nested contour lines offshore, the newest lines nearer the coast and visibly
-  re-grown over older ones, a palimpsest of light. The slate: a dark slab the size of a
-  serving tray in a plain frame; a fine diagram of interlocking lattice lines (a geometric
-  web, not letters), half rubbed out at one side.
+- **[VX, detail per owner TP72]:** the table is a single waist-high slab of grown crystal about
+  14 × 7 feet, set with its long axis north–south. Its top must read at once as **a stretch of a
+  long coast, not an island**:
+  - **The shoreline runs the full length of the table**, entering at one short end and leaving at
+    the other, never closing on itself. Land fills the west half of the top, sea the east half,
+    and the relief is cut off cleanly at both ends and at the landward edge, as if this is one
+    section lifted out of a much longer map. No land appears on the seaward side.
+  - **The land rises inland**: a low coastal strip, then folded hills climbing toward the
+    landward edge, where the relief is highest; valleys and two or three river courses cut down
+    through them to the shore. Fine, real-looking terrain, in pale crystal.
+  - **The shore is ragged and specific**: headlands, deep coves, a long spit, river mouths
+    fanning into the sea, small rocks and shoals just offshore. It should look surveyed, not
+    stylized.
+  - **The sea** is a lower, darker, smooth plane running out to the table's eastern edge.
+  - **The mist-lines** lie over the sea as threads of colored light (rose, amber, violet, pale
+    green) in nested bands roughly parallel to the coast, like contour lines of where the mist's
+    edge has stood over four centuries. The oldest are faint and steady. The newest are the
+    brightest, **farthest out to sea** (the mists have receded to record lows this year, 02), and
+    visibly re-grown over and over: tangled, doubled, corrected, a palimpsest of light.
+  - **No writing anywhere:** no names, labels, compass rose or legend, and no named places (the
+    law forbids writing, and the module names none of this coast).
+  - **The slate:** a dark slab the size of a serving tray in a plain frame; a fine diagram of
+    interlocking lattice lines (a geometric web, not letters), half rubbed out at one side.
 
 ### The instruments (B8 and the Root)
 - **Printed:** "Nobody can name them." In the Root, "instruments of glass and lattice" that read
@@ -1793,13 +1876,18 @@ earth-colored border wool, and slings are their mark.
   going back four centuries, the recent lines reworked many times." [VX] Kin to the study's
   table, longer and older, with many more strata of lines.
 - **The two-family orrery [PRINTED]:** "a crystal orrery of two family trees. The Boranis line
-  and the Nolonaire line are rendered in light, descending generations deep and intertwining as
-  they descend. Both converge toward a single darkened junction older than either house, where
-  one name has been deliberately, physically burned out of the lattice." In its base, "one
+  and the Nolonaire line are rendered in light, and both grow from a single darkened junction
+  older than either house, where one name has been deliberately, physically burned out of the
+  lattice. From that shared root the two lines diverge and run apart for generations, never
+  touching, until they cross once, at the newest point of all, where Raunu and Veier meet"
+  (TP73). In its base, "one
   figure repeats over and over: two streams of light falling into a single pool." [VX] Two
   great branching lattices of light, one rose and one amber-gold, about 8 feet tall on a low
-  round plinth, branching downward like roots rather than up like trees, weaving through each
-  other as they descend until both meet at a dark scorched node near the base; the base a ring
+  round plinth. **The shape matters (TP73):** both rise from one dark, scorched node at the
+  bottom (the shared root, with the burned-out name); from it the two lattices split apart and
+  climb on opposite sides, branching generation by generation, with clear empty space between
+  them all the way up; they never touch until the very top, where one fine newest branch from
+  each reaches across and the two cross at a single bright point (Raunu and Veier); the base a ring
   of crystal with the two-streams-into-one-pool figure repeated around it as a pattern (two
   falling lines meeting in a circle). **No names are written anywhere on it** (a name in a
   lattice is a light-pattern, not letters).
@@ -1877,7 +1965,10 @@ earth-colored border wool, and slings are their mark.
 - **Printed:** "an enormous broadsword wrapped in white cloth across his back." Never touched,
   never unwrapped.
 - **[VX]:** nearly six feet long, broad-bladed, every inch bound in white cloth wrapped in
-  overlapping turns and cord-tied, hilt included; slung diagonally.
+  overlapping turns and cord-tied, hilt included; slung diagonally. Large, but in proportion to
+  Vell (TP69).
+- **[APPROVED TP69] Away from Oraga night** (formal portrait only): it travels hidden in a large
+  musical instrument case, plain dark leather with brass corners.
 
 ### The Bought's contract case (B12)
 - **Printed:** "a case of writing chained to the sergeant's hip"; it holds the three tasks; held
@@ -1987,8 +2078,8 @@ the manifest should become. File names are under `conversions/dnd5e/oraga_night/
     and on ledges grown out of the wall (TP64).
 11. **`map_b11_root_of_the_house.png`: the orrery and the slate.** The "Orrery of the Seven
     World-Anchors" with "6 massive crystal roots converging" contradicts the text. Canon: a
-    **crystal orrery of two family trees**, Boranis and Nolonaire, in light, intertwining down to
-    one darkened junction with one name burned out, and in its base the repeated figure of **two
+    **crystal orrery of two family trees**, Boranis and Nolonaire, in light, growing apart from one
+    darkened root with one name burned out and crossing only once, at the top (TP73), and in its base the repeated figure of **two
     streams of light falling into a single pool**. Also: the "wiping-slate" belongs in the study
     (B8), not the Root (the slate is the Root's key and the wardens wipe it upstairs). Add what is
     missing: the recall-lattice racks, the chair with a wide armrest, the stool and the Thenya wool
@@ -2007,7 +2098,9 @@ the manifest should become. File names are under `conversions/dnd5e/oraga_night/
 13. **`cast_master_vell.png`: gripping the sword; a non-module people label; bone mask.** Vell "never touches" the
     sword and it stays wrapped on his back all night (TP19; 07, 10). Redraw with the wrapped sword
     on his back, hands empty. The people label is not canon and the module never says where he is from;
-    remove it. The "carved bone half-mask" is unsupported; keep his look forgettable.
+    remove it. The "carved bone half-mask" is unsupported. Redraw him to §4 (TP69): very tall,
+    built like a tank, old scars, warm face, well dressed; two portraits, the working coat with
+    the wrapped sword and the formal coat with the instrument case.
 14. **`cast_raunu_and_veier.png`: setting and props.** Veier never enters the ball and is never
     seen before the Crossing (TP13, TP41), so a joint portrait "inside the Crystal Court" breaks
     canon; set any portrait of her outside the ball's story (a neutral ground), or show her only
@@ -2021,7 +2114,8 @@ the manifest should become. File names are under `conversions/dnd5e/oraga_night/
     remove sculpted features.
 17. **`bestiary_the_hollow.png`: "battered plate armor."** The Uninvited pass all evening as
     charming guests in antique dress who eat, drink and dance; plate armor contradicts that. Redraw
-    in formal antique dress. His blank gray oval mask is right.
+    in formal antique dress. His blank mask is right in spirit; make it broad, flat
+    and dead-matte charcoal-slate with no highlight (§4, TP70), so it never reads like the Radiant's.
 18. **`bestiary_the_wept.png`: "damp ash-gray robes."** Not printed; she dances at a ball, "gracious,
     a little sad." Prefer a formal gown of antique cut. Her carved-tear mask is right; the "silver"
     tear tint is an extrapolation (acceptable if subtle; the mask is gray and unornamented).
@@ -2130,13 +2224,11 @@ listed at the end and remain tagged [VX].
     goes down at their west end to the lower cellar (−30) and its living-crystal wall; the Root
     (a 50-ft domed rotunda, −45) lies beneath the wine cellars' west end, under the Court's
     south half, grown from a central root-node (owner to confirm the root-node's look). Whether
-    the Root keeps its glow after the drain is the owner's to decide; until then, draw it lit by
-    Raunu's candles and lamps.
+    the Root keeps its glow after the drain: yes (TP67), it still glows rose.
 11. **Materials and color:** one material, pink grown crystal. Where it is thick, unlit or seen
     against the night sky it reads deep violet to charcoal (the owner's image); wherever it is
-    thinner or lit from within it glows rose to magenta up close and from the street. Before
-    midnight rose leads and the dark mass supports it; up close the light is warm and
-    shell-like. After the drain the crystal is colorless, milky, gray-violet dead glass
+    thinner or lit from within it glows a deep, dusky magenta-violet, up close and from the
+    street, always out of dark and never pastel (TP74). After the drain the crystal is colorless, milky, gray-violet dead glass
     everywhere; any rose after midnight is fire seen through or reflected in it, never the
     walls' own glow. Ward-light is a hard white-rose.
 12. **Boranis livery** (violet-charcoal, rose-crystal buttons) and the honor guard's surcoats.

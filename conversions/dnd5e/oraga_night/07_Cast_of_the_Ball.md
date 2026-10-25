@@ -535,8 +535,10 @@ unless the table works hard to change it.
 ## The Other Guests
 
 ### Master Vell — the Pale Factor
-*Tall, pale, soft-spoken; a trade factor no one remembers inviting — carrying,
-of all things, an enormous broadsword wrapped in white cloth across his back.
+*Very tall, pale and built like a siege wall, with old battle scars he doesn't hide;
+well dressed, soft-spoken and warm, and plainly a man it would be a mistake to cross.
+A trade factor no one remembers inviting — carrying, of all things, an enormous
+broadsword wrapped in white cloth across his back, and big enough that it suits him.
 See chapter II: he is the second hidden power's whole presence at the ball.*
 
 **Wants:** the river gate open at midnight and no one ever remembering his face.
@@ -545,7 +547,8 @@ respect of a man who knows what they cost. **Secret:** all of them.
 
 **The sword:** in a culture where strong personalities wear big steel, a wrapped
 broadsword on a factor's back earns an eyeroll and nothing more, which is
-precisely why he can carry it. He never touches it and never unwraps it. If a
+precisely why he can carry it. (On a night he expects no trouble it travels in a large
+musical instrument case; tonight it is on his back.) He never touches it and never unwraps it. If a
 character asks about it, he says only, "An inheritance," and means it.
 
 *(DM truth: unwrapped, the blade would release the screams of every soul it has
