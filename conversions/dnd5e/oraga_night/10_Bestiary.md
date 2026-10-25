@@ -1155,7 +1155,7 @@ passages, if they are in reach.
 ### The Hollow
 *The blank gray mask.*
 
-*Medium Humanoid (Human), Neutral*
+*Medium Humanoid (Human), Unaligned*
 
 **AC** 16 · **Initiative** +3 (13)
 **HP** 157 (21d8 + 63)
@@ -1436,7 +1436,7 @@ instead.
 ### The Radiant
 *The mirror-bright mask.*
 
-*Medium Humanoid (Human), Neutral*
+*Medium Humanoid (Human), Unaligned*
 
 **AC** 17 · **Initiative** +9 (19)
 **HP** 162 (25d8 + 50)
@@ -1972,7 +1972,7 @@ miss.
 ### The Wept
 *The gray mask with carved tears.*
 
-*Medium Humanoid (Human), Neutral*
+*Medium Humanoid (Human), Unaligned*
 
 **AC** 18 · **Initiative** +7 (17)
 **HP** 187 (22d8 + 88)
@@ -2095,7 +2095,7 @@ still calls for a saving throw, and they roll it: each line gives the Wisdom and
 Charisma saves a social spell asks for (any other save is +0).*
 
 **Raunu Boranis** — *Medium Humanoid (Human).* AC 12 · HP 40 · Speed 30 ft. ·
-Saves Wis +5, Cha +2. He will
+Saves Wis +5, Cha +2 · Condition Immunities Charmed. He will
 not fight a guest, and nothing in this module makes him. If it comes to it, on his
 turn he never attacks: he releases a ward (see chapter V), and a door, a light or a wall
 of crystal answers him. Deceiving him takes a DC 25 Charisma (Deception) check.
@@ -2143,7 +2143,7 @@ somebody, and the inquest hears of it.
 ### Master Vell
 *The Pale Factor.*
 
-*Medium Humanoid (Human), Neutral*
+*Medium Humanoid (Human), Unaligned*
 
 **AC** 20 · **Initiative** +4 (14)
 **HP** 285 (30d8 + 150)
