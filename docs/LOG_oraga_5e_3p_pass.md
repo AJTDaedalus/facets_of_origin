@@ -938,3 +938,114 @@ Read first: TASKS WP9, DECISIONS TP1–TP76 and the TPN notes, this LOG's tail. 
 ### Close
 - Done: T9.1–T9.12. Open: T9.13 (commit; not done, per brief). No ⛔ OWNER items: Svara was glossable from printed text.
 - Final checks from `M/`: lint 0; fact_check 0; bestiary 0 mismatches; pregen 0 issues; `pytest tools` **668 passed, 1 skipped** (576 + 1 at start; +73 `test_build_print.py`, +19 `test_wp9.py`). Repo root `pytest research/oraga_5e_sim` **34 passed**. `software/` docs-consistency + private-canon **42 passed**; the new untracked files and the generated packets also pass the canon detector. Print build: DM packet 10 pages, player packet 6, card deck 56, pregen sheets 13 (PDF via Playwright Chromium). No commit or staging; `M/art/` untouched.
+
+## WP11 run (2026-10-25)
+
+Read first: TASKS WP11 and its header conventions, DECISIONS TP1–TP76 and the TPN notes, this LOG's tail, `docs/audit_oraga_5e_3p/VOICE.md` (R1–R22). Overrides applied: TP57 (no dial, so the glossary has no "dial" line), TP65 (the Tithe in two heads), TP66 (S12 is Corval in the Kitchens). Rule for the pass: light touch, keep the voice, never change a rule, number, DC or canon fact. Baseline from `M/`: lint 0, fact_check 0, bestiary 0, pregen 0, `pytest tools` 668 passed + 1 skipped.
+
+**Tic metric.** `lint_5e.py --report` has no colon count, so a scratchpad counter (prose lines only: headings, tables and HTML comments stripped; run-in label colons such as `**Wants:**` counted apart) gives the before figures, per 1,000 words:
+
+| file | words | prose colons | semicolons | em dashes | "the way" simile | ", not " |
+|---|---|---|---|---|---|---|
+| 01 | 5,707 | 77 (13.5) | 30 (5.3) | 10 (1.8) | 0 | 9 |
+| 02 | 4,377 | 61 (13.9) | 18 (4.1) | 7 (1.6) | 0 | 4 |
+| 03 | 1,802 | 19 (10.5) | 17 (9.4) | 0 | 1 | 1 |
+| 04 | 16,085 | 174 (10.8) | 94 (5.8) | 26 (1.6) | 12 | 12 |
+| 05 | 15,034 | 187 (12.4) | 66 (4.4) | 43 (2.9) | 5 | 10 |
+| 06 | 1,168 | 13 (11.1) | 5 (4.3) | 1 (0.9) | 2 | 1 |
+| 07 | 8,742 | 87 (10.0) | 89 (10.2) | 27 (3.1) | 4 | 5 |
+| 08 | 3,584 | 60 (16.7) | 56 (15.6) | 13 (3.6) | 0 | 1 |
+| 09 | 20,299 | 204 (10.0) | 133 (6.6) | 85 (4.2) | 3 | 14 |
+| 10 | 16,034 | 149 (9.3) | 150 (9.4) | 42 (2.6) | 3 | 12 |
+| 11 | 3,294 | 53 (16.1) | 45 (13.7) | 5 (1.5) | 4 | 2 |
+| **all** | 96,126 | 1,084 (11.3) | 703 (7.3) | 259 (2.7) | 34 | 71 |
+
+The `lint --report` tic table at start: exactly 13, the whole 12, quietly 10, out loud 8, genuinely 4, say so 5, permanent confusion 1, not X… but Y 4 (all at or under target).
+
+### T11.1 "Words of the Night" glossary
+- **01:** a **Sidebar — Words of the Night** at the end of *Reading This Book* (after "Gaps on purpose"), 16 lines, one or two plain sentences each: Movement, omen, agenda, Undercurrent, snake (threat line, tell, heat), the Uninvited (the Wept, the Radiant, the Hollow), the Attendant (Idle, Focused), Delay, Stop and End, Fracture tell, threat, the Bought, the Midnight Clock, beat, ward-point, the Crossing. Every definition restates chapter II, IV, V or IX text; no new fact. No "dial" line (TP57). "Midnight Order" not adopted (T11.2), so the Clock line says "Despite the name, it is a numbered list."
+- **Inline glosses at first use:** the prep box's Delay ("Delay is the turns the Uninvited lose. It buys time and never beats them."), its first Radiant ("the one who hunts Veier"), and the first Wept in *When It Goes Sideways* ("a monster in the Wept, the Uninvited who goes for Raunu on the dais"). The Bought's first use (Movement VII overview) now follows the glossary.
+- **`T/terms.txt`:** Delay, Wept, Radiant, Hollow, Midnight Clock, Fracture tell, each glossed by the sidebar.
+- Checks: lint 0 (one SOFT `not_but` hit from a first draft of the Clock line, reworded); fact_check 0.
+
+### T11.2 Overloaded terms
+- **"Fracture tell" every time** an Uninvited's tell is meant: 05 *The Fractures* (the run-in "How ammunition works" became "How Fracture tells work", which also retires a pet image; 13 sites in the section, Table V–6 retitled *Fracture Tells*, the Mercy, Permission and Radiant lines), 01 prep box (three sites), 08 the night-tracker's "Fracture tells to show", 09 Church line Mv IV "(a Fracture tell; see chapter V)". Snake tells stay "tell"; the glossary says the two are different things.
+- **"Threat line"** is spelled out at first use in 01 (*The Snakes in the Chicken Pen* and now the glossary) and at the head of 09 ("how their threat line (their scheme for the night) tightens"); later "line" stays short.
+- **"Midnight Order" not adopted** (TPN-55a): the Midnight Clock is named in 01, 05, 08, 10, the flow page and the tests, and 05 already says "the night runs in this order"; the glossary line ("Despite the name, it is a numbered list") does the job without a rename.
+- **The fourth iron:** 05 *The cards* now states Draunel's plan first and names it after ("That is Draunel's fourth iron (chapter IX, "House Draunel"), card S13."), so the gloss comes before the term. 05's later "the fourth iron" (DM Note) follows it. 07's "three other irons" left (disputed sub-point, consistent).
+- Checks: lint 0; fact_check 0.
+
+### T11.3 Meta and kickers
+- Located by quote (VOICE's line numbers are from `b254fb0`). Already gone before this task: R13 "This is the crescendo" (5e), R16 "Guilt is slow", R17's "deliberate" and "Write the herring" (TP44 rewrote the note; no "carter" is left anywhere, so TP12's "horses" needs no edit).
+- **Applied, 5e:** R1 and R2 (01 *What the DM Knows*: "the answer is withheld on purpose… Don't invent answers for them at the table. Nobody in the world ever learns them, the survivors included."; the spell line ends "rumor and contradiction, which is what the world gives everybody else"). R9 (04 Undercurrent B find). R10 (04 Undercurrent D "At midnight", which now says "counts as Fracture tells"). R11 (04 Dead Dance omen: "It counts as a Fracture tell for the Wept (chapter V), and the epilogue gives it back to them."). R12 (05 ⟨The child is taken⟩). R14 (05 *The Fractures*: "The point is the seams" and the em-dash aside cut). R15 (05 DM Note, "Never lower the numbers…"). R17's last line (05 B12 DM Note: "none of those accusations is the answer"). R18 both (05 B12 last bell: "The Bought's contract ends, and so does the night."; the other attacks: "They were diversions, and who ordered them is one of the questions the module does not answer.").
+- **Other meta and kickers from VOICE P1-2:** 04 B0's seven-sentence DC 13 pedagogy note cut to three ("Keep it at 13 even though 10 would hand the table an early win…"); 04 *Threading the clock* loses "The Undercurrents are depth, not the floor."; 05 ⟨They save Raunu⟩ loses "Grieving the living is the price of this victory" and "worth the whole divergence" (now "Give Vorlain his moment when his brother walks out of the smoke."); 07 the Attendant "is the entire exposition" → "is all the explanation the night gives"; 07 Raunu "a reputation for total preparedness means never having to" → "His reputation for being ready for everything does that for him."
+- **Kept** (earn their place, or owner-ruled): 01 "The party is over." and "It has written its own Val'loh."; 07 Vell "That is not luck." (TP69 confirms it); 07 the Uninvited "What makes them monstrous is how much of them is left." (02 no longer carries the twin, so it is no longer a repeat).
+- **F/ (same sentence present):** 01 *What the MM Knows* (R1) and the reading note's "that is load-bearing"; 04 Undercurrent B find (R9, plus the meta "let the table feel the floor tilt"), Undercurrent D's two "Fracture ammunition" lines, the Dead Dance "sorrow ammunition", *Threading the clock*'s closer; 05 the crescendo opener (R13, without 5e's "carrying Veier"), "The point is the seams" (R14), "How ammunition works" → "How tells work", the diversions line (R18); 07 Raunu and the Attendant lines. F/05 still has no "darkest branch" double colon or "Never, ever".
+- No rule, number or DC changed. Checks: lint 0; fact_check 0; software docs-consistency + private-canon 42. `copyright_scan.py` needs `--refs`, and there is no refs directory on this machine (as in WP10), so it was not run.
+
+### T11.9 Read-aloud slips; blank cheque; Captain; DC names
+- **R5–R7 and R20**, in both editions (the same sentences are in F/): 04 *The Crystal Court* box "a faint warmth, like stone that has been in sun all day" (no "where you brush them"); 04 B4 box "Guests slow as they pass the doorway, look in, and keep walking."; 04 Movement V Dead Dance box "You cannot tell who anyone is, and nobody can tell who you are." (the em dash and "that is the point of the hour" gone); 05 epilogue "a sentence two years in the keeping that no one will ever hear".
+- **06 blank cheque:** the Church's favor is "one favor the Prelate can grant without scandal; make it two if the character also gave her something true about the three gray masks to file". 02 Agenda 2's *Pays* ("the DM may make it larger") matches. The condition is the Church line's printed −1 heat trigger. INVENTIONS **#135**.
+- **R21:** 07 the Captain "a man of business who has been shot at often enough that nothing tonight hurries him"; F/07 *Play him* the same. No new fact (the next sentence already says he never commits recklessly).
+- **DC ladder names (TPN-55b):** left as they are. 01 already says "The tier names are this module's own. The SRD's table calls a DC of 15 Medium; this ladder splits that middle into 13 and 15, because a mask is worth two points tonight." Renaming Standard to Medium would put "Medium" on two DCs, and every check in the body prints a single DC, so the ranges never reach play.
+- Checks: lint 0; fact_check 0.
+
+### T11.8 B5 and B8 read-aloud (and B3, B7, B10)
+- Five new boxes in 04, each under its own "**Read this when …:**" trigger, with the room's prose moved below the box (B2's layout): **B5** 51 words, **B8** 45, and, time allowing, **B3** 42, **B7** 35, **B10** 42. Every element traces to a printed line (listed in INVENTIONS **#136**). B5 places nobody near Veier (TP13) and describes the terraces before midnight; the gate is "shut" (the lock can't be seen). B8 says "a coastline" (the characters have not identified the eastern coast) and invents no shelves, light or furniture. B7 first said the guards were "not looking at the door"; cut, as an inference.
+- 5e only (TASKS lists `M/04`; L-070 is `CANON`). Checks: lint 0 (readaloud_trigger and box_label clean); fact_check 0.
+
+### T11.7 Rhythm tics
+- **"The way X" similes:** of VOICE's five in DM prose, kept the two best, 07 Vorlain "the way other men pocket coins" and 04 Movement IV omen "the way a forest does when something walks through it". Converted: 04 Movement III "watching the room the way a man watches weather" → "watching the room" (both editions); 04 the summons "the way a man mentions the weather to someone standing in it" (cut, "almost absently" kept); 04 Undercurrent D "He listens, completely, the way he listens to everything" → "He listens to all of it"; 07 Tavva "she respects the way sailors respect weather" → "she has learned to respect" (both editions). Left: read-aloud similes (the kettle, the lantern, the servant at a door), functional comparisons ("the way you show an omen") and the Hollow's printed tell (Table V–6 and its block).
+- **"Arriving":** kept only in the INVENTIONS #66 Crossing read-aloud (05). 05 Movement VI step 3 "not running, arriving" → "crosses the dark hall toward the dais without hurrying"; 07 Vell and 10 Vell *Elsewhere* drop "arriving, not running". F/05 step 3 and F/07 Vell match; F/05's own Crossing box keeps it.
+- **Repeated facts, flourish dropped** (the scene chapter keeps the image, the lookup chapter states the fact): Corro's gift "ringing like a struck glass" kept in 04, plain in 07 and 10 ("on edge… points nowhere"); Raunu's "the true thing said where the polite thing was expected" kept in 04, 07 "blunt truths where small talk belongs"; "lands on her like a slap" kept in 04 and Maiven's block, 07 "hits her hard"; "acquires teeth" kept in 04, 09 "Her question turns sharp"; "cold after the Court" kept on the S6 terrace box, the S8 corridor box is "cold"; "The Wept is not going anywhere. The guest is." kept in 01, cut from 05's DM Note; Vell "done the arithmetic" kept in 07, 10 *Move Aside* "made his choice". Pet images: 01 DM Note "Delay buys hallways and lives" → R22's "Cleverness slows them down (Delay), every turn they lose is a hallway or a life"; 05 Thenya "witnesses are hallways" → "he performs for witnesses" (no rules claim, since TPN-30 says *Witnessed* adds nothing in the east wing). "Census of souls" (04 and the Prelate's trait name) and "rumor has no shelf" (07 only now) left.
+- **Short-sentence share** (≤ 6 words): 01 15.6% → 14.3%, 04 10.2% → 10.3%, 05 12.0% → 11.1%, 07 8.9% → 9.1%; all inside the references' 9–11% band except 01, which carries the prep box's short imperatives.
+- **Lint tic count** 57 → 56 ("the whole" 12 → 11). Checks: lint 0; fact_check 0; bestiary 0 mismatches.
+
+### T11.10 Draft mid-tier speech habits (TP22) — PROPOSAL FOR OWNER APPROVAL
+Full draft, with citations, examples and questions: `docs/DRAFT_oraga_speech_habits.md`. Nothing applied to `M/` or `F/` (T11.11 is ⛔ OWNER). The examples are for the owner's ear only: TP22 says no sample quotes in the book, so T11.11 would print the habit lines alone unless the owner rules otherwise. Each habit is drawn from the printed entry (07 unless noted) and marked *pure* (restates printed behavior) or *adds* (a small new mannerism).
+
+| NPC | Habit (one line) | Rests on | Kind |
+|---|---|---|---|
+| Kovaun | Names everyone and their station before they give either; ends an exchange by repeating the answer back once, as if filing it | *Roleplaying Kovaun* "census-taker of souls", "career diplomat"; **Wants** "to file Raunu Boranis under something"; 04 Mv III Warden "knows the character's name without having been told it" | names pure; repeat-back adds |
+| Callun | A compliment, then the question, then an exact sum; never rounds, never names a price she won't pay | *Roleplaying Callun* "cordial, terrifyingly numerate", "pays on delivery"; 04 Mv III "compliments and a quiet question… with 10 GP behind it"; **Secret** "check the arithmetic" | pure; "never rounds" adds |
+| Draunel | Talks around what he wants: never says "seat" aloud, praises Vorlain's year as a question | **Fears** "being seen wanting it"; *What Draunel Knows* "if he liked the taste"; 10 **Breaks** "a misunderstanding among friends"; VOICE R19 | pure |
+| Essin | Never says no; moves instead (a step between, an elbow, a refill, the talk turned to your mask). Replaces his "forgettable on purpose" | *Roleplaying Essin* "always somehow between Vorlain and whoever is working him"; 04 Mv II "he places people"; 10 Cousin's Blade **Tells** "Admires a character's mask" | pure |
+| Maiven | Short plain demands; asks the same question again rather than rephrasing; refused, she goes silent | *Roleplaying Maiven*; **Secret** "border-raised and direct"; 04 Mv II "thinning patience"; 10 **Tells** "says nothing to Corval at all" | pure |
+| Anha | Flat facts, one at a time, never a guess; stops where the fact ends | *Roleplaying Anha* "deals only in facts"; **Fears** "giving the wrongness a name" | pure |
+| Tavva | Talks like someone quoting a job (courteous, unhurried, costs and times); cornered, puts her one offer down at once | *Roleplaying Tavva* "unhurried, courteous", "bargains fast and honestly when cornered"; **Wants** "a professional opportunity" | bargaining pure; register adds |
+| Sergeant | Answers with the terms, calmly, and says aloud any deal before he takes it | *Roleplaying the Sergeant* "opens by naming the terms aloud"; negotiation surface "he will say so before he takes it"; 10 **Tells** "reading the contract's terms aloud" | pure |
+| Captain | Says little and asks more, slowly, while the fighting goes on: what the party protects, what the fires mean | *Roleplaying the Captain* "nothing tonight hurries him", "watching who the party protects… starts talking while the attacks continue"; "contracted for diversions, not for this"; DM Note "begun to bother him" | slow talk pure; questions add |
+
+- **Shared "forgettable on purpose":** proposal for T11.11: Essin's goes (habit above); Tavva's stays (her entry already jokes about it); Vell's stands (TP69).
+- **Owner questions:** approve, change or reject each habit; examples out of the book (TP22) or in; accept the four "adds" or cut them to their printed parts; 5e only, or the Facets edition too.
+- No check needed (docs only).
+
+### T11.4–T11.6 De-colon (run as three parallel workers on disjoint files, then checked together)
+- **Method** (VOICE P1-1; R3, R4, R12): a second colon in a sentence became a period; about half the single mid-sentence colons became a period, "so", "because", "and" or a parenthesis; semicolons became periods or "and". Kept: colons before lists, run-in labels, read-aloud triggers, speech, table cells, stat lines. Read-aloud boxes untouched except obvious double colons. No rule, number or DC changed: a token check of every edited chapter against `HEAD` finds the DC and number tokens unchanged except the glossary's own references (Table I–1, Table V–6, heat 0 to 4).
+- **Before → after**, prose colons and semicolons per 1,000 words:
+
+| file | colons | semicolons | edits |
+|---|---|---|---|
+| 01 | 13.5 → 8.3 | 5.3 → 2.8 | ~40 |
+| 02 | 13.9 → 9.6 | 4.1 → 2.3 | ~23 |
+| 03 | 10.5 → 8.3 | 9.4 → 4.4 | 13 |
+| 04 | 10.8 → 5.4 | 5.8 → 3.2 | ~130 |
+| 05 | 12.4 → 8.3 | 4.4 → 2.5 | ~95 |
+| 06 | 11.1 → 5.9 | 4.3 → 1.7 | 10 |
+| 07 | 10.0 → 7.9 | 10.2 → 6.3 | ~60 |
+| 08 | 16.7 → 16.2 | 15.6 → 14.2 | 5 |
+| 09 | 10.0 → 7.3 | 6.6 → 5.2 | ~84 |
+| 10 | 9.3 → 9.0 | 9.4 → 8.9 | 12 |
+| 11 | 16.1 → 15.8 | 13.7 → 12.4 | 5 |
+| **all** | **11.3 → 8.3** (1,084 → 800) | **7.3 → 5.4** (703 → 522) | ~480 |
+
+- **Why some files fell less:** 08 is the compressed DM sheet, the canonical Handout 1, the agenda cards and Handout 5 (traced to printed text by `test_wp9`); 10 and 11 are mostly stat blocks and sheets (excepted), so only their prose paragraphs were touched; 03's remaining colons are gift-feat rules text and terms.txt gloss lines.
+- **Left as written** (guarded or ruled wording): 02 *The Oraga Nights* and 04 *Steel at the ball* (Handout 5's sources); agenda *ask*/*catch* text (mirrors the cards); TP35 "never into Veier's room: the inner guards turn them back"; TP36's Circle motive; 05 lines quoted by `facts.yaml` guards (`fracture_rule`, `garden_doors`, `second_floor`; three edits reverted on fact_check), TP67's Root line, TP15's Crossing line, `wept_freeze`, TPN-37b's captain line; 07's "At a glance" cues, the Draunel *Roleplaying* line and both "forgettable on purpose" lines (T11.11's); one 09 edit reverted because it raised the SOFT `not_but` count.
+- **F/ (same sentence present):** F/01 (1), F/02 (9), F/03 (3, agenda text), F/04 (~15), F/05 (7), F/06, F/07, F/09 (1). F/08 had none.
+- **Follow-ups found by the workers and fixed:** the T11.2 "Fracture tell" name also in 04 (Undercurrent D trail and note, the Movement III, IV and V run boxes' "Fracture tells to show"), 07 (Kovaun's and Sella's "witnessing the Fracture tell", the Uninvited entry) and 10's intro ("Each Uninvited has **Fracture tells**"); 04 Movement V Church line "has acquired teeth" → "turns sharp" (Movement IV keeps "acquires teeth"); 02 still carries "What makes them monstrous is how much of them is left", so 07's copy is cut (07 keeps "Orthaen crystals go faint").
+- Checks after all three: lint 0; fact_check 0; bestiary 0 mismatches; pregen 0 issues.
+
+### Close
+- Done: T11.1–T11.10. ⛔ OWNER: T11.11 (apply the habits; the draft and questions are in `docs/DRAFT_oraga_speech_habits.md` and the T11.10 block above). Open: T11.12 (final checks and commit; not done, per brief).
+- Tic metric, whole book: prose colons 11.3 → 8.3 per 1,000 words, semicolons 7.3 → 5.4, em dashes 2.7 → 2.6, "the way" similes 34 → 31, ", not" 71 → 67; `lint --report` tics 57 → 56.
+- Final checks from `M/`: lint 0; fact_check 0; bestiary 0 mismatches; pregen 0 issues; `pytest tools` **668 passed, 1 skipped**. Repo root `pytest research/oraga_5e_sim` **34 passed**. `software/` docs-consistency + private-canon **42 passed**. `copyright_scan.py` not run (needs `--refs`; no refs directory here). No commit or staging; `M/art/` untouched; nothing from the private canon folder read or cited.

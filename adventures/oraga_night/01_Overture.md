@@ -101,7 +101,7 @@ Run session zero as a table: each player picks a hook and an agenda, and the par
 
 **Enemies** are named by their card file — `enemies/tavva.fof` — and every one of them carries what it wants and what it does when its morale breaks, not just its numbers. No fight in this module is to the death by default.
 
-**Where the module says *the module does not say*,** that is load-bearing. See *What the MM Knows*, below in this chapter.
+**Where the module says *the module does not say*,** the answer is withheld on purpose. See *What the MM Knows*, below in this chapter.
 
 ## What the Night Pays
 
@@ -125,7 +125,7 @@ None of these replaces the ordinary earning rules. A Graceful Fail is still a Gr
 
 Every fight in this module is visible before it starts and optional once it has. Nobody is ambushed and nobody is forced to draw. That is deliberate — but a table that came to play a game with damage dice and enemies rolling in the open should not have to go home without touching them, so here is how to put each one in front of them without pushing.
 
-**The seating feud (S1)** offers itself: it is loud, it is nearby, and it is two drunk men about to embarrass their houses. A player character with any standing at all will be *looked at* by the people around the benches. That look is the invitation.
+**The seating feud (S1)** offers itself. It is loud, it is nearby, and it is two drunk men about to embarrass their houses. A player character with any standing at all will be *looked at* by the people around the benches. That look is the invitation.
 
 **Knives in the dark (S2)** needs the party in the service corridors, which any of three agendas will do on its own. If none of them has, Corval mentions that a door in the east service run has been sticking, and would somebody who is not busy take a look, because he certainly is.
 
@@ -179,7 +179,7 @@ when the lights die (Chapter IV, Undercurrent D).
 When the Unmasking comes, change your voice. Shorter sentences. Fewer adjectives. The
 party is over.
 
-One register note: this is a night of wonder and courage as much as fear. People are
+One register note. This is a night of wonder and courage as much as fear. People are
 brave in it. Guests shield strangers, servants pull nobles out of fire, and the player
 characters get every chance to be the best people in the room. End the night on what
 they saved, not on what they lost.
@@ -208,11 +208,10 @@ practice, what they came for, what constrains them, who the pale factor is worki
 against them, and why none of it will ever be public. That truth is complete enough to
 run every scene and answer every reasonable player action.
 
-It is not the whole truth. Where the module says *the module does not say*, that is a
-load-bearing sentence, not a gap. Raunu's missing year, the full nature of the
-Uninvited's distant master, what the child will one day become — these are mysteries the
-module keeps on purpose. Resist the urge to invent answers at the table; the honest
-version of this night is the one where even the survivors die not knowing.
+It is not the whole truth. Where the module says *the module does not say*, the answer
+is withheld on purpose: Raunu's missing year, the full nature of the Uninvited's distant
+master, and what the child will one day become. Don't invent answers for them at the
+table. Nobody in the world ever learns them, the survivors included.
 
 ## When It Goes Sideways
 
@@ -289,7 +288,7 @@ correction, because correcting a player mid-scene costs more than the error did.
 ## Safety and the Table
 
 This adventure contains violence erupting inside a celebration, the death of a host in
-front of his guests, and a woman in late pregnancy who is wounded during the attack; what
+front of his guests, and a woman in late pregnancy who is wounded during the attack. What
 happens to her and the child afterward is left offscreen. Say so during session zero. Agree on lines and veils
 before play; the pregnancy is central to the plot and cannot be cut, but every moment of
 harm can be handled by cutaway. The module's own camera never lingers: when the worst

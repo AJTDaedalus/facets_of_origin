@@ -204,7 +204,7 @@ Five fights, and none of them mandatory. Each card is one page, in the same fiel
 
 ***Use with:*** B9, Movement V.
 
-**Recipe:** the Boranis honor guard, detaining and expelling. Two or three exchanges. Not a fight the party is meant to win, and not one they can lose anything permanent to: a character the guards drop to 0 HP takes the Wound, and Hold On goes no lower than 7–9.
+**Recipe:** the Boranis honor guard, detaining and expelling. Two or three exchanges. Not a fight the party is meant to win, and not one they can lose anything permanent to. A character the guards drop to 0 HP takes the Wound, and Hold On goes no lower than 7–9.
 
 **Enemies**
 

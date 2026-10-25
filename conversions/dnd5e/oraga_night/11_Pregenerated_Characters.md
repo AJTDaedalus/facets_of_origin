@@ -26,7 +26,7 @@ One of them, **Dassa, is ungifted**, because one Orthaen in five is and the tabl
 see what that looks like on a sheet. Each wears the armor they can dance in, under
 their festival clothes, as chapter IV allows.
 
-**Which to deal.** The module is built for three players: which three, and what to
+**Which to deal.** The module is built for three players. Which three, and what to
 change for four, is in chapter I, "Three at the Table".
 
 **Common to all five.** *Human* (see chapter III): **Resourceful**: each begins the night
@@ -34,7 +34,7 @@ with Heroic Inspiration and regains it on a Long Rest; **Skillful**: one extra s
 listed; **Versatile**: one origin feat, listed (the gifted take their gift). Size
 Medium, Speed 30 ft., Proficiency Bonus +2. Languages: Common and two
 others the player and the DM agree on. Every guest carries a knife, because everyone at this
-ball does; drawing it is the crime. Crystal charges are consumable magic items, and
+ball does. Drawing it is the crime. Crystal charges are consumable magic items, and
 Player Handout 3, "Crystal Charges" (chapter VIII), says what each does. Each sheet
 carries one common charge: the one Common magic item the SRD gives a character who
 starts above 1st level.
@@ -119,7 +119,7 @@ great houses' dances and sent on their errands, and has learned where every one 
 keeps its grudges.
 
 **Agenda hook.** *A House's Long Game* puts Serane beside Vorlain with a Draunel errand
-and a Draunel's promises; *The Prelate's Question* puts her in front of Raunu with the
+and a Draunel's promises. *The Prelate's Question* puts her in front of Raunu with the
 Church's one question. Either way she is working a faction's errand, from
 inside.
 
@@ -284,7 +284,7 @@ face, or where she is looking?*
 ## Dassa — The House-Blade *(Orthaen, ungifted)*
 
 A hired blade of no house, who has guarded richer and softer people for twenty years.
-One Orthaen in five is born without the gift; Dassa has spent a lifetime being reminded
+One Orthaen in five is born without the gift, and Dassa has spent a lifetime being reminded
 of it politely, and has outlived several of the people who did the reminding. Slow to
 speak, impossible to move.
 
@@ -351,7 +351,7 @@ behind richer and softer people, and a lifetime of being politely reminded of wh
 was born without.
 
 **Agenda hook.** *The Vanished Servant* sends her looking for someone the house has
-swallowed; as bodyguard to another player character, she is the reason that character
+swallowed. As bodyguard to another player character, she is the reason that character
 walks out. Either way she is the one standing in the door when trouble comes through it.
 
 **Mask.** *Dassa is working tonight. Did she choose her own mask, or did whoever hired

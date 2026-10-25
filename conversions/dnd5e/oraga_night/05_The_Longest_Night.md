@@ -5,7 +5,7 @@ way it ends.*
 
 ## How to Run the Attack
 
-Drop the social rules and run the crisis in **beats**: short scenes cutting between
+Drop the social rules and run the crisis in **beats**, short scenes cutting between
 the characters, each beat one question, "What do you do?" Initiative and the combat
 rules apply when someone fights, but the attack is no set-piece battle. Think of a
 burning building with three killers out of another age in it, two hundred civilians
@@ -16,14 +16,14 @@ characters, capable of choosing anything at all.
 > character's moment, then the next. When a beat turns into a fight, roll Initiative
 > for that fight only and run it in rounds until it ends or the beat cuts away. A
 > fight in one corner of the palace does not stop the clock in another. A beat and a
-> round cost an Uninvited the same thing: one turn. "The Midnight Clock", below, gives
+> round cost an Uninvited the same thing, one turn. "The Midnight Clock", below, gives
 > the order of the night. When the table needs the attack to end, bring the Crossing to
 > the table, sooner than step 5 if you must.
 
 Four principles:
 
 1. **The Uninvited have a task, not a body count.** They kill whoever stands between
-   them and Raunu, Veier, and the child; they step around everyone else. Most people
+   them and Raunu, Veier, and the child. They step around everyone else. Most people
    are furniture to them, and it takes real interference to become anything more.
    *(In the rules: an Uninvited never targets a creature that is not between them and
    their errand, and what happens to someone they drop is "Down, Not Out", below. The
@@ -49,7 +49,7 @@ Four principles:
    If the characters found **the Root of the House** (Undercurrent A), they hold the
    master valve. From the Root, anyone ward-literate can steer any ward-point in the
    palace with a DC 13 Intelligence (Arcana) check. A dozen guests can shelter behind
-   the deepest crystal in Rekuzan: the Uninvited go only where their errands are, and
+   the deepest crystal in Rekuzan, because the Uninvited go only where their errands are, and
    none of their errands is down there. Nobody has seen what the deep crystal does to
    creatures like these until they stand in it, Raunu included, and the Uninvited don't
    know to avoid it. One that crosses its threshold can be caught (⟨They trap one of
@@ -66,10 +66,10 @@ Four principles:
    contract, and it ends the night. "The Midnight Clock", below, puts it in order.
 4. **The snakes are in the dark too.** Every faction that came to the ball armed is
    still in the palace, and every alert rule is suspended. None of them is part of the
-   attack; all of them are afraid, and several are ambitious. When the lights go out
+   attack. All of them are afraid, and several are ambitious. When the lights go out
    in an enemy's house, frightened ambitious people with hired steel do what they do.
    "The Snakes in the Dark", below, says what each of them does. The characters will
-   walk past some of it. Walking past is always an option; tell the table.
+   walk past some of it. Walking past is always an option. Tell the table.
 
 ### The Midnight Clock
 
@@ -88,10 +88,10 @@ is stated, and everything else in this chapter points here.
 5. **The Radiant reaches the garden stair** three beats after Raunu falls, plus one
    beat for each point of Delay spent on him in the east wing (three at most in the
    scene). The doors that lock behind Veier on Raunu's last charge are worth two of
-   those three beats, and *Witnessed* is the third: the household has its eyes on him
+   those three beats, and *Witnessed* is the third, because the household has its eyes on him
    all the way down. Because being watched is already counted, *Witnessed* adds no
    slowing of its own in the east wing. If the characters save Raunu, those doors never
-   lock: count from the beat he would have fallen, and he reaches the stair one beat
+   lock. Count from the beat he would have fallen, and he reaches the stair one beat
    after it, plus his Delay (⟨They save Raunu⟩).
 6. **The Crossing** runs three beats, down the garden's three levels (below).
 7. **The leash.** When the boat is out of reach of the river gate, the leash takes all
@@ -108,7 +108,7 @@ is stated, and everything else in this chapter points here.
 > Crossing and one snake in the dark.
 
 Midnight. Bells. The east doors open and Raunu Boranis mounts the dais to lead the
-Unmasking, as every host of every Oraga has, and the rite begins: the lamps
+Unmasking, as every host of every Oraga has, and the rite begins. The lamps
 brighten, the masks come off in a wave of laughter and candle-relight — and across
 the Crystal Court, three gray masks stay on. (The household staff, Corval and the
 honor guards wear one simple matching house half-mask in the livery colors, never
@@ -156,9 +156,9 @@ happens before anyone can act, and it should feel that way:
    somewhere above, sealed from afar, and his voice — flat, carrying, instantly
    obeyed — says the only farewell the ballroom gets: *"Corval. The stairs."*
 3. **The Wept moves.** The tallest of the three crosses the dark hall toward the
-   dais — not running, arriving — and the screaming starts.
+   dais without hurrying, and the screaming starts.
 4. **The doors are wrong.** The Hollow is at the main doors, and the crowd that
-   surges at them breaks around him like water. The garden doors are his too: when the
+   surges at them breaks around him like water. The garden doors are his too. When the
    crowd tries them, he steps through the shadow and is there. The Radiant is nowhere to be seen.
    He has gone for the east wing, and the first sign is the lanterns going
    dark along the gallery, one by one, like a fuse burning.
@@ -170,17 +170,17 @@ happens before anyone can act, and it should feel that way:
    > room and the three.*
 
    ("The Attendant", below. Card S14 has the hints that tell the table it can be
-   distracted; start dropping them now.)
+   distracted. Start dropping them now.)
 
-When the first beat turns into a fight, nobody is surprised: everyone saw the lights
+When the first beat turns into a fight, nobody is surprised, because everyone saw the lights
 die.
 
-Then release the beats. Nothing from here on can be scripted: this chapter can only
+Then release the beats. Nothing from here on can be scripted. This chapter can only
 tell you where everything is and what everything wants. The DM sheet (chapter VIII, Table
 VIII–2) holds the map: **the Wept → Raunu. The Radiant → Veier. The Hollow →
 the doors, herding, keeping the herd from mattering. The Attendant → whoever gets
 in their way.** Master Vell was at the river gate when the bells rang. From there he
-climbs back up through the gardens to the foot of the garden stair to meet her; the
+climbs back up through the gardens to the foot of the garden stair to meet her. The
 boat waits below.
 
 **"Corval. The stairs."** Raunu's last order sends his majordomo to the stairs that
@@ -189,12 +189,12 @@ gathers the characters nearest him, looking first for any who helped him tonight
 takes them by the routes he knows: the service stair beside the sealed double doors,
 or up the garden stair from the upper terrace while the terrace is still empty. He
 gets them in front of the Radiant. He is a guide and never a fighter, and he never
-brings them to Veier: the household moves her through the wing, and Vell meets her at
+brings them to Veier. The household moves her through the wing, and Vell meets her at
 the foot of the garden stair, later. Corval never meets Vell.
 
 Once the characters are in front of the Radiant, Corval leaves them and leads his
 household out of the palace, through the kitchens and the service passages, into the
-kitchen yard. The yard is inside the walls: nobody stands at its gate after midnight,
+kitchen yard. The yard is inside the walls. Nobody stands at its gate after midnight,
 but four Blades of the Bought's perimeter are outside it (card S3), and they hold the
 household there, alive and counted. The household who move Veier through the wing are
 not with him. Movement VII finds him in the kitchen yard with the rest, counting his
@@ -202,7 +202,7 @@ staff (the read-aloud). If the Circle's heat is 3–4,
 its knives catch him in the kitchens on the way (card S12).
 
 If the characters convinced him before midnight (chapter IV, Undercurrent D), he has already given them the wing's service door, and they start
-the chase there, in position. Keep him alive if you can: the Tithe of Hands lives in
+the chase there, in position. Keep him alive if you can, because the Tithe of Hands lives in
 his head (Agenda 1), and a Corval who walks out of the smoke is that agenda's midnight
 payoff.
 
@@ -224,11 +224,11 @@ may act in the first beat before anyone else. Following him saves lives (card S1
 >
 > The palace's great wards are
 > older and deeper and hold longer, but even they gutter when one of the three stands
-> close: a ward steered within 30 feet of an Uninvited holds for 1 round, never
+> close. A ward steered within 30 feet of an Uninvited holds for 1 round, never
 > longer. This is worth foreshadowing the exact moment a player's clever crystal plan
 > meets it. *(What the Uninvited do to the characters' own spells is in the table
 > at the head of their blocks, chapter X. It is less than this, and it is never
-> nothing: a spell that lands buys Delay.)*
+> nothing, since a spell that lands buys Delay.)*
 
 ### Midnight Rules
 
@@ -253,7 +253,7 @@ Say it aloud when it happens: *"She looks at you — properly, for the first tim
 - **Not a threat.** When one of them reduces anyone but a threat or their quarry to
   0 Hit Points, that creature is **Unconscious and Stable**: no Death Saving Throws,
   and no death from massive damage. It is thrown clear, through a broken wall or down
-  a stair or into the crowd; they are moving it out of the way.
+  a stair or into the crowd. They are moving it out of the way.
 - **A threat.** A marked creature dropped to 0 Hit Points uses the ordinary rules for
   dying, like everyone else tonight (below). The Uninvited it threatens finishes it
   only if it is still between them and their errand on their next turn. Otherwise they
@@ -274,7 +274,7 @@ and a character's own area spell all reach a body on the floor.
 - **The crowd.** The palace is full of people. If a creature one of the Uninvited (or
   the Attendant, while Idle) set aside is still down at the end of the next round and
   nobody has helped, a guest or a servant drags them clear, and they come round with
-  1 Hit Point at the start of the round after. Say who it was: that person is now owed
+  1 Hit Point at the start of the round after. Say who it was. That person is now owed
   something. (Between fights, when the night runs in beats, they are up by the next
   beat.) This is **the crowd rule**, and it covers only the set-aside.
 - **Hauling each other up.** The first time tonight a character hauls an ally to their
@@ -282,7 +282,7 @@ and a character's own area spell all reach a body on the floor.
   companion who has none.
 - **The last blow.** When an Uninvited drops to 0 Hit Points they step into the
   world's shadow and return at the start of their next turn, at full Hit Points, in
-  the space where they dropped (or the nearest unoccupied space); the Hollow returns
+  the space where they dropped (or the nearest unoccupied space). The Hollow returns
   within 60 feet of the doors he holds (see chapter X, "The Hollow", *Leashed*). At
   the start of that turn, whoever dealt the last blow makes a **DC 15 Strength or
   Dexterity saving throw** (their choice). On a failure they are pushed 15 feet in a
@@ -293,13 +293,13 @@ The **Attendant** (below) sets aside whoever it drops while it is Idle, and they
 up the same way. Focused, it can kill (see chapter X, "The Attendant").
 
 **Everyone else's steel.** The snakes and the Bought use the ordinary rules for dying,
-and the crowd rule does not reach their fights: a character they drop is dying until
+and the crowd rule does not reach their fights. A character they drop is dying until
 somebody stabilizes them, unless the attack detains (chapter X, "The palace's two
-mercies"). Nobody goes back to finish the fallen, at any heat: they leave them
+mercies"). Nobody goes back to finish the fallen, at any heat. They leave them
 where they lie, because they have somewhere to be. The danger is the dying itself, so
 keep someone free to reach the fallen.
 
-Fire is the exception: it never finishes anyone ("General Features", below).
+Fire is the exception. It never finishes anyone ("General Features", below).
 
 **Say it when the lights die**, at every table: *"From here on the knives are
 real. A character who goes down in a fight can die."*
@@ -310,8 +310,8 @@ The Uninvited can't be killed tonight, but they can be **delayed**, and delay is
 people.
 
 **Delay.** Each Uninvited has a **Delay** count, starting at 0. Keep it on the table
-where the table can see it: a die beside each of the three. At the start of an
-Uninvited's turn, if they have any Delay, spend one point: that turn they make no
+where the table can see it, with a die beside each of the three. At the start of an
+Uninvited's turn, if they have any Delay, spend one point, and that turn they make no
 progress toward their errand. They recover, find another way round, or deal with the
 problem the characters made, and you say which. They can still strike whoever is in
 reach. When the night is running in beats instead of rounds, a point is a beat (see "The
@@ -326,7 +326,7 @@ never works a third time. An attack lands if it hits.
 **Spells roll.** A spell with an attack roll or a saving throw uses that roll, and
 *Centuries of Practice* can refuse the save; a spell with neither is a trick check with
 the caster's spellcasting ability, DC 13. A spell that lands buys its Delay even when
-they are immune to what it does: the leash snaps them out of it at once, but the moment
+they are immune to what it does. The leash snaps them out of it at once, but the moment
 is bought (see chapter X, "What spells buy"). Each spell counts once per Uninvited.
 
 **Their nature pays double.** A trick or a spell that plays to that Uninvited's nature
@@ -342,7 +342,7 @@ Uninvited in a single round**, that Uninvited gains 1 Delay, never more than 1 a
 round. Damage never takes Delay away, and it never threatens their lives (*Leashed*).
 
 **Slowing them.** An Uninvited whose Speed is halved, or cut to 20 feet or less, for a
-whole turn makes half a turn's progress; two such turns are 1 Delay (within the cap,
+whole turn makes half a turn's progress, and two such turns are 1 Delay (within the cap,
 below). *Slow*, *Ray of Frost*, the Radiant's *Witnessed* and his Stop all work
 this way, except that *Witnessed* is already counted in the east wing ("The Midnight
 Clock", step 5).
@@ -364,8 +364,8 @@ gets that room's people out instead.
 | **The Hollow** | A beat off his post: *The Post* doesn't apply, and a dozen guests get through the doors behind him | When the Wept's work is done he turns east, and the doors open anyway |
 
 **Delay changes how many, not whether.** History still bends toward the record by
-default. Delay decides how many people walk out and who gets to the river gate; it
-never makes an Uninvited beatable. Delay alone never changes an outcome; ⟨If History
+default. Delay decides how many people walk out and who gets to the river gate. It
+never makes an Uninvited beatable. Delay alone never changes an outcome. ⟨If History
 Breaks⟩, at the end of this chapter, says what does.
 
 **The Attendant takes Delay away.** It can spend a turn's action to clear the way for
@@ -434,7 +434,7 @@ door Raunu sealed is a ward-point)*
 | 7 | **An audience.** Bring the guards off the east-wing doors, Maiven's slingers, anyone, to where he can see them watching. He turns to them and poses | Charisma (Persuasion) |
 | 8 | **The wrong stair.** Tell him she went down the other way | Charisma (Deception) |
 
-Darkness speeds him up: in an unlit corridor nobody is watching, so he isn't
+Darkness speeds him up. In an unlit corridor nobody is watching, so he isn't
 Witnessed, and he hurries. A pursuer needs a light for him to be Witnessed. The
 exception is his Stop. Putting out the lights to deny him his congregation still
 plays to his nature (2 Delay), and if it lands, the one who did it may try his Stop as
@@ -463,14 +463,14 @@ The attack happens in a crowd, and the crowd has rules too.
   Wherever the crowd is, count **one guest in every 5-foot square** (chapter X, *A
   guest*: AC 10, 4 Hit Points).
 - **Area spells hit guests.** A damaging area effect in the crowd hits one guest for
-  each square it covers, and at 4 Hit Points almost anything kills them: a
+  each square it covers, and at 4 Hit Points almost anything kills them. A
   *Thunderwave* at the dais is up to nine people. A guest a character kills is
   seen by somebody, and the inquest hears of it. A spell that drops people without
-  harming them (*Sleep*, say) drops them into a crush: anyone left Unconscious on the floor
+  harming them (*Sleep*, say) drops them into a crush. Anyone left Unconscious on the floor
   at the end of a round is trampled, unless somebody gets them up. A trampled guest dies, and
   a trampled character takes 5 (2d4) Bludgeoning damage (one already down: see "Down,
   Not Out", *Hitting someone who is down*).
-- **The crowd as ground.** Moving through it is Difficult Terrain; card S11 has the
+- **The crowd as ground.** Moving through it is Difficult Terrain. Card S11 has the
   rule for a crush at a door.
 - **The Post.** Guests make no saving throws against the Hollow's *Post* or *Turn Them Back*. The
   crowd breaks round him like water and does not pass. He holds the main doors and the
@@ -484,7 +484,7 @@ The attack happens in a crowd, and the crowd has rules too.
   does not reach a snake fight or the Bought ("Everyone else's steel").
 - **Other people's steel.** Every retinue at the ball is somewhere in this crowd. At
   the front gate (B12), each one the characters talk into standing with them takes one
-  Bought Blade off their hands: that Blade spends the fight on the retinue. Think of
+  Bought Blade off their hands, and that Blade spends the fight on the retinue. Think of
   Essin's cousins, Draunel's duelists, Maiven's slingers if she lived, and Corro's
   bodyguards. Bringing one round takes a
   DC 13 Charisma (Persuasion) check with whoever leads it, or no check where the
@@ -495,7 +495,7 @@ The attack happens in a crowd, and the crowd has rules too.
 It has been at the ball all night as a quiet guest, dressed as some great house's
 attendant, a cloak over one arm, waiting for a master nobody saw (see chapter IV). At the
 Unmasking it stops pretending. It has one order: **keep the three from being
-interrupted.** It is not Leashed: it can be beaten, and it is the answer to the
+interrupted.** It is not Leashed. It can be beaten, and it is the answer to the
 player who came to this ball wanting a real fight.
 
 - **It only cares about interruptions.** Anyone who isn't getting in the way of the
@@ -503,11 +503,11 @@ player who came to this ball wanting a real fight.
   until that character next attacks it or interferes with one of the three (see chapter
   X, "The Attendant"). Characters who let the three work can walk past it
   all night.
-- **Idle and Focused.** It starts Idle: rusty, slow, easy to distract. Card S14 fires
+- **Idle and Focused.** It starts Idle, which means rusty, slow and easy to distract. Card S14 fires
   the first time the characters become a real interruption: they earn Delay against one
   of the three, strike one, or stand between one and their errand. The card fires with
   the Attendant Idle. From then on it is **Focused** at the start of any of its turns
-  when one of the three in the scene has no Delay: that one glances at it, then at the
+  when one of the three in the scene has no Delay. That one glances at it, then at the
   characters. Focused, it is the most dangerous thing in
   the palace that can be fought. Announce its state every round: "locked on you"
   or "drifting".
@@ -515,7 +515,7 @@ player who came to this ball wanting a real fight.
   1 Delay (Idle, when nobody has attacked it since its last turn; Focused, on its second
   turn), and a turn lost to a distraction clears nothing. It comes
   back to Focused at the start of its turn only if one of the three in the scene has
-  no Delay. Keep Delay on the three and the Attendant stays Idle; keep the Attendant
+  no Delay. Keep Delay on the three and the Attendant stays Idle. Keep the Attendant
   busy and the Delay stays put.
 - **It can be distracted.** Its three habits are shown before midnight: worked
   crystal and light, waiting for a master who is not there, and music that
@@ -523,14 +523,14 @@ player who came to this ball wanting a real fight.
   the skill that fits, DC 13 while it is Idle and DC 18 while it is Focused, with +2s
   for leaning in, and a companion can Help. Break its focus four
   times in a night and it wanders off to a window to watch the fires. That is a win.
-  It is meant to be hard: one character or more will usually go down on the way.
+  It is meant to be hard, and one character or more will usually go down on the way.
 - **It can kill.** Whoever it drops while Idle is set aside, Stable ("Down, Not Out").
   Focused, a creature it drops is dying, and it strikes a fallen creature only if
   that creature got in its way since its last turn. At 0 Hit Points it loses interest in being here and steps into the
   shadow. There is no body.
 
 Run it from **card S14** (see chapter IX), which has the full distraction rule and the
-hints; its block is in chapter X.
+hints, and its block is in chapter X.
 
 ### The Palace After Midnight: General Features
 
@@ -543,7 +543,7 @@ a card says otherwise. Chapter VIII draws the palace (see maps VIII–1 to VIII�
     (3 feet high, 30 feet across) is at the other, about 120 feet from them. The banquet
     galleries (B3) run the length of both long sides, their rails 12 feet above the
     floor (card S1).
-  - *The banquet galleries (B3)* are a mezzanine over a floor-level aisle: under each
+  - *The banquet galleries (B3)* are a mezzanine over a floor-level aisle. Under each
     one, behind the row of piers that carries it, an aisle 20 feet deep runs at ground
     level, and the two doors in the west wall (to the Audience Hall, B4, and the 5-foot
     service door of card S11) open from it at floor level. A stair in each aisle at the
@@ -559,11 +559,11 @@ a card says otherwise. Chapter VIII draws the palace (see maps VIII–1 to VIII�
     corridor, 10 feet wide and about 100 feet long, has the rooms off it (each 20 to 30
     feet across), with the private stair (the garden stair) at its far end.
 - **Elevations.** The Crystal Court is at ground level, and so are its garden doors,
-  which open on the Court's railed garden walk; the upper terrace lies below that rail.
+  which open on the Court's railed garden walk, and the upper terrace lies below that rail.
   The banquet galleries and the east wing are at gallery level, 12 feet up: the second
   floor. Raunu's study (B8) is on the second floor too, in the dark wing, which has no
   door to the galleries. The garden stair is the east
-  wing's private stair: it runs down the wing's outer wall to the upper terrace, and
+  wing's private stair. It runs down the wing's outer wall to the upper terrace, and
   the service passages reach it too. Each terrace drops 10 feet to the next.
 - **The ways into the east wing.** Raunu's first crystal seals only the wing's double
   doors, at the head of the east stair. The service stair beside them, with the wing's
@@ -596,7 +596,7 @@ What history records, told in scenes. Bend everything except what the characters
 
   *(At his side, a character steers wards with a DC 10 Intelligence
   (Arcana) check if they studied the wards, or a DC 13 Intelligence (Arcana) check if they
-  didn't: he tells them what to touch. The dais has four ward-points, each
+  didn't, because he tells them what to touch. The dais has four ward-points, each
   good once tonight, and each one turned is a ward between the Wept and the crowd: 1
   Delay. Table V–2 has the rest of what the dais offers. When she reaches him is step 3
   of "The Midnight Clock".)*
@@ -633,13 +633,13 @@ What history records, told in scenes. Bend everything except what the characters
   the corridors is a DC 13 Strength (Athletics) or DC 13 Dexterity (Acrobatics) check
   per beat to keep him in sight. A failure costs the pursuer, never the escape (they
   fall behind, take a bad fall, lose the corridor), and Veier still gains the hallway.
-  Delay spent on him here lets the people in his way get clear; Table V–4 has the
+  Delay spent on him here lets the people in his way get clear. Table V–4 has the
   corridor's tricks.)*
 
-  This is where the night has been pointing: the escape in the record happens because
+  This is where the night has been pointing. The escape in the record happens because
   people got in the way. Let it be the characters.
 - **The gardens — the Crossing.** Veier's flight meets its hunter in the open, and
-  the night's two hidden powers finally collide. Run it as its own set-piece; see
+  the night's two hidden powers finally collide. Run it as its own set-piece (see
   "The Crossing — Vell and the Radiant", below.
 - **The hall.** The Hollow holds the doors until the Wept's work is done. Then both
   turn east and the doors are open, and the crowd pours out toward the Gatehouse Court
@@ -655,13 +655,13 @@ What history records, told in scenes. Bend everything except what the characters
   smoke-filled galleries and corridors, cutting purses, rings, and masks from
   the fallen and the fleeing.
 
-  **This is the fight for the noble-minded: nothing at stake but property and
+  **This is the fight for the noble-minded, with nothing at stake but property and
   decency.** Guests being robbed as they crawl from the fire is a sight no decent
   character walks past, and it needs only a blade and the willingness. The crew fights to escape, not to kill,
   and breaks off the moment the price turns real.
 
   Any of them caught and held is worth
-  more than the goods: by dawn, a captured looter is the inquest's favorite scapegoat
+  more than the goods. By dawn, a captured looter is the inquest's favorite scapegoat
   and the characters' proof of what they saw. If nobody interferes, the crew gets away
   clean. ***Card S5, chapter IX.*** What
   the crew carries is Tavva's sack (see chapter X, "The Night's Loot").
@@ -696,7 +696,7 @@ they choose to fight. Run it in three beats down the garden's three levels:
 1. **The terrace.** The box is the first exchange. Any character who has watched the
    three all night understands, wordlessly, that whatever they are, Vell is the
    same order of thing, and more of it. The wrapped sword stays on his back through
-   everything that follows; leave it for the table to notice. Nothing in the
+   everything that follows. Leave it for the table to notice. Nothing in the
    collision is fencing, and nothing here names the forces in it. The Radiant recognizes him. His one word is wary, for the first time
    tonight, and underneath the wariness is something older and uglier: the special
    hatred the devout reserve for an apostate.
@@ -711,14 +711,14 @@ they choose to fight. Run it in three beats down the garden's three levels:
    she can go alone.)*
 
    *(The Radiant's cut will not close. Healing magic eases her and keeps her on her
-   feet: it restores Hit Points and ends conditions as normal, but the wound does not
+   feet. It restores Hit Points and ends conditions as normal, but the wound does not
    knit, and nothing in this book says why. Don't supply a reason.)*
 
    The Radiant, meanwhile, is losing the thing he cannot bear to
    lose: his audience, gone running into the dark with the prize. This is where a
    Stop on him (below) makes most sense: dark, empty terraces, nobody watching
    but the enemy he fears. (Unless the characters brought guests down through the
-   garden doors: then he is *Witnessed* here too; see "Two Hundred People".)
+   garden doors, and then he is *Witnessed* here too; see "Two Hundred People".)
    *(Every Table V–5 trick the characters play on him here
    is Delay he carries down to the gate.)*
 3. **The river gate.** Unlocked — someone saw to it. A boat, with Veier aboard. If the
@@ -727,7 +727,7 @@ they choose to fight. Run it in three beats down the garden's three levels:
    out: one clean line of attack, one last chance, and **whatever stands at the
    river gate is what he has to go through.** A held gate, a doused lantern, a body in
    the way, a Stop finally landed: any of it is enough. A heartbeat later Vell is at the
-   oars: the moment the Radiant is past him he takes his *Elsewhere* action (chapter
+   oars. The moment the Radiant is past him he takes his *Elsewhere* action (chapter
    X), and the boat pulls out with him in it.
 
    *(In the rules: when the Radiant breaks
@@ -738,16 +738,16 @@ they choose to fight. Run it in three beats down the garden's three levels:
    *(If he has none, his one turn goes to whoever stands between him and the boat, under the threat
    rule ("Down, Not Out"). Someone who is not a threat to him is set aside, Unconscious
    and Stable. A marked creature he drops is dying, with Death Saving Throws like anyone
-   else tonight, and can die there; the leash takes him before he has a turn to finish
+   else tonight, and can die there. The leash takes him before he has a turn to finish
    it. Either way the boat is out of reach, and the escape holds. It fails only when a
-   player character chooses to stop it: see ⟨The child is taken⟩.)*
+   player character chooses to stop it (see ⟨The child is taken⟩).)*
 
 
    *(Two things change the river gate. If the crowd has reached the gardens (the garden
    doors open when the Hollow's End lands or the Wept's work is done), he is*
    Witnessed *wherever they can see him: at the gate his Speed is halved and he can't
    step through the world's shadow, so his one turn may not reach anyone. And if the
-   characters saved Raunu, the doors never locked behind Veier: the Radiant reaches
+   characters saved Raunu, the doors never locked behind Veier. The Radiant reaches
    the garden stair two beats sooner, and the party is all that stands between them
    (⟨They save Raunu⟩).)*
 
@@ -794,7 +794,7 @@ otherwise, never for a table that was busy saving someone else.
 > *Hitting someone who is down*).
 >
 > Cover doesn't help against a garden coming apart, and Evasion changes
-> nothing: a success already takes no damage. Never aim the duel at a character: the
+> nothing: a success already takes no damage. Never aim the duel at a character. The
 > terror of the Crossing is that neither combatant cares that they are
 > there. At 3rd level the damage is 3 (1d6) and 7 (2d6); at 5th level it is 10 (3d6)
 > and 21 (6d6) ("Adjusting the Attack", above).
@@ -809,7 +809,7 @@ otherwise, never for a table that was busy saving someone else.
 > clears. Characters who attack the Radiant during the
 > Crossing are fighting an Uninvited (below): he is *Leashed*, he ignores them unless
 > they stand between him and the boat, and every round they spend on him is a round
-> Vell did not have to. That is a real gift; narrate it as one. Damage
+> Vell did not have to. That is a real gift, so narrate it as one. Damage
 > in lumps earns Delay here like anywhere else ("Buying Time").
 
 ---
@@ -819,19 +819,19 @@ otherwise, never for a table that was busy saving someone else.
 Say it plainly at the table when the fiction earns it: **the Uninvited cannot be
 defeated by force tonight. Nothing in the palace can do it, spells included.** Weapons
 land and matter less than they should. The three have full stat blocks (see chapter
-X), and those blocks are lethal on purpose: no party that walks into this ballroom is
+X), and those blocks are lethal on purpose. No party that walks into this ballroom is
 their match. The trait that matters is **Leashed**, and the rules that make it playable are "Down, Not Out" and
 "Buying Time", above.
 
-**How *Leashed* plays at the table.** Read the trait in chapter X before the session;
-in practice it means this:
+**How *Leashed* plays at the table.** Read the trait in chapter X before the session.
+In practice it means this:
 
 - **Reducing one to 0 Hit Points is not a kill.** It means the killer stops
   indulging the interference. They step into the world's shadow, return at the start
   of their next turn at full Hit Points in the space where they dropped, and walk on
   toward the task. Whoever struck the last
   blow makes a saving throw or is thrown ("Down, Not Out"). Fighting the Uninvited
-  never ends in victory, but it does buy time: every round the characters land 20 damage on
+  never ends in victory, but it does buy time. Every round the characters land 20 damage on
   one of them is a point of Delay.
 - **A character one of them drops to 0 Hit Points is set aside, not killed,** unless
   that character has become a threat to them. Set aside, they are Stable, and back on
@@ -843,12 +843,12 @@ in practice it means this:
   *Hold Person*, *Command*, *Sleep*, a *Wall of Force* if somebody has one. Chapter X
   says what each obvious answer does to each of the three, and every one of those
   answers follows the same principle as steel: **at best, it buys Delay.** A spell
-  that would remove, hold, or end one of them ends at once; a barrier or a ward holds a
+  that would remove, hold, or end one of them ends at once. A barrier or a ward holds a
   round at most, and the leash always wins. None of them can be killed, charmed into changing their errand, or sent
   anywhere they do not come back from.
 - **Time is the real currency.** Every point of Delay is a hallway Veier gains, a
   dozen guests out the service doors, a ward resealed. Make the cost honest and the
-  purchase visible: the die on the table goes down, and you say what it bought. Do
+  purchase visible. The die on the table goes down, and you say what it bought. Do
   that, and a hopeless fight becomes the best scene at the table.
 
 **What actually moves the night**: Delay, bought with the room, the crowd and the
@@ -867,45 +867,43 @@ complete list.
 >
 > If a table has spent three beats on her and is not enjoying the
 > lesson, put a guest under a fallen beam 20 feet away, calling. Or use a snake
-> working the fallen in the dark gallery, or the Attendant, turning toward them. The
-> Wept is not going anywhere. The guest is.
+> working the fallen in the dark gallery, or the Attendant, turning toward them.
 >
-> Never, ever lower the numbers behind the table's back so that one of them dies. A
-> table that kills an Uninvited through a fudge has won nothing. It has learned
-> that the adventure's spine was negotiable, and every other promise the night made
-> goes soft with it. If a table somehow finds a way the rules do not cover,
+> Never lower the numbers behind the table's back so that one of them dies. A table
+> that kills an Uninvited through a fudge learns that every limit tonight can be
+> fudged, and nothing else the night promises will hold. If a table somehow finds a way the rules do not cover,
 > reach for ⟨They trap one of the Uninvited⟩ below (a trap is the outer
 > edge of the possible), and **be generous about everything else**.
 
 ### The Fractures
 
 The Uninvited are beyond any party at this table, and force buys time, never victory.
-The point is the seams. Each of the three
-is still a person — that is the terrible engine of them — and a character who
-has paid attention can reach the person. Reaching one of them for a moment is a
+Each of the three
+is still a person, though, and a character who
+has paid attention can reach that person. Reaching one of them for a moment is a
 **Stop**. Reaching one for the night is an **End**, and only two of the three have an
 End that words can find.
 
-**How ammunition works.** Each Uninvited has **tells**: human moments that slip
-out through the mask, salted through Movements III–V at the places listed below.
-A tell isn't hidden behind a check: a character in the right place sees
-it. Undercurrent D is the thread for hunting them deliberately, but plenty land
-on characters who are simply at the ball. Each tell a character has witnessed (or
+**How Fracture tells work.** Each Uninvited has **Fracture tells**, human moments
+that slip out through the mask, salted through Movements III–V at the places listed
+below. A Fracture tell isn't hidden behind a check. A character in the right place
+sees it. Undercurrent D is the thread for hunting them deliberately, but plenty land
+on characters who are simply at the ball. Each Fracture tell a character has witnessed (or
 heard secondhand, from Sella, Kovaun, or another character) gives **+2** on that
 Uninvited's Stop check, **+4** at most, and an End needs **two or more**. During the
-attack itself, everything the Uninvited do openly (below) counts as tells too.
+attack itself, everything the Uninvited do openly (below) counts as Fracture tells too.
 Characters who arrive at midnight with nothing can still land a Stop in the fire.
 
-**Stop.** A Stop needs no tell. There are three ways to land one:
+**Stop.** A Stop needs no Fracture tell. There are three ways to land one:
 
 - **Words.** An action in a fight, or one beat out of one, within 30 feet of the
   Uninvited and where they can hear. It is an ability check with whatever skill the
-  words fit, and **the DC is 15**, with +2 for each tell the speaker has (+4 at most):
+  words fit, and **the DC is 15**, with +2 for each Fracture tell the speaker has (+4 at most):
   a Charisma (Persuasion) check for a plea, Charisma (Performance) for a spectacle,
   Intelligence (Religion) for a rite or a believer's rebuke, Wisdom (Insight) for naming
   what the speaker has seen in it, or a plain Charisma check for a bared truth. Intimidation and Deception
   work here like any other skill, except on the Hollow (below). A voice carried to
-  them by a spell from farther away, such as a *Message*, doesn't count: the speaker
+  them by a spell from farther away, such as a *Message*, doesn't count. The speaker
   has to be within 30 feet. For the Radiant alone, a deed can do the words' work:
   denying him his congregation (his entry, below) earns its own 2 Delay as a trick on
   his nature, and when it lands, the one who did it may make his Stop check at once,
@@ -932,26 +930,26 @@ Heroic Inspiration may be spent on the words, and should be.
 - **Failure by 5 or more:** it does not land. The Uninvited acts against the speaker,
   or the scene around them gets worse; you choose. The scene's Stop is not spent.
 
-**End.** An End needs **two or more witnessed tells** and the one method that reaches
+**End.** An End needs **two or more witnessed Fracture tells** and the one method that reaches
 that particular person (below). Otherwise it is made like a Stop with words: the same
-30 feet, the same check, the same +2 for each tell.
+30 feet, the same check, the same +2 for each Fracture tell.
 
 - **Success:** the End lands. That Uninvited is out of the attack for the night, or its
   errand is forfeit, as its entry below says. The speaker gains Heroic Inspiration. If
   ⟨If History Breaks⟩ has an entry for what just happened, run it.
 - **Failure:** read the check as a Stop attempt instead (if that Uninvited has already
   been stopped this scene, nothing lands). The End can be tried again once the
-  characters have witnessed a new tell.
+  characters have witnessed a new Fracture tell.
 
 **End once; Stop once per scene.** An End is spent when it lands, because there is
 nothing left for it to do. A Stop comes back with every new scene.
 
 **The trap is an End for all three.** The house's own deep crystal can hold any of
 them until the last bell (⟨They trap one of the Uninvited⟩, at the end of this
-chapter). It needs no tells and no words, and it runs as written there. For the
+chapter). It needs no Fracture tells and no words, and it runs as written there. For the
 Radiant it is the only End there is.
 
-**Table V–6: Tells**
+**Table V–6: Fracture Tells**
 
 | Who | Tells before midnight *(where / when)* | Tells during the attack |
 |---|---|---|
@@ -971,9 +969,9 @@ Radiant it is the only End there is.
   no Bonus Actions, no Reactions, and does not move** — a woman standing in a burning
   ballroom, long enough to pull a victim clear, seal a ward, finish an escape. A table
   that has turned the dais wards and thrown the room at her has the easier road
-  already: three tricks on her nature in one scene are a Stop.
+  already. Three tricks on her nature in one scene are a Stop.
 
-  *End, Mercy:* with two tells, a plea that names what was done to her family and
+  *End, Mercy:* with two Fracture tells, a plea that names what was done to her family and
   offers her the chance not to do it to another. She leaves the dais, and her errand
   is forfeit. A table that lands it before she reaches Raunu has earned ⟨They save
   Raunu⟩, below.
@@ -994,7 +992,7 @@ Radiant it is the only End there is.
   service stops counting as worship, and the liturgy collapses into plain ugly work
   that even he can feel the shame of. He hurries, stops savoring, does it badly.
 
-  **Plant the doubt:** a priest, a believer, or anyone armed with his tells
+  **Plant the doubt:** a priest, a believer, or anyone armed with his Fracture tells
   declares the truth to his face: "no god worth the name asks for a stolen
   child. Whatever spoke to you, it was not the Just One." On a hit the words
   lodge. He keeps going without a word, but guilt gets into
@@ -1008,11 +1006,11 @@ Radiant it is the only End there is.
   hallway for Veier, and at the Crossing it keeps him off the gate altogether.
 
   *End:* none that words can reach. The only thing that ends his night early is the
-  house's deep crystal: trapped, he is held there, still hunting, until the last bell
+  house's deep crystal. Trapped, he is held there, still hunting, until the last bell
   (⟨They trap one of the Uninvited⟩).
 - **The Hollow** *(despair)*. Truth: he was promised family once — belonging,
   after a life of nothing — and what he got instead was the leash. He has not
-  wanted anything since; he holds the doors because holding is easier than
+  wanted anything since. He holds the doors because holding is easier than
   wanting.
 
   *His nature:* belonging, permission, honesty, people who have each other. Answering
@@ -1025,7 +1023,7 @@ Radiant it is the only End there is.
   *Stop:* he steps off the doors for one round. *The Post* doesn't apply, and the
   crowd pours through behind him.
 
-  *End, Permission:* with two tells, see him, and name the emptiness truly. Offer one
+  *End, Permission:* with two Fracture tells, see him, and name the emptiness truly. Offer one
   honest moment of the thing he was promised, or simply tell him, one person to
   another, that he can stop. He stops. He opens his hands, the doors open, and he
   leaves the field early, the only one of the three who goes home before he is
@@ -1055,7 +1053,7 @@ None of it is ambush. Every line below is something a character crossing the
 palace **sees happening** (to a guest, to a servant, to another snake) before they
 decide whether it is their business. Each has a card in chapter IX for the moment they
 decide it is, and a **default** for the moment they decide it is not. The defaults keep
-history where it was; the cards are where a table changes it.
+history where it was, and the cards are where a table changes it.
 
 **Heat decides which knife comes out.** Each faction's box on the **Snake Tracker**
 (chapter IX; the night-tracker in chapter VIII) has been rising all evening when its
@@ -1080,9 +1078,9 @@ read-aloud to its outs:
 
 - **The Circle, the delivery:** card S12, Corval in the kitchens.
 - **The Church, the filing:** card S8, its after-midnight half.
-- **House Draunel and House Boranis, the fourth iron** (if the night breaks, Draunel
-  means to take Vorlain in the chaos and hand him to the first sect guard through the
-  gate as the culprit): card S13.
+- **House Draunel and House Boranis:** if the night breaks, Draunel means to take
+  Vorlain in the chaos and hand him to the first sect guard through the gate as the
+  culprit. That is Draunel's fourth iron (chapter IX, "House Draunel"), card S13.
 - **Phern, the door:** card S11. Its first out turns the door without a fight.
 
 ### The Thenya — toward the fire
@@ -1096,7 +1094,7 @@ only on behalf of someone she loves who is in danger.
 takes her home in the morning instead of her kinswoman. **If the characters go with
 her:** she is the best ally in the palace for the next ten minutes — a border fighter
 who knows what she came for. The Radiant is ahead of both of them. Her
-slingers standing in his sight are witnesses, and witnesses are hallways. *(There is no
+slingers standing in his sight are witnesses, and he performs for witnesses. *(There is no
 card for this. At this hour, fighting Maiven means fighting a woman trying to save her
 family.)* **What it changes:** a living Maiven is the aftermath's fiercest ally,
 refusing to leave the city without her cousin or a body.
@@ -1113,8 +1111,8 @@ refusing to leave the city without her cousin or a body.
 > met.
 >
 > **The cost:** every snake fight the characters take is beats they are not spending on the
-> Radiant, the doors, or the dais. That is fine: it is the night asking what they
-> think matters, and the answer is theirs. Never punish the answer; just let the other
+> Radiant, the doors, or the dais. That is fine. It is the night asking what they
+> think matters, and the answer is theirs. Never punish the answer. Just let the other
 > clocks keep running.
 
 ---
@@ -1160,8 +1158,8 @@ and a beat, never the guest.
 Word will come in with the sect guard, later: **there were other attacks tonight.** Fires in two
 sect districts; a Blackwatch courier post found dark. Nothing so terrible as this,
 but enough that every house's blades were pulled two ways at midnight. *(That is
-all this adventure says about the other attacks. Diversions, of course. By whom is the
-same answer as everything else tonight.)*
+all this adventure says about the other attacks. They were diversions, and who ordered
+them is one of the questions the module does not answer.)*
 
 Three people on a leash did not set fires across a city. Somebody was paid to,
 and they are standing at the front gate right now.
@@ -1196,12 +1194,12 @@ night's one mortal antagonist with a contract instead of a grudge.
 >
 > **And the snakes.** A table will wonder whether one of the factions hired the
 > company. None did, and none of them knows who did. Every one of them will suggest
-> a rival by morning. That is the aftermath's weather, not an answer.
+> a rival by morning, and none of those accusations is the answer.
 
 **Trigger:** the first fleeing guests reach the Gatehouse Court and find the outer
 gate barred from the far side, and a sergeant of the Bought standing on the wrong
 side of it, reading the terms aloud. Guests start arriving the moment the Hollow
-leaves the doors; the characters usually get there once the Uninvited are gone. The
+leaves the doors. The characters usually get there once the Uninvited are gone. The
 bells of Oraga begin to toll the end of the night as the first guests reach the
 court (card S3 counts them).
 
@@ -1211,7 +1209,7 @@ read-aloud at the grille and the treasure are on the card.
 ***Card S3, chapter IX*** — the gate, the wicket and the gate-walk, the fire clock and
 the sect guard's arrival, the **Bought Sergeant** (the **Veteran Bought Sergeant** for four or
 more characters at 4th level or higher), the **Bought Blades** and the **Bought Captain**, the tactics, and the three endings written out. Everything below is what
-the scene means; the card is what you run it from.
+the scene means. The card is what you run it from.
 
 **Why this fight, here.** The Bought are the one foe at the gate who can be beaten
 or bought, the only mortal antagonist between the crowd and the way out. They
@@ -1237,7 +1235,7 @@ that nothing else in the adventure will give them.
 
    **The sergeant surrenders the field the moment the contract is void, and says so
    out loud.** Making the case to the sergeant is a DC 13 Charisma (Persuasion) check.
-   The captain, who already half knows, needs no check at all. *(This is where the snakes can be turned into something useful: characters
+   The captain, who already half knows, needs no check at all. *(This is where the snakes can be turned into something useful. Characters
    who get Callun, Draunel or Essin to pay the Bought have made the host's
    enemies buy the host's guests their lives. Nobody will ever thank them for it.)*
 3. **Outlast them.** The last bell of Oraga ends the contract's hours, and the sect
@@ -1249,8 +1247,8 @@ that nothing else in the adventure will give them.
 later than the sect guard's arrival on card S3, or at the end of Movement VII if no character
 reached the gate (see "The Midnight Clock"). Whatever the Uninvited left unfinished, it is
 finished now. If one of them is caught in deep ward-crystal (⟨They trap one of the
-Uninvited⟩), this is the moment the leash tears them out. The Bought's hours are over.
-The night is.
+Uninvited⟩), this is the moment the leash tears them out. The Bought's contract ends,
+and so does the night.
 
 **Development.** A captured sergeant, contract case and all, is the inquest's best
 evidence and the only mortal thread that leads east. A bought-out captain honors the
@@ -1275,8 +1273,8 @@ If your campaign goes on, chapter VI is what dawn looks like.
 > fact, one for each faction that needs it, and none of them yours. No one is ever
 > charged. In the years to come, "Oraga Night" will mean this night: the chief who
 > knew everything, dead in his shining hall, mid-sentence; his bride gone into the
-> river dark; three gray masks that no one ever invited; and a something-to-say,
-> two years in the keeping, that no one will ever hear. The mists off the
+> river dark; three gray masks that no one ever invited; and a sentence
+> two years in the keeping that no one will ever hear. The mists off the
 > eastern coast, the fishermen say, are rising again.*
 >
 > *You know what you saw. You are nearly the only ones who do. And on quiet nights,
@@ -1314,7 +1312,7 @@ they carried out (see chapter I).
 
 The recorded outcome is the default, not a cage. When the table genuinely diverges,
 these sidebars keep the night standing. All divergences share one rule: **be
-generous.** A table that beats history has done something remarkable; never claw
+generous.** A table that beats history has done something remarkable. Never claw
 it back.
 
 **⟨They save Raunu.⟩** Possible, but it takes the Wept's End found early, plus
@@ -1339,9 +1337,8 @@ real sacrifice at the dais. It runs in this order:
 If they do it: Raunu
 survives his own assassination, which makes him the most dangerous man alive and the
 characters his only trusted witnesses. Veier and the child still must vanish, and Raunu
-himself, once he understands what came for his son, will insist. Grieving the living
-is the price of this victory. Vorlain's face when his brother walks out of the smoke is
-worth the whole divergence. Your Val'loh now runs on: a living Raunu hunting an eastern
+himself, once he understands what came for his son, will insist. Give Vorlain his
+moment when his brother walks out of the smoke. Your Val'loh now runs on. A living Raunu hunting an eastern
 power with a party of proven allies is a campaign. *(In the wider
 canon of Svara he dies tonight. Your table's canon is now its own.)*
 
@@ -1349,8 +1346,8 @@ canon of Svara he dies tonight. Your table's canon is now its own.)*
 alive. Whatever they did in the dark, they did it in the house of a man who is now
 going to find out.)*
 
-**⟨The child is taken.⟩** The darkest branch, and it never happens by default: only
-a player character's choice opens it: someone stops the boat, bars the river gate
+**⟨The child is taken.⟩** The darkest branch. It never happens by default; only
+a player character's choice opens it. Someone stops the boat, bars the river gate
 before she is through, holds Veier back from it, drags her to the front gate instead,
 or otherwise stands between her and the water until the Radiant is past. A table that was simply elsewhere gets the record ("The
 Crossing", above). If a table does open it, do not leave it there:
@@ -1359,7 +1356,7 @@ accept endings.
 
 What comes next is a pursuit: down the river, along
 the coast, toward mists that are rising again — with Vell, suddenly and terrifyingly
-forthcoming, as patron. The child is recoverable at the water's edge; past the
+forthcoming, as patron. The child is recoverable at the water's edge. Past the
 mist-line, this adventure draws its curtain and your campaign begins. *(Vell being
 forthcoming means he points and pays. It never means he explains himself (see chapter II,
 "What the Module Never Says").)*
@@ -1379,16 +1376,16 @@ Root. The Orthaen Gift's knack does not help, because nobody has ever done this.
 trap holds until the last bell and not one moment past it. One trap a night.)*
 
 What the trap buys depends on who is caught. A table that traps the Wept before she
-reaches Raunu has saved him: run ⟨They save Raunu⟩, above, from step 2. Trap the Radiant, and the
-escape is easy: nobody hunts Veier's flight through the east wing and the gardens. Trap
-the Hollow, and the doors open early: the crowd pours out toward the Gatehouse Court
+reaches Raunu has saved him. Run ⟨They save Raunu⟩, above, from step 2. Trap the Radiant, and the
+escape is easy, because nobody hunts Veier's flight through the east wing and the gardens. Trap
+the Hollow, and the doors open early. The crowd pours out toward the Gatehouse Court
 while the Wept is still at her work.
 
 The one caught answers no question about their master or their task. Once, in the
 quiet before the last bell, they will answer a question about themselves for the
 character who treats them as a person and not a prize.
 
-If the mask comes off in that hour: a face. A
+If the mask comes off in that hour, there is a face. A
 person's face — ordinary, and tired in a way no living face is tired, and at the very
 end, unmistakably relieved to have been seen.
 
@@ -1419,7 +1416,7 @@ Out"). Make it count.)* Then, between beats, hand the player Corval, Anha, Maive
 Vorlain to finish the night with. Nobody sits out the Longest Night.
 
 **⟨The Bought change sides.⟩** A table that buys the captain out before midnight
-holds the gate open from the first scream. The door to it is inside the palace: in
+holds the gate open from the first scream. The door to it is inside the palace. In
 Movement V a sergeant's runner comes to the Gatehouse Court (area B1) to look over the
 ground the company takes at midnight. A character watching the gate, or a gifted Phern,
 can pick him out of the festival crowd. He carries word to the sergeants, the
@@ -1430,12 +1427,12 @@ could be talked into fronting the fee by characters who explain what it buys.
 want to know why the characters wanted the gate open before anything had happened, and
 will not like any answer that is true.)*
 
-If they manage it: two hundred guests are out in minutes, and the sect guard is inside
+If they manage it, two hundred guests are out in minutes, and the sect guard is inside
 before the Crossing. The Radiant's hunt is watched — by twenty blades who do not
 understand what they are seeing and will spend the rest of their lives not talking
 about it.
 
-Canon still holds: the Radiant is faster than doors, and Raunu still dies on his own
+Canon still holds. The Radiant is faster than doors, and Raunu still dies on his own
 choice. But the morning is a completely different morning: the inquest has twenty
 sworn witnesses instead of two hundred frightened ones, the Church's editing job is
 far harder, and the characters have a captain of the Bought who owes them and wants very
@@ -1443,7 +1440,7 @@ much to know who used his company's name to burn a city.
 
 **⟨The Second Clause succeeds.⟩** It must not. Veier leaves by the river, and the
 front gate was always a decoy. If a table somehow brings her to the front anyway,
-two outs are already on the board; reach for whichever is closer. The
+two outs are already on the board. Reach for whichever is closer. The
 captain's honor clause: a bought-out or contract-voided company does not resume for
 any inducement, including the one it was originally hired for. And the sect guard:
 on the clock's last segment they are at the outer wall, and no company of the Bought
@@ -1455,9 +1452,9 @@ against sixteen blades has earned the woman in Thenya wool getting past them.
 
 **⟨A snake gets what it came for.⟩** Some will, and that is
 history, not a divergence from it. The Church writing down the mist map, Corval
-leaving in Circle hands, Draunel's patience finally paying: none of it is
+leaving in Circle hands, Draunel's patience finally paying. None of it is
 recorded, because none of it was public, and all of it is the reason the story is
-already wrong by noon. Let the table find out in the aftermath which snakes fed: the
+already wrong by noon. Let the table find out in the aftermath which snakes fed. The
 ones that fed will be the ones who want to talk to the characters first.
 
 **⟨The party turns one snake on another.⟩** The Draunel

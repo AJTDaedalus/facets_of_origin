@@ -48,7 +48,7 @@ same first scene. Pick one there, then pick an agenda here.
 ## Masks
 
 Every guest wears a spirit-mask until the midnight Unmasking. Mechanically, a mask is
-worth exactly what the fiction says it is worth: faces are hidden, voices are
+worth exactly what the fiction says it is worth. Faces are hidden, voices are
 recognizable to those who know them, builds and manners give people away to a careful
 eye. Identifying a masked guest you know is a Mind roll at **Standard**; one you have merely
 heard described is **Hard**. Behind a mask, approaching someone far above your station
@@ -62,7 +62,7 @@ correct proportion for a masquerade.
 
 Each player character carries **one agenda** into the ball — a private goal with a
 patron or a personal stake behind it. Agendas are the engine of the first five
-Movements: while the night's events unfold on schedule, agendas give every character a
+Movements. While the night's events unfold on schedule, agendas give every character a
 reason to work the room, cross paths, and end up in the wrong corridor at the right
 moment.
 
@@ -93,7 +93,7 @@ two heads: Raunu's and Minister Corval's. Corval is incorruptible
 by money. He is not incorruptible by kindness.
 **At midnight:** The decree lives only in the memories of men now trapped in a
 burning palace with three killers. Keep Corval alive and the Tithe survives the
-night; the Circle, to its own surprise, may end up owing you for saving the policy
+night, and the Circle, to its own surprise, may end up owing you for saving the policy
 it hired you to undermine. *(The Tithe of Hands is a levy on each sect palace to pay
 festival laborers year-round — one more Raunu policy the great houses will hate. The
 module invents it here; it dies with its rememberers unless your table saves them.)*

@@ -3,7 +3,7 @@
 ## Making Characters for Oraga Night
 
 Build **4th-level** characters by the ordinary fifth-edition steps. Nothing about this
-module changes how a character is made; it only narrows the species step and adds one
+module changes how a character is made. It only narrows the species step and adds one
 set of options.
 
 - **Every character is Human.** The tribes of Val'loh are not different kinds of
@@ -11,20 +11,20 @@ set of options.
   something. Take the SRD's Human species and write your tribe beside it on the sheet.
 - **Your tribe is Orthaen.** Rarely, and with the DM's agreement, it is **Phern** (a couple of
   high-ranking Phern sit on the Merchant's Circle, and their factors and kin have
-  legitimate business at the ball). This is an Orthaen affair; the guest list is almost
+  legitimate business at the ball). This is an Orthaen affair. The guest list is almost
   exclusively Orthaen, and anyone else would be watched all night.
 - **Take any class, any SRD subclass, and a background in the SRD's shape**: three
   ability scores to raise (+2 and +1, or +1 to all three), an origin feat, two skill
   proficiencies, one tool proficiency, and starting equipment. The four SRD backgrounds
-  work as written; the pregens' custom backgrounds (see chapter XI) show how a Val'loh one
+  work as written, and the pregens' custom backgrounds (see chapter XI) show how a Val'loh one
   is built. Calligrapher's Supplies are a strange thing to own in a country where the
-  Church owns the written word; swap them for any other tool.
+  Church owns the written word, so swap them for any other tool.
 - **A gifted character takes their tribe's gift** as the origin feat the Human's
-  *Versatile* trait grants. The gifts are below; four Orthaen in five are gifted, and
+  *Versatile* trait grants. The gifts are below. Four Orthaen in five are gifted, and
   nearly every Phern.
 - **Everyone picks a hook and an agenda** in the first five minutes (see chapter I). The
   six hooks are there, and every one of them starts you in the street outside the
-  palace; the agenda cards are in chapter VIII.
+  palace. The agenda cards are in chapter VIII.
 
 A party of Orthaen with at most one Phern is the expected shape. A Phern character is
 conspicuous, one of a handful of non-Orthaen faces in two hundred. That puts a
@@ -36,7 +36,7 @@ chapter.
 ### Heritage
 
 Every people of Val'loh has a **Heritage**: what every member grows up knowing, gifted
-or not. It is knowledge, with no bonus attached: what it covers, your character simply
+or not. It is knowledge, with no bonus attached. What it covers, your character simply
 knows, and the DM does not call for a check to know it.
 
 - **Orthaen:** reads grown crystalwork the way a mason reads a wall: its age, whose
@@ -115,7 +115,7 @@ coming from. Nearly all carry it.
 *Origin feat. Prerequisite: Thenya, gifted, and the DM's agreement.*
 
 The gift shows itself only on behalf of someone loved, and only when they are in
-danger; it does nothing for the one who carries it. Fewer than one in a hundred carry
+danger, and it does nothing for the one who carries it. Fewer than one in a hundred carry
 it, and a player character will almost never be Thenya at this ball. The feat is here
 because the night has two gifted Thenya in it, and chapter VII uses this one.
 
@@ -138,7 +138,7 @@ like on a sheet.
 
 ### Casting in a Country Without Books
 
-Val'loh has the same magic as anywhere else; what differs is how it looks.
+Val'loh has the same magic as anywhere else. What differs is how it looks.
 
 - **Wizards** are what Val'loh calls **Thaumaturgy**: spellforms drawn thread by thread,
   a patient scholar's art. There are no books, so a wizard's spellbook is a **lattice**
@@ -158,7 +158,7 @@ why the walls of Rekuzan are wealth and not decoration.
 
 A **charge** is a consumable magic item: one stored working, released at a touch by
 anyone, gifted or not, trained or not. Releasing one does not make its bearer a
-caster, which is the point: it is the only route to magic most people in Val'loh will
+caster, which is the point. It is the only route to magic most people in Val'loh will
 ever have, and it is why a small pink splinter is worth a season's wages in the wrong
 district. The six every gifted Orthaen has heard of are *Steady Light*, *A Sealed
 Door*, *A Veil of Quiet*, *A Chime at a Threshold*, *Warmth*, and *A Held Image*.
@@ -168,7 +168,7 @@ VIII).
 ## Masks
 
 Every guest wears a spirit-mask until the midnight Unmasking. Mechanically, a mask is
-worth exactly what the fiction says it is worth: faces are hidden, voices are
+worth exactly what the fiction says it is worth. Faces are hidden, voices are
 recognizable to those who know them, builds and manners give people away to a careful
 eye.
 
@@ -182,7 +182,7 @@ eye.
 *Disguise Self* and a Disguise Kit work as written, and at a masquerade they are
 barely necessary.
 
-Let players describe their masks: it matters to nobody and everybody, which is the
+Let players describe their masks. It matters to nobody and everybody, which is the
 correct proportion for a masquerade.
 
 ## Agendas
@@ -195,7 +195,7 @@ chapter VIII). Your card is all your character knows about it.
 ## The Ready-Made Guests
 
 Five pregenerated characters at 4th level, one per agenda archetype. Their full sheets
-are in **chapter XI**; this is the table to deal from. The module is built for three
+are in **chapter XI**, and this is the table to deal from. The module is built for three
 players, and which three to deal is in chapter I, "Three at the Table".
 
 | Guest | People | Class | Gift | Suggested agenda |

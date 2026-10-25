@@ -8,7 +8,7 @@ everything after it are Chapter V.*
 The seat of House Boranis is grown, not built — pink crystal raised over generations by
 gifted ancestors, each of whom gave a working lifetime to a wing, a hall, a single
 perfect stair. It glows faintly after dusk, as all Rekuzan's old crystal does, and
-tonight it is lit deliberately for the first time in two years: lanterns in the
+tonight it is lit deliberately for the first time in two years, with lanterns in the
 gardens, fire in the great hearths, and the walls themselves shining like the inside
 of a shell.
 
@@ -38,7 +38,7 @@ the gatehouse cell unless somebody with a name intervenes, and the room remember
 their face after the Unmasking. *(Scene card S4 if the party is the one being
 detained.)*
 
-**When the east wing is forced:** the doors are doubled, Corval is informed within
+**When the east wing is forced,** the doors are doubled, Corval is informed within
 the Movement, and the offender's invitation is void whether or not they were caught
 in the act. The east wing stays doubled for the rest of the night.
 
@@ -136,7 +136,7 @@ line is long, and the custom of masks was made for this.)*
 
 > *The room is a vault of rose-lit crystal and it is full of people. Dancers under a
 > gallery of musicians; a high table on a dais at the far end, laid and canopied and
-> empty. The walls give off a faint warmth where you brush them, like stone that has
+> empty. The walls give off a faint warmth, like stone that has
 > been in sun all day. It has been dark for hours.*
 
 **B2. The Crystal Court.** The grand hall — a vault of rose-lit crystal that holds the
@@ -153,8 +153,8 @@ are half-private.)*
 
 > *A smaller crystal chamber off the Court, lit for the first time in two years —
 > you can tell, because the light finds dust in the air that nobody has had reason
-> to disturb. A dais, worn down its centre. One chair. The room is quiet in the
-> particular way of a room that a great many people are deliberately not entering.*
+> to disturb. A dais, worn down its centre. One chair. Guests slow as they pass the
+> doorway, look in, and keep walking.*
 
 **B4. The Audience Hall.** A smaller crystal chamber off the Court, its dais worn
 by generations of petitioners — the room where Orthaen chiefs have always received
@@ -229,7 +229,7 @@ closed, courteously and absolutely; through it, she is a voice only. Two finds:
 
 - **Raunu's rooms.** Nearly bare — a soldier's cot in a palace, which fits nothing
   anyone believes about him. Two personal objects only. A small, flawed, badly-grown
-  crystal, decades old, kept on the sill where the light finds it: his first, grown
+  crystal, decades old, kept on the sill where the light finds it. It is his first, grown
   at six, and kept the way other men keep nothing. And beside the worn border
   sling that is obviously hers: a second sling, new, its knots clumsy,
   re-tied many times — the terror of the Orthaen learning his wife's weapon,
@@ -293,8 +293,8 @@ thirty-eight who were sent away, and the few slept-in cots huddled by the stair.
 door sits a bowl of carters' tokens — full, and unused for two years (Agenda 8).
 
 **The laundry.** In the East Range, near the kitchens (B10). Steam, copper and the ball's
-table linen in heaps. Among it are small, soft, new-hemmed cloths that no ball needs:
-Undercurrent C's laundry spark, found where it would be.
+table linen in heaps. Among it are small, soft, new-hemmed cloths that no ball needs.
+They are Undercurrent C's laundry spark, found where it would be.
 
 **The shut state rooms.** The West Range ground floor, beyond the Audience Hall (B4) and
 the chapel (B6). Chandeliers under dust sheets and two years of dust on the floor, except
@@ -321,7 +321,7 @@ out here, only the way back inside.
 
 **Everything else.** The lower gallery (B13's door and nothing more), the music room and
 dining hall, the empty upper rooms of the towers, the gatehouse chamber, the falconer's
-lodge and the roof: dark, dust, and nothing to find.
+lodge and the roof. Dark, dust, and nothing to find.
 
 ## Running the Room
 
@@ -441,7 +441,7 @@ but wine; or ward study (B7, or Agenda 5's gallery work), which shows that the d
 work lies below the palace; or Corval, befriended and complaining about his logistics,
 mentioning crates sent down a stair nobody but the master uses — what is down there,
 he does not know; or a sharp eye in the study
-(B8): the half-erased lattice diagram on Raunu's slate matches no door anyone has
+(B8), where the half-erased lattice diagram on Raunu's slate matches no door anyone has
 seen upstairs.
 
 **The trail:**
@@ -471,7 +471,7 @@ gifts.** What an hour in the laboratory yields, in rising order:
   light. Touch one
   and it *shows* rather than tells — structured sequences of image and remembered
   gesture, gift-workings demonstrated by hands long dead, tribal lineages branching
-  like rivers. Many of the oldest lattices are not his work: relics, acquired
+  like rivers. Many of the oldest lattices are not his work. They are relics, acquired
   quietly through Phern intermediaries over fifteen years, at prices that would
   frighten the Circle. All of it — a character who samples even three or four
   lattices sees it — bends toward one question: **where do the gifts come from?**
@@ -555,14 +555,13 @@ And, three days before the ball: the testament Raunu swore aloud in the chapel,
 Corval and Mother Sella standing witness as the law requires, providing for every
 current servant by name.
 
-**The find:** nothing sinister — and let the table feel the floor tilt as that lands.
-The staff weren't victims. They were *evacuated*, with a thoroughness that reads as
-love expressed as logistics. The silent palace was never hiding a crime. It was
-clearing the decks. For what, neither Corval's memory nor the testament says.
+**The find:** nothing sinister. The staff weren't victims. They were *evacuated*,
+every one of them placed with the care Corval just recited. The silent palace was
+never hiding a crime. It was clearing the decks. For what, neither Corval's memory nor the testament says.
 
 **At midnight:** the players who solved this one understood the night *before* it
 happened — and they know the skeleton staff who remain are the ones Raunu judged he
-could not make leave. Corval, Anha, the nine inward-facing guards: the volunteers.
+could not make leave. Corval, Anha and the nine inward-facing guards are the volunteers.
 Every one of them saved is a coda this thread earns.
 
 ### Undercurrent C — The Third Plate
@@ -584,7 +583,7 @@ more than a hand's width of open door and a hand that takes it. A player who doe
 through finds warm light, the guarded calm of a household holding its breath, Veier's own
 door kept shut (she is behind it with the midwife), and the living quarters' two finds
 (B9): the two slings in Raunu's rooms, and the nursery with its slow-turning crystal
-mobile. The pregnancy is the thread's answer; the slings are its heart, and a table that
+mobile. The pregnancy is the thread's answer. The slings are its heart, and a table that
 reads those rooms stops investigating a scandal and starts guarding a family.
 
 **The find:** the pregnancy — the secret the whole ball is guessing at, and the
@@ -619,9 +618,9 @@ craft-eye, confirms the gray masks match no maker's style in Rekuzan, and the
 material is wrong; conversation with them turns up speech and manners a century
 dead, delivered by warm, living, charming people; and any Orthaen who stands near
 one feels their own carried crystals go faint and quiet. Each clue is deniable.
-Three together are not. *(These same encounters are where Fracture ammunition
-comes from — the tells are listed with the Fractures in Chapter V, and every one
-of them can be met before midnight.)*
+Three together are not. *(These same encounters are where the tells are found. They
+are listed with the Fractures in Chapter V, and every one of them can be met before
+midnight.)*
 
 **The find:** certainty, before midnight, that three guests are impossible — on
 no one's list, in no maker's masks, speaking a century that isn't this one — the
@@ -645,16 +644,15 @@ door. She leaves at midnight and not before. What the table did still pays. Gues
 the players talked out of the Crystal Court before the bells are not among the dead,
 and a player who acts on the warning starts midnight wherever they chose to stand.
 
-**At midnight:** everything. Fracture ammunition (Chapter V) is this thread's
-currency; players who walked it enter the Longest Night armed, positioned, and —
-rarest of all at Oraga — *unsurprised*.
+**At midnight:** everything this trail turned up counts as a tell for the Fractures
+(Chapter V). Players who walked it start the Longest Night already armed and in
+position, and they are the only guests in the palace who are not surprised.
 
 > **Sidebar — Threading the clock:** Undercurrents are paced for Movements II–V.
-> If a table locks onto one early and bottoms it by Movement III, let it ripple:
-> foreknowledge changes their Movement IV, and the module's scheduled events keep
+> If a table locks onto one early and bottoms it by Movement III, let it ripple.
+> Foreknowledge changes their Movement IV, and the module's scheduled events keep
 > arriving regardless. If a table chases none of them, the omens still fire, the
-> agendas still collide, and the night still works — the Undercurrents are the
-> depth, not the floor.
+> agendas still collide, and the night still works.
 
 ---
 
@@ -688,8 +686,8 @@ owners like them. The line is long, and it is the best gossip hour of the year.
 nobody is checking anyone for steel. Neither Raunu nor Veier appears. The high
 table stands empty under its canopy.
 
-**Agenda beats:** forged invitations tested (B1); staff hires slip in through the
-kitchens (B10); patrons make contact and confirm asks; first reconnaissance.
+**Agenda beats:** forged invitations tested (B1), staff hires slipping in through the
+kitchens (B10), patrons making contact and confirming asks, and first reconnaissance.
 
 **The omen:** the honor guard. A house this rich should field forty blades in
 ceremony. There are nine. A soldier or bodyguard (Dassa's *Bodyguard work* is built for
@@ -698,8 +696,8 @@ the palace doors, not the gates.
 
 ### Movement II — The Empty Rooms *(early night)*
 
-The ball proper: music in the Crystal Court, feasting in the galleries, lanterns on
-the terraces. The host has still not appeared, and his absence becomes the room's
+The ball proper begins, with music in the Crystal Court, feasting in the galleries and
+lanterns on the terraces. The host has still not appeared, and his absence becomes the room's
 running joke, then its running unease. This is the longest Movement — let agendas
 breathe here.
 
@@ -726,7 +724,7 @@ gift is ringing like a struck glass and pointing nowhere.
 The host does not appear. This is the Movement where the ball fully absorbs that he
 may never appear — the guests came to see the recluse, and the recluse is declining
 to be seen. Some guests glimpse him exactly once: a still figure on the high gallery
-above the Crystal Court, watching the room the way a man watches weather, gone when
+above the Crystal Court, watching the room, gone when
 they look again. The ball's mood curdles from curiosity into something between
 insult and dread, and the gossip gets markedly worse.
 
@@ -756,7 +754,7 @@ small talk and declines to fake them — long pauses, no pleasantries, the true 
 said where the polite thing was expected. And he knows things he should not know
 (the guest's agenda patron, their grandmother's crystal, their sister in his
 kitchens), and shows it without threat, almost absently. He is *sounding* people —
-though for what, he does not say. Each summons ends the same way: abruptly, with
+though for what, he does not say. Each summons ends the same way, abruptly, with
 something that is nearly a kindness, and the long walk back.
 
 > **Raunu's summons — the questions, and what he says**
@@ -863,7 +861,7 @@ And everyone saw the two plates. The gossip about the two plates is feral — he
 feeds the mad wife, he feeds a prisoner, he feeds the thing in the east wing —
 and only players who have run Undercurrent C know the tender truth of it. For
 Agenda 4 and the Thenya, the night sharpens: still no Veier, and now a midnight
-pronouncement coming. Maiven formally requests an audience; Corval, with genuine
+pronouncement coming. Maiven formally requests an audience, and Corval, with genuine
 misery, declines. The east wing's doors (B9) are as near as anyone gets to her.
 *(Agenda 4's errand is done at those doors, in any Movement before midnight. A guard
 carries word to her; if she chooses the messenger, and by default she does, the door
@@ -896,8 +894,8 @@ easiest hour in the world to move unseen.
 
 > *The lamps come down until the only real light is the walls, and the walls are
 > the colour of the inside of a shell. The music slows into something with a much
-> older shape to it. All around you the spirit-faces turn — you cannot tell who
-> anyone is, and neither can they, and that is the point of the hour. Somewhere
+> older shape to it. All around you the spirit-faces turn. You cannot tell who
+> anyone is, and nobody can tell who you are. Somewhere
 > above, a bell strikes a quarter.*
 >
 > *A hand is offered to you out of the dark, and the figure is beginning.*
@@ -905,7 +903,7 @@ easiest hour in the world to move unseen.
 This hour is the night holding its breath. Run it slow. Every player character is
 somewhere, with someone, in near-darkness.
 
-**Scheduled:** the Dead Dance; the bells begin their quarter-tolls toward midnight.
+**Scheduled:** the Dead Dance, and the bells begin their quarter-tolls toward midnight.
 And running under everything, the fact the whole ball knows and the players should
 be told: **custom demands the host lead the Unmasking.** Whatever else Raunu
 Boranis has dodged tonight, at midnight he must stand on that dais, send the
@@ -927,8 +925,9 @@ their partner is one of the gray masks — the tall one, the one with carved tea
 She dances flawlessly, in a style generations out of fashion; her hands are warm
 and sure; and near the turn of the figure she says one thing, softly, like a
 person being kind to herself: *"You dance like my daughter would have."* Then the
-dance turns them apart. *(Give this to any player — it needs no positioning; it
-is sorrow ammunition, and it will follow them home either way.)*
+dance turns them apart. *(Give this to any player. It needs no positioning. It
+counts as a tell for the Wept's Fracture (Chapter V), and the epilogue gives it back
+to them.)*
 
 Then the bells reach midnight. The east doors open, and — as custom has commanded
 every host of every Oraga since the first — Raunu Boranis walks back into the

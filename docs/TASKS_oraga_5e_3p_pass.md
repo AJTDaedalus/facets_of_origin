@@ -222,16 +222,16 @@ after X.
 | T9.11 | WP9 | done | The flow page |
 | T9.12 | WP9 | done | Two player handouts |
 | T9.13 | WP9 | open | Commit WP9 |
-| T11.1 | WP11 | open | "Words of the Night" glossary |
-| T11.2 | WP11 | open | Overloaded terms |
-| T11.3 | WP11 | open | Meta and kickers |
-| T11.4 | WP11 | open | De-colon: chapters I–IV |
-| T11.5 | WP11 | open | De-colon: chapter V |
-| T11.6 | WP11 | open | De-colon: chapters VI–XI |
-| T11.7 | WP11 | open | Rhythm tics |
-| T11.8 | WP11 | open | B5 and B8 read-aloud |
-| T11.9 | WP11 | open | Read-aloud slips; blank cheque; Captain; DC names |
-| T11.10 | WP11 | open | Draft mid-tier speech habits (TP22) |
+| T11.1 | WP11 | done | "Words of the Night" glossary |
+| T11.2 | WP11 | done | Overloaded terms |
+| T11.3 | WP11 | done | Meta and kickers |
+| T11.4 | WP11 | done | De-colon: chapters I–IV |
+| T11.5 | WP11 | done | De-colon: chapter V |
+| T11.6 | WP11 | done | De-colon: chapters VI–XI |
+| T11.7 | WP11 | done | Rhythm tics |
+| T11.8 | WP11 | done | B5 and B8 read-aloud |
+| T11.9 | WP11 | done | Read-aloud slips; blank cheque; Captain; DC names |
+| T11.10 | WP11 | done | Draft mid-tier speech habits (TP22) |
 | T11.11 | WP11 | ⛔ OWNER | Apply approved habits (TP22) |
 | T11.12 | WP11 | open | Final checks and commit |
 
@@ -1446,7 +1446,7 @@ T4.14).
 metric before and after each task, and log both. Run `python tools/copyright_scan.py` at the end
 of each task.*
 
-### ☐ T11.1 "Words of the Night" glossary *(L-036)*
+### ☑ T11.1 "Words of the Night" glossary *(L-036)*
 - **Do:** add a box to chapter I with about 15 lines: Delay, the Uninvited, the Wept / Radiant /
   Hollow, the Bought, Slow / Stop / End, Fracture tell, threat (marked), the dial, the Midnight
   Order (if T11.2 adopts it), and others. Gloss Delay and the Wept inline at first use (01:177,
@@ -1454,38 +1454,38 @@ of each task.*
 - **Files:** `M/01_Overture.md`, `T/terms.txt`. **Checks:** SA (defined-terms check).
   **Time:** 25 min.
 
-### ☐ T11.2 Overloaded terms *(L-069)*
+### ☑ T11.2 Overloaded terms *(L-069)*
 - **Do:** write "Fracture tell" every time (or the WP4 name). Spell out "threat line" at first use.
   Decide on "Midnight Order" (TPN note). Move the gloss of "the fourth iron" before its first use
   (09:262). Leave 07:415 (disputed, consistent).
 - **Files:** `M/01`, `M/05`, `M/09`. **Checks:** SA. **Time:** 25 min.
 
-### ☐ T11.3 Meta and kickers *(L-035)*
+### ☑ T11.3 Meta and kickers *(L-035)*
 - **Do:** apply VOICE R1, R2 and R9–R18. Cut the designer meta ("a load-bearing sentence", "This
   is the crescendo") and keep the instruction. R17 says "horses", not "carter" (TP12). R13 and R16
   must fit T4.13's text. Keep the kickers at 01:428–429 and 01:449–450.
 - **Files:** `M/01`, `M/05`, `M/07`. **Checks:** SA. **Time:** 30 min.
 
-### ☐ T11.4 De-colon: chapters I–IV *(L-034)*
+### ☑ T11.4 De-colon: chapters I–IV *(L-034)*
 - **Do:** turn every second colon in a sentence into a period, and half the rest into a period or
   "so". Thin the semicolons. Judge by ear.
 - **Files:** `M/01`–`M/04`. **Accept:** the colon and semicolon rates fall (log the before and
   after). **Checks:** SA. **Time:** 30 min.
 
-### ☐ T11.5 De-colon: chapter V *(L-034)*
+### ☑ T11.5 De-colon: chapter V *(L-034)*
 - As T11.4 for `M/05`. **Time:** 30 min.
 
-### ☐ T11.6 De-colon: chapters VI–XI *(L-034)*
+### ☑ T11.6 De-colon: chapters VI–XI *(L-034)*
 - As T11.4 for `M/06`–`M/11` (stat blocks excepted). **Time:** 30 min.
 
-### ☐ T11.7 Rhythm tics *(L-108)*
+### ☑ T11.7 Rhythm tics *(L-108)*
 - **Do:** cut "the way X" similes to the two best. Keep "arriving" only in the #66 read-aloud.
   Where a chapter repeats a fact, keep the fact and drop the flourish. Check the short-sentence
   share.
 - **Files:** as the tic table lists. **Accept:** the lint tic count falls.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T11.8 B5 and B8 read-aloud *(L-070, `CANON`)*
+### ☑ T11.8 B5 and B8 read-aloud *(L-070, `CANON`)*
 - **Do:** write 35–50-word boxes for B5 (the Crossing's ground) and B8 (the study), using only
   printed details. B5 must not place the characters with Veier (TP13). Do B3, B7 and B10 if time
   allows. Log each in INVENTIONS.
@@ -1493,7 +1493,7 @@ of each task.*
 - **Accept:** each box element traces to a printed line (list them in the INVENTIONS row).
 - **Checks:** SA. **Time:** 25 min.
 
-### ☐ T11.9 Read-aloud slips; blank cheque; Captain; DC names *(L-071, L-072, L-110, L-111)*
+### ☑ T11.9 Read-aloud slips; blank cheque; Captain; DC names *(L-071, L-072, L-110, L-111)*
 - **Do:**
   - VOICE R5–R7 and R20 (04:231–232, 255–256, 1343–1344; 05:1065–1066);
   - 06's "larger at your discretion" gets a default ("one favor; double it if…");
@@ -1502,7 +1502,7 @@ of each task.*
     explanation (TPN note).
 - **Files:** `M/04`, `M/05`, `M/06`, `M/07`, `M/01`. **Checks:** SA. **Time:** 25 min.
 
-### ☐ T11.10 Draft mid-tier speech habits (TP22) *(L-073)*
+### ☑ T11.10 Draft mid-tier speech habits (TP22) *(L-073)*
 - **Do:** draft **one speech habit each, with no sample quotes**, for Kovaun, Callun, Draunel,
   Essin, Maiven, Anha, Tavva and the two Bought officers (the Sergeant and the Captain). Draw each
   strictly from the NPC's printed traits, Wants and Secret, and cite the line it rests on. Write

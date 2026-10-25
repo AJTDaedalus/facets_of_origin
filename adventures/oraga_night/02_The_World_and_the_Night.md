@@ -67,7 +67,7 @@ What every guest at the ball knows, in order:
    of it.
 4. **3162–3164 — The Silence.** The palace staff is cut four-fold. A lively seat of
    power goes eerily quiet. Veier is last seen through a palace window three months
-   after the wedding. Rumor fills the vacuum: they are prisoners, they are dead, the
+   after the wedding. Rumor fills the vacuum. They are prisoners, they are dead, the
    chief is mad at last, the Thenya bride poisoned him, he poisoned her.
 5. **3164, harvest — The Invitations.** On the eve of the Oraga Nights, House Boranis
    sends out invitations to a masquerade ball in the Crystal Court, for the final night
@@ -85,7 +85,7 @@ his ball despises him:
 - **The Church** finds him illegible. A chief it cannot predict is a chief it cannot
   steer, and the Church steers everyone. His disappearance, return, and silence read
   to the priesthood like a theological insult they cannot name.
-- **The seven other sects** understand the arithmetic: his popularity makes him
+- **The seven other sects** understand the sums. His popularity makes him
   impossible to unseat, and even if they managed it, the commons would compare every
   successor to him and revolt.
 - **His own house** sees a ceiling. No Boranis rises while Raunu holds the seat, and
@@ -124,13 +124,13 @@ can, barely, briefly: the receding mists are the outward sign of a door standing
 ajar, and the Uninvited have slipped through it on a leash. The leash is real. As the
 night wears on, something pulls them east, harder every hour. By the last bell of
 Oraga they *must* go, whatever is finished and whatever is not. This is why they do
-not simply slaughter the palace: they have one night, one task, and no time.
+not simply slaughter the palace. They have one night, one task, and no time.
 
 Two more operational facts. They are fast in a way that has nothing to do with
 running — they slip through the world's shadow and arrive — and ordinary doors,
 walls, and barricades do not reliably hold them; only deep Boranis ward-crystal
 does. And whatever greater powers they once wielded are sealed away with their
-master: tonight they are speed, craft, and centuries of practice. That is
+master. Tonight they are speed, craft, and centuries of practice. That is
 terrible enough.
 
 **The task:** kill Raunu Boranis, kill Veier Nolonaire, and carry away the child she
@@ -148,7 +148,7 @@ defiance, and (because he is who he is) control: the announcement, the audience,
 the hour, all chosen.
 
 **He never gets to make it.** The attack comes in the middle of the sentence, and
-the announcement dies with the man. Nor does it ever surface afterward: the midwife
+the announcement dies with the man. Nor does it ever surface afterward. The midwife
 vanishes by dawn, the skeleton staff keep the silence they were paid for, and the
 inquest records a vanished *bride* — never a vanished *heir*. The world never
 learns what the ball was for. The only people who may ever know are players who
@@ -157,7 +157,7 @@ the aftermath's sharpest knife (Chapter VI).
 
 Meanwhile, the ballroom guesses all night. The Merchant's Circle is *certain* the
 midnight pronouncement is a trade decree (the Tithe of Hands — see Agenda 1). They
-are wrong, but usefully wrong: the theory is plausible, the evidence for it is
+are wrong, but usefully wrong. The theory is plausible, the evidence for it is
 real, and the factions should argue it well. The truth is upstairs, eating dinner
 off the second plate.
 
@@ -168,7 +168,7 @@ through the ball under the name **Master Vell**, a trade factor nobody quite rem
 inviting. He is older than he looks, older than anything else in the palace, and he
 serves a patience so long that this night is, for him, one move among thousands.
 
-His task is the mirror of theirs: **the child must not be taken.** He is not here to
+His task is the mirror of theirs. **The child must not be taken.** He is not here to
 save Raunu. He is not, strictly, here to save Veier. He is here so that when the worst
 happens, a wounded woman finds a strong arm, a clear path, and an unlocked river gate.
 Vell will not fight the Uninvited if he can avoid it — he knows exactly what they are,
@@ -182,7 +182,7 @@ history happen.
 
 Raunu Boranis is the most prepared man on Val'loh, and his preparations are the reason
 this attack does not become a massacre. The palace walls hold generations of stored
-crystal-work, and when the lights go out, those preparations fire: barriers seal
+crystal-work, and when the lights go out, those preparations fire. Barriers seal
 corridors, light floods stairwells, wards flare over huddled guests. Two hundred
 people survive the Uninvited because a paranoid genius spent two silent years making
 his house ready for *something*.
@@ -198,7 +198,7 @@ that together, let them.
 Veier, wounded, goes out through the gardens with Master Vell, through the river
 gate, into the dark. Vell's boat takes her north up the tributary to the foothills,
 where he has horses waiting, and from there they ride west toward the mountains. She
-will not survive the night; her child will. No player character learns this last part
+will not survive the night, and her child will. No player character learns this last part
 unless your campaign continues into the aftermath —
 what they see, at most, is Vell holding off the Radiant on the terraces, and the boat
 pulling away from the river gate with her in it.

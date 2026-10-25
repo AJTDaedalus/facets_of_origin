@@ -24,7 +24,7 @@ here. This adventure needs only what follows.*
 
 **And the recent wound, which runs under everything tonight:** the eastern mists have
 receded to record lows this year. The Blackwatch, who keep the vigil over them, are
-frightened and admit it only in low voices; inland it is a dinner-table curiosity. Keep it in the
+frightened and admit it only in low voices. Inland it is a dinner-table curiosity. Keep it in the
 table's peripheral vision, because it matters.
 
 ## The Oraga Nights
@@ -68,7 +68,7 @@ What every guest at the ball knows, in order:
    make of it.
 4. **3162–3164 — The Silence.** The palace staff is cut by nearly two-thirds, and a lively
    seat of power goes eerily quiet. Veier is last seen through a palace window three months
-   after the wedding. Rumor fills the vacuum: they are prisoners, they are dead, the
+   after the wedding. Rumor fills the vacuum. They are prisoners, they are dead, the
    chief is mad at last, the Thenya bride poisoned him, he poisoned her.
 5. **3164, harvest — The Invitations.** On the eve of the Oraga Nights, House Boranis
    sends out invitations to a masquerade ball in the Crystal Court, for the final night
@@ -83,13 +83,13 @@ his ball despises him:
 
 - **The Merchant's Circle** bleeds margin under his policies and would pay handsomely
   to know what he plans next, or to arrange that he plans nothing ever again.
-- **The Church** finds him illegible: a chief it cannot predict is a chief it cannot
+- **The Church** finds him illegible. A chief it cannot predict is a chief it cannot
   steer, and the Church steers everyone. His disappearance, return, and silence read
   to the priesthood like a theological insult they cannot name.
-- **The seven other sects** understand the arithmetic: his popularity makes him
+- **The seven other sects** understand the sums. His popularity makes him
   impossible to unseat, and even if they managed it, the commons would compare every
   successor to him and revolt.
-- **His own house** sees a ceiling: no Boranis rises while Raunu holds the seat, and
+- **His own house** sees a ceiling. No Boranis rises while Raunu holds the seat, and
   Vorlain's single year of rule taught several cousins how quickly the seat can change.
 - **The Thenya** do not hate him. They need him, which is worse. Their pact holds
   only while he lives, and their kinswoman disappeared into his silent palace two
@@ -127,17 +127,17 @@ nobody living learned. What makes them monstrous is how much of them
 is left: grief, faith, exhaustion, courtesy. Play every scene with one of them as a
 scene with a person, and the horror takes care of itself.
 
-Their master cannot act. They can, barely, briefly: the receding mists are the outward sign of a door standing
-ajar, and the Uninvited have slipped through it on a leash. The leash is real: as the
+Their master cannot act. They can, barely, briefly. The receding mists are the outward sign of a door standing
+ajar, and the Uninvited have slipped through it on a leash. The leash is real. As the
 night wears on, something pulls them east, harder every hour. By the last bell of
 Oraga they must go, whatever is finished and whatever is not. This is why they do
-not simply slaughter the palace: they have one night, one task, and no time.
+not simply slaughter the palace. They have one night, one task, and no time.
 
-Two more operational facts: they are fast in a way that has nothing to do with
-running: they slip through the world's shadow and arrive. Ordinary doors,
-walls, and barricades do not reliably hold them; only deep Boranis ward-crystal
+Two more operational facts. They are fast in a way that has nothing to do with
+running, because they slip through the world's shadow and arrive. Ordinary doors,
+walls, and barricades do not reliably hold them. Only deep Boranis ward-crystal
 does. And whatever greater powers they once wielded are sealed away with their
-master: tonight they are speed, craft, and centuries of practice. That is
+master. Tonight they are speed, craft, and centuries of practice. That is
 terrible enough.
 
 *At the table:* chapter X gives each of the three a full stat block, and every one of
@@ -155,7 +155,7 @@ and at their side from midnight. It can be beaten (card S14, chapter IX; who it 
 is about to deliver. The parents are the errand. **The child is the prize.** Something
 about this child should not be possible, and the sealed power in the east wants him
 alive, controlled, and gone. What the child is, and why he matters, the module does
-not say; it is enough that two hidden powers already know.
+not say. It is enough that two hidden powers already know.
 
 ## Why the Ball
 
@@ -166,7 +166,7 @@ defiance, and (because he is who he is) control: the announcement, the audience,
 the hour, all chosen.
 
 **He never gets to make it.** The attack comes in the middle of the sentence, and
-the announcement dies with the man. Nor does it ever surface afterward: the midwife
+the announcement dies with the man. Nor does it ever surface afterward. The midwife
 vanishes by dawn, the skeleton staff keep the silence they were paid for, and the
 inquest records a vanished bride, never a vanished heir. The world never
 learns what the ball was for. The only people who may ever know are characters who
@@ -175,7 +175,7 @@ theirs to carry out of the palace (see chapter VI).
 
 Meanwhile, the ballroom guesses all night. The Merchant's Circle is certain the
 midnight pronouncement is a trade decree (the Tithe of Hands; see Agenda 1). They
-are wrong, but usefully wrong: the theory is plausible, the evidence for it is
+are wrong, but usefully wrong. The theory is plausible, the evidence for it is
 real, and the factions should argue it well. The truth is upstairs, eating dinner
 off the second plate.
 
@@ -186,9 +186,9 @@ through the ball under the name **Master Vell**, a trade factor nobody quite rem
 inviting. He is older than he looks, older than anything else in the palace, and he
 serves a patience so long that this night is, for him, one move among thousands.
 
-His task is the mirror of theirs: **the child must not be taken.** He is not here to
+His task is the mirror of theirs. **The child must not be taken.** He is not here to
 save Raunu, nor, strictly, Veier. He is here so that when the worst happens, a wounded woman finds a strong arm, a clear path, and an unlocked river gate.
-Vell will not fight the Uninvited if he can avoid it: he knows what they are, and they
+Vell will not fight the Uninvited if he can avoid it. He knows what they are, and they
 may know him. He spends the night preparing, unseen, and he is very good at it.
 
 Characters who cross him find him courteous, unhelpful, and immune to every form of
@@ -199,7 +199,7 @@ history happen.
 
 Raunu Boranis is the most prepared man on Val'loh, and his preparations are the reason
 this attack does not become a massacre. The palace walls hold generations of stored
-crystal-work, and when the lights go out, those preparations fire: barriers seal
+crystal-work, and when the lights go out, those preparations fire. Barriers seal
 corridors, light floods stairwells, wards flare over huddled guests. Two hundred
 people survive the Uninvited because a paranoid genius spent two silent years making
 his house ready for something.
@@ -215,7 +215,7 @@ that together, let them.
 Veier, wounded, goes out through the gardens with Master Vell, through the river
 gate, into the dark. Vell's boat takes her north up the tributary to the foothills,
 where he has horses waiting, and from there they ride west toward the mountains. She
-will not survive the night; her child will. No character learns this last part tonight. At most they see Vell hold off the Radiant
+will not survive the night, and her child will. No character learns this last part tonight. At most they see Vell hold off the Radiant
 on the terraces, and the boat pull away from the river gate with her in it.
 
 By morning, three killers have vanished as if they had never existed, every great
@@ -224,13 +224,13 @@ at all, and the crime of the age begins its long life as an unsolved wound. Chap
 runs the attack in detail, and chapter VI says what happens after dawn.
 
 The snakes change none of this. Whatever the factions do in the dark (and chapter IX
-lets them do a great deal), the pillars stand: Raunu falls by his own choice, Veier
+lets them do a great deal), the pillars stand. Raunu falls by his own choice, Veier
 goes out through the river gate in Vell's boat, the Uninvited leave no trace, and no
 one is ever charged.
 
 ## What the Module Never Says
 
-Hold these lines even against clever players: the honest night is the one nobody walks
+Hold these lines even against clever players. The honest night is the one nobody walks
 out of understanding.
 
 - Where Raunu went in his missing year, and what he brought back.
@@ -247,8 +247,8 @@ at the edge of something vast.
 **This holds against spells.** *Detect Thoughts* on Vell, *Speak with Dead* on
 Raunu, *Commune*, *Legend Lore*, a *Zone of Truth* around a captured Bought captain:
 each returns something true and small, and none of them returns an answer to this
-list. The dead chief keeps the silence he kept alive; the captain truly does not
-know; the pale factor's mind is not a room any caster at this table gets into. Say it the
+list. The dead chief keeps the silence he kept alive, the captain truly does not
+know, and the pale factor's mind is not a room any caster at this table gets into. Say it the
 way the world would, and move on.
 
 ---
@@ -257,7 +257,7 @@ way the world would, and move on.
 
 Each character carries **one agenda** into the ball: a private goal with a
 patron or a personal stake behind it. Agendas are the engine of the first five
-Movements: while the night's events unfold on schedule, agendas give every character a
+Movements. While the night's events unfold on schedule, agendas give every character a
 reason to work the room, cross paths, and end up in the wrong corridor at the right
 moment.
 
@@ -294,9 +294,9 @@ by money. He is not incorruptible by kindness.
 
 **At midnight:** The decree lives only in the memories of men now trapped in a
 burning palace with three killers. Keep Corval alive and the Tithe survives the
-night; the Circle, to its own surprise, may end up owing you for saving the policy
+night, and the Circle, to its own surprise, may end up owing you for saving the policy
 it hired you to undermine. *(For the DM: at midnight Raunu's last order sends Corval to
-the east-wing stairs, with the characters nearest him; chapter V, "Corval. The stairs.")*
+the east-wing stairs, with the characters nearest him. See chapter V, "Corval. The stairs.")*
 *(The Tithe of Hands is a levy on each sect palace to pay
 festival laborers year-round, one more Raunu policy the great houses will hate. It
 dies with its rememberers unless your table saves them.)*
@@ -320,7 +320,7 @@ Raunu's face all night. You saw the exact moment he understood: before anyone
 screamed, before the lights failed. He knew what they were. Remember that.
 
 **Pays:** Heroic Inspiration, and XP by Table I–4. The Church's favor: one favor Prelate
-Kovaun can grant without scandal, spendable after tonight (the DM may make it larger; the card's "frightening size" is the patron's pitch). *(For the DM: any sincere judgment
+Kovaun can grant without scandal, spendable after tonight, or two if the character also gave her something true about the three gray masks to file (chapter VI; the card's "frightening size" is the patron's pitch). *(For the DM: any sincere judgment
 completes the agenda, whatever it says; the module never answers the question. A
 character who shades it makes a Charisma (Deception) check against the Prelate's
 Wisdom (Insight) (+8, chapter X). If she wins, she knows, and the agenda is not done.
@@ -357,7 +357,7 @@ and bring back the truth: is she well, is she free, is she herself?
 going to show her at all. She never comes down. The east wing is closed, guarded,
 and the only way to her; this errand cannot be done from the dance floor.
 
-**At midnight:** She trusts you now: yours is the one voice at this ball she chose to
+**At midnight:** She trusts you now. Yours is the one voice at this ball she chose to
 trust. When she listens for help in the dark, she will listen for you. *(The errand is
 done at the east wing door: her hand takes the ring, her face stays unseen. At midnight
 she listens for that character's voice through the door. Chapter V leans on it.)*

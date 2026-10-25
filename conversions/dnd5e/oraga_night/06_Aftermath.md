@@ -8,14 +8,14 @@ unless your table asks for it.*
 
 ## What Happens After Dawn
 
-Tell the table as much of this as their characters would live to see: it is the
+Tell the table as much of this as their characters would live to see. It is the
 record, and it is what history keeps.
 
 - **The fires are out by dawn.** The sect guard seals the palace with the guests inside
   it until midday and takes testimony. The inquest is run jointly by a Draunel captain,
   a Church notary and a Circle observer, which makes it three inquests wearing one coat.
   The notary holds the only pen in the room, and the testimony is edited in real
-  time: a character who asks to have their statement read back will hear it subtly
+  time. A character who asks to have their statement read back will hear it subtly
   improved.
 - **Everyone blames a rival.** Draunel wants Vorlain guilty. The Circle wants a foreign
   trade rival, and the Phern guests spend an ugly morning under suspicion. The Church
@@ -29,7 +29,7 @@ record, and it is what history keeps.
   and the skeleton staff hold the silence they were paid for. The record says a vanished
   bride, never a vanished heir. Characters who reached the east wing hold a truth that
   exists nowhere else in the world: priceless, unprovable, and dangerous in exact
-  proportion to who they tell. The one exception: if a character sold the nursery to
+  proportion to who they tell. There is one exception. If a character sold the nursery to
   Callun, the Circle knows there is an heir, and it begins its own search, keeping it quiet.
   Circle agents start looking west for the child. It is a threat for a campaign to
   carry, never a public fact.
@@ -44,7 +44,7 @@ record, and it is what history keeps.
 - **The house counts itself.** Corval, ruined and dignified, executes the testament
   Raunu swore aloud in the chapel, providing for every servant by name. Anha and the
   staff are free to talk at last, and have two years of eerie domestic detail and no
-  answers. If Maiven lives, she will not leave the city without her cousin or a body; if
+  answers. If Maiven lives, she will not leave the city without her cousin or a body. If
   not, the Thenya delegation takes her home.
 
 ## Ending the Session
@@ -58,7 +58,7 @@ record, and it is what history keeps.
 5th level is the line where a fighter swings twice, a caster reaches level 3 spells,
 and a character stops being somebody who survived one bad night and becomes somebody
 the city has to reckon with. Do not skip it because this is a one-shot. A gifted
-character's gift does not grow (see chapter III); any new magic shows itself the way the
+character's gift does not grow (see chapter III). Any new magic shows itself the way the
 gift always has.
 
 ## Rewards
@@ -67,7 +67,8 @@ gift always has.
   the epilogue.
 - **Agenda pay:** each agenda's **Pays** line (see chapter II, "The Eight Agendas"):
   Callun's 100 GP, the 30 GP gate fee, the Church's favor (one favor the Prelate can
-  grant without scandal, larger at your discretion), the grandmother's crystal.
+  grant without scandal; make it two if the character also gave her something true
+  about the three gray masks to file), the grandmother's crystal.
 - **Sales to the Circle:** 10 GP from Callun for each report of what Raunu said at a
   summons (chapter IV, Movement III); 250 GP for the nursery (chapter IV,
   Undercurrent C).
@@ -78,7 +79,7 @@ gift always has.
 ## If Your Table Wants More
 
 The morning after is a good second session, written loose, because it needs frames,
-not rails. Where it ends is fixed: no one is charged, and the road to the dead file is
+not rails. Where it ends is fixed. No one is charged, and the road to the dead file is
 the play.
 
 - **Vorlain's offer.** He knows he did not do it, and he knows his brother did not
@@ -88,16 +89,16 @@ the play.
 - **The inquest.** Whatever the party did to the snakes in the dark comes to it with
   them: a captive, a body in a faction's colors, a knife somebody recognizes. Each
   faction wants it written down one way. A captured sergeant of the Bought, contract
-  case and all, is the best evidence in the city; a bought-out captain who wants to
+  case and all, is the best evidence in the city, and a bought-out captain who wants to
   know who hired him will help.
 - **The trail**, step by step: the river gate (a DC 13 Intelligence (Investigation)
   check to see it was oiled, not forced), the boat (a DC 13 Charisma (Persuasion) check
   with the fishers on the tributary), the landing in the foothills (a DC 15 Wisdom
   (Survival) or DC 15 Intelligence (Investigation) check to read the horse-line and the
-  tracks going west), then nothing. A failed check costs time and draws a faction's attention; it never loses
+  tracks going west), then nothing. A failed check costs time and draws a faction's attention, but it never loses
   the trail.
 - **Otta Vesh,** the finest mask-maker in Rekuzan, keeps a casting-blank of every face
-  she has ever fitted. Ask her about the three gray masks: nobody made them, nobody
+  she has ever fitted. Ask her about the three gray masks. Nobody made them, nobody
   in the city would know how, and the material is wrong. It leads nowhere, and that is
   the moment the investigation stops having a suspect and starts having a hole in it.
 - **The choice.** Then put the question in front of the table that the night has been
@@ -108,7 +109,7 @@ the play.
 > **Sidebar — Going east**
 >
 > Sooner or later a good table looks at the mists. The adventure
-> ends at the mist-line on purpose: what waits past the Blackwatch belongs to the deep
+> ends at the mist-line on purpose. What waits past the Blackwatch belongs to the deep
 > future of this setting. If your table sails anyway, you are off the map with the
 > module's blessing. The fishermen say the mists are rising again. A campaign that
 > keeps the child safe without ever meeting him is a campaign worthy of this night.

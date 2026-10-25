@@ -37,7 +37,7 @@ Three principles:
 ## Movement VI — The Unmasking
 
 Midnight. Bells. The east doors open and Raunu Boranis mounts the dais to lead the
-Unmasking, as every host of every Oraga has, and the rite begins: the lamps
+Unmasking, as every host of every Oraga has, and the rite begins. The lamps
 brighten, the masks come off in a wave of laughter and candle-relight — and across
 the Crystal Court, three gray masks stay on. (The household staff, Corval and the
 honor guards wear one simple matching house half-mask in the livery colors, never
@@ -82,7 +82,7 @@ fixed order, fast:
    stair boom shut somewhere above, sealed from afar, and his voice — flat, carrying, instantly
    obeyed — says the only farewell the ballroom gets: *"Corval. The stairs."*
 3. **The Wept moves.** The tallest of the three crosses the dark hall toward the
-   dais — not running, *arriving* — and the screaming starts.
+   dais without hurrying, and the screaming starts.
 4. **The doors are wrong.** The Hollow is at the main doors, and the crowd that
    surges at them breaks around it like water. The garden doors are its too: when the
    crowd tries them, it steps through the shadow and is there. The Radiant is nowhere to be seen —
@@ -93,7 +93,7 @@ Then release the beats. From here the module cannot script — it can only tell 
 where everything is and what everything wants. The night-tracker's crisis panel
 (Chapter VIII) holds the map: **the Wept → Raunu. The Radiant → Veier. The Hollow →
 the doors, herding, keeping the herd from mattering.** Master Vell was at the river gate when the bells rang. From there he
-climbs back up through the gardens to the foot of the garden stair to meet her; the
+climbs back up through the gardens to the foot of the garden stair to meet her. The
 boat waits below.
 
 **"Corval. The stairs."** Raunu's last order sends his majordomo to the stairs that
@@ -102,7 +102,7 @@ gathers the player characters nearest him, looking first for any who helped him
 tonight, and takes them by the routes he knows: the service stair beside the sealed
 double doors, and the garden stair from the upper terrace. Only the double doors are
 sealed. He gets them in front of the Radiant. He is a guide and never a fighter, and he
-never brings them to Veier: the household moves her through the wing, and Vell meets
+never brings them to Veier. The household moves her through the wing, and Vell meets
 her at the foot of the garden stair. Corval never meets Vell. If the
 players convinced him before midnight, he has already given them the wing's service
 door, and they start the chase there. Once the players are in front of the Radiant,
@@ -182,10 +182,9 @@ refuse help. Then the lanterns die along the terrace behind them, and the Radian
 steps out of the smoke — and for the first and only time all night, the pale
 factor stops being unmemorable.
 
-This is the crescendo, and its rule is simple: the players are caught between two
-people the mortal world has no answer for, and they cannot beat either one. What
-they can do is everything else, and everything else is what decides it. Run it in
-three beats down the garden's three levels:
+The players are caught between two people the mortal world has no answer for, and
+they cannot beat either one. Everything else they do here decides how it ends. Run it
+in three beats down the garden's three levels:
 
 1. **The terrace.** Vell turns to face the Radiant, and moves — *the way the
    Uninvited move*, arriving instead of running, distance negotiating with him —
@@ -264,11 +263,11 @@ What actually changes outcomes, in ascending order: the palace's ward-fire
 ### The Fractures
 
 The Uninvited are beyond any table of starting characters, and the module does
-not pretend otherwise — force buys time, never victory. The point is the seams.
-Each of the three is still a person — that is the terrible engine of them — and a
-player character who has *paid attention* can reach the person.
+not pretend otherwise: force buys time, never victory. Each of the three is still a
+person, though, and a player character who has *paid attention* can reach that
+person.
 
-**How ammunition works.** Each Uninvited has **tells**: human moments that slip
+**How tells work.** Each Uninvited has **tells**: human moments that slip
 out through the mask, salted through Movements III–V at the places listed below.
 A tell isn't hidden behind a roll — a player character in the right place sees
 it; Undercurrent D is the thread for hunting them deliberately, but plenty land
@@ -343,8 +342,8 @@ of the burning banquet gallery, to everyone's permanent confusion including his 
 Word arrives with the guards: **there were other attacks tonight.** Fires in two
 sect districts; a Blackwatch courier post found dark. Nothing so terrible as this —
 but enough that every house's blades were pulled two ways at midnight. *(That is
-all the module knows about the other attacks. Diversions, of course. By whom is the
-same answer as everything else tonight.)*
+all the module knows about the other attacks. They were diversions, and who ordered
+them is one of the questions the module does not answer.)*
 
 Three creatures on a leash did not set fires across a city. Somebody was paid to,
 and they are standing at the front gate right now.
@@ -417,8 +416,8 @@ Read or paraphrase, adjusting for what the table did:
 > fact, one for each faction that needs it, and none of them yours. No one is ever
 > charged. In the years to come, "Oraga Night" will mean this night: the chief who
 > knew everything, dead in his shining hall, mid-sentence; his bride gone into the
-> river dark; three gray masks that no one ever invited; and a something-to-say,
-> two years in the keeping, that no one will ever hear. The mists off the
+> river dark; three gray masks that no one ever invited; and a sentence
+> two years in the keeping that no one will ever hear. The mists off the
 > eastern coast, the fishermen say, are rising again.
 >
 > You know what you saw. You are nearly the only ones who do. And on quiet nights,
@@ -438,7 +437,7 @@ play in Val'loh again, they are canon at your table.
 
 The recorded outcome is the default, not a cage. When the table genuinely diverges,
 these sidebars keep the night standing. All divergences share one rule: **be
-generous.** A table that beats history has done something remarkable; never claw
+generous.** A table that beats history has done something remarkable. Never claw
 it back.
 
 **⟨They save Raunu.⟩** Possible — it takes the Wept's Fracture found early, plus
@@ -451,7 +450,7 @@ which makes him the most dangerous man alive and the players his only trusted
 witnesses. Veier and the child still must vanish — Raunu himself, once he
 understands what came for his son, will insist; grieving the living is the price of
 this victory. Vorlain's face when his brother walks out of the smoke is worth the
-whole divergence. Your Val'loh now runs on: a living Raunu hunting an eastern power
+whole divergence. Your Val'loh now runs on. A living Raunu hunting an eastern power
 with a party of proven allies is a campaign, and a very good one. *(In the wider
 canon of Svara he dies tonight; your table's canon is now its own, and the module
 blesses it without reservation.)*
@@ -461,7 +460,7 @@ The module refuses to leave it there, and so should you — the leash east is lo
 the boat is slow, and Master Vell does not accept endings. The aftermath wing
 becomes a pursuit: down the river, along the coast, toward mists that are rising
 again — with Vell, suddenly and terrifyingly forthcoming, as patron. The child is
-recoverable at the water's edge; past the mist-line, the module draws its curtain
+recoverable at the water's edge. Past the mist-line, the module draws its curtain
 and your campaign begins.
 
 **⟨They trap one of the Uninvited.⟩** Killing one is off the table — see "You
@@ -500,7 +499,7 @@ is visible in the trade district at dusk to a gifted Phern, the
 sergeants will talk to anyone who opens with money, and a Draunel or a Circle patron
 could be talked into fronting the fee by a party who explains what it buys.
 
-If they manage it: two hundred guests are out in minutes. The sect guard is inside
+If they manage it, two hundred guests are out in minutes. The sect guard is inside
 before the Crossing. The Radiant's hunt is *watched* — by forty blades who do not
 understand what they are seeing and will spend the rest of their lives not talking
 about it.

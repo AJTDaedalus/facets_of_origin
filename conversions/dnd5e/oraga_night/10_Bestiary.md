@@ -17,12 +17,12 @@ chapter VII.*
 are the SRD's; the encounter math on every fight card in chapter IX uses the SRD
 5.2.1 budget per character (4th level: **Low 250 · Moderate 375 · High 500**; for three,
 **750 · 1,125 · 1,500**; other tables, Table IX–1). The
-three Uninvited are the deliberate exception: they are CR 9 to 11, and they carry a
+three Uninvited are the deliberate exception. They are CR 9 to 11, and they carry a
 trait called **Leashed** that means none of that matters, because tonight they
 cannot be killed. The **Attendant** who came with them is the other exception, in the
 other direction: a boss that can be beaten, and its block and card S14 say how.
 **Master Vell** is the last
-exception: his numbers are real, set so high that no party of 4th or 5th level drops
+exception. His numbers are real, set so high that no party of 4th or 5th level drops
 him before the boat clears, and he is worth no XP.
 
 **Every block has four lines after its numbers**: **Wants** (what ends the fight without a body), **Tells** (what a watchful
@@ -38,15 +38,15 @@ else, and most of them break long before the end.
   contract to detain leaves a creature at 1 Hit Point with the Grappled condition
   instead, see its *To the Terms*) is **Unconscious and Stable** instead of dying. Before
   midnight it wakes in the gatehouse cell at the start of the next Movement, and
-  somebody comes for it (see chapter IV, "The Palace on Alert"); after midnight, see
+  somebody comes for it (see chapter IV, "The Palace on Alert"). After midnight, see
   chapter V, "Down, Not Out". Any attacker at this ball may also knock out rather than
   kill, as the SRD's Knocking Out a Creature, with any attack roll; never with an area
   effect (see chapter IX, "Running the Snakes").
-- **Down, Not Out.** The Uninvited set most people aside instead of killing them: a
+- **Down, Not Out.** The Uninvited set most people aside instead of killing them. A
   creature one of them drops is thrown clear, and a companion or the crowd gets it up,
   unless it has made itself a threat to that one. The Attendant sets aside whoever it
   drops while it is Idle; Focused, it can kill. The rule is printed once, in chapter V
-  ("Down, Not Out"); every block below that uses it points there, and adds only what is
+  ("Down, Not Out"). Every block below that uses it points there, and adds only what is
   its own.
 
 **Standard numbers in the text.** DCs follow the ladder in chapter I: **Easy 10 ·
@@ -54,7 +54,7 @@ Standard 13–15 · Hard 18–20 · Very Hard 25.** "Bloodied" means at or below
 Hit Points. A creature with Advantage on Initiative has it folded into its Initiative
 score already. The **Gear** line names a creature's armor; its weapons are named in
 its Actions. "Until the scene ends" means until the fight ends or the Movement
-changes, whichever comes first. At a 2014 table, read the box below first: the blocks
+changes, whichever comes first. At a 2014 table, read the box below first, because the blocks
 use a few words the 2014 books don't.
 
 > **DM Note — at a 2014 table**
@@ -137,7 +137,7 @@ a leash that runs east. That leash holds their lives, minds and
 shapes, and it pulls them home when their work is done or at the last bell, whichever
 comes first. Say that at the table when a player reaches for the spell, and then say
 what the spell bought. Most good ideas buy something, and what they buy is **Delay**
-(see chapter V, "Buying Time"): each point costs one of the three a turn of movement
+(see chapter V, "Buying Time"). Each point costs one of the three a turn of movement
 toward their errand, and every point is spent on somebody's life.
 
 **One rule covers most of the list.** Anything that would block, hide from or
@@ -153,7 +153,7 @@ Else*), and the Delay is all it buys. The obvious ones:
 - **Damage, a lot of it.** Every round the party deals 20 or more damage to one of
   them (with more characters, see chapter V, "Adjusting the Attack"), that one gains
   1 Delay, never more than 1 a round. At 0 HP they step into the world's shadow and
-  are back at full HP on their next turn; whoever dealt the last blow makes a save
+  are back at full HP on their next turn, and whoever dealt the last blow makes a save
   or is thrown (*Leashed*).
 - ***Power Word* anything, *Disintegrate*, a long fall, drowning.** They are not dead.
   The leash holds their lives (*Leashed*). A spell that lands still buys its Delay.
@@ -201,9 +201,9 @@ the deepest of it, and they don't know to avoid it: see chapter V, ⟨They trap 
 Uninvited⟩); and the **leash**, which takes all three east the moment their work is
 finished or lost, and at the last bell of Oraga if nothing else has. Chapter V runs
 the attack; these blocks are what it runs on. Their challenge ratings describe how
-hard they hit; nothing tonight stops them.
+hard they hit. Nothing tonight stops them.
 
-**Stop and End.** Each Uninvited has **tells**, human moments salted through Movements
+**Stop and End.** Each Uninvited has **Fracture tells**, human moments salted through Movements
 III–V. Reaching the person inside with the right words lands a **Stop**, good for the
 scene, and every tell a character has seen makes it easier. Two or more tells and the
 one method that reaches that person land an **End**, good for the night. The full rule,
@@ -1349,7 +1349,7 @@ must succeed on a DC 13 Dexterity saving throw or drop it.
 **Traits**
 
 ***The Phern Gift.*** Corro can't be surprised, and he has Advantage on Initiative
-rolls. Tonight the gift is ringing like a struck glass and pointing nowhere.
+rolls. Tonight the gift is on edge and points nowhere.
 
 ***Three Seconds Early.*** When the lights die at midnight, Corro and his Phern
 Bodyguards act before the first round begins: he is already moving. Anyone who
@@ -2195,12 +2195,12 @@ magical effects.
 
 ***Elsewhere.*** Vell is simply somewhere else, anywhere he could have walked to,
 unhurried. No check, attack or Reaction stops it. At the Crossing he moves the way
-the Uninvited move — arriving, not running — and that is the only time all night
+the Uninvited move, and that is the only time all night
 anyone sees it.
 
 ***Move Aside.*** When the only way to the river gate runs through a creature, Vell
 makes no check. The DM tells that player what the factor's face says: he has already
-done the arithmetic, and they should move. If they do not, they are moved — set
+made his choice, and they should move. If they do not, they are moved — set
 aside, unhurt, and they did not see how. He takes the path that spills the least
 blood if one exists. If none exists, he is ruthless, because the one thing he will
 not do is fail.
@@ -2221,7 +2221,7 @@ saw him hurry.
 > VII.*
 
 The block exists to tell you one thing: **Master Vell does not fight, and no party at
-this ball can beat him.** He has no attacks; he can be hit, and the numbers above are
+this ball can beat him.** He has no attacks. He can be hit, and the numbers above are
 real, but they are set so that a party of 4th or 5th level cannot drop him before
 the boat clears: against AC 20, his Reaction and resistance to every damage type, even
 four 5th-level characters land roughly 15 damage a round, and he has 285 Hit Points. Long
@@ -2248,12 +2248,12 @@ not, trained or not. Releasing one does not make its bearer a caster.
   uncommon, and nobody at the ball grew them with a gift alone. Price: 200 GP, when
   they can be bought at all.
 - **Chancy releases.** When the fiction makes a release uncertain (fumbled in the
-  dark, jostled in a crowd), the bearer makes a DC 13 Charisma check; on a failure,
+  dark, jostled in a crowd), the bearer makes a DC 13 Charisma check. On a failure,
   the action is spent and the charge is not.
 - **Near the Uninvited** (within 30 feet of any of the three), every release needs
   that DC 13 Charisma check, and a failure means the light goes out of the crystal and
   the charge is spent. A charge that is already running (a *Steady Light* carried in,
-  a door already sealed) keeps running; only the release is at risk. Foreshadow this
+  a door already sealed) keeps running. Only the release is at risk. Foreshadow this
   the moment a player's clever crystal plan meets it.
 
 **Table X–3: Crystal Charges**

@@ -40,3 +40,11 @@ Attendant|module|02_The_World_and_the_Night.md|it is not a person: **the Attenda
 Bought|module|09_The_Snakes.md|**The Bought** are not snakes either. They are a contract company
 Merchant's Circle|module|02_The_World_and_the_Night.md|**The Merchant's Circle** bleeds margin under his policies
 Tithe of Hands|module|02_The_World_and_the_Night.md|*(The Tithe of Hands is a levy on each sect palace
+#
+# Words of the Night (WP11 T11.1; the glossary sidebar in chapter I)
+Delay|module|01_Overture.md|The turns an Uninvited loses to the characters' cleverness
+Wept|module|01_Overture.md|The three killers masked as spirits. **The Wept** goes for Raunu
+Radiant|module|01_Overture.md|**the Radiant** hunts Veier
+Hollow|module|01_Overture.md|**the Hollow** holds the doors
+Midnight Clock|module|01_Overture.md|The order of events after the lights die, step by step
+Fracture tell|module|01_Overture.md|A human moment that slips out through an Uninvited's mask

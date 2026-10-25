@@ -47,8 +47,7 @@ Agenda 4) now hold a truth that exists nowhere else in the world — priceless,
 unprovable, and dangerous in exact proportion to who they tell. Vorlain would pay
 a fortune for it and might even believe it. The Church would make it, and them,
 disappear into a closed file. The Thenya would go to war over it. Choose carefully
-is not advice the module needs to write down; the players will feel it. The one
-exception: if a character sold the nursery to Callun, the Circle knows there is an
+is not advice the module needs to write down; the players will feel it. There is one exception. If a character sold the nursery to Callun, the Circle knows there is an
 heir, and it begins its own search, keeping it quiet. Circle agents start looking west for the
 child. It is a threat for a campaign to carry, never a public fact.
 
@@ -88,7 +87,7 @@ sleeve, or carry it east toward the rising mists — is the campaign's next act,
 it is theirs, not the module's.
 
 > **Sidebar — Going east:** Sooner or later, a good table looks at the mists. The
-> module ends at the mist-line on purpose: what waits past the Blackwatch belongs
+> module ends at the mist-line on purpose. What waits past the Blackwatch belongs
 > to the deep future of this setting. If your table sails anyway — of course they
 > do — you are off the map with the module's blessing and one true bearing: the
 > mists are rising again *because the child got away*, and nothing that lives out

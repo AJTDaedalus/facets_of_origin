@@ -4,9 +4,9 @@
 keyed, and after it the Snake Tracker, Where Everyone Stands, and the rumor table, then
 the handouts for the table. The Midnight Tracker closes the chapter on a page of its
 own. The DM packet is the DM sheet, the palace keyed, the Midnight Tracker and the five
-maps (VIII–1 to VIII–5): print it and run the night from it. The handouts print for the
-table, one to a page with cut lines; the fight cards print as a deck, each card with its
-stat blocks; and each pregenerated character prints as a sheet of its own.*
+maps (VIII–1 to VIII–5). Print it and run the night from it. The handouts print for the
+table, one to a page with cut lines. The fight cards print as a deck, each card with its
+stat blocks, and each pregenerated character prints as a sheet of its own.*
 
 ---
 
@@ -40,9 +40,9 @@ The bells of midnight ring at the break, before the Unmasking. The bells of Orag
 tolling when the first guests reach the Gatehouse Court, and they are only a warning.
 The last bell of Oraga rings when the front gate is decided, or when S3's sect-guard
 clock fills (at the end of Movement VII if no character gets there). It is the leash's hard
-limit: by then the three are gone, finished or not.
+limit. By then the three are gone, finished or not.
 
-**Tells to show** *(Table V–6 in chapter V has them all. Each tell witnessed or
+**Fracture tells to show** *(Table V–6 in chapter V has them all. Each one witnessed or
 heard secondhand eases a Stop; an End needs two. Show each of the three at least
 once before midnight.)*
 
@@ -258,7 +258,7 @@ below the wing.*
 ## The Snake Tracker
 
 *Heat 0–4 per faction (chapter IX, Table IX–2, is the full rule). Tick a box when a line
-goes unanswered; clear one when the party steps on it. Read every row at the first
+goes unanswered, and clear one when the party steps on it. Read every row at the first
 scream: **0–2**, they get their principal out; **3**, the midnight card is live;
 **4**, it starts with steel already out (each card's *At heat 4* line says how). A line the table was never shown does not
 heat up. The Thenya are here because they can become a fight, not because they are a
@@ -440,7 +440,7 @@ not, trained or not. Releasing one does not make its bearer a caster.
   one at a time, and no more than one a week: a gift is not a mint (see chapter III).
   Price: 50 GP, which is a season's wages in the wrong district.
 - **Chancy releases.** When the fiction makes a release uncertain (fumbled in the
-  dark, jostled in a crowd), the bearer makes a DC 13 Charisma check; on a failure,
+  dark, jostled in a crowd), the bearer makes a DC 13 Charisma check. On a failure,
   the action is spent and the charge is not.
 - Some things at this ball smother a charge; the DM will tell you.
 
@@ -496,8 +496,8 @@ which is why the great houses post extra guards.
 ## The Midnight Tracker *(DM)*
 
 *Print this page and write on it from the moment the lights die. Every line is a piece
-of the midnight hour that drifts if you carry it in your head. The boxes only count;
-the rules behind them are in chapter V ("Midnight Rules", "The Fractures"), on card S14
+of the midnight hour that drifts if you carry it in your head. The boxes only count.
+The rules behind them are in chapter V ("Midnight Rules", "The Fractures"), on card S14
 and on card S3. Numbers are for three characters, with four in parentheses.*
 
 **Table VIII–10: The Midnight Tracker — the Three**
