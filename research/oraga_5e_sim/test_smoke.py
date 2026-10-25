@@ -152,3 +152,141 @@ def test_cli_each_script():
                              capture_output=True, text=True, timeout=120)
         assert out.returncode == 0, out.stderr
         assert "seed=1" in out.stdout
+
+
+# ------------------------------------------------------------ s14, WP5 switches (T5.8)
+
+import random  # noqa: E402
+from dataclasses import replace  # noqa: E402
+
+
+def _fight(rules, party="C1", policy="engaged", dial="sharp", seed=7, **kw):
+    rng = random.Random(seed)
+    pcs = s14.make_s14_party(party, False, rng)
+    return s14.S14(pcs, rng, policy, False, rules=rules, dial=dial, **kw), pcs
+
+
+def test_s14_old_switches_reproduce_t31_baseline():
+    """OLD is the T3.1 harness draw for draw: the seed string and the numbers."""
+    a = s14.simulate("C1", "engaged", n=N, seed=SEED)
+    b = s14.simulate("C1", "engaged", n=N, seed=SEED, rules=s14.Rules())
+    assert a == b
+    assert "pc_death" not in a
+
+
+def test_s14_every_switch_runs_and_new_differs():
+    for sw in s14.SWITCHES:
+        r = s14.simulate("C2", "engaged", n=40, seed=SEED, rules=replace(s14.OLD, **{sw: True}))
+        assert _is_rate(r["win"]) and _is_rate(r["pc_death"]), sw
+    new = s14.simulate("C1", "engaged", n=N, seed=SEED, rules=s14.NEW)
+    old = s14.simulate("C1", "engaged", n=N, seed=SEED)
+    assert new["win"] != old["win"]
+
+
+def test_s14_lethal_kills_only_when_lethal():
+    old = s14.simulate("C3", "slug", n=N, seed=SEED, rules=replace(s14.NEW, lethal=False))
+    assert old["pc_death"] == 0.0
+    sharp = s14.simulate("C3", "slug", n=N, seed=SEED, rules=s14.NEW, dial="sharp")
+    merc = s14.simulate("C3", "slug", n=N, seed=SEED, rules=s14.NEW, dial="merciless")
+    gent = s14.simulate("C3", "slug", n=N, seed=SEED, rules=s14.NEW, dial="gentle")
+    assert gent["pc_death"] <= 0.02
+    assert sharp["pc_death"] > 0.0
+    assert merc["pc_death"] >= sharp["pc_death"]
+
+
+def test_s14_idle_drop_is_set_aside_focused_drop_is_dying():
+    f, pcs = _fight(s14.NEW)
+    pc = pcs[0]
+    f.focused = False
+    f.hit_pc(pc, pc.hp)
+    assert pc.down and pc.stable and pc.name in f.set_aside
+    f2, pcs2 = _fight(s14.NEW)
+    q = pcs2[0]
+    f2.focused = True
+    f2.hit_pc(q, q.hp)
+    assert q.down and not q.stable
+
+
+def test_s14_damage_to_downed_by_dial():
+    for dial, expect in (("gentle", 0), ("sharp", 2), ("merciless", 2)):
+        f, pcs = _fight(s14.NEW, dial=dial)
+        pc = pcs[1]
+        f.focused = True
+        f.hit_pc(pc, pc.hp)          # drops (Gentle: Stable at once)
+        f.hit_pc(pc, 5)              # a hit on a downed creature
+        assert pc.ds_fail == expect, dial
+
+
+def test_s14_clears_the_way_costs_the_action():
+    f, pcs = _fight(s14.NEW)
+    f.ctx.round = 1
+    f.wept_delay = 1
+    f.last_hit_by = {}
+    f.att_turn(1)                    # Idle, not struck: it clears and attacks nobody
+    assert f.wept_delay == 0 and f.clears == 1
+    assert all(p.hp == p.max_hp for p in pcs)
+    g, _ = _fight(s14.NEW)
+    g.ctx.round = 1
+    g.wept_delay = 1
+    g.clock = 5
+    g.last_hit_by = {"Dassa": 5}     # struck since its last turn: no clearing
+    g.att_turn(1)
+    assert g.wept_delay == 1 and g.clears == 0
+    h, _ = _fight(s14.NEW)
+    h.ctx.round = 1
+    h.wept_delay = 1
+    h.lost_turn = True               # a lost turn clears nothing
+    h.att_turn(1)
+    assert h.wept_delay == 1
+
+
+def test_s14_help_dc18_idle_free_nat20_and_orders_window():
+    f, pcs = _fight(s14.NEW)
+    f.focused = True
+    assert f.focused_dc() == 18
+    serane = pcs[2]                  # her best trick has no Advantage of its own
+    base = f.best_p(serane)
+    f.helped = (serane.name, f.ctx.round)
+    assert f.best_p(serane) > base   # Help: Advantage
+    g, pcs2 = _fight(s14.NEW)
+    g.focused = False
+    g.do_trick(pcs2[1])
+    assert not g.trick_uses           # a trick tried while Idle is not spent
+    o, pcs3 = _fight(s14.OLD)
+    o.focused = False
+    o.do_trick(pcs3[1])
+    assert o.trick_uses
+    w, pcs4 = _fight(s14.NEW)
+    w.ctx.round = 3
+    w.interf_round = {p.name: 2 for p in pcs4}
+    assert len(w.valid_targets()) == len(pcs4)   # since the start of its previous round
+    w.interf_round = {p.name: 1 for p in pcs4}
+    assert w.valid_targets() == []
+
+
+def test_s14_cap3_and_tie():
+    f, _ = _fight(s14.NEW)
+    f.wept_delay = 5
+    moves = f.wept_moves
+    for _ in range(4):
+        f.wept_turn()
+    assert f.wept_lost == 3 and f.wept_moves == moves - 1
+
+
+def test_s14_solo_line_softer_and_tp30_tricks():
+    a = s14.simulate("C1", "engaged", n=N, seed=SEED, rules=replace(s14.NEW, solo_line=False),
+                     solo="Dassa")
+    b = s14.simulate("C1", "engaged", n=N, seed=SEED, rules=s14.NEW, solo="Dassa")
+    assert b["any_drop"] < a["any_drop"]
+    f, pcs = _fight(s14.NEW, party="C3")
+    names = [t[0] for p in pcs for t in p.tricks]
+    assert not any("cup" in n for n in names)
+
+
+def test_s14_regression_wp5_targets_at_sharp():
+    """DESIGN §4 targets at Sharp: engaged wins >= 85%, a death <= 10%; slugging
+    mostly loses (N=200 slack)."""
+    eng = s14.simulate("C2", "engaged", n=N, seed=SEED, rules=s14.NEW)
+    slug = s14.simulate("C2", "slug", n=N, seed=SEED, rules=s14.NEW)
+    assert eng["win"] >= 0.85 and eng["pc_death"] <= 0.12
+    assert slug["win"] <= 0.3

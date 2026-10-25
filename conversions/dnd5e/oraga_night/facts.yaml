@@ -504,6 +504,44 @@ facts:
         anchor: 'never gets out'
         why: TP46 — the Facets edition prints the same exception (fact_check reads it by path)
 
+  - id: root
+    truth: >-
+      The Root (the deep crystal under the palace) was built for gift research; it traps the
+      Uninvited as a side effect (TP8, TP18). The Attendant is not trapped: it goes wherever
+      its three go, the Root included, unaffected (TP17). T7.2 extends this fact.
+    source: owner TP8, TP17, TP18 (2026-10-20/21); T5.7
+    phrases: ["the Root included: nothing there touches it"]
+    checks:
+      - type: require
+        file: 10_Bestiary.md
+        pattern: '\bthe Root included: nothing there touches it\b'
+        anchor: 'The Attendant'
+        why: TP17 — the Attendant enters the Root wherever its three go, unaffected
+
+  - id: veier_door_errand
+    truth: >-
+      Agenda 4 is done at the east wing door: a guard carries word, the door opens a hand's
+      width, Veier's hand takes the ring, her face stays unseen, and her answer comes back
+      through the door. At midnight she listens for that character's voice. Dinner for Two is
+      cut, and the heir is found only through Undercurrent C (TP13, TP27, TP33).
+    source: owner TP13, TP27, TP33 (2026-10-22/24); T7.5, T7.6
+    phrases: ["The Ring at the Door", "her hand comes through it and takes the ring"]
+    checks:
+      - type: forbid
+        files: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "11"]
+        pattern: '(?i)\bbeside Veier\b|\bDinner for Two\b|\bat dinner\b'
+        why: TP13 / TP27 — nobody stands beside Veier before the Crossing, and the dinner is cut
+      - type: require
+        file: 04_The_Ball.md
+        pattern: '\bher hand comes through it and takes the ring\b'
+        anchor: 'The Ring at the Door'
+        why: TP33 — the ring is taken by Veier's hand through the door
+      - type: require
+        file: 07_Cast_of_the_Ball.md
+        pattern: '\bNobody meets her face to face before the Crossing\b'
+        anchor: 'Where she is'
+        why: TP13 / TP41 — 07 Veier says she is never met before the Crossing
+
 maps:
   court:          # B2 (05 General Features, Sizes)
     length: 140

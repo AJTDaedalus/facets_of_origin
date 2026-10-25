@@ -455,3 +455,88 @@ Read first: TASKS (header, SA, the task bodies, the story-beat section), DESIGN 
 - From `M/`: `lint_5e.py --check` OK 0 (first runs: two long paragraphs and a bare DC 13, fixed); `fact_check.py --check` OK 0; `bestiary_check.py` 0 mismatches; `pregen_check.py` 0 issues; `pytest tools -q` **443 passed** (434 before). From `software/`: `test_docs_consistency.py` + `test_no_private_canon.py` 42 passed. flow.json unchanged, so no rebuild.
 - Not touched, for WP5: 05 *You Cannot Beat Them* "does not die" line, 08 Down, Not Out copy, 10 the Radiant's *Down, Not Out* trait, and 05 ⟨A player character dies⟩ ("Neither the Uninvited nor the Attendant ever kills a player character"), which now contradicts the gate rule and the threat rule (T5.4/T5.5).
 - No commit or staging.
+
+## 2026-10-24 — WP7: T7.5, T7.6, T7.7, and the "Fracture" sweep outside 05/08/10
+
+Read first: TASKS (header, SA, E1, T7.5–T7.7, the story-beat section), DECISIONS TP11, TP13, TP14, TP27, TP33, TP35, TP39, TP41, TPN-6, TPN-7, and the two LOG entries above. Only 01, 02, 04, 07 (not the Attendant), 09 (line IV of the Church table only), flow, facts.yaml (append), INVENTIONS and F/ were edited; 05, 08, 10 and 09 S14 belong to the concurrent worker.
+
+### T7.6 Dinner for Two cut (TP27, TP33)
+- 04 *Dinner for Two (B9)* replaced in place by **The Ring at the Door (B9)**: any Movement before midnight; a guard carries word to her; by default she chooses, the door opens a hand's width, her hand takes the ring, face unseen, answer back through the door (Raunu's "If she chooses you, you will know" kept); she does not speak of a child, the heir is found only through Undercurrent C; a character who gets into the wing another way does not meet her either.
+- 04 pointers: B9 note (Agenda 4 "is done at these doors and goes no farther"; Undercurrent C is the way behind them), Veier's rooms ("before meeting her" cut), nursery ("Agenda 8 and Undercurrent C"), the Undercurrents box (C "is the only way to the heir"), Undercurrent C trail ("Only real ingenuity gets through them; the ring opens them a hand's width"; Anha's passages dropped, B9 already says they reach only the service door), Movement IV run box (dinner cut), Movement IV agenda beats (the doors are as near as anyone gets).
+- 07 Raunu: the two dinner clauses cut. 07 Veier: *Where she is* rewritten to the door errand, "Guests who come to her door", *What Veier Knows* trimmed to what she says through the door (quote, happy and chose this, fear); the pack, slings and nursery are B9 finds; the child, the two plates and the minute alone cut. 07 Maiven's "for Veier alone" kept (TPN-20d).
+- 09 S10: already clear of the escort (no change needed); S10's "Go with them" out matches TP35.
+- flow.json: `sc-dinner` → `sc-ring-door` ("The ring at the door", phase m2, ref `#the-ring-at-the-door-b9`), the ev-toast → dinner edge removed, `a4` and `b9` summaries and the a4 → b9 label ("at the door"). `build_flow_page.py` rebuilt.
+- INVENTIONS #58 and #72 marked superseded (TP27/TP33, → #96).
+- Facets edition: F/04 Movement IV (the door errand as a parenthesis, no mechanics), F/04 B9 Veier's rooms and nursery, F/04 Undercurrent C trail, F/07 Veier *Where she is* and "come to her door", F/08 Table (Veier row: "Agenda 4 at the door only", dinner cut).
+
+### T7.5 Agenda 4's midnight note (TP13)
+- 02 Agenda 4 *At midnight*: "yours is the one voice … she will listen for you"; DM parenthesis: done at the east wing door, her hand takes the ring, face unseen, at midnight she listens for that character's voice through the door. F/03 the same, in Facets wording.
+- 01:30, 03, 11 (fixed in T4.12), 04's old Undercurrents line (now the heir) and 09's Thenya line: checked. flow.json edge a4 → cross-1 "beside Veier" → "the voice she listens for".
+- `facts.yaml`: new fact `veier_door_errand` appended (not an edit of `veier_unmet`, per the append-only rule): forbids "beside Veier", "Dinner for Two", "at dinner" in 01–07, 09, 11 (08 left out, see below); requires the hand-through-the-door line in 04 and "Nobody meets her face to face before the Crossing" in 07. On HEAD's text it fires 11 times (02:357; 04:361, 1197, 1248, 1249, 1304; 07:57, 59, 94, 96, 109), 0 now. `tools/test_fact_check.py`: new class `TestVeierDoorErrand`, 5 tests. "beside Veier": 0 in both editions.
+
+### T7.7 Acting early (TP14)
+- 04 Undercurrent D, after "Confronting the three": **Getting Veier out early** refused (Raunu keeps her in the palace until the birth, TP11; she refuses bluntly through the door; she leaves at midnight and not before); **Moving guests early** (not among the dead; tell the table when the night is counted); **Getting ready** (a character who acts on the warning starts midnight wherever they chose to stand). The Corval payoff was already there (T7.8).
+- 01 promise: "and to see it pay when the lights die (chapter IV, Undercurrent D)"; Table I–1 Movement V "it pays at midnight"; 01 cut list: "B9's rooms, unless somebody is on Undercurrent C" (the east-wing scene was the dinner). 02 Agenda 6 catch: DM line, an early exit through the gate is refused.
+- Facets edition: F/01 Movement V line and the promise; F/04 Undercurrent D, the same refusals and payoffs as narrative.
+
+### "Fracture" sweep (outside 05/08/10)
+- 5e: 01:419 "Stops and Ends change outcomes"; 04 B13 "holds no way to Stop or End the Uninvited"; 04 Undercurrent D tells parenthesis (Table V–6) and *At midnight* ("Tells … are this thread's currency"); 04 Church line and 09 Church table IV "(a tell; see chapter V)"; 07 Uninvited lead ("Stops, Ends and full tell-tables"), "tells that arm a Stop or an End", "ward-fire, the leash, Stops and Ends". Kept as names: 01:19 (prep box pointer), 07's two *The Fractures* pointers (Mother Sella, Kovaun), README:66.
+- Facets edition: no change. F/01:136, F/04:279/570/571/591, F/05, F/07:364/387, F/08:114/115/155/183/191 and F/README:38 are the Facets edition's own Fracture rule (Soul roll, Hard/Standard by tells, once each) and contradict no canon ruling. TPN-20f.
+
+### Records and checks
+- INVENTIONS **#96**. DECISIONS **TPN-20** (a–g).
+- From `M/`: `lint_5e.py --check` OK 0 (first run: one long paragraph in Undercurrent C's trail and a "say so" tic, both fixed); `fact_check.py --check` OK 0; `pregen_check.py` 0 issues; `bestiary_check.py` 0 mismatches; `pytest tools -q` **448 passed** (443 before). From `software/`: `test_docs_consistency.py` + `test_no_private_canon.py` 42 passed. flow page rebuilt.
+- No commit or staging.
+
+### Left for the 05/08/10 worker (or a later task)
+- **08 Table VIII–6**, Veier row: "B9 — dinner for two" (Movement IV cell) and "B9 (Agenda 4 / Und. C only)" (Movement III). Once fixed, add "08" to `veier_door_errand`'s forbid files.
+- **05** "And then the counting" (05:1200): T7.7's "guests moved early are not among the dead" points here; the count could name them. No 05 dinner pointer found.
+- **Facets canon drift (not in scope):** F/07 Veier's quote says "Tell my **uncle**"; the 5e edition says "cousin" (owner ruling Q24, INVENTIONS #73). Owner to confirm which edition is right.
+
+## 2026-10-25 — WP5: T5.3–T5.11, and the 08 Table VIII–6 follow-up
+
+Read first: TASKS (header, SA, SIM, DIAL, T5.3–T5.11), DESIGN §2.1, §3.1, §4, DECISIONS TP5, TP6, TP17, TPN-1–TPN-7, TP30–TP46, the T3.1 review rule. Locate by quote; lines below are today's. Calls for Planner review: **TPN-8 (a–k)**. INVENTIONS **#97**.
+
+### Follow-up from the lore worker (before T5.3)
+- 08 Table VIII–6, Veier row: III "B9, behind the door (Agenda 4: her voice)", IV "B9, behind the door (Agenda 4: her hand takes the ring)" (TP27, TP33). `facts.yaml` `veier_door_errand` forbid now lists "08"; its why no longer excuses 08. `test_08_is_out_of_scope` became `test_08_dinner_row_is_forbidden` (the guard fires on the old row).
+
+### T5.3 Damage to a set-aside creature, per dial
+- 05 *Down, Not Out*: new paragraph **Hitting someone who is down** (05:255): Sharp and Merciless, the ordinary rules (a failure, two on a crit; Stable ends); the Uninvited never aim at the set-aside, the Attendant only as its block says; crossfire, trampling and area spells reach a body on the floor; Gentle, no damage until up. Pointers: *Two Hundred People* trampling bullet and the Crossing's crossfire sidebar (its own paragraph, to keep the sidebar under 120 words). 10's side is in the Attendant's *Removes Interruptions* (T5.5).
+
+### T5.4 Rule copies become pointers
+- 10 How to Read: the *Down, Not Out* bullet is now a pointer (set aside unless a threat; the Attendant Idle / Focused). The three Uninvited traits renamed ***Threats Only*** (10:1197, 1480, 2016), each a pointer plus its own rule (the Hollow's 30 feet; the Radiant's Veier line; the Wept's shielding mercy, now for a creature that is no threat to her). 08 Page Two *Down, Not Out*: the threat triggers, the line, Sharp's finishing, the Attendant, the last-blow throw (two `rule_copy` elements, under the max). 09 needed no change beyond S14 (its snake-fight crowd pointers are the crowd rule, not a copy).
+- Also fixed (named in the brief): 05 *You Cannot Beat Them* "does not die" bullet → "set aside, not killed, unless … a threat"; 05 ⟨A player character dies⟩ (05:1351) now lists a Focused Attendant and an Uninvited finishing a threat (TPN-8k).
+
+### T5.5 Attendant: lethal, *Clears the Way*
+- 10 the Attendant: ***Removes Interruptions*** (10:290) replaces *Down, Not Out* (Idle drops set aside; Focused drops dying; Sharp / Gentle / Merciless). ***Clears the Way*** (10:282): a turn's action at its start, no adjacency; Idle when nobody attacked it since its last turn; Focused on its second turn, or it attacks if there is no Delay to take (TPN-8a); a lost turn clears nothing. *Two Turns*: the second turn clears or makes one Joined Hands (full Multiattack at four, no attack against a lone character).
+- 05: the Attendant paragraph in *Down, Not Out*, *Buying Time*'s "The Attendant takes Delay away", *The Attendant* bullets ("It and Delay feed each other", "It can kill", 05:501). 07 the Attendant: "Whoever it drops while it is Idle is only set aside … Focused, it can kill". 08 the Attendant line ("its drops are dying") and *Clears the Way*. 09 S14 *Tactics*, the clock paragraph, *Development* (the dying make saves). Solo line in S14 *Adjusting* (09:2017).
+- "Deadly but not lethal" appears 0 times; `bestiary_check` 0 mismatches.
+
+### T5.6 Distraction at three; edge rules
+- 10 *Can Be Distracted*, 09 S14 full rule, 05 bullet, 08 line: DC 18 Focused; the Help action applies; a trick tried while Idle isn't spent ("a trick already tried … while it was Focused"); a natural 20 while Idle costs its next turn (TPN-8b); 09 *Failure while it is Idle: nothing happens*. *Literal Orders*: "since the start of its previous round". Four `lint_5e_allow.txt` bare-DC entries re-anchored from 19 to 18.
+
+### T5.7 S14 control note, tie, scene binding, the Root
+- 09 S14: **One scene at a time** (09:1844, the ledger's sentence), the tie rule in *Enemy* (09:1871), **Spells that stop it** (09:1954: *Sleep* fails, *Hold Person* can't target, a turn lost to *Command* or *Hideous Laughter* is lost but not a break). 10: ***Where the Three Go*** (10:297) points to the scene binding and carries TP17 ("the Root included: nothing there touches it").
+- `facts.yaml`: no `root` fact existed (T7.2's); a minimal `root` fact with the TP17 `require` in 10 was added (TPN-8i). Two tests (`TestRootAttendant`): the require fires without the line, not with it.
+
+### T5.8 Update `s14.py` to the new rules
+- `research/oraga_5e_sim/s14.py`: a frozen `Rules` dataclass with 13 switches (`lethal` with the dial, `clears_action`, `solo_line`, `help`, `dc18`, `idle_free`, `nat20_idle`, `orders_window`, `tie`, `cap3`, `spells_roll`, `tp30_tricks`, `put_aside_recharge`); `OLD` all off, `NEW` all on; `--rules`, `--dial`, `--hp`, `--dc`, `--moves`, `--solo`, `--level3`, `--wp5`; parties `5P` and `4S` for the adjusting lines. Found and fixed (as a switch) a T3.1 bug: *Put Aside*'s recharge was never rolled.
+- **OLD reproduces T3.1 draw for draw:** `s14.py --all --n 4000 --seed 1` before and after is byte-identical (the seed string is unchanged under OLD).
+- `test_smoke.py`: 10 new tests (OLD = baseline; every switch runs; lethal only kills when lethal, ordered by dial; Idle drop set aside vs Focused dying; damage to the downed by dial; *Clears the Way* as an action, blocked when struck or on a lost turn; Help, DC 18, Idle try not spent, the orders window; the cap; the solo line and TP30 tricks; the Sharp targets). `python -m pytest research/oraga_5e_sim -q`: **24 passed** (14 before).
+
+### T5.9 S14 re-simulation
+- Seed 1; n = 4,000 a cell for the main table (`s14.py --wp5 --n 4000 --seed 1`), 2,000 for the side runs. Full tables in `research/oraga_5e_simulation_notes.md`, "S14 under WP5". Current → WP5 Sharp, engaged win / PC death: C1 87.3 → 97.6 / 0.3, C2 90.9 → 97.2 / 3.8, C3 92.7 → 93.6 / 5.7, C4 94.1 → 96.2 / 5.5, C5 93.6 → 95.7 / 3.4, 4P 85.1 → 92.2 / 0.5. Slugging wins 0.1–25.7%, deaths 2.3–21.5%. Gentle: no deaths anywhere. Merciless: engaged deaths 3.6–15.3%, slugging 20.8–47.4%.
+- **Targets at Sharp met in the first round; no tuning** (TPN-8g). Main movers: Help (+8 win), DC 18 (+4), the *Literal Orders* window (drops nearly double).
+- L-042: the extra Wept turn holds (clock 5 instead of 6 costs engaged trios 8–13 points). L-041: on the printed clock the errand beats an engaged party 2–6%; "usually times out" is true only for a late card (engaged 3–10%, smart 25–29%). L-003: Idle-grind wins 0.0% in every cell; no XP halving (TPN-8h).
+- Adjusting lines (n = 2,000): five 260 / DC 19, four at 3rd 210 / DC 17, hit hard +30 (208 at three, 259 at four; proxy method TPN-8f). The block's 178 (21d8 + 84) and 229 are unchanged (TPN-1).
+
+### T5.10 S14 text from the re-sim
+- 09 S14 *DM Note — how it plays* (09:1892) rewritten as table advice per dial (no rates; the first draft's "one fight in ten" tripped `sim_jargon` and was reworded). *Budget*: "hard, close, and dangerous, because a Focused Attendant can kill". *Adjusting the Encounter* (09:2016): One character (no second-turn attack; outs first); Four 229; Five 260, full Multiattack, DC 19; Four at 3rd 210, DC 17; Four at 5th the five line; hit hard "30 more Hit Points, on top of whichever line above fits the table (208 for three characters, 259 for four)". Idle-grind XP unchanged.
+
+### T5.11 Vell's immunities
+- 10 Master Vell: Immunities now Charmed, Frightened, Grappled, Incapacitated, Paralyzed, Restrained, Stunned, Unconscious (TPN-8e). *Beyond Reach* already points to them. *Hold Person* at the Crossing can't land, so it can't open ⟨The child is taken⟩.
+
+### Checks (from `M/` unless noted)
+- `lint_5e.py --check` OK 0; `fact_check.py --check` OK 0; `bestiary_check.py` 28 blocks + 1 variant, 0 mismatches; `pregen_check.py` 0 issues; `pytest tools -q` **450 passed** (443 before). Repo root: `pytest research/oraga_5e_sim -q` **24 passed**. `software/`: `test_docs_consistency.py` + `test_no_private_canon.py` **42 passed**.
+- Swept 01–04, 11 and README (the other worker's files) for the Attendant's old DC 19, "no Help", "does not die" and "never kills": no hits.
+- No commit or staging. T5.12 (commit) left open.

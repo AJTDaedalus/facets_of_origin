@@ -252,6 +252,14 @@ landed Stop marks a threat, and they never finish anyone: a marked creature at
 enough (one Delay earned against them marks the one who earned it), and they finish
 a marked creature wherever it lies.
 
+**Hitting someone who is down.** At Sharp and Merciless the ordinary rules hold:
+damage to a creature at 0 Hit Points is a failed Death Saving Throw (two on a critical
+hit), and a Stable creature that takes damage is dying again. The Uninvited never aim
+at a creature they set aside, and the Attendant aims at one only as its block says. The
+rest of the night is not so careful: the Crossing's crossfire, a crowd's trampling feet
+and a character's own area spell all reach a body on the floor. At **Gentle**, a
+creature that has been set aside takes no damage until it is back on its feet.
+
 - **Help them up.** Any creature within 5 feet can take an action to rouse a Stable
   creature. It regains 1 Hit Point and can stand, with no check. A healing spell or a
   potion does the same and more, as normal.
@@ -272,8 +280,8 @@ a marked creature wherever it lies.
   direction the DM chooses and have the Prone condition. No damage. If no creature dealt it (fire, falling stone), nobody
   saves. If two blows landed at once, you pick.
 
-The **Attendant** (below) sets people aside the same way: whoever it drops is Stable,
-and gets up the same way. Everything else tonight (the snakes, the Bought) uses the
+The **Attendant** (below) sets aside whoever it drops while it is Idle, and they get
+up the same way. Focused, it can kill (see chapter X, "The Attendant"). Everything else tonight (the snakes, the Bought) uses the
 ordinary rules for dying, **except that the crowd rule holds anywhere in the palace
 after midnight.** Someone always comes.
 
@@ -340,8 +348,9 @@ default. Delay decides how many people walk out and who gets to the river gate; 
 never makes an Uninvited beatable. Delay alone never changes an outcome; ⟨If History
 Breaks⟩, at the end of this chapter, says what does.
 
-**The Attendant takes Delay away.** Once a round, if a distraction hasn't cost it the
-turn and no enemy is within 5 feet of it, it clears the way for one of the three and removes 1 Delay.
+**The Attendant takes Delay away.** It can spend a turn's action to clear the way for
+one of the three and remove 1 Delay: while Idle, whenever nobody has attacked it since its
+last turn; while Focused, on its second turn. A turn lost to a distraction clears nothing.
 That is why the characters cannot ignore it. See "The Attendant", below.
 
 > **Sidebar — Adjusting the Attack**
@@ -438,7 +447,8 @@ The attack happens in a crowd, and the crowd has rules too.
   seen by somebody, and the inquest hears of it. A spell that drops people without
   harming them (*Sleep*, say) drops them into a crush: anyone still on the floor at the
   end of the round is trampled, unless somebody gets them up. A trampled guest dies, and
-  a trampled character takes 5 (2d4) Bludgeoning damage.
+  a trampled character takes 5 (2d4) Bludgeoning damage (one already down: see "Down,
+  Not Out", *Hitting someone who is down*).
 - **The crowd as ground.** Moving through it is Difficult Terrain; card S11 has the
   rule for a crush at a door.
 - **The Post.** Guests make no saving throws against the Hollow's *Post* or *Turn Them Back*. The
@@ -475,20 +485,24 @@ player who came to this ball wanting a real fight.
   characters. Focused, it is the most dangerous thing in
   the palace that can be fought. Announce its state every round: "locked on you"
   or "drifting".
-- **It and Delay feed each other.** Once a round it clears the way and removes 1
-  Delay, unless a distraction cost it the turn or an enemy is within 5 feet of it. It comes
+- **It and Delay feed each other.** It spends a turn's action to clear the way and remove
+  1 Delay (Idle, when nobody has attacked it since its last turn; Focused, on its second
+  turn), and a turn lost to a distraction clears nothing. It comes
   back to Focused at the start of its turn only if one of the three in the scene has
   no Delay. Keep Delay on the three and the Attendant stays Idle; keep the Attendant
   busy and the Delay stays put.
 - **It can be distracted.** Its three habits are shown before midnight: worked
   crystal and light, waiting for a master who is not there, and music that
   changes. One trick a round, played out at the table: an ability check using
-  the skill that fits, DC 13 while it is Idle and DC 19 while it is Focused, with +2s
-  for leaning in. Break its focus four
+  the skill that fits, DC 13 while it is Idle and DC 18 while it is Focused, with +2s
+  for leaning in, and a companion can Help. Break its focus four
   times in a night and it wanders off to a window to watch the fires. That is a win.
   It is meant to be hard: one character or more will usually go down on the way.
-- **Down, Not Out** holds for everyone it drops. At 0 Hit Points it loses interest in
-  being here and steps into the shadow. There is no body.
+- **It can kill.** Whoever it drops while Idle is set aside, Stable ("Down, Not Out").
+  Focused, a creature it drops is dying, and at Sharp it strikes a fallen creature only if
+  that creature got in its way since its last turn (Gentle: never; Merciless: anyone its
+  orders still cover). At 0 Hit Points it loses interest in being here and steps into the
+  shadow. There is no body.
 
 Run it from **card S14** (see chapter IX), which has the full distraction rule and the
 hints; its block is in chapter X.
@@ -742,6 +756,9 @@ otherwise, never for a table that was busy saving someone else.
 > the gate gets worse (Difficult Terrain, a gap to jump, a stair gone), the DM's
 > choice.
 >
+> Against a character already down the hazard simply lands (see "Down, Not Out",
+> *Hitting someone who is down*).
+>
 > Cover doesn't help against a garden coming apart, and Evasion changes
 > nothing: a success already takes no damage. Never aim the duel at a character: the
 > terror of the Crossing is that neither combatant cares that they are
@@ -782,11 +799,12 @@ in practice it means this:
   blow makes a saving throw or is thrown ("Down, Not Out"). Fighting the Uninvited
   never ends in victory, but it does buy time: every round the characters land 20 damage on
   one of them is a point of Delay.
-- **A character one of them drops to 0 Hit Points does not die.** They are
-  Stable, and back on their feet within two rounds, by a friend's hand or a
-  stranger's ("Down, Not Out"). The Uninvited have no orders about them and no
-  appetite. *(This mercy covers only the Uninvited and the Attendant. A snake's knife
-  in the dark is an ordinary knife.)*
+- **A character one of them drops to 0 Hit Points is set aside, not killed,** unless
+  that character has become a threat to them. Set aside, they are Stable, and back on
+  their feet within two rounds, by a friend's hand or a stranger's. A threat dies like
+  anyone else, if nobody gets to them ("Down, Not Out"). The Uninvited have no orders
+  about anyone else and no appetite. *(This mercy covers only the Uninvited, and the
+  Attendant while it is Idle. A snake's knife in the dark is an ordinary knife.)*
 - **Magic buys time at most.** A table will reach for the spell list: *Banishment*,
   *Hold Person*, *Command*, *Sleep*, a *Wall of Force* if somebody has one. Chapter X
   says what each obvious answer does to each of the three, and every one of those
@@ -1331,10 +1349,10 @@ palace last night and knows who the characters are. That is a campaign frame,
 not a dead end, and chapter VI leans into it.
 
 **⟨A player character dies.⟩** Let it mean something and cost the enemy tempo.
-A death that holds a corridor or a gate is written into the night forever. *(Neither
-the Uninvited nor the Attendant ever kills a player character; "Down, Not Out" sees
-to that. A death tonight is a snake's knife, the Bought, or a player's
-own choice at the gate. Make it count.)* Then, between beats, hand the player Corval, Anha, Maiven, or
+A death that holds a corridor or a gate is written into the night forever. *(A death
+tonight is a snake's knife, the Bought, a Focused Attendant, or one of the Uninvited
+finishing a character who made itself a threat and stayed in the way ("Down, Not
+Out"). Make it count.)* Then, between beats, hand the player Corval, Anha, Maiven, or
 Vorlain to finish the night with. Nobody sits out the Longest Night.
 
 **⟨The Bought change sides.⟩** A table that buys the captain out before midnight

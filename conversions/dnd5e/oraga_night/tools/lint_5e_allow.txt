@@ -20,11 +20,11 @@
 03_Masks_and_Agendas.md|bare_dc|the skill that fits, DC 10, instead of the usual 13|approach across station: skill fits the approach
 04_The_Ball.md|bare_dc|ability check using the skill that fits, DC 10, where it would|approach across station: skill fits the approach
 05_The_Longest_Night.md|bare_dc|DC 13, or DC 15 if the same trick has already worked on that Uninvited tonight|room trick: the check is whatever the trick needs (Tables V-2 to V-5 give suggestions)
-05_The_Longest_Night.md|bare_dc|the skill that fits, DC 13 while it is Idle and DC 19 while it is Focused|Attendant distraction: skill fits the trick (card S14)
+05_The_Longest_Night.md|bare_dc|the skill that fits, DC 13 while it is Idle and DC 18 while it is Focused|Attendant distraction: skill fits the trick (card S14)
 08_Handouts.md|bare_dc|fits, DC 13 → 1 Delay (DC 15 the second time; never a third)|DM-sheet compression of the room-trick rule (05)
-08_Handouts.md|bare_dc|ability check using the skill that fits, DC 13 Idle / 19 Focused|DM-sheet compression of the Attendant distraction (S14)
-09_The_Snakes.md|bare_dc|pointing at a doorway), and so on — against **DC 13 while it is Idle, DC 19 while it is Focused.**|Attendant distraction: the sentence opens "an ability check with the skill that fits the trick"
-10_Bestiary.md|bare_dc|fits it: **DC 13 while it is Idle, DC 19 while it is Focused**|Can Be Distracted: "an ability check with whatever skill fits it" (BESTIARY-8 wording)
+08_Handouts.md|bare_dc|ability check using the skill that fits, DC 13 Idle / 18 Focused|DM-sheet compression of the Attendant distraction (S14)
+09_The_Snakes.md|bare_dc|pointing at a doorway), and so on — against **DC 13 while it is Idle, DC 18 while it is Focused.**|Attendant distraction: the sentence opens "an ability check with the skill that fits the trick"
+10_Bestiary.md|bare_dc|fits it: **DC 13 while it is Idle, DC 18 while it is Focused**|Can Be Distracted: "an ability check with whatever skill fits it" (BESTIARY-8 wording)
 05_The_Longest_Night.md|bare_dc|the caster's spellcasting ability, DC 13.|spells roll (three-player pass T4.2, L-002): the ability is the caster's spellcasting ability, which varies by class
 10_Bestiary.md|bare_dc|the caster's spellcasting ability, DC 13.|spells roll (three-player pass T4.3, L-002): the same sentence as chapter V, word for word
 

@@ -124,3 +124,82 @@ three-character line.
   duelists at first damage, so a lone fighter already sits in the band against the printed
   line.
 - **Not modelled:** the cards' clocks and outs, Tavva's charges, and Help.
+
+## S14 under WP5: the lethal Attendant (three-player pass, T5.8–T5.9)
+
+Harness: `research/oraga_5e_sim/s14.py`. Every WP5 rule is a switch on `Rules`; `OLD` (all off)
+reproduces the T3.1 table draw for draw (checked: `--all --n 4000 --seed 1` is byte-identical),
+`NEW` (all on) is the WP5 text. Per the T3.1 review rule these are **current → WP5 deltas inside
+the rebuilt harness**, not absolute claims. The WP5 run also fixes a T3.1 bug: *Put Aside*'s
+recharge was never rolled (`put_aside_recharge`). Block: 178 HP (three), 229 (four); the Wept's
+clock as printed (6 moves at three, 5 at four, 1 Delay when the card fires).
+
+**Main table** (seed 1, n = 4,000 a cell; `python s14.py --wp5 --n 4000 --seed 1`). Win % /
+PC death % / any drop % / whole party down %. "Current" is the old rule (nobody can die).
+
+| Party | Policy | Current | WP5 Gentle | WP5 Sharp | WP5 Merciless |
+|---|---|---|---|---|---|
+| C1 | engaged | 87.3 / 0 / 24.1 / 0.0 | 97.1 / 0.0 / 38.4 / 0.0 | 97.6 / 0.3 / 38.1 / 0.0 | 96.8 / 3.6 / 36.5 / 0.0 |
+| C2 | engaged | 90.9 / 0 / 24.9 / 0.0 | 97.5 / 0.0 / 45.1 / 0.1 | 97.2 / 3.8 / 44.9 / 0.1 | 96.4 / 13.7 / 45.2 / 0.2 |
+| C3 | engaged | 92.7 / 0 / 28.2 / 0.0 | 93.8 / 0.0 / 49.0 / 0.2 | 93.6 / 5.7 / 50.2 / 0.8 | 92.5 / 12.7 / 49.6 / 0.7 |
+| C4 | engaged | 94.1 / 0 / 20.3 / 0.0 | 97.5 / 0.0 / 38.6 / 0.1 | 96.2 / 5.5 / 40.0 / 0.7 | 96.5 / 15.3 / 39.3 / 0.4 |
+| C5 | engaged | 93.6 / 0 / 25.1 / 0.1 | 96.6 / 0.0 / 48.5 / 0.2 | 95.7 / 3.4 / 49.8 / 0.5 | 95.6 / 11.8 / 49.5 / 0.4 |
+| 4P | engaged | 85.1 / 0 / 29.1 / 0.0 | 92.9 / 0.0 / 51.3 / 0.0 | 92.2 / 0.5 / 52.0 / 0.0 | 92.4 / 10.0 / 50.2 / 0.0 |
+| C1 | slug | 0.8 / 0 / 75.5 / 0.0 | 0.6 / 0.0 / 87.3 / 0.5 | 0.9 / 2.3 / 86.8 / 0.2 | 0.4 / 20.8 / 88.2 / 0.5 |
+| C2 | slug | 15.3 / 0 / 80.5 / 0.1 | 13.1 / 0.0 / 91.7 / 1.4 | 8.6 / 5.9 / 92.2 / 0.2 | 9.1 / 36.0 / 91.5 / 1.0 |
+| C3 | slug | 36.5 / 0 / 82.0 / 0.1 | 30.5 / 0.0 / 92.0 / 4.8 | 25.7 / 21.5 / 92.5 / 10.4 | 24.2 / 36.5 / 92.5 / 8.8 |
+| C4 | slug | 36.4 / 0 / 74.2 / 0.2 | 27.4 / 0.0 / 90.2 / 8.0 | 17.2 / 19.8 / 89.9 / 7.1 | 17.0 / 47.4 / 90.5 / 6.4 |
+| C5 | slug | 7.0 / 0 / 86.2 / 0.6 | 5.5 / 0.0 / 98.1 / 9.5 | 3.7 / 6.6 / 97.9 / 0.7 | 4.0 / 44.2 / 98.0 / 3.2 |
+| 4P | slug | 0.3 / 0 / 83.0 / 0.0 | 0.2 / 0.0 / 94.0 / 0.0 | 0.1 / 2.8 / 94.2 / 0.0 | 0.1 / 32.4 / 93.9 / 0.0 |
+
+Naive (bare rolls), current → Sharp: C1 57.6 → 69.6 (death 1.6), C2 67.7 → 77.9 (5.3), C3 58.0
+→ 66.0 (12.3), C4 70.3 → 74.1 (11.9), C5 60.9 → 69.5 (8.7), 4P 60.1 → 71.5 (1.2). Smart, current
+→ Sharp: 91–96 → 94–98, deaths 0.1–5.3 (4P 0.6). Mean rounds 4.7–5.3 engaged, 7.1–7.4 slugging.
+Full output, every dial and policy: run the command above.
+
+**Targets at Sharp (DESIGN §4): met in the first round, no tuning.** Engaged win 92–98% (≥ 85);
+PC death for an engaged party 0.3–5.7% (≤ 10); slugging wins 0.1–26% with deaths 2–22%.
+
+**Where the change comes from** (C1 engaged at Sharp; one switch on from OLD / one off from NEW;
+n = 4,000, seed 1, win % / any drop %): Help +8.0 win (87.3 → 95.3; NEW without it 92.7); DC 18
++3.7 (→ 91.0; NEW without it 94.8); *Literal Orders* since the start of its previous round
+nearly doubles drops (24.1 → 42.9; NEW without it 14.8) and is what makes the fight dangerous;
+*Put Aside* recharging +2 drop points; the cap, *Clears the Way* as an action, the tie rule,
+spells-roll Delay and TP30's tricks each move win by 1 point or less here.
+
+**L-042 (the extra Wept turn at three) holds.** NEW at Sharp, n = 2,000, clock 6 (printed) → 5:
+engaged C1 97.1 → 86.8, C2 97.2 → 87.2, C3 93.2 → 80.3, C4 96.7 → 87.2, C5 95.0 → 85.8; naive
+falls 13–20 points. Without the extra turn the engaged trios drop to the target line.
+
+**L-041 (the timeout claim).** On the printed clock the errand beats an engaged party 2–6% of the
+time (current: 6–13% for the trios at n = 4,000, all of their losses). It is true only when the
+card fires late (`--clock tight`, n = 2,000): engaged wins 3–10% (current 3–9%), smart 25–29%
+(current 34–40%: Delay is capped at three turns and the Attendant clears it with its action).
+
+**L-003 (Idle-grind XP).** No cell, at any dial or policy, wins by Hit Points while the Attendant
+was Idle for half its turns or more (0.0% everywhere). No halving.
+
+**Adjusting lines** (NEW, Sharp, n = 2,000, seed 1; engaged win / death, slug win / death):
+
+| Line | Setting tried | Engaged | Slug | Printed |
+|---|---|---|---|---|
+| Four characters | 229, full Multiattack, DC 18 | 92.2 / 0.5 | 0.1 / 2.8 | 229 (unchanged) |
+| Five characters (all five pregens) | 229 / 260 / 280 at DC 18 and 19 | 93–95 / 0.6–0.8 | 23–25 → 5–6 → 1–2 | **260, DC 19** |
+| Four at 3rd level (80% HP, one fewer 2nd-level slot) | 178 / 195 / 210 / 229 at DC 17 and 18 | 92–94 / 0.9–1.8 | 4 → 0.1 | **210, DC 17** |
+| Hit hard, three (proxy C3 / C4 slugging) | 178 / 200 / 215 / 230 | 93–96 / 5–6 | C3 23.8 → 11.6 → 4.5 → 2.1; C4 16.7 → 6.9 → 2.6 → 0.6 | **+30 (208)** |
+| Hit hard, four (Dassa/Pello/Andra/Ilesse) | 229 / 259 / 280 / 300 | 90–91 / 3–4 | 7.3 → 1.5 → 0.2 → 0.0 | **+30 (259)** |
+
+The engaged route barely moves with Hit Points or a point of DC; the lines set the slugging odds.
+The harness has no optimized party, so "built to hit hard" uses the strongest pregen sluggers as a
+proxy (TPN-8f): +30 brings them to the other trios' slugging level.
+
+**Solo** (NEW, Sharp, engaged, n = 2,000; without the solo line → with it; win / death / drop):
+Dassa 38.7 / 18.2 / 44.0 → 47.8 / 6.2 / 14.2; Pello 12.2 / 34.4 → 15.3 / 33.2; Andra 33.6 / 25.9 →
+42.6 / 19.2; Ilesse 12.8 / 33.2 → 19.0 / 33.8; Serane 39.7 / 22.1 → 53.2 / 17.0. Alone, nobody is
+safe at Sharp (a dying lone character has no one to reach them), so the line also sends a lone
+character to the outs first.
+
+**Not modelled:** the Wept's strikes (the engaged party keeps out of her reach), so the
+Uninvited's own threat rule never bites in S14; control spells; Idle tricks (no policy tries
+one; the switches are unit-tested). After the card, standing allies stabilise the dying; with
+the whole party down, the dying roll it out unaided (Gentle: the crowd reaches everyone).

@@ -144,15 +144,15 @@ after X.
 | T4.17 | WP4 | open | Commit WP4 |
 | T5.1 | WP5 | done | `facts.yaml`: threat rule guard |
 | T5.2 | WP5 | done | The threat rule |
-| T5.3 | WP5 | open | Damage to a set-aside creature, per dial |
-| T5.4 | WP5 | open | Rule copies become pointers |
-| T5.5 | WP5 | open | Attendant: lethal, *Clears the Way* |
-| T5.6 | WP5 | open | Distraction at three; edge rules |
-| T5.7 | WP5 | open | S14 control note, tie, scene binding, the Root |
-| T5.8 | WP5 | open | Update `s14.py` to the new rules |
-| T5.9 | WP5 | open | S14 re-simulation |
-| T5.10 | WP5 | open | S14 text from the re-sim |
-| T5.11 | WP5 | open | Vell's immunities |
+| T5.3 | WP5 | done | Damage to a set-aside creature, per dial |
+| T5.4 | WP5 | done | Rule copies become pointers |
+| T5.5 | WP5 | done | Attendant: lethal, *Clears the Way* |
+| T5.6 | WP5 | done | Distraction at three; edge rules |
+| T5.7 | WP5 | done | S14 control note, tie, scene binding, the Root |
+| T5.8 | WP5 | done | Update `s14.py` to the new rules |
+| T5.9 | WP5 | done | S14 re-simulation |
+| T5.10 | WP5 | done | S14 text from the re-sim |
+| T5.11 | WP5 | done | Vell's immunities |
 | T5.12 | WP5 | open | Commit WP5 |
 | T6.1 | WP6 | open | "How Hard to Go" dial box |
 | T6.2 | WP6 | open | Rule 2 rewritten; one snake everywhere |
@@ -174,9 +174,9 @@ after X.
 | T7.2 | WP7 | open | The Root (TP8, TP17, TP18) |
 | T7.3 | WP7 | open | The garden doors (TP9) |
 | T7.4 | WP7 | done | `facts.yaml`: midnight wing routes |
-| T7.5 | WP7 | open | Agenda 4's midnight note (TP13) |
-| T7.6 | WP7 | open (option C) | Dinner for Two, Undercurrent C, 07 Veier, S10 escort |
-| T7.7 | WP7 | open | Acting early: refusals and two payoffs (TP14) |
+| T7.5 | WP7 | done | Agenda 4's midnight note (TP13) |
+| T7.6 | WP7 | done (option C) | Dinner for Two, Undercurrent C, 07 Veier, S10 escort |
+| T7.7 | WP7 | done | Acting early: refusals and two payoffs (TP14) |
 | T7.8 | WP7 | done (TP39) | Acting early: which door Corval opens |
 | T7.9 | WP7 | open | Vell's sword (TP19) |
 | T7.10 | WP7 | open | "Both rivers, one spring" note (TP20) |
@@ -695,7 +695,7 @@ T4.14).
 - **Accept:** T5.1's guard is clean for 05. Each dial setting is stated.
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T5.3 Damage to a set-aside creature, per dial *(L-040, `DIAL`)*
+### ☑ T5.3 Damage to a set-aside creature, per dial *(L-040, `DIAL`)*
 - **Do:** at Gentle, a set-aside creature takes no damage until it is up. At Sharp and Merciless
   the rules as written apply: damage is a death-save failure and ends Stable, but the Uninvited
   never *target* a set-aside creature. Cover crossfire, *Put Aside*'s Emanation, trample and area
@@ -704,14 +704,14 @@ T4.14).
 - **Accept:** one statement with pointers.
 - **Checks:** SA. **Time:** 15 min.
 
-### ☐ T5.4 Rule copies become pointers *(L-010)*
+### ☑ T5.4 Rule copies become pointers *(L-010)*
 - **Do:** 08, 09 and 10 copies of Down, Not Out become pointers to the threat rule plus their
   local rule only. The Uninvited blocks' trait is renamed.
 - **Files:** `M/08_Handouts.md`, `M/09_The_Snakes.md`, `M/10_Bestiary.md`.
 - **Accept:** T5.1's `rule_copy` is clean everywhere.
 - **Checks:** SA. **Time:** 20 min.
 
-### ☐ T5.5 Attendant: lethal, *Clears the Way* *(L-013, L-003, L-037 timing)*
+### ☑ T5.5 Attendant: lethal, *Clears the Way* *(L-013, L-003, L-037 timing)*
 - **Do:** rewrite the Attendant block (10:200–260) per DESIGN §4:
   - **Down, Not Out goes.** Idle, a creature it drops is set aside, Stable. Focused, normal dying
     rules apply. At Sharp, it attacks a downed creature only if that creature interrupted since
@@ -726,7 +726,7 @@ T4.14).
   setting's Attendant behaviour is stated (§2.1).
 - **Checks:** SA. **Time:** 30 min.
 
-### ☐ T5.6 Distraction at three; edge rules *(L-074, DESIGN §4)*
+### ☑ T5.6 Distraction at three; edge rules *(L-074, DESIGN §4)*
 - **Do:**
   - **Distraction:** Help applies; the Focused DC is 18.
   - **Idle tricks:** a trick tried while it is Idle is not spent.
@@ -738,7 +738,7 @@ T4.14).
 - **Accept:** consistent in 09 and 10.
 - **Checks:** SA. **Time:** 20 min.
 
-### ☐ T5.7 S14 control note, tie, scene binding, the Root *(L-037 FIX-NEW, L-038; TP17)*
+### ☑ T5.7 S14 control note, tie, scene binding, the Root *(L-037 FIX-NEW, L-038; TP17)*
 - **Do:**
   - **The two-line control note:** *Sleep* fails; *Hold Person* can't target it; a turn lost to
     *Command* or *Laughter* is a lost turn, but not a break.
@@ -752,7 +752,7 @@ T4.14).
   the TP17 line in 10.
 - **Checks:** SA. **Time:** 20 min.
 
-### ☐ T5.8 Update `s14.py` to the new rules *(`SIM`)*
+### ☑ T5.8 Update `s14.py` to the new rules *(`SIM`)*
 - **Do:** model the threat rule, lethal Focused drops and dial behaviour, *Clears the Way* as an
   action, Help on distractions, DC 18, the three-turn Delay cap, spells rolling, 180 HP, and the
   T5.6 edge rules. Add smoke tests for each new switch.
@@ -760,7 +760,7 @@ T4.14).
 - **Accept:** tests pass. A run with the new switches off reproduces T3.1's baseline.
 - **Checks:** `pytest research/oraga_5e_sim`. **Time:** 30 min.
 
-### ☐ T5.9 S14 re-simulation *(L-013, L-003, L-041, L-042, L-043, L-074, `SIM` `DIAL`)*
+### ☑ T5.9 S14 re-simulation *(L-013, L-003, L-041, L-042, L-043, L-074, `SIM` `DIAL`)*
 - **Do:** run C1–C5 at Gentle, Sharp and Merciless, engaged and slugging. Report:
   - win %, PC death %, whole-party-down % and rounds;
   - the hit-hard HP value for three (L-043);
@@ -776,7 +776,7 @@ T4.14).
   escalated.
 - **Time:** 30 min.
 
-### ☐ T5.10 S14 text from the re-sim *(L-043, L-078, `DIAL`)*
+### ☑ T5.10 S14 text from the re-sim *(L-043, L-078, `DIAL`)*
 - **Do:** print the hit-hard line's three-player HP and say it combines with the party-size line
   (09:1808–1812, 1927). Rewrite "how it plays" (09:1816–1818) from T5.9 as table advice for each
   setting. If T5.9 says so, halve the Idle-grind XP.
@@ -784,7 +784,7 @@ T4.14).
 - **Accept:** no simulation jargon (lint). The numbers match T5.9.
 - **Checks:** SA. **Time:** 20 min.
 
-### ☐ T5.11 Vell's immunities *(L-076)*
+### ☑ T5.11 Vell's immunities *(L-076)*
 - **Do:** add the Paralyzed, Stunned, Incapacitated and Unconscious immunities (10:2084, 2110), or
   "no spell or effect stops him taking his action" in *Beyond Reach*. Pick one and record it as a
   TPN note.
@@ -1003,7 +1003,7 @@ T4.14).
 - **Accept:** the guard is clean. Every route into the wing at midnight is drawn on Map VIII–5.
 - **Checks:** SA (+F). **Time:** 25 min.
 
-### ☐ T7.5 Agenda 4's midnight note (TP13) *(`CANON` `FACTS`)*
+### ☑ T7.5 Agenda 4's midnight note (TP13) *(`CANON` `FACTS`)*
 - **Do:** 02:355's "a character beside Veier at the Unmasking. Chapter V leans on it." is
   reworded: at midnight she listens for that character's voice through the door. Fix the matching
   claims at 03:199 ("somebody reaching Veier"), 11:438, 01:30, 04:576 and 09:425–430, but only the
@@ -1015,7 +1015,7 @@ T4.14).
 - **Accept:** "beside Veier" appears 0 times in both editions. No new fact beyond TP13's words.
 - **Checks:** SA+F. **Time:** 25 min.
 
-### ☐ T7.6 Dinner for Two, Undercurrent C, 07 Veier, S10 escort *(TP13; E1)*
+### ☑ T7.6 Dinner for Two, Undercurrent C, 07 Veier, S10 escort *(TP13; E1)*
 - **Do (E1 ruled: option C, cut the dinner, TP27):** cut the scene and its pointers, and make Agenda 4 a door errand (a guard carries word; log how the ring travels as an INVENTIONS row), in:
   - 04 *Dinner for Two (B9)*, 04 B9, Undercurrent C, 04:1174 and 04:1221;
   - 07 Veier (07:92–120) and 07 Maiven;
@@ -1027,7 +1027,7 @@ T4.14).
 - **Accept:** `veier_unmet` is clean with no exception. Both editions agree.
 - **Checks:** SA+F. **Time:** 30 min (option A or C); 10 min (option B).
 
-### ☐ T7.7 Acting early: refusals and two payoffs (TP14) *(L-028, `CANON`)*
+### ☑ T7.7 Acting early: refusals and two payoffs (TP14) *(L-028, `CANON`)*
 - **Do:**
   - **Refusals:** Veier and Raunu refuse to move, in character (TP11 plan; her printed want).
   - **Guests moved early:** they are not among the dead.

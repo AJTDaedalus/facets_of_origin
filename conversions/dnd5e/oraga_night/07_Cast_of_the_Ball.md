@@ -54,9 +54,7 @@ Summons: the Questions, and What He Says") he gives the following, and no more:
 - The Tithe of Hands, to anyone who simply asks: "It taxes palaces to pay laborers.
   The palaces can afford it. That is the whole secret. You may tell the Circle I said so."
 - Veier: "She chooses her guests herself these days. If she chooses you, you will know."
-  At dinner, when she asks him for a minute alone with her guest, he steps out without
-  a question.
-- The Unmasking: "Something true." He does not say what, at the summons or at dinner.
+- The Unmasking: "Something true." He does not say what.
 - Whether he is in danger, if friendly: he has spent two years arranging for the
   answer to be no, and tonight he is not certain the arranging was sufficient.
 - The three gray masks, if a character warns him: "I know." He thanks them and does
@@ -89,36 +87,33 @@ same thing her husband fears, learned from watching him prepare. **Secret:** she
 happy, genuinely and unfashionably, and rumor has no shelf for it.
 
 **Where she is:** the east wing (B9), all night, near her time, the midwife in
-attendance. She is reachable only by characters who earn the east wing (Agenda 4's
-errand with the grandmother's ring at the doors, Undercurrent C), so
-a scene with her is a prize, not a schedule item. Characters who reach her after the toast find her at dinner with
-Raunu, the two plates explained at last. It is the only place all night anyone sees
-Raunu Boranis at ease (see chapter IV, "Dinner for Two (B9)").
+attendance. Nobody meets her face to face before the Crossing. Agenda 4's errand is
+done at the east wing doors: a guard carries word to her, the door opens a hand's
+width, her hand takes the ring, and her answer comes back through the door. Her face
+stays unseen (see chapter IV, "The Ring at the Door (B9)"). A character who gets into
+the wing another way does not meet her either. A voice through a door is a prize, not
+a schedule item.
 
 **Roleplaying Veier:** blunt to the point of comedy, funny in a dry border-country way,
 homesick and unashamed of it. She answers the delegation's careful diplomacy
 (Agenda 4) with take-it-or-leave-it directness. She reads people nearly as well as
-Raunu and is far less polite about showing it. Guests who reach her expecting a
+Raunu and is far less polite about showing it. Guests who come to her door expecting a
 prisoner or a madwoman get a brisk education.
 
 **Quote:** "I am well. I am watched over. Tell my cousin his message took two years to
 reach me, so his worry can wait two more."
 
 **What Veier Knows:** a character Veier chooses (Agenda 4's ring at the east wing
-doors, or anyone who reaches her there) learns the following (see chapter IV,
-"Dinner for Two (B9)"):
+doors) hears the following through the door (see chapter IV, "The Ring at the Door
+(B9)"):
 
 - She is well, and watched over. Her answer for the delegation is her quote, above.
-- She is free. For her first year the traveling pack by her door stood packed, her
-  plain statement that she could leave whenever she chose. It is empty now.
 - She is happy, and she wants her cousins to know she chose this.
 - She fears what her husband fears: something is coming for their family, and
   neither of them knows what, or when.
-- The two plates were for the two of them.
-- Only to a character she trusts: she is with child and near her time, and
-  she wants the child born safe. Hearing it from her counts as discovering the heir.
-- With an Agenda 4 messenger she makes a moment: she asks Raunu for a minute, he steps
-  out, and the ring and the message reach her with no one else present.
+
+She does not speak of a child. The traveling pack, the two slings and the nursery are
+B9's finds, and the heir is found only through Undercurrent C.
 
 **At the Unmasking:** in the east wing when the lights die, the corridors sealing
 themselves behind her: her husband's two crystals working. Wounded once, cleanly,
@@ -588,7 +583,7 @@ is never the party's fight.
 ### The Uninvited — the Three Gray Masks
 *Stat blocks: **The Wept**, **The Radiant**, **The Hollow** (chapter X; read "The
 Uninvited, Before You Read Their Blocks" first). Their truth is chapter II; their
-Fractures and full tell-tables are chapter V; their conduct before midnight is here.*
+Stops, Ends and full tell-tables are chapter V; their conduct before midnight is here.*
 
 They arrive with the Movement III crush, and until midnight they do nothing but
 attend the ball. This is the thing to play correctly: **they are people, and
@@ -612,14 +607,14 @@ Their human moments — the Wept watching the young pages too long, her mourning
 rite in the chapel, the cradle-song at the east wing doors; the Radiant's
 antique blessing over the food, his warmth on the subject of service; the
 Hollow's flat answers and his hunger, watching the kitchen family belong to each
-other — are the **tells** that arm the Fractures, and chapter V lays them out as
+other — are the **tells** that arm a Stop or an End, and chapter V lays them out as
 a table with places and times. Salt them generously: every tell a character
 witnesses is a person glimpsed through a mask, and at midnight each one becomes
 a key.
 
 **If it comes to steel:** they cannot be beaten tonight, and their blocks in chapter X
 say why. They can be delayed (cleverness buys Delay far faster than damage
-does; see chapter V, "Buying Time"), and ward-fire, the leash and the Fractures change
+does; see chapter V, "Buying Time"), and ward-fire, the leash, Stops and Ends change
 outcomes. That is the complete list; their Attendant, below, is another matter.
 
 ### The Attendant — the Quiet Guest
@@ -673,8 +668,9 @@ until one of the three glances at it again. An argument that the party is not, s
 interrupting is one more distraction, never a way to end the fight by itself. The fourth broken focus of the night sends
 it off to stand at a window and watch the fires.
 Driven to 0 Hit Points, it loses interest in being here and steps back into the
-shadow, leaving no body. Anyone it drops is only knocked down (see chapter V,
-"Down, Not Out"): it removes interruptions, and it does not hunt.
+shadow, leaving no body. Whoever it drops while it is Idle is only set aside (see
+chapter V, "Down, Not Out"). Focused, it can kill, and it strikes a fallen creature only
+as its block says: it removes interruptions, and it does not hunt.
 
 ### Tavva — the Other Thief
 *Somewhere in her forties, somewhere from the coast, somewhere on every festival

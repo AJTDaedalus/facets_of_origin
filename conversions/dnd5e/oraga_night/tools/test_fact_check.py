@@ -490,3 +490,62 @@ class TestCLI:
 
     def test_check_without_baseline_errors(self, mod):
         assert cli(mod, "--check") == 2
+
+
+class TestVeierDoorErrand:
+    """T7.5 / T7.6 (three-player pass): the door errand guard (TP13, TP27, TP33)."""
+
+    @pytest.fixture(scope="class")
+    @staticmethod
+    def facts():
+        return F.load_facts(F.FACTS)
+
+    @staticmethod
+    def _hits(facts, text, fname):
+        return [h for h in F.check_text(text, fname, facts) if h.fact == "veier_door_errand"]
+
+    def test_beside_veier_is_forbidden_in_02(self, facts):
+        text = "This agenda puts a character beside Veier at the Unmasking.\n"
+        assert self._hits(facts, text, "02_The_World_and_the_Night.md")
+
+    def test_dinner_for_two_is_forbidden_in_04(self, facts):
+        text = "See \"Dinner for Two (B9)\", below.\n"
+        assert self._hits(facts, text, "04_The_Ball.md")
+
+    def test_at_dinner_is_forbidden_in_07(self, facts):
+        text = "At dinner, when she asks him for a minute alone, he steps out.\n"
+        assert self._hits(facts, text, "07_Cast_of_the_Ball.md")
+
+    def test_the_door_errand_is_not_a_hit(self, facts):
+        text = ("The door opens a hand's width and her hand comes through it and takes the "
+                "ring. Her face stays unseen.\n")
+        assert not self._hits(facts, text, "04_The_Ball.md")
+
+    def test_08_dinner_row_is_forbidden(self, facts):
+        """Table VIII–6 now follows TP27/TP33 (WP5 follow-up): 08 is in scope."""
+        text = "| Veier | B9 — dinner for two |\n"
+        assert self._hits(facts, text, "08_Handouts.md")
+
+
+class TestRootAttendant:
+    """T5.7 (three-player pass): TP17, the Attendant enters the Root unaffected."""
+
+    @pytest.fixture(scope="class")
+    @staticmethod
+    def facts():
+        return F.load_facts(F.FACTS)
+
+    @staticmethod
+    def _hits(facts, text, tmp_path):
+        (tmp_path / "10_Bestiary.md").write_text(text, encoding="utf-8")
+        fact = next(f for f in facts if f["id"] == "root")
+        return [h for c in fact["checks"] if c["type"] == "require"
+                for h in F._require(fact, c, tmp_path)]
+
+    def test_require_fires_when_the_line_is_missing(self, facts, tmp_path):
+        assert self._hits(facts, "### The Attendant\n\nIt follows its three.\n", tmp_path)
+
+    def test_line_present_is_not_a_hit(self, facts, tmp_path):
+        text = ("### The Attendant\n\n***Where the Three Go.*** It follows its three "
+                "anywhere, the Root included: nothing there touches it.\n")
+        assert not self._hits(facts, text, tmp_path)

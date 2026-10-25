@@ -82,24 +82,27 @@ secret**: no faction learns of the child unless a player character tells them.
 
 **Midnight rules, one line each** *(chapter V has them in full)*
 
-- **Down, Not Out** (see chapter V, "Down, Not Out"). Nobody an Uninvited or the
-  Attendant drops dies tonight, unless it is an Uninvited's quarry: a companion or the
-  crowd gets them up. Whoever lands the last blow on an Uninvited may be thrown when it
-  returns.
+- **Down, Not Out** (see chapter V, "Down, Not Out"). The Uninvited set aside whoever
+  they drop (a companion or the crowd gets them up) unless it is their quarry or has
+  become a threat: it landed a Stop on that one, earned Delay against them three times
+  this scene, or dealt the last blow. Say it: *"She looks at you — properly, for the
+  first time."* A threat dies like anyone; at Sharp they finish it only if it is still
+  in their way. The Attendant sets aside whoever it drops while Idle; Focused, its
+  drops are dying. Whoever deals an Uninvited's last blow may be thrown when it returns.
 - **Buying Time.** A Delay die per Uninvited, on the table. Each point = one turn of
   movement lost. A clever trick with the room, the crowd, a door, a lie: the skill that
   fits, DC 13 → 1 Delay (DC 15 the second time; never a third). A Stop → 2 Delay.
-  20+ damage to one in a round → 1 Delay (30+ with four characters, 40+ with five or at 5th level). The Attendant's *Clears the Way*: −1 Delay a
-  round.
+  20+ damage to one in a round → 1 Delay (30+ with four characters, 40+ with five or at 5th level). The Attendant's *Clears the Way*: −1 Delay for
+  a turn's action (Idle, when nobody attacked it since its last turn; Focused, its second turn).
 - **The Attendant (S14).** *Idle:* rusty, one attack with Disadvantage. *Focused* (at
   the start of its turn, if one of the three in the scene has no Delay): two turns a
-  round, and *Put Aside*. **Distract** (action; **one try a round**, no Help): an
-  ability check using the skill that fits, DC 13 Idle / 19 Focused; +2 for playing it
-  out, +2 for a habit the party has seen (max +4); a repeat has Disadvantage and no
-  bonus, never a third time. A success while Focused **breaks its focus** until its next
+  round, and *Put Aside*; its drops are dying. **Distract** (action; **one try a round**,
+  Help applies): an ability check using the skill that fits, DC 13 Idle / 18 Focused; +2
+  for playing it out, +2 for a habit the party has seen (max +4); a repeat has
+  Disadvantage and no bonus, never a third time (a try while Idle isn't spent). A success while Focused **breaks its focus** until its next
   turn (succeed by 5 or more: it loses that turn too). A success while Idle makes the
-  distractor furniture to it until they next attack it or interfere with the three (it
-  still clears the way beside them), and doesn't count. Arguing its orders is one
+  distractor furniture to it until they next attack it or interfere with the three, and
+  doesn't count. Arguing its orders is one
   more trick. **Fourth broken focus:** it
   wanders off. 0 HP: gone into the shadow. Say its state aloud: "It's locked on you" /
   "It's drifting."
@@ -266,7 +269,7 @@ the half-bell in Movement V (S10), so the only card live in the dark by default 
 | Who | I | II | III | IV | V |
 |---|---|---|---|---|---|
 | Raunu | *(unseen — B8/B9)* | *(unseen)* | high gallery glimpse, then B4 | the high table — the toast, two plates, gone to B9 | B9 with Veier; to the dais at the bells |
-| Veier | B9 | B9 | B9 (Agenda 4 / Und. C only) | B9 — dinner for two | B9, guard doubled |
+| Veier | B9 | B9 | B9, behind the door (Agenda 4: her voice) | B9, behind the door (Agenda 4: her hand takes the ring) | B9, guard doubled |
 | Vorlain | B2 | B3 wine court | B3, watching the audiences | B2 — watch his face | B3, drinking harder |
 | Essin | with Vorlain | with Vorlain | with Vorlain | with Vorlain, not smiling | B5 edge, alone — the S9 appointment |
 | Corval | B1 gate | everywhere | B1/B2, fetching guests | B2 | doubles the east-wing guard |

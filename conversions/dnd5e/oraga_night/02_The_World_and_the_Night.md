@@ -352,9 +352,10 @@ and bring back the truth: is she well, is she free, is she herself?
 going to show her at all. She never comes down. The east wing is closed, guarded,
 and the only way to her; this errand cannot be done from the dance floor.
 
-**At midnight:** She trusts you now: you are the one face at this ball she chose to
-trust. When she looks for help in the dark, she will look for you. *(This agenda puts
-a character beside Veier at the Unmasking. Chapter V leans on it.)*
+**At midnight:** She trusts you now: yours is the one voice at this ball she chose to
+trust. When she listens for help in the dark, she will listen for you. *(The errand is
+done at the east wing door: her hand takes the ring, her face stays unseen. At midnight
+she listens for that character's voice through the door. Chapter V leans on it.)*
 
 **Pays:** Heroic Inspiration, and XP by Table I–4. Maiven Nolonaire's trust, which
 after midnight is worth more than any coin at this ball. *Your patron is not a snake.
@@ -388,7 +389,8 @@ river gate at the bottom of the garden is to be unlocked at midnight. Not before
 questions.
 
 **The catch:** You have no idea who paid you, why, or what comes through a gate, in
-which direction, at midnight on Oraga.
+which direction, at midnight on Oraga. *(DM: a table that wants Veier out through this gate
+before midnight is refused, in character; see chapter IV, Undercurrent D.)*
 
 **At midnight:** You find out. *(DM: the stranger was Master Vell, securing Veier's
 escape route. The character who felt like a hired traitor all night was, in

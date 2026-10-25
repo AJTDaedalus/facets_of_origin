@@ -231,8 +231,8 @@ learn what you learn. Warm light, a midwife's quiet traffic, and three finds:
   chose. It stands there still, out of habit or humor — but it is empty now, and
   its contents have quietly become the room: the wool folded onto the marriage
   bed, the flint on the mantel, the mountain flowers pressed and kept. She stopped
-  being ready to go home. *(For the Agenda 4 player, reading this room before
-  meeting her changes everything about the errand — and makes the message they
+  being ready to go home. *(For the Agenda 4 player, reading this room
+  changes everything about the errand — and makes the message they
   carry feel suddenly heavier.)*
 - **Raunu's rooms.** Nearly bare — a soldier's cot in a palace, which fits nothing
   anyone believes about him. Two personal objects only. A small, flawed, badly-grown
@@ -246,7 +246,7 @@ learn what you learn. Warm light, a midwife's quiet traffic, and three finds:
 - **The nursery.** Newly and beautifully made, fresh paint and cedar, a mobile of
   grown crystal turning slowly over the crib. *(This is the palace's most explosive
   secret, all night — the announcement that would have made it public never gets
-  made. Agendas 4 and 8 and Undercurrent C can reach it. In hindsight, this room is
+  made. Agenda 8 and Undercurrent C can reach it. In hindsight, this room is
   the night's most devastating.)*
 
 **B10. Kitchens & Service Passages.** Understaffed chaos, festival hires, and the
@@ -529,8 +529,8 @@ finds the guards courteous, immovable, and *protective* rather than jailerly.
 
 **The trail:** the midwife, the third plate herself, glimpsed once crossing the gallery at
 the end of Movement II, moving like a woman who counts hours. Following her to the
-east wing doors is easy; through them needs Agenda 4's errand, Anha's passages, or
-real ingenuity. Inside: warm light, the guarded calm of a household holding its
+east wing doors is easy; only real ingenuity gets through them (Agenda 4's ring opens
+them a hand's width, no more). Inside: warm light, the guarded calm of a household holding its
 breath, and the living quarters' three finds (B9) — the unpacked traveling pack,
 the two slings, and the nursery with its slow-turning crystal mobile. The pregnancy
 is the thread's answer; the pack and the slings are its heart, and a table that
@@ -586,7 +586,12 @@ understood for one Movement longer than the players; what he is already doing
 about it is Chapter V.) Confronting the three directly gets perfect, wrong
 courtesy, and if pressed to a scene, they simply leave it — through the crowd,
 unhurried, unfindable for a Movement — and the accuser stands in the wreckage of
-their own credibility.
+their own credibility. A table that wants Veier out early is refused, in character:
+Raunu means to keep her in the palace until the child is born, and she will not leave
+either; whoever asks at the east wing doors hears her say no, bluntly, through the
+door. She leaves at midnight and not before. What the table did still pays. Guests
+the players talked out of the Crystal Court before the bells are not among the dead,
+and a player who acts on the warning starts midnight wherever they chose to stand.
 
 **At midnight:** everything. Fracture ammunition (Chapter V) is this thread's
 currency; players who walked it enter the Longest Night armed, positioned, and —
@@ -805,10 +810,13 @@ feeds the mad wife, he feeds a prisoner, he feeds the thing in the east wing —
 and only players who have run Undercurrent C know the tender truth of it. For
 Agenda 4 and the Thenya, the night sharpens: still no Veier, and now a midnight
 pronouncement coming. Maiven formally requests an audience; Corval, with genuine
-misery, declines. The east wing (B9) is the only way to her, and Undercurrent C
-is the map. *(Players who reach Veier after the toast find her eating dinner with
-her husband. It is the only time anyone sees the two of them together; stage it
-with all the warmth the ballroom's rumors deny them.)*
+misery, declines. The east wing's doors (B9) are as near as anyone gets to her.
+*(Agenda 4's errand is done at those doors, in any Movement before midnight. A guard
+carries word to her; if she chooses the messenger, and by default she does, the door
+opens a hand's width and her hand takes the ring. Her face stays unseen, and her
+answer comes back through the door. She does not speak of a child: the heir is found
+only through Undercurrent C. Nobody meets her face to face before the Crossing,
+whatever way they find into the wing.)*
 
 **The omen:** the falconry mews behind the garden wing erupt — every bird screaming
 at once, then, worse, all at once silent. The gardens go quiet the way a forest does

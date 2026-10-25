@@ -16,7 +16,7 @@ given `--seed`.
 | File | What it models |
 |---|---|
 | `skirm.py` | Generic snake-card skirmish: a card's roster against the party, run until the card's morale trigger fires or one side is down. It also holds what the other two share: dice, the five pregens, the party codes, PC offence and healing, dropping, death saves and the crowd rule. |
-| `s14.py` | Card S14, the Attendant, **with the distraction rules as printed now** (before WP5). |
+| `s14.py` | Card S14, the Attendant. `Rules` switches: `OLD` (default) is the T3.1 model of the rules before WP5, draw for draw; `NEW` is the WP5 text (lethal Focused drops by dial, *Clears the Way* as an action, Help, DC 18, the edge rules, the cap, the tie rule). See its docstring and T5.8. |
 | `chain.py` | The night's attrition chain, with HP and resources carried forward and no rest: an optional Movement V card, then S14, then S13, then the S3 gate fight. |
 | `test_smoke.py` | Written first (TDD). Each script runs at N=200 with a fixed seed and returns a sane structure, and each carries one regression assertion. It also checks determinism and the CLI. |
 
@@ -29,6 +29,10 @@ python research/oraga_5e_sim/s14.py --party C1 --policy engaged --n 4000 --seed 
 python research/oraga_5e_sim/s14.py --all --n 4000 --seed 1            # Appendix table
 python research/oraga_5e_sim/s14.py --all --n 4000 --seed 1 --clock tight
 python research/oraga_5e_sim/s14.py --party C1 --n 4000 --seed 1 --attrited
+python research/oraga_5e_sim/s14.py --party C1 --rules new --dial merciless --n 4000 --seed 1
+python research/oraga_5e_sim/s14.py --party C1 --rules help,dc18 --n 4000 --seed 1   # any switches
+python research/oraga_5e_sim/s14.py --party 5P --rules new --hp 260 --dc 19 --n 2000 --seed 1
+python research/oraga_5e_sim/s14.py --wp5 --n 4000 --seed 1          # T5.9 tables (~6 min)
 
 python research/oraga_5e_sim/skirm.py --card S8 --party C1 --n 4000 --seed 1
 python research/oraga_5e_sim/skirm.py --card S2 --solo Dassa --n 2000 --seed 1
@@ -116,7 +120,11 @@ that is a DM call, so the default puts them all in from round 1, as TUNING's
 
 ### `s14.py`
 
-- Modelled **as printed now**:
+*(This section describes `OLD`. `NEW` and each switch are listed in the script's docstring; the
+WP5 results are in `research/oraga_5e_simulation_notes.md`. T3.1's script never rolled Put
+Aside's recharge, so under `OLD` Put Aside never fires; `put_aside_recharge` fixes it.)*
+
+- Modelled **as printed before WP5**:
   - Idle and Focused (focus checked at the start of each of its turns,
     including a turn it then loses), and Two Turns at initiative − 10.
   - The 3P line (180 HP; the second Focused turn is one Joined Hands) and the 4P

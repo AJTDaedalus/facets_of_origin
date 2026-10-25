@@ -55,7 +55,7 @@ Print the handouts in Chapter VIII before you sit down — the agenda cards and 
 
 **Movement IV — The Toast.** The host finally appears in public, says something nobody expected, and leaves. *By the end: the room has been told something it does not know what to do with.*
 
-**Movement V — The Hour of Spirits.** The last hour before midnight. Every thread the party has pulled comes taut at once. *By the end: anyone who assembled the pattern has one chance to act on it.*
+**Movement V — The Hour of Spirits.** The last hour before midnight. Every thread the party has pulled comes taut at once. *By the end: anyone who assembled the pattern has had one chance to act on it, and it pays at midnight.*
 
 **Movement VI — The Unmasking.** Midnight. The masks come off, and three guests keep theirs on. *By the end: the host is dead, and the party is choosing who to save.*
 
@@ -172,7 +172,8 @@ who keeps glancing at doors. A falconry mews screaming at nothing. A charming gu
 whose turns of phrase are a century out of fashion. Never underline an omen. Say it
 once, plainly, and move on. Players who
 notice will assemble the pattern themselves, and players who assemble the pattern earn
-the best reward this night has: the chance to act *before* midnight.
+the best reward this night has: the chance to act *before* midnight, and to see it pay
+when the lights die (Chapter IV, Undercurrent D).
 
 
 When the Unmasking comes, change your voice. Shorter sentences. Fewer adjectives. The

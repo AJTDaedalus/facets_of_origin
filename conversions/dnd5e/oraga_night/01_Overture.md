@@ -191,7 +191,7 @@ when the table's energy says so. The budget tells you when you have spent too lo
 | 0:35 | **II. The Empty Rooms** | 45 | The host's absence has stopped being funny | One agenda beat per player; S1 only if someone asks for it |
 | 1:20 | **III. The Summons** | 35 | Somebody at the table has met him | One summons, with two characters walked in together |
 | 1:55 | **IV. The Toast** | 25 | The room has been told something it does not know what to do with | The toast, and the one snake line that turned hardest |
-| 2:20 | **V. The Hour of Spirits** | 40 | Anyone who assembled the pattern has one chance to act on it | The Dead Dance omen, and at most one fight card |
+| 2:20 | **V. The Hour of Spirits** | 40 | Anyone who assembled the pattern has had one chance to act on it; it pays at midnight | The Dead Dance omen, and at most one fight card |
 | 3:00 | *Break* | 10 | Take it as the bells begin to ring midnight | — |
 | 3:10 | **VI. The Unmasking** | 50 | The host is dead, and the party is choosing who to save | The dais, the Crossing, one snake in the dark |
 | 4:00 | **VII. The Longest Night** | 40 | The party is standing outside with whatever and whoever they carried out | The gate (S3) |
@@ -205,7 +205,7 @@ what the night builds toward, so protect them.
 
 **What to leave out, in order, when you are behind:** B13; the Undercurrents nobody is
 already on (chapter IV marks them *(if you have time)*); a second fight card in any one
-Movement; S1; the east-wing scene, **unless somebody carries Agenda 4**. Do not cut the
+Movement; S1; B9's rooms, **unless somebody is on Undercurrent C**. Do not cut the
 gate: it is the only scene the ending needs, and the fight in it is still optional.
 
 ## The First Five Minutes
@@ -416,7 +416,7 @@ The Bought hold it. The fight is optional; the gate is not.
 > **DM Note — what the fights are for**
 >
 > The Uninvited cannot be beaten, by design. Cleverness buys Delay, Delay buys hallways
-> and lives, and Fractures change outcomes. The fights give a table's fighting energy
+> and lives, and Stops and Ends change outcomes. The fights give a table's fighting energy
 > somewhere it works. The feud is about dignity, the corridor is a job, and the snakes
 > are the host's enemies acting when the lights go out. The Attendant is the thing in
 > the way. The Bought are the one foe at the gate who can be beaten or bought, and they
@@ -439,8 +439,8 @@ who keeps glancing at doors. A falconry mews screaming at nothing. A charming gu
 whose turns of phrase are centuries out of fashion. Never underline an omen: say it
 once, plainly, and move on. Players who notice will assemble the pattern themselves,
 and players who assemble the pattern earn the best reward this night has: the chance to
-act before midnight. The snakes follow the same rule: a tell is shown once, and it is
-always deniable.
+act before midnight, and to see it pay when the lights die (chapter IV, Undercurrent D).
+The snakes follow the same rule: a tell is shown once, and it is always deniable.
 
 When the Unmasking comes, change your voice. Shorter sentences. Fewer adjectives. The
 party is over.

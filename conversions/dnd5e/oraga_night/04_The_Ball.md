@@ -357,8 +357,8 @@ reach that slate first.*
 Sealed, guarded, forbidden. Behind
 its doors are the warmest rooms in the palace, or the saddest, depending on when the
 characters learn what they learn. *(Forcing the doors is card S4, and nobody gets through them on a
-single check. The ways in are Agenda 4's errand (the grandmother's ring, shown at the
-doors; see "Dinner for Two (B9)", Movement IV) and Undercurrent C. Anha's passages
+single check. Agenda 4's errand is done at these doors and goes no farther (see "The
+Ring at the Door (B9)", Movement IV); the way to what lies behind them is Undercurrent C. Anha's passages
 reach the wing's service door, and the guard behind it is doubled tonight; card S7.)*
 *(The wing is upstairs, at gallery level: a stair rises 12 feet from the Court's east
 doors, and the cleared corridor at its head is about 60 feet long. Behind the doors, one
@@ -377,8 +377,8 @@ Warm light, a midwife's quiet traffic, and three finds:
   bed, the flint on the mantel, the mountain flowers pressed and kept. She stopped
   being ready to go home.
 
-  *(For the character with Agenda 4, reading this room before meeting her changes
-  everything about the errand, and the message they carry feels suddenly heavier.)*
+  *(For the character with Agenda 4, reading this room changes everything about the
+  errand, and the message they carry feels suddenly heavier.)*
 - **Raunu's rooms.** Nearly bare: a soldier's cot in a palace, which fits nothing
   anyone believes about him. Two personal objects only. A small, flawed, badly-grown
   crystal, decades old, kept on the sill where the light finds it: his first, grown
@@ -391,7 +391,7 @@ Warm light, a midwife's quiet traffic, and three finds:
 - **The nursery.** Newly and beautifully made, fresh paint and cedar, a mobile of
   grown crystal turning slowly over the crib. *(This is the palace's most explosive
   secret, all night. The announcement that would have made it public never gets
-  made. Agendas 4 and 8 and Undercurrent C can reach it.)*
+  made. Agenda 8 and Undercurrent C can reach it.)*
 
 **B10. Kitchens & Service Passages.** Understaffed chaos, festival hires, and the
 skeleton staff of two silent years, Anha among them (Agenda 8). The service passages
@@ -424,8 +424,8 @@ been chasing nothing in particular, make it the one room in the palace that is w
 with a fire lit and two chairs, and let them find out later who was sitting in them.
 
 Three rules, and they are the only ones. **Nothing in B13 contradicts chapter II**:
-it may hint at the truth, never state it. **B13 does not contain a Fracture.**
-The three that exist are the three, and adding a fourth changes what the night costs.
+it may hint at the truth, never state it. **B13 holds no way to Stop or End the
+Uninvited.** Chapter V's are the only ones, and adding another changes what the night costs.
 *(And the third: B13 is not a snake's den. The factions' business is
 in the public rooms, where the table can see it.)*
 
@@ -585,7 +585,7 @@ and their grandmother's crystal hang in the same gallery.)*
 
 > Undercurrents A, B and D are marked *(if you have time)*. A four-hour table runs the Undercurrent a character is already
 > on and lets the rest surface as rumor. The exception is **C**: if anyone carries
-> Agenda 4, it is a way to Veier, and chapter V leans on it.
+> Agenda 4, it is the only way to the heir, and chapter V leans on it.
 
 Four investigations run beneath the ball. They are mysteries a curious table can solve, or
 at least reach the bottom of, before midnight solves everything its own way. Each
@@ -774,8 +774,8 @@ rather than jailerly.
 
 **The trail:** the midwife, the third plate herself, glimpsed once crossing the gallery at
 the end of Movement II, moving like a woman who counts hours. Following her to the
-east wing doors is easy (a DC 10 Dexterity (Stealth) check). Getting through them needs Agenda 4's
-ring, Anha's passages, or real ingenuity. Inside are warm light, the guarded calm of a
+east wing doors is easy (a DC 10 Dexterity (Stealth) check). Only real ingenuity gets
+through them; the ring opens them a hand's width. Inside are warm light, the guarded calm of a
 household on watch, and the living quarters' three finds (B9): the unpacked
 traveling pack, the two slings, and the nursery with its slow-turning crystal mobile.
 The pregnancy is the thread's answer; the pack and the slings are its heart, and a
@@ -827,8 +827,8 @@ the hole in it).
   quiet.
 
 Each clue is deniable. Three together are not. *(These same encounters are where
-Fracture ammunition comes from. The tells are listed with the Fractures in chapter V,
-and every one of them can be met before midnight.)* Magic that would read them, such as
+the tells come from, and a Stop or an End runs on tells. They are listed in chapter V
+(Table V–6), and every one of them can be met before midnight.)* Magic that would read them, such as
 *Detect Evil and Good*, *Detect Thoughts* or *Zone of Truth*, finds three people, and
 nothing that answers the question. See the Uninvited's traits in chapter X.
 
@@ -851,12 +851,22 @@ characters act on it:
 - **Confronting the three directly** gets perfect, wrong courtesy. If pressed to a
   scene, they simply leave it, through the crowd, unhurried, unfindable for a
   Movement, and the accuser stands in the wreckage of their own credibility.
+- **Getting Veier out early** is refused, in character. Raunu means to keep her in the
+  palace until the child is born, and asked to move her he says no as gently as he
+  says everything. She will not leave either: whoever asks at the east wing doors hears
+  her refuse, bluntly, through the door. History holds. She leaves at midnight and not before.
+- **Moving guests early** pays at midnight. Guests the characters talk out of the
+  Crystal Court before the bells, onto the terraces or home, are not among the dead.
+  Tell the table when the night is counted (chapter V), by name if it knows them.
+- **Getting ready** pays too. A character who acts on the warning starts midnight in
+  position: wherever they chose to stand before the bells (the east wing stair, the
+  garden doors, beside a friend), they are standing there when the lights die.
 
 *(If the confronting is done with steel: they are gone when the steel arrives,
 and the guards have come instead (see "The Palace on Alert"). Before midnight the Uninvited never
 fight, never take damage, and never stay in a scene that would make them.)*
 
-**At midnight:** everything. Fracture ammunition (see chapter V) is this thread's
+**At midnight:** everything. Tells (see chapter V) are this thread's
 currency; characters who walked it enter the Longest Night armed, positioned, and,
 rarest of all at Oraga, unsurprised.
 
@@ -1194,7 +1204,7 @@ good thing I have left to give anyone."
 
 > **About 25 minutes** (starts 1:55). *Run:* the toast word for word, the two plates,
 > the omen, the quiet guest turning after the music, the one snake line that turned
-> hardest, and, if anyone carries Agenda 4, dinner for two in the east wing (B9).
+> hardest.
 > *Tells to show:* the Radiant's antique blessing over the food (Kovaun knows the form);
 > the Wept watching the young pages a beat too long; her offering in Elanna's niche,
 > for anyone who passes the shrine (B6).
@@ -1244,9 +1254,8 @@ Only the characters who have run Undercurrent C know the tender truth of it.
 
 For Agenda 4 and the Thenya, the night sharpens: still no Veier, and now a midnight
 pronouncement coming. Maiven formally requests an audience; Corval, with genuine
-misery, declines. The east wing (B9) is the only way to her: the ring at its doors,
-or Undercurrent C. *(Characters who reach Veier after the toast find her at dinner with her
-husband; see "Dinner for Two (B9)", below.)*
+misery, declines. The east wing's doors (B9) are as near as anyone gets to her: the ring,
+a hand's width of open door, her voice (see "The Ring at the Door (B9)", below).
 
 **The omen:** the falconry mews behind the garden wing erupt — every bird screaming
 at once, then, worse, all at once silent. The gardens go quiet the way a forest does
@@ -1277,7 +1286,7 @@ everyone else's.
   leans on her, in the service doorway, in a voice the kitchen cannot hear. If
   Agenda 8 is in play, this is somebody's sister. **Tell:** Anha's hands, going still
   on the tray. → Card S7, chapter IX.
-- **The Church.** The Radiant blesses the food in a form Kovaun recognizes (a Fracture
+- **The Church.** The Radiant blesses the food in a form Kovaun recognizes (a
   tell; see chapter V). She goes very quiet, and her question has acquired teeth: two of her
   Wardens leave the gallery by different doors, and neither comes back before the
   second course. **Tell:** two empty places, and the Prelate not looking at them. → the Church's line, chapter IX.
@@ -1301,64 +1310,23 @@ everyone else's.
   said, and goes to sit with her people. The slingers are no longer counting.
   **Tell:** they have stopped drinking. → the Thenya's line, chapter IX (only if provoked).
 
-#### Dinner for Two (B9)
+#### The Ring at the Door (B9)
 
-Run this after the toast if anyone carries Agenda 4. It is the only time anyone sees
-Raunu and Veier together, and the only place all night anyone sees Raunu Boranis at
-ease. Stage it with all the warmth the ballroom's rumors deny them.
+Run this whenever a character carrying Agenda 4 shows the ring at the east wing doors,
+in any Movement before midnight. Veier is never met face to face tonight before the
+Crossing: this errand is a hand and a voice through a door.
 
-**Getting in.** A character who shows the door guards the grandmother's ring and asks
-for Veier by name is asked to wait while word goes up. The ring stays with its bearer:
-like the message, it is for Veier's hand alone. If Veier chooses them, and by default
-she does, she sends for them. This is Raunu's line from the summons, kept: *"If she
-chooses you, you will know."* Whenever the ring is shown, the answer comes after the
-toast: a guard finds the character wherever they are and walks them up.
+**At the door.** A character who shows the door guards the grandmother's ring and asks
+for Veier by name is asked to wait while a guard carries word to her. If Veier chooses
+them, and by default she does, the door opens a hand's width and her hand comes through
+it and takes the ring. Her face stays unseen. This is Raunu's line from the summons,
+kept: *"If she chooses you, you will know."* The message is given through the door, and
+her answer comes back the same way (chapter VII, "Veier Nolonaire — the Bride", has what
+she says). She does not speak of a child; the heir is found only through Undercurrent C.
 
-**Read this when a character is let into the east wing after the toast:**
-
-> *The guard leaves you at an open door. The light in here is warm after the rose
-> glow of the halls. A small table is set with two plates, and Raunu Boranis and
-> the woman you came to find are eating off them side by side, the chief of the Orthaen easy in
-> his chair in a way the ballroom would never believe. A midwife comes and goes
-> quietly. By the door stands a border woman's traveling pack, and it is empty.*
-
-**Veier.** Blunt to the point of comedy, dry in the border-country way, homesick and
-unashamed of it. She meets careful diplomacy with take-it-or-leave-it directness, and
-a guest who came expecting a prisoner or a madwoman gets a brisk education (see
-chapter VII, "Veier Nolonaire — the Bride").
-
-**Raunu.** Awkward, unhurried and out of practice: long pauses, no pleasantries, the
-true thing said where the polite thing was expected. He listens completely, and
-he does not say what he will announce at the Unmasking.
-
-**A minute alone.** Agenda 4's message and ring are for Veier alone, and she knows a
-messenger from home when she sees one. Early in the meal she asks her husband for a
-minute. Raunu steps out without a question, and the midwife with him. With no one else
-in the room, the ring goes into Veier's hand and the message is given. Raunu comes
-back when she calls him.
-
-**Topics.** What the character can ask, and the answer the book already gives:
-- *Whether she is well.* Yes. Her answer for Maiven is the one chapter VII prints: *"I am
-  well. I am watched over. Tell my cousin his message took two years to reach me, so
-  his worry can wait two more."*
-- *Whether she is free.* The room answers. For her first year the pack by the door stood
-  packed, her plain statement that she could leave whenever she chose. It is empty
-  now, and its contents have become the room (area B9).
-- *Whether she is herself.* Entirely. Her secret is that she is happy, plainly and
-  unfashionably, and rumor has no shelf for it.
-- *What she wants.* Her cousins to know she chose this.
-- *What she fears.* The same thing her husband fears, learned from watching him
-  prepare: something is coming for their family, and neither knows what or when.
-- *The two plates.* Explained at last: they were for the two of them.
-- *The midwife, or a child.* To a character she trusts, she confirms it: she is with
-  child and near her time, and she wants the child born safe. To anyone else she does not
-  speak of it (see chapter II, "Why the Ball"). Her confirmation counts as the character
-  discovering the heir; what they do with it is theirs.
-- *The midnight announcement.* He gives no more than the toast gave.
-
-**Length and exit.** About 10 minutes of table time. When the lamps begin to lower
-for the Dead Dance, Corval comes to the door and the guest is shown out. Go to
-Movement V.
+**Inside.** A character who gets into the wing some other way (Undercurrent C, or force)
+finds B9's rooms and their three finds, and does not meet her either: the household keeps
+every stranger from her door.
 
 ### Movement V — The Hour of Spirits *(approaching midnight)*
 

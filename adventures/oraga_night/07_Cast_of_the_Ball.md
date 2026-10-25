@@ -51,18 +51,17 @@ same thing her husband fears, learned from watching him prepare. **Secret:** she
 happy, genuinely and unfashionably, and rumor has no shelf for it.
 
 **Where she is:** the east wing (B9), all night, near her time, the midwife in
-attendance. She is reachable only by players who earn the east wing — Agenda 4's
-errand, Undercurrent C — so a scene with her is a prize, not a
-schedule item. Players who reach her after the toast find her at dinner with
-Raunu, the two plates explained at last — the only place all night anyone sees
-Raunu Boranis at ease.
+attendance. Nobody meets her face to face before the Crossing. Agenda 4's errand is
+done at the east wing doors: a guard carries word, the door opens a hand's width, her
+hand takes the ring, and her answer comes back through the door, her face unseen. A
+voice through a door is a prize, not a schedule item.
 
 **Play her:** blunt to the point of comedy, funny in a dry border-country way,
 homesick and unashamed of it. She answers the delegation's careful diplomacy
 (Agenda 4) with take-it-or-leave-it directness: *"I am well. I am watched over. Tell
-my uncle his message took two years to reach me, so his worry can wait two more."* She reads
+my cousin his message took two years to reach me, so his worry can wait two more."* She reads
 people nearly as well as Raunu and is far less polite about showing it. Guests who
-reach her expecting a prisoner or a madwoman get a brisk education.
+come to her door expecting a prisoner or a madwoman get a brisk education.
 
 **At the Unmasking:** in the east wing when the lights die, the corridors sealing
 themselves behind her — her husband's two crystals working. Wounded once, cleanly,

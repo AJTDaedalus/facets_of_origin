@@ -40,10 +40,12 @@ default, and most of these people would rather be anywhere else.
   midnight it wakes in the gatehouse cell at the start of the next Movement, and
   somebody comes for it (see chapter IV, "The Palace on Alert"); after midnight the crowd
   rule in "Down, Not Out" gets it up sooner.
-- **Down, Not Out.** A creature that one of the Uninvited or the Attendant drops, and
-  that is not the Uninvited's quarry, doesn't die: it is thrown clear, and a companion
-  or the crowd gets it up. The rule is printed once, in chapter V ("Down, Not Out");
-  every block below that uses it says so, and adds only what is its own.
+- **Down, Not Out.** The Uninvited set most people aside instead of killing them: a
+  creature one of them drops is thrown clear, and a companion or the crowd gets it up,
+  unless it has made itself a threat to that one. The Attendant sets aside whoever it
+  drops while it is Idle; Focused, it can kill. The rule is printed once, in chapter V
+  ("Down, Not Out"); every block below that uses it points there, and adds only what is
+  its own.
 
 **Standard numbers in the text.** DCs follow the ladder in chapter I: **Easy 10 ·
 Standard 13–15 · Hard 18–20 · Very Hard 25.** "Bloodied" means at or below half
@@ -248,8 +250,8 @@ after that: "locked on you," or "drifting."
 
 ***Literal Orders.*** Its order is to keep the three from being interrupted. It acts
 only against a creature that has attacked, hindered or interfered with one of the
-Uninvited, or attacked the Attendant, since the end of its last turn. Everyone else
-is furniture. A creature that stops interfering stops being its business.
+Uninvited, or attacked the Attendant, since the start of its previous round. Everyone
+else is furniture. A creature that stops interfering stops being its business.
 
 ***Rusty (Idle Only).*** It has spent centuries doing nothing. While Idle, its action
 is one Joined Hands attack, with Disadvantage, instead of its Multiattack. It can use
@@ -257,42 +259,53 @@ Put Aside instead only if it is Bloodied or its focus has been broken twice toni
 
 ***Can Be Distracted.*** A creature the Attendant can see or hear can take an action
 to distract it: describe the trick, then make an ability check with whatever skill
-fits it: **DC 13 while it is Idle, DC 19 while it is Focused**. It falls for **one
-trick a round**: once anyone has tried, nobody else can until the next round, and
-Help doesn't apply. Playing the trick out in character adds +2, and using one of its
+fits it: **DC 13 while it is Idle, DC 18 while it is Focused**. It falls for **one
+trick a round**: once anyone has tried, nobody else can until the next round. The Help
+action applies. Playing the trick out in character adds +2, and using one of its
 three habits the party has seen adds +2 (+4 at most). A trick already tried on it
-tonight gets no bonus and has Disadvantage; the same trick never works a third time.
+while it was Focused gets no bonus and has Disadvantage; the same trick never works a
+third time. A trick tried while it is Idle is not spent.
 Its habits: it stares at worked crystal and light; it waits for a master who is not
 there; it follows music that changes. A success against it while
 it is Focused **breaks its focus** until the start of its next turn; on a success by 5 or
 more it loses that turn as well. A success while it is Idle makes the distractor
 **furniture** to it: it ignores that creature, as if it had never interfered, until that
-creature next attacks it or interferes with one of the three. It goes on acting as before,
-and a creature that is furniture to it doesn't stop *Clears the Way*. That success doesn't
-count toward the four. On a failure the trick is spent, and a Focused
+creature next attacks it or interferes with one of the three. It goes on acting as before.
+That success doesn't count toward the four, but a natural 20 while it is Idle costs it
+its next turn. On a failure the trick is spent, and a Focused
 Attendant attacks the distractor next. The **fourth** time its focus is broken
 tonight, it wanders off: out of the fight, standing at a window, watching the fires.
 That is a win. An argument that what the party is doing is not, strictly, interrupting
 the three is one more trick, under these same rules. *(The full rule, the natural 20, and
 how to hint at all of this: card S14.)*
 
-***Clears the Way.*** Once each round, if it hasn't lost its turn to a distraction and
-no enemy is within 5 feet of it (a creature that is furniture to it doesn't count), the
-Attendant removes 1 Delay from one Uninvited in
-the same scene (see chapter V, "Buying Time"). It moves the obstacle: the barricade, the guest in the
-way, the door somebody was made to go round.
+***Clears the Way.*** At the start of a turn it hasn't lost, the Attendant can spend
+that turn's action to remove 1 Delay from one Uninvited in the same scene (see chapter V,
+"Buying Time"). Idle, it does so whenever nobody has attacked it since its last turn.
+Focused, it attacks on its first turn and clears the way on its second; if none of the
+three in the scene has Delay to take, the second turn attacks instead. A lost turn clears
+nothing. It moves the obstacle: the barricade, the guest in the way, the door somebody
+was made to go round.
 
-***Down, Not Out.*** A creature the Attendant reduces to 0 Hit Points is Unconscious
-and Stable, and is set aside somewhere out of the way (see chapter V, "Midnight Rules").
-It removes interruptions. It doesn't hunt.
+***Removes Interruptions.*** A creature the Attendant reduces to 0 Hit Points while it
+is Idle is set aside, Unconscious and Stable (see chapter V, "Down, Not Out"). While it is
+Focused, the creature uses the ordinary rules for dying. At **Sharp**, a Focused Attendant
+attacks a creature at 0 Hit Points only if that creature interfered since the
+Attendant's last turn. At **Gentle** it never does; at **Merciless** it attacks any
+fallen creature its orders still cover (*Literal Orders*). It doesn't hunt.
+
+***Where the Three Go.*** It stays in the scene of the first Uninvited the party
+interrupts (card S14), and it follows its three anywhere, the Root included: nothing
+there touches it.
 
 ***Not Here.*** At 0 Hit Points the Attendant doesn't fall. It loses interest in being
 here, steps into the world's shadow, and is gone for the night. There is no body.
 
 ***Two Turns (Focused Only).*** While Focused, the Attendant takes two turns each
 round: one on its Initiative and one at Initiative count 10 lower (last in the round,
-if that count is below 1). On the second turn its action is one Joined Hands attack
-instead of its Multiattack (with four or more characters it is the full Multiattack;
+if that count is below 1). On the second turn its action is to clear the way (*Clears
+the Way*) or one Joined Hands attack instead of its Multiattack (with four or more
+characters it is the full Multiattack, against a lone character no attack at all;
 card S14). It still has only one Reaction a round, and it rolls Put
 Aside's recharge only at the start of its first turn each round.
 
@@ -1181,9 +1194,9 @@ choose to succeed instead.
 his turn, if he has any, spend 1: for that turn he is off his post — *The Post*
 doesn't apply, and a dozen guests go through the doors behind him.
 
-***Down, Not Out.*** A creature the Hollow reduces to 0 Hit Points is Unconscious and
-Stable, and is thrown up to 30 feet clear (see chapter V, "Midnight Rules"). He never
-attacks a creature at 0 Hit Points.
+***Threats Only.*** A creature the Hollow reduces to 0 Hit Points is set aside and
+thrown up to 30 feet clear, unless it has made itself a threat to him; he finishes a
+threat only as the rule allows (see chapter V, "Down, Not Out").
 
 ***Unraveling Presence.*** Within 30 feet of the Hollow, a crystal charge released by
 anyone works only if its bearer succeeds on a DC 13 Charisma check; on a failure the
@@ -1464,9 +1477,9 @@ wing, each point spent lets one more person in his way get clear. Delay he still
 when he breaks past Master Vell at the Crossing is spent at the river gate, and one
 point is enough.
 
-***Down, Not Out.*** A creature other than Veier Nolonaire that the Radiant reduces
-to 0 Hit Points is Unconscious and Stable, and is thrown clear (see chapter V, "Midnight
-Rules"). He never attacks a creature at 0 Hit Points. What he means to do when he
+***Threats Only.*** A creature other than Veier Nolonaire that the Radiant reduces
+to 0 Hit Points is set aside and thrown clear, unless it has made itself a threat to
+him; he finishes a threat only as the rule allows (see chapter V, "Down, Not Out"). What he means to do when he
 reaches Veier, the module does not say; never narrate an attack on her (see chapter V,
 "The Crossing — Vell and the Radiant").
 
@@ -2000,11 +2013,11 @@ begin to run — actually run. Her attacks can't score Critical Hits, and she hu
 cradle-song mid-attack without knowing it. She is losing the argument with what she
 used to be.
 
-***Down, Not Out.*** A creature other than Raunu Boranis that the Wept reduces to 0
-Hit Points is Unconscious and Stable (see chapter V, "Midnight Rules"). If a creature is
-about to die shielding him, she takes it out of the fight instead of out of the
-world — through a broken wall, at 0 Hit Points, Stable. She never attacks a creature
-at 0 Hit Points.
+***Threats Only.*** A creature other than Raunu Boranis that the Wept reduces to 0
+Hit Points is set aside, unless it has made itself a threat to her; she finishes a
+threat only as the rule allows (see chapter V, "Down, Not Out"). If a creature that is
+no threat to her is about to die shielding him, she takes it out of the fight instead
+of out of the world — through a broken wall, at 0 Hit Points, Stable.
 
 ***Unraveling Presence.*** Within 30 feet of the Wept, a crystal charge released by
 anyone works only if its bearer succeeds on a DC 13 Charisma check; on a failure the
@@ -2123,7 +2136,8 @@ somebody, and the inquest hears of it.
 **Skills** Insight +13, Perception +9
 **Resistances** Acid, Bludgeoning, Cold, Fire, Force, Lightning, Necrotic, Piercing,
 Poison, Psychic, Radiant, Slashing, Thunder
-**Immunities** Charmed, Frightened, Grappled, Restrained
+**Immunities** Charmed, Frightened, Grappled, Incapacitated, Paralyzed, Restrained,
+Stunned, Unconscious
 **Senses** Passive Perception 19
 **Languages** Common
 **CR** — (XP 0; PB +4)

@@ -228,7 +228,7 @@ Damaris Kovaun").
 | I | The wardens take a post where they can see the empty high table and the east doors at once | Gray-robed men who never look at the dancing | — |
 | II | The wardens ask the festival hires which rooms the master uses: the Audience Hall, and the dark wing on the second floor | A footman looking back after a gray robe moves on | — |
 | III | Kovaun waits in the Audience Hall antechamber; a warden meets any summoned character with an invitation to attend her in the chapel | The warden knows their name without being told it | — |
-| IV | The Radiant blesses the food in a form Kovaun recognizes (a Fracture tell; see chapter V). Her question acquires teeth. Two wardens leave by different doors | Two empty places, and the Prelate not looking at them | — |
+| IV | The Radiant blesses the food in a form Kovaun recognizes (a tell; see chapter V). Her question acquires teeth. Two wardens leave by different doors | Two empty places, and the Prelate not looking at them | — |
 | V | The two wardens are at the door of Raunu's study (B8), working its crystal lock with the patience of men who have done this in other houses. They want the room filed | Lamplight under a study door that is supposed to be dark | **S8** |
 | VI–VII | *Lights out.* Heat 0–2: the wardens come down for the Prelate and get her out. Heat 3–4: they are inside the study when the lights die, and they finish the job: the great table's map goes down in a warden's hand, and the work-slate is wiped | Wardens coming down the dark-wing stair, one with fresh-written pages held to his chest | **S8** (dark) |
 
@@ -1841,6 +1841,10 @@ the light and takes no interest in anyone. A party that never interferes never m
 it. That is what makes it optional: it is in plain sight from the Unmasking on, and it
 only comes for people who are in the way.
 
+**One scene at a time.** It goes to the first Uninvited the party interrupts and stays
+in that scene; it cannot be in two. With no Uninvited left in the scene it follows the
+nearest one, or leaves (*Not Here*): the card ends, and there is no XP.
+
 **Read this when one of the three turns it on the characters:**
 
 > *One of the three gray masks turns — not toward you, toward the attendant standing
@@ -1851,9 +1855,10 @@ only comes for people who are in the way.
 **Objective:** get it out of the way. Break its focus four times and it wanders off,
 or drive it to 0 Hit Points and it leaves. Either is a win.
 
-**The clock is the errand it guards.** Every round the Attendant hasn't lost its turn
-to a distraction and has no enemy within 5 feet (furniture doesn't count), it removes
-1 Delay from one of the three in the scene (*Clears the Way*). Tell the table each time: it lifts the
+**The clock is the errand it guards.** The Attendant spends a turn's action to remove
+1 Delay from one of the three in the scene (*Clears the Way*): while Idle, whenever nobody
+has attacked it since its last turn; while Focused, on its second turn, if there is Delay
+to take. A turn lost to a distraction clears nothing. Tell the table each time: it lifts the
 barricade aside, moves the guest who was in the way, opens the door somebody was made
 to go round. When the Uninvited it guards is done with this room, so is it. At the
 table that is about six rounds.
@@ -1862,7 +1867,8 @@ table that is about six rounds.
 on, at the start of each of its turns, it is **Focused** if any one of the three in
 the scene has no Delay: one of them glances at it, then at the party, and that is
 enough. A broken focus lasts only until its next turn. Delay on every Uninvited in the
-scene keeps it Idle, and that is how Buying Time and this card feed each other.
+scene keeps it Idle, and that is how Buying Time and this card feed each other. If the
+Wept and the Attendant tie on Initiative, the Wept acts first.
 
 *Budget:* **beyond High while Focused; plays High while Idle.** The block is CR 8 (3,900 XP), and
 that CR is its Focused self: by the usual yardstick its offense rates about CR 4 (two
@@ -1878,34 +1884,44 @@ those rounds it is clearing the way. Award the full 3,900 XP however it is got o
 the way.
 
 It is meant to be the hardest fight of the night, won by the table that plays the
-game: hard, close, and never a death sentence. Let your table manner carry that,
+game: hard, close, and dangerous, because a Focused Attendant can kill. Let your table manner carry that,
 not those words: the hints below are how. A table whose characters are built to
 hit hard can out-slug it; give such a table the "A table built to hit hard" line under
 Adjusting the Encounter.
 
 > **DM Note — how it plays**
 >
-> Played as a slugging match, this fight usually goes the Attendant's way: the
-> pregens seldom clear it by blows alone, and a fair share of those fights end with the
-> whole party down. Played as the distraction game, it is close to even on bare rolls,
-> and a table that leans in usually wins. Expect at least one character to drop even
-> then. A party built for damage first can win by blows alone, which is what its
-> Adjusting line is for.
+> Played as the distraction game, with the table leaning in and helping each other, this
+> fight is usually won, at every setting of the dial. Expect a character to drop in close
+> to half of those fights. Whether anyone dies is the dial: at Gentle nobody does; at
+> Sharp a death is rare, and comes most often to a character left dying with nobody free
+> to reach them; at Merciless it happens often enough to plan for. On bare rolls,
+> without leaning in, the table wins about two fights in three; the rest end with the
+> errand done.
 >
-> The four-character, five-character and 3rd-level lines keep those odds about where
-> they are. At 5th level, Extra Attack and 3rd-level spells make the slugging route
-> likelier to work.
+> Played as a slugging match, it usually goes the Attendant's way: the pregens seldom
+> clear it by blows before the errand is done, and nearly every such fight drops
+> someone. At Sharp a slugging party loses a character often enough to fear it, the
+> hardest hitters most of all, because they stay in reach longest; at Merciless, a
+> slugging party should be ready to bury someone. A party built for damage first can win by blows alone,
+> which is what its Adjusting line is for.
+>
+> If the card fires late, with the errand nearly done, the distraction game alone seldom
+> gets there in time; buying Delay on the Uninvited as well gives the table a fighting
+> chance. The other Adjusting lines keep these odds about where they are. At 5th level,
+> Extra Attack and 3rd-level spells make the slugging route likelier to work.
 
 **Distracting the Attendant — the full rule.** It takes **an action**. The player
 describes what their character does, then makes **an ability check with the skill that
 fits the trick** — Charisma (Performance) for music, Charisma (Deception) for a false order,
 Intelligence (Arcana) to show it a working crystal, Charisma (Deception) or Charisma
 (Performance) to pose as, or announce, the master it awaits ("your master is here",
-pointing at a doorway), and so on — against **DC 13 while it is Idle, DC 19 while it is Focused.**
+pointing at a doorway), and so on — against **DC 13 while it is Idle, DC 18 while it is Focused.**
 
 *One trick a round.* It watches one thing at a time. Once anyone has tried a trick on
 it in a round, win or lose, it is watching for the next: nobody else can try until the
-next round, and the Help action doesn't apply. The table chooses whose trick it is.
+next round. The Help action applies: a companion who spends an action helping gives the
+trick Advantage. The table chooses whose trick it is.
 
 *Leaning in* — **+4 at most**:
 - **In character, specific, vivid.** The player performs or plays out the distraction
@@ -1915,8 +1931,9 @@ next round, and the Help action doesn't apply. The table chooses whose trick it 
   midnight. Only habits the table actually saw count. Its three habits, shown before
   midnight: *it stares at worked crystal and light; it waits for a master who is not
   there; it follows music that changes.*
-- **Repeats.** A trick already tried on it tonight gets no bonus and has
-  **Disadvantage** — it learns. The same trick never works a third time.
+- **Repeats.** A trick already tried on it while it was Focused gets no bonus and has
+  **Disadvantage** — it learns. The same trick never works a third time. A trick tried
+  while it is Idle isn't spent.
 
 *Results.*
 - **Success while it is Focused:** its **focus breaks**: it is Idle until the start of
@@ -1927,11 +1944,16 @@ next round, and the Help action doesn't apply. The table chooses whose trick it 
   attack it or interfere with one of the three (see chapter X, "The Attendant", *Can Be
   Distracted*). It keeps acting, and furniture standing beside it doesn't stop it clearing
   the way. That does **not** count: only a broken focus does.
-- **Failure:** the trick is spent (it is now "used"). If it was Focused, its next
-  attack is at the distractor.
+- **Failure while it is Focused:** the trick is spent (it is now "used"), and its next
+  attack is at the distractor. **Failure while it is Idle:** nothing happens.
 - **Natural 20:** as succeeding by 5 or more, and the distractor gains Heroic Inspiration.
+  While it is Idle, a natural 20 makes the distractor furniture and costs it its next turn.
 - **The fourth broken focus of the night:** it wanders off — out of the fight, standing
   at a window, watching the fires. That is a win.
+
+**Spells that stop it.** *Sleep* fails on it, and *Hold Person* can't target it. A turn
+it loses to *Command* or *Hideous Laughter* is a lost turn (no attacks, no clearing the
+way), but it is not a broken focus and doesn't count toward the four.
 
 > **DM Note — how to hint that it can be distracted**
 >
@@ -1962,9 +1984,11 @@ with a habit behind it.
 
 **Tactics.** It removes interruptions. Focused, it takes two turns a round and goes for
 whoever has most recently got in the way, *Joined Hands* first and *Put Aside* when a
-knot of the party is close together. It does not pursue anyone who stops interfering,
-and a creature it drops is set aside, Stable ("Down, Not Out"). Idle, it swings once,
-badly, and looks at things.
+knot of the party is close together. A creature it drops while Focused is dying, and at
+Sharp it strikes a fallen creature only if that creature got in its way since its last
+turn (chapter X, "The Attendant", *Removes Interruptions*). It does not pursue anyone who
+stops interfering. Idle, it swings once, badly, looks at things, and sets aside whoever
+it drops, Stable ("Down, Not Out").
 
 **Morale.** It has none to break. Its focus broken four times, or 0 Hit Points, and it is gone
 (*Not Here*) — no body, nothing left on the floor.
@@ -1990,17 +2014,21 @@ four times or it is driven to 0 Hit Points. Heroic Inspiration (Table I–3, "th
 player who tries to distract it (hint 4); a natural 20 on a distraction pays its own.
 
 **Adjusting the Encounter.** *(How each line plays is in the DM Note — how it plays, above.)*
+- *One character:* while Focused its second turn makes no attack. Alone, a character is
+  offered the outs first (stepping back is one); the fight is the last resort.
 - *Four characters:* 229 Hit Points, and while Focused its second turn is the full
   Multiattack.
 - *Five characters:* 260 Hit Points, its second Focused turn is the full Multiattack,
-  and a distraction DC of 20 while it is Focused.
-- *Four at 3rd level:* 210 Hit Points, and a distraction DC of 18 while it is Focused.
+  and a distraction DC of 19 while it is Focused.
+- *Four at 3rd level:* 210 Hit Points, and a distraction DC of 17 while it is Focused.
 - *Four at 5th level:* use the five-character line, or the block's **Nastier** line
   for a table that wants it harder.
-- *A table built to hit hard* (characters built for damage first): 300 Hit Points.
+- *A table built to hit hard* (characters built for damage first): 30 more Hit Points,
+  on top of whichever line above fits the table (208 for three characters, 259 for
+  four).
 
 **Development.** Gone, the Attendant is not seen again tonight, and chapter VI has no
 body and no witness who can say what it was. A party that sent it to the window has a
 story nobody at the inquest will believe. If the whole party is down, the Attendant
-finishes clearing the way and goes back to the edge of the light; chapter V's history
-runs as written. **Return to chapter V.**
+finishes clearing the way and goes back to the edge of the light, and anyone dying makes
+Death Saving Throws as usual; chapter V's history runs as written. **Return to chapter V.**

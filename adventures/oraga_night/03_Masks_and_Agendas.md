@@ -130,9 +130,10 @@ and bring back the truth: is she well, is she free, is she *herself*?
 **The catch:** Veier has not appeared in public for two years — and the ball is not
 going to show her at all. She never comes down. The east wing is closed, guarded,
 and the only way to her; this errand cannot be done from the dance floor.
-**At midnight:** She trusts you now — you are the one face at this ball she chose to
-trust. When she looks for help in the dark, she will look for you. *(This agenda puts
-a player character beside Veier at the Unmasking. Chapter V leans on it.)*
+**At midnight:** She trusts you now — yours is the one voice at this ball she chose to
+trust. When she listens for help in the dark, she will listen for you. *(The errand is
+done at the east wing door: her hand takes the ring, her face stays unseen. At midnight
+she listens for that player character's voice through the door. Chapter V leans on it.)*
 
 ### 5. The Unpaid Debt
 *Personal.*

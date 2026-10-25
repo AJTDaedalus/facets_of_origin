@@ -172,7 +172,7 @@
    "label": "B9. The East Wing",
    "phase": "m2",
    "kind": "room",
-   "summary": "Sealed and guarded. Veier's emptied pack, two slings, and the nursery. Reached only by errand, passage, or Undercurrent C.",
+   "summary": "Sealed and guarded. Veier's emptied pack, two slings, and the nursery. Agenda 4 is done at its doors; the rooms behind are reached only by Undercurrent C or force.",
    "ref": "04_The_Ball.md#the-private-palace (B9)",
    "optional": true,
    "faction": null
@@ -242,7 +242,7 @@
    "label": "4. The Cousin's Errand",
    "phase": "m2",
    "kind": "agenda",
-   "summary": "A memorized message and a ring, into Veier's own hands. The east wing is the only way.",
+   "summary": "A memorized message and a ring, for Veier's own hand. Done at the east wing door: her hand and her voice, never her face.",
    "ref": "02_The_World_and_the_Night.md#the-eight-agendas",
    "optional": true,
    "faction": "thenya"
@@ -458,12 +458,12 @@
    "faction": "thenya"
   },
   {
-   "id": "sc-dinner",
-   "label": "Dinner for two",
-   "phase": "m4",
+   "id": "sc-ring-door",
+   "label": "The ring at the door",
+   "phase": "m2",
    "kind": "scene",
-   "summary": "Run it if anyone carries Agenda 4: the grandmother's ring shown (and kept) at the east wing doors, and by default Veier sends for them. Raunu and Veier at ease together, the night's one warm glimpse; she asks him for a minute, he steps out, and the ring reaches her hand alone. She confirms the child to a character she trusts; he will not name the midnight announcement. About 10 minutes; Corval shows the guest out as the lamps lower.",
-   "ref": "04_The_Ball.md#dinner-for-two-b9",
+   "summary": "Any Movement before midnight, if anyone carries Agenda 4: the ring shown at the east wing doors, a guard carries word, and by default the door opens a hand's width and Veier's hand takes the ring. Her face stays unseen; her answer comes back through the door. She does not speak of a child.",
+   "ref": "04_The_Ball.md#the-ring-at-the-door-b9",
    "optional": true,
    "faction": null
   },
@@ -1304,7 +1304,7 @@
   {
    "from": "a4",
    "to": "b9",
-   "label": "into her hands",
+   "label": "at the door",
    "kind": "optional"
   },
   {
@@ -1506,14 +1506,8 @@
    "kind": "default"
   },
   {
-   "from": "ev-toast",
-   "to": "sc-dinner",
-   "label": "via B9",
-   "kind": "optional"
-  },
-  {
    "from": "b9",
-   "to": "sc-dinner",
+   "to": "sc-ring-door",
    "label": "",
    "kind": "optional"
   },
@@ -1898,7 +1892,7 @@
   {
    "from": "a4",
    "to": "cross-1",
-   "label": "beside Veier",
+   "label": "the voice she listens for",
    "kind": "optional"
   },
   {
