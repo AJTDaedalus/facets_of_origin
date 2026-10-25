@@ -129,6 +129,7 @@ Everything in the last column is a thing a table can actually reach.*
 |---|---|---|---|---|---|
 | Raunu | *(unseen — B8/B9)* | *(unseen — B8/B9)* | high gallery glimpse, then B4 (summonses) | B3 high table — the toast, two plates, gone (B9) | B9 with Veier; descends at the bells |
 | Veier | B9, her rooms | B9, her rooms | B9 (Agenda 4 at the door only) | B9, upstairs | B9, guard doubled |
+| The midwife | B9, behind Veier's door | B9; glimpsed once crossing the gallery at the end of II (Undercurrent C) | B9, behind Veier's door | B9, behind Veier's door | B9, behind Veier's door |
 | Vorlain | B2 | B3 wine court | B3, watching the audiences | B2 — watch his face | B3, drinking harder |
 | Corval | B1 gate | everywhere | B1/B2 | B2 | doubles east wing guard |
 | Kovaun | B1 line | B2 census | B4 antechamber | B2 | B6 chapel, briefly |

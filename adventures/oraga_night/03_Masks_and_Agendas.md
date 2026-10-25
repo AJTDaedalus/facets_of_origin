@@ -89,7 +89,7 @@ find them. **Completing an agenda earns a Spark** on the spot.
 **The ask:** Raunu has prepared some new trade decree — the Circle knows only that his
 ministers call it "the Tithe of Hands." Learn what it does before it is proclaimed.
 **The catch:** Nothing is written down — nothing ever is. The decree lives whole in
-exactly three heads: Minister Corval's and two ministers'. Corval is incorruptible
+two heads: Raunu's and Minister Corval's. Corval is incorruptible
 by money. He is not incorruptible by kindness.
 **At midnight:** The decree lives only in the memories of men now trapped in a
 burning palace with three killers. Keep Corval alive and the Tithe survives the

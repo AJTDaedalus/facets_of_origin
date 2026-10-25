@@ -810,7 +810,6 @@ def map_court(d: dict, grid=True) -> str:
     P.tag(-gw / 2, 100, "S1")
     P.tag(-gw - 6, 92, "S11")
     P.tag(-gw / 2, 120, "S13")
-    P.tag(W_ + gw / 2, 120, "S12")
 
     legend = [("wall", "Wall"), ("door", "Door or doorway"), ("stairs", "Stairs (arrow points up)"),
               ("rail", f"Gallery rail, {r['gallery']} ft above the floor"),
@@ -825,7 +824,7 @@ def map_court(d: dict, grid=True) -> str:
     key = [("B2", "The Crystal Court"), ("B3", "The banquet galleries, along both long sides"),
            ("S1", "The seating feud, in either gallery"),
            ("S11", "The one open door at midnight"),
-           ("S12", "The minister in the smoke"), ("S13", "The arrest in the fire")]
+           ("S13", "The arrest in the fire")]
     caption = ["Distances from chapter V. The galleries are a mezzanine; the doors under them open at floor level."]
     frame(svg, "Map VIII–3: The Crystal Court", "B2 · B3 — the Court, the banquet galleries and the east doors",
           legend, caption, mw, scale_ft=50, scale=scale, key=key)
@@ -1113,6 +1112,7 @@ def map_east_wing(d: dict, grid=True) -> str:
     P.tag(cx + cw / 2, cy + 14, "S4")
     P.tag(run_x + 2.5, 40, "S7")
     P.tag(run_x + 2.5, 50, "S2")
+    P.tag(run_x + 2.5, 4, "S12")
 
     legend = [("wall", "Wall"), ("door", "Door or double doors"), ("stairs", "Stairs (arrow points up)"),
               ("walkrail", "The garden walk's rail"), ("rail", "Terrace balustrade (10-ft drop)"),
@@ -1125,7 +1125,8 @@ def map_east_wing(d: dict, grid=True) -> str:
            ("B10", "The service passages; they reach the garden stair too"),
            ("S2", "The service corridor behind the Dance"), ("S4", "The east wing doors"),
            ("S7", "The dark run to the wing's service door"),
-           ("S10", "Over the wall, from the garden below")]
+           ("S10", "Over the wall, from the garden below"),
+           ("S12", "Corval in the kitchens, on the way out")]
     caption = ["Distances from chapter V. Only the double doors seal at midnight; the other ways in stay open."]
     frame(svg, "Map VIII–5: The East Wing and the Service Run", "B9 · B10 — upstairs, at gallery level",
           legend, caption, mw, scale_ft=20, scale=scale, key=key)

@@ -183,7 +183,7 @@ after X.
 | T7.10 | WP7 | done | "Both rivers, one spring" note (TP20) |
 | T7.11 | WP7 | done (polish A + B) | Second Clause cut (TP21); the contract void |
 | T7.12 | WP7 | done (sent to owner; T7.13 waits) | Draft midwife and minister positions (TP23) |
-| T7.13 | WP7 | ⛔ OWNER | Apply approved positions (TP23) |
+| T7.13 | WP7 | ☑ resolved by TP65 (midwife applied with T7.24; ministers cut) | Apply approved positions (TP23) |
 | T7.14 | WP7 | ☑ 2026-10-24 (TP46; `pregnancy_secret` guard added) | Aftermath: the Circle knows (TP24) |
 | T7.15 | WP7 | done | Vell's midnight route |
 | T7.16 | WP7 | done (polish A + B) | Agenda 6's reveal |
@@ -194,6 +194,8 @@ after X.
 | T7.21 | WP7 | done | The Radiant's chase line (L-091) |
 | T7.22 | WP7 | open | Commit WP7 |
 | T7.23 | WP7 | done | TP61: cut the heat-4 finish |
+| T7.24 | WP7 | done | TP65/TP66/TP68: the Tithe in two heads; S12 on Corval in B10 |
+| T7.25 | WP7 | open | TP67: house half-masks; the Root's glow after midnight |
 | T8.1 | WP8 | done | `facts.yaml`: gallery geometry and residue values |
 | T8.2 | WP8 | done | Redraw VIII–3; sightlines |
 | T8.3 | WP8 | done | Map residue; ward-points; the sealed doors |
@@ -233,8 +235,8 @@ after X.
 | T11.11 | WP11 | ⛔ OWNER | Apply approved habits (TP22) |
 | T11.12 | WP11 | open | Final checks and commit |
 
-**Counts:** WP1 4 · WP2 6 · WP3 14 · WP4 17 · WP5 12 · WP6 16 · WP7 22 · WP8 6 · WP9 13 · WP10 7 ·
-WP11 12 = **129 tasks**. **⛔ 2:** OWNER 2 (T7.13, T11.11; T8.4 answered by TP60; T7.8 and T7.14 answered by TP39 and TP46); the 4 confirm items and E1 were answered 2026-10-22
+**Counts:** WP1 4 · WP2 6 · WP3 14 · WP4 17 · WP5 12 · WP6 16 · WP7 24 · WP8 6 · WP9 13 · WP10 7 ·
+WP11 12 = **131 tasks**. **⛔ 1:** OWNER 1 (T11.11; T7.13 answered by TP65; T8.4 answered by TP60; T7.8 and T7.14 answered by TP39 and TP46); the 4 confirm items and E1 were answered 2026-10-22
 (confirm: T4.11, T6.12, T7.4, T7.21; escalation: T7.6).
 
 **Run order** (the ledger's §7): WP1 → WP3 → WP2 (T2.1–T2.5) → WP4 + WP5 (T5.1–T5.2 before T4.5) →
@@ -1120,7 +1122,7 @@ T4.14).
 - **Accept:** three positions, each with a cited rationale, sent to the owner.
 - **Time:** 20 min.
 
-### ⛔ T7.13 Apply approved positions (TP23) *(OWNER)*
+### ☑ T7.13 Apply approved positions (TP23) *(OWNER)* — **RESOLVED by TP65 (2026-10-25):** the ministers are cut as carriers and placed on no table; the midwife's approved position went into Tables VIII–2 and VIII–6, F/08 Table IX–3 and `facts.yaml` (`midnight_positions`) under T7.24.
 - **Do (after approval):** add the positions to Tables VIII–2 and VIII–6 and to `facts.yaml`
   (fact `midnight_positions`). Mirror them in F/08's position table (F/08:131), as canon.
 - **Checks:** SA+F. **Time:** 15 min.
@@ -1203,6 +1205,29 @@ T4.14).
   finish (S13, the worst-case chain line). Log the new rates. TP62: rosters stay. TP63: the
   remedy box stands as written.
 - **Checks:** SA + sims. **Time:** 40 min.
+
+### ☑ T7.24 TP65 / TP66 / TP68: the Tithe in two heads; S12 on Corval *(added 2026-10-25 by the coordinator)*
+- **Do:** replace "three heads: Minister Corval's and two ministers'" with two heads, Raunu's and
+  Corval's, everywhere in both editions (02/F/03 Agenda 1, 04/F/04 B8, 07 *What Callun Knows*, 08
+  card 1, 09 the Circle's line). Rewrite S12 as Corval caught by the two hired knives in B10 as he
+  leads his household out (TP58): printed B10 terrain, roster, XP, morale, outs reworked toward
+  Corval; saved, Movement VII as printed; carried off, the Circle owns the Tithe by dawn and the
+  read-aloud stops early (one DM line). TP68: the household reaches the kitchen yard, inside the
+  walls, held by four Blades of S3's perimeter; S12's knives must bargain or fight past them.
+  Follow through 05 (Tables V–7, V–8, ⟨A snake gets what it came for⟩, "Corval. The stairs.",
+  Movement VII), 07 Corval (both editions), F/05, 08 (VIII–2, VIII–5, DM sheet, map captions),
+  09 (line rows, tracker, 507, IX–1), maps (S12 badge to VIII–5's service run; rebuilt), flow
+  (rebuilt), INVENTIONS (#120; #5 superseded), facts (`tithe_two_heads`, `s12_corval`,
+  `midnight_positions`), tests. Apply T7.13's approved midwife positions. Corval never meets Vell.
+- **Checks:** SA + F + sims + software docs. **Time:** 60 min.
+
+### ☐ T7.25 TP67: house half-masks; the Root's glow *(follow-up, added 2026-10-25)*
+- **Do:** one plain line each, in both editions: the household staff, Corval and the honor guards
+  wear one simple matching house half-mask in the livery colors, never plain gray (where the
+  household's dress or the Unmasking is described: 04 B1/B10, 05 Movement VI); the Root is not
+  drained at midnight and still glows rose afterwards (04 B11, 05 where the Root is used). Lore
+  only in the Facets edition; record in INVENTIONS; add a facts guard if a stale line exists.
+- **Checks:** SA + F. **Time:** 20 min.
 
 ### ☐ T7.22 Commit WP7
 - `Oraga 5e 3p pass: WP7 logic fixes and TP13–TP24 canon (both editions)`.

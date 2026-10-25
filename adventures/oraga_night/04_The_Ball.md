@@ -213,7 +213,7 @@ scratch-work, the one grudging medium even the law cannot police). *(The
 module does not explain the instruments or the mist-lines. Operational hint only:
 Raunu has been studying something far away to the east, and preparing. Nothing of
 Agenda 1's decree is here — the Tithe of Hands exists only in Corval's memory and
-two ministers'.)*
+Raunu's.)*
 
 **When the party first comes within sight of the east wing doors, read:**
 

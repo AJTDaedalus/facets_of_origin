@@ -213,10 +213,13 @@ wing, and he goes without needing to understand. He gathers the characters neare
 him, those who helped him first, and guides them by the service stair and the garden
 stair to get in front of the Radiant. He is a guide, never a fighter; he never reaches
 Veier and never meets Vell. Then he leaves them and leads his household out of the
-palace through the kitchens and the service passages; Movement VII finds him outside
-with them, counting his staff. If the characters convinced him before midnight, he has
+palace through the kitchens and the service passages into the kitchen yard, inside the
+walls, where the Bought's perimeter holds them; Movement VII finds him there with them,
+counting his staff. If the characters convinced him before midnight, he has
 already given them the wing's service door. Keeping him alive is Agenda 1's midnight
-payoff (chapter V, "Corval. The stairs.").
+payoff (chapter V, "Corval. The stairs."): the Tithe lives in his head and Raunu's, and
+Raunu usually dies at midnight. If the Circle's heat is 3–4, its knives catch him in the
+kitchens on the way out (card S12).
 
 **Roleplaying Corval:** thin, upright, old, magnificent under pressure, doing the work of six
 chamberlains. Bribing Corval is impossible, with no check for it at
@@ -395,7 +398,7 @@ human, a DC 10 Charisma (Deception) check.
 
 - The Circle knows only that Raunu's ministers call his new decree "the Tithe of
   Hands". Nothing is written down.
-- The decree lives whole in exactly three heads: Minister Corval's and two ministers'.
+- The decree lives whole in two heads: Raunu's and Minister Corval's.
 - After the toast, she is certain the midnight pronouncement is the Tithe, announced
   to a captive audience of everyone it will fleece. (untrue)
 - She does not know who eats off the second plate. The Circle learns what is in the

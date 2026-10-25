@@ -796,3 +796,25 @@ Read first: TASKS WP8, DECISIONS TP1–TP64 and the TPN notes, this LOG's tail, 
 - Final checks from `M/`: lint 0; fact_check 0; bestiary 0 mismatches; pregen 0 issues; `pytest tools` **563 passed, 1 skipped** (539 + 1 at start; 11 new in `test_maps.py`, 13 in the new `test_wp8.py`). Repo root `pytest research/oraga_5e_sim` **34 passed**. `software/` docs-consistency + private-canon **42 passed**.
 - Renders for the owner: `M/maps/map_viii_1_palace.png`, `map_viii_3_court.png`, `map_viii_4_terraces.png`, `map_viii_5_east_wing.png` (VIII–2 changed only its caption).
 - No commit or staging.
+
+## 2026-10-25 — T7.24 (TP65, TP66, TP68) and T7.13
+
+### T7.24 The Tithe in two heads; S12 on Corval
+- **TP65:** "three heads: Minister Corval's and two ministers'" → "two heads: Raunu's and Minister Corval's" in M/02 and F/03 Agenda 1, M/07 *What Callun Knows*, M/09 the Circle's line; M/04 and F/04 B8 "only in Corval's memory and Raunu's"; M/08 card 1 "in Minister Corval's head and the chief's". Generic "ministers" (B4's screen, "Raunu's ministers call it…", Vorlain's lines) kept.
+- **S12 "Corval in the Kitchens"** (M/09): Movement VI into VII, B10, after Corval leaves the characters in front of the Radiant (TP58). Read-aloud: the thin old man who greeted you by name at the gate walked off by two coats, reciting something that sounds like a list, his household behind. Terrain: the 5-ft run, Darkness with one lamp in three, the galleries' smoke where the run passes their service doors (keeps the DC 10 save that 05 General Features points to), the household takes no part. Roster (two knives, a third at heat 4), 400–600 XP, morale and adjustments unchanged; outs reworked toward Corval. Development: saved → Movement VII as printed; carried off → the Circle owns the Tithe by dawn and the Movement VII read-aloud stops at "Guests are shielding strangers." (one DM line under the box in M/05). He never meets Vell.
+- **TP68 (mid-task ruling):** the household reaches the kitchen yard, inside the walls, held there alive and counted by four Blades of S3's printed perimeter. M/05 "Corval. The stairs.", M/07 and F/07 Corval, F/05, M/08 VIII–2 now say "into the kitchen yard". S12: "No clock. The Bought are the party's time": the knives must bargain or fight past the four Blades outside the yard gate; a *Kitchen yard* terrain bullet; Development "buy or force their way past the Bought".
+- Follow-through: M/05 Table V–7 Circle row, Table V–8 **Corval and Raunu**, ⟨A snake gets what it came for⟩, the card list; M/04 Undercurrent B's pointer; M/07 Corval → S12; M/08 VIII–2 Corval row "(S12 if Circle heat is 3–4)", VIII–5, DM sheet (S12 moves to the Movement VI row), map captions; M/09 tracker, "If the table does nothing", Table IX–1 (Mv VI–VII, B10). M/01 has no S12 or minister mention; the Facets edition has no S12 card.
+- **Maps:** S12 badge removed from VIII–3 and its key; added to VIII–5's service run (B10) with key "Corval in the kitchens, on the way out". `python maps/build_maps.py` rebuilt SVG + PNG.
+- **Flow:** `kd-circle`, `ihb-snakefed`, `S12` (label, phase m6, summary); `python build_flow_page.py` rebuilt the page.
+- **INVENTIONS #120**; #5 marked superseded; #68 and #110 annotated.
+- **facts.yaml:** `tithe_two_heads` (forbids "three heads", "two ministers'", "Tithe minister", "the minister in the smoke", "Corval and the ministers", "head and two others"), `s12_corval`, `midnight_positions`; `corval_end_point` truth updated for TP68.
+- **Tests:** `tools/test_wp7.py` + 13 (`TestTithe2Heads` including a Facets-edition scan, `TestS12Corval`, `TestMidwifePositions`). No existing test encoded the old S12.
+
+### T7.13 resolved by TP65
+- Ministers are on no table. The midwife's approved position (T7.12 block) went into M/08 Table VIII–2 (midnight) and VIII–6, and F/08 Table IX–3 (I–V; Movement II notes the Undercurrent C glimpse).
+
+### Follow-up
+- **T7.25** (TP67: house half-masks; the Root still glows rose after midnight) added to TASKS as open; not applied here, because this run did not edit 04 B10/B11 or the Unmasking's dress.
+
+### Checks
+- From M/: lint 0; fact_check 0; bestiary 0 mismatches; pregen 0 issues; `pytest tools` **576 passed, 1 skipped** (563 + 1 at start). Root: `research/oraga_5e_sim` 34 passed. software/: docs consistency + no private canon 42 passed. No commit or staging.

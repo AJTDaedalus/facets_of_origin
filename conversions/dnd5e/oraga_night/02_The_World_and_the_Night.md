@@ -289,7 +289,7 @@ Circle's threat line, and is the likeliest person at the ball to see its tell.
 ministers call it "the Tithe of Hands." Learn what it does before it is proclaimed.
 
 **The catch:** Nothing is written down. Nothing ever is. The decree lives whole in
-three heads: Minister Corval's and two ministers'. Corval is incorruptible
+two heads: Raunu's and Minister Corval's. Corval is incorruptible
 by money. He is not incorruptible by kindness.
 
 **At midnight:** The decree lives only in the memories of men now trapped in a

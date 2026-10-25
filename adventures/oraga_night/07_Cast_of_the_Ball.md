@@ -147,8 +147,9 @@ stairs that reach the east wing, and he goes without needing to understand. He
 gathers the players nearest him, those who helped him first, and guides them by the
 service stair and the garden stair to get in front of the Radiant. A guide, never a
 fighter; he never reaches Veier and never meets Vell. Then he leaves them and leads
-his household out of the palace through the kitchens and the service passages;
-Movement VII finds him outside with them, counting his staff. If the players convinced him
+his household out of the palace through the kitchens and the service passages into
+the kitchen yard, inside the walls, where the Bought's perimeter holds them; Movement
+VII finds him there with them, counting his staff. If the players convinced him
 before midnight, he has already given them the wing's service door. His survival is
 Agenda 1's midnight payoff — the Tithe lives in his head.
 

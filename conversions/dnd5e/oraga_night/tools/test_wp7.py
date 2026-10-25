@@ -193,3 +193,75 @@ class TestGardenStairDoor:
 
     def test_real_chapters_are_clean(self, facts):
         assert not _real(facts, "garden_stair_door")
+
+
+class TestTithe2Heads:
+    """T7.24 / TP65: the Tithe lives in two heads, Raunu's and Corval's (both editions)."""
+
+    def test_three_heads_fires(self, facts):
+        text = "The decree lives whole in three heads: Minister Corval's and two ministers'.\n"
+        assert _hits(facts, "tithe_two_heads", text, "02_The_World_and_the_Night.md")
+
+    def test_old_s12_title_fires(self, facts):
+        text = "| S12 *(half)* | The Minister in the Smoke | Mv VII | B3 / B10 |\n"
+        assert _hits(facts, "tithe_two_heads", text, "09_The_Snakes.md")
+
+    def test_old_epilogue_row_fires(self, facts):
+        text = "| **Corval and the ministers** | The Tithe survives if any one of the three lives. |\n"
+        assert _hits(facts, "tithe_two_heads", text, "05_The_Longest_Night.md")
+
+    def test_new_wording_is_clean(self, facts):
+        text = ("The decree lives whole in two heads: Raunu's and Minister Corval's. Raunu's "
+                "ministers call it the Tithe of Hands.\n")
+        assert not _hits(facts, "tithe_two_heads", text, "02_The_World_and_the_Night.md")
+
+    def test_agenda_missing_is_a_hit(self, facts, tmp_path):
+        text = "### 1. The Circle's Reckoning\n\nThe decree lives whole in nobody's head.\n"
+        assert _req(facts, "tithe_two_heads", "02_The_World_and_the_Night.md", text, tmp_path)
+
+    def test_real_chapters_are_clean(self, facts):
+        assert not _real(facts, "tithe_two_heads")
+
+    def test_facets_edition_is_clean(self, facts):
+        root = TOOLS.parents[3] / "adventures" / "oraga_night"
+        hits = []
+        for p in sorted(root.glob("*.md")):
+            hits += _hits(facts, "tithe_two_heads", p.read_text(encoding="utf-8"), p.name)
+        assert not hits
+
+
+class TestS12Corval:
+    """T7.24 / TP66, TP68: S12 is Corval in the kitchens; the Bought hold the yard gate."""
+
+    def test_card_title_missing_is_a_hit(self, facts, tmp_path):
+        text = "## S12. The Minister in the Smoke *(half-card)*\n\nThe knives walk a man out.\n"
+        assert _req(facts, "s12_corval", "09_The_Snakes.md", text, tmp_path)
+
+    def test_kitchen_yard_missing_is_a_hit(self, facts, tmp_path):
+        text = '**"Corval. The stairs."** Movement VII finds him outside with the rest.\n'
+        assert _req(facts, "s12_corval", "05_The_Longest_Night.md", text, tmp_path)
+
+    def test_real_card_is_set_in_b10(self):
+        text = (TOOLS.parent / "09_The_Snakes.md").read_text(encoding="utf-8")
+        card = text[text.index("## S12. Corval in the Kitchens"):text.index("## S13.")]
+        assert "(B10)" in card and "never meets Vell" in card
+        assert "Two **Circle Hired Knives**" in card and "400 XP" in card
+        assert "minister" not in card.lower()
+
+    def test_map_badge_moved(self):
+        src = (TOOLS.parent / "maps" / "build_maps.py").read_text(encoding="utf-8")
+        assert '"The minister in the smoke"' not in src
+        assert '("S12", "Corval in the kitchens, on the way out")' in src
+
+
+class TestMidwifePositions:
+    """T7.13 / TP65: the midwife's approved positions; no minister is placed."""
+
+    def test_midwife_row_missing_is_a_hit(self, facts, tmp_path):
+        text = "**Table VIII–2: Midnight — Who Goes Where**\n\n| **Veier** | B9 | down the stair |\n"
+        assert _req(facts, "midnight_positions", "08_Handouts.md", text, tmp_path)
+
+    def test_real_tables_have_no_minister_rows(self):
+        text = (TOOLS.parent / "08_Handouts.md").read_text(encoding="utf-8")
+        assert "| **The midwife** |" in text
+        assert "minister |" not in text.lower()

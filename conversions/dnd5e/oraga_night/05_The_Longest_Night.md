@@ -189,9 +189,13 @@ brings them to Veier: the household moves her through the wing, and Vell meets h
 the foot of the garden stair, later. Corval never meets Vell.
 
 Once the characters are in front of the Radiant, Corval leaves them and leads his
-household out of the palace, through the kitchens and the service passages. The
-household who move Veier through the wing are not with him. Movement VII finds him
-outside with the rest, counting his staff (the read-aloud).
+household out of the palace, through the kitchens and the service passages, into the
+kitchen yard. The yard is inside the walls: nobody stands at its gate after midnight,
+but four Blades of the Bought's perimeter are outside it (card S3), and they hold the
+household there, alive and counted. The household who move Veier through the wing are
+not with him. Movement VII finds him in the kitchen yard with the rest, counting his
+staff (the read-aloud). If the Circle's heat is 3–4,
+its knives catch him in the kitchens on the way (card S12).
 
 If the characters convinced him before midnight (chapter IV, Undercurrent D), he has already given them the wing's service door, and they start
 the chase there, in position. Keep him alive if you can: the Tithe of Hands lives in
@@ -1060,7 +1064,7 @@ the faction does the frightened, sensible thing and gets its principal out. **He
 
 | Faction | Heat 0–2 | Heat 3–4 — where, and what the characters see | If nobody stops it | Card |
 |---|---|---|---|---|
-| **The Circle** | The knives get Callun out through the service passages | B3 → B10: two plain good coats half-carrying an old man the wrong way through the smoke | A Tithe-carrier leaves the palace in Circle hands (if the nursery was sold, the knives are at the east wing's service door instead, card S7) | **S12** |
+| **The Circle** | The knives get Callun out through the service passages | B10: two plain good coats walking Corval the wrong way through the dark service passages, his household behind him | Corval leaves the palace in Circle hands, and by dawn the Circle owns the Tithe (if the nursery was sold, the knives are at the east wing's service door instead, card S7) | **S12** |
 | **The Church** | The **Church Wardens** come down for the Prelate and get her out | B8: wardens coming down the dark-wing stair with a written record of the mist map, the slate wiped behind them | The Church has the map in writing, and the slate is wiped by dawn | **S8** |
 | **House Draunel** | Draunel gets out, and remembers what he saw | B3: three blades pulling a man out of a burning room while he shouts for the people still inside | Essin's cousins fight for him; Vorlain is not taken | **S13** |
 | **House Boranis** | Essin and the cousins go with Vorlain into the fire | B3, only if Draunel's heat is 3–4 too: cousins, blades out, between Vorlain and Draunel's men | As Draunel | **S13** |
@@ -1070,7 +1074,7 @@ the faction does the frightened, sensible thing and gets its principal out. **He
 **The cards.** Every line with a card runs from that card in chapter IX, from its
 read-aloud to its outs:
 
-- **The Circle, the delivery:** card S12.
+- **The Circle, the delivery:** card S12, Corval in the kitchens.
 - **The Church, the filing:** card S8, its after-midnight half.
 - **House Draunel and House Boranis, the fourth iron** (if the night breaks, Draunel
   means to take Vorlain in the chaos and hand him to the first sect guard through the
@@ -1122,6 +1126,9 @@ refusing to leave the city without her cousin or a body.
 > gone dark. Guests are shielding strangers. Outside, the thin old man who greeted you
 > by name at the gate is bleeding, his household around him, and he is counting his
 > staff like a man counting his own fingers.*
+
+*(If the Circle's knives carried Corval off, card S12, stop the box at "Guests are
+shielding strangers." He is not in the kitchen yard.)*
 
 Until the sect guard gets in through the front gate (B12, below), the
 characters are the only order in the palace. This Movement keeps the adventure's tone
@@ -1283,7 +1290,7 @@ out the last line if nobody danced with the Wept in Movement V.
 |---|---|
 | **Raunu lives** (⟨They save Raunu⟩) | In place of "dead in his shining hall, mid-sentence": *"alive in his shining hall, and already hunting"* |
 | **Maiven lives** | Add: *"The Thenya envoy will not leave the city without her cousin, or a body."* |
-| **Corval and the ministers** | The Tithe of Hands survives if any one of the three who carry it lives (chapter II, Agenda 1). If a minister left the fire in Circle hands (card S12), add: *"By dawn the Circle owns the Tithe of Hands."* |
+| **Corval and Raunu** | The Tithe of Hands survives if either of the two who carry it lives (chapter II, Agenda 1): Corval, or a saved Raunu. If Corval left the palace in Circle hands (card S12), add: *"By dawn the Circle owns the Tithe of Hands."* |
 | **Vorlain was taken** (card S13) | After "No one is ever charged", add: *"Not even the brother they handed to the sect guard as the culprit."* |
 | **The slate and the map** | If the wardens got their record of the mist map out (card S8), add: *"In a Church archive, a careful copy of a chief's great table says he was looking east."* |
 | **The Bought** | If a sergeant was captured, add: *"A captured sergeant, contract case and all, is the only thread anyone holds that leads east."* If the company was bought out, add: *"A captain of the Bought owes you, and wants to know who used his company's name."* |
@@ -1443,8 +1450,8 @@ else: **be generous.** A party that fought their way to holding the front gate
 against sixteen blades has earned the woman in Thenya wool getting past them.
 
 **⟨A snake gets what it came for.⟩** Some will, and that is
-history, not a divergence from it. The Church writing down the mist map, a
-minister leaving in Circle hands, Draunel's patience finally paying: none of it is
+history, not a divergence from it. The Church writing down the mist map, Corval
+leaving in Circle hands, Draunel's patience finally paying: none of it is
 recorded, because none of it was public, and all of it is the reason the story is
 already wrong by noon. Let the table find out in the aftermath which snakes fed: the
 ones that fed will be the ones who want to talk to the characters first.

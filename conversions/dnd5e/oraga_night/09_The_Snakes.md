@@ -168,7 +168,7 @@ how a party walks into it, turns it, or sets one snake on another.*
 ### The Merchant's Circle — Mistress Rhaza Callun
 
 **What they came for.** Raunu's next decree, which his ministers call the Tithe of Hands.
-It lives whole in exactly three heads, Minister Corval's and two ministers' (see chapter II,
+It lives whole in two heads, Raunu's and Minister Corval's (see chapter II,
 "The Eight Agendas", Agenda 1), and her knives' line runs through those heads. What she
 fears is an heir, for her margins: Raunu's politics outliving him, and the Vorlain
 chieftaincy the Circle had priced attractive never coming. Her want, fear and secret
@@ -188,7 +188,7 @@ Agenda 1, if anyone took it, and the other is these.
 | III | A knife waits in the Audience Hall line to see who is summoned; Callun buys what they heard | Compliments, a quiet question, coin, and a knife standing close | — |
 | IV | The third tray, then the two plates and "two years in the keeping": Callun's question. A knife leans on Anha in the service doorway — *who eats off the second plate?* | Anha's hands going still on the tray | **S7** |
 | V | A knife works the dark service run toward the east wing's service door with whatever Anha told him, which is less than he wants | A plain good coat where no guest has any reason to be | **S7** |
-| VI–VII | *Lights out.* Heat 0–2: the knives get Callun out through the service passages. Heat 3–4: paid on delivery, they deliver — they take one of the two ministers who carry the Tithe and walk him out through the smoke to her | Two coats half-carrying an old man the wrong way through the smoke | **S12** |
+| VI–VII | *Lights out.* Heat 0–2: the knives get Callun out through the service passages. Heat 3–4: paid on delivery, they deliver — they catch Corval in the kitchens as he leads his household out, and walk him out through the service passages to her | Two coats walking a thin old man the wrong way through the dark passages, his household behind him | **S12** |
 | **Heat 4** | *They come for you.* A character who turned or caught one of the knives tonight, or told Callun to her face what her knife did, is met in the service run by S7's knives, there or in the dark, steel out after midnight. **If the nursery was sold to her,** the knives go instead for the east wing's service door when the lights die, into the Radiant's path, to get at what is behind it; S12 does not happen. They never reach Veier: the household has her | A plain good coat waiting where that character will pass, or three of them moving toward the east wing instead of the gate | **S7** |
 
 **Walk into it.** The characters can follow the coat, or be in the service doorway
@@ -493,7 +493,7 @@ out of wanting it, and stays at 0 unless something new happens to it.
 
 | Faction | Starts | Rises (+1 each) | Falls | What heat 3–4 sets off |
 |---|---|---|---|---|
-| **The Circle** ☐☐☐☐ | 2 | The toast *(automatic, Mv IV)* · Callun's coin refused in Mv III · **to 4:** S7's clock filled, or the nursery sold to her | −1 for each knife turned or caught quietly · **to 0:** Agenda 1 delivered, or the Tithe told to Callun, or Callun told to her face what her knife did to an under-cook | **S12** — the knives take a minister through the smoke. *If the nursery was sold:* **S7** at the east wing's service door instead |
+| **The Circle** ☐☐☐☐ | 2 | The toast *(automatic, Mv IV)* · Callun's coin refused in Mv III · **to 4:** S7's clock filled, or the nursery sold to her | −1 for each knife turned or caught quietly · **to 0:** Agenda 1 delivered, or the Tithe told to Callun, or Callun told to her face what her knife did to an under-cook | **S12** — the knives take Corval in the kitchens. *If the nursery was sold:* **S7** at the east wing's service door instead |
 | **The Church** ☐☐☐☐ | 1 | The Radiant's blessing *(automatic, Mv IV)* · a warden refused or humiliated in front of guests · S8's tell shown to the table and not stepped on by midnight | −1 if Kovaun is given something true about the three gray masks to file · −1 if the wardens are turned back at the study door (S8) · **to 0:** Agenda 2's honest judgment delivered | **S8, in the dark** — the wardens carry the study out |
 | **House Draunel** ☐☐☐☐ | 1 | The toast *(automatic)* · Agenda 3, if one of the characters carries it, refused or failed · Iron 2 stopped without Draunel losing face (he reaches for the next iron) · S9's clock filled, on the terrace or offstage (card S9) | −1 if Draunel is embarrassed in front of guests · **to 0:** Agenda 3's "understanding" delivered | **S13** — the arrest in the fire |
 | **House Boranis** ☐☐☐☐ | 0 | Vorlain baited, or got drunk, by one of the characters · the appointment accepted *(automatic, Mv IV)* · Draunel's heat reaches 3 · a cousin beaten in public (S6) · S9's clock filled, on the terrace or offstage (card S9) | −1 each time the party helps Essin keep Vorlain sober and unbaited · −1 if S6 ends without a shout · −1 if S9 ends with nobody drawing · **to 0:** Essin warned of the appointment before Mv IV | **S13** — the cousins fight for Vorlain *(only if Draunel's heat is 3–4 too; otherwise they simply go into the fire with him)* |
@@ -504,7 +504,7 @@ out of wanting it, and stays at 0 unless something new happens to it.
 Church at 2, Draunel at 2, House Boranis at 1, Phern at 3 and the Thenya at 3. The
 Thenya's heat spends itself at the half-bell in Movement V (S10), and at midnight
 Maiven goes east whatever her heat. So by default **two** cards are live in the dark:
-S11, the Phern door, and S12, the Circle's minister in the smoke, plus the gate. A third
+S11, the Phern door, and S12, the Circle's knives taking Corval in the kitchens, plus the gate. A third
 goes live only if the table saw a line and let it go (S8's tell, the appointment left to
 happen).
 
@@ -578,7 +578,7 @@ Make sure the table sees those openings.
 | **S11** | The Phern Door | Mv VI | B2 → the service passages | Phern | 425 XP — under Low; the crush is the fight |
 | **S14** | The Attendant | Mv VI–VII | Wherever the party gets in an Uninvited's way | The Uninvited's servant | 3,900 XP — 2.6 times High while Focused; plays High while Idle |
 | S5 *(half)* | The Looters | Mv VI–VII | B7 / B3 | Tavva's crew | 550 XP — under Low |
-| S12 *(half)* | The Minister in the Smoke | Mv VII | B3 / B10 | The Circle | 400–600 XP — under Low |
+| S12 *(half)* | Corval in the Kitchens | Mv VI–VII | B10 | The Circle | 400–600 XP — under Low |
 | **S13** | The Arrest in the Fire | Mv VII | B3, burning | House Draunel and House Boranis | 1,100 XP — between Low and Moderate; plays Moderate |
 | **S3** | The Gate at Midnight | Mv VII | B12 | The Bought | 850 XP — between Low and Moderate; 1,950 if the captain fights, and he would rather talk |
 
@@ -1694,40 +1694,58 @@ jammed for the rest of the night. **Return to chapter V, and the beats.**
 
 ---
 
-## S12. The Minister in the Smoke *(half-card)*
+## S12. Corval in the Kitchens *(half-card)*
 
-***Where and when:*** Movement VII, the burning banquet galleries (B3) and the service
-passages beyond them. The Merchant's Circle, at heat 3–4 only, and never when the heat
-came from the nursery sale (the knives are at the east wing's service door instead; see
-the Merchant's Circle line).
+***Where and when:*** Movement VI, into VII: the kitchens and service passages (B10),
+once Corval has left the characters in front of the Radiant and is leading his
+household out of the palace (see chapter V, "Corval. The stairs."). The Merchant's
+Circle, at heat 3–4 only, and never when the heat came from the nursery sale (the
+knives are at the east wing's service door instead; see the Merchant's Circle line).
 
-**Read this when a character is in B3 or its service door:**
+**Read this when a character is in the kitchens or the service passages after Corval
+has left the stairs:**
 
-> *Two men in plain good coats are coming the wrong way through the smoke — toward the
-> service passages, not the gardens — with an older man between them, his feet not
-> quite keeping up. He is saying something under his breath, over and over, that sounds
-> like a list.*
+> *Two men in plain good coats are walking the thin old man who greeted you by name at
+> the gate down the service passage between them, a hand under each of his arms, his
+> feet not quite keeping up. His household is behind them in the dark. He is saying
+> something under his breath, over and over, that sounds like a list.*
 
-**What is happening.** The Tithe of Hands lives in three heads, and one of them belongs
-to a minister (see chapter II, "The Eight Agendas", Agenda 1). The knives were hired for the decree, paid on
-delivery. In the dark they have decided the simplest delivery is the man himself. They
-are walking him out through the smoke to Callun, and they mean him no harm; he is the
-fee.
+**What is happening.** The Tithe of Hands lives in two heads, Raunu's and Corval's (see
+chapter II, "The Eight Agendas", Agenda 1), and Raunu usually dies at midnight. The
+knives were hired for the decree, paid on delivery. In the dark they have decided the
+simplest delivery is the man himself. They caught Corval in the kitchens as he led his
+household out, and they are walking him toward the kitchen yard and its gate, to
+Callun. They mean him no harm; he is the fee. Corval is a guide and never a fighter,
+and his household are no fighters either. Saving him saves the Tithe.
 
-**Objective:** the minister's choice, not the Circle's.
+**Objective:** Corval's choice, not the Circle's.
 
-**No clock.** The fire is clock enough: B3 is Heavily Obscured by smoke beyond 10 feet,
-and a creature that starts its turn in the thick of it must succeed on a DC 10
-Constitution saving throw or lose its action coughing.
+**No clock.** The Bought are the party's time. The knives can't simply walk Corval out
+through the kitchen-yard gate: they have to bargain or fight their way past the four
+Blades outside it, and while they do, the party can catch them.
 
-**Enemies.** Two **Circle Hired Knives**, both carrying the minister (400 XP, under
-Low).
+**Terrain as rules.** *(see map VIII–5, chapter VIII)*
+- *The service run* is 5 feet wide: one creature abreast, and a creature can't move
+  through an enemy's space. Getting past someone is a DC 13 Dexterity (Acrobatics)
+  check, or a Shove.
+- *Dark.* After the lights the passages are Darkness, except where one lamp in three
+  still burns (Dim Light) or a ward flares (see chapter V, "The Palace After Midnight").
+- *Smoke.* Where the run passes the banquet galleries' service doors, the smoke from
+  B3 comes through: Heavily Obscured beyond 10 feet, and a creature that starts its
+  turn in it must succeed on a DC 10 Constitution saving throw or lose its action
+  coughing.
+- *His household* is in the run behind him. Nobody targets them, and they take no part.
+- *The kitchen yard* is inside the walls. Nobody stands at its gate after midnight, but
+  four **Bought Blades** of the perimeter are outside it (card S3, "the other twelve are
+  holding the perimeter"), and they hold everyone who comes out there, alive and counted.
 
-*At heat 4:* a third knife, a few paces ahead in the smoke, finding the way (600 XP,
+**Enemies.** Two **Circle Hired Knives**, both holding Corval (400 XP, under Low).
+
+*At heat 4:* a third knife, a few paces ahead in the dark, finding the way (600 XP,
 still under Low).
 
 **Tactics.** As S7: they draw only if a character does, and they aim for hands and
-legs. They mean the minister no harm; he is the fee.
+legs. They mean Corval no harm; he is the fee.
 
 **Morale.** The knives break when half of them are down, or on Callun's word. (After
 midnight they hold longer than in S7: they are paid on delivery, and this is delivery.)
@@ -1735,28 +1753,34 @@ midnight they hold longer than in S7: they are paid on delivery, and this is del
 **Outs.**
 - Tell them Callun would be horrified. She would; *Paid on Delivery* — and anybody
   close enough to her in the Court to prove it.
-- Take him off their hands the helpful way: point them at the real way out and offer to
-  carry him. A DC 13 Charisma (Persuasion) check.
-- Let them. They are getting a man out of a fire, after all. By dawn the Circle owns
-  the Tithe, and the Tithe survives the night, which the character with Agenda 1 may
-  prefer. **(no XP)**
+- Take him off their hands the helpful way: tell them the Bought outside the yard gate
+  will take him off them anyway, and offer to see the old man to his household yourselves.
+  A DC 13 Charisma (Persuasion) check.
+- Let them. They are getting an old man out of a burning palace, after all. By dawn
+  the Circle owns the Tithe, and the Tithe survives the night, which the character
+  with Agenda 1 may prefer. **(no XP)**
 - Outbid them, as in S7.
 
 **Treasure.** Each knife's advance (2d6 GP) (see chapter X, "The Night's Loot").
 
 **Rewards.** 400–600 XP, divided equally among the characters. Heroic Inspiration
-(Table I–3, "a fight ended by an out"): to whoever gets the minister out on his own
-feet, going where he chooses.
+(Table I–3, "a fight ended by an out"): to whoever gets Corval out on his own feet,
+going where he chooses.
 
 **Adjusting the Encounter.**
-- *Four characters:* three knives, two carrying and one a few paces ahead (600 XP);
+- *Four characters:* three knives, two holding him and one a few paces ahead (600 XP);
   at heat 4, the fourth knife, all the Circle brought (800 XP).
 - *Five characters:* four knives.
 - *Four at 3rd level:* two knives, as printed (400 XP); three at heat 4.
 - *Four at 5th level:* four knives, and the smoke calls for a DC 13 Constitution saving throw.
 
-**Development.** However it ends, the Tithe survives if the minister does. Agenda 1's
-midnight note (see chapter II, "The Eight Agendas") applies. **Return to Movement VII.**
+**Development.** If Corval is saved, he leads his household into the kitchen yard and
+Movement VII proceeds as printed: its read-aloud finds him there, counting his staff,
+and the Tithe survives with him (Agenda 1's midnight note; see chapter II, "The Eight
+Agendas"). If nobody catches them, the knives buy or force their way past the Bought at
+the yard gate and carry him off: the Circle owns the Tithe by dawn (Table V–8),
+and Movement VII's read-aloud stops at "Guests are shielding strangers.": he is not
+in the yard. Either way he never meets Vell. **Return to chapter V.**
 
 ---
 

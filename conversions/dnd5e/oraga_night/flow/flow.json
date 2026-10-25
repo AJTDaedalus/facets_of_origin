@@ -682,7 +682,7 @@
    "label": "Snakes in the dark: the Circle's delivery",
    "phase": "m6",
    "kind": "snake",
-   "summary": "Live by default (the Circle starts at heat 2; the toast makes 3). Heat 3–4: Hired Knives walk a Tithe-carrying minister out through the smoke to Callun. If the nursery was sold, they go for the east wing's service door instead (S7). Heat 0–2: they just get Callun out.",
+   "summary": "Live by default (the Circle starts at heat 2; the toast makes 3). Heat 3–4: Hired Knives catch Corval in the kitchens as he leads his household out, and walk him off through the service passages to Callun; the Tithe lives in his head and Raunu's. If the nursery was sold, they go for the east wing's service door instead (S7). Heat 0–2: they just get Callun out.",
    "ref": "05_The_Longest_Night.md#the-snakes-in-the-dark; 09_The_Snakes.md (S12)",
    "optional": true,
    "faction": "circle"
@@ -952,7 +952,7 @@
    "label": "⟨A snake gets what it came for⟩",
    "phase": "end",
    "kind": "ending",
-   "summary": "The Church files its record of the mist map, a Tithe minister leaves in Circle hands. History, unrecorded: why the story is wrong by noon.",
+   "summary": "The Church files its record of the mist map, Corval leaves in Circle hands. History, unrecorded: why the story is wrong by noon.",
    "ref": "05_The_Longest_Night.md#if-history-breaks",
    "optional": true,
    "faction": null
@@ -1029,10 +1029,10 @@
   },
   {
    "id": "S12",
-   "label": "S12. The Minister in the Smoke",
-   "phase": "m7",
+   "label": "S12. Corval in the Kitchens",
+   "phase": "m6",
    "kind": "fight",
-   "summary": "Circle knives walk a Tithe-carrying minister out through the smoke. The minister's choice, not the Circle's.",
+   "summary": "Circle knives walk Corval off through the dark service passages (B10) as he leads his household out. Saving him saves the Tithe; if they get him out, the Circle owns it by dawn. Corval's choice, not the Circle's.",
    "ref": "09_The_Snakes.md (S12)",
    "optional": true,
    "faction": "circle"

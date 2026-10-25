@@ -342,8 +342,8 @@ are none anywhere: the room thinks in crystal.
   straight onto their own slate.
 *(Nothing here explains the instruments or the mist-lines. Operational hint only:
 Raunu has been studying something far away to the east, and preparing. Nothing of
-Agenda 1's decree is here; the Tithe of Hands exists only in Corval's memory and two
-ministers'.)*
+Agenda 1's decree is here; the Tithe of Hands exists only in Corval's memory and
+Raunu's.)*
 
 *The table and the slate matter to someone else, too: the written word belongs to the
 Church, and its Wardens want this room filed (see the Church's line in "The Snakes
@@ -828,8 +828,8 @@ clearing the decks. For what, neither Corval's memory nor the testament says.
 happened. They know the skeleton staff who remain are the ones Raunu judged he
 could not make leave. Corval, Anha, the nine inward-facing guards: the volunteers.
 Every one of them saved is a coda this thread earns. *(And it tells them what the
-Circle's knives are really doing if they are seen half-carrying an old man the wrong way
-through the smoke. See chapter V.)*
+Circle's knives are really doing if they are seen walking Corval the wrong way through
+the service passages. See chapter V.)*
 
 ### Undercurrent C — The Third Plate *(if you have time)*
 *Two people live in the east wing. The kitchen sends up meals for two, and the usual

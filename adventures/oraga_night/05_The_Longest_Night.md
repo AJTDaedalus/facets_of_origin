@@ -104,7 +104,9 @@ her at the foot of the garden stair. Corval never meets Vell. If the
 players convinced him before midnight, he has already given them the wing's service
 door, and they start the chase there. Once the players are in front of the Radiant,
 Corval leaves them and leads his household out of the palace, through the kitchens and
-the service passages (the household who move Veier are not with him). Keep him alive
+the service passages, into the kitchen yard. It is inside the walls, and the Bought's
+perimeter outside its gate holds them there, alive and counted (the household who move
+Veier are not with him). Keep him alive
 if you can: the Tithe of Hands lives in his head (Agenda 1).
 
 > **Sidebar — Crystals gutter:** Within a stone's throw of an Uninvited, a

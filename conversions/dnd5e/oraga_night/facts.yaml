@@ -999,7 +999,8 @@ facts:
     truth: >-
       TP58 (replaces TPN-36a): once the characters are in front of the Radiant, Corval leaves
       them and leads his household out of the palace, through the kitchens and the service
-      passages. Movement VII finds him outside with them, counting his staff. The household who
+      passages, into the kitchen yard (TP68: inside the walls, held there by the Bought's
+      perimeter). Movement VII finds him there with them, counting his staff. The household who
       move Veier through the wing (TP40) are not with him. He never meets Vell.
     source: owner TP58 (2026-10-25)
     phrases: ["leads his household out of the palace, through the kitchens and the service passages"]
@@ -1042,6 +1043,84 @@ facts:
         pattern: '\*The garden stair.s top door\* is shut and locked from inside'
         anchor: 'S10. Over the Wall'
         why: TP60 — S10's terrain says the door is locked at the half-bell
+
+  - id: tithe_two_heads
+    truth: >-
+      TP65: the two Tithe ministers are cut as carriers. The Tithe of Hands lives whole in two
+      heads, Raunu's and Corval's, in both editions. Generic "ministers" (B4's screen, Callun's
+      "Raunu's ministers call it…", Vorlain's lines) stay as background.
+    source: owner TP65 (2026-10-25); T7.24
+    phrases: ["two heads: Raunu's and Minister Corval's"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\bthree heads\b|\btwo ministers.|\bTithe[- ]carrying minister\b|\bTithe minister\b|\bthe minister in the smoke\b|\bCorval and the ministers\b|\bhead and two others\b'
+        why: TP65 — the Tithe lives in two heads, Raunu's and Corval's; no minister carries it
+      - type: require
+        file: 02_The_World_and_the_Night.md
+        pattern: "two heads: Raunu's and Minister Corval's"
+        anchor: 'The Circle.s Reckoning'
+        why: TP65 — Agenda 1 names the two heads
+      - type: require
+        file: ../../../adventures/oraga_night/03_Masks_and_Agendas.md
+        pattern: "two heads: Raunu's and Minister Corval's"
+        anchor: 'The Circle.s Reckoning'
+        why: TP65 — the Facets edition's Agenda 1 agrees
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: '\| \*\*Corval and Raunu\*\* \|'
+        anchor: 'Table V–8'
+        why: TP65 — Table V–8's Tithe row is Corval and Raunu
+
+  - id: s12_corval
+    truth: >-
+      TP66 / TP68: card S12 targets Corval. At Circle heat 3–4 the two hired knives catch him in
+      the kitchens and service passages (B10) as he leads his household out (TP58). The kitchen
+      yard is inside the walls; nobody stands at its gate, but four Bought Blades of S3's
+      perimeter are outside it, so the knives must bargain or fight past them. Saved, Movement
+      VII proceeds as printed; carried off, the Circle owns the Tithe by dawn. He never meets Vell.
+    source: owner TP66, TP68 (2026-10-25); T7.24
+    phrases: ["## S12. Corval in the Kitchens"]
+    checks:
+      - type: require
+        file: 09_The_Snakes.md
+        pattern: '## S12\. Corval in the Kitchens'
+        anchor: 'S12'
+        why: TP66 — the card is retitled for Corval
+      - type: require
+        file: 09_The_Snakes.md
+        pattern: 'bargain or fight their way past the four\s+Blades outside it'
+        anchor: 'S12. Corval in the Kitchens'
+        why: TP68 — the Bought at the kitchen-yard gate buy the party time
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: 'Movement VII finds him in the kitchen yard'
+        anchor: 'Corval. The stairs.'
+        why: TP68 — Movement VII's "outside" is the kitchen yard, inside the walls
+
+  - id: midnight_positions
+    truth: >-
+      TP65 approves the T7.12 midwife position: behind Veier's door all night (glimpsed once
+      crossing the gallery at the end of Movement II, Undercurrent C), down the private stair
+      with the household at midnight, met by no character, her fate after that unstated
+      (06 "gone by dawn, never found"). The Tithe ministers are not placed on any table.
+    source: owner TP65 (2026-10-25); T7.12, T7.13
+    phrases: ["The midwife"]
+    checks:
+      - type: require
+        file: 08_Handouts.md
+        pattern: '\| \*\*The midwife\*\* \| B9, behind Veier.s door with her \|'
+        anchor: 'Table VIII–2'
+        why: TP65 — the midwife's midnight row
+      - type: require
+        file: 08_Handouts.md
+        pattern: '\| The midwife \| B9, behind Veier.s door \|'
+        anchor: 'Table VIII–6'
+        why: TP65 — the midwife's Movements I–V row
+      - type: require
+        file: ../../../adventures/oraga_night/08_Handouts.md
+        pattern: '\| The midwife \| B9, behind Veier.s door \|'
+        anchor: 'Where Everyone Stands'
+        why: TP65 — the Facets edition's position table agrees
 
 maps:
   court:          # B2 (05 General Features, Sizes)

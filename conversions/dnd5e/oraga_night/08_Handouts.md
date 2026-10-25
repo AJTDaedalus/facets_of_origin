@@ -22,8 +22,8 @@ own. Print the first three pages and the tracker, and run the night from them.*
 | 1:55 | **IV. Toast** (25) | Raunu at the high table: *"At the Unmasking I will have something to say"*; **two plates**; gone | The mews scream, then silence | Turns to follow the music | S7 begins |
 | 2:20 | **V. Hour of Spirits** (40) | Dead Dance; quarter-bells; the S9 appointment at the first; Vell to the river gate; east wing doubled | *"You dance like my daughter would have."* | Watches the party, loses them to a glint | **One per group,** sized to who walks in (alone: the card's *One character* line): S2 · S7 · S8 · S9 · S10 |
 | 3:00 | *Break* (10) | As the bells ring midnight | | | |
-| 3:10 | **VI. Unmasking** (50) | Lights die **mid-sentence**; the attack; the dais; the Crossing; the leash takes the three once the boat is clear | — | Sets down the cloak; stands by the three | S11 · **S14** if they interfere · S8 · S5 |
-| 4:00 | **VII. Longest Night** (40) | Fire, rescue, the gate; **then** the last bell (at the latest, when S3's sect-guard clock fills); word of other attacks with the sect guard | — | — | **S3** · S12 · S13 · S5 · S14 |
+| 3:10 | **VI. Unmasking** (50) | Lights die **mid-sentence**; the attack; the dais; the Crossing; the leash takes the three once the boat is clear | — | Sets down the cloak; stands by the three | S11 · **S14** if they interfere · S8 · S5 · S12 |
+| 4:00 | **VII. Longest Night** (40) | Fire, rescue, the gate; **then** the last bell (at the latest, when S3's sect-guard clock fills); word of other attacks with the sect guard | — | — | **S3** · S13 · S5 · S14 |
 | 4:40 | **Epilogue** (10) | Chapter V read-aloud; "what do you carry out?"; **5th level** | | | |
 
 **Checkpoints:** the toast by **2:15**; midnight by **3:15**. If you are behind, cut B13,
@@ -61,8 +61,9 @@ once before midnight.)*
 | **The Attendant** | Beside the three | Idle until the party gets in the way; then Focused whenever one of the three has no Delay → **S14** |
 | **Raunu** | The dais | Spends his last charge sealing doors behind Veier; dies there, by his own choice |
 | **Veier** | B9 | Wounded once; the household brings her down the private stair to Vell; out the river gate (**by default, even if no player character is there**) |
+| **The midwife** | B9, behind Veier's door with her | Goes with the household as it brings Veier down the private stair; no character meets her. Where she goes after the stair, the book does not say |
 | **Vell** | The river gate (B5) | Climbs back to the foot of the garden stair to meet her → the river gate and the boat |
-| **Corval** | The Court, sent to the stairs by Raunu's last order | Gathers the characters nearest him (those who helped him first) → service stair, or up the garden stair while the terrace is empty, in front of the Radiant; then leads his household out of the palace through the kitchens and the service passages. A guide, never a fighter; never reaches Veier or meets Vell. Alive, he is Agenda 1's payoff |
+| **Corval** | The Court, sent to the stairs by Raunu's last order | Gathers the characters nearest him (those who helped him first) → service stair, or up the garden stair while the terrace is empty, in front of the Radiant; then leads his household out of the palace through the kitchens and the service passages into the kitchen yard, inside the walls, where the Bought's perimeter holds them (S12 if Circle heat is 3–4). A guide, never a fighter; never reaches Veier or meets Vell. Alive, he is Agenda 1's payoff |
 | **The nine honor guards** | Seven to the dais, and stay; two hold the east-wing doors (four, and five to the dais, if the wing was forced; Table VIII–7) | — |
 | **The Bought** | The outer gate shut from outside (B12) | Hold it until the front gate is decided (S3) |
 | **Corro** | Moving three seconds before the dark | Follow him and live. S11 if Phern heat is 3–4 |
@@ -208,7 +209,7 @@ the wicket in its left leaf; the cell and the gatehouse stair, which climbs to a
 and then to the gate-walk 15 feet up; the outer stair down to Gate Street; where the Bought
 stand at midnight. The section below the plan gives the heights.*
 
-**Map VIII–3: The Crystal Court** *(B2, B3; cards S1, S11, S12, S13)*
+**Map VIII–3: The Crystal Court** *(B2, B3; cards S1, S11, S13)*
 
 ![Map VIII–3: The Crystal Court and the banquet galleries](maps/map_viii_3_court.svg)
 
@@ -226,7 +227,7 @@ the gallery side (S11), open at floor level.*
 their balustrades and end stairs, the foot of the garden stair, the lower garden and the river
 gate. A profile gives the drops.*
 
-**Map VIII–5: The East Wing and the Service Run** *(B9, B10; cards S2, S4, S7, S10)*
+**Map VIII–5: The East Wing and the Service Run** *(B9, B10; cards S2, S4, S7, S10, S12)*
 
 ![Map VIII–5: The east wing and the service run](maps/map_viii_5_east_wing.svg)
 
@@ -263,7 +264,7 @@ snake.*
 
 | Faction | Heat | Starts | Rises (+1) — ✱ automatic | Falls | At heat 3–4 | Heat 4: they come for |
 |---|---|---|---|---|---|---|
-| **The Circle** | ☐☐☐☐ | 2 | ✱ the toast · Callun's coin refused (Mv III) · **to 4:** S7's clock filled, or the nursery sold to her | −1 per knife turned or caught quietly · **to 0:** Agenda 1 delivered, the Tithe told to Callun, or Callun told what her knife did to an under-cook | **S12** *(nursery sold: S7 at the east wing's service door instead)* | Whoever turned or caught a knife, or told Callun: S7's knives |
+| **The Circle** | ☐☐☐☐ | 2 | ✱ the toast · Callun's coin refused (Mv III) · **to 4:** S7's clock filled, or the nursery sold to her | −1 per knife turned or caught quietly · **to 0:** Agenda 1 delivered, the Tithe told to Callun, or Callun told what her knife did to an under-cook | **S12**, Corval taken in the kitchens *(nursery sold: S7 at the east wing's service door instead)* | Whoever turned or caught a knife, or told Callun: S7's knives |
 | **The Church** | ☐☐☐☐ | 1 | ✱ the Radiant's blessing · a warden refused or humiliated before guests · S8's tell shown and not stepped on by midnight | −1 if Kovaun is given something true to file about the gray masks · −1 if the wardens are turned back at the study door (S8) · **to 0:** Agenda 2 delivered | **S8**, in the dark | Whoever refused or humiliated a warden, or turned them back: two wardens, to the chapel (they detain) |
 | **House Draunel** | ☐☐☐☐ | 1 | ✱ the toast · Agenda 3, if one of the characters carries it, refused or failed · Iron 2 stopped without Draunel losing face · S9's clock filled (on the terrace or offstage) | −1 if Draunel is embarrassed before guests · **to 0:** Agenda 3 delivered | **S13** | Whoever embarrassed Draunel or spent Iron 2: S9's duelists, on the terrace |
 | **House Boranis** | ☐☐☐☐ | 0 | ✱ the appointment accepted (Mv IV) · Vorlain baited, or drunk, by one of the characters · Draunel's heat reaches 3 · a cousin beaten in public (S6) · S9's clock filled (on the terrace or offstage) | −1 each time the party helps Essin keep Vorlain sober · −1 if S6 ends quietly · −1 if S9 ends with nobody drawing · **to 0:** Essin warned of the appointment before Mv IV | **S13**, if Draunel is also 3–4 | Whoever baited Vorlain or beat a cousin: S6, without Essin |
@@ -283,6 +284,7 @@ the half-bell in Movement V (S10), so by default two cards are live in the dark,
 |---|---|---|---|---|---|
 | Raunu | *(unseen — B8/B9)* | *(unseen)* | high gallery glimpse, then B4 | the high table — the toast, two plates, gone to B9 | B9 with Veier; to the dais at the bells |
 | Veier | B9 | B9 | B9, behind the door (Agenda 4: her voice) | B9, behind the door (Agenda 4: her hand takes the ring) | B9, guard doubled |
+| The midwife | B9, behind Veier's door | B9; glimpsed once crossing the gallery at the end of II (Undercurrent C) | B9, behind Veier's door | B9, behind Veier's door | B9, behind Veier's door |
 | Vorlain | B2 | B3 wine court | B3, watching the audiences | B2 — watch his face | B3, drinking harder |
 | Essin | with Vorlain | with Vorlain | with Vorlain | with Vorlain, not smiling | B5 edge, alone — the S9 appointment |
 | Corval | B1 gate | everywhere | B1/B2, fetching guests | B2 | doubles the east-wing guard |
@@ -375,7 +377,7 @@ Agendas"); these cards carry only what the character knows.*
 
 **1. THE CIRCLE'S RECKONING** — *They call it "the Tithe of Hands." Learn what the
 chief's new decree does before it is proclaimed. The Circle pays for foresight.*
-*Nothing is written down; the decree lives in Minister Corval's head and two others'.
+*Nothing is written down; the decree lives in Minister Corval's head and the chief's.
 Corval cannot be bought.* **Pays:** 100 GP in Circle silver, on delivery.
 
 **2. THE PRELATE'S QUESTION** — *One question, answered honestly, and the Church
