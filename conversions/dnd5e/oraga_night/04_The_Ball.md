@@ -923,7 +923,8 @@ characters act on it:
   to everything, thanks them with terrible gentleness, and does not act. *"I know,"
   he says. "You noticed. That matters more than you yet understand. Enjoy the ball
   — and stay near the walls after the bells."* (He has understood for one Movement
-  longer than the characters. What he is already doing about it is chapter V.)
+  longer than the characters. What he is already doing about it is chapter V: the east
+  wing kept sealed around Veier, and his two crystals.)
 - **Confronting the three directly** gets perfect, wrong courtesy. If pressed to a
   scene, they simply leave it, through the crowd, unhurried, unfindable for a
   Movement, and the accuser stands in the wreckage of their own credibility.
@@ -1151,7 +1152,7 @@ Minister Corval approaches a guest and says the sentence nobody expected:
 *"The master will see you."*
 
 Inside the vast, bare hall: one chair on the dais,
-occupied, and a long walk toward it. Raunu summons four guests all night.
+occupied, and a long walk toward it. Raunu publicly summons four guests all night.
 **At least two should be player characters, walked in together** (see "Running a
 Scattered Party"); with four or more players, a second summons can bring two more. He chooses by
 whatever drew his attention, not by rank: an agenda that brushed his interests, a kindness

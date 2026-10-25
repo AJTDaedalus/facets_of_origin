@@ -171,9 +171,9 @@ after X.
 | T6.15 | WP6 | done | S11 door XP, balustrade, non-lethal, *Sleep* |
 | T6.16 | WP6 | open | Commit WP6 |
 | T6.17 | WP6 | done | TP57: strip the dial |
-| T7.1 | WP7 | open | Propagate TP11 |
+| T7.1 | WP7 | done | Propagate TP11 |
 | T7.2 | WP7 | done | The Root (TP8, TP17, TP18) |
-| T7.3 | WP7 | open | The garden doors (TP9) |
+| T7.3 | WP7 | done | The garden doors (TP9) |
 | T7.4 | WP7 | done | `facts.yaml`: midnight wing routes |
 | T7.5 | WP7 | done | Agenda 4's midnight note (TP13) |
 | T7.6 | WP7 | done (option C) | Dinner for Two, Undercurrent C, 07 Veier, S10 escort |
@@ -182,21 +182,22 @@ after X.
 | T7.9 | WP7 | done | Vell's sword (TP19) |
 | T7.10 | WP7 | done | "Both rivers, one spring" note (TP20) |
 | T7.11 | WP7 | done (polish A + B) | Second Clause cut (TP21); the contract void |
-| T7.12 | WP7 | open | Draft midwife and minister positions (TP23) |
+| T7.12 | WP7 | done (sent to owner; T7.13 waits) | Draft midwife and minister positions (TP23) |
 | T7.13 | WP7 | ⛔ OWNER | Apply approved positions (TP23) |
 | T7.14 | WP7 | ☑ 2026-10-24 (TP46; `pregnancy_secret` guard added) | Aftermath: the Circle knows (TP24) |
-| T7.15 | WP7 | open | Vell's midnight route |
+| T7.15 | WP7 | done | Vell's midnight route |
 | T7.16 | WP7 | done (polish A + B) | Agenda 6's reveal |
-| T7.17 | WP7 | open (after WP4) | Endings box; the dream line |
-| T7.18 | WP7 | open | Agenda 3 completion; Agenda 2 mechanism |
-| T7.19 | WP7 | open | Patron's Errand; Corval's doubling; "publicly" |
-| T7.20 | WP7 | open | Slingers at midnight |
+| T7.17 | WP7 | done | Endings box; the dream line |
+| T7.18 | WP7 | done | Agenda 3 completion; Agenda 2 mechanism |
+| T7.19 | WP7 | done | Patron's Errand; Corval's doubling; "publicly" |
+| T7.20 | WP7 | done | Slingers at midnight |
 | T7.21 | WP7 | done | The Radiant's chase line (L-091) |
 | T7.22 | WP7 | open | Commit WP7 |
+| T7.23 | WP7 | done | TP61: cut the heat-4 finish |
 | T8.1 | WP8 | open | `facts.yaml`: gallery geometry and residue values |
 | T8.2 | WP8 | open | Redraw VIII–3; sightlines |
 | T8.3 | WP8 | open (after T7.4) | Map residue; ward-points; the sealed doors |
-| T8.4 | WP8 | ⛔ OWNER | Garden-stair top door; S10 terrain |
+| T8.4 | WP8 | done (TP60) | Garden-stair top door; S10 terrain |
 | T8.5 | WP8 | open | S4 on a gate draw |
 | T8.6 | WP8 | open | Commit WP8 |
 | T10.1 | WP10 | open | NPC saves; casting as steel |
@@ -233,7 +234,7 @@ after X.
 | T11.12 | WP11 | open | Final checks and commit |
 
 **Counts:** WP1 4 · WP2 6 · WP3 14 · WP4 17 · WP5 12 · WP6 16 · WP7 22 · WP8 6 · WP9 13 · WP10 7 ·
-WP11 12 = **129 tasks**. **⛔ 3:** OWNER 3 (T7.13, T8.4, T11.11; T7.8 and T7.14 answered by TP39 and TP46); the 4 confirm items and E1 were answered 2026-10-22
+WP11 12 = **129 tasks**. **⛔ 2:** OWNER 2 (T7.13, T11.11; T8.4 answered by TP60; T7.8 and T7.14 answered by TP39 and TP46); the 4 confirm items and E1 were answered 2026-10-22
 (confirm: T4.11, T6.12, T7.4, T7.21; escalation: T7.6).
 
 **Run order** (the ledger's §7): WP1 → WP3 → WP2 (T2.1–T2.5) → WP4 + WP5 (T5.1–T5.2 before T4.5) →
@@ -947,7 +948,7 @@ T4.14).
 - **Checks:** SA; `pytest research/oraga_5e_sim`.
 
 ### ⛔ OWNER follow-ups from WP6 (2026-10-25; the tasks above are done within the printed canon)
-- **W1 (rosters capped by headcount).** Six cards cannot reach DESIGN §2.2's targets (before
+- **W1 (rosters capped by headcount).** *Answered: TP62, printed headcounts stand.* Six cards cannot reach DESIGN §2.2's targets (before
   midnight Low 750 / Moderate 1,125; after midnight Moderate 1,125 / High 1,500) without people the
   book does not put there: S1 (six Feuding Kinsmen, 175 XP), S2 and S5 (Tavva's crew of four: 650
   at most), S6 (Essin's three cousins: 600 at most), S11 (Phern's "two or three" bodyguards: 625 at
@@ -955,7 +956,7 @@ T4.14).
   may these fights draw extra unnamed hands from "the season's hired swords" idling at the edge of
   the Gatehouse Court (09's opening), to reach the budgets, or do they stay under their targets
   with honest labels, as the text now prints?
-- **W2 (lethality under TP57).** TP57 kept the Sharp rule that a heat-4 snake finishes a downed
+- **W2 (lethality under TP57).** *Answered: TP61, the finish is cut (T7.23).* TP57 kept the Sharp rule that a heat-4 snake finishes a downed
   character who crossed it, and the crowd rule doesn't reach snake fights. In the re-sim, a heat-4
   card kills a character 4–27% of the time (S13 at heat 4: 14–27%, against 1–2% without the
   finish), and the worst-case chain S14 → S13 (heat 4) → S3 kills someone 26–63% of the time.
@@ -970,7 +971,7 @@ T4.14).
 
 ## WP7: Logic fixes (TP8, TP9, TP11, TP13, TP14, TP17–TP21, TP23, TP24)
 
-### ☐ T7.1 Propagate TP11 *(L-024, `CANON` `FACTS`)*
+### ☑ T7.1 Propagate TP11 *(L-024, `CANON` `FACTS`)*
 - **Do:** first add `facts.yaml` fact `raunu_plan`: Raunu meant to keep Veier in the sealed east
   wing until the birth. Forbid "send(s) her (away|off) by boat" and similar. Then:
   - add the one-line plan to 07 Raunu and 07 Veier;
@@ -999,7 +1000,7 @@ T4.14).
 - **Accept:** the guard is clean in both editions. LOGIC P2-12's contradiction is gone.
 - **Checks:** SA+F. **Time:** 30 min.
 
-### ☐ T7.3 The garden doors (TP9) *(L-026, `FACTS`)*
+### ☑ T7.3 The garden doors (TP9) *(L-026, `FACTS`)*
 - **Do:** first add `facts.yaml` fact `garden_doors`: the Hollow's *Post* holds the main doors and
   the Court's garden doors. Until he turns east or is Stopped or Ended, the crowd leaves only by
   the service doors and the gallery-side door. Then:
@@ -1109,7 +1110,7 @@ T4.14).
 - **Accept:** the guard is clean, and the phrase appears 0 times in either edition.
 - **Checks:** SA+F. **Time:** 20 min.
 
-### ☐ T7.12 Draft midwife and minister positions (TP23) *(L-087)*
+### ☑ T7.12 Draft midwife and minister positions (TP23) *(L-087)*
 - **Do:** propose a midnight position for the midwife and for "the elder" and "the younger" Tithe
   minister, unnamed, using only rooms on the existing maps and printed movements (06:28–29;
   02:294–296; Agenda 1; S12; Corval's line). Under TP13, the midwife's position must not give the
@@ -1134,7 +1135,7 @@ T4.14).
   out". The midnight beat itself is T6.3.
 - **Checks:** SA+F. **Time:** 10 min.
 
-### ☐ T7.15 Vell's midnight route *(L-090, `CANON`)*
+### ☑ T7.15 Vell's midnight route *(L-090, `CANON`)*
 - **Do:** add one line at 08:42 and 05:171–173: from the river gate he climbs back to the foot of
   the garden stair to meet her. Check it against TP12 (the boat is unchanged) and TP13 (he and the
   household move her).
@@ -1149,7 +1150,7 @@ T4.14).
   applicable.
 - **Checks:** SA (+F). **Time:** 15 min.
 
-### ☐ T7.17 Endings box; the dream line *(L-056; open after WP4)*
+### ☑ T7.17 Endings box; the dream line *(L-056; open after WP4)*
 - **Do:** add an endings box to 05:1059–1072 setting each printed state variable against one
   replacement sentence: Raunu (incl. TP16's Raunu-lives), Maiven, Corval and the minister,
   Vorlain, slate and drawer, the Bought, the Wept looked back, the Hollow sent home, the Last
@@ -1158,7 +1159,7 @@ T4.14).
 - **Accept:** every replacement sentence uses printed outcomes only.
 - **Checks:** SA. **Time:** 25 min.
 
-### ☐ T7.18 Agenda 3 completion; Agenda 2 mechanism *(L-059, L-092)*
+### ☑ T7.18 Agenda 3 completion; Agenda 2 mechanism *(L-059, L-092)*
 - **Do:**
   - **Agenda 3:** any drunk line, carried to Draunel and *framed* as an understanding (Deception
     DC 13 against Draunel), counts (02:325–330; 09:291, 470).
@@ -1167,7 +1168,7 @@ T4.14).
 - **Files:** `M/02_The_World_and_the_Night.md`, `M/09_The_Snakes.md`, `M/08_Handouts.md`.
 - **Checks:** SA. **Time:** 15 min.
 
-### ☐ T7.19 Patron's Errand; Corval's doubling; "publicly" *(L-060, L-085, L-088)*
+### ☑ T7.19 Patron's Errand; Corval's doubling; "publicly" *(L-060, L-085, L-088)*
 - **Do:**
   - 01:237: "…your patron may be a snake".
   - Table VIII–7: "four if the wing was forced".
@@ -1177,7 +1178,7 @@ T4.14).
 - **Accept:** the honor-guard fact in `facts.yaml` is extended for the forced-wing four.
 - **Checks:** SA. **Time:** 15 min.
 
-### ☐ T7.20 Slingers at midnight *(L-089)*
+### ☑ T7.20 Slingers at midnight *(L-089)*
 - **Do:** add to S10's Development: "the cell opens at the lights; her slingers are with her".
   Align S10's box count with its three-player line. Settle the S4 guard count in Movement V
   (08:218–221; 05:877; 04:72–74) against Table VIII–7.
@@ -1191,6 +1192,17 @@ T4.14).
   doors are worth, because T4.14 (TP16) removes exactly those beats. Record the number as a TPN
   note.
 - **Files:** `M/05_The_Longest_Night.md`. **Checks:** SA. **Time:** 15 min.
+
+### ☑ T7.23 TP61: cut the heat-4 finish *(TP61, TP62, TP63; added 2026-10-25 by the coordinator)*
+- **Do:** cut "a snake at heat 4 finishes a downed character who crossed it" everywhere: 05
+  *Everyone else's steel*, 09 (cards, *Running the Snakes*, the S14 DM note), 10, 08, `facts.yaml`
+  (add a forbid), and the sims (`skirm.WP6` / `chain.ChainWP6`: the finish goes behind a switch,
+  off by default, so WP6 runs still reproduce). Downed characters use the ordinary dying rules; the
+  crowd rule still doesn't reach snake fights; heat 4 still brings the line in force. Re-run the
+  affected sims (seed 1, n 2,000) and update printed death figures and labels that came from the
+  finish (S13, the worst-case chain line). Log the new rates. TP62: rosters stay. TP63: the
+  remedy box stands as written.
+- **Checks:** SA + sims. **Time:** 40 min.
 
 ### ☐ T7.22 Commit WP7
 - `Oraga 5e 3p pass: WP7 logic fixes and TP13–TP24 canon (both editions)`.
@@ -1229,7 +1241,7 @@ T4.14).
 - **Accept:** "approximate" appears 0 times in captions. `test_maps` passes.
 - **Checks:** SA. **Time:** 30 min.
 
-### ⛔ T8.4 Garden-stair top door; S10 terrain *(L-061; OWNER)*
+### ☑ T8.4 Garden-stair top door; S10 terrain *(L-061; answered by TP60)*
 - **Question for the owner:** is the door at the top of the east wing's garden stair shut (and
   locked?) at Movement V's half-bell, when Maiven's slingers climb to the lit window? The ledger
   says the owner confirms this physical fact. Note that C1 keeps the garden stair open *at

@@ -284,7 +284,8 @@ of his house with good blades and a great deal to prove.
 **The four irons.**
 
 1. **Agenda 3** — get Vorlain to say something House Draunel can later call an
-   understanding.
+   understanding. Any drunk line counts, once a character carries it to Draunel and
+   frames it as one (chapter II, Agenda 3).
 2. **Make a Boranis draw first.** Draunel cannot be seen wanting the seat, so his
    young men try to make a Boranis be seen drawing at his own chief's ball. A
    Boranis who kills a guest at Oraga, or a Boranis blade who ran from a challenge:
@@ -578,7 +579,7 @@ Make sure the table sees those openings.
 | **S14** | The Attendant | Mv VI–VII | Wherever the party gets in an Uninvited's way | The Uninvited's servant | 3,900 XP — 2.6 times High while Focused; plays High while Idle |
 | S5 *(half)* | The Looters | Mv VI–VII | B7 / B3 | Tavva's crew | 550 XP — under Low |
 | S12 *(half)* | The Minister in the Smoke | Mv VII | B3 / B10 | The Circle | 400–600 XP — under Low |
-| **S13** | The Arrest in the Fire | Mv VII | B3, burning | House Draunel and House Boranis | 1,100 XP — between Low and Moderate; plays Moderate, and kills at heat 4 |
+| **S13** | The Arrest in the Fire | Mv VII | B3, burning | House Draunel and House Boranis | 1,100 XP — between Low and Moderate; plays Moderate |
 | **S3** | The Gate at Midnight | Mv VII | B12 | The Bought | 850 XP — between Low and Moderate; 1,950 if the captain fights, and he would rather talk |
 
 **Before midnight:** S1 and S6 (Movements II–III), S4, S2, S7, S8, S9, S10. **In the
@@ -594,8 +595,8 @@ a snake fight before the bells is **Stable at once**, and wakes with 1 Hit Point
 the scene ends. No Death Saving Throws.
 
 **After midnight** the ordinary rules for dying apply in every snake fight, and the
-crowd rule does not reach them. Who finishes a downed character is in chapter V (see
-chapter V, "Down, Not Out", *Everyone else's steel*).
+crowd rule does not reach them. Nobody finishes a downed character on purpose; the
+dying is danger enough (see chapter V, "Down, Not Out", *Everyone else's steel*).
 
 ---
 ## S1. The Seating Feud
@@ -953,13 +954,15 @@ forcing the east wing, robbing the gallery loudly, refusing the gatehouse cell. 
 often Movement V. Also the Gatehouse Court in Movement I, if steel is drawn at the gate
 (see chapter IV), and S10, with the Thenya as the offenders.
 
-**Enemies.** Two **Boranis Honor Guards**, detaining and expelling. *Call the House*
-brings four more at the start of the second round after the first guard is Bloodied.
+**Enemies.** Two **Boranis Honor Guards**, detaining and expelling. *Call the House* brings four more at the start of the second round after the first guard is Bloodied.
 *Budget:* 2 × 450 = **900 XP**, between Low and Moderate; with the four who are coming,
 2,700 XP, beyond High. Fought out against the two before the four arrive, it plays
 Moderate; ended when the house answers, it plays Low. This is not a fight the party is meant to
 win, and not one they can lose anything permanent to: a character the guards drop to 0 Hit Points is Unconscious
 and Stable and wakes in the gatehouse cell.
+
+In Movement V the doors hold four (Corval doubles them, Table VIII–7): two come at the
+party, and two keep the doors.
 
 **Objective:** end it, or get out, before four more arrive. Nobody gets through the
 doors this way: an out ends the fight, and the doors stay shut (area B9).
@@ -1551,6 +1554,9 @@ stands between them and that window, lays hands on them, or calls the guard.
 **Terrain as rules.** *(see map VIII–5, chapter VIII)*
 - *The wall* is 20 feet of grown crystal to the window. Climbing it takes a DC 13
   Strength (Athletics) check with the rope, or a DC 18 Strength (Athletics) check without.
+- *The garden stair's top door* is shut and locked from inside, as it is all night until
+  the household unlocks it at midnight. Picking it from the stair is possible but slow,
+  and in plain view of the garden, so the slingers go for the wall.
 - *The dark garden.* Darkness beyond the last lantern; the flower beds are Difficult
   Terrain.
 - *The lit window* is somebody's room. Anyone who reaches it sees warm light, a quiet
@@ -1596,8 +1602,10 @@ proof of her kinswoman.
 **Development.** With proof, the Thenya's heat falls to 0: Maiven stays at the doors
 and does not climb. If the honor guard answered, the delegation is escorted back to
 the Crystal Court under watch, and at the Unmasking Maiven goes toward the east wing
-anyway (see chapter V). Whatever happened, the Thenya's heat has done its work: it makes
-no card at midnight. A party that stood with her here is standing with her then.
+anyway (see chapter V). If the guard detained the slingers, the cell opens at the
+lights (chapter IV, "The gatehouse cell is a scene"), and her slingers are with her.
+Whatever happened, the Thenya's heat has done its work: it makes no card at midnight.
+A party that stood with her here is standing with her then.
 **Return to Movement V.**
 
 ---
@@ -1783,9 +1791,9 @@ comes down, and whoever is still inside is still inside.
 - *The Draunel side:* **Essar Draunel** and two **Draunel Duelists**, the two men in good
   coats. 700 + (2 × 200) = **1,100 XP**, between Low (750) and Moderate (1,125) for three
   4th-level characters. Draunel's three Rapier attacks run hotter than his XP, and it
-  plays Moderate: expect a character to drop. At heat 4 it is the deadliest card of the
-  night, because Draunel's men finish a fallen character who crossed them (see chapter V,
-  "Down, Not Out", *Everyone else's steel*): keep someone free to reach the fallen.
+  plays Moderate: expect a character to drop. Nobody here stabilizes the fallen but the
+  party (see chapter V, "Down, Not Out", *Everyone else's steel*): keep someone free to
+  reach them.
 - *The Boranis side:* **Essin Boranis** and three **Boranis Cousin's Blades**. 450 +
   (3 × 100) = **750 XP**, Low. They are the party's natural allies here if the
   party wants them; with the cousins fighting beside it, the Draunel side is a Low

@@ -1034,8 +1034,8 @@ is the owner's to decide, and no art should show it.
 
 **Mood:** "understaffed chaos"; the music through the wall "a pulse without a tune." After
 midnight [PRINTED]: Anha leads people out through them; smoke and dark that slow everyone
-else; Darkness except where a ward flares; Corval holding the wing's service door at the head
-of the service stair, counting his staff.
+else; Darkness except where a ward flares; Corval leading his household out through
+the kitchens (TP58).
 
 **Fight-card terrain:** S2 (dim, linen crates, plank wall, noise clock); S7 (5 feet wide, one
 abreast; one lamp in three; the guarded service door).

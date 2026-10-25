@@ -292,6 +292,43 @@ strict crowd rule (no help for the dying in a snake fight) and the heat-4 finish
 kept as the old Sharp wording by TP57; whether to soften either is an owner call (LOG, WP6
 OWNER questions).
 
+### TP61: the heat-4 finish cut (T7.23, 2026-10-25)
+
+*Owner ruling TP61: no snake deliberately finishes a downed character, at any heat. The finish
+stays in the harness behind `skirm.WP6.heat4_finish` / `chain.ChainWP6.finish` so the rows above
+reproduce; the current rules are `heat4_finish` off, and `chain.ChainWP6.tp61()` (every WP6
+switch except `finish`). Seed 1, n = 2,000. Script: `skirm.simulate` / `chain.simulate` looped
+over the parties (the scratchpad `t723.py`).*
+
+Heat-4 cards, drop % / death %, finish off:
+
+| Card | XP | C1 | C2 | C3 | C4 | C5 | 4P |
+|---|---|---|---|---|---|---|---|
+| S13 WP6 at heat 4, potions | 1,100 | 64.5/1.6 | 40.2/0.2 | 38.0/0.8 | 20.0/0.3 | 34.6/0.8 | 68.3/0.9 |
+| S12 heat 4 (3 knives), half down | 600 | 40.5/0.5 | 18.9/0.1 | 14.1/0.5 | 6.2/0.2 | 16.1/0.4 | 8.3/0.1 |
+| S7 in the dark (nursery sold; 3 knives, heat 4) | 600 | 38.6/0.9 | 18.4/0.1 | 14.3/0.1 | 5.5/0.2 | 17.3/0.2 | 21.1/0.4 |
+
+S13 at heat 4 is back to 0–2% deaths (TP61's target "about 1–2%"); S12 and S7 in the dark to
+0–1%. Every after-midnight snake card now kills a character 0–2% of the time (S5 printed 1–7%).
+
+The chain under the current rules (`ChainWP6.tp61()`), HP at the gate / any PC death / S14 win:
+
+| Party | Current rules | after S2 in Movement V |
+|---|---|---|
+| C1 | 69.2 / 26.7 / 97.2 | 47.3 / 45.9 / 97.1 |
+| C2 | 64.9 / 27.0 / 97.4 | 51.3 / 40.0 / 97.0 |
+| C3 | 64.8 / 13.9 / 92.1 | 56.7 / 18.8 / 92.7 |
+| C4 | 44.7 / 24.4 / 95.9 | 40.7 / 27.9 / 95.9 |
+| C5 | 52.4 / 26.1 / 95.0 | 40.0 / 40.4 / 94.9 |
+| 4P | 55.9 / 43.8 / 93.0 | 41.8 / 57.9 / 92.7 |
+
+The HP and death columns match the "+ WP6 cards" column above (the same switches). With the
+finish gone, **a character dies somewhere in the chain 14–44% of the time** (19–58% after a
+Movement V fight), down from 26–63%. What is left comes from S14 (a Focused Attendant can
+kill, TP5) and S3 at the gate, with the strict crowd rule leaving the dying unhelped; the
+chain's worst-case caveats above still apply (S13 fought every time, no outs, the gate fought).
+Recorded for the owner; no rule changes follow from it here.
+
 **Not modelled:** control spells; outs and clocks (fights run to morale); S1, S6, S11; S14's
 own use of potions (they are used between scenes and in the snake fights only); the chapel's
 cost (one heat per shown line) is a table effect, not a chain effect.

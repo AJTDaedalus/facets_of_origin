@@ -37,7 +37,9 @@ class ChainWP6:
                (skirm.WP6.potions), and between scenes by anyone under half HP.
     hit_die:   one Hit Die each at the toast, spent after the optional early card if hurt.
     chapel:    the chapel's Short Rest after the Movement V card (before midnight).
-    finish:    S13 is a heat-4 snake: Draunel's men finish a downed character.
+    finish:    S13 is a heat-4 snake: Draunel's men finish a downed character. Cut by TP61
+               (2026-10-25); kept only so the WP6 runs reproduce. `tp61()` is the
+               current rules: everything else on, the finish off.
     cards:     the WP6 rosters and morale (S13_wp6, S3_wp6) in place of S13 / S3."""
     s14_new: bool = False
     potions: bool = False
@@ -49,6 +51,11 @@ class ChainWP6:
     @classmethod
     def full(cls):
         return cls(**{f.name: True for f in fields(cls)})
+
+    @classmethod
+    def tp61(cls):
+        """The current rules (TP61): every WP6 switch on except the cut heat-4 finish."""
+        return cls(**{f.name: f.name != "finish" for f in fields(cls)})
 
     def any(self):
         return any(getattr(self, f.name) for f in fields(self))
@@ -180,7 +187,7 @@ def main(argv=None):
     ap.add_argument("--no-between-heal", action="store_true")
     ap.add_argument("--all", action="store_true", help="every party, with and without S2")
     ap.add_argument("--wp6", default=None,
-                    help="'full', or a comma list of ChainWP6 switches: "
+                    help="'full' (legacy, with the cut finish), 'tp61' (current rules), or a comma list of ChainWP6 switches: "
                          "s14_new,potions,hit_die,chapel,finish,cards")
     ap.add_argument("--early", default=None, choices=sorted(CARDS),
                     help="a Movement II-IV card fought before the toast (e.g. S6)")
@@ -192,6 +199,8 @@ def main(argv=None):
     heal = not a.no_between_heal
     if a.wp6 == "full":
         wp6 = ChainWP6.full()
+    elif a.wp6 == "tp61":
+        wp6 = ChainWP6.tp61()
     elif a.wp6:
         wp6 = ChainWP6(**{k: True for k in a.wp6.split(",")})
     else:

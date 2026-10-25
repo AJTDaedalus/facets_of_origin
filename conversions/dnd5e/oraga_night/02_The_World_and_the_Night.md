@@ -320,8 +320,11 @@ Raunu's face all night. You saw the exact moment he understood: before anyone
 screamed, before the lights failed. He knew what they were. Remember that.
 
 **Pays:** Heroic Inspiration, and XP by Table I–4. The Church's favor: one favor Prelate
-Kovaun can grant without scandal, spendable after tonight (the DM may make it larger; the card's "frightening size" is the patron's pitch). *(For the DM: this patron is a snake. See
-chapter IX, the Church line.)*
+Kovaun can grant without scandal, spendable after tonight (the DM may make it larger; the card's "frightening size" is the patron's pitch). *(For the DM: any sincere judgment
+completes the agenda, whatever it says; the module never answers the question. A
+character who shades it makes a Charisma (Deception) check against the Prelate's
+Wisdom (Insight) (+8, chapter X). If she wins, she knows, and the agenda is not done.
+This patron is a snake. See chapter IX, the Church line.)*
 
 ### 3. A House's Long Game
 *Patron: House Draunel, through Lord Essar Draunel.*
@@ -337,8 +340,11 @@ this, and you watched his face when it happened. Whatever you saw there, you are
 only witness to it.
 
 **Pays:** Heroic Inspiration, and XP by Table I–4. Lord Draunel's gratitude, for
-whatever a Draunel's gratitude is worth. *(For the DM: this patron is a
-snake. See chapter IX, the House Draunel line.)*
+whatever a Draunel's gratitude is worth. *(For the DM: any line Vorlain says drunk
+counts (chapter VII, "What Vorlain Says"), once the character carries it to Draunel
+and frames it as an understanding: a DC 13 Charisma (Deception) check. What it does to
+Vorlain at dawn is chapter VI's. This patron is a snake. See chapter IX, the House
+Draunel line.)*
 
 ### 4. The Cousin's Errand
 *Patron: the Thenya delegation, through Maiven Nolonaire.*

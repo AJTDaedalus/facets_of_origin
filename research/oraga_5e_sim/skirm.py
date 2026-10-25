@@ -440,7 +440,9 @@ class WP6:
     heat4_finish: a heat-4 snake finishes a downed character who crossed it (05 "Everyone
                   else's steel"): after midnight, a foe whose target dropped keeps attacking
                   it (Advantage; a hit within 5 ft is a critical: two failed death saves)
-                  until it is dead, then moves on. Foes that detain never do."""
+                  until it is dead, then moves on. Foes that detain never do.
+                  Cut from the book by TP61 (2026-10-25): leave it off for the current
+                  rules; it stays only so the WP6 runs reproduce."""
     potions: bool = False
     heat4_finish: bool = False
 

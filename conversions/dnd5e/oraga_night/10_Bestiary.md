@@ -1207,15 +1207,16 @@ anyone works only if its bearer succeeds on a DC 13 Charisma check; on a failure
 light goes out of the crystal and the charge is spent. The palace's great wards
 gutter at this range but hold.
 
-***The Post.*** While the Hollow is within 10 feet of the doors he holds, no creature
-passes through them without his leave. A creature that tries must succeed on a DC 17
+***The Post.*** The Hollow holds two sets of doors: the Crystal Court's main doors and
+its garden doors. While he is within 10 feet of either, no creature passes through them
+without his leave, and when anyone comes for the set he is not at, he Shadow-Steps to it. A creature that tries must succeed on a DC 17
 Strength saving throw or be pushed 10 feet away and have the Prone condition. On a
 success, the creature holds its ground but still doesn't get past him. The crowd
 makes no saving throw: it breaks around him like water (see chapter V, "Two Hundred
 People").
 
-***Only the Doors.*** The Hollow attacks only creatures that come for the doors or
-attack him. He never advances if holding will do, and he never follows anyone who
+***Only the Doors.*** The Hollow attacks only creatures that come for his doors (either
+set) or attack him. He never advances if holding will do, and he never follows anyone who
 backs away.
 
 ***Bloodied.*** While Bloodied, the Hollow gives ground to the doors and holds there.
@@ -1248,8 +1249,8 @@ The target is pushed 5 feet away.
 see. Any grapple or restraint on him ends. He arrives rather than runs; ordinary
 doors, walls and barricades do not reliably hold him. Deep Boranis ward-crystal does.
 
-> **Wants.** To stop. Tonight, only that nobody leaves: he holds the main doors and
-> herds the crowd.
+> **Wants.** To stop. Tonight, only that nobody leaves: he holds the main doors and the
+> garden doors, and herds the crowd.
 > **Tells.** *Before midnight:* stands always beside a different exit; answers small
 > talk with devastating flatness (asked if he is enjoying the festival: "It ends
 > the same whether I do"); watches the servants who belong to each other, Anha and

@@ -80,7 +80,8 @@ is stated, and everything else in this chapter points here.
    four characters; see "Adjusting the Attack"), plus one turn for each point of
    Delay spent on her (Table V–1), three at most in a scene ("Buying Time").
 4. **Raunu falls.** The Hollow turns east (if his End has not already sent him home),
-   the main doors open, and the crowd pours out toward the Gatehouse Court (B12). The
+   the main doors and the garden doors open, and the crowd pours out toward the
+   Gatehouse Court (B12). The
    bells of Oraga begin to toll as the first guests reach it.
 5. **The Radiant reaches the garden stair** three beats after Raunu falls, plus one
    beat for each point of Delay spent on him in the east wing (three at most in the
@@ -153,7 +154,8 @@ happens before anyone can act, and it should feel that way:
 3. **The Wept moves.** The tallest of the three crosses the dark hall toward the
    dais — not running, arriving — and the screaming starts.
 4. **The doors are wrong.** The Hollow is at the main doors, and the crowd that
-   surges at them breaks around him like water. The Radiant is nowhere to be seen.
+   surges at them breaks around him like water. The garden doors are his too: when the
+   crowd tries them, he steps through the shadow and is there. The Radiant is nowhere to be seen.
    He has gone for the east wing, and the first sign is the lanterns going
    dark along the gallery, one by one, like a fuse burning.
 5. **The attendant with no master.** Read it as the dark comes down:
@@ -173,9 +175,9 @@ Then release the beats. Nothing from here on can be scripted: this chapter can o
 tell you where everything is and what everything wants. The DM sheet (chapter VIII, Table
 VIII–2) holds the map: **the Wept → Raunu. The Radiant → Veier. The Hollow →
 the doors, herding, keeping the herd from mattering. The Attendant → whoever gets
-in their way.** Master Vell is already moving
-along the service passages toward the east wing, and the fastest route to the river
-gate runs through the garden stair.
+in their way.** Master Vell was at the river gate when the bells rang. From there he
+climbs back up through the gardens to the foot of the garden stair to meet her; the
+boat waits below.
 
 **"Corval. The stairs."** Raunu's last order sends his majordomo to the stairs that
 reach the east wing, and Corval goes without needing to understand why. On the way he
@@ -186,9 +188,10 @@ gets them in front of the Radiant. He is a guide and never a fighter, and he nev
 brings them to Veier: the household moves her through the wing, and Vell meets her at
 the foot of the garden stair, later. Corval never meets Vell.
 
-Once the characters are in front of the Radiant, Corval leaves them and goes back to the head of the service stair,
-to the wing's service door, and holds it for his household. Movement VII finds him
-counting his staff (the read-aloud).
+Once the characters are in front of the Radiant, Corval leaves them and leads his
+household out of the palace, through the kitchens and the service passages. The
+household who move Veier through the wing are not with him. Movement VII finds him
+outside with the rest, counting his staff (the read-aloud).
 
 If the characters convinced him before midnight (chapter IV, Undercurrent D), he has already given them the wing's service door, and they start
 the chase there, in position. Keep him alive if you can: the Tithe of Hands lives in
@@ -284,9 +287,9 @@ up the same way. Focused, it can kill (see chapter X, "The Attendant").
 **Everyone else's steel.** The snakes and the Bought use the ordinary rules for dying,
 and the crowd rule does not reach their fights: a character they drop is dying until
 somebody stabilizes them, unless the attack detains (chapter X, "The palace's two
-mercies"). A snake at heat 4 finishes a downed character who
-crossed it tonight; the rest leave the fallen where they lie, because they have
-somewhere to be.
+mercies"). Nobody goes back to finish the fallen, at any heat: they leave them
+where they lie, because they have somewhere to be. The danger is the dying itself, so
+keep someone free to reach the fallen.
 
 Fire is the exception: it never finishes anyone ("General Features", below).
 
@@ -404,7 +407,7 @@ in the room is not.
 | 2 | **Answer him.** Sooner or later he asks, flatly, whether this is worth it to you. Give him a real answer. He waits for it as if it mattered | Wisdom (Insight) or Charisma (Persuasion) |
 | 3 | **Call a name.** Get Anha, or any of the kitchen household, to call a name across the hall, or a character calls one. He turns his head toward the sound | Charisma (Performance), or Charisma (Persuasion) to get a servant to do it |
 | 4 | **Two who belong together.** Walk them past him: Anha's people through the service door, or any two guests holding on to each other. He watches them go, the way he watched them all night | Charisma (Persuasion), to get them moving |
-| 5 | **Another door.** Make the crowd surge at the gallery-side service door. He steps through the shadow to hold it, and for a moment the main doors are nobody's. The people at that door are in his way now; warn the table first | Charisma (Intimidation) or Charisma (Performance) |
+| 5 | **Another door.** Make the crowd surge at the garden doors. He steps through the shadow to hold them, and for a moment the main doors are nobody's. The people at that door are in his way now; warn the table first | Charisma (Intimidation) or Charisma (Performance) |
 | 6 | **Hand him something.** He is polite. Give him a cup, a mask, a coat to hold, as one guest to another, and he holds it | Charisma (Persuasion) or Charisma (Deception) |
 | 7 | **House light.** A *House Flare* released in his face. It is not ward-fire, but it is the house's own light, and he flinches from it the same way | The DC 13 Charisma check his *Unraveling Presence* asks for |
 | 8 | **The others are going.** Tell him the Wept is finished and they are leaving. He half believes it, and looks east | Charisma (Deception) |
@@ -462,8 +465,13 @@ The attack happens in a crowd, and the crowd has rules too.
 - **The crowd as ground.** Moving through it is Difficult Terrain; card S11 has the
   rule for a crush at a door.
 - **The Post.** Guests make no saving throws against the Hollow's *Post* or *Turn Them Back*. The
-  crowd breaks round him like water and does not pass. It leaves by the service doors
-  and the gallery-side door until he turns east, and then by the main doors too.
+  crowd breaks round him like water and does not pass. He holds the main doors and the
+  garden doors, so until he turns east, is stopped or is ended, the floor's one open
+  door is the gallery-side service door (card S11), and the galleries empty by the
+  service passages. Then the crowd leaves by the main doors too, for the front gate.
+  It goes into the gardens only if somebody leads it there. Once the garden doors
+  open, guests a character brings down into the gardens are watchers: the Radiant is
+  *Witnessed* at the Crossing.
 - **The crowd rule** ("Down, Not Out") gets up whoever the Uninvited set aside. It
   does not reach a snake fight or the Bought ("Everyone else's steel").
 - **Other people's steel.** Every retinue at the ball is somewhere in this crowd. At
@@ -694,7 +702,9 @@ they choose to fight. Run it in three beats down the garden's three levels:
    The Radiant, meanwhile, is losing the thing he cannot bear to
    lose: his audience, gone running into the dark with the prize. This is where a
    Stop on him (below) makes most sense: dark, empty terraces, nobody watching
-   but the enemy he fears. *(Every Table V–5 trick the characters play on him here
+   but the enemy he fears. (Unless the characters brought guests down through the
+   garden doors: then he is *Witnessed* here too; see "Two Hundred People".)
+   *(Every Table V–5 trick the characters play on him here
    is Delay he carries down to the gate.)*
 3. **The river gate.** Unlocked — someone saw to it. A boat, with Veier aboard. If the
    Radiant breaks past Vell (and he does, exactly once, unless guilt is already
@@ -1102,9 +1112,9 @@ refusing to leave the city without her cousin or a body.
 
 > *The three gray masks are gone. The palace is fire, smoke, flaring ward-light and
 > screaming. The banquet gallery is burning, and smoke fills the galleries under walls
-> gone dark. Guests are shielding strangers. The thin old man who greeted you by name
-> at the gate is bleeding, and he is counting his staff like a man counting his own
-> fingers.*
+> gone dark. Guests are shielding strangers. Outside, the thin old man who greeted you
+> by name at the gate is bleeding, his household around him, and he is counting his
+> staff like a man counting his own fingers.*
 
 Until the sect guard gets in through the front gate (B12, below), the
 characters are the only order in the palace. This Movement keeps the adventure's tone
@@ -1252,9 +1262,26 @@ If your campaign goes on, chapter VI is what dawn looks like.
 > eastern coast, the fishermen say, are rising again.*
 >
 > *You know what you saw. You are nearly the only ones who do. And on quiet nights,
-> from time to time, each of you dreams of dancing — a warm hand in yours, and a
-> voice, kind and centuries out of fashion, saying: "You dance like my daughter
+> from time to time, the one she danced with dreams of dancing — a warm hand in yours,
+> and a voice, kind and centuries out of fashion, saying: "You dance like my daughter
 > would have."*
+
+The box is the default night. Where the table changed it, change the box with Table V–8:
+one sentence for each thing that went differently, said where the table shows. Leave
+out the last line if nobody danced with the Wept in Movement V.
+
+**Table V–8: The Epilogue, Adjusted**
+
+| If… | Then say, or change… |
+|---|---|
+| **Raunu lives** (⟨They save Raunu⟩) | In place of "dead in his shining hall, mid-sentence": *"alive in his shining hall, and already hunting"* |
+| **Maiven lives** | Add: *"The Thenya envoy will not leave the city without her cousin, or a body."* |
+| **Corval and the ministers** | The Tithe of Hands survives if any one of the three who carry it lives (chapter II, Agenda 1). If a minister left the fire in Circle hands (card S12), add: *"By dawn the Circle owns the Tithe of Hands."* |
+| **Vorlain was taken** (card S13) | After "No one is ever charged", add: *"Not even the brother they handed to the sect guard as the culprit."* |
+| **The slate and the map** | If the wardens got their record of the mist map out (card S8), add: *"In a Church archive, a careful copy of a chief's great table says he was looking east."* |
+| **The Bought** | If a sergeant was captured, add: *"A captured sergeant, contract case and all, is the only thread anyone holds that leads east."* If the company was bought out, add: *"A captain of the Bought owes you, and wants to know who used his company's name."* |
+| **The Wept looked back** | After "three gray masks that no one ever invited", add: *"One of them looked back."* |
+| **The Hollow was sent home** (his End) | After the masks, add: *"One of them went home before he was called."* |
 
 Then go around the table once and ask: **"What does your character carry out of Oraga
 Night?"** An object, a debt, a truth, a name. Write the answers down. If you ever

@@ -674,3 +674,85 @@ Read first: TASKS (header, SA, SIM, WP6), DESIGN §2, DECISIONS TP1–TP56 and T
 - Final checks from `M/`: lint 0; fact_check 0; bestiary 0 mismatches; pregen 0 issues; `pytest tools` **505 passed** (489 at start; 16 new in `tools/test_wp6.py`). Repo root: `pytest research/oraga_5e_sim` **32 passed**. `software/`: docs-consistency + private-canon **41 passed, 1 failed**: `test_no_tracked_file_names_private_canon` on `docs/REFERENCE_oraga_palace_visual_brief.md` (~1843–1845); it fails the same way on a clean HEAD (checked with a stash), so it predates WP6.
 - Done: T6.2, T6.3, T6.4, T6.7, T6.8, T6.9, T6.10, T6.11, T6.12, T6.13, T6.14, T6.15, T6.17. ✕ T6.1 (TP57). Held: T6.5 (coordinator). Open: T6.16 (commit; not done, per brief). ⛔ OWNER: W1, W2 (TASKS, after T6.17).
 - No commit or staging.
+
+## 2026-10-25 — WP7 (T7.1, T7.3, T7.12, T7.15, T7.17–T7.20, T7.23) and TP58, TP60
+
+Read first: TASKS WP7, DECISIONS TP1–TP64 and the TPN notes, this LOG's tail. Baseline from `M/`: lint 0, fact_check 0, bestiary 0, pregen 0, `pytest tools` 504 passed + 1 skipped. T7.11 and T7.16 were already done (polish A + B). TP64 (palace brief) is not in this run's brief.
+
+### T7.23 TP61: cut the heat-4 finish (added mid-run by the coordinator)
+- **05** *Everyone else's steel*: the heat-4 finish sentence → "Nobody goes back to finish the fallen, at any heat: they leave them where they lie, because they have somewhere to be. The danger is the dying itself, so keep someone free to reach the fallen." **09** *After midnight* pointer: "Nobody finishes a downed character on purpose; the dying is danger enough". **09 S13** Draunel line: "deadliest card of the night … finish a fallen character" → "Nobody here stabilizes the fallen but the party … keep someone free to reach them". **Table IX–3** S13 label drops "and kills at heat 4". 08, 10 and the S14 DM note carried no finish (checked by grep).
+- **facts.yaml:** new fact `no_heat4_finish` (forbid + require); `crowd_rule_scope` truth reworded and its forbid of "no snake finishes a downed character" dropped (that phrase is now canon). `tools/test_wp7.py::TestNoHeat4Finish` (6 tests; the old 05/09/IX–3 wordings fire).
+- **Sims:** `skirm.WP6.heat4_finish` and `chain.ChainWP6.finish` stay as legacy switches (WP6 rows reproduce); new `ChainWP6.tp61()` and CLI `--wp6 tp61` (all switches but the finish). 2 new smoke tests. README run lines.
+- **Re-sim** (seed 1, n 2,000; scratchpad `t723.py`, 37 s): S13 WP6 heat 4 with potions, deaths C1–C5/4P 1.6/0.2/0.8/0.3/0.8/0.9 % (was 5–21 %); S12 heat 4 0.1–0.5 %; S7 in the dark 0.1–0.9 %. Chain under current rules: HP at gate 45–69 %, any death 14–44 % (19–58 % after S2), was 26–63 %. Written to `research/oraga_5e_simulation_notes.md`, "TP61". No printed percentage in the book came from the finish; the only printed figure was the S13 label and line (fixed). Residual chain deaths come from S14 and S3 (noted for the owner).
+- INVENTIONS **#107**. TP62 (rosters stand) and TP63 (remedy box) need no edits.
+- Checks: lint 0; fact_check 0; `pytest tools/test_wp7.py` 6 passed; `pytest research/oraga_5e_sim` 34 passed.
+
+### T7.1 Propagate TP11
+- `facts.yaml` fact `raunu_plan` first (forbid "send(s) her/Veier away/off", "… by boat", "Raunu's boat"; requires the plan in 07 Raunu and Veier, both editions, and the 04 pointer). `--report` before the text edits listed the five requires.
+- **M/07** Raunu: "**His plan for Veier:** keep her in the sealed east wing until the child is born. The boat is Vell's, never his." Veier *Where she is*: "Raunu means to keep her there, sealed in, until the child is born." **M/04** *Warning Raunu*: "What he is already doing about it is chapter V: the east wing kept sealed around Veier, and his two crystals." **flow.json** `ev-raunu`: "He meant to keep Veier in the sealed east wing until the child was born. Now he spends…"; page rebuilt. **F/07**: the same two lines.
+- `tools/test_wp7.py::TestRaunuPlan` (5 tests). No INVENTIONS row (TP11's own words).
+- Checks: lint 0; fact_check 0; test_wp7 11 passed.
+
+### T7.3 The garden doors (TP9)
+- `facts.yaml` fact `garden_doors` first (forbid "garden doors … stand/are open" and the old trick 5; requires *The Post* naming both sets, trick 5 at the garden doors, and the Witnessed reward). First `--check` after the edits caught my own "Once the garden doors are open" (reworded to "open").
+- **M/10** *The Post* (both sets; Shadow-Steps to the set he isn't at), *Only the Doors* ("his doors (either set)"), *Wants*. **M/05** Movement VI step 4 (garden doors his too), Clock step 4 ("the main doors and the garden doors open"), Table V–3 trick 5 → the garden doors, *The Post* bullet in *Two Hundred People* (reconciles "the one open door" = the gallery-side service door on the floor with "service doors" = the galleries' way into the passages; crowd to the front gate; into the gardens only if led; reward), the Crossing's "dark, empty terraces" gets the Witnessed exception. **M/08** Tables VIII–2 (Hollow row), VIII–10 (Errand) and VIII–11 (Raunu row). 08's "one open door off B2 at midnight (S11)" now agrees and stands. The old line refs (05:150, 382–384, 861; 08:38, 189–190; 09:866, 1596–1597) had drifted: the remaining garden mentions in 08 and 09 are before midnight or map captions, and none said the doors were open at midnight.
+- **F/05** step 4: the same sentence ("its", "it"). F/ never said the garden doors were open.
+- `tools/test_wp7.py::TestGardenDoors` (5 tests). `test_fact_check.py::TestPolishReviewB::test_no_snake_finishes…` inverted for TP61 (the phrase is now canon). INVENTIONS **#108**, TPN-51.
+- Checks: lint 0; fact_check 0; bestiary 0; `pytest tools` 520 passed + 1 skipped.
+
+### T7.12 Midwife and minister positions (TP23) — PROPOSAL FOR THE OWNER (not applied; T7.13 waits)
+Sources: 06 *The pregnancy never gets out*; 02 Agenda 1; 04 B4 and B9; 07 Veier, Corval; 08 Tables VIII–2, VIII–6; 09 S12; TP13, TP40, TP53. Only rooms on the existing maps; nobody named.
+
+| Who | Movements I–V (Table VIII–6) | Midnight (Table VIII–2) | Rationale (printed text) |
+|---|---|---|---|
+| **The midwife** | B9, all night, behind Veier's own shut door (I–V) | With Veier behind her door when the lights die; goes with the household as it brings her down the private stair. No character meets her. After the garden stair the book does not say where she goes | 04 B9 "one door kept shut: Veier's own. She is behind it with the midwife"; 07 Veier "the midwife in attendance"; TP40 "the household moves her through the wing"; 06 "The midwife is simply gone by dawn, never found" (so no position after the stair is printed or invented). She is inside the household's group, so she opens no route to Veier (TP13, TP53) |
+| **The elder minister** | III: B4, vetting supplicants behind the screen; otherwise with the guests (B2/B3) | B3, the banquet galleries. Heat 0–2: among the guests Vorlain hauls out of the burning gallery. Circle heat 3–4: he is S12's "older man" the knives walk out through the smoke | 04 B4 "Raunu holds audiences here, ministers vetting supplicants through a screen"; 09 S12 "an older man between them … saying something under his breath, over and over, that sounds like a list" (the Tithe; 02 Agenda 1 "three heads"); 08 Table VIII–2 Vorlain "B3: hauls guests out of the burning banquet gallery" |
+| **The younger minister** | III: B4, beside the elder at the screen; otherwise with the guests (B2) | B2, in the crowd at the Unmasking. Leaves as the crowd does: by the gallery-side service door (S11) while the Hollow holds the doors, or by the main doors once he turns east | 04 B4 "ministers" (plural) at the audiences; 05 *Two Hundred People* / *The Post* (the crowd's only ways out); 02 Agenda 1 "Keep Corval alive and the Tithe survives the night" names Corval only, so the younger minister needs no danger of his own and gets none |
+
+**Question for the owner (T7.13):** may these three positions go into Tables VIII–2 and VIII–6, `facts.yaml` (`midnight_positions`) and F/08's position table as canon? In particular: (1) is the elder minister the "older man" of S12 (the card never says which minister)? (2) Is it right to leave the midwife's whereabouts after the garden stair unstated, matching chapter VI's "gone by dawn, never found"? (3) Should the younger minister be in the crowd on the floor (B2), or somewhere else you prefer?
+
+### T7.15 Vell's midnight route
+- **M/05** Movement VI (after "Then release the beats"): "Master Vell was at the river gate when the bells rang. From there he climbs back up through the gardens to the foot of the garden stair to meet her; the boat waits below." **M/08** Table VIII–2 Vell: "The river gate (B5) | Climbs back to the foot of the garden stair to meet her → the river gate and the boat". Checked against TP12 (the boat is unchanged and still at the river gate) and TP13/TP40 (the household brings her down; he meets her at the foot, as 05's "Corval. The stairs." already says).
+- **F/05** the same sentence; **F/08** DM-sheet line the same route (canon, so both editions), plus "main doors and garden doors" for T7.3.
+- Guard `vell_route` (forbid the old service-passage route; requires the line in both editions' 05). `TestVellRoute` (4 tests). INVENTIONS **#109**.
+- Checks: fact_check 0; test_wp7 20 passed.
+
+### T7.17 Endings box; the dream line
+- WP4's rules work is done (only its commit, T4.17, is open), so the task ran.
+- **M/05**, after the epilogue box: a two-sentence lead-in and **Table V–8: The Epilogue, Adjusted** (a numbered table rather than a box, because sidebars and DM Notes may not carry read-aloud). Rows: Raunu lives; Maiven lives; Corval and the ministers (Tithe survives if any carrier lives; a minister in Circle hands, S12); Vorlain taken (S13); the slate and the map (TP38: the drawer is cut, so the row is the wardens' map record; the slate is always wiped); the Bought (captured sergeant, or bought out); the Wept looked back; the Hollow sent home. **The Last Rite row is omitted (TP43).** Every sentence is lifted from a printed outcome (sources in INVENTIONS #110).
+- **Dream line:** it lives in 05's epilogue now, not 04:1376 (drifted). "each of you dreams of dancing" → "the one she danced with dreams of dancing", plus "Leave out the last line if nobody danced with the Wept in Movement V." Same change in **F/05** (narrative, no mechanics).
+- Guard `epilogue_endings` (forbid the old line; require Table V–8). `TestEpilogueEndings` (4 tests). INVENTIONS **#110**.
+- Checks: lint 0; fact_check 0; `pytest tools` 524 passed + 1 skipped (before the new class).
+
+### T7.18 Agenda 3 completion; Agenda 2 mechanism
+- **M/02** Agenda 3's DM note: any drunk line (07 *What Vorlain Says*) counts once carried to Draunel and framed as an understanding, DC 13 Charisma (Deception); the dawn consequence left to chapter VI. **M/09** Draunel's scheme, item 1, points to it. **M/02** Agenda 2's DM note: any sincere judgment completes it (no answer given); shading is Charisma (Deception) against the Prelate's printed Insight +8 (chapter X), and if she wins the agenda is not done. 08's handout card keeps its player-facing "The Prelate will know" (no change needed). No lore; F/ untouched.
+- INVENTIONS **#111**. Checks: lint 0; fact_check 0.
+
+### T7.19 Patron's Errand; Corval's doubling; "publicly"
+- **01** Table I–2 already says "your patron may well be a snake" (fixed in an earlier pass): no edit.
+- **08** Table VIII–7: midnight east-wing doors "Two, who stay; four if the wing was forced"; the dais "Seven…; five if the wing was forced" (nine is fixed, so the two extra come off the dais). Table VIII–2's honor-guard row says the same. **07** Raunu's epithet "Seen publicly exactly four times"; **04** Raunu's Summons "Raunu publicly summons four guests". (The dinner L-088 worried about is cut, TP27; "publicly" still covers his unseen Movement V in B9.)
+- `honor_guards` extended (truth, `midnight_if_forced`, a require on the VIII–7 cell). `TestForcedWingGuards` (2 tests). INVENTIONS **#112**.
+- Checks: lint 0; fact_check 0; test_wp7 26 passed.
+
+### T7.20 Slingers at midnight
+- **09 S10** *Development*: "If the guard detained the slingers, the cell opens at the lights (chapter IV, "The gatehouse cell is a scene"), and her slingers are with her." (05's Thenya section already has her "with her slingers behind her".) S10's box shows two figures and its three-player roster is two slingers: already aligned, no edit.
+- **S4 in Movement V** (TPN-51b): the doors hold four (Table VIII–7); two come at the party, two keep the doors, so S4's two-guard roster and 900 XP stand. Written as a short paragraph on S4 (after the budget) and in 08's note under Table VIII–7. 05 and 04 had no conflicting S4 count left (the cited lines drifted; 04's alert rule names "the two nearest").
+- 07 Maiven's "dies there unless somebody competent goes with her" (left for this task by TPN-37e) stands: it is consistent with the slingers being with her.
+- First lint run: 09 long_paras (my S4 sentence pushed a paragraph past 120 words); moved to its own paragraph. INVENTIONS **#113**.
+- Checks: lint 0; fact_check 0.
+
+### TP58 Corval's end point
+- **M/05** "Corval. The stairs.": the service-door sentence → he leads his household out of the palace through the kitchens and the service passages; the household moving Veier are not with him; Movement VII finds him outside with the rest. **Movement VII read-aloud:** "Outside, the thin old man who greeted you by name at the gate is bleeding, his household around him, and he is counting his staff…" (only "Outside" and "his household around him" added, so it fits him being out with them; the rest unchanged). **M/07** Corval *At the Unmasking*, **M/08** Table VIII–2 Corval row. **F/05** (the stairs paragraph and Movement VII's "Outside, Corval…"), **F/07**, **F/08** DM-sheet line.
+- Guard `corval_end_point` (forbid "holds it for his household" / "holding the wing's service door"; requires both 07s and the read-aloud's "Outside"). `TestCorvalEndPoint` (5 tests). INVENTIONS **#114**.
+- Not touched: `docs/REFERENCE_oraga_palace_visual_brief.md` line ~1037 still has "Corval holding the wing's service door" (art brief; TP64's worker owns that file). Flagged for the coordinator.
+- Checks: lint 0; fact_check 0; test_wp7 31 passed.
+
+### T8.4 / TP60 The garden stair's top door
+- **09 S10** *Terrain as rules*: new bullet after *The wall*: the garden stair's top door is shut and locked from inside, as all night until the household unlocks it at midnight; picking it from the stair is possible but slow and in plain view, so the slingers go for the wall (no DC: the ruling gives none). 05's *The ways into the east wing* (the stair open after the lights) already agrees.
+- Guard `garden_stair_door` (a 09 sentence check: garden stair + door + open/unlocked, unless midnight/after the lights/the household; requires the S10 line). `TestGardenStairDoor` (4 tests). INVENTIONS **#115**. T8.4 marked ☑ (row and heading).
+- Checks: lint 0; fact_check 0.
+
+### WP7 close (this run)
+- Done: T7.1, T7.3, T7.12 (proposal sent; T7.13 stays ⛔ OWNER), T7.15, T7.17, T7.18, T7.19, T7.20, T7.23 (TP61), TP58, T8.4 (TP60). T7.11 and T7.16 were already done. Open: T7.22 (commit; not done, per brief).
+- Final checks from `M/`: lint 0; fact_check 0; bestiary 0 mismatches; pregen 0 issues; `pytest tools` **539 passed, 1 skipped** (504 + 1 skipped at start; 35 new in `tools/test_wp7.py`, one TP61 inversion in `test_fact_check.py`). Repo root `pytest research/oraga_5e_sim` **34 passed** (32 + 2). `software/` docs-consistency + private-canon **42 passed**. Flow page rebuilt.
+- No commit or staging.

@@ -18,12 +18,15 @@ Honor Guard**), the city's (**Sect Guard**), and the brawlers of the seating feu
 ## The House
 
 ### Raunu Boranis — the Host
-*Chief of the Orthaen. Seen exactly four times tonight, and the fourth is midnight.*
+*Chief of the Orthaen. Seen publicly exactly four times tonight, and the fourth is midnight.*
 
 **Wants:** one uninterrupted sentence, at midnight, two years in the making, and he
 does not get it. **Fears:** something is coming for his family; he does not know
 what, or when. His whole silent palace is the shape of that suspicion. **Secret:**
 all of them — see Undercurrents A and B, and the Root.
+
+**His plan for Veier:** keep her in the sealed east wing until the child is born. The
+boat is Vell's, never his.
 
 **His four appearances** (he is otherwise absent, and his absence is the ball's
 weather): a still figure on the high gallery in Movement III, gone when looked
@@ -86,7 +89,7 @@ same thing her husband fears, learned from watching him prepare. **Secret:** she
 happy, genuinely and unfashionably, and rumor has no shelf for it.
 
 **Where she is:** the east wing (B9), all night, near her time, the midwife in
-attendance. Nobody meets her face to face before the Crossing. Agenda 4's errand is
+attendance. Raunu means to keep her there, sealed in, until the child is born. Nobody meets her face to face before the Crossing. Agenda 4's errand is
 done at the east wing doors: a guard carries word to her, the door opens a hand's
 width, her hand takes the ring, and her answer comes back through the door. Her face
 stays unseen (see chapter IV, "The Ring at the Door (B9)").
@@ -209,7 +212,9 @@ C").
 wing, and he goes without needing to understand. He gathers the characters nearest
 him, those who helped him first, and guides them by the service stair and the garden
 stair to get in front of the Radiant. He is a guide, never a fighter; he never reaches
-Veier and never meets Vell. If the characters convinced him before midnight, he has
+Veier and never meets Vell. Then he leaves them and leads his household out of the
+palace through the kitchens and the service passages; Movement VII finds him outside
+with them, counting his staff. If the characters convinced him before midnight, he has
 already given them the wing's service door. Keeping him alive is Agenda 1's midnight
 payoff (chapter V, "Corval. The stairs.").
 

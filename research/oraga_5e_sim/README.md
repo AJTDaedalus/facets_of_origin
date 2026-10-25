@@ -44,8 +44,10 @@ python research/oraga_5e_sim/chain.py --party C1 --n 4000 --seed 1
 python research/oraga_5e_sim/chain.py --all --n 2000 --seed 1 --crowd generous
 
 # WP6 (T6.9): switches, all off by default (old runs reproduce draw for draw)
-python research/oraga_5e_sim/skirm.py --card S13_wp6 --party C1 --wp6 potions,heat4_finish --n 2000 --seed 1
-python research/oraga_5e_sim/chain.py --party C1 --wp6 full --n 2000 --seed 1
+python research/oraga_5e_sim/skirm.py --card S13_wp6 --party C1 --wp6 potions --n 2000 --seed 1   # current rules (TP61)
+python research/oraga_5e_sim/skirm.py --card S13_wp6 --party C1 --wp6 potions,heat4_finish --n 2000 --seed 1   # legacy: the cut heat-4 finish
+python research/oraga_5e_sim/chain.py --party C1 --wp6 tp61 --n 2000 --seed 1   # current rules (TP61)
+python research/oraga_5e_sim/chain.py --party C1 --wp6 full --n 2000 --seed 1   # legacy: with the cut finish
 ```
 
 From Python, call `s14.simulate(party, policy, n, seed, clock, attrited)`,

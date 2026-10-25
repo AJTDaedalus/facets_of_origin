@@ -379,3 +379,16 @@ def test_wp6_chain_runs_and_reports():
     assert _is_rate(r["hp_at_gate"]) and _is_rate(r["pc_death"])
     r2 = chain.simulate("C1", n=100, seed=SEED, wp6=chain.ChainWP6.full())
     assert r == r2
+
+
+def test_tp61_chain_rules_leave_the_finish_off():
+    w = chain.ChainWP6.tp61()
+    assert not w.finish
+    assert w.s14_new and w.potions and w.hit_die and w.chapel and w.cards
+    assert chain.ChainWP6.full().finish            # legacy runs still reproduce
+
+
+def test_tp61_chain_runs_and_is_deterministic():
+    r = chain.simulate("C1", n=100, seed=SEED, wp6=chain.ChainWP6.tp61())
+    r2 = chain.simulate("C1", n=100, seed=SEED, wp6=chain.ChainWP6.tp61())
+    assert r == r2 and r["wp6"] == "111101"

@@ -81,16 +81,17 @@ fixed order, fast:
 3. **The Wept moves.** The tallest of the three crosses the dark hall toward the
    dais — not running, *arriving* — and the screaming starts.
 4. **The doors are wrong.** The Hollow is at the main doors, and the crowd that
-   surges at them breaks around it like water. The Radiant is nowhere to be seen —
+   surges at them breaks around it like water. The garden doors are its too: when the
+   crowd tries them, it steps through the shadow and is there. The Radiant is nowhere to be seen —
    it has gone for the east wing, and the first sign is the guards' lanterns going
    dark along the gallery, one by one, like a fuse burning.
 
 Then release the beats. From here the module cannot script — it can only tell you
 where everything is and what everything wants. The night-tracker's crisis panel
 (Chapter VIII) holds the map: **the Wept → Raunu. The Radiant → Veier. The Hollow →
-the doors, herding, keeping the herd from mattering.** Master Vell is already moving
-along the service passages toward the east wing, and the fastest route to the river
-gate runs through the garden stair.
+the doors, herding, keeping the herd from mattering.** Master Vell was at the river gate when the bells rang. From there he
+climbs back up through the gardens to the foot of the garden stair to meet her; the
+boat waits below.
 
 **"Corval. The stairs."** Raunu's last order sends his majordomo to the stairs that
 reach the east wing, and Corval goes without needing to understand why. On the way he
@@ -101,8 +102,10 @@ sealed. He gets them in front of the Radiant. He is a guide and never a fighter,
 never brings them to Veier: the household moves her through the wing, and Vell meets
 her at the foot of the garden stair. Corval never meets Vell. If the
 players convinced him before midnight, he has already given them the wing's service
-door, and they start the chase there. Keep him alive if you can: the Tithe of Hands
-lives in his head (Agenda 1).
+door, and they start the chase there. Once the players are in front of the Radiant,
+Corval leaves them and leads his household out of the palace, through the kitchens and
+the service passages (the household who move Veier are not with him). Keep him alive
+if you can: the Tithe of Hands lives in his head (Agenda 1).
 
 > **Sidebar — Crystals gutter:** Within a stone's throw of an Uninvited, a
 > released crystal charge works only on a Soul roll (Standard) — on a 6− the light
@@ -325,8 +328,8 @@ works once.
 The Uninvited are gone. The palace is fire, smoke, ward-light, and screaming — and
 for one long hour before the sect guards fight their way in, the player characters
 are the only order in it. This Movement is where the module keeps its tone promise:
-**people are brave.** Guests shield strangers. Corval, bleeding, counts his staff
-like a man counting his own fingers. Anha knows the other way out, and if Agenda 8
+**people are brave.** Guests shield strangers. Outside, Corval, bleeding, counts his
+staff like a man counting his own fingers. Anha knows the other way out, and if Agenda 8
 is in play, she and her sibling empty the smoke-filled galleries through the service
 passages. Give every player character a scene of what they are best at, and give
 the room to whoever earned it least an hour ago — Vorlain, say, hauling guests out
@@ -414,9 +417,11 @@ Read or paraphrase, adjusting for what the table did:
 > eastern coast, the fishermen say, are rising again.
 >
 > You know what you saw. You are nearly the only ones who do. And on quiet nights,
-> from time to time, each of you dreams of dancing — a warm hand in yours, and a
-> voice, kind and centuries out of fashion, saying: *you dance like my daughter
+> from time to time, the one she danced with dreams of dancing — a warm hand in yours,
+> and a voice, kind and centuries out of fashion, saying: *you dance like my daughter
 > would have.*
+
+Leave out the last line if nobody danced with the Wept in Movement V.
 
 Then go around the table once: **what does your character carry out of Oraga
 Night?** An object, a debt, a truth, a name. Write the answers down. If you ever

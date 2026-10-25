@@ -57,13 +57,13 @@ once before midnight.)*
 |---|---|---|
 | **The Wept** | The dais (B2), for Raunu | Through the wards to him: she reaches him on her **4th turn** (3rd with four characters). Delay buys him rounds, three at most a scene |
 | **The Radiant** | B9, for Veier | Private stair, which he reaches at the **fall + 3 beats**, plus a beat per Delay spent (three at most) → garden → **the Crossing** (B5), Movement VI. Vell holds him there once |
-| **The Hollow** | The main doors (B2) | Herds the crowd back in. His End opens the doors; so does Raunu's fall (he turns east) |
+| **The Hollow** | The main doors and the garden doors (B2) | Herds the crowd back in. His End opens the doors; so does Raunu's fall (he turns east) |
 | **The Attendant** | Beside the three | Idle until the party gets in the way; then Focused whenever one of the three has no Delay → **S14** |
 | **Raunu** | The dais | Spends his last charge sealing doors behind Veier; dies there, by his own choice |
 | **Veier** | B9 | Wounded once; the household brings her down the private stair to Vell; out the river gate (**by default, even if no player character is there**) |
-| **Vell** | — | Service passages → garden stair → the river gate (B5) |
-| **Corval** | The Court, sent to the stairs by Raunu's last order | Gathers the characters nearest him (those who helped him first) → service stair, or up the garden stair while the terrace is empty, in front of the Radiant; then back to the head of the service stair, holding the wing's service door for his household. A guide, never a fighter; never reaches Veier or meets Vell. Alive, he is Agenda 1's payoff |
-| **The nine honor guards** | Seven to the dais, and stay; two hold the east-wing doors (Table VIII–7) | — |
+| **Vell** | The river gate (B5) | Climbs back to the foot of the garden stair to meet her → the river gate and the boat |
+| **Corval** | The Court, sent to the stairs by Raunu's last order | Gathers the characters nearest him (those who helped him first) → service stair, or up the garden stair while the terrace is empty, in front of the Radiant; then leads his household out of the palace through the kitchens and the service passages. A guide, never a fighter; never reaches Veier or meets Vell. Alive, he is Agenda 1's payoff |
+| **The nine honor guards** | Seven to the dais, and stay; two hold the east-wing doors (four, and five to the dais, if the wing was forced; Table VIII–7) | — |
 | **The Bought** | The outer gate shut from outside (B12) | Hold it until the front gate is decided (S3) |
 | **Corro** | Moving three seconds before the dark | Follow him and live. S11 if Phern heat is 3–4 |
 | **Maiven** | Toward the east wing, whatever her heat | Dies there unless somebody competent goes with her |
@@ -299,14 +299,14 @@ from the moment the last guest is through the gate)*
 | Post | I | II–IV | V | Midnight |
 |---|---|---|---|---|
 | The gate (B1) | All nine, facing inward, while the line comes in | — | — | — |
-| The east-wing doors (B9) | Two, once the line is in | Two | Four (Corval doubles them) | Two, who stay |
+| The east-wing doors (B9) | Two, once the line is in | Two | Four (Corval doubles them) | Two, who stay; four if the wing was forced |
 | The trophy gallery (B7) | Three, once the line is in | Three | Three | — |
 | With the household | Four, once the line is in | Four | Two | — |
-| The dais (B2) | — | — | — | Seven, who die or fall there |
+| The dais (B2) | — | — | — | Seven, who die or fall there; five if the wing was forced |
 
 *The alert guards (see chapter IV, "The Palace on Alert") come from the nearest post. S4's
 two are the two nearest; at the east-wing doors before Movement V, they are the two on the
-doors.*
+doors, and in Movement V two of the four, while the other two keep the doors.*
 
 ---
 
@@ -457,7 +457,7 @@ and on card S3. Numbers are for three characters, with four in parentheses.*
 
 | | The Wept | The Radiant | The Hollow |
 |---|---|---|---|
-| **Errand** | Raunu, on the dais (B2) | Veier, from the east wing (B9) | The main doors (B2) |
+| **Errand** | Raunu, on the dais (B2) | Veier, from the east wing (B9) | The main doors and the garden doors (B2) |
 | **Arrives** | At Raunu on her 4th turn of moving (3rd with four): ☐ ☐ ☐ ☐, plus a turn per Delay spent | The garden stair at Raunu's fall + 3 beats: ☐ ☐ ☐, plus a beat per Delay spent in the east wing. The Crossing: ☐ ☐ ☐ | Holds until Raunu falls, or his End lands: ☐ turned east |
 | **Delay earned** (fill a circle; cross it out when spent) | ○ ○ ○ ○ ○ ○ | ○ ○ ○ ○ ○ ○ | ○ ○ ○ ○ ○ ○ |
 | **Turns lost to Delay this scene** (three at most; clear at a new scene) | ☐ ☐ ☐ | ☐ ☐ ☐ | ☐ ☐ ☐ |
@@ -479,7 +479,7 @@ and on card S3. Numbers are for three characters, with four in parentheses.*
 | Furniture to it | | Until they next attack it or interfere with the three |
 | **Ward-points** | Dais ○ ○ ○ ○ · doors ○ ○ · sealed doors held: | Each steers once tonight (Table V–4 for the sealed doors) |
 | The Root (B11) | ☐ found | Any ward-point in the palace, from below |
-| **Raunu** | ☐ falls · ☐ saved | The main doors open; the bells of Oraga begin |
+| **Raunu** | ☐ falls · ☐ saved | The main doors and the garden doors open; the bells of Oraga begin |
 | **The leash** | ☐ the boat is out of reach | All three go, finished or not |
 | **Snakes live in the dark** | ☐ S11 · ☐ S12 · others: | Heat 3–4 at midnight (Table VIII–5). By default S11 and S12 |
 | **S3:** the fire clock | ○ ○ ○ ○ | Ticks only on rounds nobody fights or talks |

@@ -56,7 +56,9 @@ facts:
       Table VIII–7 (R2.2, O48): all nine on the gate while the line comes in; from then
       on two at the east-wing doors (four in Movement V, when Corval doubles them), three
       in the trophy gallery (B7), and the rest with the household. S4's "two guards" are
-      "the two nearest".
+      "the two nearest". If the wing was forced, it stays doubled all night (04 "When the
+      east wing is forced"): at midnight four hold the east-wing doors and five go to the
+      dais (L-085, T7.19).
     source: owner QR2 (2026-10-08); O48 (the Movement I–V posts)
     phrases: ["nine honor guards", "seven of the nine go to the dais", "two hold the east-wing doors", "Table VIII–7"]
     positions:
@@ -64,7 +66,13 @@ facts:
       movements_II_to_IV: {east_wing_doors: 2, trophy_gallery: 3, with_the_household: 4}
       movement_V: {east_wing_doors: 4, trophy_gallery: 3, with_the_household: 2}
       midnight: {dais: 7, east_wing_doors: 2}
+      midnight_if_forced: {dais: 5, east_wing_doors: 4}
     checks:
+      - type: require
+        file: 08_Handouts.md
+        pattern: '\| Two, who stay; four if the wing was forced \|'
+        anchor: 'Table VIII–7'
+        why: L-085 — a forced wing stays doubled at midnight (Table VIII–7)
       - type: sentence
         scope: block
         all: ['\bnine\b(?!\s+people)', '\bdais\b']
@@ -655,8 +663,8 @@ facts:
     truth: >-
       T6.6 / DESIGN §2.1-§2.2: after midnight the snakes and the Bought use the ordinary rules
       for dying; the crowd rule covers only creatures an Uninvited (or the Attendant, while Idle)
-      set aside. A heat-4 snake finishes a downed character who crossed it (TP57: one level, the
-      old Sharp wording; no Gentle or Merciless). The fire alone never
+      set aside. Nobody finishes a downed character on purpose, at any heat (TP61, which cut
+      TP57's heat-4 finish); the danger is the dying itself. The fire never
       finishes anyone. The rule is printed once, in chapter V; 09 and 10 point to it.
     source: owner TP2 (2026-10-20); DESIGN_oraga_5e_3p_pass §2.1, §2.2 option 3; T6.6; polish review B3
     phrases: ["Everyone else's steel", "it covers only the set-aside"]
@@ -665,7 +673,7 @@ facts:
         pattern: '(?i)\bcrowd rule\b[^.]{0,80}\bholds (?:anywhere|in every snake fight)\b'
         why: T6.6 — the crowd rule covers only the set-aside, not every snake fight
       - type: forbid
-        pattern: '(?i)\bno snake finishes a downed character\b|\bNobody is out for longer than two rounds\b|\bSomeone always comes\b'
+        pattern: '(?i)\bNobody is out for longer than two rounds\b|\bSomeone always comes\b'
         why: T6.6 — no text half-promises a rescue to the dying
       - type: require
         file: 05_The_Longest_Night.md
@@ -794,6 +802,182 @@ facts:
         pattern: '\bby default \*\*two\*\* cards are live in the dark\b'
         anchor: 'If the table does nothing'
         why: T6.7 — the default heats paragraph names two live cards
+
+  - id: no_heat4_finish
+    truth: >-
+      TP61 (2026-10-25): no snake deliberately finishes a downed character, at any heat. Downed
+      characters use the ordinary dying rules, and the crowd rule still does not reach snake
+      fights. Heat 4 still means the line comes for the party in force (the Heat 4 rows). The
+      Uninvited's threat rule and the Focused Attendant are unchanged.
+    source: owner TP61 (W2, 2026-10-25); supersedes TP57's / TPN-35's heat-4 finish; T7.23
+    phrases: ["Nobody goes back to finish the fallen, at any heat"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\bheat[ -]4\b[^.]{0,60}\bfinish(?:es)?\b|\bfinish(?:es)? a (?:fallen|downed) character who crossed\b|\bkills at heat 4\b|\bdeadliest card of the night\b'
+        why: TP61 — the heat-4 finish is cut; nobody finishes the fallen on purpose
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: '\bNobody goes back to finish the fallen, at any heat\b'
+        anchor: 'Everyone else'
+        why: TP61 — Everyone else's steel says it once, in chapter V
+
+  - id: raunu_plan
+    truth: >-
+      TP11: Raunu meant to keep Veier in the sealed east wing until the child was born. He never
+      planned to send her away; the boat is Vell's. Chapter VII carries the plan in both
+      editions (Raunu and Veier), and chapter IV's "what he is already doing about it" points
+      at the sealed wing and the crystals.
+    source: owner TP11 (2026-10-20); L-024; T7.1
+    phrases: ["keep her in the sealed east wing until the child is born", "The boat is Vell's, never his"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\b(?:send|sends|sent|sending) (?:her|Veier) (?:away|off)\b|\b(?:send|sends|sent|sending) (?:her|Veier)\b[^.]{0,30}\bby boat\b|\bRaunu.s (?:own )?boat\b'
+        why: TP11 — Raunu planned to keep her until the birth; the boat is Vell's
+      - type: require
+        file: 07_Cast_of_the_Ball.md
+        pattern: '\*\*His plan for Veier:\*\* keep her in the sealed east wing until the child is born'
+        anchor: 'Raunu Boranis'
+        why: TP11 — 07 Raunu carries the plan
+      - type: require
+        file: 07_Cast_of_the_Ball.md
+        pattern: 'Raunu means to keep her there, sealed in, until the child is born'
+        anchor: 'Veier Nolonaire'
+        why: TP11 — 07 Veier carries the plan
+      - type: require
+        file: ../../../adventures/oraga_night/07_Cast_of_the_Ball.md
+        pattern: '\*\*His plan for Veier:\*\* keep her in the sealed east wing until the child is born'
+        anchor: 'Raunu Boranis'
+        why: TP11 — the Facets edition's 07 Raunu carries the plan
+      - type: require
+        file: ../../../adventures/oraga_night/07_Cast_of_the_Ball.md
+        pattern: 'Raunu means to keep her there, sealed in, until the child is born'
+        anchor: 'Veier Nolonaire'
+        why: TP11 — the Facets edition's 07 Veier carries the plan
+      - type: require
+        file: 04_The_Ball.md
+        pattern: 'What he is already doing about it is chapter V: the east\s+wing kept sealed around Veier'
+        anchor: 'Warning Raunu'
+        why: L-024 — 04 points at the sealed wing and the crystals
+
+  - id: garden_doors
+    truth: >-
+      TP9: the Hollow's Post holds the Crystal Court's main doors and its garden doors; he
+      Shadow-Steps between them. Until he turns east, is stopped or is ended, the crowd on the
+      floor leaves only by the gallery-side service door (S11, the one open door) and the
+      galleries by the service passages. Then it goes out by the main doors for the front gate,
+      and into the gardens only if somebody leads it there; guests brought down through the
+      garden doors make the Radiant Witnessed at the Crossing. Otherwise the terraces are dark
+      and empty.
+    source: owner TP9 (2026-10-20); L-026; T7.3
+    phrases: ["he holds the main doors and the garden doors", "the floor's one open door is the gallery-side service door"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\bgarden doors\b[^.]{0,40}\b(?:stand|stood|are|were|lie|lay) (?:wide )?open\b|\bsurge at the gallery-side service door\b'
+        why: TP9 — the garden doors are the Hollow's until he turns east; trick 5 sends the crowd at them
+      - type: require
+        file: 10_Bestiary.md
+        pattern: '\*\*\*The Post\.\*\*\* The Hollow holds two sets of doors: the Crystal Court.s main doors and\s+its garden doors'
+        anchor: 'The Post'
+        why: TP9 — The Post names both sets of doors
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: '\*\*Another door\.\*\* Make the crowd surge at the garden doors'
+        anchor: 'Table V–3'
+        why: TP9 — Table V–3 trick 5 targets the garden doors
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: 'guests a character brings down into the gardens are watchers: the Radiant is\s+\*Witnessed\* at the Crossing'
+        anchor: 'Two Hundred People'
+        why: TP9 — the reward for opening the garden doors
+
+  - id: vell_route
+    truth: >-
+      L-090: Vell is at the river gate at the end of Movement V. When the lights die he climbs
+      back up through the gardens to the foot of the garden stair to meet Veier, whom the
+      household brings down (TP13, TP40), then goes back down to the river gate and the boat
+      (TP12, unchanged). He does not go through the service passages.
+    source: ledger L-090; TP12, TP13, TP40; T7.15
+    phrases: ["climbs back up through the gardens to the foot of the garden stair"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\bVell\b[^.]{0,60}\bservice passages\b[^.|]{0,20}(?:→|toward the east wing)'
+        why: L-090 — from the river gate Vell climbs back to the foot of the garden stair
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: 'climbs back up through the gardens to the foot of the garden stair to meet her'
+        anchor: 'Then release the beats'
+        why: L-090 — Movement VI says where Vell goes
+      - type: require
+        file: ../../../adventures/oraga_night/05_The_Longest_Night.md
+        pattern: 'climbs back up through the gardens to the foot of the garden stair to meet her'
+        anchor: 'Then release the beats'
+        why: L-090 — the Facets edition agrees
+
+  - id: epilogue_endings
+    truth: >-
+      L-056: the one-shot epilogue is the default night; Table V–8 sets each printed state
+      (Raunu saved, Maiven, the Tithe, Vorlain taken, the map, the Bought, the Wept looked back,
+      the Hollow sent home) against one sentence. Only the character who danced with the Wept
+      dreams of the dance. There is no Last Rite (TP43).
+    source: ledger L-056; TP16, TP38, TP43; T7.17
+    phrases: ["the one she danced with dreams of dancing", "Table V–8: The Epilogue, Adjusted"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\beach of you dreams of dancing\b'
+        why: L-056 — only the one she danced with has that memory
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: '\*\*Table V–8: The Epilogue, Adjusted\*\*'
+        anchor: 'Epilogue (one-shot ending)'
+        why: L-056 — the endings table follows the epilogue
+
+  - id: corval_end_point
+    truth: >-
+      TP58 (replaces TPN-36a): once the characters are in front of the Radiant, Corval leaves
+      them and leads his household out of the palace, through the kitchens and the service
+      passages. Movement VII finds him outside with them, counting his staff. The household who
+      move Veier through the wing (TP40) are not with him. He never meets Vell.
+    source: owner TP58 (2026-10-25)
+    phrases: ["leads his household out of the palace, through the kitchens and the service passages"]
+    checks:
+      - type: forbid
+        pattern: '(?i)\bhold(?:s|ing)? (?:it|the wing.s service door) for his household\b|\bholding the wing.s service door\b'
+        why: TP58 — Corval leads his household out of the palace; he does not hold the service door
+      - type: require
+        file: 07_Cast_of_the_Ball.md
+        pattern: 'leads his household out of the\s+palace through the kitchens and the service passages'
+        anchor: 'Minister Corval'
+        why: TP58 — 07 Corval carries his end point
+      - type: require
+        file: ../../../adventures/oraga_night/07_Cast_of_the_Ball.md
+        pattern: 'leads\s+his household out of the palace through the kitchens and the service passages'
+        anchor: 'Minister Corval'
+        why: TP58 — the Facets edition's 07 Corval agrees
+      - type: require
+        file: 05_The_Longest_Night.md
+        pattern: 'Guests are shielding strangers\. Outside, the thin old man'
+        anchor: 'Movement VII'
+        why: TP58 — Movement VII's read-aloud finds him outside
+
+  - id: garden_stair_door
+    truth: >-
+      TP60 (T8.4): the door at the top of the east wing's garden stair is locked from inside all
+      night. The household unlocks it at midnight to bring Veier down to Vell, which is why it
+      stands open after the lights (TP28). At S10's half-bell it is shut; picking it from the
+      stair is possible but slow and in plain view, so the slingers go for the wall.
+    source: owner TP60 (2026-10-25); L-061; T8.4
+    phrases: ["The garden stair's top door", "locked from inside"]
+    checks:
+      - type: sentence
+        all: ['(?i)\bgarden stair\b', '(?i)\bdoor\b', '(?i)\b(?:unlocked|stands? open|left open|open)\b']
+        unless: '(?i)\bmidnight\b|\bafter the lights\b|\bhousehold unlocks\b|\bat the lights\b|\bstays? open\b|\bopen route|\bservice door\b'
+        files: ["09"]
+        why: TP60 — before midnight the garden stair's top door is locked from inside
+      - type: require
+        file: 09_The_Snakes.md
+        pattern: '\*The garden stair.s top door\* is shut and locked from inside'
+        anchor: 'S10. Over the Wall'
+        why: TP60 — S10's terrain says the door is locked at the half-bell
 
 maps:
   court:          # B2 (05 General Features, Sizes)

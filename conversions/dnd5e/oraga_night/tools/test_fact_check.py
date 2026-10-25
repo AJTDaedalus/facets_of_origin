@@ -603,9 +603,10 @@ class TestPolishReviewB:
         text = "Nobody is out for longer than two rounds.\n"
         assert self._hits(facts, text, "05_The_Longest_Night.md", "crowd_rule_scope")
 
-    def test_no_snake_finishes_is_forbidden(self, facts):
+    def test_no_snake_finishes_is_allowed_after_tp61(self, facts):
+        # TP61 cut the heat-4 finish: "no snake finishes a downed character" is now canon
         text = "After midnight no snake finishes a downed character.\n"
-        assert self._hits(facts, text, "09_The_Snakes.md", "crowd_rule_scope")
+        assert not self._hits(facts, text, "09_The_Snakes.md", "crowd_rule_scope")
 
     def test_scoped_crowd_rule_is_not_a_hit(self, facts):
         text = "This is the crowd rule, and it covers only the set-aside.\n"
